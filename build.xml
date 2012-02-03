@@ -126,7 +126,7 @@
 
  <target name="phpcs-ci"
          description="Find coding standard violations using PHP_CodeSniffer">
-  <exec executable="phpcs.bat" output="/dev">
+  <exec executable="phpcs.bat" output="/build">
    <arg value="--report=checkstyle" />
    <arg value="--report-file=${basedir}/build/logs/checkstyle.xml" />
    <arg value="--standard=${basedir}/build/phpcs.xml" />
