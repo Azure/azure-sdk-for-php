@@ -1,0 +1,9 @@
+build/api
+build/code-browser
+build/coverage
+build/logs
+build/pdepend
+build/phpdox
+phpunit.xml
+cache.properties
+/nbproject/
