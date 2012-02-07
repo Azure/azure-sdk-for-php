@@ -28,12 +28,4 @@
       </exclude>
     </whitelist>
   </filter>
-
-  <selenium>
-    <browser name="Firefox on localhost"
-             browser="*chrome"
-             host="localhost"
-             port="4444"
-             timeout="30000"/>
-  </selenium>
 </phpunit>
