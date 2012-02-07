@@ -4,7 +4,6 @@ spl_autoload_register(
       static $classes = null;
       if ($classes === null) {
          $classes = array(
-            'foo' => '/model/Foo.php'
           );
       }
       $cn = strtolower($class);

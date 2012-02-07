@@ -6,7 +6,6 @@ spl_autoload_register(
       static $classes = null;
       if ($classes === null) {
          $classes = array(
-            'footest' => '/unit/model/FooTest.php'
           );
       }
       $cn = strtolower($class);
