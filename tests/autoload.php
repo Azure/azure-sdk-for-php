@@ -6,6 +6,7 @@ spl_autoload_register(
       static $classes = null;
       if ($classes === null) {
          $classes = array(
+            'queuerestproxytest' => '/unit/Services/Queue/QueueRestProxyTest.php'
           );
       }
       $cn = strtolower($class);
