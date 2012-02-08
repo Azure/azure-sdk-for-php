@@ -23,6 +23,7 @@
  * @link       http://pear.php.net/package/azure-sdk-for-php
  */
 
+namespace PEAR2\Test\Services\Queue;
 use PEAR2\Services\Queue\QueueRestProxy;
 
 /**
