@@ -6,7 +6,8 @@ spl_autoload_register(
       static $classes = null;
       if ($classes === null) {
          $classes = array(
-            'pear2\\test\\services\\queue\\queuerestproxytest' => '/unit/Services/Queue/QueueRestProxyTest.php'
+            'pear2\\testresources' => '/unit/TestResources.php',
+            'queuerestproxytest' => '/unit/WindowsAzure/Services/Queue/QueueRestProxyTest.php'
           );
       }
       $cn = strtolower($class);
