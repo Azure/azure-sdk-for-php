@@ -40,45 +40,46 @@ use PEAR2\WindowsAzure\Resources;
  */
 class BlobQueueSharedKey extends AzureAuthentication
 {
+  private $includedHeaders;
+  
   public function __construct($accountName, $accountKey)
   {
     parent::__construct($accountName, $accountKey);
-    // Initialize parent::$includedHeaders
+    
+    $this->includedHeaders = array();
+    $this->includedHeaders[] = Resources::CONTENT_ENCODING;
+    $this->includedHeaders[] = Resources::CONTENT_LANGUAGE;
+    $this->includedHeaders[] = Resources::CONTENT_LENGTH;
+    $this->includedHeaders[] = Resources::CONTENT_MD5;
+    $this->includedHeaders[] = Resources::CONTENT_TYPE;
+    $this->includedHeaders[] = Resources::DATE;
+    $this->includedHeaders[] = Resources::IF_MODIFIED_SINCE;
+    $this->includedHeaders[] = Resources::IF_MATCH;
+    $this->includedHeaders[] = Resources::IF_NONE_MATCH;
+    $this->includedHeaders[] = Resources::IF_UNMODIFIED_SINCE;
+    $this->includedHeaders[] = Resources::RANGE;
   }
   
   protected function ComputeSignature($request) 
   {
     $canonicalizedHeaders = parent::ComputeCanonicalizedHeaders($request);
     $canonicalizedResource = parent::ComputeCanonicalizedResource($request);
-    $headers = $request->getHeaders();
+    $headers = $request->GetHeaders();
     
     $stringToSign   = array();
     $stringToSign[] = strtoupper($request->getMethod());
     
-    foreach ($includedHeaders as $index => $header)
+    foreach ($this->includedHeaders as $header)
     {
-      isset($headers[$header]) ? $headers[$header] : NULL;
+      $stringToSign[] = isset($headers[$header]) ? $headers[$header] : NULL;
     }
-      // Verify above code and remove below
-//    $stringToSign[] = array_key_exists(Resources::CONTENT_ENCODING,     $headers) ? $headers[Resources::CONTENT_ENCODING] : NULL;
-//    $stringToSign[] = array_key_exists(Resources::CONTENT_LANGUAGE,     $headers) ? $headers[Resources::CONTENT_LANGUAGE] : NULL;
-//    $stringToSign[] = array_key_exists(Resources::CONTENT_LENGTH,       $headers) ? $headers[Resources::CONTENT_LENGTH] : NULL;
-//    $stringToSign[] = array_key_exists(Resources::CONTENT_MD5,          $headers) ? $headers[Resources::CONTENT_MD5] : NULL;
-//    $stringToSign[] = array_key_exists(Resources::CONTENT_TYPE,         $headers) ? $headers[Resources::CONTENT_TYPE] : NULL;
-//    $stringToSign[] = array_key_exists(Resources::DATE,                 $headers) ? $headers[Resources::DATE] : NULL;
-//    $stringToSign[] = array_key_exists(Resources::IF_MODIFIED_SINCE,    $headers) ? $headers[Resources::IF_MODIFIED_SINCE] : NULL;
-//    $stringToSign[] = array_key_exists(Resources::IF_MATCH,             $headers) ? $headers[Resources::IF_MATCH] : NULL;
-//    $stringToSign[] = array_key_exists(Resources::IF_NONE_MATCH,        $headers) ? $headers[Resources::IF_NONE_MATCH] : NULL;
-//    $stringToSign[] = array_key_exists(Resources::IF_UNMODIFIED_SINCE,  $headers) ? $headers[Resources::IF_UNMODIFIED_SINCE] : NULL;
-//    $stringToSign[] = array_key_exists(Resources::RANGE,                $headers) ? $headers[RANGE] : NULL;
-    $stringToSign[] = $canonicalizedHeaders;
-    $stringToSign[] = $canonicalizedResource;
     
     if (count($canonicalizedHeaders) > 0)
     {
       $stringToSign[] = implode("\n", $canonicalizedHeaders);
     }
     
+    $stringToSign[] = $canonicalizedResource;
     $stringToSign = implode("\n", $stringToSign);
     
     return $stringToSign;

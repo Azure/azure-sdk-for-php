@@ -44,7 +44,8 @@ require_once 'XML/Unserializer.php';
 class HttpClient implements IHttpClient
 {
   private $request;
-  const API_VERSION = '2011-10-01';
+  private $requestUrl;
+  const   API_VERSION = '2011-10-01';
   
   function __construct()
   {
@@ -54,22 +55,43 @@ class HttpClient implements IHttpClient
         'ssl_verify_host' => false,
     ));
     
-    $date = gmdate('D, d M Y H:i:s', time()) . ' GMT';
-    
-    $this->request->SetHeader(array(
-        X_MS_VERSION  =>  API_VERSION,
-        X_MS_DATE     =>  $date
-    ));
+    $this->request->SetHeader(array(X_MS_VERSION  =>  API_VERSION));
+    $this->requestUrl = NULL;
+  }
+  
+  public function GetQuery()
+  {
+    return $this->requestUrl->getQuery();
+  }
+  
+  public function GetQueryVariables()
+  {
+    return $this->requestUrl->getQueryVariables();
+  }
+  
+  public function SetQueryVariable($key, $value)
+  {
+    $this->requestUrl->setQueryVariable($key, $value);
   }
   
   public function SetUrl($url)
   {
-    $this->request->setUrl($url);
+    $this->requestUrl = new Net_URL2($url);
   }
   
   public function SetMethod($method)
   {
     $this->request->setMethod($method);
+  }
+  
+  public function GetMethod()
+  {
+    return $this->request->getMethod();
+  }
+  
+  public function GetHeaders()
+  {
+    return $this->request->getHeaders();
   }
   
   public function SetHeader($header, $value)
@@ -79,11 +101,9 @@ class HttpClient implements IHttpClient
   
   public function Send()
   {
+    $this->request->setUrl($this->requestUrl);
     $this->request->send();
-    $unserializer = new XML_Unserializer();
-    $unserializer->unserialize($this->request->getBody());
-    
-    return $unserializer->getUnserializedData();
+    return $this->request->getBody();
   }
 }
 

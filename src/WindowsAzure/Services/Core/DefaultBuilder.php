@@ -24,11 +24,14 @@
  */
  
 namespace PEAR2\WindowsAzure\Services\Core;
+
 use PEAR2\WindowsAzure\Services\Core\IServiceBuilder;
+use PEAR2\WindowsAzure\Services\Core\Configuration;
 use PEAR2\WindowsAzure\Services\Queue\QueueRestProxy;
 use PEAR2\WindowsAzure\Services\Queue\QueueConfiguration;
-use PEAR2\WindowsAzure\Core\HttpClient;
 use PEAR2\WindowsAzure\Services\Queue\QueueExceptionProcessor;
+use PEAR2\WindowsAzure\Services\Core\Authentication\BlobQueueSharedKey;
+//use PEAR2\WindowsAzure\Core\HttpClient;
 
 /**
  * Builds azure service objects.
@@ -50,13 +53,19 @@ class ServicesBuilder implements IServiceBuilder
         $httpClient = new HttpClient();
         
         $queueRestProxy = new QueueRestProxy($httpClient, 
-                $config->GetProperty(QueueConfiguration::ACCOUNT_NAME), 
+                $config->GetProperty(QueueConfiguration::ACCOUNT_NAME),
                 $config->GetProperty(URI));
         
         $queueWrapper = new QueueExceptionProcessor($queueRestProxy);
-        $queueWrapper = $queueRestWrapper->WithFilter($filter);
-        // Return QueueExceptionProcessor object
-        break;
+        
+        $authFilter = new BlobQueueSharedKey(
+                $config->GetProperty(QueueConfiguration::ACCOUNT_NAME),
+                $config->GetProperty(QueueConfiguration::ACCOUNT_KEY)
+                );
+        
+        $queueWrapper = $queueRestWrapper->WithFilter($authFilter);
+        
+        return $queueWrapper;
       
       default: 
         throw new InvalidArgumentException(INVALID_TYPE_MESSAGE . $type);

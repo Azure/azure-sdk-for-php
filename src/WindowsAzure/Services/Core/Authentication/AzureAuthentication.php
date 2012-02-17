@@ -40,11 +40,16 @@ abstract class AzureAuthentication
 {
   private   $accountName;
   private   $accountKey;
-  protected $includedHeaders;
+  
+  public function __construct($accountName, $accountKey)
+  {
+    $this->accountKey   = $accountKey;
+    $this->accountName  = $accountName;
+  }
   
   protected function ComputeCanonicalizedHeaders($request)
   {
-    $headers = $request->getHeaders();
+    $headers = $request->GetHeaders();
     $canonicalizedHeaders = array();
     
     if (!is_null($headers))
@@ -68,7 +73,34 @@ abstract class AzureAuthentication
   
   protected function ComputeCanonicalizedResource($request)
   {
+    // Note: Multi-valued query parameter is not supported (issue #17)
+    // 1. Beginning with an empty string (""), append a forward slash (/), followed by the name of 
+    //    the account that owns the resource being accessed.
+    $canonicalizedResource  = '/' . $this->accountName;
     
+    // 2. Append the resource's encoded URI path, without any query parameters.
+    $canonicalizedResource .= parse_url($request->GetUrl(), PHP_URL_PATH);
+    
+    // 3. Retrieve all query parameters on the resource URI, including the comp parameter if it exists.
+    $queryParams = $request->GetQueryVariables();
+    
+    // 4. Sort the query parameters lexicographically by parameter name, in ascending order.
+    if (count($queryParams) > 0)
+    {
+      ksort($queryParams);
+    }
+    
+    // 5. Convert all parameter names to lowercase.
+    // 6. URL-decode each query parameter name and value.
+    // 7. Append each query parameter name and value to the string in the following format:
+    //    parameter-name:parameter-value
+    // 8. Append a new line character (\n) after each name-value pair.
+    foreach ($queryParams as $key => $value)
+    {
+      $canonicalizedResource .= "\n" . strtolower($key) . ':' . rawurldecode($value);
+    }
+    
+    return $canonicalizedResource;
   }
   
   public function GetAuthorizationHeader($request)
@@ -79,13 +111,6 @@ abstract class AzureAuthentication
   }
   
   abstract protected function ComputeSignature($request);
-  
-  public function __construct($accountName, $accountKey)
-  {
-    $this->accountKey       = $accountKey;
-    $this->accountName      = $accountName;
-    $this->includedHeaders  = array();
-  }
 }
 
 ?>
