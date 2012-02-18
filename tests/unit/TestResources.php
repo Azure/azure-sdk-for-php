@@ -23,7 +23,7 @@
  * @link       http://pear.php.net/package/azure-sdk-for-php
  */
  
-namespace PEAR2;
+namespace PEAR2\Tests\Unit;
 
 /**
  * Resources for testing framework.
@@ -37,9 +37,17 @@ namespace PEAR2;
  */
 class TestResources
 {
-  const QUEUE1_NAME = 'Queue1';
-  const QUEUE2_NAME = 'Queue2';
-  const QUEUE3_NAME = 'Queue3';
+  const QUEUE1_NAME   = 'Queue1';
+  const QUEUE2_NAME   = 'Queue2';
+  const QUEUE3_NAME   = 'Queue3';
+  const KEY1          = 'key1';
+  const KEY2          = 'key2';
+  const KEY3          = 'key3';
+  const VALUE1        = 'value1';
+  const VALUE2        = 'value2';
+  const VALUE3        = 'value3';
+  const ACCOUNT_NAME  = 'MyAccount';
+  const QUEUE_URI     = 'queue.core.windows.net';
 }
 
 ?>

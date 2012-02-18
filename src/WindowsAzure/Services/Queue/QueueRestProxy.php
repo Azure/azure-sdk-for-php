@@ -25,6 +25,9 @@
 
 namespace  PEAR2\WindowsAzure\Services\Queue;
 use PEAR2\WindowsAzure\Services\Queue\Queue;
+use \PEAR2\WindowsAzure\Resources;
+
+require_once 'HTTP/Request2.php';
 
 /**
 * This class constructs HTTP requests and receive HTTP responses for queue 
@@ -40,15 +43,12 @@ use PEAR2\WindowsAzure\Services\Queue\Queue;
 class QueueRestProxy implements IQueue
 {
   private $channel;
-  private $accountName;
-  private $url;
   private $filters;
   
-  public function __construct($channel, $accountName, $url)
+  public function __construct($channel, $accountName, $uri)
   {
+    $channel->setUrl(sprintf(Resources::STORAGE_URI, $accountName, $uri));
     $this->channel = $channel;
-    $this->accountName = $accountName;
-    $this->url = $url;
     $this->filters = array();
   }
   
@@ -81,12 +81,19 @@ class QueueRestProxy implements IQueue
     */
   public function ListQueues()
   {
-    $listQueueOptions = new ListQueueOptions();
+    $queues = array();
     
     if (func_num_args() == 1)
     {
       $listQueueOptions = func_get_arg(0);
     }
+    
+    $this->channel->SetMethod(\HTTP_Request2::METHOD_GET);
+    $this->channel->SetQueryVariable('comp', 'list');
+    
+    $queues = $this->channel->Send($this->filters);
+    
+    return $queues;
   }
 }
 

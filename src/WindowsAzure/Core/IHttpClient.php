@@ -37,7 +37,23 @@ namespace PEAR2\WindowsAzure\Core;
  */
 interface IHttpClient
 {
-  public function Send();
+  public function GetQuery();
+  
+  public function GetQueryVariables();
+  
+  public function SetQueryVariable($key, $value);
+  
+  public function SetUrl($url);
+  
+  public function SetMethod($method);
+  
+  public function GetMethod();
+  
+  public function GetHeaders();
+  
+  public function SetHeader($header, $value);
+          
+  public function Send($filters);
 }
 
 ?>

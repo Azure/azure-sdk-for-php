@@ -38,7 +38,7 @@ namespace PEAR2\WindowsAzure;
 class Resources
 {
   // Messages
-  const INVALID_TYPE_MESSAGE = 'The provided type is invalid: ';
+  const INVALID_TYPE_MESSAGE = 'The provided variable should be of type: ';
   
   // HTTP Headers
   const X_MS_VERSION        = 'x-ms-version';
@@ -56,6 +56,13 @@ class Resources
   const IF_UNMODIFIED_SINCE = 'if-unmodified-since';
   const RANGE               = 'range';
   const X_MS_HEADER_PREFIX  = 'x-ms-';
+  
+  // Misc
+  const QUEUE_TYPE_NAME = 'IQueue';
+  const STORAGE_URI     = 'http://%s.%s/';
+  
+  // Versioning
+  const API_VERSION = '2011-10-01';
 }
 
 ?>

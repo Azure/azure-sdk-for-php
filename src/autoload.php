@@ -4,6 +4,7 @@ spl_autoload_register(
       static $classes = null;
       if ($classes === null) {
          $classes = array(
+            'pear2\\windowsazure\\core\\exceptions\\invalidargumenttypeexception' => '/WindowsAzure/Core/Exceptions/InvalidArgumentTypeException.php',
             'pear2\\windowsazure\\core\\ihttpclient' => '/WindowsAzure/Core/IHttpClient.php',
             'pear2\\windowsazure\\core\\iservicefilter' => '/WindowsAzure/Core/IServiceFilter.php',
             'pear2\\windowsazure\\resources' => '/WindowsAzure/Resources.php',
@@ -19,7 +20,8 @@ spl_autoload_register(
             'pear2\\windowsazure\\services\\queue\\queueconfiguration' => '/WindowsAzure/Services/Queue/QueueConfiguration.php',
             'pear2\\windowsazure\\services\\queue\\queueexceptionprocessor' => '/WindowsAzure/Services/Queue/QueueExceptionProcessor.php',
             'pear2\\windowsazure\\services\\queue\\queuerestproxy' => '/WindowsAzure/Services/Queue/QueueRestProxy.php',
-            'pear2\\windowsazure\\services\\queue\\queueservice' => '/WindowsAzure/Services/Queue/QueueService.php'
+            'pear2\\windowsazure\\services\\queue\\queueservice' => '/WindowsAzure/Services/Queue/QueueService.php',
+            'pear2\\windowsazure\\utilities\\validate' => '/WindowsAzure/Utilities/Validate.php'
           );
       }
       $cn = strtolower($class);

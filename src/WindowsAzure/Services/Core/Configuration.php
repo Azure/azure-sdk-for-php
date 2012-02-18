@@ -25,6 +25,7 @@
  
 namespace PEAR2\WindowsAzure\Services\Core;
 use PEAR2\WindowsAzure\Services\Core\ServicesBuilder;
+use PEAR2\WindowsAzure\Utilities\Validate;
 
 /**
  * Contains configuration used to access azure sotrage accounts.
@@ -90,7 +91,7 @@ class Configuration
   */
   public function SetProperty($key, $value)
   {
-    
+    Validate::IsString($key);
     
     $this->properties[$key] = $value;
   }
@@ -103,7 +104,7 @@ class Configuration
   */
   public function Create($type)
   {
-    return ServicesBuilder::Build($type);
+    return ServicesBuilder::Build(self::$instance, $type);
   }
 }
 

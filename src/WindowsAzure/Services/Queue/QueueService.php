@@ -26,6 +26,7 @@
 namespace PEAR2\WindowsAzure\Services\Queue;
 use PEAR2\WindowsAzure\Services\Queue\QueueExceptionProcessor;
 use PEAR2\WindowsAzure\Services\Core\Configuration;
+use PEAR2\WindowsAzure\Resources;
 
 /**
  * Factory for creating IQueue objects
@@ -41,7 +42,7 @@ class QueueService
 {
   public static function Create($config)
   {
-    return $config->Create('IQueue');
+    return $config->Create(Resources::QUEUE_TYPE_NAME);
   }
 }
 

@@ -26,9 +26,11 @@
 namespace PEAR2\WindowsAzure\Services\Core;
 use PEAR2\WindowsAzure\Core\IHttpClient;
 use PEAR2\WindowsAzure;
+use PEAR2\WindowsAzure\Resources;
 
 require_once 'HTTP/Request2.php';
 require_once 'XML/Unserializer.php';
+require_once 'Net/URL2.php';
 
 /**
  * This class acts as HTTP request which sends and receives HTTP requests and
@@ -45,17 +47,16 @@ class HttpClient implements IHttpClient
 {
   private $request;
   private $requestUrl;
-  const   API_VERSION = '2011-10-01';
   
   function __construct()
   {
-    $this->request = new HTTP_Request2(NULL, NULL, array(
+    $this->request = new \HTTP_Request2(NULL, NULL, array(
         'use_brackets'    => true,
         'ssl_verify_peer' => false,
         'ssl_verify_host' => false,
     ));
     
-    $this->request->SetHeader(array(X_MS_VERSION  =>  API_VERSION));
+    $this->request->SetHeader(array(Resources::X_MS_VERSION  =>  Resources::API_VERSION));
     $this->requestUrl = NULL;
   }
   
@@ -76,7 +77,7 @@ class HttpClient implements IHttpClient
   
   public function SetUrl($url)
   {
-    $this->requestUrl = new Net_URL2($url);
+    $this->requestUrl = new \Net_URL2($url);
   }
   
   public function SetMethod($method)
@@ -99,11 +100,23 @@ class HttpClient implements IHttpClient
     $this->request->SetHeader($header, $value);
   }
   
-  public function Send()
+  public function Send($filters)
   {
     $this->request->setUrl($this->requestUrl);
-    $this->request->send();
-    return $this->request->getBody();
+    
+    foreach ($filters as $filter)
+    {
+      $this->request = $filter->HandleRequest($this->request);
+    }
+    
+    $response = $this->request->send();
+    
+    foreach ($filters as $filter)
+    {
+      $response = $filter->HandleResponse($this->request, $response);
+    }
+    
+    return $response;
   }
 }
 

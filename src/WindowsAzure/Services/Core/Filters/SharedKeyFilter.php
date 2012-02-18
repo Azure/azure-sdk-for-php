@@ -50,9 +50,11 @@ class SharedKeyFilter implements IServiceFilter
   {
     $signedKey = $this->sharedKeyAuthentication->ComputeSignedKey($request);
     $request->SetHeader(AUTHENTICATION, $signedKey);
+    
+    return $request;
   }
   
-  public function HandleResponse($response) 
+  public function HandleResponse($request, $response) 
   {
     // Do nothing with the response.
     return $response;

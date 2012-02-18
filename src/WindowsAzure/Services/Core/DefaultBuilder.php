@@ -31,7 +31,8 @@ use PEAR2\WindowsAzure\Services\Queue\QueueRestProxy;
 use PEAR2\WindowsAzure\Services\Queue\QueueConfiguration;
 use PEAR2\WindowsAzure\Services\Queue\QueueExceptionProcessor;
 use PEAR2\WindowsAzure\Services\Core\Authentication\BlobQueueSharedKey;
-//use PEAR2\WindowsAzure\Core\HttpClient;
+use PEAR2\WindowsAzure\Resources;
+use PEAR2\WindowsAzure\Core\Exceptions\InvalidArgumentTypeException;
 
 /**
  * Builds azure service objects.
@@ -49,12 +50,12 @@ class ServicesBuilder implements IServiceBuilder
   {
     switch ($type)
     {
-      case 'IQueue':
+      case Resources::QUEUE_TYPE_NAME:
         $httpClient = new HttpClient();
         
         $queueRestProxy = new QueueRestProxy($httpClient, 
                 $config->GetProperty(QueueConfiguration::ACCOUNT_NAME),
-                $config->GetProperty(URI));
+                $config->GetProperty(QueueConfiguration::URI));
         
         $queueWrapper = new QueueExceptionProcessor($queueRestProxy);
         
@@ -63,12 +64,12 @@ class ServicesBuilder implements IServiceBuilder
                 $config->GetProperty(QueueConfiguration::ACCOUNT_KEY)
                 );
         
-        $queueWrapper = $queueRestWrapper->WithFilter($authFilter);
+        $queueWrapper = $queueRestProxy->WithFilter($authFilter);
         
         return $queueWrapper;
       
       default: 
-        throw new InvalidArgumentException(INVALID_TYPE_MESSAGE . $type);
+        throw new InvalidArgumentTypeException(Resources::QUEUE_TYPE_NAME);
     }
   }
 }

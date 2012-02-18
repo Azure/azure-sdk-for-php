@@ -40,7 +40,7 @@ interface IServiceFilter
 {
   public function HandleRequest($request);
   
-  public function HandleResponse($response);
+  public function HandleResponse($request, $response);
 }
 
 ?>

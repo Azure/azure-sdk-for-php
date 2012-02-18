@@ -23,9 +23,10 @@
  * @link       http://pear.php.net/package/azure-sdk-for-php
  */
 
+use PEAR2\WindowsAzure\Services\Core\Configuration;
 use PEAR2\WindowsAzure\Services\Queue\IQueue;
 use PEAR2\WindowsAzure\Services\Queue\QueueService;
-use PEAR2\WindowsAzure\Services\Configuration;
+use PEAR2\WindowsAzure\Services\Queue\QueueConfiguration;
 
 /**
 * Unit tests for QueueRestProxy class
@@ -39,24 +40,23 @@ use PEAR2\WindowsAzure\Services\Configuration;
 */
 class QueueRestProxyTest extends PHPUnit_Framework_TestCase
 {
-    /**
-    * @covers PEAR2\WindowsAzure\Services\Queue\QueueRestProxy::ListQueues
-    */
-    public function testListQueues()
-    {
-
-//        $config = new Configuration();
-//        $queueService = QueueService::Create($config);
-//        $queues = $queueService->ListQueues();
-//        $this->assertEquals(3, count($queues));
-//        $this->assertEquals('Queue1', $queues[0]->GetName());
-//        $this->assertEquals('Queue2', $queues[1]->GetName());
-//        $this->assertEquals('Queue3', $queues[2]->GetName());
-//
-//        return $queueService;
-      
-      $this->assertEquals(1, 1);
-    }
+  /**
+  * @covers PEAR2\WindowsAzure\Services\Queue\QueueRestProxy::ListQueues
+  */
+  public function testListQueues()
+  {
+    $config = Configuration::GetInstance();
+    $config->SetProperty(QueueConfiguration::ACCOUNT_KEY, 'AhlzsbLRkjkwObubff3xrhB2yWJNh1EMptmcmxFJ6fvPTVX2PZXwrG2YtYWf5DPMVgNsteKStM5iBLlknYFVoA==');
+    $config->SetProperty(QueueConfiguration::ACCOUNT_NAME, 'aogailsvc');
+    $config->SetProperty(QueueConfiguration::URI, '.queue.core.windows.net');
+    $queueWrapper = QueueService::Create($config);
+    $queues = $queueWrapper->ListQueues();
+    
+    $this->assertEquals('testqueue1', $queues['Queues']['Queue'][0]['Name']);
+    $this->assertEquals('testqueue2', $queues['Queues']['Queue'][1]['Name']);
+    $this->assertEquals('testqueue3', $queues['Queues']['Queue'][2]['Name']);
+    $this->assertEquals('zikas3', $queues['Queues']['Queue'][3]['Name']);
+  }
 }
 
 ?>

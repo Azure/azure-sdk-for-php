@@ -7,7 +7,7 @@ spl_autoload_register(
       if ($classes === null) {
          $classes = array(
             'configurationtesttest' => '/unit/WindowsAzure/Services/Core/ConfigurationTest.php',
-            'pear2\\testresources' => '/unit/TestResources.php',
+            'pear2\\tests\\unit\\testresources' => '/unit/TestResources.php',
             'queuerestproxytest' => '/unit/WindowsAzure/Services/Queue/QueueRestProxyTest.php'
           );
       }

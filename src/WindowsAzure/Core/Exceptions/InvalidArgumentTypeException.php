@@ -24,6 +24,7 @@
  */
  
 namespace PEAR2\WindowsAzure\Core\Exceptions;
+use PEAR2\WindowsAzure\Resources;
 
 /**
  * Exception thrown if an argument type does not match with the expected type. 
@@ -37,7 +38,10 @@ namespace PEAR2\WindowsAzure\Core\Exceptions;
  */
 class InvalidArgumentTypeException extends \LogicException
 {
-  
+  public function __construct($validType)
+  {
+    parent::__construct(Resources::INVALID_TYPE_MESSAGE . $validType);
+  }
 }
 
 ?>

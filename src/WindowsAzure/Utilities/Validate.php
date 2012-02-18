@@ -38,11 +38,31 @@ use PEAR2\WindowsAzure\Core\Exceptions\InvalidArgumentTypeException;
  */
 class Validate
 {
+  /**
+  * Throws exception if the provided variable type is not array.
+  *
+  * @param  mix $var variable to check against.
+  * @throws InvalidArgumentTypeException
+  */
   public static function IsArray($var)
   {
     if (!is_array($var))
     {
-      throw new InvalidArgumentTypeException();
+      throw new InvalidArgumentTypeException(gettype(array()));
+    }
+  }
+  
+  /**
+  * Throws exception if the provided variable type is not string.
+  *
+  * @param  mix $var variable to check against.
+  * @throws InvalidArgumentTypeException
+  */
+  public static function IsString($var)
+  {
+    if (!is_string($var))
+    {
+      throw new InvalidArgumentTypeException(gettype(''));
     }
   }
 }
