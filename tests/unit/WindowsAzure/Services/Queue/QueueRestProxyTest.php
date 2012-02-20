@@ -48,7 +48,7 @@ class QueueRestProxyTest extends PHPUnit_Framework_TestCase
     $config = Configuration::GetInstance();
     $config->SetProperty(QueueConfiguration::ACCOUNT_KEY, 'AhlzsbLRkjkwObubff3xrhB2yWJNh1EMptmcmxFJ6fvPTVX2PZXwrG2YtYWf5DPMVgNsteKStM5iBLlknYFVoA==');
     $config->SetProperty(QueueConfiguration::ACCOUNT_NAME, 'aogailsvc');
-    $config->SetProperty(QueueConfiguration::URI, '.queue.core.windows.net');
+    $config->SetProperty(QueueConfiguration::URI, 'queue.core.windows.net');
     $queueWrapper = QueueService::Create($config);
     $queues = $queueWrapper->ListQueues();
     

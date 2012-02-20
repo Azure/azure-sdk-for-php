@@ -6,9 +6,13 @@ spl_autoload_register(
       static $classes = null;
       if ($classes === null) {
          $classes = array(
-            'configurationtesttest' => '/unit/WindowsAzure/Services/Core/ConfigurationTest.php',
-            'pear2\\tests\\unit\\testresources' => '/unit/TestResources.php',
-            'queuerestproxytest' => '/unit/WindowsAzure/Services/Queue/QueueRestProxyTest.php'
+            'azureauthenticationtest' => '/Unit/WindowsAzure/Services/Core/Authentication/AzureAuthenticationTest.php',
+            'blobqueuesharedkeytest' => '/Unit/WindowsAzure/Services/Core/Authentication/BlobQueueSharedKeyTest.php',
+            'configurationtest' => '/Unit/WindowsAzure/Services/Core/ConfigurationTest.php',
+            'pear2\\tests\\mock\\windowsazure\\services\\core\\authentication\\azureauthenticationmock' => '/Mock/WindowsAzure/Services/Core/Authentication/AzureAuthenticationMock.php',
+            'pear2\\tests\\mock\\windowsazure\\services\\core\\authentication\\blobqueuesharedkeymock' => '/Mock/WindowsAzure/Services/Core/Authentication/BlobQueueSharedKeyMock.php',
+            'pear2\\tests\\unit\\testresources' => '/Unit/TestResources.php',
+            'queuerestproxytest' => '/Unit/WindowsAzure/Services/Queue/QueueRestProxyTest.php'
           );
       }
       $cn = strtolower($class);

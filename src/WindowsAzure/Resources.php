@@ -62,7 +62,7 @@ class Resources
   const STORAGE_URI     = 'http://%s.%s/';
   
   // Versioning
-  const API_VERSION = '2011-10-01';
+  const API_VERSION = '2011-08-18';
 }
 
 ?>

@@ -28,6 +28,7 @@ use PEAR2\WindowsAzure\Services\Queue\Queue;
 use \PEAR2\WindowsAzure\Resources;
 
 require_once 'HTTP/Request2.php';
+require_once 'XML/Unserializer.php';
 
 /**
 * This class constructs HTTP requests and receive HTTP responses for queue 
@@ -50,6 +51,14 @@ class QueueRestProxy implements IQueue
     $channel->setUrl(sprintf(Resources::STORAGE_URI, $accountName, $uri));
     $this->channel = $channel;
     $this->filters = array();
+  }
+  
+  private function Unserialize($xml)
+  {
+    $unserializer = new \XML_Unserializer();
+    $unserializer->unserialize($xml);
+    $data = $unserializer->getUnserializedData();
+    return $unserializer->getUnserializedData();
   }
   
   public function __clone()
@@ -91,9 +100,10 @@ class QueueRestProxy implements IQueue
     $this->channel->SetMethod(\HTTP_Request2::METHOD_GET);
     $this->channel->SetQueryVariable('comp', 'list');
     
-    $queues = $this->channel->Send($this->filters);
+    $responseBody = $this->channel->Send($this->filters);
+    $queues = $this->Unserialize($responseBody);
     
-    return $queues;
+    return $this->Unserialize($responseBody);
   }
 }
 

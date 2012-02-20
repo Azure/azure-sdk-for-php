@@ -40,7 +40,7 @@ use PEAR2\WindowsAzure\Resources;
  */
 class BlobQueueSharedKey extends AzureAuthentication
 {
-  private $includedHeaders;
+  protected $includedHeaders;
   
   public function __construct($accountName, $accountKey)
   {
@@ -60,14 +60,15 @@ class BlobQueueSharedKey extends AzureAuthentication
     $this->includedHeaders[] = Resources::RANGE;
   }
   
-  protected function ComputeSignature($request) 
+  protected function ComputeSignature($headers, $url, $queryParams, $httpMethod)
   {
-    $canonicalizedHeaders = parent::ComputeCanonicalizedHeaders($request);
-    $canonicalizedResource = parent::ComputeCanonicalizedResource($request);
-    $headers = $request->GetHeaders();
+    $canonicalizedHeaders = parent::ComputeCanonicalizedHeaders($headers);
+    //\PEAR2\WindowsAzure\Utilities\Logger::Log($canonicalizedHeaders);
+    $canonicalizedResource = parent::ComputeCanonicalizedResource($url, $queryParams);
+    //\PEAR2\WindowsAzure\Utilities\Logger::Log($canonicalizedResource);
     
     $stringToSign   = array();
-    $stringToSign[] = strtoupper($request->getMethod());
+    $stringToSign[] = strtoupper($httpMethod);
     
     foreach ($this->includedHeaders as $header)
     {

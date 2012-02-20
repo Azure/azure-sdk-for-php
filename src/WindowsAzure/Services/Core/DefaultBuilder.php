@@ -30,7 +30,8 @@ use PEAR2\WindowsAzure\Services\Core\Configuration;
 use PEAR2\WindowsAzure\Services\Queue\QueueRestProxy;
 use PEAR2\WindowsAzure\Services\Queue\QueueConfiguration;
 use PEAR2\WindowsAzure\Services\Queue\QueueExceptionProcessor;
-use PEAR2\WindowsAzure\Services\Core\Authentication\BlobQueueSharedKey;
+use PEAR2\WindowsAzure\Services\Core\Filters\SharedKeyFilter;
+use PEAR2\WindowsAzure\Services\Core\Filters\DateFilter;
 use PEAR2\WindowsAzure\Resources;
 use PEAR2\WindowsAzure\Core\Exceptions\InvalidArgumentTypeException;
 
@@ -59,12 +60,18 @@ class ServicesBuilder implements IServiceBuilder
         
         $queueWrapper = new QueueExceptionProcessor($queueRestProxy);
         
-        $authFilter = new BlobQueueSharedKey(
+        // Adding date filter
+        $dateFilter = new DateFilter();
+        $queueWrapper = $queueWrapper->WithFilter($dateFilter);
+        
+        // Adding authentication filter
+        $authFilter = new SharedKeyFilter(
                 $config->GetProperty(QueueConfiguration::ACCOUNT_NAME),
-                $config->GetProperty(QueueConfiguration::ACCOUNT_KEY)
+                $config->GetProperty(QueueConfiguration::ACCOUNT_KEY),
+                $type
                 );
         
-        $queueWrapper = $queueRestProxy->WithFilter($authFilter);
+        $queueWrapper = $queueWrapper->WithFilter($authFilter);
         
         return $queueWrapper;
       

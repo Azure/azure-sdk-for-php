@@ -38,8 +38,8 @@ use PEAR2\WindowsAzure\Resources;
  */
 abstract class AzureAuthentication
 {
-  private   $accountName;
-  private   $accountKey;
+  protected $accountName;
+  protected $accountKey;
   
   public function __construct($accountName, $accountKey)
   {
@@ -47,9 +47,8 @@ abstract class AzureAuthentication
     $this->accountName  = $accountName;
   }
   
-  protected function ComputeCanonicalizedHeaders($request)
+  protected function ComputeCanonicalizedHeaders($headers)
   {
-    $headers = $request->GetHeaders();
     $canonicalizedHeaders = array();
     
     if (!is_null($headers))
@@ -60,18 +59,21 @@ abstract class AzureAuthentication
         {
           $value = $value === true ? 'True' : 'False';
         }
-      }
-      $headers[$header] = $value;
-      if (substr($header, 0, strlen(Resources::X_MS_HEADER_PREFIX)) == Resources::X_MS_HEADER_PREFIX)
-      {
-        $canonicalizedHeaders[] = strtolower($header) . ':' . $value;
+        
+        $headers[$header] = $value;
+        if (substr($header, 0, strlen(Resources::X_MS_HEADER_PREFIX)) == Resources::X_MS_HEADER_PREFIX)
+        {
+          $canonicalizedHeaders[] = strtolower($header) . ':' . $value;
+        }
       }
     }
     
     sort($canonicalizedHeaders);
+    
+    return $canonicalizedHeaders;
   }
   
-  protected function ComputeCanonicalizedResource($request)
+  protected function ComputeCanonicalizedResource($url, $queryParams)
   {
     // Note: Multi-valued query parameter is not supported (issue #17)
     // 1. Beginning with an empty string (""), append a forward slash (/), followed by the name of 
@@ -79,11 +81,9 @@ abstract class AzureAuthentication
     $canonicalizedResource  = '/' . $this->accountName;
     
     // 2. Append the resource's encoded URI path, without any query parameters.
-    $canonicalizedResource .= parse_url($request->GetUrl(), PHP_URL_PATH);
+    $canonicalizedResource .= parse_url($url, PHP_URL_PATH);
     
     // 3. Retrieve all query parameters on the resource URI, including the comp parameter if it exists.
-    $queryParams = $request->GetQueryVariables();
-    
     // 4. Sort the query parameters lexicographically by parameter name, in ascending order.
     if (count($queryParams) > 0)
     {
@@ -103,14 +103,15 @@ abstract class AzureAuthentication
     return $canonicalizedResource;
   }
   
-  public function GetAuthorizationHeader($request)
+  public function GetAuthorizationHeader($headers, $url, $queryParams, $httpMethod)
   {
-    return 'SharedKey ' . $this->accountName . ':' .
-            base64_encode(hash_hmac('sha256', ComputeSignature($request), 
+    $signature = $this->ComputeSignature($headers, $url, $queryParams, $httpMethod);
+    
+    return 'SharedKey ' . $this->accountName . ':' . base64_encode(hash_hmac('sha256', $signature, 
                     base64_decode($this->accountKey), true));
   }
   
-  abstract protected function ComputeSignature($request);
+  abstract protected function ComputeSignature($headers, $url, $queryParams, $httpMethod);
 }
 
 ?>

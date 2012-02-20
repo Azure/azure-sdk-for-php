@@ -61,19 +61,22 @@ class QueueExceptionProcessor implements IQueue
   {
     try
     {
+      $result = NULL;
       if (func_num_args() == 0)
       {
-        $this->service->ListQueues();
+        $result = $this->service->ListQueues();
       }
       else
       {
-        $this->service->ListQueues(func_get_arg(0));
+        $result = $this->service->ListQueues(func_get_arg(0));
       }
     }
     catch (Exception $e)
     {
       // Write code to handle the exception
     }
+    
+    return $result;
   }
 }
 

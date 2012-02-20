@@ -25,7 +25,7 @@
  
 namespace PEAR2\WindowsAzure\Services\Core;
 use PEAR2\WindowsAzure\Core\IHttpClient;
-use PEAR2\WindowsAzure;
+use PEAR2\WindowsAzure\Core\IServiceFilter;
 use PEAR2\WindowsAzure\Resources;
 
 require_once 'HTTP/Request2.php';
@@ -80,6 +80,11 @@ class HttpClient implements IHttpClient
     $this->requestUrl = new \Net_URL2($url);
   }
   
+  public function GetUrl()
+  {
+    return $this->requestUrl;
+  }
+  
   public function SetMethod($method)
   {
     $this->request->setMethod($method);
@@ -106,17 +111,17 @@ class HttpClient implements IHttpClient
     
     foreach ($filters as $filter)
     {
-      $this->request = $filter->HandleRequest($this->request);
+      $this->request = $filter->HandleRequest($this)->request;
     }
     
     $response = $this->request->send();
     
     foreach ($filters as $filter)
     {
-      $response = $filter->HandleResponse($this->request, $response);
+      $response = $filter->HandleResponse($this, $response);
     }
     
-    return $response;
+    return $response->getBody();
   }
 }
 
