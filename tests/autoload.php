@@ -9,10 +9,10 @@ spl_autoload_register(
             'azureauthenticationtest' => '/Unit/WindowsAzure/Services/Core/Authentication/AzureAuthenticationTest.php',
             'blobqueuesharedkeytest' => '/Unit/WindowsAzure/Services/Core/Authentication/BlobQueueSharedKeyTest.php',
             'configurationtest' => '/Unit/WindowsAzure/Services/Core/ConfigurationTest.php',
+            'pear2\\tests\\mock\\windowsazure\\core\\httpclientmock' => '/Mock/WindowsAzure/Core/HttpClientMock.php',
             'pear2\\tests\\mock\\windowsazure\\services\\core\\authentication\\azureauthenticationmock' => '/Mock/WindowsAzure/Services/Core/Authentication/AzureAuthenticationMock.php',
             'pear2\\tests\\mock\\windowsazure\\services\\core\\authentication\\blobqueuesharedkeymock' => '/Mock/WindowsAzure/Services/Core/Authentication/BlobQueueSharedKeyMock.php',
             'pear2\\tests\\unit\\testresources' => '/Unit/TestResources.php',
-            'pear2\\windowsazure\\httpclient' => '/Mock/WindowsAzure/Core/HttpClient.php',
             'queuerestproxytest' => '/Unit/WindowsAzure/Services/Queue/QueueRestProxyTest.php'
           );
       }

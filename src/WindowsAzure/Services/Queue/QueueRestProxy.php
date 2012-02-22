@@ -27,6 +27,7 @@ namespace PEAR2\WindowsAzure\Services\Queue;
 use PEAR2\WindowsAzure\Services\Queue\Queue;
 use PEAR2\WindowsAzure\Resources;
 use PEAR2\WindowsAzure\Services\Queue\Models\ListQueueOptions;
+use PEAR2\WindowsAzure\Services\Queue\Models\ListQueueResult;
 
 require_once 'HTTP/Request2.php';
 require_once 'XML/Unserializer.php';
@@ -90,8 +91,6 @@ class QueueRestProxy implements IQueue
     */
   public function listQueues($listQueuesOptions = NULL)
   {
-    $queues = array();
-    
     if (!isset($listQueuesOptions))
     {
       $listQueuesOptions = new ListQueueOptions();
@@ -99,15 +98,16 @@ class QueueRestProxy implements IQueue
     
     $this->_channel->setMethod(\HTTP_Request2::METHOD_GET);
     $this->_channel->setQueryVariable('comp', 'list');
-    $this->_channel->setQueryVariable('prefix', $listQueuesOptions->getPrefix());
-    $this->_channel->setQueryVariable('marker', $listQueuesOptions->getMarker());
-    $this->_channel->setQueryVariable('maxresults', $listQueuesOptions->getMaxResults());
+    $this->_channel->setQueryVariable(Resources::PREFIX, $listQueuesOptions->getPrefix());
+    $this->_channel->setQueryVariable(Resources::MARKER, $listQueuesOptions->getMarker());
+    $this->_channel->setQueryVariable(Resources::MAX_RESULTS, $listQueuesOptions->getMaxResults());
     $this->_channel->setQueryVariable('include', $listQueuesOptions->isIncludeMetadata()? 
             'metadata':  NULL);
     
     $responseBody = $this->_channel->send($this->_filters);
+    $parsedResponse = $this->unserialize($responseBody);
     
-    return $this->unserialize($responseBody);
+    return ListQueueResult::createFromParsedResponse($parsedResponse);
   }
 
   public function clearMessages($queueName, $queueServiceOptions = NULL)

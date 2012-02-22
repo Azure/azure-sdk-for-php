@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Implementation of class HttpClient.
+ * Implementation of class HttpClientMock.
  *
  * PHP version 5
  *
@@ -23,7 +23,9 @@
  * @link       http://pear.php.net/package/azure-sdk-for-php
  */
  
-namespace PEAR2\WindowsAzure;
+namespace PEAR2\Tests\Mock\WindowsAzure\Core;
+use PEAR2\WindowsAzure\Core\IHttpClient;
+use PEAR2\WindowsAzure\Services\Core\HttpClient;
 
 /**
  * Mock class for Http client.
@@ -35,9 +37,51 @@ namespace PEAR2\WindowsAzure;
  * @version    Release: @package_version@
  * @link       http://pear.php.net/package/azure-sdk-for-php
  */
-class HttpClient
-{
+class HttpClientMock implements IHttpClient
+{ 
+  public function getHeaders()
+  {
+    
+  }
   
+  public function getMethod()
+  {
+
+  }
+  public function getQuery()
+  {
+    
+  }
+
+  public function getQueryVariables()
+  {
+    
+  }
+  
+  public function send($filters) 
+  {
+    
+  }
+  
+  public function setHeader($header, $value)
+  {
+    
+  }
+  
+  public function setMethod($method)
+  {
+    
+  }
+  
+  public function setQueryVariable($key, $value)
+  {
+    
+  }
+  
+  public function setUrl($url)
+  {
+    
+  }
 }
 
 ?>

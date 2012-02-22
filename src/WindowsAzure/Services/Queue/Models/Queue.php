@@ -24,6 +24,8 @@
  */
  
 namespace PEAR2\WindowsAzure\Services\Queue;
+use PEAR2\WindowsAzure\Resources;
+use PEAR2\WindowsAzure\Utilities;
 
 /**
  * Azure queue object.
@@ -40,6 +42,25 @@ class Queue
   private $_name;
   private $_url;
   private $_metadata;
+  
+  public static function createOneObject($raw)
+  {
+    $queue = new Queue($raw['Name'], $raw['Url']);
+    $queue->setMetadata(Utilities::getValue($raw, Resources::METADATA, NULL));
+    
+    return $queue;
+  }
+  
+  public static function createArray($raw)
+  {
+    $queues = array();
+    foreach ($raw as $rawQueue)
+    {
+      $queues[] = self::createOneObject($rawQueue);
+    }
+    
+    return $queues;
+  }
   
   function __construct($name, $url)
   {

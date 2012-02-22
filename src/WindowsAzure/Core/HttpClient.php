@@ -72,7 +72,7 @@ class HttpClient implements IHttpClient
   
   public function setQueryVariable($key, $value)
   {
-    $this->_requestUrl->setQueryVariable($key, $value);
+    $this->_requestUrl->setQueryVariable(strtolower($key), $value);
   }
   
   public function setUrl($url)

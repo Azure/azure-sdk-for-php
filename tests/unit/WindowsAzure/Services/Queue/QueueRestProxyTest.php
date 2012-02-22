@@ -28,6 +28,7 @@ use PEAR2\WindowsAzure\Services\Queue\IQueue;
 use PEAR2\WindowsAzure\Services\Queue\QueueService;
 use PEAR2\WindowsAzure\Services\Queue\QueueConfiguration;
 use PEAR2\WindowsAzure\Services\Queue\Models\ListQueueOptions;
+use PEAR2\WindowsAzure\Services\Queue\Models\ListQueueResult;
 
 /**
 * Unit tests for QueueRestProxy class
@@ -51,12 +52,13 @@ class QueueRestProxyTest extends PHPUnit_Framework_TestCase
     $config->setProperty(QueueConfiguration::ACCOUNT_NAME, 'aogailsvc');
     $config->setProperty(QueueConfiguration::URI, 'queue.core.windows.net');
     $queueWrapper = QueueService::create($config);
-    $queues = $queueWrapper->listQueues();
-  
-    $this->assertEquals('testqueue1', $queues['Queues']['Queue'][0]['Name']);
-    $this->assertEquals('testqueue2', $queues['Queues']['Queue'][1]['Name']);
-    $this->assertEquals('testqueue3', $queues['Queues']['Queue'][2]['Name']);
-    $this->assertEquals('zikas3', $queues['Queues']['Queue'][3]['Name']);
+    $result = $queueWrapper->listQueues();
+    $queues = $result->getQueues();
+    
+    $this->assertEquals('testqueue1', $queues[0]->getName());
+    $this->assertEquals('testqueue2', $queues[1]->getName());
+    $this->assertEquals('testqueue3', $queues[2]->getName());
+    $this->assertEquals('zikas3', $queues[3]->getName());
   }
   
   /**
@@ -72,12 +74,13 @@ class QueueRestProxyTest extends PHPUnit_Framework_TestCase
     $options = new ListQueueOptions();
     $options->setPrefix('test');
     $options->setIncludeMetadata(TRUE);
-    $queues = $queueWrapper->listQueues($options);
-  
-    $this->assertEquals(3, count($queues['Queues']['Queue']));
-    $this->assertEquals('testqueue1', $queues['Queues']['Queue'][0]['Name']);
-    $this->assertEquals('testqueue2', $queues['Queues']['Queue'][1]['Name']);
-    $this->assertEquals('testqueue3', $queues['Queues']['Queue'][2]['Name']);
+    $result = $queueWrapper->listQueues($options);
+    $queues = $result->getQueues();
+    
+    $this->assertEquals(3, count($queues));
+    $this->assertEquals('testqueue1', $queues[0]->getName());
+    $this->assertEquals('testqueue2', $queues[1]->getName());
+    $this->assertEquals('testqueue3', $queues[2]->getName());
   }
   
   /**
@@ -92,18 +95,57 @@ class QueueRestProxyTest extends PHPUnit_Framework_TestCase
     $queueWrapper = QueueService::create($config);
     $options = new ListQueueOptions();
     $options->setMaxResults(2);
-    $queues = $queueWrapper->listQueues($options);
+    $result = $queueWrapper->listQueues($options);
+    $queues = $result->getQueues();
   
-    $this->assertEquals(2, count($queues['Queues']['Queue']));
-    $this->assertEquals('testqueue1', $queues['Queues']['Queue'][0]['Name']);
-    $this->assertEquals('testqueue2', $queues['Queues']['Queue'][1]['Name']);
+    $this->assertEquals(2, count($queues));
+    $this->assertEquals('testqueue1', $queues[0]->getName());
+    $this->assertEquals('testqueue2', $queues[1]->getName());
     
-    $options->setMarker($queues['NextMarker']);
-    $queues = $queueWrapper->listQueues($options);
+    $options->setMarker($result->getNextMarker());
+    $result = $queueWrapper->listQueues($options);
+    $queues = $result->getQueues();
     
-    $this->assertEquals(2, count($queues['Queues']['Queue']));
-    $this->assertEquals('testqueue3', $queues['Queues']['Queue'][0]['Name']);
-    $this->assertEquals('zikas3', $queues['Queues']['Queue'][1]['Name']);
+    $this->assertEquals(2, count($queues));
+    $this->assertEquals('testqueue3', $queues[0]->getName());
+    $this->assertEquals('zikas3', $queues[1]->getName());
+  }
+  
+  /**
+  * @covers PEAR2\WindowsAzure\Services\Queue\QueueRestProxy::listQueues
+  */
+  public function testListQueuesWithNoQueues()
+  {
+    $config = Configuration::getInstance();
+    $config->setProperty(QueueConfiguration::ACCOUNT_KEY, 'AhlzsbLRkjkwObubff3xrhB2yWJNh1EMptmcmxFJ6fvPTVX2PZXwrG2YtYWf5DPMVgNsteKStM5iBLlknYFVoA==');
+    $config->setProperty(QueueConfiguration::ACCOUNT_NAME, 'aogailsvc');
+    $config->setProperty(QueueConfiguration::URI, 'queue.core.windows.net');
+    $queueWrapper = QueueService::create($config);
+    $options = new ListQueueOptions();
+    $options->setPrefix('7amada');
+    $result = $queueWrapper->listQueues($options);
+    $queues = $result->getQueues();
+  
+    $this->assertTrue(empty($queues));
+  }
+  
+  /**
+  * @covers PEAR2\WindowsAzure\Services\Queue\QueueRestProxy::listQueues
+  */
+  public function testListQueuesWithOneResult()
+  {
+    $config = Configuration::getInstance();
+    $config->setProperty(QueueConfiguration::ACCOUNT_KEY, 'AhlzsbLRkjkwObubff3xrhB2yWJNh1EMptmcmxFJ6fvPTVX2PZXwrG2YtYWf5DPMVgNsteKStM5iBLlknYFVoA==');
+    $config->setProperty(QueueConfiguration::ACCOUNT_NAME, 'aogailsvc');
+    $config->setProperty(QueueConfiguration::URI, 'queue.core.windows.net');
+    $queueWrapper = QueueService::create($config);
+    $options = new ListQueueOptions();
+    $options->setMaxResults(2);
+    $options->setPrefix('z');
+    $result = $queueWrapper->listQueues($options);
+    $queues = $result->getQueues();
+  
+    $this->assertEquals(1, count($queues));
   }
 }
 

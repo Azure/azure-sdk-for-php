@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Implementation of class ListQueueResults.
+ * Implementation of class Utilities.
  *
  * PHP version 5
  *
@@ -23,10 +23,10 @@
  * @link       http://pear.php.net/package/azure-sdk-for-php
  */
  
-namespace PEAR2\WindowsAzure\Services\Queue\Models;
+namespace PEAR2\WindowsAzure;
 
 /**
- * Container to hold list queue response object.
+ * Utilities for the project
  *
  * @package    azure-sdk-for-php
  * @author     Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
@@ -35,62 +35,19 @@ namespace PEAR2\WindowsAzure\Services\Queue\Models;
  * @version    Release: @package_version@
  * @link       http://pear.php.net/package/azure-sdk-for-php
  */
-class ListQueueResults
+class Utilities
 {
-  private $_queues;
-  private $_prefix;
-  private $_marker;
-  private $_nextMarker;
-  private $_maxResults;
-  
-  public static function createFromResponse($parsedResponse)
+  /**
+    * Returns the specified value of the key passed and in case that this index doesn't exist,
+    * the default value is used.
+    *
+    * @param ListQueueOptions $listQueuesOptions  Optional. Options provided for list queues request.
+    * @return array
+    * @throws ServiceException
+    */
+  public static function getValue($array, $key, $default)
   {
-    
-  }
-  
-  public function getQueues()
-  {
-    return $this->_queues;
-  }
-  
-  public function getPrefix()
-  {
-    $this->_prefix;
-  }
-  
-  public function setPrefix($prefix)
-  {
-    $this->_prefix = $prefix;
-  }
-  
-  public function getMarker()
-  {
-    return $this->_marker;
-  }
-  
-  public function setMarker($marker)
-  {
-    $this->_marker = $marker;
-  }
-  
-  public function getMaxResults()
-  {
-    return $this->_maxResults;
-  }
-  
-  public function setMaxResults($maxResults)
-  {
-    $this->_maxResults = $maxResults;
-  }
-  
-  public function getNextMarker()
-  {
-    return $this->_nextMarker;
-  }
-  
-  public function setNextMarker($nextMarker)
-  {
-    $this->_nextMarker = $nextMarker;
+    return array_key_exists($key, $array) ? $array[$key] : $default;
   }
 }
 

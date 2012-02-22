@@ -18,13 +18,14 @@ spl_autoload_register(
             'pear2\\windowsazure\\services\\core\\servicesbuilder' => '/WindowsAzure/Services/Core/DefaultBuilder.php',
             'pear2\\windowsazure\\services\\queue\\iqueue' => '/WindowsAzure/Services/Queue/IQueue.php',
             'pear2\\windowsazure\\services\\queue\\models\\listqueueoptions' => '/WindowsAzure/Services/Queue/Models/ListQueueOptions.php',
-            'pear2\\windowsazure\\services\\queue\\models\\listqueueresults' => '/WindowsAzure/Services/Queue/Models/ListQueueResults.php',
+            'pear2\\windowsazure\\services\\queue\\models\\listqueueresult' => '/WindowsAzure/Services/Queue/Models/ListQueueResult.php',
             'pear2\\windowsazure\\services\\queue\\models\\queueserviceoptions' => '/WindowsAzure/Services/Queue/Models/QueueServiceOptions.php',
             'pear2\\windowsazure\\services\\queue\\queue' => '/WindowsAzure/Services/Queue/Models/Queue.php',
             'pear2\\windowsazure\\services\\queue\\queueconfiguration' => '/WindowsAzure/Services/Queue/QueueConfiguration.php',
             'pear2\\windowsazure\\services\\queue\\queueexceptionprocessor' => '/WindowsAzure/Services/Queue/QueueExceptionProcessor.php',
             'pear2\\windowsazure\\services\\queue\\queuerestproxy' => '/WindowsAzure/Services/Queue/QueueRestProxy.php',
             'pear2\\windowsazure\\services\\queue\\queueservice' => '/WindowsAzure/Services/Queue/QueueService.php',
+            'pear2\\windowsazure\\utilities' => '/WindowsAzure/Utilities/Utilities.php',
             'pear2\\windowsazure\\utilities\\logger' => '/WindowsAzure/Utilities/Logger.php',
             'pear2\\windowsazure\\utilities\\validate' => '/WindowsAzure/Utilities/Validate.php'
           );
