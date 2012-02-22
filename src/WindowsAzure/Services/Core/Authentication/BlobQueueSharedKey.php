@@ -60,11 +60,11 @@ class BlobQueueSharedKey extends AzureAuthentication
     $this->includedHeaders[] = Resources::RANGE;
   }
   
-  protected function ComputeSignature($headers, $url, $queryParams, $httpMethod)
+  protected function computeSignature($headers, $url, $queryParams, $httpMethod)
   {
-    $canonicalizedHeaders = parent::ComputeCanonicalizedHeaders($headers);
+    $canonicalizedHeaders = parent::computeCanonicalizedHeaders($headers);
     //\PEAR2\WindowsAzure\Utilities\Logger::Log($canonicalizedHeaders);
-    $canonicalizedResource = parent::ComputeCanonicalizedResource($url, $queryParams);
+    $canonicalizedResource = parent::computeCanonicalizedResource($url, $queryParams);
     //\PEAR2\WindowsAzure\Utilities\Logger::Log($canonicalizedResource);
     
     $stringToSign   = array();

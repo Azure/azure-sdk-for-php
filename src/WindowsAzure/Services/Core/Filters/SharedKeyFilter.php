@@ -40,26 +40,26 @@ use PEAR2\WindowsAzure\Services\Core\Authentication\BlobQueueSharedKey;
  */
 class SharedKeyFilter implements IServiceFilter
 {
-  private $sharedKeyAuthentication;
+  private $_sharedKeyAuthentication;
   
   public function __construct($accountName, $accountKey)
   {
     if (Resources::QUEUE_TYPE_NAME) 
     {
-      $this->sharedKeyAuthentication = new BlobQueueSharedKey($accountName, $accountKey);
+      $this->_sharedKeyAuthentication = new BlobQueueSharedKey($accountName, $accountKey);
     }
   }
   
-  public function HandleRequest($request) 
+  public function handleRequest($request)
   {
-    $signedKey = $this->sharedKeyAuthentication->GetAuthorizationHeader($request->GetHeaders(), 
-            $request->GetUrl(), $request->GetQueryVariables(), $request->GetMethod());
-    $request->SetHeader(Resources::AUTHENTICATION, $signedKey);
+    $signedKey = $this->_sharedKeyAuthentication->getAuthorizationHeader($request->getHeaders(), 
+            $request->getUrl(), $request->getQueryVariables(), $request->getMethod());
+    $request->setHeader(Resources::AUTHENTICATION, $signedKey);
     
     return $request;
   }
   
-  public function HandleResponse($request, $response) 
+  public function handleResponse($request, $response) 
   {
     // Do nothing with the response.
     return $response;

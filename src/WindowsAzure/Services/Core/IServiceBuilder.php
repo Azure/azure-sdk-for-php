@@ -37,7 +37,7 @@ namespace PEAR2\WindowsAzure\Services\Core;
  */
 interface IServiceBuilder
 {
-  public static function Build($config, $type);
+  public static function build($config, $type);
 }
 
 ?>

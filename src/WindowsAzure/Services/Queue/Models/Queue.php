@@ -26,7 +26,7 @@
 namespace PEAR2\WindowsAzure\Services\Queue;
 
 /**
- * Wrapper for azure queue object.
+ * Azure queue object.
  *
  * @package    azure-sdk-for-php
  * @author     Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
@@ -37,23 +37,44 @@ namespace PEAR2\WindowsAzure\Services\Queue;
  */
 class Queue
 {
-  private $name;
-  private $url;
+  private $_name;
+  private $_url;
+  private $_metadata;
   
   function __construct($name, $url)
   {
-    $this->name = $name;
-    $this->url = $url;
+    $this->_name = $name;
+    $this->_url = $url;
   }
   
-  public function GetName()
+  public function getName()
   {
-    return $this->name;
+    return $this->_name;
   }
   
-  public function SetName($name)
+  public function setName($name)
   {
-    $this->name = $name;
+    $this->_name = $name;
+  }
+  
+  public function getUrl()
+  {
+    return $this->_url;
+  }
+  
+  public function setUrl($url)
+  {
+    $this->_url = $url;
+  }
+  
+  public function getMetadata()
+  {
+    return $this->_metadata;
+  }
+  
+  public function setMetadata($metadata)
+  {
+    $this->_metadata = $metadata;
   }
 }
 

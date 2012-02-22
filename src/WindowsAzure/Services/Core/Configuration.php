@@ -39,27 +39,27 @@ use PEAR2\WindowsAzure\Utilities\Validate;
  */
 class Configuration
 {
-  private $properties;
-  private static $instance;
+  private $_properties;
+  private static $_instance;
   
   private function __construct()
   {
-    $this->properties = array();
+    $this->_properties = array();
   }
 
   /**
-  * Access point to the static instance of the class.
+  * Access point to the static _instance of the class.
   *
   * @return PEAR2\WindowsAzure\Services\Core\Configuration
   */
-  public static function GetInstance()
+  public static function getInstance()
   {
-    if (!isset(self::$instance)) 
+    if (!isset(self::$_instance)) 
     {
       $className = __CLASS__;
-      self::$instance = new $className;
+      self::$_instance = new $className;
     }
-    return self::$instance;
+    return self::$_instance;
   }
   
   /**
@@ -67,9 +67,9 @@ class Configuration
   *
   * @return array
   */
-  public function GetProperties()
+  public function getProperties()
   {
-    return $this->properties;
+    return $this->_properties;
   }
   
   /**
@@ -78,9 +78,9 @@ class Configuration
   * @param  string $key index of the property value
   * @return mix
   */
-  public function GetProperty($key)
+  public function getProperty($key)
   {
-    return $this->properties[$key];
+    return $this->_properties[$key];
   }
   
   /**
@@ -89,11 +89,11 @@ class Configuration
   * @param  string $key   index of the property value.
   * @param  string $value actual value to store.
   */
-  public function SetProperty($key, $value)
+  public function setProperty($key, $value)
   {
-    Validate::IsString($key);
+    Validate::isString($key);
     
-    $this->properties[$key] = $value;
+    $this->_properties[$key] = $value;
   }
   
   /**
@@ -102,9 +102,9 @@ class Configuration
   * @param  string $type the desired object type.
   * @return mix
   */
-  public function Create($type)
+  public function create($type)
   {
-    return ServicesBuilder::Build(self::$instance, $type);
+    return ServicesBuilder::build(self::$_instance, $type);
   }
 }
 

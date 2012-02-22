@@ -63,6 +63,13 @@ class Resources
   
   // Versioning
   const API_VERSION = '2011-08-18';
+  
+  // Query parameter names
+  const PREFIX      = 'Prefix';
+  const MAX_RESULTS = 'MaxResults';
+  const METADATA    = 'Metadata';
+  const MARKER      = 'Marker';
+  const NEXT_MARKER = 'NextMarker';
 }
 
 ?>

@@ -37,17 +37,17 @@ namespace PEAR2\WindowsAzure\Utilities;
  */
 class Logger
 {
-  private static $filePath = "C:\errors.txt";
+  private static $_filePath = "C:\log.txt";
   
-  public static function Log($var)
+  public static function log($var)
   {
     if (is_array($var)) 
     {
-      error_log(print_r($var, TRUE), 3, self::$filePath);
+      error_log(print_r($var, TRUE), 3, self::$_filePath);
     }
     else
     {
-      error_log($var . "\n", 3, self::$filePath);
+      error_log($var . "\n", 3, self::$_filePath);
     }
   }
 }

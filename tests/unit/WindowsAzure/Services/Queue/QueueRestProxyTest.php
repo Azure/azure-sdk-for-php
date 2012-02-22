@@ -27,6 +27,7 @@ use PEAR2\WindowsAzure\Services\Core\Configuration;
 use PEAR2\WindowsAzure\Services\Queue\IQueue;
 use PEAR2\WindowsAzure\Services\Queue\QueueService;
 use PEAR2\WindowsAzure\Services\Queue\QueueConfiguration;
+use PEAR2\WindowsAzure\Services\Queue\Models\ListQueueOptions;
 
 /**
 * Unit tests for QueueRestProxy class
@@ -41,21 +42,68 @@ use PEAR2\WindowsAzure\Services\Queue\QueueConfiguration;
 class QueueRestProxyTest extends PHPUnit_Framework_TestCase
 {
   /**
-  * @covers PEAR2\WindowsAzure\Services\Queue\QueueRestProxy::ListQueues
+  * @covers PEAR2\WindowsAzure\Services\Queue\QueueRestProxy::listQueues
   */
   public function testListQueues()
   {
-    $config = Configuration::GetInstance();
-    $config->SetProperty(QueueConfiguration::ACCOUNT_KEY, 'AhlzsbLRkjkwObubff3xrhB2yWJNh1EMptmcmxFJ6fvPTVX2PZXwrG2YtYWf5DPMVgNsteKStM5iBLlknYFVoA==');
-    $config->SetProperty(QueueConfiguration::ACCOUNT_NAME, 'aogailsvc');
-    $config->SetProperty(QueueConfiguration::URI, 'queue.core.windows.net');
-    $queueWrapper = QueueService::Create($config);
-    $queues = $queueWrapper->ListQueues();
-    
+    $config = Configuration::getInstance();
+    $config->setProperty(QueueConfiguration::ACCOUNT_KEY, 'AhlzsbLRkjkwObubff3xrhB2yWJNh1EMptmcmxFJ6fvPTVX2PZXwrG2YtYWf5DPMVgNsteKStM5iBLlknYFVoA==');
+    $config->setProperty(QueueConfiguration::ACCOUNT_NAME, 'aogailsvc');
+    $config->setProperty(QueueConfiguration::URI, 'queue.core.windows.net');
+    $queueWrapper = QueueService::create($config);
+    $queues = $queueWrapper->listQueues();
+  
     $this->assertEquals('testqueue1', $queues['Queues']['Queue'][0]['Name']);
     $this->assertEquals('testqueue2', $queues['Queues']['Queue'][1]['Name']);
     $this->assertEquals('testqueue3', $queues['Queues']['Queue'][2]['Name']);
     $this->assertEquals('zikas3', $queues['Queues']['Queue'][3]['Name']);
+  }
+  
+  /**
+  * @covers PEAR2\WindowsAzure\Services\Queue\QueueRestProxy::listQueues
+  */
+  public function testListQueuesWithOptions()
+  {
+    $config = Configuration::getInstance();
+    $config->setProperty(QueueConfiguration::ACCOUNT_KEY, 'AhlzsbLRkjkwObubff3xrhB2yWJNh1EMptmcmxFJ6fvPTVX2PZXwrG2YtYWf5DPMVgNsteKStM5iBLlknYFVoA==');
+    $config->setProperty(QueueConfiguration::ACCOUNT_NAME, 'aogailsvc');
+    $config->setProperty(QueueConfiguration::URI, 'queue.core.windows.net');
+    $queueWrapper = QueueService::create($config);
+    $options = new ListQueueOptions();
+    $options->setPrefix('test');
+    $options->setIncludeMetadata(TRUE);
+    $queues = $queueWrapper->listQueues($options);
+  
+    $this->assertEquals(3, count($queues['Queues']['Queue']));
+    $this->assertEquals('testqueue1', $queues['Queues']['Queue'][0]['Name']);
+    $this->assertEquals('testqueue2', $queues['Queues']['Queue'][1]['Name']);
+    $this->assertEquals('testqueue3', $queues['Queues']['Queue'][2]['Name']);
+  }
+  
+  /**
+  * @covers PEAR2\WindowsAzure\Services\Queue\QueueRestProxy::listQueues
+  */
+  public function testListQueuesWithNextMarker()
+  {
+    $config = Configuration::getInstance();
+    $config->setProperty(QueueConfiguration::ACCOUNT_KEY, 'AhlzsbLRkjkwObubff3xrhB2yWJNh1EMptmcmxFJ6fvPTVX2PZXwrG2YtYWf5DPMVgNsteKStM5iBLlknYFVoA==');
+    $config->setProperty(QueueConfiguration::ACCOUNT_NAME, 'aogailsvc');
+    $config->setProperty(QueueConfiguration::URI, 'queue.core.windows.net');
+    $queueWrapper = QueueService::create($config);
+    $options = new ListQueueOptions();
+    $options->setMaxResults(2);
+    $queues = $queueWrapper->listQueues($options);
+  
+    $this->assertEquals(2, count($queues['Queues']['Queue']));
+    $this->assertEquals('testqueue1', $queues['Queues']['Queue'][0]['Name']);
+    $this->assertEquals('testqueue2', $queues['Queues']['Queue'][1]['Name']);
+    
+    $options->setMarker($queues['NextMarker']);
+    $queues = $queueWrapper->listQueues($options);
+    
+    $this->assertEquals(2, count($queues['Queues']['Queue']));
+    $this->assertEquals('testqueue3', $queues['Queues']['Queue'][0]['Name']);
+    $this->assertEquals('zikas3', $queues['Queues']['Queue'][1]['Name']);
   }
 }
 

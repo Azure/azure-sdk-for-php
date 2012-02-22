@@ -23,9 +23,10 @@
  * @link       http://pear.php.net/package/azure-sdk-for-php
  */
 
-namespace  PEAR2\WindowsAzure\Services\Queue;
+namespace PEAR2\WindowsAzure\Services\Queue;
 use PEAR2\WindowsAzure\Services\Queue\Queue;
-use \PEAR2\WindowsAzure\Resources;
+use PEAR2\WindowsAzure\Resources;
+use PEAR2\WindowsAzure\Services\Queue\Models\ListQueueOptions;
 
 require_once 'HTTP/Request2.php';
 require_once 'XML/Unserializer.php';
@@ -43,21 +44,20 @@ require_once 'XML/Unserializer.php';
 */
 class QueueRestProxy implements IQueue
 {
-  private $channel;
-  private $filters;
+  private $_channel;
+  private $_filters;
   
   public function __construct($channel, $accountName, $uri)
   {
     $channel->setUrl(sprintf(Resources::STORAGE_URI, $accountName, $uri));
-    $this->channel = $channel;
-    $this->filters = array();
+    $this->_channel = $channel;
+    $this->_filters = array();
   }
   
-  private function Unserialize($xml)
+  private function unserialize($xml)
   {
     $unserializer = new \XML_Unserializer();
     $unserializer->unserialize($xml);
-    $data = $unserializer->getUnserializedData();
     return $unserializer->getUnserializedData();
   }
   
@@ -73,10 +73,10 @@ class QueueRestProxy implements IQueue
     * @param ServiceFilter $filter filter to add for the pipeline.
     * @return QueueRestProxy
     */  
-  public function WithFilter($filter)
+  public function withFilter($filter)
   {
     $queueWithFilter = clone $this;
-    $queueWithFilter->filters[] = $filter;
+    $queueWithFilter->_filters[] = $filter;
     
     return $queueWithFilter;
   }
@@ -84,26 +84,91 @@ class QueueRestProxy implements IQueue
   /**
     * List queue objects for storage account.
     *
-    * @param ListQueueOptions $options  Optional. Options provided for list queues request.
+    * @param ListQueueOptions $listQueuesOptions  Optional. Options provided for list queues request.
     * @return array
     * @throws ServiceException
     */
-  public function ListQueues()
+  public function listQueues($listQueuesOptions = NULL)
   {
     $queues = array();
     
-    if (func_num_args() == 1)
+    if (!isset($listQueuesOptions))
     {
-      $listQueueOptions = func_get_arg(0);
+      $listQueuesOptions = new ListQueueOptions();
     }
     
-    $this->channel->SetMethod(\HTTP_Request2::METHOD_GET);
-    $this->channel->SetQueryVariable('comp', 'list');
+    $this->_channel->setMethod(\HTTP_Request2::METHOD_GET);
+    $this->_channel->setQueryVariable('comp', 'list');
+    $this->_channel->setQueryVariable('prefix', $listQueuesOptions->getPrefix());
+    $this->_channel->setQueryVariable('marker', $listQueuesOptions->getMarker());
+    $this->_channel->setQueryVariable('maxresults', $listQueuesOptions->getMaxResults());
+    $this->_channel->setQueryVariable('include', $listQueuesOptions->isIncludeMetadata()? 
+            'metadata':  NULL);
     
-    $responseBody = $this->channel->Send($this->filters);
-    $queues = $this->Unserialize($responseBody);
+    $responseBody = $this->_channel->send($this->_filters);
     
-    return $this->Unserialize($responseBody);
+    return $this->unserialize($responseBody);
+  }
+
+  public function clearMessages($queueName, $queueServiceOptions = NULL)
+  {
+    
+  }
+
+  public function createMessage($queueName, $messageText, $createMessageOptions = NULL)
+  {
+    
+  }
+
+  public function createQueue($queueName, $createQueueOptions = NULL)
+  {
+    
+  }
+
+  public function deleteMessage($queueName, $messageId, $popReceipt, $queueServiceOptions = NULL)
+  {
+    
+  }
+
+  public function deleteQueue($queueName, $queueServiceOptions = NULL)
+  {
+    
+  }
+
+  public function getQueueMetadata($queueName, $queueServiceOptions = NULL)
+  {
+    
+  }
+
+  public function getServiceProperties($queueServiceOptions = NULL)
+  {
+    
+  }
+
+  public function listMessages($queueName, $listMessagesOptions = NULL)
+  {
+    
+  }
+
+  public function peekMessages($queueName, $peekMessagesOptions = NULL)
+  {
+    
+  }
+
+  public function setQueueMetadata($queueName, $metadata, $queueServiceOptions = NULL)
+  {
+    
+  }
+
+  public function setServiceProperties($serviceProperties, $queueServiceOptions = NULL)
+  {
+    
+  }
+
+  public function updateMessage($queueName, $messageId, $popReceipt, $messageText, 
+          $visibilityTimeoutInSeconds, $queueServiceOptions = NULL)
+  {
+    
   }
 }
 

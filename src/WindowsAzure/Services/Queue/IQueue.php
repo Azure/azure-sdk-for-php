@@ -40,8 +40,33 @@ namespace PEAR2\WindowsAzure\Services\Queue;
 */
 interface IQueue
 {
-  public function WithFilter($filter);
+  public function withFilter($filter);
   
-  public function ListQueues();
+  public function getServiceProperties($queueServiceOptions = NULL);
+  
+  public function setServiceProperties($serviceProperties, $queueServiceOptions = NULL);
+  
+  public function createQueue($queueName, $createQueueOptions = NULL);
+  
+  public function deleteQueue($queueName, $queueServiceOptions = NULL);
+  
+  public function listQueues($listQueuesOptions = NULL);
+  
+  public function getQueueMetadata($queueName, $queueServiceOptions = NULL);
+  
+  public function setQueueMetadata($queueName, $metadata, $queueServiceOptions = NULL);
+  
+  public function createMessage($queueName, $messageText, $createMessageOptions = NULL);
+  
+  public function updateMessage($queueName, $messageId, $popReceipt, $messageText, 
+          $visibilityTimeoutInSeconds, $queueServiceOptions = NULL);
+  
+  public function deleteMessage($queueName, $messageId, $popReceipt, $queueServiceOptions = NULL);
+  
+  public function listMessages($queueName, $listMessagesOptions = NULL);
+  
+  public function peekMessages($queueName, $peekMessagesOptions = NULL);
+  
+  public function clearMessages($queueName, $queueServiceOptions = NULL);
 }
 ?>

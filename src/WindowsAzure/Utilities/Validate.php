@@ -44,7 +44,7 @@ class Validate
   * @param  mix $var variable to check against.
   * @throws InvalidArgumentTypeException
   */
-  public static function IsArray($var)
+  public static function isArray($var)
   {
     if (!is_array($var))
     {
@@ -58,7 +58,7 @@ class Validate
   * @param  mix $var variable to check against.
   * @throws InvalidArgumentTypeException
   */
-  public static function IsString($var)
+  public static function isString($var)
   {
     if (!is_string($var))
     {

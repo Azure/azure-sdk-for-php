@@ -47,7 +47,7 @@ use PEAR2\WindowsAzure\Core\Exceptions\InvalidArgumentTypeException;
  */
 class ServicesBuilder implements IServiceBuilder
 {
-  public static function Build($config, $type)
+  public static function build($config, $type)
   {
     switch ($type)
     {
@@ -55,23 +55,23 @@ class ServicesBuilder implements IServiceBuilder
         $httpClient = new HttpClient();
         
         $queueRestProxy = new QueueRestProxy($httpClient, 
-                $config->GetProperty(QueueConfiguration::ACCOUNT_NAME),
-                $config->GetProperty(QueueConfiguration::URI));
+                $config->getProperty(QueueConfiguration::ACCOUNT_NAME),
+                $config->getProperty(QueueConfiguration::URI));
         
         $queueWrapper = new QueueExceptionProcessor($queueRestProxy);
         
         // Adding date filter
         $dateFilter = new DateFilter();
-        $queueWrapper = $queueWrapper->WithFilter($dateFilter);
+        $queueWrapper = $queueWrapper->withFilter($dateFilter);
         
         // Adding authentication filter
         $authFilter = new SharedKeyFilter(
-                $config->GetProperty(QueueConfiguration::ACCOUNT_NAME),
-                $config->GetProperty(QueueConfiguration::ACCOUNT_KEY),
+                $config->getProperty(QueueConfiguration::ACCOUNT_NAME),
+                $config->getProperty(QueueConfiguration::ACCOUNT_KEY),
                 $type
                 );
         
-        $queueWrapper = $queueWrapper->WithFilter($authFilter);
+        $queueWrapper = $queueWrapper->withFilter($authFilter);
         
         return $queueWrapper;
       

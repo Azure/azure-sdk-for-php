@@ -48,8 +48,8 @@ class AzureAuthenticationTest extends PHPUnit_Framework_TestCase
   public function test__construct()
   {
     $mock = new AzureAuthenticationMock(TestResources::ACCOUNT_NAME, TestResources::KEY4);
-    $this->assertEquals(TestResources::ACCOUNT_NAME, $mock->GetAccountName());
-    $this->assertEquals(TestResources::KEY4, $mock->GetAccountKey());
+    $this->assertEquals(TestResources::ACCOUNT_NAME, $mock->getAccountName());
+    $this->assertEquals(TestResources::KEY4, $mock->getAccountKey());
   }
   
   /**
@@ -66,7 +66,7 @@ class AzureAuthenticationTest extends PHPUnit_Framework_TestCase
     $expected[] = Resources::X_MS_VERSION . ':' . Resources::API_VERSION;
     $mock = new AzureAuthenticationMock(TestResources::ACCOUNT_NAME, TestResources::KEY4);
     
-    $actual = $mock->ComputeCanonicalizedHeadersMock($headers);
+    $actual = $mock->computeCanonicalizedHeadersMock($headers);
     
     $this->assertEquals($expected, $actual);
   }
@@ -83,7 +83,7 @@ class AzureAuthenticationTest extends PHPUnit_Framework_TestCase
     $expected = '/' . $accountName . parse_url($url, PHP_URL_PATH) . "\n" . 'comp:list';
     $mock = new AzureAuthenticationMock($accountName, TestResources::KEY4);
     
-    $actual = $mock->ComputeCanonicalizedResourceMock($url, $queryVariables);
+    $actual = $mock->computeCanonicalizedResourceMock($url, $queryVariables);
     
     $this->assertEquals($expected, $actual);
   }

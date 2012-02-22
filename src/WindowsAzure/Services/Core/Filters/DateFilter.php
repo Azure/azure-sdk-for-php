@@ -39,15 +39,15 @@ use PEAR2\WindowsAzure\Core\IServiceFilter;
  */
 class DateFilter implements IServiceFilter
 { 
-  public function HandleRequest($request) 
+  public function handleRequest($request) 
   {
     $date = gmdate('D, d M Y H:i:s', time()) . ' GMT';
-    $request->SetHeader(Resources::X_MS_DATE, $date);
+    $request->setHeader(Resources::X_MS_DATE, $date);
     
     return $request;
   }
   
-  public function HandleResponse($request, $response) 
+  public function handleResponse($request, $response) 
   {
     // Do nothing with the response.
     return $response;

@@ -33,7 +33,7 @@ require_once 'XML/Unserializer.php';
 require_once 'Net/URL2.php';
 
 /**
- * This class acts as HTTP request which sends and receives HTTP requests and
+ * This class acts as HTTP _request which sends and receives HTTP requests and
  * responses.
  *
  * @package    azure-sdk-for-php
@@ -45,80 +45,80 @@ require_once 'Net/URL2.php';
  */
 class HttpClient implements IHttpClient
 {
-  private $request;
-  private $requestUrl;
+  private $_request;
+  private $_requestUrl;
   
   function __construct()
   {
-    $this->request = new \HTTP_Request2(NULL, NULL, array(
+    $this->_request = new \HTTP_Request2(NULL, NULL, array(
         'use_brackets'    => true,
         'ssl_verify_peer' => false,
         'ssl_verify_host' => false,
     ));
     
-    $this->request->SetHeader(array(Resources::X_MS_VERSION  =>  Resources::API_VERSION));
-    $this->requestUrl = NULL;
+    $this->_request->SetHeader(array(Resources::X_MS_VERSION  =>  Resources::API_VERSION));
+    $this->_requestUrl = NULL;
   }
   
-  public function GetQuery()
+  public function getQuery()
   {
-    return $this->requestUrl->getQuery();
+    return $this->_requestUrl->getQuery();
   }
   
-  public function GetQueryVariables()
+  public function getQueryVariables()
   {
-    return $this->requestUrl->getQueryVariables();
+    return $this->_requestUrl->getQueryVariables();
   }
   
-  public function SetQueryVariable($key, $value)
+  public function setQueryVariable($key, $value)
   {
-    $this->requestUrl->setQueryVariable($key, $value);
+    $this->_requestUrl->setQueryVariable($key, $value);
   }
   
-  public function SetUrl($url)
+  public function setUrl($url)
   {
-    $this->requestUrl = new \Net_URL2($url);
+    $this->_requestUrl = new \Net_URL2($url);
   }
   
-  public function GetUrl()
+  public function getUrl()
   {
-    return $this->requestUrl;
+    return $this->_requestUrl;
   }
   
-  public function SetMethod($method)
+  public function setMethod($method)
   {
-    $this->request->setMethod($method);
+    $this->_request->setMethod($method);
   }
   
-  public function GetMethod()
+  public function getMethod()
   {
-    return $this->request->getMethod();
+    return $this->_request->getMethod();
   }
   
-  public function GetHeaders()
+  public function getHeaders()
   {
-    return $this->request->getHeaders();
+    return $this->_request->getHeaders();
   }
   
-  public function SetHeader($header, $value)
+  public function setHeader($header, $value)
   {
-    $this->request->SetHeader($header, $value);
+    $this->_request->SetHeader($header, $value);
   }
   
-  public function Send($filters)
+  public function send($filters)
   {
-    $this->request->setUrl($this->requestUrl);
+    $this->_request->setUrl($this->_requestUrl);
     
     foreach ($filters as $filter)
     {
-      $this->request = $filter->HandleRequest($this)->request;
+      $this->_request = $filter->handleRequest($this)->_request;
     }
     
-    $response = $this->request->send();
+    $response = $this->_request->send();
     
     foreach ($filters as $filter)
     {
-      $response = $filter->HandleResponse($this, $response);
+      $response = $filter->handleResponse($this, $response);
     }
     
     return $response->getBody();

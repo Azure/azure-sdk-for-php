@@ -47,9 +47,9 @@ class ConfigurationTest extends PHPUnit_Framework_TestCase
   */
   public function testGetInstance()
   {
-    $config = Configuration::GetInstance();
+    $config = Configuration::getInstance();
     
-    $this->assertTrue(is_array($config->GetProperties()));
+    $this->assertTrue(is_array($config->getProperties()));
   }
     
   /**
@@ -57,12 +57,12 @@ class ConfigurationTest extends PHPUnit_Framework_TestCase
   */
   public function testGetProperties()
   {
-    $config = Configuration::GetInstance();
-    $config->SetProperty(TestResources::KEY1, TestResources::VALUE1);
-    $config->SetProperty(TestResources::KEY2, TestResources::VALUE2);
+    $config = Configuration::getInstance();
+    $config->setProperty(TestResources::KEY1, TestResources::VALUE1);
+    $config->setProperty(TestResources::KEY2, TestResources::VALUE2);
     
-    $this->assertTrue(is_array($config->GetProperties()));
-    $this->assertEquals(2, count($config->GetProperties()));
+    $this->assertTrue(is_array($config->getProperties()));
+    $this->assertEquals(2, count($config->getProperties()));
   }
   
   /**
@@ -70,12 +70,12 @@ class ConfigurationTest extends PHPUnit_Framework_TestCase
   */
   public function testGetProperty()
   {
-    $config = Configuration::GetInstance();
-    $config->SetProperty(TestResources::KEY1, TestResources::VALUE1);
-    $config->SetProperty(TestResources::KEY2, TestResources::VALUE2);
+    $config = Configuration::getInstance();
+    $config->setProperty(TestResources::KEY1, TestResources::VALUE1);
+    $config->setProperty(TestResources::KEY2, TestResources::VALUE2);
     
-    $this->assertEquals(TestResources::VALUE1, $config->GetProperty(TestResources::KEY1));
-    $this->assertEquals(TestResources::VALUE2, $config->GetProperty(TestResources::KEY2));
+    $this->assertEquals(TestResources::VALUE1, $config->getProperty(TestResources::KEY1));
+    $this->assertEquals(TestResources::VALUE2, $config->getProperty(TestResources::KEY2));
   }
   
   /**
@@ -84,9 +84,10 @@ class ConfigurationTest extends PHPUnit_Framework_TestCase
   public function testSetPropertyWithNonStringKeyFail()
   {
     $invalidKey = 1;
-    $this->setExpectedException(get_class(new InvalidArgumentTypeException('')), Resources::INVALID_TYPE_MESSAGE . gettype(''));
-    $config = Configuration::GetInstance();
-    $config->SetProperty($invalidKey, TestResources::VALUE1);
+    $this->setExpectedException(get_class(new InvalidArgumentTypeException('')), 
+            Resources::INVALID_TYPE_MESSAGE . gettype(''));
+    $config = Configuration::getInstance();
+    $config->setProperty($invalidKey, TestResources::VALUE1);
   }
   
   /**
@@ -95,10 +96,10 @@ class ConfigurationTest extends PHPUnit_Framework_TestCase
   public function testCreate()
   {
     $config = Configuration::GetInstance();
-    $config->SetProperty(QueueConfiguration::ACCOUNT_KEY, TestResources::KEY1);
-    $config->SetProperty(QueueConfiguration::ACCOUNT_NAME, TestResources::ACCOUNT_NAME);
-    $config->SetProperty(QueueConfiguration::URI, TestResources::QUEUE_URI);
-    $queueWrapper = $config->Create(Resources::QUEUE_TYPE_NAME);
+    $config->setProperty(QueueConfiguration::ACCOUNT_KEY, TestResources::KEY1);
+    $config->setProperty(QueueConfiguration::ACCOUNT_NAME, TestResources::ACCOUNT_NAME);
+    $config->setProperty(QueueConfiguration::URI, TestResources::QUEUE_URI);
+    $queueWrapper = $config->create(Resources::QUEUE_TYPE_NAME);
     
     $this->assertInstanceOf('PEAR2\\WindowsAzure\\Services\\Queue\\' . Resources::QUEUE_TYPE_NAME, $queueWrapper);
   }
@@ -110,11 +111,11 @@ class ConfigurationTest extends PHPUnit_Framework_TestCase
   {
     $invalidType = gettype('');
     $this->setExpectedException(get_class(new InvalidArgumentTypeException('')), Resources::INVALID_TYPE_MESSAGE . Resources::QUEUE_TYPE_NAME);
-    $config = Configuration::GetInstance();
-    $config->SetProperty(QueueConfiguration::ACCOUNT_KEY, TestResources::KEY1);
-    $config->SetProperty(QueueConfiguration::ACCOUNT_NAME, TestResources::ACCOUNT_NAME);
-    $config->SetProperty(QueueConfiguration::URI, TestResources::QUEUE_URI);
-    $config->Create($invalidType);
+    $config = Configuration::getInstance();
+    $config->setProperty(QueueConfiguration::ACCOUNT_KEY, TestResources::KEY1);
+    $config->setProperty(QueueConfiguration::ACCOUNT_NAME, TestResources::ACCOUNT_NAME);
+    $config->setProperty(QueueConfiguration::URI, TestResources::QUEUE_URI);
+    $config->create($invalidType);
   }
 }
 

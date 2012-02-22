@@ -60,7 +60,7 @@ class BlobQueueSharedKeyTest extends PHPUnit_Framework_TestCase
     
     $mock = new BlobQueueSharedKeyMock(TestResources::ACCOUNT_NAME, TestResources::KEY4);
     
-    $this->assertEquals($expected, $mock->GetIncludedHeaders());
+    $this->assertEquals($expected, $mock->getIncludedHeaders());
   }
   
   /**
@@ -79,7 +79,7 @@ class BlobQueueSharedKeyTest extends PHPUnit_Framework_TestCase
             ":$apiVersion\n/$accountName" . parse_url($url, PHP_URL_PATH) . "\ncomp:list";
     $mock = new BlobQueueSharedKeyMock($accountName, TestResources::KEY4);
     
-    $actual = $mock->ComputeSignatureMock($headers, $url, $queryParams, $httpMethod);
+    $actual = $mock->computeSignatureMock($headers, $url, $queryParams, $httpMethod);
     
     $this->assertEquals($expected, $actual);
   }
@@ -101,7 +101,7 @@ class BlobQueueSharedKeyTest extends PHPUnit_Framework_TestCase
     
     $mock = new BlobQueueSharedKeyMock($accountName, $accountKey);
     
-    $actual = $mock->GetAuthorizationHeader($headers, $url, $queryParams, $httpMethod);
+    $actual = $mock->getAuthorizationHeader($headers, $url, $queryParams, $httpMethod);
     
     $this->assertEquals($expected, $actual);
   }

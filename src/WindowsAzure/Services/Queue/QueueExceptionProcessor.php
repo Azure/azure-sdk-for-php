@@ -25,6 +25,7 @@
  
 namespace PEAR2\WindowsAzure\Services\Queue;
 use PEAR2\WindowsAzure\Services\Queue\IQueue;
+use PEAR2\WindowsAzure\Services\Queue\Models\ListQueueOptions;
 
 /**
  * Wrapper for IQueue object with exception handeling
@@ -38,38 +39,30 @@ use PEAR2\WindowsAzure\Services\Queue\IQueue;
  */
 class QueueExceptionProcessor implements IQueue
 {
-  private $service;
+  private $_service;
   
   public function __construct($service)
   {
-    $this->service = $service;
+    $this->_service = $service;
   }
   
-  public function WithFilter($filter)
+  public function withFilter($filter)
   {
-    return new QueueExceptionProcessor($this->service->WithFilter($filter));
+    return new QueueExceptionProcessor($this->_service->withFilter($filter));
   }
   
   /**
     * List queue objects for storage account.
     *
-    * @param ListQueueOptions $options  Optional. Options provided for list queues request.
+    * @param ListQueueOptions $listQueueOptions  Optional. Options provided for list queues request.
     * @return array
     * @throws ServiceException
     */
-  public function ListQueues()
+  public function listQueues($listQueueOptions = NULL)
   {
     try
     {
-      $result = NULL;
-      if (func_num_args() == 0)
-      {
-        $result = $this->service->ListQueues();
-      }
-      else
-      {
-        $result = $this->service->ListQueues(func_get_arg(0));
-      }
+      $result = $this->_service->listQueues($listQueueOptions);
     }
     catch (Exception $e)
     {
@@ -77,6 +70,66 @@ class QueueExceptionProcessor implements IQueue
     }
     
     return $result;
+  }
+
+  public function clearMessages($queueName, $queueServiceOptions = NULL)
+  {
+    
+  }
+
+  public function createMessage($queueName, $messageText, $createMessageOptions = NULL) 
+  {
+    
+  }
+
+  public function createQueue($queueName, $createQueueOptions = NULL)
+  {
+    
+  }
+
+  public function deleteMessage($queueName, $messageId, $popReceipt, $queueServiceOptions = NULL)
+  {
+    
+  }
+
+  public function deleteQueue($queueName, $queueServiceOptions = NULL)
+  {
+    
+  }
+
+  public function getQueueMetadata($queueName, $queueServiceOptions = NULL)
+  {
+    
+  }
+
+  public function getServiceProperties($queueServiceOptions = NULL)
+  {
+    
+  }
+
+  public function listMessages($queueName, $listMessagesOptions = NULL)
+  {
+    
+  }
+
+  public function peekMessages($queueName, $peekMessagesOptions = NULL)
+  {
+    
+  }
+
+  public function setQueueMetadata($queueName, $metadata, $queueServiceOptions = NULL)
+  {
+    
+  }
+
+  public function setServiceProperties($serviceProperties, $queueServiceOptions = NULL)
+  {
+    
+  }
+
+  public function updateMessage($queueName, $messageId, $popReceipt, $messageText, $visibilityTimeoutInSeconds, $queueServiceOptions = NULL)
+  {
+    
   }
 }
 

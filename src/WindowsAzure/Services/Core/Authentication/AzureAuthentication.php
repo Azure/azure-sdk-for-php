@@ -47,7 +47,7 @@ abstract class AzureAuthentication
     $this->accountName  = $accountName;
   }
   
-  protected function ComputeCanonicalizedHeaders($headers)
+  protected function computeCanonicalizedHeaders($headers)
   {
     $canonicalizedHeaders = array();
     
@@ -73,7 +73,7 @@ abstract class AzureAuthentication
     return $canonicalizedHeaders;
   }
   
-  protected function ComputeCanonicalizedResource($url, $queryParams)
+  protected function computeCanonicalizedResource($url, $queryParams)
   {
     // Note: Multi-valued query parameter is not supported (issue #17)
     // 1. Beginning with an empty string (""), append a forward slash (/), followed by the name of 
@@ -103,15 +103,15 @@ abstract class AzureAuthentication
     return $canonicalizedResource;
   }
   
-  public function GetAuthorizationHeader($headers, $url, $queryParams, $httpMethod)
+  public function getAuthorizationHeader($headers, $url, $queryParams, $httpMethod)
   {
-    $signature = $this->ComputeSignature($headers, $url, $queryParams, $httpMethod);
+    $signature = $this->computeSignature($headers, $url, $queryParams, $httpMethod);
     
     return 'SharedKey ' . $this->accountName . ':' . base64_encode(hash_hmac('sha256', $signature, 
                     base64_decode($this->accountKey), true));
   }
   
-  abstract protected function ComputeSignature($headers, $url, $queryParams, $httpMethod);
+  abstract protected function computeSignature($headers, $url, $queryParams, $httpMethod);
 }
 
 ?>

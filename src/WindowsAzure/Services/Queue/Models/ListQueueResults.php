@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Implementation of class BlobQueueSharedKeyMock.
+ * Implementation of class ListQueueResults.
  *
  * PHP version 5
  *
@@ -23,11 +23,10 @@
  * @link       http://pear.php.net/package/azure-sdk-for-php
  */
  
-namespace PEAR2\Tests\Mock\WindowsAzure\Services\Core\Authentication;
-use PEAR2\WindowsAzure\Services\Core\Authentication\BlobQueueSharedKey;
+namespace PEAR2\WindowsAzure\Services\Queue\Models;
 
 /**
- * Mock class to wrap BlobQueueSharedKey class.
+ * Container to hold list queue response object.
  *
  * @package    azure-sdk-for-php
  * @author     Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
@@ -36,16 +35,62 @@ use PEAR2\WindowsAzure\Services\Core\Authentication\BlobQueueSharedKey;
  * @version    Release: @package_version@
  * @link       http://pear.php.net/package/azure-sdk-for-php
  */
-class BlobQueueSharedKeyMock extends BlobQueueSharedKey
+class ListQueueResults
 {
-  public function getIncludedHeaders()
+  private $_queues;
+  private $_prefix;
+  private $_marker;
+  private $_nextMarker;
+  private $_maxResults;
+  
+  public static function createFromResponse($parsedResponse)
   {
-    return $this->includedHeaders;
+    
   }
   
-  public function computeSignatureMock($headers, $url, $queryParams, $httpMethod)
+  public function getQueues()
   {
-    return parent::computeSignature($headers, $url, $queryParams, $httpMethod);
+    return $this->_queues;
+  }
+  
+  public function getPrefix()
+  {
+    $this->_prefix;
+  }
+  
+  public function setPrefix($prefix)
+  {
+    $this->_prefix = $prefix;
+  }
+  
+  public function getMarker()
+  {
+    return $this->_marker;
+  }
+  
+  public function setMarker($marker)
+  {
+    $this->_marker = $marker;
+  }
+  
+  public function getMaxResults()
+  {
+    return $this->_maxResults;
+  }
+  
+  public function setMaxResults($maxResults)
+  {
+    $this->_maxResults = $maxResults;
+  }
+  
+  public function getNextMarker()
+  {
+    return $this->_nextMarker;
+  }
+  
+  public function setNextMarker($nextMarker)
+  {
+    $this->_nextMarker = $nextMarker;
   }
 }
 

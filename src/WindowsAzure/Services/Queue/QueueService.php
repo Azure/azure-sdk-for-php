@@ -40,9 +40,9 @@ use PEAR2\WindowsAzure\Resources;
  */
 class QueueService
 {
-  public static function Create($config)
+  public static function create($config)
   {
-    return $config->Create(Resources::QUEUE_TYPE_NAME);
+    return $config->create(Resources::QUEUE_TYPE_NAME);
   }
 }
 

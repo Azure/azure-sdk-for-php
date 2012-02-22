@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Implementation of class BlobQueueSharedKeyMock.
+ * Implementation of class ListQueueOptions.
  *
  * PHP version 5
  *
@@ -23,11 +23,11 @@
  * @link       http://pear.php.net/package/azure-sdk-for-php
  */
  
-namespace PEAR2\Tests\Mock\WindowsAzure\Services\Core\Authentication;
-use PEAR2\WindowsAzure\Services\Core\Authentication\BlobQueueSharedKey;
+namespace PEAR2\WindowsAzure\Services\Queue\Models;
+use PEAR2\WindowsAzure\Services\Queue\Models\QueueServiceOptions;
 
 /**
- * Mock class to wrap BlobQueueSharedKey class.
+ * Options for listQueues API.
  *
  * @package    azure-sdk-for-php
  * @author     Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
@@ -36,16 +36,51 @@ use PEAR2\WindowsAzure\Services\Core\Authentication\BlobQueueSharedKey;
  * @version    Release: @package_version@
  * @link       http://pear.php.net/package/azure-sdk-for-php
  */
-class BlobQueueSharedKeyMock extends BlobQueueSharedKey
+class ListQueueOptions extends QueueServiceOptions
 {
-  public function getIncludedHeaders()
+  private $_prefix;
+  private $_marker;
+  private $_maxResults;
+  private $_includeMetadata;
+  
+  public function getPrefix()
   {
-    return $this->includedHeaders;
+    return $this->_prefix;
   }
   
-  public function computeSignatureMock($headers, $url, $queryParams, $httpMethod)
+  public function setPrefix($prefix)
   {
-    return parent::computeSignature($headers, $url, $queryParams, $httpMethod);
+    $this->_prefix = $prefix;
+  }
+  
+  public function getMarker()
+  {
+    return $this->_marker;
+  }
+  
+  public function setMarker($marker)
+  {
+    $this->_marker = $marker;
+  }
+  
+  public function getMaxResults()
+  {
+    return $this->_maxResults;
+  }
+  
+  public function setMaxResults($maxResults)
+  {
+    $this->_maxResults = $maxResults;
+  }
+  
+  public function isIncludeMetadata()
+  {
+    return $this->_includeMetadata;
+  }
+  
+  public function setIncludeMetadata($includeMetadata)
+  {
+    $this->_includeMetadata = $includeMetadata;
   }
 }
 

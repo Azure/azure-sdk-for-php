@@ -38,9 +38,9 @@ namespace PEAR2\WindowsAzure\Core;
  */
 interface IServiceFilter
 {
-  public function HandleRequest($request);
+  public function handleRequest($request);
   
-  public function HandleResponse($request, $response);
+  public function handleResponse($request, $response);
 }
 
 ?>

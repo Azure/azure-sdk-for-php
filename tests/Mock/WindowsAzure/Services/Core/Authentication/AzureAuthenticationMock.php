@@ -43,27 +43,27 @@ class AzureAuthenticationMock extends AzureAuthentication
     parent::__construct($accountName, $accountKey);
   }
   
-  public function ComputeCanonicalizedHeadersMock($headers)
+  public function computeCanonicalizedHeadersMock($headers)
   {
-    return parent::ComputeCanonicalizedHeaders($headers);
+    return parent::computeCanonicalizedHeaders($headers);
   }
   
-  public function ComputeCanonicalizedResourceMock($url, $queryParams)
+  public function computeCanonicalizedResourceMock($url, $queryParams)
   {
-    return parent::ComputeCanonicalizedResource($url, $queryParams);
+    return parent::computeCanonicalizedResource($url, $queryParams);
   }
   
-  public function GetAccountName()
+  public function getAccountName()
   {
     return $this->accountName;
   }
   
-  public function GetAccountKey()
+  public function getAccountKey()
   {
     return $this->accountKey;
   }
 
-  protected function ComputeSignature($headers, $url, $queryParams, $httpMethod) 
+  protected function computeSignature($headers, $url, $queryParams, $httpMethod) 
   {
     // Do nothing
   }

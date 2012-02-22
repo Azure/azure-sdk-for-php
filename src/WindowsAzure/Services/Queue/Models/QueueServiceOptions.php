@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Implementation of class BlobQueueSharedKeyMock.
+ * Implementation of class QueueServiceOptions.
  *
  * PHP version 5
  *
@@ -23,11 +23,10 @@
  * @link       http://pear.php.net/package/azure-sdk-for-php
  */
  
-namespace PEAR2\Tests\Mock\WindowsAzure\Services\Core\Authentication;
-use PEAR2\WindowsAzure\Services\Core\Authentication\BlobQueueSharedKey;
+namespace PEAR2\WindowsAzure\Services\Queue\Models;
 
 /**
- * Mock class to wrap BlobQueueSharedKey class.
+ * Queue service options.
  *
  * @package    azure-sdk-for-php
  * @author     Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
@@ -36,16 +35,19 @@ use PEAR2\WindowsAzure\Services\Core\Authentication\BlobQueueSharedKey;
  * @version    Release: @package_version@
  * @link       http://pear.php.net/package/azure-sdk-for-php
  */
-class BlobQueueSharedKeyMock extends BlobQueueSharedKey
+class QueueServiceOptions
 {
-  public function getIncludedHeaders()
+  private $_timeout;
+  
+  public function getTimeout()
   {
-    return $this->includedHeaders;
+    return $this->_timeout;
   }
   
-  public function computeSignatureMock($headers, $url, $queryParams, $httpMethod)
+  public function setTimeout($timeout)
   {
-    return parent::computeSignature($headers, $url, $queryParams, $httpMethod);
+    $this->_timeout = $timeout;
+    return $this;
   }
 }
 
