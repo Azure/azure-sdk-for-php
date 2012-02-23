@@ -29,6 +29,7 @@ use PEAR2\WindowsAzure\Services\Queue\QueueService;
 use PEAR2\WindowsAzure\Services\Queue\QueueConfiguration;
 use PEAR2\WindowsAzure\Services\Queue\Models\ListQueueOptions;
 use PEAR2\WindowsAzure\Services\Queue\Models\ListQueueResult;
+use PEAR2\Tests\Unit\TestResources;
 
 /**
 * Unit tests for QueueRestProxy class
@@ -48,8 +49,8 @@ class QueueRestProxyTest extends PHPUnit_Framework_TestCase
   public function testListQueues()
   {
     $config = Configuration::getInstance();
-    $config->setProperty(QueueConfiguration::ACCOUNT_KEY, 'AhlzsbLRkjkwObubff3xrhB2yWJNh1EMptmcmxFJ6fvPTVX2PZXwrG2YtYWf5DPMVgNsteKStM5iBLlknYFVoA==');
-    $config->setProperty(QueueConfiguration::ACCOUNT_NAME, 'aogailsvc');
+    $config->setProperty(QueueConfiguration::ACCOUNT_KEY, TestResources::AZURE_KEY);
+    $config->setProperty(QueueConfiguration::ACCOUNT_NAME, TestResources::AZURE_ACCOUNT);
     $config->setProperty(QueueConfiguration::URI, 'queue.core.windows.net');
     $queueWrapper = QueueService::create($config);
     $result = $queueWrapper->listQueues();
@@ -67,8 +68,8 @@ class QueueRestProxyTest extends PHPUnit_Framework_TestCase
   public function testListQueuesWithOptions()
   {
     $config = Configuration::getInstance();
-    $config->setProperty(QueueConfiguration::ACCOUNT_KEY, 'AhlzsbLRkjkwObubff3xrhB2yWJNh1EMptmcmxFJ6fvPTVX2PZXwrG2YtYWf5DPMVgNsteKStM5iBLlknYFVoA==');
-    $config->setProperty(QueueConfiguration::ACCOUNT_NAME, 'aogailsvc');
+    $config->setProperty(QueueConfiguration::ACCOUNT_KEY, TestResources::AZURE_KEY);
+    $config->setProperty(QueueConfiguration::ACCOUNT_NAME, TestResources::AZURE_ACCOUNT);
     $config->setProperty(QueueConfiguration::URI, 'queue.core.windows.net');
     $queueWrapper = QueueService::create($config);
     $options = new ListQueueOptions();
@@ -89,8 +90,8 @@ class QueueRestProxyTest extends PHPUnit_Framework_TestCase
   public function testListQueuesWithNextMarker()
   {
     $config = Configuration::getInstance();
-    $config->setProperty(QueueConfiguration::ACCOUNT_KEY, 'AhlzsbLRkjkwObubff3xrhB2yWJNh1EMptmcmxFJ6fvPTVX2PZXwrG2YtYWf5DPMVgNsteKStM5iBLlknYFVoA==');
-    $config->setProperty(QueueConfiguration::ACCOUNT_NAME, 'aogailsvc');
+    $config->setProperty(QueueConfiguration::ACCOUNT_KEY, TestResources::AZURE_KEY);
+    $config->setProperty(QueueConfiguration::ACCOUNT_NAME, TestResources::AZURE_ACCOUNT);
     $config->setProperty(QueueConfiguration::URI, 'queue.core.windows.net');
     $queueWrapper = QueueService::create($config);
     $options = new ListQueueOptions();
@@ -117,8 +118,8 @@ class QueueRestProxyTest extends PHPUnit_Framework_TestCase
   public function testListQueuesWithNoQueues()
   {
     $config = Configuration::getInstance();
-    $config->setProperty(QueueConfiguration::ACCOUNT_KEY, 'AhlzsbLRkjkwObubff3xrhB2yWJNh1EMptmcmxFJ6fvPTVX2PZXwrG2YtYWf5DPMVgNsteKStM5iBLlknYFVoA==');
-    $config->setProperty(QueueConfiguration::ACCOUNT_NAME, 'aogailsvc');
+    $config->setProperty(QueueConfiguration::ACCOUNT_KEY, TestResources::AZURE_KEY);
+    $config->setProperty(QueueConfiguration::ACCOUNT_NAME, TestResources::AZURE_ACCOUNT);
     $config->setProperty(QueueConfiguration::URI, 'queue.core.windows.net');
     $queueWrapper = QueueService::create($config);
     $options = new ListQueueOptions();
@@ -135,8 +136,8 @@ class QueueRestProxyTest extends PHPUnit_Framework_TestCase
   public function testListQueuesWithOneResult()
   {
     $config = Configuration::getInstance();
-    $config->setProperty(QueueConfiguration::ACCOUNT_KEY, 'AhlzsbLRkjkwObubff3xrhB2yWJNh1EMptmcmxFJ6fvPTVX2PZXwrG2YtYWf5DPMVgNsteKStM5iBLlknYFVoA==');
-    $config->setProperty(QueueConfiguration::ACCOUNT_NAME, 'aogailsvc');
+    $config->setProperty(QueueConfiguration::ACCOUNT_KEY, TestResources::AZURE_KEY);
+    $config->setProperty(QueueConfiguration::ACCOUNT_NAME, TestResources::AZURE_ACCOUNT);
     $config->setProperty(QueueConfiguration::URI, 'queue.core.windows.net');
     $queueWrapper = QueueService::create($config);
     $options = new ListQueueOptions();

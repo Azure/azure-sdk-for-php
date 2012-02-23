@@ -44,10 +44,12 @@ class TestResources
   const KEY2          = 'key2';
   const KEY3          = 'key3';
   const KEY4          = 'AhlzsbLRkjfwObuqff3xrhB2yWJNh1EMptmcmxFJ6fvPTVX3PZXwrG2YtYWf5DPMVgNsteKStM5iBLlknYFVoA==';
+  const AZURE_KEY     = 'd7mefHRJ1jcjYtNslLuGaxnBFu5lhVJQPYqxoI5ze65v3KPhtf3m9WJMlYsS6E0sNuRw5ZetjIt0JnmfzGj69w==';
   const VALUE1        = 'value1';
   const VALUE2        = 'value2';
   const VALUE3        = 'value3';
   const ACCOUNT_NAME  = 'myaccount';
+  const AZURE_ACCOUNT = 'aogail';
   const QUEUE_URI     = 'queue.core.windows.net';
   const URI1          = "http://myaccount.queue.core.windows.net/myqueue";
   const URI2          = "http://myaccount.queue.core.windows.net/?comp=list";
