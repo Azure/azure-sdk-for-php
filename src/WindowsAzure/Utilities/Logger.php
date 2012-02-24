@@ -56,6 +56,20 @@ class Logger
             error_log($var . "\n", 3, self::$_filePath);
         }
     }
+    
+    /**
+     * Sets file path to set
+     *
+     * @param string $filePath log file path.
+     * 
+     * @static
+     * 
+     * @return none.
+     */
+    public static function setLogFile($filePath)
+    {
+        $this->_filePath = $filePath;
+    }
 }
 
 ?>
