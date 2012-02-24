@@ -1,10 +1,6 @@
 <?php
 
 /**
- * Implementation of class QueueServiceOptions.
- *
- * PHP version 5
- *
  * LICENSE: Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -15,12 +11,15 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
+ * 
+ * PHP version 5
  *
- * @package    Azure-sdk-for-php
- * @author     Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
- * @copyright  2012 Microsoft Corporation
- * @license    http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
- * @link       http://pear.php.net/package/azure-sdk-for-php
+ * @category  Microsoft
+ * @package   PEAR2\WindowsAzure\Services\Queue\Models
+ * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
+ * @copyright 2012 Microsoft Corporation
+ * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
+ * @link      http://pear.php.net/package/azure-sdk-for-php
  */
  
 namespace PEAR2\WindowsAzure\Services\Queue\Models;
@@ -28,27 +27,39 @@ namespace PEAR2\WindowsAzure\Services\Queue\Models;
 /**
  * Queue service options.
  *
- * @package    Azure-sdk-for-php
- * @author     Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
- * @copyright  2012 Microsoft Corporation
- * @license    http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
- * @version    Release: @package_version@
- * @link       http://pear.php.net/package/azure-sdk-for-php
+ * @category  Microsoft
+ * @package   PEAR2\WindowsAzure\Services\Queue\Models
+ * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
+ * @copyright 2012 Microsoft Corporation
+ * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
+ * @version   Release: @package_version@
+ * @link      http://pear.php.net/package/azure-sdk-for-php
  */
 class QueueServiceOptions
 {
-  private $_timeout;
-  
-  public function getTimeout()
-  {
-    return $this->_timeout;
-  }
-  
-  public function setTimeout($timeout)
-  {
-    $this->_timeout = $timeout;
-    return $this;
-  }
+    private $_timeout;
+
+    /**
+     * Gets timeout.
+     *
+     * @return int.
+     */
+    public function getTimeout()
+    {
+        return $this->_timeout;
+    }
+
+    /**
+     * Sets timeout.
+     *
+     * @param int $timeout value.
+     * 
+     * @return none.
+     */
+    public function setTimeout($timeout)
+    {
+        $this->_timeout = $timeout;
+    }
 }
 
 ?>

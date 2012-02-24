@@ -74,7 +74,7 @@ class QueueRestProxyTest extends PHPUnit_Framework_TestCase
     $queueWrapper = QueueService::create($config);
     $options = new ListQueueOptions();
     $options->setPrefix('test');
-    $options->setIncludeMetadata(TRUE);
+    $options->setIncludeMetadata(true);
     $result = $queueWrapper->listQueues($options);
     $queues = $result->getQueues();
     

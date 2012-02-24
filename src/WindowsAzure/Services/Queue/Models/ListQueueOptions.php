@@ -1,10 +1,6 @@
 <?php
 
 /**
- * Implementation of class ListQueueOptions.
- *
- * PHP version 5
- *
  * LICENSE: Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -15,12 +11,15 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
+ * 
+ * PHP version 5
  *
- * @package    Azure-sdk-for-php
- * @author     Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
- * @copyright  2012 Microsoft Corporation
- * @license    http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
- * @link       http://pear.php.net/package/azure-sdk-for-php
+ * @category  Microsoft
+ * @package   PEAR2\WindowsAzure\Services\Queue\Models
+ * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
+ * @copyright 2012 Microsoft Corporation
+ * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
+ * @link      http://pear.php.net/package/azure-sdk-for-php
  */
  
 namespace PEAR2\WindowsAzure\Services\Queue\Models;
@@ -29,59 +28,108 @@ use PEAR2\WindowsAzure\Services\Queue\Models\QueueServiceOptions;
 /**
  * Options for listQueues API.
  *
- * @package    Azure-sdk-for-php
- * @author     Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
- * @copyright  2012 Microsoft Corporation
- * @license    http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
- * @version    Release: @package_version@
- * @link       http://pear.php.net/package/azure-sdk-for-php
+ * @category  Microsoft
+ * @package   PEAR2\WindowsAzure\Services\Queue\Models
+ * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
+ * @copyright 2012 Microsoft Corporation
+ * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
+ * @version   Release: @package_version@
+ * @link      http://pear.php.net/package/azure-sdk-for-php
  */
 class ListQueueOptions extends QueueServiceOptions
 {
-  private $_prefix;
-  private $_marker;
-  private $_maxResults;
-  private $_includeMetadata;
-  
-  public function getPrefix()
-  {
-    return $this->_prefix;
-  }
-  
-  public function setPrefix($prefix)
-  {
-    $this->_prefix = $prefix;
-  }
-  
-  public function getMarker()
-  {
-    return $this->_marker;
-  }
-  
-  public function setMarker($marker)
-  {
-    $this->_marker = $marker;
-  }
-  
-  public function getMaxResults()
-  {
-    return $this->_maxResults;
-  }
-  
-  public function setMaxResults($maxResults)
-  {
-    $this->_maxResults = $maxResults;
-  }
-  
-  public function isIncludeMetadata()
-  {
-    return $this->_includeMetadata;
-  }
-  
-  public function setIncludeMetadata($includeMetadata)
-  {
-    $this->_includeMetadata = $includeMetadata;
-  }
+    private $_prefix;
+    private $_marker;
+    private $_maxResults;
+    private $_includeMetadata;
+
+    /**
+     * Gets perfix.
+     *
+     * @return string.
+     */
+    public function getPrefix()
+    {
+        return $this->_prefix;
+    }
+
+    /**
+     * Sets perfix.
+     *
+     * @param string $prefix value.
+     * 
+     * @return none.
+     */
+    public function setPrefix($prefix)
+    {
+        $this->_prefix = $prefix;
+    }
+
+    /**
+     * Gets marker.
+     * 
+     * @return string.
+     */
+    public function getMarker()
+    {
+        return $this->_marker;
+    }
+
+    /**
+     * Sets marker.
+     *
+     * @param string $marker value.
+     * 
+     * @return none.
+     */
+    public function setMarker($marker)
+    {
+        $this->_marker = $marker;
+    }
+
+    /**
+     * Gets max results.
+     * 
+     * @return string.
+     */
+    public function getMaxResults()
+    {
+        return $this->_maxResults;
+    }
+
+    /**
+     * Sets max results.
+     *
+     * @param string $maxResults value.
+     * 
+     * @return none.
+     */
+    public function setMaxResults($maxResults)
+    {
+        $this->_maxResults = $maxResults;
+    }
+
+    /**
+     * Indicates if metadata is included or not.
+     * 
+     * @return string.
+     */
+    public function isIncludeMetadata()
+    {
+        return $this->_includeMetadata;
+    }
+
+    /**
+     * Sets the include metadata flag.
+     *
+     * @param bool $includeMetadata value.
+     * 
+     * @return none.
+     */
+    public function setIncludeMetadata($includeMetadata)
+    {
+        $this->_includeMetadata = $includeMetadata;
+    }
 }
 
 ?>

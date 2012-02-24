@@ -1,10 +1,6 @@
 <?php
 
 /**
- * Implementation of interface IServiceFilter.
- *
- * PHP version 5
- *
  * LICENSE: Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -15,12 +11,15 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
+ * 
+ * PHP version 5
  *
- * @package    Azure-sdk-for-php
- * @author     Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
- * @copyright  2012 Microsoft Corporation
- * @license    http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
- * @link       http://pear.php.net/package/azure-sdk-for-php
+ * @category  Microsoft
+ * @package   PEAR2\WindowsAzure\Core
+ * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
+ * @copyright 2012 Microsoft Corporation
+ * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
+ * @link      http://pear.php.net/package/azure-sdk-for-php
  */
  
 namespace PEAR2\WindowsAzure\Core;
@@ -29,18 +28,34 @@ namespace PEAR2\WindowsAzure\Core;
  * ServceFilter is called when the sending the request and after receiving the 
  * response.
  *
- * @package    Azure-sdk-for-php
- * @author     Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
- * @copyright  2012 Microsoft Corporation
- * @license    http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
- * @version    Release: @package_version@
- * @link       http://pear.php.net/package/azure-sdk-for-php
+ * @category  Microsoft
+ * @package   PEAR2\WindowsAzure\Core
+ * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
+ * @copyright 2012 Microsoft Corporation
+ * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
+ * @version   Release: @package_version@
+ * @link      http://pear.php.net/package/azure-sdk-for-php
  */
 interface IServiceFilter
 {
-  public function handleRequest($request);
-  
-  public function handleResponse($request, $response);
+    /**
+     * Processes HTTP request before send.
+     *
+     * @param mixed $request HTTP request object.
+     * 
+     * @return mixed processed HTTP request object.
+     */
+    public function handleRequest($request);
+
+    /**
+     * Processes HTTP response after send.
+     *
+     * @param mixed $request  HTTP request object.
+     * @param mixed $response HTTP response object.
+     * 
+     * @return mixed processed HTTP response object.
+     */
+    public function handleResponse($request, $response);
 }
 
 ?>
