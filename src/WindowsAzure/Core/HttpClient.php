@@ -170,6 +170,43 @@ class HttpClient implements IHttpClient
     {
         $this->_request->SetHeader($header, $value);
     }
+    
+    /**
+     * Sets request headers using array
+     * 
+     * @param array $headers headers key-value array
+     * 
+     * @return none.
+     */
+    public function setHeaders($headers)
+    {
+        $this->_request->SetHeader($headers);
+    }
+    
+    /**
+     * Sets url path
+     * 
+     * @param string $urlPath url path to set.
+     * 
+     * @return none.
+     */
+    public function setUrlPath($urlPath)
+    {
+        $this->_requestUrl->setPath($urlPath);
+    }
+    
+    /**
+     * Appends url path
+     * 
+     * @param string $urlPath url path to append.
+     * 
+     * @return none.
+     */
+    public function appendUrlPath($urlPath)
+    {
+        $newUrlPath = parse_url($this->_requestUrl, PHP_URL_PATH) . $urlPath;
+        $this->_requestUrl->setPath($newUrlPath);
+    }
 
     /**
      * Processes the reuqest through HTTP pipeline with passed $filters, 

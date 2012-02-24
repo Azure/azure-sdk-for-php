@@ -27,6 +27,7 @@ use PEAR2\WindowsAzure\Services\Queue\Queue;
 use PEAR2\WindowsAzure\Resources;
 use PEAR2\WindowsAzure\Services\Queue\Models\ListQueueOptions;
 use PEAR2\WindowsAzure\Services\Queue\Models\ListQueueResult;
+use PEAR2\WindowsAzure\Services\Queue\Models\CreateQueueOptions;
 use PEAR2\WindowsAzure\Core\IHttpClient;
 
 require_once 'XML/Unserializer.php';
@@ -179,7 +180,14 @@ class QueueRestProxy implements IQueue
      */
     public function createQueue($queueName, $createQueueOptions = null)
     {
+        if (!isset($createQueueOptions)) {
+            $createQueueOptions = new CreateQueueOptions();
+        }
 
+        $this->_channel->setMethod(\HTTP_Request2::METHOD_PUT);
+        $this->_channel->setHeaders($metadata);
+
+        $responseBody   = $this->_channel->send($this->_filters);
     }
 
     /**

@@ -111,6 +111,15 @@ interface IHttpClient
      * @return none.
      */
     public function setHeader($header, $value);
+    
+    /**
+     * Sets request headers using array
+     * 
+     * @param array $headers headers key-value array
+     * 
+     * @return none.
+     */
+    public function setHeaders($headers);
 
     /**
      * Processes the reuqest through HTTP pipeline with passed $filters, 
@@ -122,6 +131,24 @@ interface IHttpClient
      * @return string The response body.
      */
     public function send($filters);
+    
+    /**
+     * Sets url path
+     * 
+     * @param string $urlPath url path to set.
+     * 
+     * @return none.
+     */
+    public function setUrlPath($urlPath);
+    
+    /**
+     * Appends url path
+     * 
+     * @param string $urlPath url path to append.
+     * 
+     * @return none.
+     */
+    public function appendUrlPath($urlPath);
 }
 
 ?>
