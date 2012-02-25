@@ -56,7 +56,7 @@ class Queue
     public static function createOneObject($raw)
     {
         $queue = new Queue($raw['Name'], $raw['Url']);
-        $queue->setMetadata(Utilities::getValue($raw, Resources::METADATA, null));
+        $queue->setMetadata(Utilities::tryGetValue($raw, Resources::METADATA, null));
 
         return $queue;
     }

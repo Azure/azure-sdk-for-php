@@ -54,10 +54,15 @@ class SharedKeyFilter implements IServiceFilter
      */
     public function __construct($accountName, $accountKey, $type)
     {
-        if ($type == Resources::QUEUE_TYPE_NAME) {
+        switch ($type) {
+        case Resources::QUEUE_TYPE_NAME:
             $this->_sharedKeyAuthentication = new BlobQueueSharedKey(
-                $accountName, $accountKey
+                    $accountName, $accountKey
             );
+            break;
+
+        default: 
+            throw new InvalidArgumentTypeException(Resources::QUEUE_TYPE_NAME);
         }
     }
 

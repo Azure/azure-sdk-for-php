@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Implementation of class AzureAuthentication.
+ * Implementation of class StorageAuthenticationSchema.
  *
  *
  * PHP version 5
@@ -24,14 +24,14 @@
  * @link       http://pear.php.net/package/azure-sdk-for-php
  */
 
-use PEAR2\WindowsAzure\Services\Core\Authentication\AzureAuthentication;
+use PEAR2\WindowsAzure\Services\Core\Authentication\StorageAuthenticationSchema;
 use PEAR2\Tests\Unit\Utilities;
-use PEAR2\Tests\Mock\WindowsAzure\Services\Core\Authentication\AzureAuthenticationMock;
+use PEAR2\Tests\Mock\WindowsAzure\Services\Core\Authentication\StorageAuthenticationSchemaMock;
 use PEAR2\Tests\Unit\TestResources;
 use PEAR2\WindowsAzure\Resources;
 
 /**
- * Unit tests for AzureAuthentication class.
+ * Unit tests for StorageAuthenticationSchema class.
  *
  * @package    Azure-sdk-for-php
  * @author     Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
@@ -43,17 +43,17 @@ use PEAR2\WindowsAzure\Resources;
 class AzureAuthenticationTest extends PHPUnit_Framework_TestCase
 {
   /**
-  * @covers PEAR2\WindowsAzure\Services\Core\Authentication\AzureAuthentication::__construct
+  * @covers PEAR2\WindowsAzure\Services\Core\Authentication\StorageAuthenticationSchema::__construct
   */
   public function test__construct()
   {
-    $mock = new AzureAuthenticationMock(TestResources::ACCOUNT_NAME, TestResources::KEY4);
+    $mock = new StorageAuthenticationSchemaMock(TestResources::ACCOUNT_NAME, TestResources::KEY4);
     $this->assertEquals(TestResources::ACCOUNT_NAME, $mock->getAccountName());
     $this->assertEquals(TestResources::KEY4, $mock->getAccountKey());
   }
   
   /**
-  * @covers PEAR2\WindowsAzure\Services\Core\Authentication\AzureAuthentication::__construct
+  * @covers PEAR2\WindowsAzure\Services\Core\Authentication\StorageAuthenticationSchema::__construct
   */
   public function testComputeCanonicalizedHeadersMock()
   {
@@ -64,7 +64,7 @@ class AzureAuthenticationTest extends PHPUnit_Framework_TestCase
     $expected = array();
     $expected[] = Resources::X_MS_DATE . ':' . $date;
     $expected[] = Resources::X_MS_VERSION . ':' . Resources::API_VERSION;
-    $mock = new AzureAuthenticationMock(TestResources::ACCOUNT_NAME, TestResources::KEY4);
+    $mock = new StorageAuthenticationSchemaMock(TestResources::ACCOUNT_NAME, TestResources::KEY4);
     
     $actual = $mock->computeCanonicalizedHeadersMock($headers);
     
@@ -72,7 +72,7 @@ class AzureAuthenticationTest extends PHPUnit_Framework_TestCase
   }
   
   /**
-  * @covers PEAR2\WindowsAzure\Services\Core\Authentication\AzureAuthentication::ComputeCanonicalizedResource
+  * @covers PEAR2\WindowsAzure\Services\Core\Authentication\StorageAuthenticationSchema::ComputeCanonicalizedResource
   */
   public function testComputeCanonicalizedResourceMockSimple()
   {
@@ -81,7 +81,7 @@ class AzureAuthenticationTest extends PHPUnit_Framework_TestCase
     $accountName = TestResources::ACCOUNT_NAME;
     $url = TestResources::URI1;
     $expected = '/' . $accountName . parse_url($url, PHP_URL_PATH) . "\n" . 'comp:list';
-    $mock = new AzureAuthenticationMock($accountName, TestResources::KEY4);
+    $mock = new StorageAuthenticationSchemaMock($accountName, TestResources::KEY4);
     
     $actual = $mock->computeCanonicalizedResourceMock($url, $queryVariables);
     

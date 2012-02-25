@@ -26,6 +26,7 @@ namespace PEAR2\WindowsAzure\Services\Core;
 use PEAR2\WindowsAzure\Core\IHttpClient;
 use PEAR2\WindowsAzure\Core\IServiceFilter;
 use PEAR2\WindowsAzure\Resources;
+use PEAR2\WindowsAzure\Utilities\Validate;
 
 require_once 'HTTP/Request2.php';
 require_once 'XML/Unserializer.php';
@@ -75,6 +76,7 @@ class HttpClient implements IHttpClient
      */
     public function getQuery()
     {
+        Validate::isNull($this->_requestUrl);
         return $this->_requestUrl->getQuery();
     }
 
@@ -85,6 +87,7 @@ class HttpClient implements IHttpClient
      */
     public function getQueryVariables()
     {
+        Validate::isNull($this->_requestUrl);
         return $this->_requestUrl->getQueryVariables();
     }
 
@@ -99,6 +102,7 @@ class HttpClient implements IHttpClient
      */
     public function setQueryVariable($key, $value)
     {
+        Validate::isNull($this->_requestUrl);
         $this->_requestUrl->setQueryVariable(strtolower($key), $value);
     }
 
@@ -117,10 +121,11 @@ class HttpClient implements IHttpClient
     /**
      * Gets request url.
      *
-     * @return \Net_URL2
+     * @return string
      */
     public function getUrl()
     {
+        Validate::isNull($this->_requestUrl);
         return $this->_requestUrl;
     }
 
@@ -190,8 +195,8 @@ class HttpClient implements IHttpClient
 
         $response = $this->_request->send();
 
-        foreach ($filters as $filter) {
-            $response = $filter->handleResponse($this, $response);
+        for ($index = count($filters) - 1; $index < count($filter); $index--) {
+            $response = $filters[$index]->handleResponse($this, $response);
         }
 
         return $response->getBody();

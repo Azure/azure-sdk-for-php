@@ -48,40 +48,52 @@ use PEAR2\WindowsAzure\Core\Exceptions\InvalidArgumentTypeException;
 class ServicesBuilder implements IServiceBuilder
 {
     /**
+     * Builds a queue object.
+     *
+     * @param PEAR2\WindowsAzure\Services\Core\Configuration $config configuration.
+     * 
+     * @return IQueue.
+     */
+    private static function buildQueue($config)
+    {
+        $httpClient = new HttpClient();
+
+        $queueRestProxy = new QueueRestProxy(
+            $httpClient, $config->getProperty(QueueConfiguration::ACCOUNT_NAME),
+            $config->getProperty(QueueConfiguration::URI)
+        );
+
+        $queueWrapper = new QueueExceptionProcessor($queueRestProxy);
+
+        // Adding date filter
+        $dateFilter   = new DateFilter();
+        $queueWrapper = $queueWrapper->withFilter($dateFilter);
+
+        // Adding authentication filter
+        $authFilter = new SharedKeyFilter(
+            $config->getProperty(QueueConfiguration::ACCOUNT_NAME),
+            $config->getProperty(QueueConfiguration::ACCOUNT_KEY),
+            Resources::QUEUE_TYPE_NAME
+        );
+
+        $queueWrapper = $queueWrapper->withFilter($authFilter);
+
+        return $queueWrapper;
+    }
+    
+    /**
      * Creates an object passed $type configured with $config.
      *
      * @param PEAR2\WindowsAzure\Services\Core\Configuration $config configuration.
      * @param string                                         $type   type name.
      * 
-     * @return mixed.
+     * @return IQueue.
      */
     public static function build($config, $type)
     {
         switch ($type) {
         case Resources::QUEUE_TYPE_NAME:
-            $httpClient = new HttpClient();
-
-            $queueRestProxy = new QueueRestProxy(
-                $httpClient, $config->getProperty(QueueConfiguration::ACCOUNT_NAME),
-                $config->getProperty(QueueConfiguration::URI)
-            );
-
-            $queueWrapper = new QueueExceptionProcessor($queueRestProxy);
-
-            // Adding date filter
-            $dateFilter   = new DateFilter();
-            $queueWrapper = $queueWrapper->withFilter($dateFilter);
-
-            // Adding authentication filter
-            $authFilter = new SharedKeyFilter(
-                $config->getProperty(QueueConfiguration::ACCOUNT_NAME),
-                $config->getProperty(QueueConfiguration::ACCOUNT_KEY),
-                $type
-            );
-
-            $queueWrapper = $queueWrapper->withFilter($authFilter);
-
-            return $queueWrapper;
+            return self::buildQueue($config);
 
         default: 
             throw new InvalidArgumentTypeException(Resources::QUEUE_TYPE_NAME);

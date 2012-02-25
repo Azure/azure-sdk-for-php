@@ -27,8 +27,14 @@ use PEAR2\WindowsAzure\Services\Core\ServicesBuilder;
 use PEAR2\WindowsAzure\Utilities\Validate;
 
 /**
- * Contains configuration used to access azure sotrage accounts.
- *
+ * Contains configuration used to access azure storage accounts. 
+ * 
+ * Usage example:
+ * <code>
+ * $config = Configuration::getInstance();
+ * $config->setProperty('PropertyName', 'PropertyValue);
+ * $propertyValue = $config->getProperty('PropertyName');
+ * </code>
  * @category  Microsoft
  * @package   PEAR2\WindowsAzure\Services\Core
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>

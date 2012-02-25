@@ -37,24 +37,32 @@ namespace PEAR2\Tests\Unit;
  */
 class TestResources
 {
-  const QUEUE1_NAME   = 'Queue1';
-  const QUEUE2_NAME   = 'Queue2';
-  const QUEUE3_NAME   = 'Queue3';
-  const KEY1          = 'key1';
-  const KEY2          = 'key2';
-  const KEY3          = 'key3';
-  const KEY4          = 'AhlzsbLRkjfwObuqff3xrhB2yWJNh1EMptmcmxFJ6fvPTVX3PZXwrG2YtYWf5DPMVgNsteKStM5iBLlknYFVoA==';
-  const AZURE_KEY     = 'd7mefHRJ1jcjYtNslLuGaxnBFu5lhVJQPYqxoI5ze65v3KPhtf3m9WJMlYsS6E0sNuRw5ZetjIt0JnmfzGj69w==';
-  const VALUE1        = 'value1';
-  const VALUE2        = 'value2';
-  const VALUE3        = 'value3';
-  const ACCOUNT_NAME  = 'myaccount';
-  const AZURE_ACCOUNT = 'aogail';
-  const QUEUE_URI     = 'queue.core.windows.net';
-  const URI1          = "http://myaccount.queue.core.windows.net/myqueue";
-  const URI2          = "http://myaccount.queue.core.windows.net/?comp=list";
-  const DATE1         = 'Sat, 18 Feb 2012 16:25:21 GMT';
-  const DATE2         = 'Mon, 20 Feb 2012 17:12:31 GMT';
+    const QUEUE1_NAME   = 'Queue1';
+    const QUEUE2_NAME   = 'Queue2';
+    const QUEUE3_NAME   = 'Queue3';
+    const KEY1          = 'key1';
+    const KEY2          = 'key2';
+    const KEY3          = 'key3';
+    const KEY4          = 'AhlzsbLRkjfwObuqff3xrhB2yWJNh1EMptmcmxFJ6fvPTVX3PZXwrG2YtYWf5DPMVgNsteKStM5iBLlknYFVoA==';
+    const VALUE1        = 'value1';
+    const VALUE2        = 'value2';
+    const VALUE3        = 'value3';
+    const ACCOUNT_NAME  = 'myaccount';
+    const QUEUE_URI     = 'queue.core.windows.net';
+    const URI1          = "http://myaccount.queue.core.windows.net/myqueue";
+    const URI2          = "http://myaccount.queue.core.windows.net/?comp=list";
+    const DATE1         = 'Sat, 18 Feb 2012 16:25:21 GMT';
+    const DATE2         = 'Mon, 20 Feb 2012 17:12:31 GMT';
+
+    public static function accountName()
+    {
+        return getenv('AZURE_ACCOUNT');
+    }
+    
+    public static function accountKey()
+    {
+        return getenv('AZURE_KEY');
+    }
 }
 
 ?>

@@ -85,7 +85,7 @@ class BlobQueueSharedKeyTest extends PHPUnit_Framework_TestCase
   }
   
     /**
-  * @covers PEAR2\WindowsAzure\Services\Core\Authentication\AzureAuthentication::GetAuthorizationHeader
+  * @covers PEAR2\WindowsAzure\Services\Core\Authentication\StorageAuthenticationSchema::GetAuthorizationHeader
   */
   public function testGetAuthorizationHeaderSimple()
   {

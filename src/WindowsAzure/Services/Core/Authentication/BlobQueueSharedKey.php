@@ -23,8 +23,9 @@
  */
  
 namespace PEAR2\WindowsAzure\Services\Core\Authentication;
-use PEAR2\WindowsAzure\Services\Core\Authentication\AzureAuthentication;
+use PEAR2\WindowsAzure\Services\Core\Authentication\StorageAuthenticationSchema;
 use PEAR2\WindowsAzure\Resources;
+use PEAR2\WindowsAzure\Utilities\Utilities;
 
 /**
  * Provides shared key authentication scheme for blob and queue. For more info
@@ -38,7 +39,7 @@ use PEAR2\WindowsAzure\Resources;
  * @version   Release: @package_version@
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
-class BlobQueueSharedKey extends AzureAuthentication
+class BlobQueueSharedKey extends StorageAuthenticationSchema
 {
     protected $includedHeaders;
 
@@ -94,7 +95,7 @@ class BlobQueueSharedKey extends AzureAuthentication
         $stringToSign[] = strtoupper($httpMethod);
 
         foreach ($this->includedHeaders as $header) {
-            $stringToSign[] = isset($headers[$header]) ? $headers[$header] : null;
+            $stringToSign[] = Utilities::tryGetValue($headers, $header, null);
         }
 
         if (count($canonicalizedHeaders) > 0) {
@@ -105,6 +106,30 @@ class BlobQueueSharedKey extends AzureAuthentication
         $stringToSign   = implode("\n", $stringToSign);
 
         return $stringToSign;
+    }
+    
+    /**
+     * Returns authorization header to be included in the request.
+     *
+     * @param array  $headers     request headers.
+     * @param string $url         reuqest url.
+     * @param array  $queryParams query variables.
+     * @param string $httpMethod  request http method.
+     * 
+     * @see Specifying the Authorization Header section at 
+     *      http://msdn.microsoft.com/en-us/library/windowsazure/dd179428.aspx
+     * 
+     * @return string
+     */
+    public function getAuthorizationHeader($headers, $url, $queryParams, $httpMethod)
+    {
+        $signature = $this->computeSignature(
+            $headers, $url, $queryParams, $httpMethod
+        );
+
+        return 'SharedKey ' . $this->accountName . ':' . base64_encode(
+            hash_hmac('sha256', $signature, base64_decode($this->accountKey), true)
+        );
     }
 }
 

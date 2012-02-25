@@ -56,13 +56,13 @@ class ListQueueResult
     public static function createFromParsedResponse($parsedResponse)
     {
         $result              = new ListQueueResult();
-        $result->_prefix     = Utilities::getValue(
+        $result->_prefix     = Utilities::tryGetValue(
             $parsedResponse, Resources::PREFIX, null
         );
-        $result->_marker     = Utilities::getValue(
+        $result->_marker     = Utilities::tryGetValue(
             $parsedResponse, Resources::MARKER, null
         );
-        $result->_nextMarker = Utilities::getValue(
+        $result->_nextMarker = Utilities::tryGetValue(
             $parsedResponse, Resources::NEXT_MARKER, null
         );
         $result->_queues     = array();

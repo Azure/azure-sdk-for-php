@@ -69,6 +69,22 @@ class Validate
             throw new InvalidArgumentTypeException(gettype(''));
         }
     }
+    
+    /**
+     * Throws exception if the provided variable is set to null.
+     *
+     * @param mixed $var variable to check against.
+     * 
+     * @throws InvalidArgumentException
+     * 
+     * @return none.
+     */
+    public static function isNull($var)
+    {
+        if (!isset($var)) {
+            throw new InvalidArgumentException();
+        }
+    }
 }
 
 ?>

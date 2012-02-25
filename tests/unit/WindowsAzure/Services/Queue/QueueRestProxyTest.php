@@ -49,8 +49,8 @@ class QueueRestProxyTest extends PHPUnit_Framework_TestCase
   public function testListQueues()
   {
     $config = Configuration::getInstance();
-    $config->setProperty(QueueConfiguration::ACCOUNT_KEY, TestResources::AZURE_KEY);
-    $config->setProperty(QueueConfiguration::ACCOUNT_NAME, TestResources::AZURE_ACCOUNT);
+    $config->setProperty(QueueConfiguration::ACCOUNT_KEY, TestResources::accountKey());
+    $config->setProperty(QueueConfiguration::ACCOUNT_NAME, TestResources::accountName());
     $config->setProperty(QueueConfiguration::URI, 'queue.core.windows.net');
     $queueWrapper = QueueService::create($config);
     $result = $queueWrapper->listQueues();
@@ -68,8 +68,8 @@ class QueueRestProxyTest extends PHPUnit_Framework_TestCase
   public function testListQueuesWithOptions()
   {
     $config = Configuration::getInstance();
-    $config->setProperty(QueueConfiguration::ACCOUNT_KEY, TestResources::AZURE_KEY);
-    $config->setProperty(QueueConfiguration::ACCOUNT_NAME, TestResources::AZURE_ACCOUNT);
+    $config->setProperty(QueueConfiguration::ACCOUNT_KEY, TestResources::accountKey());
+    $config->setProperty(QueueConfiguration::ACCOUNT_NAME, TestResources::accountName());
     $config->setProperty(QueueConfiguration::URI, 'queue.core.windows.net');
     $queueWrapper = QueueService::create($config);
     $options = new ListQueueOptions();
@@ -90,8 +90,8 @@ class QueueRestProxyTest extends PHPUnit_Framework_TestCase
   public function testListQueuesWithNextMarker()
   {
     $config = Configuration::getInstance();
-    $config->setProperty(QueueConfiguration::ACCOUNT_KEY, TestResources::AZURE_KEY);
-    $config->setProperty(QueueConfiguration::ACCOUNT_NAME, TestResources::AZURE_ACCOUNT);
+    $config->setProperty(QueueConfiguration::ACCOUNT_KEY, TestResources::accountKey());
+    $config->setProperty(QueueConfiguration::ACCOUNT_NAME, TestResources::accountName());
     $config->setProperty(QueueConfiguration::URI, 'queue.core.windows.net');
     $queueWrapper = QueueService::create($config);
     $options = new ListQueueOptions();
@@ -118,8 +118,8 @@ class QueueRestProxyTest extends PHPUnit_Framework_TestCase
   public function testListQueuesWithNoQueues()
   {
     $config = Configuration::getInstance();
-    $config->setProperty(QueueConfiguration::ACCOUNT_KEY, TestResources::AZURE_KEY);
-    $config->setProperty(QueueConfiguration::ACCOUNT_NAME, TestResources::AZURE_ACCOUNT);
+    $config->setProperty(QueueConfiguration::ACCOUNT_KEY, TestResources::accountKey());
+    $config->setProperty(QueueConfiguration::ACCOUNT_NAME, TestResources::accountName());
     $config->setProperty(QueueConfiguration::URI, 'queue.core.windows.net');
     $queueWrapper = QueueService::create($config);
     $options = new ListQueueOptions();
@@ -136,8 +136,8 @@ class QueueRestProxyTest extends PHPUnit_Framework_TestCase
   public function testListQueuesWithOneResult()
   {
     $config = Configuration::getInstance();
-    $config->setProperty(QueueConfiguration::ACCOUNT_KEY, TestResources::AZURE_KEY);
-    $config->setProperty(QueueConfiguration::ACCOUNT_NAME, TestResources::AZURE_ACCOUNT);
+    $config->setProperty(QueueConfiguration::ACCOUNT_KEY, TestResources::accountKey());
+    $config->setProperty(QueueConfiguration::ACCOUNT_NAME, TestResources::accountName());
     $config->setProperty(QueueConfiguration::URI, 'queue.core.windows.net');
     $queueWrapper = QueueService::create($config);
     $options = new ListQueueOptions();

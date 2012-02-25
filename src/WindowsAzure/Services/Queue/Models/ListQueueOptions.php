@@ -114,7 +114,7 @@ class ListQueueOptions extends QueueServiceOptions
      * 
      * @return string.
      */
-    public function isIncludeMetadata()
+    public function getIncludeMetadata()
     {
         return $this->_includeMetadata;
     }

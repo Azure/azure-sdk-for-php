@@ -25,7 +25,15 @@
 namespace PEAR2\WindowsAzure\Services\Core;
 
 /**
- * Interface for azure builder classes which create the wrapper objects.
+ * By implementing this interface you can control how 
+ * PEAR2\WindowsAzure\Services\Core\Configuration creates your object when create
+ * function is called. This can be useful if you want to add any processing layer
+ * to the REST API wrapper (like handeling exceptions). So you can have a builder
+ * with this build function:
+ * <code>
+ * $queueRestWrapper   = new QueueRestProxy(...)
+ * $exceptionProcessor = new ExceptionProcessor($queueRestWrapper);
+ * </code>
  *
  * @category  Microsoft
  * @package   PEAR2\WindowsAzure\Services\Core

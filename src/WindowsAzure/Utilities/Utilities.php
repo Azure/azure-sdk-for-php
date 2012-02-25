@@ -45,11 +45,28 @@ class Utilities
      * @param mixed $key     Array key.
      * @param mixed $default Value to return if $key is not found in $array.
      * 
+     * @static
+     * 
      * @return mixed.
      */
-    public static function getValue($array, $key, $default)
+    public static function tryGetValue($array, $key, $default)
     {
         return array_key_exists($key, $array) ? $array[$key] : $default;
+    }
+    
+    /**
+     * Checks if the passed $string starts with $prefix
+     *
+     * @param string $string word to seaech in
+     * @param string $prefix prefix to be matched
+     * 
+     * @static
+     * 
+     * @return bool.
+     */
+    public static function startsWith($string, $prefix)
+    {
+        return ($prefix == substr($string, 0, strlen($prefix)));
     }
 }
 

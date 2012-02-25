@@ -24,6 +24,7 @@
  
 namespace PEAR2\WindowsAzure\Services\Core\Authentication;
 use PEAR2\WindowsAzure\Resources;
+use PEAR2\WindowsAzure\Utilities\Utilities;
 
 /**
  * Base class for azure authentication schemes.
@@ -36,7 +37,7 @@ use PEAR2\WindowsAzure\Resources;
  * @version   Release: @package_version@
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
-abstract class AzureAuthentication
+abstract class StorageAuthenticationSchema
 {
     protected $accountName;
     protected $accountKey;
@@ -47,7 +48,7 @@ abstract class AzureAuthentication
      * @param string $accountName storage account name.
      * @param string $accountKey  storage account primary or secondary key.
      * 
-     * @return PEAR2\WindowsAzure\Services\Core\Authentication\AzureAuthentication
+     * @return PEAR2\WindowsAzure\Services\Core\Authentication\StorageAuthenticationSchema
      */
     public function __construct($accountName, $accountKey)
     {
@@ -63,7 +64,7 @@ abstract class AzureAuthentication
      * @see Constructing the Canonicalized Headers String section at 
      *      http://msdn.microsoft.com/en-us/library/windowsazure/dd179428.aspx
      * 
-     * @return string
+     * @return array
      */
     protected function computeCanonicalizedHeaders($headers)
     {
@@ -72,14 +73,13 @@ abstract class AzureAuthentication
         if (!is_null($headers)) {
             foreach ($headers as $header => $value) {
                 if (is_bool($value)) {
+                    // This line converts passed user bool values into string value.
                     $value = $value === true ? 'True' : 'False';
                 }
 
-                $prefix = substr($header, 0, strlen(Resources::X_MS_HEADER_PREFIX));
-                
-                if ($prefix == Resources::X_MS_HEADER_PREFIX) {
-                    $headers[$header]       = $value;
-                    $canonicalizedHeaders[] = strtolower($header) . ':' . $value;
+                if (Utilities::startsWith($header, Resources::X_MS_HEADER_PREFIX)) {
+                    $canonicalizedHeaders[] = strtolower($header) . ':' . 
+                        trim($value);
                 }
             }
         }
@@ -101,7 +101,6 @@ abstract class AzureAuthentication
      */
     protected function computeCanonicalizedResource($url, $queryParams)
     {
-        // Note: Multi-valued query parameter is not supported (issue #17)
         // 1. Beginning with an empty string (""), append a forward slash (/), 
         //    followed by the name of the account that owns the accessed resource.
         $canonicalizedResource = '/' . $this->accountName;
@@ -122,7 +121,8 @@ abstract class AzureAuthentication
         // 7. Append each query parameter name and value to the string in the 
         //    following format:
         //      parameter-name:parameter-value
-        // 8. Append a new line character (\n) after each name-value pair.
+        // 9. Group query parameters (not supported see issue #17)
+        // 10. Append a new line character (\n) after each name-value pair.
         foreach ($queryParams as $key => $value) {
             $canonicalizedResource .= "\n" . strtolower($key) . ':' . 
                 rawurldecode($value);
@@ -142,18 +142,13 @@ abstract class AzureAuthentication
      * @see Specifying the Authorization Header section at 
      *      http://msdn.microsoft.com/en-us/library/windowsazure/dd179428.aspx
      * 
+     * @abstract
+     * 
      * @return string
      */
-    public function getAuthorizationHeader($headers, $url, $queryParams, $httpMethod)
-    {
-        $signature = $this->computeSignature(
-            $headers, $url, $queryParams, $httpMethod
-        );
-
-        return 'SharedKey ' . $this->accountName . ':' . base64_encode(
-            hash_hmac('sha256', $signature, base64_decode($this->accountKey), true)
-        );
-    }
+    abstract public function getAuthorizationHeader($headers, $url, $queryParams, 
+            $httpMethod
+    );
 
     /**
      * Computes the authorization signature.
@@ -165,6 +160,8 @@ abstract class AzureAuthentication
      * 
      * @see check all authentication schemes at
      *      http://msdn.microsoft.com/en-us/library/windowsazure/dd179428.aspx
+     * 
+     * @abstract
      * 
      * @return string
      */

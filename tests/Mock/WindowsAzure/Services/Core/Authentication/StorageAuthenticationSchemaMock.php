@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Implementation of class HttpClientMock.
+ * Implementation of class StorageAuthenticationSchemaMock.
  *
  * PHP version 5
  *
@@ -23,12 +23,11 @@
  * @link       http://pear.php.net/package/azure-sdk-for-php
  */
  
-namespace PEAR2\Tests\Mock\WindowsAzure\Core;
-use PEAR2\WindowsAzure\Core\IHttpClient;
-use PEAR2\WindowsAzure\Services\Core\HttpClient;
+namespace PEAR2\Tests\Mock\WindowsAzure\Services\Core\Authentication;
+use PEAR2\WindowsAzure\Services\Core\Authentication\StorageAuthenticationSchema;
 
 /**
- * Mock class for Http client.
+ * Mock class to wrap StorageAuthenticationSchema class.
  *
  * @package    Azure-sdk-for-php
  * @author     Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
@@ -37,51 +36,42 @@ use PEAR2\WindowsAzure\Services\Core\HttpClient;
  * @version    Release: @package_version@
  * @link       http://pear.php.net/package/azure-sdk-for-php
  */
-class HttpClientMock implements IHttpClient
-{ 
-  public function getHeaders()
-  {
-    
-  }
-  
-  public function getMethod()
-  {
+class StorageAuthenticationSchemaMock extends StorageAuthenticationSchema
+{
+    public function __construct($accountName, $accountKey)
+    {
+        parent::__construct($accountName, $accountKey);
+    }
 
-  }
-  public function getQuery()
-  {
-    
-  }
+    public function computeCanonicalizedHeadersMock($headers)
+    {
+        return parent::computeCanonicalizedHeaders($headers);
+    }
 
-  public function getQueryVariables()
-  {
-    
-  }
-  
-  public function send($filters) 
-  {
-    
-  }
-  
-  public function setHeader($header, $value)
-  {
-    
-  }
-  
-  public function setMethod($method)
-  {
-    
-  }
-  
-  public function setQueryVariable($key, $value)
-  {
-    
-  }
-  
-  public function setUrl($url)
-  {
-    
-  }
+    public function computeCanonicalizedResourceMock($url, $queryParams)
+    {
+        return parent::computeCanonicalizedResource($url, $queryParams);
+    }
+
+    public function getAccountName()
+    {
+        return $this->accountName;
+    }
+
+    public function getAccountKey()
+    {
+        return $this->accountKey;
+    }
+
+    protected function computeSignature($headers, $url, $queryParams, $httpMethod) 
+    {
+        // Do nothing
+    }
+
+    public function getAuthorizationHeader($headers, $url, $queryParams, $httpMethod)
+    {
+        // Do nothing
+    }
 }
 
 ?>

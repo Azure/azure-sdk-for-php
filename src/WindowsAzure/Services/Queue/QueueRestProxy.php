@@ -131,7 +131,7 @@ class QueueRestProxy implements IQueue
             Resources::MAX_RESULTS, $listQueuesOptions->getMaxResults()
         );
         $this->_channel->setQueryVariable(
-            'include', $listQueuesOptions->isIncludeMetadata()? 'metadata':  null
+            'include', $listQueuesOptions->getIncludeMetadata()? 'metadata':  null
         );
 
         $responseBody   = $this->_channel->send($this->_filters);

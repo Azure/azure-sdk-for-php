@@ -74,7 +74,7 @@ interface IHttpClient
     /**
      * Gets request url.
      *
-     * @return \Net_URL2
+     * @return string
      */
     public function getUrl();
     
