@@ -47,7 +47,7 @@ class Configuration
      *
      * @return PEAR2\WindowsAzure\Services\Core\Configuration.
      */
-    private function __construct()
+    public function __construct()
     {
         $this->_properties = array();
     }
@@ -112,7 +112,7 @@ class Configuration
      */
     public function create($type)
     {
-        return ServicesBuilder::build(self::$_instance, $type);
+        return ServicesBuilder::build($this, $type);
     }
 }
 

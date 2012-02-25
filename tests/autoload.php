@@ -13,7 +13,8 @@ spl_autoload_register(
             'pear2\\tests\\mock\\windowsazure\\services\\core\\authentication\\azureauthenticationmock' => '/mock/WindowsAzure/Services/Core/Authentication/AzureAuthenticationMock.php',
             'pear2\\tests\\mock\\windowsazure\\services\\core\\authentication\\blobqueuesharedkeymock' => '/mock/WindowsAzure/Services/Core/Authentication/BlobQueueSharedKeyMock.php',
             'pear2\\tests\\unit\\testresources' => '/unit/TestResources.php',
-            'queuerestproxytest' => '/unit/WindowsAzure/Services/Queue/QueueRestProxyTest.php'
+            'queuerestproxytest' => '/unit/WindowsAzure/Services/Queue/QueueRestProxyTest.php',
+            'resttestbase' => '/unit/RestTestBase.php'
           );
       }
       $cn = strtolower($class);

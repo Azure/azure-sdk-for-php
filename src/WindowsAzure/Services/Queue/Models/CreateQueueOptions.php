@@ -50,7 +50,9 @@ class CreateQueueOptions
     }
     
     /**
-     * Sets user defined metadata.
+     * Sets user defined metadata. This metadata should be added without the header
+     * prefix (x-ms-meta-*).
+     * 
      * 
      * @param array $metadata user defined metadata object in array form.
      * 
@@ -62,7 +64,8 @@ class CreateQueueOptions
     }
     
     /**
-     * Adds new metadata element.
+     * Adds new metadata element. This element should be added without the header
+     * prefix (x-ms-meta-*).
      * 
      * @param string $key   metadata key element.
      * @param string $value metadata value element.

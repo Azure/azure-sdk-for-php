@@ -38,28 +38,33 @@ namespace PEAR2\WindowsAzure;
 class Resources
 {
     // Messages
-    const INVALID_TYPE_MESSAGE = 'The provided variable should be of type: ';
+    const INVALID_TYPE_MSG = 'The provided variable should be of type: ';
+    const INVALID_META_MSG = 'Metadata cannot contain newline characters';
+    const AZURE_ERROR_MSG  = 
+        "HTTP call failed:\nCode: %s\nValue: %s\ndetails (if any): %s";
 
     // HTTP Headers
-    const X_MS_VERSION        = 'x-ms-version';
-    const X_MS_DATE           = 'x-ms-date';
-    const AUTHENTICATION      = 'Authorization';
-    const CONTENT_ENCODING    = 'content-encoding';
-    const CONTENT_LANGUAGE    = 'content-language';
-    const CONTENT_LENGTH      = 'content-length';
-    const CONTENT_MD5         = 'content-md5';
-    const CONTENT_TYPE        = 'content-type';
-    const DATE                = 'date';
-    const IF_MODIFIED_SINCE   = 'if-modified-since';
-    const IF_MATCH            = 'if-match';
-    const IF_NONE_MATCH       = 'if-none-match';
-    const IF_UNMODIFIED_SINCE = 'if-unmodified-since';
-    const RANGE               = 'range';
-    const X_MS_HEADER_PREFIX  = 'x-ms-';
+    const X_MS_HEADER_PREFIX      = 'x-ms-';
+    const X_MS_META_HEADER_PREFIX = 'x-ms-meta-';
+    const X_MS_VERSION            = 'x-ms-version';
+    const X_MS_DATE               = 'x-ms-date';
+    const DATE                    = 'date';
+    const AUTHENTICATION          = 'Authorization';
+    const CONTENT_ENCODING        = 'content-encoding';
+    const CONTENT_LANGUAGE        = 'content-language';
+    const CONTENT_LENGTH          = 'content-length';
+    const CONTENT_MD5             = 'content-md5';
+    const CONTENT_TYPE            = 'content-type';
+    const IF_MODIFIED_SINCE       = 'if-modified-since';
+    const IF_MATCH                = 'if-match';
+    const IF_NONE_MATCH           = 'if-none-match';
+    const IF_UNMODIFIED_SINCE     = 'if-unmodified-since';
+    const RANGE                   = 'range';
 
     // Misc
     const QUEUE_TYPE_NAME = 'IQueue';
     const STORAGE_URI     = 'http://%s.%s/';
+    const EMPTY_STRING    = '';
 
     // Versioning
     const API_VERSION = '2011-08-18';
@@ -70,6 +75,11 @@ class Resources
     const METADATA    = 'Metadata';
     const MARKER      = 'Marker';
     const NEXT_MARKER = 'NextMarker';
+    
+    // Status Codes
+    const SUCCESS_LIST_QUEUES  = '200';
+    const SUCCESS_CREATE_QUEUE = '201';
+    const SUCCESS_DELETE_QUEUE = '204';
 }
 
 ?>

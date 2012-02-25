@@ -28,7 +28,6 @@ use PEAR2\WindowsAzure\Services\Core\IServiceBuilder;
 use PEAR2\WindowsAzure\Services\Core\Configuration;
 use PEAR2\WindowsAzure\Services\Queue\QueueRestProxy;
 use PEAR2\WindowsAzure\Services\Queue\QueueConfiguration;
-use PEAR2\WindowsAzure\Services\Queue\QueueExceptionProcessor;
 use PEAR2\WindowsAzure\Services\Core\Filters\SharedKeyFilter;
 use PEAR2\WindowsAzure\Services\Core\Filters\DateFilter;
 use PEAR2\WindowsAzure\Resources;
@@ -61,12 +60,10 @@ class ServicesBuilder implements IServiceBuilder
         case Resources::QUEUE_TYPE_NAME:
             $httpClient = new HttpClient();
 
-            $queueRestProxy = new QueueRestProxy(
+            $queueWrapper = new QueueRestProxy(
                 $httpClient, $config->getProperty(QueueConfiguration::ACCOUNT_NAME),
                 $config->getProperty(QueueConfiguration::URI)
             );
-
-            $queueWrapper = new QueueExceptionProcessor($queueRestProxy);
 
             // Adding date filter
             $dateFilter   = new DateFilter();

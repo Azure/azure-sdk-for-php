@@ -29,7 +29,9 @@ use PEAR2\WindowsAzure\Services\Queue\QueueService;
 use PEAR2\WindowsAzure\Services\Queue\QueueConfiguration;
 use PEAR2\WindowsAzure\Services\Queue\Models\ListQueueOptions;
 use PEAR2\WindowsAzure\Services\Queue\Models\ListQueueResult;
+use PEAR2\WindowsAzure\Services\Queue\Models\CreateQueueOptions;
 use PEAR2\Tests\Unit\TestResources;
+use PEAR2\WindowsAzure\Core\Exceptions\ServiceException;
 
 /**
 * Unit tests for QueueRestProxy class
@@ -41,113 +43,234 @@ use PEAR2\Tests\Unit\TestResources;
 * @version    Release: @package_version@
 * @link       http://pear.php.net/package/azure-sdk-for-php
 */
-class QueueRestProxyTest extends PHPUnit_Framework_TestCase
+class QueueRestProxyTest extends \RestTestBase
 {
-  /**
-  * @covers PEAR2\WindowsAzure\Services\Queue\QueueRestProxy::listQueues
-  */
-  public function testListQueues()
-  {
-    $config = Configuration::getInstance();
-    $config->setProperty(QueueConfiguration::ACCOUNT_KEY, TestResources::AZURE_KEY);
-    $config->setProperty(QueueConfiguration::ACCOUNT_NAME, TestResources::AZURE_ACCOUNT);
-    $config->setProperty(QueueConfiguration::URI, 'queue.core.windows.net');
-    $queueWrapper = QueueService::create($config);
-    $result = $queueWrapper->listQueues();
-    $queues = $result->getQueues();
+    /**
+    * @covers PEAR2\WindowsAzure\Services\Queue\QueueRestProxy::listQueues
+    */
+    public function testListQueuesSimple()
+    {
+        // Setup
+        $queue1 = 'listqueuesimple1';
+        $queue2 = 'listqueuesimple2';
+        $queue3 = 'listqueuesimple3';
+
+        parent::createQueue($queue1);
+        parent::createQueue($queue2);
+        parent::createQueue($queue3);
+        
+        // Test
+        $result = $this->queueWrapper->listQueues();
+
+        // Assert
+        $queues = $result->getQueues();
+        $this->assertEquals($queue1, $queues[0]->getName());
+        $this->assertEquals($queue2, $queues[1]->getName());
+        $this->assertEquals($queue3, $queues[2]->getName());
+    }
+
+    /**
+    * @covers PEAR2\WindowsAzure\Services\Queue\QueueRestProxy::listQueues
+    */
+    public function testListQueuesWithOptions()
+    {
+        // Setup
+        $queue1        = 'listqueuewithoptions1';
+        $queue2        = 'listqueuewithoptions2';
+        $queue3        = 'mlistqueuewithoptions3';
+        $metadataName  = 'Mymetadataname';
+        $metadataValue = 'MetadataValue';
+        $options = new CreateQueueOptions();
+        $options->addMetadata($metadataName, $metadataValue);
+        parent::createQueue($queue1);
+        parent::createQueue($queue2, $options);
+        parent::createQueue($queue3);
+        $options = new ListQueueOptions();
+        $options->setPrefix('list');
+        $options->setIncludeMetadata(true);
+        
+        // Test
+        $result = $this->queueWrapper->listQueues($options);
+        
+        // Assert
+        $queues   = $result->getQueues();
+        $metadata = $queues[1]->getMetadata();
+        $this->assertEquals(2, count($queues));
+        $this->assertEquals($queue1, $queues[0]->getName());
+        $this->assertEquals($queue2, $queues[1]->getName());
+        $this->assertEquals($metadataValue, $metadata[$metadataName]);
+    }
+
+    /**
+    * @covers PEAR2\WindowsAzure\Services\Queue\QueueRestProxy::listQueues
+    */
+    public function testListQueuesWithNextMarker()
+    {
+        // Setup
+        $queue1 = 'listqueueswithnextmarker1';
+        $queue2 = 'listqueueswithnextmarker2';
+        $queue3 = 'listqueueswithnextmarker3';
+        parent::createQueue($queue1);
+        parent::createQueue($queue2);
+        parent::createQueue($queue3);
+        $options = new ListQueueOptions();
+        $options->setMaxResults(2);
+        
+        // Test
+        $result = $this->queueWrapper->listQueues($options);
+        
+        // Assert
+        $queues = $result->getQueues();
+        $this->assertEquals(2, count($queues));
+        $this->assertEquals($queue1, $queues[0]->getName());
+        $this->assertEquals($queue2, $queues[1]->getName());
+        
+        // Test
+        $options->setMarker($result->getNextMarker());
+        $result = $this->queueWrapper->listQueues($options);
+        $queues = $result->getQueues();
+
+        // Assert
+        $this->assertEquals(1, count($queues));
+        $this->assertEquals($queue3, $queues[0]->getName());
+    }
     
-    $this->assertEquals('testqueue1', $queues[0]->getName());
-    $this->assertEquals('testqueue2', $queues[1]->getName());
-    $this->assertEquals('testqueue3', $queues[2]->getName());
-    $this->assertEquals('zikas3', $queues[3]->getName());
-  }
-  
-  /**
-  * @covers PEAR2\WindowsAzure\Services\Queue\QueueRestProxy::listQueues
-  */
-  public function testListQueuesWithOptions()
-  {
-    $config = Configuration::getInstance();
-    $config->setProperty(QueueConfiguration::ACCOUNT_KEY, TestResources::AZURE_KEY);
-    $config->setProperty(QueueConfiguration::ACCOUNT_NAME, TestResources::AZURE_ACCOUNT);
-    $config->setProperty(QueueConfiguration::URI, 'queue.core.windows.net');
-    $queueWrapper = QueueService::create($config);
-    $options = new ListQueueOptions();
-    $options->setPrefix('test');
-    $options->setIncludeMetadata(true);
-    $result = $queueWrapper->listQueues($options);
-    $queues = $result->getQueues();
+    /**
+    * @covers PEAR2\WindowsAzure\Services\Queue\QueueRestProxy::listQueues
+    */
+    public function testListQueuesWithInvalidNextMarkerFail()
+    {
+        // Setup
+        $queue1 = 'listqueueswithinvalidnextmarker1';
+        $queue2 = 'listqueueswithinvalidnextmarker2';
+        $queue3 = 'listqueueswithinvalidnextmarker3';
+        parent::createQueue($queue1);
+        parent::createQueue($queue2);
+        parent::createQueue($queue3);
+        $options = new ListQueueOptions();
+        $options->setMaxResults(2);
+        $this->setExpectedException(get_class(new ServiceException('409')));
+        
+        // Test
+        $this->queueWrapper->listQueues($options);
+        $options->setMarker('wrong marker');
+        $this->queueWrapper->listQueues($options);
+    }
+
+    /**
+    * @covers PEAR2\WindowsAzure\Services\Queue\QueueRestProxy::listQueues
+    */
+    public function testListQueuesWithNoQueues()
+    {
+        // Test
+        $result = $this->queueWrapper->listQueues();
+
+        // Assert
+        $queues = $result->getQueues();
+        $this->assertTrue(empty($queues));
+    }
+
+    /**
+    * @covers PEAR2\WindowsAzure\Services\Queue\QueueRestProxy::listQueues
+    */
+    public function testListQueuesWithOneResult()
+    {
+        // Setup
+        $queueName = 'listqueueswithoneresult';
+        parent::createQueue($queueName);
+        
+        // Test
+        $result = $this->queueWrapper->listQueues();
+        $queues = $result->getQueues();
+
+        // Assert
+        $this->assertEquals(1, count($queues));
+    }
+
+    /**
+    * @covers PEAR2\WindowsAzure\Services\Queue\QueueRestProxy::createQueue
+    */
+    public function testCreateQueueSimple()
+    {
+        // Setup
+        $queueName = 'createqueuesimple';
+        
+        // Test
+        $this->createQueue($queueName);
+        
+        // Assert
+        $result = $this->queueWrapper->listQueues();
+        $queues = $result->getQueues();
+        $this->assertEquals(1, count($queues));
+        $this->assertEquals($queues[0]->getName(), $queueName);
+    }
     
-    $this->assertEquals(3, count($queues));
-    $this->assertEquals('testqueue1', $queues[0]->getName());
-    $this->assertEquals('testqueue2', $queues[1]->getName());
-    $this->assertEquals('testqueue3', $queues[2]->getName());
-  }
-  
-  /**
-  * @covers PEAR2\WindowsAzure\Services\Queue\QueueRestProxy::listQueues
-  */
-  public function testListQueuesWithNextMarker()
-  {
-    $config = Configuration::getInstance();
-    $config->setProperty(QueueConfiguration::ACCOUNT_KEY, TestResources::AZURE_KEY);
-    $config->setProperty(QueueConfiguration::ACCOUNT_NAME, TestResources::AZURE_ACCOUNT);
-    $config->setProperty(QueueConfiguration::URI, 'queue.core.windows.net');
-    $queueWrapper = QueueService::create($config);
-    $options = new ListQueueOptions();
-    $options->setMaxResults(2);
-    $result = $queueWrapper->listQueues($options);
-    $queues = $result->getQueues();
-  
-    $this->assertEquals(2, count($queues));
-    $this->assertEquals('testqueue1', $queues[0]->getName());
-    $this->assertEquals('testqueue2', $queues[1]->getName());
+    /**
+    * @covers PEAR2\WindowsAzure\Services\Queue\QueueRestProxy::createQueue
+    */
+    public function testCreateQueueWithMetadata()
+    {
+        $queueName     = 'createqueuewithmetadata';
+        $metadataName  = 'Name';
+        $metadataValue = 'MyName';
+        $queueCreateOptions = new CreateQueueOptions();
+        $queueCreateOptions->addMetadata($metadataName, $metadataValue);
+        
+        // Test
+        $this->createQueue($queueName, $queueCreateOptions);
+
+        // Assert
+        $options = new ListQueueOptions();
+        $options->setIncludeMetadata(true);
+        $result   = $this->queueWrapper->listQueues($options);
+        $queues   = $result->getQueues();
+        $metadata = $queues[0]->getMetadata();
+        $this->assertEquals($metadataValue, $metadata[$metadataName]);
+    }
     
-    $options->setMarker($result->getNextMarker());
-    $result = $queueWrapper->listQueues($options);
-    $queues = $result->getQueues();
+    /**
+    * @covers PEAR2\WindowsAzure\Services\Queue\QueueRestProxy::createQueue
+    */
+    public function testCreateQueueInvalidNameFail()
+    {
+        // Setup
+        $queueName = 'CreateQueueInvalidNameFail';
+        $this->setExpectedException(get_class(new ServiceException('400')));
+        
+        // Test
+        $this->createQueue($queueName);
+    }
     
-    $this->assertEquals(2, count($queues));
-    $this->assertEquals('testqueue3', $queues[0]->getName());
-    $this->assertEquals('zikas3', $queues[1]->getName());
-  }
-  
-  /**
-  * @covers PEAR2\WindowsAzure\Services\Queue\QueueRestProxy::listQueues
-  */
-  public function testListQueuesWithNoQueues()
-  {
-    $config = Configuration::getInstance();
-    $config->setProperty(QueueConfiguration::ACCOUNT_KEY, TestResources::AZURE_KEY);
-    $config->setProperty(QueueConfiguration::ACCOUNT_NAME, TestResources::AZURE_ACCOUNT);
-    $config->setProperty(QueueConfiguration::URI, 'queue.core.windows.net');
-    $queueWrapper = QueueService::create($config);
-    $options = new ListQueueOptions();
-    $options->setPrefix('7amada');
-    $result = $queueWrapper->listQueues($options);
-    $queues = $result->getQueues();
-  
-    $this->assertTrue(empty($queues));
-  }
-  
-  /**
-  * @covers PEAR2\WindowsAzure\Services\Queue\QueueRestProxy::listQueues
-  */
-  public function testListQueuesWithOneResult()
-  {
-    $config = Configuration::getInstance();
-    $config->setProperty(QueueConfiguration::ACCOUNT_KEY, TestResources::AZURE_KEY);
-    $config->setProperty(QueueConfiguration::ACCOUNT_NAME, TestResources::AZURE_ACCOUNT);
-    $config->setProperty(QueueConfiguration::URI, 'queue.core.windows.net');
-    $queueWrapper = QueueService::create($config);
-    $options = new ListQueueOptions();
-    $options->setMaxResults(2);
-    $options->setPrefix('z');
-    $result = $queueWrapper->listQueues($options);
-    $queues = $result->getQueues();
-  
-    $this->assertEquals(1, count($queues));
-  }
+    /**
+    * @covers PEAR2\WindowsAzure\Services\Queue\QueueRestProxy::deleteQueue
+    */
+    public function testDeleteQueue()
+    {
+        // Setup
+        $queueName = 'deletequeue';
+        $this->queueWrapper->createQueue($queueName);
+        
+        // Test
+        $this->queueWrapper->deleteQueue($queueName);
+        
+        // Assert
+        $result = $this->queueWrapper->listQueues();
+        $queues = $result->getQueues();
+        $this->assertTrue(empty($queues));
+    }
+    
+    /**
+    * @covers PEAR2\WindowsAzure\Services\Queue\QueueRestProxy::deleteQueue
+    */
+    public function testDeleteQueueFail()
+    {
+        // Setup
+        $queueName = 'deletequeuefail';
+        $this->setExpectedException(get_class(new ServiceException('404')));
+        
+        // Test
+        $this->queueWrapper->deleteQueue($queueName);
+    }
 }
 
 ?>

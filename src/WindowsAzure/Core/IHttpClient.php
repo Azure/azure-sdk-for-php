@@ -149,6 +149,15 @@ interface IHttpClient
      * @return none.
      */
     public function appendUrlPath($urlPath);
+    
+    /**
+     * Sets successful status code
+     * 
+     * @param array|string $statusCodes successful status code.
+     * 
+     * @return none.
+     */
+    public function setSuccessfulStatusCode($statusCodes);
 }
 
 ?>

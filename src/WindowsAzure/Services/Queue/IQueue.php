@@ -86,11 +86,10 @@ interface IQueue
      * Deletes a queue.
      * 
      * @param string              $queueName           Queue to delete.
-     * @param QueueServiceOptions $queueServiceOptions Optional queue service options
      * 
      * @return none.
      */
-    public function deleteQueue($queueName, $queueServiceOptions = null);
+    public function deleteQueue($queueName);
 
     /**
      * Lists all queues in the storage account.

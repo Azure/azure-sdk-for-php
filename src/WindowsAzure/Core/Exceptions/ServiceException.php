@@ -26,7 +26,7 @@ namespace PEAR2\WindowsAzure\Core\Exceptions;
 use PEAR2\WindowsAzure\Resources;
 
 /**
- * Exception thrown if an argument type does not match with the expected type. 
+ * Fires when the response code is incorrect
  *
  * @category  Microsoft
  * @package   PEAR2\WindowsAzure\Core\Exceptions
@@ -36,18 +36,29 @@ use PEAR2\WindowsAzure\Resources;
  * @version   Release: @package_version@
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
-class InvalidArgumentTypeException extends \LogicException
+class ServiceException extends \LogicException
 {
+    private $stringValue;
+    private $message;
+    
     /**
      * Constructor
      *
-     * @param string $validType valid type that should be provided by the user.
+     * @param string $errorCode   status error code.
+     * @param string $stringValue the string value of the error code.
+     * @param string $message     the detailed message for the error.
      * 
-     * @return PEAR2\WindowsAzure\Core\Exceptions\InvalidArgumentTypeException
+     * @return PEAR2\WindowsAzure\Core\Exceptions\ServiceException
      */
-    public function __construct($validType)
+    public function __construct($errorCode, $stringValue = null, $message = null)
     {
-        parent::__construct(Resources::INVALID_TYPE_MSG . $validType);
+        parent::__construct(
+            sprintf(Resources::AZURE_ERROR_MSG, $errorCode, $stringValue, $message)
+        );
+        $this->code        = $errorCode;
+        $this->stringValue = $stringValue;
+        // Need to improve message parsing issue #32
+        $this->message     = $message;
     }
 }
 

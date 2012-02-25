@@ -26,6 +26,7 @@ namespace PEAR2\WindowsAzure\Services\Core;
 use PEAR2\WindowsAzure\Core\IHttpClient;
 use PEAR2\WindowsAzure\Core\IServiceFilter;
 use PEAR2\WindowsAzure\Resources;
+use PEAR2\WindowsAzure\Core\Exceptions\ServiceException;
 
 require_once 'HTTP/Request2.php';
 require_once 'XML/Unserializer.php';
@@ -46,6 +47,7 @@ class HttpClient implements IHttpClient
 {
     private $_request;
     private $_requestUrl;
+    private $_successfulStatusCodes;
     
     /**
      * Constructor
@@ -65,7 +67,32 @@ class HttpClient implements IHttpClient
         $this->_request->SetHeader(
             array(Resources::X_MS_VERSION => Resources::API_VERSION)
         );
-        $this->_requestUrl = null;
+        $this->_requestUrl      = null;
+        $this->_successfulStatusCodes = array();
+    }
+    
+    /**
+     * Resets request headers queyr variables and url path section. Also sets 
+     * x-ms-version header to latest version.
+     * 
+     * @return none
+     */
+    private function _resetRequest()
+    {
+        // Clear headers
+        $headerKeys = array_keys($this->getHeaders());
+        $this->setHeaders($headerKeys);
+        
+        // Reset url path section
+        $this->setUrlPath('/');
+        
+        // Clear query variables
+        $this->_requestUrl->setQuery(Resources::EMPTY_STRING);
+        
+        // Sets version header
+        $this->_request->SetHeader(
+            array(Resources::X_MS_VERSION => Resources::API_VERSION)
+        );
     }
 
     /**
@@ -99,7 +126,9 @@ class HttpClient implements IHttpClient
      */
     public function setQueryVariable($key, $value)
     {
-        $this->_requestUrl->setQueryVariable(strtolower($key), $value);
+        if (isset($value)) {
+            $this->_requestUrl->setQueryVariable(strtolower($key), $value);
+        }
     }
 
     /**
@@ -168,7 +197,7 @@ class HttpClient implements IHttpClient
      */
     public function setHeader($header, $value)
     {
-        $this->_request->SetHeader($header, $value);
+        $this->_request->SetHeader($header, $value, false);
     }
     
     /**
@@ -215,6 +244,8 @@ class HttpClient implements IHttpClient
      * @param array $filters HTTP filters which will be applied to the request before
      * send and then applied to the response.
      * 
+     * @throws PEAR2\WindowsAzure\Core\Exceptions\ServiceException
+     * 
      * @return string The response body.
      */
     public function send($filters)
@@ -230,8 +261,34 @@ class HttpClient implements IHttpClient
         foreach ($filters as $filter) {
             $response = $filter->handleResponse($this, $response);
         }
+        
+        $this->_resetRequest();
+        
+        if (!in_array($response->getStatus(), $this->_successfulStatusCodes)) {            
+            $errorCode      = $response->getStatus();
+            $stringValue    = $response->getReasonPhrase();
+            $errorDetails   = $response->getBody();
+            
+            throw new ServiceException($errorCode, $stringValue, $errorDetails);
+        }
 
         return $response->getBody();
+    }
+    
+    /**
+     * Sets successful status code
+     * 
+     * @param array|string $statusCodes successful status code.
+     * 
+     * @return none.
+     */
+    public function setSuccessfulStatusCode($statusCodes)
+    {
+        if (!is_array($statusCodes)) {
+            $this->_successfulStatusCodes[] = $statusCodes;
+        } else {
+            $this->_successfulStatusCodes = $statusCodes;
+        }
     }
 }
 

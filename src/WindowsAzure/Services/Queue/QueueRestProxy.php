@@ -29,8 +29,7 @@ use PEAR2\WindowsAzure\Services\Queue\Models\ListQueueOptions;
 use PEAR2\WindowsAzure\Services\Queue\Models\ListQueueResult;
 use PEAR2\WindowsAzure\Services\Queue\Models\CreateQueueOptions;
 use PEAR2\WindowsAzure\Core\IHttpClient;
-
-require_once 'XML/Unserializer.php';
+use PEAR2\WindowsAzure\Utilities\Utilities;
 
 /**
  * This class constructs HTTP requests and receive HTTP responses for queue 
@@ -65,19 +64,34 @@ class QueueRestProxy implements IQueue
         $this->_channel = $channel;
         $this->_filters = array();
     }
-
+    
     /**
-     * Unserializes the passed $xml into array.
+     * Generates metadata headers by prefixing each element with 'x-ms-meta'.
      *
-     * @param string $xml XML to be parsed.
+     * @param array $metadata user defined metadata.
      * 
      * @return array.
      */
-    private function _unserialize($xml)
+    private function _generateMetadataHeaders($metadata)
     {
-        $unserializer = new \XML_Unserializer();
-        $unserializer->unserialize($xml);
-        return $unserializer->getUnserializedData();
+        $metadataHeaders = array();
+        
+        if (is_array($metadata) && !empty($metadata)) {
+            foreach ($metadata as $key => $value) {
+                if (   strpos($value, "\r") !== false 
+                    || strpos($value, "\n") !== false
+                   ) {
+                        throw new \InvalidArgumentException(
+                                Resources::INVALID_META_MSG
+                        );
+                }
+                
+                $headerName = Resources::X_MS_META_HEADER_PREFIX . strtolower($key);
+                $metadataHeaders[$headerName] = $value;
+            }
+        }
+        
+        return $metadataHeaders;
     }
 
     /**
@@ -134,9 +148,11 @@ class QueueRestProxy implements IQueue
         $this->_channel->setQueryVariable(
             'include', $listQueuesOptions->isIncludeMetadata()? 'metadata':  null
         );
+        
+        $this->_channel->setSuccessfulStatusCode(Resources::SUCCESS_LIST_QUEUES);
 
         $responseBody   = $this->_channel->send($this->_filters);
-        $parsedResponse = $this->_unserialize($responseBody);
+        $parsedResponse = Utilities::unserialize($responseBody);
 
         return ListQueueResult::createFromParsedResponse($parsedResponse);
     }
@@ -185,9 +201,16 @@ class QueueRestProxy implements IQueue
         }
 
         $this->_channel->setMethod(\HTTP_Request2::METHOD_PUT);
-        $this->_channel->setHeaders($metadata);
+        $this->_channel->appendUrlPath($queueName);
+        // Set metadata headers.
+        $metadataHeaders = $this->_generateMetadataHeaders(
+            $createQueueOptions->getMetadata()
+        );
+        $this->_channel->setHeaders($metadataHeaders);
+        $this->_channel->setHeader(Resources::CONTENT_LENGTH, 0);
+        $this->_channel->setSuccessfulStatusCode(Resources::SUCCESS_CREATE_QUEUE);
 
-        $responseBody   = $this->_channel->send($this->_filters);
+        $this->_channel->send($this->_filters);
     }
 
     /**
@@ -210,14 +233,17 @@ class QueueRestProxy implements IQueue
     /**
      * Deletes a queue.
      * 
-     * @param string              $queueName           Queue to delete.
-     * @param QueueServiceOptions $queueServiceOptions Optional queue service options
+     * @param string $queueName Queue name to delete.
      * 
      * @return none.
      */
-    public function deleteQueue($queueName, $queueServiceOptions = null)
+    public function deleteQueue($queueName)
     {
-
+        $this->_channel->setMethod(\HTTP_Request2::METHOD_DELETE);
+        $this->_channel->appendUrlPath($queueName);
+        $this->_channel->setSuccessfulStatusCode(Resources::SUCCESS_DELETE_QUEUE);
+        
+        $this->_channel->send($this->_filters);
     }
 
     /**
