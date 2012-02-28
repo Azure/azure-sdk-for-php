@@ -26,7 +26,7 @@
 use PEAR2\WindowsAzure\Services\Core\Configuration;
 use PEAR2\WindowsAzure\Services\Queue\IQueue;
 use PEAR2\WindowsAzure\Services\Queue\QueueService;
-use PEAR2\WindowsAzure\Services\Queue\QueueConfiguration;
+use PEAR2\WindowsAzure\Services\Queue\QueueSettings;
 use PEAR2\WindowsAzure\Services\Queue\Models\ListQueueOptions;
 use PEAR2\WindowsAzure\Services\Queue\Models\ListQueueResult;
 use PEAR2\Tests\Unit\TestResources;
@@ -49,9 +49,9 @@ class QueueRestProxyTest extends PHPUnit_Framework_TestCase
   public function testListQueues()
   {
     $config = Configuration::getInstance();
-    $config->setProperty(QueueConfiguration::ACCOUNT_KEY, TestResources::accountKey());
-    $config->setProperty(QueueConfiguration::ACCOUNT_NAME, TestResources::accountName());
-    $config->setProperty(QueueConfiguration::URI, 'queue.core.windows.net');
+    $config->setProperty(QueueSettings::ACCOUNT_KEY, TestResources::accountKey());
+    $config->setProperty(QueueSettings::ACCOUNT_NAME, TestResources::accountName());
+    $config->setProperty(QueueSettings::URI, 'queue.core.windows.net');
     $queueWrapper = QueueService::create($config);
     $result = $queueWrapper->listQueues();
     $queues = $result->getQueues();
@@ -68,9 +68,9 @@ class QueueRestProxyTest extends PHPUnit_Framework_TestCase
   public function testListQueuesWithOptions()
   {
     $config = Configuration::getInstance();
-    $config->setProperty(QueueConfiguration::ACCOUNT_KEY, TestResources::accountKey());
-    $config->setProperty(QueueConfiguration::ACCOUNT_NAME, TestResources::accountName());
-    $config->setProperty(QueueConfiguration::URI, 'queue.core.windows.net');
+    $config->setProperty(QueueSettings::ACCOUNT_KEY, TestResources::accountKey());
+    $config->setProperty(QueueSettings::ACCOUNT_NAME, TestResources::accountName());
+    $config->setProperty(QueueSettings::URI, 'queue.core.windows.net');
     $queueWrapper = QueueService::create($config);
     $options = new ListQueueOptions();
     $options->setPrefix('test');
@@ -90,12 +90,12 @@ class QueueRestProxyTest extends PHPUnit_Framework_TestCase
   public function testListQueuesWithNextMarker()
   {
     $config = Configuration::getInstance();
-    $config->setProperty(QueueConfiguration::ACCOUNT_KEY, TestResources::accountKey());
-    $config->setProperty(QueueConfiguration::ACCOUNT_NAME, TestResources::accountName());
-    $config->setProperty(QueueConfiguration::URI, 'queue.core.windows.net');
+    $config->setProperty(QueueSettings::ACCOUNT_KEY, TestResources::accountKey());
+    $config->setProperty(QueueSettings::ACCOUNT_NAME, TestResources::accountName());
+    $config->setProperty(QueueSettings::URI, 'queue.core.windows.net');
     $queueWrapper = QueueService::create($config);
     $options = new ListQueueOptions();
-    $options->setMaxResults(2);
+    $options->setMaxResults('2');
     $result = $queueWrapper->listQueues($options);
     $queues = $result->getQueues();
   
@@ -118,9 +118,9 @@ class QueueRestProxyTest extends PHPUnit_Framework_TestCase
   public function testListQueuesWithNoQueues()
   {
     $config = Configuration::getInstance();
-    $config->setProperty(QueueConfiguration::ACCOUNT_KEY, TestResources::accountKey());
-    $config->setProperty(QueueConfiguration::ACCOUNT_NAME, TestResources::accountName());
-    $config->setProperty(QueueConfiguration::URI, 'queue.core.windows.net');
+    $config->setProperty(QueueSettings::ACCOUNT_KEY, TestResources::accountKey());
+    $config->setProperty(QueueSettings::ACCOUNT_NAME, TestResources::accountName());
+    $config->setProperty(QueueSettings::URI, 'queue.core.windows.net');
     $queueWrapper = QueueService::create($config);
     $options = new ListQueueOptions();
     $options->setPrefix('7amada');
@@ -136,12 +136,12 @@ class QueueRestProxyTest extends PHPUnit_Framework_TestCase
   public function testListQueuesWithOneResult()
   {
     $config = Configuration::getInstance();
-    $config->setProperty(QueueConfiguration::ACCOUNT_KEY, TestResources::accountKey());
-    $config->setProperty(QueueConfiguration::ACCOUNT_NAME, TestResources::accountName());
-    $config->setProperty(QueueConfiguration::URI, 'queue.core.windows.net');
+    $config->setProperty(QueueSettings::ACCOUNT_KEY, TestResources::accountKey());
+    $config->setProperty(QueueSettings::ACCOUNT_NAME, TestResources::accountName());
+    $config->setProperty(QueueSettings::URI, 'queue.core.windows.net');
     $queueWrapper = QueueService::create($config);
     $options = new ListQueueOptions();
-    $options->setMaxResults(2);
+    $options->setMaxResults('2');
     $options->setPrefix('z');
     $result = $queueWrapper->listQueues($options);
     $queues = $result->getQueues();

@@ -25,7 +25,7 @@
 namespace PEAR2\WindowsAzure\Services\Core\Filters;
 use PEAR2\WindowsAzure\Resources;
 use PEAR2\WindowsAzure\Core\IServiceFilter;
-use PEAR2\WindowsAzure\Services\Core\Authentication\BlobQueueSharedKey;
+use PEAR2\WindowsAzure\Services\Core\Authentication\SharedKeyAuthenticationScheme;
 
 /**
  * Adds authentication header to the http request object.
@@ -49,15 +49,16 @@ class SharedKeyFilter implements IServiceFilter
      * @param string $accountKey  storage account primary or secondary key.
      * @param string $type        storage account type.
      * 
-     * @return mixed if Queue or Blob will return
-     *         PEAR2\WindowsAzure\Services\Core\Authentication\BlobQueueSharedKey
+     * @return
+     * PEAR2\WindowsAzure\Services\Core\Authentication\SharedKeyAuthenticationScheme
+     *         
      */
     public function __construct($accountName, $accountKey, $type)
     {
         switch ($type) {
         case Resources::QUEUE_TYPE_NAME:
-            $this->_sharedKeyAuthentication = new BlobQueueSharedKey(
-                    $accountName, $accountKey
+            $this->_sharedKeyAuthentication = new SharedKeyAuthenticationScheme(
+                $accountName, $accountKey
             );
             break;
 
@@ -77,7 +78,7 @@ class SharedKeyFilter implements IServiceFilter
     {
         $signedKey = $this->_sharedKeyAuthentication->getAuthorizationHeader(
             $request->getHeaders(), $request->getUrl(),
-            $request->getQueryVariables(), $request->getMethod()
+            $request->getUrl()->getQueryVariables(), $request->getMethod()
         );
         $request->setHeader(Resources::AUTHENTICATION, $signedKey);
 

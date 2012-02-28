@@ -24,10 +24,10 @@
  */
  
 namespace PEAR2\Tests\Mock\WindowsAzure\Services\Core\Authentication;
-use PEAR2\WindowsAzure\Services\Core\Authentication\StorageAuthenticationSchema;
+use PEAR2\WindowsAzure\Services\Core\Authentication\StorageAuthenticationScheme;
 
 /**
- * Mock class to wrap StorageAuthenticationSchema class.
+ * Mock class to wrap StorageAuthenticationScheme class.
  *
  * @package    Azure-sdk-for-php
  * @author     Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
@@ -36,7 +36,7 @@ use PEAR2\WindowsAzure\Services\Core\Authentication\StorageAuthenticationSchema;
  * @version    Release: @package_version@
  * @link       http://pear.php.net/package/azure-sdk-for-php
  */
-class StorageAuthenticationSchemaMock extends StorageAuthenticationSchema
+class StorageAuthenticationSchemaMock extends StorageAuthenticationScheme
 {
     public function __construct($accountName, $accountKey)
     {

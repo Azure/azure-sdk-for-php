@@ -44,44 +44,6 @@ class Queue
     private $_metadata;
 
     /**
-     * Creates new PEAR2\WindowsAzure\Services\Queue\Models\Queue object 
-     * from parsed XML.
-     * 
-     * @param array $raw parsed XML.
-     * 
-     * @static
-     * 
-     * @return PEAR2\WindowsAzure\Services\Queue\Queue.
-     */
-    public static function createOneObject($raw)
-    {
-        $queue = new Queue($raw['Name'], $raw['Url']);
-        $queue->setMetadata(Utilities::tryGetValue($raw, Resources::METADATA, null));
-
-        return $queue;
-    }
-
-    /**
-     * Creates an array of PEAR2\WindowsAzure\Services\Queue\Models\Queue from 
-     * parsed XML.
-     * 
-     * @param array $raw parsed XML.
-     * 
-     * @static
-     * 
-     * @return array.
-     */
-    public static function createArray($raw)
-    {
-        $queues = array();
-        foreach ($raw as $rawQueue) {
-            $queues[] = self::createOneObject($rawQueue);
-        }
-
-        return $queues;
-    }
-
-    /**
      * Constructor
      * 
      * @param string $name queue name.

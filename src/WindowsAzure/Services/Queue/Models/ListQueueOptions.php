@@ -24,6 +24,7 @@
  
 namespace PEAR2\WindowsAzure\Services\Queue\Models;
 use PEAR2\WindowsAzure\Services\Queue\Models\QueueServiceOptions;
+use \PEAR2\WindowsAzure\Utilities\Validate;
 
 /**
  * Options for listQueues API.
@@ -44,7 +45,7 @@ class ListQueueOptions extends QueueServiceOptions
     private $_includeMetadata;
 
     /**
-     * Gets perfix.
+     * Gets prefix.
      *
      * @return string.
      */
@@ -62,6 +63,7 @@ class ListQueueOptions extends QueueServiceOptions
      */
     public function setPrefix($prefix)
     {
+        Validate::isString($prefix);
         $this->_prefix = $prefix;
     }
 
@@ -84,6 +86,7 @@ class ListQueueOptions extends QueueServiceOptions
      */
     public function setMarker($marker)
     {
+        Validate::isString($marker);
         $this->_marker = $marker;
     }
 
@@ -106,6 +109,7 @@ class ListQueueOptions extends QueueServiceOptions
      */
     public function setMaxResults($maxResults)
     {
+        Validate::isString($maxResults);
         $this->_maxResults = $maxResults;
     }
 
@@ -128,6 +132,7 @@ class ListQueueOptions extends QueueServiceOptions
      */
     public function setIncludeMetadata($includeMetadata)
     {
+        Validate::isBool($includeMetadata);
         $this->_includeMetadata = $includeMetadata;
     }
 }

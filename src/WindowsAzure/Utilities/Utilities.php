@@ -49,7 +49,7 @@ class Utilities
      * 
      * @return mixed.
      */
-    public static function tryGetValue($array, $key, $default)
+    public static function tryGetValue($array, $key, $default = null)
     {
         return array_key_exists($key, $array) ? $array[$key] : $default;
     }
@@ -67,6 +67,26 @@ class Utilities
     public static function startsWith($string, $prefix)
     {
         return ($prefix == substr($string, 0, strlen($prefix)));
+    }
+    
+    /**
+     * Returns grouped items from passed $var
+     *
+     * @param array $var item to group
+     * 
+     * @static
+     * 
+     * @return array.
+     */
+    public static function getArray($var)
+    {
+        foreach ($var as $value) {
+            if (is_array($value)) {
+                return $var;
+            } else {
+                return array($var);
+            }
+        }
     }
 }
 

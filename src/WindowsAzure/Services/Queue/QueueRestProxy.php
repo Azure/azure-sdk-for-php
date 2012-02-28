@@ -28,6 +28,7 @@ use PEAR2\WindowsAzure\Resources;
 use PEAR2\WindowsAzure\Services\Queue\Models\ListQueueOptions;
 use PEAR2\WindowsAzure\Services\Queue\Models\ListQueueResult;
 use PEAR2\WindowsAzure\Core\IHttpClient;
+use PEAR2\WindowsAzure\Core\Url;
 
 require_once 'XML/Unserializer.php';
 
@@ -47,6 +48,7 @@ class QueueRestProxy implements IQueue
 {
     private $_channel;
     private $_filters;
+    private $_url;
 
     /**
      * Constructor
@@ -60,7 +62,9 @@ class QueueRestProxy implements IQueue
      */
     public function __construct($channel, $accountName, $uri)
     {
-        $channel->setUrl(sprintf(Resources::STORAGE_URI, $accountName, $uri));
+        $this->_url     = new Url(
+            sprintf(Resources::STORAGE_URI, $accountName, $uri)
+        );
         $this->_channel = $channel;
         $this->_filters = array();
     }
@@ -120,20 +124,21 @@ class QueueRestProxy implements IQueue
         }
 
         $this->_channel->setMethod(\HTTP_Request2::METHOD_GET);
-        $this->_channel->setQueryVariable('comp', 'list');
-        $this->_channel->setQueryVariable(
+        $this->_url->setQueryVariable('comp', 'list');
+        $this->_url->setQueryVariable(
             Resources::PREFIX, $listQueuesOptions->getPrefix()
         );
-        $this->_channel->setQueryVariable(
+        $this->_url->setQueryVariable(
             Resources::MARKER, $listQueuesOptions->getMarker()
         );
-        $this->_channel->setQueryVariable(
+        $this->_url->setQueryVariable(
             Resources::MAX_RESULTS, $listQueuesOptions->getMaxResults()
         );
-        $this->_channel->setQueryVariable(
+        $this->_url->setQueryVariable(
             'include', $listQueuesOptions->getIncludeMetadata()? 'metadata':  null
         );
 
+        $this->_channel->setUrl($this->_url);
         $responseBody   = $this->_channel->send($this->_filters);
         $parsedResponse = $this->_unserialize($responseBody);
 
@@ -150,7 +155,7 @@ class QueueRestProxy implements IQueue
      */
     public function clearMessages($queueName, $queueServiceOptions = null)
     {
-
+        throw new \Exception(Resources::NOT_IMPLEMENTED_MSG);
     }
 
     /**
@@ -166,7 +171,7 @@ class QueueRestProxy implements IQueue
     public function createMessage($queueName, $messageText, 
         $createMessageOptions = null
     ) {
-
+        throw new \Exception(Resources::NOT_IMPLEMENTED_MSG);
     }
 
     /**
@@ -179,7 +184,7 @@ class QueueRestProxy implements IQueue
      */
     public function createQueue($queueName, $createQueueOptions = null)
     {
-
+        throw new \Exception(Resources::NOT_IMPLEMENTED_MSG);
     }
 
     /**
@@ -196,7 +201,7 @@ class QueueRestProxy implements IQueue
     public function deleteMessage($queueName, $messageId, $popReceipt, 
         $queueServiceOptions = null
     ) {
-
+        throw new \Exception(Resources::NOT_IMPLEMENTED_MSG);
     }
 
     /**
@@ -209,7 +214,7 @@ class QueueRestProxy implements IQueue
      */
     public function deleteQueue($queueName, $queueServiceOptions = null)
     {
-
+        throw new \Exception(Resources::NOT_IMPLEMENTED_MSG);
     }
 
     /**
@@ -222,7 +227,7 @@ class QueueRestProxy implements IQueue
      */
     public function getQueueMetadata($queueName, $queueServiceOptions = null)
     {
-
+        throw new \Exception(Resources::NOT_IMPLEMENTED_MSG);
     }
 
     /**
@@ -235,7 +240,7 @@ class QueueRestProxy implements IQueue
      */
     public function getServiceProperties($queueServiceOptions = null)
     {
-
+        throw new \Exception(Resources::NOT_IMPLEMENTED_MSG);
     }
 
     /**
@@ -248,7 +253,7 @@ class QueueRestProxy implements IQueue
      */
     public function listMessages($queueName, $listMessagesOptions = null)
     {
-
+        throw new \Exception(Resources::NOT_IMPLEMENTED_MSG);
     }
 
     /**
@@ -262,7 +267,7 @@ class QueueRestProxy implements IQueue
      */
     public function peekMessages($queueName, $peekMessagesOptions = null)
     {
-
+        throw new \Exception(Resources::NOT_IMPLEMENTED_MSG);
     }
 
     /**
@@ -278,7 +283,7 @@ class QueueRestProxy implements IQueue
     public function setQueueMetadata($queueName, $metadata, 
         $queueServiceOptions = null
     ) {
-
+        throw new \Exception(Resources::NOT_IMPLEMENTED_MSG);
     }
 
     /**
@@ -292,7 +297,7 @@ class QueueRestProxy implements IQueue
     public function setServiceProperties($serviceProperties, 
         $queueServiceOptions = null
     ) {
-
+        throw new \Exception(Resources::NOT_IMPLEMENTED_MSG);
     }
 
     /**
@@ -318,7 +323,7 @@ class QueueRestProxy implements IQueue
     public function updateMessage($queueName, $messageId, $popReceipt, $messageText, 
         $visibilityTimeoutInSeconds, $queueServiceOptions = null
     ) {
-
+        throw new \Exception(Resources::NOT_IMPLEMENTED_MSG);
     }
 }
 

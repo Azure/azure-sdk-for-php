@@ -27,12 +27,12 @@ namespace PEAR2\WindowsAzure\Services\Core;
 use PEAR2\WindowsAzure\Services\Core\IServiceBuilder;
 use PEAR2\WindowsAzure\Services\Core\Configuration;
 use PEAR2\WindowsAzure\Services\Queue\QueueRestProxy;
-use PEAR2\WindowsAzure\Services\Queue\QueueConfiguration;
+use PEAR2\WindowsAzure\Services\Queue\QueueSettings;
 use PEAR2\WindowsAzure\Services\Queue\QueueExceptionProcessor;
 use PEAR2\WindowsAzure\Services\Core\Filters\SharedKeyFilter;
 use PEAR2\WindowsAzure\Services\Core\Filters\DateFilter;
 use PEAR2\WindowsAzure\Resources;
-use PEAR2\WindowsAzure\Core\Exceptions\InvalidArgumentTypeException;
+use PEAR2\WindowsAzure\Core\InvalidArgumentTypeException;
 
 /**
  * Builds azure service objects.
@@ -54,13 +54,13 @@ class ServicesBuilder implements IServiceBuilder
      * 
      * @return IQueue.
      */
-    private static function buildQueue($config)
+    private static function _buildQueue($config)
     {
         $httpClient = new HttpClient();
 
         $queueRestProxy = new QueueRestProxy(
-            $httpClient, $config->getProperty(QueueConfiguration::ACCOUNT_NAME),
-            $config->getProperty(QueueConfiguration::URI)
+            $httpClient, $config->getProperty(QueueSettings::ACCOUNT_NAME),
+            $config->getProperty(QueueSettings::URI)
         );
 
         $queueWrapper = new QueueExceptionProcessor($queueRestProxy);
@@ -71,8 +71,8 @@ class ServicesBuilder implements IServiceBuilder
 
         // Adding authentication filter
         $authFilter = new SharedKeyFilter(
-            $config->getProperty(QueueConfiguration::ACCOUNT_NAME),
-            $config->getProperty(QueueConfiguration::ACCOUNT_KEY),
+            $config->getProperty(QueueSettings::ACCOUNT_NAME),
+            $config->getProperty(QueueSettings::ACCOUNT_KEY),
             Resources::QUEUE_TYPE_NAME
         );
 
@@ -93,7 +93,7 @@ class ServicesBuilder implements IServiceBuilder
     {
         switch ($type) {
         case Resources::QUEUE_TYPE_NAME:
-            return self::buildQueue($config);
+            return self::_buildQueue($config);
 
         default: 
             throw new InvalidArgumentTypeException(Resources::QUEUE_TYPE_NAME);

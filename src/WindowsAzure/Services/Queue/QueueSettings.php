@@ -35,7 +35,7 @@ namespace PEAR2\WindowsAzure\Services\Queue;
  * @version   Release: @package_version@
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
-class QueueConfiguration
+class QueueSettings
 {
     const ACCOUNT_NAME = 'queue.accountName';
     const ACCOUNT_KEY  = 'queue.accountKey';

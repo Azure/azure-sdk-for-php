@@ -27,10 +27,10 @@ use PEAR2\WindowsAzure\Core\IHttpClient;
 use PEAR2\WindowsAzure\Core\IServiceFilter;
 use PEAR2\WindowsAzure\Resources;
 use PEAR2\WindowsAzure\Utilities\Validate;
+use PEAR2\WindowsAzure\Core\IUrl;
 
 require_once 'HTTP/Request2.php';
 require_once 'XML/Unserializer.php';
-require_once 'Net/URL2.php';
 
 /**
  * HTTP client which sends and receives HTTP requests and responses.
@@ -45,7 +45,13 @@ require_once 'Net/URL2.php';
  */
 class HttpClient implements IHttpClient
 {
+    /**
+     * @var \HTTP_Request2 
+     */
     private $_request;
+    /**
+     * @var PEAR2\WindowsAzure\Core\IUrl 
+     */
     private $_requestUrl;
     
     /**
@@ -70,62 +76,24 @@ class HttpClient implements IHttpClient
     }
 
     /**
-     * Returns the query portion of the url
-     * 
-     * @return string
-     */
-    public function getQuery()
-    {
-        Validate::isNull($this->_requestUrl);
-        return $this->_requestUrl->getQuery();
-    }
-
-    /**
-     * Returns the query portion of the url in array form
-     * 
-     * @return array
-     */
-    public function getQueryVariables()
-    {
-        Validate::isNull($this->_requestUrl);
-        return $this->_requestUrl->getQueryVariables();
-    }
-
-    /**
-     * Sets a an existing query parameter to value or creates a new one if the $key
-     * doesn't exist.
-     * 
-     * @param string $key   query parameter name.
-     * @param string $value query value.
-     * 
-     * @return none.
-     */
-    public function setQueryVariable($key, $value)
-    {
-        Validate::isNull($this->_requestUrl);
-        $this->_requestUrl->setQueryVariable(strtolower($key), $value);
-    }
-
-    /**
      * Sets the request url.
      *
-     * @param string $url request url.
+     * @param PEAR2\WindowsAzure\Core\IUrl $url request url.
      * 
      * @return none.
      */
     public function setUrl($url)
     {
-        $this->_requestUrl = new \Net_URL2($url);
+        $this->_requestUrl = $url;
     }
 
     /**
      * Gets request url.
      *
-     * @return string
+     * @return PEAR2\WindowsAzure\Core\IUrl
      */
     public function getUrl()
     {
-        Validate::isNull($this->_requestUrl);
         return $this->_requestUrl;
     }
 
@@ -135,7 +103,7 @@ class HttpClient implements IHttpClient
      * 
      * @param string $method request's HTTP method.
      * 
-     * @return \Net_URL2
+     * @return none.
      */
     public function setMethod($method)
     {
@@ -187,7 +155,7 @@ class HttpClient implements IHttpClient
      */
     public function send($filters)
     {
-        $this->_request->setUrl($this->_requestUrl);
+        $this->_request->setUrl($this->_requestUrl->getUrl());
 
         foreach ($filters as $filter) {
             $this->_request = $filter->handleRequest($this)->_request;
@@ -195,7 +163,8 @@ class HttpClient implements IHttpClient
 
         $response = $this->_request->send();
 
-        for ($index = count($filters) - 1; $index < count($filter); $index--) {
+        $count = count($filter);
+        for ($index = count($filters) - 1; $index < $count; $index--) {
             $response = $filters[$index]->handleResponse($this, $response);
         }
 

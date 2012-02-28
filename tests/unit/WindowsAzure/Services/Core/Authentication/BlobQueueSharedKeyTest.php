@@ -29,7 +29,7 @@ use PEAR2\WindowsAzure\Resources;
 use PEAR2\Tests\Unit\TestResources;
 
 /**
- * Unit tests for BlobQueueSharedKey class.
+ * Unit tests for SharedKeyAuthenticationScheme class.
  *
  * @package    Azure-sdk-for-php
  * @author     Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
@@ -41,7 +41,7 @@ use PEAR2\Tests\Unit\TestResources;
 class BlobQueueSharedKeyTest extends PHPUnit_Framework_TestCase
 {
   /**
-  * @covers PEAR2\WindowsAzure\Services\Core\Authentication\BlobQueueSharedKey::__construct
+  * @covers PEAR2\WindowsAzure\Services\Core\Authentication\SharedKeyAuthenticationScheme::__construct
   */
   public function test__construct()
   {
@@ -64,7 +64,7 @@ class BlobQueueSharedKeyTest extends PHPUnit_Framework_TestCase
   }
   
   /**
-  * @covers PEAR2\WindowsAzure\Services\Core\Authentication\BlobQueueSharedKey::ComputeSignature
+  * @covers PEAR2\WindowsAzure\Services\Core\Authentication\SharedKeyAuthenticationScheme::ComputeSignature
   */
   public function testComputeSignatureSimple()
   {
@@ -85,7 +85,7 @@ class BlobQueueSharedKeyTest extends PHPUnit_Framework_TestCase
   }
   
     /**
-  * @covers PEAR2\WindowsAzure\Services\Core\Authentication\StorageAuthenticationSchema::GetAuthorizationHeader
+  * @covers PEAR2\WindowsAzure\Services\Core\Authentication\StorageAuthenticationScheme::GetAuthorizationHeader
   */
   public function testGetAuthorizationHeaderSimple()
   {

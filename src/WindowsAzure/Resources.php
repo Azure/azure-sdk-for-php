@@ -39,6 +39,7 @@ class Resources
 {
     // Messages
     const INVALID_TYPE_MESSAGE = 'The provided variable should be of type: ';
+    const NOT_IMPLEMENTED_MSG  = 'This method is not implemented';
 
     // HTTP Headers
     const X_MS_VERSION        = 'x-ms-version';
@@ -60,6 +61,7 @@ class Resources
     // Misc
     const QUEUE_TYPE_NAME = 'IQueue';
     const STORAGE_URI     = 'http://%s.%s/';
+    const EMPTY_STRING    = '';
 
     // Versioning
     const API_VERSION = '2011-08-18';

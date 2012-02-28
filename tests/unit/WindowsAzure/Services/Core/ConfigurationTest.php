@@ -27,8 +27,8 @@
 use PEAR2\WindowsAzure\Services\Core\Configuration;
 use PEAR2\Tests\Unit\TestResources;
 use PEAR2\WindowsAzure\Resources;
-use PEAR2\WindowsAzure\Core\Exceptions\InvalidArgumentTypeException;
-use PEAR2\WindowsAzure\Services\Queue\QueueConfiguration;
+use PEAR2\WindowsAzure\Core\InvalidArgumentTypeException;
+use PEAR2\WindowsAzure\Services\Queue\QueueSettings;
 
 /**
  * Unit tests for Configuration class
@@ -96,9 +96,9 @@ class ConfigurationTest extends PHPUnit_Framework_TestCase
   public function testCreate()
   {
     $config = Configuration::GetInstance();
-    $config->setProperty(QueueConfiguration::ACCOUNT_KEY, TestResources::KEY1);
-    $config->setProperty(QueueConfiguration::ACCOUNT_NAME, TestResources::ACCOUNT_NAME);
-    $config->setProperty(QueueConfiguration::URI, TestResources::QUEUE_URI);
+    $config->setProperty(QueueSettings::ACCOUNT_KEY, TestResources::KEY1);
+    $config->setProperty(QueueSettings::ACCOUNT_NAME, TestResources::ACCOUNT_NAME);
+    $config->setProperty(QueueSettings::URI, TestResources::QUEUE_URI);
     $queueWrapper = $config->create(Resources::QUEUE_TYPE_NAME);
     
     $this->assertInstanceOf('PEAR2\\WindowsAzure\\Services\\Queue\\' . Resources::QUEUE_TYPE_NAME, $queueWrapper);
@@ -112,9 +112,9 @@ class ConfigurationTest extends PHPUnit_Framework_TestCase
     $invalidType = gettype('');
     $this->setExpectedException(get_class(new InvalidArgumentTypeException('')), Resources::INVALID_TYPE_MESSAGE . Resources::QUEUE_TYPE_NAME);
     $config = Configuration::getInstance();
-    $config->setProperty(QueueConfiguration::ACCOUNT_KEY, TestResources::KEY1);
-    $config->setProperty(QueueConfiguration::ACCOUNT_NAME, TestResources::ACCOUNT_NAME);
-    $config->setProperty(QueueConfiguration::URI, TestResources::QUEUE_URI);
+    $config->setProperty(QueueSettings::ACCOUNT_KEY, TestResources::KEY1);
+    $config->setProperty(QueueSettings::ACCOUNT_NAME, TestResources::ACCOUNT_NAME);
+    $config->setProperty(QueueSettings::URI, TestResources::QUEUE_URI);
     $config->create($invalidType);
   }
 }

@@ -57,28 +57,27 @@ class ListQueueResult
     {
         $result              = new ListQueueResult();
         $result->_prefix     = Utilities::tryGetValue(
-            $parsedResponse, Resources::PREFIX, null
+            $parsedResponse, Resources::PREFIX
         );
         $result->_marker     = Utilities::tryGetValue(
-            $parsedResponse, Resources::MARKER, null
+            $parsedResponse, Resources::MARKER
         );
         $result->_nextMarker = Utilities::tryGetValue(
-            $parsedResponse, Resources::NEXT_MARKER, null
+            $parsedResponse, Resources::NEXT_MARKER
         );
         $result->_queues     = array();
-        $rawQueuesList       = is_array($parsedResponse['Queues']) ? 
-            $parsedResponse['Queues']['Queue'] : array();
-
-        if (!is_array($parsedResponse['Queues'])) {
-            // There are no queues returned. Do nothing.
-        } else if (array_key_exists('Name', $rawQueuesList)) {
-            // Just one queue is returned.
-            $result->_queues[] = Queue::createOneObject($rawQueuesList);
-        } else {
-            // Multiple queues are returned
-            $result->_queues = Queue::createArray($rawQueuesList);
+        $rawQueues           = array();
+        
+        if (is_array($parsedResponse['Queues'])) {
+            $rawQueues = Utilities::getArray($parsedResponse['Queues']['Queue']);
         }
-
+        
+        foreach ($rawQueues as $value) {
+            $queue = new Queue($value['Name'], $value['Url']);
+            $queue->setMetadata(Utilities::tryGetValue($value, Resources::METADATA));
+            $result->_queues[] = $queue;
+        }
+        
         return $result;
     }
 

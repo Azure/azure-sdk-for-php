@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Implementation of class StorageAuthenticationSchema.
+ * Implementation of class StorageAuthenticationScheme.
  *
  *
  * PHP version 5
@@ -24,14 +24,14 @@
  * @link       http://pear.php.net/package/azure-sdk-for-php
  */
 
-use PEAR2\WindowsAzure\Services\Core\Authentication\StorageAuthenticationSchema;
+use PEAR2\WindowsAzure\Services\Core\Authentication\StorageAuthenticationScheme;
 use PEAR2\Tests\Unit\Utilities;
 use PEAR2\Tests\Mock\WindowsAzure\Services\Core\Authentication\StorageAuthenticationSchemaMock;
 use PEAR2\Tests\Unit\TestResources;
 use PEAR2\WindowsAzure\Resources;
 
 /**
- * Unit tests for StorageAuthenticationSchema class.
+ * Unit tests for StorageAuthenticationScheme class.
  *
  * @package    Azure-sdk-for-php
  * @author     Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
@@ -43,7 +43,7 @@ use PEAR2\WindowsAzure\Resources;
 class AzureAuthenticationTest extends PHPUnit_Framework_TestCase
 {
   /**
-  * @covers PEAR2\WindowsAzure\Services\Core\Authentication\StorageAuthenticationSchema::__construct
+  * @covers PEAR2\WindowsAzure\Services\Core\Authentication\StorageAuthenticationScheme::__construct
   */
   public function test__construct()
   {
@@ -53,7 +53,7 @@ class AzureAuthenticationTest extends PHPUnit_Framework_TestCase
   }
   
   /**
-  * @covers PEAR2\WindowsAzure\Services\Core\Authentication\StorageAuthenticationSchema::__construct
+  * @covers PEAR2\WindowsAzure\Services\Core\Authentication\StorageAuthenticationScheme::__construct
   */
   public function testComputeCanonicalizedHeadersMock()
   {
@@ -72,7 +72,7 @@ class AzureAuthenticationTest extends PHPUnit_Framework_TestCase
   }
   
   /**
-  * @covers PEAR2\WindowsAzure\Services\Core\Authentication\StorageAuthenticationSchema::ComputeCanonicalizedResource
+  * @covers PEAR2\WindowsAzure\Services\Core\Authentication\StorageAuthenticationScheme::ComputeCanonicalizedResource
   */
   public function testComputeCanonicalizedResourceMockSimple()
   {

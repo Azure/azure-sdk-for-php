@@ -38,34 +38,9 @@ namespace PEAR2\WindowsAzure\Core;
 interface IHttpClient
 {
     /**
-     * Returns the query portion of the url
-     * 
-     * @return string
-     */
-    public function getQuery();
-
-    /**
-     * Returns the query portion of the url in array form
-     * 
-     * @return array
-     */
-    public function getQueryVariables();
-
-    /**
-     * Sets a an existing query parameter to value or creates a new one if the $key
-     * doesn't exist.
-     * 
-     * @param string $key   query parameter name.
-     * @param string $value query value.
-     * 
-     * @return none.
-     */
-    public function setQueryVariable($key, $value);
-
-    /**
      * Sets the request url.
      *
-     * @param string $url request url.
+     * @param PEAR2\WindowsAzure\Core\IUrl $url request url.
      * 
      * @return none.
      */
@@ -74,7 +49,7 @@ interface IHttpClient
     /**
      * Gets request url.
      *
-     * @return string
+     * @return PEAR2\WindowsAzure\Core\IUrl
      */
     public function getUrl();
     
@@ -83,7 +58,7 @@ interface IHttpClient
      * 
      * @param string $method request's HTTP method.
      * 
-     * @return \Net_URL2
+     * @return none.
      */
     public function setMethod($method);
 

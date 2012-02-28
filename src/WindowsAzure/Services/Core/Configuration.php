@@ -35,6 +35,7 @@ use PEAR2\WindowsAzure\Utilities\Validate;
  * $config->setProperty('PropertyName', 'PropertyValue);
  * $propertyValue = $config->getProperty('PropertyName');
  * </code>
+ * 
  * @category  Microsoft
  * @package   PEAR2\WindowsAzure\Services\Core
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
@@ -105,6 +106,7 @@ class Configuration
     public function setProperty($key, $value)
     {
         Validate::isString($key);
+        Validate::isString($value);
 
         $this->_properties[$key] = $value;
     }

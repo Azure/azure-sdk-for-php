@@ -15,21 +15,21 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   PEAR2\WindowsAzure\Core\Exceptions
+ * @package   PEAR2\WindowsAzure\Core
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
  
-namespace PEAR2\WindowsAzure\Core\Exceptions;
+namespace PEAR2\WindowsAzure\Core;
 use PEAR2\WindowsAzure\Resources;
 
 /**
  * Exception thrown if an argument type does not match with the expected type. 
  *
  * @category  Microsoft
- * @package   PEAR2\WindowsAzure\Core\Exceptions
+ * @package   PEAR2\WindowsAzure\Core
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0

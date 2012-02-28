@@ -23,7 +23,7 @@
  */
  
 namespace PEAR2\WindowsAzure\Services\Core\Authentication;
-use PEAR2\WindowsAzure\Services\Core\Authentication\StorageAuthenticationSchema;
+use PEAR2\WindowsAzure\Services\Core\Authentication\StorageAuthenticationScheme;
 use PEAR2\WindowsAzure\Resources;
 use PEAR2\WindowsAzure\Utilities\Utilities;
 
@@ -39,7 +39,7 @@ use PEAR2\WindowsAzure\Utilities\Utilities;
  * @version   Release: @package_version@
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
-class BlobQueueSharedKey extends StorageAuthenticationSchema
+class SharedKeyAuthenticationScheme extends StorageAuthenticationScheme
 {
     protected $includedHeaders;
 
@@ -49,7 +49,8 @@ class BlobQueueSharedKey extends StorageAuthenticationSchema
      * @param string $accountName storage account name.
      * @param string $accountKey  storage account primary or secondary key.
      * 
-     * @return PEAR2\WindowsAzure\Services\Core\Authentication\BlobQueueSharedKey
+     * @return 
+     * PEAR2\WindowsAzure\Services\Core\Authentication\SharedKeyAuthenticationScheme
      */
     public function __construct($accountName, $accountKey)
     {
@@ -95,7 +96,7 @@ class BlobQueueSharedKey extends StorageAuthenticationSchema
         $stringToSign[] = strtoupper($httpMethod);
 
         foreach ($this->includedHeaders as $header) {
-            $stringToSign[] = Utilities::tryGetValue($headers, $header, null);
+            $stringToSign[] = Utilities::tryGetValue($headers, $header);
         }
 
         if (count($canonicalizedHeaders) > 0) {

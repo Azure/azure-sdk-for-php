@@ -23,7 +23,8 @@
  */
  
 namespace PEAR2\WindowsAzure\Utilities;
-use PEAR2\WindowsAzure\Core\Exceptions\InvalidArgumentTypeException;
+use PEAR2\WindowsAzure\Core\InvalidArgumentTypeException;
+use PEAR2\WindowsAzure\Resources;
 
 /**
  * Validates aganist a condition and throws an exception in case of failure.
@@ -65,8 +66,24 @@ class Validate
      */
     public static function isString($var)
     {
-        if (!is_string($var)) {
+        if (!is_string($var) && $var != Resources::EMPTY_STRING) {
             throw new InvalidArgumentTypeException(gettype(''));
+        }
+    }
+    
+    /**
+     * Throws exception if the provided variable type is not boolean.
+     *
+     * @param mixed $var variable to check against.
+     * 
+     * @throws InvalidArgumentTypeException
+     * 
+     * @return none.
+     */
+    public static function isBool($var)
+    {
+        if (!is_bool($var) && $var != Resources::EMPTY_STRING) {
+            throw new InvalidArgumentTypeException(gettype(true));
         }
     }
     

@@ -15,61 +15,75 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   PEAR2\WindowsAzure\Utilities
+ * @package   PEAR2\WindowsAzure\Core
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
  
-namespace PEAR2\WindowsAzure\Utilities;
+namespace PEAR2\WindowsAzure\Core;
 
 /**
- * Logger.
+ * Defines what are main url functionalities that should be supported
  *
  * @category  Microsoft
- * @package   PEAR2\WindowsAzure\Utilities
+ * @package   PEAR2\WindowsAzure\Core
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @version   Release: @package_version@
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
-class Logger
+interface IUrl
 {
-    private static $_filePath = "C:\log.txt";
+    /**
+     * Returns the query portion of the url
+     * 
+     * @return string
+     */
+    public function getQuery();
 
     /**
-     * Logs $var to file
-     *
-     * @param mix $var data to log.
+     * Returns the query portion of the url in array form
      * 
-     * @static
-     * 
-     * @return none.
+     * @return array
      */
-    public static function log($var)
-    {
-        if (is_array($var)) {
-            error_log(print_r($var, true), 3, self::$_filePath);
-        } else {
-            error_log($var . "\n", 3, self::$_filePath);
-        }
-    }
+    public function getQueryVariables();
     
     /**
-     * Sets file path to set
-     *
-     * @param string $filePath log file path.
+     * Sets a an existing query parameter to value or creates a new one if the $key
+     * doesn't exist.
      * 
-     * @static
+     * @param string $key   query parameter name.
+     * @param string $value query value.
      * 
      * @return none.
      */
-    public static function setLogFile($filePath)
-    {
-        $this->_filePath = $filePath;
-    }
+    public function setQueryVariable($key, $value);
+    
+    /**
+     * Gets actual URL string.
+     * 
+     * @return string.
+     */
+    public function getUrl();
+    
+    /**
+     * Set URL string.
+     * 
+     * @param string $url URL string to set.
+     * 
+     * @return none.
+     */
+    public function setUrl($url);
+    
+    /**
+     * Gets actual URL string.
+     * 
+     * @return string.
+     */
+    public function __toString();
 }
 
 ?>

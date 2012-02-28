@@ -37,7 +37,7 @@ use PEAR2\WindowsAzure\Utilities\Utilities;
  * @version   Release: @package_version@
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
-abstract class StorageAuthenticationSchema
+abstract class StorageAuthenticationScheme
 {
     protected $accountName;
     protected $accountKey;
@@ -48,7 +48,8 @@ abstract class StorageAuthenticationSchema
      * @param string $accountName storage account name.
      * @param string $accountKey  storage account primary or secondary key.
      * 
-     * @return PEAR2\WindowsAzure\Services\Core\Authentication\StorageAuthenticationSchema
+     * @return 
+     * PEAR2\WindowsAzure\Services\Core\Authentication\StorageAuthenticationScheme
      */
     public function __construct($accountName, $accountKey)
     {
@@ -147,7 +148,7 @@ abstract class StorageAuthenticationSchema
      * @return string
      */
     abstract public function getAuthorizationHeader($headers, $url, $queryParams, 
-            $httpMethod
+        $httpMethod
     );
 
     /**
