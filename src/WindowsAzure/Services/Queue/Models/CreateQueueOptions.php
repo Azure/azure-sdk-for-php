@@ -15,39 +15,65 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   PEAR2\WindowsAzure\Core
+ * @package   PEAR2\WindowsAzure\Services\Queue\Models
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
  
-namespace PEAR2\WindowsAzure\Core;
-use PEAR2\WindowsAzure\Resources;
+namespace PEAR2\WindowsAzure\Services\Queue\Models;
 
 /**
- * Exception thrown if an argument type does not match with the expected type. 
+ * Optional parameters for Create Queue REST API.
  *
  * @category  Microsoft
- * @package   PEAR2\WindowsAzure\Core
+ * @package   PEAR2\WindowsAzure\Services\Queue\Models
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @version   Release: @package_version@
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
-class InvalidArgumentTypeException extends \InvalidArgumentException
+class CreateQueueOptions
 {
+    private $_metadata;
+    
     /**
-     * Constructor
-     *
-     * @param string $validType valid type that should be provided by the user.
+     * Gets user defined metadata.
      * 
-     * @return PEAR2\WindowsAzure\Core\InvalidArgumentTypeException
+     * @return array.
      */
-    public function __construct($validType)
+    public function getMetadata()
     {
-        parent::__construct(Resources::INVALID_TYPE_MSG . $validType);
+        return $this->_metadata;
+    }
+    
+    /**
+     * Sets user defined metadata. This metadata should be added without the header
+     * prefix (x-ms-meta-*).
+     * 
+     * @param array $metadata user defined metadata object in array form.
+     * 
+     * @return none.
+     */
+    public function setMetadata($metadata)
+    {
+        $this->_metadata = $metadata;
+    }
+    
+    /**
+     * Adds new metadata element. This element should be added without the header
+     * prefix (x-ms-meta-*).
+     * 
+     * @param string $key   metadata key element.
+     * @param string $value metadata value element.
+     * 
+     * @return none.
+     */
+    public function addMetadata($key, $value)
+    {
+        $this->_metadata[$key] = $value;
     }
 }
 

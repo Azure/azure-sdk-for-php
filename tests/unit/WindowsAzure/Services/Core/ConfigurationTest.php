@@ -47,7 +47,7 @@ class ConfigurationTest extends PHPUnit_Framework_TestCase
   */
   public function testGetInstance()
   {
-    $config = Configuration::getInstance();
+    $config = new Configuration();
     
     $this->assertTrue(is_array($config->getProperties()));
   }
@@ -57,7 +57,7 @@ class ConfigurationTest extends PHPUnit_Framework_TestCase
   */
   public function testGetProperties()
   {
-    $config = Configuration::getInstance();
+    $config = new Configuration();
     $config->setProperty(TestResources::KEY1, TestResources::VALUE1);
     $config->setProperty(TestResources::KEY2, TestResources::VALUE2);
     
@@ -70,7 +70,7 @@ class ConfigurationTest extends PHPUnit_Framework_TestCase
   */
   public function testGetProperty()
   {
-    $config = Configuration::getInstance();
+    $config = $this->config = new Configuration();
     $config->setProperty(TestResources::KEY1, TestResources::VALUE1);
     $config->setProperty(TestResources::KEY2, TestResources::VALUE2);
     
@@ -85,8 +85,8 @@ class ConfigurationTest extends PHPUnit_Framework_TestCase
   {
     $invalidKey = 1;
     $this->setExpectedException(get_class(new InvalidArgumentTypeException('')), 
-            Resources::INVALID_TYPE_MESSAGE . gettype(''));
-    $config = Configuration::getInstance();
+            Resources::INVALID_TYPE_MSG . gettype(''));
+    $config = $this->config = new Configuration();
     $config->setProperty($invalidKey, TestResources::VALUE1);
   }
   
@@ -110,8 +110,8 @@ class ConfigurationTest extends PHPUnit_Framework_TestCase
   public function testCreateWithInvalidTypeFail()
   {
     $invalidType = gettype('');
-    $this->setExpectedException(get_class(new InvalidArgumentTypeException('')), Resources::INVALID_TYPE_MESSAGE . Resources::QUEUE_TYPE_NAME);
-    $config = Configuration::getInstance();
+    $this->setExpectedException(get_class(new InvalidArgumentTypeException('')), Resources::INVALID_TYPE_MSG . Resources::QUEUE_TYPE_NAME);
+    $config = $this->config = new Configuration();
     $config->setProperty(QueueSettings::ACCOUNT_KEY, TestResources::KEY1);
     $config->setProperty(QueueSettings::ACCOUNT_NAME, TestResources::ACCOUNT_NAME);
     $config->setProperty(QueueSettings::URI, TestResources::QUEUE_URI);

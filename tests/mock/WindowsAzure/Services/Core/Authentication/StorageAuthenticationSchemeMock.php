@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Implementation of class StorageAuthenticationSchemaMock.
+ * Implementation of class StorageAuthenticationSchemeMock.
  *
  * PHP version 5
  *
@@ -36,7 +36,7 @@ use PEAR2\WindowsAzure\Services\Core\Authentication\StorageAuthenticationScheme;
  * @version    Release: @package_version@
  * @link       http://pear.php.net/package/azure-sdk-for-php
  */
-class StorageAuthenticationSchemaMock extends StorageAuthenticationScheme
+class StorageAuthenticationSchemeMock extends StorageAuthenticationScheme
 {
     public function __construct($accountName, $accountKey)
     {

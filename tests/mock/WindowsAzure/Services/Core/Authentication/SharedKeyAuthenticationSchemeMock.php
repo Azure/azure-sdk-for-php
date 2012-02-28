@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Implementation of class BlobQueueSharedKeyMock.
+ * Implementation of class SharedKeyAuthenticationSchemeMock.
  *
  * PHP version 5
  *
@@ -36,7 +36,7 @@ use PEAR2\WindowsAzure\Services\Core\Authentication\SharedKeyAuthenticationSchem
  * @version    Release: @package_version@
  * @link       http://pear.php.net/package/azure-sdk-for-php
  */
-class BlobQueueSharedKeyMock extends SharedKeyAuthenticationScheme
+class SharedKeyAuthenticationSchemeMock extends SharedKeyAuthenticationScheme
 {
   public function getIncludedHeaders()
   {
