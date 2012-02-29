@@ -141,9 +141,7 @@ class Url implements IUrl
         Validate::isString($urlPath);
         Validate::notNullOrEmpty($urlPath);
         
-        \PEAR2\WindowsAzure\Utilities\Logger::log(parse_url($this->_url, PHP_URL_PATH));
         $newUrlPath = parse_url($this->_url, PHP_URL_PATH) . $urlPath;
-        \PEAR2\WindowsAzure\Utilities\Logger::log($newUrlPath);
         $this->_url->setPath($newUrlPath);
     }
     

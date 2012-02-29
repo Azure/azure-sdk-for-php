@@ -259,7 +259,6 @@ class UrlTest extends PHPUnit_Framework_TestCase
         $url->appendUrlPath($urlPath);
         
         // Assert
-        \PEAR2\WindowsAzure\Utilities\Logger::log($url->getUrl());
         $this->assertEquals($expectedUrlPath, parse_url($url->getUrl(), PHP_URL_PATH));
     }
     
