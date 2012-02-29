@@ -114,10 +114,11 @@ interface IHttpClient
      * 
      * @return none.
      */
-    public function setSuccessfulStatusCode($statusCodes);
+    public function setExpectedStatusCode($statusCodes);
     
     /**
-     * Gets actual URL string.
+     * Resets request headers, expected code and sets x-ms-version header to latest
+     * version.
      * 
      * @return string.
      */

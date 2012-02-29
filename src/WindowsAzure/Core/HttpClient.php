@@ -54,7 +54,7 @@ class HttpClient implements IHttpClient
      * @var PEAR2\WindowsAzure\Core\IUrl 
      */
     private $_requestUrl;
-    private $_successfulStatusCodes;
+    private $_expectedStatusCodes;
     
     /**
      * Constructor
@@ -74,12 +74,13 @@ class HttpClient implements IHttpClient
         $this->_request->SetHeader(
             array(Resources::X_MS_VERSION => Resources::API_VERSION)
         );
-        $this->_requestUrl            = null;
-        $this->_successfulStatusCodes = array();
+        $this->_requestUrl          = null;
+        $this->_expectedStatusCodes = array();
     }
     
     /**
-     * Resets request headers and sets x-ms-version header to latest version.
+     * Resets request headers, expected code and sets x-ms-version header to latest 
+     * version.
      * 
      * @return none
      */
@@ -93,6 +94,9 @@ class HttpClient implements IHttpClient
         $this->_request->SetHeader(
             array(Resources::X_MS_VERSION => Resources::API_VERSION)
         );
+        
+        // Reset expected code
+        $this->_expectedStatusCodes = array();
     }
 
     /**
@@ -202,7 +206,7 @@ class HttpClient implements IHttpClient
             $response = $filters[$index]->handleResponse($this, $response);
         }
         
-        if (!in_array($response->getStatus(), $this->_successfulStatusCodes)) {
+        if (!in_array($response->getStatus(), $this->_expectedStatusCodes)) {
             $errorCode    = $response->getStatus();
             $stringValue  = $response->getReasonPhrase();
             $errorDetails = $response->getBody();
@@ -220,12 +224,12 @@ class HttpClient implements IHttpClient
      * 
      * @return none.
      */
-    public function setSuccessfulStatusCode($statusCodes)
+    public function setExpectedStatusCode($statusCodes)
     {
         if (!is_array($statusCodes)) {
-            $this->_successfulStatusCodes[] = $statusCodes;
+            $this->_expectedStatusCodes[] = $statusCodes;
         } else {
-            $this->_successfulStatusCodes = $statusCodes;
+            $this->_expectedStatusCodes = $statusCodes;
         }
     }
 }

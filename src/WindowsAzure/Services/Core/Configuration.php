@@ -29,17 +29,13 @@ use PEAR2\WindowsAzure\Utilities\Validate;
 /**
  * Contains configuration used to access azure storage accounts. 
  * 
- * Usage example:
+ * There are two possible ways to create Configuration objects:
  * <code>
  * // Scenario #1 (using global configuration)
  * $config = Configuration::getInstance();
- * $config->setProperty('PropertyName', 'PropertyValue);
- * $propertyValue = $config->getProperty('PropertyName');
  * 
  * // Scenario #2
  * $config = new Configuration();
- * $config->setProperty('PropertyName', 'PropertyValue);
- * $propertyValue = $config->getProperty('PropertyName');
  * </code>
  * 
  * @category  Microsoft
