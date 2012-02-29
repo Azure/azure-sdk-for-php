@@ -70,7 +70,7 @@ class SharedKeyFilter implements IServiceFilter
     /**
      * Adds authentication header to the request headers.
      *
-     * @param \HTTP_Request2 $request HTTP request object.
+     * @param HttpClient $request HTTP channel object.
      * 
      * @return \HTTP_Request2
      */
@@ -88,7 +88,7 @@ class SharedKeyFilter implements IServiceFilter
     /**
      * Does nothing with the response.
      *
-     * @param \HTTP_Request2          $request  HTTP request object.
+     * @param HttpClient              $request  HTTP channel object.
      * @param \HTTP_Request2_Response $response HTTP response object.
      * 
      * @return \HTTP_Request2_Response

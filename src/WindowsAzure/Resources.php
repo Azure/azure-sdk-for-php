@@ -42,6 +42,7 @@ class Resources
     const INVALID_META_MSG    = 'Metadata cannot contain newline characters';
     const AZURE_ERROR_MSG     = "Fail:\nCode: %s\nValue: %s\ndetails (if any): %s";
     const NOT_IMPLEMENTED_MSG = 'This method is not implemented';
+    const NULL_ERROR_MSG      = 'Value can\'t be NULL or empty.';
 
     // HTTP Headers
     const X_MS_HEADER_PREFIX      = 'x-ms-';

@@ -92,14 +92,14 @@ class Validate
      *
      * @param mixed $var variable to check against.
      * 
-     * @throws InvalidArgumentException
+     * @throws \InvalidArgumentException
      * 
      * @return none.
      */
-    public static function isNull($var)
+    public static function notNullOrEmpty($var)
     {
-        if (!isset($var)) {
-            throw new InvalidArgumentException();
+        if (!isset($var) || $var == Resources::EMPTY_STRING) {
+            throw new \InvalidArgumentException(Resources::NULL_ERROR_MSG);
         }
     }
 }

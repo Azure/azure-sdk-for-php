@@ -82,10 +82,12 @@ interface IHttpClient
      * 
      * @param string $header header name.
      * @param string $value  header value.
+     * @param bool   $replace whether to replace previous header with the same name
+     * or append to its value (comma separated)
      * 
      * @return none.
      */
-    public function setHeader($header, $value);
+    public function setHeader($header, $value, $replace = false);
     
     /**
      * Sets request headers using array
@@ -102,10 +104,11 @@ interface IHttpClient
      * 
      * @param array $filters HTTP filters which will be applied to the request before
      * send and then applied to the response.
-     * 
+     * @param IUrl  $url     Request url.
+
      * @return string The response body.
      */
-    public function send($filters);
+    public function send($filters, $url = null);
     
     /**
      * Sets successful status code

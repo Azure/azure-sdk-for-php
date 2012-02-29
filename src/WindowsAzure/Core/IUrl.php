@@ -70,15 +70,6 @@ interface IUrl
     public function getUrl();
     
     /**
-     * Set URL string.
-     * 
-     * @param string $url URL string to set.
-     * 
-     * @return none.
-     */
-    public function setUrl($url);
-    
-    /**
      * Sets url path
      * 
      * @param string $urlPath url path to set.
