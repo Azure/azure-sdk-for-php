@@ -79,11 +79,36 @@ interface IUrl
     public function setUrl($url);
     
     /**
+     * Sets url path
+     * 
+     * @param string $urlPath url path to set.
+     * 
+     * @return none.
+     */
+    public function setUrlPath($urlPath);
+    
+    /**
+     * Appends url path
+     * 
+     * @param string $urlPath url path to append.
+     * 
+     * @return none.
+     */
+    public function appendUrlPath($urlPath);
+    
+    /**
      * Gets actual URL string.
      * 
      * @return string.
      */
     public function __toString();
+    
+    /**
+     * Gets actual URL string.
+     * 
+     * @return string.
+     */
+    public function reset();
 }
 
 ?>

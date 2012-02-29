@@ -6,13 +6,14 @@ spl_autoload_register(
       static $classes = null;
       if ($classes === null) {
          $classes = array(
-            'azureauthenticationtest' => '/unit/WindowsAzure/Services/Core/Authentication/AzureAuthenticationTest.php',
-            'blobqueuesharedkeytest' => '/unit/WindowsAzure/Services/Core/Authentication/BlobQueueSharedKeyTest.php',
             'configurationtest' => '/unit/WindowsAzure/Services/Core/ConfigurationTest.php',
-            'pear2\\tests\\mock\\windowsazure\\services\\core\\authentication\\blobqueuesharedkeymock' => '/mock/WindowsAzure/Services/Core/Authentication/BlobQueueSharedKeyMock.php',
-            'pear2\\tests\\mock\\windowsazure\\services\\core\\authentication\\storageauthenticationschemamock' => '/mock/WindowsAzure/Services/Core/Authentication/StorageAuthenticationSchemaMock.php',
+            'pear2\\tests\\mock\\windowsazure\\services\\core\\authentication\\sharedkeyauthenticationschememock' => '/mock/WindowsAzure/Services/Core/Authentication/SharedKeyAuthenticationSchemeMock.php',
+            'pear2\\tests\\mock\\windowsazure\\services\\core\\authentication\\storageauthenticationschememock' => '/mock/WindowsAzure/Services/Core/Authentication/StorageAuthenticationSchemeMock.php',
             'pear2\\tests\\unit\\testresources' => '/unit/TestResources.php',
-            'queuerestproxytest' => '/unit/WindowsAzure/Services/Queue/QueueRestProxyTest.php'
+            'queuerestproxytest' => '/unit/WindowsAzure/Services/Queue/QueueRestProxyTest.php',
+            'resttestbase' => '/unit/RestTestBase.php',
+            'sharedkeyauthenticationschemetest' => '/unit/WindowsAzure/Services/Core/Authentication/SharedKeyAuthenticationSchemeTest.php',
+            'storageauthenticationschemetest' => '/unit/WindowsAzure/Services/Core/Authentication/StorageAuthenticationSchemeTest.php'
           );
       }
       $cn = strtolower($class);

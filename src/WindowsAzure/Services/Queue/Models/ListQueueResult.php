@@ -53,7 +53,7 @@ class ListQueueResult
      * 
      * @return PEAR2\WindowsAzure\Services\Queue\Models\ListQueueResult.
      */
-    public static function createFromParsedResponse($parsedResponse)
+    public static function create($parsedResponse)
     {
         $result              = new ListQueueResult();
         $result->_prefix     = Utilities::tryGetValue(

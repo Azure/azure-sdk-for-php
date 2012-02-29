@@ -24,6 +24,7 @@
  
 namespace PEAR2\WindowsAzure\Core;
 use PEAR2\WindowsAzure\Utilities\Validate;
+use PEAR2\WindowsAzure\Resources;
 require_once 'Net/URL2.php';
 
 /**
@@ -109,6 +110,31 @@ class Url
     }
     
     /**
+     * Sets url path
+     * 
+     * @param string $urlPath url path to set.
+     * 
+     * @return none.
+     */
+    public function setUrlPath($urlPath)
+    {
+        $this->_url->setPath($urlPath);
+    }
+    
+    /**
+     * Appends url path
+     * 
+     * @param string $urlPath url path to append.
+     * 
+     * @return none.
+     */
+    public function appendUrlPath($urlPath)
+    {
+        $newUrlPath = parse_url($this->_url, PHP_URL_PATH) . $urlPath;
+        $this->_url->setPath($newUrlPath);
+    }
+    
+    /**
      * Gets actual URL string.
      * 
      * @return string.
@@ -116,6 +142,20 @@ class Url
     public function __toString()
     {
         return $this->_url->getURL();
+    }
+    
+    /**
+     * Resets URL path and query string.
+     * 
+     * @return none.
+     */
+    public function reset()
+    {
+        // Reset url path section
+        $this->setUrlPath('/');
+        
+        // Clear query variables
+        $this->_url->setQuery(Resources::EMPTY_STRING);
     }
 }
 
