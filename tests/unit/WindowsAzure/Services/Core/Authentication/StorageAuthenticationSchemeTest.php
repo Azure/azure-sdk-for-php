@@ -1,8 +1,6 @@
 <?php
 
 /**
- * Implementation of class StorageAuthenticationScheme.
- *
  *
  * PHP version 5
  *
@@ -26,7 +24,7 @@
 
 use PEAR2\WindowsAzure\Services\Core\Authentication\StorageAuthenticationScheme;
 use PEAR2\Tests\Unit\Utilities;
-use PEAR2\Tests\Mock\WindowsAzure\Services\Core\Authentication\StorageAuthenticationSchemaMock;
+use PEAR2\Tests\Mock\WindowsAzure\Services\Core\Authentication\StorageAuthenticationSchemeMock;
 use PEAR2\Tests\Unit\TestResources;
 use PEAR2\WindowsAzure\Resources;
 
@@ -40,14 +38,14 @@ use PEAR2\WindowsAzure\Resources;
  * @version    Release: @package_version@
  * @link       http://pear.php.net/package/azure-sdk-for-php
  */
-class AzureAuthenticationTest extends PHPUnit_Framework_TestCase
+class StorageAuthenticationSchemeTest extends PHPUnit_Framework_TestCase
 {
   /**
   * @covers PEAR2\WindowsAzure\Services\Core\Authentication\StorageAuthenticationScheme::__construct
   */
   public function test__construct()
   {
-    $mock = new StorageAuthenticationSchemaMock(TestResources::ACCOUNT_NAME, TestResources::KEY4);
+    $mock = new StorageAuthenticationSchemeMock(TestResources::ACCOUNT_NAME, TestResources::KEY4);
     $this->assertEquals(TestResources::ACCOUNT_NAME, $mock->getAccountName());
     $this->assertEquals(TestResources::KEY4, $mock->getAccountKey());
   }
@@ -64,7 +62,7 @@ class AzureAuthenticationTest extends PHPUnit_Framework_TestCase
     $expected = array();
     $expected[] = Resources::X_MS_DATE . ':' . $date;
     $expected[] = Resources::X_MS_VERSION . ':' . Resources::API_VERSION;
-    $mock = new StorageAuthenticationSchemaMock(TestResources::ACCOUNT_NAME, TestResources::KEY4);
+    $mock = new StorageAuthenticationSchemeMock(TestResources::ACCOUNT_NAME, TestResources::KEY4);
     
     $actual = $mock->computeCanonicalizedHeadersMock($headers);
     
@@ -81,7 +79,7 @@ class AzureAuthenticationTest extends PHPUnit_Framework_TestCase
     $accountName = TestResources::ACCOUNT_NAME;
     $url = TestResources::URI1;
     $expected = '/' . $accountName . parse_url($url, PHP_URL_PATH) . "\n" . 'comp:list';
-    $mock = new StorageAuthenticationSchemaMock($accountName, TestResources::KEY4);
+    $mock = new StorageAuthenticationSchemeMock($accountName, TestResources::KEY4);
     
     $actual = $mock->computeCanonicalizedResourceMock($url, $queryVariables);
     

@@ -86,6 +86,15 @@ interface IHttpClient
      * @return none.
      */
     public function setHeader($header, $value);
+    
+    /**
+     * Sets request headers using array
+     * 
+     * @param array $headers headers key-value array
+     * 
+     * @return none.
+     */
+    public function setHeaders($headers);
 
     /**
      * Processes the reuqest through HTTP pipeline with passed $filters, 
@@ -97,6 +106,23 @@ interface IHttpClient
      * @return string The response body.
      */
     public function send($filters);
+    
+    /**
+     * Sets successful status code
+     * 
+     * @param array|string $statusCodes successful status code.
+     * 
+     * @return none.
+     */
+    public function setExpectedStatusCode($statusCodes);
+    
+    /**
+     * Resets request headers, expected code and sets x-ms-version header to latest
+     * version.
+     * 
+     * @return string.
+     */
+    public function reset();
 }
 
 ?>

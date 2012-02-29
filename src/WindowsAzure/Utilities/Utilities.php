@@ -23,6 +23,7 @@
  */
  
 namespace PEAR2\WindowsAzure\Utilities;
+require_once 'XML/Unserializer.php';
 
 /**
  * Utilities for the project
@@ -87,6 +88,22 @@ class Utilities
                 return array($var);
             }
         }
+    }
+
+    /**
+     * Unserializes the passed $xml into array.
+     *
+     * @param string $xml XML to be parsed.
+     * 
+     * @static
+     * 
+     * @return array.
+     */
+    public static function unserialize($xml)
+    {
+        $unserializer = new \XML_Unserializer();
+        $unserializer->unserialize($xml);
+        return $unserializer->getUnserializedData();
     }
 }
 

@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Implementation of class BlobQueueSharedKeyTest.
+ * Implementation of class SharedKeyAuthenticationSchemeTest.
  *
  *
  * PHP version 5
@@ -24,7 +24,7 @@
  * @link       http://pear.php.net/package/azure-sdk-for-php
  */
 
-use PEAR2\Tests\Mock\WindowsAzure\Services\Core\Authentication\BlobQueueSharedKeyMock;
+use PEAR2\Tests\Mock\WindowsAzure\Services\Core\Authentication\SharedKeyAuthenticationSchemeMock;
 use PEAR2\WindowsAzure\Resources;
 use PEAR2\Tests\Unit\TestResources;
 
@@ -38,7 +38,7 @@ use PEAR2\Tests\Unit\TestResources;
  * @version    Release: @package_version@
  * @link       http://pear.php.net/package/azure-sdk-for-php
  */
-class BlobQueueSharedKeyTest extends PHPUnit_Framework_TestCase
+class SharedKeyAuthenticationSchemeTest extends PHPUnit_Framework_TestCase
 {
   /**
   * @covers PEAR2\WindowsAzure\Services\Core\Authentication\SharedKeyAuthenticationScheme::__construct
@@ -58,7 +58,7 @@ class BlobQueueSharedKeyTest extends PHPUnit_Framework_TestCase
     $expected[] = Resources::IF_UNMODIFIED_SINCE;
     $expected[] = Resources::RANGE;
     
-    $mock = new BlobQueueSharedKeyMock(TestResources::ACCOUNT_NAME, TestResources::KEY4);
+    $mock = new SharedKeyAuthenticationSchemeMock(TestResources::ACCOUNT_NAME, TestResources::KEY4);
     
     $this->assertEquals($expected, $mock->getIncludedHeaders());
   }
@@ -77,7 +77,7 @@ class BlobQueueSharedKeyTest extends PHPUnit_Framework_TestCase
     $headers = array(Resources::X_MS_DATE => $date, Resources::X_MS_VERSION => $apiVersion);
     $expected = "GET\n\n\n\n\n\n\n\n\n\n\n\n" . Resources::X_MS_DATE . ":$date\n" . Resources::X_MS_VERSION . 
             ":$apiVersion\n/$accountName" . parse_url($url, PHP_URL_PATH) . "\ncomp:list";
-    $mock = new BlobQueueSharedKeyMock($accountName, TestResources::KEY4);
+    $mock = new SharedKeyAuthenticationSchemeMock($accountName, TestResources::KEY4);
     
     $actual = $mock->computeSignatureMock($headers, $url, $queryParams, $httpMethod);
     
@@ -99,7 +99,7 @@ class BlobQueueSharedKeyTest extends PHPUnit_Framework_TestCase
     $httpMethod = 'GET';
     $expected = 'SharedKey ' . $accountName . ':tPIT33PrvWHsSXTbzvT93R4YmP13c5H6WB7lGKO3E2M=';
     
-    $mock = new BlobQueueSharedKeyMock($accountName, $accountKey);
+    $mock = new SharedKeyAuthenticationSchemeMock($accountName, $accountKey);
     
     $actual = $mock->getAuthorizationHeader($headers, $url, $queryParams, $httpMethod);
     
