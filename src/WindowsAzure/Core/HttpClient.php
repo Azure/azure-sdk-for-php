@@ -114,7 +114,7 @@ class HttpClient implements IHttpClient
      *
      * @return PEAR2\WindowsAzure\Core\IUrl
      */ 
-   public function getUrl()
+    public function getUrl()
     {
         return $this->_requestUrl;
     }
@@ -236,6 +236,16 @@ class HttpClient implements IHttpClient
         } else {
             $this->_successfulStatusCodes = $statusCodes;
         }
+    }
+    
+    /**
+     * Gets successful status code
+     * 
+     * @return array.
+     */
+    public function getSuccessfulStatusCode()
+    {
+        return $this->_successfulStatusCodes;
     }
 }
 

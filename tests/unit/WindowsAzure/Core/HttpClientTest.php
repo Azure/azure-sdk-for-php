@@ -26,6 +26,7 @@ use PEAR2\WindowsAzure\Services\Core\HttpClient;
 use PEAR2\WindowsAzure\Resources;
 use PEAR2\Tests\Unit\TestResources;
 use PEAR2\Tests\Mock\WindowsAzure\Services\Core\Filters\SimpleFilterMock;
+use PEAR2\WindowsAzure\Core\ServiceException;
 
 /**
  * Unit tests for class HttpClient
@@ -308,6 +309,53 @@ class HttpClientTest extends PHPUnit_Framework_TestCase
         $this->assertTrue(isset($response));
         $this->assertContains($expectedResponseSubstring1, $response);
         $this->assertContains($expectedResponseSubstring2, $response);
+    }
+    
+    /**
+     * @covers PEAR2\WindowsAzure\Services\Core\HttpClient::send
+     */
+    public function testSendFail()
+    {
+        // Setup
+        $channel = new HttpClient();
+        $url = new PEAR2\WindowsAzure\Core\Url('http://www.microsoft.com/');
+        $channel->setSuccessfulStatusCode('201');
+        $this->setExpectedException(get_class(new ServiceException('200')));
+        
+        // Test
+        $channel->send(array(), $url);
+    }
+    
+    /**
+     * @covers PEAR2\WindowsAzure\Services\Core\HttpClient::setSuccessfulStatusCode
+     */
+    public function testSetSuccessfulStatusCodeSimple()
+    {
+        // Setup
+        $channel = new HttpClient();
+        $code = '200';
+        
+        // Test
+        $channel->setSuccessfulStatusCode($code);
+        
+        // Assert
+        $this->assertContains($code, $channel->getSuccessfulStatusCode());
+    }
+    
+    /**
+     * @covers PEAR2\WindowsAzure\Services\Core\HttpClient::setSuccessfulStatusCode
+     */
+    public function testSetSuccessfulStatusCodeArray()
+    {
+        // Setup
+        $channel = new HttpClient();
+        $codes = array ('200', '201', '202');
+        
+        // Test
+        $channel->setSuccessfulStatusCode($codes);
+        
+        // Assert
+        $this->assertEquals($codes, $channel->getSuccessfulStatusCode());
     }
 }
 

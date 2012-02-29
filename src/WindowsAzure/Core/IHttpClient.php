@@ -80,8 +80,8 @@ interface IHttpClient
      * Sets a an existing request header to value or creates a new one if the $header
      * doesn't exist.
      * 
-     * @param string $header header name.
-     * @param string $value  header value.
+     * @param string $header  header name.
+     * @param string $value   header value.
      * @param bool   $replace whether to replace previous header with the same name
      * or append to its value (comma separated)
      * 
@@ -105,7 +105,7 @@ interface IHttpClient
      * @param array $filters HTTP filters which will be applied to the request before
      * send and then applied to the response.
      * @param IUrl  $url     Request url.
-
+     * 
      * @return string The response body.
      */
     public function send($filters, $url = null);
@@ -118,6 +118,13 @@ interface IHttpClient
      * @return none.
      */
     public function setSuccessfulStatusCode($statusCodes);
+    
+    /**
+     * Gets successful status code
+     * 
+     * @return array.
+     */
+    public function getSuccessfulStatusCode();
     
     /**
      * Gets actual URL string.
