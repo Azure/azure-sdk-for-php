@@ -38,27 +38,47 @@ use PEAR2\WindowsAzure\Resources;
  */
 class ServiceException extends \LogicException
 {
-    private $_stringValue;
+    private $_error;
     private $_reason;
     
     /**
      * Constructor
      *
-     * @param string $errorCode   status error code.
-     * @param string $stringValue string value of the error code.
-     * @param string $reason      detailed message for the error.
+     * @param string $errorCode status error code.
+     * @param string $error     string value of the error code.
+     * @param string $reason    detailed message for the error.
      * 
      * @return PEAR2\WindowsAzure\Core\ServiceException
      */
-    public function __construct($errorCode, $stringValue = null, $reason = null)
+    public function __construct($errorCode, $error = null, $reason = null)
     {
         parent::__construct(
-            sprintf(Resources::AZURE_ERROR_MSG, $errorCode, $stringValue, $reason)
+            sprintf(Resources::AZURE_ERROR_MSG, $errorCode, $error, $reason)
         );
-        $this->code         = $errorCode;
-        $this->_stringValue = $stringValue;
+        $this->code   = $errorCode;
+        $this->_error = $error;
         // Need to improve message parsing issue #32
         $this->_reason = $reason;
+    }
+    
+    /**
+     * Gets error text.
+     *
+     * @return string
+     */
+    public function getErrorText()
+    {
+        return $this->_error;
+    }
+    
+    /**
+     * Gets detailed error reason.
+     *
+     * @return string
+     */
+    public function getErrorReason()
+    {
+        return $this->_reason;
     }
 }
 

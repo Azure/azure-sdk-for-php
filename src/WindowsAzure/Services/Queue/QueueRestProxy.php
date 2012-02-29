@@ -89,8 +89,7 @@ class QueueRestProxy implements IQueue
     {
         try
         {
-            $this->_channel->setUrl($this->_url);
-            $responseBody   = $this->_channel->send($this->_filters);
+            $responseBody   = $this->_channel->send($this->_filters, $this->_url);
             $parsedResponse = Utilities::unserialize($responseBody);
             $this->_reset();
             
