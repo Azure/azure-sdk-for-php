@@ -357,6 +357,23 @@ class HttpClientTest extends PHPUnit_Framework_TestCase
         // Assert
         $this->assertEquals($codes, $channel->getSuccessfulStatusCode());
     }
+    
+    /**
+     * @covers PEAR2\WindowsAzure\Services\Core\HttpClient::getSuccessfulStatusCode
+     */
+    public function testGetSuccessfulStatusCode()
+    {
+        // Setup
+        $channel = new HttpClient();
+        $codes = array ('200', '201', '202');
+        $channel->setSuccessfulStatusCode($codes);
+        
+        // Test
+        $actualErrorCodes = $channel->getSuccessfulStatusCode();
+        
+        // Assert
+        $this->assertEquals($codes, $actualErrorCodes);
+    }
 }
 
 ?>

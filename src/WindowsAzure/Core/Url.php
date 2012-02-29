@@ -29,7 +29,7 @@ use PEAR2\WindowsAzure\Core\IUrl;
 require_once 'Net/URL2.php';
 
 /**
- * Default IUril implementation.
+ * Default IUrl implementation.
  *
  * @category  Microsoft
  * @package   PEAR2\WindowsAzure\Core
@@ -55,9 +55,8 @@ class Url implements IUrl
      */
     public function __construct($url)
     {
-        Validate::isString($url);
-        Validate::notNullOrEmpty($url);
-        filter_var($url, FILTER_VALIDATE_URL);
+        $errorMessage = Resources::INVALID_URL_MSG;
+        Validate::isTrue(filter_var($url, FILTER_VALIDATE_URL), $errorMessage);
         
         $this->_url = new \Net_URL2($url);
     }
@@ -142,7 +141,9 @@ class Url implements IUrl
         Validate::isString($urlPath);
         Validate::notNullOrEmpty($urlPath);
         
+        \PEAR2\WindowsAzure\Utilities\Logger::log(parse_url($this->_url, PHP_URL_PATH));
         $newUrlPath = parse_url($this->_url, PHP_URL_PATH) . $urlPath;
+        \PEAR2\WindowsAzure\Utilities\Logger::log($newUrlPath);
         $this->_url->setPath($newUrlPath);
     }
     

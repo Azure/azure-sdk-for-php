@@ -102,6 +102,23 @@ class Validate
             throw new \InvalidArgumentException(Resources::NULL_ERROR_MSG);
         }
     }
+    
+    /**
+     * Throws exception if the provided condition is not satisfied.
+     *
+     * @param bool   $isSatisfied    condition result.
+     * @param string $failureMessage the exception message
+     * 
+     * @throws \Exception
+     * 
+     * @return none.
+     */
+    public static function isTrue($isSatisfied, $failureMessage)
+    {
+        if (!$isSatisfied) {
+            throw new \RuntimeException($failureMessage);
+        }
+    }
 }
 
 ?>
