@@ -186,7 +186,7 @@ class QueueRestProxy implements IQueue
             'include', $listQueuesOptions->getIncludeMetadata()? 'metadata':  null
         );
         
-        $this->_channel->setSuccessfulStatusCode(Resources::SUCCESS_LIST_QUEUES);
+        $this->_channel->setExpectedStatusCode(Resources::SUCCESS_LIST_QUEUES);
         
         $parsedResponse = $this->_sendAndReset();
 
@@ -244,7 +244,7 @@ class QueueRestProxy implements IQueue
         );
         $this->_channel->setHeaders($metadataHeaders);
         $this->_channel->setHeader(Resources::CONTENT_LENGTH, 0);
-        $this->_channel->setSuccessfulStatusCode(Resources::SUCCESS_CREATE_QUEUE);
+        $this->_channel->setExpectedStatusCode(Resources::SUCCESS_CREATE_QUEUE);
 
         $this->_sendAndReset();
     }
@@ -277,7 +277,7 @@ class QueueRestProxy implements IQueue
     {
         $this->_channel->setMethod(\HTTP_Request2::METHOD_DELETE);
         $this->_url->appendUrlPath($queueName);
-        $this->_channel->setSuccessfulStatusCode(Resources::SUCCESS_DELETE_QUEUE);
+        $this->_channel->setExpectedStatusCode(Resources::SUCCESS_DELETE_QUEUE);
         
         $this->_sendAndReset();
     }

@@ -251,7 +251,7 @@ class HttpClientTest extends PHPUnit_Framework_TestCase
         // Setup
         $channel = new HttpClient();
         $url = new PEAR2\WindowsAzure\Core\Url('http://www.microsoft.com/');
-        $channel->setSuccessfulStatusCode('200');
+        $channel->setExpectedStatusCode('200');
         
         // Test
         $response = $channel->send(array(), $url);
@@ -268,7 +268,7 @@ class HttpClientTest extends PHPUnit_Framework_TestCase
         // Setup
         $channel = new HttpClient();
         $url = new PEAR2\WindowsAzure\Core\Url('http://www.microsoft.com/');
-        $channel->setSuccessfulStatusCode('200');
+        $channel->setExpectedStatusCode('200');
         $expectedHeader = TestResources::HEADER1;
         $expectedResponseSubstring = TestResources::HEADER1_VALUE;
         $filter = new SimpleFilterMock($expectedHeader, $expectedResponseSubstring);
@@ -291,7 +291,7 @@ class HttpClientTest extends PHPUnit_Framework_TestCase
         // Setup
         $channel = new HttpClient();
         $url = new PEAR2\WindowsAzure\Core\Url('http://www.microsoft.com/');
-        $channel->setSuccessfulStatusCode('200');
+        $channel->setExpectedStatusCode('200');
         $expectedHeader1 = TestResources::HEADER1;
         $expectedResponseSubstring1 = TestResources::HEADER1_VALUE;
         $expectedHeader2 = TestResources::HEADER2;
@@ -319,7 +319,7 @@ class HttpClientTest extends PHPUnit_Framework_TestCase
         // Setup
         $channel = new HttpClient();
         $url = new PEAR2\WindowsAzure\Core\Url('http://www.microsoft.com/');
-        $channel->setSuccessfulStatusCode('201');
+        $channel->setExpectedStatusCode('201');
         $this->setExpectedException(get_class(new ServiceException('200')));
         
         // Test
@@ -327,7 +327,7 @@ class HttpClientTest extends PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers PEAR2\WindowsAzure\Services\Core\HttpClient::setSuccessfulStatusCode
+     * @covers PEAR2\WindowsAzure\Services\Core\HttpClient::setExpectedStatusCode
      */
     public function testSetSuccessfulStatusCodeSimple()
     {
@@ -336,14 +336,14 @@ class HttpClientTest extends PHPUnit_Framework_TestCase
         $code = '200';
         
         // Test
-        $channel->setSuccessfulStatusCode($code);
+        $channel->setExpectedStatusCode($code);
         
         // Assert
         $this->assertContains($code, $channel->getSuccessfulStatusCode());
     }
     
     /**
-     * @covers PEAR2\WindowsAzure\Services\Core\HttpClient::setSuccessfulStatusCode
+     * @covers PEAR2\WindowsAzure\Services\Core\HttpClient::setExpectedStatusCode
      */
     public function testSetSuccessfulStatusCodeArray()
     {
@@ -352,7 +352,7 @@ class HttpClientTest extends PHPUnit_Framework_TestCase
         $codes = array ('200', '201', '202');
         
         // Test
-        $channel->setSuccessfulStatusCode($codes);
+        $channel->setExpectedStatusCode($codes);
         
         // Assert
         $this->assertEquals($codes, $channel->getSuccessfulStatusCode());
@@ -366,7 +366,7 @@ class HttpClientTest extends PHPUnit_Framework_TestCase
         // Setup
         $channel = new HttpClient();
         $codes = array ('200', '201', '202');
-        $channel->setSuccessfulStatusCode($codes);
+        $channel->setExpectedStatusCode($codes);
         
         // Test
         $actualErrorCodes = $channel->getSuccessfulStatusCode();

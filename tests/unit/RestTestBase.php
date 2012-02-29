@@ -68,7 +68,15 @@ class RestTestBase extends PHPUnit_Framework_TestCase
     protected function tearDown()
     {
         foreach ($this->createdQueues as $value) {
-            $this->deleteQueue($value);
+            try
+            {
+                $this->deleteQueue($value);
+            }
+            catch (Exception $e)
+            {
+                // Ignore exception and continue, will assume that this queue doesn't exist in the sotrage account
+                error_log($e->getMessage());
+            }
         }
     }
     
