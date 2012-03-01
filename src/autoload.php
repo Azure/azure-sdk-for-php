@@ -10,6 +10,7 @@ spl_autoload_register(
             'pear2\\windowsazure\\core\\iurl' => '/WindowsAzure/Core/IUrl.php',
             'pear2\\windowsazure\\core\\serviceexception' => '/WindowsAzure/Core/ServiceException.php',
             'pear2\\windowsazure\\core\\url' => '/WindowsAzure/Core/Url.php',
+            'pear2\\windowsazure\\logger' => '/WindowsAzure/Utilities/Logger.php',
             'pear2\\windowsazure\\resources' => '/WindowsAzure/Resources.php',
             'pear2\\windowsazure\\services\\core\\authentication\\sharedkeyauthenticationscheme' => '/WindowsAzure/Services/Core/Authentication/SharedKeyAuthenticationScheme.php',
             'pear2\\windowsazure\\services\\core\\authentication\\storageauthenticationscheme' => '/WindowsAzure/Services/Core/Authentication/StorageAuthenticationScheme.php',
@@ -21,16 +22,20 @@ spl_autoload_register(
             'pear2\\windowsazure\\services\\core\\servicesbuilder' => '/WindowsAzure/Services/Core/ServicesBuilder.php',
             'pear2\\windowsazure\\services\\queue\\iqueue' => '/WindowsAzure/Services/Queue/IQueue.php',
             'pear2\\windowsazure\\services\\queue\\models\\createqueueoptions' => '/WindowsAzure/Services/Queue/Models/CreateQueueOptions.php',
+            'pear2\\windowsazure\\services\\queue\\models\\getservicepropertiesresult' => '/WindowsAzure/Services/Queue/Models/GetServicePropertiesResult.php',
             'pear2\\windowsazure\\services\\queue\\models\\listqueueoptions' => '/WindowsAzure/Services/Queue/Models/ListQueueOptions.php',
             'pear2\\windowsazure\\services\\queue\\models\\listqueueresult' => '/WindowsAzure/Services/Queue/Models/ListQueueResult.php',
+            'pear2\\windowsazure\\services\\queue\\models\\logging' => '/WindowsAzure/Services/Queue/Models/Logging.php',
+            'pear2\\windowsazure\\services\\queue\\models\\metrics' => '/WindowsAzure/Services/Queue/Models/Metrics.php',
             'pear2\\windowsazure\\services\\queue\\models\\queue' => '/WindowsAzure/Services/Queue/Models/Queue.php',
             'pear2\\windowsazure\\services\\queue\\models\\queueserviceoptions' => '/WindowsAzure/Services/Queue/Models/QueueServiceOptions.php',
+            'pear2\\windowsazure\\services\\queue\\models\\retentionpolicy' => '/WindowsAzure/Services/Queue/Models/RetentionPolicy.php',
+            'pear2\\windowsazure\\services\\queue\\models\\serviceproperties' => '/WindowsAzure/Services/Queue/Models/ServiceProperties.php',
             'pear2\\windowsazure\\services\\queue\\queuerestproxy' => '/WindowsAzure/Services/Queue/QueueRestProxy.php',
             'pear2\\windowsazure\\services\\queue\\queueservice' => '/WindowsAzure/Services/Queue/QueueService.php',
             'pear2\\windowsazure\\services\\queue\\queuesettings' => '/WindowsAzure/Services/Queue/QueueSettings.php',
-            'pear2\\windowsazure\\utilities\\logger' => '/WindowsAzure/Utilities/Logger.php',
-            'pear2\\windowsazure\\utilities\\utilities' => '/WindowsAzure/Utilities/Utilities.php',
-            'pear2\\windowsazure\\utilities\\validate' => '/WindowsAzure/Utilities/Validate.php'
+            'pear2\\windowsazure\\utilities' => '/WindowsAzure/Utilities/Utilities.php',
+            'pear2\\windowsazure\\validate' => '/WindowsAzure/Utilities/Validate.php'
           );
       }
       $cn = strtolower($class);

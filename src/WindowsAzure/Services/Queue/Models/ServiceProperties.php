@@ -23,11 +23,11 @@
  */
  
 namespace PEAR2\WindowsAzure\Services\Queue\Models;
-use PEAR2\WindowsAzure\Resources;
-use PEAR2\WindowsAzure\Utilities;
+use PEAR2\WindowsAzure\Services\Queue\Models\Logging;
+use PEAR2\WindowsAzure\Services\Queue\Models\Metrics;
 
 /**
- * Azure queue object.
+ * Encapsulates service properties
  *
  * @category  Microsoft
  * @package   PEAR2\WindowsAzure\Services\Queue\Models
@@ -37,90 +37,69 @@ use PEAR2\WindowsAzure\Utilities;
  * @version   Release: @package_version@
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
-class Queue
+class ServiceProperties
 {
-    private $_name;
-    private $_url;
-    private $_metadata;
-
+    private $_logging;
+    private $_metrics;
+    
     /**
-     * Constructor
+     * Creates ServiceProperties object from parsed XML response.
+     *
+     * @param array $parsedResponse XML response parsed into array.
      * 
-     * @param string $name queue name.
-     * @param string $url  queue url.
-     * 
-     * @return PEAR2\WindowsAzure\Services\Queue\Models\Queue.
+     * @return PEAR2\WindowsAzure\Services\Queue\Models\ServiceProperties.
      */
-    function __construct($name, $url)
+    public static function create($parsedResponse)
     {
-        $this->_name = $name;
-        $this->_url  = $url;
+        $result = new ServiceProperties();
+        $result->setLogging(Logging::create($parsedResponse['Logging']));
+        $result->setMetrics(Metrics::create($parsedResponse['Metrics']));
+        
+        return $result;
     }
-
+    
     /**
-     * Gets queue name.
+     * Gets logging element.
      *
-     * @return string.
+     * @return PEAR2\WindowsAzure\Services\Queue\Models\Logging.
      */
-    public function getName()
+    public function getLogging()
     {
-        return $this->_name;
+        return $this->_logging;
     }
-
+    
     /**
-     * Sets queue name.
+     * Sets logging element.
      *
-     * @param string $name value.
-     * 
-     * @return none.
-     */
-    public function setName($name)
-    {
-        $this->_name = $name;
-    }
-
-    /**
-     * Gets queue url.
-     *
-     * @return string.
-     */
-    public function getUrl()
-    {
-        return $this->_url;
-    }
-
-    /**
-     * Sets queue url.
-     *
-     * @param string $url value.
+     * @param PEAR2\WindowsAzure\Services\Queue\Models\Logging $logging new element.
      * 
      * @return none.
      */
-    public function setUrl($url)
+    public function setLogging($logging)
     {
-        $this->_url = $url;
+        $this->_logging = clone $logging;
     }
-
+    
     /**
-     * Gets queue metadata.
+     * Gets metrics element.
      *
-     * @return array.
+     * @return PEAR2\WindowsAzure\Services\Queue\Models\Metrics.
      */
-    public function getMetadata()
+    public function getMetrics()
     {
-        return $this->_metadata;
+        return $this->_metrics;
     }
-
+    
     /**
-     * Sets queue metadata.
+     * Sets metrics element.
      *
-     * @param string $metadata value.
+     * @param PEAR2\WindowsAzure\Services\Queue\Models\Metrics $metrics new element.
      * 
      * @return none.
      */
-    public function setMetadata($metadata)
+    public function setMetrics($metrics)
     {
-        $this->_metadata = $metadata;
+        $this->_metrics = clone $metrics;
     }
 }
 

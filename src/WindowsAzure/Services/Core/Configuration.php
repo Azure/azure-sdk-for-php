@@ -24,7 +24,7 @@
  
 namespace PEAR2\WindowsAzure\Services\Core;
 use PEAR2\WindowsAzure\Services\Core\ServicesBuilder;
-use PEAR2\WindowsAzure\Utilities\Validate;
+use PEAR2\WindowsAzure\Validate;
 
 /**
  * Contains configuration used to access azure storage accounts. 

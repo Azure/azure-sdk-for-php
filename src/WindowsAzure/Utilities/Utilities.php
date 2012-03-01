@@ -15,21 +15,21 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   PEAR2\WindowsAzure\Utilities
+ * @package   PEAR2\WindowsAzure
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
  
-namespace PEAR2\WindowsAzure\Utilities;
+namespace PEAR2\WindowsAzure;
 require_once 'XML/Unserializer.php';
 
 /**
  * Utilities for the project
  *
  * @category  Microsoft
- * @package   PEAR2\WindowsAzure\Utilities
+ * @package   PEAR2\WindowsAzure
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
@@ -105,6 +105,19 @@ class Utilities
         $unserializer->unserialize($xml);
         return $unserializer->getUnserializedData();
     }
+    
+    /**
+     * Converts string into boolean value.
+     * 
+     * @param string $obj boolean value in string format.
+     * 
+     * @return bool
+     */
+    public static function toBool($obj)
+    {
+        return filter_var($obj, FILTER_VALIDATE_BOOLEAN);
+    }
+
 }
 
 ?>

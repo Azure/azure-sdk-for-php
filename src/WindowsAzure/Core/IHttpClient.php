@@ -133,6 +133,25 @@ interface IHttpClient
      * @return string.
      */
     public function reset();
+    
+    /**
+     * Sets a configuration element for the request.
+     * 
+     * @param string $name  configuration parameter name.
+     * @param mixed  $value configuration parameter value.
+     * 
+     * @return none.
+     */
+    public function setConfig($name, $value = null);
+    
+    /**
+     * Gets value for configuration parameter.
+     * 
+     * @param string $name configuration parameter name.
+     * 
+     * @return string.
+     */
+    public function getConfig($name);
 }
 
 ?>

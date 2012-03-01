@@ -24,7 +24,7 @@
  
 namespace PEAR2\WindowsAzure\Services\Core\Authentication;
 use PEAR2\WindowsAzure\Resources;
-use PEAR2\WindowsAzure\Utilities\Utilities;
+use PEAR2\WindowsAzure\Utilities;
 
 /**
  * Base class for azure authentication schemes.
