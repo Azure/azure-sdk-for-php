@@ -15,14 +15,14 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   PEAR2\WindowsAzure\Utilities
+ * @package   PEAR2\WindowsAzure
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
  
-namespace PEAR2\WindowsAzure\Utilities;
+namespace PEAR2\WindowsAzure;
 use PEAR2\WindowsAzure\Core\InvalidArgumentTypeException;
 use PEAR2\WindowsAzure\Resources;
 
@@ -30,7 +30,7 @@ use PEAR2\WindowsAzure\Resources;
  * Validates aganist a condition and throws an exception in case of failure.
  *
  * @category  Microsoft
- * @package   PEAR2\WindowsAzure\Utilities
+ * @package   PEAR2\WindowsAzure
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0

@@ -25,7 +25,7 @@
 namespace PEAR2\WindowsAzure\Services\Core\Authentication;
 use PEAR2\WindowsAzure\Services\Core\Authentication\StorageAuthenticationScheme;
 use PEAR2\WindowsAzure\Resources;
-use PEAR2\WindowsAzure\Utilities\Utilities;
+use PEAR2\WindowsAzure\Utilities;
 
 /**
  * Provides shared key authentication scheme for blob and queue. For more info

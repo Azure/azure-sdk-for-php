@@ -27,6 +27,7 @@ use PEAR2\WindowsAzure\Resources;
 use PEAR2\Tests\Unit\TestResources;
 use PEAR2\Tests\Mock\WindowsAzure\Services\Core\Filters\SimpleFilterMock;
 use PEAR2\WindowsAzure\Core\ServiceException;
+use \PEAR2\WindowsAzure\Core\InvalidArgumentTypeException;
 
 /**
  * Unit tests for class HttpClient
@@ -373,6 +374,71 @@ class HttpClientTest extends PHPUnit_Framework_TestCase
         
         // Assert
         $this->assertEquals($codes, $actualErrorCodes);
+    }
+    
+    /**
+     * @covers PEAR2\WindowsAzure\Services\Core\HttpClient::setConfig
+     */
+    public function testSetConfig()
+    {
+        // Setup
+        $channel = new HttpClient();
+        $name = Resources::CONNECT_TIMEOUT;
+        $value = 10;
+        
+        // Test
+        $channel->setConfig($name, $value);
+        
+        // Assert
+        $this->assertEquals($value, $channel->getConfig($name));
+    }
+    
+    /**
+     * @covers PEAR2\WindowsAzure\Services\Core\HttpClient::setConfig
+     */
+    public function testSetConfigNotStringNameFail()
+    {
+        // Setup
+        $channel = new HttpClient();
+        $name = 123;
+        $value = 10;
+        $this->setExpectedException(get_class(new InvalidArgumentTypeException(gettype(''))));
+        
+        // Test
+        $channel->setConfig($name, $value);
+    }
+    
+    /**
+     * @covers PEAR2\WindowsAzure\Services\Core\HttpClient::setConfig
+     */
+    public function testSetConfigEmptyNameFail()
+    {
+        // Setup
+        $channel = new HttpClient();
+        $name = '';
+        $value = 10;
+        $this->setExpectedException(get_class(new InvalidArgumentException(Resources::NULL_ERROR_MSG)));
+        
+        // Test
+        $channel->setConfig($name, $value);
+    }
+    
+    /**
+     * @covers PEAR2\WindowsAzure\Services\Core\HttpClient::getConfig
+     */
+    public function testGetConfig()
+    {
+        // Setup
+        $channel = new HttpClient();
+        $name = Resources::CONNECT_TIMEOUT;
+        $value = 10;
+        $channel->setConfig($name, $value);
+        
+        // Test
+        $actualValue = $channel->getConfig($name);
+        
+        // Assert
+        $this->assertEquals($value, $actualValue);
     }
 }
 

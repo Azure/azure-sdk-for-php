@@ -28,8 +28,10 @@ use PEAR2\WindowsAzure\Resources;
 use PEAR2\WindowsAzure\Services\Queue\Models\ListQueueOptions;
 use PEAR2\WindowsAzure\Services\Queue\Models\ListQueueResult;
 use PEAR2\WindowsAzure\Services\Queue\Models\CreateQueueOptions;
+use PEAR2\WindowsAzure\Services\Queue\Models\GetServicePropertiesResult;
+use PEAR2\WindowsAzure\Services\Queue\Models\QueueServiceOptions;
 use PEAR2\WindowsAzure\Core\IHttpClient;
-use PEAR2\WindowsAzure\Utilities\Utilities;
+use PEAR2\WindowsAzure\Utilities;
 use PEAR2\WindowsAzure\Core\Url;
 
 /**
@@ -186,7 +188,7 @@ class QueueRestProxy implements IQueue
             'include', $listQueuesOptions->getIncludeMetadata()? 'metadata':  null
         );
         
-        $this->_channel->setExpectedStatusCode(Resources::SUCCESS_LIST_QUEUES);
+        $this->_channel->setExpectedStatusCode(Resources::STATUS_OK);
         
         $parsedResponse = $this->_sendAndReset();
 
@@ -244,7 +246,7 @@ class QueueRestProxy implements IQueue
         );
         $this->_channel->setHeaders($metadataHeaders);
         $this->_channel->setHeader(Resources::CONTENT_LENGTH, 0);
-        $this->_channel->setExpectedStatusCode(Resources::SUCCESS_CREATE_QUEUE);
+        $this->_channel->setExpectedStatusCode(Resources::STATUS_OK_CREATE_QUEUE);
 
         $this->_sendAndReset();
     }
@@ -277,7 +279,7 @@ class QueueRestProxy implements IQueue
     {
         $this->_channel->setMethod(\HTTP_Request2::METHOD_DELETE);
         $this->_url->appendUrlPath($queueName);
-        $this->_channel->setExpectedStatusCode(Resources::SUCCESS_DELETE_QUEUE);
+        $this->_channel->setExpectedStatusCode(Resources::STATUS_OK_DELETE_QUEUE);
         
         $this->_sendAndReset();
     }
@@ -305,7 +307,19 @@ class QueueRestProxy implements IQueue
      */
     public function getServiceProperties($queueServiceOptions = null)
     {
-        throw new \Exception(Resources::NOT_IMPLEMENTED_MSG);
+        if (!isset($queueServiceOptions)) {
+            $queueServiceOptions = new QueueServiceOptions();
+        }
+        
+        $this->_channel->setMethod(\HTTP_Request2::METHOD_GET);
+        $this->_channel->setExpectedStatusCode(Resources::STATUS_OK);
+        $this->_url->setQueryVariable('restype', 'service');
+        $this->_url->setQueryVariable('comp', 'properties');
+        $this->_url->setQueryVariable('timeout', $queueServiceOptions->getTimeout());
+        
+        $parsedResponse = $this->_sendAndReset();
+        
+        return GetServicePropertiesResult::create($parsedResponse);
     }
 
     /**

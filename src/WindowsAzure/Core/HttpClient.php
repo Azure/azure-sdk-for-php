@@ -27,7 +27,7 @@ use PEAR2\WindowsAzure\Core\IHttpClient;
 use PEAR2\WindowsAzure\Core\IServiceFilter;
 use PEAR2\WindowsAzure\Resources;
 use PEAR2\WindowsAzure\Core\ServiceException;
-use PEAR2\WindowsAzure\Utilities\Validate;
+use PEAR2\WindowsAzure\Validate;
 use PEAR2\WindowsAzure\Core\IUrl;
 
 require_once 'HTTP/Request2.php';
@@ -65,9 +65,9 @@ class HttpClient implements IHttpClient
     {
         $this->_request = new \HTTP_Request2(
             null, null, array(
-                'use_brackets'    => true,
-                'ssl_verify_peer' => false,
-                'ssl_verify_host' => false
+                Resources::USE_BRACKETS    => true,
+                Resources::SSL_VERIFY_PEER => false,
+                Resources::SSL_VERIFY_HOST => false
                 )
         );
 
@@ -250,6 +250,34 @@ class HttpClient implements IHttpClient
     public function getSuccessfulStatusCode()
     {
         return $this->_expectedStatusCodes;
+    }
+    
+    /**
+     * Sets configuration parameter.
+     * 
+     * @param string $name  configuration parameter name.
+     * @param mixed  $value configuration parameter value.
+     * 
+     * @return none.
+     */
+    public function setConfig($name, $value = null)
+    {
+        Validate::isString($name);
+        Validate::notNullOrEmpty($name);
+        
+        $this->_request->setConfig($name, $value);
+    }
+    
+    /**
+     * Gets value for configuration parameter.
+     * 
+     * @param string $name configuration parameter name.
+     * 
+     * @return string.
+     */
+    public function getConfig($name)
+    {
+        return $this->_request->getConfig($name);
     }
 }
 

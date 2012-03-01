@@ -23,7 +23,7 @@
  */
  
 namespace PEAR2\WindowsAzure\Core;
-use PEAR2\WindowsAzure\Utilities\Validate;
+use PEAR2\WindowsAzure\Validate;
 use PEAR2\WindowsAzure\Resources;
 use PEAR2\WindowsAzure\Core\IUrl;
 require_once 'Net/URL2.php';

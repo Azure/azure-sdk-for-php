@@ -24,7 +24,7 @@
  
 namespace PEAR2\WindowsAzure\Services\Queue\Models;
 use PEAR2\WindowsAzure\Services\Queue\Models\QueueServiceOptions;
-use \PEAR2\WindowsAzure\Utilities\Validate;
+use \PEAR2\WindowsAzure\Validate;
 
 /**
  * Options for listQueues API.

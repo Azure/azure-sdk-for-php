@@ -31,6 +31,7 @@ use PEAR2\WindowsAzure\Services\Queue\Models\ListQueueOptions;
 use PEAR2\WindowsAzure\Services\Queue\Models\ListQueueResult;
 use PEAR2\WindowsAzure\Services\Queue\Models\CreateQueueOptions;
 use PEAR2\Tests\Unit\TestResources;
+use PEAR2\WindowsAzure\Resources;
 use PEAR2\WindowsAzure\Core\ServiceException;
 
 /**
@@ -270,6 +271,19 @@ class QueueRestProxyTest extends \RestTestBase
         
         // Test
         $this->queueWrapper->deleteQueue($queueName);
+    }
+    
+    /**
+    * @covers PEAR2\WindowsAzure\Services\Queue\QueueRestProxy::getServiceProperties
+    */
+    public function testGetServiceProperties()
+    {
+        // Test
+        $result = $this->queueWrapper->getServiceProperties();
+        
+        // Assert
+        $version = $result->getValue()->getLogging()->getVersion();
+        $this->assertGreaterThanOrEqual(Resources::MIN_STORAGE_ANALYTICS_VERSION, $version);
     }
 }
 

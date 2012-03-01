@@ -69,7 +69,8 @@ class Resources
     const EMPTY_STRING    = '';
 
     // Versioning
-    const API_VERSION = '2011-08-18';
+    const API_VERSION                   = '2011-08-18';
+    const MIN_STORAGE_ANALYTICS_VERSION = '1.0';
 
     // Query parameter names
     const PREFIX      = 'Prefix';
@@ -79,9 +80,15 @@ class Resources
     const NEXT_MARKER = 'NextMarker';
     
     // Status Codes
-    const SUCCESS_LIST_QUEUES  = '200';
-    const SUCCESS_CREATE_QUEUE = '201';
-    const SUCCESS_DELETE_QUEUE = '204';
+    const STATUS_OK              = '200';
+    const STATUS_OK_CREATE_QUEUE = '201';
+    const STATUS_OK_DELETE_QUEUE = '204';
+    
+    // HTTP_Request2 config parameter names
+    const USE_BRACKETS    = 'use_brackets';
+    const SSL_VERIFY_PEER = 'ssl_verify_peer';
+    const SSL_VERIFY_HOST = 'ssl_verify_host';
+    const CONNECT_TIMEOUT = 'connect_timeout';
 }
 
 ?>
