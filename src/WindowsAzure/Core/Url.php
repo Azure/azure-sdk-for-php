@@ -25,10 +25,11 @@
 namespace PEAR2\WindowsAzure\Core;
 use PEAR2\WindowsAzure\Utilities\Validate;
 use PEAR2\WindowsAzure\Resources;
+use PEAR2\WindowsAzure\Core\IUrl;
 require_once 'Net/URL2.php';
 
 /**
- * Default IUril implementation.
+ * Default IUrl implementation.
  *
  * @category  Microsoft
  * @package   PEAR2\WindowsAzure\Core
@@ -38,7 +39,7 @@ require_once 'Net/URL2.php';
  * @version   Release: @package_version@
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
-class Url
+class Url implements IUrl
 {
     /**
      * @var \Net_URL2
@@ -54,6 +55,9 @@ class Url
      */
     public function __construct($url)
     {
+        $errorMessage = Resources::INVALID_URL_MSG;
+        Validate::isTrue(filter_var($url, FILTER_VALIDATE_URL), $errorMessage);
+        
         $this->_url = new \Net_URL2($url);
     }
     
@@ -90,6 +94,7 @@ class Url
     public function setQueryVariable($key, $value, $force = false)
     {
         Validate::isString($key);
+        Validate::notNullOrEmpty($key);
         Validate::isString($value);
 
         if (isset($value)) {
@@ -118,6 +123,9 @@ class Url
      */
     public function setUrlPath($urlPath)
     {
+        Validate::isString($urlPath);
+        Validate::notNullOrEmpty($urlPath);
+        
         $this->_url->setPath($urlPath);
     }
     
@@ -130,6 +138,9 @@ class Url
      */
     public function appendUrlPath($urlPath)
     {
+        Validate::isString($urlPath);
+        Validate::notNullOrEmpty($urlPath);
+        
         $newUrlPath = parse_url($this->_url, PHP_URL_PATH) . $urlPath;
         $this->_url->setPath($newUrlPath);
     }
