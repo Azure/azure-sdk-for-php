@@ -31,6 +31,7 @@ use PEAR2\WindowsAzure\Services\Queue\Models\ListQueueOptions;
 use PEAR2\WindowsAzure\Services\Queue\Models\ListQueueResult;
 use PEAR2\WindowsAzure\Services\Queue\Models\CreateQueueOptions;
 use PEAR2\WindowsAzure\Services\Queue\Models\ServiceProperties;
+use PEAR2\WindowsAzure\Services\Queue\Models\GetQueueMetadataResult;
 use PEAR2\Tests\Unit\TestResources;
 use PEAR2\WindowsAzure\Resources;
 use PEAR2\WindowsAzure\Core\ServiceException;
@@ -300,6 +301,27 @@ class QueueRestProxyTest extends \RestTestBase
         
         // Assert
         $this->assertEquals($expected->toXml(), $actual->getValue()->toXml());
+    }
+    
+    /**
+    * @covers PEAR2\WindowsAzure\Services\Queue\QueueRestProxy::getQueueMetadata
+    */
+    public function testGetQueueMetadata()
+    {
+        // Setup
+        $name     = 'getqueuemetadata';
+        $expectedCount = 0;
+        $options  = new CreateQueueOptions();
+        $expected = array ('name1' => 'MyName1', 'mymetaname' => '12345', 'values' => 'Microsoft_');
+        $options->setMetadata($expected);
+        $this->createQueue($name, $options);
+        
+        // Test
+        $result = $this->queueWrapper->getQueueMetadata($name);
+        
+        // Assert
+        $this->assertEquals($expectedCount, $result->getApproximateMessageCount());
+        $this->assertEquals($expected, $result->getMetadata());
     }
 }
 

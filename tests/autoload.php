@@ -6,7 +6,9 @@ spl_autoload_register(
       static $classes = null;
       if ($classes === null) {
          $classes = array(
+            'azureutilitiestest' => '/unit/WindowsAzure/Core/AzureUtilitiesTest.php',
             'configurationtest' => '/unit/WindowsAzure/Services/Core/ConfigurationTest.php',
+            'getqueuemetadataresulttest' => '/unit/WindowsAzure/Services/Queue/Models/GetQueueMetadataResultTest.php',
             'getservicepropertiesresulttest' => '/unit/WindowsAzure/Services/Queue/Models/GetServicePropertiesResultTest.php',
             'httpclienttest' => '/unit/WindowsAzure/Core/HttpClientTest.php',
             'invalidargumenttypeexceptiontest' => '/unit/WindowsAzure/Core/InvalidArgumentTypeExceptionTest.php',
