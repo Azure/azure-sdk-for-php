@@ -155,7 +155,6 @@ class UtilitiesTest extends PHPUnit_Framework_TestCase
         
         // Test
         $actual = Utilities::getArray($flat);
-        PEAR2\WindowsAzure\Logger::log($actual);
         
         $this->assertEquals($expected, $actual);
     }
