@@ -83,12 +83,12 @@ class Utilities
     public static function getArray($var)
     {
         foreach ($var as $value) {
-            if (is_array($value)) {
-                return $var;
-            } else {
+            if (!is_array($value)) {
                 return array($var);
             }
         }
+        
+        return $var;
     }
 
     /**

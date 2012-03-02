@@ -145,6 +145,22 @@ class UtilitiesTest extends PHPUnit_Framework_TestCase
     }
     
     /**
+     * @covers PEAR2\WindowsAzure\Utilities::getArray
+     */
+    public function testGetArrayWithMixtureValue()
+    {
+        // Setup
+        $flat = array(array(10, 2), 1, 2, 3, 4, 5, 6, 7, 8);
+        $expected = array(array(array(10, 2), 1, 2, 3, 4, 5, 6, 7, 8));
+        
+        // Test
+        $actual = Utilities::getArray($flat);
+        PEAR2\WindowsAzure\Logger::log($actual);
+        
+        $this->assertEquals($expected, $actual);
+    }
+    
+    /**
      * @covers PEAR2\WindowsAzure\Utilities::unserialize
      */
     public function testUnserialize()

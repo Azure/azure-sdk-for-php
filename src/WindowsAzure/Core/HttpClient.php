@@ -78,29 +78,17 @@ class HttpClient implements IHttpClient
     }
     
     /**
-     * Resets request headers, body,expected code and sets x-ms-version header to 
-     * latest version.
+     * Makes deep copy from the current object.
      * 
-     * @return none
+     * @return PEAR2\WindowsAzure\Core\HttpClient
      */
-    
-    public function reset()
+    public function __clone()
     {
-        // Clear headers
-        $this->setHeaders(array_keys($this->getHeaders()));
+        $this->_request = clone $this->_request;
         
-        $this->_requestUrl = null;
-        
-        // Sets version header
-        $this->_request->SetHeader(
-            array(Resources::X_MS_VERSION => Resources::API_VERSION)
-        );
-        
-        // Reset expected code
-        $this->_expectedStatusCodes = array();
-        
-        // Reset request body
-        $this->_request->setBody(Resources::EMPTY_STRING);
+        if (!is_null($this->_requestUrl)) {
+            $this->_requestUrl = clone $this->_requestUrl;
+        }
     }
 
     /**
@@ -216,9 +204,8 @@ class HttpClient implements IHttpClient
             if (!is_null($this->getBody())) {
                 $contentLength = strlen($this->getBody());
             }
+            $this->_request->setHeader(Resources::CONTENT_LENGTH, $contentLength);
         }
-        
-        $this->_request->setHeader(Resources::CONTENT_LENGTH, $contentLength);
 
         foreach ($filters as $filter) {
             $this->_request = $filter->handleRequest($this)->_request;

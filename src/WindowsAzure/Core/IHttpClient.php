@@ -127,14 +127,6 @@ interface IHttpClient
     public function getSuccessfulStatusCode();
     
     /**
-     * Resets request headers, expected code and sets x-ms-version header to latest
-     * version.
-     * 
-     * @return string.
-     */
-    public function reset();
-    
-    /**
      * Sets a configuration element for the request.
      * 
      * @param string $name  configuration parameter name.
@@ -168,6 +160,13 @@ interface IHttpClient
      * @return string.
      */
     public function getBody();
+    
+    /**
+     * Makes deep copy from the current object.
+     * 
+     * @return PEAR2\WindowsAzure\Core\HttpClient
+     */
+    public function __clone();
 }
 
 ?>

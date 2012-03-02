@@ -58,26 +58,6 @@ class HttpClientTest extends PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers PEAR2\WindowsAzure\Services\Core\HttpClient::reset
-     */
-    public function testReset()
-    {
-        // Setup
-        $channel = new HttpClient();
-        
-        $channel->setHeader(TestResources::HEADER1, TestResources::HEADER1_VALUE);
-        $channel->setHeader(TestResources::HEADER2, TestResources::HEADER2_VALUE);
-        
-        // Test
-        $channel->reset();
-        
-        // Assert
-        $headers = $channel->getHeaders();
-        $this->assertCount(1, $headers);
-        $this->assertContains(Resources::X_MS_VERSION, array_keys($headers));
-    }
-    
-    /**
      * @covers PEAR2\WindowsAzure\Services\Core\HttpClient::setUrl
      */
     public function testSetUrl()
@@ -259,6 +239,23 @@ class HttpClientTest extends PHPUnit_Framework_TestCase
         
         // Assert
         $this->assertTrue(isset($response));
+    }
+    
+    /**
+     * @covers PEAR2\WindowsAzure\Services\Core\HttpClient::send
+     */
+    public function testSendWithContent()
+    {
+        // Setup
+        $channel = new HttpClient();
+        $url = new PEAR2\WindowsAzure\Core\Url('http://www.microsoft.com/');
+        $channel->setExpectedStatusCode('200');
+        $channel->setBody('This is body');
+        $channel->setMethod('PUT');
+        $this->setExpectedException(get_class(new ServiceException('404')));
+        
+        // Test
+        $channel->send(array(), $url);
     }
     
     /**
@@ -472,6 +469,26 @@ class HttpClientTest extends PHPUnit_Framework_TestCase
         
         // Assert
         $this->assertEquals($expected, $actual);
+    }
+    
+    /**
+     * @covers PEAR2\WindowsAzure\Services\Core\HttpClient::__clone
+     */
+    public function test__clone()
+    {
+        // Setup
+        $channel = new HttpClient();
+        $channel->setHeader('myheader', 'headervalue');
+        $channel->setUrl(new PEAR2\WindowsAzure\Core\Url('http://www.example.com'));
+        
+        // Test
+        $actual = clone $channel;
+        $channel->setUrl(new PEAR2\WindowsAzure\Core\Url('http://www.microsoft.com'));
+        $channel->setHeader('headerx', 'valuex');
+        
+        // Assert
+        $this->assertNotEquals($channel->getHeaders(), $actual->getHeaders());
+        $this->assertNotEquals($channel->getUrl()->getUrl(), $actual->getUrl()->getUrl());
     }
 }
 
