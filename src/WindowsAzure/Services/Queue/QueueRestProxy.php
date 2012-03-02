@@ -254,8 +254,8 @@ class QueueRestProxy implements IQueue
         $channel->send($this->_filters, $url);
         $response = $channel->getResponse();
         $metadata = AzureUtilities::getMetadataArray($response->getHeader());
-        $maxCount = intval($response->getHeader(
-            Resources::X_MS_APPROXIMATE_MESSAGES_COUNT)
+        $maxCount = intval(
+            $response->getHeader(Resources::X_MS_APPROXIMATE_MESSAGES_COUNT)
         );
         
         return new GetQueueMetadataResult($maxCount, $metadata);
@@ -330,7 +330,26 @@ class QueueRestProxy implements IQueue
     public function setQueueMetadata($queueName, $metadata, 
         $queueServiceOptions = null
     ) {
-        throw new \Exception(Resources::NOT_IMPLEMENTED_MSG);
+        $channel = clone $this->_channel;
+        $url     = clone $this->_url;
+        
+        if (!isset($queueServiceOptions)) {
+            $queueServiceOptions = new QueueServiceOptions();
+        }
+        
+        $channel->setMethod(\HTTP_Request2::METHOD_PUT);
+        $channel->setExpectedStatusCode(Resources::STATUS_NO_CONTENT);
+        
+        $timeout = $queueServiceOptions->getTimeout();
+        if (isset($timeout)) {
+            $channel->setConfig(Resources::CONNECT_TIMEOUT, $timeout);
+        }
+        $url->appendUrlPath($queueName);
+        $url->setQueryVariable('comp', 'metadata');
+        $metadataHeaders = AzureUtilities::generateMetadataHeaders($metadata);
+        $channel->setHeaders($metadataHeaders);
+        
+        $channel->send($this->_filters, $url);
     }
 
     /**

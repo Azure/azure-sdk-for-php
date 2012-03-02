@@ -323,6 +323,24 @@ class QueueRestProxyTest extends \RestTestBase
         $this->assertEquals($expectedCount, $result->getApproximateMessageCount());
         $this->assertEquals($expected, $result->getMetadata());
     }
+    
+    /**
+    * @covers PEAR2\WindowsAzure\Services\Queue\QueueRestProxy::setQueueMetadata
+    */
+    public function testSetQueueMetadata()
+    {
+        // Setup
+        $name = 'setqueuemetadata';
+        $expected = array ('name1' => 'MyName1', 'mymetaname' => '12345', 'values' => 'Microsoft_');
+        $this->createQueue($name);
+        
+        // Test
+        $this->queueWrapper->setQueueMetadata($name, $expected);
+        $actual = $this->queueWrapper->getQueueMetadata($name);
+        
+        // Assert
+        $this->assertEquals($expected, $actual->getMetadata());
+    }
 }
 
 ?>

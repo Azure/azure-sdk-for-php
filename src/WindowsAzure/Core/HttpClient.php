@@ -53,7 +53,7 @@ class HttpClient implements IHttpClient
      * @var PEAR2\WindowsAzure\Core\IUrl 
      */
     private $_requestUrl;
-    private $_lastResponse;
+    private $_response;
     private $_expectedStatusCodes;
     
     /**
@@ -75,7 +75,7 @@ class HttpClient implements IHttpClient
         $this->setHeader('user-agent', null);
         
         $this->_requestUrl          = null;
-        $this->_lastResponse        = null;
+        $this->_response            = null;
         $this->_expectedStatusCodes = array();
     }
     
@@ -213,22 +213,24 @@ class HttpClient implements IHttpClient
             $this->_request = $filter->handleRequest($this)->_request;
         }
 
-        $this->_lastResponse = $this->_request->send();
+        $this->_response = $this->_request->send();
 
         $start = count($filters) - 1;
         for ($index = $start; $index >= 0; $index--) {
-            $this->_lastResponse = $filters[$index]->handleResponse($this, $this->_lastResponse);
+            $this->_response = $filters[$index]->handleResponse(
+                $this, $this->_response
+            );
         }
         
-        if (!in_array($this->_lastResponse->getStatus(), $this->_expectedStatusCodes)) {
-            $errorCode    = $this->_lastResponse->getStatus();
-            $stringValue  = $this->_lastResponse->getReasonPhrase();
-            $errorDetails = $this->_lastResponse->getBody();
+        if (!in_array($this->_response->getStatus(), $this->_expectedStatusCodes)) {
+            $errorCode    = $this->_response->getStatus();
+            $stringValue  = $this->_response->getReasonPhrase();
+            $errorDetails = $this->_response->getBody();
             
             throw new ServiceException($errorCode, $stringValue, $errorDetails);
         }
 
-        return $this->_lastResponse->getBody();
+        return $this->_response->getBody();
     }
     
     /**
@@ -314,7 +316,7 @@ class HttpClient implements IHttpClient
      */
     public function getResponse()
     {
-        return $this->_lastResponse;
+        return $this->_response;
     }
 }
 
