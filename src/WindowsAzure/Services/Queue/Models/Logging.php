@@ -86,9 +86,9 @@ class Logging
     {
         $result = new Logging();
         $result->setVersion($parsedResponse['Version']);
-        $result->setDelete(Utilities::toBool($parsedResponse['Delete']));
-        $result->setRead(Utilities::toBool($parsedResponse['Read']));
-        $result->setWrite(Utilities::toBool($parsedResponse['Write']));
+        $result->setDelete(Utilities::toBoolean($parsedResponse['Delete']));
+        $result->setRead(Utilities::toBoolean($parsedResponse['Read']));
+        $result->setWrite(Utilities::toBoolean($parsedResponse['Write']));
         $result->setRetentionPolicy(
             RetentionPolicy::create($parsedResponse['RetentionPolicy'])
         );
@@ -205,6 +205,22 @@ class Logging
     public function setVersion($version)
     {
         $this->_version = $version;
+    }
+    
+    /**
+     * Converts this object to array with XML tags
+     * 
+     * @return array. 
+     */
+    public function toArray()
+    {
+        return array(
+            'Version'         => $this->_version,
+            'Delete'          => Utilities::booleanToString($this->_delete),
+            'Read'            => Utilities::booleanToString($this->_read),
+            'Write'           => Utilities::booleanToString($this->_write),
+            'RetentionPolicy' => $this->_retentionPolicy->toArray()
+        );
     }
 }
 

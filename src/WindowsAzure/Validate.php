@@ -80,7 +80,7 @@ class Validate
      * 
      * @return none.
      */
-    public static function isBool($var)
+    public static function isBoolean($var)
     {
         if (!is_bool($var) && $var != Resources::EMPTY_STRING) {
             throw new InvalidArgumentTypeException(gettype(true));
@@ -98,7 +98,7 @@ class Validate
      */
     public static function notNullOrEmpty($var)
     {
-        if (!isset($var) || $var == Resources::EMPTY_STRING) {
+        if (is_null($var) || $var == Resources::EMPTY_STRING) {
             throw new \InvalidArgumentException(Resources::NULL_ERROR_MSG);
         }
     }

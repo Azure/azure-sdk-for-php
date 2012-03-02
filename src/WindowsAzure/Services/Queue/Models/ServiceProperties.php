@@ -25,6 +25,7 @@
 namespace PEAR2\WindowsAzure\Services\Queue\Models;
 use PEAR2\WindowsAzure\Services\Queue\Models\Logging;
 use PEAR2\WindowsAzure\Services\Queue\Models\Metrics;
+use PEAR2\WindowsAzure\Utilities;
 
 /**
  * Encapsulates service properties
@@ -41,6 +42,7 @@ class ServiceProperties
 {
     private $_logging;
     private $_metrics;
+    public static $xmLRootName = 'StorageServiceProperties';
     
     /**
      * Creates ServiceProperties object from parsed XML response.
@@ -100,6 +102,29 @@ class ServiceProperties
     public function setMetrics($metrics)
     {
         $this->_metrics = clone $metrics;
+    }
+    
+    /**
+     * Converts this object to array with XML tags
+     * 
+     * @return array. 
+     */
+    public function toArray()
+    {
+        return array(
+            'Logging' => $this->_logging->toArray(),
+            'Metrics' => $this->_metrics->toArray(),
+        );
+    }
+    
+    /**
+     * Converts this current object to XML representation.
+     * 
+     * @return string
+     */
+    public function toXml()
+    {
+        return Utilities::serialize($this->toArray(), self::$xmLRootName);
     }
 }
 

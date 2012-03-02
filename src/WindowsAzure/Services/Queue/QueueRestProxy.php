@@ -30,6 +30,7 @@ use PEAR2\WindowsAzure\Services\Queue\Models\ListQueueResult;
 use PEAR2\WindowsAzure\Services\Queue\Models\CreateQueueOptions;
 use PEAR2\WindowsAzure\Services\Queue\Models\GetServicePropertiesResult;
 use PEAR2\WindowsAzure\Services\Queue\Models\QueueServiceOptions;
+use PEAR2\WindowsAzure\Services\Queue\Models\ServiceProperties;
 use PEAR2\WindowsAzure\Core\IHttpClient;
 use PEAR2\WindowsAzure\Utilities;
 use PEAR2\WindowsAzure\Core\Url;
@@ -134,16 +135,6 @@ class QueueRestProxy implements IQueue
     }
 
     /**
-     * Clones the current object into new one.
-     *
-     * @return PEAR2\WindowsAzure\Services\Queue\Models\QueueRestProxy.
-     */
-    public function __clone()
-    {
-
-    }
-
-    /**
      * Adds new filter to queue proxy object and returns new QueueRestProxy with
      * that filter.
      *
@@ -245,8 +236,7 @@ class QueueRestProxy implements IQueue
             $createQueueOptions->getMetadata()
         );
         $this->_channel->setHeaders($metadataHeaders);
-        $this->_channel->setHeader(Resources::CONTENT_LENGTH, 0);
-        $this->_channel->setExpectedStatusCode(Resources::STATUS_OK_CREATE_QUEUE);
+        $this->_channel->setExpectedStatusCode(Resources::STATUS_CREATED);
 
         $this->_sendAndReset();
     }
@@ -279,7 +269,7 @@ class QueueRestProxy implements IQueue
     {
         $this->_channel->setMethod(\HTTP_Request2::METHOD_DELETE);
         $this->_url->appendUrlPath($queueName);
-        $this->_channel->setExpectedStatusCode(Resources::STATUS_OK_DELETE_QUEUE);
+        $this->_channel->setExpectedStatusCode(Resources::STATUS_NO_CONTENT);
         
         $this->_sendAndReset();
     }
@@ -368,7 +358,7 @@ class QueueRestProxy implements IQueue
     /**
      * Sets the properties of the Queue service.
      * 
-     * @param array               $serviceProperties   New service properties.
+     * @param ServiceProperties   $serviceProperties   New service properties.
      * @param QueueServiceOptions $queueServiceOptions Optional queue service options
      * 
      * @return none.
@@ -376,7 +366,21 @@ class QueueRestProxy implements IQueue
     public function setServiceProperties($serviceProperties, 
         $queueServiceOptions = null
     ) {
-        throw new \Exception(Resources::NOT_IMPLEMENTED_MSG);
+        if (!isset($queueServiceOptions)) {
+            $queueServiceOptions = new QueueServiceOptions();
+        }
+        
+        $this->_channel->setMethod(\HTTP_Request2::METHOD_PUT);
+        $this->_channel->setExpectedStatusCode(Resources::STATUS_ACCEPT);
+        $this->_url->setQueryVariable('restype', 'service');
+        $this->_url->setQueryVariable('comp', 'properties');
+        $this->_url->setQueryVariable('timeout', $queueServiceOptions->getTimeout());
+        $this->_channel->setBody($serviceProperties->toXml());
+        $this->_channel->setHeader(
+            Resources::CONTENT_TYPE, Resources::XML_CONTENT_TYPE
+        );
+        
+        $this->_sendAndReset();
     }
 
     /**

@@ -46,7 +46,7 @@ class RetentionPolicyTest extends PHPUnit_Framework_TestCase
     {
         // Setup
         $sample = TestResources::getServicePropertiesSample();
-        $expectedEnabled = Utilities::toBool($sample['Logging']['RetentionPolicy']['Enabled']);
+        $expectedEnabled = Utilities::toBoolean($sample['Logging']['RetentionPolicy']['Enabled']);
         $expectedDays = intval($sample['Logging']['RetentionPolicy']['Days']);
         
         // Test
@@ -65,7 +65,7 @@ class RetentionPolicyTest extends PHPUnit_Framework_TestCase
         // Setup
         $sample = TestResources::getServicePropertiesSample();
         $retentionPolicy = new RetentionPolicy();
-        $expected = Utilities::toBool($sample['Logging']['RetentionPolicy']['Enabled']);
+        $expected = Utilities::toBoolean($sample['Logging']['RetentionPolicy']['Enabled']);
         $retentionPolicy->setEnabled($expected);
         
         // Test
@@ -83,7 +83,7 @@ class RetentionPolicyTest extends PHPUnit_Framework_TestCase
         // Setup
         $sample = TestResources::getServicePropertiesSample();
         $retentionPolicy = new RetentionPolicy();
-        $expected = Utilities::toBool($sample['Logging']['RetentionPolicy']['Enabled']);
+        $expected = Utilities::toBoolean($sample['Logging']['RetentionPolicy']['Enabled']);
         
         // Test
         $retentionPolicy->setEnabled($expected);
@@ -126,6 +126,44 @@ class RetentionPolicyTest extends PHPUnit_Framework_TestCase
         
         // Assert
         $actual = $retentionPolicy->getDays();
+        $this->assertEquals($expected, $actual);
+    }
+    
+    /**
+     * @covers PEAR2\WindowsAzure\Services\Queue\Models\RetentionPolicy::toArray
+     */
+    public function testToArray()
+    {
+        // Setup
+        $sample = TestResources::getServicePropertiesSample();
+        $retentionPolicy = RetentionPolicy::create($sample['Logging']['RetentionPolicy']);
+        $expected = array(
+            'Enabled' => $sample['Logging']['RetentionPolicy']['Enabled'], 
+            'Days'    => $sample['Logging']['RetentionPolicy']['Days']
+        );
+        
+        // Test
+        $actual = $retentionPolicy->toArray();
+        
+        // Assert
+        $this->assertEquals($expected, $actual);
+    }
+    
+    /**
+     * @covers PEAR2\WindowsAzure\Services\Queue\Models\RetentionPolicy::toArray
+     */
+    public function testToArrayWithoutDays()
+    {
+        // Setup
+        $sample = TestResources::getServicePropertiesSample();
+        $retentionPolicy = RetentionPolicy::create($sample['Logging']['RetentionPolicy']);
+        $expected = array('Enabled' => $sample['Logging']['RetentionPolicy']['Enabled']);
+        $retentionPolicy->setDays(null);
+        
+        // Test
+        $actual = $retentionPolicy->toArray();
+        
+        // Assert
         $this->assertEquals($expected, $actual);
     }
 }

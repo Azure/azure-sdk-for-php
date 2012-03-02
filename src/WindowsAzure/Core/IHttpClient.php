@@ -152,6 +152,22 @@ interface IHttpClient
      * @return string.
      */
     public function getConfig($name);
+    
+    /**
+     * Sets the request body.
+     * 
+     * @param string $body body to use.
+     * 
+     * @return none.
+     */
+    public function setBody($body);
+    
+    /**
+     * Gets the request body.
+     * 
+     * @return string.
+     */
+    public function getBody();
 }
 
 ?>

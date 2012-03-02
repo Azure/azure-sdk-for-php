@@ -7,4 +7,4 @@ build/phpdox
 phpunit.xml
 cache.properties
 /nbproject/
-/src/WindowsAzure/Utilities/Logger.php
+/src/WindowsAzure/Logger.php

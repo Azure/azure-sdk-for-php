@@ -99,7 +99,7 @@ class Url implements IUrl
 
         if (isset($value)) {
             $this->_url->setQueryVariable(strtolower($key), $value);
-        } else if (!isset($value) && $force) {
+        } else if ($force) {
             $this->_url->setQueryVariable(strtolower($key), $value);
         }
     }

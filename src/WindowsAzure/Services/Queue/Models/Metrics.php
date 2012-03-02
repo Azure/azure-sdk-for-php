@@ -71,10 +71,10 @@ class Metrics
     {
         $result = new Metrics();
         $result->setVersion($parsedResponse['Version']);
-        $result->setEnabled(Utilities::toBool($parsedResponse['Enabled']));
+        $result->setEnabled(Utilities::toBoolean($parsedResponse['Enabled']));
         if ($result->getEnabled()) {
             $result->setIncludeAPIs(
-                Utilities::toBool($parsedResponse['IncludeAPIs'])
+                Utilities::toBoolean($parsedResponse['IncludeAPIs'])
             );
         }
         $result->setRetentionPolicy(
@@ -171,6 +171,25 @@ class Metrics
     public function setVersion($version)
     {
         $this->_version = $version;
+    }
+    
+    /**
+     * Converts this object to array with XML tags
+     * 
+     * @return array. 
+     */
+    public function toArray()
+    {
+        $array = array(
+            'Version' => $this->_version,
+            'Enabled' => Utilities::booleanToString($this->_enabled)
+        );
+        if ($this->_enabled) {
+            $array['IncludeAPIs'] = Utilities::booleanToString($this->_includeAPIs);
+        }
+        $array['RetentionPolicy'] = $this->_retentionPolicy->toArray();
+        
+        return $array;
     }
 }
 

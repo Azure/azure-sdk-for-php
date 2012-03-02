@@ -132,7 +132,7 @@ class ListQueueOptions extends QueueServiceOptions
      */
     public function setIncludeMetadata($includeMetadata)
     {
-        Validate::isBool($includeMetadata);
+        Validate::isBoolean($includeMetadata);
         $this->_includeMetadata = $includeMetadata;
     }
 }

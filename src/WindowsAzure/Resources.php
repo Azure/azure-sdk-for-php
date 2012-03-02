@@ -69,8 +69,7 @@ class Resources
     const EMPTY_STRING    = '';
 
     // Versioning
-    const API_VERSION                   = '2011-08-18';
-    const MIN_STORAGE_ANALYTICS_VERSION = '1.0';
+    const API_VERSION = '2011-08-18';
 
     // Query parameter names
     const PREFIX      = 'Prefix';
@@ -79,10 +78,14 @@ class Resources
     const MARKER      = 'Marker';
     const NEXT_MARKER = 'NextMarker';
     
+    // Content types
+    const XML_CONTENT_TYPE = 'application/x-www-form-urlencoded';
+    
     // Status Codes
-    const STATUS_OK              = '200';
-    const STATUS_OK_CREATE_QUEUE = '201';
-    const STATUS_OK_DELETE_QUEUE = '204';
+    const STATUS_OK         = '200';
+    const STATUS_CREATED    = '201';
+    const STATUS_ACCEPT     = '202';
+    const STATUS_NO_CONTENT = '204';
     
     // HTTP_Request2 config parameter names
     const USE_BRACKETS    = 'use_brackets';

@@ -52,8 +52,8 @@ class MetricsTest extends PHPUnit_Framework_TestCase
         $actual = Metrics::create($sample['Metrics']);
         
         // Assert
-        $this->assertEquals(Utilities::toBool($sample['Metrics']['Enabled']), $actual->getEnabled());
-        $this->assertEquals(Utilities::toBool($sample['Metrics']['IncludeAPIs']), $actual->getIncludeAPIs());
+        $this->assertEquals(Utilities::toBoolean($sample['Metrics']['Enabled']), $actual->getEnabled());
+        $this->assertEquals(Utilities::toBoolean($sample['Metrics']['IncludeAPIs']), $actual->getIncludeAPIs());
         $this->assertEquals(RetentionPolicy::create($sample['Metrics']['RetentionPolicy']), $actual->getRetentionPolicy());
         $this->assertEquals($sample['Metrics']['Version'], $actual->getVersion());
     }
@@ -138,7 +138,7 @@ class MetricsTest extends PHPUnit_Framework_TestCase
         // Setup
         $sample = TestResources::getServicePropertiesSample();
         $metrics = new Metrics();
-        $expected = Utilities::toBool($sample['Metrics']['Enabled']);
+        $expected = Utilities::toBoolean($sample['Metrics']['Enabled']);
         $metrics->setEnabled($expected);
         
         // Test
@@ -156,7 +156,7 @@ class MetricsTest extends PHPUnit_Framework_TestCase
         // Setup
         $sample = TestResources::getServicePropertiesSample();
         $metrics = new Metrics();
-        $expected = Utilities::toBool($sample['Metrics']['Enabled']);
+        $expected = Utilities::toBoolean($sample['Metrics']['Enabled']);
         
         // Test
         $metrics->setEnabled($expected);
@@ -174,7 +174,7 @@ class MetricsTest extends PHPUnit_Framework_TestCase
         // Setup
         $sample = TestResources::getServicePropertiesSample();
         $metrics = new Metrics();
-        $expected = Utilities::toBool($sample['Metrics']['IncludeAPIs']);
+        $expected = Utilities::toBoolean($sample['Metrics']['IncludeAPIs']);
         $metrics->setIncludeAPIs($expected);
         
         // Test
@@ -192,13 +192,57 @@ class MetricsTest extends PHPUnit_Framework_TestCase
         // Setup
         $sample = TestResources::getServicePropertiesSample();
         $metrics = new Metrics();
-        $expected = Utilities::toBool($sample['Metrics']['IncludeAPIs']);
+        $expected = Utilities::toBoolean($sample['Metrics']['IncludeAPIs']);
         
         // Test
         $metrics->setIncludeAPIs($expected);
         
         // Assert
         $actual = $metrics->getIncludeAPIs();
+        $this->assertEquals($expected, $actual);
+    }
+    
+    /**
+     * @covers PEAR2\WindowsAzure\Services\Queue\Models\Metrics::toArray
+     */
+    public function testToArray()
+    {
+        // Setup
+        $sample = TestResources::getServicePropertiesSample();
+        $metrics = Metrics::create($sample['Metrics']);
+        $expected = array(
+            'Version'         => $sample['Metrics']['Version'],
+            'Enabled'         => $sample['Metrics']['Enabled'],
+            'IncludeAPIs'     => $sample['Metrics']['IncludeAPIs'],
+            'RetentionPolicy' => $metrics->getRetentionPolicy()->toArray()
+        );
+        
+        // Test
+        $actual = $metrics->toArray();
+        
+        // Assert
+        $this->assertEquals($expected, $actual);
+    }
+    
+    /**
+     * @covers PEAR2\WindowsAzure\Services\Queue\Models\Metrics::toArray
+     */
+    public function testToArrayWithNotEnabled()
+    {
+        // Setup
+        $sample = TestResources::getServicePropertiesSample();
+        $sample['Metrics']['Enabled'] = 'false';
+        $metrics = Metrics::create($sample['Metrics']);
+        $expected = array(
+            'Version'         => $sample['Metrics']['Version'],
+            'Enabled'         => $sample['Metrics']['Enabled'],
+            'RetentionPolicy' => $metrics->getRetentionPolicy()->toArray()
+        );
+        
+        // Test
+        $actual = $metrics->toArray();
+        
+        // Assert
         $this->assertEquals($expected, $actual);
     }
 }

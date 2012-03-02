@@ -10,7 +10,7 @@ spl_autoload_register(
             'pear2\\windowsazure\\core\\iurl' => '/WindowsAzure/Core/IUrl.php',
             'pear2\\windowsazure\\core\\serviceexception' => '/WindowsAzure/Core/ServiceException.php',
             'pear2\\windowsazure\\core\\url' => '/WindowsAzure/Core/Url.php',
-            'pear2\\windowsazure\\logger' => '/WindowsAzure/Utilities/Logger.php',
+            'pear2\\windowsazure\\logger' => '/WindowsAzure/Logger.php',
             'pear2\\windowsazure\\resources' => '/WindowsAzure/Resources.php',
             'pear2\\windowsazure\\services\\core\\authentication\\sharedkeyauthenticationscheme' => '/WindowsAzure/Services/Core/Authentication/SharedKeyAuthenticationScheme.php',
             'pear2\\windowsazure\\services\\core\\authentication\\storageauthenticationscheme' => '/WindowsAzure/Services/Core/Authentication/StorageAuthenticationScheme.php',
@@ -34,8 +34,8 @@ spl_autoload_register(
             'pear2\\windowsazure\\services\\queue\\queuerestproxy' => '/WindowsAzure/Services/Queue/QueueRestProxy.php',
             'pear2\\windowsazure\\services\\queue\\queueservice' => '/WindowsAzure/Services/Queue/QueueService.php',
             'pear2\\windowsazure\\services\\queue\\queuesettings' => '/WindowsAzure/Services/Queue/QueueSettings.php',
-            'pear2\\windowsazure\\utilities' => '/WindowsAzure/Utilities/Utilities.php',
-            'pear2\\windowsazure\\validate' => '/WindowsAzure/Utilities/Validate.php'
+            'pear2\\windowsazure\\utilities' => '/WindowsAzure/Utilities.php',
+            'pear2\\windowsazure\\validate' => '/WindowsAzure/Validate.php'
           );
       }
       $cn = strtolower($class);

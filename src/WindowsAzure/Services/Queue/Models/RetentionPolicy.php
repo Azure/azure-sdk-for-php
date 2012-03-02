@@ -65,7 +65,7 @@ class RetentionPolicy
     public static function create($parsedResponse)
     {
         $result = new RetentionPolicy();
-        $result->setEnabled(Utilities::toBool($parsedResponse['Enabled']));
+        $result->setEnabled(Utilities::toBoolean($parsedResponse['Enabled']));
         if ($result->getEnabled()) {
             $result->setDays(intval($parsedResponse['Days']));
         }
@@ -115,6 +115,21 @@ class RetentionPolicy
     public function setDays($days)
     {
         $this->_days = $days;
+    }
+    
+    /**
+     * Converts this object to array with XML tags
+     * 
+     * @return array. 
+     */
+    public function toArray()
+    {
+        $array = array('Enabled' => Utilities::booleanToString($this->_enabled));
+        if (isset($this->_days)) {
+            $array['Days'] = strval($this->_days);
+        }
+        
+        return $array;
     }
 }
 

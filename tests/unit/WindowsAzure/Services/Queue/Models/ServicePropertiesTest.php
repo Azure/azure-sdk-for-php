@@ -128,6 +128,42 @@ class ServicePropertiesTest extends PHPUnit_Framework_TestCase
         // Assert
         $this->assertEquals($metrics, $actual);
     }
+    
+    /**
+     * @covers PEAR2\WindowsAzure\Services\Queue\Models\ServiceProperties::toArray
+     */
+    public function testToArray()
+    {
+        // Setup
+        $properties = ServiceProperties::create(TestResources::getServicePropertiesSample());
+        $expected = array(
+            'Logging' => $properties->getLogging()->toArray(),
+            'Metrics' => $properties->getMetrics()->toArray()
+        );
+        
+        // Test
+        $actual = $properties->toArray();
+        
+        // Assert
+        $this->assertEquals($expected, $actual);
+    }
+    
+    /**
+     * @covers PEAR2\WindowsAzure\Services\Queue\Models\ServiceProperties::toXml
+     */
+    public function testToXml()
+    {
+        // Setup
+        $properties = ServiceProperties::create(TestResources::getServicePropertiesSample());
+        
+        // Test
+        $actual = $properties->toXml();
+        
+        // Assert
+        $actualParsed = PEAR2\WindowsAzure\Utilities::unserialize($actual);
+        $actualProperties = \PEAR2\WindowsAzure\Services\Queue\Models\GetServicePropertiesResult::create($actualParsed);
+        $this->assertEquals($actualProperties->getValue(), $properties);
+    }
 }
 
 ?>

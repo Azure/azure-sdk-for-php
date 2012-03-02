@@ -31,7 +31,6 @@ use PEAR2\WindowsAzure\Validate;
 use PEAR2\WindowsAzure\Core\IUrl;
 
 require_once 'HTTP/Request2.php';
-require_once 'XML/Unserializer.php';
 
 /**
  * HTTP client which sends and receives HTTP requests and responses.
@@ -79,8 +78,8 @@ class HttpClient implements IHttpClient
     }
     
     /**
-     * Resets request headers, expected code and sets x-ms-version header to latest 
-     * version.
+     * Resets request headers, body,expected code and sets x-ms-version header to 
+     * latest version.
      * 
      * @return none
      */
@@ -99,6 +98,9 @@ class HttpClient implements IHttpClient
         
         // Reset expected code
         $this->_expectedStatusCodes = array();
+        
+        // Reset request body
+        $this->_request->setBody(Resources::EMPTY_STRING);
     }
 
     /**
@@ -203,6 +205,20 @@ class HttpClient implements IHttpClient
             $this->setUrl($url);
             $this->_request->setUrl($this->_requestUrl->getUrl());
         }
+        
+        $contentLength = Resources::EMPTY_STRING;
+        if (    strtoupper($this->getMethod()) != \HTTP_Request2::METHOD_GET
+            && strtoupper($this->getMethod()) != \HTTP_Request2::METHOD_DELETE
+            && strtoupper($this->getMethod()) != \HTTP_Request2::METHOD_HEAD
+        ) {
+            $contentLength = 0;
+            
+            if (!is_null($this->getBody())) {
+                $contentLength = strlen($this->getBody());
+            }
+        }
+        
+        $this->_request->setHeader(Resources::CONTENT_LENGTH, $contentLength);
 
         foreach ($filters as $filter) {
             $this->_request = $filter->handleRequest($this)->_request;
@@ -278,6 +294,28 @@ class HttpClient implements IHttpClient
     public function getConfig($name)
     {
         return $this->_request->getConfig($name);
+    }
+    
+    /**
+     * Sets the request body.
+     * 
+     * @param string $body body to use.
+     * 
+     * @return none.
+     */
+    public function setBody($body)
+    {
+        $this->_request->setBody($body);
+    }
+    
+    /**
+     * Gets the request body.
+     * 
+     * @return string.
+     */
+    public function getBody()
+    {
+        return $this->_request->getBody();
     }
 }
 

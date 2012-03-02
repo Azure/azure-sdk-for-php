@@ -440,6 +440,39 @@ class HttpClientTest extends PHPUnit_Framework_TestCase
         // Assert
         $this->assertEquals($value, $actualValue);
     }
+    
+    /**
+     * @covers PEAR2\WindowsAzure\Services\Core\HttpClient::setBody
+     */
+    public function testSetBody()
+    {
+        // Setup
+        $channel = new HttpClient();
+        $expected = 'new body';
+        
+        // Test
+        $channel->setBody($expected);
+        
+        // Assert
+        $this->assertEquals($expected, $channel->getBody());
+    }
+    
+    /**
+     * @covers PEAR2\WindowsAzure\Services\Core\HttpClient::getBody
+     */
+    public function testGetBody()
+    {
+        // Setup
+        $channel = new HttpClient();
+        $expected = 'new body';
+        $channel->setBody($expected);
+        
+        // Test
+        $actual = $channel->getBody();
+        
+        // Assert
+        $this->assertEquals($expected, $actual);
+    }
 }
 
 ?>
