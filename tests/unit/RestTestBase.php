@@ -26,6 +26,7 @@ use PEAR2\WindowsAzure\Services\Core\Configuration;
 use PEAR2\WindowsAzure\Services\Queue\QueueSettings;
 use PEAR2\Tests\Unit\TestResources;
 use PEAR2\WindowsAzure\Services\Queue\QueueService;
+use PEAR2\WindowsAzure\Services\Queue\Models\ServiceProperties;
 
 /**
  * TestBase class for each unit test class.
@@ -43,6 +44,8 @@ class RestTestBase extends PHPUnit_Framework_TestCase
     protected $config;
     protected $queueWrapper;
     protected $createdQueues;
+    protected $propertiesChanged;
+    protected $defaultProperties;
     
     public function __construct()
     {
@@ -52,6 +55,18 @@ class RestTestBase extends PHPUnit_Framework_TestCase
         $this->config->setProperty(QueueSettings::URI, 'queue.core.windows.net');
         $this->queueWrapper = QueueService::create($this->config);
         $this->createdQueues = array();
+        $this->propertiesChanged = false;
+        $propertiesArray = array();
+        $propertiesArray['Logging']['Version'] = '1.0';
+        $propertiesArray['Logging']['Delete'] = 'false';
+        $propertiesArray['Logging']['Read'] = 'false';
+        $propertiesArray['Logging']['Write'] = 'false';
+        $propertiesArray['Logging']['RetentionPolicy']['Enabled'] = 'false';
+        $propertiesArray['Metrics']['Version'] = '1.0';
+        $propertiesArray['Metrics']['Enabled'] = 'false';
+        $propertiesArray['Metrics']['IncludeAPIs'] = 'false';
+        $propertiesArray['Metrics']['RetentionPolicy']['Enabled'] = 'false';
+        $this->defaultProperties = ServiceProperties::create($propertiesArray);
     }
     
     public function createQueue($queueName, $options = null)
@@ -63,6 +78,12 @@ class RestTestBase extends PHPUnit_Framework_TestCase
     public function deleteQueue($queueName, $options = null)
     {
         $this->queueWrapper->deleteQueue($queueName, $options);
+    }
+    
+    public function setServiceProperties($properties, $options = null)
+    {
+        $this->queueWrapper->setServiceProperties($properties, $options);
+        $this->propertiesChanged = true;
     }
 
     protected function tearDown()
@@ -77,6 +98,10 @@ class RestTestBase extends PHPUnit_Framework_TestCase
                 // Ignore exception and continue, will assume that this queue doesn't exist in the sotrage account
                 error_log($e->getMessage());
             }
+        }
+        
+        if ($this->propertiesChanged) {
+            $this->queueWrapper->setServiceProperties($this->defaultProperties);
         }
     }
     

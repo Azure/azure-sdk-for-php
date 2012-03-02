@@ -24,7 +24,7 @@
  
 namespace PEAR2\WindowsAzure\Services\Queue\Models;
 use PEAR2\WindowsAzure\Services\Queue\Models\QueueServiceOptions;
-use \PEAR2\WindowsAzure\Utilities\Validate;
+use \PEAR2\WindowsAzure\Validate;
 
 /**
  * Options for listQueues API.
@@ -132,7 +132,7 @@ class ListQueueOptions extends QueueServiceOptions
      */
     public function setIncludeMetadata($includeMetadata)
     {
-        Validate::isBool($includeMetadata);
+        Validate::isBoolean($includeMetadata);
         $this->_includeMetadata = $includeMetadata;
     }
 }
