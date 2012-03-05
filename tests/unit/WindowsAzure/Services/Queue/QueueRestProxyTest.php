@@ -582,6 +582,30 @@ class QueueRestProxyTest extends \RestTestBase
         $queues = $result->getQueues();
         $this->assertTrue(empty($queues));
     }
+    
+    /**
+    * @covers PEAR2\WindowsAzure\Services\Queue\QueueRestProxy::deleteMessage
+    */
+    public function testDeleteMessage()
+    {
+        // Setup
+        $name = 'deletemessage';
+        $expected = 'this is message text';
+        $this->createQueue($name);
+        $this->queueWrapper->createMessage($name, $expected);
+        $result = $this->queueWrapper->listMessages($name);
+        $messages   = $result->getQueueMessages();
+        $messageId  = $messages[0]->getMessageId();
+        $popReceipt = $messages[0]->getPopReceipt();
+        
+        // Test
+        $this->queueWrapper->deleteMessage($name, $messageId, $popReceipt);
+        
+        // Assert
+        $result   = $this->queueWrapper->listMessages($name);
+        $messages = $result->getQueueMessages();
+        $this->assertTrue(empty($messages));
+    }
 }
 
 ?>

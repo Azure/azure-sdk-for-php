@@ -25,6 +25,7 @@
 namespace PEAR2\WindowsAzure\Services\Queue;
 use PEAR2\WindowsAzure\Services\Queue\Queue;
 use PEAR2\WindowsAzure\Resources;
+use PEAR2\WindowsAzure\Validate;
 use PEAR2\WindowsAzure\Services\Queue\Models\ListQueueOptions;
 use PEAR2\WindowsAzure\Services\Queue\Models\ListQueueResult;
 use PEAR2\WindowsAzure\Services\Queue\Models\CreateQueueOptions;
@@ -202,7 +203,6 @@ class QueueRestProxy implements IQueue
         $body        = Resources::EMPTY_STRING;
         $statusCode  = Resources::STATUS_CREATED;
         
-        
         if (!isset($createMessageOptions)) {
             $createMessageOptions = new CreateMessageOptions();
         }
@@ -267,7 +267,27 @@ class QueueRestProxy implements IQueue
     public function deleteMessage($queueName, $messageId, $popReceipt, 
         $queueServiceOptions = null
     ) {
-        throw new \Exception(Resources::NOT_IMPLEMENTED_MSG);
+        Validate::notNullOrEmpty($queueName);
+        Validate::notNullOrEmpty($messageId);
+        Validate::notNullOrEmpty($popReceipt);
+        
+        $method      = \HTTP_Request2::METHOD_DELETE;
+        $headers     = array();
+        $queryParams = array();
+        $config      = array();
+        $path        = $queueName . '/messages' . '/' . $messageId;
+        $body        = Resources::EMPTY_STRING;
+        $statusCode  = Resources::STATUS_NO_CONTENT;
+        
+        if (!isset($queueServiceOptions)) {
+            $queueServiceOptions = new QueueServiceOptions();
+        }
+        
+        $queryParams['popreceipt']          = $popReceipt;
+        $config[Resources::CONNECT_TIMEOUT] = $queueServiceOptions->getTimeout();
+        
+        $this->send($method, $headers, $queryParams, $path, $statusCode, $body, 
+            $config);
     }
 
     /**
