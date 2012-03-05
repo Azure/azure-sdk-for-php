@@ -84,10 +84,10 @@ class Resources
     const XML_CONTENT_TYPE = 'application/x-www-form-urlencoded';
     
     // Status Codes
-    const STATUS_OK         = '200';
-    const STATUS_CREATED    = '201';
-    const STATUS_ACCEPT     = '202';
-    const STATUS_NO_CONTENT = '204';
+    const STATUS_OK         = 200;
+    const STATUS_CREATED    = 201;
+    const STATUS_ACCEPTED   = 202;
+    const STATUS_NO_CONTENT = 204;
     
     // HTTP_Request2 config parameter names
     const USE_BRACKETS    = 'use_brackets';

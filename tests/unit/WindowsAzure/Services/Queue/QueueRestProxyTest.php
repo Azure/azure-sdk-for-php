@@ -249,6 +249,20 @@ class QueueRestProxyTest extends \RestTestBase
     }
     
     /**
+    * @covers PEAR2\WindowsAzure\Services\Queue\QueueRestProxy::createQueue
+    */
+    public function testCreateQueueAlreadyExitsFail()
+    {
+        // Setup
+        $queueName = 'createqueuealreadyexitsfail';
+        $this->setExpectedException(get_class(new ServiceException('204')));
+        $this->createQueue($queueName);
+
+        // Test
+        $this->createQueue($queueName);
+    }
+    
+    /**
     * @covers PEAR2\WindowsAzure\Services\Queue\QueueRestProxy::deleteQueue
     */
     public function testDeleteQueue()
@@ -544,6 +558,29 @@ class QueueRestProxyTest extends \RestTestBase
         $this->assertEquals($expected1, $actual[0]->getMessageText());
         $this->assertEquals($expected2, $actual[1]->getMessageText());
         $this->assertEquals($expected3, $actual[2]->getMessageText());
+    }
+    
+    /**
+    * @covers PEAR2\WindowsAzure\Services\Queue\QueueRestProxy::send
+    */
+    public function testSend()
+    {
+        // Setup
+        $queueName   = 'send';
+        $method      = \HTTP_Request2::METHOD_DELETE;
+        $headers     = array();
+        $queryParams = array();
+        $path        = $queueName;
+        $statusCode  = Resources::STATUS_NO_CONTENT;
+        $this->queueWrapper->createQueue($queueName);
+        
+        // Test
+        $this->queueWrapper->send($method, $headers, $queryParams, $path, $statusCode);
+        
+        // Assert
+        $result = $this->queueWrapper->listQueues();
+        $queues = $result->getQueues();
+        $this->assertTrue(empty($queues));
     }
 }
 

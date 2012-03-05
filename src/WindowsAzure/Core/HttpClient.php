@@ -46,14 +46,27 @@ require_once 'HTTP/Request2.php';
 class HttpClient implements IHttpClient
 {
     /**
-     * @var \HTTP_Request2 
+     * @var \HTTP_Request2
      */
     private $_request;
+    
     /**
      * @var PEAR2\WindowsAzure\Core\IUrl 
      */
     private $_requestUrl;
+    
+    /**
+     * Holds the latest response object
+     * 
+     * @var \HTTP_Request2_Response
+     */
     private $_response;
+    
+    /**
+     * Holds expected status code after sending the request.
+     * 
+     * @var array
+     */
     private $_expectedStatusCodes;
     
     /**
