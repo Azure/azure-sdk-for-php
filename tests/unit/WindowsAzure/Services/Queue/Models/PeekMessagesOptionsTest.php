@@ -15,57 +15,60 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   PEAR2\WindowsAzure\Services\Core\Filters
+ * @package   PEAR2\Tests\Unit\WindowsAzure
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
- 
-namespace PEAR2\WindowsAzure\Services\Core\Filters;
-use PEAR2\WindowsAzure\Resources;
-use PEAR2\WindowsAzure\Core\IServiceFilter;
+
+use PEAR2\WindowsAzure\Services\Queue\Models\PeekMessagesOptions;
 
 /**
- * Adds date header to the http request.
+ * Unit tests for class PeekMessagesOptions
  *
  * @category  Microsoft
- * @package   PEAR2\WindowsAzure\Services\Core\Filters
+ * @package   PEAR2\Tests\Unit\WindowsAzure
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @version   Release: @package_version@
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
-class DateFilter implements IServiceFilter
+class PeekMessagesOptionsTest extends PHPUnit_Framework_TestCase
 {
     /**
-     * Adds date (in GMT format) header to the request headers.
-     *
-     * @param HttpClient $request HTTP channel object.
-     * 
-     * @return \HTTP_Request2
+     * @covers PEAR2\WindowsAzure\Services\Queue\Models\PeekMessagesOptions::getNumberOfMessages
      */
-    public function handleRequest($request) 
+    public function testGetNumberOfMessages()
     {
-        $date = gmdate(Resources::AZURE_DATE_FORMAT, time());
-        $request->setHeader(Resources::X_MS_DATE, $date);
-
-        return $request;
+        // Setup
+        $peekMessagesOptions = new PeekMessagesOptions();
+        $expected = 10;
+        $peekMessagesOptions->setNumberOfMessages($expected);
+        
+        // Test
+        $actual = $peekMessagesOptions->getNumberOfMessages();
+        
+        // Assert
+        $this->assertEquals($expected, $actual);
     }
-
+    
     /**
-     * Does nothing with the response.
-     *
-     * @param HttpClient              $request  HTTP channel object.
-     * @param \HTTP_Request2_Response $response HTTP response object.
-     * 
-     * @return \HTTP_Request2_Response
+     * @covers PEAR2\WindowsAzure\Services\Queue\Models\PeekMessagesOptions::setNumberOfMessages
      */
-    public function handleResponse($request, $response) 
+    public function testSetNumberOfMessages()
     {
-        // Do nothing with the response.
-        return $response;
+        // Setup
+        $peekMessagesOptions = new PeekMessagesOptions();
+        $expected = 10;
+        
+        // Test
+        $peekMessagesOptions->setNumberOfMessages($expected);
+        
+        // Assert
+        $actual = $peekMessagesOptions->getNumberOfMessages();
+        $this->assertEquals($expected, $actual);
     }
 }
 

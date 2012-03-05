@@ -96,6 +96,21 @@ class AzureUtilities
         
         return $metadata;
     }
+    
+    /**
+     * Converts a given date string into \DateTime object
+     * 
+     * @param string $date windows azure date ins string represntation.
+     * 
+     * @return \DateTime
+     */
+    public static function windowsAzureDateToDateTime($date)
+    {
+        $timeZone = new \DateTimeZone('GMT');
+        $format   = Resources::AZURE_DATE_FORMAT;
+        
+        return \DateTime::createFromFormat($format, $date, $timeZone);
+    }
 }
 
 ?>

@@ -32,6 +32,12 @@ use PEAR2\WindowsAzure\Services\Queue\Models\GetServicePropertiesResult;
 use PEAR2\WindowsAzure\Services\Queue\Models\QueueServiceOptions;
 use PEAR2\WindowsAzure\Services\Queue\Models\ServiceProperties;
 use PEAR2\WindowsAzure\Services\Queue\Models\GetQueueMetadataResult;
+use PEAR2\WindowsAzure\Services\Queue\Models\CreateMessageOptions;
+use PEAR2\WindowsAzure\Services\Queue\Models\QueueMessage;
+use PEAR2\WindowsAzure\Services\Queue\Models\ListMessagesOptions;
+use PEAR2\WindowsAzure\Services\Queue\Models\ListMessagesResult;
+use PEAR2\WindowsAzure\Services\Queue\Models\PeekMessagesOptions;
+use PEAR2\WindowsAzure\Services\Queue\Models\PeekMessagesResult;
 use PEAR2\WindowsAzure\Core\IHttpClient;
 use PEAR2\WindowsAzure\Utilities;
 use PEAR2\WindowsAzure\Core\Url;
@@ -153,10 +159,30 @@ class QueueRestProxy implements IQueue
      * 
      * @return none.
      */
-    public function createMessage($queueName, $messageText, 
+    public function createMessage($queueName, $messageText,
         $createMessageOptions = null
     ) {
-        throw new \Exception(Resources::NOT_IMPLEMENTED_MSG);
+        $channel = clone $this->_channel;
+        $url     = clone $this->_url;
+        
+        if (!isset($createMessageOptions)) {
+            $createMessageOptions = new CreateMessageOptions();
+        }
+        
+        $channel->setMethod(\HTTP_Request2::METHOD_POST);
+        $channel->setExpectedStatusCode(Resources::STATUS_CREATED);
+        $channel->setHeader(Resources::CONTENT_TYPE, Resources::XML_CONTENT_TYPE);
+        $message = new QueueMessage();
+        $message->setMessageText($messageText);
+        $channel->setBody($message->toXml());
+        $visibility = $createMessageOptions->getVisibilityTimeoutInSeconds();
+        $timeToLive = $createMessageOptions->getTimeToLiveInSeconds();
+        $url->setQueryVariable('visibilitytimeout', $visibility);
+        $url->setQueryVariable('messagettl', $timeToLive);
+        $url->appendUrlPath($queueName);
+        $url->appendUrlPath('/messages');
+        
+        $channel->send($this->_filters, $url);
     }
 
     /**
@@ -300,7 +326,26 @@ class QueueRestProxy implements IQueue
      */
     public function listMessages($queueName, $listMessagesOptions = null)
     {
-        throw new \Exception(Resources::NOT_IMPLEMENTED_MSG);
+        $channel = clone $this->_channel;
+        $url     = clone $this->_url;
+        
+        if (!isset($listMessagesOptions)) {
+            $listMessagesOptions = new ListMessagesOptions();
+        }
+        
+        $channel->setMethod(\HTTP_Request2::METHOD_GET);
+        $channel->setExpectedStatusCode(Resources::STATUS_OK);
+        $messagesCount = $listMessagesOptions->getNumberOfMessages();
+        $visibility    = $listMessagesOptions->getVisibilityTimeoutInSeconds();
+        $url->setQueryVariable('numofmessages', strval($messagesCount));
+        $url->setQueryVariable('visibilitytimeout', strval($visibility));
+        $url->appendUrlPath($queueName);
+        $url->appendUrlPath('/messages');
+        
+        $responseBody   = $channel->send($this->_filters, $url);
+        $parsedResponse = Utilities::unserialize($responseBody);
+        
+        return ListMessagesResult::create($parsedResponse);
     }
 
     /**
@@ -314,7 +359,25 @@ class QueueRestProxy implements IQueue
      */
     public function peekMessages($queueName, $peekMessagesOptions = null)
     {
-        throw new \Exception(Resources::NOT_IMPLEMENTED_MSG);
+        $channel = clone $this->_channel;
+        $url     = clone $this->_url;
+        
+        if (!isset($peekMessagesOptions)) {
+            $peekMessagesOptions = new PeekMessagesOptions();
+        }
+        
+        $channel->setMethod(\HTTP_Request2::METHOD_GET);
+        $channel->setExpectedStatusCode(Resources::STATUS_OK);
+        $messagesCount = $peekMessagesOptions->getNumberOfMessages();
+        $url->setQueryVariable('peekonly', 'true');
+        $url->setQueryVariable('numofmessages', strval($messagesCount));
+        $url->appendUrlPath($queueName);
+        $url->appendUrlPath('/messages');
+        
+        $responseBody   = $channel->send($this->_filters, $url);
+        $parsedResponse = Utilities::unserialize($responseBody);
+        
+        return PeekMessagesResult::create($parsedResponse);
     }
 
     /**

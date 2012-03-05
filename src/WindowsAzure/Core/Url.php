@@ -107,7 +107,7 @@ class Url implements IUrl
         Validate::notNullOrEmpty($key);
         Validate::isString($value);
         
-        if ($value != Resources::EMPTY_STRING || $force) {
+        if ($value != Resources::EMPTY_STRING || !is_null($value) || $force) {
             $this->_url->setQueryVariable(strtolower($key), $value);
         }
     }

@@ -15,57 +15,57 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   PEAR2\WindowsAzure\Services\Core\Filters
+ * @package   PEAR2\WindowsAzure\Services\Queue\Models
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
  
-namespace PEAR2\WindowsAzure\Services\Core\Filters;
-use PEAR2\WindowsAzure\Resources;
-use PEAR2\WindowsAzure\Core\IServiceFilter;
+namespace PEAR2\WindowsAzure\Services\Queue\Models;
 
 /**
- * Adds date header to the http request.
+ * Short description
  *
  * @category  Microsoft
- * @package   PEAR2\WindowsAzure\Services\Core\Filters
+ * @package   PEAR2\WindowsAzure\Services\Queue\Models
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @version   Release: @package_version@
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
-class DateFilter implements IServiceFilter
+class PeekMessagesOptions
 {
     /**
-     * Adds date (in GMT format) header to the request headers.
-     *
-     * @param HttpClient $request HTTP channel object.
+     * A nonzero integer value that specifies the number of messages to peek from 
+     * the queue, up to a maximum of 32. By default, a single message is peeked 
+     * from the queue with this operation.
      * 
-     * @return \HTTP_Request2
+     * @var integer
      */
-    public function handleRequest($request) 
-    {
-        $date = gmdate(Resources::AZURE_DATE_FORMAT, time());
-        $request->setHeader(Resources::X_MS_DATE, $date);
-
-        return $request;
-    }
-
+    private $_numberOfMessages;
+    
     /**
-     * Does nothing with the response.
-     *
-     * @param HttpClient              $request  HTTP channel object.
-     * @param \HTTP_Request2_Response $response HTTP response object.
+     * Gets numberOfMessages field.
      * 
-     * @return \HTTP_Request2_Response
+     * @return integer
      */
-    public function handleResponse($request, $response) 
+    public function getNumberOfMessages()
     {
-        // Do nothing with the response.
-        return $response;
+        return $this->_numberOfMessages;
+    }
+    
+    /**
+     * Sets numberOfMessages field.
+     * 
+     * @param integer $numberOfMessages value to use.
+     * 
+     * @return none
+     */
+    public function setNumberOfMessages($numberOfMessages)
+    {
+        $this->_numberOfMessages = $numberOfMessages;
     }
 }
 

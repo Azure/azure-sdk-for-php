@@ -82,6 +82,10 @@ class Utilities
      */
     public static function getArray($var)
     {
+        if (is_null($var) || empty($var)) {
+            return array();
+        }
+        
         foreach ($var as $value) {
             if (!is_array($value)) {
                 return array($var);

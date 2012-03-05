@@ -42,7 +42,7 @@ class ServiceProperties
 {
     private $_logging;
     private $_metrics;
-    public static $xmLRootName = 'StorageServiceProperties';
+    public static $xmlRootName = 'StorageServiceProperties';
     
     /**
      * Creates ServiceProperties object from parsed XML response.
@@ -124,7 +124,7 @@ class ServiceProperties
      */
     public function toXml()
     {
-        return Utilities::serialize($this->toArray(), self::$xmLRootName);
+        return Utilities::serialize($this->toArray(), self::$xmlRootName);
     }
 }
 
