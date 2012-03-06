@@ -36,6 +36,7 @@ use PEAR2\WindowsAzure\Services\Queue\Models\ListMessagesResult;
 use PEAR2\WindowsAzure\Services\Queue\Models\ListMessagesOptions;
 use PEAR2\WindowsAzure\Services\Queue\Models\PeekMessagesResult;
 use PEAR2\WindowsAzure\Services\Queue\Models\PeekMessagesOptions;
+use PEAR2\WindowsAzure\Services\Queue\Models\UpdateMessageResult;
 use PEAR2\Tests\Unit\TestResources;
 use PEAR2\WindowsAzure\Resources;
 use PEAR2\WindowsAzure\Core\ServiceException;
@@ -629,6 +630,39 @@ class QueueRestProxyTest extends \RestTestBase
         $result   = $this->queueWrapper->listMessages($name);
         $messages = $result->getQueueMessages();
         $this->assertTrue(empty($messages));
+    }
+    
+    /**
+    * @covers PEAR2\WindowsAzure\Services\Queue\QueueRestProxy::updateMessage
+    */
+    public function testUpdateMessage()
+    {
+        // Setup
+        $name = 'updatemessage';
+        $expectedText = 'this is message text';
+        $expectedVisibility = 10;
+        $this->createQueue($name);
+        $this->queueWrapper->createMessage($name, 'Text to change');
+        $result = $this->queueWrapper->listMessages($name);
+        $messages   = $result->getQueueMessages();
+        $popReceipt = $messages[0]->getPopReceipt();
+        $messageId = $messages[0]->getMessageId();
+        
+        // Test
+        $result = $this->queueWrapper->UpdateMessage($name, $messageId, $popReceipt, 
+            $expectedText, $expectedVisibility);
+        
+        // Assert
+        $result   = $this->queueWrapper->listMessages($name);
+        $messages = $result->getQueueMessages();
+        $this->assertTrue(empty($messages));
+        
+        sleep($expectedVisibility);
+        
+        $result   = $this->queueWrapper->listMessages($name);
+        $messages = $result->getQueueMessages();
+        $actual   = $messages[0];
+        $this->assertEquals($expectedText, $actual->getMessageText());
     }
 }
 

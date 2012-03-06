@@ -35,6 +35,7 @@ spl_autoload_register(
             'servicepropertiestest' => '/unit/WindowsAzure/Services/Queue/Models/ServicePropertiesTest.php',
             'sharedkeyauthenticationschemetest' => '/unit/WindowsAzure/Services/Core/Authentication/SharedKeyAuthenticationSchemeTest.php',
             'storageauthenticationschemetest' => '/unit/WindowsAzure/Services/Core/Authentication/StorageAuthenticationSchemeTest.php',
+            'updatemessageresulttest' => '/unit/WindowsAzure/Services/Queue/Models/UpdateMessageResultTest.php',
             'urltest' => '/unit/WindowsAzure/Core/UrlTest.php',
             'utilitiestest' => '/unit/WindowsAzure/UtilitiesTest.php'
           );

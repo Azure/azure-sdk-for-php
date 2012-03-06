@@ -40,6 +40,7 @@ spl_autoload_register(
             'pear2\\windowsazure\\services\\queue\\models\\queueserviceoptions' => '/WindowsAzure/Services/Queue/Models/QueueServiceOptions.php',
             'pear2\\windowsazure\\services\\queue\\models\\retentionpolicy' => '/WindowsAzure/Services/Queue/Models/RetentionPolicy.php',
             'pear2\\windowsazure\\services\\queue\\models\\serviceproperties' => '/WindowsAzure/Services/Queue/Models/ServiceProperties.php',
+            'pear2\\windowsazure\\services\\queue\\models\\updatemessageresult' => '/WindowsAzure/Services/Queue/Models/UpdateMessageResult.php',
             'pear2\\windowsazure\\services\\queue\\queuerestproxy' => '/WindowsAzure/Services/Queue/QueueRestProxy.php',
             'pear2\\windowsazure\\services\\queue\\queueservice' => '/WindowsAzure/Services/Queue/QueueService.php',
             'pear2\\windowsazure\\services\\queue\\queuesettings' => '/WindowsAzure/Services/Queue/QueueSettings.php',
