@@ -108,6 +108,21 @@ class AzureUtilitiesTest extends PHPUnit_Framework_TestCase
         $this->assertCount(1, $actual);
         $this->assertEquals($value, $actual[$key]);
     }
+    
+    /**
+     * @covers PEAR2\WindowsAzure\Core\AzureUtilities::windowsAzureDateToDateTime
+     */
+    public function testWindowsAzureDateToDateTime()
+    {
+        // Setup
+        $expected = 'Fri, 16 Oct 2009 21:04:30 GMT';
+        
+        // Test
+        $actual = AzureUtilities::windowsAzureDateToDateTime($expected);
+        
+        // Assert
+        $this->assertEquals($expected, $actual->format('D, d M Y H:i:s T'));
+    }
 }
 
 ?>

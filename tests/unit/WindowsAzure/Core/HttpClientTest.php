@@ -490,6 +490,24 @@ class HttpClientTest extends PHPUnit_Framework_TestCase
         $this->assertNotEquals($channel->getHeaders(), $actual->getHeaders());
         $this->assertNotEquals($channel->getUrl()->getUrl(), $actual->getUrl()->getUrl());
     }
+    
+    /**
+     * @covers PEAR2\WindowsAzure\Services\Core\HttpClient::getResponse
+     */
+    public function testGetResponse()
+    {
+        // Setup
+        $channel = new HttpClient();
+        $url = new PEAR2\WindowsAzure\Core\Url('http://www.microsoft.com/');
+        $channel->setExpectedStatusCode('200');
+        $channel->send(array(), $url);
+        
+        // Test
+        $response = $channel->getResponse();
+        
+        // Assert
+        $this->assertInstanceOf('\HTTP_Request2_Response', $response);
+    }
 }
 
 ?>

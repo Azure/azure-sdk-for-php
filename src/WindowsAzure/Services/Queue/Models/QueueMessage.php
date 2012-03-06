@@ -15,57 +15,63 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   PEAR2\WindowsAzure\Services\Core\Filters
+ * @package   PEAR2\WindowsAzure\Services\Queue\Models
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
  
-namespace PEAR2\WindowsAzure\Services\Core\Filters;
-use PEAR2\WindowsAzure\Resources;
-use PEAR2\WindowsAzure\Core\IServiceFilter;
+namespace PEAR2\WindowsAzure\Services\Queue\Models;
+use PEAR2\WindowsAzure\Utilities;
 
 /**
- * Adds date header to the http request.
+ * Wrappers queue message text.
  *
  * @category  Microsoft
- * @package   PEAR2\WindowsAzure\Services\Core\Filters
+ * @package   PEAR2\WindowsAzure\Services\Queue\Models
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @version   Release: @package_version@
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
-class DateFilter implements IServiceFilter
+class QueueMessage
 {
+    private $_messageText;
+    public static $xmlRootName = 'QueueMessage';
+    
     /**
-     * Adds date (in GMT format) header to the request headers.
-     *
-     * @param HttpClient $request HTTP channel object.
+     * Gets message text field.
      * 
-     * @return \HTTP_Request2
+     * @return string.
      */
-    public function handleRequest($request) 
+    public function getMessageText()
     {
-        $date = gmdate(Resources::AZURE_DATE_FORMAT, time());
-        $request->setHeader(Resources::X_MS_DATE, $date);
-
-        return $request;
+        return $this->_messageText;
     }
-
+    
     /**
-     * Does nothing with the response.
-     *
-     * @param HttpClient              $request  HTTP channel object.
-     * @param \HTTP_Request2_Response $response HTTP response object.
+     * Sets message text field.
      * 
-     * @return \HTTP_Request2_Response
+     * @param string $messageText message contents.
+     * 
+     * @return string.
      */
-    public function handleResponse($request, $response) 
+    public function setMessageText($messageText)
     {
-        // Do nothing with the response.
-        return $response;
+        $this->_messageText = $messageText;
+    }
+    
+    /**
+     * Converts this current object to XML representation.
+     * 
+     * @return string. 
+     */
+    public function toXml()
+    {
+        $array = array('MessageText' => $this->_messageText);
+        return Utilities::serialize($array, self::$xmlRootName);
     }
 }
 
