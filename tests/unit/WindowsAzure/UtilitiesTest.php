@@ -160,6 +160,21 @@ class UtilitiesTest extends PHPUnit_Framework_TestCase
     }
     
     /**
+     * @covers PEAR2\WindowsAzure\Utilities::getArray
+     */
+    public function testGetArrayWithEmptyValue()
+    {
+        // Setup
+        $empty = PEAR2\WindowsAzure\Resources::EMPTY_STRING;
+        $expected = array();
+        
+        // Test
+        $actual = Utilities::getArray($empty);
+        
+        $this->assertEquals($expected, $actual);
+    }
+    
+    /**
      * @covers PEAR2\WindowsAzure\Utilities::unserialize
      */
     public function testUnserialize()
@@ -188,7 +203,7 @@ class UtilitiesTest extends PHPUnit_Framework_TestCase
         $array = $properties->toArray();
         
         // Test
-        $actual = Utilities::serialize($array, \PEAR2\WindowsAzure\Services\Queue\Models\ServiceProperties::$xmLRootName);
+        $actual = Utilities::serialize($array, \PEAR2\WindowsAzure\Services\Queue\Models\ServiceProperties::$xmlRootName);
         
         $this->assertEquals($expected, $actual);
     }

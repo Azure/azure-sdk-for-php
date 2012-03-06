@@ -65,9 +65,10 @@ class Resources
     const RANGE                           = 'range';
 
     // Misc
-    const QUEUE_TYPE_NAME = 'IQueue';
-    const STORAGE_URI     = 'http://%s.%s/';
-    const EMPTY_STRING    = '';
+    const QUEUE_TYPE_NAME   = 'IQueue';
+    const STORAGE_URI       = 'http://%s.%s/';
+    const EMPTY_STRING      = '';
+    const AZURE_DATE_FORMAT = 'D, d M Y H:i:s T';
 
     // Versioning
     const API_VERSION = '2011-08-18';
