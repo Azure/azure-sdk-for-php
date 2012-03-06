@@ -299,7 +299,7 @@ class QueueRestProxy implements IQueue
         $headers     = array();
         $queryParams = array();
         $config      = array();
-        $path        = $queueName . '/messages' . '/' . $messageId;
+        $path        = $queueName . '/messages/' . $messageId;
         $body        = Resources::EMPTY_STRING;
         $statusCode  = Resources::STATUS_NO_CONTENT;
         
