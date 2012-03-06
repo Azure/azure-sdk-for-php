@@ -25,6 +25,7 @@
 namespace PEAR2\WindowsAzure\Services\Queue;
 use PEAR2\WindowsAzure\Services\Queue\Queue;
 use PEAR2\WindowsAzure\Resources;
+use PEAR2\WindowsAzure\Validate;
 use PEAR2\WindowsAzure\Services\Queue\Models\ListQueueOptions;
 use PEAR2\WindowsAzure\Services\Queue\Models\ListQueueResult;
 use PEAR2\WindowsAzure\Services\Queue\Models\CreateQueueOptions;
@@ -172,14 +173,38 @@ class QueueRestProxy implements IQueue
     /**
      * Clears all messages from the queue.
      * 
+     * If a queue contains a large number of messages, Clear Messages may time out 
+     * before all messages have been deleted. In this case the Queue service will 
+     * return status code 500 (Internal Server Error), with the additional error 
+     * code OperationTimedOut. If the operation times out, the client should 
+     * continue to retry Clear Messages until it succeeds, to ensure that all 
+     * messages have been deleted.
+     * 
      * @param string              $queueName           Name of the queue.
      * @param QueueServiceOptions $queueServiceOptions Optional queue service options
      * 
-     * @return PEAR2\WindowsAzure\Services\Queue\Models\PeekMessagesResult.
+     * @return none.
      */
     public function clearMessages($queueName, $queueServiceOptions = null)
     {
-        throw new \Exception(Resources::NOT_IMPLEMENTED_MSG);
+        Validate::notNullOrEmpty($queueName);
+        
+        $method      = \HTTP_Request2::METHOD_DELETE;
+        $headers     = array();
+        $queryParams = array();
+        $config      = array();
+        $path        = $queueName . '/messages';
+        $body        = Resources::EMPTY_STRING;
+        $statusCode  = Resources::STATUS_NO_CONTENT;
+        
+        if (!isset($queueServiceOptions)) {
+            $queueServiceOptions = new QueueServiceOptions();
+        }
+        
+        $config[Resources::CONNECT_TIMEOUT] = $queueServiceOptions->getTimeout();
+        
+        $this->send($method, $headers, $queryParams, $path, $statusCode, $body, 
+            $config);
     }
 
     /**
@@ -201,7 +226,6 @@ class QueueRestProxy implements IQueue
         $path        = Resources::EMPTY_STRING;
         $body        = Resources::EMPTY_STRING;
         $statusCode  = Resources::STATUS_CREATED;
-        
         
         if (!isset($createMessageOptions)) {
             $createMessageOptions = new CreateMessageOptions();
@@ -267,7 +291,27 @@ class QueueRestProxy implements IQueue
     public function deleteMessage($queueName, $messageId, $popReceipt, 
         $queueServiceOptions = null
     ) {
-        throw new \Exception(Resources::NOT_IMPLEMENTED_MSG);
+        Validate::notNullOrEmpty($queueName);
+        Validate::notNullOrEmpty($messageId);
+        Validate::notNullOrEmpty($popReceipt);
+        
+        $method      = \HTTP_Request2::METHOD_DELETE;
+        $headers     = array();
+        $queryParams = array();
+        $config      = array();
+        $path        = $queueName . '/messages' . '/' . $messageId;
+        $body        = Resources::EMPTY_STRING;
+        $statusCode  = Resources::STATUS_NO_CONTENT;
+        
+        if (!isset($queueServiceOptions)) {
+            $queueServiceOptions = new QueueServiceOptions();
+        }
+        
+        $queryParams['popreceipt']          = $popReceipt;
+        $config[Resources::CONNECT_TIMEOUT] = $queueServiceOptions->getTimeout();
+        
+        $this->send($method, $headers, $queryParams, $path, $statusCode, $body, 
+            $config);
     }
 
     /**
