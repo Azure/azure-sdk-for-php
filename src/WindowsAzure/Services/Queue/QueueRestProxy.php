@@ -79,6 +79,45 @@ class QueueRestProxy implements IQueue
         $this->_channel = $channel;
         $this->_filters = array();
     }
+    
+    /**
+     * Sends HTTP request with the specified parameters.
+     * 
+     * @param string $method      HTTP method used in the request
+     * @param array  $headers     HTTP headers.
+     * @param array  $queryParams URL query parameters.
+     * @param string $path        URL path
+     * @param int    $statusCode  Expected status code received in the response
+     * @param string $body        Request body
+     * 
+     * @return \HTTP_Request2_Response
+     */
+    public function send($method, $headers, $queryParams, $path, $statusCode,
+        $body = Resources::EMPTY_STRING, $config = array()
+    ) {
+        $channel = clone $this->_channel;
+        $url     = clone $this->_url;
+        
+        $channel->setMethod($method);
+        $channel->setHeaders($headers);
+        $channel->setExpectedStatusCode($statusCode);
+        $channel->setBody($body);
+        $url->setQueryVariables($queryParams);
+        if (!empty($path)) {
+            $url->appendUrlPath($path);
+        }
+        
+        foreach ($config as $key => $value) {
+            if (!empty($value)) {
+                $channel->setConfig($key, $value);
+            }
+                
+        }
+        
+        $channel->send($this->_filters, $url);
+        
+        return $channel->getResponse();
+    }
 
     /**
      * Adds new filter to queue proxy object and returns new QueueRestProxy with
@@ -106,34 +145,28 @@ class QueueRestProxy implements IQueue
      */
     public function listQueues($listQueuesOptions = null)
     {
-        $channel = clone $this->_channel;
-        $url     = clone $this->_url;
+        $method      = \HTTP_Request2::METHOD_GET;
+        $headers     = array();
+        $queryParams = array();
+        $path        = Resources::EMPTY_STRING;
+        $statusCode  = Resources::STATUS_OK;
         
         if (!isset($listQueuesOptions)) {
             $listQueuesOptions = new ListQueueOptions();
         }
-
-        $channel->setMethod(\HTTP_Request2::METHOD_GET);
-        $url->setQueryVariable('comp', 'list');
-        $url->setQueryVariable(
-            Resources::PREFIX, $listQueuesOptions->getPrefix()
-        );
-        $url->setQueryVariable(
-            Resources::MARKER, $listQueuesOptions->getMarker()
-        );
-        $url->setQueryVariable(
-            Resources::MAX_RESULTS, $listQueuesOptions->getMaxResults()
-        );
-        $url->setQueryVariable(
-            'include', $listQueuesOptions->getIncludeMetadata()? 'metadata':  null
-        );
         
-        $channel->setExpectedStatusCode(Resources::STATUS_OK);
-        
-        $responseBody   = $channel->send($this->_filters, $url);
-        $parsedResponse = Utilities::unserialize($responseBody);
+        $queryParams['comp']                 = 'list';
+        $queryParams[Resources::PREFIX]      = $listQueuesOptions->getPrefix();
+        $queryParams[Resources::MARKER]      = $listQueuesOptions->getMarker();
+        $queryParams[Resources::MAX_RESULTS] = $listQueuesOptions->getMaxResults();
 
-        return ListQueueResult::create($parsedResponse);
+        $isInclude              = $listQueuesOptions->getIncludeMetadata();
+        $queryParams['include'] = $isInclude ? 'metadata' : null;
+        
+        $response = $this->send($method, $headers, $queryParams, $path, $statusCode);
+        $parsed   = Utilities::unserialize($response->getBody());
+
+        return ListQueueResult::create($parsed);
     }
 
     /**
@@ -162,27 +195,32 @@ class QueueRestProxy implements IQueue
     public function createMessage($queueName, $messageText,
         $createMessageOptions = null
     ) {
-        $channel = clone $this->_channel;
-        $url     = clone $this->_url;
+        $method      = \HTTP_Request2::METHOD_POST;
+        $headers     = array();
+        $queryParams = array();
+        $path        = Resources::EMPTY_STRING;
+        $body        = Resources::EMPTY_STRING;
+        $statusCode  = Resources::STATUS_CREATED;
+        
         
         if (!isset($createMessageOptions)) {
             $createMessageOptions = new CreateMessageOptions();
         }
         
-        $channel->setMethod(\HTTP_Request2::METHOD_POST);
-        $channel->setExpectedStatusCode(Resources::STATUS_CREATED);
-        $channel->setHeader(Resources::CONTENT_TYPE, Resources::XML_CONTENT_TYPE);
+        $headers[Resources::CONTENT_TYPE] = Resources::XML_CONTENT_TYPE;
+        
         $message = new QueueMessage();
         $message->setMessageText($messageText);
-        $channel->setBody($message->toXml());
+        $body = $message->toXml();
+        
         $visibility = $createMessageOptions->getVisibilityTimeoutInSeconds();
         $timeToLive = $createMessageOptions->getTimeToLiveInSeconds();
-        $url->setQueryVariable('visibilitytimeout', $visibility);
-        $url->setQueryVariable('messagettl', $timeToLive);
-        $url->appendUrlPath($queueName);
-        $url->appendUrlPath('/messages');
         
-        $channel->send($this->_filters, $url);
+        $queryParams['visibilitytimeout'] = $visibility;
+        $queryParams['messagettl']        = $timeToLive;
+        $path                             = $queueName . '/messages';
+        
+        $this->send($method, $headers, $queryParams, $path, $statusCode, $body);
     }
 
     /**
@@ -195,23 +233,24 @@ class QueueRestProxy implements IQueue
      */
     public function createQueue($queueName, $createQueueOptions = null)
     {
-        $channel = clone $this->_channel;
-        $url     = clone $this->_url;
+        $method      = \HTTP_Request2::METHOD_POST;
+        $headers     = array();
+        $queryParams = array();
+        $path        = Resources::EMPTY_STRING;
+        $statusCode  = Resources::STATUS_CREATED;
         
         if (!isset($createQueueOptions)) {
             $createQueueOptions = new CreateQueueOptions();
         }
 
-        $channel->setMethod(\HTTP_Request2::METHOD_PUT);
-        $url->appendUrlPath($queueName);
-        // Set metadata headers.
+        $method          = \HTTP_Request2::METHOD_PUT;
         $metadataHeaders = AzureUtilities::generateMetadataHeaders(
             $createQueueOptions->getMetadata()
         );
-        $channel->setHeaders($metadataHeaders);
-        $channel->setExpectedStatusCode(Resources::STATUS_CREATED);
+        $headers         = $metadataHeaders;
+        $path            = $queueName;
         
-        $channel->send($this->_filters, $url);
+        $this->send($method, $headers, $queryParams, $path, $statusCode);
     }
 
     /**
@@ -240,14 +279,13 @@ class QueueRestProxy implements IQueue
      */
     public function deleteQueue($queueName)
     {
-        $channel = clone $this->_channel;
-        $url     = clone $this->_url;
+        $method      = \HTTP_Request2::METHOD_DELETE;
+        $headers     = array();
+        $queryParams = array();
+        $path        = $queueName;
+        $statusCode  = Resources::STATUS_NO_CONTENT;
         
-        $channel->setMethod(\HTTP_Request2::METHOD_DELETE);
-        $url->appendUrlPath($queueName);
-        $channel->setExpectedStatusCode(Resources::STATUS_NO_CONTENT);
-        
-        $channel->send($this->_filters, $url);
+        $this->send($method, $headers, $queryParams, $path, $statusCode);
     }
 
     /**
@@ -260,25 +298,24 @@ class QueueRestProxy implements IQueue
      */
     public function getQueueMetadata($queueName, $queueServiceOptions = null)
     {
-        $channel = clone $this->_channel;
-        $url     = clone $this->_url;
+        $method      = \HTTP_Request2::METHOD_GET;
+        $headers     = array();
+        $queryParams = array();
+        $config      = array();
+        $path        = $queueName;
+        $body        = Resources::EMPTY_STRING;
+        $statusCode  = Resources::STATUS_OK;
         
         if (!isset($queueServiceOptions)) {
             $queueServiceOptions = new QueueServiceOptions();
         }
         
-        $channel->setMethod(\HTTP_Request2::METHOD_GET);
-        $channel->setExpectedStatusCode(Resources::STATUS_OK);
+        $config[Resources::CONNECT_TIMEOUT] = $queueServiceOptions->getTimeout();
+        $queryParams['comp'] = 'metadata';
         
-        $timeout = $queueServiceOptions->getTimeout();
-        if (isset($timeout)) {
-            $channel->setConfig(Resources::CONNECT_TIMEOUT, $timeout);
-        }
-        $url->appendUrlPath($queueName);
-        $url->setQueryVariable('comp', 'metadata');
+        $response = $this->send($method, $headers, $queryParams, $path, $statusCode, 
+            $body, $config);
         
-        $channel->send($this->_filters, $url);
-        $response = $channel->getResponse();
         $metadata = AzureUtilities::getMetadataArray($response->getHeader());
         $maxCount = intval(
             $response->getHeader(Resources::X_MS_APPROXIMATE_MESSAGES_COUNT)
@@ -297,23 +334,24 @@ class QueueRestProxy implements IQueue
      */
     public function getServiceProperties($queueServiceOptions = null)
     {
-        $channel = clone $this->_channel;
-        $url     = clone $this->_url;
+        $method      = \HTTP_Request2::METHOD_GET;
+        $headers     = array();
+        $queryParams = array();
+        $path        = Resources::EMPTY_STRING;
+        $statusCode  = Resources::STATUS_OK;
         
         if (!isset($queueServiceOptions)) {
             $queueServiceOptions = new QueueServiceOptions();
         }
         
-        $channel->setMethod(\HTTP_Request2::METHOD_GET);
-        $channel->setExpectedStatusCode(Resources::STATUS_OK);
-        $url->setQueryVariable('restype', 'service');
-        $url->setQueryVariable('comp', 'properties');
-        $url->setQueryVariable('timeout', $queueServiceOptions->getTimeout());
+        $queryParams['restype'] = 'service';
+        $queryParams['comp']    = 'properties';
+        $queryParams['timeout'] = $queueServiceOptions->getTimeout();
         
-        $responseBody   = $channel->send($this->_filters, $url);
-        $parsedResponse = Utilities::unserialize($responseBody);
+        $response = $this->send($method, $headers, $queryParams, $path, $statusCode);
+        $parsed = Utilities::unserialize($response->getBody());
         
-        return GetServicePropertiesResult::create($parsedResponse);
+        return GetServicePropertiesResult::create($parsed);
     }
 
     /**
@@ -326,26 +364,26 @@ class QueueRestProxy implements IQueue
      */
     public function listMessages($queueName, $listMessagesOptions = null)
     {
-        $channel = clone $this->_channel;
-        $url     = clone $this->_url;
+        $method      = \HTTP_Request2::METHOD_GET;
+        $headers     = array();
+        $queryParams = array();
+        $path        = $queueName . '/messages';
+        $statusCode  = Resources::STATUS_OK;
         
         if (!isset($listMessagesOptions)) {
             $listMessagesOptions = new ListMessagesOptions();
         }
         
-        $channel->setMethod(\HTTP_Request2::METHOD_GET);
-        $channel->setExpectedStatusCode(Resources::STATUS_OK);
         $messagesCount = $listMessagesOptions->getNumberOfMessages();
         $visibility    = $listMessagesOptions->getVisibilityTimeoutInSeconds();
-        $url->setQueryVariable('numofmessages', strval($messagesCount));
-        $url->setQueryVariable('visibilitytimeout', strval($visibility));
-        $url->appendUrlPath($queueName);
-        $url->appendUrlPath('/messages');
         
-        $responseBody   = $channel->send($this->_filters, $url);
-        $parsedResponse = Utilities::unserialize($responseBody);
+        $queryParams['numofmessages']     = strval($messagesCount);
+        $queryParams['visibilitytimeout'] = strval($visibility);
         
-        return ListMessagesResult::create($parsedResponse);
+        $response = $this->send($method, $headers, $queryParams, $path, $statusCode);
+        $parsed   = Utilities::unserialize($response->getBody());
+        
+        return ListMessagesResult::create($parsed);
     }
 
     /**
@@ -359,25 +397,25 @@ class QueueRestProxy implements IQueue
      */
     public function peekMessages($queueName, $peekMessagesOptions = null)
     {
-        $channel = clone $this->_channel;
-        $url     = clone $this->_url;
+        $method      = \HTTP_Request2::METHOD_GET;
+        $headers     = array();
+        $queryParams = array();
+        $path        = $queueName . '/messages';
+        $statusCode  = Resources::STATUS_OK;
         
         if (!isset($peekMessagesOptions)) {
             $peekMessagesOptions = new PeekMessagesOptions();
         }
         
-        $channel->setMethod(\HTTP_Request2::METHOD_GET);
-        $channel->setExpectedStatusCode(Resources::STATUS_OK);
         $messagesCount = $peekMessagesOptions->getNumberOfMessages();
-        $url->setQueryVariable('peekonly', 'true');
-        $url->setQueryVariable('numofmessages', strval($messagesCount));
-        $url->appendUrlPath($queueName);
-        $url->appendUrlPath('/messages');
         
-        $responseBody   = $channel->send($this->_filters, $url);
-        $parsedResponse = Utilities::unserialize($responseBody);
+        $queryParams['peekonly']      = 'true';
+        $queryParams['numofmessages'] = strval($messagesCount);
         
-        return PeekMessagesResult::create($parsedResponse);
+        $response = $this->send($method, $headers, $queryParams, $path, $statusCode);
+        $parsed   = Utilities::unserialize($response->getBody());
+        
+        return PeekMessagesResult::create($parsed);
     }
 
     /**
@@ -393,26 +431,26 @@ class QueueRestProxy implements IQueue
     public function setQueueMetadata($queueName, $metadata, 
         $queueServiceOptions = null
     ) {
-        $channel = clone $this->_channel;
-        $url     = clone $this->_url;
+        $method      = \HTTP_Request2::METHOD_PUT;
+        $headers     = array();
+        $queryParams = array();
+        $config      = array();
+        $path        = $queueName;
+        $statusCode  = Resources::STATUS_NO_CONTENT;
+        $body        = Resources::EMPTY_STRING;
         
         if (!isset($queueServiceOptions)) {
             $queueServiceOptions = new QueueServiceOptions();
         }
         
-        $channel->setMethod(\HTTP_Request2::METHOD_PUT);
-        $channel->setExpectedStatusCode(Resources::STATUS_NO_CONTENT);
+        $config[Resources::CONNECT_TIMEOUT] = $queueServiceOptions->getTimeout();
+        $queryParams['comp']                = 'metadata';
         
-        $timeout = $queueServiceOptions->getTimeout();
-        if (isset($timeout)) {
-            $channel->setConfig(Resources::CONNECT_TIMEOUT, $timeout);
-        }
-        $url->appendUrlPath($queueName);
-        $url->setQueryVariable('comp', 'metadata');
         $metadataHeaders = AzureUtilities::generateMetadataHeaders($metadata);
-        $channel->setHeaders($metadataHeaders);
+        $headers         = $metadataHeaders;
         
-        $channel->send($this->_filters, $url);
+        $this->send($method, $headers, $queryParams, $path, $statusCode, $body, 
+            $config);
     }
 
     /**
@@ -426,24 +464,24 @@ class QueueRestProxy implements IQueue
     public function setServiceProperties($serviceProperties, 
         $queueServiceOptions = null
     ) {
-        $channel = clone $this->_channel;
-        $url     = clone $this->_url;
+        $method      = \HTTP_Request2::METHOD_PUT;
+        $headers     = array();
+        $queryParams = array();
+        $statusCode  = Resources::STATUS_ACCEPTED;
+        $path        = Resources::EMPTY_STRING;
+        $body        = Resources::EMPTY_STRING;
         
         if (!isset($queueServiceOptions)) {
             $queueServiceOptions = new QueueServiceOptions();
         }
         
-        $channel->setMethod(\HTTP_Request2::METHOD_PUT);
-        $channel->setExpectedStatusCode(Resources::STATUS_ACCEPT);
-        $url->setQueryVariable('restype', 'service');
-        $url->setQueryVariable('comp', 'properties');
-        $url->setQueryVariable('timeout', $queueServiceOptions->getTimeout());
-        $channel->setBody($serviceProperties->toXml());
-        $channel->setHeader(
-            Resources::CONTENT_TYPE, Resources::XML_CONTENT_TYPE
-        );
+        $queryParams['restype']           = 'service';
+        $queryParams['comp']              = 'properties';
+        $queryParams['timeout']           = $queueServiceOptions->getTimeout();
+        $body                             = $serviceProperties->toXml();
+        $headers[Resources::CONTENT_TYPE] = Resources::XML_CONTENT_TYPE;
         
-        $channel->send($this->_filters, $url);
+        $this->send($method, $headers, $queryParams, $path, $statusCode, $body);
     }
 
     /**

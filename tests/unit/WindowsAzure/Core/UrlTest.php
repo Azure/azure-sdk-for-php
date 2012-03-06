@@ -294,6 +294,24 @@ class UrlTest extends PHPUnit_Framework_TestCase
         // Assert
         $this->assertNotEquals($url->getQueryVariables(), $actualUrl->getQueryVariables());
     }
+    
+    /**
+     * @covers PEAR2\WindowsAzure\Core\Url::setQueryVariables
+     */
+    public function testSetQueryVariables()
+    {
+        // Setup
+        $urlString = TestResources::VALID_URL;
+        $expectedQueryVariables = array(TestResources::HEADER1 => TestResources::HEADER1_VALUE,
+                                        TestResources::HEADER2 => TestResources::HEADER2_VALUE);
+        $url = new Url($urlString);
+        
+        // Test
+        $url->setQueryVariables($expectedQueryVariables);
+        
+        // Assert
+        $this->assertEquals($expectedQueryVariables, $url->getQueryVariables());
+    }
 }
 
 ?>

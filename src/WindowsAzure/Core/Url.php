@@ -162,6 +162,20 @@ class Url implements IUrl
     {
         return $this->_url->getURL();
     }
+    
+    /**
+     * Sets the query string to the specified variables in $array
+     * 
+     * @param array $array key/value representation of query variables.
+     * 
+     * @return none.
+     */
+    public function setQueryVariables($array)
+    {
+        foreach ($array as $key => $value) {
+            $this->setQueryVariable($key, $value);
+        }
+    }
 }
 
 ?>

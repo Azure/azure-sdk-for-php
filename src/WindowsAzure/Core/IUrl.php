@@ -100,6 +100,15 @@ interface IUrl
      * @return PEAR2\WindowsAzure\Core\Url
      */
     public function __clone();
+    
+    /**
+     * Sets the query string to the specified variables in $array
+     * 
+     * @param array $array key/value representation of query variables.
+     * 
+     * @return none.
+     */
+    public function setQueryVariables($array);
 }
 
 ?>
