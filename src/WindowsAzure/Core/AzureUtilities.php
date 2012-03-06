@@ -111,6 +111,16 @@ class AzureUtilities
         
         return \DateTime::createFromFormat($format, $date, $timeZone);
     }
+    
+    /**
+     * Returns boolean flag indicating if running aganist emulator or not.
+     * 
+     * @return bool
+     */
+    public static function isEmulated()
+    {
+        return getenv(Resources::EMULATED);
+    }
 }
 
 ?>

@@ -25,6 +25,9 @@
 namespace PEAR2\WindowsAzure\Services\Core;
 use PEAR2\WindowsAzure\Services\Core\ServicesBuilder;
 use PEAR2\WindowsAzure\Validate;
+use PEAR2\WindowsAzure\Core\InvalidArgumentTypeException;
+use PEAR2\WindowsAzure\Resources;
+use PEAR2\WindowsAzure\Services\Queue\QueueSettings;
 
 /**
  * Contains configuration used to access azure storage accounts. 
@@ -59,6 +62,31 @@ class Configuration
     public function __construct()
     {
         $this->_properties = array();
+    }
+    
+    /**
+     * Configures $config to run against the storage emulator
+     *
+     * @param PEAR2\WindowsAzure\Services\Core\Configuration $config configuration.
+     * @param string                                         $type   type name.
+     * 
+     * @return none.
+     */
+    private static function _useStorageEmulatorConfig($config, $type)
+    {
+        $name = Resources::DEV_STORE_NAME;
+        $key  = Resources::DEV_STORE_KEY;
+        $uri  = "http://%s/" . Resources::DEV_STORE_NAME . "/";
+        
+        if ($type == Resources::QUEUE_TYPE_NAME) {
+            $config->setProperty(
+                QueueSettings::URI, sprintf($uri, Resources::EMULATOR_QUEUE_URI)
+            );
+            $config->setProperty(QueueSettings::ACCOUNT_NAME, $name);
+            $config->setProperty(QueueSettings::ACCOUNT_KEY, $key);
+        } else {
+            throw new InvalidArgumentTypeException(Resources::QUEUE_TYPE_NAME);
+        }
     }
 
     /**
@@ -122,6 +150,10 @@ class Configuration
      */
     public function create($type)
     {
+        if (\PEAR2\WindowsAzure\Core\AzureUtilities::isEmulated()) {
+            self::_useStorageEmulatorConfig($this, $type);
+        }
+        
         return ServicesBuilder::build($this, $type);
     }
 }

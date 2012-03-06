@@ -48,7 +48,7 @@ class TestResources
     const VALUE2        = 'value2';
     const VALUE3        = 'value3';
     const ACCOUNT_NAME  = 'myaccount';
-    const QUEUE_URI     = 'queue.core.windows.net';
+    const QUEUE_URI     = '.queue.core.windows.net/';
     const URI1          = "http://myaccount.queue.core.windows.net/myqueue";
     const URI2          = "http://myaccount.queue.core.windows.net/?comp=list";
     const DATE1         = 'Sat, 18 Feb 2012 16:25:21 GMT';

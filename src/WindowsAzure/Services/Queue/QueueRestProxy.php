@@ -66,18 +66,15 @@ class QueueRestProxy implements IQueue
     /**
      * Constructor
      *
-     * @param PEAR2\WindowsAzure\Core\IHttpClient $channel     http client to send 
+     * @param PEAR2\WindowsAzure\Core\IHttpClient $channel http client to send 
      * HTTP requests
-     * @param string                              $accountName storage account name.
-     * @param string                              $uri         storage account uri.
+     * @param string                              $uri     storage account uri.
      * 
      * @return array.
      */
-    public function __construct($channel, $accountName, $uri)
+    public function __construct($channel, $uri)
     {
-        $this->_url     = new Url(
-            sprintf(Resources::STORAGE_URI, $accountName, $uri)
-        );
+        $this->_url     = new Url($uri);
         $this->_channel = $channel;
         $this->_filters = array();
     }

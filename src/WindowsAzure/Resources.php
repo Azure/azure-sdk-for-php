@@ -67,10 +67,13 @@ class Resources
     const RANGE                           = 'range';
 
     // Misc
-    const QUEUE_TYPE_NAME   = 'IQueue';
-    const STORAGE_URI       = 'http://%s.%s/';
-    const EMPTY_STRING      = '';
-    const AZURE_DATE_FORMAT = 'D, d M Y H:i:s T';
+    const QUEUE_TYPE_NAME    = 'IQueue';
+    const EMPTY_STRING       = '';
+    const AZURE_DATE_FORMAT  = 'D, d M Y H:i:s T';
+    const EMULATED           = 'EMULATED';
+    const DEV_STORE_NAME     = 'devstoreaccount1';
+    const DEV_STORE_KEY      = 'Eby8vdM02xNOcqFlqUwJPLlmEtlCDXJ1OUzFT50uSRZ6IFsuFq2UVErCz4I6tq/K1SZFPTOtr/KBHBeksoGMGw==';
+    const EMULATOR_QUEUE_URI = '127.0.0.1:10001';
 
     // Versioning
     const API_VERSION = '2011-08-18';
