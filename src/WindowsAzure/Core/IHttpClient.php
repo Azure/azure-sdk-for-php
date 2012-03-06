@@ -167,6 +167,13 @@ interface IHttpClient
      * @return PEAR2\WindowsAzure\Core\HttpClient
      */
     public function __clone();
+    
+    /**
+     * Gets the response object.
+     * 
+     * @return \HTTP_Request2_Response.
+     */
+    public function getResponse();
 }
 
 ?>

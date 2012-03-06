@@ -46,22 +46,23 @@ class Resources
     const INVALID_URL_MSG     = 'Provided URL is invalid';
 
     // HTTP Headers
-    const X_MS_HEADER_PREFIX      = 'x-ms-';
-    const X_MS_META_HEADER_PREFIX = 'x-ms-meta-';
-    const X_MS_VERSION            = 'x-ms-version';
-    const X_MS_DATE               = 'x-ms-date';
-    const DATE                    = 'date';
-    const AUTHENTICATION          = 'Authorization';
-    const CONTENT_ENCODING        = 'content-encoding';
-    const CONTENT_LANGUAGE        = 'content-language';
-    const CONTENT_LENGTH          = 'content-length';
-    const CONTENT_MD5             = 'content-md5';
-    const CONTENT_TYPE            = 'content-type';
-    const IF_MODIFIED_SINCE       = 'if-modified-since';
-    const IF_MATCH                = 'if-match';
-    const IF_NONE_MATCH           = 'if-none-match';
-    const IF_UNMODIFIED_SINCE     = 'if-unmodified-since';
-    const RANGE                   = 'range';
+    const X_MS_HEADER_PREFIX              = 'x-ms-';
+    const X_MS_META_HEADER_PREFIX         = 'x-ms-meta-';
+    const X_MS_APPROXIMATE_MESSAGES_COUNT = 'x-ms-approximate-messages-count';
+    const X_MS_VERSION                    = 'x-ms-version';
+    const X_MS_DATE                       = 'x-ms-date';
+    const DATE                            = 'date';
+    const AUTHENTICATION                  = 'Authorization';
+    const CONTENT_ENCODING                = 'content-encoding';
+    const CONTENT_LANGUAGE                = 'content-language';
+    const CONTENT_LENGTH                  = 'content-length';
+    const CONTENT_MD5                     = 'content-md5';
+    const CONTENT_TYPE                    = 'content-type';
+    const IF_MODIFIED_SINCE               = 'if-modified-since';
+    const IF_MATCH                        = 'if-match';
+    const IF_NONE_MATCH                   = 'if-none-match';
+    const IF_UNMODIFIED_SINCE             = 'if-unmodified-since';
+    const RANGE                           = 'range';
 
     // Misc
     const QUEUE_TYPE_NAME = 'IQueue';
