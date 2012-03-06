@@ -49,6 +49,8 @@ class Resources
     const X_MS_HEADER_PREFIX              = 'x-ms-';
     const X_MS_META_HEADER_PREFIX         = 'x-ms-meta-';
     const X_MS_APPROXIMATE_MESSAGES_COUNT = 'x-ms-approximate-messages-count';
+    const X_MS_POPRECEIPT                 = 'x-ms-popreceipt';
+    const X_MS_TIME_NEXT_VISIBLE          = 'x-ms-time-next-visible';
     const X_MS_VERSION                    = 'x-ms-version';
     const X_MS_DATE                       = 'x-ms-date';
     const DATE                            = 'date';
