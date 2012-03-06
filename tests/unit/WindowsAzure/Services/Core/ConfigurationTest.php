@@ -95,10 +95,10 @@ class ConfigurationTest extends PHPUnit_Framework_TestCase
   */
   public function testCreate()
   {
-    $config = Configuration::GetInstance();
+    $config = new Configuration();
     $config->setProperty(QueueSettings::ACCOUNT_KEY, TestResources::KEY1);
     $config->setProperty(QueueSettings::ACCOUNT_NAME, TestResources::ACCOUNT_NAME);
-    $config->setProperty(QueueSettings::URI, TestResources::QUEUE_URI);
+    $config->setProperty(QueueSettings::URI, 'http://' . TestResources::ACCOUNT_NAME . TestResources::QUEUE_URI);
     $queueWrapper = $config->create(Resources::QUEUE_TYPE_NAME);
     
     $this->assertInstanceOf('PEAR2\\WindowsAzure\\Services\\Queue\\' . Resources::QUEUE_TYPE_NAME, $queueWrapper);
