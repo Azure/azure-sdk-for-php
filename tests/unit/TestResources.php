@@ -68,6 +68,42 @@ class TestResources
     {
         return getenv('AZURE_KEY');
     }
+    
+    public static function getServicePropertiesSample()
+    {
+        $sample = array();
+        $sample['Logging']['Version'] = '1.0';
+        $sample['Logging']['Delete'] = 'true';
+        $sample['Logging']['Read'] = 'false';
+        $sample['Logging']['Write'] = 'true';
+        $sample['Logging']['RetentionPolicy']['Enabled'] = 'true';
+        $sample['Logging']['RetentionPolicy']['Days'] = '20';
+        $sample['Metrics']['Version'] = '1.0';
+        $sample['Metrics']['Enabled'] = 'true';
+        $sample['Metrics']['IncludeAPIs'] = 'false';
+        $sample['Metrics']['RetentionPolicy']['Enabled'] = 'true';
+        $sample['Metrics']['RetentionPolicy']['Days'] = '20';
+        
+        return $sample;
+    }
+    
+    public static function setServicePropertiesSample()
+    {
+        $sample = array();
+        $sample['Logging']['Version'] = '1.0';
+        $sample['Logging']['Delete'] = 'true';
+        $sample['Logging']['Read'] = 'false';
+        $sample['Logging']['Write'] = 'true';
+        $sample['Logging']['RetentionPolicy']['Enabled'] = 'true';
+        $sample['Logging']['RetentionPolicy']['Days'] = '10';
+        $sample['Metrics']['Version'] = '1.0';
+        $sample['Metrics']['Enabled'] = 'true';
+        $sample['Metrics']['IncludeAPIs'] = 'false';
+        $sample['Metrics']['RetentionPolicy']['Enabled'] = 'true';
+        $sample['Metrics']['RetentionPolicy']['Days'] = '10';
+        
+        return $sample;
+    }
 }
 
 ?>

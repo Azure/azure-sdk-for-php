@@ -279,22 +279,20 @@ class UrlTest extends PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers PEAR2\WindowsAzure\Core\Url::reset
+     * @covers PEAR2\WindowsAzure\Core\Url::__clone
      */
-    public function testReset()
+    public function test__clone()
     {
         // Setup
         $urlString = TestResources::VALID_URL;
         $url = new Url($urlString);
-        $url->setQueryVariable('key', 'value');
-        $url->setUrlPath('/myqueue');
         
         // Test
-        $url->reset();
+        $actualUrl = clone $url;
+        $url->setQueryVariable('key', 'value');
         
         // Assert
-        $this->assertEquals(Resources::EMPTY_STRING, $url->getQuery());
-        $this->assertEquals('/', parse_url($url->getUrl(), PHP_URL_PATH));
+        $this->assertNotEquals($url->getQueryVariables(), $actualUrl->getQueryVariables());
     }
 }
 

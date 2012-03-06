@@ -27,11 +27,10 @@ use PEAR2\WindowsAzure\Core\IHttpClient;
 use PEAR2\WindowsAzure\Core\IServiceFilter;
 use PEAR2\WindowsAzure\Resources;
 use PEAR2\WindowsAzure\Core\ServiceException;
-use PEAR2\WindowsAzure\Utilities\Validate;
+use PEAR2\WindowsAzure\Validate;
 use PEAR2\WindowsAzure\Core\IUrl;
 
 require_once 'HTTP/Request2.php';
-require_once 'XML/Unserializer.php';
 
 /**
  * HTTP client which sends and receives HTTP requests and responses.
@@ -65,9 +64,9 @@ class HttpClient implements IHttpClient
     {
         $this->_request = new \HTTP_Request2(
             null, null, array(
-                'use_brackets'    => true,
-                'ssl_verify_peer' => false,
-                'ssl_verify_host' => false
+                Resources::USE_BRACKETS    => true,
+                Resources::SSL_VERIFY_PEER => false,
+                Resources::SSL_VERIFY_HOST => false
                 )
         );
 
@@ -79,26 +78,17 @@ class HttpClient implements IHttpClient
     }
     
     /**
-     * Resets request headers, expected code and sets x-ms-version header to latest 
-     * version.
+     * Makes deep copy from the current object.
      * 
-     * @return none
+     * @return PEAR2\WindowsAzure\Core\HttpClient
      */
-    
-    public function reset()
+    public function __clone()
     {
-        // Clear headers
-        $this->setHeaders(array_keys($this->getHeaders()));
+        $this->_request = clone $this->_request;
         
-        $this->_requestUrl = null;
-        
-        // Sets version header
-        $this->_request->SetHeader(
-            array(Resources::X_MS_VERSION => Resources::API_VERSION)
-        );
-        
-        // Reset expected code
-        $this->_expectedStatusCodes = array();
+        if (!is_null($this->_requestUrl)) {
+            $this->_requestUrl = clone $this->_requestUrl;
+        }
     }
 
     /**
@@ -203,6 +193,19 @@ class HttpClient implements IHttpClient
             $this->setUrl($url);
             $this->_request->setUrl($this->_requestUrl->getUrl());
         }
+        
+        $contentLength = Resources::EMPTY_STRING;
+        if (    strtoupper($this->getMethod()) != \HTTP_Request2::METHOD_GET
+            && strtoupper($this->getMethod()) != \HTTP_Request2::METHOD_DELETE
+            && strtoupper($this->getMethod()) != \HTTP_Request2::METHOD_HEAD
+        ) {
+            $contentLength = 0;
+            
+            if (!is_null($this->getBody())) {
+                $contentLength = strlen($this->getBody());
+            }
+            $this->_request->setHeader(Resources::CONTENT_LENGTH, $contentLength);
+        }
 
         foreach ($filters as $filter) {
             $this->_request = $filter->handleRequest($this)->_request;
@@ -250,6 +253,56 @@ class HttpClient implements IHttpClient
     public function getSuccessfulStatusCode()
     {
         return $this->_expectedStatusCodes;
+    }
+    
+    /**
+     * Sets configuration parameter.
+     * 
+     * @param string $name  configuration parameter name.
+     * @param mixed  $value configuration parameter value.
+     * 
+     * @return none.
+     */
+    public function setConfig($name, $value = null)
+    {
+        Validate::isString($name);
+        Validate::notNullOrEmpty($name);
+        
+        $this->_request->setConfig($name, $value);
+    }
+    
+    /**
+     * Gets value for configuration parameter.
+     * 
+     * @param string $name configuration parameter name.
+     * 
+     * @return string.
+     */
+    public function getConfig($name)
+    {
+        return $this->_request->getConfig($name);
+    }
+    
+    /**
+     * Sets the request body.
+     * 
+     * @param string $body body to use.
+     * 
+     * @return none.
+     */
+    public function setBody($body)
+    {
+        $this->_request->setBody($body);
+    }
+    
+    /**
+     * Gets the request body.
+     * 
+     * @return string.
+     */
+    public function getBody()
+    {
+        return $this->_request->getBody();
     }
 }
 

@@ -28,8 +28,11 @@ use PEAR2\WindowsAzure\Resources;
 use PEAR2\WindowsAzure\Services\Queue\Models\ListQueueOptions;
 use PEAR2\WindowsAzure\Services\Queue\Models\ListQueueResult;
 use PEAR2\WindowsAzure\Services\Queue\Models\CreateQueueOptions;
+use PEAR2\WindowsAzure\Services\Queue\Models\GetServicePropertiesResult;
+use PEAR2\WindowsAzure\Services\Queue\Models\QueueServiceOptions;
+use PEAR2\WindowsAzure\Services\Queue\Models\ServiceProperties;
 use PEAR2\WindowsAzure\Core\IHttpClient;
-use PEAR2\WindowsAzure\Utilities\Utilities;
+use PEAR2\WindowsAzure\Utilities;
 use PEAR2\WindowsAzure\Core\Url;
 
 /**
@@ -70,39 +73,6 @@ class QueueRestProxy implements IQueue
     }
     
     /**
-     * Resets the http channel and request url
-     *
-     * @return none.
-     */
-    private function _reset()
-    {
-        $this->_channel->reset();
-        $this->_url->reset();
-    }
-    
-    /**
-     * Tries to send, serialize response and then resets resources.
-     *
-     * @return none.
-     */
-    private function _sendAndReset()
-    {
-        try
-        {
-            $responseBody   = $this->_channel->send($this->_filters, $this->_url);
-            $parsedResponse = Utilities::unserialize($responseBody);
-            $this->_reset();
-            
-            return $parsedResponse;
-        }
-        catch (\Exception $e)
-        {
-            $this->_reset();
-            throw $e;
-        }
-    }
-    
-    /**
      * Generates metadata headers by prefixing each element with 'x-ms-meta'.
      *
      * @param array $metadata user defined metadata.
@@ -132,16 +102,6 @@ class QueueRestProxy implements IQueue
     }
 
     /**
-     * Clones the current object into new one.
-     *
-     * @return PEAR2\WindowsAzure\Services\Queue\Models\QueueRestProxy.
-     */
-    public function __clone()
-    {
-
-    }
-
-    /**
      * Adds new filter to queue proxy object and returns new QueueRestProxy with
      * that filter.
      *
@@ -167,28 +127,32 @@ class QueueRestProxy implements IQueue
      */
     public function listQueues($listQueuesOptions = null)
     {
+        $channel = clone $this->_channel;
+        $url     = clone $this->_url;
+        
         if (!isset($listQueuesOptions)) {
             $listQueuesOptions = new ListQueueOptions();
         }
 
-        $this->_channel->setMethod(\HTTP_Request2::METHOD_GET);
-        $this->_url->setQueryVariable('comp', 'list');
-        $this->_url->setQueryVariable(
+        $channel->setMethod(\HTTP_Request2::METHOD_GET);
+        $url->setQueryVariable('comp', 'list');
+        $url->setQueryVariable(
             Resources::PREFIX, $listQueuesOptions->getPrefix()
         );
-        $this->_url->setQueryVariable(
+        $url->setQueryVariable(
             Resources::MARKER, $listQueuesOptions->getMarker()
         );
-        $this->_url->setQueryVariable(
+        $url->setQueryVariable(
             Resources::MAX_RESULTS, $listQueuesOptions->getMaxResults()
         );
-        $this->_url->setQueryVariable(
+        $url->setQueryVariable(
             'include', $listQueuesOptions->getIncludeMetadata()? 'metadata':  null
         );
         
-        $this->_channel->setExpectedStatusCode(Resources::SUCCESS_LIST_QUEUES);
+        $channel->setExpectedStatusCode(Resources::STATUS_OK);
         
-        $parsedResponse = $this->_sendAndReset();
+        $responseBody   = $channel->send($this->_filters, $url);
+        $parsedResponse = Utilities::unserialize($responseBody);
 
         return ListQueueResult::create($parsedResponse);
     }
@@ -232,21 +196,23 @@ class QueueRestProxy implements IQueue
      */
     public function createQueue($queueName, $createQueueOptions = null)
     {
+        $channel = clone $this->_channel;
+        $url     = clone $this->_url;
+        
         if (!isset($createQueueOptions)) {
             $createQueueOptions = new CreateQueueOptions();
         }
 
-        $this->_channel->setMethod(\HTTP_Request2::METHOD_PUT);
-        $this->_url->appendUrlPath($queueName);
+        $channel->setMethod(\HTTP_Request2::METHOD_PUT);
+        $url->appendUrlPath($queueName);
         // Set metadata headers.
         $metadataHeaders = $this->_generateMetadataHeaders(
             $createQueueOptions->getMetadata()
         );
-        $this->_channel->setHeaders($metadataHeaders);
-        $this->_channel->setHeader(Resources::CONTENT_LENGTH, 0);
-        $this->_channel->setExpectedStatusCode(Resources::SUCCESS_CREATE_QUEUE);
-
-        $this->_sendAndReset();
+        $channel->setHeaders($metadataHeaders);
+        $channel->setExpectedStatusCode(Resources::STATUS_CREATED);
+        
+        $channel->send($this->_filters, $url);
     }
 
     /**
@@ -275,11 +241,14 @@ class QueueRestProxy implements IQueue
      */
     public function deleteQueue($queueName)
     {
-        $this->_channel->setMethod(\HTTP_Request2::METHOD_DELETE);
-        $this->_url->appendUrlPath($queueName);
-        $this->_channel->setExpectedStatusCode(Resources::SUCCESS_DELETE_QUEUE);
+        $channel = clone $this->_channel;
+        $url     = clone $this->_url;
         
-        $this->_sendAndReset();
+        $channel->setMethod(\HTTP_Request2::METHOD_DELETE);
+        $url->appendUrlPath($queueName);
+        $channel->setExpectedStatusCode(Resources::STATUS_NO_CONTENT);
+        
+        $channel->send($this->_filters, $url);
     }
 
     /**
@@ -305,7 +274,23 @@ class QueueRestProxy implements IQueue
      */
     public function getServiceProperties($queueServiceOptions = null)
     {
-        throw new \Exception(Resources::NOT_IMPLEMENTED_MSG);
+        $channel = clone $this->_channel;
+        $url     = clone $this->_url;
+        
+        if (!isset($queueServiceOptions)) {
+            $queueServiceOptions = new QueueServiceOptions();
+        }
+        
+        $channel->setMethod(\HTTP_Request2::METHOD_GET);
+        $channel->setExpectedStatusCode(Resources::STATUS_OK);
+        $url->setQueryVariable('restype', 'service');
+        $url->setQueryVariable('comp', 'properties');
+        $url->setQueryVariable('timeout', $queueServiceOptions->getTimeout());
+        
+        $responseBody   = $channel->send($this->_filters, $url);
+        $parsedResponse = Utilities::unserialize($responseBody);
+        
+        return GetServicePropertiesResult::create($parsedResponse);
     }
 
     /**
@@ -354,7 +339,7 @@ class QueueRestProxy implements IQueue
     /**
      * Sets the properties of the Queue service.
      * 
-     * @param array               $serviceProperties   New service properties.
+     * @param ServiceProperties   $serviceProperties   New service properties.
      * @param QueueServiceOptions $queueServiceOptions Optional queue service options
      * 
      * @return none.
@@ -362,7 +347,24 @@ class QueueRestProxy implements IQueue
     public function setServiceProperties($serviceProperties, 
         $queueServiceOptions = null
     ) {
-        throw new \Exception(Resources::NOT_IMPLEMENTED_MSG);
+        $channel = clone $this->_channel;
+        $url     = clone $this->_url;
+        
+        if (!isset($queueServiceOptions)) {
+            $queueServiceOptions = new QueueServiceOptions();
+        }
+        
+        $channel->setMethod(\HTTP_Request2::METHOD_PUT);
+        $channel->setExpectedStatusCode(Resources::STATUS_ACCEPT);
+        $url->setQueryVariable('restype', 'service');
+        $url->setQueryVariable('comp', 'properties');
+        $url->setQueryVariable('timeout', $queueServiceOptions->getTimeout());
+        $channel->setBody($serviceProperties->toXml());
+        $channel->setHeader(
+            Resources::CONTENT_TYPE, Resources::XML_CONTENT_TYPE
+        );
+        
+        $channel->send($this->_filters, $url);
     }
 
     /**

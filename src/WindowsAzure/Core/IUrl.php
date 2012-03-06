@@ -95,11 +95,11 @@ interface IUrl
     public function __toString();
     
     /**
-     * Gets actual URL string.
+     * Makes deep copy from the current object.
      * 
-     * @return string.
+     * @return PEAR2\WindowsAzure\Core\Url
      */
-    public function reset();
+    public function __clone();
 }
 
 ?>

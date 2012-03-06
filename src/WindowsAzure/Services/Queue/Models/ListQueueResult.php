@@ -25,7 +25,7 @@
 namespace PEAR2\WindowsAzure\Services\Queue\Models;
 use PEAR2\WindowsAzure\Resources;
 use PEAR2\WindowsAzure\Services\Queue\Models\Queue;
-use PEAR2\WindowsAzure\Utilities\Utilities;
+use PEAR2\WindowsAzure\Utilities;
 
 /**
  * Container to hold list queue response object.

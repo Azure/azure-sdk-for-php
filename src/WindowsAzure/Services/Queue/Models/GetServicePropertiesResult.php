@@ -23,11 +23,10 @@
  */
  
 namespace PEAR2\WindowsAzure\Services\Queue\Models;
-use PEAR2\WindowsAzure\Resources;
-use PEAR2\WindowsAzure\Utilities;
+use PEAR2\WindowsAzure\Services\Queue\Models\ServiceProperties;
 
 /**
- * Azure queue object.
+ * Result from calling GetQueueProperties REST wrapper.
  *
  * @category  Microsoft
  * @package   PEAR2\WindowsAzure\Services\Queue\Models
@@ -37,90 +36,45 @@ use PEAR2\WindowsAzure\Utilities;
  * @version   Release: @package_version@
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
-class Queue
+class GetServicePropertiesResult
 {
-    private $_name;
-    private $_url;
-    private $_metadata;
-
+    private $_serviceProperties;
+    
     /**
-     * Constructor
+     * Creates object from $parsedResponse.
      * 
-     * @param string $name queue name.
-     * @param string $url  queue url.
+     * @param array $parsedResponse XML response parsed into array.
      * 
-     * @return PEAR2\WindowsAzure\Services\Queue\Models\Queue.
+     * @return PEAR2\WindowsAzure\Services\Queue\Models\GetServicePropertiesResult
      */
-    function __construct($name, $url)
+    public static function create($parsedResponse)
     {
-        $this->_name = $name;
-        $this->_url  = $url;
+        $result                     = new GetServicePropertiesResult();
+        $result->_serviceProperties = ServiceProperties::create($parsedResponse);
+        
+        return $result;
     }
-
+    
     /**
-     * Gets queue name.
-     *
-     * @return string.
-     */
-    public function getName()
-    {
-        return $this->_name;
-    }
-
-    /**
-     * Sets queue name.
-     *
-     * @param string $name value.
+     * Gets service properties object.
      * 
-     * @return none.
+     * @return PEAR2\WindowsAzure\Services\Queue\Models\ServiceProperties 
      */
-    public function setName($name)
+    public function getValue()
     {
-        $this->_name = $name;
+        return $this->_serviceProperties;
     }
-
+    
     /**
-     * Gets queue url.
-     *
-     * @return string.
-     */
-    public function getUrl()
-    {
-        return $this->_url;
-    }
-
-    /**
-     * Sets queue url.
-     *
-     * @param string $url value.
+     * Sets service properties object.
      * 
-     * @return none.
-     */
-    public function setUrl($url)
-    {
-        $this->_url = $url;
-    }
-
-    /**
-     * Gets queue metadata.
-     *
-     * @return array.
-     */
-    public function getMetadata()
-    {
-        return $this->_metadata;
-    }
-
-    /**
-     * Sets queue metadata.
-     *
-     * @param string $metadata value.
+     * @param ServiceProperties $serviceProperties object to use.
      * 
-     * @return none.
+     * @return none 
      */
-    public function setMetadata($metadata)
+    public function setValue($serviceProperties)
     {
-        $this->_metadata = $metadata;
+        $this->_serviceProperties = clone $serviceProperties;
     }
 }
 

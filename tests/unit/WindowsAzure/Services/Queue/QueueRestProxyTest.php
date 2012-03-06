@@ -30,7 +30,9 @@ use PEAR2\WindowsAzure\Services\Queue\QueueSettings;
 use PEAR2\WindowsAzure\Services\Queue\Models\ListQueueOptions;
 use PEAR2\WindowsAzure\Services\Queue\Models\ListQueueResult;
 use PEAR2\WindowsAzure\Services\Queue\Models\CreateQueueOptions;
+use PEAR2\WindowsAzure\Services\Queue\Models\ServiceProperties;
 use PEAR2\Tests\Unit\TestResources;
+use PEAR2\WindowsAzure\Resources;
 use PEAR2\WindowsAzure\Core\ServiceException;
 
 /**
@@ -270,6 +272,34 @@ class QueueRestProxyTest extends \RestTestBase
         
         // Test
         $this->queueWrapper->deleteQueue($queueName);
+    }
+    
+    /**
+    * @covers PEAR2\WindowsAzure\Services\Queue\QueueRestProxy::getServiceProperties
+    */
+    public function testGetServiceProperties()
+    {
+        // Test
+        $result = $this->queueWrapper->getServiceProperties();
+        
+        // Assert
+        $this->assertEquals($this->defaultProperties->toArray(), $result->getValue()->toArray());
+    }
+    
+    /**
+    * @covers PEAR2\WindowsAzure\Services\Queue\QueueRestProxy::setServiceProperties
+    */
+    public function testSetServiceProperties()
+    {
+        // Setup
+        $expected = ServiceProperties::create(TestResources::setServicePropertiesSample());
+        
+        // Test
+        $this->setServiceProperties($expected);
+        $actual = $this->queueWrapper->getServiceProperties();
+        
+        // Assert
+        $this->assertEquals($expected->toXml(), $actual->getValue()->toXml());
     }
 }
 

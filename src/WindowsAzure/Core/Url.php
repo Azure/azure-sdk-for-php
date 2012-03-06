@@ -23,7 +23,7 @@
  */
  
 namespace PEAR2\WindowsAzure\Core;
-use PEAR2\WindowsAzure\Utilities\Validate;
+use PEAR2\WindowsAzure\Validate;
 use PEAR2\WindowsAzure\Resources;
 use PEAR2\WindowsAzure\Core\IUrl;
 require_once 'Net/URL2.php';
@@ -62,6 +62,16 @@ class Url implements IUrl
     }
     
     /**
+     * Makes deep copy from the current object.
+     * 
+     * @return PEAR2\WindowsAzure\Core\Url
+     */
+    public function __clone()
+    {
+        $this->_url = clone $this->_url;
+    }
+    
+    /**
      * Returns the query portion of the url
      * 
      * @return string
@@ -96,10 +106,8 @@ class Url implements IUrl
         Validate::isString($key);
         Validate::notNullOrEmpty($key);
         Validate::isString($value);
-
-        if (isset($value)) {
-            $this->_url->setQueryVariable(strtolower($key), $value);
-        } else if (!isset($value) && $force) {
+        
+        if ($value != Resources::EMPTY_STRING || $force) {
             $this->_url->setQueryVariable(strtolower($key), $value);
         }
     }
@@ -153,20 +161,6 @@ class Url implements IUrl
     public function __toString()
     {
         return $this->_url->getURL();
-    }
-    
-    /**
-     * Resets URL path and query string.
-     * 
-     * @return none.
-     */
-    public function reset()
-    {
-        // Reset url path section
-        $this->setUrlPath('/');
-        
-        // Clear query variables
-        $this->_url->setQuery(Resources::EMPTY_STRING);
     }
 }
 
