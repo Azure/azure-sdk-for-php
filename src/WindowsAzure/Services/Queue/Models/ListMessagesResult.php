@@ -72,17 +72,11 @@ class ListMessagesResult
     /**
      * Gets queueMessages field.
      * 
-     * @return integer
+     * @return array
      */
     public function getQueueMessages()
     {
-        $clonedMessages = array();
-        
-        foreach ($this->_queueMessages as $value) {
-            $clonedMessages[] = clone $value;
-        }
-        
-        return $clonedMessages;
+        return $this->_queueMessages;
     }
     
     /**
@@ -94,7 +88,11 @@ class ListMessagesResult
      */
     public function setQueueMessages($queueMessages)
     {
-        $this->_queueMessages = $queueMessages;
+        $this->_queueMessages = array();
+        
+        foreach ($queueMessages as $value) {
+            $this->_queueMessages[] = clone $value;
+        }
     }
 }
 
