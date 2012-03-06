@@ -582,6 +582,54 @@ class QueueRestProxyTest extends \RestTestBase
         $queues = $result->getQueues();
         $this->assertTrue(empty($queues));
     }
+    
+    /**
+    * @covers PEAR2\WindowsAzure\Services\Queue\QueueRestProxy::deleteMessage
+    */
+    public function testDeleteMessage()
+    {
+        // Setup
+        $name = 'deletemessage';
+        $expected = 'this is message text';
+        $this->createQueue($name);
+        $this->queueWrapper->createMessage($name, $expected);
+        $result = $this->queueWrapper->listMessages($name);
+        $messages   = $result->getQueueMessages();
+        $messageId  = $messages[0]->getMessageId();
+        $popReceipt = $messages[0]->getPopReceipt();
+        
+        // Test
+        $this->queueWrapper->deleteMessage($name, $messageId, $popReceipt);
+        
+        // Assert
+        $result   = $this->queueWrapper->listMessages($name);
+        $messages = $result->getQueueMessages();
+        $this->assertTrue(empty($messages));
+    }
+    
+    /**
+    * @covers PEAR2\WindowsAzure\Services\Queue\QueueRestProxy::clearMessages
+    */
+    public function testClearMessages()
+    {
+        // Setup
+        $name = 'clearmessages';
+        $msg1 = 'message #1';
+        $msg2 = 'message #2';
+        $msg3 = 'message #3';
+        $this->createQueue($name);
+        $this->queueWrapper->createMessage($name, $msg1);
+        $this->queueWrapper->createMessage($name, $msg2);
+        $this->queueWrapper->createMessage($name, $msg3);
+        
+        // Test
+        $this->queueWrapper->clearMessages($name);
+        
+        // Assert
+        $result   = $this->queueWrapper->listMessages($name);
+        $messages = $result->getQueueMessages();
+        $this->assertTrue(empty($messages));
+    }
 }
 
 ?>
