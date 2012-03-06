@@ -119,6 +119,23 @@ class Validate
             throw new \RuntimeException($failureMessage);
         }
     }
+    
+    /**
+     * Throws exception if the provided $date is not of type \DateTime
+     *
+     * @param mixed $date variable to check against.
+     * 
+     * @throws \InvalidArgumentTypeException
+     * 
+     * @return none.
+     */
+    public static function isDate($date)
+    {
+        if (get_class($date) != 'DateTime') {
+            throw new InvalidArgumentTypeException('DateTime');
+        }
+            
+    }
 }
 
 ?>
