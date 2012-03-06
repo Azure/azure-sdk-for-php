@@ -31,9 +31,11 @@ use PEAR2\WindowsAzure\Services\Queue\Models\CreateQueueOptions;
 use PEAR2\WindowsAzure\Services\Queue\Models\GetServicePropertiesResult;
 use PEAR2\WindowsAzure\Services\Queue\Models\QueueServiceOptions;
 use PEAR2\WindowsAzure\Services\Queue\Models\ServiceProperties;
+use PEAR2\WindowsAzure\Services\Queue\Models\GetQueueMetadataResult;
 use PEAR2\WindowsAzure\Core\IHttpClient;
 use PEAR2\WindowsAzure\Utilities;
 use PEAR2\WindowsAzure\Core\Url;
+use PEAR2\WindowsAzure\Core\AzureUtilities;
 
 /**
  * This class constructs HTTP requests and receive HTTP responses for queue 
@@ -70,35 +72,6 @@ class QueueRestProxy implements IQueue
         );
         $this->_channel = $channel;
         $this->_filters = array();
-    }
-    
-    /**
-     * Generates metadata headers by prefixing each element with 'x-ms-meta'.
-     *
-     * @param array $metadata user defined metadata.
-     * 
-     * @return array.
-     */
-    private function _generateMetadataHeaders($metadata)
-    {
-        $metadataHeaders = array();
-        
-        if (is_array($metadata) && !empty($metadata)) {
-            $headerName = Resources::X_MS_META_HEADER_PREFIX;
-            
-            foreach ($metadata as $key => $value) {
-                if (   strpos($value, "\r") !== false
-                    || strpos($value, "\n") !== false
-                ) {
-                    throw new \InvalidArgumentException(Resources::INVALID_META_MSG);
-                }
-                
-                $headerName                  .= strtolower($key);
-                $metadataHeaders[$headerName] = $value;
-            }
-        }
-        
-        return $metadataHeaders;
     }
 
     /**
@@ -206,7 +179,7 @@ class QueueRestProxy implements IQueue
         $channel->setMethod(\HTTP_Request2::METHOD_PUT);
         $url->appendUrlPath($queueName);
         // Set metadata headers.
-        $metadataHeaders = $this->_generateMetadataHeaders(
+        $metadataHeaders = AzureUtilities::generateMetadataHeaders(
             $createQueueOptions->getMetadata()
         );
         $channel->setHeaders($metadataHeaders);
@@ -261,7 +234,31 @@ class QueueRestProxy implements IQueue
      */
     public function getQueueMetadata($queueName, $queueServiceOptions = null)
     {
-        throw new \Exception(Resources::NOT_IMPLEMENTED_MSG);
+        $channel = clone $this->_channel;
+        $url     = clone $this->_url;
+        
+        if (!isset($queueServiceOptions)) {
+            $queueServiceOptions = new QueueServiceOptions();
+        }
+        
+        $channel->setMethod(\HTTP_Request2::METHOD_GET);
+        $channel->setExpectedStatusCode(Resources::STATUS_OK);
+        
+        $timeout = $queueServiceOptions->getTimeout();
+        if (isset($timeout)) {
+            $channel->setConfig(Resources::CONNECT_TIMEOUT, $timeout);
+        }
+        $url->appendUrlPath($queueName);
+        $url->setQueryVariable('comp', 'metadata');
+        
+        $channel->send($this->_filters, $url);
+        $response = $channel->getResponse();
+        $metadata = AzureUtilities::getMetadataArray($response->getHeader());
+        $maxCount = intval(
+            $response->getHeader(Resources::X_MS_APPROXIMATE_MESSAGES_COUNT)
+        );
+        
+        return new GetQueueMetadataResult($maxCount, $metadata);
     }
 
     /**
@@ -333,7 +330,26 @@ class QueueRestProxy implements IQueue
     public function setQueueMetadata($queueName, $metadata, 
         $queueServiceOptions = null
     ) {
-        throw new \Exception(Resources::NOT_IMPLEMENTED_MSG);
+        $channel = clone $this->_channel;
+        $url     = clone $this->_url;
+        
+        if (!isset($queueServiceOptions)) {
+            $queueServiceOptions = new QueueServiceOptions();
+        }
+        
+        $channel->setMethod(\HTTP_Request2::METHOD_PUT);
+        $channel->setExpectedStatusCode(Resources::STATUS_NO_CONTENT);
+        
+        $timeout = $queueServiceOptions->getTimeout();
+        if (isset($timeout)) {
+            $channel->setConfig(Resources::CONNECT_TIMEOUT, $timeout);
+        }
+        $url->appendUrlPath($queueName);
+        $url->setQueryVariable('comp', 'metadata');
+        $metadataHeaders = AzureUtilities::generateMetadataHeaders($metadata);
+        $channel->setHeaders($metadataHeaders);
+        
+        $channel->send($this->_filters, $url);
     }
 
     /**
