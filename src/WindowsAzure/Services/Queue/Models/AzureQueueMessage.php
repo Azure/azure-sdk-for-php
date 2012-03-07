@@ -100,24 +100,11 @@ class AzureQueueMessage
      */
     public static function createFromListMessages($parsedResponse)
     {
-        $msg             = new AzureQueueMessage();
-        $expirationDate  = $parsedResponse['ExpirationTime'];
-        $insertionDate   = $parsedResponse['InsertionTime'];
         $timeNextVisible = $parsedResponse['TimeNextVisible'];
         
-        $msg->setDequeueCount(intval($parsedResponse['DequeueCount']));
-        
-        $date = AzureUtilities::windowsAzureDateToDateTime($expirationDate);
-        $msg->setExpirationDate($date);
-        
-        $date = AzureUtilities::windowsAzureDateToDateTime($insertionDate);
-        $msg->setInsertionDate($date);
-        
+        $msg  = self::createFromPeekMessages($parsedResponse);
         $date = AzureUtilities::windowsAzureDateToDateTime($timeNextVisible);
         $msg->setTimeNextVisible($date);
-        
-        $msg->setMessageId($parsedResponse['MessageId']);
-        $msg->setMessageText($parsedResponse['MessageText']);
         $msg->setPopReceipt($parsedResponse['PopReceipt']);
         
         return $msg;
@@ -229,7 +216,7 @@ class AzureQueueMessage
     /**
      * Sets expirationDate field.
      * 
-     * @param \DateTime $expirationDate message contents.
+     * @param \DateTime $expirationDate the expiration date of the message.
      * 
      * @return none.
      */
@@ -251,7 +238,7 @@ class AzureQueueMessage
     /**
      * Sets timeNextVisible field.
      * 
-     * @param \DateTime $timeNextVisible message contents.
+     * @param \DateTime $timeNextVisible next visibile time for the message.
      * 
      * @return none.
      */
@@ -273,7 +260,7 @@ class AzureQueueMessage
     /**
      * Sets popReceipt field.
      * 
-     * @param string $popReceipt message contents.
+     * @param string $popReceipt used when deleting the message.
      * 
      * @return none.
      */
@@ -295,7 +282,7 @@ class AzureQueueMessage
     /**
      * Sets dequeueCount field.
      * 
-     * @param integer $dequeueCount message contents.
+     * @param integer $dequeueCount number of dequeues for that message.
      * 
      * @return none.
      */
