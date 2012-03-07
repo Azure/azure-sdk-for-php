@@ -140,6 +140,39 @@ class TestResources
         
         return $sample;
     }
+    
+    public static function listQueuesEmpty()
+    {
+        $sample = array();
+        $sample['Queues'] = '';
+        $sample['NextMarker'] = '';
+        
+        return $sample;
+    }
+    
+    public static function listQueuesOneEntry()
+    {
+        $sample = array();
+        $sample['Marker'] = '/account/listqueueswithnextmarker3';
+        $sample['MaxResults'] = '2';
+        $sample['Queues'] = array('Queue' => array('Name' => 'myqueue', 'Url' => 'http://account.queue.core.windows.net/myqueue'));
+        $sample['NextMarker'] = '';
+        
+        return $sample;
+    }
+    
+    public static function listQueuesMultipleEntries()
+    {
+        $sample = array();
+        $sample['MaxResults'] = '2';
+        $sample['Queues'] = array ('Queue' => array(
+          0 => array('Name' => 'myqueue1', 'Url' => 'http://account.queue.core.windows.net/myqueue1'),
+          1 => array('Name' => 'myqueue2', 'Url' => 'http://account.queue.core.windows.net/myqueue2')
+        ));
+        $sample['NextMarker'] = '/account/myqueue3';
+        
+        return $sample;
+    }
 }
 
 ?>
