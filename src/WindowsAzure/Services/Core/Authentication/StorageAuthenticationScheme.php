@@ -73,11 +73,6 @@ abstract class StorageAuthenticationScheme
 
         if (!is_null($headers)) {
             foreach ($headers as $header => $value) {
-                if (is_bool($value)) {
-                    // This line converts passed user bool values into string value.
-                    $value = $value === true ? 'True' : 'False';
-                }
-
                 if (Utilities::startsWith($header, Resources::X_MS_HEADER_PREFIX)) {
                     $canonicalizedHeaders[] = strtolower($header) . ':' . 
                         trim($value);

@@ -40,51 +40,51 @@ use PEAR2\WindowsAzure\Resources;
  */
 class StorageAuthenticationSchemeTest extends PHPUnit_Framework_TestCase
 {
-  /**
-  * @covers PEAR2\WindowsAzure\Services\Core\Authentication\StorageAuthenticationScheme::__construct
-  */
-  public function test__construct()
-  {
-    $mock = new StorageAuthenticationSchemeMock(TestResources::ACCOUNT_NAME, TestResources::KEY4);
-    $this->assertEquals(TestResources::ACCOUNT_NAME, $mock->getAccountName());
-    $this->assertEquals(TestResources::KEY4, $mock->getAccountKey());
-  }
-  
-  /**
-  * @covers PEAR2\WindowsAzure\Services\Core\Authentication\StorageAuthenticationScheme::__construct
-  */
-  public function testComputeCanonicalizedHeadersMock()
-  {
-    $date = TestResources::DATE1;
-    $headers = array();
-    $headers[Resources::X_MS_DATE] = $date;
-    $headers[Resources::X_MS_VERSION] = Resources::API_VERSION;
-    $expected = array();
-    $expected[] = Resources::X_MS_DATE . ':' . $date;
-    $expected[] = Resources::X_MS_VERSION . ':' . Resources::API_VERSION;
-    $mock = new StorageAuthenticationSchemeMock(TestResources::ACCOUNT_NAME, TestResources::KEY4);
-    
-    $actual = $mock->computeCanonicalizedHeadersMock($headers);
-    
-    $this->assertEquals($expected, $actual);
-  }
-  
-  /**
-  * @covers PEAR2\WindowsAzure\Services\Core\Authentication\StorageAuthenticationScheme::ComputeCanonicalizedResource
-  */
-  public function testComputeCanonicalizedResourceMockSimple()
-  {
-    $queryVariables = array();
-    $queryVariables['COMP'] = 'list';
-    $accountName = TestResources::ACCOUNT_NAME;
-    $url = TestResources::URI1;
-    $expected = '/' . $accountName . parse_url($url, PHP_URL_PATH) . "\n" . 'comp:list';
-    $mock = new StorageAuthenticationSchemeMock($accountName, TestResources::KEY4);
-    
-    $actual = $mock->computeCanonicalizedResourceMock($url, $queryVariables);
-    
-    $this->assertEquals($expected, $actual);
-  }
+    /**
+    * @covers PEAR2\WindowsAzure\Services\Core\Authentication\StorageAuthenticationScheme::__construct
+    */
+    public function test__construct()
+    {
+        $mock = new StorageAuthenticationSchemeMock(TestResources::ACCOUNT_NAME, TestResources::KEY4);
+        $this->assertEquals(TestResources::ACCOUNT_NAME, $mock->getAccountName());
+        $this->assertEquals(TestResources::KEY4, $mock->getAccountKey());
+    }
+
+    /**
+    * @covers PEAR2\WindowsAzure\Services\Core\Authentication\StorageAuthenticationScheme::computeCanonicalizedHeaders
+    */
+    public function testComputeCanonicalizedHeadersMock()
+    {
+        $date = TestResources::DATE1;
+        $headers = array();
+        $headers[Resources::X_MS_DATE] = $date;
+        $headers[Resources::X_MS_VERSION] = Resources::API_VERSION;
+        $expected = array();
+        $expected[] = Resources::X_MS_DATE . ':' . $date;
+        $expected[] = Resources::X_MS_VERSION . ':' . Resources::API_VERSION;
+        $mock = new StorageAuthenticationSchemeMock(TestResources::ACCOUNT_NAME, TestResources::KEY4);
+
+        $actual = $mock->computeCanonicalizedHeadersMock($headers);
+
+        $this->assertEquals($expected, $actual);
+    }
+
+    /**
+    * @covers PEAR2\WindowsAzure\Services\Core\Authentication\StorageAuthenticationScheme::computeCanonicalizedResource
+    */
+    public function testComputeCanonicalizedResourceMockSimple()
+    {
+        $queryVariables = array();
+        $queryVariables['COMP'] = 'list';
+        $accountName = TestResources::ACCOUNT_NAME;
+        $url = TestResources::URI1;
+        $expected = '/' . $accountName . parse_url($url, PHP_URL_PATH) . "\n" . 'comp:list';
+        $mock = new StorageAuthenticationSchemeMock($accountName, TestResources::KEY4);
+
+        $actual = $mock->computeCanonicalizedResourceMock($url, $queryVariables);
+
+        $this->assertEquals($expected, $actual);
+    }
 }
 
 ?>

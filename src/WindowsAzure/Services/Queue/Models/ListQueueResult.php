@@ -65,6 +65,9 @@ class ListQueueResult
         $result->_nextMarker = Utilities::tryGetValue(
             $parsedResponse, Resources::NEXT_MARKER
         );
+        $result->_maxResults = Utilities::tryGetValue(
+            $parsedResponse, Resources::MAX_RESULTS
+        );
         $result->_queues     = array();
         $rawQueues           = array();
         
@@ -98,7 +101,7 @@ class ListQueueResult
      */
     public function getPrefix()
     {
-        $this->_prefix;
+        return $this->_prefix;
     }
 
     /**

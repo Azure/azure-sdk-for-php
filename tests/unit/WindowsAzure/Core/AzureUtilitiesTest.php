@@ -129,8 +129,11 @@ class AzureUtilitiesTest extends PHPUnit_Framework_TestCase
      */
     public function testIsEmulated()
     {
-        // Just to cover the method in the coverage percentage.
-        $this->assertTrue(true);
+        // Test
+        $actual = AzureUtilities::isEmulated();
+        
+        // Assert
+        $this->assertTrue(isset($actual));
     }
 }
 
