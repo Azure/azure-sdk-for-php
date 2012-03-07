@@ -309,6 +309,7 @@ class HttpClient implements IHttpClient
      */
     public function setBody($body)
     {
+        Validate::isString($body);
         $this->_request->setBody($body);
     }
     
