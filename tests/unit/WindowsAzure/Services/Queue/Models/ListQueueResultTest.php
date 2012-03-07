@@ -95,6 +95,153 @@ class ListQueueResultTest extends PHPUnit_Framework_TestCase
         $this->assertEquals($sample['Queues']['Queue'][1]['Url'], $queues[1]->getUrl());
         $this->assertEquals($sample['MaxResults'], $actual->getMaxResults());
         $this->assertEquals($sample['NextMarker'], $actual->getNextMarker());
+        
+        return $actual;
+    }
+    
+    /**
+     * @covers PEAR2\WindowsAzure\Services\Queue\Models\ListQueueResult::getQueues
+     * @depends testCreateWithmultipleEnties
+     */
+    public function testGetQueues($result)
+    {
+        // Test
+        $actual = $result->getQueues();
+        
+        // Assert
+        $this->assertCount(2, $actual);
+    }
+    
+    /**
+     * @covers PEAR2\WindowsAzure\Services\Queue\Models\ListQueueResult::setPrefix
+     */
+    public function testSetPrefix()
+    {
+        // Setup
+        $options = new ListQueueResult();
+        $expected = 'myprefix';
+        
+        // Test
+        $options->setPrefix($expected);
+        
+        // Assert
+        $this->assertEquals($expected, $options->getPrefix());
+    }
+    
+    /**
+     * @covers PEAR2\WindowsAzure\Services\Queue\Models\ListQueueResult::getPrefix
+     */
+    public function testGetPrefix()
+    {
+        // Setup
+        $options = new ListQueueResult();
+        $expected = 'myprefix';
+        $options->setPrefix($expected);
+        
+        // Test
+        $actual = $options->getPrefix();
+        
+        // Assert
+        $this->assertEquals($expected, $actual);
+    }
+    
+    /**
+     * @covers PEAR2\WindowsAzure\Services\Queue\Models\ListQueueResult::setNextMarker
+     */
+    public function testSetNextMarker()
+    {
+        // Setup
+        $options = new ListQueueResult();
+        $expected = 'mymarker';
+        
+        // Test
+        $options->setNextMarker($expected);
+        
+        // Assert
+        $this->assertEquals($expected, $options->getNextMarker());
+    }
+    
+    /**
+     * @covers PEAR2\WindowsAzure\Services\Queue\Models\ListQueueResult::getNextMarker
+     */
+    public function testGetNextMarker()
+    {
+        // Setup
+        $options = new ListQueueResult();
+        $expected = 'mymarker';
+        $options->setNextMarker($expected);
+        
+        // Test
+        $actual = $options->getNextMarker();
+        
+        // Assert
+        $this->assertEquals($expected, $actual);
+    }
+    
+    /**
+     * @covers PEAR2\WindowsAzure\Services\Queue\Models\ListQueueResult::setMarker
+     */
+    public function testSetMarker()
+    {
+        // Setup
+        $options = new ListQueueResult();
+        $expected = 'mymarker';
+        
+        // Test
+        $options->setMarker($expected);
+        
+        // Assert
+        $this->assertEquals($expected, $options->getMarker());
+    }
+    
+    /**
+     * @covers PEAR2\WindowsAzure\Services\Queue\Models\ListQueueResult::getMarker
+     */
+    public function testGetMarker()
+    {
+        // Setup
+        $options = new ListQueueResult();
+        $expected = 'mymarker';
+        $options->setMarker($expected);
+        
+        // Test
+        $actual = $options->getMarker();
+        
+        // Assert
+        $this->assertEquals($expected, $actual);
+    }
+    
+    /**
+     * @covers PEAR2\WindowsAzure\Services\Queue\Models\ListQueueResult::setMaxResults
+     */
+    public function testSetMaxResults()
+    {
+        // Setup
+        $options = new ListQueueResult();
+        $expected = '3';
+        
+        // Test
+        $options->setMaxResults($expected);
+        
+        // Assert
+        $this->assertEquals($expected, $options->getMaxResults());
+    }
+    
+    /**
+     * @covers PEAR2\WindowsAzure\Services\Queue\Models\ListQueueResult::getMaxResults
+     */
+    public function testGetMaxResults()
+    {
+        // Setup
+        $options = new ListQueueResult();
+        $expected = '3';
+        $options->setMaxResults($expected);
+        
+        // Test
+        $actual = $options->getMaxResults();
+        
+        // Assert
+        $this->assertEquals($expected, $actual);
     }
 }
 

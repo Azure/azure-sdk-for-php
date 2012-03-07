@@ -101,7 +101,7 @@ class ListQueueResult
      */
     public function getPrefix()
     {
-        $this->_prefix;
+        return $this->_prefix;
     }
 
     /**

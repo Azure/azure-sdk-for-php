@@ -125,6 +125,8 @@ class HttpClient implements IHttpClient
      */ 
     public function getUrl()
     {
+        Validate::notNullOrEmpty($this->_requestUrl);
+        
         return $this->_requestUrl;
     }
 
@@ -175,6 +177,8 @@ class HttpClient implements IHttpClient
      */
     public function setHeader($header, $value, $replace = false)
     {
+        Validate::isString($value);
+        
         $this->_request->SetHeader($header, $value, $replace);
     }
     
@@ -187,7 +191,9 @@ class HttpClient implements IHttpClient
      */
     public function setHeaders($headers)
     {
-        $this->_request->SetHeader($headers);
+        foreach ($headers as $key => $value) {
+            $this->setHeader($key, $value);
+        }
     }
 
     /**

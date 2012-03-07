@@ -11,6 +11,7 @@ spl_autoload_register(
             'configurationtest' => '/unit/WindowsAzure/Services/Core/ConfigurationTest.php',
             'createmessageoptionstest' => '/unit/WindowsAzure/Services/Queue/Models/CreateMessageOptionsTest.php',
             'createqueueoptionstest' => '/unit/WindowsAzure/Services/Queue/Models/CreateQueueOptionsTest.php',
+            'datefiltertest' => '/unit/WindowsAzure/Services/Core/Filters/DateFilterTest.php',
             'getqueuemetadataresulttest' => '/unit/WindowsAzure/Services/Queue/Models/GetQueueMetadataResultTest.php',
             'getservicepropertiesresulttest' => '/unit/WindowsAzure/Services/Queue/Models/GetServicePropertiesResultTest.php',
             'httpclienttest' => '/unit/WindowsAzure/Core/HttpClientTest.php',
@@ -38,10 +39,12 @@ spl_autoload_register(
             'servicepropertiestest' => '/unit/WindowsAzure/Services/Queue/Models/ServicePropertiesTest.php',
             'servicesbuildertest' => '/unit/WindowsAzure/Services/Core/ServicesBuilderTest.php',
             'sharedkeyauthenticationschemetest' => '/unit/WindowsAzure/Services/Core/Authentication/SharedKeyAuthenticationSchemeTest.php',
+            'sharedkeyfiltertest' => '/unit/WindowsAzure/Services/Core/Filters/SharedKeyFilterTest.php',
             'storageauthenticationschemetest' => '/unit/WindowsAzure/Services/Core/Authentication/StorageAuthenticationSchemeTest.php',
             'updatemessageresulttest' => '/unit/WindowsAzure/Services/Queue/Models/UpdateMessageResultTest.php',
             'urltest' => '/unit/WindowsAzure/Core/UrlTest.php',
-            'utilitiestest' => '/unit/WindowsAzure/UtilitiesTest.php'
+            'utilitiestest' => '/unit/WindowsAzure/UtilitiesTest.php',
+            'validatetest' => '/unit/WindowsAzure/ValidateTest.php'
           );
       }
       $cn = strtolower($class);

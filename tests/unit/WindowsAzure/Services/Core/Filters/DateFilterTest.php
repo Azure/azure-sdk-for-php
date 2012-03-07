@@ -22,10 +22,12 @@
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
 
-use PEAR2\WindowsAzure\Services\Queue\Models\CreateQueueOptions;
+use PEAR2\WindowsAzure\Services\Core\Filters\DateFilter;
+use PEAR2\WindowsAzure\Services\Core\HttpClient;
+use PEAR2\WindowsAzure\Resources;
 
 /**
- * Unit tests for class CreateQueueOptions
+ * Unit tests for class DateFilter
  *
  * @category  Microsoft
  * @package   PEAR2\Tests\Unit\WindowsAzure
@@ -35,57 +37,39 @@ use PEAR2\WindowsAzure\Services\Queue\Models\CreateQueueOptions;
  * @version   Release: @package_version@
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
-class CreateQueueOptionsTest extends PHPUnit_Framework_TestCase
+class DateFilterTest extends PHPUnit_Framework_TestCase
 {
     /**
-     * @covers PEAR2\WindowsAzure\Services\Queue\Models\CreateQueueOptions::setMetadata
+     * @covers PEAR2\WindowsAzure\Services\Core\Filters\DateFilter::handleRequest
      */
-    public function testSetMetadata()
+    public function testHandleRequest()
     {
         // Setup
-        $queue = new CreateQueueOptions();
-        $expected = array('key1' => 'value1', 'key2' => 'value2');
+        $channel = new HttpClient();
+        $filer = new DateFilter();
         
         // Test
-        $queue->setMetadata($expected);
+        $request = $filer->handleRequest($channel);
         
         // Assert
-        $this->assertEquals($expected, $queue->getMetadata());
+        $this->assertArrayHasKey(Resources::X_MS_DATE, $request->getHeaders());
     }
     
     /**
-     * @covers PEAR2\WindowsAzure\Services\Queue\Models\CreateQueueOptions::getMetadata
+     * @covers PEAR2\WindowsAzure\Services\Core\Filters\DateFilter::handleResponse
      */
-    public function testGetMetadata()
+    public function testHandleResponse()
     {
         // Setup
-        $queue = new CreateQueueOptions();
-        $expected = array('key1' => 'value1', 'key2' => 'value2');
-        $queue->setMetadata($expected);
+        $channel = new HttpClient();
+        $response = null;
+        $filer = new DateFilter();
         
         // Test
-        $actual = $queue->getMetadata();
+        $response = $filer->handleResponse($channel, $response);
         
         // Assert
-        $this->assertEquals($expected, $actual);
-    }
-    
-    /**
-     * @covers PEAR2\WindowsAzure\Services\Queue\Models\CreateQueueOptions::addMetadata
-     */
-    public function testAddMetadata()
-    {
-        // Setup
-        $queue = new CreateQueueOptions();
-        $key = 'key1';
-        $value = 'value1';
-        $expected = array($key => $value);
-        
-        // Test
-        $queue->addMetadata($key, $value);
-        
-        // Assert
-        $this->assertEquals($expected, $queue->getMetadata());
+        $this->assertNull($response);
     }
 }
 
