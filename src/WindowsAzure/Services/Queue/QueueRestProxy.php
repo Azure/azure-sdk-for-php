@@ -80,6 +80,16 @@ class QueueRestProxy implements IQueue
     }
     
     /**
+     * Gets HTTP filters that will process each request.
+     * 
+     * @return array
+     */
+    public function getFilters()
+    {
+        return $this->_filters;
+    }
+    
+    /**
      * Sends HTTP request with the specified parameters.
      * 
      * @param string $method      HTTP method used in the request
@@ -165,7 +175,7 @@ class QueueRestProxy implements IQueue
         
         $response = $this->send($method, $headers, $queryParams, $path, $statusCode);
         $parsed   = Utilities::unserialize($response->getBody());
-
+        
         return ListQueueResult::create($parsed);
     }
 
@@ -299,7 +309,7 @@ class QueueRestProxy implements IQueue
         $headers     = array();
         $queryParams = array();
         $config      = array();
-        $path        = $queueName . '/messages' . '/' . $messageId;
+        $path        = $queueName . '/messages/' . $messageId;
         $body        = Resources::EMPTY_STRING;
         $statusCode  = Resources::STATUS_NO_CONTENT;
         

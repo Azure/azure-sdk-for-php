@@ -54,7 +54,6 @@ class HttpClientTest extends PHPUnit_Framework_TestCase
         // Assert
         $this->assertTrue(isset($channel));
         $this->assertContains(Resources::X_MS_VERSION, array_keys($headers));
-        $this->assertNull($channel->getUrl());
     }
     
     /**
