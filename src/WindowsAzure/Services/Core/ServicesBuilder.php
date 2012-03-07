@@ -56,10 +56,9 @@ class ServicesBuilder implements IServiceBuilder
     private static function _buildQueue($config)
     {
         $httpClient = new HttpClient();
-
+        
         $queueWrapper = new QueueRestProxy(
-            $httpClient, $config->getProperty(QueueSettings::ACCOUNT_NAME),
-            $config->getProperty(QueueSettings::URI)
+            $httpClient, $config->getProperty(QueueSettings::URI)
         );
 
         // Adding date filter

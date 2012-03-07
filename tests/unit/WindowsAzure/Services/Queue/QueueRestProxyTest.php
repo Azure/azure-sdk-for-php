@@ -53,6 +53,8 @@ use PEAR2\WindowsAzure\Core\ServiceException;
 */
 class QueueRestProxyTest extends \RestTestBase
 {
+    const NOT_SUPPORTED = 'The storage emulator doesn\'t support this API';
+    
     /**
     * @covers PEAR2\WindowsAzure\Services\Queue\QueueRestProxy::listQueues
     */
@@ -148,6 +150,10 @@ class QueueRestProxyTest extends \RestTestBase
     */
     public function testListQueuesWithInvalidNextMarkerFail()
     {
+        if (\PEAR2\WindowsAzure\Core\AzureUtilities::isEmulated()) {
+            $this->markTestSkipped(self::NOT_SUPPORTED);
+        }
+        
         // Setup
         $queue1 = 'listqueueswithinvalidnextmarker1';
         $queue2 = 'listqueueswithinvalidnextmarker2';
@@ -299,6 +305,10 @@ class QueueRestProxyTest extends \RestTestBase
     */
     public function testGetServiceProperties()
     {
+        if (\PEAR2\WindowsAzure\Core\AzureUtilities::isEmulated()) {
+            $this->markTestSkipped(self::NOT_SUPPORTED);
+        }
+        
         // Test
         $result = $this->queueWrapper->getServiceProperties();
         
@@ -311,6 +321,10 @@ class QueueRestProxyTest extends \RestTestBase
     */
     public function testSetServiceProperties()
     {
+        if (\PEAR2\WindowsAzure\Core\AzureUtilities::isEmulated()) {
+            $this->markTestSkipped(self::NOT_SUPPORTED);
+        }
+        
         // Setup
         $expected = ServiceProperties::create(TestResources::setServicePropertiesSample());
         
