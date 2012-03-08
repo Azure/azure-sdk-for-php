@@ -23,7 +23,7 @@
  */
 
 use \ServicePropertiesTest;
-use PEAR2\Tests\Unit\TestResources;
+use PEAR2\Tests\Framework\TestResources;
 use PEAR2\WindowsAzure\Services\Queue\Models\Logging;
 use PEAR2\WindowsAzure\Services\Queue\Models\Metrics;
 use PEAR2\WindowsAzure\Services\Queue\Models\ServiceProperties;

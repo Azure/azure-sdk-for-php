@@ -17,6 +17,7 @@ spl_autoload_register(
             'pear2\\windowsazure\\services\\blob\\blobservice' => '/WindowsAzure/Services/Blob/BlobService.php',
             'pear2\\windowsazure\\services\\blob\\blobsettings' => '/WindowsAzure/Services/Blob/BlobSettings.php',
             'pear2\\windowsazure\\services\\blob\\iblob' => '/WindowsAzure/Services/Blob/IBlob.php',
+            'pear2\\windowsazure\\services\\blob\\models\\blobserviceoptions' => '/WindowsAzure/Services/Blob/Models/BlobServiceOptions.php',
             'pear2\\windowsazure\\services\\core\\authentication\\sharedkeyauthenticationscheme' => '/WindowsAzure/Services/Core/Authentication/SharedKeyAuthenticationScheme.php',
             'pear2\\windowsazure\\services\\core\\authentication\\storageauthenticationscheme' => '/WindowsAzure/Services/Core/Authentication/StorageAuthenticationScheme.php',
             'pear2\\windowsazure\\services\\core\\configuration' => '/WindowsAzure/Services/Core/Configuration.php',

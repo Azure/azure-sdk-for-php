@@ -24,7 +24,7 @@
 
 use PEAR2\WindowsAzure\Services\Queue\Models\Metrics;
 use PEAR2\WindowsAzure\Utilities;
-use PEAR2\Tests\Unit\TestResources;
+use PEAR2\Tests\Framework\TestResources;
 use PEAR2\WindowsAzure\Services\Queue\Models\RetentionPolicy;
 
 /**

@@ -24,7 +24,7 @@
 
 use PEAR2\WindowsAzure\Services\Queue\Models\GetServicePropertiesResult;
 use PEAR2\WindowsAzure\Services\Queue\Models\ServiceProperties;
-use PEAR2\Tests\Unit\TestResources;
+use PEAR2\Tests\Framework\TestResources;
 
 /**
  * Unit tests for class GetServicePropertiesResult
