@@ -22,7 +22,7 @@
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
 
-use Tests\Framework\QueueRestProxyTestBase;
+use Tests\Framework\BlobRestProxyTestBase;
 use PEAR2\Tests\Framework\TestResources;
 use PEAR2\WindowsAzure\Services\Queue\Models\ServiceProperties;
 
@@ -37,7 +37,7 @@ use PEAR2\WindowsAzure\Services\Queue\Models\ServiceProperties;
  * @version   Release: @package_version@
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
-class BlobRestProxyTest extends QueueRestProxyTestBase
+class BlobRestProxyTest extends BlobRestProxyTestBase
 {
     /**
     * @covers PEAR2\WindowsAzure\Services\Blob\BlobRestProxy::getServiceProperties
