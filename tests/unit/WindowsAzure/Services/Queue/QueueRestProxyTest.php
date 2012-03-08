@@ -605,10 +605,10 @@ class QueueRestProxyTest extends \RestTestBase
      * @covers PEAR2\WindowsAzure\Services\Queue\QueueRestProxy::clearMessages
      * @covers PEAR2\WindowsAzure\Services\Core\ServiceRestProxy::send
      */
-    public function testClearMessages()
+    public function testClearMessagesWithOptions()
     {
         // Setup
-        $name = 'clearmessages';
+        $name = 'clearmessageswithoptions';
         $msg1 = 'message #1';
         $msg2 = 'message #2';
         $msg3 = 'message #3';
@@ -621,6 +621,31 @@ class QueueRestProxyTest extends \RestTestBase
         
         // Test
         $this->queueWrapper->clearMessages($name, $options);
+        
+        // Assert
+        $result   = $this->queueWrapper->listMessages($name);
+        $messages = $result->getQueueMessages();
+        $this->assertTrue(empty($messages));
+    }
+    
+    /**
+     * @covers PEAR2\WindowsAzure\Services\Queue\QueueRestProxy::clearMessages
+     * @covers PEAR2\WindowsAzure\Services\Core\ServiceRestProxy::send
+     */
+    public function testClearMessages()
+    {
+        // Setup
+        $name = 'clearmessages';
+        $msg1 = 'message #1';
+        $msg2 = 'message #2';
+        $msg3 = 'message #3';
+        $this->createQueue($name);
+        $this->queueWrapper->createMessage($name, $msg1);
+        $this->queueWrapper->createMessage($name, $msg2);
+        $this->queueWrapper->createMessage($name, $msg3);
+        
+        // Test
+        $this->queueWrapper->clearMessages($name);
         
         // Assert
         $result   = $this->queueWrapper->listMessages($name);
