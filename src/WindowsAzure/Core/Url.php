@@ -45,6 +45,22 @@ class Url implements IUrl
      * @var \Net_URL2
      */
     private $_url;
+    
+    /**
+     * Sets the url path to '/' if it's empty
+     * 
+     * @param string $url the url string
+     * 
+     * @return none.
+     */
+    public function _setPathIfEmpty($url)
+    {
+        $path =  parse_url($url, PHP_URL_PATH);
+        
+        if (empty($path)) {
+            $this->setUrlPath('/');
+        }
+    }
 
     /**
      * Constructor
@@ -59,6 +75,7 @@ class Url implements IUrl
         Validate::isTrue(filter_var($url, FILTER_VALIDATE_URL), $errorMessage);
         
         $this->_url = new \Net_URL2($url);
+        $this->_setPathIfEmpty($url);
     }
     
     /**

@@ -40,9 +40,9 @@ use PEAR2\Tests\Mock\WindowsAzure\Services\Core\Filters\SimpleFilterMock;
  */
 class ServiceRestProxyTest extends PHPUnit_Framework_TestCase
 {
-        /**
-    * @covers PEAR2\WindowsAzure\Services\Core\ServiceRestProxy::__construct
-    */
+    /**
+     * @covers PEAR2\WindowsAzure\Services\Core\ServiceRestProxy::__construct
+     */
     public function test__construct()
     {
         // Setup
