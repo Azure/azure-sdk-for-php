@@ -26,6 +26,7 @@ use PEAR2\WindowsAzure\Services\Core\ServicesBuilder;
 use PEAR2\Tests\Unit\TestResources;
 use PEAR2\WindowsAzure\Services\Core\Configuration;
 use PEAR2\WindowsAzure\Services\Queue\QueueSettings;
+use PEAR2\WindowsAzure\Services\Blob\BlobSettings;
 use PEAR2\WindowsAzure\Core\InvalidArgumentTypeException;
 
 /**
@@ -48,7 +49,7 @@ class ServicesBuilderTest extends PHPUnit_Framework_TestCase
     public function testBuildForQueue()
     {
         // Setup
-        $uri = 'http://' . TestResources::accountName() . '.queue.core.windows.net/';
+        $uri = 'http://' . TestResources::accountName() . '.queue.core.windows.net';
         $config = new Configuration();
         $config->setProperty(QueueSettings::ACCOUNT_KEY, TestResources::accountKey());
         $config->setProperty(QueueSettings::ACCOUNT_NAME, TestResources::accountName());        
@@ -64,12 +65,33 @@ class ServicesBuilderTest extends PHPUnit_Framework_TestCase
     
     /**
      * @covers PEAR2\WindowsAzure\Services\Core\ServicesBuilder::build
+     * @covers PEAR2\WindowsAzure\Services\Core\ServicesBuilder::_buildBlob
+     */
+    public function testBuildForBlob()
+    {
+        // Setup
+        $uri = 'http://' . TestResources::accountName() . '.blob.core.windows.net';
+        $config = new Configuration();
+        $config->setProperty(BlobSettings::ACCOUNT_KEY, TestResources::accountKey());
+        $config->setProperty(BlobSettings::ACCOUNT_NAME, TestResources::accountName());        
+        $config->setProperty(BlobSettings::URI, $uri);
+        $builder = new ServicesBuilder();
+        
+        // Test
+        $blobWrapper = $builder->build($config, PEAR2\WindowsAzure\Resources::BLOB_TYPE_NAME);
+        
+        // Assert
+        $this->assertInstanceOf('PEAR2\\WindowsAzure\\Services\\Blob\\IBlob', $blobWrapper);
+    }
+    
+    /**
+     * @covers PEAR2\WindowsAzure\Services\Core\ServicesBuilder::build
      * @covers PEAR2\WindowsAzure\Services\Core\ServicesBuilder::_buildQueue
      */
     public function testBuildWithInvalidTypeFail()
     {
         // Setup
-        $uri = 'http://' . TestResources::accountName() . '.queue.core.windows.net/';
+        $uri = 'http://' . TestResources::accountName() . '.queue.core.windows.net';
         $config = new Configuration();
         $config->setProperty(QueueSettings::ACCOUNT_KEY, TestResources::accountKey());
         $config->setProperty(QueueSettings::ACCOUNT_NAME, TestResources::accountName());        

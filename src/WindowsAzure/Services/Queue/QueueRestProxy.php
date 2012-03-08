@@ -23,6 +23,7 @@
  */
 
 namespace PEAR2\WindowsAzure\Services\Queue;
+use PEAR2\WindowsAzure\Services\Core\ServiceRestProxy;
 use PEAR2\WindowsAzure\Services\Queue\Queue;
 use PEAR2\WindowsAzure\Resources;
 use PEAR2\WindowsAzure\Validate;
@@ -47,105 +48,18 @@ use PEAR2\WindowsAzure\Core\AzureUtilities;
 
 /**
  * This class constructs HTTP requests and receive HTTP responses for queue 
- * service service layer.
+ * service layer.
  *
  * @category  Microsoft
- * @package   PEAR2\WindowsAzure\Services\Queue\Models
+ * @package   PEAR2\WindowsAzure\Services\Queue
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @version   Release: @package_version@
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
-class QueueRestProxy implements IQueue
+class QueueRestProxy extends ServiceRestProxy implements IQueue
 {
-    private $_channel;
-    private $_filters;
-    private $_url;
-
-    /**
-     * Constructor
-     *
-     * @param PEAR2\WindowsAzure\Core\IHttpClient $channel http client to send 
-     * HTTP requests
-     * @param string                              $uri     storage account uri.
-     * 
-     * @return array.
-     */
-    public function __construct($channel, $uri)
-    {
-        $this->_url     = new Url($uri);
-        $this->_channel = $channel;
-        $this->_filters = array();
-    }
-    
-    /**
-     * Gets HTTP filters that will process each request.
-     * 
-     * @return array
-     */
-    public function getFilters()
-    {
-        return $this->_filters;
-    }
-    
-    /**
-     * Sends HTTP request with the specified parameters.
-     * 
-     * @param string $method      HTTP method used in the request
-     * @param array  $headers     HTTP headers.
-     * @param array  $queryParams URL query parameters.
-     * @param string $path        URL path
-     * @param int    $statusCode  Expected status code received in the response
-     * @param string $body        Request body
-     * @param array  $config      Request configuration parameters.
-     * 
-     * @return \HTTP_Request2_Response
-     */
-    public function send($method, $headers, $queryParams, $path, $statusCode,
-        $body = Resources::EMPTY_STRING, $config = array()
-    ) {
-        $channel = clone $this->_channel;
-        $url     = clone $this->_url;
-        
-        $channel->setMethod($method);
-        $channel->setHeaders($headers);
-        $channel->setExpectedStatusCode($statusCode);
-        $channel->setBody($body);
-        $url->setQueryVariables($queryParams);
-        if (!empty($path)) {
-            $url->appendUrlPath($path);
-        }
-        
-        foreach ($config as $key => $value) {
-            if (!empty($value)) {
-                $channel->setConfig($key, $value);
-            }
-                
-        }
-        
-        $channel->send($this->_filters, $url);
-        
-        return $channel->getResponse();
-    }
-
-    /**
-     * Adds new filter to queue proxy object and returns new QueueRestProxy with
-     * that filter.
-     *
-     * @param PEAR2\WindowsAzure\Core\IServiceFilter $filter Filter to add for 
-     * the pipeline.
-     * 
-     * @return PEAR2\WindowsAzure\Services\Queue\IQueue.
-     */
-    public function withFilter($filter)
-    {
-        $queueWithFilter             = clone $this;
-        $queueWithFilter->_filters[] = $filter;
-
-        return $queueWithFilter;
-    }
-
     /**
      * Lists all queues in the storage account.
      * 

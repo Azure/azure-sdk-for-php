@@ -87,7 +87,7 @@ class HttpClientTest extends PHPUnit_Framework_TestCase
         
         // Assert
         $this->assertInstanceOf('PEAR2\WindowsAzure\Core\IUrl', $channelUrl);
-        $this->assertEquals(TestResources::VALID_URL, $channelUrl);
+        $this->assertEquals(TestResources::VALID_URL . '/', $channelUrl);
     }
     
     /**

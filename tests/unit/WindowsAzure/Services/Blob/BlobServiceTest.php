@@ -22,13 +22,13 @@
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
 
-use PEAR2\WindowsAzure\Services\Queue\QueueService;
+use PEAR2\WindowsAzure\Services\Blob\BlobService;
 use PEAR2\WindowsAzure\Services\Core\Configuration;
 use PEAR2\Tests\Unit\TestResources;
-use PEAR2\WindowsAzure\Services\Queue\QueueSettings;
+use PEAR2\WindowsAzure\Services\Blob\BlobSettings;
 
 /**
- * Unit tests for class QueueService
+ * Unit tests for class BlobService
  *
  * @category  Microsoft
  * @package   PEAR2\Tests\Unit\WindowsAzure
@@ -38,25 +38,25 @@ use PEAR2\WindowsAzure\Services\Queue\QueueSettings;
  * @version   Release: @package_version@
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
-class QueueServiceTest extends PHPUnit_Framework_TestCase
+class BlobServiceTest extends PHPUnit_Framework_TestCase
 {
     /**
-     * @covers PEAR2\WindowsAzure\Services\Queue\QueueService::create
+     * @covers PEAR2\WindowsAzure\Services\Blob\BlobService::create
      */
     public function testCreateWithConfig()
     {
         // Setup
-        $uri = 'http://' . TestResources::accountName() . '.queue.core.windows.net';
+        $uri = 'http://' . TestResources::accountName() . '.blob.core.windows.net';
         $config = new Configuration();
-        $config->setProperty(QueueSettings::ACCOUNT_KEY, TestResources::accountKey());
-        $config->setProperty(QueueSettings::ACCOUNT_NAME, TestResources::accountName());        
-        $config->setProperty(QueueSettings::URI, $uri);
+        $config->setProperty(BlobSettings::ACCOUNT_KEY, TestResources::accountKey());
+        $config->setProperty(BlobSettings::ACCOUNT_NAME, TestResources::accountName());        
+        $config->setProperty(BlobSettings::URI, $uri);
         
         // Test
-        $queueWrapper = QueueService::create($config);
+        $blobWrapper = BlobService::create($config);
         
         // Assert
-        $this->assertInstanceOf('PEAR2\\WindowsAzure\\Services\\Queue\\IQueue', $queueWrapper);
+        $this->assertInstanceOf('PEAR2\\WindowsAzure\\Services\\Blob\\IBlob', $blobWrapper);
     }
 }
 

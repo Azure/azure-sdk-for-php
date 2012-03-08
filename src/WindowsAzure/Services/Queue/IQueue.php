@@ -25,9 +25,7 @@
 namespace PEAR2\WindowsAzure\Services\Queue;
 
 /**
- * This interface has all REST APIs provided by Windows Azure. You can check
- * list of all supported APIs from: 
- * http://msdn.microsoft.com/en-us/library/windowsazure/dd179466.aspx
+ * This interface has all REST APIs provided by Windows Azure for queue service
  *
  * @category  Microsoft
  * @package   PEAR2\WindowsAzure\Services\Queue
@@ -36,6 +34,7 @@ namespace PEAR2\WindowsAzure\Services\Queue;
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @version   Release: @package_version@
  * @link      http://pear.php.net/package/azure-sdk-for-php
+ * @see       http://msdn.microsoft.com/en-us/library/windowsazure/dd179363.aspx
  */
 interface IQueue
 {

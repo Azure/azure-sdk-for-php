@@ -42,7 +42,7 @@ class QueueServiceOptions
     /**
      * Gets timeout.
      *
-     * @return int.
+     * @return string.
      */
     public function getTimeout()
     {
@@ -52,7 +52,7 @@ class QueueServiceOptions
     /**
      * Sets timeout.
      *
-     * @param int $timeout value.
+     * @param string $timeout value.
      * 
      * @return none.
      */

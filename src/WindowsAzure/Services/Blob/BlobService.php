@@ -15,48 +15,41 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   PEAR2\Tests\Unit\WindowsAzure
+ * @package   PEAR2\WindowsAzure\Services\Blob
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
-
-use PEAR2\WindowsAzure\Services\Queue\QueueService;
+ 
+namespace PEAR2\WindowsAzure\Services\Blob;
+use PEAR2\WindowsAzure\Services\Blob\BlobExceptionProcessor;
 use PEAR2\WindowsAzure\Services\Core\Configuration;
-use PEAR2\Tests\Unit\TestResources;
-use PEAR2\WindowsAzure\Services\Queue\QueueSettings;
+use PEAR2\WindowsAzure\Resources;
 
 /**
- * Unit tests for class QueueService
+ * Factory for creating IBlob objects
  *
  * @category  Microsoft
- * @package   PEAR2\Tests\Unit\WindowsAzure
+ * @package   PEAR2\WindowsAzure\Services\Blob
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @version   Release: @package_version@
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
-class QueueServiceTest extends PHPUnit_Framework_TestCase
+class BlobService
 {
     /**
-     * @covers PEAR2\WindowsAzure\Services\Queue\QueueService::create
+     * Creates new object based on the builder type in the $config.
+     *
+     * @param PEAR2\WindowsAzure\Services\Core\Configuration $config config object.
+     * 
+     * @return PEAR2\WindowsAzure\Services\Blob\IBlob.
      */
-    public function testCreateWithConfig()
+    public static function create($config)
     {
-        // Setup
-        $uri = 'http://' . TestResources::accountName() . '.queue.core.windows.net';
-        $config = new Configuration();
-        $config->setProperty(QueueSettings::ACCOUNT_KEY, TestResources::accountKey());
-        $config->setProperty(QueueSettings::ACCOUNT_NAME, TestResources::accountName());        
-        $config->setProperty(QueueSettings::URI, $uri);
-        
-        // Test
-        $queueWrapper = QueueService::create($config);
-        
-        // Assert
-        $this->assertInstanceOf('PEAR2\\WindowsAzure\\Services\\Queue\\IQueue', $queueWrapper);
+        return $config->create(Resources::BLOB_TYPE_NAME);
     }
 }
 
