@@ -214,6 +214,7 @@ class UrlTest extends PHPUnit_Framework_TestCase
     
     /**
      * @covers PEAR2\WindowsAzure\Core\Url::getUrl
+     * @covers PEAR2\WindowsAzure\Core\Url::_setPathIfEmpty
      */
     public function testGetUrl()
     {
@@ -265,6 +266,7 @@ class UrlTest extends PHPUnit_Framework_TestCase
     
     /**
      * @covers PEAR2\WindowsAzure\Core\Url::__toString
+     * @covers PEAR2\WindowsAzure\Core\Url::_setPathIfEmpty
      */
     public function test__toString()
     {

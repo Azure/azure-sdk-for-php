@@ -53,7 +53,7 @@ class Url implements IUrl
      * 
      * @return none.
      */
-    public function _setPathIfEmpty($url)
+    private function _setPathIfEmpty($url)
     {
         $path =  parse_url($url, PHP_URL_PATH);
         
