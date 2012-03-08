@@ -47,6 +47,8 @@ class RestTestBase extends PHPUnit_Framework_TestCase
     protected $propertiesChanged;
     protected $defaultProperties;
     
+    const NOT_SUPPORTED = 'The storage emulator doesn\'t support this API';
+    
     public function __construct()
     {
         $uri = 'http://' . TestResources::accountName() . '.queue.core.windows.net/';

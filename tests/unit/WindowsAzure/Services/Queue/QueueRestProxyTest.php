@@ -38,6 +38,7 @@ use PEAR2\WindowsAzure\Services\Queue\Models\ListMessagesOptions;
 use PEAR2\WindowsAzure\Services\Queue\Models\PeekMessagesResult;
 use PEAR2\WindowsAzure\Services\Queue\Models\PeekMessagesOptions;
 use PEAR2\WindowsAzure\Services\Queue\Models\UpdateMessageResult;
+use PEAR2\WindowsAzure\Services\Queue\Models\QueueServiceOptions;
 use PEAR2\Tests\Unit\TestResources;
 use PEAR2\WindowsAzure\Resources;
 use PEAR2\WindowsAzure\Core\ServiceException;
@@ -54,65 +55,10 @@ use PEAR2\WindowsAzure\Core\ServiceException;
 */
 class QueueRestProxyTest extends \RestTestBase
 {
-    const NOT_SUPPORTED = 'The storage emulator doesn\'t support this API';
-    
     /**
-    * @covers PEAR2\WindowsAzure\Services\Queue\QueueRestProxy::__construct
-    */
-    public function test__construct()
-    {
-        // Setup
-        $channel = new PEAR2\WindowsAzure\Services\Core\HttpClient();
-        $url     = new PEAR2\WindowsAzure\Core\Url('http://www.microsoft.com');
-        
-        // Test
-        $actual = new QueueRestProxy($channel, $url);
-        
-        // Assert
-        $this->assertTrue(isset($actual));
-        
-        return $actual;
-    }
-    
-    /**
-     * @covers  PEAR2\WindowsAzure\Services\Queue\QueueRestProxy::withFilter
-     * @depends test__construct
+     * @covers PEAR2\WindowsAzure\Services\Queue\QueueRestProxy::listQueues
+     * @covers PEAR2\WindowsAzure\Services\Core\ServiceRestProxy::send
      */
-    public function testWithFilter($queueWrapper)
-    {
-        // Setup
-        $filter = new \PEAR2\Tests\Mock\WindowsAzure\Services\Core\Filters\SimpleFilterMock('name', 'value');
-        
-        // Test
-        $actual = $queueWrapper->withFilter($filter);
-        
-        // Assert
-        $this->assertCount(1, $actual->getFilters());
-        $this->assertCount(0, $queueWrapper->getFilters());
-    }
-    
-    /**
-     * @covers  PEAR2\WindowsAzure\Services\Queue\QueueRestProxy::getFilters
-     * @depends test__construct
-     */
-    public function testGetFilters($queueWrapper)
-    {
-        // Setup
-        $filter = new \PEAR2\Tests\Mock\WindowsAzure\Services\Core\Filters\SimpleFilterMock('name', 'value');
-        $withFilter = $queueWrapper->withFilter($filter);
-        
-        // Test
-        $actual1 = $withFilter->getFilters();
-        $actual2 = $queueWrapper->getFilters();
-        
-        // Assert
-        $this->assertCount(1, $actual1);
-        $this->assertCount(0, $actual2);
-    }
-    
-    /**
-    * @covers PEAR2\WindowsAzure\Services\Queue\QueueRestProxy::listQueues
-    */
     public function testListQueuesSimple()
     {
         // Setup
@@ -431,8 +377,9 @@ class QueueRestProxyTest extends \RestTestBase
     }
     
     /**
-    * @covers PEAR2\WindowsAzure\Services\Queue\QueueRestProxy::createMessage
-    */
+     * @covers PEAR2\WindowsAzure\Services\Queue\QueueRestProxy::createMessage
+     * @covers PEAR2\WindowsAzure\Services\Core\ServiceRestProxy::send
+     */
     public function testCreateMessage()
     {
         // Setup
@@ -631,31 +578,6 @@ class QueueRestProxyTest extends \RestTestBase
     }
     
     /**
-    * @covers PEAR2\WindowsAzure\Services\Queue\QueueRestProxy::send
-    */
-    public function testSend()
-    {
-        // Setup
-        $queueName   = 'send';
-        $method      = \HTTP_Request2::METHOD_DELETE;
-        $headers     = array();
-        $queryParams = array();
-        $path        = $queueName;
-        $statusCode  = Resources::STATUS_NO_CONTENT;
-        $config      = array(Resources::CONNECT_TIMEOUT => 10);
-        $body        = Resources::EMPTY_STRING;
-        $this->createQueue($queueName);
-        
-        // Test
-        $this->queueWrapper->send($method, $headers, $queryParams, $path, $statusCode, $body, $config);
-        
-        // Assert
-        $result = $this->queueWrapper->listQueues();
-        $queues = $result->getQueues();
-        $this->assertTrue(empty($queues));
-    }
-    
-    /**
     * @covers PEAR2\WindowsAzure\Services\Queue\QueueRestProxy::deleteMessage
     */
     public function testDeleteMessage()
@@ -680,8 +602,9 @@ class QueueRestProxyTest extends \RestTestBase
     }
     
     /**
-    * @covers PEAR2\WindowsAzure\Services\Queue\QueueRestProxy::clearMessages
-    */
+     * @covers PEAR2\WindowsAzure\Services\Queue\QueueRestProxy::clearMessages
+     * @covers PEAR2\WindowsAzure\Services\Core\ServiceRestProxy::send
+     */
     public function testClearMessages()
     {
         // Setup
@@ -689,13 +612,15 @@ class QueueRestProxyTest extends \RestTestBase
         $msg1 = 'message #1';
         $msg2 = 'message #2';
         $msg3 = 'message #3';
+        $options = new QueueServiceOptions();
+        $options->setTimeout('10');
         $this->createQueue($name);
         $this->queueWrapper->createMessage($name, $msg1);
         $this->queueWrapper->createMessage($name, $msg2);
         $this->queueWrapper->createMessage($name, $msg3);
         
         // Test
-        $this->queueWrapper->clearMessages($name);
+        $this->queueWrapper->clearMessages($name, $options);
         
         // Assert
         $result   = $this->queueWrapper->listMessages($name);

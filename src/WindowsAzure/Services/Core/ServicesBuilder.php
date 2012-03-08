@@ -28,6 +28,8 @@ use PEAR2\WindowsAzure\Services\Core\IServiceBuilder;
 use PEAR2\WindowsAzure\Services\Core\Configuration;
 use PEAR2\WindowsAzure\Services\Queue\QueueRestProxy;
 use PEAR2\WindowsAzure\Services\Queue\QueueSettings;
+use PEAR2\WindowsAzure\Services\Blob\BlobRestProxy;
+use PEAR2\WindowsAzure\Services\Blob\BlobSettings;
 use PEAR2\WindowsAzure\Services\Core\Filters\SharedKeyFilter;
 use PEAR2\WindowsAzure\Services\Core\Filters\DateFilter;
 use PEAR2\WindowsAzure\Resources;
@@ -51,7 +53,7 @@ class ServicesBuilder implements IServiceBuilder
      *
      * @param PEAR2\WindowsAzure\Services\Core\Configuration $config configuration.
      * 
-     * @return IQueue.
+     * @return PEAR2\WindowsAzure\Services\Queue\IQueue.
      */
     private static function _buildQueue($config)
     {
@@ -78,21 +80,57 @@ class ServicesBuilder implements IServiceBuilder
     }
     
     /**
+     * Builds a blob object.
+     *
+     * @param PEAR2\WindowsAzure\Services\Core\Configuration $config configuration.
+     * 
+     * @return PEAR2\WindowsAzure\Services\Blob\IBlob.
+     */
+    private static function _buildBlob($config)
+    {
+        $httpClient = new HttpClient();
+
+        $blobWrapper = new BlobRestProxy(
+            $httpClient, $config->getProperty(BlobSettings::URI)
+        );
+
+        // Adding date filter
+        $dateFilter  = new DateFilter();
+        $blobWrapper = $blobWrapper->withFilter($dateFilter);
+
+        // Adding authentication filter
+        $authFilter = new SharedKeyFilter(
+            $config->getProperty(BlobSettings::ACCOUNT_NAME),
+            $config->getProperty(BlobSettings::ACCOUNT_KEY),
+            Resources::BLOB_TYPE_NAME
+        );
+
+        $blobWrapper = $blobWrapper->withFilter($authFilter);
+
+        return $blobWrapper;
+    }
+    
+    /**
      * Creates an object passed $type configured with $config.
      *
      * @param PEAR2\WindowsAzure\Services\Core\Configuration $config configuration.
      * @param string                                         $type   type name.
      * 
-     * @return IQueue.
+     * @return PEAR2\WindowsAzure\Services\Queue\IQueue
+     *       | PEAR2\WindowsAzure\Services\Blob\IBlob
      */
     public static function build($config, $type)
     {
         switch ($type) {
         case Resources::QUEUE_TYPE_NAME:
             return self::_buildQueue($config);
+        case Resources::BLOB_TYPE_NAME:
+            return self::_buildBlob($config);
 
-        default: 
-            throw new InvalidArgumentTypeException(Resources::QUEUE_TYPE_NAME);
+        default:
+            $expected  = Resources::QUEUE_TYPE_NAME;
+            $expected .= '|' . Resources::BLOB_TYPE_NAME;
+            throw new InvalidArgumentTypeException($expected);
         }
     }
 }

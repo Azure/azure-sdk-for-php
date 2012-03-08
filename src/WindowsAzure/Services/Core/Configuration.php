@@ -28,6 +28,7 @@ use PEAR2\WindowsAzure\Validate;
 use PEAR2\WindowsAzure\Core\InvalidArgumentTypeException;
 use PEAR2\WindowsAzure\Resources;
 use PEAR2\WindowsAzure\Services\Queue\QueueSettings;
+use PEAR2\WindowsAzure\Services\Blob\BlobSettings;
 
 /**
  * Contains configuration used to access azure storage accounts. 
@@ -84,8 +85,16 @@ class Configuration
             );
             $config->setProperty(QueueSettings::ACCOUNT_NAME, $name);
             $config->setProperty(QueueSettings::ACCOUNT_KEY, $key);
+        } else if ($type == Resources::BLOB_TYPE_NAME) {
+            $config->setProperty(
+                BlobSettings::URI, sprintf($uri, Resources::EMULATOR_BLOB_URI)
+            );
+            $config->setProperty(BlobSettings::ACCOUNT_NAME, $name);
+            $config->setProperty(BlobSettings::ACCOUNT_KEY, $key);
         } else {
-            throw new InvalidArgumentTypeException(Resources::QUEUE_TYPE_NAME);
+            $expected  = Resources::QUEUE_TYPE_NAME;
+            $expected .= '|' . Resources::BLOB_TYPE_NAME;
+            throw new InvalidArgumentTypeException($expected);
         }
     }
 
@@ -146,7 +155,8 @@ class Configuration
      *
      * @param string $type the desired object type.
      * 
-     * @return mixed.
+     * @return PEAR2\WindowsAzure\Services\Queue\IQueue
+     *       | PEAR2\WindowsAzure\Services\Blob\IBlob
      */
     public function create($type)
     {
