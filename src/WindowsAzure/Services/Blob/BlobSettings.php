@@ -15,51 +15,31 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   PEAR2\WindowsAzure\Services\Queue\Models
+ * @package   PEAR2\WindowsAzure\Services\Blob
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
  
-namespace PEAR2\WindowsAzure\Services\Queue\Models;
+namespace PEAR2\WindowsAzure\Services\Blob;
 
 /**
- * Queue service options.
+ * Basic Blob configuration elements.
  *
  * @category  Microsoft
- * @package   PEAR2\WindowsAzure\Services\Queue\Models
+ * @package   PEAR2\WindowsAzure\Services\Blob
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @version   Release: @package_version@
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
-class QueueServiceOptions
+class BlobSettings
 {
-    private $_timeout;
-
-    /**
-     * Gets timeout.
-     *
-     * @return string.
-     */
-    public function getTimeout()
-    {
-        return $this->_timeout;
-    }
-
-    /**
-     * Sets timeout.
-     *
-     * @param string $timeout value.
-     * 
-     * @return none.
-     */
-    public function setTimeout($timeout)
-    {
-        $this->_timeout = $timeout;
-    }
+    const ACCOUNT_NAME = 'blob.accountName';
+    const ACCOUNT_KEY  = 'blob.accountKey';
+    const URI          = 'blob.uri';
 }
 
 ?>

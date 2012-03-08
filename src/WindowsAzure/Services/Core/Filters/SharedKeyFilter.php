@@ -58,13 +58,16 @@ class SharedKeyFilter implements IServiceFilter
     {
         switch ($type) {
         case Resources::QUEUE_TYPE_NAME:
+        case Resources::BLOB_TYPE_NAME:
             $this->_sharedKeyAuthentication = new SharedKeyAuthenticationScheme(
                 $accountName, $accountKey
             );
             break;
 
-        default: 
-            throw new InvalidArgumentTypeException(Resources::QUEUE_TYPE_NAME);
+        default:
+            $expected  = Resources::QUEUE_TYPE_NAME;
+            $expected .= '|' . Resources::BLOB_TYPE_NAME;
+            throw new InvalidArgumentTypeException($expected);
         }
     }
 
