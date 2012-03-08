@@ -49,7 +49,7 @@ class ServicesBuilderTest extends PHPUnit_Framework_TestCase
     public function testBuildForQueue()
     {
         // Setup
-        $uri = 'http://' . TestResources::accountName() . '.queue.core.windows.net/';
+        $uri = 'http://' . TestResources::accountName() . '.queue.core.windows.net';
         $config = new Configuration();
         $config->setProperty(QueueSettings::ACCOUNT_KEY, TestResources::accountKey());
         $config->setProperty(QueueSettings::ACCOUNT_NAME, TestResources::accountName());        
@@ -70,7 +70,7 @@ class ServicesBuilderTest extends PHPUnit_Framework_TestCase
     public function testBuildForBlob()
     {
         // Setup
-        $uri = 'http://' . TestResources::accountName() . '.blob.core.windows.net/';
+        $uri = 'http://' . TestResources::accountName() . '.blob.core.windows.net';
         $config = new Configuration();
         $config->setProperty(BlobSettings::ACCOUNT_KEY, TestResources::accountKey());
         $config->setProperty(BlobSettings::ACCOUNT_NAME, TestResources::accountName());        
@@ -91,7 +91,7 @@ class ServicesBuilderTest extends PHPUnit_Framework_TestCase
     public function testBuildWithInvalidTypeFail()
     {
         // Setup
-        $uri = 'http://' . TestResources::accountName() . '.queue.core.windows.net/';
+        $uri = 'http://' . TestResources::accountName() . '.queue.core.windows.net';
         $config = new Configuration();
         $config->setProperty(QueueSettings::ACCOUNT_KEY, TestResources::accountKey());
         $config->setProperty(QueueSettings::ACCOUNT_NAME, TestResources::accountName());        

@@ -46,7 +46,7 @@ class QueueServiceTest extends PHPUnit_Framework_TestCase
     public function testCreateWithConfig()
     {
         // Setup
-        $uri = 'http://' . TestResources::accountName() . '.queue.core.windows.net/';
+        $uri = 'http://' . TestResources::accountName() . '.queue.core.windows.net';
         $config = new Configuration();
         $config->setProperty(QueueSettings::ACCOUNT_KEY, TestResources::accountKey());
         $config->setProperty(QueueSettings::ACCOUNT_NAME, TestResources::accountName());        
