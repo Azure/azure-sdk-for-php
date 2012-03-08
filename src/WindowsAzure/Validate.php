@@ -98,7 +98,7 @@ class Validate
      */
     public static function notNullOrEmpty($var)
     {
-        if (is_null($var) || $var == Resources::EMPTY_STRING) {
+        if (is_null($var) || empty($var)) {
             throw new \InvalidArgumentException(Resources::NULL_ERROR_MSG);
         }
     }
@@ -118,6 +118,23 @@ class Validate
         if (!$isSatisfied) {
             throw new \RuntimeException($failureMessage);
         }
+    }
+    
+    /**
+     * Throws exception if the provided $date is not of type \DateTime
+     *
+     * @param mixed $date variable to check against.
+     * 
+     * @throws PEAR2\WindowsAzure\Core\InvalidArgumentTypeException
+     * 
+     * @return none.
+     */
+    public static function isDate($date)
+    {
+        if (gettype($date) != 'object' || get_class($date) != 'DateTime') {
+            throw new InvalidArgumentTypeException('DateTime');
+        }
+            
     }
 }
 

@@ -100,24 +100,11 @@ class AzureQueueMessage
      */
     public static function createFromListMessages($parsedResponse)
     {
-        $msg             = new AzureQueueMessage();
-        $expirationDate  = $parsedResponse['ExpirationTime'];
-        $insertionDate   = $parsedResponse['InsertionTime'];
         $timeNextVisible = $parsedResponse['TimeNextVisible'];
         
-        $msg->setDequeueCount(intval($parsedResponse['DequeueCount']));
-        
-        $date = AzureUtilities::windowsAzureDateToDateTime($expirationDate);
-        $msg->setExpirationDate($date);
-        
-        $date = AzureUtilities::windowsAzureDateToDateTime($insertionDate);
-        $msg->setInsertionDate($date);
-        
+        $msg  = self::createFromPeekMessages($parsedResponse);
         $date = AzureUtilities::windowsAzureDateToDateTime($timeNextVisible);
         $msg->setTimeNextVisible($date);
-        
-        $msg->setMessageId($parsedResponse['MessageId']);
-        $msg->setMessageText($parsedResponse['MessageText']);
         $msg->setPopReceipt($parsedResponse['PopReceipt']);
         
         return $msg;
@@ -165,7 +152,7 @@ class AzureQueueMessage
      * 
      * @param string $messageText message contents.
      * 
-     * @return string.
+     * @return none.
      */
     public function setMessageText($messageText)
     {
@@ -187,7 +174,7 @@ class AzureQueueMessage
      * 
      * @param string $messageId message contents.
      * 
-     * @return integer.
+     * @return none.
      */
     public function setMessageId($messageId)
     {
@@ -207,9 +194,9 @@ class AzureQueueMessage
     /**
      * Sets insertionDate field.
      * 
-     * @param string $insertionDate message contents.
+     * @param \DateTime $insertionDate message contents.
      * 
-     * @return \DateTime.
+     * @return none.
      */
     public function setInsertionDate($insertionDate)
     {
@@ -229,9 +216,9 @@ class AzureQueueMessage
     /**
      * Sets expirationDate field.
      * 
-     * @param string $expirationDate message contents.
+     * @param \DateTime $expirationDate the expiration date of the message.
      * 
-     * @return \DateTime.
+     * @return none.
      */
     public function setExpirationDate($expirationDate)
     {
@@ -251,9 +238,9 @@ class AzureQueueMessage
     /**
      * Sets timeNextVisible field.
      * 
-     * @param string $timeNextVisible message contents.
+     * @param \DateTime $timeNextVisible next visibile time for the message.
      * 
-     * @return \DateTime.
+     * @return none.
      */
     public function setTimeNextVisible($timeNextVisible)
     {
@@ -273,9 +260,9 @@ class AzureQueueMessage
     /**
      * Sets popReceipt field.
      * 
-     * @param string $popReceipt message contents.
+     * @param string $popReceipt used when deleting the message.
      * 
-     * @return string.
+     * @return none.
      */
     public function setPopReceipt($popReceipt)
     {
@@ -295,9 +282,9 @@ class AzureQueueMessage
     /**
      * Sets dequeueCount field.
      * 
-     * @param string $dequeueCount message contents.
+     * @param integer $dequeueCount number of dequeues for that message.
      * 
-     * @return integer.
+     * @return none.
      */
     public function setDequeueCount($dequeueCount)
     {

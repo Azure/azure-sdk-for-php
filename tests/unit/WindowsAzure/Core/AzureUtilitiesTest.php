@@ -123,6 +123,18 @@ class AzureUtilitiesTest extends PHPUnit_Framework_TestCase
         // Assert
         $this->assertEquals($expected, $actual->format('D, d M Y H:i:s T'));
     }
+    
+    /**
+     * @covers PEAR2\WindowsAzure\Core\AzureUtilities::isEmulated
+     */
+    public function testIsEmulated()
+    {
+        // Test
+        $actual = AzureUtilities::isEmulated();
+        
+        // Assert
+        $this->assertTrue(isset($actual));
+    }
 }
 
 ?>

@@ -21,13 +21,11 @@
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
-
+ 
 namespace PEAR2\WindowsAzure\Services\Queue\Models;
-use PEAR2\WindowsAzure\Services\Queue\Models\AzureQueueMessage;
-use PEAR2\WindowsAzure\Utilities;
 
 /**
- * Holds results of listMessages wrapper.
+ * Holds results of updateMessage wrapper.
  *
  * @category  Microsoft
  * @package   PEAR2\WindowsAzure\Services\Queue\Models
@@ -37,62 +35,70 @@ use PEAR2\WindowsAzure\Utilities;
  * @version   Release: @package_version@
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
-class ListMessagesResult
+class UpdateMessageResult
 {
     /**
-     * Holds all message entries.
+     * The value of PopReceipt is opaque to the client and its only purpose is to 
+     * ensure that a message may be deleted with the delete message operation.
      * 
-     * @var array.
+     * @var string
      */
-    private $_queueMessages;
+    private $_popReceipt;
     
     /**
-     * Creates ListMessagesResult object from parsed XML response.
-     *
-     * @param array $parsedResponse XML response parsed into array.
+     * A UTC date/time value that represents when the message will be visible on the 
+     * queue.
      * 
-     * @return PEAR2\WindowsAzure\Services\Queue\Models\ListMessagesResult.
+     * @var \DateTime
      */
-    public static function create($parsedResponse)
+    private $_timeNextVisible;
+    
+    /**
+     * Gets timeNextVisible field.
+     * 
+     * @return \DateTime.
+     */
+    public function getTimeNextVisible()
     {
-        $result        = new ListMessagesResult();
-        $queueMessages = array();
-        
-        if (!empty($parsedResponse)) {
-            $rawMessages = Utilities::getArray($parsedResponse['QueueMessage']);
-            foreach ($rawMessages as $value) {
-                $queueMessages[] = AzureQueueMessage::createFromListMessages($value);
-            }
-        }
-        $result->setQueueMessages($queueMessages);
-        
-        return $result;
+        return $this->_timeNextVisible;
     }
     
     /**
-     * Gets queueMessages field.
+     * Sets timeNextVisible field.
      * 
-     * @return array
+     * @param \DateTime $timeNextVisible A UTC date/time value that represents when 
+     * the message will be visible on the queue.
+     * 
+     * @return none.
      */
-    public function getQueueMessages()
+    public function setTimeNextVisible($timeNextVisible)
     {
-        return $this->_queueMessages;
+        \PEAR2\WindowsAzure\Validate::isDate($timeNextVisible);
+        
+        $this->_timeNextVisible = $timeNextVisible;
     }
     
     /**
-     * Sets queueMessages field.
+     * Gets popReceipt field.
      * 
-     * @param integer $queueMessages value to use.
-     * 
-     * @return none
+     * @return string.
      */
-    public function setQueueMessages($queueMessages)
+    public function getPopReceipt()
     {
-        $this->_queueMessages = array();
-        
-        foreach ($queueMessages as $value) {
-            $this->_queueMessages[] = clone $value;
-        }
+        return $this->_popReceipt;
+    }
+    
+    /**
+     * Sets popReceipt field.
+     * 
+     * @param string $popReceipt The pop receipt of the queue message.
+     * 
+     * @return none.
+     */
+    public function setPopReceipt($popReceipt)
+    {
+        \PEAR2\WindowsAzure\Validate::notNullOrEmpty($popReceipt);
+        $this->_popReceipt = $popReceipt;
     }
 }
 

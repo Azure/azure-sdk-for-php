@@ -48,7 +48,7 @@ class TestResources
     const VALUE2        = 'value2';
     const VALUE3        = 'value3';
     const ACCOUNT_NAME  = 'myaccount';
-    const QUEUE_URI     = 'queue.core.windows.net';
+    const QUEUE_URI     = '.queue.core.windows.net/';
     const URI1          = "http://myaccount.queue.core.windows.net/myqueue";
     const URI2          = "http://myaccount.queue.core.windows.net/?comp=list";
     const DATE1         = 'Sat, 18 Feb 2012 16:25:21 GMT';
@@ -137,6 +137,39 @@ class TestResources
         $sample['QueueMessage'][1]['TimeNextVisible'] = 'Sun, 09 Oct 2009 23:29:20 GMT';
         $sample['QueueMessage'][1]['DequeueCount']    = '4';
         $sample['QueueMessage'][1]['MessageText']     = 'QWEFGlsc3Q+dGhpcyBpcyBhIHRlc3QgbWVzc2FnZTwvdGVzdD4=';
+        
+        return $sample;
+    }
+    
+    public static function listQueuesEmpty()
+    {
+        $sample = array();
+        $sample['Queues'] = '';
+        $sample['NextMarker'] = '';
+        
+        return $sample;
+    }
+    
+    public static function listQueuesOneEntry()
+    {
+        $sample = array();
+        $sample['Marker'] = '/account/listqueueswithnextmarker3';
+        $sample['MaxResults'] = '2';
+        $sample['Queues'] = array('Queue' => array('Name' => 'myqueue', 'Url' => 'http://account.queue.core.windows.net/myqueue'));
+        $sample['NextMarker'] = '';
+        
+        return $sample;
+    }
+    
+    public static function listQueuesMultipleEntries()
+    {
+        $sample = array();
+        $sample['MaxResults'] = '2';
+        $sample['Queues'] = array ('Queue' => array(
+          0 => array('Name' => 'myqueue1', 'Url' => 'http://account.queue.core.windows.net/myqueue1'),
+          1 => array('Name' => 'myqueue2', 'Url' => 'http://account.queue.core.windows.net/myqueue2')
+        ));
+        $sample['NextMarker'] = '/account/myqueue3';
         
         return $sample;
     }

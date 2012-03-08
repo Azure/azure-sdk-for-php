@@ -24,6 +24,7 @@
  */
 
 use PEAR2\WindowsAzure\Services\Core\Configuration;
+use PEAR2\WindowsAzure\Services\Queue\QueueRestProxy;
 use PEAR2\WindowsAzure\Services\Queue\IQueue;
 use PEAR2\WindowsAzure\Services\Queue\QueueService;
 use PEAR2\WindowsAzure\Services\Queue\QueueSettings;
@@ -36,6 +37,7 @@ use PEAR2\WindowsAzure\Services\Queue\Models\ListMessagesResult;
 use PEAR2\WindowsAzure\Services\Queue\Models\ListMessagesOptions;
 use PEAR2\WindowsAzure\Services\Queue\Models\PeekMessagesResult;
 use PEAR2\WindowsAzure\Services\Queue\Models\PeekMessagesOptions;
+use PEAR2\WindowsAzure\Services\Queue\Models\UpdateMessageResult;
 use PEAR2\Tests\Unit\TestResources;
 use PEAR2\WindowsAzure\Resources;
 use PEAR2\WindowsAzure\Core\ServiceException;
@@ -52,6 +54,62 @@ use PEAR2\WindowsAzure\Core\ServiceException;
 */
 class QueueRestProxyTest extends \RestTestBase
 {
+    const NOT_SUPPORTED = 'The storage emulator doesn\'t support this API';
+    
+    /**
+    * @covers PEAR2\WindowsAzure\Services\Queue\QueueRestProxy::__construct
+    */
+    public function test__construct()
+    {
+        // Setup
+        $channel = new PEAR2\WindowsAzure\Services\Core\HttpClient();
+        $url     = new PEAR2\WindowsAzure\Core\Url('http://www.microsoft.com');
+        
+        // Test
+        $actual = new QueueRestProxy($channel, $url);
+        
+        // Assert
+        $this->assertTrue(isset($actual));
+        
+        return $actual;
+    }
+    
+    /**
+     * @covers  PEAR2\WindowsAzure\Services\Queue\QueueRestProxy::withFilter
+     * @depends test__construct
+     */
+    public function testWithFilter($queueWrapper)
+    {
+        // Setup
+        $filter = new \PEAR2\Tests\Mock\WindowsAzure\Services\Core\Filters\SimpleFilterMock('name', 'value');
+        
+        // Test
+        $actual = $queueWrapper->withFilter($filter);
+        
+        // Assert
+        $this->assertCount(1, $actual->getFilters());
+        $this->assertCount(0, $queueWrapper->getFilters());
+    }
+    
+    /**
+     * @covers  PEAR2\WindowsAzure\Services\Queue\QueueRestProxy::getFilters
+     * @depends test__construct
+     */
+    public function testGetFilters($queueWrapper)
+    {
+        // Setup
+        $filter = new \PEAR2\Tests\Mock\WindowsAzure\Services\Core\Filters\SimpleFilterMock('name', 'value');
+        $withFilter = $queueWrapper->withFilter($filter);
+        
+        // Test
+        $actual1 = $withFilter->getFilters();
+        $actual2 = $queueWrapper->getFilters();
+        
+        // Assert
+        $this->assertCount(1, $actual1);
+        $this->assertCount(0, $actual2);
+    }
+    
     /**
     * @covers PEAR2\WindowsAzure\Services\Queue\QueueRestProxy::listQueues
     */
@@ -147,6 +205,10 @@ class QueueRestProxyTest extends \RestTestBase
     */
     public function testListQueuesWithInvalidNextMarkerFail()
     {
+        if (\PEAR2\WindowsAzure\Core\AzureUtilities::isEmulated()) {
+            $this->markTestSkipped(self::NOT_SUPPORTED);
+        }
+        
         // Setup
         $queue1 = 'listqueueswithinvalidnextmarker1';
         $queue2 = 'listqueueswithinvalidnextmarker2';
@@ -298,6 +360,10 @@ class QueueRestProxyTest extends \RestTestBase
     */
     public function testGetServiceProperties()
     {
+        if (\PEAR2\WindowsAzure\Core\AzureUtilities::isEmulated()) {
+            $this->markTestSkipped(self::NOT_SUPPORTED);
+        }
+        
         // Test
         $result = $this->queueWrapper->getServiceProperties();
         
@@ -310,6 +376,10 @@ class QueueRestProxyTest extends \RestTestBase
     */
     public function testSetServiceProperties()
     {
+        if (\PEAR2\WindowsAzure\Core\AzureUtilities::isEmulated()) {
+            $this->markTestSkipped(self::NOT_SUPPORTED);
+        }
+        
         // Setup
         $expected = ServiceProperties::create(TestResources::setServicePropertiesSample());
         
@@ -572,10 +642,12 @@ class QueueRestProxyTest extends \RestTestBase
         $queryParams = array();
         $path        = $queueName;
         $statusCode  = Resources::STATUS_NO_CONTENT;
-        $this->queueWrapper->createQueue($queueName);
+        $config      = array(Resources::CONNECT_TIMEOUT => 10);
+        $body        = Resources::EMPTY_STRING;
+        $this->createQueue($queueName);
         
         // Test
-        $this->queueWrapper->send($method, $headers, $queryParams, $path, $statusCode);
+        $this->queueWrapper->send($method, $headers, $queryParams, $path, $statusCode, $body, $config);
         
         // Assert
         $result = $this->queueWrapper->listQueues();
@@ -629,6 +701,39 @@ class QueueRestProxyTest extends \RestTestBase
         $result   = $this->queueWrapper->listMessages($name);
         $messages = $result->getQueueMessages();
         $this->assertTrue(empty($messages));
+    }
+    
+    /**
+    * @covers PEAR2\WindowsAzure\Services\Queue\QueueRestProxy::updateMessage
+    */
+    public function testUpdateMessage()
+    {
+        // Setup
+        $name = 'updatemessage';
+        $expectedText = 'this is message text';
+        $expectedVisibility = 10;
+        $this->createQueue($name);
+        $this->queueWrapper->createMessage($name, 'Text to change');
+        $result = $this->queueWrapper->listMessages($name);
+        $messages   = $result->getQueueMessages();
+        $popReceipt = $messages[0]->getPopReceipt();
+        $messageId = $messages[0]->getMessageId();
+        
+        // Test
+        $result = $this->queueWrapper->UpdateMessage($name, $messageId, $popReceipt, 
+            $expectedText, $expectedVisibility);
+        
+        // Assert
+        $result   = $this->queueWrapper->listMessages($name);
+        $messages = $result->getQueueMessages();
+        $this->assertTrue(empty($messages));
+        
+        sleep($expectedVisibility);
+        
+        $result   = $this->queueWrapper->listMessages($name);
+        $messages = $result->getQueueMessages();
+        $actual   = $messages[0];
+        $this->assertEquals($expectedText, $actual->getMessageText());
     }
 }
 

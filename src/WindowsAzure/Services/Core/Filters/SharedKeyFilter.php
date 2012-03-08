@@ -26,6 +26,7 @@ namespace PEAR2\WindowsAzure\Services\Core\Filters;
 use PEAR2\WindowsAzure\Resources;
 use PEAR2\WindowsAzure\Core\IServiceFilter;
 use PEAR2\WindowsAzure\Services\Core\Authentication\SharedKeyAuthenticationScheme;
+use PEAR2\WindowsAzure\Core\InvalidArgumentTypeException;
 
 /**
  * Adds authentication header to the http request object.
