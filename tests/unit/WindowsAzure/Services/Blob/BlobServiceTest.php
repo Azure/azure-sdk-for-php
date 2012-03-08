@@ -15,50 +15,48 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   PEAR2\WindowsAzure\Services\Queue\Models
+ * @package   PEAR2\Tests\Unit\WindowsAzure
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
- 
-namespace PEAR2\WindowsAzure\Services\Queue\Models;
+
+use PEAR2\WindowsAzure\Services\Blob\BlobService;
+use PEAR2\WindowsAzure\Services\Core\Configuration;
+use PEAR2\Tests\Unit\TestResources;
+use PEAR2\WindowsAzure\Services\Blob\BlobSettings;
 
 /**
- * Queue service options.
+ * Unit tests for class BlobService
  *
  * @category  Microsoft
- * @package   PEAR2\WindowsAzure\Services\Queue\Models
+ * @package   PEAR2\Tests\Unit\WindowsAzure
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @version   Release: @package_version@
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
-class QueueServiceOptions
+class BlobServiceTest extends PHPUnit_Framework_TestCase
 {
-    private $_timeout;
-
     /**
-     * Gets timeout.
-     *
-     * @return string.
+     * @covers PEAR2\WindowsAzure\Services\Blob\BlobService::create
      */
-    public function getTimeout()
+    public function testCreateWithConfig()
     {
-        return $this->_timeout;
-    }
-
-    /**
-     * Sets timeout.
-     *
-     * @param string $timeout value.
-     * 
-     * @return none.
-     */
-    public function setTimeout($timeout)
-    {
-        $this->_timeout = $timeout;
+        // Setup
+        $uri = 'http://' . TestResources::accountName() . '.blob.core.windows.net/';
+        $config = new Configuration();
+        $config->setProperty(BlobSettings::ACCOUNT_KEY, TestResources::accountKey());
+        $config->setProperty(BlobSettings::ACCOUNT_NAME, TestResources::accountName());        
+        $config->setProperty(BlobSettings::URI, $uri);
+        
+        // Test
+        $blobWrapper = BlobService::create($config);
+        
+        // Assert
+        $this->assertInstanceOf('PEAR2\\WindowsAzure\\Services\\Blob\\IBlob', $blobWrapper);
     }
 }
 

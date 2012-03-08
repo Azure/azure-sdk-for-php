@@ -53,10 +53,10 @@ class QueueServiceTest extends PHPUnit_Framework_TestCase
         $config->setProperty(QueueSettings::URI, $uri);
         
         // Test
-        $this->queueWrapper = QueueService::create($config);
+        $queueWrapper = QueueService::create($config);
         
         // Assert
-        $this->assertInstanceOf('PEAR2\\WindowsAzure\\Services\\Queue\\IQueue', $this->queueWrapper);
+        $this->assertInstanceOf('PEAR2\\WindowsAzure\\Services\\Queue\\IQueue', $queueWrapper);
     }
 }
 

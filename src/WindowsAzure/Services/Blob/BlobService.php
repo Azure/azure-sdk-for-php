@@ -15,50 +15,41 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   PEAR2\WindowsAzure\Services\Queue\Models
+ * @package   PEAR2\WindowsAzure\Services\Blob
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
  
-namespace PEAR2\WindowsAzure\Services\Queue\Models;
+namespace PEAR2\WindowsAzure\Services\Blob;
+use PEAR2\WindowsAzure\Services\Blob\BlobExceptionProcessor;
+use PEAR2\WindowsAzure\Services\Core\Configuration;
+use PEAR2\WindowsAzure\Resources;
 
 /**
- * Queue service options.
+ * Factory for creating IBlob objects
  *
  * @category  Microsoft
- * @package   PEAR2\WindowsAzure\Services\Queue\Models
+ * @package   PEAR2\WindowsAzure\Services\Blob
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @version   Release: @package_version@
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
-class QueueServiceOptions
+class BlobService
 {
-    private $_timeout;
-
     /**
-     * Gets timeout.
+     * Creates new object based on the builder type in the $config.
      *
-     * @return string.
-     */
-    public function getTimeout()
-    {
-        return $this->_timeout;
-    }
-
-    /**
-     * Sets timeout.
-     *
-     * @param string $timeout value.
+     * @param PEAR2\WindowsAzure\Services\Core\Configuration $config config object.
      * 
-     * @return none.
+     * @return PEAR2\WindowsAzure\Services\Blob\IBlob.
      */
-    public function setTimeout($timeout)
+    public static function create($config)
     {
-        $this->_timeout = $timeout;
+        return $config->create(Resources::BLOB_TYPE_NAME);
     }
 }
 

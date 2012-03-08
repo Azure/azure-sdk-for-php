@@ -8,6 +8,7 @@ spl_autoload_register(
          $classes = array(
             'azurequeuemessagetest' => '/unit/WindowsAzure/Services/Queue/Models/AzureQueueMessageTest.php',
             'azureutilitiestest' => '/unit/WindowsAzure/Core/AzureUtilitiesTest.php',
+            'blobservicetest' => '/unit/WindowsAzure/Services/Blob/BlobServiceTest.php',
             'configurationtest' => '/unit/WindowsAzure/Services/Core/ConfigurationTest.php',
             'createmessageoptionstest' => '/unit/WindowsAzure/Services/Queue/Models/CreateMessageOptionsTest.php',
             'createqueueoptionstest' => '/unit/WindowsAzure/Services/Queue/Models/CreateQueueOptionsTest.php',
@@ -37,6 +38,7 @@ spl_autoload_register(
             'retentionpolicytest' => '/unit/WindowsAzure/Services/Queue/Models/RetentionPolicyTest.php',
             'serviceexceptiontest' => '/unit/WindowsAzure/Core/ServiceExceptionTest.php',
             'servicepropertiestest' => '/unit/WindowsAzure/Services/Queue/Models/ServicePropertiesTest.php',
+            'servicerestproxytest' => '/unit/WindowsAzure/Services/Core/ServiceRestProxyTest.php',
             'servicesbuildertest' => '/unit/WindowsAzure/Services/Core/ServicesBuilderTest.php',
             'sharedkeyauthenticationschemetest' => '/unit/WindowsAzure/Services/Core/Authentication/SharedKeyAuthenticationSchemeTest.php',
             'sharedkeyfiltertest' => '/unit/WindowsAzure/Services/Core/Filters/SharedKeyFilterTest.php',
