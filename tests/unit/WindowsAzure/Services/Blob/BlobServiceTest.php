@@ -46,7 +46,7 @@ class BlobServiceTest extends PHPUnit_Framework_TestCase
     public function testCreateWithConfig()
     {
         // Setup
-        $uri = 'http://' . TestResources::accountName() . '.blob.core.windows.net/';
+        $uri = 'http://' . TestResources::accountName() . '.blob.core.windows.net';
         $config = new Configuration();
         $config->setProperty(BlobSettings::ACCOUNT_KEY, TestResources::accountKey());
         $config->setProperty(BlobSettings::ACCOUNT_NAME, TestResources::accountName());        

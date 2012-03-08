@@ -48,12 +48,12 @@ class TestResources
     const VALUE2        = 'value2';
     const VALUE3        = 'value3';
     const ACCOUNT_NAME  = 'myaccount';
-    const QUEUE_URI     = '.queue.core.windows.net/';
+    const QUEUE_URI     = '.queue.core.windows.net';
     const URI1          = "http://myaccount.queue.core.windows.net/myqueue";
     const URI2          = "http://myaccount.queue.core.windows.net/?comp=list";
     const DATE1         = 'Sat, 18 Feb 2012 16:25:21 GMT';
     const DATE2         = 'Mon, 20 Feb 2012 17:12:31 GMT';
-    const VALID_URL     = 'http://www.example.com/';
+    const VALID_URL     = 'http://www.example.com';
     const HEADER1       = 'testheader1';
     const HEADER2       = 'testheader2';
     const HEADER1_VALUE = 'HeaderValue1';

@@ -51,7 +51,7 @@ class RestTestBase extends PHPUnit_Framework_TestCase
     
     public function __construct()
     {
-        $uri = 'http://' . TestResources::accountName() . '.queue.core.windows.net/';
+        $uri = 'http://' . TestResources::accountName() . '.queue.core.windows.net';
         $this->config = new Configuration();
         $this->config->setProperty(QueueSettings::ACCOUNT_KEY, TestResources::accountKey());
         $this->config->setProperty(QueueSettings::ACCOUNT_NAME, TestResources::accountName());        

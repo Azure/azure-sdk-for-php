@@ -42,11 +42,12 @@ class UrlTest extends PHPUnit_Framework_TestCase
 {
     /**
      * @covers PEAR2\WindowsAzure\Core\Url::__construct
+     * @covers PEAR2\WindowsAzure\Core\Url::_setPathIfEmpty
      */
     public function test__construct()
     {
         // Setup
-        $urlString = TestResources::VALID_URL;
+        $urlString = TestResources::VALID_URL . '/';
         
         // Test
         $url = new Url($urlString);
@@ -213,11 +214,12 @@ class UrlTest extends PHPUnit_Framework_TestCase
     
     /**
      * @covers PEAR2\WindowsAzure\Core\Url::getUrl
+     * @covers PEAR2\WindowsAzure\Core\Url::_setPathIfEmpty
      */
     public function testGetUrl()
     {
         // Setup
-        $urlString = TestResources::VALID_URL;
+        $urlString = TestResources::VALID_URL . '/';
         $url = new Url($urlString);
         
         // Test
@@ -264,11 +266,12 @@ class UrlTest extends PHPUnit_Framework_TestCase
     
     /**
      * @covers PEAR2\WindowsAzure\Core\Url::__toString
+     * @covers PEAR2\WindowsAzure\Core\Url::_setPathIfEmpty
      */
     public function test__toString()
     {
         // Setup
-        $urlString = TestResources::VALID_URL;
+        $urlString = TestResources::VALID_URL . '/';
         $url = new Url($urlString);
         
         // Test
