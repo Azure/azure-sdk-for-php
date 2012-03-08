@@ -23,8 +23,12 @@
  */
  
 namespace PEAR2\WindowsAzure\Services\Blob;
+use PEAR2\WindowsAzure\Utilities;
+use PEAR2\WindowsAzure\Resources;
 use PEAR2\WindowsAzure\Services\Core\ServiceRestProxy;
 use PEAR2\WindowsAzure\Services\Blob\IBlob;
+use PEAR2\WindowsAzure\Services\Blob\Models\BlobServiceOptions;
+use PEAR2\WindowsAzure\Services\Queue\Models\GetServicePropertiesResult;
 
 /**
  * This class constructs HTTP requests and receive HTTP responses for blob
@@ -45,19 +49,36 @@ class BlobRestProxy extends ServiceRestProxy implements IBlob
      * 
      * @param Models\BlobServiceOptions $options optional blob service options.
      * 
-     * @return Models\GetServicePropertiesResult
+     * @return PEAR2\WindowsAzure\Services\Queue\Models\GetServicePropertiesResult
      * 
      * @see http://msdn.microsoft.com/en-us/library/windowsazure/hh452239.aspx
      */
     public function getServiceProperties($options = null)
     {
-        throw new \Exception(Resources::NOT_IMPLEMENTED_MSG);
+        $method      = \HTTP_Request2::METHOD_GET;
+        $headers     = array();
+        $queryParams = array();
+        $path        = Resources::EMPTY_STRING;
+        $statusCode  = Resources::STATUS_OK;
+        
+        if (is_null($options)) {
+            $options = new BlobServiceOptions();
+        }
+        
+        $queryParams['restype'] = 'service';
+        $queryParams['comp']    = 'properties';
+        $queryParams['timeout'] = $options->getTimeout();
+        
+        $response = $this->send($method, $headers, $queryParams, $path, $statusCode);
+        $parsed   = Utilities::unserialize($response->getBody());
+        
+        return GetServicePropertiesResult::create($parsed);
     }
 
     /**
      * Sets the properties of the Blob service.
      * 
-     * @param array                     $serviceProperties new service properties.
+     * @param ServiceProperties         $serviceProperties new service properties.
      * @param Models\BlobServiceOptions $options           optional parameters
      * 
      * @return none.
@@ -66,7 +87,24 @@ class BlobRestProxy extends ServiceRestProxy implements IBlob
      */
     public function setServiceProperties($serviceProperties, $options = null)
     {
-        throw new \Exception(Resources::NOT_IMPLEMENTED_MSG);
+        $method      = \HTTP_Request2::METHOD_PUT;
+        $headers     = array();
+        $queryParams = array();
+        $statusCode  = Resources::STATUS_ACCEPTED;
+        $path        = Resources::EMPTY_STRING;
+        $body        = Resources::EMPTY_STRING;
+        
+        if (!isset($options)) {
+            $options = new BlobServiceOptions();
+        }
+        
+        $queryParams['restype']           = 'service';
+        $queryParams['comp']              = 'properties';
+        $queryParams['timeout']           = $options->getTimeout();
+        $body                             = $serviceProperties->toXml();
+        $headers[Resources::CONTENT_TYPE] = Resources::XML_CONTENT_TYPE;
+        
+        $this->send($method, $headers, $queryParams, $path, $statusCode, $body);
     }
     
     /**

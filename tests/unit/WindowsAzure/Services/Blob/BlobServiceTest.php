@@ -24,7 +24,7 @@
 
 use PEAR2\WindowsAzure\Services\Blob\BlobService;
 use PEAR2\WindowsAzure\Services\Core\Configuration;
-use PEAR2\Tests\Unit\TestResources;
+use PEAR2\Tests\Framework\TestResources;
 use PEAR2\WindowsAzure\Services\Blob\BlobSettings;
 
 /**

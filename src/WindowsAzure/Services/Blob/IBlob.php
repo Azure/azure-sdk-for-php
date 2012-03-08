@@ -54,7 +54,7 @@ interface IBlob
     * 
     * @param Models\BlobServiceOptions $options optional blob service options.
     * 
-    * @return Models\GetServicePropertiesResult
+    * @return PEAR2\WindowsAzure\Services\Queue\Models\GetServicePropertiesResult
     * 
     * @see http://msdn.microsoft.com/en-us/library/windowsazure/hh452239.aspx
     */
@@ -63,7 +63,7 @@ interface IBlob
     /**
     * Sets the properties of the Blob service.
     * 
-    * @param array                     $serviceProperties new service properties
+    * @param ServiceProperties         $serviceProperties new service properties
     * @param Models\BlobServiceOptions $options           optional parameters
     * 
     * @return none.

@@ -23,7 +23,7 @@
  */
 
 use PEAR2\WindowsAzure\Services\Queue\Models\ListQueueOptions;
-use PEAR2\Tests\Unit\TestResources;
+use PEAR2\Tests\Framework\TestResources;
 
 /**
  * Unit tests for class ListQueueOptions

@@ -21,11 +21,9 @@
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
- 
+namespace Tests\Framework;
 use PEAR2\WindowsAzure\Services\Core\Configuration;
-use PEAR2\WindowsAzure\Services\Queue\QueueSettings;
-use PEAR2\Tests\Unit\TestResources;
-use PEAR2\WindowsAzure\Services\Queue\QueueService;
+use PEAR2\Tests\Framework\TestResources;
 use PEAR2\WindowsAzure\Services\Queue\Models\ServiceProperties;
 
 /**
@@ -39,25 +37,17 @@ use PEAR2\WindowsAzure\Services\Queue\Models\ServiceProperties;
  * @version   Release: @package_version@
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
-class RestTestBase extends PHPUnit_Framework_TestCase
+class RestProxyTestBase extends \PHPUnit_Framework_TestCase
 {
     protected $config;
-    protected $queueWrapper;
-    protected $createdQueues;
     protected $propertiesChanged;
     protected $defaultProperties;
+    protected $wrapper;
     
     const NOT_SUPPORTED = 'The storage emulator doesn\'t support this API';
     
-    public function __construct()
+    private function _createDefaultProperties()
     {
-        $uri = 'http://' . TestResources::accountName() . '.queue.core.windows.net';
-        $this->config = new Configuration();
-        $this->config->setProperty(QueueSettings::ACCOUNT_KEY, TestResources::accountKey());
-        $this->config->setProperty(QueueSettings::ACCOUNT_NAME, TestResources::accountName());        
-        $this->config->setProperty(QueueSettings::URI, $uri);
-        $this->queueWrapper = QueueService::create($this->config);
-        $this->createdQueues = array();
         $this->propertiesChanged = false;
         $propertiesArray = array();
         $propertiesArray['Logging']['Version'] = '1.0';
@@ -72,43 +62,27 @@ class RestTestBase extends PHPUnit_Framework_TestCase
         $this->defaultProperties = ServiceProperties::create($propertiesArray);
     }
     
-    public function createQueue($queueName, $options = null)
+    public function __construct($config, $serviceWrapper)
     {
-        $this->queueWrapper->createQueue($queueName, $options);
-        $this->createdQueues[] = $queueName;
-    }
-    
-    public function deleteQueue($queueName, $options = null)
-    {
-        $this->queueWrapper->deleteQueue($queueName, $options);
+        $this->config = $config;
+        $this->wrapper = $serviceWrapper;
+        $this->_createDefaultProperties();
     }
     
     public function setServiceProperties($properties, $options = null)
     {
-        $this->queueWrapper->setServiceProperties($properties, $options);
+        $this->wrapper->setServiceProperties($properties, $options);
         $this->propertiesChanged = true;
     }
 
     protected function tearDown()
     {
-        foreach ($this->createdQueues as $value) {
-            try
-            {
-                $this->deleteQueue($value);
-            }
-            catch (Exception $e)
-            {
-                // Ignore exception and continue, will assume that this queue doesn't exist in the sotrage account
-                error_log($e->getMessage());
-            }
-        }
-        
         if ($this->propertiesChanged) {
-            $this->queueWrapper->setServiceProperties($this->defaultProperties);
+            $this->wrapper->setServiceProperties($this->defaultProperties);
         }
     }
     
-    protected function onNotSuccessfulTest(Exception $e)
+    protected function onNotSuccessfulTest(\Exception $e)
     {
         $this->tearDown();
         throw $e;
