@@ -47,13 +47,13 @@ class UrlTest extends PHPUnit_Framework_TestCase
     public function test__construct()
     {
         // Setup
-        $urlString = TestResources::VALID_URL . '/';
+        $urlString = TestResources::VALID_URL;
         
         // Test
         $url = new Url($urlString);
         
         // Assert
-        $this->assertEquals($urlString, $url->getUrl());
+        $this->assertEquals($urlString . '/', $url->getUrl());
     }
     
     /**
@@ -219,14 +219,14 @@ class UrlTest extends PHPUnit_Framework_TestCase
     public function testGetUrl()
     {
         // Setup
-        $urlString = TestResources::VALID_URL . '/';
+        $urlString = TestResources::VALID_URL;
         $url = new Url($urlString);
         
         // Test
         $actualUrl = $url->getUrl();
         
         // Assert
-        $this->assertEquals($urlString, $actualUrl);
+        $this->assertEquals($urlString . '/', $actualUrl);
     }
     
     /**
@@ -271,14 +271,14 @@ class UrlTest extends PHPUnit_Framework_TestCase
     public function test__toString()
     {
         // Setup
-        $urlString = TestResources::VALID_URL . '/';
+        $urlString = TestResources::VALID_URL;
         $url = new Url($urlString);
         
         // Test
         $actualUrl = $url->__toString();
         
         // Assert
-        $this->assertEquals($urlString, $actualUrl);
+        $this->assertEquals($urlString . '/', $actualUrl);
     }
     
     /**
