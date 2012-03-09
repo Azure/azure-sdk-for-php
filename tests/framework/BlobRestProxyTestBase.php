@@ -27,6 +27,7 @@ use PEAR2\WindowsAzure\Services\Core\Configuration;
 use PEAR2\WindowsAzure\Services\Blob\BlobSettings;
 use PEAR2\WindowsAzure\Services\Blob\BlobService;
 use PEAR2\Tests\Framework\TestResources;
+use PEAR2\WindowsAzure\Services\Blob\Models\CreateContainerOptions;
 
 /**
  * TestBase class for each unit test class.
@@ -41,6 +42,8 @@ use PEAR2\Tests\Framework\TestResources;
  */
 class BlobRestProxyTestBase extends RestProxyTestBase
 {
+    protected $_createdContainers;
+    
     public function __construct()
     {
         $config = new Configuration();
@@ -49,13 +52,41 @@ class BlobRestProxyTestBase extends RestProxyTestBase
         $config->setProperty(BlobSettings::ACCOUNT_NAME, TestResources::accountName());        
         $config->setProperty(BlobSettings::URI, $blobUri);
         $blobWrapper = BlobService::create($config);
-        
         parent::__construct($config, $blobWrapper);
+        $this->_createdContainers = array();
+    }
+    
+    public function createContainer($containerName, $options = null)
+    {
+        if (is_null($options)) {
+            $options = new CreateContainerOptions();
+            $options->setPublicAccess('container');
+        }
+        
+        $this->wrapper->createContainer($containerName, $options);
+        $this->_createdContainers[] = $containerName;
+    }
+    
+    public function deleteContainer($containerName)
+    {
+        $this->wrapper->deleteContainer($containerName);
     }
     
     protected function tearDown()
     {
         parent::tearDown();
+        
+        foreach ($this->_createdContainers as $value) {
+            try
+            {
+                $this->deleteContainer($value);
+            }
+            catch (\Exception $e)
+            {
+                // Ignore exception and continue, will assume that this container doesn't exist in the sotrage account
+                error_log($e->getMessage());
+            }
+        }
     }
 }
 

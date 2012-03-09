@@ -15,29 +15,72 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   PEAR2\WindowsAzure\Services\Core\Models
+ * @package   PEAR2\WindowsAzure\Services\Blob\Models
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
  
-namespace PEAR2\WindowsAzure\Services\Core\Models;
+namespace PEAR2\WindowsAzure\Services\Blob\Models;
+use PEAR2\WindowsAzure\Services\Blob\Models\BlobServiceOptions;
+use PEAR2\WindowsAzure\Validate;
 
 /**
- * Optional parameters for Create Queue REST API.
+ * Optional parameters for createContainer API
  *
  * @category  Microsoft
- * @package   PEAR2\WindowsAzure\Services\Core\Models
+ * @package   PEAR2\WindowsAzure\Services\Blob\Models
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @version   Release: @package_version@
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
-class CreateQueueOptions
+class CreateContainerOptions extends BlobServiceOptions
 {
+    /**
+     * @var string 
+     */
+    private $_publicAccess;
+    
+    /**
+     * @var array
+     */
     private $_metadata;
+    
+    /**
+     * Gets container public access.
+     * 
+     * @return string.
+     */
+    public function getPublicAccess()
+    {
+        return $this->_publicAccess;
+    }
+    
+    /**
+     * Specifies whether data in the container may be accessed publicly and the level
+     * of access. Possible values include: 
+     * 1) container: Specifies full public read access for container and blob data.
+     *    Clients can enumerate blobs within the container via anonymous request, but 
+     *    cannot enumerate containers within the storage account.
+     * 2) blob: Specifies public read access for blobs. Blob data within this 
+     *    container can be read via anonymous request, but container data is not 
+     *    available. Clients cannot enumerate blobs within the container via 
+     *    anonymous request.
+     * If this value is not specified in the request, container data is private to 
+     * the account owner.
+     * 
+     * @param string $publicAccess
+     * 
+     * @return none.
+     */
+    public function setPublicAccess($publicAccess)
+    {
+        Validate::isString($publicAccess);
+        $this->_publicAccess = $publicAccess;
+    }
     
     /**
      * Gets user defined metadata.

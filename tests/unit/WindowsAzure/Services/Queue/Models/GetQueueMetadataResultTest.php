@@ -22,7 +22,7 @@
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
 
-use PEAR2\WindowsAzure\Services\Queue\Models\GetQueueMetadataResult;
+use PEAR2\WindowsAzure\Services\Core\Models\GetQueueMetadataResult;
 
 /**
  * Unit tests for class GetQueueMetadataResult
@@ -38,7 +38,7 @@ use PEAR2\WindowsAzure\Services\Queue\Models\GetQueueMetadataResult;
 class GetQueueMetadataResultTest extends PHPUnit_Framework_TestCase
 {
     /**
-     * @covers PEAR2\WindowsAzure\Services\Queue\Models\GetQueueMetadataResult::__construct
+     * @covers PEAR2\WindowsAzure\Services\Core\Models\GetQueueMetadataResult::__construct
      */
     public function test__construct()
     {
@@ -55,7 +55,7 @@ class GetQueueMetadataResultTest extends PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers PEAR2\WindowsAzure\Services\Queue\Models\GetQueueMetadataResult::getApproximateMessageCount
+     * @covers PEAR2\WindowsAzure\Services\Core\Models\GetQueueMetadataResult::getApproximateMessageCount
      */
     public function testGetApproximateMessageCount()
     {
@@ -71,7 +71,7 @@ class GetQueueMetadataResultTest extends PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers PEAR2\WindowsAzure\Services\Queue\Models\GetQueueMetadataResult::setApproximateMessageCount
+     * @covers PEAR2\WindowsAzure\Services\Core\Models\GetQueueMetadataResult::setApproximateMessageCount
      */
     public function testSetApproximateMessageCount()
     {
@@ -87,7 +87,7 @@ class GetQueueMetadataResultTest extends PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers PEAR2\WindowsAzure\Services\Queue\Models\GetQueueMetadataResult::getMetadata
+     * @covers PEAR2\WindowsAzure\Services\Core\Models\GetQueueMetadataResult::getMetadata
      */
     public function testGetMetadata()
     {
@@ -103,7 +103,7 @@ class GetQueueMetadataResultTest extends PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers PEAR2\WindowsAzure\Services\Queue\Models\GetQueueMetadataResult::setMetadata
+     * @covers PEAR2\WindowsAzure\Services\Core\Models\GetQueueMetadataResult::setMetadata
      */
     public function testSetMetadata()
     {

@@ -15,45 +15,93 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   PEAR2\WindowsAzure\Services\Core\Models
+ * @package   PEAR2\WindowsAzure\Services\Blob\Models
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
  
-namespace PEAR2\WindowsAzure\Services\Core\Models;
+namespace PEAR2\WindowsAzure\Services\Blob\Models;
+use PEAR2\WindowsAzure\Resources;
+use PEAR2\WindowsAzure\Utilities;
 
 /**
- * Optional parameters for Create Queue REST API.
+ * Azure container object.
  *
  * @category  Microsoft
- * @package   PEAR2\WindowsAzure\Services\Core\Models
+ * @package   PEAR2\WindowsAzure\Services\Blob\Models
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @version   Release: @package_version@
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
-class CreateQueueOptions
+class Container
 {
+    private $_name;
+    private $_url;
     private $_metadata;
-    
+    private $_properties;
+
     /**
-     * Gets user defined metadata.
+     * Gets container name.
+     *
+     * @return string.
+     */
+    public function getName()
+    {
+        return $this->_name;
+    }
+
+    /**
+     * Sets container name.
+     *
+     * @param string $name value.
      * 
+     * @return none.
+     */
+    public function setName($name)
+    {
+        $this->_name = $name;
+    }
+
+    /**
+     * Gets container url.
+     *
+     * @return string.
+     */
+    public function getUrl()
+    {
+        return $this->_url;
+    }
+
+    /**
+     * Sets container url.
+     *
+     * @param string $url value.
+     * 
+     * @return none.
+     */
+    public function setUrl($url)
+    {
+        $this->_url = $url;
+    }
+
+    /**
+     * Gets container metadata.
+     *
      * @return array.
      */
     public function getMetadata()
     {
         return $this->_metadata;
     }
-    
+
     /**
-     * Sets user defined metadata. This metadata should be added without the header
-     * prefix (x-ms-meta-*).
-     * 
-     * @param array $metadata user defined metadata object in array form.
+     * Sets container metadata.
+     *
+     * @param string $metadata value.
      * 
      * @return none.
      */
@@ -63,17 +111,25 @@ class CreateQueueOptions
     }
     
     /**
-     * Adds new metadata element. This element should be added without the header
-     * prefix (x-ms-meta-*).
+     * Gets container properties
      * 
-     * @param string $key   metadata key element.
-     * @param string $value metadata value element.
+     * @return PEAR2\WindowsAzure\Services\Blob\Models\ContainerProperties
+     */
+    public function getProperties()
+    {
+        return $this->_properties;
+    }
+    
+    /**
+     * Sets container properties
+     * 
+     * @param Models\ContainerProperties $properties
      * 
      * @return none.
      */
-    public function addMetadata($key, $value)
+    public function setProperties($properties)
     {
-        $this->_metadata[$key] = $value;
+        $this->_properties = $properties;
     }
 }
 
