@@ -33,6 +33,7 @@ use PEAR2\WindowsAzure\Services\Core\Models\GetServicePropertiesResult;
 use PEAR2\WindowsAzure\Services\Blob\Models\ListContainersOptions;
 use PEAR2\WindowsAzure\Services\Blob\Models\ListContainersResult;
 use PEAR2\WindowsAzure\Services\Blob\Models\CreateContainerOptions;
+use PEAR2\WindowsAzure\Services\Blob\Models\GetContainerPropertiesResult;
 
 /**
  * This class constructs HTTP requests and receive HTTP responses for blob
@@ -48,6 +49,44 @@ use PEAR2\WindowsAzure\Services\Blob\Models\CreateContainerOptions;
  */
 class BlobRestProxy extends ServiceRestProxy implements IBlob
 {
+    /**
+     * Helper method for getContainerProperties and getContainerMetadata
+     * 
+     * @param string             $container name
+     * @param BlobServiceOptions $options   optional parameters
+     * @param string             $operation should be 'metadata' to get metadata
+     * 
+     * @return GetContainerPropertiesResult
+     */
+    private function _getContainerPropertiesImpl($container, $options = null,
+        $operation = null
+    ){
+        $method      = \HTTP_Request2::METHOD_GET;
+        $headers     = array();
+        $queryParams = array();
+        $path        = $container;
+        $statusCode  = Resources::STATUS_OK;
+        
+        if (is_null($options)) {
+            $options = new BlobServiceOptions();
+        }
+        
+        $queryParams['restype'] = 'container';
+        $queryParams['comp']    = $operation;
+        $queryParams['timeout'] = strval($options->getTimeout());
+        
+        $response = $this->send($method, $headers, $queryParams, $path, $statusCode);
+        $result   = new GetContainerPropertiesResult();
+        $metadata = AzureUtilities::getMetadataArray($response->getHeader());
+        $date     = $response->getHeader(Resources::LAST_MODIFIED);
+        $date     = AzureUtilities::windowsAzureDateToDateTime($date);
+        $result->setEtag($response->getHeader(Resources::ETAG));
+        $result->setMetadata($metadata);
+        $result->setLastModified($date);
+        
+        return $result;
+    }
+    
     /**
      * Gets the properties of the Blob service.
      * 
@@ -214,7 +253,7 @@ class BlobRestProxy extends ServiceRestProxy implements IBlob
      */
     public function getContainerProperties($container, $options = null)
     {
-        throw new \Exception(Resources::NOT_IMPLEMENTED_MSG);
+        return $this->_getContainerPropertiesImpl($container, $options);
     }
     
     /**
@@ -229,7 +268,7 @@ class BlobRestProxy extends ServiceRestProxy implements IBlob
      */
     public function getContainerMetadata($container, $options = null)
     {
-        throw new \Exception(Resources::NOT_IMPLEMENTED_MSG);
+        return $this->_getContainerPropertiesImpl($container, $options, 'metadata');
     }
     
     /**

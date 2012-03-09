@@ -21,6 +21,7 @@ spl_autoload_register(
             'pear2\\windowsazure\\services\\blob\\models\\container' => '/WindowsAzure/Services/Blob/Models/Container.php',
             'pear2\\windowsazure\\services\\blob\\models\\containerproperties' => '/WindowsAzure/Services/Blob/Models/ContainerProperties.php',
             'pear2\\windowsazure\\services\\blob\\models\\createcontaineroptions' => '/WindowsAzure/Services/Blob/Models/CreateContainerOptions.php',
+            'pear2\\windowsazure\\services\\blob\\models\\getcontainerpropertiesresult' => '/WindowsAzure/Services/Blob/Models/GetContainerPropertiesResult.php',
             'pear2\\windowsazure\\services\\blob\\models\\listcontainersoptions' => '/WindowsAzure/Services/Blob/Models/ListContainersOptions.php',
             'pear2\\windowsazure\\services\\blob\\models\\listcontainersresult' => '/WindowsAzure/Services/Blob/Models/ListContainersResult.php',
             'pear2\\windowsazure\\services\\core\\authentication\\sharedkeyauthenticationscheme' => '/WindowsAzure/Services/Core/Authentication/SharedKeyAuthenticationScheme.php',
