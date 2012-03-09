@@ -123,7 +123,7 @@ class Container
     /**
      * Sets container properties
      * 
-     * @param Models\ContainerProperties $properties
+     * @param Models\ContainerProperties $properties container properties
      * 
      * @return none.
      */

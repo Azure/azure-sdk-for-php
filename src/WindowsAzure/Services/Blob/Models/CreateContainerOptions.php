@@ -63,7 +63,7 @@ class CreateContainerOptions extends BlobServiceOptions
      * Specifies whether data in the container may be accessed publicly and the level
      * of access. Possible values include: 
      * 1) container: Specifies full public read access for container and blob data.
-     *    Clients can enumerate blobs within the container via anonymous request, but 
+     *    Clients can enumerate blobs within the container via anonymous request, but
      *    cannot enumerate containers within the storage account.
      * 2) blob: Specifies public read access for blobs. Blob data within this 
      *    container can be read via anonymous request, but container data is not 
@@ -72,7 +72,7 @@ class CreateContainerOptions extends BlobServiceOptions
      * If this value is not specified in the request, container data is private to 
      * the account owner.
      * 
-     * @param string $publicAccess
+     * @param string $publicAccess access modifier for the container
      * 
      * @return none.
      */

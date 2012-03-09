@@ -97,6 +97,8 @@ class ListQueuesResult
     /**
      * Sets queues.
      *
+     * @param array $queues list of queues
+     * 
      * @return none.
      */
     public function setQueues($queues)

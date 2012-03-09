@@ -99,6 +99,8 @@ class ListContainersResult
     /**
      * Sets containers.
      *
+     * @param array $containers list of containers
+     * 
      * @return none.
      */
     public function setContainers($containers)
