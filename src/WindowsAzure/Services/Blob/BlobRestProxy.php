@@ -60,7 +60,7 @@ class BlobRestProxy extends ServiceRestProxy implements IBlob
      */
     private function _getContainerPropertiesImpl($container, $options = null,
         $operation = null
-    ){
+    ) {
         $method      = \HTTP_Request2::METHOD_GET;
         $headers     = array();
         $queryParams = array();
