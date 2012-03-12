@@ -15,33 +15,65 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   PEAR2\WindowsAzure\Services\Queue\Models
+ * @package   PEAR2\WindowsAzure\Services\Blob\Models
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
  
-namespace PEAR2\WindowsAzure\Services\Queue\Models;
-use PEAR2\WindowsAzure\Services\Queue\Models\QueueServiceOptions;
+namespace PEAR2\WindowsAzure\Services\Blob\Models;
+use PEAR2\WindowsAzure\Services\Blob\Models\BlobServiceOptions;
 use \PEAR2\WindowsAzure\Validate;
 
 /**
- * Options for listQueues API.
+ * Options for listBlobs API.
  *
  * @category  Microsoft
- * @package   PEAR2\WindowsAzure\Services\Queue\Models
+ * @package   PEAR2\WindowsAzure\Services\Blob\Models
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @version   Release: @package_version@
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
-class ListQueueOptions extends QueueServiceOptions
+class ListContainersOptions extends BlobServiceOptions
 {
+    /**
+     * Filters the results to return only containers whose name begins with the 
+     * specified prefix.
+     * 
+     * @var string
+     */
     private $_prefix;
+    
+    /**
+     * Identifies the portion of the list to be returned with the next list operation
+     * The operation returns a marker value within the 
+     * response body if the list returned was not complete. The marker value may 
+     * then be used in a subsequent call to request the next set of list items.
+     * The marker value is opaque to the client.
+     * 
+     * @var string
+     */
     private $_marker;
+    
+    /**
+     * Specifies the maximum number of containers to return. If the request does not
+     * specify maxresults, or specifies a value greater than 5,000, the server will
+     * return up to 5,000 items. If the parameter is set to a value less than or
+     * equal to zero, the server will return status code 400 (Bad Request).
+     * 
+     * @var string
+     */
     private $_maxResults;
+    
+    /**
+     * Include this parameter to specify that the container's metadata be returned
+     * as part of the response body.
+     * 
+     * @var bool
+     */
     private $_includeMetadata;
 
     /**

@@ -15,28 +15,29 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   PEAR2\WindowsAzure\Services\Queue\Models
+ * @package   PEAR2\WindowsAzure\Services\Core\Models
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
  
-namespace PEAR2\WindowsAzure\Services\Queue\Models;
+namespace PEAR2\WindowsAzure\Services\Core\Models;
+use PEAR2\WindowsAzure\Services\Core\Models\RetentionPolicy;
 use PEAR2\WindowsAzure\Utilities;
 
 /**
- * Holds elements of queue properties metrics field.
+ * Holds elements of queue properties logging field.
  *
  * @category  Microsoft
- * @package   PEAR2\WindowsAzure\Services\Queue\Models
+ * @package   PEAR2\WindowsAzure\Services\Core\Models
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @version   Release: @package_version@
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
-class Metrics
+class Logging
 {
     /**
      * The version of Storage Analytics to configure
@@ -46,18 +47,32 @@ class Metrics
     private $_version;
     
     /**
-     * Indicates whether metrics is enabled for the storage service
+     * Applies only to logging configuration. Indicates whether all delete requests 
+     * should be logged.
      * 
      * @var bool
      */
-    private $_enabled;
+    private $_delete;
     
     /**
-     * Indicates whether a retention policy is enabled for the storage service
+     * Applies only to logging configuration. Indicates whether all read requests 
+     * should be logged.
      * 
-     * @var bool
+     * @var bool.
      */
-    private $_includeAPIs;
+    private $_read;
+    
+    /**
+     * Applies only to logging configuration. Indicates whether all write requests 
+     * should be logged.
+     * 
+     * @var bool 
+     */
+    private $_write;
+    
+    /**
+     * @var PEAR2\WindowsAzure\Services\Core\Models\RetentionPolicy
+     */
     private $_retentionPolicy;
     
     /**
@@ -65,18 +80,15 @@ class Metrics
      * 
      * @param array $parsedResponse XML response parsed into array.
      * 
-     * @return PEAR2\WindowsAzure\Services\Queue\Models\Metrics
+     * @return PEAR2\WindowsAzure\Services\Core\Models\Logging
      */
     public static function create($parsedResponse)
     {
-        $result = new Metrics();
+        $result = new Logging();
         $result->setVersion($parsedResponse['Version']);
-        $result->setEnabled(Utilities::toBoolean($parsedResponse['Enabled']));
-        if ($result->getEnabled()) {
-            $result->setIncludeAPIs(
-                Utilities::toBoolean($parsedResponse['IncludeAPIs'])
-            );
-        }
+        $result->setDelete(Utilities::toBoolean($parsedResponse['Delete']));
+        $result->setRead(Utilities::toBoolean($parsedResponse['Read']));
+        $result->setWrite(Utilities::toBoolean($parsedResponse['Write']));
         $result->setRetentionPolicy(
             RetentionPolicy::create($parsedResponse['RetentionPolicy'])
         );
@@ -87,7 +99,7 @@ class Metrics
     /**
      * Gets retention policy
      * 
-     * @return PEAR2\WindowsAzure\Services\Queue\Models\RetentionPolicy
+     * @return PEAR2\WindowsAzure\Services\Core\Models\RetentionPolicy
      *  
      */
     public function getRetentionPolicy()
@@ -108,47 +120,69 @@ class Metrics
     }
     
     /**
-     * Gets include APIs.
+     * Gets write
      * 
-     * @return bool. 
+     * @return bool.
      */
-    public function getIncludeAPIs()
+    public function getWrite()
     {
-        return $this->_includeAPIs;
+        return $this->_write;
     }
     
     /**
-     * Sets include APIs.
+     * Sets write
      * 
-     * @param $bool $includeAPIs value to use.
+     * @param bool $write new value.
      * 
-     * @return none. 
+     * @return none.
      */
-    public function setIncludeAPIs($includeAPIs)
+    public function setWrite($write)
     {
-        $this->_includeAPIs = $includeAPIs;
+        $this->_write = $write;
+    }
+            
+    /**
+     * Gets read
+     * 
+     * @return bool.
+     */
+    public function getRead()
+    {
+        return $this->_read;
     }
     
     /**
-     * Gets enabled.
+     * Sets read
      * 
-     * @return bool. 
+     * @param bool $read new value.
+     * 
+     * @return none.
      */
-    public function getEnabled()
+    public function setRead($read)
     {
-        return $this->_enabled;
+        $this->_read = $read;
     }
     
     /**
-     * Sets enabled.
+     * Gets delete
      * 
-     * @param bool $enabled value to use.
-     * 
-     * @return none. 
+     * @return bool.
      */
-    public function setEnabled($enabled)
+    public function getDelete()
     {
-        $this->_enabled = $enabled;
+        return $this->_delete;
+    }
+    
+    /**
+     * Sets delete
+     * 
+     * @param bool $delete new value.
+     * 
+     * @return none.
+     */
+    public function setDelete($delete)
+    {
+        $this->_delete = $delete;
     }
     
     /**
@@ -180,16 +214,13 @@ class Metrics
      */
     public function toArray()
     {
-        $array = array(
-            'Version' => $this->_version,
-            'Enabled' => Utilities::booleanToString($this->_enabled)
+        return array(
+            'Version'         => $this->_version,
+            'Delete'          => Utilities::booleanToString($this->_delete),
+            'Read'            => Utilities::booleanToString($this->_read),
+            'Write'           => Utilities::booleanToString($this->_write),
+            'RetentionPolicy' => $this->_retentionPolicy->toArray()
         );
-        if ($this->_enabled) {
-            $array['IncludeAPIs'] = Utilities::booleanToString($this->_includeAPIs);
-        }
-        $array['RetentionPolicy'] = $this->_retentionPolicy->toArray();
-        
-        return $array;
     }
 }
 

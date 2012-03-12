@@ -22,7 +22,7 @@
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
 
-use PEAR2\WindowsAzure\Services\Queue\Models\CreateMessageOptions;
+use PEAR2\WindowsAzure\Services\Core\Models\CreateMessageOptions;
 
 /**
  * Unit tests for class CreateMessageOptions
@@ -38,7 +38,7 @@ use PEAR2\WindowsAzure\Services\Queue\Models\CreateMessageOptions;
 class CreateMessageOptionsTest extends PHPUnit_Framework_TestCase
 {
     /**
-     * @covers PEAR2\WindowsAzure\Services\Queue\Models\CreateMessageOptions::getVisibilityTimeoutInSeconds
+     * @covers PEAR2\WindowsAzure\Services\Core\Models\CreateMessageOptions::getVisibilityTimeoutInSeconds
      */
     public function testGetVisibilityTimeoutInSeconds()
     {
@@ -55,7 +55,7 @@ class CreateMessageOptionsTest extends PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers PEAR2\WindowsAzure\Services\Queue\Models\CreateMessageOptions::setVisibilityTimeoutInSeconds
+     * @covers PEAR2\WindowsAzure\Services\Core\Models\CreateMessageOptions::setVisibilityTimeoutInSeconds
      */
     public function testSetVisibilityTimeoutInSeconds()
     {
@@ -72,7 +72,7 @@ class CreateMessageOptionsTest extends PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers PEAR2\WindowsAzure\Services\Queue\Models\CreateMessageOptions::getTimeToLiveInSeconds
+     * @covers PEAR2\WindowsAzure\Services\Core\Models\CreateMessageOptions::getTimeToLiveInSeconds
      */
     public function testGetTimeToLiveInSeconds()
     {
@@ -89,7 +89,7 @@ class CreateMessageOptionsTest extends PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers PEAR2\WindowsAzure\Services\Queue\Models\CreateMessageOptions::setTimeToLiveInSeconds
+     * @covers PEAR2\WindowsAzure\Services\Core\Models\CreateMessageOptions::setTimeToLiveInSeconds
      */
     public function testSetTimeToLiveInSeconds()
     {

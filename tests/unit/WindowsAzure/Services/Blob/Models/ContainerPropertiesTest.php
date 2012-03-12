@@ -15,93 +15,94 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   PEAR2\Tests\Unit\WindowsAzure
+ * @package   PEAR2\Tests\Unit\WindowsAzure\Services\Blob\Models
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
 
-use PEAR2\WindowsAzure\Services\Core\Models\ListMessagesOptions;
+namespace PEAR2\Tests\Unit\WindowsAzure\Services\Blob\Models;
+use PEAR2\WindowsAzure\Services\Blob\Models\ContainerProperties;
 
 /**
- * Unit tests for class ListMessagesOptions
+ * Unit tests for class ContainerProperties
  *
  * @category  Microsoft
- * @package   PEAR2\Tests\Unit\WindowsAzure
+ * @package   PEAR2\Tests\Unit\WindowsAzure\Services\Blob\Models
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @version   Release: @package_version@
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
-class ListMessagesOptionsTest extends PHPUnit_Framework_TestCase
+class ContainerPropertiesTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @covers PEAR2\WindowsAzure\Services\Core\Models\ListMessagesOptions::getVisibilityTimeoutInSeconds
+     * @covers PEAR2\WindowsAzure\Services\Blob\Models\ContainerProperties::getEtag
      */
-    public function testGetVisibilityTimeoutInSeconds()
+    public function testGetEtag()
     {
         // Setup
-        $listMessagesOptions = new ListMessagesOptions();
-        $expected = 1000;
-        $listMessagesOptions->setVisibilityTimeoutInSeconds($expected);
+        $properties = new ContainerProperties();
+        $expected = '0x8CACB9BD7C6B1B2';
+        $properties->setEtag($expected);
         
         // Test
-        $actual = $listMessagesOptions->getVisibilityTimeoutInSeconds();
+        $actual = $properties->getEtag();
         
         // Assert
         $this->assertEquals($expected, $actual);
     }
     
     /**
-     * @covers PEAR2\WindowsAzure\Services\Core\Models\ListMessagesOptions::setVisibilityTimeoutInSeconds
+     * @covers PEAR2\WindowsAzure\Services\Blob\Models\ContainerProperties::setEtag
      */
-    public function testSetVisibilityTimeoutInSeconds()
+    public function testSetEtag()
     {
         // Setup
-        $listMessagesOptions = new ListMessagesOptions();
-        $expected = 1000;
+        $properties = new ContainerProperties();
+        $expected = '0x8CACB9BD7C6B1B2';
         
         // Test
-        $listMessagesOptions->setVisibilityTimeoutInSeconds($expected);
+        $properties->setEtag($expected);
         
         // Assert
-        $actual = $listMessagesOptions->getVisibilityTimeoutInSeconds();
+        $actual = $properties->getEtag();
         $this->assertEquals($expected, $actual);
     }
     
     /**
-     * @covers PEAR2\WindowsAzure\Services\Core\Models\ListMessagesOptions::getNumberOfMessages
+     * @covers PEAR2\WindowsAzure\Services\Blob\Models\ContainerProperties::getLastModified
      */
-    public function testGetNumberOfMessages()
+    public function testGetLastModified()
     {
         // Setup
-        $listMessagesOptions = new ListMessagesOptions();
-        $expected = 10;
-        $listMessagesOptions->setNumberOfMessages($expected);
+        $properties = new ContainerProperties();
+        $expected = 'Fri, 09 Oct 2009 21:04:30 GMT';
+        $properties->setLastModified($expected);
         
         // Test
-        $actual = $listMessagesOptions->getNumberOfMessages();
+        $actual = $properties->getLastModified();
         
         // Assert
         $this->assertEquals($expected, $actual);
     }
     
     /**
-     * @covers PEAR2\WindowsAzure\Services\Core\Models\ListMessagesOptions::setNumberOfMessages
+     * @covers PEAR2\WindowsAzure\Services\Blob\Models\ContainerProperties::setLastModified
      */
-    public function testSetNumberOfMessages()
+    public function testSetLastModified()
     {
         // Setup
-        $listMessagesOptions = new ListMessagesOptions();
-        $expected = 10;
+        $properties = new ContainerProperties();
+        $expected = 'Fri, 09 Oct 2009 21:04:30 GMT';
         
         // Test
-        $listMessagesOptions->setNumberOfMessages($expected);
+        $properties->setLastModified($expected);
         
         // Assert
-        $actual = $listMessagesOptions->getNumberOfMessages();
+        $actual = $properties->getLastModified();
         $this->assertEquals($expected, $actual);
     }
 }

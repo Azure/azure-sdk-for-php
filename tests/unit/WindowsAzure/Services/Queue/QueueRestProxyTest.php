@@ -22,24 +22,25 @@
  * @license    http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link       http://pear.php.net/package/azure-sdk-for-php
  */
-
+namespace PEAR2\Tests\Unit\WindowsAzure\Services\Queue\QueueRestProxy;
+use PEAR2\WindowsAzure\Core\AzureUtilities;
 use Tests\Framework\QueueRestProxyTestBase;
 use PEAR2\WindowsAzure\Services\Core\Configuration;
 use PEAR2\WindowsAzure\Services\Queue\QueueRestProxy;
 use PEAR2\WindowsAzure\Services\Queue\IQueue;
 use PEAR2\WindowsAzure\Services\Queue\QueueService;
 use PEAR2\WindowsAzure\Services\Queue\QueueSettings;
-use PEAR2\WindowsAzure\Services\Queue\Models\ListQueueOptions;
-use PEAR2\WindowsAzure\Services\Queue\Models\ListQueueResult;
-use PEAR2\WindowsAzure\Services\Queue\Models\CreateQueueOptions;
-use PEAR2\WindowsAzure\Services\Queue\Models\ServiceProperties;
-use PEAR2\WindowsAzure\Services\Queue\Models\GetQueueMetadataResult;
-use PEAR2\WindowsAzure\Services\Queue\Models\ListMessagesResult;
-use PEAR2\WindowsAzure\Services\Queue\Models\ListMessagesOptions;
-use PEAR2\WindowsAzure\Services\Queue\Models\PeekMessagesResult;
-use PEAR2\WindowsAzure\Services\Queue\Models\PeekMessagesOptions;
-use PEAR2\WindowsAzure\Services\Queue\Models\UpdateMessageResult;
-use PEAR2\WindowsAzure\Services\Queue\Models\QueueServiceOptions;
+use PEAR2\WindowsAzure\Services\Core\Models\ListQueuesOptions;
+use PEAR2\WindowsAzure\Services\Core\Models\ListQueuesResult;
+use PEAR2\WindowsAzure\Services\Core\Models\CreateQueueOptions;
+use PEAR2\WindowsAzure\Services\Core\Models\ServiceProperties;
+use PEAR2\WindowsAzure\Services\Core\Models\GetQueueMetadataResult;
+use PEAR2\WindowsAzure\Services\Core\Models\ListMessagesResult;
+use PEAR2\WindowsAzure\Services\Core\Models\ListMessagesOptions;
+use PEAR2\WindowsAzure\Services\Core\Models\PeekMessagesResult;
+use PEAR2\WindowsAzure\Services\Core\Models\PeekMessagesOptions;
+use PEAR2\WindowsAzure\Services\Core\Models\UpdateMessageResult;
+use PEAR2\WindowsAzure\Services\Core\Models\QueueServiceOptions;
 use PEAR2\Tests\Framework\TestResources;
 use PEAR2\WindowsAzure\Resources;
 use PEAR2\WindowsAzure\Core\ServiceException;
@@ -97,7 +98,7 @@ class QueueRestProxyTest extends QueueRestProxyTestBase
         parent::createQueue($queue1);
         parent::createQueue($queue2, $options);
         parent::createQueue($queue3);
-        $options = new ListQueueOptions();
+        $options = new ListQueuesOptions();
         $options->setPrefix('list');
         $options->setIncludeMetadata(true);
         
@@ -125,7 +126,7 @@ class QueueRestProxyTest extends QueueRestProxyTestBase
         parent::createQueue($queue1);
         parent::createQueue($queue2);
         parent::createQueue($queue3);
-        $options = new ListQueueOptions();
+        $options = new ListQueuesOptions();
         $options->setMaxResults('2');
         
         // Test
@@ -152,7 +153,7 @@ class QueueRestProxyTest extends QueueRestProxyTestBase
     */
     public function testListQueuesWithInvalidNextMarkerFail()
     {
-        if (\PEAR2\WindowsAzure\Core\AzureUtilities::isEmulated()) {
+        if (AzureUtilities::isEmulated()) {
             $this->markTestSkipped(self::NOT_SUPPORTED);
         }
         
@@ -163,7 +164,7 @@ class QueueRestProxyTest extends QueueRestProxyTestBase
         parent::createQueue($queue1);
         parent::createQueue($queue2);
         parent::createQueue($queue3);
-        $options = new ListQueueOptions();
+        $options = new ListQueuesOptions();
         $options->setMaxResults('2');
         $this->setExpectedException(get_class(new ServiceException('409')));
         
@@ -236,7 +237,7 @@ class QueueRestProxyTest extends QueueRestProxyTestBase
         $this->createQueue($queueName, $queueCreateOptions);
 
         // Assert
-        $options = new ListQueueOptions();
+        $options = new ListQueuesOptions();
         $options->setIncludeMetadata(true);
         $result   = $this->wrapper->listQueues($options);
         $queues   = $result->getQueues();
@@ -307,7 +308,7 @@ class QueueRestProxyTest extends QueueRestProxyTestBase
     */
     public function testGetServiceProperties()
     {
-        if (\PEAR2\WindowsAzure\Core\AzureUtilities::isEmulated()) {
+        if (AzureUtilities::isEmulated()) {
             $this->markTestSkipped(self::NOT_SUPPORTED);
         }
         
@@ -323,7 +324,7 @@ class QueueRestProxyTest extends QueueRestProxyTestBase
     */
     public function testSetServiceProperties()
     {
-        if (\PEAR2\WindowsAzure\Core\AzureUtilities::isEmulated()) {
+        if (AzureUtilities::isEmulated()) {
             $this->markTestSkipped(self::NOT_SUPPORTED);
         }
         

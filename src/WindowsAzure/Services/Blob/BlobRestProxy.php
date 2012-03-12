@@ -25,10 +25,14 @@
 namespace PEAR2\WindowsAzure\Services\Blob;
 use PEAR2\WindowsAzure\Utilities;
 use PEAR2\WindowsAzure\Resources;
+use PEAR2\WindowsAzure\Core\AzureUtilities;
 use PEAR2\WindowsAzure\Services\Core\ServiceRestProxy;
 use PEAR2\WindowsAzure\Services\Blob\IBlob;
 use PEAR2\WindowsAzure\Services\Blob\Models\BlobServiceOptions;
-use PEAR2\WindowsAzure\Services\Queue\Models\GetServicePropertiesResult;
+use PEAR2\WindowsAzure\Services\Core\Models\GetServicePropertiesResult;
+use PEAR2\WindowsAzure\Services\Blob\Models\ListContainersOptions;
+use PEAR2\WindowsAzure\Services\Blob\Models\ListContainersResult;
+use PEAR2\WindowsAzure\Services\Blob\Models\CreateContainerOptions;
 
 /**
  * This class constructs HTTP requests and receive HTTP responses for blob
@@ -49,7 +53,7 @@ class BlobRestProxy extends ServiceRestProxy implements IBlob
      * 
      * @param Models\BlobServiceOptions $options optional blob service options.
      * 
-     * @return PEAR2\WindowsAzure\Services\Queue\Models\GetServicePropertiesResult
+     * @return PEAR2\WindowsAzure\Services\Core\Models\GetServicePropertiesResult
      * 
      * @see http://msdn.microsoft.com/en-us/library/windowsazure/hh452239.aspx
      */
@@ -67,7 +71,7 @@ class BlobRestProxy extends ServiceRestProxy implements IBlob
         
         $queryParams['restype'] = 'service';
         $queryParams['comp']    = 'properties';
-        $queryParams['timeout'] = $options->getTimeout();
+        $queryParams['timeout'] = strval($options->getTimeout());
         
         $response = $this->send($method, $headers, $queryParams, $path, $statusCode);
         $parsed   = Utilities::unserialize($response->getBody());
@@ -100,7 +104,7 @@ class BlobRestProxy extends ServiceRestProxy implements IBlob
         
         $queryParams['restype']           = 'service';
         $queryParams['comp']              = 'properties';
-        $queryParams['timeout']           = $options->getTimeout();
+        $queryParams['timeout']           = strval($options->getTimeout());
         $body                             = $serviceProperties->toXml();
         $headers[Resources::CONTENT_TYPE] = Resources::XML_CONTENT_TYPE;
         
@@ -118,7 +122,28 @@ class BlobRestProxy extends ServiceRestProxy implements IBlob
      */
     public function listContainers($options = null)
     {
-        throw new \Exception(Resources::NOT_IMPLEMENTED_MSG);
+        $method      = \HTTP_Request2::METHOD_GET;
+        $headers     = array();
+        $queryParams = array();
+        $path        = Resources::EMPTY_STRING;
+        $statusCode  = Resources::STATUS_OK;
+        
+        if (is_null($options)) {
+            $options = new ListContainersOptions();
+        }
+        
+        $queryParams['timeout']              = strval($options->getTimeout());
+        $queryParams['comp']                 = 'list';
+        $queryParams[Resources::PREFIX]      = $options->getPrefix();
+        $queryParams[Resources::MARKER]      = $options->getMarker();
+        $queryParams[Resources::MAX_RESULTS] = $options->getMaxResults();
+        $isInclude                           = $options->getIncludeMetadata();
+        $queryParams['include']              = $isInclude ? 'metadata' : null;
+        
+        $response = $this->send($method, $headers, $queryParams, $path, $statusCode);
+        $parsed   = Utilities::unserialize($response->getBody());
+        
+        return ListContainersResult::create($parsed);
     }
     
     /**
@@ -133,13 +158,33 @@ class BlobRestProxy extends ServiceRestProxy implements IBlob
      */
     public function createContainer($container, $options = null)
     {
-        throw new \Exception(Resources::NOT_IMPLEMENTED_MSG);
+        $method      = \HTTP_Request2::METHOD_PUT;
+        $headers     = array();
+        $queryParams = array();
+        $path        = Resources::EMPTY_STRING;
+        $statusCode  = Resources::STATUS_CREATED;
+        
+        if (is_null($options)) {
+            $options = new CreateContainerOptions();
+        }
+
+        $queryParams['restype'] = 'container';
+        $path                   = $container;
+        
+        $metadataHeaders = AzureUtilities::generateMetadataHeaders(
+            $options->getMetadata()
+        );
+        
+        $headers                                     = $metadataHeaders;
+        $headers[Resources::X_MS_BLOB_PUBLIC_ACCESS] = $options->getPublicAccess();
+        
+        $this->send($method, $headers, $queryParams, $path, $statusCode);
     }
     
     /**
      * Creates a new container in the given storage account.
      * 
-     * @param string                        $container name
+     * @param string                        $container name of the container
      * @param Models\DeleteContainerOptions $options   optional parameters
      * 
      * @return none.
@@ -148,7 +193,13 @@ class BlobRestProxy extends ServiceRestProxy implements IBlob
      */
     public function deleteContainer($container, $options = null)
     {
-        throw new \Exception(Resources::NOT_IMPLEMENTED_MSG);
+        $method      = \HTTP_Request2::METHOD_DELETE;
+        $headers     = array();
+        $queryParams = array('restype' => 'container');
+        $path        = $container;
+        $statusCode  = Resources::STATUS_ACCEPTED;
+        
+        $this->send($method, $headers, $queryParams, $path, $statusCode);
     }
     
     /**

@@ -22,11 +22,11 @@
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
 
-use PEAR2\WindowsAzure\Services\Queue\Models\ListQueueOptions;
+use PEAR2\WindowsAzure\Services\Core\Models\ListQueuesOptions;
 use PEAR2\Tests\Framework\TestResources;
 
 /**
- * Unit tests for class ListQueueOptions
+ * Unit tests for class ListQueuesOptions
  *
  * @category  Microsoft
  * @package   PEAR2\Tests\Unit\WindowsAzure
@@ -39,12 +39,12 @@ use PEAR2\Tests\Framework\TestResources;
 class ListQueueOptionsTest extends PHPUnit_Framework_TestCase
 {
     /**
-     * @covers PEAR2\WindowsAzure\Services\Queue\Models\ListQueueOptions::setPrefix
+     * @covers PEAR2\WindowsAzure\Services\Core\Models\ListQueuesOptions::setPrefix
      */
     public function testSetPrefix()
     {
         // Setup
-        $options = new ListQueueOptions();
+        $options = new ListQueuesOptions();
         $expected = 'myprefix';
         
         // Test
@@ -55,12 +55,12 @@ class ListQueueOptionsTest extends PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers PEAR2\WindowsAzure\Services\Queue\Models\ListQueueOptions::getPrefix
+     * @covers PEAR2\WindowsAzure\Services\Core\Models\ListQueuesOptions::getPrefix
      */
     public function testGetPrefix()
     {
         // Setup
-        $options = new ListQueueOptions();
+        $options = new ListQueuesOptions();
         $expected = 'myprefix';
         $options->setPrefix($expected);
         
@@ -72,12 +72,12 @@ class ListQueueOptionsTest extends PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers PEAR2\WindowsAzure\Services\Queue\Models\ListQueueOptions::setMarker
+     * @covers PEAR2\WindowsAzure\Services\Core\Models\ListQueuesOptions::setMarker
      */
     public function testSetMarker()
     {
         // Setup
-        $options = new ListQueueOptions();
+        $options = new ListQueuesOptions();
         $expected = 'mymarker';
         
         // Test
@@ -88,12 +88,12 @@ class ListQueueOptionsTest extends PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers PEAR2\WindowsAzure\Services\Queue\Models\ListQueueOptions::getMarker
+     * @covers PEAR2\WindowsAzure\Services\Core\Models\ListQueuesOptions::getMarker
      */
     public function testGetMarker()
     {
         // Setup
-        $options = new ListQueueOptions();
+        $options = new ListQueuesOptions();
         $expected = 'mymarker';
         $options->setMarker($expected);
         
@@ -105,12 +105,12 @@ class ListQueueOptionsTest extends PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers PEAR2\WindowsAzure\Services\Queue\Models\ListQueueOptions::setMaxResults
+     * @covers PEAR2\WindowsAzure\Services\Core\Models\ListQueuesOptions::setMaxResults
      */
     public function testSetMaxResults()
     {
         // Setup
-        $options = new ListQueueOptions();
+        $options = new ListQueuesOptions();
         $expected = '3';
         
         // Test
@@ -121,12 +121,12 @@ class ListQueueOptionsTest extends PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers PEAR2\WindowsAzure\Services\Queue\Models\ListQueueOptions::getMaxResults
+     * @covers PEAR2\WindowsAzure\Services\Core\Models\ListQueuesOptions::getMaxResults
      */
     public function testGetMaxResults()
     {
         // Setup
-        $options = new ListQueueOptions();
+        $options = new ListQueuesOptions();
         $expected = '3';
         $options->setMaxResults($expected);
         
@@ -138,12 +138,12 @@ class ListQueueOptionsTest extends PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers PEAR2\WindowsAzure\Services\Queue\Models\ListQueueOptions::setIncludeMetadata
+     * @covers PEAR2\WindowsAzure\Services\Core\Models\ListQueuesOptions::setIncludeMetadata
      */
     public function testSetIncludeMetadata()
     {
         // Setup
-        $options = new ListQueueOptions();
+        $options = new ListQueuesOptions();
         $expected = true;
         
         // Test
@@ -154,12 +154,12 @@ class ListQueueOptionsTest extends PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers PEAR2\WindowsAzure\Services\Queue\Models\ListQueueOptions::getIncludeMetadata
+     * @covers PEAR2\WindowsAzure\Services\Core\Models\ListQueuesOptions::getIncludeMetadata
      */
     public function testGetIncludeMetadata()
     {
         // Setup
-        $options = new ListQueueOptions();
+        $options = new ListQueuesOptions();
         $expected = true;
         $options->setIncludeMetadata($expected);
         

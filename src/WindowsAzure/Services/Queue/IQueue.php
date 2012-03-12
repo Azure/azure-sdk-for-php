@@ -52,10 +52,10 @@ interface IQueue
     /**
      * Gets the properties of the Queue service.
      * 
-     * @param PEAR2\WindowsAzure\Services\Queue\Models\QueueServiceOptions 
+     * @param PEAR2\WindowsAzure\Services\Core\Models\QueueServiceOptions 
      * $queueServiceOptions optional queue service options.
      * 
-     * @return PEAR2\WindowsAzure\Services\Queue\Models\GetServicePropertiesResult
+     * @return PEAR2\WindowsAzure\Services\Core\Models\GetServicePropertiesResult
      */
     public function getServiceProperties($queueServiceOptions = null);
 
@@ -93,9 +93,9 @@ interface IQueue
     /**
      * Lists all queues in the storage account.
      * 
-     * @param ListQueueOptions $listQueuesOptions Optional list queue options.
+     * @param ListQueuesOptions $listQueuesOptions Optional list queue options.
      * 
-     * @return PEAR2\WindowsAzure\Services\Queue\Models\ListQueueResult.
+     * @return PEAR2\WindowsAzure\Services\Core\Models\ListQueuesResult.
      */
     public function listQueues($listQueuesOptions = null);
 
@@ -105,7 +105,7 @@ interface IQueue
      * @param string              $queueName           Name of the queue.
      * @param QueueServiceOptions $queueServiceOptions Optional queue service options
      * 
-     * @return PEAR2\WindowsAzure\Services\Queue\Models\GetQueueMetadataResult.
+     * @return PEAR2\WindowsAzure\Services\Core\Models\GetQueueMetadataResult.
      */
     public function getQueueMetadata($queueName, $queueServiceOptions = null);
 
@@ -155,7 +155,7 @@ interface IQueue
      * @param QueueServiceOptions $queueServiceOptions        Optional queue 
      * service options
      * 
-     * @return PEAR2\WindowsAzure\Services\Queue\Models\UpdateMessageResult.
+     * @return PEAR2\WindowsAzure\Services\Core\Models\UpdateMessageResult.
      */
     public function updateMessage($queueName, $messageId, $popReceipt, $messageText, 
         $visibilityTimeoutInSeconds, $queueServiceOptions = null
@@ -182,7 +182,7 @@ interface IQueue
      * @param string              $queueName           Name of the queue.
      * @param ListMessagesOptions $listMessagesOptions Optional list messages options
      * 
-     * @return PEAR2\WindowsAzure\Services\Queue\Models\ListMessagesResult.
+     * @return PEAR2\WindowsAzure\Services\Core\Models\ListMessagesResult.
      */
     public function listMessages($queueName, $listMessagesOptions = null);
 
@@ -193,7 +193,7 @@ interface IQueue
      * @param string              $queueName           Name of the queue.
      * @param PeekMessagesOptions $peekMessagesOptions Optional peek messages options
      * 
-     * @return PEAR2\WindowsAzure\Services\Queue\Models\PeekMessagesResult.
+     * @return PEAR2\WindowsAzure\Services\Core\Models\PeekMessagesResult.
      */
     public function peekMessages($queueName, $peekMessagesOptions = null);
 
@@ -203,7 +203,7 @@ interface IQueue
      * @param string              $queueName           Name of the queue.
      * @param QueueServiceOptions $queueServiceOptions Optional queue service options
      * 
-     * @return PEAR2\WindowsAzure\Services\Queue\Models\PeekMessagesResult.
+     * @return PEAR2\WindowsAzure\Services\Core\Models\PeekMessagesResult.
      */
     public function clearMessages($queueName, $queueServiceOptions = null);
 }

@@ -27,7 +27,7 @@ use PEAR2\WindowsAzure\Services\Core\Configuration;
 use PEAR2\WindowsAzure\Services\Queue\QueueSettings;
 use PEAR2\WindowsAzure\Services\Queue\QueueService;
 use PEAR2\Tests\Framework\TestResources;
-use PEAR2\WindowsAzure\Services\Queue\Models\ServiceProperties;
+use PEAR2\WindowsAzure\Services\Core\Models\ServiceProperties;
 
 /**
  * TestBase class for each unit test class.
@@ -42,7 +42,7 @@ use PEAR2\WindowsAzure\Services\Queue\Models\ServiceProperties;
  */
 class QueueRestProxyTestBase extends RestProxyTestBase
 {
-    protected $createdQueues;
+    private $_createdQueues;
     
     public function __construct()
     {
@@ -53,13 +53,13 @@ class QueueRestProxyTestBase extends RestProxyTestBase
         $config->setProperty(QueueSettings::URI, $queueUri);
         $queueWrapper = QueueService::create($config);
         parent::__construct($config, $queueWrapper);
-        $this->createdQueues = array();
+        $this->_createdQueues = array();
     }
     
     public function createQueue($queueName, $options = null)
     {
         $this->wrapper->createQueue($queueName, $options);
-        $this->createdQueues[] = $queueName;
+        $this->_createdQueues[] = $queueName;
     }
     
     public function deleteQueue($queueName, $options = null)
@@ -71,12 +71,12 @@ class QueueRestProxyTestBase extends RestProxyTestBase
     {
         parent::tearDown();
         
-        foreach ($this->createdQueues as $value) {
+        foreach ($this->_createdQueues as $value) {
             try
             {
                 $this->deleteQueue($value);
             }
-            catch (Exception $e)
+            catch (\Exception $e)
             {
                 // Ignore exception and continue, will assume that this queue doesn't exist in the sotrage account
                 error_log($e->getMessage());
