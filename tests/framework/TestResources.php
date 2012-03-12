@@ -23,7 +23,7 @@
  * @link       http://pear.php.net/package/azure-sdk-for-php
  */
  
-namespace PEAR2\Tests\Unit;
+namespace PEAR2\Tests\Framework;
 
 /**
  * Resources for testing framework.
