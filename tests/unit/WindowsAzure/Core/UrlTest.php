@@ -96,6 +96,20 @@ class UrlTest extends PHPUnit_Framework_TestCase
     }
     
     /**
+     * @covers PEAR2\WindowsAzure\Core\Url::__construct
+     */
+    public function test__constructWithUrlPath()
+    {
+        // Setup
+        $urlString = TestResources::VALID_URL . '/';
+        
+        // Test
+        $url = new Url($urlString);
+        
+        $this->assertEquals($urlString, $url->getUrl());
+    }
+    
+    /**
      * @covers PEAR2\WindowsAzure\Core\Url::getQuery
      */
     public function testGetQuery()

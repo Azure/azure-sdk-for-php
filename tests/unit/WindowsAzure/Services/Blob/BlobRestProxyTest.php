@@ -31,6 +31,7 @@ use PEAR2\WindowsAzure\Services\Blob\Models\ListContainersOptions;
 use PEAR2\WindowsAzure\Services\Blob\Models\ListContainersResult;
 use PEAR2\WindowsAzure\Services\Blob\Models\CreateContainerOptions;
 use PEAR2\WindowsAzure\Services\Blob\Models\GetContainerPropertiesResult;
+use PEAR2\WindowsAzure\Services\Blob\Models\ContainerACL;
 
 /**
  * Unit tests for class BlobRestProxy
@@ -389,6 +390,47 @@ class BlobRestProxyTest extends BlobRestProxyTestBase
         $this->assertEquals($expectedEtag, $result->getEtag());
         $this->assertEquals($expectedLastModified, $result->getLastModified());
         $this->assertEquals($expected, $result->getMetadata());
+    }
+
+    /**
+     * @covers PEAR2\WindowsAzure\Services\Blob\BlobRestProxy::getContainerACL
+     */
+    public function testGetContainerACL()
+    {
+        // Setup
+        $name = 'getcontaineracl';
+        $expectedAccess = 'container';
+        $this->createContainer($name);
+        
+        // Test
+        $result = $this->wrapper->getContainerACL($name);
+        
+        // Assert
+        $this->assertEquals($expectedAccess, $result->getContainerACL()->getPublicAccess());
+    }
+    
+    /**
+     * @covers PEAR2\WindowsAzure\Services\Blob\BlobRestProxy::setContainerACL
+     */
+    public function testSetContainerACL()
+    {
+        // Setup
+        $name = 'setcontaineracl';
+        $this->createContainer($name);
+        $sample = TestResources::getContainerACLMultipleEntriesSample();
+        $expectedEtag = '0x8CAFB82EFF70C46';
+        $expectedLastModified = 'Sun, 25 Sep 2011 19:42:18 GMT';
+        $expectedPublicAccess = 'container';
+        $acl = ContainerACL::create($expectedPublicAccess, $expectedEtag, 
+            $expectedLastModified, $sample['SignedIdentifiers']);
+        
+        // Test
+        $this->wrapper->setContainerACL($name, $acl);
+        
+        // Assert
+        $actual = $this->wrapper->getContainerACL($name);
+        $this->assertEquals($acl->getPublicAccess(), $actual->getContainerACL()->getPublicAccess());
+        $this->assertEquals($acl->getSignedIdentifiers(), $actual->getContainerACL()->getSignedIdentifiers());
     }
 }
 

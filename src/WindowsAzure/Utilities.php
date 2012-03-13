@@ -115,19 +115,21 @@ class Utilities
      * Serializes given array into xml. The array indecies must be string to use
      * them as XML tags.
      * 
-     * @param array  $array    object to serialize represented in array.
-     * @param string $rootName name of the XML root element.
+     * @param array  $array      object to serialize represented in array.
+     * @param string $rootName   name of the XML root element.
+     * @param string $defaultTag default tag for non-tagged elements.
      * 
      * @return string
      */
-    public static function serialize($array, $rootName)
+    public static function serialize($array, $rootName, $defaultTag = null)
     {
         $options = array(
             XML_SERIALIZER_OPTION_INDENT           => '    ',
             XML_SERIALIZER_OPTION_XML_DECL_ENABLED => true,
             XML_SERIALIZER_OPTION_RETURN_RESULT    => true,
             XML_SERIALIZER_OPTION_XML_ENCODING     => "UTF-8",
-            XML_SERIALIZER_OPTION_ROOT_NAME        => $rootName
+            XML_SERIALIZER_OPTION_ROOT_NAME        => $rootName,
+            XML_SERIALIZER_OPTION_DEFAULT_TAG      => $defaultTag
         );
         
         $serializer = new \XML_Serializer($options);
