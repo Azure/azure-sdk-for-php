@@ -15,48 +15,73 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   PEAR2\Tests\Unit\WindowsAzure
+ * @package   PEAR2\WindowsAzure
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
-
-use PEAR2\WindowsAzure\Services\Queue\QueueService;
+namespace Tests\Framework;
+use Tests\Framework\RestProxyTestBase;
 use PEAR2\WindowsAzure\Services\Core\Configuration;
-use PEAR2\Tests\Framework\TestResources;
 use PEAR2\WindowsAzure\Services\Queue\QueueSettings;
+use PEAR2\WindowsAzure\Services\Queue\QueueService;
+use PEAR2\Tests\Framework\TestResources;
+use PEAR2\WindowsAzure\Services\Queue\Models\ServiceProperties;
 
 /**
- * Unit tests for class QueueService
+ * TestBase class for each unit test class.
  *
  * @category  Microsoft
- * @package   PEAR2\Tests\Unit\WindowsAzure
+ * @package   PEAR2\WindowsAzure
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @version   Release: @package_version@
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
-class QueueServiceTest extends PHPUnit_Framework_TestCase
+class QueueRestProxyTestBase extends RestProxyTestBase
 {
-    /**
-     * @covers PEAR2\WindowsAzure\Services\Queue\QueueService::create
-     */
-    public function testCreateWithConfig()
+    protected $createdQueues;
+    
+    public function __construct()
     {
-        // Setup
-        $uri = 'http://' . TestResources::accountName() . '.queue.core.windows.net';
         $config = new Configuration();
+        $queueUri = 'http://' . TestResources::accountName() . '.queue.core.windows.net';
         $config->setProperty(QueueSettings::ACCOUNT_KEY, TestResources::accountKey());
         $config->setProperty(QueueSettings::ACCOUNT_NAME, TestResources::accountName());        
-        $config->setProperty(QueueSettings::URI, $uri);
-        
-        // Test
+        $config->setProperty(QueueSettings::URI, $queueUri);
         $queueWrapper = QueueService::create($config);
+        parent::__construct($config, $queueWrapper);
+        $this->createdQueues = array();
+    }
+    
+    public function createQueue($queueName, $options = null)
+    {
+        $this->wrapper->createQueue($queueName, $options);
+        $this->createdQueues[] = $queueName;
+    }
+    
+    public function deleteQueue($queueName, $options = null)
+    {
+        $this->wrapper->deleteQueue($queueName, $options);
+    }
+    
+    protected function tearDown()
+    {
+        parent::tearDown();
         
-        // Assert
-        $this->assertInstanceOf('PEAR2\\WindowsAzure\\Services\\Queue\\IQueue', $queueWrapper);
+        foreach ($this->createdQueues as $value) {
+            try
+            {
+                $this->deleteQueue($value);
+            }
+            catch (Exception $e)
+            {
+                // Ignore exception and continue, will assume that this queue doesn't exist in the sotrage account
+                error_log($e->getMessage());
+            }
+        }
     }
 }
 

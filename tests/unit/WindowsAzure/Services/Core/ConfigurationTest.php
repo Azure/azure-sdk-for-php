@@ -25,7 +25,7 @@
  */
 
 use PEAR2\WindowsAzure\Services\Core\Configuration;
-use PEAR2\Tests\Unit\TestResources;
+use PEAR2\Tests\Framework\TestResources;
 use PEAR2\WindowsAzure\Resources;
 use PEAR2\WindowsAzure\Core\InvalidArgumentTypeException;
 use PEAR2\WindowsAzure\Services\Queue\QueueSettings;

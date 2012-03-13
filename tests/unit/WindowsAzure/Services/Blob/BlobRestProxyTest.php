@@ -22,13 +22,12 @@
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
 
-use PEAR2\WindowsAzure\Services\Queue\QueueService;
-use PEAR2\WindowsAzure\Services\Core\Configuration;
+use Tests\Framework\BlobRestProxyTestBase;
 use PEAR2\Tests\Framework\TestResources;
-use PEAR2\WindowsAzure\Services\Queue\QueueSettings;
+use PEAR2\WindowsAzure\Services\Queue\Models\ServiceProperties;
 
 /**
- * Unit tests for class QueueService
+ * Unit tests for class BlobRestProxy
  *
  * @category  Microsoft
  * @package   PEAR2\Tests\Unit\WindowsAzure
@@ -38,25 +37,42 @@ use PEAR2\WindowsAzure\Services\Queue\QueueSettings;
  * @version   Release: @package_version@
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
-class QueueServiceTest extends PHPUnit_Framework_TestCase
+class BlobRestProxyTest extends BlobRestProxyTestBase
 {
     /**
-     * @covers PEAR2\WindowsAzure\Services\Queue\QueueService::create
-     */
-    public function testCreateWithConfig()
+    * @covers PEAR2\WindowsAzure\Services\Blob\BlobRestProxy::getServiceProperties
+    */
+    public function testGetServiceProperties()
     {
-        // Setup
-        $uri = 'http://' . TestResources::accountName() . '.queue.core.windows.net';
-        $config = new Configuration();
-        $config->setProperty(QueueSettings::ACCOUNT_KEY, TestResources::accountKey());
-        $config->setProperty(QueueSettings::ACCOUNT_NAME, TestResources::accountName());        
-        $config->setProperty(QueueSettings::URI, $uri);
+        if (\PEAR2\WindowsAzure\Core\AzureUtilities::isEmulated()) {
+            $this->markTestSkipped(self::NOT_SUPPORTED);
+        }
         
         // Test
-        $queueWrapper = QueueService::create($config);
+        $result = $this->wrapper->getServiceProperties();
         
         // Assert
-        $this->assertInstanceOf('PEAR2\\WindowsAzure\\Services\\Queue\\IQueue', $queueWrapper);
+        $this->assertEquals($this->defaultProperties->toArray(), $result->getValue()->toArray());
+    }
+    
+    /**
+    * @covers PEAR2\WindowsAzure\Services\Blob\BlobRestProxy::setServiceProperties
+    */
+    public function testSetServiceProperties()
+    {
+        if (\PEAR2\WindowsAzure\Core\AzureUtilities::isEmulated()) {
+            $this->markTestSkipped(self::NOT_SUPPORTED);
+        }
+        
+        // Setup
+        $expected = ServiceProperties::create(TestResources::setServicePropertiesSample());
+        
+        // Test
+        $this->setServiceProperties($expected);
+        $actual = $this->wrapper->getServiceProperties();
+        
+        // Assert
+        $this->assertEquals($expected->toXml(), $actual->getValue()->toXml());
     }
 }
 

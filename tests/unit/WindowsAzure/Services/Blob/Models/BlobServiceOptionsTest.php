@@ -22,13 +22,10 @@
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
 
-use PEAR2\WindowsAzure\Services\Queue\QueueService;
-use PEAR2\WindowsAzure\Services\Core\Configuration;
-use PEAR2\Tests\Framework\TestResources;
-use PEAR2\WindowsAzure\Services\Queue\QueueSettings;
+use PEAR2\WindowsAzure\Services\Blob\Models\BlobServiceOptions;
 
 /**
- * Unit tests for class QueueService
+ * Unit tests for class BlobServiceOptions
  *
  * @category  Microsoft
  * @package   PEAR2\Tests\Unit\WindowsAzure
@@ -38,25 +35,39 @@ use PEAR2\WindowsAzure\Services\Queue\QueueSettings;
  * @version   Release: @package_version@
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
-class QueueServiceTest extends PHPUnit_Framework_TestCase
+class BlobServiceOptionsTest extends PHPUnit_Framework_TestCase
 {
     /**
-     * @covers PEAR2\WindowsAzure\Services\Queue\QueueService::create
+     * @covers PEAR2\WindowsAzure\Services\Blob\Models\BlobServiceOptions::setTimeout
      */
-    public function testCreateWithConfig()
+    public function testSetTimeout()
     {
         // Setup
-        $uri = 'http://' . TestResources::accountName() . '.queue.core.windows.net';
-        $config = new Configuration();
-        $config->setProperty(QueueSettings::ACCOUNT_KEY, TestResources::accountKey());
-        $config->setProperty(QueueSettings::ACCOUNT_NAME, TestResources::accountName());        
-        $config->setProperty(QueueSettings::URI, $uri);
+        $options = new BlobServiceOptions();
+        $value = 10;
         
         // Test
-        $queueWrapper = QueueService::create($config);
+        $options->setTimeout($value);
         
         // Assert
-        $this->assertInstanceOf('PEAR2\\WindowsAzure\\Services\\Queue\\IQueue', $queueWrapper);
+        $this->assertEquals($value, $options->getTimeout());
+    }
+    
+    /**
+     * @covers PEAR2\WindowsAzure\Services\Blob\Models\BlobServiceOptions::getTimeout
+     */
+    public function testGetTimeout()
+    {
+        // Setup
+        $options = new BlobServiceOptions();
+        $value = 10;
+        $options->setTimeout($value);
+        
+        // Test
+        $actualValue = $options->getTimeout();
+        
+        // Assert
+        $this->assertEquals($value, $actualValue);
     }
 }
 

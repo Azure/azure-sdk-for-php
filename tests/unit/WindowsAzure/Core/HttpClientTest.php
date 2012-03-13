@@ -24,7 +24,7 @@
 
 use PEAR2\WindowsAzure\Services\Core\HttpClient;
 use PEAR2\WindowsAzure\Resources;
-use PEAR2\Tests\Unit\TestResources;
+use PEAR2\Tests\Framework\TestResources;
 use PEAR2\Tests\Mock\WindowsAzure\Services\Core\Filters\SimpleFilterMock;
 use PEAR2\WindowsAzure\Core\ServiceException;
 use \PEAR2\WindowsAzure\Core\InvalidArgumentTypeException;

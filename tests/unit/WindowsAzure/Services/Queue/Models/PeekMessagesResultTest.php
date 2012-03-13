@@ -23,7 +23,7 @@
  */
 
 use PEAR2\WindowsAzure\Services\Queue\Models\PeekMessagesResult;
-use PEAR2\Tests\Unit\TestResources;
+use PEAR2\Tests\Framework\TestResources;
 use PEAR2\WindowsAzure\Core\AzureUtilities;
 
 /**
