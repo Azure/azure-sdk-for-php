@@ -44,6 +44,7 @@ class Resources
     const NOT_IMPLEMENTED_MSG = 'This method is not implemented';
     const NULL_ERROR_MSG      = 'Value can\'t be NULL or empty.';
     const INVALID_URL_MSG     = 'Provided URL is invalid';
+    const INVALID_HT_MSG      = 'The header type provided is invalid';
 
     // HTTP Headers
     const X_MS_HEADER_PREFIX              = 'x-ms-';

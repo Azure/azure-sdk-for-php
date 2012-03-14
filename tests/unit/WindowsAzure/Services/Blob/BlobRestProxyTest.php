@@ -432,6 +432,28 @@ class BlobRestProxyTest extends BlobRestProxyTestBase
         $this->assertEquals($acl->getPublicAccess(), $actual->getContainerACL()->getPublicAccess());
         $this->assertEquals($acl->getSignedIdentifiers(), $actual->getContainerACL()->getSignedIdentifiers());
     }
+    
+    /**
+     * @covers PEAR2\WindowsAzure\Services\Blob\BlobRestProxy::setContainerMetadata
+     */
+    public function testSetContainerMetadata()
+    {
+        // Setup
+        $name     = 'setcontainermetadata';
+        $expected = array ('name1' => 'MyName1', 'mymetaname' => '12345', 'values' => 'Microsoft_');
+        $this->createContainer($name);
+        
+        // Test
+        $this->wrapper->setContainerMetadata($name, $expected);
+        
+        // Assert
+        $result = $this->wrapper->getContainerProperties($name);
+        $expectedEtag = $result->getEtag();
+        $expectedLastModified = $result->getLastModified();
+        $this->assertEquals($expectedEtag, $result->getEtag());
+        $this->assertEquals($expectedLastModified, $result->getLastModified());
+        $this->assertEquals($expected, $result->getMetadata());
+    }
 }
 
 ?>
