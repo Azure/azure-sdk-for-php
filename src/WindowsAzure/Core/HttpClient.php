@@ -15,14 +15,14 @@
  * PHP version 5
  * 
  * @category  Microsoft
- * @package   PEAR2\WindowsAzure\Services\Core
+ * @package   PEAR2\WindowsAzure\Core
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
  
-namespace PEAR2\WindowsAzure\Services\Core;
+namespace PEAR2\WindowsAzure\Core;
 use PEAR2\WindowsAzure\Core\IHttpClient;
 use PEAR2\WindowsAzure\Core\IServiceFilter;
 use PEAR2\WindowsAzure\Resources;
@@ -36,7 +36,7 @@ require_once 'HTTP/Request2.php';
  * HTTP client which sends and receives HTTP requests and responses.
  *
  * @category  Microsoft
- * @package   PEAR2\WindowsAzure\Services\Core
+ * @package   PEAR2\WindowsAzure\Core
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
@@ -72,7 +72,7 @@ class HttpClient implements IHttpClient
     /**
      * Constructor
      * 
-     * @return PEAR2\WindowsAzure\Services\Core\HttpClient
+     * @return PEAR2\WindowsAzure\Core\HttpClient
      */
     function __construct()
     {

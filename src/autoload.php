@@ -4,6 +4,7 @@ spl_autoload_register(
       static $classes = null;
       if ($classes === null) {
          $classes = array(
+            'pear2\\windowsazure\\core\\httpclient' => '/WindowsAzure/Core/HttpClient.php',
             'pear2\\windowsazure\\core\\ihttpclient' => '/WindowsAzure/Core/IHttpClient.php',
             'pear2\\windowsazure\\core\\invalidargumenttypeexception' => '/WindowsAzure/Core/InvalidArgumentTypeException.php',
             'pear2\\windowsazure\\core\\iservicefilter' => '/WindowsAzure/Core/IServiceFilter.php',
@@ -37,7 +38,6 @@ spl_autoload_register(
             'pear2\\windowsazure\\services\\core\\configuration' => '/WindowsAzure/Services/Core/Configuration.php',
             'pear2\\windowsazure\\services\\core\\filters\\datefilter' => '/WindowsAzure/Services/Core/Filters/DateFilter.php',
             'pear2\\windowsazure\\services\\core\\filters\\sharedkeyfilter' => '/WindowsAzure/Services/Core/Filters/SharedKeyFilter.php',
-            'pear2\\windowsazure\\services\\core\\httpclient' => '/WindowsAzure/Core/HttpClient.php',
             'pear2\\windowsazure\\services\\core\\iservicebuilder' => '/WindowsAzure/Services/Core/IServiceBuilder.php',
             'pear2\\windowsazure\\services\\core\\models\\getservicepropertiesresult' => '/WindowsAzure/Services/Core/Models/GetServicePropertiesResult.php',
             'pear2\\windowsazure\\services\\core\\models\\logging' => '/WindowsAzure/Services/Core/Models/Logging.php',

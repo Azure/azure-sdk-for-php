@@ -23,17 +23,17 @@
  */
  
 namespace PEAR2\WindowsAzure\Services\Core;
-
+use PEAR2\WindowsAzure\Resources;
+use PEAR2\WindowsAzure\Core\HttpClient;
 use PEAR2\WindowsAzure\Services\Core\IServiceBuilder;
 use PEAR2\WindowsAzure\Services\Core\Configuration;
+use PEAR2\WindowsAzure\Services\Core\Filters\SharedKeyFilter;
+use PEAR2\WindowsAzure\Services\Core\Filters\DateFilter;
+use PEAR2\WindowsAzure\Core\InvalidArgumentTypeException;
 use PEAR2\WindowsAzure\Services\Queue\QueueRestProxy;
 use PEAR2\WindowsAzure\Services\Queue\QueueSettings;
 use PEAR2\WindowsAzure\Services\Blob\BlobRestProxy;
 use PEAR2\WindowsAzure\Services\Blob\BlobSettings;
-use PEAR2\WindowsAzure\Services\Core\Filters\SharedKeyFilter;
-use PEAR2\WindowsAzure\Services\Core\Filters\DateFilter;
-use PEAR2\WindowsAzure\Resources;
-use PEAR2\WindowsAzure\Core\InvalidArgumentTypeException;
 
 /**
  * Builds azure service objects.

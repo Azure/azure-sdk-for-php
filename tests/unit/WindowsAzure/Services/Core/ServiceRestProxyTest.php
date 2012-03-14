@@ -23,7 +23,7 @@
  */
 
 use PEAR2\WindowsAzure\Services\Core\ServiceRestProxy;
-use PEAR2\WindowsAzure\Services\Core\HttpClient;
+use PEAR2\WindowsAzure\Core\HttpClient;
 use PEAR2\WindowsAzure\Core\Url;
 use PEAR2\Tests\Mock\WindowsAzure\Services\Core\Filters\SimpleFilterMock;
 use PEAR2\WindowsAzure\Services\Blob\Models\AccessCondition;

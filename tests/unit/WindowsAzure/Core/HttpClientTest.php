@@ -22,7 +22,7 @@
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
 
-use PEAR2\WindowsAzure\Services\Core\HttpClient;
+use PEAR2\WindowsAzure\Core\HttpClient;
 use PEAR2\WindowsAzure\Resources;
 use PEAR2\Tests\Framework\TestResources;
 use PEAR2\Tests\Mock\WindowsAzure\Services\Core\Filters\SimpleFilterMock;
@@ -43,7 +43,7 @@ use \PEAR2\WindowsAzure\Core\InvalidArgumentTypeException;
 class HttpClientTest extends PHPUnit_Framework_TestCase
 {
     /**
-     * @covers PEAR2\WindowsAzure\Services\Core\HttpClient::__construct
+     * @covers PEAR2\WindowsAzure\Core\HttpClient::__construct
      */
     public function test__construct()
     {
@@ -57,7 +57,7 @@ class HttpClientTest extends PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers PEAR2\WindowsAzure\Services\Core\HttpClient::setUrl
+     * @covers PEAR2\WindowsAzure\Core\HttpClient::setUrl
      */
     public function testSetUrl()
     {
@@ -73,7 +73,7 @@ class HttpClientTest extends PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers PEAR2\WindowsAzure\Services\Core\HttpClient::getUrl
+     * @covers PEAR2\WindowsAzure\Core\HttpClient::getUrl
      */
     public function testGetUrl()
     {
@@ -91,7 +91,7 @@ class HttpClientTest extends PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers PEAR2\WindowsAzure\Services\Core\HttpClient::setMethod
+     * @covers PEAR2\WindowsAzure\Core\HttpClient::setMethod
      */
     public function testSetMethod()
     {
@@ -107,7 +107,7 @@ class HttpClientTest extends PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers PEAR2\WindowsAzure\Services\Core\HttpClient::getMethod
+     * @covers PEAR2\WindowsAzure\Core\HttpClient::getMethod
      */
     public function testGetMethod()
     {
@@ -124,7 +124,7 @@ class HttpClientTest extends PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers PEAR2\WindowsAzure\Services\Core\HttpClient::setHeaders
+     * @covers PEAR2\WindowsAzure\Core\HttpClient::setHeaders
      */
     public function testSetHeaders()
     {
@@ -147,7 +147,7 @@ class HttpClientTest extends PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers PEAR2\WindowsAzure\Services\Core\HttpClient::getHeaders
+     * @covers PEAR2\WindowsAzure\Core\HttpClient::getHeaders
      */
     public function testGetHeaders()
     {
@@ -170,7 +170,7 @@ class HttpClientTest extends PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers PEAR2\WindowsAzure\Services\Core\HttpClient::setHeader
+     * @covers PEAR2\WindowsAzure\Core\HttpClient::setHeader
      */
     public function testSetHeaderNewHeader()
     {
@@ -187,7 +187,7 @@ class HttpClientTest extends PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers PEAR2\WindowsAzure\Services\Core\HttpClient::setHeader
+     * @covers PEAR2\WindowsAzure\Core\HttpClient::setHeader
      */
     public function testSetHeaderExistingHeaderReplace()
     {
@@ -205,7 +205,7 @@ class HttpClientTest extends PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers PEAR2\WindowsAzure\Services\Core\HttpClient::setHeader
+     * @covers PEAR2\WindowsAzure\Core\HttpClient::setHeader
      */
     public function testSetHeaderExistingHeaderAppend()
     {
@@ -224,7 +224,7 @@ class HttpClientTest extends PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers PEAR2\WindowsAzure\Services\Core\HttpClient::send
+     * @covers PEAR2\WindowsAzure\Core\HttpClient::send
      */
     public function testSendSimple()
     {
@@ -241,7 +241,7 @@ class HttpClientTest extends PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers PEAR2\WindowsAzure\Services\Core\HttpClient::send
+     * @covers PEAR2\WindowsAzure\Core\HttpClient::send
      */
     public function testSendWithContent()
     {
@@ -258,7 +258,7 @@ class HttpClientTest extends PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers PEAR2\WindowsAzure\Services\Core\HttpClient::send
+     * @covers PEAR2\WindowsAzure\Core\HttpClient::send
      */
     public function testSendWithOneFilter()
     {
@@ -281,7 +281,7 @@ class HttpClientTest extends PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers PEAR2\WindowsAzure\Services\Core\HttpClient::send
+     * @covers PEAR2\WindowsAzure\Core\HttpClient::send
      */
     public function testSendWithMultipleFilters()
     {
@@ -309,7 +309,7 @@ class HttpClientTest extends PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers PEAR2\WindowsAzure\Services\Core\HttpClient::send
+     * @covers PEAR2\WindowsAzure\Core\HttpClient::send
      */
     public function testSendFail()
     {
@@ -324,7 +324,7 @@ class HttpClientTest extends PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers PEAR2\WindowsAzure\Services\Core\HttpClient::setExpectedStatusCode
+     * @covers PEAR2\WindowsAzure\Core\HttpClient::setExpectedStatusCode
      */
     public function testSetSuccessfulStatusCodeSimple()
     {
@@ -340,7 +340,7 @@ class HttpClientTest extends PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers PEAR2\WindowsAzure\Services\Core\HttpClient::setExpectedStatusCode
+     * @covers PEAR2\WindowsAzure\Core\HttpClient::setExpectedStatusCode
      */
     public function testSetSuccessfulStatusCodeArray()
     {
@@ -356,7 +356,7 @@ class HttpClientTest extends PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers PEAR2\WindowsAzure\Services\Core\HttpClient::getSuccessfulStatusCode
+     * @covers PEAR2\WindowsAzure\Core\HttpClient::getSuccessfulStatusCode
      */
     public function testGetSuccessfulStatusCode()
     {
@@ -373,7 +373,7 @@ class HttpClientTest extends PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers PEAR2\WindowsAzure\Services\Core\HttpClient::setConfig
+     * @covers PEAR2\WindowsAzure\Core\HttpClient::setConfig
      */
     public function testSetConfig()
     {
@@ -390,7 +390,7 @@ class HttpClientTest extends PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers PEAR2\WindowsAzure\Services\Core\HttpClient::setConfig
+     * @covers PEAR2\WindowsAzure\Core\HttpClient::setConfig
      */
     public function testSetConfigNotStringNameFail()
     {
@@ -405,7 +405,7 @@ class HttpClientTest extends PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers PEAR2\WindowsAzure\Services\Core\HttpClient::setConfig
+     * @covers PEAR2\WindowsAzure\Core\HttpClient::setConfig
      */
     public function testSetConfigEmptyNameFail()
     {
@@ -420,7 +420,7 @@ class HttpClientTest extends PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers PEAR2\WindowsAzure\Services\Core\HttpClient::getConfig
+     * @covers PEAR2\WindowsAzure\Core\HttpClient::getConfig
      */
     public function testGetConfig()
     {
@@ -438,7 +438,7 @@ class HttpClientTest extends PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers PEAR2\WindowsAzure\Services\Core\HttpClient::setBody
+     * @covers PEAR2\WindowsAzure\Core\HttpClient::setBody
      */
     public function testSetBody()
     {
@@ -454,7 +454,7 @@ class HttpClientTest extends PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers PEAR2\WindowsAzure\Services\Core\HttpClient::getBody
+     * @covers PEAR2\WindowsAzure\Core\HttpClient::getBody
      */
     public function testGetBody()
     {
@@ -471,7 +471,7 @@ class HttpClientTest extends PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers PEAR2\WindowsAzure\Services\Core\HttpClient::__clone
+     * @covers PEAR2\WindowsAzure\Core\HttpClient::__clone
      */
     public function test__clone()
     {
@@ -491,7 +491,7 @@ class HttpClientTest extends PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers PEAR2\WindowsAzure\Services\Core\HttpClient::getResponse
+     * @covers PEAR2\WindowsAzure\Core\HttpClient::getResponse
      */
     public function testGetResponse()
     {
