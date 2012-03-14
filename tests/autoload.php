@@ -30,6 +30,7 @@ spl_autoload_register(
             'pear2\\tests\\unit\\windowsazure\\services\\blob\\models\\containerpropertiestest' => '/unit/WindowsAzure/Services/Blob/Models/ContainerPropertiesTest.php',
             'pear2\\tests\\unit\\windowsazure\\services\\blob\\models\\containertest' => '/unit/WindowsAzure/Services/Blob/Models/ContainerTest.php',
             'pear2\\tests\\unit\\windowsazure\\services\\blob\\models\\createcontaineroptionstest' => '/unit/WindowsAzure/Services/Blob/Models/CreateContainerOptionsTest.php',
+            'pear2\\tests\\unit\\windowsazure\\services\\blob\\models\\getcontainerpropertiesresulttest' => '/unit/WindowsAzure/Services/Blob/Models/GetContainerPropertiesResultTest.php',
             'pear2\\tests\\unit\\windowsazure\\services\\blob\\models\\listcontainersoptionstest' => '/unit/WindowsAzure/Services/Blob/Models/ListContainersOptionsTest.php',
             'pear2\\tests\\unit\\windowsazure\\services\\blob\\models\\listcontainersresulttest' => '/unit/WindowsAzure/Services/Blob/Models/ListContainersResultTest.php',
             'pear2\\tests\\unit\\windowsazure\\services\\core\\models\\loggingtest' => '/unit/WindowsAzure/Services/Core/Models/LoggingTest.php',
