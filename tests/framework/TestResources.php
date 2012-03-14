@@ -173,6 +173,60 @@ class TestResources
         
         return $sample;
     }
+    
+    public static function listContainersEmpty()
+    {
+        $sample = array();
+        $sample['Containers'] = '';
+        $sample['NextMarker'] = '';
+        
+        return $sample;
+    }
+    
+    public static function listContainersOneEntry()
+    {
+        $sample = array();
+        $sample['Marker'] = '/account/listqueueswithnextmarker3';
+        $sample['MaxResults'] = '2';
+        $sample['Containers'] = array('Container' => array(
+            'Name' => 'audio',
+            'Url' => 'http://myaccount.blob.core.windows.net/audio',
+            'Properties' => array(
+                'Last-Modified' => 'Wed, 12 Aug 2009 20:39:39 GMT',
+                'Etag' => '0x8CACB9BD7C6B1B2'
+            )
+            ));
+        $sample['NextMarker'] = '';
+        
+        return $sample;
+    }
+    
+    public static function listContainersMultipleEntries()
+    {
+        $sample = array();
+        $sample['MaxResults'] = '3';
+        $sample['Containers'] = array ('Container' => array(
+          0 => array(
+            'Name' => 'audio',
+            'Url' => 'http://myaccount.blob.core.windows.net/audio',
+            'Properties' => array(
+                'Last-Modified' => 'Wed, 12 Aug 2009 20:39:39 GMT',
+                'Etag' => '0x8CACB9BD7C6B1B2'
+            )
+            ),
+          1 => array(
+            'Name' => 'images',
+            'Url' => 'http://myaccount.blob.core.windows.net/images',
+            'Properties' => array(
+                'Last-Modified' => 'Wed, 12 Aug 2009 20:39:39 GMT',
+                'Etag' => '0x8CACB9BD7C1EEEC'
+            )
+            )
+        ));
+        $sample['NextMarker'] = 'video';
+        
+        return $sample;
+    }
 }
 
 ?>

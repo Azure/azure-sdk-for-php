@@ -15,14 +15,15 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   PEAR2\Tests\Unit\WindowsAzure
+ * @package   PEAR2\Tests\Unit\WindowsAzure\Services\Core\Models
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
 
-use PEAR2\WindowsAzure\Services\Queue\Models\RetentionPolicy;
+namespace PEAR2\Tests\Unit\WindowsAzure\Services\Core\Models;
+use PEAR2\WindowsAzure\Services\Core\Models\RetentionPolicy;
 use PEAR2\Tests\Framework\TestResources;
 use PEAR2\WindowsAzure\Utilities;
 
@@ -37,10 +38,10 @@ use PEAR2\WindowsAzure\Utilities;
  * @version   Release: @package_version@
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
-class RetentionPolicyTest extends PHPUnit_Framework_TestCase
+class RetentionPolicyTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @covers PEAR2\WindowsAzure\Services\Queue\Models\RetentionPolicy::create
+     * @covers PEAR2\WindowsAzure\Services\Core\Models\RetentionPolicy::create
      */
     public function testCreate()
     {
@@ -58,7 +59,7 @@ class RetentionPolicyTest extends PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers PEAR2\WindowsAzure\Services\Queue\Models\RetentionPolicy::getEnabled
+     * @covers PEAR2\WindowsAzure\Services\Core\Models\RetentionPolicy::getEnabled
      */
     public function testGetEnabled()
     {
@@ -76,7 +77,7 @@ class RetentionPolicyTest extends PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers PEAR2\WindowsAzure\Services\Queue\Models\RetentionPolicy::setEnabled
+     * @covers PEAR2\WindowsAzure\Services\Core\Models\RetentionPolicy::setEnabled
      */
     public function testSetEnabled()
     {
@@ -94,7 +95,7 @@ class RetentionPolicyTest extends PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers PEAR2\WindowsAzure\Services\Queue\Models\RetentionPolicy::getDays
+     * @covers PEAR2\WindowsAzure\Services\Core\Models\RetentionPolicy::getDays
      */
     public function testGetDays()
     {
@@ -112,7 +113,7 @@ class RetentionPolicyTest extends PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers PEAR2\WindowsAzure\Services\Queue\Models\RetentionPolicy::setDays
+     * @covers PEAR2\WindowsAzure\Services\Core\Models\RetentionPolicy::setDays
      */
     public function testSetDays()
     {
@@ -130,7 +131,7 @@ class RetentionPolicyTest extends PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers PEAR2\WindowsAzure\Services\Queue\Models\RetentionPolicy::toArray
+     * @covers PEAR2\WindowsAzure\Services\Core\Models\RetentionPolicy::toArray
      */
     public function testToArray()
     {
@@ -150,7 +151,7 @@ class RetentionPolicyTest extends PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers PEAR2\WindowsAzure\Services\Queue\Models\RetentionPolicy::toArray
+     * @covers PEAR2\WindowsAzure\Services\Core\Models\RetentionPolicy::toArray
      */
     public function testToArrayWithoutDays()
     {

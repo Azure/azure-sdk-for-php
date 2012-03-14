@@ -15,87 +15,37 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   PEAR2\WindowsAzure\Services\Queue\Models
+ * @package   PEAR2\WindowsAzure\Services\Core\Models
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
  
-namespace PEAR2\WindowsAzure\Services\Queue\Models;
-use PEAR2\WindowsAzure\Resources;
-use PEAR2\WindowsAzure\Services\Queue\Models\Queue;
-use PEAR2\WindowsAzure\Utilities;
+namespace PEAR2\WindowsAzure\Services\Core\Models;
+use PEAR2\WindowsAzure\Services\Core\Models\QueueServiceOptions;
+use \PEAR2\WindowsAzure\Validate;
 
 /**
- * Container to hold list queue response object.
+ * Options for listQueues API.
  *
  * @category  Microsoft
- * @package   PEAR2\WindowsAzure\Services\Queue\Models
+ * @package   PEAR2\WindowsAzure\Services\Core\Models
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @version   Release: @package_version@
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
-class ListQueueResult
+class ListQueuesOptions extends QueueServiceOptions
 {
-    private $_queues;
     private $_prefix;
     private $_marker;
-    private $_nextMarker;
     private $_maxResults;
+    private $_includeMetadata;
 
     /**
-     * Creates ListQueueResult object from parsed XML response.
-     *
-     * @param array $parsedResponse XML response parsed into array.
-     * 
-     * @return PEAR2\WindowsAzure\Services\Queue\Models\ListQueueResult.
-     */
-    public static function create($parsedResponse)
-    {
-        $result              = new ListQueueResult();
-        $result->_prefix     = Utilities::tryGetValue(
-            $parsedResponse, Resources::PREFIX
-        );
-        $result->_marker     = Utilities::tryGetValue(
-            $parsedResponse, Resources::MARKER
-        );
-        $result->_nextMarker = Utilities::tryGetValue(
-            $parsedResponse, Resources::NEXT_MARKER
-        );
-        $result->_maxResults = Utilities::tryGetValue(
-            $parsedResponse, Resources::MAX_RESULTS
-        );
-        $result->_queues     = array();
-        $rawQueues           = array();
-        
-        if (is_array($parsedResponse['Queues'])) {
-            $rawQueues = Utilities::getArray($parsedResponse['Queues']['Queue']);
-        }
-        
-        foreach ($rawQueues as $value) {
-            $queue = new Queue($value['Name'], $value['Url']);
-            $queue->setMetadata(Utilities::tryGetValue($value, Resources::METADATA));
-            $result->_queues[] = $queue;
-        }
-        
-        return $result;
-    }
-
-    /**
-     * Gets queues.
-     *
-     * @return array.
-     */
-    public function getQueues()
-    {
-        return $this->_queues;
-    }
-
-    /**
-     * Gets perfix.
+     * Gets prefix.
      *
      * @return string.
      */
@@ -113,6 +63,7 @@ class ListQueueResult
      */
     public function setPrefix($prefix)
     {
+        Validate::isString($prefix);
         $this->_prefix = $prefix;
     }
 
@@ -135,6 +86,7 @@ class ListQueueResult
      */
     public function setMarker($marker)
     {
+        Validate::isString($marker);
         $this->_marker = $marker;
     }
 
@@ -157,29 +109,31 @@ class ListQueueResult
      */
     public function setMaxResults($maxResults)
     {
+        Validate::isString($maxResults);
         $this->_maxResults = $maxResults;
     }
 
     /**
-     * Gets next marker.
+     * Indicates if metadata is included or not.
      * 
      * @return string.
      */
-    public function getNextMarker()
+    public function getIncludeMetadata()
     {
-        return $this->_nextMarker;
+        return $this->_includeMetadata;
     }
 
     /**
-     * Sets next marker.
+     * Sets the include metadata flag.
      *
-     * @param string $nextMarker value.
+     * @param bool $includeMetadata value.
      * 
      * @return none.
      */
-    public function setNextMarker($nextMarker)
+    public function setIncludeMetadata($includeMetadata)
     {
-        $this->_nextMarker = $nextMarker;
+        Validate::isBoolean($includeMetadata);
+        $this->_includeMetadata = $includeMetadata;
     }
 }
 

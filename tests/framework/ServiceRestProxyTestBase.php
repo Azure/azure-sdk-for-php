@@ -24,7 +24,7 @@
 namespace Tests\Framework;
 use PEAR2\WindowsAzure\Services\Core\Configuration;
 use PEAR2\Tests\Framework\TestResources;
-use PEAR2\WindowsAzure\Services\Queue\Models\ServiceProperties;
+use PEAR2\WindowsAzure\Services\Core\Models\ServiceProperties;
 
 /**
  * TestBase class for each unit test class.

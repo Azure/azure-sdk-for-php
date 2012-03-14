@@ -15,34 +15,36 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   PEAR2\Tests\Unit\WindowsAzure
+ * @package   PEAR2\Tests\Unit\WindowsAzure\Services\Core\Models
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
 
-use \ServicePropertiesTest;
+namespace PEAR2\Tests\Unit\WindowsAzure\Services\Core\Models;
 use PEAR2\Tests\Framework\TestResources;
-use PEAR2\WindowsAzure\Services\Queue\Models\Logging;
-use PEAR2\WindowsAzure\Services\Queue\Models\Metrics;
-use PEAR2\WindowsAzure\Services\Queue\Models\ServiceProperties;
+use PEAR2\WindowsAzure\Utilities;
+use PEAR2\WindowsAzure\Services\Core\Models\Logging;
+use PEAR2\WindowsAzure\Services\Core\Models\Metrics;
+use PEAR2\WindowsAzure\Services\Core\Models\ServiceProperties;
+use PEAR2\WindowsAzure\Services\Core\Models\GetServicePropertiesResult;
 
 /**
  * Unit tests for class ServiceProperties
  *
  * @category  Microsoft
- * @package   PEAR2\Tests\Unit\WindowsAzure
+ * @package   PEAR2\Tests\Unit\WindowsAzure\Services\Core\Models
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @version   Release: @package_version@
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
-class ServicePropertiesTest extends PHPUnit_Framework_TestCase
+class ServicePropertiesTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @covers PEAR2\WindowsAzure\Services\Queue\Models\ServiceProperties::create
+     * @covers PEAR2\WindowsAzure\Services\Core\Models\ServiceProperties::create
      */
     public function testCreate()
     {
@@ -60,7 +62,7 @@ class ServicePropertiesTest extends PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers PEAR2\WindowsAzure\Services\Queue\Models\ServiceProperties::setLogging
+     * @covers PEAR2\WindowsAzure\Services\Core\Models\ServiceProperties::setLogging
      */
     public function testSetLogging()
     {
@@ -77,7 +79,7 @@ class ServicePropertiesTest extends PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers PEAR2\WindowsAzure\Services\Queue\Models\ServiceProperties::getLogging
+     * @covers PEAR2\WindowsAzure\Services\Core\Models\ServiceProperties::getLogging
      */
     public function testGetLogging()
     {
@@ -95,7 +97,7 @@ class ServicePropertiesTest extends PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers PEAR2\WindowsAzure\Services\Queue\Models\ServiceProperties::setMetrics
+     * @covers PEAR2\WindowsAzure\Services\Core\Models\ServiceProperties::setMetrics
      */
     public function testSetMetrics()
     {
@@ -112,7 +114,7 @@ class ServicePropertiesTest extends PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers PEAR2\WindowsAzure\Services\Queue\Models\ServiceProperties::getMetrics
+     * @covers PEAR2\WindowsAzure\Services\Core\Models\ServiceProperties::getMetrics
      */
     public function testGetMetrics()
     {
@@ -130,7 +132,7 @@ class ServicePropertiesTest extends PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers PEAR2\WindowsAzure\Services\Queue\Models\ServiceProperties::toArray
+     * @covers PEAR2\WindowsAzure\Services\Core\Models\ServiceProperties::toArray
      */
     public function testToArray()
     {
@@ -149,7 +151,7 @@ class ServicePropertiesTest extends PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers PEAR2\WindowsAzure\Services\Queue\Models\ServiceProperties::toXml
+     * @covers PEAR2\WindowsAzure\Services\Core\Models\ServiceProperties::toXml
      */
     public function testToXml()
     {
@@ -160,8 +162,8 @@ class ServicePropertiesTest extends PHPUnit_Framework_TestCase
         $actual = $properties->toXml();
         
         // Assert
-        $actualParsed = PEAR2\WindowsAzure\Utilities::unserialize($actual);
-        $actualProperties = \PEAR2\WindowsAzure\Services\Queue\Models\GetServicePropertiesResult::create($actualParsed);
+        $actualParsed = Utilities::unserialize($actual);
+        $actualProperties = GetServicePropertiesResult::create($actualParsed);
         $this->assertEquals($actualProperties->getValue(), $properties);
     }
 }
