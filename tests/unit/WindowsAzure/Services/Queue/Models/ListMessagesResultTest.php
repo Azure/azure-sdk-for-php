@@ -22,7 +22,7 @@
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
 
-use PEAR2\WindowsAzure\Services\Core\Models\ListMessagesResult;
+use PEAR2\WindowsAzure\Services\Queue\Models\ListMessagesResult;
 use PEAR2\Tests\Framework\TestResources;
 use PEAR2\WindowsAzure\Core\AzureUtilities;
 
@@ -40,7 +40,7 @@ use PEAR2\WindowsAzure\Core\AzureUtilities;
 class ListMessagesResultTest extends PHPUnit_Framework_TestCase
 {
     /**
-     * @covers PEAR2\WindowsAzure\Services\Core\Models\ListMessagesResult::create
+     * @covers PEAR2\WindowsAzure\Services\Queue\Models\ListMessagesResult::create
      */
     public function testCreate()
     {
@@ -64,7 +64,7 @@ class ListMessagesResultTest extends PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers PEAR2\WindowsAzure\Services\Core\Models\ListMessagesResult::create
+     * @covers PEAR2\WindowsAzure\Services\Queue\Models\ListMessagesResult::create
      */
     public function testCreateMultiple()
     {
@@ -95,7 +95,7 @@ class ListMessagesResultTest extends PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers PEAR2\WindowsAzure\Services\Core\Models\ListMessagesResult::getQueueMessages
+     * @covers PEAR2\WindowsAzure\Services\Queue\Models\ListMessagesResult::getQueueMessages
      */
     public function testGetQueueMessages()
     {
@@ -114,7 +114,7 @@ class ListMessagesResultTest extends PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers PEAR2\WindowsAzure\Services\Core\Models\ListMessagesResult::setQueueMessages
+     * @covers PEAR2\WindowsAzure\Services\Queue\Models\ListMessagesResult::setQueueMessages
      */
     public function testSetQueueMessages()
     {

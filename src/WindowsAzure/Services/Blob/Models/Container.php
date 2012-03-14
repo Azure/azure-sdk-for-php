@@ -39,9 +39,24 @@ use PEAR2\WindowsAzure\Utilities;
  */
 class Container
 {
+    /**
+     * @var string
+     */
     private $_name;
+    
+    /**
+     * @var string
+     */
     private $_url;
+    
+    /**
+     * @var array
+     */
     private $_metadata;
+    
+    /**
+     * @var ContainerProperties
+     */
     private $_properties;
 
     /**
@@ -101,7 +116,7 @@ class Container
     /**
      * Sets container metadata.
      *
-     * @param string $metadata value.
+     * @param array $metadata value.
      * 
      * @return none.
      */
@@ -113,7 +128,7 @@ class Container
     /**
      * Gets container properties
      * 
-     * @return PEAR2\WindowsAzure\Services\Blob\Models\ContainerProperties
+     * @return ContainerProperties
      */
     public function getProperties()
     {
@@ -123,7 +138,7 @@ class Container
     /**
      * Sets container properties
      * 
-     * @param Models\ContainerProperties $properties container properties
+     * @param ContainerProperties $properties container properties
      * 
      * @return none.
      */

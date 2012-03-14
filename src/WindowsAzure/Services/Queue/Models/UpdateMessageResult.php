@@ -15,20 +15,21 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   PEAR2\WindowsAzure\Services\Core\Models
+ * @package   PEAR2\WindowsAzure\Services\Queue\Models
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
  
-namespace PEAR2\WindowsAzure\Services\Core\Models;
+namespace PEAR2\WindowsAzure\Services\Queue\Models;
+use PEAR2\WindowsAzure\Validate;
 
 /**
  * Holds results of updateMessage wrapper.
  *
  * @category  Microsoft
- * @package   PEAR2\WindowsAzure\Services\Core\Models
+ * @package   PEAR2\WindowsAzure\Services\Queue\Models
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
@@ -73,7 +74,7 @@ class UpdateMessageResult
      */
     public function setTimeNextVisible($timeNextVisible)
     {
-        \PEAR2\WindowsAzure\Validate::isDate($timeNextVisible);
+        Validate::isDate($timeNextVisible);
         
         $this->_timeNextVisible = $timeNextVisible;
     }
@@ -97,7 +98,7 @@ class UpdateMessageResult
      */
     public function setPopReceipt($popReceipt)
     {
-        \PEAR2\WindowsAzure\Validate::notNullOrEmpty($popReceipt);
+        Validate::notNullOrEmpty($popReceipt);
         $this->_popReceipt = $popReceipt;
     }
 }

@@ -119,14 +119,13 @@ class HttpClient implements IHttpClient
     }
 
     /**
-     * Gets request url.
+     * Gets request url. Note that you must check if the retruend object is null or
+     * not.
      *
      * @return PEAR2\WindowsAzure\Core\IUrl
      */ 
     public function getUrl()
     {
-        Validate::notNullOrEmpty($this->_requestUrl);
-        
         return $this->_requestUrl;
     }
 
