@@ -22,8 +22,8 @@
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
 
-use PEAR2\WindowsAzure\Services\Queue\Models\GetServicePropertiesResult;
-use PEAR2\WindowsAzure\Services\Queue\Models\ServiceProperties;
+use PEAR2\WindowsAzure\Services\Core\Models\GetServicePropertiesResult;
+use PEAR2\WindowsAzure\Services\Core\Models\ServiceProperties;
 use PEAR2\Tests\Framework\TestResources;
 
 /**
@@ -40,7 +40,7 @@ use PEAR2\Tests\Framework\TestResources;
 class GetServicePropertiesResultTest extends PHPUnit_Framework_TestCase
 {
     /**
-     * @covers PEAR2\WindowsAzure\Services\Queue\Models\GetServicePropertiesResult::create
+     * @covers PEAR2\WindowsAzure\Services\Core\Models\GetServicePropertiesResult::create
      */
     public function testCreate()
     {
@@ -53,7 +53,7 @@ class GetServicePropertiesResultTest extends PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers PEAR2\WindowsAzure\Services\Queue\Models\GetServicePropertiesResult::getValue
+     * @covers PEAR2\WindowsAzure\Services\Core\Models\GetServicePropertiesResult::getValue
      */
     public function testGetValue()
     {
@@ -70,7 +70,7 @@ class GetServicePropertiesResultTest extends PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers PEAR2\WindowsAzure\Services\Queue\Models\GetServicePropertiesResult::setValue
+     * @covers PEAR2\WindowsAzure\Services\Core\Models\GetServicePropertiesResult::setValue
      */
     public function testSetValue()
     {

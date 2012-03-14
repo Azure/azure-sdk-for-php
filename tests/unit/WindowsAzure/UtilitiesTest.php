@@ -181,7 +181,7 @@ class UtilitiesTest extends PHPUnit_Framework_TestCase
     {
         // Setup
         $propertiesSample = TestResources::getServicePropertiesSample();
-        $properties = \PEAR2\WindowsAzure\Services\Queue\Models\ServiceProperties::create($propertiesSample);
+        $properties = \PEAR2\WindowsAzure\Services\Core\Models\ServiceProperties::create($propertiesSample);
         $xml = $properties->toXml();
         $expected = $properties->toArray();
         
@@ -198,12 +198,12 @@ class UtilitiesTest extends PHPUnit_Framework_TestCase
     {
         // Setup
         $propertiesSample = TestResources::getServicePropertiesSample();
-        $properties = \PEAR2\WindowsAzure\Services\Queue\Models\ServiceProperties::create($propertiesSample);
+        $properties = \PEAR2\WindowsAzure\Services\Core\Models\ServiceProperties::create($propertiesSample);
         $expected = $properties->toXml();
         $array = $properties->toArray();
         
         // Test
-        $actual = Utilities::serialize($array, \PEAR2\WindowsAzure\Services\Queue\Models\ServiceProperties::$xmlRootName);
+        $actual = Utilities::serialize($array, \PEAR2\WindowsAzure\Services\Core\Models\ServiceProperties::$xmlRootName);
         
         $this->assertEquals($expected, $actual);
     }

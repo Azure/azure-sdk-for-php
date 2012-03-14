@@ -22,7 +22,7 @@
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
 
-use PEAR2\WindowsAzure\Services\Queue\Models\PeekMessagesResult;
+use PEAR2\WindowsAzure\Services\Core\Models\PeekMessagesResult;
 use PEAR2\Tests\Framework\TestResources;
 use PEAR2\WindowsAzure\Core\AzureUtilities;
 
@@ -40,7 +40,7 @@ use PEAR2\WindowsAzure\Core\AzureUtilities;
 class PeekMessagesResultTest extends PHPUnit_Framework_TestCase
 {
     /**
-     * @covers PEAR2\WindowsAzure\Services\Queue\Models\PeekMessagesResult::create
+     * @covers PEAR2\WindowsAzure\Services\Core\Models\PeekMessagesResult::create
      */
     public function testCreate()
     {
@@ -62,7 +62,7 @@ class PeekMessagesResultTest extends PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers PEAR2\WindowsAzure\Services\Queue\Models\PeekMessagesResult::create
+     * @covers PEAR2\WindowsAzure\Services\Core\Models\PeekMessagesResult::create
      */
     public function testCreateMultiple()
     {
@@ -89,7 +89,7 @@ class PeekMessagesResultTest extends PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers PEAR2\WindowsAzure\Services\Queue\Models\PeekMessagesResult::getQueueMessages
+     * @covers PEAR2\WindowsAzure\Services\Core\Models\PeekMessagesResult::getQueueMessages
      */
     public function testGetQueueMessages()
     {
@@ -108,7 +108,7 @@ class PeekMessagesResultTest extends PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers PEAR2\WindowsAzure\Services\Queue\Models\PeekMessagesResult::setQueueMessages
+     * @covers PEAR2\WindowsAzure\Services\Core\Models\PeekMessagesResult::setQueueMessages
      */
     public function testSetQueueMessages()
     {

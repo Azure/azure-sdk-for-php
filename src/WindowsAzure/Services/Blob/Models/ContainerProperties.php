@@ -15,65 +15,73 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   PEAR2\WindowsAzure\Services\Core\Models
+ * @package   PEAR2\WindowsAzure\Services\Blob\Models
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
  
-namespace PEAR2\WindowsAzure\Services\Core\Models;
+namespace PEAR2\WindowsAzure\Services\Blob\Models;
 
 /**
- * Optional parameters for Create Queue REST API.
+ * Holds container properties fields
  *
  * @category  Microsoft
- * @package   PEAR2\WindowsAzure\Services\Core\Models
+ * @package   PEAR2\WindowsAzure\Services\Blob\Models
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @version   Release: @package_version@
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
-class CreateQueueOptions
+class ContainerProperties
 {
-    private $_metadata;
+    private $_lastModified;
+    private $_etag;
     
     /**
-     * Gets user defined metadata.
-     * 
-     * @return array.
+     * Gets container lastModified.
+     *
+     * @return \DateTime.
      */
-    public function getMetadata()
+    public function getLastModified()
     {
-        return $this->_metadata;
+        return $this->_lastModified;
     }
-    
+
     /**
-     * Sets user defined metadata. This metadata should be added without the header
-     * prefix (x-ms-meta-*).
-     * 
-     * @param array $metadata user defined metadata object in array form.
+     * Sets container lastModified.
+     *
+     * @param \DateTime $lastModified value.
      * 
      * @return none.
      */
-    public function setMetadata($metadata)
+    public function setLastModified($lastModified)
     {
-        $this->_metadata = $metadata;
+        $this->_lastModified = $lastModified;
     }
     
     /**
-     * Adds new metadata element. This element should be added without the header
-     * prefix (x-ms-meta-*).
-     * 
-     * @param string $key   metadata key element.
-     * @param string $value metadata value element.
+     * Gets container etag.
+     *
+     * @return string.
+     */
+    public function getEtag()
+    {
+        return $this->_etag;
+    }
+
+    /**
+     * Sets container etag.
+     *
+     * @param string $etag value.
      * 
      * @return none.
      */
-    public function addMetadata($key, $value)
+    public function setEtag($etag)
     {
-        $this->_metadata[$key] = $value;
+        $this->_etag = $etag;
     }
 }
 

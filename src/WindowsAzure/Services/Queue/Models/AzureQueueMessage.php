@@ -15,14 +15,14 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   PEAR2\WindowsAzure\Services\Queue\Models
+ * @package   PEAR2\WindowsAzure\Services\Core\Models
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
  
-namespace PEAR2\WindowsAzure\Services\Queue\Models;
+namespace PEAR2\WindowsAzure\Services\Core\Models;
 use PEAR2\WindowsAzure\Resources;
 use PEAR2\WindowsAzure\Core\AzureUtilities;
 
@@ -30,7 +30,7 @@ use PEAR2\WindowsAzure\Core\AzureUtilities;
  * Holds data for single Azure queue message.
  *
  * @category  Microsoft
- * @package   PEAR2\WindowsAzure\Services\Queue\Models
+ * @package   PEAR2\WindowsAzure\Services\Core\Models
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
@@ -96,7 +96,7 @@ class AzureQueueMessage
      *
      * @param array $parsedResponse XML response parsed into array.
      * 
-     * @return PEAR2\WindowsAzure\Services\Queue\Models\AzureQueueMessage.
+     * @return PEAR2\WindowsAzure\Services\Core\Models\AzureQueueMessage.
      */
     public static function createFromListMessages($parsedResponse)
     {
@@ -115,7 +115,7 @@ class AzureQueueMessage
      *
      * @param array $parsedResponse XML response parsed into array.
      * 
-     * @return PEAR2\WindowsAzure\Services\Queue\Models\AzureQueueMessage.
+     * @return PEAR2\WindowsAzure\Services\Core\Models\AzureQueueMessage.
      */
     public static function createFromPeekMessages($parsedResponse)
     {

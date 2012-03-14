@@ -22,7 +22,7 @@
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
 
-use PEAR2\WindowsAzure\Services\Queue\Models\PeekMessagesOptions;
+use PEAR2\WindowsAzure\Services\Core\Models\PeekMessagesOptions;
 
 /**
  * Unit tests for class PeekMessagesOptions
@@ -38,7 +38,7 @@ use PEAR2\WindowsAzure\Services\Queue\Models\PeekMessagesOptions;
 class PeekMessagesOptionsTest extends PHPUnit_Framework_TestCase
 {
     /**
-     * @covers PEAR2\WindowsAzure\Services\Queue\Models\PeekMessagesOptions::getNumberOfMessages
+     * @covers PEAR2\WindowsAzure\Services\Core\Models\PeekMessagesOptions::getNumberOfMessages
      */
     public function testGetNumberOfMessages()
     {
@@ -55,7 +55,7 @@ class PeekMessagesOptionsTest extends PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers PEAR2\WindowsAzure\Services\Queue\Models\PeekMessagesOptions::setNumberOfMessages
+     * @covers PEAR2\WindowsAzure\Services\Core\Models\PeekMessagesOptions::setNumberOfMessages
      */
     public function testSetNumberOfMessages()
     {

@@ -15,33 +15,33 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   PEAR2\Tests\Unit\WindowsAzure
+ * @package   PEAR2\Tests\Unit\WindowsAzure\Services\Core\Models
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
-
-use PEAR2\WindowsAzure\Services\Queue\Models\Logging;
+namespace PEAR2\Tests\Unit\WindowsAzure\Services\Core\Models;
+use PEAR2\WindowsAzure\Services\Core\Models\Logging;
 use PEAR2\Tests\Framework\TestResources;
-use PEAR2\WindowsAzure\Services\Queue\Models\RetentionPolicy;
+use PEAR2\WindowsAzure\Services\Core\Models\RetentionPolicy;
 use PEAR2\WindowsAzure\Utilities;
 
 /**
  * Unit tests for class Logging
  *
  * @category  Microsoft
- * @package   PEAR2\Tests\Unit\WindowsAzure
+ * @package   PEAR2\Tests\Unit\WindowsAzure\Services\Core\Models
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @version   Release: @package_version@
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
-class LoggingTest extends PHPUnit_Framework_TestCase
+class LoggingTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @covers PEAR2\WindowsAzure\Services\Queue\Models\Logging::create
+     * @covers PEAR2\WindowsAzure\Services\Core\Models\Logging::create
      */
     public function testCreate()
     {
@@ -60,7 +60,7 @@ class LoggingTest extends PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers PEAR2\WindowsAzure\Services\Queue\Models\Logging::getRetentionPolicy
+     * @covers PEAR2\WindowsAzure\Services\Core\Models\Logging::getRetentionPolicy
      */
     public function testGetRetentionPolicy()
     {
@@ -78,7 +78,7 @@ class LoggingTest extends PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers PEAR2\WindowsAzure\Services\Queue\Models\Logging::setRetentionPolicy
+     * @covers PEAR2\WindowsAzure\Services\Core\Models\Logging::setRetentionPolicy
      */
     public function testSetRetentionPolicy()
     {
@@ -96,7 +96,7 @@ class LoggingTest extends PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers PEAR2\WindowsAzure\Services\Queue\Models\Logging::getWrite
+     * @covers PEAR2\WindowsAzure\Services\Core\Models\Logging::getWrite
      */
     public function testGetWrite()
     {
@@ -114,7 +114,7 @@ class LoggingTest extends PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers PEAR2\WindowsAzure\Services\Queue\Models\Logging::setWrite
+     * @covers PEAR2\WindowsAzure\Services\Core\Models\Logging::setWrite
      */
     public function testSetWrite()
     {
@@ -132,7 +132,7 @@ class LoggingTest extends PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers PEAR2\WindowsAzure\Services\Queue\Models\Logging::getRead
+     * @covers PEAR2\WindowsAzure\Services\Core\Models\Logging::getRead
      */
     public function testGetRead()
     {
@@ -150,7 +150,7 @@ class LoggingTest extends PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers PEAR2\WindowsAzure\Services\Queue\Models\Logging::setRead
+     * @covers PEAR2\WindowsAzure\Services\Core\Models\Logging::setRead
      */
     public function testSetRead()
     {
@@ -168,7 +168,7 @@ class LoggingTest extends PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers PEAR2\WindowsAzure\Services\Queue\Models\Logging::getDelete
+     * @covers PEAR2\WindowsAzure\Services\Core\Models\Logging::getDelete
      */
     public function testGetDelete()
     {
@@ -186,7 +186,7 @@ class LoggingTest extends PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers PEAR2\WindowsAzure\Services\Queue\Models\Logging::setDelete
+     * @covers PEAR2\WindowsAzure\Services\Core\Models\Logging::setDelete
      */
     public function testSetDelete()
     {
@@ -204,7 +204,7 @@ class LoggingTest extends PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers PEAR2\WindowsAzure\Services\Queue\Models\Logging::getVersion
+     * @covers PEAR2\WindowsAzure\Services\Core\Models\Logging::getVersion
      */
     public function testGetVersion()
     {
@@ -222,7 +222,7 @@ class LoggingTest extends PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers PEAR2\WindowsAzure\Services\Queue\Models\Logging::setVersion
+     * @covers PEAR2\WindowsAzure\Services\Core\Models\Logging::setVersion
      */
     public function testSetVersion()
     {
@@ -240,7 +240,7 @@ class LoggingTest extends PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers PEAR2\WindowsAzure\Services\Queue\Models\Logging::toArray
+     * @covers PEAR2\WindowsAzure\Services\Core\Models\Logging::toArray
      */
     public function testToArray()
     {
