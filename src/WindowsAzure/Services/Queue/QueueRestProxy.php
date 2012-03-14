@@ -43,7 +43,7 @@ use PEAR2\WindowsAzure\Services\Queue\Models\UpdateMessageResult;
 use PEAR2\WindowsAzure\Core\IHttpClient;
 use PEAR2\WindowsAzure\Utilities;
 use PEAR2\WindowsAzure\Core\Url;
-use PEAR2\WindowsAzure\Core\AzureUtilities;
+use PEAR2\WindowsAzure\Core\WindowsAzureUtilities;
 
 /**
  * This class constructs HTTP requests and receive HTTP responses for queue 
@@ -190,7 +190,7 @@ class QueueRestProxy extends ServiceRestProxy implements IQueue
             $createQueueOptions = new CreateQueueOptions();
         }
 
-        $metadataHeaders = AzureUtilities::generateMetadataHeaders(
+        $metadataHeaders = WindowsAzureUtilities::generateMetadataHeaders(
             $createQueueOptions->getMetadata()
         );
         $headers         = $metadataHeaders;
@@ -284,7 +284,7 @@ class QueueRestProxy extends ServiceRestProxy implements IQueue
             $method, $headers, $queryParams, $path, $statusCode, $body, $config
         );
         
-        $metadata = AzureUtilities::getMetadataArray($response->getHeader());
+        $metadata = WindowsAzureUtilities::getMetadataArray($response->getHeader());
         $maxCount = intval(
             $response->getHeader(Resources::X_MS_APPROXIMATE_MESSAGES_COUNT)
         );
@@ -414,7 +414,7 @@ class QueueRestProxy extends ServiceRestProxy implements IQueue
         $config[Resources::CONNECT_TIMEOUT] = $queueServiceOptions->getTimeout();
         $queryParams['comp']                = 'metadata';
         
-        $metadataHeaders = AzureUtilities::generateMetadataHeaders($metadata);
+        $metadataHeaders = WindowsAzureUtilities::generateMetadataHeaders($metadata);
         $headers         = $metadataHeaders;
         
         $this->send(
@@ -511,7 +511,7 @@ class QueueRestProxy extends ServiceRestProxy implements IQueue
         $popReceipt      = $response->getHeader(Resources::X_MS_POPRECEIPT);
         $timeNextVisible = $response->getHeader(Resources::X_MS_TIME_NEXT_VISIBLE);
         
-        $date   = AzureUtilities::windowsAzureDateToDateTime($timeNextVisible);
+        $date   = WindowsAzureUtilities::rfc1123ToDateTime($timeNextVisible);
         $result = new UpdateMessageResult();
         $result->setPopReceipt($popReceipt);
         $result->setTimeNextVisible($date);

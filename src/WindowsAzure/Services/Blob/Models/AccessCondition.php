@@ -26,7 +26,7 @@ namespace PEAR2\WindowsAzure\Services\Blob\Models;
 use PEAR2\WindowsAzure\Services\Blob\Models\AccessConditionHeaderType;
 use PEAR2\WindowsAzure\Validate;
 use PEAR2\WindowsAzure\Resources;
-use PEAR2\WindowsAzure\Core\AzureUtilities;
+use PEAR2\WindowsAzure\Core\WindowsAzureUtilities;
 
 /**
  * Represents a set of access conditions to be used for operations against the 
@@ -122,7 +122,7 @@ class AccessCondition
     {
         return new AccessCondition(
             AccessConditionHeaderType::IF_MODIFIED_SINCE,
-            AzureUtilities::windowsAzureDateToDateTime($lastModified)
+            WindowsAzureUtilities::rfc1123ToDateTime($lastModified)
         );
     }
     
@@ -170,7 +170,7 @@ class AccessCondition
     {
         return new AccessCondition(
             AccessConditionHeaderType::IF_UNMODIFIED_SINCE,
-            AzureUtilities::windowsAzureDateToDateTime($lastModified)
+            WindowsAzureUtilities::rfc1123ToDateTime($lastModified)
         );
     }
     

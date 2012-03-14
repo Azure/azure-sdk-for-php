@@ -27,7 +27,7 @@ use PEAR2\WindowsAzure\Resources;
 use PEAR2\WindowsAzure\Utilities;
 
 /**
- * Azure queue object.
+ * WindowsAzure queue object.
  *
  * @category  Microsoft
  * @package   PEAR2\WindowsAzure\Services\Queue\Models

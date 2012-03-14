@@ -6,8 +6,6 @@ spl_autoload_register(
       static $classes = null;
       if ($classes === null) {
          $classes = array(
-            'azurequeuemessagetest' => '/unit/WindowsAzure/Services/Queue/Models/AzureQueueMessageTest.php',
-            'azureutilitiestest' => '/unit/WindowsAzure/Core/AzureUtilitiesTest.php',
             'blobrestproxytest' => '/unit/WindowsAzure/Services/Blob/BlobRestProxyTest.php',
             'blobservicetest' => '/unit/WindowsAzure/Services/Blob/BlobServiceTest.php',
             'configurationtest' => '/unit/WindowsAzure/Services/Core/ConfigurationTest.php',
@@ -63,7 +61,9 @@ spl_autoload_register(
             'updatemessageresulttest' => '/unit/WindowsAzure/Services/Queue/Models/UpdateMessageResultTest.php',
             'urltest' => '/unit/WindowsAzure/Core/UrlTest.php',
             'utilitiestest' => '/unit/WindowsAzure/UtilitiesTest.php',
-            'validatetest' => '/unit/WindowsAzure/ValidateTest.php'
+            'validatetest' => '/unit/WindowsAzure/ValidateTest.php',
+            'windowsazurequeuemessagetest' => '/unit/WindowsAzure/Services/Queue/Models/WindowsAzureQueueMessageTest.php',
+            'windowsazureutilitiestest' => '/unit/WindowsAzure/Core/WindowsAzureUtilitiesTest.php'
           );
       }
       $cn = strtolower($class);

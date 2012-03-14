@@ -23,7 +23,7 @@
  */
 
 use PEAR2\WindowsAzure\Services\Queue\Models\UpdateMessageResult;
-use PEAR2\WindowsAzure\Core\AzureUtilities;
+use PEAR2\WindowsAzure\Core\WindowsAzureUtilities;
 
 /**
  * Unit tests for class UpdateMessageResult
@@ -79,7 +79,7 @@ class UpdateMessageResultTest extends PHPUnit_Framework_TestCase
     {
         // Setup
         $updateMessageResult = new UpdateMessageResult();
-        $expected = AzureUtilities::windowsAzureDateToDateTime('Fri, 09 Oct 2009 23:29:20 GMT');
+        $expected = WindowsAzureUtilities::rfc1123ToDateTime('Fri, 09 Oct 2009 23:29:20 GMT');
         $updateMessageResult->setTimeNextVisible($expected);
         
         // Test
@@ -96,7 +96,7 @@ class UpdateMessageResultTest extends PHPUnit_Framework_TestCase
     {
         // Setup
         $updateMessageResult = new UpdateMessageResult();
-        $expected = AzureUtilities::windowsAzureDateToDateTime('Fri, 09 Oct 2009 23:29:20 GMT');
+        $expected = WindowsAzureUtilities::rfc1123ToDateTime('Fri, 09 Oct 2009 23:29:20 GMT');
         
         // Test
         $updateMessageResult->setTimeNextVisible($expected);

@@ -4,13 +4,13 @@ spl_autoload_register(
       static $classes = null;
       if ($classes === null) {
          $classes = array(
-            'pear2\\windowsazure\\core\\azureutilities' => '/WindowsAzure/Core/AzureUtilities.php',
             'pear2\\windowsazure\\core\\ihttpclient' => '/WindowsAzure/Core/IHttpClient.php',
             'pear2\\windowsazure\\core\\invalidargumenttypeexception' => '/WindowsAzure/Core/InvalidArgumentTypeException.php',
             'pear2\\windowsazure\\core\\iservicefilter' => '/WindowsAzure/Core/IServiceFilter.php',
             'pear2\\windowsazure\\core\\iurl' => '/WindowsAzure/Core/IUrl.php',
             'pear2\\windowsazure\\core\\serviceexception' => '/WindowsAzure/Core/ServiceException.php',
             'pear2\\windowsazure\\core\\url' => '/WindowsAzure/Core/Url.php',
+            'pear2\\windowsazure\\core\\windowsazureutilities' => '/WindowsAzure/Core/WindowsAzureUtilities.php',
             'pear2\\windowsazure\\logger' => '/WindowsAzure/Logger.php',
             'pear2\\windowsazure\\resources' => '/WindowsAzure/Resources.php',
             'pear2\\windowsazure\\services\\blob\\blobrestproxy' => '/WindowsAzure/Services/Blob/BlobRestProxy.php',
@@ -47,7 +47,6 @@ spl_autoload_register(
             'pear2\\windowsazure\\services\\core\\servicerestproxy' => '/WindowsAzure/Services/Core/ServiceRestProxy.php',
             'pear2\\windowsazure\\services\\core\\servicesbuilder' => '/WindowsAzure/Services/Core/ServicesBuilder.php',
             'pear2\\windowsazure\\services\\queue\\iqueue' => '/WindowsAzure/Services/Queue/IQueue.php',
-            'pear2\\windowsazure\\services\\queue\\models\\azurequeuemessage' => '/WindowsAzure/Services/Queue/Models/AzureQueueMessage.php',
             'pear2\\windowsazure\\services\\queue\\models\\createmessageoptions' => '/WindowsAzure/Services/Queue/Models/CreateMessageOptions.php',
             'pear2\\windowsazure\\services\\queue\\models\\createqueueoptions' => '/WindowsAzure/Services/Queue/Models/CreateQueueOptions.php',
             'pear2\\windowsazure\\services\\queue\\models\\getqueuemetadataresult' => '/WindowsAzure/Services/Queue/Models/GetQueueMetadataResult.php',
@@ -61,6 +60,7 @@ spl_autoload_register(
             'pear2\\windowsazure\\services\\queue\\models\\queuemessage' => '/WindowsAzure/Services/Queue/Models/QueueMessage.php',
             'pear2\\windowsazure\\services\\queue\\models\\queueserviceoptions' => '/WindowsAzure/Services/Queue/Models/QueueServiceOptions.php',
             'pear2\\windowsazure\\services\\queue\\models\\updatemessageresult' => '/WindowsAzure/Services/Queue/Models/UpdateMessageResult.php',
+            'pear2\\windowsazure\\services\\queue\\models\\windowsazurequeuemessage' => '/WindowsAzure/Services/Queue/Models/WindowsAzureQueueMessage.php',
             'pear2\\windowsazure\\services\\queue\\queuerestproxy' => '/WindowsAzure/Services/Queue/QueueRestProxy.php',
             'pear2\\windowsazure\\services\\queue\\queueservice' => '/WindowsAzure/Services/Queue/QueueService.php',
             'pear2\\windowsazure\\services\\queue\\queuesettings' => '/WindowsAzure/Services/Queue/QueueSettings.php',

@@ -22,11 +22,11 @@
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
 
-use PEAR2\WindowsAzure\Core\AzureUtilities;
+use PEAR2\WindowsAzure\Core\WindowsAzureUtilities;
 use PEAR2\WindowsAzure\Resources;
 
 /**
- * Unit tests for class AzureUtilities
+ * Unit tests for class WindowsAzureUtilities
  *
  * @category  Microsoft
  * @package   PEAR2\Tests\Unit\WindowsAzure
@@ -36,29 +36,29 @@ use PEAR2\WindowsAzure\Resources;
  * @version   Release: @package_version@
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
-class AzureUtilitiesTest extends PHPUnit_Framework_TestCase
+class WindowsAzureUtilitiesTest extends PHPUnit_Framework_TestCase
 {
     /**
-     * @covers PEAR2\WindowsAzure\Core\AzureUtilities::generateMetadataHeaders
+     * @covers PEAR2\WindowsAzure\Core\WindowsAzureUtilities::generateMetadataHeaders
      */
     public function testGenerateMetadataHeader()
     {
         // Setup
-        $metadata = array('key1' => 'value1', 'MyName' => 'Azure', 'MyCompany' => 'Microsoft_');
+        $metadata = array('key1' => 'value1', 'MyName' => 'WindowsAzure', 'MyCompany' => 'Microsoft_');
         $expected = array();
         foreach ($metadata as $key => $value) {
             $expected[Resources::X_MS_META_HEADER_PREFIX . strtolower($key)] = $value;
         }
         
         // Test
-        $actual = AzureUtilities::generateMetadataHeaders($metadata);
+        $actual = WindowsAzureUtilities::generateMetadataHeaders($metadata);
         
         // Assert
         $this->assertEquals($expected, $actual);
     }
     
     /**
-     * @covers PEAR2\WindowsAzure\Core\AzureUtilities::generateMetadataHeaders
+     * @covers PEAR2\WindowsAzure\Core\WindowsAzureUtilities::generateMetadataHeaders
      */
     public function testGenerateMetadataHeaderInvalidNameFail()
     {
@@ -67,11 +67,11 @@ class AzureUtilitiesTest extends PHPUnit_Framework_TestCase
         $this->setExpectedException(get_class(new \InvalidArgumentException(Resources::INVALID_META_MSG)));
         
         // Test
-        AzureUtilities::generateMetadataHeaders($metadata);
+        WindowsAzureUtilities::generateMetadataHeaders($metadata);
     }
     
     /**
-     * @covers PEAR2\WindowsAzure\Core\AzureUtilities::getMetadataArray
+     * @covers PEAR2\WindowsAzure\Core\WindowsAzureUtilities::getMetadataArray
      */
     public function testGetMetadataArray()
     {
@@ -83,14 +83,14 @@ class AzureUtilitiesTest extends PHPUnit_Framework_TestCase
         }
         
         // Test
-        $actual = AzureUtilities::getMetadataArray($metadataHeaders);
+        $actual = WindowsAzureUtilities::getMetadataArray($metadataHeaders);
         
         // Assert
         $this->assertEquals($expected, $actual);
     }
     
     /**
-     * @covers PEAR2\WindowsAzure\Core\AzureUtilities::getMetadataArray
+     * @covers PEAR2\WindowsAzure\Core\WindowsAzureUtilities::getMetadataArray
      */
     public function testGetMetadataArrayWithMsHeaders()
     {
@@ -102,7 +102,7 @@ class AzureUtilitiesTest extends PHPUnit_Framework_TestCase
                           $validMetadataKey => $value, 'mycompany' => 'microsoft_');
         
         // Test
-        $actual = AzureUtilities::getMetadataArray($metadataHeaders);
+        $actual = WindowsAzureUtilities::getMetadataArray($metadataHeaders);
         
         // Assert
         $this->assertCount(1, $actual);
@@ -110,7 +110,7 @@ class AzureUtilitiesTest extends PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers PEAR2\WindowsAzure\Core\AzureUtilities::windowsAzureDateToDateTime
+     * @covers PEAR2\WindowsAzure\Core\WindowsAzureUtilities::rfc1123ToDateTime
      */
     public function testWindowsAzureDateToDateTime()
     {
@@ -118,19 +118,19 @@ class AzureUtilitiesTest extends PHPUnit_Framework_TestCase
         $expected = 'Fri, 16 Oct 2009 21:04:30 GMT';
         
         // Test
-        $actual = AzureUtilities::windowsAzureDateToDateTime($expected);
+        $actual = WindowsAzureUtilities::rfc1123ToDateTime($expected);
         
         // Assert
         $this->assertEquals($expected, $actual->format('D, d M Y H:i:s T'));
     }
     
     /**
-     * @covers PEAR2\WindowsAzure\Core\AzureUtilities::isEmulated
+     * @covers PEAR2\WindowsAzure\Core\WindowsAzureUtilities::isEmulated
      */
     public function testIsEmulated()
     {
         // Test
-        $actual = AzureUtilities::isEmulated();
+        $actual = WindowsAzureUtilities::isEmulated();
         
         // Assert
         $this->assertTrue(isset($actual));

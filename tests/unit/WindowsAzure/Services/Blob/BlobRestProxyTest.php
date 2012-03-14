@@ -23,7 +23,7 @@
  */
 
 use Tests\Framework\BlobRestProxyTestBase;
-use PEAR2\WindowsAzure\Core\AzureUtilities;
+use PEAR2\WindowsAzure\Core\WindowsAzureUtilities;
 use PEAR2\WindowsAzure\Core\ServiceException;
 use PEAR2\Tests\Framework\TestResources;
 use PEAR2\WindowsAzure\Services\Core\Models\ServiceProperties;
@@ -51,7 +51,7 @@ class BlobRestProxyTest extends BlobRestProxyTestBase
     */
     public function testGetServiceProperties()
     {
-        if (AzureUtilities::isEmulated()) {
+        if (WindowsAzureUtilities::isEmulated()) {
             $this->markTestSkipped(self::NOT_SUPPORTED);
         }
         
@@ -67,7 +67,7 @@ class BlobRestProxyTest extends BlobRestProxyTestBase
     */
     public function testSetServiceProperties()
     {
-        if (AzureUtilities::isEmulated()) {
+        if (WindowsAzureUtilities::isEmulated()) {
             $this->markTestSkipped(self::NOT_SUPPORTED);
         }
         
@@ -178,7 +178,7 @@ class BlobRestProxyTest extends BlobRestProxyTestBase
     */
     public function testListContainersWithInvalidNextMarkerFail()
     {
-        if (\PEAR2\WindowsAzure\Core\AzureUtilities::isEmulated()) {
+        if (\PEAR2\WindowsAzure\Core\WindowsAzureUtilities::isEmulated()) {
             $this->markTestSkipped(self::NOT_SUPPORTED);
         }
         

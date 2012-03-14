@@ -23,7 +23,7 @@
  */
 
 namespace PEAR2\WindowsAzure\Services\Queue\Models;
-use PEAR2\WindowsAzure\Services\Queue\Models\AzureQueueMessage;
+use PEAR2\WindowsAzure\Services\Queue\Models\WindowsAzureQueueMessage;
 use PEAR2\WindowsAzure\Utilities;
 
 /**
@@ -61,7 +61,9 @@ class ListMessagesResult
         if (!empty($parsedResponse)) {
             $rawMessages = Utilities::getArray($parsedResponse['QueueMessage']);
             foreach ($rawMessages as $value) {
-                $queueMessages[] = AzureQueueMessage::createFromListMessages($value);
+                $message = WindowsAzureQueueMessage::createFromListMessages($value);
+                
+                $queueMessages[] = $message;
             }
         }
         $result->setQueueMessages($queueMessages);

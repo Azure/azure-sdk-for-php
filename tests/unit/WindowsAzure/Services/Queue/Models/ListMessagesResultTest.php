@@ -24,7 +24,7 @@
 
 use PEAR2\WindowsAzure\Services\Queue\Models\ListMessagesResult;
 use PEAR2\Tests\Framework\TestResources;
-use PEAR2\WindowsAzure\Core\AzureUtilities;
+use PEAR2\WindowsAzure\Core\WindowsAzureUtilities;
 
 /**
  * Unit tests for class ListMessagesResult
@@ -55,10 +55,10 @@ class ListMessagesResultTest extends PHPUnit_Framework_TestCase
         $actual = $result->getQueueMessages();
         $this->assertCount(1, $actual);
         $this->assertEquals($sample['QueueMessage']['MessageId'] , $actual[0]->getMessageId());
-        $this->assertEquals(AzureUtilities::windowsAzureDateToDateTime($sample['QueueMessage']['InsertionTime']) , $actual[0]->getInsertionDate());
-        $this->assertEquals(AzureUtilities::windowsAzureDateToDateTime($sample['QueueMessage']['ExpirationTime']) , $actual[0]->getExpirationDate());
+        $this->assertEquals(WindowsAzureUtilities::rfc1123ToDateTime($sample['QueueMessage']['InsertionTime']) , $actual[0]->getInsertionDate());
+        $this->assertEquals(WindowsAzureUtilities::rfc1123ToDateTime($sample['QueueMessage']['ExpirationTime']) , $actual[0]->getExpirationDate());
         $this->assertEquals($sample['QueueMessage']['PopReceipt'] , $actual[0]->getPopReceipt());
-        $this->assertEquals(AzureUtilities::windowsAzureDateToDateTime($sample['QueueMessage']['TimeNextVisible']), $actual[0]->getTimeNextVisible());
+        $this->assertEquals(WindowsAzureUtilities::rfc1123ToDateTime($sample['QueueMessage']['TimeNextVisible']), $actual[0]->getTimeNextVisible());
         $this->assertEquals(intval($sample['QueueMessage']['DequeueCount']) , $actual[0]->getDequeueCount());
         $this->assertEquals($sample['QueueMessage']['MessageText'] , $actual[0]->getMessageText());
     }
@@ -78,18 +78,18 @@ class ListMessagesResultTest extends PHPUnit_Framework_TestCase
         $actual = $result->getQueueMessages();
         $this->assertCount(2, $actual);
         $this->assertEquals($sample['QueueMessage'][0]['MessageId'] , $actual[0]->getMessageId());
-        $this->assertEquals(AzureUtilities::windowsAzureDateToDateTime($sample['QueueMessage'][0]['InsertionTime']) , $actual[0]->getInsertionDate());
-        $this->assertEquals(AzureUtilities::windowsAzureDateToDateTime($sample['QueueMessage'][0]['ExpirationTime']) , $actual[0]->getExpirationDate());
+        $this->assertEquals(WindowsAzureUtilities::rfc1123ToDateTime($sample['QueueMessage'][0]['InsertionTime']) , $actual[0]->getInsertionDate());
+        $this->assertEquals(WindowsAzureUtilities::rfc1123ToDateTime($sample['QueueMessage'][0]['ExpirationTime']) , $actual[0]->getExpirationDate());
         $this->assertEquals($sample['QueueMessage'][0]['PopReceipt'] , $actual[0]->getPopReceipt());
-        $this->assertEquals(AzureUtilities::windowsAzureDateToDateTime($sample['QueueMessage'][0]['TimeNextVisible']), $actual[0]->getTimeNextVisible());
+        $this->assertEquals(WindowsAzureUtilities::rfc1123ToDateTime($sample['QueueMessage'][0]['TimeNextVisible']), $actual[0]->getTimeNextVisible());
         $this->assertEquals(intval($sample['QueueMessage'][0]['DequeueCount']) , $actual[0]->getDequeueCount());
         $this->assertEquals($sample['QueueMessage'][0]['MessageText'] , $actual[0]->getMessageText());
         
         $this->assertEquals($sample['QueueMessage'][1]['MessageId'] , $actual[1]->getMessageId());
-        $this->assertEquals(AzureUtilities::windowsAzureDateToDateTime($sample['QueueMessage'][1]['InsertionTime']) , $actual[1]->getInsertionDate());
-        $this->assertEquals(AzureUtilities::windowsAzureDateToDateTime($sample['QueueMessage'][1]['ExpirationTime']) , $actual[1]->getExpirationDate());
+        $this->assertEquals(WindowsAzureUtilities::rfc1123ToDateTime($sample['QueueMessage'][1]['InsertionTime']) , $actual[1]->getInsertionDate());
+        $this->assertEquals(WindowsAzureUtilities::rfc1123ToDateTime($sample['QueueMessage'][1]['ExpirationTime']) , $actual[1]->getExpirationDate());
         $this->assertEquals($sample['QueueMessage'][1]['PopReceipt'] , $actual[1]->getPopReceipt());
-        $this->assertEquals(AzureUtilities::windowsAzureDateToDateTime($sample['QueueMessage'][1]['TimeNextVisible']), $actual[1]->getTimeNextVisible());
+        $this->assertEquals(WindowsAzureUtilities::rfc1123ToDateTime($sample['QueueMessage'][1]['TimeNextVisible']), $actual[1]->getTimeNextVisible());
         $this->assertEquals(intval($sample['QueueMessage'][1]['DequeueCount']) , $actual[1]->getDequeueCount());
         $this->assertEquals($sample['QueueMessage'][1]['MessageText'] , $actual[1]->getMessageText());
     }

@@ -16,14 +16,14 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- * @package    Azure-sdk-for-php
+ * @package    WindowsAzure-sdk-for-php
  * @author     Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright  2012 Microsoft Corporation
  * @license    http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link       http://pear.php.net/package/azure-sdk-for-php
  */
 namespace PEAR2\Tests\Unit\WindowsAzure\Services\Queue\QueueRestProxy;
-use PEAR2\WindowsAzure\Core\AzureUtilities;
+use PEAR2\WindowsAzure\Core\WindowsAzureUtilities;
 use PEAR2\Tests\Framework\QueueRestProxyTestBase;
 use PEAR2\WindowsAzure\Services\Core\Configuration;
 use PEAR2\WindowsAzure\Services\Core\Models\ServiceProperties;
@@ -48,7 +48,7 @@ use PEAR2\WindowsAzure\Core\ServiceException;
 /**
 * Unit tests for QueueRestProxy class
 *
-* @package    Azure-sdk-for-php
+* @package    WindowsAzure-sdk-for-php
 * @author     Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
 * @copyright  2012 Microsoft Corporation
 * @license    http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
@@ -153,7 +153,7 @@ class QueueRestProxyTest extends QueueRestProxyTestBase
     */
     public function testListQueuesWithInvalidNextMarkerFail()
     {
-        if (AzureUtilities::isEmulated()) {
+        if (WindowsAzureUtilities::isEmulated()) {
             $this->markTestSkipped(self::NOT_SUPPORTED);
         }
         
@@ -308,7 +308,7 @@ class QueueRestProxyTest extends QueueRestProxyTestBase
     */
     public function testGetServiceProperties()
     {
-        if (AzureUtilities::isEmulated()) {
+        if (WindowsAzureUtilities::isEmulated()) {
             $this->markTestSkipped(self::NOT_SUPPORTED);
         }
         
@@ -324,7 +324,7 @@ class QueueRestProxyTest extends QueueRestProxyTestBase
     */
     public function testSetServiceProperties()
     {
-        if (AzureUtilities::isEmulated()) {
+        if (WindowsAzureUtilities::isEmulated()) {
             $this->markTestSkipped(self::NOT_SUPPORTED);
         }
         
