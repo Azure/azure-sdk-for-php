@@ -76,6 +76,7 @@ class Resources
     
     // Misc
     const EMPTY_STRING       = '';
+    const SEPARATOR          = ',';
     const AZURE_DATE_FORMAT  = 'D, d M Y H:i:s T';
     const EMULATED           = 'EMULATED';
     const DEV_STORE_NAME     = 'devstoreaccount1';

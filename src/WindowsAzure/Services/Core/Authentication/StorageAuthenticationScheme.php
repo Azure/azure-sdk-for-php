@@ -117,11 +117,16 @@ abstract class StorageAuthenticationScheme
         // 7. Append each query parameter name and value to the string in the 
         //    following format:
         //      parameter-name:parameter-value
-        // 9. Group query parameters (not supported see issue #17)
+        // 9. Group query parameters
         // 10. Append a new line character (\n) after each name-value pair.
         foreach ($queryParams as $key => $value) {
+            // Grouping query parameters
+            $values = explode(Resources::SEPARATOR, $value);
+            sort($values);
+            $separated = implode(Resources::SEPARATOR, $values);
+            
             $canonicalizedResource .= "\n" . strtolower($key) . ':' . 
-                rawurldecode($value);
+                rawurldecode($separated);
         }
 
         return $canonicalizedResource;
