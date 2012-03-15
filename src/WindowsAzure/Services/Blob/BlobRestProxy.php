@@ -77,9 +77,9 @@ class BlobRestProxy extends ServiceRestProxy implements IBlob
             $options = new BlobServiceOptions();
         }
         
-        $queryParams['restype']             = 'container';
-        $queryParams[Resources::QP_COMP]    = $operation;
-        $queryParams[Resources::QP_TIMEOUT] = strval($options->getTimeout());
+        $queryParams[Resources::QP_REST_TYPE] = 'container';
+        $queryParams[Resources::QP_COMP]      = $operation;
+        $queryParams[Resources::QP_TIMEOUT]   = strval($options->getTimeout());
         
         $response = $this->send($method, $headers, $queryParams, $path, $statusCode);
         $result   = new GetContainerPropertiesResult();
@@ -162,9 +162,9 @@ class BlobRestProxy extends ServiceRestProxy implements IBlob
             $options = new BlobServiceOptions();
         }
         
-        $queryParams['restype']             = 'service';
-        $queryParams[Resources::QP_COMP]    = 'properties';
-        $queryParams[Resources::QP_TIMEOUT] = strval($options->getTimeout());
+        $queryParams[Resources::QP_REST_TYPE] = 'service';
+        $queryParams[Resources::QP_COMP]      = 'properties';
+        $queryParams[Resources::QP_TIMEOUT]   = strval($options->getTimeout());
         
         $response = $this->send($method, $headers, $queryParams, $path, $statusCode);
         $parsed   = Utilities::unserialize($response->getBody());
@@ -195,11 +195,11 @@ class BlobRestProxy extends ServiceRestProxy implements IBlob
             $options = new BlobServiceOptions();
         }
         
-        $queryParams['restype']             = 'service';
-        $queryParams[Resources::QP_COMP]    = 'properties';
-        $queryParams[Resources::QP_TIMEOUT] = strval($options->getTimeout());
-        $body                               = $serviceProperties->toXml();
-        $headers[Resources::CONTENT_TYPE]   = Resources::XML_CONTENT_TYPE;
+        $queryParams[Resources::QP_REST_TYPE] = 'service';
+        $queryParams[Resources::QP_COMP]      = 'properties';
+        $queryParams[Resources::QP_TIMEOUT]   = strval($options->getTimeout());
+        $body                                 = $serviceProperties->toXml();
+        $headers[Resources::CONTENT_TYPE]     = Resources::XML_CONTENT_TYPE;
         
         $this->send($method, $headers, $queryParams, $path, $statusCode, $body);
     }
@@ -253,7 +253,7 @@ class BlobRestProxy extends ServiceRestProxy implements IBlob
     {
         $method      = \HTTP_Request2::METHOD_PUT;
         $headers     = array();
-        $queryParams = array('restype' => 'container');
+        $queryParams = array(Resources::QP_REST_TYPE => 'container');
         $path        = $container;
         $statusCode  = Resources::STATUS_CREATED;
         
@@ -295,8 +295,8 @@ class BlobRestProxy extends ServiceRestProxy implements IBlob
             $options = new BlobServiceOptions();
         }
         
-        $queryParams['restype']             = 'container';
-        $queryParams[Resources::QP_TIMEOUT] = strval($options->getTimeout());
+        $queryParams[Resources::QP_REST_TYPE] = 'container';
+        $queryParams[Resources::QP_TIMEOUT]   = strval($options->getTimeout());
         
         $this->send($method, $headers, $queryParams, $path, $statusCode);
     }
@@ -354,9 +354,9 @@ class BlobRestProxy extends ServiceRestProxy implements IBlob
             $options = new BlobServiceOptions();
         }
         
-        $queryParams[Resources::QP_TIMEOUT] = strval($options->getTimeout());
-        $queryParams['restype']             = 'container';
-        $queryParams[Resources::QP_COMP]    = 'acl';
+        $queryParams[Resources::QP_TIMEOUT]   = strval($options->getTimeout());
+        $queryParams[Resources::QP_REST_TYPE] = 'container';
+        $queryParams[Resources::QP_COMP]      = 'acl';
         
         $response = $this->send($method, $headers, $queryParams, $path, $statusCode);
         
@@ -392,9 +392,9 @@ class BlobRestProxy extends ServiceRestProxy implements IBlob
             $options = new BlobServiceOptions();
         }
         
-        $queryParams[Resources::QP_TIMEOUT] = strval($options->getTimeout());
-        $queryParams['restype']             = 'container';
-        $queryParams[Resources::QP_COMP]    = 'acl';
+        $queryParams[Resources::QP_TIMEOUT]   = strval($options->getTimeout());
+        $queryParams[Resources::QP_REST_TYPE] = 'container';
+        $queryParams[Resources::QP_COMP]      = 'acl';
         
         $headers[Resources::X_MS_BLOB_PUBLIC_ACCESS] = $acl->getPublicAccess();
         $headers[Resources::CONTENT_TYPE]            = Resources::XML_CONTENT_TYPE;
@@ -425,9 +425,9 @@ class BlobRestProxy extends ServiceRestProxy implements IBlob
             $options = new SetContainerMetadataOptions();
         }
         
-        $queryParams[Resources::QP_TIMEOUT] = strval($options->getTimeout());
-        $queryParams['restype']             = 'container';
-        $queryParams[Resources::QP_COMP]    = 'metadata';
+        $queryParams[Resources::QP_TIMEOUT]   = strval($options->getTimeout());
+        $queryParams[Resources::QP_REST_TYPE] = 'container';
+        $queryParams[Resources::QP_COMP]      = 'metadata';
         
         $header           = $options->getAccessCondition()->getHeader();
         $value            = $options->getAccessCondition()->getValue();
@@ -460,7 +460,7 @@ class BlobRestProxy extends ServiceRestProxy implements IBlob
         
         $queryParams[Resources::QP_TIMEOUT]     = strval($options->getTimeout());
         $queryParams[Resources::QP_COMP]        = 'list';
-        $queryParams['restype']                 = 'container';
+        $queryParams[Resources::QP_REST_TYPE]   = 'container';
         $queryParams[Resources::QP_PREFIX]      = $options->getPrefix();
         $queryParams[Resources::QP_MARKER]      = $options->getMarker();
         $queryParams[Resources::QP_DELIMITER]   = $options->getDelimiter();
