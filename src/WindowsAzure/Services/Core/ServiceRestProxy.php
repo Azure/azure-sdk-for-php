@@ -23,9 +23,10 @@
  */
  
 namespace PEAR2\WindowsAzure\Services\Core;
+use PEAR2\WindowsAzure\Resources;
+use PEAR2\WindowsAzure\Validate;
 use PEAR2\WindowsAzure\Core\Url;
 use PEAR2\WindowsAzure\Core\IHttpClient;
-use PEAR2\WindowsAzure\Resources;
 use PEAR2\WindowsAzure\Services\Blob\Models\AccessConditionHeaderType;
 
 /**
@@ -91,7 +92,13 @@ class ServiceRestProxy
         $url     = clone $this->_url;
         
         $channel->setMethod($method);
-        $channel->setHeaders($headers);
+        
+        foreach ($headers as $key => $value) {
+            if (!is_null($value) && !empty($value)) {
+                $channel->setHeader($key, $value);
+            }
+        }
+        
         $channel->setExpectedStatusCode($statusCode);
         $channel->setBody($body);
         $url->setQueryVariables($queryParams);
@@ -147,6 +154,27 @@ class ServiceRestProxy
         }
         
         return $headers;
+    }
+    
+    /**
+     * Groups set of values into one value separated with Resources::SEPARATOR
+     * 
+     * @param array $values array of values to be grouped.
+     * 
+     * @return string
+     */
+    public function groupQueryValues($values)
+    {
+        Validate::isArray($values);
+        $joined = Resources::EMPTY_STRING;
+        
+        foreach ($values as $value) {
+            if (!is_null($value) && !empty($value)) {
+                $joined .= $value . Resources::SEPARATOR;
+            }
+        }
+        
+        return trim($joined, Resources::SEPARATOR);
     }
 }
 

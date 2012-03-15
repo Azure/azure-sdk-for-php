@@ -93,7 +93,7 @@ class StorageAuthenticationSchemeTest extends \PHPUnit_Framework_TestCase
     {
         $queryVariables = array();
         $queryVariables['COMP'] = 'list';
-        $queryVariables['include'] = 'snapshots,metadata,uncommittedblobs';
+        $queryVariables[Resources::QP_INCLUDE] = 'snapshots,metadata,uncommittedblobs';
         $expectedQueryPart = "comp:list\ninclude:metadata,snapshots,uncommittedblobs";
         $accountName = TestResources::ACCOUNT_NAME;
         $url = TestResources::URI1;

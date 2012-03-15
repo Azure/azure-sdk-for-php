@@ -260,6 +260,104 @@ class TestResources
         
         return $sample;
     }
+    
+    public static function listBlobsEmpty()
+    {
+        $sample = array();
+        $sample['Blobs'] = '';
+        $sample['NextMarker'] = '';
+        
+        return $sample;
+    }
+    
+    public static function listBlobsOneEntry()
+    {
+        $sample = array();
+        $sample['Marker'] = '/account/listblobswithnextmarker3';
+        $sample['MaxResults'] = '2';
+        $sample['Delimiter'] = 'mydelimiter';
+        $sample['Prefix'] = 'myprefix';
+        $sample['Blobs'] = array(
+            'BlobPrefix' => array('Name' => 'myblobprefix'),
+            'Blob' => array(
+                'Name' => 'myblob', 
+                'Url' => 'http://account.blob.core.windows.net/myblob',
+                'Snapshot' => '10-12-2011',
+                'Metadata' => array('Name1' => 'Value1', 'Name2' => 'Value2'),
+                'Properties' => array(
+                    'Last-Modified' => 'Sat, 04 Sep 2011 12:43:08 GMT',
+                    'Etag' => '0x8CAFB82EFF70C46',
+                    'Content-Length' => '10',
+                    'Content-Type' => 'type',
+                    'Content-Encoding' => 'encoding',
+                    'Content-Language' => 'language',
+                    'Content-MD5' => 'md5',
+                    'Cache-Control' => 'cachecontrol',
+                    'x-ms-blob-sequence-number' => '0',
+                    'BlobType' => 'BlockBlob',
+                    'LeaseStatus' => 'locked'
+                )
+            )
+        );
+        
+        $sample['NextMarker'] = '';
+        
+        return $sample;
+    }
+    
+    public static function listBlobsMultipleEntries()
+    {
+        $sample = array();
+        $sample['Marker'] = '/account/listblobswithnextmarker3';
+        $sample['MaxResults'] = '2';
+        $sample['Blobs'] = array(
+            'BlobPrefix' => array(
+                0 => array('Name' => 'myblobprefix'),
+                1 => array('Name' => 'myblobprefix2')),
+            'Blob' => array( 0 => array(
+                'Name' => 'myblob', 
+                'Url' => 'http://account.blob.core.windows.net/myblob',
+                'Snapshot' => '10-12-2011',
+                'Metadata' => array('Name1' => 'Value1', 'Name2' => 'Value2'),
+                'Properties' => array(
+                    'Last-Modified' => 'Sat, 04 Sep 2011 12:43:08 GMT',
+                    'Etag' => '0x8CAFB82EFF70C46',
+                    'Content-Length' => '10',
+                    'Content-Type' => 'type',
+                    'Content-Encoding' => 'encoding',
+                    'Content-Language' => 'language',
+                    'Content-MD5' => 'md5',
+                    'Cache-Control' => 'cachecontrol',
+                    'x-ms-blob-sequence-number' => '0',
+                    'BlobType' => 'BlockBlob',
+                    'LeaseStatus' => 'locked'
+                )
+            ),
+            
+            1 => array(
+                'Name' => 'myblob2', 
+                'Url' => 'http://account.blob.core.windows.net/myblob2',
+                'Snapshot' => '10-12-2011',
+                'Metadata' => array('Name1' => 'Value1', 'Name2' => 'Value2'),
+                'Properties' => array(
+                    'Last-Modified' => 'Sun, 26 Feb 2010 12:43:08 GMT',
+                    'Etag' => '0x7CQWER2EFF70C46',
+                    'Content-Length' => '20',
+                    'Content-Type' => 'type2',
+                    'Content-Encoding' => 'encoding2',
+                    'Content-Language' => 'language2',
+                    'Content-MD5' => 'md52',
+                    'Cache-Control' => 'cachecontrol2',
+                    'x-ms-blob-sequence-number' => '1',
+                    'BlobType' => 'PageBlob',
+                    'LeaseStatus' => 'unlocked'
+                )
+            )));
+        
+        $sample['NextMarker'] = 'value';
+        
+        return $sample;
+    }
 }
 
 ?>

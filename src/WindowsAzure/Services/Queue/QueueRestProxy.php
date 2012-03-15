@@ -78,13 +78,14 @@ class QueueRestProxy extends ServiceRestProxy implements IQueue
             $listQueuesOptions = new ListQueuesOptions();
         }
         
-        $queryParams['comp']                 = 'list';
-        $queryParams[Resources::PREFIX]      = $listQueuesOptions->getPrefix();
-        $queryParams[Resources::MARKER]      = $listQueuesOptions->getMarker();
-        $queryParams[Resources::MAX_RESULTS] = $listQueuesOptions->getMaxResults();
-
-        $isInclude              = $listQueuesOptions->getIncludeMetadata();
-        $queryParams['include'] = $isInclude ? 'metadata' : null;
+        $maxResults = $listQueuesOptions->getMaxResults();
+        $isInclude  = $listQueuesOptions->getIncludeMetadata();
+        
+        $queryParams[Resources::QP_COMP]        = 'list';
+        $queryParams[Resources::QP_PREFIX]      = $listQueuesOptions->getPrefix();
+        $queryParams[Resources::QP_MARKER]      = $listQueuesOptions->getMarker();
+        $queryParams[Resources::QP_MAX_RESULTS] = $maxResults;
+        $queryParams[Resources::QP_INCLUDE]     = $isInclude ? 'metadata' : null;
         
         $response = $this->send($method, $headers, $queryParams, $path, $statusCode);
         $parsed   = Utilities::unserialize($response->getBody());
@@ -278,7 +279,7 @@ class QueueRestProxy extends ServiceRestProxy implements IQueue
         }
         
         $config[Resources::CONNECT_TIMEOUT] = $queueServiceOptions->getTimeout();
-        $queryParams['comp']                = 'metadata';
+        $queryParams[Resources::QP_COMP]    = 'metadata';
         
         $response = $this->send(
             $method, $headers, $queryParams, $path, $statusCode, $body, $config
@@ -312,9 +313,9 @@ class QueueRestProxy extends ServiceRestProxy implements IQueue
             $queueServiceOptions = new QueueServiceOptions();
         }
         
-        $queryParams['restype'] = 'service';
-        $queryParams['comp']    = 'properties';
-        $queryParams['timeout'] = $queueServiceOptions->getTimeout();
+        $queryParams['restype']             = 'service';
+        $queryParams[Resources::QP_COMP]    = 'properties';
+        $queryParams[Resources::QP_TIMEOUT] = $queueServiceOptions->getTimeout();
         
         $response = $this->send($method, $headers, $queryParams, $path, $statusCode);
         $parsed   = Utilities::unserialize($response->getBody());
@@ -412,7 +413,7 @@ class QueueRestProxy extends ServiceRestProxy implements IQueue
         }
         
         $config[Resources::CONNECT_TIMEOUT] = $queueServiceOptions->getTimeout();
-        $queryParams['comp']                = 'metadata';
+        $queryParams[Resources::QP_COMP]    = 'metadata';
         
         $metadataHeaders = WindowsAzureUtilities::generateMetadataHeaders($metadata);
         $headers         = $metadataHeaders;
@@ -438,17 +439,16 @@ class QueueRestProxy extends ServiceRestProxy implements IQueue
         $queryParams = array();
         $statusCode  = Resources::STATUS_ACCEPTED;
         $path        = Resources::EMPTY_STRING;
-        $body        = Resources::EMPTY_STRING;
+        $body        = $serviceProperties->toXml();
         
         if (!isset($queueServiceOptions)) {
             $queueServiceOptions = new QueueServiceOptions();
         }
         
-        $queryParams['restype']           = 'service';
-        $queryParams['comp']              = 'properties';
-        $queryParams['timeout']           = $queueServiceOptions->getTimeout();
-        $body                             = $serviceProperties->toXml();
-        $headers[Resources::CONTENT_TYPE] = Resources::XML_CONTENT_TYPE;
+        $queryParams['restype']             = 'service';
+        $queryParams[Resources::QP_COMP]    = 'properties';
+        $queryParams[Resources::QP_TIMEOUT] = $queueServiceOptions->getTimeout();
+        $headers[Resources::CONTENT_TYPE]   = Resources::XML_CONTENT_TYPE;
         
         $this->send($method, $headers, $queryParams, $path, $statusCode, $body);
     }

@@ -180,7 +180,7 @@ interface IBlob
     * 
     * @see http://msdn.microsoft.com/en-us/library/windowsazure/dd135734.aspx
     */
-    public function listBlobs($container, $options);
+    public function listBlobs($container, $options = null);
 
     /**
     * Creates a new page blob. Note that calling createPageBlob to create a page
