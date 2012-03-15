@@ -533,6 +533,7 @@ class BlobRestProxy extends ServiceRestProxy implements IBlob
      * Partial updates are not supported with createBlockBlob the content of the
      * existing blob is overwritten with the content of the new blob. To perform a
      * partial update of the content of a block blob, use the createBlockList method.
+     * Note that the default content type is application/octet-stream
      * 
      * @param string                   $container name of the container
      * @param string                   $blob      name of the blob
@@ -545,7 +546,23 @@ class BlobRestProxy extends ServiceRestProxy implements IBlob
      */
     public function createBlockBlob($container, $blob, $content, $options = null)
     {
-        throw new \Exception(Resources::NOT_IMPLEMENTED_MSG);
+        $method      = \HTTP_Request2::METHOD_PUT;
+        $headers     = array();
+        $queryParams = array();
+        $path        = $container . '/' . $blob;
+        $statusCode  = Resources::STATUS_CREATED;
+        $body        = $content;
+        
+        if (is_null($options)) {
+            $options = new CreateBlobOptions();
+        }
+        
+        $headers = $this->_addCreateBlobOptionalHeaders($options, $headers);
+        
+        $headers[Resources::X_MS_BLOB_TYPE] = BlobType::BLOCK_BLOB;
+        $queryParams[Resources::QP_TIMEOUT] = strval($options->getTimeout());
+        
+        $this->send($method, $headers, $queryParams, $path, $statusCode, $body);
     }
     
     /**
