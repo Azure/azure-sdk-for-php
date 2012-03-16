@@ -27,6 +27,7 @@ use PEAR2\WindowsAzure\Resources;
 use PEAR2\WindowsAzure\Validate;
 use PEAR2\WindowsAzure\Core\Url;
 use PEAR2\WindowsAzure\Core\IHttpClient;
+use PEAR2\WindowsAzure\Core\WindowsAzureUtilities;
 use PEAR2\WindowsAzure\Services\Blob\Models\AccessConditionHeaderType;
 
 /**
@@ -45,7 +46,7 @@ class ServiceRestProxy
     private $_channel;
     private $_filters;
     private $_url;
-
+    
     /**
      * Constructor
      *

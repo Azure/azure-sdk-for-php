@@ -40,6 +40,11 @@ use PEAR2\WindowsAzure\Services\Blob\Models\ListBlobsOptions;
 use PEAR2\WindowsAzure\Services\Blob\Models\ListBlobsResult;
 use PEAR2\WindowsAzure\Services\Blob\Models\BlobType;
 use PEAR2\WindowsAzure\Services\Blob\Models\CreateBlobOptions;
+use PEAR2\WindowsAzure\Services\Blob\Models\BlobProperties;
+use PEAR2\WindowsAzure\Services\Blob\Models\GetBlobPropertiesOptions;
+use PEAR2\WindowsAzure\Services\Blob\Models\GetBlobPropertiesResult;
+use PEAR2\WindowsAzure\Services\Blob\Models\SetBlobPropertiesOptions;
+use PEAR2\WindowsAzure\Services\Blob\Models\SetBlobPropertiesResult;
 
 /**
  * This class constructs HTTP requests and receive HTTP responses for blob
@@ -55,6 +60,51 @@ use PEAR2\WindowsAzure\Services\Blob\Models\CreateBlobOptions;
  */
 class BlobRestProxy extends ServiceRestProxy implements IBlob
 {
+    /**
+     * Creates GetBlobPropertiesResult from headers array
+     * 
+     * @param array $headers HTTP response headers array
+     * 
+     * @return GetBlobPropertiesResult
+     */
+    private function _getBlobPropertiesResultFromResponse($headers)
+    {
+        $result     = new GetBlobPropertiesResult();
+        $properties = new BlobProperties();
+        $d          = $headers[Resources::LAST_MODIFIED];
+        $bType      = $headers[Resources::X_MS_BLOB_TYPE];
+        $lStatus    = $headers[Resources::X_MS_LEASE_STATUS];
+        $cLength    = intval($headers[Resources::CONTENT_LENGTH]);
+        $cType      = Utilities::tryGetValue($headers, Resources::CONTENT_TYPE);
+        $cMD5       = Utilities::tryGetValue($headers, Resources::CONTENT_MD5);
+        $cEncoding  = Utilities::tryGetValue($headers, Resources::CONTENT_ENCODING);
+        $cLanguage  = Utilities::tryGetValue($headers, Resources::CONTENT_LANGUAGE);
+        $cControl   = Utilities::tryGetValue($headers, Resources::CACHE_CONTROL);
+        $etag       = $headers[Resources::ETAG];
+        $metadata   = WindowsAzureUtilities::getMetadataArray($headers);
+        
+        if (array_key_exists(Resources::X_MS_BLOB_SEQUENCE_NUMBER, $headers)) {
+            $sNumber = intval($headers[Resources::X_MS_BLOB_SEQUENCE_NUMBER]);
+            $properties->setSequenceNumber($sNumber);
+        }
+        
+        $properties->setBlobType($bType);
+        $properties->setCacheControl($cControl);
+        $properties->setContentEncoding($cEncoding);
+        $properties->setContentLanguage($cLanguage);
+        $properties->setContentLength($cLength);
+        $properties->setContentMD5($cMD5);
+        $properties->setContentType($cType);
+        $properties->setEtag($etag);
+        $properties->setLastModified(WindowsAzureUtilities::rfc1123ToDateTime($d));
+        $properties->setLeaseStatus($lStatus);
+        
+        $result->setProperties($properties);
+        $result->setMetadata($metadata);
+        
+        return $result;
+    }
+    
     /**
      * Helper method for getContainerProperties and getContainerMetadata
      * 
@@ -124,7 +174,9 @@ class BlobRestProxy extends ServiceRestProxy implements IBlob
             $headers  = array_merge($headers, $metadata);
         }
         
-        $this->addOptionalAccessContitionHeader($headers, $accessCondition);
+        $headers = $this->addOptionalAccessContitionHeader(
+            $headers, $accessCondition
+        );
         
         $headers[Resources::CONTENT_ENCODING] = $options->getContentEncoding();
         $headers[Resources::CONTENT_LANGUAGE] = $options->getContentLanguage();
@@ -688,7 +740,29 @@ class BlobRestProxy extends ServiceRestProxy implements IBlob
      */
     public function getBlobProperties($container, $blob, $options = null)
     {
-        throw new \Exception(Resources::NOT_IMPLEMENTED_MSG);
+        $method      = \HTTP_Request2::METHOD_HEAD;
+        $headers     = array();
+        $queryParams = array();
+        $path        = $container . '/' . $blob;
+        $statusCode  = Resources::STATUS_OK;
+        
+        if (is_null($options)) {
+            $options = new GetBlobPropertiesOptions();
+        }
+        
+        $headers = $this->addOptionalAccessContitionHeader(
+            $headers, $options->getAccessCondition()
+        );
+        
+        $headers[Resources::X_MS_LEASE_ID]  = $options->getLeaseId();
+        $queryParams['snapshot']            = $options->getSnapshot();
+        $queryParams[Resources::QP_TIMEOUT] = strval($options->getTimeout());
+        
+        
+        
+        $response = $this->send($method, $headers, $queryParams, $path, $statusCode);
+        
+        return $this->_getBlobPropertiesResultFromResponse($response->getHeader());
     }
     
     /**
@@ -737,7 +811,46 @@ class BlobRestProxy extends ServiceRestProxy implements IBlob
      */
     public function setBlobProperties($container, $blob, $options = null)
     {
-        throw new \Exception(Resources::NOT_IMPLEMENTED_MSG);
+        $method      = \HTTP_Request2::METHOD_PUT;
+        $headers     = array();
+        $queryParams = array();
+        $path        = $container . '/' . $blob;
+        $statusCode  = Resources::STATUS_OK;
+        
+        if (is_null($options)) {
+            $options = new SetBlobPropertiesOptions();
+        }
+        
+        $accessCondition     = $options->getAccessCondition();
+        $blobContentType     = $options->getBlobContentType();
+        $blobContentEncoding = $options->getBlobContentEncoding();
+        $blobContentLanguage = $options->getBlobContentLanguage();
+        $blobContentLength   = strval($options->getBlobContentLength());
+        $blobContentMD5      = $options->getBlobContentMD5();
+        $blobCacheControl    = $options->getBlobCacheControl();
+        $leaseId             = $options->getLeaseId();
+        $sNumberAction       = $options->getSequenceNumberAction();
+        $sNumber             = strval($options->getSequenceNumber());
+        
+        $headers = $this->addOptionalAccessContitionHeader(
+            $headers, $accessCondition
+        );
+        
+        $headers[Resources::X_MS_LEASE_ID]                    = $leaseId;
+        $headers[Resources::X_MS_BLOB_CONTENT_TYPE]           = $blobContentType;
+        $headers[Resources::X_MS_BLOB_CONTENT_ENCODING]       = $blobContentEncoding;
+        $headers[Resources::X_MS_BLOB_CONTENT_LANGUAGE]       = $blobContentLanguage;
+        $headers[Resources::X_MS_BLOB_CONTENT_LENGTH]         = $blobContentLength;
+        $headers[Resources::X_MS_BLOB_CONTENT_MD5]            = $blobContentMD5;
+        $headers[Resources::X_MS_BLOB_CACHE_CONTROL]          = $blobCacheControl;
+        $headers[Resources::X_MS_BLOB_SEQUENCE_NUMBER_ACTION] = $sNumberAction;
+        $headers[Resources::X_MS_BLOB_SEQUENCE_NUMBER]        = $sNumber;
+
+        $queryParams[Resources::QP_COMP] = 'properties';
+        
+        $response = $this->send($method, $headers, $queryParams, $path, $statusCode);
+        
+        return SetBlobPropertiesResult::create($response->getHeader());
     }
     
     /**
