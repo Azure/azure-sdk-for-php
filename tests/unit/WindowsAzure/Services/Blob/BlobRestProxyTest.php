@@ -30,6 +30,7 @@ use PEAR2\WindowsAzure\Services\Core\Models\ServiceProperties;
 use PEAR2\WindowsAzure\Services\Blob\Models\ListContainersOptions;
 use PEAR2\WindowsAzure\Services\Blob\Models\ListContainersResult;
 use PEAR2\WindowsAzure\Services\Blob\Models\CreateContainerOptions;
+use PEAR2\WindowsAzure\Services\Blob\Models\GetContainerPropertiesResult;
 
 /**
  * Unit tests for class BlobRestProxy
@@ -344,6 +345,50 @@ class BlobRestProxyTest extends BlobRestProxyTestBase
         
         // Test
         $this->wrapper->deleteContainer($containerName);
+    }
+    
+    /**
+     * @covers PEAR2\WindowsAzure\Services\Blob\BlobRestProxy::getContainerProperties
+     * @covers PEAR2\WindowsAzure\Services\Blob\BlobRestProxy::_getContainerPropertiesImpl
+     */
+    public function testGetContainerProperties()
+    {
+        // Setup
+        $name = 'getcontainerproperties';
+        $this->createContainer($name);
+        
+        // Test
+        $result = $this->wrapper->getContainerProperties($name);
+        
+        // Assert
+        $this->assertNotNull($result->getEtag());
+        $this->assertNotNull($result->getLastModified());
+        $this->assertCount(0, $result->getMetadata());
+    }
+    
+    /**
+     * @covers PEAR2\WindowsAzure\Services\Blob\BlobRestProxy::getContainerMetadata
+     * @covers PEAR2\WindowsAzure\Services\Blob\BlobRestProxy::_getContainerPropertiesImpl
+     */
+    public function testGetContainerMetadata()
+    {
+        // Setup
+        $name     = 'getcontainermetadata';
+        $options  = new CreateContainerOptions();
+        $expected = array ('name1' => 'MyName1', 'mymetaname' => '12345', 'values' => 'Microsoft_');
+        $options->setMetadata($expected);
+        $this->createContainer($name, $options);
+        $result = $this->wrapper->getContainerProperties($name);
+        $expectedEtag = $result->getEtag();
+        $expectedLastModified = $result->getLastModified();
+        
+        // Test
+        $result = $this->wrapper->getContainerMetadata($name);
+        
+        // Assert
+        $this->assertEquals($expectedEtag, $result->getEtag());
+        $this->assertEquals($expectedLastModified, $result->getLastModified());
+        $this->assertEquals($expected, $result->getMetadata());
     }
 }
 
