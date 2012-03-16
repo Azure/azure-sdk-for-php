@@ -54,6 +54,8 @@ class Resources
     const X_MS_BLOB_PUBLIC_ACCESS         = 'x-ms-blob-public-access';
     const X_MS_VERSION                    = 'x-ms-version';
     const X_MS_DATE                       = 'x-ms-date';
+    const ETAG                            = 'ETag';
+    const LAST_MODIFIED                   = 'Last-Modified';
     const DATE                            = 'date';
     const AUTHENTICATION                  = 'Authorization';
     const CONTENT_ENCODING                = 'content-encoding';
