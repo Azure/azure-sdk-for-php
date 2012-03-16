@@ -227,6 +227,39 @@ class TestResources
         
         return $sample;
     }
+    
+    public static function getContainerACLOneEntrySample()
+    {
+        $sample = array();
+        $sample['SignedIdentifiers'] = array('SignedIdentifier' => array (
+            'Id' => 'MTIzNDU2Nzg5MDEyMzQ1Njc4OTAxMjM0NTY3ODkwMTI=',
+            'AccessPolicy' => array(
+                'Start' => '2009-09-28T08%3A49%3A37.0000000Z',
+                'Expiry' => '2009-09-29T08%3A49%3A37.0000000Z',
+                'Permission' => 'rwd')
+            ));
+        
+        return $sample;
+    }
+    
+    public static function getContainerACLMultipleEntriesSample()
+    {
+        $sample = array();
+        $sample['SignedIdentifiers'] = array( 'SignedIdentifier' => array (
+            0 => array ('Id' => 'HYQzNDU2Nzg5MDEyMzQ1Njc4OTAxMjM0NTY3ODkwMTI=',
+            'AccessPolicy' => array(
+                'Start' => '2010-09-28T08%3A49%3A37.0000000Z',
+                'Expiry' => '2010-09-29T08%3A49%3A37.0000000Z',
+                'Permission' => 'wd')),
+            1 => array ('Id' => 'MTIzNDU2Nzg5MDEyMzQ1Njc4OTAxMjM0NTY3ODkwMTI=',
+            'AccessPolicy' => array(
+                'Start' => '2009-09-28T08%3A49%3A37.0000000Z',
+                'Expiry' => '2009-09-29T08%3A49%3A37.0000000Z',
+                'Permission' => 'rwd'))
+            ));
+        
+        return $sample;
+    }
 }
 
 ?>

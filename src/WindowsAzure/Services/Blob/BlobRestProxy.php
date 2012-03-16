@@ -34,6 +34,7 @@ use PEAR2\WindowsAzure\Services\Blob\Models\ListContainersOptions;
 use PEAR2\WindowsAzure\Services\Blob\Models\ListContainersResult;
 use PEAR2\WindowsAzure\Services\Blob\Models\CreateContainerOptions;
 use PEAR2\WindowsAzure\Services\Blob\Models\GetContainerPropertiesResult;
+use PEAR2\WindowsAzure\Services\Blob\Models\GetContainerACLResult;
 
 /**
  * This class constructs HTTP requests and receive HTTP responses for blob
@@ -199,16 +200,15 @@ class BlobRestProxy extends ServiceRestProxy implements IBlob
     {
         $method      = \HTTP_Request2::METHOD_PUT;
         $headers     = array();
-        $queryParams = array();
-        $path        = Resources::EMPTY_STRING;
+        $queryParams = array('restype' => 'container');
+        $path        = $container;
         $statusCode  = Resources::STATUS_CREATED;
         
         if (is_null($options)) {
             $options = new CreateContainerOptions();
         }
 
-        $queryParams['restype'] = 'container';
-        $path                   = $container;
+        $queryParams['timeout'] = strval($options->getTimeout());
         
         $metadataHeaders = AzureUtilities::generateMetadataHeaders(
             $options->getMetadata()
@@ -223,8 +223,8 @@ class BlobRestProxy extends ServiceRestProxy implements IBlob
     /**
      * Creates a new container in the given storage account.
      * 
-     * @param string                        $container name of the container
-     * @param Models\DeleteContainerOptions $options   optional parameters
+     * @param string                    $container name of the container
+     * @param Models\BlobServiceOptions $options   optional parameters
      * 
      * @return none.
      * 
@@ -234,9 +234,16 @@ class BlobRestProxy extends ServiceRestProxy implements IBlob
     {
         $method      = \HTTP_Request2::METHOD_DELETE;
         $headers     = array();
-        $queryParams = array('restype' => 'container');
+        $queryParams = array();
         $path        = $container;
         $statusCode  = Resources::STATUS_ACCEPTED;
+        
+        if (is_null($options)) {
+            $options = new BlobServiceOptions();
+        }
+        
+        $queryParams['restype'] = 'container';
+        $queryParams['timeout'] = strval($options->getTimeout());
         
         $this->send($method, $headers, $queryParams, $path, $statusCode);
     }
@@ -284,7 +291,28 @@ class BlobRestProxy extends ServiceRestProxy implements IBlob
      */
     public function getContainerACL($container, $options = null)
     {
-        throw new \Exception(Resources::NOT_IMPLEMENTED_MSG);
+        $method      = \HTTP_Request2::METHOD_GET;
+        $headers     = array();
+        $queryParams = array();
+        $path        = $container;
+        $statusCode  = Resources::STATUS_OK;
+        
+        if (is_null($options)) {
+            $options = new BlobServiceOptions();
+        }
+        
+        $queryParams['timeout'] = strval($options->getTimeout());
+        $queryParams['restype'] = 'container';
+        $queryParams['comp']    = 'acl';
+        
+        $response = $this->send($method, $headers, $queryParams, $path, $statusCode);
+        
+        $access       = $response->getHeader(Resources::X_MS_BLOB_PUBLIC_ACCESS);
+        $etag         = $response->getHeader(Resources::ETAG);
+        $lastModified = $response->getHeader(Resources::LAST_MODIFIED);
+        $parsed       = Utilities::unserialize($response->getBody());
+                
+        return GetContainerACLResult::create($access, $etag, $lastModified, $parsed);
     }
     
     /**
@@ -300,7 +328,25 @@ class BlobRestProxy extends ServiceRestProxy implements IBlob
      */
     public function setContainerACL($container, $acl, $options = null)
     {
-        throw new \Exception(Resources::NOT_IMPLEMENTED_MSG);
+        $method      = \HTTP_Request2::METHOD_PUT;
+        $headers     = array();
+        $queryParams = array();
+        $path        = $container;
+        $statusCode  = Resources::STATUS_OK;
+        $body        = $acl->toXml();
+        
+        if (is_null($options)) {
+            $options = new BlobServiceOptions();
+        }
+        
+        $queryParams['timeout'] = strval($options->getTimeout());
+        $queryParams['restype'] = 'container';
+        $queryParams['comp']    = 'acl';
+        
+        $headers[Resources::X_MS_BLOB_PUBLIC_ACCESS] = $acl->getPublicAccess();
+        $headers[Resources::CONTENT_TYPE]            = Resources::XML_CONTENT_TYPE;
+
+        $this->send($method, $headers, $queryParams, $path, $statusCode, $body);
     }
     
     /**
