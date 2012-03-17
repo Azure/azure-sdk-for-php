@@ -401,7 +401,7 @@ interface IBlob
     * @param string                   $blob      name of the blob
     * @param Models\DeleteBlobOptions $options   optional parameters
     * 
-    * @return Models\DeleteBlobResult
+    * @return none.
     * 
     * @see http://msdn.microsoft.com/en-us/library/windowsazure/dd179413.aspx
     */

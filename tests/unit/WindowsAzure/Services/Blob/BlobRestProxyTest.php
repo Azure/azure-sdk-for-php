@@ -856,6 +856,29 @@ class BlobRestProxyTest extends BlobRestProxyTestBase
         $this->assertEquals($metadata, $result->getMetadata());
         $this->assertEquals($contentStream, $result->getContentStream());
     }
+    
+    /**
+     * @covers PEAR2\WindowsAzure\Services\Blob\BlobRestProxy::deleteBlob
+     * @covers PEAR2\WindowsAzure\Services\Blob\BlobRestProxy::_setAccessConditionHeader
+     */
+    public function testDeleteBlob()
+    {
+        // Setup
+        $name = 'deleteblob';
+        $blob = 'myblob';
+        $contentType = 'text/plain; charset=UTF-8';
+        $this->createContainer($name);
+        $options = new CreateBlobOptions();
+        $options->setContentType($contentType);
+        $this->wrapper->createBlockBlob($name, $blob, 'Hello world', $options);
+        
+        // Test
+        $this->wrapper->deleteBlob($name, $blob);
+        
+        // Assert
+        $result = $this->wrapper->listBlobs($name);
+        $this->assertCount(0, $result->getBlobs());
+    }
 }
 
 ?>
