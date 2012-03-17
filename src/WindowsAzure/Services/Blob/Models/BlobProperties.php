@@ -25,6 +25,7 @@
 namespace PEAR2\WindowsAzure\Services\Blob\Models;
 use PEAR2\WindowsAzure\Validate;
 use PEAR2\WindowsAzure\Resources;
+use PEAR2\WindowsAzure\Utilities;
 use PEAR2\WindowsAzure\Core\WindowsAzureUtilities;
 
 /**
@@ -78,6 +79,11 @@ class BlobProperties
     /**
      * @var string
      */
+    private $_contentRange;
+    
+    /**
+     * @var string
+     */
     private $_cacheControl;
     
     /**
@@ -105,19 +111,50 @@ class BlobProperties
     public static function create($parsed)
     {
         $result = new BlobProperties();
+        $clean  = array();
         
-        $result->setBlobType($parsed['BlobType']);
-        $result->setCacheControl($parsed['Cache-Control']);
-        $result->setContentEncoding($parsed['Content-Encoding']);
-        $result->setContentLanguage($parsed['Content-Language']);
-        $result->setContentLength(intval($parsed['Content-Length']));
-        $result->setContentMD5($parsed['Content-MD5']);
-        $result->setContentType($parsed['Content-Type']);
-        $result->setEtag($parsed['Etag']);
-        $date = WindowsAzureUtilities::rfc1123ToDateTime($parsed['Last-Modified']);
+        foreach ($parsed as $key => $value) {
+            $clean[strtolower($key)] = $value;
+        }
+        
+        $date = $clean[Resources::LAST_MODIFIED];
+        $date = WindowsAzureUtilities::rfc1123ToDateTime($date);
+        $result->setBlobType(Utilities::tryGetValue($clean, 'blobtype'));
+        $result->setContentLength(intval($clean[Resources::CONTENT_LENGTH]));
+        $result->setContentType($clean[Resources::CONTENT_TYPE]);
+        $result->setEtag($clean[Resources::ETAG]);
         $result->setLastModified($date);
-        $result->setLeaseStatus($parsed['LeaseStatus']);
-        $result->setSequenceNumber(intval(Resources::X_MS_BLOB_SEQUENCE_NUMBER));
+        $result->setLeaseStatus(Utilities::tryGetValue($clean, 'leasestatus'));
+        $result->setLeaseStatus(
+            Utilities::tryGetValue(
+                $clean, Resources::X_MS_LEASE_STATUS, $result->getLeaseStatus()
+            )
+        );
+        $result->setSequenceNumber(
+            intval(
+                Utilities::tryGetValue($clean, Resources::X_MS_BLOB_SEQUENCE_NUMBER)
+            )
+        );
+        $result->setContentRange(
+            Utilities::tryGetValue($clean, Resources::CONTENT_RANGE)
+        );
+        $result->setCacheControl(
+            Utilities::tryGetValue($clean, Resources::CACHE_CONTROL)
+        );
+        $result->setBlobType(
+            Utilities::tryGetValue(
+                $clean, Resources::X_MS_BLOB_TYPE, $result->getBlobType()
+            )
+        );
+        $result->setContentEncoding(
+            Utilities::tryGetValue($clean, Resources::CONTENT_ENCODING)
+        );
+        $result->setContentLanguage(
+            Utilities::tryGetValue($clean, Resources::CONTENT_LANGUAGE)
+        );
+        $result->setContentMD5(
+            Utilities::tryGetValue($clean, Resources::CONTENT_MD5)
+        );
         
         return $result;
     }
@@ -188,6 +225,28 @@ class BlobProperties
     public function setContentType($contentType)
     {
         $this->_contentType = $contentType;
+    }
+    
+    /**
+     * Gets blob contentRange.
+     *
+     * @return string.
+     */
+    public function getContentRange()
+    {
+        return $this->_contentRange;
+    }
+
+    /**
+     * Sets blob contentRange.
+     *
+     * @param string $contentRange value.
+     *
+     * @return none.
+     */
+    public function setContentRange($contentRange)
+    {
+        $this->_contentRange = $contentRange;
     }
     
     /**

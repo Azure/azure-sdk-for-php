@@ -49,6 +49,8 @@ use PEAR2\WindowsAzure\Services\Blob\Models\GetBlobMetadataOptions;
 use PEAR2\WindowsAzure\Services\Blob\Models\GetBlobMetadataResult;
 use PEAR2\WindowsAzure\Services\Blob\Models\SetBlobMetadataOptions;
 use PEAR2\WindowsAzure\Services\Blob\Models\SetBlobMetadataResult;
+use PEAR2\WindowsAzure\Services\Blob\Models\GetBlobOptions;
+use PEAR2\WindowsAzure\Services\Blob\Models\GetBlobResult;
 
 /**
  * This class constructs HTTP requests and receive HTTP responses for blob
@@ -113,7 +115,7 @@ class BlobRestProxy extends ServiceRestProxy implements IBlob
      * Sets access condition header for given headers array
      * 
      * @param array $headers HTTP request headers
-     * @param type  $options  optional parameters (must container getAccessCondition)
+     * @param type  $options optional parameters (must container getAccessCondition)
      * 
      * @return array
      */
@@ -206,6 +208,28 @@ class BlobRestProxy extends ServiceRestProxy implements IBlob
         $headers[Resources::X_MS_BLOB_CONTENT_LANGUAGE] = $blobContentLanguage;
         $headers[Resources::X_MS_BLOB_CONTENT_MD5]      = $blobContentMD5;
         $headers[Resources::X_MS_BLOB_CACHE_CONTROL]    = $blobCacheControl;
+        
+        return $headers;
+    }
+    
+    /**
+     * Adds Range header to the headers array
+     * 
+     * @param array   $headers HTTP request headers
+     * @param integer $start   the start byte
+     * @param integer $end     the end byte
+     * 
+     * @return array
+     */
+    private function _addOptionalRangeHeader($headers, $start, $end)
+    {
+        if (!is_null($start)) {
+            $range = $start . '-';
+            if (!is_null($end)) {
+                $range .= $end;
+            }
+            $headers[Resources::RANGE] = 'bytes=' . $range;
+        }
         
         return $headers;
     }
@@ -934,7 +958,31 @@ class BlobRestProxy extends ServiceRestProxy implements IBlob
      */
     public function getBlob($container, $blob, $options = null)
     {
-        throw new \Exception(Resources::NOT_IMPLEMENTED_MSG);
+        $method      = \HTTP_Request2::METHOD_GET;
+        $headers     = array();
+        $queryParams = array();
+        $path        = $container . '/' . $blob;
+        $statusCode  = Resources::STATUS_OK;
+        
+        if (is_null($options)) {
+            $options = new GetBlobOptions();
+        }
+        
+        $getMD5  = $options->getComputeRangeMD5();
+        $headers = $this->_setAccessConditionHeader($headers, $options);
+        $headers = $this->_addOptionalRangeHeader(
+            $headers, $options->getRangeStart(), $options->getRangeEnd()
+        );
+        
+        $headers[Resources::X_MS_RANGE_GET_CONTENT_MD5] = $getMD5 ? 'true' : null;
+        $headers[Resources::X_MS_LEASE_ID]              = $options->getLeaseId();
+        
+        $queryParams['snapshot']            = $options->getSnapshot();
+        $queryParams[Resources::QP_TIMEOUT] = strval($options->getTimeout());
+        
+        $response = $this->send($method, $headers, $queryParams, $path, $statusCode);
+        
+        return GetBlobResult::create($response->getHeader(), $response->getBody());
     }
     
     /**

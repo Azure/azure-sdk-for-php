@@ -39,6 +39,8 @@ use PEAR2\WindowsAzure\Services\Blob\Models\CreateBlobOptions;
 use PEAR2\WindowsAzure\Services\Blob\Models\SetBlobPropertiesOptions;
 use PEAR2\WindowsAzure\Services\Blob\Models\GetBlobMetadataResult;
 use PEAR2\WindowsAzure\Services\Blob\Models\SetBlobMetadataResult;
+use PEAR2\WindowsAzure\Services\Blob\Models\GetBlobResult;
+use PEAR2\WindowsAzure\Services\Blob\Models\BlobType;
 
 /**
  * Unit tests for class BlobRestProxy
@@ -824,6 +826,35 @@ class BlobRestProxyTest extends BlobRestProxyTestBase
         // Assert
         $result = $this->wrapper->getBlobMetadata($name, $blob);
         $this->assertEquals($metadata, $result->getMetadata());
+    }
+
+    /**
+     * @covers PEAR2\WindowsAzure\Services\Blob\BlobRestProxy::getBlob
+     * @covers PEAR2\WindowsAzure\Services\Blob\BlobRestProxy::_setAccessConditionHeader
+     * @covers PEAR2\WindowsAzure\Services\Blob\BlobRestProxy::_addOptionalRangeHeader
+     * @covers PEAR2\WindowsAzure\Services\Blob\Models\GetBlobResult::create
+     */
+    public function testGetBlob()
+    {
+        // Setup
+        $name = 'getblob';
+        $blob = 'myblob';
+        $metadata = array('m1' => 'v1', 'm2' => 'v2');
+        $contentType = 'text/plain; charset=UTF-8';
+        $contentStream = 'Hello world';
+        $this->createContainer($name);
+        $options = new CreateBlobOptions();
+        $options->setContentType($contentType);
+        $options->setMetadata($metadata);
+        $this->wrapper->createBlockBlob($name, $blob, $contentStream, $options);
+        
+        // Test
+        $result = $this->wrapper->getBlob($name, $blob);
+        
+        // Assert
+        $this->assertEquals(BlobType::BLOCK_BLOB, $result->getProperties()->getBlobType());
+        $this->assertEquals($metadata, $result->getMetadata());
+        $this->assertEquals($contentStream, $result->getContentStream());
     }
 }
 
