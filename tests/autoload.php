@@ -29,6 +29,8 @@ spl_autoload_register(
             'pear2\\tests\\unit\\windowsazure\\services\\blob\\models\\accessconditionheadertypetest' => '/unit/WindowsAzure/Services/Blob/Models/AccessConditionHeaderTypeTest.php',
             'pear2\\tests\\unit\\windowsazure\\services\\blob\\models\\accessconditiontest' => '/unit/WindowsAzure/Services/Blob/Models/AccessConditionTest.php',
             'pear2\\tests\\unit\\windowsazure\\services\\blob\\models\\accesspolicytest' => '/unit/WindowsAzure/Services/Blob/Models/AccessPolicyTest.php',
+            'pear2\\tests\\unit\\windowsazure\\services\\blob\\models\\acquireleaseoptionstest' => '/unit/WindowsAzure/Services/Blob/Models/AcquireLeaseOptionsTest.php',
+            'pear2\\tests\\unit\\windowsazure\\services\\blob\\models\\acquireleaseresulttest' => '/unit/WindowsAzure/Services/Blob/Models/AcquireLeaseResultTest.php',
             'pear2\\tests\\unit\\windowsazure\\services\\blob\\models\\blobprefixtest' => '/unit/WindowsAzure/Services/Blob/Models/BlobPrefixTest.php',
             'pear2\\tests\\unit\\windowsazure\\services\\blob\\models\\blobpropertiestest' => '/unit/WindowsAzure/Services/Blob/Models/BlobPropertiesTest.php',
             'pear2\\tests\\unit\\windowsazure\\services\\blob\\models\\blobserviceoptionstest' => '/unit/WindowsAzure/Services/Blob/Models/BlobServiceOptionsTest.php',
