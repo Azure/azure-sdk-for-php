@@ -22,7 +22,7 @@
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
 namespace Tests\Framework;
-use Tests\Framework\RestProxyTestBase;
+use PEAR2\Tests\Framework\RestProxyTestBase;
 use PEAR2\WindowsAzure\Services\Core\Configuration;
 use PEAR2\WindowsAzure\Services\Blob\BlobSettings;
 use PEAR2\WindowsAzure\Services\Blob\BlobService;

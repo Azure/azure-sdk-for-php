@@ -15,29 +15,29 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   PEAR2\WindowsAzure\Services\Core\Models
+ * @package   PEAR2\WindowsAzure\Services\Queue\Models
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
  
-namespace PEAR2\WindowsAzure\Services\Core\Models;
+namespace PEAR2\WindowsAzure\Services\Queue\Models;
 use PEAR2\WindowsAzure\Resources;
-use PEAR2\WindowsAzure\Core\AzureUtilities;
+use PEAR2\WindowsAzure\Core\WindowsAzureUtilities;
 
 /**
- * Holds data for single Azure queue message.
+ * Holds data for single WindowsAzure queue message.
  *
  * @category  Microsoft
- * @package   PEAR2\WindowsAzure\Services\Core\Models
+ * @package   PEAR2\WindowsAzure\Services\Queue\Models
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @version   Release: @package_version@
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
-class AzureQueueMessage
+class WindowsAzureQueueMessage
 {
     /**
      * GUID value that identifies the message in the queue
@@ -92,18 +92,19 @@ class AzureQueueMessage
     private $_messageText;
     
     /**
-     * Creates AzureQueueMessage object from parsed XML response of ListMessages.
+     * Creates WindowsAzureQueueMessage object from parsed XML response of 
+     * ListMessages.
      *
      * @param array $parsedResponse XML response parsed into array.
      * 
-     * @return PEAR2\WindowsAzure\Services\Core\Models\AzureQueueMessage.
+     * @return PEAR2\WindowsAzure\Services\Queue\Models\WindowsAzureQueueMessage.
      */
     public static function createFromListMessages($parsedResponse)
     {
         $timeNextVisible = $parsedResponse['TimeNextVisible'];
         
         $msg  = self::createFromPeekMessages($parsedResponse);
-        $date = AzureUtilities::windowsAzureDateToDateTime($timeNextVisible);
+        $date = WindowsAzureUtilities::rfc1123ToDateTime($timeNextVisible);
         $msg->setTimeNextVisible($date);
         $msg->setPopReceipt($parsedResponse['PopReceipt']);
         
@@ -111,24 +112,25 @@ class AzureQueueMessage
     }
     
     /**
-     * Creates AzureQueueMessage object from parsed XML response of PeekMessages.
+     * Creates WindowsAzureQueueMessage object from parsed XML response of
+     * PeekMessages.
      *
      * @param array $parsedResponse XML response parsed into array.
      * 
-     * @return PEAR2\WindowsAzure\Services\Core\Models\AzureQueueMessage.
+     * @return PEAR2\WindowsAzure\Services\Queue\Models\WindowsAzureQueueMessage.
      */
     public static function createFromPeekMessages($parsedResponse)
     {
-        $msg            = new AzureQueueMessage();
+        $msg            = new WindowsAzureQueueMessage();
         $expirationDate = $parsedResponse['ExpirationTime'];
         $insertionDate  = $parsedResponse['InsertionTime'];
         
         $msg->setDequeueCount(intval($parsedResponse['DequeueCount']));
         
-        $date = AzureUtilities::windowsAzureDateToDateTime($expirationDate);
+        $date = WindowsAzureUtilities::rfc1123ToDateTime($expirationDate);
         $msg->setExpirationDate($date);
         
-        $date = AzureUtilities::windowsAzureDateToDateTime($insertionDate);
+        $date = WindowsAzureUtilities::rfc1123ToDateTime($insertionDate);
         $msg->setInsertionDate($date);
         
         $msg->setMessageId($parsedResponse['MessageId']);

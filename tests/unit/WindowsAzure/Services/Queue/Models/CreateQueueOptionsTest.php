@@ -22,7 +22,7 @@
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
 
-use PEAR2\WindowsAzure\Services\Core\Models\CreateQueueOptions;
+use PEAR2\WindowsAzure\Services\Queue\Models\CreateQueueOptions;
 
 /**
  * Unit tests for class CreateQueueOptions
@@ -38,7 +38,7 @@ use PEAR2\WindowsAzure\Services\Core\Models\CreateQueueOptions;
 class CreateQueueOptionsTest extends PHPUnit_Framework_TestCase
 {
     /**
-     * @covers PEAR2\WindowsAzure\Services\Core\Models\CreateQueueOptions::setMetadata
+     * @covers PEAR2\WindowsAzure\Services\Queue\Models\CreateQueueOptions::setMetadata
      */
     public function testSetMetadata()
     {
@@ -54,7 +54,7 @@ class CreateQueueOptionsTest extends PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers PEAR2\WindowsAzure\Services\Core\Models\CreateQueueOptions::getMetadata
+     * @covers PEAR2\WindowsAzure\Services\Queue\Models\CreateQueueOptions::getMetadata
      */
     public function testGetMetadata()
     {
@@ -71,7 +71,7 @@ class CreateQueueOptionsTest extends PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers PEAR2\WindowsAzure\Services\Core\Models\CreateQueueOptions::addMetadata
+     * @covers PEAR2\WindowsAzure\Services\Queue\Models\CreateQueueOptions::addMetadata
      */
     public function testAddMetadata()
     {

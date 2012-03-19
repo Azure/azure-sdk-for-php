@@ -6,8 +6,6 @@ spl_autoload_register(
       static $classes = null;
       if ($classes === null) {
          $classes = array(
-            'azurequeuemessagetest' => '/unit/WindowsAzure/Services/Queue/Models/AzureQueueMessageTest.php',
-            'azureutilitiestest' => '/unit/WindowsAzure/Core/AzureUtilitiesTest.php',
             'blobrestproxytest' => '/unit/WindowsAzure/Services/Blob/BlobRestProxyTest.php',
             'blobservicetest' => '/unit/WindowsAzure/Services/Blob/BlobServiceTest.php',
             'configurationtest' => '/unit/WindowsAzure/Services/Core/ConfigurationTest.php',
@@ -15,13 +13,15 @@ spl_autoload_register(
             'createqueueoptionstest' => '/unit/WindowsAzure/Services/Queue/Models/CreateQueueOptionsTest.php',
             'datefiltertest' => '/unit/WindowsAzure/Services/Core/Filters/DateFilterTest.php',
             'getqueuemetadataresulttest' => '/unit/WindowsAzure/Services/Queue/Models/GetQueueMetadataResultTest.php',
-            'getservicepropertiesresulttest' => '/unit/WindowsAzure/Services/Queue/Models/GetServicePropertiesResultTest.php',
+            'getservicepropertiesresulttest' => '/unit/WindowsAzure/Services/Core/Models/GetServicePropertiesResultTest.php',
             'httpclienttest' => '/unit/WindowsAzure/Core/HttpClientTest.php',
             'invalidargumenttypeexceptiontest' => '/unit/WindowsAzure/Core/InvalidArgumentTypeExceptionTest.php',
             'listmessagesoptionstest' => '/unit/WindowsAzure/Services/Queue/Models/ListMessagesOptionsTest.php',
             'listmessagesresulttest' => '/unit/WindowsAzure/Services/Queue/Models/ListMessagesResultTest.php',
             'listqueueoptionstest' => '/unit/WindowsAzure/Services/Queue/Models/ListQueuesOptionsTest.php',
             'listqueueresulttest' => '/unit/WindowsAzure/Services/Queue/Models/ListQueuesResultTest.php',
+            'pear2\\tests\\framework\\queuerestproxytestbase' => '/framework/QueueRestProxyTestBase.php',
+            'pear2\\tests\\framework\\restproxytestbase' => '/framework/ServiceRestProxyTestBase.php',
             'pear2\\tests\\framework\\testresources' => '/framework/TestResources.php',
             'pear2\\tests\\mock\\windowsazure\\services\\core\\authentication\\sharedkeyauthenticationschememock' => '/mock/WindowsAzure/Services/Core/Authentication/SharedKeyAuthenticationSchemeMock.php',
             'pear2\\tests\\mock\\windowsazure\\services\\core\\authentication\\storageauthenticationschememock' => '/mock/WindowsAzure/Services/Core/Authentication/StorageAuthenticationSchemeMock.php',
@@ -58,12 +58,12 @@ spl_autoload_register(
             'sharedkeyfiltertest' => '/unit/WindowsAzure/Services/Core/Filters/SharedKeyFilterTest.php',
             'storageauthenticationschemetest' => '/unit/WindowsAzure/Services/Core/Authentication/StorageAuthenticationSchemeTest.php',
             'tests\\framework\\blobrestproxytestbase' => '/framework/BlobRestProxyTestBase.php',
-            'tests\\framework\\queuerestproxytestbase' => '/framework/QueueRestProxyTestBase.php',
-            'tests\\framework\\restproxytestbase' => '/framework/ServiceRestProxyTestBase.php',
             'updatemessageresulttest' => '/unit/WindowsAzure/Services/Queue/Models/UpdateMessageResultTest.php',
             'urltest' => '/unit/WindowsAzure/Core/UrlTest.php',
             'utilitiestest' => '/unit/WindowsAzure/UtilitiesTest.php',
-            'validatetest' => '/unit/WindowsAzure/ValidateTest.php'
+            'validatetest' => '/unit/WindowsAzure/ValidateTest.php',
+            'windowsazurequeuemessagetest' => '/unit/WindowsAzure/Services/Queue/Models/WindowsAzureQueueMessageTest.php',
+            'windowsazureutilitiestest' => '/unit/WindowsAzure/Core/WindowsAzureUtilitiesTest.php'
           );
       }
       $cn = strtolower($class);

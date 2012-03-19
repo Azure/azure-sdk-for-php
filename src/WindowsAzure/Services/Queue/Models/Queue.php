@@ -15,22 +15,22 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   PEAR2\WindowsAzure\Services\Core\Models
+ * @package   PEAR2\WindowsAzure\Services\Queue\Models
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
  
-namespace PEAR2\WindowsAzure\Services\Core\Models;
+namespace PEAR2\WindowsAzure\Services\Queue\Models;
 use PEAR2\WindowsAzure\Resources;
 use PEAR2\WindowsAzure\Utilities;
 
 /**
- * Azure queue object.
+ * WindowsAzure queue object.
  *
  * @category  Microsoft
- * @package   PEAR2\WindowsAzure\Services\Core\Models
+ * @package   PEAR2\WindowsAzure\Services\Queue\Models
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
@@ -49,7 +49,7 @@ class Queue
      * @param string $name queue name.
      * @param string $url  queue url.
      * 
-     * @return PEAR2\WindowsAzure\Services\Core\Models\Queue.
+     * @return PEAR2\WindowsAzure\Services\Queue\Models\Queue.
      */
     function __construct($name, $url)
     {

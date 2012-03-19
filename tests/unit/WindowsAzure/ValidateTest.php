@@ -25,7 +25,7 @@
 use PEAR2\WindowsAzure\Validate;
 use PEAR2\WindowsAzure\Core\InvalidArgumentTypeException;
 use PEAR2\WindowsAzure\Resources;
-use PEAR2\WindowsAzure\Core\AzureUtilities;
+use PEAR2\WindowsAzure\Core\WindowsAzureUtilities;
 
 /**
  * Unit tests for class ValidateTest
@@ -140,7 +140,7 @@ class ValidateTest extends PHPUnit_Framework_TestCase
      */
     public function testIsDateWithDate()
     {
-        $date = AzureUtilities::windowsAzureDateToDateTime('Fri, 09 Oct 2009 21:04:30 GMT');
+        $date = WindowsAzureUtilities::rfc1123ToDateTime('Fri, 09 Oct 2009 21:04:30 GMT');
         Validate::isDate($date);
         
         $this->assertTrue(true);
