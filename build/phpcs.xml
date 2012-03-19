@@ -7,30 +7,23 @@
  <rule ref="Generic.CodeAnalysis.JumbledIncrementer"/>
  <rule ref="Generic.CodeAnalysis.UnconditionalIfStatement"/>
  <rule ref="Generic.CodeAnalysis.UnnecessaryFinalModifier"/>
- <rule ref="Generic.CodeAnalysis.UselessOverridingMethod"/>
 
- <rule ref="Generic.Commenting.Todo"/>
-
- <rule ref="Generic.ControlStructures.InlineControlStructure"/>
-
- <rule ref="Generic.Files.LineEndings"/>
-
+ <rule ref="Generic.Files.LineLength"/>
+ 
  <rule ref="Generic.Formatting.DisallowMultipleStatements"/>
  <rule ref="Generic.Formatting.MultipleStatementAlignment"/>
- <rule ref="Generic.Formatting.NoSpaceAfterCast"/>
 
- <rule ref="Generic.Functions.OpeningFunctionBraceBsdAllman"/>
- <rule ref="PEAR.Functions.ValidDefaultValue"/>
-
+ <rule ref="Generic.Metrics.CyclomaticComplexity"/>
+ <rule ref="Generic.Metrics.NestingLevel"/>
+ 
  <rule ref="Generic.NamingConventions.ConstructorName"/>
  <rule ref="Generic.NamingConventions.UpperCaseConstantName"/>
- <rule ref="PEAR.NamingConventions.ValidClassName"/>
 
  <rule ref="Generic.PHP.DisallowShortOpenTag"/>
  <rule ref="Generic.PHP.NoSilencedErrors"/>
- <rule ref="Generic.PHP.UpperCaseConstant"/>
 
  <rule ref="Generic.WhiteSpace.DisallowTabIndent"/>
- <rule ref="Generic.WhiteSpace.ScopeIndent"/>
- <rule ref="Squiz.WhiteSpace.SuperfluousWhitespace"/>
-</ruleset>
+
+ <rule ref="PEAR"/>
+ 
+ </ruleset>
