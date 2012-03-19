@@ -26,6 +26,7 @@ namespace PEAR2\WindowsAzure\Services\Core;
 use PEAR2\WindowsAzure\Core\Url;
 use PEAR2\WindowsAzure\Core\IHttpClient;
 use PEAR2\WindowsAzure\Resources;
+use PEAR2\WindowsAzure\Services\Blob\Models\AccessConditionHeaderType;
 
 /**
  * Base class for all services rest proxies.
@@ -125,6 +126,27 @@ class ServiceRestProxy
         $queueWithFilter->_filters[] = $filter;
 
         return $queueWithFilter;
+    }
+    
+    /**
+     * Adds optional header to headers if set
+     * 
+     * @param array           $headers         array of request headers
+     * @param AccessCondition $accessCondition the access condition object
+     * 
+     * @return array
+     */
+    public function addOptionalAccessContitionHeader($headers, $accessCondition)
+    {
+        if (!is_null($accessCondition)) {
+            $header = $accessCondition->getHeader();
+            
+            if ($header != AccessConditionHeaderType::NONE) {
+                $headers[$header] = $accessCondition->getValue();
+            }
+        }
+        
+        return $headers;
     }
 }
 

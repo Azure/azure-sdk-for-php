@@ -35,6 +35,7 @@ use PEAR2\WindowsAzure\Services\Blob\Models\ListContainersResult;
 use PEAR2\WindowsAzure\Services\Blob\Models\CreateContainerOptions;
 use PEAR2\WindowsAzure\Services\Blob\Models\GetContainerPropertiesResult;
 use PEAR2\WindowsAzure\Services\Blob\Models\GetContainerACLResult;
+use PEAR2\WindowsAzure\Services\Blob\Models\SetContainerMetadataOptions;
 
 /**
  * This class constructs HTTP requests and receive HTTP responses for blob
@@ -362,7 +363,25 @@ class BlobRestProxy extends ServiceRestProxy implements IBlob
      */
     public function setContainerMetadata($container, $metadata, $options = null)
     {
-        throw new \Exception(Resources::NOT_IMPLEMENTED_MSG);
+        $method      = \HTTP_Request2::METHOD_PUT;
+        $headers     = AzureUtilities::generateMetadataHeaders($metadata);
+        $queryParams = array();
+        $path        = $container;
+        $statusCode  = Resources::STATUS_OK;
+        
+        if (is_null($options)) {
+            $options = new SetContainerMetadataOptions();
+        }
+        
+        $queryParams['timeout'] = strval($options->getTimeout());
+        $queryParams['restype'] = 'container';
+        $queryParams['comp']    = 'metadata';
+        
+        $header           = $options->getAccessCondition()->getHeader();
+        $value            = $options->getAccessCondition()->getValue();
+        $headers[$header] = $value;
+
+        $this->send($method, $headers, $queryParams, $path, $statusCode);
     }
     
     /**
