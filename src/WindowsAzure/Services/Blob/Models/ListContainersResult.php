@@ -58,16 +58,16 @@ class ListContainersResult
     {
         $result              = new ListContainersResult();
         $result->_prefix     = Utilities::tryGetValue(
-            $parsedResponse, Resources::PREFIX
+            $parsedResponse, Resources::QP_PREFIX
         );
         $result->_marker     = Utilities::tryGetValue(
-            $parsedResponse, Resources::MARKER
+            $parsedResponse, Resources::QP_MARKER
         );
         $result->_nextMarker = Utilities::tryGetValue(
-            $parsedResponse, Resources::NEXT_MARKER
+            $parsedResponse, Resources::QP_NEXT_MARKER
         );
         $result->_maxResults = Utilities::tryGetValue(
-            $parsedResponse, Resources::MAX_RESULTS
+            $parsedResponse, Resources::QP_MAX_RESULTS
         );
         $result->_containers = array();
         $rawContainer        = array();
@@ -82,7 +82,7 @@ class ListContainersResult
             $container->setName($value['Name']);
             $container->setUrl($value['Url']);
             $container->setMetadata(
-                Utilities::tryGetValue($value, Resources::METADATA)
+                Utilities::tryGetValue($value, Resources::QP_METADATA)
             );
             $properties = new ContainerProperties();
             $date       = $value['Properties']['Last-Modified'];

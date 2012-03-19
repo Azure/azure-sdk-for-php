@@ -15,34 +15,63 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   PEAR2\WindowsAzure\Services\Queue\Models
+ * @package   PEAR2\WindowsAzure
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
  
-namespace PEAR2\WindowsAzure\Services\Queue\Models;
-use PEAR2\WindowsAzure\Services\Queue\Models\QueueServiceOptions;
-use \PEAR2\WindowsAzure\Validate;
+namespace PEAR2\WindowsAzure\Services\Blob\Models;
+use PEAR2\WindowsAzure\Validate;
 
 /**
- * Options for listQueues API.
+ * Short description
  *
  * @category  Microsoft
- * @package   PEAR2\WindowsAzure\Services\Queue\Models
+ * @package   PEAR2\WindowsAzure
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @version   Release: @package_version@
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
-class ListQueuesOptions extends QueueServiceOptions
+class ListBlobsOptions extends BlobServiceOptions
 {
+    /**
+     * @var string
+     */
     private $_prefix;
+    
+    /**
+     * @var string
+     */
     private $_marker;
+    
+    /**
+     * @var string
+     */
+    private $_delimiter;
+    
+    /**
+     * @var integer
+     */
     private $_maxResults;
+    
+    /**
+     * @var boolean
+     */
     private $_includeMetadata;
+    
+    /**
+     * @var boolean
+     */
+    private $_includeSnapshots;
+    
+    /**
+     * @var boolean
+     */
+    private $_includeUncommittedBlobs;
 
     /**
      * Gets prefix.
@@ -65,6 +94,29 @@ class ListQueuesOptions extends QueueServiceOptions
     {
         Validate::isString($prefix);
         $this->_prefix = $prefix;
+    }
+    
+    /**
+     * Gets delimiter.
+     *
+     * @return string.
+     */
+    public function getDelimiter()
+    {
+        return $this->_delimiter;
+    }
+
+    /**
+     * Sets perfix.
+     *
+     * @param string $delimiter value.
+     * 
+     * @return none.
+     */
+    public function setDelimiter($delimiter)
+    {
+        Validate::isString($delimiter);
+        $this->_delimiter = $delimiter;
     }
 
     /**
@@ -93,7 +145,7 @@ class ListQueuesOptions extends QueueServiceOptions
     /**
      * Gets max results.
      * 
-     * @return string.
+     * @return integer.
      */
     public function getMaxResults()
     {
@@ -103,13 +155,13 @@ class ListQueuesOptions extends QueueServiceOptions
     /**
      * Sets max results.
      *
-     * @param string $maxResults value.
+     * @param integer $maxResults value.
      * 
      * @return none.
      */
     public function setMaxResults($maxResults)
     {
-        Validate::isString($maxResults);
+        Validate::isInteger($maxResults);
         $this->_maxResults = $maxResults;
     }
 
@@ -134,6 +186,52 @@ class ListQueuesOptions extends QueueServiceOptions
     {
         Validate::isBoolean($includeMetadata);
         $this->_includeMetadata = $includeMetadata;
+    }
+    
+    /**
+     * Indicates if snapshots is included or not.
+     * 
+     * @return boolean.
+     */
+    public function getIncludeSnapshots()
+    {
+        return $this->_includeSnapshots;
+    }
+
+    /**
+     * Sets the include snapshots flag.
+     *
+     * @param bool $includeSnapshots value.
+     * 
+     * @return none.
+     */
+    public function setIncludeSnapshots($includeSnapshots)
+    {
+        Validate::isBoolean($includeSnapshots);
+        $this->_includeSnapshots = $includeSnapshots;
+    }
+    
+    /**
+     * Indicates if uncommittedBlobs is included or not.
+     * 
+     * @return boolean.
+     */
+    public function getIncludeUncommittedBlobs()
+    {
+        return $this->_includeUncommittedBlobs;
+    }
+
+    /**
+     * Sets the include uncommittedBlobs flag.
+     *
+     * @param bool $includeUncommittedBlobs value.
+     * 
+     * @return none.
+     */
+    public function setIncludeUncommittedBlobs($includeUncommittedBlobs)
+    {
+        Validate::isBoolean($includeUncommittedBlobs);
+        $this->_includeUncommittedBlobs = $includeUncommittedBlobs;
     }
 }
 

@@ -55,15 +55,25 @@ class Resources
     const X_MS_BLOB_PUBLIC_ACCESS         = 'x-ms-blob-public-access';
     const X_MS_VERSION                    = 'x-ms-version';
     const X_MS_DATE                       = 'x-ms-date';
-    const ETAG                            = 'ETag';
-    const LAST_MODIFIED                   = 'Last-Modified';
+    const X_MS_BLOB_SEQUENCE_NUMBER       = 'x-ms-blob-sequence-number';
+    const X_MS_BLOB_TYPE                  = 'x-ms-blob-type';
+    const X_MS_BLOB_CONTENT_TYPE          = 'x-ms-blob-content-type';
+    const X_MS_BLOB_CONTENT_ENCODING      = 'x-ms-blob-content-encoding';
+    const X_MS_BLOB_CONTENT_LANGUAGE      = 'x-ms-blob-content-language';
+    const X_MS_BLOB_CONTENT_MD5           = 'x-ms-blob-content-md5';
+    const X_MS_BLOB_CACHE_CONTROL         = 'x-ms-blob-cache-control';
+    const X_MS_BLOB_CONTENT_LENGTH        = 'x-ms-blob-content-length';
+    const X_MS_LEASE_ID                   = 'x-ms-lease-id';
+    const ETAG                            = 'etag';
+    const LAST_MODIFIED                   = 'last-modified';
     const DATE                            = 'date';
-    const AUTHENTICATION                  = 'Authorization';
+    const AUTHENTICATION                  = 'authorization';
     const CONTENT_ENCODING                = 'content-encoding';
     const CONTENT_LANGUAGE                = 'content-language';
     const CONTENT_LENGTH                  = 'content-length';
     const CONTENT_MD5                     = 'content-md5';
     const CONTENT_TYPE                    = 'content-type';
+    const CACHE_CONTROL                   = 'cache-control';
     const IF_MODIFIED_SINCE               = 'if-modified-since';
     const IF_MATCH                        = 'if-match';
     const IF_NONE_MATCH                   = 'if-none-match';
@@ -88,14 +98,19 @@ class Resources
     const API_VERSION = '2011-08-18';
 
     // Query parameter names
-    const PREFIX      = 'Prefix';
-    const MAX_RESULTS = 'MaxResults';
-    const METADATA    = 'Metadata';
-    const MARKER      = 'Marker';
-    const NEXT_MARKER = 'NextMarker';
+    const QP_PREFIX      = 'Prefix';
+    const QP_MAX_RESULTS = 'MaxResults';
+    const QP_METADATA    = 'Metadata';
+    const QP_MARKER      = 'Marker';
+    const QP_NEXT_MARKER = 'NextMarker';
+    const QP_COMP        = 'comp';
+    const QP_INCLUDE     = 'include';
+    const QP_TIMEOUT     = 'timeout';
+    const QP_DELIMITER   = 'Delimiter';
     
-    // Content types
+    // Request body content types
     const XML_CONTENT_TYPE = 'application/x-www-form-urlencoded';
+    const BINARY_FILE_TYPE = 'application/octet-stream';
     
     // Status Codes
     const STATUS_OK         = 200;

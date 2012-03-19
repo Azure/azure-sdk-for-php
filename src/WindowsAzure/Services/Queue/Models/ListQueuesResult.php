@@ -57,16 +57,16 @@ class ListQueuesResult
     {
         $result              = new ListQueuesResult();
         $result->_prefix     = Utilities::tryGetValue(
-            $parsedResponse, Resources::PREFIX
+            $parsedResponse, Resources::QP_PREFIX
         );
         $result->_marker     = Utilities::tryGetValue(
-            $parsedResponse, Resources::MARKER
+            $parsedResponse, Resources::QP_MARKER
         );
         $result->_nextMarker = Utilities::tryGetValue(
-            $parsedResponse, Resources::NEXT_MARKER
+            $parsedResponse, Resources::QP_NEXT_MARKER
         );
         $result->_maxResults = Utilities::tryGetValue(
-            $parsedResponse, Resources::MAX_RESULTS
+            $parsedResponse, Resources::QP_MAX_RESULTS
         );
         $result->_queues     = array();
         $rawQueues           = array();
@@ -77,7 +77,9 @@ class ListQueuesResult
         
         foreach ($rawQueues as $value) {
             $queue = new Queue($value['Name'], $value['Url']);
-            $queue->setMetadata(Utilities::tryGetValue($value, Resources::METADATA));
+            $queue->setMetadata(
+                Utilities::tryGetValue($value, Resources::QP_METADATA)
+            );
             $result->_queues[] = $queue;
         }
         

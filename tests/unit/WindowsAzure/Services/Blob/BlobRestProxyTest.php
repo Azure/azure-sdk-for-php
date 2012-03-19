@@ -26,12 +26,16 @@ use Tests\Framework\BlobRestProxyTestBase;
 use PEAR2\WindowsAzure\Core\WindowsAzureUtilities;
 use PEAR2\WindowsAzure\Core\ServiceException;
 use PEAR2\Tests\Framework\TestResources;
+use PEAR2\WindowsAzure\Resources;
 use PEAR2\WindowsAzure\Services\Core\Models\ServiceProperties;
 use PEAR2\WindowsAzure\Services\Blob\Models\ListContainersOptions;
 use PEAR2\WindowsAzure\Services\Blob\Models\ListContainersResult;
 use PEAR2\WindowsAzure\Services\Blob\Models\CreateContainerOptions;
 use PEAR2\WindowsAzure\Services\Blob\Models\GetContainerPropertiesResult;
 use PEAR2\WindowsAzure\Services\Blob\Models\ContainerACL;
+use PEAR2\WindowsAzure\Services\Blob\Models\ListBlobsResult;
+use PEAR2\WindowsAzure\Services\Blob\Models\ListBlobsOptions;
+use PEAR2\WindowsAzure\Services\Blob\Models\CreateBlobOptions;
 
 /**
  * Unit tests for class BlobRestProxy
@@ -113,9 +117,9 @@ class BlobRestProxyTest extends BlobRestProxyTestBase
     public function testListContainersWithOptions()
     {
         // Setup
-        $container1        = 'listcontainerwithoptions1';
-        $container2        = 'listcontainerwithoptions2';
-        $container3        = 'mlistcontainerwithoptions3';
+        $container1    = 'listcontainerwithoptions1';
+        $container2    = 'listcontainerwithoptions2';
+        $container3    = 'mlistcontainerwithoptions3';
         $metadataName  = 'Mymetadataname';
         $metadataValue = 'MetadataValue';
         $options = new CreateContainerOptions();
@@ -453,6 +457,210 @@ class BlobRestProxyTest extends BlobRestProxyTestBase
         $this->assertEquals($expectedEtag, $result->getEtag());
         $this->assertEquals($expectedLastModified, $result->getLastModified());
         $this->assertEquals($expected, $result->getMetadata());
+    }
+    
+    /**
+     * @covers PEAR2\WindowsAzure\Services\Blob\BlobRestProxy::listBlobs
+     * @covers PEAR2\WindowsAzure\Services\Core\ServiceRestProxy::send
+     */
+    public function testListBlobsSimple()
+    {
+        // Setup
+        $name  = 'listblobssimple';
+        $blob1 = 'blob1';
+        $blob2 = 'blob2';
+        $blob3 = 'blob3';
+        $length = 512;
+
+        $this->createContainer($name);
+        $this->wrapper->createPageBlob($name, $blob1, $length);
+        $this->wrapper->createPageBlob($name, $blob2, $length);
+        $this->wrapper->createPageBlob($name, $blob3, $length);
+        
+        // Test
+        $result = $this->wrapper->listBlobs($name);
+
+        // Assert
+        $blobs = $result->getBlobs();
+        $this->assertEquals($blob1, $blobs[0]->getName());
+        $this->assertEquals($blob2, $blobs[1]->getName());
+        $this->assertEquals($blob3, $blobs[2]->getName());
+    }
+
+    /**
+    * @covers PEAR2\WindowsAzure\Services\Blob\BlobRestProxy::listBlobs
+    */
+    public function testListBlobsWithOptions()
+    {
+        // Setup
+        $name  = 'listblobswithoptions';
+        $blob1 = 'blob1';
+        $blob2 = 'blob2';
+        $blob3 = 'blob3';
+        $blob4 = 'lblob1';
+        $blob5 = 'lblob2';
+        $blob6 = 'lblob3';
+        $length = 512;
+        $options = new ListBlobsOptions();
+        $options->setIncludeMetadata(true);
+        $options->setIncludeSnapshots(true);
+        $options->setIncludeUncommittedBlobs(true);
+        $options->setMaxResults(10);
+        $options->setPrefix('lb');
+
+        $this->createContainer($name);
+        $this->wrapper->createPageBlob($name, $blob1, $length);
+        $this->wrapper->createPageBlob($name, $blob2, $length);
+        $this->wrapper->createPageBlob($name, $blob3, $length);
+        $this->wrapper->createPageBlob($name, $blob4, $length);
+        $this->wrapper->createPageBlob($name, $blob5, $length);
+        $this->wrapper->createPageBlob($name, $blob6, $length);
+        
+        // Test
+        $result = $this->wrapper->listBlobs($name, $options);
+
+        // Assert
+        $this->assertCount(3, $result->getBlobs());
+        $this->assertCount(0, $result->getBlobPrefixes());
+    }
+    
+    /**
+    * @covers PEAR2\WindowsAzure\Services\Blob\BlobRestProxy::listBlobs
+    */
+    public function testListBlobsWithOptionsWithDelimiter()
+    {
+        // Setup
+        $name  = 'listblobswithoptionswithdelimiter';
+        $blob1 = 'blob1';
+        $blob2 = 'blob2';
+        $blob3 = 'blob3';
+        $blob4 = 'lblob1';
+        $blob5 = 'lblob2';
+        $blob6 = 'lblob3';
+        $length = 512;
+        $options = new ListBlobsOptions();
+        $options->setDelimiter('b');
+        $options->setIncludeMetadata(true);
+        $options->setIncludeUncommittedBlobs(true);
+        $options->setMaxResults(10);
+        $this->createContainer($name);
+        $this->wrapper->createPageBlob($name, $blob1, $length);
+        $this->wrapper->createPageBlob($name, $blob2, $length);
+        $this->wrapper->createPageBlob($name, $blob3, $length);
+        $this->wrapper->createPageBlob($name, $blob4, $length);
+        $this->wrapper->createPageBlob($name, $blob5, $length);
+        $this->wrapper->createPageBlob($name, $blob6, $length);
+        
+        // Test
+        $result = $this->wrapper->listBlobs($name, $options);
+
+        // Assert
+        $this->assertCount(0, $result->getBlobs());
+        $this->assertCount(2, $result->getBlobPrefixes());
+    }
+
+    /**
+    * @covers PEAR2\WindowsAzure\Services\Blob\BlobRestProxy::listBlobs
+    */
+    public function testListBlobsWithNextMarker()
+    {
+        // Setup
+        $name  = 'listblobswithnextmarker';
+        $blob1 = 'blob1';
+        $blob2 = 'blob2';
+        $blob3 = 'blob3';
+        $length = 512;
+        $options = new ListBlobsOptions();
+        $options->setMaxResults(2);
+
+        $this->createContainer($name);
+        $this->wrapper->createPageBlob($name, $blob1, $length);
+        $this->wrapper->createPageBlob($name, $blob2, $length);
+        $this->wrapper->createPageBlob($name, $blob3, $length);
+        
+        // Test
+        $result = $this->wrapper->listBlobs($name, $options);
+        
+        // Assert
+        $this->assertCount(2, $result->getBlobs());
+        
+        // Setup
+        $options->setMarker($result->getNextMarker());
+        
+        $result = $this->wrapper->listBlobs($name, $options);
+
+        // Assert
+        $this->assertCount(1, $result->getBlobs());
+    }
+
+    /**
+    * @covers PEAR2\WindowsAzure\Services\Blob\BlobRestProxy::listBlobs
+    */
+    public function testListBlobsWithNoBlobs()
+    {
+        // Test
+        $name = 'listblobswithnoblobs';
+        $this->createContainer($name);
+        $result = $this->wrapper->listBlobs($name);
+        
+        // Assert
+        $this->assertCount(0, $result->getBlobs());
+    }
+
+    /**
+     * @covers PEAR2\WindowsAzure\Services\Blob\BlobRestProxy::listBlobs
+     */
+    public function testListBlobsWithOneResult()
+    {
+        // Test
+        $name = 'listblobswithoneresult';
+        $this->createContainer($name);
+        $this->wrapper->createPageBlob($name, 'myblob', 512);
+        $result = $this->wrapper->listBlobs($name);
+        
+        // Assert
+        $this->assertCount(1, $result->getBlobs());
+    }
+    
+    /**
+     * @covers PEAR2\WindowsAzure\Services\Blob\BlobRestProxy::createPageBlob
+     * @covers PEAR2\WindowsAzure\Services\Blob\BlobRestProxy::_addCreateBlobOptionalHeaders
+     */
+    public function testCreatePageBlob()
+    {
+        // Setup
+        $name = 'createpageblob';
+        $this->createContainer($name);
+        
+        // Test
+        $this->wrapper->createPageBlob($name, 'myblob', 512);
+        
+        // Assert
+        $result = $this->wrapper->listBlobs($name);
+        $this->assertCount(1, $result->getBlobs());
+    }
+    
+    /**
+     * @covers PEAR2\WindowsAzure\Services\Blob\BlobRestProxy::createPageBlob
+     * @covers PEAR2\WindowsAzure\Services\Blob\BlobRestProxy::_addCreateBlobOptionalHeaders
+     */
+    public function testCreatePageBlobWithExtraOptions()
+    {
+        // Setup
+        $name = 'createpageblobwithextraoptions';
+        $this->createContainer($name);
+        $metadata = array('Name1' => 'Value1', 'Name2' => 'Value2');
+        $contentType = Resources::BINARY_FILE_TYPE;
+        $options = new CreateBlobOptions();
+        $options->setMetadata($metadata);
+        $options->setContentType($contentType);
+        
+        // Test
+        $this->wrapper->createPageBlob($name, 'myblob', 512, $options);
+        
+        // Assert
+        $result = $this->wrapper->listBlobs($name);
+        $this->assertCount(1, $result->getBlobs());
     }
 }
 
