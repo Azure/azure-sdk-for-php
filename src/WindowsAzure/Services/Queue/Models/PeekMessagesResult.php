@@ -15,22 +15,22 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   PEAR2\WindowsAzure\Services\Core\Models
+ * @package   PEAR2\WindowsAzure\Services\Queue\Models
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
 
-namespace PEAR2\WindowsAzure\Services\Core\Models;
-use PEAR2\WindowsAzure\Services\Core\Models\AzureQueueMessage;
+namespace PEAR2\WindowsAzure\Services\Queue\Models;
+use PEAR2\WindowsAzure\Services\Queue\Models\WindowsAzureQueueMessage;
 use PEAR2\WindowsAzure\Utilities;
 
 /**
  * Holds results of listMessages wrapper.
  *
  * @category  Microsoft
- * @package   PEAR2\WindowsAzure\Services\Core\Models
+ * @package   PEAR2\WindowsAzure\Services\Queue\Models
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
@@ -51,7 +51,7 @@ class PeekMessagesResult
      *
      * @param array $parsedResponse XML response parsed into array.
      * 
-     * @return PEAR2\WindowsAzure\Services\Core\Models\PeekMessagesResult.
+     * @return PEAR2\WindowsAzure\Services\Queue\Models\PeekMessagesResult.
      */
     public static function create($parsedResponse)
     {
@@ -61,7 +61,9 @@ class PeekMessagesResult
         if (!empty($parsedResponse)) {
             $rawMessages = Utilities::getArray($parsedResponse['QueueMessage']);
             foreach ($rawMessages as $value) {
-                $queueMessages[] = AzureQueueMessage::createFromPeekMessages($value);
+                $message = WindowsAzureQueueMessage::createFromPeekMessages($value);
+                
+                $queueMessages[] = $message;
             }
         }
         $result->setQueueMessages($queueMessages);

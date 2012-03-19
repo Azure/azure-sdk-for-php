@@ -26,7 +26,7 @@ namespace PEAR2\WindowsAzure\Services\Blob\Models;
 use PEAR2\WindowsAzure\Resources;
 use PEAR2\WindowsAzure\Services\Blob\Models\Container;
 use PEAR2\WindowsAzure\Utilities;
-use PEAR2\WindowsAzure\Core\AzureUtilities;
+use PEAR2\WindowsAzure\Core\WindowsAzureUtilities;
 
 /**
  * Container to hold list container response object.
@@ -86,7 +86,7 @@ class ListContainersResult
             );
             $properties = new ContainerProperties();
             $date       = $value['Properties']['Last-Modified'];
-            $date       = AzureUtilities::windowsAzureDateToDateTime($date);
+            $date       = WindowsAzureUtilities::rfc1123ToDateTime($date);
             $properties->setLastModified($date);
             $properties->setEtag($value['Properties']['Etag']);
             $container->setProperties($properties);

@@ -37,7 +37,14 @@ namespace PEAR2\WindowsAzure\Services\Blob\Models;
  */
 class ContainerProperties
 {
+    /**
+     * @var \DateTime
+     */
     private $_lastModified;
+    
+    /**
+     * @var string
+     */
     private $_etag;
     
     /**

@@ -26,7 +26,7 @@ use PEAR2\WindowsAzure\Services\Blob\Models\GetContainerACLResult;
 use PEAR2\WindowsAzure\Services\Blob\Models\ContainerACL;
 use PEAR2\Tests\Framework\TestResources;
 use PEAR2\WindowsAzure\Resources;
-use PEAR2\WindowsAzure\Core\AzureUtilities;
+use PEAR2\WindowsAzure\Core\WindowsAzureUtilities;
 
 /**
  * Unit tests for class GetContainerACLResult
@@ -50,7 +50,7 @@ class GetContainerACLResultTest extends \PHPUnit_Framework_TestCase
         $sample = Resources::EMPTY_STRING;
         $expectedEtag = '0x8CAFB82EFF70C46';
         $expectedLastModified = 'Sun, 25 Sep 2011 19:42:18 GMT';
-        $expectedDate = AzureUtilities::windowsAzureDateToDateTime($expectedLastModified);
+        $expectedDate = WindowsAzureUtilities::rfc1123ToDateTime($expectedLastModified);
         $expectedPublicAccess = 'container';
         
         // Test

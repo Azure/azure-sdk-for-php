@@ -25,7 +25,7 @@
 namespace PEAR2\WindowsAzure\Services\Blob\Models;
 use PEAR2\WindowsAzure\Services\Blob\Models\AccessPolicy;
 use PEAR2\WindowsAzure\Services\Blob\Models\SignedIdentifier;
-use PEAR2\WindowsAzure\Core\AzureUtilities;
+use PEAR2\WindowsAzure\Core\WindowsAzureUtilities;
 use PEAR2\WindowsAzure\Utilities;
 use PEAR2\WindowsAzure\Validate;
 
@@ -84,7 +84,7 @@ class ContainerACL
      */
     public static function create($publicAccess, $etag, $lastModified, $parsed)
     {
-        $date = AzureUtilities::windowsAzureDateToDateTime($lastModified);
+        $date = WindowsAzureUtilities::rfc1123ToDateTime($lastModified);
         
         $result                     = new ContainerACL();
         $result->_etag              = $etag;

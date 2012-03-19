@@ -160,7 +160,7 @@ class Configuration
      */
     public function create($type)
     {
-        if (\PEAR2\WindowsAzure\Core\AzureUtilities::isEmulated()) {
+        if (\PEAR2\WindowsAzure\Core\WindowsAzureUtilities::isEmulated()) {
             self::_useStorageEmulatorConfig($this, $type);
         }
         

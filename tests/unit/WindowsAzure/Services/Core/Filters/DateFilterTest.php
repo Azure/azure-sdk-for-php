@@ -23,7 +23,7 @@
  */
 
 use PEAR2\WindowsAzure\Services\Core\Filters\DateFilter;
-use PEAR2\WindowsAzure\Services\Core\HttpClient;
+use PEAR2\WindowsAzure\Core\HttpClient;
 use PEAR2\WindowsAzure\Resources;
 
 /**

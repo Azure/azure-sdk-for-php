@@ -25,7 +25,7 @@
 namespace PEAR2\WindowsAzure\Services\Blob;
 use PEAR2\WindowsAzure\Utilities;
 use PEAR2\WindowsAzure\Resources;
-use PEAR2\WindowsAzure\Core\AzureUtilities;
+use PEAR2\WindowsAzure\Core\WindowsAzureUtilities;
 use PEAR2\WindowsAzure\Services\Core\ServiceRestProxy;
 use PEAR2\WindowsAzure\Services\Blob\IBlob;
 use PEAR2\WindowsAzure\Services\Blob\Models\BlobServiceOptions;
@@ -79,9 +79,9 @@ class BlobRestProxy extends ServiceRestProxy implements IBlob
         
         $response = $this->send($method, $headers, $queryParams, $path, $statusCode);
         $result   = new GetContainerPropertiesResult();
-        $metadata = AzureUtilities::getMetadataArray($response->getHeader());
+        $metadata = WindowsAzureUtilities::getMetadataArray($response->getHeader());
         $date     = $response->getHeader(Resources::LAST_MODIFIED);
-        $date     = AzureUtilities::windowsAzureDateToDateTime($date);
+        $date     = WindowsAzureUtilities::rfc1123ToDateTime($date);
         $result->setEtag($response->getHeader(Resources::ETAG));
         $result->setMetadata($metadata);
         $result->setLastModified($date);
@@ -211,7 +211,7 @@ class BlobRestProxy extends ServiceRestProxy implements IBlob
 
         $queryParams['timeout'] = strval($options->getTimeout());
         
-        $metadataHeaders = AzureUtilities::generateMetadataHeaders(
+        $metadataHeaders = WindowsAzureUtilities::generateMetadataHeaders(
             $options->getMetadata()
         );
         
@@ -364,7 +364,7 @@ class BlobRestProxy extends ServiceRestProxy implements IBlob
     public function setContainerMetadata($container, $metadata, $options = null)
     {
         $method      = \HTTP_Request2::METHOD_PUT;
-        $headers     = AzureUtilities::generateMetadataHeaders($metadata);
+        $headers     = WindowsAzureUtilities::generateMetadataHeaders($metadata);
         $queryParams = array();
         $path        = $container;
         $statusCode  = Resources::STATUS_OK;

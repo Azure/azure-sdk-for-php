@@ -22,8 +22,8 @@
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
 
-use PEAR2\WindowsAzure\Services\Core\Models\UpdateMessageResult;
-use PEAR2\WindowsAzure\Core\AzureUtilities;
+use PEAR2\WindowsAzure\Services\Queue\Models\UpdateMessageResult;
+use PEAR2\WindowsAzure\Core\WindowsAzureUtilities;
 
 /**
  * Unit tests for class UpdateMessageResult
@@ -39,7 +39,7 @@ use PEAR2\WindowsAzure\Core\AzureUtilities;
 class UpdateMessageResultTest extends PHPUnit_Framework_TestCase
 {
     /**
-     * @covers PEAR2\WindowsAzure\Services\Core\Models\UpdateMessageResult::getPopReceipt
+     * @covers PEAR2\WindowsAzure\Services\Queue\Models\UpdateMessageResult::getPopReceipt
      */
     public function testGetPopReceipt()
     {
@@ -56,7 +56,7 @@ class UpdateMessageResultTest extends PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers PEAR2\WindowsAzure\Services\Core\Models\UpdateMessageResult::setPopReceipt
+     * @covers PEAR2\WindowsAzure\Services\Queue\Models\UpdateMessageResult::setPopReceipt
      */
     public function testSetPopReceipt()
     {
@@ -73,13 +73,13 @@ class UpdateMessageResultTest extends PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers PEAR2\WindowsAzure\Services\Core\Models\UpdateMessageResult::getTimeNextVisible
+     * @covers PEAR2\WindowsAzure\Services\Queue\Models\UpdateMessageResult::getTimeNextVisible
      */
     public function testGetTimeNextVisible()
     {
         // Setup
         $updateMessageResult = new UpdateMessageResult();
-        $expected = AzureUtilities::windowsAzureDateToDateTime('Fri, 09 Oct 2009 23:29:20 GMT');
+        $expected = WindowsAzureUtilities::rfc1123ToDateTime('Fri, 09 Oct 2009 23:29:20 GMT');
         $updateMessageResult->setTimeNextVisible($expected);
         
         // Test
@@ -90,13 +90,13 @@ class UpdateMessageResultTest extends PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers PEAR2\WindowsAzure\Services\Core\Models\UpdateMessageResult::setTimeNextVisible
+     * @covers PEAR2\WindowsAzure\Services\Queue\Models\UpdateMessageResult::setTimeNextVisible
      */
     public function testSetTimeNextVisible()
     {
         // Setup
         $updateMessageResult = new UpdateMessageResult();
-        $expected = AzureUtilities::windowsAzureDateToDateTime('Fri, 09 Oct 2009 23:29:20 GMT');
+        $expected = WindowsAzureUtilities::rfc1123ToDateTime('Fri, 09 Oct 2009 23:29:20 GMT');
         
         // Test
         $updateMessageResult->setTimeNextVisible($expected);

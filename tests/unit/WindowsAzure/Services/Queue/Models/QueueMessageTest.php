@@ -21,7 +21,7 @@
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
-use PEAR2\WindowsAzure\Services\Core\Models\QueueMessage;
+use PEAR2\WindowsAzure\Services\Queue\Models\QueueMessage;
 
 /**
  * Unit tests for class QueueMessage
@@ -37,7 +37,7 @@ use PEAR2\WindowsAzure\Services\Core\Models\QueueMessage;
 class QueueMessageTest extends PHPUnit_Framework_TestCase
 {
     /**
-     * @covers PEAR2\WindowsAzure\Services\Core\Models\QueueMessage::getMessageText
+     * @covers PEAR2\WindowsAzure\Services\Queue\Models\QueueMessage::getMessageText
      */
     public function testGetMessageText()
     {
@@ -54,7 +54,7 @@ class QueueMessageTest extends PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers PEAR2\WindowsAzure\Services\Core\Models\QueueMessage::setMessageText
+     * @covers PEAR2\WindowsAzure\Services\Queue\Models\QueueMessage::setMessageText
      */
     public function testSetMessageText()
     {
@@ -71,7 +71,7 @@ class QueueMessageTest extends PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers PEAR2\WindowsAzure\Services\Core\Models\QueueMessage::toXml
+     * @covers PEAR2\WindowsAzure\Services\Queue\Models\QueueMessage::toXml
      */
     public function testToXml()
     {

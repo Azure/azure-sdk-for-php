@@ -26,7 +26,7 @@ namespace PEAR2\Tests\Unit\WindowsAzure\Services\Blob\Models;
 use PEAR2\WindowsAzure\Services\Blob\Models\Container;
 use PEAR2\Tests\Framework\TestResources;
 use PEAR2\WindowsAzure\Services\Blob\Models\ContainerProperties;
-use PEAR2\WindowsAzure\Core\AzureUtilities;
+use PEAR2\WindowsAzure\Core\WindowsAzureUtilities;
 
 /**
  * Unit tests for class Container
@@ -146,7 +146,7 @@ class ContainerTest extends \PHPUnit_Framework_TestCase
     public function testSetProperties()
     {
         // Setup
-        $date = AzureUtilities::windowsAzureDateToDateTime('Wed, 12 Aug 2009 20:39:39 GMT');
+        $date = WindowsAzureUtilities::rfc1123ToDateTime('Wed, 12 Aug 2009 20:39:39 GMT');
         $container = new Container();
         $expected = new ContainerProperties();
         $expected->setEtag('0x8CACB9BD7C1EEEC');
@@ -165,7 +165,7 @@ class ContainerTest extends \PHPUnit_Framework_TestCase
     public function testGetProperties()
     {
         // Setup
-        $date = AzureUtilities::windowsAzureDateToDateTime('Wed, 12 Aug 2009 20:39:39 GMT');
+        $date = WindowsAzureUtilities::rfc1123ToDateTime('Wed, 12 Aug 2009 20:39:39 GMT');
         $container = new Container();
         $expected = new ContainerProperties();
         $expected->setEtag('0x8CACB9BD7C1EEEC');

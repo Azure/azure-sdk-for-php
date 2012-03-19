@@ -25,7 +25,7 @@ namespace PEAR2\Tests\Unit\WindowsAzure\Services\Blob\Models;
 use PEAR2\WindowsAzure\Services\Blob\Models\AccessCondition;
 use PEAR2\WindowsAzure\Services\Blob\Models\AccessConditionHeaderType;
 use PEAR2\WindowsAzure\Resources;
-use PEAR2\WindowsAzure\Core\AzureUtilities;
+use PEAR2\WindowsAzure\Core\WindowsAzureUtilities;
 
 /**
  * Unit tests for class AccessCondition
@@ -90,7 +90,7 @@ class AccessConditionTest extends \PHPUnit_Framework_TestCase
         // Setup
         $expectedHeader = AccessConditionHeaderType::IF_MODIFIED_SINCE;
         $date = 'Sun, 25 Sep 2011 00:42:49 GMT';
-        $expectedValue = AzureUtilities::windowsAzureDateToDateTime($date);
+        $expectedValue = WindowsAzureUtilities::rfc1123ToDateTime($date);
         
         // Test
         $actual = AccessCondition::ifModifiedSince($date);
@@ -148,7 +148,7 @@ class AccessConditionTest extends \PHPUnit_Framework_TestCase
         // Setup
         $expectedHeader = AccessConditionHeaderType::IF_UNMODIFIED_SINCE;
         $date = 'Sun, 25 Sep 2011 00:42:49 GMT';
-        $expectedValue = AzureUtilities::windowsAzureDateToDateTime($date);
+        $expectedValue = WindowsAzureUtilities::rfc1123ToDateTime($date);
         
         // Test
         $actual = AccessCondition::ifNotModifiedSince($date);
