@@ -41,6 +41,8 @@ use PEAR2\WindowsAzure\Services\Blob\Models\GetBlobMetadataResult;
 use PEAR2\WindowsAzure\Services\Blob\Models\SetBlobMetadataResult;
 use PEAR2\WindowsAzure\Services\Blob\Models\GetBlobResult;
 use PEAR2\WindowsAzure\Services\Blob\Models\BlobType;
+use PEAR2\WindowsAzure\Services\Blob\Models\PageRange;
+use PEAR2\WindowsAzure\Services\Blob\Models\CreateBlobPagesResult;
 
 /**
  * Unit tests for class BlobRestProxy
@@ -716,7 +718,6 @@ class BlobRestProxyTest extends BlobRestProxyTestBase
     /**
      * @covers PEAR2\WindowsAzure\Services\Blob\BlobRestProxy::getBlobProperties
      * @covers PEAR2\WindowsAzure\Services\Blob\BlobRestProxy::_getBlobPropertiesResultFromResponse
-     * @covers PEAR2\WindowsAzure\Services\Blob\BlobRestProxy::_setAccessConditionHeader
      * @covers PEAR2\WindowsAzure\Services\Blob\Models\SetBlobPropertiesResult::create
      */
     public function testGetBlobProperties()
@@ -738,7 +739,6 @@ class BlobRestProxyTest extends BlobRestProxyTestBase
      * @covers PEAR2\WindowsAzure\Services\Blob\BlobRestProxy::getBlobProperties
      * @covers PEAR2\WindowsAzure\Services\Blob\BlobRestProxy::setBlobProperties
      * @covers PEAR2\WindowsAzure\Services\Blob\BlobRestProxy::_getBlobPropertiesResultFromResponse
-     * @covers PEAR2\WindowsAzure\Services\Blob\BlobRestProxy::_setAccessConditionHeader
      * @covers PEAR2\WindowsAzure\Services\Blob\Models\SetBlobPropertiesResult::create
      */
     public function testSetBlobProperties()
@@ -762,7 +762,6 @@ class BlobRestProxyTest extends BlobRestProxyTestBase
     
     /**
      * @covers PEAR2\WindowsAzure\Services\Blob\BlobRestProxy::setBlobProperties
-     * @covers PEAR2\WindowsAzure\Services\Blob\BlobRestProxy::_setAccessConditionHeader
      * @covers PEAR2\WindowsAzure\Services\Blob\BlobRestProxy::_getBlobPropertiesResultFromResponse
      * @covers PEAR2\WindowsAzure\Services\Blob\Models\SetBlobPropertiesResult::create
      */
@@ -784,7 +783,6 @@ class BlobRestProxyTest extends BlobRestProxyTestBase
     
     /**
      * @covers PEAR2\WindowsAzure\Services\Blob\BlobRestProxy::getBlobMetadata
-     * @covers PEAR2\WindowsAzure\Services\Blob\BlobRestProxy::_setAccessConditionHeader
      * @covers PEAR2\WindowsAzure\Services\Blob\Models\GetBlobMetadataResult::create
      */
     public function testGetBlobMetadata()
@@ -807,7 +805,6 @@ class BlobRestProxyTest extends BlobRestProxyTestBase
     
     /**
      * @covers PEAR2\WindowsAzure\Services\Blob\BlobRestProxy::setBlobMetadata
-     * @covers PEAR2\WindowsAzure\Services\Blob\BlobRestProxy::_setAccessConditionHeader
      * @covers PEAR2\WindowsAzure\Services\Blob\Models\SetBlobMetadataResult::create
      * @covers PEAR2\WindowsAzure\Services\Core\ServiceRestProxy::addMetadataHeaders
      */
@@ -830,7 +827,6 @@ class BlobRestProxyTest extends BlobRestProxyTestBase
 
     /**
      * @covers PEAR2\WindowsAzure\Services\Blob\BlobRestProxy::getBlob
-     * @covers PEAR2\WindowsAzure\Services\Blob\BlobRestProxy::_setAccessConditionHeader
      * @covers PEAR2\WindowsAzure\Services\Blob\BlobRestProxy::_addOptionalRangeHeader
      * @covers PEAR2\WindowsAzure\Services\Blob\Models\GetBlobResult::create
      */
@@ -859,7 +855,6 @@ class BlobRestProxyTest extends BlobRestProxyTestBase
     
     /**
      * @covers PEAR2\WindowsAzure\Services\Blob\BlobRestProxy::deleteBlob
-     * @covers PEAR2\WindowsAzure\Services\Blob\BlobRestProxy::_setAccessConditionHeader
      */
     public function testDeleteBlob()
     {
@@ -971,6 +966,59 @@ class BlobRestProxyTest extends BlobRestProxyTestBase
         // Assert
         $this->setExpectedException(get_class(new ServiceException('')));
         $result = $this->wrapper->acquireLease($name, $blob);
+    }
+    
+    /**
+     * @covers PEAR2\WindowsAzure\Services\Blob\BlobRestProxy::createBlobPages
+     * @covers PEAR2\WindowsAzure\Services\Blob\BlobRestProxy::_updatePageBlobPagesImpl
+     * @covers PEAR2\WindowsAzure\Services\Blob\BlobRestProxy::_addOptionalRangeHeader
+     */
+    public function testCreateBlobPages()
+    {
+        // Setup
+        $name = 'createblobpages';
+        $blob = 'myblob';
+        $length = 512;
+        $range = new PageRange(0, 511);
+        $content = Resources::EMPTY_STRING;
+        $this->createContainer($name);
+        $this->wrapper->createPageBlob($name, $blob, $length);
+        for ($i = 0; $i < 512; $i++) {
+            $content .= 'A';
+        }
+        
+        // Test
+        $actual = $this->wrapper->createBlobPages($name, $blob, $range, $content);
+        
+        // Assert
+        $this->assertNotNull($actual->getEtag());
+    }
+    
+    /**
+     * @covers PEAR2\WindowsAzure\Services\Blob\BlobRestProxy::clearBlobPages
+     * @covers PEAR2\WindowsAzure\Services\Blob\BlobRestProxy::_updatePageBlobPagesImpl
+     * @covers PEAR2\WindowsAzure\Services\Blob\BlobRestProxy::_addOptionalRangeHeader
+     */
+    public function testClearBlobPages()
+    {
+        // Setup
+        $name = 'clearblobpages';
+        $blob = 'myblob';
+        $length = 512;
+        $range = new PageRange(0, 511);
+        $content = Resources::EMPTY_STRING;
+        $this->createContainer($name);
+        $this->wrapper->createPageBlob($name, $blob, $length);
+        for ($i = 0; $i < 512; $i++) {
+            $content .= 'A';
+        }
+        $this->wrapper->createBlobPages($name, $blob, $range, $content);
+        
+        // Test
+        $actual = $this->wrapper->clearBlobPages($name, $blob, $range);
+        
+        // Assert
+        $this->assertNotNull($actual->getEtag());
     }
 }
 

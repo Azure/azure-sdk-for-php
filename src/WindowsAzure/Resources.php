@@ -70,6 +70,7 @@ class Resources
     const X_MS_LEASE_STATUS                = 'x-ms-lease-status';
     const X_MS_LEASE_ACTION                = 'x-ms-lease-action';
     const X_MS_DELETE_SNAPSHOTS            = 'x-ms-delete-snapshots';
+    const X_MS_PAGE_WRITE                  = 'x-ms-page-write';
     const ETAG                             = 'etag';
     const LAST_MODIFIED                    = 'last-modified';
     const DATE                             = 'date';
