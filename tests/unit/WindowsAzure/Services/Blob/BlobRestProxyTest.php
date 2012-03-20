@@ -879,6 +879,99 @@ class BlobRestProxyTest extends BlobRestProxyTestBase
         $result = $this->wrapper->listBlobs($name);
         $this->assertCount(0, $result->getBlobs());
     }
+    
+    /**
+     * @covers PEAR2\WindowsAzure\Services\Blob\BlobRestProxy::acquireLease
+     * @covers PEAR2\WindowsAzure\Services\Blob\BlobRestProxy::_putLeaseImpl
+     */
+    public function testAcquireLease()
+    {
+        // Setup
+        $name = 'acquirelease';
+        $blob = 'myblob';
+        $contentType = 'text/plain; charset=UTF-8';
+        $this->createContainer($name);
+        $options = new CreateBlobOptions();
+        $options->setContentType($contentType);
+        $this->wrapper->createBlockBlob($name, $blob, 'Hello world', $options);
+        
+        // Test
+        $result = $this->wrapper->acquireLease($name, $blob);
+        
+        // Assert
+        $this->assertNotNull($result->getLeaseId());
+    }
+    
+    /**
+     * @covers PEAR2\WindowsAzure\Services\Blob\BlobRestProxy::renewLease
+     * @covers PEAR2\WindowsAzure\Services\Blob\BlobRestProxy::_putLeaseImpl
+     */
+    public function testRenewLease()
+    {
+        // Setup
+        $name = 'renewlease';
+        $blob = 'myblob';
+        $contentType = 'text/plain; charset=UTF-8';
+        $this->createContainer($name);
+        $options = new CreateBlobOptions();
+        $options->setContentType($contentType);
+        $this->wrapper->createBlockBlob($name, $blob, 'Hello world', $options);
+        $result = $this->wrapper->acquireLease($name, $blob);
+        
+        // Test
+        $result = $this->wrapper->renewLease($name, $blob, $result->getLeaseId());
+        
+        // Assert
+        $this->assertNotNull($result->getLeaseId());
+    }
+    
+    /**
+     * @covers PEAR2\WindowsAzure\Services\Blob\BlobRestProxy::releaseLease
+     * @covers PEAR2\WindowsAzure\Services\Blob\BlobRestProxy::_putLeaseImpl
+     */
+    public function testReleaseLease()
+    {
+        // Setup
+        $name = 'releaselease';
+        $blob = 'myblob';
+        $contentType = 'text/plain; charset=UTF-8';
+        $this->createContainer($name);
+        $options = new CreateBlobOptions();
+        $options->setContentType($contentType);
+        $this->wrapper->createBlockBlob($name, $blob, 'Hello world', $options);
+        $result = $this->wrapper->acquireLease($name, $blob);
+        
+        // Test
+        $this->wrapper->releaseLease($name, $blob, $result->getLeaseId());
+        
+        // Assert
+        $result = $this->wrapper->acquireLease($name, $blob);
+        $this->assertNotNull($result->getLeaseId());
+    }
+    
+    /**
+     * @covers PEAR2\WindowsAzure\Services\Blob\BlobRestProxy::breakLease
+     * @covers PEAR2\WindowsAzure\Services\Blob\BlobRestProxy::_putLeaseImpl
+     */
+    public function testBreakLease()
+    {
+        // Setup
+        $name = 'breaklease';
+        $blob = 'myblob';
+        $contentType = 'text/plain; charset=UTF-8';
+        $this->createContainer($name);
+        $options = new CreateBlobOptions();
+        $options->setContentType($contentType);
+        $this->wrapper->createBlockBlob($name, $blob, 'Hello world', $options);
+        $result = $this->wrapper->acquireLease($name, $blob);
+        
+        // Test
+        $this->wrapper->breakLease($name, $blob, $result->getLeaseId());
+        
+        // Assert
+        $this->setExpectedException(get_class(new ServiceException('')));
+        $result = $this->wrapper->acquireLease($name, $blob);
+    }
 }
 
 ?>

@@ -68,6 +68,7 @@ class Resources
     const X_MS_RANGE_GET_CONTENT_MD5       = 'x-ms-range-get-content-md5';
     const X_MS_LEASE_ID                    = 'x-ms-lease-id';
     const X_MS_LEASE_STATUS                = 'x-ms-lease-status';
+    const X_MS_LEASE_ACTION                = 'x-ms-lease-action';
     const X_MS_DELETE_SNAPSHOTS            = 'x-ms-delete-snapshots';
     const ETAG                             = 'etag';
     const LAST_MODIFIED                    = 'last-modified';
