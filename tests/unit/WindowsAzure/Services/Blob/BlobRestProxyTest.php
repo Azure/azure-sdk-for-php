@@ -37,6 +37,8 @@ use PEAR2\WindowsAzure\Services\Blob\Models\ListBlobsResult;
 use PEAR2\WindowsAzure\Services\Blob\Models\ListBlobsOptions;
 use PEAR2\WindowsAzure\Services\Blob\Models\CreateBlobOptions;
 use PEAR2\WindowsAzure\Services\Blob\Models\SetBlobPropertiesOptions;
+use PEAR2\WindowsAzure\Services\Blob\Models\GetBlobMetadataResult;
+use PEAR2\WindowsAzure\Services\Blob\Models\SetBlobMetadataResult;
 
 /**
  * Unit tests for class BlobRestProxy
@@ -712,6 +714,7 @@ class BlobRestProxyTest extends BlobRestProxyTestBase
     /**
      * @covers PEAR2\WindowsAzure\Services\Blob\BlobRestProxy::getBlobProperties
      * @covers PEAR2\WindowsAzure\Services\Blob\BlobRestProxy::_getBlobPropertiesResultFromResponse
+     * @covers PEAR2\WindowsAzure\Services\Blob\BlobRestProxy::_setAccessConditionHeader
      * @covers PEAR2\WindowsAzure\Services\Blob\Models\SetBlobPropertiesResult::create
      */
     public function testGetBlobProperties()
@@ -733,6 +736,7 @@ class BlobRestProxyTest extends BlobRestProxyTestBase
      * @covers PEAR2\WindowsAzure\Services\Blob\BlobRestProxy::getBlobProperties
      * @covers PEAR2\WindowsAzure\Services\Blob\BlobRestProxy::setBlobProperties
      * @covers PEAR2\WindowsAzure\Services\Blob\BlobRestProxy::_getBlobPropertiesResultFromResponse
+     * @covers PEAR2\WindowsAzure\Services\Blob\BlobRestProxy::_setAccessConditionHeader
      * @covers PEAR2\WindowsAzure\Services\Blob\Models\SetBlobPropertiesResult::create
      */
     public function testSetBlobProperties()
@@ -756,6 +760,7 @@ class BlobRestProxyTest extends BlobRestProxyTestBase
     
     /**
      * @covers PEAR2\WindowsAzure\Services\Blob\BlobRestProxy::setBlobProperties
+     * @covers PEAR2\WindowsAzure\Services\Blob\BlobRestProxy::_setAccessConditionHeader
      * @covers PEAR2\WindowsAzure\Services\Blob\BlobRestProxy::_getBlobPropertiesResultFromResponse
      * @covers PEAR2\WindowsAzure\Services\Blob\Models\SetBlobPropertiesResult::create
      */
@@ -765,7 +770,7 @@ class BlobRestProxyTest extends BlobRestProxyTestBase
         $name = 'setblobpropertieswithnooptions';
         $blob = 'myblob';
         $this->createContainer($name);
-        $this->wrapper->createPageBlob($name, 'myblob', 512);
+        $this->wrapper->createPageBlob($name, $blob, 512);
         
         // Test
         $result = $this->wrapper->setBlobProperties($name, $blob);
@@ -773,6 +778,52 @@ class BlobRestProxyTest extends BlobRestProxyTestBase
         // Assert
         $this->assertInstanceOf('\DateTime', $result->getLastModified());
         $this->assertTrue(!is_null($result->getEtag()));
+    }
+    
+    /**
+     * @covers PEAR2\WindowsAzure\Services\Blob\BlobRestProxy::getBlobMetadata
+     * @covers PEAR2\WindowsAzure\Services\Blob\BlobRestProxy::_setAccessConditionHeader
+     * @covers PEAR2\WindowsAzure\Services\Blob\Models\GetBlobMetadataResult::create
+     */
+    public function testGetBlobMetadata()
+    {
+        // Setup
+        $name = 'getblobmetadata';
+        $metadata = array('m1' => 'v1', 'm2' => 'v2');
+        $blob = 'myblob';
+        $this->createContainer($name);
+        $options = new CreateBlobOptions();
+        $options->setMetadata($metadata);
+        $this->wrapper->createPageBlob($name, $blob, 512, $options);
+        
+        // Test
+        $result = $this->wrapper->getBlobMetadata($name, $blob);
+        
+        // Assert
+        $this->assertEquals($metadata, $result->getMetadata());
+    }
+    
+    /**
+     * @covers PEAR2\WindowsAzure\Services\Blob\BlobRestProxy::setBlobMetadata
+     * @covers PEAR2\WindowsAzure\Services\Blob\BlobRestProxy::_setAccessConditionHeader
+     * @covers PEAR2\WindowsAzure\Services\Blob\Models\SetBlobMetadataResult::create
+     * @covers PEAR2\WindowsAzure\Services\Core\ServiceRestProxy::addMetadataHeaders
+     */
+    public function testSetBlobMetadata()
+    {
+        // Setup
+        $name = 'setblobmetadata';
+        $metadata = array('m1' => 'v1', 'm2' => 'v2');
+        $blob = 'myblob';
+        $this->createContainer($name);
+        $this->wrapper->createPageBlob($name, $blob, 512);
+        
+        // Test
+        $this->wrapper->setBlobMetadata($name, $blob, $metadata);
+        
+        // Assert
+        $result = $this->wrapper->getBlobMetadata($name, $blob);
+        $this->assertEquals($metadata, $result->getMetadata());
     }
 }
 

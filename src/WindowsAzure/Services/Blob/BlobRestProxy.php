@@ -45,6 +45,10 @@ use PEAR2\WindowsAzure\Services\Blob\Models\GetBlobPropertiesOptions;
 use PEAR2\WindowsAzure\Services\Blob\Models\GetBlobPropertiesResult;
 use PEAR2\WindowsAzure\Services\Blob\Models\SetBlobPropertiesOptions;
 use PEAR2\WindowsAzure\Services\Blob\Models\SetBlobPropertiesResult;
+use PEAR2\WindowsAzure\Services\Blob\Models\GetBlobMetadataOptions;
+use PEAR2\WindowsAzure\Services\Blob\Models\GetBlobMetadataResult;
+use PEAR2\WindowsAzure\Services\Blob\Models\SetBlobMetadataOptions;
+use PEAR2\WindowsAzure\Services\Blob\Models\SetBlobMetadataResult;
 
 /**
  * This class constructs HTTP requests and receive HTTP responses for blob
@@ -106,6 +110,26 @@ class BlobRestProxy extends ServiceRestProxy implements IBlob
     }
     
     /**
+     * Sets access condition header for given headers array
+     * 
+     * @param array $headers HTTP request headers
+     * @param type  $options  optional parameters (must container getAccessCondition)
+     * 
+     * @return array
+     */
+    private function _setAccessConditionHeader($headers, $options)
+    {
+        if (!is_null($options)) {
+            $c = $options->getAccessCondition();
+            if (!is_null($c)) {
+                $headers[$c->getHeader()] = $c->getValue();
+            }
+        }
+        
+        return $headers;
+    }
+    
+    /**
      * Helper method for getContainerProperties and getContainerMetadata
      * 
      * @param string             $container name
@@ -155,7 +179,6 @@ class BlobRestProxy extends ServiceRestProxy implements IBlob
     {
         $contentType         = $options->getContentType();
         $metadata            = $options->getMetadata();
-        $accessCondition     = $options->getAccessCondition();
         $blobContentType     = $options->getBlobContentType();
         $blobContentEncoding = $options->getBlobContentEncoding();
         $blobContentLanguage = $options->getBlobContentLanguage();
@@ -169,14 +192,8 @@ class BlobRestProxy extends ServiceRestProxy implements IBlob
             $headers[Resources::CONTENT_TYPE] = Resources::BINARY_FILE_TYPE;
         }
         
-        if (!is_null($metadata) && !empty($metadata)) {
-            $metadata = WindowsAzureUtilities::generateMetadataHeaders($metadata);
-            $headers  = array_merge($headers, $metadata);
-        }
-        
-        $headers = $this->addOptionalAccessContitionHeader(
-            $headers, $accessCondition
-        );
+        $headers = $this->addMetadataHeaders($headers, $metadata);
+        $headers = $this->_setAccessConditionHeader($headers, $options);
         
         $headers[Resources::CONTENT_ENCODING] = $options->getContentEncoding();
         $headers[Resources::CONTENT_LANGUAGE] = $options->getContentLanguage();
@@ -750,9 +767,7 @@ class BlobRestProxy extends ServiceRestProxy implements IBlob
             $options = new GetBlobPropertiesOptions();
         }
         
-        $headers = $this->addOptionalAccessContitionHeader(
-            $headers, $options->getAccessCondition()
-        );
+        $headers = $this->_setAccessConditionHeader($headers, $options);
         
         $headers[Resources::X_MS_LEASE_ID]  = $options->getLeaseId();
         $queryParams['snapshot']            = $options->getSnapshot();
@@ -778,7 +793,26 @@ class BlobRestProxy extends ServiceRestProxy implements IBlob
      */
     public function getBlobMetadata($container, $blob, $options = null)
     {
-        throw new \Exception(Resources::NOT_IMPLEMENTED_MSG);
+        $method      = \HTTP_Request2::METHOD_HEAD;
+        $headers     = array();
+        $queryParams = array();
+        $path        = $container . '/' . $blob;
+        $statusCode  = Resources::STATUS_OK;
+        
+        if (is_null($options)) {
+            $options = new GetBlobMetadataOptions();
+        }
+        
+        $headers = $this->_setAccessConditionHeader($headers, $options);
+        
+        $headers[Resources::X_MS_LEASE_ID]  = $options->getLeaseId();
+        $queryParams['snapshot']            = $options->getSnapshot();
+        $queryParams[Resources::QP_TIMEOUT] = strval($options->getTimeout());
+        $queryParams[Resources::QP_COMP]    = 'metadata';
+        
+        $response = $this->send($method, $headers, $queryParams, $path, $statusCode);
+        
+        return GetBlobMetadataResult::create($response->getHeader());
     }
     
     /**
@@ -821,7 +855,6 @@ class BlobRestProxy extends ServiceRestProxy implements IBlob
             $options = new SetBlobPropertiesOptions();
         }
         
-        $accessCondition     = $options->getAccessCondition();
         $blobContentType     = $options->getBlobContentType();
         $blobContentEncoding = $options->getBlobContentEncoding();
         $blobContentLanguage = $options->getBlobContentLanguage();
@@ -832,9 +865,7 @@ class BlobRestProxy extends ServiceRestProxy implements IBlob
         $sNumberAction       = $options->getSequenceNumberAction();
         $sNumber             = strval($options->getSequenceNumber());
         
-        $headers = $this->addOptionalAccessContitionHeader(
-            $headers, $accessCondition
-        );
+        $headers = $this->_setAccessConditionHeader($headers, $options);
         
         $headers[Resources::X_MS_LEASE_ID]                    = $leaseId;
         $headers[Resources::X_MS_BLOB_CONTENT_TYPE]           = $blobContentType;
@@ -867,7 +898,26 @@ class BlobRestProxy extends ServiceRestProxy implements IBlob
      */
     public function setBlobMetadata($container, $blob, $metadata, $options = null)
     {
-        throw new \Exception(Resources::NOT_IMPLEMENTED_MSG);
+        $method      = \HTTP_Request2::METHOD_PUT;
+        $headers     = array();
+        $queryParams = array();
+        $path        = $container . '/' . $blob;
+        $statusCode  = Resources::STATUS_OK;
+        
+        if (is_null($options)) {
+            $options = new SetBlobMetadataOptions();
+        }
+        
+        $headers = $this->_setAccessConditionHeader($headers, $options);
+        $headers = $this->addMetadataHeaders($headers, $metadata);
+        
+        $headers[Resources::X_MS_LEASE_ID]  = $options->getLeaseId();
+        $queryParams[Resources::QP_TIMEOUT] = strval($options->getTimeout());
+        $queryParams[Resources::QP_COMP]    = 'metadata';
+        
+        $response = $this->send($method, $headers, $queryParams, $path, $statusCode);
+        
+        return SetBlobMetadataResult::create($response->getHeader());
     }
     
     /**
