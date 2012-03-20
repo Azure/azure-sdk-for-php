@@ -662,6 +662,51 @@ class BlobRestProxyTest extends BlobRestProxyTestBase
         $result = $this->wrapper->listBlobs($name);
         $this->assertCount(1, $result->getBlobs());
     }
+    
+    /**
+     * @covers PEAR2\WindowsAzure\Services\Blob\BlobRestProxy::createBlockBlob
+     * @covers PEAR2\WindowsAzure\Services\Blob\BlobRestProxy::_addCreateBlobOptionalHeaders
+     */
+    public function testCreateBlockBlobWithBinary()
+    {
+        // Setup
+        $name = 'createblockblobwithbinary';
+        $this->createContainer($name);
+        
+        // Test
+        $this->wrapper->createBlockBlob($name, 'myblob', '123455');
+        
+        // Assert
+        $result = $this->wrapper->listBlobs($name);
+        $blobs = $result->getBlobs();
+        $blob = $blobs[0];
+        $this->assertCount(1, $result->getBlobs());
+        $this->assertEquals(Resources::BINARY_FILE_TYPE, $blob->getProperties()->getContentType());
+    }
+    
+    /**
+     * @covers PEAR2\WindowsAzure\Services\Blob\BlobRestProxy::createBlockBlob
+     * @covers PEAR2\WindowsAzure\Services\Blob\BlobRestProxy::_addCreateBlobOptionalHeaders
+     */
+    public function testCreateBlockBlobWithPlainText()
+    {
+        // Setup
+        $name = 'createblockblobwithplaintext';
+        $contentType = 'text/plain; charset=UTF-8';
+        $this->createContainer($name);
+        $options = new CreateBlobOptions();
+        $options->setContentType($contentType);
+        
+        // Test
+        $this->wrapper->createBlockBlob($name, 'myblob', 'Hello world', $options);
+        
+        // Assert
+        $result = $this->wrapper->listBlobs($name);
+        $blobs = $result->getBlobs();
+        $blob = $blobs[0];
+        $this->assertCount(1, $result->getBlobs());
+        $this->assertEquals($contentType, $blob->getProperties()->getContentType());
+    }
 }
 
 ?>
