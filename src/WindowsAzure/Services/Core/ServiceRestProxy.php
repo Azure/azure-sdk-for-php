@@ -177,6 +177,24 @@ class ServiceRestProxy
         
         return trim($joined, Resources::SEPARATOR);
     }
+    
+    /**
+     * Adds metadata elements to headers array
+     * 
+     * @param array $headers  HTTP request headers
+     * @param array $metadata user specified metadata
+     * 
+     * @return array
+     */
+    protected function addMetadataHeaders($headers, $metadata)
+    {
+        if (!is_null($metadata) && !empty($metadata)) {
+            $metadata = WindowsAzureUtilities::generateMetadataHeaders($metadata);
+            $headers  = array_merge($headers, $metadata);
+        }
+        
+        return $headers;
+    }
 }
 
 ?>

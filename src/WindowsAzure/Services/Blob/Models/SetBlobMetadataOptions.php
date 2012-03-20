@@ -15,50 +15,80 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   PEAR2\Tests\Unit\WindowsAzure\Services\Blob\Models
+ * @package   PEAR2\WindowsAzure\Services\Blob\Models
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
-namespace PEAR2\Tests\Unit\WindowsAzure\Services\Blob\Models;
-use PEAR2\WindowsAzure\Services\Blob\Models\AccessConditionHeaderType;
+ 
+namespace PEAR2\WindowsAzure\Services\Blob\Models;
 
 /**
- * Unit tests for class AccessConditionHeaderType
+ * Short description
  *
  * @category  Microsoft
- * @package   PEAR2\Tests\Unit\WindowsAzure\Services\Blob\Models
+ * @package   PEAR2\WindowsAzure\Services\Blob\Models
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @version   Release: @package_version@
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
-class AccessConditionHeaderTypeTest extends \PHPUnit_Framework_TestCase
+class SetBlobMetadataOptions extends BlobServiceOptions
 {
     /**
-     * @covers PEAR2\WindowsAzure\Services\Blob\Models\AccessConditionHeaderType::isValid
+     * @var string
      */
-    public function testIsValidWithValid()
+    private $_leaseId;
+    
+    /**
+     * @var AccessCondition
+     */
+    private $_accessCondition;
+    
+    /**
+     * Gets lease Id for the blob
+     * 
+     * @return string
+     */
+    public function getLeaseId()
     {
-        // Test
-        $actual = AccessConditionHeaderType::isValid(AccessConditionHeaderType::IF_MATCH);
-        
-        // Assert
-        $this->assertTrue($actual);
+        return $this->_leaseId;
     }
     
     /**
-     * @covers PEAR2\WindowsAzure\Services\Blob\Models\AccessConditionHeaderType::isValid
+     * Sets lease Id for the blob
+     * 
+     * @param string $leaseId the blob lease id.
+     * 
+     * @return none
      */
-    public function testIsValidWithInvalid()
+    public function setLeaseId($leaseId)
     {
-        // Test
-        $actual = AccessConditionHeaderType::isValid('1234');
-        
-        // Assert
-        $this->assertFalse($actual);
+        $this->_leaseId = $leaseId;
+    }
+    
+    /**
+     * Gets access condition
+     * 
+     * @return AccessCondition
+     */
+    public function getAccessCondition()
+    {
+        return $this->_accessCondition;
+    }
+    
+    /**
+     * Sets access condition
+     * 
+     * @param AccessCondition $accessCondition value to use.
+     * 
+     * @return none.
+     */
+    public function setAccessCondition($accessCondition)
+    {
+        $this->_accessCondition = $accessCondition;
     }
 }
 

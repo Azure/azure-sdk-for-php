@@ -37,25 +37,25 @@ use PEAR2\WindowsAzure\Services\Blob\Models\AccessConditionHeaderType;
  */
 class AccessConditionHeaderTypeTest extends \PHPUnit_Framework_TestCase
 {
+    /**
+     * @covers PEAR2\WindowsAzure\Services\Blob\Models\AccessConditionHeaderType::isValid
+     */
     public function testIsValidWithValid()
     {
-        // Setup
-        $var = AccessConditionHeaderType::IF_MATCH;
-        
         // Test
-        $actual = AccessConditionHeaderType::isValid($var);
+        $actual = AccessConditionHeaderType::isValid(AccessConditionHeaderType::IF_MATCH);
         
         // Assert
         $this->assertTrue($actual);
     }
     
+    /**
+     * @covers PEAR2\WindowsAzure\Services\Blob\Models\AccessConditionHeaderType::isValid
+     */
     public function testIsValidWithInvalid()
     {
-        // Setup
-        $var = 'NotValid';
-        
         // Test
-        $actual = AccessConditionHeaderType::isValid($var);
+        $actual = AccessConditionHeaderType::isValid('1234');
         
         // Assert
         $this->assertFalse($actual);
