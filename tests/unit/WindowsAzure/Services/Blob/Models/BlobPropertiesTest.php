@@ -103,6 +103,24 @@ class BlobPropertiesTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
+     * @covers PEAR2\WindowsAzure\Services\Blob\Models\BlobProperties::setContentRange
+     * @covers PEAR2\WindowsAzure\Services\Blob\Models\BlobProperties::getContentRange
+     */
+    public function testSetContentRange()
+    {
+        // Setup
+        $expected = '0x8CAFB82EFF70C46';
+        $prooperties = new BlobProperties();
+        $prooperties->setContentRange($expected);
+        
+        // Test
+        $prooperties->setContentRange($expected);
+        
+        // Assert
+        $this->assertEquals($expected, $prooperties->getContentRange());
+    }
+    
+    /**
      * @covers PEAR2\WindowsAzure\Services\Blob\Models\BlobProperties::setContentType
      * @covers PEAR2\WindowsAzure\Services\Blob\Models\BlobProperties::getContentType
      */
