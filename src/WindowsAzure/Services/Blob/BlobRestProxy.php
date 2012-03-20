@@ -51,6 +51,7 @@ use PEAR2\WindowsAzure\Services\Blob\Models\SetBlobMetadataOptions;
 use PEAR2\WindowsAzure\Services\Blob\Models\SetBlobMetadataResult;
 use PEAR2\WindowsAzure\Services\Blob\Models\GetBlobOptions;
 use PEAR2\WindowsAzure\Services\Blob\Models\GetBlobResult;
+use PEAR2\WindowsAzure\Services\Blob\Models\DeleteBlobOptions;
 
 /**
  * This class constructs HTTP requests and receive HTTP responses for blob
@@ -992,13 +993,32 @@ class BlobRestProxy extends ServiceRestProxy implements IBlob
      * @param string                   $blob      name of the blob
      * @param Models\DeleteBlobOptions $options   optional parameters
      * 
-     * @return Models\DeleteBlobResult
+     * @return none.
      * 
      * @see http://msdn.microsoft.com/en-us/library/windowsazure/dd179413.aspx
      */
     public function deleteBlob($container, $blob, $options = null)
     {
-        throw new \Exception(Resources::NOT_IMPLEMENTED_MSG);
+        $method      = \HTTP_Request2::METHOD_DELETE;
+        $headers     = array();
+        $queryParams = array();
+        $path        = $container . '/' . $blob;
+        $statusCode  = Resources::STATUS_ACCEPTED;
+        
+        if (is_null($options)) {
+            $options = new DeleteBlobOptions();
+        }
+        
+        $deleteSnapshots = $options->getDeleteSnaphotsOnly() ? 'only' : 'include';
+        $headers         = $this->_setAccessConditionHeader($headers, $options);
+        
+        $headers[Resources::X_MS_LEASE_ID]         = $options->getLeaseId();
+        $headers[Resources::X_MS_DELETE_SNAPSHOTS] = $deleteSnapshots;
+        
+        $queryParams['snapshot']            = $options->getSnapshot();
+        $queryParams[Resources::QP_TIMEOUT] = strval($options->getTimeout());
+        
+        $this->send($method, $headers, $queryParams, $path, $statusCode);
     }
     
     /**
