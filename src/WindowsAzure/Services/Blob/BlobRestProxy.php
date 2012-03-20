@@ -52,6 +52,9 @@ use PEAR2\WindowsAzure\Services\Blob\Models\SetBlobMetadataResult;
 use PEAR2\WindowsAzure\Services\Blob\Models\GetBlobOptions;
 use PEAR2\WindowsAzure\Services\Blob\Models\GetBlobResult;
 use PEAR2\WindowsAzure\Services\Blob\Models\DeleteBlobOptions;
+use PEAR2\WindowsAzure\Services\Blob\Models\LeaseMode;
+use PEAR2\WindowsAzure\Services\Blob\Models\AcquireLeaseOptions;
+use PEAR2\WindowsAzure\Services\Blob\Models\AcquireLeaseResult;
 
 /**
  * This class constructs HTTP requests and receive HTTP responses for blob
@@ -233,6 +236,55 @@ class BlobRestProxy extends ServiceRestProxy implements IBlob
         }
         
         return $headers;
+    }
+
+    /**
+     * Does the actual work for leasing a blob
+     * 
+     * @param string             $leaseAction the lease action string
+     * @param string             $container   the container name
+     * @param string             $blob        the blob to lease name
+     * @param string             $leaseId     the existing lease id
+     * @param BlobServiceOptions $options     optional parameters
+     * 
+     * @return AcquireLeaseResult
+     */
+    private function _putLeaseImpl($leaseAction, $container, $blob, $leaseId, 
+        $options
+    ) {
+        $method      = \HTTP_Request2::METHOD_PUT;
+        $headers     = array();
+        $queryParams = array();
+        $path        = $container . '/' . $blob;
+        $statusCode  = Resources::EMPTY_STRING;
+        
+        switch ($leaseAction) {
+        case LeaseMode::ACQUIRE_ACTION:
+            $statusCode = Resources::STATUS_CREATED;
+            break;
+        case LeaseMode::RENEW_ACTION:
+            $statusCode = Resources::STATUS_OK;
+            break;
+        case LeaseMode::RELEASE_ACTION:
+            $statusCode = Resources::STATUS_OK;
+            break;
+        case LeaseMode::BREAK_ACTION:
+            $statusCode = Resources::STATUS_ACCEPTED;
+            break;
+        }
+        
+        if (method_exists($options, 'getAccessCondition')) {
+            $headers = $this->_setAccessConditionHeader($headers, $options);
+        }
+
+        $headers[Resources::X_MS_LEASE_ID]     = $leaseId;
+        $headers[Resources::X_MS_LEASE_ACTION] = $leaseAction;
+        $queryParams[Resources::QP_COMP]       = 'lease';
+        $queryParams[Resources::QP_TIMEOUT]    = strval($options->getTimeout());
+        
+        $response = $this->send($method, $headers, $queryParams, $path, $statusCode);
+        
+        return AcquireLeaseResult::create($response->getHeader());
     }
     
     /**
@@ -1070,7 +1122,17 @@ class BlobRestProxy extends ServiceRestProxy implements IBlob
      */
     public function acquireLease($container, $blob, $options = null)
     {
-        throw new \Exception(Resources::NOT_IMPLEMENTED_MSG);
+        if (is_null($options)) {
+            $options = new AcquireLeaseOptions();
+        }
+        
+        return $this->_putLeaseImpl(
+            LeaseMode::ACQUIRE_ACTION,
+            $container,
+            $blob,
+            null /* leaseId */,
+            $options
+        );
     }
     
     /**
@@ -1087,7 +1149,17 @@ class BlobRestProxy extends ServiceRestProxy implements IBlob
      */
     public function renewLease($container, $blob, $leaseId, $options = null)
     {
-        throw new \Exception(Resources::NOT_IMPLEMENTED_MSG);
+        if (is_null($options)) {
+            $options = new BlobServiceOptions();
+        }
+        
+        return $this->_putLeaseImpl(
+            LeaseMode::RENEW_ACTION,
+            $container,
+            $blob,
+            $leaseId,
+            $options
+        );
     }
     
     /**
@@ -1105,7 +1177,17 @@ class BlobRestProxy extends ServiceRestProxy implements IBlob
      */
     public function releaseLease($container, $blob, $leaseId, $options = null)
     {
-        throw new \Exception(Resources::NOT_IMPLEMENTED_MSG);
+        if (is_null($options)) {
+            $options = new BlobServiceOptions();
+        }
+        
+        $this->_putLeaseImpl(
+            LeaseMode::RELEASE_ACTION,
+            $container,
+            $blob,
+            $leaseId,
+            $options
+        );
     }
     
     /**
@@ -1123,7 +1205,17 @@ class BlobRestProxy extends ServiceRestProxy implements IBlob
      */
     public function breakLease($container, $blob, $leaseId, $options = null)
     {
-        throw new \Exception(Resources::NOT_IMPLEMENTED_MSG);
+        if (is_null($options)) {
+            $options = new BlobServiceOptions();
+        }
+        
+        $this->_putLeaseImpl(
+            LeaseMode::BREAK_ACTION,
+            $container,
+            $blob,
+            $leaseId,
+            $options
+        );
     }
 }
 
