@@ -15,41 +15,30 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   PEAR2\WindowsAzure\Services\Queue
+ * @package   PEAR2\WindowsAzure\Services\Blob\Models
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
  
-namespace PEAR2\WindowsAzure\Services\Queue;
-use PEAR2\WindowsAzure\Services\Core\Configuration;
-use PEAR2\WindowsAzure\Resources;
+namespace PEAR2\WindowsAzure\Services\Blob\Models;
 
 /**
- * Factory for creating IQueue objects
+ * Holds available blob page write options
  *
  * @category  Microsoft
- * @package   PEAR2\WindowsAzure\Services\Queue
+ * @package   PEAR2\WindowsAzure\Services\Blob\Models
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @version   Release: @package_version@
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
-class QueueService
+class PageWriteOption
 {
-    /**
-     * Creates new object based on the builder type in the $config.
-     *
-     * @param PEAR2\WindowsAzure\Services\Core\Configuration $config config object.
-     * 
-     * @return PEAR2\WindowsAzure\Services\Queue\IQueue.
-     */
-    public static function create($config)
-    {
-        return $config->create(Resources::QUEUE_TYPE_NAME);
-    }
+    const CLEAR_OPTION  = 'clear';
+    const UPDATE_OPTION = 'update';
 }
 
 ?>

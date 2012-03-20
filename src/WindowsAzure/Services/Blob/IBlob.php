@@ -239,7 +239,6 @@ interface IBlob
     * @param string                        $container name of the container
     * @param string                        $blob      name of the blob
     * @param Models\PageRange              $range     Can be up to 4 MB in size
-    * @param integer                       $length    Specifies the page max size.
     * @param string                        $content   the blob contents
     * @param Models\CreateBlobPagesOptions $options   optional parameters
     * 
@@ -247,7 +246,7 @@ interface IBlob
     * 
     * @see http://msdn.microsoft.com/en-us/library/windowsazure/ee691975.aspx
     */
-    public function createBlobPages($container, $blob, $range, $length, $content,
+    public function createBlobPages($container, $blob, $range, $content,
         $options = null
     );
 
