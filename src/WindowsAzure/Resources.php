@@ -64,6 +64,8 @@ class Resources
     const X_MS_BLOB_CONTENT_MD5            = 'x-ms-blob-content-md5';
     const X_MS_BLOB_CACHE_CONTROL          = 'x-ms-blob-cache-control';
     const X_MS_BLOB_CONTENT_LENGTH         = 'x-ms-blob-content-length';
+    const X_MS_RANGE                       = 'x-ms-range';
+    const X_MS_RANGE_GET_CONTENT_MD5       = 'x-ms-range-get-content-md5';
     const X_MS_LEASE_ID                    = 'x-ms-lease-id';
     const X_MS_LEASE_STATUS                = 'x-ms-lease-status';
     const ETAG                             = 'etag';
@@ -75,6 +77,7 @@ class Resources
     const CONTENT_LENGTH                   = 'content-length';
     const CONTENT_MD5                      = 'content-md5';
     const CONTENT_TYPE                     = 'content-type';
+    const CONTENT_RANGE                    = 'content-range';
     const CACHE_CONTROL                    = 'cache-control';
     const IF_MODIFIED_SINCE                = 'if-modified-since';
     const IF_MATCH                         = 'if-match';
