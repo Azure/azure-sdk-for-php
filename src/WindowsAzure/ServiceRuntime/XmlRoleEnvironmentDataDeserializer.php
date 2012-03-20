@@ -24,4 +24,47 @@
 
 namespace PEAR2\WindowsAzure\ServiceRuntime;
 
+class XmlRoleEnvironmentDataDeserializer
+{
+    public function __construct()
+    {
+        throw new \Exception(Resources::NOT_IMPLEMENTED_MSG);
+    }
+    
+    public function deserialize($document)
+    {
+        throw new \Exception(Resources::NOT_IMPLEMENTED_MSG);
+    }
+    
+    private function translateConfigurationSettings($environmentInfo)
+    {
+        throw new \Exception(Resources::NOT_IMPLEMENTED_MSG);
+    }
+    
+    private function translateLocalResources($environmentInfo)
+    {
+        throw new \Exception(Resources::NOT_IMPLEMENTED_MSG);
+    }
+    
+    private function translateRoles($environmentInfo, $currentInstance, $currentRole)
+    {
+        throw new \Exception(Resources::NOT_IMPLEMENTED_MSG);
+    }
+    
+    private function translateRoleInstances($instancesInfo)
+    {
+        throw new \Exception(Resources::NOT_IMPLEMENTED_MSG);
+    }
+    
+    private function translateRoleInstanceEndpoints($endpointsInfo)
+    {
+        throw new \Exception(Resources::NOT_IMPLEMENTED_MSG);
+    }
+    
+    private function translateCurrentInstance($endpointsInfo)
+    {
+        throw new \Exception(Resources::NOT_IMPLEMENTED_MSG);
+    }
+}
+
 ?>

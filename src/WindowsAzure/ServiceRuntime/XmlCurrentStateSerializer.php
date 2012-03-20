@@ -24,4 +24,17 @@
 
 namespace PEAR2\WindowsAzure\ServiceRuntime;
 
+class XmlCurrentStateSerializer
+{
+    public function __construct()
+    {
+        throw new \Exception(Resources::NOT_IMPLEMENTED_MSG);
+    }
+    
+    public function serialize($state, $stream)
+    {
+        throw new \Exception(Resources::NOT_IMPLEMENTED_MSG);
+    }
+}
+
 ?>

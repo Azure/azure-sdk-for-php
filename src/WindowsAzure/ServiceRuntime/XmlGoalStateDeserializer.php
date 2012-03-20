@@ -24,4 +24,17 @@
 
 namespace PEAR2\WindowsAzure\ServiceRuntime;
 
+class XmlGoalStateDeserializer
+{
+    public function __construct()
+    {
+        throw new \Exception(Resources::NOT_IMPLEMENTED_MSG);
+    }
+    
+    public function deserialize($document)
+    {
+        throw new \Exception(Resources::NOT_IMPLEMENTED_MSG);
+    }
+}
+
 ?>
