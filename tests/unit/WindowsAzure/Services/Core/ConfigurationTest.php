@@ -17,7 +17,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- * @package    Azure-sdk-for-php
+ * @package    WindowsAzure-sdk-for-php
  * @author     Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright  2012 Microsoft Corporation
  * @license    http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
@@ -33,7 +33,7 @@ use PEAR2\WindowsAzure\Services\Queue\QueueSettings;
 /**
  * Unit tests for Configuration class
  *
- * @package    Azure-sdk-for-php
+ * @package    WindowsAzure-sdk-for-php
  * @author     Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright  2012 Microsoft Corporation
  * @license    http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0

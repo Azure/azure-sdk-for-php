@@ -23,9 +23,11 @@
  */
 
 use PEAR2\WindowsAzure\Services\Core\ServiceRestProxy;
-use PEAR2\WindowsAzure\Services\Core\HttpClient;
+use PEAR2\WindowsAzure\Core\HttpClient;
 use PEAR2\WindowsAzure\Core\Url;
 use PEAR2\Tests\Mock\WindowsAzure\Services\Core\Filters\SimpleFilterMock;
+use PEAR2\WindowsAzure\Services\Blob\Models\AccessCondition;
+use PEAR2\WindowsAzure\Services\Blob\Models\AccessConditionHeaderType;
 
 /**
  * Unit tests for class ServiceRestProxy
@@ -92,6 +94,76 @@ class ServiceRestProxyTest extends PHPUnit_Framework_TestCase
         // Assert
         $this->assertCount(1, $actual1);
         $this->assertCount(0, $actual2);
+    }
+    
+    /**
+     * @covers  PEAR2\WindowsAzure\Services\Core\ServiceRestProxy::addOptionalAccessContitionHeader
+     * @depends test__construct
+     */
+    public function testAddOptionalAccessContitionHeader($restWrapper)
+    {
+        // Setup
+        $expectedHeader = AccessConditionHeaderType::IF_MATCH;
+        $expectedValue = '0x8CAFB82EFF70C46';
+        $accessCondition = AccessCondition::ifMatch($expectedValue);
+        $headers = array('Header1' => 'Value1', 'Header2' => 'Value2');
+        
+        // Test
+        $actual = $restWrapper->addOptionalAccessContitionHeader($headers, $accessCondition);
+        
+        // Assert
+        $this->assertCount(3, $actual);
+        $this->assertEquals($expectedValue, $actual[$expectedHeader]);
+    }
+    
+    /**
+     * @covers  PEAR2\WindowsAzure\Services\Core\ServiceRestProxy::groupQueryValues
+     * @depends test__construct
+     */
+    public function testGroupQueryValues($restWrapper)
+    {
+        // Setup
+        $values = array('A', 'B', 'C');
+        $expected = 'A,B,C';
+        
+        // Test
+        $actual = $restWrapper->groupQueryValues($values);
+        
+        // Assert
+        $this->assertEquals($expected, $actual);
+    }
+    
+    /**
+     * @covers  PEAR2\WindowsAzure\Services\Core\ServiceRestProxy::groupQueryValues
+     * @depends test__construct
+     */
+    public function testGroupQueryValuesWithNulls($restWrapper)
+    {
+        // Setup
+        $values = array(null, '', null);
+        
+        // Test
+        $actual = $restWrapper->groupQueryValues($values);
+        
+        // Assert
+        $this->assertTrue(empty($actual));
+    }
+    
+    /**
+     * @covers  PEAR2\WindowsAzure\Services\Core\ServiceRestProxy::groupQueryValues
+     * @depends test__construct
+     */
+    public function testGroupQueryValuesWithMix($restWrapper)
+    {
+        // Setup
+        $values = array(null, 'B', 'C', '');
+        $expected = 'B,C';
+        
+        // Test
+        $actual = $restWrapper->groupQueryValues($values);
+        
+        // Assert
+        $this->assertEquals($expected, $actual);
     }
 }
 

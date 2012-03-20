@@ -23,9 +23,12 @@
  */
  
 namespace PEAR2\WindowsAzure\Services\Core;
+use PEAR2\WindowsAzure\Resources;
+use PEAR2\WindowsAzure\Validate;
 use PEAR2\WindowsAzure\Core\Url;
 use PEAR2\WindowsAzure\Core\IHttpClient;
-use PEAR2\WindowsAzure\Resources;
+use PEAR2\WindowsAzure\Core\WindowsAzureUtilities;
+use PEAR2\WindowsAzure\Services\Blob\Models\AccessConditionHeaderType;
 
 /**
  * Base class for all services rest proxies.
@@ -43,7 +46,7 @@ class ServiceRestProxy
     private $_channel;
     private $_filters;
     private $_url;
-
+    
     /**
      * Constructor
      *
@@ -90,7 +93,13 @@ class ServiceRestProxy
         $url     = clone $this->_url;
         
         $channel->setMethod($method);
-        $channel->setHeaders($headers);
+        
+        foreach ($headers as $key => $value) {
+            if (!is_null($value) && !empty($value)) {
+                $channel->setHeader($key, $value);
+            }
+        }
+        
         $channel->setExpectedStatusCode($statusCode);
         $channel->setBody($body);
         $url->setQueryVariables($queryParams);
@@ -125,6 +134,66 @@ class ServiceRestProxy
         $queueWithFilter->_filters[] = $filter;
 
         return $queueWithFilter;
+    }
+    
+    /**
+     * Adds optional header to headers if set
+     * 
+     * @param array           $headers         array of request headers
+     * @param AccessCondition $accessCondition the access condition object
+     * 
+     * @return array
+     */
+    public function addOptionalAccessContitionHeader($headers, $accessCondition)
+    {
+        if (!is_null($accessCondition)) {
+            $header = $accessCondition->getHeader();
+            
+            if ($header != AccessConditionHeaderType::NONE) {
+                $headers[$header] = $accessCondition->getValue();
+            }
+        }
+        
+        return $headers;
+    }
+    
+    /**
+     * Groups set of values into one value separated with Resources::SEPARATOR
+     * 
+     * @param array $values array of values to be grouped.
+     * 
+     * @return string
+     */
+    public function groupQueryValues($values)
+    {
+        Validate::isArray($values);
+        $joined = Resources::EMPTY_STRING;
+        
+        foreach ($values as $value) {
+            if (!is_null($value) && !empty($value)) {
+                $joined .= $value . Resources::SEPARATOR;
+            }
+        }
+        
+        return trim($joined, Resources::SEPARATOR);
+    }
+    
+    /**
+     * Adds metadata elements to headers array
+     * 
+     * @param array $headers  HTTP request headers
+     * @param array $metadata user specified metadata
+     * 
+     * @return array
+     */
+    protected function addMetadataHeaders($headers, $metadata)
+    {
+        if (!is_null($metadata) && !empty($metadata)) {
+            $metadata = WindowsAzureUtilities::generateMetadataHeaders($metadata);
+            $headers  = array_merge($headers, $metadata);
+        }
+        
+        return $headers;
     }
 }
 

@@ -24,27 +24,26 @@
 
 namespace PEAR2\WindowsAzure\Services\Queue;
 use PEAR2\WindowsAzure\Services\Core\ServiceRestProxy;
-use PEAR2\WindowsAzure\Services\Queue\Queue;
 use PEAR2\WindowsAzure\Resources;
 use PEAR2\WindowsAzure\Validate;
-use PEAR2\WindowsAzure\Services\Core\Models\ListQueuesOptions;
-use PEAR2\WindowsAzure\Services\Core\Models\ListQueuesResult;
-use PEAR2\WindowsAzure\Services\Core\Models\CreateQueueOptions;
 use PEAR2\WindowsAzure\Services\Core\Models\GetServicePropertiesResult;
-use PEAR2\WindowsAzure\Services\Core\Models\QueueServiceOptions;
 use PEAR2\WindowsAzure\Services\Core\Models\ServiceProperties;
-use PEAR2\WindowsAzure\Services\Core\Models\GetQueueMetadataResult;
-use PEAR2\WindowsAzure\Services\Core\Models\CreateMessageOptions;
-use PEAR2\WindowsAzure\Services\Core\Models\QueueMessage;
-use PEAR2\WindowsAzure\Services\Core\Models\ListMessagesOptions;
-use PEAR2\WindowsAzure\Services\Core\Models\ListMessagesResult;
-use PEAR2\WindowsAzure\Services\Core\Models\PeekMessagesOptions;
-use PEAR2\WindowsAzure\Services\Core\Models\PeekMessagesResult;
-use PEAR2\WindowsAzure\Services\Core\Models\UpdateMessageResult;
+use PEAR2\WindowsAzure\Services\Queue\Models\ListQueuesOptions;
+use PEAR2\WindowsAzure\Services\Queue\Models\ListQueuesResult;
+use PEAR2\WindowsAzure\Services\Queue\Models\CreateQueueOptions;
+use PEAR2\WindowsAzure\Services\Queue\Models\QueueServiceOptions;
+use PEAR2\WindowsAzure\Services\Queue\Models\GetQueueMetadataResult;
+use PEAR2\WindowsAzure\Services\Queue\Models\CreateMessageOptions;
+use PEAR2\WindowsAzure\Services\Queue\Models\QueueMessage;
+use PEAR2\WindowsAzure\Services\Queue\Models\ListMessagesOptions;
+use PEAR2\WindowsAzure\Services\Queue\Models\ListMessagesResult;
+use PEAR2\WindowsAzure\Services\Queue\Models\PeekMessagesOptions;
+use PEAR2\WindowsAzure\Services\Queue\Models\PeekMessagesResult;
+use PEAR2\WindowsAzure\Services\Queue\Models\UpdateMessageResult;
 use PEAR2\WindowsAzure\Core\IHttpClient;
 use PEAR2\WindowsAzure\Utilities;
 use PEAR2\WindowsAzure\Core\Url;
-use PEAR2\WindowsAzure\Core\AzureUtilities;
+use PEAR2\WindowsAzure\Core\WindowsAzureUtilities;
 
 /**
  * This class constructs HTTP requests and receive HTTP responses for queue 
@@ -65,7 +64,7 @@ class QueueRestProxy extends ServiceRestProxy implements IQueue
      * 
      * @param ListQueuesOptions $listQueuesOptions Optional list queue options.
      * 
-     * @return PEAR2\WindowsAzure\Services\Core\Models\ListQueuesResult.
+     * @return PEAR2\WindowsAzure\Services\Queue\Models\ListQueuesResult.
      */
     public function listQueues($listQueuesOptions = null)
     {
@@ -79,13 +78,14 @@ class QueueRestProxy extends ServiceRestProxy implements IQueue
             $listQueuesOptions = new ListQueuesOptions();
         }
         
-        $queryParams['comp']                 = 'list';
-        $queryParams[Resources::PREFIX]      = $listQueuesOptions->getPrefix();
-        $queryParams[Resources::MARKER]      = $listQueuesOptions->getMarker();
-        $queryParams[Resources::MAX_RESULTS] = $listQueuesOptions->getMaxResults();
-
-        $isInclude              = $listQueuesOptions->getIncludeMetadata();
-        $queryParams['include'] = $isInclude ? 'metadata' : null;
+        $maxResults = $listQueuesOptions->getMaxResults();
+        $isInclude  = $listQueuesOptions->getIncludeMetadata();
+        
+        $queryParams[Resources::QP_COMP]        = 'list';
+        $queryParams[Resources::QP_PREFIX]      = $listQueuesOptions->getPrefix();
+        $queryParams[Resources::QP_MARKER]      = $listQueuesOptions->getMarker();
+        $queryParams[Resources::QP_MAX_RESULTS] = $maxResults;
+        $queryParams[Resources::QP_INCLUDE]     = $isInclude ? 'metadata' : null;
         
         $response = $this->send($method, $headers, $queryParams, $path, $statusCode);
         $parsed   = Utilities::unserialize($response->getBody());
@@ -191,7 +191,7 @@ class QueueRestProxy extends ServiceRestProxy implements IQueue
             $createQueueOptions = new CreateQueueOptions();
         }
 
-        $metadataHeaders = AzureUtilities::generateMetadataHeaders(
+        $metadataHeaders = WindowsAzureUtilities::generateMetadataHeaders(
             $createQueueOptions->getMetadata()
         );
         $headers         = $metadataHeaders;
@@ -262,7 +262,7 @@ class QueueRestProxy extends ServiceRestProxy implements IQueue
      * @param string              $queueName           Name of the queue.
      * @param QueueServiceOptions $queueServiceOptions Optional queue service options
      * 
-     * @return PEAR2\WindowsAzure\Services\Core\Models\GetQueueMetadataResult.
+     * @return PEAR2\WindowsAzure\Services\Queue\Models\GetQueueMetadataResult.
      */
     public function getQueueMetadata($queueName, $queueServiceOptions = null)
     {
@@ -279,13 +279,13 @@ class QueueRestProxy extends ServiceRestProxy implements IQueue
         }
         
         $config[Resources::CONNECT_TIMEOUT] = $queueServiceOptions->getTimeout();
-        $queryParams['comp']                = 'metadata';
+        $queryParams[Resources::QP_COMP]    = 'metadata';
         
         $response = $this->send(
             $method, $headers, $queryParams, $path, $statusCode, $body, $config
         );
         
-        $metadata = AzureUtilities::getMetadataArray($response->getHeader());
+        $metadata = WindowsAzureUtilities::getMetadataArray($response->getHeader());
         $maxCount = intval(
             $response->getHeader(Resources::X_MS_APPROXIMATE_MESSAGES_COUNT)
         );
@@ -296,7 +296,7 @@ class QueueRestProxy extends ServiceRestProxy implements IQueue
     /**
      * Gets the properties of the Queue service.
      * 
-     * @param PEAR2\WindowsAzure\Services\Core\Models\QueueServiceOptions 
+     * @param PEAR2\WindowsAzure\Services\Queue\Models\QueueServiceOptions 
      * $queueServiceOptions optional queue service options.
      * 
      * @return PEAR2\WindowsAzure\Services\Core\Models\GetServicePropertiesResult
@@ -313,9 +313,9 @@ class QueueRestProxy extends ServiceRestProxy implements IQueue
             $queueServiceOptions = new QueueServiceOptions();
         }
         
-        $queryParams['restype'] = 'service';
-        $queryParams['comp']    = 'properties';
-        $queryParams['timeout'] = $queueServiceOptions->getTimeout();
+        $queryParams[Resources::QP_REST_TYPE] = 'service';
+        $queryParams[Resources::QP_COMP]      = 'properties';
+        $queryParams[Resources::QP_TIMEOUT]   = $queueServiceOptions->getTimeout();
         
         $response = $this->send($method, $headers, $queryParams, $path, $statusCode);
         $parsed   = Utilities::unserialize($response->getBody());
@@ -329,7 +329,7 @@ class QueueRestProxy extends ServiceRestProxy implements IQueue
      * @param string              $queueName           Name of the queue.
      * @param ListMessagesOptions $listMessagesOptions Optional list messages options
      * 
-     * @return PEAR2\WindowsAzure\Services\Core\Models\ListMessagesResult.
+     * @return PEAR2\WindowsAzure\Services\Queue\Models\ListMessagesResult.
      */
     public function listMessages($queueName, $listMessagesOptions = null)
     {
@@ -362,7 +362,7 @@ class QueueRestProxy extends ServiceRestProxy implements IQueue
      * @param string              $queueName           Name of the queue.
      * @param PeekMessagesOptions $peekMessagesOptions Optional peek messages options
      * 
-     * @return PEAR2\WindowsAzure\Services\Core\Models\PeekMessagesResult.
+     * @return PEAR2\WindowsAzure\Services\Queue\Models\PeekMessagesResult.
      */
     public function peekMessages($queueName, $peekMessagesOptions = null)
     {
@@ -413,9 +413,9 @@ class QueueRestProxy extends ServiceRestProxy implements IQueue
         }
         
         $config[Resources::CONNECT_TIMEOUT] = $queueServiceOptions->getTimeout();
-        $queryParams['comp']                = 'metadata';
+        $queryParams[Resources::QP_COMP]    = 'metadata';
         
-        $metadataHeaders = AzureUtilities::generateMetadataHeaders($metadata);
+        $metadataHeaders = WindowsAzureUtilities::generateMetadataHeaders($metadata);
         $headers         = $metadataHeaders;
         
         $this->send(
@@ -439,17 +439,16 @@ class QueueRestProxy extends ServiceRestProxy implements IQueue
         $queryParams = array();
         $statusCode  = Resources::STATUS_ACCEPTED;
         $path        = Resources::EMPTY_STRING;
-        $body        = Resources::EMPTY_STRING;
+        $body        = $serviceProperties->toXml();
         
         if (!isset($queueServiceOptions)) {
             $queueServiceOptions = new QueueServiceOptions();
         }
         
-        $queryParams['restype']           = 'service';
-        $queryParams['comp']              = 'properties';
-        $queryParams['timeout']           = $queueServiceOptions->getTimeout();
-        $body                             = $serviceProperties->toXml();
-        $headers[Resources::CONTENT_TYPE] = Resources::XML_CONTENT_TYPE;
+        $queryParams[Resources::QP_REST_TYPE] = 'service';
+        $queryParams[Resources::QP_COMP]      = 'properties';
+        $queryParams[Resources::QP_TIMEOUT]   = $queueServiceOptions->getTimeout();
+        $headers[Resources::CONTENT_TYPE]     = Resources::XML_CONTENT_TYPE;
         
         $this->send($method, $headers, $queryParams, $path, $statusCode, $body);
     }
@@ -472,7 +471,7 @@ class QueueRestProxy extends ServiceRestProxy implements IQueue
      * @param QueueServiceOptions $queueServiceOptions        Optional queue 
      * service options
      * 
-     * @return PEAR2\WindowsAzure\Services\Core\Models\UpdateMessageResult.
+     * @return PEAR2\WindowsAzure\Services\Queue\Models\UpdateMessageResult.
      */
     public function updateMessage($queueName, $messageId, $popReceipt, $messageText, 
         $visibilityTimeoutInSeconds, $queueServiceOptions = null
@@ -512,7 +511,7 @@ class QueueRestProxy extends ServiceRestProxy implements IQueue
         $popReceipt      = $response->getHeader(Resources::X_MS_POPRECEIPT);
         $timeNextVisible = $response->getHeader(Resources::X_MS_TIME_NEXT_VISIBLE);
         
-        $date   = AzureUtilities::windowsAzureDateToDateTime($timeNextVisible);
+        $date   = WindowsAzureUtilities::rfc1123ToDateTime($timeNextVisible);
         $result = new UpdateMessageResult();
         $result->setPopReceipt($popReceipt);
         $result->setTimeNextVisible($date);

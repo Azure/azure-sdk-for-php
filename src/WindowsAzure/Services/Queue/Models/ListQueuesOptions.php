@@ -15,22 +15,22 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   PEAR2\WindowsAzure\Services\Core\Models
+ * @package   PEAR2\WindowsAzure\Services\Queue\Models
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
  
-namespace PEAR2\WindowsAzure\Services\Core\Models;
-use PEAR2\WindowsAzure\Services\Core\Models\QueueServiceOptions;
+namespace PEAR2\WindowsAzure\Services\Queue\Models;
+use PEAR2\WindowsAzure\Services\Queue\Models\QueueServiceOptions;
 use \PEAR2\WindowsAzure\Validate;
 
 /**
  * Options for listQueues API.
  *
  * @category  Microsoft
- * @package   PEAR2\WindowsAzure\Services\Core\Models
+ * @package   PEAR2\WindowsAzure\Services\Queue\Models
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
@@ -116,7 +116,7 @@ class ListQueuesOptions extends QueueServiceOptions
     /**
      * Indicates if metadata is included or not.
      * 
-     * @return string.
+     * @return boolean.
      */
     public function getIncludeMetadata()
     {

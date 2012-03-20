@@ -16,7 +16,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- * @package    Azure-sdk-for-php
+ * @package    WindowsAzure-sdk-for-php
  * @author     Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright  2012 Microsoft Corporation
  * @license    http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
@@ -28,7 +28,7 @@ namespace PEAR2\Tests\Framework;
 /**
  * Resources for testing framework.
  *
- * @package    Azure-sdk-for-php
+ * @package    WindowsAzure-sdk-for-php
  * @author     Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright  2012 Microsoft Corporation
  * @license    http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
@@ -224,6 +224,137 @@ class TestResources
             )
         ));
         $sample['NextMarker'] = 'video';
+        
+        return $sample;
+    }
+    
+    public static function getContainerACLOneEntrySample()
+    {
+        $sample = array();
+        $sample['SignedIdentifiers'] = array('SignedIdentifier' => array (
+            'Id' => 'MTIzNDU2Nzg5MDEyMzQ1Njc4OTAxMjM0NTY3ODkwMTI=',
+            'AccessPolicy' => array(
+                'Start' => '2009-09-28T08%3A49%3A37.0000000Z',
+                'Expiry' => '2009-09-29T08%3A49%3A37.0000000Z',
+                'Permission' => 'rwd')
+            ));
+        
+        return $sample;
+    }
+    
+    public static function getContainerACLMultipleEntriesSample()
+    {
+        $sample = array();
+        $sample['SignedIdentifiers'] = array( 'SignedIdentifier' => array (
+            0 => array ('Id' => 'HYQzNDU2Nzg5MDEyMzQ1Njc4OTAxMjM0NTY3ODkwMTI=',
+            'AccessPolicy' => array(
+                'Start' => '2010-09-28T08%3A49%3A37.0000000Z',
+                'Expiry' => '2010-09-29T08%3A49%3A37.0000000Z',
+                'Permission' => 'wd')),
+            1 => array ('Id' => 'MTIzNDU2Nzg5MDEyMzQ1Njc4OTAxMjM0NTY3ODkwMTI=',
+            'AccessPolicy' => array(
+                'Start' => '2009-09-28T08%3A49%3A37.0000000Z',
+                'Expiry' => '2009-09-29T08%3A49%3A37.0000000Z',
+                'Permission' => 'rwd'))
+            ));
+        
+        return $sample;
+    }
+    
+    public static function listBlobsEmpty()
+    {
+        $sample = array();
+        $sample['Blobs'] = '';
+        $sample['NextMarker'] = '';
+        
+        return $sample;
+    }
+    
+    public static function listBlobsOneEntry()
+    {
+        $sample = array();
+        $sample['Marker'] = '/account/listblobswithnextmarker3';
+        $sample['MaxResults'] = '2';
+        $sample['Delimiter'] = 'mydelimiter';
+        $sample['Prefix'] = 'myprefix';
+        $sample['Blobs'] = array(
+            'BlobPrefix' => array('Name' => 'myblobprefix'),
+            'Blob' => array(
+                'Name' => 'myblob', 
+                'Url' => 'http://account.blob.core.windows.net/myblob',
+                'Snapshot' => '10-12-2011',
+                'Metadata' => array('Name1' => 'Value1', 'Name2' => 'Value2'),
+                'Properties' => array(
+                    'Last-Modified' => 'Sat, 04 Sep 2011 12:43:08 GMT',
+                    'Etag' => '0x8CAFB82EFF70C46',
+                    'Content-Length' => '10',
+                    'Content-Type' => 'type',
+                    'Content-Encoding' => 'encoding',
+                    'Content-Language' => 'language',
+                    'Content-MD5' => 'md5',
+                    'Cache-Control' => 'cachecontrol',
+                    'x-ms-blob-sequence-number' => '0',
+                    'BlobType' => 'BlockBlob',
+                    'LeaseStatus' => 'locked'
+                )
+            )
+        );
+        
+        $sample['NextMarker'] = '';
+        
+        return $sample;
+    }
+    
+    public static function listBlobsMultipleEntries()
+    {
+        $sample = array();
+        $sample['Marker'] = '/account/listblobswithnextmarker3';
+        $sample['MaxResults'] = '2';
+        $sample['Blobs'] = array(
+            'BlobPrefix' => array(
+                0 => array('Name' => 'myblobprefix'),
+                1 => array('Name' => 'myblobprefix2')),
+            'Blob' => array( 0 => array(
+                'Name' => 'myblob', 
+                'Url' => 'http://account.blob.core.windows.net/myblob',
+                'Snapshot' => '10-12-2011',
+                'Metadata' => array('Name1' => 'Value1', 'Name2' => 'Value2'),
+                'Properties' => array(
+                    'Last-Modified' => 'Sat, 04 Sep 2011 12:43:08 GMT',
+                    'Etag' => '0x8CAFB82EFF70C46',
+                    'Content-Length' => '10',
+                    'Content-Type' => 'type',
+                    'Content-Encoding' => 'encoding',
+                    'Content-Language' => 'language',
+                    'Content-MD5' => 'md5',
+                    'Cache-Control' => 'cachecontrol',
+                    'x-ms-blob-sequence-number' => '0',
+                    'BlobType' => 'BlockBlob',
+                    'LeaseStatus' => 'locked'
+                )
+            ),
+            
+            1 => array(
+                'Name' => 'myblob2', 
+                'Url' => 'http://account.blob.core.windows.net/myblob2',
+                'Snapshot' => '10-12-2011',
+                'Metadata' => array('Name1' => 'Value1', 'Name2' => 'Value2'),
+                'Properties' => array(
+                    'Last-Modified' => 'Sun, 26 Feb 2010 12:43:08 GMT',
+                    'Etag' => '0x7CQWER2EFF70C46',
+                    'Content-Length' => '20',
+                    'Content-Type' => 'type2',
+                    'Content-Encoding' => 'encoding2',
+                    'Content-Language' => 'language2',
+                    'Content-MD5' => 'md52',
+                    'Cache-Control' => 'cachecontrol2',
+                    'x-ms-blob-sequence-number' => '1',
+                    'BlobType' => 'PageBlob',
+                    'LeaseStatus' => 'unlocked'
+                )
+            )));
+        
+        $sample['NextMarker'] = 'value';
         
         return $sample;
     }

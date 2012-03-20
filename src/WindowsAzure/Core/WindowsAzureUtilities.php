@@ -37,7 +37,7 @@ use PEAR2\WindowsAzure\Utilities;
  * @version   Release: @package_version@
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
-class AzureUtilities
+class WindowsAzureUtilities
 {
     /**
      * Generates metadata headers by prefixing each element with 'x-ms-meta'.
@@ -104,7 +104,7 @@ class AzureUtilities
      * 
      * @return \DateTime
      */
-    public static function windowsAzureDateToDateTime($date)
+    public static function rfc1123ToDateTime($date)
     {
         $timeZone = new \DateTimeZone('GMT');
         $format   = Resources::AZURE_DATE_FORMAT;

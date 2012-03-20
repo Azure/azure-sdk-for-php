@@ -22,7 +22,7 @@
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
 
-use PEAR2\WindowsAzure\Services\Core\Models\Queue;
+use PEAR2\WindowsAzure\Services\Queue\Models\Queue;
 use PEAR2\Tests\Framework\TestResources;
 
 /**
@@ -39,7 +39,7 @@ use PEAR2\Tests\Framework\TestResources;
 class QueueTest extends PHPUnit_Framework_TestCase
 {
     /**
-     * @covers PEAR2\WindowsAzure\Services\Core\Models\Queue::__construct
+     * @covers PEAR2\WindowsAzure\Services\Queue\Models\Queue::__construct
      */
     public function test__construct()
     {
@@ -56,7 +56,7 @@ class QueueTest extends PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers PEAR2\WindowsAzure\Services\Core\Models\Queue::setName
+     * @covers PEAR2\WindowsAzure\Services\Queue\Models\Queue::setName
      */
     public function testSetName()
     {
@@ -72,7 +72,7 @@ class QueueTest extends PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers PEAR2\WindowsAzure\Services\Core\Models\Queue::getName
+     * @covers PEAR2\WindowsAzure\Services\Queue\Models\Queue::getName
      */
     public function testGetName()
     {
@@ -89,7 +89,7 @@ class QueueTest extends PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers PEAR2\WindowsAzure\Services\Core\Models\Queue::setUrl
+     * @covers PEAR2\WindowsAzure\Services\Queue\Models\Queue::setUrl
      */
     public function testSetUrl()
     {
@@ -105,7 +105,7 @@ class QueueTest extends PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers PEAR2\WindowsAzure\Services\Core\Models\Queue::getUrl
+     * @covers PEAR2\WindowsAzure\Services\Queue\Models\Queue::getUrl
      */
     public function testGetUrl()
     {
@@ -122,7 +122,7 @@ class QueueTest extends PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers PEAR2\WindowsAzure\Services\Core\Models\Queue::setMetadata
+     * @covers PEAR2\WindowsAzure\Services\Queue\Models\Queue::setMetadata
      */
     public function testSetMetadata()
     {
@@ -138,7 +138,7 @@ class QueueTest extends PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers PEAR2\WindowsAzure\Services\Core\Models\Queue::getMetadata
+     * @covers PEAR2\WindowsAzure\Services\Queue\Models\Queue::getMetadata
      */
     public function testGetMetadata()
     {

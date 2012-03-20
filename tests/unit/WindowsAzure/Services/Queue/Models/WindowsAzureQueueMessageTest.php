@@ -22,12 +22,12 @@
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
 
-use PEAR2\WindowsAzure\Services\Core\Models\AzureQueueMessage;
+use PEAR2\WindowsAzure\Services\Queue\Models\WindowsAzureQueueMessage;
 use PEAR2\Tests\Framework\TestResources;
-use PEAR2\WindowsAzure\Core\AzureUtilities;
+use PEAR2\WindowsAzure\Core\WindowsAzureUtilities;
 
 /**
- * Unit tests for class AzureQueueMessageTest
+ * Unit tests for class WindowsAzureQueueMessageTest
  *
  * @category  Microsoft
  * @package   PEAR2\Tests\Unit\WindowsAzure
@@ -37,10 +37,10 @@ use PEAR2\WindowsAzure\Core\AzureUtilities;
  * @version   Release: @package_version@
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
-class AzureQueueMessageTest extends PHPUnit_Framework_TestCase
+class WindowsAzureQueueMessageTest extends PHPUnit_Framework_TestCase
 {
     /**
-    * @covers PEAR2\WindowsAzure\Services\Core\Models\AzureQueueMessage::createFromListMessages
+    * @covers PEAR2\WindowsAzure\Services\Queue\Models\WindowsAzureQueueMessage::createFromListMessages
     */
     public function testCreateListMessages()
     {
@@ -49,20 +49,20 @@ class AzureQueueMessageTest extends PHPUnit_Framework_TestCase
         $sample = $sample['QueueMessage'];
         
         // Test
-        $actual = AzureQueueMessage::createFromListMessages($sample);
+        $actual = WindowsAzureQueueMessage::createFromListMessages($sample);
         
         // Assert
         $this->assertEquals($sample['MessageId'] , $actual->getMessageId());
-        $this->assertEquals(AzureUtilities::windowsAzureDateToDateTime($sample['InsertionTime']) , $actual->getInsertionDate());
-        $this->assertEquals(AzureUtilities::windowsAzureDateToDateTime($sample['ExpirationTime']) , $actual->getExpirationDate());
+        $this->assertEquals(WindowsAzureUtilities::rfc1123ToDateTime($sample['InsertionTime']) , $actual->getInsertionDate());
+        $this->assertEquals(WindowsAzureUtilities::rfc1123ToDateTime($sample['ExpirationTime']) , $actual->getExpirationDate());
         $this->assertEquals($sample['PopReceipt'] , $actual->getPopReceipt());
-        $this->assertEquals(AzureUtilities::windowsAzureDateToDateTime($sample['TimeNextVisible']), $actual->getTimeNextVisible());
+        $this->assertEquals(WindowsAzureUtilities::rfc1123ToDateTime($sample['TimeNextVisible']), $actual->getTimeNextVisible());
         $this->assertEquals(intval($sample['DequeueCount']) , $actual->getDequeueCount());
         $this->assertEquals($sample['MessageText'] , $actual->getMessageText());
     }
     
     /**
-    * @covers PEAR2\WindowsAzure\Services\Core\Models\AzureQueueMessage::createFromPeekMessages
+    * @covers PEAR2\WindowsAzure\Services\Queue\Models\WindowsAzureQueueMessage::createFromPeekMessages
     */
     public function testCreateFromPeekMessages()
     {
@@ -71,23 +71,23 @@ class AzureQueueMessageTest extends PHPUnit_Framework_TestCase
         $sample = $sample['QueueMessage'];
         
         // Test
-        $actual = AzureQueueMessage::createFromPeekMessages($sample);
+        $actual = WindowsAzureQueueMessage::createFromPeekMessages($sample);
         
         // Assert
         $this->assertEquals($sample['MessageId'] , $actual->getMessageId());
-        $this->assertEquals(AzureUtilities::windowsAzureDateToDateTime($sample['InsertionTime']) , $actual->getInsertionDate());
-        $this->assertEquals(AzureUtilities::windowsAzureDateToDateTime($sample['ExpirationTime']) , $actual->getExpirationDate());
+        $this->assertEquals(WindowsAzureUtilities::rfc1123ToDateTime($sample['InsertionTime']) , $actual->getInsertionDate());
+        $this->assertEquals(WindowsAzureUtilities::rfc1123ToDateTime($sample['ExpirationTime']) , $actual->getExpirationDate());
         $this->assertEquals(intval($sample['DequeueCount']) , $actual->getDequeueCount());
         $this->assertEquals($sample['MessageText'] , $actual->getMessageText());
     }
     
     /**
-     * @covers PEAR2\WindowsAzure\Services\Core\Models\AzureQueueMessage::getMessageText
+     * @covers PEAR2\WindowsAzure\Services\Queue\Models\WindowsAzureQueueMessage::getMessageText
      */
     public function testGetMessageText()
     {
         // Setup
-        $azureQueueMessage = new AzureQueueMessage();
+        $azureQueueMessage = new WindowsAzureQueueMessage();
         $expected = 'PHRlc3Q+dGhpcyBpcyBhIHRlc3QgbWVzc2FnZTwvdGVzdD4=' ;
         $azureQueueMessage->setMessageText($expected);
         
@@ -99,12 +99,12 @@ class AzureQueueMessageTest extends PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers PEAR2\WindowsAzure\Services\Core\Models\AzureQueueMessage::setMessageText
+     * @covers PEAR2\WindowsAzure\Services\Queue\Models\WindowsAzureQueueMessage::setMessageText
      */
     public function testSetMessageText()
     {
         // Setup
-        $azureQueueMessage = new AzureQueueMessage();
+        $azureQueueMessage = new WindowsAzureQueueMessage();
         $expected = 'PHRlc3Q+dGhpcyBpcyBhIHRlc3QgbWVzc2FnZTwvdGVzdD4=';
         
         // Test
@@ -116,12 +116,12 @@ class AzureQueueMessageTest extends PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers PEAR2\WindowsAzure\Services\Core\Models\AzureQueueMessage::getMessageId
+     * @covers PEAR2\WindowsAzure\Services\Queue\Models\WindowsAzureQueueMessage::getMessageId
      */
     public function testGetMessageId()
     {
         // Setup
-        $azureQueueMessage = new AzureQueueMessage();
+        $azureQueueMessage = new WindowsAzureQueueMessage();
         $expected = '5974b586-0df3-4e2d-ad0c-18e3892bfca2';
         $azureQueueMessage->setMessageId($expected);
         
@@ -133,12 +133,12 @@ class AzureQueueMessageTest extends PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers PEAR2\WindowsAzure\Services\Core\Models\AzureQueueMessage::setMessageId
+     * @covers PEAR2\WindowsAzure\Services\Queue\Models\WindowsAzureQueueMessage::setMessageId
      */
     public function testSetMessageId()
     {
         // Setup
-        $azureQueueMessage = new AzureQueueMessage();
+        $azureQueueMessage = new WindowsAzureQueueMessage();
         $expected = '5974b586-0df3-4e2d-ad0c-18e3892bfca2';
         
         // Test
@@ -150,12 +150,12 @@ class AzureQueueMessageTest extends PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers PEAR2\WindowsAzure\Services\Core\Models\AzureQueueMessage::getInsertionDate
+     * @covers PEAR2\WindowsAzure\Services\Queue\Models\WindowsAzureQueueMessage::getInsertionDate
      */
     public function testGetInsertionDate()
     {
         // Setup
-        $azureQueueMessage = new AzureQueueMessage();
+        $azureQueueMessage = new WindowsAzureQueueMessage();
         $expected = 'Fri, 09 Oct 2009 21:04:30 GMT';
         $azureQueueMessage->setInsertionDate($expected);
         
@@ -167,12 +167,12 @@ class AzureQueueMessageTest extends PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers PEAR2\WindowsAzure\Services\Core\Models\AzureQueueMessage::setInsertionDate
+     * @covers PEAR2\WindowsAzure\Services\Queue\Models\WindowsAzureQueueMessage::setInsertionDate
      */
     public function testSetInsertionDate()
     {
         // Setup
-        $azureQueueMessage = new AzureQueueMessage();
+        $azureQueueMessage = new WindowsAzureQueueMessage();
         $expected = 'Fri, 09 Oct 2009 21:04:30 GMT';
         
         // Test
@@ -184,12 +184,12 @@ class AzureQueueMessageTest extends PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers PEAR2\WindowsAzure\Services\Core\Models\AzureQueueMessage::getExpirationDate
+     * @covers PEAR2\WindowsAzure\Services\Queue\Models\WindowsAzureQueueMessage::getExpirationDate
      */
     public function testGetExpirationDate()
     {
         // Setup
-        $azureQueueMessage = new AzureQueueMessage();
+        $azureQueueMessage = new WindowsAzureQueueMessage();
         $expected = 'Fri, 16 Oct 2009 21:04:30 GMT';
         $azureQueueMessage->setExpirationDate($expected);
         
@@ -201,12 +201,12 @@ class AzureQueueMessageTest extends PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers PEAR2\WindowsAzure\Services\Core\Models\AzureQueueMessage::setExpirationDate
+     * @covers PEAR2\WindowsAzure\Services\Queue\Models\WindowsAzureQueueMessage::setExpirationDate
      */
     public function testSetExpirationDate()
     {
         // Setup
-        $azureQueueMessage = new AzureQueueMessage();
+        $azureQueueMessage = new WindowsAzureQueueMessage();
         $expected = 'Fri, 16 Oct 2009 21:04:30 GMT';
         
         // Test
@@ -218,12 +218,12 @@ class AzureQueueMessageTest extends PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers PEAR2\WindowsAzure\Services\Core\Models\AzureQueueMessage::getPopReceipt
+     * @covers PEAR2\WindowsAzure\Services\Queue\Models\WindowsAzureQueueMessage::getPopReceipt
      */
     public function testGetPopReceipt()
     {
         // Setup
-        $azureQueueMessage = new AzureQueueMessage();
+        $azureQueueMessage = new WindowsAzureQueueMessage();
         $expected = 'YzQ4Yzg1MDItYTc0Ny00OWNjLTkxYTUtZGM0MDFiZDAwYzEw';
         $azureQueueMessage->setPopReceipt($expected);
         
@@ -235,12 +235,12 @@ class AzureQueueMessageTest extends PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers PEAR2\WindowsAzure\Services\Core\Models\AzureQueueMessage::setPopReceipt
+     * @covers PEAR2\WindowsAzure\Services\Queue\Models\WindowsAzureQueueMessage::setPopReceipt
      */
     public function testSetPopReceipt()
     {
         // Setup
-        $azureQueueMessage = new AzureQueueMessage();
+        $azureQueueMessage = new WindowsAzureQueueMessage();
         $expected = 'YzQ4Yzg1MDItYTc0Ny00OWNjLTkxYTUtZGM0MDFiZDAwYzEw';
         
         // Test
@@ -252,12 +252,12 @@ class AzureQueueMessageTest extends PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers PEAR2\WindowsAzure\Services\Core\Models\AzureQueueMessage::getTimeNextVisible
+     * @covers PEAR2\WindowsAzure\Services\Queue\Models\WindowsAzureQueueMessage::getTimeNextVisible
      */
     public function testGetTimeNextVisible()
     {
         // Setup
-        $azureQueueMessage = new AzureQueueMessage();
+        $azureQueueMessage = new WindowsAzureQueueMessage();
         $expected = 'Fri, 09 Oct 2009 23:29:20 GMT';
         $azureQueueMessage->setTimeNextVisible($expected);
         
@@ -269,12 +269,12 @@ class AzureQueueMessageTest extends PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers PEAR2\WindowsAzure\Services\Core\Models\AzureQueueMessage::setTimeNextVisible
+     * @covers PEAR2\WindowsAzure\Services\Queue\Models\WindowsAzureQueueMessage::setTimeNextVisible
      */
     public function testSetTimeNextVisible()
     {
         // Setup
-        $azureQueueMessage = new AzureQueueMessage();
+        $azureQueueMessage = new WindowsAzureQueueMessage();
         $expected = 'Fri, 09 Oct 2009 23:29:20 GMT';
         
         // Test
@@ -286,12 +286,12 @@ class AzureQueueMessageTest extends PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers PEAR2\WindowsAzure\Services\Core\Models\AzureQueueMessage::getDequeueCount
+     * @covers PEAR2\WindowsAzure\Services\Queue\Models\WindowsAzureQueueMessage::getDequeueCount
      */
     public function testGetDequeueCount()
     {
         // Setup
-        $azureQueueMessage = new AzureQueueMessage();
+        $azureQueueMessage = new WindowsAzureQueueMessage();
         $expected = 1;
         $azureQueueMessage->setDequeueCount($expected);
         
@@ -303,12 +303,12 @@ class AzureQueueMessageTest extends PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers PEAR2\WindowsAzure\Services\Core\Models\AzureQueueMessage::setDequeueCount
+     * @covers PEAR2\WindowsAzure\Services\Queue\Models\WindowsAzureQueueMessage::setDequeueCount
      */
     public function testSetDequeueCount()
     {
         // Setup
-        $azureQueueMessage = new AzureQueueMessage();
+        $azureQueueMessage = new WindowsAzureQueueMessage();
         $expected = 1;
         
         // Test

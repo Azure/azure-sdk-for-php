@@ -15,13 +15,13 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   PEAR2\WindowsAzure
+ * @package   PEAR2\Tests\Framework
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
-namespace Tests\Framework;
+namespace PEAR2\Tests\Framework;
 use PEAR2\WindowsAzure\Services\Core\Configuration;
 use PEAR2\Tests\Framework\TestResources;
 use PEAR2\WindowsAzure\Services\Core\Models\ServiceProperties;
@@ -30,7 +30,7 @@ use PEAR2\WindowsAzure\Services\Core\Models\ServiceProperties;
  * TestBase class for each unit test class.
  *
  * @category  Microsoft
- * @package   PEAR2\WindowsAzure
+ * @package   PEAR2\Tests\Framework
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0

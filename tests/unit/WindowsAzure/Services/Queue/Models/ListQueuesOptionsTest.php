@@ -22,7 +22,7 @@
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
 
-use PEAR2\WindowsAzure\Services\Core\Models\ListQueuesOptions;
+use PEAR2\WindowsAzure\Services\Queue\Models\ListQueuesOptions;
 use PEAR2\Tests\Framework\TestResources;
 
 /**
@@ -39,7 +39,7 @@ use PEAR2\Tests\Framework\TestResources;
 class ListQueueOptionsTest extends PHPUnit_Framework_TestCase
 {
     /**
-     * @covers PEAR2\WindowsAzure\Services\Core\Models\ListQueuesOptions::setPrefix
+     * @covers PEAR2\WindowsAzure\Services\Queue\Models\ListQueuesOptions::setPrefix
      */
     public function testSetPrefix()
     {
@@ -55,7 +55,7 @@ class ListQueueOptionsTest extends PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers PEAR2\WindowsAzure\Services\Core\Models\ListQueuesOptions::getPrefix
+     * @covers PEAR2\WindowsAzure\Services\Queue\Models\ListQueuesOptions::getPrefix
      */
     public function testGetPrefix()
     {
@@ -72,7 +72,7 @@ class ListQueueOptionsTest extends PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers PEAR2\WindowsAzure\Services\Core\Models\ListQueuesOptions::setMarker
+     * @covers PEAR2\WindowsAzure\Services\Queue\Models\ListQueuesOptions::setMarker
      */
     public function testSetMarker()
     {
@@ -88,7 +88,7 @@ class ListQueueOptionsTest extends PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers PEAR2\WindowsAzure\Services\Core\Models\ListQueuesOptions::getMarker
+     * @covers PEAR2\WindowsAzure\Services\Queue\Models\ListQueuesOptions::getMarker
      */
     public function testGetMarker()
     {
@@ -105,7 +105,7 @@ class ListQueueOptionsTest extends PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers PEAR2\WindowsAzure\Services\Core\Models\ListQueuesOptions::setMaxResults
+     * @covers PEAR2\WindowsAzure\Services\Queue\Models\ListQueuesOptions::setMaxResults
      */
     public function testSetMaxResults()
     {
@@ -121,7 +121,7 @@ class ListQueueOptionsTest extends PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers PEAR2\WindowsAzure\Services\Core\Models\ListQueuesOptions::getMaxResults
+     * @covers PEAR2\WindowsAzure\Services\Queue\Models\ListQueuesOptions::getMaxResults
      */
     public function testGetMaxResults()
     {
@@ -138,7 +138,7 @@ class ListQueueOptionsTest extends PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers PEAR2\WindowsAzure\Services\Core\Models\ListQueuesOptions::setIncludeMetadata
+     * @covers PEAR2\WindowsAzure\Services\Queue\Models\ListQueuesOptions::setIncludeMetadata
      */
     public function testSetIncludeMetadata()
     {
@@ -154,7 +154,7 @@ class ListQueueOptionsTest extends PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers PEAR2\WindowsAzure\Services\Core\Models\ListQueuesOptions::getIncludeMetadata
+     * @covers PEAR2\WindowsAzure\Services\Queue\Models\ListQueuesOptions::getIncludeMetadata
      */
     public function testGetIncludeMetadata()
     {

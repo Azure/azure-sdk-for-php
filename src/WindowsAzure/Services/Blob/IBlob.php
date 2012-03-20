@@ -98,8 +98,8 @@ interface IBlob
     /**
     * Creates a new container in the given storage account.
     * 
-    * @param string                        $container name
-    * @param Models\DeleteContainerOptions $options   optional parameters
+    * @param string                    $container name
+    * @param Models\BlobServiceOptions $options   optional parameters
     * 
     * @return none.
     * 
@@ -180,7 +180,7 @@ interface IBlob
     * 
     * @see http://msdn.microsoft.com/en-us/library/windowsazure/dd135734.aspx
     */
-    public function listBlobs($container, $options);
+    public function listBlobs($container, $options = null);
 
     /**
     * Creates a new page blob. Note that calling createPageBlob to create a page
@@ -401,7 +401,7 @@ interface IBlob
     * @param string                   $blob      name of the blob
     * @param Models\DeleteBlobOptions $options   optional parameters
     * 
-    * @return Models\DeleteBlobResult
+    * @return none.
     * 
     * @see http://msdn.microsoft.com/en-us/library/windowsazure/dd179413.aspx
     */

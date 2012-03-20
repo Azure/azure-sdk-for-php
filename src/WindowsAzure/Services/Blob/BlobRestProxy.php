@@ -25,7 +25,7 @@
 namespace PEAR2\WindowsAzure\Services\Blob;
 use PEAR2\WindowsAzure\Utilities;
 use PEAR2\WindowsAzure\Resources;
-use PEAR2\WindowsAzure\Core\AzureUtilities;
+use PEAR2\WindowsAzure\Core\WindowsAzureUtilities;
 use PEAR2\WindowsAzure\Services\Core\ServiceRestProxy;
 use PEAR2\WindowsAzure\Services\Blob\IBlob;
 use PEAR2\WindowsAzure\Services\Blob\Models\BlobServiceOptions;
@@ -34,6 +34,24 @@ use PEAR2\WindowsAzure\Services\Blob\Models\ListContainersOptions;
 use PEAR2\WindowsAzure\Services\Blob\Models\ListContainersResult;
 use PEAR2\WindowsAzure\Services\Blob\Models\CreateContainerOptions;
 use PEAR2\WindowsAzure\Services\Blob\Models\GetContainerPropertiesResult;
+use PEAR2\WindowsAzure\Services\Blob\Models\GetContainerACLResult;
+use PEAR2\WindowsAzure\Services\Blob\Models\SetContainerMetadataOptions;
+use PEAR2\WindowsAzure\Services\Blob\Models\ListBlobsOptions;
+use PEAR2\WindowsAzure\Services\Blob\Models\ListBlobsResult;
+use PEAR2\WindowsAzure\Services\Blob\Models\BlobType;
+use PEAR2\WindowsAzure\Services\Blob\Models\CreateBlobOptions;
+use PEAR2\WindowsAzure\Services\Blob\Models\BlobProperties;
+use PEAR2\WindowsAzure\Services\Blob\Models\GetBlobPropertiesOptions;
+use PEAR2\WindowsAzure\Services\Blob\Models\GetBlobPropertiesResult;
+use PEAR2\WindowsAzure\Services\Blob\Models\SetBlobPropertiesOptions;
+use PEAR2\WindowsAzure\Services\Blob\Models\SetBlobPropertiesResult;
+use PEAR2\WindowsAzure\Services\Blob\Models\GetBlobMetadataOptions;
+use PEAR2\WindowsAzure\Services\Blob\Models\GetBlobMetadataResult;
+use PEAR2\WindowsAzure\Services\Blob\Models\SetBlobMetadataOptions;
+use PEAR2\WindowsAzure\Services\Blob\Models\SetBlobMetadataResult;
+use PEAR2\WindowsAzure\Services\Blob\Models\GetBlobOptions;
+use PEAR2\WindowsAzure\Services\Blob\Models\GetBlobResult;
+use PEAR2\WindowsAzure\Services\Blob\Models\DeleteBlobOptions;
 
 /**
  * This class constructs HTTP requests and receive HTTP responses for blob
@@ -49,6 +67,71 @@ use PEAR2\WindowsAzure\Services\Blob\Models\GetContainerPropertiesResult;
  */
 class BlobRestProxy extends ServiceRestProxy implements IBlob
 {
+    /**
+     * Creates GetBlobPropertiesResult from headers array
+     * 
+     * @param array $headers HTTP response headers array
+     * 
+     * @return GetBlobPropertiesResult
+     */
+    private function _getBlobPropertiesResultFromResponse($headers)
+    {
+        $result     = new GetBlobPropertiesResult();
+        $properties = new BlobProperties();
+        $d          = $headers[Resources::LAST_MODIFIED];
+        $bType      = $headers[Resources::X_MS_BLOB_TYPE];
+        $lStatus    = $headers[Resources::X_MS_LEASE_STATUS];
+        $cLength    = intval($headers[Resources::CONTENT_LENGTH]);
+        $cType      = Utilities::tryGetValue($headers, Resources::CONTENT_TYPE);
+        $cMD5       = Utilities::tryGetValue($headers, Resources::CONTENT_MD5);
+        $cEncoding  = Utilities::tryGetValue($headers, Resources::CONTENT_ENCODING);
+        $cLanguage  = Utilities::tryGetValue($headers, Resources::CONTENT_LANGUAGE);
+        $cControl   = Utilities::tryGetValue($headers, Resources::CACHE_CONTROL);
+        $etag       = $headers[Resources::ETAG];
+        $metadata   = WindowsAzureUtilities::getMetadataArray($headers);
+        
+        if (array_key_exists(Resources::X_MS_BLOB_SEQUENCE_NUMBER, $headers)) {
+            $sNumber = intval($headers[Resources::X_MS_BLOB_SEQUENCE_NUMBER]);
+            $properties->setSequenceNumber($sNumber);
+        }
+        
+        $properties->setBlobType($bType);
+        $properties->setCacheControl($cControl);
+        $properties->setContentEncoding($cEncoding);
+        $properties->setContentLanguage($cLanguage);
+        $properties->setContentLength($cLength);
+        $properties->setContentMD5($cMD5);
+        $properties->setContentType($cType);
+        $properties->setEtag($etag);
+        $properties->setLastModified(WindowsAzureUtilities::rfc1123ToDateTime($d));
+        $properties->setLeaseStatus($lStatus);
+        
+        $result->setProperties($properties);
+        $result->setMetadata($metadata);
+        
+        return $result;
+    }
+    
+    /**
+     * Sets access condition header for given headers array
+     * 
+     * @param array $headers HTTP request headers
+     * @param type  $options optional parameters (must container getAccessCondition)
+     * 
+     * @return array
+     */
+    private function _setAccessConditionHeader($headers, $options)
+    {
+        if (!is_null($options)) {
+            $c = $options->getAccessCondition();
+            if (!is_null($c)) {
+                $headers[$c->getHeader()] = $c->getValue();
+            }
+        }
+        
+        return $headers;
+    }
+    
     /**
      * Helper method for getContainerProperties and getContainerMetadata
      * 
@@ -71,20 +154,85 @@ class BlobRestProxy extends ServiceRestProxy implements IBlob
             $options = new BlobServiceOptions();
         }
         
-        $queryParams['restype'] = 'container';
-        $queryParams['comp']    = $operation;
-        $queryParams['timeout'] = strval($options->getTimeout());
+        $queryParams[Resources::QP_REST_TYPE] = 'container';
+        $queryParams[Resources::QP_COMP]      = $operation;
+        $queryParams[Resources::QP_TIMEOUT]   = strval($options->getTimeout());
         
         $response = $this->send($method, $headers, $queryParams, $path, $statusCode);
         $result   = new GetContainerPropertiesResult();
-        $metadata = AzureUtilities::getMetadataArray($response->getHeader());
+        $metadata = WindowsAzureUtilities::getMetadataArray($response->getHeader());
         $date     = $response->getHeader(Resources::LAST_MODIFIED);
-        $date     = AzureUtilities::windowsAzureDateToDateTime($date);
+        $date     = WindowsAzureUtilities::rfc1123ToDateTime($date);
         $result->setEtag($response->getHeader(Resources::ETAG));
         $result->setMetadata($metadata);
         $result->setLastModified($date);
         
         return $result;
+    }
+    
+    /**
+     * Adds optional create blob headers.
+     * 
+     * @param CreateBlobOptions $options optional parameters
+     * @param array             $headers request headers
+     * 
+     * @return array
+     */
+    private function _addCreateBlobOptionalHeaders($options, $headers)
+    {
+        $contentType         = $options->getContentType();
+        $metadata            = $options->getMetadata();
+        $blobContentType     = $options->getBlobContentType();
+        $blobContentEncoding = $options->getBlobContentEncoding();
+        $blobContentLanguage = $options->getBlobContentLanguage();
+        $blobContentMD5      = $options->getBlobContentMD5();
+        $blobCacheControl    = $options->getBlobCacheControl();
+        $leaseId             = $options->getLeaseId();
+        
+        if (!is_null($contentType)) {
+            $headers[Resources::CONTENT_TYPE] = $options->getContentType();
+        } else {
+            $headers[Resources::CONTENT_TYPE] = Resources::BINARY_FILE_TYPE;
+        }
+        
+        $headers = $this->addMetadataHeaders($headers, $metadata);
+        $headers = $this->_setAccessConditionHeader($headers, $options);
+        
+        $headers[Resources::CONTENT_ENCODING] = $options->getContentEncoding();
+        $headers[Resources::CONTENT_LANGUAGE] = $options->getContentLanguage();
+        $headers[Resources::CONTENT_MD5]      = $options->getContentMD5();
+        $headers[Resources::CACHE_CONTROL]    = $options->getCacheControl();
+        $headers[Resources::X_MS_LEASE_ID]    = $leaseId;
+        
+        $headers[Resources::X_MS_BLOB_CONTENT_TYPE]     = $blobContentType;
+        $headers[Resources::X_MS_BLOB_CONTENT_ENCODING] = $blobContentEncoding;
+        $headers[Resources::X_MS_BLOB_CONTENT_LANGUAGE] = $blobContentLanguage;
+        $headers[Resources::X_MS_BLOB_CONTENT_MD5]      = $blobContentMD5;
+        $headers[Resources::X_MS_BLOB_CACHE_CONTROL]    = $blobCacheControl;
+        
+        return $headers;
+    }
+    
+    /**
+     * Adds Range header to the headers array
+     * 
+     * @param array   $headers HTTP request headers
+     * @param integer $start   the start byte
+     * @param integer $end     the end byte
+     * 
+     * @return array
+     */
+    private function _addOptionalRangeHeader($headers, $start, $end)
+    {
+        if (!is_null($start)) {
+            $range = $start . '-';
+            if (!is_null($end)) {
+                $range .= $end;
+            }
+            $headers[Resources::RANGE] = 'bytes=' . $range;
+        }
+        
+        return $headers;
     }
     
     /**
@@ -108,9 +256,9 @@ class BlobRestProxy extends ServiceRestProxy implements IBlob
             $options = new BlobServiceOptions();
         }
         
-        $queryParams['restype'] = 'service';
-        $queryParams['comp']    = 'properties';
-        $queryParams['timeout'] = strval($options->getTimeout());
+        $queryParams[Resources::QP_REST_TYPE] = 'service';
+        $queryParams[Resources::QP_COMP]      = 'properties';
+        $queryParams[Resources::QP_TIMEOUT]   = strval($options->getTimeout());
         
         $response = $this->send($method, $headers, $queryParams, $path, $statusCode);
         $parsed   = Utilities::unserialize($response->getBody());
@@ -141,11 +289,11 @@ class BlobRestProxy extends ServiceRestProxy implements IBlob
             $options = new BlobServiceOptions();
         }
         
-        $queryParams['restype']           = 'service';
-        $queryParams['comp']              = 'properties';
-        $queryParams['timeout']           = strval($options->getTimeout());
-        $body                             = $serviceProperties->toXml();
-        $headers[Resources::CONTENT_TYPE] = Resources::XML_CONTENT_TYPE;
+        $queryParams[Resources::QP_REST_TYPE] = 'service';
+        $queryParams[Resources::QP_COMP]      = 'properties';
+        $queryParams[Resources::QP_TIMEOUT]   = strval($options->getTimeout());
+        $body                                 = $serviceProperties->toXml();
+        $headers[Resources::CONTENT_TYPE]     = Resources::XML_CONTENT_TYPE;
         
         $this->send($method, $headers, $queryParams, $path, $statusCode, $body);
     }
@@ -171,13 +319,13 @@ class BlobRestProxy extends ServiceRestProxy implements IBlob
             $options = new ListContainersOptions();
         }
         
-        $queryParams['timeout']              = strval($options->getTimeout());
-        $queryParams['comp']                 = 'list';
-        $queryParams[Resources::PREFIX]      = $options->getPrefix();
-        $queryParams[Resources::MARKER]      = $options->getMarker();
-        $queryParams[Resources::MAX_RESULTS] = $options->getMaxResults();
-        $isInclude                           = $options->getIncludeMetadata();
-        $queryParams['include']              = $isInclude ? 'metadata' : null;
+        $queryParams[Resources::QP_TIMEOUT]     = strval($options->getTimeout());
+        $queryParams[Resources::QP_COMP]        = 'list';
+        $queryParams[Resources::QP_PREFIX]      = $options->getPrefix();
+        $queryParams[Resources::QP_MARKER]      = $options->getMarker();
+        $queryParams[Resources::QP_MAX_RESULTS] = $options->getMaxResults();
+        $isInclude                              = $options->getIncludeMetadata();
+        $queryParams[Resources::QP_INCLUDE]     = $isInclude ? 'metadata' : null;
         
         $response = $this->send($method, $headers, $queryParams, $path, $statusCode);
         $parsed   = Utilities::unserialize($response->getBody());
@@ -199,18 +347,17 @@ class BlobRestProxy extends ServiceRestProxy implements IBlob
     {
         $method      = \HTTP_Request2::METHOD_PUT;
         $headers     = array();
-        $queryParams = array();
-        $path        = Resources::EMPTY_STRING;
+        $queryParams = array(Resources::QP_REST_TYPE => 'container');
+        $path        = $container;
         $statusCode  = Resources::STATUS_CREATED;
         
         if (is_null($options)) {
             $options = new CreateContainerOptions();
         }
 
-        $queryParams['restype'] = 'container';
-        $path                   = $container;
+        $queryParams[Resources::QP_TIMEOUT] = strval($options->getTimeout());
         
-        $metadataHeaders = AzureUtilities::generateMetadataHeaders(
+        $metadataHeaders = WindowsAzureUtilities::generateMetadataHeaders(
             $options->getMetadata()
         );
         
@@ -223,8 +370,8 @@ class BlobRestProxy extends ServiceRestProxy implements IBlob
     /**
      * Creates a new container in the given storage account.
      * 
-     * @param string                        $container name of the container
-     * @param Models\DeleteContainerOptions $options   optional parameters
+     * @param string                    $container name of the container
+     * @param Models\BlobServiceOptions $options   optional parameters
      * 
      * @return none.
      * 
@@ -234,9 +381,16 @@ class BlobRestProxy extends ServiceRestProxy implements IBlob
     {
         $method      = \HTTP_Request2::METHOD_DELETE;
         $headers     = array();
-        $queryParams = array('restype' => 'container');
+        $queryParams = array();
         $path        = $container;
         $statusCode  = Resources::STATUS_ACCEPTED;
+        
+        if (is_null($options)) {
+            $options = new BlobServiceOptions();
+        }
+        
+        $queryParams[Resources::QP_REST_TYPE] = 'container';
+        $queryParams[Resources::QP_TIMEOUT]   = strval($options->getTimeout());
         
         $this->send($method, $headers, $queryParams, $path, $statusCode);
     }
@@ -284,7 +438,28 @@ class BlobRestProxy extends ServiceRestProxy implements IBlob
      */
     public function getContainerACL($container, $options = null)
     {
-        throw new \Exception(Resources::NOT_IMPLEMENTED_MSG);
+        $method      = \HTTP_Request2::METHOD_GET;
+        $headers     = array();
+        $queryParams = array();
+        $path        = $container;
+        $statusCode  = Resources::STATUS_OK;
+        
+        if (is_null($options)) {
+            $options = new BlobServiceOptions();
+        }
+        
+        $queryParams[Resources::QP_TIMEOUT]   = strval($options->getTimeout());
+        $queryParams[Resources::QP_REST_TYPE] = 'container';
+        $queryParams[Resources::QP_COMP]      = 'acl';
+        
+        $response = $this->send($method, $headers, $queryParams, $path, $statusCode);
+        
+        $access       = $response->getHeader(Resources::X_MS_BLOB_PUBLIC_ACCESS);
+        $etag         = $response->getHeader(Resources::ETAG);
+        $lastModified = $response->getHeader(Resources::LAST_MODIFIED);
+        $parsed       = Utilities::unserialize($response->getBody());
+                
+        return GetContainerACLResult::create($access, $etag, $lastModified, $parsed);
     }
     
     /**
@@ -300,7 +475,25 @@ class BlobRestProxy extends ServiceRestProxy implements IBlob
      */
     public function setContainerACL($container, $acl, $options = null)
     {
-        throw new \Exception(Resources::NOT_IMPLEMENTED_MSG);
+        $method      = \HTTP_Request2::METHOD_PUT;
+        $headers     = array();
+        $queryParams = array();
+        $path        = $container;
+        $statusCode  = Resources::STATUS_OK;
+        $body        = $acl->toXml();
+        
+        if (is_null($options)) {
+            $options = new BlobServiceOptions();
+        }
+        
+        $queryParams[Resources::QP_TIMEOUT]   = strval($options->getTimeout());
+        $queryParams[Resources::QP_REST_TYPE] = 'container';
+        $queryParams[Resources::QP_COMP]      = 'acl';
+        
+        $headers[Resources::X_MS_BLOB_PUBLIC_ACCESS] = $acl->getPublicAccess();
+        $headers[Resources::CONTENT_TYPE]            = Resources::XML_CONTENT_TYPE;
+
+        $this->send($method, $headers, $queryParams, $path, $statusCode, $body);
     }
     
     /**
@@ -316,7 +509,25 @@ class BlobRestProxy extends ServiceRestProxy implements IBlob
      */
     public function setContainerMetadata($container, $metadata, $options = null)
     {
-        throw new \Exception(Resources::NOT_IMPLEMENTED_MSG);
+        $method      = \HTTP_Request2::METHOD_PUT;
+        $headers     = WindowsAzureUtilities::generateMetadataHeaders($metadata);
+        $queryParams = array();
+        $path        = $container;
+        $statusCode  = Resources::STATUS_OK;
+        
+        if (is_null($options)) {
+            $options = new SetContainerMetadataOptions();
+        }
+        
+        $queryParams[Resources::QP_TIMEOUT]   = strval($options->getTimeout());
+        $queryParams[Resources::QP_REST_TYPE] = 'container';
+        $queryParams[Resources::QP_COMP]      = 'metadata';
+        
+        $header           = $options->getAccessCondition()->getHeader();
+        $value            = $options->getAccessCondition()->getValue();
+        $headers[$header] = $value;
+
+        $this->send($method, $headers, $queryParams, $path, $statusCode);
     }
     
     /**
@@ -329,9 +540,44 @@ class BlobRestProxy extends ServiceRestProxy implements IBlob
      * 
      * @see http://msdn.microsoft.com/en-us/library/windowsazure/dd135734.aspx
      */
-    public function listBlobs($container, $options)
+    public function listBlobs($container, $options = null)
     {
-        throw new \Exception(Resources::NOT_IMPLEMENTED_MSG);
+        $method      = \HTTP_Request2::METHOD_GET;
+        $headers     = array();
+        $queryParams = array();
+        $path        = $container;
+        $statusCode  = Resources::STATUS_OK;
+        
+        if (is_null($options)) {
+            $options = new ListBlobsOptions();
+        }
+        
+        $queryParams[Resources::QP_TIMEOUT]     = strval($options->getTimeout());
+        $queryParams[Resources::QP_COMP]        = 'list';
+        $queryParams[Resources::QP_REST_TYPE]   = 'container';
+        $queryParams[Resources::QP_PREFIX]      = $options->getPrefix();
+        $queryParams[Resources::QP_MARKER]      = $options->getMarker();
+        $queryParams[Resources::QP_DELIMITER]   = $options->getDelimiter();
+        $queryParams[Resources::QP_MAX_RESULTS] = strval($options->getMaxResults());
+        
+        $includeMetadata         = $options->getIncludeMetadata();
+        $includeSnapshots        = $options->getIncludeSnapshots();
+        $includeUncommittedBlobs = $options->getIncludeUncommittedBlobs();
+        
+        $includeValue = $this->groupQueryValues(
+            array(
+                $includeMetadata ? 'metadata' : null, 
+                $includeSnapshots ? 'snapshots' : null, 
+                $includeUncommittedBlobs ? 'uncommittedblobs' : null
+            )
+        );
+        
+        $queryParams[Resources::QP_INCLUDE] = $includeValue;
+        
+        $response = $this->send($method, $headers, $queryParams, $path, $statusCode);
+        $parsed   = Utilities::unserialize($response->getBody());
+        
+        return ListBlobsResult::create($parsed);
     }
     
     /**
@@ -352,7 +598,27 @@ class BlobRestProxy extends ServiceRestProxy implements IBlob
      */
     public function createPageBlob($container, $blob, $length, $options = null)
     {
-        throw new \Exception(Resources::NOT_IMPLEMENTED_MSG);
+        $method      = \HTTP_Request2::METHOD_PUT;
+        $headers     = array();
+        $queryParams = array();
+        $path        = $container . '/' . $blob;
+        $statusCode  = Resources::STATUS_CREATED;
+        
+        if (is_null($options)) {
+            $options = new CreateBlobOptions();
+        }
+        
+        $sequenceNumber = strval($options->getSequenceNumber());
+        
+        $headers[Resources::X_MS_BLOB_TYPE]            = BlobType::PAGE_BLOB;
+        $headers[Resources::X_MS_BLOB_CONTENT_LENGTH]  = strval($length);
+        $headers[Resources::X_MS_BLOB_SEQUENCE_NUMBER] = $sequenceNumber;
+        
+        $headers = $this->_addCreateBlobOptionalHeaders($options, $headers);
+        
+        $queryParams[Resources::QP_TIMEOUT] = strval($options->getTimeout());
+        
+        $this->send($method, $headers, $queryParams, $path, $statusCode);
     }
     
     /**
@@ -361,6 +627,7 @@ class BlobRestProxy extends ServiceRestProxy implements IBlob
      * Partial updates are not supported with createBlockBlob the content of the
      * existing blob is overwritten with the content of the new blob. To perform a
      * partial update of the content of a block blob, use the createBlockList method.
+     * Note that the default content type is application/octet-stream
      * 
      * @param string                   $container name of the container
      * @param string                   $blob      name of the blob
@@ -373,7 +640,23 @@ class BlobRestProxy extends ServiceRestProxy implements IBlob
      */
     public function createBlockBlob($container, $blob, $content, $options = null)
     {
-        throw new \Exception(Resources::NOT_IMPLEMENTED_MSG);
+        $method      = \HTTP_Request2::METHOD_PUT;
+        $headers     = array();
+        $queryParams = array();
+        $path        = $container . '/' . $blob;
+        $statusCode  = Resources::STATUS_CREATED;
+        $body        = $content;
+        
+        if (is_null($options)) {
+            $options = new CreateBlobOptions();
+        }
+        
+        $headers = $this->_addCreateBlobOptionalHeaders($options, $headers);
+        
+        $headers[Resources::X_MS_BLOB_TYPE] = BlobType::BLOCK_BLOB;
+        $queryParams[Resources::QP_TIMEOUT] = strval($options->getTimeout());
+        
+        $this->send($method, $headers, $queryParams, $path, $statusCode, $body);
     }
     
     /**
@@ -499,7 +782,27 @@ class BlobRestProxy extends ServiceRestProxy implements IBlob
      */
     public function getBlobProperties($container, $blob, $options = null)
     {
-        throw new \Exception(Resources::NOT_IMPLEMENTED_MSG);
+        $method      = \HTTP_Request2::METHOD_HEAD;
+        $headers     = array();
+        $queryParams = array();
+        $path        = $container . '/' . $blob;
+        $statusCode  = Resources::STATUS_OK;
+        
+        if (is_null($options)) {
+            $options = new GetBlobPropertiesOptions();
+        }
+        
+        $headers = $this->_setAccessConditionHeader($headers, $options);
+        
+        $headers[Resources::X_MS_LEASE_ID]  = $options->getLeaseId();
+        $queryParams['snapshot']            = $options->getSnapshot();
+        $queryParams[Resources::QP_TIMEOUT] = strval($options->getTimeout());
+        
+        
+        
+        $response = $this->send($method, $headers, $queryParams, $path, $statusCode);
+        
+        return $this->_getBlobPropertiesResultFromResponse($response->getHeader());
     }
     
     /**
@@ -515,7 +818,26 @@ class BlobRestProxy extends ServiceRestProxy implements IBlob
      */
     public function getBlobMetadata($container, $blob, $options = null)
     {
-        throw new \Exception(Resources::NOT_IMPLEMENTED_MSG);
+        $method      = \HTTP_Request2::METHOD_HEAD;
+        $headers     = array();
+        $queryParams = array();
+        $path        = $container . '/' . $blob;
+        $statusCode  = Resources::STATUS_OK;
+        
+        if (is_null($options)) {
+            $options = new GetBlobMetadataOptions();
+        }
+        
+        $headers = $this->_setAccessConditionHeader($headers, $options);
+        
+        $headers[Resources::X_MS_LEASE_ID]  = $options->getLeaseId();
+        $queryParams['snapshot']            = $options->getSnapshot();
+        $queryParams[Resources::QP_TIMEOUT] = strval($options->getTimeout());
+        $queryParams[Resources::QP_COMP]    = 'metadata';
+        
+        $response = $this->send($method, $headers, $queryParams, $path, $statusCode);
+        
+        return GetBlobMetadataResult::create($response->getHeader());
     }
     
     /**
@@ -548,7 +870,43 @@ class BlobRestProxy extends ServiceRestProxy implements IBlob
      */
     public function setBlobProperties($container, $blob, $options = null)
     {
-        throw new \Exception(Resources::NOT_IMPLEMENTED_MSG);
+        $method      = \HTTP_Request2::METHOD_PUT;
+        $headers     = array();
+        $queryParams = array();
+        $path        = $container . '/' . $blob;
+        $statusCode  = Resources::STATUS_OK;
+        
+        if (is_null($options)) {
+            $options = new SetBlobPropertiesOptions();
+        }
+        
+        $blobContentType     = $options->getBlobContentType();
+        $blobContentEncoding = $options->getBlobContentEncoding();
+        $blobContentLanguage = $options->getBlobContentLanguage();
+        $blobContentLength   = strval($options->getBlobContentLength());
+        $blobContentMD5      = $options->getBlobContentMD5();
+        $blobCacheControl    = $options->getBlobCacheControl();
+        $leaseId             = $options->getLeaseId();
+        $sNumberAction       = $options->getSequenceNumberAction();
+        $sNumber             = strval($options->getSequenceNumber());
+        
+        $headers = $this->_setAccessConditionHeader($headers, $options);
+        
+        $headers[Resources::X_MS_LEASE_ID]                    = $leaseId;
+        $headers[Resources::X_MS_BLOB_CONTENT_TYPE]           = $blobContentType;
+        $headers[Resources::X_MS_BLOB_CONTENT_ENCODING]       = $blobContentEncoding;
+        $headers[Resources::X_MS_BLOB_CONTENT_LANGUAGE]       = $blobContentLanguage;
+        $headers[Resources::X_MS_BLOB_CONTENT_LENGTH]         = $blobContentLength;
+        $headers[Resources::X_MS_BLOB_CONTENT_MD5]            = $blobContentMD5;
+        $headers[Resources::X_MS_BLOB_CACHE_CONTROL]          = $blobCacheControl;
+        $headers[Resources::X_MS_BLOB_SEQUENCE_NUMBER_ACTION] = $sNumberAction;
+        $headers[Resources::X_MS_BLOB_SEQUENCE_NUMBER]        = $sNumber;
+
+        $queryParams[Resources::QP_COMP] = 'properties';
+        
+        $response = $this->send($method, $headers, $queryParams, $path, $statusCode);
+        
+        return SetBlobPropertiesResult::create($response->getHeader());
     }
     
     /**
@@ -565,7 +923,26 @@ class BlobRestProxy extends ServiceRestProxy implements IBlob
      */
     public function setBlobMetadata($container, $blob, $metadata, $options = null)
     {
-        throw new \Exception(Resources::NOT_IMPLEMENTED_MSG);
+        $method      = \HTTP_Request2::METHOD_PUT;
+        $headers     = array();
+        $queryParams = array();
+        $path        = $container . '/' . $blob;
+        $statusCode  = Resources::STATUS_OK;
+        
+        if (is_null($options)) {
+            $options = new SetBlobMetadataOptions();
+        }
+        
+        $headers = $this->_setAccessConditionHeader($headers, $options);
+        $headers = $this->addMetadataHeaders($headers, $metadata);
+        
+        $headers[Resources::X_MS_LEASE_ID]  = $options->getLeaseId();
+        $queryParams[Resources::QP_TIMEOUT] = strval($options->getTimeout());
+        $queryParams[Resources::QP_COMP]    = 'metadata';
+        
+        $response = $this->send($method, $headers, $queryParams, $path, $statusCode);
+        
+        return SetBlobMetadataResult::create($response->getHeader());
     }
     
     /**
@@ -582,7 +959,31 @@ class BlobRestProxy extends ServiceRestProxy implements IBlob
      */
     public function getBlob($container, $blob, $options = null)
     {
-        throw new \Exception(Resources::NOT_IMPLEMENTED_MSG);
+        $method      = \HTTP_Request2::METHOD_GET;
+        $headers     = array();
+        $queryParams = array();
+        $path        = $container . '/' . $blob;
+        $statusCode  = Resources::STATUS_OK;
+        
+        if (is_null($options)) {
+            $options = new GetBlobOptions();
+        }
+        
+        $getMD5  = $options->getComputeRangeMD5();
+        $headers = $this->_setAccessConditionHeader($headers, $options);
+        $headers = $this->_addOptionalRangeHeader(
+            $headers, $options->getRangeStart(), $options->getRangeEnd()
+        );
+        
+        $headers[Resources::X_MS_RANGE_GET_CONTENT_MD5] = $getMD5 ? 'true' : null;
+        $headers[Resources::X_MS_LEASE_ID]              = $options->getLeaseId();
+        
+        $queryParams['snapshot']            = $options->getSnapshot();
+        $queryParams[Resources::QP_TIMEOUT] = strval($options->getTimeout());
+        
+        $response = $this->send($method, $headers, $queryParams, $path, $statusCode);
+        
+        return GetBlobResult::create($response->getHeader(), $response->getBody());
     }
     
     /**
@@ -592,13 +993,32 @@ class BlobRestProxy extends ServiceRestProxy implements IBlob
      * @param string                   $blob      name of the blob
      * @param Models\DeleteBlobOptions $options   optional parameters
      * 
-     * @return Models\DeleteBlobResult
+     * @return none.
      * 
      * @see http://msdn.microsoft.com/en-us/library/windowsazure/dd179413.aspx
      */
     public function deleteBlob($container, $blob, $options = null)
     {
-        throw new \Exception(Resources::NOT_IMPLEMENTED_MSG);
+        $method      = \HTTP_Request2::METHOD_DELETE;
+        $headers     = array();
+        $queryParams = array();
+        $path        = $container . '/' . $blob;
+        $statusCode  = Resources::STATUS_ACCEPTED;
+        
+        if (is_null($options)) {
+            $options = new DeleteBlobOptions();
+        }
+        
+        $deleteSnapshots = $options->getDeleteSnaphotsOnly() ? 'only' : 'include';
+        $headers         = $this->_setAccessConditionHeader($headers, $options);
+        
+        $headers[Resources::X_MS_LEASE_ID]         = $options->getLeaseId();
+        $headers[Resources::X_MS_DELETE_SNAPSHOTS] = $deleteSnapshots;
+        
+        $queryParams['snapshot']            = $options->getSnapshot();
+        $queryParams[Resources::QP_TIMEOUT] = strval($options->getTimeout());
+        
+        $this->send($method, $headers, $queryParams, $path, $statusCode);
     }
     
     /**

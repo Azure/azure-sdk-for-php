@@ -17,7 +17,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- * @package    Azure-sdk-for-php
+ * @package    WindowsAzure-sdk-for-php
  * @author     Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright  2012 Microsoft Corporation
  * @license    http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
@@ -31,7 +31,7 @@ use PEAR2\Tests\Framework\TestResources;
 /**
  * Unit tests for SharedKeyAuthenticationScheme class.
  *
- * @package    Azure-sdk-for-php
+ * @package    WindowsAzure-sdk-for-php
  * @author     Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright  2012 Microsoft Corporation
  * @license    http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
@@ -69,7 +69,7 @@ class SharedKeyAuthenticationSchemeTest extends PHPUnit_Framework_TestCase
     public function testComputeSignatureSimple()
     {
         $httpMethod = 'GET';
-        $queryParams = array('comp' => 'list');
+        $queryParams = array(Resources::QP_COMP => 'list');
         $url = TestResources::URI1;
         $date = TestResources::DATE1;
         $apiVersion = Resources::API_VERSION;
@@ -95,7 +95,7 @@ class SharedKeyAuthenticationSchemeTest extends PHPUnit_Framework_TestCase
         $url = TestResources::URI2;
         $date1 = TestResources::DATE2;
         $headers = array(Resources::X_MS_VERSION => $apiVersion, Resources::X_MS_DATE => $date1);
-        $queryParams = array('comp' => 'list');
+        $queryParams = array(Resources::QP_COMP => 'list');
         $httpMethod = 'GET';
         $expected = 'SharedKey ' . $accountName . ':tPIT33PrvWHsSXTbzvT93R4YmP13c5H6WB7lGKO3E2M=';
 
