@@ -98,6 +98,25 @@ class ValidateTest extends PHPUnit_Framework_TestCase
     }
     
     /**
+     * @covers PEAR2\WindowsAzure\Validate::isInteger
+     */
+    public function testIsIntegerWithInteger()
+    {
+        Validate::isInteger(123);
+        
+        $this->assertTrue(true);
+    }
+    
+    /**
+     * @covers PEAR2\WindowsAzure\Validate::isInteger
+     */
+    public function testIsIntegerWithNonInteger()
+    {
+        $this->setExpectedException(get_class(new InvalidArgumentTypeException('')));
+        Validate::isInteger('I\'m not Integer');
+    }
+    
+    /**
      * @covers PEAR2\WindowsAzure\Validate::notNullOrEmpty
      */
     public function testNotNullOrEmptyWithNonEmpty()

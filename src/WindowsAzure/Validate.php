@@ -82,8 +82,24 @@ class Validate
      */
     public static function isBoolean($var)
     {
-        if (!is_bool($var) && $var != Resources::EMPTY_STRING) {
+        if (!is_bool($var)) {
             throw new InvalidArgumentTypeException(gettype(true));
+        }
+    }
+    
+    /**
+     * Throws exception if the provided variable type is not integer.
+     *
+     * @param mixed $var variable to check against.
+     * 
+     * @throws InvalidArgumentTypeException
+     * 
+     * @return none.
+     */
+    public static function isInteger($var)
+    {
+        if (!is_int($var)) {
+            throw new InvalidArgumentTypeException(gettype(123));
         }
     }
     
@@ -134,7 +150,6 @@ class Validate
         if (gettype($date) != 'object' || get_class($date) != 'DateTime') {
             throw new InvalidArgumentTypeException('DateTime');
         }
-            
     }
 }
 

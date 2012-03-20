@@ -115,6 +115,56 @@ class ServiceRestProxyTest extends PHPUnit_Framework_TestCase
         $this->assertCount(3, $actual);
         $this->assertEquals($expectedValue, $actual[$expectedHeader]);
     }
+    
+    /**
+     * @covers  PEAR2\WindowsAzure\Services\Core\ServiceRestProxy::groupQueryValues
+     * @depends test__construct
+     */
+    public function testGroupQueryValues($restWrapper)
+    {
+        // Setup
+        $values = array('A', 'B', 'C');
+        $expected = 'A,B,C';
+        
+        // Test
+        $actual = $restWrapper->groupQueryValues($values);
+        
+        // Assert
+        $this->assertEquals($expected, $actual);
+    }
+    
+    /**
+     * @covers  PEAR2\WindowsAzure\Services\Core\ServiceRestProxy::groupQueryValues
+     * @depends test__construct
+     */
+    public function testGroupQueryValuesWithNulls($restWrapper)
+    {
+        // Setup
+        $values = array(null, '', null);
+        
+        // Test
+        $actual = $restWrapper->groupQueryValues($values);
+        
+        // Assert
+        $this->assertTrue(empty($actual));
+    }
+    
+    /**
+     * @covers  PEAR2\WindowsAzure\Services\Core\ServiceRestProxy::groupQueryValues
+     * @depends test__construct
+     */
+    public function testGroupQueryValuesWithMix($restWrapper)
+    {
+        // Setup
+        $values = array(null, 'B', 'C', '');
+        $expected = 'B,C';
+        
+        // Test
+        $actual = $restWrapper->groupQueryValues($values);
+        
+        // Assert
+        $this->assertEquals($expected, $actual);
+    }
 }
 
 ?>
