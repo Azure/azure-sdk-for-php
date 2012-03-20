@@ -313,9 +313,9 @@ class QueueRestProxy extends ServiceRestProxy implements IQueue
             $queueServiceOptions = new QueueServiceOptions();
         }
         
-        $queryParams['restype']             = 'service';
-        $queryParams[Resources::QP_COMP]    = 'properties';
-        $queryParams[Resources::QP_TIMEOUT] = $queueServiceOptions->getTimeout();
+        $queryParams[Resources::QP_REST_TYPE] = 'service';
+        $queryParams[Resources::QP_COMP]      = 'properties';
+        $queryParams[Resources::QP_TIMEOUT]   = $queueServiceOptions->getTimeout();
         
         $response = $this->send($method, $headers, $queryParams, $path, $statusCode);
         $parsed   = Utilities::unserialize($response->getBody());
@@ -445,10 +445,10 @@ class QueueRestProxy extends ServiceRestProxy implements IQueue
             $queueServiceOptions = new QueueServiceOptions();
         }
         
-        $queryParams['restype']             = 'service';
-        $queryParams[Resources::QP_COMP]    = 'properties';
-        $queryParams[Resources::QP_TIMEOUT] = $queueServiceOptions->getTimeout();
-        $headers[Resources::CONTENT_TYPE]   = Resources::XML_CONTENT_TYPE;
+        $queryParams[Resources::QP_REST_TYPE] = 'service';
+        $queryParams[Resources::QP_COMP]      = 'properties';
+        $queryParams[Resources::QP_TIMEOUT]   = $queueServiceOptions->getTimeout();
+        $headers[Resources::CONTENT_TYPE]     = Resources::XML_CONTENT_TYPE;
         
         $this->send($method, $headers, $queryParams, $path, $statusCode, $body);
     }

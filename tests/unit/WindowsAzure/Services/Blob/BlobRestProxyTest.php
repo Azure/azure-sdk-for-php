@@ -36,6 +36,7 @@ use PEAR2\WindowsAzure\Services\Blob\Models\ContainerACL;
 use PEAR2\WindowsAzure\Services\Blob\Models\ListBlobsResult;
 use PEAR2\WindowsAzure\Services\Blob\Models\ListBlobsOptions;
 use PEAR2\WindowsAzure\Services\Blob\Models\CreateBlobOptions;
+use PEAR2\WindowsAzure\Services\Blob\Models\SetBlobPropertiesOptions;
 
 /**
  * Unit tests for class BlobRestProxy
@@ -706,6 +707,72 @@ class BlobRestProxyTest extends BlobRestProxyTestBase
         $blob = $blobs[0];
         $this->assertCount(1, $result->getBlobs());
         $this->assertEquals($contentType, $blob->getProperties()->getContentType());
+    }
+    
+    /**
+     * @covers PEAR2\WindowsAzure\Services\Blob\BlobRestProxy::getBlobProperties
+     * @covers PEAR2\WindowsAzure\Services\Blob\BlobRestProxy::_getBlobPropertiesResultFromResponse
+     * @covers PEAR2\WindowsAzure\Services\Blob\Models\SetBlobPropertiesResult::create
+     */
+    public function testGetBlobProperties()
+    {
+        // Setup
+        $name = 'getblobproperties';
+        $contentLength = 512;
+        $this->createContainer($name);
+        $this->wrapper->createPageBlob($name, 'myblob', $contentLength);
+        
+        // Test
+        $result = $this->wrapper->getBlobProperties($name, 'myblob');
+        
+        // Assert
+        $this->assertEquals($contentLength, $result->getProperties()->getContentLength());
+    }
+    
+    /**
+     * @covers PEAR2\WindowsAzure\Services\Blob\BlobRestProxy::getBlobProperties
+     * @covers PEAR2\WindowsAzure\Services\Blob\BlobRestProxy::setBlobProperties
+     * @covers PEAR2\WindowsAzure\Services\Blob\BlobRestProxy::_getBlobPropertiesResultFromResponse
+     * @covers PEAR2\WindowsAzure\Services\Blob\Models\SetBlobPropertiesResult::create
+     */
+    public function testSetBlobProperties()
+    {
+        // Setup
+        $name = 'setblobproperties';
+        $contentLength = 1024;
+        $blob = 'myblob';
+        $this->createContainer($name);
+        $this->wrapper->createPageBlob($name, 'myblob', 512);
+        $options = new SetBlobPropertiesOptions();
+        $options->setBlobContentLength($contentLength);
+        
+        // Test
+        $this->wrapper->setBlobProperties($name, $blob, $options);
+        
+        // Assert
+        $result = $this->wrapper->getBlobProperties($name, $blob);
+        $this->assertEquals($contentLength, $result->getProperties()->getContentLength());
+    }
+    
+    /**
+     * @covers PEAR2\WindowsAzure\Services\Blob\BlobRestProxy::setBlobProperties
+     * @covers PEAR2\WindowsAzure\Services\Blob\BlobRestProxy::_getBlobPropertiesResultFromResponse
+     * @covers PEAR2\WindowsAzure\Services\Blob\Models\SetBlobPropertiesResult::create
+     */
+    public function testSetBlobPropertiesWithNoOptions()
+    {
+        // Setup
+        $name = 'setblobpropertieswithnooptions';
+        $blob = 'myblob';
+        $this->createContainer($name);
+        $this->wrapper->createPageBlob($name, 'myblob', 512);
+        
+        // Test
+        $result = $this->wrapper->setBlobProperties($name, $blob);
+        
+        // Assert
+        $this->assertInstanceOf('\DateTime', $result->getLastModified());
+        $this->assertTrue(!is_null($result->getEtag()));
     }
 }
 
