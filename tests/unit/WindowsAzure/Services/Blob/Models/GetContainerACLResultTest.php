@@ -22,14 +22,14 @@
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
 namespace PEAR2\Tests\Unit\WindowsAzure\Services\Blob\Models;
-use PEAR2\WindowsAzure\Services\Blob\Models\GetContainerACLResult;
-use PEAR2\WindowsAzure\Services\Blob\Models\ContainerACL;
+use PEAR2\WindowsAzure\Services\Blob\Models\GetContainerAclResult;
+use PEAR2\WindowsAzure\Services\Blob\Models\ContainerAcl;
 use PEAR2\Tests\Framework\TestResources;
 use PEAR2\WindowsAzure\Resources;
 use PEAR2\WindowsAzure\Core\WindowsAzureUtilities;
 
 /**
- * Unit tests for class GetContainerACLResult
+ * Unit tests for class GetContainerAclResult
  *
  * @category  Microsoft
  * @package   PEAR2\Tests\Unit\WindowsAzure\Services\Blob\Models
@@ -39,10 +39,10 @@ use PEAR2\WindowsAzure\Core\WindowsAzureUtilities;
  * @version   Release: @package_version@
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
-class GetContainerACLResultTest extends \PHPUnit_Framework_TestCase
+class GetContainerAclResultTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @covers PEAR2\WindowsAzure\Services\Blob\Models\GetContainerACLResult::create
+     * @covers PEAR2\WindowsAzure\Services\Blob\Models\GetContainerAclResult::create
      */
     public function testCreate()
     {
@@ -54,11 +54,11 @@ class GetContainerACLResultTest extends \PHPUnit_Framework_TestCase
         $expectedPublicAccess = 'container';
         
         // Test
-        $result = GetContainerACLResult::create($expectedPublicAccess, $expectedEtag, 
+        $result = GetContainerAclResult::create($expectedPublicAccess, $expectedEtag, 
             $expectedLastModified, $sample);
         
         // Assert
-        $acl = $result->getContainerACL();
+        $acl = $result->getContainerAcl();
         $this->assertEquals($expectedEtag, $acl->getEtag());
         $this->assertEquals($expectedDate, $acl->getLastModified());
         $this->assertEquals($expectedPublicAccess, $acl->getPublicAccess());
@@ -66,37 +66,37 @@ class GetContainerACLResultTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers PEAR2\WindowsAzure\Services\Blob\Models\GetContainerACLResult::getContainerACL
+     * @covers PEAR2\WindowsAzure\Services\Blob\Models\GetContainerAclResult::getContainerAcl
      */
-    public function testGetContainerACL()
+    public function testGetContainerAcl()
     {
         // Setup
-        $expected = new ContainerACL();
+        $expected = new ContainerAcl();
         $expected->setEtag('0x8CAFB82EFF70C46');
-        $obj = new GetContainerACLResult();
+        $obj = new GetContainerAclResult();
         
         // Test
-        $obj->setContainerACL($expected);
+        $obj->setContainerAcl($expected);
         
         // Assert
-        $this->assertEquals($expected->getEtag(), $obj->getContainerACL()->getEtag());
-        $this->assertCount(0, $obj->getContainerACL()->getSignedIdentifiers());
-        $this->assertNull($obj->getContainerACL()->getLastModified());
+        $this->assertEquals($expected->getEtag(), $obj->getContainerAcl()->getEtag());
+        $this->assertCount(0, $obj->getContainerAcl()->getSignedIdentifiers());
+        $this->assertNull($obj->getContainerAcl()->getLastModified());
     }
     
     /**
-     * @covers PEAR2\WindowsAzure\Services\Blob\Models\GetContainerACLResult::setContainerACL
+     * @covers PEAR2\WindowsAzure\Services\Blob\Models\GetContainerAclResult::setContainerAcl
      */
-    public function testSetContainerACL()
+    public function testSetContainerAcl()
     {
         // Setup
-        $expected = new ContainerACL();
+        $expected = new ContainerAcl();
         $expected->setEtag('0x8CAFB82EFF70C46');
-        $obj = new GetContainerACLResult();
-        $obj->setContainerACL($expected);
+        $obj = new GetContainerAclResult();
+        $obj->setContainerAcl($expected);
         
         // Test
-        $actual = $obj->getContainerACL();
+        $actual = $obj->getContainerAcl();
         
         // Assert
         $this->assertEquals($expected->getEtag(), $actual->getEtag());
