@@ -240,6 +240,22 @@ class UtilitiesTest extends PHPUnit_Framework_TestCase
         // Assert
         $this->assertEquals($expected, $actual);
     }
+    
+    /**
+     * @covers PEAR2\WindowsAzure\Utilities::keysToLower
+     */
+    public function testKeysToLower()
+    {
+        // Setup
+        $expected = array('name' => 1, 'value' => 20, '12m3' => 0);
+        $test = array('NamE' => 1, 'VALUe' => 20, '12M3' => 0);
+        
+        // Test
+        $actual = Utilities::keysToLower($test);
+        
+        // Assert
+        $this->assertEquals($expected, $actual);
+    }
 }
 
 ?>

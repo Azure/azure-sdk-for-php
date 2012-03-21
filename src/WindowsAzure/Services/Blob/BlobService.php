@@ -23,7 +23,6 @@
  */
  
 namespace PEAR2\WindowsAzure\Services\Blob;
-use PEAR2\WindowsAzure\Services\Blob\BlobExceptionProcessor;
 use PEAR2\WindowsAzure\Services\Core\Configuration;
 use PEAR2\WindowsAzure\Resources;
 

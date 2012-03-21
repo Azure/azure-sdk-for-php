@@ -23,8 +23,8 @@
  */
  
 namespace PEAR2\WindowsAzure\Services\Blob\Models;
-use PEAR2\WindowsAzure\Validate;
 use PEAR2\WindowsAzure\Resources;
+use PEAR2\WindowsAzure\Validate;
 use PEAR2\WindowsAzure\Utilities;
 use PEAR2\WindowsAzure\Core\WindowsAzureUtilities;
 

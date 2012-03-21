@@ -178,7 +178,7 @@ class HttpClient implements IHttpClient
     {
         Validate::isString($value);
         
-        $this->_request->SetHeader($header, $value, $replace);
+        $this->_request->setHeader($header, $value, $replace);
     }
     
     /**

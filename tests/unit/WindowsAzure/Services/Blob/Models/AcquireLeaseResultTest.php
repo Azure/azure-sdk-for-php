@@ -38,6 +38,22 @@ use PEAR2\WindowsAzure\Services\Blob\Models\AcquireLeaseResult;
 class AcquireLeaseResultTest extends \PHPUnit_Framework_TestCase
 {
     /**
+     * @covers PEAR2\WindowsAzure\Services\Blob\Models\AcquireLeaseResult::create
+     */
+    public function testCreate()
+    {
+        // Setup
+        $expected = '10';
+        $headers = array('x-ms-lease-id' => $expected);
+        
+        // Test
+        $result = AcquireLeaseResult::create($headers);
+        
+        // Assert
+        $this->assertEquals($expected, $result->getLeaseId());
+    }
+    
+    /**
      * @covers PEAR2\WindowsAzure\Services\Blob\Models\AcquireLeaseResult::setLeaseId
      * @covers PEAR2\WindowsAzure\Services\Blob\Models\AcquireLeaseResult::getLeaseId
      */
