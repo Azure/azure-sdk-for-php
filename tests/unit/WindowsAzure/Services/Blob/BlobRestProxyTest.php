@@ -1020,6 +1020,54 @@ class BlobRestProxyTest extends BlobRestProxyTestBase
         // Assert
         $this->assertNotNull($actual->getEtag());
     }
+    
+    /**
+     * @covers PEAR2\WindowsAzure\Services\Blob\BlobRestProxy::listPageBlobRanges
+     * @covers PEAR2\WindowsAzure\Services\Blob\Models\ListPageBlobRangesResult::create
+     */
+    public function testListPageBlobRanges()
+    {
+        // Setup
+        $name = 'listpageblobranges';
+        $blob = 'myblob';
+        $length = 512;
+        $range = new PageRange(0, 511);
+        $content = Resources::EMPTY_STRING;
+        $this->createContainer($name);
+        $this->wrapper->createPageBlob($name, $blob, $length);
+        for ($i = 0; $i < 512; $i++) {
+            $content .= 'A';
+        }
+        $this->wrapper->createBlobPages($name, $blob, $range, $content);
+        
+        // Test
+        $result = $this->wrapper->listPageBlobRanges($name, $blob);
+        
+        // Assert
+        $this->assertNotNull($result->getEtag());
+        $this->assertCount(1, $result->getPageRanges());
+    }
+    
+    /**
+     * @covers PEAR2\WindowsAzure\Services\Blob\BlobRestProxy::listPageBlobRanges
+     * @covers PEAR2\WindowsAzure\Services\Blob\Models\ListPageBlobRangesResult::create
+     */
+    public function testListPageBlobRangesEmpty()
+    {
+        // Setup
+        $name = 'listpageblobrangesempty';
+        $blob = 'myblob';
+        $length = 512;
+        $this->createContainer($name);
+        $this->wrapper->createPageBlob($name, $blob, $length);
+        
+        // Test
+        $result = $this->wrapper->listPageBlobRanges($name, $blob);
+        
+        // Assert
+        $this->assertNotNull($result->getEtag());
+        $this->assertCount(0, $result->getPageRanges());
+    }
 }
 
 ?>

@@ -49,6 +49,8 @@ spl_autoload_register(
             'pear2\\windowsazure\\services\\blob\\models\\listblobsresult' => '/WindowsAzure/Services/Blob/Models/ListBlobsResult.php',
             'pear2\\windowsazure\\services\\blob\\models\\listcontainersoptions' => '/WindowsAzure/Services/Blob/Models/ListContainersOptions.php',
             'pear2\\windowsazure\\services\\blob\\models\\listcontainersresult' => '/WindowsAzure/Services/Blob/Models/ListContainersResult.php',
+            'pear2\\windowsazure\\services\\blob\\models\\listpageblobrangesoptions' => '/WindowsAzure/Services/Blob/Models/ListPageBlobRangesOptions.php',
+            'pear2\\windowsazure\\services\\blob\\models\\listpageblobrangesresult' => '/WindowsAzure/Services/Blob/Models/ListPageBlobRangesResult.php',
             'pear2\\windowsazure\\services\\blob\\models\\pagerange' => '/WindowsAzure/Services/Blob/Models/PageRange.php',
             'pear2\\windowsazure\\services\\blob\\models\\pagewriteoption' => '/WindowsAzure/Services/Blob/Models/PageWriteOption.php',
             'pear2\\windowsazure\\services\\blob\\models\\publicaccesstype' => '/WindowsAzure/Services/Blob/Models/PublicAccessType.php',

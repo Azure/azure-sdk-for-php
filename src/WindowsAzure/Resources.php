@@ -116,6 +116,7 @@ class Resources
     const QP_TIMEOUT     = 'timeout';
     const QP_DELIMITER   = 'Delimiter';
     const QP_REST_TYPE   = 'restype';
+    const QP_SNAPSHOT    = 'snapshot';
     
     // Request body content types
     const XML_CONTENT_TYPE = 'application/x-www-form-urlencoded';

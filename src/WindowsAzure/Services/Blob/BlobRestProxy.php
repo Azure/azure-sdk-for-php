@@ -58,6 +58,8 @@ use PEAR2\WindowsAzure\Services\Blob\Models\AcquireLeaseResult;
 use PEAR2\WindowsAzure\Services\Blob\Models\CreateBlobPagesOptions;
 use PEAR2\WindowsAzure\Services\Blob\Models\CreateBlobPagesResult;
 use PEAR2\WindowsAzure\Services\Blob\Models\PageWriteOption;
+use PEAR2\WindowsAzure\Services\Blob\Models\ListPageBlobRangesOptions;
+use PEAR2\WindowsAzure\Services\Blob\Models\ListPageBlobRangesResult;
 
 /**
  * This class constructs HTTP requests and receive HTTP responses for blob
@@ -898,9 +900,9 @@ class BlobRestProxy extends ServiceRestProxy implements IBlob
             $headers, $options->getAccessCondition()
         );
         
-        $headers[Resources::X_MS_LEASE_ID]  = $options->getLeaseId();
-        $queryParams['snapshot']            = $options->getSnapshot();
-        $queryParams[Resources::QP_TIMEOUT] = strval($options->getTimeout());
+        $headers[Resources::X_MS_LEASE_ID]   = $options->getLeaseId();
+        $queryParams[Resources::QP_SNAPSHOT] = $options->getSnapshot();
+        $queryParams[Resources::QP_TIMEOUT]  = strval($options->getTimeout());
         
         $response = $this->send($method, $headers, $queryParams, $path, $statusCode);
         
@@ -934,10 +936,10 @@ class BlobRestProxy extends ServiceRestProxy implements IBlob
             $headers, $options->getAccessCondition()
         );
         
-        $headers[Resources::X_MS_LEASE_ID]  = $options->getLeaseId();
-        $queryParams['snapshot']            = $options->getSnapshot();
-        $queryParams[Resources::QP_TIMEOUT] = strval($options->getTimeout());
-        $queryParams[Resources::QP_COMP]    = 'metadata';
+        $headers[Resources::X_MS_LEASE_ID]   = $options->getLeaseId();
+        $queryParams[Resources::QP_SNAPSHOT] = $options->getSnapshot();
+        $queryParams[Resources::QP_TIMEOUT]  = strval($options->getTimeout());
+        $queryParams[Resources::QP_COMP]     = 'metadata';
         
         $response = $this->send($method, $headers, $queryParams, $path, $statusCode);
         
@@ -948,17 +950,43 @@ class BlobRestProxy extends ServiceRestProxy implements IBlob
      * Returns a list of active page ranges for a page blob. Active page ranges are 
      * those that have been populated with data.
      * 
-     * @param string                       $container name of the container
-     * @param string                       $blob      name of the blob
-     * @param Models\ListBlobRangesOptions $options   optional parameters
+     * @param string                           $container name of the container
+     * @param string                           $blob      name of the blob
+     * @param Models\ListPageBlobRangesOptions $options   optional parameters
      * 
-     * @return Models\ListBlobRangesResult
+     * @return Models\ListPageBlobRangesResult
      * 
      * @see http://msdn.microsoft.com/en-us/library/windowsazure/ee691973.aspx
      */
     public function listPageBlobRanges($container, $blob, $options = null)
     {
-        throw new \Exception(Resources::NOT_IMPLEMENTED_MSG);
+        $method      = \HTTP_Request2::METHOD_GET;
+        $headers     = array();
+        $queryParams = array();
+        $path        = $container . '/' . $blob;
+        $statusCode  = Resources::STATUS_OK;
+        
+        if (is_null($options)) {
+            $options = new ListPageBlobRangesOptions();
+        }
+        
+        $headers = $this->addOptionalAccessContitionHeader(
+            $headers, $options->getAccessCondition()
+        );
+        
+        $headers = $this->_addOptionalRangeHeader(
+            $headers, $options->getRangeStart(), $options->getRangeEnd()
+        );
+        
+        $headers[Resources::X_MS_LEASE_ID]   = $options->getLeaseId();
+        $queryParams[Resources::QP_SNAPSHOT] = $options->getSnapshot();
+        $queryParams[Resources::QP_TIMEOUT]  = strval($options->getTimeout());
+        $queryParams[Resources::QP_COMP]     = 'pagelist';
+        
+        $response = $this->send($method, $headers, $queryParams, $path, $statusCode);
+        $parsed   = Utilities::unserialize($response->getBody());
+        
+        return ListPageBlobRangesResult::create($response->getHeader(), $parsed);
     }
     
     /**
@@ -1088,8 +1116,8 @@ class BlobRestProxy extends ServiceRestProxy implements IBlob
         $headers[Resources::X_MS_RANGE_GET_CONTENT_MD5] = $getMD5 ? 'true' : null;
         $headers[Resources::X_MS_LEASE_ID]              = $options->getLeaseId();
         
-        $queryParams['snapshot']            = $options->getSnapshot();
-        $queryParams[Resources::QP_TIMEOUT] = strval($options->getTimeout());
+        $queryParams[Resources::QP_SNAPSHOT] = $options->getSnapshot();
+        $queryParams[Resources::QP_TIMEOUT]  = strval($options->getTimeout());
         
         $response = $this->send($method, $headers, $queryParams, $path, $statusCode);
         
@@ -1127,8 +1155,8 @@ class BlobRestProxy extends ServiceRestProxy implements IBlob
         $headers[Resources::X_MS_LEASE_ID]         = $options->getLeaseId();
         $headers[Resources::X_MS_DELETE_SNAPSHOTS] = $deleteSnapshots;
         
-        $queryParams['snapshot']            = $options->getSnapshot();
-        $queryParams[Resources::QP_TIMEOUT] = strval($options->getTimeout());
+        $queryParams[Resources::QP_SNAPSHOT] = $options->getSnapshot();
+        $queryParams[Resources::QP_TIMEOUT]  = strval($options->getTimeout());
         
         $this->send($method, $headers, $queryParams, $path, $statusCode);
     }
