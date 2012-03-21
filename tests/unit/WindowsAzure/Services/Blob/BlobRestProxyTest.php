@@ -32,7 +32,7 @@ use PEAR2\WindowsAzure\Services\Blob\Models\ListContainersOptions;
 use PEAR2\WindowsAzure\Services\Blob\Models\ListContainersResult;
 use PEAR2\WindowsAzure\Services\Blob\Models\CreateContainerOptions;
 use PEAR2\WindowsAzure\Services\Blob\Models\GetContainerPropertiesResult;
-use PEAR2\WindowsAzure\Services\Blob\Models\ContainerACL;
+use PEAR2\WindowsAzure\Services\Blob\Models\ContainerAcl;
 use PEAR2\WindowsAzure\Services\Blob\Models\ListBlobsResult;
 use PEAR2\WindowsAzure\Services\Blob\Models\ListBlobsOptions;
 use PEAR2\WindowsAzure\Services\Blob\Models\CreateBlobOptions;
@@ -404,9 +404,9 @@ class BlobRestProxyTest extends BlobRestProxyTestBase
     }
 
     /**
-     * @covers PEAR2\WindowsAzure\Services\Blob\BlobRestProxy::getContainerACL
+     * @covers PEAR2\WindowsAzure\Services\Blob\BlobRestProxy::getContainerAcl
      */
-    public function testGetContainerACL()
+    public function testGetContainerAcl()
     {
         // Setup
         $name = 'getcontaineracl';
@@ -414,34 +414,34 @@ class BlobRestProxyTest extends BlobRestProxyTestBase
         $this->createContainer($name);
         
         // Test
-        $result = $this->wrapper->getContainerACL($name);
+        $result = $this->wrapper->getContainerAcl($name);
         
         // Assert
-        $this->assertEquals($expectedAccess, $result->getContainerACL()->getPublicAccess());
+        $this->assertEquals($expectedAccess, $result->getContainerAcl()->getPublicAccess());
     }
     
     /**
-     * @covers PEAR2\WindowsAzure\Services\Blob\BlobRestProxy::setContainerACL
+     * @covers PEAR2\WindowsAzure\Services\Blob\BlobRestProxy::setContainerAcl
      */
-    public function testSetContainerACL()
+    public function testSetContainerAcl()
     {
         // Setup
         $name = 'setcontaineracl';
         $this->createContainer($name);
-        $sample = TestResources::getContainerACLMultipleEntriesSample();
+        $sample = TestResources::getContainerAclMultipleEntriesSample();
         $expectedEtag = '0x8CAFB82EFF70C46';
         $expectedLastModified = 'Sun, 25 Sep 2011 19:42:18 GMT';
         $expectedPublicAccess = 'container';
-        $acl = ContainerACL::create($expectedPublicAccess, $expectedEtag, 
+        $acl = ContainerAcl::create($expectedPublicAccess, $expectedEtag, 
             $expectedLastModified, $sample['SignedIdentifiers']);
         
         // Test
-        $this->wrapper->setContainerACL($name, $acl);
+        $this->wrapper->setContainerAcl($name, $acl);
         
         // Assert
-        $actual = $this->wrapper->getContainerACL($name);
-        $this->assertEquals($acl->getPublicAccess(), $actual->getContainerACL()->getPublicAccess());
-        $this->assertEquals($acl->getSignedIdentifiers(), $actual->getContainerACL()->getSignedIdentifiers());
+        $actual = $this->wrapper->getContainerAcl($name);
+        $this->assertEquals($acl->getPublicAccess(), $actual->getContainerAcl()->getPublicAccess());
+        $this->assertEquals($acl->getSignedIdentifiers(), $actual->getContainerAcl()->getSignedIdentifiers());
     }
     
     /**

@@ -81,7 +81,7 @@ class ListPageBlobRangesResult
         $rawPageRanges = array();
         
         if (!empty($parsed['PageRange'])) {
-            $parsed  = Utilities::keysToLower($parsed);
+            $parsed        = Utilities::keysToLower($parsed);
             $rawPageRanges = Utilities::getArray($parsed['pagerange']);
         }
         
