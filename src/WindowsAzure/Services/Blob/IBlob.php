@@ -342,11 +342,11 @@ interface IBlob
     * Returns a list of active page ranges for a page blob. Active page ranges are 
     * those that have been populated with data.
     * 
-    * @param string                       $container name of the container
-    * @param string                       $blob      name of the blob
-    * @param Models\ListBlobRangesOptions $options   optional parameters
+    * @param string                           $container name of the container
+    * @param string                           $blob      name of the blob
+    * @param Models\ListPageBlobRangesOptions $options   optional parameters
     * 
-    * @return Models\ListBlobRangesResult
+    * @return Models\ListPageBlobRangesResult
     * 
     * @see http://msdn.microsoft.com/en-us/library/windowsazure/ee691973.aspx
     */

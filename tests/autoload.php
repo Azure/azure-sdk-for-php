@@ -55,6 +55,8 @@ spl_autoload_register(
             'pear2\\tests\\unit\\windowsazure\\services\\blob\\models\\listblobresulttest' => '/unit/WindowsAzure/Services/Blob/Models/ListBlobsResultTest.php',
             'pear2\\tests\\unit\\windowsazure\\services\\blob\\models\\listcontainersoptionstest' => '/unit/WindowsAzure/Services/Blob/Models/ListContainersOptionsTest.php',
             'pear2\\tests\\unit\\windowsazure\\services\\blob\\models\\listcontainersresulttest' => '/unit/WindowsAzure/Services/Blob/Models/ListContainersResultTest.php',
+            'pear2\\tests\\unit\\windowsazure\\services\\blob\\models\\listpageblobrangesoptionstest' => '/unit/WindowsAzure/Services/Blob/Models/ListPageBlobRangesOptionsTest.php',
+            'pear2\\tests\\unit\\windowsazure\\services\\blob\\models\\listpageblobrangesresulttest' => '/unit/WindowsAzure/Services/Blob/Models/ListPageBlobRangesResultTest.php',
             'pear2\\tests\\unit\\windowsazure\\services\\blob\\models\\pagerangetest' => '/unit/WindowsAzure/Services/Blob/Models/PageRangeTest.php',
             'pear2\\tests\\unit\\windowsazure\\services\\blob\\models\\publicaccesstypetest' => '/unit/WindowsAzure/Services/Blob/Models/PublicAccessTypeTest.php',
             'pear2\\tests\\unit\\windowsazure\\services\\blob\\models\\setblobmetadataoptionstest' => '/unit/WindowsAzure/Services/Blob/Models/SetBlobMetadataOptionsTest.php',
