@@ -138,24 +138,24 @@ interface IBlob
     * @param string                    $container name
     * @param Models\BlobServiceOptions $options   optional parameters
     * 
-    * @return Models\GetContainerACLResult
+    * @return Models\GetContainerAclResult
     * 
     * @see http://msdn.microsoft.com/en-us/library/windowsazure/dd179469.aspx
     */
-    public function getContainerACL($container, $options = null);
+    public function getContainerAcl($container, $options = null);
 
     /**
     * Sets the ACL and any container-level access policies for the container.
     * 
     * @param string                    $container name
-    * @param Models\ContainerACL       $acl       access control list for container
+    * @param Models\ContainerAcl       $acl       access control list for container
     * @param Models\BlobServiceOptions $options   optional parameters
     * 
     * @return none.
     * 
     * @see http://msdn.microsoft.com/en-us/library/windowsazure/dd179391.aspx
     */
-    public function setContainerACL($container, $acl, $options = null);
+    public function setContainerAcl($container, $acl, $options = null);
 
     /**
     * Sets metadata headers on the container.

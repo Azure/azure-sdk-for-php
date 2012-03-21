@@ -34,7 +34,7 @@ use PEAR2\WindowsAzure\Services\Blob\Models\ListContainersOptions;
 use PEAR2\WindowsAzure\Services\Blob\Models\ListContainersResult;
 use PEAR2\WindowsAzure\Services\Blob\Models\CreateContainerOptions;
 use PEAR2\WindowsAzure\Services\Blob\Models\GetContainerPropertiesResult;
-use PEAR2\WindowsAzure\Services\Blob\Models\GetContainerACLResult;
+use PEAR2\WindowsAzure\Services\Blob\Models\GetContainerAclResult;
 use PEAR2\WindowsAzure\Services\Blob\Models\SetContainerMetadataOptions;
 use PEAR2\WindowsAzure\Services\Blob\Models\ListBlobsOptions;
 use PEAR2\WindowsAzure\Services\Blob\Models\ListBlobsResult;
@@ -184,7 +184,7 @@ class BlobRestProxy extends ServiceRestProxy implements IBlob
         }
         
         $headers = $this->addMetadataHeaders($headers, $metadata);
-        $headers = $this->addOptionalAccessContitionHeader(
+        $headers = $this->addOptionalAccessConditionHeader(
             $headers, $options->getAccessCondition()
         );
         
@@ -259,13 +259,15 @@ class BlobRestProxy extends ServiceRestProxy implements IBlob
         case LeaseMode::BREAK_ACTION:
             $statusCode = Resources::STATUS_ACCEPTED;
             break;
+        default:
+            throw new \Exception(Resources::NOT_IMPLEMENTED_MSG);
         }
         
         if (!is_null($options)) {
             $options = new BlobServiceOptions();
         }
         
-        $headers = $this->addOptionalAccessContitionHeader(
+        $headers = $this->addOptionalAccessConditionHeader(
             $headers, $accessCondition
         );
 
@@ -280,7 +282,7 @@ class BlobRestProxy extends ServiceRestProxy implements IBlob
     }
     
     /**
-     * Does actual work for XXXBlobPages
+     * Does actual work for create and clear blob pages
      * 
      * @param string                 $action    either clear or create
      * @param string                 $container container name
@@ -309,7 +311,7 @@ class BlobRestProxy extends ServiceRestProxy implements IBlob
             $headers, $range->getStart(), $range->getEnd()
         );
         
-        $headers = $this->addOptionalAccessContitionHeader(
+        $headers = $this->addOptionalAccessConditionHeader(
             $headers, $options->getAccessCondition()
         );
         
@@ -524,11 +526,11 @@ class BlobRestProxy extends ServiceRestProxy implements IBlob
      * @param string                    $container name
      * @param Models\BlobServiceOptions $options   optional parameters
      * 
-     * @return Models\GetContainerACLResult
+     * @return Models\GetContainerAclResult
      * 
      * @see http://msdn.microsoft.com/en-us/library/windowsazure/dd179469.aspx
      */
-    public function getContainerACL($container, $options = null)
+    public function getContainerAcl($container, $options = null)
     {
         $method      = \HTTP_Request2::METHOD_GET;
         $headers     = array();
@@ -551,21 +553,21 @@ class BlobRestProxy extends ServiceRestProxy implements IBlob
         $lastModified = $response->getHeader(Resources::LAST_MODIFIED);
         $parsed       = Utilities::unserialize($response->getBody());
                 
-        return GetContainerACLResult::create($access, $etag, $lastModified, $parsed);
+        return GetContainerAclResult::create($access, $etag, $lastModified, $parsed);
     }
     
     /**
      * Sets the ACL and any container-level access policies for the container.
      * 
      * @param string                    $container name
-     * @param Models\ContainerACL       $acl       access control list for container
+     * @param Models\ContainerAcl       $acl       access control list for container
      * @param Models\BlobServiceOptions $options   optional parameters
      * 
      * @return none.
      * 
      * @see http://msdn.microsoft.com/en-us/library/windowsazure/dd179391.aspx
      */
-    public function setContainerACL($container, $acl, $options = null)
+    public function setContainerAcl($container, $acl, $options = null)
     {
         $method      = \HTTP_Request2::METHOD_PUT;
         $headers     = array();
@@ -719,7 +721,7 @@ class BlobRestProxy extends ServiceRestProxy implements IBlob
      * Partial updates are not supported with createBlockBlob the content of the
      * existing blob is overwritten with the content of the new blob. To perform a
      * partial update of the content of a block blob, use the createBlockList method.
-     * Note that the default content type is application/octet-stream
+     * Note that the default content type is application/octet-stream.
      * 
      * @param string                   $container name of the container
      * @param string                   $blob      name of the blob
@@ -896,7 +898,7 @@ class BlobRestProxy extends ServiceRestProxy implements IBlob
             $options = new GetBlobPropertiesOptions();
         }
         
-        $headers = $this->addOptionalAccessContitionHeader(
+        $headers = $this->addOptionalAccessConditionHeader(
             $headers, $options->getAccessCondition()
         );
         
@@ -932,7 +934,7 @@ class BlobRestProxy extends ServiceRestProxy implements IBlob
             $options = new GetBlobMetadataOptions();
         }
         
-        $headers = $this->addOptionalAccessContitionHeader(
+        $headers = $this->addOptionalAccessConditionHeader(
             $headers, $options->getAccessCondition()
         );
         
@@ -970,7 +972,7 @@ class BlobRestProxy extends ServiceRestProxy implements IBlob
             $options = new ListPageBlobRangesOptions();
         }
         
-        $headers = $this->addOptionalAccessContitionHeader(
+        $headers = $this->addOptionalAccessConditionHeader(
             $headers, $options->getAccessCondition()
         );
         
@@ -1022,7 +1024,7 @@ class BlobRestProxy extends ServiceRestProxy implements IBlob
         $sNumberAction       = $options->getSequenceNumberAction();
         $sNumber             = strval($options->getSequenceNumber());
         
-        $headers = $this->addOptionalAccessContitionHeader(
+        $headers = $this->addOptionalAccessConditionHeader(
             $headers, $options->getAccessCondition()
         );
         
@@ -1067,7 +1069,7 @@ class BlobRestProxy extends ServiceRestProxy implements IBlob
             $options = new SetBlobMetadataOptions();
         }
         
-        $headers = $this->addOptionalAccessContitionHeader(
+        $headers = $this->addOptionalAccessConditionHeader(
             $headers, $options->getAccessCondition()
         );
         $headers = $this->addMetadataHeaders($headers, $metadata);
@@ -1106,7 +1108,7 @@ class BlobRestProxy extends ServiceRestProxy implements IBlob
         }
         
         $getMD5  = $options->getComputeRangeMD5();
-        $headers = $this->addOptionalAccessContitionHeader(
+        $headers = $this->addOptionalAccessConditionHeader(
             $headers, $options->getAccessCondition()
         );
         $headers = $this->_addOptionalRangeHeader(
@@ -1148,7 +1150,7 @@ class BlobRestProxy extends ServiceRestProxy implements IBlob
         }
         
         $deleteSnapshots = $options->getDeleteSnaphotsOnly() ? 'only' : 'include';
-        $headers         = $this->addOptionalAccessContitionHeader(
+        $headers         = $this->addOptionalAccessConditionHeader(
             $headers, $options->getAccessCondition()
         );
         

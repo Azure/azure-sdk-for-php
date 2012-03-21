@@ -40,7 +40,7 @@ use PEAR2\WindowsAzure\Validate;
  * @version   Release: @package_version@
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
-class ContainerACL
+class ContainerAcl
 {
     /**
      * @var \DateTime
@@ -86,7 +86,7 @@ class ContainerACL
     {
         $date = WindowsAzureUtilities::rfc1123ToDateTime($lastModified);
         
-        $result                     = new ContainerACL();
+        $result                     = new ContainerAcl();
         $result->_etag              = $etag;
         $result->_lastModified      = $date;
         $result->_publicAccess      = $publicAccess;

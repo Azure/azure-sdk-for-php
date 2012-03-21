@@ -144,7 +144,7 @@ class ServiceRestProxy
      * 
      * @return array
      */
-    public function addOptionalAccessContitionHeader($headers, $accessCondition)
+    public function addOptionalAccessConditionHeader($headers, $accessCondition)
     {
         if (!is_null($accessCondition)) {
             $header = $accessCondition->getHeader();

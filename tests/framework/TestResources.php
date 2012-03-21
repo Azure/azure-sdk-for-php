@@ -228,7 +228,7 @@ class TestResources
         return $sample;
     }
     
-    public static function getContainerACLOneEntrySample()
+    public static function getContainerAclOneEntrySample()
     {
         $sample = array();
         $sample['SignedIdentifiers'] = array('SignedIdentifier' => array (
@@ -242,7 +242,7 @@ class TestResources
         return $sample;
     }
     
-    public static function getContainerACLMultipleEntriesSample()
+    public static function getContainerAclMultipleEntriesSample()
     {
         $sample = array();
         $sample['SignedIdentifiers'] = array( 'SignedIdentifier' => array (

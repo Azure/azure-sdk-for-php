@@ -23,7 +23,7 @@
  */
  
 namespace PEAR2\WindowsAzure\Services\Blob\Models;
-use PEAR2\WindowsAzure\Services\Blob\Models\ContainerACL;
+use PEAR2\WindowsAzure\Services\Blob\Models\ContainerAcl;
 
 /**
  * Holds container ACL
@@ -36,7 +36,7 @@ use PEAR2\WindowsAzure\Services\Blob\Models\ContainerACL;
  * @version   Release: @package_version@
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
-class GetContainerACLResult
+class GetContainerAclResult
 {
     private $_containerACL;
     
@@ -52,9 +52,9 @@ class GetContainerACLResult
      */
     public static function create($publicAccess, $etag, $lastModified, $parsed)
     {
-        $result = new GetContainerACLResult();
-        $acl    = ContainerACL::create($publicAccess, $etag, $lastModified, $parsed);
-        $result->setContainerACL($acl);
+        $result = new GetContainerAclResult();
+        $acl    = ContainerAcl::create($publicAccess, $etag, $lastModified, $parsed);
+        $result->setContainerAcl($acl);
         
         return $result;
     }
@@ -62,9 +62,9 @@ class GetContainerACLResult
     /**
      * Gets container ACL
      * 
-     * @return ContainerACL
+     * @return ContainerAcl
      */
-    public function getContainerACL()
+    public function getContainerAcl()
     {
         return $this->_containerACL;
     }
@@ -72,11 +72,11 @@ class GetContainerACLResult
     /**
      * Sets container ACL
      * 
-     * @param ContainerACL $containerACL value.
+     * @param ContainerAcl $containerACL value.
      * 
      * @return none.
      */
-    public function setContainerACL($containerACL)
+    public function setContainerAcl($containerACL)
     {
         $this->_containerACL = $containerACL;
     }
