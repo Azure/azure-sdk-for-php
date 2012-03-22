@@ -22,14 +22,14 @@
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
 namespace PEAR2\Tests\Unit\WindowsAzure\Services\Blob\Models;
-use PEAR2\WindowsAzure\Services\Blob\Models\ContainerACL;
+use PEAR2\WindowsAzure\Services\Blob\Models\ContainerAcl;
 use PEAR2\Tests\Framework\TestResources;
 use PEAR2\WindowsAzure\Resources;
 use PEAR2\WindowsAzure\Core\WindowsAzureUtilities;
 use PEAR2\WindowsAzure\Utilities;
 
 /**
- * Unit tests for class ContainerACL
+ * Unit tests for class ContainerAcl
  *
  * @category  Microsoft
  * @package   PEAR2\Tests\Unit\WindowsAzure\Services\Blob\Models
@@ -39,15 +39,15 @@ use PEAR2\WindowsAzure\Utilities;
  * @version   Release: @package_version@
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
-class ContainerACLTest extends \PHPUnit_Framework_TestCase
+class ContainerAclTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @covers PEAR2\WindowsAzure\Services\Blob\Models\ContainerACL::create
-     * @covers PEAR2\WindowsAzure\Services\Blob\Models\ContainerACL::getEtag
-     * @covers PEAR2\WindowsAzure\Services\Blob\Models\ContainerACL::getLastModified
-     * @covers PEAR2\WindowsAzure\Services\Blob\Models\ContainerACL::getPublicAccess
-     * @covers PEAR2\WindowsAzure\Services\Blob\Models\ContainerACL::getSignedIdentifiers
-     * @covers PEAR2\WindowsAzure\Services\Blob\Models\ContainerACL::addSignedIdentifier
+     * @covers PEAR2\WindowsAzure\Services\Blob\Models\ContainerAcl::create
+     * @covers PEAR2\WindowsAzure\Services\Blob\Models\ContainerAcl::getEtag
+     * @covers PEAR2\WindowsAzure\Services\Blob\Models\ContainerAcl::getLastModified
+     * @covers PEAR2\WindowsAzure\Services\Blob\Models\ContainerAcl::getPublicAccess
+     * @covers PEAR2\WindowsAzure\Services\Blob\Models\ContainerAcl::getSignedIdentifiers
+     * @covers PEAR2\WindowsAzure\Services\Blob\Models\ContainerAcl::addSignedIdentifier
      */
     public function testCreateEmpty()
     {
@@ -59,7 +59,7 @@ class ContainerACLTest extends \PHPUnit_Framework_TestCase
         $expectedPublicAccess = 'container';
         
         // Test
-        $acl = ContainerACL::create($expectedPublicAccess, $expectedEtag, 
+        $acl = ContainerAcl::create($expectedPublicAccess, $expectedEtag, 
             $expectedLastModified, $sample);
         
         // Assert
@@ -70,24 +70,24 @@ class ContainerACLTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers PEAR2\WindowsAzure\Services\Blob\Models\ContainerACL::create
-     * @covers PEAR2\WindowsAzure\Services\Blob\Models\ContainerACL::getEtag
-     * @covers PEAR2\WindowsAzure\Services\Blob\Models\ContainerACL::getLastModified
-     * @covers PEAR2\WindowsAzure\Services\Blob\Models\ContainerACL::getPublicAccess
-     * @covers PEAR2\WindowsAzure\Services\Blob\Models\ContainerACL::getSignedIdentifiers
-     * @covers PEAR2\WindowsAzure\Services\Blob\Models\ContainerACL::addSignedIdentifier
+     * @covers PEAR2\WindowsAzure\Services\Blob\Models\ContainerAcl::create
+     * @covers PEAR2\WindowsAzure\Services\Blob\Models\ContainerAcl::getEtag
+     * @covers PEAR2\WindowsAzure\Services\Blob\Models\ContainerAcl::getLastModified
+     * @covers PEAR2\WindowsAzure\Services\Blob\Models\ContainerAcl::getPublicAccess
+     * @covers PEAR2\WindowsAzure\Services\Blob\Models\ContainerAcl::getSignedIdentifiers
+     * @covers PEAR2\WindowsAzure\Services\Blob\Models\ContainerAcl::addSignedIdentifier
      */
     public function testCreateOneEntry()
     {
         // Setup
-        $sample = TestResources::getContainerACLOneEntrySample();
+        $sample = TestResources::getContainerAclOneEntrySample();
         $expectedEtag = '0x8CAFB82EFF70C46';
         $expectedLastModified = 'Sun, 25 Sep 2011 19:42:18 GMT';
         $expectedDate = WindowsAzureUtilities::rfc1123ToDateTime($expectedLastModified);
         $expectedPublicAccess = 'container';
         
         // Test
-        $acl = ContainerACL::create($expectedPublicAccess, $expectedEtag, 
+        $acl = ContainerAcl::create($expectedPublicAccess, $expectedEtag, 
             $expectedLastModified, $sample['SignedIdentifiers']);
         
         // Assert
@@ -98,24 +98,24 @@ class ContainerACLTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers PEAR2\WindowsAzure\Services\Blob\Models\ContainerACL::create
-     * @covers PEAR2\WindowsAzure\Services\Blob\Models\ContainerACL::getEtag
-     * @covers PEAR2\WindowsAzure\Services\Blob\Models\ContainerACL::getLastModified
-     * @covers PEAR2\WindowsAzure\Services\Blob\Models\ContainerACL::getPublicAccess
-     * @covers PEAR2\WindowsAzure\Services\Blob\Models\ContainerACL::getSignedIdentifiers
-     * @covers PEAR2\WindowsAzure\Services\Blob\Models\ContainerACL::addSignedIdentifier
+     * @covers PEAR2\WindowsAzure\Services\Blob\Models\ContainerAcl::create
+     * @covers PEAR2\WindowsAzure\Services\Blob\Models\ContainerAcl::getEtag
+     * @covers PEAR2\WindowsAzure\Services\Blob\Models\ContainerAcl::getLastModified
+     * @covers PEAR2\WindowsAzure\Services\Blob\Models\ContainerAcl::getPublicAccess
+     * @covers PEAR2\WindowsAzure\Services\Blob\Models\ContainerAcl::getSignedIdentifiers
+     * @covers PEAR2\WindowsAzure\Services\Blob\Models\ContainerAcl::addSignedIdentifier
      */
     public function testCreateMultipleEntries()
     {
         // Setup
-        $sample = TestResources::getContainerACLMultipleEntriesSample();
+        $sample = TestResources::getContainerAclMultipleEntriesSample();
         $expectedEtag = '0x8CAFB82EFF70C46';
         $expectedLastModified = 'Sun, 25 Sep 2011 19:42:18 GMT';
         $expectedDate = WindowsAzureUtilities::rfc1123ToDateTime($expectedLastModified);
         $expectedPublicAccess = 'container';
         
         // Test
-        $acl = ContainerACL::create($expectedPublicAccess, $expectedEtag, 
+        $acl = ContainerAcl::create($expectedPublicAccess, $expectedEtag, 
             $expectedLastModified, $sample['SignedIdentifiers']);
         
         // Assert
@@ -128,18 +128,18 @@ class ContainerACLTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers PEAR2\WindowsAzure\Services\Blob\Models\ContainerACL::setSignedIdentifiers
-     * @covers PEAR2\WindowsAzure\Services\Blob\Models\ContainerACL::getSignedIdentifiers
+     * @covers PEAR2\WindowsAzure\Services\Blob\Models\ContainerAcl::setSignedIdentifiers
+     * @covers PEAR2\WindowsAzure\Services\Blob\Models\ContainerAcl::getSignedIdentifiers
      */
     public function testSetSignedIdentifiers()
     {
         // Setup
-        $sample = TestResources::getContainerACLOneEntrySample();
+        $sample = TestResources::getContainerAclOneEntrySample();
         $expectedEtag = '0x8CAFB82EFF70C46';
         $expectedLastModified = 'Sun, 25 Sep 2011 19:42:18 GMT';
         $expectedDate = WindowsAzureUtilities::rfc1123ToDateTime($expectedLastModified);
         $expectedPublicAccess = 'container';
-        $acl = ContainerACL::create($expectedPublicAccess, $expectedEtag, 
+        $acl = ContainerAcl::create($expectedPublicAccess, $expectedEtag, 
             $expectedLastModified, $sample['SignedIdentifiers']);
         $expected = $acl->getSignedIdentifiers();
         $expected[0]->setId('newXid');
@@ -155,14 +155,14 @@ class ContainerACLTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers PEAR2\WindowsAzure\Services\Blob\Models\ContainerACL::setLastModified
-     * @covers PEAR2\WindowsAzure\Services\Blob\Models\ContainerACL::getLastModified
+     * @covers PEAR2\WindowsAzure\Services\Blob\Models\ContainerAcl::setLastModified
+     * @covers PEAR2\WindowsAzure\Services\Blob\Models\ContainerAcl::getLastModified
      */
     public function testSetLastModified()
     {
         // Setup
         $expected = WindowsAzureUtilities::rfc1123ToDateTime('Sun, 25 Sep 2011 19:42:18 GMT');
-        $acl = new ContainerACL();
+        $acl = new ContainerAcl();
         $acl->setLastModified($expected);
         
         // Test
@@ -173,14 +173,14 @@ class ContainerACLTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers PEAR2\WindowsAzure\Services\Blob\Models\ContainerACL::setEtag
-     * @covers PEAR2\WindowsAzure\Services\Blob\Models\ContainerACL::getEtag
+     * @covers PEAR2\WindowsAzure\Services\Blob\Models\ContainerAcl::setEtag
+     * @covers PEAR2\WindowsAzure\Services\Blob\Models\ContainerAcl::getEtag
      */
     public function testSetEtag()
     {
         // Setup
         $expected = '0x8CAFB82EFF70C46';
-        $acl = new ContainerACL();
+        $acl = new ContainerAcl();
         $acl->setEtag($expected);
         
         // Test
@@ -191,14 +191,14 @@ class ContainerACLTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers PEAR2\WindowsAzure\Services\Blob\Models\ContainerACL::setPublicAccess
-     * @covers PEAR2\WindowsAzure\Services\Blob\Models\ContainerACL::getPublicAccess
+     * @covers PEAR2\WindowsAzure\Services\Blob\Models\ContainerAcl::setPublicAccess
+     * @covers PEAR2\WindowsAzure\Services\Blob\Models\ContainerAcl::getPublicAccess
      */
     public function testSetPublicAccess()
     {
         // Setup
         $expected = 'container';
-        $acl = new ContainerACL();
+        $acl = new ContainerAcl();
         $acl->setPublicAccess($expected);
         
         // Test
@@ -209,15 +209,15 @@ class ContainerACLTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers PEAR2\WindowsAzure\Services\Blob\Models\ContainerACL::toXml
-     * @covers PEAR2\WindowsAzure\Services\Blob\Models\ContainerACL::toArray
+     * @covers PEAR2\WindowsAzure\Services\Blob\Models\ContainerAcl::toXml
+     * @covers PEAR2\WindowsAzure\Services\Blob\Models\ContainerAcl::toArray
      * @depends testCreateMultipleEntries
      */
     public function testToXml($acl)
     {
         // Setup
-        $sample = TestResources::getContainerACLMultipleEntriesSample();
-        $expected = ContainerACL::create('container', 
+        $sample = TestResources::getContainerAclMultipleEntriesSample();
+        $expected = ContainerAcl::create('container', 
             '123', 'Sun, 25 Sep 2011 19:42:18 GMT', $sample['SignedIdentifiers']);
         
         // Test
@@ -225,7 +225,7 @@ class ContainerACLTest extends \PHPUnit_Framework_TestCase
         
         // Assert
         $array = Utilities::unserialize($xml);
-        $acl = ContainerACL::create('container', '123', 'Sun, 25 Sep 2011 19:42:18 GMT', $array);
+        $acl = ContainerAcl::create('container', '123', 'Sun, 25 Sep 2011 19:42:18 GMT', $array);
         $this->assertEquals($expected->getSignedIdentifiers(), $acl->getSignedIdentifiers());
     }
 }

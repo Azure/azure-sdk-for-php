@@ -157,9 +157,27 @@ class Utilities
      * 
      * @return string
      */
-    public function booleanToString($obj)
+    public static function booleanToString($obj)
     {
         return $obj ? 'true' : 'false';
+    }
+    
+    /**
+     * Converts all string keys in the given $array into lower case
+     * 
+     * @param array $array array to be used
+     * 
+     * @return array 
+     */
+    public static function keysToLower($array)
+    {
+        $clean = array();
+        
+        foreach ($array as $key => $value) {
+            $clean[strtolower($key)] = $value;
+        }
+        
+        return $clean;
     }
 
 }

@@ -23,10 +23,9 @@
  */
  
 namespace PEAR2\WindowsAzure\Services\Blob\Models;
-use PEAR2\WindowsAzure\Services\Blob\Models\ContainerAcl;
 
 /**
- * Holds container ACL
+ * Holds info about page range used in HTTP requests
  *
  * @category  Microsoft
  * @package   PEAR2\WindowsAzure\Services\Blob\Models
@@ -36,49 +35,96 @@ use PEAR2\WindowsAzure\Services\Blob\Models\ContainerAcl;
  * @version   Release: @package_version@
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
-class GetContainerAclResult
+class PageRange
 {
-    private $_containerACL;
+    /**
+     * @var integer
+     */
+    private $_start;
     
     /**
-     * Parses the given array into signed identifiers
-     * 
-     * @param string $publicAccess container public access
-     * @param string $etag         container etag
-     * @param string $lastModified last modification in string representation
-     * @param array  $parsed       parsed response into array representation
-     * 
-     * @return none.
+     * @var integer
      */
-    public static function create($publicAccess, $etag, $lastModified, $parsed)
+    private $_end;
+
+    /**
+     * Constructor
+     * 
+     * @param integer $start the page start value
+     * @param integer $end   the page end value
+     * 
+     * @return PageRange
+     */
+    public function __construct($start = null, $end = null)
     {
-        $result = new GetContainerAclResult();
-        $acl    = ContainerAcl::create($publicAccess, $etag, $lastModified, $parsed);
-        $result->setContainerAcl($acl);
-        
-        return $result;
+        $this->_start = $start;
+        $this->_end   = $end;
     }
     
     /**
-     * Gets container ACL
+     * Sets page start range
      * 
-     * @return ContainerAcl
-     */
-    public function getContainerAcl()
-    {
-        return $this->_containerACL;
-    }
-    
-    /**
-     * Sets container ACL
-     * 
-     * @param ContainerAcl $containerACL value.
+     * @param integer $start the page range start
      * 
      * @return none.
      */
-    public function setContainerAcl($containerACL)
+    public function setStart($start)
     {
-        $this->_containerACL = $containerACL;
+        $this->_start = $start;
+    }
+    
+    /**
+     * Gets page start range
+     * 
+     * @return integer
+     */
+    public function getStart()
+    {
+        return $this->_start;
+    }
+    
+    /**
+     * Sets page end range
+     * 
+     * @param integer $end the page range end
+     * 
+     * @return none.
+     */
+    public function setEnd($end)
+    {
+        $this->_end = $end;
+    }
+    
+    /**
+     * Gets page end range
+     * 
+     * @return integer
+     */
+    public function getEnd()
+    {
+        return $this->_end;
+    }
+    
+    /**
+     * Gets page range length
+     * 
+     * @return integer
+     */
+    public function getLength()
+    {
+        return $this->_end - $this->_start - 1;
+    }
+    
+    /**
+     * Sets page range length
+     * 
+     * @param integer $value new page range
+     * 
+     * @return none
+     */
+    public function setLength($value)
+    {
+        $this->_end = $this->_start + $value - 1;
     }
 }
 

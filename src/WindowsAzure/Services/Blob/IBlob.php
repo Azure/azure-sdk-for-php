@@ -138,24 +138,24 @@ interface IBlob
     * @param string                    $container name
     * @param Models\BlobServiceOptions $options   optional parameters
     * 
-    * @return Models\GetContainerACLResult
+    * @return Models\GetContainerAclResult
     * 
     * @see http://msdn.microsoft.com/en-us/library/windowsazure/dd179469.aspx
     */
-    public function getContainerACL($container, $options = null);
+    public function getContainerAcl($container, $options = null);
 
     /**
     * Sets the ACL and any container-level access policies for the container.
     * 
     * @param string                    $container name
-    * @param Models\ContainerACL       $acl       access control list for container
+    * @param Models\ContainerAcl       $acl       access control list for container
     * @param Models\BlobServiceOptions $options   optional parameters
     * 
     * @return none.
     * 
     * @see http://msdn.microsoft.com/en-us/library/windowsazure/dd179391.aspx
     */
-    public function setContainerACL($container, $acl, $options = null);
+    public function setContainerAcl($container, $acl, $options = null);
 
     /**
     * Sets metadata headers on the container.
@@ -239,7 +239,6 @@ interface IBlob
     * @param string                        $container name of the container
     * @param string                        $blob      name of the blob
     * @param Models\PageRange              $range     Can be up to 4 MB in size
-    * @param integer                       $length    Specifies the page max size.
     * @param string                        $content   the blob contents
     * @param Models\CreateBlobPagesOptions $options   optional parameters
     * 
@@ -247,7 +246,7 @@ interface IBlob
     * 
     * @see http://msdn.microsoft.com/en-us/library/windowsazure/ee691975.aspx
     */
-    public function createBlobPages($container, $blob, $range, $length, $content,
+    public function createBlobPages($container, $blob, $range, $content,
         $options = null
     );
 
@@ -343,11 +342,11 @@ interface IBlob
     * Returns a list of active page ranges for a page blob. Active page ranges are 
     * those that have been populated with data.
     * 
-    * @param string                       $container name of the container
-    * @param string                       $blob      name of the blob
-    * @param Models\ListBlobRangesOptions $options   optional parameters
+    * @param string                           $container name of the container
+    * @param string                           $blob      name of the blob
+    * @param Models\ListPageBlobRangesOptions $options   optional parameters
     * 
-    * @return Models\ListBlobRangesResult
+    * @return Models\ListPageBlobRangesResult
     * 
     * @see http://msdn.microsoft.com/en-us/library/windowsazure/ee691973.aspx
     */

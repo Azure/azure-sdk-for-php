@@ -97,7 +97,7 @@ class ServiceRestProxyTest extends PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers  PEAR2\WindowsAzure\Services\Core\ServiceRestProxy::addOptionalAccessContitionHeader
+     * @covers  PEAR2\WindowsAzure\Services\Core\ServiceRestProxy::addOptionalAccessConditionHeader
      * @depends test__construct
      */
     public function testAddOptionalAccessContitionHeader($restWrapper)
@@ -109,7 +109,7 @@ class ServiceRestProxyTest extends PHPUnit_Framework_TestCase
         $headers = array('Header1' => 'Value1', 'Header2' => 'Value2');
         
         // Test
-        $actual = $restWrapper->addOptionalAccessContitionHeader($headers, $accessCondition);
+        $actual = $restWrapper->addOptionalAccessConditionHeader($headers, $accessCondition);
         
         // Assert
         $this->assertCount(3, $actual);

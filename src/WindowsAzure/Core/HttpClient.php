@@ -119,7 +119,7 @@ class HttpClient implements IHttpClient
     }
 
     /**
-     * Gets request url. Note that you must check if the retruend object is null or
+     * Gets request url. Note that you must check if the returned object is null or
      * not.
      *
      * @return PEAR2\WindowsAzure\Core\IUrl
@@ -178,7 +178,7 @@ class HttpClient implements IHttpClient
     {
         Validate::isString($value);
         
-        $this->_request->SetHeader($header, $value, $replace);
+        $this->_request->setHeader($header, $value, $replace);
     }
     
     /**

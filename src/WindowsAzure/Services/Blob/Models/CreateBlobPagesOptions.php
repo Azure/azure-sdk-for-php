@@ -23,10 +23,9 @@
  */
  
 namespace PEAR2\WindowsAzure\Services\Blob\Models;
-use PEAR2\WindowsAzure\Services\Blob\Models\ContainerAcl;
 
 /**
- * Holds container ACL
+ * Optional parameters for create and clear blob pages
  *
  * @category  Microsoft
  * @package   PEAR2\WindowsAzure\Services\Blob\Models
@@ -36,49 +35,87 @@ use PEAR2\WindowsAzure\Services\Blob\Models\ContainerAcl;
  * @version   Release: @package_version@
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
-class GetContainerAclResult
+class CreateBlobPagesOptions extends BlobServiceOptions
 {
-    private $_containerACL;
+    /**
+     * @var string
+     */
+    private $_contentMD5;
     
     /**
-     * Parses the given array into signed identifiers
-     * 
-     * @param string $publicAccess container public access
-     * @param string $etag         container etag
-     * @param string $lastModified last modification in string representation
-     * @param array  $parsed       parsed response into array representation
-     * 
-     * @return none.
+     * @var string
      */
-    public static function create($publicAccess, $etag, $lastModified, $parsed)
+    private $_leaseId;
+    
+    /**
+     * @var AccessCondition
+     */
+    private $_accessCondition;
+    
+    /**
+     * Gets access condition
+     * 
+     * @return AccessCondition
+     */
+    public function getAccessCondition()
     {
-        $result = new GetContainerAclResult();
-        $acl    = ContainerAcl::create($publicAccess, $etag, $lastModified, $parsed);
-        $result->setContainerAcl($acl);
-        
-        return $result;
+        return $this->_accessCondition;
     }
     
     /**
-     * Gets container ACL
+     * Sets access condition
      * 
-     * @return ContainerAcl
-     */
-    public function getContainerAcl()
-    {
-        return $this->_containerACL;
-    }
-    
-    /**
-     * Sets container ACL
-     * 
-     * @param ContainerAcl $containerACL value.
+     * @param AccessCondition $accessCondition value to use.
      * 
      * @return none.
      */
-    public function setContainerAcl($containerACL)
+    public function setAccessCondition($accessCondition)
     {
-        $this->_containerACL = $containerACL;
+        $this->_accessCondition = $accessCondition;
+    }
+    
+    /**
+     * Gets lease Id for the blob
+     * 
+     * @return string
+     */
+    public function getLeaseId()
+    {
+        return $this->_leaseId;
+    }
+    
+    /**
+     * Sets lease Id for the blob
+     * 
+     * @param string $leaseId the blob lease id.
+     * 
+     * @return none
+     */
+    public function setLeaseId($leaseId)
+    {
+        $this->_leaseId = $leaseId;
+    }
+    
+    /**
+     * Gets blob contentMD5.
+     *
+     * @return string.
+     */
+    public function getContentMD5()
+    {
+        return $this->_contentMD5;
+    }
+
+    /**
+     * Sets blob contentMD5.
+     *
+     * @param string $contentMD5 value.
+     *
+     * @return none.
+     */
+    public function setContentMD5($contentMD5)
+    {
+        $this->_contentMD5 = $contentMD5;
     }
 }
 

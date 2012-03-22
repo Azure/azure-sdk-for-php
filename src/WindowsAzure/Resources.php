@@ -68,7 +68,9 @@ class Resources
     const X_MS_RANGE_GET_CONTENT_MD5       = 'x-ms-range-get-content-md5';
     const X_MS_LEASE_ID                    = 'x-ms-lease-id';
     const X_MS_LEASE_STATUS                = 'x-ms-lease-status';
+    const X_MS_LEASE_ACTION                = 'x-ms-lease-action';
     const X_MS_DELETE_SNAPSHOTS            = 'x-ms-delete-snapshots';
+    const X_MS_PAGE_WRITE                  = 'x-ms-page-write';
     const ETAG                             = 'etag';
     const LAST_MODIFIED                    = 'last-modified';
     const DATE                             = 'date';
@@ -114,6 +116,7 @@ class Resources
     const QP_TIMEOUT     = 'timeout';
     const QP_DELIMITER   = 'Delimiter';
     const QP_REST_TYPE   = 'restype';
+    const QP_SNAPSHOT    = 'snapshot';
     
     // Request body content types
     const XML_CONTENT_TYPE = 'application/x-www-form-urlencoded';

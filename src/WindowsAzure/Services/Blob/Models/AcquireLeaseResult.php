@@ -23,10 +23,11 @@
  */
  
 namespace PEAR2\WindowsAzure\Services\Blob\Models;
-use PEAR2\WindowsAzure\Services\Blob\Models\ContainerAcl;
+use PEAR2\WindowsAzure\Resources;
+use PEAR2\WindowsAzure\Utilities;
 
 /**
- * Holds container ACL
+ * Short description
  *
  * @category  Microsoft
  * @package   PEAR2\WindowsAzure\Services\Blob\Models
@@ -36,49 +37,51 @@ use PEAR2\WindowsAzure\Services\Blob\Models\ContainerAcl;
  * @version   Release: @package_version@
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
-class GetContainerAclResult
+class AcquireLeaseResult
 {
-    private $_containerACL;
+    /**
+     * @var string
+     */
+    private $_leaseId;
     
     /**
-     * Parses the given array into signed identifiers
+     * Creates AcquireLeaseResult from response headers
      * 
-     * @param string $publicAccess container public access
-     * @param string $etag         container etag
-     * @param string $lastModified last modification in string representation
-     * @param array  $parsed       parsed response into array representation
+     * @param array $headers response headers
      * 
-     * @return none.
+     * @return AcquireLeaseResult
      */
-    public static function create($publicAccess, $etag, $lastModified, $parsed)
+    public static function create($headers)
     {
-        $result = new GetContainerAclResult();
-        $acl    = ContainerAcl::create($publicAccess, $etag, $lastModified, $parsed);
-        $result->setContainerAcl($acl);
+        $result = new AcquireLeaseResult();
+        
+        $result->setLeaseId(
+            Utilities::tryGetValue($headers, Resources::X_MS_LEASE_ID)
+        );
         
         return $result;
     }
     
     /**
-     * Gets container ACL
+     * Gets lease Id for the blob
      * 
-     * @return ContainerAcl
+     * @return string
      */
-    public function getContainerAcl()
+    public function getLeaseId()
     {
-        return $this->_containerACL;
+        return $this->_leaseId;
     }
     
     /**
-     * Sets container ACL
+     * Sets lease Id for the blob
      * 
-     * @param ContainerAcl $containerACL value.
+     * @param string $leaseId the blob lease id.
      * 
-     * @return none.
+     * @return none
      */
-    public function setContainerAcl($containerACL)
+    public function setLeaseId($leaseId)
     {
-        $this->_containerACL = $containerACL;
+        $this->_leaseId = $leaseId;
     }
 }
 
