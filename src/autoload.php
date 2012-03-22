@@ -31,6 +31,7 @@ spl_autoload_register(
             'pear2\\windowsazure\\services\\blob\\models\\container' => '/WindowsAzure/Services/Blob/Models/Container.php',
             'pear2\\windowsazure\\services\\blob\\models\\containeracl' => '/WindowsAzure/Services/Blob/Models/ContainerACL.php',
             'pear2\\windowsazure\\services\\blob\\models\\containerproperties' => '/WindowsAzure/Services/Blob/Models/ContainerProperties.php',
+            'pear2\\windowsazure\\services\\blob\\models\\createblobblockoptions' => '/WindowsAzure/Services/Blob/Models/CreateBlobBlockOptions.php',
             'pear2\\windowsazure\\services\\blob\\models\\createbloboptions' => '/WindowsAzure/Services/Blob/Models/CreateBlobOptions.php',
             'pear2\\windowsazure\\services\\blob\\models\\createblobpagesoptions' => '/WindowsAzure/Services/Blob/Models/CreateBlobPagesOptions.php',
             'pear2\\windowsazure\\services\\blob\\models\\createblobpagesresult' => '/WindowsAzure/Services/Blob/Models/CreateBlobPagesResult.php',
