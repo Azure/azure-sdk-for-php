@@ -60,6 +60,7 @@ use PEAR2\WindowsAzure\Services\Blob\Models\CreateBlobPagesResult;
 use PEAR2\WindowsAzure\Services\Blob\Models\PageWriteOption;
 use PEAR2\WindowsAzure\Services\Blob\Models\ListPageBlobRangesOptions;
 use PEAR2\WindowsAzure\Services\Blob\Models\ListPageBlobRangesResult;
+use PEAR2\WindowsAzure\Services\Blob\Models\CreateBlobBlockOptions;
 
 /**
  * This class constructs HTTP requests and receive HTTP responses for blob
@@ -823,7 +824,25 @@ class BlobRestProxy extends ServiceRestProxy implements IBlob
     public function createBlobBlock($container, $blob, $blockId, $content,
         $options = null
     ) {
-        throw new \Exception(Resources::NOT_IMPLEMENTED_MSG);
+        $method      = \HTTP_Request2::METHOD_PUT;
+        $headers     = array();
+        $queryParams = array();
+        $path        = $container . '/' . $blob;
+        $statusCode  = Resources::STATUS_CREATED;
+        $body        = $content;
+        
+        if (is_null($options)) {
+            $options = new CreateBlobBlockOptions();
+        }
+        
+        $headers[Resources::X_MS_LEASE_ID]  = $options->getLeaseId();
+        $headers[Resources::CONTENT_MD5]    = $options->getContentMD5();
+        $headers[Resources::CONTENT_TYPE]   = Resources::XML_CONTENT_TYPE;
+        $queryParams[Resources::QP_TIMEOUT] = strval($options->getTimeout());
+        $queryParams[Resources::QP_COMP]    = 'block';
+        $queryParams['blockid']             = base64_encode($blockId);
+        
+        $this->send($method, $headers, $queryParams, $path, $statusCode, $body);
     }
     
     /**

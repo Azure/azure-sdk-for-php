@@ -111,19 +111,18 @@ class BlobProperties
     public static function create($parsed)
     {
         $result = new BlobProperties();
-        $clean  = array();
+        $clean  = Utilities::keysToLower($parsed);
         
-        foreach ($parsed as $key => $value) {
-            $clean[strtolower($key)] = $value;
-        }
-        
-        $date = $clean[Resources::LAST_MODIFIED];
-        $date = WindowsAzureUtilities::rfc1123ToDateTime($date);
+        $date = Utilities::tryGetValue($clean, Resources::LAST_MODIFIED);
         $result->setBlobType(Utilities::tryGetValue($clean, 'blobtype'));
         $result->setContentLength(intval($clean[Resources::CONTENT_LENGTH]));
-        $result->setContentType($clean[Resources::CONTENT_TYPE]);
-        $result->setEtag($clean[Resources::ETAG]);
-        $result->setLastModified($date);
+        $result->setEtag(Utilities::tryGetValue($clean, Resources::ETAG));
+        
+        if (!is_null($date)) {
+            $date = WindowsAzureUtilities::rfc1123ToDateTime($date);
+            $result->setLastModified($date);
+        }
+        
         $result->setLeaseStatus(Utilities::tryGetValue($clean, 'leasestatus'));
         $result->setLeaseStatus(
             Utilities::tryGetValue(
@@ -154,6 +153,9 @@ class BlobProperties
         );
         $result->setContentMD5(
             Utilities::tryGetValue($clean, Resources::CONTENT_MD5)
+        );
+        $result->setContentType(
+            Utilities::tryGetValue($clean, Resources::CONTENT_TYPE)
         );
         
         return $result;
@@ -201,7 +203,6 @@ class BlobProperties
      */
     public function setEtag($etag)
     {
-        Validate::notNullOrEmpty($etag);
         $this->_etag = $etag;
     }
     

@@ -38,6 +38,7 @@ spl_autoload_register(
             'pear2\\tests\\unit\\windowsazure\\services\\blob\\models\\containeracltest' => '/unit/WindowsAzure/Services/Blob/Models/ContainerACLTest.php',
             'pear2\\tests\\unit\\windowsazure\\services\\blob\\models\\containerpropertiestest' => '/unit/WindowsAzure/Services/Blob/Models/ContainerPropertiesTest.php',
             'pear2\\tests\\unit\\windowsazure\\services\\blob\\models\\containertest' => '/unit/WindowsAzure/Services/Blob/Models/ContainerTest.php',
+            'pear2\\tests\\unit\\windowsazure\\services\\blob\\models\\createblobblockoptionstest' => '/unit/WindowsAzure/Services/Blob/Models/CreateBlobBlockOptionsTest.php',
             'pear2\\tests\\unit\\windowsazure\\services\\blob\\models\\createbloboptionstest' => '/unit/WindowsAzure/Services/Blob/Models/CreateBlobOptionsTest.php',
             'pear2\\tests\\unit\\windowsazure\\services\\blob\\models\\createblobpagesoptionstest' => '/unit/WindowsAzure/Services/Blob/Models/CreateBlobPagesOptionsTest.php',
             'pear2\\tests\\unit\\windowsazure\\services\\blob\\models\\createblobpagesresulttest' => '/unit/WindowsAzure/Services/Blob/Models/CreateBlobPagesResultTest.php',
