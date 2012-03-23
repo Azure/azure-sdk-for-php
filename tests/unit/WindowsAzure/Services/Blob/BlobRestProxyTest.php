@@ -1068,6 +1068,25 @@ class BlobRestProxyTest extends BlobRestProxyTestBase
         $this->assertNotNull($result->getEtag());
         $this->assertCount(0, $result->getPageRanges());
     }
+    
+    /**
+     * @covers PEAR2\WindowsAzure\Services\Blob\BlobRestProxy::createBlobBlock
+     */
+    public function testCreateBlobBlock()
+    {
+        // Setup
+        $name = 'createblobblock';
+        $this->createContainer($name);
+        $options = new ListBlobsOptions();
+        $options->setIncludeUncommittedBlobs(true);
+        
+        // Test
+        $this->wrapper->createBlobBlock($name, 'myblob', 'AAAAAA==', 'Hello world');
+        
+        // Assert
+        $result = $this->wrapper->listBlobs($name, $options);
+        $this->assertCount(1, $result->getBlobs());
+    }
 }
 
 ?>
