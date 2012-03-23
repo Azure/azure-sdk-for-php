@@ -61,6 +61,8 @@ use PEAR2\WindowsAzure\Services\Blob\Models\PageWriteOption;
 use PEAR2\WindowsAzure\Services\Blob\Models\ListPageBlobRangesOptions;
 use PEAR2\WindowsAzure\Services\Blob\Models\ListPageBlobRangesResult;
 use PEAR2\WindowsAzure\Services\Blob\Models\CreateBlobBlockOptions;
+use PEAR2\WindowsAzure\Services\Blob\Models\CommitBlobBlocksOptions;
+use PEAR2\WindowsAzure\Services\Blob\Models\BlockList;
 
 /**
  * This class constructs HTTP requests and receive HTTP responses for blob
@@ -867,7 +869,44 @@ class BlobRestProxy extends ServiceRestProxy implements IBlob
      */
     public function commitBlobBlocks($container, $blob, $blockList, $options = null)
     {
-        throw new \Exception(Resources::NOT_IMPLEMENTED_MSG);
+        $method      = \HTTP_Request2::METHOD_PUT;
+        $headers     = array();
+        $queryParams = array();
+        $path        = $container . '/' . $blob;
+        $statusCode  = Resources::STATUS_CREATED;
+        $body        = $blockList->toXml();
+        
+        if (is_null($options)) {
+            $options = new CommitBlobBlocksOptions();
+        }
+        
+        $blobContentType     = $options->getBlobContentType();
+        $blobContentEncoding = $options->getBlobContentEncoding();
+        $blobContentLanguage = $options->getBlobContentLanguage();
+        $blobContentMD5      = $options->getBlobContentMD5();
+        $blobCacheControl    = $options->getBlobCacheControl();
+        $leaseId             = $options->getLeaseId();
+        $contentType         = Resources::XML_CONTENT_TYPE;
+        
+        $metadata        = $options->getMetadata();
+        $metadataHeaders = WindowsAzureUtilities::generateMetadataHeaders($metadata);
+        $headers         = array_merge($headers, $metadataHeaders);
+        $headers         = $this->addOptionalAccessConditionHeader(
+            $headers, $options->getAccessCondition()
+        );
+        
+        $headers[Resources::X_MS_LEASE_ID]              = $leaseId;
+        $headers[Resources::X_MS_BLOB_CACHE_CONTROL]    = $blobCacheControl;
+        $headers[Resources::X_MS_BLOB_CONTENT_TYPE]     = $blobContentType;
+        $headers[Resources::X_MS_BLOB_CONTENT_ENCODING] = $blobContentEncoding;
+        $headers[Resources::X_MS_BLOB_CONTENT_LANGUAGE] = $blobContentLanguage;
+        $headers[Resources::X_MS_BLOB_CONTENT_MD5]      = $blobContentMD5;
+        $headers[Resources::CONTENT_TYPE]               = $contentType;
+        
+        $queryParams[Resources::QP_TIMEOUT] = strval($options->getTimeout());
+        $queryParams[Resources::QP_COMP]    = 'blocklist';
+        
+        $this->send($method, $headers, $queryParams, $path, $statusCode, $body);
     }
     
     /**

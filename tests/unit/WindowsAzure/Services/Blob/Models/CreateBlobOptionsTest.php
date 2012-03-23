@@ -130,6 +130,10 @@ class CreateBlobOptionsTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($expected, $options->getCacheControl());
     }
     
+    /**
+     * @covers PEAR2\WindowsAzure\Services\Blob\Models\CreateBlobOptions::setBlobContentType
+     * @covers PEAR2\WindowsAzure\Services\Blob\Models\CreateBlobOptions::getBlobContentType
+     */
     public function testSetBlobContentType()
     {
         // Setup
