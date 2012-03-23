@@ -26,7 +26,7 @@ namespace PEAR2\WindowsAzure\ServiceRuntime;
 use PEAR2\WindowsAzure\Resources;
 
 /**
- * The runtime state client.
+ * The runtime goal state client.
  *
  * @category  Microsoft
  * @package   PEAR2\WindowsAzure\ServiceRuntime\IRuntimeGoalStateClient

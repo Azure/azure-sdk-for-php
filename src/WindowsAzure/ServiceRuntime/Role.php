@@ -24,9 +24,10 @@
 
 namespace PEAR2\WindowsAzure\ServiceRuntime;
 use PEAR2\WindowsAzure\Resources;
+use PEAR2\WindowsAzure\Validate;
 
 /**
- * The role environment data.
+ * The role data.
  *
  * @category  Microsoft
  * @package   PEAR2\WindowsAzure\ServiceRuntime\Role
@@ -56,6 +57,8 @@ class Role
      */
     public function __construct($name, $instances)
     {
+        Validate::isArray($instances);
+        
         $this->_name      = $name;
         $this->_instances = $instances;
     }

@@ -54,10 +54,19 @@ class RoleEnvironment
      */
     private static $_currentEnvironmentData;
     
+	/**
+     * @var array
+     */
     private static $_changingListeners;
-    
+
+	/**
+     * @var array
+     */    
     private static $_changedListeners;
-    
+
+	/**
+     * @var array
+     */
     private static $_stoppingListeners;
     
     /**
@@ -65,6 +74,9 @@ class RoleEnvironment
      */
     private static $_lastState;
     
+	/**
+     * @var \DateTime
+     */
     private static $_maxDateTime;
     
     /**

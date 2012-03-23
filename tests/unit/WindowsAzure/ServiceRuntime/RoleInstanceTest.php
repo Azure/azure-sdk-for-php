@@ -21,7 +21,7 @@
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
-namespace PEAR2\Tests\Framework;
+namespace PEAR2\Tests\Unit\WindowsAzure\ServiceRuntime;
 use PEAR2\Tests\Framework\TestResources;
 use PEAR2\WindowsAzure\ServiceRuntime\Role;
 use PEAR2\WindowsAzure\ServiceRuntime\RoleInstance;
@@ -103,7 +103,7 @@ class RoleInstanceTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetSetRole()
     {
-        $role = new Role(null, null);
+        $role = new Role(null, array());
 
         // Setup
         $roleInstance = new RoleInstance(null, null, null, null);

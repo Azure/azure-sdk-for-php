@@ -26,7 +26,7 @@ namespace PEAR2\WindowsAzure\ServiceRuntime;
 use PEAR2\WindowsAzure\Resources;
 
 /**
- * An implementation for the protocol runtime current state client.
+ * An implementation for the protocol runtime goal state client.
  *
  * @category  Microsoft
  * @package   PEAR2\WindowsAzure\ServiceRuntime\Protocol1RuntimeGoalStateClient
@@ -36,7 +36,7 @@ use PEAR2\WindowsAzure\Resources;
  * @version   Release: @package_version@
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
-class Protocol1RuntimeGoalStateClient
+class Protocol1RuntimeGoalStateClient implements IRuntimeGoalStateClient
 {
     /**
      * @var Protocol1RuntimeCurrentStateClient
@@ -58,7 +58,9 @@ class Protocol1RuntimeGoalStateClient
      */
     private $_inputChannel;
     
-    
+    /**
+     * @var array
+     */    
     private $_listeners;
     
     /**
@@ -125,9 +127,11 @@ class Protocol1RuntimeGoalStateClient
     /**
      * Adds a goal state changed listener.
      * 
+     * @param string $listener The listener.
+	 *
      * @return none
      */
-    public function addGoalStateChangedListener()
+    public function addGoalStateChangedListener($listener)
     {
         throw new \Exception(Resources::NOT_IMPLEMENTED_MSG);
     }
@@ -135,9 +139,11 @@ class Protocol1RuntimeGoalStateClient
     /**
      * Removes a goal state changed listener.
      * 
+     * @param string $listener The listener.
+	 *
      * @return none
      */
-    public function removeGoalStateChangedListener()
+    public function removeGoalStateChangedListener($listener)
     {
         throw new \Exception(Resources::NOT_IMPLEMENTED_MSG);
     }

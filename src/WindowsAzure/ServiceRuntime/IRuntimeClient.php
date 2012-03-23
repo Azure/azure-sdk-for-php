@@ -26,7 +26,7 @@ namespace PEAR2\WindowsAzure\ServiceRuntime;
 use PEAR2\WindowsAzure\Resources;
 
 /**
- * The output channel.
+ * The runtime client.
  *
  * @category  Microsoft
  * @package   PEAR2\WindowsAzure\ServiceRuntime\IRuntimeClient

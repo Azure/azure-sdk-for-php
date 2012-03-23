@@ -24,6 +24,7 @@
 
 namespace PEAR2\WindowsAzure\ServiceRuntime;
 use PEAR2\WindowsAzure\Resources;
+use PEAR2\WindowsAzure\Validate;
 
 /**
  * The goal state representation.
@@ -74,7 +75,9 @@ class GoalState
      */
     public function __construct ($incarnation, $expectedState, $environmentPath, 
         $deadline, $currentStateEndpoint
-    ) {    
+    ) {
+        Validate::isDate($deadline);
+        
         $this->_incarnation          = $incarnation;
         $this->_expectedState        = $expectedState;
         $this->_environmentPath      = $environmentPath;

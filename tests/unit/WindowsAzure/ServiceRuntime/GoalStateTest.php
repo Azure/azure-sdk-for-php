@@ -21,7 +21,7 @@
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
-namespace PEAR2\Tests\Framework;
+namespace PEAR2\Tests\Unit\WindowsAzure\ServiceRuntime;
 use PEAR2\Tests\Framework\TestResources;
 use PEAR2\WindowsAzure\Core\WindowsAzureUtilities;
 use PEAR2\WindowsAzure\ServiceRuntime\GoalState;
@@ -58,10 +58,11 @@ class GoalStateTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetCurrentStateEndpoint()
     {
+        $deadline = WindowsAzureUtilities::rfc1123ToDateTime('Sun, 25 Sep 2011 19:42:18 GMT');
         $currentStateEndpoint = 'endpoint';
         
         // Setup
-        $goalState = new GoalState(null, null, null, null, $currentStateEndpoint);
+        $goalState = new GoalState(null, null, null, $deadline, $currentStateEndpoint);
         
         // Test
         $this->assertEquals($currentStateEndpoint, $goalState->getCurrentStateEndpoint());
@@ -72,10 +73,11 @@ class GoalStateTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetEnvironmentPath()
     {
+        $deadline = WindowsAzureUtilities::rfc1123ToDateTime('Sun, 25 Sep 2011 19:42:18 GMT');
         $environmentPath = 'path';
         
         // Setup
-        $goalState = new GoalState(null, null, $environmentPath, null, null);
+        $goalState = new GoalState(null, null, $environmentPath, $deadline, null);
         
         // Test
         $this->assertEquals($environmentPath, $goalState->getEnvironmentPath());
@@ -86,10 +88,11 @@ class GoalStateTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetExpectedState()
     {
+        $deadline = WindowsAzureUtilities::rfc1123ToDateTime('Sun, 25 Sep 2011 19:42:18 GMT');
         $expectedState = 'expectedState';
         
         // Setup
-        $goalState = new GoalState(null, $expectedState, null, null, null);
+        $goalState = new GoalState(null, $expectedState, null, $deadline, null);
         
         // Test
         $this->assertEquals($expectedState, $goalState->getExpectedState());
@@ -100,10 +103,11 @@ class GoalStateTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetIncarnation()
     {
+        $deadline = WindowsAzureUtilities::rfc1123ToDateTime('Sun, 25 Sep 2011 19:42:18 GMT');
         $incarnation = 1;
         
         // Setup
-        $goalState = new GoalState($incarnation, null, null, null, null);
+        $goalState = new GoalState($incarnation, null, null, $deadline, null);
         
         // Test
         $this->assertEquals($incarnation, $goalState->getIncarnation());
@@ -114,10 +118,11 @@ class GoalStateTest extends \PHPUnit_Framework_TestCase
      */
     public function testConstructor()
     {
+        $deadline = WindowsAzureUtilities::rfc1123ToDateTime('Sun, 25 Sep 2011 19:42:18 GMT');
         $incarnation = 1;
         
         // Setup
-        $goalState = new GoalState($incarnation, null, null, null, null);
+        $goalState = new GoalState($incarnation, null, null, $deadline, null);
         
         // Test
         $this->assertInstanceOf('PEAR2\\WindowsAzure\\ServiceRuntime\\GoalState',

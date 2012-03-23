@@ -26,7 +26,7 @@ namespace PEAR2\WindowsAzure\ServiceRuntime;
 use PEAR2\WindowsAzure\Resources;
 
 /**
- * The goal state representation.
+ * The file output channel.
  *
  * @category  Microsoft
  * @package   PEAR2\WindowsAzure\ServiceRuntime\FileOutputChannel

@@ -110,9 +110,9 @@ class Protocol1RuntimeClient
     /**
      * Sets the current state.
      * 
-     * @param CurrentState $state The new state.
+     * @param CurrentState $state The current state.
      * 
-     * @return none.
+     * @return none
      */
     public function setCurrentState($state)
     {

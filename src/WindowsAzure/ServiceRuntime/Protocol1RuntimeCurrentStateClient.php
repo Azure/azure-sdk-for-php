@@ -36,7 +36,7 @@ use PEAR2\WindowsAzure\Resources;
  * @version   Release: @package_version@
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
-class Protocol1RuntimeCurrentStateClient
+class Protocol1RuntimeCurrentStateClient implements IRuntimeCurrentStateClient
 {
     /**
      * @var ICurrentStateSerializer
