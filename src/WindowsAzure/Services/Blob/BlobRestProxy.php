@@ -63,6 +63,8 @@ use PEAR2\WindowsAzure\Services\Blob\Models\ListPageBlobRangesResult;
 use PEAR2\WindowsAzure\Services\Blob\Models\CreateBlobBlockOptions;
 use PEAR2\WindowsAzure\Services\Blob\Models\CommitBlobBlocksOptions;
 use PEAR2\WindowsAzure\Services\Blob\Models\BlockList;
+use PEAR2\WindowsAzure\Services\Blob\Models\ListBlobBlocksOptions;
+use PEAR2\WindowsAzure\Services\Blob\Models\ListBlobBlocksResult;
 
 /**
  * This class constructs HTTP requests and receive HTTP responses for blob
@@ -930,7 +932,26 @@ class BlobRestProxy extends ServiceRestProxy implements IBlob
      */
     public function listBlobBlocks($container, $blob, $options = null)
     {
-        throw new \Exception(Resources::NOT_IMPLEMENTED_MSG);
+        $method      = \HTTP_Request2::METHOD_GET;
+        $headers     = array();
+        $queryParams = array();
+        $path        = $container . '/' . $blob;
+        $statusCode  = Resources::STATUS_OK;
+        
+        if (is_null($options)) {
+            $options = new ListBlobBlocksOptions();
+        }
+        
+        $headers[Resources::X_MS_LEASE_ID]   = $options->getLeaseId();
+        $queryParams[Resources::QP_TIMEOUT]  = strval($options->getTimeout());
+        $queryParams['blocklisttype']        = $options->getBlockListType();
+        $queryParams[Resources::QP_SNAPSHOT] = $options->getSnapshot();
+        $queryParams[Resources::QP_COMP]     = 'blocklist';
+        
+        $response = $this->send($method, $headers, $queryParams, $path, $statusCode);
+        $parsed   = Utilities::unserialize($response->getBody());
+        
+        return ListBlobBlocksResult::create($response->getHeader(), $parsed);
     }
     
     /**
