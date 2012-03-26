@@ -43,6 +43,8 @@ use PEAR2\WindowsAzure\Services\Blob\Models\GetBlobResult;
 use PEAR2\WindowsAzure\Services\Blob\Models\BlobType;
 use PEAR2\WindowsAzure\Services\Blob\Models\PageRange;
 use PEAR2\WindowsAzure\Services\Blob\Models\CreateBlobPagesResult;
+use PEAR2\WindowsAzure\Services\Blob\Models\BlockList;
+use PEAR2\WindowsAzure\Services\Blob\Models\BlobBlockType;
 
 /**
  * Unit tests for class BlobRestProxy
@@ -1085,6 +1087,32 @@ class BlobRestProxyTest extends BlobRestProxyTestBase
         
         // Assert
         $result = $this->wrapper->listBlobs($name, $options);
+        $this->assertCount(1, $result->getBlobs());
+    }
+    
+    /**
+     * @covers PEAR2\WindowsAzure\Services\Blob\BlobRestProxy::commitBlobBlocks
+     * @covers PEAR2\WindowsAzure\Services\Blob\Models\BlockList::toXml
+     */
+    public function testCommitBlobBlocks()
+    {
+        // Setup
+        $name = 'commitblobblocks';
+        $blob = 'myblob';
+        $id1 = 'AAAAAA==';
+        $id2 = 'ANAAAA==';
+        $this->createContainer($name);
+        $this->wrapper->createBlobBlock($name, $blob, $id1, 'Hello world');
+        $this->wrapper->createBlobBlock($name, $blob, $id2, 'Hello world');
+        $blockList = new BlockList();
+        $blockList->setEntry($id1, BlobBlockType::LATEST_TYPE);
+        $blockList->setEntry($id2, BlobBlockType::LATEST_TYPE);
+        
+        // Test
+        $this->wrapper->commitBlobBlocks($name, $blob, $blockList);
+        
+        // Assert
+        $result = $this->wrapper->listBlobs($name);
         $this->assertCount(1, $result->getBlobs());
     }
 }
