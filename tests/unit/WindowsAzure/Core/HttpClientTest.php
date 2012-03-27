@@ -53,7 +53,6 @@ class HttpClientTest extends PHPUnit_Framework_TestCase
         
         // Assert
         $this->assertTrue(isset($channel));
-        $this->assertContains(Resources::X_MS_VERSION, array_keys($headers));
     }
     
     /**
@@ -141,7 +140,7 @@ class HttpClientTest extends PHPUnit_Framework_TestCase
         
         // Assert
         $channelHeaders = $channel->getHeaders();
-        $this->assertCount(3, $channelHeaders);
+        $this->assertCount(2, $channelHeaders);
         $this->assertEquals($value1, $channelHeaders[$header1]);
         $this->assertEquals($value2, $channelHeaders[$header2]);
     }
@@ -164,7 +163,7 @@ class HttpClientTest extends PHPUnit_Framework_TestCase
         $headers = $channel->getHeaders();
         
         // Assert
-        $this->assertCount(3, $headers);
+        $this->assertCount(2, $headers);
         $this->assertEquals($value1, $headers[$header1]);
         $this->assertEquals($value2, $headers[$header2]);
     }
@@ -182,7 +181,7 @@ class HttpClientTest extends PHPUnit_Framework_TestCase
         
         // Assert
         $headers = $channel->getHeaders();
-        $this->assertCount(2, $headers);
+        $this->assertCount(1, $headers);
         $this->assertEquals(TestResources::HEADER1_VALUE, $headers[TestResources::HEADER1]);
     }
     
@@ -200,7 +199,7 @@ class HttpClientTest extends PHPUnit_Framework_TestCase
         
         // Assert
         $headers = $channel->getHeaders();
-        $this->assertCount(2, $headers);
+        $this->assertCount(1, $headers);
         $this->assertEquals(TestResources::HEADER2_VALUE, $headers[TestResources::HEADER1]);
     }
     
@@ -219,7 +218,7 @@ class HttpClientTest extends PHPUnit_Framework_TestCase
         
         // Assert
         $headers = $channel->getHeaders();
-        $this->assertCount(2, $headers);
+        $this->assertCount(1, $headers);
         $this->assertEquals($expected, $headers[TestResources::HEADER1]);
     }
     

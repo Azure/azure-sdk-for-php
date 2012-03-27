@@ -15,14 +15,15 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   PEAR2\Tests\Unit\WindowsAzure
+ * @package   PEAR2\Tests\Unit\WindowsAzure\Services\Blob
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
 
-use Tests\Framework\BlobRestProxyTestBase;
+namespace PEAR2\Tests\Unit\WindowsAzure\Services\Blob;
+use PEAR2\Tests\Framework\BlobRestProxyTestBase;
 use PEAR2\WindowsAzure\Core\WindowsAzureUtilities;
 use PEAR2\WindowsAzure\Core\ServiceException;
 use PEAR2\Tests\Framework\TestResources;
@@ -50,7 +51,7 @@ use PEAR2\WindowsAzure\Services\Blob\Models\BlobBlockType;
  * Unit tests for class BlobRestProxy
  *
  * @category  Microsoft
- * @package   PEAR2\Tests\Unit\WindowsAzure
+ * @package   PEAR2\Tests\Unit\WindowsAzure\Services\Blob
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0

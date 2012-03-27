@@ -87,10 +87,13 @@ class Resources
     const IF_NONE_MATCH                    = 'if-none-match';
     const IF_UNMODIFIED_SINCE              = 'if-unmodified-since';
     const RANGE                            = 'range';
+    const DATA_SERVICE_VERSION             = 'dataserviceversion';
+    const MAX_DATA_SERVICE_VERSION         = 'maxdataserviceversion';
 
     // Type
     const QUEUE_TYPE_NAME = 'IQueue';
     const BLOB_TYPE_NAME  = 'IBlob';
+    const TABLE_TYPE_NAME = 'ITable';
     
     // Misc
     const EMPTY_STRING       = '';
@@ -99,11 +102,14 @@ class Resources
     const EMULATED           = 'EMULATED';
     const DEV_STORE_NAME     = 'devstoreaccount1';
     const DEV_STORE_KEY      = 'Eby8vdM02xNOcqFlqUwJPLlmEtlCDXJ1OUzFT50uSRZ6IFsuFq2UVErCz4I6tq/K1SZFPTOtr/KBHBeksoGMGw==';
-    const EMULATOR_QUEUE_URI = '127.0.0.1:10001';
     const EMULATOR_BLOB_URI  = '127.0.0.1:10000';
+    const EMULATOR_QUEUE_URI = '127.0.0.1:10001';
+    const EMULATOR_TABLE_URI = '127.0.0.1:10002';
 
     // Versioning
-    const API_VERSION = '2011-08-18';
+    const API_VERSION                    = '2011-08-18';
+    const DATA_SERVICE_VERSION_VALUE     = '1.0;NetFx';
+    const MAX_DATA_SERVICE_VERSION_VALUE = '1.0;NetFx';
 
     // Query parameter names
     const QP_PREFIX      = 'Prefix';

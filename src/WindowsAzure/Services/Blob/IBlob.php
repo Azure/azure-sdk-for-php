@@ -23,6 +23,7 @@
  */
  
 namespace PEAR2\WindowsAzure\Services\Blob;
+use PEAR2\WindowsAzure\Services\Core\FilterableService;
 
 /**
  * This interface has all REST APIs provided by Windows Azure for Blob service.
@@ -36,19 +37,8 @@ namespace PEAR2\WindowsAzure\Services\Blob;
  * @link      http://pear.php.net/package/azure-sdk-for-php
  * @see       http://msdn.microsoft.com/en-us/library/windowsazure/dd135733.aspx
  */
-interface IBlob
+interface IBlob extends FilterableService
 {
-    /**
-    * Adds new filter to blob proxy object and returns new BlobRestProxy with
-    * that filter.
-    *
-    * @param PEAR2\WindowsAzure\Core\IServiceFilter $filter Filter to add for 
-    * the pipeline.
-    * 
-    * @return PEAR2\WindowsAzure\Services\Blob\IBlob.
-    */
-    public function withFilter($filter);
-
     /**
     * Gets the properties of the Blob service.
     * 

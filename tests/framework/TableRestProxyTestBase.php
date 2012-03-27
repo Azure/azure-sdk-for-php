@@ -24,10 +24,9 @@
 namespace PEAR2\Tests\Framework;
 use PEAR2\Tests\Framework\RestProxyTestBase;
 use PEAR2\WindowsAzure\Services\Core\Configuration;
-use PEAR2\WindowsAzure\Services\Blob\BlobSettings;
-use PEAR2\WindowsAzure\Services\Blob\BlobService;
+use PEAR2\WindowsAzure\Services\Table\TableSettings;
+use PEAR2\WindowsAzure\Services\Table\TableService;
 use PEAR2\Tests\Framework\TestResources;
-use PEAR2\WindowsAzure\Services\Blob\Models\CreateContainerOptions;
 
 /**
  * TestBase class for each unit test class.
@@ -40,50 +39,45 @@ use PEAR2\WindowsAzure\Services\Blob\Models\CreateContainerOptions;
  * @version   Release: @package_version@
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
-class BlobRestProxyTestBase extends RestProxyTestBase
+class TableRestProxyTestBase extends RestProxyTestBase
 {
-    protected $_createdContainers;
+    protected $_createdTables;
     
     public function __construct()
     {
         $config = new Configuration();
-        $blobUri = 'http://' . TestResources::accountName() . '.blob.core.windows.net';
-        $config->setProperty(BlobSettings::ACCOUNT_KEY, TestResources::accountKey());
-        $config->setProperty(BlobSettings::ACCOUNT_NAME, TestResources::accountName());        
-        $config->setProperty(BlobSettings::URI, $blobUri);
-        $blobWrapper = BlobService::create($config);
-        parent::__construct($config, $blobWrapper);
-        $this->_createdContainers = array();
+        $tableUri = 'http://' . TestResources::accountName() . '.table.core.windows.net';
+        $config->setProperty(TableSettings::ACCOUNT_KEY, TestResources::accountKey());
+        $config->setProperty(TableSettings::ACCOUNT_NAME, TestResources::accountName());        
+        $config->setProperty(TableSettings::URI, $tableUri);
+        $tableWrapper = TableService::create($config);
+        parent::__construct($config, $tableWrapper);
+        $this->_createdTables = array();
     }
     
-    public function createContainer($containerName, $options = null)
+    public function createTable($tableName, $options = null)
     {
-        if (is_null($options)) {
-            $options = new CreateContainerOptions();
-            $options->setPublicAccess('container');
-        }
-        
-        $this->wrapper->createContainer($containerName, $options);
-        $this->_createdContainers[] = $containerName;
+        $this->wrapper->createTable($tableName, $options);
+        $this->_createdTables[] = $tableName;
     }
     
-    public function deleteContainer($containerName)
+    public function deleteTable($tableName)
     {
-        $this->wrapper->deleteContainer($containerName);
+        $this->wrapper->deleteTable($tableName);
     }
     
     protected function tearDown()
     {
         parent::tearDown();
         
-        foreach ($this->_createdContainers as $value) {
+        foreach ($this->_createdTables as $value) {
             try
             {
-                $this->deleteContainer($value);
+                $this->deleteTable($value);
             }
             catch (\Exception $e)
             {
-                // Ignore exception and continue, will assume that this container doesn't exist in the sotrage account
+                // Ignore exception and continue, will assume that this table doesn't exist in the sotrage account
                 error_log($e->getMessage());
             }
         }

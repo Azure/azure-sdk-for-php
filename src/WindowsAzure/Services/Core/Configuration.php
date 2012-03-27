@@ -91,6 +91,12 @@ class Configuration
             );
             $config->setProperty(BlobSettings::ACCOUNT_NAME, $name);
             $config->setProperty(BlobSettings::ACCOUNT_KEY, $key);
+        } else if ($type == Resources::TABLE_TYPE_NAME) {
+            $config->setProperty(
+                TableSettings::URI, sprintf($uri, Resources::EMULATOR_TABLE_URI)
+            );
+            $config->setProperty(TableSettings::ACCOUNT_NAME, $name);
+            $config->setProperty(TableSettings::ACCOUNT_KEY, $key);
         } else {
             $expected  = Resources::QUEUE_TYPE_NAME;
             $expected .= '|' . Resources::BLOB_TYPE_NAME;

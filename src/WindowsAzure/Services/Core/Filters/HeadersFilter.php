@@ -15,62 +15,75 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   PEAR2\Tests\Unit\WindowsAzure\Services\Core\Filters
+ * @package   PEAR2\WindowsAzure\Services\Core\Filters
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
-
-namespace PEAR2\Tests\Unit\WindowsAzure\Services\Core\Filters;
-use PEAR2\WindowsAzure\Services\Core\Filters\DateFilter;
-use PEAR2\WindowsAzure\Core\HttpClient;
+ 
+namespace PEAR2\WindowsAzure\Services\Core\Filters;
 use PEAR2\WindowsAzure\Resources;
+use PEAR2\WindowsAzure\Core\IServiceFilter;
 
 /**
- * Unit tests for class DateFilter
+ * Adds all passed headers to the HTTP request headers.
  *
  * @category  Microsoft
- * @package   PEAR2\Tests\Unit\WindowsAzure\Services\Core\Filters
+ * @package   PEAR2\WindowsAzure\Services\Core\Filters
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @version   Release: @package_version@
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
-class DateFilterTest extends \PHPUnit_Framework_TestCase
+class HeadersFilter implements IServiceFilter
 {
     /**
-     * @covers PEAR2\WindowsAzure\Services\Core\Filters\DateFilter::handleRequest
+     * @var array
      */
-    public function testHandleRequest()
+    private $_headers;
+    
+    /**
+     * Constructor
+     * 
+     * @param array $headers static headers to be added.
+     * 
+     * @return HeadersFilter
+     */
+    public function __construct($headers)
     {
-        // Setup
-        $channel = new HttpClient();
-        $filer = new DateFilter();
-        
-        // Test
-        $request = $filer->handleRequest($channel);
-        
-        // Assert
-        $this->assertArrayHasKey(Resources::DATE, $request->getHeaders());
+        $this->_headers = $headers;
     }
     
     /**
-     * @covers PEAR2\WindowsAzure\Services\Core\Filters\DateFilter::handleResponse
+     * Adds static header(s) to the HTTP request headers
+     *
+     * @param HttpClient $request HTTP channel object.
+     * 
+     * @return \HTTP_Request2
      */
-    public function testHandleResponse()
+    public function handleRequest($request) 
     {
-        // Setup
-        $channel = new HttpClient();
-        $response = null;
-        $filer = new DateFilter();
-        
-        // Test
-        $response = $filer->handleResponse($channel, $response);
-        
-        // Assert
-        $this->assertNull($response);
+        foreach ($this->_headers as $key => $value) {
+            $request->setHeader($key, $value);
+        }
+
+        return $request;
+    }
+
+    /**
+     * Does nothing with the response.
+     *
+     * @param HttpClient              $request  HTTP channel object.
+     * @param \HTTP_Request2_Response $response HTTP response object.
+     * 
+     * @return \HTTP_Request2_Response
+     */
+    public function handleResponse($request, $response) 
+    {
+        // Do nothing with the response.
+        return $response;
     }
 }
 

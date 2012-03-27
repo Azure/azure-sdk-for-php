@@ -15,62 +15,60 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   PEAR2\Tests\Unit\WindowsAzure\Services\Core\Filters
+ * @package   PEAR2\Tests\Unit\WindowsAzure\Services\Table\Models
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
 
-namespace PEAR2\Tests\Unit\WindowsAzure\Services\Core\Filters;
-use PEAR2\WindowsAzure\Services\Core\Filters\DateFilter;
-use PEAR2\WindowsAzure\Core\HttpClient;
-use PEAR2\WindowsAzure\Resources;
+namespace PEAR2\Tests\Unit\WindowsAzure\Services\Table\Models;
+use PEAR2\WindowsAzure\Services\Table\Models\TableServiceOptions;
 
 /**
- * Unit tests for class DateFilter
+ * Unit tests for class TableServiceOptions
  *
  * @category  Microsoft
- * @package   PEAR2\Tests\Unit\WindowsAzure\Services\Core\Filters
+ * @package   PEAR2\Tests\Unit\WindowsAzure\Services\Table\Models
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @version   Release: @package_version@
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
-class DateFilterTest extends \PHPUnit_Framework_TestCase
+class TableServiceOptionsTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @covers PEAR2\WindowsAzure\Services\Core\Filters\DateFilter::handleRequest
+     * @covers PEAR2\WindowsAzure\Services\Table\Models\TableServiceOptions::setTimeout
      */
-    public function testHandleRequest()
+    public function testSetTimeout()
     {
         // Setup
-        $channel = new HttpClient();
-        $filer = new DateFilter();
+        $options = new TableServiceOptions();
+        $value = 10;
         
         // Test
-        $request = $filer->handleRequest($channel);
+        $options->setTimeout($value);
         
         // Assert
-        $this->assertArrayHasKey(Resources::DATE, $request->getHeaders());
+        $this->assertEquals($value, $options->getTimeout());
     }
     
     /**
-     * @covers PEAR2\WindowsAzure\Services\Core\Filters\DateFilter::handleResponse
+     * @covers PEAR2\WindowsAzure\Services\Table\Models\TableServiceOptions::getTimeout
      */
-    public function testHandleResponse()
+    public function testGetTimeout()
     {
         // Setup
-        $channel = new HttpClient();
-        $response = null;
-        $filer = new DateFilter();
+        $options = new TableServiceOptions();
+        $value = 10;
+        $options->setTimeout($value);
         
         // Test
-        $response = $filer->handleResponse($channel, $response);
+        $actualValue = $options->getTimeout();
         
         // Assert
-        $this->assertNull($response);
+        $this->assertEquals($value, $actualValue);
     }
 }
 

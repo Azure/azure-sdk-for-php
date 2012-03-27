@@ -21,6 +21,7 @@
  * @license    http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link       http://pear.php.net/package/azure-sdk-for-php
  */
+
 namespace PEAR2\Tests\Unit\WindowsAzure\Services\Core\Authentication;
 use PEAR2\WindowsAzure\Services\Core\Authentication\StorageAuthenticationScheme;
 use PEAR2\Tests\Unit\Utilities;
@@ -101,6 +102,23 @@ class StorageAuthenticationSchemeTest extends \PHPUnit_Framework_TestCase
         $mock = new StorageAuthenticationSchemeMock($accountName, TestResources::KEY4);
 
         $actual = $mock->computeCanonicalizedResourceMock($url, $queryVariables);
+
+        $this->assertEquals($expected, $actual);
+    }
+    
+    /**
+    * @covers PEAR2\WindowsAzure\Services\Core\Authentication\StorageAuthenticationScheme::computeCanonicalizedResourceForTable
+    */
+    public function testComputeCanonicalizedResourceForTableMock()
+    {
+        $queryVariables = array();
+        $queryVariables['COMP'] = 'list';
+        $accountName = TestResources::ACCOUNT_NAME;
+        $url = TestResources::URI1;
+        $expected = '/' . $accountName . parse_url($url, PHP_URL_PATH) . '?comp=list';
+        $mock = new StorageAuthenticationSchemeMock($accountName, TestResources::KEY4);
+
+        $actual = $mock->computeCanonicalizedResourceForTableMock($url, $queryVariables);
 
         $this->assertEquals($expected, $actual);
     }

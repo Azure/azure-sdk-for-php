@@ -21,6 +21,7 @@
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
+
 namespace PEAR2\Tests\Unit\WindowsAzure\Services\Core\Models;
 use PEAR2\WindowsAzure\Services\Core\Models\Logging;
 use PEAR2\Tests\Framework\TestResources;
