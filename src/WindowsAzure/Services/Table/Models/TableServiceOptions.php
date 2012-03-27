@@ -15,62 +15,50 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   PEAR2\Tests\Unit\WindowsAzure\Services\Core\Filters
+ * @package   PEAR2\WindowsAzure\Services\Table\Models
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
-
-namespace PEAR2\Tests\Unit\WindowsAzure\Services\Core\Filters;
-use PEAR2\WindowsAzure\Services\Core\Filters\DateFilter;
-use PEAR2\WindowsAzure\Core\HttpClient;
-use PEAR2\WindowsAzure\Resources;
+ 
+namespace PEAR2\WindowsAzure\Services\Table\Models;
 
 /**
- * Unit tests for class DateFilter
+ * Table service options.
  *
  * @category  Microsoft
- * @package   PEAR2\Tests\Unit\WindowsAzure\Services\Core\Filters
+ * @package   PEAR2\WindowsAzure\Services\Table\Models
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @version   Release: @package_version@
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
-class DateFilterTest extends \PHPUnit_Framework_TestCase
+class TableServiceOptions
 {
+    private $_timeout;
+
     /**
-     * @covers PEAR2\WindowsAzure\Services\Core\Filters\DateFilter::handleRequest
+     * Gets timeout.
+     *
+     * @return string.
      */
-    public function testHandleRequest()
+    public function getTimeout()
     {
-        // Setup
-        $channel = new HttpClient();
-        $filer = new DateFilter();
-        
-        // Test
-        $request = $filer->handleRequest($channel);
-        
-        // Assert
-        $this->assertArrayHasKey(Resources::DATE, $request->getHeaders());
+        return $this->_timeout;
     }
-    
+
     /**
-     * @covers PEAR2\WindowsAzure\Services\Core\Filters\DateFilter::handleResponse
+     * Sets timeout.
+     *
+     * @param string $timeout value.
+     * 
+     * @return none.
      */
-    public function testHandleResponse()
+    public function setTimeout($timeout)
     {
-        // Setup
-        $channel = new HttpClient();
-        $response = null;
-        $filer = new DateFilter();
-        
-        // Test
-        $response = $filer->handleResponse($channel, $response);
-        
-        // Assert
-        $this->assertNull($response);
+        $this->_timeout = $timeout;
     }
 }
 

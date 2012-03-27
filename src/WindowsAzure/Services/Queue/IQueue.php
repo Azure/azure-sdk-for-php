@@ -23,6 +23,7 @@
  */
 
 namespace PEAR2\WindowsAzure\Services\Queue;
+use PEAR2\WindowsAzure\Services\Core\FilterableService;
 
 /**
  * This interface has all REST APIs provided by Windows Azure for queue service
@@ -36,19 +37,8 @@ namespace PEAR2\WindowsAzure\Services\Queue;
  * @link      http://pear.php.net/package/azure-sdk-for-php
  * @see       http://msdn.microsoft.com/en-us/library/windowsazure/dd179363.aspx
  */
-interface IQueue
+interface IQueue extends FilterableService
 {
-    /**
-     * Adds new filter to queue proxy object and returns new QueueRestProxy with
-     * that filter.
-     *
-     * @param PEAR2\WindowsAzure\Core\IServiceFilter $filter Filter to add for 
-     * the pipeline.
-     * 
-     * @return PEAR2\WindowsAzure\Services\Queue\IQueue.
-     */
-    public function withFilter($filter);
-
     /**
      * Gets the properties of the Queue service.
      * 

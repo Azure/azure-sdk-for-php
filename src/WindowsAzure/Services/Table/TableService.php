@@ -15,62 +15,39 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   PEAR2\Tests\Unit\WindowsAzure\Services\Core\Filters
+ * @package   PEAR2\WindowsAzure\Services\Table
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
-
-namespace PEAR2\Tests\Unit\WindowsAzure\Services\Core\Filters;
-use PEAR2\WindowsAzure\Services\Core\Filters\DateFilter;
-use PEAR2\WindowsAzure\Core\HttpClient;
+ 
+namespace PEAR2\WindowsAzure\Services\Table;
 use PEAR2\WindowsAzure\Resources;
 
 /**
- * Unit tests for class DateFilter
+ * Factory for creating ITable objects
  *
  * @category  Microsoft
- * @package   PEAR2\Tests\Unit\WindowsAzure\Services\Core\Filters
+ * @package   PEAR2\WindowsAzure\Services\Table
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @version   Release: @package_version@
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
-class DateFilterTest extends \PHPUnit_Framework_TestCase
+class TableService
 {
     /**
-     * @covers PEAR2\WindowsAzure\Services\Core\Filters\DateFilter::handleRequest
+     * Creates new object based on the builder type in the $config.
+     *
+     * @param PEAR2\WindowsAzure\Services\Core\Configuration $config config object.
+     * 
+     * @return PEAR2\WindowsAzure\Services\Table\ITable.
      */
-    public function testHandleRequest()
+    public static function create($config)
     {
-        // Setup
-        $channel = new HttpClient();
-        $filer = new DateFilter();
-        
-        // Test
-        $request = $filer->handleRequest($channel);
-        
-        // Assert
-        $this->assertArrayHasKey(Resources::DATE, $request->getHeaders());
-    }
-    
-    /**
-     * @covers PEAR2\WindowsAzure\Services\Core\Filters\DateFilter::handleResponse
-     */
-    public function testHandleResponse()
-    {
-        // Setup
-        $channel = new HttpClient();
-        $response = null;
-        $filer = new DateFilter();
-        
-        // Test
-        $response = $filer->handleResponse($channel, $response);
-        
-        // Assert
-        $this->assertNull($response);
+        return $config->create(Resources::TABLE_TYPE_NAME);
     }
 }
 

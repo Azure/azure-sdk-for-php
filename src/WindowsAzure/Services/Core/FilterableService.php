@@ -15,50 +15,38 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   PEAR2\Tests\Unit\WindowsAzure\Services\Queue
+ * @package   PEAR2\WindowsAzure\Services\Core
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
-
-namespace PEAR2\Tests\Unit\WindowsAzure\Services\Queue;
-use PEAR2\WindowsAzure\Services\Queue\QueueService;
-use PEAR2\WindowsAzure\Services\Core\Configuration;
-use PEAR2\Tests\Framework\TestResources;
-use PEAR2\WindowsAzure\Services\Queue\QueueSettings;
+ 
+namespace PEAR2\WindowsAzure\Services\Core;
 
 /**
- * Unit tests for class QueueService
+ * Interface for service with filers.
  *
  * @category  Microsoft
- * @package   PEAR2\Tests\Unit\WindowsAzure\Services\Queue
+ * @package   PEAR2\WindowsAzure\Services\Core
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @version   Release: @package_version@
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
-class QueueServiceTest extends \PHPUnit_Framework_TestCase
+interface FilterableService
 {
     /**
-     * @covers PEAR2\WindowsAzure\Services\Queue\QueueService::create
-     */
-    public function testCreateWithConfig()
-    {
-        // Setup
-        $uri = 'http://' . TestResources::accountName() . '.queue.core.windows.net';
-        $config = new Configuration();
-        $config->setProperty(QueueSettings::ACCOUNT_KEY, TestResources::accountKey());
-        $config->setProperty(QueueSettings::ACCOUNT_NAME, TestResources::accountName());        
-        $config->setProperty(QueueSettings::URI, $uri);
-        
-        // Test
-        $queueWrapper = QueueService::create($config);
-        
-        // Assert
-        $this->assertInstanceOf('PEAR2\\WindowsAzure\\Services\\Queue\\IQueue', $queueWrapper);
-    }
+    * Adds new filter to proxy object and returns new BlobRestProxy with
+    * that filter.
+    *
+    * @param PEAR2\WindowsAzure\Core\IServiceFilter $filter Filter to add for 
+    * the pipeline.
+    * 
+    * @return mix.
+    */
+    public function withFilter($filter);
 }
 
 ?>

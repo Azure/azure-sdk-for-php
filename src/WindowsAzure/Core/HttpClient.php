@@ -84,7 +84,6 @@ class HttpClient implements IHttpClient
                 )
         );
 
-        $this->setHeader(Resources::X_MS_VERSION, Resources::API_VERSION);
         $this->setHeader('user-agent', null);
         
         $this->_requestUrl          = null;

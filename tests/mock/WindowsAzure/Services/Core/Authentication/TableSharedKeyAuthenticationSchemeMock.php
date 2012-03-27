@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Implementation of class StorageAuthenticationSchemeMock.
+ * Implementation of class TableSharedKeyAuthenticationSchemeMock.
  *
  * PHP version 5
  *
@@ -24,10 +24,10 @@
  */
  
 namespace PEAR2\Tests\Mock\WindowsAzure\Services\Core\Authentication;
-use PEAR2\WindowsAzure\Services\Core\Authentication\StorageAuthenticationScheme;
+use PEAR2\WindowsAzure\Services\Core\Authentication\TableSharedKeyAuthenticationScheme;
 
 /**
- * Mock class to wrap StorageAuthenticationScheme class.
+ * Mock class to wrap SharedKeyAuthenticationScheme class.
  *
  * @package    WindowsAzure-sdk-for-php
  * @author     Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
@@ -36,47 +36,17 @@ use PEAR2\WindowsAzure\Services\Core\Authentication\StorageAuthenticationScheme;
  * @version    Release: @package_version@
  * @link       http://pear.php.net/package/azure-sdk-for-php
  */
-class StorageAuthenticationSchemeMock extends StorageAuthenticationScheme
+class TableSharedKeyAuthenticationSchemeMock extends TableSharedKeyAuthenticationScheme
 {
-    public function __construct($accountName, $accountKey)
-    {
-        parent::__construct($accountName, $accountKey);
-    }
-
-    public function computeCanonicalizedHeadersMock($headers)
-    {
-        return parent::computeCanonicalizedHeaders($headers);
-    }
-
-    public function computeCanonicalizedResourceMock($url, $queryParams)
-    {
-        return parent::computeCanonicalizedResource($url, $queryParams);
-    }
-    
-    public function computeCanonicalizedResourceForTableMock($url, $queryParams)
-    {
-        return parent::computeCanonicalizedResourceForTable($url, $queryParams);
-    }
-
-    public function getAccountName()
-    {
-        return $this->accountName;
-    }
-
-    public function getAccountKey()
-    {
-        return $this->accountKey;
-    }
-
-    protected function computeSignature($headers, $url, $queryParams, $httpMethod) 
-    {
-        // Do nothing
-    }
-
-    public function getAuthorizationHeader($headers, $url, $queryParams, $httpMethod)
-    {
-        // Do nothing
-    }
+  public function getIncludedHeaders()
+  {
+    return $this->includedHeaders;
+  }
+  
+  public function computeSignatureMock($headers, $url, $queryParams, $httpMethod)
+  {
+    return parent::computeSignature($headers, $url, $queryParams, $httpMethod);
+  }
 }
 
 ?>

@@ -15,13 +15,14 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   PEAR2\Tests\Unit\WindowsAzure
+ * @package   PEAR2\Tests\Unit\WindowsAzure\Services\Queue\Models
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
 
+namespace PEAR2\Tests\Unit\WindowsAzure\Services\Queue\Models;
 use PEAR2\WindowsAzure\Services\Queue\Models\Queue;
 use PEAR2\Tests\Framework\TestResources;
 
@@ -29,14 +30,14 @@ use PEAR2\Tests\Framework\TestResources;
  * Unit tests for class Queue
  *
  * @category  Microsoft
- * @package   PEAR2\Tests\Unit\WindowsAzure
+ * @package   PEAR2\Tests\Unit\WindowsAzure\Services\Queue\Models
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @version   Release: @package_version@
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
-class QueueTest extends PHPUnit_Framework_TestCase
+class QueueTest extends \PHPUnit_Framework_TestCase
 {
     /**
      * @covers PEAR2\WindowsAzure\Services\Queue\Models\Queue::__construct
