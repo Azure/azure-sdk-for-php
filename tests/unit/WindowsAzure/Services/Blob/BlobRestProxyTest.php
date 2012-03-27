@@ -1115,6 +1115,56 @@ class BlobRestProxyTest extends BlobRestProxyTestBase
         $result = $this->wrapper->listBlobs($name);
         $this->assertCount(1, $result->getBlobs());
     }
+    
+    /**
+     * @covers PEAR2\WindowsAzure\Services\Blob\BlobRestProxy::listBlobBlocks
+     * @covers PEAR2\WindowsAzure\Services\Blob\Models\ListBlobBlocksResult::create
+     * @covers PEAR2\WindowsAzure\Services\Blob\Models\ListBlobBlocksResult::_getEntries
+     */
+    public function testListBlobBlocks()
+    {
+        // Setup
+        $name = 'listblobblocks';
+        $blob = 'myblob';
+        $id1 = 'AAAAAA==';
+        $id2 = 'ANAAAA==';
+        $this->createContainer($name);
+        $this->wrapper->createBlobBlock($name, $blob, $id1, 'Hello world');
+        $this->wrapper->createBlobBlock($name, $blob, $id2, 'Hello world');
+        
+        // Test
+        $result = $this->wrapper->listBlobBlocks($name, $blob);
+        
+        // Assert
+        $this->assertNull($result->getEtag());
+        $this->assertEquals(0, $result->getContentLength());
+        $this->assertCount(2, $result->getUncommittedBlock());
+        $this->assertCount(0, $result->getCommittedBlock());
+    }
+    
+    /**
+     * @covers PEAR2\WindowsAzure\Services\Blob\BlobRestProxy::listBlobBlocks
+     * @covers PEAR2\WindowsAzure\Services\Blob\Models\ListBlobBlocksResult::create
+     * @covers PEAR2\WindowsAzure\Services\Blob\Models\ListBlobBlocksResult::_getEntries
+     */
+    public function testListBlobBlocksEmpty()
+    {
+        // Setup
+        $name = 'listblobblocksempty';
+        $blob = 'myblob';
+        $content = 'Hello world';
+        $this->createContainer($name);
+        $this->wrapper->createBlockBlob($name, $blob, $content);
+        
+        // Test
+        $result = $this->wrapper->listBlobBlocks($name, $blob);
+        
+        // Assert
+        $this->assertNotNull($result->getEtag());
+        $this->assertEquals(strlen($content), $result->getContentLength());
+        $this->assertCount(0, $result->getUncommittedBlock());
+        $this->assertCount(0, $result->getCommittedBlock());
+    }
 }
 
 ?>
