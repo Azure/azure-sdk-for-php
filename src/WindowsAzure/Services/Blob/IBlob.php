@@ -411,13 +411,13 @@ interface IBlob
     * 
     * @param string                           $container name of the container
     * @param string                           $blob      name of the blob
-    * @param Models\CreateBlobSnapshotOptions $options   optional parameters
+    * @param Models\SnapshotBlobOptions $options   optional parameters
     * 
-    * @return Models\CreateBlobSnapshotResult
+    * @return Models\BlobSnapshotBlobResult
     * 
     * @see http://msdn.microsoft.com/en-us/library/windowsazure/ee691971.aspx
     */
-    public function createBlobSnapshot($container, $blob, $options = null);
+    public function SnapshotBlob($container, $blob, $options = null);
 
     /**
     * Copies a source blob to a destination blob within the same storage account.
