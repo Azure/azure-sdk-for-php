@@ -37,7 +37,140 @@ namespace PEAR2\WindowsAzure\Services\Table\Models;
  */
 class Query
 {
+    /**
+     * @var array
+     */
+    private $_selectFields;
     
+    /**
+     * @var string
+     */
+    private $_from;
+    
+    /**
+     * @var Filters\Filter
+     */
+    private $_filter;
+    
+    /**
+     * @var array
+     */
+    private $_orderByFields;
+    
+    /**
+     * @var integer
+     */
+    private $_top;
+    
+    /**
+     * Gets from.
+     *
+     * @return string.
+     */
+    public function getFrom()
+    {
+        return $this->_from;
+    }
+
+    /**
+     * Sets from.
+     *
+     * @param string $from value.
+     * 
+     * @return none.
+     */
+    public function setFrom($from)
+    {
+        $this->_from = $from;
+    }
+    
+    /**
+     * Gets filter.
+     *
+     * @return Filters\Filter
+     */
+    public function getFilter()
+    {
+        return $this->_filter;
+    }
+
+    /**
+     * Sets filter.
+     *
+     * @param Filters\Filter $filter value.
+     * 
+     * @return none.
+     */
+    public function setFilter($filter)
+    {
+        $this->_filter = $filter;
+    }
+    
+    /**
+     * Gets top.
+     *
+     * @return integer.
+     */
+    public function getTop()
+    {
+        return $this->_top;
+    }
+
+    /**
+     * Sets top.
+     *
+     * @param integer $top value.
+     * 
+     * @return none.
+     */
+    public function setTop($top)
+    {
+        $this->_top = $top;
+    }
+    
+    /**
+     * Gets orderByFields.
+     *
+     * @return array.
+     */
+    public function getOrderByFields()
+    {
+        return $this->_orderByFields;
+    }
+
+    /**
+     * Sets orderByFields.
+     *
+     * @param array $orderByFields value.
+     * 
+     * @return none.
+     */
+    public function setOrderByFields($orderByFields)
+    {
+        $this->_orderByFields = $orderByFields;
+    }
+    
+    /**
+     * Gets selectFields.
+     *
+     * @return array.
+     */
+    public function getSelectFields()
+    {
+        return $this->_selectFields;
+    }
+
+    /**
+     * Sets selectFields.
+     *
+     * @param array $selectFields value.
+     * 
+     * @return none.
+     */
+    public function setSelectFields($selectFields)
+    {
+        $this->_selectFields = $selectFields;
+    }
 }
 
 ?>
