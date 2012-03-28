@@ -15,62 +15,49 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   PEAR2\Tests\Unit\WindowsAzure\Services\Core\Filters
+ * @package   PEAR2\Tests\Unit\WindowsAzure\Services\Table
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
 
-namespace PEAR2\Tests\Unit\WindowsAzure\Services\Core\Filters;
-use PEAR2\WindowsAzure\Services\Core\Filters\DateFilter;
-use PEAR2\WindowsAzure\Core\HttpClient;
-use PEAR2\WindowsAzure\Resources;
+namespace PEAR2\Tests\Unit\WindowsAzure\Services\Table;
+use PEAR2\WindowsAzure\Services\Table\TableService;
+use PEAR2\WindowsAzure\Services\Core\Configuration;
+use PEAR2\Tests\Framework\TestResources;
+use PEAR2\WindowsAzure\Services\Table\TableSettings;
 
 /**
- * Unit tests for class DateFilter
+ * Unit tests for class TableService
  *
  * @category  Microsoft
- * @package   PEAR2\Tests\Unit\WindowsAzure\Services\Core\Filters
+ * @package   PEAR2\Tests\Unit\WindowsAzure\Services\Table
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @version   Release: @package_version@
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
-class DateFilterTest extends \PHPUnit_Framework_TestCase
+class TableServiceTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @covers PEAR2\WindowsAzure\Services\Core\Filters\DateFilter::handleRequest
+     * @covers PEAR2\WindowsAzure\Services\Table\TableService::create
      */
-    public function testHandleRequest()
+    public function testCreateWithConfig()
     {
         // Setup
-        $channel = new HttpClient();
-        $filer = new DateFilter();
+        $uri = 'http://' . TestResources::accountName() . '.table.core.windows.net';
+        $config = new Configuration();
+        $config->setProperty(TableSettings::ACCOUNT_KEY, TestResources::accountKey());
+        $config->setProperty(TableSettings::ACCOUNT_NAME, TestResources::accountName());        
+        $config->setProperty(TableSettings::URI, $uri);
         
         // Test
-        $request = $filer->handleRequest($channel);
+        $tableWrapper = TableService::create($config);
         
         // Assert
-        $this->assertArrayHasKey(Resources::DATE, $request->getHeaders());
-    }
-    
-    /**
-     * @covers PEAR2\WindowsAzure\Services\Core\Filters\DateFilter::handleResponse
-     */
-    public function testHandleResponse()
-    {
-        // Setup
-        $channel = new HttpClient();
-        $response = null;
-        $filer = new DateFilter();
-        
-        // Test
-        $response = $filer->handleResponse($channel, $response);
-        
-        // Assert
-        $this->assertNull($response);
+        $this->assertInstanceOf('PEAR2\WindowsAzure\Services\Table\ITable', $tableWrapper);
     }
 }
 

@@ -68,8 +68,11 @@ spl_autoload_register(
             'pear2\\windowsazure\\services\\blob\\models\\signedidentifier' => '/WindowsAzure/Services/Blob/Models/SignedIdentifier.php',
             'pear2\\windowsazure\\services\\core\\authentication\\sharedkeyauthenticationscheme' => '/WindowsAzure/Services/Core/Authentication/SharedKeyAuthenticationScheme.php',
             'pear2\\windowsazure\\services\\core\\authentication\\storageauthenticationscheme' => '/WindowsAzure/Services/Core/Authentication/StorageAuthenticationScheme.php',
+            'pear2\\windowsazure\\services\\core\\authentication\\tablesharedkeyauthenticationscheme' => '/WindowsAzure/Services/Core/Authentication/TableSharedKeyAuthenticationScheme.php',
             'pear2\\windowsazure\\services\\core\\configuration' => '/WindowsAzure/Services/Core/Configuration.php',
+            'pear2\\windowsazure\\services\\core\\filterableservice' => '/WindowsAzure/Services/Core/FilterableService.php',
             'pear2\\windowsazure\\services\\core\\filters\\datefilter' => '/WindowsAzure/Services/Core/Filters/DateFilter.php',
+            'pear2\\windowsazure\\services\\core\\filters\\headersfilter' => '/WindowsAzure/Services/Core/Filters/HeadersFilter.php',
             'pear2\\windowsazure\\services\\core\\filters\\sharedkeyfilter' => '/WindowsAzure/Services/Core/Filters/SharedKeyFilter.php',
             'pear2\\windowsazure\\services\\core\\iservicebuilder' => '/WindowsAzure/Services/Core/IServiceBuilder.php',
             'pear2\\windowsazure\\services\\core\\models\\getservicepropertiesresult' => '/WindowsAzure/Services/Core/Models/GetServicePropertiesResult.php',
@@ -97,6 +100,11 @@ spl_autoload_register(
             'pear2\\windowsazure\\services\\queue\\queuerestproxy' => '/WindowsAzure/Services/Queue/QueueRestProxy.php',
             'pear2\\windowsazure\\services\\queue\\queueservice' => '/WindowsAzure/Services/Queue/QueueService.php',
             'pear2\\windowsazure\\services\\queue\\queuesettings' => '/WindowsAzure/Services/Queue/QueueSettings.php',
+            'pear2\\windowsazure\\services\\table\\itable' => '/WindowsAzure/Services/Table/ITable.php',
+            'pear2\\windowsazure\\services\\table\\models\\tableserviceoptions' => '/WindowsAzure/Services/Table/Models/TableServiceOptions.php',
+            'pear2\\windowsazure\\services\\table\\tablerestproxy' => '/WindowsAzure/Services/Table/TableRestProxy.php',
+            'pear2\\windowsazure\\services\\table\\tableservice' => '/WindowsAzure/Services/Table/TableService.php',
+            'pear2\\windowsazure\\services\\table\\tablesettings' => '/WindowsAzure/Services/Table/TableSettings.php',
             'pear2\\windowsazure\\utilities' => '/WindowsAzure/Utilities.php',
             'pear2\\windowsazure\\validate' => '/WindowsAzure/Validate.php'
           );

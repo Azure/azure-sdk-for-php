@@ -15,7 +15,7 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   PEAR2\Tests\Unit\WindowsAzure
+ * @package   PEAR2\Tests\Unit\WindowsAzure\Services\Core
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
@@ -33,14 +33,14 @@ use PEAR2\WindowsAzure\Services\Blob\Models\AccessConditionHeaderType;
  * Unit tests for class ServiceRestProxy
  *
  * @category  Microsoft
- * @package   PEAR2\Tests\Unit\WindowsAzure
+ * @package   PEAR2\Tests\Unit\WindowsAzure\Services\Core
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @version   Release: @package_version@
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
-class ServiceRestProxyTest extends PHPUnit_Framework_TestCase
+class ServiceRestProxyTest extends \PHPUnit_Framework_TestCase
 {
     /**
      * @covers PEAR2\WindowsAzure\Services\Core\ServiceRestProxy::__construct

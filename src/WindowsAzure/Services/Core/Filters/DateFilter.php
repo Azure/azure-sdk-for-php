@@ -49,7 +49,7 @@ class DateFilter implements IServiceFilter
     public function handleRequest($request) 
     {
         $date = gmdate(Resources::AZURE_DATE_FORMAT, time());
-        $request->setHeader(Resources::X_MS_DATE, $date);
+        $request->setHeader(Resources::DATE, $date);
 
         return $request;
     }
