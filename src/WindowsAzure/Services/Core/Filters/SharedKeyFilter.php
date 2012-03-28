@@ -26,7 +26,7 @@ namespace PEAR2\WindowsAzure\Services\Core\Filters;
 use PEAR2\WindowsAzure\Resources;
 use PEAR2\WindowsAzure\Core\IServiceFilter;
 use PEAR2\WindowsAzure\Services\Core\Authentication\SharedKeyAuthenticationScheme;
-use PEAR2\WindowsAzure\Services\Core\Authentication\TableSharedKeyAuthenticationScheme;
+use PEAR2\WindowsAzure\Services\Core\Authentication\TableSharedKeyLiteAuthenticationScheme;
 use PEAR2\WindowsAzure\Core\InvalidArgumentTypeException;
 
 /**
@@ -65,7 +65,7 @@ class SharedKeyFilter implements IServiceFilter
             );
             break;
         case Resources::TABLE_TYPE_NAME:
-            $this->_sharedKeyAuthentication = new TableSharedKeyAuthenticationScheme(
+            $this->_sharedKeyAuthentication = new TableSharedKeyLiteAuthenticationScheme(
                 $accountName, $accountKey
             );
             break;

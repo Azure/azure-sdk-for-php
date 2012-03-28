@@ -68,7 +68,7 @@ spl_autoload_register(
             'pear2\\windowsazure\\services\\blob\\models\\signedidentifier' => '/WindowsAzure/Services/Blob/Models/SignedIdentifier.php',
             'pear2\\windowsazure\\services\\core\\authentication\\sharedkeyauthenticationscheme' => '/WindowsAzure/Services/Core/Authentication/SharedKeyAuthenticationScheme.php',
             'pear2\\windowsazure\\services\\core\\authentication\\storageauthenticationscheme' => '/WindowsAzure/Services/Core/Authentication/StorageAuthenticationScheme.php',
-            'pear2\\windowsazure\\services\\core\\authentication\\tablesharedkeyauthenticationscheme' => '/WindowsAzure/Services/Core/Authentication/TableSharedKeyAuthenticationScheme.php',
+            'pear2\\windowsazure\\services\\core\\authentication\\tablesharedkeyliteauthenticationscheme' => '/WindowsAzure/Services/Core/Authentication/TableSharedKeyLiteAuthenticationScheme.php',
             'pear2\\windowsazure\\services\\core\\configuration' => '/WindowsAzure/Services/Core/Configuration.php',
             'pear2\\windowsazure\\services\\core\\filterableservice' => '/WindowsAzure/Services/Core/FilterableService.php',
             'pear2\\windowsazure\\services\\core\\filters\\datefilter' => '/WindowsAzure/Services/Core/Filters/DateFilter.php',
@@ -105,6 +105,8 @@ spl_autoload_register(
             'pear2\\windowsazure\\services\\table\\tablerestproxy' => '/WindowsAzure/Services/Table/TableRestProxy.php',
             'pear2\\windowsazure\\services\\table\\tableservice' => '/WindowsAzure/Services/Table/TableService.php',
             'pear2\\windowsazure\\services\\table\\tablesettings' => '/WindowsAzure/Services/Table/TableSettings.php',
+            'pear2\\windowsazure\\services\\table\\utilities\\iatomreaderwriter' => '/WindowsAzure/Services/Table/Utilities/IAtomReaderWriter.php',
+            'pear2\\windowsazure\\services\\table\\utilities\\manualatomreaderwriter' => '/WindowsAzure/Services/Table/Utilities/ManualAtomReaderWriter.php',
             'pear2\\windowsazure\\utilities' => '/WindowsAzure/Utilities.php',
             'pear2\\windowsazure\\validate' => '/WindowsAzure/Validate.php'
           );

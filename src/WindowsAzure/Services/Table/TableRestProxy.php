@@ -25,6 +25,7 @@
 namespace PEAR2\WindowsAzure\Services\Table;
 use PEAR2\WindowsAzure\Resources;
 use PEAR2\WindowsAzure\Utilities;
+use PEAR2\WindowsAzure\Validate;
 use PEAR2\WindowsAzure\Services\Core\ServiceRestProxy;
 use PEAR2\WindowsAzure\Services\Table\Models\TableServiceOptions;
 use PEAR2\WindowsAzure\Services\Core\Models\GetServicePropertiesResult;
@@ -43,6 +44,26 @@ use PEAR2\WindowsAzure\Services\Core\Models\GetServicePropertiesResult;
  */
 class TableRestProxy extends ServiceRestProxy implements ITable
 {
+    /**
+     * @var IAtomReaderWriter
+     */
+    private $atomSerializer;
+    
+    /**
+     * Constructor
+     * 
+     * @param PEAR2\WindowsAzure\Core\IHttpClient $channel       http client channel
+     * @param string                              $uri            storage account uri
+     * @param Table\Utilities\IAtomReaderWriter   $atomSerializer serializer
+     * 
+     * @return TableRestProxy
+     */
+    public function __construct($channel, $uri, $atomSerializer)
+    {
+        parent::__construct($channel, $uri);
+        $this->atomSerializer = $atomSerializer;
+    }
+    
     /**
     * Gets the properties of the Table service.
     * 
@@ -132,7 +153,24 @@ class TableRestProxy extends ServiceRestProxy implements ITable
      */
     public function createTable($table, $options = null)
     {
-        throw new \Exception(Resources::NOT_IMPLEMENTED_MSG);
+        Validate::isString($table);
+        Validate::notNullOrEmpty($table);
+        
+        $method      = \HTTP_Request2::METHOD_POST;
+        $headers     = array();
+        $queryParams = array();
+        $statusCode  = Resources::STATUS_CREATED;
+        $path        = 'Tables';
+        $body        = $this->atomSerializer->getTable($table);
+        
+        if (!isset($options)) {
+            $options = new TableServiceOptions();
+        }
+        
+        $queryParams[Resources::QP_TIMEOUT] = strval($options->getTimeout());
+        $headers[Resources::CONTENT_TYPE]   = Resources::XML_ATOM_CONTENT_TYPE;
+        
+        $this->send($method, $headers, $queryParams, $path, $statusCode, $body);
     }
     
     /**
@@ -147,7 +185,23 @@ class TableRestProxy extends ServiceRestProxy implements ITable
      */
     public function deleteTable($table, $options = null)
     {
-        throw new \Exception(Resources::NOT_IMPLEMENTED_MSG);
+        Validate::isString($table);
+        Validate::notNullOrEmpty($table);
+        
+        $method      = \HTTP_Request2::METHOD_DELETE;
+        $headers     = array();
+        $queryParams = array();
+        $statusCode  = Resources::STATUS_NO_CONTENT;
+        $path        = "Tables('$table')";
+        
+        if (!isset($options)) {
+            $options = new TableServiceOptions();
+        }
+        
+        $queryParams[Resources::QP_TIMEOUT] = strval($options->getTimeout());
+        $headers[Resources::CONTENT_TYPE]   = Resources::XML_ATOM_CONTENT_TYPE;
+        
+        $this->send($method, $headers, $queryParams, $path, $statusCode);
     }
     
     /**

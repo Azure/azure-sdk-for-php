@@ -89,6 +89,8 @@ class Resources
     const RANGE                            = 'range';
     const DATA_SERVICE_VERSION             = 'dataserviceversion';
     const MAX_DATA_SERVICE_VERSION         = 'maxdataserviceversion';
+    const ACCEPT_HEADER                    = 'accept';
+    const ACCEPT_CHARSET                   = 'accept-charset';
 
     // Type
     const QUEUE_TYPE_NAME = 'IQueue';
@@ -106,10 +108,12 @@ class Resources
     const EMULATOR_QUEUE_URI = '127.0.0.1:10001';
     const EMULATOR_TABLE_URI = '127.0.0.1:10002';
 
-    // Versioning
+    // Header values
     const API_VERSION                    = '2011-08-18';
     const DATA_SERVICE_VERSION_VALUE     = '1.0;NetFx';
     const MAX_DATA_SERVICE_VERSION_VALUE = '1.0;NetFx';
+    const ACCEPT_HEADER_VALUE            = 'application/atom+xml,application/xml';
+    const ACCEPT_CHARSET_VALUE           = 'utf-8';
 
     // Query parameter names
     const QP_PREFIX      = 'Prefix';
@@ -125,8 +129,9 @@ class Resources
     const QP_SNAPSHOT    = 'snapshot';
     
     // Request body content types
-    const XML_CONTENT_TYPE = 'application/x-www-form-urlencoded';
-    const BINARY_FILE_TYPE = 'application/octet-stream';
+    const XML_CONTENT_TYPE       = 'application/x-www-form-urlencoded';
+    const BINARY_FILE_TYPE       = 'application/octet-stream';
+    const XML_ATOM_CONTENT_TYPE  = 'application/atom+xml';
     
     // Status Codes
     const STATUS_OK         = 200;

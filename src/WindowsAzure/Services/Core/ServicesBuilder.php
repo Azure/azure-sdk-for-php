@@ -37,6 +37,7 @@ use PEAR2\WindowsAzure\Services\Blob\BlobRestProxy;
 use PEAR2\WindowsAzure\Services\Blob\BlobSettings;
 use PEAR2\WindowsAzure\Services\Table\TableRestProxy;
 use PEAR2\WindowsAzure\Services\Table\TableSettings;
+use PEAR2\WindowsAzure\Services\Table\Utilities\ManualAtomReaderWriter;
 
 /**
  * Builds azure service objects.
@@ -71,10 +72,15 @@ class ServicesBuilder implements IServiceBuilder
         case Resources::TABLE_TYPE_NAME:
             $currentVersion = Resources::DATA_SERVICE_VERSION_VALUE;
             $maxVersion     = Resources::MAX_DATA_SERVICE_VERSION_VALUE;
+            $accept         = Resources::ACCEPT_HEADER_VALUE;
+            $acceptCharset  = Resources::ACCEPT_CHARSET_VALUE;
             
             $headers[Resources::X_MS_VERSION]             = Resources::API_VERSION;
             $headers[Resources::DATA_SERVICE_VERSION]     = $currentVersion;
             $headers[Resources::MAX_DATA_SERVICE_VERSION] = $maxVersion;
+            $headers[Resources::MAX_DATA_SERVICE_VERSION] = $maxVersion;
+            $headers[Resources::ACCEPT_HEADER]            = $accept;
+            $headers[Resources::ACCEPT_CHARSET]           = $acceptCharset;
             break;
 
         default:
@@ -171,9 +177,10 @@ class ServicesBuilder implements IServiceBuilder
     private static function _buildTable($config)
     {
         $httpClient = new HttpClient();
+        $serialize  = new ManualAtomReaderWriter();
 
         $tableWrapper = new TableRestProxy(
-            $httpClient, $config->getProperty(TableSettings::URI)
+            $httpClient, $config->getProperty(TableSettings::URI), $serialize
         );
 
         // Adding headers filter

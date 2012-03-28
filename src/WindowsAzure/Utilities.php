@@ -180,6 +180,26 @@ class Utilities
         return $clean;
     }
 
+    /**
+	 * Generate ISO 8601 compliant date string in UTC time zone
+	 * 
+	 * @param int $timestamp
+     * 
+	 * @return string
+	 */
+	public static function isoDate($timestamp = null)
+	{        
+	    $tz = @date_default_timezone_get();
+	    @date_default_timezone_set('UTC');
+	    
+	    if (is_null($timestamp)) {
+	        $timestamp = time();
+	    }
+	        
+	    $returnValue = str_replace('+00:00', '.0000000Z', @date('c', $timestamp));
+	    @date_default_timezone_set($tz);
+	    return $returnValue;
+	}
 }
 
 ?>

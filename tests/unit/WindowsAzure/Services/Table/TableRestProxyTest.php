@@ -78,6 +78,37 @@ class TableRestProxyTest extends TableRestProxyTestBase
         // Assert
         $this->assertEquals($expected->toXml(), $actual->getValue()->toXml());
     }
+    
+    /**
+     * @covers PEAR2\WindowsAzure\Services\Table\TableRestProxy::createTable
+     */
+    public function testCreateTable()
+    {
+        // Setup
+        $name = 'createtable';
+        
+        // Test
+        $this->wrapper->createTable($name);
+        
+        // Assert
+        $this->assertEquals(1, 1);
+    }
+    
+    /**
+     * @covers PEAR2\WindowsAzure\Services\Table\TableRestProxy::deleteTable
+     */
+    public function testDeleteTable()
+    {
+        // Setup
+        $name = 'deletetable';
+        $this->wrapper->createTable($name);
+        
+        // Test
+        $this->wrapper->deleteTable($name);
+        
+        // Assert
+        $this->assertEquals(1, 1);
+    }
 }
 
 ?>
