@@ -259,7 +259,7 @@ class HttpClientTest extends PHPUnit_Framework_TestCase
     /**
      * @covers PEAR2\WindowsAzure\Core\HttpClient::send
      */
-    public function wtestSendWithOneFilter()
+    public function testSendWithOneFilter()
     {
         // Setup
         $channel = new HttpClient();
@@ -282,7 +282,7 @@ class HttpClientTest extends PHPUnit_Framework_TestCase
     /**
      * @covers PEAR2\WindowsAzure\Core\HttpClient::send
      */
-    public function wtestSendWithMultipleFilters()
+    public function testSendWithMultipleFilters()
     {
         // Setup
         $channel = new HttpClient();
