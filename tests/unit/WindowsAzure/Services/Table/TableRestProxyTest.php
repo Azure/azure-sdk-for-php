@@ -30,6 +30,8 @@ use PEAR2\Tests\Framework\TestResources;
 use PEAR2\WindowsAzure\Resources;
 use PEAR2\WindowsAzure\Services\Core\Models\ServiceProperties;
 use PEAR2\WindowsAzure\Services\Table\Models\QueryTablesOptions;
+use PEAR2\WindowsAzure\Services\Table\Models\Query;
+use PEAR2\WindowsAzure\Services\Table\Models\Filters\Filter;
 
 /**
  * Unit tests for class TableRestProxy

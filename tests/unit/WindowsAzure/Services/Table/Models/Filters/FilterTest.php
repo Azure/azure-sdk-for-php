@@ -1,0 +1,210 @@
+<?php
+
+/**
+ * LICENSE: Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ * 
+ * PHP version 5
+ *
+ * @category  Microsoft
+ * @package   PEAR2\Tests\Unit\WindowsAzure\Services\Table\Models\Filters
+ * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
+ * @copyright 2012 Microsoft Corporation
+ * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
+ * @link      http://pear.php.net/package/azure-sdk-for-php
+ */
+
+namespace PEAR2\Tests\Unit\WindowsAzure\Services\Table\Models\Filters;
+use PEAR2\WindowsAzure\Services\Table\Models\Filters\Filter;
+
+/**
+ * Unit tests for class Filter
+ *
+ * @category  Microsoft
+ * @package   PEAR2\Tests\Unit\WindowsAzure\Services\Table\Models\Filters
+ * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
+ * @copyright 2012 Microsoft Corporation
+ * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
+ * @version   Release: @package_version@
+ * @link      http://pear.php.net/package/azure-sdk-for-php
+ */
+class FilterTest extends \PHPUnit_Framework_TestCase
+{
+    /**
+     * @covers PEAR2\WindowsAzure\Services\Table\Models\Filters\Filter::applyAnd
+     * @covers PEAR2\WindowsAzure\Services\Table\Models\Filters\Filter::applyLitteral
+     * @covers PEAR2\WindowsAzure\Services\Table\Models\Filters\Filter::applyRawString
+     */
+    public function testApplyAnd()
+    {
+        // Setup
+        $left = Filter::applyLitteral('test');
+        $right = Filter::applyRawString('raw string');
+        
+        // Test
+        $actual = Filter::applyAnd($left, $right);
+        
+        // Assert
+        $this->assertEquals($left, $actual->getLeft());
+        $this->assertEquals($right, $actual->getRight());
+    }
+    
+    /**
+     * @covers PEAR2\WindowsAzure\Services\Table\Models\Filters\Filter::applyNot
+     * @covers PEAR2\WindowsAzure\Services\Table\Models\Filters\Filter::applyConstant
+     */
+    public function testApplyNot()
+    {
+        // Setup
+        $operand = Filter::applyConstant('test');
+        
+        // Test
+        $actual = Filter::applyNot($operand);
+        
+        // Assert
+        $this->assertEquals($operand, $actual->getOperand());
+    }
+    
+    /**
+     * @covers PEAR2\WindowsAzure\Services\Table\Models\Filters\Filter::applyOr
+     * @covers PEAR2\WindowsAzure\Services\Table\Models\Filters\Filter::applyLitteral
+     * @covers PEAR2\WindowsAzure\Services\Table\Models\Filters\Filter::applyRawString
+     */
+    public function testApplyOr()
+    {
+        // Setup
+        $left = Filter::applyLitteral('test');
+        $right = Filter::applyRawString('raw string');
+        
+        // Test
+        $actual = Filter::applyOr($left, $right);
+        
+        // Assert
+        $this->assertEquals($left, $actual->getLeft());
+        $this->assertEquals($right, $actual->getRight());
+    }
+    
+    /**
+     * @covers PEAR2\WindowsAzure\Services\Table\Models\Filters\Filter::applyEq
+     * @covers PEAR2\WindowsAzure\Services\Table\Models\Filters\Filter::applyLitteral
+     * @covers PEAR2\WindowsAzure\Services\Table\Models\Filters\Filter::applyRawString
+     */
+    public function testApplyEq()
+    {
+        // Setup
+        $left = Filter::applyLitteral('test');
+        $right = Filter::applyRawString('raw string');
+        
+        // Test
+        $actual = Filter::applyEq($left, $right);
+        
+        // Assert
+        $this->assertEquals($left, $actual->getLeft());
+        $this->assertEquals($right, $actual->getRight());
+    }
+    
+    /**
+     * @covers PEAR2\WindowsAzure\Services\Table\Models\Filters\Filter::applyNe
+     * @covers PEAR2\WindowsAzure\Services\Table\Models\Filters\Filter::applyLitteral
+     * @covers PEAR2\WindowsAzure\Services\Table\Models\Filters\Filter::applyRawString
+     */
+    public function testApplyNe()
+    {
+        // Setup
+        $left = Filter::applyLitteral('test');
+        $right = Filter::applyRawString('raw string');
+        
+        // Test
+        $actual = Filter::applyNe($left, $right);
+        
+        // Assert
+        $this->assertEquals($left, $actual->getLeft());
+        $this->assertEquals($right, $actual->getRight());
+    }
+    
+    /**
+     * @covers PEAR2\WindowsAzure\Services\Table\Models\Filters\Filter::applyGe
+     * @covers PEAR2\WindowsAzure\Services\Table\Models\Filters\Filter::applyLitteral
+     * @covers PEAR2\WindowsAzure\Services\Table\Models\Filters\Filter::applyRawString
+     */
+    public function testApplyGe()
+    {
+        // Setup
+        $left = Filter::applyLitteral('test');
+        $right = Filter::applyRawString('raw string');
+        
+        // Test
+        $actual = Filter::applyGe($left, $right);
+        
+        // Assert
+        $this->assertEquals($left, $actual->getLeft());
+        $this->assertEquals($right, $actual->getRight());
+    }
+    
+    /**
+     * @covers PEAR2\WindowsAzure\Services\Table\Models\Filters\Filter::applyGt
+     * @covers PEAR2\WindowsAzure\Services\Table\Models\Filters\Filter::applyLitteral
+     * @covers PEAR2\WindowsAzure\Services\Table\Models\Filters\Filter::applyRawString
+     */
+    public function testApplyGt()
+    {
+        // Setup
+        $left = Filter::applyLitteral('test');
+        $right = Filter::applyRawString('raw string');
+        
+        // Test
+        $actual = Filter::applyGt($left, $right);
+        
+        // Assert
+        $this->assertEquals($left, $actual->getLeft());
+        $this->assertEquals($right, $actual->getRight());
+    }
+    
+    /**
+     * @covers PEAR2\WindowsAzure\Services\Table\Models\Filters\Filter::applyLt
+     * @covers PEAR2\WindowsAzure\Services\Table\Models\Filters\Filter::applyLitteral
+     * @covers PEAR2\WindowsAzure\Services\Table\Models\Filters\Filter::applyRawString
+     */
+    public function testApplyLt()
+    {
+        // Setup
+        $left = Filter::applyLitteral('test');
+        $right = Filter::applyRawString('raw string');
+        
+        // Test
+        $actual = Filter::applyLt($left, $right);
+        
+        // Assert
+        $this->assertEquals($left, $actual->getLeft());
+        $this->assertEquals($right, $actual->getRight());
+    }
+    
+    /**
+     * @covers PEAR2\WindowsAzure\Services\Table\Models\Filters\Filter::applyLe
+     * @covers PEAR2\WindowsAzure\Services\Table\Models\Filters\Filter::applyLitteral
+     * @covers PEAR2\WindowsAzure\Services\Table\Models\Filters\Filter::applyRawString
+     */
+    public function testApplyLe()
+    {
+        // Setup
+        $left = Filter::applyLitteral('test');
+        $right = Filter::applyRawString('raw string');
+        
+        // Test
+        $actual = Filter::applyLe($left, $right);
+        
+        // Assert
+        $this->assertEquals($left, $actual->getLeft());
+        $this->assertEquals($right, $actual->getRight());
+    }
+}
+
+?>

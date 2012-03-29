@@ -137,6 +137,18 @@ class Query
     {
         return $this->_orderByFields;
     }
+    
+    /**
+     * Adds a field to orderBy fields.
+     * 
+     * @param string $field The value of the field.
+     * 
+     * @return none.
+     */
+    public function addOrderByField($field)
+    {
+        $this->_orderByFields[] = $field;
+    }
 
     /**
      * Sets orderByFields.
@@ -148,6 +160,18 @@ class Query
     public function setOrderByFields($orderByFields)
     {
         $this->_orderByFields = $orderByFields;
+    }
+    
+    /**
+     * Adds a field to select fields.
+     * 
+     * @param string $field The value of the field.
+     * 
+     * @return none.
+     */
+    public function addSelectField($field)
+    {
+        $this->_selectFields[] = $field;
     }
     
     /**

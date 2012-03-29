@@ -81,7 +81,7 @@ class Filter
      */
     public static function applyOr($left, $right)
     {
-        $filer = BinaryFilter();
+        $filer = new BinaryFilter();
         $filer->setOperator('or');
         $filer->setLeft($left);
         $filer->setRight($right);
