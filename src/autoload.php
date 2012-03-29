@@ -12,7 +12,6 @@ spl_autoload_register(
             'pear2\\windowsazure\\core\\serviceexception' => '/WindowsAzure/Core/ServiceException.php',
             'pear2\\windowsazure\\core\\url' => '/WindowsAzure/Core/Url.php',
             'pear2\\windowsazure\\core\\windowsazureutilities' => '/WindowsAzure/Core/WindowsAzureUtilities.php',
-            'pear2\\windowsazure\\logger' => '/WindowsAzure/Logger.php',
             'pear2\\windowsazure\\resources' => '/WindowsAzure/Resources.php',
             'pear2\\windowsazure\\services\\blob\\blobrestproxy' => '/WindowsAzure/Services/Blob/BlobRestProxy.php',
             'pear2\\windowsazure\\services\\blob\\blobservice' => '/WindowsAzure/Services/Blob/BlobService.php',
