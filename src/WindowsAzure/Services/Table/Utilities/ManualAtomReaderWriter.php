@@ -39,20 +39,48 @@ use PEAR2\WindowsAzure\Utilities;
 class ManualAtomReaderWriter implements IAtomReaderWriter
 {
     /**
-	 * Fill text template with variables from key/value array
-	 * 
-	 * @param string $templateText Template text
-	 * @param array  $variables Array containing key/value pairs
-	 * 
+     * Fills text template with variables from key/value array
+     * 
+     * @param string $templateText The template text
+     * @param array  $variables    The array containing key/value pairs
+     * 
      * @return string
-	 */
-	private static function _fillTemplate($templateText, $variables = array())
-	{
-	    foreach ($variables as $key => $value) {
-	        $templateText = str_replace('{tpl:' . $key . '}', $value, $templateText);
-	    }
-	    return $templateText;
-	}
+     */
+    private static function _fillTemplate($templateText, $variables = array())
+    {
+        foreach ($variables as $key => $value) {
+            $templateText = str_replace('{tpl:' . $key . '}', $value, $templateText);
+        }
+        return $templateText;
+    }
+    
+    /** 
+     * Parse result from Microsoft_Http_Response
+     *
+     * @param string $body Response from HTTP call
+     * 
+     * @return object
+     */
+    private static function _parseBody($body)
+    {
+        $xml = simplexml_load_string($body);
+
+        if ($xml !== false) {
+            // Fetch all namespaces 
+            $namespaces = array_merge(
+                $xml->getNamespaces(true), $xml->getDocNamespaces(true)
+            );
+
+            // Register all namespace prefixes
+            foreach ($namespaces as $prefix => $ns) { 
+                if ($prefix != '') {
+                    $xml->registerXPathNamespace($prefix, $ns);
+                } 
+            } 
+        }
+
+        return $xml;
+    }
     
     /**
      * Constructs XML representation for table entry
@@ -89,6 +117,37 @@ class ManualAtomReaderWriter implements IAtomReaderWriter
         );
         
         return $xml;
+    }
+    
+    /**
+     * Constructs array of tables from HTTP response body.
+     * 
+     * @param string $body The HTTP response body
+     * 
+     * @return array
+     */
+    public static function parseTableEntries($body)
+    {
+        $tables = array();
+        $result = self::_parseBody($body);
+        
+        if (!$result || !$result->entry) {
+            return array();
+        }
+        
+        $entries = null;
+        if (count($result->entry) > 1) {
+            $entries = $result->entry;
+        } else {
+            $entries = array($result->entry);
+        }
+
+        foreach ($entries as $entry) {
+            $tableName = $entry->xpath('.//m:properties/d:TableName');
+            $tables[]  = (string)$tableName[0];
+        }
+        
+        return $tables;
     }
 }
 

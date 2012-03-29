@@ -40,11 +40,20 @@ interface IAtomReaderWriter
     /**
      * Constructs XML representation for table entry
      * 
-     * @param type $name the name of the table
+     * @param type $tableName the name of the table
      * 
      * @return string
      */
     public static function getTable($tableName);
+    
+    /**
+     * Constructs array of tables from HTTP response body.
+     * 
+     * @param string $body The HTTP response body
+     * 
+     * @return array
+     */
+    public static function parseTableEntries($body);
 }
 
 ?>

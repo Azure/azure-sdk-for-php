@@ -35,7 +35,7 @@ namespace PEAR2\WindowsAzure\Services\Table\Models\Filters;
  * @version   Release: @package_version@
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
-class BinaryFilter
+class BinaryFilter extends Filter
 {
     /**
      * @var string 
@@ -52,31 +52,67 @@ class BinaryFilter
      */
     private $_right;
     
+    /**
+     * Gets operator
+     * 
+     * @return string 
+     */
     public function getOperator() 
     {
-        return $this->__operator;
+        return $this->_operator;
     }
 
+    /**
+     * Sets operator
+     * 
+     * @param string $operator value
+     * 
+     * @return none. 
+     */
     public function setOperator($operator)
     {
         $this->_operator = $operator;
     }
 
+    /**
+     * Gets left
+     * 
+     * @return Filter 
+     */
     public function getLeft()
     {
         return $this->_left;
     }
 
+    /**
+     * Sets left
+     * 
+     * @param Filter $left value
+     * 
+     * @return none 
+     */
     public function setLeft($left)
     {
         $this->_left = $left;
     }
 
+    /**
+     * Gets right
+     * 
+     * @return Filter 
+     */
     public function getRight()
     {
         return $this->_right;
     }
 
+    /**
+     * Sets right
+     * 
+     * @param Filter $right value
+     * 
+     * @return none 
+     */
     public function setRight($right)
     {
         $this->_right = $right;

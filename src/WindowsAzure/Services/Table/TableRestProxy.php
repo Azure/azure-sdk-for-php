@@ -29,6 +29,10 @@ use PEAR2\WindowsAzure\Validate;
 use PEAR2\WindowsAzure\Services\Core\ServiceRestProxy;
 use PEAR2\WindowsAzure\Services\Table\Models\TableServiceOptions;
 use PEAR2\WindowsAzure\Services\Core\Models\GetServicePropertiesResult;
+use PEAR2\WindowsAzure\Services\Table\Models\Filters;
+use PEAR2\WindowsAzure\Services\Table\Models\Filters\Filter;
+use PEAR2\WindowsAzure\Services\Table\Models\QueryTablesOptions;
+use PEAR2\WindowsAzure\Services\Table\Models\QueryTablesResult;
 
 /**
  * This class constructs HTTP requests and receive HTTP responses for table
@@ -47,12 +51,138 @@ class TableRestProxy extends ServiceRestProxy implements ITable
     /**
      * @var IAtomReaderWriter
      */
-    private $atomSerializer;
+    private $_atomSerializer;
+ 
+    /**
+     * Builds filter expression
+     * 
+     * @param Filter $filter The filter object
+     * 
+     * @return string 
+     */
+    private function _buildFilterExpression($filter)
+    {
+        $e = Resources::EMPTY_STRING;
+        $this->_buildFilterExpressionRec($filter, $e);
+        
+        return $e;
+    }
+    
+    /**
+     * Builds filter expression
+     * 
+     * @param Filter $filter The filter object
+     * @param string &$e     The filter expression
+     * 
+     * @return string
+     */
+    private function _buildFilterExpressionRec($filter, &$e)
+    {
+        if (is_null($filter)) {
+            return;
+        }
+        
+        if ($filter instanceof Filters\LitteralFilter) {
+            $e .= $filter->getLitteral();
+        } else if ($filter instanceof Filters\ConstantFilter) {
+            $e .= '\'' . $filter->getValue() . '\'';
+        } else if ($filter instanceof Filters\UnaryFilter) {
+            $e .= $filter->getOperator();
+            $e .= '(';
+            $this->_buildFilterExpressionRec($filter->getOperand(), $e);
+            $e .= ')';
+        } else if ($filter instanceof Filters\BinaryFilter) {
+            $e .= '(';
+            $this->_buildFilterExpressionRec($filter->getLeft(), $e);
+            $e .= ' ';
+            $e .= $filter->getOperator();
+            $e .= ' ';
+            $this->_buildFilterExpressionRec($filter->getRight(), $e);
+            $e .= ')';
+        } else if ($filter instanceof Filters\RawStringFilter) {
+            $e .= $filter->getRawStringFilter();
+        }
+        
+        return $e;
+    }
+    
+    /**
+     * Adds query object to the query parameter array
+     * 
+     * @param array        $queryParam The URI query parameters 
+     * @param Models\Query $query      The query object
+     * 
+     * @return array 
+     */
+    private function _addOptionalQuery($queryParam, $query)
+    {
+        if (!is_null($query)) {
+            $selectedFields = $query->getSelectFields();
+            if (!empty($selectedFields)) {
+                $final = $this->_encodeODataUriValues($selectedFields); 
+                
+                $queryParam[Resources::QP_SELECT] = implode(',', $final);
+            }
+            
+            if (!is_null($query->getTop())) {
+                $final = strval($this->_encodeODataUriValue($query->getTop()));
+                
+                $queryParam[Resources::QP_TOP] = $final;
+            }
+            
+            if (!is_null($query->getFilter())) {
+                $final = $this->_buildFilterExpression($query->getFilter());
+                
+                $queryParam[Resources::QP_FILTER] = $final;
+            }
+            
+            if (!is_null($query->getOrderByFields())) {
+                $final = $this->_encodeODataUriValues(
+                    $query->getOrderByFields()
+                );
+                
+                $queryParam[Resources::QP_ORDERBY] = implode(',', $final);
+            }
+        }
+        
+        return $queryParam;
+    }
+    
+    /**
+     * Encodes OData URI values
+     * 
+     * @param array $values The OData URL values
+     * 
+     * @return array
+     */
+    private function _encodeODataUriValues($values)
+    {
+        $list = array();
+        
+        foreach ($values as $value) {
+            $list[] = $this->_encodeODataUriValue($value);
+        }
+        
+        return $list;
+    }
+    
+    /**
+     * Encodes OData URI value
+     * 
+     * @param string $value The OData URL value
+     * 
+     * @return string
+     */
+    private function _encodeODataUriValue($value)
+    {
+        //TODO: Unclear if OData value in URI's need to be encoded or not
+        return $value;
+    }
     
     /**
      * Constructor
      * 
-     * @param PEAR2\WindowsAzure\Core\IHttpClient $channel       http client channel
+     * @param PEAR2\WindowsAzure\Core\IHttpClient $channel        http client channel
      * @param string                              $uri            storage account uri
      * @param Table\Utilities\IAtomReaderWriter   $atomSerializer serializer
      * 
@@ -61,7 +191,7 @@ class TableRestProxy extends ServiceRestProxy implements ITable
     public function __construct($channel, $uri, $atomSerializer)
     {
         parent::__construct($channel, $uri);
-        $this->atomSerializer = $atomSerializer;
+        $this->_atomSerializer = $atomSerializer;
     }
     
     /**
@@ -114,7 +244,7 @@ class TableRestProxy extends ServiceRestProxy implements ITable
         $path        = Resources::EMPTY_STRING;
         $body        = Resources::EMPTY_STRING;
         
-        if (!isset($options)) {
+        if (is_null($options)) {
             $options = new TableServiceOptions();
         }
         
@@ -138,7 +268,60 @@ class TableRestProxy extends ServiceRestProxy implements ITable
      */
     public function queryTables($options = null)
     {
-        throw new \Exception(Resources::NOT_IMPLEMENTED_MSG);
+        $method      = \HTTP_Request2::METHOD_GET;
+        $headers     = array();
+        $queryParams = array();
+        $statusCode  = Resources::STATUS_OK;
+        $path        = 'Tables';
+        
+        if (is_null($options)) {
+            $options = new QueryTablesOptions();
+        }
+        
+        $query   = $options->getQuery();
+        $next    = $options->getNextTableName();
+        $prefix  = $options->getPrefix();
+        $timeout = strval($options->getTimeout());
+        
+        if (!empty($prefix)) {
+            // Append Max char to end '{' is 1 + 'z' in AsciiTable ==> upperBound 
+            // is prefix + '{'
+            $prefixFilter = Filter::applyAnd(
+                Filter::applyGe(
+                    Filter::applyLitteral('TableName'),
+                    Filter::applyConstant($prefix)
+                ),
+                Filter::applyLe(
+                    Filter::applyLitteral('TableName'),
+                    Filter::applyConstant($prefix . '{')
+                )
+            );
+            
+            if (is_null($query)) {
+                $query = new Models\Query();
+            }
+
+            if (is_null($query->getFilter())) {
+                // use the prefix filter if the query filter is null
+                $query->setFilter($prefixFilter);
+            } else {
+                // combine and use the prefix filter if the query filter exists
+                $combinedFilter = Filter::applyAnd(
+                    $query->getFilter(), $prefixFilter
+                );
+                $query->setFilter($combinedFilter);
+            }
+        }
+        
+        $queryParams = $this->_addOptionalQuery($queryParams, $query);
+        
+        $queryParams[Resources::QP_NEXT_TABLE_NAME] = $next;
+        $queryParams[Resources::QP_TIMEOUT]         = $timeout;
+        
+        $response = $this->send($method, $headers, $queryParams, $path, $statusCode);
+        $tables   = $this->_atomSerializer->parseTableEntries($response->getBody());
+        
+        return QueryTablesResult::create($response->getHeader(), $tables);
     }
     
     /**
@@ -161,9 +344,9 @@ class TableRestProxy extends ServiceRestProxy implements ITable
         $queryParams = array();
         $statusCode  = Resources::STATUS_CREATED;
         $path        = 'Tables';
-        $body        = $this->atomSerializer->getTable($table);
+        $body        = $this->_atomSerializer->getTable($table);
         
-        if (!isset($options)) {
+        if (is_null($options)) {
             $options = new TableServiceOptions();
         }
         
@@ -194,7 +377,7 @@ class TableRestProxy extends ServiceRestProxy implements ITable
         $statusCode  = Resources::STATUS_NO_CONTENT;
         $path        = "Tables('$table')";
         
-        if (!isset($options)) {
+        if (is_null($options)) {
             $options = new TableServiceOptions();
         }
         

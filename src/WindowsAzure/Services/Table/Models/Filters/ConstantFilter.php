@@ -35,18 +35,30 @@ namespace PEAR2\WindowsAzure\Services\Table\Models\Filters;
  * @version   Release: @package_version@
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
-class ConstantFilter
+class ConstantFilter extends Filter
 {
     /**
      * @var mix
      */
     private $_value;
     
+    /**
+     * Gets value
+     * 
+     * @return mix 
+     */
     public function getValue()
     {
         return $this->_value;
     }
     
+    /**
+     * Sets value
+     * 
+     * @param mix $value value 
+     * 
+     * @return none
+     */
     public function setValue($value)
     {
         $this->_value = $value;

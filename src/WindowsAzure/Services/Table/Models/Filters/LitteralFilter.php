@@ -35,18 +35,30 @@ namespace PEAR2\WindowsAzure\Services\Table\Models\Filters;
  * @version   Release: @package_version@
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
-class ConstantFilter
+class LitteralFilter extends Filter
 {
     /**
      * @var string
      */
     private $_litteral;
     
+    /**
+     * Gets litteral
+     * 
+     * @return string 
+     */
     public function getLitteral()
     {
         return $this->_litteral;
     }
-    
+
+    /**
+     * Sets litteral
+     * 
+     * @param string $litteral value 
+     * 
+     * @return none
+     */
     public function setLitteral($litteral)
     {
         $this->_litteral = $litteral;

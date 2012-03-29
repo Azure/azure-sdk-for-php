@@ -35,8 +35,16 @@ namespace PEAR2\WindowsAzure\Services\Table\Models\Filters;
  * @version   Release: @package_version@
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
-class Filter 
+class Filter
 {
+    /**
+     * Apply and operation between two filters
+     * 
+     * @param Filter $left  The left filter
+     * @param Filter $right The right filter
+     * 
+     * @return \PEAR2\WindowsAzure\Services\Table\Models\Filters\BinaryFilter 
+     */
     public static function applyAnd($left, $right)
     {
         $filer = new BinaryFilter();
@@ -46,7 +54,14 @@ class Filter
         
         return $filer;
     }
-    
+   
+    /**
+     * Applies not operation on $operand
+     * 
+     * @param Filter $operand The operand
+     * 
+     * @return \PEAR2\WindowsAzure\Services\Table\Models\Filters\UnaryFilter 
+     */
     public static function applyNot($operand)
     {
         $filer = new UnaryFilter();
@@ -56,6 +71,14 @@ class Filter
         return $filer;
     }
 
+    /**
+     * Apply or operation on the passed filers
+     * 
+     * @param Filter $left  The left operand
+     * @param Filter $right The right operand
+     * 
+     * @return BinaryFilter
+     */
     public static function applyOr($left, $right)
     {
         $filer = BinaryFilter();
@@ -66,6 +89,14 @@ class Filter
         return $filer;
     }
 
+    /**
+     * Apply eq operation on the passed filers
+     * 
+     * @param Filter $left  The left operand
+     * @param Filter $right The right operand
+     * 
+     * @return BinaryFilter
+     */
     public static function applyEq($left, $right)
     {
         $filer = new BinaryFilter();
@@ -76,6 +107,14 @@ class Filter
         return $filer;
     }
 
+    /**
+     * Apply ne operation on the passed filers
+     * 
+     * @param Filter $left  The left operand
+     * @param Filter $right The right operand
+     * 
+     * @return BinaryFilter
+     */
     public static function applyNe($left, $right)
     {
         $filer = new BinaryFilter();
@@ -86,6 +125,14 @@ class Filter
         return $filer;
     }
 
+    /**
+     * Apply ge operation on the passed filers
+     * 
+     * @param Filter $left  The left operand
+     * @param Filter $right The right operand
+     * 
+     * @return BinaryFilter
+     */
     public static function applyGe($left, $right)
     {
         $filer = new BinaryFilter();
@@ -96,6 +143,14 @@ class Filter
         return $filer;
     }
 
+    /**
+     * Apply gt operation on the passed filers
+     * 
+     * @param Filter $left  The left operand
+     * @param Filter $right The right operand
+     * 
+     * @return BinaryFilter
+     */
     public static function applyGt($left, $right)
     {
         $filer = new BinaryFilter();
@@ -106,6 +161,14 @@ class Filter
         return $filer;
     }
 
+    /**
+     * Apply lt operation on the passed filers
+     * 
+     * @param Filter $left  The left operand
+     * @param Filter $right The right operand
+     * 
+     * @return BinaryFilter
+     */
     public static function applyLt($left, $right)
     {
         $filer = new BinaryFilter();
@@ -116,6 +179,14 @@ class Filter
         return $filer;
     }
 
+    /**
+     * Apply le operation on the passed filers
+     * 
+     * @param Filter $left  The left operand
+     * @param Filter $right The right operand
+     * 
+     * @return BinaryFilter
+     */
     public static function applyLe($left, $right)
     {
         $filer = new BinaryFilter();
@@ -126,21 +197,45 @@ class Filter
         return $filer;
     }
 
-    public static function applyConstant($value) {
+    /**
+     * Apply constant filter on value
+     * 
+     * @param mix $value The filter value
+     * 
+     * @return \PEAR2\WindowsAzure\Services\Table\Models\Filters\ConstantFilter 
+     */
+    public static function applyConstant($value)
+    {
         $filer = new ConstantFilter();
         $filer->setValue($value);
         
         return $filer;
     }
 
-    public static function applyLitteral($value) {
+    /**
+     * Apply litteral filter on $value
+     * 
+     * @param string $value The filter value
+     * 
+     * @return \PEAR2\WindowsAzure\Services\Table\Models\Filters\LitteralFilter 
+     */
+    public static function applyLitteral($value)
+    {
         $filer = new LitteralFilter();
         $filer->setLitteral($value);
         
         return $filer;
     }
 
-    public static function applyRawString($value) {
+    /**
+     * Takes raw string filter
+     * 
+     * @param string $value The raw string filter expression
+     * 
+     * @return \PEAR2\WindowsAzure\Services\Table\Models\Filters\RawStringFilter 
+     */
+    public static function applyRawString($value)
+    {
         $filer = new RawStringFilter();
         $filer->setRawString($value);
         

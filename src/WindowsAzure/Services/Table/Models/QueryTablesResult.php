@@ -23,9 +23,11 @@
  */
  
 namespace PEAR2\WindowsAzure\Services\Table\Models;
+use PEAR2\WindowsAzure\Utilities;
+use PEAR2\WindowsAzure\Resources;
 
 /**
- * Optional parameters for queryTables wrapper.
+ * QueryTablesResult
  *
  * @category  Microsoft
  * @package   PEAR2\WindowsAzure\Services\Table\Models
@@ -35,22 +37,40 @@ namespace PEAR2\WindowsAzure\Services\Table\Models;
  * @version   Release: @package_version@
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
-class QueryTablesOptions extends TableServiceOptions
+class QueryTablesResult
 {
     /**
-     * @var string
+     * @var string 
      */
     private $_nextTableName;
     
     /**
-     * @var Query
+     * @var array
      */
-    private $_query;
+    private $_tables;
     
     /**
-     * @var string
+     * Creates new QueryTablesResult object
+     * 
+     * @param array $headers The HTTP response headers
+     * @param array $entries The table entriess
+     * 
+     * @return \PEAR2\WindowsAzure\Services\Table\Models\QueryTablesResult 
      */
-    private $_prefix;
+    public static function create($headers, $entries)
+    {
+        $result  = new QueryTablesResult();
+        $headers = Utilities::keysToLower($headers);
+        
+        $result->setNextTableName(
+            Utilities::tryGetValue(
+                $headers, Resources::X_MS_CONTINUATION_NEXTTABLENAME
+            )
+        );
+        $result->setTables($entries);
+        
+        return $result;
+    }
     
     /**
      * Gets nextTableName
@@ -75,47 +95,25 @@ class QueryTablesOptions extends TableServiceOptions
     }
     
     /**
-     * Gets prefix
+     * Gets tables
      * 
-     * @return string
+     * @return array
      */
-    public function getPrefix()
+    public function getTables()
     {
-        return $this->_prefix;
+        return $this->_tables;
     }
     
     /**
-     * Sets prefix
+     * Sets tables
      * 
-     * @param string $prefix value
+     * @param array $tables value
      * 
      * @return none
      */
-    public function setPrefix($prefix)
+    public function setTables($tables)
     {
-        $this->_prefix = $prefix;
-    }
-    
-    /**
-     * Gets query
-     * 
-     * @return Query
-     */
-    public function getQuery()
-    {
-        return $this->_query;
-    }
-    
-    /**
-     * Sets query
-     * 
-     * @param string $query value
-     * 
-     * @return none
-     */
-    public function setQuery($query)
-    {
-        $this->_query = $query;
+        $this->_tables = $tables;
     }
 }
 

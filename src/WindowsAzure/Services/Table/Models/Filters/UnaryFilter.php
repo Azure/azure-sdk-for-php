@@ -47,22 +47,48 @@ class UnaryFilter extends Filter
      */
     private $_operand;
     
-    public function getOperator() {
+    /**
+     * Gets operator
+     * 
+     * @return string 
+     */
+    public function getOperator()
+    {
         return $this->_operator;
     }
 
-    public function setOperator($operator) {
+    /**
+     * Sets operator
+     * 
+     * @param string $operator value
+     * 
+     * @return none. 
+     */
+    public function setOperator($operator)
+    {
         $this->_operator = $operator;
-        return this;
     }
 
-    public function getOperand() {
+    /**
+     * Gets operand
+     * 
+     * @return Filter 
+     */
+    public function getOperand()
+    {
         return $this->_operand;
     }
 
-    public function setOperand($operand) {
+    /**
+     * Sets operand
+     * 
+     * @param Filter $operand value
+     * 
+     * @return Filter 
+     */
+    public function setOperand($operand)
+    {
         $this->_operand = $operand;
-        return this;
     }
 }
 

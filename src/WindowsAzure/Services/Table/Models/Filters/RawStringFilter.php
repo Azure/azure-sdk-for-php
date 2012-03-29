@@ -35,18 +35,30 @@ namespace PEAR2\WindowsAzure\Services\Table\Models\Filters;
  * @version   Release: @package_version@
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
-class ConstantFilter
+class RawStringFilter extends Filter
 {
     /**
      * @var string
      */
     private $_rawString;
     
+    /**
+     * Gets raw string filter
+     * 
+     * @return string 
+     */
     public function getRawString()
     {
         return $this->_rawString;
     }
     
+    /**
+     * Sets raw string filter
+     * 
+     * @param string $rawString value 
+     * 
+     * @return none
+     */
     public function setRawString($rawString)
     {
         $this->_rawString = $rawString;
