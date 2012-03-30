@@ -147,10 +147,11 @@ class Utilities
      * @param array  $array      object to serialize represented in array.
      * @param string $rootName   name of the XML root element.
      * @param string $defaultTag default tag for non-tagged elements.
+     * @param string $standalone adds 'standalone' header tag, values 'yes'/'no'
      * 
      * @return string
      */
-    public static function serialize($array, $rootName, $defaultTag = null)
+    public static function serialize($array, $rootName, $defaultTag = null, $standalone = null)
     {
         $xmlVersion  = '1.0';
         $xmlEncoding = 'UTF-8';
@@ -161,7 +162,7 @@ class Utilities
 
         $xmlw = new \XmlWriter();
         $xmlw->openMemory();
-        $xmlw->startDocument($xmlVersion, $xmlEncoding);
+        $xmlw->startDocument($xmlVersion, $xmlEncoding, $standalone);
         
         $xmlw->startElement($rootName);
 
