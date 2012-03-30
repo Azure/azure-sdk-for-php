@@ -26,6 +26,8 @@ namespace PEAR2\WindowsAzure\Services\Core\Filters;
 use PEAR2\WindowsAzure\Resources;
 use PEAR2\WindowsAzure\Core\IServiceFilter;
 use PEAR2\WindowsAzure\Services\Core\Authentication\SharedKeyAuthenticationScheme;
+use PEAR2\WindowsAzure\Services\Core\Authentication\TableSharedKeyAuthenticationScheme;
+use PEAR2\WindowsAzure\Core\InvalidArgumentTypeException;
 
 /**
  * Adds authentication header to the http request object.
@@ -50,20 +52,29 @@ class SharedKeyFilter implements IServiceFilter
      * @param string $type        storage account type.
      * 
      * @return
-     * PEAR2\WindowsAzure\Services\Core\Authentication\SharedKeyAuthenticationScheme
+     * PEAR2\WindowsAzure\Services\Core\Authentication\StorageAuthenticationScheme
      *         
      */
     public function __construct($accountName, $accountKey, $type)
     {
         switch ($type) {
         case Resources::QUEUE_TYPE_NAME:
+        case Resources::BLOB_TYPE_NAME:
             $this->_sharedKeyAuthentication = new SharedKeyAuthenticationScheme(
                 $accountName, $accountKey
             );
             break;
+        case Resources::TABLE_TYPE_NAME:
+            $this->_sharedKeyAuthentication = new TableSharedKeyAuthenticationScheme(
+                $accountName, $accountKey
+            );
+            break;
 
-        default: 
-            throw new InvalidArgumentTypeException(Resources::QUEUE_TYPE_NAME);
+        default:
+            $expected  = Resources::QUEUE_TYPE_NAME;
+            $expected .= '|' . Resources::BLOB_TYPE_NAME;
+            $expected .= '|' . Resources::TABLE_TYPE_NAME;
+            throw new InvalidArgumentTypeException($expected);
         }
     }
 

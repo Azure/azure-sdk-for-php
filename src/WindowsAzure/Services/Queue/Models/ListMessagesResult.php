@@ -23,7 +23,7 @@
  */
 
 namespace PEAR2\WindowsAzure\Services\Queue\Models;
-use PEAR2\WindowsAzure\Services\Queue\Models\AzureQueueMessage;
+use PEAR2\WindowsAzure\Services\Queue\Models\WindowsAzureQueueMessage;
 use PEAR2\WindowsAzure\Utilities;
 
 /**
@@ -61,7 +61,9 @@ class ListMessagesResult
         if (!empty($parsedResponse)) {
             $rawMessages = Utilities::getArray($parsedResponse['QueueMessage']);
             foreach ($rawMessages as $value) {
-                $queueMessages[] = AzureQueueMessage::createFromListMessages($value);
+                $message = WindowsAzureQueueMessage::createFromListMessages($value);
+                
+                $queueMessages[] = $message;
             }
         }
         $result->setQueueMessages($queueMessages);
@@ -72,17 +74,11 @@ class ListMessagesResult
     /**
      * Gets queueMessages field.
      * 
-     * @return integer
+     * @return array
      */
     public function getQueueMessages()
     {
-        $clonedMessages = array();
-        
-        foreach ($this->_queueMessages as $value) {
-            $clonedMessages[] = clone $value;
-        }
-        
-        return $clonedMessages;
+        return $this->_queueMessages;
     }
     
     /**
@@ -94,7 +90,11 @@ class ListMessagesResult
      */
     public function setQueueMessages($queueMessages)
     {
-        $this->_queueMessages = $queueMessages;
+        $this->_queueMessages = array();
+        
+        foreach ($queueMessages as $value) {
+            $this->_queueMessages[] = clone $value;
+        }
     }
 }
 

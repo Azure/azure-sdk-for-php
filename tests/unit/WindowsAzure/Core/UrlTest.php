@@ -23,7 +23,7 @@
  */
 
 use PEAR2\WindowsAzure\Core\Url;
-use PEAR2\Tests\Unit\TestResources;
+use PEAR2\Tests\Framework\TestResources;
 use PEAR2\WindowsAzure\Resources;
 use PEAR2\WindowsAzure\Core\InvalidArgumentTypeException;
 
@@ -42,6 +42,7 @@ class UrlTest extends PHPUnit_Framework_TestCase
 {
     /**
      * @covers PEAR2\WindowsAzure\Core\Url::__construct
+     * @covers PEAR2\WindowsAzure\Core\Url::_setPathIfEmpty
      */
     public function test__construct()
     {
@@ -52,7 +53,7 @@ class UrlTest extends PHPUnit_Framework_TestCase
         $url = new Url($urlString);
         
         // Assert
-        $this->assertEquals($urlString, $url->getUrl());
+        $this->assertEquals($urlString . '/', $url->getUrl());
     }
     
     /**
@@ -92,6 +93,20 @@ class UrlTest extends PHPUnit_Framework_TestCase
         
         // Test
         new Url($urlString);
+    }
+    
+    /**
+     * @covers PEAR2\WindowsAzure\Core\Url::__construct
+     */
+    public function test__constructWithUrlPath()
+    {
+        // Setup
+        $urlString = TestResources::VALID_URL . '/';
+        
+        // Test
+        $url = new Url($urlString);
+        
+        $this->assertEquals($urlString, $url->getUrl());
     }
     
     /**
@@ -213,6 +228,7 @@ class UrlTest extends PHPUnit_Framework_TestCase
     
     /**
      * @covers PEAR2\WindowsAzure\Core\Url::getUrl
+     * @covers PEAR2\WindowsAzure\Core\Url::_setPathIfEmpty
      */
     public function testGetUrl()
     {
@@ -224,7 +240,7 @@ class UrlTest extends PHPUnit_Framework_TestCase
         $actualUrl = $url->getUrl();
         
         // Assert
-        $this->assertEquals($urlString, $actualUrl);
+        $this->assertEquals($urlString . '/', $actualUrl);
     }
     
     /**
@@ -264,6 +280,7 @@ class UrlTest extends PHPUnit_Framework_TestCase
     
     /**
      * @covers PEAR2\WindowsAzure\Core\Url::__toString
+     * @covers PEAR2\WindowsAzure\Core\Url::_setPathIfEmpty
      */
     public function test__toString()
     {
@@ -275,7 +292,7 @@ class UrlTest extends PHPUnit_Framework_TestCase
         $actualUrl = $url->__toString();
         
         // Assert
-        $this->assertEquals($urlString, $actualUrl);
+        $this->assertEquals($urlString . '/', $actualUrl);
     }
     
     /**

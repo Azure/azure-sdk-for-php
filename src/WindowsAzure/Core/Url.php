@@ -45,6 +45,22 @@ class Url implements IUrl
      * @var \Net_URL2
      */
     private $_url;
+    
+    /**
+     * Sets the url path to '/' if it's empty
+     * 
+     * @param string $url the url string
+     * 
+     * @return none.
+     */
+    private function _setPathIfEmpty($url)
+    {
+        $path =  parse_url($url, PHP_URL_PATH);
+        
+        if (empty($path)) {
+            $this->setUrlPath('/');
+        }
+    }
 
     /**
      * Constructor
@@ -59,6 +75,7 @@ class Url implements IUrl
         Validate::isTrue(filter_var($url, FILTER_VALIDATE_URL), $errorMessage);
         
         $this->_url = new \Net_URL2($url);
+        $this->_setPathIfEmpty($url);
     }
     
     /**
@@ -107,7 +124,7 @@ class Url implements IUrl
         Validate::notNullOrEmpty($key);
         Validate::isString($value);
         
-        if ($value != Resources::EMPTY_STRING || !is_null($value) || $force) {
+        if (!empty($value) && !is_null($value) || $force) {
             $this->_url->setQueryVariable(strtolower($key), $value);
         }
     }

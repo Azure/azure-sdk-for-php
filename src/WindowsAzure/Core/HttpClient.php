@@ -15,14 +15,14 @@
  * PHP version 5
  * 
  * @category  Microsoft
- * @package   PEAR2\WindowsAzure\Services\Core
+ * @package   PEAR2\WindowsAzure\Core
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
  
-namespace PEAR2\WindowsAzure\Services\Core;
+namespace PEAR2\WindowsAzure\Core;
 use PEAR2\WindowsAzure\Core\IHttpClient;
 use PEAR2\WindowsAzure\Core\IServiceFilter;
 use PEAR2\WindowsAzure\Resources;
@@ -36,7 +36,7 @@ require_once 'HTTP/Request2.php';
  * HTTP client which sends and receives HTTP requests and responses.
  *
  * @category  Microsoft
- * @package   PEAR2\WindowsAzure\Services\Core
+ * @package   PEAR2\WindowsAzure\Core
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
@@ -72,7 +72,7 @@ class HttpClient implements IHttpClient
     /**
      * Constructor
      * 
-     * @return PEAR2\WindowsAzure\Services\Core\HttpClient
+     * @return PEAR2\WindowsAzure\Core\HttpClient
      */
     function __construct()
     {
@@ -84,7 +84,6 @@ class HttpClient implements IHttpClient
                 )
         );
 
-        $this->setHeader(Resources::X_MS_VERSION, Resources::API_VERSION);
         $this->setHeader('user-agent', null);
         
         $this->_requestUrl          = null;
@@ -119,7 +118,8 @@ class HttpClient implements IHttpClient
     }
 
     /**
-     * Gets request url.
+     * Gets request url. Note that you must check if the returned object is null or
+     * not.
      *
      * @return PEAR2\WindowsAzure\Core\IUrl
      */ 
@@ -175,7 +175,9 @@ class HttpClient implements IHttpClient
      */
     public function setHeader($header, $value, $replace = false)
     {
-        $this->_request->SetHeader($header, $value, $replace);
+        Validate::isString($value);
+        
+        $this->_request->setHeader($header, $value, $replace);
     }
     
     /**
@@ -187,7 +189,9 @@ class HttpClient implements IHttpClient
      */
     public function setHeaders($headers)
     {
-        $this->_request->SetHeader($headers);
+        foreach ($headers as $key => $value) {
+            $this->setHeader($key, $value);
+        }
     }
 
     /**
@@ -309,6 +313,7 @@ class HttpClient implements IHttpClient
      */
     public function setBody($body)
     {
+        Validate::isString($body);
         $this->_request->setBody($body);
     }
     

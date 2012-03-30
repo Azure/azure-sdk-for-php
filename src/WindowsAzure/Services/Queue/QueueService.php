@@ -23,7 +23,6 @@
  */
  
 namespace PEAR2\WindowsAzure\Services\Queue;
-use PEAR2\WindowsAzure\Services\Queue\QueueExceptionProcessor;
 use PEAR2\WindowsAzure\Services\Core\Configuration;
 use PEAR2\WindowsAzure\Resources;
 

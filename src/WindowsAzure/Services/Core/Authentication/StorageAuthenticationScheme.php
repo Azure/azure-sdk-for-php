@@ -73,11 +73,6 @@ abstract class StorageAuthenticationScheme
 
         if (!is_null($headers)) {
             foreach ($headers as $header => $value) {
-                if (is_bool($value)) {
-                    // This line converts passed user bool values into string value.
-                    $value = $value === true ? 'True' : 'False';
-                }
-
                 if (Utilities::startsWith($header, Resources::X_MS_HEADER_PREFIX)) {
                     $canonicalizedHeaders[] = strtolower($header) . ':' . 
                         trim($value);
@@ -88,9 +83,42 @@ abstract class StorageAuthenticationScheme
 
         return $canonicalizedHeaders;
     }
+    
+    /**
+     * Computes canonicalized resources from URL using Table formar
+     *
+     * @param string $url         request url.
+     * @param array  $queryParams request query variables.
+     * 
+     * @see Constructing the Canonicalized Resource String section at 
+     *      http://msdn.microsoft.com/en-us/library/windowsazure/dd179428.aspx
+     * 
+     * @return string
+     */
+    protected function computeCanonicalizedResourceForTable($url, $queryParams)
+    {
+        $queryParams = Utilities::keysToLower($queryParams);
+        
+        // 1. Beginning with an empty string (""), append a forward slash (/), 
+        //    followed by the name of the account that owns the accessed resource.
+        $canonicalizedResource = '/' . $this->accountName;
+
+        // 2. Append the resource's encoded URI path, without any query parameters.
+        $canonicalizedResource .= parse_url($url, PHP_URL_PATH);
+        
+        // 3. The query string should include the question mark and the comp 
+        //    parameter (for example, ?comp=metadata). No other parameters should 
+        //    be included on the query string.
+        if (array_key_exists(Resources::QP_COMP, $queryParams)) {
+            $canonicalizedResource .= '?' . Resources::QP_COMP . '=';
+            $canonicalizedResource .= $queryParams[Resources::QP_COMP];
+        }
+        
+        return $canonicalizedResource;
+    }
 
     /**
-     * Computes canonicalized resources for headers array.
+     * Computes canonicalized resources from URL.
      *
      * @param string $url         request url.
      * @param array  $queryParams request query variables.
@@ -122,11 +150,16 @@ abstract class StorageAuthenticationScheme
         // 7. Append each query parameter name and value to the string in the 
         //    following format:
         //      parameter-name:parameter-value
-        // 9. Group query parameters (not supported see issue #17)
+        // 9. Group query parameters
         // 10. Append a new line character (\n) after each name-value pair.
         foreach ($queryParams as $key => $value) {
+            // Grouping query parameters
+            $values = explode(Resources::SEPARATOR, $value);
+            sort($values);
+            $separated = implode(Resources::SEPARATOR, $values);
+            
             $canonicalizedResource .= "\n" . strtolower($key) . ':' . 
-                rawurldecode($value);
+                rawurldecode($separated);
         }
 
         return $canonicalizedResource;

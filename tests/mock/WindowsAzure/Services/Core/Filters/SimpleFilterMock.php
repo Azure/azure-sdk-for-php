@@ -23,7 +23,7 @@
  */
  
 namespace PEAR2\Tests\Mock\WindowsAzure\Services\Core\Filters;
-use PEAR2\Tests\Unit\TestResources;
+use PEAR2\Tests\Framework\TestResources;
 
 /**
  * Alters request headers and response to mock real filter

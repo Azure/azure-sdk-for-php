@@ -23,7 +23,7 @@
  */
 
 use PEAR2\WindowsAzure\Utilities;
-use PEAR2\Tests\Unit\TestResources;
+use PEAR2\Tests\Framework\TestResources;
 
 /**
  * Unit tests for class Utilities
@@ -181,7 +181,7 @@ class UtilitiesTest extends PHPUnit_Framework_TestCase
     {
         // Setup
         $propertiesSample = TestResources::getServicePropertiesSample();
-        $properties = \PEAR2\WindowsAzure\Services\Queue\Models\ServiceProperties::create($propertiesSample);
+        $properties = \PEAR2\WindowsAzure\Services\Core\Models\ServiceProperties::create($propertiesSample);
         $xml = $properties->toXml();
         $expected = $properties->toArray();
         
@@ -198,12 +198,12 @@ class UtilitiesTest extends PHPUnit_Framework_TestCase
     {
         // Setup
         $propertiesSample = TestResources::getServicePropertiesSample();
-        $properties = \PEAR2\WindowsAzure\Services\Queue\Models\ServiceProperties::create($propertiesSample);
+        $properties = \PEAR2\WindowsAzure\Services\Core\Models\ServiceProperties::create($propertiesSample);
         $expected = $properties->toXml();
         $array = $properties->toArray();
         
         // Test
-        $actual = Utilities::serialize($array, \PEAR2\WindowsAzure\Services\Queue\Models\ServiceProperties::$xmlRootName);
+        $actual = Utilities::serialize($array, \PEAR2\WindowsAzure\Services\Core\Models\ServiceProperties::$xmlRootName);
         
         $this->assertEquals($expected, $actual);
     }
@@ -236,6 +236,22 @@ class UtilitiesTest extends PHPUnit_Framework_TestCase
         
         // Test
         $actual = Utilities::booleanToString($value);
+        
+        // Assert
+        $this->assertEquals($expected, $actual);
+    }
+    
+    /**
+     * @covers PEAR2\WindowsAzure\Utilities::keysToLower
+     */
+    public function testKeysToLower()
+    {
+        // Setup
+        $expected = array('name' => 1, 'value' => 20, '12m3' => 0);
+        $test = array('NamE' => 1, 'VALUe' => 20, '12M3' => 0);
+        
+        // Test
+        $actual = Utilities::keysToLower($test);
         
         // Assert
         $this->assertEquals($expected, $actual);

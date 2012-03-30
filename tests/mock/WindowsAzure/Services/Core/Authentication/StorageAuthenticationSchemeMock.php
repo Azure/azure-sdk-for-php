@@ -16,7 +16,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- * @package    Azure-sdk-for-php
+ * @package    WindowsAzure-sdk-for-php
  * @author     Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright  2012 Microsoft Corporation
  * @license    http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
@@ -29,7 +29,7 @@ use PEAR2\WindowsAzure\Services\Core\Authentication\StorageAuthenticationScheme;
 /**
  * Mock class to wrap StorageAuthenticationScheme class.
  *
- * @package    Azure-sdk-for-php
+ * @package    WindowsAzure-sdk-for-php
  * @author     Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright  2012 Microsoft Corporation
  * @license    http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
@@ -51,6 +51,11 @@ class StorageAuthenticationSchemeMock extends StorageAuthenticationScheme
     public function computeCanonicalizedResourceMock($url, $queryParams)
     {
         return parent::computeCanonicalizedResource($url, $queryParams);
+    }
+    
+    public function computeCanonicalizedResourceForTableMock($url, $queryParams)
+    {
+        return parent::computeCanonicalizedResourceForTable($url, $queryParams);
     }
 
     public function getAccountName()
