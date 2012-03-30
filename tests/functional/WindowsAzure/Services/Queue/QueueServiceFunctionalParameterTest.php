@@ -116,6 +116,7 @@ class QueueServiceFunctionalParameterTest extends FunctionalTestBase {
 
         try {
             $service->setServiceProperties($serviceProperties, null);
+            $this->assertFalse('service properties should throw in emulator', FunctionalTestBase::isRunningWithEmulator());
         }
         catch (ServiceException $e) {
             if (FunctionalTestBase::isRunningWithEmulator()) {
