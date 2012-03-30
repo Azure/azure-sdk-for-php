@@ -87,10 +87,11 @@ class Utilities
         }
         
         foreach ($var as $value) {
-            if ((gettype($value) == 'object') && (get_class($value) == 'SimpleXMLElement')) {
+            if ((gettype($value) == 'object')
+                && (get_class($value) == 'SimpleXMLElement')
+            ) {
                 return (array) $var;
-            }
-            else if (!is_array($value)) {
+            } else if (!is_array($value)) {
                 return array($var);
             }
 
@@ -112,17 +113,28 @@ class Utilities
     {
         $sxml = new \SimpleXMLElement($xml);
 
-        return self::sxml2arr($sxml);
+        return self::_sxml2arr($sxml);
     }
-	
-    private static function sxml2arr($sxml, $arr = array ()) 
+
+    /**
+     * Converts a SimpleXML object to an Array recursively
+     * ensuring all sub-elements are arrays as well.
+     *
+     * @param string $sxml SimpleXML object
+     * @param array  $arr  Array into which to store results
+     * 
+     * @static
+     * 
+     * @return array.
+     */
+    private static function _sxml2arr($sxml, $arr = array ()) 
     { 
-        foreach ((array) $sxml as $key => $value) 
-        {
-            if (is_object($value) || (is_array($value)))
-                $arr[$key] = self::sxml2arr($value);
-            else
+        foreach ((array) $sxml as $key => $value) {
+            if (is_object($value) || (is_array($value))) {
+                $arr[$key] = self::_sxml2arr($value);
+            } else {
                 $arr[$key] = $value;
+            }
         }
 
         return $arr; 
@@ -140,11 +152,12 @@ class Utilities
      */
     public static function serialize($array, $rootName, $defaultTag = null)
     {
-        $xmlVersion = '1.0';
+        $xmlVersion  = '1.0';
         $xmlEncoding = 'UTF-8';
 
-        if(!is_array($array))
-                return false;
+        if (!is_array($array)) {
+            return false;
+        }
 
         $xmlw = new \XmlWriter();
         $xmlw->openMemory();
@@ -152,33 +165,47 @@ class Utilities
         
         $xmlw->startElement($rootName);
 
-        self::arr2xml($xmlw, $array, $defaultTag);
+        self::_arr2xml($xmlw, $array, $defaultTag);
 
         $xmlw->endElement();
 
         return $xmlw->outputMemory(true); 
     }
+    
+    /**
+     * Takes an array and produces XML based on it.
+     *
+     * @param XMLWriter $xmlw       XMLWriter object that was previously instanted
+     * and is used for creating the XML.
+     * @param array     $data       Array to be converted to XML
+     * @param string    $defaultTag Default XML tag to be used if none specified.
+     * 
+     * @static
+     * 
+     * @return void.
+     */
 
-    private static function arr2xml(\XMLWriter $xmlw, $data, $defaultTag = null)
+    private static function _arr2xml(\XMLWriter $xmlw, $data, $defaultTag = null)
     {
-        foreach($data as $key => $value)
-        {
-            if(is_array($value))
-            {
-                if (!is_int($key))
-                    if ($key != '')
+        foreach ($data as $key => $value) {
+            if (is_array($value)) {
+                if (!is_int($key)) {
+                    if ($key != '') {
                         $xmlw->startElement($key);
-                    else
+                    } else {
                         $xmlw->startElement($defaultTag);
+                    }
+                }
                 
-                self::arr2xml($xmlw, $value);
+                self::_arr2xml($xmlw, $value);
                 
-                if (!is_int($key))
+                if (!is_int($key)) {
                     $xmlw->endElement();
+                }
                 continue;
-            }
-            else
+            } else {
                 $xmlw->writeElement($key, $value);
+            }
         }
     }
     
