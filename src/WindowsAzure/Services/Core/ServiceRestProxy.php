@@ -54,7 +54,7 @@ class ServiceRestProxy
      * HTTP requests
      * @param string                              $uri     storage account uri.
      * 
-     * @return array.
+     * @return ServiceRestProxy.
      */
     public function __construct($channel, $uri)
     {

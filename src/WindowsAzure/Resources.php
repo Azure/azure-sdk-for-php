@@ -71,6 +71,7 @@ class Resources
     const X_MS_LEASE_ACTION                = 'x-ms-lease-action';
     const X_MS_DELETE_SNAPSHOTS            = 'x-ms-delete-snapshots';
     const X_MS_PAGE_WRITE                  = 'x-ms-page-write';
+    const X_MS_CONTINUATION_NEXTTABLENAME  = 'x-ms-continuation-nexttablename';
     const ETAG                             = 'etag';
     const LAST_MODIFIED                    = 'last-modified';
     const DATE                             = 'date';
@@ -89,6 +90,8 @@ class Resources
     const RANGE                            = 'range';
     const DATA_SERVICE_VERSION             = 'dataserviceversion';
     const MAX_DATA_SERVICE_VERSION         = 'maxdataserviceversion';
+    const ACCEPT_HEADER                    = 'accept';
+    const ACCEPT_CHARSET                   = 'accept-charset';
 
     // Type
     const QUEUE_TYPE_NAME = 'IQueue';
@@ -106,27 +109,35 @@ class Resources
     const EMULATOR_QUEUE_URI = '127.0.0.1:10001';
     const EMULATOR_TABLE_URI = '127.0.0.1:10002';
 
-    // Versioning
+    // Header values
     const API_VERSION                    = '2011-08-18';
     const DATA_SERVICE_VERSION_VALUE     = '1.0;NetFx';
     const MAX_DATA_SERVICE_VERSION_VALUE = '1.0;NetFx';
+    const ACCEPT_HEADER_VALUE            = 'application/atom+xml,application/xml';
+    const ACCEPT_CHARSET_VALUE           = 'utf-8';
 
     // Query parameter names
-    const QP_PREFIX      = 'Prefix';
-    const QP_MAX_RESULTS = 'MaxResults';
-    const QP_METADATA    = 'Metadata';
-    const QP_MARKER      = 'Marker';
-    const QP_NEXT_MARKER = 'NextMarker';
-    const QP_COMP        = 'comp';
-    const QP_INCLUDE     = 'include';
-    const QP_TIMEOUT     = 'timeout';
-    const QP_DELIMITER   = 'Delimiter';
-    const QP_REST_TYPE   = 'restype';
-    const QP_SNAPSHOT    = 'snapshot';
+    const QP_PREFIX          = 'Prefix';
+    const QP_MAX_RESULTS     = 'MaxResults';
+    const QP_METADATA        = 'Metadata';
+    const QP_MARKER          = 'Marker';
+    const QP_NEXT_MARKER     = 'NextMarker';
+    const QP_COMP            = 'comp';
+    const QP_INCLUDE         = 'include';
+    const QP_TIMEOUT         = 'timeout';
+    const QP_DELIMITER       = 'Delimiter';
+    const QP_REST_TYPE       = 'restype';
+    const QP_SNAPSHOT        = 'snapshot';
+    const QP_SELECT          = '$select';
+    const QP_TOP             = '$top';
+    const QP_FILTER          = '$filter';
+    const QP_ORDERBY         = '$orderby';
+    const QP_NEXT_TABLE_NAME = 'nexttablename';
     
     // Request body content types
-    const XML_CONTENT_TYPE = 'application/x-www-form-urlencoded';
-    const BINARY_FILE_TYPE = 'application/octet-stream';
+    const XML_CONTENT_TYPE      = 'application/x-www-form-urlencoded';
+    const BINARY_FILE_TYPE      = 'application/octet-stream';
+    const XML_ATOM_CONTENT_TYPE = 'application/atom+xml';
     
     // Status Codes
     const STATUS_OK         = 200;

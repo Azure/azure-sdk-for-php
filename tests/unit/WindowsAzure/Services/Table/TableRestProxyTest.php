@@ -29,6 +29,9 @@ use PEAR2\WindowsAzure\Core\ServiceException;
 use PEAR2\Tests\Framework\TestResources;
 use PEAR2\WindowsAzure\Resources;
 use PEAR2\WindowsAzure\Services\Core\Models\ServiceProperties;
+use PEAR2\WindowsAzure\Services\Table\Models\QueryTablesOptions;
+use PEAR2\WindowsAzure\Services\Table\Models\Query;
+use PEAR2\WindowsAzure\Services\Table\Models\Filters\Filter;
 
 /**
  * Unit tests for class TableRestProxy
@@ -77,6 +80,103 @@ class TableRestProxyTest extends TableRestProxyTestBase
         
         // Assert
         $this->assertEquals($expected->toXml(), $actual->getValue()->toXml());
+    }
+    
+    /**
+     * @covers PEAR2\WindowsAzure\Services\Table\TableRestProxy::createTable
+     * @covers PEAR2\WindowsAzure\Services\Table\Utilities\ManualAtomReaderWriter::_fillTemplate
+     * @covers PEAR2\WindowsAzure\Services\Table\Utilities\ManualAtomReaderWriter::getTable
+     */
+    public function testCreateTable()
+    {
+        // Setup
+        $name = 'createtable';
+        
+        // Test
+        $this->createTable($name);
+        
+        // Assert
+        $result = $this->wrapper->queryTables();
+        $this->assertCount(1, $result->getTables());
+    }
+    
+    /**
+     * @covers PEAR2\WindowsAzure\Services\Table\TableRestProxy::deleteTable
+     */
+    public function testDeleteTable()
+    {
+        // Setup
+        $name = 'deletetable';
+        $this->wrapper->createTable($name);
+        
+        // Test
+        $this->wrapper->deleteTable($name);
+        
+        // Assert
+        $result = $this->wrapper->queryTables();
+        $this->assertCount(0, $result->getTables());
+    }
+    
+    /**
+     * @covers PEAR2\WindowsAzure\Services\Table\TableRestProxy::queryTables
+     * @covers PEAR2\WindowsAzure\Services\Table\TableRestProxy::_buildFilterExpression
+     * @covers PEAR2\WindowsAzure\Services\Table\TableRestProxy::_buildFilterExpressionRec
+     * @covers PEAR2\WindowsAzure\Services\Table\TableRestProxy::_addOptionalQuery
+     * @covers PEAR2\WindowsAzure\Services\Table\TableRestProxy::_encodeODataUriValues
+     * @covers PEAR2\WindowsAzure\Services\Table\TableRestProxy::_encodeODataUriValue
+     * @covers PEAR2\WindowsAzure\Services\Table\Models\QueryTablesResult::create
+     * @covers PEAR2\WindowsAzure\Services\Table\Utilities\ManualAtomReaderWriter::_parseBody
+     * @covers PEAR2\WindowsAzure\Services\Table\Utilities\ManualAtomReaderWriter::parseTableEntries
+     */
+    public function testQueryTablesSimple()
+    {
+        // Setup
+        $name1 = 'querytablessimple1';
+        $name2 = 'querytablessimple2';
+        $this->createTable($name1);
+        $this->createTable($name2);
+        
+        // Test
+        $result = $this->wrapper->queryTables();
+        
+        // Assert
+        $tables = $result->getTables();
+        $this->assertCount(2, $tables);
+        $this->assertEquals($name1, $tables[0]);
+        $this->assertEquals($name2, $tables[1]);
+    }
+    
+    /**
+     * @covers PEAR2\WindowsAzure\Services\Table\TableRestProxy::queryTables
+     * @covers PEAR2\WindowsAzure\Services\Table\TableRestProxy::_buildFilterExpression
+     * @covers PEAR2\WindowsAzure\Services\Table\TableRestProxy::_buildFilterExpressionRec
+     * @covers PEAR2\WindowsAzure\Services\Table\TableRestProxy::_addOptionalQuery
+     * @covers PEAR2\WindowsAzure\Services\Table\TableRestProxy::_encodeODataUriValues
+     * @covers PEAR2\WindowsAzure\Services\Table\TableRestProxy::_encodeODataUriValue
+     * @covers PEAR2\WindowsAzure\Services\Table\Models\QueryTablesResult::create
+     * @covers PEAR2\WindowsAzure\Services\Table\Utilities\ManualAtomReaderWriter::_parseBody
+     * @covers PEAR2\WindowsAzure\Services\Table\Utilities\ManualAtomReaderWriter::parseTableEntries
+     */
+    public function testQueryTablesWithPrefix()
+    {
+        // Setup
+        $name1 = 'wquerytableswithprefix1';
+        $name2 = 'querytableswithprefix2';
+        $name3 = 'querytableswithprefix3';
+        $options = new QueryTablesOptions();
+        $options->setPrefix('q');
+        $this->createTable($name1);
+        $this->createTable($name2);
+        $this->createTable($name3);
+        
+        // Test
+        $result = $this->wrapper->queryTables($options);
+        
+        // Assert
+        $tables = $result->getTables();
+        $this->assertCount(2, $tables);
+        $this->assertEquals($name2, $tables[0]);
+        $this->assertEquals($name3, $tables[1]);
     }
 }
 
