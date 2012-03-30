@@ -68,6 +68,7 @@ class SharedKeyFilter implements IServiceFilter
             $sharedKeyLiteAuth = new TableSharedKeyLiteAuthenticationScheme(
                 $accountName, $accountKey
             );
+            
             $this->_sharedKeyAuthentication = $sharedKeyLiteAuth;
             break;
 

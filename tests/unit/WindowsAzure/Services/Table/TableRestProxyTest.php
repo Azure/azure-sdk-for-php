@@ -84,6 +84,8 @@ class TableRestProxyTest extends TableRestProxyTestBase
     
     /**
      * @covers PEAR2\WindowsAzure\Services\Table\TableRestProxy::createTable
+     * @covers PEAR2\WindowsAzure\Services\Table\Utilities\ManualAtomReaderWriter::_fillTemplate
+     * @covers PEAR2\WindowsAzure\Services\Table\Utilities\ManualAtomReaderWriter::getTable
      */
     public function testCreateTable()
     {
@@ -123,6 +125,8 @@ class TableRestProxyTest extends TableRestProxyTestBase
      * @covers PEAR2\WindowsAzure\Services\Table\TableRestProxy::_encodeODataUriValues
      * @covers PEAR2\WindowsAzure\Services\Table\TableRestProxy::_encodeODataUriValue
      * @covers PEAR2\WindowsAzure\Services\Table\Models\QueryTablesResult::create
+     * @covers PEAR2\WindowsAzure\Services\Table\Utilities\ManualAtomReaderWriter::_parseBody
+     * @covers PEAR2\WindowsAzure\Services\Table\Utilities\ManualAtomReaderWriter::parseTableEntries
      */
     public function testQueryTablesSimple()
     {
@@ -150,6 +154,8 @@ class TableRestProxyTest extends TableRestProxyTestBase
      * @covers PEAR2\WindowsAzure\Services\Table\TableRestProxy::_encodeODataUriValues
      * @covers PEAR2\WindowsAzure\Services\Table\TableRestProxy::_encodeODataUriValue
      * @covers PEAR2\WindowsAzure\Services\Table\Models\QueryTablesResult::create
+     * @covers PEAR2\WindowsAzure\Services\Table\Utilities\ManualAtomReaderWriter::_parseBody
+     * @covers PEAR2\WindowsAzure\Services\Table\Utilities\ManualAtomReaderWriter::parseTableEntries
      */
     public function testQueryTablesWithPrefix()
     {
