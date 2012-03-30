@@ -87,9 +87,13 @@ class Utilities
         }
         
         foreach ($var as $value) {
-            if (!is_array($value)) {
+            if ((gettype($value) == 'object') && (get_class($value) == 'SimpleXMLElement')) {
+                return (array) $var;
+            }
+            else if (!is_array($value)) {
                 return array($var);
             }
+
         }
         
         return $var;
@@ -106,9 +110,22 @@ class Utilities
      */
     public static function unserialize($xml)
     {
-        $unserializer = new \XML_Unserializer();
-        $unserializer->unserialize($xml);
-        return $unserializer->getUnserializedData();
+        $sxml = new \SimpleXMLElement($xml);
+
+        return self::sxml2arr($sxml);
+    }
+	
+    private static function sxml2arr($sxml, $arr = array ()) 
+    { 
+        foreach ((array) $sxml as $key => $value) 
+        {
+            if (is_object($value) || (is_array($value)))
+                $arr[$key] = self::sxml2arr($value);
+            else
+                $arr[$key] = $value;
+        }
+
+        return $arr; 
     }
     
     /**
@@ -123,19 +140,46 @@ class Utilities
      */
     public static function serialize($array, $rootName, $defaultTag = null)
     {
-        $options = array(
-            XML_SERIALIZER_OPTION_INDENT           => '    ',
-            XML_SERIALIZER_OPTION_XML_DECL_ENABLED => true,
-            XML_SERIALIZER_OPTION_RETURN_RESULT    => true,
-            XML_SERIALIZER_OPTION_XML_ENCODING     => "UTF-8",
-            XML_SERIALIZER_OPTION_ROOT_NAME        => $rootName,
-            XML_SERIALIZER_OPTION_DEFAULT_TAG      => $defaultTag
-        );
+        $xmlVersion = '1.0';
+        $xmlEncoding = 'UTF-8';
+
+        if(!is_array($array))
+                return false;
+
+        $xmlw = new \XmlWriter();
+        $xmlw->openMemory();
+        $xmlw->startDocument($xmlVersion, $xmlEncoding);
         
-        $serializer = new \XML_Serializer($options);
-        $xml        = $serializer->serialize($array);
-        
-        return $xml;
+        $xmlw->startElement($rootName);
+
+        self::arr2xml($xmlw, $array, $defaultTag);
+
+        $xmlw->endElement();
+
+        return $xmlw->outputMemory(true); 
+    }
+
+    private static function arr2xml(\XMLWriter $xmlw, $data, $defaultTag = null)
+    {
+        foreach($data as $key => $value)
+        {
+            if(is_array($value))
+            {
+                if (!is_int($key))
+                    if ($key != '')
+                        $xmlw->startElement($key);
+                    else
+                        $xmlw->startElement($defaultTag);
+                
+                self::arr2xml($xmlw, $value);
+                
+                if (!is_int($key))
+                    $xmlw->endElement();
+                continue;
+            }
+            else
+                $xmlw->writeElement($key, $value);
+        }
     }
     
     /**
