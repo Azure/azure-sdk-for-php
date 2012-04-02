@@ -52,6 +52,7 @@ class QueueServiceIntegrationTest extends IntegrationTestBase {
     private static $testQueues;
 
     public function setUp() {
+        parent::setUp();
         // Setup container names array (list of container names used by
         // integration tests)
         self::$testQueues = array();
@@ -78,59 +79,68 @@ class QueueServiceIntegrationTest extends IntegrationTestBase {
         self::$CREATABLE_QUEUE_3 = self::$creatableQueues[2];
 
         // Create all test containers and their content
-        $service = self::createService();
 
-        self::createQueues($service, self::$testQueuesPrefix, self::$testQueues);
+        self::createQueues(self::$testQueuesPrefix, self::$testQueues);
     }
 
     public function tearDown() {
-        $service = self::createService();
-
-        self::deleteQueues($service, self::$testQueuesPrefix, self::$testQueues);
-        self::deleteQueues($service, self::$createableQueuesPrefix, self::$creatableQueues);
+        parent::tearDown();
+        self::deleteQueues(self::$testQueuesPrefix, self::$testQueues);
+        self::deleteQueues(self::$createableQueuesPrefix, self::$creatableQueues);
     }
 
-    private static function createQueues($service, $prefix, $list) {
-        $containers = self::listQueues($service, $prefix);
+    /**
+    * @covers PEAR2\WindowsAzure\Services\Queue\QueueRestProxy::createQueue
+    */
+    private function createQueues($prefix, $list) {
+        $containers = self::listQueues($prefix);
         foreach($list as $item)  {
             if (!in_array($item, $containers)) {
-                $service->createQueue($item);
+                $this->wrapper->createQueue($item);
             }
         }
     }
 
-    private static function deleteQueues($service, $prefix, $list) {
-        $containers = self::listQueues($service, $prefix);
+    /**
+    * @covers PEAR2\WindowsAzure\Services\Queue\QueueRestProxy::deleteQueue
+    */
+    private function deleteQueues($prefix, $list) {
+        $containers = self::listQueues($prefix);
         foreach($list as $item)  {
             if (in_array($item, $containers)) {
-                $service->deleteQueue($item);
+                $this->wrapper->deleteQueue($item);
             }
         }
     }
 
-    private static function listQueues($service, $prefix) {
+    /**
+    * @covers PEAR2\WindowsAzure\Services\Queue\QueueRestProxy::listQueues
+    */
+    private function listQueues($prefix) {
         $result = array();
         $opts = new ListQueuesOptions();
         $opts->setPrefix($prefix);
-        $list = $service->listQueues($opts);
+        $list = $this->wrapper->listQueues($opts);
         foreach($list->getQueues() as $item)  {
             array_push($result, $item->getName());
         }
         return $result;
     }
 
+    /**
+    * @covers PEAR2\WindowsAzure\Services\Queue\QueueRestProxy::getServiceProperties
+    */
     public function testGetServicePropertiesWorks() {
         // Arrange
-        $service = self::createService();
 
         // Act
         $shouldReturn = false;
         try {
-            $props = $service->getServiceProperties()->getValue();
-            $this->assertFalse(self::isRunningWithEmulator(), 'Should succeed when not running in emulator');
+            $props = $this->wrapper->getServiceProperties()->getValue();
+            $this->assertFalse($this->isUsingStorageEmulator(), 'Should succeed when not running in emulator');
         } catch (ServiceException $e) {
             // Expect failure in emulator, as v1.6 doesn't support this method
-            if (self::isRunningWithEmulator()) {
+            if ($this->isUsingStorageEmulator()) {
                 $this->assertEquals(400, $e->getCode(), 'getCode');
                 $shouldReturn = true;
             }
@@ -148,18 +158,21 @@ class QueueServiceIntegrationTest extends IntegrationTestBase {
         $this->assertNotNull($props->getMetrics()->getVersion(), '$props->getMetrics()->getVersion');
     }
 
+    /**
+    * @covers PEAR2\WindowsAzure\Services\Queue\QueueRestProxy::getServiceProperties
+    * @covers PEAR2\WindowsAzure\Services\Queue\QueueRestProxy::setServiceProperties
+    */
     public function testSetServicePropertiesWorks() {
         // Arrange
-        $service = self::createService();
 
         // Act
         $shouldReturn = false;
         try {
-            $props = $service->getServiceProperties()->getValue();
-            $this->assertFalse(self::isRunningWithEmulator(), 'Should succeed when not running in emulator');
+            $props = $this->wrapper->getServiceProperties()->getValue();
+            $this->assertFalse($this->isUsingStorageEmulator(), 'Should succeed when not running in emulator');
         } catch (ServiceException $e) {
             // Expect failure in emulator, as v1.6 doesn't support this method
-            if (self::isRunningWithEmulator()) {
+            if ($this->isUsingStorageEmulator()) {
                 $this->assertEquals(400, $e->getCode(), 'getCode');
                 $shouldReturn = true;
             }
@@ -169,9 +182,9 @@ class QueueServiceIntegrationTest extends IntegrationTestBase {
         }
 
         $props->getLogging()->setRead(true);
-        $service->setServiceProperties($props);
+        $this->wrapper->setServiceProperties($props);
 
-        $props = $service->getServiceProperties()->getValue();
+        $props = $this->wrapper->getServiceProperties()->getValue();
 
         // Assert
         $this->assertNotNull($props, '$props');
@@ -183,14 +196,18 @@ class QueueServiceIntegrationTest extends IntegrationTestBase {
         $this->assertNotNull($props->getMetrics()->getVersion(), '$props->getMetrics()->getVersion');
     }
 
+    /**
+    * @covers PEAR2\WindowsAzure\Services\Queue\QueueRestProxy::createQueue
+    * @covers PEAR2\WindowsAzure\Services\Queue\QueueRestProxy::deleteQueue
+    * @covers PEAR2\WindowsAzure\Services\Queue\QueueRestProxy::getQueueMetadata
+    */
     public function testCreateQueueWorks() {
         // Arrange
-        $service = self::createService();
 
         // Act
-        $service->createQueue(self::$CREATABLE_QUEUE_1);
-        $result = $service->getQueueMetadata(self::$CREATABLE_QUEUE_1);
-        $service->deleteQueue(self::$CREATABLE_QUEUE_1);
+        $this->wrapper->createQueue(self::$CREATABLE_QUEUE_1);
+        $result = $this->wrapper->getQueueMetadata(self::$CREATABLE_QUEUE_1);
+        $this->wrapper->deleteQueue(self::$CREATABLE_QUEUE_1);
 
         // Assert
         $this->assertNotNull($result, 'result');
@@ -199,17 +216,21 @@ class QueueServiceIntegrationTest extends IntegrationTestBase {
         $this->assertEquals(0, count($result->getMetadata()), 'count($result->getMetadata');
     }
 
+    /**
+    * @covers PEAR2\WindowsAzure\Services\Queue\QueueRestProxy::createQueue
+    * @covers PEAR2\WindowsAzure\Services\Queue\QueueRestProxy::deleteQueue
+    * @covers PEAR2\WindowsAzure\Services\Queue\QueueRestProxy::getQueueMetadata
+    */
     public function testCreateQueueWithOptionsWorks() {
         // Arrange
-        $service = self::createService();
 
         // Act
         $opts = new CreateQueueOptions();
         $opts->addMetadata('foo', 'bar');
         $opts->addMetadata('test', 'blah');
-        $service->createQueue(self::$CREATABLE_QUEUE_2, $opts);
-        $result = $service->getQueueMetadata(self::$CREATABLE_QUEUE_2);
-        $service->deleteQueue(self::$CREATABLE_QUEUE_2);
+        $this->wrapper->createQueue(self::$CREATABLE_QUEUE_2, $opts);
+        $result = $this->wrapper->getQueueMetadata(self::$CREATABLE_QUEUE_2);
+        $this->wrapper->deleteQueue(self::$CREATABLE_QUEUE_2);
 
         // Assert
         $this->assertNotNull($result, '$result');
@@ -221,17 +242,19 @@ class QueueServiceIntegrationTest extends IntegrationTestBase {
         $this->assertEquals('blah', $metadata['test'], '$metadata[test]');
     }
 
+    /**
+    * @covers PEAR2\WindowsAzure\Services\Queue\QueueRestProxy::listQueues
+    */
     public function testListQueuesWorks() {
         // Arrange
-        $service = self::createService();
 
         // Act
-        $result = $service->listQueues();
-        
+        $result = $this->wrapper->listQueues();
+
         // Assert
         $this->assertNotNull($result, '$result');
         $this->assertNotNull($result->getQueues(), '$result->getQueues');
-        
+
         // TODO: Uncomment when the following issue is fixed:
         // https://github.com/WindowsAzure/azure-sdk-for-php/issues/98
         // $this->assertNotNull($result->getAccountName(), '$result->getAccountName()');
@@ -240,9 +263,11 @@ class QueueServiceIntegrationTest extends IntegrationTestBase {
         $this->assertTrue(count(self::$testQueues) <= count($result->getQueues()), 'counts');
     }
 
+    /**
+    * @covers PEAR2\WindowsAzure\Services\Queue\QueueRestProxy::listQueues
+    */
     public function testListQueuesWithOptionsWorks() {
         // Arrange
-        $service = self::createService();
 
         // Act
         $opts = new ListQueuesOptions();
@@ -252,13 +277,13 @@ class QueueServiceIntegrationTest extends IntegrationTestBase {
         $opts->setMaxResults('3');
         $opts->setIncludeMetadata(true);
         $opts->setPrefix(self::$testQueuesPrefix);
-        $result = $service->listQueues($opts);
+        $result = $this->wrapper->listQueues($opts);
 
         $opts = new ListQueuesOptions();
         $opts->setMarker($result->getNextMarker());
         $opts->setIncludeMetadata(false);
         $opts->setPrefix(self::$testQueuesPrefix);
-        $result2 = $service->listQueues($opts);
+        $result2 = $this->wrapper->listQueues($opts);
 
         // Assert
         $this->assertNotNull($result, '$result');
@@ -292,22 +317,27 @@ class QueueServiceIntegrationTest extends IntegrationTestBase {
         $this->assertNotNull($queue20->getUrl(), '$queue20->getUrl');
     }
 
+    /**
+    * @covers PEAR2\WindowsAzure\Services\Queue\QueueRestProxy::createQueue
+    * @covers PEAR2\WindowsAzure\Services\Queue\QueueRestProxy::deleteQueue
+    * @covers PEAR2\WindowsAzure\Services\Queue\QueueRestProxy::getQueueMetadata
+    * @covers PEAR2\WindowsAzure\Services\Queue\QueueRestProxy::setQueueMetadata
+    */
     public function testSetQueueMetadataWorks() {
         // Arrange
-        $service = self::createService();
 
         // Act
-        $service->createQueue(self::$CREATABLE_QUEUE_3);
+        $this->wrapper->createQueue(self::$CREATABLE_QUEUE_3);
 
         $metadata = array(
             'foo' => 'bar',
             'test' => 'blah',
             );
-        $service->setQueueMetadata(self::$CREATABLE_QUEUE_3, $metadata);
+        $this->wrapper->setQueueMetadata(self::$CREATABLE_QUEUE_3, $metadata);
 
-        $result = $service->getQueueMetadata(self::$CREATABLE_QUEUE_3);
+        $result = $this->wrapper->getQueueMetadata(self::$CREATABLE_QUEUE_3);
 
-        $service->deleteQueue(self::$CREATABLE_QUEUE_3);
+        $this->wrapper->deleteQueue(self::$CREATABLE_QUEUE_3);
 
         // Assert
         $this->assertNotNull($result, '$result');
@@ -319,32 +349,37 @@ class QueueServiceIntegrationTest extends IntegrationTestBase {
         $this->assertEquals('blah', $metadata['test'], '$metadata[\'test\']');
     }
 
+    /**
+    * @covers PEAR2\WindowsAzure\Services\Queue\QueueRestProxy::createMessage
+    */
     public function testCreateMessageWorks() {
         // Arrange
-        $service = self::createService();
 
         // Act
-        $service->createMessage(self::$TEST_QUEUE_FOR_MESSAGES, 'message1');
-        $service->createMessage(self::$TEST_QUEUE_FOR_MESSAGES, 'message2');
-        $service->createMessage(self::$TEST_QUEUE_FOR_MESSAGES, 'message3');
-        $service->createMessage(self::$TEST_QUEUE_FOR_MESSAGES, 'message4');
+        $this->wrapper->createMessage(self::$TEST_QUEUE_FOR_MESSAGES, 'message1');
+        $this->wrapper->createMessage(self::$TEST_QUEUE_FOR_MESSAGES, 'message2');
+        $this->wrapper->createMessage(self::$TEST_QUEUE_FOR_MESSAGES, 'message3');
+        $this->wrapper->createMessage(self::$TEST_QUEUE_FOR_MESSAGES, 'message4');
 
         // Assert
         $this->assertTrue(true, 'if get there, it is working');
     }
 
+    /**
+    * @covers PEAR2\WindowsAzure\Services\Queue\QueueRestProxy::createMessage
+    * @covers PEAR2\WindowsAzure\Services\Queue\QueueRestProxy::listMessages
+    */
     public function testListMessagesWorks() {
         // Arrange
-        $service = self::createService();
         $year2010 = new \DateTime;
-        $year2010->setDate(2010, 1, 1);        
+        $year2010->setDate(2010, 1, 1);
 
         // Act
-        $service->createMessage(self::$TEST_QUEUE_FOR_MESSAGES_2, 'message1');
-        $service->createMessage(self::$TEST_QUEUE_FOR_MESSAGES_2, 'message2');
-        $service->createMessage(self::$TEST_QUEUE_FOR_MESSAGES_2, 'message3');
-        $service->createMessage(self::$TEST_QUEUE_FOR_MESSAGES_2, 'message4');
-        $result = $service->listMessages(self::$TEST_QUEUE_FOR_MESSAGES_2);
+        $this->wrapper->createMessage(self::$TEST_QUEUE_FOR_MESSAGES_2, 'message1');
+        $this->wrapper->createMessage(self::$TEST_QUEUE_FOR_MESSAGES_2, 'message2');
+        $this->wrapper->createMessage(self::$TEST_QUEUE_FOR_MESSAGES_2, 'message3');
+        $this->wrapper->createMessage(self::$TEST_QUEUE_FOR_MESSAGES_2, 'message4');
+        $result = $this->wrapper->listMessages(self::$TEST_QUEUE_FOR_MESSAGES_2);
 
         // Assert
         $this->assertNotNull($result, '$result');
@@ -352,7 +387,7 @@ class QueueServiceIntegrationTest extends IntegrationTestBase {
 
         $entry = $result->getQueueMessages();
         $entry = $entry[0];
-        
+
         $this->assertNotNull($entry->getMessageId(), '$entry->getMessageId');
         $this->assertNotNull($entry->getMessageText(), '$entry->getMessageText');
         $this->assertNotNull($entry->getPopReceipt(), '$entry->getPopReceipt');
@@ -368,21 +403,24 @@ class QueueServiceIntegrationTest extends IntegrationTestBase {
         $this->assertTrue($year2010 < $entry->getTimeNextVisible(), 'diff');
     }
 
+    /**
+    * @covers PEAR2\WindowsAzure\Services\Queue\QueueRestProxy::createMessage
+    * @covers PEAR2\WindowsAzure\Services\Queue\QueueRestProxy::listMessages
+    */
     public function testListMessagesWithOptionsWorks() {
         // Arrange
-        $service = self::createService();
         $year2010 = new \DateTime;
-        $year2010->setDate(2010, 1, 1);        
+        $year2010->setDate(2010, 1, 1);
 
         // Act
-        $service->createMessage(self::$TEST_QUEUE_FOR_MESSAGES_3, 'message1');
-        $service->createMessage(self::$TEST_QUEUE_FOR_MESSAGES_3, 'message2');
-        $service->createMessage(self::$TEST_QUEUE_FOR_MESSAGES_3, 'message3');
-        $service->createMessage(self::$TEST_QUEUE_FOR_MESSAGES_3, 'message4');
+        $this->wrapper->createMessage(self::$TEST_QUEUE_FOR_MESSAGES_3, 'message1');
+        $this->wrapper->createMessage(self::$TEST_QUEUE_FOR_MESSAGES_3, 'message2');
+        $this->wrapper->createMessage(self::$TEST_QUEUE_FOR_MESSAGES_3, 'message3');
+        $this->wrapper->createMessage(self::$TEST_QUEUE_FOR_MESSAGES_3, 'message4');
         $opts = new ListMessagesOptions();
         $opts->setNumberOfMessages(4);
         $opts->setVisibilityTimeoutInSeconds(20);
-        $result = $service->listMessages(self::$TEST_QUEUE_FOR_MESSAGES_3, $opts);
+        $result = $this->wrapper->listMessages(self::$TEST_QUEUE_FOR_MESSAGES_3, $opts);
 
         // Assert
         $this->assertNotNull($result, '$result');
@@ -407,18 +445,22 @@ class QueueServiceIntegrationTest extends IntegrationTestBase {
         }
     }
 
+    /**
+    * @covers PEAR2\WindowsAzure\Services\Queue\QueueRestProxy::createMessage
+    * @covers PEAR2\WindowsAzure\Services\Queue\QueueRestProxy::peekMessages
+    */
     public function testPeekMessagesWorks() {
         // Arrange
-        $service = self::createService();
+
         $year2010 = new \DateTime;
-        $year2010->setDate(2010, 1, 1);        
+        $year2010->setDate(2010, 1, 1);
 
         // Act
-        $service->createMessage(self::$TEST_QUEUE_FOR_MESSAGES_4, 'message1');
-        $service->createMessage(self::$TEST_QUEUE_FOR_MESSAGES_4, 'message2');
-        $service->createMessage(self::$TEST_QUEUE_FOR_MESSAGES_4, 'message3');
-        $service->createMessage(self::$TEST_QUEUE_FOR_MESSAGES_4, 'message4');
-        $result = $service->peekMessages(self::$TEST_QUEUE_FOR_MESSAGES_4);
+        $this->wrapper->createMessage(self::$TEST_QUEUE_FOR_MESSAGES_4, 'message1');
+        $this->wrapper->createMessage(self::$TEST_QUEUE_FOR_MESSAGES_4, 'message2');
+        $this->wrapper->createMessage(self::$TEST_QUEUE_FOR_MESSAGES_4, 'message3');
+        $this->wrapper->createMessage(self::$TEST_QUEUE_FOR_MESSAGES_4, 'message4');
+        $result = $this->wrapper->peekMessages(self::$TEST_QUEUE_FOR_MESSAGES_4);
 
         // Assert
         $this->assertNotNull($result, '$result');
@@ -438,20 +480,23 @@ class QueueServiceIntegrationTest extends IntegrationTestBase {
         $this->assertTrue($year2010 < $entry->getInsertionDate(), '$year2010 < $entry->getInsertionDate()');
     }
 
+    /**
+    * @covers PEAR2\WindowsAzure\Services\Queue\QueueRestProxy::createMessage
+    * @covers PEAR2\WindowsAzure\Services\Queue\QueueRestProxy::peekMessages
+    */
     public function testPeekMessagesWithOptionsWorks() {
         // Arrange
-        $service = self::createService();
         $year2010 = new \DateTime;
-        $year2010->setDate(2010, 1, 1);        
+        $year2010->setDate(2010, 1, 1);
 
         // Act
-        $service->createMessage(self::$TEST_QUEUE_FOR_MESSAGES_5, 'message1');
-        $service->createMessage(self::$TEST_QUEUE_FOR_MESSAGES_5, 'message2');
-        $service->createMessage(self::$TEST_QUEUE_FOR_MESSAGES_5, 'message3');
-        $service->createMessage(self::$TEST_QUEUE_FOR_MESSAGES_5, 'message4');
+        $this->wrapper->createMessage(self::$TEST_QUEUE_FOR_MESSAGES_5, 'message1');
+        $this->wrapper->createMessage(self::$TEST_QUEUE_FOR_MESSAGES_5, 'message2');
+        $this->wrapper->createMessage(self::$TEST_QUEUE_FOR_MESSAGES_5, 'message3');
+        $this->wrapper->createMessage(self::$TEST_QUEUE_FOR_MESSAGES_5, 'message4');
         $opts = new PeekMessagesOptions();
         $opts->setNumberOfMessages(4);
-        $result = $service->peekMessages(self::$TEST_QUEUE_FOR_MESSAGES_5, $opts);
+        $result = $this->wrapper->peekMessages(self::$TEST_QUEUE_FOR_MESSAGES_5, $opts);
 
         // Assert
         $this->assertNotNull($result, '$result');
@@ -472,72 +517,84 @@ class QueueServiceIntegrationTest extends IntegrationTestBase {
         }
     }
 
+    /**
+    * @covers PEAR2\WindowsAzure\Services\Queue\QueueRestProxy::clearMessages
+    * @covers PEAR2\WindowsAzure\Services\Queue\QueueRestProxy::createMessage
+    * @covers PEAR2\WindowsAzure\Services\Queue\QueueRestProxy::peekMessages
+    */
     public function testClearMessagesWorks() {
         // Arrange
-        $service = self::createService();
 
         // Act
-        $service->createMessage(self::$TEST_QUEUE_FOR_MESSAGES_6, 'message1');
-        $service->createMessage(self::$TEST_QUEUE_FOR_MESSAGES_6, 'message2');
-        $service->createMessage(self::$TEST_QUEUE_FOR_MESSAGES_6, 'message3');
-        $service->createMessage(self::$TEST_QUEUE_FOR_MESSAGES_6, 'message4');
-        $service->clearMessages(self::$TEST_QUEUE_FOR_MESSAGES_6);
+        $this->wrapper->createMessage(self::$TEST_QUEUE_FOR_MESSAGES_6, 'message1');
+        $this->wrapper->createMessage(self::$TEST_QUEUE_FOR_MESSAGES_6, 'message2');
+        $this->wrapper->createMessage(self::$TEST_QUEUE_FOR_MESSAGES_6, 'message3');
+        $this->wrapper->createMessage(self::$TEST_QUEUE_FOR_MESSAGES_6, 'message4');
+        $this->wrapper->clearMessages(self::$TEST_QUEUE_FOR_MESSAGES_6);
 
-        $result = $service->peekMessages(self::$TEST_QUEUE_FOR_MESSAGES_6);
+        $result = $this->wrapper->peekMessages(self::$TEST_QUEUE_FOR_MESSAGES_6);
 
         // Assert
         $this->assertNotNull($result, '$result');
         $this->assertEquals(0, count($result->getQueueMessages()), 'count($result->getQueueMessages())');
     }
 
+    /**
+    * @covers PEAR2\WindowsAzure\Services\Queue\QueueRestProxy::createMessage
+    * @covers PEAR2\WindowsAzure\Services\Queue\QueueRestProxy::deleteMessage
+    * @covers PEAR2\WindowsAzure\Services\Queue\QueueRestProxy::listMessages
+    */
     public function testDeleteMessageWorks() {
         // Arrange
-        $service = self::createService();
 
         // Act
-        $service->createMessage(self::$TEST_QUEUE_FOR_MESSAGES_7, 'message1');
-        $service->createMessage(self::$TEST_QUEUE_FOR_MESSAGES_7, 'message2');
-        $service->createMessage(self::$TEST_QUEUE_FOR_MESSAGES_7, 'message3');
-        $service->createMessage(self::$TEST_QUEUE_FOR_MESSAGES_7, 'message4');
+        $this->wrapper->createMessage(self::$TEST_QUEUE_FOR_MESSAGES_7, 'message1');
+        $this->wrapper->createMessage(self::$TEST_QUEUE_FOR_MESSAGES_7, 'message2');
+        $this->wrapper->createMessage(self::$TEST_QUEUE_FOR_MESSAGES_7, 'message3');
+        $this->wrapper->createMessage(self::$TEST_QUEUE_FOR_MESSAGES_7, 'message4');
 
-        $result = $service->listMessages(self::$TEST_QUEUE_FOR_MESSAGES_7);
+        $result = $this->wrapper->listMessages(self::$TEST_QUEUE_FOR_MESSAGES_7);
         $message0 = $result->getQueueMessages();
         $message0 = $message0[0];
-        
-        $service->deleteMessage(self::$TEST_QUEUE_FOR_MESSAGES_7, $message0->getMessageId(), $message0->getPopReceipt());
+
+        $this->wrapper->deleteMessage(self::$TEST_QUEUE_FOR_MESSAGES_7, $message0->getMessageId(), $message0->getPopReceipt());
         $opts = new ListMessagesOptions();
         $opts->setNumberOfMessages(32);
-        $result2 = $service->listMessages(self::$TEST_QUEUE_FOR_MESSAGES_7, $opts);
+        $result2 = $this->wrapper->listMessages(self::$TEST_QUEUE_FOR_MESSAGES_7, $opts);
 
         // Assert
         $this->assertNotNull($result2, '$result2');
         $this->assertEquals(3, count($result2->getQueueMessages()), 'count($result2->getQueueMessages())');
     }
 
+    /**
+    * @covers PEAR2\WindowsAzure\Services\Queue\QueueRestProxy::createMessage
+    * @covers PEAR2\WindowsAzure\Services\Queue\QueueRestProxy::listMessages
+    * @covers PEAR2\WindowsAzure\Services\Queue\QueueRestProxy::updateMessage
+    */
     public function testUpdateMessageWorks() {
         // Arrange
-        $service = self::createService();
         $year2010 = new \DateTime;
-        $year2010->setDate(2010, 1, 1);        
+        $year2010->setDate(2010, 1, 1);
 
         // Act
-        $service->createMessage(self::$TEST_QUEUE_FOR_MESSAGES_8, 'message1');
+        $this->wrapper->createMessage(self::$TEST_QUEUE_FOR_MESSAGES_8, 'message1');
 
-        $listResult1 = $service->listMessages(self::$TEST_QUEUE_FOR_MESSAGES_8);
+        $listResult1 = $this->wrapper->listMessages(self::$TEST_QUEUE_FOR_MESSAGES_8);
         $message0 = $listResult1->getQueueMessages();
         $message0 = $message0[0];
-        
+
         // TODO: Change the last parameter to 0 when the following is fixed:
         // https://github.com/WindowsAzure/azure-sdk-for-php/issues/99
         // Also, remove the sleep.
-        $updateResult = $service->updateMessage(
-                self::$TEST_QUEUE_FOR_MESSAGES_8, 
-                $message0->getMessageId(), 
-                $message0->getPopReceipt(), 
-                'new text', 
+        $updateResult = $this->wrapper->updateMessage(
+                self::$TEST_QUEUE_FOR_MESSAGES_8,
+                $message0->getMessageId(),
+                $message0->getPopReceipt(),
+                'new text',
                 1);
         sleep(2);
-        $listResult2 = $service->listMessages(self::$TEST_QUEUE_FOR_MESSAGES_8);
+        $listResult2 = $this->wrapper->listMessages(self::$TEST_QUEUE_FOR_MESSAGES_8);
 
         // Assert
         $this->assertNotNull($updateResult, '$updateResult');
@@ -551,7 +608,7 @@ class QueueServiceIntegrationTest extends IntegrationTestBase {
 
         $blarg = $listResult1->getQueueMessages();
         $blarg = $blarg[0];
-        
+
         $this->assertEquals($blarg->getMessageId(), $entry->getMessageId(), '$entry->getMessageId()');
         $this->assertEquals('new text', $entry->getMessageText(), '$entry->getMessageText()');
         $this->assertNotNull($entry->getPopReceipt(), '$entry->getPopReceipt()');

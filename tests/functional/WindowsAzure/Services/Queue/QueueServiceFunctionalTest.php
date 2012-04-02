@@ -44,17 +44,20 @@ class QueueServiceFunctionalTest extends FunctionalTestBase {
     // --- getServiceProperties ---
     // ----------------------------
 
+    /**
+    * @covers PEAR2\WindowsAzure\Services\Queue\QueueRestProxy::getServiceProperties
+    * @covers PEAR2\WindowsAzure\Services\Queue\QueueRestProxy::setServiceProperties
+    */
     public function testGetServicePropertiesNoOptions() {
-        $service = FunctionalTestBase::createService();
         $serviceProperties = QueueServiceFunctionalTestData::getDefaultServiceProperties();
        
         $shouldReturn = false;
         try {
-            $service->setServiceProperties($serviceProperties);
-            $this->assertFalse(self::isRunningWithEmulator(), 'Should succeed when not running in emulator');
+            $this->wrapper->setServiceProperties($serviceProperties);
+            $this->assertFalse($this->isUsingStorageEmulator(), 'Should succeed when not running in emulator');
         } catch (ServiceException $e) {
             // Expect failure in emulator, as v1.6 doesn't support this method
-            if (self::isRunningWithEmulator()) {
+            if ($this->isUsingStorageEmulator()) {
                 $this->assertEquals(400, $e->getCode(), 'getCode');
                 $shouldReturn = true;
             }
@@ -63,20 +66,23 @@ class QueueServiceFunctionalTest extends FunctionalTestBase {
             return;
         }
 
-        $this->getServicePropertiesWorker($service, null);
+        $this->getServicePropertiesWorker(null);
     }
 
+    /**
+    * @covers PEAR2\WindowsAzure\Services\Queue\QueueRestProxy::getServiceProperties
+    * @covers PEAR2\WindowsAzure\Services\Queue\QueueRestProxy::setServiceProperties
+    */
     public function testGetServiceProperties() {
-        $service = FunctionalTestBase::createService();
         $serviceProperties = QueueServiceFunctionalTestData::getDefaultServiceProperties();
 
         $shouldReturn = false;
         try {
-            $service->setServiceProperties($serviceProperties);
-            $this->assertFalse(self::isRunningWithEmulator(), 'Should succeed when not running in emulator');
+            $this->wrapper->setServiceProperties($serviceProperties);
+            $this->assertFalse($this->isUsingStorageEmulator(), 'Should succeed when not running in emulator');
         } catch (ServiceException $e) {
             // Expect failure in emulator, as v1.6 doesn't support this method
-            if (self::isRunningWithEmulator()) {
+            if ($this->isUsingStorageEmulator()) {
                 $this->assertEquals(400, $e->getCode(), 'getCode');
                 $shouldReturn = true;
             }
@@ -93,15 +99,15 @@ class QueueServiceFunctionalTest extends FunctionalTestBase {
             // https://github.com/WindowsAzure/azure-sdk-for-php/issues/69
             // $options->setTimeout($timeout);
             $options->setTimeout($timeout . '');
-            $this->getServicePropertiesWorker($service, $options);
+            $this->getServicePropertiesWorker($options);
         }
     }
 
-    private function getServicePropertiesWorker($service, $options) {
+    private function getServicePropertiesWorker($options) {
         self::println( 'Trying $options: ' . self::tmptostring($options));
         $effOptions = ($options == null ? new QueueServiceOptions() : $options);
         try {
-            $ret = ($options == null ? $service->getServiceProperties() : $service->getServiceProperties($options));
+            $ret = ($options == null ? $this->wrapper->getServiceProperties() : $this->wrapper->getServiceProperties($options));
 
             // TODO: Revert when fixed
             // https://github.com/WindowsAzure/azure-sdk-for-php/issues/101
@@ -109,12 +115,12 @@ class QueueServiceFunctionalTest extends FunctionalTestBase {
             if ($effOptions->getTimeout() != null && $effOptions->getTimeout() < 0) {
                 $this->True('Expect negative timeouts in $options to throw', false);
             } else {
-                $this->assertFalse(self::isRunningWithEmulator(), 'Should succeed when not running in emulator');
+                $this->assertFalse($this->isUsingStorageEmulator(), 'Should succeed when not running in emulator');
             }
             $this->verifyServicePropertiesWorker($ret, null);
         }
         catch (ServiceException $e) {
-            if (self::isRunningWithEmulator()) {
+            if ($this->isUsingStorageEmulator()) {
                 if ($options->getTimeout() != null && $options->getTimeout() < 0) {
                     $this->assertEquals(500, $e->getCode(), 'getCode');
                 } else {
@@ -166,14 +172,20 @@ class QueueServiceFunctionalTest extends FunctionalTestBase {
     // --- setServiceProperties ---
     // ----------------------------
 
+    /**
+    * @covers PEAR2\WindowsAzure\Services\Queue\QueueRestProxy::getServiceProperties
+    * @covers PEAR2\WindowsAzure\Services\Queue\QueueRestProxy::setServiceProperties
+    */
     public function testSetServicePropertiesNoOptions() {
-        $service = FunctionalTestBase::createService();
         $serviceProperties = QueueServiceFunctionalTestData::getDefaultServiceProperties();
-        $this->setServicePropertiesWorker($service, $serviceProperties, null);
+        $this->setServicePropertiesWorker($serviceProperties, null);
     }
 
+    /**
+    * @covers PEAR2\WindowsAzure\Services\Queue\QueueRestProxy::getServiceProperties
+    * @covers PEAR2\WindowsAzure\Services\Queue\QueueRestProxy::setServiceProperties
+    */
     public function testSetServiceProperties() {
-        $service = FunctionalTestBase::createService();
         $interestingServiceProperties = QueueServiceFunctionalTestData::getInterestingServiceProperties();
         foreach($interestingServiceProperties as $serviceProperties)  {
             $interestingTimeouts = QueueServiceFunctionalTestData::getInterestingTimeoutValues();
@@ -183,23 +195,23 @@ class QueueServiceFunctionalTest extends FunctionalTestBase {
                 // https://github.com/WindowsAzure/azure-sdk-for-php/issues/69
                 // $options->setTimeout($timeout);
                 $options->setTimeout($timeout . '');
-                $this->setServicePropertiesWorker($service, $serviceProperties, $options);
+                $this->setServicePropertiesWorker($serviceProperties, $options);
             }
         }
     }
 
-    private function setServicePropertiesWorker($service, $serviceProperties, $options) {
+    private function setServicePropertiesWorker($serviceProperties, $options) {
         self::println( 'Trying $options: ' . self::tmptostring($options) . 
                 ' and $serviceProperties' . self::tmptostring($serviceProperties));
         
         try {
             if ($options == null) {
-                $service->setServiceProperties($serviceProperties);
+                $this->wrapper->setServiceProperties($serviceProperties);
             } else {
-                $service->setServiceProperties($serviceProperties, $options);
+                $this->wrapper->setServiceProperties($serviceProperties, $options);
             }
 
-            $this->assertFalse(self::isRunningWithEmulator(), 'Should succeed when not running in emulator');
+            $this->assertFalse($this->isUsingStorageEmulator(), 'Should succeed when not running in emulator');
 
             if ($options == null) {
                 $options = new QueueServiceOptions();
@@ -211,10 +223,10 @@ class QueueServiceFunctionalTest extends FunctionalTestBase {
             if ($options->getTimeout() != null && $options->getTimeout() < 0) {
                 $this->assertTrue(false, 'Expect negative timeouts in $options to throw');
             } else {
-                $this->assertFalse(self::isRunningWithEmulator(), 'Should succeed when not running in emulator');
+                $this->assertFalse($this->isUsingStorageEmulator(), 'Should succeed when not running in emulator');
             }
 
-            $ret = ($options == null ? $service->getServiceProperties() : $service->getServiceProperties($options));
+            $ret = ($options == null ? $this->wrapper->getServiceProperties() : $this->wrapper->getServiceProperties($options));
 
             $this->verifyServicePropertiesWorker($ret, $serviceProperties);
 
@@ -223,7 +235,7 @@ class QueueServiceFunctionalTest extends FunctionalTestBase {
                 $options = new QueueServiceOptions();
             }
 
-            if (self::isRunningWithEmulator()) {
+            if ($this->isUsingStorageEmulator()) {
                 if ($options->getTimeout() != null && $options->getTimeout() < 0) {
                     $this->assertEquals(500, $e->getCode(), 'getCode');
                 } else {
@@ -243,25 +255,29 @@ class QueueServiceFunctionalTest extends FunctionalTestBase {
     // --- listQueues ---
     // ------------------
 
+    /**
+    * @covers PEAR2\WindowsAzure\Services\Queue\QueueRestProxy::listQueues
+    */
     public function testListQueuesNoOptions() {
-        $service = FunctionalTestBase::createService();
-        $this->listQueuesWorker($service, null);
+        $this->listQueuesWorker(null);
     }
 
+    /**
+    * @covers PEAR2\WindowsAzure\Services\Queue\QueueRestProxy::listQueues
+    */
     public function testListQueues() {
-        $service = FunctionalTestBase::createService();
         $interestingListQueuesOptions = QueueServiceFunctionalTestData::getInterestingListQueuesOptions();
         foreach($interestingListQueuesOptions as $options)  {
-            $this->listQueuesWorker($service, $options);
+            $this->listQueuesWorker($options);
         }
     }
 
-    private function listQueuesWorker($service, $options) {
+    private function listQueuesWorker($options) {
         self::println( 'Trying $options: ' . self::tmptostring($options));
         $finished = false;
         while (!$finished) {
             try {
-                $ret = ($options == null ? $service->listQueues() : $service->listQueues($options));
+                $ret = ($options == null ? $this->wrapper->listQueues() : $this->wrapper->listQueues($options));
 
                 if ($options == null) {
                     $options = new ListQueuesOptions();
@@ -313,10 +329,9 @@ class QueueServiceFunctionalTest extends FunctionalTestBase {
         $this->assertNotNull($ret->getQueues(), 'getQueues');
          
         if ($options->getMaxResults() == 0) {
-            $this->assertEquals(
+            $this->assertEquals(0, strlen($ret->getNextMarker()),
                     'When MaxResults is 0, expect getNextMarker (' . 
-                    $ret->getNextMarker() . ')to be have length 0', 
-                    0, strlen($ret->getNextMarker()));
+                    $ret->getNextMarker() . ')to be have length 0');
 
             if ($options->getPrefix() != null && $options->getPrefix() == QueueServiceFunctionalTestData::$nonExistQueuePrefix) {
                 $this->assertEquals(0, count($ret->getQueues()), 'when MaxResults=0 and Prefix=(\'' . $options->getPrefix() . '\'), then Queues->length');
@@ -343,11 +358,10 @@ class QueueServiceFunctionalTest extends FunctionalTestBase {
             }
         }
         else {
-            $this->assertEquals('when NextMarker (' . $ret->getNextMarker() .
+            $this->assertEquals(count($ret ->getQueues()), $options->getMaxResults(),
+                    'when NextMarker (' . $ret->getNextMarker() .
                     ')!=\'\', Queues->length (' . count($ret->getQueues()) . 
-                    ') should be == MaxResults (' . $options->getMaxResults() . ')', 
-                    count($ret ->getQueues()), 
-                    $options->getMaxResults());
+                    ') should be == MaxResults (' . $options->getMaxResults() . ')');
 
             if ($options->getPrefix() != null && $options->getPrefix() == (QueueServiceFunctionalTestData::$nonExistQueuePrefix)) {
                 $this->assertTrue(false, 'when a next marker and Prefix=(\'' . $options->getPrefix() . '\'), impossible');
@@ -361,30 +375,40 @@ class QueueServiceFunctionalTest extends FunctionalTestBase {
     // --- createQueue --- 
     // -------------------  
 
+    /**
+    * @covers PEAR2\WindowsAzure\Services\Queue\QueueRestProxy::createQueue
+    * @covers PEAR2\WindowsAzure\Services\Queue\QueueRestProxy::deleteQueue
+    * @covers PEAR2\WindowsAzure\Services\Queue\QueueRestProxy::getQueueMetadata
+    * @covers PEAR2\WindowsAzure\Services\Queue\QueueRestProxy::listQueues
+    */
     public function testCreateQueueNoOptions() {
-        $service = FunctionalTestBase::createService();
-        $this->createQueueWorker($service, null);
+        $this->createQueueWorker(null);
     }
 
+    /**
+    * @covers PEAR2\WindowsAzure\Services\Queue\QueueRestProxy::createQueue
+    * @covers PEAR2\WindowsAzure\Services\Queue\QueueRestProxy::deleteQueue
+    * @covers PEAR2\WindowsAzure\Services\Queue\QueueRestProxy::getQueueMetadata
+    * @covers PEAR2\WindowsAzure\Services\Queue\QueueRestProxy::listQueues
+    */
     public function testCreateQueue() {
-        $service = FunctionalTestBase::createService();
         $interestingCreateQueueOptions = QueueServiceFunctionalTestData::getInterestingCreateQueueOptions();
         foreach($interestingCreateQueueOptions as $options)  {
-            $this->createQueueWorker($service, $options);
+            $this->createQueueWorker($options);
         }
     }
 
-    private function createQueueWorker($service, $options) {
+    private function createQueueWorker($options) {
         self::println( 'Trying $options: ' . self::tmptostring($options));
         $queue = QueueServiceFunctionalTestData::getInterestingQueueName();
         $created = false;
 
         try {
             if ($options == null) {
-                $service->createQueue($queue);
+                $this->wrapper->createQueue($queue);
             }
             else {
-                $service->createQueue($queue, $options);
+                $this->wrapper->createQueue($queue, $options);
             }
             $created = true;
 
@@ -403,13 +427,13 @@ class QueueServiceFunctionalTest extends FunctionalTestBase {
             // Make sure that the list of all applicable queues is correctly updated.
             $opts = new ListQueuesOptions();
             $opts->setPrefix(QueueServiceFunctionalTestData::$testUniqueId);
-            $qs = $service->listQueues($opts);
+            $qs = $this->wrapper->listQueues($opts);
             $this->assertEquals(count($qs->getQueues()), (count(QueueServiceFunctionalTestData::$TEST_QUEUE_NAMES) + 1), 'After adding one, with Prefix=(\'' . QueueServiceFunctionalTestData::$testUniqueId . '\'), then Queues->length');
 
             // Check the metadata on the queue
-            $ret = $service->getQueueMetadata($queue);
+            $ret = $this->wrapper->getQueueMetadata($queue);
             $this->verifyCreateQueueWorker($ret, $options);
-            $service->deleteQueue($queue);
+            $this->wrapper->deleteQueue($queue);
             $created = false;
         }
         catch (ServiceException $e) {
@@ -427,7 +451,7 @@ class QueueServiceFunctionalTest extends FunctionalTestBase {
             }
         }
         if ($created) {
-            $service->deleteQueue($queue);
+            $this->wrapper->deleteQueue($queue);
         }
     }
 
@@ -459,41 +483,49 @@ class QueueServiceFunctionalTest extends FunctionalTestBase {
     // --- deleteQueue ---
     // -------------------
 
+    /**
+    * @covers PEAR2\WindowsAzure\Services\Queue\QueueRestProxy::createQueue
+    * @covers PEAR2\WindowsAzure\Services\Queue\QueueRestProxy::deleteQueue
+    * @covers PEAR2\WindowsAzure\Services\Queue\QueueRestProxy::listQueues
+    */
     public function testDeleteQueueNoOptions() {
-        $service = FunctionalTestBase::createService();
-        $this->deleteQueueWorker($service, null);
+        $this->deleteQueueWorker(null);
     }
 
+    /**
+    * @covers PEAR2\WindowsAzure\Services\Queue\QueueRestProxy::createQueue
+    * @covers PEAR2\WindowsAzure\Services\Queue\QueueRestProxy::deleteQueue
+    * @covers PEAR2\WindowsAzure\Services\Queue\QueueRestProxy::listQueues
+    */
     public function testDeleteQueue() {
-        $service = FunctionalTestBase::createService();
         $interestingTimeouts = QueueServiceFunctionalTestData::getInterestingTimeoutValues();
         foreach($interestingTimeouts as $timeout)  {
             $options = new QueueServiceOptions();
             $options->setTimeout($timeout);
-            $this->deleteQueueWorker($service, $options);
+            $this->deleteQueueWorker($options);
         }
     }
 
-    private function deleteQueueWorker($service, $options) {
+    private function deleteQueueWorker($options) {
         self::println( 'Trying $options: ' . self::tmptostring($options));
         $queue = QueueServiceFunctionalTestData::getInterestingQueueName();
 
         // Make sure there is something to delete.
-        $service->createQueue($queue);
+        $this->wrapper->createQueue($queue);
 
         // Make sure that the list of all applicable queues is correctly updated.
         $opts = new ListQueuesOptions();
         $opts->setPrefix(QueueServiceFunctionalTestData::$testUniqueId);
-        $qs = $service->listQueues($opts);
+        $qs = $this->wrapper->listQueues($opts);
         $this->assertEquals(count($qs->getQueues()), (count(QueueServiceFunctionalTestData::$TEST_QUEUE_NAMES) + 1), 'After adding one, with Prefix=(\'' . QueueServiceFunctionalTestData::$testUniqueId . '\'), then Queues->length');
 
         $deleted = false;
         try {
             if ($options == null) {
-                $service->deleteQueue($queue);
+                $this->wrapper->deleteQueue($queue);
             }
             else {
-                $service->deleteQueue($queue, $options);
+                $this->wrapper->deleteQueue($queue, $options);
             }
 
             $deleted = true;
@@ -511,7 +543,7 @@ class QueueServiceFunctionalTest extends FunctionalTestBase {
             // Make sure that the list of all applicable queues is correctly updated.
             $opts = new ListQueuesOptions();
             $opts->setPrefix(QueueServiceFunctionalTestData::$testUniqueId);
-            $qs = $service->listQueues($opts);
+            $qs = $this->wrapper->listQueues($opts);
             $this->assertEquals(count($qs->getQueues()), count(QueueServiceFunctionalTestData::$TEST_QUEUE_NAMES), 'After adding then deleting one, with Prefix=(\'' . QueueServiceFunctionalTestData::$testUniqueId . '\'), then Queues->length');
 
             // Nothing else interesting to check for the options.
@@ -530,7 +562,7 @@ class QueueServiceFunctionalTest extends FunctionalTestBase {
         if (!$deleted) {
             echo ('Test didn\'t delete the $queue, so try again more simply');
                 // Try again. If it doesn't work, not much else to try.
-            $service->deleteQueue($queue);
+            $this->wrapper->deleteQueue($queue);
         }
     }
 
@@ -540,16 +572,28 @@ class QueueServiceFunctionalTest extends FunctionalTestBase {
     // --- getQueueMetadata, setQueueMetadata ---
     // ------------------------------------------
 
+    /**
+    * @covers PEAR2\WindowsAzure\Services\Queue\QueueRestProxy::createMessage
+    * @covers PEAR2\WindowsAzure\Services\Queue\QueueRestProxy::createQueue
+    * @covers PEAR2\WindowsAzure\Services\Queue\QueueRestProxy::deleteQueue
+    * @covers PEAR2\WindowsAzure\Services\Queue\QueueRestProxy::getQueueMetadata
+    * @covers PEAR2\WindowsAzure\Services\Queue\QueueRestProxy::setQueueMetadata
+    */
     public function testGetQueueMetadataNoOptions() {
-        $service = FunctionalTestBase::createService();
         $interestingMetadata = QueueServiceFunctionalTestData::getNiceMetadata();
         foreach ($interestingMetadata as $metadata) {
-            $this->getQueueMetadataWorker($service, null, $metadata);
+            $this->getQueueMetadataWorker(null, $metadata);
         }
     }
 
+    /**
+    * @covers PEAR2\WindowsAzure\Services\Queue\QueueRestProxy::createMessage
+    * @covers PEAR2\WindowsAzure\Services\Queue\QueueRestProxy::createQueue
+    * @covers PEAR2\WindowsAzure\Services\Queue\QueueRestProxy::deleteQueue
+    * @covers PEAR2\WindowsAzure\Services\Queue\QueueRestProxy::getQueueMetadata
+    * @covers PEAR2\WindowsAzure\Services\Queue\QueueRestProxy::setQueueMetadata
+    */
     public function testGetQueueMetadata() {
-        $service = FunctionalTestBase::createService();
         $interestingTimeouts = QueueServiceFunctionalTestData::getInterestingTimeoutValues();
         $interestingMetadata = QueueServiceFunctionalTestData::getNiceMetadata();
 
@@ -557,31 +601,31 @@ class QueueServiceFunctionalTest extends FunctionalTestBase {
             foreach ($interestingMetadata as $metadata) {
                 $options = new QueueServiceOptions();
                 $options->setTimeout($timeout);
-                $this->getQueueMetadataWorker($service, $options, $metadata);
+                $this->getQueueMetadataWorker($options, $metadata);
             }
         }
     }
 
-    private function getQueueMetadataWorker($service, $options, $metadata) {
+    private function getQueueMetadataWorker($options, $metadata) {
         self::println( 'Trying $options: ' . self::tmptostring($options) . 
                 ' and $metadata: ' . self::tmptostring($metadata));
         $queue = QueueServiceFunctionalTestData::getInterestingQueueName();
 
         // Make sure there is something to test
-        $service->createQueue($queue);
+        $this->wrapper->createQueue($queue);
 
         // Put some messages to verify getApproximateMessageCount 
         if ($metadata != null) {
             for ($i = 0; $i < count($metadata); $i++) {
-                $service->createMessage($queue, 'message ' . $i);
+                $this->wrapper->createMessage($queue, 'message ' . $i);
             }
 
             // And put in some metadata
-            $service->setQueueMetadata($queue, $metadata);
+            $this->wrapper->setQueueMetadata($queue, $metadata);
         }
 
         try {
-            $res = ($options == null ? $service->getQueueMetadata($queue) : $service->getQueueMetadata( $queue, $options));
+            $res = ($options == null ? $this->wrapper->getQueueMetadata($queue) : $this->wrapper->getQueueMetadata( $queue, $options));
 
             if ($options == null) {
                 $options = new QueueServiceOptions();
@@ -607,7 +651,7 @@ class QueueServiceFunctionalTest extends FunctionalTestBase {
             }
         }
         // Clean up->
-        $service->deleteQueue($queue);
+        $this->wrapper->deleteQueue($queue);
     }
 
     private function verifyGetSetQueueMetadataWorker($ret, $metadata) {
@@ -624,9 +668,9 @@ class QueueServiceFunctionalTest extends FunctionalTestBase {
             }
 
             // Hard to test "approximate", so just verify that it is in the expected range
-            $this->assertTrue('0 <= getApproximateMessageCount (' . 
-                    $ret->getApproximateMessageCount() . ') <= $metadata count (' . count($metadata) . ')', 
-                            (0 <= $ret->getApproximateMessageCount()) && ($ret->getApproximateMessageCount() <= count($metadata)));
+            $this->assertTrue(
+                    (0 <= $ret->getApproximateMessageCount()) && ($ret->getApproximateMessageCount() <= count($metadata)),
+                    '0 <= getApproximateMessageCount (' . $ret->getApproximateMessageCount() . ') <= $metadata count (' . count($metadata) . ')');
         }
     }
 
@@ -634,20 +678,30 @@ class QueueServiceFunctionalTest extends FunctionalTestBase {
     // --- setQueueMetadata ---
     // ------------------------
 
+    /**
+    * @covers PEAR2\WindowsAzure\Services\Queue\QueueRestProxy::createQueue
+    * @covers PEAR2\WindowsAzure\Services\Queue\QueueRestProxy::deleteQueue
+    * @covers PEAR2\WindowsAzure\Services\Queue\QueueRestProxy::getQueueMetadata
+    * @covers PEAR2\WindowsAzure\Services\Queue\QueueRestProxy::setQueueMetadata
+    */
     public function testSetQueueMetadataNoOptions() {
-        $service = FunctionalTestBase::createService();
         $interestingMetadata = QueueServiceFunctionalTestData::getInterestingMetadata();
         foreach ($interestingMetadata as $metadata) {
             if ($metadata == null) {
                 // This is tested above.
                 continue;
             }
-            $this->setQueueMetadataWorker($service, null, $metadata);
+            $this->setQueueMetadataWorker(null, $metadata);
         }
     }
 
+    /**
+    * @covers PEAR2\WindowsAzure\Services\Queue\QueueRestProxy::createQueue
+    * @covers PEAR2\WindowsAzure\Services\Queue\QueueRestProxy::deleteQueue
+    * @covers PEAR2\WindowsAzure\Services\Queue\QueueRestProxy::getQueueMetadata
+    * @covers PEAR2\WindowsAzure\Services\Queue\QueueRestProxy::setQueueMetadata
+    */
     public function testSetQueueMetadata() {
-        $service = FunctionalTestBase::createService();
         $interestingTimeouts = QueueServiceFunctionalTestData::getInterestingTimeoutValues();
         $interestingMetadata = QueueServiceFunctionalTestData::getInterestingMetadata();
 
@@ -659,26 +713,26 @@ class QueueServiceFunctionalTest extends FunctionalTestBase {
                 }
                 $options = new QueueServiceOptions();
                 $options->setTimeout($timeout);
-                $this->setQueueMetadataWorker($service, $options, $metadata);
+                $this->setQueueMetadataWorker($options, $metadata);
             }
         }
     }
 
-    private function setQueueMetadataWorker($service, $options, $metadata) {
+    private function setQueueMetadataWorker($options, $metadata) {
         self::println( 'Trying $options: ' . self::tmptostring($options) . 
                 ' and $metadata: ' . self::tmptostring($metadata));
         $queue = QueueServiceFunctionalTestData::getInterestingQueueName();
 
         // Make sure there is something to test
-        $service->createQueue($queue);
+        $this->wrapper->createQueue($queue);
 
         try {
             // And put in some metadata
             if ($options == null) {
-                $service->setQueueMetadata($queue, $metadata);
+                $this->wrapper->setQueueMetadata($queue, $metadata);
             }
             else {
-                $service->setQueueMetadata($queue, $metadata, $options);
+                $this->wrapper->setQueueMetadata($queue, $metadata, $options);
             }
 
             if ($options == null) {
@@ -691,7 +745,7 @@ class QueueServiceFunctionalTest extends FunctionalTestBase {
 //                $this->assertTrue(false, 'Expect negative timeouts in $options to throw');
 //            }
 
-            $res = $service->getQueueMetadata($queue);
+            $res = $this->wrapper->getQueueMetadata($queue);
             $this->verifyGetSetQueueMetadataWorker($res, $metadata);
         }
         catch (HTTP_Request2_LogicException $le) {
@@ -715,30 +769,49 @@ class QueueServiceFunctionalTest extends FunctionalTestBase {
 //            }
 //        }
         // Clean up.
-        $service->deleteQueue($queue);
+        $this->wrapper->deleteQueue($queue);
     }
 
     // ---------------------
     // --- createMessage ---
     // ---------------------
 
+    /**
+    * @covers PEAR2\WindowsAzure\Services\Queue\QueueRestProxy::clearMessages
+    * @covers PEAR2\WindowsAzure\Services\Queue\QueueRestProxy::createMessage
+    * @covers PEAR2\WindowsAzure\Services\Queue\QueueRestProxy::listMessages
+    */
     public function testCreateMessageEmpty() {
         $this->createMessageWorker('', QueueServiceFunctionalTestData::getSimpleCreateMessageOptions());
     }
 
+    /**
+    * @covers PEAR2\WindowsAzure\Services\Queue\QueueRestProxy::clearMessages
+    * @covers PEAR2\WindowsAzure\Services\Queue\QueueRestProxy::createMessage
+    * @covers PEAR2\WindowsAzure\Services\Queue\QueueRestProxy::listMessages
+    */
     public function testCreateMessageUnicodeMessage() {
         $this->createMessageWorker('Some unicode: \uB2E4\uB974\uB2E4\uB294\u0625 \u064A\u062F\u064A\u0648', QueueServiceFunctionalTestData::getSimpleCreateMessageOptions());
     }
 
+    /**
+    * @covers PEAR2\WindowsAzure\Services\Queue\QueueRestProxy::clearMessages
+    * @covers PEAR2\WindowsAzure\Services\Queue\QueueRestProxy::createMessage
+    * @covers PEAR2\WindowsAzure\Services\Queue\QueueRestProxy::listMessages
+    */
     public function testCreateMessageXmlMessage() {
         $this->createMessageWorker('Some HTML: <this><is></a>', QueueServiceFunctionalTestData::getSimpleCreateMessageOptions());
     }
 
+    /**
+    * @covers PEAR2\WindowsAzure\Services\Queue\QueueRestProxy::clearMessages
+    * @covers PEAR2\WindowsAzure\Services\Queue\QueueRestProxy::createMessage
+    * @covers PEAR2\WindowsAzure\Services\Queue\QueueRestProxy::listMessages
+    */
     public function testCreateMessageWithSmallTTL() {
         $queue = QueueServiceFunctionalTestData::$TEST_QUEUE_NAMES;
         $queue = $queue[0];
         $messageText = QueueServiceFunctionalTestData::getSimpleMessageText();
-        $service = FunctionalTestBase::createService();
 
         $options = new CreateMessageOptions();
         // Revert when fixed
@@ -748,21 +821,26 @@ class QueueServiceFunctionalTest extends FunctionalTestBase {
         $options->setVisibilityTimeoutInSeconds('2');
         $options->setTimeToLiveInSeconds('4');
 
-        $service->createMessage($queue, $messageText, $options);
+        $this->wrapper->createMessage($queue, $messageText, $options);
 
-        $lmr = $service->listMessages($queue);
+        $lmr = $this->wrapper->listMessages($queue);
 
         // No messages, because it is not visible for 2 seconds.
         $this->assertEquals(0, count($lmr->getQueueMessages()), 'getQueueMessages() count');
         sleep(6);
         // Try again, passed the VisibilityTimeout has passed, but also the 4 second TTL has passed.
-        $lmr = $service->listMessages($queue);
+        $lmr = $this->wrapper->listMessages($queue);
 
         $this->assertEquals(0, count($lmr->getQueueMessages()), 'getQueueMessages() count');
 
-        $service->clearMessages($queue);
+        $this->wrapper->clearMessages($queue);
     }
 
+    /**
+    * @covers PEAR2\WindowsAzure\Services\Queue\QueueRestProxy::clearMessages
+    * @covers PEAR2\WindowsAzure\Services\Queue\QueueRestProxy::createMessage
+    * @covers PEAR2\WindowsAzure\Services\Queue\QueueRestProxy::listMessages
+    */
     public function testCreateMessage() {
         $interestingTimes = array( null, -1, 0, QueueServiceFunctionalTestData::INTERESTING_TTL, 1000 );
         foreach($interestingTimes as $timeToLiveInSeconds)  {
@@ -805,14 +883,13 @@ class QueueServiceFunctionalTest extends FunctionalTestBase {
         self::println( 'Trying $options: ' . self::tmptostring($options));
         $queue = QueueServiceFunctionalTestData::$TEST_QUEUE_NAMES;
         $queue = $queue[0];
-        $service = FunctionalTestBase::createService();
 
         try {
             if ($options == null) {
-                $service->createMessage($queue, $messageText);
+                $this->wrapper->createMessage($queue, $messageText);
             }
             else {
-                $service->createMessage($queue, $messageText, $options);
+                $this->wrapper->createMessage($queue, $messageText, $options);
             }
 
             if ($options == null) {
@@ -851,12 +928,12 @@ class QueueServiceFunctionalTest extends FunctionalTestBase {
 //            }
 
             // Check that the message matches
-            $lmr = $service->listMessages($queue);
+            $lmr = $this->wrapper->listMessages($queue);
             if ($options->getVisibilityTimeoutInSeconds() != null && $options->getVisibilityTimeoutInSeconds() > 0) {
                 $this->assertEquals(0, count($lmr->getQueueMessages()), 'getQueueMessages() count');
                 sleep(QueueServiceFunctionalTestData::INTERESTING_TTL);
                 // Try again, not that the 4 second visibility has passed
-                $lmr = $service->listMessages($queue);
+                $lmr = $this->wrapper->listMessages($queue);
                 if ($options->getVisibilityTimeoutInSeconds() > QueueServiceFunctionalTestData::INTERESTING_TTL) {
                     $this->assertEquals(0, count($lmr->getQueueMessages()), 'getQueueMessages() count');
                 }
@@ -898,13 +975,19 @@ class QueueServiceFunctionalTest extends FunctionalTestBase {
             }
             // TODO: More checks to not fall out the end if in error?
         }
-        $service->clearMessages($queue);
+        $this->wrapper->clearMessages($queue);
     }
 
     // ---------------------
     // --- updateMessage ---
     // ---------------------
 
+    /**
+    * @covers PEAR2\WindowsAzure\Services\Queue\QueueRestProxy::clearMessages
+    * @covers PEAR2\WindowsAzure\Services\Queue\QueueRestProxy::createMessage
+    * @covers PEAR2\WindowsAzure\Services\Queue\QueueRestProxy::listMessages
+    * @covers PEAR2\WindowsAzure\Services\Queue\QueueRestProxy::updateMessage
+    */
     public function testUpdateMessageNoOptions() {
         // TODO: revert change when fixed
         // https://github.com/WindowsAzure/azure-sdk-for-php/issues/99
@@ -928,6 +1011,12 @@ class QueueServiceFunctionalTest extends FunctionalTestBase {
         }
     }
 
+    /**
+    * @covers PEAR2\WindowsAzure\Services\Queue\QueueRestProxy::clearMessages
+    * @covers PEAR2\WindowsAzure\Services\Queue\QueueRestProxy::createMessage
+    * @covers PEAR2\WindowsAzure\Services\Queue\QueueRestProxy::listMessages
+    * @covers PEAR2\WindowsAzure\Services\Queue\QueueRestProxy::updateMessage
+    */
     public function testUpdateMessage() {
         $interestingTimes = array(null, -1, 0, QueueServiceFunctionalTestData::INTERESTING_TTL, 1000);
         
@@ -962,19 +1051,18 @@ class QueueServiceFunctionalTest extends FunctionalTestBase {
                 ' and $visibilityTimeoutInSeconds: ' . self::tmptostring($visibilityTimeoutInSeconds));
         $queue = QueueServiceFunctionalTestData::$TEST_QUEUE_NAMES;
         $queue = $queue[0];
-        $service = FunctionalTestBase::createService();
 
-        $service->createMessage($queue, QueueServiceFunctionalTestData::getSimpleMessageText(), $startingMessage);
-        $lmr = $service->listMessages($queue);
+        $this->wrapper->createMessage($queue, QueueServiceFunctionalTestData::getSimpleMessageText(), $startingMessage);
+        $lmr = $this->wrapper->listMessages($queue);
         $m = $lmr->getQueueMessages();
         $m = $m[0];
 
         try {
             if ($options == null) {
-                $service->updateMessage($queue, $m->getMessageId(), $m->getPopReceipt(), $messageText, $visibilityTimeoutInSeconds);
+                $this->wrapper->updateMessage($queue, $m->getMessageId(), $m->getPopReceipt(), $messageText, $visibilityTimeoutInSeconds);
             }
             else {
-                $service->updateMessage($queue, $m->getMessageId(), $m->getPopReceipt(), $messageText, $visibilityTimeoutInSeconds, $options);
+                $this->wrapper->updateMessage($queue, $m->getMessageId(), $m->getPopReceipt(), $messageText, $visibilityTimeoutInSeconds, $options);
             }
 
             if ($options == null) {
@@ -992,12 +1080,12 @@ class QueueServiceFunctionalTest extends FunctionalTestBase {
 //            }
 
             // Check that the message matches
-            $lmr = $service->listMessages($queue);
+            $lmr = $this->wrapper->listMessages($queue);
             if ($visibilityTimeoutInSeconds > 0) {
                 $this->assertEquals(0, count($lmr->getQueueMessages()), 'getQueueMessages() count');
                 sleep(QueueServiceFunctionalTestData::INTERESTING_TTL);
                 // Try again, not that the 4 second visibility has passed
-                $lmr = $service->listMessages($queue);
+                $lmr = $this->wrapper->listMessages($queue);
                 if ($visibilityTimeoutInSeconds > QueueServiceFunctionalTestData::INTERESTING_TTL) {
                     $this->assertEquals(0, count($lmr->getQueueMessages()), 'getQueueMessages() count');
                 }
@@ -1035,17 +1123,29 @@ class QueueServiceFunctionalTest extends FunctionalTestBase {
                 $this->assertNull($e, 'Expect positive timeouts in $options to be fine');
             }
         }
-        $service->clearMessages($queue);
+        $this->wrapper->clearMessages($queue);
     }
 
     // ---------------------
     // --- deleteMessage ---
     // ---------------------
 
+    /**
+    * @covers PEAR2\WindowsAzure\Services\Queue\QueueRestProxy::clearMessages
+    * @covers PEAR2\WindowsAzure\Services\Queue\QueueRestProxy::createMessage
+    * @covers PEAR2\WindowsAzure\Services\Queue\QueueRestProxy::deleteMessage
+    * @covers PEAR2\WindowsAzure\Services\Queue\QueueRestProxy::listMessages
+    */
     public function testDeleteMessageNoOptions() {
         $this->deleteMessageWorker(null);
     }
 
+    /**
+    * @covers PEAR2\WindowsAzure\Services\Queue\QueueRestProxy::clearMessages
+    * @covers PEAR2\WindowsAzure\Services\Queue\QueueRestProxy::createMessage
+    * @covers PEAR2\WindowsAzure\Services\Queue\QueueRestProxy::deleteMessage
+    * @covers PEAR2\WindowsAzure\Services\Queue\QueueRestProxy::listMessages
+    */
     public function testDeleteMessage() {
         $interestingTimes = array(null, -1, 0, QueueServiceFunctionalTestData::INTERESTING_TTL, 1000);
         foreach($interestingTimes as $timeout)  {
@@ -1059,21 +1159,20 @@ class QueueServiceFunctionalTest extends FunctionalTestBase {
         self::println( 'Trying $options: ' . self::tmptostring($options));
         $queue = QueueServiceFunctionalTestData::$TEST_QUEUE_NAMES;
         $queue = $queue[0];
-        $service = FunctionalTestBase::createService();
 
-        $service->createMessage($queue, 'test');
+        $this->wrapper->createMessage($queue, 'test');
         $opts = new ListMessagesOptions();
         $opts->setVisibilityTimeoutInSeconds(QueueServiceFunctionalTestData::INTERESTING_TTL);
-        $lmr = $service->listMessages($queue, $opts);
+        $lmr = $this->wrapper->listMessages($queue, $opts);
         $m = $lmr->getQueueMessages();
         $m = $m[0];
 
         try {
             if ($options == null) {
-                $service->deleteMessage($queue, $m->getMessageId(), $m->getPopReceipt());
+                $this->wrapper->deleteMessage($queue, $m->getMessageId(), $m->getPopReceipt());
             }
             else {
-                $service->deleteMessage($queue, $m->getMessageId(), $m->getPopReceipt(), $options);
+                $this->wrapper->deleteMessage($queue, $m->getMessageId(), $m->getPopReceipt(), $options);
             }
 
             if ($options == null) {
@@ -1087,13 +1186,13 @@ class QueueServiceFunctionalTest extends FunctionalTestBase {
 //            }
 
             // Check that the message matches
-            $lmr = $service->listMessages($queue);
+            $lmr = $this->wrapper->listMessages($queue);
             $this->assertEquals(0, count($lmr->getQueueMessages()), 'getQueueMessages() count');
 
             // Wait until the popped message should be visible again->
             sleep(QueueServiceFunctionalTestData::INTERESTING_TTL + 1);
             // Try again, to make sure the message really is gone->
-            $lmr = $service->listMessages($queue);
+            $lmr = $this->wrapper->listMessages($queue);
             $this->assertEquals(0, count($lmr->getQueueMessages()), 'getQueueMessages() count');
         }
         catch (ServiceException $e) {
@@ -1107,17 +1206,29 @@ class QueueServiceFunctionalTest extends FunctionalTestBase {
                 $this->assertNull($e, 'Expect positive timeouts in $options to be fine');
             }
         }
-        $service->clearMessages($queue);
+        $this->wrapper->clearMessages($queue);
     }
 
     // --------------------
     // --- listMessages ---
     // --------------------
 
+    /**
+    * @covers PEAR2\WindowsAzure\Services\Queue\QueueRestProxy::clearMessages
+    * @covers PEAR2\WindowsAzure\Services\Queue\QueueRestProxy::createMessage
+    * @covers PEAR2\WindowsAzure\Services\Queue\QueueRestProxy::listMessages
+    * @covers PEAR2\WindowsAzure\Services\Queue\QueueRestProxy::peekMessages
+    */
     public function testListMessagesNoOptions() {
         $this->listMessagesWorker(new ListMessagesOptions());
     }
 
+    /**
+    * @covers PEAR2\WindowsAzure\Services\Queue\QueueRestProxy::clearMessages
+    * @covers PEAR2\WindowsAzure\Services\Queue\QueueRestProxy::createMessage
+    * @covers PEAR2\WindowsAzure\Services\Queue\QueueRestProxy::listMessages
+    * @covers PEAR2\WindowsAzure\Services\Queue\QueueRestProxy::peekMessages
+    */
     public function testListMessages() {
         $interestingTimes = array(null, -1, 0, QueueServiceFunctionalTestData::INTERESTING_TTL, 1000);
         $interestingNums = array(null, -1, 0, 2, 10, 1000);
@@ -1149,12 +1260,11 @@ class QueueServiceFunctionalTest extends FunctionalTestBase {
         self::println( 'Trying $options: ' . self::tmptostring($options));
         $queue = QueueServiceFunctionalTestData::$TEST_QUEUE_NAMES;
         $queue = $queue[0];
-        $service = FunctionalTestBase::createService();
 
         // Put three messages into the queue.
-        $service->createMessage($queue, QueueServiceFunctionalTestData::getSimpleMessageText());
-        $service->createMessage($queue, QueueServiceFunctionalTestData::getSimpleMessageText());
-        $service->createMessage($queue, QueueServiceFunctionalTestData::getSimpleMessageText());
+        $this->wrapper->createMessage($queue, QueueServiceFunctionalTestData::getSimpleMessageText());
+        $this->wrapper->createMessage($queue, QueueServiceFunctionalTestData::getSimpleMessageText());
+        $this->wrapper->createMessage($queue, QueueServiceFunctionalTestData::getSimpleMessageText());
 
         // Default is 1 message
         $effectiveNumOfMessages = ($options == null || $options->getNumberOfMessages() == null ? 1 : $options ->getNumberOfMessages());
@@ -1169,7 +1279,7 @@ class QueueServiceFunctionalTest extends FunctionalTestBase {
         $expectedNumMessagesSecond = ($expectedNumMessagesSecond < 0 ? 0 : $expectedNumMessagesSecond);
 
         try {
-            $res = ($options == null ? $service->listMessages($queue) : $service->listMessages($queue, $options));
+            $res = ($options == null ? $this->wrapper->listMessages($queue) : $this->wrapper->listMessages($queue, $options));
 
             if ($options == null) {
                 $options = new ListMessagesOptions();
@@ -1190,7 +1300,7 @@ class QueueServiceFunctionalTest extends FunctionalTestBase {
             $this->assertEquals($expectedNumMessagesFirst, count($res->getQueueMessages()), 'list getQueueMessages() count');
             $opts = new PeekMessagesOptions();
             $opts->setNumberOfMessages(32);
-            $pres = $service->peekMessages($queue, $opts);
+            $pres = $this->wrapper->peekMessages($queue, $opts);
             $this->assertEquals(3 - $expectedNumMessagesFirst, count($pres->getQueueMessages()), 'peek getQueueMessages() count');
 
             // The visibilityTimeoutInSeconds controls when the requested messages will be visible again.
@@ -1198,11 +1308,11 @@ class QueueServiceFunctionalTest extends FunctionalTestBase {
             sleep(2.5);
             $opts = new ListMessagesOptions();
             $opts->setNumberOfMessages(32);
-            $res2 = $service->listMessages($queue, $opts);
+            $res2 = $this->wrapper->listMessages($queue, $opts);
             $this->assertEquals($expectedNumMessagesSecond, count($res2->getQueueMessages()), 'list getQueueMessages() count');
             $opts = new PeekMessagesOptions();
             $opts->setNumberOfMessages(32);
-            $pres2 = $service->peekMessages($queue, $opts);
+            $pres2 = $this->wrapper->peekMessages($queue, $opts);
             $this->assertEquals(0, count($pres2->getQueueMessages()), 'peek getQueueMessages() count');
 
             // TODO: These might get screwy if the timing gets off. Might need to use times spaces farther apart.
@@ -1228,17 +1338,29 @@ class QueueServiceFunctionalTest extends FunctionalTestBase {
                 $this->assertNull($e, 'Expect positive timeouts in $options to be fine');
             }
         }
-        $service->clearMessages($queue);
+        $this->wrapper->clearMessages($queue);
     }
 
     // --------------------
     // --- peekMessages ---
     // --------------------
 
+    /**
+    * @covers PEAR2\WindowsAzure\Services\Queue\QueueRestProxy::clearMessages
+    * @covers PEAR2\WindowsAzure\Services\Queue\QueueRestProxy::createMessage
+    * @covers PEAR2\WindowsAzure\Services\Queue\QueueRestProxy::listMessages
+    * @covers PEAR2\WindowsAzure\Services\Queue\QueueRestProxy::peekMessages
+    */
     public function testPeekMessagesNoOptions() {
         $this->peekMessagesWorker(new PeekMessagesOptions());
     }
 
+    /**
+    * @covers PEAR2\WindowsAzure\Services\Queue\QueueRestProxy::clearMessages
+    * @covers PEAR2\WindowsAzure\Services\Queue\QueueRestProxy::createMessage
+    * @covers PEAR2\WindowsAzure\Services\Queue\QueueRestProxy::listMessages
+    * @covers PEAR2\WindowsAzure\Services\Queue\QueueRestProxy::peekMessages
+    */
     public function testPeekMessages() {
         $interestingTimes = array(null, -1, 0, QueueServiceFunctionalTestData::INTERESTING_TTL, 1000);
         $interestingNums = array(null, -1, 0, 2, 10, 1000);
@@ -1262,12 +1384,11 @@ class QueueServiceFunctionalTest extends FunctionalTestBase {
         self::println( 'Trying $options: ' . self::tmptostring($options));
         $queue = QueueServiceFunctionalTestData::$TEST_QUEUE_NAMES;
         $queue = $queue[0];
-        $service = FunctionalTestBase::createService();
 
         // Put three messages into the queue.
-        $service->createMessage($queue, QueueServiceFunctionalTestData::getSimpleMessageText());
-        $service->createMessage($queue, QueueServiceFunctionalTestData::getSimpleMessageText());
-        $service->createMessage($queue, QueueServiceFunctionalTestData::getSimpleMessageText());
+        $this->wrapper->createMessage($queue, QueueServiceFunctionalTestData::getSimpleMessageText());
+        $this->wrapper->createMessage($queue, QueueServiceFunctionalTestData::getSimpleMessageText());
+        $this->wrapper->createMessage($queue, QueueServiceFunctionalTestData::getSimpleMessageText());
 
         // Default is 1 message
         $effectiveNumOfMessages = ($options == null || $options->getNumberOfMessages() == null ? 1 : $options ->getNumberOfMessages());
@@ -1276,7 +1397,7 @@ class QueueServiceFunctionalTest extends FunctionalTestBase {
         $expectedNumMessagesFirst = ($effectiveNumOfMessages > 3 ? 3 : $effectiveNumOfMessages);
 
         try {
-            $res = ($options == null ? $service->peekMessages($queue) : $service->peekMessages($queue, $options));
+            $res = ($options == null ? $this->wrapper->peekMessages($queue) : $this->wrapper->peekMessages($queue, $options));
 
             if ($options == null) {
                 $options = new PeekMessagesOptions();
@@ -1294,12 +1415,12 @@ class QueueServiceFunctionalTest extends FunctionalTestBase {
             $this->assertEquals($expectedNumMessagesFirst, count($res->getQueueMessages()), 'getQueueMessages() count');
             $opts = new PeekMessagesOptions();
             $opts->setNumberOfMessages(32);
-            $res2 = $service->peekMessages($queue, $opts);
+            $res2 = $this->wrapper->peekMessages($queue, $opts);
             $this->assertEquals(3, count($res2->getQueueMessages()), 'getQueueMessages() count');
-            $service->listMessages($queue);
+            $this->wrapper->listMessages($queue);
             $opts = new PeekMessagesOptions();
             $opts->setNumberOfMessages(32);
-            $res3 = $service->peekMessages($queue, $opts);
+            $res3 = $this->wrapper->peekMessages($queue, $opts);
             $this->assertEquals(2, count($res3->getQueueMessages()), 'getQueueMessages() count');
         }
         catch (ServiceException $e) {
@@ -1321,17 +1442,27 @@ class QueueServiceFunctionalTest extends FunctionalTestBase {
             }
             // TODO: More checks to not fall out the end if in error?
         }
-        $service->clearMessages($queue);
+        $this->wrapper->clearMessages($queue);
     }
 
     // ---------------------
     // --- clearMessages ---
     // ---------------------
 
+    /**
+    * @covers PEAR2\WindowsAzure\Services\Queue\QueueRestProxy::clearMessages
+    * @covers PEAR2\WindowsAzure\Services\Queue\QueueRestProxy::createMessage
+    * @covers PEAR2\WindowsAzure\Services\Queue\QueueRestProxy::listMessages
+    */
     public function testClearMessagesNoOptions() {
         $this->clearMessagesWorker(null);
     }
 
+    /**
+    * @covers PEAR2\WindowsAzure\Services\Queue\QueueRestProxy::clearMessages
+    * @covers PEAR2\WindowsAzure\Services\Queue\QueueRestProxy::createMessage
+    * @covers PEAR2\WindowsAzure\Services\Queue\QueueRestProxy::listMessages
+    */
     public function testClearMessages() {
         $interestingTimes = array(null, -1, 0, QueueServiceFunctionalTestData::INTERESTING_TTL, 1000);
         foreach($interestingTimes as $timeout)  {
@@ -1346,27 +1477,26 @@ class QueueServiceFunctionalTest extends FunctionalTestBase {
                 self::tmptostring($options));
         $queue = QueueServiceFunctionalTestData::$TEST_QUEUE_NAMES;
         $queue = $queue[0];
-        $service = FunctionalTestBase::createService();
 
         // Put three messages into the queue.
-        $service->createMessage($queue, QueueServiceFunctionalTestData::getSimpleMessageText());
-        $service->createMessage($queue, QueueServiceFunctionalTestData::getSimpleMessageText());
-        $service->createMessage($queue, QueueServiceFunctionalTestData::getSimpleMessageText());
+        $this->wrapper->createMessage($queue, QueueServiceFunctionalTestData::getSimpleMessageText());
+        $this->wrapper->createMessage($queue, QueueServiceFunctionalTestData::getSimpleMessageText());
+        $this->wrapper->createMessage($queue, QueueServiceFunctionalTestData::getSimpleMessageText());
         // Wait a bit to make sure the messages are there.
         sleep(1);
         // Make sure the messages are there, and use a short visibility timeout to make sure the are visible again later.
         $opts = new ListMessagesOptions();
         $opts->setVisibilityTimeoutInSeconds(1);
         $opts->setNumberOfMessages(32);
-        $lmr = $service->listMessages($queue, $opts);
+        $lmr = $this->wrapper->listMessages($queue, $opts);
         $this->assertEquals(3, count($lmr->getQueueMessages()), 'getQueueMessages() count');
         sleep(2);
         try {
             if ($options == null) {
-                $service->clearMessages($queue);
+                $this->wrapper->clearMessages($queue);
             }
             else {
-                $service->clearMessages($queue, $options);
+                $this->wrapper->clearMessages($queue, $options);
             }
 
             if ($options == null) {
@@ -1383,7 +1513,7 @@ class QueueServiceFunctionalTest extends FunctionalTestBase {
             $opts = new ListMessagesOptions();
             $opts->setVisibilityTimeoutInSeconds(1);
             $opts->setNumberOfMessages(32);
-            $lmr = $service->listMessages($queue, $opts);
+            $lmr = $this->wrapper->listMessages($queue, $opts);
             $this->assertEquals(0, count($lmr->getQueueMessages()), 'getQueueMessages() count');
         }
         catch (ServiceException $e) {
@@ -1401,6 +1531,6 @@ class QueueServiceFunctionalTest extends FunctionalTestBase {
                 $this->assertNull($e, 'Expect positive timeouts in $options to be fine');
             }
         }
-        $service->clearMessages($queue);
+        $this->wrapper->clearMessages($queue);
     }
 }
