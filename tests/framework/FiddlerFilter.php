@@ -29,22 +29,28 @@ use PEAR2\WindowsAzure\Core\IServiceFilter;
 class FiddlerFilter implements IServiceFilter {
     protected $site = '127.0.0.1';
     protected $port = 8888;
-    protected $isFiddlerOn;
+    protected static $isChecked;
+    protected static $isFiddlerOn;
     
     public function __construct() {
-        $this->isFiddlerOn = false;
-        try {
-            $fp = fsockopen($this->site, $this->port); 
-            $this->isFiddlerOn = !(!$fp);
-            if ($this->isFiddlerOn) {
-                fclose($fp);
+        if (!self::$isChecked) {
+            set_error_handler(array('PEAR2\Tests\Framework\FiddlerFilter', 'errorHandler'));
+            self::$isChecked = true;
+            self::$isFiddlerOn = false;
+            try {
+                $fp = fsockopen($this->site, $this->port); 
+                self::$isFiddlerOn = !(!$fp);
+                if (self::$isFiddlerOn) {
+                    fclose($fp);
+                }
+            } catch(\Exception $e) {
             }
-        } catch(\Exception $e) {
+            restore_error_handler();
         }
     }
     
     public function handleRequest($request) {
-        if ($this->isFiddlerOn) {
+        if (self::$isFiddlerOn) {
             $request->setConfig('proxy_host', $this->site);
             $request->setConfig('proxy_port', $this->port);
         }
@@ -53,6 +59,11 @@ class FiddlerFilter implements IServiceFilter {
 
     public function handleResponse($request, $response) {
         return $response;
+    }
+
+    public static function errorHandler($errno, $errorMessage, $errorFile, $errorLine)
+    {
+        return ($errno == E_WARNING ? true : false);
     }
 }
 

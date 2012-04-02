@@ -69,7 +69,7 @@ class FunctionalTestBase extends QueueRestProxyTestBase {
         parent::tearDown();
         if (!$this->isUsingStorageEmulator()) {
             $serviceProperties = QueueServiceFunctionalTestData::getDefaultServiceProperties();
-            $this->service->setServiceProperties($serviceProperties);
+            $this->wrapper->setServiceProperties($serviceProperties);
         }
         
         foreach(QueueServiceFunctionalTestData::$TEST_QUEUE_NAMES as $name)  {
