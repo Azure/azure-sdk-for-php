@@ -43,22 +43,22 @@ class QueueServiceFunctionalTestData {
 
     public static function setupData() {
         $rint = mt_rand(0, 1000000);
-        QueueServiceFunctionalTestData::$testUniqueId = 'qa-' . $rint . '-';
-        QueueServiceFunctionalTestData::$nonExistQueuePrefix = 'qa-' . ($rint + 1) . '-';
-        QueueServiceFunctionalTestData::$TEST_QUEUE_NAMES = array(
-            QueueServiceFunctionalTestData::$testUniqueId . 'a1', 
-            QueueServiceFunctionalTestData::$testUniqueId . 'a2', 
-            QueueServiceFunctionalTestData::$testUniqueId . 'b1',
+        self::$testUniqueId = 'qa-' . $rint . '-';
+        self::$nonExistQueuePrefix = 'qa-' . ($rint + 1) . '-';
+        self::$TEST_QUEUE_NAMES = array(
+            self::$testUniqueId . 'a1', 
+            self::$testUniqueId . 'a2', 
+            self::$testUniqueId . 'b1',
         );
-        QueueServiceFunctionalTestData::$tempQueueCounter = 0;
+        self::$tempQueueCounter = 0;
     }
 
     public static function getInterestingQueueName() {
-        return QueueServiceFunctionalTestData::$testUniqueId . 'int-' . (QueueServiceFunctionalTestData::$tempQueueCounter++);
+        return self::$testUniqueId . 'int-' . (self::$tempQueueCounter++);
     }
 
     public static function getSimpleMessageText() {
-        return 'foo bar' . (QueueServiceFunctionalTestData::$tempQueueCounter++);
+        return 'foo bar' . (self::$tempQueueCounter++);
     }
 
     public static function getInterestingTimeoutValues() {
@@ -100,7 +100,7 @@ class QueueServiceFunctionalTestData {
 
         {
             // This is the default that comes from the server.
-            array_push($ret, QueueServiceFunctionalTestData::getDefaultServiceProperties());
+            array_push($ret, self::getDefaultServiceProperties());
         }
 
         {
@@ -190,11 +190,10 @@ class QueueServiceFunctionalTestData {
     }
 
     public static function getInterestingMetadata() {
-        $ret = QueueServiceFunctionalTestData::getNiceMetadata();
+        $ret = self::getNiceMetadata();
 
         // Some metadata that HTTP will not like.
-        $metadata = array();
-        $metadata['<>000'] = '::::value';
+        $metadata = array('<>000' => '::::value');
         array_push($ret,$metadata);
 
         return $ret;
@@ -208,10 +207,10 @@ class QueueServiceFunctionalTestData {
         $metadata = array();
         array_push($ret, $metadata);
 
-        $metadata = array();
-        $metadata['key'] = 'value';
-        $metadata['foo'] = 'bar';
-        $metadata['baz'] = 'boo';
+        $metadata = array(
+            'key' => 'value',
+            'foo' => 'bar',
+            'baz' => 'boo');
         array_push($ret, $metadata);
 
         return $ret;
@@ -247,8 +246,7 @@ class QueueServiceFunctionalTestData {
         array_push($ret, $options);
 
         $options = new CreateQueueOptions();
-        $metadata = array();
-        $metadata['foo'] =  'bar';
+        $metadata = array('foo' => 'bar');
         $options->setMetadata($metadata);
             // Uncomment when fixed
             // https://github.com/WindowsAzure/azure-sdk-for-php/issues/59
@@ -267,9 +265,9 @@ class QueueServiceFunctionalTestData {
         // Revert when fixed
         // https://github.com/WindowsAzure/azure-sdk-for-php/issues/69
 //        $ret->setTimeToLiveInSeconds(1000);
-//        $ret->setVisibilityTimeoutInSeconds(QueueServiceFunctionalTestData::INTERESTING_TTL);
+//        $ret->setVisibilityTimeoutInSeconds(self::INTERESTING_TTL);
         $ret->setTimeToLiveInSeconds('1000');
-        $ret->setVisibilityTimeoutInSeconds(QueueServiceFunctionalTestData::INTERESTING_TTL . '');
+        $ret->setVisibilityTimeoutInSeconds(self::INTERESTING_TTL . '');
         return $ret;
     }
 
@@ -301,11 +299,11 @@ class QueueServiceFunctionalTestData {
         array_push($ret, $options);
 
         $options = new ListQueuesOptions();
-        $options->setPrefix(QueueServiceFunctionalTestData::$nonExistQueuePrefix);
+        $options->setPrefix(self::$nonExistQueuePrefix);
         array_push($ret, $options);
 
         $options = new ListQueuesOptions();
-        $options->setPrefix(QueueServiceFunctionalTestData::$testUniqueId);
+        $options->setPrefix(self::$testUniqueId);
         array_push($ret, $options);
 
         $options = new ListQueuesOptions();
@@ -316,7 +314,7 @@ class QueueServiceFunctionalTestData {
         // https://github.com/WindowsAzure/azure-sdk-for-php/issues/69
 //        $options->setMaxResults(2);
         $options->setMaxResults('2');
-        $options->setPrefix(QueueServiceFunctionalTestData::$testUniqueId);
+        $options->setPrefix(self::$testUniqueId);
         // TODO: Revert when fixed
         // https://github.com/WindowsAzure/azure-sdk-for-php/issues/69
 //        $options->setTimeout(10);
@@ -328,7 +326,7 @@ class QueueServiceFunctionalTestData {
         // https://github.com/WindowsAzure/azure-sdk-for-php/issues/69
 //        $options->setMaxResults(3);
         $options->setMaxResults('3');
-        $options->setPrefix(QueueServiceFunctionalTestData::$testUniqueId);
+        $options->setPrefix(self::$testUniqueId);
         // TODO: Revert when fixed
         // https://github.com/WindowsAzure/azure-sdk-for-php/issues/69
 //        $options->setTimeout(10);
@@ -340,7 +338,7 @@ class QueueServiceFunctionalTestData {
         // https://github.com/WindowsAzure/azure-sdk-for-php/issues/69
 //        $options->setMaxResults(4);
         $options->setMaxResults('4');
-        $options->setPrefix(QueueServiceFunctionalTestData::$testUniqueId);
+        $options->setPrefix(self::$testUniqueId);
         // TODO: Revert when fixed
         // https://github.com/WindowsAzure/azure-sdk-for-php/issues/69
 //        $options->setTimeout(10);

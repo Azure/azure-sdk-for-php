@@ -127,11 +127,11 @@ class QueueServiceIntegrationTest extends IntegrationTestBase {
         $shouldReturn = false;
         try {
             $props = $service->getServiceProperties()->getValue();
-            $this->assertFalse('Should succeed when not running in emulator', self::isRunningWithEmulator());
+            $this->assertFalse(self::isRunningWithEmulator(), 'Should succeed when not running in emulator');
         } catch (ServiceException $e) {
             // Expect failure in emulator, as v1.6 doesn't support this method
             if (self::isRunningWithEmulator()) {
-                $this->assertEquals('getCode', 400, $e->getCode());
+                $this->assertEquals(400, $e->getCode(), 'getCode');
                 $shouldReturn = true;
             }
         }
@@ -140,12 +140,12 @@ class QueueServiceIntegrationTest extends IntegrationTestBase {
         }
 
         // Assert
-        $this->assertNotNull('$props', $props);
-        $this->assertNotNull('$props->getLogging', $props->getLogging());
-        $this->assertNotNull('$props->getLogging()->getRetentionPolicy', $props->getLogging()->getRetentionPolicy());
-        $this->assertNotNull('$props->getLogging()->getVersion', $props->getLogging()->getVersion());
-        $this->assertNotNull('$props->getMetrics()->getRetentionPolicy', $props->getMetrics()->getRetentionPolicy());
-        $this->assertNotNull('$props->getMetrics()->getVersion', $props->getMetrics()->getVersion());
+        $this->assertNotNull($props, '$props');
+        $this->assertNotNull($props->getLogging(), '$props->getLogging');
+        $this->assertNotNull($props->getLogging()->getRetentionPolicy(), '$props->getLogging()->getRetentionPolicy');
+        $this->assertNotNull($props->getLogging()->getVersion(), '$props->getLogging()->getVersion');
+        $this->assertNotNull($props->getMetrics()->getRetentionPolicy(), '$props->getMetrics()->getRetentionPolicy');
+        $this->assertNotNull($props->getMetrics()->getVersion(), '$props->getMetrics()->getVersion');
     }
 
     public function testSetServicePropertiesWorks() {
@@ -156,11 +156,11 @@ class QueueServiceIntegrationTest extends IntegrationTestBase {
         $shouldReturn = false;
         try {
             $props = $service->getServiceProperties()->getValue();
-            $this->assertFalse('Should succeed when not running in emulator', self::isRunningWithEmulator());
+            $this->assertFalse(self::isRunningWithEmulator(), 'Should succeed when not running in emulator');
         } catch (ServiceException $e) {
             // Expect failure in emulator, as v1.6 doesn't support this method
             if (self::isRunningWithEmulator()) {
-                $this->assertEquals('getCode', 400, $e->getCode());
+                $this->assertEquals(400, $e->getCode(), 'getCode');
                 $shouldReturn = true;
             }
         }
@@ -174,13 +174,13 @@ class QueueServiceIntegrationTest extends IntegrationTestBase {
         $props = $service->getServiceProperties()->getValue();
 
         // Assert
-        $this->assertNotNull('$props', $props);
-        $this->assertNotNull('$props->getLogging', $props->getLogging());
-        $this->assertNotNull('$props->getLogging()->getRetentionPolicy', $props->getLogging()->getRetentionPolicy());
-        $this->assertNotNull('$props->getLogging()->getVersion', $props->getLogging()->getVersion());
-        $this->assertTrue('$props->getLogging()->getRead', $props->getLogging()->getRead());
-        $this->assertNotNull('$props->getMetrics()->getRetentionPolicy', $props->getMetrics()->getRetentionPolicy());
-        $this->assertNotNull('$props->getMetrics()->getVersion', $props->getMetrics()->getVersion());
+        $this->assertNotNull($props, '$props');
+        $this->assertNotNull($props->getLogging(), '$props->getLogging');
+        $this->assertNotNull($props->getLogging()->getRetentionPolicy(), '$props->getLogging()->getRetentionPolicy');
+        $this->assertNotNull($props->getLogging()->getVersion(), '$props->getLogging()->getVersion');
+        $this->assertTrue($props->getLogging()->getRead(), '$props->getLogging()->getRead');
+        $this->assertNotNull($props->getMetrics()->getRetentionPolicy(), '$props->getMetrics()->getRetentionPolicy');
+        $this->assertNotNull($props->getMetrics()->getVersion(), '$props->getMetrics()->getVersion');
     }
 
     public function testCreateQueueWorks() {
@@ -193,10 +193,10 @@ class QueueServiceIntegrationTest extends IntegrationTestBase {
         $service->deleteQueue(self::$CREATABLE_QUEUE_1);
 
         // Assert
-        $this->assertNotNull('result', $result);
-        $this->assertEquals('$result->getApproximateMessageCount', 0, $result->getApproximateMessageCount());
-        $this->assertNotNull('$result->getMetadata',$result->getMetadata());
-        $this->assertEquals('count($result->getMetadata', 0, count($result->getMetadata()));
+        $this->assertNotNull($result, 'result');
+        $this->assertEquals(0, $result->getApproximateMessageCount(), '$result->getApproximateMessageCount');
+        $this->assertNotNull($result->getMetadata(), '$result->getMetadata');
+        $this->assertEquals(0, count($result->getMetadata()), 'count($result->getMetadata');
     }
 
     public function testCreateQueueWithOptionsWorks() {
@@ -212,13 +212,13 @@ class QueueServiceIntegrationTest extends IntegrationTestBase {
         $service->deleteQueue(self::$CREATABLE_QUEUE_2);
 
         // Assert
-        $this->assertNotNull('$result',$result);
-        $this->assertEquals('$result->getApproximateMessageCount', 0, $result->getApproximateMessageCount());
-        $this->assertNotNull('$result->getMetadata', $result->getMetadata());
-        $this->assertEquals('count($result->getMetadata', 2, count($result->getMetadata()));
+        $this->assertNotNull($result, '$result');
+        $this->assertEquals(0, $result->getApproximateMessageCount(), '$result->getApproximateMessageCount');
+        $this->assertNotNull($result->getMetadata(), '$result->getMetadata');
+        $this->assertEquals(2, count($result->getMetadata()), 'count($result->getMetadata');
         $metadata = $result->getMetadata();
-        $this->assertEquals('$metadata[foo]', 'bar', $metadata['foo']);
-        $this->assertEquals('$metadata[test]', 'blah', $metadata['test']);
+        $this->assertEquals('bar', $metadata['foo'], '$metadata[foo]');
+        $this->assertEquals('blah', $metadata['test'], '$metadata[test]');
     }
 
     public function testListQueuesWorks() {
@@ -229,15 +229,15 @@ class QueueServiceIntegrationTest extends IntegrationTestBase {
         $result = $service->listQueues();
         
         // Assert
-        $this->assertNotNull('$result', $result);
-        $this->assertNotNull('$result->getQueues', $result->getQueues());
+        $this->assertNotNull($result, '$result');
+        $this->assertNotNull($result->getQueues(), '$result->getQueues');
         
         // TODO: Uncomment when the following issue is fixed:
         // https://github.com/WindowsAzure/azure-sdk-for-php/issues/98
-        // $this->assertNotNull($result->getAccountName());
-        $this->assertEquals('$result->getMarker', '', $result->getMarker());
-        $this->assertNull('$result->getMaxResults', $result->getMaxResults());
-        $this->assertTrue('counts', count(self::$testQueues) <= count($result->getQueues()));
+        // $this->assertNotNull($result->getAccountName(), '$result->getAccountName()');
+        $this->assertEquals('', $result->getMarker(), '$result->getMarker');
+        $this->assertNull($result->getMaxResults(), '$result->getMaxResults');
+        $this->assertTrue(count(self::$testQueues) <= count($result->getQueues()), 'counts');
     }
 
     public function testListQueuesWithOptionsWorks() {
@@ -261,35 +261,35 @@ class QueueServiceIntegrationTest extends IntegrationTestBase {
         $result2 = $service->listQueues($opts);
 
         // Assert
-        $this->assertNotNull('$result', $result);
-        $this->assertNotNull('$result->getQueues', $result->getQueues());
-        $this->assertEquals('count($result->getQueues', 3, count($result->getQueues()));
-        $this->assertEquals('$result->getMaxResults', 3, $result->getMaxResults());
+        $this->assertNotNull($result, '$result');
+        $this->assertNotNull($result->getQueues(), '$result->getQueues');
+        $this->assertEquals(3, count($result->getQueues()), 'count($result->getQueues');
+        $this->assertEquals(3, $result->getMaxResults(), '$result->getMaxResults');
         // TODO: Uncomment when the following issue is fixed:
         // https://github.com/WindowsAzure/azure-sdk-for-php/issues/98
-        // $this->assertNotNull($result->getAccountName());
-        $this->assertNull('$result->getMarker', $result->getMarker());
+        // $this->assertNotNull($result->getAccountName(), '$result->getAccountName()');
+        $this->assertNull($result->getMarker(), '$result->getMarker');
         $queue0 = $result->getQueues();
         $queue0 = $queue0[0];
-        $this->assertNotNull('$queue0', $queue0);
-        $this->assertNotNull('$queue0->getMetadata', $queue0->getMetadata());
-        $this->assertNotNull('$queue0->getName', $queue0->getName());
-        $this->assertNotNull('$queue0->getUrl', $queue0->getUrl());
+        $this->assertNotNull($queue0, '$queue0');
+        $this->assertNotNull($queue0->getMetadata(), '$queue0->getMetadata');
+        $this->assertNotNull($queue0->getName(), '$queue0->getName');
+        $this->assertNotNull($queue0->getUrl(), '$queue0->getUrl');
 
-        $this->assertNotNull('$result2', $result2);
-        $this->assertNotNull('$result2->getQueues', $result2->getQueues());
-        $this->assertTrue('count', count(self::$testQueues) - 3 <= count($result2->getQueues()));
-        $this->assertEquals('$result2->getMaxResults', 0, $result2->getMaxResults());
+        $this->assertNotNull($result2, '$result2');
+        $this->assertNotNull($result2->getQueues(), '$result2->getQueues');
+        $this->assertTrue(count(self::$testQueues) - 3 <= count($result2->getQueues()), 'count');
+        $this->assertEquals(0, $result2->getMaxResults(), '$result2->getMaxResults');
         // TODO: Uncomment when the following issue is fixed:
         // https://github.com/WindowsAzure/azure-sdk-for-php/issues/98
-        // $this->assertNotNull($result2->getAccountName());
-        $this->assertEquals('$result2->getMarker', $result->getNextMarker(), $result2->getMarker());
+        // $this->assertNotNull($result2->getAccountName(), '$result2->getAccountName()');
+        $this->assertEquals($result->getNextMarker(), $result2->getMarker(), '$result2->getMarker');
         $queue20 = $result2->getQueues();
         $queue20 = $queue20[0];
-        $this->assertNotNull('$queue20', $queue20);
-        $this->assertNull('$queue20->getMetadata', $queue20->getMetadata());
-        $this->assertNotNull('$queue20->getName', $queue20->getName());
-        $this->assertNotNull('$queue20->getUrl', $queue20->getUrl());
+        $this->assertNotNull($queue20, '$queue20');
+        $this->assertNull($queue20->getMetadata(), '$queue20->getMetadata');
+        $this->assertNotNull($queue20->getName(), '$queue20->getName');
+        $this->assertNotNull($queue20->getUrl(), '$queue20->getUrl');
     }
 
     public function testSetQueueMetadataWorks() {
@@ -310,13 +310,13 @@ class QueueServiceIntegrationTest extends IntegrationTestBase {
         $service->deleteQueue(self::$CREATABLE_QUEUE_3);
 
         // Assert
-        $this->assertNotNull('$result', $result);
-        $this->assertEquals('$result->getApproximateMessageCount', 0, $result->getApproximateMessageCount());
-        $this->assertNotNull('$result->getMetadata', $result->getMetadata());
-        $this->assertEquals('count($result->getMetadata', 2, count($result->getMetadata()));
+        $this->assertNotNull($result, '$result');
+        $this->assertEquals(0, $result->getApproximateMessageCount(), '$result->getApproximateMessageCount');
+        $this->assertNotNull($result->getMetadata(), '$result->getMetadata');
+        $this->assertEquals(2, count($result->getMetadata()), 'count($result->getMetadata');
         $metadata = $result->getMetadata();
-        $this->assertEquals('$metadata[\'foo\']', 'bar', $metadata['foo']);
-        $this->assertEquals('$metadata[\'test\']', 'blah', $metadata['test']);
+        $this->assertEquals('bar', $metadata['foo'], '$metadata[\'foo\']');
+        $this->assertEquals('blah', $metadata['test'], '$metadata[\'test\']');
     }
 
     public function testCreateMessageWorks() {
@@ -330,7 +330,7 @@ class QueueServiceIntegrationTest extends IntegrationTestBase {
         $service->createMessage(self::$TEST_QUEUE_FOR_MESSAGES, 'message4');
 
         // Assert
-        $this->assertTrue('if get there, it is working', true);
+        $this->assertTrue(true, 'if get there, it is working');
     }
 
     public function testListMessagesWorks() {
@@ -347,25 +347,25 @@ class QueueServiceIntegrationTest extends IntegrationTestBase {
         $result = $service->listMessages(self::$TEST_QUEUE_FOR_MESSAGES_2);
 
         // Assert
-        $this->assertNotNull('$result', $result);
-        $this->assertEquals('count($result->getQueueMessages', 1, count($result->getQueueMessages()));
+        $this->assertNotNull($result, '$result');
+        $this->assertEquals(1, count($result->getQueueMessages()), 'count($result->getQueueMessages');
 
         $entry = $result->getQueueMessages();
         $entry = $entry[0];
         
-        $this->assertNotNull('$entry->getMessageId', $entry->getMessageId());
-        $this->assertNotNull('$entry->getMessageText', $entry->getMessageText());
-        $this->assertNotNull('$entry->getPopReceipt', $entry->getPopReceipt());
-        $this->assertEquals('$entry->getDequeueCount', 1, $entry->getDequeueCount());
+        $this->assertNotNull($entry->getMessageId(), '$entry->getMessageId');
+        $this->assertNotNull($entry->getMessageText(), '$entry->getMessageText');
+        $this->assertNotNull($entry->getPopReceipt(), '$entry->getPopReceipt');
+        $this->assertEquals(1, $entry->getDequeueCount(), '$entry->getDequeueCount');
 
-        $this->assertNotNull('$entry->getExpirationDate', $entry->getExpirationDate());
-        $this->assertTrue('diff', $year2010 < $entry->getExpirationDate());
+        $this->assertNotNull($entry->getExpirationDate(), '$entry->getExpirationDate');
+        $this->assertTrue($year2010 < $entry->getExpirationDate(), 'diff');
 
-        $this->assertNotNull('$entry->getInsertionDate', $entry->getInsertionDate());
-        $this->assertTrue('diff', $year2010 < $entry->getInsertionDate());
+        $this->assertNotNull($entry->getInsertionDate(), '$entry->getInsertionDate');
+        $this->assertTrue($year2010 < $entry->getInsertionDate(), 'diff');
 
-        $this->assertNotNull('$entry->getTimeNextVisible', $entry->getTimeNextVisible());
-        $this->assertTrue('diff', $year2010 < $entry->getTimeNextVisible());
+        $this->assertNotNull($entry->getTimeNextVisible(), '$entry->getTimeNextVisible');
+        $this->assertTrue($year2010 < $entry->getTimeNextVisible(), 'diff');
     }
 
     public function testListMessagesWithOptionsWorks() {
@@ -385,25 +385,25 @@ class QueueServiceIntegrationTest extends IntegrationTestBase {
         $result = $service->listMessages(self::$TEST_QUEUE_FOR_MESSAGES_3, $opts);
 
         // Assert
-        $this->assertNotNull('',$result);
-        $this->assertEquals('',4, count($result->getQueueMessages()));
+        $this->assertNotNull($result, '$result');
+        $this->assertEquals(4, count($result->getQueueMessages()), 'count($result->getQueueMessages())');
         for ($i = 0; $i < 4; $i++) {
             $entry = $result->getQueueMessages();
             $entry = $entry[$i];
 
-            $this->assertNotNull('', $entry->getMessageId());
-            $this->assertNotNull('', $entry->getMessageText());
-            $this->assertNotNull('', $entry->getPopReceipt());
-            $this->assertEquals('', 1, $entry->getDequeueCount());
+            $this->assertNotNull($entry->getMessageId(), '$entry->getMessageId()');
+            $this->assertNotNull($entry->getMessageText(), '$entry->getMessageText()');
+            $this->assertNotNull($entry->getPopReceipt(), '$entry->getPopReceipt()');
+            $this->assertEquals(1, $entry->getDequeueCount(), '$entry->getDequeueCount()');
 
-            $this->assertNotNull('', $entry->getExpirationDate());
-            $this->assertTrue('', $year2010 < $entry->getExpirationDate());
+            $this->assertNotNull($entry->getExpirationDate(), '$entry->getExpirationDate()');
+            $this->assertTrue($year2010 < $entry->getExpirationDate(), '$year2010 < $entry->getExpirationDate()');
 
-            $this->assertNotNull('', $entry->getInsertionDate());
-            $this->assertTrue('', $year2010 < $entry->getInsertionDate());
+            $this->assertNotNull($entry->getInsertionDate(), '$entry->getInsertionDate()');
+            $this->assertTrue($year2010 < $entry->getInsertionDate(), '$year2010 < $entry->getInsertionDate()');
 
-            $this->assertNotNull('', $entry->getTimeNextVisible());
-            $this->assertTrue('', $year2010 < $entry->getTimeNextVisible());
+            $this->assertNotNull($entry->getTimeNextVisible(), '$entry->getTimeNextVisible()');
+            $this->assertTrue($year2010 < $entry->getTimeNextVisible(), '$year2010 < $entry->getTimeNextVisible()');
         }
     }
 
@@ -421,21 +421,21 @@ class QueueServiceIntegrationTest extends IntegrationTestBase {
         $result = $service->peekMessages(self::$TEST_QUEUE_FOR_MESSAGES_4);
 
         // Assert
-        $this->assertNotNull('', $result);
-        $this->assertEquals('', 1, count($result->getQueueMessages()));
+        $this->assertNotNull($result, '$result');
+        $this->assertEquals(1, count($result->getQueueMessages()), 'count($result->getQueueMessages())');
 
         $entry = $result ->getQueueMessages();
         $entry = $entry[0];
 
-        $this->assertNotNull('', $entry->getMessageId());
-        $this->assertNotNull('', $entry->getMessageText());
-        $this->assertEquals('', 0, $entry->getDequeueCount());
+        $this->assertNotNull($entry->getMessageId(), '$entry->getMessageId()');
+        $this->assertNotNull($entry->getMessageText(), '$entry->getMessageText()');
+        $this->assertEquals(0, $entry->getDequeueCount(), '$entry->getDequeueCount()');
 
-        $this->assertNotNull('', $entry->getExpirationDate());
-        $this->assertTrue('', $year2010 < $entry->getExpirationDate());
+        $this->assertNotNull($entry->getExpirationDate(), '$entry->getExpirationDate()');
+        $this->assertTrue($year2010 < $entry->getExpirationDate(), '$year2010 < $entry->getExpirationDate()');
 
-        $this->assertNotNull('', $entry->getInsertionDate());
-        $this->assertTrue('', $year2010 < $entry->getInsertionDate());
+        $this->assertNotNull($entry->getInsertionDate(), '$entry->getInsertionDate()');
+        $this->assertTrue($year2010 < $entry->getInsertionDate(), '$year2010 < $entry->getInsertionDate()');
     }
 
     public function testPeekMessagesWithOptionsWorks() {
@@ -454,21 +454,21 @@ class QueueServiceIntegrationTest extends IntegrationTestBase {
         $result = $service->peekMessages(self::$TEST_QUEUE_FOR_MESSAGES_5, $opts);
 
         // Assert
-        $this->assertNotNull('', $result);
-        $this->assertEquals('', 4, count($result->getQueueMessages()));
+        $this->assertNotNull($result, '$result');
+        $this->assertEquals(4, count($result->getQueueMessages()), 'count($result->getQueueMessages())');
         for ($i = 0; $i < 4; $i++) {
             $entry = $result ->getQueueMessages();
             $entry = $entry[$i];
 
-            $this->assertNotNull('', $entry->getMessageId());
-            $this->assertNotNull('', $entry->getMessageText());
-            $this->assertEquals('', 0, $entry->getDequeueCount());
+            $this->assertNotNull($entry->getMessageId(), '$entry->getMessageId()');
+            $this->assertNotNull($entry->getMessageText(), '$entry->getMessageText()');
+            $this->assertEquals(0, $entry->getDequeueCount(), '$entry->getDequeueCount()');
 
-            $this->assertNotNull('', $entry->getExpirationDate());
-            $this->assertTrue('', $year2010 < $entry->getExpirationDate());
+            $this->assertNotNull($entry->getExpirationDate(), '$entry->getExpirationDate()');
+            $this->assertTrue($year2010 < $entry->getExpirationDate(), '$year2010 < $entry->getExpirationDate()');
 
-            $this->assertNotNull('', $entry->getInsertionDate());
-            $this->assertTrue('', $year2010 < $entry->getInsertionDate());
+            $this->assertNotNull($entry->getInsertionDate(), '$entry->getInsertionDate()');
+            $this->assertTrue($year2010 < $entry->getInsertionDate(), '$year2010 < $entry->getInsertionDate()');
         }
     }
 
@@ -486,8 +486,8 @@ class QueueServiceIntegrationTest extends IntegrationTestBase {
         $result = $service->peekMessages(self::$TEST_QUEUE_FOR_MESSAGES_6);
 
         // Assert
-        $this->assertNotNull('', $result);
-        $this->assertEquals('', 0, count($result->getQueueMessages()));
+        $this->assertNotNull($result, '$result');
+        $this->assertEquals(0, count($result->getQueueMessages()), 'count($result->getQueueMessages())');
     }
 
     public function testDeleteMessageWorks() {
@@ -510,8 +510,8 @@ class QueueServiceIntegrationTest extends IntegrationTestBase {
         $result2 = $service->listMessages(self::$TEST_QUEUE_FOR_MESSAGES_7, $opts);
 
         // Assert
-        $this->assertNotNull('', $result2);
-        $this->assertEquals('', 3, count($result2->getQueueMessages()));
+        $this->assertNotNull($result2, '$result2');
+        $this->assertEquals(3, count($result2->getQueueMessages()), 'count($result2->getQueueMessages())');
     }
 
     public function testUpdateMessageWorks() {
@@ -540,31 +540,31 @@ class QueueServiceIntegrationTest extends IntegrationTestBase {
         $listResult2 = $service->listMessages(self::$TEST_QUEUE_FOR_MESSAGES_8);
 
         // Assert
-        $this->assertNotNull('', $updateResult);
-        $this->assertNotNull('', $updateResult->getPopReceipt());
-        $this->assertNotNull('', $updateResult->getTimeNextVisible());
-        $this->assertTrue('', $year2010 < $updateResult->getTimeNextVisible());
+        $this->assertNotNull($updateResult, '$updateResult');
+        $this->assertNotNull($updateResult->getPopReceipt(), '$updateResult->getPopReceipt()');
+        $this->assertNotNull($updateResult->getTimeNextVisible(), '$updateResult->getTimeNextVisible()');
+        $this->assertTrue($year2010 < $updateResult->getTimeNextVisible(), '$year2010 < $updateResult->getTimeNextVisible()');
 
-        $this->assertNotNull('', $listResult2);
+        $this->assertNotNull($listResult2, '$listResult2');
         $entry = $listResult2->getQueueMessages();
         $entry = $entry[0];
 
         $blarg = $listResult1->getQueueMessages();
         $blarg = $blarg[0];
         
-        $this->assertEquals('', $blarg->getMessageId(), $entry->getMessageId());
-        $this->assertEquals('', 'new text', $entry->getMessageText());
-        $this->assertNotNull('', $entry->getPopReceipt());
-        $this->assertEquals('', 2, $entry->getDequeueCount());
+        $this->assertEquals($blarg->getMessageId(), $entry->getMessageId(), '$entry->getMessageId()');
+        $this->assertEquals('new text', $entry->getMessageText(), '$entry->getMessageText()');
+        $this->assertNotNull($entry->getPopReceipt(), '$entry->getPopReceipt()');
+        $this->assertEquals(2, $entry->getDequeueCount(), '$entry->getDequeueCount()');
 
-        $this->assertNotNull('', $entry->getExpirationDate());
-        $this->assertTrue('', $year2010 < $entry->getExpirationDate());
+        $this->assertNotNull($entry->getExpirationDate(), '$entry->getExpirationDate()');
+        $this->assertTrue($year2010 < $entry->getExpirationDate(), '$year2010 < $entry->getExpirationDate()');
 
-        $this->assertNotNull('', $entry->getInsertionDate());
-        $this->assertTrue('', $year2010 < $entry->getInsertionDate());
+        $this->assertNotNull($entry->getInsertionDate(), '$entry->getInsertionDate()');
+        $this->assertTrue($year2010 < $entry->getInsertionDate(), '$year2010 < $entry->getInsertionDate()');
 
-        $this->assertNotNull('', $entry->getTimeNextVisible());
-        $this->assertTrue('', $year2010 < $entry->getTimeNextVisible());
+        $this->assertNotNull($entry->getTimeNextVisible(), '$entry->getTimeNextVisible()');
+        $this->assertTrue($year2010 < $entry->getTimeNextVisible(), '$year2010 < $entry->getTimeNextVisible()');
 
     }
 }

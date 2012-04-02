@@ -51,11 +51,11 @@ class QueueServiceFunctionalTest extends FunctionalTestBase {
         $shouldReturn = false;
         try {
             $service->setServiceProperties($serviceProperties);
-            $this->assertFalse('Should succeed when not running in emulator', self::isRunningWithEmulator());
+            $this->assertFalse(self::isRunningWithEmulator(), 'Should succeed when not running in emulator');
         } catch (ServiceException $e) {
             // Expect failure in emulator, as v1.6 doesn't support this method
             if (self::isRunningWithEmulator()) {
-                $this->assertEquals('getCode', 400, $e->getCode());
+                $this->assertEquals(400, $e->getCode(), 'getCode');
                 $shouldReturn = true;
             }
         }
@@ -73,11 +73,11 @@ class QueueServiceFunctionalTest extends FunctionalTestBase {
         $shouldReturn = false;
         try {
             $service->setServiceProperties($serviceProperties);
-            $this->assertFalse('Should succeed when not running in emulator', self::isRunningWithEmulator());
+            $this->assertFalse(self::isRunningWithEmulator(), 'Should succeed when not running in emulator');
         } catch (ServiceException $e) {
             // Expect failure in emulator, as v1.6 doesn't support this method
             if (self::isRunningWithEmulator()) {
-                $this->assertEquals('getCode', 400, $e->getCode());
+                $this->assertEquals(400, $e->getCode(), 'getCode');
                 $shouldReturn = true;
             }
         }
@@ -109,24 +109,24 @@ class QueueServiceFunctionalTest extends FunctionalTestBase {
             if ($effOptions->getTimeout() != null && $effOptions->getTimeout() < 0) {
                 $this->True('Expect negative timeouts in $options to throw', false);
             } else {
-                $this->assertFalse('Should succeed when not running in emulator', self::isRunningWithEmulator());
+                $this->assertFalse(self::isRunningWithEmulator(), 'Should succeed when not running in emulator');
             }
             $this->verifyServicePropertiesWorker($ret, null);
         }
         catch (ServiceException $e) {
             if (self::isRunningWithEmulator()) {
                 if ($options->getTimeout() != null && $options->getTimeout() < 0) {
-                    $this->assertEquals('getCode', 500, $e->getCode());
+                    $this->assertEquals(500, $e->getCode(), 'getCode');
                 } else {
                 // Expect failure in emulator, as v1.6 doesn't support this method
-                    $this->assertEquals('getCode', 400, $e->getCode());
+                    $this->assertEquals(400, $e->getCode(), 'getCode');
                 }
             } else {
                 if ($effOptions->getTimeout() == null || $effOptions->getTimeout() >= 1) {
-                    $this->assertNull('Expect positive timeouts in $options to be fine', $e);
+                    $this->assertNull($e, 'Expect positive timeouts in $options to be fine');
                 }
                 else {
-                    $this->assertEquals('getCode', 500, $e->getCode());
+                    $this->assertEquals(500, $e->getCode(), 'getCode');
                 }
             }
         }
@@ -138,28 +138,28 @@ class QueueServiceFunctionalTest extends FunctionalTestBase {
         }
 
         $sp = $ret->getValue();
-        $this->assertNotNull('getValue should be non-null', $sp);
+        $this->assertNotNull($sp, 'getValue should be non-null');
 
         $l = $sp->getLogging();
-        $this->assertNotNull('getValue()->getLogging() should be non-null', $l);
-        $this->assertEquals('getValue()->getLogging()->getVersion', $serviceProperties->getLogging()->getVersion(), $l->getVersion());
-        $this->assertEquals('getValue()->getLogging()->getDelete', $serviceProperties->getLogging()->getDelete(), $l->getDelete());
-        $this->assertEquals('getValue()->getLogging()->getRead', $serviceProperties->getLogging()->getRead(), $l->getRead());
-        $this->assertEquals('getValue()->getLogging()->getWrite', $serviceProperties->getLogging()->getWrite(), $l->getWrite());
+        $this->assertNotNull($l, 'getValue()->getLogging() should be non-null');
+        $this->assertEquals($serviceProperties->getLogging()->getVersion(), $l->getVersion(), 'getValue()->getLogging()->getVersion');
+        $this->assertEquals($serviceProperties->getLogging()->getDelete(), $l->getDelete(), 'getValue()->getLogging()->getDelete');
+        $this->assertEquals($serviceProperties->getLogging()->getRead(), $l->getRead(), 'getValue()->getLogging()->getRead');
+        $this->assertEquals($serviceProperties->getLogging()->getWrite(), $l->getWrite(), 'getValue()->getLogging()->getWrite');
 
         $r = $l->getRetentionPolicy();
-        $this->assertNotNull('getValue()->getLogging()->getRetentionPolicy should be non-null', $r);
-        $this->assertEquals('getValue()->getLogging()->getRetentionPolicy()->getDays', $serviceProperties->getLogging() ->getRetentionPolicy()->getDays(), $r->getDays());
+        $this->assertNotNull($r, 'getValue()->getLogging()->getRetentionPolicy should be non-null');
+        $this->assertEquals($serviceProperties->getLogging() ->getRetentionPolicy()->getDays(), $r->getDays(), 'getValue()->getLogging()->getRetentionPolicy()->getDays');
 
         $m = $sp->getMetrics();
-        $this->assertNotNull('getValue()->getMetrics() should be non-null', $m);
-        $this->assertEquals('getValue()->getMetrics()->getVersion', $serviceProperties->getMetrics()->getVersion(), $m->getVersion());
-        $this->assertEquals('getValue()->getMetrics()->getEnabled', $serviceProperties->getMetrics()->getEnabled(), $m->getEnabled());
-        $this->assertEquals('getValue()->getMetrics()->getIncludeAPIs', $serviceProperties->getMetrics()->getIncludeAPIs(), $m->getIncludeAPIs());
+        $this->assertNotNull($m, 'getValue()->getMetrics() should be non-null');
+        $this->assertEquals($serviceProperties->getMetrics()->getVersion(), $m->getVersion(), 'getValue()->getMetrics()->getVersion');
+        $this->assertEquals($serviceProperties->getMetrics()->getEnabled(), $m->getEnabled(), 'getValue()->getMetrics()->getEnabled');
+        $this->assertEquals($serviceProperties->getMetrics()->getIncludeAPIs(), $m->getIncludeAPIs(), 'getValue()->getMetrics()->getIncludeAPIs');
 
         $r = $m->getRetentionPolicy();
-        $this->assertNotNull('getValue()->getMetrics()->getRetentionPolicy should be non-null', $r);
-        $this->assertEquals('getValue()->getMetrics()->getRetentionPolicy()->getDays', $serviceProperties->getMetrics() ->getRetentionPolicy()->getDays(), $r->getDays());
+        $this->assertNotNull($r, 'getValue()->getMetrics()->getRetentionPolicy should be non-null');
+        $this->assertEquals($serviceProperties->getMetrics() ->getRetentionPolicy()->getDays(), $r->getDays(), 'getValue()->getMetrics()->getRetentionPolicy()->getDays');
     }
 
     // ----------------------------
@@ -199,7 +199,7 @@ class QueueServiceFunctionalTest extends FunctionalTestBase {
                 $service->setServiceProperties($serviceProperties, $options);
             }
 
-            $this->assertFalse('Should succeed when not running in emulator', self::isRunningWithEmulator());
+            $this->assertFalse(self::isRunningWithEmulator(), 'Should succeed when not running in emulator');
 
             if ($options == null) {
                 $options = new QueueServiceOptions();
@@ -209,9 +209,9 @@ class QueueServiceFunctionalTest extends FunctionalTestBase {
             // https://github.com/WindowsAzure/azure-sdk-for-php/issues/101
             // if ($options->getTimeout() != null && $options->getTimeout() < 1) {
             if ($options->getTimeout() != null && $options->getTimeout() < 0) {
-                $this->assertTrue('Expect negative timeouts in $options to throw', false);
+                $this->assertTrue(false, 'Expect negative timeouts in $options to throw');
             } else {
-                $this->assertFalse('Should succeed when not running in emulator', self::isRunningWithEmulator());
+                $this->assertFalse(self::isRunningWithEmulator(), 'Should succeed when not running in emulator');
             }
 
             $ret = ($options == null ? $service->getServiceProperties() : $service->getServiceProperties($options));
@@ -225,15 +225,15 @@ class QueueServiceFunctionalTest extends FunctionalTestBase {
 
             if (self::isRunningWithEmulator()) {
                 if ($options->getTimeout() != null && $options->getTimeout() < 0) {
-                    $this->assertEquals('getCode', 500, $e->getCode());
+                    $this->assertEquals(500, $e->getCode(), 'getCode');
                 } else {
-                    $this->assertEquals('getCode', 400, $e->getCode());
+                    $this->assertEquals(400, $e->getCode(), 'getCode');
                 }
             } else {
                 if ($options->getTimeout() != null && $options->getTimeout() < 1) {
-                    $this->assertEquals('getCode', 500, $e->getCode());
+                    $this->assertEquals(500, $e->getCode(), 'getCode');
                 } else {
-                    $this->assertNull('Expect positive timeouts in $options to be fine', $e);
+                    $this->assertNull($e, 'Expect positive timeouts in $options to be fine');
                 }
             }
         }
@@ -274,7 +274,7 @@ class QueueServiceFunctionalTest extends FunctionalTestBase {
                 // TODO: Uncomment when fixed
                 // https://github.com/WindowsAzure/azure-sdk-for-php/issues/103
 //                if ($options->getTimeout() != null && $options->getTimeout() < 0) {
-//                    $this->assertTrue('Expect negative timeouts ' . $options->getTimeout() . ' in $options to throw', false);
+//                    $this->assertTrue(false, 'Expect negative timeouts ' . $options->getTimeout() . ' in $options to throw');
 //                }
                 $this->verifyListQueuesWorker($ret, $options);
 
@@ -290,10 +290,10 @@ class QueueServiceFunctionalTest extends FunctionalTestBase {
             catch (ServiceException $e) {
                 $finished = true;
                 if ($options->getTimeout() == null || $options->getTimeout() >= 1) {
-                    $this->assertNull('Expect positive timeouts in $options to be fine', $e);
+                    $this->assertNull($e, 'Expect positive timeouts in $options to be fine');
                 }
                 else {
-                    $this->assertEquals('getCode', 500, $e->getCode());
+                    $this->assertEquals(500, $e->getCode(), 'getCode');
                 }
             }
         }
@@ -302,15 +302,15 @@ class QueueServiceFunctionalTest extends FunctionalTestBase {
     private function verifyListQueuesWorker($ret, $options) {
         // Uncomment when fixed
         // https://github.com/WindowsAzure/azure-sdk-for-php/issues/98
-        //$this->assertEquals('getAccountName', $accountName, $ret->getAccountName());
+        //$this->assertEquals($accountName, $ret->getAccountName(), 'getAccountName');
         
         // Cannot really check the next marker. Just make sure it is not null.
-        $this->assertNotNull('getNextMarker', $ret->getNextMarker());
-        $this->assertEquals('getMarker', $options->getMarker(), $ret->getMarker());
-        $this->assertEquals('getMaxResults', $options->getMaxResults(), $ret->getMaxResults());
-        $this->assertEquals('getPrefix', $options->getPrefix(), $ret->getPrefix());
+        $this->assertNotNull($ret->getNextMarker(), 'getNextMarker');
+        $this->assertEquals($options->getMarker(), $ret->getMarker(), 'getMarker');
+        $this->assertEquals($options->getMaxResults(), $ret->getMaxResults(), 'getMaxResults');
+        $this->assertEquals($options->getPrefix(), $ret->getPrefix(), 'getPrefix');
 
-        $this->assertNotNull('getQueues', $ret->getQueues());
+        $this->assertNotNull($ret->getQueues(), 'getQueues');
          
         if ($options->getMaxResults() == 0) {
             $this->assertEquals(
@@ -319,24 +319,24 @@ class QueueServiceFunctionalTest extends FunctionalTestBase {
                     0, strlen($ret->getNextMarker()));
 
             if ($options->getPrefix() != null && $options->getPrefix() == QueueServiceFunctionalTestData::$nonExistQueuePrefix) {
-                $this->assertEquals('when MaxResults=0 and Prefix=(\'' . $options->getPrefix() . '\'), then Queues->length', 0, count($ret->getQueues()));
+                $this->assertEquals(0, count($ret->getQueues()), 'when MaxResults=0 and Prefix=(\'' . $options->getPrefix() . '\'), then Queues->length');
             }
             else if ($options->getPrefix() != null && $options->getPrefix() == QueueServiceFunctionalTestData::$testUniqueId) {
-                $this->assertEquals('when MaxResults=0 and Prefix=(\'' . $options->getPrefix() . '\'), then count Queues', count(QueueServiceFunctionalTestData::$TEST_QUEUE_NAMES), count($ret->getQueues()));
+                $this->assertEquals(count(QueueServiceFunctionalTestData::$TEST_QUEUE_NAMES), count($ret->getQueues()), 'when MaxResults=0 and Prefix=(\'' . $options->getPrefix() . '\'), then count Queues');
             }
             else {
                 // Don't know how many there should be
             }
         }
         else if (strlen($ret->getNextMarker()) == 0) {
-            $this->assertTrue('when NextMarker (\'' . $ret->getNextMarker() . '\')==\'\', Queues->length (' . count($ret->getQueues()) . ') should be <= MaxResults (' . $options->getMaxResults() . ')', count($ret ->getQueues()) <= $options->getMaxResults());
+            $this->assertTrue(count($ret ->getQueues()) <= $options->getMaxResults(), 'when NextMarker (\'' . $ret->getNextMarker() . '\')==\'\', Queues->length (' . count($ret->getQueues()) . ') should be <= MaxResults (' . $options->getMaxResults() . ')');
 
             if ($options->getPrefix() != null && $options->getPrefix() == QueueServiceFunctionalTestData::$nonExistQueuePrefix) {
-                $this->assertEquals('when no next marker and Prefix=(\'' . $options->getPrefix() . '\'), then Queues->length', 0, count($ret->getQueues()));
+                $this->assertEquals(0, count($ret->getQueues()), 'when no next marker and Prefix=(\'' . $options->getPrefix() . '\'), then Queues->length');
             }
             else if ($options->getPrefix() != null && $options->getPrefix() == QueueServiceFunctionalTestData::$testUniqueId) {
                 // Need to futz with the mod because you are allowed to get MaxResults items returned->
-                $this->assertEquals('when no next marker and Prefix=(\'' . $options->getPrefix() . '\'), then Queues->length', count(QueueServiceFunctionalTestData::$TEST_QUEUE_NAMES) % $options->getMaxResults(), count($ret ->getQueues()) % $options->getMaxResults());
+                $this->assertEquals(count(QueueServiceFunctionalTestData::$TEST_QUEUE_NAMES) % $options->getMaxResults(), count($ret ->getQueues()) % $options->getMaxResults(), 'when no next marker and Prefix=(\'' . $options->getPrefix() . '\'), then Queues->length');
             }
             else {
                 // Don't know how many there should be
@@ -350,7 +350,7 @@ class QueueServiceFunctionalTest extends FunctionalTestBase {
                     $options->getMaxResults());
 
             if ($options->getPrefix() != null && $options->getPrefix() == (QueueServiceFunctionalTestData::$nonExistQueuePrefix)) {
-                $this->assertTrue('when a next marker and Prefix=(\'' . $options->getPrefix() . '\'), impossible', false);
+                $this->assertTrue(false, 'when a next marker and Prefix=(\'' . $options->getPrefix() . '\'), impossible');
             }
         }
 
@@ -395,7 +395,7 @@ class QueueServiceFunctionalTest extends FunctionalTestBase {
             // Uncomment when fixed
             // https://github.com/WindowsAzure/azure-sdk-for-php/issues/59
 //            if ($options->getTimeout() != null && $options->getTimeout() < 1) {
-//                $this->assertTrue('Expect negative timeouts in $options to throw', false);
+//                $this->assertTrue(false, 'Expect negative timeouts in $options to throw');
 //            }
 
             // Now check that the queue was created correctly.
@@ -404,7 +404,7 @@ class QueueServiceFunctionalTest extends FunctionalTestBase {
             $opts = new ListQueuesOptions();
             $opts->setPrefix(QueueServiceFunctionalTestData::$testUniqueId);
             $qs = $service->listQueues($opts);
-            $this->assertEquals('After adding one, with Prefix=(\'' . QueueServiceFunctionalTestData::$testUniqueId . '\'), then Queues->length', count($qs->getQueues()), (count(QueueServiceFunctionalTestData::$TEST_QUEUE_NAMES) + 1));
+            $this->assertEquals(count($qs->getQueues()), (count(QueueServiceFunctionalTestData::$TEST_QUEUE_NAMES) + 1), 'After adding one, with Prefix=(\'' . QueueServiceFunctionalTestData::$testUniqueId . '\'), then Queues->length');
 
             // Check the metadata on the queue
             $ret = $service->getQueueMetadata($queue);
@@ -419,11 +419,11 @@ class QueueServiceFunctionalTest extends FunctionalTestBase {
             // Uncomment when fixed
             // https://github.com/WindowsAzure/azure-sdk-for-php/issues/59
 //            if ($options->getTimeout() == null || $options->getTimeout() >= 1) {
-//                $this->assertNull('Expect positive timeouts in $options to be fine', $e);
+//                $this->assertNull($e, 'Expect positive timeouts in $options to be fine');
 //            }
 //            else 
                 {
-                $this->assertEquals('getCode', 500, $e->getCode());
+                $this->assertEquals(500, $e->getCode(), 'getCode');
             }
         }
         if ($created) {
@@ -440,16 +440,16 @@ class QueueServiceFunctionalTest extends FunctionalTestBase {
         }
 
         if ($options->getMetadata() == null) {
-            $this->assertNotNull('queue Metadata', $ret->getMetadata());
-            $this->assertEquals('queue Metadata count', 0, count($ret->getMetadata()));
+            $this->assertNotNull($ret->getMetadata(), 'queue Metadata');
+            $this->assertEquals(0, count($ret->getMetadata()), 'queue Metadata count');
         }
         else {
-            $this->assertNotNull('queue Metadata', $ret->getMetadata());
-            $this->assertEquals('Metadata', count($options->getMetadata()), count($ret->getMetadata()));
+            $this->assertNotNull($ret->getMetadata(), 'queue Metadata');
+            $this->assertEquals(count($options->getMetadata()), count($ret->getMetadata()), 'Metadata');
             $om = $options->getMetadata();
             $rm = $ret->getMetadata();
             foreach(array_keys($options->getMetadata()) as $key)  {
-                $this->assertEquals('Metadata(' . $key . ')', $om[$key], $rm[$key]);
+                $this->assertEquals($om[$key], $rm[$key], 'Metadata(' . $key . ')');
             }
         }
         // TODO: Need to verify the queue content?
@@ -485,7 +485,7 @@ class QueueServiceFunctionalTest extends FunctionalTestBase {
         $opts = new ListQueuesOptions();
         $opts->setPrefix(QueueServiceFunctionalTestData::$testUniqueId);
         $qs = $service->listQueues($opts);
-        $this->assertEquals('After adding one, with Prefix=(\'' . QueueServiceFunctionalTestData::$testUniqueId . '\'), then Queues->length', count($qs->getQueues()), (count(QueueServiceFunctionalTestData::$TEST_QUEUE_NAMES) + 1));
+        $this->assertEquals(count($qs->getQueues()), (count(QueueServiceFunctionalTestData::$TEST_QUEUE_NAMES) + 1), 'After adding one, with Prefix=(\'' . QueueServiceFunctionalTestData::$testUniqueId . '\'), then Queues->length');
 
         $deleted = false;
         try {
@@ -505,14 +505,14 @@ class QueueServiceFunctionalTest extends FunctionalTestBase {
             // Uncomment when fixed
             // https://github.com/WindowsAzure/azure-sdk-for-php/issues/59
 //            if ($options->getTimeout() != null && $options->getTimeout() < 1) {
-//                $this->assertTrue('Expect negative timeouts in $options to throw', false);
+//                $this->assertTrue(false, 'Expect negative timeouts in $options to throw');
 //            }
 
             // Make sure that the list of all applicable queues is correctly updated.
             $opts = new ListQueuesOptions();
             $opts->setPrefix(QueueServiceFunctionalTestData::$testUniqueId);
             $qs = $service->listQueues($opts);
-            $this->assertEquals('After adding then deleting one, with Prefix=(\'' . QueueServiceFunctionalTestData::$testUniqueId . '\'), then Queues->length', count($qs->getQueues()), count(QueueServiceFunctionalTestData::$TEST_QUEUE_NAMES));
+            $this->assertEquals(count($qs->getQueues()), count(QueueServiceFunctionalTestData::$TEST_QUEUE_NAMES), 'After adding then deleting one, with Prefix=(\'' . QueueServiceFunctionalTestData::$testUniqueId . '\'), then Queues->length');
 
             // Nothing else interesting to check for the options.
         }
@@ -520,11 +520,11 @@ class QueueServiceFunctionalTest extends FunctionalTestBase {
             // Uncomment when fixed
             // https://github.com/WindowsAzure/azure-sdk-for-php/issues/59
 //            if ($options->getTimeout() == null || $options->getTimeout() >= 1) {
-//                $this->assertNull('Expect positive timeouts in $options to be fine', $e);
+//                $this->assertNull($e, 'Expect positive timeouts in $options to be fine');
 //            }
 //            else
             {
-                $this->assertEquals('getCode', 500, $e->getCode());
+                $this->assertEquals(500, $e->getCode(), 'getCode');
             }
         }
         if (!$deleted) {
@@ -590,7 +590,7 @@ class QueueServiceFunctionalTest extends FunctionalTestBase {
             // Uncomment when fixed
             // https://github.com/WindowsAzure/azure-sdk-for-php/issues/59
 //            if ($options->getTimeout() != null && $options->getTimeout() < 1) {
-//                $this->assertTrue('Expect negative timeouts in $options to throw', false);
+//                $this->assertTrue(false, 'Expect negative timeouts in $options to throw');
 //            }
 
             $this->verifyGetSetQueueMetadataWorker($res, $metadata);
@@ -599,11 +599,11 @@ class QueueServiceFunctionalTest extends FunctionalTestBase {
             // Uncomment when fixed
             // https://github.com/WindowsAzure/azure-sdk-for-php/issues/59
 //            if ($options->getTimeout() == null || $options->getTimeout() >= 1) {
-//                $this->assertNull('Expect positive timeouts in $options to be fine', $e);
+//                $this->assertNull($e, 'Expect positive timeouts in $options to be fine');
 //            }
 //            else
             {
-                $this->assertEquals('getCode', 500, $e->getCode());
+                $this->assertEquals(500, $e->getCode(), 'getCode');
             }
         }
         // Clean up->
@@ -611,16 +611,16 @@ class QueueServiceFunctionalTest extends FunctionalTestBase {
     }
 
     private function verifyGetSetQueueMetadataWorker($ret, $metadata) {
-        $this->assertNotNull('queue Metadata', $ret->getMetadata());
+        $this->assertNotNull($ret->getMetadata(), 'queue Metadata');
         if ($metadata == null) {
-            $this->assertEquals('Metadata', 0, count($ret->getMetadata()));
-            $this->assertEquals('getApproximateMessageCount', 0, $ret->getApproximateMessageCount());
+            $this->assertEquals(0, count($ret->getMetadata()), 'Metadata');
+            $this->assertEquals(0, $ret->getApproximateMessageCount(), 'getApproximateMessageCount');
         }
         else {
-            $this->assertEquals('Metadata', count($metadata), count($ret->getMetadata()));
+            $this->assertEquals(count($metadata), count($ret->getMetadata()), 'Metadata');
             $rm =$ret->getMetadata();
             foreach(array_keys($metadata) as $key)  {
-                $this->assertEquals('Metadata(' . $key . ')', $metadata[$key], $rm[$key]);
+                $this->assertEquals($metadata[$key], $rm[$key], 'Metadata(' . $key . ')');
             }
 
             // Hard to test "approximate", so just verify that it is in the expected range
@@ -688,7 +688,7 @@ class QueueServiceFunctionalTest extends FunctionalTestBase {
             // Uncomment when fixed
             // https://github.com/WindowsAzure/azure-sdk-for-php/issues/59
 //            if ($options->getTimeout() != null && $options->getTimeout() < 1) {
-//                $this->assertTrue('Expect negative timeouts in $options to throw', false);
+//                $this->assertTrue(false, 'Expect negative timeouts in $options to throw');
 //            }
 
             $res = $service->getQueueMetadata($queue);
@@ -708,10 +708,10 @@ class QueueServiceFunctionalTest extends FunctionalTestBase {
 //            // Uncomment when fixed
 //            // https://github.com/WindowsAzure/azure-sdk-for-php/issues/59
 ////            else if ($options->getTimeout() != null && $options->getTimeout() < 1) {
-////                $this->assertEquals('getCode', 500, $e->getCode());
+////                $this->assertEquals(500, $e->getCode(), 'getCode');
 ////            }
 //            else {
-//                $this->assertNull('Expect positive timeouts in $options to be fine', $e);
+//                $this->assertNull($e, 'Expect positive timeouts in $options to be fine');
 //            }
 //        }
         // Clean up.
@@ -753,12 +753,12 @@ class QueueServiceFunctionalTest extends FunctionalTestBase {
         $lmr = $service->listMessages($queue);
 
         // No messages, because it is not visible for 2 seconds.
-        $this->assertEquals('getQueueMessages() count', 0, count($lmr->getQueueMessages()));
+        $this->assertEquals(0, count($lmr->getQueueMessages()), 'getQueueMessages() count');
         sleep(6);
         // Try again, passed the VisibilityTimeout has passed, but also the 4 second TTL has passed.
         $lmr = $service->listMessages($queue);
 
-        $this->assertEquals('getQueueMessages() count', 0, count($lmr->getQueueMessages()));
+        $this->assertEquals(0, count($lmr->getQueueMessages()), 'getQueueMessages() count');
 
         $service->clearMessages($queue);
     }
@@ -820,13 +820,13 @@ class QueueServiceFunctionalTest extends FunctionalTestBase {
             }
 
             if ($options->getVisibilityTimeoutInSeconds() != null && $options->getVisibilityTimeoutInSeconds() < 0) {
-                $this->assertTrue('Expect negative getVisibilityTimeoutInSeconds in $options to throw', false);
+                $this->assertTrue(false, 'Expect negative getVisibilityTimeoutInSeconds in $options to throw');
             }
             // Uncomment when fixed
             // https://github.com/WindowsAzure/azure-sdk-for-php/issues/101
 //            else if ($options->getTimeToLiveInSeconds() != null && $options->getTimeToLiveInSeconds() <= 0) {
             else if ($options->getTimeToLiveInSeconds() != null && $options->getTimeToLiveInSeconds() < 0) {
-                $this->assertTrue('Expect negative getVisibilityTimeoutInSeconds in $options to throw', false);
+                $this->assertTrue(false, 'Expect negative getVisibilityTimeoutInSeconds in $options to throw');
             }
             // Uncomment when fixed
             // https://github.com/WindowsAzure/azure-sdk-for-php/issues/101
@@ -841,37 +841,37 @@ class QueueServiceFunctionalTest extends FunctionalTestBase {
 //                    $options->getTimeToLiveInSeconds() != null && 
 //                    $options->getVisibilityTimeoutInSeconds() >= 0 && 
 //                    $options->getTimeToLiveInSeconds() <= $options->getVisibilityTimeoutInSeconds()) {
-//                $this->assertTrue('Expect getTimeToLiveInSeconds() <= getVisibilityTimeoutInSeconds in $options to throw', false);
+//                $this->assertTrue(false, 'Expect getTimeToLiveInSeconds() <= getVisibilityTimeoutInSeconds in $options to throw');
 //            }
             
             // Uncomment when fixed
             // https://github.com/WindowsAzure/azure-sdk-for-php/issues/59
 //            else if ($options->getTimeout() != null && $options->getTimeout() < 1) {
-//                $this->assertTrue('Expect negative timeouts in $options to throw', false);
+//                $this->assertTrue(false, 'Expect negative timeouts in $options to throw');
 //            }
 
             // Check that the message matches
             $lmr = $service->listMessages($queue);
             if ($options->getVisibilityTimeoutInSeconds() != null && $options->getVisibilityTimeoutInSeconds() > 0) {
-                $this->assertEquals('getQueueMessages() count', 0, count($lmr->getQueueMessages()));
+                $this->assertEquals(0, count($lmr->getQueueMessages()), 'getQueueMessages() count');
                 sleep(QueueServiceFunctionalTestData::INTERESTING_TTL);
                 // Try again, not that the 4 second visibility has passed
                 $lmr = $service->listMessages($queue);
                 if ($options->getVisibilityTimeoutInSeconds() > QueueServiceFunctionalTestData::INTERESTING_TTL) {
-                    $this->assertEquals('getQueueMessages() count', 0, count($lmr->getQueueMessages()));
+                    $this->assertEquals(0, count($lmr->getQueueMessages()), 'getQueueMessages() count');
                 }
                 else {
-                    $this->assertEquals('getQueueMessages() count', 1, count($lmr->getQueueMessages()));
+                    $this->assertEquals(1, count($lmr->getQueueMessages()), 'getQueueMessages() count');
                     $qm = $lmr->getQueueMessages();
                     $qm = $qm[0];
-                    $this->assertEquals('$qm->getMessageText', $messageText, $qm->getMessageText());
+                    $this->assertEquals($messageText, $qm->getMessageText(), '$qm->getMessageText');
                 }
             }
             else {
-                $this->assertEquals('getQueueMessages() count', 1, count($lmr->getQueueMessages()));
+                $this->assertEquals(1, count($lmr->getQueueMessages()), 'getQueueMessages() count');
                 $qm = $lmr->getQueueMessages();
                 $qm = $qm[0];
-                $this->assertEquals('$qm->getMessageText', $messageText, $qm->getMessageText());
+                $this->assertEquals($messageText, $qm->getMessageText(), '$qm->getMessageText');
             }
 
         }
@@ -879,22 +879,22 @@ class QueueServiceFunctionalTest extends FunctionalTestBase {
             // Uncomment when fixed
             // https://github.com/WindowsAzure/azure-sdk-for-php/issues/59
 //            if ($options->getTimeout() != null && $options->getTimeout() < 1) {
-//                $this->assertEquals('getCode', 500, $e->getCode());
+//                $this->assertEquals(500, $e->getCode(), 'getCode');
 //            }
 //            else
             if ($options->getVisibilityTimeoutInSeconds() != null && $options->getVisibilityTimeoutInSeconds() < 0) {
                 // Trying to pass bad metadata
-                $this->assertEquals('getCode', 400, $e->getCode());
+                $this->assertEquals(400, $e->getCode(), 'getCode');
                 // TODO: Can check more?
             }
             else if ($options->getTimeToLiveInSeconds() != null && $options->getTimeToLiveInSeconds() <= 0) {
-                $this->assertEquals('getCode', 400, $e->getCode());
+                $this->assertEquals(400, $e->getCode(), 'getCode');
             }
             else if ($options->getVisibilityTimeoutInSeconds() != null && $options->getTimeToLiveInSeconds() != null && $options->getVisibilityTimeoutInSeconds() > 0 && $options->getTimeToLiveInSeconds() <= $options->getVisibilityTimeoutInSeconds()) {
-                $this->assertEquals('getCode', 400, $e->getCode());
+                $this->assertEquals(400, $e->getCode(), 'getCode');
             }
             else {
-                $this->assertNull('Expect positive timeouts in $options to be fine', $e);
+                $this->assertNull($e, 'Expect positive timeouts in $options to be fine');
             }
             // TODO: More checks to not fall out the end if in error?
         }
@@ -982,37 +982,37 @@ class QueueServiceFunctionalTest extends FunctionalTestBase {
             }
 
             if ($visibilityTimeoutInSeconds < 0) {
-                $this->assertTrue('Expect negative getVisibilityTimeoutInSeconds in $options to throw', false);
+                $this->assertTrue(false, 'Expect negative getVisibilityTimeoutInSeconds in $options to throw');
             }
             
             // Uncomment when fixed
             // https://github.com/WindowsAzure/azure-sdk-for-php/issues/59
 //            else if ($options->getTimeout() != null && $options->getTimeout() < 1) {
-//                $this->assertTrue('Expect negative timeouts in $options to throw', false);
+//                $this->assertTrue(false, 'Expect negative timeouts in $options to throw');
 //            }
 
             // Check that the message matches
             $lmr = $service->listMessages($queue);
             if ($visibilityTimeoutInSeconds > 0) {
-                $this->assertEquals('getQueueMessages() count', 0, count($lmr->getQueueMessages()));
+                $this->assertEquals(0, count($lmr->getQueueMessages()), 'getQueueMessages() count');
                 sleep(QueueServiceFunctionalTestData::INTERESTING_TTL);
                 // Try again, not that the 4 second visibility has passed
                 $lmr = $service->listMessages($queue);
                 if ($visibilityTimeoutInSeconds > QueueServiceFunctionalTestData::INTERESTING_TTL) {
-                    $this->assertEquals('getQueueMessages() count', 0, count($lmr->getQueueMessages()));
+                    $this->assertEquals(0, count($lmr->getQueueMessages()), 'getQueueMessages() count');
                 }
                 else {
-                    $this->assertEquals('getQueueMessages() count', 1, count($lmr->getQueueMessages()));
+                    $this->assertEquals(1, count($lmr->getQueueMessages()), 'getQueueMessages() count');
                     $qm = $lmr->getQueueMessages();
                     $qm = $qm[0];
-                    $this->assertEquals('$qm->getMessageText', $messageText, $qm->getMessageText());
+                    $this->assertEquals($messageText, $qm->getMessageText(), '$qm->getMessageText');
                 }
             }
             else {
-                $this->assertEquals('getQueueMessages() count', 1, count($lmr->getQueueMessages()));
+                $this->assertEquals(1, count($lmr->getQueueMessages()), 'getQueueMessages() count');
                 $qm = $lmr->getQueueMessages();
                 $qm = $qm[0];
-                $this->assertEquals('$qm->getMessageText', $messageText, $qm->getMessageText());
+                $this->assertEquals($messageText, $qm->getMessageText(), '$qm->getMessageText');
             }
 
         }
@@ -1024,15 +1024,15 @@ class QueueServiceFunctionalTest extends FunctionalTestBase {
             // Uncomment when fixed
             // https://github.com/WindowsAzure/azure-sdk-for-php/issues/59
 //            if ($options->getTimeout() != null && $options->getTimeout() < 1) {
-//                $this->assertEquals('getCode', 500, $e->getCode());
+//                $this->assertEquals(500, $e->getCode(), 'getCode');
 //            }
 //            else
             if ($visibilityTimeoutInSeconds < 0) {
                 // Trying to pass bad metadata
-                $this->assertEquals('getCode', 400, $e->getCode());
+                $this->assertEquals(400, $e->getCode(), 'getCode');
             }
             else {
-                $this->assertNull('Expect positive timeouts in $options to be fine', $e);
+                $this->assertNull($e, 'Expect positive timeouts in $options to be fine');
             }
         }
         $service->clearMessages($queue);
@@ -1083,28 +1083,28 @@ class QueueServiceFunctionalTest extends FunctionalTestBase {
             // Uncomment when fixed
             // https://github.com/WindowsAzure/azure-sdk-for-php/issues/59
 //            else if ($options->getTimeout() != null && $options->getTimeout() < 1) {
-//                $this->assertTrue('Expect negative timeouts in $options to throw', false);
+//                $this->assertTrue(false, 'Expect negative timeouts in $options to throw');
 //            }
 
             // Check that the message matches
             $lmr = $service->listMessages($queue);
-            $this->assertEquals('getQueueMessages() count', 0, count($lmr->getQueueMessages()));
+            $this->assertEquals(0, count($lmr->getQueueMessages()), 'getQueueMessages() count');
 
             // Wait until the popped message should be visible again->
             sleep(QueueServiceFunctionalTestData::INTERESTING_TTL + 1);
             // Try again, to make sure the message really is gone->
             $lmr = $service->listMessages($queue);
-            $this->assertEquals('getQueueMessages() count', 0, count($lmr->getQueueMessages()));
+            $this->assertEquals(0, count($lmr->getQueueMessages()), 'getQueueMessages() count');
         }
         catch (ServiceException $e) {
             // Uncomment when fixed
             // https://github.com/WindowsAzure/azure-sdk-for-php/issues/59
 //            if ($options->getTimeout() != null && $options->getTimeout() < 1) {
-//                $this->assertEquals('getCode', 500, $e->getCode());
+//                $this->assertEquals(500, $e->getCode(), 'getCode');
 //            }
 //            else 
                {
-                $this->assertNull('Expect positive timeouts in $options to be fine', $e);
+                $this->assertNull($e, 'Expect positive timeouts in $options to be fine');
             }
         }
         $service->clearMessages($queue);
@@ -1176,22 +1176,22 @@ class QueueServiceFunctionalTest extends FunctionalTestBase {
             }
 
             if ($options->getVisibilityTimeoutInSeconds() != null && $options->getVisibilityTimeoutInSeconds() < 1) {
-                $this->assertTrue('Expect non-positive getVisibilityTimeoutInSeconds in $options to throw', false);
+                $this->assertTrue(false, 'Expect non-positive getVisibilityTimeoutInSeconds in $options to throw');
             }
             else if ($options->getNumberOfMessages() != null && ($options->getNumberOfMessages() < 1 || $options->getNumberOfMessages() > 32)) {
-                $this->assertTrue('Expect  getNumberOfMessages < 1 or 32 < numMessages in $options to throw', false);
+                $this->assertTrue(false, 'Expect  getNumberOfMessages < 1 or 32 < numMessages in $options to throw');
             }
             // Uncomment when fixed
             // https://github.com/WindowsAzure/azure-sdk-for-php/issues/59
 //            else if ($options->getTimeout() != null && $options->getTimeout() < 1) {
-//                $this->assertTrue('Expect negative timeouts in $options to throw', false);
+//                $this->assertTrue(false, 'Expect negative timeouts in $options to throw');
 //            }
 
-            $this->assertEquals('list getQueueMessages() count', $expectedNumMessagesFirst, count($res->getQueueMessages()));
+            $this->assertEquals($expectedNumMessagesFirst, count($res->getQueueMessages()), 'list getQueueMessages() count');
             $opts = new PeekMessagesOptions();
             $opts->setNumberOfMessages(32);
             $pres = $service->peekMessages($queue, $opts);
-            $this->assertEquals('peek getQueueMessages() count', 3 - $expectedNumMessagesFirst, count($pres->getQueueMessages()));
+            $this->assertEquals(3 - $expectedNumMessagesFirst, count($pres->getQueueMessages()), 'peek getQueueMessages() count');
 
             // The visibilityTimeoutInSeconds controls when the requested messages will be visible again.
             // Wait 2.5 seconds to see when the messages are visible again.
@@ -1199,11 +1199,11 @@ class QueueServiceFunctionalTest extends FunctionalTestBase {
             $opts = new ListMessagesOptions();
             $opts->setNumberOfMessages(32);
             $res2 = $service->listMessages($queue, $opts);
-            $this->assertEquals('list getQueueMessages() count', $expectedNumMessagesSecond, count($res2->getQueueMessages()));
+            $this->assertEquals($expectedNumMessagesSecond, count($res2->getQueueMessages()), 'list getQueueMessages() count');
             $opts = new PeekMessagesOptions();
             $opts->setNumberOfMessages(32);
             $pres2 = $service->peekMessages($queue, $opts);
-            $this->assertEquals('peek getQueueMessages() count', 0, count($pres2->getQueueMessages()));
+            $this->assertEquals(0, count($pres2->getQueueMessages()), 'peek getQueueMessages() count');
 
             // TODO: These might get screwy if the timing gets off. Might need to use times spaces farther apart.
         }
@@ -1215,17 +1215,17 @@ class QueueServiceFunctionalTest extends FunctionalTestBase {
             // Uncomment when fixed
             // https://github.com/WindowsAzure/azure-sdk-for-php/issues/59
 //            if ($options->getTimeout() != null && $options->getTimeout() < 1) {
-//                $this->assertEquals('getCode', 500, $e->getCode());
+//                $this->assertEquals(500, $e->getCode(), 'getCode');
 //            }
             //else 
                 if ($options->getVisibilityTimeoutInSeconds() != null && $options->getVisibilityTimeoutInSeconds() < 1) {
-                $this->assertEquals('getCode', 400, $e->getCode());
+                $this->assertEquals(400, $e->getCode(), 'getCode');
             }
             else if ($options->getNumberOfMessages() != null && ($options->getNumberOfMessages() < 1 || $options->getNumberOfMessages() > 32)) {
-                $this->assertEquals('getCode', 400, $e->getCode());
+                $this->assertEquals(400, $e->getCode(), 'getCode');
             }
             else {
-                $this->assertNull('Expect positive timeouts in $options to be fine', $e);
+                $this->assertNull($e, 'Expect positive timeouts in $options to be fine');
             }
         }
         $service->clearMessages($queue);
@@ -1283,24 +1283,24 @@ class QueueServiceFunctionalTest extends FunctionalTestBase {
             }
 
             if ($options->getNumberOfMessages() != null && ($options->getNumberOfMessages() < 1 || $options->getNumberOfMessages() > 32)) {
-                $this->assertTrue('Expect  getNumberOfMessages < 1 or 32 < numMessages in $options to throw', false);
+                $this->assertTrue(false, 'Expect  getNumberOfMessages < 1 or 32 < numMessages in $options to throw');
             }
             // Uncomment when fixed
             // https://github.com/WindowsAzure/azure-sdk-for-php/issues/59
 //            else if ($options->getTimeout() != null && $options->getTimeout() < 1) {
-//                $this->assertTrue('Expect negative timeouts in $options to throw', false);
+//                $this->assertTrue(false, 'Expect negative timeouts in $options to throw');
 //            }
 
-            $this->assertEquals('getQueueMessages() count', $expectedNumMessagesFirst, count($res->getQueueMessages()));
+            $this->assertEquals($expectedNumMessagesFirst, count($res->getQueueMessages()), 'getQueueMessages() count');
             $opts = new PeekMessagesOptions();
             $opts->setNumberOfMessages(32);
             $res2 = $service->peekMessages($queue, $opts);
-            $this->assertEquals('getQueueMessages() count', 3, count($res2->getQueueMessages()));
+            $this->assertEquals(3, count($res2->getQueueMessages()), 'getQueueMessages() count');
             $service->listMessages($queue);
             $opts = new PeekMessagesOptions();
             $opts->setNumberOfMessages(32);
             $res3 = $service->peekMessages($queue, $opts);
-            $this->assertEquals('getQueueMessages() count', 2, count($res3->getQueueMessages()));
+            $this->assertEquals(2, count($res3->getQueueMessages()), 'getQueueMessages() count');
         }
         catch (ServiceException $e) {
             if ($options == null) {
@@ -1310,14 +1310,14 @@ class QueueServiceFunctionalTest extends FunctionalTestBase {
             // Uncomment when fixed
             // https://github.com/WindowsAzure/azure-sdk-for-php/issues/59
 //            if ($options->getTimeout() != null && $options->getTimeout() < 1) {
-//                $this->assertEquals('getCode', 500, $e->getCode());
+//                $this->assertEquals(500, $e->getCode(), 'getCode');
 //            }
             //else
                 if ($options->getNumberOfMessages() != null && ($options->getNumberOfMessages() < 1 || $options->getNumberOfMessages() > 32)) {
-                $this->assertEquals('getCode', 400, $e->getCode());
+                $this->assertEquals(400, $e->getCode(), 'getCode');
             }
             else {
-                $this->assertNull('Expect positive timeouts in $options to be fine', $e);
+                $this->assertNull($e, 'Expect positive timeouts in $options to be fine');
             }
             // TODO: More checks to not fall out the end if in error?
         }
@@ -1359,7 +1359,7 @@ class QueueServiceFunctionalTest extends FunctionalTestBase {
         $opts->setVisibilityTimeoutInSeconds(1);
         $opts->setNumberOfMessages(32);
         $lmr = $service->listMessages($queue, $opts);
-        $this->assertEquals('getQueueMessages() count', 3, count($lmr->getQueueMessages()));
+        $this->assertEquals(3, count($lmr->getQueueMessages()), 'getQueueMessages() count');
         sleep(2);
         try {
             if ($options == null) {
@@ -1376,7 +1376,7 @@ class QueueServiceFunctionalTest extends FunctionalTestBase {
             // Uncomment when fixed
             // https://github.com/WindowsAzure/azure-sdk-for-php/issues/59
 //            else if ($options->getTimeout() != null && $options->getTimeout() < 1) {
-//                $this->assertTrue('Expect negative timeouts in $options to throw', false);
+//                $this->assertTrue(false, 'Expect negative timeouts in $options to throw');
 //            }
 
             // Wait 2 seconds to make sure the messages would be visible again.
@@ -1384,7 +1384,7 @@ class QueueServiceFunctionalTest extends FunctionalTestBase {
             $opts->setVisibilityTimeoutInSeconds(1);
             $opts->setNumberOfMessages(32);
             $lmr = $service->listMessages($queue, $opts);
-            $this->assertEquals('getQueueMessages() count', 0, count($lmr->getQueueMessages()));
+            $this->assertEquals(0, count($lmr->getQueueMessages()), 'getQueueMessages() count');
         }
         catch (ServiceException $e) {
             if ($options == null) {
@@ -1394,11 +1394,11 @@ class QueueServiceFunctionalTest extends FunctionalTestBase {
             // Uncomment when fixed
             // https://github.com/WindowsAzure/azure-sdk-for-php/issues/59
 //            if ($options->getTimeout() != null && $options->getTimeout() < 1) {
-//                $this->assertEquals('getCode', 500, $e->getCode());
+//                $this->assertEquals(500, $e->getCode(), 'getCode');
 //            }
 //            else {
              {
-                $this->assertNull('Expect positive timeouts in $options to be fine', $e);
+                $this->assertNull($e, 'Expect positive timeouts in $options to be fine');
             }
         }
         $service->clearMessages($queue);

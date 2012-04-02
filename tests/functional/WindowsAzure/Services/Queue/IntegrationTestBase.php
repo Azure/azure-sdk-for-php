@@ -72,21 +72,5 @@ class IntegrationTestBase extends \PHPUnit_Framework_TestCase {
 
         return $accountName == $config->getProperty(QueueSettings::ACCOUNT_NAME) && 
                $accountKey  == $config->getProperty(QueueSettings::ACCOUNT_KEY);
-    }
-
-    public static function assertNotNull($msg, $obj) {
-        parent::assertNotNull($obj, $msg);
-    }
-    public static function assertNull($msg, $obj) {
-        parent::assertNull($obj, $msg);
-    }
-    public static function assertTrue($msg, $obj) {
-        parent::assertTrue($obj, $msg);
-    }
-    public static function assertFalse($msg, $obj) {
-        parent::assertFalse($obj, $msg);
-    }
-    public static function assertEquals($msg, $obj1, $obj2) {
-        parent::assertEquals($obj1, $obj2, $msg);
-    }        
+    }       
 }

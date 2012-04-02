@@ -36,7 +36,6 @@ use PEAR2\WindowsAzure\Services\Core\Configuration;
 use PEAR2\WindowsAzure\Services\Queue\QueueService;
 use PEAR2\WindowsAzure\Services\Queue\QueueSettings;
 
-
 class FunctionalTestBase  extends \PHPUnit_Framework_TestCase {
     protected static $accountName;
 
@@ -125,28 +124,7 @@ class FunctionalTestBase  extends \PHPUnit_Framework_TestCase {
 
         return $accountName == $config->getProperty(QueueSettings::ACCOUNT_NAME) && 
                $accountKey  == $config->getProperty(QueueSettings::ACCOUNT_KEY);
-    }
-
-    public static function assertNotNull($msg, $obj) {
-        self::println('assertNotNull(\'' . $msg . '\', ' . self::tmptostring($obj));
-        parent::assertNotNull($obj, $msg);
-    }
-    public static function assertNull($msg, $obj) {
-        self::println('assertNull(\'' . $msg . '\', ' . self::tmptostring($obj));
-        parent::assertNull($obj, $msg);
-    }
-    public static function assertTrue($msg, $obj) {
-        self::println('assertTrue(\'' . $msg . '\', ' . self::tmptostring($obj));
-        parent::assertTrue($obj, $msg);
-    }
-    public static function assertFalse($msg, $obj) {
-        self::println('assertFalse(\'' . $msg . '\', ' . self::tmptostring($obj));
-        parent::assertFalse($obj, $msg);
-    }
-    public static function assertEquals($msg, $obj1, $obj2) {
-        self::println('assertEquals(\'' . $msg . '\', ' . self::tmptostring($obj1) . ', ' . self::tmptostring($obj2));
-        parent::assertEquals($obj1, $obj2, $msg);
-    }      
+    }    
     
     public static function println($msg) {
         // echo $msg . "<br/>\n";

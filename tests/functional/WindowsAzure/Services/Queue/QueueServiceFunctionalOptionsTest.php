@@ -44,21 +44,21 @@ class QueueServiceFunctionalOptionsTest extends \PHPUnit_Framework_TestCase  {
     
     public function testCheckQueueServiceOptions() {
         $options = new QueueServiceOptions();
-        $this->assertNull('Default QueueServiceOptions->getTimeout should be null', $options->getTimeout());
+        $this->assertNull($options->getTimeout(), 'Default QueueServiceOptions->getTimeout should be null');
         $options->setTimeout(self::IntegerMAX_VALUE);
-        $this->assertEquals('Set QueueServiceOptions->getTimeout', self::IntegerMAX_VALUE, $options->getTimeout());
+        $this->assertEquals(self::IntegerMAX_VALUE, $options->getTimeout(), 'Set QueueServiceOptions->getTimeout');
     }
 
     public function testCheckRetentionPolicy() {
         // Check that the default values of options are reasonable
 
         $rp = new RetentionPolicy();
-        $this->assertNull('Default RetentionPolicy->getDays should be null', $rp->getDays());
-        $this->assertNull('Default RetentionPolicy->getEnabled should be null', $rp->getEnabled());
+        $this->assertNull($rp->getDays(), 'Default RetentionPolicy->getDays should be null');
+        $this->assertNull($rp->getEnabled(), 'Default RetentionPolicy->getEnabled should be null');
         $rp->setDays(10);
         $rp->setEnabled(true);
-        $this->assertEquals('Set RetentionPolicy->getDays should be 10', 10, $rp->getDays());
-        $this->assertTrue('Sett RetentionPolicy->getEnabled should be true', $rp->getEnabled());
+        $this->assertEquals(10, $rp->getDays(), 'Set RetentionPolicy->getDays should be 10');
+        $this->assertTrue($rp->getEnabled(), 'Sett RetentionPolicy->getEnabled should be true');
     }
 
     public function testCheckLogging() {
@@ -66,22 +66,22 @@ class QueueServiceFunctionalOptionsTest extends \PHPUnit_Framework_TestCase  {
         $rp = new RetentionPolicy();
 
         $l = new Logging();
-        $this->assertNull('Default Logging->getRetentionPolicy should be null', $l->getRetentionPolicy());
-        $this->assertNull('Default Logging->getVersion should be null', $l->getVersion());
-        $this->assertNull('Default Logging->getDelete should be null', $l->getDelete());
-        $this->assertNull('Default Logging->getRead should be false', $l->getRead());
-        $this->assertNull('Default Logging->getWrite should be false', $l->getWrite());
+        $this->assertNull($l->getRetentionPolicy(), 'Default Logging->getRetentionPolicy should be null');
+        $this->assertNull($l->getVersion(), 'Default Logging->getVersion should be null');
+        $this->assertNull($l->getDelete(), 'Default Logging->getDelete should be null');
+        $this->assertNull($l->getRead(), 'Default Logging->getRead should be false');
+        $this->assertNull($l->getWrite(), 'Default Logging->getWrite should be false');
         $l->setRetentionPolicy($rp);
         $l->setVersion('2.0');
         $l->setDelete(true);
         $l->setRead(true);
         $l->setWrite(true);
         
-        $this->assertEquals('Set Logging->getRetentionPolicy', $rp, $l->getRetentionPolicy());
-        $this->assertEquals('Set Logging->getVersion', '2.0', $l->getVersion());
-        $this->assertTrue('Set Logging->getDelete should be true', $l->getDelete());
-        $this->assertTrue('Set Logging->getRead should be true', $l->getRead());
-        $this->assertTrue('Set Logging->getWrite should be true', $l->getWrite());
+        $this->assertEquals($rp, $l->getRetentionPolicy(), 'Set Logging->getRetentionPolicy');
+        $this->assertEquals('2.0', $l->getVersion(), 'Set Logging->getVersion');
+        $this->assertTrue($l->getDelete(), 'Set Logging->getDelete should be true');
+        $this->assertTrue($l->getRead(), 'Set Logging->getRead should be true');
+        $this->assertTrue($l->getWrite(), 'Set Logging->getWrite should be true');
     }
 
     public function testCheckMetrics() {
@@ -89,18 +89,18 @@ class QueueServiceFunctionalOptionsTest extends \PHPUnit_Framework_TestCase  {
         $rp = new RetentionPolicy();
 
         $m = new Metrics();
-        $this->assertNull('Default Metrics->getRetentionPolicy should be null', $m->getRetentionPolicy());
-        $this->assertNull('Default Metrics->getVersion should be null', $m->getVersion());
-        $this->assertNull('Default Metrics->getEnabled should be false', $m->getEnabled());
-        $this->assertNull('Default Metrics->getIncludeAPIs should be null', $m->getIncludeAPIs());
+        $this->assertNull($m->getRetentionPolicy(), 'Default Metrics->getRetentionPolicy should be null');
+        $this->assertNull($m->getVersion(), 'Default Metrics->getVersion should be null');
+        $this->assertNull($m->getEnabled(), 'Default Metrics->getEnabled should be false');
+        $this->assertNull($m->getIncludeAPIs(), 'Default Metrics->getIncludeAPIs should be null');
         $m->setRetentionPolicy($rp);
         $m->setVersion('2.0');
         $m->setEnabled(true);
         $m->setIncludeAPIs(true);
-        $this->assertEquals('Set Metrics->getRetentionPolicy', $rp, $m->getRetentionPolicy());
-        $this->assertEquals('Set Metrics->getVersion', '2.0', $m->getVersion());
-        $this->assertTrue('Set Metrics->getEnabled should be true', $m->getEnabled());
-        $this->assertTrue('Set Metrics->getIncludeAPIs should be true', $m->getIncludeAPIs());
+        $this->assertEquals($rp, $m->getRetentionPolicy(), 'Set Metrics->getRetentionPolicy');
+        $this->assertEquals('2.0', $m->getVersion(), 'Set Metrics->getVersion');
+        $this->assertTrue($m->getEnabled(), 'Set Metrics->getEnabled should be true');
+        $this->assertTrue($m->getIncludeAPIs(), 'Set Metrics->getIncludeAPIs should be true');
     }
 
     public function testCheckServiceProperties() {
@@ -109,22 +109,22 @@ class QueueServiceFunctionalOptionsTest extends \PHPUnit_Framework_TestCase  {
         $m = new Metrics();
 
         $sp = new ServiceProperties();
-        $this->assertNull('Default ServiceProperties->getLogging should not be null', $sp->getLogging());
-        $this->assertNull('Default ServiceProperties->getMetrics should not be null', $sp->getMetrics());
+        $this->assertNull($sp->getLogging(), 'Default ServiceProperties->getLogging should not be null');
+        $this->assertNull($sp->getMetrics(), 'Default ServiceProperties->getMetrics should not be null');
 
         $sp->setLogging($l);
         $sp->setMetrics($m);
-        $this->assertEquals('Set ServiceProperties->getLogging', $sp->getLogging(), $l);
-        $this->assertEquals('Set ServiceProperties->getMetrics', $sp->getMetrics(), $m);
+        $this->assertEquals($sp->getLogging(), $l, 'Set ServiceProperties->getLogging');
+        $this->assertEquals($sp->getMetrics(), $m, 'Set ServiceProperties->getMetrics');
     }
 
     public function testCheckListQueuesOptions() {
         $options = new ListQueuesOptions();
-        $this->assertNull('Default ListQueuesOptions->getIncludeMetadata', $options->getIncludeMetadata());
-        $this->assertNull('Default ListQueuesOptions->getMarker', $options->getMarker());
-        $this->assertEquals('Default ListQueuesOptions->getMaxResults', 0, $options->getMaxResults());
-        $this->assertNull('Default ListQueuesOptions->getPrefix', $options->getPrefix());
-        $this->assertNull('Default ListQueuesOptions->getTimeout', $options->getTimeout());        
+        $this->assertNull($options->getIncludeMetadata(), 'Default ListQueuesOptions->getIncludeMetadata');
+        $this->assertNull($options->getMarker(), 'Default ListQueuesOptions->getMarker');
+        $this->assertEquals(0, $options->getMaxResults(), 'Default ListQueuesOptions->getMaxResults');
+        $this->assertNull($options->getPrefix(), 'Default ListQueuesOptions->getPrefix');
+        $this->assertNull($options->getTimeout(), 'Default ListQueuesOptions->getTimeout');        
         $options->setIncludeMetadata(true);
         $options->setMarker('foo');
         // TODO: Revert this change when fixed
@@ -133,20 +133,20 @@ class QueueServiceFunctionalOptionsTest extends \PHPUnit_Framework_TestCase  {
         $options->setMaxResults('-10');
         $options->setPrefix('bar');
         $options->setTimeout(self::IntegerMAX_VALUE);
-        $this->assertTrue('Set ListQueuesOptions->getIncludeMetadata', $options->getIncludeMetadata());
-        $this->assertEquals('Set ListQueuesOptions->getMarker', 'foo', $options->getMarker());
-        $this->assertEquals('Set ListQueuesOptions->getMaxResults', -10, $options->getMaxResults());
-        $this->assertEquals('Set ListQueuesOptions->getPrefix', 'bar', $options->getPrefix());
-        $this->assertEquals('Set ListQueuesOptions->getTimeout', self::IntegerMAX_VALUE, $options->getTimeout());
+        $this->assertTrue($options->getIncludeMetadata(), 'Set ListQueuesOptions->getIncludeMetadata');
+        $this->assertEquals('foo', $options->getMarker(), 'Set ListQueuesOptions->getMarker');
+        $this->assertEquals(-10, $options->getMaxResults(), 'Set ListQueuesOptions->getMaxResults');
+        $this->assertEquals('bar', $options->getPrefix(), 'Set ListQueuesOptions->getPrefix');
+        $this->assertEquals(self::IntegerMAX_VALUE, $options->getTimeout(), 'Set ListQueuesOptions->getTimeout');
     }
 
     public function testCheckCreateQueueOptions() {
         $options = new CreateQueueOptions();
-        $this->assertNull('Default CreateQueueOptions->getMetadata', $options->getMetadata());
-        $this->assertEquals('Default CreateQueueOptions->getMetadata->size', 0, count($options->getMetadata()));
+        $this->assertNull($options->getMetadata(), 'Default CreateQueueOptions->getMetadata');
+        $this->assertEquals(0, count($options->getMetadata()), 'Default CreateQueueOptions->getMetadata->size');
         // TODO: Uncomment when fixed.
         // https://github.com/WindowsAzure/azure-sdk-for-php/issues/59
-        // $this->assertNull('Default CreateQueueOptions->getTimeout', $options->getTimeout());
+        // $this->assertNull($options->getTimeout(), 'Default CreateQueueOptions->getTimeout');
         $metadata = array(
             'foo' => 'bar',
             'baz' => 'bat',
@@ -155,22 +155,22 @@ class QueueServiceFunctionalOptionsTest extends \PHPUnit_Framework_TestCase  {
         // TODO: Uncomment when fixed.
         // https://github.com/WindowsAzure/azure-sdk-for-php/issues/59
         //$options->setTimeout(-10);
-        $this->assertEquals('Set CreateQueueOptions->getMetadata', $options->getMetadata(), $metadata);
-        $this->assertEquals('Set CreateQueueOptions->getMetadata->size', 2, count($options->getMetadata()));
+        $this->assertEquals($options->getMetadata(), $metadata, 'Set CreateQueueOptions->getMetadata');
+        $this->assertEquals(2, count($options->getMetadata()), 'Set CreateQueueOptions->getMetadata->size');
         // TODO: Uncomment when fixed.
         // https://github.com/WindowsAzure/azure-sdk-for-php/issues/59
-        // $this->assertEquals('Set CreateQueueOptions->getTimeout', -10, $options->getTimeout());
+        // $this->assertEquals(-10, $options->getTimeout(), 'Set CreateQueueOptions->getTimeout');
         $options->addMetadata('aaa', 'bbb');
-        $this->assertEquals('Set CreateQueueOptions->getMetadata->size', 3, count($options->getMetadata()));
+        $this->assertEquals(3, count($options->getMetadata()), 'Set CreateQueueOptions->getMetadata->size');
     }
 
     public function testCheckCreateMessageOptions() {
         $options = new CreateMessageOptions();
         // TODO: Uncomment when fixed.
         // https://github.com/WindowsAzure/azure-sdk-for-php/issues/59
-        // $this->assertNull('Default CreateMessageOptions->getTimeout', $options->getTimeout());
-        $this->assertNull('Default CreateMessageOptions->getTimeToLiveInSeconds', $options->getTimeToLiveInSeconds());
-        $this->assertNull('Default CreateMessageOptions->getVisibilityTimeoutInSeconds', $options->getVisibilityTimeoutInSeconds());
+        // $this->assertNull($options->getTimeout(), 'Default CreateMessageOptions->getTimeout');
+        $this->assertNull($options->getTimeToLiveInSeconds(), 'Default CreateMessageOptions->getTimeToLiveInSeconds');
+        $this->assertNull($options->getVisibilityTimeoutInSeconds(), 'Default CreateMessageOptions->getVisibilityTimeoutInSeconds');
         // TODO: Uncomment when fixed.
         // https://github.com/WindowsAzure/azure-sdk-for-php/issues/59
         // $options->setTimeout(self::IntegerMAX_VALUE);
@@ -178,18 +178,18 @@ class QueueServiceFunctionalOptionsTest extends \PHPUnit_Framework_TestCase  {
         $options->setVisibilityTimeoutInSeconds(self::IntegerMIN_VALUE);
         // TODO: Uncomment when fixed.
         // https://github.com/WindowsAzure/azure-sdk-for-php/issues/59
-        // $this->assertEquals('Set CreateMessageOptions->getTimeout', self::IntegerMAX_VALUE, $options->getTimeout());
-        $this->assertEquals('Set CreateMessageOptions->getTimeToLiveInSeconds', 0, $options->getTimeToLiveInSeconds());
-        $this->assertEquals('Set CreateMessageOptions->getVisibilityTimeoutInSeconds', self::IntegerMIN_VALUE, $options->getVisibilityTimeoutInSeconds());
+        // $this->assertEquals(self::IntegerMAX_VALUE, $options->getTimeout(), 'Set CreateMessageOptions->getTimeout');
+        $this->assertEquals(0, $options->getTimeToLiveInSeconds(), 'Set CreateMessageOptions->getTimeToLiveInSeconds');
+        $this->assertEquals(self::IntegerMIN_VALUE, $options->getVisibilityTimeoutInSeconds(), 'Set CreateMessageOptions->getVisibilityTimeoutInSeconds');
     }
 
     public function testCheckListMessagesOptions() {
         $options = new ListMessagesOptions();
         // TODO: Uncomment when fixed.
         // https://github.com/WindowsAzure/azure-sdk-for-php/issues/59
-        // $this->assertNull('Default ListMessagesOptions->getTimeout', $options->getTimeout());
-        $this->assertNull('Default ListMessagesOptions->getNumberOfMessages', $options->getNumberOfMessages());
-        $this->assertNull('Default ListMessagesOptions->getVisibilityTimeoutInSeconds', $options->getVisibilityTimeoutInSeconds());
+        // $this->assertNull($options->getTimeout(), 'Default ListMessagesOptions->getTimeout');
+        $this->assertNull($options->getNumberOfMessages(), 'Default ListMessagesOptions->getNumberOfMessages');
+        $this->assertNull($options->getVisibilityTimeoutInSeconds(), 'Default ListMessagesOptions->getVisibilityTimeoutInSeconds');
         // TODO: Uncomment when fixed.
         // https://github.com/WindowsAzure/azure-sdk-for-php/issues/59
         // $options->setTimeout(self::IntegerMAX_VALUE);
@@ -197,40 +197,24 @@ class QueueServiceFunctionalOptionsTest extends \PHPUnit_Framework_TestCase  {
         $options->setVisibilityTimeoutInSeconds(self::IntegerMIN_VALUE);
         // TODO: Uncomment when fixed.
         // https://github.com/WindowsAzure/azure-sdk-for-php/issues/59
-        // $this->assertEquals('Set ListMessagesOptions->getTimeout', self::IntegerMAX_VALUE, $options->getTimeout());
-        $this->assertEquals('Set ListMessagesOptions->getNumberOfMessages', 0, $options->getNumberOfMessages());
-        $this->assertEquals('Set ListMessagesOptions->getVisibilityTimeoutInSeconds', self::IntegerMIN_VALUE, $options->getVisibilityTimeoutInSeconds());
+        // $this->assertEquals(self::IntegerMAX_VALUE, $options->getTimeout(), 'Set ListMessagesOptions->getTimeout');
+        $this->assertEquals(0, $options->getNumberOfMessages(), 'Set ListMessagesOptions->getNumberOfMessages');
+        $this->assertEquals(self::IntegerMIN_VALUE, $options->getVisibilityTimeoutInSeconds(), 'Set ListMessagesOptions->getVisibilityTimeoutInSeconds');
     }
 
     public function testCheckPeekMessagesOptions() {
         $options = new PeekMessagesOptions();
         // TODO: Uncomment when fixed.
         // https://github.com/WindowsAzure/azure-sdk-for-php/issues/59
-        // $this->assertNull('Default PeekMessagesOptions->getTimeout', $options->getTimeout());
-        $this->assertNull('Default PeekMessagesOptions->getNumberOfMessages', $options->getNumberOfMessages());
+        // $this->assertNull($options->getTimeout(), 'Default PeekMessagesOptions->getTimeout');
+        $this->assertNull($options->getNumberOfMessages(), 'Default PeekMessagesOptions->getNumberOfMessages');
         // TODO: Uncomment when fixed.
         // https://github.com/WindowsAzure/azure-sdk-for-php/issues/59
         // $options->setTimeout(self::IntegerMAX_VALUE);
         $options->setNumberOfMessages(0);
         // TODO: Uncomment when fixed.
         // https://github.com/WindowsAzure/azure-sdk-for-php/issues/59
-        // $this->assertEquals('Set PeekMessagesOptions->getTimeout', self::IntegerMAX_VALUE, $options->getTimeout());
-        $this->assertEquals('Set PeekMessagesOptions->getNumberOfMessages', 0, $options->getNumberOfMessages());
+        // $this->assertEquals(self::IntegerMAX_VALUE, $options->getTimeout(), 'Set PeekMessagesOptions->getTimeout');
+        $this->assertEquals(0, $options->getNumberOfMessages(), 'Set PeekMessagesOptions->getNumberOfMessages');
     }
-
-    public static function assertNotNull($msg, $obj) {
-        parent::assertNotNull($obj, $msg);
-    }
-    public static function assertNull($msg, $obj) {
-        parent::assertNull($obj, $msg);
-    }
-    public static function assertTrue($msg, $obj) {
-        parent::assertTrue($obj, $msg);
-    }
-    public static function assertFalse($msg, $obj) {
-        parent::assertFalse($obj, $msg);
-    }
-    public static function assertEquals($msg, $obj1, $obj2) {
-        parent::assertEquals($obj1, $obj2, $msg);
-    }     
 }
