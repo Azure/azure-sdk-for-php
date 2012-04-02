@@ -39,7 +39,7 @@ use PEAR2\WindowsAzure\Utilities;
  * @version   Release: @package_version@
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
-class TableSharedKeyAuthenticationScheme extends StorageAuthenticationScheme
+class TableSharedKeyLiteAuthenticationScheme extends StorageAuthenticationScheme
 {
     protected $includedHeaders;
 
@@ -49,15 +49,13 @@ class TableSharedKeyAuthenticationScheme extends StorageAuthenticationScheme
      * @param string $accountName storage account name.
      * @param string $accountKey  storage account primary or secondary key.
      * 
-     * @return TableSharedKeyAuthenticationScheme
+     * @return TableSharedKeyLiteAuthenticationScheme
      */
     public function __construct($accountName, $accountKey)
     {
         parent::__construct($accountName, $accountKey);
 
         $this->includedHeaders   = array();
-        $this->includedHeaders[] = Resources::CONTENT_MD5;
-        $this->includedHeaders[] = Resources::CONTENT_TYPE;
         $this->includedHeaders[] = Resources::DATE;
     }
 
@@ -80,9 +78,7 @@ class TableSharedKeyAuthenticationScheme extends StorageAuthenticationScheme
             $url, $queryParams
         );
         
-
-        $stringToSign   = array();
-        $stringToSign[] = strtoupper($httpMethod);
+        $stringToSign = array();
 
         foreach ($this->includedHeaders as $header) {
             $stringToSign[] = Utilities::tryGetValue($headers, $header);
@@ -113,7 +109,7 @@ class TableSharedKeyAuthenticationScheme extends StorageAuthenticationScheme
             $headers, $url, $queryParams, $httpMethod
         );
 
-        return 'SharedKey ' . $this->accountName . ':' . base64_encode(
+        return 'SharedKeyLite ' . $this->accountName . ':' . base64_encode(
             hash_hmac('sha256', $signature, base64_decode($this->accountKey), true)
         );
     }
