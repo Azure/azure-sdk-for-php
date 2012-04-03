@@ -15,63 +15,46 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   PEAR2\WindowsAzure\Services\Table\Utilities
+ * @package   PEAR2\Tests\Unit\WindowsAzure\Services\Table\Models
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
- 
-namespace PEAR2\WindowsAzure\Services\Table\Utilities;
+namespace PEAR2\Tests\Unit\WindowsAzure\Services\Table\Models;
+use PEAR2\WindowsAzure\Services\Table\Models\InsertEntityResult;
+use PEAR2\WindowsAzure\Services\Table\Models\Entity;
 
 /**
- * Defines how to serialize and unserialize table wrapper xml
+ * Unit tests for class InsertEntityResult
  *
  * @category  Microsoft
- * @package   PEAR2\WindowsAzure\Services\Table\Utilities
+ * @package   PEAR2\Tests\Unit\WindowsAzure\Services\Table\Models
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @version   Release: @package_version@
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
-interface IAtomReaderWriter
+class InsertEntityResultTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * Constructs XML representation for table entry.
-     * 
-     * @param string $name The name of the table.
-     * 
-     * @return string
+     * @covers PEAR2\WindowsAzure\Services\Table\Models\InsertEntityResult::setEntity
+     * @covers PEAR2\WindowsAzure\Services\Table\Models\InsertEntityResult::getEntity
      */
-    public static function getTable($name);
-    
-    /**
-     * Constructs array of tables from HTTP response body.
-     * 
-     * @param string $body The HTTP response body.
-     * 
-     * @return array
-     */
-    public static function parseTableEntries($body);
-    
-    /**
-     * Constructs XML representation for entity.
-     * 
-     * @param Models\Entity $entity The entity instance.
-     * 
-     * @return string
-     */
-    public static function getEntity($entity);
-    
-    /**
-     * Constructs entity from HTTP response body.
-     * 
-     * @param string $body The HTTP response body.
-     * 
-     * @return Models\Entity
-     */
-    public static function parseEntity($body);
+    public function testSetEntity()
+    {
+        // Setup
+        $result = new InsertEntityResult();
+        $entity = new Entity();
+        
+        // Test
+        $result->setEntity($entity);
+        
+        // Assert
+        $this->assertEquals($entity, $result->getEntity());
+        
+    }
 }
 
 ?>

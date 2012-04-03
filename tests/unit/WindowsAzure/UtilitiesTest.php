@@ -256,6 +256,60 @@ class UtilitiesTest extends PHPUnit_Framework_TestCase
         // Assert
         $this->assertEquals($expected, $actual);
     }
+    
+    /**
+     * @covers PEAR2\WindowsAzure\Utilities::isoDate
+     */
+    public function testIsoDate()
+    {
+        // Test
+        $date = Utilities::isoDate();
+        
+        // Assert
+        $this->assertNotNull($date);
+    }
+    
+    /**
+     * @covers PEAR2\WindowsAzure\Utilities::convertToEdmDateTime
+     */
+    public function testConvertToEdmDateTime()
+    {
+        // Test
+        $actual = Utilities::convertToEdmDateTime(new \DateTime());
+        
+        // Assert
+        $this->assertNotNull($actual);
+    }
+    
+    /**
+     * @covers PEAR2\WindowsAzure\Utilities::convertToDateTime
+     */
+    public function testConvertToDateTime()
+    {
+        // Setup
+        $date = '2008-10-01T15:26:13Z';
+        
+        // Test
+        $actual = Utilities::convertToDateTime($date);
+        
+        // Assert
+        $this->assertInstanceOf('\DateTime', $actual);
+    }
+    
+    /**
+     * @covers PEAR2\WindowsAzure\Utilities::convertToDateTime
+     */
+    public function testConvertToDateTimeWithDate()
+    {
+        // Setup
+        $date = new \DateTime();
+        
+        // Test
+        $actual = Utilities::convertToDateTime($date);
+        
+        // Assert
+        $this->assertEquals($date, $actual);
+    }
 }
 
 ?>

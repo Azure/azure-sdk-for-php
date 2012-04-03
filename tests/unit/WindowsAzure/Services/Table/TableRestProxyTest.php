@@ -32,6 +32,8 @@ use PEAR2\WindowsAzure\Services\Core\Models\ServiceProperties;
 use PEAR2\WindowsAzure\Services\Table\Models\QueryTablesOptions;
 use PEAR2\WindowsAzure\Services\Table\Models\Query;
 use PEAR2\WindowsAzure\Services\Table\Models\Filters\Filter;
+use PEAR2\WindowsAzure\Services\Table\Models\Entity;
+use PEAR2\WindowsAzure\Services\Table\Models\EdmType;
 
 /**
  * Unit tests for class TableRestProxy
@@ -84,8 +86,8 @@ class TableRestProxyTest extends TableRestProxyTestBase
     
     /**
      * @covers PEAR2\WindowsAzure\Services\Table\TableRestProxy::createTable
-     * @covers PEAR2\WindowsAzure\Services\Table\Utilities\ManualAtomReaderWriter::_fillTemplate
-     * @covers PEAR2\WindowsAzure\Services\Table\Utilities\ManualAtomReaderWriter::getTable
+     * @covers PEAR2\WindowsAzure\Services\Table\Utilities\AtomReaderWriter::_fillTemplate
+     * @covers PEAR2\WindowsAzure\Services\Table\Utilities\AtomReaderWriter::getTable
      */
     public function testCreateTable()
     {
@@ -125,8 +127,8 @@ class TableRestProxyTest extends TableRestProxyTestBase
      * @covers PEAR2\WindowsAzure\Services\Table\TableRestProxy::_encodeODataUriValues
      * @covers PEAR2\WindowsAzure\Services\Table\TableRestProxy::_encodeODataUriValue
      * @covers PEAR2\WindowsAzure\Services\Table\Models\QueryTablesResult::create
-     * @covers PEAR2\WindowsAzure\Services\Table\Utilities\ManualAtomReaderWriter::_parseBody
-     * @covers PEAR2\WindowsAzure\Services\Table\Utilities\ManualAtomReaderWriter::parseTableEntries
+     * @covers PEAR2\WindowsAzure\Services\Table\Utilities\AtomReaderWriter::_parseBody
+     * @covers PEAR2\WindowsAzure\Services\Table\Utilities\AtomReaderWriter::parseTableEntries
      */
     public function testQueryTablesSimple()
     {
@@ -154,8 +156,55 @@ class TableRestProxyTest extends TableRestProxyTestBase
      * @covers PEAR2\WindowsAzure\Services\Table\TableRestProxy::_encodeODataUriValues
      * @covers PEAR2\WindowsAzure\Services\Table\TableRestProxy::_encodeODataUriValue
      * @covers PEAR2\WindowsAzure\Services\Table\Models\QueryTablesResult::create
-     * @covers PEAR2\WindowsAzure\Services\Table\Utilities\ManualAtomReaderWriter::_parseBody
-     * @covers PEAR2\WindowsAzure\Services\Table\Utilities\ManualAtomReaderWriter::parseTableEntries
+     * @covers PEAR2\WindowsAzure\Services\Table\Utilities\AtomReaderWriter::_parseBody
+     * @covers PEAR2\WindowsAzure\Services\Table\Utilities\AtomReaderWriter::parseTableEntries
+     */
+    public function testQueryTablesOneTable()
+    {
+        // Setup
+        $name1 = 'querytablesonetable';
+        $this->createTable($name1);
+        
+        // Test
+        $result = $this->wrapper->queryTables();
+        
+        // Assert
+        $tables = $result->getTables();
+        $this->assertCount(1, $tables);
+        $this->assertEquals($name1, $tables[0]);
+    }
+    
+    /**
+     * @covers PEAR2\WindowsAzure\Services\Table\TableRestProxy::queryTables
+     * @covers PEAR2\WindowsAzure\Services\Table\TableRestProxy::_buildFilterExpression
+     * @covers PEAR2\WindowsAzure\Services\Table\TableRestProxy::_buildFilterExpressionRec
+     * @covers PEAR2\WindowsAzure\Services\Table\TableRestProxy::_addOptionalQuery
+     * @covers PEAR2\WindowsAzure\Services\Table\TableRestProxy::_encodeODataUriValues
+     * @covers PEAR2\WindowsAzure\Services\Table\TableRestProxy::_encodeODataUriValue
+     * @covers PEAR2\WindowsAzure\Services\Table\Models\QueryTablesResult::create
+     * @covers PEAR2\WindowsAzure\Services\Table\Utilities\AtomReaderWriter::_parseBody
+     * @covers PEAR2\WindowsAzure\Services\Table\Utilities\AtomReaderWriter::parseTableEntries
+     */
+    public function testQueryTablesEmpty()
+    {
+        // Test
+        $result = $this->wrapper->queryTables();
+        
+        // Assert
+        $tables = $result->getTables();
+        $this->assertCount(0, $tables);
+    }
+    
+    /**
+     * @covers PEAR2\WindowsAzure\Services\Table\TableRestProxy::queryTables
+     * @covers PEAR2\WindowsAzure\Services\Table\TableRestProxy::_buildFilterExpression
+     * @covers PEAR2\WindowsAzure\Services\Table\TableRestProxy::_buildFilterExpressionRec
+     * @covers PEAR2\WindowsAzure\Services\Table\TableRestProxy::_addOptionalQuery
+     * @covers PEAR2\WindowsAzure\Services\Table\TableRestProxy::_encodeODataUriValues
+     * @covers PEAR2\WindowsAzure\Services\Table\TableRestProxy::_encodeODataUriValue
+     * @covers PEAR2\WindowsAzure\Services\Table\Models\QueryTablesResult::create
+     * @covers PEAR2\WindowsAzure\Services\Table\Utilities\AtomReaderWriter::_parseBody
+     * @covers PEAR2\WindowsAzure\Services\Table\Utilities\AtomReaderWriter::parseTableEntries
      */
     public function testQueryTablesWithPrefix()
     {
@@ -177,6 +226,30 @@ class TableRestProxyTest extends TableRestProxyTestBase
         $this->assertCount(2, $tables);
         $this->assertEquals($name2, $tables[0]);
         $this->assertEquals($name3, $tables[1]);
+    }
+    
+    public function testInsertEntity()
+    {
+        // Setup
+        $name = 'insertentity';
+        $this->createTable($name);
+        $entity = new Entity();
+        $entity->setPartitionKey('123');
+        $entity->setRowKey('456');
+        $entity->setTimestamp('2012-03-29T23:46:19.3857256Z');
+        $entity->newProperty('CustomerId', EdmType::INT32, '890');
+        $entity->newProperty('CustomerName', null, null);
+        $entity->newProperty('IsNew', EdmType::BOOLEAN, true);
+        $entity->newProperty('JoinDate', EdmType::DATETIME, new \DateTime());
+        
+        // Test
+        $result = $this->wrapper->insertEntity($name, $entity);
+        
+        // Assert
+        $entity = $result->getEntity();
+        $this->assertEquals($entity->getPartitionKey(), $entity->getPartitionKey());
+        $this->assertEquals($entity->getRowKey(), $entity->getRowKey());
+        $this->assertCount(count($entity->getProperties()), $entity->getProperties());
     }
 }
 

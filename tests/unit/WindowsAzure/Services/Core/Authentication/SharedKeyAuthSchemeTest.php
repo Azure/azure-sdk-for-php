@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Implementation of class TableSharedKeyLiteAuthenticationSchemeTest.
+ * Implementation of class SharedKeyAuthSchemeTest.
  *
  *
  * PHP version 5
@@ -25,12 +25,12 @@
  */
 
 namespace PEAR2\Tests\Unit\WindowsAzure\Services\Core\Authentication;
-use PEAR2\Tests\Mock\WindowsAzure\Services\Core\Authentication\TableSharedKeyLiteAuthenticationSchemeMock;
+use PEAR2\Tests\Mock\WindowsAzure\Services\Core\Authentication\SharedKeyAuthSchemeMock;
 use PEAR2\WindowsAzure\Resources;
 use PEAR2\Tests\Framework\TestResources;
 
 /**
- * Unit tests for TableSharedKeyLiteAuthenticationScheme class.
+ * Unit tests for SharedKeyAuthScheme class.
  *
  * @package    PEAR2\Tests\Unit\WindowsAzure\Services\Core\Authentication
  * @author     Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
@@ -39,23 +39,33 @@ use PEAR2\Tests\Framework\TestResources;
  * @version    Release: @package_version@
  * @link       http://pear.php.net/package/azure-sdk-for-php
  */
-class TableSharedKeyLiteAuthenticationSchemeTest extends \PHPUnit_Framework_TestCase
+class SharedKeyAuthSchemeTest extends \PHPUnit_Framework_TestCase
 {
     /**
-    * @covers PEAR2\WindowsAzure\Services\Core\Authentication\TableSharedKeyLiteAuthenticationScheme::__construct
+    * @covers PEAR2\WindowsAzure\Services\Core\Authentication\SharedKeyAuthScheme::__construct
     */
     public function test__construct()
     {
         $expected = array();
+        $expected[] = Resources::CONTENT_ENCODING;
+        $expected[] = Resources::CONTENT_LANGUAGE;
+        $expected[] = Resources::CONTENT_LENGTH;
+        $expected[] = Resources::CONTENT_MD5;
+        $expected[] = Resources::CONTENT_TYPE;
         $expected[] = Resources::DATE;
+        $expected[] = Resources::IF_MODIFIED_SINCE;
+        $expected[] = Resources::IF_MATCH;
+        $expected[] = Resources::IF_NONE_MATCH;
+        $expected[] = Resources::IF_UNMODIFIED_SINCE;
+        $expected[] = Resources::RANGE;
 
-        $mock = new TableSharedKeyLiteAuthenticationSchemeMock(TestResources::ACCOUNT_NAME, TestResources::KEY4);
+        $mock = new SharedKeyAuthSchemeMock(TestResources::ACCOUNT_NAME, TestResources::KEY4);
 
         $this->assertEquals($expected, $mock->getIncludedHeaders());
     }
 
     /**
-    * @covers PEAR2\WindowsAzure\Services\Core\Authentication\TableSharedKeyLiteAuthenticationScheme::computeSignature
+    * @covers PEAR2\WindowsAzure\Services\Core\Authentication\SharedKeyAuthScheme::computeSignature
     */
     public function testComputeSignatureSimple()
     {
@@ -66,8 +76,9 @@ class TableSharedKeyLiteAuthenticationSchemeTest extends \PHPUnit_Framework_Test
         $apiVersion = Resources::API_VERSION;
         $accountName = TestResources::ACCOUNT_NAME;
         $headers = array(Resources::X_MS_DATE => $date, Resources::X_MS_VERSION => $apiVersion);
-        $expected = "\n/$accountName" . parse_url($url, PHP_URL_PATH) . "?comp=list";
-        $mock = new TableSharedKeyLiteAuthenticationSchemeMock($accountName, TestResources::KEY4);
+        $expected = "GET\n\n\n\n\n\n\n\n\n\n\n\n" . Resources::X_MS_DATE . ":$date\n" . Resources::X_MS_VERSION . 
+                ":$apiVersion\n/$accountName" . parse_url($url, PHP_URL_PATH) . "\ncomp:list";
+        $mock = new SharedKeyAuthSchemeMock($accountName, TestResources::KEY4);
 
         $actual = $mock->computeSignatureMock($headers, $url, $queryParams, $httpMethod);
 
@@ -75,7 +86,7 @@ class TableSharedKeyLiteAuthenticationSchemeTest extends \PHPUnit_Framework_Test
     }
 
     /**
-     * @covers PEAR2\WindowsAzure\Services\Core\Authentication\TableSharedKeyLiteAuthenticationScheme::getAuthorizationHeader
+     * @covers PEAR2\WindowsAzure\Services\Core\Authentication\SharedKeyAuthScheme::getAuthorizationHeader
      */
     public function testGetAuthorizationHeaderSimple()
     {
@@ -87,9 +98,9 @@ class TableSharedKeyLiteAuthenticationSchemeTest extends \PHPUnit_Framework_Test
         $headers = array(Resources::X_MS_VERSION => $apiVersion, Resources::X_MS_DATE => $date1);
         $queryParams = array(Resources::QP_COMP => 'list');
         $httpMethod = 'GET';
-        $expected = 'SharedKeyLite ' . $accountName . ':KB+TK3FPHLADYwd0/b3PcZgK/fYXUSlwsoOIf80l2co=';
+        $expected = 'SharedKey ' . $accountName . ':tPIT33PrvWHsSXTbzvT93R4YmP13c5H6WB7lGKO3E2M=';
 
-        $mock = new TableSharedKeyLiteAuthenticationSchemeMock($accountName, $accountKey);
+        $mock = new SharedKeyAuthSchemeMock($accountName, $accountKey);
 
         $actual = $mock->getAuthorizationHeader($headers, $url, $queryParams, $httpMethod);
 

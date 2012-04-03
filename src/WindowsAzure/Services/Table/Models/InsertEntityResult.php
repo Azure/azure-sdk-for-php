@@ -15,63 +15,54 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   PEAR2\WindowsAzure\Services\Table\Utilities
+ * @package   PEAR2\WindowsAzure\Services\Table\Models
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
  
-namespace PEAR2\WindowsAzure\Services\Table\Utilities;
+namespace PEAR2\WindowsAzure\Services\Table\Models;
 
 /**
- * Defines how to serialize and unserialize table wrapper xml
+ * Holds result of calling insertEntity wrapper
  *
  * @category  Microsoft
- * @package   PEAR2\WindowsAzure\Services\Table\Utilities
+ * @package   PEAR2\WindowsAzure\Services\Table\Models
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @version   Release: @package_version@
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
-interface IAtomReaderWriter
+class InsertEntityResult
 {
     /**
-     * Constructs XML representation for table entry.
-     * 
-     * @param string $name The name of the table.
-     * 
-     * @return string
+     * @var Entity
      */
-    public static function getTable($name);
+    private $_entity;
     
     /**
-     * Constructs array of tables from HTTP response body.
+     * Gets table entity.
      * 
-     * @param string $body The HTTP response body.
-     * 
-     * @return array
+     * @return Entity
      */
-    public static function parseTableEntries($body);
+    public function getEntity()
+    {
+        return $this->_entity;
+    }
     
     /**
-     * Constructs XML representation for entity.
+     * Sets table entity.
      * 
-     * @param Models\Entity $entity The entity instance.
+     * @param Entity $entity The table entity instance.
      * 
-     * @return string
+     * @return none
      */
-    public static function getEntity($entity);
-    
-    /**
-     * Constructs entity from HTTP response body.
-     * 
-     * @param string $body The HTTP response body.
-     * 
-     * @return Models\Entity
-     */
-    public static function parseEntity($body);
+    public function setEntity($entity)
+    {
+        $this->_entity = $entity;
+    }
 }
 
 ?>
