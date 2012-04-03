@@ -42,42 +42,42 @@ class Protocol1RuntimeGoalStateClient implements IRuntimeGoalStateClient
      * @var Protocol1RuntimeCurrentStateClient
      */
     private $_currentStateClient;
-    
+
     /**
      * @var IGoalStateDeserializer
      */
     private $_goalStateDeserializer;
-    
+
     /**
      * @var IGoalStateDeserializer
      */
     private $_roleEnvironmentDeserializer;
-    
+
     /**
      * @var IInputChannel
      */
     private $_inputChannel;
-    
+
     /**
      * @var array
-     */    
+     */
     private $_listeners;
-    
+
     /**
      * @var string
      */
     private $_endpoint;
-    
+
     /**
      * @var CurrentGoalState
      */
     private $_currentGoalState;
-    
+
     /**
      * @var RoleEnvironmentData
      */
     private $_currentEnvironmentData;
-    
+
     /**
      * Constructor
      * 
@@ -92,14 +92,14 @@ class Protocol1RuntimeGoalStateClient implements IRuntimeGoalStateClient
      */
     public function __construct($currentStateClient, $goalStateDeserializer,
         $roleEnvironmentDeserializer, $inputChannel
-    ) {       
+    ) {
         $this->_currentStateClient          = $currentStateClient;
         $this->_goalStateDeserializer       = $goalStateDeserializer;
         $this->_roleEnvironmentDeserializer = $roleEnvironmentDeserializer;
         $this->_inputChannel                = $inputChannel;
-        
+
         $this->_listeners = array();
-        
+
         $this->_currentGoalState       = null;
         $this->_currentEnvironmentData = null;
     }
@@ -112,7 +112,7 @@ class Protocol1RuntimeGoalStateClient implements IRuntimeGoalStateClient
     public function getCurrentGoalState()
     {
         $this->_ensureGoalStateRetrieved();
-        
+
         return $this->_currentGoalState;
     }
     
@@ -124,24 +124,24 @@ class Protocol1RuntimeGoalStateClient implements IRuntimeGoalStateClient
     public function getRoleEnvironmentData()
     {
         $this->_ensureGoalStateRetrieved();
-        
+
         if ($this->_currentEnvironmentData == null) {
             $current = $this->_currentGoalState;
-            
+
             if ($current->getEnvironmentPath() == null) {
                 throw new \Exception(
                     'No role environment data for the current goal state'
                 );
             }
-            
+
             $environmentStream = $this->_inputChannel->getInputStream(
                 $current->getEnvironmentPath()
             );
-            
+
             $this->_currentEnvironmentData = $this->_roleEnvironmentDeserializer
                 ->deserialize($environmentStream);
         }
-        
+
         return $this->_currentEnvironmentData;
     }
     
@@ -190,18 +190,18 @@ class Protocol1RuntimeGoalStateClient implements IRuntimeGoalStateClient
     {
         $inputStream = $this->_inputChannel->getInputStream($this->_endpoint);
         $this->_goalStateDeserializer->initialize($inputStream);
-  
+
         $goalState = $this->_goalStateDeserializer->deserialize();
         if ($goalState == null) {
             return;
         }
-        
+
         $this->_currentGoalState = $goalState;
-        
+
         if ($goalState->getEnvironmentPath() == null) {
             $this->_currentEnvironmentData = null;
         }
-        
+
         $this->_currentStateClient->setEndpoint(
             $this->_currentGoalState->getCurrentStateEndpoint()
         );
