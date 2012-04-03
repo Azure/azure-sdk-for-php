@@ -29,7 +29,7 @@ use PEAR2\WindowsAzure\Resources;
  * The runtime current state client.
  *
  * @category  Microsoft
- * @package   PEAR2\WindowsAzure\ServiceRuntime\IRuntimeCurrentStateClient
+ * @package   PEAR2\WindowsAzure\ServiceRuntime
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0

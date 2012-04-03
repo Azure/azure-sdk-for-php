@@ -29,7 +29,7 @@ use PEAR2\WindowsAzure\Resources;
  * The goal state representation.
  *
  * @category  Microsoft
- * @package   PEAR2\WindowsAzure\ServiceRuntime\ChunkedGoalStateDeserializer
+ * @package   PEAR2\WindowsAzure\ServiceRuntime
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
@@ -39,15 +39,53 @@ use PEAR2\WindowsAzure\Resources;
 class ChunkedGoalStateDeserializer implements IGoalStateDeserializer
 {
     /**
-     * Deserializes a goal state document.
+     * @var XmlGoalStateDeserializer
+     */
+    private $_deserializer;
+
+    /**
+     * @var none
+     */
+    private $_inputStream;
+    
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->_deserializer = new XmlGoalStateDeserializer();
+    }
+    
+    /**
+     * Initializes the goal state deserializer with the input stream.
      * 
-     * @param string $document The document to deserialize.
+     * @param Stream $inputStream The input stream.
      * 
      * @return none
      */
-    public function deserialize($document)
+    public function initialize($inputStream)
     {
-        throw new \Exception(Resources::NOT_IMPLEMENTED_MSG);
+        $this->_inputStream = $inputStream;
+    }
+    
+    /**
+     * Deserializes a goal state document.
+     * 
+     * @return none
+     */
+    public function deserialize()
+    {
+        $lengthString = stream_get_line($this->_inputStream, 100, "\n");
+        if ($lengthString == null) {
+            return null;
+        }
+        
+        $intLengthString = hexdec(trim($lengthString));
+        
+        $chunkData = stream_get_contents($this->_inputStream, $intLengthString);
+        $goalState = $this->_deserializer->deserialize($chunkData);
+
+        return $goalState;
     }
 }
 

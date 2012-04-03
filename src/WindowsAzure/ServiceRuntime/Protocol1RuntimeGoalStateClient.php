@@ -29,7 +29,7 @@ use PEAR2\WindowsAzure\Resources;
  * An implementation for the protocol runtime goal state client.
  *
  * @category  Microsoft
- * @package   PEAR2\WindowsAzure\ServiceRuntime\Protocol1RuntimeGoalStateClient
+ * @package   PEAR2\WindowsAzure\ServiceRuntime
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
@@ -92,7 +92,7 @@ class Protocol1RuntimeGoalStateClient implements IRuntimeGoalStateClient
      */
     public function __construct($currentStateClient, $goalStateDeserializer,
         $roleEnvironmentDeserializer, $inputChannel
-    ) {
+    ) {       
         $this->_currentStateClient          = $currentStateClient;
         $this->_goalStateDeserializer       = $goalStateDeserializer;
         $this->_roleEnvironmentDeserializer = $roleEnvironmentDeserializer;
@@ -111,6 +111,8 @@ class Protocol1RuntimeGoalStateClient implements IRuntimeGoalStateClient
      */
     public function getCurrentGoalState()
     {
+        $this->_ensureGoalStateRetrieved();
+        
         return $this->_currentGoalState;
     }
     
@@ -121,14 +123,33 @@ class Protocol1RuntimeGoalStateClient implements IRuntimeGoalStateClient
      */
     public function getRoleEnvironmentData()
     {
-        throw new \Exception(Resources::NOT_IMPLEMENTED_MSG);
+        $this->_ensureGoalStateRetrieved();
+        
+        if ($this->_currentEnvironmentData == null) {
+            $current = $this->_currentGoalState;
+            
+            if ($current->getEnvironmentPath() == null) {
+                throw new \Exception(
+                    'No role environment data for the current goal state'
+                );
+            }
+            
+            $environmentStream = $this->_inputChannel->getInputStream(
+                $current->getEnvironmentPath()
+            );
+            
+            $this->_currentEnvironmentData = $this->_roleEnvironmentDeserializer
+                ->deserialize($environmentStream);
+        }
+        
+        return $this->_currentEnvironmentData;
     }
     
     /**
      * Adds a goal state changed listener.
      * 
      * @param string $listener The listener.
-	 *
+     *
      * @return none
      */
     public function addGoalStateChangedListener($listener)
@@ -140,7 +161,7 @@ class Protocol1RuntimeGoalStateClient implements IRuntimeGoalStateClient
      * Removes a goal state changed listener.
      * 
      * @param string $listener The listener.
-	 *
+     *
      * @return none
      */
     public function removeGoalStateChangedListener($listener)
@@ -167,7 +188,23 @@ class Protocol1RuntimeGoalStateClient implements IRuntimeGoalStateClient
      */
     private function _ensureGoalStateRetrieved()
     {
-        throw new \Exception(Resources::NOT_IMPLEMENTED_MSG);
+        $inputStream = $this->_inputChannel->getInputStream($this->_endpoint);
+        $this->_goalStateDeserializer->initialize($inputStream);
+  
+        $goalState = $this->_goalStateDeserializer->deserialize();
+        if ($goalState == null) {
+            return;
+        }
+        
+        $this->_currentGoalState = $goalState;
+        
+        if ($goalState->getEnvironmentPath() == null) {
+            $this->_currentEnvironmentData = null;
+        }
+        
+        $this->_currentStateClient->setEndpoint(
+            $this->_currentGoalState->getCurrentStateEndpoint()
+        );
     }
 }
 

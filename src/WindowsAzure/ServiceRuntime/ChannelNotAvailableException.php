@@ -26,7 +26,7 @@ namespace PEAR2\WindowsAzure\ServiceRuntime;
 use PEAR2\WindowsAzure\Resources;
 
 /**
- * The runtime goal state client.
+ * Custom exception when a role environment channel is not available.
  *
  * @category  Microsoft
  * @package   PEAR2\WindowsAzure\ServiceRuntime
@@ -36,39 +36,8 @@ use PEAR2\WindowsAzure\Resources;
  * @version   Release: @package_version@
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
-interface IRuntimeGoalStateClient
+class ChannelNotAvailableException extends \Exception
 {
-    /**
-     * Gets the current goal state.
-     * 
-     * @return GoalState
-     */
-    public function getCurrentGoalState();
-    
-    /**
-     * Gets the role environment data.
-     * 
-     * @return RoleEnvironmentData
-     */
-    public function getRoleEnvironmentData();
-
-    /**
-     * Adds a goal state changed listener.
-     * 
-     * @param string $listener The listener.
-     * 
-     * @return none
-     */
-    public function addGoalStateChangedListener($listener);
-
-    /**
-     * Removes a goal state changed listener.
-     * 
-     * @param string $listener The listener.
-     * 
-     * @return none
-     */
-    public function removeGoalStateChangedListener($listener);
 }
 
 ?>
