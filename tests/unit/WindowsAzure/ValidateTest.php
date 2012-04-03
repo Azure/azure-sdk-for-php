@@ -173,6 +173,12 @@ class ValidateTest extends PHPUnit_Framework_TestCase
         $this->setExpectedException(get_class(new InvalidArgumentTypeException('DateTime')));
         Validate::isDate('not date');
     }
+    
+    public function testIsValidString()
+    {
+        Validate::isValidString('ValidString');
+        $this->assertTrue(true);
+    }
 }
 
 ?>

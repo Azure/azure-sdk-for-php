@@ -37,7 +37,7 @@ use PEAR2\WindowsAzure\Services\Blob\BlobRestProxy;
 use PEAR2\WindowsAzure\Services\Blob\BlobSettings;
 use PEAR2\WindowsAzure\Services\Table\TableRestProxy;
 use PEAR2\WindowsAzure\Services\Table\TableSettings;
-use PEAR2\WindowsAzure\Services\Table\Utilities\ManualAtomReaderWriter;
+use PEAR2\WindowsAzure\Services\Table\Utilities\AtomReaderWriter;
 
 /**
  * Builds azure service objects.
@@ -177,7 +177,7 @@ class ServicesBuilder implements IServiceBuilder
     private static function _buildTable($config)
     {
         $httpClient = new HttpClient();
-        $serialize  = new ManualAtomReaderWriter();
+        $serialize  = new AtomReaderWriter();
 
         $tableWrapper = new TableRestProxy(
             $httpClient, $config->getProperty(TableSettings::URI), $serialize

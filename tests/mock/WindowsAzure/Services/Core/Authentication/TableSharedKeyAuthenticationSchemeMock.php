@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Implementation of class TableSharedKeyLiteAuthenticationSchemeMock.
+ * Implementation of class TableSharedKeyLiteAuthSchemeMock.
  *
  * PHP version 5
  *
@@ -24,10 +24,10 @@
  */
  
 namespace PEAR2\Tests\Mock\WindowsAzure\Services\Core\Authentication;
-use PEAR2\WindowsAzure\Services\Core\Authentication\TableSharedKeyLiteAuthenticationScheme;
+use PEAR2\WindowsAzure\Services\Core\Authentication\TableSharedKeyLiteAuthScheme;
 
 /**
- * Mock class to wrap SharedKeyAuthenticationScheme class.
+ * Mock class to wrap SharedKeyAuthScheme class.
  *
  * @package    WindowsAzure-sdk-for-php
  * @author     Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
@@ -36,7 +36,7 @@ use PEAR2\WindowsAzure\Services\Core\Authentication\TableSharedKeyLiteAuthentica
  * @version    Release: @package_version@
  * @link       http://pear.php.net/package/azure-sdk-for-php
  */
-class TableSharedKeyLiteAuthenticationSchemeMock extends TableSharedKeyLiteAuthenticationScheme
+class TableSharedKeyLiteAuthSchemeMock extends TableSharedKeyLiteAuthScheme
 {
   public function getIncludedHeaders()
   {

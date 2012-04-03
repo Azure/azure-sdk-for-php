@@ -151,6 +151,19 @@ class Validate
             throw new InvalidArgumentTypeException('DateTime');
         }
     }
+    
+    /**
+     * Validates if the given variable is string and not null or empty
+     * 
+     * @param mix $var The variable to check.
+     * 
+     * @return none.
+     */
+    public static function isValidString($var)
+    {
+        self::isString($var);
+        self::notNullOrEmpty($var);
+    }
 }
 
 ?>
