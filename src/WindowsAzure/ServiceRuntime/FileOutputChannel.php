@@ -47,7 +47,11 @@ class FileOutputChannel implements IOutputChannel
      */
     public function getOutputStream($name)
     {
-        throw new \Exception(Resources::NOT_IMPLEMENTED_MSG);
+        if (file_exists($name)) {
+            return fopen($name, 'w');
+        } else {
+            throw new ChannelNotAvailableException();
+        }
     }
 }
 
