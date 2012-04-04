@@ -94,8 +94,8 @@ class SignedIdentifier
     {
         $array = array();
         
-        $array['Id']           = $this->_id;
-        $array['AccessPolicy'] = $this->_accessPolicy->toXml();
+        $array['SignedIdentifier']['Id']           = $this->_id;
+        $array['SignedIdentifier']['AccessPolicy'] = $this->_accessPolicy->toXml();
         
         return $array;
     }
