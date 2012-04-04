@@ -99,7 +99,7 @@ spl_autoload_register(
             'pear2\\tests\\unit\\windowsazure\\services\\table\\models\\filters\\binaryfiltertest' => '/unit/WindowsAzure/Services/Table/Models/Filters/BinaryFilterTest.php',
             'pear2\\tests\\unit\\windowsazure\\services\\table\\models\\filters\\constantfiltertest' => '/unit/WindowsAzure/Services/Table/Models/Filters/ConstantFilterTest.php',
             'pear2\\tests\\unit\\windowsazure\\services\\table\\models\\filters\\filtertest' => '/unit/WindowsAzure/Services/Table/Models/Filters/FilterTest.php',
-            'pear2\\tests\\unit\\windowsazure\\services\\table\\models\\filters\\litteralfiltertest' => '/unit/WindowsAzure/Services/Table/Models/Filters/LitteralFilterTest.php',
+            'pear2\\tests\\unit\\windowsazure\\services\\table\\models\\filters\\literalfiltertest' => '/unit/WindowsAzure/Services/Table/Models/Filters/LitteralFilterTest.php',
             'pear2\\tests\\unit\\windowsazure\\services\\table\\models\\filters\\rawstringfiltertest' => '/unit/WindowsAzure/Services/Table/Models/Filters/RawStringFilterTest.php',
             'pear2\\tests\\unit\\windowsazure\\services\\table\\models\\filters\\unaryfiltertest' => '/unit/WindowsAzure/Services/Table/Models/Filters/UnaryFilterTest.php',
             'pear2\\tests\\unit\\windowsazure\\services\\table\\models\\insertentityresulttest' => '/unit/WindowsAzure/Services/Table/Models/InsertEntityResultTest.php',

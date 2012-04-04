@@ -85,8 +85,8 @@ class TableRestProxy extends ServiceRestProxy implements ITable
             return;
         }
         
-        if ($filter instanceof Filters\LitteralFilter) {
-            $e .= $filter->getLitteral();
+        if ($filter instanceof Filters\LiteralFilter) {
+            $e .= $filter->getLiteral();
         } else if ($filter instanceof Filters\ConstantFilter) {
             $e .= '\'' . $filter->getValue() . '\'';
         } else if ($filter instanceof Filters\UnaryFilter) {
@@ -290,11 +290,11 @@ class TableRestProxy extends ServiceRestProxy implements ITable
             // is prefix + '{'
             $prefixFilter = Filter::applyAnd(
                 Filter::applyGe(
-                    Filter::applyLitteral('TableName'),
+                    Filter::applyLiteral('TableName'),
                     Filter::applyConstant($prefix)
                 ),
                 Filter::applyLe(
-                    Filter::applyLitteral('TableName'),
+                    Filter::applyLiteral('TableName'),
                     Filter::applyConstant($prefix . '{')
                 )
             );

@@ -46,7 +46,7 @@ class Resources
     const INVALID_URL_MSG     = 'Provided URL is invalid.';
     const INVALID_HT_MSG      = 'The header type provided is invalid.';
     const INVALID_EDM_MSG     = 'The provided EDM type is invalid.';
-    const INVALID_PROP_MSG    = 'The provided properties array is invalid.';
+    const INVALID_PROP_MSG    = 'The provided propertie(s) are/is invalid.';
     const INVALID_ENTITY_MSG  = 'The provided entity object is invalid.';
 
     // HTTP Headers
