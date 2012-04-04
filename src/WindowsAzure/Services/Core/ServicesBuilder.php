@@ -180,7 +180,9 @@ class ServicesBuilder implements IServiceBuilder
         $serialize  = new AtomReaderWriter();
 
         $tableWrapper = new TableRestProxy(
-            $httpClient, $config->getProperty(TableSettings::URI), $serialize
+            $httpClient,
+            $config->getProperty(TableSettings::URI),
+            $serialize
         );
 
         // Adding headers filter

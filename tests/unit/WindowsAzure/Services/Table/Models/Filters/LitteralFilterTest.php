@@ -23,10 +23,10 @@
  */
 
 namespace PEAR2\Tests\Unit\WindowsAzure\Services\Table\Models\Filters;
-use PEAR2\WindowsAzure\Services\Table\Models\Filters\LitteralFilter;
+use PEAR2\WindowsAzure\Services\Table\Models\Filters\LiteralFilter;
 
 /**
- * Unit tests for class LitteralFilter
+ * Unit tests for class LiteralFilter
  *
  * @category  Microsoft
  * @package   PEAR2\Tests\Unit\WindowsAzure\Services\Table\Models\Filters
@@ -36,23 +36,23 @@ use PEAR2\WindowsAzure\Services\Table\Models\Filters\LitteralFilter;
  * @version   Release: @package_version@
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
-class LitteralFilterTest extends \PHPUnit_Framework_TestCase
+class LiteralFilterTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @covers PEAR2\WindowsAzure\Services\Table\Models\Filters\LitteralFilter::setLitteral
-     * @covers PEAR2\WindowsAzure\Services\Table\Models\Filters\LitteralFilter::getLitteral
+     * @covers PEAR2\WindowsAzure\Services\Table\Models\Filters\LiteralFilter::setLiteral
+     * @covers PEAR2\WindowsAzure\Services\Table\Models\Filters\LiteralFilter::getLiteral
      */
-    public function testSetLitteral()
+    public function testSetLiteral()
     {
         // Setup
-        $filter = new LitteralFilter();
+        $filter = new LiteralFilter();
         $expected = 'x';
         
         // Test
-        $filter->setLitteral($expected);
+        $filter->setLiteral($expected);
         
         // Test
-        $this->assertEquals($expected, $filter->getLitteral());
+        $this->assertEquals($expected, $filter->getLiteral());
     }
 }
 

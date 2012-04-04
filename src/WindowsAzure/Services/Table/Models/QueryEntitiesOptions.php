@@ -23,11 +23,9 @@
  */
  
 namespace PEAR2\WindowsAzure\Services\Table\Models;
-use PEAR2\WindowsAzure\Services\Table\Models\EdmType;
-use PEAR2\WindowsAzure\Validate;
 
 /**
- * Represents entity property.
+ * Holds optional parameters for queryEntities API
  *
  * @category  Microsoft
  * @package   PEAR2\WindowsAzure\Services\Table\Models
@@ -37,60 +35,87 @@ use PEAR2\WindowsAzure\Validate;
  * @version   Release: @package_version@
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
-class Property
+class QueryEntitiesOptions extends TableServiceOptions
 {
+    /**
+     * @var Query
+     */
+    private $_query;
+    
     /**
      * @var string
      */
-    private $_edmType;
+    private $_nextPartitionKey;
     
     /**
-     * @var mix
+     * @var string
      */
-    private $_value;
+    private $_nextRowKey;
     
     /**
-     * Gets the type of the property.
+     * Gets query.
      * 
-     * @return string
+     * @return Query
      */
-    public function getEdmType()
+    public function getQuery()
     {
-        return $this->_edmType;
+        return $this->_query;
     }
     
     /**
-     * Sets the value of the property.
+     * Sets query.
      * 
-     * @param string $edmType The property type.
+     * @param string $query The query instance.
      * 
      * @return none
      */
-    public function setEdmType($edmType)
+    public function setQuery($query)
     {
-        $this->_edmType = EdmType::processType($edmType);
+        $this->_query = $query;
     }
     
     /**
-     * Gets the value of the property.
-     * 
+     * Gets entity next partition key.
+     *
      * @return string
      */
-    public function getValue()
+    public function getNextPartitionKey()
     {
-        return $this->_value;
+        return $this->_nextPartitionKey;
+    }
+
+    /**
+     * Sets entity next partition key.
+     *
+     * @param string $nextPartitionKey The entity next partition key value.
+     *
+     * @return none
+     */
+    public function setNextPartitionKey($nextPartitionKey)
+    {
+        $this->_nextPartitionKey = $nextPartitionKey;
     }
     
     /**
-     * Sets the property value.
-     * 
-     * @param mix $value The value of property.
-     * 
+     * Gets entity next row key.
+     *
+     * @return string
+     */
+    public function getNextRowKey()
+    {
+        return $this->_nextRowKey;
+    }
+
+    /**
+     * Sets entity next row key.
+     *
+     * @param string $nextRowKey The entity next row key value.
+     *
      * @return none
      */
-    public function setValue($value)
+    public function setNextRowKey($nextRowKey)
     {
-        $this->_value = $value;
+        $this->_nextRowKey = $nextRowKey;
     }
 }
 
