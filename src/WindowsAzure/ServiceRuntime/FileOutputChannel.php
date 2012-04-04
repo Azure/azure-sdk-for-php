@@ -29,7 +29,7 @@ use PEAR2\WindowsAzure\Resources;
  * The file output channel.
  *
  * @category  Microsoft
- * @package   PEAR2\WindowsAzure\ServiceRuntime\FileOutputChannel
+ * @package   PEAR2\WindowsAzure\ServiceRuntime
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
@@ -47,7 +47,11 @@ class FileOutputChannel implements IOutputChannel
      */
     public function getOutputStream($name)
     {
-        throw new \Exception(Resources::NOT_IMPLEMENTED_MSG);
+        if (file_exists($name)) {
+            return fopen($name, 'w');
+        } else {
+            throw new ChannelNotAvailableException();
+        }
     }
 }
 

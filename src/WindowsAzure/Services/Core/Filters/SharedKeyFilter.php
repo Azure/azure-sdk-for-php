@@ -25,8 +25,8 @@
 namespace PEAR2\WindowsAzure\Services\Core\Filters;
 use PEAR2\WindowsAzure\Resources;
 use PEAR2\WindowsAzure\Core\IServiceFilter;
-use PEAR2\WindowsAzure\Services\Core\Authentication\SharedKeyAuthenticationScheme;
-use PEAR2\WindowsAzure\Services\Core\Authentication\TableSharedKeyAuthenticationScheme;
+use PEAR2\WindowsAzure\Services\Core\Authentication\SharedKeyAuthScheme;
+use PEAR2\WindowsAzure\Services\Core\Authentication\TableSharedKeyLiteAuthScheme;
 use PEAR2\WindowsAzure\Core\InvalidArgumentTypeException;
 
 /**
@@ -52,7 +52,7 @@ class SharedKeyFilter implements IServiceFilter
      * @param string $type        storage account type.
      * 
      * @return
-     * PEAR2\WindowsAzure\Services\Core\Authentication\StorageAuthenticationScheme
+     * PEAR2\WindowsAzure\Services\Core\Authentication\StorageAuthScheme
      *         
      */
     public function __construct($accountName, $accountKey, $type)
@@ -60,14 +60,16 @@ class SharedKeyFilter implements IServiceFilter
         switch ($type) {
         case Resources::QUEUE_TYPE_NAME:
         case Resources::BLOB_TYPE_NAME:
-            $this->_sharedKeyAuthentication = new SharedKeyAuthenticationScheme(
+            $this->_sharedKeyAuthentication = new SharedKeyAuthScheme(
                 $accountName, $accountKey
             );
             break;
         case Resources::TABLE_TYPE_NAME:
-            $this->_sharedKeyAuthentication = new TableSharedKeyAuthenticationScheme(
+            $sharedKeyLiteAuth = new TableSharedKeyLiteAuthScheme(
                 $accountName, $accountKey
             );
+            
+            $this->_sharedKeyAuthentication = $sharedKeyLiteAuth;
             break;
 
         default:

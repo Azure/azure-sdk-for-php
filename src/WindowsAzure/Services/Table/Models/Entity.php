@@ -1,0 +1,273 @@
+<?php
+
+/**
+ * LICENSE: Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ * 
+ * PHP version 5
+ *
+ * @category  Microsoft
+ * @package   PEAR2\WindowsAzure\Services\Table\Models
+ * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
+ * @copyright 2012 Microsoft Corporation
+ * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
+ * @link      http://pear.php.net/package/azure-sdk-for-php
+ */
+ 
+namespace PEAR2\WindowsAzure\Services\Table\Models;
+use PEAR2\WindowsAzure\Utilities;
+use PEAR2\WindowsAzure\Resources;
+use PEAR2\WindowsAzure\Validate;
+
+/**
+ * Represents entity object used in tables
+ *
+ * @category  Microsoft
+ * @package   PEAR2\WindowsAzure\Services\Table\Models
+ * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
+ * @copyright 2012 Microsoft Corporation
+ * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
+ * @version   Release: @package_version@
+ * @link      http://pear.php.net/package/azure-sdk-for-php
+ */
+class Entity
+{
+    /**
+     * @var string
+     */
+    private $_etag;
+    
+    /**
+     * @var array
+     */
+    private $_properties;
+    
+    /**
+     * Validates if properties is valid or not.
+     * 
+     * @param mix $properties The properties array.
+     * 
+     * @return none
+     */
+    private function _validateProperties($properties)
+    {
+        Validate::isArray($properties);
+        
+        foreach ($properties as $key => $value) {
+            Validate::isString($key);
+            Validate::isTrue(
+                $value instanceof Property, Resources::INVALID_PROP_MSG
+            );
+        }
+    }
+    
+    /**
+     * Gets property value and if the property name is not found return null.
+     * 
+     * @param string $name The property name.
+     * 
+     * @return mix
+     */
+    public function tryGetPropertyValue($name)
+    {
+        $p = $this->_properties[$name];
+        return is_null($p) ? null : $p->getValue();
+    }
+    
+    /**
+     * Gets entity etag.
+     *
+     * @return string
+     */
+    public function getEtag()
+    {
+        return $this->_etag;
+    }
+
+    /**
+     * Sets entity etag.
+     *
+     * @param string $etag The entity Etag value.
+     *
+     * @return none
+     */
+    public function setEtag($etag)
+    {
+        $this->_etag = $etag;
+    }
+    
+    /**
+     * Gets entity PartitionKey.
+     *
+     * @return string
+     */
+    public function getPartitionKey()
+    {
+        return $this->tryGetPropertyValue('PartitionKey');
+    }
+
+    /**
+     * Sets entity PartitionKey.
+     *
+     * @param string $partitionKey The entity PartitionKey value.
+     *
+     * @return none
+     */
+    public function setPartitionKey($partitionKey)
+    {
+        $this->newProperty('PartitionKey', null, $partitionKey);
+    }
+    
+    /**
+     * Gets entity RowKey.
+     *
+     * @return string
+     */
+    public function getRowKey()
+    {
+        return $this->tryGetPropertyValue('RowKey');
+    }
+
+    /**
+     * Sets entity RowKey.
+     *
+     * @param string $rowKey The entity RowKey value.
+     *
+     * @return none
+     */
+    public function setRowKey($rowKey)
+    {
+        $this->newProperty('RowKey', null, $rowKey);
+    }
+    
+    /**
+     * Gets entity Timestamp.
+     *
+     * @return string
+     */
+    public function getTimestamp()
+    {
+        return $this->tryGetPropertyValue('Timestamp');
+    }
+
+    /**
+     * Sets entity Timestamp.
+     *
+     * @param string $timestamp The entity Timestamp value.
+     *
+     * @return none
+     */
+    public function setTimestamp($timestamp)
+    {
+        $this->newProperty('Timestamp', null, $timestamp);
+    }
+    
+    /**
+     * Gets the entity properties array.
+     * 
+     * @return array
+     */
+    public function getProperties()
+    {
+        return $this->_properties;
+    }
+    
+    /**
+     * Sets the entity properties array.
+     * 
+     * @param array $properties The entity properties.
+     * 
+     * @return none
+     */
+    public function setProperties($properties)
+    {
+        $this->_validateProperties($properties);
+        $this->_properties = $properties;
+    }
+    
+    /**
+     * Gets property object from the entity properties.
+     * 
+     * @param string $name The property name.
+     * 
+     * @return Property
+     */
+    public function getProperty($name)
+    {
+        return Utilities::tryGetValue($this->_properties, $name);
+    }
+    
+    /**
+     * Sets entity property.
+     * 
+     * @param string   $name     The property name.
+     * @param Property $property The property object.
+     * 
+     * @return none
+     */
+    public function setProperty($name, $property)
+    {
+        $this->_properties[$name] = $property;
+    }
+    
+    /**
+     * Creates new entity property.
+     * 
+     * @param string $name    The property name.
+     * @param string $edmType The property edm type.
+     * @param mix    $value   The property value.
+     * 
+     * @return none
+     */
+    public function newProperty($name, $edmType, $value)
+    {
+        $edmType = EdmType::processType($edmType);
+        $value   = EdmType::processValue($edmType, $value);
+        
+        $p = new Property();
+        $p->setEdmType($edmType);
+        $p->setValue($value);
+        $this->setProperty($name, $p);
+    }
+    
+    /**
+     * Checks if the entity object is valid or not.
+     * Valid means the partition and row key exists for this entity along with the
+     * timestamp.
+     * 
+     * @return boolean 
+     */
+    public function isValid()
+    {
+        $validProperties = null;
+        try {
+            $this->_validateProperties($this->_properties);
+            $validProperties = true;
+        } catch (\Exception $exc) {
+            $validProperties = false;
+        }
+
+
+
+        if (   !$validProperties
+            || is_null($this->getTimestamp())
+            || is_null($this->getPartitionKey())
+            || is_null($this->getRowKey())
+        ) {
+            return false;
+        } else {
+            return true;
+        }
+            
+    }
+}
+
+?>

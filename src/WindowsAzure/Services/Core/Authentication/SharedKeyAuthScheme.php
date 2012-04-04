@@ -23,7 +23,7 @@
  */
  
 namespace PEAR2\WindowsAzure\Services\Core\Authentication;
-use PEAR2\WindowsAzure\Services\Core\Authentication\StorageAuthenticationScheme;
+use PEAR2\WindowsAzure\Services\Core\Authentication\StorageAuthScheme;
 use PEAR2\WindowsAzure\Resources;
 use PEAR2\WindowsAzure\Utilities;
 
@@ -39,7 +39,7 @@ use PEAR2\WindowsAzure\Utilities;
  * @version   Release: @package_version@
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
-class TableSharedKeyAuthenticationScheme extends StorageAuthenticationScheme
+class SharedKeyAuthScheme extends StorageAuthScheme
 {
     protected $includedHeaders;
 
@@ -49,16 +49,25 @@ class TableSharedKeyAuthenticationScheme extends StorageAuthenticationScheme
      * @param string $accountName storage account name.
      * @param string $accountKey  storage account primary or secondary key.
      * 
-     * @return TableSharedKeyAuthenticationScheme
+     * @return 
+     * PEAR2\WindowsAzure\Services\Core\Authentication\SharedKeyAuthScheme
      */
     public function __construct($accountName, $accountKey)
     {
         parent::__construct($accountName, $accountKey);
 
         $this->includedHeaders   = array();
+        $this->includedHeaders[] = Resources::CONTENT_ENCODING;
+        $this->includedHeaders[] = Resources::CONTENT_LANGUAGE;
+        $this->includedHeaders[] = Resources::CONTENT_LENGTH;
         $this->includedHeaders[] = Resources::CONTENT_MD5;
         $this->includedHeaders[] = Resources::CONTENT_TYPE;
         $this->includedHeaders[] = Resources::DATE;
+        $this->includedHeaders[] = Resources::IF_MODIFIED_SINCE;
+        $this->includedHeaders[] = Resources::IF_MATCH;
+        $this->includedHeaders[] = Resources::IF_NONE_MATCH;
+        $this->includedHeaders[] = Resources::IF_UNMODIFIED_SINCE;
+        $this->includedHeaders[] = Resources::RANGE;
     }
 
     /**
@@ -76,7 +85,9 @@ class TableSharedKeyAuthenticationScheme extends StorageAuthenticationScheme
      */
     protected function computeSignature($headers, $url, $queryParams, $httpMethod)
     {
-        $canonicalizedResource = parent::computeCanonicalizedResourceForTable(
+        $canonicalizedHeaders = parent::computeCanonicalizedHeaders($headers);
+        
+        $canonicalizedResource = parent::computeCanonicalizedResource(
             $url, $queryParams
         );
         
@@ -88,9 +99,13 @@ class TableSharedKeyAuthenticationScheme extends StorageAuthenticationScheme
             $stringToSign[] = Utilities::tryGetValue($headers, $header);
         }
 
+        if (count($canonicalizedHeaders) > 0) {
+            $stringToSign[] = implode("\n", $canonicalizedHeaders);
+        }
+
         $stringToSign[] = $canonicalizedResource;
         $stringToSign   = implode("\n", $stringToSign);
-        
+
         return $stringToSign;
     }
     

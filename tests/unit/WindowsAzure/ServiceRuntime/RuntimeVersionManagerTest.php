@@ -24,6 +24,8 @@
 namespace PEAR2\Tests\Unit\WindowsAzure\ServiceRuntime;
 use PEAR2\Tests\Framework\TestResources;
 use PEAR2\WindowsAzure\Core\WindowsAzureUtilities;
+use PEAR2\WindowsAzure\ServiceRuntime\FileInputChannel;
+use PEAR2\WindowsAzure\ServiceRuntime\RuntimeVersionProtocolClient;
 use PEAR2\WindowsAzure\ServiceRuntime\RuntimeVersionManager;
 use PEAR2\WindowsAzure\Resources;
 
@@ -31,7 +33,7 @@ use PEAR2\WindowsAzure\Resources;
  * Unit tests for class RuntimeVersionManager
  *
  * @category  Microsoft
- * @package   PEAR2\Tests\Unit\WindowsAzure\ServiceRuntime\RuntimeVersionManagerTest
+ * @package   PEAR2\Tests\Unit\WindowsAzure\ServiceRuntime
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
@@ -52,6 +54,48 @@ class RuntimeVersionManagerTest extends \PHPUnit_Framework_TestCase
         $this->assertInstanceOf(
             'PEAR2\\WindowsAzure\\ServiceRuntime\\RuntimeVersionManager',
             $runtimeVersionManager);
+    }
+    
+    /**
+     * @covers PEAR2\WindowsAzure\ServiceRuntime\RuntimeVersionManager::getRuntimeClient
+     */
+    public function testGetRuntimeClient()
+    {
+        // Setup
+        // Setup
+        $rootDirectory = 'root';
+
+        \vfsStreamWrapper::register(); 
+        \vfsStreamWrapper::setRoot(new \vfsStreamDirectory($rootDirectory));
+                
+        $fileName = 'versionendpoint';
+        $fileContent = '<?xml version="1.0" encoding="utf-8"?>' .
+            '<RuntimeServerDiscovery xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" ' .
+            'xmlns:xsd="http://www.w3.org/2001/XMLSchema">' .
+            '<RuntimeServerEndpoints>' .
+            '<RuntimeServerEndpoint version="2011-03-08" path="myPath1" />' .
+            '</RuntimeServerEndpoints>' .
+            '</RuntimeServerDiscovery>';
+        
+        $file = \vfsStream::newFile($fileName);
+        $file->setContent($fileContent); 
+
+        \vfsStreamWrapper::getRoot()->addChild($file);
+        
+        // Setup
+        $runtimeVersionProtocolClient =
+            new RuntimeVersionProtocolClient(new FileInputChannel());
+        
+        $runtimeVersionManager = new RuntimeVersionManager(
+            $runtimeVersionProtocolClient
+        );
+        
+        $runtimeClient = $runtimeVersionManager->getRuntimeClient(
+            \vfsStream::url($rootDirectory . '/' . $fileName)
+        );
+        
+        // Test
+        $this->assertNotEquals(null, $runtimeClient);
     }
 }
 

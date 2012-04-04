@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Implementation of class TableSharedKeyAuthenticationSchemeTest.
+ * Implementation of class TableSharedKeyLiteAuthSchemeTest.
  *
  *
  * PHP version 5
@@ -25,12 +25,12 @@
  */
 
 namespace PEAR2\Tests\Unit\WindowsAzure\Services\Core\Authentication;
-use PEAR2\Tests\Mock\WindowsAzure\Services\Core\Authentication\TableSharedKeyAuthenticationSchemeMock;
+use PEAR2\Tests\Mock\WindowsAzure\Services\Core\Authentication\TableSharedKeyLiteAuthSchemeMock;
 use PEAR2\WindowsAzure\Resources;
 use PEAR2\Tests\Framework\TestResources;
 
 /**
- * Unit tests for TableSharedKeyAuthenticationScheme class.
+ * Unit tests for TableSharedKeyLiteAuthScheme class.
  *
  * @package    PEAR2\Tests\Unit\WindowsAzure\Services\Core\Authentication
  * @author     Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
@@ -39,25 +39,23 @@ use PEAR2\Tests\Framework\TestResources;
  * @version    Release: @package_version@
  * @link       http://pear.php.net/package/azure-sdk-for-php
  */
-class TableSharedKeyAuthenticationSchemeTest extends \PHPUnit_Framework_TestCase
+class TableSharedKeyLiteAuthSchemeTest extends \PHPUnit_Framework_TestCase
 {
     /**
-    * @covers PEAR2\WindowsAzure\Services\Core\Authentication\TableSharedKeyAuthenticationScheme::__construct
+    * @covers PEAR2\WindowsAzure\Services\Core\Authentication\TableSharedKeyLiteAuthScheme::__construct
     */
     public function test__construct()
     {
         $expected = array();
-        $expected[] = Resources::CONTENT_MD5;
-        $expected[] = Resources::CONTENT_TYPE;
         $expected[] = Resources::DATE;
 
-        $mock = new TableSharedKeyAuthenticationSchemeMock(TestResources::ACCOUNT_NAME, TestResources::KEY4);
+        $mock = new TableSharedKeyLiteAuthSchemeMock(TestResources::ACCOUNT_NAME, TestResources::KEY4);
 
         $this->assertEquals($expected, $mock->getIncludedHeaders());
     }
 
     /**
-    * @covers PEAR2\WindowsAzure\Services\Core\Authentication\TableSharedKeyAuthenticationScheme::computeSignature
+    * @covers PEAR2\WindowsAzure\Services\Core\Authentication\TableSharedKeyLiteAuthScheme::computeSignature
     */
     public function testComputeSignatureSimple()
     {
@@ -68,8 +66,8 @@ class TableSharedKeyAuthenticationSchemeTest extends \PHPUnit_Framework_TestCase
         $apiVersion = Resources::API_VERSION;
         $accountName = TestResources::ACCOUNT_NAME;
         $headers = array(Resources::X_MS_DATE => $date, Resources::X_MS_VERSION => $apiVersion);
-        $expected = "GET\n\n\n\n" . "/$accountName" . parse_url($url, PHP_URL_PATH) . "?comp=list";
-        $mock = new TableSharedKeyAuthenticationSchemeMock($accountName, TestResources::KEY4);
+        $expected = "\n/$accountName" . parse_url($url, PHP_URL_PATH) . "?comp=list";
+        $mock = new TableSharedKeyLiteAuthSchemeMock($accountName, TestResources::KEY4);
 
         $actual = $mock->computeSignatureMock($headers, $url, $queryParams, $httpMethod);
 
@@ -77,7 +75,7 @@ class TableSharedKeyAuthenticationSchemeTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers PEAR2\WindowsAzure\Services\Core\Authentication\TableSharedKeyAuthenticationScheme::getAuthorizationHeader
+     * @covers PEAR2\WindowsAzure\Services\Core\Authentication\TableSharedKeyLiteAuthScheme::getAuthorizationHeader
      */
     public function testGetAuthorizationHeaderSimple()
     {
@@ -89,9 +87,9 @@ class TableSharedKeyAuthenticationSchemeTest extends \PHPUnit_Framework_TestCase
         $headers = array(Resources::X_MS_VERSION => $apiVersion, Resources::X_MS_DATE => $date1);
         $queryParams = array(Resources::QP_COMP => 'list');
         $httpMethod = 'GET';
-        $expected = 'SharedKey ' . $accountName . ':ai6WvDp9Sz5uQXvETjq49KfXedpsNkyr35hsr2xbL6Y=';
+        $expected = 'SharedKeyLite ' . $accountName . ':KB+TK3FPHLADYwd0/b3PcZgK/fYXUSlwsoOIf80l2co=';
 
-        $mock = new TableSharedKeyAuthenticationSchemeMock($accountName, $accountKey);
+        $mock = new TableSharedKeyLiteAuthSchemeMock($accountName, $accountKey);
 
         $actual = $mock->getAuthorizationHeader($headers, $url, $queryParams, $httpMethod);
 

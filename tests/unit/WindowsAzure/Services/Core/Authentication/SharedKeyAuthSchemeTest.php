@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Implementation of class SharedKeyAuthenticationSchemeTest.
+ * Implementation of class SharedKeyAuthSchemeTest.
  *
  *
  * PHP version 5
@@ -25,12 +25,12 @@
  */
 
 namespace PEAR2\Tests\Unit\WindowsAzure\Services\Core\Authentication;
-use PEAR2\Tests\Mock\WindowsAzure\Services\Core\Authentication\SharedKeyAuthenticationSchemeMock;
+use PEAR2\Tests\Mock\WindowsAzure\Services\Core\Authentication\SharedKeyAuthSchemeMock;
 use PEAR2\WindowsAzure\Resources;
 use PEAR2\Tests\Framework\TestResources;
 
 /**
- * Unit tests for SharedKeyAuthenticationScheme class.
+ * Unit tests for SharedKeyAuthScheme class.
  *
  * @package    PEAR2\Tests\Unit\WindowsAzure\Services\Core\Authentication
  * @author     Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
@@ -39,10 +39,10 @@ use PEAR2\Tests\Framework\TestResources;
  * @version    Release: @package_version@
  * @link       http://pear.php.net/package/azure-sdk-for-php
  */
-class SharedKeyAuthenticationSchemeTest extends \PHPUnit_Framework_TestCase
+class SharedKeyAuthSchemeTest extends \PHPUnit_Framework_TestCase
 {
     /**
-    * @covers PEAR2\WindowsAzure\Services\Core\Authentication\SharedKeyAuthenticationScheme::__construct
+    * @covers PEAR2\WindowsAzure\Services\Core\Authentication\SharedKeyAuthScheme::__construct
     */
     public function test__construct()
     {
@@ -59,13 +59,13 @@ class SharedKeyAuthenticationSchemeTest extends \PHPUnit_Framework_TestCase
         $expected[] = Resources::IF_UNMODIFIED_SINCE;
         $expected[] = Resources::RANGE;
 
-        $mock = new SharedKeyAuthenticationSchemeMock(TestResources::ACCOUNT_NAME, TestResources::KEY4);
+        $mock = new SharedKeyAuthSchemeMock(TestResources::ACCOUNT_NAME, TestResources::KEY4);
 
         $this->assertEquals($expected, $mock->getIncludedHeaders());
     }
 
     /**
-    * @covers PEAR2\WindowsAzure\Services\Core\Authentication\SharedKeyAuthenticationScheme::computeSignature
+    * @covers PEAR2\WindowsAzure\Services\Core\Authentication\SharedKeyAuthScheme::computeSignature
     */
     public function testComputeSignatureSimple()
     {
@@ -78,7 +78,7 @@ class SharedKeyAuthenticationSchemeTest extends \PHPUnit_Framework_TestCase
         $headers = array(Resources::X_MS_DATE => $date, Resources::X_MS_VERSION => $apiVersion);
         $expected = "GET\n\n\n\n\n\n\n\n\n\n\n\n" . Resources::X_MS_DATE . ":$date\n" . Resources::X_MS_VERSION . 
                 ":$apiVersion\n/$accountName" . parse_url($url, PHP_URL_PATH) . "\ncomp:list";
-        $mock = new SharedKeyAuthenticationSchemeMock($accountName, TestResources::KEY4);
+        $mock = new SharedKeyAuthSchemeMock($accountName, TestResources::KEY4);
 
         $actual = $mock->computeSignatureMock($headers, $url, $queryParams, $httpMethod);
 
@@ -86,7 +86,7 @@ class SharedKeyAuthenticationSchemeTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers PEAR2\WindowsAzure\Services\Core\Authentication\SharedKeyAuthenticationScheme::getAuthorizationHeader
+     * @covers PEAR2\WindowsAzure\Services\Core\Authentication\SharedKeyAuthScheme::getAuthorizationHeader
      */
     public function testGetAuthorizationHeaderSimple()
     {
@@ -100,7 +100,7 @@ class SharedKeyAuthenticationSchemeTest extends \PHPUnit_Framework_TestCase
         $httpMethod = 'GET';
         $expected = 'SharedKey ' . $accountName . ':tPIT33PrvWHsSXTbzvT93R4YmP13c5H6WB7lGKO3E2M=';
 
-        $mock = new SharedKeyAuthenticationSchemeMock($accountName, $accountKey);
+        $mock = new SharedKeyAuthSchemeMock($accountName, $accountKey);
 
         $actual = $mock->getAuthorizationHeader($headers, $url, $queryParams, $httpMethod);
 

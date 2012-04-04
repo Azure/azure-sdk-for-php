@@ -39,12 +39,16 @@ class Resources
 {
     // Messages
     const INVALID_TYPE_MSG    = 'The provided variable should be of type: ';
-    const INVALID_META_MSG    = 'Metadata cannot contain newline characters';
-    const AZURE_ERROR_MSG     = "Fail:\nCode: %s\nValue: %s\ndetails (if any): %s";
-    const NOT_IMPLEMENTED_MSG = 'This method is not implemented';
+    const INVALID_META_MSG    = 'Metadata cannot contain newline characters.';
+    const AZURE_ERROR_MSG     = "Fail:\nCode: %s\nValue: %s\ndetails (if any): %s.";
+    const NOT_IMPLEMENTED_MSG = 'This method is not implemented.';
     const NULL_ERROR_MSG      = 'Value can\'t be NULL or empty.';
-    const INVALID_URL_MSG     = 'Provided URL is invalid';
-    const INVALID_HT_MSG      = 'The header type provided is invalid';
+    const INVALID_URL_MSG     = 'Provided URL is invalid.';
+    const INVALID_HT_MSG      = 'The header type provided is invalid.';
+    const INVALID_EDM_MSG     = 'The provided EDM type is invalid.';
+    const INVALID_PROP_MSG    = 'The provided properties array is invalid.';
+    const INVALID_ENTITY_MSG  = 'The provided entity object is invalid.';
+    const INVALID_VERSION_MSG = 'Server does not support any known protocol versions.';
 
     // HTTP Headers
     const X_MS_HEADER_PREFIX               = 'x-ms-';
@@ -71,6 +75,7 @@ class Resources
     const X_MS_LEASE_ACTION                = 'x-ms-lease-action';
     const X_MS_DELETE_SNAPSHOTS            = 'x-ms-delete-snapshots';
     const X_MS_PAGE_WRITE                  = 'x-ms-page-write';
+    const X_MS_CONTINUATION_NEXTTABLENAME  = 'x-ms-continuation-nexttablename';
     const ETAG                             = 'etag';
     const LAST_MODIFIED                    = 'last-modified';
     const DATE                             = 'date';
@@ -89,6 +94,8 @@ class Resources
     const RANGE                            = 'range';
     const DATA_SERVICE_VERSION             = 'dataserviceversion';
     const MAX_DATA_SERVICE_VERSION         = 'maxdataserviceversion';
+    const ACCEPT_HEADER                    = 'accept';
+    const ACCEPT_CHARSET                   = 'accept-charset';
 
     // Type
     const QUEUE_TYPE_NAME = 'IQueue';
@@ -106,27 +113,35 @@ class Resources
     const EMULATOR_QUEUE_URI = '127.0.0.1:10001';
     const EMULATOR_TABLE_URI = '127.0.0.1:10002';
 
-    // Versioning
+    // Header values
     const API_VERSION                    = '2011-08-18';
     const DATA_SERVICE_VERSION_VALUE     = '1.0;NetFx';
     const MAX_DATA_SERVICE_VERSION_VALUE = '1.0;NetFx';
+    const ACCEPT_HEADER_VALUE            = 'application/atom+xml,application/xml';
+    const ACCEPT_CHARSET_VALUE           = 'utf-8';
 
     // Query parameter names
-    const QP_PREFIX      = 'Prefix';
-    const QP_MAX_RESULTS = 'MaxResults';
-    const QP_METADATA    = 'Metadata';
-    const QP_MARKER      = 'Marker';
-    const QP_NEXT_MARKER = 'NextMarker';
-    const QP_COMP        = 'comp';
-    const QP_INCLUDE     = 'include';
-    const QP_TIMEOUT     = 'timeout';
-    const QP_DELIMITER   = 'Delimiter';
-    const QP_REST_TYPE   = 'restype';
-    const QP_SNAPSHOT    = 'snapshot';
+    const QP_PREFIX          = 'Prefix';
+    const QP_MAX_RESULTS     = 'MaxResults';
+    const QP_METADATA        = 'Metadata';
+    const QP_MARKER          = 'Marker';
+    const QP_NEXT_MARKER     = 'NextMarker';
+    const QP_COMP            = 'comp';
+    const QP_INCLUDE         = 'include';
+    const QP_TIMEOUT         = 'timeout';
+    const QP_DELIMITER       = 'Delimiter';
+    const QP_REST_TYPE       = 'restype';
+    const QP_SNAPSHOT        = 'snapshot';
+    const QP_SELECT          = '$select';
+    const QP_TOP             = '$top';
+    const QP_FILTER          = '$filter';
+    const QP_ORDERBY         = '$orderby';
+    const QP_NEXT_TABLE_NAME = 'nexttablename';
     
     // Request body content types
-    const XML_CONTENT_TYPE = 'application/x-www-form-urlencoded';
-    const BINARY_FILE_TYPE = 'application/octet-stream';
+    const XML_CONTENT_TYPE      = 'application/x-www-form-urlencoded';
+    const BINARY_FILE_TYPE      = 'application/octet-stream';
+    const XML_ATOM_CONTENT_TYPE = 'application/atom+xml';
     
     // Status Codes
     const STATUS_OK         = 200;
