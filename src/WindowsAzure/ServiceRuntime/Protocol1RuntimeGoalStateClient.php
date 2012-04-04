@@ -125,10 +125,10 @@ class Protocol1RuntimeGoalStateClient implements IRuntimeGoalStateClient
     {
         $this->_ensureGoalStateRetrieved();
 
-        if ($this->_currentEnvironmentData == null) {
+        if (is_null($this->_currentEnvironmentData)) {
             $current = $this->_currentGoalState;
 
-            if ($current->getEnvironmentPath() == null) {
+            if (is_null($current->getEnvironmentPath())) {
                 throw new \Exception(
                     'No role environment data for the current goal state'
                 );
@@ -192,13 +192,13 @@ class Protocol1RuntimeGoalStateClient implements IRuntimeGoalStateClient
         $this->_goalStateDeserializer->initialize($inputStream);
 
         $goalState = $this->_goalStateDeserializer->deserialize();
-        if ($goalState == null) {
+        if (is_null($goalState)) {
             return;
         }
 
         $this->_currentGoalState = $goalState;
 
-        if ($goalState->getEnvironmentPath() == null) {
+        if (is_null($goalState->getEnvironmentPath())) {
             $this->_currentEnvironmentData = null;
         }
 

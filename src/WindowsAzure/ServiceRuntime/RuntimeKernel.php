@@ -154,7 +154,7 @@ class RuntimeKernel
      */
     public static function getKernel($forceNewInstance = false)
     {
-        if (self::$_theKernel == null || $forceNewInstance) {
+        if (is_null(self::$_theKernel) || $forceNewInstance) {
             self::$_theKernel = new RuntimeKernel();
         }
         

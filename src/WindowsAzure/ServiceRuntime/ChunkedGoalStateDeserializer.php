@@ -44,7 +44,7 @@ class ChunkedGoalStateDeserializer implements IGoalStateDeserializer
     private $_deserializer;
 
     /**
-     * @var none
+     * @var resource
      */
     private $_inputStream;
     

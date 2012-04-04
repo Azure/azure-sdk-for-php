@@ -89,7 +89,7 @@ class RuntimeVersionManager
         }
         
         // TODO: replace by non generic exception type
-        throw new \Exception('Server does not support any known protocol versions.');
+        throw new \Exception(Resources::INVALID_VERSION_MSG);
     }
 }
 

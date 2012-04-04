@@ -111,7 +111,7 @@ class RuntimeVersionProtocolClientTest extends \PHPUnit_Framework_TestCase
         );
         
         $this->assertEquals('myPath1', $versions['2011-03-08']);
-        $this->assertEquals(false, array_key_exists('2012-03-08', $versions));
+        $this->assertArrayNotHasKey('2012-03-08', $versions);
     }
 }
 
