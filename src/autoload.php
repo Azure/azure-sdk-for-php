@@ -111,6 +111,8 @@ spl_autoload_register(
             'pear2\\windowsazure\\services\\table\\models\\insertentityresult' => '/WindowsAzure/Services/Table/Models/InsertEntityResult.php',
             'pear2\\windowsazure\\services\\table\\models\\property' => '/WindowsAzure/Services/Table/Models/Property.php',
             'pear2\\windowsazure\\services\\table\\models\\query' => '/WindowsAzure/Services/Table/Models/Query.php',
+            'pear2\\windowsazure\\services\\table\\models\\queryentitiesoptions' => '/WindowsAzure/Services/Table/Models/QueryEntitiesOptions.php',
+            'pear2\\windowsazure\\services\\table\\models\\queryentitiesresult' => '/WindowsAzure/Services/Table/Models/QueryEntitiesResult.php',
             'pear2\\windowsazure\\services\\table\\models\\querytablesoptions' => '/WindowsAzure/Services/Table/Models/QueryTablesOptions.php',
             'pear2\\windowsazure\\services\\table\\models\\querytablesresult' => '/WindowsAzure/Services/Table/Models/QueryTablesResult.php',
             'pear2\\windowsazure\\services\\table\\models\\tableserviceoptions' => '/WindowsAzure/Services/Table/Models/TableServiceOptions.php',

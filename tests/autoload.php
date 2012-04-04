@@ -104,6 +104,8 @@ spl_autoload_register(
             'pear2\\tests\\unit\\windowsazure\\services\\table\\models\\filters\\unaryfiltertest' => '/unit/WindowsAzure/Services/Table/Models/Filters/UnaryFilterTest.php',
             'pear2\\tests\\unit\\windowsazure\\services\\table\\models\\insertentityresulttest' => '/unit/WindowsAzure/Services/Table/Models/InsertEntityResultTest.php',
             'pear2\\tests\\unit\\windowsazure\\services\\table\\models\\propertytest' => '/unit/WindowsAzure/Services/Table/Models/PropertyTest.php',
+            'pear2\\tests\\unit\\windowsazure\\services\\table\\models\\queryentitiesoptionstest' => '/unit/WindowsAzure/Services/Table/Models/QueryEntitiesOptionsTest.php',
+            'pear2\\tests\\unit\\windowsazure\\services\\table\\models\\queryentitiesresulttest' => '/unit/WindowsAzure/Services/Table/Models/QueryEntitiesResultTest.php',
             'pear2\\tests\\unit\\windowsazure\\services\\table\\models\\querytablesoptionstest' => '/unit/WindowsAzure/Services/Table/Models/QueryTablesOptionsTest.php',
             'pear2\\tests\\unit\\windowsazure\\services\\table\\models\\querytablesresulttest' => '/unit/WindowsAzure/Services/Table/Models/QueryTablesResultTest.php',
             'pear2\\tests\\unit\\windowsazure\\services\\table\\models\\querytest' => '/unit/WindowsAzure/Services/Table/Models/QueryTest.php',
