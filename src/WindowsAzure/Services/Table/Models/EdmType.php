@@ -118,7 +118,7 @@ class EdmType
         case $type == self::STRING:
             return true;
         
-            default:
+        default:
             return false;
                 
         }
