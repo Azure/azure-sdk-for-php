@@ -15,63 +15,84 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   PEAR2\WindowsAzure\Services\Table\Utilities
+ * @package   PEAR2\WindowsAzure\Services\Table\Models
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
  
-namespace PEAR2\WindowsAzure\Services\Table\Utilities;
+namespace PEAR2\WindowsAzure\Services\Table\Models;
+use PEAR2\WindowsAzure\Services\Table\Models\EdmType;
+use PEAR2\WindowsAzure\Validate;
 
 /**
- * Defines how to serialize and unserialize table wrapper xml
+ * Represents entity property.
  *
  * @category  Microsoft
- * @package   PEAR2\WindowsAzure\Services\Table\Utilities
+ * @package   PEAR2\WindowsAzure\Services\Table\Models
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @version   Release: @package_version@
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
-interface IAtomReaderWriter
+class Property
 {
     /**
-     * Constructs XML representation for table entry.
-     * 
-     * @param string $name The name of the table.
+     * @var string
+     */
+    private $_edmType;
+    
+    /**
+     * @var mix
+     */
+    private $_value;
+    
+    /**
+     * Gets the type of the property.
      * 
      * @return string
      */
-    public static function getTable($name);
+    public function getEdmType()
+    {
+        return $this->_edmType;
+    }
     
     /**
-     * Constructs array of tables from HTTP response body.
+     * Sets the value of the property.
      * 
-     * @param string $body The HTTP response body.
+     * @param string $edmType The property type.
      * 
-     * @return array
+     * @return none
      */
-    public static function parseTableEntries($body);
+    public function setEdmType($edmType)
+    {
+        EdmType::processType($edmType);
+        $this->_edmType = $edmType;
+    }
     
     /**
-     * Constructs XML representation for entity.
-     * 
-     * @param Models\Entity $entity The entity instance.
+     * Gets the value of the property.
      * 
      * @return string
      */
-    public static function getEntity($entity);
+    public function getValue()
+    {
+        return $this->_value;
+    }
     
     /**
-     * Constructs entity from HTTP response body.
+     * Sets the property value.
      * 
-     * @param string $body The HTTP response body.
+     * @param mix $value The value of property.
      * 
-     * @return Models\Entity
+     * @return none
      */
-    public static function parseEntity($body);
+    public function setValue($value)
+    {
+        $this->_value = $value;
+    }
 }
 
 ?>

@@ -33,6 +33,7 @@ use PEAR2\WindowsAzure\Services\Table\Models\Filters;
 use PEAR2\WindowsAzure\Services\Table\Models\Filters\Filter;
 use PEAR2\WindowsAzure\Services\Table\Models\QueryTablesOptions;
 use PEAR2\WindowsAzure\Services\Table\Models\QueryTablesResult;
+use PEAR2\WindowsAzure\Services\Table\Models\InsertEntityResult;
 
 /**
  * This class constructs HTTP requests and receive HTTP responses for table
@@ -335,8 +336,7 @@ class TableRestProxy extends ServiceRestProxy implements ITable
      */
     public function createTable($table, $options = null)
     {
-        Validate::isString($table);
-        Validate::notNullOrEmpty($table);
+        Validate::isValidString($table);
         
         $method      = \HTTP_Request2::METHOD_POST;
         $headers     = array();
@@ -367,8 +367,7 @@ class TableRestProxy extends ServiceRestProxy implements ITable
      */
     public function deleteTable($table, $options = null)
     {
-        Validate::isString($table);
-        Validate::notNullOrEmpty($table);
+        Validate::isValidString($table);
         
         $method      = \HTTP_Request2::METHOD_DELETE;
         $headers     = array();
@@ -402,11 +401,11 @@ class TableRestProxy extends ServiceRestProxy implements ITable
     }
     
     /**
-     * Inserts new entity to the table
+     * Inserts new entity to the table.
      * 
-     * @param string                     $table   name of the table
-     * @param Models\Entity              $entity  table entity
-     * @param Models\TableServiceOptions $options optional parameters
+     * @param string                     $table   name of the table.
+     * @param Models\Entity              $entity  table entity.
+     * @param Models\TableServiceOptions $options optional parameters.
      * 
      * @return Models\InsertEntityResult
      * 
@@ -414,7 +413,33 @@ class TableRestProxy extends ServiceRestProxy implements ITable
      */
     public function insertEntity($table, $entity, $options = null)
     {
-        throw new \Exception(Resources::NOT_IMPLEMENTED_MSG);
+        Validate::isValidString($table);
+        Validate::notNullOrEmpty($entity);
+        Validate::isTrue($entity->isValid(), Resources::INVALID_ENTITY_MSG);
+        
+        $method      = \HTTP_Request2::METHOD_POST;
+        $headers     = array();
+        $queryParams = array();
+        $statusCode  = Resources::STATUS_CREATED;
+        $path        = $table;
+        $body        = $this->_atomSerializer->getEntity($entity);
+        
+        if (is_null($options)) {
+            $options = new TableServiceOptions();
+        }
+        
+        $queryParams[Resources::QP_TIMEOUT] = strval($options->getTimeout());
+        $headers[Resources::CONTENT_TYPE]   = Resources::XML_ATOM_CONTENT_TYPE;
+        
+        $response = $this->send(
+            $method, $headers, $queryParams, $path, $statusCode, $body
+        );
+        
+        $entity = $this->_atomSerializer->parseEntity($response->getBody());
+        $result = new InsertEntityResult();
+        $result->setEntity($entity);
+        
+        return $result;
     }
     
     /**

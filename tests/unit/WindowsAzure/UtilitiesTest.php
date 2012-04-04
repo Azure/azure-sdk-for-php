@@ -176,6 +176,7 @@ class UtilitiesTest extends PHPUnit_Framework_TestCase
     
     /**
      * @covers PEAR2\WindowsAzure\Utilities::unserialize
+     * @covers PEAR2\WindowsAzure\Utilities::_sxml2arr
      */
     public function testUnserialize()
     {
@@ -193,6 +194,7 @@ class UtilitiesTest extends PHPUnit_Framework_TestCase
     
     /**
      * @covers PEAR2\WindowsAzure\Utilities::serialize
+     * @covers PEAR2\WindowsAzure\Utilities::_arr2xml
      */
     public function testSerialize()
     {
@@ -201,6 +203,22 @@ class UtilitiesTest extends PHPUnit_Framework_TestCase
         $properties = \PEAR2\WindowsAzure\Services\Core\Models\ServiceProperties::create($propertiesSample);
         $expected = $properties->toXml();
         $array = $properties->toArray();
+        
+        // Test
+        $actual = Utilities::serialize($array, \PEAR2\WindowsAzure\Services\Core\Models\ServiceProperties::$xmlRootName);
+        
+        $this->assertEquals($expected, $actual);
+    }
+
+    /**
+     * @covers PEAR2\WindowsAzure\Utilities::serialize
+     * @covers PEAR2\WindowsAzure\Utilities::_arr2xml
+     */
+    public function testSerializeNoArray()
+    {
+        // Setup
+        $expected = false;
+        $array = 'not an array';
         
         // Test
         $actual = Utilities::serialize($array, \PEAR2\WindowsAzure\Services\Core\Models\ServiceProperties::$xmlRootName);
@@ -255,6 +273,60 @@ class UtilitiesTest extends PHPUnit_Framework_TestCase
         
         // Assert
         $this->assertEquals($expected, $actual);
+    }
+    
+    /**
+     * @covers PEAR2\WindowsAzure\Utilities::isoDate
+     */
+    public function testIsoDate()
+    {
+        // Test
+        $date = Utilities::isoDate();
+        
+        // Assert
+        $this->assertNotNull($date);
+    }
+    
+    /**
+     * @covers PEAR2\WindowsAzure\Utilities::convertToEdmDateTime
+     */
+    public function testConvertToEdmDateTime()
+    {
+        // Test
+        $actual = Utilities::convertToEdmDateTime(new \DateTime());
+        
+        // Assert
+        $this->assertNotNull($actual);
+    }
+    
+    /**
+     * @covers PEAR2\WindowsAzure\Utilities::convertToDateTime
+     */
+    public function testConvertToDateTime()
+    {
+        // Setup
+        $date = '2008-10-01T15:26:13Z';
+        
+        // Test
+        $actual = Utilities::convertToDateTime($date);
+        
+        // Assert
+        $this->assertInstanceOf('\DateTime', $actual);
+    }
+    
+    /**
+     * @covers PEAR2\WindowsAzure\Utilities::convertToDateTime
+     */
+    public function testConvertToDateTimeWithDate()
+    {
+        // Setup
+        $date = new \DateTime();
+        
+        // Test
+        $actual = Utilities::convertToDateTime($date);
+        
+        // Assert
+        $this->assertEquals($date, $actual);
     }
 }
 

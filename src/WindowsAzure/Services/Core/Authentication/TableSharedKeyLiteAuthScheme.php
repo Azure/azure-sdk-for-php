@@ -23,7 +23,7 @@
  */
  
 namespace PEAR2\WindowsAzure\Services\Core\Authentication;
-use PEAR2\WindowsAzure\Services\Core\Authentication\StorageAuthenticationScheme;
+use PEAR2\WindowsAzure\Services\Core\Authentication\StorageAuthScheme;
 use PEAR2\WindowsAzure\Resources;
 use PEAR2\WindowsAzure\Utilities;
 
@@ -39,7 +39,7 @@ use PEAR2\WindowsAzure\Utilities;
  * @version   Release: @package_version@
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
-class SharedKeyAuthenticationScheme extends StorageAuthenticationScheme
+class TableSharedKeyLiteAuthScheme extends StorageAuthScheme
 {
     protected $includedHeaders;
 
@@ -49,25 +49,14 @@ class SharedKeyAuthenticationScheme extends StorageAuthenticationScheme
      * @param string $accountName storage account name.
      * @param string $accountKey  storage account primary or secondary key.
      * 
-     * @return 
-     * PEAR2\WindowsAzure\Services\Core\Authentication\SharedKeyAuthenticationScheme
+     * @return TableSharedKeyLiteAuthScheme
      */
     public function __construct($accountName, $accountKey)
     {
         parent::__construct($accountName, $accountKey);
 
         $this->includedHeaders   = array();
-        $this->includedHeaders[] = Resources::CONTENT_ENCODING;
-        $this->includedHeaders[] = Resources::CONTENT_LANGUAGE;
-        $this->includedHeaders[] = Resources::CONTENT_LENGTH;
-        $this->includedHeaders[] = Resources::CONTENT_MD5;
-        $this->includedHeaders[] = Resources::CONTENT_TYPE;
         $this->includedHeaders[] = Resources::DATE;
-        $this->includedHeaders[] = Resources::IF_MODIFIED_SINCE;
-        $this->includedHeaders[] = Resources::IF_MATCH;
-        $this->includedHeaders[] = Resources::IF_NONE_MATCH;
-        $this->includedHeaders[] = Resources::IF_UNMODIFIED_SINCE;
-        $this->includedHeaders[] = Resources::RANGE;
     }
 
     /**
@@ -85,27 +74,19 @@ class SharedKeyAuthenticationScheme extends StorageAuthenticationScheme
      */
     protected function computeSignature($headers, $url, $queryParams, $httpMethod)
     {
-        $canonicalizedHeaders = parent::computeCanonicalizedHeaders($headers);
-        
-        $canonicalizedResource = parent::computeCanonicalizedResource(
+        $canonicalizedResource = parent::computeCanonicalizedResourceForTable(
             $url, $queryParams
         );
         
-
-        $stringToSign   = array();
-        $stringToSign[] = strtoupper($httpMethod);
+        $stringToSign = array();
 
         foreach ($this->includedHeaders as $header) {
             $stringToSign[] = Utilities::tryGetValue($headers, $header);
         }
 
-        if (count($canonicalizedHeaders) > 0) {
-            $stringToSign[] = implode("\n", $canonicalizedHeaders);
-        }
-
         $stringToSign[] = $canonicalizedResource;
         $stringToSign   = implode("\n", $stringToSign);
-
+        
         return $stringToSign;
     }
     
@@ -128,7 +109,7 @@ class SharedKeyAuthenticationScheme extends StorageAuthenticationScheme
             $headers, $url, $queryParams, $httpMethod
         );
 
-        return 'SharedKey ' . $this->accountName . ':' . base64_encode(
+        return 'SharedKeyLite ' . $this->accountName . ':' . base64_encode(
             hash_hmac('sha256', $signature, base64_decode($this->accountKey), true)
         );
     }
