@@ -176,6 +176,7 @@ class UtilitiesTest extends PHPUnit_Framework_TestCase
     
     /**
      * @covers PEAR2\WindowsAzure\Utilities::unserialize
+     * @covers PEAR2\WindowsAzure\Utilities::_sxml2arr
      */
     public function testUnserialize()
     {
@@ -193,6 +194,7 @@ class UtilitiesTest extends PHPUnit_Framework_TestCase
     
     /**
      * @covers PEAR2\WindowsAzure\Utilities::serialize
+     * @covers PEAR2\WindowsAzure\Utilities::_arr2xml
      */
     public function testSerialize()
     {
@@ -201,6 +203,22 @@ class UtilitiesTest extends PHPUnit_Framework_TestCase
         $properties = \PEAR2\WindowsAzure\Services\Core\Models\ServiceProperties::create($propertiesSample);
         $expected = $properties->toXml();
         $array = $properties->toArray();
+        
+        // Test
+        $actual = Utilities::serialize($array, \PEAR2\WindowsAzure\Services\Core\Models\ServiceProperties::$xmlRootName);
+        
+        $this->assertEquals($expected, $actual);
+    }
+
+    /**
+     * @covers PEAR2\WindowsAzure\Utilities::serialize
+     * @covers PEAR2\WindowsAzure\Utilities::_arr2xml
+     */
+    public function testSerializeNoArray()
+    {
+        // Setup
+        $expected = false;
+        $array = 'not an array';
         
         // Test
         $actual = Utilities::serialize($array, \PEAR2\WindowsAzure\Services\Core\Models\ServiceProperties::$xmlRootName);

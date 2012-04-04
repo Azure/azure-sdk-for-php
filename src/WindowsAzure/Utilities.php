@@ -191,7 +191,7 @@ class Utilities
         foreach ($data as $key => $value) {
             if (is_array($value)) {
                 if (!is_int($key)) {
-                    if ($key != '') {
+                    if ($key != Resources::EMPTY_STRING) {
                         $xmlw->startElement($key);
                     } else {
                         $xmlw->startElement($defaultTag);

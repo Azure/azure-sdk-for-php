@@ -72,9 +72,7 @@ class ListContainersResult
         $result->_containers = array();
         $rawContainer        = array();
         
-        if ( is_array($parsedResponse['Containers']) 
-            && !empty($parsedResponse['Containers'])
-        ) {
+        if ( !empty($parsedResponse['Containers']) ) {
             $containersArray = $parsedResponse['Containers']['Container'];
             $rawContainer    = Utilities::getArray($containersArray);
         }
