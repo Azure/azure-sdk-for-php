@@ -202,6 +202,41 @@ class Utilities
         date_default_timezone_set($tz);
         return $returnValue;
     }
+    
+    /**
+        * Converts a DateTime object into an Edm.DaeTime value in UTC timezone,
+        * represented as a string.
+        * 
+        * @param \DateTime $value The datetime value.
+        * 
+        * @return string
+        */
+    public static function convertToEdmDateTime($value) 
+    {
+        $cloned = clone $value;
+        $cloned->setTimezone(new \DateTimeZone('UTC'));
+        return str_replace('+0000', 'Z', $cloned->format(\DateTime::ISO8601));
+    }
+    
+    /**
+        * Converts a string to a \DateTime object. Returns false on failure.
+        * 
+        * @param string $value The string value to parse.
+        * 
+        * @return DateTime
+        */
+    public function convertToDateTime($value)
+    {
+        if ($value instanceof \DateTime) {
+            return $value;
+        }
+        
+        if (substr($value, -1) == 'Z') {
+            $value = substr($value, 0, strlen($value) - 1);
+        }
+            
+        return new \DateTime($value, new \DateTimeZone('UTC'));
+    }
 }
 
 ?>
