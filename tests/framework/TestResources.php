@@ -26,6 +26,7 @@
 namespace PEAR2\Tests\Framework;
 use PEAR2\WindowsAzure\Services\Table\Models\EdmType;
 use PEAR2\WindowsAzure\Services\Table\Models\Entity;
+use PEAR2\WindowsAzure\Utilities;
 
 /**
  * Resources for testing framework.
@@ -366,7 +367,7 @@ class TestResources
         $entity = new Entity();
         $entity->setPartitionKey($pk);
         $entity->setRowKey($rk);
-        $entity->setTimestamp('2012-03-29T23:46:19.3857256Z');
+        $entity->setTimestamp(Utilities::isoDate());
         $entity->newProperty('CustomerId', EdmType::INT32, '890');
         $entity->newProperty('CustomerName', null, null);
         $entity->newProperty('IsNew', EdmType::BOOLEAN, true);

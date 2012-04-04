@@ -121,6 +121,7 @@ spl_autoload_register(
             'pear2\\tests\\unit\\windowsazure\\services\\table\\models\\querytablesresulttest' => '/unit/WindowsAzure/Services/Table/Models/QueryTablesResultTest.php',
             'pear2\\tests\\unit\\windowsazure\\services\\table\\models\\querytest' => '/unit/WindowsAzure/Services/Table/Models/QueryTest.php',
             'pear2\\tests\\unit\\windowsazure\\services\\table\\models\\tableserviceoptionstest' => '/unit/WindowsAzure/Services/Table/Models/TableServiceOptionsTest.php',
+            'pear2\\tests\\unit\\windowsazure\\services\\table\\models\\updateentityresulttest' => '/unit/WindowsAzure/Services/Table/Models/UpdateEntityResultTest.php',
             'pear2\\tests\\unit\\windowsazure\\services\\table\\tablerestproxytest' => '/unit/WindowsAzure/Services/Table/TableRestProxyTest.php',
             'pear2\\tests\\unit\\windowsazure\\services\\table\\tableservicetest' => '/unit/WindowsAzure/Services/Table/TableServiceTest.php',
             'serviceexceptiontest' => '/unit/WindowsAzure/Core/ServiceExceptionTest.php',

@@ -151,7 +151,7 @@ class Entity
     /**
      * Gets entity Timestamp.
      *
-     * @return string
+     * @return \DateTime
      */
     public function getTimestamp()
     {
@@ -161,13 +161,13 @@ class Entity
     /**
      * Sets entity Timestamp.
      *
-     * @param string $timestamp The entity Timestamp value.
+     * @param \DateTime $timestamp The entity Timestamp value.
      *
      * @return none
      */
     public function setTimestamp($timestamp)
     {
-        $this->newProperty('Timestamp', null, $timestamp);
+        $this->newProperty('Timestamp', EdmType::DATETIME, $timestamp);
     }
     
     /**
