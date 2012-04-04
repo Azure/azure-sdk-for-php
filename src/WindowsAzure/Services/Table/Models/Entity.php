@@ -215,6 +215,7 @@ class Entity
      */
     public function setProperty($name, $property)
     {
+        Validate::isTrue($property instanceof Property, Resources::INVALID_PROP_MSG);
         $this->_properties[$name] = $property;
     }
     

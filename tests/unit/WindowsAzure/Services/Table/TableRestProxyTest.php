@@ -228,19 +228,20 @@ class TableRestProxyTest extends TableRestProxyTestBase
         $this->assertEquals($name3, $tables[1]);
     }
     
+    /**
+     * @covers PEAR2\WindowsAzure\Services\Table\TableRestProxy::insertEntity
+     * @covers PEAR2\WindowsAzure\Services\Table\Utilities\AtomReaderWriter::_parseBody
+     * @covers PEAR2\WindowsAzure\Services\Table\Utilities\AtomReaderWriter::getEntity
+     * @covers PEAR2\WindowsAzure\Services\Table\Utilities\AtomReaderWriter::_generatePropertiesXml
+     * @covers PEAR2\WindowsAzure\Services\Table\Utilities\AtomReaderWriter::parseEntity
+     * @covers PEAR2\WindowsAzure\Services\Table\Utilities\AtomReaderWriter::_parseOneEntity
+     */
     public function testInsertEntity()
     {
         // Setup
         $name = 'insertentity';
         $this->createTable($name);
-        $entity = new Entity();
-        $entity->setPartitionKey('123');
-        $entity->setRowKey('456');
-        $entity->setTimestamp('2012-03-29T23:46:19.3857256Z');
-        $entity->newProperty('CustomerId', EdmType::INT32, '890');
-        $entity->newProperty('CustomerName', null, null);
-        $entity->newProperty('IsNew', EdmType::BOOLEAN, true);
-        $entity->newProperty('JoinDate', EdmType::DATETIME, new \DateTime());
+        $entity = TestResources::getTestEntity('123', '456');
         
         // Test
         $result = $this->wrapper->insertEntity($name, $entity);
@@ -250,6 +251,83 @@ class TableRestProxyTest extends TableRestProxyTestBase
         $this->assertEquals($entity->getPartitionKey(), $entity->getPartitionKey());
         $this->assertEquals($entity->getRowKey(), $entity->getRowKey());
         $this->assertCount(count($entity->getProperties()), $entity->getProperties());
+    }
+    
+    /**
+     * @covers PEAR2\WindowsAzure\Services\Table\TableRestProxy::queryEntities
+     * @covers PEAR2\WindowsAzure\Services\Table\Utilities\AtomReaderWriter::_parseBody
+     * @covers PEAR2\WindowsAzure\Services\Table\Utilities\AtomReaderWriter::parseEntities
+     * @covers PEAR2\WindowsAzure\Services\Table\Utilities\AtomReaderWriter::_parseOneEntity
+     */
+    public function testQueryEntitiesWithEmpty()
+    {
+        // Setup
+        $name = 'queryentitieswithempty';
+        $this->createTable($name);
+        
+        // Test
+        $result = $this->wrapper->queryEntities($name);
+        
+        // Assert
+        $entities = $result->getEntities();
+        $this->assertCount(0, $entities);
+        
+    }
+    
+    /**
+     * @covers PEAR2\WindowsAzure\Services\Table\TableRestProxy::queryEntities
+     * @covers PEAR2\WindowsAzure\Services\Table\Utilities\AtomReaderWriter::_parseBody
+     * @covers PEAR2\WindowsAzure\Services\Table\Utilities\AtomReaderWriter::parseEntities
+     * @covers PEAR2\WindowsAzure\Services\Table\Utilities\AtomReaderWriter::_parseOneEntity
+     */
+    public function testQueryEntitiesWithOneEntity()
+    {
+        // Setup
+        $name = 'queryentitieswithoneentity';
+        $pk1 = '123';
+        $e1 = TestResources::getTestEntity($pk1, '1');
+        $this->createTable($name);
+        $this->wrapper->insertEntity($name, $e1);
+        
+        // Test
+        $result = $this->wrapper->queryEntities($name);
+        
+        // Assert
+        $entities = $result->getEntities();
+        $this->assertCount(1, $entities);
+        $this->assertEquals($pk1, $entities[0]->getPartitionKey());
+    }
+    
+    /**
+     * @covers PEAR2\WindowsAzure\Services\Table\TableRestProxy::queryEntities
+     * @covers PEAR2\WindowsAzure\Services\Table\Utilities\AtomReaderWriter::_parseBody
+     * @covers PEAR2\WindowsAzure\Services\Table\Utilities\AtomReaderWriter::parseEntities
+     * @covers PEAR2\WindowsAzure\Services\Table\Utilities\AtomReaderWriter::_parseOneEntity
+     */
+    public function testQueryEntitiesWithMultipleEntities()
+    {
+        // Setup
+        $name = 'queryentitieswithmultipleentities';
+        $pk1 = '123';
+        $pk2 = '124';
+        $pk3 = '125';
+        $e1 = TestResources::getTestEntity($pk1, '1');
+        $e2 = TestResources::getTestEntity($pk2, '2');
+        $e3 = TestResources::getTestEntity($pk3, '3');
+        $this->createTable($name);
+        $this->wrapper->insertEntity($name, $e1);
+        $this->wrapper->insertEntity($name, $e2);
+        $this->wrapper->insertEntity($name, $e3);
+        
+        // Test
+        $result = $this->wrapper->queryEntities($name);
+        
+        // Assert
+        $entities = $result->getEntities();
+        $this->assertCount(3, $entities);
+        $this->assertEquals($pk1, $entities[0]->getPartitionKey());
+        $this->assertEquals($pk2, $entities[1]->getPartitionKey());
+        $this->assertEquals($pk3, $entities[2]->getPartitionKey());
     }
 }
 

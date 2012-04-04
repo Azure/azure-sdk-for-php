@@ -213,16 +213,16 @@ class Filter
     }
 
     /**
-     * Apply litteral filter on $value
+     * Apply literal filter on $value
      * 
      * @param string $value The filter value
      * 
-     * @return \PEAR2\WindowsAzure\Services\Table\Models\Filters\LitteralFilter 
+     * @return \PEAR2\WindowsAzure\Services\Table\Models\Filters\LiteralFilter 
      */
-    public static function applyLitteral($value)
+    public static function applyLiteral($value)
     {
-        $filer = new LitteralFilter();
-        $filer->setLitteral($value);
+        $filer = new LiteralFilter();
+        $filer->setLiteral($value);
         
         return $filer;
     }
