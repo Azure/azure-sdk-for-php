@@ -28,6 +28,7 @@ namespace PEAR2\Tests\Functional\WindowsAzure\Services\Queue;
 
 use \HTTP_Request2_LogicException;
 use PEAR2\WindowsAzure\Core\ServiceException;
+use PEAR2\WindowsAzure\Core\WindowsAzureUtilities;
 use PEAR2\WindowsAzure\Services\Core\Models\Logging;
 use PEAR2\WindowsAzure\Services\Core\Models\Metrics;
 use PEAR2\WindowsAzure\Services\Core\Models\RetentionPolicy;
@@ -54,10 +55,10 @@ class QueueServiceFunctionalTest extends FunctionalTestBase {
         $shouldReturn = false;
         try {
             $this->wrapper->setServiceProperties($serviceProperties);
-            $this->assertFalse($this->isUsingStorageEmulator(), 'Should succeed when not running in emulator');
+            $this->assertFalse(WindowsAzureUtilities::isEmulated(), 'Should succeed when not running in emulator');
         } catch (ServiceException $e) {
             // Expect failure in emulator, as v1.6 doesn't support this method
-            if ($this->isUsingStorageEmulator()) {
+            if (WindowsAzureUtilities::isEmulated()) {
                 $this->assertEquals(400, $e->getCode(), 'getCode');
                 $shouldReturn = true;
             }
@@ -79,10 +80,10 @@ class QueueServiceFunctionalTest extends FunctionalTestBase {
         $shouldReturn = false;
         try {
             $this->wrapper->setServiceProperties($serviceProperties);
-            $this->assertFalse($this->isUsingStorageEmulator(), 'Should succeed when not running in emulator');
+            $this->assertFalse(WindowsAzureUtilities::isEmulated(), 'Should succeed when not running in emulator');
         } catch (ServiceException $e) {
             // Expect failure in emulator, as v1.6 doesn't support this method
-            if ($this->isUsingStorageEmulator()) {
+            if (WindowsAzureUtilities::isEmulated()) {
                 $this->assertEquals(400, $e->getCode(), 'getCode');
                 $shouldReturn = true;
             }
@@ -115,12 +116,12 @@ class QueueServiceFunctionalTest extends FunctionalTestBase {
             if ($effOptions->getTimeout() != null && $effOptions->getTimeout() < 0) {
                 $this->True('Expect negative timeouts in $options to throw', false);
             } else {
-                $this->assertFalse($this->isUsingStorageEmulator(), 'Should succeed when not running in emulator');
+                $this->assertFalse(WindowsAzureUtilities::isEmulated(), 'Should succeed when not running in emulator');
             }
             $this->verifyServicePropertiesWorker($ret, null);
         }
         catch (ServiceException $e) {
-            if ($this->isUsingStorageEmulator()) {
+            if (WindowsAzureUtilities::isEmulated()) {
                 if ($options->getTimeout() != null && $options->getTimeout() < 0) {
                     $this->assertEquals(500, $e->getCode(), 'getCode');
                 } else {
@@ -211,7 +212,7 @@ class QueueServiceFunctionalTest extends FunctionalTestBase {
                 $this->wrapper->setServiceProperties($serviceProperties, $options);
             }
 
-            $this->assertFalse($this->isUsingStorageEmulator(), 'Should succeed when not running in emulator');
+            $this->assertFalse(WindowsAzureUtilities::isEmulated(), 'Should succeed when not running in emulator');
 
             if ($options == null) {
                 $options = new QueueServiceOptions();
@@ -223,7 +224,7 @@ class QueueServiceFunctionalTest extends FunctionalTestBase {
             if ($options->getTimeout() != null && $options->getTimeout() < 0) {
                 $this->assertTrue(false, 'Expect negative timeouts in $options to throw');
             } else {
-                $this->assertFalse($this->isUsingStorageEmulator(), 'Should succeed when not running in emulator');
+                $this->assertFalse(WindowsAzureUtilities::isEmulated(), 'Should succeed when not running in emulator');
             }
 
             $ret = ($options == null ? $this->wrapper->getServiceProperties() : $this->wrapper->getServiceProperties($options));
@@ -235,7 +236,7 @@ class QueueServiceFunctionalTest extends FunctionalTestBase {
                 $options = new QueueServiceOptions();
             }
 
-            if ($this->isUsingStorageEmulator()) {
+            if (WindowsAzureUtilities::isEmulated()) {
                 if ($options->getTimeout() != null && $options->getTimeout() < 0) {
                     $this->assertEquals(500, $e->getCode(), 'getCode');
                 } else {

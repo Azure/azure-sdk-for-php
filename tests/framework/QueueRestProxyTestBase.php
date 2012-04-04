@@ -24,7 +24,6 @@
 namespace PEAR2\Tests\Framework;
 use PEAR2\Tests\Framework\RestProxyTestBase;
 use PEAR2\Tests\Framework\TestResources;
-use PEAR2\WindowsAzure\Resources;
 use PEAR2\WindowsAzure\Services\Core\Configuration;
 use PEAR2\WindowsAzure\Services\Core\Models\ServiceProperties;
 use PEAR2\WindowsAzure\Services\Queue\QueueSettings;
@@ -48,23 +47,10 @@ class QueueRestProxyTestBase extends RestProxyTestBase
     public function __construct()
     {
         $config = new Configuration();
-        
-        // By default, use the local dev storage. Override by setting the environment variables.
-        $config->setProperty(QueueSettings::ACCOUNT_KEY, Resources::DEV_STORE_KEY);
-        $config->setProperty(QueueSettings::ACCOUNT_NAME, Resources::DEV_STORE_NAME);        
-        $config->setProperty(QueueSettings::URI, 'http://127.0.0.1:10001/devstoreaccount1/');
-
-        if (TestResources::accountName() != '' && TestResources::accountName() != '') {
-            $queueUri = 'http://' . TestResources::accountName() . '.queue.core.windows.net';
-            $config->setProperty(QueueSettings::ACCOUNT_KEY, TestResources::accountKey());
-            $config->setProperty(QueueSettings::ACCOUNT_NAME, TestResources::accountName());        
-            $config->setProperty(QueueSettings::URI, $queueUri);
-        } else {
-            $this->overrideWithEnv($config, QueueSettings::ACCOUNT_KEY);
-            $this->overrideWithEnv($config, QueueSettings::ACCOUNT_NAME);
-            $this->overrideWithEnv($config, QueueSettings::URI);
-        }
-        
+        $queueUri = 'http://' . TestResources::accountName() . '.queue.core.windows.net';
+        $config->setProperty(QueueSettings::ACCOUNT_KEY, TestResources::accountKey());
+        $config->setProperty(QueueSettings::ACCOUNT_NAME, TestResources::accountName());        
+        $config->setProperty(QueueSettings::URI, $queueUri);
         $queueWrapper = QueueService::create($config);
         parent::__construct($config, $queueWrapper);
         $this->_createdQueues = array();
@@ -102,11 +88,6 @@ class QueueRestProxyTestBase extends RestProxyTestBase
             $this->safeDeleteQueue($value);
         }
     }
-       
-    protected function isUsingStorageEmulator() {
-        return Resources::DEV_STORE_NAME == $this->config->getProperty(QueueSettings::ACCOUNT_NAME) && 
-               Resources::DEV_STORE_KEY  == $this->config->getProperty(QueueSettings::ACCOUNT_KEY);
-    }  
 }
 
 ?>

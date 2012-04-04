@@ -87,13 +87,6 @@ class RestProxyTestBase extends \PHPUnit_Framework_TestCase
         $this->tearDown();
         throw $e;
     }
-
-    protected function overrideWithEnv($config, $key) {
-        $value = getenv($key);
-        if ($value != null) {
-            $config->setProperty($key, $value);
-        }
-    }
 }
 
 ?>

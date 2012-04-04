@@ -32,9 +32,10 @@ use ReflectionMethod;
 use PEAR2\Tests\Framework\FiddlerFilter;
 use PEAR2\Tests\Framework\QueueRestProxyTestBase;
 use PEAR2\Tests\Framework\TestResources;
-use PEAR2\WindowsAzure\Resources;
 use PEAR2\Tests\Functional\WindowsAzure\Services\Queue\QueueServiceFunctionalTestData;
 use PEAR2\WindowsAzure\Core\ServiceException;
+use PEAR2\WindowsAzure\Core\WindowsAzureUtilities;
+use PEAR2\WindowsAzure\Resources;
 use PEAR2\WindowsAzure\Services\Core\Configuration;
 use PEAR2\WindowsAzure\Services\Queue\QueueService;
 use PEAR2\WindowsAzure\Services\Queue\QueueSettings;
@@ -67,7 +68,7 @@ class FunctionalTestBase extends QueueRestProxyTestBase {
     protected function tearDown()
     {
         parent::tearDown();
-        if (!$this->isUsingStorageEmulator()) {
+        if (!WindowsAzureUtilities::isEmulated()) {
             $serviceProperties = QueueServiceFunctionalTestData::getDefaultServiceProperties();
             $this->wrapper->setServiceProperties($serviceProperties);
         }
@@ -78,7 +79,6 @@ class FunctionalTestBase extends QueueRestProxyTestBase {
     }
     
     public static function println($msg) {
-        // echo $msg . "<br/>\n";
         error_log($msg);
     }
     

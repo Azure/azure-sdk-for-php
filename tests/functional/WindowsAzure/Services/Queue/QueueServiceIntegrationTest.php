@@ -27,6 +27,7 @@
 namespace PEAR2\Tests\Functional\WindowsAzure\Services\Queue;
 
 use PEAR2\WindowsAzure\Core\ServiceException;
+use PEAR2\WindowsAzure\Core\WindowsAzureUtilities;
 use PEAR2\WindowsAzure\Services\Queue\QueueService;
 use PEAR2\WindowsAzure\Services\Queue\Models\ListQueuesOptions;
 use PEAR2\WindowsAzure\Services\Queue\Models\ListQueuesResult;
@@ -137,10 +138,10 @@ class QueueServiceIntegrationTest extends IntegrationTestBase {
         $shouldReturn = false;
         try {
             $props = $this->wrapper->getServiceProperties()->getValue();
-            $this->assertFalse($this->isUsingStorageEmulator(), 'Should succeed when not running in emulator');
+            $this->assertFalse(WindowsAzureUtilities::isEmulated(), 'Should succeed when not running in emulator');
         } catch (ServiceException $e) {
             // Expect failure in emulator, as v1.6 doesn't support this method
-            if ($this->isUsingStorageEmulator()) {
+            if (WindowsAzureUtilities::isEmulated()) {
                 $this->assertEquals(400, $e->getCode(), 'getCode');
                 $shouldReturn = true;
             }
@@ -169,10 +170,10 @@ class QueueServiceIntegrationTest extends IntegrationTestBase {
         $shouldReturn = false;
         try {
             $props = $this->wrapper->getServiceProperties()->getValue();
-            $this->assertFalse($this->isUsingStorageEmulator(), 'Should succeed when not running in emulator');
+            $this->assertFalse(WindowsAzureUtilities::isEmulated(), 'Should succeed when not running in emulator');
         } catch (ServiceException $e) {
             // Expect failure in emulator, as v1.6 doesn't support this method
-            if ($this->isUsingStorageEmulator()) {
+            if (WindowsAzureUtilities::isEmulated()) {
                 $this->assertEquals(400, $e->getCode(), 'getCode');
                 $shouldReturn = true;
             }

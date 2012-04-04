@@ -28,6 +28,7 @@ namespace PEAR2\Tests\Functional\WindowsAzure\Services\Queue;
 
 use InvalidArgumentException;
 use PEAR2\WindowsAzure\Core\ServiceException;
+use PEAR2\WindowsAzure\Core\WindowsAzureUtilities;
 use PEAR2\WindowsAzure\Resources;
 use PEAR2\WindowsAzure\Services\Core\Models\Logging;
 use PEAR2\WindowsAzure\Services\Core\Models\Metrics;
@@ -51,10 +52,10 @@ class QueueServiceFunctionalParameterTest extends FunctionalTestBase {
     public function testGetServicePropertiesNullOptions() {
         try {
             $this->wrapper->getServiceProperties(null);
-            $this->assertFalse($this->isUsingStorageEmulator(), 'service properties should throw in emulator');
+            $this->assertFalse(WindowsAzureUtilities::isEmulated(), 'service properties should throw in emulator');
         }
         catch (ServiceException $e) {
-            if ($this->isUsingStorageEmulator()) {
+            if (WindowsAzureUtilities::isEmulated()) {
                 // Properties are not supported in emulator
                 $this->assertEquals(400, $e->getCode(), 'getCode');
             } else {
@@ -75,9 +76,9 @@ class QueueServiceFunctionalParameterTest extends FunctionalTestBase {
         $serviceProperties = QueueServiceFunctionalTestData::getDefaultServiceProperties();
         try {
             $this->wrapper->setServiceProperties($serviceProperties);
-            $this->assertFalse($this->isUsingStorageEmulator(), 'service properties should throw in emulator');
+            $this->assertFalse(WindowsAzureUtilities::isEmulated(), 'service properties should throw in emulator');
         } catch (ServiceException $e) {
-            if ($this->isUsingStorageEmulator()) {
+            if (WindowsAzureUtilities::isEmulated()) {
                 // Properties are not supported in emulator
                 $this->assertEquals(400, $e->getCode(), 'getCode');
             } else {
@@ -127,10 +128,10 @@ class QueueServiceFunctionalParameterTest extends FunctionalTestBase {
 
         try {
             $this->wrapper->setServiceProperties($serviceProperties, null);
-            $this->assertFalse($this->isUsingStorageEmulator(), 'service properties should throw in emulator');
+            $this->assertFalse(WindowsAzureUtilities::isEmulated(), 'service properties should throw in emulator');
         }
         catch (ServiceException $e) {
-            if ($this->isUsingStorageEmulator()) {
+            if (WindowsAzureUtilities::isEmulated()) {
                 // Setting is not supported in emulator
                 $this->assertEquals(400, $e->getCode(), 'getCode');
             } else {
