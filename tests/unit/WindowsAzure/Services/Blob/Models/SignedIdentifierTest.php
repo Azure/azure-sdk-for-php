@@ -126,8 +126,8 @@ class SignedIdentifierTest extends \PHPUnit_Framework_TestCase
         $array = $signedIdentifier->toXml();
         
         // Assert
-        $this->assertEquals($id, $array['Id']);
-        $this->assertArrayHasKey('AccessPolicy', $array);
+        $this->assertEquals($id, $array['SignedIdentifier']['Id']);
+        $this->assertArrayHasKey('AccessPolicy', $array['SignedIdentifier']);
     }
 }
 

@@ -15,89 +15,79 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   PEAR2\WindowsAzure\Services\Blob\Models
+ * @package   PEAR2\WindowsAzure\ServiceRuntime
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
- 
-namespace PEAR2\WindowsAzure\Services\Blob\Models;
-use PEAR2\WindowsAzure\Services\Blob\Models\AccessPolicy;
+
+namespace PEAR2\WindowsAzure\ServiceRuntime;
+use PEAR2\WindowsAzure\Resources;
+use PEAR2\WindowsAzure\Validate;
 
 /**
- * Holds container signed identifiers.
- * 
+ * The role data.
+ *
  * @category  Microsoft
- * @package   PEAR2\WindowsAzure\Services\Blob\Models
+ * @package   PEAR2\WindowsAzure\ServiceRuntime\Role
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @version   Release: @package_version@
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
-class SignedIdentifier
+class Role
 {
-    private $_id;
-    private $_accessPolicy;
+    /**
+     * @var string
+     */
+    private $_name;
     
     /**
-     * Gets id.
-     *
-     * @return string.
+     * @var array
      */
-    public function getId()
-    {
-        return $this->_id;
-    }
-
+    private $_instances;
+   
     /**
-     * Sets id.
-     *
-     * @param string $id value.
+     * Constructor
      * 
-     * @return none.
+     * @param string $name      The role name.
+     * @param array  $instances The role instances.
      */
-    public function setId($id)
+    public function __construct($name, $instances)
     {
-        $this->_id = $id;
-    }
-    
-    /**
-     * Gets accessPolicy.
-     *
-     * @return string.
-     */
-    public function getAccessPolicy()
-    {
-        return $this->_accessPolicy;
-    }
-
-    /**
-     * Sets accessPolicy.
-     *
-     * @param string $accessPolicy value.
-     * 
-     * @return none.
-     */
-    public function setAccessPolicy($accessPolicy)
-    {
-        $this->_accessPolicy = $accessPolicy;
-    }
-    
-    /**
-     * Converts this current object to XML representation.
-     * 
-     * @return array.
-     */
-    public function toXml()
-    {
-        $array = array();
+        Validate::isArray($instances);
         
-        $array['SignedIdentifier']['Id']           = $this->_id;
-        $array['SignedIdentifier']['AccessPolicy'] = $this->_accessPolicy->toXml();
-        
-        return $array;
+        $this->_name      = $name;
+        $this->_instances = $instances;
+    }
+    
+    /**
+     * Returns the collection of instances for the role.
+     * 
+     * The number of instances of a role to be deployed to Windows Azure is
+     * specified in the service's configuration file.
+     * 
+     * A role must define at least one internal endpoint in order for its set 
+     * of instances to be known at runtime.
+     * 
+     * @return array
+     */
+    public function getInstances()
+    {
+        return $this->_instances;
+    }
+    
+    /**
+     * Returns the name of the role as it is declared in the service definition
+     * file.
+     * 
+     * @return string
+     */
+    public function getName()
+    {
+        return $this->_name;
     }
 }
 

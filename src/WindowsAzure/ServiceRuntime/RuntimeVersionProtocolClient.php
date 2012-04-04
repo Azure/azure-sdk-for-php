@@ -15,89 +15,57 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   PEAR2\WindowsAzure\Services\Blob\Models
+ * @package   PEAR2\WindowsAzure\ServiceRuntime
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
- 
-namespace PEAR2\WindowsAzure\Services\Blob\Models;
-use PEAR2\WindowsAzure\Services\Blob\Models\AccessPolicy;
+
+namespace PEAR2\WindowsAzure\ServiceRuntime;
+use PEAR2\WindowsAzure\Resources;
+
 
 /**
- * Holds container signed identifiers.
- * 
+ * The runtime version protocol client.
+ *
  * @category  Microsoft
- * @package   PEAR2\WindowsAzure\Services\Blob\Models
+ * @package   PEAR2\WindowsAzure\ServiceRuntime\RuntimeVersionProtocolClient
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @version   Release: @package_version@
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
-class SignedIdentifier
+class RuntimeVersionProtocolClient
 {
-    private $_id;
-    private $_accessPolicy;
+    /**
+     * The input channel.
+     * 
+     * @var IInputChannel
+     */
+    private $_inputChannel;
     
     /**
-     * Gets id.
-     *
-     * @return string.
-     */
-    public function getId()
-    {
-        return $this->_id;
-    }
-
-    /**
-     * Sets id.
-     *
-     * @param string $id value.
+     * Constructor
      * 
-     * @return none.
+     * @param IInputChannel $inputChannel The input channel.
      */
-    public function setId($id)
+    public function __construct($inputChannel)
     {
-        $this->_id = $id;
+        $this->_inputChannel = $inputChannel;
     }
     
     /**
-     * Gets accessPolicy.
-     *
-     * @return string.
-     */
-    public function getAccessPolicy()
-    {
-        return $this->_accessPolicy;
-    }
-
-    /**
-     * Sets accessPolicy.
-     *
-     * @param string $accessPolicy value.
+     * Gets the version map.
      * 
-     * @return none.
-     */
-    public function setAccessPolicy($accessPolicy)
-    {
-        $this->_accessPolicy = $accessPolicy;
-    }
-    
-    /**
-     * Converts this current object to XML representation.
+     * @param string $connectionPath The connection path.
      * 
-     * @return array.
+     * @return array
      */
-    public function toXml()
+    public function getVersionMap($connectionPath)
     {
-        $array = array();
-        
-        $array['SignedIdentifier']['Id']           = $this->_id;
-        $array['SignedIdentifier']['AccessPolicy'] = $this->_accessPolicy->toXml();
-        
-        return $array;
+        throw new \Exception(Resources::NOT_IMPLEMENTED_MSG);
     }
 }
 

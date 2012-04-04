@@ -15,89 +15,63 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   PEAR2\WindowsAzure\Services\Blob\Models
+ * @package   PEAR2\WindowsAzure\ServiceRuntime
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
- 
-namespace PEAR2\WindowsAzure\Services\Blob\Models;
-use PEAR2\WindowsAzure\Services\Blob\Models\AccessPolicy;
+
+namespace PEAR2\WindowsAzure\ServiceRuntime;
+use PEAR2\WindowsAzure\Resources;
 
 /**
- * Holds container signed identifiers.
- * 
+ * The runtime version manager.
+ *
  * @category  Microsoft
- * @package   PEAR2\WindowsAzure\Services\Blob\Models
+ * @package   PEAR2\WindowsAzure\ServiceRuntime\RuntimeVersionManager
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @version   Release: @package_version@
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
-class SignedIdentifier
+class RuntimeVersionManager
 {
-    private $_id;
-    private $_accessPolicy;
+    /**
+     * The protocol client.
+     * 
+     * @var Protocol1RuntimeClient
+     */
+    private $_protocolClient;
     
     /**
-     * Gets id.
-     *
-     * @return string.
-     */
-    public function getId()
-    {
-        return $this->_id;
-    }
-
-    /**
-     * Sets id.
-     *
-     * @param string $id value.
+     * The supported versions list.
      * 
-     * @return none.
+     * @var array
      */
-    public function setId($id)
-    {
-        $this->_id = $id;
-    }
+    private $_supportedVersionList;
     
     /**
-     * Gets accessPolicy.
-     *
-     * @return string.
-     */
-    public function getAccessPolicy()
-    {
-        return $this->_accessPolicy;
-    }
-
-    /**
-     * Sets accessPolicy.
-     *
-     * @param string $accessPolicy value.
+     * Constructor
      * 
-     * @return none.
+     * @param Protocol1RuntimeClient $protocolClient The protocol client.
      */
-    public function setAccessPolicy($accessPolicy)
+    public function __construct($protocolClient)
     {
-        $this->_accessPolicy = $accessPolicy;
+        $this->_protocolClient = $protocolClient;
     }
     
     /**
-     * Converts this current object to XML representation.
+     * Gets the runtime client.
      * 
-     * @return array.
+     * @param string $versionEndpoint The endpoint's version.
+     *
+     * @return Protocol1RuntimeClient
      */
-    public function toXml()
+    public function getRuntimeClient($versionEndpoint)
     {
-        $array = array();
-        
-        $array['SignedIdentifier']['Id']           = $this->_id;
-        $array['SignedIdentifier']['AccessPolicy'] = $this->_accessPolicy->toXml();
-        
-        return $array;
+        throw new \Exception(Resources::NOT_IMPLEMENTED_MSG);
     }
 }
 

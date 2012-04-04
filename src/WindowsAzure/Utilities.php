@@ -87,9 +87,14 @@ class Utilities
         }
         
         foreach ($var as $value) {
-            if (!is_array($value)) {
+            if ((gettype($value) == 'object')
+                && (get_class($value) == 'SimpleXMLElement')
+            ) {
+                return (array) $var;
+            } else if (!is_array($value)) {
                 return array($var);
             }
+
         }
         
         return $var;
@@ -106,9 +111,33 @@ class Utilities
      */
     public static function unserialize($xml)
     {
-        $unserializer = new \XML_Unserializer();
-        $unserializer->unserialize($xml);
-        return $unserializer->getUnserializedData();
+        $sxml = new \SimpleXMLElement($xml);
+
+        return self::_sxml2arr($sxml);
+    }
+
+    /**
+     * Converts a SimpleXML object to an Array recursively
+     * ensuring all sub-elements are arrays as well.
+     *
+     * @param string $sxml SimpleXML object
+     * @param array  $arr  Array into which to store results
+     * 
+     * @static
+     * 
+     * @return array.
+     */
+    private static function _sxml2arr($sxml, $arr = array ()) 
+    { 
+        foreach ((array) $sxml as $key => $value) {
+            if (is_object($value) || (is_array($value))) {
+                $arr[$key] = self::_sxml2arr($value);
+            } else {
+                $arr[$key] = $value;
+            }
+        }
+
+        return $arr; 
     }
     
     /**
@@ -118,24 +147,67 @@ class Utilities
      * @param array  $array      object to serialize represented in array.
      * @param string $rootName   name of the XML root element.
      * @param string $defaultTag default tag for non-tagged elements.
+     * @param string $standalone adds 'standalone' header tag, values 'yes'/'no'
      * 
      * @return string
      */
-    public static function serialize($array, $rootName, $defaultTag = null)
+    public static function serialize($array, $rootName, $defaultTag = null, $standalone = null)
     {
-        $options = array(
-            XML_SERIALIZER_OPTION_INDENT           => '    ',
-            XML_SERIALIZER_OPTION_XML_DECL_ENABLED => true,
-            XML_SERIALIZER_OPTION_RETURN_RESULT    => true,
-            XML_SERIALIZER_OPTION_XML_ENCODING     => "UTF-8",
-            XML_SERIALIZER_OPTION_ROOT_NAME        => $rootName,
-            XML_SERIALIZER_OPTION_DEFAULT_TAG      => $defaultTag
-        );
+        $xmlVersion  = '1.0';
+        $xmlEncoding = 'UTF-8';
+
+        if (!is_array($array)) {
+            return false;
+        }
+
+        $xmlw = new \XmlWriter();
+        $xmlw->openMemory();
+        $xmlw->startDocument($xmlVersion, $xmlEncoding, $standalone);
         
-        $serializer = new \XML_Serializer($options);
-        $xml        = $serializer->serialize($array);
-        
-        return $xml;
+        $xmlw->startElement($rootName);
+
+        self::_arr2xml($xmlw, $array, $defaultTag);
+
+        $xmlw->endElement();
+
+        return $xmlw->outputMemory(true); 
+    }
+    
+    /**
+     * Takes an array and produces XML based on it.
+     *
+     * @param XMLWriter $xmlw       XMLWriter object that was previously instanted
+     * and is used for creating the XML.
+     * @param array     $data       Array to be converted to XML
+     * @param string    $defaultTag Default XML tag to be used if none specified.
+     * 
+     * @static
+     * 
+     * @return void.
+     */
+
+    private static function _arr2xml(\XMLWriter $xmlw, $data, $defaultTag = null)
+    {
+        foreach ($data as $key => $value) {
+            if (is_array($value)) {
+                if (!is_int($key)) {
+                    if ($key != Resources::EMPTY_STRING) {
+                        $xmlw->startElement($key);
+                    } else {
+                        $xmlw->startElement($defaultTag);
+                    }
+                }
+                
+                self::_arr2xml($xmlw, $value);
+                
+                if (!is_int($key)) {
+                    $xmlw->endElement();
+                }
+                continue;
+            } else {
+                $xmlw->writeElement($key, $value);
+            }
+        }
     }
     
     /**
