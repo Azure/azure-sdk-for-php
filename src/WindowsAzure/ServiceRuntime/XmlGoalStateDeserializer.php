@@ -23,13 +23,14 @@
  */
 
 namespace PEAR2\WindowsAzure\ServiceRuntime;
+use PEAR2\WindowsAzure\Utilities;
 use PEAR2\WindowsAzure\Resources;
 
 /**
  * The XML goal state deserializer.
  *
  * @category  Microsoft
- * @package   PEAR2\WindowsAzure\ServiceRuntime\XmlGoalStateDeserializer
+ * @package   PEAR2\WindowsAzure\ServiceRuntime
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
@@ -39,14 +40,6 @@ use PEAR2\WindowsAzure\Resources;
 class XmlGoalStateDeserializer
 {
     /**
-     * Constructor
-     */
-    public function __construct()
-    {
-        throw new \Exception(Resources::NOT_IMPLEMENTED_MSG);
-    }
-
-    /**
      * Deserializes a goal state.
      * 
      * @param string $document The goal state document.
@@ -55,7 +48,15 @@ class XmlGoalStateDeserializer
      */
     public function deserialize($document)
     {
-        throw new \Exception(Resources::NOT_IMPLEMENTED_MSG);
+        $goalStateInfo = Utilities::unserialize($document);
+        
+        return new GoalState(
+            $goalStateInfo['Incarnation'],
+            $goalStateInfo['ExpectedState'],
+            $goalStateInfo['RoleEnvironmentPath'],
+            new \DateTime($goalStateInfo['Deadline']),
+            $goalStateInfo['CurrentStateEndpoint']
+        );
     }
 }
 

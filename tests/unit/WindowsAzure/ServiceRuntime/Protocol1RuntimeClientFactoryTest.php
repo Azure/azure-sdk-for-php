@@ -23,10 +23,11 @@
  */
 namespace PEAR2\Tests\Unit\WindowsAzure\ServiceRuntime;
 use PEAR2\Tests\Framework\TestResources;
-use PEAR2\WindowsAzure\ServiceRuntime\Role;
+use PEAR2\WindowsAzure\Core\WindowsAzureUtilities;
+use PEAR2\WindowsAzure\ServiceRuntime\Protocol1RuntimeClientFactory;
 
 /**
- * Unit tests for class Role
+ * Unit tests for class Protocol1RuntimeClientFactory
  *
  * @category  Microsoft
  * @package   PEAR2\Tests\Unit\WindowsAzure\ServiceRuntime
@@ -36,35 +37,38 @@ use PEAR2\WindowsAzure\ServiceRuntime\Role;
  * @version   Release: @package_version@
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
-class RoleTest extends \PHPUnit_Framework_TestCase
+class Protocol1RuntimeClientFactoryTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @covers PEAR2\WindowsAzure\ServiceRuntime\Role::__construct
-     * @covers PEAR2\WindowsAzure\ServiceRuntime\Role::getName
+     * @covers PEAR2\WindowsAzure\ServiceRuntime\Protocol1RuntimeClientFactory::getVersion
      */
-    public function testGetName()
+    public function testGetVersion()
     {
-        $name = 'roleName';
-
         // Setup
-        $role = new Role($name, array());
+        $protocol1RuntimeClientFactory =
+            new Protocol1RuntimeClientFactory();
         
         // Test
-        $this->assertEquals($name, $role->getName());
+        $this->assertEquals('2011-03-08', $protocol1RuntimeClientFactory->getVersion());
     }
-
+    
     /**
-     * @covers PEAR2\WindowsAzure\ServiceRuntime\Role::getInstances
+     * @covers PEAR2\WindowsAzure\ServiceRuntime\Protocol1RuntimeClientFactory::createRuntimeClient
      */
-    public function testGetInstances()
+    public function testCreateRuntimeClient()
     {
-        $instances = array();
-
         // Setup
-        $role = new Role(null, $instances);
+        $protocol1RuntimeClientFactory =
+            new Protocol1RuntimeClientFactory();
         
+        $protocol1RuntimeClient = $protocol1RuntimeClientFactory
+            ->createRuntimeClient('');
+                
         // Test
-        $this->assertEquals($instances, $role->getInstances());
+        $this->assertInstanceOf(
+            'PEAR2\\WindowsAzure\\ServiceRuntime\\Protocol1RuntimeClient',
+            $protocol1RuntimeClient
+        );
     }
 }
 

@@ -29,7 +29,7 @@ use PEAR2\WindowsAzure\Resources;
  * An implementation for the protocol runtime client.
  *
  * @category  Microsoft
- * @package   PEAR2\WindowsAzure\ServiceRuntime\Protocol1RuntimeClient
+ * @package   PEAR2\WindowsAzure\ServiceRuntime
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0

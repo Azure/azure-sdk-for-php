@@ -29,7 +29,7 @@ use PEAR2\WindowsAzure\ServiceRuntime\RuntimeKernel;
  * Unit tests for class RuntimeKernel
  *
  * @category  Microsoft
- * @package   PEAR2\Tests\Unit\WindowsAzure\ServiceRuntime\RuntimeKernelTest
+ * @package   PEAR2\Tests\Unit\WindowsAzure\ServiceRuntime
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
@@ -45,7 +45,7 @@ class RuntimeKernelTest extends \PHPUnit_Framework_TestCase
     public function testGetKernel()
     {
         // Setup
-        $runtimeKernel = RuntimeKernel::getKernel();
+        $runtimeKernel = RuntimeKernel::getKernel(true);
         
         // Test
         $this->assertInstanceOf(
