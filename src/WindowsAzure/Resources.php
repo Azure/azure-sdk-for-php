@@ -48,6 +48,7 @@ class Resources
     const INVALID_EDM_MSG     = 'The provided EDM type is invalid.';
     const INVALID_PROP_MSG    = 'The provided propertie(s) are/is invalid.';
     const INVALID_ENTITY_MSG  = 'The provided entity object is invalid.';
+    const INVALID_VERSION_MSG = 'Server does not support any known protocol versions.';
 
     // HTTP Headers
     const X_MS_HEADER_PREFIX                 = 'x-ms-';

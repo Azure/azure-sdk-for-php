@@ -29,7 +29,7 @@ use PEAR2\WindowsAzure\Resources;
  * The goal state deserializer.
  *
  * @category  Microsoft
- * @package   PEAR2\WindowsAzure\ServiceRuntime\IGoalStateDeserializer
+ * @package   PEAR2\WindowsAzure\ServiceRuntime
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
@@ -39,13 +39,20 @@ use PEAR2\WindowsAzure\Resources;
 interface IGoalStateDeserializer
 {
     /**
-     * Deserializes a goal state document.
+     * Initializes the goal state deserializer with the input stream.
      * 
-     * @param string $document The document to deserialize.
+     * @param Stream $inputStream The input stream.
      * 
      * @return none
      */
-    public function deserialize($document);
+    public function initialize($inputStream);
+    
+    /**
+     * Deserializes a goal state.
+     * 
+     * @return none
+     */
+    public function deserialize();
 }
 
 ?>

@@ -24,13 +24,13 @@
 namespace PEAR2\Tests\Unit\WindowsAzure\ServiceRuntime;
 use PEAR2\Tests\Framework\TestResources;
 use PEAR2\WindowsAzure\Core\WindowsAzureUtilities;
+use PEAR2\WindowsAzure\ServiceRuntime\ChannelNotAvailableException;
 use PEAR2\WindowsAzure\ServiceRuntime\FileInputChannel;
-use PEAR2\WindowsAzure\ServiceRuntime\RuntimeVersionProtocolClient;
-use PEAR2\WindowsAzure\ServiceRuntime\RuntimeVersionManager;
-use PEAR2\WindowsAzure\Resources;
+
+require_once 'vfsStream/vfsStream.php';
 
 /**
- * Unit tests for class RuntimeVersionManager
+ * Unit tests for class FileInputChannel
  *
  * @category  Microsoft
  * @package   PEAR2\Tests\Unit\WindowsAzure\ServiceRuntime
@@ -40,62 +40,36 @@ use PEAR2\WindowsAzure\Resources;
  * @version   Release: @package_version@
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
-class RuntimeVersionManagerTest extends \PHPUnit_Framework_TestCase
+class FileInputChannelTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @covers PEAR2\WindowsAzure\ServiceRuntime\RuntimeVersionManager::__construct
+     * @covers PEAR2\WindowsAzure\ServiceRuntime\FileInputChannel::getInputStream
      */
-    public function testConstruct()
+    public function testGetInputStream()
     {
-        // Setup
-        $runtimeVersionManager = new RuntimeVersionManager(null);
-        
-        // Test
-        $this->assertInstanceOf(
-            'PEAR2\\WindowsAzure\\ServiceRuntime\\RuntimeVersionManager',
-            $runtimeVersionManager);
-    }
-    
-    /**
-     * @covers PEAR2\WindowsAzure\ServiceRuntime\RuntimeVersionManager::getRuntimeClient
-     */
-    public function testGetRuntimeClient()
-    {
-        // Setup
-        // Setup
         $rootDirectory = 'root';
+        $fileName = 'test.txt';
+        $fileContent = 'somecontent';
 
+        // Setup
         \vfsStreamWrapper::register(); 
         \vfsStreamWrapper::setRoot(new \vfsStreamDirectory($rootDirectory));
-                
-        $fileName = 'versionendpoint';
-        $fileContent = '<?xml version="1.0" encoding="utf-8"?>' .
-            '<RuntimeServerDiscovery xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" ' .
-            'xmlns:xsd="http://www.w3.org/2001/XMLSchema">' .
-            '<RuntimeServerEndpoints>' .
-            '<RuntimeServerEndpoint version="2011-03-08" path="myPath1" />' .
-            '</RuntimeServerEndpoints>' .
-            '</RuntimeServerDiscovery>';
         
         $file = \vfsStream::newFile($fileName);
         $file->setContent($fileContent); 
-
+        
         \vfsStreamWrapper::getRoot()->addChild($file);
         
-        // Setup
-        $runtimeVersionProtocolClient =
-            new RuntimeVersionProtocolClient(new FileInputChannel());
-        
-        $runtimeVersionManager = new RuntimeVersionManager(
-            $runtimeVersionProtocolClient
-        );
-        
-        $runtimeClient = $runtimeVersionManager->getRuntimeClient(
-            \vfsStream::url($rootDirectory . '/' . $fileName)
-        );
-        
         // Test
-        $this->assertNotEquals(null, $runtimeClient);
+        $fileInputChannel = new FileInputChannel();
+        $inputStream = $fileInputChannel->getInputStream(\vfsStream::url($rootDirectory . '/' . $fileName));
+        
+        $inputChannelContents = stream_get_contents($inputStream);
+        $this->assertEquals($fileContent, $inputChannelContents);
+        
+        // invalid file
+        $this->setExpectedException(get_class(new ChannelNotAvailableException()));
+        $fileInputChannel->getInputStream('fake');
     }
 }
 

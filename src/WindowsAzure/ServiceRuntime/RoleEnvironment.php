@@ -30,7 +30,7 @@ use PEAR2\WindowsAzure\Resources;
  * running.
  *
  * @category  Microsoft
- * @package   PEAR2\WindowsAzure\ServiceRuntime\RoleEnvironment
+ * @package   PEAR2\WindowsAzure\ServiceRuntime
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
@@ -40,45 +40,59 @@ use PEAR2\WindowsAzure\Resources;
 class RoleEnvironment
 {
     /**
+     * Specifies the environment variable that contains the path to the endpoint.
+     * 
+     * @var string
+     */
+    const VERSION_ENDPOINT_ENVIRONMENT_NAME = 'WaRuntimeEndpoint';
+
+    /**
+     * Specifies the endpoint fixed path.
+     * 
+     * @var string
+     */
+    const VERSION_ENDPOINT_FIXED_PATH = '\\.\pipe\WindowsAzureRuntime';
+
+    /**
      * @var IRuntimeClient
      */
     private static $_runtimeClient;
-    
+
     /**
      * @var GoalState
      */
     private static $_currentGoalState;
-    
+
     /**
      * @var RoleEnvironmentData
      */
     private static $_currentEnvironmentData;
-    
-	/**
+
+    /**
      * @var array
      */
     private static $_changingListeners;
 
-	/**
+    /**
      * @var array
      */    
     private static $_changedListeners;
 
-	/**
+    /**
      * @var array
      */
     private static $_stoppingListeners;
-    
+
     /**
      * @var CurrentState
      */
     private static $_lastState;
-    
-	/**
+
+    /**
      * @var \DateTime
      */
     private static $_maxDateTime;
-    
+
     /**
      * Initializes the runtime client.
      * 
@@ -86,9 +100,28 @@ class RoleEnvironment
      */
     private static function _initialize()
     {
-        throw new \Exception(Resources::NOT_IMPLEMENTED_MSG);
+        if (self::$_runtimeClient == null) {
+            $endpoint = getenv(self::VERSION_ENDPOINT_ENVIRONMENT_NAME);
+
+            if ($endpoint == null) {
+                $endpoint = self::VERSION_ENDPOINT_FIXED_PATH;
+            }
+
+            $kernel = RuntimeKernel::getKernel();
+            
+            self::$_runtimeClient = $kernel->getRuntimeVersionManager()
+                ->getRuntimeClient($endpoint);
+            
+            self::$_currentGoalState = self::$_runtimeClient
+                ->getCurrentGoalState();
+            
+            self::$_currentEnvironmentData = self::$_runtimeClient
+                ->getRoleEnvironmentData();
+        } else {
+            
+        }
     }
-    
+
     /**
      * Processes a goal state change.
      * 
@@ -98,7 +131,7 @@ class RoleEnvironment
     {
         throw new \Exception(Resources::NOT_IMPLEMENTED_MSG);
     }
-    
+
     /**
      * Accepts the latest incarnation.
      * 
@@ -108,7 +141,7 @@ class RoleEnvironment
     {
         throw new \Exception(Resources::NOT_IMPLEMENTED_MSG);
     }
-    
+
     /**
      * Calculates changes.
      * 
@@ -118,7 +151,7 @@ class RoleEnvironment
     {
         throw new \Exception(Resources::NOT_IMPLEMENTED_MSG);
     }
-    
+
     /**
      * Raises a stopping event.
      * 
@@ -128,7 +161,7 @@ class RoleEnvironment
     {
         throw new \Exception(Resources::NOT_IMPLEMENTED_MSG);
     }
-    
+
     /**
      * Returns a RoleInstance object that represents the role instance
      * in which this code is currently executing.
@@ -137,7 +170,9 @@ class RoleEnvironment
      */
     public static function getCurrentRoleInstance()
     {
-        throw new \Exception(Resources::NOT_IMPLEMENTED_MSG);
+        self::_initialize();
+        
+        return self::$_currentEnvironmentData->getCurrentInstance();
     }
 
     /**
@@ -148,20 +183,29 @@ class RoleEnvironment
      */
     public static function getDeploymentId()
     {
-        throw new \Exception(Resources::NOT_IMPLEMENTED_MSG);
+        self::_initialize();
+        
+        return self::$_currentEnvironmentData->getDeploymentId();
     }
-    
+
     /**
-     *  Indicates whether the role instance is running in the Windows Azure
+     * Indicates whether the role instance is running in the Windows Azure
      * environment.
      * 
      * @return boolean
      */
     public static function isAvailable()
     {
-        throw new \Exception(Resources::NOT_IMPLEMENTED_MSG);
+        try {
+            self::_initialize();
+        } catch (RoleEnvironmentNotAvailableException $ex) {
+        } catch (ChannelNotAvailableException $ex) {
+            return false;
+        }
+
+        return self::$_runtimeClient != null;
     }
-    
+
     /**
      * Indicates whether the role instance is running in the development fabric.
      * 
@@ -169,9 +213,11 @@ class RoleEnvironment
      */
     public static function isEmulated()
     {
-        throw new \Exception(Resources::NOT_IMPLEMENTED_MSG);
+        self::_initialize();
+        
+        return self::$_currentEnvironmentData->isEmulated();
     }
-    
+
     /**
      * Returns the set of Role objects defined for your service.
      * 
@@ -181,9 +227,11 @@ class RoleEnvironment
      */
     public static function getRoles()
     {
-        throw new \Exception(Resources::NOT_IMPLEMENTED_MSG);
+        self::_initialize();
+        
+        return self::$_currentEnvironmentData->getRoles();
     }
-    
+
     /**
      * Retrieves the settings in the service configuration file.
      * 
@@ -195,9 +243,11 @@ class RoleEnvironment
      */
     public static function getConfigurationSettings()
     {
-        throw new \Exception(Resources::NOT_IMPLEMENTED_MSG);
+        self::_initialize();
+        
+        return self::$_currentEnvironmentData->getConfigurationSettings();
     }
-    
+
     /**
      * Retrieves the set of named local storage resources.
      * 
@@ -205,9 +255,11 @@ class RoleEnvironment
      */
     public static function getLocalResources()
     {
-        throw new \Exception(Resources::NOT_IMPLEMENTED_MSG);
+        self::_initialize();
+        
+        return self::$_currentEnvironmentData->getLocalResources();
     }
-    
+
     /**
      * Requests that the current role instance be stopped and restarted.
      * Before the role instance is recycled, the Windows Azure load balancer 
@@ -222,7 +274,7 @@ class RoleEnvironment
     {
         throw new \Exception(Resources::NOT_IMPLEMENTED_MSG);
     }
-    
+
     /**
      * Sets the status of the role instance.
      * 
@@ -240,7 +292,7 @@ class RoleEnvironment
     {
         throw new \Exception(Resources::NOT_IMPLEMENTED_MSG);
     }
-    
+
     /**
      * Clears the status of the role instance.
      * 
@@ -253,7 +305,7 @@ class RoleEnvironment
     {
         throw new \Exception(Resources::NOT_IMPLEMENTED_MSG);
     }
-    
+
     /**
      * Adds an event listener for the changed event, which occurs
      * after a configuration change has been applied to a role instance.
@@ -264,7 +316,7 @@ class RoleEnvironment
     {
         throw new \Exception(Resources::NOT_IMPLEMENTED_MSG);
     }
-    
+
     /**
      * Removes an event listener for the Changed event.
      * 
@@ -274,7 +326,7 @@ class RoleEnvironment
     {
         throw new \Exception(Resources::NOT_IMPLEMENTED_MSG);
     }
-    
+
     /**
      * Adds an event listener for the Changing event, which occurs
      * before a change to the service configuration is applied to the running
@@ -300,7 +352,7 @@ class RoleEnvironment
     {
         throw new \Exception(Resources::NOT_IMPLEMENTED_MSG);
     }
-    
+
     /** 
      * Removes an event listener for the Changing event.
      * 
@@ -310,7 +362,7 @@ class RoleEnvironment
     {
         throw new \Exception(Resources::NOT_IMPLEMENTED_MSG);
     }
-    
+
     /**
      * Adds an event listener for the Stopping event, which occurs
      * wheen the role is stopping.
@@ -321,7 +373,7 @@ class RoleEnvironment
     {
         throw new \Exception(Resources::NOT_IMPLEMENTED_MSG);
     }
-    
+
     /**
      * Removes an event listener for the Stopping event.
      * 

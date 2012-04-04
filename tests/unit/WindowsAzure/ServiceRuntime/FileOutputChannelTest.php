@@ -23,10 +23,15 @@
  */
 namespace PEAR2\Tests\Unit\WindowsAzure\ServiceRuntime;
 use PEAR2\Tests\Framework\TestResources;
-use PEAR2\WindowsAzure\ServiceRuntime\Role;
+use PEAR2\WindowsAzure\Core\WindowsAzureUtilities;
+use PEAR2\WindowsAzure\ServiceRuntime\ChannelNotAvailableException;
+use PEAR2\WindowsAzure\ServiceRuntime\FileInputChannel;
+use PEAR2\WindowsAzure\ServiceRuntime\FileOutputChannel;
+
+require_once 'vfsStream/vfsStream.php';
 
 /**
- * Unit tests for class Role
+ * Unit tests for class FileOutputChannel
  *
  * @category  Microsoft
  * @package   PEAR2\Tests\Unit\WindowsAzure\ServiceRuntime
@@ -36,35 +41,38 @@ use PEAR2\WindowsAzure\ServiceRuntime\Role;
  * @version   Release: @package_version@
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
-class RoleTest extends \PHPUnit_Framework_TestCase
+class FileOutputChannelTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @covers PEAR2\WindowsAzure\ServiceRuntime\Role::__construct
-     * @covers PEAR2\WindowsAzure\ServiceRuntime\Role::getName
+     * @covers PEAR2\WindowsAzure\ServiceRuntime\FileOutputChannel::getOutputStream
      */
-    public function testGetName()
+    public function testGetOutputStream()
     {
-        $name = 'roleName';
-
+        $rootDirectory = 'root';
+        $fileName = 'test.txt';
+        $fileContents = 'Hello World!';
+        
         // Setup
-        $role = new Role($name, array());
+        \vfsStreamWrapper::register(); 
+        \vfsStreamWrapper::setRoot(new \vfsStreamDirectory($rootDirectory));
+        
+        $file = \vfsStream::newFile($fileName);
+        \vfsStreamWrapper::getRoot()->addChild($file);
         
         // Test
-        $this->assertEquals($name, $role->getName());
-    }
+        $fileOutputChannel = new FileOutputChannel();
+        $outputStream = $fileOutputChannel->getOutputStream(\vfsStream::url($rootDirectory . '/' . $fileName));
 
-    /**
-     * @covers PEAR2\WindowsAzure\ServiceRuntime\Role::getInstances
-     */
-    public function testGetInstances()
-    {
-        $instances = array();
+        // Write content to file
+        fwrite($outputStream, $fileContents);
+        fclose($outputStream);
 
-        // Setup
-        $role = new Role(null, $instances);
+        // Test file content
+        $fileInputChannel = new FileInputChannel();
+        $fileInputStream = $fileInputChannel->getInputStream(\vfsStream::url($rootDirectory . '/' . $fileName));
         
-        // Test
-        $this->assertEquals($instances, $role->getInstances());
+        $inputChannelContents = stream_get_contents($fileInputStream);
+        $this->assertEquals($fileContents, $inputChannelContents);
     }
 }
 

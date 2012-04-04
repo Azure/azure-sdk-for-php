@@ -23,10 +23,9 @@
  */
 
 namespace PEAR2\WindowsAzure\ServiceRuntime;
-use PEAR2\WindowsAzure\Resources;
 
 /**
- * The runtime goal state client.
+ * The runtime client factory.
  *
  * @category  Microsoft
  * @package   PEAR2\WindowsAzure\ServiceRuntime
@@ -36,39 +35,35 @@ use PEAR2\WindowsAzure\Resources;
  * @version   Release: @package_version@
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
-interface IRuntimeGoalStateClient
+class Protocol1RuntimeClientFactory
 {
     /**
-     * Gets the current goal state.
+     * Gets the runtime version.
      * 
-     * @return GoalState
+     * @return string
      */
-    public function getCurrentGoalState();
+    public function getVersion()
+    {
+        return '2011-03-08';
+    }
     
     /**
-     * Gets the role environment data.
+     * Creates a new runtime client instance.
      * 
-     * @return RoleEnvironmentData
+     * @param string $path The goal state path.
+     * 
+     * @return IRuntimeClient
      */
-    public function getRoleEnvironmentData();
-
-    /**
-     * Adds a goal state changed listener.
-     * 
-     * @param string $listener The listener.
-     * 
-     * @return none
-     */
-    public function addGoalStateChangedListener($listener);
-
-    /**
-     * Removes a goal state changed listener.
-     * 
-     * @param string $listener The listener.
-     * 
-     * @return none
-     */
-    public function removeGoalStateChangedListener($listener);
+    public function createRuntimeClient($path)
+    {
+        $kernel = RuntimeKernel::getKernel();
+        
+        return new Protocol1RuntimeClient(
+            $kernel->getProtocol1RuntimeGoalStateClient(), 
+            $kernel->getProtocol1RuntimeCurrentStateClient(),
+            $path
+        );
+    }
 }
 
 ?>
