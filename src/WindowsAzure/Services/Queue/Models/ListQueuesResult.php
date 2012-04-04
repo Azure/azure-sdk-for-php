@@ -71,7 +71,7 @@ class ListQueuesResult
         $result->_queues     = array();
         $rawQueues           = array();
         
-        if (is_array($parsedResponse['Queues'])) {
+        if ( !empty($parsedResponse['Queues']) ) {
             $rawQueues = Utilities::getArray($parsedResponse['Queues']['Queue']);
         }
         
