@@ -67,7 +67,7 @@ class QueueRestProxyTestBase extends RestProxyTestBase
         $this->wrapper->deleteQueue($queueName, $options);
     }
     
-    public function safeDeleteQueue($queueName, $options = null)
+    public function safeDeleteQueue($queueName)
     {
         try
         {
