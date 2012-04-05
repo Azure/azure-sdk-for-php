@@ -34,6 +34,7 @@ use PEAR2\WindowsAzure\Services\Table\Models\Query;
 use PEAR2\WindowsAzure\Services\Table\Models\Filters\Filter;
 use PEAR2\WindowsAzure\Services\Table\Models\Entity;
 use PEAR2\WindowsAzure\Services\Table\Models\EdmType;
+use PEAR2\WindowsAzure\Services\Table\Models\QueryEntitiesOptions;
 
 /**
  * Unit tests for class TableRestProxy
@@ -301,6 +302,9 @@ class TableRestProxyTest extends TableRestProxyTestBase
     
     /**
      * @covers PEAR2\WindowsAzure\Services\Table\TableRestProxy::queryEntities
+     * @covers PEAR2\WindowsAzure\Services\Table\TableRestProxy::_addOptionalQuery
+     * @covers PEAR2\WindowsAzure\Services\Table\TableRestProxy::_encodeODataUriValues
+     * @covers PEAR2\WindowsAzure\Services\Table\TableRestProxy::_encodeODataUriValue
      * @covers PEAR2\WindowsAzure\Services\Table\Utilities\AtomReaderWriter::_parseBody
      * @covers PEAR2\WindowsAzure\Services\Table\Utilities\AtomReaderWriter::parseEntities
      * @covers PEAR2\WindowsAzure\Services\Table\Utilities\AtomReaderWriter::_parseOneEntity
@@ -312,6 +316,9 @@ class TableRestProxyTest extends TableRestProxyTestBase
         $pk1 = '123';
         $pk2 = '124';
         $pk3 = '125';
+        // This value is hard coded in TestResources::getTestEntity
+        $expected = 890;
+        $field = 'CustomerId';
         $e1 = TestResources::getTestEntity($pk1, '1');
         $e2 = TestResources::getTestEntity($pk2, '2');
         $e3 = TestResources::getTestEntity($pk3, '3');
@@ -319,16 +326,57 @@ class TableRestProxyTest extends TableRestProxyTestBase
         $this->wrapper->insertEntity($name, $e1);
         $this->wrapper->insertEntity($name, $e2);
         $this->wrapper->insertEntity($name, $e3);
+        $query = new Query();
+        $query->addSelectField('CustomerId');
+        $options = new QueryEntitiesOptions();
+        $options->setQuery($query);
         
         // Test
-        $result = $this->wrapper->queryEntities($name);
+        $result = $this->wrapper->queryEntities($name, $options);
         
         // Assert
         $entities = $result->getEntities();
         $this->assertCount(3, $entities);
+        $this->assertEquals($expected, $entities[0]->getProperty($field)->getValue());
+        $this->assertEquals($expected, $entities[1]->getProperty($field)->getValue());
+        $this->assertEquals($expected, $entities[2]->getProperty($field)->getValue());
+    }
+    
+    /**
+     * @covers PEAR2\WindowsAzure\Services\Table\TableRestProxy::queryEntities
+     * @covers PEAR2\WindowsAzure\Services\Table\TableRestProxy::_addOptionalQuery
+     * @covers PEAR2\WindowsAzure\Services\Table\TableRestProxy::_encodeODataUriValues
+     * @covers PEAR2\WindowsAzure\Services\Table\TableRestProxy::_encodeODataUriValue
+     * @covers PEAR2\WindowsAzure\Services\Table\Utilities\AtomReaderWriter::_parseBody
+     * @covers PEAR2\WindowsAzure\Services\Table\Utilities\AtomReaderWriter::parseEntities
+     * @covers PEAR2\WindowsAzure\Services\Table\Utilities\AtomReaderWriter::_parseOneEntity
+     */
+    public function testQueryEntitiesWithGetTop()
+    {
+        // Setup
+        $name = 'queryentitieswithgettop';
+        $pk1 = '123';
+        $pk2 = '124';
+        $pk3 = '125';
+        $e1 = TestResources::getTestEntity($pk1, '1');
+        $e2 = TestResources::getTestEntity($pk2, '2');
+        $e3 = TestResources::getTestEntity($pk3, '3');
+        $this->createTable($name);
+        $this->wrapper->insertEntity($name, $e1);
+        $this->wrapper->insertEntity($name, $e2);
+        $this->wrapper->insertEntity($name, $e3);
+        $query = new Query();
+        $query->setTop(1);
+        $options = new QueryEntitiesOptions();
+        $options->setQuery($query);
+        
+        // Test
+        $result = $this->wrapper->queryEntities($name, $options);
+        
+        // Assert
+        $entities = $result->getEntities();
+        $this->assertCount(1, $entities);
         $this->assertEquals($pk1, $entities[0]->getPartitionKey());
-        $this->assertEquals($pk2, $entities[1]->getPartitionKey());
-        $this->assertEquals($pk3, $entities[2]->getPartitionKey());
     }
     
     /**

@@ -469,15 +469,24 @@ class TableRestProxy extends ServiceRestProxy implements ITable
             $options = new QueryEntitiesOptions();
         }
         
-        $encodedPK = $this->_encodeODataUriValue($options->getNextPartitionKey());
-        $encodedRK = $this->_encodeODataUriValue($options->getNextRowKey());
-        
+        $encodedPK   = $this->_encodeODataUriValue($options->getNextPartitionKey());
+        $encodedRK   = $this->_encodeODataUriValue($options->getNextRowKey());
         $queryParams = $this->_addOptionalQuery($queryParams, $options->getQuery());
         
         $queryParams[Resources::QP_TIMEOUT] = strval($options->getTimeout());
         $queryParams[Resources::QP_NEXT_PK] = $encodedPK;
         $queryParams[Resources::QP_NEXT_RK] = $encodedRK;
         $headers[Resources::CONTENT_TYPE]   = Resources::XML_ATOM_CONTENT_TYPE;
+        
+        if (!is_null($options->getQuery())) {
+            $dsHeader    = Resources::DATA_SERVICE_VERSION;
+            $maxdsValue  = Resources::MAX_DATA_SERVICE_VERSION_VALUE;
+            $fields      = $options->getQuery()->getSelectFields();
+            $hasSelect   = !empty($fields);
+            if ($hasSelect) {
+                $headers[$dsHeader] = $maxdsValue;
+            }
+        }
         
         $response = $this->send($method, $headers, $queryParams, $path, $statusCode);
         $entities = $this->_atomSerializer->parseEntities($response->getBody());
