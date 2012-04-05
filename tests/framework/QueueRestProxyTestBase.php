@@ -71,7 +71,7 @@ class QueueRestProxyTestBase extends RestProxyTestBase
     {
         try
         {
-            $this->deleteQueue($value);
+            $this->deleteQueue($queueName);
         }
         catch (\Exception $e)
         {
