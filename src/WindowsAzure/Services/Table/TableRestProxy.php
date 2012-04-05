@@ -479,10 +479,10 @@ class TableRestProxy extends ServiceRestProxy implements ITable
         $headers[Resources::CONTENT_TYPE]   = Resources::XML_ATOM_CONTENT_TYPE;
         
         if (!is_null($options->getQuery())) {
-            $dsHeader    = Resources::DATA_SERVICE_VERSION;
-            $maxdsValue  = Resources::MAX_DATA_SERVICE_VERSION_VALUE;
-            $fields      = $options->getQuery()->getSelectFields();
-            $hasSelect   = !empty($fields);
+            $dsHeader   = Resources::DATA_SERVICE_VERSION;
+            $maxdsValue = Resources::MAX_DATA_SERVICE_VERSION_VALUE;
+            $fields     = $options->getQuery()->getSelectFields();
+            $hasSelect  = !empty($fields);
             if ($hasSelect) {
                 $headers[$dsHeader] = $maxdsValue;
             }

@@ -80,7 +80,7 @@ class TableSharedKeyAuthScheme extends StorageAuthScheme
             $url, $queryParams
         );
         
-        $stringToSign = array();
+        $stringToSign   = array();
         $stringToSign[] = strtoupper($httpMethod);
 
         foreach ($this->includedHeaders as $header) {
