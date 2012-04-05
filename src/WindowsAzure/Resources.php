@@ -104,6 +104,9 @@ class Resources
     const BLOB_TYPE_NAME  = 'IBlob';
     const TABLE_TYPE_NAME = 'ITable';
     
+    // HTTP Methods
+    const HTTP_MERGE = 'MERGE';
+    
     // Misc
     const EMPTY_STRING       = '';
     const SEPARATOR          = ',';
@@ -114,10 +117,11 @@ class Resources
     const EMULATOR_BLOB_URI  = '127.0.0.1:10000';
     const EMULATOR_QUEUE_URI = '127.0.0.1:10001';
     const EMULATOR_TABLE_URI = '127.0.0.1:10002';
+    const ASTERISK           = '*';
 
     // Header values
     const API_VERSION                    = '2011-08-18';
-    const DATA_SERVICE_VERSION_VALUE     = '2.0;NetFx';
+    const DATA_SERVICE_VERSION_VALUE     = '1.0;NetFx';
     const MAX_DATA_SERVICE_VERSION_VALUE = '2.0;NetFx';
     const ACCEPT_HEADER_VALUE            = 'application/atom+xml,application/xml';
     const ACCEPT_CHARSET_VALUE           = 'utf-8';

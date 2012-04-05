@@ -29,6 +29,7 @@ use PEAR2\WindowsAzure\Core\InvalidArgumentTypeException;
 use PEAR2\WindowsAzure\Resources;
 use PEAR2\WindowsAzure\Services\Queue\QueueSettings;
 use PEAR2\WindowsAzure\Services\Blob\BlobSettings;
+use PEAR2\WindowsAzure\Services\Table\TableSettings;
 
 /**
  * Contains configuration used to access azure storage accounts. 

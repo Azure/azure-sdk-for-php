@@ -154,33 +154,29 @@ interface ITable extends FilterableService
      * Updates an existing entity in a table. The Update Entity operation replaces 
      * the entire entity and can be used to remove properties.
      * 
-     * @param string                     $table   name of the table
-     * @param string                     $match   the matching condition. To force an
-     * unconditional update, set If-Match to the wildcard character (*)
-     * @param Models\Entity              $entity  table entity
-     * @param Models\TableServiceOptions $options optional parameters
+     * @param string                     $table   The table name.
+     * @param Models\Entity              $entity  The table entity.
+     * @param Models\TableServiceOptions $options The optional parameters.
      * 
      * @return Models\UpdateEntityResult
      * 
      * @see http://msdn.microsoft.com/en-us/library/windowsazure/dd179427.aspx
      */
-    public function updateEntity($table, $match, $entity, $options = null);
+    public function updateEntity($table, $entity, $options = null);
     
     /**
      * Updates an existing entity by updating the entity's properties. This operation
      * does not replace the existing entity, as the updateEntity operation does.
      * 
-     * @param string                     $table   name of the table
-     * @param string                     $match   the matching condition. To force an
-     * unconditional merge, set $match to the wildcard character (*)
-     * @param Models\Entity              $entity  table entity
-     * @param Models\TableServiceOptions $options optional parameters
+     * @param string                     $table   The table name.
+     * @param Models\Entity              $entity  The table entity.
+     * @param Models\TableServiceOptions $options The optional parameters.
      * 
      * @return Models\UpdateEntityResult
      * 
      * @see http://msdn.microsoft.com/en-us/library/windowsazure/dd179392.aspx
      */
-    public function mergeEntity($table, $match, $entity, $options = null);
+    public function mergeEntity($table, $entity, $options = null);
     
     /**
      * Deletes an existing entity in a table.
