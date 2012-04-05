@@ -97,7 +97,7 @@ spl_autoload_register(
             'pear2\\windowsazure\\services\\blob\\models\\signedidentifier' => '/WindowsAzure/Services/Blob/Models/SignedIdentifier.php',
             'pear2\\windowsazure\\services\\core\\authentication\\sharedkeyauthscheme' => '/WindowsAzure/Services/Core/Authentication/SharedKeyAuthScheme.php',
             'pear2\\windowsazure\\services\\core\\authentication\\storageauthscheme' => '/WindowsAzure/Services/Core/Authentication/StorageAuthScheme.php',
-			'pear2\\windowsazure\\services\\core\\authentication\\tablesharedkeyauthscheme' => '/WindowsAzure/Services/Core/Authentication/TableSharedKeyAuthScheme.php',
+            'pear2\\windowsazure\\services\\core\\authentication\\tablesharedkeyauthscheme' => '/WindowsAzure/Services/Core/Authentication/TableSharedKeyAuthScheme.php',
             'pear2\\windowsazure\\services\\core\\authentication\\tablesharedkeyliteauthscheme' => '/WindowsAzure/Services/Core/Authentication/TableSharedKeyLiteAuthScheme.php',
             'pear2\\windowsazure\\services\\core\\configuration' => '/WindowsAzure/Services/Core/Configuration.php',
             'pear2\\windowsazure\\services\\core\\filterableservice' => '/WindowsAzure/Services/Core/FilterableService.php',
