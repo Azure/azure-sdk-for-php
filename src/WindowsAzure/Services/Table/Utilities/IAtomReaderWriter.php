@@ -72,6 +72,15 @@ interface IAtomReaderWriter
      * @return Models\Entity
      */
     public static function parseEntity($body);
+    
+    /**
+     * Constructs array of entities from HTTP response body.
+     * 
+     * @param string $body The HTTP response body.
+     * 
+     * @return array
+     */
+    public static function parseEntities($body);
 }
 
 ?>

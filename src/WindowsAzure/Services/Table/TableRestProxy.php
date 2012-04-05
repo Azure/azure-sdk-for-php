@@ -34,6 +34,8 @@ use PEAR2\WindowsAzure\Services\Table\Models\Filters\Filter;
 use PEAR2\WindowsAzure\Services\Table\Models\QueryTablesOptions;
 use PEAR2\WindowsAzure\Services\Table\Models\QueryTablesResult;
 use PEAR2\WindowsAzure\Services\Table\Models\InsertEntityResult;
+use PEAR2\WindowsAzure\Services\Table\Models\QueryEntitiesOptions;
+use PEAR2\WindowsAzure\Services\Table\Models\QueryEntitiesResult;
 
 /**
  * This class constructs HTTP requests and receive HTTP responses for table
@@ -83,8 +85,8 @@ class TableRestProxy extends ServiceRestProxy implements ITable
             return;
         }
         
-        if ($filter instanceof Filters\LitteralFilter) {
-            $e .= $filter->getLitteral();
+        if ($filter instanceof Filters\LiteralFilter) {
+            $e .= $filter->getLiteral();
         } else if ($filter instanceof Filters\ConstantFilter) {
             $e .= '\'' . $filter->getValue() . '\'';
         } else if ($filter instanceof Filters\UnaryFilter) {
@@ -288,11 +290,11 @@ class TableRestProxy extends ServiceRestProxy implements ITable
             // is prefix + '{'
             $prefixFilter = Filter::applyAnd(
                 Filter::applyGe(
-                    Filter::applyLitteral('TableName'),
+                    Filter::applyLiteral('TableName'),
                     Filter::applyConstant($prefix)
                 ),
                 Filter::applyLe(
-                    Filter::applyLitteral('TableName'),
+                    Filter::applyLiteral('TableName'),
                     Filter::applyConstant($prefix . '{')
                 )
             );
@@ -397,7 +399,32 @@ class TableRestProxy extends ServiceRestProxy implements ITable
      */
     public function queryEntities($table, $options = null)
     {
-        throw new \Exception(Resources::NOT_IMPLEMENTED_MSG);
+        Validate::isValidString($table);
+        
+        $method      = \HTTP_Request2::METHOD_GET;
+        $headers     = array();
+        $queryParams = array();
+        $statusCode  = Resources::STATUS_OK;
+        $path        = $table;
+        
+        if (is_null($options)) {
+            $options = new QueryEntitiesOptions();
+        }
+        
+        $encodedPK = $this->_encodeODataUriValue($options->getNextPartitionKey());
+        $encodedRK = $this->_encodeODataUriValue($options->getNextRowKey());
+        
+        $queryParams = $this->_addOptionalQuery($queryParams, $options->getQuery());
+        
+        $queryParams[Resources::QP_TIMEOUT] = strval($options->getTimeout());
+        $queryParams[Resources::QP_NEXT_PK] = $encodedPK;
+        $queryParams[Resources::QP_NEXT_RK] = $encodedRK;
+        $headers[Resources::CONTENT_TYPE]   = Resources::XML_ATOM_CONTENT_TYPE;
+        
+        $response = $this->send($method, $headers, $queryParams, $path, $statusCode);
+        $entities = $this->_atomSerializer->parseEntities($response->getBody());
+        
+        return QueryEntitiesResult::create($response->getHeader(), $entities);
     }
     
     /**

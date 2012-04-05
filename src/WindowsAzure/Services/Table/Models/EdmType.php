@@ -107,18 +107,20 @@ class EdmType
      */
     public static function isValid($type)
     {
-        if (   $type == self::DATETIME
-            || $type == self::BINARY
-            || $type == self::BOOLEAN
-            || $type == self::DOUBLE
-            || $type == self::GUID
-            || $type == self::INT32
-            || $type == self::INT64
-            || $type == self::STRING
-        ) {
+        switch($type) {
+        case $type == self::DATETIME:
+        case $type == self::BINARY:
+        case $type == self::BOOLEAN:
+        case $type == self::DOUBLE:
+        case $type == self::GUID:
+        case $type == self::INT32:
+        case $type == self::INT64:
+        case $type == self::STRING:
             return true;
-        } else {
+        
+        default:
             return false;
+                
         }
     }
 }
