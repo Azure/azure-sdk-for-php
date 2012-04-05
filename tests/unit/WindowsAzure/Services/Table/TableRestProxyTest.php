@@ -444,6 +444,72 @@ class TableRestProxyTest extends TableRestProxyTestBase
         $this->assertEquals($expected->getRowKey(), $actual->getRowKey());
         $this->assertCount(count($expected->getProperties()), $actual->getProperties());
     }
+    
+    /**
+     * @covers PEAR2\WindowsAzure\Services\Table\TableRestProxy::insertOrReplaceEntity
+     * @covers PEAR2\WindowsAzure\Services\Table\TableRestProxy::_getEntityPath
+     * @covers PEAR2\WindowsAzure\Services\Table\TableRestProxy::_putOrMergeEntityImpl
+     * @covers PEAR2\WindowsAzure\Services\Table\Utilities\AtomReaderWriter::_parseBody
+     * @covers PEAR2\WindowsAzure\Services\Table\Utilities\AtomReaderWriter::getEntity
+     * @covers PEAR2\WindowsAzure\Services\Table\Utilities\AtomReaderWriter::_generatePropertiesXml
+     * @covers PEAR2\WindowsAzure\Services\Table\Models\UpdateEntityResult::create
+     */
+    public function testInsertOrReplaceEntity()
+    {
+        // Setup
+        $name = 'insertorreplaceentity';
+        $this->createTable($name);
+        $expected = TestResources::getTestEntity('123', '456');
+        $this->wrapper->insertEntity($name, $expected);
+        $result = $this->wrapper->queryEntities($name);
+        $entities = $result->getEntities();
+        $expected = $entities[0];
+        $expected->newProperty('CustomerPlace', EdmType::STRING, 'Redmond');
+        
+        // Test
+        $this->wrapper->InsertOrReplaceEntity($name, $expected);
+        
+        // Assert
+        $result = $this->wrapper->queryEntities($name);
+        $entities = $result->getEntities();
+        $actual = $entities[0];
+        $this->assertEquals($expected->getPartitionKey(), $actual->getPartitionKey());
+        $this->assertEquals($expected->getRowKey(), $actual->getRowKey());
+        $this->assertCount(count($expected->getProperties()), $actual->getProperties());
+    }
+    
+    /**
+     * @covers PEAR2\WindowsAzure\Services\Table\TableRestProxy::InsertOrMergeEntity
+     * @covers PEAR2\WindowsAzure\Services\Table\TableRestProxy::_getEntityPath
+     * @covers PEAR2\WindowsAzure\Services\Table\TableRestProxy::_putOrMergeEntityImpl
+     * @covers PEAR2\WindowsAzure\Services\Table\Utilities\AtomReaderWriter::_parseBody
+     * @covers PEAR2\WindowsAzure\Services\Table\Utilities\AtomReaderWriter::getEntity
+     * @covers PEAR2\WindowsAzure\Services\Table\Utilities\AtomReaderWriter::_generatePropertiesXml
+     * @covers PEAR2\WindowsAzure\Services\Table\Models\UpdateEntityResult::create
+     */
+    public function testInsertOrMergeEntity()
+    {
+        // Setup
+        $name = 'insertormergeentity';
+        $this->createTable($name);
+        $expected = TestResources::getTestEntity('123', '456');
+        $this->wrapper->insertEntity($name, $expected);
+        $result = $this->wrapper->queryEntities($name);
+        $entities = $result->getEntities();
+        $expected = $entities[0];
+        $expected->newProperty('CustomerPhone', EdmType::STRING, '99999999');
+        
+        // Test
+        $this->wrapper->InsertOrMergeEntity($name, $expected);
+        
+        // Assert
+        $result = $this->wrapper->queryEntities($name);
+        $entities = $result->getEntities();
+        $actual = $entities[0];
+        $this->assertEquals($expected->getPartitionKey(), $actual->getPartitionKey());
+        $this->assertEquals($expected->getRowKey(), $actual->getRowKey());
+        $this->assertCount(count($expected->getProperties()), $actual->getProperties());
+    }
 }
 
 ?>

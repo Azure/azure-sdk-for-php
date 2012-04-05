@@ -550,7 +550,13 @@ class TableRestProxy extends ServiceRestProxy implements ITable
      */
     public function insertOrMergeEntity($table, $entity, $options = null)
     {
-        throw new \Exception(Resources::NOT_IMPLEMENTED_MSG);
+        $this->_putOrMergeEntityImpl(
+            $table,
+            $entity,
+            Resources::HTTP_MERGE,
+            false, 
+            $options
+        );
     }
     
     /**
@@ -567,7 +573,13 @@ class TableRestProxy extends ServiceRestProxy implements ITable
      */
     public function insertOrReplaceEntity($table, $entity, $options = null)
     {
-        throw new \Exception(Resources::NOT_IMPLEMENTED_MSG);
+        $this->_putOrMergeEntityImpl(
+            $table,
+            $entity,
+            \HTTP_Request2::METHOD_PUT,
+            false, 
+            $options
+        );
     }
     
     /**
