@@ -255,7 +255,6 @@ class TableRestProxyTest extends TableRestProxyTestBase
         $actual = $result->getEntity();
         $this->assertEquals($expected->getPartitionKey(), $actual->getPartitionKey());
         $this->assertEquals($expected->getRowKey(), $actual->getRowKey());
-        // Decrease the expected count with 1 because one entry has null value so it'll be ignored.
         $this->assertCount(count($expected->getProperties()), $actual->getProperties());
     }
     
@@ -540,6 +539,32 @@ class TableRestProxyTest extends TableRestProxyTestBase
         $result = $this->wrapper->queryEntities($name);
         $entities = $result->getEntities();
         $this->assertCount(0, $entities);
+    }
+    
+    /**
+     * @covers PEAR2\WindowsAzure\Services\Table\TableRestProxy::getEntity
+     * @covers PEAR2\WindowsAzure\Services\Table\Utilities\AtomReaderWriter::_parseBody
+     * @covers PEAR2\WindowsAzure\Services\Table\Utilities\AtomReaderWriter::parseEntity
+     * @covers PEAR2\WindowsAzure\Services\Table\Utilities\AtomReaderWriter::_parseOneEntity
+     */
+    public function testGetEntity()
+    {
+        // Setup
+        $name = 'getentity';
+        $this->createTable($name);
+        $pk = '123';
+        $rk = '456';
+        $expected = TestResources::getTestEntity($pk, $rk);
+        $this->wrapper->insertEntity($name, $expected);
+        
+        // Test
+        $result = $this->wrapper->getEntity($name, $pk, $rk);
+        
+        // Assert
+        $actual = $result->getEntity();
+        $this->assertEquals($expected->getPartitionKey(), $actual->getPartitionKey());
+        $this->assertEquals($expected->getRowKey(), $actual->getRowKey());
+        $this->assertCount(count($expected->getProperties()), $actual->getProperties());
     }
 }
 

@@ -38,6 +38,7 @@ use PEAR2\WindowsAzure\Services\Table\Models\UpdateEntityResult;
 use PEAR2\WindowsAzure\Services\Table\Models\QueryEntitiesOptions;
 use PEAR2\WindowsAzure\Services\Table\Models\QueryEntitiesResult;
 use PEAR2\WindowsAzure\Services\Table\Models\DeleteEntityOptions;
+use PEAR2\WindowsAzure\Services\Table\Models\GetEntityResult;
 
 /**
  * This class constructs HTTP requests and receive HTTP responses for table
@@ -533,9 +534,8 @@ class TableRestProxy extends ServiceRestProxy implements ITable
         $response = $this->send(
             $method, $headers, $queryParams, $path, $statusCode, $body
         );
-        
-        $entity = $this->_atomSerializer->parseEntity($response->getBody());
-        $result = new InsertEntityResult();
+        $entity   = $this->_atomSerializer->parseEntity($response->getBody());
+        $result   = new InsertEntityResult();
         $result->setEntity($entity);
         
         return $result;
@@ -684,7 +684,29 @@ class TableRestProxy extends ServiceRestProxy implements ITable
      */
     public function getEntity($table, $partitionKey, $rowKey, $options = null)
     {
-        throw new \Exception(Resources::NOT_IMPLEMENTED_MSG);
+        Validate::isValidString($table);
+        Validate::isValidString($partitionKey);
+        Validate::isValidString($rowKey);
+        
+        $method      = \HTTP_Request2::METHOD_GET;
+        $headers     = array();
+        $queryParams = array();
+        $statusCode  = Resources::STATUS_OK;
+        $path        = $this->_getEntityPath($table, $partitionKey, $rowKey);
+        
+        if (is_null($options)) {
+            $options = new TableServiceOptions();
+        }
+        
+        $queryParams[Resources::QP_TIMEOUT] = strval($options->getTimeout());
+        $headers[Resources::CONTENT_TYPE]   = Resources::XML_ATOM_CONTENT_TYPE;
+        
+        $response = $this->send($method, $headers, $queryParams, $path, $statusCode);
+        $entity   = $this->_atomSerializer->parseEntity($response->getBody());
+        $result   = new GetEntityResult();
+        $result->setEntity($entity);
+        
+        return $result;
     }
     
     /**
