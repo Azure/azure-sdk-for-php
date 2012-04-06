@@ -195,7 +195,7 @@ interface ITable extends FilterableService
     /**
      * Gets table entity.
      * 
-     * @param string                     $table        The Name of the table.
+     * @param string                     $table        The name of the table.
      * @param string                     $partitionKey The entity partition key.
      * @param string                     $rowKey       The entity row key.
      * @param Models\TableServiceOptions $options      The optional parameters.
