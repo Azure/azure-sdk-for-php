@@ -181,28 +181,24 @@ interface ITable extends FilterableService
     /**
      * Deletes an existing entity in a table.
      * 
-     * @param string                     $table        name of the table
-     * @param string                     $partitionKey the entity partition key
-     * @param string                     $rowKey       the entity row key
-     * @param string                     $match        the matching condition.
-     * To force an unconditional delete, set $match to the wildcard character (*)
-     * @param Models\DeleteEntityOptions $options      optional parameters
+     * @param string                     $table        The name of the table.
+     * @param string                     $partitionKey The entity partition key.
+     * @param string                     $rowKey       The entity row key.
+     * @param Models\DeleteEntityOptions $options      The optional parameters.
      * 
      * @return none
      * 
      * @see http://msdn.microsoft.com/en-us/library/windowsazure/dd135727.aspx
      */
-    public function deleteEntity($table, $partitionKey, $rowKey, $match,
-        $options = null
-    );
+    public function deleteEntity($table, $partitionKey, $rowKey, $options = null);
     
     /**
-     * Gets table entity
+     * Gets table entity.
      * 
-     * @param string                     $table        name of the table
-     * @param string                     $partitionKey the entity partition key
-     * @param string                     $rowKey       the entity row key
-     * @param Models\DeleteEntityOptions $options      optional parameters
+     * @param string                     $table        The Name of the table.
+     * @param string                     $partitionKey The entity partition key.
+     * @param string                     $rowKey       The entity row key.
+     * @param Models\TableServiceOptions $options      The optional parameters.
      * 
      * @return Models\GetEntityResult
      * 

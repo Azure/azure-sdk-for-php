@@ -37,6 +37,7 @@ use PEAR2\WindowsAzure\Services\Table\Models\InsertEntityResult;
 use PEAR2\WindowsAzure\Services\Table\Models\UpdateEntityResult;
 use PEAR2\WindowsAzure\Services\Table\Models\QueryEntitiesOptions;
 use PEAR2\WindowsAzure\Services\Table\Models\QueryEntitiesResult;
+use PEAR2\WindowsAzure\Services\Table\Models\DeleteEntityOptions;
 
 /**
  * This class constructs HTTP requests and receive HTTP responses for table
@@ -88,14 +89,13 @@ class TableRestProxy extends ServiceRestProxy implements ITable
         Validate::notNullOrEmpty($entity);
         Validate::isTrue($entity->isValid(), Resources::INVALID_ENTITY_MSG);
         
-        $ETag        = false;
         $method      = $verb;
         $headers     = array();
         $queryParams = array();
         $statusCode  = Resources::STATUS_NO_CONTENT;
         $pk          = $entity->getPartitionKey();
         $rk          = $entity->getRowKey();
-        $etag        = $entity->getEtag();
+        $etagObj     = $entity->getEtag();
         $path        = $this->_getEntityPath($table, $pk, $rk);
         $body        = $this->_atomSerializer->getEntity($entity);
         
@@ -105,7 +105,7 @@ class TableRestProxy extends ServiceRestProxy implements ITable
         
         $queryParams[Resources::QP_TIMEOUT] = strval($options->getTimeout());
         $headers[Resources::CONTENT_TYPE]   = Resources::XML_ATOM_CONTENT_TYPE;
-        $headers[Resources::IF_MATCH]       = $ETag ? $etag : Resources::ASTERISK;
+        $headers[Resources::IF_MATCH]       = $ETag ? $etagObj : Resources::ASTERISK;
         
         $response = $this->send(
             $method, $headers, $queryParams, $path, $statusCode, $body
@@ -631,30 +631,47 @@ class TableRestProxy extends ServiceRestProxy implements ITable
     /**
      * Deletes an existing entity in a table.
      * 
-     * @param string                     $table        name of the table
-     * @param string                     $partitionKey the entity partition key
-     * @param string                     $rowKey       the entity row key
-     * @param string                     $match        the matching condition.
-     * To force an unconditional delete, set $match to the wildcard character (*)
-     * @param Models\DeleteEntityOptions $options      optional parameters
+     * @param string                     $table        The name of the table.
+     * @param string                     $partitionKey The entity partition key.
+     * @param string                     $rowKey       The entity row key.
+     * @param Models\DeleteEntityOptions $options      The optional parameters.
      * 
      * @return none
      * 
      * @see http://msdn.microsoft.com/en-us/library/windowsazure/dd135727.aspx
      */
-    public function deleteEntity($table, $partitionKey, $rowKey, $match,
-        $options = null
-    ) {
-        throw new \Exception(Resources::NOT_IMPLEMENTED_MSG);
+    public function deleteEntity($table, $partitionKey, $rowKey, $options = null)
+    {
+        Validate::isValidString($table);
+        Validate::isValidString($partitionKey);
+        Validate::isValidString($rowKey);
+        
+        $method      = \HTTP_Request2::METHOD_DELETE;
+        $headers     = array();
+        $queryParams = array();
+        $statusCode  = Resources::STATUS_NO_CONTENT;
+        $path        = $this->_getEntityPath($table, $partitionKey, $rowKey);
+        
+        if (is_null($options)) {
+            $options = new DeleteEntityOptions();
+        }
+        
+        $etagObj                            = $options->getEtag();
+        $ETag                               = !is_null($etagObj);
+        $queryParams[Resources::QP_TIMEOUT] = strval($options->getTimeout());
+        $headers[Resources::CONTENT_TYPE]   = Resources::XML_ATOM_CONTENT_TYPE;
+        $headers[Resources::IF_MATCH]       = $ETag ? $etagObj : Resources::ASTERISK;
+        
+        $this->send($method, $headers, $queryParams, $path, $statusCode);
     }
     
     /**
-     * Gets table entity
+     * Gets table entity.
      * 
-     * @param string                     $table        name of the table
-     * @param string                     $partitionKey the entity partition key
-     * @param string                     $rowKey       the entity row key
-     * @param Models\DeleteEntityOptions $options      optional parameters
+     * @param string                     $table        The Name of the table.
+     * @param string                     $partitionKey The entity partition key.
+     * @param string                     $rowKey       The entity row key.
+     * @param Models\TableServiceOptions $options      The optional parameters.
      * 
      * @return Models\GetEntityResult
      * 
