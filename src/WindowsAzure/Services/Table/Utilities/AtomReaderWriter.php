@@ -220,10 +220,11 @@ class AtomReaderWriter implements IAtomReaderWriter
                 </m:properties>
             </content>
         </entry>';
-        
-        $xml = self::_fillTemplate(
+     
+        $edmDate = Utilities::convertToEdmDateTime($entity->getTimestamp());
+        $xml     = self::_fillTemplate(
             $xml, array(
-                'Updated'    => Utilities::isoDate(),
+                'Updated'    => $edmDate,
                 'Properties' => self::_generatePropertiesXml($entity)
             )
         );

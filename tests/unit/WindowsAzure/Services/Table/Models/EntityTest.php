@@ -25,6 +25,7 @@ namespace PEAR2\Tests\Unit\WindowsAzure\Services\Table\Models;
 use PEAR2\WindowsAzure\Services\Table\Models\Entity;
 use PEAR2\WindowsAzure\Services\Table\Models\Property;
 use PEAR2\WindowsAzure\Services\Table\Models\EdmType;
+use PEAR2\WindowsAzure\Utilities;
 
 /**
  * Unit tests for class Entity
@@ -114,7 +115,7 @@ class EntityTest extends \PHPUnit_Framework_TestCase
     {
         // Setup
         $entity = new Entity();
-        $expected = '1234';
+        $expected = Utilities::convertToDateTime(Utilities::isoDate());
         
         // Test
         $entity->setTimestamp($expected);

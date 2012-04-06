@@ -34,6 +34,7 @@ use PEAR2\WindowsAzure\Services\Table\Models\Filters\Filter;
 use PEAR2\WindowsAzure\Services\Table\Models\QueryTablesOptions;
 use PEAR2\WindowsAzure\Services\Table\Models\QueryTablesResult;
 use PEAR2\WindowsAzure\Services\Table\Models\InsertEntityResult;
+use PEAR2\WindowsAzure\Services\Table\Models\UpdateEntityResult;
 use PEAR2\WindowsAzure\Services\Table\Models\QueryEntitiesOptions;
 use PEAR2\WindowsAzure\Services\Table\Models\QueryEntitiesResult;
 
@@ -55,6 +56,63 @@ class TableRestProxy extends ServiceRestProxy implements ITable
      * @var IAtomReaderWriter
      */
     private $_atomSerializer;
+    
+    /**
+     * Constructs URI path for entity.
+     * 
+     * @param string $table The table name.
+     * @param string $pk    The entity's partition key.
+     * @param string $rk    The entity's row key.
+     * 
+     * @return string 
+     */
+    private function _getEntityPath($table, $pk, $rk)
+    {
+        return "$table(PartitionKey='$pk',RowKey='$rk')";
+    }
+    
+    /**
+     * Does actual work for update and merge entity APIs
+     * 
+     * @param string                     $table   The table name.
+     * @param Models\Entity              $entity  The entity instance to use.
+     * @param string                     $verb    The HTTP method.
+     * @param boolean                    $ETag    The flag to include tag or not.
+     * @param Models\TableServiceOptions $options The optional parameters.
+     * 
+     * @return Models\UpdateEntityResult
+     */
+    private function _putOrMergeEntityImpl($table, $entity, $verb, $ETag, $options)
+    {
+        Validate::isValidString($table);
+        Validate::notNullOrEmpty($entity);
+        Validate::isTrue($entity->isValid(), Resources::INVALID_ENTITY_MSG);
+        
+        $ETag        = false;
+        $method      = $verb;
+        $headers     = array();
+        $queryParams = array();
+        $statusCode  = Resources::STATUS_NO_CONTENT;
+        $pk          = $entity->getPartitionKey();
+        $rk          = $entity->getRowKey();
+        $etag        = $entity->getEtag();
+        $path        = $this->_getEntityPath($table, $pk, $rk);
+        $body        = $this->_atomSerializer->getEntity($entity);
+        
+        if (is_null($options)) {
+            $options = new TableServiceOptions();
+        }
+        
+        $queryParams[Resources::QP_TIMEOUT] = strval($options->getTimeout());
+        $headers[Resources::CONTENT_TYPE]   = Resources::XML_ATOM_CONTENT_TYPE;
+        $headers[Resources::IF_MATCH]       = $ETag ? $etag : Resources::ASTERISK;
+        
+        $response = $this->send(
+            $method, $headers, $queryParams, $path, $statusCode, $body
+        );
+        
+        return UpdateEntityResult::create($response->getHeader());
+    }
  
     /**
      * Builds filter expression
@@ -411,15 +469,24 @@ class TableRestProxy extends ServiceRestProxy implements ITable
             $options = new QueryEntitiesOptions();
         }
         
-        $encodedPK = $this->_encodeODataUriValue($options->getNextPartitionKey());
-        $encodedRK = $this->_encodeODataUriValue($options->getNextRowKey());
-        
+        $encodedPK   = $this->_encodeODataUriValue($options->getNextPartitionKey());
+        $encodedRK   = $this->_encodeODataUriValue($options->getNextRowKey());
         $queryParams = $this->_addOptionalQuery($queryParams, $options->getQuery());
         
         $queryParams[Resources::QP_TIMEOUT] = strval($options->getTimeout());
         $queryParams[Resources::QP_NEXT_PK] = $encodedPK;
         $queryParams[Resources::QP_NEXT_RK] = $encodedRK;
         $headers[Resources::CONTENT_TYPE]   = Resources::XML_ATOM_CONTENT_TYPE;
+        
+        if (!is_null($options->getQuery())) {
+            $dsHeader   = Resources::DATA_SERVICE_VERSION;
+            $maxdsValue = Resources::MAX_DATA_SERVICE_VERSION_VALUE;
+            $fields     = $options->getQuery()->getSelectFields();
+            $hasSelect  = !empty($fields);
+            if ($hasSelect) {
+                $headers[$dsHeader] = $maxdsValue;
+            }
+        }
         
         $response = $this->send($method, $headers, $queryParams, $path, $statusCode);
         $entities = $this->_atomSerializer->parseEntities($response->getBody());
@@ -483,7 +550,13 @@ class TableRestProxy extends ServiceRestProxy implements ITable
      */
     public function insertOrMergeEntity($table, $entity, $options = null)
     {
-        throw new \Exception(Resources::NOT_IMPLEMENTED_MSG);
+        $this->_putOrMergeEntityImpl(
+            $table,
+            $entity,
+            Resources::HTTP_MERGE,
+            false, 
+            $options
+        );
     }
     
     /**
@@ -500,45 +573,59 @@ class TableRestProxy extends ServiceRestProxy implements ITable
      */
     public function insertOrReplaceEntity($table, $entity, $options = null)
     {
-        throw new \Exception(Resources::NOT_IMPLEMENTED_MSG);
+        $this->_putOrMergeEntityImpl(
+            $table,
+            $entity,
+            \HTTP_Request2::METHOD_PUT,
+            false, 
+            $options
+        );
     }
     
     /**
      * Updates an existing entity in a table. The Update Entity operation replaces 
      * the entire entity and can be used to remove properties.
      * 
-     * @param string                     $table   name of the table
-     * @param string                     $match   the matching condition. To force an
-     * unconditional update, set If-Match to the wildcard character (*)
-     * @param Models\Entity              $entity  table entity
-     * @param Models\TableServiceOptions $options optional parameters
+     * @param string                     $table   The table name.
+     * @param Models\Entity              $entity  The table entity.
+     * @param Models\TableServiceOptions $options The optional parameters.
      * 
      * @return Models\UpdateEntityResult
      * 
      * @see http://msdn.microsoft.com/en-us/library/windowsazure/dd179427.aspx
      */
-    public function updateEntity($table, $match, $entity, $options = null)
+    public function updateEntity($table, $entity, $options = null)
     {
-        throw new \Exception(Resources::NOT_IMPLEMENTED_MSG);
+        $this->_putOrMergeEntityImpl(
+            $table,
+            $entity,
+            \HTTP_Request2::METHOD_PUT,
+            true, 
+            $options
+        );
     }
     
     /**
      * Updates an existing entity by updating the entity's properties. This operation
      * does not replace the existing entity, as the updateEntity operation does.
      * 
-     * @param string                     $table   name of the table
-     * @param string                     $match   the matching condition. To force an
-     * unconditional merge, set $match to the wildcard character (*)
-     * @param Models\Entity              $entity  table entity
-     * @param Models\TableServiceOptions $options optional parameters
+     * @param string                     $table   The table name.
+     * @param Models\Entity              $entity  The table entity.
+     * @param Models\TableServiceOptions $options The optional parameters.
      * 
      * @return Models\UpdateEntityResult
      * 
      * @see http://msdn.microsoft.com/en-us/library/windowsazure/dd179392.aspx
      */
-    public function mergeEntity($table, $match, $entity, $options = null)
+    public function mergeEntity($table, $entity, $options = null)
     {
-        throw new \Exception(Resources::NOT_IMPLEMENTED_MSG);
+        $this->_putOrMergeEntityImpl(
+            $table,
+            $entity,
+            Resources::HTTP_MERGE,
+            true, 
+            $options
+        );
     }
     
     /**
