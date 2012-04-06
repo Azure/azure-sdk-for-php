@@ -131,6 +131,7 @@ spl_autoload_register(
             'pear2\\windowsazure\\services\\queue\\queueservice' => '/WindowsAzure/Services/Queue/QueueService.php',
             'pear2\\windowsazure\\services\\queue\\queuesettings' => '/WindowsAzure/Services/Queue/QueueSettings.php',
             'pear2\\windowsazure\\services\\table\\itable' => '/WindowsAzure/Services/Table/ITable.php',
+            'pear2\\windowsazure\\services\\table\\models\\deleteentityoptions' => '/WindowsAzure/Services/Table/Models/DeleteEntityOptions.php',
             'pear2\\windowsazure\\services\\table\\models\\edmtype' => '/WindowsAzure/Services/Table/Models/EdmType.php',
             'pear2\\windowsazure\\services\\table\\models\\entity' => '/WindowsAzure/Services/Table/Models/Entity.php',
             'pear2\\windowsazure\\services\\table\\models\\filters\\binaryfilter' => '/WindowsAzure/Services/Table/Models/Filters/BinaryFilter.php',
