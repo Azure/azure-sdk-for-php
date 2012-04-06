@@ -73,31 +73,36 @@ class TableRestProxy extends ServiceRestProxy implements ITable
     }
     
     /**
-     * Does actual work for update and merge entity APIs
+     * Does actual work for update and merge entity APIs.
      * 
      * @param string                     $table   The table name.
      * @param Models\Entity              $entity  The entity instance to use.
      * @param string                     $verb    The HTTP method.
-     * @param boolean                    $ETag    The flag to include tag or not.
+     * @param boolean                    $useETag The flag to include etag or not.
      * @param Models\TableServiceOptions $options The optional parameters.
      * 
      * @return Models\UpdateEntityResult
      */
-    private function _putOrMergeEntityImpl($table, $entity, $verb, $ETag, $options)
-    {
+    private function _putOrMergeEntityImpl($table, $entity, $verb, $useETag,
+        $options
+    ) {
         Validate::isValidString($table);
         Validate::notNullOrEmpty($entity);
         Validate::isTrue($entity->isValid(), Resources::INVALID_ENTITY_MSG);
         
-        $method      = $verb;
-        $headers     = array();
-        $queryParams = array();
-        $statusCode  = Resources::STATUS_NO_CONTENT;
-        $pk          = $entity->getPartitionKey();
-        $rk          = $entity->getRowKey();
-        $etagObj     = $entity->getEtag();
-        $path        = $this->_getEntityPath($table, $pk, $rk);
-        $body        = $this->_atomSerializer->getEntity($entity);
+        if ($useETag) {
+            Validate::notNullOrEmpty($entity->getEtag());
+        }
+        
+        $method       = $verb;
+        $headers      = array();
+        $queryParams  = array();
+        $statusCode   = Resources::STATUS_NO_CONTENT;
+        $pk           = $entity->getPartitionKey();
+        $rk           = $entity->getRowKey();
+        $path         = $this->_getEntityPath($table, $pk, $rk);
+        $body         = $this->_atomSerializer->getEntity($entity);
+        $ifMatchValue = $useETag ? $entity->getEtag() : Resources::ASTERISK;
         
         if (is_null($options)) {
             $options = new TableServiceOptions();
@@ -105,7 +110,7 @@ class TableRestProxy extends ServiceRestProxy implements ITable
         
         $queryParams[Resources::QP_TIMEOUT] = strval($options->getTimeout());
         $headers[Resources::CONTENT_TYPE]   = Resources::XML_ATOM_CONTENT_TYPE;
-        $headers[Resources::IF_MATCH]       = $ETag ? $etagObj : Resources::ASTERISK;
+        $headers[Resources::IF_MATCH]       = $ifMatchValue;
         
         $response = $this->send(
             $method, $headers, $queryParams, $path, $statusCode, $body
