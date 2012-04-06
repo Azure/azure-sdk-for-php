@@ -369,7 +369,7 @@ class TestResources
         $entity->setRowKey($rk);
         $entity->setTimestamp(Utilities::isoDate());
         $entity->newProperty('CustomerId', EdmType::INT32, '890');
-        $entity->newProperty('CustomerName', null, null);
+        $entity->newProperty('CustomerName', null, 'John');
         $entity->newProperty('IsNew', EdmType::BOOLEAN, true);
         $entity->newProperty('JoinDate', EdmType::DATETIME, new \DateTime());
         

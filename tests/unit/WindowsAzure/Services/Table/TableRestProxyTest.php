@@ -209,6 +209,10 @@ class TableRestProxyTest extends TableRestProxyTestBase
      */
     public function testQueryTablesWithPrefix()
     {
+        if (WindowsAzureUtilities::isEmulated()) {
+            $this->markTestSkipped(self::NOT_SUPPORTED);
+        }
+        
         // Setup
         $name1 = 'wquerytableswithprefix1';
         $name2 = 'querytableswithprefix2';
@@ -252,7 +256,7 @@ class TableRestProxyTest extends TableRestProxyTestBase
         $this->assertEquals($expected->getPartitionKey(), $actual->getPartitionKey());
         $this->assertEquals($expected->getRowKey(), $actual->getRowKey());
         // Decrease the expected count with 1 because one entry has null value so it'll be ignored.
-        $this->assertCount(count($expected->getProperties()) - 1, $actual->getProperties());
+        $this->assertCount(count($expected->getProperties()), $actual->getProperties());
     }
     
     /**
@@ -311,6 +315,10 @@ class TableRestProxyTest extends TableRestProxyTestBase
      */
     public function testQueryEntitiesWithMultipleEntities()
     {
+        if (WindowsAzureUtilities::isEmulated()) {
+            $this->markTestSkipped(self::NOT_SUPPORTED);
+        }
+        
         // Setup
         $name = 'queryentitieswithmultipleentities';
         $pk1 = '123';
@@ -509,6 +517,29 @@ class TableRestProxyTest extends TableRestProxyTestBase
         $this->assertEquals($expected->getPartitionKey(), $actual->getPartitionKey());
         $this->assertEquals($expected->getRowKey(), $actual->getRowKey());
         $this->assertCount(count($expected->getProperties()), $actual->getProperties());
+    }
+    
+    /**
+     * @covers PEAR2\WindowsAzure\Services\Table\TableRestProxy::deleteEntity
+     * @covers PEAR2\WindowsAzure\Services\Table\TableRestProxy::_getEntityPath
+     */
+    public function testDeleteEntity()
+    {
+        // Setup
+        $name = 'deleteentity';
+        $this->createTable($name);
+        $pk = '123';
+        $rk = '456';
+        $entity = TestResources::getTestEntity($pk, $rk);
+        $result = $this->wrapper->insertEntity($name, $entity);
+        
+        // Test
+        $this->wrapper->deleteEntity($name, $pk, $rk);
+        
+        // Assert
+        $result = $this->wrapper->queryEntities($name);
+        $entities = $result->getEntities();
+        $this->assertCount(0, $entities);
     }
 }
 
