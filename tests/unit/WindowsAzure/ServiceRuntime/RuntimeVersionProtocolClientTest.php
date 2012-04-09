@@ -31,7 +31,7 @@ use PEAR2\WindowsAzure\Resources;
 require_once 'vfsStream/vfsStream.php';
 
 /**
- * Unit tests for class RuntimeVersionProtocolClient
+ * Unit tests for class RuntimeVersionProtocolClient.
  *
  * @category  Microsoft
  * @package   PEAR2\Tests\Unit\WindowsAzure\ServiceRuntime

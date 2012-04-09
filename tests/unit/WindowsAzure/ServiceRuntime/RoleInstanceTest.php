@@ -27,7 +27,7 @@ use PEAR2\WindowsAzure\ServiceRuntime\Role;
 use PEAR2\WindowsAzure\ServiceRuntime\RoleInstance;
 
 /**
- * Unit tests for class CurrentState
+ * Unit tests for class RoleInstance.
  *
  * @category  Microsoft
  * @package   PEAR2\Tests\Unit\WindowsAzure\ServiceRuntime

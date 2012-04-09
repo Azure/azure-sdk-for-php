@@ -88,7 +88,9 @@ class Protocol1RuntimeCurrentStateClient implements IRuntimeCurrentStateClient
      */
     public function setCurrentState($state)
     {
-        throw new \Exception(Resources::NOT_IMPLEMENTED_MSG);
+        $outputStream = $this->_outputChannel->getOutputStream($this->_endpoint);
+        $this->_serializer->serialize($state, $outputStream);
+        fclose($outputStream);
     }
 }
 

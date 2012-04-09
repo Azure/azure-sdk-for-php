@@ -27,7 +27,7 @@ use PEAR2\WindowsAzure\Core\WindowsAzureUtilities;
 use PEAR2\WindowsAzure\ServiceRuntime\Protocol1RuntimeClientFactory;
 
 /**
- * Unit tests for class Protocol1RuntimeClientFactory
+ * Unit tests for class Protocol1RuntimeClientFactory.
  *
  * @category  Microsoft
  * @package   PEAR2\Tests\Unit\WindowsAzure\ServiceRuntime

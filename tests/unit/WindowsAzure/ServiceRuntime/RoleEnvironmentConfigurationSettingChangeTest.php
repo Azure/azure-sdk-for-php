@@ -15,52 +15,43 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   PEAR2\WindowsAzure\ServiceRuntime
+ * @package   PEAR2\Tests\Unit\WindowsAzure\ServiceRuntime
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
-
-namespace PEAR2\WindowsAzure\ServiceRuntime;
-use PEAR2\WindowsAzure\Resources;
+namespace PEAR2\Tests\Unit\WindowsAzure\ServiceRuntime;
+use PEAR2\Tests\Framework\TestResources;
+use PEAR2\WindowsAzure\Core\WindowsAzureUtilities;
+use PEAR2\WindowsAzure\ServiceRuntime\RoleEnvironmentConfigurationSettingChange;
 
 /**
- * The current state representation.
+ * Unit tests for class RoleEnvironmentConfigurationSettingChange.
  *
  * @category  Microsoft
- * @package   PEAR2\WindowsAzure\ServiceRuntime
+ * @package   PEAR2\Tests\Unit\WindowsAzure\ServiceRuntime
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @version   Release: @package_version@
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
-class CurrentState
+class RoleEnvironmentConfigurationSettingChangeTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @var string
+     * @covers PEAR2\WindowsAzure\ServiceRuntime\RoleEnvironmentConfigurationSettingChange::__construct
+     * @covers PEAR2\WindowsAzure\ServiceRuntime\RoleEnvironmentConfigurationSettingChange::getConfigurationSettingName
      */
-    private $_clientId;
-    
-    /**
-     * Constructor
-     * 
-     * @param string $clientId The client identifier.
-     */
-    public function __construct($clientId)
+    public function testGetConfigurationSettingName()
     {
-        $this->_clientId = $clientId;
-    }
-    
-    /**
-     * Gets the client identifier.
-     * 
-     * @return string
-     */
-    public function getClientId()
-    {
-        return $this->_clientId;
+        $settingName = 'setting';
+        
+        // Setup
+        $roleEnvironmentConfigurationSettingChange = new RoleEnvironmentConfigurationSettingChange($settingName);
+        
+        // Test
+        $this->assertEquals($settingName, $roleEnvironmentConfigurationSettingChange->getConfigurationSettingName());
     }
 }
 

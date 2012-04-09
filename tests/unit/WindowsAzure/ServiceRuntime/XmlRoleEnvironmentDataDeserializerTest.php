@@ -30,7 +30,7 @@ use PEAR2\WindowsAzure\ServiceRuntime\XmlRoleEnvironmentDataDeserializer;
 require_once 'vfsStream/vfsStream.php';
 
 /**
- * Unit tests for class XmlRoleEnvironmentDataDeserializer
+ * Unit tests for class XmlRoleEnvironmentDataDeserializer.
  *
  * @category  Microsoft
  * @package   PEAR2\Tests\Unit\WindowsAzure\ServiceRuntime

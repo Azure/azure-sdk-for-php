@@ -41,7 +41,7 @@ class Utilities
 {
     /**
      * Returns the specified value of the $key passed from $array and in case that
-     * this $key doesn't exist, the default value is retured.
+     * this $key doesn't exist, the default value is returned.
      *
      * @param array $array   Array to be used.
      * @param mixed $key     Array key.
@@ -54,6 +54,33 @@ class Utilities
     public static function tryGetValue($array, $key, $default = null)
     {
         return array_key_exists($key, $array) ? $array[$key] : $default;
+    }
+    
+    /**
+     * Returns the specified value of the key chain passed from $array and in case
+     * that key chain doesn't exist, the default value is returned.
+     *
+     * @param array $array Array to be used.
+     * 
+     * @static
+     * 
+     * @return mixed.
+     */
+    public static function tryGetKeysChainValue($array)
+    {
+        $arguments    = func_get_args();
+        $numArguments = func_num_args();
+        
+        $currentArray = $array;
+        for ($i = 1; $i < $numArguments; $i++) {
+            if (array_key_exists($arguments[$i], $currentArray)) {
+                $currentArray = $currentArray[$arguments[$i]];
+            } else {
+                return null;
+            }
+        }
+        
+        return $currentArray;
     }
     
     /**
@@ -151,8 +178,9 @@ class Utilities
      * 
      * @return string
      */
-    public static function serialize($array, $rootName, $defaultTag = null, $standalone = null)
-    {
+    public static function serialize($array, $rootName, $defaultTag = null, 
+        $standalone = null
+    ) {
         $xmlVersion  = '1.0';
         $xmlEncoding = 'UTF-8';
 
@@ -189,7 +217,11 @@ class Utilities
     private static function _arr2xml(\XMLWriter $xmlw, $data, $defaultTag = null)
     {
         foreach ($data as $key => $value) {
-            if (is_array($value)) {
+            if (strcmp($key, '@attributes') == 0) {
+                foreach ($value as $attributeName => $attributeValue) {
+                    $xmlw->writeAttribute($attributeName, $attributeValue);
+                }
+            } else if (is_array($value)) {
                 if (!is_int($key)) {
                     if ($key != Resources::EMPTY_STRING) {
                         $xmlw->startElement($key);
@@ -255,7 +287,8 @@ class Utilities
     /**
     * Generate ISO 8601 compliant date string in UTC time zone
     * 
-    * @param int $timestamp The time to convert
+    * @param int $timestamp The unix timestamp to convert 
+    *     (for DateTime check date_timestamp_get).
     *
     * @return string
     */

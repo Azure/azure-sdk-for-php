@@ -28,11 +28,12 @@ use PEAR2\WindowsAzure\ServiceRuntime\ChunkedGoalStateDeserializer;
 use PEAR2\WindowsAzure\ServiceRuntime\FileInputChannel;
 use PEAR2\WindowsAzure\ServiceRuntime\Protocol1RuntimeCurrentStateClient;
 use PEAR2\WindowsAzure\ServiceRuntime\Protocol1RuntimeGoalStateClient;
+use PEAR2\WindowsAzure\ServiceRuntime\XmlRoleEnvironmentDataDeserializer;
 
 require_once 'vfsStream/vfsStream.php';
 
 /**
- * Unit tests for class Protocol1RuntimeGoalStateClient
+ * Unit tests for class Protocol1RuntimeGoalStateClient.
  *
  * @category  Microsoft
  * @package   PEAR2\Tests\Unit\WindowsAzure\ServiceRuntime
@@ -91,6 +92,80 @@ class Protocol1RuntimeGoalStateClientTest extends \PHPUnit_Framework_TestCase
         
         // Test
         $this->assertNotEquals(null, $runtimeGoalStateClient->getCurrentGoalState());
+    }
+    
+    /**
+     * @covers PEAR2\WindowsAzure\ServiceRuntime\Protocol1RuntimeGoalStateClient::__construct
+     * @covers PEAR2\WindowsAzure\ServiceRuntime\Protocol1RuntimeGoalStateClient::getRoleEnvironmentData
+     * @covers PEAR2\WindowsAzure\ServiceRuntime\Protocol1RuntimeGoalStateClient::setEndpoint
+     * @covers PEAR2\WindowsAzure\ServiceRuntime\Protocol1RuntimeGoalStateClient::_ensureGoalStateRetrieved
+     */
+    public function testGetRoleEnvironmentData()
+    {
+        // Setup
+        $rootDirectory = 'root';
+
+        \vfsStreamWrapper::register(); 
+        \vfsStreamWrapper::setRoot(new \vfsStreamDirectory($rootDirectory));
+        
+        $roleEnvironmentFileName = 'roleEnvironment';
+        $roleEnvironmentFileContent = '<?xml version="1.0" encoding="utf-8"?>' .
+            '<RoleEnvironment xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" ' .
+            'xmlns:xsd="http://www.w3.org/2001/XMLSchema">' .
+            '<Deployment id="id1" emulated="false" />' .
+            '<CurrentInstance id="geophotoapp_IN_0" roleName="geophotoapp" faultDomain="0" updateDomain="0">' .
+            '<ConfigurationSettings />' .
+            '<LocalResources>' .
+            '<LocalResource name="DiagnosticStore" path="somepath.DiagnosticStore" sizeInMB="4096" />' .
+            '</LocalResources>' .
+            '<Endpoints>' .
+            '<Endpoint name="HttpIn" address="10.114.250.21" port="80" protocol="tcp" />' .
+            '</Endpoints>' .
+            '</CurrentInstance>' .
+            '<Roles />' .
+            '</RoleEnvironment>';
+        
+        $file = \vfsStream::newFile($roleEnvironmentFileName);
+        $file->setContent($roleEnvironmentFileContent); 
+        
+        \vfsStreamWrapper::getRoot()->addChild($file);
+        
+        $goalStateFileName = 'goalstate';
+        $goalStateFileContent = '<?xml version="1.0" encoding="utf-8"?>' .
+            '<GoalState xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" ' .
+            'xmlns:xsd="http://www.w3.org/2001/XMLSchema">' .
+            '<Incarnation>1</Incarnation>' .
+            '<ExpectedState>Started</ExpectedState>' .
+            '<RoleEnvironmentPath>' . 
+            \vfsStream::url($rootDirectory . '/' . $roleEnvironmentFileName) . 
+            '</RoleEnvironmentPath>' .
+            '<CurrentStateEndpoint>\\.\pipe\WindowsAzureRuntime.CurrentState</CurrentStateEndpoint>' .
+            '<Deadline>9999-12-31T23:59:59.9999999</Deadline>' .
+            '</GoalState>';
+
+        $goalStateFileContent = dechex(strlen($goalStateFileContent)) . "\n" . $goalStateFileContent;
+        
+        $file = \vfsStream::newFile($goalStateFileName);
+        $file->setContent($goalStateFileContent); 
+        
+        \vfsStreamWrapper::getRoot()->addChild($file);
+        
+        // Test
+        $fileInputChannel = new FileInputChannel();
+        $goalStateDeserializer = new ChunkedGoalStateDeserializer();
+        $roleEnvironmentDeserializer = new XmlRoleEnvironmentDataDeserializer();
+        $currentStateClient = new Protocol1RuntimeCurrentStateClient(null, null);
+        $runtimeGoalStateClient = new Protocol1RuntimeGoalStateClient(
+            $currentStateClient,
+            $goalStateDeserializer,
+            $roleEnvironmentDeserializer,
+            $fileInputChannel
+        );
+        
+        $runtimeGoalStateClient->setEndpoint(\vfsStream::url($rootDirectory . '/' . $goalStateFileName));
+        
+        // Test
+        $this->assertNotEquals(null, $runtimeGoalStateClient->getRoleEnvironmentData());
     }
 }
 

@@ -198,7 +198,7 @@ class Protocol1RuntimeGoalStateClient implements IRuntimeGoalStateClient
 
         $this->_currentGoalState = $goalState;
 
-        if (is_null($goalState->getEnvironmentPath())) {
+        if (!is_null($goalState->getEnvironmentPath())) {
             $this->_currentEnvironmentData = null;
         }
 
