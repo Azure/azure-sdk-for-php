@@ -149,6 +149,9 @@ class TableServiceIntegrationTest extends IntegrationTestBase {
         return $result;
     }
 
+    /**
+    * @covers PEAR2\WindowsAzure\Services\Queue\QueueRestProxy::getServiceProperties
+    */
     public function testGetServicePropertiesWorks() {
         // Arrange
 
@@ -177,6 +180,10 @@ class TableServiceIntegrationTest extends IntegrationTestBase {
         $this->assertNotNull($props->getMetrics()->getVersion(), '$props->getMetrics()->getVersion');
     }
 
+    /**
+    * @covers PEAR2\WindowsAzure\Services\Queue\QueueRestProxy::getServiceProperties
+    * @covers PEAR2\WindowsAzure\Services\Queue\QueueRestProxy::setServiceProperties
+    */
     public function testSetServicePropertiesWorks() {
         // Arrange
 
@@ -211,6 +218,10 @@ class TableServiceIntegrationTest extends IntegrationTestBase {
         $this->assertNotNull($props->getMetrics()->getVersion(), '$props->getMetrics()->getVersion');
     }
 
+    /**
+    * @covers PEAR2\WindowsAzure\Services\Queue\QueueRestProxy::createTable
+    * @covers PEAR2\WindowsAzure\Services\Queue\QueueRestProxy::getTable
+    */
     public function testCreateTablesWorks() {
         $this->fail("Need to implement getTable");
         // Act
@@ -229,6 +240,11 @@ class TableServiceIntegrationTest extends IntegrationTestBase {
         $this->assertNotNull($result, '$result');
     }
 
+    /**
+    * @covers PEAR2\WindowsAzure\Services\Queue\QueueRestProxy::createTable
+    * @covers PEAR2\WindowsAzure\Services\Queue\QueueRestProxy::deleteTable
+    * @covers PEAR2\WindowsAzure\Services\Queue\QueueRestProxy::getTable
+    */
     public function testDeleteTablesWorks() {
         $this->fail("Need to implement getTable");
 
@@ -250,6 +266,9 @@ class TableServiceIntegrationTest extends IntegrationTestBase {
         $this->assertNotNull($result, '$result');
     }
 
+    /**
+    * @covers PEAR2\WindowsAzure\Services\Queue\QueueRestProxy::queryTables
+    */
     public function testQueryTablesWorks() {
         // Act
         $result = $this->wrapper->queryTables();
@@ -258,6 +277,9 @@ class TableServiceIntegrationTest extends IntegrationTestBase {
         $this->assertNotNull($result, '$result');
     }
 
+    /**
+    * @covers PEAR2\WindowsAzure\Services\Queue\QueueRestProxy::queryTables
+    */
     public function testQueryTablesWithPrefixWorks() {
         // Act
         $qto = new QueryTablesOptions();
@@ -268,6 +290,9 @@ class TableServiceIntegrationTest extends IntegrationTestBase {
         $this->assertNotNull($result, '$result');
     }
 
+    /**
+    * @covers PEAR2\WindowsAzure\Services\Queue\QueueRestProxy::getTable
+    */
     public function testGetTableWorks() {
         $this->fail("Need to implement getTable");
 
@@ -278,6 +303,9 @@ class TableServiceIntegrationTest extends IntegrationTestBase {
         $this->assertNotNull($result, '$result');
     }
 
+    /**
+    * @covers PEAR2\WindowsAzure\Services\Queue\QueueRestProxy::insertEntity
+    */
     public function testInsertEntityWorks() {
         // Arrange
         $entity = new Entity();
@@ -316,6 +344,10 @@ class TableServiceIntegrationTest extends IntegrationTestBase {
         $this->assertNotNull($result->getEntity()->getProperty('test5'), '$result->getEntity()->getProperty(\'test5\')');
         $this->assertTrue($result->getEntity()->getProperty('test5')->getValue() instanceof \DateTime, '$result->getEntity()->getProperty(\'test5\')->getValue() instanceof \DateTime');
     }
+    /**
+    * @covers PEAR2\WindowsAzure\Services\Queue\QueueRestProxy::insertEntity
+    * @covers PEAR2\WindowsAzure\Services\Queue\QueueRestProxy::updateEntity
+    */
     public function testUpdateEntityWorks() {
         // Arrange
         $entity = new Entity();
@@ -336,6 +368,9 @@ class TableServiceIntegrationTest extends IntegrationTestBase {
         $this->assertTrue(true, 'Expect success in testUpdateEntityWorks');
     }
 
+    /**
+    * @covers PEAR2\WindowsAzure\Services\Queue\QueueRestProxy::insertOrReplaceEntity
+    */
     public function testInsertOrReplaceEntityWorks() {
         // Arrange
         $entity = new Entity();
@@ -366,6 +401,9 @@ class TableServiceIntegrationTest extends IntegrationTestBase {
         }
     }
 
+    /**
+    * @covers PEAR2\WindowsAzure\Services\Queue\QueueRestProxy::insertOrMergeEntity
+    */
     public function testInsertOrMergeEntityWorks() {
         // Arrange
         $entity = new Entity();
@@ -396,6 +434,10 @@ class TableServiceIntegrationTest extends IntegrationTestBase {
         }
     }
 
+    /**
+    * @covers PEAR2\WindowsAzure\Services\Queue\QueueRestProxy::insertEntity
+    * @covers PEAR2\WindowsAzure\Services\Queue\QueueRestProxy::mergeEntity
+    */
     public function testMergeEntityWorks() {
         // Arrange
         $entity = new Entity();
@@ -418,6 +460,10 @@ class TableServiceIntegrationTest extends IntegrationTestBase {
         $this->assertTrue(true, 'expect no errors');
     }
 
+    /**
+    * @covers PEAR2\WindowsAzure\Services\Queue\QueueRestProxy::deleteEntity
+    * @covers PEAR2\WindowsAzure\Services\Queue\QueueRestProxy::insertEntity
+    */
     public function testDeleteEntityWorks() {
         // Arrange
         $entity = new Entity();
@@ -438,6 +484,10 @@ class TableServiceIntegrationTest extends IntegrationTestBase {
         $this->assertTrue(true, 'expect no errors');
     }
 
+    /**
+    * @covers PEAR2\WindowsAzure\Services\Queue\QueueRestProxy::deleteEntity
+    * @covers PEAR2\WindowsAzure\Services\Queue\QueueRestProxy::insertEntity
+    */
     public function testDeleteEntityWithETagWorks() {
         // Arrange
         $entity = new Entity();
@@ -461,6 +511,10 @@ class TableServiceIntegrationTest extends IntegrationTestBase {
         $this->assertTrue(true, 'expect no errors');
     }
 
+    /**
+    * @covers PEAR2\WindowsAzure\Services\Queue\QueueRestProxy::getEntity
+    * @covers PEAR2\WindowsAzure\Services\Queue\QueueRestProxy::insertEntity
+    */
     public function testGetEntityWorks() {
         // Arrange
         $entity = new Entity();
@@ -501,6 +555,10 @@ class TableServiceIntegrationTest extends IntegrationTestBase {
         $this->assertTrue($result->getEntity()->getProperty('test5')->getValue() instanceof \DateTime, '$result->getEntity()->getProperty(\'test5\')->getValue() instanceof \DateTime');
     }
 
+    /**
+    * @covers PEAR2\WindowsAzure\Services\Queue\QueueRestProxy::insertEntity
+    * @covers PEAR2\WindowsAzure\Services\Queue\QueueRestProxy::queryEntities
+    */
     public function testQueryEntitiesWorks() {
         // Arrange
         $entity = new Entity();
@@ -545,6 +603,10 @@ class TableServiceIntegrationTest extends IntegrationTestBase {
         $this->assertTrue($entities[0]->getProperty('test5')->getValue() instanceof \DateTime, '$entities[0]->getProperty(\'test5\')->getValue() instanceof \DateTime');
     }
 
+    /**
+    * @covers PEAR2\WindowsAzure\Services\Queue\QueueRestProxy::insertEntity
+    * @covers PEAR2\WindowsAzure\Services\Queue\QueueRestProxy::queryEntities
+    */
     public function testQueryEntitiesWithPaginationWorks() {
         // Arrange
         $table = self::$TEST_TABLE_4;
@@ -584,6 +646,10 @@ class TableServiceIntegrationTest extends IntegrationTestBase {
         $this->assertEquals($numberOfEntries, $entryCount, '$entryCount');
     }
 
+    /**
+    * @covers PEAR2\WindowsAzure\Services\Queue\QueueRestProxy::insertEntity
+    * @covers PEAR2\WindowsAzure\Services\Queue\QueueRestProxy::queryEntities
+    */
     public function testQueryEntitiesWithFilterWorks() {
         // Arrange
         $table = self::$TEST_TABLE_5;
@@ -633,6 +699,9 @@ class TableServiceIntegrationTest extends IntegrationTestBase {
         }
     }
 
+    /**
+    * @covers PEAR2\WindowsAzure\Services\Queue\QueueRestProxy::batch
+    */
     public function testBatchInsertWorks() {
         $this->fail('Need to implement BatchOperations');
         // Arrange
@@ -659,6 +728,10 @@ class TableServiceIntegrationTest extends IntegrationTestBase {
         //$this->assertEquals(InsertEntity->class, $result->getEntries()->get(0)->getClass(), '$result->getEntries()->get(0)->getClass()');
     }
 
+    /**
+    * @covers PEAR2\WindowsAzure\Services\Queue\QueueRestProxy::batch
+    * @covers PEAR2\WindowsAzure\Services\Queue\QueueRestProxy::insertEntity
+    */
     public function testBatchUpdateWorks() {
         $this->fail('Need to implement BatchOperations');
         // Arrange
@@ -686,6 +759,10 @@ class TableServiceIntegrationTest extends IntegrationTestBase {
        // $this->assertEquals(UpdateEntity->class, $result->getEntries()->get(0)->getClass(), '$result->getEntries()->get(0)->getClass()');
     }
 
+    /**
+    * @covers PEAR2\WindowsAzure\Services\Queue\QueueRestProxy::batch
+    * @covers PEAR2\WindowsAzure\Services\Queue\QueueRestProxy::insertEntity
+    */
     public function testBatchMergeWorks() {
         $this->fail('Need to implement BatchOperations');
         // Arrange
@@ -712,6 +789,9 @@ class TableServiceIntegrationTest extends IntegrationTestBase {
         //$this->assertEquals(UpdateEntity->class, $result->getEntries()->get(0)->getClass(), '$result->getEntries()->get(0)->getClass()');
     }
 
+    /**
+    * @covers PEAR2\WindowsAzure\Services\Queue\QueueRestProxy::batch
+    */
     public function testBatchInsertOrReplaceWorks() {
         $this->fail('Need to implement BatchOperations');
         // Arrange
@@ -738,6 +818,9 @@ class TableServiceIntegrationTest extends IntegrationTestBase {
         //$this->assertEquals(UpdateEntity->class, $result->getEntries()->get(0)->getClass(), '$result->getEntries()->get(0)->getClass()');
     }
 
+    /**
+    * @covers PEAR2\WindowsAzure\Services\Queue\QueueRestProxy::batch
+    */
     public function testBatchInsertOrMergeWorks() {
         $this->fail('Need to implement BatchOperations');
         // Arrange
@@ -764,6 +847,10 @@ class TableServiceIntegrationTest extends IntegrationTestBase {
       //  $this->assertEquals(UpdateEntity->class, $result->getEntries()->get(0)->getClass(), '$result->getEntries()->get(0)->getClass()');
     }
 
+    /**
+    * @covers PEAR2\WindowsAzure\Services\Queue\QueueRestProxy::batch
+    * @covers PEAR2\WindowsAzure\Services\Queue\QueueRestProxy::insertEntity
+    */
     public function testBatchDeleteWorks() {
         $this->fail('Need to implement BatchOperations');
         // Arrange
@@ -790,6 +877,9 @@ class TableServiceIntegrationTest extends IntegrationTestBase {
       //  $this->assertEquals(DeleteEntity->class, $result->getEntries()->get(0)->getClass(), '$result->getEntries()->get(0)->getClass()');
     }
 
+    /**
+    * @covers PEAR2\WindowsAzure\Services\Queue\QueueRestProxy::batch
+    */
     public function testBatchLotsOfInsertsWorks() {
         $this->fail('Need to implement BatchOperations');
         // Arrange
@@ -845,6 +935,10 @@ class TableServiceIntegrationTest extends IntegrationTestBase {
         }
     }
 
+    /**
+    * @covers PEAR2\WindowsAzure\Services\Queue\QueueRestProxy::batch
+    * @covers PEAR2\WindowsAzure\Services\Queue\QueueRestProxy::insertEntity
+    */
     public function testBatchAllOperationsTogetherWorks() {
         $this->fail('Need to implement BatchOperations');
 
