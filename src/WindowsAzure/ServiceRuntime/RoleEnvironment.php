@@ -708,9 +708,9 @@ class RoleEnvironment
      * Adds an event listener for the Stopping event, which occurs
      * wheen the role is stopping.
      * 
-     * @static
-     * 
      * @param function $listener The stopping listener.
+     * 
+     * @static
      * 
      * @return none
      */
