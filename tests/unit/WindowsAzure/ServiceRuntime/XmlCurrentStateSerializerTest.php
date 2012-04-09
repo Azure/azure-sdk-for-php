@@ -28,6 +28,7 @@ use PEAR2\WindowsAzure\ServiceRuntime\AcquireCurrentState;
 use PEAR2\WindowsAzure\ServiceRuntime\CurrentStatus;
 use PEAR2\WindowsAzure\ServiceRuntime\FileInputChannel;
 use PEAR2\WindowsAzure\ServiceRuntime\FileOutputChannel;
+use PEAR2\WindowsAzure\ServiceRuntime\ReleaseCurrentState;
 use PEAR2\WindowsAzure\ServiceRuntime\XmlCurrentStateSerializer;
 
 require_once 'vfsStream/vfsStream.php';
@@ -48,7 +49,7 @@ class XmlCurrentStateSerializerTest extends \PHPUnit_Framework_TestCase
     /**
      * @covers PEAR2\WindowsAzure\ServiceRuntime\XmlCurrentStateSerializer::serialize
      */
-    public function testSerialize()
+    public function testSerializeAcquire()
     {
         // Setup
         $rootDirectory = 'root';
@@ -84,6 +85,48 @@ class XmlCurrentStateSerializerTest extends \PHPUnit_Framework_TestCase
             new \DateTime('2000-01-01', new \DateTimeZone('UTC'))
         );
         
+        $xmlCurrentStateSerializer = new XmlCurrentStateSerializer();
+        $xmlCurrentStateSerializer->serialize($recycleState, $outputStream);
+        fclose($outputStream);
+        
+        $fileInputChannel = new FileInputChannel();
+        $fileInputStream = $fileInputChannel->getInputStream(
+            \vfsStream::url($rootDirectory . '/' . $fileName)
+        );
+        
+        $inputChannelContents = stream_get_contents($fileInputStream);
+        $this->assertEquals($fileContents, $inputChannelContents);
+    }
+    
+    /**
+     * @covers PEAR2\WindowsAzure\ServiceRuntime\XmlCurrentStateSerializer::serialize
+     */
+    public function testSerializeRelease()
+    {
+        // Setup
+        $rootDirectory = 'root';
+        $fileName = 'test';
+        $fileContents = '<?xml version="1.0" encoding="UTF-8"?>' . "\n" .
+            '<CurrentState>' .
+            '<StatusLease ClientId="clientId">' .
+            '<Release/>' .
+            '</StatusLease>' .
+            '</CurrentState>';
+        
+        // Setup
+        \vfsStreamWrapper::register(); 
+        \vfsStreamWrapper::setRoot(new \vfsStreamDirectory($rootDirectory));
+        
+        $file = \vfsStream::newFile($fileName);
+        \vfsStreamWrapper::getRoot()->addChild($file);
+        
+        // Test
+        $fileOutputChannel = new FileOutputChannel();
+        $outputStream = $fileOutputChannel->getOutputStream(
+            \vfsStream::url($rootDirectory . '/' . $fileName)
+        );
+        
+        $recycleState = new ReleaseCurrentState('clientId');
         $xmlCurrentStateSerializer = new XmlCurrentStateSerializer();
         $xmlCurrentStateSerializer->serialize($recycleState, $outputStream);
         fclose($outputStream);
