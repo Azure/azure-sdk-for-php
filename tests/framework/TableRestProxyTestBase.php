@@ -23,10 +23,10 @@
  */
 namespace PEAR2\Tests\Framework;
 use PEAR2\Tests\Framework\RestProxyTestBase;
+use PEAR2\Tests\Framework\TestResources;
 use PEAR2\WindowsAzure\Services\Core\Configuration;
 use PEAR2\WindowsAzure\Services\Table\TableSettings;
 use PEAR2\WindowsAzure\Services\Table\TableService;
-use PEAR2\Tests\Framework\TestResources;
 
 /**
  * TestBase class for each unit test class.
@@ -45,16 +45,30 @@ class TableRestProxyTestBase extends RestProxyTestBase
     
     public function __construct()
     {
+        $config = self::createConfig();
+        $tableWrapper = self::createService($config);
+        parent::__construct($config, $tableWrapper);
+        $this->_createdTables = array();
+    }
+
+    private static function createConfig() {
         $config = new Configuration();
         $tableUri = 'http://' . TestResources::accountName() . '.table.core.windows.net';
         $config->setProperty(TableSettings::ACCOUNT_KEY, TestResources::accountKey());
         $config->setProperty(TableSettings::ACCOUNT_NAME, TestResources::accountName());        
         $config->setProperty(TableSettings::URI, $tableUri);
-        $tableWrapper = TableService::create($config);
-        parent::__construct($config, $tableWrapper);
-        $this->_createdTables = array();
+        return $config;
     }
-    
+
+    protected static function createService($config = null) {
+        if (is_null($config)) {
+            $config = self::createConfig();
+        }
+
+        $service = TableService::create($config);
+        return $service;
+    }
+
     public function createTable($tableName, $options = null)
     {
         $this->wrapper->createTable($tableName, $options);
@@ -66,20 +80,25 @@ class TableRestProxyTestBase extends RestProxyTestBase
         $this->wrapper->deleteTable($tableName);
     }
     
+    public function safeDeleteTable($tableName)
+    {
+        try
+        {
+            $this->deleteTable($tableName);
+        }
+        catch (\Exception $e)
+        {
+            // Ignore exception and continue, will assume that this table doesn't exist in the sotrage account
+            error_log($e->getMessage());
+        }
+    }
+
     protected function tearDown()
     {
         parent::tearDown();
         
         foreach ($this->_createdTables as $value) {
-            try
-            {
-                $this->deleteTable($value);
-            }
-            catch (\Exception $e)
-            {
-                // Ignore exception and continue, will assume that this table doesn't exist in the sotrage account
-                error_log($e->getMessage());
-            }
+            $this->safeDeleteTable($value);
         }
     }
 }
