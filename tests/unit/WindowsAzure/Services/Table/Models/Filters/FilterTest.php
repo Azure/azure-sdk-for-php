@@ -40,13 +40,13 @@ class FilterTest extends \PHPUnit_Framework_TestCase
 {
     /**
      * @covers PEAR2\WindowsAzure\Services\Table\Models\Filters\Filter::applyAnd
-     * @covers PEAR2\WindowsAzure\Services\Table\Models\Filters\Filter::applyLitteral
+     * @covers PEAR2\WindowsAzure\Services\Table\Models\Filters\Filter::applyLiteral
      * @covers PEAR2\WindowsAzure\Services\Table\Models\Filters\Filter::applyRawString
      */
     public function testApplyAnd()
     {
         // Setup
-        $left = Filter::applyLitteral('test');
+        $left = Filter::applyLiteral('test');
         $right = Filter::applyRawString('raw string');
         
         // Test
@@ -75,13 +75,13 @@ class FilterTest extends \PHPUnit_Framework_TestCase
     
     /**
      * @covers PEAR2\WindowsAzure\Services\Table\Models\Filters\Filter::applyOr
-     * @covers PEAR2\WindowsAzure\Services\Table\Models\Filters\Filter::applyLitteral
+     * @covers PEAR2\WindowsAzure\Services\Table\Models\Filters\Filter::applyLiteral
      * @covers PEAR2\WindowsAzure\Services\Table\Models\Filters\Filter::applyRawString
      */
     public function testApplyOr()
     {
         // Setup
-        $left = Filter::applyLitteral('test');
+        $left = Filter::applyLiteral('test');
         $right = Filter::applyRawString('raw string');
         
         // Test
@@ -94,13 +94,13 @@ class FilterTest extends \PHPUnit_Framework_TestCase
     
     /**
      * @covers PEAR2\WindowsAzure\Services\Table\Models\Filters\Filter::applyEq
-     * @covers PEAR2\WindowsAzure\Services\Table\Models\Filters\Filter::applyLitteral
+     * @covers PEAR2\WindowsAzure\Services\Table\Models\Filters\Filter::applyLiteral
      * @covers PEAR2\WindowsAzure\Services\Table\Models\Filters\Filter::applyRawString
      */
     public function testApplyEq()
     {
         // Setup
-        $left = Filter::applyLitteral('test');
+        $left = Filter::applyLiteral('test');
         $right = Filter::applyRawString('raw string');
         
         // Test
@@ -113,13 +113,13 @@ class FilterTest extends \PHPUnit_Framework_TestCase
     
     /**
      * @covers PEAR2\WindowsAzure\Services\Table\Models\Filters\Filter::applyNe
-     * @covers PEAR2\WindowsAzure\Services\Table\Models\Filters\Filter::applyLitteral
+     * @covers PEAR2\WindowsAzure\Services\Table\Models\Filters\Filter::applyLiteral
      * @covers PEAR2\WindowsAzure\Services\Table\Models\Filters\Filter::applyRawString
      */
     public function testApplyNe()
     {
         // Setup
-        $left = Filter::applyLitteral('test');
+        $left = Filter::applyLiteral('test');
         $right = Filter::applyRawString('raw string');
         
         // Test
@@ -132,13 +132,13 @@ class FilterTest extends \PHPUnit_Framework_TestCase
     
     /**
      * @covers PEAR2\WindowsAzure\Services\Table\Models\Filters\Filter::applyGe
-     * @covers PEAR2\WindowsAzure\Services\Table\Models\Filters\Filter::applyLitteral
+     * @covers PEAR2\WindowsAzure\Services\Table\Models\Filters\Filter::applyLiteral
      * @covers PEAR2\WindowsAzure\Services\Table\Models\Filters\Filter::applyRawString
      */
     public function testApplyGe()
     {
         // Setup
-        $left = Filter::applyLitteral('test');
+        $left = Filter::applyLiteral('test');
         $right = Filter::applyRawString('raw string');
         
         // Test
@@ -151,13 +151,13 @@ class FilterTest extends \PHPUnit_Framework_TestCase
     
     /**
      * @covers PEAR2\WindowsAzure\Services\Table\Models\Filters\Filter::applyGt
-     * @covers PEAR2\WindowsAzure\Services\Table\Models\Filters\Filter::applyLitteral
+     * @covers PEAR2\WindowsAzure\Services\Table\Models\Filters\Filter::applyLiteral
      * @covers PEAR2\WindowsAzure\Services\Table\Models\Filters\Filter::applyRawString
      */
     public function testApplyGt()
     {
         // Setup
-        $left = Filter::applyLitteral('test');
+        $left = Filter::applyLiteral('test');
         $right = Filter::applyRawString('raw string');
         
         // Test
@@ -170,13 +170,13 @@ class FilterTest extends \PHPUnit_Framework_TestCase
     
     /**
      * @covers PEAR2\WindowsAzure\Services\Table\Models\Filters\Filter::applyLt
-     * @covers PEAR2\WindowsAzure\Services\Table\Models\Filters\Filter::applyLitteral
+     * @covers PEAR2\WindowsAzure\Services\Table\Models\Filters\Filter::applyLiteral
      * @covers PEAR2\WindowsAzure\Services\Table\Models\Filters\Filter::applyRawString
      */
     public function testApplyLt()
     {
         // Setup
-        $left = Filter::applyLitteral('test');
+        $left = Filter::applyLiteral('test');
         $right = Filter::applyRawString('raw string');
         
         // Test
@@ -189,13 +189,13 @@ class FilterTest extends \PHPUnit_Framework_TestCase
     
     /**
      * @covers PEAR2\WindowsAzure\Services\Table\Models\Filters\Filter::applyLe
-     * @covers PEAR2\WindowsAzure\Services\Table\Models\Filters\Filter::applyLitteral
+     * @covers PEAR2\WindowsAzure\Services\Table\Models\Filters\Filter::applyLiteral
      * @covers PEAR2\WindowsAzure\Services\Table\Models\Filters\Filter::applyRawString
      */
     public function testApplyLe()
     {
         // Setup
-        $left = Filter::applyLitteral('test');
+        $left = Filter::applyLiteral('test');
         $right = Filter::applyRawString('raw string');
         
         // Test

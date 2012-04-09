@@ -46,61 +46,66 @@ class Resources
     const INVALID_URL_MSG     = 'Provided URL is invalid.';
     const INVALID_HT_MSG      = 'The header type provided is invalid.';
     const INVALID_EDM_MSG     = 'The provided EDM type is invalid.';
-    const INVALID_PROP_MSG    = 'The provided properties array is invalid.';
+    const INVALID_PROP_MSG    = 'The provided propertie(s) are/is invalid.';
     const INVALID_ENTITY_MSG  = 'The provided entity object is invalid.';
     const INVALID_VERSION_MSG = 'Server does not support any known protocol versions.';
 
     // HTTP Headers
-    const X_MS_HEADER_PREFIX               = 'x-ms-';
-    const X_MS_META_HEADER_PREFIX          = 'x-ms-meta-';
-    const X_MS_APPROXIMATE_MESSAGES_COUNT  = 'x-ms-approximate-messages-count';
-    const X_MS_POPRECEIPT                  = 'x-ms-popreceipt';
-    const X_MS_TIME_NEXT_VISIBLE           = 'x-ms-time-next-visible';
-    const X_MS_BLOB_PUBLIC_ACCESS          = 'x-ms-blob-public-access';
-    const X_MS_VERSION                     = 'x-ms-version';
-    const X_MS_DATE                        = 'x-ms-date';
-    const X_MS_BLOB_SEQUENCE_NUMBER        = 'x-ms-blob-sequence-number';
-    const X_MS_BLOB_SEQUENCE_NUMBER_ACTION = 'x-ms-sequence-number-action';
-    const X_MS_BLOB_TYPE                   = 'x-ms-blob-type';
-    const X_MS_BLOB_CONTENT_TYPE           = 'x-ms-blob-content-type';
-    const X_MS_BLOB_CONTENT_ENCODING       = 'x-ms-blob-content-encoding';
-    const X_MS_BLOB_CONTENT_LANGUAGE       = 'x-ms-blob-content-language';
-    const X_MS_BLOB_CONTENT_MD5            = 'x-ms-blob-content-md5';
-    const X_MS_BLOB_CACHE_CONTROL          = 'x-ms-blob-cache-control';
-    const X_MS_BLOB_CONTENT_LENGTH         = 'x-ms-blob-content-length';
-    const X_MS_RANGE                       = 'x-ms-range';
-    const X_MS_RANGE_GET_CONTENT_MD5       = 'x-ms-range-get-content-md5';
-    const X_MS_LEASE_ID                    = 'x-ms-lease-id';
-    const X_MS_LEASE_STATUS                = 'x-ms-lease-status';
-    const X_MS_LEASE_ACTION                = 'x-ms-lease-action';
-    const X_MS_DELETE_SNAPSHOTS            = 'x-ms-delete-snapshots';
-    const X_MS_PAGE_WRITE                  = 'x-ms-page-write';
-    const X_MS_CONTINUATION_NEXTTABLENAME  = 'x-ms-continuation-nexttablename';
-    const ETAG                             = 'etag';
-    const LAST_MODIFIED                    = 'last-modified';
-    const DATE                             = 'date';
-    const AUTHENTICATION                   = 'authorization';
-    const CONTENT_ENCODING                 = 'content-encoding';
-    const CONTENT_LANGUAGE                 = 'content-language';
-    const CONTENT_LENGTH                   = 'content-length';
-    const CONTENT_MD5                      = 'content-md5';
-    const CONTENT_TYPE                     = 'content-type';
-    const CONTENT_RANGE                    = 'content-range';
-    const CACHE_CONTROL                    = 'cache-control';
-    const IF_MODIFIED_SINCE                = 'if-modified-since';
-    const IF_MATCH                         = 'if-match';
-    const IF_NONE_MATCH                    = 'if-none-match';
-    const IF_UNMODIFIED_SINCE              = 'if-unmodified-since';
-    const RANGE                            = 'range';
-    const DATA_SERVICE_VERSION             = 'dataserviceversion';
-    const MAX_DATA_SERVICE_VERSION         = 'maxdataserviceversion';
-    const ACCEPT_HEADER                    = 'accept';
-    const ACCEPT_CHARSET                   = 'accept-charset';
+    const X_MS_HEADER_PREFIX                 = 'x-ms-';
+    const X_MS_META_HEADER_PREFIX            = 'x-ms-meta-';
+    const X_MS_APPROXIMATE_MESSAGES_COUNT    = 'x-ms-approximate-messages-count';
+    const X_MS_POPRECEIPT                    = 'x-ms-popreceipt';
+    const X_MS_TIME_NEXT_VISIBLE             = 'x-ms-time-next-visible';
+    const X_MS_BLOB_PUBLIC_ACCESS            = 'x-ms-blob-public-access';
+    const X_MS_VERSION                       = 'x-ms-version';
+    const X_MS_DATE                          = 'x-ms-date';
+    const X_MS_BLOB_SEQUENCE_NUMBER          = 'x-ms-blob-sequence-number';
+    const X_MS_BLOB_SEQUENCE_NUMBER_ACTION   = 'x-ms-sequence-number-action';
+    const X_MS_BLOB_TYPE                     = 'x-ms-blob-type';
+    const X_MS_BLOB_CONTENT_TYPE             = 'x-ms-blob-content-type';
+    const X_MS_BLOB_CONTENT_ENCODING         = 'x-ms-blob-content-encoding';
+    const X_MS_BLOB_CONTENT_LANGUAGE         = 'x-ms-blob-content-language';
+    const X_MS_BLOB_CONTENT_MD5              = 'x-ms-blob-content-md5';
+    const X_MS_BLOB_CACHE_CONTROL            = 'x-ms-blob-cache-control';
+    const X_MS_BLOB_CONTENT_LENGTH           = 'x-ms-blob-content-length';
+    const X_MS_RANGE                         = 'x-ms-range';
+    const X_MS_RANGE_GET_CONTENT_MD5         = 'x-ms-range-get-content-md5';
+    const X_MS_LEASE_ID                      = 'x-ms-lease-id';
+    const X_MS_LEASE_STATUS                  = 'x-ms-lease-status';
+    const X_MS_LEASE_ACTION                  = 'x-ms-lease-action';
+    const X_MS_DELETE_SNAPSHOTS              = 'x-ms-delete-snapshots';
+    const X_MS_PAGE_WRITE                    = 'x-ms-page-write';
+    const X_MS_CONTINUATION_NEXTTABLENAME    = 'x-ms-continuation-nexttablename';
+    const X_MS_CONTINUATION_NEXTPARTITIONKEY = 'x-ms-continuation-nextpartitionkey';
+    const X_MS_CONTINUATION_NEXTROWKEY       = 'x-ms-continuation-nextrowkey';
+    const ETAG                               = 'etag';
+    const LAST_MODIFIED                      = 'last-modified';
+    const DATE                               = 'date';
+    const AUTHENTICATION                     = 'authorization';
+    const CONTENT_ENCODING                   = 'content-encoding';
+    const CONTENT_LANGUAGE                   = 'content-language';
+    const CONTENT_LENGTH                     = 'content-length';
+    const CONTENT_MD5                        = 'content-md5';
+    const CONTENT_TYPE                       = 'content-type';
+    const CONTENT_RANGE                      = 'content-range';
+    const CACHE_CONTROL                      = 'cache-control';
+    const IF_MODIFIED_SINCE                  = 'if-modified-since';
+    const IF_MATCH                           = 'if-match';
+    const IF_NONE_MATCH                      = 'if-none-match';
+    const IF_UNMODIFIED_SINCE                = 'if-unmodified-since';
+    const RANGE                              = 'range';
+    const DATA_SERVICE_VERSION               = 'dataserviceversion';
+    const MAX_DATA_SERVICE_VERSION           = 'maxdataserviceversion';
+    const ACCEPT_HEADER                      = 'accept';
+    const ACCEPT_CHARSET                     = 'accept-charset';
 
     // Type
     const QUEUE_TYPE_NAME = 'IQueue';
     const BLOB_TYPE_NAME  = 'IBlob';
     const TABLE_TYPE_NAME = 'ITable';
+    
+    // HTTP Methods
+    const HTTP_MERGE = 'MERGE';
     
     // Misc
     const EMPTY_STRING       = '';
@@ -112,11 +117,12 @@ class Resources
     const EMULATOR_BLOB_URI  = '127.0.0.1:10000';
     const EMULATOR_QUEUE_URI = '127.0.0.1:10001';
     const EMULATOR_TABLE_URI = '127.0.0.1:10002';
+    const ASTERISK           = '*';
 
     // Header values
     const API_VERSION                    = '2011-08-18';
     const DATA_SERVICE_VERSION_VALUE     = '1.0;NetFx';
-    const MAX_DATA_SERVICE_VERSION_VALUE = '1.0;NetFx';
+    const MAX_DATA_SERVICE_VERSION_VALUE = '2.0;NetFx';
     const ACCEPT_HEADER_VALUE            = 'application/atom+xml,application/xml';
     const ACCEPT_CHARSET_VALUE           = 'utf-8';
 
@@ -137,6 +143,8 @@ class Resources
     const QP_FILTER          = '$filter';
     const QP_ORDERBY         = '$orderby';
     const QP_NEXT_TABLE_NAME = 'nexttablename';
+    const QP_NEXT_PK         = 'nextpartitionkey';
+    const QP_NEXT_RK         = 'nextrowkey';
     
     // Request body content types
     const XML_CONTENT_TYPE      = 'application/x-www-form-urlencoded';

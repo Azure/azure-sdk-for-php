@@ -179,14 +179,14 @@ class AtomReaderWriter implements IAtomReaderWriter
             return array();
         }
         
-        $entries = null;
+        $rawEntries = null;
         if (count($result->entry) > 1) {
-            $entries = $result->entry;
+            $rawEntries = $result->entry;
         } else {
-            $entries = array($result->entry);
+            $rawEntries = array($result->entry);
         }
 
-        foreach ($entries as $entry) {
+        foreach ($rawEntries as $entry) {
             $tableName = $entry->xpath('.//m:properties/d:TableName');
             $tables[]  = (string)$tableName[0];
         }
@@ -203,10 +203,12 @@ class AtomReaderWriter implements IAtomReaderWriter
      */
     public static function getEntity($entity)
     {
+        // There are extra spaces at the end of lines 2, 3 and 4 which are important
+        // for having the code works fine with emulator.
         $xml = '<?xml version="1.0" encoding="utf-8" standalone="yes"?>
-            <entry
-            xmlns:d="http://schemas.microsoft.com/ado/2007/08/dataservices"
-            xmlns:m="http://schemas.microsoft.com/ado/2007/08/dataservices/metadata"
+            <entry 
+            xmlns:d="http://schemas.microsoft.com/ado/2007/08/dataservices" 
+            xmlns:m="http://schemas.microsoft.com/ado/2007/08/dataservices/metadata" 
             xmlns="http://www.w3.org/2005/Atom">
             <title />
             <updated>{tpl:Updated}</updated>
@@ -220,15 +222,45 @@ class AtomReaderWriter implements IAtomReaderWriter
                 </m:properties>
             </content>
         </entry>';
-        
-        $xml = self::_fillTemplate(
+     
+        $edmDate = Utilities::convertToEdmDateTime($entity->getTimestamp());
+        $xml     = self::_fillTemplate(
             $xml, array(
-                'Updated'    => Utilities::isoDate(),
+                'Updated'    => $edmDate,
                 'Properties' => self::_generatePropertiesXml($entity)
             )
         );
         
         return $xml;
+    }
+    
+    /**
+     * Parses an entity entry from given SimpleXML object.
+     * 
+     * @param \SimpleXML $result The SimpleXML object representing the entity.
+     * 
+     * @return \PEAR2\WindowsAzure\Services\Table\Models\Entity
+     */
+    private static function _parseOneEntity($result)
+    {
+        $services = 'http://schemas.microsoft.com/ado/2007/08/dataservices';
+        $metadata = 'http://schemas.microsoft.com/ado/2007/08/dataservices/metadata';
+        $prop     = $result->content->xpath('.//m:properties');
+        $prop     = $prop[0]->children($services);
+        $entity   = new Entity();
+        
+        // Set Etag
+        $etag = $result->attributes($metadata);
+        $etag = $etag[Resources::ETAG];
+        $entity->setEtag((string)$etag);
+        
+        foreach ($prop as $key => $value) {
+            $attributes = $value->attributes($metadata);
+            $type       = $attributes['type'];
+            $entity->newProperty((string)$key, (string)$type, (string)$value);
+        }
+        
+        return $entity;
     }
     
     /**
@@ -240,25 +272,39 @@ class AtomReaderWriter implements IAtomReaderWriter
      */
     public static function parseEntity($body)
     {
-        $result   = self::_parseBody($body);
-        $services = 'http://schemas.microsoft.com/ado/2007/08/dataservices';
-        $metadata = 'http://schemas.microsoft.com/ado/2007/08/dataservices/metadata';
-        $prop     = $result->content->xpath('//m:properties');
-        $prop     = $prop[0]->children($services);
-        $entity   = new Entity();
-        
-        // Set Etag
-        $etag = $result->attributes($metadata);
-        $etag = $etag[Resources::ETAG];
-        $entity->setEtag($etag);
-        
-        foreach ($prop as $key => $value) {
-            $attributes = $value->attributes($metadata);
-            $type       = $attributes['type'];
-            $entity->newProperty($key, $type, $value);
+        $result = self::_parseBody($body);
+        $entity = self::_parseOneEntity($result);
+        return $entity;
+    }
+    
+    /**
+     * Constructs array of entities from HTTP response body.
+     * 
+     * @param string $body The HTTP response body.
+     * 
+     * @return array
+     */
+    public static function parseEntities($body)
+    {
+        $result = self::_parseBody($body);
+
+        $rawEntries = null;
+        if ($result->entry) {
+            if (count($result->entry) > 1) {
+                $rawEntries = $result->entry;
+            } else {
+                $rawEntries = array($result->entry);
+            }
+        } else {
+            return array();
         }
         
-        return $entity;
+        $entities = array();
+        foreach ($rawEntries as $entity) {
+            $entities[] = self::_parseOneEntity($entity);
+        }
+        
+        return $entities;
     }
 }
 

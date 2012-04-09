@@ -15,82 +15,45 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   PEAR2\WindowsAzure\Services\Table\Models
+ * @package   PEAR2\Tests\Unit\WindowsAzure\Services\Table\Models
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
- 
-namespace PEAR2\WindowsAzure\Services\Table\Models;
-use PEAR2\WindowsAzure\Services\Table\Models\EdmType;
-use PEAR2\WindowsAzure\Validate;
+namespace PEAR2\Tests\Unit\WindowsAzure\Services\Table\Models;
+use PEAR2\WindowsAzure\Services\Table\Models\DeleteEntityOptions;
+use PEAR2\WindowsAzure\Services\Table\Models\Etag;
 
 /**
- * Represents entity property.
+ * Unit tests for class DeleteEntityOptions
  *
  * @category  Microsoft
- * @package   PEAR2\WindowsAzure\Services\Table\Models
+ * @package   PEAR2\Tests\Unit\WindowsAzure\Services\Table\Models
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @version   Release: @package_version@
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
-class Property
+class DeleteEntityOptionsTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @var string
+     * @covers PEAR2\WindowsAzure\Services\Table\Models\DeleteEntityOptions::setEtag
+     * @covers PEAR2\WindowsAzure\Services\Table\Models\DeleteEntityOptions::getEtag
      */
-    private $_edmType;
-    
-    /**
-     * @var mix
-     */
-    private $_value;
-    
-    /**
-     * Gets the type of the property.
-     * 
-     * @return string
-     */
-    public function getEdmType()
+    public function testSetEtag()
     {
-        return $this->_edmType;
-    }
-    
-    /**
-     * Sets the value of the property.
-     * 
-     * @param string $edmType The property type.
-     * 
-     * @return none
-     */
-    public function setEdmType($edmType)
-    {
-        $this->_edmType = EdmType::processType($edmType);
-    }
-    
-    /**
-     * Gets the value of the property.
-     * 
-     * @return string
-     */
-    public function getValue()
-    {
-        return $this->_value;
-    }
-    
-    /**
-     * Sets the property value.
-     * 
-     * @param mix $value The value of property.
-     * 
-     * @return none
-     */
-    public function setValue($value)
-    {
-        $this->_value = $value;
+        // Setup
+        $options = new DeleteEntityOptions();
+        $Etag = 'etag value';
+        
+        // Test
+        $options->setEtag($Etag);
+        
+        // Assert
+        $this->assertEquals($Etag, $options->getEtag());
+        
     }
 }
 

@@ -67,20 +67,25 @@ class QueueRestProxyTestBase extends RestProxyTestBase
         $this->wrapper->deleteQueue($queueName, $options);
     }
     
+    public function safeDeleteQueue($queueName)
+    {
+        try
+        {
+            $this->deleteQueue($queueName);
+        }
+        catch (\Exception $e)
+        {
+            // Ignore exception and continue, will assume that this queue doesn't exist in the sotrage account
+            error_log($e->getMessage());
+        }
+    }
+    
     protected function tearDown()
     {
         parent::tearDown();
         
         foreach ($this->_createdQueues as $value) {
-            try
-            {
-                $this->deleteQueue($value);
-            }
-            catch (\Exception $e)
-            {
-                // Ignore exception and continue, will assume that this queue doesn't exist in the sotrage account
-                error_log($e->getMessage());
-            }
+            $this->safeDeleteQueue($value);
         }
     }
 }

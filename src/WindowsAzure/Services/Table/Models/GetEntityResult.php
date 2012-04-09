@@ -23,11 +23,9 @@
  */
  
 namespace PEAR2\WindowsAzure\Services\Table\Models;
-use PEAR2\WindowsAzure\Services\Table\Models\EdmType;
-use PEAR2\WindowsAzure\Validate;
 
 /**
- * Represents entity property.
+ * Holds result of calling getEntity wrapper
  *
  * @category  Microsoft
  * @package   PEAR2\WindowsAzure\Services\Table\Models
@@ -37,60 +35,33 @@ use PEAR2\WindowsAzure\Validate;
  * @version   Release: @package_version@
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
-class Property
+class GetEntityResult
 {
     /**
-     * @var string
+     * @var Entity
      */
-    private $_edmType;
+    private $_entity;
     
     /**
-     * @var mix
-     */
-    private $_value;
-    
-    /**
-     * Gets the type of the property.
+     * Gets table entity.
      * 
-     * @return string
+     * @return Entity
      */
-    public function getEdmType()
+    public function getEntity()
     {
-        return $this->_edmType;
+        return $this->_entity;
     }
     
     /**
-     * Sets the value of the property.
+     * Sets table entity.
      * 
-     * @param string $edmType The property type.
+     * @param Entity $entity The table entity instance.
      * 
      * @return none
      */
-    public function setEdmType($edmType)
+    public function setEntity($entity)
     {
-        $this->_edmType = EdmType::processType($edmType);
-    }
-    
-    /**
-     * Gets the value of the property.
-     * 
-     * @return string
-     */
-    public function getValue()
-    {
-        return $this->_value;
-    }
-    
-    /**
-     * Sets the property value.
-     * 
-     * @param mix $value The value of property.
-     * 
-     * @return none
-     */
-    public function setValue($value)
-    {
-        $this->_value = $value;
+        $this->_entity = $entity;
     }
 }
 

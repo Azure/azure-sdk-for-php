@@ -34,6 +34,11 @@ use PEAR2\WindowsAzure\Services\Table\Models\Filters\Filter;
 use PEAR2\WindowsAzure\Services\Table\Models\QueryTablesOptions;
 use PEAR2\WindowsAzure\Services\Table\Models\QueryTablesResult;
 use PEAR2\WindowsAzure\Services\Table\Models\InsertEntityResult;
+use PEAR2\WindowsAzure\Services\Table\Models\UpdateEntityResult;
+use PEAR2\WindowsAzure\Services\Table\Models\QueryEntitiesOptions;
+use PEAR2\WindowsAzure\Services\Table\Models\QueryEntitiesResult;
+use PEAR2\WindowsAzure\Services\Table\Models\DeleteEntityOptions;
+use PEAR2\WindowsAzure\Services\Table\Models\GetEntityResult;
 
 /**
  * This class constructs HTTP requests and receive HTTP responses for table
@@ -53,6 +58,67 @@ class TableRestProxy extends ServiceRestProxy implements ITable
      * @var IAtomReaderWriter
      */
     private $_atomSerializer;
+    
+    /**
+     * Constructs URI path for entity.
+     * 
+     * @param string $table The table name.
+     * @param string $pk    The entity's partition key.
+     * @param string $rk    The entity's row key.
+     * 
+     * @return string 
+     */
+    private function _getEntityPath($table, $pk, $rk)
+    {
+        return "$table(PartitionKey='$pk',RowKey='$rk')";
+    }
+    
+    /**
+     * Does actual work for update and merge entity APIs.
+     * 
+     * @param string                     $table   The table name.
+     * @param Models\Entity              $entity  The entity instance to use.
+     * @param string                     $verb    The HTTP method.
+     * @param boolean                    $useETag The flag to include etag or not.
+     * @param Models\TableServiceOptions $options The optional parameters.
+     * 
+     * @return Models\UpdateEntityResult
+     */
+    private function _putOrMergeEntityImpl($table, $entity, $verb, $useETag,
+        $options
+    ) {
+        Validate::isValidString($table);
+        Validate::notNullOrEmpty($entity);
+        Validate::isTrue($entity->isValid(), Resources::INVALID_ENTITY_MSG);
+        
+        if ($useETag) {
+            Validate::notNullOrEmpty($entity->getEtag());
+        }
+        
+        $method       = $verb;
+        $headers      = array();
+        $queryParams  = array();
+        $statusCode   = Resources::STATUS_NO_CONTENT;
+        $pk           = $entity->getPartitionKey();
+        $rk           = $entity->getRowKey();
+        $path         = $this->_getEntityPath($table, $pk, $rk);
+        $body         = $this->_atomSerializer->getEntity($entity);
+        $ifMatchValue = $useETag ? $entity->getEtag() : Resources::ASTERISK;
+        
+        if (is_null($options)) {
+            $options = new TableServiceOptions();
+        }
+        
+        $queryParams[Resources::QP_TIMEOUT] = strval($options->getTimeout());
+        $headers[Resources::CONTENT_TYPE]   = Resources::XML_ATOM_CONTENT_TYPE;
+        $headers[Resources::IF_MATCH]       = $ifMatchValue;
+        
+        $response = $this->send(
+            $method, $headers, $queryParams, $path, $statusCode, $body
+        );
+        
+        return UpdateEntityResult::create($response->getHeader());
+    }
  
     /**
      * Builds filter expression
@@ -83,8 +149,8 @@ class TableRestProxy extends ServiceRestProxy implements ITable
             return;
         }
         
-        if ($filter instanceof Filters\LitteralFilter) {
-            $e .= $filter->getLitteral();
+        if ($filter instanceof Filters\LiteralFilter) {
+            $e .= $filter->getLiteral();
         } else if ($filter instanceof Filters\ConstantFilter) {
             $e .= '\'' . $filter->getValue() . '\'';
         } else if ($filter instanceof Filters\UnaryFilter) {
@@ -288,11 +354,11 @@ class TableRestProxy extends ServiceRestProxy implements ITable
             // is prefix + '{'
             $prefixFilter = Filter::applyAnd(
                 Filter::applyGe(
-                    Filter::applyLitteral('TableName'),
+                    Filter::applyLiteral('TableName'),
                     Filter::applyConstant($prefix)
                 ),
                 Filter::applyLe(
-                    Filter::applyLitteral('TableName'),
+                    Filter::applyLiteral('TableName'),
                     Filter::applyConstant($prefix . '{')
                 )
             );
@@ -397,7 +463,41 @@ class TableRestProxy extends ServiceRestProxy implements ITable
      */
     public function queryEntities($table, $options = null)
     {
-        throw new \Exception(Resources::NOT_IMPLEMENTED_MSG);
+        Validate::isValidString($table);
+        
+        $method      = \HTTP_Request2::METHOD_GET;
+        $headers     = array();
+        $queryParams = array();
+        $statusCode  = Resources::STATUS_OK;
+        $path        = $table;
+        
+        if (is_null($options)) {
+            $options = new QueryEntitiesOptions();
+        }
+        
+        $encodedPK   = $this->_encodeODataUriValue($options->getNextPartitionKey());
+        $encodedRK   = $this->_encodeODataUriValue($options->getNextRowKey());
+        $queryParams = $this->_addOptionalQuery($queryParams, $options->getQuery());
+        
+        $queryParams[Resources::QP_TIMEOUT] = strval($options->getTimeout());
+        $queryParams[Resources::QP_NEXT_PK] = $encodedPK;
+        $queryParams[Resources::QP_NEXT_RK] = $encodedRK;
+        $headers[Resources::CONTENT_TYPE]   = Resources::XML_ATOM_CONTENT_TYPE;
+        
+        if (!is_null($options->getQuery())) {
+            $dsHeader   = Resources::DATA_SERVICE_VERSION;
+            $maxdsValue = Resources::MAX_DATA_SERVICE_VERSION_VALUE;
+            $fields     = $options->getQuery()->getSelectFields();
+            $hasSelect  = !empty($fields);
+            if ($hasSelect) {
+                $headers[$dsHeader] = $maxdsValue;
+            }
+        }
+        
+        $response = $this->send($method, $headers, $queryParams, $path, $statusCode);
+        $entities = $this->_atomSerializer->parseEntities($response->getBody());
+        
+        return QueryEntitiesResult::create($response->getHeader(), $entities);
     }
     
     /**
@@ -434,9 +534,8 @@ class TableRestProxy extends ServiceRestProxy implements ITable
         $response = $this->send(
             $method, $headers, $queryParams, $path, $statusCode, $body
         );
-        
-        $entity = $this->_atomSerializer->parseEntity($response->getBody());
-        $result = new InsertEntityResult();
+        $entity   = $this->_atomSerializer->parseEntity($response->getBody());
+        $result   = new InsertEntityResult();
         $result->setEntity($entity);
         
         return $result;
@@ -456,7 +555,13 @@ class TableRestProxy extends ServiceRestProxy implements ITable
      */
     public function insertOrMergeEntity($table, $entity, $options = null)
     {
-        throw new \Exception(Resources::NOT_IMPLEMENTED_MSG);
+        $this->_putOrMergeEntityImpl(
+            $table,
+            $entity,
+            Resources::HTTP_MERGE,
+            false, 
+            $options
+        );
     }
     
     /**
@@ -473,74 +578,105 @@ class TableRestProxy extends ServiceRestProxy implements ITable
      */
     public function insertOrReplaceEntity($table, $entity, $options = null)
     {
-        throw new \Exception(Resources::NOT_IMPLEMENTED_MSG);
+        $this->_putOrMergeEntityImpl(
+            $table,
+            $entity,
+            \HTTP_Request2::METHOD_PUT,
+            false, 
+            $options
+        );
     }
     
     /**
      * Updates an existing entity in a table. The Update Entity operation replaces 
      * the entire entity and can be used to remove properties.
      * 
-     * @param string                     $table   name of the table
-     * @param string                     $match   the matching condition. To force an
-     * unconditional update, set If-Match to the wildcard character (*)
-     * @param Models\Entity              $entity  table entity
-     * @param Models\TableServiceOptions $options optional parameters
+     * @param string                     $table   The table name.
+     * @param Models\Entity              $entity  The table entity.
+     * @param Models\TableServiceOptions $options The optional parameters.
      * 
      * @return Models\UpdateEntityResult
      * 
      * @see http://msdn.microsoft.com/en-us/library/windowsazure/dd179427.aspx
      */
-    public function updateEntity($table, $match, $entity, $options = null)
+    public function updateEntity($table, $entity, $options = null)
     {
-        throw new \Exception(Resources::NOT_IMPLEMENTED_MSG);
+        $this->_putOrMergeEntityImpl(
+            $table,
+            $entity,
+            \HTTP_Request2::METHOD_PUT,
+            true, 
+            $options
+        );
     }
     
     /**
      * Updates an existing entity by updating the entity's properties. This operation
      * does not replace the existing entity, as the updateEntity operation does.
      * 
-     * @param string                     $table   name of the table
-     * @param string                     $match   the matching condition. To force an
-     * unconditional merge, set $match to the wildcard character (*)
-     * @param Models\Entity              $entity  table entity
-     * @param Models\TableServiceOptions $options optional parameters
+     * @param string                     $table   The table name.
+     * @param Models\Entity              $entity  The table entity.
+     * @param Models\TableServiceOptions $options The optional parameters.
      * 
      * @return Models\UpdateEntityResult
      * 
      * @see http://msdn.microsoft.com/en-us/library/windowsazure/dd179392.aspx
      */
-    public function mergeEntity($table, $match, $entity, $options = null)
+    public function mergeEntity($table, $entity, $options = null)
     {
-        throw new \Exception(Resources::NOT_IMPLEMENTED_MSG);
+        $this->_putOrMergeEntityImpl(
+            $table,
+            $entity,
+            Resources::HTTP_MERGE,
+            true, 
+            $options
+        );
     }
     
     /**
      * Deletes an existing entity in a table.
      * 
-     * @param string                     $table        name of the table
-     * @param string                     $partitionKey the entity partition key
-     * @param string                     $rowKey       the entity row key
-     * @param string                     $match        the matching condition.
-     * To force an unconditional delete, set $match to the wildcard character (*)
-     * @param Models\DeleteEntityOptions $options      optional parameters
+     * @param string                     $table        The name of the table.
+     * @param string                     $partitionKey The entity partition key.
+     * @param string                     $rowKey       The entity row key.
+     * @param Models\DeleteEntityOptions $options      The optional parameters.
      * 
      * @return none
      * 
      * @see http://msdn.microsoft.com/en-us/library/windowsazure/dd135727.aspx
      */
-    public function deleteEntity($table, $partitionKey, $rowKey, $match,
-        $options = null
-    ) {
-        throw new \Exception(Resources::NOT_IMPLEMENTED_MSG);
+    public function deleteEntity($table, $partitionKey, $rowKey, $options = null)
+    {
+        Validate::isValidString($table);
+        Validate::isValidString($partitionKey);
+        Validate::isValidString($rowKey);
+        
+        $method      = \HTTP_Request2::METHOD_DELETE;
+        $headers     = array();
+        $queryParams = array();
+        $statusCode  = Resources::STATUS_NO_CONTENT;
+        $path        = $this->_getEntityPath($table, $partitionKey, $rowKey);
+        
+        if (is_null($options)) {
+            $options = new DeleteEntityOptions();
+        }
+        
+        $etagObj                            = $options->getEtag();
+        $ETag                               = !is_null($etagObj);
+        $queryParams[Resources::QP_TIMEOUT] = strval($options->getTimeout());
+        $headers[Resources::CONTENT_TYPE]   = Resources::XML_ATOM_CONTENT_TYPE;
+        $headers[Resources::IF_MATCH]       = $ETag ? $etagObj : Resources::ASTERISK;
+        
+        $this->send($method, $headers, $queryParams, $path, $statusCode);
     }
     
     /**
-     * Gets table entity
+     * Gets table entity.
      * 
-     * @param string                     $table        name of the table
-     * @param string                     $partitionKey the entity partition key
-     * @param string                     $rowKey       the entity row key
-     * @param Models\DeleteEntityOptions $options      optional parameters
+     * @param string                     $table        The name of the table.
+     * @param string                     $partitionKey The entity partition key.
+     * @param string                     $rowKey       The entity row key.
+     * @param Models\TableServiceOptions $options      The optional parameters.
      * 
      * @return Models\GetEntityResult
      * 
@@ -548,7 +684,29 @@ class TableRestProxy extends ServiceRestProxy implements ITable
      */
     public function getEntity($table, $partitionKey, $rowKey, $options = null)
     {
-        throw new \Exception(Resources::NOT_IMPLEMENTED_MSG);
+        Validate::isValidString($table);
+        Validate::isValidString($partitionKey);
+        Validate::isValidString($rowKey);
+        
+        $method      = \HTTP_Request2::METHOD_GET;
+        $headers     = array();
+        $queryParams = array();
+        $statusCode  = Resources::STATUS_OK;
+        $path        = $this->_getEntityPath($table, $partitionKey, $rowKey);
+        
+        if (is_null($options)) {
+            $options = new TableServiceOptions();
+        }
+        
+        $queryParams[Resources::QP_TIMEOUT] = strval($options->getTimeout());
+        $headers[Resources::CONTENT_TYPE]   = Resources::XML_ATOM_CONTENT_TYPE;
+        
+        $response = $this->send($method, $headers, $queryParams, $path, $statusCode);
+        $entity   = $this->_atomSerializer->parseEntity($response->getBody());
+        $result   = new GetEntityResult();
+        $result->setEntity($entity);
+        
+        return $result;
     }
     
     /**

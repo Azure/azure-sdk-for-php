@@ -178,7 +178,7 @@ class Utilities
      * 
      * @return string
      */
-    public static function serialize($array, $rootName, $defaultTag = null, 
+    public static function serialize($array, $rootName, $defaultTag = null,
         $standalone = null
     ) {
         $xmlVersion  = '1.0';
@@ -328,7 +328,7 @@ class Utilities
         * 
         * @param string $value The string value to parse.
         * 
-        * @return DateTime
+        * @return \DateTime
         */
     public function convertToDateTime($value)
     {

@@ -15,82 +15,45 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   PEAR2\WindowsAzure\Services\Table\Models
+ * @package   PEAR2\Tests\Unit\WindowsAzure\Services\Table\Models
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
- 
-namespace PEAR2\WindowsAzure\Services\Table\Models;
-use PEAR2\WindowsAzure\Services\Table\Models\EdmType;
-use PEAR2\WindowsAzure\Validate;
+namespace PEAR2\Tests\Unit\WindowsAzure\Services\Table\Models;
+use PEAR2\WindowsAzure\Services\Table\Models\GetEntityResult;
+use PEAR2\WindowsAzure\Services\Table\Models\Entity;
 
 /**
- * Represents entity property.
+ * Unit tests for class GetEntityResult
  *
  * @category  Microsoft
- * @package   PEAR2\WindowsAzure\Services\Table\Models
+ * @package   PEAR2\Tests\Unit\WindowsAzure\Services\Table\Models
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @version   Release: @package_version@
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
-class Property
+class GetEntityResultTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @var string
+     * @covers PEAR2\WindowsAzure\Services\Table\Models\GetEntityResult::setEntity
+     * @covers PEAR2\WindowsAzure\Services\Table\Models\GetEntityResult::getEntity
      */
-    private $_edmType;
-    
-    /**
-     * @var mix
-     */
-    private $_value;
-    
-    /**
-     * Gets the type of the property.
-     * 
-     * @return string
-     */
-    public function getEdmType()
+    public function testSetEntity()
     {
-        return $this->_edmType;
-    }
-    
-    /**
-     * Sets the value of the property.
-     * 
-     * @param string $edmType The property type.
-     * 
-     * @return none
-     */
-    public function setEdmType($edmType)
-    {
-        $this->_edmType = EdmType::processType($edmType);
-    }
-    
-    /**
-     * Gets the value of the property.
-     * 
-     * @return string
-     */
-    public function getValue()
-    {
-        return $this->_value;
-    }
-    
-    /**
-     * Sets the property value.
-     * 
-     * @param mix $value The value of property.
-     * 
-     * @return none
-     */
-    public function setValue($value)
-    {
-        $this->_value = $value;
+        // Setup
+        $result = new GetEntityResult();
+        $entity = new Entity();
+        
+        // Test
+        $result->setEntity($entity);
+        
+        // Assert
+        $this->assertEquals($entity, $result->getEntity());
+        
     }
 }
 

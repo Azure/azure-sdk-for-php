@@ -23,11 +23,11 @@
  */
  
 namespace PEAR2\WindowsAzure\Services\Table\Models;
-use PEAR2\WindowsAzure\Services\Table\Models\EdmType;
-use PEAR2\WindowsAzure\Validate;
+use PEAR2\WindowsAzure\Utilities;
+use PEAR2\WindowsAzure\Resources;
 
 /**
- * Represents entity property.
+ * Holds optional parameters for deleteEntity API.
  *
  * @category  Microsoft
  * @package   PEAR2\WindowsAzure\Services\Table\Models
@@ -37,60 +37,33 @@ use PEAR2\WindowsAzure\Validate;
  * @version   Release: @package_version@
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
-class Property
+class DeleteEntityOptions extends TableServiceOptions
 {
     /**
      * @var string
      */
-    private $_edmType;
+    private $_etag;
     
     /**
-     * @var mix
-     */
-    private $_value;
-    
-    /**
-     * Gets the type of the property.
-     * 
+     * Gets entity etag.
+     *
      * @return string
      */
-    public function getEdmType()
+    public function getEtag()
     {
-        return $this->_edmType;
+        return $this->_etag;
     }
-    
+
     /**
-     * Sets the value of the property.
-     * 
-     * @param string $edmType The property type.
-     * 
+     * Sets entity etag.
+     *
+     * @param string $etag The entity Etag.
+     *
      * @return none
      */
-    public function setEdmType($edmType)
+    public function setEtag($etag)
     {
-        $this->_edmType = EdmType::processType($edmType);
-    }
-    
-    /**
-     * Gets the value of the property.
-     * 
-     * @return string
-     */
-    public function getValue()
-    {
-        return $this->_value;
-    }
-    
-    /**
-     * Sets the property value.
-     * 
-     * @param mix $value The value of property.
-     * 
-     * @return none
-     */
-    public function setValue($value)
-    {
-        $this->_value = $value;
+        $this->_etag = $etag;
     }
 }
 

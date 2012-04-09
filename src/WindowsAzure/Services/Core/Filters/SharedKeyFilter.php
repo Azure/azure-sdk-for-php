@@ -27,6 +27,7 @@ use PEAR2\WindowsAzure\Resources;
 use PEAR2\WindowsAzure\Core\IServiceFilter;
 use PEAR2\WindowsAzure\Services\Core\Authentication\SharedKeyAuthScheme;
 use PEAR2\WindowsAzure\Services\Core\Authentication\TableSharedKeyLiteAuthScheme;
+use PEAR2\WindowsAzure\Services\Core\Authentication\TableSharedKeyAuthScheme;
 use PEAR2\WindowsAzure\Core\InvalidArgumentTypeException;
 
 /**
