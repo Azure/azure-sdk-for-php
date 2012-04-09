@@ -279,7 +279,7 @@ class RoleEnvironment
                     && $currentFaultDomain == $newFaultDomain
                 ) {
                     $currentInstanceEndpoints = $currentInstance
-                        ->getInstanceEndpoints();                    
+                        ->getInstanceEndpoints();
                     $newInstanceEndpoints     = $newInstance->getInstanceEndpoints();
                     
                     self::_calculateNewRoleInstanceEndpointsChanges(
@@ -365,7 +365,7 @@ class RoleEnvironment
 
                     self::_calculateCurrentRoleInstanceEndpointsChanges(
                         $changedRoleSet,
-                        $currentInstanceEndpoints,   
+                        $currentInstanceEndpoints,
                         $newInstanceEndpoints
                     );
                 } else {
@@ -643,7 +643,7 @@ class RoleEnvironment
      */
     public static function addRoleEnvironmentChangedListener($listener)
     {
-        self::_initialize();        
+        self::_initialize();
         
         self::$_changedListeners[] = $listener;
     }
