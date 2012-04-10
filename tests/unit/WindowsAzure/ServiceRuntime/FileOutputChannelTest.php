@@ -31,7 +31,7 @@ use PEAR2\WindowsAzure\ServiceRuntime\FileOutputChannel;
 require_once 'vfsStream/vfsStream.php';
 
 /**
- * Unit tests for class FileOutputChannel
+ * Unit tests for class FileOutputChannel.
  *
  * @category  Microsoft
  * @package   PEAR2\Tests\Unit\WindowsAzure\ServiceRuntime
@@ -73,6 +73,10 @@ class FileOutputChannelTest extends \PHPUnit_Framework_TestCase
         
         $inputChannelContents = stream_get_contents($fileInputStream);
         $this->assertEquals($fileContents, $inputChannelContents);
+        
+        // invalid file
+        $this->setExpectedException(get_class(new ChannelNotAvailableException()));
+        $fileOutputChannel->getOutputStream('fake');
     }
 }
 

@@ -46,7 +46,7 @@ class Validate
      * 
      * @throws InvalidArgumentTypeException.
      * 
-     * @return none.
+     * @return none
      */
     public static function isArray($var)
     {
@@ -62,7 +62,7 @@ class Validate
      * 
      * @throws InvalidArgumentTypeException
      * 
-     * @return none.
+     * @return none
      */
     public static function isString($var)
     {
@@ -78,7 +78,7 @@ class Validate
      * 
      * @throws InvalidArgumentTypeException
      * 
-     * @return none.
+     * @return none
      */
     public static function isBoolean($var)
     {
@@ -94,7 +94,7 @@ class Validate
      * 
      * @throws InvalidArgumentTypeException
      * 
-     * @return none.
+     * @return none
      */
     public static function isInteger($var)
     {
@@ -110,7 +110,7 @@ class Validate
      * 
      * @throws \InvalidArgumentException
      * 
-     * @return none.
+     * @return none
      */
     public static function notNullOrEmpty($var)
     {
@@ -127,7 +127,7 @@ class Validate
      * 
      * @throws \Exception
      * 
-     * @return none.
+     * @return none
      */
     public static function isTrue($isSatisfied, $failureMessage)
     {
@@ -143,7 +143,7 @@ class Validate
      * 
      * @throws PEAR2\WindowsAzure\Core\InvalidArgumentTypeException
      * 
-     * @return none.
+     * @return none
      */
     public static function isDate($date)
     {
@@ -157,7 +157,7 @@ class Validate
      * 
      * @param mix $var The variable to check.
      * 
-     * @return none.
+     * @return none
      */
     public static function isValidString($var)
     {

@@ -26,7 +26,7 @@ namespace PEAR2\WindowsAzure\ServiceRuntime;
 use PEAR2\WindowsAzure\Resources;
 
 /**
- * The current state representation.
+ * The role instance endpoint data.
  *
  * @category  Microsoft
  * @package   PEAR2\WindowsAzure\ServiceRuntime
@@ -36,31 +36,92 @@ use PEAR2\WindowsAzure\Resources;
  * @version   Release: @package_version@
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
-class CurrentState
+class RoleInstanceEndpoint
 {
+    /**
+     * @var RoleInstance
+     */
+    private $_roleInstance;
+    
     /**
      * @var string
      */
-    private $_clientId;
+    private $_protocol;
+
+    /**
+     * @var string
+     */
+    private $_address;
+    
+    /**
+     * @var string
+     */
+    private $_port;
     
     /**
      * Constructor
      * 
-     * @param string $clientId The client identifier.
+     * @param string $protocol The protocol.
+     * @param string $address  The Address.
+     * @param string $port     The Port.
      */
-    public function __construct($clientId)
+    public function __construct($protocol, $address, $port)
     {
-        $this->_clientId = $clientId;
+        $this->_protocol = $protocol;
+        $this->_address  = $address;
+        $this->_port     = $port;
     }
     
     /**
-     * Gets the client identifier.
+     * Sets the role instance.
+     * 
+     * @param RoleInstance $roleInstance The role instance.
+     * 
+     * @return none
+     */
+    public function setRoleInstance($roleInstance)
+    {
+        $this->_roleInstance = $roleInstance;
+    }
+    
+    /**
+     * Returns the RoleInstance object associated with this endpoint.
+     * 
+     * @return RoleInstance
+     */
+    public function getRoleInstance()
+    {
+        return $this->_roleInstance;
+    }
+    
+    /**
+     * Returns the protocol associated with the endpoint.
      * 
      * @return string
      */
-    public function getClientId()
+    public function getProtocol()
     {
-        return $this->_clientId;
+        return $this->_protocol;
+    }
+    
+    /**
+     * Return the address.
+     * 
+     * @return string
+     */
+    public function getAddress()
+    {
+        return $this->_address;
+    }
+    
+    /**
+     * Return the port.
+     * 
+     * @return string
+     */
+    public function getPort()
+    {
+        return $this->_port;
     }
 }
 

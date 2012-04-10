@@ -26,7 +26,7 @@ namespace PEAR2\WindowsAzure\ServiceRuntime;
 use PEAR2\WindowsAzure\Resources;
 
 /**
- * The current state representation.
+ * The role instance status.
  *
  * @category  Microsoft
  * @package   PEAR2\WindowsAzure\ServiceRuntime
@@ -36,32 +36,21 @@ use PEAR2\WindowsAzure\Resources;
  * @version   Release: @package_version@
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
-class CurrentState
+class RoleInstanceStatus
 {
     /**
-     * @var string
+     * The role instance is unavailable for requests.
+     * 
+     * @var int
      */
-    private $_clientId;
+    const BUSY = 0;
     
     /**
-     * Constructor
+     * The role instance is ready to accept requests.
      * 
-     * @param string $clientId The client identifier.
+     * @var int
      */
-    public function __construct($clientId)
-    {
-        $this->_clientId = $clientId;
-    }
-    
-    /**
-     * Gets the client identifier.
-     * 
-     * @return string
-     */
-    public function getClientId()
-    {
-        return $this->_clientId;
-    }
+    const READY = 1;
 }
 
 ?>

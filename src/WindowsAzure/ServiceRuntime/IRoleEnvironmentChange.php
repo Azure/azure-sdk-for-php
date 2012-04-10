@@ -23,10 +23,9 @@
  */
 
 namespace PEAR2\WindowsAzure\ServiceRuntime;
-use PEAR2\WindowsAzure\Resources;
 
 /**
- * The current state representation.
+ * The role environment change.
  *
  * @category  Microsoft
  * @package   PEAR2\WindowsAzure\ServiceRuntime
@@ -36,32 +35,8 @@ use PEAR2\WindowsAzure\Resources;
  * @version   Release: @package_version@
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
-class CurrentState
+interface IRoleEnvironmentChange
 {
-    /**
-     * @var string
-     */
-    private $_clientId;
-    
-    /**
-     * Constructor
-     * 
-     * @param string $clientId The client identifier.
-     */
-    public function __construct($clientId)
-    {
-        $this->_clientId = $clientId;
-    }
-    
-    /**
-     * Gets the client identifier.
-     * 
-     * @return string
-     */
-    public function getClientId()
-    {
-        return $this->_clientId;
-    }
 }
 
 ?>

@@ -23,6 +23,7 @@
  */
 
 namespace PEAR2\WindowsAzure\ServiceRuntime;
+use PEAR2\WindowsAzure\Utilities;
 use PEAR2\WindowsAzure\Resources;
 
 /**
@@ -41,14 +42,35 @@ class XmlCurrentStateSerializer
     /**
      * Serializes the current state.
      * 
-     * @param CurrentState   $state         The current state.
-     * @param IOutputChannel $outputChannel The output channel.
+     * @param CurrentState  $state        The current state.
+     * @param IOutputStream $outputStream The output stream.
      * 
      * @return none
      */
-    public function serialize($state, $outputChannel)
+    public function serialize($state, $outputStream)
     {
-        throw new \Exception(Resources::NOT_IMPLEMENTED_MSG);
+        $statusLeaseInfo = array(
+            'StatusLease' => array(
+                '@attributes' => array(
+                    'ClientId' => $state->getClientId()
+                )
+            )
+        );
+        
+        if ($state instanceof AcquireCurrentState) {
+            $statusLeaseInfo['StatusLease']['Acquire'] = array(
+                'Incarnation' => $state->getIncarnation(),
+                'Status'      => $state->getStatus(),
+                'Expiration'  => Utilities::isoDate(
+                    date_timestamp_get($state->getExpiration())
+                )
+            );
+        } else if ($state instanceof ReleaseCurrentState) {
+            $statusLeaseInfo['StatusLease']['Release'] = array();
+        }
+        
+        $currentState = Utilities::serialize($statusLeaseInfo, 'CurrentState');
+        fwrite($outputStream, $currentState);
     }
 }
 
