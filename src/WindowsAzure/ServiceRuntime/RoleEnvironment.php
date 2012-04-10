@@ -54,6 +54,11 @@ class RoleEnvironment
     const VERSION_ENDPOINT_FIXED_PATH = '\\.\pipe\WindowsAzureRuntime';
 
     /**
+     * @var string
+     */
+    private static $_clientId; // TODO: initialize ... 
+    
+    /**
      * @var IRuntimeClient
      */
     private static $_runtimeClient;
@@ -89,12 +94,9 @@ class RoleEnvironment
     private static $_lastState;
 
     /**
-     * @var \DateTime
-     */
-    private static $_maxDateTime;
-
-    /**
      * Initializes the runtime client.
+     * 
+     * @static
      * 
      * @return none
      */
@@ -118,12 +120,18 @@ class RoleEnvironment
             self::$_currentEnvironmentData = self::$_runtimeClient
                 ->getRoleEnvironmentData();
         } else {
+            self::$_currentGoalState = self::$_runtimeClient
+                ->getCurrentGoalState();
             
+            self::$_currentEnvironmentData = self::$_runtimeClient
+                ->getRoleEnvironmentData();
         }
     }
 
     /**
      * Processes a goal state change.
+     * 
+     * @static
      * 
      * @return none
      */
@@ -135,6 +143,8 @@ class RoleEnvironment
     /**
      * Accepts the latest incarnation.
      * 
+     * @static
+     * 
      * @return none
      */
     private static function _acceptLatestIncarnation()
@@ -145,15 +155,272 @@ class RoleEnvironment
     /**
      * Calculates changes.
      * 
+     * @param array $changes The list of changes.
+     *
+     * @static
+     *
      * @return none
      */
-    private static function _calculateChanges()
+    private static function _calculateChanges($changes)
     {
-        throw new \Exception(Resources::NOT_IMPLEMENTED_MSG);
-    }
+        $current = self::$_currentEnvironmentData;
+        $newData = self::$_runtimeClient->getRoleEnvironmentData();
+        
+        self::_calculateConfigurationChanges($changes, $current, $newData);
 
+        $currentRoles   = $current->getRoles();
+        $newRoles       = $newData->getRoles();
+        $changedRoleSet = array();
+        
+        foreach ($currentRoles as $role) {
+            if (array_key_exists($role, $newRoles)) {
+                $currentRole = $currentRoles[$role];
+                $newRole     = $newRoles[$role];
+
+                $currentRoleInstances = $currentRole->getInstances();
+                $newRoleInstances     = $newRole->getInstances();
+                    
+                self::_calculateNewRoleInstanceChanges(
+                    $changedRoleSet,
+                    $currentRoleInstances,
+                    $newRoleInstances
+                );
+            } else {
+                $changedRoleSet[] = $role;
+            }
+        }
+        
+        foreach ($newRoles as $role) {
+            if (array_key_exists($role, $currentRoles)) {
+                $currentRole = $currentRoles[$role];
+                $newRole     = $newRoles[$role];
+                
+                $currentRoleInstances = $currentRole->getInstances();
+                $newRoleInstances     = $newRole->getInstances();
+                    
+                self::_calculateCurrentRoleInstanceChanges(
+                    $changedRoleSet,
+                    $currentRoleInstances,
+                    $newRoleInstances
+                );
+            } else {
+                $changedRoleSet[] = $role;
+            }
+        }
+        
+        foreach ($changedRoleSet as $role) {
+            $changes[] = new RoleEnvironmentTopologyChange($role);
+        }
+    }
+    
+    /**
+     * Calculates the configuration changes.
+     * 
+     * @param array               $changes                The current changes.
+     * @param RoleEnvironmentData $currentRoleEnvironment The current role 
+     *     environment data.
+     * @param RoleEnvionrmentData $newRoleEnvironment     The new role 
+     *     environment data.
+     * 
+     * @static
+     * 
+     * @return none
+     */
+    private static function _calculateConfigurationChanges($changes,
+        $currentRoleEnvironment, $newRoleEnvironment
+    ) {    
+        $currentConfig = $currentRoleEnvironment->getConfigurationSettings();
+        $newConfig     = $newRoleEnvironment->getConfigurationSettings();
+        
+        foreach ($currentConfig as $setting) {
+            if (array_key_exists($setting, $newConfig)) {
+                if ($newConfig[$setting] != $currentConfig[$setting]) {
+                    $changes[] = new RoleEnvironmentConfigurationSettingChange(
+                        $setting
+                    );
+                }
+            } else {
+                $changes[] = new RoleEnvironmentConfigurationSettingChange($setting);
+            }
+        }
+        
+        foreach ($newConfig as $setting) {
+            if (!array_key_exists($setting, $currentConfig)) {
+                $changes[] = new RoleEnvironmentConfigurationSettingChange($setting);
+            }
+        }
+    }
+    
+    /**
+     * Calculates which instances / instance endpoints were added from the current
+     * role to the new role.
+     * 
+     * @param type $changedRoleSet       The current changed role set.
+     * @param type $currentRoleInstances The current role instances.
+     * @param type $newRoleInstances     The new role instances.
+     * 
+     * @static
+     * 
+     * @return none
+     */
+    private static function _calculateNewRoleInstanceChanges($changedRoleSet, 
+        $currentRoleInstances, $newRoleInstances
+    ) {
+        foreach ($currentRoleInstances as $instanceKey => $currentInstance) {
+            if (array_key_exists($instanceKey, $newRoleInstances)) {
+                $newInstance = $newRoleInstances[$instanceKey];
+
+                $currentUpdateDomain = $currentInstance->getUpdateDomain();
+                $newUpdateDomain     = $newInstance->getUpdateDomain();
+                $currentFaultDomain  = $currentInstance->getFaultDomain();
+                $newFaultDomain      = $newInstance->getFaultDomain();
+                
+                if ($currentUpdateDomain == $newUpdateDomain
+                    && $currentFaultDomain == $newFaultDomain
+                ) {
+                    $currentInstanceEndpoints = $currentInstance
+                        ->getInstanceEndpoints();
+                    $newInstanceEndpoints     = $newInstance->getInstanceEndpoints();
+                    
+                    self::_calculateNewRoleInstanceEndpointsChanges(
+                        $changedRoleSet,
+                        $currentInstanceEndpoints,
+                        $newInstanceEndpoints
+                    );
+                } else {
+                    $changedRoleSet[] = $role;
+                }
+            } else {
+                $changedRoleSet[] = $role;
+            }
+        }
+    }
+    
+    /**
+     * Calculates which endpoints / endpoint were added from the current
+     * role to the new role.
+     * 
+     * @param type $changedRoleSet           The current changed role set.
+     * @param type $currentInstanceEndpoints The current instance endpoints.
+     * @param type $newInstanceEndpoints     The new instance endpoints.
+     * 
+     * @static
+     * 
+     * @return none
+     */
+    private static function _calculateNewRoleInstanceEndpointsChanges(
+        $changedRoleSet, $currentInstanceEndpoints, $newInstanceEndpoints
+    ) {
+        foreach ($currentInstanceEndpoints as $endpointKey => $currentEndpoint) {
+            if (array_key_exists($endpointKey, $newInstanceEndpoints)) {
+                $newEndpoint = $newInstanceEndpoints[$endpointKey];
+
+                $currentProtocol = $currentEndpoint->getProtocol();
+                $newProtocol     = $newEndpoint->getProtocol();
+                $currentAddress  = $currentEndpoint->getAddress();
+                $newAddress      = $newEndpoint->getAddress();
+                $currentPort     = $currentEndpoint->getPort();
+                $newPort         = $newEndpoint->getPort();
+                if ($currentProtocol != $newProtocol
+                    || $currentAddress != $newAddress
+                    || $currentPort != $newPort
+                ) {
+                    $changedRoleSet[] = $role;
+                }
+            } else {
+                $changedRoleSet[] = $role;
+            }
+        }
+    }
+    
+    /**
+     * Calculates which instances / instance endpoints were removed from the current
+     * role to the new role.
+     * 
+     * @param type $changedRoleSet       The current changed role set.
+     * @param type $currentRoleInstances The current role instances.
+     * @param type $newRoleInstances     The new role instances.
+     * 
+     * @static
+     * 
+     * @return none
+     */
+    private static function _calculateCurrentRoleInstanceChanges($changedRoleSet, 
+        $currentRoleInstances, $newRoleInstances
+    ) {
+        foreach ($newRoleInstances as $instanceKey => $newInstance) {
+            if (array_key_exists($instanceKey, $currentRoleInstances)) {
+                $currentInstance = $currentRoleInstances[$instanceKey];
+                
+                $currentUpdateDomain = $currentInstance->getUpdateDomain();
+                $newUpdateDomain     = $newInstance->getUpdateDomain();
+                $currentFaultDomain  = $currentInstance->getFaultDomain();
+                $newFaultDomain      = $newInstance->getFaultDomain();
+                
+                if ($currentUpdateDomain == $newUpdateDomain
+                    && $currentFaultDomain == $newFaultDomain
+                ) {
+                    $newInstanceEndpoints     = $newInstance->getInstanceEndpoints();
+                    $currentInstanceEndpoints = $currentInstance->getEndpoints();
+
+                    self::_calculateCurrentRoleInstanceEndpointsChanges(
+                        $changedRoleSet,
+                        $currentInstanceEndpoints,
+                        $newInstanceEndpoints
+                    );
+                } else {
+                    $changedRoleSet[] = $role;
+                }
+            } else {
+                $changedRoleSet[] = $role;
+            }
+        }
+    }
+    
+    /**
+     * Calculates which endpoints / endpoint were removed from the current
+     * role to the new role.
+     * 
+     * @param type $changedRoleSet           The current changed role set.
+     * @param type $currentInstanceEndpoints The current instance endpoints.
+     * @param type $newInstanceEndpoints     The new instance endpoints.
+     * 
+     * @static
+     * 
+     * @return none
+     */
+    private static function _calculateCurrentRoleInstanceEndpointsChanges(
+        $changedRoleSet, $currentInstanceEndpoints, $newInstanceEndpoints
+    ) {
+        foreach ($newInstanceEndpoints as $endpointKey => $newEndpoint) {
+            if (array_key_exists(
+                $endpointKey,
+                $currentInstanceEndpoints
+            )
+            ) {
+                $currentEndpoint = $currentInstanceEndpoints
+                    [$endpointKey];
+
+                $currentProtocol = $currentEndpoint->getProtocol();
+                $newProtocol     = $newEndpoint->getProtocol();
+                $currentAddress  = $currentEndpoint->getAddress();
+                $newAddress      = $newEndpoint->getAddress();
+                $currentPort     = $currentEndpoint->getPort();
+                $newPort         = $newEndpoint->getPort();
+                if ($currentProtocol != $newProtocol
+                    || $currentAddress != $newAddress
+                    || $currentPort != $newPort
+                ) {
+                    $changedRoleSet[] = $role;
+                }
+            }
+        }
+    }
+    
     /**
      * Raises a stopping event.
+     * 
+     * @static
      * 
      * @return none
      */
@@ -165,6 +432,8 @@ class RoleEnvironment
     /**
      * Returns a RoleInstance object that represents the role instance
      * in which this code is currently executing.
+     * 
+     * @static
      * 
      * @return RoleInstance
      */
@@ -179,6 +448,8 @@ class RoleEnvironment
      * Returns the deployment ID that uniquely identifies the deployment in
      * which this role instance is running.
      * 
+     * @static
+     * 
      * @return string
      */
     public static function getDeploymentId()
@@ -191,6 +462,8 @@ class RoleEnvironment
     /**
      * Indicates whether the role instance is running in the Windows Azure
      * environment.
+     * 
+     * @static
      * 
      * @return boolean
      */
@@ -209,6 +482,8 @@ class RoleEnvironment
     /**
      * Indicates whether the role instance is running in the development fabric.
      * 
+     * @static
+     * 
      * @return boolean
      */
     public static function isEmulated()
@@ -222,6 +497,8 @@ class RoleEnvironment
      * Returns the set of Role objects defined for your service.
      * 
      * Roles are defined in the service definition file.
+     * 
+     * @static
      * 
      * @return array
      */
@@ -239,6 +516,8 @@ class RoleEnvironment
      * file. Values for configuration settings are set in the service
      * configuration file.
      * 
+     * @static
+     * 
      * @return array
      */
     public static function getConfigurationSettings()
@@ -250,6 +529,8 @@ class RoleEnvironment
 
     /**
      * Retrieves the set of named local storage resources.
+     * 
+     * @static
      * 
      * @return array
      */
@@ -268,11 +549,25 @@ class RoleEnvironment
      * This ensures that no new requests are routed to the instance while it 
      * is restarting.
      * 
+     * @static
+     * 
      * @return none
      */
     public static function requestRecycle()
     {
-        throw new \Exception(Resources::NOT_IMPLEMENTED_MSG);
+        // 2038-01-19 04:14:07 
+        $maxDateTime = new \DateTime(date(Resources::TIMESTAMP_FORMAT, PHP_INT_MAX));
+        
+        self::_initialize();
+        
+        $recycleState = new AcquireCurrentState(
+            self::$_clientId,
+            self::$_currentGoalState->getIncarnation(),
+            CurrentStatus::RECYCLE,
+            $maxDateTime
+        );
+        
+        self::$_runtimeClient->setCurrentState($recycleState);
     }
 
     /**
@@ -283,14 +578,38 @@ class RoleEnvironment
      * the load balancer. If the instance's state is Busy, it will not receive
      * requests from the load balancer.
      * 
-     * @param string    $status        The new role status.
-     * @param \DateTime $expirationUtc The expiration UTC time.
+     * @param RoleInstanceStatus $status        The new role status.
+     * @param \DateTime          $expirationUtc The expiration UTC time.
+     * 
+     * @static
      * 
      * @return none
      */
     public static function setStatus($status, $expirationUtc)
     {
-        throw new \Exception(Resources::NOT_IMPLEMENTED_MSG);
+        self::_initialize();
+        
+        $currentStatus = CurrentStatus::STARTED;
+        
+        switch ($status) {
+        case RoleInstanceStatus::BUSY:
+            $currentStatus = CurrentStatus::BUSY;
+            break;
+        case RoleInstanceStatus::READY:
+            $currentStatus = CurrentStatus::STARTED;
+            break;
+        }
+        
+        $newState = new AcquireCurrentState(
+            self::$_clientId,
+            self::$_currentGoalState->getIncarnation(),
+            $currentStatus,
+            $expirationUtc
+        );
+        
+        self::$_lastState = $newState;
+        
+        self::$_runtimeClient->setCurrentState($newState);
     }
 
     /**
@@ -299,26 +618,40 @@ class RoleEnvironment
      * An instance may indicate that it has completed communicating status by 
      * calling this method.
      * 
+     * @static
+     * 
      * @return none
      */
     public static function clearStatus()
     {
-        throw new \Exception(Resources::NOT_IMPLEMENTED_MSG);
+        self::_initialize();
+        
+        $newState = new ReleaseCurrentState(self::$_clientId);
+        
+        self::$_lastState = $newState;
+        
+        self::$_runtimeClient->setCurrentState($newState);
     }
 
     /**
      * Adds an event listener for the changed event, which occurs
      * after a configuration change has been applied to a role instance.
      * 
+     * @param function $listener The changed listener.
+     * 
      * @return none
      */
-    public static function addRoleEnvironmentChangedListener()
+    public static function addRoleEnvironmentChangedListener($listener)
     {
-        throw new \Exception(Resources::NOT_IMPLEMENTED_MSG);
+        self::_initialize();
+        
+        self::$_changedListeners[] = $listener;
     }
 
     /**
      * Removes an event listener for the Changed event.
+     * 
+     * @static
      * 
      * @return none
      */
@@ -346,15 +679,23 @@ class RoleEnvironment
      * recycled. When the instance is recycled, the configuration change is 
      * applied when it restarts.
      * 
+     * @param function $listener The changing listener.
+     * 
+     * @static
+     * 
      * @return none
      */
-    public static function addRoleEnvironmentChangingListener()
+    public static function addRoleEnvironmentChangingListener($listener)
     {
-        throw new \Exception(Resources::NOT_IMPLEMENTED_MSG);
+        self::_initialize();
+        
+        self::$_changingListeners[] = $listener;
     }
 
     /** 
      * Removes an event listener for the Changing event.
+     * 
+     * @static
      * 
      * @return none
      */
@@ -367,15 +708,23 @@ class RoleEnvironment
      * Adds an event listener for the Stopping event, which occurs
      * wheen the role is stopping.
      * 
+     * @param function $listener The stopping listener.
+     * 
+     * @static
+     * 
      * @return none
      */
-    public static function addRoleEnvironmentStoppingListener()
+    public static function addRoleEnvironmentStoppingListener($listener)
     {
-        throw new \Exception(Resources::NOT_IMPLEMENTED_MSG);
+        self::_initialize();
+        
+        self::$_stoppingListeners = $listener;
     }
 
     /**
      * Removes an event listener for the Stopping event.
+     * 
+     * @static
      * 
      * @return none
      */

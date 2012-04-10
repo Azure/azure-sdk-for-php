@@ -27,7 +27,7 @@ use PEAR2\WindowsAzure\ServiceRuntime\RoleEnvironmentData;
 use PEAR2\WindowsAzure\ServiceRuntime\RoleInstance;
 
 /**
- * Unit tests for class RoleEnvironmentData
+ * Unit tests for class RoleEnvironmentData.
  *
  * @category  Microsoft
  * @package   PEAR2\Tests\Unit\WindowsAzure\ServiceRuntime

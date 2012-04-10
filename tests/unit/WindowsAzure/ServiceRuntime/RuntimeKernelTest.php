@@ -26,7 +26,7 @@ use PEAR2\Tests\Framework\TestResources;
 use PEAR2\WindowsAzure\ServiceRuntime\RuntimeKernel;
 
 /**
- * Unit tests for class RuntimeKernel
+ * Unit tests for class RuntimeKernel.
  *
  * @category  Microsoft
  * @package   PEAR2\Tests\Unit\WindowsAzure\ServiceRuntime

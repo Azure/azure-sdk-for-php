@@ -29,7 +29,7 @@ use PEAR2\WindowsAzure\ServiceRuntime\FileInputChannel;
 require_once 'vfsStream/vfsStream.php';
 
 /**
- * Unit tests for class ChunkedGoalStateDeserializer
+ * Unit tests for class ChunkedGoalStateDeserializer.
  *
  * @category  Microsoft
  * @package   PEAR2\Tests\Unit\WindowsAzure\ServiceRuntime

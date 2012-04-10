@@ -23,10 +23,9 @@
  */
 
 namespace PEAR2\WindowsAzure\ServiceRuntime;
-use PEAR2\WindowsAzure\Resources;
 
 /**
- * The current state representation.
+ * The role environment topology change.
  *
  * @category  Microsoft
  * @package   PEAR2\WindowsAzure\ServiceRuntime
@@ -36,31 +35,31 @@ use PEAR2\WindowsAzure\Resources;
  * @version   Release: @package_version@
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
-class CurrentState
+class RoleEnvironmentTopologyChange implements IRoleEnvironmentChange
 {
     /**
      * @var string
      */
-    private $_clientId;
+    private $_roleName;
     
     /**
      * Constructor
      * 
-     * @param string $clientId The client identifier.
+     * @param string $roleName The role name.
      */
-    public function __construct($clientId)
+    public function __construct($roleName)
     {
-        $this->_clientId = $clientId;
+        $this->_roleName = $roleName;
     }
     
     /**
-     * Gets the client identifier.
+     * Returns the name of the role.
      * 
      * @return string
      */
-    public function getClientId()
+    public function getRoleName()
     {
-        return $this->_clientId;
+        return $this->_roleName;
     }
 }
 

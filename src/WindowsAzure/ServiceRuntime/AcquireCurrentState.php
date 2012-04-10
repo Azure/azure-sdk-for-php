@@ -26,7 +26,7 @@ namespace PEAR2\WindowsAzure\ServiceRuntime;
 use PEAR2\WindowsAzure\Resources;
 
 /**
- * The current state representation.
+ * The acquire current state request.
  *
  * @category  Microsoft
  * @package   PEAR2\WindowsAzure\ServiceRuntime
@@ -36,31 +36,67 @@ use PEAR2\WindowsAzure\Resources;
  * @version   Release: @package_version@
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
-class CurrentState
+class AcquireCurrentState extends CurrentState
 {
     /**
      * @var string
      */
-    private $_clientId;
+    private $_incarnation;
+    
+    /**
+     * @var CurrentStatus
+     */
+    private $_status;
+    
+    /**
+     * @var \DateTime
+     */
+    private $_expiration;
     
     /**
      * Constructor
      * 
-     * @param string $clientId The client identifier.
+     * @param string    $clientId    The client identifier.
+     * @param string    $incarnation The incarnation.
+     * @param string    $status      The status.
+     * @param \DateTime $expiration  The expiration date.
      */
-    public function __construct($clientId)
+    public function __construct($clientId, $incarnation, $status, $expiration)
     {
-        $this->_clientId = $clientId;
+        parent::__construct($clientId);
+        $this->_incarnation = $incarnation;
+        $this->_status      = $status;
+        $this->_expiration  = $expiration;
     }
     
     /**
-     * Gets the client identifier.
+     * Gets the incarnation.
      * 
      * @return string
      */
-    public function getClientId()
+    public function getIncarnation()
     {
-        return $this->_clientId;
+        return $this->_incarnation;
+    }
+    
+    /**
+     * Gets the status.
+     * 
+     * @return string
+     */
+    public function getStatus()
+    {
+        return $this->_status;
+    }
+    
+    /**
+     * Gets the expiration.
+     * 
+     * @return \DateTime
+     */
+    public function getExpiration()
+    {
+        return $this->_expiration;
     }
 }
 

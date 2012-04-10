@@ -23,10 +23,11 @@
  */
 namespace PEAR2\Tests\Unit\WindowsAzure\ServiceRuntime;
 use PEAR2\Tests\Framework\TestResources;
-use PEAR2\WindowsAzure\ServiceRuntime\Role;
+use PEAR2\WindowsAzure\ServiceRuntime\AcquireCurrentState;
+use PEAR2\WindowsAzure\ServiceRuntime\CurrentStatus;
 
 /**
- * Unit tests for class Role.
+ * Unit tests for class AcquireCurrentState.
  *
  * @category  Microsoft
  * @package   PEAR2\Tests\Unit\WindowsAzure\ServiceRuntime
@@ -36,35 +37,34 @@ use PEAR2\WindowsAzure\ServiceRuntime\Role;
  * @version   Release: @package_version@
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
-class RoleTest extends \PHPUnit_Framework_TestCase
+class AcquireCurrentStateTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @covers PEAR2\WindowsAzure\ServiceRuntime\Role::__construct
-     * @covers PEAR2\WindowsAzure\ServiceRuntime\Role::getName
+     * @covers PEAR2\WindowsAzure\ServiceRuntime\AcquireCurrentState::__construct
+     * @covers PEAR2\WindowsAzure\ServiceRuntime\AcquireCurrentState::getIncarnation
+     * @covers PEAR2\WindowsAzure\ServiceRuntime\AcquireCurrentState::getStatus
+     * @covers PEAR2\WindowsAzure\ServiceRuntime\AcquireCurrentState::getExpiration
      */
-    public function testGetName()
+    public function testConstruct()
     {
-        $name = 'roleName';
-
+        $clientId    = 'ClientId';
+        $incarnation = 2;
+        $status      = CurrentStatus::BUSY;
+        $expiration  = new \DateTime();
+        
         // Setup
-        $role = new Role($name, array());
+        $acquireCurrentState = new AcquireCurrentState(
+            $clientId,
+            $incarnation,
+            $status,
+            $expiration
+        );
         
         // Test
-        $this->assertEquals($name, $role->getName());
-    }
-
-    /**
-     * @covers PEAR2\WindowsAzure\ServiceRuntime\Role::getInstances
-     */
-    public function testGetInstances()
-    {
-        $instances = array();
-
-        // Setup
-        $role = new Role(null, $instances);
-        
-        // Test
-        $this->assertEquals($instances, $role->getInstances());
+        $this->assertEquals($clientId, $acquireCurrentState->getClientId());
+        $this->assertEquals($incarnation, $acquireCurrentState->getIncarnation());
+        $this->assertEquals($status, $acquireCurrentState->getStatus());
+        $this->assertEquals($expiration, $acquireCurrentState->getExpiration());
     }
 }
 
