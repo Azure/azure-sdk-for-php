@@ -49,7 +49,7 @@ class Utilities
      * 
      * @static
      * 
-     * @return mixed.
+     * @return mixed
      */
     public static function tryGetValue($array, $key, $default = null)
     {
@@ -58,13 +58,13 @@ class Utilities
     
     /**
      * Returns the specified value of the key chain passed from $array and in case
-     * that key chain doesn't exist, the default value is returned.
+     * that key chain doesn't exist, null is returned.
      *
      * @param array $array Array to be used.
      * 
      * @static
      * 
-     * @return mixed.
+     * @return mixed
      */
     public static function tryGetKeysChainValue($array)
     {
@@ -91,7 +91,7 @@ class Utilities
      * 
      * @static
      * 
-     * @return bool.
+     * @return bool
      */
     public static function startsWith($string, $prefix)
     {
@@ -105,7 +105,7 @@ class Utilities
      * 
      * @static
      * 
-     * @return array.
+     * @return array
      */
     public static function getArray($var)
     {
@@ -134,7 +134,7 @@ class Utilities
      * 
      * @static
      * 
-     * @return array.
+     * @return array
      */
     public static function unserialize($xml)
     {
@@ -152,7 +152,7 @@ class Utilities
      * 
      * @static
      * 
-     * @return array.
+     * @return array
      */
     private static function _sxml2arr($sxml, $arr = array ()) 
     { 
@@ -211,9 +211,8 @@ class Utilities
      * 
      * @static
      * 
-     * @return void.
+     * @return void
      */
-
     private static function _arr2xml(\XMLWriter $xmlw, $data, $defaultTag = null)
     {
         foreach ($data as $key => $value) {

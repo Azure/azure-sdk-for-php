@@ -253,6 +253,29 @@ class UtilitiesTest extends PHPUnit_Framework_TestCase
     }
     
     /**
+     * @covers PEAR2\WindowsAzure\Utilities::serialize
+     * @covers PEAR2\WindowsAzure\Utilities::_arr2xml
+     */
+    public function testSerializeAttribute()
+    {
+        // Setup
+        $expected = '<?xml version="1.0" encoding="UTF-8"?>' . "\n" .
+            '<Object field1="value1" field2="value2"/>';
+        
+        $object = array(
+            '@attributes' => array(
+                'field1' => 'value1',
+                'field2' => 'value2'
+            )
+        );
+        
+        // Test
+        $actual = Utilities::serialize($object, 'Object');
+        
+        $this->assertEquals($expected, $actual);
+    }
+    
+    /**
      * @covers PEAR2\WindowsAzure\Utilities::toBoolean
      */
     public function testToBoolean()

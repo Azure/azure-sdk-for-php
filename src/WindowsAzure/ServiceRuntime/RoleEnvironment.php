@@ -556,7 +556,7 @@ class RoleEnvironment
     public static function requestRecycle()
     {
         // 2038-01-19 04:14:07 
-        $maxDateTime = new \DateTime(date('Y-m-d H:i:s', PHP_INT_MAX));
+        $maxDateTime = new \DateTime(date(Resources::TIMESTAMP_FORMAT, PHP_INT_MAX));
         
         self::_initialize();
         
