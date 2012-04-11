@@ -576,10 +576,11 @@ class TableRestProxyTest extends TableRestProxyTestBase
         $pk = '123';
         $rk = '456';
         $expected = TestResources::getTestEntity($pk, $rk);
-        $r = $this->wrapper->insertEntity($name, $expected);
+        //$r = $this->wrapper->insertEntity($name, $expected);
         $operations = new BatchOperations();
-        $etag = $r->getEntity()->getEtag();
-        $operations->addDeleteEntity($name, $pk, $rk, $etag);
+        //$etag = $r->getEntity()->getEtag();
+        //$operations->addDeleteEntity($name, $pk, $rk, $etag);
+        $operations->addInsertEntity($name, $expected);
         
         // Test
         $this->wrapper->batch($operations);

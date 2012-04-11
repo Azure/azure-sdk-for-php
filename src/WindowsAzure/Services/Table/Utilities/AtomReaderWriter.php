@@ -95,7 +95,7 @@ class AtomReaderWriter implements IAtomReaderWriter
             $xml[]   = implode('', $value);
         }
 
-        return implode("\n", $xml);
+        return implode('', $xml);
     }
     
     /** 
@@ -205,23 +205,7 @@ class AtomReaderWriter implements IAtomReaderWriter
     {
         // There are extra spaces at the end of lines 2, 3 and 4 which are important
         // for having the code works fine with emulator.
-        $xml = '<?xml version="1.0" encoding="utf-8" standalone="yes"?>
-            <entry 
-            xmlns:d="http://schemas.microsoft.com/ado/2007/08/dataservices" 
-            xmlns:m="http://schemas.microsoft.com/ado/2007/08/dataservices/metadata" 
-            xmlns="http://www.w3.org/2005/Atom">
-            <title />
-            <updated>{tpl:Updated}</updated>
-            <author>
-            <name />
-            </author>
-            <id />
-            <content type="application/xml">
-                <m:properties>
-                    {tpl:Properties}
-                </m:properties>
-            </content>
-        </entry>';
+        $xml = '<?xml version="1.0" encoding="utf-8"?><entry xmlns:d="http://schemas.microsoft.com/ado/2007/08/dataservices" xmlns:m="http://schemas.microsoft.com/ado/2007/08/dataservices/metadata" xmlns="http://www.w3.org/2005/Atom"><title /><updated>{tpl:Updated}</updated><author><name /></author><id /><content type="application/xml"><m:properties>{tpl:Properties}</m:properties></content></entry>';
      
         $edmDate = Utilities::convertToEdmDateTime($entity->getTimestamp());
         $xml     = self::_fillTemplate(

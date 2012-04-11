@@ -275,6 +275,18 @@ class HttpCallContext
     }
     
     /**
+     * Removes header from the HTTP request headers.
+     * 
+     * @param string $name The HTTP header name.
+     * 
+     * @return none
+     */
+    public function removeHeader($name)
+    {
+        unset($this->_headers[$name]);
+    }
+    
+    /**
      * Adds or sets query parameter pair. Note that this method doesn't do any
      * validation or has any tweaks as the actual set of query parameters and all 
      * tweaks are handled in the Uri object.
@@ -328,8 +340,7 @@ class HttpCallContext
             $headers .= "$key: $value\n";
         }
         
-        return "$this->_method $this->_uri/$this->_path HTTP/1.1\n$headers
-            $this->_body";
+        return "$this->_method $this->_uri/$this->_path HTTP/1.1\n$headers$this->_body";
     }
 }
 

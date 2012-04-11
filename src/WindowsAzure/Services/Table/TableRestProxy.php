@@ -109,11 +109,9 @@ class TableRestProxy extends ServiceRestProxy implements ITable
             $options->setEtag($etag);
             $context = $this->_constructDeleteEntityContext($table, $pk, $rk, $options);
             $body    = $context->getBody();
-            \PEAR2\WindowsAzure\Logger::log($body, 'HTTP Body:');
-            $headers = $context->getHeaders();
-            unset($headers[Resources::CONTENT_TYPE]);
+            $context->removeHeader(Resources::CONTENT_TYPE);
             $headers[Resources::CONTENT_ID] = strval($contentId);
-            $context->setHeaders($headers);
+            \PEAR2\WindowsAzure\Logger::log($headers);
             $mimeBodyPart = $context->__toString();
             \PEAR2\WindowsAzure\Logger::log($mimeBodyPart, 'MIME part obj:-');
 
