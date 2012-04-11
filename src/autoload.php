@@ -4,6 +4,7 @@ spl_autoload_register(
       static $classes = null;
       if ($classes === null) {
          $classes = array(
+            'pear2\\windowsazure\\core\\httpcallcontext' => '/WindowsAzure/Core/HttpCallContext.php',
             'pear2\\windowsazure\\core\\httpclient' => '/WindowsAzure/Core/HttpClient.php',
             'pear2\\windowsazure\\core\\ihttpclient' => '/WindowsAzure/Core/IHttpClient.php',
             'pear2\\windowsazure\\core\\invalidargumenttypeexception' => '/WindowsAzure/Core/InvalidArgumentTypeException.php',
@@ -12,6 +13,7 @@ spl_autoload_register(
             'pear2\\windowsazure\\core\\serviceexception' => '/WindowsAzure/Core/ServiceException.php',
             'pear2\\windowsazure\\core\\url' => '/WindowsAzure/Core/Url.php',
             'pear2\\windowsazure\\core\\windowsazureutilities' => '/WindowsAzure/Core/WindowsAzureUtilities.php',
+            'pear2\\windowsazure\\logger' => '/WindowsAzure/Logger.php',
             'pear2\\windowsazure\\resources' => '/WindowsAzure/Resources.php',
             'pear2\\windowsazure\\serviceruntime\\channelnotavailableexception' => '/WindowsAzure/ServiceRuntime/ChannelNotAvailableException.php',
             'pear2\\windowsazure\\serviceruntime\\chunkedgoalstatedeserializer' => '/WindowsAzure/ServiceRuntime/ChunkedGoalStateDeserializer.php',
@@ -131,6 +133,10 @@ spl_autoload_register(
             'pear2\\windowsazure\\services\\queue\\queueservice' => '/WindowsAzure/Services/Queue/QueueService.php',
             'pear2\\windowsazure\\services\\queue\\queuesettings' => '/WindowsAzure/Services/Queue/QueueSettings.php',
             'pear2\\windowsazure\\services\\table\\itable' => '/WindowsAzure/Services/Table/ITable.php',
+            'pear2\\windowsazure\\services\\table\\models\\batchoperation' => '/WindowsAzure/Services/Table/Models/BatchOperation.php',
+            'pear2\\windowsazure\\services\\table\\models\\batchoperationparamname' => '/WindowsAzure/Services/Table/Models/BatchOperationParamName.php',
+            'pear2\\windowsazure\\services\\table\\models\\batchoperations' => '/WindowsAzure/Services/Table/Models/BatchOperations.php',
+            'pear2\\windowsazure\\services\\table\\models\\batchoperationtype' => '/WindowsAzure/Services/Table/Models/BatchOperationType.php',
             'pear2\\windowsazure\\services\\table\\models\\deleteentityoptions' => '/WindowsAzure/Services/Table/Models/DeleteEntityOptions.php',
             'pear2\\windowsazure\\services\\table\\models\\edmtype' => '/WindowsAzure/Services/Table/Models/EdmType.php',
             'pear2\\windowsazure\\services\\table\\models\\entity' => '/WindowsAzure/Services/Table/Models/Entity.php',
@@ -155,6 +161,8 @@ spl_autoload_register(
             'pear2\\windowsazure\\services\\table\\tablesettings' => '/WindowsAzure/Services/Table/TableSettings.php',
             'pear2\\windowsazure\\services\\table\\utilities\\atomreaderwriter' => '/WindowsAzure/Services/Table/Utilities/AtomReaderWriter.php',
             'pear2\\windowsazure\\services\\table\\utilities\\iatomreaderwriter' => '/WindowsAzure/Services/Table/Utilities/IAtomReaderWriter.php',
+            'pear2\\windowsazure\\services\\table\\utilities\\imimereaderwriter' => '/WindowsAzure/Services/Table/Utilities/IMimeReaderWriter.php',
+            'pear2\\windowsazure\\services\\table\\utilities\\mimereaderwriter' => '/WindowsAzure/Services/Table/Utilities/MimeReaderWriter.php',
             'pear2\\windowsazure\\utilities' => '/WindowsAzure/Utilities.php',
             'pear2\\windowsazure\\validate' => '/WindowsAzure/Validate.php'
           );

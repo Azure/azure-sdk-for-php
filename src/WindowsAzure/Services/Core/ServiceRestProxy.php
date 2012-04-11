@@ -26,6 +26,7 @@ namespace PEAR2\WindowsAzure\Services\Core;
 use PEAR2\WindowsAzure\Resources;
 use PEAR2\WindowsAzure\Validate;
 use PEAR2\WindowsAzure\Core\Url;
+use PEAR2\WindowsAzure\Core\HttpCallContext;
 use PEAR2\WindowsAzure\Core\IHttpClient;
 use PEAR2\WindowsAzure\Core\WindowsAzureUtilities;
 use PEAR2\WindowsAzure\Services\Blob\Models\AccessConditionHeaderType;
@@ -43,9 +44,20 @@ use PEAR2\WindowsAzure\Services\Blob\Models\AccessConditionHeaderType;
  */
 class ServiceRestProxy
 {
+    /**
+     * @var PEAR2\WindowsAzure\Core\IHttpClient
+     */
     private $_channel;
+    
+    /**
+     * @var array
+     */
     private $_filters;
-    private $_url;
+    
+    /**
+     * @var string
+     */
+    protected $url;
     
     /**
      * Constructor
@@ -58,7 +70,7 @@ class ServiceRestProxy
      */
     public function __construct($channel, $uri)
     {
-        $this->_url     = new Url($uri);
+        $this->url     = $uri;
         $this->_channel = $channel;
         $this->_filters = array();
     }
@@ -71,6 +83,42 @@ class ServiceRestProxy
     public function getFilters()
     {
         return $this->_filters;
+    }
+    
+    /**
+     * Sends HTTP request with the specified HTTP call context.
+     * 
+     * @param PEAR2\WindowsAzure\Core\HttpCallContext $context The HTTP call context.
+     * 
+     * @return \HTTP_Request2_Response
+     */
+    protected function send2($context)
+    {
+        $channel     = clone $this->_channel;
+        $url         = new Url($this->url);
+        $headers     = $context->getHeaders();
+        $statusCodes = $context->getStatusCodes();
+        $body        = $context->getBody();
+        $queryParams = $context->getQueryParameters();
+        $path        = $context->getPath();
+
+        $channel->setMethod($context->getMethod());
+        $channel->setExpectedStatusCode($statusCodes);
+        $channel->setBody($body);
+        foreach ($headers as $key => $value) {
+            if (!is_null($value) && !empty($value)) {
+                $channel->setHeader($key, $value);
+            }
+        }
+        
+        $url->setQueryVariables($queryParams);
+        if (!empty($path)) {
+            $url->appendUrlPath($path);
+        }
+        
+        $channel->send($this->_filters, $url);
+        
+        return $channel->getResponse();
     }
     
     /**
@@ -89,34 +137,22 @@ class ServiceRestProxy
     protected function send($method, $headers, $queryParams, $path, $statusCode,
         $body = Resources::EMPTY_STRING, $config = array()
     ) {
-        $channel = clone $this->_channel;
-        $url     = clone $this->_url;
+        $context = new HttpCallContext();
+        $context->setBody($body);
+        $context->setHeaders($headers);
+        $context->setMethod($method);
+        $context->setPath($path);
+        $context->setQueryParameters($queryParams);
         
-        $channel->setMethod($method);
-        
-        foreach ($headers as $key => $value) {
-            if (!is_null($value) && !empty($value)) {
-                $channel->setHeader($key, $value);
-            }
+        if (is_array($statusCode)) {
+            $context->setStatusCodes($statusCode);
+        } else if (is_integer($statusCode)) {
+            $context->addStatusCode($statusCode);
+        } else {
+            throw new \InvalidArgumentException();
         }
         
-        $channel->setExpectedStatusCode($statusCode);
-        $channel->setBody($body);
-        $url->setQueryVariables($queryParams);
-        if (!empty($path)) {
-            $url->appendUrlPath($path);
-        }
-        
-        foreach ($config as $key => $value) {
-            if (!empty($value)) {
-                $channel->setConfig($key, $value);
-            }
-                
-        }
-        
-        $channel->send($this->_filters, $url);
-        
-        return $channel->getResponse();
+        return $this->send2($context);
     }
 
     /**

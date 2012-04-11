@@ -26,6 +26,7 @@ namespace PEAR2\WindowsAzure\Services\Table;
 use PEAR2\WindowsAzure\Resources;
 use PEAR2\WindowsAzure\Utilities;
 use PEAR2\WindowsAzure\Validate;
+use PEAR2\WindowsAzure\Core\HttpCallContext;
 use PEAR2\WindowsAzure\Services\Core\ServiceRestProxy;
 use PEAR2\WindowsAzure\Services\Table\Models\TableServiceOptions;
 use PEAR2\WindowsAzure\Services\Core\Models\GetServicePropertiesResult;
@@ -39,6 +40,8 @@ use PEAR2\WindowsAzure\Services\Table\Models\QueryEntitiesOptions;
 use PEAR2\WindowsAzure\Services\Table\Models\QueryEntitiesResult;
 use PEAR2\WindowsAzure\Services\Table\Models\DeleteEntityOptions;
 use PEAR2\WindowsAzure\Services\Table\Models\GetEntityResult;
+use PEAR2\WindowsAzure\Services\Table\Models\BatchOperationType;
+use PEAR2\WindowsAzure\Services\Table\Models\BatchOperationParamName;
 
 /**
  * This class constructs HTTP requests and receive HTTP responses for table
@@ -55,9 +58,216 @@ use PEAR2\WindowsAzure\Services\Table\Models\GetEntityResult;
 class TableRestProxy extends ServiceRestProxy implements ITable
 {
     /**
-     * @var IAtomReaderWriter
+     * @var Utilities\IAtomReaderWriter
      */
     private $_atomSerializer;
+    
+    /**
+     *
+     * @var Utilities\IMimeReaderWriter
+     */
+    private $_mimeSerializer;
+    
+    /**
+     * Creates MIME part body for batch API.
+     * 
+     * @param array $operations The batch operations.
+     * 
+     * @return array
+     */
+    private function _createBatchRequestBody($batchOperations)
+    {
+        \PEAR2\WindowsAzure\Logger::log($batchOperations);
+        
+        $mimeBodyParts = array();
+        $operations = $batchOperations->getOperations();
+        $contentId = 1;
+        foreach ($operations as $operation) {
+            $mimeBodyPart = null;
+            
+            switch ($operation->getType()) {
+            case BatchOperationType::INSERT_ENTITY_OPERATION:
+            $table   = $operation->getParam(BatchOperationParamName::BP_TABLE);
+            $entity  = $operation->getParam(BatchOperationParamName::BP_ENTITY);
+            $context = $this->_constructInsertEntityContext($table, $entity, null);
+            $ct      = $context->getHeader(Resources::CONTENT_TYPE);
+            $body    = $context->getBody();
+            $ct     .= ';type=entry';
+            $context->addHeader(Resources::CONTENT_TYPE, $ct);
+            $context->addHeader(Resources::CONTENT_LENGTH, strlen($body));
+            $context->addHeader(Resources::CONTENT_ID, strval($contentId));
+            $mimeBodyPart = $context->__toString();
+            \PEAR2\WindowsAzure\Logger::log($mimeBodyPart, 'MIME part obj:-');
+            break;
+        
+            case BatchOperationType::DELETE_ENTITY_OPERATION:
+            $table   = $operation->getParam(BatchOperationParamName::BP_TABLE);
+            $pk      = $operation->getParam(BatchOperationParamName::BP_PARTITION_KEY);
+            $rk      = $operation->getParam(BatchOperationParamName::BP_ROW_KEY);
+            $etag    = $operation->getParam(BatchOperationParamName::BP_ETAG);
+            $options = new DeleteEntityOptions();
+            $options->setEtag($etag);
+            $context = $this->_constructDeleteEntityContext($table, $pk, $rk, $options);
+            $body    = $context->getBody();
+            \PEAR2\WindowsAzure\Logger::log($body, 'HTTP Body:');
+            $headers = $context->getHeaders();
+            unset($headers[Resources::CONTENT_TYPE]);
+            $headers[Resources::CONTENT_ID] = strval($contentId);
+            $context->setHeaders($headers);
+            $mimeBodyPart = $context->__toString();
+            \PEAR2\WindowsAzure\Logger::log($mimeBodyPart, 'MIME part obj:-');
+
+            default:
+            break;
+            }
+            
+            if (!is_null($mimeBodyPart)) {
+                $mimeBodyParts[] = $mimeBodyPart;
+                $contentId++;
+            }
+        }
+        
+        return $this->_mimeSerializer->getMimeMultipart($mimeBodyParts);
+    }
+    
+    /**
+     * Constructs HTTP call context for deleteEntity API.
+     * 
+     * @param string                     $table        The name of the table.
+     * @param string                     $partitionKey The entity partition key.
+     * @param string                     $rowKey       The entity row key.
+     * @param Models\DeleteEntityOptions $options      The optional parameters.
+     * 
+     * @return HttpCallContext
+     */
+    public function _constructDeleteEntityContext($table, $partitionKey, $rowKey, 
+        $options
+    ) {
+        Validate::isValidString($table);
+        Validate::isValidString($partitionKey);
+        Validate::isValidString($rowKey);
+        
+        $method      = \HTTP_Request2::METHOD_DELETE;
+        $headers     = array();
+        $queryParams = array();
+        $statusCode  = Resources::STATUS_NO_CONTENT;
+        $path        = $this->_getEntityPath($table, $partitionKey, $rowKey);
+        
+        if (is_null($options)) {
+            $options = new DeleteEntityOptions();
+        }
+        
+        $etagObj                            = $options->getEtag();
+        $ETag                               = !is_null($etagObj);
+        $queryParams[Resources::QP_TIMEOUT] = strval($options->getTimeout());
+        $headers[Resources::CONTENT_TYPE]   = Resources::XML_ATOM_CONTENT_TYPE;
+        $headers[Resources::IF_MATCH]       = $ETag ? $etagObj : Resources::ASTERISK;
+        
+        $context = new HttpCallContext();
+        $context->setHeaders($headers);
+        $context->setMethod($method);
+        $context->setPath($path);
+        $context->setQueryParameters($queryParams);
+        $context->addStatusCode($statusCode);
+        $context->setUri($this->url);
+        $context->setBody('');
+        
+        return $context;
+    }
+    
+    /**
+     * Constructs HTTP call context for updateEntity, mergeEntity, 
+     * insertOrReplaceEntity and insertOrMergeEntity.
+     * 
+     * @param string                     $table   The table name.
+     * @param Models\Entity              $entity  The entity instance to use.
+     * @param string                     $verb    The HTTP method.
+     * @param boolean                    $useETag The flag to include etag or not.
+     * @param Models\TableServiceOptions $options The optional parameters.
+     * 
+     * @return HttpCallContext
+     */
+    private function _constructPutOrMergeEntityContext($table, $entity, $verb,
+        $useETag, $options
+    ) {
+        Validate::isValidString($table);
+        Validate::notNullOrEmpty($entity);
+        Validate::isTrue($entity->isValid(), Resources::INVALID_ENTITY_MSG);
+        
+        if ($useETag) {
+            Validate::notNullOrEmpty($entity->getEtag());
+        }
+        
+        $method       = $verb;
+        $headers      = array();
+        $queryParams  = array();
+        $statusCode   = Resources::STATUS_NO_CONTENT;
+        $pk           = $entity->getPartitionKey();
+        $rk           = $entity->getRowKey();
+        $path         = $this->_getEntityPath($table, $pk, $rk);
+        $body         = $this->_atomSerializer->getEntity($entity);
+        $ifMatchValue = $useETag ? $entity->getEtag() : Resources::ASTERISK;
+        
+        if (is_null($options)) {
+            $options = new TableServiceOptions();
+        }
+        
+        $queryParams[Resources::QP_TIMEOUT] = strval($options->getTimeout());
+        $headers[Resources::CONTENT_TYPE]   = Resources::XML_ATOM_CONTENT_TYPE;
+        $headers[Resources::IF_MATCH]       = $ifMatchValue;
+        
+        $context = new HttpCallContext();
+        $context->setBody($body);
+        $context->setHeaders($headers);
+        $context->setMethod($method);
+        $context->setPath($path);
+        $context->setQueryParameters($queryParams);
+        $context->addStatusCode($statusCode);
+        $context->setUri($this->url);
+        
+        return $context;
+    }
+    
+    /**
+     * Constructs HTTP call context for insertEntity API.
+     * 
+     * @param string                     $table   The name of the table.
+     * @param Models\Entity              $entity  The table entity.
+     * @param Models\TableServiceOptions $options The optional parameters.
+     * 
+     * @return HttpCallContext
+     */
+    private function _constructInsertEntityContext($table, $entity, $options)
+    {
+        Validate::isValidString($table);
+        Validate::notNullOrEmpty($entity);
+        Validate::isTrue($entity->isValid(), Resources::INVALID_ENTITY_MSG);
+        
+        $method      = \HTTP_Request2::METHOD_POST;
+        $context     = new HttpCallContext();
+        $headers     = array();
+        $queryParams = array();
+        $statusCode  = Resources::STATUS_CREATED;
+        $path        = $table;
+        $body        = $this->_atomSerializer->getEntity($entity);
+        
+        if (is_null($options)) {
+            $options = new TableServiceOptions();
+        }
+        
+        $queryParams[Resources::QP_TIMEOUT] = strval($options->getTimeout());
+        $headers[Resources::CONTENT_TYPE]   = Resources::XML_ATOM_CONTENT_TYPE;
+        
+        $context->setBody($body);
+        $context->setHeaders($headers);
+        $context->setMethod($method);
+        $context->setPath($path);
+        $context->setQueryParameters($queryParams);
+        $context->addStatusCode($statusCode);
+        $context->setUri($this->url);
+        
+        return $context;
+    }
     
     /**
      * Constructs URI path for entity.
@@ -87,35 +297,15 @@ class TableRestProxy extends ServiceRestProxy implements ITable
     private function _putOrMergeEntityImpl($table, $entity, $verb, $useETag,
         $options
     ) {
-        Validate::isValidString($table);
-        Validate::notNullOrEmpty($entity);
-        Validate::isTrue($entity->isValid(), Resources::INVALID_ENTITY_MSG);
-        
-        if ($useETag) {
-            Validate::notNullOrEmpty($entity->getEtag());
-        }
-        
-        $method       = $verb;
-        $headers      = array();
-        $queryParams  = array();
-        $statusCode   = Resources::STATUS_NO_CONTENT;
-        $pk           = $entity->getPartitionKey();
-        $rk           = $entity->getRowKey();
-        $path         = $this->_getEntityPath($table, $pk, $rk);
-        $body         = $this->_atomSerializer->getEntity($entity);
-        $ifMatchValue = $useETag ? $entity->getEtag() : Resources::ASTERISK;
-        
-        if (is_null($options)) {
-            $options = new TableServiceOptions();
-        }
-        
-        $queryParams[Resources::QP_TIMEOUT] = strval($options->getTimeout());
-        $headers[Resources::CONTENT_TYPE]   = Resources::XML_ATOM_CONTENT_TYPE;
-        $headers[Resources::IF_MATCH]       = $ifMatchValue;
-        
-        $response = $this->send(
-            $method, $headers, $queryParams, $path, $statusCode, $body
+        $context = $this->_constructPutOrMergeEntityContext(
+            $table,
+            $entity,
+            $verb,
+            $useETag,
+            $options
         );
+        
+        $response = $this->send2($context);
         
         return UpdateEntityResult::create($response->getHeader());
     }
@@ -248,16 +438,22 @@ class TableRestProxy extends ServiceRestProxy implements ITable
     /**
      * Constructor
      * 
-     * @param PEAR2\WindowsAzure\Core\IHttpClient $channel        http client channel
-     * @param string                              $uri            storage account uri
-     * @param Table\Utilities\IAtomReaderWriter   $atomSerializer serializer
+     * @param PEAR2\WindowsAzure\Core\IHttpClient $channel        The HTTP client 
+     * channel.
+     * @param string                              $uri            The storage account
+     * uri.
+     * @param Table\Utilities\IAtomReaderWriter   $atomSerializer The atom 
+     * serializer.
+     * @param Table\Utilities\IMimeReaderWriter   $mimeSerializer The MIME 
+     * serializer.
      * 
      * @return TableRestProxy
      */
-    public function __construct($channel, $uri, $atomSerializer)
+    public function __construct($channel, $uri, $atomSerializer, $mimeSerializer)
     {
         parent::__construct($channel, $uri);
         $this->_atomSerializer = $atomSerializer;
+        $this->_mimeSerializer = $mimeSerializer;
     }
     
     /**
@@ -271,21 +467,19 @@ class TableRestProxy extends ServiceRestProxy implements ITable
     */
     public function getServiceProperties($options = null)
     {
-        $method      = \HTTP_Request2::METHOD_GET;
-        $headers     = array();
-        $queryParams = array();
-        $path        = Resources::EMPTY_STRING;
-        $statusCode  = Resources::STATUS_OK;
-        
         if (is_null($options)) {
             $options = new TableServiceOptions();
         }
         
-        $queryParams[Resources::QP_REST_TYPE] = 'service';
-        $queryParams[Resources::QP_COMP]      = 'properties';
-        $queryParams[Resources::QP_TIMEOUT]   = strval($options->getTimeout());
+        $context = new HttpCallContext();
+        $timeout = strval($options->getTimeout());
+        $context->setMethod(\HTTP_Request2::METHOD_GET);
+        $context->addQueryParam(Resources::QP_REST_TYPE, 'service');
+        $context->addQueryParam(Resources::QP_COMP, 'properties');
+        $context->addQueryParam(Resources::QP_TIMEOUT, $timeout);
+        $context->addStatusCode(Resources::STATUS_OK);
         
-        $response = $this->send($method, $headers, $queryParams, $path, $statusCode);
+        $response = $this->send2($context);
         $parsed   = Utilities::unserialize($response->getBody());
         
         return GetServicePropertiesResult::create($parsed);
@@ -513,27 +707,9 @@ class TableRestProxy extends ServiceRestProxy implements ITable
      */
     public function insertEntity($table, $entity, $options = null)
     {
-        Validate::isValidString($table);
-        Validate::notNullOrEmpty($entity);
-        Validate::isTrue($entity->isValid(), Resources::INVALID_ENTITY_MSG);
+        $context = $this->_constructInsertEntityContext($table, $entity, $options);
         
-        $method      = \HTTP_Request2::METHOD_POST;
-        $headers     = array();
-        $queryParams = array();
-        $statusCode  = Resources::STATUS_CREATED;
-        $path        = $table;
-        $body        = $this->_atomSerializer->getEntity($entity);
-        
-        if (is_null($options)) {
-            $options = new TableServiceOptions();
-        }
-        
-        $queryParams[Resources::QP_TIMEOUT] = strval($options->getTimeout());
-        $headers[Resources::CONTENT_TYPE]   = Resources::XML_ATOM_CONTENT_TYPE;
-        
-        $response = $this->send(
-            $method, $headers, $queryParams, $path, $statusCode, $body
-        );
+        $response = $this->send2($context);
         $entity   = $this->_atomSerializer->parseEntity($response->getBody());
         $result   = new InsertEntityResult();
         $result->setEntity($entity);
@@ -647,27 +823,14 @@ class TableRestProxy extends ServiceRestProxy implements ITable
      */
     public function deleteEntity($table, $partitionKey, $rowKey, $options = null)
     {
-        Validate::isValidString($table);
-        Validate::isValidString($partitionKey);
-        Validate::isValidString($rowKey);
+        $context = $this->_constructDeleteEntityContext(
+            $table,
+            $partitionKey,
+            $rowKey,
+            $options
+        );
         
-        $method      = \HTTP_Request2::METHOD_DELETE;
-        $headers     = array();
-        $queryParams = array();
-        $statusCode  = Resources::STATUS_NO_CONTENT;
-        $path        = $this->_getEntityPath($table, $partitionKey, $rowKey);
-        
-        if (is_null($options)) {
-            $options = new DeleteEntityOptions();
-        }
-        
-        $etagObj                            = $options->getEtag();
-        $ETag                               = !is_null($etagObj);
-        $queryParams[Resources::QP_TIMEOUT] = strval($options->getTimeout());
-        $headers[Resources::CONTENT_TYPE]   = Resources::XML_ATOM_CONTENT_TYPE;
-        $headers[Resources::IF_MATCH]       = $ETag ? $etagObj : Resources::ASTERISK;
-        
-        $this->send($method, $headers, $queryParams, $path, $statusCode);
+        $this->send2($context);
     }
     
     /**
@@ -701,7 +864,14 @@ class TableRestProxy extends ServiceRestProxy implements ITable
         $queryParams[Resources::QP_TIMEOUT] = strval($options->getTimeout());
         $headers[Resources::CONTENT_TYPE]   = Resources::XML_ATOM_CONTENT_TYPE;
         
-        $response = $this->send($method, $headers, $queryParams, $path, $statusCode);
+        $context = new HttpCallContext();
+        $context->setHeaders($headers);
+        $context->setMethod($method);
+        $context->setPath($path);
+        $context->setQueryParameters($queryParams);
+        $context->addStatusCode($statusCode);
+        
+        $response = $this->send2($context);
         $entity   = $this->_atomSerializer->parseEntity($response->getBody());
         $result   = new GetEntityResult();
         $result->setEntity($entity);
@@ -712,14 +882,35 @@ class TableRestProxy extends ServiceRestProxy implements ITable
     /**
      * Does batch of operations on the table service.
      * 
-     * @param BatchOperations            $operations the operations to apply
-     * @param Models\TableServiceOptions $options    optional parameters
+     * @param Models\BatchOperations     $operations The operations to apply.
+     * @param Models\TableServiceOptions $options    The optional parameters.
      * 
      * @return Models\BatchResult
      */
     public function batch($operations, $options = null)
     {
-        throw new \Exception(Resources::NOT_IMPLEMENTED_MSG);
+        Validate::notNullOrEmpty($operations);
+        
+        $method      = \HTTP_Request2::METHOD_POST;
+        $mime        = $this->_createBatchRequestBody($operations);
+        $body        = $mime['body'];
+        $headers     = $mime['headers'];
+        $queryParams = array();
+        $statusCode  = Resources::STATUS_ACCEPTED;
+        $path        = '$batch';
+        
+        if (is_null($options)) {
+            $options = new TableServiceOptions();
+        }
+        
+        $queryParams[Resources::QP_TIMEOUT] = strval($options->getTimeout());
+        $headers[Resources::X_MS_VERSION]   = Resources::API_VERSION_2009_4;
+        
+        $response = $this->send(
+            $method, $headers, $queryParams, $path, $statusCode, $body
+        );
+        
+        \PEAR2\WindowsAzure\Logger::log($response->getBody());
     }
 }
 

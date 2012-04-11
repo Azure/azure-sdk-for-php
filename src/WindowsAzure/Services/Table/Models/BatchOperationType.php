@@ -25,7 +25,7 @@
 namespace PEAR2\WindowsAzure\Services\Table\Models;
 
 /**
- * Holds result of calling getEntity wrapper.
+ * Supported batch operations.
  *
  * @category  Microsoft
  * @package   PEAR2\WindowsAzure\Services\Table\Models
@@ -35,33 +35,36 @@ namespace PEAR2\WindowsAzure\Services\Table\Models;
  * @version   Release: @package_version@
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
-class GetEntityResult
+class BatchOperationType
 {
-    /**
-     * @var Entity
-     */
-    private $_entity;
+    const INSERT_ENTITY_OPERATION         = 'InsertEntityOperation';
+    const UPDATE_ENTITY_OPERATION         = 'UpdateEntityOperation';
+    const DELETE_ENTITY_OPERATION         = 'DeleteEntityOperation';
+    const MERGE_ENTITY_OPERATION          = 'MergeEntityOperation';
+    const INSERT_REPLACE_ENTITY_OPERATION = 'InsertOrReplaceEntityOperation';
+    const INSERT_MERGE_ENTITY_OPERATION   = 'InsertOrMergeEntityOperation';
     
     /**
-     * Gets table entity.
+     * Validates if $type is already defined.
      * 
-     * @return Entity
+     * @param string $type The operation type.
+     * 
+     * @return boolean 
      */
-    public function getEntity()
+    public static function isValid($type)
     {
-        return $this->_entity;
-    }
-    
-    /**
-     * Sets table entity.
-     * 
-     * @param Entity $entity The table entity instance.
-     * 
-     * @return none
-     */
-    public function setEntity($entity)
-    {
-        $this->_entity = $entity;
+        switch ($type) {
+        case self::INSERT_ENTITY_OPERATION:
+        case self::UPDATE_ENTITY_OPERATION:
+        case self::DELETE_ENTITY_OPERATION:
+        case self::MERGE_ENTITY_OPERATION:
+        case self::INSERT_REPLACE_ENTITY_OPERATION:
+        case self::INSERT_MERGE_ENTITY_OPERATION:
+            return true;
+                
+        default:
+            return false;
+        }
     }
 }
 

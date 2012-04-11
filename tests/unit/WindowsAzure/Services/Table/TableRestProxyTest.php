@@ -35,6 +35,7 @@ use PEAR2\WindowsAzure\Services\Table\Models\Filters\Filter;
 use PEAR2\WindowsAzure\Services\Table\Models\Entity;
 use PEAR2\WindowsAzure\Services\Table\Models\EdmType;
 use PEAR2\WindowsAzure\Services\Table\Models\QueryEntitiesOptions;
+use PEAR2\WindowsAzure\Services\Table\Models\BatchOperations;
 
 /**
  * Unit tests for class TableRestProxy
@@ -565,6 +566,26 @@ class TableRestProxyTest extends TableRestProxyTestBase
         $this->assertEquals($expected->getPartitionKey(), $actual->getPartitionKey());
         $this->assertEquals($expected->getRowKey(), $actual->getRowKey());
         $this->assertCount(count($expected->getProperties()), $actual->getProperties());
+    }
+    
+    public function testBatch()
+    {
+        // Setup
+        $name = 'batch';
+        $this->createTable($name);
+        $pk = '123';
+        $rk = '456';
+        $expected = TestResources::getTestEntity($pk, $rk);
+        $r = $this->wrapper->insertEntity($name, $expected);
+        $operations = new BatchOperations();
+        $etag = $r->getEntity()->getEtag();
+        $operations->addDeleteEntity($name, $pk, $rk, $etag);
+        
+        // Test
+        $this->wrapper->batch($operations);
+        
+        // Assert
+        $this->assertTrue(true);
     }
 }
 

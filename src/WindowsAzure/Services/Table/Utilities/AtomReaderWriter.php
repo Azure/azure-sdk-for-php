@@ -95,7 +95,7 @@ class AtomReaderWriter implements IAtomReaderWriter
             $xml[]   = implode('', $value);
         }
 
-        return implode('', $xml);
+        return implode("\n", $xml);
     }
     
     /** 

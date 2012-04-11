@@ -38,6 +38,8 @@ use PEAR2\WindowsAzure\Services\Blob\BlobSettings;
 use PEAR2\WindowsAzure\Services\Table\TableRestProxy;
 use PEAR2\WindowsAzure\Services\Table\TableSettings;
 use PEAR2\WindowsAzure\Services\Table\Utilities\AtomReaderWriter;
+use PEAR2\WindowsAzure\Services\Table\Utilities\MimeReaderWriter;
+use PEAR2\Tests\Framework\FiddlerFilter;
 
 /**
  * Builds azure service objects.
@@ -176,19 +178,24 @@ class ServicesBuilder implements IServiceBuilder
      */
     private static function _buildTable($config)
     {
-        $httpClient = new HttpClient();
-        $serialize  = new AtomReaderWriter();
+        $httpClient     = new HttpClient();
+        $atomSerializer = new AtomReaderWriter();
+        $mimeSerializer = new MimeReaderWriter();
 
         $tableWrapper = new TableRestProxy(
             $httpClient,
             $config->getProperty(TableSettings::URI),
-            $serialize
+            $atomSerializer,
+            $mimeSerializer
         );
 
         // Adding headers filter
         $tableWrapper = self::_addHeadersFilter(
             $tableWrapper, Resources::TABLE_TYPE_NAME
         );
+        
+        $fiddlerFilter = new FiddlerFilter();
+        $tableWrapper = $tableWrapper->withFilter($fiddlerFilter);
         
         // Adding date filter
         $dateFilter   = new DateFilter();

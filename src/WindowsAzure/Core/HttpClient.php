@@ -230,6 +230,10 @@ class HttpClient implements IHttpClient
             $this->_request = $filter->handleRequest($this)->_request;
         }
 
+        \PEAR2\WindowsAzure\Logger::log($this->getUrl()->getUrl());
+        \PEAR2\WindowsAzure\Logger::log($this->getHeaders());
+        \PEAR2\WindowsAzure\Logger::log($this->getBody());
+        
         $this->_response = $this->_request->send();
 
         $start = count($filters) - 1;

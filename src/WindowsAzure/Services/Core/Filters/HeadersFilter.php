@@ -66,7 +66,10 @@ class HeadersFilter implements IServiceFilter
     public function handleRequest($request) 
     {
         foreach ($this->_headers as $key => $value) {
-            $request->setHeader($key, $value);
+            $headers = $request->getHeaders();
+            if (!array_key_exists($key, $headers)) {
+                $request->setHeader($key, $value);
+            }
         }
 
         return $request;

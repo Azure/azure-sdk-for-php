@@ -23,9 +23,12 @@
  */
  
 namespace PEAR2\WindowsAzure\Services\Table\Models;
+use PEAR2\WindowsAzure\Validate;
+use PEAR2\WindowsAzure\Resources;
+use PEAR2\WindowsAzure\Utilities;
 
 /**
- * Holds result of calling getEntity wrapper.
+ * Represents one batch operation
  *
  * @category  Microsoft
  * @package   PEAR2\WindowsAzure\Services\Table\Models
@@ -35,33 +38,71 @@ namespace PEAR2\WindowsAzure\Services\Table\Models;
  * @version   Release: @package_version@
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
-class GetEntityResult
+class BatchOperation
 {
     /**
-     * @var Entity
+     * @var string
      */
-    private $_entity;
+    private $_type;
     
     /**
-     * Gets table entity.
-     * 
-     * @return Entity
+     * @var array
      */
-    public function getEntity()
-    {
-        return $this->_entity;
-    }
+    private $_params;
     
     /**
-     * Sets table entity.
+     * Sets operation type.
      * 
-     * @param Entity $entity The table entity instance.
+     * @param string $type The operation type. Must be valid type.
      * 
      * @return none
      */
-    public function setEntity($entity)
+    public function setType($type)
     {
-        $this->_entity = $entity;
+        Validate::isTrue(
+            BatchOperationType::isValid($type),
+            Resources::INVALID_BO_TYPE_MSG
+        );
+        $this->_type = $type;
+    }
+    
+    /**
+     * Gets operation type.
+     * 
+     * @return string
+     */
+    public function getType()
+    {
+        return $this->_type;
+    }
+    
+    /**
+     * Adds or sets parameter for the operation.
+     * 
+     * @param string $name  The param name. Must be valid name.
+     * @param mix    $value The param value.
+     * 
+     * @return none
+     */
+    public function addParam($name, $value)
+    {
+        Validate::isTrue(
+            BatchOperationParamName::isValid($name),
+            Resources::INVALID_BO_PN_MSG
+        );
+        $this->_params[$name] = $value;
+    }
+    
+    /**
+     * Gets parameter value and if the name doesn't exist, return null.
+     * 
+     * @param string $name The parameter name.
+     * 
+     * @return mix
+     */
+    public function getParam($name)
+    {
+        return Utilities::tryGetValue($this->_params, $name);
     }
 }
 

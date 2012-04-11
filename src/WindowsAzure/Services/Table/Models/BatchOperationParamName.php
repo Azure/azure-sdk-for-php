@@ -25,7 +25,7 @@
 namespace PEAR2\WindowsAzure\Services\Table\Models;
 
 /**
- * Holds result of calling getEntity wrapper.
+ * Batch parameter names.
  *
  * @category  Microsoft
  * @package   PEAR2\WindowsAzure\Services\Table\Models
@@ -35,33 +35,33 @@ namespace PEAR2\WindowsAzure\Services\Table\Models;
  * @version   Release: @package_version@
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
-class GetEntityResult
+class BatchOperationParamName
 {
-    /**
-     * @var Entity
-     */
-    private $_entity;
+    const BP_TABLE         = 'table';
+    const BP_ENTITY        = 'entity';
+    const BP_PARTITION_KEY = 'PartitionKey';
+    const BP_ROW_KEY       = 'RowKey';
+    const BP_ETAG          = 'etag';
     
     /**
-     * Gets table entity.
+     * Validates if $paramName is already defined.
      * 
-     * @return Entity
+     * @param string $paramName The batch operation parameter name.
+     * @return boolean 
      */
-    public function getEntity()
+    public static function isValid($paramName)
     {
-        return $this->_entity;
-    }
-    
-    /**
-     * Sets table entity.
-     * 
-     * @param Entity $entity The table entity instance.
-     * 
-     * @return none
-     */
-    public function setEntity($entity)
-    {
-        $this->_entity = $entity;
+        switch ($paramName) {
+        case self::BP_TABLE:
+        case self::BP_ENTITY:
+        case self::BP_PARTITION_KEY:
+        case self::BP_ROW_KEY:
+        case self::BP_ETAG:
+                return true;
+
+            default:
+                return false;
+        }
     }
 }
 

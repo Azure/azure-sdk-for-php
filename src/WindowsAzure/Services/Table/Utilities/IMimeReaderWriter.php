@@ -15,54 +15,38 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   PEAR2\WindowsAzure\Services\Table\Models
+ * @package   PEAR2\WindowsAzure\Services\Table\Utilities
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
  
-namespace PEAR2\WindowsAzure\Services\Table\Models;
+namespace PEAR2\WindowsAzure\Services\Table\Utilities;
 
 /**
- * Holds result of calling getEntity wrapper.
+ * Interface for MIME reading and writing.
  *
  * @category  Microsoft
- * @package   PEAR2\WindowsAzure\Services\Table\Models
+ * @package   PEAR2\WindowsAzure\Services\Table\Utilities
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @version   Release: @package_version@
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
-class GetEntityResult
+interface IMimeReaderWriter
 {
     /**
-     * @var Entity
-     */
-    private $_entity;
-    
-    /**
-     * Gets table entity.
+     * Given array of MIME parts in raw string, this function converts them into MIME
+     * representation. 
      * 
-     * @return Entity
-     */
-    public function getEntity()
-    {
-        return $this->_entity;
-    }
-    
-    /**
-     * Sets table entity.
+     * @param array $bodyPartContents The MIME body parts.
      * 
-     * @param Entity $entity The table entity instance.
-     * 
-     * @return none
+     * @return array Returns array with two elements 'headers' and 'body' which
+     * represents the MIME message.
      */
-    public function setEntity($entity)
-    {
-        $this->_entity = $entity;
-    }
+    public function getMimeMultipart($bodyPartContents);
 }
 
 ?>

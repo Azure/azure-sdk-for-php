@@ -298,7 +298,7 @@ class Utilities
         * 
         * @return \DateTime
         */
-    public function convertToDateTime($value)
+    public static function convertToDateTime($value)
     {
         if ($value instanceof \DateTime) {
             return $value;
