@@ -23,11 +23,11 @@
  */
  
 namespace PEAR2\WindowsAzure\Services\Table\Models;
-use PEAR2\WindowsAzure\Utilities;
 use PEAR2\WindowsAzure\Resources;
+use PEAR2\WindowsAzure\Utilities;
 
 /**
- * Holds result of calling insertEntity wrapper
+ * Represents an error returned from call to batch API.
  *
  * @category  Microsoft
  * @package   PEAR2\WindowsAzure\Services\Table\Models
@@ -37,54 +37,79 @@ use PEAR2\WindowsAzure\Resources;
  * @version   Release: @package_version@
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
-class InsertEntityResult
+class BatchError
 {
     /**
-     * @var Entity
+     * @var ServiceException 
      */
-    private $_entity;
+    private $_error;
     
     /**
-     * Create InsertEntityResult object from HTTP response parts.
-     * 
-     * @param string           $body           The HTTP response body.
-     * @param array            $headers        The HTTP response headers.
-     * @param AtomReaderWriter $atomSerializer The atom serializer.
-     * 
-     * @return \PEAR2\WindowsAzure\Services\Table\Models\InsertEntityResult
-     * 
-     * @static
+     * @var inetegr
      */
-    public static function create($body, $headers, $atomSerializer)
+    private $_contentId;
+    
+    /**
+     * Creates BatchError object.
+     * 
+     * @param PEAR2\WindowsAzure\Core\ServiceException $error   The error object.
+     * @param array                                    $headers The response headers.
+     * 
+     * @return \PEAR2\WindowsAzure\Services\Table\Models\BatchError 
+     */
+    public static function create($error, $headers)
     {
-        $result = new InsertEntityResult();
-        $entity = $atomSerializer->parseEntity($body);
-        $entity->setEtag(Utilities::tryGetValue($headers, Resources::ETAG));
-        $result->setEntity($entity);
+        $result    = new BatchError();
+        
+        $result->setError($error);
+        $contentId = Utilities::tryGetValue($headers, Resources::CONTENT_ID);
+        $result->setContentId(is_null($contentId) ? null : intval($contentId));
         
         return $result;
     }
     
     /**
-     * Gets table entity.
+     * Gets the error.
      * 
-     * @return Entity
+     * @return PEAR2\WindowsAzure\Core\ServiceException
      */
-    public function getEntity()
+    public function getError()
     {
-        return $this->_entity;
+        return $this->_error;
     }
     
     /**
-     * Sets table entity.
+     * Sets the error.
      * 
-     * @param Entity $entity The table entity instance.
+     * @param PEAR2\WindowsAzure\Core\ServiceException $error The error object.
      * 
      * @return none
      */
-    public function setEntity($entity)
+    public function setError($error)
     {
-        $this->_entity = $entity;
+        $this->_error = $error;
+    }
+    
+    /**
+     * Gets the contentId.
+     * 
+     * @return inetegr
+     */
+    public function getContentId()
+    {
+        return $this->_contentId;
+    }
+    
+    /**
+     * Sets the contentId.
+     * 
+     * @param inetegr $contentId The contentId object.
+     * 
+     * @return none
+     */
+    public function setContentId($contentId)
+    {
+        $this->_contentId = $contentId;
     }
 }
 

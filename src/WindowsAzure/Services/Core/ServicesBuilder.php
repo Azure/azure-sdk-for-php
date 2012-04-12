@@ -39,7 +39,6 @@ use PEAR2\WindowsAzure\Services\Table\TableRestProxy;
 use PEAR2\WindowsAzure\Services\Table\TableSettings;
 use PEAR2\WindowsAzure\Services\Table\Utilities\AtomReaderWriter;
 use PEAR2\WindowsAzure\Services\Table\Utilities\MimeReaderWriter;
-use PEAR2\Tests\Framework\FiddlerFilter;
 
 /**
  * Builds azure service objects.
@@ -193,9 +192,6 @@ class ServicesBuilder implements IServiceBuilder
         $tableWrapper = self::_addHeadersFilter(
             $tableWrapper, Resources::TABLE_TYPE_NAME
         );
-        
-        $fiddlerFilter = new FiddlerFilter();
-        $tableWrapper = $tableWrapper->withFilter($fiddlerFilter);
         
         // Adding date filter
         $dateFilter   = new DateFilter();

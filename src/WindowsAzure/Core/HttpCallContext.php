@@ -340,7 +340,10 @@ class HttpCallContext
             $headers .= "$key: $value\n";
         }
         
-        return "$this->_method $this->_uri/$this->_path HTTP/1.1\n$headers$this->_body";
+        $str  = "$this->_method $this->_uri/$this->_path HTTP/1.1\n$headers\n";
+        $str .= "$this->_body";
+        
+        return $str;
     }
 }
 

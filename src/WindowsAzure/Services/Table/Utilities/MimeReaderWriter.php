@@ -72,10 +72,7 @@ class MimeReaderWriter implements IMimeReaderWriter
         
         // Encode batch MIME part
         $batchEncoded = $batch->encode($batchId);
-        $headers = $batchEncoded['headers'];
-        $ct = $headers['Content-Type'];
-        $ct = str_replace('"', '', $ct);
-        $batchEncoded['headers']['Content-Type'] = $ct;
+        
         return $batchEncoded;
     }
 }

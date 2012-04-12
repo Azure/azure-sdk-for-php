@@ -42,6 +42,7 @@ use PEAR2\WindowsAzure\Services\Table\Models\DeleteEntityOptions;
 use PEAR2\WindowsAzure\Services\Table\Models\GetEntityResult;
 use PEAR2\WindowsAzure\Services\Table\Models\BatchOperationType;
 use PEAR2\WindowsAzure\Services\Table\Models\BatchOperationParamName;
+use PEAR2\WindowsAzure\Services\Table\Models\BatchResult;
 
 /**
  * This class constructs HTTP requests and receive HTTP responses for table
@@ -69,60 +70,164 @@ class TableRestProxy extends ServiceRestProxy implements ITable
     private $_mimeSerializer;
     
     /**
+     * Creates contexts for batch operations.
+     * 
+     * @param array $operations The batch operations array.
+     * 
+     * @return array
+     * 
+     * @throws \InvalidArgumentException 
+     */
+    private function _createOperationsContexts($operations)
+    {
+        $contexts   = array();
+        
+        foreach ($operations as $operation) {
+            $context = null;
+            $type    = $operation->getType();
+            
+            switch ($type) {
+            case BatchOperationType::INSERT_ENTITY_OPERATION:
+            case BatchOperationType::UPDATE_ENTITY_OPERATION:
+            case BatchOperationType::MERGE_ENTITY_OPERATION:
+            case BatchOperationType::INSERT_REPLACE_ENTITY_OPERATION:
+            case BatchOperationType::INSERT_MERGE_ENTITY_OPERATION:
+                $table   = $operation->getParam(BatchOperationParamName::BP_TABLE);
+                $entity  = $operation->getParam(BatchOperationParamName::BP_ENTITY);
+                $context = $this->_getOperationContext($table, $entity, $type);
+                break;
+        
+            case BatchOperationType::DELETE_ENTITY_OPERATION:
+                $table   = $operation->getParam(BatchOperationParamName::BP_TABLE);
+                $pk      = $operation->getParam(
+                    BatchOperationParamName::BP_PARTITION_KEY
+                );
+                $rk      = $operation->getParam(BatchOperationParamName::BP_ROW_KEY);
+                $etag    = $operation->getParam(BatchOperationParamName::BP_ETAG);
+                $options = new DeleteEntityOptions();
+                $options->setEtag($etag);
+                $context = $this->_constructDeleteEntityContext(
+                    $table, $pk, $rk, $options
+                );
+                break;
+
+            default:
+                throw new \InvalidArgumentException();
+            }
+            
+            $contexts[] = $context;
+        }
+        
+        return $contexts;
+    }
+    
+    /**
+     * Creates operation context for the API.
+     * 
+     * @param string $table         The table name.
+     * @param Models\Entity $entity The entity object.
+     * @param string $type          The API type.
+     * 
+     * @return PEAR2\WindowsAzure\Core\HttpCallContext
+     * 
+     * @throws \InvalidArgumentException 
+     */
+    private function _getOperationContext($table, $entity, $type)
+    {
+        switch ($type) {
+        case BatchOperationType::INSERT_ENTITY_OPERATION:
+            return $this->_constructInsertEntityContext($table, $entity, null);
+            
+        case BatchOperationType::UPDATE_ENTITY_OPERATION:
+            return $this->_constructPutOrMergeEntityContext(
+                $table,
+                $entity,
+                \HTTP_Request2::METHOD_PUT,
+                true,
+                null
+            );
+            
+        case BatchOperationType::MERGE_ENTITY_OPERATION:
+            return $this->_constructPutOrMergeEntityContext(
+                $table,
+                $entity,
+                Resources::HTTP_MERGE,
+                true,
+                null
+            );
+            
+        case BatchOperationType::INSERT_REPLACE_ENTITY_OPERATION:
+            return $this->_constructPutOrMergeEntityContext(
+                $table,
+                $entity,
+                \HTTP_Request2::METHOD_PUT,
+                false,
+                null
+            );
+            
+        case BatchOperationType::INSERT_MERGE_ENTITY_OPERATION:
+            return $this->_constructPutOrMergeEntityContext(
+                $table,
+                $entity,
+                Resources::HTTP_MERGE,
+                false,
+                null
+            );
+        default:
+            throw new \InvalidArgumentException();
+        }
+    }
+    
+    /**
      * Creates MIME part body for batch API.
      * 
      * @param array $operations The batch operations.
+     * @param array $contexts   The contexts objects.
      * 
      * @return array
+     * 
+     * @throws \InvalidArgumentException
      */
-    private function _createBatchRequestBody($batchOperations)
+    private function _createBatchRequestBody($operations, $contexts)
     {
-        \PEAR2\WindowsAzure\Logger::log($batchOperations);
-        
         $mimeBodyParts = array();
-        $operations = $batchOperations->getOperations();
-        $contentId = 1;
-        foreach ($operations as $operation) {
-            $mimeBodyPart = null;
+        $contentId     = 1;
+        $count         = count($operations);
+        
+        Validate::isTrue(count($operations) == count($contexts), null);
+        
+        for ($i = 0; $i < $count; $i++) {
+            $operation = $operations[$i];
+            $context   = $contexts[$i];
+            $type      = $operation->getType();
             
-            switch ($operation->getType()) {
+            switch ($type) {
             case BatchOperationType::INSERT_ENTITY_OPERATION:
-            $table   = $operation->getParam(BatchOperationParamName::BP_TABLE);
-            $entity  = $operation->getParam(BatchOperationParamName::BP_ENTITY);
-            $context = $this->_constructInsertEntityContext($table, $entity, null);
-            $ct      = $context->getHeader(Resources::CONTENT_TYPE);
-            $body    = $context->getBody();
-            $ct     .= ';type=entry';
-            $context->addHeader(Resources::CONTENT_TYPE, $ct);
-            $context->addHeader(Resources::CONTENT_LENGTH, strlen($body));
-            $context->addHeader(Resources::CONTENT_ID, strval($contentId));
-            $mimeBodyPart = $context->__toString();
-            \PEAR2\WindowsAzure\Logger::log($mimeBodyPart, 'MIME part obj:-');
-            break;
+            case BatchOperationType::UPDATE_ENTITY_OPERATION:
+            case BatchOperationType::MERGE_ENTITY_OPERATION:
+            case BatchOperationType::INSERT_REPLACE_ENTITY_OPERATION:
+            case BatchOperationType::INSERT_MERGE_ENTITY_OPERATION:
+                $cType   = $context->getHeader(Resources::CONTENT_TYPE);
+                $body    = $context->getBody();
+                $cType   .= ';type=entry';
+                $context->addHeader(Resources::CONTENT_TYPE, $cType);
+                // Use mb_strlen instead of strlen to get the length of the string
+                // instead of char length
+                $context->addHeader(Resources::CONTENT_LENGTH, mb_strlen($body));
+                break;
         
             case BatchOperationType::DELETE_ENTITY_OPERATION:
-            $table   = $operation->getParam(BatchOperationParamName::BP_TABLE);
-            $pk      = $operation->getParam(BatchOperationParamName::BP_PARTITION_KEY);
-            $rk      = $operation->getParam(BatchOperationParamName::BP_ROW_KEY);
-            $etag    = $operation->getParam(BatchOperationParamName::BP_ETAG);
-            $options = new DeleteEntityOptions();
-            $options->setEtag($etag);
-            $context = $this->_constructDeleteEntityContext($table, $pk, $rk, $options);
-            $body    = $context->getBody();
-            $context->removeHeader(Resources::CONTENT_TYPE);
-            $headers[Resources::CONTENT_ID] = strval($contentId);
-            \PEAR2\WindowsAzure\Logger::log($headers);
-            $mimeBodyPart = $context->__toString();
-            \PEAR2\WindowsAzure\Logger::log($mimeBodyPart, 'MIME part obj:-');
+                $context->removeHeader(Resources::CONTENT_TYPE);
+                break;
 
             default:
-            break;
+                throw new \InvalidArgumentException();
             }
             
-            if (!is_null($mimeBodyPart)) {
-                $mimeBodyParts[] = $mimeBodyPart;
-                $contentId++;
-            }
+            $context->addHeader(Resources::CONTENT_ID, $contentId);
+            $mimeBodyPart    = $context->__toString();
+            $mimeBodyParts[] = $mimeBodyPart;
+            $contentId++;
         }
         
         return $this->_mimeSerializer->getMimeMultipart($mimeBodyParts);
@@ -708,11 +813,10 @@ class TableRestProxy extends ServiceRestProxy implements ITable
         $context = $this->_constructInsertEntityContext($table, $entity, $options);
         
         $response = $this->send2($context);
-        $entity   = $this->_atomSerializer->parseEntity($response->getBody());
-        $result   = new InsertEntityResult();
-        $result->setEntity($entity);
+        $body     = $response->getBody();
+        $headers  = $response->getHeader();
         
-        return $result;
+        return InsertEntityResult::create($body, $headers, $this->_atomSerializer);
     }
     
     /**
@@ -880,17 +984,19 @@ class TableRestProxy extends ServiceRestProxy implements ITable
     /**
      * Does batch of operations on the table service.
      * 
-     * @param Models\BatchOperations     $operations The operations to apply.
-     * @param Models\TableServiceOptions $options    The optional parameters.
+     * @param Models\BatchOperations     $batchOperations The operations to apply.
+     * @param Models\TableServiceOptions $options         The optional parameters.
      * 
      * @return Models\BatchResult
      */
-    public function batch($operations, $options = null)
+    public function batch($batchOperations, $options = null)
     {
-        Validate::notNullOrEmpty($operations);
+        Validate::notNullOrEmpty($batchOperations);
         
         $method      = \HTTP_Request2::METHOD_POST;
-        $mime        = $this->_createBatchRequestBody($operations);
+        $operations  = $batchOperations->getOperations();
+        $contexts    = $this->_createOperationsContexts($operations);
+        $mime        = $this->_createBatchRequestBody($operations, $contexts);
         $body        = $mime['body'];
         $headers     = $mime['headers'];
         $queryParams = array();
@@ -902,13 +1008,17 @@ class TableRestProxy extends ServiceRestProxy implements ITable
         }
         
         $queryParams[Resources::QP_TIMEOUT] = strval($options->getTimeout());
-        $headers[Resources::X_MS_VERSION]   = Resources::API_VERSION_2009_4;
         
         $response = $this->send(
             $method, $headers, $queryParams, $path, $statusCode, $body
         );
         
-        \PEAR2\WindowsAzure\Logger::log($response->getBody());
+        return BatchResult::create(
+            $response->getBody(),
+            $operations,
+            $contexts,
+            $this->_atomSerializer
+        );
     }
 }
 
