@@ -105,7 +105,7 @@ class RoleEnvironment
      * 
      * @return none
      */
-    static function init()
+    public static function init()
     {
         self::$_clientId = uniqid();
 
@@ -139,10 +139,10 @@ class RoleEnvironment
      */
     private static function _initialize($keepOpen = false)
     {
-        if (self::$_runtimeClient == null) {
+        if (is_null(self::$_runtimeClient)) {
             $endpoint = getenv(self::VERSION_ENDPOINT_ENVIRONMENT_NAME);
 
-            if ($endpoint == null) {
+            if (is_null($endpoint)) {
                 $endpoint = self::VERSION_ENDPOINT_FIXED_PATH;
             }
 
@@ -218,7 +218,6 @@ class RoleEnvironment
     private static function _processGoalStateChange($newGoalState)
     {
         $last    = self::$_lastState;
-        
         $changes = self::_calculateChanges(); 
         
         if (count($changes) == 0) {
@@ -247,7 +246,7 @@ class RoleEnvironment
      */
     private static function _acceptLatestIncarnation($newGoalState, $last)
     {
-        if ($last != null && $last instanceof AcquireCurrentState) {
+        if (!is_null($last) && $last instanceof AcquireCurrentState) {
             $acquireState = $last;
             
             $acceptState = new AcquireCurrentState(
