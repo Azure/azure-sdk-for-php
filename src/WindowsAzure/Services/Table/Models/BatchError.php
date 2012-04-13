@@ -59,7 +59,7 @@ class BatchError
      */
     public static function create($error, $headers)
     {
-        $result    = new BatchError();
+        $result = new BatchError();
         
         $result->setError($error);
         $contentId = Utilities::tryGetValue($headers, Resources::CONTENT_ID);

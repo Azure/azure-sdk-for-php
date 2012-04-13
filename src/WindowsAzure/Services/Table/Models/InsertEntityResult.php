@@ -47,9 +47,9 @@ class InsertEntityResult
     /**
      * Create InsertEntityResult object from HTTP response parts.
      * 
-     * @param string           $body           The HTTP response body.
-     * @param array            $headers        The HTTP response headers.
-     * @param AtomReaderWriter $atomSerializer The atom serializer.
+     * @param string            $body           The HTTP response body.
+     * @param array             $headers        The HTTP response headers.
+     * @param IAtomReaderWriter $atomSerializer The atom reader and writer.
      * 
      * @return \PEAR2\WindowsAzure\Services\Table\Models\InsertEntityResult
      * 

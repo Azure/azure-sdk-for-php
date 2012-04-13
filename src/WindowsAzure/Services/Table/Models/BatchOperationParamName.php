@@ -47,6 +47,7 @@ class BatchOperationParamName
      * Validates if $paramName is already defined.
      * 
      * @param string $paramName The batch operation parameter name.
+     * 
      * @return boolean 
      */
     public static function isValid($paramName)
@@ -57,10 +58,10 @@ class BatchOperationParamName
         case self::BP_PARTITION_KEY:
         case self::BP_ROW_KEY:
         case self::BP_ETAG:
-                return true;
+            return true;
 
-            default:
-                return false;
+        default:
+            return false;
         }
     }
 }

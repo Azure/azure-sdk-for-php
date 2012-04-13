@@ -70,7 +70,7 @@ class ServiceRestProxy
      */
     public function __construct($channel, $uri)
     {
-        $this->url     = $uri;
+        $this->url      = $uri;
         $this->_channel = $channel;
         $this->_filters = array();
     }

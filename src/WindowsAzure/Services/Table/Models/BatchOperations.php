@@ -41,7 +41,10 @@ class BatchOperations
      * @var array
      */
     private $_operations;
-    
+
+    /**
+     * Default constructor. 
+     */
     public function __construct()
     {
         $this->_operations = array();

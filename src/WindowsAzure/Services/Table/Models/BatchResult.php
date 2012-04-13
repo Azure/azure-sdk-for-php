@@ -23,7 +23,6 @@
  */
  
 namespace PEAR2\WindowsAzure\Services\Table\Models;
-require_once 'Mail/mimeDecode.php';
 require_once 'HTTP/Request2/Response.php';
 use PEAR2\WindowsAzure\Core\HttpClient;
 use PEAR2\WindowsAzure\Core\ServiceException;
@@ -54,20 +53,22 @@ class BatchResult
     /**
      * Creates array of response from batch response body.
      * 
-     * @param string $body The HTTP response body.
+     * @param string            $body           The HTTP response body.
+     * @param IMimeReaderWriter $mimeSerializer The MIME reader and writer.
      * 
      * @return array
      */
-    private static function _constructResponses($body)
+    private static function _constructResponses($body, $mimeSerializer)
     {
-        $params['include_bodies'] = true;
-        $params['input']          = $body;
-        $structure                = \Mail_mimeDecode::decode($params);
-        $responses                = array();
-        $parts                    = $structure->parts;
+        $responses = array();
+        $parts     = $mimeSerializer->decodeMimeMultipart($body);
+        // Decrease the count of parts to remove the batch response body and just
+        // include change sets response body. We may need to undo this action in
+        // case that batch response body has useful info.
+        $count = count($parts) - 1;
 
-        for ($i = 0; $i < count($parts) - 1; $i++) {
-            $lines    = explode("\r\n", $parts[$i]->body);
+        for ($i = 0; $i < $count; $i++) {
+            $lines    = explode("\r\n", $parts[$i]);
             $response = new \HTTP_Request2_Response($lines[0]);
             $j        = 1;
             do {
@@ -85,19 +86,21 @@ class BatchResult
     /**
      * Creates BatchResult object.
      * 
-     * @param string           $body           The HTTP response body
-     * @param array            $operations     The batch operations.
-     * @param array            $contexts       The batch operations context.
-     * @param AtomReaderWriter $atomSerializer The atom serializer.
+     * @param string            $body           The HTTP response body
+     * @param array             $operations     The batch operations.
+     * @param array             $contexts       The batch operations context.
+     * @param IAtomReaderWriter $atomSerializer The Atom reader and writer.
+     * @param IMimeReaderWriter $mimeSerializer The MIME reader and writer.
      * 
      * @return \PEAR2\WindowsAzure\Services\Table\Models\BatchResult
      * 
      * @throws \InvalidArgumentException 
      */
-    public static function create($body, $operations, $contexts, $atomSerializer)
-    {
+    public static function create($body, $operations, $contexts, $atomSerializer, 
+        $mimeSerializer
+    ) {
         $result    = new BatchResult();
-        $responses = self::_constructResponses($body);
+        $responses = self::_constructResponses($body, $mimeSerializer);
         $count     = count($responses);
         $entries   = array();
         

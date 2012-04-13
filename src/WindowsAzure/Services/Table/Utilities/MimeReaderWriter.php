@@ -23,9 +23,10 @@
  */
  
 namespace PEAR2\WindowsAzure\Services\Table\Utilities;
-use PEAR2\WindowsAzure\Resources;
 require_once 'PEAR.php';
 require_once 'Mail/mimePart.php';
+require_once 'Mail/mimeDecode.php';
+use PEAR2\WindowsAzure\Resources;
 
 /**
  * Reads and writes MIME for batch API.
@@ -40,8 +41,18 @@ require_once 'Mail/mimePart.php';
  */
 class MimeReaderWriter implements IMimeReaderWriter
 {
-    public function getMimeMultipart($bodyPartContents)
+    /**
+     * Given array of MIME parts in raw string, this function converts them into MIME
+     * representation. 
+     * 
+     * @param array $bodyPartContents The MIME body parts.
+     * 
+     * @return array Returns array with two elements 'headers' and 'body' which
+     * represents the MIME message.
+     */
+    public function encodeMimeMultipart($bodyPartContents)
     {
+        $count         = count($bodyPartContents);
         $mimeType      = Resources::MULTIPART_MIXED_TYPE;
         $batchGuid     = strtolower(trim(com_create_guid(), '{}'));
         $batchId       = sprintf('batch_%s', $batchGuid);
@@ -57,7 +68,7 @@ class MimeReaderWriter implements IMimeReaderWriter
         // Create changeset MIME part
         $changeSet = new \Mail_mimePart();
         
-        for ($i = 0; $i < count($bodyPartContents); $i++) {
+        for ($i = 0; $i < $count; $i++) {
             $changeSet->addSubpart($bodyPartContents[$i], $options);
         }
         
@@ -74,6 +85,29 @@ class MimeReaderWriter implements IMimeReaderWriter
         $batchEncoded = $batch->encode($batchId);
         
         return $batchEncoded;
+    }
+    
+    /**
+     * Parses given mime HTTP response body into array. Each array element 
+     * represents a change set result.
+     * 
+     * @param string $mimeBody The raw MIME body result.
+     * 
+     * @return array
+     */
+    public function decodeMimeMultipart($mimeBody)
+    {
+        $params['include_bodies'] = true;
+        $params['input']          = $mimeBody;
+        $structure                = \Mail_mimeDecode::decode($params);
+        $parts                    = $structure->parts;
+        $bodies                   = array();
+        
+        foreach ($parts as $part) {
+            $bodies[] = $part->body;
+        }
+        
+        return $bodies;
     }
 }
 

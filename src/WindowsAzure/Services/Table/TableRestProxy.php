@@ -80,7 +80,7 @@ class TableRestProxy extends ServiceRestProxy implements ITable
      */
     private function _createOperationsContexts($operations)
     {
-        $contexts   = array();
+        $contexts = array();
         
         foreach ($operations as $operation) {
             $context = null;
@@ -124,9 +124,9 @@ class TableRestProxy extends ServiceRestProxy implements ITable
     /**
      * Creates operation context for the API.
      * 
-     * @param string $table         The table name.
+     * @param string        $table  The table name.
      * @param Models\Entity $entity The entity object.
-     * @param string $type          The API type.
+     * @param string        $type   The API type.
      * 
      * @return PEAR2\WindowsAzure\Core\HttpCallContext
      * 
@@ -207,10 +207,10 @@ class TableRestProxy extends ServiceRestProxy implements ITable
             case BatchOperationType::MERGE_ENTITY_OPERATION:
             case BatchOperationType::INSERT_REPLACE_ENTITY_OPERATION:
             case BatchOperationType::INSERT_MERGE_ENTITY_OPERATION:
-                $cType   = $context->getHeader(Resources::CONTENT_TYPE);
-                $body    = $context->getBody();
-                $cType   .= ';type=entry';
-                $context->addHeader(Resources::CONTENT_TYPE, $cType);
+                $contentType  = $context->getHeader(Resources::CONTENT_TYPE);
+                $body         = $context->getBody();
+                $contentType .= ';type=entry';
+                $context->addHeader(Resources::CONTENT_TYPE, $contentType);
                 // Use mb_strlen instead of strlen to get the length of the string
                 // instead of char length
                 $context->addHeader(Resources::CONTENT_LENGTH, mb_strlen($body));
@@ -230,7 +230,7 @@ class TableRestProxy extends ServiceRestProxy implements ITable
             $contentId++;
         }
         
-        return $this->_mimeSerializer->getMimeMultipart($mimeBodyParts);
+        return $this->_mimeSerializer->encodeMimeMultipart($mimeBodyParts);
     }
     
     /**
@@ -243,7 +243,7 @@ class TableRestProxy extends ServiceRestProxy implements ITable
      * 
      * @return HttpCallContext
      */
-    public function _constructDeleteEntityContext($table, $partitionKey, $rowKey, 
+    private function _constructDeleteEntityContext($table, $partitionKey, $rowKey, 
         $options
     ) {
         Validate::isValidString($table);
@@ -1017,7 +1017,8 @@ class TableRestProxy extends ServiceRestProxy implements ITable
             $response->getBody(),
             $operations,
             $contexts,
-            $this->_atomSerializer
+            $this->_atomSerializer,
+            $this->_mimeSerializer
         );
     }
 }

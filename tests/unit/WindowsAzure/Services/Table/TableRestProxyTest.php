@@ -579,7 +579,7 @@ class TableRestProxyTest extends TableRestProxyTestBase
      * @covers PEAR2\WindowsAzure\Services\Table\TableRestProxy::_createBatchRequestBody
      * @covers PEAR2\WindowsAzure\Services\Table\TableRestProxy::_getOperationContext
      * @covers PEAR2\WindowsAzure\Services\Table\TableRestProxy::_constructInsertEntityContext
-     * @covers PEAR2\WindowsAzure\Services\Table\Utilities\MimeReaderWriter::getMimeMultipart
+     * @covers PEAR2\WindowsAzure\Services\Table\Utilities\MimeReaderWriter::encodeMimeMultipart
      */
     public function testBatchWithInsert()
     {
@@ -608,7 +608,7 @@ class TableRestProxyTest extends TableRestProxyTestBase
      * @covers PEAR2\WindowsAzure\Services\Table\TableRestProxy::_createBatchRequestBody
      * @covers PEAR2\WindowsAzure\Services\Table\TableRestProxy::_getOperationContext
      * @covers PEAR2\WindowsAzure\Services\Table\TableRestProxy::_constructDeleteEntityContext
-     * @covers PEAR2\WindowsAzure\Services\Table\Utilities\MimeReaderWriter::getMimeMultipart
+     * @covers PEAR2\WindowsAzure\Services\Table\Utilities\MimeReaderWriter::encodeMimeMultipart
      */
     public function testBatchWithDelete()
     {
@@ -637,7 +637,7 @@ class TableRestProxyTest extends TableRestProxyTestBase
      * @covers PEAR2\WindowsAzure\Services\Table\TableRestProxy::_createBatchRequestBody
      * @covers PEAR2\WindowsAzure\Services\Table\TableRestProxy::_getOperationContext
      * @covers PEAR2\WindowsAzure\Services\Table\TableRestProxy::_constructPutOrMergeEntityContext
-     * @covers PEAR2\WindowsAzure\Services\Table\Utilities\MimeReaderWriter::getMimeMultipart
+     * @covers PEAR2\WindowsAzure\Services\Table\Utilities\MimeReaderWriter::encodeMimeMultipart
      */
     public function testBatchWithUpdate()
     {
@@ -674,7 +674,7 @@ class TableRestProxyTest extends TableRestProxyTestBase
      * @covers PEAR2\WindowsAzure\Services\Table\TableRestProxy::_createBatchRequestBody
      * @covers PEAR2\WindowsAzure\Services\Table\TableRestProxy::_getOperationContext
      * @covers PEAR2\WindowsAzure\Services\Table\TableRestProxy::_constructPutOrMergeEntityContext
-     * @covers PEAR2\WindowsAzure\Services\Table\Utilities\MimeReaderWriter::getMimeMultipart
+     * @covers PEAR2\WindowsAzure\Services\Table\Utilities\MimeReaderWriter::encodeMimeMultipart
      */
     public function testBatchWithMerge()
     {
@@ -711,7 +711,7 @@ class TableRestProxyTest extends TableRestProxyTestBase
      * @covers PEAR2\WindowsAzure\Services\Table\TableRestProxy::_createBatchRequestBody
      * @covers PEAR2\WindowsAzure\Services\Table\TableRestProxy::_getOperationContext
      * @covers PEAR2\WindowsAzure\Services\Table\TableRestProxy::_constructPutOrMergeEntityContext
-     * @covers PEAR2\WindowsAzure\Services\Table\Utilities\MimeReaderWriter::getMimeMultipart
+     * @covers PEAR2\WindowsAzure\Services\Table\Utilities\MimeReaderWriter::encodeMimeMultipart
      */
     public function testBatchWithInsertOrReplace()
     {
@@ -748,7 +748,7 @@ class TableRestProxyTest extends TableRestProxyTestBase
      * @covers PEAR2\WindowsAzure\Services\Table\TableRestProxy::_createBatchRequestBody
      * @covers PEAR2\WindowsAzure\Services\Table\TableRestProxy::_getOperationContext
      * @covers PEAR2\WindowsAzure\Services\Table\TableRestProxy::_constructPutOrMergeEntityContext
-     * @covers PEAR2\WindowsAzure\Services\Table\Utilities\MimeReaderWriter::getMimeMultipart
+     * @covers PEAR2\WindowsAzure\Services\Table\Utilities\MimeReaderWriter::encodeMimeMultipart
      */
     public function testBatchWithInsertOrMerge()
     {
@@ -785,7 +785,7 @@ class TableRestProxyTest extends TableRestProxyTestBase
      * @covers PEAR2\WindowsAzure\Services\Table\TableRestProxy::_createBatchRequestBody
      * @covers PEAR2\WindowsAzure\Services\Table\TableRestProxy::_getOperationContext
      * @covers PEAR2\WindowsAzure\Services\Table\TableRestProxy::_constructPutOrMergeEntityContext
-     * @covers PEAR2\WindowsAzure\Services\Table\Utilities\MimeReaderWriter::getMimeMultipart
+     * @covers PEAR2\WindowsAzure\Services\Table\Utilities\MimeReaderWriter::encodeMimeMultipart
      */
     public function testBatchWithMultipleOperations()
     {
@@ -823,7 +823,7 @@ class TableRestProxyTest extends TableRestProxyTestBase
      * @covers PEAR2\WindowsAzure\Services\Table\TableRestProxy::_createBatchRequestBody
      * @covers PEAR2\WindowsAzure\Services\Table\TableRestProxy::_getOperationContext
      * @covers PEAR2\WindowsAzure\Services\Table\TableRestProxy::_constructPutOrMergeEntityContext
-     * @covers PEAR2\WindowsAzure\Services\Table\Utilities\MimeReaderWriter::getMimeMultipart
+     * @covers PEAR2\WindowsAzure\Services\Table\Utilities\MimeReaderWriter::encodeMimeMultipart
      */
     public function testBatchWithDifferentPKFail()
     {
