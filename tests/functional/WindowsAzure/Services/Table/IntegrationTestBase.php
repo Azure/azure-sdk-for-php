@@ -17,20 +17,20 @@
  * limitations under the License.
  *
  * @category   Microsoft
- * @package    PEAR2\Tests\Functional\WindowsAzure\Services\Queue
+ * @package    PEAR2\Tests\Functional\WindowsAzure\Services\Table
  * @author     Jason Cooke <jcooke@microsoft.com>
  * @copyright  2012 Microsoft Corporation
  * @license    http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link       http://pear.php.net/package/azure-sdk-for-php
  */
 
-namespace PEAR2\Tests\Functional\WindowsAzure\Services\Queue;
+namespace PEAR2\Tests\Functional\WindowsAzure\Services\Table;
 
 use PEAR2\Tests\Framework\FiddlerFilter;
-use PEAR2\Tests\Framework\QueueRestProxyTestBase;
-use PEAR2\WindowsAzure\Services\Queue\QueueService;
+use PEAR2\Tests\Framework\TableRestProxyTestBase;
+use PEAR2\WindowsAzure\Services\Table\TableService;
 
-class IntegrationTestBase extends QueueRestProxyTestBase {
+class IntegrationTestBase extends TableRestProxyTestBase {
     public function __construct()
     {
         parent::__construct();
