@@ -149,8 +149,13 @@ class TableServiceIntegrationTest extends IntegrationTestBase {
         return $result;
     }
 
+    private static function createService() {
+        $tmp = new IntegrationTestBase();
+        return $tmp->wrapper;
+    }
+    
     /**
-    * @covers PEAR2\WindowsAzure\Services\Queue\QueueRestProxy::getServiceProperties
+    * @covers PEAR2\WindowsAzure\Services\Table\TableRestProxy::getServiceProperties
     */
     public function testGetServicePropertiesWorks() {
         // Arrange
@@ -159,12 +164,15 @@ class TableServiceIntegrationTest extends IntegrationTestBase {
         $shouldReturn = false;
         try {
             $props = $this->wrapper->getServiceProperties()->getValue();
-            $this->assertFalse(WindowsAzureUtilities::isEmulated(), 'Should succeed when not running in emulator');
+            $this->assertTrue(!WindowsAzureUtilities::isEmulated(), 'Should succeed iff not running in emulator');
         } catch (ServiceException $e) {
             // Expect failure in emulator, as v1.6 doesn't support this method
             if (WindowsAzureUtilities::isEmulated()) {
                 $this->assertEquals(400, $e->getCode(), 'getCode');
                 $shouldReturn = true;
+            }
+            else {
+                throw $e;
             }
         }
         if($shouldReturn) {
@@ -181,8 +189,8 @@ class TableServiceIntegrationTest extends IntegrationTestBase {
     }
 
     /**
-    * @covers PEAR2\WindowsAzure\Services\Queue\QueueRestProxy::getServiceProperties
-    * @covers PEAR2\WindowsAzure\Services\Queue\QueueRestProxy::setServiceProperties
+    * @covers PEAR2\WindowsAzure\Services\Table\TableRestProxy::getServiceProperties
+    * @covers PEAR2\WindowsAzure\Services\Table\TableRestProxy::setServiceProperties
     */
     public function testSetServicePropertiesWorks() {
         // Arrange
@@ -191,12 +199,15 @@ class TableServiceIntegrationTest extends IntegrationTestBase {
         $shouldReturn = false;
         try {
             $props = $this->wrapper->getServiceProperties()->getValue();
-            $this->assertFalse(WindowsAzureUtilities::isEmulated(), 'Should succeed when not running in emulator');
+            $this->assertTrue(!WindowsAzureUtilities::isEmulated(), 'Should succeed iff not running in emulator');
         } catch (ServiceException $e) {
             // Expect failure in emulator, as v1.6 doesn't support this method
             if (WindowsAzureUtilities::isEmulated()) {
                 $this->assertEquals(400, $e->getCode(), 'getCode');
                 $shouldReturn = true;
+            }
+            else {
+                throw $e;
             }
         }
         if($shouldReturn) {
@@ -219,8 +230,8 @@ class TableServiceIntegrationTest extends IntegrationTestBase {
     }
 
     /**
-    * @covers PEAR2\WindowsAzure\Services\Queue\QueueRestProxy::createTable
-    * @covers PEAR2\WindowsAzure\Services\Queue\QueueRestProxy::getTable
+    * @covers PEAR2\WindowsAzure\Services\Table\TableRestProxy::createTable
+    * @covers PEAR2\WindowsAzure\Services\Table\TableRestProxy::getTable
     */
     public function testCreateTablesWorks() {
         $this->fail("Need to implement getTable");
@@ -241,9 +252,9 @@ class TableServiceIntegrationTest extends IntegrationTestBase {
     }
 
     /**
-    * @covers PEAR2\WindowsAzure\Services\Queue\QueueRestProxy::createTable
-    * @covers PEAR2\WindowsAzure\Services\Queue\QueueRestProxy::deleteTable
-    * @covers PEAR2\WindowsAzure\Services\Queue\QueueRestProxy::getTable
+    * @covers PEAR2\WindowsAzure\Services\Table\TableRestProxy::createTable
+    * @covers PEAR2\WindowsAzure\Services\Table\TableRestProxy::deleteTable
+    * @covers PEAR2\WindowsAzure\Services\Table\TableRestProxy::getTable
     */
     public function testDeleteTablesWorks() {
         $this->fail("Need to implement getTable");
@@ -267,7 +278,7 @@ class TableServiceIntegrationTest extends IntegrationTestBase {
     }
 
     /**
-    * @covers PEAR2\WindowsAzure\Services\Queue\QueueRestProxy::queryTables
+    * @covers PEAR2\WindowsAzure\Services\Table\TableRestProxy::queryTables
     */
     public function testQueryTablesWorks() {
         // Act
@@ -278,7 +289,7 @@ class TableServiceIntegrationTest extends IntegrationTestBase {
     }
 
     /**
-    * @covers PEAR2\WindowsAzure\Services\Queue\QueueRestProxy::queryTables
+    * @covers PEAR2\WindowsAzure\Services\Table\TableRestProxy::queryTables
     */
     public function testQueryTablesWithPrefixWorks() {
         // Act
@@ -291,7 +302,7 @@ class TableServiceIntegrationTest extends IntegrationTestBase {
     }
 
     /**
-    * @covers PEAR2\WindowsAzure\Services\Queue\QueueRestProxy::getTable
+    * @covers PEAR2\WindowsAzure\Services\Table\TableRestProxy::getTable
     */
     public function testGetTableWorks() {
         $this->fail("Need to implement getTable");
@@ -304,10 +315,12 @@ class TableServiceIntegrationTest extends IntegrationTestBase {
     }
 
     /**
-    * @covers PEAR2\WindowsAzure\Services\Queue\QueueRestProxy::insertEntity
+    * @covers PEAR2\WindowsAzure\Services\Table\TableRestProxy::insertEntity
     */
     public function testInsertEntityWorks() {
         // Arrange
+        $binaryData = chr(1) . chr(2) . chr(3) . chr(4);
+        $uuid = strtolower(trim(com_create_guid(), '{}'));
         $entity = new Entity();
         $entity->setPartitionKey('001');
         $entity->setRowKey('insertEntityWorks');
@@ -316,6 +329,8 @@ class TableServiceIntegrationTest extends IntegrationTestBase {
         $entity->newProperty('test3', EdmType::INT32, 3);
         $entity->newProperty('test4', EdmType::INT64, 12345678901);
         $entity->newProperty('test5', EdmType::DATETIME, new \DateTime());
+        $entity->newProperty('test6', EdmType::BINARY, $binaryData);
+        $entity->newProperty('test7', EdmType::GUID, $uuid);
 
         // Act
         $result = $this->wrapper->insertEntity(self::$TEST_TABLE_2, $entity);
@@ -343,10 +358,20 @@ class TableServiceIntegrationTest extends IntegrationTestBase {
 
         $this->assertNotNull($result->getEntity()->getProperty('test5'), '$result->getEntity()->getProperty(\'test5\')');
         $this->assertTrue($result->getEntity()->getProperty('test5')->getValue() instanceof \DateTime, '$result->getEntity()->getProperty(\'test5\')->getValue() instanceof \DateTime');
+
+        $this->assertNotNull($result->getEntity()->getProperty('test6'), '$result->getEntity()->getProperty(\'test6\')');
+        $returnedBinaryData = $result->getEntity()->getProperty('test6')->getValue();
+        $this->assertTrue(is_string($returnedBinaryData), 'binary data is string');
+        $this->assertEquals(strlen($binaryData), strlen($returnedBinaryData), 'binary data lengths are the same');
+        $this->assertEquals($binaryData, $returnedBinaryData, 'binary data are the same');
+
+        $this->assertNotNull($result->getEntity()->getProperty('test7'), '$result->getEntity()->getProperty(\'test7\')');
+        $this->assertTrue(is_string($result->getEntity()->getProperty('test7')->getValue()), 'is_string($result->getEntity()->getProperty(\'test7\')->getValue())');
+        $this->assertEquals($uuid, $result->getEntity()->tryGetPropertyValue('test7'), 'GUIDs are the same');
     }
     /**
-    * @covers PEAR2\WindowsAzure\Services\Queue\QueueRestProxy::insertEntity
-    * @covers PEAR2\WindowsAzure\Services\Queue\QueueRestProxy::updateEntity
+    * @covers PEAR2\WindowsAzure\Services\Table\TableRestProxy::insertEntity
+    * @covers PEAR2\WindowsAzure\Services\Table\TableRestProxy::updateEntity
     */
     public function testUpdateEntityWorks() {
         // Arrange
@@ -369,7 +394,7 @@ class TableServiceIntegrationTest extends IntegrationTestBase {
     }
 
     /**
-    * @covers PEAR2\WindowsAzure\Services\Queue\QueueRestProxy::insertOrReplaceEntity
+    * @covers PEAR2\WindowsAzure\Services\Table\TableRestProxy::insertOrReplaceEntity
     */
     public function testInsertOrReplaceEntityWorks() {
         // Arrange
@@ -402,7 +427,7 @@ class TableServiceIntegrationTest extends IntegrationTestBase {
     }
 
     /**
-    * @covers PEAR2\WindowsAzure\Services\Queue\QueueRestProxy::insertOrMergeEntity
+    * @covers PEAR2\WindowsAzure\Services\Table\TableRestProxy::insertOrMergeEntity
     */
     public function testInsertOrMergeEntityWorks() {
         // Arrange
@@ -435,8 +460,8 @@ class TableServiceIntegrationTest extends IntegrationTestBase {
     }
 
     /**
-    * @covers PEAR2\WindowsAzure\Services\Queue\QueueRestProxy::insertEntity
-    * @covers PEAR2\WindowsAzure\Services\Queue\QueueRestProxy::mergeEntity
+    * @covers PEAR2\WindowsAzure\Services\Table\TableRestProxy::insertEntity
+    * @covers PEAR2\WindowsAzure\Services\Table\TableRestProxy::mergeEntity
     */
     public function testMergeEntityWorks() {
         // Arrange
@@ -461,8 +486,8 @@ class TableServiceIntegrationTest extends IntegrationTestBase {
     }
 
     /**
-    * @covers PEAR2\WindowsAzure\Services\Queue\QueueRestProxy::deleteEntity
-    * @covers PEAR2\WindowsAzure\Services\Queue\QueueRestProxy::insertEntity
+    * @covers PEAR2\WindowsAzure\Services\Table\TableRestProxy::deleteEntity
+    * @covers PEAR2\WindowsAzure\Services\Table\TableRestProxy::insertEntity
     */
     public function testDeleteEntityWorks() {
         // Arrange
@@ -486,7 +511,62 @@ class TableServiceIntegrationTest extends IntegrationTestBase {
 
     /**
     * @covers PEAR2\WindowsAzure\Services\Queue\QueueRestProxy::deleteEntity
+    * @covers PEAR2\WindowsAzure\Services\Queue\QueueRestProxy::getEntity
     * @covers PEAR2\WindowsAzure\Services\Queue\QueueRestProxy::insertEntity
+    * @covers PEAR2\WindowsAzure\Services\Queue\QueueRestProxy::queryEntities
+    */
+    public function testDeleteEntityTroublesomeKeyWorks() {
+        // Arrange
+        $entity1 = new Entity();
+        $entity1->setPartitionKey('001');
+        $entity1->setRowKey('key with spaces');
+        $entity2 = new Entity();
+        $entity2->setPartitionKey('001');
+        $entity2->setRowKey('key\'with\'quotes');
+        $entity3 = new Entity();
+        $entity3->setPartitionKey('001');
+        $entity3->setRowKey('keyWithUnicode \uB2E4');
+        $entity4 = new Entity();
+        $entity4->setPartitionKey('001');
+        $entity4->setRowKey('key \'with\'\' \uB2E4');
+
+        // Act
+        $result1 = $this->wrapper->insertEntity(self::$TEST_TABLE_8, $entity1);
+        $result2 = $this->wrapper->insertEntity(self::$TEST_TABLE_8, $entity2);
+        $result3 = $this->wrapper->insertEntity(self::$TEST_TABLE_8, $entity3);
+        $result4 = $this->wrapper->insertEntity(self::$TEST_TABLE_8, $entity4);
+
+        $this->wrapper->deleteEntity(self::$TEST_TABLE_8, $result1->getEntity()->getPartitionKey(), $result1->getEntity()->getRowKey());
+        $this->wrapper->deleteEntity(self::$TEST_TABLE_8, $result2->getEntity()->getPartitionKey(), $result2->getEntity()->getRowKey());
+        $this->wrapper->deleteEntity(self::$TEST_TABLE_8, $result3->getEntity()->getPartitionKey(), $result3->getEntity()->getRowKey());
+        $this->wrapper->deleteEntity(self::$TEST_TABLE_8, $result4->getEntity()->getPartitionKey(), $result4->getEntity()->getRowKey());
+
+        // Assert
+        try {
+            $this->wrapper->getEntity(self::$TEST_TABLE_8, $result1->getEntity()->getPartitionKey(), $result1->getEntity()->getRowKey());
+            $this->fail('Expect an exception when getting an entity that does not exist');
+        }
+        catch (ServiceException $e) {
+            $this->assertEquals(404, $e->getCode(), 'getCode');
+
+        }
+
+        $qopts = new QueryEntitiesOptions();
+        $qopts->setFilter(Filter::applyEq(Filter::applyLiteral('RowKey'), Filter::applyConstant('key\'with\'quotes')));
+        $assertResult2 = $this->wrapper->queryEntities(self::$TEST_TABLE_8, $qopts);
+
+        $this->assertEquals(0, count($assertResult2->getEntities()), 'entities returned');
+
+        $assertResult3 = $this->wrapper->queryEntities(self::$TEST_TABLE_8);
+        foreach($assertResult3->getEntities() as $entity)  {
+            $this->assertFalse($entity3->getRowKey() == $entity->getRowKey(), 'Entity3 should be removed from the table');
+            $this->assertFalse($entity4->getRowKey() == $entity->getRowKey(), 'Entity4 should be removed from the table');
+        }
+    }
+
+    /**
+    * @covers PEAR2\WindowsAzure\Services\Table\TableRestProxy::deleteEntity
+    * @covers PEAR2\WindowsAzure\Services\Table\TableRestProxy::insertEntity
     */
     public function testDeleteEntityWithETagWorks() {
         // Arrange
@@ -512,11 +592,13 @@ class TableServiceIntegrationTest extends IntegrationTestBase {
     }
 
     /**
-    * @covers PEAR2\WindowsAzure\Services\Queue\QueueRestProxy::getEntity
-    * @covers PEAR2\WindowsAzure\Services\Queue\QueueRestProxy::insertEntity
+    * @covers PEAR2\WindowsAzure\Services\Table\TableRestProxy::getEntity
+    * @covers PEAR2\WindowsAzure\Services\Table\TableRestProxy::insertEntity
     */
     public function testGetEntityWorks() {
         // Arrange
+        $binaryData = chr(1) . chr(2) . chr(3) . chr(4);
+        $uuid = strtolower(trim(com_create_guid(), '{}'));
         $entity = new Entity();
         $entity->setPartitionKey('001');
         $entity->setRowKey('getEntityWorks');
@@ -525,6 +607,8 @@ class TableServiceIntegrationTest extends IntegrationTestBase {
         $entity->newProperty('test3', EdmType::INT32, 3);
         $entity->newProperty('test4', EdmType::INT64, 12345678901);
         $entity->newProperty('test5', EdmType::DATETIME, new \DateTime());
+        $entity->newProperty('test6', EdmType::BINARY, $binaryData);
+        $entity->newProperty('test7', EdmType::GUID, $uuid);
 
         // Act
         $insertResult = $this->wrapper->insertEntity(self::$TEST_TABLE_2, $entity);
@@ -553,11 +637,21 @@ class TableServiceIntegrationTest extends IntegrationTestBase {
 
         $this->assertNotNull($result->getEntity()->getProperty('test5'), '$result->getEntity()->getProperty(\'test5\')');
         $this->assertTrue($result->getEntity()->getProperty('test5')->getValue() instanceof \DateTime, '$result->getEntity()->getProperty(\'test5\')->getValue() instanceof \DateTime');
+
+        $this->assertNotNull($result->getEntity()->getProperty('test6'), '$result->getEntity()->getProperty(\'test6\')');
+        $returnedBinaryData = $result->getEntity()->getProperty('test6')->getValue();
+        $this->assertTrue(is_string($returnedBinaryData), 'binary data is string');
+        $this->assertEquals(strlen($binaryData), strlen($returnedBinaryData), 'binary data lengths are the same');
+        $this->assertEquals($binaryData, $returnedBinaryData, 'binary data are the same');
+
+        $this->assertNotNull($result->getEntity()->getProperty('test7'), '$result->getEntity()->getProperty(\'test7\')');
+        $this->assertTrue(is_string($result->getEntity()->getProperty('test7')->getValue()), 'is_string($result->getEntity()->getProperty(\'test7\')->getValue())');
+        $this->assertEquals($uuid, $result->getEntity()->tryGetPropertyValue('test7'), 'GUIDs are the same');
     }
 
     /**
-    * @covers PEAR2\WindowsAzure\Services\Queue\QueueRestProxy::insertEntity
-    * @covers PEAR2\WindowsAzure\Services\Queue\QueueRestProxy::queryEntities
+    * @covers PEAR2\WindowsAzure\Services\Table\TableRestProxy::insertEntity
+    * @covers PEAR2\WindowsAzure\Services\Table\TableRestProxy::queryEntities
     */
     public function testQueryEntitiesWorks() {
         // Arrange
@@ -604,8 +698,8 @@ class TableServiceIntegrationTest extends IntegrationTestBase {
     }
 
     /**
-    * @covers PEAR2\WindowsAzure\Services\Queue\QueueRestProxy::insertEntity
-    * @covers PEAR2\WindowsAzure\Services\Queue\QueueRestProxy::queryEntities
+    * @covers PEAR2\WindowsAzure\Services\Table\TableRestProxy::insertEntity
+    * @covers PEAR2\WindowsAzure\Services\Table\TableRestProxy::queryEntities
     */
     public function testQueryEntitiesWithPaginationWorks() {
         // Arrange
@@ -647,23 +741,26 @@ class TableServiceIntegrationTest extends IntegrationTestBase {
     }
 
     /**
-    * @covers PEAR2\WindowsAzure\Services\Queue\QueueRestProxy::insertEntity
-    * @covers PEAR2\WindowsAzure\Services\Queue\QueueRestProxy::queryEntities
+    * @covers PEAR2\WindowsAzure\Services\Table\TableRestProxy::insertEntity
+    * @covers PEAR2\WindowsAzure\Services\Table\TableRestProxy::queryEntities
     */
     public function testQueryEntitiesWithFilterWorks() {
         // Arrange
         $table = self::$TEST_TABLE_5;
         $numberOfEntries = 5;
+        $entities = array();
         for ($i = 0; $i < $numberOfEntries; $i++) {
             $entity = new Entity();
             $entity->setPartitionKey('001');
             $entity->setRowKey('queryEntitiesWithFilterWorks-' . $i);
-            $entity->newProperty('test', EdmType::BOOLEAN, true);
-            $entity->newProperty('test2', EdmType::STRING, 'value');
-            $entity->newProperty('test3', EdmType::INT32, 3);
-            $entity->newProperty('test4', EdmType::INT64, 12345678901);
-            $entity->newProperty('test5', EdmType::DATETIME, new \DateTime());
-
+            $entity->newProperty('test', EdmType::BOOLEAN, $i % 2 == 0);
+            $entity->newProperty('test2', EdmType::STRING, '\'value" ' . $i);
+            $entity->newProperty('test3', EdmType::INT32, $i);
+            $entity->newProperty('test4', EdmType::INT64, 12345678901 + $i);
+            $entity->newProperty('test5', EdmType::DATETIME, new \DateTime('2012-01-0' . $i));
+            $entity->newProperty('test6', EdmType::BINARY, chr($i));
+            $entity->newProperty('test7', EdmType::GUID, strtolower(trim(com_create_guid(), '{}')));
+            $entities[$i] = $entity;
             $this->wrapper->insertEntity($table, $entity);
         }
 
@@ -697,10 +794,95 @@ class TableServiceIntegrationTest extends IntegrationTestBase {
             $entities = $result->getEntities();
             $this->assertEquals('queryEntitiesWithFilterWorks-3', $entities[0]->getRowKey(), '$entities[0]->getRowKey()');
         }
+
+        {
+            // Act
+            $q = new Query();
+            $q->setFilter(Filter::applyLiteral('test'));
+            $qeo = new QueryEntitiesOptions();
+            $qeo->setQuery($q);
+            $result = $this->wrapper->queryEntities($table, $qeo);
+
+            // Assert
+            $this->assertNotNull($result, '$result');
+            $this->assertEquals(3, count($result->getEntities()), 'count($result->getEntities())');
+        }
+
+        {
+            // Act
+            $q = new Query();
+            $q->setFilter(Filter::applyEq(Filter::applyLiteral('test2'), Filter::applyConstant('\'value" 3')));
+            $qeo = new QueryEntitiesOptions();
+            $qeo->setQuery($q);
+            $result = $this->wrapper->queryEntities($table, $qeo);
+
+            // Assert
+            $this->assertNotNull($result, '$result');
+            $this->assertEquals(1, count($result->getEntities()), 'count($result->getEntities())');
+            $this->assertEquals('queryEntitiesWithFilterWorks-3', $entities[0]->getRowKey(), '$entities[0]->getRowKey()');
+        }
+
+        {
+            // Act
+            $q = new Query();
+            $q->setFilter(Filter::applyEq(Filter::applyLiteral('test4'), Filter::applyConstant(12345678903)));
+            $qeo = new QueryEntitiesOptions();
+            $qeo->setQuery($q);
+            $result = $this->wrapper->queryEntities($table, $qeo);
+
+            // Assert
+            $this->assertNotNull($result, '$result');
+            $this->assertEquals(1, count($result->getEntities()), 'count($result->getEntities())');
+            $this->assertEquals('queryEntitiesWithFilterWorks-2', $entities[0]->getRowKey(), '$entities[0]->getRowKey()');
+        }
+
+        {
+            // Act
+            $q = new Query();
+            $q->setFilter(Filter::applyEq(Filter::applyLiteral('test5'), Filter::applyConstant(new \DateTime('2012-01-03'))));
+            $qeo = new QueryEntitiesOptions();
+            $qeo->setQuery($q);
+            $result = $this->wrapper->queryEntities($table, $qeo);
+
+            // Assert
+            $this->assertNotNull($result, '$result');
+            $this->assertEquals(1, count($result->getEntities()), 'count($result->getEntities())');
+            $this->assertEquals('queryEntitiesWithFilterWorks-3', $entities[0]->getRowKey(), '$entities[0]->getRowKey()');
+        }
+
+        {
+            // Act
+            $q = new Query();
+            $ent3 = $entities[3];
+            $q->setFilter(Filter::applyEq(Filter::applyLiteral('test6'), Filter::applyConstant(chr(3))));
+            $qeo = new QueryEntitiesOptions();
+            $qeo->setQuery($q);
+            $result = $this->wrapper->queryEntities($table, $qeo);
+
+            // Assert
+            $this->assertNotNull($result, '$result');
+            $this->assertEquals(1, count($result->getEntities()), 'count($result->getEntities())');
+            $this->assertEquals('queryEntitiesWithFilterWorks-3', $entities[0]->getRowKey(), '$entities[0]->getRowKey()');
+        }
+
+        {
+            // Act
+            $q = new Query();
+            $ent3 = $entities[3];
+            $q->setFilter(Filter::applyEq(Filter::applyLiteral('test7'), Filter::applyConstant($ent3->tryGetPropertyValue('test7'))));
+            $qeo = new QueryEntitiesOptions();
+            $qeo->setQuery($q);
+            $result = $this->wrapper->queryEntities($table, $qeo);
+
+            // Assert
+            $this->assertNotNull($result, '$result');
+            $this->assertEquals(1, count($result->getEntities()), 'count($result->getEntities())');
+            $this->assertEquals('queryEntitiesWithFilterWorks-3', $entities[0]->getRowKey(), '$entities[0]->getRowKey()');
+        }              
     }
 
     /**
-    * @covers PEAR2\WindowsAzure\Services\Queue\QueueRestProxy::batch
+    * @covers PEAR2\WindowsAzure\Services\Table\TableRestProxy::batch
     */
     public function testBatchInsertWorks() {
         $this->fail('Need to implement BatchOperations');
@@ -725,12 +907,13 @@ class TableServiceIntegrationTest extends IntegrationTestBase {
         // Assert
         $this->assertNotNull($result, '$result');
         $this->assertEquals(1, count($result->getEntries()), 'count($result->getEntries())');
-        //$this->assertEquals(InsertEntity->class, $result->getEntries()->get(0)->getClass(), '$result->getEntries()->get(0)->getClass()');
+        $ents = $result->getEntries();
+        $this->assertTrue($ents[0] instanceof InsertEntity, '$result->getEntries()->get(0)->getClass()');
     }
 
     /**
-    * @covers PEAR2\WindowsAzure\Services\Queue\QueueRestProxy::batch
-    * @covers PEAR2\WindowsAzure\Services\Queue\QueueRestProxy::insertEntity
+    * @covers PEAR2\WindowsAzure\Services\Table\TableRestProxy::batch
+    * @covers PEAR2\WindowsAzure\Services\Table\TableRestProxy::insertEntity
     */
     public function testBatchUpdateWorks() {
         $this->fail('Need to implement BatchOperations');
@@ -756,12 +939,13 @@ class TableServiceIntegrationTest extends IntegrationTestBase {
         // Assert
         $this->assertNotNull($result, '$result');
         $this->assertEquals(1, count($result->getEntries()), 'count($result->getEntries())');
-       // $this->assertEquals(UpdateEntity->class, $result->getEntries()->get(0)->getClass(), '$result->getEntries()->get(0)->getClass()');
+        $ents = $result->getEntries();
+        $this->assertTrue($ents[0] instanceof UpdateEntity, '$result->getEntries()->get(0)->getClass()');
     }
 
     /**
-    * @covers PEAR2\WindowsAzure\Services\Queue\QueueRestProxy::batch
-    * @covers PEAR2\WindowsAzure\Services\Queue\QueueRestProxy::insertEntity
+    * @covers PEAR2\WindowsAzure\Services\Table\TableRestProxy::batch
+    * @covers PEAR2\WindowsAzure\Services\Table\TableRestProxy::insertEntity
     */
     public function testBatchMergeWorks() {
         $this->fail('Need to implement BatchOperations');
@@ -786,15 +970,21 @@ class TableServiceIntegrationTest extends IntegrationTestBase {
         // Assert
         $this->assertNotNull($result, '$result');
         $this->assertEquals(1, count($result->getEntries()), 'count($result->getEntries())');
-        //$this->assertEquals(UpdateEntity->class, $result->getEntries()->get(0)->getClass(), '$result->getEntries()->get(0)->getClass()');
+        $ents = $result->getEntries();
+        $this->assertTrue($ents[0] instanceof UpdateEntity, '$result->getEntries()->get(0)->getClass()');
     }
 
     /**
-    * @covers PEAR2\WindowsAzure\Services\Queue\QueueRestProxy::batch
+    * @covers PEAR2\WindowsAzure\Services\Table\TableRestProxy::batch
     */
     public function testBatchInsertOrReplaceWorks() {
         $this->fail('Need to implement BatchOperations');
         // Arrange
+        
+        // Don"t run this test with emulator, as v1.6 doesn"t support this method
+        if (WindowsAzureUtilities::isEmulated()) {
+            return;
+        }
         $table = self::$TEST_TABLE_6;
         $partitionKey = '001';
 
@@ -815,15 +1005,22 @@ class TableServiceIntegrationTest extends IntegrationTestBase {
         // Assert
         $this->assertNotNull($result, '$result');
         $this->assertEquals(1, count($result->getEntries()), 'count($result->getEntries())');
-        //$this->assertEquals(UpdateEntity->class, $result->getEntries()->get(0)->getClass(), '$result->getEntries()->get(0)->getClass()');
+        $ents = $result->getEntries();
+        $this->assertTrue($ents[0] instanceof UpdateEntity, '$result->getEntries()->get(0)->getClass()');
     }
 
     /**
-    * @covers PEAR2\WindowsAzure\Services\Queue\QueueRestProxy::batch
+    * @covers PEAR2\WindowsAzure\Services\Table\TableRestProxy::batch
     */
     public function testBatchInsertOrMergeWorks() {
         $this->fail('Need to implement BatchOperations');
         // Arrange
+        
+        // Don"t run this test with emulator, as v1.6 doesn"t support this method
+        if (WindowsAzureUtilities::isEmulated()) {
+            return;
+        }
+
         $table = self::$TEST_TABLE_6;
         $partitionKey = '001';
 
@@ -844,12 +1041,13 @@ class TableServiceIntegrationTest extends IntegrationTestBase {
         // Assert
         $this->assertNotNull($result, '$result');
         $this->assertEquals(1, count($result->getEntries()), 'count($result->getEntries())');
-      //  $this->assertEquals(UpdateEntity->class, $result->getEntries()->get(0)->getClass(), '$result->getEntries()->get(0)->getClass()');
+        $ents = $result->getEntries();
+        $this->assertTrue($ents[0] instanceof UpdateEntity, '$result->getEntries()->get(0)->getClass()');
     }
 
     /**
-    * @covers PEAR2\WindowsAzure\Services\Queue\QueueRestProxy::batch
-    * @covers PEAR2\WindowsAzure\Services\Queue\QueueRestProxy::insertEntity
+    * @covers PEAR2\WindowsAzure\Services\Table\TableRestProxy::batch
+    * @covers PEAR2\WindowsAzure\Services\Table\TableRestProxy::insertEntity
     */
     public function testBatchDeleteWorks() {
         $this->fail('Need to implement BatchOperations');
@@ -874,11 +1072,12 @@ class TableServiceIntegrationTest extends IntegrationTestBase {
         // Assert
         $this->assertNotNull($result, '$result');
         $this->assertEquals(1, count($result->getEntries()), 'count($result->getEntries())');
-      //  $this->assertEquals(DeleteEntity->class, $result->getEntries()->get(0)->getClass(), '$result->getEntries()->get(0)->getClass()');
+        $ents = $result->getEntries();
+        $this->assertTrue($ents[0] instanceof DeleteEntry, '$result->getEntries()->get(0)->getClass()');
     }
 
     /**
-    * @covers PEAR2\WindowsAzure\Services\Queue\QueueRestProxy::batch
+    * @covers PEAR2\WindowsAzure\Services\Table\TableRestProxy::batch
     */
     public function testBatchLotsOfInsertsWorks() {
         $this->fail('Need to implement BatchOperations');
@@ -936,8 +1135,8 @@ class TableServiceIntegrationTest extends IntegrationTestBase {
     }
 
     /**
-    * @covers PEAR2\WindowsAzure\Services\Queue\QueueRestProxy::batch
-    * @covers PEAR2\WindowsAzure\Services\Queue\QueueRestProxy::insertEntity
+    * @covers PEAR2\WindowsAzure\Services\Table\TableRestProxy::batch
+    * @covers PEAR2\WindowsAzure\Services\Table\TableRestProxy::insertEntity
     */
     public function testBatchAllOperationsTogetherWorks() {
         $this->fail('Need to implement BatchOperations');
@@ -1006,9 +1205,15 @@ class TableServiceIntegrationTest extends IntegrationTestBase {
 
         $batchOperations->addDeleteEntity($table, $entity1->getPartitionKey(), $entity1->getRowKey(), $entity1->getEtag());
 
-        $batchOperations->addUpdateEntity($table, $entity2->newProperty('test', EdmType::INT32, 5));
-        $batchOperations->addMergeEntity($table, $entity3->newProperty('test', EdmType::INT32, 5));
-        $batchOperations->addInsertOrReplaceEntity($table, $entity4->newProperty('test', EdmType::INT32, 5));
+        $batchOperations->addUpdateEntity($table, $entity2->newProperty('test3', EdmType::INT32, 5));
+        $batchOperations->addMergeEntity($table, $entity3->newProperty('test3', EdmType::INT32, 5));
+        // Use different behavior in the emulator, as v1.6 doesn"t support this method
+        if (!WindowsAzureUtilities::isEmulated()) {
+            $batchOperations->addInsertOrReplaceEntity($table, $entity4->newProperty('test3', EdmType::INT32, 5));
+        }
+        else {
+            $batchOperations->addUpdateEntity($table, $entity4->newProperty('test3', EdmType::INT32, 5));
+        }
 
         $entity5 = new Entity();
         $entity5->setPartitionKey($partitionKey);
@@ -1018,19 +1223,93 @@ class TableServiceIntegrationTest extends IntegrationTestBase {
         $entity5->newProperty('test3', EdmType::INT32, 3);
         $entity5->newProperty('test4', EdmType::INT64, 12345678901);
         $entity5->newProperty('test5', EdmType::DATETIME, new \DateTime());
-        $batchOperations->addInsertOrMergeEntity($table, $entity5);
+        // Use different behavior in the emulator, as v1.6 doesn"t support this method
+        if (!WindowsAzureUtilities::isEmulated()) {
+            $batchOperations->addInsertOrMergeEntity($table, $entity5);
+        }
+        else {
+            $batchOperations->addInsertEntity($table, $entity5);
+        }
 
         $result = $this->wrapper->batch($batchOperations);
 
         // Assert
         $this->assertNotNull($result, '$result');
         $this->assertEquals(count($batchOperations->getOperations()), count($result->getEntries()), 'count($result->getEntries())');
-//        $this->assertEquals(InsertEntity->class, $result->getEntries()->get(0)->getClass(), '$result->getEntries()->get(0)->getClass()');
-//        $this->assertEquals(DeleteEntity->class, $result->getEntries()->get(1)->getClass(), '$result->getEntries()->get(1)->getClass()');
-//        $this->assertEquals(UpdateEntity->class, $result->getEntries()->get(2)->getClass(), '$result->getEntries()->get(2)->getClass()');
-//        $this->assertEquals(UpdateEntity->class, $result->getEntries()->get(3)->getClass(), '$result->getEntries()->get(3)->getClass()');
-//        $this->assertEquals(UpdateEntity->class, $result->getEntries()->get(4)->getClass(), '$result->getEntries()->get(4)->getClass()');
-//        $this->assertEquals(UpdateEntity->class, $result->getEntries()->get(5)->getClass(), '$result->getEntries()->get(5)->getClass()');
+
+        $ents = $result->getEntries();
+        $this->assertTrue($ents[0] instanceof InsertEntity, '$result->getEntries()->get(0)->getClass()');
+        $this->assertTrue($ents[1] instanceof DeleteEntity, '$result->getEntries()->get(1)->getClass()');
+        $this->assertTrue($ents[2] instanceof UpdateEntity, '$result->getEntries()->get(2)->getClass()');
+        $this->assertTrue($ents[3] instanceof UpdateEntity, '$result->getEntries()->get(3)->getClass()');
+        $this->assertTrue($ents[4] instanceof UpdateEntity, '$result->getEntries()->get(4)->getClass()');
+        $this->assertTrue($ents[5] instanceof UpdateEntity, '$result->getEntries()->get(5)->getClass()');
     }
- 
+
+    /**
+    * @covers PEAR2\WindowsAzure\Services\Queue\QueueRestProxy::batch
+    * @covers PEAR2\WindowsAzure\Services\Queue\QueueRestProxy::insertEntity
+    * @covers PEAR2\WindowsAzure\Services\Queue\QueueRestProxy::updateEntity
+    */
+    public function testBatchNegativeWorks() {
+        $this->fail('Need to implement BatchOperations');
+
+        // Arrange
+        $table = self::$TEST_TABLE_8;
+        $partitionKey = '001';
+
+        // Insert an entity the modify it outside of the batch
+        $entity1 = new Entity();
+        $entity1->setPartitionKey($partitionKey);
+        $entity1->setRowKey('batchNegativeWorks1');
+        $entity1->newProperty('test', EdmType::INT32, 1);
+        $entity2 = new Entity();
+        $entity2->setPartitionKey($partitionKey);
+        $entity2->setRowKey('batchNegativeWorks2');
+        $entity2->newProperty('test', EdmType::INT32, 2);
+        $entity3 = new Entity();
+        $entity3->setPartitionKey($partitionKey);
+        $entity3->setRowKey('batchNegativeWorks3');
+        $entity3->newProperty('test', EdmType::INT32, 3);
+
+        $entity1 = $this->wrapper->insertEntity($table, $entity1)->getEntity();
+        $entity2 = $this->wrapper->insertEntity($table, $entity2)->getEntity();
+        $entity2->newProperty('test', EdmType::INT32, -2);
+        $this->wrapper->updateEntity($table, $entity2);
+
+        // Act
+        $batchOperations = new BatchOperations();
+
+        // The $entity1 still has the original etag from the first submit, 
+        // so this update should fail, because another update was already made.
+        $entity1->newProperty('test', EdmType::INT32, 3);
+        $batchOperations->addDeleteEntity($table, $entity1->getPartitionKey(), $entity1->getRowKey(), $entity1->getEtag());
+        $batchOperations->addUpdateEntity($table, $entity2);
+        $batchOperations->addInsertEntity($table, $entity3);
+
+        $result = $this->wrapper->batch($batchOperations);
+
+        // Assert
+        $this->assertNotNull($result, '$result');
+        $this->assertEquals($batchOperations->getOperations()->size(), $result->getEntries()->size(), '$result->getEntries()->size()');
+
+        $entries = $result->getEntries();
+        if (WindowsAzureUtilities::isEmulated()) {
+            // Don"t run this test with emulator, as v1.6 doesn"t support ordering the results
+            $this->assertNotNull($entries[0], 'First $result should not be null');
+            $this->assertTrue($entries[0] instanceof Error, 'First $result type');
+            $error = $entries[0];
+            $this->assertEquals(412, $error->getError()->getCode(), 'First $result status code');
+            $this->assertNull($entries[1], 'Second $result should be null');
+            $this->assertNull($entries[2], 'Third $result should be null');
+        }
+        else {
+            $this->assertNull($entries[0], 'First $result should be null');
+            $this->assertNotNull($entries[1], 'Second $result should not be null');
+            $this->assertTrue($entries[1] instanceof Error, 'Second $result type');
+            $error = $entries[1];
+            $this->assertEquals(412, $error->getError()->getCode(), 'Second $result status code');
+            $this->assertNull($entries[2], 'Third $result should be null');
+        }
+    }
 }

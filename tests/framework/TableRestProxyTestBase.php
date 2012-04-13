@@ -45,28 +45,14 @@ class TableRestProxyTestBase extends RestProxyTestBase
     
     public function __construct()
     {
-        $config = self::createConfig();
-        $tableWrapper = self::createService($config);
-        parent::__construct($config, $tableWrapper);
-        $this->_createdTables = array();
-    }
-
-    private static function createConfig() {
         $config = new Configuration();
         $tableUri = 'http://' . TestResources::accountName() . '.table.core.windows.net';
         $config->setProperty(TableSettings::ACCOUNT_KEY, TestResources::accountKey());
         $config->setProperty(TableSettings::ACCOUNT_NAME, TestResources::accountName());        
         $config->setProperty(TableSettings::URI, $tableUri);
-        return $config;
-    }
-
-    protected static function createService($config = null) {
-        if (is_null($config)) {
-            $config = self::createConfig();
-        }
-
-        $service = TableService::create($config);
-        return $service;
+        $tableWrapper = TableService::create($config);
+        parent::__construct($config, $tableWrapper);
+        $this->_createdTables = array();
     }
 
     public function createTable($tableName, $options = null)
