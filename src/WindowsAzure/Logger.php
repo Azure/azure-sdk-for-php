@@ -15,53 +15,65 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   PEAR2\WindowsAzure\Services\Table\Models
+ * @package   PEAR2\WindowsAzure
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
  
-namespace PEAR2\WindowsAzure\Services\Table\Models;
+namespace PEAR2\WindowsAzure;
 
 /**
- * Holds result of calling getEntity wrapper.
+ * Logger.
  *
  * @category  Microsoft
- * @package   PEAR2\WindowsAzure\Services\Table\Models
+ * @package   PEAR2\WindowsAzure
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @version   Release: @package_version@
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
-class GetEntityResult
+class Logger
 {
+    private static $_filePath = "C:\log.txt";
+
     /**
-     * @var Entity
-     */
-    private $_entity;
-    
-    /**
-     * Gets table entity.
+     * Logs $var to file
+     *
+     * @param mix    $var data to log.
+     * @param string $tip help message.
      * 
-     * @return Entity
+     * @static
+     * 
+     * @return none.
      */
-    public function getEntity()
+    public static function log($var, $tip = Resources::EMPTY_STRING)
     {
-        return $this->_entity;
+        if (!empty($tip)) {
+            error_log($tip . "\n", 3, self::$_filePath);
+        }
+        
+        if (is_array($var) || is_object($var)) {
+            error_log(print_r($var, true), 3, self::$_filePath);
+        } else {
+            error_log($var . "\n", 3, self::$_filePath);
+        }
     }
     
     /**
-     * Sets table entity.
+     * Sets file path to set
+     *
+     * @param string $filePath log file path.
      * 
-     * @param Entity $entity The table entity instance.
+     * @static
      * 
-     * @return none
+     * @return none.
      */
-    public function setEntity($entity)
+    public static function setLogFile($filePath)
     {
-        $this->_entity = $entity;
+        $this->_filePath = $filePath;
     }
 }
 

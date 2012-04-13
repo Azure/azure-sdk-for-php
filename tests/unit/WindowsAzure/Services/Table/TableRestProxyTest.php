@@ -35,6 +35,7 @@ use PEAR2\WindowsAzure\Services\Table\Models\Filters\Filter;
 use PEAR2\WindowsAzure\Services\Table\Models\Entity;
 use PEAR2\WindowsAzure\Services\Table\Models\EdmType;
 use PEAR2\WindowsAzure\Services\Table\Models\QueryEntitiesOptions;
+use PEAR2\WindowsAzure\Services\Table\Models\BatchOperations;
 
 /**
  * Unit tests for class TableRestProxy
@@ -235,6 +236,7 @@ class TableRestProxyTest extends TableRestProxyTestBase
     
     /**
      * @covers PEAR2\WindowsAzure\Services\Table\TableRestProxy::insertEntity
+     * @covers PEAR2\WindowsAzure\Services\Table\TableRestProxy::_constructInsertEntityContext
      * @covers PEAR2\WindowsAzure\Services\Table\Utilities\AtomReaderWriter::_parseBody
      * @covers PEAR2\WindowsAzure\Services\Table\Utilities\AtomReaderWriter::getEntity
      * @covers PEAR2\WindowsAzure\Services\Table\Utilities\AtomReaderWriter::_generatePropertiesXml
@@ -390,6 +392,7 @@ class TableRestProxyTest extends TableRestProxyTestBase
      * @covers PEAR2\WindowsAzure\Services\Table\TableRestProxy::updateEntity
      * @covers PEAR2\WindowsAzure\Services\Table\TableRestProxy::_getEntityPath
      * @covers PEAR2\WindowsAzure\Services\Table\TableRestProxy::_putOrMergeEntityImpl
+     * @covers PEAR2\WindowsAzure\Services\Table\TableRestProxy::_constructPutOrMergeEntityContext
      * @covers PEAR2\WindowsAzure\Services\Table\Utilities\AtomReaderWriter::_parseBody
      * @covers PEAR2\WindowsAzure\Services\Table\Utilities\AtomReaderWriter::getEntity
      * @covers PEAR2\WindowsAzure\Services\Table\Utilities\AtomReaderWriter::_generatePropertiesXml
@@ -423,6 +426,7 @@ class TableRestProxyTest extends TableRestProxyTestBase
      * @covers PEAR2\WindowsAzure\Services\Table\TableRestProxy::mergeEntity
      * @covers PEAR2\WindowsAzure\Services\Table\TableRestProxy::_getEntityPath
      * @covers PEAR2\WindowsAzure\Services\Table\TableRestProxy::_putOrMergeEntityImpl
+     * @covers PEAR2\WindowsAzure\Services\Table\TableRestProxy::_constructPutOrMergeEntityContext
      * @covers PEAR2\WindowsAzure\Services\Table\Utilities\AtomReaderWriter::_parseBody
      * @covers PEAR2\WindowsAzure\Services\Table\Utilities\AtomReaderWriter::getEntity
      * @covers PEAR2\WindowsAzure\Services\Table\Utilities\AtomReaderWriter::_generatePropertiesXml
@@ -456,6 +460,7 @@ class TableRestProxyTest extends TableRestProxyTestBase
      * @covers PEAR2\WindowsAzure\Services\Table\TableRestProxy::insertOrReplaceEntity
      * @covers PEAR2\WindowsAzure\Services\Table\TableRestProxy::_getEntityPath
      * @covers PEAR2\WindowsAzure\Services\Table\TableRestProxy::_putOrMergeEntityImpl
+     * @covers PEAR2\WindowsAzure\Services\Table\TableRestProxy::_constructPutOrMergeEntityContext
      * @covers PEAR2\WindowsAzure\Services\Table\Utilities\AtomReaderWriter::_parseBody
      * @covers PEAR2\WindowsAzure\Services\Table\Utilities\AtomReaderWriter::getEntity
      * @covers PEAR2\WindowsAzure\Services\Table\Utilities\AtomReaderWriter::_generatePropertiesXml
@@ -489,6 +494,7 @@ class TableRestProxyTest extends TableRestProxyTestBase
      * @covers PEAR2\WindowsAzure\Services\Table\TableRestProxy::InsertOrMergeEntity
      * @covers PEAR2\WindowsAzure\Services\Table\TableRestProxy::_getEntityPath
      * @covers PEAR2\WindowsAzure\Services\Table\TableRestProxy::_putOrMergeEntityImpl
+     * @covers PEAR2\WindowsAzure\Services\Table\TableRestProxy::_constructPutOrMergeEntityContext
      * @covers PEAR2\WindowsAzure\Services\Table\Utilities\AtomReaderWriter::_parseBody
      * @covers PEAR2\WindowsAzure\Services\Table\Utilities\AtomReaderWriter::getEntity
      * @covers PEAR2\WindowsAzure\Services\Table\Utilities\AtomReaderWriter::_generatePropertiesXml
@@ -521,6 +527,7 @@ class TableRestProxyTest extends TableRestProxyTestBase
     /**
      * @covers PEAR2\WindowsAzure\Services\Table\TableRestProxy::deleteEntity
      * @covers PEAR2\WindowsAzure\Services\Table\TableRestProxy::_getEntityPath
+     * @covers PEAR2\WindowsAzure\Services\Table\TableRestProxy::_constructDeleteEntityContext
      */
     public function testDeleteEntity()
     {
@@ -565,6 +572,285 @@ class TableRestProxyTest extends TableRestProxyTestBase
         $this->assertEquals($expected->getPartitionKey(), $actual->getPartitionKey());
         $this->assertEquals($expected->getRowKey(), $actual->getRowKey());
         $this->assertCount(count($expected->getProperties()), $actual->getProperties());
+    }
+    
+    /**
+     * @covers PEAR2\WindowsAzure\Services\Table\TableRestProxy::batch
+     * @covers PEAR2\WindowsAzure\Services\Table\TableRestProxy::_createBatchRequestBody
+     * @covers PEAR2\WindowsAzure\Services\Table\TableRestProxy::_getOperationContext
+     * @covers PEAR2\WindowsAzure\Services\Table\TableRestProxy::_constructInsertEntityContext
+     * @covers PEAR2\WindowsAzure\Services\Table\Utilities\MimeReaderWriter::encodeMimeMultipart
+     */
+    public function testBatchWithInsert()
+    {
+        // Setup
+        $name = 'batchwithinsert';
+        $this->createTable($name);
+        $pk = '123';
+        $rk = '456';
+        $expected = TestResources::getTestEntity($pk, $rk);
+        $operations = new BatchOperations();
+        $operations->addInsertEntity($name, $expected);
+        
+        // Test
+        $result = $this->wrapper->batch($operations);
+        
+        // Assert
+        $entries = $result->getEntries();
+        $actual = $entries[0]->getEntity();
+        $this->assertEquals($expected->getPartitionKey(), $actual->getPartitionKey());
+        $this->assertEquals($expected->getRowKey(), $actual->getRowKey());
+        $this->assertCount(count($expected->getProperties()), $actual->getProperties());
+    }
+    
+    /**
+     * @covers PEAR2\WindowsAzure\Services\Table\TableRestProxy::batch
+     * @covers PEAR2\WindowsAzure\Services\Table\TableRestProxy::_createBatchRequestBody
+     * @covers PEAR2\WindowsAzure\Services\Table\TableRestProxy::_getOperationContext
+     * @covers PEAR2\WindowsAzure\Services\Table\TableRestProxy::_constructDeleteEntityContext
+     * @covers PEAR2\WindowsAzure\Services\Table\Utilities\MimeReaderWriter::encodeMimeMultipart
+     */
+    public function testBatchWithDelete()
+    {
+        // Setup
+        $name = 'batchwithdelete';
+        $this->createTable($name);
+        $pk = '123';
+        $rk = '456';
+        $expected = TestResources::getTestEntity($pk, $rk);
+        $r = $this->wrapper->insertEntity($name, $expected);
+        $operations = new BatchOperations();
+        $etag = $r->getEntity()->getEtag();
+        $operations->addDeleteEntity($name, $pk, $rk, $etag);
+        
+        // Test
+        $this->wrapper->batch($operations);
+        
+        // Assert
+        $result = $this->wrapper->queryEntities($name);
+        $entities = $result->getEntities();
+        $this->assertCount(0, $entities);
+    }
+    
+    /**
+     * @covers PEAR2\WindowsAzure\Services\Table\TableRestProxy::batch
+     * @covers PEAR2\WindowsAzure\Services\Table\TableRestProxy::_createBatchRequestBody
+     * @covers PEAR2\WindowsAzure\Services\Table\TableRestProxy::_getOperationContext
+     * @covers PEAR2\WindowsAzure\Services\Table\TableRestProxy::_constructPutOrMergeEntityContext
+     * @covers PEAR2\WindowsAzure\Services\Table\Utilities\MimeReaderWriter::encodeMimeMultipart
+     */
+    public function testBatchWithUpdate()
+    {
+        // Setup
+        $name = 'batchwithupdate';
+        $this->createTable($name);
+        $pk = '123';
+        $rk = '456';
+        $expected = TestResources::getTestEntity($pk, $rk);
+        $this->wrapper->insertEntity($name, $expected);
+        $result = $this->wrapper->queryEntities($name);
+        $entities = $result->getEntities();
+        $expected = $entities[0];
+        $expected->newProperty('CustomerPlace', EdmType::STRING, 'Redmond');
+        $operations = new BatchOperations();
+        $operations->addUpdateEntity($name, $expected);
+        
+        // Test
+        $result = $this->wrapper->batch($operations);
+        
+        // Assert
+        $entries = $result->getEntries();
+        $this->assertNotNull($entries[0]->getEtag());
+        $result = $this->wrapper->queryEntities($name);
+        $entities = $result->getEntities();
+        $actual = $entities[0];
+        $this->assertEquals($expected->getPartitionKey(), $actual->getPartitionKey());
+        $this->assertEquals($expected->getRowKey(), $actual->getRowKey());
+        $this->assertCount(count($expected->getProperties()), $actual->getProperties());
+    }
+    
+    /**
+     * @covers PEAR2\WindowsAzure\Services\Table\TableRestProxy::batch
+     * @covers PEAR2\WindowsAzure\Services\Table\TableRestProxy::_createBatchRequestBody
+     * @covers PEAR2\WindowsAzure\Services\Table\TableRestProxy::_getOperationContext
+     * @covers PEAR2\WindowsAzure\Services\Table\TableRestProxy::_constructPutOrMergeEntityContext
+     * @covers PEAR2\WindowsAzure\Services\Table\Utilities\MimeReaderWriter::encodeMimeMultipart
+     */
+    public function testBatchWithMerge()
+    {
+        // Setup
+        $name = 'batchwithmerge';
+        $this->createTable($name);
+        $pk = '123';
+        $rk = '456';
+        $expected = TestResources::getTestEntity($pk, $rk);
+        $this->wrapper->insertEntity($name, $expected);
+        $result = $this->wrapper->queryEntities($name);
+        $entities = $result->getEntities();
+        $expected = $entities[0];
+        $expected->newProperty('CustomerPlace', EdmType::STRING, 'Redmond');
+        $operations = new BatchOperations();
+        $operations->addMergeEntity($name, $expected);
+        
+        // Test
+        $result = $this->wrapper->batch($operations);
+        
+        // Assert
+        $entries = $result->getEntries();
+        $this->assertNotNull($entries[0]->getEtag());
+        $result = $this->wrapper->queryEntities($name);
+        $entities = $result->getEntities();
+        $actual = $entities[0];
+        $this->assertEquals($expected->getPartitionKey(), $actual->getPartitionKey());
+        $this->assertEquals($expected->getRowKey(), $actual->getRowKey());
+        $this->assertCount(count($expected->getProperties()), $actual->getProperties());
+    }
+    
+    /**
+     * @covers PEAR2\WindowsAzure\Services\Table\TableRestProxy::batch
+     * @covers PEAR2\WindowsAzure\Services\Table\TableRestProxy::_createBatchRequestBody
+     * @covers PEAR2\WindowsAzure\Services\Table\TableRestProxy::_getOperationContext
+     * @covers PEAR2\WindowsAzure\Services\Table\TableRestProxy::_constructPutOrMergeEntityContext
+     * @covers PEAR2\WindowsAzure\Services\Table\Utilities\MimeReaderWriter::encodeMimeMultipart
+     */
+    public function testBatchWithInsertOrReplace()
+    {
+        // Setup
+        $name = 'batchwithinsertorreplace';
+        $this->createTable($name);
+        $pk = '123';
+        $rk = '456';
+        $expected = TestResources::getTestEntity($pk, $rk);
+        $this->wrapper->insertEntity($name, $expected);
+        $result = $this->wrapper->queryEntities($name);
+        $entities = $result->getEntities();
+        $expected = $entities[0];
+        $expected->newProperty('CustomerPlace', EdmType::STRING, 'Redmond');
+        $operations = new BatchOperations();
+        $operations->addInsertOrReplaceEntity($name, $expected);
+        
+        // Test
+        $result = $this->wrapper->batch($operations);
+        
+        // Assert
+        $entries = $result->getEntries();
+        $this->assertNotNull($entries[0]->getEtag());
+        $result = $this->wrapper->queryEntities($name);
+        $entities = $result->getEntities();
+        $actual = $entities[0];
+        $this->assertEquals($expected->getPartitionKey(), $actual->getPartitionKey());
+        $this->assertEquals($expected->getRowKey(), $actual->getRowKey());
+        $this->assertCount(count($expected->getProperties()), $actual->getProperties());
+    }
+    
+    /**
+     * @covers PEAR2\WindowsAzure\Services\Table\TableRestProxy::batch
+     * @covers PEAR2\WindowsAzure\Services\Table\TableRestProxy::_createBatchRequestBody
+     * @covers PEAR2\WindowsAzure\Services\Table\TableRestProxy::_getOperationContext
+     * @covers PEAR2\WindowsAzure\Services\Table\TableRestProxy::_constructPutOrMergeEntityContext
+     * @covers PEAR2\WindowsAzure\Services\Table\Utilities\MimeReaderWriter::encodeMimeMultipart
+     */
+    public function testBatchWithInsertOrMerge()
+    {
+        // Setup
+        $name = 'batchwithinsertormerge';
+        $this->createTable($name);
+        $pk = '123';
+        $rk = '456';
+        $expected = TestResources::getTestEntity($pk, $rk);
+        $this->wrapper->insertEntity($name, $expected);
+        $result = $this->wrapper->queryEntities($name);
+        $entities = $result->getEntities();
+        $expected = $entities[0];
+        $expected->newProperty('CustomerPlace', EdmType::STRING, 'Redmond');
+        $operations = new BatchOperations();
+        $operations->addInsertOrMergeEntity($name, $expected);
+        
+        // Test
+        $result = $this->wrapper->batch($operations);
+        
+        // Assert
+        $entries = $result->getEntries();
+        $this->assertNotNull($entries[0]->getEtag());
+        $result = $this->wrapper->queryEntities($name);
+        $entities = $result->getEntities();
+        $actual = $entities[0];
+        $this->assertEquals($expected->getPartitionKey(), $actual->getPartitionKey());
+        $this->assertEquals($expected->getRowKey(), $actual->getRowKey());
+        $this->assertCount(count($expected->getProperties()), $actual->getProperties());
+    }
+    
+    /**
+     * @covers PEAR2\WindowsAzure\Services\Table\TableRestProxy::batch
+     * @covers PEAR2\WindowsAzure\Services\Table\TableRestProxy::_createBatchRequestBody
+     * @covers PEAR2\WindowsAzure\Services\Table\TableRestProxy::_getOperationContext
+     * @covers PEAR2\WindowsAzure\Services\Table\TableRestProxy::_constructPutOrMergeEntityContext
+     * @covers PEAR2\WindowsAzure\Services\Table\Utilities\MimeReaderWriter::encodeMimeMultipart
+     */
+    public function testBatchWithMultipleOperations()
+    {
+        // Setup
+        $name = 'batchwithwithmultipleoperations';
+        $this->createTable($name);
+        $pk = '123';
+        $rk1 = '456';
+        $rk2 = '457';
+        $rk3 = '458';
+        $delete = TestResources::getTestEntity($pk, $rk1);
+        $insert = TestResources::getTestEntity($pk, $rk2);
+        $update = TestResources::getTestEntity($pk, $rk3);
+        $this->wrapper->insertEntity($name, $delete);
+        $this->wrapper->insertEntity($name, $update);
+        $result = $this->wrapper->queryEntities($name);
+        $entities = $result->getEntities();
+        $delete = $entities[0];
+        $update = $entities[1];
+        $update->newProperty('CustomerPlace', EdmType::STRING, 'Redmond');
+        $operations = new BatchOperations();
+        $operations->addInsertEntity($name, $insert);
+        $operations->addUpdateEntity($name, $update);
+        $operations->addDeleteEntity($name, $delete->getPartitionKey(), $delete->getRowKey(), $delete->getEtag());
+        
+        // Test
+        $result = $this->wrapper->batch($operations);
+        
+        // Assert
+        $this->assertTrue(true);
+    }
+    
+    /**
+     * @covers PEAR2\WindowsAzure\Services\Table\TableRestProxy::batch
+     * @covers PEAR2\WindowsAzure\Services\Table\TableRestProxy::_createBatchRequestBody
+     * @covers PEAR2\WindowsAzure\Services\Table\TableRestProxy::_getOperationContext
+     * @covers PEAR2\WindowsAzure\Services\Table\TableRestProxy::_constructPutOrMergeEntityContext
+     * @covers PEAR2\WindowsAzure\Services\Table\Utilities\MimeReaderWriter::encodeMimeMultipart
+     */
+    public function testBatchWithDifferentPKFail()
+    {
+        // Setup
+        $name = 'batchwithwithdifferentpkfail';
+        $this->createTable($name);
+        $pk = '123';
+        $rk1 = '456';
+        $rk3 = '458';
+        $delete = TestResources::getTestEntity($pk, $rk1);
+        $update = TestResources::getTestEntity($pk, $rk3);
+        $this->wrapper->insertEntity($name, $delete);
+        $this->wrapper->insertEntity($name, $update);
+        $result = $this->wrapper->queryEntities($name);
+        $entities = $result->getEntities();
+        $delete = $entities[0];
+        $update = $entities[1];
+        $update->newProperty('CustomerPlace', EdmType::STRING, 'Redmond');
+        $operations = new BatchOperations();
+        $operations->addUpdateEntity($name, $update);
+        $operations->addDeleteEntity($name, '125', $delete->getRowKey(), $delete->getEtag());
+        
+        // Test
+        $result = $this->wrapper->batch($operations);
+        
+        // Assert
+        $this->assertTrue(true);
     }
 }
 

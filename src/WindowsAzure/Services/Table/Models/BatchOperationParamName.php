@@ -23,11 +23,9 @@
  */
  
 namespace PEAR2\WindowsAzure\Services\Table\Models;
-use PEAR2\WindowsAzure\Utilities;
-use PEAR2\WindowsAzure\Resources;
 
 /**
- * Holds result of calling insertEntity wrapper
+ * Batch parameter names.
  *
  * @category  Microsoft
  * @package   PEAR2\WindowsAzure\Services\Table\Models
@@ -37,54 +35,34 @@ use PEAR2\WindowsAzure\Resources;
  * @version   Release: @package_version@
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
-class InsertEntityResult
+class BatchOperationParamName
 {
-    /**
-     * @var Entity
-     */
-    private $_entity;
+    const BP_TABLE         = 'table';
+    const BP_ENTITY        = 'entity';
+    const BP_PARTITION_KEY = 'PartitionKey';
+    const BP_ROW_KEY       = 'RowKey';
+    const BP_ETAG          = 'etag';
     
     /**
-     * Create InsertEntityResult object from HTTP response parts.
+     * Validates if $paramName is already defined.
      * 
-     * @param string            $body           The HTTP response body.
-     * @param array             $headers        The HTTP response headers.
-     * @param IAtomReaderWriter $atomSerializer The atom reader and writer.
+     * @param string $paramName The batch operation parameter name.
      * 
-     * @return \PEAR2\WindowsAzure\Services\Table\Models\InsertEntityResult
-     * 
-     * @static
+     * @return boolean 
      */
-    public static function create($body, $headers, $atomSerializer)
+    public static function isValid($paramName)
     {
-        $result = new InsertEntityResult();
-        $entity = $atomSerializer->parseEntity($body);
-        $entity->setEtag(Utilities::tryGetValue($headers, Resources::ETAG));
-        $result->setEntity($entity);
-        
-        return $result;
-    }
-    
-    /**
-     * Gets table entity.
-     * 
-     * @return Entity
-     */
-    public function getEntity()
-    {
-        return $this->_entity;
-    }
-    
-    /**
-     * Sets table entity.
-     * 
-     * @param Entity $entity The table entity instance.
-     * 
-     * @return none
-     */
-    public function setEntity($entity)
-    {
-        $this->_entity = $entity;
+        switch ($paramName) {
+        case self::BP_TABLE:
+        case self::BP_ENTITY:
+        case self::BP_PARTITION_KEY:
+        case self::BP_ROW_KEY:
+        case self::BP_ETAG:
+            return true;
+
+        default:
+            return false;
+        }
     }
 }
 

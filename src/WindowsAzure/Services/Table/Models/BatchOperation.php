@@ -23,11 +23,12 @@
  */
  
 namespace PEAR2\WindowsAzure\Services\Table\Models;
-use PEAR2\WindowsAzure\Utilities;
+use PEAR2\WindowsAzure\Validate;
 use PEAR2\WindowsAzure\Resources;
+use PEAR2\WindowsAzure\Utilities;
 
 /**
- * Holds result of calling insertEntity wrapper
+ * Represents one batch operation
  *
  * @category  Microsoft
  * @package   PEAR2\WindowsAzure\Services\Table\Models
@@ -37,54 +38,71 @@ use PEAR2\WindowsAzure\Resources;
  * @version   Release: @package_version@
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
-class InsertEntityResult
+class BatchOperation
 {
     /**
-     * @var Entity
+     * @var string
      */
-    private $_entity;
+    private $_type;
     
     /**
-     * Create InsertEntityResult object from HTTP response parts.
-     * 
-     * @param string            $body           The HTTP response body.
-     * @param array             $headers        The HTTP response headers.
-     * @param IAtomReaderWriter $atomSerializer The atom reader and writer.
-     * 
-     * @return \PEAR2\WindowsAzure\Services\Table\Models\InsertEntityResult
-     * 
-     * @static
+     * @var array
      */
-    public static function create($body, $headers, $atomSerializer)
-    {
-        $result = new InsertEntityResult();
-        $entity = $atomSerializer->parseEntity($body);
-        $entity->setEtag(Utilities::tryGetValue($headers, Resources::ETAG));
-        $result->setEntity($entity);
-        
-        return $result;
-    }
+    private $_params;
     
     /**
-     * Gets table entity.
+     * Sets operation type.
      * 
-     * @return Entity
-     */
-    public function getEntity()
-    {
-        return $this->_entity;
-    }
-    
-    /**
-     * Sets table entity.
-     * 
-     * @param Entity $entity The table entity instance.
+     * @param string $type The operation type. Must be valid type.
      * 
      * @return none
      */
-    public function setEntity($entity)
+    public function setType($type)
     {
-        $this->_entity = $entity;
+        Validate::isTrue(
+            BatchOperationType::isValid($type),
+            Resources::INVALID_BO_TYPE_MSG
+        );
+        $this->_type = $type;
+    }
+    
+    /**
+     * Gets operation type.
+     * 
+     * @return string
+     */
+    public function getType()
+    {
+        return $this->_type;
+    }
+    
+    /**
+     * Adds or sets parameter for the operation.
+     * 
+     * @param string $name  The param name. Must be valid name.
+     * @param mix    $value The param value.
+     * 
+     * @return none
+     */
+    public function addParam($name, $value)
+    {
+        Validate::isTrue(
+            BatchOperationParamName::isValid($name),
+            Resources::INVALID_BO_PN_MSG
+        );
+        $this->_params[$name] = $value;
+    }
+    
+    /**
+     * Gets parameter value and if the name doesn't exist, return null.
+     * 
+     * @param string $name The parameter name.
+     * 
+     * @return mix
+     */
+    public function getParam($name)
+    {
+        return Utilities::tryGetValue($this->_params, $name);
     }
 }
 
