@@ -174,6 +174,22 @@ interface IHttpClient
      * @return \HTTP_Request2_Response.
      */
     public function getResponse();
+    
+    /**
+     * Throws ServiceException if the recieved status code is not expected.
+     * 
+     * @param string $actual   The received status code.
+     * @param string $reason   The reason phrase.
+     * @param string $message  The detailed message (if any).
+     * @param array  $expected The expected status codes.
+     * 
+     * @return none
+     * 
+     * @static
+     * 
+     * @throws ServiceException
+     */
+    public static function throwIfError($actual, $reason, $message, $expected);
 }
 
 ?>

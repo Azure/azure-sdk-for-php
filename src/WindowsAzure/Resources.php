@@ -49,6 +49,8 @@ class Resources
     const INVALID_PROP_MSG    = 'The provided propertie(s) are/is invalid.';
     const INVALID_ENTITY_MSG  = 'The provided entity object is invalid.';
     const INVALID_VERSION_MSG = 'Server does not support any known protocol versions.';
+    const INVALID_BO_TYPE_MSG = 'Batch operation is not supported.';
+    const INVALID_BO_PN_MSG   = 'Batch operation parameter is not supported.';
 
     // HTTP Headers
     const X_MS_HEADER_PREFIX                 = 'x-ms-';
@@ -87,6 +89,7 @@ class Resources
     const CONTENT_LENGTH                     = 'content-length';
     const CONTENT_MD5                        = 'content-md5';
     const CONTENT_TYPE                       = 'content-type';
+    const CONTENT_ID                         = 'content-id';
     const CONTENT_RANGE                      = 'content-range';
     const CACHE_CONTROL                      = 'cache-control';
     const IF_MODIFIED_SINCE                  = 'if-modified-since';
@@ -122,6 +125,7 @@ class Resources
 
     // Header values
     const API_VERSION                    = '2011-08-18';
+    const API_VERSION_2009_4             = '2009-04-14';
     const DATA_SERVICE_VERSION_VALUE     = '1.0;NetFx';
     const MAX_DATA_SERVICE_VERSION_VALUE = '2.0;NetFx';
     const ACCEPT_HEADER_VALUE            = 'application/atom+xml,application/xml';
@@ -151,6 +155,8 @@ class Resources
     const XML_CONTENT_TYPE      = 'application/x-www-form-urlencoded';
     const BINARY_FILE_TYPE      = 'application/octet-stream';
     const XML_ATOM_CONTENT_TYPE = 'application/atom+xml';
+    const HTTP_TYPE             = 'application/http';
+    const MULTIPART_MIXED_TYPE  = 'multipart/mixed';
     
     // Status Codes
     const STATUS_OK         = 200;

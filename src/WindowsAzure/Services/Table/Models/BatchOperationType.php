@@ -23,11 +23,9 @@
  */
  
 namespace PEAR2\WindowsAzure\Services\Table\Models;
-use PEAR2\WindowsAzure\Utilities;
-use PEAR2\WindowsAzure\Resources;
 
 /**
- * Holds result of calling insertEntity wrapper
+ * Supported batch operations.
  *
  * @category  Microsoft
  * @package   PEAR2\WindowsAzure\Services\Table\Models
@@ -37,54 +35,36 @@ use PEAR2\WindowsAzure\Resources;
  * @version   Release: @package_version@
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
-class InsertEntityResult
+class BatchOperationType
 {
-    /**
-     * @var Entity
-     */
-    private $_entity;
+    const INSERT_ENTITY_OPERATION         = 'InsertEntityOperation';
+    const UPDATE_ENTITY_OPERATION         = 'UpdateEntityOperation';
+    const DELETE_ENTITY_OPERATION         = 'DeleteEntityOperation';
+    const MERGE_ENTITY_OPERATION          = 'MergeEntityOperation';
+    const INSERT_REPLACE_ENTITY_OPERATION = 'InsertOrReplaceEntityOperation';
+    const INSERT_MERGE_ENTITY_OPERATION   = 'InsertOrMergeEntityOperation';
     
     /**
-     * Create InsertEntityResult object from HTTP response parts.
+     * Validates if $type is already defined.
      * 
-     * @param string            $body           The HTTP response body.
-     * @param array             $headers        The HTTP response headers.
-     * @param IAtomReaderWriter $atomSerializer The atom reader and writer.
+     * @param string $type The operation type.
      * 
-     * @return \PEAR2\WindowsAzure\Services\Table\Models\InsertEntityResult
-     * 
-     * @static
+     * @return boolean 
      */
-    public static function create($body, $headers, $atomSerializer)
+    public static function isValid($type)
     {
-        $result = new InsertEntityResult();
-        $entity = $atomSerializer->parseEntity($body);
-        $entity->setEtag(Utilities::tryGetValue($headers, Resources::ETAG));
-        $result->setEntity($entity);
-        
-        return $result;
-    }
-    
-    /**
-     * Gets table entity.
-     * 
-     * @return Entity
-     */
-    public function getEntity()
-    {
-        return $this->_entity;
-    }
-    
-    /**
-     * Sets table entity.
-     * 
-     * @param Entity $entity The table entity instance.
-     * 
-     * @return none
-     */
-    public function setEntity($entity)
-    {
-        $this->_entity = $entity;
+        switch ($type) {
+        case self::INSERT_ENTITY_OPERATION:
+        case self::UPDATE_ENTITY_OPERATION:
+        case self::DELETE_ENTITY_OPERATION:
+        case self::MERGE_ENTITY_OPERATION:
+        case self::INSERT_REPLACE_ENTITY_OPERATION:
+        case self::INSERT_MERGE_ENTITY_OPERATION:
+            return true;
+                
+        default:
+            return false;
+        }
     }
 }
 
