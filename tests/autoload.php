@@ -35,6 +35,7 @@ spl_autoload_register(
             'pear2\\tests\\unit\\windowsazure\\serviceruntime\\protocol1runtimeclienttest' => '/unit/WindowsAzure/ServiceRuntime/Protocol1RuntimeClientTest.php',
             'pear2\\tests\\unit\\windowsazure\\serviceruntime\\protocol1runtimecurrentstateclienttest' => '/unit/WindowsAzure/ServiceRuntime/Protocol1RuntimeCurrentStateClientTest.php',
             'pear2\\tests\\unit\\windowsazure\\serviceruntime\\protocol1runtimegoalstateclienttest' => '/unit/WindowsAzure/ServiceRuntime/Protocol1RuntimeGoalStateClientTest.php',
+            'pear2\\tests\\unit\\windowsazure\\serviceruntime\\releasecurrentstatetest' => '/unit/WindowsAzure/ServiceRuntime/ReleaseCurrentStateTest.php',
             'pear2\\tests\\unit\\windowsazure\\serviceruntime\\roleenvironmentconfigurationsettingchangetest' => '/unit/WindowsAzure/ServiceRuntime/RoleEnvironmentConfigurationSettingChangeTest.php',
             'pear2\\tests\\unit\\windowsazure\\serviceruntime\\roleenvironmentdatatest' => '/unit/WindowsAzure/ServiceRuntime/RoleEnvironmentDataTest.php',
             'pear2\\tests\\unit\\windowsazure\\serviceruntime\\roleenvironmenttest' => '/unit/WindowsAzure/ServiceRuntime/RoleEnvironmentTest.php',
