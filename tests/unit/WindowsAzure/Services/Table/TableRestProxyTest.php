@@ -23,7 +23,7 @@
  */
 
 namespace PEAR2\Tests\Unit\WindowsAzure\Services\Table;
-use PEAR2\Tests\Framework\TableRestProxyTestBase;
+use PEAR2\Tests\Framework\TableServiceRestProxyTestBase;
 use PEAR2\WindowsAzure\Core\WindowsAzureUtilities;
 use PEAR2\WindowsAzure\Core\ServiceException;
 use PEAR2\Tests\Framework\TestResources;
@@ -48,7 +48,7 @@ use PEAR2\WindowsAzure\Services\Table\Models\BatchOperations;
  * @version   Release: @package_version@
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
-class TableRestProxyTest extends TableRestProxyTestBase
+class TableRestProxyTest extends TableServiceRestProxyTestBase
 {
     /**
     * @covers PEAR2\WindowsAzure\Services\Table\TableRestProxy::getServiceProperties
@@ -408,7 +408,7 @@ class TableRestProxyTest extends TableRestProxyTestBase
         $result = $this->wrapper->queryEntities($name);
         $entities = $result->getEntities();
         $expected = $entities[0];
-        $expected->newProperty('CustomerPlace', EdmType::STRING, 'Redmond');
+        $expected->addProperty('CustomerPlace', EdmType::STRING, 'Redmond');
         
         // Test
         $this->wrapper->UpdateEntity($name, $expected);
@@ -442,7 +442,7 @@ class TableRestProxyTest extends TableRestProxyTestBase
         $result = $this->wrapper->queryEntities($name);
         $entities = $result->getEntities();
         $expected = $entities[0];
-        $expected->newProperty('CustomerPhone', EdmType::STRING, '99999999');
+        $expected->addProperty('CustomerPhone', EdmType::STRING, '99999999');
         
         // Test
         $this->wrapper->mergeEntity($name, $expected);
@@ -476,7 +476,7 @@ class TableRestProxyTest extends TableRestProxyTestBase
         $result = $this->wrapper->queryEntities($name);
         $entities = $result->getEntities();
         $expected = $entities[0];
-        $expected->newProperty('CustomerPlace', EdmType::STRING, 'Redmond');
+        $expected->addProperty('CustomerPlace', EdmType::STRING, 'Redmond');
         
         // Test
         $this->wrapper->InsertOrReplaceEntity($name, $expected);
@@ -510,7 +510,7 @@ class TableRestProxyTest extends TableRestProxyTestBase
         $result = $this->wrapper->queryEntities($name);
         $entities = $result->getEntities();
         $expected = $entities[0];
-        $expected->newProperty('CustomerPhone', EdmType::STRING, '99999999');
+        $expected->addProperty('CustomerPhone', EdmType::STRING, '99999999');
         
         // Test
         $this->wrapper->InsertOrMergeEntity($name, $expected);
@@ -651,7 +651,7 @@ class TableRestProxyTest extends TableRestProxyTestBase
         $result = $this->wrapper->queryEntities($name);
         $entities = $result->getEntities();
         $expected = $entities[0];
-        $expected->newProperty('CustomerPlace', EdmType::STRING, 'Redmond');
+        $expected->addProperty('CustomerPlace', EdmType::STRING, 'Redmond');
         $operations = new BatchOperations();
         $operations->addUpdateEntity($name, $expected);
         
@@ -688,7 +688,7 @@ class TableRestProxyTest extends TableRestProxyTestBase
         $result = $this->wrapper->queryEntities($name);
         $entities = $result->getEntities();
         $expected = $entities[0];
-        $expected->newProperty('CustomerPlace', EdmType::STRING, 'Redmond');
+        $expected->addProperty('CustomerPlace', EdmType::STRING, 'Redmond');
         $operations = new BatchOperations();
         $operations->addMergeEntity($name, $expected);
         
@@ -725,7 +725,7 @@ class TableRestProxyTest extends TableRestProxyTestBase
         $result = $this->wrapper->queryEntities($name);
         $entities = $result->getEntities();
         $expected = $entities[0];
-        $expected->newProperty('CustomerPlace', EdmType::STRING, 'Redmond');
+        $expected->addProperty('CustomerPlace', EdmType::STRING, 'Redmond');
         $operations = new BatchOperations();
         $operations->addInsertOrReplaceEntity($name, $expected);
         
@@ -762,7 +762,7 @@ class TableRestProxyTest extends TableRestProxyTestBase
         $result = $this->wrapper->queryEntities($name);
         $entities = $result->getEntities();
         $expected = $entities[0];
-        $expected->newProperty('CustomerPlace', EdmType::STRING, 'Redmond');
+        $expected->addProperty('CustomerPlace', EdmType::STRING, 'Redmond');
         $operations = new BatchOperations();
         $operations->addInsertOrMergeEntity($name, $expected);
         
@@ -805,7 +805,7 @@ class TableRestProxyTest extends TableRestProxyTestBase
         $entities = $result->getEntities();
         $delete = $entities[0];
         $update = $entities[1];
-        $update->newProperty('CustomerPlace', EdmType::STRING, 'Redmond');
+        $update->addProperty('CustomerPlace', EdmType::STRING, 'Redmond');
         $operations = new BatchOperations();
         $operations->addInsertEntity($name, $insert);
         $operations->addUpdateEntity($name, $update);
@@ -841,7 +841,7 @@ class TableRestProxyTest extends TableRestProxyTestBase
         $entities = $result->getEntities();
         $delete = $entities[0];
         $update = $entities[1];
-        $update->newProperty('CustomerPlace', EdmType::STRING, 'Redmond');
+        $update->addProperty('CustomerPlace', EdmType::STRING, 'Redmond');
         $operations = new BatchOperations();
         $operations->addUpdateEntity($name, $update);
         $operations->addDeleteEntity($name, '125', $delete->getRowKey(), $delete->getEtag());

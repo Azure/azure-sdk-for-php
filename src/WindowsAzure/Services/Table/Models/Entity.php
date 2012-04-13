@@ -123,7 +123,7 @@ class Entity
      */
     public function setPartitionKey($partitionKey)
     {
-        $this->newProperty('PartitionKey', null, $partitionKey);
+        $this->addProperty('PartitionKey', null, $partitionKey);
     }
     
     /**
@@ -145,7 +145,7 @@ class Entity
      */
     public function setRowKey($rowKey)
     {
-        $this->newProperty('RowKey', null, $rowKey);
+        $this->addProperty('RowKey', null, $rowKey);
     }
     
     /**
@@ -167,7 +167,7 @@ class Entity
      */
     public function setTimestamp($timestamp)
     {
-        $this->newProperty('Timestamp', EdmType::DATETIME, $timestamp);
+        $this->addProperty('Timestamp', EdmType::DATETIME, $timestamp);
     }
     
     /**
@@ -228,7 +228,7 @@ class Entity
      * 
      * @return none
      */
-    public function newProperty($name, $edmType, $value)
+    public function addProperty($name, $edmType, $value)
     {
         $edmType = EdmType::processType($edmType);
         $value   = EdmType::processValue($edmType, $value);

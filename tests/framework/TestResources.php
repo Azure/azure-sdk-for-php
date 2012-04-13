@@ -368,10 +368,10 @@ class TestResources
         $entity->setPartitionKey($pk);
         $entity->setRowKey($rk);
         $entity->setTimestamp(Utilities::isoDate());
-        $entity->newProperty('CustomerId', EdmType::INT32, '890');
-        $entity->newProperty('CustomerName', null, 'John');
-        $entity->newProperty('IsNew', EdmType::BOOLEAN, true);
-        $entity->newProperty('JoinDate', EdmType::DATETIME, new \DateTime());
+        $entity->addProperty('CustomerId', EdmType::INT32, '890');
+        $entity->addProperty('CustomerName', null, 'John');
+        $entity->addProperty('IsNew', EdmType::BOOLEAN, true);
+        $entity->addProperty('JoinDate', EdmType::DATETIME, new \DateTime());
         
         return $entity;
     }
