@@ -105,7 +105,7 @@ class Protocol1RuntimeGoalStateClientTest extends \PHPUnit_Framework_TestCase
         // Setup
         $rootDirectory = 'root';
 
-        \vfsStreamWrapper::register(); 
+        \vfsStreamWrapper::register();
         \vfsStreamWrapper::setRoot(new \vfsStreamDirectory($rootDirectory));
         
         $roleEnvironmentFileName = 'roleEnvironment';
@@ -126,7 +126,7 @@ class Protocol1RuntimeGoalStateClientTest extends \PHPUnit_Framework_TestCase
             '</RoleEnvironment>';
         
         $file = \vfsStream::newFile($roleEnvironmentFileName);
-        $file->setContent($roleEnvironmentFileContent); 
+        $file->setContent($roleEnvironmentFileContent);
         
         \vfsStreamWrapper::getRoot()->addChild($file);
         
@@ -166,6 +166,28 @@ class Protocol1RuntimeGoalStateClientTest extends \PHPUnit_Framework_TestCase
         
         // Test
         $this->assertNotEquals(null, $runtimeGoalStateClient->getRoleEnvironmentData());
+    }
+    
+    /**
+     * @covers PEAR2\WindowsAzure\ServiceRuntime\Protocol1RuntimeGoalStateClient::setKeepOpen
+     * @covers PEAR2\WindowsAzure\ServiceRuntime\Protocol1RuntimeGoalStateClient::getKeepOpen
+     */
+    public function testSetKeepOpen()
+    {
+        // Setup
+        $runtimeGoalStateClient = new Protocol1RuntimeGoalStateClient(
+            null,
+            null,
+            null,
+            null
+        );
+
+        // Test
+        $runtimeGoalStateClient->setKeepOpen(true);
+        $this->assertEquals(true, $runtimeGoalStateClient->getKeepOpen());
+
+        $runtimeGoalStateClient->setKeepOpen(false);
+        $this->assertEquals(false, $runtimeGoalStateClient->getKeepOpen());
     }
 }
 

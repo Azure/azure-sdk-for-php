@@ -95,7 +95,8 @@ class Protocol1RuntimeCurrentStateClientTest extends \PHPUnit_Framework_TestCase
         $protocol1RuntimeCurrentStateClient =
             new Protocol1RuntimeCurrentStateClient(
                 $serializer,
-                $fileOutputChannel);
+                $fileOutputChannel
+            );
         
         $protocol1RuntimeCurrentStateClient->setEndpoint(
             \vfsStream::url($rootDirectory . '/' . $fileName)

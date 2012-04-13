@@ -23,7 +23,6 @@
  */
 
 namespace PEAR2\WindowsAzure\ServiceRuntime;
-use PEAR2\WindowsAzure\Resources;
 
 /**
  * An implementation for the protocol runtime goal state client.
@@ -59,11 +58,6 @@ class Protocol1RuntimeGoalStateClient implements IRuntimeGoalStateClient
     private $_inputChannel;
 
     /**
-     * @var array
-     */
-    private $_listeners;
-
-    /**
      * @var string
      */
     private $_endpoint;
@@ -77,6 +71,11 @@ class Protocol1RuntimeGoalStateClient implements IRuntimeGoalStateClient
      * @var RoleEnvironmentData
      */
     private $_currentEnvironmentData;
+
+    /**
+     * @var bool
+     */
+    private $_keepOpen;
 
     /**
      * Constructor
@@ -102,8 +101,9 @@ class Protocol1RuntimeGoalStateClient implements IRuntimeGoalStateClient
 
         $this->_currentGoalState       = null;
         $this->_currentEnvironmentData = null;
+        $this->_keepOpen               = false;
     }
-    
+
     /**
      * Gets the current goal state.
      * 
@@ -115,7 +115,7 @@ class Protocol1RuntimeGoalStateClient implements IRuntimeGoalStateClient
 
         return $this->_currentGoalState;
     }
-    
+
     /**
      * Gets the role environment data.
      * 
@@ -144,31 +144,7 @@ class Protocol1RuntimeGoalStateClient implements IRuntimeGoalStateClient
 
         return $this->_currentEnvironmentData;
     }
-    
-    /**
-     * Adds a goal state changed listener.
-     * 
-     * @param string $listener The listener.
-     *
-     * @return none
-     */
-    public function addGoalStateChangedListener($listener)
-    {
-        throw new \Exception(Resources::NOT_IMPLEMENTED_MSG);
-    }
-    
-    /**
-     * Removes a goal state changed listener.
-     * 
-     * @param string $listener The listener.
-     *
-     * @return none
-     */
-    public function removeGoalStateChangedListener($listener)
-    {
-        throw new \Exception(Resources::NOT_IMPLEMENTED_MSG);
-    }
-    
+
     /**
      * Sets the endpoint.
      *
@@ -180,7 +156,29 @@ class Protocol1RuntimeGoalStateClient implements IRuntimeGoalStateClient
     {
         $this->_endpoint = $endpoint;
     }
-    
+
+    /**
+     * Sets the keep open state.
+     *
+     * @param string $keepOpen Sets the keep open state.
+     * 
+     * @return none
+     */
+    public function setKeepOpen($keepOpen)
+    {
+        $this->_keepOpen = $keepOpen;
+    }
+
+    /**
+     * Gets the keep open state.
+     * 
+     * @return bool
+     */
+    public function getKeepOpen()
+    {
+        return $this->_keepOpen;
+    }
+
     /**
      * Ensures that the goal state is retrieved.
      * 
@@ -188,8 +186,10 @@ class Protocol1RuntimeGoalStateClient implements IRuntimeGoalStateClient
      */
     private function _ensureGoalStateRetrieved()
     {
-        $inputStream = $this->_inputChannel->getInputStream($this->_endpoint);
-        $this->_goalStateDeserializer->initialize($inputStream);
+        if (is_null($this->_currentGoalState) || !$this->_keepOpen) {
+            $inputStream = $this->_inputChannel->getInputStream($this->_endpoint);
+            $this->_goalStateDeserializer->initialize($inputStream);
+        }
 
         $goalState = $this->_goalStateDeserializer->deserialize();
         if (is_null($goalState)) {
@@ -205,6 +205,10 @@ class Protocol1RuntimeGoalStateClient implements IRuntimeGoalStateClient
         $this->_currentStateClient->setEndpoint(
             $this->_currentGoalState->getCurrentStateEndpoint()
         );
+
+        if (!$this->_keepOpen) {
+            $this->_inputChannel->closeInputStream();
+        }
     }
 }
 

@@ -44,6 +44,7 @@ class FileInputChannelTest extends \PHPUnit_Framework_TestCase
 {
     /**
      * @covers PEAR2\WindowsAzure\ServiceRuntime\FileInputChannel::getInputStream
+     * @covers PEAR2\WindowsAzure\ServiceRuntime\FileInputChannel::closeInputStream
      */
     public function testGetInputStream()
     {
@@ -66,6 +67,8 @@ class FileInputChannelTest extends \PHPUnit_Framework_TestCase
         
         $inputChannelContents = stream_get_contents($inputStream);
         $this->assertEquals($fileContent, $inputChannelContents);
+        
+        $fileInputChannel->closeInputStream();
         
         // invalid file
         $this->setExpectedException(get_class(new ChannelNotAvailableException()));

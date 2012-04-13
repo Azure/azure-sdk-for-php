@@ -23,7 +23,6 @@
  */
 
 namespace PEAR2\WindowsAzure\ServiceRuntime;
-use PEAR2\WindowsAzure\Resources;
 
 /**
  * An implementation for the protocol runtime current state client.
