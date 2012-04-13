@@ -23,6 +23,7 @@
  */
  
 namespace PEAR2\WindowsAzure\Services\Table\Models;
+use PEAR2\WindowsAzure\Validate;
 
 /**
  * Holds batch operation change set.
@@ -94,6 +95,9 @@ class BatchOperations
      */
     public function addInsertEntity($table, $entity)
     {
+        Validate::isValidString($table);
+        Validate::notNullOrEmpty($entity);
+        
         $operation = new BatchOperation();
         $type      = BatchOperationType::INSERT_ENTITY_OPERATION;
         $operation->setType($type);
@@ -112,6 +116,9 @@ class BatchOperations
      */
     public function addUpdateEntity($table, $entity)
     {
+        Validate::isValidString($table);
+        Validate::notNullOrEmpty($entity);
+        
         $operation = new BatchOperation();
         $type      = BatchOperationType::UPDATE_ENTITY_OPERATION;
         $operation->setType($type);
@@ -130,6 +137,9 @@ class BatchOperations
      */
     public function addMergeEntity($table, $entity)
     {
+        Validate::isValidString($table);
+        Validate::notNullOrEmpty($entity);
+        
         $operation = new BatchOperation();
         $type      = BatchOperationType::MERGE_ENTITY_OPERATION;
         $operation->setType($type);
@@ -148,6 +158,9 @@ class BatchOperations
      */
     public function addInsertOrReplaceEntity($table, $entity)
     {
+        Validate::isValidString($table);
+        Validate::notNullOrEmpty($entity);
+        
         $operation = new BatchOperation();
         $type      = BatchOperationType::INSERT_REPLACE_ENTITY_OPERATION;
         $operation->setType($type);
@@ -166,6 +179,9 @@ class BatchOperations
      */
     public function addInsertOrMergeEntity($table, $entity)
     {
+        Validate::isValidString($table);
+        Validate::notNullOrEmpty($entity);
+        
         $operation = new BatchOperation();
         $type      = BatchOperationType::INSERT_MERGE_ENTITY_OPERATION;
         $operation->setType($type);
@@ -186,6 +202,11 @@ class BatchOperations
      */
     public function addDeleteEntity($table, $partitionKey, $rowKey, $etag)
     {
+        Validate::isValidString($table);
+        Validate::isValidString($partitionKey);
+        Validate::isValidString($rowKey);
+        Validate::isValidString($etag);
+        
         $operation = new BatchOperation();
         $type      = BatchOperationType::DELETE_ENTITY_OPERATION;
         $operation->setType($type);
