@@ -58,7 +58,7 @@ class QueueServiceFunctionalOptionsTest extends \PHPUnit_Framework_TestCase  {
         $rp->setDays(10);
         $rp->setEnabled(true);
         $this->assertEquals(10, $rp->getDays(), 'Set RetentionPolicy->getDays should be 10');
-        $this->assertTrue($rp->getEnabled(), 'Sett RetentionPolicy->getEnabled should be true');
+        $this->assertTrue($rp->getEnabled(), 'Set RetentionPolicy->getEnabled should be true');
     }
 
     public function testCheckLogging() {
