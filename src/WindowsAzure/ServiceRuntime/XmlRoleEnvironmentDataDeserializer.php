@@ -23,7 +23,6 @@
  */
 
 namespace PEAR2\WindowsAzure\ServiceRuntime;
-use PEAR2\WindowsAzure\ServiceRuntime\RoleInstance;
 use PEAR2\WindowsAzure\Utilities;
 use PEAR2\WindowsAzure\Resources;
 
@@ -72,7 +71,7 @@ class XmlRoleEnvironmentDataDeserializer
             $localResources,
             $currentInstance,
             $roles,
-            $environmentInfo['Deployment']['@attributes']['emulated']
+            ($environmentInfo['Deployment']['@attributes']['emulated'] == 'true')
         );
     }
     
@@ -87,27 +86,19 @@ class XmlRoleEnvironmentDataDeserializer
     {
         $configurationSettings = array();
 
-        if (array_key_exists('CurrentInstance', $environmentInfo)
-            && array_key_exists(
-                'ConfigurationSettings',
-                $environmentInfo['CurrentInstance']
-            )
-            && array_key_exists(
-                'ConfigurationSetting',
-                $environmentInfo['CurrentInstance']['ConfigurationSettings']
-            )
-        ) {
-
-            $settingInfos = $environmentInfo['CurrentInstance']
-                ['ConfigurationSettings']['ConfigurationSetting'];
-            if (array_key_exists('@attributes', $settingInfos)) {
-                $settingInfos   = array();
-                $settingInfos[] = $environmentInfo['CurrentInstance']
-                    ['ConfigurationSettings']
-                    ['ConfigurationSetting'];
+        $settingsInfo = Utilities::tryGetKeysChainValue(
+            $environmentInfo,
+            'CurrentInstance',
+            'ConfigurationSettings',
+            'ConfigurationSetting'
+        );
+        
+        if (!is_null($settingsInfo)) {
+            if (array_key_exists('@attributes', $settingsInfo)) {
+                $settingsInfo = array(0 => $settingsInfo);
             }
 
-            foreach ($settingInfos as $settingInfo) {
+            foreach ($settingsInfo as $settingInfo) {
                 $configurationSettings
                     [$settingInfo['@attributes']['name']] = $settingInfo
                         ['@attributes']['value'];
@@ -128,26 +119,19 @@ class XmlRoleEnvironmentDataDeserializer
     {
         $localResourcesMap = array();
 
-        if (array_key_exists('CurrentInstance', $environmentInfo)
-            && array_key_exists(
-                'LocalResources',
-                $environmentInfo['CurrentInstance']
-            )
-            && array_key_exists(
-                'LocalResource',
-                $environmentInfo['CurrentInstance']['LocalResources']
-            )
-        ) {
-
-            $localResources = $environmentInfo['CurrentInstance']
-                ['LocalResources']['LocalResource'];
-            if (array_key_exists('@attributes', $localResources)) {
-                $localResources   = array();
-                $localResources[] = $environmentInfo['CurrentInstance']
-                    ['LocalResources']['LocalResource'];
+        $localResourcesInfo = Utilities::tryGetKeysChainValue(
+            $environmentInfo,
+            'CurrentInstance',
+            'LocalResources',
+            'LocalResource'
+        );
+        
+        if (!is_null($localResourcesInfo)) {
+            if (array_key_exists('@attributes', $localResourcesInfo)) {
+                $localResourcesInfo = array(0 => $localResourcesInfo);
             }
 
-            foreach ($localResources as $localResource) {
+            foreach ($localResourcesInfo as $localResource) {
                 $localResourcesMap
                     [$localResource['@attributes']['name']] = $localResource
                         ['@attributes'];
@@ -171,32 +155,42 @@ class XmlRoleEnvironmentDataDeserializer
     ) {
         $rolesMap = array();
 
-        if (array_key_exists('Roles', $environmentInfo)
-            && array_key_exists('Role', $environmentInfo['Roles'])
-        ) {
-
-            $roles = $environmentInfo['Roles']['Role'];
-            if (array_key_exists('@attributes', $roles)) {
-                $roles   = array();
-                $roles[] = $environmentInfo['Roles']['Role'];
+        $rolesInfo = Utilities::tryGetKeysChainValue(
+            $environmentInfo,
+            'Roles',
+            'Role'
+        );
+        
+        if (!is_null($rolesInfo)) {
+            if (array_key_exists('@attributes', $rolesInfo)) {
+                $rolesInfo = array(0 => $rolesInfo);
             }
 
-            foreach ($roles as $role) {
-                $roleInstances = $this->_translateRoleInstances($role);
+            foreach ($rolesInfo as $roleInfo) {
+                $roleInstances = $this->_translateRoleInstances($roleInfo);
 
-                if ($role['@attributes']['name'] == $currentRole) {
+                if ($roleInfo['@attributes']['name'] == $currentRole) {
                     $roleInstances[$currentInstance->getId()] = $currentInstance;
                 }
 
-                $rolesMap[$role['@attributes']['name']] = $roleInstances;
-            }
-
-            if (!array_key_exists($currentRole, $rolesMap)) {
-                $roleInstances                            = array();
-                $roleInstances[$currentInstance->getId()] = $currentInstance;
+                $role = new Role($roleInfo['@attributes']['name'], $roleInstances);
                 
-                $rolesMap[$currentRole] = $roleInstances;
+                foreach ($roleInstances as $instance) {
+                    $instance->setRole($role);
+                }
+                
+                $rolesMap[$roleInfo['@attributes']['name']] = $role;
             }
+        }
+        
+        if (!array_key_exists($currentRole, $rolesMap)) {
+            $roleInstances                            = array();
+            $roleInstances[$currentInstance->getId()] = $currentInstance;
+
+            $singleRole = new Role($currentRole, $roleInstances);
+            $currentInstance->setRole($singleRole);
+
+            $rolesMap[$currentRole] = $singleRole;
         }
 
         return $rolesMap;
@@ -213,24 +207,31 @@ class XmlRoleEnvironmentDataDeserializer
     {
         $roleInstanceMap = array();
 
-        if (array_key_exists('Instances', $instancesInfo)
-            && array_key_exists('Instance', $instancesInfo['Instances'])
-        ) {
-
-            $instances = $instancesInfo['Instances']['Instance'];
+        $instances = Utilities::tryGetKeysChainValue(
+            $instancesInfo,
+            'Instances',
+            'Instance'
+        );
+        
+        if (!is_null($instances)) {
             if (array_key_exists('@attributes', $instances)) {
-                $instances   = array();
-                $instances[] = $instancesInfo['Instances']['Instance'];
+                $instances = array(0 => $instances);
             }
 
-            foreach ($instances as $instance) {
-                $instance['@attributes']
-                    ['Endpoints'] = $this->_translateRoleInstanceEndpoints(
-                        $instance['Endpoints']['Endpoint']
-                    );
+            foreach ($instances as $instanceInfo) {
+                $endpoints = $this->_translateRoleInstanceEndpoints(
+                    $instanceInfo['Endpoints']['Endpoint']
+                );
 
+                $roleInstance = new RoleInstance(
+                    $instanceInfo['@attributes']['id'],
+                    $instanceInfo['@attributes']['faultDomain'],
+                    $instanceInfo['@attributes']['updateDomain'],
+                    $endpoints
+                );
+                
                 $roleInstanceMap
-                    [$instance['@attributes']['id']] = $instance['@attributes'];
+                    [$instanceInfo['@attributes']['id']] = $roleInstance;
             }
         }
 
@@ -250,13 +251,17 @@ class XmlRoleEnvironmentDataDeserializer
 
         $endpoints = $endpointsInfo;
         if (array_key_exists('@attributes', $endpoints)) {
-            $endpoints   = array();
-            $endpoints[] = $endpointsInfo;
+            $endpoints = array(0 => $endpointsInfo);
         }
 
         foreach ($endpoints as $endpoint) {
-            $endpointsMap
-                [$endpoint['@attributes']['name']] = $endpoint['@attributes'];
+            $roleInstanceEndpoint = new RoleInstanceEndpoint(
+                $endpoint['@attributes']['protocol'],
+                $endpoint['@attributes']['address'],
+                intval($endpoint['@attributes']['port'], 10)
+            );
+            
+            $endpointsMap[$endpoint['@attributes']['name']] = $roleInstanceEndpoint;
         }
 
         return $endpointsMap;
@@ -271,21 +276,17 @@ class XmlRoleEnvironmentDataDeserializer
      */
     private function _translateCurrentInstance($environmentInfo)
     {
-        $endpoints = null;
-        if (array_key_exists('CurrentInstance', $environmentInfo)
-            && array_key_exists(
-                'Endpoints',
-                $environmentInfo['CurrentInstance']
-            )
-            && array_key_exists(
-                'Endpoint',
-                $environmentInfo['CurrentInstance']['Endpoints']
-            )
-        ) {
-
-            $endpoints = $this->_translateRoleInstanceEndpoints(
-                $environmentInfo['CurrentInstance']['Endpoints']['Endpoint']
-            );
+        $endpoints = array();
+        
+        $endpointsInfo = Utilities::tryGetKeysChainValue(
+            $environmentInfo,
+            'CurrentInstance',
+            'Endpoints',
+            'Endpoint'
+        );
+        
+        if (!is_null($endpointsInfo)) {
+            $endpoints = $this->_translateRoleInstanceEndpoints($endpointsInfo);
         }
 
         $currentInstance = new RoleInstance(
@@ -295,6 +296,10 @@ class XmlRoleEnvironmentDataDeserializer
             $endpoints
         );
 
+        foreach ($currentInstance->getInstanceEndpoints() as $endpoint) {
+            $endpoint->setRoleInstance($currentInstance);
+        }
+        
         return $currentInstance;
     }
 }

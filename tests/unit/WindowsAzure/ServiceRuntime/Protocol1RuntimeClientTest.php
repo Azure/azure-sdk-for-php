@@ -29,7 +29,7 @@ use PEAR2\WindowsAzure\ServiceRuntime\Protocol1RuntimeCurrentStateClient;
 use PEAR2\WindowsAzure\ServiceRuntime\Protocol1RuntimeGoalStateClient;
 
 /**
- * Unit tests for class Protocol1RuntimeClient
+ * Unit tests for class Protocol1RuntimeClient.
  *
  * @category  Microsoft
  * @package   PEAR2\Tests\Unit\WindowsAzure\ServiceRuntime

@@ -26,7 +26,7 @@ namespace PEAR2\WindowsAzure\ServiceRuntime;
 use PEAR2\WindowsAzure\Resources;
 
 /**
- * The current state representation.
+ * The current status.
  *
  * @category  Microsoft
  * @package   PEAR2\WindowsAzure\ServiceRuntime
@@ -36,32 +36,27 @@ use PEAR2\WindowsAzure\Resources;
  * @version   Release: @package_version@
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
-class CurrentState
+class CurrentStatus
 {
     /**
      * @var string
      */
-    private $_clientId;
+    const STARTED = 'Started';
     
     /**
-     * Constructor
-     * 
-     * @param string $clientId The client identifier.
+     * @var string
      */
-    public function __construct($clientId)
-    {
-        $this->_clientId = $clientId;
-    }
+    const BUSY = 'Busy';
     
     /**
-     * Gets the client identifier.
-     * 
-     * @return string
+     * @var string
      */
-    public function getClientId()
-    {
-        return $this->_clientId;
-    }
+    const RECYCLE = 'Recycle';
+    
+    /**
+     * @var string
+     */
+    const STOPPED = 'Stopped';
 }
 
 ?>

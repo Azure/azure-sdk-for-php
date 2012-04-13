@@ -23,10 +23,9 @@
  */
 
 namespace PEAR2\WindowsAzure\ServiceRuntime;
-use PEAR2\WindowsAzure\Resources;
 
 /**
- * The current state representation.
+ * The role environment configuration setting change.
  *
  * @category  Microsoft
  * @package   PEAR2\WindowsAzure\ServiceRuntime
@@ -36,31 +35,31 @@ use PEAR2\WindowsAzure\Resources;
  * @version   Release: @package_version@
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
-class CurrentState
+class RoleEnvironmentConfigurationSettingChange implements IRoleEnvironmentChange
 {
     /**
      * @var string
      */
-    private $_clientId;
+    private $_settingName;
     
     /**
      * Constructor
      * 
-     * @param string $clientId The client identifier.
+     * @param string $settingName The setting name.
      */
-    public function __construct($clientId)
+    public function __construct($settingName)
     {
-        $this->_clientId = $clientId;
+        $this->_settingName = $settingName;
     }
     
     /**
-     * Gets the client identifier.
+     * Returns the name of the configuration setting that has been changed.
      * 
      * @return string
      */
-    public function getClientId()
+    public function getConfigurationSettingName()
     {
-        return $this->_clientId;
+        return $this->_settingName;
     }
 }
 

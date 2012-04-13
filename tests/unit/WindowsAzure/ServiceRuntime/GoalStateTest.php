@@ -27,7 +27,7 @@ use PEAR2\WindowsAzure\Core\WindowsAzureUtilities;
 use PEAR2\WindowsAzure\ServiceRuntime\GoalState;
 
 /**
- * Unit tests for class CurrentState
+ * Unit tests for class CurrentState.
  *
  * @category  Microsoft
  * @package   PEAR2\Tests\Unit\WindowsAzure\ServiceRuntime
