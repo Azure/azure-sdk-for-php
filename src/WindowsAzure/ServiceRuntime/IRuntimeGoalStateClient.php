@@ -23,7 +23,6 @@
  */
 
 namespace PEAR2\WindowsAzure\ServiceRuntime;
-use PEAR2\WindowsAzure\Resources;
 
 /**
  * The runtime goal state client.
@@ -51,24 +50,6 @@ interface IRuntimeGoalStateClient
      * @return RoleEnvironmentData
      */
     public function getRoleEnvironmentData();
-
-    /**
-     * Adds a goal state changed listener.
-     * 
-     * @param string $listener The listener.
-     * 
-     * @return none
-     */
-    public function addGoalStateChangedListener($listener);
-
-    /**
-     * Removes a goal state changed listener.
-     * 
-     * @param string $listener The listener.
-     * 
-     * @return none
-     */
-    public function removeGoalStateChangedListener($listener);
 }
 
 ?>

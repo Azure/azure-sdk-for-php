@@ -26,6 +26,7 @@ use PEAR2\Tests\Framework\TestResources;
 use PEAR2\WindowsAzure\ServiceRuntime\FileInputChannel;
 use PEAR2\WindowsAzure\ServiceRuntime\RoleEnvironment;
 use PEAR2\WindowsAzure\ServiceRuntime\RoleInstanceStatus;
+use PEAR2\WindowsAzure\ServiceRuntime\RuntimeKernel;
 
 require_once 'vfsStream/vfsStream.php';
 
@@ -42,6 +43,16 @@ require_once 'vfsStream/vfsStream.php';
  */
 class RoleEnvironmentTest extends \PHPUnit_Framework_TestCase
 {
+    /**
+     * @covers PEAR2\WindowsAzure\ServiceRuntime\RoleEnvironment::init
+     * @covers PEAR2\WindowsAzure\ServiceRuntime\RoleEnvironment::getClientId
+     */
+    public function testGetClientId()
+    {
+        // Test
+        $this->assertNotEquals(null, RoleEnvironment::getClientId());
+    }
+    
     /**
      * @covers PEAR2\WindowsAzure\ServiceRuntime\RoleEnvironment::isAvailable
      */
@@ -675,7 +686,7 @@ class RoleEnvironmentTest extends \PHPUnit_Framework_TestCase
         $currentStateFileName = 'test';
         $fileContents = '<?xml version="1.0" encoding="UTF-8"?>' . "\n" .
             '<CurrentState>' .
-            '<StatusLease ClientId="">' .
+            '<StatusLease ClientId="' . RoleEnvironment::getClientId() . '">' .
             '<Acquire>' .
             '<Incarnation>1</Incarnation>' .
             '<Status>Recycle</Status>' .
@@ -771,7 +782,7 @@ class RoleEnvironmentTest extends \PHPUnit_Framework_TestCase
         $currentStateFileName = 'test';
         $fileContents = '<?xml version="1.0" encoding="UTF-8"?>' . "\n" .
             '<CurrentState>' .
-            '<StatusLease ClientId="">' .
+            '<StatusLease ClientId="' . RoleEnvironment::getClientId() . '">' .
             '<Release/>' .
             '</StatusLease>' .
             '</CurrentState>';
@@ -863,7 +874,7 @@ class RoleEnvironmentTest extends \PHPUnit_Framework_TestCase
         $currentStateFileName = 'test';
         $fileContents = '<?xml version="1.0" encoding="UTF-8"?>' . "\n" .
             '<CurrentState>' .
-            '<StatusLease ClientId="">' .
+            '<StatusLease ClientId="' . RoleEnvironment::getClientId() . '">' .
             '<Acquire>' .
             '<Incarnation>1</Incarnation>' .
             '<Status>Busy</Status>' .
@@ -965,7 +976,7 @@ class RoleEnvironmentTest extends \PHPUnit_Framework_TestCase
         $currentStateFileName = 'test';
         $fileContents = '<?xml version="1.0" encoding="UTF-8"?>' . "\n" .
             '<CurrentState>' .
-            '<StatusLease ClientId="">' .
+            '<StatusLease ClientId="' . RoleEnvironment::getClientId() . '">' .
             '<Acquire>' .
             '<Incarnation>1</Incarnation>' .
             '<Status>Started</Status>' .
@@ -1051,6 +1062,692 @@ class RoleEnvironmentTest extends \PHPUnit_Framework_TestCase
         
         $inputChannelContents = stream_get_contents($fileInputStream);
         $this->assertEquals($fileContents, $inputChannelContents);
+    }
+    
+    /**
+     * @covers PEAR2\WindowsAzure\ServiceRuntime\RoleEnvironment::addRoleEnvironmentChangedListener
+     * @covers PEAR2\WindowsAzure\ServiceRuntime\RoleEnvironment::removeRoleEnvironmentChangedListener
+     */
+    public function testAddRemoveRoleEnvironmentChangedListener()
+    {
+        RoleEnvironment::addRoleEnvironmentChangedListener(
+            'RoleEnvironmentTest::myFunction'
+        );
+        
+        // Removing succeeds
+        $this->assertEquals(
+            true,
+            RoleEnvironment::removeRoleEnvironmentChangedListener(
+                'RoleEnvironmentTest::myFunction'
+            )
+        );
+        
+        // Removing again fails
+        $this->assertEquals(
+            false,
+            RoleEnvironment::removeRoleEnvironmentChangedListener(
+                'RoleEnvironmentTest::myFunction'
+            )
+        );
+    }
+    
+    /**
+     * @covers PEAR2\WindowsAzure\ServiceRuntime\RoleEnvironment::addRoleEnvironmentChangingListener
+     * @covers PEAR2\WindowsAzure\ServiceRuntime\RoleEnvironment::removeRoleEnvironmentChangingListener
+     */
+    public function testAddRemoveRoleEnvironmentChangingListener()
+    {
+        RoleEnvironment::addRoleEnvironmentChangingListener(
+            'RoleEnvironmentTest::myFunction'
+        );
+        
+        // Removing succeeds
+        $this->assertEquals(
+            true,
+            RoleEnvironment::removeRoleEnvironmentChangingListener(
+                'RoleEnvironmentTest::myFunction'
+            )
+        );
+        
+        // Removing again fails
+        $this->assertEquals(
+            false,
+            RoleEnvironment::removeRoleEnvironmentChangingListener(
+                'RoleEnvironmentTest::myFunction'
+            )
+        );
+    }
+    
+    /**
+     * @covers PEAR2\WindowsAzure\ServiceRuntime\RoleEnvironment::addRoleEnvironmentStoppingListener
+     * @covers PEAR2\WindowsAzure\ServiceRuntime\RoleEnvironment::removeRoleEnvironmentStoppingListener
+     */
+    public function testAddRemoveRoleEnvironmentStoppingListener()
+    {
+        RoleEnvironment::addRoleEnvironmentStoppingListener(
+            'RoleEnvironmentTest::myFunction'
+        );
+        
+        // Removing succeeds
+        $this->assertEquals(
+            true,
+            RoleEnvironment::removeRoleEnvironmentStoppingListener(
+                'RoleEnvironmentTest::myFunction'
+            )
+        );
+        
+        // Removing again fails
+        $this->assertEquals(
+            false,
+            RoleEnvironment::removeRoleEnvironmentStoppingListener(
+                'RoleEnvironmentTest::myFunction'
+            )
+        );
+    }
+    
+    /**
+     * @covers PEAR2\WindowsAzure\ServiceRuntime\RoleEnvironment::_calculateChanges
+     * @covers PEAR2\WindowsAzure\ServiceRuntime\RoleEnvironment::_calculateConfigurationChanges
+     * @covers PEAR2\WindowsAzure\ServiceRuntime\RoleEnvironment::_calculateNewRoleInstanceChanges
+     * @covers PEAR2\WindowsAzure\ServiceRuntime\RoleEnvironment::_calculateNewRoleInstanceEndpointsChanges
+     * @covers PEAR2\WindowsAzure\ServiceRuntime\RoleEnvironment::_calculateCurrentRoleInstanceChanges
+     * @covers PEAR2\WindowsAzure\ServiceRuntime\RoleEnvironment::_calculateCurrentRoleInstanceEndpointsChanges
+     */    
+    public function testCalculateChanges()
+    {
+       // Setup
+        $rootDirectory = 'root';
+
+        \vfsStreamWrapper::register();
+        \vfsStreamWrapper::setRoot(new \vfsStreamDirectory($rootDirectory));
+        
+        $roleEnvironmentFileName = 'roleEnvironment';
+        $roleEnvironmentFileContent = '<?xml version="1.0" encoding="utf-8"?>' .
+            '<RoleEnvironment xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" ' .
+            'xmlns:xsd="http://www.w3.org/2001/XMLSchema">' .
+            '<Deployment id="deploymentId" emulated="false" />' .
+            '<CurrentInstance id="id3" roleName="roleName" faultDomain="4" updateDomain="5">' .
+            '<LocalResources>' .
+            '<LocalResource name="DiagnosticStore" path="somepath.DiagnosticStore" sizeInMB="4096" />' .
+            '</LocalResources>' .
+            '</CurrentInstance>' .
+            '<Roles />' .
+            '</RoleEnvironment>';
+        
+        $roleEnvironmentFile = \vfsStream::newFile($roleEnvironmentFileName);
+        $roleEnvironmentFile->setContent($roleEnvironmentFileContent); 
+        
+        \vfsStreamWrapper::getRoot()->addChild($roleEnvironmentFile);
+        
+        $goalStateFileName = 'goalstate';
+        $goalStateFileContent = '<?xml version="1.0" encoding="utf-8"?>' .
+            '<GoalState xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" ' .
+            'xmlns:xsd="http://www.w3.org/2001/XMLSchema">' .
+            '<Incarnation>1</Incarnation>' .
+            '<ExpectedState>Started</ExpectedState>' .
+            '<RoleEnvironmentPath>' .
+            \vfsStream::url($rootDirectory . '/' . $roleEnvironmentFileName) .
+            '</RoleEnvironmentPath>' .
+            '<CurrentStateEndpoint>none</CurrentStateEndpoint>' .
+            '<Deadline>9999-12-31T23:59:59.9999999</Deadline>' .
+            '</GoalState>';
+        
+        $goalStateFileContent = dechex(strlen($goalStateFileContent)) . "\n" . $goalStateFileContent;
+        
+        $file = \vfsStream::newFile($goalStateFileName);
+        $file->setContent($goalStateFileContent);
+        
+        \vfsStreamWrapper::getRoot()->addChild($file);
+        
+        $fileName = 'versionendpoint';
+        $fileContent = '<?xml version="1.0" encoding="utf-8"?>' .
+            '<RuntimeServerDiscovery xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" ' .
+            'xmlns:xsd="http://www.w3.org/2001/XMLSchema">' .
+            '<RuntimeServerEndpoints>' .
+            '<RuntimeServerEndpoint version="2011-03-08" path="' .
+            \vfsStream::url($rootDirectory . '/' . $goalStateFileName) .
+            '" />' .
+            '</RuntimeServerEndpoints>' .
+            '</RuntimeServerDiscovery>';
+        
+        $file = \vfsStream::newFile($fileName);
+        $file->setContent($fileContent);
+        
+        \vfsStreamWrapper::getRoot()->addChild($file);
+        
+        putenv('WaRuntimeEndpoint=' . \vfsStream::url($rootDirectory . '/' . $fileName));
+        
+        // Test
+        $this->assertEquals(
+            'deploymentId',
+            RoleEnvironment::getDeploymentId()
+        );
+        
+        // Test 1 - No changes
+        $calculateChanges = self::getMethod('_calculateChanges');
+        $changes = $calculateChanges->invoke(null);
+        
+        // Force a role environment data refresh
+        RoleEnvironment::getDeploymentId();
+        
+        $this->assertEquals(0, count($changes));
+
+        // Test 2 - Add a configuration
+        $roleEnvironmentFileContent = '<?xml version="1.0" encoding="utf-8"?>' .
+            '<RoleEnvironment xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" ' .
+            'xmlns:xsd="http://www.w3.org/2001/XMLSchema">' .
+            '<Deployment id="deploymentId" emulated="false" />' .
+            '<CurrentInstance id="id3" roleName="roleName" faultDomain="4" updateDomain="5">' .
+            '<ConfigurationSettings>' .
+            '<ConfigurationSetting name="Setting1" value="Value1" />' .
+            '</ConfigurationSettings>' .
+            '</CurrentInstance>' .
+            '<Roles />' .
+            '</RoleEnvironment>';
+
+        $roleEnvironmentFile->setContent($roleEnvironmentFileContent);
+
+        $changes = $calculateChanges->invoke(null);
+
+        $this->assertEquals(1, count($changes));
+        $this->assertEquals('Setting1', $changes[0]->getConfigurationSettingName());
+        
+        // Test 3 - Change configuration value
+        $roleEnvironmentFileContent = '<?xml version="1.0" encoding="utf-8"?>' .
+            '<RoleEnvironment xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" ' .
+            'xmlns:xsd="http://www.w3.org/2001/XMLSchema">' .
+            '<Deployment id="deploymentId" emulated="false" />' .
+            '<CurrentInstance id="id3" roleName="roleName" faultDomain="4" updateDomain="5">' .
+            '<ConfigurationSettings>' .
+            '<ConfigurationSetting name="Setting1" value="Value2" />' .
+            '</ConfigurationSettings>' .
+            '</CurrentInstance>' .
+            '<Roles />' .
+            '</RoleEnvironment>';
+
+        $roleEnvironmentFile->setContent($roleEnvironmentFileContent);
+        
+        $changes = $calculateChanges->invoke(null);
+
+        // Force a role environment data refresh
+        RoleEnvironment::getDeploymentId();
+
+        $this->assertEquals(1, count($changes));
+        $this->assertEquals('Setting1', $changes[0]->getConfigurationSettingName());
+        
+        // Test 4 - Remove the configuration
+        $roleEnvironmentFileContent = '<?xml version="1.0" encoding="utf-8"?>' .
+            '<RoleEnvironment xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" ' .
+            'xmlns:xsd="http://www.w3.org/2001/XMLSchema">' .
+            '<Deployment id="deploymentId" emulated="false" />' .
+            '<CurrentInstance id="id3" roleName="roleName" faultDomain="4" updateDomain="5">' .
+            '<ConfigurationSettings>' .
+            '<ConfigurationSetting name="Setting1" value="Value1" />' .
+            '</ConfigurationSettings>' .
+            '</CurrentInstance>' .
+            '<Roles />' .
+            '</RoleEnvironment>';
+
+        $roleEnvironmentFile->setContent($roleEnvironmentFileContent);
+        
+        $changes = $calculateChanges->invoke(null);
+
+        // Force a role environment data refresh
+        RoleEnvironment::getDeploymentId();
+
+        $this->assertEquals(1, count($changes));
+        $this->assertEquals('Setting1', $changes[0]->getConfigurationSettingName());
+        
+        // Test 5 - Adding roles
+        $roleEnvironmentFileContent = '<?xml version="1.0" encoding="utf-8"?>' .
+            '<RoleEnvironment xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" ' .
+            'xmlns:xsd="http://www.w3.org/2001/XMLSchema">' .
+            '<Deployment id="deploymentId" emulated="false" />' .
+            '<CurrentInstance id="id3" roleName="roleName" faultDomain="4" updateDomain="5">' .
+            '</CurrentInstance>' .
+            '<Roles>' .
+            '<Role name="role1">' .
+            '<Instances>' .
+            '<Instance id="role1instance1" faultDomain="1" updateDomain="1">' .
+            '<Endpoints>' .
+            '<Endpoint name="MyInternalEndpoint1" address="127.255.0.0" port="20000" protocol="tcp" />' .
+            '</Endpoints>' .
+            '</Instance>' .
+            '</Instances>' .
+            '</Role>' .
+            '<Role name="role2">' .
+            '<Instances>' .
+            '<Instance id="role2instance1" faultDomain="2" updateDomain="2">' .
+            '<Endpoints>' .
+            '<Endpoint name="MyInternalEndpoint2" address="127.255.0.2" port="20002" protocol="tcp" />' .
+            '</Endpoints>' .
+            '</Instance>' .
+            '<Instance id="role2instance2" faultDomain="3" updateDomain="3">' .
+            '<Endpoints>' .
+            '<Endpoint name="MyInternalEndpoint3" address="127.255.0.3" port="20002" protocol="tcp" />' .
+            '<Endpoint name="MyInternalEndpoint4" address="127.255.0.3" port="20004" protocol="tcp" />' .
+            '</Endpoints>' .
+            '</Instance>' .
+            '</Instances>' .
+            '</Role>' .
+            '</Roles>' .
+            '</RoleEnvironment>';
+
+        $roleEnvironmentFile->setContent($roleEnvironmentFileContent);
+
+        $changes = $calculateChanges->invoke(null);
+
+        // Force a role environment data refresh
+        RoleEnvironment::getDeploymentId();
+
+        // There are 2 topology changes (the 2 roles) and 1 setting change (removed)
+        $this->assertEquals(3, count($changes));
+        
+        $this->assertInstanceOf(
+            'PEAR2\\WindowsAzure\\ServiceRuntime\\RoleEnvironmentConfigurationSettingChange',
+            $changes[0]
+        );
+        
+        $this->assertInstanceOf(
+            'PEAR2\\WindowsAzure\\ServiceRuntime\\RoleEnvironmentTopologyChange',
+            $changes[1]
+        );
+
+        $this->assertInstanceOf(
+            'PEAR2\\WindowsAzure\\ServiceRuntime\\RoleEnvironmentTopologyChange',
+            $changes[2]
+        );
+        
+        // Test 6 - No changes
+        $roleEnvironmentFileContent = '<?xml version="1.0" encoding="utf-8"?>' .
+            '<RoleEnvironment xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" ' .
+            'xmlns:xsd="http://www.w3.org/2001/XMLSchema">' .
+            '<Deployment id="deploymentId" emulated="false" />' .
+            '<CurrentInstance id="id3" roleName="roleName" faultDomain="4" updateDomain="5">' .
+            '</CurrentInstance>' .
+            '<Roles>' .
+            '<Role name="role1">' .
+            '<Instances>' .
+            '<Instance id="role1instance1" faultDomain="1" updateDomain="1">' .
+            '<Endpoints>' .
+            '<Endpoint name="MyInternalEndpoint1" address="127.255.0.0" port="20000" protocol="tcp" />' .
+            '</Endpoints>' .
+            '</Instance>' .
+            '</Instances>' .
+            '</Role>' .
+            '<Role name="role2">' .
+            '<Instances>' .
+            '<Instance id="role2instance1" faultDomain="2" updateDomain="2">' .
+            '<Endpoints>' .
+            '<Endpoint name="MyInternalEndpoint2" address="127.255.0.2" port="20002" protocol="tcp" />' .
+            '</Endpoints>' .
+            '</Instance>' .
+            '<Instance id="role2instance2" faultDomain="3" updateDomain="3">' .
+            '<Endpoints>' .
+            '<Endpoint name="MyInternalEndpoint3" address="127.255.0.3" port="20002" protocol="tcp" />' .
+            '<Endpoint name="MyInternalEndpoint4" address="127.255.0.3" port="20004" protocol="tcp" />' .
+            '</Endpoints>' .
+            '</Instance>' .
+            '</Instances>' .
+            '</Role>' .
+            '</Roles>' .
+            '</RoleEnvironment>';
+
+        $roleEnvironmentFile->setContent($roleEnvironmentFileContent);
+
+        $calculateChanges = self::getMethod('_calculateChanges');
+        $changes = $calculateChanges->invoke(null);
+
+        // Force a role environment data refresh
+        RoleEnvironment::getDeploymentId();
+        
+        $this->assertEquals(0, count($changes));
+        
+        // Test 7 - Adding endpoint
+        $roleEnvironmentFileContent = '<?xml version="1.0" encoding="utf-8"?>' .
+            '<RoleEnvironment xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" ' .
+            'xmlns:xsd="http://www.w3.org/2001/XMLSchema">' .
+            '<Deployment id="deploymentId" emulated="false" />' .
+            '<CurrentInstance id="id3" roleName="roleName" faultDomain="4" updateDomain="5">' .
+            '</CurrentInstance>' .
+            '<Roles>' .
+            '<Role name="role1">' .
+            '<Instances>' .
+            '<Instance id="role1instance1" faultDomain="1" updateDomain="1">' .
+            '<Endpoints>' .
+            '<Endpoint name="MyInternalEndpoint1" address="127.255.0.0" port="20000" protocol="tcp" />' .
+            '</Endpoints>' .
+            '</Instance>' .
+            '</Instances>' .
+            '</Role>' .
+            '<Role name="role2">' .
+            '<Instances>' .
+            '<Instance id="role2instance1" faultDomain="2" updateDomain="2">' .
+            '<Endpoints>' .
+            '<Endpoint name="MyInternalEndpoint2" address="127.255.0.2" port="20002" protocol="tcp" />' .
+            '</Endpoints>' .
+            '</Instance>' .
+            '<Instance id="role2instance2" faultDomain="3" updateDomain="3">' .
+            '<Endpoints>' .
+            '<Endpoint name="MyInternalEndpoint3" address="127.255.0.3" port="20002" protocol="tcp" />' .
+            '<Endpoint name="MyInternalEndpoint4" address="127.255.0.3" port="20004" protocol="tcp" />' .
+            '<Endpoint name="MyInternalEndpoint5" address="127.255.0.3" port="20006" protocol="tcp" />' .
+            '</Endpoints>' .
+            '</Instance>' .
+            '</Instances>' .
+            '</Role>' .
+            '</Roles>' .
+            '</RoleEnvironment>';
+
+        $roleEnvironmentFile->setContent($roleEnvironmentFileContent);
+
+        $changes = $calculateChanges->invoke(null);
+
+        // There are 1 topology changes - the endpoint added
+        $this->assertEquals(1, count($changes));
+
+        // Force a role environment data refresh
+        RoleEnvironment::getDeploymentId();
+        
+        $this->assertInstanceOf(
+            'PEAR2\\WindowsAzure\\ServiceRuntime\\RoleEnvironmentTopologyChange',
+            $changes[0]
+        );
+        
+        // Test 8 - Removing endpoint
+        $roleEnvironmentFileContent = '<?xml version="1.0" encoding="utf-8"?>' .
+            '<RoleEnvironment xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" ' .
+            'xmlns:xsd="http://www.w3.org/2001/XMLSchema">' .
+            '<Deployment id="deploymentId" emulated="false" />' .
+            '<CurrentInstance id="id3" roleName="roleName" faultDomain="4" updateDomain="5">' .
+            '</CurrentInstance>' .
+            '<Roles>' .
+            '<Role name="role1">' .
+            '<Instances>' .
+            '<Instance id="role1instance1" faultDomain="1" updateDomain="1">' .
+            '<Endpoints>' .
+            '<Endpoint name="MyInternalEndpoint1" address="127.255.0.0" port="20000" protocol="tcp" />' .
+            '</Endpoints>' .
+            '</Instance>' .
+            '</Instances>' .
+            '</Role>' .
+            '<Role name="role2">' .
+            '<Instances>' .
+            '<Instance id="role2instance1" faultDomain="2" updateDomain="2">' .
+            '<Endpoints>' .
+            '<Endpoint name="MyInternalEndpoint2" address="127.255.0.2" port="20002" protocol="tcp" />' .
+            '</Endpoints>' .
+            '</Instance>' .
+            '<Instance id="role2instance2" faultDomain="3" updateDomain="3">' .
+            '<Endpoints>' .
+            '<Endpoint name="MyInternalEndpoint4" address="127.255.0.3" port="20004" protocol="tcp" />' .
+            '<Endpoint name="MyInternalEndpoint5" address="127.255.0.3" port="20006" protocol="tcp" />' .
+            '</Endpoints>' .
+            '</Instance>' .
+            '</Instances>' .
+            '</Role>' .
+            '</Roles>' .
+            '</RoleEnvironment>';
+
+        $roleEnvironmentFile->setContent($roleEnvironmentFileContent);
+
+        $changes = $calculateChanges->invoke(null);
+
+        // Force a role environment data refresh
+        RoleEnvironment::getDeploymentId();
+
+        // There are 1 topology changes - the endpoint removed
+        $this->assertEquals(1, count($changes));
+
+        $this->assertInstanceOf(
+            'PEAR2\\WindowsAzure\\ServiceRuntime\\RoleEnvironmentTopologyChange',
+            $changes[0]
+        );
+        
+        // Test 9 - Changing endpoint
+        $roleEnvironmentFileContent = '<?xml version="1.0" encoding="utf-8"?>' .
+            '<RoleEnvironment xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" ' .
+            'xmlns:xsd="http://www.w3.org/2001/XMLSchema">' .
+            '<Deployment id="deploymentId" emulated="false" />' .
+            '<CurrentInstance id="id3" roleName="roleName" faultDomain="4" updateDomain="5">' .
+            '</CurrentInstance>' .
+            '<Roles>' .
+            '<Role name="role1">' .
+            '<Instances>' .
+            '<Instance id="role1instance1" faultDomain="1" updateDomain="1">' .
+            '<Endpoints>' .
+            '<Endpoint name="MyInternalEndpoint1" address="127.255.0.0" port="20000" protocol="tcp" />' .
+            '</Endpoints>' .
+            '</Instance>' .
+            '</Instances>' .
+            '</Role>' .
+            '<Role name="role2">' .
+            '<Instances>' .
+            '<Instance id="role2instance1" faultDomain="2" updateDomain="2">' .
+            '<Endpoints>' .
+            '<Endpoint name="MyInternalEndpoint2" address="127.255.0.2" port="20002" protocol="tcp" />' .
+            '</Endpoints>' .
+            '</Instance>' .
+            '<Instance id="role2instance2" faultDomain="3" updateDomain="3">' .
+            '<Endpoints>' .
+            '<Endpoint name="MyInternalEndpoint4" address="127.255.0.3" port="20004" protocol="http" />' .
+            '<Endpoint name="MyInternalEndpoint5" address="127.255.0.3" port="20006" protocol="tcp" />' .
+            '</Endpoints>' .
+            '</Instance>' .
+            '</Instances>' .
+            '</Role>' .
+            '</Roles>' .
+            '</RoleEnvironment>';
+
+        $roleEnvironmentFile->setContent($roleEnvironmentFileContent);
+
+        $changes = $calculateChanges->invoke(null);
+
+        // Force a role environment data refresh
+        RoleEnvironment::getDeploymentId();
+
+        // There are 1 topology changes - the endpoint protocol was changed
+        $this->assertEquals(1, count($changes));
+
+        $this->assertInstanceOf(
+            'PEAR2\\WindowsAzure\\ServiceRuntime\\RoleEnvironmentTopologyChange',
+            $changes[0]
+        );
+        
+        // Test 10 - Removing role
+        $roleEnvironmentFileContent = '<?xml version="1.0" encoding="utf-8"?>' .
+            '<RoleEnvironment xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" ' .
+            'xmlns:xsd="http://www.w3.org/2001/XMLSchema">' .
+            '<Deployment id="deploymentId" emulated="false" />' .
+            '<CurrentInstance id="id3" roleName="roleName" faultDomain="4" updateDomain="5">' .
+            '</CurrentInstance>' .
+            '<Roles>' .
+            '<Role name="role1">' .
+            '<Instances>' .
+            '<Instance id="role1instance1" faultDomain="1" updateDomain="1">' .
+            '<Endpoints>' .
+            '<Endpoint name="MyInternalEndpoint1" address="127.255.0.0" port="20000" protocol="tcp" />' .
+            '</Endpoints>' .
+            '</Instance>' .
+            '</Instances>' .
+            '</Role>' .
+            '</Roles>' .
+            '</RoleEnvironment>';
+
+        $roleEnvironmentFile->setContent($roleEnvironmentFileContent);
+
+        $changes = $calculateChanges->invoke(null);
+
+        // Force a role environment data refresh
+        RoleEnvironment::getDeploymentId();
+
+        // There are 1 topology changes - the endpoint removed
+        $this->assertEquals(1, count($changes));
+
+        $this->assertInstanceOf(
+            'PEAR2\\WindowsAzure\\ServiceRuntime\\RoleEnvironmentTopologyChange',
+            $changes[0]
+        );
+        
+        // Test 11 - Change role
+        $roleEnvironmentFileContent = '<?xml version="1.0" encoding="utf-8"?>' .
+            '<RoleEnvironment xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" ' .
+            'xmlns:xsd="http://www.w3.org/2001/XMLSchema">' .
+            '<Deployment id="deploymentId" emulated="false" />' .
+            '<CurrentInstance id="id3" roleName="roleName" faultDomain="4" updateDomain="5">' .
+            '</CurrentInstance>' .
+            '<Roles>' .
+            '<Role name="role1">' .
+            '<Instances>' .
+            '<Instance id="role1instance1" faultDomain="1" updateDomain="2">' .
+            '<Endpoints>' .
+            '<Endpoint name="MyInternalEndpoint1" address="127.255.0.0" port="20000" protocol="tcp" />' .
+            '</Endpoints>' .
+            '</Instance>' .
+            '</Instances>' .
+            '</Role>' .
+            '</Roles>' .
+            '</RoleEnvironment>';
+
+        $roleEnvironmentFile->setContent($roleEnvironmentFileContent);
+
+        $changes = $calculateChanges->invoke(null);
+
+        // Force a role environment data refresh
+        RoleEnvironment::getDeploymentId();
+
+        // There are 1 topology changes - the endpoint removed
+        $this->assertEquals(1, count($changes));
+
+        $this->assertInstanceOf(
+            'PEAR2\\WindowsAzure\\ServiceRuntime\\RoleEnvironmentTopologyChange',
+            $changes[0]
+        );
+    }
+
+    /**
+     * @covers PEAR2\WindowsAzure\ServiceRuntime\RoleEnvironment::_processGoalStateChange
+     * @covers PEAR2\WindowsAzure\ServiceRuntime\RoleEnvironment::_acceptLatestIncarnation
+     * @covers PEAR2\WindowsAzure\ServiceRuntime\RoleEnvironment::_raiseStoppingEvent
+     * @covers PEAR2\WindowsAzure\ServiceRuntime\RoleEnvironment::_raiseChangingEvent
+     * @covers PEAR2\WindowsAzure\ServiceRuntime\RoleEnvironment::_raiseChangedEvent
+     */    
+    public function testProcessGoalStateChange()
+    {
+       // Setup
+        $rootDirectory = 'root';
+
+        \vfsStreamWrapper::register();
+        \vfsStreamWrapper::setRoot(new \vfsStreamDirectory($rootDirectory));
+        
+        $roleEnvironmentFileName = 'roleEnvironment';
+        $roleEnvironmentFileContent = '<?xml version="1.0" encoding="utf-8"?>' .
+            '<RoleEnvironment xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" ' .
+            'xmlns:xsd="http://www.w3.org/2001/XMLSchema">' .
+            '<Deployment id="state1" emulated="false" />' .
+            '<CurrentInstance id="id3" roleName="roleName" faultDomain="4" updateDomain="5">' .
+            '<LocalResources>' .
+            '<LocalResource name="DiagnosticStore" path="somepath.DiagnosticStore" sizeInMB="4096" />' .
+            '</LocalResources>' .
+            '</CurrentInstance>' .
+            '<Roles />' .
+            '</RoleEnvironment>';
+        
+        $roleEnvironmentFile = \vfsStream::newFile($roleEnvironmentFileName);
+        $roleEnvironmentFile->setContent($roleEnvironmentFileContent); 
+        
+        \vfsStreamWrapper::getRoot()->addChild($roleEnvironmentFile);
+        
+        $currentGoalStateFileName = 'currentGoalStateFile';
+        $currentGoalStateFile = \vfsStream::newFile($currentGoalStateFileName);
+        \vfsStreamWrapper::getRoot()->addChild($currentGoalStateFile);
+        
+        $goalStateFileName = 'goalstate';
+        $goalStateFileContent = '<?xml version="1.0" encoding="utf-8"?>' .
+            '<GoalState xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" ' .
+            'xmlns:xsd="http://www.w3.org/2001/XMLSchema">' .
+            '<Incarnation>1</Incarnation>' .
+            '<ExpectedState>Started</ExpectedState>' .
+            '<RoleEnvironmentPath>' .
+            \vfsStream::url($rootDirectory . '/' . $roleEnvironmentFileName) .
+            '</RoleEnvironmentPath>' .
+            '<CurrentStateEndpoint>' .
+            \vfsStream::url($rootDirectory . '/' . $currentGoalStateFileName) .
+            '</CurrentStateEndpoint>' .
+            '<Deadline>9999-12-31T23:59:59.9999999</Deadline>' .
+            '</GoalState>';
+        
+        $goalStateFileContent = dechex(strlen($goalStateFileContent)) . "\n" . $goalStateFileContent;
+        
+        $file = \vfsStream::newFile($goalStateFileName);
+        $file->setContent($goalStateFileContent);
+        
+        \vfsStreamWrapper::getRoot()->addChild($file);
+        
+        $fileName = 'versionendpoint';
+        $fileContent = '<?xml version="1.0" encoding="utf-8"?>' .
+            '<RuntimeServerDiscovery xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" ' .
+            'xmlns:xsd="http://www.w3.org/2001/XMLSchema">' .
+            '<RuntimeServerEndpoints>' .
+            '<RuntimeServerEndpoint version="2011-03-08" path="' .
+            \vfsStream::url($rootDirectory . '/' . $goalStateFileName) .
+            '" />' .
+            '</RuntimeServerEndpoints>' .
+            '</RuntimeServerDiscovery>';
+        
+        $file = \vfsStream::newFile($fileName);
+        $file->setContent($fileContent);
+        
+        \vfsStreamWrapper::getRoot()->addChild($file);
+        
+        putenv('WaRuntimeEndpoint=' . \vfsStream::url($rootDirectory . '/' . $fileName));
+        
+        // Test
+        $this->assertEquals('state1', RoleEnvironment::getDeploymentId());
+
+        $currentGoalState = self::getStaticPropertyValue('_currentGoalState');
+        
+        // Process goal state to the previous state
+        $args = array();
+        $args[] = $currentGoalState;
+        
+        $processGoalStateChange = self::getMethod('_processGoalStateChange');
+        $processGoalStateChange->invokeArgs(null, $args);
+        
+        // Update current state this time changing things
+        $roleEnvironmentFileContent = '<?xml version="1.0" encoding="utf-8"?>' .
+            '<RoleEnvironment xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" ' .
+            'xmlns:xsd="http://www.w3.org/2001/XMLSchema">' .
+            '<Deployment id="state3" emulated="false" />' .
+            '<CurrentInstance id="id3" roleName="roleName" faultDomain="10" updateDomain="10">' .
+            '</CurrentInstance>' .
+            '<Roles />' .
+            '</RoleEnvironment>';
+        
+        $roleEnvironmentFile->setContent($roleEnvironmentFileContent); 
+
+        $currentGoalState = RuntimeKernel::getKernel()->getProtocol1RuntimeGoalStateClient()
+            ->getCurrentGoalState();
+        
+        $processGoalStateChange = self::getMethod('_processGoalStateChange');
+        $processGoalStateChange->invokeArgs(null, $args);
+
+        $this->assertEquals('state3', RoleEnvironment::getDeploymentId());
+    }
+    
+    protected static function getMethod($name)
+    {
+        $class = new \ReflectionClass('PEAR2\WindowsAzure\ServiceRuntime\RoleEnvironment');
+        $method = $class->getMethod($name);
+        $method->setAccessible(true);
+        return $method;
+    }
+    
+    protected static function getStaticPropertyValue($property) 
+    {
+        $class = new \ReflectionClass('PEAR2\WindowsAzure\ServiceRuntime\RoleEnvironment');
+        $properties = $class->getStaticProperties();
+        return $properties[$property];
     }
 }
 

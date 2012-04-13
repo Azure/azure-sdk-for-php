@@ -24,7 +24,6 @@
 
 namespace PEAR2\WindowsAzure\ServiceRuntime;
 use PEAR2\WindowsAzure\Utilities;
-use PEAR2\WindowsAzure\Resources;
 
 /**
  * The XML role environment data deserializer.

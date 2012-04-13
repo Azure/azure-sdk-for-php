@@ -23,7 +23,6 @@
  */
 
 namespace PEAR2\WindowsAzure\ServiceRuntime;
-use PEAR2\WindowsAzure\Resources;
 
 /**
  * The file input channel.
@@ -39,6 +38,11 @@ use PEAR2\WindowsAzure\Resources;
 class FileInputChannel implements IInputChannel
 {
     /**
+     * @var Resource
+     */
+    private $_inputStream;
+    
+    /**
      * Gets the input stream.
      * 
      * @param string $name The input stream path.
@@ -48,9 +52,23 @@ class FileInputChannel implements IInputChannel
     public function getInputStream($name)
     {
         if (file_exists($name)) {
-            return fopen($name, 'r');
+            $this->_inputStream = fopen($name, 'r');
+            return $this->_inputStream;
         } else {
             throw new ChannelNotAvailableException();
+        }
+    }
+    
+    /**
+     * Closes the input stream.
+     * 
+     * @return none
+     */
+    public function closeInputStream() 
+    {
+        if (!is_null($this->_inputStream)) {
+            fclose($this->_inputStream);
+            $this->_inputStream = null;
         }
     }
 }
