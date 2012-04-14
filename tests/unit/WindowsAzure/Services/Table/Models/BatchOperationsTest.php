@@ -179,13 +179,13 @@ class BatchOperationsTest extends \PHPUnit_Framework_TestCase
     {
         // Setup
         $table = 'mytable';
-        $pk = '123';
-        $rk= '456';
+        $partitionKey = '123';
+        $rowKey= '456';
         $etag = 'W/datetime:2009';
         $operations = new BatchOperations();
         
         // Test
-        $operations->addDeleteEntity($table, $pk, $rk, $etag);
+        $operations->addDeleteEntity($table, $partitionKey, $rowKey, $etag);
         
         // Assert
         $this->assertCount(1, $operations->getOperations());

@@ -92,22 +92,32 @@ class TableRestProxy extends ServiceRestProxy implements ITable
             case BatchOperationType::MERGE_ENTITY_OPERATION:
             case BatchOperationType::INSERT_REPLACE_ENTITY_OPERATION:
             case BatchOperationType::INSERT_MERGE_ENTITY_OPERATION:
-                $table   = $operation->getParameter(BatchOperationParameterName::BP_TABLE);
-                $entity  = $operation->getParameter(BatchOperationParameterName::BP_ENTITY);
+                $table   = $operation->getParameter(
+                    BatchOperationParameterName::BP_TABLE
+                );
+                $entity  = $operation->getParameter(
+                    BatchOperationParameterName::BP_ENTITY
+                );
                 $context = $this->_getOperationContext($table, $entity, $type);
                 break;
         
             case BatchOperationType::DELETE_ENTITY_OPERATION:
-                $table   = $operation->getParameter(BatchOperationParameterName::BP_TABLE);
-                $pk      = $operation->getParameter(
+                $table        = $operation->getParameter(
+                    BatchOperationParameterName::BP_TABLE
+                );
+                $partitionKey = $operation->getParameter(
                     BatchOperationParameterName::BP_PARTITION_KEY
                 );
-                $rk      = $operation->getParameter(BatchOperationParameterName::BP_ROW_KEY);
-                $etag    = $operation->getParameter(BatchOperationParameterName::BP_ETAG);
-                $options = new DeleteEntityOptions();
+                $rowKey       = $operation->getParameter(
+                    BatchOperationParameterName::BP_ROW_KEY
+                );
+                $etag         = $operation->getParameter(
+                    BatchOperationParameterName::BP_ETAG
+                );
+                $options      = new DeleteEntityOptions();
                 $options->setEtag($etag);
                 $context = $this->_constructDeleteEntityContext(
-                    $table, $pk, $rk, $options
+                    $table, $partitionKey, $rowKey, $options
                 );
                 break;
 
@@ -308,9 +318,9 @@ class TableRestProxy extends ServiceRestProxy implements ITable
         $headers      = array();
         $queryParams  = array();
         $statusCode   = Resources::STATUS_NO_CONTENT;
-        $pk           = $entity->getPartitionKey();
-        $rk           = $entity->getRowKey();
-        $path         = $this->_getEntityPath($table, $pk, $rk);
+        $partitionKey = $entity->getPartitionKey();
+        $rowKey       = $entity->getRowKey();
+        $path         = $this->_getEntityPath($table, $partitionKey, $rowKey);
         $body         = $this->_atomSerializer->getEntity($entity);
         $ifMatchValue = $useETag ? $entity->getEtag() : Resources::ASTERISK;
         
@@ -378,15 +388,15 @@ class TableRestProxy extends ServiceRestProxy implements ITable
     /**
      * Constructs URI path for entity.
      * 
-     * @param string $table The table name.
-     * @param string $pk    The entity's partition key.
-     * @param string $rk    The entity's row key.
+     * @param string $table        The table name.
+     * @param string $partitionKey The entity's partition key.
+     * @param string $rowKey       The entity's row key.
      * 
      * @return string 
      */
-    private function _getEntityPath($table, $pk, $rk)
+    private function _getEntityPath($table, $partitionKey, $rowKey)
     {
-        return "$table(PartitionKey='$pk',RowKey='$rk')";
+        return "$table(PartitionKey='$partitionKey',RowKey='$rowKey')";
     }
     
     /**

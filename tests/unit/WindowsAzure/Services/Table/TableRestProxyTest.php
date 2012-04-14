@@ -572,13 +572,13 @@ class TableRestProxyTest extends TableServiceRestProxyTestBase
         // Setup
         $name = 'deleteentity';
         $this->createTable($name);
-        $pk = '123';
-        $rk = '456';
-        $entity = TestResources::getTestEntity($pk, $rk);
+        $partitionKey = '123';
+        $rowKey = '456';
+        $entity = TestResources::getTestEntity($partitionKey, $rowKey);
         $result = $this->wrapper->insertEntity($name, $entity);
         
         // Test
-        $this->wrapper->deleteEntity($name, $pk, $rk);
+        $this->wrapper->deleteEntity($name, $partitionKey, $rowKey);
         
         // Assert
         $result = $this->wrapper->queryEntities($name);
@@ -598,13 +598,13 @@ class TableRestProxyTest extends TableServiceRestProxyTestBase
         // Setup
         $name = 'getentity';
         $this->createTable($name);
-        $pk = '123';
-        $rk = '456';
-        $expected = TestResources::getTestEntity($pk, $rk);
+        $partitionKey = '123';
+        $rowKey = '456';
+        $expected = TestResources::getTestEntity($partitionKey, $rowKey);
         $this->wrapper->insertEntity($name, $expected);
         
         // Test
-        $result = $this->wrapper->getEntity($name, $pk, $rk);
+        $result = $this->wrapper->getEntity($name, $partitionKey, $rowKey);
         
         // Assert
         $actual = $result->getEntity();
@@ -630,9 +630,9 @@ class TableRestProxyTest extends TableServiceRestProxyTestBase
         // Setup
         $name = 'batchwithinsert';
         $this->createTable($name);
-        $pk = '123';
-        $rk = '456';
-        $expected = TestResources::getTestEntity($pk, $rk);
+        $partitionKey = '123';
+        $rowKey = '456';
+        $expected = TestResources::getTestEntity($partitionKey, $rowKey);
         $operations = new BatchOperations();
         $operations->addInsertEntity($name, $expected);
         
@@ -664,13 +664,13 @@ class TableRestProxyTest extends TableServiceRestProxyTestBase
         // Setup
         $name = 'batchwithdelete';
         $this->createTable($name);
-        $pk = '123';
-        $rk = '456';
-        $expected = TestResources::getTestEntity($pk, $rk);
+        $partitionKey = '123';
+        $rowKey = '456';
+        $expected = TestResources::getTestEntity($partitionKey, $rowKey);
         $r = $this->wrapper->insertEntity($name, $expected);
         $operations = new BatchOperations();
         $etag = $r->getEntity()->getEtag();
-        $operations->addDeleteEntity($name, $pk, $rk, $etag);
+        $operations->addDeleteEntity($name, $partitionKey, $rowKey, $etag);
         
         // Test
         $this->wrapper->batch($operations);
@@ -698,9 +698,9 @@ class TableRestProxyTest extends TableServiceRestProxyTestBase
         // Setup
         $name = 'batchwithupdate';
         $this->createTable($name);
-        $pk = '123';
-        $rk = '456';
-        $expected = TestResources::getTestEntity($pk, $rk);
+        $partitionKey = '123';
+        $rowKey = '456';
+        $expected = TestResources::getTestEntity($partitionKey, $rowKey);
         $this->wrapper->insertEntity($name, $expected);
         $result = $this->wrapper->queryEntities($name);
         $entities = $result->getEntities();
@@ -740,9 +740,9 @@ class TableRestProxyTest extends TableServiceRestProxyTestBase
         // Setup
         $name = 'batchwithmerge';
         $this->createTable($name);
-        $pk = '123';
-        $rk = '456';
-        $expected = TestResources::getTestEntity($pk, $rk);
+        $partitionKey = '123';
+        $rowKey = '456';
+        $expected = TestResources::getTestEntity($partitionKey, $rowKey);
         $this->wrapper->insertEntity($name, $expected);
         $result = $this->wrapper->queryEntities($name);
         $entities = $result->getEntities();
@@ -782,9 +782,9 @@ class TableRestProxyTest extends TableServiceRestProxyTestBase
         // Setup
         $name = 'batchwithinsertorreplace';
         $this->createTable($name);
-        $pk = '123';
-        $rk = '456';
-        $expected = TestResources::getTestEntity($pk, $rk);
+        $partitionKey = '123';
+        $rowKey = '456';
+        $expected = TestResources::getTestEntity($partitionKey, $rowKey);
         $this->wrapper->insertEntity($name, $expected);
         $result = $this->wrapper->queryEntities($name);
         $entities = $result->getEntities();
@@ -824,9 +824,9 @@ class TableRestProxyTest extends TableServiceRestProxyTestBase
         // Setup
         $name = 'batchwithinsertormerge';
         $this->createTable($name);
-        $pk = '123';
-        $rk = '456';
-        $expected = TestResources::getTestEntity($pk, $rk);
+        $partitionKey = '123';
+        $rowKey = '456';
+        $expected = TestResources::getTestEntity($partitionKey, $rowKey);
         $this->wrapper->insertEntity($name, $expected);
         $result = $this->wrapper->queryEntities($name);
         $entities = $result->getEntities();
@@ -866,13 +866,13 @@ class TableRestProxyTest extends TableServiceRestProxyTestBase
         // Setup
         $name = 'batchwithwithmultipleoperations';
         $this->createTable($name);
-        $pk = '123';
+        $partitionKey = '123';
         $rk1 = '456';
         $rk2 = '457';
         $rk3 = '458';
-        $delete = TestResources::getTestEntity($pk, $rk1);
-        $insert = TestResources::getTestEntity($pk, $rk2);
-        $update = TestResources::getTestEntity($pk, $rk3);
+        $delete = TestResources::getTestEntity($partitionKey, $rk1);
+        $insert = TestResources::getTestEntity($partitionKey, $rk2);
+        $update = TestResources::getTestEntity($partitionKey, $rk3);
         $this->wrapper->insertEntity($name, $delete);
         $this->wrapper->insertEntity($name, $update);
         $result = $this->wrapper->queryEntities($name);
@@ -909,11 +909,11 @@ class TableRestProxyTest extends TableServiceRestProxyTestBase
         // Setup
         $name = 'batchwithwithdifferentpkfail';
         $this->createTable($name);
-        $pk = '123';
+        $partitionKey = '123';
         $rk1 = '456';
         $rk3 = '458';
-        $delete = TestResources::getTestEntity($pk, $rk1);
-        $update = TestResources::getTestEntity($pk, $rk3);
+        $delete = TestResources::getTestEntity($partitionKey, $rk1);
+        $update = TestResources::getTestEntity($partitionKey, $rk3);
         $this->wrapper->insertEntity($name, $delete);
         $this->wrapper->insertEntity($name, $update);
         $result = $this->wrapper->queryEntities($name);
