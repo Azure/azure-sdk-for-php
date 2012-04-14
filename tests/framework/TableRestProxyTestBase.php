@@ -22,7 +22,7 @@
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
 namespace PEAR2\Tests\Framework;
-use PEAR2\Tests\Framework\RestProxyTestBase;
+use PEAR2\Tests\Framework\ServiceRestProxyTestBase;
 use PEAR2\Tests\Framework\TestResources;
 use PEAR2\WindowsAzure\Services\Core\Configuration;
 use PEAR2\WindowsAzure\Services\Table\TableSettings;
@@ -39,7 +39,7 @@ use PEAR2\WindowsAzure\Services\Table\TableService;
  * @version   Release: @package_version@
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
-class TableRestProxyTestBase extends RestProxyTestBase
+class TableServiceRestProxyTestBase extends ServiceRestProxyTestBase
 {
     protected $_createdTables;
     

@@ -24,6 +24,7 @@
  
 namespace PEAR2\WindowsAzure\Services\Table\Models;
 require_once 'HTTP/Request2/Response.php';
+use PEAR2\WindowsAzure\Resources;
 use PEAR2\WindowsAzure\Core\HttpClient;
 use PEAR2\WindowsAzure\Core\ServiceException;
 use PEAR2\WindowsAzure\Services\Table\Models\BatchError;
@@ -51,7 +52,7 @@ class BatchResult
     private $_entries;
     
     /**
-     * Creates array of response from batch response body.
+     * Creates a array of responses from the batch response body.
      * 
      * @param string            $body           The HTTP response body.
      * @param IMimeReaderWriter $mimeSerializer The MIME reader and writer.
@@ -74,7 +75,7 @@ class BatchResult
             do {
                 $headerLine = $lines[$j++];
                 $response->parseHeaderLine($headerLine);
-            } while ('' != $headerLine);
+            } while (Resources::EMPTY_STRING != $headerLine);
             $body = implode("\r\n", array_slice($lines, $j));
             $response->appendBody($body);
             $responses[] = $response;
@@ -86,7 +87,7 @@ class BatchResult
     /**
      * Creates BatchResult object.
      * 
-     * @param string            $body           The HTTP response body
+     * @param string            $body           The HTTP response body.
      * @param array             $operations     The batch operations.
      * @param array             $contexts       The batch operations context.
      * @param IAtomReaderWriter $atomSerializer The Atom reader and writer.

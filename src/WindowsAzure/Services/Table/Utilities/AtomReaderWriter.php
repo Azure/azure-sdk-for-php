@@ -257,7 +257,7 @@ class AtomReaderWriter implements IAtomReaderWriter
         foreach ($prop as $key => $value) {
             $attributes = $value->attributes($metadata);
             $type       = $attributes['type'];
-            $entity->newProperty((string)$key, (string)$type, (string)$value);
+            $entity->addProperty((string)$key, (string)$type, (string)$value);
         }
         
         return $entity;

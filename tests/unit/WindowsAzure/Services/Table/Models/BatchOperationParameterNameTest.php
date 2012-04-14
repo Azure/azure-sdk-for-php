@@ -15,54 +15,57 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   PEAR2\WindowsAzure\Services\Table\Models
+ * @package   PEAR2\Tests\Unit\WindowsAzure\Services\Table\Models
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
- 
-namespace PEAR2\WindowsAzure\Services\Table\Models;
+
+namespace PEAR2\Tests\Unit\WindowsAzure\Services\Table\Models;
+use PEAR2\WindowsAzure\Services\Table\Models\BatchOperationParameterName;
 
 /**
- * Batch parameter names.
+ * Unit tests for class BatchOperationParameterName
  *
  * @category  Microsoft
- * @package   PEAR2\WindowsAzure\Services\Table\Models
+ * @package   PEAR2\Tests\Unit\WindowsAzure\Services\Table\Models
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @version   Release: @package_version@
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
-class BatchOperationParamName
+class BatchOperationParameterNameTest extends \PHPUnit_Framework_TestCase
 {
-    const BP_TABLE         = 'table';
-    const BP_ENTITY        = 'entity';
-    const BP_PARTITION_KEY = 'PartitionKey';
-    const BP_ROW_KEY       = 'RowKey';
-    const BP_ETAG          = 'etag';
+    /**
+     * @covers PEAR2\WindowsAzure\Services\Table\Models\BatchOperationParameterName::isValid
+     */
+    public function testIsValid()
+    {
+        // Setup
+        $name = BatchOperationParameterName::BP_ETAG;
+        
+        // Test
+        $actual = BatchOperationParameterName::isValid($name);
+        
+        // Assert
+        $this->assertTrue($actual);
+    }
     
     /**
-     * Validates if $paramName is already defined.
-     * 
-     * @param string $paramName The batch operation parameter name.
-     * 
-     * @return boolean 
+     * @covers PEAR2\WindowsAzure\Services\Table\Models\BatchOperationParameterName::isValid
      */
-    public static function isValid($paramName)
+    public function testIsValidWithInvalid()
     {
-        switch ($paramName) {
-        case self::BP_TABLE:
-        case self::BP_ENTITY:
-        case self::BP_PARTITION_KEY:
-        case self::BP_ROW_KEY:
-        case self::BP_ETAG:
-            return true;
-
-        default:
-            return false;
-        }
+        // Setup
+        $name = 'zeta el senen';
+        
+        // Test
+        $actual = BatchOperationParameterName::isValid($name);
+        
+        // Assert
+        $this->assertFalse($actual);
     }
 }
 

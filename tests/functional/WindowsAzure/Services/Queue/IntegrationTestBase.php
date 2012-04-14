@@ -27,10 +27,10 @@
 namespace PEAR2\Tests\Functional\WindowsAzure\Services\Queue;
 
 use PEAR2\Tests\Framework\FiddlerFilter;
-use PEAR2\Tests\Framework\QueueRestProxyTestBase;
+use PEAR2\Tests\Framework\QueueServiceRestProxyTestBase;
 use PEAR2\WindowsAzure\Services\Queue\QueueService;
 
-class IntegrationTestBase extends QueueRestProxyTestBase {
+class IntegrationTestBase extends QueueServiceRestProxyTestBase {
     public function __construct()
     {
         parent::__construct();

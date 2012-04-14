@@ -15,68 +15,44 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   PEAR2\WindowsAzure
+ * @package   PEAR2\Tests\Unit\WindowsAzure\Services\Table\Models
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
- 
-namespace PEAR2\WindowsAzure;
+
+namespace PEAR2\Tests\Unit\WindowsAzure\Services\Table\Models;
+use PEAR2\WindowsAzure\Services\Table\Models\BatchResult;
 
 /**
- * Logger class for debugging purpose.
+ * Unit tests for class BatchResult
  *
  * @category  Microsoft
- * @package   PEAR2\WindowsAzure
+ * @package   PEAR2\Tests\Unit\WindowsAzure\Services\Table\Models
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @version   Release: @package_version@
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
-class Logger
+class BatchResultTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @var string
+     * @covers PEAR2\WindowsAzure\Services\Table\Models\BatchResult::setEntries
+     * @covers PEAR2\WindowsAzure\Services\Table\Models\BatchResult::getEntries
      */
-    private static $_filePath;
-
-    /**
-     * Logs $var to file.
-     *
-     * @param mix    $var The data to log.
-     * @param string $tip The help message.
-     * 
-     * @static
-     * 
-     * @return none
-     */
-    public static function log($var, $tip = Resources::EMPTY_STRING)
+    public function testSetEntries()
     {
-        if (!empty($tip)) {
-            error_log($tip . "\n", 3, self::$_filePath);
-        }
+        // Setup
+        $batchResult = new BatchResult();
+        $entries = array();
         
-        if (is_array($var) || is_object($var)) {
-            error_log(print_r($var, true), 3, self::$_filePath);
-        } else {
-            error_log($var . "\n", 3, self::$_filePath);
-        }
-    }
-    
-    /**
-     * Sets file path to use.
-     *
-     * @param string $filePath The log file path.
-     * 
-     * @static
-     * 
-     * @return none
-     */
-    public static function setLogFile($filePath)
-    {
-        $this->_filePath = $filePath;
+        // Test
+        $batchResult->setEntries($entries);
+        
+        // Assert
+        $this->assertEquals($entries, $batchResult->getEntries());
     }
 }
 

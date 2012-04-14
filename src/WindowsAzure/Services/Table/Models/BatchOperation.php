@@ -63,6 +63,7 @@ class BatchOperation
             BatchOperationType::isValid($type),
             Resources::INVALID_BO_TYPE_MSG
         );
+        
         $this->_type = $type;
     }
     
@@ -84,10 +85,10 @@ class BatchOperation
      * 
      * @return none
      */
-    public function addParam($name, $value)
+    public function addParameter($name, $value)
     {
         Validate::isTrue(
-            BatchOperationParamName::isValid($name),
+            BatchOperationParameterName::isValid($name),
             Resources::INVALID_BO_PN_MSG
         );
         $this->_params[$name] = $value;
@@ -100,7 +101,7 @@ class BatchOperation
      * 
      * @return mix
      */
-    public function getParam($name)
+    public function getParameter($name)
     {
         return Utilities::tryGetValue($this->_params, $name);
     }

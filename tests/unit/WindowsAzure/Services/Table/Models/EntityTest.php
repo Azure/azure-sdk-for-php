@@ -161,7 +161,7 @@ class EntityTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers PEAR2\WindowsAzure\Services\Table\Models\Entity::newProperty
+     * @covers PEAR2\WindowsAzure\Services\Table\Models\Entity::addProperty
      */
     public function testNewProperty()
     {
@@ -175,7 +175,7 @@ class EntityTest extends \PHPUnit_Framework_TestCase
         $expected->setValue($value);
         
         // Test
-        $entity->newProperty($name, $edmType, $value);
+        $entity->addProperty($name, $edmType, $value);
         
         // Assert
         $this->assertEquals($expected, $entity->getProperty($name));

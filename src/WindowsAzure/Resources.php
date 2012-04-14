@@ -38,19 +38,21 @@ namespace PEAR2\WindowsAzure;
 class Resources
 {
     // Messages
-    const INVALID_TYPE_MSG    = 'The provided variable should be of type: ';
-    const INVALID_META_MSG    = 'Metadata cannot contain newline characters.';
-    const AZURE_ERROR_MSG     = "Fail:\nCode: %s\nValue: %s\ndetails (if any): %s.";
-    const NOT_IMPLEMENTED_MSG = 'This method is not implemented.';
-    const NULL_ERROR_MSG      = 'Value can\'t be NULL or empty.';
-    const INVALID_URL_MSG     = 'Provided URL is invalid.';
-    const INVALID_HT_MSG      = 'The header type provided is invalid.';
-    const INVALID_EDM_MSG     = 'The provided EDM type is invalid.';
-    const INVALID_PROP_MSG    = 'The provided propertie(s) are/is invalid.';
-    const INVALID_ENTITY_MSG  = 'The provided entity object is invalid.';
-    const INVALID_VERSION_MSG = 'Server does not support any known protocol versions.';
-    const INVALID_BO_TYPE_MSG = 'Batch operation is not supported.';
-    const INVALID_BO_PN_MSG   = 'Batch operation parameter is not supported.';
+    const INVALID_TYPE_MSG     = 'The provided variable should be of type: ';
+    const INVALID_META_MSG     = 'Metadata cannot contain newline characters.';
+    const AZURE_ERROR_MSG      = "Fail:\nCode: %s\nValue: %s\ndetails (if any): %s.";
+    const NOT_IMPLEMENTED_MSG  = 'This method is not implemented.';
+    const NULL_ERROR_MSG       = 'Value can\'t be NULL or empty.';
+    const INVALID_URL_MSG      = 'Provided URL is invalid.';
+    const INVALID_HT_MSG       = 'The header type provided is invalid.';
+    const INVALID_EDM_MSG      = 'The provided EDM type is invalid.';
+    const INVALID_PROP_MSG     = 'The provided propertie(s) are/is invalid.';
+    const INVALID_ENTITY_MSG   = 'The provided entity object is invalid.';
+    const INVALID_VERSION_MSG  = 'Server does not support any known protocol versions.';
+    const INVALID_BO_TYPE_MSG  = 'Batch operation name is not supported or invalid.';
+    const INVALID_BO_PN_MSG    = 'Batch operation parameter is not supported.';
+    const INVALID_OC_COUNT_MSG = 'Operations and contexts must be of same size.';
+    const INVALID_EXC_OBJ_MSG  = 'Exception object type should be ServiceException.';
 
     // HTTP Headers
     const X_MS_HEADER_PREFIX                 = 'x-ms-';

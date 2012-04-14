@@ -25,7 +25,7 @@
 
 namespace PEAR2\Tests\Unit\WindowsAzure\Services\Queue;
 use PEAR2\WindowsAzure\Core\WindowsAzureUtilities;
-use PEAR2\Tests\Framework\QueueRestProxyTestBase;
+use PEAR2\Tests\Framework\QueueServiceRestProxyTestBase;
 use PEAR2\WindowsAzure\Services\Core\Configuration;
 use PEAR2\WindowsAzure\Services\Core\Models\ServiceProperties;
 use PEAR2\WindowsAzure\Services\Queue\QueueRestProxy;
@@ -56,7 +56,7 @@ use PEAR2\WindowsAzure\Core\ServiceException;
 * @version    Release: @package_version@
 * @link       http://pear.php.net/package/azure-sdk-for-php
 */
-class QueueRestProxyTest extends QueueRestProxyTestBase
+class QueueRestProxyTest extends QueueServiceRestProxyTestBase
 {
     /**
      * @covers PEAR2\WindowsAzure\Services\Queue\QueueRestProxy::listQueues

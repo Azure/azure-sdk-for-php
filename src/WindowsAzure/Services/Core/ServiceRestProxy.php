@@ -92,7 +92,7 @@ class ServiceRestProxy
      * 
      * @return \HTTP_Request2_Response
      */
-    protected function send2($context)
+    protected function sendContext($context)
     {
         $channel     = clone $this->_channel;
         $url         = new Url($this->url);
@@ -152,7 +152,7 @@ class ServiceRestProxy
             throw new \InvalidArgumentException();
         }
         
-        return $this->send2($context);
+        return $this->sendContext($context);
     }
 
     /**

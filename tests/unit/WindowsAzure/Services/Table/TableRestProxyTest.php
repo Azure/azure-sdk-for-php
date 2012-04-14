@@ -23,11 +23,15 @@
  */
 
 namespace PEAR2\Tests\Unit\WindowsAzure\Services\Table;
-use PEAR2\Tests\Framework\TableRestProxyTestBase;
+use PEAR2\WindowsAzure\Core\HttpClient;
+use PEAR2\WindowsAzure\Services\Table\Utilities\AtomReaderWriter;
+use PEAR2\WindowsAzure\Services\Table\Utilities\MimeReaderWriter;
+use PEAR2\Tests\Framework\TableServiceRestProxyTestBase;
 use PEAR2\WindowsAzure\Core\WindowsAzureUtilities;
 use PEAR2\WindowsAzure\Core\ServiceException;
 use PEAR2\Tests\Framework\TestResources;
 use PEAR2\WindowsAzure\Resources;
+use PEAR2\WindowsAzure\Services\Table\TableRestProxy;
 use PEAR2\WindowsAzure\Services\Core\Models\ServiceProperties;
 use PEAR2\WindowsAzure\Services\Table\Models\QueryTablesOptions;
 use PEAR2\WindowsAzure\Services\Table\Models\Query;
@@ -48,10 +52,26 @@ use PEAR2\WindowsAzure\Services\Table\Models\BatchOperations;
  * @version   Release: @package_version@
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
-class TableRestProxyTest extends TableRestProxyTestBase
+class TableRestProxyTest extends TableServiceRestProxyTestBase
 {
+    public function test__construct()
+    {
+        // Setup
+        $channel = new HttpClient();
+        $atomSerializer = new AtomReaderWriter();
+        $mimeSerializer = new MimeReaderWriter();
+        $url = 'http:://www.microsoft.com';
+        
+        // Test
+        $tableRestProxy = new TableRestProxy($channel, $atomSerializer, $mimeSerializer, $url);
+        
+        // Assert
+        $this->assertNotNull($tableRestProxy);
+    }
+    
     /**
-    * @covers PEAR2\WindowsAzure\Services\Table\TableRestProxy::getServiceProperties
+     * @covers PEAR2\WindowsAzure\Services\Table\TableRestProxy::getServiceProperties
+     * @covers PEAR2\WindowsAzure\Services\Core\ServiceRestProxy::sendContext
     */
     public function testGetServiceProperties()
     {
@@ -67,7 +87,8 @@ class TableRestProxyTest extends TableRestProxyTestBase
     }
     
     /**
-    * @covers PEAR2\WindowsAzure\Services\Table\TableRestProxy::setServiceProperties
+     * @covers PEAR2\WindowsAzure\Services\Table\TableRestProxy::setServiceProperties
+     * @covers PEAR2\WindowsAzure\Services\Core\ServiceRestProxy::sendContext
     */
     public function testSetServiceProperties()
     {
@@ -90,6 +111,7 @@ class TableRestProxyTest extends TableRestProxyTestBase
      * @covers PEAR2\WindowsAzure\Services\Table\TableRestProxy::createTable
      * @covers PEAR2\WindowsAzure\Services\Table\Utilities\AtomReaderWriter::_fillTemplate
      * @covers PEAR2\WindowsAzure\Services\Table\Utilities\AtomReaderWriter::getTable
+     * @covers PEAR2\WindowsAzure\Services\Core\ServiceRestProxy::sendContext
      */
     public function testCreateTable()
     {
@@ -106,6 +128,7 @@ class TableRestProxyTest extends TableRestProxyTestBase
     
     /**
      * @covers PEAR2\WindowsAzure\Services\Table\TableRestProxy::deleteTable
+     * @covers PEAR2\WindowsAzure\Services\Core\ServiceRestProxy::sendContext
      */
     public function testDeleteTable()
     {
@@ -131,6 +154,7 @@ class TableRestProxyTest extends TableRestProxyTestBase
      * @covers PEAR2\WindowsAzure\Services\Table\Models\QueryTablesResult::create
      * @covers PEAR2\WindowsAzure\Services\Table\Utilities\AtomReaderWriter::_parseBody
      * @covers PEAR2\WindowsAzure\Services\Table\Utilities\AtomReaderWriter::parseTableEntries
+     * @covers PEAR2\WindowsAzure\Services\Core\ServiceRestProxy::sendContext
      */
     public function testQueryTablesSimple()
     {
@@ -160,6 +184,7 @@ class TableRestProxyTest extends TableRestProxyTestBase
      * @covers PEAR2\WindowsAzure\Services\Table\Models\QueryTablesResult::create
      * @covers PEAR2\WindowsAzure\Services\Table\Utilities\AtomReaderWriter::_parseBody
      * @covers PEAR2\WindowsAzure\Services\Table\Utilities\AtomReaderWriter::parseTableEntries
+     * @covers PEAR2\WindowsAzure\Services\Core\ServiceRestProxy::sendContext
      */
     public function testQueryTablesOneTable()
     {
@@ -186,6 +211,7 @@ class TableRestProxyTest extends TableRestProxyTestBase
      * @covers PEAR2\WindowsAzure\Services\Table\Models\QueryTablesResult::create
      * @covers PEAR2\WindowsAzure\Services\Table\Utilities\AtomReaderWriter::_parseBody
      * @covers PEAR2\WindowsAzure\Services\Table\Utilities\AtomReaderWriter::parseTableEntries
+     * @covers PEAR2\WindowsAzure\Services\Core\ServiceRestProxy::sendContext
      */
     public function testQueryTablesEmpty()
     {
@@ -207,6 +233,7 @@ class TableRestProxyTest extends TableRestProxyTestBase
      * @covers PEAR2\WindowsAzure\Services\Table\Models\QueryTablesResult::create
      * @covers PEAR2\WindowsAzure\Services\Table\Utilities\AtomReaderWriter::_parseBody
      * @covers PEAR2\WindowsAzure\Services\Table\Utilities\AtomReaderWriter::parseTableEntries
+     * @covers PEAR2\WindowsAzure\Services\Core\ServiceRestProxy::sendContext
      */
     public function testQueryTablesWithPrefix()
     {
@@ -242,6 +269,8 @@ class TableRestProxyTest extends TableRestProxyTestBase
      * @covers PEAR2\WindowsAzure\Services\Table\Utilities\AtomReaderWriter::_generatePropertiesXml
      * @covers PEAR2\WindowsAzure\Services\Table\Utilities\AtomReaderWriter::parseEntity
      * @covers PEAR2\WindowsAzure\Services\Table\Utilities\AtomReaderWriter::_parseOneEntity
+     * PEAR2\WindowsAzure\Services\Table\Models\InsertEntityResult::create
+     * @covers PEAR2\WindowsAzure\Services\Core\ServiceRestProxy::sendContext
      */
     public function testInsertEntity()
     {
@@ -265,6 +294,7 @@ class TableRestProxyTest extends TableRestProxyTestBase
      * @covers PEAR2\WindowsAzure\Services\Table\Utilities\AtomReaderWriter::_parseBody
      * @covers PEAR2\WindowsAzure\Services\Table\Utilities\AtomReaderWriter::parseEntities
      * @covers PEAR2\WindowsAzure\Services\Table\Utilities\AtomReaderWriter::_parseOneEntity
+     * @covers PEAR2\WindowsAzure\Services\Core\ServiceRestProxy::sendContext
      */
     public function testQueryEntitiesWithEmpty()
     {
@@ -286,6 +316,7 @@ class TableRestProxyTest extends TableRestProxyTestBase
      * @covers PEAR2\WindowsAzure\Services\Table\Utilities\AtomReaderWriter::_parseBody
      * @covers PEAR2\WindowsAzure\Services\Table\Utilities\AtomReaderWriter::parseEntities
      * @covers PEAR2\WindowsAzure\Services\Table\Utilities\AtomReaderWriter::_parseOneEntity
+     * @covers PEAR2\WindowsAzure\Services\Core\ServiceRestProxy::sendContext
      */
     public function testQueryEntitiesWithOneEntity()
     {
@@ -313,6 +344,7 @@ class TableRestProxyTest extends TableRestProxyTestBase
      * @covers PEAR2\WindowsAzure\Services\Table\Utilities\AtomReaderWriter::_parseBody
      * @covers PEAR2\WindowsAzure\Services\Table\Utilities\AtomReaderWriter::parseEntities
      * @covers PEAR2\WindowsAzure\Services\Table\Utilities\AtomReaderWriter::_parseOneEntity
+     * @covers PEAR2\WindowsAzure\Services\Core\ServiceRestProxy::sendContext
      */
     public function testQueryEntitiesWithMultipleEntities()
     {
@@ -359,6 +391,7 @@ class TableRestProxyTest extends TableRestProxyTestBase
      * @covers PEAR2\WindowsAzure\Services\Table\Utilities\AtomReaderWriter::_parseBody
      * @covers PEAR2\WindowsAzure\Services\Table\Utilities\AtomReaderWriter::parseEntities
      * @covers PEAR2\WindowsAzure\Services\Table\Utilities\AtomReaderWriter::_parseOneEntity
+     * @covers PEAR2\WindowsAzure\Services\Core\ServiceRestProxy::sendContext
      */
     public function testQueryEntitiesWithGetTop()
     {
@@ -397,6 +430,7 @@ class TableRestProxyTest extends TableRestProxyTestBase
      * @covers PEAR2\WindowsAzure\Services\Table\Utilities\AtomReaderWriter::getEntity
      * @covers PEAR2\WindowsAzure\Services\Table\Utilities\AtomReaderWriter::_generatePropertiesXml
      * @covers PEAR2\WindowsAzure\Services\Table\Models\UpdateEntityResult::create
+     * @covers PEAR2\WindowsAzure\Services\Core\ServiceRestProxy::sendContext
      */
     public function testUpdateEntity()
     {
@@ -408,7 +442,7 @@ class TableRestProxyTest extends TableRestProxyTestBase
         $result = $this->wrapper->queryEntities($name);
         $entities = $result->getEntities();
         $expected = $entities[0];
-        $expected->newProperty('CustomerPlace', EdmType::STRING, 'Redmond');
+        $expected->addProperty('CustomerPlace', EdmType::STRING, 'Redmond');
         
         // Test
         $this->wrapper->UpdateEntity($name, $expected);
@@ -431,6 +465,7 @@ class TableRestProxyTest extends TableRestProxyTestBase
      * @covers PEAR2\WindowsAzure\Services\Table\Utilities\AtomReaderWriter::getEntity
      * @covers PEAR2\WindowsAzure\Services\Table\Utilities\AtomReaderWriter::_generatePropertiesXml
      * @covers PEAR2\WindowsAzure\Services\Table\Models\UpdateEntityResult::create
+     * @covers PEAR2\WindowsAzure\Services\Core\ServiceRestProxy::sendContext
      */
     public function testMergeEntity()
     {
@@ -442,7 +477,7 @@ class TableRestProxyTest extends TableRestProxyTestBase
         $result = $this->wrapper->queryEntities($name);
         $entities = $result->getEntities();
         $expected = $entities[0];
-        $expected->newProperty('CustomerPhone', EdmType::STRING, '99999999');
+        $expected->addProperty('CustomerPhone', EdmType::STRING, '99999999');
         
         // Test
         $this->wrapper->mergeEntity($name, $expected);
@@ -465,6 +500,7 @@ class TableRestProxyTest extends TableRestProxyTestBase
      * @covers PEAR2\WindowsAzure\Services\Table\Utilities\AtomReaderWriter::getEntity
      * @covers PEAR2\WindowsAzure\Services\Table\Utilities\AtomReaderWriter::_generatePropertiesXml
      * @covers PEAR2\WindowsAzure\Services\Table\Models\UpdateEntityResult::create
+     * @covers PEAR2\WindowsAzure\Services\Core\ServiceRestProxy::sendContext
      */
     public function testInsertOrReplaceEntity()
     {
@@ -476,7 +512,7 @@ class TableRestProxyTest extends TableRestProxyTestBase
         $result = $this->wrapper->queryEntities($name);
         $entities = $result->getEntities();
         $expected = $entities[0];
-        $expected->newProperty('CustomerPlace', EdmType::STRING, 'Redmond');
+        $expected->addProperty('CustomerPlace', EdmType::STRING, 'Redmond');
         
         // Test
         $this->wrapper->InsertOrReplaceEntity($name, $expected);
@@ -499,6 +535,7 @@ class TableRestProxyTest extends TableRestProxyTestBase
      * @covers PEAR2\WindowsAzure\Services\Table\Utilities\AtomReaderWriter::getEntity
      * @covers PEAR2\WindowsAzure\Services\Table\Utilities\AtomReaderWriter::_generatePropertiesXml
      * @covers PEAR2\WindowsAzure\Services\Table\Models\UpdateEntityResult::create
+     * @covers PEAR2\WindowsAzure\Services\Core\ServiceRestProxy::sendContext
      */
     public function testInsertOrMergeEntity()
     {
@@ -510,7 +547,7 @@ class TableRestProxyTest extends TableRestProxyTestBase
         $result = $this->wrapper->queryEntities($name);
         $entities = $result->getEntities();
         $expected = $entities[0];
-        $expected->newProperty('CustomerPhone', EdmType::STRING, '99999999');
+        $expected->addProperty('CustomerPhone', EdmType::STRING, '99999999');
         
         // Test
         $this->wrapper->InsertOrMergeEntity($name, $expected);
@@ -528,19 +565,20 @@ class TableRestProxyTest extends TableRestProxyTestBase
      * @covers PEAR2\WindowsAzure\Services\Table\TableRestProxy::deleteEntity
      * @covers PEAR2\WindowsAzure\Services\Table\TableRestProxy::_getEntityPath
      * @covers PEAR2\WindowsAzure\Services\Table\TableRestProxy::_constructDeleteEntityContext
+     * @covers PEAR2\WindowsAzure\Services\Core\ServiceRestProxy::sendContext
      */
     public function testDeleteEntity()
     {
         // Setup
         $name = 'deleteentity';
         $this->createTable($name);
-        $pk = '123';
-        $rk = '456';
-        $entity = TestResources::getTestEntity($pk, $rk);
+        $partitionKey = '123';
+        $rowKey = '456';
+        $entity = TestResources::getTestEntity($partitionKey, $rowKey);
         $result = $this->wrapper->insertEntity($name, $entity);
         
         // Test
-        $this->wrapper->deleteEntity($name, $pk, $rk);
+        $this->wrapper->deleteEntity($name, $partitionKey, $rowKey);
         
         // Assert
         $result = $this->wrapper->queryEntities($name);
@@ -553,19 +591,20 @@ class TableRestProxyTest extends TableRestProxyTestBase
      * @covers PEAR2\WindowsAzure\Services\Table\Utilities\AtomReaderWriter::_parseBody
      * @covers PEAR2\WindowsAzure\Services\Table\Utilities\AtomReaderWriter::parseEntity
      * @covers PEAR2\WindowsAzure\Services\Table\Utilities\AtomReaderWriter::_parseOneEntity
+     * @covers PEAR2\WindowsAzure\Services\Core\ServiceRestProxy::sendContext
      */
     public function testGetEntity()
     {
         // Setup
         $name = 'getentity';
         $this->createTable($name);
-        $pk = '123';
-        $rk = '456';
-        $expected = TestResources::getTestEntity($pk, $rk);
+        $partitionKey = '123';
+        $rowKey = '456';
+        $expected = TestResources::getTestEntity($partitionKey, $rowKey);
         $this->wrapper->insertEntity($name, $expected);
         
         // Test
-        $result = $this->wrapper->getEntity($name, $pk, $rk);
+        $result = $this->wrapper->getEntity($name, $partitionKey, $rowKey);
         
         // Assert
         $actual = $result->getEntity();
@@ -579,16 +618,21 @@ class TableRestProxyTest extends TableRestProxyTestBase
      * @covers PEAR2\WindowsAzure\Services\Table\TableRestProxy::_createBatchRequestBody
      * @covers PEAR2\WindowsAzure\Services\Table\TableRestProxy::_getOperationContext
      * @covers PEAR2\WindowsAzure\Services\Table\TableRestProxy::_constructInsertEntityContext
+     * @covers PEAR2\WindowsAzure\Services\Table\TableRestProxy::_createOperationsContexts
      * @covers PEAR2\WindowsAzure\Services\Table\Utilities\MimeReaderWriter::encodeMimeMultipart
+     * @covers PEAR2\WindowsAzure\Services\Table\Utilities\MimeReaderWriter::decodeMimeMultipart
+     * @covers PEAR2\WindowsAzure\Services\Table\Models\BatchResult::create
+     * @covers PEAR2\WindowsAzure\Services\Table\Models\BatchResult::_constructResponses
+     * @covers PEAR2\WindowsAzure\Services\Core\ServiceRestProxy::sendContext
      */
     public function testBatchWithInsert()
     {
         // Setup
         $name = 'batchwithinsert';
         $this->createTable($name);
-        $pk = '123';
-        $rk = '456';
-        $expected = TestResources::getTestEntity($pk, $rk);
+        $partitionKey = '123';
+        $rowKey = '456';
+        $expected = TestResources::getTestEntity($partitionKey, $rowKey);
         $operations = new BatchOperations();
         $operations->addInsertEntity($name, $expected);
         
@@ -607,21 +651,26 @@ class TableRestProxyTest extends TableRestProxyTestBase
      * @covers PEAR2\WindowsAzure\Services\Table\TableRestProxy::batch
      * @covers PEAR2\WindowsAzure\Services\Table\TableRestProxy::_createBatchRequestBody
      * @covers PEAR2\WindowsAzure\Services\Table\TableRestProxy::_getOperationContext
+     * @covers PEAR2\WindowsAzure\Services\Table\TableRestProxy::_createOperationsContexts
      * @covers PEAR2\WindowsAzure\Services\Table\TableRestProxy::_constructDeleteEntityContext
      * @covers PEAR2\WindowsAzure\Services\Table\Utilities\MimeReaderWriter::encodeMimeMultipart
+     * @covers PEAR2\WindowsAzure\Services\Table\Utilities\MimeReaderWriter::decodeMimeMultipart
+     * @covers PEAR2\WindowsAzure\Services\Table\Models\BatchResult::create
+     * @covers PEAR2\WindowsAzure\Services\Table\Models\BatchResult::_constructResponses
+     * @covers PEAR2\WindowsAzure\Services\Core\ServiceRestProxy::sendContext
      */
     public function testBatchWithDelete()
     {
         // Setup
         $name = 'batchwithdelete';
         $this->createTable($name);
-        $pk = '123';
-        $rk = '456';
-        $expected = TestResources::getTestEntity($pk, $rk);
+        $partitionKey = '123';
+        $rowKey = '456';
+        $expected = TestResources::getTestEntity($partitionKey, $rowKey);
         $r = $this->wrapper->insertEntity($name, $expected);
         $operations = new BatchOperations();
         $etag = $r->getEntity()->getEtag();
-        $operations->addDeleteEntity($name, $pk, $rk, $etag);
+        $operations->addDeleteEntity($name, $partitionKey, $rowKey, $etag);
         
         // Test
         $this->wrapper->batch($operations);
@@ -636,22 +685,27 @@ class TableRestProxyTest extends TableRestProxyTestBase
      * @covers PEAR2\WindowsAzure\Services\Table\TableRestProxy::batch
      * @covers PEAR2\WindowsAzure\Services\Table\TableRestProxy::_createBatchRequestBody
      * @covers PEAR2\WindowsAzure\Services\Table\TableRestProxy::_getOperationContext
+     * @covers PEAR2\WindowsAzure\Services\Table\TableRestProxy::_createOperationsContexts
      * @covers PEAR2\WindowsAzure\Services\Table\TableRestProxy::_constructPutOrMergeEntityContext
      * @covers PEAR2\WindowsAzure\Services\Table\Utilities\MimeReaderWriter::encodeMimeMultipart
+     * @covers PEAR2\WindowsAzure\Services\Table\Utilities\MimeReaderWriter::decodeMimeMultipart
+     * @covers PEAR2\WindowsAzure\Services\Table\Models\BatchResult::create
+     * @covers PEAR2\WindowsAzure\Services\Table\Models\BatchResult::_constructResponses
+     * @covers PEAR2\WindowsAzure\Services\Core\ServiceRestProxy::sendContext
      */
     public function testBatchWithUpdate()
     {
         // Setup
         $name = 'batchwithupdate';
         $this->createTable($name);
-        $pk = '123';
-        $rk = '456';
-        $expected = TestResources::getTestEntity($pk, $rk);
+        $partitionKey = '123';
+        $rowKey = '456';
+        $expected = TestResources::getTestEntity($partitionKey, $rowKey);
         $this->wrapper->insertEntity($name, $expected);
         $result = $this->wrapper->queryEntities($name);
         $entities = $result->getEntities();
         $expected = $entities[0];
-        $expected->newProperty('CustomerPlace', EdmType::STRING, 'Redmond');
+        $expected->addProperty('CustomerPlace', EdmType::STRING, 'Redmond');
         $operations = new BatchOperations();
         $operations->addUpdateEntity($name, $expected);
         
@@ -673,22 +727,27 @@ class TableRestProxyTest extends TableRestProxyTestBase
      * @covers PEAR2\WindowsAzure\Services\Table\TableRestProxy::batch
      * @covers PEAR2\WindowsAzure\Services\Table\TableRestProxy::_createBatchRequestBody
      * @covers PEAR2\WindowsAzure\Services\Table\TableRestProxy::_getOperationContext
+     * @covers PEAR2\WindowsAzure\Services\Table\TableRestProxy::_createOperationsContexts
      * @covers PEAR2\WindowsAzure\Services\Table\TableRestProxy::_constructPutOrMergeEntityContext
      * @covers PEAR2\WindowsAzure\Services\Table\Utilities\MimeReaderWriter::encodeMimeMultipart
+     * @covers PEAR2\WindowsAzure\Services\Table\Utilities\MimeReaderWriter::decodeMimeMultipart
+     * @covers PEAR2\WindowsAzure\Services\Table\Models\BatchResult::create
+     * @covers PEAR2\WindowsAzure\Services\Table\Models\BatchResult::_constructResponses
+     * @covers PEAR2\WindowsAzure\Services\Core\ServiceRestProxy::sendContext
      */
     public function testBatchWithMerge()
     {
         // Setup
         $name = 'batchwithmerge';
         $this->createTable($name);
-        $pk = '123';
-        $rk = '456';
-        $expected = TestResources::getTestEntity($pk, $rk);
+        $partitionKey = '123';
+        $rowKey = '456';
+        $expected = TestResources::getTestEntity($partitionKey, $rowKey);
         $this->wrapper->insertEntity($name, $expected);
         $result = $this->wrapper->queryEntities($name);
         $entities = $result->getEntities();
         $expected = $entities[0];
-        $expected->newProperty('CustomerPlace', EdmType::STRING, 'Redmond');
+        $expected->addProperty('CustomerPlace', EdmType::STRING, 'Redmond');
         $operations = new BatchOperations();
         $operations->addMergeEntity($name, $expected);
         
@@ -710,22 +769,27 @@ class TableRestProxyTest extends TableRestProxyTestBase
      * @covers PEAR2\WindowsAzure\Services\Table\TableRestProxy::batch
      * @covers PEAR2\WindowsAzure\Services\Table\TableRestProxy::_createBatchRequestBody
      * @covers PEAR2\WindowsAzure\Services\Table\TableRestProxy::_getOperationContext
+     * @covers PEAR2\WindowsAzure\Services\Table\TableRestProxy::_createOperationsContexts
      * @covers PEAR2\WindowsAzure\Services\Table\TableRestProxy::_constructPutOrMergeEntityContext
      * @covers PEAR2\WindowsAzure\Services\Table\Utilities\MimeReaderWriter::encodeMimeMultipart
+     * @covers PEAR2\WindowsAzure\Services\Table\Utilities\MimeReaderWriter::decodeMimeMultipart
+     * @covers PEAR2\WindowsAzure\Services\Table\Models\BatchResult::create
+     * @covers PEAR2\WindowsAzure\Services\Table\Models\BatchResult::_constructResponses
+     * @covers PEAR2\WindowsAzure\Services\Core\ServiceRestProxy::sendContext
      */
     public function testBatchWithInsertOrReplace()
     {
         // Setup
         $name = 'batchwithinsertorreplace';
         $this->createTable($name);
-        $pk = '123';
-        $rk = '456';
-        $expected = TestResources::getTestEntity($pk, $rk);
+        $partitionKey = '123';
+        $rowKey = '456';
+        $expected = TestResources::getTestEntity($partitionKey, $rowKey);
         $this->wrapper->insertEntity($name, $expected);
         $result = $this->wrapper->queryEntities($name);
         $entities = $result->getEntities();
         $expected = $entities[0];
-        $expected->newProperty('CustomerPlace', EdmType::STRING, 'Redmond');
+        $expected->addProperty('CustomerPlace', EdmType::STRING, 'Redmond');
         $operations = new BatchOperations();
         $operations->addInsertOrReplaceEntity($name, $expected);
         
@@ -747,22 +811,27 @@ class TableRestProxyTest extends TableRestProxyTestBase
      * @covers PEAR2\WindowsAzure\Services\Table\TableRestProxy::batch
      * @covers PEAR2\WindowsAzure\Services\Table\TableRestProxy::_createBatchRequestBody
      * @covers PEAR2\WindowsAzure\Services\Table\TableRestProxy::_getOperationContext
+     * @covers PEAR2\WindowsAzure\Services\Table\TableRestProxy::_createOperationsContexts
      * @covers PEAR2\WindowsAzure\Services\Table\TableRestProxy::_constructPutOrMergeEntityContext
      * @covers PEAR2\WindowsAzure\Services\Table\Utilities\MimeReaderWriter::encodeMimeMultipart
+     * @covers PEAR2\WindowsAzure\Services\Table\Utilities\MimeReaderWriter::decodeMimeMultipart
+     * @covers PEAR2\WindowsAzure\Services\Table\Models\BatchResult::create
+     * @covers PEAR2\WindowsAzure\Services\Table\Models\BatchResult::_constructResponses
+     * @covers PEAR2\WindowsAzure\Services\Core\ServiceRestProxy::sendContext
      */
     public function testBatchWithInsertOrMerge()
     {
         // Setup
         $name = 'batchwithinsertormerge';
         $this->createTable($name);
-        $pk = '123';
-        $rk = '456';
-        $expected = TestResources::getTestEntity($pk, $rk);
+        $partitionKey = '123';
+        $rowKey = '456';
+        $expected = TestResources::getTestEntity($partitionKey, $rowKey);
         $this->wrapper->insertEntity($name, $expected);
         $result = $this->wrapper->queryEntities($name);
         $entities = $result->getEntities();
         $expected = $entities[0];
-        $expected->newProperty('CustomerPlace', EdmType::STRING, 'Redmond');
+        $expected->addProperty('CustomerPlace', EdmType::STRING, 'Redmond');
         $operations = new BatchOperations();
         $operations->addInsertOrMergeEntity($name, $expected);
         
@@ -784,28 +853,33 @@ class TableRestProxyTest extends TableRestProxyTestBase
      * @covers PEAR2\WindowsAzure\Services\Table\TableRestProxy::batch
      * @covers PEAR2\WindowsAzure\Services\Table\TableRestProxy::_createBatchRequestBody
      * @covers PEAR2\WindowsAzure\Services\Table\TableRestProxy::_getOperationContext
+     * @covers PEAR2\WindowsAzure\Services\Table\TableRestProxy::_createOperationsContexts
      * @covers PEAR2\WindowsAzure\Services\Table\TableRestProxy::_constructPutOrMergeEntityContext
      * @covers PEAR2\WindowsAzure\Services\Table\Utilities\MimeReaderWriter::encodeMimeMultipart
+     * @covers PEAR2\WindowsAzure\Services\Table\Utilities\MimeReaderWriter::decodeMimeMultipart
+     * @covers PEAR2\WindowsAzure\Services\Table\Models\BatchResult::create
+     * @covers PEAR2\WindowsAzure\Services\Table\Models\BatchResult::_constructResponses
+     * @covers PEAR2\WindowsAzure\Services\Core\ServiceRestProxy::sendContext
      */
     public function testBatchWithMultipleOperations()
     {
         // Setup
         $name = 'batchwithwithmultipleoperations';
         $this->createTable($name);
-        $pk = '123';
+        $partitionKey = '123';
         $rk1 = '456';
         $rk2 = '457';
         $rk3 = '458';
-        $delete = TestResources::getTestEntity($pk, $rk1);
-        $insert = TestResources::getTestEntity($pk, $rk2);
-        $update = TestResources::getTestEntity($pk, $rk3);
+        $delete = TestResources::getTestEntity($partitionKey, $rk1);
+        $insert = TestResources::getTestEntity($partitionKey, $rk2);
+        $update = TestResources::getTestEntity($partitionKey, $rk3);
         $this->wrapper->insertEntity($name, $delete);
         $this->wrapper->insertEntity($name, $update);
         $result = $this->wrapper->queryEntities($name);
         $entities = $result->getEntities();
         $delete = $entities[0];
         $update = $entities[1];
-        $update->newProperty('CustomerPlace', EdmType::STRING, 'Redmond');
+        $update->addProperty('CustomerPlace', EdmType::STRING, 'Redmond');
         $operations = new BatchOperations();
         $operations->addInsertEntity($name, $insert);
         $operations->addUpdateEntity($name, $update);
@@ -822,26 +896,31 @@ class TableRestProxyTest extends TableRestProxyTestBase
      * @covers PEAR2\WindowsAzure\Services\Table\TableRestProxy::batch
      * @covers PEAR2\WindowsAzure\Services\Table\TableRestProxy::_createBatchRequestBody
      * @covers PEAR2\WindowsAzure\Services\Table\TableRestProxy::_getOperationContext
+     * @covers PEAR2\WindowsAzure\Services\Table\TableRestProxy::_createOperationsContexts
      * @covers PEAR2\WindowsAzure\Services\Table\TableRestProxy::_constructPutOrMergeEntityContext
      * @covers PEAR2\WindowsAzure\Services\Table\Utilities\MimeReaderWriter::encodeMimeMultipart
+     * @covers PEAR2\WindowsAzure\Services\Table\Utilities\MimeReaderWriter::decodeMimeMultipart
+     * @covers PEAR2\WindowsAzure\Services\Table\Models\BatchResult::create
+     * @covers PEAR2\WindowsAzure\Services\Table\Models\BatchResult::_constructResponses
+     * @covers PEAR2\WindowsAzure\Services\Core\ServiceRestProxy::sendContext
      */
     public function testBatchWithDifferentPKFail()
     {
         // Setup
         $name = 'batchwithwithdifferentpkfail';
         $this->createTable($name);
-        $pk = '123';
+        $partitionKey = '123';
         $rk1 = '456';
         $rk3 = '458';
-        $delete = TestResources::getTestEntity($pk, $rk1);
-        $update = TestResources::getTestEntity($pk, $rk3);
+        $delete = TestResources::getTestEntity($partitionKey, $rk1);
+        $update = TestResources::getTestEntity($partitionKey, $rk3);
         $this->wrapper->insertEntity($name, $delete);
         $this->wrapper->insertEntity($name, $update);
         $result = $this->wrapper->queryEntities($name);
         $entities = $result->getEntities();
         $delete = $entities[0];
         $update = $entities[1];
-        $update->newProperty('CustomerPlace', EdmType::STRING, 'Redmond');
+        $update->addProperty('CustomerPlace', EdmType::STRING, 'Redmond');
         $operations = new BatchOperations();
         $operations->addUpdateEntity($name, $update);
         $operations->addDeleteEntity($name, '125', $delete->getRowKey(), $delete->getEtag());

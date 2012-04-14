@@ -37,7 +37,7 @@ use PEAR2\WindowsAzure\Services\Core\Models\ServiceProperties;
  * @version   Release: @package_version@
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
-class RestProxyTestBase extends \PHPUnit_Framework_TestCase
+class ServiceRestProxyTestBase extends \PHPUnit_Framework_TestCase
 {
     protected $config;
     protected $propertiesChanged;
