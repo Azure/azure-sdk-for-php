@@ -25,6 +25,7 @@
 namespace PEAR2\WindowsAzure\Core;
 use PEAR2\WindowsAzure\Utilities;
 use PEAR2\WindowsAzure\Resources;
+use PEAR2\WindowsAzure\Validate;
 
 /**
  * Holds basic elements for making HTTP call.
@@ -87,13 +88,14 @@ class HttpCallContext
     private $_body;
     
     /**
-     * Default constructor. 
+     * Default constructor.
      */
     public function __construct()
     {
         $this->_method      = null;
         $this->_body        = null;
         $this->_path        = null;
+        $this->_uri         = null;
         $this->_queryParams = array();
         $this->_statusCodes = array();
         $this->_headers     = array();
@@ -134,12 +136,15 @@ class HttpCallContext
     /**
      * Sets headers.
      * 
+     * Ignores the header if its value is empty.
+     * 
      * @param array $headers The headers value.
      * 
      * @return none
      */
     public function setHeaders($headers)
     {
+        $this->_headers = array();
         foreach ($headers as $key => $value) {
             $this->addHeader($key, $value);
         }
@@ -158,14 +163,17 @@ class HttpCallContext
     /**
      * Sets queryParams.
      * 
+     * Ignores the query variable if its value is empty.
+     * 
      * @param array $queryParams The queryParams value.
      * 
      * @return none
      */
     public function setQueryParameters($queryParams)
     {
+        $this->_queryParams = array();
         foreach ($queryParams as $key => $value) {
-            $this->addQueryParam($key, $value);
+            $this->addQueryParameter($key, $value);
         }
     }
     
@@ -232,7 +240,10 @@ class HttpCallContext
      */
     public function setStatusCodes($statusCodes)
     {
-        $this->_statusCodes = $statusCodes;
+        $this->_statusCodes = array();
+        foreach ($statusCodes as $value) {
+            $this->addStatusCode($value);
+        }
     }
     
     /**
@@ -258,9 +269,9 @@ class HttpCallContext
     }
     
     /**
-     * Adds or sets header pair. Note that this method doesn't do any validation or
-     * has any tweaks as the actual set of headers and all tweaks are handled in the
-     * HTTP request object.
+     * Adds or sets header pair.
+     * 
+     * Ignores the header if its value is empty.
      * 
      * @param string $name  The HTTP header name.
      * @param mix    $value The HTTP header value.
@@ -283,20 +294,21 @@ class HttpCallContext
      */
     public function removeHeader($name)
     {
+        Validate::isValidString($name);
         unset($this->_headers[$name]);
     }
     
     /**
-     * Adds or sets query parameter pair. Note that this method doesn't do any
-     * validation or has any tweaks as the actual set of query parameters and all 
-     * tweaks are handled in the Uri object.
+     * Adds or sets query parameter pair.
+     * 
+     * Ignores the query variable if its value is empty.
      * 
      * @param string $name  The URI query parameter name.
      * @param mix    $value The URI query parameter value.
      * 
      * @return none
      */
-    public function addQueryParam($name, $value)
+    public function addQueryParameter($name, $value)
     {
         if (!empty($value)) {
             $this->_queryParams[$name] = $value;
@@ -306,12 +318,13 @@ class HttpCallContext
     /**
      * Adds status code to the expected status codes.
      * 
-     * @param int $statusCode The expected status code.
+     * @param integer $statusCode The expected status code.
      * 
      * @return none
      */
     public function addStatusCode($statusCode)
     {
+        Validate::isInteger($statusCode);
         $this->_statusCodes[] = $statusCode;
     }
     

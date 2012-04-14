@@ -24,6 +24,7 @@
  
 namespace PEAR2\WindowsAzure\Services\Table\Models;
 use PEAR2\WindowsAzure\Validate;
+use PEAR2\WindowsAzure\Resources;
 
 /**
  * Holds batch operation change set.
@@ -70,7 +71,10 @@ class BatchOperations
      */
     public function setOperations($operations)
     {
-        $this->_operations = $operations;
+        $this->_operations = array();
+        foreach ($operations as $operation) {
+            $this->addOperation($operation);
+        }
     }
     
     /**
@@ -82,6 +86,11 @@ class BatchOperations
      */
     public function addOperation($operation)
     {
+        Validate::isTrue(
+            $operation instanceof BatchOperation,
+            Resources::INVALID_BO_TYPE_MSG
+        );
+        
         $this->_operations[] = $operation;
     }
     
@@ -101,8 +110,8 @@ class BatchOperations
         $operation = new BatchOperation();
         $type      = BatchOperationType::INSERT_ENTITY_OPERATION;
         $operation->setType($type);
-        $operation->addParam(BatchOperationParamName::BP_TABLE, $table);
-        $operation->addParam(BatchOperationParamName::BP_ENTITY, $entity);
+        $operation->addParameter(BatchOperationParameterName::BP_TABLE, $table);
+        $operation->addParameter(BatchOperationParameterName::BP_ENTITY, $entity);
         $this->addOperation($operation);
     }
     
@@ -122,8 +131,8 @@ class BatchOperations
         $operation = new BatchOperation();
         $type      = BatchOperationType::UPDATE_ENTITY_OPERATION;
         $operation->setType($type);
-        $operation->addParam(BatchOperationParamName::BP_TABLE, $table);
-        $operation->addParam(BatchOperationParamName::BP_ENTITY, $entity);
+        $operation->addParameter(BatchOperationParameterName::BP_TABLE, $table);
+        $operation->addParameter(BatchOperationParameterName::BP_ENTITY, $entity);
         $this->addOperation($operation);
     }
     
@@ -143,8 +152,8 @@ class BatchOperations
         $operation = new BatchOperation();
         $type      = BatchOperationType::MERGE_ENTITY_OPERATION;
         $operation->setType($type);
-        $operation->addParam(BatchOperationParamName::BP_TABLE, $table);
-        $operation->addParam(BatchOperationParamName::BP_ENTITY, $entity);
+        $operation->addParameter(BatchOperationParameterName::BP_TABLE, $table);
+        $operation->addParameter(BatchOperationParameterName::BP_ENTITY, $entity);
         $this->addOperation($operation);
     }
     
@@ -164,8 +173,8 @@ class BatchOperations
         $operation = new BatchOperation();
         $type      = BatchOperationType::INSERT_REPLACE_ENTITY_OPERATION;
         $operation->setType($type);
-        $operation->addParam(BatchOperationParamName::BP_TABLE, $table);
-        $operation->addParam(BatchOperationParamName::BP_ENTITY, $entity);
+        $operation->addParameter(BatchOperationParameterName::BP_TABLE, $table);
+        $operation->addParameter(BatchOperationParameterName::BP_ENTITY, $entity);
         $this->addOperation($operation);
     }
     
@@ -185,8 +194,8 @@ class BatchOperations
         $operation = new BatchOperation();
         $type      = BatchOperationType::INSERT_MERGE_ENTITY_OPERATION;
         $operation->setType($type);
-        $operation->addParam(BatchOperationParamName::BP_TABLE, $table);
-        $operation->addParam(BatchOperationParamName::BP_ENTITY, $entity);
+        $operation->addParameter(BatchOperationParameterName::BP_TABLE, $table);
+        $operation->addParameter(BatchOperationParameterName::BP_ENTITY, $entity);
         $this->addOperation($operation);
     }
     
@@ -210,11 +219,11 @@ class BatchOperations
         $operation = new BatchOperation();
         $type      = BatchOperationType::DELETE_ENTITY_OPERATION;
         $operation->setType($type);
-        $operation->addParam(BatchOperationParamName::BP_TABLE, $table);
-        $operation->addParam(BatchOperationParamName::BP_ROW_KEY, $rowKey);
-        $operation->addParam(BatchOperationParamName::BP_ETAG, $etag);
-        $operation->addParam(
-            BatchOperationParamName::BP_PARTITION_KEY,
+        $operation->addParameter(BatchOperationParameterName::BP_TABLE, $table);
+        $operation->addParameter(BatchOperationParameterName::BP_ROW_KEY, $rowKey);
+        $operation->addParameter(BatchOperationParameterName::BP_ETAG, $etag);
+        $operation->addParameter(
+            BatchOperationParameterName::BP_PARTITION_KEY,
             $partitionKey
         );
         $this->addOperation($operation);

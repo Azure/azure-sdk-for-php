@@ -25,6 +25,8 @@
 namespace PEAR2\WindowsAzure\Services\Table\Models;
 use PEAR2\WindowsAzure\Resources;
 use PEAR2\WindowsAzure\Utilities;
+use PEAR2\WindowsAzure\Validate;
+use PEAR2\WindowsAzure\Core\ServiceException;
 
 /**
  * Represents an error returned from call to batch API.
@@ -40,12 +42,12 @@ use PEAR2\WindowsAzure\Utilities;
 class BatchError
 {
     /**
-     * @var ServiceException 
+     * @var PEAR2\WindowsAzure\Core\ServiceException 
      */
     private $_error;
     
     /**
-     * @var inetegr
+     * @var integer
      */
     private $_contentId;
     
@@ -59,10 +61,17 @@ class BatchError
      */
     public static function create($error, $headers)
     {
+        Validate::isTrue(
+            $error instanceof ServiceException,
+            Resources::INVALID_EXC_OBJ_MSG
+        );
+        Validate::isArray($headers);
+        
         $result = new BatchError();
+        $clean  = Utilities::keysToLower($headers);
         
         $result->setError($error);
-        $contentId = Utilities::tryGetValue($headers, Resources::CONTENT_ID);
+        $contentId = Utilities::tryGetValue($clean, Resources::CONTENT_ID);
         $result->setContentId(is_null($contentId) ? null : intval($contentId));
         
         return $result;
@@ -93,7 +102,7 @@ class BatchError
     /**
      * Gets the contentId.
      * 
-     * @return inetegr
+     * @return integer
      */
     public function getContentId()
     {
@@ -103,7 +112,7 @@ class BatchError
     /**
      * Sets the contentId.
      * 
-     * @param inetegr $contentId The contentId object.
+     * @param integer $contentId The contentId object.
      * 
      * @return none
      */

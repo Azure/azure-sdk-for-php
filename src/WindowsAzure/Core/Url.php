@@ -23,10 +23,10 @@
  */
  
 namespace PEAR2\WindowsAzure\Core;
+require_once 'Net/URL2.php';
 use PEAR2\WindowsAzure\Validate;
 use PEAR2\WindowsAzure\Resources;
 use PEAR2\WindowsAzure\Core\IUrl;
-require_once 'Net/URL2.php';
 
 /**
  * Default IUrl implementation.

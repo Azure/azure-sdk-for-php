@@ -41,7 +41,7 @@ use PEAR2\WindowsAzure\Services\Table\Models\QueryEntitiesResult;
 use PEAR2\WindowsAzure\Services\Table\Models\DeleteEntityOptions;
 use PEAR2\WindowsAzure\Services\Table\Models\GetEntityResult;
 use PEAR2\WindowsAzure\Services\Table\Models\BatchOperationType;
-use PEAR2\WindowsAzure\Services\Table\Models\BatchOperationParamName;
+use PEAR2\WindowsAzure\Services\Table\Models\BatchOperationParameterName;
 use PEAR2\WindowsAzure\Services\Table\Models\BatchResult;
 
 /**
@@ -92,18 +92,18 @@ class TableRestProxy extends ServiceRestProxy implements ITable
             case BatchOperationType::MERGE_ENTITY_OPERATION:
             case BatchOperationType::INSERT_REPLACE_ENTITY_OPERATION:
             case BatchOperationType::INSERT_MERGE_ENTITY_OPERATION:
-                $table   = $operation->getParam(BatchOperationParamName::BP_TABLE);
-                $entity  = $operation->getParam(BatchOperationParamName::BP_ENTITY);
+                $table   = $operation->getParameter(BatchOperationParameterName::BP_TABLE);
+                $entity  = $operation->getParameter(BatchOperationParameterName::BP_ENTITY);
                 $context = $this->_getOperationContext($table, $entity, $type);
                 break;
         
             case BatchOperationType::DELETE_ENTITY_OPERATION:
-                $table   = $operation->getParam(BatchOperationParamName::BP_TABLE);
-                $pk      = $operation->getParam(
-                    BatchOperationParamName::BP_PARTITION_KEY
+                $table   = $operation->getParameter(BatchOperationParameterName::BP_TABLE);
+                $pk      = $operation->getParameter(
+                    BatchOperationParameterName::BP_PARTITION_KEY
                 );
-                $rk      = $operation->getParam(BatchOperationParamName::BP_ROW_KEY);
-                $etag    = $operation->getParam(BatchOperationParamName::BP_ETAG);
+                $rk      = $operation->getParameter(BatchOperationParameterName::BP_ROW_KEY);
+                $etag    = $operation->getParameter(BatchOperationParameterName::BP_ETAG);
                 $options = new DeleteEntityOptions();
                 $options->setEtag($etag);
                 $context = $this->_constructDeleteEntityContext(
@@ -194,7 +194,10 @@ class TableRestProxy extends ServiceRestProxy implements ITable
         $contentId     = 1;
         $count         = count($operations);
         
-        Validate::isTrue(count($operations) == count($contexts), null);
+        Validate::isTrue(
+            count($operations) == count($contexts),
+            Resources::INVALID_OC_COUNT_MSG
+        );
         
         for ($i = 0; $i < $count; $i++) {
             $operation = $operations[$i];
@@ -212,7 +215,7 @@ class TableRestProxy extends ServiceRestProxy implements ITable
                 $contentType .= ';type=entry';
                 $context->addHeader(Resources::CONTENT_TYPE, $contentType);
                 // Use mb_strlen instead of strlen to get the length of the string
-                // instead of char length
+                // in bytes instead of the length in chars.
                 $context->addHeader(Resources::CONTENT_LENGTH, mb_strlen($body));
                 break;
         
@@ -408,7 +411,7 @@ class TableRestProxy extends ServiceRestProxy implements ITable
             $options
         );
         
-        $response = $this->send2($context);
+        $response = $this->sendContext($context);
         
         return UpdateEntityResult::create($response->getHeader());
     }
@@ -577,12 +580,12 @@ class TableRestProxy extends ServiceRestProxy implements ITable
         $context = new HttpCallContext();
         $timeout = strval($options->getTimeout());
         $context->setMethod(\HTTP_Request2::METHOD_GET);
-        $context->addQueryParam(Resources::QP_REST_TYPE, 'service');
-        $context->addQueryParam(Resources::QP_COMP, 'properties');
-        $context->addQueryParam(Resources::QP_TIMEOUT, $timeout);
+        $context->addQueryParameter(Resources::QP_REST_TYPE, 'service');
+        $context->addQueryParameter(Resources::QP_COMP, 'properties');
+        $context->addQueryParameter(Resources::QP_TIMEOUT, $timeout);
         $context->addStatusCode(Resources::STATUS_OK);
         
-        $response = $this->send2($context);
+        $response = $this->sendContext($context);
         $parsed   = Utilities::unserialize($response->getBody());
         
         return GetServicePropertiesResult::create($parsed);
@@ -812,7 +815,7 @@ class TableRestProxy extends ServiceRestProxy implements ITable
     {
         $context = $this->_constructInsertEntityContext($table, $entity, $options);
         
-        $response = $this->send2($context);
+        $response = $this->sendContext($context);
         $body     = $response->getBody();
         $headers  = $response->getHeader();
         
@@ -932,7 +935,7 @@ class TableRestProxy extends ServiceRestProxy implements ITable
             $options
         );
         
-        $this->send2($context);
+        $this->sendContext($context);
     }
     
     /**
@@ -973,7 +976,7 @@ class TableRestProxy extends ServiceRestProxy implements ITable
         $context->setQueryParameters($queryParams);
         $context->addStatusCode($statusCode);
         
-        $response = $this->send2($context);
+        $response = $this->sendContext($context);
         $entity   = $this->_atomSerializer->parseEntity($response->getBody());
         $result   = new GetEntityResult();
         $result->setEntity($entity);

@@ -15,68 +15,57 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   PEAR2\WindowsAzure
+ * @package   PEAR2\Tests\Unit\WindowsAzure\Services\Table\Models
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
- 
-namespace PEAR2\WindowsAzure;
+
+namespace PEAR2\Tests\Unit\WindowsAzure\Services\Table\Models;
+use PEAR2\WindowsAzure\Services\Table\Models\BatchOperationType;
 
 /**
- * Logger class for debugging purpose.
+ * Unit tests for class BatchOperationType
  *
  * @category  Microsoft
- * @package   PEAR2\WindowsAzure
+ * @package   PEAR2\Tests\Unit\WindowsAzure\Services\Table\Models
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @version   Release: @package_version@
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
-class Logger
+class BatchOperationTypeTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @var string
+     * @covers PEAR2\WindowsAzure\Services\Table\Models\BatchOperationType::isValid
      */
-    private static $_filePath;
-
-    /**
-     * Logs $var to file.
-     *
-     * @param mix    $var The data to log.
-     * @param string $tip The help message.
-     * 
-     * @static
-     * 
-     * @return none
-     */
-    public static function log($var, $tip = Resources::EMPTY_STRING)
+    public function testIsValid()
     {
-        if (!empty($tip)) {
-            error_log($tip . "\n", 3, self::$_filePath);
-        }
+        // Setup
+        $name = BatchOperationType::DELETE_ENTITY_OPERATION;
         
-        if (is_array($var) || is_object($var)) {
-            error_log(print_r($var, true), 3, self::$_filePath);
-        } else {
-            error_log($var . "\n", 3, self::$_filePath);
-        }
+        // Test
+        $actual = BatchOperationType::isValid($name);
+        
+        // Assert
+        $this->assertTrue($actual);
     }
     
     /**
-     * Sets file path to use.
-     *
-     * @param string $filePath The log file path.
-     * 
-     * @static
-     * 
-     * @return none
+     * @covers PEAR2\WindowsAzure\Services\Table\Models\BatchOperationType::isValid
      */
-    public static function setLogFile($filePath)
+    public function testIsValidWithInvalid()
     {
-        $this->_filePath = $filePath;
+        // Setup
+        $name = 'zeta el senen';
+        
+        // Test
+        $actual = BatchOperationType::isValid($name);
+        
+        // Assert
+        $this->assertFalse($actual);
     }
 }
 
