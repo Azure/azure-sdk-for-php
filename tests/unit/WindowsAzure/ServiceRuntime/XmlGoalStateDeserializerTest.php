@@ -30,7 +30,7 @@ use PEAR2\WindowsAzure\ServiceRuntime\XmlGoalStateDeserializer;
 require_once 'vfsStream/vfsStream.php';
 
 /**
- * Unit tests for class XmlGoalStateDeserializer
+ * Unit tests for class XmlGoalStateDeserializer.
  *
  * @category  Microsoft
  * @package   PEAR2\Tests\Unit\WindowsAzure\ServiceRuntime

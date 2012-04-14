@@ -23,10 +23,9 @@
  */
 
 namespace PEAR2\WindowsAzure\ServiceRuntime;
-use PEAR2\WindowsAzure\Utilities;
 
 /**
- * The XML current state serializer.
+ * The release current state request.
  *
  * @category  Microsoft
  * @package   PEAR2\WindowsAzure\ServiceRuntime
@@ -36,40 +35,16 @@ use PEAR2\WindowsAzure\Utilities;
  * @version   Release: @package_version@
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
-class XmlCurrentStateSerializer
+class ReleaseCurrentState extends CurrentState
 {
     /**
-     * Serializes the current state.
+     * Constructor
      * 
-     * @param CurrentState  $state        The current state.
-     * @param IOutputStream $outputStream The output stream.
-     * 
-     * @return none
+     * @param string $clientId The client identifier.
      */
-    public function serialize($state, $outputStream)
+    public function __construct($clientId)
     {
-        $statusLeaseInfo = array(
-            'StatusLease' => array(
-                '@attributes' => array(
-                    'ClientId' => $state->getClientId()
-                )
-            )
-        );
-        
-        if ($state instanceof AcquireCurrentState) {
-            $statusLeaseInfo['StatusLease']['Acquire'] = array(
-                'Incarnation' => $state->getIncarnation(),
-                'Status'      => $state->getStatus(),
-                'Expiration'  => Utilities::isoDate(
-                    date_timestamp_get($state->getExpiration())
-                )
-            );
-        } else if ($state instanceof ReleaseCurrentState) {
-            $statusLeaseInfo['StatusLease']['Release'] = array();
-        }
-        
-        $currentState = Utilities::serialize($statusLeaseInfo, 'CurrentState');
-        fwrite($outputStream, $currentState);
+        parent::__construct($clientId);
     }
 }
 

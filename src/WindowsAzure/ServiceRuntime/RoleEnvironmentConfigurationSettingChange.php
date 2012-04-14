@@ -23,10 +23,9 @@
  */
 
 namespace PEAR2\WindowsAzure\ServiceRuntime;
-use PEAR2\WindowsAzure\Utilities;
 
 /**
- * The XML current state serializer.
+ * The role environment configuration setting change.
  *
  * @category  Microsoft
  * @package   PEAR2\WindowsAzure\ServiceRuntime
@@ -36,40 +35,31 @@ use PEAR2\WindowsAzure\Utilities;
  * @version   Release: @package_version@
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
-class XmlCurrentStateSerializer
+class RoleEnvironmentConfigurationSettingChange implements IRoleEnvironmentChange
 {
     /**
-     * Serializes the current state.
-     * 
-     * @param CurrentState  $state        The current state.
-     * @param IOutputStream $outputStream The output stream.
-     * 
-     * @return none
+     * @var string
      */
-    public function serialize($state, $outputStream)
+    private $_settingName;
+    
+    /**
+     * Constructor
+     * 
+     * @param string $settingName The setting name.
+     */
+    public function __construct($settingName)
     {
-        $statusLeaseInfo = array(
-            'StatusLease' => array(
-                '@attributes' => array(
-                    'ClientId' => $state->getClientId()
-                )
-            )
-        );
-        
-        if ($state instanceof AcquireCurrentState) {
-            $statusLeaseInfo['StatusLease']['Acquire'] = array(
-                'Incarnation' => $state->getIncarnation(),
-                'Status'      => $state->getStatus(),
-                'Expiration'  => Utilities::isoDate(
-                    date_timestamp_get($state->getExpiration())
-                )
-            );
-        } else if ($state instanceof ReleaseCurrentState) {
-            $statusLeaseInfo['StatusLease']['Release'] = array();
-        }
-        
-        $currentState = Utilities::serialize($statusLeaseInfo, 'CurrentState');
-        fwrite($outputStream, $currentState);
+        $this->_settingName = $settingName;
+    }
+    
+    /**
+     * Returns the name of the configuration setting that has been changed.
+     * 
+     * @return string
+     */
+    public function getConfigurationSettingName()
+    {
+        return $this->_settingName;
     }
 }
 

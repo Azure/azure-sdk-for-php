@@ -23,7 +23,6 @@
  */
 
 namespace PEAR2\WindowsAzure\ServiceRuntime;
-use PEAR2\WindowsAzure\Resources;
 
 /**
  * An implementation for the protocol runtime client.
@@ -81,30 +80,6 @@ class Protocol1RuntimeClient
     public function getRoleEnvironmentData()
     {
         return $this->_goalStateClient->getRoleEnvironmentData();
-    }
-    
-    /**
-     * Adds a goal state changed listener.
-     * 
-     * @param function $listener The listener function.
-     * 
-     * @return none.
-     */
-    public function addGoalStateChangedListener($listener)
-    {
-        $this->_goalStateClient->addGoalStateChangedListener($listener);
-    }
-    
-    /**
-     * Removes a goal state changed listener.
-     * 
-     * @param function $listener The listener function.
-     * 
-     * @return none.
-     */
-    public function removeGoalStateChangedListener($listener)
-    {
-        $this->_goalStateClient->removeGoalStateChangedListener($listener);
     }
     
     /**

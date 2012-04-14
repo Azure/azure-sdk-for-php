@@ -23,10 +23,9 @@
  */
 
 namespace PEAR2\WindowsAzure\ServiceRuntime;
-use PEAR2\WindowsAzure\Utilities;
 
 /**
- * The XML current state serializer.
+ * The role instance status.
  *
  * @category  Microsoft
  * @package   PEAR2\WindowsAzure\ServiceRuntime
@@ -36,41 +35,21 @@ use PEAR2\WindowsAzure\Utilities;
  * @version   Release: @package_version@
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
-class XmlCurrentStateSerializer
+class RoleInstanceStatus
 {
     /**
-     * Serializes the current state.
+     * The role instance is unavailable for requests.
      * 
-     * @param CurrentState  $state        The current state.
-     * @param IOutputStream $outputStream The output stream.
-     * 
-     * @return none
+     * @var int
      */
-    public function serialize($state, $outputStream)
-    {
-        $statusLeaseInfo = array(
-            'StatusLease' => array(
-                '@attributes' => array(
-                    'ClientId' => $state->getClientId()
-                )
-            )
-        );
-        
-        if ($state instanceof AcquireCurrentState) {
-            $statusLeaseInfo['StatusLease']['Acquire'] = array(
-                'Incarnation' => $state->getIncarnation(),
-                'Status'      => $state->getStatus(),
-                'Expiration'  => Utilities::isoDate(
-                    date_timestamp_get($state->getExpiration())
-                )
-            );
-        } else if ($state instanceof ReleaseCurrentState) {
-            $statusLeaseInfo['StatusLease']['Release'] = array();
-        }
-        
-        $currentState = Utilities::serialize($statusLeaseInfo, 'CurrentState');
-        fwrite($outputStream, $currentState);
-    }
+    const BUSY = 0;
+    
+    /**
+     * The role instance is ready to accept requests.
+     * 
+     * @var int
+     */
+    const READY = 1;
 }
 
 ?>

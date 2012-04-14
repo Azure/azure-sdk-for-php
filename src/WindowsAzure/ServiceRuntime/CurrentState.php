@@ -23,7 +23,6 @@
  */
 
 namespace PEAR2\WindowsAzure\ServiceRuntime;
-use PEAR2\WindowsAzure\Resources;
 
 /**
  * The current state representation.
@@ -56,7 +55,7 @@ class CurrentState
     /**
      * Gets the client identifier.
      * 
-     * @return string.
+     * @return string
      */
     public function getClientId()
     {

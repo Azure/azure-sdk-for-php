@@ -23,7 +23,6 @@
  */
 
 namespace PEAR2\WindowsAzure\ServiceRuntime;
-use PEAR2\WindowsAzure\Resources;
 
 /**
  * An implementation for the protocol runtime current state client.
@@ -88,7 +87,9 @@ class Protocol1RuntimeCurrentStateClient implements IRuntimeCurrentStateClient
      */
     public function setCurrentState($state)
     {
-        throw new \Exception(Resources::NOT_IMPLEMENTED_MSG);
+        $outputStream = $this->_outputChannel->getOutputStream($this->_endpoint);
+        $this->_serializer->serialize($state, $outputStream);
+        fclose($outputStream);
     }
 }
 

@@ -116,6 +116,7 @@ class Resources
     const EMPTY_STRING       = '';
     const SEPARATOR          = ',';
     const AZURE_DATE_FORMAT  = 'D, d M Y H:i:s T';
+    const TIMESTAMP_FORMAT   = 'Y-m-d H:i:s';
     const EMULATED           = 'EMULATED';
     const DEV_STORE_NAME     = 'devstoreaccount1';
     const DEV_STORE_KEY      = 'Eby8vdM02xNOcqFlqUwJPLlmEtlCDXJ1OUzFT50uSRZ6IFsuFq2UVErCz4I6tq/K1SZFPTOtr/KBHBeksoGMGw==';

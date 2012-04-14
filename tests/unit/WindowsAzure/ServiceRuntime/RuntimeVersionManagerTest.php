@@ -30,7 +30,7 @@ use PEAR2\WindowsAzure\ServiceRuntime\RuntimeVersionManager;
 use PEAR2\WindowsAzure\Resources;
 
 /**
- * Unit tests for class RuntimeVersionManager
+ * Unit tests for class RuntimeVersionManager.
  *
  * @category  Microsoft
  * @package   PEAR2\Tests\Unit\WindowsAzure\ServiceRuntime

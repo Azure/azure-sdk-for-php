@@ -15,37 +15,44 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   PEAR2\WindowsAzure\ServiceRuntime
+ * @package   PEAR2\Tests\Unit\WindowsAzure\ServiceRuntime
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
-
-namespace PEAR2\WindowsAzure\ServiceRuntime;
+namespace PEAR2\Tests\Unit\WindowsAzure\ServiceRuntime;
+use PEAR2\Tests\Framework\TestResources;
+use PEAR2\WindowsAzure\Core\WindowsAzureUtilities;
+use PEAR2\WindowsAzure\ServiceRuntime\RoleEnvironmentConfigurationSettingChange;
 
 /**
- * The current state serializer.
+ * Unit tests for class RoleEnvironmentConfigurationSettingChange.
  *
  * @category  Microsoft
- * @package   PEAR2\WindowsAzure\ServiceRuntime
+ * @package   PEAR2\Tests\Unit\WindowsAzure\ServiceRuntime
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @version   Release: @package_version@
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
-interface ICurrentStateSerializer
+class RoleEnvironmentConfigurationSettingChangeTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * Serializes the current state.
-     * 
-     * @param CurrentState $state  The current state.
-     * @param string       $stream The output stream.
-     * 
-     * @return none
+     * @covers PEAR2\WindowsAzure\ServiceRuntime\RoleEnvironmentConfigurationSettingChange::__construct
+     * @covers PEAR2\WindowsAzure\ServiceRuntime\RoleEnvironmentConfigurationSettingChange::getConfigurationSettingName
      */
-    public function serialize($state, $stream);
+    public function testGetConfigurationSettingName()
+    {
+        $settingName = 'setting';
+        
+        // Setup
+        $roleEnvironmentConfigurationSettingChange = new RoleEnvironmentConfigurationSettingChange($settingName);
+        
+        // Test
+        $this->assertEquals($settingName, $roleEnvironmentConfigurationSettingChange->getConfigurationSettingName());
+    }
 }
 
 ?>

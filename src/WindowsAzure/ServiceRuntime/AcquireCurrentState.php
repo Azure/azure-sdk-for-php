@@ -23,10 +23,9 @@
  */
 
 namespace PEAR2\WindowsAzure\ServiceRuntime;
-use PEAR2\WindowsAzure\Utilities;
 
 /**
- * The XML current state serializer.
+ * The acquire current state request.
  *
  * @category  Microsoft
  * @package   PEAR2\WindowsAzure\ServiceRuntime
@@ -36,40 +35,67 @@ use PEAR2\WindowsAzure\Utilities;
  * @version   Release: @package_version@
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
-class XmlCurrentStateSerializer
+class AcquireCurrentState extends CurrentState
 {
     /**
-     * Serializes the current state.
-     * 
-     * @param CurrentState  $state        The current state.
-     * @param IOutputStream $outputStream The output stream.
-     * 
-     * @return none
+     * @var string
      */
-    public function serialize($state, $outputStream)
+    private $_incarnation;
+    
+    /**
+     * @var CurrentStatus
+     */
+    private $_status;
+    
+    /**
+     * @var \DateTime
+     */
+    private $_expiration;
+    
+    /**
+     * Constructor
+     * 
+     * @param string    $clientId    The client identifier.
+     * @param string    $incarnation The incarnation.
+     * @param string    $status      The status.
+     * @param \DateTime $expiration  The expiration date.
+     */
+    public function __construct($clientId, $incarnation, $status, $expiration)
     {
-        $statusLeaseInfo = array(
-            'StatusLease' => array(
-                '@attributes' => array(
-                    'ClientId' => $state->getClientId()
-                )
-            )
-        );
-        
-        if ($state instanceof AcquireCurrentState) {
-            $statusLeaseInfo['StatusLease']['Acquire'] = array(
-                'Incarnation' => $state->getIncarnation(),
-                'Status'      => $state->getStatus(),
-                'Expiration'  => Utilities::isoDate(
-                    date_timestamp_get($state->getExpiration())
-                )
-            );
-        } else if ($state instanceof ReleaseCurrentState) {
-            $statusLeaseInfo['StatusLease']['Release'] = array();
-        }
-        
-        $currentState = Utilities::serialize($statusLeaseInfo, 'CurrentState');
-        fwrite($outputStream, $currentState);
+        parent::__construct($clientId);
+        $this->_incarnation = $incarnation;
+        $this->_status      = $status;
+        $this->_expiration  = $expiration;
+    }
+    
+    /**
+     * Gets the incarnation.
+     * 
+     * @return string
+     */
+    public function getIncarnation()
+    {
+        return $this->_incarnation;
+    }
+    
+    /**
+     * Gets the status.
+     * 
+     * @return string
+     */
+    public function getStatus()
+    {
+        return $this->_status;
+    }
+    
+    /**
+     * Gets the expiration.
+     * 
+     * @return \DateTime
+     */
+    public function getExpiration()
+    {
+        return $this->_expiration;
     }
 }
 

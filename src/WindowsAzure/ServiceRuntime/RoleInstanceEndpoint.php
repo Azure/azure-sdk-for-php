@@ -25,7 +25,7 @@
 namespace PEAR2\WindowsAzure\ServiceRuntime;
 
 /**
- * The goal state representation.
+ * The role instance endpoint data.
  *
  * @category  Microsoft
  * @package   PEAR2\WindowsAzure\ServiceRuntime
@@ -35,56 +35,92 @@ namespace PEAR2\WindowsAzure\ServiceRuntime;
  * @version   Release: @package_version@
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
-class ChunkedGoalStateDeserializer implements IGoalStateDeserializer
+class RoleInstanceEndpoint
 {
     /**
-     * @var XmlGoalStateDeserializer
+     * @var RoleInstance
      */
-    private $_deserializer;
+    private $_roleInstance;
+    
+    /**
+     * @var string
+     */
+    private $_protocol;
 
     /**
-     * @var resource
+     * @var string
      */
-    private $_inputStream;
+    private $_address;
+    
+    /**
+     * @var string
+     */
+    private $_port;
     
     /**
      * Constructor
+     * 
+     * @param string $protocol The protocol.
+     * @param string $address  The Address.
+     * @param string $port     The Port.
      */
-    public function __construct()
+    public function __construct($protocol, $address, $port)
     {
-        $this->_deserializer = new XmlGoalStateDeserializer();
+        $this->_protocol = $protocol;
+        $this->_address  = $address;
+        $this->_port     = $port;
     }
     
     /**
-     * Initializes the goal state deserializer with the input stream.
+     * Sets the role instance.
      * 
-     * @param Stream $inputStream The input stream.
+     * @param RoleInstance $roleInstance The role instance.
      * 
      * @return none
      */
-    public function initialize($inputStream)
+    public function setRoleInstance($roleInstance)
     {
-        $this->_inputStream = $inputStream;
+        $this->_roleInstance = $roleInstance;
     }
     
     /**
-     * Deserializes a goal state document.
+     * Returns the RoleInstance object associated with this endpoint.
      * 
-     * @return none
+     * @return RoleInstance
      */
-    public function deserialize()
+    public function getRoleInstance()
     {
-        $lengthString = stream_get_line($this->_inputStream, 100, "\n");
-        if ($lengthString == null) {
-            return null;
-        }
-        
-        $intLengthString = hexdec(trim($lengthString));
-        
-        $chunkData = stream_get_contents($this->_inputStream, $intLengthString);
-        $goalState = $this->_deserializer->deserialize($chunkData);
-
-        return $goalState;
+        return $this->_roleInstance;
+    }
+    
+    /**
+     * Returns the protocol associated with the endpoint.
+     * 
+     * @return string
+     */
+    public function getProtocol()
+    {
+        return $this->_protocol;
+    }
+    
+    /**
+     * Return the address.
+     * 
+     * @return string
+     */
+    public function getAddress()
+    {
+        return $this->_address;
+    }
+    
+    /**
+     * Return the port.
+     * 
+     * @return string
+     */
+    public function getPort()
+    {
+        return $this->_port;
     }
 }
 

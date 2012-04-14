@@ -84,6 +84,32 @@ class UtilitiesTest extends PHPUnit_Framework_TestCase
         
         $this->assertNull($actual);
     }
+
+    /**
+     * @covers PEAR2\WindowsAzure\Utilities::tryGetKeysChainValue
+     */
+    public function testTryGetKeysChainValue()
+    {
+        // Setup
+        $array = array();
+        $array['a1'] = array();
+        $array['a2'] = 'value1';
+        $array['a1']['b1'] = array();
+        $array['a1']['b2'] = 'value2';
+        $array['a1']['b1']['c1'] = 'value3';
+        
+        // Test - Level 1
+        $this->assertEquals('value1', Utilities::tryGetKeysChainValue($array, 'a2'));
+        $this->assertEquals(null, Utilities::tryGetKeysChainValue($array, 'a3'));
+        
+        // Test - Level 2
+        $this->assertEquals('value2', Utilities::tryGetKeysChainValue($array, 'a1', 'b2'));
+        $this->assertEquals(null, Utilities::tryGetKeysChainValue($array, 'a1', 'b3'));
+        
+        // Test - Level 3
+        $this->assertEquals('value3', Utilities::tryGetKeysChainValue($array, 'a1', 'b1', 'c1'));
+        $this->assertEquals(null, Utilities::tryGetKeysChainValue($array, 'a1', 'b1', 'c2'));
+    }
     
     /**
      * @covers PEAR2\WindowsAzure\Utilities::startsWith
@@ -222,6 +248,29 @@ class UtilitiesTest extends PHPUnit_Framework_TestCase
         
         // Test
         $actual = Utilities::serialize($array, \PEAR2\WindowsAzure\Services\Core\Models\ServiceProperties::$xmlRootName);
+        
+        $this->assertEquals($expected, $actual);
+    }
+    
+    /**
+     * @covers PEAR2\WindowsAzure\Utilities::serialize
+     * @covers PEAR2\WindowsAzure\Utilities::_arr2xml
+     */
+    public function testSerializeAttribute()
+    {
+        // Setup
+        $expected = '<?xml version="1.0" encoding="UTF-8"?>' . "\n" .
+            '<Object field1="value1" field2="value2"/>';
+        
+        $object = array(
+            '@attributes' => array(
+                'field1' => 'value1',
+                'field2' => 'value2'
+            )
+        );
+        
+        // Test
+        $actual = Utilities::serialize($object, 'Object');
         
         $this->assertEquals($expected, $actual);
     }

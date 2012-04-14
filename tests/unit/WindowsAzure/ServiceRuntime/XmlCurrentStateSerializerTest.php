@@ -28,11 +28,13 @@ use PEAR2\WindowsAzure\ServiceRuntime\AcquireCurrentState;
 use PEAR2\WindowsAzure\ServiceRuntime\CurrentStatus;
 use PEAR2\WindowsAzure\ServiceRuntime\FileInputChannel;
 use PEAR2\WindowsAzure\ServiceRuntime\FileOutputChannel;
-use PEAR2\WindowsAzure\ServiceRuntime\Protocol1RuntimeCurrentStateClient;
+use PEAR2\WindowsAzure\ServiceRuntime\ReleaseCurrentState;
 use PEAR2\WindowsAzure\ServiceRuntime\XmlCurrentStateSerializer;
 
+require_once 'vfsStream/vfsStream.php';
+
 /**
- * Unit tests for class Protocol1RuntimeCurrentStateClient.
+ * Unit tests for class XmlCurrentStateSerializer.
  *
  * @category  Microsoft
  * @package   PEAR2\Tests\Unit\WindowsAzure\ServiceRuntime
@@ -42,32 +44,12 @@ use PEAR2\WindowsAzure\ServiceRuntime\XmlCurrentStateSerializer;
  * @version   Release: @package_version@
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
-class Protocol1RuntimeCurrentStateClientTest extends \PHPUnit_Framework_TestCase
+class XmlCurrentStateSerializerTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @covers PEAR2\WindowsAzure\ServiceRuntime\Protocol1RuntimeCurrentStateClient::__construct
+     * @covers PEAR2\WindowsAzure\ServiceRuntime\XmlCurrentStateSerializer::serialize
      */
-    public function testConstruct()
-    {
-        $serializer = new XmlCurrentStateSerializer();
-        $outputChannel = new FileOutputChannel();
-        
-        // Setup
-        $protocol1RuntimeCurrentStateClient =
-            new Protocol1RuntimeCurrentStateClient(
-                $serializer,
-                $outputChannel);
-        
-        // Test
-        $this->assertInstanceOf('PEAR2\\WindowsAzure\\ServiceRuntime\\Protocol1RuntimeCurrentStateClient',
-            $protocol1RuntimeCurrentStateClient);
-    }
-    
-    /**
-     * @covers PEAR2\WindowsAzure\ServiceRuntime\Protocol1RuntimeCurrentStateClient::setEndpoint
-     * @covers PEAR2\WindowsAzure\ServiceRuntime\Protocol1RuntimeCurrentStateClient::setCurrentState
-     */
-    public function testSetCurrentState()
+    public function testSerializeAcquire()
     {
         // Setup
         $rootDirectory = 'root';
@@ -83,26 +65,19 @@ class Protocol1RuntimeCurrentStateClientTest extends \PHPUnit_Framework_TestCase
             '</StatusLease>' .
             '</CurrentState>';
         
+        // Setup
         \vfsStreamWrapper::register(); 
         \vfsStreamWrapper::setRoot(new \vfsStreamDirectory($rootDirectory));
         
         $file = \vfsStream::newFile($fileName);
         \vfsStreamWrapper::getRoot()->addChild($file);
         
-        $serializer = new XmlCurrentStateSerializer();
+        // Test
         $fileOutputChannel = new FileOutputChannel();
-
-        $protocol1RuntimeCurrentStateClient =
-            new Protocol1RuntimeCurrentStateClient(
-                $serializer,
-                $fileOutputChannel
-            );
-        
-        $protocol1RuntimeCurrentStateClient->setEndpoint(
+        $outputStream = $fileOutputChannel->getOutputStream(
             \vfsStream::url($rootDirectory . '/' . $fileName)
         );
         
-        // Test
         $recycleState = new AcquireCurrentState(
             'clientId',
             1,
@@ -110,7 +85,51 @@ class Protocol1RuntimeCurrentStateClientTest extends \PHPUnit_Framework_TestCase
             new \DateTime('2000-01-01', new \DateTimeZone('UTC'))
         );
         
-        $protocol1RuntimeCurrentStateClient->setCurrentState($recycleState);
+        $xmlCurrentStateSerializer = new XmlCurrentStateSerializer();
+        $xmlCurrentStateSerializer->serialize($recycleState, $outputStream);
+        fclose($outputStream);
+        
+        $fileInputChannel = new FileInputChannel();
+        $fileInputStream = $fileInputChannel->getInputStream(
+            \vfsStream::url($rootDirectory . '/' . $fileName)
+        );
+        
+        $inputChannelContents = stream_get_contents($fileInputStream);
+        $this->assertEquals($fileContents, $inputChannelContents);
+    }
+    
+    /**
+     * @covers PEAR2\WindowsAzure\ServiceRuntime\XmlCurrentStateSerializer::serialize
+     */
+    public function testSerializeRelease()
+    {
+        // Setup
+        $rootDirectory = 'root';
+        $fileName = 'test';
+        $fileContents = '<?xml version="1.0" encoding="UTF-8"?>' . "\n" .
+            '<CurrentState>' .
+            '<StatusLease ClientId="clientId">' .
+            '<Release/>' .
+            '</StatusLease>' .
+            '</CurrentState>';
+        
+        // Setup
+        \vfsStreamWrapper::register(); 
+        \vfsStreamWrapper::setRoot(new \vfsStreamDirectory($rootDirectory));
+        
+        $file = \vfsStream::newFile($fileName);
+        \vfsStreamWrapper::getRoot()->addChild($file);
+        
+        // Test
+        $fileOutputChannel = new FileOutputChannel();
+        $outputStream = $fileOutputChannel->getOutputStream(
+            \vfsStream::url($rootDirectory . '/' . $fileName)
+        );
+        
+        $recycleState = new ReleaseCurrentState('clientId');
+        $xmlCurrentStateSerializer = new XmlCurrentStateSerializer();
+        $xmlCurrentStateSerializer->serialize($recycleState, $outputStream);
+        fclose($outputStream);
         
         $fileInputChannel = new FileInputChannel();
         $fileInputStream = $fileInputChannel->getInputStream(
