@@ -30,7 +30,7 @@ use DateTime;
 use ReflectionClass;
 use ReflectionMethod;
 use PEAR2\Tests\Framework\FiddlerFilter;
-use PEAR2\Tests\Framework\QueueRestProxyTestBase;
+use PEAR2\Tests\Framework\QueueServiceRestProxyTestBase;
 use PEAR2\Tests\Framework\TestResources;
 use PEAR2\Tests\Functional\WindowsAzure\Services\Queue\QueueServiceFunctionalTestData;
 use PEAR2\WindowsAzure\Core\ServiceException;
@@ -40,7 +40,7 @@ use PEAR2\WindowsAzure\Services\Core\Configuration;
 use PEAR2\WindowsAzure\Services\Queue\QueueService;
 use PEAR2\WindowsAzure\Services\Queue\QueueSettings;
 
-class FunctionalTestBase extends QueueRestProxyTestBase {
+class FunctionalTestBase extends QueueServiceRestProxyTestBase {
     protected $accountName;
 
     public function __construct()

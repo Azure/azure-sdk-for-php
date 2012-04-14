@@ -15,68 +15,54 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   PEAR2\WindowsAzure
+ * @package   PEAR2\WindowsAzure\Services\Table\Models
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
  
-namespace PEAR2\WindowsAzure;
+namespace PEAR2\WindowsAzure\Services\Table\Models;
 
 /**
- * Logger class for debugging purpose.
+ * Batch parameter names.
  *
  * @category  Microsoft
- * @package   PEAR2\WindowsAzure
+ * @package   PEAR2\WindowsAzure\Services\Table\Models
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @version   Release: @package_version@
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
-class Logger
+class BatchOperationParameterName
 {
-    /**
-     * @var string
-     */
-    private static $_filePath;
-
-    /**
-     * Logs $var to file.
-     *
-     * @param mix    $var The data to log.
-     * @param string $tip The help message.
-     * 
-     * @static
-     * 
-     * @return none
-     */
-    public static function log($var, $tip = Resources::EMPTY_STRING)
-    {
-        if (!empty($tip)) {
-            error_log($tip . "\n", 3, self::$_filePath);
-        }
-        
-        if (is_array($var) || is_object($var)) {
-            error_log(print_r($var, true), 3, self::$_filePath);
-        } else {
-            error_log($var . "\n", 3, self::$_filePath);
-        }
-    }
+    const BP_TABLE         = 'table';
+    const BP_ENTITY        = 'entity';
+    const BP_PARTITION_KEY = 'PartitionKey';
+    const BP_ROW_KEY       = 'RowKey';
+    const BP_ETAG          = 'etag';
     
     /**
-     * Sets file path to use.
-     *
-     * @param string $filePath The log file path.
+     * Validates if $paramName is already defined.
      * 
-     * @static
+     * @param string $paramName The batch operation parameter name.
      * 
-     * @return none
+     * @return boolean 
      */
-    public static function setLogFile($filePath)
+    public static function isValid($paramName)
     {
-        $this->_filePath = $filePath;
+        switch ($paramName) {
+        case self::BP_TABLE:
+        case self::BP_ENTITY:
+        case self::BP_PARTITION_KEY:
+        case self::BP_ROW_KEY:
+        case self::BP_ETAG:
+            return true;
+
+        default:
+            return false;
+        }
     }
 }
 

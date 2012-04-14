@@ -506,6 +506,17 @@ class HttpClientTest extends PHPUnit_Framework_TestCase
         // Assert
         $this->assertInstanceOf('\HTTP_Request2_Response', $response);
     }
+    
+    /**
+     * @covers PEAR2\WindowsAzure\Core\HttpClient::throwIfError
+     */
+    public function testThrowIfError()
+    {
+        // Setup
+        $this->setExpectedException(get_class(new ServiceException('200')));
+        
+        HttpClient::throwIfError(200, null, null, array(10));
+    }
 }
 
 ?>

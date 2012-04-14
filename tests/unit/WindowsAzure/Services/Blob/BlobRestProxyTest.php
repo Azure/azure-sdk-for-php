@@ -23,7 +23,7 @@
  */
 
 namespace PEAR2\Tests\Unit\WindowsAzure\Services\Blob;
-use PEAR2\Tests\Framework\BlobRestProxyTestBase;
+use PEAR2\Tests\Framework\BlobServiceRestProxyTestBase;
 use PEAR2\WindowsAzure\Core\WindowsAzureUtilities;
 use PEAR2\WindowsAzure\Core\ServiceException;
 use PEAR2\Tests\Framework\TestResources;
@@ -58,7 +58,7 @@ use PEAR2\WindowsAzure\Services\Blob\Models\BlobBlockType;
  * @version   Release: @package_version@
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
-class BlobRestProxyTest extends BlobRestProxyTestBase
+class BlobRestProxyTest extends BlobServiceRestProxyTestBase
 {
     /**
     * @covers PEAR2\WindowsAzure\Services\Blob\BlobRestProxy::getServiceProperties

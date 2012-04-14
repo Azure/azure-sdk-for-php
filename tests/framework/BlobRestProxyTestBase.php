@@ -22,7 +22,7 @@
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
 namespace PEAR2\Tests\Framework;
-use PEAR2\Tests\Framework\RestProxyTestBase;
+use PEAR2\Tests\Framework\ServiceRestProxyTestBase;
 use PEAR2\WindowsAzure\Services\Core\Configuration;
 use PEAR2\WindowsAzure\Services\Blob\BlobSettings;
 use PEAR2\WindowsAzure\Services\Blob\BlobService;
@@ -40,7 +40,7 @@ use PEAR2\WindowsAzure\Services\Blob\Models\CreateContainerOptions;
  * @version   Release: @package_version@
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
-class BlobRestProxyTestBase extends RestProxyTestBase
+class BlobServiceRestProxyTestBase extends ServiceRestProxyTestBase
 {
     protected $_createdContainers;
     
