@@ -47,12 +47,12 @@ class Filter
      */
     public static function applyAnd($left, $right)
     {
-        $filer = new BinaryFilter();
-        $filer->setOperator('and');
-        $filer->setLeft($left);
-        $filer->setRight($right);
+        $filter = new BinaryFilter();
+        $filter->setOperator('and');
+        $filter->setLeft($left);
+        $filter->setRight($right);
         
-        return $filer;
+        return $filter;
     }
    
     /**
@@ -64,11 +64,11 @@ class Filter
      */
     public static function applyNot($operand)
     {
-        $filer = new UnaryFilter();
-        $filer->setOperator('not');
-        $filer->setOperand($operand);
+        $filter = new UnaryFilter();
+        $filter->setOperator('not');
+        $filter->setOperand($operand);
         
-        return $filer;
+        return $filter;
     }
 
     /**
@@ -81,12 +81,12 @@ class Filter
      */
     public static function applyOr($left, $right)
     {
-        $filer = new BinaryFilter();
-        $filer->setOperator('or');
-        $filer->setLeft($left);
-        $filer->setRight($right);
+        $filter = new BinaryFilter();
+        $filter->setOperator('or');
+        $filter->setLeft($left);
+        $filter->setRight($right);
         
-        return $filer;
+        return $filter;
     }
 
     /**
@@ -99,12 +99,12 @@ class Filter
      */
     public static function applyEq($left, $right)
     {
-        $filer = new BinaryFilter();
-        $filer->setOperator('eq');
-        $filer->setLeft($left);
-        $filer->setRight($right);
+        $filter = new BinaryFilter();
+        $filter->setOperator('eq');
+        $filter->setLeft($left);
+        $filter->setRight($right);
         
-        return $filer;
+        return $filter;
     }
 
     /**
@@ -117,12 +117,12 @@ class Filter
      */
     public static function applyNe($left, $right)
     {
-        $filer = new BinaryFilter();
-        $filer->setOperator('ne');
-        $filer->setLeft($left);
-        $filer->setRight($right);
+        $filter = new BinaryFilter();
+        $filter->setOperator('ne');
+        $filter->setLeft($left);
+        $filter->setRight($right);
         
-        return $filer;
+        return $filter;
     }
 
     /**
@@ -135,12 +135,12 @@ class Filter
      */
     public static function applyGe($left, $right)
     {
-        $filer = new BinaryFilter();
-        $filer->setOperator('ge');
-        $filer->setLeft($left);
-        $filer->setRight($right);
+        $filter = new BinaryFilter();
+        $filter->setOperator('ge');
+        $filter->setLeft($left);
+        $filter->setRight($right);
         
-        return $filer;
+        return $filter;
     }
 
     /**
@@ -153,12 +153,12 @@ class Filter
      */
     public static function applyGt($left, $right)
     {
-        $filer = new BinaryFilter();
-        $filer->setOperator('gt');
-        $filer->setLeft($left);
-        $filer->setRight($right);
+        $filter = new BinaryFilter();
+        $filter->setOperator('gt');
+        $filter->setLeft($left);
+        $filter->setRight($right);
         
-        return $filer;
+        return $filter;
     }
 
     /**
@@ -171,12 +171,12 @@ class Filter
      */
     public static function applyLt($left, $right)
     {
-        $filer = new BinaryFilter();
-        $filer->setOperator('lt');
-        $filer->setLeft($left);
-        $filer->setRight($right);
+        $filter = new BinaryFilter();
+        $filter->setOperator('lt');
+        $filter->setLeft($left);
+        $filter->setRight($right);
         
-        return $filer;
+        return $filter;
     }
 
     /**
@@ -189,12 +189,12 @@ class Filter
      */
     public static function applyLe($left, $right)
     {
-        $filer = new BinaryFilter();
-        $filer->setOperator('le');
-        $filer->setLeft($left);
-        $filer->setRight($right);
+        $filter = new BinaryFilter();
+        $filter->setOperator('le');
+        $filter->setLeft($left);
+        $filter->setRight($right);
         
-        return $filer;
+        return $filter;
     }
 
     /**
@@ -206,10 +206,10 @@ class Filter
      */
     public static function applyConstant($value)
     {
-        $filer = new ConstantFilter();
-        $filer->setValue($value);
+        $filter = new ConstantFilter();
+        $filter->setValue($value);
         
-        return $filer;
+        return $filter;
     }
 
     /**
@@ -221,10 +221,10 @@ class Filter
      */
     public static function applyLiteral($value)
     {
-        $filer = new LiteralFilter();
-        $filer->setLiteral($value);
+        $filter = new LiteralFilter();
+        $filter->setLiteral($value);
         
-        return $filer;
+        return $filter;
     }
 
     /**
@@ -236,10 +236,10 @@ class Filter
      */
     public static function applyRawString($value)
     {
-        $filer = new RawStringFilter();
-        $filer->setRawString($value);
+        $filter = new RawStringFilter();
+        $filter->setRawString($value);
         
-        return $filer;
+        return $filter;
     }
 }
 
