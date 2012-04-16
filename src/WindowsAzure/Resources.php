@@ -46,7 +46,7 @@ class Resources
     const INVALID_URL_MSG      = 'Provided URL is invalid.';
     const INVALID_HT_MSG       = 'The header type provided is invalid.';
     const INVALID_EDM_MSG      = 'The provided EDM type is invalid.';
-    const INVALID_PROP_MSG     = 'The provided propertie(s) are/is invalid.';
+    const INVALID_PROP_MSG     = 'One of the provided properties is not an instance of class Property';
     const INVALID_ENTITY_MSG   = 'The provided entity object is invalid.';
     const INVALID_VERSION_MSG  = 'Server does not support any known protocol versions.';
     const INVALID_BO_TYPE_MSG  = 'Batch operation name is not supported or invalid.';
