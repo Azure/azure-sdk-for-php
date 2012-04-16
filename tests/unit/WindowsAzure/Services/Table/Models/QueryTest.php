@@ -98,23 +98,6 @@ class QueryTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers PEAR2\WindowsAzure\Services\Table\Models\Query::setFrom
-     * @covers PEAR2\WindowsAzure\Services\Table\Models\Query::getFrom
-     */
-    public function testSetFrom()
-    {
-        // Setup
-        $query = new Query();
-        $expected = 'TableName';
-        
-        // Test
-        $query->setFrom($expected);
-        
-        // Assert
-        $this->assertEquals($expected, $query->getFrom());
-    }
-    
-    /**
      * @covers PEAR2\WindowsAzure\Services\Table\Models\Query::setFilter
      * @covers PEAR2\WindowsAzure\Services\Table\Models\Query::getFilter
      */

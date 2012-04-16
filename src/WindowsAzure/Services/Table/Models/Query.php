@@ -43,11 +43,6 @@ class Query
     private $_selectFields;
     
     /**
-     * @var string
-     */
-    private $_from;
-    
-    /**
      * @var Filters\Filter
      */
     private $_filter;
@@ -61,28 +56,6 @@ class Query
      * @var integer
      */
     private $_top;
-    
-    /**
-     * Gets from.
-     *
-     * @return string.
-     */
-    public function getFrom()
-    {
-        return $this->_from;
-    }
-
-    /**
-     * Sets from.
-     *
-     * @param string $from value.
-     * 
-     * @return none.
-     */
-    public function setFrom($from)
-    {
-        $this->_from = $from;
-    }
     
     /**
      * Gets filter.
