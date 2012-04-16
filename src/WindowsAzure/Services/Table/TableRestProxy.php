@@ -261,8 +261,8 @@ class TableRestProxy extends ServiceRestProxy implements ITable
         $options
     ) {
         Validate::isValidString($table);
-        Validate::isValidString($partitionKey);
-        Validate::isValidString($rowKey);
+        Validate::isTrue(!is_null($partitionKey), Resources::NULL_TABLE_KEY_MSG);
+        Validate::isTrue(!is_null($rowKey), Resources::NULL_TABLE_KEY_MSG);
         
         $method      = \HTTP_Request2::METHOD_DELETE;
         $headers     = array();
@@ -1009,8 +1009,8 @@ class TableRestProxy extends ServiceRestProxy implements ITable
     public function getEntity($table, $partitionKey, $rowKey, $options = null)
     {
         Validate::isValidString($table);
-        Validate::isValidString($partitionKey);
-        Validate::isValidString($rowKey);
+        Validate::isTrue(!is_null($partitionKey), Resources::NULL_TABLE_KEY_MSG);
+        Validate::isTrue(!is_null($rowKey), Resources::NULL_TABLE_KEY_MSG);
         
         $method      = \HTTP_Request2::METHOD_GET;
         $headers     = array();

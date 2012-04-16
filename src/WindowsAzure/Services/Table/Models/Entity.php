@@ -256,10 +256,7 @@ class Entity
             $validProperties = false;
         }
 
-
-
         if (   !$validProperties
-            || is_null($this->getTimestamp())
             || is_null($this->getPartitionKey())
             || is_null($this->getRowKey())
         ) {
@@ -267,7 +264,6 @@ class Entity
         } else {
             return true;
         }
-            
     }
 }
 
