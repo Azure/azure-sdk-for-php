@@ -76,6 +76,10 @@ class EdmType
      */
     public static function processValue($type, $value)
     {
+        // Having null value means that the user wants to remove the property name
+        // associated with this value. Leave the value as null so this hold.
+        if (is_null($value)) return null;
+        
         switch ($type) {
         case self::BINARY:
         case self::GUID:
