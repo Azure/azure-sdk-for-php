@@ -397,7 +397,10 @@ class TableRestProxy extends ServiceRestProxy implements ITable
      */
     private function _getEntityPath($table, $partitionKey, $rowKey)
     {
-        return "$table(PartitionKey='$partitionKey',RowKey='$rowKey')";
+        $encodedPK = $this->_encodeODataUriValue($partitionKey);
+        $encodedRK = $this->_encodeODataUriValue($rowKey);
+        
+        return "$table(PartitionKey='$encodedPK',RowKey='$encodedRK')";
     }
     
     /**
@@ -585,7 +588,13 @@ class TableRestProxy extends ServiceRestProxy implements ITable
      */
     private function _encodeODataUriValue($value)
     {
-        //TODO: Unclear if OData value in URI's need to be encoded or not
+        // Replace each single quote (') with double single quotes ('') not doudle
+        // quotes (")
+        $value = str_replace('\'', '\'\'', $value);
+        
+        // Encode the special URL characters
+        $value = urlencode($value);
+        
         return $value;
     }
     
@@ -794,7 +803,6 @@ class TableRestProxy extends ServiceRestProxy implements ITable
         }
         
         $queryParams[Resources::QP_TIMEOUT] = strval($options->getTimeout());
-        $headers[Resources::CONTENT_TYPE]   = Resources::XML_ATOM_CONTENT_TYPE;
         
         $this->send($method, $headers, $queryParams, $path, $statusCode);
     }
