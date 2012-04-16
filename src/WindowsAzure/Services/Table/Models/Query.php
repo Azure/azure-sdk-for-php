@@ -133,7 +133,7 @@ class Query
      *
      * @return array.
      */
-    public function getOrderByFields()
+    private function _getOrderByFields()
     {
         return $this->_orderByFields;
     }
@@ -145,7 +145,7 @@ class Query
      * 
      * @return none.
      */
-    public function addOrderByField($field)
+    private function _addOrderByField($field)
     {
         $this->_orderByFields[] = $field;
     }
@@ -157,7 +157,7 @@ class Query
      * 
      * @return none.
      */
-    public function setOrderByFields($orderByFields)
+    private function _setOrderByFields($orderByFields)
     {
         $this->_orderByFields = $orderByFields;
     }

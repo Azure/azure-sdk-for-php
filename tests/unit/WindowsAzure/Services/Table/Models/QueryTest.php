@@ -40,6 +40,8 @@ use PEAR2\WindowsAzure\Services\Table\Models\EdmType;
  */
 class QueryTest extends \PHPUnit_Framework_TestCase
 {
+    private $queryClassName = 'PEAR2\WindowsAzure\Services\Table\Models\Query';
+    
     /**
      * @covers PEAR2\WindowsAzure\Services\Table\Models\Query::setSelectFields
      * @covers PEAR2\WindowsAzure\Services\Table\Models\Query::getSelectFields
@@ -58,20 +60,24 @@ class QueryTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers PEAR2\WindowsAzure\Services\Table\Models\Query::setOrderByFields
-     * @covers PEAR2\WindowsAzure\Services\Table\Models\Query::getOrderByFields
+     * @covers PEAR2\WindowsAzure\Services\Table\Models\Query::_setOrderByFields
+     * @covers PEAR2\WindowsAzure\Services\Table\Models\Query::_getOrderByFields
      */
     public function testSetOrderByFields()
     {
         // Setup
         $query = new Query();
         $expected = array('customerId', 'customerName');
+        $_setOrderByFields = new \ReflectionMethod($this->queryClassName, '_setOrderByFields');
+        $_getOrderByFields = new \ReflectionMethod($this->queryClassName, '_getOrderByFields');
+        $_setOrderByFields->setAccessible(true);
+        $_getOrderByFields->setAccessible(true);
         
         // Test
-        $query->setOrderByFields($expected);
+        $_setOrderByFields->invoke($query, $expected);
         
         // Assert
-        $this->assertEquals($expected, $query->getOrderByFields());
+        $this->assertEquals($expected, $_getOrderByFields->invoke($query));
     }
     
     /**
@@ -126,8 +132,8 @@ class QueryTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers PEAR2\WindowsAzure\Services\Table\Models\Query::addOrderByField
-     * @covers PEAR2\WindowsAzure\Services\Table\Models\Query::getOrderByFields
+     * @covers PEAR2\WindowsAzure\Services\Table\Models\Query::_addOrderByField
+     * @covers PEAR2\WindowsAzure\Services\Table\Models\Query::_getOrderByFields
      */
     public function testAddOrderByField()
     {
@@ -135,12 +141,16 @@ class QueryTest extends \PHPUnit_Framework_TestCase
         $query = new Query();
         $field = 'customerId';
         $expected = array($field);
+        $_addOrderByField = new \ReflectionMethod($this->queryClassName, '_addOrderByField');
+        $_getOrderByFields = new \ReflectionMethod($this->queryClassName, '_getOrderByFields');
+        $_addOrderByField->setAccessible(true);
+        $_getOrderByFields->setAccessible(true);
         
-        // Test
-        $query->addOrderByField($field);
+        // Test        
+        $_addOrderByField->invoke($query, $field);
         
         // Assert
-        $this->assertEquals($expected, $query->getOrderByFields());
+        $this->assertEquals($expected, $_getOrderByFields->invoke($query));
     }
     
     /**
