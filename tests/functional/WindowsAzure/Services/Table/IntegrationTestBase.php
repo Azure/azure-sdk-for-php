@@ -27,10 +27,10 @@
 namespace PEAR2\Tests\Functional\WindowsAzure\Services\Table;
 
 use PEAR2\Tests\Framework\FiddlerFilter;
-use PEAR2\Tests\Framework\TableRestProxyTestBase;
+use PEAR2\Tests\Framework\TableServiceRestProxyTestBase;
 use PEAR2\WindowsAzure\Services\Table\TableService;
 
-class IntegrationTestBase extends TableRestProxyTestBase {
+class IntegrationTestBase extends TableServiceRestProxyTestBase {
     public function __construct()
     {
         parent::__construct();

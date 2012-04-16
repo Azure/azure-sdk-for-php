@@ -61,6 +61,8 @@ class QueueServiceFunctionalTest extends FunctionalTestBase {
             if (WindowsAzureUtilities::isEmulated()) {
                 $this->assertEquals(400, $e->getCode(), 'getCode');
                 $shouldReturn = true;
+            } else {
+                throw $e;
             }
         }
         if($shouldReturn) {
@@ -86,6 +88,8 @@ class QueueServiceFunctionalTest extends FunctionalTestBase {
             if (WindowsAzureUtilities::isEmulated()) {
                 $this->assertEquals(400, $e->getCode(), 'getCode');
                 $shouldReturn = true;
+            } else {
+                throw $e;
             }
         }
         if($shouldReturn) {
@@ -108,7 +112,7 @@ class QueueServiceFunctionalTest extends FunctionalTestBase {
         self::println( 'Trying $options: ' . self::tmptostring($options));
         $effOptions = ($options == null ? new QueueServiceOptions() : $options);
         try {
-            $ret = ($options == null ? $this->wrapper->getServiceProperties() : $this->wrapper->getServiceProperties($options));
+            $ret = ($options == null ? $this->wrapper->getServiceProperties() : $this->wrapper->getServiceProperties($effOptions));
 
             // TODO: Revert when fixed
             // https://github.com/WindowsAzure/azure-sdk-for-php/issues/101
@@ -156,7 +160,7 @@ class QueueServiceFunctionalTest extends FunctionalTestBase {
 
         $r = $l->getRetentionPolicy();
         $this->assertNotNull($r, 'getValue()->getLogging()->getRetentionPolicy should be non-null');
-        $this->assertEquals($serviceProperties->getLogging() ->getRetentionPolicy()->getDays(), $r->getDays(), 'getValue()->getLogging()->getRetentionPolicy()->getDays');
+        $this->assertEquals($serviceProperties->getLogging()->getRetentionPolicy()->getDays(), $r->getDays(), 'getValue()->getLogging()->getRetentionPolicy()->getDays');
 
         $m = $sp->getMetrics();
         $this->assertNotNull($m, 'getValue()->getMetrics() should be non-null');
@@ -166,7 +170,7 @@ class QueueServiceFunctionalTest extends FunctionalTestBase {
 
         $r = $m->getRetentionPolicy();
         $this->assertNotNull($r, 'getValue()->getMetrics()->getRetentionPolicy should be non-null');
-        $this->assertEquals($serviceProperties->getMetrics() ->getRetentionPolicy()->getDays(), $r->getDays(), 'getValue()->getMetrics()->getRetentionPolicy()->getDays');
+        $this->assertEquals($serviceProperties->getMetrics()->getRetentionPolicy()->getDays(), $r->getDays(), 'getValue()->getMetrics()->getRetentionPolicy()->getDays');
     }
 
     // ----------------------------
@@ -199,6 +203,7 @@ class QueueServiceFunctionalTest extends FunctionalTestBase {
                 $this->setServicePropertiesWorker($serviceProperties, $options);
             }
         }
+        $this->wrapper->setServiceProperties($interestingServiceProperties[0]);
     }
 
     private function setServicePropertiesWorker($serviceProperties, $options) {
@@ -211,8 +216,6 @@ class QueueServiceFunctionalTest extends FunctionalTestBase {
             } else {
                 $this->wrapper->setServiceProperties($serviceProperties, $options);
             }
-
-            $this->assertFalse(WindowsAzureUtilities::isEmulated(), 'Should succeed when not running in emulator');
 
             if ($options == null) {
                 $options = new QueueServiceOptions();
