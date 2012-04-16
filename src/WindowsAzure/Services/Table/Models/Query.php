@@ -48,11 +48,6 @@ class Query
     private $_filter;
     
     /**
-     * @var array
-     */
-    private $_orderByFields;
-    
-    /**
      * @var integer
      */
     private $_top;
@@ -99,40 +94,6 @@ class Query
     public function setTop($top)
     {
         $this->_top = $top;
-    }
-    
-    /**
-     * Gets orderByFields.
-     *
-     * @return array.
-     */
-    private function _getOrderByFields()
-    {
-        return $this->_orderByFields;
-    }
-    
-    /**
-     * Adds a field to orderBy fields.
-     * 
-     * @param string $field The value of the field.
-     * 
-     * @return none.
-     */
-    private function _addOrderByField($field)
-    {
-        $this->_orderByFields[] = $field;
-    }
-
-    /**
-     * Sets orderByFields.
-     *
-     * @param array $orderByFields value.
-     * 
-     * @return none.
-     */
-    private function _setOrderByFields($orderByFields)
-    {
-        $this->_orderByFields = $orderByFields;
     }
     
     /**

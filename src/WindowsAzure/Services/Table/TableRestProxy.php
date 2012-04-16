@@ -553,16 +553,6 @@ class TableRestProxy extends ServiceRestProxy implements ITable
                 
                 $queryParam[Resources::QP_FILTER] = $final;
             }
-            
-            /*
-            // Enable this part after supporting orderby query option.
-            $orderByFields = $query->getOrderByFields();
-            if (!empty($orderByFields)) {
-                $final = $this->_encodeODataUriValues($orderByFields);
-                
-                $queryParam[Resources::QP_ORDERBY] = implode(',', $final);
-            }
-            */
         }
         
         return $queryParam;

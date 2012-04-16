@@ -148,7 +148,6 @@ class Resources
     const QP_SELECT          = '$select';
     const QP_TOP             = '$top';
     const QP_FILTER          = '$filter';
-    const QP_ORDERBY         = '$orderby';
     const QP_NEXT_TABLE_NAME = 'NextTableName';
     const QP_NEXT_PK         = 'NextPartitionKey';
     const QP_NEXT_RK         = 'NextRowKey';
