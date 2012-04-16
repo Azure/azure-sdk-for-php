@@ -25,6 +25,7 @@
 namespace PEAR2\Tests\Unit\WindowsAzure\Services\Table\Models;
 use PEAR2\WindowsAzure\Services\Table\Models\Query;
 use PEAR2\WindowsAzure\Services\Table\Models\Filters\Filter;
+use PEAR2\WindowsAzure\Services\Table\Models\EdmType;
 
 /**
  * Unit tests for class Query
@@ -115,7 +116,7 @@ class QueryTest extends \PHPUnit_Framework_TestCase
     {
         // Setup
         $query = new Query();
-        $expected = Filter::applyConstant('constValue');
+        $expected = Filter::applyConstant('constValue', EdmType::STRING);
         
         // Test
         $query->setFilter($expected);

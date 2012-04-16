@@ -24,6 +24,7 @@
 
 namespace PEAR2\Tests\Unit\WindowsAzure\Services\Table\Models\Filters;
 use PEAR2\WindowsAzure\Services\Table\Models\Filters\Filter;
+use PEAR2\WindowsAzure\Services\Table\Models\EdmType;
 
 /**
  * Unit tests for class Filter
@@ -64,7 +65,7 @@ class FilterTest extends \PHPUnit_Framework_TestCase
     public function testApplyNot()
     {
         // Setup
-        $operand = Filter::applyConstant('test');
+        $operand = Filter::applyConstant('test', EdmType::STRING);
         
         // Test
         $actual = Filter::applyNot($operand);

@@ -24,6 +24,7 @@
 
 namespace PEAR2\Tests\Unit\WindowsAzure\Services\Table\Models\Filters;
 use PEAR2\WindowsAzure\Services\Table\Models\Filters\ConstantFilter;
+use PEAR2\WindowsAzure\Services\Table\Models\EdmType;
 
 /**
  * Unit tests for class ConstantFilter
@@ -53,6 +54,23 @@ class ConstantFilterTest extends \PHPUnit_Framework_TestCase
         
         // Test
         $this->assertEquals($expected, $filter->getValue());
+    }
+    
+    /**
+     * @covers PEAR2\WindowsAzure\Services\Table\Models\Filters\ConstantFilter::setEdmType
+     * @covers PEAR2\WindowsAzure\Services\Table\Models\Filters\ConstantFilter::getEdmType
+     */
+    public function testSetEdmType()
+    {
+        // Setup
+        $filter = new ConstantFilter();
+        $expected = EdmType::BINARY;
+        
+        // Test
+        $filter->setEdmType($expected);
+        
+        // Assert
+        $this->assertEquals($expected, $filter->getEdmType());
     }
 }
 

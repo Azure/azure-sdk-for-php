@@ -23,6 +23,7 @@
  */
  
 namespace PEAR2\WindowsAzure\Services\Table\Models\Filters;
+use PEAR2\WindowsAzure\Services\Table\Models\EdmType;
 
 /**
  * Constant filter
@@ -41,6 +42,11 @@ class ConstantFilter extends Filter
      * @var mix
      */
     private $_value;
+    
+    /**
+     * @var string
+     */
+    private $_edmType;
     
     /**
      * Gets value
@@ -62,6 +68,28 @@ class ConstantFilter extends Filter
     public function setValue($value)
     {
         $this->_value = $value;
+    }
+    
+    /**
+     * Gets the type of the constant.
+     * 
+     * @return string
+     */
+    public function getEdmType()
+    {
+        return $this->_edmType;
+    }
+    
+    /**
+     * Sets the value of the constant.
+     * 
+     * @param string $edmType The constant type.
+     * 
+     * @return none
+     */
+    public function setEdmType($edmType)
+    {
+        $this->_edmType = EdmType::processType($edmType);
     }
 }
 

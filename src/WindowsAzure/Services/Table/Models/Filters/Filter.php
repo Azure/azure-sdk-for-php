@@ -198,16 +198,18 @@ class Filter
     }
 
     /**
-     * Apply constant filter on value
+     * Apply constant filter on value.
      * 
-     * @param mix $value The filter value
+     * @param mix    $value   The filter value
+     * @param string $edmType The value EDM type.
      * 
      * @return \PEAR2\WindowsAzure\Services\Table\Models\Filters\ConstantFilter 
      */
-    public static function applyConstant($value)
+    public static function applyConstant($value, $edmType)
     {
         $filter = new ConstantFilter();
         $filter->setValue($value);
+        $filter->setEdmType($edmType);
         
         return $filter;
     }

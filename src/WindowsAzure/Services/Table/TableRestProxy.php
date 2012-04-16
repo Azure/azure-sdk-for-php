@@ -30,6 +30,7 @@ use PEAR2\WindowsAzure\Core\HttpCallContext;
 use PEAR2\WindowsAzure\Services\Core\ServiceRestProxy;
 use PEAR2\WindowsAzure\Services\Table\Models\TableServiceOptions;
 use PEAR2\WindowsAzure\Services\Core\Models\GetServicePropertiesResult;
+use PEAR2\WindowsAzure\Services\Table\Models\EdmType;
 use PEAR2\WindowsAzure\Services\Table\Models\Filters;
 use PEAR2\WindowsAzure\Services\Table\Models\Filters\Filter;
 use PEAR2\WindowsAzure\Services\Table\Models\QueryTablesOptions;
@@ -448,6 +449,8 @@ class TableRestProxy extends ServiceRestProxy implements ITable
      * @param string &$e     The filter expression
      * 
      * @return string
+     * 
+     * @throws \InvalidArgumentException
      */
     private function _buildFilterExpressionRec($filter, &$e)
     {
@@ -458,7 +461,49 @@ class TableRestProxy extends ServiceRestProxy implements ITable
         if ($filter instanceof Filters\LiteralFilter) {
             $e .= $filter->getLiteral();
         } else if ($filter instanceof Filters\ConstantFilter) {
-            $e .= '\'' . $filter->getValue() . '\'';
+            $value = $filter->getValue();
+            // If the value is null we just append null regardless of the edmType.
+            if (is_null($value)) {
+                $e .= 'null';
+            } else {
+                switch ($filter->getEdmType()) {
+                case EdmType::DATETIME:
+                    $edmDate = Utilities::convertToEdmDateTime($value);
+                    $e .= 'datetime\'' . $edmDate . '\'';
+                    break;
+
+                case EdmType::BINARY:
+                    $e .= 'X\'' . implode('', unpack("H*", $value)) . '\'';
+                    break;
+
+                case EdmType::BOOLEAN:
+                    $e .= ($value ? 'true' : 'false');
+                    break;
+
+                case EdmType::DOUBLE:
+                    $e .= $value;
+                    break;
+
+                case EdmType::GUID:
+                    $e .= 'guid\'' . $value . '\'';
+                    break;
+
+                case EdmType::INT32:
+                    $e .= $value;
+                    break;
+
+                case EdmType::INT64:
+                    $e .= $value . 'L';
+                    break;
+
+                case EdmType::STRING:
+                    $e .= '\'' . str_replace('\'', '\'\'', $value) . '\'';
+                    break;
+
+                default:
+                    throw new \InvalidArgumentException();
+                }
+            }
         } else if ($filter instanceof Filters\UnaryFilter) {
             $e .= $filter->getOperator();
             $e .= '(';
@@ -665,11 +710,11 @@ class TableRestProxy extends ServiceRestProxy implements ITable
             $prefixFilter = Filter::applyAnd(
                 Filter::applyGe(
                     Filter::applyLiteral('TableName'),
-                    Filter::applyConstant($prefix)
+                    Filter::applyConstant($prefix, EdmType::STRING)
                 ),
                 Filter::applyLe(
                     Filter::applyLiteral('TableName'),
-                    Filter::applyConstant($prefix . '{')
+                    Filter::applyConstant($prefix . '{', EdmType::STRING)
                 )
             );
             
