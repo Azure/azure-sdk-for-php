@@ -88,7 +88,7 @@ class RuntimeVersionManager
             }
         }
         
-        throw new RuntimeException(Resources::INVALID_VERSION_MSG);
+        throw new \RuntimeException(Resources::INVALID_VERSION_MSG);
     }
 }
 

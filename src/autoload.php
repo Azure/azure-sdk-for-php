@@ -47,7 +47,6 @@ spl_autoload_register(
             'windowsazure\\serviceruntime\\roleinstance' => '/WindowsAzure/ServiceRuntime/RoleInstance.php',
             'windowsazure\\serviceruntime\\roleinstanceendpoint' => '/WindowsAzure/ServiceRuntime/RoleInstanceEndpoint.php',
             'windowsazure\\serviceruntime\\roleinstancestatus' => '/WindowsAzure/ServiceRuntime/RoleInstanceStatus.php',
-            'windowsazure\\serviceruntime\\runtimeexception' => '/WindowsAzure/ServiceRuntime/RuntimeException.php',
             'windowsazure\\serviceruntime\\runtimekernel' => '/WindowsAzure/ServiceRuntime/RuntimeKernel.php',
             'windowsazure\\serviceruntime\\runtimeversionmanager' => '/WindowsAzure/ServiceRuntime/RuntimeVersionManager.php',
             'windowsazure\\serviceruntime\\runtimeversionprotocolclient' => '/WindowsAzure/ServiceRuntime/RuntimeVersionProtocolClient.php',

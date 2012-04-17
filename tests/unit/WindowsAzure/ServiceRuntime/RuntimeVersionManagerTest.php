@@ -25,7 +25,6 @@ namespace Tests\Unit\WindowsAzure\ServiceRuntime;
 use Tests\Framework\TestResources;
 use WindowsAzure\Core\WindowsAzureUtilities;
 use WindowsAzure\ServiceRuntime\FileInputChannel;
-use WindowsAzure\ServiceRuntime\RuntimeException;
 use WindowsAzure\ServiceRuntime\RuntimeVersionProtocolClient;
 use WindowsAzure\ServiceRuntime\RuntimeVersionManager;
 use WindowsAzure\Resources;
@@ -91,7 +90,7 @@ class RuntimeVersionManagerTest extends \PHPUnit_Framework_TestCase
         );
 
         // Test
-        $this->setExpectedException(get_class(new RuntimeException()));
+        $this->setExpectedException(get_class(new \RuntimeException()));
         $runtimeVersionManager->getRuntimeClient(
             \vfsStream::url($rootDirectory . '/' . $fileName)
         );
