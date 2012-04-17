@@ -48,10 +48,10 @@ class HeadersFilterTest extends \PHPUnit_Framework_TestCase
     {
         // Setup
         $channel = new HttpClient();
-        $filer = new HeadersFilter(array());
+        $filter = new HeadersFilter(array());
         
         // Test
-        $request = $filer->handleRequest($channel);
+        $request = $filter->handleRequest($channel);
         
         // Assert
         $this->assertCount(0, $request->getHeaders());
@@ -68,10 +68,10 @@ class HeadersFilterTest extends \PHPUnit_Framework_TestCase
         $header1 = 'header1';
         $value1 = 'value1';
         $expected = array($header1 => $value1);
-        $filer = new HeadersFilter($expected);
+        $filter = new HeadersFilter($expected);
         
         // Test
-        $request = $filer->handleRequest($channel);
+        $request = $filter->handleRequest($channel);
         
         // Assert
         $headers = $request->getHeaders();
@@ -91,10 +91,10 @@ class HeadersFilterTest extends \PHPUnit_Framework_TestCase
         $header2 = 'header2';
         $value2 = 'value2';
         $expected = array($header1 => $value1, $header2 => $value2);
-        $filer = new HeadersFilter($expected);
+        $filter = new HeadersFilter($expected);
         
         // Test
-        $request = $filer->handleRequest($channel);
+        $request = $filter->handleRequest($channel);
         
         // Assert
         $headers = $request->getHeaders();
@@ -110,10 +110,10 @@ class HeadersFilterTest extends \PHPUnit_Framework_TestCase
         // Setup
         $channel = new HttpClient();
         $response = null;
-        $filer = new HeadersFilter(array());
+        $filter = new HeadersFilter(array());
         
         // Test
-        $response = $filer->handleResponse($channel, $response);
+        $response = $filter->handleResponse($channel, $response);
         
         // Assert
         $this->assertNull($response);

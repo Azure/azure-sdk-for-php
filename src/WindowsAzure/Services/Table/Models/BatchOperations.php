@@ -212,8 +212,8 @@ class BatchOperations
     public function addDeleteEntity($table, $partitionKey, $rowKey, $etag)
     {
         Validate::isValidString($table);
-        Validate::isValidString($partitionKey);
-        Validate::isValidString($rowKey);
+        Validate::isTrue(!is_null($partitionKey), Resources::NULL_TABLE_KEY_MSG);
+        Validate::isTrue(!is_null($rowKey), Resources::NULL_TABLE_KEY_MSG);
         Validate::isValidString($etag);
         
         $operation = new BatchOperation();

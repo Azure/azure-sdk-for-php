@@ -15,62 +15,69 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   PEAR2\Tests\Unit\WindowsAzure\Services\Table\Models\Filters
+ * @package   PEAR2\Tests\Unit\WindowsAzure
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
 
-namespace PEAR2\Tests\Unit\WindowsAzure\Services\Table\Models\Filters;
-use PEAR2\WindowsAzure\Services\Table\Models\Filters\ConstantFilter;
-use PEAR2\WindowsAzure\Services\Table\Models\EdmType;
+namespace PEAR2\Tests\Unit\WindowsAzure;
+use PEAR2\WindowsAzure\Logger;
+use PEAR2\WindowsAzure\Resources;
+use PEAR2\Tests\Framework\VirtualFileSystem;
 
 /**
- * Unit tests for class ConstantFilter
+ * Unit tests for class Logger
  *
  * @category  Microsoft
- * @package   PEAR2\Tests\Unit\WindowsAzure\Services\Table\Models\Filters
+ * @package   PEAR2\Tests\Unit\WindowsAzure
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @version   Release: @package_version@
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
-class ConstantFilterTest extends \PHPUnit_Framework_TestCase
+class LoggerTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @covers PEAR2\WindowsAzure\Services\Table\Models\Filters\ConstantFilter::setValue
-     * @covers PEAR2\WindowsAzure\Services\Table\Models\Filters\ConstantFilter::getValue
+     * @covers PEAR2\WindowsAzure\Logger::log
+     * @covers PEAR2\WindowsAzure\Logger::setLogFile
      */
-    public function testSetValue()
+    public function testLogWithArray()
     {
         // Setup
-        $filter = new ConstantFilter();
-        $expected = 'x';
+        $virtualPath = VirtualFileSystem::newFile(Resources::EMPTY_STRING);
+        $tip = 'This is array';
+        $expected = "$tip\nArray\n(\n)\n";
+        Logger::setLogFile($virtualPath);
         
         // Test
-        $filter->setValue($expected);
+        Logger::log(array(), $tip);
         
-        // Test
-        $this->assertEquals($expected, $filter->getValue());
+        // Assert
+        $actual = file_get_contents($virtualPath);
+        $this->assertEquals($expected, $actual);
     }
     
     /**
-     * @covers PEAR2\WindowsAzure\Services\Table\Models\Filters\ConstantFilter::setEdmType
-     * @covers PEAR2\WindowsAzure\Services\Table\Models\Filters\ConstantFilter::getEdmType
+     * @covers PEAR2\WindowsAzure\Logger::log
+     * @covers PEAR2\WindowsAzure\Logger::setLogFile
      */
-    public function testSetEdmType()
+    public function testLogWithString()
     {
         // Setup
-        $filter = new ConstantFilter();
-        $expected = EdmType::BINARY;
+        $virtualPath = VirtualFileSystem::newFile(Resources::EMPTY_STRING);
+        $tip = 'This is string';
+        $expected = "$tip\nI'm a string\n";
+        Logger::setLogFile($virtualPath);
         
         // Test
-        $filter->setEdmType($expected);
+        Logger::log('I\'m a string', $tip);
         
         // Assert
-        $this->assertEquals($expected, $filter->getEdmType());
+        $actual = file_get_contents($virtualPath);
+        $this->assertEquals($expected, $actual);
     }
 }
 

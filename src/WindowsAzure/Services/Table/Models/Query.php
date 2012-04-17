@@ -43,46 +43,14 @@ class Query
     private $_selectFields;
     
     /**
-     * @var string
-     */
-    private $_from;
-    
-    /**
      * @var Filters\Filter
      */
     private $_filter;
     
     /**
-     * @var array
-     */
-    private $_orderByFields;
-    
-    /**
      * @var integer
      */
     private $_top;
-    
-    /**
-     * Gets from.
-     *
-     * @return string.
-     */
-    public function getFrom()
-    {
-        return $this->_from;
-    }
-
-    /**
-     * Sets from.
-     *
-     * @param string $from value.
-     * 
-     * @return none.
-     */
-    public function setFrom($from)
-    {
-        $this->_from = $from;
-    }
     
     /**
      * Gets filter.
@@ -126,40 +94,6 @@ class Query
     public function setTop($top)
     {
         $this->_top = $top;
-    }
-    
-    /**
-     * Gets orderByFields.
-     *
-     * @return array.
-     */
-    public function getOrderByFields()
-    {
-        return $this->_orderByFields;
-    }
-    
-    /**
-     * Adds a field to orderBy fields.
-     * 
-     * @param string $field The value of the field.
-     * 
-     * @return none.
-     */
-    public function addOrderByField($field)
-    {
-        $this->_orderByFields[] = $field;
-    }
-
-    /**
-     * Sets orderByFields.
-     *
-     * @param array $orderByFields value.
-     * 
-     * @return none.
-     */
-    public function setOrderByFields($orderByFields)
-    {
-        $this->_orderByFields = $orderByFields;
     }
     
     /**

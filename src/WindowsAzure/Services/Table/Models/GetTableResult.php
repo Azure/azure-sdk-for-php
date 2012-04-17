@@ -15,68 +15,72 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   PEAR2\WindowsAzure
+ * @package   PEAR2\WindowsAzure\Services\Table\Models
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
  
-namespace PEAR2\WindowsAzure;
+namespace PEAR2\WindowsAzure\Services\Table\Models;
+use PEAR2\WindowsAzure\Utilities;
 
 /**
- * Logger class for debugging purpose.
+ * Holds result of getTable API.
  *
  * @category  Microsoft
- * @package   PEAR2\WindowsAzure
+ * @package   PEAR2\WindowsAzure\Services\Table\Models
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @version   Release: @package_version@
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
-class Logger
+class GetTableResult
 {
     /**
      * @var string
      */
-    private static $_filePath;
-
+    private $_name;
+    
     /**
-     * Logs $var to file.
-     *
-     * @param mix    $var The data to log.
-     * @param string $tip The help message.
+     * Creates GetTableResult from HTTP response body.
      * 
-     * @static
+     * @param string           $body           The HTTP response body.
+     * @param AtomReaderWriter $atomSerializer The Atom reader and writer.
      * 
-     * @return none
+     * @return \PEAR2\WindowsAzure\Services\Table\Models\GetTableResult
      */
-    public static function log($var, $tip = Resources::EMPTY_STRING)
+    public static function create($body, $atomSerializer)
     {
-        if (!empty($tip)) {
-            error_log($tip . "\n", 3, self::$_filePath);
-        }
+        $result = new GetTableResult();
         
-        if (is_array($var) || is_object($var)) {
-            error_log(print_r($var, true), 3, self::$_filePath);
-        } else {
-            error_log($var . "\n", 3, self::$_filePath);
-        }
+        $name = $atomSerializer->parseTable($body);
+        $result->setName($name);
+        
+        return $result;
     }
     
     /**
-     * Sets file path to use.
-     *
-     * @param string $filePath The log file path.
+     * Gets the name.
      * 
-     * @static
+     * @return string
+     */
+    public function getName()
+    {
+        return $this->_name;
+    }
+    
+    /**
+     * Sets the name.
+     * 
+     * @param string $name The table name.
      * 
      * @return none
      */
-    public static function setLogFile($filePath)
+    public function setName($name)
     {
-        self::$_filePath = $filePath;
+        $this->_name = $name;
     }
 }
 

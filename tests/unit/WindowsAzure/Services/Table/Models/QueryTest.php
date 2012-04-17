@@ -25,6 +25,7 @@
 namespace PEAR2\Tests\Unit\WindowsAzure\Services\Table\Models;
 use PEAR2\WindowsAzure\Services\Table\Models\Query;
 use PEAR2\WindowsAzure\Services\Table\Models\Filters\Filter;
+use PEAR2\WindowsAzure\Services\Table\Models\EdmType;
 
 /**
  * Unit tests for class Query
@@ -57,23 +58,6 @@ class QueryTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers PEAR2\WindowsAzure\Services\Table\Models\Query::setOrderByFields
-     * @covers PEAR2\WindowsAzure\Services\Table\Models\Query::getOrderByFields
-     */
-    public function testSetOrderByFields()
-    {
-        // Setup
-        $query = new Query();
-        $expected = array('customerId', 'customerName');
-        
-        // Test
-        $query->setOrderByFields($expected);
-        
-        // Assert
-        $this->assertEquals($expected, $query->getOrderByFields());
-    }
-    
-    /**
      * @covers PEAR2\WindowsAzure\Services\Table\Models\Query::setTop
      * @covers PEAR2\WindowsAzure\Services\Table\Models\Query::getTop
      */
@@ -91,23 +75,6 @@ class QueryTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers PEAR2\WindowsAzure\Services\Table\Models\Query::setFrom
-     * @covers PEAR2\WindowsAzure\Services\Table\Models\Query::getFrom
-     */
-    public function testSetFrom()
-    {
-        // Setup
-        $query = new Query();
-        $expected = 'TableName';
-        
-        // Test
-        $query->setFrom($expected);
-        
-        // Assert
-        $this->assertEquals($expected, $query->getFrom());
-    }
-    
-    /**
      * @covers PEAR2\WindowsAzure\Services\Table\Models\Query::setFilter
      * @covers PEAR2\WindowsAzure\Services\Table\Models\Query::getFilter
      */
@@ -115,31 +82,13 @@ class QueryTest extends \PHPUnit_Framework_TestCase
     {
         // Setup
         $query = new Query();
-        $expected = Filter::applyConstant('constValue');
+        $expected = Filter::applyConstant('constValue', EdmType::STRING);
         
         // Test
         $query->setFilter($expected);
         
         // Assert
         $this->assertEquals($expected, $query->getFilter());
-    }
-    
-    /**
-     * @covers PEAR2\WindowsAzure\Services\Table\Models\Query::addOrderByField
-     * @covers PEAR2\WindowsAzure\Services\Table\Models\Query::getOrderByFields
-     */
-    public function testAddOrderByField()
-    {
-        // Setup
-        $query = new Query();
-        $field = 'customerId';
-        $expected = array($field);
-        
-        // Test
-        $query->addOrderByField($field);
-        
-        // Assert
-        $this->assertEquals($expected, $query->getOrderByFields());
     }
     
     /**

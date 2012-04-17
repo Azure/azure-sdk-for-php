@@ -47,10 +47,10 @@ class DateFilterTest extends \PHPUnit_Framework_TestCase
     {
         // Setup
         $channel = new HttpClient();
-        $filer = new DateFilter();
+        $filter = new DateFilter();
         
         // Test
-        $request = $filer->handleRequest($channel);
+        $request = $filter->handleRequest($channel);
         
         // Assert
         $this->assertArrayHasKey(Resources::DATE, $request->getHeaders());
@@ -64,10 +64,10 @@ class DateFilterTest extends \PHPUnit_Framework_TestCase
         // Setup
         $channel = new HttpClient();
         $response = null;
-        $filer = new DateFilter();
+        $filter = new DateFilter();
         
         // Test
-        $response = $filer->handleResponse($channel, $response);
+        $response = $filter->handleResponse($channel, $response);
         
         // Assert
         $this->assertNull($response);

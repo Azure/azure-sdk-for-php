@@ -127,6 +127,26 @@ class TableRestProxyTest extends TableServiceRestProxyTestBase
     }
     
     /**
+     * @covers PEAR2\WindowsAzure\Services\Table\TableRestProxy::getTable
+     * @covers PEAR2\WindowsAzure\Services\Core\ServiceRestProxy::sendContext
+     * @covers PEAR2\WindowsAzure\Services\Table\Utilities\AtomReaderWriter::parseTable
+     * @covers PEAR2\WindowsAzure\Services\Table\Utilities\AtomReaderWriter::_parseBody
+     * @covers PEAR2\WindowsAzure\Services\Table\Models\GetTableResult::create
+     */
+    public function testGetTable()
+    {
+        // Setup
+        $name = 'gettable';
+        $this->createTable($name);
+        
+        // Test
+        $result = $this->wrapper->getTable($name);
+        
+        // Assert
+        $this->assertEquals($name, $result->getName());
+    }
+    
+    /**
      * @covers PEAR2\WindowsAzure\Services\Table\TableRestProxy::deleteTable
      * @covers PEAR2\WindowsAzure\Services\Core\ServiceRestProxy::sendContext
      */
@@ -623,6 +643,7 @@ class TableRestProxyTest extends TableServiceRestProxyTestBase
      * @covers PEAR2\WindowsAzure\Services\Table\Utilities\MimeReaderWriter::decodeMimeMultipart
      * @covers PEAR2\WindowsAzure\Services\Table\Models\BatchResult::create
      * @covers PEAR2\WindowsAzure\Services\Table\Models\BatchResult::_constructResponses
+     * @covers PEAR2\WindowsAzure\Services\Table\Models\BatchResult::_compareUsingContentId
      * @covers PEAR2\WindowsAzure\Services\Core\ServiceRestProxy::sendContext
      */
     public function testBatchWithInsert()
@@ -657,6 +678,7 @@ class TableRestProxyTest extends TableServiceRestProxyTestBase
      * @covers PEAR2\WindowsAzure\Services\Table\Utilities\MimeReaderWriter::decodeMimeMultipart
      * @covers PEAR2\WindowsAzure\Services\Table\Models\BatchResult::create
      * @covers PEAR2\WindowsAzure\Services\Table\Models\BatchResult::_constructResponses
+     * @covers PEAR2\WindowsAzure\Services\Table\Models\BatchResult::_compareUsingContentId
      * @covers PEAR2\WindowsAzure\Services\Core\ServiceRestProxy::sendContext
      */
     public function testBatchWithDelete()
@@ -691,6 +713,7 @@ class TableRestProxyTest extends TableServiceRestProxyTestBase
      * @covers PEAR2\WindowsAzure\Services\Table\Utilities\MimeReaderWriter::decodeMimeMultipart
      * @covers PEAR2\WindowsAzure\Services\Table\Models\BatchResult::create
      * @covers PEAR2\WindowsAzure\Services\Table\Models\BatchResult::_constructResponses
+     * @covers PEAR2\WindowsAzure\Services\Table\Models\BatchResult::_compareUsingContentId
      * @covers PEAR2\WindowsAzure\Services\Core\ServiceRestProxy::sendContext
      */
     public function testBatchWithUpdate()
@@ -733,6 +756,7 @@ class TableRestProxyTest extends TableServiceRestProxyTestBase
      * @covers PEAR2\WindowsAzure\Services\Table\Utilities\MimeReaderWriter::decodeMimeMultipart
      * @covers PEAR2\WindowsAzure\Services\Table\Models\BatchResult::create
      * @covers PEAR2\WindowsAzure\Services\Table\Models\BatchResult::_constructResponses
+     * @covers PEAR2\WindowsAzure\Services\Table\Models\BatchResult::_compareUsingContentId
      * @covers PEAR2\WindowsAzure\Services\Core\ServiceRestProxy::sendContext
      */
     public function testBatchWithMerge()
@@ -775,6 +799,7 @@ class TableRestProxyTest extends TableServiceRestProxyTestBase
      * @covers PEAR2\WindowsAzure\Services\Table\Utilities\MimeReaderWriter::decodeMimeMultipart
      * @covers PEAR2\WindowsAzure\Services\Table\Models\BatchResult::create
      * @covers PEAR2\WindowsAzure\Services\Table\Models\BatchResult::_constructResponses
+     * @covers PEAR2\WindowsAzure\Services\Table\Models\BatchResult::_compareUsingContentId
      * @covers PEAR2\WindowsAzure\Services\Core\ServiceRestProxy::sendContext
      */
     public function testBatchWithInsertOrReplace()
@@ -817,6 +842,7 @@ class TableRestProxyTest extends TableServiceRestProxyTestBase
      * @covers PEAR2\WindowsAzure\Services\Table\Utilities\MimeReaderWriter::decodeMimeMultipart
      * @covers PEAR2\WindowsAzure\Services\Table\Models\BatchResult::create
      * @covers PEAR2\WindowsAzure\Services\Table\Models\BatchResult::_constructResponses
+     * @covers PEAR2\WindowsAzure\Services\Table\Models\BatchResult::_compareUsingContentId
      * @covers PEAR2\WindowsAzure\Services\Core\ServiceRestProxy::sendContext
      */
     public function testBatchWithInsertOrMerge()
@@ -859,6 +885,7 @@ class TableRestProxyTest extends TableServiceRestProxyTestBase
      * @covers PEAR2\WindowsAzure\Services\Table\Utilities\MimeReaderWriter::decodeMimeMultipart
      * @covers PEAR2\WindowsAzure\Services\Table\Models\BatchResult::create
      * @covers PEAR2\WindowsAzure\Services\Table\Models\BatchResult::_constructResponses
+     * @covers PEAR2\WindowsAzure\Services\Table\Models\BatchResult::_compareUsingContentId
      * @covers PEAR2\WindowsAzure\Services\Core\ServiceRestProxy::sendContext
      */
     public function testBatchWithMultipleOperations()
@@ -902,6 +929,7 @@ class TableRestProxyTest extends TableServiceRestProxyTestBase
      * @covers PEAR2\WindowsAzure\Services\Table\Utilities\MimeReaderWriter::decodeMimeMultipart
      * @covers PEAR2\WindowsAzure\Services\Table\Models\BatchResult::create
      * @covers PEAR2\WindowsAzure\Services\Table\Models\BatchResult::_constructResponses
+     * @covers PEAR2\WindowsAzure\Services\Table\Models\BatchResult::_compareUsingContentId
      * @covers PEAR2\WindowsAzure\Services\Core\ServiceRestProxy::sendContext
      */
     public function testBatchWithDifferentPKFail()
