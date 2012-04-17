@@ -112,7 +112,12 @@ class Resources
     const TABLE_TYPE_NAME = 'ITable';
     
     // HTTP Methods
-    const HTTP_MERGE = 'MERGE';
+    const HTTP_GET    = 'GET';
+    const HTTP_PUT    = 'PUT';
+    const HTTP_POST   = 'POST';
+    const HTTP_HEAD   = 'HEAD';
+    const HTTP_DELETE = 'DELETE';
+    const HTTP_MERGE  = 'MERGE';
     
     // Misc
     const EMPTY_STRING       = '';

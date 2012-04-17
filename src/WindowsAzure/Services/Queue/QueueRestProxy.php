@@ -68,7 +68,7 @@ class QueueRestProxy extends ServiceRestProxy implements IQueue
      */
     public function listQueues($listQueuesOptions = null)
     {
-        $method      = \HTTP_Request2::METHOD_GET;
+        $method      = Resources::HTTP_GET;
         $headers     = array();
         $queryParams = array();
         $path        = Resources::EMPTY_STRING;
@@ -112,7 +112,7 @@ class QueueRestProxy extends ServiceRestProxy implements IQueue
     {
         Validate::notNullOrEmpty($queueName);
         
-        $method      = \HTTP_Request2::METHOD_DELETE;
+        $method      = Resources::HTTP_DELETE;
         $headers     = array();
         $queryParams = array();
         $config      = array();
@@ -144,7 +144,7 @@ class QueueRestProxy extends ServiceRestProxy implements IQueue
     public function createMessage($queueName, $messageText,
         $createMessageOptions = null
     ) {
-        $method      = \HTTP_Request2::METHOD_POST;
+        $method      = Resources::HTTP_POST;
         $headers     = array();
         $queryParams = array();
         $path        = Resources::EMPTY_STRING;
@@ -181,7 +181,7 @@ class QueueRestProxy extends ServiceRestProxy implements IQueue
      */
     public function createQueue($queueName, $createQueueOptions = null)
     {
-        $method      = \HTTP_Request2::METHOD_PUT;
+        $method      = Resources::HTTP_PUT;
         $headers     = array();
         $queryParams = array();
         $path        = Resources::EMPTY_STRING;
@@ -218,7 +218,7 @@ class QueueRestProxy extends ServiceRestProxy implements IQueue
         Validate::notNullOrEmpty($messageId);
         Validate::notNullOrEmpty($popReceipt);
         
-        $method      = \HTTP_Request2::METHOD_DELETE;
+        $method      = Resources::HTTP_DELETE;
         $headers     = array();
         $queryParams = array();
         $config      = array();
@@ -247,7 +247,7 @@ class QueueRestProxy extends ServiceRestProxy implements IQueue
      */
     public function deleteQueue($queueName)
     {
-        $method      = \HTTP_Request2::METHOD_DELETE;
+        $method      = Resources::HTTP_DELETE;
         $headers     = array();
         $queryParams = array();
         $path        = $queueName;
@@ -266,7 +266,7 @@ class QueueRestProxy extends ServiceRestProxy implements IQueue
      */
     public function getQueueMetadata($queueName, $queueServiceOptions = null)
     {
-        $method      = \HTTP_Request2::METHOD_GET;
+        $method      = Resources::HTTP_GET;
         $headers     = array();
         $queryParams = array();
         $config      = array();
@@ -303,7 +303,7 @@ class QueueRestProxy extends ServiceRestProxy implements IQueue
      */
     public function getServiceProperties($queueServiceOptions = null)
     {
-        $method      = \HTTP_Request2::METHOD_GET;
+        $method      = Resources::HTTP_GET;
         $headers     = array();
         $queryParams = array();
         $path        = Resources::EMPTY_STRING;
@@ -333,7 +333,7 @@ class QueueRestProxy extends ServiceRestProxy implements IQueue
      */
     public function listMessages($queueName, $listMessagesOptions = null)
     {
-        $method      = \HTTP_Request2::METHOD_GET;
+        $method      = Resources::HTTP_GET;
         $headers     = array();
         $queryParams = array();
         $path        = $queueName . '/messages';
@@ -366,7 +366,7 @@ class QueueRestProxy extends ServiceRestProxy implements IQueue
      */
     public function peekMessages($queueName, $peekMessagesOptions = null)
     {
-        $method      = \HTTP_Request2::METHOD_GET;
+        $method      = Resources::HTTP_GET;
         $headers     = array();
         $queryParams = array();
         $path        = $queueName . '/messages';
@@ -400,7 +400,7 @@ class QueueRestProxy extends ServiceRestProxy implements IQueue
     public function setQueueMetadata($queueName, $metadata, 
         $queueServiceOptions = null
     ) {
-        $method      = \HTTP_Request2::METHOD_PUT;
+        $method      = Resources::HTTP_PUT;
         $headers     = array();
         $queryParams = array();
         $config      = array();
@@ -434,7 +434,7 @@ class QueueRestProxy extends ServiceRestProxy implements IQueue
     public function setServiceProperties($serviceProperties, 
         $queueServiceOptions = null
     ) {
-        $method      = \HTTP_Request2::METHOD_PUT;
+        $method      = Resources::HTTP_PUT;
         $headers     = array();
         $queryParams = array();
         $statusCode  = Resources::STATUS_ACCEPTED;
@@ -481,7 +481,7 @@ class QueueRestProxy extends ServiceRestProxy implements IQueue
         Validate::notNullOrEmpty($popReceipt);
         Validate::notNullOrEmpty($visibilityTimeoutInSeconds);
         
-        $method      = \HTTP_Request2::METHOD_PUT;
+        $method      = Resources::HTTP_PUT;
         $headers     = array();
         $queryParams = array();
         $config      = array();

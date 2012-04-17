@@ -137,7 +137,7 @@ class BlobRestProxy extends ServiceRestProxy implements IBlob
     private function _getContainerPropertiesImpl($container, $options = null,
         $operation = null
     ) {
-        $method      = \HTTP_Request2::METHOD_GET;
+        $method      = Resources::HTTP_GET;
         $headers     = array();
         $queryParams = array();
         $path        = $container;
@@ -245,7 +245,7 @@ class BlobRestProxy extends ServiceRestProxy implements IBlob
     private function _putLeaseImpl($leaseAction, $container, $blob, $leaseId, 
         $options, $accessCondition = null
     ) {
-        $method      = \HTTP_Request2::METHOD_PUT;
+        $method      = Resources::HTTP_PUT;
         $headers     = array();
         $queryParams = array();
         $path        = $container . '/' . $blob;
@@ -301,7 +301,7 @@ class BlobRestProxy extends ServiceRestProxy implements IBlob
     private function _updatePageBlobPagesImpl($action, $container, $blob, $range,
         $content, $options = null
     ) {
-        $method      = \HTTP_Request2::METHOD_PUT;
+        $method      = Resources::HTTP_PUT;
         $headers     = array();
         $queryParams = array();
         $path        = $container . '/' . $blob;
@@ -345,7 +345,7 @@ class BlobRestProxy extends ServiceRestProxy implements IBlob
      */
     public function getServiceProperties($options = null)
     {
-        $method      = \HTTP_Request2::METHOD_GET;
+        $method      = Resources::HTTP_GET;
         $headers     = array();
         $queryParams = array();
         $path        = Resources::EMPTY_STRING;
@@ -377,7 +377,7 @@ class BlobRestProxy extends ServiceRestProxy implements IBlob
      */
     public function setServiceProperties($serviceProperties, $options = null)
     {
-        $method      = \HTTP_Request2::METHOD_PUT;
+        $method      = Resources::HTTP_PUT;
         $headers     = array();
         $queryParams = array();
         $statusCode  = Resources::STATUS_ACCEPTED;
@@ -408,7 +408,7 @@ class BlobRestProxy extends ServiceRestProxy implements IBlob
      */
     public function listContainers($options = null)
     {
-        $method      = \HTTP_Request2::METHOD_GET;
+        $method      = Resources::HTTP_GET;
         $headers     = array();
         $queryParams = array();
         $path        = Resources::EMPTY_STRING;
@@ -444,7 +444,7 @@ class BlobRestProxy extends ServiceRestProxy implements IBlob
      */
     public function createContainer($container, $options = null)
     {
-        $method      = \HTTP_Request2::METHOD_PUT;
+        $method      = Resources::HTTP_PUT;
         $headers     = array();
         $queryParams = array(Resources::QP_REST_TYPE => 'container');
         $path        = $container;
@@ -478,7 +478,7 @@ class BlobRestProxy extends ServiceRestProxy implements IBlob
      */
     public function deleteContainer($container, $options = null)
     {
-        $method      = \HTTP_Request2::METHOD_DELETE;
+        $method      = Resources::HTTP_DELETE;
         $headers     = array();
         $queryParams = array();
         $path        = $container;
@@ -537,7 +537,7 @@ class BlobRestProxy extends ServiceRestProxy implements IBlob
      */
     public function getContainerAcl($container, $options = null)
     {
-        $method      = \HTTP_Request2::METHOD_GET;
+        $method      = Resources::HTTP_GET;
         $headers     = array();
         $queryParams = array();
         $path        = $container;
@@ -574,7 +574,7 @@ class BlobRestProxy extends ServiceRestProxy implements IBlob
      */
     public function setContainerAcl($container, $acl, $options = null)
     {
-        $method      = \HTTP_Request2::METHOD_PUT;
+        $method      = Resources::HTTP_PUT;
         $headers     = array();
         $queryParams = array();
         $path        = $container;
@@ -608,7 +608,7 @@ class BlobRestProxy extends ServiceRestProxy implements IBlob
      */
     public function setContainerMetadata($container, $metadata, $options = null)
     {
-        $method      = \HTTP_Request2::METHOD_PUT;
+        $method      = Resources::HTTP_PUT;
         $headers     = WindowsAzureUtilities::generateMetadataHeaders($metadata);
         $queryParams = array();
         $path        = $container;
@@ -641,7 +641,7 @@ class BlobRestProxy extends ServiceRestProxy implements IBlob
      */
     public function listBlobs($container, $options = null)
     {
-        $method      = \HTTP_Request2::METHOD_GET;
+        $method      = Resources::HTTP_GET;
         $headers     = array();
         $queryParams = array();
         $path        = $container;
@@ -697,7 +697,7 @@ class BlobRestProxy extends ServiceRestProxy implements IBlob
      */
     public function createPageBlob($container, $blob, $length, $options = null)
     {
-        $method      = \HTTP_Request2::METHOD_PUT;
+        $method      = Resources::HTTP_PUT;
         $headers     = array();
         $queryParams = array();
         $path        = $container . '/' . $blob;
@@ -741,7 +741,7 @@ class BlobRestProxy extends ServiceRestProxy implements IBlob
      */
     public function createBlockBlob($container, $blob, $content, $options = null)
     {
-        $method      = \HTTP_Request2::METHOD_PUT;
+        $method      = Resources::HTTP_PUT;
         $headers     = array();
         $queryParams = array();
         $path        = $container . '/' . $blob;
@@ -831,7 +831,7 @@ class BlobRestProxy extends ServiceRestProxy implements IBlob
     public function createBlobBlock($container, $blob, $blockId, $content,
         $options = null
     ) {
-        $method      = \HTTP_Request2::METHOD_PUT;
+        $method      = Resources::HTTP_PUT;
         $headers     = array();
         $queryParams = array();
         $path        = $container . '/' . $blob;
@@ -874,7 +874,7 @@ class BlobRestProxy extends ServiceRestProxy implements IBlob
      */
     public function commitBlobBlocks($container, $blob, $blockList, $options = null)
     {
-        $method      = \HTTP_Request2::METHOD_PUT;
+        $method      = Resources::HTTP_PUT;
         $headers     = array();
         $queryParams = array();
         $path        = $container . '/' . $blob;
@@ -935,7 +935,7 @@ class BlobRestProxy extends ServiceRestProxy implements IBlob
      */
     public function listBlobBlocks($container, $blob, $options = null)
     {
-        $method      = \HTTP_Request2::METHOD_GET;
+        $method      = Resources::HTTP_GET;
         $headers     = array();
         $queryParams = array();
         $path        = $container . '/' . $blob;
@@ -970,7 +970,7 @@ class BlobRestProxy extends ServiceRestProxy implements IBlob
      */
     public function getBlobProperties($container, $blob, $options = null)
     {
-        $method      = \HTTP_Request2::METHOD_HEAD;
+        $method      = Resources::HTTP_HEAD;
         $headers     = array();
         $queryParams = array();
         $path        = $container . '/' . $blob;
@@ -1006,7 +1006,7 @@ class BlobRestProxy extends ServiceRestProxy implements IBlob
      */
     public function getBlobMetadata($container, $blob, $options = null)
     {
-        $method      = \HTTP_Request2::METHOD_HEAD;
+        $method      = Resources::HTTP_HEAD;
         $headers     = array();
         $queryParams = array();
         $path        = $container . '/' . $blob;
@@ -1044,7 +1044,7 @@ class BlobRestProxy extends ServiceRestProxy implements IBlob
      */
     public function listPageBlobRanges($container, $blob, $options = null)
     {
-        $method      = \HTTP_Request2::METHOD_GET;
+        $method      = Resources::HTTP_GET;
         $headers     = array();
         $queryParams = array();
         $path        = $container . '/' . $blob;
@@ -1086,7 +1086,7 @@ class BlobRestProxy extends ServiceRestProxy implements IBlob
      */
     public function setBlobProperties($container, $blob, $options = null)
     {
-        $method      = \HTTP_Request2::METHOD_PUT;
+        $method      = Resources::HTTP_PUT;
         $headers     = array();
         $queryParams = array();
         $path        = $container . '/' . $blob;
@@ -1141,7 +1141,7 @@ class BlobRestProxy extends ServiceRestProxy implements IBlob
      */
     public function setBlobMetadata($container, $blob, $metadata, $options = null)
     {
-        $method      = \HTTP_Request2::METHOD_PUT;
+        $method      = Resources::HTTP_PUT;
         $headers     = array();
         $queryParams = array();
         $path        = $container . '/' . $blob;
@@ -1179,7 +1179,7 @@ class BlobRestProxy extends ServiceRestProxy implements IBlob
      */
     public function getBlob($container, $blob, $options = null)
     {
-        $method      = \HTTP_Request2::METHOD_GET;
+        $method      = Resources::HTTP_GET;
         $headers     = array();
         $queryParams = array();
         $path        = $container . '/' . $blob;
@@ -1221,7 +1221,7 @@ class BlobRestProxy extends ServiceRestProxy implements IBlob
      */
     public function deleteBlob($container, $blob, $options = null)
     {
-        $method      = \HTTP_Request2::METHOD_DELETE;
+        $method      = Resources::HTTP_DELETE;
         $headers     = array();
         $queryParams = array();
         $path        = $container . '/' . $blob;

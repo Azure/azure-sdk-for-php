@@ -130,7 +130,7 @@ class HttpClient implements IHttpClient
 
     /**
      * Sets request's HTTP method. You can use \HTTP_Request2 constants like
-     * \HTTP_Request2::METHOD_GET or strings like 'GET'.
+     * Resources::HTTP_GET or strings like 'GET'.
      * 
      * @param string $method request's HTTP method.
      * 
@@ -214,9 +214,9 @@ class HttpClient implements IHttpClient
         }
         
         $contentLength = Resources::EMPTY_STRING;
-        if (    strtoupper($this->getMethod()) != \HTTP_Request2::METHOD_GET
-            && strtoupper($this->getMethod()) != \HTTP_Request2::METHOD_DELETE
-            && strtoupper($this->getMethod()) != \HTTP_Request2::METHOD_HEAD
+        if (    strtoupper($this->getMethod()) != Resources::HTTP_GET
+            && strtoupper($this->getMethod()) != Resources::HTTP_DELETE
+            && strtoupper($this->getMethod()) != Resources::HTTP_HEAD
         ) {
             $contentLength = 0;
             

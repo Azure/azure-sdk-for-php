@@ -154,7 +154,7 @@ class TableRestProxy extends ServiceRestProxy implements ITable
             return $this->_constructPutOrMergeEntityContext(
                 $table,
                 $entity,
-                \HTTP_Request2::METHOD_PUT,
+                Resources::HTTP_PUT,
                 true,
                 null
             );
@@ -172,7 +172,7 @@ class TableRestProxy extends ServiceRestProxy implements ITable
             return $this->_constructPutOrMergeEntityContext(
                 $table,
                 $entity,
-                \HTTP_Request2::METHOD_PUT,
+                Resources::HTTP_PUT,
                 false,
                 null
             );
@@ -265,7 +265,7 @@ class TableRestProxy extends ServiceRestProxy implements ITable
         Validate::isTrue(!is_null($partitionKey), Resources::NULL_TABLE_KEY_MSG);
         Validate::isTrue(!is_null($rowKey), Resources::NULL_TABLE_KEY_MSG);
         
-        $method      = \HTTP_Request2::METHOD_DELETE;
+        $method      = Resources::HTTP_DELETE;
         $headers     = array();
         $queryParams = array();
         $statusCode  = Resources::STATUS_NO_CONTENT;
@@ -361,7 +361,7 @@ class TableRestProxy extends ServiceRestProxy implements ITable
         Validate::notNullOrEmpty($entity);
         Validate::isTrue($entity->isValid(), Resources::INVALID_ENTITY_MSG);
         
-        $method      = \HTTP_Request2::METHOD_POST;
+        $method      = Resources::HTTP_POST;
         $context     = new HttpCallContext();
         $headers     = array();
         $queryParams = array();
@@ -598,7 +598,7 @@ class TableRestProxy extends ServiceRestProxy implements ITable
         
         $context = new HttpCallContext();
         $timeout = strval($options->getTimeout());
-        $context->setMethod(\HTTP_Request2::METHOD_GET);
+        $context->setMethod(Resources::HTTP_GET);
         $context->addQueryParameter(Resources::QP_REST_TYPE, 'service');
         $context->addQueryParameter(Resources::QP_COMP, 'properties');
         $context->addQueryParameter(Resources::QP_TIMEOUT, $timeout);
@@ -622,7 +622,7 @@ class TableRestProxy extends ServiceRestProxy implements ITable
     */
     public function setServiceProperties($serviceProperties, $options = null)
     {
-        $method      = \HTTP_Request2::METHOD_PUT;
+        $method      = Resources::HTTP_PUT;
         $headers     = array();
         $queryParams = array();
         $statusCode  = Resources::STATUS_ACCEPTED;
@@ -653,7 +653,7 @@ class TableRestProxy extends ServiceRestProxy implements ITable
      */
     public function queryTables($options = null)
     {
-        $method      = \HTTP_Request2::METHOD_GET;
+        $method      = Resources::HTTP_GET;
         $headers     = array();
         $queryParams = array();
         $statusCode  = Resources::STATUS_OK;
@@ -723,7 +723,7 @@ class TableRestProxy extends ServiceRestProxy implements ITable
     {
         Validate::isValidString($table);
         
-        $method      = \HTTP_Request2::METHOD_POST;
+        $method      = Resources::HTTP_POST;
         $headers     = array();
         $queryParams = array();
         $statusCode  = Resources::STATUS_CREATED;
@@ -752,7 +752,7 @@ class TableRestProxy extends ServiceRestProxy implements ITable
     {
         Validate::isValidString($table);
         
-        $method      = \HTTP_Request2::METHOD_GET;
+        $method      = Resources::HTTP_GET;
         $headers     = array();
         $queryParams = array();
         $statusCode  = Resources::STATUS_OK;
@@ -784,7 +784,7 @@ class TableRestProxy extends ServiceRestProxy implements ITable
     {
         Validate::isValidString($table);
         
-        $method      = \HTTP_Request2::METHOD_DELETE;
+        $method      = Resources::HTTP_DELETE;
         $headers     = array();
         $queryParams = array();
         $statusCode  = Resources::STATUS_NO_CONTENT;
@@ -813,7 +813,7 @@ class TableRestProxy extends ServiceRestProxy implements ITable
     {
         Validate::isValidString($table);
         
-        $method      = \HTTP_Request2::METHOD_GET;
+        $method      = Resources::HTTP_GET;
         $headers     = array();
         $queryParams = array();
         $statusCode  = Resources::STATUS_OK;
@@ -910,7 +910,7 @@ class TableRestProxy extends ServiceRestProxy implements ITable
         return $this->_putOrMergeEntityImpl(
             $table,
             $entity,
-            \HTTP_Request2::METHOD_PUT,
+            Resources::HTTP_PUT,
             false, 
             $options
         );
@@ -933,7 +933,7 @@ class TableRestProxy extends ServiceRestProxy implements ITable
         return $this->_putOrMergeEntityImpl(
             $table,
             $entity,
-            \HTTP_Request2::METHOD_PUT,
+            Resources::HTTP_PUT,
             true, 
             $options
         );
@@ -1004,7 +1004,7 @@ class TableRestProxy extends ServiceRestProxy implements ITable
         Validate::isTrue(!is_null($partitionKey), Resources::NULL_TABLE_KEY_MSG);
         Validate::isTrue(!is_null($rowKey), Resources::NULL_TABLE_KEY_MSG);
         
-        $method      = \HTTP_Request2::METHOD_GET;
+        $method      = Resources::HTTP_GET;
         $headers     = array();
         $queryParams = array();
         $statusCode  = Resources::STATUS_OK;
@@ -1044,7 +1044,7 @@ class TableRestProxy extends ServiceRestProxy implements ITable
     {
         Validate::notNullOrEmpty($batchOperations);
         
-        $method      = \HTTP_Request2::METHOD_POST;
+        $method      = Resources::HTTP_POST;
         $operations  = $batchOperations->getOperations();
         $contexts    = $this->_createOperationsContexts($operations);
         $mime        = $this->_createBatchRequestBody($operations, $contexts);
