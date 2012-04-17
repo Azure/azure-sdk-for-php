@@ -232,7 +232,6 @@ class TableRestProxy extends ServiceRestProxy implements ITable
                 break;
         
             case BatchOperationType::DELETE_ENTITY_OPERATION:
-                $context->removeHeader(Resources::CONTENT_TYPE);
                 break;
 
             default:
@@ -278,7 +277,6 @@ class TableRestProxy extends ServiceRestProxy implements ITable
         $etagObj                            = $options->getEtag();
         $ETag                               = !is_null($etagObj);
         $queryParams[Resources::QP_TIMEOUT] = strval($options->getTimeout());
-        $headers[Resources::CONTENT_TYPE]   = Resources::XML_ATOM_CONTENT_TYPE;
         $headers[Resources::IF_MATCH]       = $ETag ? $etagObj : Resources::ASTERISK;
         
         $context = new HttpCallContext();

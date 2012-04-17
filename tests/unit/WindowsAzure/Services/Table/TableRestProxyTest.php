@@ -697,10 +697,9 @@ class TableRestProxyTest extends TableServiceRestProxyTestBase
         $partitionKey = '123';
         $rowKey = '456';
         $expected = TestResources::getTestEntity($partitionKey, $rowKey);
-        $r = $this->wrapper->insertEntity($name, $expected);
+        $this->wrapper->insertEntity($name, $expected);
         $operations = new BatchOperations();
-        $etag = $r->getEntity()->getEtag();
-        $operations->addDeleteEntity($name, $partitionKey, $rowKey, $etag);
+        $operations->addDeleteEntity($name, $partitionKey, $rowKey);
         
         // Test
         $this->wrapper->batch($operations);
