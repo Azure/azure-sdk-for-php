@@ -349,12 +349,11 @@ class Utilities
      * 
      * @return string
      */
-    public static function ReadFile($stream)
+    public static function readFile($stream)
     {
         $contents = Resources::EMPTY_STRING;
         
-        while (!feof($stream))
-        {
+        while (!feof($stream)) {
             $contents .= fgets($stream);
         }
         

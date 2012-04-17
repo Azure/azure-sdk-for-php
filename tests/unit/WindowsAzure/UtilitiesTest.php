@@ -380,7 +380,7 @@ class UtilitiesTest extends PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers PEAR2\WindowsAzure\Utilities::ReadFile
+     * @covers PEAR2\WindowsAzure\Utilities::readFile
      */
     public function testReadFile()
     {
@@ -388,7 +388,7 @@ class UtilitiesTest extends PHPUnit_Framework_TestCase
         $stream = fopen(VirtualFileSystem::newFile($expected), 'r');
         
         // Test
-        $actual = Utilities::ReadFile($stream);
+        $actual = Utilities::readFile($stream);
         
         // Assert
         $this->assertEquals($expected, $actual);

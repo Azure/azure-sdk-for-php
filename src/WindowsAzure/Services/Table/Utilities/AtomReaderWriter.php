@@ -223,7 +223,7 @@ class AtomReaderWriter implements IAtomReaderWriter
             </content>
         </entry>';
      
-        $xml     = self::_fillTemplate(
+        $xml = self::_fillTemplate(
             $xml, array(
                 'Updated'    => Utilities::isoDate(),
                 'Properties' => self::_generatePropertiesXml($entity)

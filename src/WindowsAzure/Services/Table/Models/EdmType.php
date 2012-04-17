@@ -78,29 +78,31 @@ class EdmType
     {
         // Having null value means that the user wants to remove the property name
         // associated with this value. Leave the value as null so this hold.
-        if (is_null($value)) return null;
-        
-        switch ($type) {
-        case self::GUID:
-        case self::STRING:
-            return $value;
-            
-        case self::BINARY:
-            return base64_decode($value);
+        if (is_null($value)) {
+            return null;
+        } else {
+            switch ($type) {
+            case self::GUID:
+            case self::STRING:
+                return $value;
 
-        case self::DATETIME:
-            return Utilities::convertToDateTime($value);
+            case self::BINARY:
+                return base64_decode($value);
 
-        case self::BOOLEAN:
-            return Utilities::toBoolean($value);
+            case self::DATETIME:
+                return Utilities::convertToDateTime($value);
 
-        case self::DOUBLE:
-        case self::INT32:
-        case self::INT64:
-            return intval($value);
+            case self::BOOLEAN:
+                return Utilities::toBoolean($value);
 
-        default:
-            throw new \InvalidArgumentException();
+            case self::DOUBLE:
+            case self::INT32:
+            case self::INT64:
+                return intval($value);
+
+            default:
+                throw new \InvalidArgumentException();
+            }
         }
     }
     

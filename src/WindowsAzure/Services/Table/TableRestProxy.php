@@ -472,7 +472,7 @@ class TableRestProxy extends ServiceRestProxy implements ITable
                 switch ($filter->getEdmType()) {
                 case EdmType::DATETIME:
                     $edmDate = Utilities::convertToEdmDateTime($value);
-                    $e .= 'datetime\'' . $edmDate . '\'';
+                    $e      .= 'datetime\'' . $edmDate . '\'';
                     break;
 
                 case EdmType::BINARY:

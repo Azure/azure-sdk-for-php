@@ -85,6 +85,14 @@ class BatchResult
         return $responses;
     }
     
+    /**
+     * Compares between two responses by Content-ID header.
+     * 
+     * @param \HTTP_Response2 $r1 The first response object.
+     * @param \HTTP_Response2 $r2 The second response object.
+     * 
+     * @return boolean
+     */
     private static function _compareUsingContentId($r1, $r2)
     {
         $h1 = Utilities::keysToLower($r1->getHeader());
