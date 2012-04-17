@@ -144,7 +144,9 @@ class RoleEnvironment
     private static function _initialize($keepOpen = false)
     {
         if (is_null(self::$_runtimeClient)) {
-            self::$_versionEndpoint = getenv(self::VERSION_ENDPOINT_ENVIRONMENT_NAME);
+            self::$_versionEndpoint = getenv(
+                self::VERSION_ENDPOINT_ENVIRONMENT_NAME
+            );
             
             if (self::$_versionEndpoint == false) {
                 self::$_versionEndpoint = self::VERSION_ENDPOINT_FIXED_PATH;
