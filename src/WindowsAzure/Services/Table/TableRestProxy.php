@@ -909,7 +909,7 @@ class TableRestProxy extends ServiceRestProxy implements ITable
      */
     public function insertOrReplaceEntity($table, $entity, $options = null)
     {
-        return tyImpl(
+        return $this->_putOrMergeEntityImpl(
             $table,
             $entity,
             \HTTP_Request2::METHOD_PUT,
