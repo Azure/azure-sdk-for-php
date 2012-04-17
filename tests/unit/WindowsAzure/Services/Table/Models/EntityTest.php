@@ -41,15 +41,15 @@ use PEAR2\WindowsAzure\Utilities;
 class EntityTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @covers PEAR2\WindowsAzure\Services\Table\Models\Entity::tryGetPropertyValue
+     * @covers PEAR2\WindowsAzure\Services\Table\Models\Entity::getPropertyValue
      */
-    public function testTryGetPropertyValue()
+    public function testGetPropertyValue()
     {
         // Setup
         $entity = new Entity();
         
         // Test
-        $actual = $entity->tryGetPropertyValue('dummy');
+        $actual = $entity->getPropertyValue('dummy');
         
         // Assert
         $this->assertNull($actual);

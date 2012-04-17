@@ -76,7 +76,7 @@ class Entity
      * 
      * @return mix
      */
-    public function tryGetPropertyValue($name)
+    public function getPropertyValue($name)
     {
         $p = $this->_properties[$name];
         return is_null($p) ? null : $p->getValue();
@@ -111,7 +111,7 @@ class Entity
      */
     public function getPartitionKey()
     {
-        return $this->tryGetPropertyValue('PartitionKey');
+        return $this->getPropertyValue('PartitionKey');
     }
 
     /**
@@ -133,7 +133,7 @@ class Entity
      */
     public function getRowKey()
     {
-        return $this->tryGetPropertyValue('RowKey');
+        return $this->getPropertyValue('RowKey');
     }
 
     /**
@@ -155,7 +155,7 @@ class Entity
      */
     public function getTimestamp()
     {
-        return $this->tryGetPropertyValue('Timestamp');
+        return $this->getPropertyValue('Timestamp');
     }
 
     /**

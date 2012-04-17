@@ -367,7 +367,7 @@ class TableServiceIntegrationTest extends IntegrationTestBase {
 
         $this->assertNotNull($result->getEntity()->getProperty('test7'), '$result->getEntity()->getProperty(\'test7\')');
         $this->assertTrue(is_string($result->getEntity()->getProperty('test7')->getValue()), 'is_string($result->getEntity()->getProperty(\'test7\')->getValue())');
-        $this->assertEquals($uuid, $result->getEntity()->tryGetPropertyValue('test7'), 'GUIDs are the same');
+        $this->assertEquals($uuid, $result->getEntity()->getPropertyValue('test7'), 'GUIDs are the same');
     }
     /**
     * @covers PEAR2\WindowsAzure\Services\Table\TableRestProxy::insertEntity
@@ -646,7 +646,7 @@ class TableServiceIntegrationTest extends IntegrationTestBase {
 
         $this->assertNotNull($result->getEntity()->getProperty('test7'), '$result->getEntity()->getProperty(\'test7\')');
         $this->assertTrue(is_string($result->getEntity()->getProperty('test7')->getValue()), 'is_string($result->getEntity()->getProperty(\'test7\')->getValue())');
-        $this->assertEquals($uuid, $result->getEntity()->tryGetPropertyValue('test7'), 'GUIDs are the same');
+        $this->assertEquals($uuid, $result->getEntity()->getPropertyValue('test7'), 'GUIDs are the same');
     }
 
     /**
@@ -869,7 +869,7 @@ class TableServiceIntegrationTest extends IntegrationTestBase {
             // Act
             $q = new Query();
             $ent3 = $entities[3];
-            $q->setFilter(Filter::applyEq(Filter::applyLiteral('test7'), Filter::applyConstant($ent3->tryGetPropertyValue('test7'))));
+            $q->setFilter(Filter::applyEq(Filter::applyLiteral('test7'), Filter::applyConstant($ent3->getPropertyValue('test7'))));
             $qeo = new QueryEntitiesOptions();
             $qeo->setQuery($q);
             $result = $this->wrapper->queryEntities($table, $qeo);
