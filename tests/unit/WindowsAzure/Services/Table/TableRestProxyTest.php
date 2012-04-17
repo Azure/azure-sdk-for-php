@@ -54,6 +54,9 @@ use WindowsAzure\Services\Table\Models\BatchOperations;
  */
 class TableRestProxyTest extends TableServiceRestProxyTestBase
 {
+    /**
+     * @covers  WindowsAzure\Services\Table\TableRestProxy::__construct
+     */
     public function test__construct()
     {
         // Setup
@@ -72,7 +75,7 @@ class TableRestProxyTest extends TableServiceRestProxyTestBase
     /**
      * @covers WindowsAzure\Services\Table\TableRestProxy::getServiceProperties
      * @covers WindowsAzure\Services\Core\ServiceRestProxy::sendContext
-    */
+     */
     public function testGetServiceProperties()
     {
         if (WindowsAzureUtilities::isEmulated()) {
@@ -89,7 +92,7 @@ class TableRestProxyTest extends TableServiceRestProxyTestBase
     /**
      * @covers WindowsAzure\Services\Table\TableRestProxy::setServiceProperties
      * @covers WindowsAzure\Services\Core\ServiceRestProxy::sendContext
-    */
+     */
     public function testSetServiceProperties()
     {
         if (WindowsAzureUtilities::isEmulated()) {
@@ -98,6 +101,29 @@ class TableRestProxyTest extends TableServiceRestProxyTestBase
         
         // Setup
         $expected = ServiceProperties::create(TestResources::setServicePropertiesSample());
+        
+        // Test
+        $this->setServiceProperties($expected);
+        $actual = $this->wrapper->getServiceProperties();
+        
+        // Assert
+        $this->assertEquals($expected->toXml(), $actual->getValue()->toXml());
+    }
+    
+    /**
+     * @covers WindowsAzure\Services\Table\TableRestProxy::setServiceProperties
+     * @covers WindowsAzure\Services\Core\ServiceRestProxy::sendContext
+     */
+    public function testSetServicePropertiesWithEmptyParts()
+    {
+        if (WindowsAzureUtilities::isEmulated()) {
+            $this->markTestSkipped(self::NOT_SUPPORTED);
+        }
+        
+        // Setup
+        $xml = TestResources::setServicePropertiesSample();
+        $xml['Metrics']['RetentionPolicy'] = null;
+        $expected = ServiceProperties::create($xml);
         
         // Test
         $this->setServiceProperties($expected);
