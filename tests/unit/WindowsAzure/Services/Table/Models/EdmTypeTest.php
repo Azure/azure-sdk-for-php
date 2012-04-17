@@ -87,6 +87,23 @@ class EdmTypeTest extends \PHPUnit_Framework_TestCase
     /**
      * @covers PEAR2\WindowsAzure\Services\Table\Models\EdmType::processValue
      */
+    public function testProcessValueWithBinary()
+    {
+        // Setup
+        $type = EdmType::BINARY;
+        $value = 'MTIzNDU=';
+        $expected = base64_decode($value);
+        
+        // Test
+        $actual = EdmType::processValue($type, $value);
+        
+        // Assert
+        $this->assertEquals($expected, $actual);
+    }
+    
+    /**
+     * @covers PEAR2\WindowsAzure\Services\Table\Models\EdmType::processValue
+     */
     public function testProcessValueWithDate()
     {
         // Setup

@@ -76,7 +76,7 @@ interface ITable extends FilterableService
     /**
      * Creates new table in the storage account
      * 
-     * @param string                     $table   name of the name
+     * @param string                     $table   The name of the table.
      * @param Models\TableServiceOptions $options optional parameters
      * 
      * @return none
@@ -86,9 +86,19 @@ interface ITable extends FilterableService
     public function createTable($table, $options = null);
     
     /**
+     * Gets the table.
+     * 
+     * @param string                     $table   The The name of the table..
+     * @param Models\TableServiceOptions $options The optional parameters.
+     * 
+     * @return Models\GetTableResult
+     */
+    public function getTable($table, $options = null);
+    
+    /**
      * Deletes the specified table and any data it contains.
      * 
-     * @param string                     $table   name of the name
+     * @param string                     $table   The name of the table.
      * @param Models\TableServiceOptions $options optional parameters
      * 
      * @return none

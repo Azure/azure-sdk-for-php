@@ -185,13 +185,29 @@ class AtomReaderWriter implements IAtomReaderWriter
         } else {
             $rawEntries = array($result->entry);
         }
-
+        
         foreach ($rawEntries as $entry) {
             $tableName = $entry->xpath('.//m:properties/d:TableName');
             $tables[]  = (string)$tableName[0];
         }
         
         return $tables;
+    }
+    
+    /**
+     * Parses one table entry.
+     * 
+     * @param string $body The HTTP response body.
+     * 
+     * @return string 
+     */
+    public static function parseTable($body)
+    {
+        $result    = self::_parseBody($body);
+        $tableName = $result->xpath('.//m:properties/d:TableName');
+        $table     = (string)$tableName[0];
+        
+        return $table;
     }
     
     /**
@@ -223,10 +239,9 @@ class AtomReaderWriter implements IAtomReaderWriter
             </content>
         </entry>';
      
-        $edmDate = Utilities::convertToEdmDateTime($entity->getTimestamp());
-        $xml     = self::_fillTemplate(
+        $xml = self::_fillTemplate(
             $xml, array(
-                'Updated'    => $edmDate,
+                'Updated'    => Utilities::isoDate(),
                 'Properties' => self::_generatePropertiesXml($entity)
             )
         );
@@ -257,7 +272,13 @@ class AtomReaderWriter implements IAtomReaderWriter
         foreach ($prop as $key => $value) {
             $attributes = $value->attributes($metadata);
             $type       = $attributes['type'];
-            $entity->addProperty((string)$key, (string)$type, (string)$value);
+            $isnull     = $attributes['null'];
+            
+            $entity->addProperty(
+                (string)$key,
+                (string)$type,
+                $isnull ? null : $value
+            );
         }
         
         return $entity;

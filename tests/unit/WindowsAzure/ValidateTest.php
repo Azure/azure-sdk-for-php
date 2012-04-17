@@ -22,6 +22,7 @@
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
 
+namespace PEAR2\Tests\Unit\WindowsAzure;
 use PEAR2\WindowsAzure\Validate;
 use PEAR2\WindowsAzure\Core\InvalidArgumentTypeException;
 use PEAR2\WindowsAzure\Resources;
@@ -38,7 +39,7 @@ use PEAR2\WindowsAzure\Core\WindowsAzureUtilities;
  * @version   Release: @package_version@
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
-class ValidateTest extends PHPUnit_Framework_TestCase
+class ValidateTest extends \PHPUnit_Framework_TestCase
 {
     /**
      * @covers PEAR2\WindowsAzure\Validate::isArray

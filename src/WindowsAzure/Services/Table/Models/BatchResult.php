@@ -25,6 +25,7 @@
 namespace PEAR2\WindowsAzure\Services\Table\Models;
 require_once 'HTTP/Request2/Response.php';
 use PEAR2\WindowsAzure\Resources;
+use PEAR2\WindowsAzure\Utilities;
 use PEAR2\WindowsAzure\Core\HttpClient;
 use PEAR2\WindowsAzure\Core\ServiceException;
 use PEAR2\WindowsAzure\Services\Table\Models\BatchError;
@@ -85,6 +86,25 @@ class BatchResult
     }
     
     /**
+     * Compares between two responses by Content-ID header.
+     * 
+     * @param \HTTP_Response2 $r1 The first response object.
+     * @param \HTTP_Response2 $r2 The second response object.
+     * 
+     * @return boolean
+     */
+    private static function _compareUsingContentId($r1, $r2)
+    {
+        $h1 = Utilities::keysToLower($r1->getHeader());
+        $h2 = Utilities::keysToLower($r2->getHeader());
+        $c1 = Utilities::tryGetValue($h1, Resources::CONTENT_ID, 0);
+        $c2 = Utilities::tryGetValue($h2, Resources::CONTENT_ID, 0);
+        
+        return intval($c1) >= intval($c2);
+    }
+
+
+    /**
      * Creates BatchResult object.
      * 
      * @param string            $body           The HTTP response body.
@@ -100,10 +120,14 @@ class BatchResult
     public static function create($body, $operations, $contexts, $atomSerializer, 
         $mimeSerializer
     ) {
-        $result    = new BatchResult();
-        $responses = self::_constructResponses($body, $mimeSerializer);
-        $count     = count($responses);
-        $entries   = array();
+        $result       = new BatchResult();
+        $responses    = self::_constructResponses($body, $mimeSerializer);
+        $callbackName = __CLASS__ . '::_compareUsingContentId';
+        $count        = count($responses);
+        $entries      = array();
+        
+        // Sort $responses based on Content-ID so they match order of $operations.
+        uasort($responses, $callbackName);
         
         for ($i = 0; $i < $count; $i++) {
             $context   = $contexts[$i];
@@ -137,7 +161,7 @@ class BatchResult
                     break;
 
                 case BatchOperationType::DELETE_ENTITY_OPERATION:
-                    $entries[] = null;
+                    $entries[] = Resources::BATCH_ENTITY_DEL_MSG;
                     break;
 
                 default:

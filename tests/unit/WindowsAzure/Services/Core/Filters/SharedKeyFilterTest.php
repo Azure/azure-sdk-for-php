@@ -50,10 +50,10 @@ class SharedKeyFilterTest extends PHPUnit_Framework_TestCase
         $channel = new HttpClient();
         $url = new \PEAR2\WindowsAzure\Core\Url('http://microsoft.com');
         $channel->setUrl($url);
-        $filer = new SharedKeyFilter('acount', 'key', Resources::QUEUE_TYPE_NAME);
+        $filter = new SharedKeyFilter('acount', 'key', Resources::QUEUE_TYPE_NAME);
         
         // Test
-        $request = $filer->handleRequest($channel);
+        $request = $filter->handleRequest($channel);
         
         // Assert
         $this->assertArrayHasKey(strtolower(Resources::AUTHENTICATION), $request->getHeaders());
@@ -69,10 +69,10 @@ class SharedKeyFilterTest extends PHPUnit_Framework_TestCase
         $channel = new HttpClient();
         $url = new \PEAR2\WindowsAzure\Core\Url('http://microsoft.com');
         $channel->setUrl($url);
-        $filer = new SharedKeyFilter('acount', 'key', Resources::TABLE_TYPE_NAME);
+        $filter = new SharedKeyFilter('acount', 'key', Resources::TABLE_TYPE_NAME);
         
         // Test
-        $request = $filer->handleRequest($channel);
+        $request = $filter->handleRequest($channel);
         
         // Assert
         $this->assertArrayHasKey(strtolower(Resources::AUTHENTICATION), $request->getHeaders());
@@ -100,10 +100,10 @@ class SharedKeyFilterTest extends PHPUnit_Framework_TestCase
         $url = new \PEAR2\WindowsAzure\Core\Url('http://microsoft.com');
         $channel->setUrl($url);
         $response = null;
-        $filer = new SharedKeyFilter('acount', 'key', Resources::QUEUE_TYPE_NAME);
+        $filter = new SharedKeyFilter('acount', 'key', Resources::QUEUE_TYPE_NAME);
         
         // Test
-        $response = $filer->handleResponse($channel, $response);
+        $response = $filter->handleResponse($channel, $response);
         
         // Assert
         $this->assertNull($response);

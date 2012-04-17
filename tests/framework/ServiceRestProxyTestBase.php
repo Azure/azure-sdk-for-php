@@ -67,6 +67,7 @@ class ServiceRestProxyTestBase extends \PHPUnit_Framework_TestCase
         $this->config = $config;
         $this->wrapper = $serviceWrapper;
         $this->_createDefaultProperties();
+        \PEAR2\WindowsAzure\Logger::setLogFile('C:\log.txt');
     }
     
     public function setServiceProperties($properties, $options = null)

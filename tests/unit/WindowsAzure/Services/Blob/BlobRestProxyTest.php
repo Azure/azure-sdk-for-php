@@ -23,6 +23,7 @@
  */
 
 namespace PEAR2\Tests\Unit\WindowsAzure\Services\Blob;
+use PEAR2\Tests\Framework\VirtualFileSystem;
 use PEAR2\Tests\Framework\BlobServiceRestProxyTestBase;
 use PEAR2\WindowsAzure\Core\WindowsAzureUtilities;
 use PEAR2\WindowsAzure\Core\ServiceException;
@@ -709,6 +710,32 @@ class BlobRestProxyTest extends BlobServiceRestProxyTestBase
         
         // Test
         $this->wrapper->createBlockBlob($name, 'myblob', 'Hello world', $options);
+        
+        // Assert
+        $result = $this->wrapper->listBlobs($name);
+        $blobs = $result->getBlobs();
+        $blob = $blobs[0];
+        $this->assertCount(1, $result->getBlobs());
+        $this->assertEquals($contentType, $blob->getProperties()->getContentType());
+    }
+    
+    /**
+     * @covers PEAR2\WindowsAzure\Services\Blob\BlobRestProxy::createBlockBlob
+     * @covers PEAR2\WindowsAzure\Services\Blob\BlobRestProxy::_addCreateBlobOptionalHeaders
+     */
+    public function testCreateBlockBlobWithStream()
+    {
+        // Setup
+        $name = 'createblockblobwithstream';
+        $contentType = 'text/plain; charset=UTF-8';
+        $this->createContainer($name);
+        $options = new CreateBlobOptions();
+        $options->setContentType($contentType);
+        $fileContents = 'Hello world, I\'m a file';
+        $stream = fopen(VirtualFileSystem::newFile($fileContents), 'r');
+        
+        // Test
+        $this->wrapper->createBlockBlob($name, 'myblob', $stream, $options);
         
         // Assert
         $result = $this->wrapper->listBlobs($name);

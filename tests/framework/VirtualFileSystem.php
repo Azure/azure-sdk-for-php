@@ -15,68 +15,44 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   PEAR2\WindowsAzure
+ * @package   PEAR2\Tests\Framework
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
  
-namespace PEAR2\WindowsAzure;
+namespace PEAR2\Tests\Framework;
+require_once 'vfsStream/vfsStream.php';
 
 /**
- * Logger class for debugging purpose.
+ * Represents virtual file system for testing purpose.
  *
  * @category  Microsoft
- * @package   PEAR2\WindowsAzure
+ * @package   PEAR2\Tests\Framework
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @version   Release: @package_version@
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
-class Logger
+class VirtualFileSystem
 {
-    /**
-     * @var string
-     */
-    private static $_filePath;
+    public static function newFile($contents, $fileName = null, $root = null)
+    {
+        $root = is_null($root) ? 'root' : $root;
+        $fileName = is_null($fileName) ? 'test.txt' : $fileName;
 
-    /**
-     * Logs $var to file.
-     *
-     * @param mix    $var The data to log.
-     * @param string $tip The help message.
-     * 
-     * @static
-     * 
-     * @return none
-     */
-    public static function log($var, $tip = Resources::EMPTY_STRING)
-    {
-        if (!empty($tip)) {
-            error_log($tip . "\n", 3, self::$_filePath);
-        }
+        \vfsStreamWrapper::register();
+        \vfsStreamWrapper::setRoot(new \vfsStreamDirectory($root));
         
-        if (is_array($var) || is_object($var)) {
-            error_log(print_r($var, true), 3, self::$_filePath);
-        } else {
-            error_log($var . "\n", 3, self::$_filePath);
-        }
-    }
-    
-    /**
-     * Sets file path to use.
-     *
-     * @param string $filePath The log file path.
-     * 
-     * @static
-     * 
-     * @return none
-     */
-    public static function setLogFile($filePath)
-    {
-        self::$_filePath = $filePath;
+        $file = \vfsStream::newFile($fileName);
+        $file->setContent($contents);
+        
+        \vfsStreamWrapper::getRoot()->addChild($file);
+        $virtualPath = \vfsStream::url($root . '/' . $fileName);
+        
+        return $virtualPath;
     }
 }
 

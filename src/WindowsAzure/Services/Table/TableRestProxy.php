@@ -30,8 +30,10 @@ use PEAR2\WindowsAzure\Core\HttpCallContext;
 use PEAR2\WindowsAzure\Services\Core\ServiceRestProxy;
 use PEAR2\WindowsAzure\Services\Table\Models\TableServiceOptions;
 use PEAR2\WindowsAzure\Services\Core\Models\GetServicePropertiesResult;
+use PEAR2\WindowsAzure\Services\Table\Models\EdmType;
 use PEAR2\WindowsAzure\Services\Table\Models\Filters;
 use PEAR2\WindowsAzure\Services\Table\Models\Filters\Filter;
+use PEAR2\WindowsAzure\Services\Table\Models\GetTableResult;
 use PEAR2\WindowsAzure\Services\Table\Models\QueryTablesOptions;
 use PEAR2\WindowsAzure\Services\Table\Models\QueryTablesResult;
 use PEAR2\WindowsAzure\Services\Table\Models\InsertEntityResult;
@@ -260,8 +262,8 @@ class TableRestProxy extends ServiceRestProxy implements ITable
         $options
     ) {
         Validate::isValidString($table);
-        Validate::isValidString($partitionKey);
-        Validate::isValidString($rowKey);
+        Validate::isTrue(!is_null($partitionKey), Resources::NULL_TABLE_KEY_MSG);
+        Validate::isTrue(!is_null($rowKey), Resources::NULL_TABLE_KEY_MSG);
         
         $method      = \HTTP_Request2::METHOD_DELETE;
         $headers     = array();
@@ -396,7 +398,10 @@ class TableRestProxy extends ServiceRestProxy implements ITable
      */
     private function _getEntityPath($table, $partitionKey, $rowKey)
     {
-        return "$table(PartitionKey='$partitionKey',RowKey='$rowKey')";
+        $encodedPK = $this->_encodeODataUriValue($partitionKey);
+        $encodedRK = $this->_encodeODataUriValue($rowKey);
+        
+        return "$table(PartitionKey='$encodedPK',RowKey='$encodedRK')";
     }
     
     /**
@@ -448,6 +453,8 @@ class TableRestProxy extends ServiceRestProxy implements ITable
      * @param string &$e     The filter expression
      * 
      * @return string
+     * 
+     * @throws \InvalidArgumentException
      */
     private function _buildFilterExpressionRec($filter, &$e)
     {
@@ -458,7 +465,49 @@ class TableRestProxy extends ServiceRestProxy implements ITable
         if ($filter instanceof Filters\LiteralFilter) {
             $e .= $filter->getLiteral();
         } else if ($filter instanceof Filters\ConstantFilter) {
-            $e .= '\'' . $filter->getValue() . '\'';
+            $value = $filter->getValue();
+            // If the value is null we just append null regardless of the edmType.
+            if (is_null($value)) {
+                $e .= 'null';
+            } else {
+                switch ($filter->getEdmType()) {
+                case EdmType::DATETIME:
+                    $edmDate = Utilities::convertToEdmDateTime($value);
+                    $e      .= 'datetime\'' . $edmDate . '\'';
+                    break;
+
+                case EdmType::BINARY:
+                    $e .= 'X\'' . implode('', unpack("H*", $value)) . '\'';
+                    break;
+
+                case EdmType::BOOLEAN:
+                    $e .= ($value ? 'true' : 'false');
+                    break;
+
+                case EdmType::DOUBLE:
+                    $e .= $value;
+                    break;
+
+                case EdmType::GUID:
+                    $e .= 'guid\'' . $value . '\'';
+                    break;
+
+                case EdmType::INT32:
+                    $e .= $value;
+                    break;
+
+                case EdmType::INT64:
+                    $e .= $value . 'L';
+                    break;
+
+                case EdmType::STRING:
+                    $e .= '\'' . str_replace('\'', '\'\'', $value) . '\'';
+                    break;
+
+                default:
+                    throw new \InvalidArgumentException();
+                }
+            }
         } else if ($filter instanceof Filters\UnaryFilter) {
             $e .= $filter->getOperator();
             $e .= '(';
@@ -508,13 +557,6 @@ class TableRestProxy extends ServiceRestProxy implements ITable
                 
                 $queryParam[Resources::QP_FILTER] = $final;
             }
-            
-            $orderByFields = $query->getOrderByFields();
-            if (!empty($orderByFields)) {
-                $final = $this->_encodeODataUriValues($orderByFields);
-                
-                $queryParam[Resources::QP_ORDERBY] = implode(',', $final);
-            }
         }
         
         return $queryParam;
@@ -547,7 +589,13 @@ class TableRestProxy extends ServiceRestProxy implements ITable
      */
     private function _encodeODataUriValue($value)
     {
-        //TODO: Unclear if OData value in URI's need to be encoded or not
+        // Replace each single quote (') with double single quotes ('') not doudle
+        // quotes (")
+        $value = str_replace('\'', '\'\'', $value);
+        
+        // Encode the special URL characters
+        $value = urlencode($value);
+        
         return $value;
     }
     
@@ -665,11 +713,11 @@ class TableRestProxy extends ServiceRestProxy implements ITable
             $prefixFilter = Filter::applyAnd(
                 Filter::applyGe(
                     Filter::applyLiteral('TableName'),
-                    Filter::applyConstant($prefix)
+                    Filter::applyConstant($prefix, EdmType::STRING)
                 ),
                 Filter::applyLe(
                     Filter::applyLiteral('TableName'),
-                    Filter::applyConstant($prefix . '{')
+                    Filter::applyConstant($prefix . '{', EdmType::STRING)
                 )
             );
             
@@ -703,8 +751,8 @@ class TableRestProxy extends ServiceRestProxy implements ITable
     /**
      * Creates new table in the storage account
      * 
-     * @param string                     $table   name of the name
-     * @param Models\TableServiceOptions $options optional parameters
+     * @param string                     $table   The name of the table.
+     * @param Models\TableServiceOptions $options The optional parameters.
      * 
      * @return none
      * 
@@ -732,9 +780,39 @@ class TableRestProxy extends ServiceRestProxy implements ITable
     }
     
     /**
+     * Gets the table.
+     * 
+     * @param string                     $table   The name of the table.
+     * @param Models\TableServiceOptions $options The optional parameters.
+     * 
+     * @return Models\GetTableResult
+     */
+    public function getTable($table, $options = null)
+    {
+        Validate::isValidString($table);
+        
+        $method      = \HTTP_Request2::METHOD_GET;
+        $headers     = array();
+        $queryParams = array();
+        $statusCode  = Resources::STATUS_OK;
+        $path        = "Tables('$table')";
+        
+        if (is_null($options)) {
+            $options = new TableServiceOptions();
+        }
+        
+        $queryParams[Resources::QP_TIMEOUT] = strval($options->getTimeout());
+        $headers[Resources::CONTENT_TYPE]   = Resources::XML_ATOM_CONTENT_TYPE;
+        
+        $response = $this->send($method, $headers, $queryParams, $path, $statusCode);
+        
+        return GetTableResult::create($response->getBody(), $this->_atomSerializer);
+    }
+    
+    /**
      * Deletes the specified table and any data it contains.
      * 
-     * @param string                     $table   name of the name
+     * @param string                     $table   The name of the table.
      * @param Models\TableServiceOptions $options optional parameters
      * 
      * @return none
@@ -756,7 +834,6 @@ class TableRestProxy extends ServiceRestProxy implements ITable
         }
         
         $queryParams[Resources::QP_TIMEOUT] = strval($options->getTimeout());
-        $headers[Resources::CONTENT_TYPE]   = Resources::XML_ATOM_CONTENT_TYPE;
         
         $this->send($method, $headers, $queryParams, $path, $statusCode);
     }
@@ -963,8 +1040,8 @@ class TableRestProxy extends ServiceRestProxy implements ITable
     public function getEntity($table, $partitionKey, $rowKey, $options = null)
     {
         Validate::isValidString($table);
-        Validate::isValidString($partitionKey);
-        Validate::isValidString($rowKey);
+        Validate::isTrue(!is_null($partitionKey), Resources::NULL_TABLE_KEY_MSG);
+        Validate::isTrue(!is_null($rowKey), Resources::NULL_TABLE_KEY_MSG);
         
         $method      = \HTTP_Request2::METHOD_GET;
         $headers     = array();

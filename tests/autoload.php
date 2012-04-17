@@ -14,6 +14,7 @@ spl_autoload_register(
             'pear2\\tests\\framework\\servicerestproxytestbase' => '/framework/ServiceRestProxyTestBase.php',
             'pear2\\tests\\framework\\tableservicerestproxytestbase' => '/framework/TableRestProxyTestBase.php',
             'pear2\\tests\\framework\\testresources' => '/framework/TestResources.php',
+            'pear2\\tests\\framework\\virtualfilesystem' => '/framework/VirtualFileSystem.php',
             'pear2\\tests\\functional\\windowsazure\\services\\queue\\functionaltestbase' => '/functional/WindowsAzure/Services/Queue/FunctionalTestBase.php',
             'pear2\\tests\\functional\\windowsazure\\services\\queue\\integrationtestbase' => '/functional/WindowsAzure/Services/Queue/IntegrationTestBase.php',
             'pear2\\tests\\functional\\windowsazure\\services\\queue\\queueservicefunctionaloptionstest' => '/functional/WindowsAzure/Services/Queue/QueueServiceFunctionalOptionsTest.php',
@@ -28,6 +29,7 @@ spl_autoload_register(
             'pear2\\tests\\mock\\windowsazure\\services\\core\\authentication\\tablesharedkeyliteauthschememock' => '/mock/WindowsAzure/Services/Core/Authentication/TableSharedKeyAuthSchemeMock.php',
             'pear2\\tests\\mock\\windowsazure\\services\\core\\filters\\simplefiltermock' => '/mock/WindowsAzure/Services/Core/Filters/SimpleFilterMock.php',
             'pear2\\tests\\unit\\windowsazure\\core\\httpcallcontexttest' => '/unit/WindowsAzure/Core/HttpCallContextTest.php',
+            'pear2\\tests\\unit\\windowsazure\\loggertest' => '/unit/WindowsAzure/LoggerTest.php',
             'pear2\\tests\\unit\\windowsazure\\serviceruntime\\acquirecurrentstatetest' => '/unit/WindowsAzure/ServiceRuntime/AcquireCurrentStateTest.php',
             'pear2\\tests\\unit\\windowsazure\\serviceruntime\\chunkedgoalstatedeserializertest' => '/unit/WindowsAzure/ServiceRuntime/ChunkedGoalStateDeserializerTest.php',
             'pear2\\tests\\unit\\windowsazure\\serviceruntime\\currentstatetest' => '/unit/WindowsAzure/ServiceRuntime/CurrentStateTest.php',
@@ -145,6 +147,7 @@ spl_autoload_register(
             'pear2\\tests\\unit\\windowsazure\\services\\table\\models\\filters\\rawstringfiltertest' => '/unit/WindowsAzure/Services/Table/Models/Filters/RawStringFilterTest.php',
             'pear2\\tests\\unit\\windowsazure\\services\\table\\models\\filters\\unaryfiltertest' => '/unit/WindowsAzure/Services/Table/Models/Filters/UnaryFilterTest.php',
             'pear2\\tests\\unit\\windowsazure\\services\\table\\models\\getentityresulttest' => '/unit/WindowsAzure/Services/Table/Models/GetEntityResultTest.php',
+            'pear2\\tests\\unit\\windowsazure\\services\\table\\models\\gettableresulttest' => '/unit/WindowsAzure/Services/Table/Models/GetTableResultTest.php',
             'pear2\\tests\\unit\\windowsazure\\services\\table\\models\\insertentityresulttest' => '/unit/WindowsAzure/Services/Table/Models/InsertEntityResultTest.php',
             'pear2\\tests\\unit\\windowsazure\\services\\table\\models\\propertytest' => '/unit/WindowsAzure/Services/Table/Models/PropertyTest.php',
             'pear2\\tests\\unit\\windowsazure\\services\\table\\models\\queryentitiesoptionstest' => '/unit/WindowsAzure/Services/Table/Models/QueryEntitiesOptionsTest.php',
@@ -156,12 +159,12 @@ spl_autoload_register(
             'pear2\\tests\\unit\\windowsazure\\services\\table\\models\\updateentityresulttest' => '/unit/WindowsAzure/Services/Table/Models/UpdateEntityResultTest.php',
             'pear2\\tests\\unit\\windowsazure\\services\\table\\tablerestproxytest' => '/unit/WindowsAzure/Services/Table/TableRestProxyTest.php',
             'pear2\\tests\\unit\\windowsazure\\services\\table\\tableservicetest' => '/unit/WindowsAzure/Services/Table/TableServiceTest.php',
+            'pear2\\tests\\unit\\windowsazure\\utilitiestest' => '/unit/WindowsAzure/UtilitiesTest.php',
+            'pear2\\tests\\unit\\windowsazure\\validatetest' => '/unit/WindowsAzure/ValidateTest.php',
             'serviceexceptiontest' => '/unit/WindowsAzure/Core/ServiceExceptionTest.php',
             'servicerestproxytest' => '/unit/WindowsAzure/Services/Core/ServiceRestProxyTest.php',
             'sharedkeyfiltertest' => '/unit/WindowsAzure/Services/Core/Filters/SharedKeyFilterTest.php',
             'urltest' => '/unit/WindowsAzure/Core/UrlTest.php',
-            'utilitiestest' => '/unit/WindowsAzure/UtilitiesTest.php',
-            'validatetest' => '/unit/WindowsAzure/ValidateTest.php',
             'windowsazureutilitiestest' => '/unit/WindowsAzure/Core/WindowsAzureUtilitiesTest.php'
           );
       }

@@ -46,13 +46,15 @@ class Resources
     const INVALID_URL_MSG      = 'Provided URL is invalid.';
     const INVALID_HT_MSG       = 'The header type provided is invalid.';
     const INVALID_EDM_MSG      = 'The provided EDM type is invalid.';
-    const INVALID_PROP_MSG     = 'The provided propertie(s) are/is invalid.';
+    const INVALID_PROP_MSG     = 'One of the provided properties is not an instance of class Property';
     const INVALID_ENTITY_MSG   = 'The provided entity object is invalid.';
     const INVALID_VERSION_MSG  = 'Server does not support any known protocol versions.';
     const INVALID_BO_TYPE_MSG  = 'Batch operation name is not supported or invalid.';
     const INVALID_BO_PN_MSG    = 'Batch operation parameter is not supported.';
     const INVALID_OC_COUNT_MSG = 'Operations and contexts must be of same size.';
     const INVALID_EXC_OBJ_MSG  = 'Exception object type should be ServiceException.';
+    const NULL_TABLE_KEY_MSG   = 'Partition and raw keys can\'t be NULL.';
+    const BATCH_ENTITY_DEL_MSG = 'The entity was deleted successfully.';
 
     // HTTP Headers
     const X_MS_HEADER_PREFIX                 = 'x-ms-';
@@ -148,10 +150,9 @@ class Resources
     const QP_SELECT          = '$select';
     const QP_TOP             = '$top';
     const QP_FILTER          = '$filter';
-    const QP_ORDERBY         = '$orderby';
-    const QP_NEXT_TABLE_NAME = 'nexttablename';
-    const QP_NEXT_PK         = 'nextpartitionkey';
-    const QP_NEXT_RK         = 'nextrowkey';
+    const QP_NEXT_TABLE_NAME = 'NextTableName';
+    const QP_NEXT_PK         = 'NextPartitionKey';
+    const QP_NEXT_RK         = 'NextRowKey';
     
     // Request body content types
     const XML_CONTENT_TYPE      = 'application/x-www-form-urlencoded';

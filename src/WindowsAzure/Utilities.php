@@ -341,6 +341,24 @@ class Utilities
             
         return new \DateTime($value, new \DateTimeZone('UTC'));
     }
+    
+    /**
+     * Reads the contents of a file.
+     * 
+     * @param stream $stream The file strea with read permissions.
+     * 
+     * @return string
+     */
+    public static function readFile($stream)
+    {
+        $contents = Resources::EMPTY_STRING;
+        
+        while (!feof($stream)) {
+            $contents .= fgets($stream);
+        }
+        
+        return $contents;
+    }
 }
 
 ?>
