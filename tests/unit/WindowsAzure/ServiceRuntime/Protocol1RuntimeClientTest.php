@@ -15,32 +15,32 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   PEAR2\Tests\Unit\WindowsAzure\ServiceRuntime
+ * @package   Tests\Unit\WindowsAzure\ServiceRuntime
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
-namespace PEAR2\Tests\Unit\WindowsAzure\ServiceRuntime;
+namespace Tests\Unit\WindowsAzure\ServiceRuntime;
 
-use PEAR2\Tests\Framework\TestResources;
-use PEAR2\WindowsAzure\Core\WindowsAzureUtilities;
-use PEAR2\WindowsAzure\ServiceRuntime\AcquireCurrentState;
-use PEAR2\WindowsAzure\ServiceRuntime\ChunkedGoalStateDeserializer;
-use PEAR2\WindowsAzure\ServiceRuntime\CurrentStatus;
-use PEAR2\WindowsAzure\ServiceRuntime\FileInputChannel;
-use PEAR2\WindowsAzure\ServiceRuntime\FileOutputChannel;
-use PEAR2\WindowsAzure\ServiceRuntime\Protocol1RuntimeClient;
-use PEAR2\WindowsAzure\ServiceRuntime\Protocol1RuntimeCurrentStateClient;
-use PEAR2\WindowsAzure\ServiceRuntime\Protocol1RuntimeGoalStateClient;
-use PEAR2\WindowsAzure\ServiceRuntime\XmlCurrentStateSerializer;
-use PEAR2\WindowsAzure\ServiceRuntime\XmlRoleEnvironmentDataDeserializer;
+use Tests\Framework\TestResources;
+use WindowsAzure\Core\WindowsAzureUtilities;
+use WindowsAzure\ServiceRuntime\AcquireCurrentState;
+use WindowsAzure\ServiceRuntime\ChunkedGoalStateDeserializer;
+use WindowsAzure\ServiceRuntime\CurrentStatus;
+use WindowsAzure\ServiceRuntime\FileInputChannel;
+use WindowsAzure\ServiceRuntime\FileOutputChannel;
+use WindowsAzure\ServiceRuntime\Protocol1RuntimeClient;
+use WindowsAzure\ServiceRuntime\Protocol1RuntimeCurrentStateClient;
+use WindowsAzure\ServiceRuntime\Protocol1RuntimeGoalStateClient;
+use WindowsAzure\ServiceRuntime\XmlCurrentStateSerializer;
+use WindowsAzure\ServiceRuntime\XmlRoleEnvironmentDataDeserializer;
 
 /**
  * Unit tests for class Protocol1RuntimeClient.
  *
  * @category  Microsoft
- * @package   PEAR2\Tests\Unit\WindowsAzure\ServiceRuntime
+ * @package   Tests\Unit\WindowsAzure\ServiceRuntime
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
@@ -50,7 +50,7 @@ use PEAR2\WindowsAzure\ServiceRuntime\XmlRoleEnvironmentDataDeserializer;
 class Protocol1RuntimeClientTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @covers PEAR2\WindowsAzure\ServiceRuntime\Protocol1RuntimeClient::__construct
+     * @covers WindowsAzure\ServiceRuntime\Protocol1RuntimeClient::__construct
      */
     public function testConstruct()
     {
@@ -69,12 +69,12 @@ class Protocol1RuntimeClientTest extends \PHPUnit_Framework_TestCase
             $endpoint);
         
         // Test
-        $this->assertInstanceOf('PEAR2\\WindowsAzure\\ServiceRuntime\\Protocol1RuntimeClient',
+        $this->assertInstanceOf('\WindowsAzure\\ServiceRuntime\\Protocol1RuntimeClient',
             $protocol1RuntimeClient);
     }
     
     /**
-     * @covers PEAR2\WindowsAzure\ServiceRuntime\Protocol1RuntimeClient::getCurrentGoalState
+     * @covers WindowsAzure\ServiceRuntime\Protocol1RuntimeClient::getCurrentGoalState
      */
     public function testGetCurrentGoalState()
     {
@@ -144,13 +144,13 @@ class Protocol1RuntimeClientTest extends \PHPUnit_Framework_TestCase
 
         // Test
         $this->assertInstanceOf(
-            'PEAR2\\WindowsAzure\\ServiceRuntime\\GoalState',
+            '\WindowsAzure\\ServiceRuntime\\GoalState',
             $protocol1RuntimeClient->getCurrentGoalState()
         );
     }
     
    /**
-     * @covers PEAR2\WindowsAzure\ServiceRuntime\Protocol1RuntimeClient::getRoleEnvironmentData
+     * @covers WindowsAzure\ServiceRuntime\Protocol1RuntimeClient::getRoleEnvironmentData
      */
     public function testGetRoleEnvironmentData()
     {
@@ -220,13 +220,13 @@ class Protocol1RuntimeClientTest extends \PHPUnit_Framework_TestCase
 
         // Test
         $this->assertInstanceOf(
-            'PEAR2\\WindowsAzure\\ServiceRuntime\\RoleEnvironmentData',
+            '\WindowsAzure\\ServiceRuntime\\RoleEnvironmentData',
             $protocol1RuntimeClient->getRoleEnvironmentData()
         );
     }
     
     /**
-     * @covers PEAR2\WindowsAzure\ServiceRuntime\Protocol1RuntimeClient::setCurrentState
+     * @covers WindowsAzure\ServiceRuntime\Protocol1RuntimeClient::setCurrentState
      */
     public function testSetCurrentState()
     {

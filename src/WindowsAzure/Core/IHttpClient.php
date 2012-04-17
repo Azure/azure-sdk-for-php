@@ -15,20 +15,20 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   PEAR2\WindowsAzure\Core
+ * @package   WindowsAzure\Core
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
  
-namespace PEAR2\WindowsAzure\Core;
+namespace WindowsAzure\Core;
 
 /**
  * Defines required methods for a HTTP client proxy.
  *
  * @category  Microsoft
- * @package   PEAR2\WindowsAzure\Core
+ * @package   WindowsAzure\Core
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
@@ -40,7 +40,7 @@ interface IHttpClient
     /**
      * Sets the request url.
      *
-     * @param PEAR2\WindowsAzure\Core\IUrl $url request url.
+     * @param WindowsAzure\Core\IUrl $url request url.
      * 
      * @return none.
      */
@@ -49,7 +49,7 @@ interface IHttpClient
     /**
      * Gets request url.
      *
-     * @return PEAR2\WindowsAzure\Core\IUrl
+     * @return WindowsAzure\Core\IUrl
      */
     public function getUrl();
     
@@ -164,7 +164,7 @@ interface IHttpClient
     /**
      * Makes deep copy from the current object.
      * 
-     * @return PEAR2\WindowsAzure\Core\HttpClient
+     * @return WindowsAzure\Core\HttpClient
      */
     public function __clone();
     

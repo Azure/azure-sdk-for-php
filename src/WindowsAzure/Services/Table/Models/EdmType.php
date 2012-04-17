@@ -15,23 +15,23 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   PEAR2\WindowsAzure\Services\Table\Models
+ * @package   WindowsAzure\Services\Table\Models
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
  
-namespace PEAR2\WindowsAzure\Services\Table\Models;
-use PEAR2\WindowsAzure\Utilities;
-use PEAR2\WindowsAzure\Validate;
-use PEAR2\WindowsAzure\Resources;
+namespace WindowsAzure\Services\Table\Models;
+use WindowsAzure\Utilities;
+use WindowsAzure\Validate;
+use WindowsAzure\Resources;
 
 /**
  * Basic Windows Azure EDM Types used for table entity properties.
  *
  * @category  Microsoft
- * @package   PEAR2\WindowsAzure\Services\Table\Models
+ * @package   WindowsAzure\Services\Table\Models
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
@@ -65,6 +65,49 @@ class EdmType
     }
     
     /**
+     * Serializes EDM value into proper value for sending to Windows Azure service.
+     * 
+     * @param string $type  The EDM type.
+     * @param mix    $value The EDM value.
+     * 
+     * @return string
+     * 
+     * @throws \InvalidArgumentException 
+     */
+    public static function serializeValue($type, $value)
+    {
+        switch ($type) {
+        case EdmType::DATETIME:
+            $edmDate = Utilities::convertToEdmDateTime($value);
+            return 'datetime\'' . $edmDate . '\'';
+
+        case EdmType::BINARY:
+            return 'X\'' . implode('', unpack("H*", $value)) . '\'';
+
+        case EdmType::BOOLEAN:
+            return ($value ? 'true' : 'false');
+
+        case EdmType::DOUBLE:
+        case EdmType::INT32:
+            return $value;
+            
+        case EdmType::INT64:
+            return $value . 'L';
+
+        case EdmType::GUID:
+            return 'guid\'' . $value . '\'';
+
+        case null:
+        case EdmType::STRING:
+            // NULL also is treated as EdmType::STRING
+            return '\'' . str_replace('\'', '\'\'', $value) . '\'';
+
+        default:
+            throw new \InvalidArgumentException();
+        }
+    }
+    
+    /**
      * Converts the value into its proper type.
      * 
      * @param string $type  The edm type.
@@ -74,7 +117,7 @@ class EdmType
      * 
      * @throws \InvalidArgumentException
      */
-    public static function processValue($type, $value)
+    public static function unserializeValue($type, $value)
     {
         // Having null value means that the user wants to remove the property name
         // associated with this value. Leave the value as null so this hold.

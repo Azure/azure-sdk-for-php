@@ -15,21 +15,21 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   PEAR2\Tests\Unit\WindowsAzure\Services\Table\Models
+ * @package   Tests\Unit\WindowsAzure\Services\Table\Models
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
-namespace PEAR2\Tests\Unit\WindowsAzure\Services\Table\Models;
-use PEAR2\WindowsAzure\Services\Table\Models\DeleteEntityOptions;
-use PEAR2\WindowsAzure\Services\Table\Models\Etag;
+namespace Tests\Unit\WindowsAzure\Services\Table\Models;
+use WindowsAzure\Services\Table\Models\DeleteEntityOptions;
+use WindowsAzure\Services\Table\Models\Etag;
 
 /**
  * Unit tests for class DeleteEntityOptions
  *
  * @category  Microsoft
- * @package   PEAR2\Tests\Unit\WindowsAzure\Services\Table\Models
+ * @package   Tests\Unit\WindowsAzure\Services\Table\Models
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
@@ -39,8 +39,8 @@ use PEAR2\WindowsAzure\Services\Table\Models\Etag;
 class DeleteEntityOptionsTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @covers PEAR2\WindowsAzure\Services\Table\Models\DeleteEntityOptions::setEtag
-     * @covers PEAR2\WindowsAzure\Services\Table\Models\DeleteEntityOptions::getEtag
+     * @covers WindowsAzure\Services\Table\Models\DeleteEntityOptions::setEtag
+     * @covers WindowsAzure\Services\Table\Models\DeleteEntityOptions::getEtag
      */
     public function testSetEtag()
     {

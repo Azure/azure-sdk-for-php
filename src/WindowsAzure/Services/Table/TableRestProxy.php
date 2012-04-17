@@ -15,43 +15,43 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   PEAR2\WindowsAzure\Services\Table
+ * @package   WindowsAzure\Services\Table
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
  
-namespace PEAR2\WindowsAzure\Services\Table;
-use PEAR2\WindowsAzure\Resources;
-use PEAR2\WindowsAzure\Utilities;
-use PEAR2\WindowsAzure\Validate;
-use PEAR2\WindowsAzure\Core\HttpCallContext;
-use PEAR2\WindowsAzure\Services\Core\ServiceRestProxy;
-use PEAR2\WindowsAzure\Services\Table\Models\TableServiceOptions;
-use PEAR2\WindowsAzure\Services\Core\Models\GetServicePropertiesResult;
-use PEAR2\WindowsAzure\Services\Table\Models\EdmType;
-use PEAR2\WindowsAzure\Services\Table\Models\Filters;
-use PEAR2\WindowsAzure\Services\Table\Models\Filters\Filter;
-use PEAR2\WindowsAzure\Services\Table\Models\GetTableResult;
-use PEAR2\WindowsAzure\Services\Table\Models\QueryTablesOptions;
-use PEAR2\WindowsAzure\Services\Table\Models\QueryTablesResult;
-use PEAR2\WindowsAzure\Services\Table\Models\InsertEntityResult;
-use PEAR2\WindowsAzure\Services\Table\Models\UpdateEntityResult;
-use PEAR2\WindowsAzure\Services\Table\Models\QueryEntitiesOptions;
-use PEAR2\WindowsAzure\Services\Table\Models\QueryEntitiesResult;
-use PEAR2\WindowsAzure\Services\Table\Models\DeleteEntityOptions;
-use PEAR2\WindowsAzure\Services\Table\Models\GetEntityResult;
-use PEAR2\WindowsAzure\Services\Table\Models\BatchOperationType;
-use PEAR2\WindowsAzure\Services\Table\Models\BatchOperationParameterName;
-use PEAR2\WindowsAzure\Services\Table\Models\BatchResult;
+namespace WindowsAzure\Services\Table;
+use WindowsAzure\Resources;
+use WindowsAzure\Utilities;
+use WindowsAzure\Validate;
+use WindowsAzure\Core\HttpCallContext;
+use WindowsAzure\Services\Core\ServiceRestProxy;
+use WindowsAzure\Services\Table\Models\TableServiceOptions;
+use WindowsAzure\Services\Core\Models\GetServicePropertiesResult;
+use WindowsAzure\Services\Table\Models\EdmType;
+use WindowsAzure\Services\Table\Models\Filters;
+use WindowsAzure\Services\Table\Models\Filters\Filter;
+use WindowsAzure\Services\Table\Models\GetTableResult;
+use WindowsAzure\Services\Table\Models\QueryTablesOptions;
+use WindowsAzure\Services\Table\Models\QueryTablesResult;
+use WindowsAzure\Services\Table\Models\InsertEntityResult;
+use WindowsAzure\Services\Table\Models\UpdateEntityResult;
+use WindowsAzure\Services\Table\Models\QueryEntitiesOptions;
+use WindowsAzure\Services\Table\Models\QueryEntitiesResult;
+use WindowsAzure\Services\Table\Models\DeleteEntityOptions;
+use WindowsAzure\Services\Table\Models\GetEntityResult;
+use WindowsAzure\Services\Table\Models\BatchOperationType;
+use WindowsAzure\Services\Table\Models\BatchOperationParameterName;
+use WindowsAzure\Services\Table\Models\BatchResult;
 
 /**
  * This class constructs HTTP requests and receive HTTP responses for table
  * service layer.
  *
  * @category  Microsoft
- * @package   PEAR2\WindowsAzure\Services\Table
+ * @package   WindowsAzure\Services\Table
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
@@ -140,7 +140,7 @@ class TableRestProxy extends ServiceRestProxy implements ITable
      * @param Models\Entity $entity The entity object.
      * @param string        $type   The API type.
      * 
-     * @return PEAR2\WindowsAzure\Core\HttpCallContext
+     * @return WindowsAzure\Core\HttpCallContext
      * 
      * @throws \InvalidArgumentException 
      */
@@ -154,7 +154,7 @@ class TableRestProxy extends ServiceRestProxy implements ITable
             return $this->_constructPutOrMergeEntityContext(
                 $table,
                 $entity,
-                \HTTP_Request2::METHOD_PUT,
+                Resources::HTTP_PUT,
                 true,
                 null
             );
@@ -172,7 +172,7 @@ class TableRestProxy extends ServiceRestProxy implements ITable
             return $this->_constructPutOrMergeEntityContext(
                 $table,
                 $entity,
-                \HTTP_Request2::METHOD_PUT,
+                Resources::HTTP_PUT,
                 false,
                 null
             );
@@ -265,7 +265,7 @@ class TableRestProxy extends ServiceRestProxy implements ITable
         Validate::isTrue(!is_null($partitionKey), Resources::NULL_TABLE_KEY_MSG);
         Validate::isTrue(!is_null($rowKey), Resources::NULL_TABLE_KEY_MSG);
         
-        $method      = \HTTP_Request2::METHOD_DELETE;
+        $method      = Resources::HTTP_DELETE;
         $headers     = array();
         $queryParams = array();
         $statusCode  = Resources::STATUS_NO_CONTENT;
@@ -361,7 +361,7 @@ class TableRestProxy extends ServiceRestProxy implements ITable
         Validate::notNullOrEmpty($entity);
         Validate::isTrue($entity->isValid(), Resources::INVALID_ENTITY_MSG);
         
-        $method      = \HTTP_Request2::METHOD_POST;
+        $method      = Resources::HTTP_POST;
         $context     = new HttpCallContext();
         $headers     = array();
         $queryParams = array();
@@ -453,8 +453,6 @@ class TableRestProxy extends ServiceRestProxy implements ITable
      * @param string &$e     The filter expression
      * 
      * @return string
-     * 
-     * @throws \InvalidArgumentException
      */
     private function _buildFilterExpressionRec($filter, &$e)
     {
@@ -470,43 +468,8 @@ class TableRestProxy extends ServiceRestProxy implements ITable
             if (is_null($value)) {
                 $e .= 'null';
             } else {
-                switch ($filter->getEdmType()) {
-                case EdmType::DATETIME:
-                    $edmDate = Utilities::convertToEdmDateTime($value);
-                    $e      .= 'datetime\'' . $edmDate . '\'';
-                    break;
-
-                case EdmType::BINARY:
-                    $e .= 'X\'' . implode('', unpack("H*", $value)) . '\'';
-                    break;
-
-                case EdmType::BOOLEAN:
-                    $e .= ($value ? 'true' : 'false');
-                    break;
-
-                case EdmType::DOUBLE:
-                    $e .= $value;
-                    break;
-
-                case EdmType::GUID:
-                    $e .= 'guid\'' . $value . '\'';
-                    break;
-
-                case EdmType::INT32:
-                    $e .= $value;
-                    break;
-
-                case EdmType::INT64:
-                    $e .= $value . 'L';
-                    break;
-
-                case EdmType::STRING:
-                    $e .= '\'' . str_replace('\'', '\'\'', $value) . '\'';
-                    break;
-
-                default:
-                    throw new \InvalidArgumentException();
-                }
+                $type = $filter->getEdmType();
+                $e   .= EdmType::serializeValue($type, $value);
             }
         } else if ($filter instanceof Filters\UnaryFilter) {
             $e .= $filter->getOperator();
@@ -600,18 +563,16 @@ class TableRestProxy extends ServiceRestProxy implements ITable
     }
     
     /**
-     * Constructor
+     * Constructor.
      * 
-     * @param PEAR2\WindowsAzure\Core\IHttpClient $channel        The HTTP client 
+     * @param WindowsAzure\Core\IHttpClient     $channel        The HTTP client 
      * channel.
-     * @param string                              $uri            The storage account
+     * @param string                            $uri            The storage account
      * uri.
-     * @param Table\Utilities\IAtomReaderWriter   $atomSerializer The atom 
+     * @param Table\Utilities\IAtomReaderWriter $atomSerializer The atom 
      * serializer.
-     * @param Table\Utilities\IMimeReaderWriter   $mimeSerializer The MIME 
+     * @param Table\Utilities\IMimeReaderWriter $mimeSerializer The MIME 
      * serializer.
-     * 
-     * @return TableRestProxy
      */
     public function __construct($channel, $uri, $atomSerializer, $mimeSerializer)
     {
@@ -625,7 +586,7 @@ class TableRestProxy extends ServiceRestProxy implements ITable
     * 
     * @param Models\TableServiceOptions $options optional table service options.
     * 
-    * @return PEAR2\WindowsAzure\Services\Core\Models\GetServicePropertiesResult
+    * @return WindowsAzure\Services\Core\Models\GetServicePropertiesResult
     * 
     * @see http://msdn.microsoft.com/en-us/library/windowsazure/hh452238.aspx
     */
@@ -637,7 +598,7 @@ class TableRestProxy extends ServiceRestProxy implements ITable
         
         $context = new HttpCallContext();
         $timeout = strval($options->getTimeout());
-        $context->setMethod(\HTTP_Request2::METHOD_GET);
+        $context->setMethod(Resources::HTTP_GET);
         $context->addQueryParameter(Resources::QP_REST_TYPE, 'service');
         $context->addQueryParameter(Resources::QP_COMP, 'properties');
         $context->addQueryParameter(Resources::QP_TIMEOUT, $timeout);
@@ -661,7 +622,7 @@ class TableRestProxy extends ServiceRestProxy implements ITable
     */
     public function setServiceProperties($serviceProperties, $options = null)
     {
-        $method      = \HTTP_Request2::METHOD_PUT;
+        $method      = Resources::HTTP_PUT;
         $headers     = array();
         $queryParams = array();
         $statusCode  = Resources::STATUS_ACCEPTED;
@@ -692,7 +653,7 @@ class TableRestProxy extends ServiceRestProxy implements ITable
      */
     public function queryTables($options = null)
     {
-        $method      = \HTTP_Request2::METHOD_GET;
+        $method      = Resources::HTTP_GET;
         $headers     = array();
         $queryParams = array();
         $statusCode  = Resources::STATUS_OK;
@@ -762,7 +723,7 @@ class TableRestProxy extends ServiceRestProxy implements ITable
     {
         Validate::isValidString($table);
         
-        $method      = \HTTP_Request2::METHOD_POST;
+        $method      = Resources::HTTP_POST;
         $headers     = array();
         $queryParams = array();
         $statusCode  = Resources::STATUS_CREATED;
@@ -791,7 +752,7 @@ class TableRestProxy extends ServiceRestProxy implements ITable
     {
         Validate::isValidString($table);
         
-        $method      = \HTTP_Request2::METHOD_GET;
+        $method      = Resources::HTTP_GET;
         $headers     = array();
         $queryParams = array();
         $statusCode  = Resources::STATUS_OK;
@@ -823,7 +784,7 @@ class TableRestProxy extends ServiceRestProxy implements ITable
     {
         Validate::isValidString($table);
         
-        $method      = \HTTP_Request2::METHOD_DELETE;
+        $method      = Resources::HTTP_DELETE;
         $headers     = array();
         $queryParams = array();
         $statusCode  = Resources::STATUS_NO_CONTENT;
@@ -852,7 +813,7 @@ class TableRestProxy extends ServiceRestProxy implements ITable
     {
         Validate::isValidString($table);
         
-        $method      = \HTTP_Request2::METHOD_GET;
+        $method      = Resources::HTTP_GET;
         $headers     = array();
         $queryParams = array();
         $statusCode  = Resources::STATUS_OK;
@@ -923,7 +884,7 @@ class TableRestProxy extends ServiceRestProxy implements ITable
      */
     public function insertOrMergeEntity($table, $entity, $options = null)
     {
-        $this->_putOrMergeEntityImpl(
+        return $this->_putOrMergeEntityImpl(
             $table,
             $entity,
             Resources::HTTP_MERGE,
@@ -946,10 +907,10 @@ class TableRestProxy extends ServiceRestProxy implements ITable
      */
     public function insertOrReplaceEntity($table, $entity, $options = null)
     {
-        $this->_putOrMergeEntityImpl(
+        return $this->_putOrMergeEntityImpl(
             $table,
             $entity,
-            \HTTP_Request2::METHOD_PUT,
+            Resources::HTTP_PUT,
             false, 
             $options
         );
@@ -969,10 +930,10 @@ class TableRestProxy extends ServiceRestProxy implements ITable
      */
     public function updateEntity($table, $entity, $options = null)
     {
-        $this->_putOrMergeEntityImpl(
+        return $this->_putOrMergeEntityImpl(
             $table,
             $entity,
-            \HTTP_Request2::METHOD_PUT,
+            Resources::HTTP_PUT,
             true, 
             $options
         );
@@ -992,7 +953,7 @@ class TableRestProxy extends ServiceRestProxy implements ITable
      */
     public function mergeEntity($table, $entity, $options = null)
     {
-        $this->_putOrMergeEntityImpl(
+        return $this->_putOrMergeEntityImpl(
             $table,
             $entity,
             Resources::HTTP_MERGE,
@@ -1043,7 +1004,7 @@ class TableRestProxy extends ServiceRestProxy implements ITable
         Validate::isTrue(!is_null($partitionKey), Resources::NULL_TABLE_KEY_MSG);
         Validate::isTrue(!is_null($rowKey), Resources::NULL_TABLE_KEY_MSG);
         
-        $method      = \HTTP_Request2::METHOD_GET;
+        $method      = Resources::HTTP_GET;
         $headers     = array();
         $queryParams = array();
         $statusCode  = Resources::STATUS_OK;
@@ -1083,7 +1044,7 @@ class TableRestProxy extends ServiceRestProxy implements ITable
     {
         Validate::notNullOrEmpty($batchOperations);
         
-        $method      = \HTTP_Request2::METHOD_POST;
+        $method      = Resources::HTTP_POST;
         $operations  = $batchOperations->getOperations();
         $contexts    = $this->_createOperationsContexts($operations);
         $mime        = $this->_createBatchRequestBody($operations, $contexts);

@@ -15,22 +15,22 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   PEAR2\Tests\Unit\WindowsAzure\ServiceRuntime
+ * @package   Tests\Unit\WindowsAzure\ServiceRuntime
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
-namespace PEAR2\Tests\Unit\WindowsAzure\ServiceRuntime;
-use PEAR2\Tests\Framework\TestResources;
-use PEAR2\WindowsAzure\Core\WindowsAzureUtilities;
-use PEAR2\WindowsAzure\ServiceRuntime\RoleEnvironmentConfigurationSettingChange;
+namespace Tests\Unit\WindowsAzure\ServiceRuntime;
+use Tests\Framework\TestResources;
+use WindowsAzure\Core\WindowsAzureUtilities;
+use WindowsAzure\ServiceRuntime\RoleEnvironmentConfigurationSettingChange;
 
 /**
  * Unit tests for class RoleEnvironmentConfigurationSettingChange.
  *
  * @category  Microsoft
- * @package   PEAR2\Tests\Unit\WindowsAzure\ServiceRuntime
+ * @package   Tests\Unit\WindowsAzure\ServiceRuntime
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
@@ -40,8 +40,8 @@ use PEAR2\WindowsAzure\ServiceRuntime\RoleEnvironmentConfigurationSettingChange;
 class RoleEnvironmentConfigurationSettingChangeTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @covers PEAR2\WindowsAzure\ServiceRuntime\RoleEnvironmentConfigurationSettingChange::__construct
-     * @covers PEAR2\WindowsAzure\ServiceRuntime\RoleEnvironmentConfigurationSettingChange::getConfigurationSettingName
+     * @covers WindowsAzure\ServiceRuntime\RoleEnvironmentConfigurationSettingChange::__construct
+     * @covers WindowsAzure\ServiceRuntime\RoleEnvironmentConfigurationSettingChange::getConfigurationSettingName
      */
     public function testGetConfigurationSettingName()
     {

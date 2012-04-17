@@ -17,22 +17,22 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- * @package    PEAR2\Tests\Unit\WindowsAzure\Services\Core\Authentication
+ * @package    Tests\Unit\WindowsAzure\Services\Core\Authentication
  * @author     Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright  2012 Microsoft Corporation
  * @license    http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link       http://pear.php.net/package/azure-sdk-for-php
  */
 
-namespace PEAR2\Tests\Unit\WindowsAzure\Services\Core\Authentication;
-use PEAR2\Tests\Mock\WindowsAzure\Services\Core\Authentication\TableSharedKeyLiteAuthSchemeMock;
-use PEAR2\WindowsAzure\Resources;
-use PEAR2\Tests\Framework\TestResources;
+namespace Tests\Unit\WindowsAzure\Services\Core\Authentication;
+use Tests\Mock\WindowsAzure\Services\Core\Authentication\TableSharedKeyLiteAuthSchemeMock;
+use WindowsAzure\Resources;
+use Tests\Framework\TestResources;
 
 /**
  * Unit tests for TableSharedKeyLiteAuthScheme class.
  *
- * @package    PEAR2\Tests\Unit\WindowsAzure\Services\Core\Authentication
+ * @package    Tests\Unit\WindowsAzure\Services\Core\Authentication
  * @author     Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright  2012 Microsoft Corporation
  * @license    http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
@@ -42,7 +42,7 @@ use PEAR2\Tests\Framework\TestResources;
 class TableSharedKeyLiteAuthSchemeTest extends \PHPUnit_Framework_TestCase
 {
     /**
-    * @covers PEAR2\WindowsAzure\Services\Core\Authentication\TableSharedKeyLiteAuthScheme::__construct
+    * @covers WindowsAzure\Services\Core\Authentication\TableSharedKeyLiteAuthScheme::__construct
     */
     public function test__construct()
     {
@@ -55,7 +55,7 @@ class TableSharedKeyLiteAuthSchemeTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-    * @covers PEAR2\WindowsAzure\Services\Core\Authentication\TableSharedKeyLiteAuthScheme::computeSignature
+    * @covers WindowsAzure\Services\Core\Authentication\TableSharedKeyLiteAuthScheme::computeSignature
     */
     public function testComputeSignatureSimple()
     {
@@ -75,7 +75,7 @@ class TableSharedKeyLiteAuthSchemeTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers PEAR2\WindowsAzure\Services\Core\Authentication\TableSharedKeyLiteAuthScheme::getAuthorizationHeader
+     * @covers WindowsAzure\Services\Core\Authentication\TableSharedKeyLiteAuthScheme::getAuthorizationHeader
      */
     public function testGetAuthorizationHeaderSimple()
     {

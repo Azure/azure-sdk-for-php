@@ -15,24 +15,24 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   PEAR2\Tests\Framework
+ * @package   Tests\Framework
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
-namespace PEAR2\Tests\Framework;
-use PEAR2\Tests\Framework\ServiceRestProxyTestBase;
-use PEAR2\Tests\Framework\TestResources;
-use PEAR2\WindowsAzure\Services\Core\Configuration;
-use PEAR2\WindowsAzure\Services\Table\TableSettings;
-use PEAR2\WindowsAzure\Services\Table\TableService;
+namespace Tests\Framework;
+use Tests\Framework\ServiceRestProxyTestBase;
+use Tests\Framework\TestResources;
+use WindowsAzure\Services\Core\Configuration;
+use WindowsAzure\Services\Table\TableSettings;
+use WindowsAzure\Services\Table\TableService;
 
 /**
  * TestBase class for each unit test class.
  *
  * @category  Microsoft
- * @package   PEAR2\Tests\Framework
+ * @package   Tests\Framework
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0

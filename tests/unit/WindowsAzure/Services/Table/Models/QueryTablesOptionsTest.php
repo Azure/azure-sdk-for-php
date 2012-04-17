@@ -15,22 +15,22 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   PEAR2\Tests\Unit\WindowsAzure\Services\Table\Models
+ * @package   Tests\Unit\WindowsAzure\Services\Table\Models
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
 
-namespace PEAR2\Tests\Unit\WindowsAzure\Services\Table\Models;
-use PEAR2\WindowsAzure\Services\Table\Models\QueryTablesOptions;
-use PEAR2\WindowsAzure\Services\Table\Models\Query;
+namespace Tests\Unit\WindowsAzure\Services\Table\Models;
+use WindowsAzure\Services\Table\Models\QueryTablesOptions;
+use WindowsAzure\Services\Table\Models\Query;
 
 /**
  * Unit tests for class QueryTablesOptions
  *
  * @category  Microsoft
- * @package   PEAR2\Tests\Unit\WindowsAzure\Services\Table\Models
+ * @package   Tests\Unit\WindowsAzure\Services\Table\Models
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
@@ -40,8 +40,8 @@ use PEAR2\WindowsAzure\Services\Table\Models\Query;
 class QueryTablesOptionsTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @covers PEAR2\WindowsAzure\Services\Table\Models\QueryTablesOptions::setNextTableName
-     * @covers PEAR2\WindowsAzure\Services\Table\Models\QueryTablesOptions::getNextTableName
+     * @covers WindowsAzure\Services\Table\Models\QueryTablesOptions::setNextTableName
+     * @covers WindowsAzure\Services\Table\Models\QueryTablesOptions::getNextTableName
      */
     public function testSetNextTableName()
     {
@@ -57,8 +57,8 @@ class QueryTablesOptionsTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers PEAR2\WindowsAzure\Services\Table\Models\QueryTablesOptions::setPrefix
-     * @covers PEAR2\WindowsAzure\Services\Table\Models\QueryTablesOptions::getPrefix
+     * @covers WindowsAzure\Services\Table\Models\QueryTablesOptions::setPrefix
+     * @covers WindowsAzure\Services\Table\Models\QueryTablesOptions::getPrefix
      */
     public function testSetPrefix()
     {
@@ -74,8 +74,8 @@ class QueryTablesOptionsTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers PEAR2\WindowsAzure\Services\Table\Models\QueryTablesOptions::setQuery
-     * @covers PEAR2\WindowsAzure\Services\Table\Models\QueryTablesOptions::getQuery
+     * @covers WindowsAzure\Services\Table\Models\QueryTablesOptions::setQuery
+     * @covers WindowsAzure\Services\Table\Models\QueryTablesOptions::getQuery
      */
     public function testSetQuery()
     {

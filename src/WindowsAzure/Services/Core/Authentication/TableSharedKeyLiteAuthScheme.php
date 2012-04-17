@@ -15,24 +15,24 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   PEAR2\WindowsAzure\Services\Core\Authentication
+ * @package   WindowsAzure\Services\Core\Authentication
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
  
-namespace PEAR2\WindowsAzure\Services\Core\Authentication;
-use PEAR2\WindowsAzure\Services\Core\Authentication\StorageAuthScheme;
-use PEAR2\WindowsAzure\Resources;
-use PEAR2\WindowsAzure\Utilities;
+namespace WindowsAzure\Services\Core\Authentication;
+use WindowsAzure\Services\Core\Authentication\StorageAuthScheme;
+use WindowsAzure\Resources;
+use WindowsAzure\Utilities;
 
 /**
  * Provides shared key authentication scheme for blob and queue. For more info
  * check: http://msdn.microsoft.com/en-us/library/windowsazure/dd179428.aspx
  *
  * @category  Microsoft
- * @package   PEAR2\WindowsAzure\Services\Core\Authentication
+ * @package   WindowsAzure\Services\Core\Authentication
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0

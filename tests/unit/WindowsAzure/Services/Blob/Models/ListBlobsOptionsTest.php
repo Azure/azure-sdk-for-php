@@ -15,21 +15,21 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   PEAR2\Tests\Unit\WindowsAzure\Services\Blob\Models
+ * @package   Tests\Unit\WindowsAzure\Services\Blob\Models
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
-namespace PEAR2\Tests\Unit\WindowsAzure\Services\Blob\Models;
-use PEAR2\WindowsAzure\Services\Blob\Models\ListBlobsOptions;
-use PEAR2\Tests\Framework\TestResources;
+namespace Tests\Unit\WindowsAzure\Services\Blob\Models;
+use WindowsAzure\Services\Blob\Models\ListBlobsOptions;
+use Tests\Framework\TestResources;
 
 /**
  * Unit tests for class ListBlobsOptions
  *
  * @category  Microsoft
- * @package   PEAR2\Tests\Unit\WindowsAzure\Services\Blob\Models
+ * @package   Tests\Unit\WindowsAzure\Services\Blob\Models
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
@@ -39,7 +39,7 @@ use PEAR2\Tests\Framework\TestResources;
 class ListBlobOptionsTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @covers PEAR2\WindowsAzure\Services\Blob\Models\ListBlobsOptions::setPrefix
+     * @covers WindowsAzure\Services\Blob\Models\ListBlobsOptions::setPrefix
      */
     public function testSetPrefix()
     {
@@ -55,7 +55,7 @@ class ListBlobOptionsTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers PEAR2\WindowsAzure\Services\Blob\Models\ListBlobsOptions::getPrefix
+     * @covers WindowsAzure\Services\Blob\Models\ListBlobsOptions::getPrefix
      */
     public function testGetPrefix()
     {
@@ -72,7 +72,7 @@ class ListBlobOptionsTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers PEAR2\WindowsAzure\Services\Blob\Models\ListBlobsOptions::setDelimiter
+     * @covers WindowsAzure\Services\Blob\Models\ListBlobsOptions::setDelimiter
      */
     public function testSetDelimiter()
     {
@@ -88,7 +88,7 @@ class ListBlobOptionsTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers PEAR2\WindowsAzure\Services\Blob\Models\ListBlobsOptions::getDelimiter
+     * @covers WindowsAzure\Services\Blob\Models\ListBlobsOptions::getDelimiter
      */
     public function testGetDelimiter()
     {
@@ -105,7 +105,7 @@ class ListBlobOptionsTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers PEAR2\WindowsAzure\Services\Blob\Models\ListBlobsOptions::setMarker
+     * @covers WindowsAzure\Services\Blob\Models\ListBlobsOptions::setMarker
      */
     public function testSetMarker()
     {
@@ -121,7 +121,7 @@ class ListBlobOptionsTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers PEAR2\WindowsAzure\Services\Blob\Models\ListBlobsOptions::getMarker
+     * @covers WindowsAzure\Services\Blob\Models\ListBlobsOptions::getMarker
      */
     public function testGetMarker()
     {
@@ -138,7 +138,7 @@ class ListBlobOptionsTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers PEAR2\WindowsAzure\Services\Blob\Models\ListBlobsOptions::setMaxResults
+     * @covers WindowsAzure\Services\Blob\Models\ListBlobsOptions::setMaxResults
      */
     public function testSetMaxResults()
     {
@@ -154,7 +154,7 @@ class ListBlobOptionsTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers PEAR2\WindowsAzure\Services\Blob\Models\ListBlobsOptions::getMaxResults
+     * @covers WindowsAzure\Services\Blob\Models\ListBlobsOptions::getMaxResults
      */
     public function testGetMaxResults()
     {
@@ -171,7 +171,7 @@ class ListBlobOptionsTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers PEAR2\WindowsAzure\Services\Blob\Models\ListBlobsOptions::setIncludeMetadata
+     * @covers WindowsAzure\Services\Blob\Models\ListBlobsOptions::setIncludeMetadata
      */
     public function testSetIncludeMetadata()
     {
@@ -187,7 +187,7 @@ class ListBlobOptionsTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers PEAR2\WindowsAzure\Services\Blob\Models\ListBlobsOptions::getIncludeMetadata
+     * @covers WindowsAzure\Services\Blob\Models\ListBlobsOptions::getIncludeMetadata
      */
     public function testGetIncludeMetadata()
     {
@@ -204,7 +204,7 @@ class ListBlobOptionsTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers PEAR2\WindowsAzure\Services\Blob\Models\ListBlobsOptions::setIncludeSnapshots
+     * @covers WindowsAzure\Services\Blob\Models\ListBlobsOptions::setIncludeSnapshots
      */
     public function testSetIncludeSnapshots()
     {
@@ -220,7 +220,7 @@ class ListBlobOptionsTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers PEAR2\WindowsAzure\Services\Blob\Models\ListBlobsOptions::getIncludeSnapshots
+     * @covers WindowsAzure\Services\Blob\Models\ListBlobsOptions::getIncludeSnapshots
      */
     public function testGetIncludeSnapshots()
     {
@@ -237,7 +237,7 @@ class ListBlobOptionsTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers PEAR2\WindowsAzure\Services\Blob\Models\ListBlobsOptions::setIncludeUncommittedBlobs
+     * @covers WindowsAzure\Services\Blob\Models\ListBlobsOptions::setIncludeUncommittedBlobs
      */
     public function testSetIncludeUncommittedBlobs()
     {
@@ -253,7 +253,7 @@ class ListBlobOptionsTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers PEAR2\WindowsAzure\Services\Blob\Models\ListBlobsOptions::getIncludeUncommittedBlobs
+     * @covers WindowsAzure\Services\Blob\Models\ListBlobsOptions::getIncludeUncommittedBlobs
      */
     public function testGetIncludeUncommittedBlobs()
     {

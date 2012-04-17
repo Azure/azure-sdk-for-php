@@ -15,22 +15,22 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   PEAR2\WindowsAzure
+ * @package   WindowsAzure
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
  
-namespace PEAR2\WindowsAzure;
-use PEAR2\WindowsAzure\Core\InvalidArgumentTypeException;
-use PEAR2\WindowsAzure\Resources;
+namespace WindowsAzure;
+use WindowsAzure\Core\InvalidArgumentTypeException;
+use WindowsAzure\Resources;
 
 /**
  * Validates aganist a condition and throws an exception in case of failure.
  *
  * @category  Microsoft
- * @package   PEAR2\WindowsAzure
+ * @package   WindowsAzure
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
@@ -141,7 +141,7 @@ class Validate
      *
      * @param mixed $date variable to check against.
      * 
-     * @throws PEAR2\WindowsAzure\Core\InvalidArgumentTypeException
+     * @throws WindowsAzure\Core\InvalidArgumentTypeException
      * 
      * @return none
      */

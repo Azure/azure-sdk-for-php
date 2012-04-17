@@ -15,18 +15,18 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   PEAR2\Tests\Unit\WindowsAzure\ServiceRuntime
+ * @package   Tests\Unit\WindowsAzure\ServiceRuntime
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
-namespace PEAR2\Tests\Unit\WindowsAzure\ServiceRuntime;
-use PEAR2\Tests\Framework\TestResources;
-use PEAR2\WindowsAzure\ServiceRuntime\FileInputChannel;
-use PEAR2\WindowsAzure\ServiceRuntime\RoleEnvironment;
-use PEAR2\WindowsAzure\ServiceRuntime\RoleInstanceStatus;
-use PEAR2\WindowsAzure\ServiceRuntime\RuntimeKernel;
+namespace Tests\Unit\WindowsAzure\ServiceRuntime;
+use Tests\Framework\TestResources;
+use WindowsAzure\ServiceRuntime\FileInputChannel;
+use WindowsAzure\ServiceRuntime\RoleEnvironment;
+use WindowsAzure\ServiceRuntime\RoleInstanceStatus;
+use WindowsAzure\ServiceRuntime\RuntimeKernel;
 
 require_once 'vfsStream/vfsStream.php';
 
@@ -34,7 +34,7 @@ require_once 'vfsStream/vfsStream.php';
  * Unit tests for class RoleEnvironment.
  *
  * @category  Microsoft
- * @package   PEAR2\Tests\Unit\WindowsAzure\ServiceRuntime
+ * @package   Tests\Unit\WindowsAzure\ServiceRuntime
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
@@ -44,8 +44,8 @@ require_once 'vfsStream/vfsStream.php';
 class RoleEnvironmentTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @covers PEAR2\WindowsAzure\ServiceRuntime\RoleEnvironment::init
-     * @covers PEAR2\WindowsAzure\ServiceRuntime\RoleEnvironment::getClientId
+     * @covers WindowsAzure\ServiceRuntime\RoleEnvironment::init
+     * @covers WindowsAzure\ServiceRuntime\RoleEnvironment::getClientId
      */
     public function testGetClientId()
     {
@@ -54,7 +54,7 @@ class RoleEnvironmentTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers PEAR2\WindowsAzure\ServiceRuntime\RoleEnvironment::isAvailable
+     * @covers WindowsAzure\ServiceRuntime\RoleEnvironment::isAvailable
      */
     public function testIsNotAvailable()
     {
@@ -66,8 +66,8 @@ class RoleEnvironmentTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers PEAR2\WindowsAzure\ServiceRuntime\RoleEnvironment::isAvailable
-     * @covers PEAR2\WindowsAzure\ServiceRuntime\RoleEnvironment::_initialize
+     * @covers WindowsAzure\ServiceRuntime\RoleEnvironment::isAvailable
+     * @covers WindowsAzure\ServiceRuntime\RoleEnvironment::_initialize
      */
     public function testIsAvailable()
     {
@@ -142,8 +142,8 @@ class RoleEnvironmentTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers PEAR2\WindowsAzure\ServiceRuntime\RoleEnvironment::getDeploymentId
-     * @covers PEAR2\WindowsAzure\ServiceRuntime\RoleEnvironment::_initialize
+     * @covers WindowsAzure\ServiceRuntime\RoleEnvironment::getDeploymentId
+     * @covers WindowsAzure\ServiceRuntime\RoleEnvironment::_initialize
      */
     public function testGetDeploymentId()
     {
@@ -218,8 +218,8 @@ class RoleEnvironmentTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers PEAR2\WindowsAzure\ServiceRuntime\RoleEnvironment::getCurrentRoleInstance
-     * @covers PEAR2\WindowsAzure\ServiceRuntime\RoleEnvironment::_initialize
+     * @covers WindowsAzure\ServiceRuntime\RoleEnvironment::getCurrentRoleInstance
+     * @covers WindowsAzure\ServiceRuntime\RoleEnvironment::_initialize
      */
     public function testGetCurrentRoleInstance()
     {
@@ -304,7 +304,7 @@ class RoleEnvironmentTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers PEAR2\WindowsAzure\ServiceRuntime\RoleEnvironment::isEmulated
+     * @covers WindowsAzure\ServiceRuntime\RoleEnvironment::isEmulated
      */
     public function testIsEmulated()
     {
@@ -399,8 +399,8 @@ class RoleEnvironmentTest extends \PHPUnit_Framework_TestCase
     }
     
    /**
-    * @covers PEAR2\WindowsAzure\ServiceRuntime\RoleEnvironment::getRoles
-    * @covers PEAR2\WindowsAzure\ServiceRuntime\RoleEnvironment::_initialize
+    * @covers WindowsAzure\ServiceRuntime\RoleEnvironment::getRoles
+    * @covers WindowsAzure\ServiceRuntime\RoleEnvironment::_initialize
     */
     public function testGetRoles()
     {
@@ -526,7 +526,7 @@ class RoleEnvironmentTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers PEAR2\WindowsAzure\ServiceRuntime\RoleEnvironment::getConfigurationSettings
+     * @covers WindowsAzure\ServiceRuntime\RoleEnvironment::getConfigurationSettings
      */
     public function testGetConfigurationSettings()
     {
@@ -599,7 +599,7 @@ class RoleEnvironmentTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers PEAR2\WindowsAzure\ServiceRuntime\RoleEnvironment::getLocalResources
+     * @covers WindowsAzure\ServiceRuntime\RoleEnvironment::getLocalResources
      */
     public function testGetLocalResources()
     {
@@ -673,7 +673,7 @@ class RoleEnvironmentTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers PEAR2\WindowsAzure\ServiceRuntime\RoleEnvironment::requestRecycle
+     * @covers WindowsAzure\ServiceRuntime\RoleEnvironment::requestRecycle
      */
     public function testRequestRecycle() 
     {
@@ -769,7 +769,7 @@ class RoleEnvironmentTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers PEAR2\WindowsAzure\ServiceRuntime\RoleEnvironment::clearStatus
+     * @covers WindowsAzure\ServiceRuntime\RoleEnvironment::clearStatus
      */
     public function testClearStatus() 
     {
@@ -861,7 +861,7 @@ class RoleEnvironmentTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers PEAR2\WindowsAzure\ServiceRuntime\RoleEnvironment::setStatus
+     * @covers WindowsAzure\ServiceRuntime\RoleEnvironment::setStatus
      */
     public function testSetStatusBusy() 
     {
@@ -963,7 +963,7 @@ class RoleEnvironmentTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers PEAR2\WindowsAzure\ServiceRuntime\RoleEnvironment::setStatus
+     * @covers WindowsAzure\ServiceRuntime\RoleEnvironment::setStatus
      */
     public function testSetStatusReady() 
     {
@@ -1065,8 +1065,8 @@ class RoleEnvironmentTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers PEAR2\WindowsAzure\ServiceRuntime\RoleEnvironment::addRoleEnvironmentChangedListener
-     * @covers PEAR2\WindowsAzure\ServiceRuntime\RoleEnvironment::removeRoleEnvironmentChangedListener
+     * @covers WindowsAzure\ServiceRuntime\RoleEnvironment::addRoleEnvironmentChangedListener
+     * @covers WindowsAzure\ServiceRuntime\RoleEnvironment::removeRoleEnvironmentChangedListener
      */
     public function testAddRemoveRoleEnvironmentChangedListener()
     {
@@ -1092,8 +1092,8 @@ class RoleEnvironmentTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers PEAR2\WindowsAzure\ServiceRuntime\RoleEnvironment::addRoleEnvironmentChangingListener
-     * @covers PEAR2\WindowsAzure\ServiceRuntime\RoleEnvironment::removeRoleEnvironmentChangingListener
+     * @covers WindowsAzure\ServiceRuntime\RoleEnvironment::addRoleEnvironmentChangingListener
+     * @covers WindowsAzure\ServiceRuntime\RoleEnvironment::removeRoleEnvironmentChangingListener
      */
     public function testAddRemoveRoleEnvironmentChangingListener()
     {
@@ -1119,8 +1119,8 @@ class RoleEnvironmentTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers PEAR2\WindowsAzure\ServiceRuntime\RoleEnvironment::addRoleEnvironmentStoppingListener
-     * @covers PEAR2\WindowsAzure\ServiceRuntime\RoleEnvironment::removeRoleEnvironmentStoppingListener
+     * @covers WindowsAzure\ServiceRuntime\RoleEnvironment::addRoleEnvironmentStoppingListener
+     * @covers WindowsAzure\ServiceRuntime\RoleEnvironment::removeRoleEnvironmentStoppingListener
      */
     public function testAddRemoveRoleEnvironmentStoppingListener()
     {
@@ -1146,12 +1146,12 @@ class RoleEnvironmentTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers PEAR2\WindowsAzure\ServiceRuntime\RoleEnvironment::_calculateChanges
-     * @covers PEAR2\WindowsAzure\ServiceRuntime\RoleEnvironment::_calculateConfigurationChanges
-     * @covers PEAR2\WindowsAzure\ServiceRuntime\RoleEnvironment::_calculateNewRoleInstanceChanges
-     * @covers PEAR2\WindowsAzure\ServiceRuntime\RoleEnvironment::_calculateNewRoleInstanceEndpointsChanges
-     * @covers PEAR2\WindowsAzure\ServiceRuntime\RoleEnvironment::_calculateCurrentRoleInstanceChanges
-     * @covers PEAR2\WindowsAzure\ServiceRuntime\RoleEnvironment::_calculateCurrentRoleInstanceEndpointsChanges
+     * @covers WindowsAzure\ServiceRuntime\RoleEnvironment::_calculateChanges
+     * @covers WindowsAzure\ServiceRuntime\RoleEnvironment::_calculateConfigurationChanges
+     * @covers WindowsAzure\ServiceRuntime\RoleEnvironment::_calculateNewRoleInstanceChanges
+     * @covers WindowsAzure\ServiceRuntime\RoleEnvironment::_calculateNewRoleInstanceEndpointsChanges
+     * @covers WindowsAzure\ServiceRuntime\RoleEnvironment::_calculateCurrentRoleInstanceChanges
+     * @covers WindowsAzure\ServiceRuntime\RoleEnvironment::_calculateCurrentRoleInstanceEndpointsChanges
      */    
     public function testCalculateChanges()
     {
@@ -1344,17 +1344,17 @@ class RoleEnvironmentTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(3, count($changes));
         
         $this->assertInstanceOf(
-            'PEAR2\\WindowsAzure\\ServiceRuntime\\RoleEnvironmentConfigurationSettingChange',
+            '\WindowsAzure\\ServiceRuntime\\RoleEnvironmentConfigurationSettingChange',
             $changes[0]
         );
         
         $this->assertInstanceOf(
-            'PEAR2\\WindowsAzure\\ServiceRuntime\\RoleEnvironmentTopologyChange',
+            '\WindowsAzure\\ServiceRuntime\\RoleEnvironmentTopologyChange',
             $changes[1]
         );
 
         $this->assertInstanceOf(
-            'PEAR2\\WindowsAzure\\ServiceRuntime\\RoleEnvironmentTopologyChange',
+            '\WindowsAzure\\ServiceRuntime\\RoleEnvironmentTopologyChange',
             $changes[2]
         );
         
@@ -1450,7 +1450,7 @@ class RoleEnvironmentTest extends \PHPUnit_Framework_TestCase
         RoleEnvironment::getDeploymentId();
         
         $this->assertInstanceOf(
-            'PEAR2\\WindowsAzure\\ServiceRuntime\\RoleEnvironmentTopologyChange',
+            '\WindowsAzure\\ServiceRuntime\\RoleEnvironmentTopologyChange',
             $changes[0]
         );
         
@@ -1500,7 +1500,7 @@ class RoleEnvironmentTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(1, count($changes));
 
         $this->assertInstanceOf(
-            'PEAR2\\WindowsAzure\\ServiceRuntime\\RoleEnvironmentTopologyChange',
+            '\WindowsAzure\\ServiceRuntime\\RoleEnvironmentTopologyChange',
             $changes[0]
         );
         
@@ -1550,7 +1550,7 @@ class RoleEnvironmentTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(1, count($changes));
 
         $this->assertInstanceOf(
-            'PEAR2\\WindowsAzure\\ServiceRuntime\\RoleEnvironmentTopologyChange',
+            '\WindowsAzure\\ServiceRuntime\\RoleEnvironmentTopologyChange',
             $changes[0]
         );
         
@@ -1585,7 +1585,7 @@ class RoleEnvironmentTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(1, count($changes));
 
         $this->assertInstanceOf(
-            'PEAR2\\WindowsAzure\\ServiceRuntime\\RoleEnvironmentTopologyChange',
+            '\WindowsAzure\\ServiceRuntime\\RoleEnvironmentTopologyChange',
             $changes[0]
         );
         
@@ -1620,17 +1620,17 @@ class RoleEnvironmentTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(1, count($changes));
 
         $this->assertInstanceOf(
-            'PEAR2\\WindowsAzure\\ServiceRuntime\\RoleEnvironmentTopologyChange',
+            '\WindowsAzure\\ServiceRuntime\\RoleEnvironmentTopologyChange',
             $changes[0]
         );
     }
 
     /**
-     * @covers PEAR2\WindowsAzure\ServiceRuntime\RoleEnvironment::_processGoalStateChange
-     * @covers PEAR2\WindowsAzure\ServiceRuntime\RoleEnvironment::_acceptLatestIncarnation
-     * @covers PEAR2\WindowsAzure\ServiceRuntime\RoleEnvironment::_raiseStoppingEvent
-     * @covers PEAR2\WindowsAzure\ServiceRuntime\RoleEnvironment::_raiseChangingEvent
-     * @covers PEAR2\WindowsAzure\ServiceRuntime\RoleEnvironment::_raiseChangedEvent
+     * @covers WindowsAzure\ServiceRuntime\RoleEnvironment::_processGoalStateChange
+     * @covers WindowsAzure\ServiceRuntime\RoleEnvironment::_acceptLatestIncarnation
+     * @covers WindowsAzure\ServiceRuntime\RoleEnvironment::_raiseStoppingEvent
+     * @covers WindowsAzure\ServiceRuntime\RoleEnvironment::_raiseChangingEvent
+     * @covers WindowsAzure\ServiceRuntime\RoleEnvironment::_raiseChangedEvent
      */    
     public function testProcessGoalStateChange()
     {
@@ -1737,7 +1737,7 @@ class RoleEnvironmentTest extends \PHPUnit_Framework_TestCase
     
     protected static function getMethod($name)
     {
-        $class = new \ReflectionClass('PEAR2\WindowsAzure\ServiceRuntime\RoleEnvironment');
+        $class = new \ReflectionClass('WindowsAzure\ServiceRuntime\RoleEnvironment');
         $method = $class->getMethod($name);
         $method->setAccessible(true);
         return $method;
@@ -1745,7 +1745,7 @@ class RoleEnvironmentTest extends \PHPUnit_Framework_TestCase
     
     protected static function getStaticPropertyValue($property) 
     {
-        $class = new \ReflectionClass('PEAR2\WindowsAzure\ServiceRuntime\RoleEnvironment');
+        $class = new \ReflectionClass('WindowsAzure\ServiceRuntime\RoleEnvironment');
         $properties = $class->getStaticProperties();
         return $properties[$property];
     }

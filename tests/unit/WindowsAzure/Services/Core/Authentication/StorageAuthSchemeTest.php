@@ -15,24 +15,24 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- * @package    PEAR2\Tests\Unit\WindowsAzure\Services\Core\Authentication
+ * @package    Tests\Unit\WindowsAzure\Services\Core\Authentication
  * @author     Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright  2012 Microsoft Corporation
  * @license    http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link       http://pear.php.net/package/azure-sdk-for-php
  */
 
-namespace PEAR2\Tests\Unit\WindowsAzure\Services\Core\Authentication;
-use PEAR2\WindowsAzure\Services\Core\Authentication\StorageAuthScheme;
-use PEAR2\Tests\Unit\Utilities;
-use PEAR2\Tests\Mock\WindowsAzure\Services\Core\Authentication\StorageAuthSchemeMock;
-use PEAR2\Tests\Framework\TestResources;
-use PEAR2\WindowsAzure\Resources;
+namespace Tests\Unit\WindowsAzure\Services\Core\Authentication;
+use WindowsAzure\Services\Core\Authentication\StorageAuthScheme;
+use Tests\Unit\Utilities;
+use Tests\Mock\WindowsAzure\Services\Core\Authentication\StorageAuthSchemeMock;
+use Tests\Framework\TestResources;
+use WindowsAzure\Resources;
 
 /**
  * Unit tests for StorageAuthScheme class.
  *
- * @package    PEAR2\Tests\Unit\WindowsAzure\Services\Core\Authentication
+ * @package    Tests\Unit\WindowsAzure\Services\Core\Authentication
  * @author     Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright  2012 Microsoft Corporation
  * @license    http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
@@ -42,7 +42,7 @@ use PEAR2\WindowsAzure\Resources;
 class StorageAuthSchemeTest extends \PHPUnit_Framework_TestCase
 {
     /**
-    * @covers PEAR2\WindowsAzure\Services\Core\Authentication\StorageAuthScheme::__construct
+    * @covers WindowsAzure\Services\Core\Authentication\StorageAuthScheme::__construct
     */
     public function test__construct()
     {
@@ -52,7 +52,7 @@ class StorageAuthSchemeTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-    * @covers PEAR2\WindowsAzure\Services\Core\Authentication\StorageAuthScheme::computeCanonicalizedHeaders
+    * @covers WindowsAzure\Services\Core\Authentication\StorageAuthScheme::computeCanonicalizedHeaders
     */
     public function testComputeCanonicalizedHeadersMock()
     {
@@ -71,7 +71,7 @@ class StorageAuthSchemeTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-    * @covers PEAR2\WindowsAzure\Services\Core\Authentication\StorageAuthScheme::computeCanonicalizedResource
+    * @covers WindowsAzure\Services\Core\Authentication\StorageAuthScheme::computeCanonicalizedResource
     */
     public function testComputeCanonicalizedResourceMockSimple()
     {
@@ -88,7 +88,7 @@ class StorageAuthSchemeTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-    * @covers PEAR2\WindowsAzure\Services\Core\Authentication\StorageAuthScheme::computeCanonicalizedResource
+    * @covers WindowsAzure\Services\Core\Authentication\StorageAuthScheme::computeCanonicalizedResource
     */
     public function testComputeCanonicalizedResourceMockMultipleValues()
     {
@@ -107,7 +107,7 @@ class StorageAuthSchemeTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-    * @covers PEAR2\WindowsAzure\Services\Core\Authentication\StorageAuthScheme::computeCanonicalizedResourceForTable
+    * @covers WindowsAzure\Services\Core\Authentication\StorageAuthScheme::computeCanonicalizedResourceForTable
     */
     public function testComputeCanonicalizedResourceForTableMock()
     {

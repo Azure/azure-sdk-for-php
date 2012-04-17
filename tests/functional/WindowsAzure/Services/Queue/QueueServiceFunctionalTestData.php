@@ -17,22 +17,22 @@
  * limitations under the License.
  *
  * @category   Microsoft
- * @package    PEAR2\Tests\Functional\WindowsAzure\Services\Queue
+ * @package    Tests\Functional\WindowsAzure\Services\Queue
  * @author     Jason Cooke <jcooke@microsoft.com>
  * @copyright  2012 Microsoft Corporation
  * @license    http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link       http://pear.php.net/package/azure-sdk-for-php
  */
 
-namespace PEAR2\Tests\Functional\WindowsAzure\Services\Queue;
+namespace Tests\Functional\WindowsAzure\Services\Queue;
 
-use PEAR2\WindowsAzure\Services\Core\Models\Logging;
-use PEAR2\WindowsAzure\Services\Core\Models\Metrics;
-use PEAR2\WindowsAzure\Services\Core\Models\RetentionPolicy;
-use PEAR2\WindowsAzure\Services\Core\Models\ServiceProperties;
-use PEAR2\WindowsAzure\Services\Queue\Models\CreateMessageOptions;
-use PEAR2\WindowsAzure\Services\Queue\Models\CreateQueueOptions;
-use PEAR2\WindowsAzure\Services\Queue\Models\ListQueuesOptions;
+use WindowsAzure\Services\Core\Models\Logging;
+use WindowsAzure\Services\Core\Models\Metrics;
+use WindowsAzure\Services\Core\Models\RetentionPolicy;
+use WindowsAzure\Services\Core\Models\ServiceProperties;
+use WindowsAzure\Services\Queue\Models\CreateMessageOptions;
+use WindowsAzure\Services\Queue\Models\CreateQueueOptions;
+use WindowsAzure\Services\Queue\Models\ListQueuesOptions;
 
 class QueueServiceFunctionalTestData {
     const INTERESTING_TTL = 4;

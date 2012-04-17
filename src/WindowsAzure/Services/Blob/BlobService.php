@@ -15,22 +15,22 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   PEAR2\WindowsAzure\Services\Blob
+ * @package   WindowsAzure\Services\Blob
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
  
-namespace PEAR2\WindowsAzure\Services\Blob;
-use PEAR2\WindowsAzure\Services\Core\Configuration;
-use PEAR2\WindowsAzure\Resources;
+namespace WindowsAzure\Services\Blob;
+use WindowsAzure\Services\Core\Configuration;
+use WindowsAzure\Resources;
 
 /**
  * Factory for creating IBlob objects
  *
  * @category  Microsoft
- * @package   PEAR2\WindowsAzure\Services\Blob
+ * @package   WindowsAzure\Services\Blob
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
@@ -42,9 +42,9 @@ class BlobService
     /**
      * Creates new object based on the builder type in the $config.
      *
-     * @param PEAR2\WindowsAzure\Services\Core\Configuration $config config object.
+     * @param WindowsAzure\Services\Core\Configuration $config config object.
      * 
-     * @return PEAR2\WindowsAzure\Services\Blob\IBlob.
+     * @return WindowsAzure\Services\Blob\IBlob.
      */
     public static function create($config)
     {

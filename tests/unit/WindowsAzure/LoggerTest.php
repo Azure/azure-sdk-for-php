@@ -15,23 +15,23 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   PEAR2\Tests\Unit\WindowsAzure
+ * @package   Tests\Unit\WindowsAzure
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
 
-namespace PEAR2\Tests\Unit\WindowsAzure;
-use PEAR2\WindowsAzure\Logger;
-use PEAR2\WindowsAzure\Resources;
-use PEAR2\Tests\Framework\VirtualFileSystem;
+namespace Tests\Unit\WindowsAzure;
+use WindowsAzure\Logger;
+use WindowsAzure\Resources;
+use Tests\Framework\VirtualFileSystem;
 
 /**
  * Unit tests for class Logger
  *
  * @category  Microsoft
- * @package   PEAR2\Tests\Unit\WindowsAzure
+ * @package   Tests\Unit\WindowsAzure
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
@@ -41,8 +41,8 @@ use PEAR2\Tests\Framework\VirtualFileSystem;
 class LoggerTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @covers PEAR2\WindowsAzure\Logger::log
-     * @covers PEAR2\WindowsAzure\Logger::setLogFile
+     * @covers WindowsAzure\Logger::log
+     * @covers WindowsAzure\Logger::setLogFile
      */
     public function testLogWithArray()
     {
@@ -61,8 +61,8 @@ class LoggerTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers PEAR2\WindowsAzure\Logger::log
-     * @covers PEAR2\WindowsAzure\Logger::setLogFile
+     * @covers WindowsAzure\Logger::log
+     * @covers WindowsAzure\Logger::setLogFile
      */
     public function testLogWithString()
     {
