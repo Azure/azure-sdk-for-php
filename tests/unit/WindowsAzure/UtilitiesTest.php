@@ -24,8 +24,10 @@
 
 namespace PEAR2\Tests\Unit\WindowsAzure;
 use PEAR2\WindowsAzure\Utilities;
+use PEAR2\WindowsAzure\Resources;
 use PEAR2\Tests\Framework\TestResources;
 use PEAR2\Tests\Framework\VirtualFileSystem;
+use PEAR2\WindowsAzure\Services\Core\Models\ServiceProperties;
 
 /**
  * Unit tests for class Utilities
@@ -38,7 +40,7 @@ use PEAR2\Tests\Framework\VirtualFileSystem;
  * @version   Release: @package_version@
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
-class UtilitiesTest extends PHPUnit_Framework_TestCase
+class UtilitiesTest extends \PHPUnit_Framework_TestCase
 {
     /**
      * @covers PEAR2\WindowsAzure\Utilities::tryGetValue
@@ -193,7 +195,7 @@ class UtilitiesTest extends PHPUnit_Framework_TestCase
     public function testGetArrayWithEmptyValue()
     {
         // Setup
-        $empty = PEAR2\WindowsAzure\Resources::EMPTY_STRING;
+        $empty = Resources::EMPTY_STRING;
         $expected = array();
         
         // Test
@@ -210,7 +212,7 @@ class UtilitiesTest extends PHPUnit_Framework_TestCase
     {
         // Setup
         $propertiesSample = TestResources::getServicePropertiesSample();
-        $properties = \PEAR2\WindowsAzure\Services\Core\Models\ServiceProperties::create($propertiesSample);
+        $properties = ServiceProperties::create($propertiesSample);
         $xml = $properties->toXml();
         $expected = $properties->toArray();
         
@@ -228,12 +230,12 @@ class UtilitiesTest extends PHPUnit_Framework_TestCase
     {
         // Setup
         $propertiesSample = TestResources::getServicePropertiesSample();
-        $properties = \PEAR2\WindowsAzure\Services\Core\Models\ServiceProperties::create($propertiesSample);
+        $properties = ServiceProperties::create($propertiesSample);
         $expected = $properties->toXml();
         $array = $properties->toArray();
         
         // Test
-        $actual = Utilities::serialize($array, \PEAR2\WindowsAzure\Services\Core\Models\ServiceProperties::$xmlRootName);
+        $actual = Utilities::serialize($array, ServiceProperties::$xmlRootName);
         
         $this->assertEquals($expected, $actual);
     }
@@ -249,7 +251,7 @@ class UtilitiesTest extends PHPUnit_Framework_TestCase
         $array = 'not an array';
         
         // Test
-        $actual = Utilities::serialize($array, \PEAR2\WindowsAzure\Services\Core\Models\ServiceProperties::$xmlRootName);
+        $actual = Utilities::serialize($array, ServiceProperties::$xmlRootName);
         
         $this->assertEquals($expected, $actual);
     }
