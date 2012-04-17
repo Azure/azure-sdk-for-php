@@ -158,6 +158,16 @@ class Protocol1RuntimeGoalStateClient implements IRuntimeGoalStateClient
     }
 
     /**
+     * Gets the endpoint.
+     * 
+     * @return string
+     */
+    public function getEndpoint()
+    {
+        return $this->_endpoint;
+    }
+
+    /**
      * Sets the keep open state.
      *
      * @param string $keepOpen Sets the keep open state.

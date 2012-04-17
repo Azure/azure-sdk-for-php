@@ -97,6 +97,10 @@ class RoleEnvironment
      * @var CurrentState
      */
     private static $_lastState;
+    /**
+     * @var string
+     */
+    private static $_versionEndpoint;
 
     /**
      * Initializes the role environment.
@@ -140,17 +144,19 @@ class RoleEnvironment
     private static function _initialize($keepOpen = false)
     {
         if (is_null(self::$_runtimeClient)) {
-            $endpoint = getenv(self::VERSION_ENDPOINT_ENVIRONMENT_NAME);
-
-            if (is_null($endpoint)) {
-                $endpoint = self::VERSION_ENDPOINT_FIXED_PATH;
+            self::$_versionEndpoint = getenv(
+                self::VERSION_ENDPOINT_ENVIRONMENT_NAME
+            );
+            
+            if (self::$_versionEndpoint == false) {
+                self::$_versionEndpoint = self::VERSION_ENDPOINT_FIXED_PATH;
             }
 
             $kernel = RuntimeKernel::getKernel();
             $kernel->getProtocol1RuntimeGoalStateClient()->setKeepOpen($keepOpen);
             
             self::$_runtimeClient = $kernel->getRuntimeVersionManager()
-                ->getRuntimeClient($endpoint);
+                ->getRuntimeClient(self::$_versionEndpoint);
             
             self::$_currentGoalState = self::$_runtimeClient
                 ->getCurrentGoalState();
