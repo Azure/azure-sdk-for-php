@@ -84,6 +84,7 @@ class EdmType
             switch ($type) {
             case self::GUID:
             case self::STRING:
+            case self::INT64:
                 return $value;
 
             case self::BINARY:
@@ -97,7 +98,6 @@ class EdmType
 
             case self::DOUBLE:
             case self::INT32:
-            case self::INT64:
                 return intval($value);
 
             default:
