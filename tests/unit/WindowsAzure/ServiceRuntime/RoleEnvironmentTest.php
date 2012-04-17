@@ -23,6 +23,7 @@
  */
 namespace PEAR2\Tests\Unit\WindowsAzure\ServiceRuntime;
 use PEAR2\Tests\Framework\TestResources;
+use PEAR2\WindowsAzure\ServiceRuntime\ChannelNotAvailableException;
 use PEAR2\WindowsAzure\ServiceRuntime\FileInputChannel;
 use PEAR2\WindowsAzure\ServiceRuntime\RoleEnvironment;
 use PEAR2\WindowsAzure\ServiceRuntime\RoleInstanceStatus;
@@ -43,6 +44,35 @@ require_once 'vfsStream/vfsStream.php';
  */
 class RoleEnvironmentTest extends \PHPUnit_Framework_TestCase
 {
+    /**
+     * @covers PEAR2\WindowsAzure\ServiceRuntime\RoleEnvironment::_initialize
+     * @covers PEAR2\WindowsAzure\ServiceRuntime\RoleEnvironment::init
+     */
+    public function testValidEndpoint()
+    {
+        // Test 1 - No environment variable
+        putenv('WaRuntimeEndpoint');
+        
+        try {
+            RoleEnvironment::getDeploymentId();
+        } catch (ChannelNotAvailableException $exception) { }
+        
+        $endpoint = self::getStaticPropertyValue('_versionEndpoint');
+        
+        $this->assertEquals('\\.\pipe\WindowsAzureRuntime', $endpoint);
+        
+        // Test 2 - Environment variable
+        putenv('WaRuntimeEndpoint=endpoint1');
+
+        try {
+            RoleEnvironment::getDeploymentId();
+        } catch (ChannelNotAvailableException $exception) { }
+        
+        $endpoint = self::getStaticPropertyValue('_versionEndpoint');
+        
+        $this->assertEquals('endpoint1', $endpoint);
+    }
+    
     /**
      * @covers PEAR2\WindowsAzure\ServiceRuntime\RoleEnvironment::init
      * @covers PEAR2\WindowsAzure\ServiceRuntime\RoleEnvironment::getClientId
