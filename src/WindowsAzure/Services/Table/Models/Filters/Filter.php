@@ -205,7 +205,7 @@ class Filter
      * 
      * @return \WindowsAzure\Services\Table\Models\Filters\ConstantFilter 
      */
-    public static function applyConstant($value, $edmType)
+    public static function applyConstant($value, $edmType = null)
     {
         $filter = new ConstantFilter();
         $filter->setValue($value);
