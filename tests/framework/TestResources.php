@@ -368,7 +368,7 @@ class TestResources
         $entity->setPartitionKey($partitionKey);
         $entity->setRowKey($rowKey);
         $entity->setTimestamp(Utilities::isoDate());
-        $entity->addProperty('CustomerId', EdmType::INT32, '890');
+        $entity->addProperty('CustomerId', EdmType::INT32, 890);
         $entity->addProperty('CustomerName', null, 'John');
         $entity->addProperty('IsNew', EdmType::BOOLEAN, true);
         $entity->addProperty('JoinDate', EdmType::DATETIME, new \DateTime());

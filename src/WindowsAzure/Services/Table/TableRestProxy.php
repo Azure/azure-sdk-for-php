@@ -308,7 +308,7 @@ class TableRestProxy extends ServiceRestProxy implements ITable
     ) {
         Validate::isValidString($table);
         Validate::notNullOrEmpty($entity);
-        Validate::isTrue($entity->isValid(), Resources::INVALID_ENTITY_MSG);
+        Validate::isTrue($entity->isValid($msg), $msg);
         
         if ($useETag) {
             Validate::notNullOrEmpty($entity->getEtag());
@@ -467,7 +467,7 @@ class TableRestProxy extends ServiceRestProxy implements ITable
                 $e .= 'null';
             } else {
                 $type = $filter->getEdmType();
-                $e   .= EdmType::serializeValue($type, $value);
+                $e   .= EdmType::serializeQueryValue($type, $value);
             }
         } else if ($filter instanceof Filters\UnaryFilter) {
             $e .= $filter->getOperator();

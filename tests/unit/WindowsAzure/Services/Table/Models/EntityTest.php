@@ -133,7 +133,7 @@ class EntityTest extends \PHPUnit_Framework_TestCase
     {
         // Setup
         $entity = new Entity();
-        $expected = array('name' => new Property());
+        $expected = array('name' => new Property(EdmType::STRING, null));
         
         // Test
         $entity->setProperties($expected);

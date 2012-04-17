@@ -23,6 +23,7 @@
  */
 namespace Tests\Unit\WindowsAzure\Services\Table\Models;
 use WindowsAzure\Services\Table\Models\EdmType;
+use WindowsAzure\Utilities;
 
 /**
  * Unit tests for class EdmTypeTest
@@ -68,9 +69,9 @@ class EdmTypeTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers WindowsAzure\Services\Table\Models\EdmType::unserializeValue
+     * @covers WindowsAzure\Services\Table\Models\EdmType::unserializeQueryValue
      */
-    public function testProcessValueWithString()
+    public function testUnserializeQueryValueWithString()
     {
         // Setup
         $type = EdmType::STRING;
@@ -78,16 +79,16 @@ class EdmTypeTest extends \PHPUnit_Framework_TestCase
         $expected = $value;
         
         // Test
-        $actual = EdmType::unserializeValue($type, $value);
+        $actual = EdmType::unserializeQueryValue($type, $value);
         
         // Assert
         $this->assertEquals($expected, $actual);
     }
     
     /**
-     * @covers WindowsAzure\Services\Table\Models\EdmType::unserializeValue
+     * @covers WindowsAzure\Services\Table\Models\EdmType::unserializeQueryValue
      */
-    public function testProcessValueWithBinary()
+    public function testUnserializeQueryValueWithBinary()
     {
         // Setup
         $type = EdmType::BINARY;
@@ -95,32 +96,32 @@ class EdmTypeTest extends \PHPUnit_Framework_TestCase
         $expected = base64_decode($value);
         
         // Test
-        $actual = EdmType::unserializeValue($type, $value);
+        $actual = EdmType::unserializeQueryValue($type, $value);
         
         // Assert
         $this->assertEquals($expected, $actual);
     }
     
     /**
-     * @covers WindowsAzure\Services\Table\Models\EdmType::unserializeValue
+     * @covers WindowsAzure\Services\Table\Models\EdmType::unserializeQueryValue
      */
-    public function testProcessValueWithDate()
+    public function testUnserializeQueryValueWithDate()
     {
         // Setup
         $type = EdmType::DATETIME;
         $value = '2008-10-01T15:26:13Z';
         
         // Test
-        $actual = EdmType::unserializeValue($type, $value);
+        $actual = EdmType::unserializeQueryValue($type, $value);
         
         // Assert
         $this->assertInstanceOf('\DateTime', $actual);
     }
     
     /**
-     * @covers WindowsAzure\Services\Table\Models\EdmType::unserializeValue
+     * @covers WindowsAzure\Services\Table\Models\EdmType::unserializeQueryValue
      */
-    public function testProcessValueWithInt()
+    public function testUnserializeQueryValueWithInt()
     {
         // Setup
         $type = EdmType::INT64;
@@ -128,16 +129,16 @@ class EdmTypeTest extends \PHPUnit_Framework_TestCase
         $expected = 123;
         
         // Test
-        $actual = EdmType::unserializeValue($type, $value);
+        $actual = EdmType::unserializeQueryValue($type, $value);
         
         // Assert
         $this->assertEquals($expected, $actual);
     }
     
     /**
-     * @covers WindowsAzure\Services\Table\Models\EdmType::unserializeValue
+     * @covers WindowsAzure\Services\Table\Models\EdmType::unserializeQueryValue
      */
-    public function testProcessValueWithBoolean()
+    public function testUnserializeQueryValueWithBoolean()
     {
         // Setup
         $type = EdmType::BOOLEAN;
@@ -145,22 +146,22 @@ class EdmTypeTest extends \PHPUnit_Framework_TestCase
         $expected = true;
         
         // Test
-        $actual = EdmType::unserializeValue($type, $value);
+        $actual = EdmType::unserializeQueryValue($type, $value);
         
         // Assert
         $this->assertEquals($expected, $actual);
     }
     
     /**
-     * @covers WindowsAzure\Services\Table\Models\EdmType::unserializeValue
+     * @covers WindowsAzure\Services\Table\Models\EdmType::unserializeQueryValue
      */
-    public function testProcessValueWithInvalid()
+    public function testUnserializeQueryValueWithInvalid()
     {
         // Assert
         $this->setExpectedException('\InvalidArgumentException');
         
         // Test
-        EdmType::unserializeValue('7amada', '1233');
+        EdmType::unserializeQueryValue('7amada', '1233');
     }
     
     /**
@@ -191,6 +192,166 @@ class EdmTypeTest extends \PHPUnit_Framework_TestCase
         
         // Assert
         $this->assertEquals($expected, $actual);
+    }
+    
+    /**
+     * @covers WindowsAzure\Services\Table\Models\EdmType::validateEdmValue
+     */
+    public function testValidateEdmValueWithBinary()
+    {
+        // Setup
+        $type = EdmType::BINARY;
+        $value = 'MTIzNDU=';
+        $expected = true;
+        
+        // Test
+        $actual = EdmType::validateEdmValue($type, $value);
+        
+        // Assert
+        $this->assertEquals($expected, $actual);
+    }
+    
+    /**
+     * @covers WindowsAzure\Services\Table\Models\EdmType::validateEdmValue
+     */
+    public function testValidateEdmValueWithDate()
+    {
+        // Setup
+        $type = EdmType::DATETIME;
+        $value = new \DateTime();
+        $expected = true;
+        
+        // Test
+        $actual = EdmType::validateEdmValue($type, $value);
+        
+        // Assert
+        $this->assertEquals($expected, $actual);
+    }
+    
+    /**
+     * @covers WindowsAzure\Services\Table\Models\EdmType::validateEdmValue
+     */
+    public function testValidateEdmValueWithInt()
+    {
+        // Setup
+        $type = EdmType::INT64;
+        $value = 123;
+        $expected = true;
+        
+        // Test
+        $actual = EdmType::validateEdmValue($type, $value);
+        
+        // Assert
+        $this->assertEquals($expected, $actual);
+    }
+    
+    /**
+     * @covers WindowsAzure\Services\Table\Models\EdmType::validateEdmValue
+     */
+    public function testValidateEdmValueWithBoolean()
+    {
+        // Setup
+        $type = EdmType::BOOLEAN;
+        $value = false;
+        $expected = true;
+        
+        // Test
+        $actual = EdmType::validateEdmValue($type, $value);
+        
+        // Assert
+        $this->assertEquals($expected, $actual);
+    }
+    
+    /**
+     * @covers WindowsAzure\Services\Table\Models\EdmType::validateEdmValue
+     */
+    public function testValidateEdmValueWithInvalid()
+    {
+        // Assert
+        $this->setExpectedException('\InvalidArgumentException');
+        
+        // Test
+        EdmType::validateEdmValue('7amada', '1233');
+    }
+    
+    /**
+     * @covers WindowsAzure\Services\Table\Models\EdmType::serializeValue
+     */
+    public function testSerializeValueWithBinary()
+    {
+        // Setup
+        $type = EdmType::BINARY;
+        $value = 'MTIzNDU=';
+        $expected = htmlspecialchars($value);
+        
+        // Test
+        $actual = EdmType::serializeValue($type, $value);
+        
+        // Assert
+        $this->assertEquals($expected, $actual);
+    }
+    
+    /**
+     * @covers WindowsAzure\Services\Table\Models\EdmType::serializeValue
+     */
+    public function testSerializeValueWithDate()
+    {
+        // Setup
+        $type = EdmType::DATETIME;
+        $value = new \DateTime();
+        $expected = Utilities::convertToEdmDateTime($value);
+        
+        // Test
+        $actual = EdmType::serializeValue($type, $value);
+        
+        // Assert
+        $this->assertEquals($expected, $actual);
+    }
+    
+    /**
+     * @covers WindowsAzure\Services\Table\Models\EdmType::serializeValue
+     */
+    public function testSerializeValueWithInt()
+    {
+        // Setup
+        $type = EdmType::INT64;
+        $value = 123;
+        $expected = htmlspecialchars($value);
+        
+        // Test
+        $actual = EdmType::serializeValue($type, $value);
+        
+        // Assert
+        $this->assertEquals($expected, $actual);
+    }
+    
+    /**
+     * @covers WindowsAzure\Services\Table\Models\EdmType::serializeValue
+     */
+    public function testSerializeValueWithBoolean()
+    {
+        // Setup
+        $type = EdmType::BOOLEAN;
+        $value = true;
+        $expected = ($value == true ? '1' : '0');
+        
+        // Test
+        $actual = EdmType::serializeValue($type, $value);
+        
+        // Assert
+        $this->assertEquals($expected, $actual);
+    }
+    
+    /**
+     * @covers WindowsAzure\Services\Table\Models\EdmType::serializeValue
+     */
+    public function testSerializeValueWithInvalid()
+    {
+        // Assert
+        $this->setExpectedException('\InvalidArgumentException');
+        
+        // Test
+        EdmType::serializeValue('7amada', '1233');
     }
 }
 
