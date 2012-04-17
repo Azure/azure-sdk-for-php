@@ -83,7 +83,7 @@ class Entity
      */
     public function getPropertyValue($name)
     {
-        $p = $this->_properties[$name];
+        $p = Utilities::tryGetValue($this->_properties, $name);
         return is_null($p) ? null : $p->getValue();
     }
     

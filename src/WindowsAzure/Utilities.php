@@ -53,7 +53,9 @@ class Utilities
      */
     public static function tryGetValue($array, $key, $default = null)
     {
-        return array_key_exists($key, $array) ? $array[$key] : $default;
+        return is_array($array) && array_key_exists($key, $array)
+            ? $array[$key]
+            : $default;
     }
     
     /**
@@ -70,6 +72,10 @@ class Utilities
     {
         $arguments    = func_get_args();
         $numArguments = func_num_args();
+        
+        if (!is_array($array)) {
+            return null;
+        }
         
         $currentArray = $array;
         for ($i = 1; $i < $numArguments; $i++) {
