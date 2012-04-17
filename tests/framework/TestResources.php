@@ -23,10 +23,10 @@
  * @link       http://pear.php.net/package/azure-sdk-for-php
  */
  
-namespace PEAR2\Tests\Framework;
-use PEAR2\WindowsAzure\Services\Table\Models\EdmType;
-use PEAR2\WindowsAzure\Services\Table\Models\Entity;
-use PEAR2\WindowsAzure\Utilities;
+namespace Tests\Framework;
+use WindowsAzure\Services\Table\Models\EdmType;
+use WindowsAzure\Services\Table\Models\Entity;
+use WindowsAzure\Utilities;
 
 /**
  * Resources for testing framework.
@@ -362,16 +362,16 @@ class TestResources
         return $sample;
     }
     
-    public static function getTestEntity($pk, $rk)
+    public static function getTestEntity($partitionKey, $rowKey)
     {
         $entity = new Entity();
-        $entity->setPartitionKey($pk);
-        $entity->setRowKey($rk);
+        $entity->setPartitionKey($partitionKey);
+        $entity->setRowKey($rowKey);
         $entity->setTimestamp(Utilities::isoDate());
-        $entity->newProperty('CustomerId', EdmType::INT32, '890');
-        $entity->newProperty('CustomerName', null, 'John');
-        $entity->newProperty('IsNew', EdmType::BOOLEAN, true);
-        $entity->newProperty('JoinDate', EdmType::DATETIME, new \DateTime());
+        $entity->addProperty('CustomerId', EdmType::INT32, '890');
+        $entity->addProperty('CustomerName', null, 'John');
+        $entity->addProperty('IsNew', EdmType::BOOLEAN, true);
+        $entity->addProperty('JoinDate', EdmType::DATETIME, new \DateTime());
         
         return $entity;
     }

@@ -15,20 +15,20 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   PEAR2\WindowsAzure\Services\Table\Models\Filters
+ * @package   WindowsAzure\Services\Table\Models\Filters
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
  
-namespace PEAR2\WindowsAzure\Services\Table\Models\Filters;
+namespace WindowsAzure\Services\Table\Models\Filters;
 
 /**
  * Filter operations
  *
  * @category  Microsoft
- * @package   PEAR2\WindowsAzure\Services\Table\Models\Filters
+ * @package   WindowsAzure\Services\Table\Models\Filters
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
@@ -43,16 +43,16 @@ class Filter
      * @param Filter $left  The left filter
      * @param Filter $right The right filter
      * 
-     * @return \PEAR2\WindowsAzure\Services\Table\Models\Filters\BinaryFilter 
+     * @return \WindowsAzure\Services\Table\Models\Filters\BinaryFilter 
      */
     public static function applyAnd($left, $right)
     {
-        $filer = new BinaryFilter();
-        $filer->setOperator('and');
-        $filer->setLeft($left);
-        $filer->setRight($right);
+        $filter = new BinaryFilter();
+        $filter->setOperator('and');
+        $filter->setLeft($left);
+        $filter->setRight($right);
         
-        return $filer;
+        return $filter;
     }
    
     /**
@@ -60,15 +60,15 @@ class Filter
      * 
      * @param Filter $operand The operand
      * 
-     * @return \PEAR2\WindowsAzure\Services\Table\Models\Filters\UnaryFilter 
+     * @return \WindowsAzure\Services\Table\Models\Filters\UnaryFilter 
      */
     public static function applyNot($operand)
     {
-        $filer = new UnaryFilter();
-        $filer->setOperator('not');
-        $filer->setOperand($operand);
+        $filter = new UnaryFilter();
+        $filter->setOperator('not');
+        $filter->setOperand($operand);
         
-        return $filer;
+        return $filter;
     }
 
     /**
@@ -81,12 +81,12 @@ class Filter
      */
     public static function applyOr($left, $right)
     {
-        $filer = new BinaryFilter();
-        $filer->setOperator('or');
-        $filer->setLeft($left);
-        $filer->setRight($right);
+        $filter = new BinaryFilter();
+        $filter->setOperator('or');
+        $filter->setLeft($left);
+        $filter->setRight($right);
         
-        return $filer;
+        return $filter;
     }
 
     /**
@@ -99,12 +99,12 @@ class Filter
      */
     public static function applyEq($left, $right)
     {
-        $filer = new BinaryFilter();
-        $filer->setOperator('eq');
-        $filer->setLeft($left);
-        $filer->setRight($right);
+        $filter = new BinaryFilter();
+        $filter->setOperator('eq');
+        $filter->setLeft($left);
+        $filter->setRight($right);
         
-        return $filer;
+        return $filter;
     }
 
     /**
@@ -117,12 +117,12 @@ class Filter
      */
     public static function applyNe($left, $right)
     {
-        $filer = new BinaryFilter();
-        $filer->setOperator('ne');
-        $filer->setLeft($left);
-        $filer->setRight($right);
+        $filter = new BinaryFilter();
+        $filter->setOperator('ne');
+        $filter->setLeft($left);
+        $filter->setRight($right);
         
-        return $filer;
+        return $filter;
     }
 
     /**
@@ -135,12 +135,12 @@ class Filter
      */
     public static function applyGe($left, $right)
     {
-        $filer = new BinaryFilter();
-        $filer->setOperator('ge');
-        $filer->setLeft($left);
-        $filer->setRight($right);
+        $filter = new BinaryFilter();
+        $filter->setOperator('ge');
+        $filter->setLeft($left);
+        $filter->setRight($right);
         
-        return $filer;
+        return $filter;
     }
 
     /**
@@ -153,12 +153,12 @@ class Filter
      */
     public static function applyGt($left, $right)
     {
-        $filer = new BinaryFilter();
-        $filer->setOperator('gt');
-        $filer->setLeft($left);
-        $filer->setRight($right);
+        $filter = new BinaryFilter();
+        $filter->setOperator('gt');
+        $filter->setLeft($left);
+        $filter->setRight($right);
         
-        return $filer;
+        return $filter;
     }
 
     /**
@@ -171,12 +171,12 @@ class Filter
      */
     public static function applyLt($left, $right)
     {
-        $filer = new BinaryFilter();
-        $filer->setOperator('lt');
-        $filer->setLeft($left);
-        $filer->setRight($right);
+        $filter = new BinaryFilter();
+        $filter->setOperator('lt');
+        $filter->setLeft($left);
+        $filter->setRight($right);
         
-        return $filer;
+        return $filter;
     }
 
     /**
@@ -189,27 +189,29 @@ class Filter
      */
     public static function applyLe($left, $right)
     {
-        $filer = new BinaryFilter();
-        $filer->setOperator('le');
-        $filer->setLeft($left);
-        $filer->setRight($right);
+        $filter = new BinaryFilter();
+        $filter->setOperator('le');
+        $filter->setLeft($left);
+        $filter->setRight($right);
         
-        return $filer;
+        return $filter;
     }
 
     /**
-     * Apply constant filter on value
+     * Apply constant filter on value.
      * 
-     * @param mix $value The filter value
+     * @param mix    $value   The filter value
+     * @param string $edmType The value EDM type.
      * 
-     * @return \PEAR2\WindowsAzure\Services\Table\Models\Filters\ConstantFilter 
+     * @return \WindowsAzure\Services\Table\Models\Filters\ConstantFilter 
      */
-    public static function applyConstant($value)
+    public static function applyConstant($value, $edmType)
     {
-        $filer = new ConstantFilter();
-        $filer->setValue($value);
+        $filter = new ConstantFilter();
+        $filter->setValue($value);
+        $filter->setEdmType($edmType);
         
-        return $filer;
+        return $filter;
     }
 
     /**
@@ -217,14 +219,14 @@ class Filter
      * 
      * @param string $value The filter value
      * 
-     * @return \PEAR2\WindowsAzure\Services\Table\Models\Filters\LiteralFilter 
+     * @return \WindowsAzure\Services\Table\Models\Filters\LiteralFilter 
      */
     public static function applyLiteral($value)
     {
-        $filer = new LiteralFilter();
-        $filer->setLiteral($value);
+        $filter = new LiteralFilter();
+        $filter->setLiteral($value);
         
-        return $filer;
+        return $filter;
     }
 
     /**
@@ -232,14 +234,14 @@ class Filter
      * 
      * @param string $value The raw string filter expression
      * 
-     * @return \PEAR2\WindowsAzure\Services\Table\Models\Filters\RawStringFilter 
+     * @return \WindowsAzure\Services\Table\Models\Filters\RawStringFilter 
      */
     public static function applyRawString($value)
     {
-        $filer = new RawStringFilter();
-        $filer->setRawString($value);
+        $filter = new RawStringFilter();
+        $filter->setRawString($value);
         
-        return $filer;
+        return $filter;
     }
 }
 

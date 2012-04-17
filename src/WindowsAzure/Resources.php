@@ -15,20 +15,20 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   PEAR2\WindowsAzure
+ * @package   WindowsAzure
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
  
-namespace PEAR2\WindowsAzure;
+namespace WindowsAzure;
 
 /**
  * Project resources.
  *
  * @category  Microsoft
- * @package   PEAR2\WindowsAzure
+ * @package   WindowsAzure
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
@@ -38,17 +38,23 @@ namespace PEAR2\WindowsAzure;
 class Resources
 {
     // Messages
-    const INVALID_TYPE_MSG    = 'The provided variable should be of type: ';
-    const INVALID_META_MSG    = 'Metadata cannot contain newline characters.';
-    const AZURE_ERROR_MSG     = "Fail:\nCode: %s\nValue: %s\ndetails (if any): %s.";
-    const NOT_IMPLEMENTED_MSG = 'This method is not implemented.';
-    const NULL_ERROR_MSG      = 'Value can\'t be NULL or empty.';
-    const INVALID_URL_MSG     = 'Provided URL is invalid.';
-    const INVALID_HT_MSG      = 'The header type provided is invalid.';
-    const INVALID_EDM_MSG     = 'The provided EDM type is invalid.';
-    const INVALID_PROP_MSG    = 'The provided propertie(s) are/is invalid.';
-    const INVALID_ENTITY_MSG  = 'The provided entity object is invalid.';
-    const INVALID_VERSION_MSG = 'Server does not support any known protocol versions.';
+    const INVALID_TYPE_MSG     = 'The provided variable should be of type: ';
+    const INVALID_META_MSG     = 'Metadata cannot contain newline characters.';
+    const AZURE_ERROR_MSG      = "Fail:\nCode: %s\nValue: %s\ndetails (if any): %s.";
+    const NOT_IMPLEMENTED_MSG  = 'This method is not implemented.';
+    const NULL_ERROR_MSG       = 'Value can\'t be NULL or empty.';
+    const INVALID_URL_MSG      = 'Provided URL is invalid.';
+    const INVALID_HT_MSG       = 'The header type provided is invalid.';
+    const INVALID_EDM_MSG      = 'The provided EDM type is invalid.';
+    const INVALID_PROP_MSG     = 'One of the provided properties is not an instance of class Property';
+    const INVALID_ENTITY_MSG   = 'The provided entity object is invalid.';
+    const INVALID_VERSION_MSG  = 'Server does not support any known protocol versions.';
+    const INVALID_BO_TYPE_MSG  = 'Batch operation name is not supported or invalid.';
+    const INVALID_BO_PN_MSG    = 'Batch operation parameter is not supported.';
+    const INVALID_OC_COUNT_MSG = 'Operations and contexts must be of same size.';
+    const INVALID_EXC_OBJ_MSG  = 'Exception object type should be ServiceException.';
+    const NULL_TABLE_KEY_MSG   = 'Partition and raw keys can\'t be NULL.';
+    const BATCH_ENTITY_DEL_MSG = 'The entity was deleted successfully.';
 
     // HTTP Headers
     const X_MS_HEADER_PREFIX                 = 'x-ms-';
@@ -87,6 +93,7 @@ class Resources
     const CONTENT_LENGTH                     = 'content-length';
     const CONTENT_MD5                        = 'content-md5';
     const CONTENT_TYPE                       = 'content-type';
+    const CONTENT_ID                         = 'content-id';
     const CONTENT_RANGE                      = 'content-range';
     const CACHE_CONTROL                      = 'cache-control';
     const IF_MODIFIED_SINCE                  = 'if-modified-since';
@@ -105,7 +112,12 @@ class Resources
     const TABLE_TYPE_NAME = 'ITable';
     
     // HTTP Methods
-    const HTTP_MERGE = 'MERGE';
+    const HTTP_GET    = 'GET';
+    const HTTP_PUT    = 'PUT';
+    const HTTP_POST   = 'POST';
+    const HTTP_HEAD   = 'HEAD';
+    const HTTP_DELETE = 'DELETE';
+    const HTTP_MERGE  = 'MERGE';
     
     // Misc
     const EMPTY_STRING       = '';
@@ -122,6 +134,7 @@ class Resources
 
     // Header values
     const API_VERSION                    = '2011-08-18';
+    const API_VERSION_2009_4             = '2009-04-14';
     const DATA_SERVICE_VERSION_VALUE     = '1.0;NetFx';
     const MAX_DATA_SERVICE_VERSION_VALUE = '2.0;NetFx';
     const ACCEPT_HEADER_VALUE            = 'application/atom+xml,application/xml';
@@ -142,15 +155,16 @@ class Resources
     const QP_SELECT          = '$select';
     const QP_TOP             = '$top';
     const QP_FILTER          = '$filter';
-    const QP_ORDERBY         = '$orderby';
-    const QP_NEXT_TABLE_NAME = 'nexttablename';
-    const QP_NEXT_PK         = 'nextpartitionkey';
-    const QP_NEXT_RK         = 'nextrowkey';
+    const QP_NEXT_TABLE_NAME = 'NextTableName';
+    const QP_NEXT_PK         = 'NextPartitionKey';
+    const QP_NEXT_RK         = 'NextRowKey';
     
     // Request body content types
     const XML_CONTENT_TYPE      = 'application/x-www-form-urlencoded';
     const BINARY_FILE_TYPE      = 'application/octet-stream';
     const XML_ATOM_CONTENT_TYPE = 'application/atom+xml';
+    const HTTP_TYPE             = 'application/http';
+    const MULTIPART_MIXED_TYPE  = 'multipart/mixed';
     
     // Status Codes
     const STATUS_OK         = 200;

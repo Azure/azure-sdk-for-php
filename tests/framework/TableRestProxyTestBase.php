@@ -15,31 +15,31 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   PEAR2\Tests\Framework
+ * @package   Tests\Framework
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
-namespace PEAR2\Tests\Framework;
-use PEAR2\Tests\Framework\RestProxyTestBase;
-use PEAR2\WindowsAzure\Services\Core\Configuration;
-use PEAR2\WindowsAzure\Services\Table\TableSettings;
-use PEAR2\WindowsAzure\Services\Table\TableService;
-use PEAR2\Tests\Framework\TestResources;
+namespace Tests\Framework;
+use Tests\Framework\ServiceRestProxyTestBase;
+use Tests\Framework\TestResources;
+use WindowsAzure\Services\Core\Configuration;
+use WindowsAzure\Services\Table\TableSettings;
+use WindowsAzure\Services\Table\TableService;
 
 /**
  * TestBase class for each unit test class.
  *
  * @category  Microsoft
- * @package   PEAR2\Tests\Framework
+ * @package   Tests\Framework
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @version   Release: @package_version@
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
-class TableRestProxyTestBase extends RestProxyTestBase
+class TableServiceRestProxyTestBase extends ServiceRestProxyTestBase
 {
     protected $_createdTables;
     
@@ -54,7 +54,7 @@ class TableRestProxyTestBase extends RestProxyTestBase
         parent::__construct($config, $tableWrapper);
         $this->_createdTables = array();
     }
-    
+
     public function createTable($tableName, $options = null)
     {
         $this->wrapper->createTable($tableName, $options);
@@ -66,20 +66,25 @@ class TableRestProxyTestBase extends RestProxyTestBase
         $this->wrapper->deleteTable($tableName);
     }
     
+    public function safeDeleteTable($tableName)
+    {
+        try
+        {
+            $this->deleteTable($tableName);
+        }
+        catch (\Exception $e)
+        {
+            // Ignore exception and continue, will assume that this table doesn't exist in the sotrage account
+            error_log($e->getMessage());
+        }
+    }
+
     protected function tearDown()
     {
         parent::tearDown();
         
         foreach ($this->_createdTables as $value) {
-            try
-            {
-                $this->deleteTable($value);
-            }
-            catch (\Exception $e)
-            {
-                // Ignore exception and continue, will assume that this table doesn't exist in the sotrage account
-                error_log($e->getMessage());
-            }
+            $this->safeDeleteTable($value);
         }
     }
 }

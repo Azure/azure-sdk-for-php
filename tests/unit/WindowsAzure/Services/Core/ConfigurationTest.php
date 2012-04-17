@@ -17,24 +17,24 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- * @package    PEAR2\Tests\Unit\WindowsAzure\Services\Core
+ * @package    Tests\Unit\WindowsAzure\Services\Core
  * @author     Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright  2012 Microsoft Corporation
  * @license    http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link       http://pear.php.net/package/azure-sdk-for-php
  */
 
-namespace PEAR2\Tests\Unit\WindowsAzure\Services\Core;
-use PEAR2\WindowsAzure\Services\Core\Configuration;
-use PEAR2\Tests\Framework\TestResources;
-use PEAR2\WindowsAzure\Resources;
-use PEAR2\WindowsAzure\Core\InvalidArgumentTypeException;
-use PEAR2\WindowsAzure\Services\Queue\QueueSettings;
+namespace Tests\Unit\WindowsAzure\Services\Core;
+use WindowsAzure\Services\Core\Configuration;
+use Tests\Framework\TestResources;
+use WindowsAzure\Resources;
+use WindowsAzure\Core\InvalidArgumentTypeException;
+use WindowsAzure\Services\Queue\QueueSettings;
 
 /**
  * Unit tests for Configuration class
  *
- * @package    PEAR2\Tests\Unit\WindowsAzure\Services\Core
+ * @package    Tests\Unit\WindowsAzure\Services\Core
  * @author     Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright  2012 Microsoft Corporation
  * @license    http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
@@ -44,7 +44,7 @@ use PEAR2\WindowsAzure\Services\Queue\QueueSettings;
 class ConfigurationTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @covers PEAR2\WindowsAzure\Services\Core\Configuration::__construct
+     * @covers WindowsAzure\Services\Core\Configuration::__construct
      */
     public function test__construct()
     {
@@ -57,7 +57,7 @@ class ConfigurationTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-    * @covers PEAR2\WindowsAzure\Services\Core\Configuration::getInstance
+    * @covers WindowsAzure\Services\Core\Configuration::getInstance
     */
     public function testGetInstance()
     {
@@ -67,7 +67,7 @@ class ConfigurationTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-    * @covers PEAR2\WindowsAzure\Services\Core\Configuration::getProperties
+    * @covers WindowsAzure\Services\Core\Configuration::getProperties
     */
     public function testGetProperties()
     {
@@ -80,7 +80,7 @@ class ConfigurationTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-    * @covers PEAR2\WindowsAzure\Services\Core\Configuration::getProperty
+    * @covers WindowsAzure\Services\Core\Configuration::getProperty
     */
     public function testGetProperty()
     {
@@ -93,7 +93,7 @@ class ConfigurationTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-    * @covers PEAR2\WindowsAzure\Services\Core\Configuration::setProperty
+    * @covers WindowsAzure\Services\Core\Configuration::setProperty
     */
     public function testSetProperty()
     {
@@ -110,7 +110,7 @@ class ConfigurationTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-    * @covers PEAR2\WindowsAzure\Services\Core\Configuration::setProperty
+    * @covers WindowsAzure\Services\Core\Configuration::setProperty
     */
     public function testSetPropertyWithNonStringKeyFail()
     {
@@ -122,8 +122,8 @@ class ConfigurationTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-    * @covers PEAR2\WindowsAzure\Services\Core\Configuration::create
-    * @covers PEAR2\WindowsAzure\Services\Core\Configuration::_useStorageEmulatorConfig
+    * @covers WindowsAzure\Services\Core\Configuration::create
+    * @covers WindowsAzure\Services\Core\Configuration::_useStorageEmulatorConfig
     */
     public function testCreate()
     {
@@ -133,12 +133,12 @@ class ConfigurationTest extends \PHPUnit_Framework_TestCase
         $config->setProperty(QueueSettings::URI, 'http://' . TestResources::ACCOUNT_NAME . TestResources::QUEUE_URI);
         $queueWrapper = $config->create(Resources::QUEUE_TYPE_NAME);
 
-        $this->assertInstanceOf('PEAR2\\WindowsAzure\\Services\\Queue\\' . Resources::QUEUE_TYPE_NAME, $queueWrapper);
+        $this->assertInstanceOf('\WindowsAzure\\Services\\Queue\\' . Resources::QUEUE_TYPE_NAME, $queueWrapper);
     }
 
     /**
-    * @covers PEAR2\WindowsAzure\Services\Core\Configuration::create
-    * @covers PEAR2\WindowsAzure\Services\Core\Configuration::_useStorageEmulatorConfig
+    * @covers WindowsAzure\Services\Core\Configuration::create
+    * @covers WindowsAzure\Services\Core\Configuration::_useStorageEmulatorConfig
     */
     public function testCreateWithInvalidTypeFail()
     {

@@ -15,24 +15,24 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   PEAR2\Tests\Unit\WindowsAzure\Services\Blob\Models
+ * @package   Tests\Unit\WindowsAzure\Services\Blob\Models
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
 
-namespace PEAR2\Tests\Unit\WindowsAzure\Services\Blob\Models;
-use PEAR2\WindowsAzure\Services\Blob\Models\Container;
-use PEAR2\Tests\Framework\TestResources;
-use PEAR2\WindowsAzure\Services\Blob\Models\ContainerProperties;
-use PEAR2\WindowsAzure\Core\WindowsAzureUtilities;
+namespace Tests\Unit\WindowsAzure\Services\Blob\Models;
+use WindowsAzure\Services\Blob\Models\Container;
+use Tests\Framework\TestResources;
+use WindowsAzure\Services\Blob\Models\ContainerProperties;
+use WindowsAzure\Core\WindowsAzureUtilities;
 
 /**
  * Unit tests for class Container
  *
  * @category  Microsoft
- * @package   PEAR2\Tests\Unit\WindowsAzure\Services\Blob\Models
+ * @package   Tests\Unit\WindowsAzure\Services\Blob\Models
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
@@ -42,7 +42,7 @@ use PEAR2\WindowsAzure\Core\WindowsAzureUtilities;
 class ContainerTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @covers PEAR2\WindowsAzure\Services\Blob\Models\Container::setName
+     * @covers WindowsAzure\Services\Blob\Models\Container::setName
      */
     public function testSetName()
     {
@@ -58,7 +58,7 @@ class ContainerTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers PEAR2\WindowsAzure\Services\Blob\Models\Container::getName
+     * @covers WindowsAzure\Services\Blob\Models\Container::getName
      */
     public function testGetName()
     {
@@ -75,7 +75,7 @@ class ContainerTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers PEAR2\WindowsAzure\Services\Blob\Models\Container::setUrl
+     * @covers WindowsAzure\Services\Blob\Models\Container::setUrl
      */
     public function testSetUrl()
     {
@@ -91,7 +91,7 @@ class ContainerTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers PEAR2\WindowsAzure\Services\Blob\Models\Container::getUrl
+     * @covers WindowsAzure\Services\Blob\Models\Container::getUrl
      */
     public function testGetUrl()
     {
@@ -108,7 +108,7 @@ class ContainerTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers PEAR2\WindowsAzure\Services\Blob\Models\Container::setMetadata
+     * @covers WindowsAzure\Services\Blob\Models\Container::setMetadata
      */
     public function testSetMetadata()
     {
@@ -124,7 +124,7 @@ class ContainerTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers PEAR2\WindowsAzure\Services\Blob\Models\Container::getMetadata
+     * @covers WindowsAzure\Services\Blob\Models\Container::getMetadata
      */
     public function testGetMetadata()
     {
@@ -141,7 +141,7 @@ class ContainerTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers PEAR2\WindowsAzure\Services\Blob\Models\Container::setProperties
+     * @covers WindowsAzure\Services\Blob\Models\Container::setProperties
      */
     public function testSetProperties()
     {
@@ -160,7 +160,7 @@ class ContainerTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers PEAR2\WindowsAzure\Services\Blob\Models\Container::getProperties
+     * @covers WindowsAzure\Services\Blob\Models\Container::getProperties
      */
     public function testGetProperties()
     {

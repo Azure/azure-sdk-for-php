@@ -15,22 +15,23 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   PEAR2\Tests\Unit\WindowsAzure\Services\Table\Models
+ * @package   Tests\Unit\WindowsAzure\Services\Table\Models
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
 
-namespace PEAR2\Tests\Unit\WindowsAzure\Services\Table\Models;
-use PEAR2\WindowsAzure\Services\Table\Models\Query;
-use PEAR2\WindowsAzure\Services\Table\Models\Filters\Filter;
+namespace Tests\Unit\WindowsAzure\Services\Table\Models;
+use WindowsAzure\Services\Table\Models\Query;
+use WindowsAzure\Services\Table\Models\Filters\Filter;
+use WindowsAzure\Services\Table\Models\EdmType;
 
 /**
  * Unit tests for class Query
  *
  * @category  Microsoft
- * @package   PEAR2\Tests\Unit\WindowsAzure\Services\Table\Models
+ * @package   Tests\Unit\WindowsAzure\Services\Table\Models
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
@@ -40,8 +41,8 @@ use PEAR2\WindowsAzure\Services\Table\Models\Filters\Filter;
 class QueryTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @covers PEAR2\WindowsAzure\Services\Table\Models\Query::setSelectFields
-     * @covers PEAR2\WindowsAzure\Services\Table\Models\Query::getSelectFields
+     * @covers WindowsAzure\Services\Table\Models\Query::setSelectFields
+     * @covers WindowsAzure\Services\Table\Models\Query::getSelectFields
      */
     public function testSetSelectFields()
     {
@@ -57,25 +58,8 @@ class QueryTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers PEAR2\WindowsAzure\Services\Table\Models\Query::setOrderByFields
-     * @covers PEAR2\WindowsAzure\Services\Table\Models\Query::getOrderByFields
-     */
-    public function testSetOrderByFields()
-    {
-        // Setup
-        $query = new Query();
-        $expected = array('customerId', 'customerName');
-        
-        // Test
-        $query->setOrderByFields($expected);
-        
-        // Assert
-        $this->assertEquals($expected, $query->getOrderByFields());
-    }
-    
-    /**
-     * @covers PEAR2\WindowsAzure\Services\Table\Models\Query::setTop
-     * @covers PEAR2\WindowsAzure\Services\Table\Models\Query::getTop
+     * @covers WindowsAzure\Services\Table\Models\Query::setTop
+     * @covers WindowsAzure\Services\Table\Models\Query::getTop
      */
     public function testSetTop()
     {
@@ -91,31 +75,14 @@ class QueryTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers PEAR2\WindowsAzure\Services\Table\Models\Query::setFrom
-     * @covers PEAR2\WindowsAzure\Services\Table\Models\Query::getFrom
-     */
-    public function testSetFrom()
-    {
-        // Setup
-        $query = new Query();
-        $expected = 'TableName';
-        
-        // Test
-        $query->setFrom($expected);
-        
-        // Assert
-        $this->assertEquals($expected, $query->getFrom());
-    }
-    
-    /**
-     * @covers PEAR2\WindowsAzure\Services\Table\Models\Query::setFilter
-     * @covers PEAR2\WindowsAzure\Services\Table\Models\Query::getFilter
+     * @covers WindowsAzure\Services\Table\Models\Query::setFilter
+     * @covers WindowsAzure\Services\Table\Models\Query::getFilter
      */
     public function testSetFilter()
     {
         // Setup
         $query = new Query();
-        $expected = Filter::applyConstant('constValue');
+        $expected = Filter::applyConstant('constValue', EdmType::STRING);
         
         // Test
         $query->setFilter($expected);
@@ -125,26 +92,8 @@ class QueryTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers PEAR2\WindowsAzure\Services\Table\Models\Query::addOrderByField
-     * @covers PEAR2\WindowsAzure\Services\Table\Models\Query::getOrderByFields
-     */
-    public function testAddOrderByField()
-    {
-        // Setup
-        $query = new Query();
-        $field = 'customerId';
-        $expected = array($field);
-        
-        // Test
-        $query->addOrderByField($field);
-        
-        // Assert
-        $this->assertEquals($expected, $query->getOrderByFields());
-    }
-    
-    /**
-     * @covers PEAR2\WindowsAzure\Services\Table\Models\Query::addSelectField
-     * @covers PEAR2\WindowsAzure\Services\Table\Models\Query::getSelectFields
+     * @covers WindowsAzure\Services\Table\Models\Query::addSelectField
+     * @covers WindowsAzure\Services\Table\Models\Query::getSelectFields
      */
     public function testAddSelectField()
     {

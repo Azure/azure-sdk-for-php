@@ -15,53 +15,57 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   PEAR2\WindowsAzure\Services\Table\Models\Filters
+ * @package   Tests\Unit\WindowsAzure\Services\Table\Models
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
- 
-namespace PEAR2\WindowsAzure\Services\Table\Models\Filters;
+
+namespace Tests\Unit\WindowsAzure\Services\Table\Models;
+use WindowsAzure\Services\Table\Models\BatchOperationParameterName;
 
 /**
- * Constant filter
+ * Unit tests for class BatchOperationParameterName
  *
  * @category  Microsoft
- * @package   PEAR2\WindowsAzure\Services\Table\Models\Filters
+ * @package   Tests\Unit\WindowsAzure\Services\Table\Models
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @version   Release: @package_version@
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
-class LiteralFilter extends Filter
+class BatchOperationParameterNameTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @var string
+     * @covers WindowsAzure\Services\Table\Models\BatchOperationParameterName::isValid
      */
-    private $_literal;
+    public function testIsValid()
+    {
+        // Setup
+        $name = BatchOperationParameterName::BP_ETAG;
+        
+        // Test
+        $actual = BatchOperationParameterName::isValid($name);
+        
+        // Assert
+        $this->assertTrue($actual);
+    }
     
     /**
-     * Gets literal
-     * 
-     * @return string 
+     * @covers WindowsAzure\Services\Table\Models\BatchOperationParameterName::isValid
      */
-    public function getLiteral()
+    public function testIsValidWithInvalid()
     {
-        return $this->_literal;
-    }
-
-    /**
-     * Sets literal
-     * 
-     * @param string $literal value 
-     * 
-     * @return none
-     */
-    public function setLiteral($literal)
-    {
-        $this->_literal = $literal;
+        // Setup
+        $name = 'zeta el senen';
+        
+        // Test
+        $actual = BatchOperationParameterName::isValid($name);
+        
+        // Assert
+        $this->assertFalse($actual);
     }
 }
 

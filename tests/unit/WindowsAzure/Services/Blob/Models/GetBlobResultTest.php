@@ -15,21 +15,21 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   PEAR2\Tests\Unit\WindowsAzure\Services\Blob\Models
+ * @package   Tests\Unit\WindowsAzure\Services\Blob\Models
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
-namespace PEAR2\Tests\Unit\WindowsAzure\Services\Blob\Models;
-use PEAR2\WindowsAzure\Services\Blob\Models\GetBlobResult;
-use PEAR2\WindowsAzure\Services\Blob\Models\BlobProperties;
+namespace Tests\Unit\WindowsAzure\Services\Blob\Models;
+use WindowsAzure\Services\Blob\Models\GetBlobResult;
+use WindowsAzure\Services\Blob\Models\BlobProperties;
 
 /**
  * Unit tests for class GetBlobResult
  *
  * @category  Microsoft
- * @package   PEAR2\Tests\Unit\WindowsAzure\Services\Blob\Models
+ * @package   Tests\Unit\WindowsAzure\Services\Blob\Models
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
@@ -39,7 +39,7 @@ use PEAR2\WindowsAzure\Services\Blob\Models\BlobProperties;
 class GetBlobResultTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @covers PEAR2\WindowsAzure\Services\Blob\Models\GetBlobResult::setMetadata
+     * @covers WindowsAzure\Services\Blob\Models\GetBlobResult::setMetadata
      */
     public function testSetMetadata()
     {
@@ -55,7 +55,7 @@ class GetBlobResultTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers PEAR2\WindowsAzure\Services\Blob\Models\GetBlobResult::getMetadata
+     * @covers WindowsAzure\Services\Blob\Models\GetBlobResult::getMetadata
      */
     public function testGetMetadata()
     {
@@ -72,7 +72,7 @@ class GetBlobResultTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers PEAR2\WindowsAzure\Services\Blob\Models\GetBlobResult::setProperties
+     * @covers WindowsAzure\Services\Blob\Models\GetBlobResult::setProperties
      */
     public function testSetProperties()
     {
@@ -88,7 +88,7 @@ class GetBlobResultTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers PEAR2\WindowsAzure\Services\Blob\Models\GetBlobResult::getProperties
+     * @covers WindowsAzure\Services\Blob\Models\GetBlobResult::getProperties
      */
     public function testGetProperties()
     {
@@ -105,8 +105,8 @@ class GetBlobResultTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers PEAR2\WindowsAzure\Services\Blob\Models\GetBlobResult::setContentStream
-     * @covers PEAR2\WindowsAzure\Services\Blob\Models\GetBlobResult::getContentStream
+     * @covers WindowsAzure\Services\Blob\Models\GetBlobResult::setContentStream
+     * @covers WindowsAzure\Services\Blob\Models\GetBlobResult::getContentStream
      */
     public function testSetContentStream()
     {

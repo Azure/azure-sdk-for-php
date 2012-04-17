@@ -15,29 +15,29 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   PEAR2\Tests\Framework
+ * @package   Tests\Framework
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
-namespace PEAR2\Tests\Framework;
-use PEAR2\WindowsAzure\Services\Core\Configuration;
-use PEAR2\Tests\Framework\TestResources;
-use PEAR2\WindowsAzure\Services\Core\Models\ServiceProperties;
+namespace Tests\Framework;
+use WindowsAzure\Services\Core\Configuration;
+use Tests\Framework\TestResources;
+use WindowsAzure\Services\Core\Models\ServiceProperties;
 
 /**
  * TestBase class for each unit test class.
  *
  * @category  Microsoft
- * @package   PEAR2\Tests\Framework
+ * @package   Tests\Framework
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @version   Release: @package_version@
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
-class RestProxyTestBase extends \PHPUnit_Framework_TestCase
+class ServiceRestProxyTestBase extends \PHPUnit_Framework_TestCase
 {
     protected $config;
     protected $propertiesChanged;
@@ -67,6 +67,7 @@ class RestProxyTestBase extends \PHPUnit_Framework_TestCase
         $this->config = $config;
         $this->wrapper = $serviceWrapper;
         $this->_createDefaultProperties();
+        \WindowsAzure\Logger::setLogFile('C:\log.txt');
     }
     
     public function setServiceProperties($properties, $options = null)

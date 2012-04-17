@@ -15,35 +15,36 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   PEAR2\WindowsAzure\Services\Core
+ * @package   WindowsAzure\Services\Core
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
  
-namespace PEAR2\WindowsAzure\Services\Core;
-use PEAR2\WindowsAzure\Resources;
-use PEAR2\WindowsAzure\Core\HttpClient;
-use PEAR2\WindowsAzure\Services\Core\IServiceBuilder;
-use PEAR2\WindowsAzure\Services\Core\Configuration;
-use PEAR2\WindowsAzure\Services\Core\Filters\SharedKeyFilter;
-use PEAR2\WindowsAzure\Services\Core\Filters\DateFilter;
-use PEAR2\WindowsAzure\Services\Core\Filters\HeadersFilter;
-use PEAR2\WindowsAzure\Core\InvalidArgumentTypeException;
-use PEAR2\WindowsAzure\Services\Queue\QueueRestProxy;
-use PEAR2\WindowsAzure\Services\Queue\QueueSettings;
-use PEAR2\WindowsAzure\Services\Blob\BlobRestProxy;
-use PEAR2\WindowsAzure\Services\Blob\BlobSettings;
-use PEAR2\WindowsAzure\Services\Table\TableRestProxy;
-use PEAR2\WindowsAzure\Services\Table\TableSettings;
-use PEAR2\WindowsAzure\Services\Table\Utilities\AtomReaderWriter;
+namespace WindowsAzure\Services\Core;
+use WindowsAzure\Resources;
+use WindowsAzure\Core\HttpClient;
+use WindowsAzure\Services\Core\IServiceBuilder;
+use WindowsAzure\Services\Core\Configuration;
+use WindowsAzure\Services\Core\Filters\SharedKeyFilter;
+use WindowsAzure\Services\Core\Filters\DateFilter;
+use WindowsAzure\Services\Core\Filters\HeadersFilter;
+use WindowsAzure\Core\InvalidArgumentTypeException;
+use WindowsAzure\Services\Queue\QueueRestProxy;
+use WindowsAzure\Services\Queue\QueueSettings;
+use WindowsAzure\Services\Blob\BlobRestProxy;
+use WindowsAzure\Services\Blob\BlobSettings;
+use WindowsAzure\Services\Table\TableRestProxy;
+use WindowsAzure\Services\Table\TableSettings;
+use WindowsAzure\Services\Table\Utilities\AtomReaderWriter;
+use WindowsAzure\Services\Table\Utilities\MimeReaderWriter;
 
 /**
  * Builds azure service objects.
  *
  * @category  Microsoft
- * @package   PEAR2\WindowsAzure\Services\Core
+ * @package   WindowsAzure\Services\Core
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
@@ -98,9 +99,9 @@ class ServicesBuilder implements IServiceBuilder
     /**
      * Builds a queue object.
      *
-     * @param PEAR2\WindowsAzure\Services\Core\Configuration $config configuration.
+     * @param WindowsAzure\Services\Core\Configuration $config configuration.
      * 
-     * @return PEAR2\WindowsAzure\Services\Queue\IQueue.
+     * @return WindowsAzure\Services\Queue\IQueue.
      */
     private static function _buildQueue($config)
     {
@@ -134,9 +135,9 @@ class ServicesBuilder implements IServiceBuilder
     /**
      * Builds a blob object.
      *
-     * @param PEAR2\WindowsAzure\Services\Core\Configuration $config configuration.
+     * @param WindowsAzure\Services\Core\Configuration $config configuration.
      * 
-     * @return PEAR2\WindowsAzure\Services\Blob\IBlob.
+     * @return WindowsAzure\Services\Blob\IBlob.
      */
     private static function _buildBlob($config)
     {
@@ -170,19 +171,21 @@ class ServicesBuilder implements IServiceBuilder
     /**
      * Builds a table object.
      *
-     * @param PEAR2\WindowsAzure\Services\Core\Configuration $config configuration.
+     * @param WindowsAzure\Services\Core\Configuration $config configuration.
      * 
-     * @return PEAR2\WindowsAzure\Services\Table\ITable.
+     * @return WindowsAzure\Services\Table\ITable.
      */
     private static function _buildTable($config)
     {
-        $httpClient = new HttpClient();
-        $serialize  = new AtomReaderWriter();
+        $httpClient     = new HttpClient();
+        $atomSerializer = new AtomReaderWriter();
+        $mimeSerializer = new MimeReaderWriter();
 
         $tableWrapper = new TableRestProxy(
             $httpClient,
             $config->getProperty(TableSettings::URI),
-            $serialize
+            $atomSerializer,
+            $mimeSerializer
         );
 
         // Adding headers filter
@@ -209,12 +212,12 @@ class ServicesBuilder implements IServiceBuilder
     /**
      * Creates an object passed $type configured with $config.
      *
-     * @param PEAR2\WindowsAzure\Services\Core\Configuration $config configuration.
-     * @param string                                         $type   type name.
+     * @param WindowsAzure\Services\Core\Configuration $config The configuration.
+     * @param string                                   $type   The type name.
      * 
-     * @return PEAR2\WindowsAzure\Services\Queue\IQueue
-     *       | PEAR2\WindowsAzure\Services\Blob\IBlob
-     *       | PEAR2\WindowsAzure\Services\Blob\ITable
+     * @return WindowsAzure\Services\Queue\IQueue
+     *       | WindowsAzure\Services\Blob\IBlob
+     *       | WindowsAzure\Services\Blob\ITable
      */
     public static function build($config, $type)
     {

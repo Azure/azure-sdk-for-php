@@ -15,22 +15,22 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   PEAR2\Tests\Unit\WindowsAzure\ServiceRuntime
+ * @package   Tests\Unit\WindowsAzure\ServiceRuntime
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
-namespace PEAR2\Tests\Unit\WindowsAzure\ServiceRuntime;
-use PEAR2\Tests\Framework\TestResources;
-use PEAR2\WindowsAzure\ServiceRuntime\RoleInstance;
-use PEAR2\WindowsAzure\ServiceRuntime\RoleInstanceEndpoint;
+namespace Tests\Unit\WindowsAzure\ServiceRuntime;
+use Tests\Framework\TestResources;
+use WindowsAzure\ServiceRuntime\RoleInstance;
+use WindowsAzure\ServiceRuntime\RoleInstanceEndpoint;
 
 /**
  * Unit tests for class RoleInstanceEndpoint.
  *
  * @category  Microsoft
- * @package   PEAR2\Tests\Unit\WindowsAzure\ServiceRuntime
+ * @package   Tests\Unit\WindowsAzure\ServiceRuntime
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
@@ -40,9 +40,9 @@ use PEAR2\WindowsAzure\ServiceRuntime\RoleInstanceEndpoint;
 class RoleInstanceEndpointTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @covers PEAR2\WindowsAzure\ServiceRuntime\RoleInstanceEndpoint::__construct
-     * @covers PEAR2\WindowsAzure\ServiceRuntime\RoleInstanceEndpoint::setRoleInstance
-     * @covers PEAR2\WindowsAzure\ServiceRuntime\RoleInstanceEndpoint::getRoleInstance
+     * @covers WindowsAzure\ServiceRuntime\RoleInstanceEndpoint::__construct
+     * @covers WindowsAzure\ServiceRuntime\RoleInstanceEndpoint::setRoleInstance
+     * @covers WindowsAzure\ServiceRuntime\RoleInstanceEndpoint::getRoleInstance
      */
     public function testRoleInstance()
     {
@@ -59,7 +59,7 @@ class RoleInstanceEndpointTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers PEAR2\WindowsAzure\ServiceRuntime\RoleInstanceEndpoint::getProtocol
+     * @covers WindowsAzure\ServiceRuntime\RoleInstanceEndpoint::getProtocol
      */
     public function testGetProtocol()
     {
@@ -74,7 +74,7 @@ class RoleInstanceEndpointTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers PEAR2\WindowsAzure\ServiceRuntime\RoleInstanceEndpoint::getAddress
+     * @covers WindowsAzure\ServiceRuntime\RoleInstanceEndpoint::getAddress
      */
     public function testGetAddress()
     {
@@ -89,7 +89,7 @@ class RoleInstanceEndpointTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers PEAR2\WindowsAzure\ServiceRuntime\RoleInstanceEndpoint::getPort
+     * @covers WindowsAzure\ServiceRuntime\RoleInstanceEndpoint::getPort
      */
     public function testGetPort()
     {

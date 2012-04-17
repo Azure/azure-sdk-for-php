@@ -15,32 +15,32 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   PEAR2\Tests\Framework
+ * @package   Tests\Framework
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
-namespace PEAR2\Tests\Framework;
-use PEAR2\Tests\Framework\RestProxyTestBase;
-use PEAR2\WindowsAzure\Services\Core\Configuration;
-use PEAR2\WindowsAzure\Services\Blob\BlobSettings;
-use PEAR2\WindowsAzure\Services\Blob\BlobService;
-use PEAR2\Tests\Framework\TestResources;
-use PEAR2\WindowsAzure\Services\Blob\Models\CreateContainerOptions;
+namespace Tests\Framework;
+use Tests\Framework\ServiceRestProxyTestBase;
+use WindowsAzure\Services\Core\Configuration;
+use WindowsAzure\Services\Blob\BlobSettings;
+use WindowsAzure\Services\Blob\BlobService;
+use Tests\Framework\TestResources;
+use WindowsAzure\Services\Blob\Models\CreateContainerOptions;
 
 /**
  * TestBase class for each unit test class.
  *
  * @category  Microsoft
- * @package   PEAR2\Tests\Framework
+ * @package   Tests\Framework
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @version   Release: @package_version@
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
-class BlobRestProxyTestBase extends RestProxyTestBase
+class BlobServiceRestProxyTestBase extends ServiceRestProxyTestBase
 {
     protected $_createdContainers;
     

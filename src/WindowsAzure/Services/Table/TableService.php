@@ -15,21 +15,21 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   PEAR2\WindowsAzure\Services\Table
+ * @package   WindowsAzure\Services\Table
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
  
-namespace PEAR2\WindowsAzure\Services\Table;
-use PEAR2\WindowsAzure\Resources;
+namespace WindowsAzure\Services\Table;
+use WindowsAzure\Resources;
 
 /**
  * Factory for creating ITable objects
  *
  * @category  Microsoft
- * @package   PEAR2\WindowsAzure\Services\Table
+ * @package   WindowsAzure\Services\Table
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
@@ -41,9 +41,9 @@ class TableService
     /**
      * Creates new object based on the builder type in the $config.
      *
-     * @param PEAR2\WindowsAzure\Services\Core\Configuration $config config object.
+     * @param WindowsAzure\Services\Core\Configuration $config config object.
      * 
-     * @return PEAR2\WindowsAzure\Services\Table\ITable.
+     * @return WindowsAzure\Services\Table\ITable.
      */
     public static function create($config)
     {

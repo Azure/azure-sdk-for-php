@@ -15,23 +15,23 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   PEAR2\Tests\Unit\WindowsAzure
+ * @package   Tests\Unit\WindowsAzure
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
 
-use PEAR2\WindowsAzure\Services\Core\Filters\SharedKeyFilter;
-use PEAR2\WindowsAzure\Core\HttpClient;
-use PEAR2\WindowsAzure\Resources;
-use PEAR2\WindowsAzure\Core\InvalidArgumentTypeException;
+use WindowsAzure\Services\Core\Filters\SharedKeyFilter;
+use WindowsAzure\Core\HttpClient;
+use WindowsAzure\Resources;
+use WindowsAzure\Core\InvalidArgumentTypeException;
 
 /**
  * Unit tests for class SharedKeyFilterTest
  *
  * @category  Microsoft
- * @package   PEAR2\Tests\Unit\WindowsAzure
+ * @package   Tests\Unit\WindowsAzure
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
@@ -41,69 +41,69 @@ use PEAR2\WindowsAzure\Core\InvalidArgumentTypeException;
 class SharedKeyFilterTest extends PHPUnit_Framework_TestCase
 {
     /**
-     * @covers PEAR2\WindowsAzure\Services\Core\Filters\SharedKeyFilter::handleRequest
-     * @covers PEAR2\WindowsAzure\Services\Core\Filters\SharedKeyFilter::__construct
+     * @covers WindowsAzure\Services\Core\Filters\SharedKeyFilter::handleRequest
+     * @covers WindowsAzure\Services\Core\Filters\SharedKeyFilter::__construct
      */
     public function testHandleRequest()
     {
         // Setup
         $channel = new HttpClient();
-        $url = new \PEAR2\WindowsAzure\Core\Url('http://microsoft.com');
+        $url = new \WindowsAzure\Core\Url('http://microsoft.com');
         $channel->setUrl($url);
-        $filer = new SharedKeyFilter('acount', 'key', Resources::QUEUE_TYPE_NAME);
+        $filter = new SharedKeyFilter('acount', 'key', Resources::QUEUE_TYPE_NAME);
         
         // Test
-        $request = $filer->handleRequest($channel);
+        $request = $filter->handleRequest($channel);
         
         // Assert
         $this->assertArrayHasKey(strtolower(Resources::AUTHENTICATION), $request->getHeaders());
     }
     
     /**
-     * @covers PEAR2\WindowsAzure\Services\Core\Filters\SharedKeyFilter::handleRequest
-     * @covers PEAR2\WindowsAzure\Services\Core\Filters\SharedKeyFilter::__construct
+     * @covers WindowsAzure\Services\Core\Filters\SharedKeyFilter::handleRequest
+     * @covers WindowsAzure\Services\Core\Filters\SharedKeyFilter::__construct
      */
     public function testHandleRequestWithTable()
     {
         // Setup
         $channel = new HttpClient();
-        $url = new \PEAR2\WindowsAzure\Core\Url('http://microsoft.com');
+        $url = new \WindowsAzure\Core\Url('http://microsoft.com');
         $channel->setUrl($url);
-        $filer = new SharedKeyFilter('acount', 'key', Resources::TABLE_TYPE_NAME);
+        $filter = new SharedKeyFilter('acount', 'key', Resources::TABLE_TYPE_NAME);
         
         // Test
-        $request = $filer->handleRequest($channel);
+        $request = $filter->handleRequest($channel);
         
         // Assert
         $this->assertArrayHasKey(strtolower(Resources::AUTHENTICATION), $request->getHeaders());
     }
     
     /**
-     * @covers PEAR2\WindowsAzure\Services\Core\Filters\SharedKeyFilter::__construct
+     * @covers WindowsAzure\Services\Core\Filters\SharedKeyFilter::__construct
      */
     public function test__constructWithInvalidTypeFail()
     {
         // Setup
-        $this->setExpectedException('PEAR2\\WindowsAzure\\Core\\InvalidArgumentTypeException');
+        $this->setExpectedException('\WindowsAzure\\Core\\InvalidArgumentTypeException');
         
         // Test
         new SharedKeyFilter('acount', 'key', 'FooType');
     }
     
     /**
-     * @covers PEAR2\WindowsAzure\Services\Core\Filters\SharedKeyFilter::handleResponse
+     * @covers WindowsAzure\Services\Core\Filters\SharedKeyFilter::handleResponse
      */
     public function testHandleResponse()
     {
         // Setup
         $channel = new HttpClient();
-        $url = new \PEAR2\WindowsAzure\Core\Url('http://microsoft.com');
+        $url = new \WindowsAzure\Core\Url('http://microsoft.com');
         $channel->setUrl($url);
         $response = null;
-        $filer = new SharedKeyFilter('acount', 'key', Resources::QUEUE_TYPE_NAME);
+        $filter = new SharedKeyFilter('acount', 'key', Resources::QUEUE_TYPE_NAME);
         
         // Test
-        $response = $filer->handleResponse($channel, $response);
+        $response = $filter->handleResponse($channel, $response);
         
         // Assert
         $this->assertNull($response);

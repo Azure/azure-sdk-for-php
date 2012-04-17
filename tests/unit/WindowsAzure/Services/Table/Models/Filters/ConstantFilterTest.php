@@ -15,21 +15,22 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   PEAR2\Tests\Unit\WindowsAzure\Services\Table\Models\Filters
+ * @package   Tests\Unit\WindowsAzure\Services\Table\Models\Filters
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
 
-namespace PEAR2\Tests\Unit\WindowsAzure\Services\Table\Models\Filters;
-use PEAR2\WindowsAzure\Services\Table\Models\Filters\ConstantFilter;
+namespace Tests\Unit\WindowsAzure\Services\Table\Models\Filters;
+use WindowsAzure\Services\Table\Models\Filters\ConstantFilter;
+use WindowsAzure\Services\Table\Models\EdmType;
 
 /**
  * Unit tests for class ConstantFilter
  *
  * @category  Microsoft
- * @package   PEAR2\Tests\Unit\WindowsAzure\Services\Table\Models\Filters
+ * @package   Tests\Unit\WindowsAzure\Services\Table\Models\Filters
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
@@ -39,8 +40,8 @@ use PEAR2\WindowsAzure\Services\Table\Models\Filters\ConstantFilter;
 class ConstantFilterTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @covers PEAR2\WindowsAzure\Services\Table\Models\Filters\ConstantFilter::setValue
-     * @covers PEAR2\WindowsAzure\Services\Table\Models\Filters\ConstantFilter::getValue
+     * @covers WindowsAzure\Services\Table\Models\Filters\ConstantFilter::setValue
+     * @covers WindowsAzure\Services\Table\Models\Filters\ConstantFilter::getValue
      */
     public function testSetValue()
     {
@@ -53,6 +54,23 @@ class ConstantFilterTest extends \PHPUnit_Framework_TestCase
         
         // Test
         $this->assertEquals($expected, $filter->getValue());
+    }
+    
+    /**
+     * @covers WindowsAzure\Services\Table\Models\Filters\ConstantFilter::setEdmType
+     * @covers WindowsAzure\Services\Table\Models\Filters\ConstantFilter::getEdmType
+     */
+    public function testSetEdmType()
+    {
+        // Setup
+        $filter = new ConstantFilter();
+        $expected = EdmType::BINARY;
+        
+        // Test
+        $filter->setEdmType($expected);
+        
+        // Assert
+        $this->assertEquals($expected, $filter->getEdmType());
     }
 }
 

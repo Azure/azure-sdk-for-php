@@ -15,23 +15,23 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   PEAR2\WindowsAzure\Services\Table\Models
+ * @package   WindowsAzure\Services\Table\Models
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
  
-namespace PEAR2\WindowsAzure\Services\Table\Models;
-use PEAR2\WindowsAzure\Utilities;
-use PEAR2\WindowsAzure\Resources;
-use PEAR2\WindowsAzure\Validate;
+namespace WindowsAzure\Services\Table\Models;
+use WindowsAzure\Utilities;
+use WindowsAzure\Resources;
+use WindowsAzure\Validate;
 
 /**
  * Represents entity object used in tables
  *
  * @category  Microsoft
- * @package   PEAR2\WindowsAzure\Services\Table\Models
+ * @package   WindowsAzure\Services\Table\Models
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
@@ -76,7 +76,7 @@ class Entity
      * 
      * @return mix
      */
-    public function tryGetPropertyValue($name)
+    public function getPropertyValue($name)
     {
         $p = $this->_properties[$name];
         return is_null($p) ? null : $p->getValue();
@@ -111,7 +111,7 @@ class Entity
      */
     public function getPartitionKey()
     {
-        return $this->tryGetPropertyValue('PartitionKey');
+        return $this->getPropertyValue('PartitionKey');
     }
 
     /**
@@ -123,7 +123,7 @@ class Entity
      */
     public function setPartitionKey($partitionKey)
     {
-        $this->newProperty('PartitionKey', null, $partitionKey);
+        $this->addProperty('PartitionKey', null, $partitionKey);
     }
     
     /**
@@ -133,7 +133,7 @@ class Entity
      */
     public function getRowKey()
     {
-        return $this->tryGetPropertyValue('RowKey');
+        return $this->getPropertyValue('RowKey');
     }
 
     /**
@@ -145,7 +145,7 @@ class Entity
      */
     public function setRowKey($rowKey)
     {
-        $this->newProperty('RowKey', null, $rowKey);
+        $this->addProperty('RowKey', null, $rowKey);
     }
     
     /**
@@ -155,7 +155,7 @@ class Entity
      */
     public function getTimestamp()
     {
-        return $this->tryGetPropertyValue('Timestamp');
+        return $this->getPropertyValue('Timestamp');
     }
 
     /**
@@ -167,7 +167,7 @@ class Entity
      */
     public function setTimestamp($timestamp)
     {
-        $this->newProperty('Timestamp', EdmType::DATETIME, $timestamp);
+        $this->addProperty('Timestamp', EdmType::DATETIME, $timestamp);
     }
     
     /**
@@ -228,10 +228,10 @@ class Entity
      * 
      * @return none
      */
-    public function newProperty($name, $edmType, $value)
+    public function addProperty($name, $edmType, $value)
     {
         $edmType = EdmType::processType($edmType);
-        $value   = EdmType::processValue($edmType, $value);
+        $value   = EdmType::unserializeValue($edmType, $value);
         
         $p = new Property();
         $p->setEdmType($edmType);
@@ -256,10 +256,7 @@ class Entity
             $validProperties = false;
         }
 
-
-
         if (   !$validProperties
-            || is_null($this->getTimestamp())
             || is_null($this->getPartitionKey())
             || is_null($this->getRowKey())
         ) {
@@ -267,7 +264,6 @@ class Entity
         } else {
             return true;
         }
-            
     }
 }
 

@@ -15,23 +15,23 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   PEAR2\Tests\Unit\WindowsAzure\Services\Core\Filters
+ * @package   Tests\Unit\WindowsAzure\Services\Core\Filters
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
 
-namespace PEAR2\Tests\Unit\WindowsAzure\Services\Core\Filters;
-use PEAR2\WindowsAzure\Services\Core\Filters\DateFilter;
-use PEAR2\WindowsAzure\Core\HttpClient;
-use PEAR2\WindowsAzure\Resources;
+namespace Tests\Unit\WindowsAzure\Services\Core\Filters;
+use WindowsAzure\Services\Core\Filters\DateFilter;
+use WindowsAzure\Core\HttpClient;
+use WindowsAzure\Resources;
 
 /**
  * Unit tests for class DateFilter
  *
  * @category  Microsoft
- * @package   PEAR2\Tests\Unit\WindowsAzure\Services\Core\Filters
+ * @package   Tests\Unit\WindowsAzure\Services\Core\Filters
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
@@ -41,33 +41,33 @@ use PEAR2\WindowsAzure\Resources;
 class DateFilterTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @covers PEAR2\WindowsAzure\Services\Core\Filters\DateFilter::handleRequest
+     * @covers WindowsAzure\Services\Core\Filters\DateFilter::handleRequest
      */
     public function testHandleRequest()
     {
         // Setup
         $channel = new HttpClient();
-        $filer = new DateFilter();
+        $filter = new DateFilter();
         
         // Test
-        $request = $filer->handleRequest($channel);
+        $request = $filter->handleRequest($channel);
         
         // Assert
         $this->assertArrayHasKey(Resources::DATE, $request->getHeaders());
     }
     
     /**
-     * @covers PEAR2\WindowsAzure\Services\Core\Filters\DateFilter::handleResponse
+     * @covers WindowsAzure\Services\Core\Filters\DateFilter::handleResponse
      */
     public function testHandleResponse()
     {
         // Setup
         $channel = new HttpClient();
         $response = null;
-        $filer = new DateFilter();
+        $filter = new DateFilter();
         
         // Test
-        $response = $filer->handleResponse($channel, $response);
+        $response = $filter->handleResponse($channel, $response);
         
         // Assert
         $this->assertNull($response);

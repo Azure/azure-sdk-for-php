@@ -15,21 +15,21 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   PEAR2\Tests\Unit\WindowsAzure\Services\Blob\Models
+ * @package   Tests\Unit\WindowsAzure\Services\Blob\Models
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
-namespace PEAR2\Tests\Unit\WindowsAzure\Services\Blob\Models;
-use PEAR2\WindowsAzure\Core\WindowsAzureUtilities;
-use PEAR2\WindowsAzure\Services\Blob\Models\GetBlobMetadataResult;
+namespace Tests\Unit\WindowsAzure\Services\Blob\Models;
+use WindowsAzure\Core\WindowsAzureUtilities;
+use WindowsAzure\Services\Blob\Models\GetBlobMetadataResult;
 
 /**
  * Unit tests for class GetBlobMetadataResult
  *
  * @category  Microsoft
- * @package   PEAR2\Tests\Unit\WindowsAzure\Services\Blob\Models
+ * @package   Tests\Unit\WindowsAzure\Services\Blob\Models
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
@@ -39,7 +39,7 @@ use PEAR2\WindowsAzure\Services\Blob\Models\GetBlobMetadataResult;
 class GetBlobMetadataResultTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @covers PEAR2\WindowsAzure\Services\Blob\Models\GetBlobMetadataResult::getEtag
+     * @covers WindowsAzure\Services\Blob\Models\GetBlobMetadataResult::getEtag
      */
     public function testGetEtag()
     {
@@ -56,7 +56,7 @@ class GetBlobMetadataResultTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers PEAR2\WindowsAzure\Services\Blob\Models\GetBlobMetadataResult::setEtag
+     * @covers WindowsAzure\Services\Blob\Models\GetBlobMetadataResult::setEtag
      */
     public function testSetEtag()
     {
@@ -73,7 +73,7 @@ class GetBlobMetadataResultTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers PEAR2\WindowsAzure\Services\Blob\Models\GetBlobMetadataResult::getLastModified
+     * @covers WindowsAzure\Services\Blob\Models\GetBlobMetadataResult::getLastModified
      */
     public function testGetLastModified()
     {
@@ -90,7 +90,7 @@ class GetBlobMetadataResultTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers PEAR2\WindowsAzure\Services\Blob\Models\GetBlobMetadataResult::setLastModified
+     * @covers WindowsAzure\Services\Blob\Models\GetBlobMetadataResult::setLastModified
      */
     public function testSetLastModified()
     {
@@ -107,7 +107,7 @@ class GetBlobMetadataResultTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers PEAR2\WindowsAzure\Services\Blob\Models\GetBlobMetadataResult::setMetadata
+     * @covers WindowsAzure\Services\Blob\Models\GetBlobMetadataResult::setMetadata
      */
     public function testSetMetadata()
     {
@@ -123,7 +123,7 @@ class GetBlobMetadataResultTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers PEAR2\WindowsAzure\Services\Blob\Models\GetBlobMetadataResult::getMetadata
+     * @covers WindowsAzure\Services\Blob\Models\GetBlobMetadataResult::getMetadata
      */
     public function testGetMetadata()
     {

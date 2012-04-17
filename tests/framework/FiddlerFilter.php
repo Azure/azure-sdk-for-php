@@ -15,16 +15,16 @@
  * PHP version 5
  *
  * @category   Microsoft
- * @package    PEAR2\Tests\Framework
+ * @package    Tests\Framework
  * @author     Jason Cooke <jcooke@microsoft.com>
  * @copyright  2012 Microsoft Corporation
  * @license    http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link       http://pear.php.net/package/azure-sdk-for-php
  */
  
-namespace PEAR2\Tests\Framework;
+namespace Tests\Framework;
 
-use PEAR2\WindowsAzure\Core\IServiceFilter;
+use WindowsAzure\Core\IServiceFilter;
 
 class FiddlerFilter implements IServiceFilter {
     protected $site = '127.0.0.1';
@@ -34,7 +34,7 @@ class FiddlerFilter implements IServiceFilter {
     
     public function __construct() {
         if (!self::$isChecked) {
-            set_error_handler(array('PEAR2\Tests\Framework\FiddlerFilter', 'errorHandler'));
+            set_error_handler(array('Tests\Framework\FiddlerFilter', 'errorHandler'));
             self::$isChecked = true;
             self::$isFiddlerOn = false;
             try {

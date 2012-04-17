@@ -15,25 +15,25 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   PEAR2\Tests\Unit\WindowsAzure\Services\Core
+ * @package   Tests\Unit\WindowsAzure\Services\Core
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
 
-use PEAR2\WindowsAzure\Services\Core\ServiceRestProxy;
-use PEAR2\WindowsAzure\Core\HttpClient;
-use PEAR2\WindowsAzure\Core\Url;
-use PEAR2\Tests\Mock\WindowsAzure\Services\Core\Filters\SimpleFilterMock;
-use PEAR2\WindowsAzure\Services\Blob\Models\AccessCondition;
-use PEAR2\WindowsAzure\Services\Blob\Models\AccessConditionHeaderType;
+use WindowsAzure\Services\Core\ServiceRestProxy;
+use WindowsAzure\Core\HttpClient;
+use WindowsAzure\Core\Url;
+use Tests\Mock\WindowsAzure\Services\Core\Filters\SimpleFilterMock;
+use WindowsAzure\Services\Blob\Models\AccessCondition;
+use WindowsAzure\Services\Blob\Models\AccessConditionHeaderType;
 
 /**
  * Unit tests for class ServiceRestProxy
  *
  * @category  Microsoft
- * @package   PEAR2\Tests\Unit\WindowsAzure\Services\Core
+ * @package   Tests\Unit\WindowsAzure\Services\Core
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
@@ -43,7 +43,7 @@ use PEAR2\WindowsAzure\Services\Blob\Models\AccessConditionHeaderType;
 class ServiceRestProxyTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @covers PEAR2\WindowsAzure\Services\Core\ServiceRestProxy::__construct
+     * @covers WindowsAzure\Services\Core\ServiceRestProxy::__construct
      */
     public function test__construct()
     {
@@ -61,7 +61,7 @@ class ServiceRestProxyTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers  PEAR2\WindowsAzure\Services\Core\ServiceRestProxy::withFilter
+     * @covers  WindowsAzure\Services\Core\ServiceRestProxy::withFilter
      * @depends test__construct
      */
     public function testWithFilter($restWrapper)
@@ -78,7 +78,7 @@ class ServiceRestProxyTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers  PEAR2\WindowsAzure\Services\Core\ServiceRestProxy::getFilters
+     * @covers  WindowsAzure\Services\Core\ServiceRestProxy::getFilters
      * @depends test__construct
      */
     public function testGetFilters($restWrapper)
@@ -97,7 +97,7 @@ class ServiceRestProxyTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers  PEAR2\WindowsAzure\Services\Core\ServiceRestProxy::addOptionalAccessConditionHeader
+     * @covers  WindowsAzure\Services\Core\ServiceRestProxy::addOptionalAccessConditionHeader
      * @depends test__construct
      */
     public function testAddOptionalAccessContitionHeader($restWrapper)
@@ -117,7 +117,7 @@ class ServiceRestProxyTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers  PEAR2\WindowsAzure\Services\Core\ServiceRestProxy::groupQueryValues
+     * @covers  WindowsAzure\Services\Core\ServiceRestProxy::groupQueryValues
      * @depends test__construct
      */
     public function testGroupQueryValues($restWrapper)
@@ -134,7 +134,7 @@ class ServiceRestProxyTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers  PEAR2\WindowsAzure\Services\Core\ServiceRestProxy::groupQueryValues
+     * @covers  WindowsAzure\Services\Core\ServiceRestProxy::groupQueryValues
      * @depends test__construct
      */
     public function testGroupQueryValuesWithNulls($restWrapper)
@@ -150,7 +150,7 @@ class ServiceRestProxyTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers  PEAR2\WindowsAzure\Services\Core\ServiceRestProxy::groupQueryValues
+     * @covers  WindowsAzure\Services\Core\ServiceRestProxy::groupQueryValues
      * @depends test__construct
      */
     public function testGroupQueryValuesWithMix($restWrapper)

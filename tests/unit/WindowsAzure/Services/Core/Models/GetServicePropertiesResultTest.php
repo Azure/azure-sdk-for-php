@@ -15,23 +15,23 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   PEAR2\Tests\Unit\WindowsAzure\Services\Core\Models
+ * @package   Tests\Unit\WindowsAzure\Services\Core\Models
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
 
-namespace PEAR2\Tests\Unit\WindowsAzure\Services\Core\Models;
-use PEAR2\WindowsAzure\Services\Core\Models\GetServicePropertiesResult;
-use PEAR2\WindowsAzure\Services\Core\Models\ServiceProperties;
-use PEAR2\Tests\Framework\TestResources;
+namespace Tests\Unit\WindowsAzure\Services\Core\Models;
+use WindowsAzure\Services\Core\Models\GetServicePropertiesResult;
+use WindowsAzure\Services\Core\Models\ServiceProperties;
+use Tests\Framework\TestResources;
 
 /**
  * Unit tests for class GetServicePropertiesResult
  *
  * @category  Microsoft
- * @package   PEAR2\Tests\Unit\WindowsAzure\Services\Core\Models
+ * @package   Tests\Unit\WindowsAzure\Services\Core\Models
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
@@ -41,7 +41,7 @@ use PEAR2\Tests\Framework\TestResources;
 class GetServicePropertiesResultTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @covers PEAR2\WindowsAzure\Services\Core\Models\GetServicePropertiesResult::create
+     * @covers WindowsAzure\Services\Core\Models\GetServicePropertiesResult::create
      */
     public function testCreate()
     {
@@ -54,7 +54,7 @@ class GetServicePropertiesResultTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers PEAR2\WindowsAzure\Services\Core\Models\GetServicePropertiesResult::getValue
+     * @covers WindowsAzure\Services\Core\Models\GetServicePropertiesResult::getValue
      */
     public function testGetValue()
     {
@@ -71,7 +71,7 @@ class GetServicePropertiesResultTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers PEAR2\WindowsAzure\Services\Core\Models\GetServicePropertiesResult::setValue
+     * @covers WindowsAzure\Services\Core\Models\GetServicePropertiesResult::setValue
      */
     public function testSetValue()
     {

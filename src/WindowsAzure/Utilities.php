@@ -15,14 +15,14 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   PEAR2\WindowsAzure
+ * @package   WindowsAzure
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
  
-namespace PEAR2\WindowsAzure;
+namespace WindowsAzure;
 require_once 'XML/Unserializer.php';
 require_once 'XML/Serializer.php';
 
@@ -30,7 +30,7 @@ require_once 'XML/Serializer.php';
  * Utilities for the project
  *
  * @category  Microsoft
- * @package   PEAR2\WindowsAzure
+ * @package   WindowsAzure
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
@@ -329,7 +329,7 @@ class Utilities
         * 
         * @return \DateTime
         */
-    public function convertToDateTime($value)
+    public static function convertToDateTime($value)
     {
         if ($value instanceof \DateTime) {
             return $value;
@@ -340,6 +340,24 @@ class Utilities
         }
             
         return new \DateTime($value, new \DateTimeZone('UTC'));
+    }
+    
+    /**
+     * Reads the contents of a file.
+     * 
+     * @param stream $stream The file strea with read permissions.
+     * 
+     * @return string
+     */
+    public static function readFile($stream)
+    {
+        $contents = Resources::EMPTY_STRING;
+        
+        while (!feof($stream)) {
+            $contents .= fgets($stream);
+        }
+        
+        return $contents;
     }
 }
 

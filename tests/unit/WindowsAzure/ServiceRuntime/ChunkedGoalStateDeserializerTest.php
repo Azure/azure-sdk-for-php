@@ -15,16 +15,16 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   PEAR2\Tests\Unit\WindowsAzure\ServiceRuntime
+ * @package   Tests\Unit\WindowsAzure\ServiceRuntime
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
-namespace PEAR2\Tests\Unit\WindowsAzure\ServiceRuntime;
-use PEAR2\Tests\Framework\TestResources;
-use PEAR2\WindowsAzure\ServiceRuntime\ChunkedGoalStateDeserializer;
-use PEAR2\WindowsAzure\ServiceRuntime\FileInputChannel;
+namespace Tests\Unit\WindowsAzure\ServiceRuntime;
+use Tests\Framework\TestResources;
+use WindowsAzure\ServiceRuntime\ChunkedGoalStateDeserializer;
+use WindowsAzure\ServiceRuntime\FileInputChannel;
 
 require_once 'vfsStream/vfsStream.php';
 
@@ -32,7 +32,7 @@ require_once 'vfsStream/vfsStream.php';
  * Unit tests for class ChunkedGoalStateDeserializer.
  *
  * @category  Microsoft
- * @package   PEAR2\Tests\Unit\WindowsAzure\ServiceRuntime
+ * @package   Tests\Unit\WindowsAzure\ServiceRuntime
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
@@ -42,9 +42,9 @@ require_once 'vfsStream/vfsStream.php';
 class ChunkedGoalStateDeserializerTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @covers PEAR2\WindowsAzure\ServiceRuntime\ChunkedGoalStateDeserializer::__construct
-     * @covers PEAR2\WindowsAzure\ServiceRuntime\ChunkedGoalStateDeserializer::initialize
-     * @covers PEAR2\WindowsAzure\ServiceRuntime\ChunkedGoalStateDeserializer::deserialize
+     * @covers WindowsAzure\ServiceRuntime\ChunkedGoalStateDeserializer::__construct
+     * @covers WindowsAzure\ServiceRuntime\ChunkedGoalStateDeserializer::initialize
+     * @covers WindowsAzure\ServiceRuntime\ChunkedGoalStateDeserializer::deserialize
      */
     public function testDeserialize()
     {

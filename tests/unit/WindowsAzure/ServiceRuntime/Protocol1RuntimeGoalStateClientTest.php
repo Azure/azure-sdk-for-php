@@ -15,20 +15,20 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   PEAR2\Tests\Unit\WindowsAzure\ServiceRuntime
+ * @package   Tests\Unit\WindowsAzure\ServiceRuntime
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
-namespace PEAR2\Tests\Unit\WindowsAzure\ServiceRuntime;
-use PEAR2\Tests\Framework\TestResources;
-use PEAR2\WindowsAzure\Core\WindowsAzureUtilities;
-use PEAR2\WindowsAzure\ServiceRuntime\ChunkedGoalStateDeserializer;
-use PEAR2\WindowsAzure\ServiceRuntime\FileInputChannel;
-use PEAR2\WindowsAzure\ServiceRuntime\Protocol1RuntimeCurrentStateClient;
-use PEAR2\WindowsAzure\ServiceRuntime\Protocol1RuntimeGoalStateClient;
-use PEAR2\WindowsAzure\ServiceRuntime\XmlRoleEnvironmentDataDeserializer;
+namespace Tests\Unit\WindowsAzure\ServiceRuntime;
+use Tests\Framework\TestResources;
+use WindowsAzure\Core\WindowsAzureUtilities;
+use WindowsAzure\ServiceRuntime\ChunkedGoalStateDeserializer;
+use WindowsAzure\ServiceRuntime\FileInputChannel;
+use WindowsAzure\ServiceRuntime\Protocol1RuntimeCurrentStateClient;
+use WindowsAzure\ServiceRuntime\Protocol1RuntimeGoalStateClient;
+use WindowsAzure\ServiceRuntime\XmlRoleEnvironmentDataDeserializer;
 
 require_once 'vfsStream/vfsStream.php';
 
@@ -36,7 +36,7 @@ require_once 'vfsStream/vfsStream.php';
  * Unit tests for class Protocol1RuntimeGoalStateClient.
  *
  * @category  Microsoft
- * @package   PEAR2\Tests\Unit\WindowsAzure\ServiceRuntime
+ * @package   Tests\Unit\WindowsAzure\ServiceRuntime
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
@@ -46,10 +46,10 @@ require_once 'vfsStream/vfsStream.php';
 class Protocol1RuntimeGoalStateClientTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @covers PEAR2\WindowsAzure\ServiceRuntime\Protocol1RuntimeGoalStateClient::__construct
-     * @covers PEAR2\WindowsAzure\ServiceRuntime\Protocol1RuntimeGoalStateClient::getCurrentGoalState
-     * @covers PEAR2\WindowsAzure\ServiceRuntime\Protocol1RuntimeGoalStateClient::setEndpoint
-     * @covers PEAR2\WindowsAzure\ServiceRuntime\Protocol1RuntimeGoalStateClient::_ensureGoalStateRetrieved
+     * @covers WindowsAzure\ServiceRuntime\Protocol1RuntimeGoalStateClient::__construct
+     * @covers WindowsAzure\ServiceRuntime\Protocol1RuntimeGoalStateClient::getCurrentGoalState
+     * @covers WindowsAzure\ServiceRuntime\Protocol1RuntimeGoalStateClient::setEndpoint
+     * @covers WindowsAzure\ServiceRuntime\Protocol1RuntimeGoalStateClient::_ensureGoalStateRetrieved
      */
     public function testGetCurrentGoalState()
     {
@@ -95,10 +95,10 @@ class Protocol1RuntimeGoalStateClientTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers PEAR2\WindowsAzure\ServiceRuntime\Protocol1RuntimeGoalStateClient::__construct
-     * @covers PEAR2\WindowsAzure\ServiceRuntime\Protocol1RuntimeGoalStateClient::getRoleEnvironmentData
-     * @covers PEAR2\WindowsAzure\ServiceRuntime\Protocol1RuntimeGoalStateClient::setEndpoint
-     * @covers PEAR2\WindowsAzure\ServiceRuntime\Protocol1RuntimeGoalStateClient::_ensureGoalStateRetrieved
+     * @covers WindowsAzure\ServiceRuntime\Protocol1RuntimeGoalStateClient::__construct
+     * @covers WindowsAzure\ServiceRuntime\Protocol1RuntimeGoalStateClient::getRoleEnvironmentData
+     * @covers WindowsAzure\ServiceRuntime\Protocol1RuntimeGoalStateClient::setEndpoint
+     * @covers WindowsAzure\ServiceRuntime\Protocol1RuntimeGoalStateClient::_ensureGoalStateRetrieved
      */
     public function testGetRoleEnvironmentData()
     {
@@ -169,8 +169,8 @@ class Protocol1RuntimeGoalStateClientTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers PEAR2\WindowsAzure\ServiceRuntime\Protocol1RuntimeGoalStateClient::setKeepOpen
-     * @covers PEAR2\WindowsAzure\ServiceRuntime\Protocol1RuntimeGoalStateClient::getKeepOpen
+     * @covers WindowsAzure\ServiceRuntime\Protocol1RuntimeGoalStateClient::setKeepOpen
+     * @covers WindowsAzure\ServiceRuntime\Protocol1RuntimeGoalStateClient::getKeepOpen
      */
     public function testSetKeepOpen()
     {

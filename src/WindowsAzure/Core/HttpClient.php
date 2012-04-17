@@ -15,20 +15,20 @@
  * PHP version 5
  * 
  * @category  Microsoft
- * @package   PEAR2\WindowsAzure\Core
+ * @package   WindowsAzure\Core
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
  
-namespace PEAR2\WindowsAzure\Core;
-use PEAR2\WindowsAzure\Core\IHttpClient;
-use PEAR2\WindowsAzure\Core\IServiceFilter;
-use PEAR2\WindowsAzure\Resources;
-use PEAR2\WindowsAzure\Core\ServiceException;
-use PEAR2\WindowsAzure\Validate;
-use PEAR2\WindowsAzure\Core\IUrl;
+namespace WindowsAzure\Core;
+use WindowsAzure\Core\IHttpClient;
+use WindowsAzure\Core\IServiceFilter;
+use WindowsAzure\Resources;
+use WindowsAzure\Core\ServiceException;
+use WindowsAzure\Validate;
+use WindowsAzure\Core\IUrl;
 
 require_once 'HTTP/Request2.php';
 
@@ -36,7 +36,7 @@ require_once 'HTTP/Request2.php';
  * HTTP client which sends and receives HTTP requests and responses.
  *
  * @category  Microsoft
- * @package   PEAR2\WindowsAzure\Core
+ * @package   WindowsAzure\Core
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
@@ -51,7 +51,7 @@ class HttpClient implements IHttpClient
     private $_request;
     
     /**
-     * @var PEAR2\WindowsAzure\Core\IUrl 
+     * @var WindowsAzure\Core\IUrl 
      */
     private $_requestUrl;
     
@@ -72,7 +72,7 @@ class HttpClient implements IHttpClient
     /**
      * Constructor
      * 
-     * @return PEAR2\WindowsAzure\Core\HttpClient
+     * @return WindowsAzure\Core\HttpClient
      */
     function __construct()
     {
@@ -94,7 +94,7 @@ class HttpClient implements IHttpClient
     /**
      * Makes deep copy from the current object.
      * 
-     * @return PEAR2\WindowsAzure\Core\HttpClient
+     * @return WindowsAzure\Core\HttpClient
      */
     public function __clone()
     {
@@ -108,7 +108,7 @@ class HttpClient implements IHttpClient
     /**
      * Sets the request url.
      *
-     * @param PEAR2\WindowsAzure\Core\IUrl $url request url.
+     * @param WindowsAzure\Core\IUrl $url request url.
      * 
      * @return none.
      */
@@ -121,7 +121,7 @@ class HttpClient implements IHttpClient
      * Gets request url. Note that you must check if the returned object is null or
      * not.
      *
-     * @return PEAR2\WindowsAzure\Core\IUrl
+     * @return WindowsAzure\Core\IUrl
      */ 
     public function getUrl()
     {
@@ -130,7 +130,7 @@ class HttpClient implements IHttpClient
 
     /**
      * Sets request's HTTP method. You can use \HTTP_Request2 constants like
-     * \HTTP_Request2::METHOD_GET or strings like 'GET'.
+     * Resources::HTTP_GET or strings like 'GET'.
      * 
      * @param string $method request's HTTP method.
      * 
@@ -202,7 +202,7 @@ class HttpClient implements IHttpClient
      * send and then applied to the response.
      * @param IUrl  $url     Request url.
      * 
-     * @throws PEAR2\WindowsAzure\Core\ServiceException
+     * @throws WindowsAzure\Core\ServiceException
      * 
      * @return string The response body.
      */
@@ -214,9 +214,9 @@ class HttpClient implements IHttpClient
         }
         
         $contentLength = Resources::EMPTY_STRING;
-        if (    strtoupper($this->getMethod()) != \HTTP_Request2::METHOD_GET
-            && strtoupper($this->getMethod()) != \HTTP_Request2::METHOD_DELETE
-            && strtoupper($this->getMethod()) != \HTTP_Request2::METHOD_HEAD
+        if (    strtoupper($this->getMethod()) != Resources::HTTP_GET
+            && strtoupper($this->getMethod()) != Resources::HTTP_DELETE
+            && strtoupper($this->getMethod()) != Resources::HTTP_HEAD
         ) {
             $contentLength = 0;
             
@@ -229,7 +229,7 @@ class HttpClient implements IHttpClient
         foreach ($filters as $filter) {
             $this->_request = $filter->handleRequest($this)->_request;
         }
-
+        
         $this->_response = $this->_request->send();
 
         $start = count($filters) - 1;
@@ -239,13 +239,12 @@ class HttpClient implements IHttpClient
             );
         }
         
-        if (!in_array($this->_response->getStatus(), $this->_expectedStatusCodes)) {
-            $errorCode    = $this->_response->getStatus();
-            $stringValue  = $this->_response->getReasonPhrase();
-            $errorDetails = $this->_response->getBody();
-            
-            throw new ServiceException($errorCode, $stringValue, $errorDetails);
-        }
+        self::throwIfError(
+            $this->_response->getStatus(),
+            $this->_response->getReasonPhrase(),
+            $this->_response->getBody(),
+            $this->_expectedStatusCodes
+        );
 
         return $this->_response->getBody();
     }
@@ -335,6 +334,27 @@ class HttpClient implements IHttpClient
     public function getResponse()
     {
         return $this->_response;
+    }
+    
+    /**
+     * Throws ServiceException if the recieved status code is not expected.
+     * 
+     * @param string $actual   The received status code.
+     * @param string $reason   The reason phrase.
+     * @param string $message  The detailed message (if any).
+     * @param array  $expected The expected status codes.
+     * 
+     * @return none
+     * 
+     * @static
+     * 
+     * @throws ServiceException
+     */
+    public static function throwIfError($actual, $reason, $message, $expected)
+    {
+        if (!in_array($actual, $expected)) {
+            throw new ServiceException($actual, $reason, $message);
+        }
     }
 }
 

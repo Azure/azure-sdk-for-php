@@ -15,23 +15,23 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   PEAR2\WindowsAzure\Services\Core\Models
+ * @package   WindowsAzure\Services\Core\Models
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
  
-namespace PEAR2\WindowsAzure\Services\Core\Models;
-use PEAR2\WindowsAzure\Services\Core\Models\Logging;
-use PEAR2\WindowsAzure\Services\Core\Models\Metrics;
-use PEAR2\WindowsAzure\Utilities;
+namespace WindowsAzure\Services\Core\Models;
+use WindowsAzure\Services\Core\Models\Logging;
+use WindowsAzure\Services\Core\Models\Metrics;
+use WindowsAzure\Utilities;
 
 /**
  * Encapsulates service properties
  *
  * @category  Microsoft
- * @package   PEAR2\WindowsAzure\Services\Core\Models
+ * @package   WindowsAzure\Services\Core\Models
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
@@ -49,7 +49,7 @@ class ServiceProperties
      *
      * @param array $parsedResponse XML response parsed into array.
      * 
-     * @return PEAR2\WindowsAzure\Services\Core\Models\ServiceProperties.
+     * @return WindowsAzure\Services\Core\Models\ServiceProperties.
      */
     public static function create($parsedResponse)
     {
@@ -63,7 +63,7 @@ class ServiceProperties
     /**
      * Gets logging element.
      *
-     * @return PEAR2\WindowsAzure\Services\Core\Models\Logging.
+     * @return WindowsAzure\Services\Core\Models\Logging.
      */
     public function getLogging()
     {
@@ -73,7 +73,7 @@ class ServiceProperties
     /**
      * Sets logging element.
      *
-     * @param PEAR2\WindowsAzure\Services\Core\Models\Logging $logging new element.
+     * @param WindowsAzure\Services\Core\Models\Logging $logging new element.
      * 
      * @return none.
      */
@@ -85,7 +85,7 @@ class ServiceProperties
     /**
      * Gets metrics element.
      *
-     * @return PEAR2\WindowsAzure\Services\Core\Models\Metrics.
+     * @return WindowsAzure\Services\Core\Models\Metrics.
      */
     public function getMetrics()
     {
@@ -95,7 +95,7 @@ class ServiceProperties
     /**
      * Sets metrics element.
      *
-     * @param PEAR2\WindowsAzure\Services\Core\Models\Metrics $metrics new element.
+     * @param WindowsAzure\Services\Core\Models\Metrics $metrics new element.
      * 
      * @return none.
      */

@@ -15,21 +15,21 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   PEAR2\WindowsAzure\Services\Core
+ * @package   WindowsAzure\Services\Core
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
  
-namespace PEAR2\WindowsAzure\Services\Core;
-use PEAR2\WindowsAzure\Services\Core\ServicesBuilder;
-use PEAR2\WindowsAzure\Validate;
-use PEAR2\WindowsAzure\Core\InvalidArgumentTypeException;
-use PEAR2\WindowsAzure\Resources;
-use PEAR2\WindowsAzure\Services\Queue\QueueSettings;
-use PEAR2\WindowsAzure\Services\Blob\BlobSettings;
-use PEAR2\WindowsAzure\Services\Table\TableSettings;
+namespace WindowsAzure\Services\Core;
+use WindowsAzure\Services\Core\ServicesBuilder;
+use WindowsAzure\Validate;
+use WindowsAzure\Core\InvalidArgumentTypeException;
+use WindowsAzure\Resources;
+use WindowsAzure\Services\Queue\QueueSettings;
+use WindowsAzure\Services\Blob\BlobSettings;
+use WindowsAzure\Services\Table\TableSettings;
 
 /**
  * Contains configuration used to access azure storage accounts. 
@@ -44,7 +44,7 @@ use PEAR2\WindowsAzure\Services\Table\TableSettings;
  * </code>
  * 
  * @category  Microsoft
- * @package   PEAR2\WindowsAzure\Services\Core
+ * @package   WindowsAzure\Services\Core
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
@@ -59,7 +59,7 @@ class Configuration
     /**
      * Constructor.
      *
-     * @return PEAR2\WindowsAzure\Services\Core\Configuration.
+     * @return WindowsAzure\Services\Core\Configuration.
      */
     public function __construct()
     {
@@ -69,8 +69,8 @@ class Configuration
     /**
      * Configures $config to run against the storage emulator
      *
-     * @param PEAR2\WindowsAzure\Services\Core\Configuration $config configuration.
-     * @param string                                         $type   type name.
+     * @param WindowsAzure\Services\Core\Configuration $config The configuration.
+     * @param string                                   $type   The type name.
      * 
      * @return none.
      */
@@ -108,7 +108,7 @@ class Configuration
     /**
      * Access point to the static _instance of the class.
      *
-     * @return PEAR2\WindowsAzure\Services\Core\Configuration.
+     * @return WindowsAzure\Services\Core\Configuration.
      */
     public static function getInstance()
     {
@@ -162,12 +162,12 @@ class Configuration
      *
      * @param string $type the desired object type.
      * 
-     * @return PEAR2\WindowsAzure\Services\Queue\IQueue
-     *       | PEAR2\WindowsAzure\Services\Blob\IBlob
+     * @return WindowsAzure\Services\Queue\IQueue
+     *       | WindowsAzure\Services\Blob\IBlob
      */
     public function create($type)
     {
-        if (\PEAR2\WindowsAzure\Core\WindowsAzureUtilities::isEmulated()) {
+        if (\WindowsAzure\Core\WindowsAzureUtilities::isEmulated()) {
             self::_useStorageEmulatorConfig($this, $type);
         }
         

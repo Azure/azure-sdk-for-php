@@ -15,24 +15,24 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   PEAR2\WindowsAzure\Services\Table
+ * @package   WindowsAzure\Services\Table
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
  
-namespace PEAR2\WindowsAzure\Services\Table\Utilities;
-use PEAR2\WindowsAzure\Utilities;
-use PEAR2\WindowsAzure\Resources;
-use PEAR2\WindowsAzure\Services\Table\Models\EdmType;
-use PEAR2\WindowsAzure\Services\Table\Models\Entity;
+namespace WindowsAzure\Services\Table\Utilities;
+use WindowsAzure\Utilities;
+use WindowsAzure\Resources;
+use WindowsAzure\Services\Table\Models\EdmType;
+use WindowsAzure\Services\Table\Models\Entity;
 
 /**
  * Serializes and unserializes results from table wrapper calls
  *
  * @category  Microsoft
- * @package   PEAR2\WindowsAzure\Services\Table
+ * @package   WindowsAzure\Services\Table
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
@@ -185,13 +185,29 @@ class AtomReaderWriter implements IAtomReaderWriter
         } else {
             $rawEntries = array($result->entry);
         }
-
+        
         foreach ($rawEntries as $entry) {
             $tableName = $entry->xpath('.//m:properties/d:TableName');
             $tables[]  = (string)$tableName[0];
         }
         
         return $tables;
+    }
+    
+    /**
+     * Parses one table entry.
+     * 
+     * @param string $body The HTTP response body.
+     * 
+     * @return string 
+     */
+    public static function parseTable($body)
+    {
+        $result    = self::_parseBody($body);
+        $tableName = $result->xpath('.//m:properties/d:TableName');
+        $table     = (string)$tableName[0];
+        
+        return $table;
     }
     
     /**
@@ -223,10 +239,9 @@ class AtomReaderWriter implements IAtomReaderWriter
             </content>
         </entry>';
      
-        $edmDate = Utilities::convertToEdmDateTime($entity->getTimestamp());
-        $xml     = self::_fillTemplate(
+        $xml = self::_fillTemplate(
             $xml, array(
-                'Updated'    => $edmDate,
+                'Updated'    => Utilities::isoDate(),
                 'Properties' => self::_generatePropertiesXml($entity)
             )
         );
@@ -239,7 +254,7 @@ class AtomReaderWriter implements IAtomReaderWriter
      * 
      * @param \SimpleXML $result The SimpleXML object representing the entity.
      * 
-     * @return \PEAR2\WindowsAzure\Services\Table\Models\Entity
+     * @return \WindowsAzure\Services\Table\Models\Entity
      */
     private static function _parseOneEntity($result)
     {
@@ -257,7 +272,13 @@ class AtomReaderWriter implements IAtomReaderWriter
         foreach ($prop as $key => $value) {
             $attributes = $value->attributes($metadata);
             $type       = $attributes['type'];
-            $entity->newProperty((string)$key, (string)$type, (string)$value);
+            $isnull     = $attributes['null'];
+            
+            $entity->addProperty(
+                (string)$key,
+                (string)$type,
+                $isnull ? null : $value
+            );
         }
         
         return $entity;

@@ -15,21 +15,21 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   PEAR2\Tests\Unit\WindowsAzure\Services\Table\Models
+ * @package   Tests\Unit\WindowsAzure\Services\Table\Models
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
-namespace PEAR2\Tests\Unit\WindowsAzure\Services\Table\Models;
-use PEAR2\WindowsAzure\Services\Table\Models\QueryEntitiesOptions;
-use PEAR2\WindowsAzure\Services\Table\Models\Query;
+namespace Tests\Unit\WindowsAzure\Services\Table\Models;
+use WindowsAzure\Services\Table\Models\QueryEntitiesOptions;
+use WindowsAzure\Services\Table\Models\Query;
 
 /**
  * Unit tests for class QueryEntitiesOptions
  *
  * @category  Microsoft
- * @package   PEAR2\Tests\Unit\WindowsAzure\Services\Table\Models
+ * @package   Tests\Unit\WindowsAzure\Services\Table\Models
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
@@ -39,8 +39,8 @@ use PEAR2\WindowsAzure\Services\Table\Models\Query;
 class QueryEntitiesOptionsTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @covers PEAR2\WindowsAzure\Services\Table\Models\QueryEntitiesOptions::setQuery
-     * @covers PEAR2\WindowsAzure\Services\Table\Models\QueryEntitiesOptions::getQuery
+     * @covers WindowsAzure\Services\Table\Models\QueryEntitiesOptions::setQuery
+     * @covers WindowsAzure\Services\Table\Models\QueryEntitiesOptions::getQuery
      */
     public function testSetQuery()
     {
@@ -56,8 +56,8 @@ class QueryEntitiesOptionsTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers PEAR2\WindowsAzure\Services\Table\Models\QueryEntitiesOptions::setNextPartitionKey
-     * @covers PEAR2\WindowsAzure\Services\Table\Models\QueryEntitiesOptions::getNextPartitionKey
+     * @covers WindowsAzure\Services\Table\Models\QueryEntitiesOptions::setNextPartitionKey
+     * @covers WindowsAzure\Services\Table\Models\QueryEntitiesOptions::getNextPartitionKey
      */
     public function testSetNextPartitionKey()
     {
@@ -73,8 +73,8 @@ class QueryEntitiesOptionsTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers PEAR2\WindowsAzure\Services\Table\Models\QueryEntitiesOptions::setNextRowKey
-     * @covers PEAR2\WindowsAzure\Services\Table\Models\QueryEntitiesOptions::getNextRowKey
+     * @covers WindowsAzure\Services\Table\Models\QueryEntitiesOptions::setNextRowKey
+     * @covers WindowsAzure\Services\Table\Models\QueryEntitiesOptions::getNextRowKey
      */
     public function testSetNextRowKey()
     {

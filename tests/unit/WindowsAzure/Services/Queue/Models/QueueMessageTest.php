@@ -15,22 +15,22 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   PEAR2\Tests\Unit\WindowsAzure\Services\Queue\Models
+ * @package   Tests\Unit\WindowsAzure\Services\Queue\Models
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
 
-namespace PEAR2\Tests\Unit\WindowsAzure\Services\Queue\Models;
-use PEAR2\WindowsAzure\Utilities;
-use PEAR2\WindowsAzure\Services\Queue\Models\QueueMessage;
+namespace Tests\Unit\WindowsAzure\Services\Queue\Models;
+use WindowsAzure\Utilities;
+use WindowsAzure\Services\Queue\Models\QueueMessage;
 
 /**
  * Unit tests for class QueueMessage
  *
  * @category  Microsoft
- * @package   PEAR2\Tests\Unit\WindowsAzure\Services\Queue\Models
+ * @package   Tests\Unit\WindowsAzure\Services\Queue\Models
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
@@ -40,7 +40,7 @@ use PEAR2\WindowsAzure\Services\Queue\Models\QueueMessage;
 class QueueMessageTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @covers PEAR2\WindowsAzure\Services\Queue\Models\QueueMessage::getMessageText
+     * @covers WindowsAzure\Services\Queue\Models\QueueMessage::getMessageText
      */
     public function testGetMessageText()
     {
@@ -57,7 +57,7 @@ class QueueMessageTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers PEAR2\WindowsAzure\Services\Queue\Models\QueueMessage::setMessageText
+     * @covers WindowsAzure\Services\Queue\Models\QueueMessage::setMessageText
      */
     public function testSetMessageText()
     {
@@ -74,7 +74,7 @@ class QueueMessageTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers PEAR2\WindowsAzure\Services\Queue\Models\QueueMessage::toXml
+     * @covers WindowsAzure\Services\Queue\Models\QueueMessage::toXml
      */
     public function testToXml()
     {

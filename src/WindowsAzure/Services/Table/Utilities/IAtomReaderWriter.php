@@ -15,20 +15,20 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   PEAR2\WindowsAzure\Services\Table\Utilities
+ * @package   WindowsAzure\Services\Table\Utilities
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
  
-namespace PEAR2\WindowsAzure\Services\Table\Utilities;
+namespace WindowsAzure\Services\Table\Utilities;
 
 /**
  * Defines how to serialize and unserialize table wrapper xml
  *
  * @category  Microsoft
- * @package   PEAR2\WindowsAzure\Services\Table\Utilities
+ * @package   WindowsAzure\Services\Table\Utilities
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
@@ -45,6 +45,15 @@ interface IAtomReaderWriter
      * @return string
      */
     public static function getTable($name);
+    
+    /**
+     * Parses one table entry.
+     * 
+     * @param string $body The HTTP response body.
+     * 
+     * @return string 
+     */
+    public static function parseTable($body);
     
     /**
      * Constructs array of tables from HTTP response body.

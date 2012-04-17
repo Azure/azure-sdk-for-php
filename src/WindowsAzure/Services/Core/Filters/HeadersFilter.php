@@ -15,22 +15,22 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   PEAR2\WindowsAzure\Services\Core\Filters
+ * @package   WindowsAzure\Services\Core\Filters
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
  
-namespace PEAR2\WindowsAzure\Services\Core\Filters;
-use PEAR2\WindowsAzure\Resources;
-use PEAR2\WindowsAzure\Core\IServiceFilter;
+namespace WindowsAzure\Services\Core\Filters;
+use WindowsAzure\Resources;
+use WindowsAzure\Core\IServiceFilter;
 
 /**
  * Adds all passed headers to the HTTP request headers.
  *
  * @category  Microsoft
- * @package   PEAR2\WindowsAzure\Services\Core\Filters
+ * @package   WindowsAzure\Services\Core\Filters
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
@@ -66,7 +66,10 @@ class HeadersFilter implements IServiceFilter
     public function handleRequest($request) 
     {
         foreach ($this->_headers as $key => $value) {
-            $request->setHeader($key, $value);
+            $headers = $request->getHeaders();
+            if (!array_key_exists($key, $headers)) {
+                $request->setHeader($key, $value);
+            }
         }
 
         return $request;

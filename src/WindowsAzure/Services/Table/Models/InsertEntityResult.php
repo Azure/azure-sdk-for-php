@@ -15,20 +15,22 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   PEAR2\WindowsAzure\Services\Table\Models
+ * @package   WindowsAzure\Services\Table\Models
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
  
-namespace PEAR2\WindowsAzure\Services\Table\Models;
+namespace WindowsAzure\Services\Table\Models;
+use WindowsAzure\Utilities;
+use WindowsAzure\Resources;
 
 /**
  * Holds result of calling insertEntity wrapper
  *
  * @category  Microsoft
- * @package   PEAR2\WindowsAzure\Services\Table\Models
+ * @package   WindowsAzure\Services\Table\Models
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
@@ -41,6 +43,27 @@ class InsertEntityResult
      * @var Entity
      */
     private $_entity;
+    
+    /**
+     * Create InsertEntityResult object from HTTP response parts.
+     * 
+     * @param string            $body           The HTTP response body.
+     * @param array             $headers        The HTTP response headers.
+     * @param IAtomReaderWriter $atomSerializer The atom reader and writer.
+     * 
+     * @return \WindowsAzure\Services\Table\Models\InsertEntityResult
+     * 
+     * @static
+     */
+    public static function create($body, $headers, $atomSerializer)
+    {
+        $result = new InsertEntityResult();
+        $entity = $atomSerializer->parseEntity($body);
+        $entity->setEtag(Utilities::tryGetValue($headers, Resources::ETAG));
+        $result->setEntity($entity);
+        
+        return $result;
+    }
     
     /**
      * Gets table entity.

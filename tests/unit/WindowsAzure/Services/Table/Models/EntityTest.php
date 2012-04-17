@@ -15,23 +15,23 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   PEAR2\Tests\Unit\WindowsAzure\Services\Table\Models
+ * @package   Tests\Unit\WindowsAzure\Services\Table\Models
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
-namespace PEAR2\Tests\Unit\WindowsAzure\Services\Table\Models;
-use PEAR2\WindowsAzure\Services\Table\Models\Entity;
-use PEAR2\WindowsAzure\Services\Table\Models\Property;
-use PEAR2\WindowsAzure\Services\Table\Models\EdmType;
-use PEAR2\WindowsAzure\Utilities;
+namespace Tests\Unit\WindowsAzure\Services\Table\Models;
+use WindowsAzure\Services\Table\Models\Entity;
+use WindowsAzure\Services\Table\Models\Property;
+use WindowsAzure\Services\Table\Models\EdmType;
+use WindowsAzure\Utilities;
 
 /**
  * Unit tests for class Entity
  *
  * @category  Microsoft
- * @package   PEAR2\Tests\Unit\WindowsAzure\Services\Table\Models
+ * @package   Tests\Unit\WindowsAzure\Services\Table\Models
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
@@ -41,23 +41,23 @@ use PEAR2\WindowsAzure\Utilities;
 class EntityTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @covers PEAR2\WindowsAzure\Services\Table\Models\Entity::tryGetPropertyValue
+     * @covers WindowsAzure\Services\Table\Models\Entity::getPropertyValue
      */
-    public function testTryGetPropertyValue()
+    public function testGetPropertyValue()
     {
         // Setup
         $entity = new Entity();
         
         // Test
-        $actual = $entity->tryGetPropertyValue('dummy');
+        $actual = $entity->getPropertyValue('dummy');
         
         // Assert
         $this->assertNull($actual);
     }
     
     /**
-     * @covers PEAR2\WindowsAzure\Services\Table\Models\Entity::setEtag
-     * @covers PEAR2\WindowsAzure\Services\Table\Models\Entity::getEtag
+     * @covers WindowsAzure\Services\Table\Models\Entity::setEtag
+     * @covers WindowsAzure\Services\Table\Models\Entity::getEtag
      */
     public function testSetEtag()
     {
@@ -74,8 +74,8 @@ class EntityTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers PEAR2\WindowsAzure\Services\Table\Models\Entity::setPartitionKey
-     * @covers PEAR2\WindowsAzure\Services\Table\Models\Entity::getPartitionKey
+     * @covers WindowsAzure\Services\Table\Models\Entity::setPartitionKey
+     * @covers WindowsAzure\Services\Table\Models\Entity::getPartitionKey
      */
     public function testSetPartitionKey()
     {
@@ -91,8 +91,8 @@ class EntityTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers PEAR2\WindowsAzure\Services\Table\Models\Entity::setRowKey
-     * @covers PEAR2\WindowsAzure\Services\Table\Models\Entity::getRowKey
+     * @covers WindowsAzure\Services\Table\Models\Entity::setRowKey
+     * @covers WindowsAzure\Services\Table\Models\Entity::getRowKey
      */
     public function testSetRowKey()
     {
@@ -108,8 +108,8 @@ class EntityTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers PEAR2\WindowsAzure\Services\Table\Models\Entity::setTimestamp
-     * @covers PEAR2\WindowsAzure\Services\Table\Models\Entity::getTimestamp
+     * @covers WindowsAzure\Services\Table\Models\Entity::setTimestamp
+     * @covers WindowsAzure\Services\Table\Models\Entity::getTimestamp
      */
     public function testSetTimestamp()
     {
@@ -125,9 +125,9 @@ class EntityTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers PEAR2\WindowsAzure\Services\Table\Models\Entity::setProperties
-     * @covers PEAR2\WindowsAzure\Services\Table\Models\Entity::getProperties
-     * @covers PEAR2\WindowsAzure\Services\Table\Models\Entity::_validateProperties
+     * @covers WindowsAzure\Services\Table\Models\Entity::setProperties
+     * @covers WindowsAzure\Services\Table\Models\Entity::getProperties
+     * @covers WindowsAzure\Services\Table\Models\Entity::_validateProperties
      */
     public function testSetProperties()
     {
@@ -143,8 +143,8 @@ class EntityTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers PEAR2\WindowsAzure\Services\Table\Models\Entity::getProperty
-     * @covers PEAR2\WindowsAzure\Services\Table\Models\Entity::setProperty
+     * @covers WindowsAzure\Services\Table\Models\Entity::getProperty
+     * @covers WindowsAzure\Services\Table\Models\Entity::setProperty
      */
     public function testSetProperty()
     {
@@ -161,28 +161,28 @@ class EntityTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers PEAR2\WindowsAzure\Services\Table\Models\Entity::newProperty
+     * @covers WindowsAzure\Services\Table\Models\Entity::addProperty
      */
-    public function testNewProperty()
+    public function testAddProperty()
     {
         // Setup
         $entity = new Entity();
         $name = 'test';
         $expected = new Property();
-        $edmType = EdmType::BINARY;
+        $edmType = EdmType::STRING;
         $value = '01231232290234210';
         $expected->setEdmType($edmType);
         $expected->setValue($value);
         
         // Test
-        $entity->newProperty($name, $edmType, $value);
+        $entity->addProperty($name, $edmType, $value);
         
         // Assert
         $this->assertEquals($expected, $entity->getProperty($name));
     }
     
     /**
-     * @covers PEAR2\WindowsAzure\Services\Table\Models\Entity::isValid
+     * @covers WindowsAzure\Services\Table\Models\Entity::isValid
      */
     public function testIsValid()
     {
@@ -200,7 +200,7 @@ class EntityTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers PEAR2\WindowsAzure\Services\Table\Models\Entity::isValid
+     * @covers WindowsAzure\Services\Table\Models\Entity::isValid
      */
     public function testIsValidWithInvalid()
     {

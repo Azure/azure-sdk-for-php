@@ -15,20 +15,20 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   PEAR2\Tests\Unit\WindowsAzure\Services\Table\Models
+ * @package   Tests\Unit\WindowsAzure\Services\Table\Models
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
-namespace PEAR2\Tests\Unit\WindowsAzure\Services\Table\Models;
-use PEAR2\WindowsAzure\Services\Table\Models\EdmType;
+namespace Tests\Unit\WindowsAzure\Services\Table\Models;
+use WindowsAzure\Services\Table\Models\EdmType;
 
 /**
  * Unit tests for class EdmTypeTest
  *
  * @category  Microsoft
- * @package   PEAR2\Tests\Unit\WindowsAzure\Services\Table\Models
+ * @package   Tests\Unit\WindowsAzure\Services\Table\Models
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
@@ -38,7 +38,7 @@ use PEAR2\WindowsAzure\Services\Table\Models\EdmType;
 class EdmTypeTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @covers PEAR2\WindowsAzure\Services\Table\Models\EdmType::processType
+     * @covers WindowsAzure\Services\Table\Models\EdmType::processType
      */
     public function testProcessTypeWithNull()
     {
@@ -53,7 +53,7 @@ class EdmTypeTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers PEAR2\WindowsAzure\Services\Table\Models\EdmType::processType
+     * @covers WindowsAzure\Services\Table\Models\EdmType::processType
      */
     public function testProcessType()
     {
@@ -68,7 +68,7 @@ class EdmTypeTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers PEAR2\WindowsAzure\Services\Table\Models\EdmType::processValue
+     * @covers WindowsAzure\Services\Table\Models\EdmType::unserializeValue
      */
     public function testProcessValueWithString()
     {
@@ -78,14 +78,31 @@ class EdmTypeTest extends \PHPUnit_Framework_TestCase
         $expected = $value;
         
         // Test
-        $actual = EdmType::processValue($type, $value);
+        $actual = EdmType::unserializeValue($type, $value);
         
         // Assert
         $this->assertEquals($expected, $actual);
     }
     
     /**
-     * @covers PEAR2\WindowsAzure\Services\Table\Models\EdmType::processValue
+     * @covers WindowsAzure\Services\Table\Models\EdmType::unserializeValue
+     */
+    public function testProcessValueWithBinary()
+    {
+        // Setup
+        $type = EdmType::BINARY;
+        $value = 'MTIzNDU=';
+        $expected = base64_decode($value);
+        
+        // Test
+        $actual = EdmType::unserializeValue($type, $value);
+        
+        // Assert
+        $this->assertEquals($expected, $actual);
+    }
+    
+    /**
+     * @covers WindowsAzure\Services\Table\Models\EdmType::unserializeValue
      */
     public function testProcessValueWithDate()
     {
@@ -94,14 +111,14 @@ class EdmTypeTest extends \PHPUnit_Framework_TestCase
         $value = '2008-10-01T15:26:13Z';
         
         // Test
-        $actual = EdmType::processValue($type, $value);
+        $actual = EdmType::unserializeValue($type, $value);
         
         // Assert
         $this->assertInstanceOf('\DateTime', $actual);
     }
     
     /**
-     * @covers PEAR2\WindowsAzure\Services\Table\Models\EdmType::processValue
+     * @covers WindowsAzure\Services\Table\Models\EdmType::unserializeValue
      */
     public function testProcessValueWithInt()
     {
@@ -111,14 +128,14 @@ class EdmTypeTest extends \PHPUnit_Framework_TestCase
         $expected = 123;
         
         // Test
-        $actual = EdmType::processValue($type, $value);
+        $actual = EdmType::unserializeValue($type, $value);
         
         // Assert
         $this->assertEquals($expected, $actual);
     }
     
     /**
-     * @covers PEAR2\WindowsAzure\Services\Table\Models\EdmType::processValue
+     * @covers WindowsAzure\Services\Table\Models\EdmType::unserializeValue
      */
     public function testProcessValueWithBoolean()
     {
@@ -128,14 +145,14 @@ class EdmTypeTest extends \PHPUnit_Framework_TestCase
         $expected = true;
         
         // Test
-        $actual = EdmType::processValue($type, $value);
+        $actual = EdmType::unserializeValue($type, $value);
         
         // Assert
         $this->assertEquals($expected, $actual);
     }
     
     /**
-     * @covers PEAR2\WindowsAzure\Services\Table\Models\EdmType::processValue
+     * @covers WindowsAzure\Services\Table\Models\EdmType::unserializeValue
      */
     public function testProcessValueWithInvalid()
     {
@@ -143,11 +160,11 @@ class EdmTypeTest extends \PHPUnit_Framework_TestCase
         $this->setExpectedException('\InvalidArgumentException');
         
         // Test
-        EdmType::processValue('7amada', '1233');
+        EdmType::unserializeValue('7amada', '1233');
     }
     
     /**
-     * @covers PEAR2\WindowsAzure\Services\Table\Models\EdmType::isValid
+     * @covers WindowsAzure\Services\Table\Models\EdmType::isValid
      */
     public function testIsValid()
     {
@@ -162,7 +179,7 @@ class EdmTypeTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers PEAR2\WindowsAzure\Services\Table\Models\EdmType::isValid
+     * @covers WindowsAzure\Services\Table\Models\EdmType::isValid
      */
     public function testIsValidWithInvalid()
     {

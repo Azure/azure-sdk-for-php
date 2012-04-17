@@ -17,29 +17,29 @@
  * limitations under the License.
  *
  * @category   Microsoft
- * @package    PEAR2\Tests\Functional\WindowsAzure\Services\Queue
+ * @package    Tests\Functional\WindowsAzure\Services\Queue
  * @author     Jason Cooke <jcooke@microsoft.com>
  * @copyright  2012 Microsoft Corporation
  * @license    http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link       http://pear.php.net/package/azure-sdk-for-php
  */
 
-namespace PEAR2\Tests\Functional\WindowsAzure\Services\Queue;
+namespace Tests\Functional\WindowsAzure\Services\Queue;
 
 use InvalidArgumentException;
-use PEAR2\WindowsAzure\Core\ServiceException;
-use PEAR2\WindowsAzure\Core\WindowsAzureUtilities;
-use PEAR2\WindowsAzure\Resources;
-use PEAR2\WindowsAzure\Services\Core\Models\Logging;
-use PEAR2\WindowsAzure\Services\Core\Models\Metrics;
-use PEAR2\WindowsAzure\Services\Core\Models\RetentionPolicy;
-use PEAR2\WindowsAzure\Services\Core\Models\ServiceProperties;
-use PEAR2\WindowsAzure\Services\Queue\Models\CreateMessageOptions;
-use PEAR2\WindowsAzure\Services\Queue\Models\CreateQueueOptions;
-use PEAR2\WindowsAzure\Services\Queue\Models\ListMessagesOptions;
-use PEAR2\WindowsAzure\Services\Queue\Models\ListQueuesOptions;
-use PEAR2\WindowsAzure\Services\Queue\Models\PeekMessagesOptions;
-use PEAR2\WindowsAzure\Services\Queue\Models\QueueServiceOptions;
+use WindowsAzure\Core\ServiceException;
+use WindowsAzure\Core\WindowsAzureUtilities;
+use WindowsAzure\Resources;
+use WindowsAzure\Services\Core\Models\Logging;
+use WindowsAzure\Services\Core\Models\Metrics;
+use WindowsAzure\Services\Core\Models\RetentionPolicy;
+use WindowsAzure\Services\Core\Models\ServiceProperties;
+use WindowsAzure\Services\Queue\Models\CreateMessageOptions;
+use WindowsAzure\Services\Queue\Models\CreateQueueOptions;
+use WindowsAzure\Services\Queue\Models\ListMessagesOptions;
+use WindowsAzure\Services\Queue\Models\ListQueuesOptions;
+use WindowsAzure\Services\Queue\Models\PeekMessagesOptions;
+use WindowsAzure\Services\Queue\Models\QueueServiceOptions;
 
 class QueueServiceFunctionalParameterTest extends FunctionalTestBase {
     // ----------------------------
@@ -47,7 +47,7 @@ class QueueServiceFunctionalParameterTest extends FunctionalTestBase {
     // ----------------------------
 
     /**
-    * @covers PEAR2\WindowsAzure\Services\Queue\QueueRestProxy::getServiceProperties
+    * @covers WindowsAzure\Services\Queue\QueueRestProxy::getServiceProperties
     */
     public function testGetServicePropertiesNullOptions() {
         try {
@@ -69,7 +69,7 @@ class QueueServiceFunctionalParameterTest extends FunctionalTestBase {
     // ----------------------------
 
     /**
-    * @covers PEAR2\WindowsAzure\Services\Queue\QueueRestProxy::setServiceProperties
+    * @covers WindowsAzure\Services\Queue\QueueRestProxy::setServiceProperties
     */
     public function testSetServicePropertiesNullOptions1() {
 
@@ -88,7 +88,7 @@ class QueueServiceFunctionalParameterTest extends FunctionalTestBase {
     }
 
     /**
-    * @covers PEAR2\WindowsAzure\Services\Queue\QueueRestProxy::setServiceProperties
+    * @covers WindowsAzure\Services\Queue\QueueRestProxy::setServiceProperties
     */
     public function testSetServicePropertiesNullOptions2() {
         $this->assertTrue(false, 'Test gives a fatal error, so commenting out');
@@ -105,7 +105,7 @@ class QueueServiceFunctionalParameterTest extends FunctionalTestBase {
     }
 
     /**
-    * @covers PEAR2\WindowsAzure\Services\Queue\QueueRestProxy::setServiceProperties
+    * @covers WindowsAzure\Services\Queue\QueueRestProxy::setServiceProperties
     */
     public function testSetServicePropertiesNullOptions3() {
         $this->assertTrue(false, 'Test gives a fatal error, so commenting out');
@@ -121,7 +121,7 @@ class QueueServiceFunctionalParameterTest extends FunctionalTestBase {
     }
 
     /**
-    * @covers PEAR2\WindowsAzure\Services\Queue\QueueRestProxy::setServiceProperties
+    * @covers WindowsAzure\Services\Queue\QueueRestProxy::setServiceProperties
     */
     public function testSetServicePropertiesNullOptions4() {
         $serviceProperties = QueueServiceFunctionalTestData::getDefaultServiceProperties();
@@ -145,7 +145,7 @@ class QueueServiceFunctionalParameterTest extends FunctionalTestBase {
     // ------------------
 
     /**
-    * @covers PEAR2\WindowsAzure\Services\Queue\QueueRestProxy::listQueues
+    * @covers WindowsAzure\Services\Queue\QueueRestProxy::listQueues
     */
     public function testListQueuesNullOptions() {
         $this->wrapper->listQueues(null);
@@ -157,7 +157,7 @@ class QueueServiceFunctionalParameterTest extends FunctionalTestBase {
     // -------------------  
 
     /**
-    * @covers PEAR2\WindowsAzure\Services\Queue\QueueRestProxy::createQueue
+    * @covers WindowsAzure\Services\Queue\QueueRestProxy::createQueue
     */
     public function testCreateQueueNullName() {
 
@@ -179,7 +179,7 @@ class QueueServiceFunctionalParameterTest extends FunctionalTestBase {
     // -------------------
 
     /**
-    * @covers PEAR2\WindowsAzure\Services\Queue\QueueRestProxy::deleteQueue
+    * @covers WindowsAzure\Services\Queue\QueueRestProxy::deleteQueue
     */
     public function testDeleteQueueNullName() {
         try {
@@ -199,7 +199,7 @@ class QueueServiceFunctionalParameterTest extends FunctionalTestBase {
     // ------------------------
 
     /**
-    * @covers PEAR2\WindowsAzure\Services\Queue\QueueRestProxy::getQueueMetadata
+    * @covers WindowsAzure\Services\Queue\QueueRestProxy::getQueueMetadata
     */
     public function testGetQueueMetadataNullName() {
         try {
@@ -219,7 +219,7 @@ class QueueServiceFunctionalParameterTest extends FunctionalTestBase {
     // ------------------------
 
     /**
-    * @covers PEAR2\WindowsAzure\Services\Queue\QueueRestProxy::setQueueMetadata
+    * @covers WindowsAzure\Services\Queue\QueueRestProxy::setQueueMetadata
     */
     public function testSetQueueMetadataNullNameAndOptions() {
         try {
@@ -235,7 +235,7 @@ class QueueServiceFunctionalParameterTest extends FunctionalTestBase {
     }
 
     /**
-    * @covers PEAR2\WindowsAzure\Services\Queue\QueueRestProxy::setQueueMetadata
+    * @covers WindowsAzure\Services\Queue\QueueRestProxy::setQueueMetadata
     */
     public function testSetQueueMetadataNullName() {
         try {
@@ -251,7 +251,7 @@ class QueueServiceFunctionalParameterTest extends FunctionalTestBase {
     }
 
     /**
-    * @covers PEAR2\WindowsAzure\Services\Queue\QueueRestProxy::setQueueMetadata
+    * @covers WindowsAzure\Services\Queue\QueueRestProxy::setQueueMetadata
     */
     public function testSetQueueMetadataNullOptions() {
         $queue = QueueServiceFunctionalTestData::$TEST_QUEUE_NAMES[0];
@@ -264,8 +264,8 @@ class QueueServiceFunctionalParameterTest extends FunctionalTestBase {
     // ---------------------
 
     /**
-    * @covers PEAR2\WindowsAzure\Services\Queue\QueueRestProxy::clearMessages
-    * @covers PEAR2\WindowsAzure\Services\Queue\QueueRestProxy::createMessage
+    * @covers WindowsAzure\Services\Queue\QueueRestProxy::clearMessages
+    * @covers WindowsAzure\Services\Queue\QueueRestProxy::createMessage
     */
     public function testCreateMessageQueueNull() {
         $queue = QueueServiceFunctionalTestData::$TEST_QUEUE_NAMES[0];
@@ -283,8 +283,8 @@ class QueueServiceFunctionalParameterTest extends FunctionalTestBase {
     }
 
     /**
-    * @covers PEAR2\WindowsAzure\Services\Queue\QueueRestProxy::clearMessages
-    * @covers PEAR2\WindowsAzure\Services\Queue\QueueRestProxy::createMessage
+    * @covers WindowsAzure\Services\Queue\QueueRestProxy::clearMessages
+    * @covers WindowsAzure\Services\Queue\QueueRestProxy::createMessage
     */
     public function testCreateMessageNull() {
         $queue = QueueServiceFunctionalTestData::$TEST_QUEUE_NAMES[0];
@@ -294,8 +294,8 @@ class QueueServiceFunctionalParameterTest extends FunctionalTestBase {
     }
 
     /**
-    * @covers PEAR2\WindowsAzure\Services\Queue\QueueRestProxy::clearMessages
-    * @covers PEAR2\WindowsAzure\Services\Queue\QueueRestProxy::createMessage
+    * @covers WindowsAzure\Services\Queue\QueueRestProxy::clearMessages
+    * @covers WindowsAzure\Services\Queue\QueueRestProxy::createMessage
     */
     public function testCreateMessageBothMessageAndOptionsNull() {
         $queue = QueueServiceFunctionalTestData::$TEST_QUEUE_NAMES[0];
@@ -305,8 +305,8 @@ class QueueServiceFunctionalParameterTest extends FunctionalTestBase {
     }
 
     /**
-    * @covers PEAR2\WindowsAzure\Services\Queue\QueueRestProxy::clearMessages
-    * @covers PEAR2\WindowsAzure\Services\Queue\QueueRestProxy::createMessage
+    * @covers WindowsAzure\Services\Queue\QueueRestProxy::clearMessages
+    * @covers WindowsAzure\Services\Queue\QueueRestProxy::createMessage
     */
     public function testCreateMessageMessageNull() {
         $queue = QueueServiceFunctionalTestData::$TEST_QUEUE_NAMES[0];
@@ -316,8 +316,8 @@ class QueueServiceFunctionalParameterTest extends FunctionalTestBase {
     }
 
     /**
-    * @covers PEAR2\WindowsAzure\Services\Queue\QueueRestProxy::clearMessages
-    * @covers PEAR2\WindowsAzure\Services\Queue\QueueRestProxy::createMessage
+    * @covers WindowsAzure\Services\Queue\QueueRestProxy::clearMessages
+    * @covers WindowsAzure\Services\Queue\QueueRestProxy::createMessage
     */
     public function testCreateMessageOptionsNull() {
         $queue = QueueServiceFunctionalTestData::$TEST_QUEUE_NAMES[0];
@@ -331,7 +331,7 @@ class QueueServiceFunctionalParameterTest extends FunctionalTestBase {
     // ---------------------
 
     /**
-    * @covers PEAR2\WindowsAzure\Services\Queue\QueueRestProxy::updateMessage
+    * @covers WindowsAzure\Services\Queue\QueueRestProxy::updateMessage
     */
     public function testUpdateMessageQueueNull() {
         $queue = null;
@@ -351,7 +351,7 @@ class QueueServiceFunctionalParameterTest extends FunctionalTestBase {
     }
 
     /**
-    * @covers PEAR2\WindowsAzure\Services\Queue\QueueRestProxy::updateMessage
+    * @covers WindowsAzure\Services\Queue\QueueRestProxy::updateMessage
     */
     public function testUpdateMessageQueueEmpty() {
         $queue = '';
@@ -371,7 +371,7 @@ class QueueServiceFunctionalParameterTest extends FunctionalTestBase {
     }
 
     /**
-    * @covers PEAR2\WindowsAzure\Services\Queue\QueueRestProxy::updateMessage
+    * @covers WindowsAzure\Services\Queue\QueueRestProxy::updateMessage
     */
     public function testUpdateMessageMessageIdNull() {
         $queue = QueueServiceFunctionalTestData::$TEST_QUEUE_NAMES[0];
@@ -391,7 +391,7 @@ class QueueServiceFunctionalParameterTest extends FunctionalTestBase {
     }
 
     /**
-    * @covers PEAR2\WindowsAzure\Services\Queue\QueueRestProxy::updateMessage
+    * @covers WindowsAzure\Services\Queue\QueueRestProxy::updateMessage
     */
     public function testUpdateMessageMessageIdEmpty() {
         $queue = QueueServiceFunctionalTestData::$TEST_QUEUE_NAMES[0];
@@ -411,7 +411,7 @@ class QueueServiceFunctionalParameterTest extends FunctionalTestBase {
     }
 
     /**
-    * @covers PEAR2\WindowsAzure\Services\Queue\QueueRestProxy::updateMessage
+    * @covers WindowsAzure\Services\Queue\QueueRestProxy::updateMessage
     */
     public function testUpdateMessagePopReceiptNull() {
         $queue = QueueServiceFunctionalTestData::$TEST_QUEUE_NAMES[0];
@@ -431,7 +431,7 @@ class QueueServiceFunctionalParameterTest extends FunctionalTestBase {
     }
 
     /**
-    * @covers PEAR2\WindowsAzure\Services\Queue\QueueRestProxy::updateMessage
+    * @covers WindowsAzure\Services\Queue\QueueRestProxy::updateMessage
     */
     public function testUpdateMessagePopReceiptEmpty() {
         $queue = QueueServiceFunctionalTestData::$TEST_QUEUE_NAMES[0];
@@ -451,7 +451,7 @@ class QueueServiceFunctionalParameterTest extends FunctionalTestBase {
     }
 
     /**
-    * @covers PEAR2\WindowsAzure\Services\Queue\QueueRestProxy::updateMessage
+    * @covers WindowsAzure\Services\Queue\QueueRestProxy::updateMessage
     */
     public function testUpdateMessageMessageTextNull() {
         $queue = QueueServiceFunctionalTestData::$TEST_QUEUE_NAMES[0];
@@ -471,7 +471,7 @@ class QueueServiceFunctionalParameterTest extends FunctionalTestBase {
     }
 
     /**
-    * @covers PEAR2\WindowsAzure\Services\Queue\QueueRestProxy::updateMessage
+    * @covers WindowsAzure\Services\Queue\QueueRestProxy::updateMessage
     */
     public function testUpdateMessageMessageTextEmpty() {
         $queue = QueueServiceFunctionalTestData::$TEST_QUEUE_NAMES[0];
@@ -491,7 +491,7 @@ class QueueServiceFunctionalParameterTest extends FunctionalTestBase {
     }
 
     /**
-    * @covers PEAR2\WindowsAzure\Services\Queue\QueueRestProxy::updateMessage
+    * @covers WindowsAzure\Services\Queue\QueueRestProxy::updateMessage
     */
     public function testUpdateMessageOptionsNull() {
         $queue = QueueServiceFunctionalTestData::$TEST_QUEUE_NAMES[0];
@@ -511,7 +511,7 @@ class QueueServiceFunctionalParameterTest extends FunctionalTestBase {
     }
 
     /**
-    * @covers PEAR2\WindowsAzure\Services\Queue\QueueRestProxy::updateMessage
+    * @covers WindowsAzure\Services\Queue\QueueRestProxy::updateMessage
     */
     public function testUpdateMessageVisibilityTimeout0() {
         $queue = QueueServiceFunctionalTestData::$TEST_QUEUE_NAMES[0];
@@ -536,7 +536,7 @@ class QueueServiceFunctionalParameterTest extends FunctionalTestBase {
     }
 
     /**
-    * @covers PEAR2\WindowsAzure\Services\Queue\QueueRestProxy::updateMessage
+    * @covers WindowsAzure\Services\Queue\QueueRestProxy::updateMessage
     */
     public function testUpdateMessageVisibilityTimeoutNull() {
         $queue = QueueServiceFunctionalTestData::$TEST_QUEUE_NAMES[0];
@@ -560,7 +560,7 @@ class QueueServiceFunctionalParameterTest extends FunctionalTestBase {
     // ---------------------
 
     /**
-    * @covers PEAR2\WindowsAzure\Services\Queue\QueueRestProxy::deleteMessage
+    * @covers WindowsAzure\Services\Queue\QueueRestProxy::deleteMessage
     */
     public function testDeleteMessageQueueNullNoOptions() {
         $queue = null;
@@ -577,7 +577,7 @@ class QueueServiceFunctionalParameterTest extends FunctionalTestBase {
     }
 
     /**
-    * @covers PEAR2\WindowsAzure\Services\Queue\QueueRestProxy::deleteMessage
+    * @covers WindowsAzure\Services\Queue\QueueRestProxy::deleteMessage
     */
     public function testDeleteMessageQueueEmptyNoOptions() {
         $queue = '';
@@ -594,7 +594,7 @@ class QueueServiceFunctionalParameterTest extends FunctionalTestBase {
     }
 
     /**
-    * @covers PEAR2\WindowsAzure\Services\Queue\QueueRestProxy::deleteMessage
+    * @covers WindowsAzure\Services\Queue\QueueRestProxy::deleteMessage
     */
     public function testDeleteMessageQueueNullWithOptions() {
         $queue = null;
@@ -612,7 +612,7 @@ class QueueServiceFunctionalParameterTest extends FunctionalTestBase {
     }
 
     /**
-    * @covers PEAR2\WindowsAzure\Services\Queue\QueueRestProxy::deleteMessage
+    * @covers WindowsAzure\Services\Queue\QueueRestProxy::deleteMessage
     */
     public function testDeleteMessageMessageIdNull() {
         $queue = 'abc';
@@ -630,7 +630,7 @@ class QueueServiceFunctionalParameterTest extends FunctionalTestBase {
     }
 
     /**
-    * @covers PEAR2\WindowsAzure\Services\Queue\QueueRestProxy::deleteMessage
+    * @covers WindowsAzure\Services\Queue\QueueRestProxy::deleteMessage
     */
     public function testDeleteMessageMessageIdEmpty() {
         $queue = 'abc';
@@ -648,7 +648,7 @@ class QueueServiceFunctionalParameterTest extends FunctionalTestBase {
     }
 
     /**
-    * @covers PEAR2\WindowsAzure\Services\Queue\QueueRestProxy::deleteMessage
+    * @covers WindowsAzure\Services\Queue\QueueRestProxy::deleteMessage
     */
     public function testDeleteMessagePopReceiptNull() {
         $queue = 'abc';
@@ -666,7 +666,7 @@ class QueueServiceFunctionalParameterTest extends FunctionalTestBase {
     }
 
     /**
-    * @covers PEAR2\WindowsAzure\Services\Queue\QueueRestProxy::deleteMessage
+    * @covers WindowsAzure\Services\Queue\QueueRestProxy::deleteMessage
     */
     public function testDeleteMessagePopReceiptEmpty() {
         $queue = 'abc';
@@ -684,7 +684,7 @@ class QueueServiceFunctionalParameterTest extends FunctionalTestBase {
     }
 
     /**
-    * @covers PEAR2\WindowsAzure\Services\Queue\QueueRestProxy::deleteMessage
+    * @covers WindowsAzure\Services\Queue\QueueRestProxy::deleteMessage
     */
     public function testDeleteMessageOptionsNull() {
         $queue = 'abc';
@@ -706,7 +706,7 @@ class QueueServiceFunctionalParameterTest extends FunctionalTestBase {
     // --------------------
 
     /**
-    * @covers PEAR2\WindowsAzure\Services\Queue\QueueRestProxy::listMessages
+    * @covers WindowsAzure\Services\Queue\QueueRestProxy::listMessages
     */
     public function testListMessagesQueueNullNoOptions() {
         try {
@@ -722,7 +722,7 @@ class QueueServiceFunctionalParameterTest extends FunctionalTestBase {
     }
 
     /**
-    * @covers PEAR2\WindowsAzure\Services\Queue\QueueRestProxy::listMessages
+    * @covers WindowsAzure\Services\Queue\QueueRestProxy::listMessages
     */
     public function testListMessagesQueueNullWithOptions() {
         try {
@@ -738,7 +738,7 @@ class QueueServiceFunctionalParameterTest extends FunctionalTestBase {
     }
 
     /**
-    * @covers PEAR2\WindowsAzure\Services\Queue\QueueRestProxy::listMessages
+    * @covers WindowsAzure\Services\Queue\QueueRestProxy::listMessages
     */
     public function testListMessagesOptionsNull() {
         try {
@@ -751,7 +751,7 @@ class QueueServiceFunctionalParameterTest extends FunctionalTestBase {
     }
 
     /**
-    * @covers PEAR2\WindowsAzure\Services\Queue\QueueRestProxy::listMessages
+    * @covers WindowsAzure\Services\Queue\QueueRestProxy::listMessages
     */
     public function testListMessagesAllNull() {
         try {
@@ -771,7 +771,7 @@ class QueueServiceFunctionalParameterTest extends FunctionalTestBase {
     // --------------------
 
     /**
-    * @covers PEAR2\WindowsAzure\Services\Queue\QueueRestProxy::peekMessages
+    * @covers WindowsAzure\Services\Queue\QueueRestProxy::peekMessages
     */
     public function testPeekMessagesQueueNullNoOptions() {
         try {
@@ -787,7 +787,7 @@ class QueueServiceFunctionalParameterTest extends FunctionalTestBase {
     }
 
     /**
-    * @covers PEAR2\WindowsAzure\Services\Queue\QueueRestProxy::peekMessages
+    * @covers WindowsAzure\Services\Queue\QueueRestProxy::peekMessages
     */
     public function testPeekMessagesQueueEmptyNoOptions() {
         try {
@@ -803,7 +803,7 @@ class QueueServiceFunctionalParameterTest extends FunctionalTestBase {
     }
 
     /**
-    * @covers PEAR2\WindowsAzure\Services\Queue\QueueRestProxy::peekMessages
+    * @covers WindowsAzure\Services\Queue\QueueRestProxy::peekMessages
     */
     public function testPeekMessagesQueueNullWithOptions() {
         try {
@@ -819,7 +819,7 @@ class QueueServiceFunctionalParameterTest extends FunctionalTestBase {
     }
 
     /**
-    * @covers PEAR2\WindowsAzure\Services\Queue\QueueRestProxy::peekMessages
+    * @covers WindowsAzure\Services\Queue\QueueRestProxy::peekMessages
     */
     public function testPeekMessagesOptionsNull() {
         try {
@@ -832,7 +832,7 @@ class QueueServiceFunctionalParameterTest extends FunctionalTestBase {
     }
 
     /**
-    * @covers PEAR2\WindowsAzure\Services\Queue\QueueRestProxy::peekMessages
+    * @covers WindowsAzure\Services\Queue\QueueRestProxy::peekMessages
     */
     public function testPeekMessagesAllNull() {
         try {
@@ -852,7 +852,7 @@ class QueueServiceFunctionalParameterTest extends FunctionalTestBase {
     // ---------------------
 
     /**
-    * @covers PEAR2\WindowsAzure\Services\Queue\QueueRestProxy::clearMessages
+    * @covers WindowsAzure\Services\Queue\QueueRestProxy::clearMessages
     */
     public function testClearMessagesQueueNullNoOptions() {
         try {
@@ -868,7 +868,7 @@ class QueueServiceFunctionalParameterTest extends FunctionalTestBase {
     }
 
     /**
-    * @covers PEAR2\WindowsAzure\Services\Queue\QueueRestProxy::clearMessages
+    * @covers WindowsAzure\Services\Queue\QueueRestProxy::clearMessages
     */
     public function testClearMessagesQueueNullWithOptions() {
         try {
@@ -884,7 +884,7 @@ class QueueServiceFunctionalParameterTest extends FunctionalTestBase {
     }
 
     /**
-    * @covers PEAR2\WindowsAzure\Services\Queue\QueueRestProxy::clearMessages
+    * @covers WindowsAzure\Services\Queue\QueueRestProxy::clearMessages
     */
     public function testClearMessagesOptionsNull() {
         try {
@@ -897,7 +897,7 @@ class QueueServiceFunctionalParameterTest extends FunctionalTestBase {
     }
 
     /**
-    * @covers PEAR2\WindowsAzure\Services\Queue\QueueRestProxy::clearMessages
+    * @covers WindowsAzure\Services\Queue\QueueRestProxy::clearMessages
     */
     public function testClearMessagesAllNull() {
         try {
