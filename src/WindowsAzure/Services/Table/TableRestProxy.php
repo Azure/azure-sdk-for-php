@@ -33,6 +33,7 @@ use PEAR2\WindowsAzure\Services\Core\Models\GetServicePropertiesResult;
 use PEAR2\WindowsAzure\Services\Table\Models\EdmType;
 use PEAR2\WindowsAzure\Services\Table\Models\Filters;
 use PEAR2\WindowsAzure\Services\Table\Models\Filters\Filter;
+use PEAR2\WindowsAzure\Services\Table\Models\GetTableResult;
 use PEAR2\WindowsAzure\Services\Table\Models\QueryTablesOptions;
 use PEAR2\WindowsAzure\Services\Table\Models\QueryTablesResult;
 use PEAR2\WindowsAzure\Services\Table\Models\InsertEntityResult;
@@ -750,8 +751,8 @@ class TableRestProxy extends ServiceRestProxy implements ITable
     /**
      * Creates new table in the storage account
      * 
-     * @param string                     $table   name of the name
-     * @param Models\TableServiceOptions $options optional parameters
+     * @param string                     $table   The name of the table.
+     * @param Models\TableServiceOptions $options The optional parameters.
      * 
      * @return none
      * 
@@ -779,9 +780,39 @@ class TableRestProxy extends ServiceRestProxy implements ITable
     }
     
     /**
+     * Gets the table.
+     * 
+     * @param string                     $table   The name of the table.
+     * @param Models\TableServiceOptions $options The optional parameters.
+     * 
+     * @return Models\GetTableResult
+     */
+    public function getTable($table, $options = null)
+    {
+        Validate::isValidString($table);
+        
+        $method      = \HTTP_Request2::METHOD_GET;
+        $headers     = array();
+        $queryParams = array();
+        $statusCode  = Resources::STATUS_OK;
+        $path        = "Tables('$table')";
+        
+        if (is_null($options)) {
+            $options = new TableServiceOptions();
+        }
+        
+        $queryParams[Resources::QP_TIMEOUT] = strval($options->getTimeout());
+        $headers[Resources::CONTENT_TYPE]   = Resources::XML_ATOM_CONTENT_TYPE;
+        
+        $response = $this->send($method, $headers, $queryParams, $path, $statusCode);
+        
+        return GetTableResult::create($response->getBody(), $this->_atomSerializer);
+    }
+    
+    /**
      * Deletes the specified table and any data it contains.
      * 
-     * @param string                     $table   name of the name
+     * @param string                     $table   The name of the table.
      * @param Models\TableServiceOptions $options optional parameters
      * 
      * @return none

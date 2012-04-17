@@ -156,6 +156,7 @@ spl_autoload_register(
             'pear2\\windowsazure\\services\\table\\models\\filters\\rawstringfilter' => '/WindowsAzure/Services/Table/Models/Filters/RawStringFilter.php',
             'pear2\\windowsazure\\services\\table\\models\\filters\\unaryfilter' => '/WindowsAzure/Services/Table/Models/Filters/UnaryFilter.php',
             'pear2\\windowsazure\\services\\table\\models\\getentityresult' => '/WindowsAzure/Services/Table/Models/GetEntityResult.php',
+            'pear2\\windowsazure\\services\\table\\models\\gettableresult' => '/WindowsAzure/Services/Table/Models/GetTableResult.php',
             'pear2\\windowsazure\\services\\table\\models\\insertentityresult' => '/WindowsAzure/Services/Table/Models/InsertEntityResult.php',
             'pear2\\windowsazure\\services\\table\\models\\property' => '/WindowsAzure/Services/Table/Models/Property.php',
             'pear2\\windowsazure\\services\\table\\models\\query' => '/WindowsAzure/Services/Table/Models/Query.php',

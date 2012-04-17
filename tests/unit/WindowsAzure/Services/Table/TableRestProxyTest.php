@@ -127,6 +127,26 @@ class TableRestProxyTest extends TableServiceRestProxyTestBase
     }
     
     /**
+     * @covers PEAR2\WindowsAzure\Services\Table\TableRestProxy::getTable
+     * @covers PEAR2\WindowsAzure\Services\Core\ServiceRestProxy::sendContext
+     * @covers PEAR2\WindowsAzure\Services\Table\Utilities\AtomReaderWriter::parseTable
+     * @covers PEAR2\WindowsAzure\Services\Table\Utilities\AtomReaderWriter::_parseBody
+     * @covers PEAR2\WindowsAzure\Services\Table\Models\GetTableResult::create
+     */
+    public function testGetTable()
+    {
+        // Setup
+        $name = 'gettable';
+        $this->createTable($name);
+        
+        // Test
+        $result = $this->wrapper->getTable($name);
+        
+        // Assert
+        $this->assertEquals($name, $result->getName());
+    }
+    
+    /**
      * @covers PEAR2\WindowsAzure\Services\Table\TableRestProxy::deleteTable
      * @covers PEAR2\WindowsAzure\Services\Core\ServiceRestProxy::sendContext
      */

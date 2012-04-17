@@ -47,6 +47,15 @@ interface IAtomReaderWriter
     public static function getTable($name);
     
     /**
+     * Parses one table entry.
+     * 
+     * @param string $body The HTTP response body.
+     * 
+     * @return string 
+     */
+    public static function parseTable($body);
+    
+    /**
      * Constructs array of tables from HTTP response body.
      * 
      * @param string $body The HTTP response body.

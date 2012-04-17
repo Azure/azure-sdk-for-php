@@ -185,13 +185,29 @@ class AtomReaderWriter implements IAtomReaderWriter
         } else {
             $rawEntries = array($result->entry);
         }
-
+        
         foreach ($rawEntries as $entry) {
             $tableName = $entry->xpath('.//m:properties/d:TableName');
             $tables[]  = (string)$tableName[0];
         }
         
         return $tables;
+    }
+    
+    /**
+     * Parses one table entry.
+     * 
+     * @param string $body The HTTP response body.
+     * 
+     * @return string 
+     */
+    public static function parseTable($body)
+    {
+        $result    = self::_parseBody($body);
+        $tableName = $result->xpath('.//m:properties/d:TableName');
+        $table     = (string)$tableName[0];
+        
+        return $table;
     }
     
     /**
