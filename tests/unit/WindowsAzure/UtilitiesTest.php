@@ -24,6 +24,7 @@
 
 use PEAR2\WindowsAzure\Utilities;
 use PEAR2\Tests\Framework\TestResources;
+use PEAR2\Tests\Framework\VirtualFileSystem;
 
 /**
  * Unit tests for class Utilities
@@ -376,6 +377,21 @@ class UtilitiesTest extends PHPUnit_Framework_TestCase
         
         // Assert
         $this->assertEquals($date, $actual);
+    }
+    
+    /**
+     * @covers PEAR2\WindowsAzure\Utilities::ReadFile
+     */
+    public function testReadFile()
+    {
+        $expected = 'FileDummyContent';
+        $stream = fopen(VirtualFileSystem::newFile($expected), 'r');
+        
+        // Test
+        $actual = Utilities::ReadFile($stream);
+        
+        // Assert
+        $this->assertEquals($expected, $actual);
     }
 }
 

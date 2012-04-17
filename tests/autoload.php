@@ -14,6 +14,7 @@ spl_autoload_register(
             'pear2\\tests\\framework\\servicerestproxytestbase' => '/framework/ServiceRestProxyTestBase.php',
             'pear2\\tests\\framework\\tableservicerestproxytestbase' => '/framework/TableRestProxyTestBase.php',
             'pear2\\tests\\framework\\testresources' => '/framework/TestResources.php',
+            'pear2\\tests\\framework\\virtualfilesystem' => '/framework/VirtualFileSystem.php',
             'pear2\\tests\\functional\\windowsazure\\services\\queue\\functionaltestbase' => '/functional/WindowsAzure/Services/Queue/FunctionalTestBase.php',
             'pear2\\tests\\functional\\windowsazure\\services\\queue\\integrationtestbase' => '/functional/WindowsAzure/Services/Queue/IntegrationTestBase.php',
             'pear2\\tests\\functional\\windowsazure\\services\\queue\\queueservicefunctionaloptionstest' => '/functional/WindowsAzure/Services/Queue/QueueServiceFunctionalOptionsTest.php',

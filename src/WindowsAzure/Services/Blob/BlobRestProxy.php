@@ -725,12 +725,12 @@ class BlobRestProxy extends ServiceRestProxy implements IBlob
      * Updating an existing block blob overwrites any existing metadata on the blob.
      * Partial updates are not supported with createBlockBlob the content of the
      * existing blob is overwritten with the content of the new blob. To perform a
-     * partial update of the content of a block blob, use the createBlockList method.
+     * partial update of the content o  f a block blob, use the createBlockList method.
      * Note that the default content type is application/octet-stream.
      * 
      * @param string                   $container name of the container
      * @param string                   $blob      name of the blob
-     * @param string                   $content   content of the blob
+     * @param string|resource          $content   content of the blob
      * @param Models\CreateBlobOptions $options   optional parameters
      * 
      * @return none.
@@ -744,7 +744,8 @@ class BlobRestProxy extends ServiceRestProxy implements IBlob
         $queryParams = array();
         $path        = $container . '/' . $blob;
         $statusCode  = Resources::STATUS_CREATED;
-        $body        = $content;
+        // If read file failed for any reason it'll throw an exception.
+        $body = is_resource($content) ? Utilities::ReadFile($content) : $content;
         
         if (is_null($options)) {
             $options = new CreateBlobOptions();
