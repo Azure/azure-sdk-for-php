@@ -15,21 +15,21 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   PEAR2\Tests\Framework
+ * @package   Tests\Framework
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
  
-namespace PEAR2\Tests\Framework;
+namespace Tests\Framework;
 require_once 'vfsStream/vfsStream.php';
 
 /**
  * Represents virtual file system for testing purpose.
  *
  * @category  Microsoft
- * @package   PEAR2\Tests\Framework
+ * @package   Tests\Framework
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0

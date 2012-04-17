@@ -15,20 +15,20 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   PEAR2\Tests\Unit\WindowsAzure
+ * @package   Tests\Unit\WindowsAzure
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
 
-use PEAR2\WindowsAzure\Core\InvalidArgumentTypeException;
+use WindowsAzure\Core\InvalidArgumentTypeException;
 
 /**
  * Unit tests for class InvalidArgumentTypeException
  *
  * @category  Microsoft
- * @package   PEAR2\Tests\Unit\WindowsAzure
+ * @package   Tests\Unit\WindowsAzure
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
@@ -38,7 +38,7 @@ use PEAR2\WindowsAzure\Core\InvalidArgumentTypeException;
 class InvalidArgumentTypeExceptionTest extends PHPUnit_Framework_TestCase
 {
     /**
-     * @covers PEAR2\WindowsAzure\Core\InvalidArgumentTypeException::__construct
+     * @covers WindowsAzure\Core\InvalidArgumentTypeException::__construct
      */
     public function test__construct()
     {

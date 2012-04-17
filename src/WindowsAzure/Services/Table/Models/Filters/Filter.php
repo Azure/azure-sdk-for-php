@@ -15,20 +15,20 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   PEAR2\WindowsAzure\Services\Table\Models\Filters
+ * @package   WindowsAzure\Services\Table\Models\Filters
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
  
-namespace PEAR2\WindowsAzure\Services\Table\Models\Filters;
+namespace WindowsAzure\Services\Table\Models\Filters;
 
 /**
  * Filter operations
  *
  * @category  Microsoft
- * @package   PEAR2\WindowsAzure\Services\Table\Models\Filters
+ * @package   WindowsAzure\Services\Table\Models\Filters
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
@@ -43,7 +43,7 @@ class Filter
      * @param Filter $left  The left filter
      * @param Filter $right The right filter
      * 
-     * @return \PEAR2\WindowsAzure\Services\Table\Models\Filters\BinaryFilter 
+     * @return \WindowsAzure\Services\Table\Models\Filters\BinaryFilter 
      */
     public static function applyAnd($left, $right)
     {
@@ -60,7 +60,7 @@ class Filter
      * 
      * @param Filter $operand The operand
      * 
-     * @return \PEAR2\WindowsAzure\Services\Table\Models\Filters\UnaryFilter 
+     * @return \WindowsAzure\Services\Table\Models\Filters\UnaryFilter 
      */
     public static function applyNot($operand)
     {
@@ -203,7 +203,7 @@ class Filter
      * @param mix    $value   The filter value
      * @param string $edmType The value EDM type.
      * 
-     * @return \PEAR2\WindowsAzure\Services\Table\Models\Filters\ConstantFilter 
+     * @return \WindowsAzure\Services\Table\Models\Filters\ConstantFilter 
      */
     public static function applyConstant($value, $edmType)
     {
@@ -219,7 +219,7 @@ class Filter
      * 
      * @param string $value The filter value
      * 
-     * @return \PEAR2\WindowsAzure\Services\Table\Models\Filters\LiteralFilter 
+     * @return \WindowsAzure\Services\Table\Models\Filters\LiteralFilter 
      */
     public static function applyLiteral($value)
     {
@@ -234,7 +234,7 @@ class Filter
      * 
      * @param string $value The raw string filter expression
      * 
-     * @return \PEAR2\WindowsAzure\Services\Table\Models\Filters\RawStringFilter 
+     * @return \WindowsAzure\Services\Table\Models\Filters\RawStringFilter 
      */
     public static function applyRawString($value)
     {

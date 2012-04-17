@@ -15,24 +15,24 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   PEAR2\Tests\Unit\WindowsAzure\Services\Queue
+ * @package   Tests\Unit\WindowsAzure\Services\Queue
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
 
-namespace PEAR2\Tests\Unit\WindowsAzure\Services\Queue;
-use PEAR2\WindowsAzure\Services\Queue\QueueService;
-use PEAR2\WindowsAzure\Services\Core\Configuration;
-use PEAR2\Tests\Framework\TestResources;
-use PEAR2\WindowsAzure\Services\Queue\QueueSettings;
+namespace Tests\Unit\WindowsAzure\Services\Queue;
+use WindowsAzure\Services\Queue\QueueService;
+use WindowsAzure\Services\Core\Configuration;
+use Tests\Framework\TestResources;
+use WindowsAzure\Services\Queue\QueueSettings;
 
 /**
  * Unit tests for class QueueService
  *
  * @category  Microsoft
- * @package   PEAR2\Tests\Unit\WindowsAzure\Services\Queue
+ * @package   Tests\Unit\WindowsAzure\Services\Queue
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
@@ -42,7 +42,7 @@ use PEAR2\WindowsAzure\Services\Queue\QueueSettings;
 class QueueServiceTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @covers PEAR2\WindowsAzure\Services\Queue\QueueService::create
+     * @covers WindowsAzure\Services\Queue\QueueService::create
      */
     public function testCreateWithConfig()
     {
@@ -57,7 +57,7 @@ class QueueServiceTest extends \PHPUnit_Framework_TestCase
         $queueWrapper = QueueService::create($config);
         
         // Assert
-        $this->assertInstanceOf('PEAR2\\WindowsAzure\\Services\\Queue\\IQueue', $queueWrapper);
+        $this->assertInstanceOf('\WindowsAzure\\Services\\Queue\\IQueue', $queueWrapper);
     }
 }
 

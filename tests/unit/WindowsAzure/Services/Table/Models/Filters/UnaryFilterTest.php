@@ -15,21 +15,21 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   PEAR2\Tests\Unit\WindowsAzure\Services\Table\Models\Filters
+ * @package   Tests\Unit\WindowsAzure\Services\Table\Models\Filters
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
 
-namespace PEAR2\Tests\Unit\WindowsAzure\Services\Table\Models\Filters;
-use PEAR2\WindowsAzure\Services\Table\Models\Filters\UnaryFilter;
+namespace Tests\Unit\WindowsAzure\Services\Table\Models\Filters;
+use WindowsAzure\Services\Table\Models\Filters\UnaryFilter;
 
 /**
  * Unit tests for class UnaryFilter
  *
  * @category  Microsoft
- * @package   PEAR2\Tests\Unit\WindowsAzure\Services\Table\Models\Filters
+ * @package   Tests\Unit\WindowsAzure\Services\Table\Models\Filters
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
@@ -39,8 +39,8 @@ use PEAR2\WindowsAzure\Services\Table\Models\Filters\UnaryFilter;
 class UnaryFilterTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @covers PEAR2\WindowsAzure\Services\Table\Models\Filters\UnaryFilter::setOperator
-     * @covers PEAR2\WindowsAzure\Services\Table\Models\Filters\UnaryFilter::getOperator
+     * @covers WindowsAzure\Services\Table\Models\Filters\UnaryFilter::setOperator
+     * @covers WindowsAzure\Services\Table\Models\Filters\UnaryFilter::getOperator
      */
     public function testSetOperator()
     {
@@ -56,8 +56,8 @@ class UnaryFilterTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers PEAR2\WindowsAzure\Services\Table\Models\Filters\UnaryFilter::setOperand
-     * @covers PEAR2\WindowsAzure\Services\Table\Models\Filters\UnaryFilter::getOperand
+     * @covers WindowsAzure\Services\Table\Models\Filters\UnaryFilter::setOperand
+     * @covers WindowsAzure\Services\Table\Models\Filters\UnaryFilter::getOperand
      */
     public function testSetOperand()
     {

@@ -15,28 +15,28 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   PEAR2\WindowsAzure\Services\Table\Models
+ * @package   WindowsAzure\Services\Table\Models
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
  
-namespace PEAR2\WindowsAzure\Services\Table\Models;
+namespace WindowsAzure\Services\Table\Models;
 require_once 'HTTP/Request2/Response.php';
-use PEAR2\WindowsAzure\Resources;
-use PEAR2\WindowsAzure\Utilities;
-use PEAR2\WindowsAzure\Core\HttpClient;
-use PEAR2\WindowsAzure\Core\ServiceException;
-use PEAR2\WindowsAzure\Services\Table\Models\BatchError;
-use PEAR2\WindowsAzure\Services\Table\Models\InsertEntityResult;
-use PEAR2\WindowsAzure\Services\Table\Models\UpdateEntityResult;
+use WindowsAzure\Resources;
+use WindowsAzure\Utilities;
+use WindowsAzure\Core\HttpClient;
+use WindowsAzure\Core\ServiceException;
+use WindowsAzure\Services\Table\Models\BatchError;
+use WindowsAzure\Services\Table\Models\InsertEntityResult;
+use WindowsAzure\Services\Table\Models\UpdateEntityResult;
 
 /**
  * Holds results from batch API.
  *
  * @category  Microsoft
- * @package   PEAR2\WindowsAzure\Services\Table\Models
+ * @package   WindowsAzure\Services\Table\Models
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
@@ -113,7 +113,7 @@ class BatchResult
      * @param IAtomReaderWriter $atomSerializer The Atom reader and writer.
      * @param IMimeReaderWriter $mimeSerializer The MIME reader and writer.
      * 
-     * @return \PEAR2\WindowsAzure\Services\Table\Models\BatchResult
+     * @return \WindowsAzure\Services\Table\Models\BatchResult
      * 
      * @throws \InvalidArgumentException 
      */

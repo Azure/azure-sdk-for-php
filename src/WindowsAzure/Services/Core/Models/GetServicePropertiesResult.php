@@ -15,21 +15,21 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   PEAR2\WindowsAzure\Services\Core\Models
+ * @package   WindowsAzure\Services\Core\Models
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
  
-namespace PEAR2\WindowsAzure\Services\Core\Models;
-use PEAR2\WindowsAzure\Services\Core\Models\ServiceProperties;
+namespace WindowsAzure\Services\Core\Models;
+use WindowsAzure\Services\Core\Models\ServiceProperties;
 
 /**
  * Result from calling GetQueueProperties REST wrapper.
  *
  * @category  Microsoft
- * @package   PEAR2\WindowsAzure\Services\Core\Models
+ * @package   WindowsAzure\Services\Core\Models
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
@@ -45,7 +45,7 @@ class GetServicePropertiesResult
      * 
      * @param array $parsedResponse XML response parsed into array.
      * 
-     * @return PEAR2\WindowsAzure\Services\Core\Models\GetServicePropertiesResult
+     * @return WindowsAzure\Services\Core\Models\GetServicePropertiesResult
      */
     public static function create($parsedResponse)
     {
@@ -58,7 +58,7 @@ class GetServicePropertiesResult
     /**
      * Gets service properties object.
      * 
-     * @return PEAR2\WindowsAzure\Services\Core\Models\ServiceProperties 
+     * @return WindowsAzure\Services\Core\Models\ServiceProperties 
      */
     public function getValue()
     {

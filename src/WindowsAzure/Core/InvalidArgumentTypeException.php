@@ -15,21 +15,21 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   PEAR2\WindowsAzure\Core
+ * @package   WindowsAzure\Core
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
  
-namespace PEAR2\WindowsAzure\Core;
-use PEAR2\WindowsAzure\Resources;
+namespace WindowsAzure\Core;
+use WindowsAzure\Resources;
 
 /**
  * Exception thrown if an argument type does not match with the expected type. 
  *
  * @category  Microsoft
- * @package   PEAR2\WindowsAzure\Core
+ * @package   WindowsAzure\Core
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
@@ -43,7 +43,7 @@ class InvalidArgumentTypeException extends \InvalidArgumentException
      *
      * @param string $validType valid type that should be provided by the user.
      * 
-     * @return PEAR2\WindowsAzure\Core\InvalidArgumentTypeException
+     * @return WindowsAzure\Core\InvalidArgumentTypeException
      */
     public function __construct($validType)
     {

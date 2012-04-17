@@ -15,26 +15,26 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   PEAR2\Tests\Unit\WindowsAzure\Services\Core\Models
+ * @package   Tests\Unit\WindowsAzure\Services\Core\Models
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
 
-namespace PEAR2\Tests\Unit\WindowsAzure\Services\Core\Models;
-use PEAR2\Tests\Framework\TestResources;
-use PEAR2\WindowsAzure\Utilities;
-use PEAR2\WindowsAzure\Services\Core\Models\Logging;
-use PEAR2\WindowsAzure\Services\Core\Models\Metrics;
-use PEAR2\WindowsAzure\Services\Core\Models\ServiceProperties;
-use PEAR2\WindowsAzure\Services\Core\Models\GetServicePropertiesResult;
+namespace Tests\Unit\WindowsAzure\Services\Core\Models;
+use Tests\Framework\TestResources;
+use WindowsAzure\Utilities;
+use WindowsAzure\Services\Core\Models\Logging;
+use WindowsAzure\Services\Core\Models\Metrics;
+use WindowsAzure\Services\Core\Models\ServiceProperties;
+use WindowsAzure\Services\Core\Models\GetServicePropertiesResult;
 
 /**
  * Unit tests for class ServiceProperties
  *
  * @category  Microsoft
- * @package   PEAR2\Tests\Unit\WindowsAzure\Services\Core\Models
+ * @package   Tests\Unit\WindowsAzure\Services\Core\Models
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
@@ -44,7 +44,7 @@ use PEAR2\WindowsAzure\Services\Core\Models\GetServicePropertiesResult;
 class ServicePropertiesTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @covers PEAR2\WindowsAzure\Services\Core\Models\ServiceProperties::create
+     * @covers WindowsAzure\Services\Core\Models\ServiceProperties::create
      */
     public function testCreate()
     {
@@ -62,7 +62,7 @@ class ServicePropertiesTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers PEAR2\WindowsAzure\Services\Core\Models\ServiceProperties::setLogging
+     * @covers WindowsAzure\Services\Core\Models\ServiceProperties::setLogging
      */
     public function testSetLogging()
     {
@@ -79,7 +79,7 @@ class ServicePropertiesTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers PEAR2\WindowsAzure\Services\Core\Models\ServiceProperties::getLogging
+     * @covers WindowsAzure\Services\Core\Models\ServiceProperties::getLogging
      */
     public function testGetLogging()
     {
@@ -97,7 +97,7 @@ class ServicePropertiesTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers PEAR2\WindowsAzure\Services\Core\Models\ServiceProperties::setMetrics
+     * @covers WindowsAzure\Services\Core\Models\ServiceProperties::setMetrics
      */
     public function testSetMetrics()
     {
@@ -114,7 +114,7 @@ class ServicePropertiesTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers PEAR2\WindowsAzure\Services\Core\Models\ServiceProperties::getMetrics
+     * @covers WindowsAzure\Services\Core\Models\ServiceProperties::getMetrics
      */
     public function testGetMetrics()
     {
@@ -132,7 +132,7 @@ class ServicePropertiesTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers PEAR2\WindowsAzure\Services\Core\Models\ServiceProperties::toArray
+     * @covers WindowsAzure\Services\Core\Models\ServiceProperties::toArray
      */
     public function testToArray()
     {
@@ -151,7 +151,7 @@ class ServicePropertiesTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers PEAR2\WindowsAzure\Services\Core\Models\ServiceProperties::toXml
+     * @covers WindowsAzure\Services\Core\Models\ServiceProperties::toXml
      */
     public function testToXml()
     {

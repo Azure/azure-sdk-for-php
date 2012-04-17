@@ -15,21 +15,21 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   PEAR2\WindowsAzure\Services\Blob
+ * @package   WindowsAzure\Services\Blob
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
  
-namespace PEAR2\WindowsAzure\Services\Blob;
-use PEAR2\WindowsAzure\Services\Core\FilterableService;
+namespace WindowsAzure\Services\Blob;
+use WindowsAzure\Services\Core\FilterableService;
 
 /**
  * This interface has all REST APIs provided by Windows Azure for Blob service.
  *
  * @category  Microsoft
- * @package   PEAR2\WindowsAzure\Services\Blob
+ * @package   WindowsAzure\Services\Blob
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
@@ -44,7 +44,7 @@ interface IBlob extends FilterableService
     * 
     * @param Models\BlobServiceOptions $options optional blob service options.
     * 
-    * @return PEAR2\WindowsAzure\Services\Core\Models\GetServicePropertiesResult
+    * @return WindowsAzure\Services\Core\Models\GetServicePropertiesResult
     * 
     * @see http://msdn.microsoft.com/en-us/library/windowsazure/hh452239.aspx
     */
@@ -67,7 +67,7 @@ interface IBlob extends FilterableService
     * 
     * @param Models\ListContainersOptions $options optional parameters
     * 
-    * @return PEAR2\WindowsAzure\Services\Blob\Models\ListContainersResult
+    * @return WindowsAzure\Services\Blob\Models\ListContainersResult
     * 
     * @see http://msdn.microsoft.com/en-us/library/windowsazure/dd179352.aspx
     */

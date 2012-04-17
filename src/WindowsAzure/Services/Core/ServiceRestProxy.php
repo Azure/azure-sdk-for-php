@@ -15,27 +15,27 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   PEAR2\WindowsAzure\Services\Core
+ * @package   WindowsAzure\Services\Core
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
  
-namespace PEAR2\WindowsAzure\Services\Core;
-use PEAR2\WindowsAzure\Resources;
-use PEAR2\WindowsAzure\Validate;
-use PEAR2\WindowsAzure\Core\Url;
-use PEAR2\WindowsAzure\Core\HttpCallContext;
-use PEAR2\WindowsAzure\Core\IHttpClient;
-use PEAR2\WindowsAzure\Core\WindowsAzureUtilities;
-use PEAR2\WindowsAzure\Services\Blob\Models\AccessConditionHeaderType;
+namespace WindowsAzure\Services\Core;
+use WindowsAzure\Resources;
+use WindowsAzure\Validate;
+use WindowsAzure\Core\Url;
+use WindowsAzure\Core\HttpCallContext;
+use WindowsAzure\Core\IHttpClient;
+use WindowsAzure\Core\WindowsAzureUtilities;
+use WindowsAzure\Services\Blob\Models\AccessConditionHeaderType;
 
 /**
  * Base class for all services rest proxies.
  *
  * @category  Microsoft
- * @package   PEAR2\WindowsAzure\Services\Core
+ * @package   WindowsAzure\Services\Core
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
@@ -45,7 +45,7 @@ use PEAR2\WindowsAzure\Services\Blob\Models\AccessConditionHeaderType;
 class ServiceRestProxy
 {
     /**
-     * @var PEAR2\WindowsAzure\Core\IHttpClient
+     * @var WindowsAzure\Core\IHttpClient
      */
     private $_channel;
     
@@ -62,7 +62,7 @@ class ServiceRestProxy
     /**
      * Constructor
      *
-     * @param PEAR2\WindowsAzure\Core\IHttpClient $channel http client to send 
+     * @param WindowsAzure\Core\IHttpClient $channel http client to send 
      * HTTP requests
      * @param string                              $uri     storage account uri.
      * 
@@ -88,7 +88,7 @@ class ServiceRestProxy
     /**
      * Sends HTTP request with the specified HTTP call context.
      * 
-     * @param PEAR2\WindowsAzure\Core\HttpCallContext $context The HTTP call context.
+     * @param WindowsAzure\Core\HttpCallContext $context The HTTP call context.
      * 
      * @return \HTTP_Request2_Response
      */
@@ -159,10 +159,10 @@ class ServiceRestProxy
      * Adds new filter to queue proxy object and returns new QueueRestProxy with
      * that filter.
      *
-     * @param PEAR2\WindowsAzure\Core\IServiceFilter $filter Filter to add for 
+     * @param WindowsAzure\Core\IServiceFilter $filter Filter to add for 
      * the pipeline.
      * 
-     * @return PEAR2\WindowsAzure\Services\Queue\IQueue.
+     * @return WindowsAzure\Services\Queue\IQueue.
      */
     public function withFilter($filter)
     {

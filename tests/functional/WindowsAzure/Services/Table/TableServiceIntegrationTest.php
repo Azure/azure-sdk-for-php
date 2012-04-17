@@ -17,37 +17,37 @@
  * limitations under the License.
  *
  * @category   Microsoft
- * @package    PEAR2\Tests\Functional\WindowsAzure\Services\Table
+ * @package    Tests\Functional\WindowsAzure\Services\Table
  * @author     Jason Cooke <jcooke@microsoft.com>
  * @copyright  2012 Microsoft Corporation
  * @license    http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link       http://pear.php.net/package/azure-sdk-for-php
  */
 
-namespace PEAR2\Tests\Functional\WindowsAzure\Services\Table;
+namespace Tests\Functional\WindowsAzure\Services\Table;
 
-use PEAR2\WindowsAzure\Core\ServiceException;
-use PEAR2\WindowsAzure\Core\WindowsAzureUtilities;
-use PEAR2\WindowsAzure\Services\Table\TableService;
-use PEAR2\WindowsAzure\Services\Table\Models\EdmType;
-use PEAR2\WindowsAzure\Services\Table\Models\InsertEntityResult;
-use PEAR2\WindowsAzure\Services\Table\Models\Entity;
-use PEAR2\WindowsAzure\Services\Table\Models\Property;
-use PEAR2\WindowsAzure\Services\Table\Models\Query;
-use PEAR2\WindowsAzure\Services\Table\Models\QueryEntitiesOptions;
-use PEAR2\WindowsAzure\Services\Table\Models\BatchOperations;
-use PEAR2\WindowsAzure\Services\Table\Models\QueryEntitiesResult;
-use PEAR2\WindowsAzure\Services\Table\Models\QueryTablesOptions;
-use PEAR2\WindowsAzure\Services\Table\Models\QueryTableResults;
-use PEAR2\WindowsAzure\Services\Table\Models\TableServiceOptions;
-use PEAR2\WindowsAzure\Services\Table\Models\UpdateEntityResult;
-use PEAR2\WindowsAzure\Services\Table\Models\DeleteEntityOptions;
-use PEAR2\WindowsAzure\Services\Table\Models\Filters\BinaryFilter;
-use PEAR2\WindowsAzure\Services\Table\Models\Filters\ConstantFilter;
-use PEAR2\WindowsAzure\Services\Table\Models\Filters\Filter;
-use PEAR2\WindowsAzure\Services\Table\Models\Filters\LiteralFilter;
-use PEAR2\WindowsAzure\Services\Table\Models\Filters\RawStringFilter;
-use PEAR2\WindowsAzure\Services\Table\Models\Filters\UnaryFilter;
+use WindowsAzure\Core\ServiceException;
+use WindowsAzure\Core\WindowsAzureUtilities;
+use WindowsAzure\Services\Table\TableService;
+use WindowsAzure\Services\Table\Models\EdmType;
+use WindowsAzure\Services\Table\Models\InsertEntityResult;
+use WindowsAzure\Services\Table\Models\Entity;
+use WindowsAzure\Services\Table\Models\Property;
+use WindowsAzure\Services\Table\Models\Query;
+use WindowsAzure\Services\Table\Models\QueryEntitiesOptions;
+use WindowsAzure\Services\Table\Models\BatchOperations;
+use WindowsAzure\Services\Table\Models\QueryEntitiesResult;
+use WindowsAzure\Services\Table\Models\QueryTablesOptions;
+use WindowsAzure\Services\Table\Models\QueryTableResults;
+use WindowsAzure\Services\Table\Models\TableServiceOptions;
+use WindowsAzure\Services\Table\Models\UpdateEntityResult;
+use WindowsAzure\Services\Table\Models\DeleteEntityOptions;
+use WindowsAzure\Services\Table\Models\Filters\BinaryFilter;
+use WindowsAzure\Services\Table\Models\Filters\ConstantFilter;
+use WindowsAzure\Services\Table\Models\Filters\Filter;
+use WindowsAzure\Services\Table\Models\Filters\LiteralFilter;
+use WindowsAzure\Services\Table\Models\Filters\RawStringFilter;
+use WindowsAzure\Services\Table\Models\Filters\UnaryFilter;
 
 class TableServiceIntegrationTest extends IntegrationTestBase {
     private static $testTablesPrefix = 'sdktest';
@@ -156,7 +156,7 @@ class TableServiceIntegrationTest extends IntegrationTestBase {
     }
     
     /**
-    * @covers PEAR2\WindowsAzure\Services\Table\TableRestProxy::getServiceProperties
+    * @covers WindowsAzure\Services\Table\TableRestProxy::getServiceProperties
     */
     public function testGetServicePropertiesWorks() {
         // Arrange
@@ -190,8 +190,8 @@ class TableServiceIntegrationTest extends IntegrationTestBase {
     }
 
     /**
-    * @covers PEAR2\WindowsAzure\Services\Table\TableRestProxy::getServiceProperties
-    * @covers PEAR2\WindowsAzure\Services\Table\TableRestProxy::setServiceProperties
+    * @covers WindowsAzure\Services\Table\TableRestProxy::getServiceProperties
+    * @covers WindowsAzure\Services\Table\TableRestProxy::setServiceProperties
     */
     public function testSetServicePropertiesWorks() {
         // Arrange
@@ -231,8 +231,8 @@ class TableServiceIntegrationTest extends IntegrationTestBase {
     }
 
     /**
-    * @covers PEAR2\WindowsAzure\Services\Table\TableRestProxy::createTable
-    * @covers PEAR2\WindowsAzure\Services\Table\TableRestProxy::getTable
+    * @covers WindowsAzure\Services\Table\TableRestProxy::createTable
+    * @covers WindowsAzure\Services\Table\TableRestProxy::getTable
     */
     public function testCreateTablesWorks() {
         $this->fail("Need to implement getTable");
@@ -253,9 +253,9 @@ class TableServiceIntegrationTest extends IntegrationTestBase {
     }
 
     /**
-    * @covers PEAR2\WindowsAzure\Services\Table\TableRestProxy::createTable
-    * @covers PEAR2\WindowsAzure\Services\Table\TableRestProxy::deleteTable
-    * @covers PEAR2\WindowsAzure\Services\Table\TableRestProxy::getTable
+    * @covers WindowsAzure\Services\Table\TableRestProxy::createTable
+    * @covers WindowsAzure\Services\Table\TableRestProxy::deleteTable
+    * @covers WindowsAzure\Services\Table\TableRestProxy::getTable
     */
     public function testDeleteTablesWorks() {
         $this->fail("Need to implement getTable");
@@ -279,7 +279,7 @@ class TableServiceIntegrationTest extends IntegrationTestBase {
     }
 
     /**
-    * @covers PEAR2\WindowsAzure\Services\Table\TableRestProxy::queryTables
+    * @covers WindowsAzure\Services\Table\TableRestProxy::queryTables
     */
     public function testQueryTablesWorks() {
         // Act
@@ -290,7 +290,7 @@ class TableServiceIntegrationTest extends IntegrationTestBase {
     }
 
     /**
-    * @covers PEAR2\WindowsAzure\Services\Table\TableRestProxy::queryTables
+    * @covers WindowsAzure\Services\Table\TableRestProxy::queryTables
     */
     public function testQueryTablesWithPrefixWorks() {
         // Act
@@ -303,7 +303,7 @@ class TableServiceIntegrationTest extends IntegrationTestBase {
     }
 
     /**
-    * @covers PEAR2\WindowsAzure\Services\Table\TableRestProxy::getTable
+    * @covers WindowsAzure\Services\Table\TableRestProxy::getTable
     */
     public function testGetTableWorks() {
         $this->fail("Need to implement getTable");
@@ -316,7 +316,7 @@ class TableServiceIntegrationTest extends IntegrationTestBase {
     }
 
     /**
-    * @covers PEAR2\WindowsAzure\Services\Table\TableRestProxy::insertEntity
+    * @covers WindowsAzure\Services\Table\TableRestProxy::insertEntity
     */
     public function testInsertEntityWorks() {
         // Arrange
@@ -371,8 +371,8 @@ class TableServiceIntegrationTest extends IntegrationTestBase {
         $this->assertEquals($uuid, $result->getEntity()->getPropertyValue('test7'), 'GUIDs are the same');
     }
     /**
-    * @covers PEAR2\WindowsAzure\Services\Table\TableRestProxy::insertEntity
-    * @covers PEAR2\WindowsAzure\Services\Table\TableRestProxy::updateEntity
+    * @covers WindowsAzure\Services\Table\TableRestProxy::insertEntity
+    * @covers WindowsAzure\Services\Table\TableRestProxy::updateEntity
     */
     public function testUpdateEntityWorks() {
         // Arrange
@@ -395,7 +395,7 @@ class TableServiceIntegrationTest extends IntegrationTestBase {
     }
 
     /**
-    * @covers PEAR2\WindowsAzure\Services\Table\TableRestProxy::insertOrReplaceEntity
+    * @covers WindowsAzure\Services\Table\TableRestProxy::insertOrReplaceEntity
     */
     public function testInsertOrReplaceEntityWorks() {
         // Arrange
@@ -428,7 +428,7 @@ class TableServiceIntegrationTest extends IntegrationTestBase {
     }
 
     /**
-    * @covers PEAR2\WindowsAzure\Services\Table\TableRestProxy::insertOrMergeEntity
+    * @covers WindowsAzure\Services\Table\TableRestProxy::insertOrMergeEntity
     */
     public function testInsertOrMergeEntityWorks() {
         // Arrange
@@ -461,8 +461,8 @@ class TableServiceIntegrationTest extends IntegrationTestBase {
     }
 
     /**
-    * @covers PEAR2\WindowsAzure\Services\Table\TableRestProxy::insertEntity
-    * @covers PEAR2\WindowsAzure\Services\Table\TableRestProxy::mergeEntity
+    * @covers WindowsAzure\Services\Table\TableRestProxy::insertEntity
+    * @covers WindowsAzure\Services\Table\TableRestProxy::mergeEntity
     */
     public function testMergeEntityWorks() {
         // Arrange
@@ -487,8 +487,8 @@ class TableServiceIntegrationTest extends IntegrationTestBase {
     }
 
     /**
-    * @covers PEAR2\WindowsAzure\Services\Table\TableRestProxy::deleteEntity
-    * @covers PEAR2\WindowsAzure\Services\Table\TableRestProxy::insertEntity
+    * @covers WindowsAzure\Services\Table\TableRestProxy::deleteEntity
+    * @covers WindowsAzure\Services\Table\TableRestProxy::insertEntity
     */
     public function testDeleteEntityWorks() {
         // Arrange
@@ -511,10 +511,10 @@ class TableServiceIntegrationTest extends IntegrationTestBase {
     }
 
     /**
-    * @covers PEAR2\WindowsAzure\Services\Queue\QueueRestProxy::deleteEntity
-    * @covers PEAR2\WindowsAzure\Services\Queue\QueueRestProxy::getEntity
-    * @covers PEAR2\WindowsAzure\Services\Queue\QueueRestProxy::insertEntity
-    * @covers PEAR2\WindowsAzure\Services\Queue\QueueRestProxy::queryEntities
+    * @covers WindowsAzure\Services\Queue\QueueRestProxy::deleteEntity
+    * @covers WindowsAzure\Services\Queue\QueueRestProxy::getEntity
+    * @covers WindowsAzure\Services\Queue\QueueRestProxy::insertEntity
+    * @covers WindowsAzure\Services\Queue\QueueRestProxy::queryEntities
     */
     public function testDeleteEntityTroublesomeKeyWorks() {
         // For issue https://github.com/WindowsAzure/azure-sdk-for-php/issues/180
@@ -588,8 +588,8 @@ class TableServiceIntegrationTest extends IntegrationTestBase {
     }
 
     /**
-    * @covers PEAR2\WindowsAzure\Services\Table\TableRestProxy::deleteEntity
-    * @covers PEAR2\WindowsAzure\Services\Table\TableRestProxy::insertEntity
+    * @covers WindowsAzure\Services\Table\TableRestProxy::deleteEntity
+    * @covers WindowsAzure\Services\Table\TableRestProxy::insertEntity
     */
     public function testDeleteEntityWithETagWorks() {
         // Arrange
@@ -615,8 +615,8 @@ class TableServiceIntegrationTest extends IntegrationTestBase {
     }
 
     /**
-    * @covers PEAR2\WindowsAzure\Services\Table\TableRestProxy::getEntity
-    * @covers PEAR2\WindowsAzure\Services\Table\TableRestProxy::insertEntity
+    * @covers WindowsAzure\Services\Table\TableRestProxy::getEntity
+    * @covers WindowsAzure\Services\Table\TableRestProxy::insertEntity
     */
     public function testGetEntityWorks() {
         // Arrange
@@ -673,8 +673,8 @@ class TableServiceIntegrationTest extends IntegrationTestBase {
     }
 
     /**
-    * @covers PEAR2\WindowsAzure\Services\Table\TableRestProxy::insertEntity
-    * @covers PEAR2\WindowsAzure\Services\Table\TableRestProxy::queryEntities
+    * @covers WindowsAzure\Services\Table\TableRestProxy::insertEntity
+    * @covers WindowsAzure\Services\Table\TableRestProxy::queryEntities
     */
     public function testQueryEntitiesWorks() {
         // Arrange
@@ -721,8 +721,8 @@ class TableServiceIntegrationTest extends IntegrationTestBase {
     }
 
     /**
-    * @covers PEAR2\WindowsAzure\Services\Table\TableRestProxy::insertEntity
-    * @covers PEAR2\WindowsAzure\Services\Table\TableRestProxy::queryEntities
+    * @covers WindowsAzure\Services\Table\TableRestProxy::insertEntity
+    * @covers WindowsAzure\Services\Table\TableRestProxy::queryEntities
     */
     public function testQueryEntitiesWithPaginationWorks() {
         // Arrange
@@ -764,8 +764,8 @@ class TableServiceIntegrationTest extends IntegrationTestBase {
     }
 
     /**
-    * @covers PEAR2\WindowsAzure\Services\Table\TableRestProxy::insertEntity
-    * @covers PEAR2\WindowsAzure\Services\Table\TableRestProxy::queryEntities
+    * @covers WindowsAzure\Services\Table\TableRestProxy::insertEntity
+    * @covers WindowsAzure\Services\Table\TableRestProxy::queryEntities
     */
     public function testQueryEntitiesWithFilterWorks() {
         // Arrange
@@ -910,7 +910,7 @@ class TableServiceIntegrationTest extends IntegrationTestBase {
     }
 
     /**
-    * @covers PEAR2\WindowsAzure\Services\Table\TableRestProxy::batch
+    * @covers WindowsAzure\Services\Table\TableRestProxy::batch
     */
     public function testBatchInsertWorks() {
         // Arrange
@@ -939,8 +939,8 @@ class TableServiceIntegrationTest extends IntegrationTestBase {
     }
 
     /**
-    * @covers PEAR2\WindowsAzure\Services\Table\TableRestProxy::batch
-    * @covers PEAR2\WindowsAzure\Services\Table\TableRestProxy::insertEntity
+    * @covers WindowsAzure\Services\Table\TableRestProxy::batch
+    * @covers WindowsAzure\Services\Table\TableRestProxy::insertEntity
     */
     public function testBatchUpdateWorks() {
         $this->fail('Need to implement BatchOperations');
@@ -971,8 +971,8 @@ class TableServiceIntegrationTest extends IntegrationTestBase {
     }
 
     /**
-    * @covers PEAR2\WindowsAzure\Services\Table\TableRestProxy::batch
-    * @covers PEAR2\WindowsAzure\Services\Table\TableRestProxy::insertEntity
+    * @covers WindowsAzure\Services\Table\TableRestProxy::batch
+    * @covers WindowsAzure\Services\Table\TableRestProxy::insertEntity
     */
     public function testBatchMergeWorks() {
         // Arrange
@@ -1001,7 +1001,7 @@ class TableServiceIntegrationTest extends IntegrationTestBase {
     }
 
     /**
-    * @covers PEAR2\WindowsAzure\Services\Table\TableRestProxy::batch
+    * @covers WindowsAzure\Services\Table\TableRestProxy::batch
     */
     public function testBatchInsertOrReplaceWorks() {
         // Arrange
@@ -1035,7 +1035,7 @@ class TableServiceIntegrationTest extends IntegrationTestBase {
     }
 
     /**
-    * @covers PEAR2\WindowsAzure\Services\Table\TableRestProxy::batch
+    * @covers WindowsAzure\Services\Table\TableRestProxy::batch
     */
     public function testBatchInsertOrMergeWorks() {
         // Arrange
@@ -1070,8 +1070,8 @@ class TableServiceIntegrationTest extends IntegrationTestBase {
     }
 
     /**
-    * @covers PEAR2\WindowsAzure\Services\Table\TableRestProxy::batch
-    * @covers PEAR2\WindowsAzure\Services\Table\TableRestProxy::insertEntity
+    * @covers WindowsAzure\Services\Table\TableRestProxy::batch
+    * @covers WindowsAzure\Services\Table\TableRestProxy::insertEntity
     */
     public function testBatchDeleteWorks() {
         // Arrange
@@ -1101,7 +1101,7 @@ class TableServiceIntegrationTest extends IntegrationTestBase {
     }
 
     /**
-    * @covers PEAR2\WindowsAzure\Services\Table\TableRestProxy::batch
+    * @covers WindowsAzure\Services\Table\TableRestProxy::batch
     */
     public function testBatchLotsOfInsertsWorks() {
         // Arrange
@@ -1158,8 +1158,8 @@ class TableServiceIntegrationTest extends IntegrationTestBase {
     }
 
     /**
-    * @covers PEAR2\WindowsAzure\Services\Table\TableRestProxy::batch
-    * @covers PEAR2\WindowsAzure\Services\Table\TableRestProxy::insertEntity
+    * @covers WindowsAzure\Services\Table\TableRestProxy::batch
+    * @covers WindowsAzure\Services\Table\TableRestProxy::insertEntity
     */
     public function testBatchAllOperationsTogetherWorks() {
         // Arrange
@@ -1270,9 +1270,9 @@ class TableServiceIntegrationTest extends IntegrationTestBase {
     }
 
     /**
-    * @covers PEAR2\WindowsAzure\Services\Queue\QueueRestProxy::batch
-    * @covers PEAR2\WindowsAzure\Services\Queue\QueueRestProxy::insertEntity
-    * @covers PEAR2\WindowsAzure\Services\Queue\QueueRestProxy::updateEntity
+    * @covers WindowsAzure\Services\Queue\QueueRestProxy::batch
+    * @covers WindowsAzure\Services\Queue\QueueRestProxy::insertEntity
+    * @covers WindowsAzure\Services\Queue\QueueRestProxy::updateEntity
     */
     public function testBatchNegativeWorks() {
         // Arrange

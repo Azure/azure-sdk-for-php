@@ -15,21 +15,21 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   PEAR2\Tests\Unit\WindowsAzure\Services\Queue\Models
+ * @package   Tests\Unit\WindowsAzure\Services\Queue\Models
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
 
-namespace PEAR2\Tests\Unit\WindowsAzure\Services\Queue\Models;
-use PEAR2\WindowsAzure\Services\Queue\Models\QueueServiceOptions;
+namespace Tests\Unit\WindowsAzure\Services\Queue\Models;
+use WindowsAzure\Services\Queue\Models\QueueServiceOptions;
 
 /**
  * Unit tests for class QueueServiceOptions
  *
  * @category  Microsoft
- * @package   PEAR2\Tests\Unit\WindowsAzure\Services\Queue\Models
+ * @package   Tests\Unit\WindowsAzure\Services\Queue\Models
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
@@ -39,7 +39,7 @@ use PEAR2\WindowsAzure\Services\Queue\Models\QueueServiceOptions;
 class QueueServiceOptionsTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @covers PEAR2\WindowsAzure\Services\Queue\Models\QueueServiceOptions::setTimeout
+     * @covers WindowsAzure\Services\Queue\Models\QueueServiceOptions::setTimeout
      */
     public function testSetTimeout()
     {
@@ -55,7 +55,7 @@ class QueueServiceOptionsTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers PEAR2\WindowsAzure\Services\Queue\Models\QueueServiceOptions::getTimeout
+     * @covers WindowsAzure\Services\Queue\Models\QueueServiceOptions::getTimeout
      */
     public function testGetTimeout()
     {

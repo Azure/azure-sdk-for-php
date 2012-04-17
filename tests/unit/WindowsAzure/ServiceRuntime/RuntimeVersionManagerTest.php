@@ -15,25 +15,25 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   PEAR2\Tests\Unit\WindowsAzure\ServiceRuntime
+ * @package   Tests\Unit\WindowsAzure\ServiceRuntime
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
-namespace PEAR2\Tests\Unit\WindowsAzure\ServiceRuntime;
-use PEAR2\Tests\Framework\TestResources;
-use PEAR2\WindowsAzure\Core\WindowsAzureUtilities;
-use PEAR2\WindowsAzure\ServiceRuntime\FileInputChannel;
-use PEAR2\WindowsAzure\ServiceRuntime\RuntimeVersionProtocolClient;
-use PEAR2\WindowsAzure\ServiceRuntime\RuntimeVersionManager;
-use PEAR2\WindowsAzure\Resources;
+namespace Tests\Unit\WindowsAzure\ServiceRuntime;
+use Tests\Framework\TestResources;
+use WindowsAzure\Core\WindowsAzureUtilities;
+use WindowsAzure\ServiceRuntime\FileInputChannel;
+use WindowsAzure\ServiceRuntime\RuntimeVersionProtocolClient;
+use WindowsAzure\ServiceRuntime\RuntimeVersionManager;
+use WindowsAzure\Resources;
 
 /**
  * Unit tests for class RuntimeVersionManager.
  *
  * @category  Microsoft
- * @package   PEAR2\Tests\Unit\WindowsAzure\ServiceRuntime
+ * @package   Tests\Unit\WindowsAzure\ServiceRuntime
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
@@ -43,7 +43,7 @@ use PEAR2\WindowsAzure\Resources;
 class RuntimeVersionManagerTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @covers PEAR2\WindowsAzure\ServiceRuntime\RuntimeVersionManager::__construct
+     * @covers WindowsAzure\ServiceRuntime\RuntimeVersionManager::__construct
      */
     public function testConstruct()
     {
@@ -52,12 +52,12 @@ class RuntimeVersionManagerTest extends \PHPUnit_Framework_TestCase
         
         // Test
         $this->assertInstanceOf(
-            'PEAR2\\WindowsAzure\\ServiceRuntime\\RuntimeVersionManager',
+            '\WindowsAzure\\ServiceRuntime\\RuntimeVersionManager',
             $runtimeVersionManager);
     }
     
     /**
-     * @covers PEAR2\WindowsAzure\ServiceRuntime\RuntimeVersionManager::getRuntimeClient
+     * @covers WindowsAzure\ServiceRuntime\RuntimeVersionManager::getRuntimeClient
      */
     public function testGetRuntimeClient()
     {

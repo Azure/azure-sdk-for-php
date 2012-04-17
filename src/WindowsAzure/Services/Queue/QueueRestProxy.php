@@ -15,42 +15,42 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   PEAR2\WindowsAzure\Services\Queue
+ * @package   WindowsAzure\Services\Queue
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
 
-namespace PEAR2\WindowsAzure\Services\Queue;
-use PEAR2\WindowsAzure\Services\Core\ServiceRestProxy;
-use PEAR2\WindowsAzure\Resources;
-use PEAR2\WindowsAzure\Validate;
-use PEAR2\WindowsAzure\Services\Core\Models\GetServicePropertiesResult;
-use PEAR2\WindowsAzure\Services\Core\Models\ServiceProperties;
-use PEAR2\WindowsAzure\Services\Queue\Models\ListQueuesOptions;
-use PEAR2\WindowsAzure\Services\Queue\Models\ListQueuesResult;
-use PEAR2\WindowsAzure\Services\Queue\Models\CreateQueueOptions;
-use PEAR2\WindowsAzure\Services\Queue\Models\QueueServiceOptions;
-use PEAR2\WindowsAzure\Services\Queue\Models\GetQueueMetadataResult;
-use PEAR2\WindowsAzure\Services\Queue\Models\CreateMessageOptions;
-use PEAR2\WindowsAzure\Services\Queue\Models\QueueMessage;
-use PEAR2\WindowsAzure\Services\Queue\Models\ListMessagesOptions;
-use PEAR2\WindowsAzure\Services\Queue\Models\ListMessagesResult;
-use PEAR2\WindowsAzure\Services\Queue\Models\PeekMessagesOptions;
-use PEAR2\WindowsAzure\Services\Queue\Models\PeekMessagesResult;
-use PEAR2\WindowsAzure\Services\Queue\Models\UpdateMessageResult;
-use PEAR2\WindowsAzure\Core\IHttpClient;
-use PEAR2\WindowsAzure\Utilities;
-use PEAR2\WindowsAzure\Core\Url;
-use PEAR2\WindowsAzure\Core\WindowsAzureUtilities;
+namespace WindowsAzure\Services\Queue;
+use WindowsAzure\Services\Core\ServiceRestProxy;
+use WindowsAzure\Resources;
+use WindowsAzure\Validate;
+use WindowsAzure\Services\Core\Models\GetServicePropertiesResult;
+use WindowsAzure\Services\Core\Models\ServiceProperties;
+use WindowsAzure\Services\Queue\Models\ListQueuesOptions;
+use WindowsAzure\Services\Queue\Models\ListQueuesResult;
+use WindowsAzure\Services\Queue\Models\CreateQueueOptions;
+use WindowsAzure\Services\Queue\Models\QueueServiceOptions;
+use WindowsAzure\Services\Queue\Models\GetQueueMetadataResult;
+use WindowsAzure\Services\Queue\Models\CreateMessageOptions;
+use WindowsAzure\Services\Queue\Models\QueueMessage;
+use WindowsAzure\Services\Queue\Models\ListMessagesOptions;
+use WindowsAzure\Services\Queue\Models\ListMessagesResult;
+use WindowsAzure\Services\Queue\Models\PeekMessagesOptions;
+use WindowsAzure\Services\Queue\Models\PeekMessagesResult;
+use WindowsAzure\Services\Queue\Models\UpdateMessageResult;
+use WindowsAzure\Core\IHttpClient;
+use WindowsAzure\Utilities;
+use WindowsAzure\Core\Url;
+use WindowsAzure\Core\WindowsAzureUtilities;
 
 /**
  * This class constructs HTTP requests and receive HTTP responses for queue 
  * service layer.
  *
  * @category  Microsoft
- * @package   PEAR2\WindowsAzure\Services\Queue
+ * @package   WindowsAzure\Services\Queue
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
@@ -64,7 +64,7 @@ class QueueRestProxy extends ServiceRestProxy implements IQueue
      * 
      * @param ListQueuesOptions $listQueuesOptions Optional list queue options.
      * 
-     * @return PEAR2\WindowsAzure\Services\Queue\Models\ListQueuesResult.
+     * @return WindowsAzure\Services\Queue\Models\ListQueuesResult.
      */
     public function listQueues($listQueuesOptions = null)
     {
@@ -262,7 +262,7 @@ class QueueRestProxy extends ServiceRestProxy implements IQueue
      * @param string              $queueName           Name of the queue.
      * @param QueueServiceOptions $queueServiceOptions Optional queue service options
      * 
-     * @return PEAR2\WindowsAzure\Services\Queue\Models\GetQueueMetadataResult.
+     * @return WindowsAzure\Services\Queue\Models\GetQueueMetadataResult.
      */
     public function getQueueMetadata($queueName, $queueServiceOptions = null)
     {
@@ -296,10 +296,10 @@ class QueueRestProxy extends ServiceRestProxy implements IQueue
     /**
      * Gets the properties of the Queue service.
      * 
-     * @param PEAR2\WindowsAzure\Services\Queue\Models\QueueServiceOptions 
+     * @param WindowsAzure\Services\Queue\Models\QueueServiceOptions 
      * $queueServiceOptions optional queue service options.
      * 
-     * @return PEAR2\WindowsAzure\Services\Core\Models\GetServicePropertiesResult
+     * @return WindowsAzure\Services\Core\Models\GetServicePropertiesResult
      */
     public function getServiceProperties($queueServiceOptions = null)
     {
@@ -329,7 +329,7 @@ class QueueRestProxy extends ServiceRestProxy implements IQueue
      * @param string              $queueName           Name of the queue.
      * @param ListMessagesOptions $listMessagesOptions Optional list messages options
      * 
-     * @return PEAR2\WindowsAzure\Services\Queue\Models\ListMessagesResult.
+     * @return WindowsAzure\Services\Queue\Models\ListMessagesResult.
      */
     public function listMessages($queueName, $listMessagesOptions = null)
     {
@@ -362,7 +362,7 @@ class QueueRestProxy extends ServiceRestProxy implements IQueue
      * @param string              $queueName           Name of the queue.
      * @param PeekMessagesOptions $peekMessagesOptions Optional peek messages options
      * 
-     * @return PEAR2\WindowsAzure\Services\Queue\Models\PeekMessagesResult.
+     * @return WindowsAzure\Services\Queue\Models\PeekMessagesResult.
      */
     public function peekMessages($queueName, $peekMessagesOptions = null)
     {
@@ -471,7 +471,7 @@ class QueueRestProxy extends ServiceRestProxy implements IQueue
      * @param QueueServiceOptions $queueServiceOptions        Optional queue 
      * service options
      * 
-     * @return PEAR2\WindowsAzure\Services\Queue\Models\UpdateMessageResult.
+     * @return WindowsAzure\Services\Queue\Models\UpdateMessageResult.
      */
     public function updateMessage($queueName, $messageId, $popReceipt, $messageText, 
         $visibilityTimeoutInSeconds, $queueServiceOptions = null

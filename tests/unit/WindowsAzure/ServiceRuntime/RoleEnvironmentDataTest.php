@@ -15,22 +15,22 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   PEAR2\Tests\Unit\WindowsAzure\ServiceRuntime
+ * @package   Tests\Unit\WindowsAzure\ServiceRuntime
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
-namespace PEAR2\Tests\Unit\WindowsAzure\ServiceRuntime;
-use PEAR2\Tests\Framework\TestResources;
-use PEAR2\WindowsAzure\ServiceRuntime\RoleEnvironmentData;
-use PEAR2\WindowsAzure\ServiceRuntime\RoleInstance;
+namespace Tests\Unit\WindowsAzure\ServiceRuntime;
+use Tests\Framework\TestResources;
+use WindowsAzure\ServiceRuntime\RoleEnvironmentData;
+use WindowsAzure\ServiceRuntime\RoleInstance;
 
 /**
  * Unit tests for class RoleEnvironmentData.
  *
  * @category  Microsoft
- * @package   PEAR2\Tests\Unit\WindowsAzure\ServiceRuntime
+ * @package   Tests\Unit\WindowsAzure\ServiceRuntime
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
@@ -40,13 +40,13 @@ use PEAR2\WindowsAzure\ServiceRuntime\RoleInstance;
 class RoleEnvironmentDataTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @covers PEAR2\WindowsAzure\ServiceRuntime\RoleEnvironmentData::__construct
-     * @covers PEAR2\WindowsAzure\ServiceRuntime\RoleEnvironmentData::getDeploymentId
-     * @covers PEAR2\WindowsAzure\ServiceRuntime\RoleEnvironmentData::getConfigurationSettings
-     * @covers PEAR2\WindowsAzure\ServiceRuntime\RoleEnvironmentData::getLocalResources
-     * @covers PEAR2\WindowsAzure\ServiceRuntime\RoleEnvironmentData::getCurrentInstance
-     * @covers PEAR2\WindowsAzure\ServiceRuntime\RoleEnvironmentData::getRoles
-     * @covers PEAR2\WindowsAzure\ServiceRuntime\RoleEnvironmentData::isEmulated
+     * @covers WindowsAzure\ServiceRuntime\RoleEnvironmentData::__construct
+     * @covers WindowsAzure\ServiceRuntime\RoleEnvironmentData::getDeploymentId
+     * @covers WindowsAzure\ServiceRuntime\RoleEnvironmentData::getConfigurationSettings
+     * @covers WindowsAzure\ServiceRuntime\RoleEnvironmentData::getLocalResources
+     * @covers WindowsAzure\ServiceRuntime\RoleEnvironmentData::getCurrentInstance
+     * @covers WindowsAzure\ServiceRuntime\RoleEnvironmentData::getRoles
+     * @covers WindowsAzure\ServiceRuntime\RoleEnvironmentData::isEmulated
      */
     public function testGetters()
     {

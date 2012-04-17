@@ -15,37 +15,37 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   PEAR2\Tests\Unit\WindowsAzure\Services\Table
+ * @package   Tests\Unit\WindowsAzure\Services\Table
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
 
-namespace PEAR2\Tests\Unit\WindowsAzure\Services\Table;
-use PEAR2\WindowsAzure\Core\HttpClient;
-use PEAR2\WindowsAzure\Services\Table\Utilities\AtomReaderWriter;
-use PEAR2\WindowsAzure\Services\Table\Utilities\MimeReaderWriter;
-use PEAR2\Tests\Framework\TableServiceRestProxyTestBase;
-use PEAR2\WindowsAzure\Core\WindowsAzureUtilities;
-use PEAR2\WindowsAzure\Core\ServiceException;
-use PEAR2\Tests\Framework\TestResources;
-use PEAR2\WindowsAzure\Resources;
-use PEAR2\WindowsAzure\Services\Table\TableRestProxy;
-use PEAR2\WindowsAzure\Services\Core\Models\ServiceProperties;
-use PEAR2\WindowsAzure\Services\Table\Models\QueryTablesOptions;
-use PEAR2\WindowsAzure\Services\Table\Models\Query;
-use PEAR2\WindowsAzure\Services\Table\Models\Filters\Filter;
-use PEAR2\WindowsAzure\Services\Table\Models\Entity;
-use PEAR2\WindowsAzure\Services\Table\Models\EdmType;
-use PEAR2\WindowsAzure\Services\Table\Models\QueryEntitiesOptions;
-use PEAR2\WindowsAzure\Services\Table\Models\BatchOperations;
+namespace Tests\Unit\WindowsAzure\Services\Table;
+use WindowsAzure\Core\HttpClient;
+use WindowsAzure\Services\Table\Utilities\AtomReaderWriter;
+use WindowsAzure\Services\Table\Utilities\MimeReaderWriter;
+use Tests\Framework\TableServiceRestProxyTestBase;
+use WindowsAzure\Core\WindowsAzureUtilities;
+use WindowsAzure\Core\ServiceException;
+use Tests\Framework\TestResources;
+use WindowsAzure\Resources;
+use WindowsAzure\Services\Table\TableRestProxy;
+use WindowsAzure\Services\Core\Models\ServiceProperties;
+use WindowsAzure\Services\Table\Models\QueryTablesOptions;
+use WindowsAzure\Services\Table\Models\Query;
+use WindowsAzure\Services\Table\Models\Filters\Filter;
+use WindowsAzure\Services\Table\Models\Entity;
+use WindowsAzure\Services\Table\Models\EdmType;
+use WindowsAzure\Services\Table\Models\QueryEntitiesOptions;
+use WindowsAzure\Services\Table\Models\BatchOperations;
 
 /**
  * Unit tests for class TableRestProxy
  *
  * @category  Microsoft
- * @package   PEAR2\Tests\Unit\WindowsAzure\Services\Table
+ * @package   Tests\Unit\WindowsAzure\Services\Table
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
@@ -70,8 +70,8 @@ class TableRestProxyTest extends TableServiceRestProxyTestBase
     }
     
     /**
-     * @covers PEAR2\WindowsAzure\Services\Table\TableRestProxy::getServiceProperties
-     * @covers PEAR2\WindowsAzure\Services\Core\ServiceRestProxy::sendContext
+     * @covers WindowsAzure\Services\Table\TableRestProxy::getServiceProperties
+     * @covers WindowsAzure\Services\Core\ServiceRestProxy::sendContext
     */
     public function testGetServiceProperties()
     {
@@ -87,8 +87,8 @@ class TableRestProxyTest extends TableServiceRestProxyTestBase
     }
     
     /**
-     * @covers PEAR2\WindowsAzure\Services\Table\TableRestProxy::setServiceProperties
-     * @covers PEAR2\WindowsAzure\Services\Core\ServiceRestProxy::sendContext
+     * @covers WindowsAzure\Services\Table\TableRestProxy::setServiceProperties
+     * @covers WindowsAzure\Services\Core\ServiceRestProxy::sendContext
     */
     public function testSetServiceProperties()
     {
@@ -108,10 +108,10 @@ class TableRestProxyTest extends TableServiceRestProxyTestBase
     }
     
     /**
-     * @covers PEAR2\WindowsAzure\Services\Table\TableRestProxy::createTable
-     * @covers PEAR2\WindowsAzure\Services\Table\Utilities\AtomReaderWriter::_fillTemplate
-     * @covers PEAR2\WindowsAzure\Services\Table\Utilities\AtomReaderWriter::getTable
-     * @covers PEAR2\WindowsAzure\Services\Core\ServiceRestProxy::sendContext
+     * @covers WindowsAzure\Services\Table\TableRestProxy::createTable
+     * @covers WindowsAzure\Services\Table\Utilities\AtomReaderWriter::_fillTemplate
+     * @covers WindowsAzure\Services\Table\Utilities\AtomReaderWriter::getTable
+     * @covers WindowsAzure\Services\Core\ServiceRestProxy::sendContext
      */
     public function testCreateTable()
     {
@@ -127,11 +127,11 @@ class TableRestProxyTest extends TableServiceRestProxyTestBase
     }
     
     /**
-     * @covers PEAR2\WindowsAzure\Services\Table\TableRestProxy::getTable
-     * @covers PEAR2\WindowsAzure\Services\Core\ServiceRestProxy::sendContext
-     * @covers PEAR2\WindowsAzure\Services\Table\Utilities\AtomReaderWriter::parseTable
-     * @covers PEAR2\WindowsAzure\Services\Table\Utilities\AtomReaderWriter::_parseBody
-     * @covers PEAR2\WindowsAzure\Services\Table\Models\GetTableResult::create
+     * @covers WindowsAzure\Services\Table\TableRestProxy::getTable
+     * @covers WindowsAzure\Services\Core\ServiceRestProxy::sendContext
+     * @covers WindowsAzure\Services\Table\Utilities\AtomReaderWriter::parseTable
+     * @covers WindowsAzure\Services\Table\Utilities\AtomReaderWriter::_parseBody
+     * @covers WindowsAzure\Services\Table\Models\GetTableResult::create
      */
     public function testGetTable()
     {
@@ -147,8 +147,8 @@ class TableRestProxyTest extends TableServiceRestProxyTestBase
     }
     
     /**
-     * @covers PEAR2\WindowsAzure\Services\Table\TableRestProxy::deleteTable
-     * @covers PEAR2\WindowsAzure\Services\Core\ServiceRestProxy::sendContext
+     * @covers WindowsAzure\Services\Table\TableRestProxy::deleteTable
+     * @covers WindowsAzure\Services\Core\ServiceRestProxy::sendContext
      */
     public function testDeleteTable()
     {
@@ -165,16 +165,16 @@ class TableRestProxyTest extends TableServiceRestProxyTestBase
     }
     
     /**
-     * @covers PEAR2\WindowsAzure\Services\Table\TableRestProxy::queryTables
-     * @covers PEAR2\WindowsAzure\Services\Table\TableRestProxy::_buildFilterExpression
-     * @covers PEAR2\WindowsAzure\Services\Table\TableRestProxy::_buildFilterExpressionRec
-     * @covers PEAR2\WindowsAzure\Services\Table\TableRestProxy::_addOptionalQuery
-     * @covers PEAR2\WindowsAzure\Services\Table\TableRestProxy::_encodeODataUriValues
-     * @covers PEAR2\WindowsAzure\Services\Table\TableRestProxy::_encodeODataUriValue
-     * @covers PEAR2\WindowsAzure\Services\Table\Models\QueryTablesResult::create
-     * @covers PEAR2\WindowsAzure\Services\Table\Utilities\AtomReaderWriter::_parseBody
-     * @covers PEAR2\WindowsAzure\Services\Table\Utilities\AtomReaderWriter::parseTableEntries
-     * @covers PEAR2\WindowsAzure\Services\Core\ServiceRestProxy::sendContext
+     * @covers WindowsAzure\Services\Table\TableRestProxy::queryTables
+     * @covers WindowsAzure\Services\Table\TableRestProxy::_buildFilterExpression
+     * @covers WindowsAzure\Services\Table\TableRestProxy::_buildFilterExpressionRec
+     * @covers WindowsAzure\Services\Table\TableRestProxy::_addOptionalQuery
+     * @covers WindowsAzure\Services\Table\TableRestProxy::_encodeODataUriValues
+     * @covers WindowsAzure\Services\Table\TableRestProxy::_encodeODataUriValue
+     * @covers WindowsAzure\Services\Table\Models\QueryTablesResult::create
+     * @covers WindowsAzure\Services\Table\Utilities\AtomReaderWriter::_parseBody
+     * @covers WindowsAzure\Services\Table\Utilities\AtomReaderWriter::parseTableEntries
+     * @covers WindowsAzure\Services\Core\ServiceRestProxy::sendContext
      */
     public function testQueryTablesSimple()
     {
@@ -195,16 +195,16 @@ class TableRestProxyTest extends TableServiceRestProxyTestBase
     }
     
     /**
-     * @covers PEAR2\WindowsAzure\Services\Table\TableRestProxy::queryTables
-     * @covers PEAR2\WindowsAzure\Services\Table\TableRestProxy::_buildFilterExpression
-     * @covers PEAR2\WindowsAzure\Services\Table\TableRestProxy::_buildFilterExpressionRec
-     * @covers PEAR2\WindowsAzure\Services\Table\TableRestProxy::_addOptionalQuery
-     * @covers PEAR2\WindowsAzure\Services\Table\TableRestProxy::_encodeODataUriValues
-     * @covers PEAR2\WindowsAzure\Services\Table\TableRestProxy::_encodeODataUriValue
-     * @covers PEAR2\WindowsAzure\Services\Table\Models\QueryTablesResult::create
-     * @covers PEAR2\WindowsAzure\Services\Table\Utilities\AtomReaderWriter::_parseBody
-     * @covers PEAR2\WindowsAzure\Services\Table\Utilities\AtomReaderWriter::parseTableEntries
-     * @covers PEAR2\WindowsAzure\Services\Core\ServiceRestProxy::sendContext
+     * @covers WindowsAzure\Services\Table\TableRestProxy::queryTables
+     * @covers WindowsAzure\Services\Table\TableRestProxy::_buildFilterExpression
+     * @covers WindowsAzure\Services\Table\TableRestProxy::_buildFilterExpressionRec
+     * @covers WindowsAzure\Services\Table\TableRestProxy::_addOptionalQuery
+     * @covers WindowsAzure\Services\Table\TableRestProxy::_encodeODataUriValues
+     * @covers WindowsAzure\Services\Table\TableRestProxy::_encodeODataUriValue
+     * @covers WindowsAzure\Services\Table\Models\QueryTablesResult::create
+     * @covers WindowsAzure\Services\Table\Utilities\AtomReaderWriter::_parseBody
+     * @covers WindowsAzure\Services\Table\Utilities\AtomReaderWriter::parseTableEntries
+     * @covers WindowsAzure\Services\Core\ServiceRestProxy::sendContext
      */
     public function testQueryTablesOneTable()
     {
@@ -222,16 +222,16 @@ class TableRestProxyTest extends TableServiceRestProxyTestBase
     }
     
     /**
-     * @covers PEAR2\WindowsAzure\Services\Table\TableRestProxy::queryTables
-     * @covers PEAR2\WindowsAzure\Services\Table\TableRestProxy::_buildFilterExpression
-     * @covers PEAR2\WindowsAzure\Services\Table\TableRestProxy::_buildFilterExpressionRec
-     * @covers PEAR2\WindowsAzure\Services\Table\TableRestProxy::_addOptionalQuery
-     * @covers PEAR2\WindowsAzure\Services\Table\TableRestProxy::_encodeODataUriValues
-     * @covers PEAR2\WindowsAzure\Services\Table\TableRestProxy::_encodeODataUriValue
-     * @covers PEAR2\WindowsAzure\Services\Table\Models\QueryTablesResult::create
-     * @covers PEAR2\WindowsAzure\Services\Table\Utilities\AtomReaderWriter::_parseBody
-     * @covers PEAR2\WindowsAzure\Services\Table\Utilities\AtomReaderWriter::parseTableEntries
-     * @covers PEAR2\WindowsAzure\Services\Core\ServiceRestProxy::sendContext
+     * @covers WindowsAzure\Services\Table\TableRestProxy::queryTables
+     * @covers WindowsAzure\Services\Table\TableRestProxy::_buildFilterExpression
+     * @covers WindowsAzure\Services\Table\TableRestProxy::_buildFilterExpressionRec
+     * @covers WindowsAzure\Services\Table\TableRestProxy::_addOptionalQuery
+     * @covers WindowsAzure\Services\Table\TableRestProxy::_encodeODataUriValues
+     * @covers WindowsAzure\Services\Table\TableRestProxy::_encodeODataUriValue
+     * @covers WindowsAzure\Services\Table\Models\QueryTablesResult::create
+     * @covers WindowsAzure\Services\Table\Utilities\AtomReaderWriter::_parseBody
+     * @covers WindowsAzure\Services\Table\Utilities\AtomReaderWriter::parseTableEntries
+     * @covers WindowsAzure\Services\Core\ServiceRestProxy::sendContext
      */
     public function testQueryTablesEmpty()
     {
@@ -244,16 +244,16 @@ class TableRestProxyTest extends TableServiceRestProxyTestBase
     }
     
     /**
-     * @covers PEAR2\WindowsAzure\Services\Table\TableRestProxy::queryTables
-     * @covers PEAR2\WindowsAzure\Services\Table\TableRestProxy::_buildFilterExpression
-     * @covers PEAR2\WindowsAzure\Services\Table\TableRestProxy::_buildFilterExpressionRec
-     * @covers PEAR2\WindowsAzure\Services\Table\TableRestProxy::_addOptionalQuery
-     * @covers PEAR2\WindowsAzure\Services\Table\TableRestProxy::_encodeODataUriValues
-     * @covers PEAR2\WindowsAzure\Services\Table\TableRestProxy::_encodeODataUriValue
-     * @covers PEAR2\WindowsAzure\Services\Table\Models\QueryTablesResult::create
-     * @covers PEAR2\WindowsAzure\Services\Table\Utilities\AtomReaderWriter::_parseBody
-     * @covers PEAR2\WindowsAzure\Services\Table\Utilities\AtomReaderWriter::parseTableEntries
-     * @covers PEAR2\WindowsAzure\Services\Core\ServiceRestProxy::sendContext
+     * @covers WindowsAzure\Services\Table\TableRestProxy::queryTables
+     * @covers WindowsAzure\Services\Table\TableRestProxy::_buildFilterExpression
+     * @covers WindowsAzure\Services\Table\TableRestProxy::_buildFilterExpressionRec
+     * @covers WindowsAzure\Services\Table\TableRestProxy::_addOptionalQuery
+     * @covers WindowsAzure\Services\Table\TableRestProxy::_encodeODataUriValues
+     * @covers WindowsAzure\Services\Table\TableRestProxy::_encodeODataUriValue
+     * @covers WindowsAzure\Services\Table\Models\QueryTablesResult::create
+     * @covers WindowsAzure\Services\Table\Utilities\AtomReaderWriter::_parseBody
+     * @covers WindowsAzure\Services\Table\Utilities\AtomReaderWriter::parseTableEntries
+     * @covers WindowsAzure\Services\Core\ServiceRestProxy::sendContext
      */
     public function testQueryTablesWithPrefix()
     {
@@ -282,15 +282,15 @@ class TableRestProxyTest extends TableServiceRestProxyTestBase
     }
     
     /**
-     * @covers PEAR2\WindowsAzure\Services\Table\TableRestProxy::insertEntity
-     * @covers PEAR2\WindowsAzure\Services\Table\TableRestProxy::_constructInsertEntityContext
-     * @covers PEAR2\WindowsAzure\Services\Table\Utilities\AtomReaderWriter::_parseBody
-     * @covers PEAR2\WindowsAzure\Services\Table\Utilities\AtomReaderWriter::getEntity
-     * @covers PEAR2\WindowsAzure\Services\Table\Utilities\AtomReaderWriter::_generatePropertiesXml
-     * @covers PEAR2\WindowsAzure\Services\Table\Utilities\AtomReaderWriter::parseEntity
-     * @covers PEAR2\WindowsAzure\Services\Table\Utilities\AtomReaderWriter::_parseOneEntity
-     * PEAR2\WindowsAzure\Services\Table\Models\InsertEntityResult::create
-     * @covers PEAR2\WindowsAzure\Services\Core\ServiceRestProxy::sendContext
+     * @covers WindowsAzure\Services\Table\TableRestProxy::insertEntity
+     * @covers WindowsAzure\Services\Table\TableRestProxy::_constructInsertEntityContext
+     * @covers WindowsAzure\Services\Table\Utilities\AtomReaderWriter::_parseBody
+     * @covers WindowsAzure\Services\Table\Utilities\AtomReaderWriter::getEntity
+     * @covers WindowsAzure\Services\Table\Utilities\AtomReaderWriter::_generatePropertiesXml
+     * @covers WindowsAzure\Services\Table\Utilities\AtomReaderWriter::parseEntity
+     * @covers WindowsAzure\Services\Table\Utilities\AtomReaderWriter::_parseOneEntity
+     * WindowsAzure\Services\Table\Models\InsertEntityResult::create
+     * @covers WindowsAzure\Services\Core\ServiceRestProxy::sendContext
      */
     public function testInsertEntity()
     {
@@ -310,11 +310,11 @@ class TableRestProxyTest extends TableServiceRestProxyTestBase
     }
     
     /**
-     * @covers PEAR2\WindowsAzure\Services\Table\TableRestProxy::queryEntities
-     * @covers PEAR2\WindowsAzure\Services\Table\Utilities\AtomReaderWriter::_parseBody
-     * @covers PEAR2\WindowsAzure\Services\Table\Utilities\AtomReaderWriter::parseEntities
-     * @covers PEAR2\WindowsAzure\Services\Table\Utilities\AtomReaderWriter::_parseOneEntity
-     * @covers PEAR2\WindowsAzure\Services\Core\ServiceRestProxy::sendContext
+     * @covers WindowsAzure\Services\Table\TableRestProxy::queryEntities
+     * @covers WindowsAzure\Services\Table\Utilities\AtomReaderWriter::_parseBody
+     * @covers WindowsAzure\Services\Table\Utilities\AtomReaderWriter::parseEntities
+     * @covers WindowsAzure\Services\Table\Utilities\AtomReaderWriter::_parseOneEntity
+     * @covers WindowsAzure\Services\Core\ServiceRestProxy::sendContext
      */
     public function testQueryEntitiesWithEmpty()
     {
@@ -332,11 +332,11 @@ class TableRestProxyTest extends TableServiceRestProxyTestBase
     }
     
     /**
-     * @covers PEAR2\WindowsAzure\Services\Table\TableRestProxy::queryEntities
-     * @covers PEAR2\WindowsAzure\Services\Table\Utilities\AtomReaderWriter::_parseBody
-     * @covers PEAR2\WindowsAzure\Services\Table\Utilities\AtomReaderWriter::parseEntities
-     * @covers PEAR2\WindowsAzure\Services\Table\Utilities\AtomReaderWriter::_parseOneEntity
-     * @covers PEAR2\WindowsAzure\Services\Core\ServiceRestProxy::sendContext
+     * @covers WindowsAzure\Services\Table\TableRestProxy::queryEntities
+     * @covers WindowsAzure\Services\Table\Utilities\AtomReaderWriter::_parseBody
+     * @covers WindowsAzure\Services\Table\Utilities\AtomReaderWriter::parseEntities
+     * @covers WindowsAzure\Services\Table\Utilities\AtomReaderWriter::_parseOneEntity
+     * @covers WindowsAzure\Services\Core\ServiceRestProxy::sendContext
      */
     public function testQueryEntitiesWithOneEntity()
     {
@@ -357,14 +357,14 @@ class TableRestProxyTest extends TableServiceRestProxyTestBase
     }
     
     /**
-     * @covers PEAR2\WindowsAzure\Services\Table\TableRestProxy::queryEntities
-     * @covers PEAR2\WindowsAzure\Services\Table\TableRestProxy::_addOptionalQuery
-     * @covers PEAR2\WindowsAzure\Services\Table\TableRestProxy::_encodeODataUriValues
-     * @covers PEAR2\WindowsAzure\Services\Table\TableRestProxy::_encodeODataUriValue
-     * @covers PEAR2\WindowsAzure\Services\Table\Utilities\AtomReaderWriter::_parseBody
-     * @covers PEAR2\WindowsAzure\Services\Table\Utilities\AtomReaderWriter::parseEntities
-     * @covers PEAR2\WindowsAzure\Services\Table\Utilities\AtomReaderWriter::_parseOneEntity
-     * @covers PEAR2\WindowsAzure\Services\Core\ServiceRestProxy::sendContext
+     * @covers WindowsAzure\Services\Table\TableRestProxy::queryEntities
+     * @covers WindowsAzure\Services\Table\TableRestProxy::_addOptionalQuery
+     * @covers WindowsAzure\Services\Table\TableRestProxy::_encodeODataUriValues
+     * @covers WindowsAzure\Services\Table\TableRestProxy::_encodeODataUriValue
+     * @covers WindowsAzure\Services\Table\Utilities\AtomReaderWriter::_parseBody
+     * @covers WindowsAzure\Services\Table\Utilities\AtomReaderWriter::parseEntities
+     * @covers WindowsAzure\Services\Table\Utilities\AtomReaderWriter::_parseOneEntity
+     * @covers WindowsAzure\Services\Core\ServiceRestProxy::sendContext
      */
     public function testQueryEntitiesWithMultipleEntities()
     {
@@ -404,14 +404,14 @@ class TableRestProxyTest extends TableServiceRestProxyTestBase
     }
     
     /**
-     * @covers PEAR2\WindowsAzure\Services\Table\TableRestProxy::queryEntities
-     * @covers PEAR2\WindowsAzure\Services\Table\TableRestProxy::_addOptionalQuery
-     * @covers PEAR2\WindowsAzure\Services\Table\TableRestProxy::_encodeODataUriValues
-     * @covers PEAR2\WindowsAzure\Services\Table\TableRestProxy::_encodeODataUriValue
-     * @covers PEAR2\WindowsAzure\Services\Table\Utilities\AtomReaderWriter::_parseBody
-     * @covers PEAR2\WindowsAzure\Services\Table\Utilities\AtomReaderWriter::parseEntities
-     * @covers PEAR2\WindowsAzure\Services\Table\Utilities\AtomReaderWriter::_parseOneEntity
-     * @covers PEAR2\WindowsAzure\Services\Core\ServiceRestProxy::sendContext
+     * @covers WindowsAzure\Services\Table\TableRestProxy::queryEntities
+     * @covers WindowsAzure\Services\Table\TableRestProxy::_addOptionalQuery
+     * @covers WindowsAzure\Services\Table\TableRestProxy::_encodeODataUriValues
+     * @covers WindowsAzure\Services\Table\TableRestProxy::_encodeODataUriValue
+     * @covers WindowsAzure\Services\Table\Utilities\AtomReaderWriter::_parseBody
+     * @covers WindowsAzure\Services\Table\Utilities\AtomReaderWriter::parseEntities
+     * @covers WindowsAzure\Services\Table\Utilities\AtomReaderWriter::_parseOneEntity
+     * @covers WindowsAzure\Services\Core\ServiceRestProxy::sendContext
      */
     public function testQueryEntitiesWithGetTop()
     {
@@ -442,15 +442,15 @@ class TableRestProxyTest extends TableServiceRestProxyTestBase
     }
     
     /**
-     * @covers PEAR2\WindowsAzure\Services\Table\TableRestProxy::updateEntity
-     * @covers PEAR2\WindowsAzure\Services\Table\TableRestProxy::_getEntityPath
-     * @covers PEAR2\WindowsAzure\Services\Table\TableRestProxy::_putOrMergeEntityImpl
-     * @covers PEAR2\WindowsAzure\Services\Table\TableRestProxy::_constructPutOrMergeEntityContext
-     * @covers PEAR2\WindowsAzure\Services\Table\Utilities\AtomReaderWriter::_parseBody
-     * @covers PEAR2\WindowsAzure\Services\Table\Utilities\AtomReaderWriter::getEntity
-     * @covers PEAR2\WindowsAzure\Services\Table\Utilities\AtomReaderWriter::_generatePropertiesXml
-     * @covers PEAR2\WindowsAzure\Services\Table\Models\UpdateEntityResult::create
-     * @covers PEAR2\WindowsAzure\Services\Core\ServiceRestProxy::sendContext
+     * @covers WindowsAzure\Services\Table\TableRestProxy::updateEntity
+     * @covers WindowsAzure\Services\Table\TableRestProxy::_getEntityPath
+     * @covers WindowsAzure\Services\Table\TableRestProxy::_putOrMergeEntityImpl
+     * @covers WindowsAzure\Services\Table\TableRestProxy::_constructPutOrMergeEntityContext
+     * @covers WindowsAzure\Services\Table\Utilities\AtomReaderWriter::_parseBody
+     * @covers WindowsAzure\Services\Table\Utilities\AtomReaderWriter::getEntity
+     * @covers WindowsAzure\Services\Table\Utilities\AtomReaderWriter::_generatePropertiesXml
+     * @covers WindowsAzure\Services\Table\Models\UpdateEntityResult::create
+     * @covers WindowsAzure\Services\Core\ServiceRestProxy::sendContext
      */
     public function testUpdateEntity()
     {
@@ -477,15 +477,15 @@ class TableRestProxyTest extends TableServiceRestProxyTestBase
     }
     
     /**
-     * @covers PEAR2\WindowsAzure\Services\Table\TableRestProxy::mergeEntity
-     * @covers PEAR2\WindowsAzure\Services\Table\TableRestProxy::_getEntityPath
-     * @covers PEAR2\WindowsAzure\Services\Table\TableRestProxy::_putOrMergeEntityImpl
-     * @covers PEAR2\WindowsAzure\Services\Table\TableRestProxy::_constructPutOrMergeEntityContext
-     * @covers PEAR2\WindowsAzure\Services\Table\Utilities\AtomReaderWriter::_parseBody
-     * @covers PEAR2\WindowsAzure\Services\Table\Utilities\AtomReaderWriter::getEntity
-     * @covers PEAR2\WindowsAzure\Services\Table\Utilities\AtomReaderWriter::_generatePropertiesXml
-     * @covers PEAR2\WindowsAzure\Services\Table\Models\UpdateEntityResult::create
-     * @covers PEAR2\WindowsAzure\Services\Core\ServiceRestProxy::sendContext
+     * @covers WindowsAzure\Services\Table\TableRestProxy::mergeEntity
+     * @covers WindowsAzure\Services\Table\TableRestProxy::_getEntityPath
+     * @covers WindowsAzure\Services\Table\TableRestProxy::_putOrMergeEntityImpl
+     * @covers WindowsAzure\Services\Table\TableRestProxy::_constructPutOrMergeEntityContext
+     * @covers WindowsAzure\Services\Table\Utilities\AtomReaderWriter::_parseBody
+     * @covers WindowsAzure\Services\Table\Utilities\AtomReaderWriter::getEntity
+     * @covers WindowsAzure\Services\Table\Utilities\AtomReaderWriter::_generatePropertiesXml
+     * @covers WindowsAzure\Services\Table\Models\UpdateEntityResult::create
+     * @covers WindowsAzure\Services\Core\ServiceRestProxy::sendContext
      */
     public function testMergeEntity()
     {
@@ -512,15 +512,15 @@ class TableRestProxyTest extends TableServiceRestProxyTestBase
     }
     
     /**
-     * @covers PEAR2\WindowsAzure\Services\Table\TableRestProxy::insertOrReplaceEntity
-     * @covers PEAR2\WindowsAzure\Services\Table\TableRestProxy::_getEntityPath
-     * @covers PEAR2\WindowsAzure\Services\Table\TableRestProxy::_putOrMergeEntityImpl
-     * @covers PEAR2\WindowsAzure\Services\Table\TableRestProxy::_constructPutOrMergeEntityContext
-     * @covers PEAR2\WindowsAzure\Services\Table\Utilities\AtomReaderWriter::_parseBody
-     * @covers PEAR2\WindowsAzure\Services\Table\Utilities\AtomReaderWriter::getEntity
-     * @covers PEAR2\WindowsAzure\Services\Table\Utilities\AtomReaderWriter::_generatePropertiesXml
-     * @covers PEAR2\WindowsAzure\Services\Table\Models\UpdateEntityResult::create
-     * @covers PEAR2\WindowsAzure\Services\Core\ServiceRestProxy::sendContext
+     * @covers WindowsAzure\Services\Table\TableRestProxy::insertOrReplaceEntity
+     * @covers WindowsAzure\Services\Table\TableRestProxy::_getEntityPath
+     * @covers WindowsAzure\Services\Table\TableRestProxy::_putOrMergeEntityImpl
+     * @covers WindowsAzure\Services\Table\TableRestProxy::_constructPutOrMergeEntityContext
+     * @covers WindowsAzure\Services\Table\Utilities\AtomReaderWriter::_parseBody
+     * @covers WindowsAzure\Services\Table\Utilities\AtomReaderWriter::getEntity
+     * @covers WindowsAzure\Services\Table\Utilities\AtomReaderWriter::_generatePropertiesXml
+     * @covers WindowsAzure\Services\Table\Models\UpdateEntityResult::create
+     * @covers WindowsAzure\Services\Core\ServiceRestProxy::sendContext
      */
     public function testInsertOrReplaceEntity()
     {
@@ -547,15 +547,15 @@ class TableRestProxyTest extends TableServiceRestProxyTestBase
     }
     
     /**
-     * @covers PEAR2\WindowsAzure\Services\Table\TableRestProxy::InsertOrMergeEntity
-     * @covers PEAR2\WindowsAzure\Services\Table\TableRestProxy::_getEntityPath
-     * @covers PEAR2\WindowsAzure\Services\Table\TableRestProxy::_putOrMergeEntityImpl
-     * @covers PEAR2\WindowsAzure\Services\Table\TableRestProxy::_constructPutOrMergeEntityContext
-     * @covers PEAR2\WindowsAzure\Services\Table\Utilities\AtomReaderWriter::_parseBody
-     * @covers PEAR2\WindowsAzure\Services\Table\Utilities\AtomReaderWriter::getEntity
-     * @covers PEAR2\WindowsAzure\Services\Table\Utilities\AtomReaderWriter::_generatePropertiesXml
-     * @covers PEAR2\WindowsAzure\Services\Table\Models\UpdateEntityResult::create
-     * @covers PEAR2\WindowsAzure\Services\Core\ServiceRestProxy::sendContext
+     * @covers WindowsAzure\Services\Table\TableRestProxy::InsertOrMergeEntity
+     * @covers WindowsAzure\Services\Table\TableRestProxy::_getEntityPath
+     * @covers WindowsAzure\Services\Table\TableRestProxy::_putOrMergeEntityImpl
+     * @covers WindowsAzure\Services\Table\TableRestProxy::_constructPutOrMergeEntityContext
+     * @covers WindowsAzure\Services\Table\Utilities\AtomReaderWriter::_parseBody
+     * @covers WindowsAzure\Services\Table\Utilities\AtomReaderWriter::getEntity
+     * @covers WindowsAzure\Services\Table\Utilities\AtomReaderWriter::_generatePropertiesXml
+     * @covers WindowsAzure\Services\Table\Models\UpdateEntityResult::create
+     * @covers WindowsAzure\Services\Core\ServiceRestProxy::sendContext
      */
     public function testInsertOrMergeEntity()
     {
@@ -582,10 +582,10 @@ class TableRestProxyTest extends TableServiceRestProxyTestBase
     }
     
     /**
-     * @covers PEAR2\WindowsAzure\Services\Table\TableRestProxy::deleteEntity
-     * @covers PEAR2\WindowsAzure\Services\Table\TableRestProxy::_getEntityPath
-     * @covers PEAR2\WindowsAzure\Services\Table\TableRestProxy::_constructDeleteEntityContext
-     * @covers PEAR2\WindowsAzure\Services\Core\ServiceRestProxy::sendContext
+     * @covers WindowsAzure\Services\Table\TableRestProxy::deleteEntity
+     * @covers WindowsAzure\Services\Table\TableRestProxy::_getEntityPath
+     * @covers WindowsAzure\Services\Table\TableRestProxy::_constructDeleteEntityContext
+     * @covers WindowsAzure\Services\Core\ServiceRestProxy::sendContext
      */
     public function testDeleteEntity()
     {
@@ -607,11 +607,11 @@ class TableRestProxyTest extends TableServiceRestProxyTestBase
     }
     
     /**
-     * @covers PEAR2\WindowsAzure\Services\Table\TableRestProxy::getEntity
-     * @covers PEAR2\WindowsAzure\Services\Table\Utilities\AtomReaderWriter::_parseBody
-     * @covers PEAR2\WindowsAzure\Services\Table\Utilities\AtomReaderWriter::parseEntity
-     * @covers PEAR2\WindowsAzure\Services\Table\Utilities\AtomReaderWriter::_parseOneEntity
-     * @covers PEAR2\WindowsAzure\Services\Core\ServiceRestProxy::sendContext
+     * @covers WindowsAzure\Services\Table\TableRestProxy::getEntity
+     * @covers WindowsAzure\Services\Table\Utilities\AtomReaderWriter::_parseBody
+     * @covers WindowsAzure\Services\Table\Utilities\AtomReaderWriter::parseEntity
+     * @covers WindowsAzure\Services\Table\Utilities\AtomReaderWriter::_parseOneEntity
+     * @covers WindowsAzure\Services\Core\ServiceRestProxy::sendContext
      */
     public function testGetEntity()
     {
@@ -634,17 +634,17 @@ class TableRestProxyTest extends TableServiceRestProxyTestBase
     }
     
     /**
-     * @covers PEAR2\WindowsAzure\Services\Table\TableRestProxy::batch
-     * @covers PEAR2\WindowsAzure\Services\Table\TableRestProxy::_createBatchRequestBody
-     * @covers PEAR2\WindowsAzure\Services\Table\TableRestProxy::_getOperationContext
-     * @covers PEAR2\WindowsAzure\Services\Table\TableRestProxy::_constructInsertEntityContext
-     * @covers PEAR2\WindowsAzure\Services\Table\TableRestProxy::_createOperationsContexts
-     * @covers PEAR2\WindowsAzure\Services\Table\Utilities\MimeReaderWriter::encodeMimeMultipart
-     * @covers PEAR2\WindowsAzure\Services\Table\Utilities\MimeReaderWriter::decodeMimeMultipart
-     * @covers PEAR2\WindowsAzure\Services\Table\Models\BatchResult::create
-     * @covers PEAR2\WindowsAzure\Services\Table\Models\BatchResult::_constructResponses
-     * @covers PEAR2\WindowsAzure\Services\Table\Models\BatchResult::_compareUsingContentId
-     * @covers PEAR2\WindowsAzure\Services\Core\ServiceRestProxy::sendContext
+     * @covers WindowsAzure\Services\Table\TableRestProxy::batch
+     * @covers WindowsAzure\Services\Table\TableRestProxy::_createBatchRequestBody
+     * @covers WindowsAzure\Services\Table\TableRestProxy::_getOperationContext
+     * @covers WindowsAzure\Services\Table\TableRestProxy::_constructInsertEntityContext
+     * @covers WindowsAzure\Services\Table\TableRestProxy::_createOperationsContexts
+     * @covers WindowsAzure\Services\Table\Utilities\MimeReaderWriter::encodeMimeMultipart
+     * @covers WindowsAzure\Services\Table\Utilities\MimeReaderWriter::decodeMimeMultipart
+     * @covers WindowsAzure\Services\Table\Models\BatchResult::create
+     * @covers WindowsAzure\Services\Table\Models\BatchResult::_constructResponses
+     * @covers WindowsAzure\Services\Table\Models\BatchResult::_compareUsingContentId
+     * @covers WindowsAzure\Services\Core\ServiceRestProxy::sendContext
      */
     public function testBatchWithInsert()
     {
@@ -669,17 +669,17 @@ class TableRestProxyTest extends TableServiceRestProxyTestBase
     }
     
     /**
-     * @covers PEAR2\WindowsAzure\Services\Table\TableRestProxy::batch
-     * @covers PEAR2\WindowsAzure\Services\Table\TableRestProxy::_createBatchRequestBody
-     * @covers PEAR2\WindowsAzure\Services\Table\TableRestProxy::_getOperationContext
-     * @covers PEAR2\WindowsAzure\Services\Table\TableRestProxy::_createOperationsContexts
-     * @covers PEAR2\WindowsAzure\Services\Table\TableRestProxy::_constructDeleteEntityContext
-     * @covers PEAR2\WindowsAzure\Services\Table\Utilities\MimeReaderWriter::encodeMimeMultipart
-     * @covers PEAR2\WindowsAzure\Services\Table\Utilities\MimeReaderWriter::decodeMimeMultipart
-     * @covers PEAR2\WindowsAzure\Services\Table\Models\BatchResult::create
-     * @covers PEAR2\WindowsAzure\Services\Table\Models\BatchResult::_constructResponses
-     * @covers PEAR2\WindowsAzure\Services\Table\Models\BatchResult::_compareUsingContentId
-     * @covers PEAR2\WindowsAzure\Services\Core\ServiceRestProxy::sendContext
+     * @covers WindowsAzure\Services\Table\TableRestProxy::batch
+     * @covers WindowsAzure\Services\Table\TableRestProxy::_createBatchRequestBody
+     * @covers WindowsAzure\Services\Table\TableRestProxy::_getOperationContext
+     * @covers WindowsAzure\Services\Table\TableRestProxy::_createOperationsContexts
+     * @covers WindowsAzure\Services\Table\TableRestProxy::_constructDeleteEntityContext
+     * @covers WindowsAzure\Services\Table\Utilities\MimeReaderWriter::encodeMimeMultipart
+     * @covers WindowsAzure\Services\Table\Utilities\MimeReaderWriter::decodeMimeMultipart
+     * @covers WindowsAzure\Services\Table\Models\BatchResult::create
+     * @covers WindowsAzure\Services\Table\Models\BatchResult::_constructResponses
+     * @covers WindowsAzure\Services\Table\Models\BatchResult::_compareUsingContentId
+     * @covers WindowsAzure\Services\Core\ServiceRestProxy::sendContext
      */
     public function testBatchWithDelete()
     {
@@ -704,17 +704,17 @@ class TableRestProxyTest extends TableServiceRestProxyTestBase
     }
     
     /**
-     * @covers PEAR2\WindowsAzure\Services\Table\TableRestProxy::batch
-     * @covers PEAR2\WindowsAzure\Services\Table\TableRestProxy::_createBatchRequestBody
-     * @covers PEAR2\WindowsAzure\Services\Table\TableRestProxy::_getOperationContext
-     * @covers PEAR2\WindowsAzure\Services\Table\TableRestProxy::_createOperationsContexts
-     * @covers PEAR2\WindowsAzure\Services\Table\TableRestProxy::_constructPutOrMergeEntityContext
-     * @covers PEAR2\WindowsAzure\Services\Table\Utilities\MimeReaderWriter::encodeMimeMultipart
-     * @covers PEAR2\WindowsAzure\Services\Table\Utilities\MimeReaderWriter::decodeMimeMultipart
-     * @covers PEAR2\WindowsAzure\Services\Table\Models\BatchResult::create
-     * @covers PEAR2\WindowsAzure\Services\Table\Models\BatchResult::_constructResponses
-     * @covers PEAR2\WindowsAzure\Services\Table\Models\BatchResult::_compareUsingContentId
-     * @covers PEAR2\WindowsAzure\Services\Core\ServiceRestProxy::sendContext
+     * @covers WindowsAzure\Services\Table\TableRestProxy::batch
+     * @covers WindowsAzure\Services\Table\TableRestProxy::_createBatchRequestBody
+     * @covers WindowsAzure\Services\Table\TableRestProxy::_getOperationContext
+     * @covers WindowsAzure\Services\Table\TableRestProxy::_createOperationsContexts
+     * @covers WindowsAzure\Services\Table\TableRestProxy::_constructPutOrMergeEntityContext
+     * @covers WindowsAzure\Services\Table\Utilities\MimeReaderWriter::encodeMimeMultipart
+     * @covers WindowsAzure\Services\Table\Utilities\MimeReaderWriter::decodeMimeMultipart
+     * @covers WindowsAzure\Services\Table\Models\BatchResult::create
+     * @covers WindowsAzure\Services\Table\Models\BatchResult::_constructResponses
+     * @covers WindowsAzure\Services\Table\Models\BatchResult::_compareUsingContentId
+     * @covers WindowsAzure\Services\Core\ServiceRestProxy::sendContext
      */
     public function testBatchWithUpdate()
     {
@@ -747,17 +747,17 @@ class TableRestProxyTest extends TableServiceRestProxyTestBase
     }
     
     /**
-     * @covers PEAR2\WindowsAzure\Services\Table\TableRestProxy::batch
-     * @covers PEAR2\WindowsAzure\Services\Table\TableRestProxy::_createBatchRequestBody
-     * @covers PEAR2\WindowsAzure\Services\Table\TableRestProxy::_getOperationContext
-     * @covers PEAR2\WindowsAzure\Services\Table\TableRestProxy::_createOperationsContexts
-     * @covers PEAR2\WindowsAzure\Services\Table\TableRestProxy::_constructPutOrMergeEntityContext
-     * @covers PEAR2\WindowsAzure\Services\Table\Utilities\MimeReaderWriter::encodeMimeMultipart
-     * @covers PEAR2\WindowsAzure\Services\Table\Utilities\MimeReaderWriter::decodeMimeMultipart
-     * @covers PEAR2\WindowsAzure\Services\Table\Models\BatchResult::create
-     * @covers PEAR2\WindowsAzure\Services\Table\Models\BatchResult::_constructResponses
-     * @covers PEAR2\WindowsAzure\Services\Table\Models\BatchResult::_compareUsingContentId
-     * @covers PEAR2\WindowsAzure\Services\Core\ServiceRestProxy::sendContext
+     * @covers WindowsAzure\Services\Table\TableRestProxy::batch
+     * @covers WindowsAzure\Services\Table\TableRestProxy::_createBatchRequestBody
+     * @covers WindowsAzure\Services\Table\TableRestProxy::_getOperationContext
+     * @covers WindowsAzure\Services\Table\TableRestProxy::_createOperationsContexts
+     * @covers WindowsAzure\Services\Table\TableRestProxy::_constructPutOrMergeEntityContext
+     * @covers WindowsAzure\Services\Table\Utilities\MimeReaderWriter::encodeMimeMultipart
+     * @covers WindowsAzure\Services\Table\Utilities\MimeReaderWriter::decodeMimeMultipart
+     * @covers WindowsAzure\Services\Table\Models\BatchResult::create
+     * @covers WindowsAzure\Services\Table\Models\BatchResult::_constructResponses
+     * @covers WindowsAzure\Services\Table\Models\BatchResult::_compareUsingContentId
+     * @covers WindowsAzure\Services\Core\ServiceRestProxy::sendContext
      */
     public function testBatchWithMerge()
     {
@@ -790,17 +790,17 @@ class TableRestProxyTest extends TableServiceRestProxyTestBase
     }
     
     /**
-     * @covers PEAR2\WindowsAzure\Services\Table\TableRestProxy::batch
-     * @covers PEAR2\WindowsAzure\Services\Table\TableRestProxy::_createBatchRequestBody
-     * @covers PEAR2\WindowsAzure\Services\Table\TableRestProxy::_getOperationContext
-     * @covers PEAR2\WindowsAzure\Services\Table\TableRestProxy::_createOperationsContexts
-     * @covers PEAR2\WindowsAzure\Services\Table\TableRestProxy::_constructPutOrMergeEntityContext
-     * @covers PEAR2\WindowsAzure\Services\Table\Utilities\MimeReaderWriter::encodeMimeMultipart
-     * @covers PEAR2\WindowsAzure\Services\Table\Utilities\MimeReaderWriter::decodeMimeMultipart
-     * @covers PEAR2\WindowsAzure\Services\Table\Models\BatchResult::create
-     * @covers PEAR2\WindowsAzure\Services\Table\Models\BatchResult::_constructResponses
-     * @covers PEAR2\WindowsAzure\Services\Table\Models\BatchResult::_compareUsingContentId
-     * @covers PEAR2\WindowsAzure\Services\Core\ServiceRestProxy::sendContext
+     * @covers WindowsAzure\Services\Table\TableRestProxy::batch
+     * @covers WindowsAzure\Services\Table\TableRestProxy::_createBatchRequestBody
+     * @covers WindowsAzure\Services\Table\TableRestProxy::_getOperationContext
+     * @covers WindowsAzure\Services\Table\TableRestProxy::_createOperationsContexts
+     * @covers WindowsAzure\Services\Table\TableRestProxy::_constructPutOrMergeEntityContext
+     * @covers WindowsAzure\Services\Table\Utilities\MimeReaderWriter::encodeMimeMultipart
+     * @covers WindowsAzure\Services\Table\Utilities\MimeReaderWriter::decodeMimeMultipart
+     * @covers WindowsAzure\Services\Table\Models\BatchResult::create
+     * @covers WindowsAzure\Services\Table\Models\BatchResult::_constructResponses
+     * @covers WindowsAzure\Services\Table\Models\BatchResult::_compareUsingContentId
+     * @covers WindowsAzure\Services\Core\ServiceRestProxy::sendContext
      */
     public function testBatchWithInsertOrReplace()
     {
@@ -833,17 +833,17 @@ class TableRestProxyTest extends TableServiceRestProxyTestBase
     }
     
     /**
-     * @covers PEAR2\WindowsAzure\Services\Table\TableRestProxy::batch
-     * @covers PEAR2\WindowsAzure\Services\Table\TableRestProxy::_createBatchRequestBody
-     * @covers PEAR2\WindowsAzure\Services\Table\TableRestProxy::_getOperationContext
-     * @covers PEAR2\WindowsAzure\Services\Table\TableRestProxy::_createOperationsContexts
-     * @covers PEAR2\WindowsAzure\Services\Table\TableRestProxy::_constructPutOrMergeEntityContext
-     * @covers PEAR2\WindowsAzure\Services\Table\Utilities\MimeReaderWriter::encodeMimeMultipart
-     * @covers PEAR2\WindowsAzure\Services\Table\Utilities\MimeReaderWriter::decodeMimeMultipart
-     * @covers PEAR2\WindowsAzure\Services\Table\Models\BatchResult::create
-     * @covers PEAR2\WindowsAzure\Services\Table\Models\BatchResult::_constructResponses
-     * @covers PEAR2\WindowsAzure\Services\Table\Models\BatchResult::_compareUsingContentId
-     * @covers PEAR2\WindowsAzure\Services\Core\ServiceRestProxy::sendContext
+     * @covers WindowsAzure\Services\Table\TableRestProxy::batch
+     * @covers WindowsAzure\Services\Table\TableRestProxy::_createBatchRequestBody
+     * @covers WindowsAzure\Services\Table\TableRestProxy::_getOperationContext
+     * @covers WindowsAzure\Services\Table\TableRestProxy::_createOperationsContexts
+     * @covers WindowsAzure\Services\Table\TableRestProxy::_constructPutOrMergeEntityContext
+     * @covers WindowsAzure\Services\Table\Utilities\MimeReaderWriter::encodeMimeMultipart
+     * @covers WindowsAzure\Services\Table\Utilities\MimeReaderWriter::decodeMimeMultipart
+     * @covers WindowsAzure\Services\Table\Models\BatchResult::create
+     * @covers WindowsAzure\Services\Table\Models\BatchResult::_constructResponses
+     * @covers WindowsAzure\Services\Table\Models\BatchResult::_compareUsingContentId
+     * @covers WindowsAzure\Services\Core\ServiceRestProxy::sendContext
      */
     public function testBatchWithInsertOrMerge()
     {
@@ -876,17 +876,17 @@ class TableRestProxyTest extends TableServiceRestProxyTestBase
     }
     
     /**
-     * @covers PEAR2\WindowsAzure\Services\Table\TableRestProxy::batch
-     * @covers PEAR2\WindowsAzure\Services\Table\TableRestProxy::_createBatchRequestBody
-     * @covers PEAR2\WindowsAzure\Services\Table\TableRestProxy::_getOperationContext
-     * @covers PEAR2\WindowsAzure\Services\Table\TableRestProxy::_createOperationsContexts
-     * @covers PEAR2\WindowsAzure\Services\Table\TableRestProxy::_constructPutOrMergeEntityContext
-     * @covers PEAR2\WindowsAzure\Services\Table\Utilities\MimeReaderWriter::encodeMimeMultipart
-     * @covers PEAR2\WindowsAzure\Services\Table\Utilities\MimeReaderWriter::decodeMimeMultipart
-     * @covers PEAR2\WindowsAzure\Services\Table\Models\BatchResult::create
-     * @covers PEAR2\WindowsAzure\Services\Table\Models\BatchResult::_constructResponses
-     * @covers PEAR2\WindowsAzure\Services\Table\Models\BatchResult::_compareUsingContentId
-     * @covers PEAR2\WindowsAzure\Services\Core\ServiceRestProxy::sendContext
+     * @covers WindowsAzure\Services\Table\TableRestProxy::batch
+     * @covers WindowsAzure\Services\Table\TableRestProxy::_createBatchRequestBody
+     * @covers WindowsAzure\Services\Table\TableRestProxy::_getOperationContext
+     * @covers WindowsAzure\Services\Table\TableRestProxy::_createOperationsContexts
+     * @covers WindowsAzure\Services\Table\TableRestProxy::_constructPutOrMergeEntityContext
+     * @covers WindowsAzure\Services\Table\Utilities\MimeReaderWriter::encodeMimeMultipart
+     * @covers WindowsAzure\Services\Table\Utilities\MimeReaderWriter::decodeMimeMultipart
+     * @covers WindowsAzure\Services\Table\Models\BatchResult::create
+     * @covers WindowsAzure\Services\Table\Models\BatchResult::_constructResponses
+     * @covers WindowsAzure\Services\Table\Models\BatchResult::_compareUsingContentId
+     * @covers WindowsAzure\Services\Core\ServiceRestProxy::sendContext
      */
     public function testBatchWithMultipleOperations()
     {
@@ -920,17 +920,17 @@ class TableRestProxyTest extends TableServiceRestProxyTestBase
     }
     
     /**
-     * @covers PEAR2\WindowsAzure\Services\Table\TableRestProxy::batch
-     * @covers PEAR2\WindowsAzure\Services\Table\TableRestProxy::_createBatchRequestBody
-     * @covers PEAR2\WindowsAzure\Services\Table\TableRestProxy::_getOperationContext
-     * @covers PEAR2\WindowsAzure\Services\Table\TableRestProxy::_createOperationsContexts
-     * @covers PEAR2\WindowsAzure\Services\Table\TableRestProxy::_constructPutOrMergeEntityContext
-     * @covers PEAR2\WindowsAzure\Services\Table\Utilities\MimeReaderWriter::encodeMimeMultipart
-     * @covers PEAR2\WindowsAzure\Services\Table\Utilities\MimeReaderWriter::decodeMimeMultipart
-     * @covers PEAR2\WindowsAzure\Services\Table\Models\BatchResult::create
-     * @covers PEAR2\WindowsAzure\Services\Table\Models\BatchResult::_constructResponses
-     * @covers PEAR2\WindowsAzure\Services\Table\Models\BatchResult::_compareUsingContentId
-     * @covers PEAR2\WindowsAzure\Services\Core\ServiceRestProxy::sendContext
+     * @covers WindowsAzure\Services\Table\TableRestProxy::batch
+     * @covers WindowsAzure\Services\Table\TableRestProxy::_createBatchRequestBody
+     * @covers WindowsAzure\Services\Table\TableRestProxy::_getOperationContext
+     * @covers WindowsAzure\Services\Table\TableRestProxy::_createOperationsContexts
+     * @covers WindowsAzure\Services\Table\TableRestProxy::_constructPutOrMergeEntityContext
+     * @covers WindowsAzure\Services\Table\Utilities\MimeReaderWriter::encodeMimeMultipart
+     * @covers WindowsAzure\Services\Table\Utilities\MimeReaderWriter::decodeMimeMultipart
+     * @covers WindowsAzure\Services\Table\Models\BatchResult::create
+     * @covers WindowsAzure\Services\Table\Models\BatchResult::_constructResponses
+     * @covers WindowsAzure\Services\Table\Models\BatchResult::_compareUsingContentId
+     * @covers WindowsAzure\Services\Core\ServiceRestProxy::sendContext
      */
     public function testBatchWithDifferentPKFail()
     {

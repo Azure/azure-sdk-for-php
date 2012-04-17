@@ -15,23 +15,23 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   PEAR2\WindowsAzure\Services\Table\Models
+ * @package   WindowsAzure\Services\Table\Models
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
  
-namespace PEAR2\WindowsAzure\Services\Table\Models;
-use PEAR2\WindowsAzure\Utilities;
-use PEAR2\WindowsAzure\Validate;
-use PEAR2\WindowsAzure\Resources;
+namespace WindowsAzure\Services\Table\Models;
+use WindowsAzure\Utilities;
+use WindowsAzure\Validate;
+use WindowsAzure\Resources;
 
 /**
  * Basic Windows Azure EDM Types used for table entity properties.
  *
  * @category  Microsoft
- * @package   PEAR2\WindowsAzure\Services\Table\Models
+ * @package   WindowsAzure\Services\Table\Models
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0

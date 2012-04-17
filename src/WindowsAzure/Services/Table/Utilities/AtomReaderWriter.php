@@ -15,24 +15,24 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   PEAR2\WindowsAzure\Services\Table
+ * @package   WindowsAzure\Services\Table
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
  
-namespace PEAR2\WindowsAzure\Services\Table\Utilities;
-use PEAR2\WindowsAzure\Utilities;
-use PEAR2\WindowsAzure\Resources;
-use PEAR2\WindowsAzure\Services\Table\Models\EdmType;
-use PEAR2\WindowsAzure\Services\Table\Models\Entity;
+namespace WindowsAzure\Services\Table\Utilities;
+use WindowsAzure\Utilities;
+use WindowsAzure\Resources;
+use WindowsAzure\Services\Table\Models\EdmType;
+use WindowsAzure\Services\Table\Models\Entity;
 
 /**
  * Serializes and unserializes results from table wrapper calls
  *
  * @category  Microsoft
- * @package   PEAR2\WindowsAzure\Services\Table
+ * @package   WindowsAzure\Services\Table
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
@@ -254,7 +254,7 @@ class AtomReaderWriter implements IAtomReaderWriter
      * 
      * @param \SimpleXML $result The SimpleXML object representing the entity.
      * 
-     * @return \PEAR2\WindowsAzure\Services\Table\Models\Entity
+     * @return \WindowsAzure\Services\Table\Models\Entity
      */
     private static function _parseOneEntity($result)
     {

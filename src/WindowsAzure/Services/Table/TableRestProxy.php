@@ -15,43 +15,43 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   PEAR2\WindowsAzure\Services\Table
+ * @package   WindowsAzure\Services\Table
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
  
-namespace PEAR2\WindowsAzure\Services\Table;
-use PEAR2\WindowsAzure\Resources;
-use PEAR2\WindowsAzure\Utilities;
-use PEAR2\WindowsAzure\Validate;
-use PEAR2\WindowsAzure\Core\HttpCallContext;
-use PEAR2\WindowsAzure\Services\Core\ServiceRestProxy;
-use PEAR2\WindowsAzure\Services\Table\Models\TableServiceOptions;
-use PEAR2\WindowsAzure\Services\Core\Models\GetServicePropertiesResult;
-use PEAR2\WindowsAzure\Services\Table\Models\EdmType;
-use PEAR2\WindowsAzure\Services\Table\Models\Filters;
-use PEAR2\WindowsAzure\Services\Table\Models\Filters\Filter;
-use PEAR2\WindowsAzure\Services\Table\Models\GetTableResult;
-use PEAR2\WindowsAzure\Services\Table\Models\QueryTablesOptions;
-use PEAR2\WindowsAzure\Services\Table\Models\QueryTablesResult;
-use PEAR2\WindowsAzure\Services\Table\Models\InsertEntityResult;
-use PEAR2\WindowsAzure\Services\Table\Models\UpdateEntityResult;
-use PEAR2\WindowsAzure\Services\Table\Models\QueryEntitiesOptions;
-use PEAR2\WindowsAzure\Services\Table\Models\QueryEntitiesResult;
-use PEAR2\WindowsAzure\Services\Table\Models\DeleteEntityOptions;
-use PEAR2\WindowsAzure\Services\Table\Models\GetEntityResult;
-use PEAR2\WindowsAzure\Services\Table\Models\BatchOperationType;
-use PEAR2\WindowsAzure\Services\Table\Models\BatchOperationParameterName;
-use PEAR2\WindowsAzure\Services\Table\Models\BatchResult;
+namespace WindowsAzure\Services\Table;
+use WindowsAzure\Resources;
+use WindowsAzure\Utilities;
+use WindowsAzure\Validate;
+use WindowsAzure\Core\HttpCallContext;
+use WindowsAzure\Services\Core\ServiceRestProxy;
+use WindowsAzure\Services\Table\Models\TableServiceOptions;
+use WindowsAzure\Services\Core\Models\GetServicePropertiesResult;
+use WindowsAzure\Services\Table\Models\EdmType;
+use WindowsAzure\Services\Table\Models\Filters;
+use WindowsAzure\Services\Table\Models\Filters\Filter;
+use WindowsAzure\Services\Table\Models\GetTableResult;
+use WindowsAzure\Services\Table\Models\QueryTablesOptions;
+use WindowsAzure\Services\Table\Models\QueryTablesResult;
+use WindowsAzure\Services\Table\Models\InsertEntityResult;
+use WindowsAzure\Services\Table\Models\UpdateEntityResult;
+use WindowsAzure\Services\Table\Models\QueryEntitiesOptions;
+use WindowsAzure\Services\Table\Models\QueryEntitiesResult;
+use WindowsAzure\Services\Table\Models\DeleteEntityOptions;
+use WindowsAzure\Services\Table\Models\GetEntityResult;
+use WindowsAzure\Services\Table\Models\BatchOperationType;
+use WindowsAzure\Services\Table\Models\BatchOperationParameterName;
+use WindowsAzure\Services\Table\Models\BatchResult;
 
 /**
  * This class constructs HTTP requests and receive HTTP responses for table
  * service layer.
  *
  * @category  Microsoft
- * @package   PEAR2\WindowsAzure\Services\Table
+ * @package   WindowsAzure\Services\Table
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
@@ -140,7 +140,7 @@ class TableRestProxy extends ServiceRestProxy implements ITable
      * @param Models\Entity $entity The entity object.
      * @param string        $type   The API type.
      * 
-     * @return PEAR2\WindowsAzure\Core\HttpCallContext
+     * @return WindowsAzure\Core\HttpCallContext
      * 
      * @throws \InvalidArgumentException 
      */
@@ -602,7 +602,7 @@ class TableRestProxy extends ServiceRestProxy implements ITable
     /**
      * Constructor
      * 
-     * @param PEAR2\WindowsAzure\Core\IHttpClient $channel        The HTTP client 
+     * @param WindowsAzure\Core\IHttpClient $channel        The HTTP client 
      * channel.
      * @param string                              $uri            The storage account
      * uri.
@@ -625,7 +625,7 @@ class TableRestProxy extends ServiceRestProxy implements ITable
     * 
     * @param Models\TableServiceOptions $options optional table service options.
     * 
-    * @return PEAR2\WindowsAzure\Services\Core\Models\GetServicePropertiesResult
+    * @return WindowsAzure\Services\Core\Models\GetServicePropertiesResult
     * 
     * @see http://msdn.microsoft.com/en-us/library/windowsazure/hh452238.aspx
     */

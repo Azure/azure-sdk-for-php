@@ -15,24 +15,24 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   PEAR2\Tests\Unit\WindowsAzure
+ * @package   Tests\Unit\WindowsAzure
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
 
-namespace PEAR2\Tests\Unit\WindowsAzure;
-use PEAR2\WindowsAzure\Validate;
-use PEAR2\WindowsAzure\Core\InvalidArgumentTypeException;
-use PEAR2\WindowsAzure\Resources;
-use PEAR2\WindowsAzure\Core\WindowsAzureUtilities;
+namespace Tests\Unit\WindowsAzure;
+use WindowsAzure\Validate;
+use WindowsAzure\Core\InvalidArgumentTypeException;
+use WindowsAzure\Resources;
+use WindowsAzure\Core\WindowsAzureUtilities;
 
 /**
  * Unit tests for class ValidateTest
  *
  * @category  Microsoft
- * @package   PEAR2\Tests\Unit\WindowsAzure
+ * @package   Tests\Unit\WindowsAzure
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
@@ -42,7 +42,7 @@ use PEAR2\WindowsAzure\Core\WindowsAzureUtilities;
 class ValidateTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @covers PEAR2\WindowsAzure\Validate::isArray
+     * @covers WindowsAzure\Validate::isArray
      */
     public function testIsArrayWithArray()
     {
@@ -52,7 +52,7 @@ class ValidateTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers PEAR2\WindowsAzure\Validate::isArray
+     * @covers WindowsAzure\Validate::isArray
      */
     public function testIsArrayWithNonArray()
     {
@@ -61,7 +61,7 @@ class ValidateTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers PEAR2\WindowsAzure\Validate::isString
+     * @covers WindowsAzure\Validate::isString
      */
     public function testIsStringWithString()
     {
@@ -71,7 +71,7 @@ class ValidateTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers PEAR2\WindowsAzure\Validate::isString
+     * @covers WindowsAzure\Validate::isString
      */
     public function testIsStringWithNonString()
     {
@@ -80,7 +80,7 @@ class ValidateTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers PEAR2\WindowsAzure\Validate::isBoolean
+     * @covers WindowsAzure\Validate::isBoolean
      */
     public function testIsBooleanWithBoolean()
     {
@@ -90,7 +90,7 @@ class ValidateTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers PEAR2\WindowsAzure\Validate::isBoolean
+     * @covers WindowsAzure\Validate::isBoolean
      */
     public function testIsBooleanWithNonBoolean()
     {
@@ -99,7 +99,7 @@ class ValidateTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers PEAR2\WindowsAzure\Validate::isInteger
+     * @covers WindowsAzure\Validate::isInteger
      */
     public function testIsIntegerWithInteger()
     {
@@ -109,7 +109,7 @@ class ValidateTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers PEAR2\WindowsAzure\Validate::isInteger
+     * @covers WindowsAzure\Validate::isInteger
      */
     public function testIsIntegerWithNonInteger()
     {
@@ -118,7 +118,7 @@ class ValidateTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers PEAR2\WindowsAzure\Validate::notNullOrEmpty
+     * @covers WindowsAzure\Validate::notNullOrEmpty
      */
     public function testNotNullOrEmptyWithNonEmpty()
     {
@@ -128,7 +128,7 @@ class ValidateTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers PEAR2\WindowsAzure\Validate::notNullOrEmpty
+     * @covers WindowsAzure\Validate::notNullOrEmpty
      */
     public function testNotNullOrEmptyWithEmpty()
     {
@@ -137,7 +137,7 @@ class ValidateTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers PEAR2\WindowsAzure\Validate::isTrue
+     * @covers WindowsAzure\Validate::isTrue
      */
     public function testIsTrueWithTrue()
     {
@@ -147,7 +147,7 @@ class ValidateTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers PEAR2\WindowsAzure\Validate::isTrue
+     * @covers WindowsAzure\Validate::isTrue
      */
     public function testIsTrueWithFalse()
     {
@@ -156,7 +156,7 @@ class ValidateTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers PEAR2\WindowsAzure\Validate::isDate
+     * @covers WindowsAzure\Validate::isDate
      */
     public function testIsDateWithDate()
     {
@@ -167,7 +167,7 @@ class ValidateTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers PEAR2\WindowsAzure\Validate::isDate
+     * @covers WindowsAzure\Validate::isDate
      */
     public function testIsDateWithNonDate()
     {

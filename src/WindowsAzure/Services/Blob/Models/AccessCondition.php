@@ -15,25 +15,25 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   PEAR2\WindowsAzure\Services\Blob\Models
+ * @package   WindowsAzure\Services\Blob\Models
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
  
-namespace PEAR2\WindowsAzure\Services\Blob\Models;
-use PEAR2\WindowsAzure\Services\Blob\Models\AccessConditionHeaderType;
-use PEAR2\WindowsAzure\Validate;
-use PEAR2\WindowsAzure\Resources;
-use PEAR2\WindowsAzure\Core\WindowsAzureUtilities;
+namespace WindowsAzure\Services\Blob\Models;
+use WindowsAzure\Services\Blob\Models\AccessConditionHeaderType;
+use WindowsAzure\Validate;
+use WindowsAzure\Resources;
+use WindowsAzure\Core\WindowsAzureUtilities;
 
 /**
  * Represents a set of access conditions to be used for operations against the 
  * storage services.
  *
  * @category  Microsoft
- * @package   PEAR2\WindowsAzure\Services\Blob\Models
+ * @package   WindowsAzure\Services\Blob\Models
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
@@ -71,7 +71,7 @@ class AccessCondition
     /**
      * Specifies that no access condition is set.
      * 
-     * @return \PEAR2\WindowsAzure\Services\Blob\Models\AccessCondition 
+     * @return \WindowsAzure\Services\Blob\Models\AccessCondition 
      */
     public static function none()
     {
@@ -93,7 +93,7 @@ class AccessCondition
      *
      * @param string $etag a string that represents the ETag value to check.
      *
-     * @return \PEAR2\WindowsAzure\Services\Blob\Models\AccessCondition
+     * @return \WindowsAzure\Services\Blob\Models\AccessCondition
      */
     public static function ifMatch($etag)
     {
@@ -116,7 +116,7 @@ class AccessCondition
      * @param \DateTime $lastModified date object that represents the last-modified 
      * time to check for the resource.
      *
-     * @return \PEAR2\WindowsAzure\Services\Blob\Models\AccessCondition
+     * @return \WindowsAzure\Services\Blob\Models\AccessCondition
      */
     public static function ifModifiedSince($lastModified)
     {
@@ -141,7 +141,7 @@ class AccessCondition
      *
      * @param string $etag string that represents the ETag value to check.
      *
-     * @return \PEAR2\WindowsAzure\Services\Blob\Models\AccessCondition
+     * @return \WindowsAzure\Services\Blob\Models\AccessCondition
      */
     public static function ifNoneMatch($etag)
     {
@@ -164,7 +164,7 @@ class AccessCondition
      * @param \DateTime $lastModified date object that represents the last-modified 
      * time to check for the resource.
      *
-     * @return \PEAR2\WindowsAzure\Services\Blob\Models\AccessCondition
+     * @return \WindowsAzure\Services\Blob\Models\AccessCondition
      */
     public static function ifNotModifiedSince($lastModified)
     {

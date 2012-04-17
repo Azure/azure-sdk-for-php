@@ -23,8 +23,8 @@
  * @link       http://pear.php.net/package/azure-sdk-for-php
  */
  
-namespace PEAR2\Tests\Mock\WindowsAzure\Services\Core\Authentication;
-use PEAR2\WindowsAzure\Services\Core\Authentication\TableSharedKeyLiteAuthScheme;
+namespace Tests\Mock\WindowsAzure\Services\Core\Authentication;
+use WindowsAzure\Services\Core\Authentication\TableSharedKeyLiteAuthScheme;
 
 /**
  * Mock class to wrap SharedKeyAuthScheme class.

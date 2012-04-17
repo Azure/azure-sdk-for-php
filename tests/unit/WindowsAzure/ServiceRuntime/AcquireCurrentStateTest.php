@@ -15,22 +15,22 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   PEAR2\Tests\Unit\WindowsAzure\ServiceRuntime
+ * @package   Tests\Unit\WindowsAzure\ServiceRuntime
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
-namespace PEAR2\Tests\Unit\WindowsAzure\ServiceRuntime;
-use PEAR2\Tests\Framework\TestResources;
-use PEAR2\WindowsAzure\ServiceRuntime\AcquireCurrentState;
-use PEAR2\WindowsAzure\ServiceRuntime\CurrentStatus;
+namespace Tests\Unit\WindowsAzure\ServiceRuntime;
+use Tests\Framework\TestResources;
+use WindowsAzure\ServiceRuntime\AcquireCurrentState;
+use WindowsAzure\ServiceRuntime\CurrentStatus;
 
 /**
  * Unit tests for class AcquireCurrentState.
  *
  * @category  Microsoft
- * @package   PEAR2\Tests\Unit\WindowsAzure\ServiceRuntime
+ * @package   Tests\Unit\WindowsAzure\ServiceRuntime
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
@@ -40,10 +40,10 @@ use PEAR2\WindowsAzure\ServiceRuntime\CurrentStatus;
 class AcquireCurrentStateTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @covers PEAR2\WindowsAzure\ServiceRuntime\AcquireCurrentState::__construct
-     * @covers PEAR2\WindowsAzure\ServiceRuntime\AcquireCurrentState::getIncarnation
-     * @covers PEAR2\WindowsAzure\ServiceRuntime\AcquireCurrentState::getStatus
-     * @covers PEAR2\WindowsAzure\ServiceRuntime\AcquireCurrentState::getExpiration
+     * @covers WindowsAzure\ServiceRuntime\AcquireCurrentState::__construct
+     * @covers WindowsAzure\ServiceRuntime\AcquireCurrentState::getIncarnation
+     * @covers WindowsAzure\ServiceRuntime\AcquireCurrentState::getStatus
+     * @covers WindowsAzure\ServiceRuntime\AcquireCurrentState::getExpiration
      */
     public function testConstruct()
     {

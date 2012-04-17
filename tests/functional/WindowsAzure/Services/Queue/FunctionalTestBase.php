@@ -17,28 +17,28 @@
  * limitations under the License.
  *
  * @category   Microsoft
- * @package    PEAR2\Tests\Functional\WindowsAzure\Services\Queue
+ * @package    Tests\Functional\WindowsAzure\Services\Queue
  * @author     Jason Cooke <jcooke@microsoft.com>
  * @copyright  2012 Microsoft Corporation
  * @license    http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link       http://pear.php.net/package/azure-sdk-for-php
  */
 
-namespace PEAR2\Tests\Functional\WindowsAzure\Services\Queue;
+namespace Tests\Functional\WindowsAzure\Services\Queue;
 
 use DateTime;
 use ReflectionClass;
 use ReflectionMethod;
-use PEAR2\Tests\Framework\FiddlerFilter;
-use PEAR2\Tests\Framework\QueueServiceRestProxyTestBase;
-use PEAR2\Tests\Framework\TestResources;
-use PEAR2\Tests\Functional\WindowsAzure\Services\Queue\QueueServiceFunctionalTestData;
-use PEAR2\WindowsAzure\Core\ServiceException;
-use PEAR2\WindowsAzure\Core\WindowsAzureUtilities;
-use PEAR2\WindowsAzure\Resources;
-use PEAR2\WindowsAzure\Services\Core\Configuration;
-use PEAR2\WindowsAzure\Services\Queue\QueueService;
-use PEAR2\WindowsAzure\Services\Queue\QueueSettings;
+use Tests\Framework\FiddlerFilter;
+use Tests\Framework\QueueServiceRestProxyTestBase;
+use Tests\Framework\TestResources;
+use Tests\Functional\WindowsAzure\Services\Queue\QueueServiceFunctionalTestData;
+use WindowsAzure\Core\ServiceException;
+use WindowsAzure\Core\WindowsAzureUtilities;
+use WindowsAzure\Resources;
+use WindowsAzure\Services\Core\Configuration;
+use WindowsAzure\Services\Queue\QueueService;
+use WindowsAzure\Services\Queue\QueueSettings;
 
 class FunctionalTestBase extends QueueServiceRestProxyTestBase {
     protected $accountName;

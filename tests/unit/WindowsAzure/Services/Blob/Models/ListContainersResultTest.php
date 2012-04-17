@@ -15,23 +15,23 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   PEAR2\Tests\Unit\WindowsAzure\Services\Blob\Models
+ * @package   Tests\Unit\WindowsAzure\Services\Blob\Models
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
 
-namespace PEAR2\Tests\Unit\WindowsAzure\Services\Blob\Models;
-use PEAR2\WindowsAzure\Services\Blob\Models\ListContainersResult;
-use PEAR2\Tests\Framework\TestResources;
-use PEAR2\WindowsAzure\Core\WindowsAzureUtilities;
+namespace Tests\Unit\WindowsAzure\Services\Blob\Models;
+use WindowsAzure\Services\Blob\Models\ListContainersResult;
+use Tests\Framework\TestResources;
+use WindowsAzure\Core\WindowsAzureUtilities;
 
 /**
  * Unit tests for class ListContainersResult
  *
  * @category  Microsoft
- * @package   PEAR2\Tests\Unit\WindowsAzure\Services\Blob\Models
+ * @package   Tests\Unit\WindowsAzure\Services\Blob\Models
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
@@ -41,7 +41,7 @@ use PEAR2\WindowsAzure\Core\WindowsAzureUtilities;
 class ListContainersResultTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @covers PEAR2\WindowsAzure\Services\Blob\Models\ListContainersResult::create 
+     * @covers WindowsAzure\Services\Blob\Models\ListContainersResult::create 
      */
     public function testCreateWithEmpty()
     {
@@ -57,7 +57,7 @@ class ListContainersResultTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers PEAR2\WindowsAzure\Services\Blob\Models\ListContainersResult::create 
+     * @covers WindowsAzure\Services\Blob\Models\ListContainersResult::create 
      */
     public function testCreateWithOneEntry()
     {
@@ -84,7 +84,7 @@ class ListContainersResultTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers PEAR2\WindowsAzure\Services\Blob\Models\ListContainersResult::create 
+     * @covers WindowsAzure\Services\Blob\Models\ListContainersResult::create 
      */
     public function testCreateWithMultipleEntries()
     {
@@ -120,7 +120,7 @@ class ListContainersResultTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers PEAR2\WindowsAzure\Services\Blob\Models\ListContainersResult::getContainers
+     * @covers WindowsAzure\Services\Blob\Models\ListContainersResult::getContainers
      * @depends testCreateWithMultipleEntries
      */
     public function testGetContainers($result)
@@ -133,7 +133,7 @@ class ListContainersResultTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers PEAR2\WindowsAzure\Services\Blob\Models\ListContainersResult::setContainers
+     * @covers WindowsAzure\Services\Blob\Models\ListContainersResult::setContainers
      * @depends testCreateWithMultipleEntries
      */
     public function testSetContainers($result)
@@ -152,7 +152,7 @@ class ListContainersResultTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers PEAR2\WindowsAzure\Services\Blob\Models\ListContainersResult::setPrefix
+     * @covers WindowsAzure\Services\Blob\Models\ListContainersResult::setPrefix
      */
     public function testSetPrefix()
     {
@@ -168,7 +168,7 @@ class ListContainersResultTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers PEAR2\WindowsAzure\Services\Blob\Models\ListContainersResult::getPrefix
+     * @covers WindowsAzure\Services\Blob\Models\ListContainersResult::getPrefix
      */
     public function testGetPrefix()
     {
@@ -185,7 +185,7 @@ class ListContainersResultTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers PEAR2\WindowsAzure\Services\Blob\Models\ListContainersResult::setNextMarker
+     * @covers WindowsAzure\Services\Blob\Models\ListContainersResult::setNextMarker
      */
     public function testSetNextMarker()
     {
@@ -201,7 +201,7 @@ class ListContainersResultTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers PEAR2\WindowsAzure\Services\Blob\Models\ListContainersResult::getNextMarker
+     * @covers WindowsAzure\Services\Blob\Models\ListContainersResult::getNextMarker
      */
     public function testGetNextMarker()
     {
@@ -218,7 +218,7 @@ class ListContainersResultTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers PEAR2\WindowsAzure\Services\Blob\Models\ListContainersResult::setMarker
+     * @covers WindowsAzure\Services\Blob\Models\ListContainersResult::setMarker
      */
     public function testSetMarker()
     {
@@ -234,7 +234,7 @@ class ListContainersResultTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers PEAR2\WindowsAzure\Services\Blob\Models\ListContainersResult::getMarker
+     * @covers WindowsAzure\Services\Blob\Models\ListContainersResult::getMarker
      */
     public function testGetMarker()
     {
@@ -251,7 +251,7 @@ class ListContainersResultTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers PEAR2\WindowsAzure\Services\Blob\Models\ListContainersResult::setMaxResults
+     * @covers WindowsAzure\Services\Blob\Models\ListContainersResult::setMaxResults
      */
     public function testSetMaxResults()
     {
@@ -267,7 +267,7 @@ class ListContainersResultTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers PEAR2\WindowsAzure\Services\Blob\Models\ListContainersResult::getMaxResults
+     * @covers WindowsAzure\Services\Blob\Models\ListContainersResult::getMaxResults
      */
     public function testGetMaxResults()
     {
