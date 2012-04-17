@@ -25,6 +25,7 @@ namespace PEAR2\Tests\Unit\WindowsAzure\ServiceRuntime;
 use PEAR2\Tests\Framework\TestResources;
 use PEAR2\WindowsAzure\Core\WindowsAzureUtilities;
 use PEAR2\WindowsAzure\ServiceRuntime\FileInputChannel;
+use PEAR2\WindowsAzure\ServiceRuntime\RuntimeException;
 use PEAR2\WindowsAzure\ServiceRuntime\RuntimeVersionProtocolClient;
 use PEAR2\WindowsAzure\ServiceRuntime\RuntimeVersionManager;
 use PEAR2\WindowsAzure\Resources;
@@ -59,9 +60,48 @@ class RuntimeVersionManagerTest extends \PHPUnit_Framework_TestCase
     /**
      * @covers PEAR2\WindowsAzure\ServiceRuntime\RuntimeVersionManager::getRuntimeClient
      */
-    public function testGetRuntimeClient()
+    public function testGetRuntimeClientInvalid()
     {
         // Setup
+        $rootDirectory = 'root';
+
+        \vfsStreamWrapper::register(); 
+        \vfsStreamWrapper::setRoot(new \vfsStreamDirectory($rootDirectory));
+                
+        // Fake version will force the exception
+        $fileName = 'versionendpoint';
+        $fileContent = '<?xml version="1.0" encoding="utf-8"?>' .
+            '<RuntimeServerDiscovery xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" ' .
+            'xmlns:xsd="http://www.w3.org/2001/XMLSchema">' .
+            '<RuntimeServerEndpoints>' .
+            '<RuntimeServerEndpoint version="2099-03-08" path="myPath1" />' .
+            '</RuntimeServerEndpoints>' .
+            '</RuntimeServerDiscovery>';
+        
+        $file = \vfsStream::newFile($fileName);
+        $file->setContent($fileContent); 
+
+        \vfsStreamWrapper::getRoot()->addChild($file);
+        
+        $runtimeVersionProtocolClient =
+            new RuntimeVersionProtocolClient(new FileInputChannel());
+        
+        $runtimeVersionManager = new RuntimeVersionManager(
+            $runtimeVersionProtocolClient
+        );
+
+        // Test
+        $this->setExpectedException(get_class(new RuntimeException()));
+        $runtimeVersionManager->getRuntimeClient(
+            \vfsStream::url($rootDirectory . '/' . $fileName)
+        );
+    }
+    
+    /**
+     * @covers PEAR2\WindowsAzure\ServiceRuntime\RuntimeVersionManager::getRuntimeClient
+     */
+    public function testGetRuntimeClient()
+    {
         // Setup
         $rootDirectory = 'root';
 
@@ -82,7 +122,6 @@ class RuntimeVersionManagerTest extends \PHPUnit_Framework_TestCase
 
         \vfsStreamWrapper::getRoot()->addChild($file);
         
-        // Setup
         $runtimeVersionProtocolClient =
             new RuntimeVersionProtocolClient(new FileInputChannel());
         

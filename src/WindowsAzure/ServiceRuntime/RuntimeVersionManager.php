@@ -23,6 +23,7 @@
  */
 
 namespace PEAR2\WindowsAzure\ServiceRuntime;
+use PEAR2\WindowsAzure\Resources;
 
 /**
  * The runtime version manager.
@@ -87,8 +88,7 @@ class RuntimeVersionManager
             }
         }
         
-        // TODO: replace by non generic exception type
-        throw new \Exception(Resources::INVALID_VERSION_MSG);
+        throw new RuntimeException(Resources::INVALID_VERSION_MSG);
     }
 }
 
