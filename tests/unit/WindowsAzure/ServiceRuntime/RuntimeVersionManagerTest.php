@@ -98,7 +98,7 @@ class RuntimeVersionManagerTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers PEAR2\WindowsAzure\ServiceRuntime\RuntimeVersionManager::getRuntimeClient
+     * @covers WindowsAzure\ServiceRuntime\RuntimeVersionManager::getRuntimeClient
      */
     public function testGetRuntimeClient()
     {

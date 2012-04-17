@@ -191,8 +191,8 @@ class Protocol1RuntimeGoalStateClientTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers PEAR2\WindowsAzure\ServiceRuntime\Protocol1RuntimeGoalStateClient::setEndpoint
-     * @covers PEAR2\WindowsAzure\ServiceRuntime\Protocol1RuntimeGoalStateClient::getEndpoint
+     * @covers WindowsAzure\ServiceRuntime\Protocol1RuntimeGoalStateClient::setEndpoint
+     * @covers WindowsAzure\ServiceRuntime\Protocol1RuntimeGoalStateClient::getEndpoint
      */
     public function testSetGetEndpoint()
     {
