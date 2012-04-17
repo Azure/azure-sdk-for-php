@@ -54,6 +54,7 @@ class Resources
     const INVALID_OC_COUNT_MSG = 'Operations and contexts must be of same size.';
     const INVALID_EXC_OBJ_MSG  = 'Exception object type should be ServiceException.';
     const NULL_TABLE_KEY_MSG   = 'Partition and raw keys can\'t be NULL.';
+    const BATCH_ENTITY_DEL_MSG = 'The entity was deleted successfully.';
 
     // HTTP Headers
     const X_MS_HEADER_PREFIX                 = 'x-ms-';

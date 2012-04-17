@@ -161,7 +161,7 @@ class BatchResult
                     break;
 
                 case BatchOperationType::DELETE_ENTITY_OPERATION:
-                    $entries[] = null;
+                    $entries[] = Resources::BATCH_ENTITY_DEL_MSG;
                     break;
 
                 default:
