@@ -171,6 +171,7 @@ class TableRestProxyTest extends TableServiceRestProxyTestBase
      * @covers WindowsAzure\Services\Table\TableRestProxy::_addOptionalQuery
      * @covers WindowsAzure\Services\Table\TableRestProxy::_encodeODataUriValues
      * @covers WindowsAzure\Services\Table\TableRestProxy::_encodeODataUriValue
+     * @covers WindowsAzure\Services\Table\Models\EdmType::serializeValue
      * @covers WindowsAzure\Services\Table\Models\QueryTablesResult::create
      * @covers WindowsAzure\Services\Table\Utilities\AtomReaderWriter::_parseBody
      * @covers WindowsAzure\Services\Table\Utilities\AtomReaderWriter::parseTableEntries
@@ -201,6 +202,7 @@ class TableRestProxyTest extends TableServiceRestProxyTestBase
      * @covers WindowsAzure\Services\Table\TableRestProxy::_addOptionalQuery
      * @covers WindowsAzure\Services\Table\TableRestProxy::_encodeODataUriValues
      * @covers WindowsAzure\Services\Table\TableRestProxy::_encodeODataUriValue
+     * @covers WindowsAzure\Services\Table\Models\EdmType::serializeValue
      * @covers WindowsAzure\Services\Table\Models\QueryTablesResult::create
      * @covers WindowsAzure\Services\Table\Utilities\AtomReaderWriter::_parseBody
      * @covers WindowsAzure\Services\Table\Utilities\AtomReaderWriter::parseTableEntries
@@ -228,6 +230,7 @@ class TableRestProxyTest extends TableServiceRestProxyTestBase
      * @covers WindowsAzure\Services\Table\TableRestProxy::_addOptionalQuery
      * @covers WindowsAzure\Services\Table\TableRestProxy::_encodeODataUriValues
      * @covers WindowsAzure\Services\Table\TableRestProxy::_encodeODataUriValue
+     * @covers WindowsAzure\Services\Table\Models\EdmType::serializeValue
      * @covers WindowsAzure\Services\Table\Models\QueryTablesResult::create
      * @covers WindowsAzure\Services\Table\Utilities\AtomReaderWriter::_parseBody
      * @covers WindowsAzure\Services\Table\Utilities\AtomReaderWriter::parseTableEntries
@@ -250,6 +253,7 @@ class TableRestProxyTest extends TableServiceRestProxyTestBase
      * @covers WindowsAzure\Services\Table\TableRestProxy::_addOptionalQuery
      * @covers WindowsAzure\Services\Table\TableRestProxy::_encodeODataUriValues
      * @covers WindowsAzure\Services\Table\TableRestProxy::_encodeODataUriValue
+     * @covers WindowsAzure\Services\Table\Models\EdmType::serializeValue
      * @covers WindowsAzure\Services\Table\Models\QueryTablesResult::create
      * @covers WindowsAzure\Services\Table\Utilities\AtomReaderWriter::_parseBody
      * @covers WindowsAzure\Services\Table\Utilities\AtomReaderWriter::parseTableEntries

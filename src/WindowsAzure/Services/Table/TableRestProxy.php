@@ -453,8 +453,6 @@ class TableRestProxy extends ServiceRestProxy implements ITable
      * @param string &$e     The filter expression
      * 
      * @return string
-     * 
-     * @throws \InvalidArgumentException
      */
     private function _buildFilterExpressionRec($filter, &$e)
     {
@@ -470,43 +468,8 @@ class TableRestProxy extends ServiceRestProxy implements ITable
             if (is_null($value)) {
                 $e .= 'null';
             } else {
-                switch ($filter->getEdmType()) {
-                case EdmType::DATETIME:
-                    $edmDate = Utilities::convertToEdmDateTime($value);
-                    $e      .= 'datetime\'' . $edmDate . '\'';
-                    break;
-
-                case EdmType::BINARY:
-                    $e .= 'X\'' . implode('', unpack("H*", $value)) . '\'';
-                    break;
-
-                case EdmType::BOOLEAN:
-                    $e .= ($value ? 'true' : 'false');
-                    break;
-
-                case EdmType::DOUBLE:
-                    $e .= $value;
-                    break;
-
-                case EdmType::GUID:
-                    $e .= 'guid\'' . $value . '\'';
-                    break;
-
-                case EdmType::INT32:
-                    $e .= $value;
-                    break;
-
-                case EdmType::INT64:
-                    $e .= $value . 'L';
-                    break;
-
-                case EdmType::STRING:
-                    $e .= '\'' . str_replace('\'', '\'\'', $value) . '\'';
-                    break;
-
-                default:
-                    throw new \InvalidArgumentException();
-                }
+                $type = $filter->getEdmType();
+                $e   .= EdmType::serializeValue($type, $value);
             }
         } else if ($filter instanceof Filters\UnaryFilter) {
             $e .= $filter->getOperator();
@@ -923,7 +886,7 @@ class TableRestProxy extends ServiceRestProxy implements ITable
      */
     public function insertOrMergeEntity($table, $entity, $options = null)
     {
-        $this->_putOrMergeEntityImpl(
+        return $this->_putOrMergeEntityImpl(
             $table,
             $entity,
             Resources::HTTP_MERGE,
@@ -946,7 +909,7 @@ class TableRestProxy extends ServiceRestProxy implements ITable
      */
     public function insertOrReplaceEntity($table, $entity, $options = null)
     {
-        $this->_putOrMergeEntityImpl(
+        return tyImpl(
             $table,
             $entity,
             \HTTP_Request2::METHOD_PUT,
@@ -969,7 +932,7 @@ class TableRestProxy extends ServiceRestProxy implements ITable
      */
     public function updateEntity($table, $entity, $options = null)
     {
-        $this->_putOrMergeEntityImpl(
+        return $this->_putOrMergeEntityImpl(
             $table,
             $entity,
             \HTTP_Request2::METHOD_PUT,
@@ -992,7 +955,7 @@ class TableRestProxy extends ServiceRestProxy implements ITable
      */
     public function mergeEntity($table, $entity, $options = null)
     {
-        $this->_putOrMergeEntityImpl(
+        return $this->_putOrMergeEntityImpl(
             $table,
             $entity,
             Resources::HTTP_MERGE,

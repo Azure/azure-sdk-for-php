@@ -65,6 +65,51 @@ class EdmType
     }
     
     /**
+     * Serializes EDM value into proper value for sending to Windows Azure service.
+     * 
+     * @param string $type  The EDM type.
+     * @param mix    $value The EDM value.
+     * 
+     * @return string
+     * 
+     * @throws \InvalidArgumentException 
+     */
+    public static function serializeValue($type, $value)
+    {
+        switch ($type) {
+        case EdmType::DATETIME:
+            $edmDate = Utilities::convertToEdmDateTime($value);
+            return 'datetime\'' . $edmDate . '\'';
+
+        case EdmType::BINARY:
+            return 'X\'' . implode('', unpack("H*", $value)) . '\'';
+
+        case EdmType::BOOLEAN:
+            return ($value ? 'true' : 'false');
+
+        case EdmType::DOUBLE:
+        case EdmType::INT32:
+            return $value;
+            
+        case EdmType::INT64:
+            return $value . 'L';
+            break;
+
+        case EdmType::GUID:
+            return 'guid\'' . $value . '\'';
+
+        // NULL also is treated as EdmType::STRING
+        case null:
+        case EdmType::STRING:
+            return '\'' . str_replace('\'', '\'\'', $value) . '\'';
+            break;
+
+        default:
+            throw new \InvalidArgumentException();
+        }
+    }
+    
+    /**
      * Converts the value into its proper type.
      * 
      * @param string $type  The edm type.
@@ -74,7 +119,7 @@ class EdmType
      * 
      * @throws \InvalidArgumentException
      */
-    public static function processValue($type, $value)
+    public static function unserializeValue($type, $value)
     {
         // Having null value means that the user wants to remove the property name
         // associated with this value. Leave the value as null so this hold.

@@ -746,7 +746,7 @@ class BlobRestProxy extends ServiceRestProxy implements IBlob
         $queryParams = array();
         $path        = $container . '/' . $blob;
         $statusCode  = Resources::STATUS_CREATED;
-        // If read file failed for any reason it'll throw an exception.
+        // If read file failed for any reason it will throw an exception.
         $body = is_resource($content) ? Utilities::readFile($content) : $content;
         
         if (is_null($options)) {
