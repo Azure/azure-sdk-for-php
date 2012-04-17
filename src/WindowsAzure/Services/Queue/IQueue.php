@@ -15,21 +15,21 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   PEAR2\WindowsAzure\Services\Queue
+ * @package   WindowsAzure\Services\Queue
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
 
-namespace PEAR2\WindowsAzure\Services\Queue;
-use PEAR2\WindowsAzure\Services\Core\FilterableService;
+namespace WindowsAzure\Services\Queue;
+use WindowsAzure\Services\Core\FilterableService;
 
 /**
  * This interface has all REST APIs provided by Windows Azure for queue service
  *
  * @category  Microsoft
- * @package   PEAR2\WindowsAzure\Services\Queue
+ * @package   WindowsAzure\Services\Queue
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
@@ -42,10 +42,10 @@ interface IQueue extends FilterableService
     /**
      * Gets the properties of the Queue service.
      * 
-     * @param PEAR2\WindowsAzure\Services\Core\Models\QueueServiceOptions 
+     * @param WindowsAzure\Services\Core\Models\QueueServiceOptions 
      * $queueServiceOptions optional queue service options.
      * 
-     * @return PEAR2\WindowsAzure\Services\Core\Models\GetServicePropertiesResult
+     * @return WindowsAzure\Services\Core\Models\GetServicePropertiesResult
      */
     public function getServiceProperties($queueServiceOptions = null);
 
@@ -85,7 +85,7 @@ interface IQueue extends FilterableService
      * 
      * @param ListQueuesOptions $listQueuesOptions Optional list queue options.
      * 
-     * @return PEAR2\WindowsAzure\Services\Core\Models\ListQueuesResult.
+     * @return WindowsAzure\Services\Core\Models\ListQueuesResult.
      */
     public function listQueues($listQueuesOptions = null);
 
@@ -95,7 +95,7 @@ interface IQueue extends FilterableService
      * @param string              $queueName           Name of the queue.
      * @param QueueServiceOptions $queueServiceOptions Optional queue service options
      * 
-     * @return PEAR2\WindowsAzure\Services\Core\Models\GetQueueMetadataResult.
+     * @return WindowsAzure\Services\Core\Models\GetQueueMetadataResult.
      */
     public function getQueueMetadata($queueName, $queueServiceOptions = null);
 
@@ -145,7 +145,7 @@ interface IQueue extends FilterableService
      * @param QueueServiceOptions $queueServiceOptions        Optional queue 
      * service options
      * 
-     * @return PEAR2\WindowsAzure\Services\Core\Models\UpdateMessageResult.
+     * @return WindowsAzure\Services\Core\Models\UpdateMessageResult.
      */
     public function updateMessage($queueName, $messageId, $popReceipt, $messageText, 
         $visibilityTimeoutInSeconds, $queueServiceOptions = null
@@ -172,7 +172,7 @@ interface IQueue extends FilterableService
      * @param string              $queueName           Name of the queue.
      * @param ListMessagesOptions $listMessagesOptions Optional list messages options
      * 
-     * @return PEAR2\WindowsAzure\Services\Core\Models\ListMessagesResult.
+     * @return WindowsAzure\Services\Core\Models\ListMessagesResult.
      */
     public function listMessages($queueName, $listMessagesOptions = null);
 
@@ -183,7 +183,7 @@ interface IQueue extends FilterableService
      * @param string              $queueName           Name of the queue.
      * @param PeekMessagesOptions $peekMessagesOptions Optional peek messages options
      * 
-     * @return PEAR2\WindowsAzure\Services\Core\Models\PeekMessagesResult.
+     * @return WindowsAzure\Services\Core\Models\PeekMessagesResult.
      */
     public function peekMessages($queueName, $peekMessagesOptions = null);
 
@@ -193,7 +193,7 @@ interface IQueue extends FilterableService
      * @param string              $queueName           Name of the queue.
      * @param QueueServiceOptions $queueServiceOptions Optional queue service options
      * 
-     * @return PEAR2\WindowsAzure\Services\Core\Models\PeekMessagesResult.
+     * @return WindowsAzure\Services\Core\Models\PeekMessagesResult.
      */
     public function clearMessages($queueName, $queueServiceOptions = null);
 }

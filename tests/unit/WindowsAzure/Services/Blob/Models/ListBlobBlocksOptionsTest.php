@@ -15,21 +15,21 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   PEAR2\Tests\Unit\WindowsAzure\Services\Blob\Models
+ * @package   Tests\Unit\WindowsAzure\Services\Blob\Models
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
-namespace PEAR2\Tests\Unit\WindowsAzure\Services\Blob\Models;
-use PEAR2\Tests\Framework\TestResources;
-use PEAR2\WindowsAzure\Services\Blob\Models\ListBlobBlocksOptions;
+namespace Tests\Unit\WindowsAzure\Services\Blob\Models;
+use Tests\Framework\TestResources;
+use WindowsAzure\Services\Blob\Models\ListBlobBlocksOptions;
 
 /**
  * Unit tests for class ListBlobBlocksOptions
  *
  * @category  Microsoft
- * @package   PEAR2\Tests\Unit\WindowsAzure\Services\Blob\Models
+ * @package   Tests\Unit\WindowsAzure\Services\Blob\Models
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
@@ -39,8 +39,8 @@ use PEAR2\WindowsAzure\Services\Blob\Models\ListBlobBlocksOptions;
 class ListBlobBlocksOptionsTest extends \PHPUnit_Framework_TestCase
 {   
     /**
-     * @covers PEAR2\WindowsAzure\Services\Blob\Models\ListBlobBlocksOptions::setSnapshot
-     * @covers PEAR2\WindowsAzure\Services\Blob\Models\ListBlobBlocksOptions::__construct
+     * @covers WindowsAzure\Services\Blob\Models\ListBlobBlocksOptions::setSnapshot
+     * @covers WindowsAzure\Services\Blob\Models\ListBlobBlocksOptions::__construct
      */
     public function testSetSnapshot()
     {
@@ -56,8 +56,8 @@ class ListBlobBlocksOptionsTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers PEAR2\WindowsAzure\Services\Blob\Models\ListBlobBlocksOptions::getSnapshot
-     * @covers PEAR2\WindowsAzure\Services\Blob\Models\ListBlobBlocksOptions::__construct
+     * @covers WindowsAzure\Services\Blob\Models\ListBlobBlocksOptions::getSnapshot
+     * @covers WindowsAzure\Services\Blob\Models\ListBlobBlocksOptions::__construct
      */
     public function testGetSnapshot()
     {
@@ -74,9 +74,9 @@ class ListBlobBlocksOptionsTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers PEAR2\WindowsAzure\Services\Blob\Models\ListBlobBlocksOptions::setLeaseId
-     * @covers PEAR2\WindowsAzure\Services\Blob\Models\ListBlobBlocksOptions::getLeaseId
-     * @covers PEAR2\WindowsAzure\Services\Blob\Models\ListBlobBlocksOptions::__construct
+     * @covers WindowsAzure\Services\Blob\Models\ListBlobBlocksOptions::setLeaseId
+     * @covers WindowsAzure\Services\Blob\Models\ListBlobBlocksOptions::getLeaseId
+     * @covers WindowsAzure\Services\Blob\Models\ListBlobBlocksOptions::__construct
      */
     public function testSetLeaseId()
     {
@@ -93,7 +93,7 @@ class ListBlobBlocksOptionsTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers PEAR2\WindowsAzure\Services\Blob\Models\ListBlobBlocksOptions::setIncludeUncommittedBlobs
+     * @covers WindowsAzure\Services\Blob\Models\ListBlobBlocksOptions::setIncludeUncommittedBlobs
      */
     public function testSetIncludeUncommittedBlobs()
     {
@@ -109,7 +109,7 @@ class ListBlobBlocksOptionsTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers PEAR2\WindowsAzure\Services\Blob\Models\ListBlobBlocksOptions::getIncludeUncommittedBlobs
+     * @covers WindowsAzure\Services\Blob\Models\ListBlobBlocksOptions::getIncludeUncommittedBlobs
      */
     public function testGetIncludeUncommittedBlobs()
     {
@@ -126,7 +126,7 @@ class ListBlobBlocksOptionsTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers PEAR2\WindowsAzure\Services\Blob\Models\ListBlobBlocksOptions::setIncludeCommittedBlobs
+     * @covers WindowsAzure\Services\Blob\Models\ListBlobBlocksOptions::setIncludeCommittedBlobs
      */
     public function testSetIncludeCommittedBlobs()
     {
@@ -142,7 +142,7 @@ class ListBlobBlocksOptionsTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers PEAR2\WindowsAzure\Services\Blob\Models\ListBlobBlocksOptions::getIncludeCommittedBlobs
+     * @covers WindowsAzure\Services\Blob\Models\ListBlobBlocksOptions::getIncludeCommittedBlobs
      */
     public function testGetIncludeCommittedBlobs()
     {
@@ -159,7 +159,7 @@ class ListBlobBlocksOptionsTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers PEAR2\WindowsAzure\Services\Blob\Models\ListBlobBlocksOptions::getBlockListType
+     * @covers WindowsAzure\Services\Blob\Models\ListBlobBlocksOptions::getBlockListType
      */
     public function testGetBlockListType()
     {

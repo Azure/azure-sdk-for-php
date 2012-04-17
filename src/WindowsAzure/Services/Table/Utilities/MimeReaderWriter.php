@@ -15,24 +15,24 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   PEAR2\WindowsAzure\Services\Table\Utilities
+ * @package   WindowsAzure\Services\Table\Utilities
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
  
-namespace PEAR2\WindowsAzure\Services\Table\Utilities;
+namespace WindowsAzure\Services\Table\Utilities;
 require_once 'PEAR.php';
 require_once 'Mail/mimePart.php';
 require_once 'Mail/mimeDecode.php';
-use PEAR2\WindowsAzure\Resources;
+use WindowsAzure\Resources;
 
 /**
  * Reads and writes MIME for batch API.
  *
  * @category  Microsoft
- * @package   PEAR2\WindowsAzure\Services\Table\Utilities
+ * @package   WindowsAzure\Services\Table\Utilities
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0

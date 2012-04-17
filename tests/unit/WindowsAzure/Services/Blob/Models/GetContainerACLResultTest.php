@@ -15,24 +15,24 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   PEAR2\Tests\Unit\WindowsAzure\Services\Blob\Models
+ * @package   Tests\Unit\WindowsAzure\Services\Blob\Models
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
-namespace PEAR2\Tests\Unit\WindowsAzure\Services\Blob\Models;
-use PEAR2\WindowsAzure\Services\Blob\Models\GetContainerAclResult;
-use PEAR2\WindowsAzure\Services\Blob\Models\ContainerAcl;
-use PEAR2\Tests\Framework\TestResources;
-use PEAR2\WindowsAzure\Resources;
-use PEAR2\WindowsAzure\Core\WindowsAzureUtilities;
+namespace Tests\Unit\WindowsAzure\Services\Blob\Models;
+use WindowsAzure\Services\Blob\Models\GetContainerAclResult;
+use WindowsAzure\Services\Blob\Models\ContainerAcl;
+use Tests\Framework\TestResources;
+use WindowsAzure\Resources;
+use WindowsAzure\Core\WindowsAzureUtilities;
 
 /**
  * Unit tests for class GetContainerAclResult
  *
  * @category  Microsoft
- * @package   PEAR2\Tests\Unit\WindowsAzure\Services\Blob\Models
+ * @package   Tests\Unit\WindowsAzure\Services\Blob\Models
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
@@ -42,7 +42,7 @@ use PEAR2\WindowsAzure\Core\WindowsAzureUtilities;
 class GetContainerAclResultTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @covers PEAR2\WindowsAzure\Services\Blob\Models\GetContainerAclResult::create
+     * @covers WindowsAzure\Services\Blob\Models\GetContainerAclResult::create
      */
     public function testCreate()
     {
@@ -66,7 +66,7 @@ class GetContainerAclResultTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers PEAR2\WindowsAzure\Services\Blob\Models\GetContainerAclResult::getContainerAcl
+     * @covers WindowsAzure\Services\Blob\Models\GetContainerAclResult::getContainerAcl
      */
     public function testGetContainerAcl()
     {
@@ -85,7 +85,7 @@ class GetContainerAclResultTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers PEAR2\WindowsAzure\Services\Blob\Models\GetContainerAclResult::setContainerAcl
+     * @covers WindowsAzure\Services\Blob\Models\GetContainerAclResult::setContainerAcl
      */
     public function testSetContainerAcl()
     {

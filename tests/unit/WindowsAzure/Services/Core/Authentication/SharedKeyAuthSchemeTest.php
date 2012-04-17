@@ -17,22 +17,22 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- * @package    PEAR2\Tests\Unit\WindowsAzure\Services\Core\Authentication
+ * @package    Tests\Unit\WindowsAzure\Services\Core\Authentication
  * @author     Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright  2012 Microsoft Corporation
  * @license    http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link       http://pear.php.net/package/azure-sdk-for-php
  */
 
-namespace PEAR2\Tests\Unit\WindowsAzure\Services\Core\Authentication;
-use PEAR2\Tests\Mock\WindowsAzure\Services\Core\Authentication\SharedKeyAuthSchemeMock;
-use PEAR2\WindowsAzure\Resources;
-use PEAR2\Tests\Framework\TestResources;
+namespace Tests\Unit\WindowsAzure\Services\Core\Authentication;
+use Tests\Mock\WindowsAzure\Services\Core\Authentication\SharedKeyAuthSchemeMock;
+use WindowsAzure\Resources;
+use Tests\Framework\TestResources;
 
 /**
  * Unit tests for SharedKeyAuthScheme class.
  *
- * @package    PEAR2\Tests\Unit\WindowsAzure\Services\Core\Authentication
+ * @package    Tests\Unit\WindowsAzure\Services\Core\Authentication
  * @author     Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright  2012 Microsoft Corporation
  * @license    http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
@@ -42,7 +42,7 @@ use PEAR2\Tests\Framework\TestResources;
 class SharedKeyAuthSchemeTest extends \PHPUnit_Framework_TestCase
 {
     /**
-    * @covers PEAR2\WindowsAzure\Services\Core\Authentication\SharedKeyAuthScheme::__construct
+    * @covers WindowsAzure\Services\Core\Authentication\SharedKeyAuthScheme::__construct
     */
     public function test__construct()
     {
@@ -65,7 +65,7 @@ class SharedKeyAuthSchemeTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-    * @covers PEAR2\WindowsAzure\Services\Core\Authentication\SharedKeyAuthScheme::computeSignature
+    * @covers WindowsAzure\Services\Core\Authentication\SharedKeyAuthScheme::computeSignature
     */
     public function testComputeSignatureSimple()
     {
@@ -86,7 +86,7 @@ class SharedKeyAuthSchemeTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers PEAR2\WindowsAzure\Services\Core\Authentication\SharedKeyAuthScheme::getAuthorizationHeader
+     * @covers WindowsAzure\Services\Core\Authentication\SharedKeyAuthScheme::getAuthorizationHeader
      */
     public function testGetAuthorizationHeaderSimple()
     {

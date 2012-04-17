@@ -15,25 +15,25 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   PEAR2\Tests\Unit\WindowsAzure
+ * @package   Tests\Unit\WindowsAzure
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
 
-namespace PEAR2\Tests\Unit\WindowsAzure;
-use PEAR2\WindowsAzure\Utilities;
-use PEAR2\WindowsAzure\Resources;
-use PEAR2\Tests\Framework\TestResources;
-use PEAR2\Tests\Framework\VirtualFileSystem;
-use PEAR2\WindowsAzure\Services\Core\Models\ServiceProperties;
+namespace Tests\Unit\WindowsAzure;
+use WindowsAzure\Utilities;
+use WindowsAzure\Resources;
+use Tests\Framework\TestResources;
+use Tests\Framework\VirtualFileSystem;
+use WindowsAzure\Services\Core\Models\ServiceProperties;
 
 /**
  * Unit tests for class Utilities
  *
  * @category  Microsoft
- * @package   PEAR2\Tests\Unit\WindowsAzure
+ * @package   Tests\Unit\WindowsAzure
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
@@ -43,7 +43,7 @@ use PEAR2\WindowsAzure\Services\Core\Models\ServiceProperties;
 class UtilitiesTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @covers PEAR2\WindowsAzure\Utilities::tryGetValue
+     * @covers WindowsAzure\Utilities::tryGetValue
      */
     public function testTryGetValue()
     {
@@ -59,7 +59,7 @@ class UtilitiesTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers PEAR2\WindowsAzure\Utilities::tryGetValue
+     * @covers WindowsAzure\Utilities::tryGetValue
      */
     public function testTryGetValueUsingDefault()
     {
@@ -75,7 +75,7 @@ class UtilitiesTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers PEAR2\WindowsAzure\Utilities::tryGetValue
+     * @covers WindowsAzure\Utilities::tryGetValue
      */
     public function testTryGetValueWithNull()
     {
@@ -90,7 +90,7 @@ class UtilitiesTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers PEAR2\WindowsAzure\Utilities::tryGetKeysChainValue
+     * @covers WindowsAzure\Utilities::tryGetKeysChainValue
      */
     public function testTryGetKeysChainValue()
     {
@@ -116,7 +116,7 @@ class UtilitiesTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers PEAR2\WindowsAzure\Utilities::startsWith
+     * @covers WindowsAzure\Utilities::startsWith
      */
     public function testStartsWith()
     {
@@ -131,7 +131,7 @@ class UtilitiesTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers PEAR2\WindowsAzure\Utilities::startsWith
+     * @covers WindowsAzure\Utilities::startsWith
      */
     public function testStartsWithDoesNotStartWithPrefix()
     {
@@ -146,7 +146,7 @@ class UtilitiesTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers PEAR2\WindowsAzure\Utilities::getArray
+     * @covers WindowsAzure\Utilities::getArray
      */
     public function testGetArray()
     {
@@ -160,7 +160,7 @@ class UtilitiesTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers PEAR2\WindowsAzure\Utilities::getArray
+     * @covers WindowsAzure\Utilities::getArray
      */
     public function testGetArrayWithFlatValue()
     {
@@ -175,7 +175,7 @@ class UtilitiesTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers PEAR2\WindowsAzure\Utilities::getArray
+     * @covers WindowsAzure\Utilities::getArray
      */
     public function testGetArrayWithMixtureValue()
     {
@@ -190,7 +190,7 @@ class UtilitiesTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers PEAR2\WindowsAzure\Utilities::getArray
+     * @covers WindowsAzure\Utilities::getArray
      */
     public function testGetArrayWithEmptyValue()
     {
@@ -205,8 +205,8 @@ class UtilitiesTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers PEAR2\WindowsAzure\Utilities::unserialize
-     * @covers PEAR2\WindowsAzure\Utilities::_sxml2arr
+     * @covers WindowsAzure\Utilities::unserialize
+     * @covers WindowsAzure\Utilities::_sxml2arr
      */
     public function testUnserialize()
     {
@@ -223,8 +223,8 @@ class UtilitiesTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers PEAR2\WindowsAzure\Utilities::serialize
-     * @covers PEAR2\WindowsAzure\Utilities::_arr2xml
+     * @covers WindowsAzure\Utilities::serialize
+     * @covers WindowsAzure\Utilities::_arr2xml
      */
     public function testSerialize()
     {
@@ -241,8 +241,8 @@ class UtilitiesTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers PEAR2\WindowsAzure\Utilities::serialize
-     * @covers PEAR2\WindowsAzure\Utilities::_arr2xml
+     * @covers WindowsAzure\Utilities::serialize
+     * @covers WindowsAzure\Utilities::_arr2xml
      */
     public function testSerializeNoArray()
     {
@@ -257,8 +257,8 @@ class UtilitiesTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers PEAR2\WindowsAzure\Utilities::serialize
-     * @covers PEAR2\WindowsAzure\Utilities::_arr2xml
+     * @covers WindowsAzure\Utilities::serialize
+     * @covers WindowsAzure\Utilities::_arr2xml
      */
     public function testSerializeAttribute()
     {
@@ -280,7 +280,7 @@ class UtilitiesTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers PEAR2\WindowsAzure\Utilities::toBoolean
+     * @covers WindowsAzure\Utilities::toBoolean
      */
     public function testToBoolean()
     {
@@ -297,7 +297,7 @@ class UtilitiesTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers PEAR2\WindowsAzure\Utilities::booleanToString
+     * @covers WindowsAzure\Utilities::booleanToString
      */
     public function testBooleanToString()
     {
@@ -313,7 +313,7 @@ class UtilitiesTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers PEAR2\WindowsAzure\Utilities::keysToLower
+     * @covers WindowsAzure\Utilities::keysToLower
      */
     public function testKeysToLower()
     {
@@ -329,7 +329,7 @@ class UtilitiesTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers PEAR2\WindowsAzure\Utilities::isoDate
+     * @covers WindowsAzure\Utilities::isoDate
      */
     public function testIsoDate()
     {
@@ -341,7 +341,7 @@ class UtilitiesTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers PEAR2\WindowsAzure\Utilities::convertToEdmDateTime
+     * @covers WindowsAzure\Utilities::convertToEdmDateTime
      */
     public function testConvertToEdmDateTime()
     {
@@ -353,7 +353,7 @@ class UtilitiesTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers PEAR2\WindowsAzure\Utilities::convertToDateTime
+     * @covers WindowsAzure\Utilities::convertToDateTime
      */
     public function testConvertToDateTime()
     {
@@ -368,7 +368,7 @@ class UtilitiesTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers PEAR2\WindowsAzure\Utilities::convertToDateTime
+     * @covers WindowsAzure\Utilities::convertToDateTime
      */
     public function testConvertToDateTimeWithDate()
     {
@@ -383,7 +383,7 @@ class UtilitiesTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers PEAR2\WindowsAzure\Utilities::readFile
+     * @covers WindowsAzure\Utilities::readFile
      */
     public function testReadFile()
     {

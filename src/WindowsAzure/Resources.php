@@ -15,20 +15,20 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   PEAR2\WindowsAzure
+ * @package   WindowsAzure
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
  
-namespace PEAR2\WindowsAzure;
+namespace WindowsAzure;
 
 /**
  * Project resources.
  *
  * @category  Microsoft
- * @package   PEAR2\WindowsAzure
+ * @package   WindowsAzure
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
@@ -112,7 +112,12 @@ class Resources
     const TABLE_TYPE_NAME = 'ITable';
     
     // HTTP Methods
-    const HTTP_MERGE = 'MERGE';
+    const HTTP_GET    = 'GET';
+    const HTTP_PUT    = 'PUT';
+    const HTTP_POST   = 'POST';
+    const HTTP_HEAD   = 'HEAD';
+    const HTTP_DELETE = 'DELETE';
+    const HTTP_MERGE  = 'MERGE';
     
     // Misc
     const EMPTY_STRING       = '';

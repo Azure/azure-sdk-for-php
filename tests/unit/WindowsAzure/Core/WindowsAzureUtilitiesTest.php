@@ -15,21 +15,21 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   PEAR2\Tests\Unit\WindowsAzure
+ * @package   Tests\Unit\WindowsAzure
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
 
-use PEAR2\WindowsAzure\Core\WindowsAzureUtilities;
-use PEAR2\WindowsAzure\Resources;
+use WindowsAzure\Core\WindowsAzureUtilities;
+use WindowsAzure\Resources;
 
 /**
  * Unit tests for class WindowsAzureUtilities
  *
  * @category  Microsoft
- * @package   PEAR2\Tests\Unit\WindowsAzure
+ * @package   Tests\Unit\WindowsAzure
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
@@ -39,7 +39,7 @@ use PEAR2\WindowsAzure\Resources;
 class WindowsAzureUtilitiesTest extends PHPUnit_Framework_TestCase
 {
     /**
-     * @covers PEAR2\WindowsAzure\Core\WindowsAzureUtilities::generateMetadataHeaders
+     * @covers WindowsAzure\Core\WindowsAzureUtilities::generateMetadataHeaders
      */
     public function testGenerateMetadataHeader()
     {
@@ -58,7 +58,7 @@ class WindowsAzureUtilitiesTest extends PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers PEAR2\WindowsAzure\Core\WindowsAzureUtilities::generateMetadataHeaders
+     * @covers WindowsAzure\Core\WindowsAzureUtilities::generateMetadataHeaders
      */
     public function testGenerateMetadataHeaderInvalidNameFail()
     {
@@ -71,7 +71,7 @@ class WindowsAzureUtilitiesTest extends PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers PEAR2\WindowsAzure\Core\WindowsAzureUtilities::getMetadataArray
+     * @covers WindowsAzure\Core\WindowsAzureUtilities::getMetadataArray
      */
     public function testGetMetadataArray()
     {
@@ -90,7 +90,7 @@ class WindowsAzureUtilitiesTest extends PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers PEAR2\WindowsAzure\Core\WindowsAzureUtilities::getMetadataArray
+     * @covers WindowsAzure\Core\WindowsAzureUtilities::getMetadataArray
      */
     public function testGetMetadataArrayWithMsHeaders()
     {
@@ -110,7 +110,7 @@ class WindowsAzureUtilitiesTest extends PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers PEAR2\WindowsAzure\Core\WindowsAzureUtilities::rfc1123ToDateTime
+     * @covers WindowsAzure\Core\WindowsAzureUtilities::rfc1123ToDateTime
      */
     public function testWindowsAzureDateToDateTime()
     {
@@ -125,7 +125,7 @@ class WindowsAzureUtilitiesTest extends PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers PEAR2\WindowsAzure\Core\WindowsAzureUtilities::isEmulated
+     * @covers WindowsAzure\Core\WindowsAzureUtilities::isEmulated
      */
     public function testIsEmulated()
     {

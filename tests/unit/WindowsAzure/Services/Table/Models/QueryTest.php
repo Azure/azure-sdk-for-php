@@ -15,23 +15,23 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   PEAR2\Tests\Unit\WindowsAzure\Services\Table\Models
+ * @package   Tests\Unit\WindowsAzure\Services\Table\Models
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
 
-namespace PEAR2\Tests\Unit\WindowsAzure\Services\Table\Models;
-use PEAR2\WindowsAzure\Services\Table\Models\Query;
-use PEAR2\WindowsAzure\Services\Table\Models\Filters\Filter;
-use PEAR2\WindowsAzure\Services\Table\Models\EdmType;
+namespace Tests\Unit\WindowsAzure\Services\Table\Models;
+use WindowsAzure\Services\Table\Models\Query;
+use WindowsAzure\Services\Table\Models\Filters\Filter;
+use WindowsAzure\Services\Table\Models\EdmType;
 
 /**
  * Unit tests for class Query
  *
  * @category  Microsoft
- * @package   PEAR2\Tests\Unit\WindowsAzure\Services\Table\Models
+ * @package   Tests\Unit\WindowsAzure\Services\Table\Models
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
@@ -41,8 +41,8 @@ use PEAR2\WindowsAzure\Services\Table\Models\EdmType;
 class QueryTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @covers PEAR2\WindowsAzure\Services\Table\Models\Query::setSelectFields
-     * @covers PEAR2\WindowsAzure\Services\Table\Models\Query::getSelectFields
+     * @covers WindowsAzure\Services\Table\Models\Query::setSelectFields
+     * @covers WindowsAzure\Services\Table\Models\Query::getSelectFields
      */
     public function testSetSelectFields()
     {
@@ -58,8 +58,8 @@ class QueryTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers PEAR2\WindowsAzure\Services\Table\Models\Query::setTop
-     * @covers PEAR2\WindowsAzure\Services\Table\Models\Query::getTop
+     * @covers WindowsAzure\Services\Table\Models\Query::setTop
+     * @covers WindowsAzure\Services\Table\Models\Query::getTop
      */
     public function testSetTop()
     {
@@ -75,8 +75,8 @@ class QueryTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers PEAR2\WindowsAzure\Services\Table\Models\Query::setFilter
-     * @covers PEAR2\WindowsAzure\Services\Table\Models\Query::getFilter
+     * @covers WindowsAzure\Services\Table\Models\Query::setFilter
+     * @covers WindowsAzure\Services\Table\Models\Query::getFilter
      */
     public function testSetFilter()
     {
@@ -92,8 +92,8 @@ class QueryTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers PEAR2\WindowsAzure\Services\Table\Models\Query::addSelectField
-     * @covers PEAR2\WindowsAzure\Services\Table\Models\Query::getSelectFields
+     * @covers WindowsAzure\Services\Table\Models\Query::addSelectField
+     * @covers WindowsAzure\Services\Table\Models\Query::getSelectFields
      */
     public function testAddSelectField()
     {

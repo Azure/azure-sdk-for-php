@@ -15,21 +15,21 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   PEAR2\Tests\Unit\WindowsAzure\Services\Blob\Models
+ * @package   Tests\Unit\WindowsAzure\Services\Blob\Models
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
-namespace PEAR2\Tests\Unit\WindowsAzure\Services\Blob\Models;
-use PEAR2\WindowsAzure\Services\Blob\Models\BlockList;
-use PEAR2\WindowsAzure\Services\Blob\Models\BlobBlockType;
+namespace Tests\Unit\WindowsAzure\Services\Blob\Models;
+use WindowsAzure\Services\Blob\Models\BlockList;
+use WindowsAzure\Services\Blob\Models\BlobBlockType;
 
 /**
  * Unit tests for class BlockList
  *
  * @category  Microsoft
- * @package   PEAR2\Tests\Unit\WindowsAzure\Services\Blob\Models
+ * @package   Tests\Unit\WindowsAzure\Services\Blob\Models
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
@@ -39,8 +39,8 @@ use PEAR2\WindowsAzure\Services\Blob\Models\BlobBlockType;
 class BlockListTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @covers PEAR2\WindowsAzure\Services\Blob\Models\BlockList::setEntry
-     * @covers PEAR2\WindowsAzure\Services\Blob\Models\BlockList::getEntry
+     * @covers WindowsAzure\Services\Blob\Models\BlockList::setEntry
+     * @covers WindowsAzure\Services\Blob\Models\BlockList::getEntry
      */
     public function testSetEntry()
     {
@@ -57,7 +57,7 @@ class BlockListTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers PEAR2\WindowsAzure\Services\Blob\Models\BlockList::getEntries
+     * @covers WindowsAzure\Services\Blob\Models\BlockList::getEntries
      */
     public function testGetEntries()
     {

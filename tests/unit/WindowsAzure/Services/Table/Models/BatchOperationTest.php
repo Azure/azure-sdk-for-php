@@ -15,23 +15,23 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   PEAR2\Tests\Unit\WindowsAzure\Services\Table\Models
+ * @package   Tests\Unit\WindowsAzure\Services\Table\Models
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
 
-namespace PEAR2\Tests\Unit\WindowsAzure\Services\Table\Models;
-use PEAR2\WindowsAzure\Services\Table\Models\BatchOperation;
-use PEAR2\WindowsAzure\Services\Table\Models\BatchOperationType;
-use PEAR2\WindowsAzure\Services\Table\Models\BatchOperationParameterName;
+namespace Tests\Unit\WindowsAzure\Services\Table\Models;
+use WindowsAzure\Services\Table\Models\BatchOperation;
+use WindowsAzure\Services\Table\Models\BatchOperationType;
+use WindowsAzure\Services\Table\Models\BatchOperationParameterName;
 
 /**
  * Unit tests for class BatchOperation
  *
  * @category  Microsoft
- * @package   PEAR2\Tests\Unit\WindowsAzure\Services\Table\Models
+ * @package   Tests\Unit\WindowsAzure\Services\Table\Models
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
@@ -41,8 +41,8 @@ use PEAR2\WindowsAzure\Services\Table\Models\BatchOperationParameterName;
 class BatchOperationTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @covers PEAR2\WindowsAzure\Services\Table\Models\BatchOperation::setType
-     * @covers PEAR2\WindowsAzure\Services\Table\Models\BatchOperation::getType
+     * @covers WindowsAzure\Services\Table\Models\BatchOperation::setType
+     * @covers WindowsAzure\Services\Table\Models\BatchOperation::getType
      */
     public function testSetType()
     {
@@ -58,8 +58,8 @@ class BatchOperationTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers PEAR2\WindowsAzure\Services\Table\Models\BatchOperation::addParameter
-     * @covers PEAR2\WindowsAzure\Services\Table\Models\BatchOperation::getParameter
+     * @covers WindowsAzure\Services\Table\Models\BatchOperation::addParameter
+     * @covers WindowsAzure\Services\Table\Models\BatchOperation::getParameter
      */
     public function testAddParameter()
     {

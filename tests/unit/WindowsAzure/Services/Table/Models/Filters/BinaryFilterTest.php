@@ -15,21 +15,21 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   PEAR2\Tests\Unit\WindowsAzure\Services\Table\Models\Filters
+ * @package   Tests\Unit\WindowsAzure\Services\Table\Models\Filters
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
 
-namespace PEAR2\Tests\Unit\WindowsAzure\Services\Table\Models\Filters;
-use PEAR2\WindowsAzure\Services\Table\Models\Filters\BinaryFilter;
+namespace Tests\Unit\WindowsAzure\Services\Table\Models\Filters;
+use WindowsAzure\Services\Table\Models\Filters\BinaryFilter;
 
 /**
  * Unit tests for class BinaryFilter
  *
  * @category  Microsoft
- * @package   PEAR2\Tests\Unit\WindowsAzure\Services\Table\Models\Filters
+ * @package   Tests\Unit\WindowsAzure\Services\Table\Models\Filters
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
@@ -39,8 +39,8 @@ use PEAR2\WindowsAzure\Services\Table\Models\Filters\BinaryFilter;
 class BinaryFilterTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @covers PEAR2\WindowsAzure\Services\Table\Models\Filters\BinaryFilter::setOperator
-     * @covers PEAR2\WindowsAzure\Services\Table\Models\Filters\BinaryFilter::getOperator
+     * @covers WindowsAzure\Services\Table\Models\Filters\BinaryFilter::setOperator
+     * @covers WindowsAzure\Services\Table\Models\Filters\BinaryFilter::getOperator
      */
     public function testSetOperator()
     {
@@ -56,8 +56,8 @@ class BinaryFilterTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers PEAR2\WindowsAzure\Services\Table\Models\Filters\BinaryFilter::setLeft
-     * @covers PEAR2\WindowsAzure\Services\Table\Models\Filters\BinaryFilter::getLeft
+     * @covers WindowsAzure\Services\Table\Models\Filters\BinaryFilter::setLeft
+     * @covers WindowsAzure\Services\Table\Models\Filters\BinaryFilter::getLeft
      */
     public function testSetLeft()
     {
@@ -73,8 +73,8 @@ class BinaryFilterTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers PEAR2\WindowsAzure\Services\Table\Models\Filters\BinaryFilter::setRight
-     * @covers PEAR2\WindowsAzure\Services\Table\Models\Filters\BinaryFilter::getRight
+     * @covers WindowsAzure\Services\Table\Models\Filters\BinaryFilter::setRight
+     * @covers WindowsAzure\Services\Table\Models\Filters\BinaryFilter::getRight
      */
     public function testSetRight()
     {

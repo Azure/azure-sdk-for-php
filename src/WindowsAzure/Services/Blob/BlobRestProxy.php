@@ -15,63 +15,63 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   PEAR2\WindowsAzure\Services\Blob\BlobRestProxy
+ * @package   WindowsAzure\Services\Blob\BlobRestProxy
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
  
-namespace PEAR2\WindowsAzure\Services\Blob;
-use PEAR2\WindowsAzure\Utilities;
-use PEAR2\WindowsAzure\Resources;
-use PEAR2\WindowsAzure\Core\WindowsAzureUtilities;
-use PEAR2\WindowsAzure\Services\Core\ServiceRestProxy;
-use PEAR2\WindowsAzure\Services\Blob\IBlob;
-use PEAR2\WindowsAzure\Services\Blob\Models\BlobServiceOptions;
-use PEAR2\WindowsAzure\Services\Core\Models\GetServicePropertiesResult;
-use PEAR2\WindowsAzure\Services\Blob\Models\ListContainersOptions;
-use PEAR2\WindowsAzure\Services\Blob\Models\ListContainersResult;
-use PEAR2\WindowsAzure\Services\Blob\Models\CreateContainerOptions;
-use PEAR2\WindowsAzure\Services\Blob\Models\GetContainerPropertiesResult;
-use PEAR2\WindowsAzure\Services\Blob\Models\GetContainerAclResult;
-use PEAR2\WindowsAzure\Services\Blob\Models\SetContainerMetadataOptions;
-use PEAR2\WindowsAzure\Services\Blob\Models\ListBlobsOptions;
-use PEAR2\WindowsAzure\Services\Blob\Models\ListBlobsResult;
-use PEAR2\WindowsAzure\Services\Blob\Models\BlobType;
-use PEAR2\WindowsAzure\Services\Blob\Models\CreateBlobOptions;
-use PEAR2\WindowsAzure\Services\Blob\Models\BlobProperties;
-use PEAR2\WindowsAzure\Services\Blob\Models\GetBlobPropertiesOptions;
-use PEAR2\WindowsAzure\Services\Blob\Models\GetBlobPropertiesResult;
-use PEAR2\WindowsAzure\Services\Blob\Models\SetBlobPropertiesOptions;
-use PEAR2\WindowsAzure\Services\Blob\Models\SetBlobPropertiesResult;
-use PEAR2\WindowsAzure\Services\Blob\Models\GetBlobMetadataOptions;
-use PEAR2\WindowsAzure\Services\Blob\Models\GetBlobMetadataResult;
-use PEAR2\WindowsAzure\Services\Blob\Models\SetBlobMetadataOptions;
-use PEAR2\WindowsAzure\Services\Blob\Models\SetBlobMetadataResult;
-use PEAR2\WindowsAzure\Services\Blob\Models\GetBlobOptions;
-use PEAR2\WindowsAzure\Services\Blob\Models\GetBlobResult;
-use PEAR2\WindowsAzure\Services\Blob\Models\DeleteBlobOptions;
-use PEAR2\WindowsAzure\Services\Blob\Models\LeaseMode;
-use PEAR2\WindowsAzure\Services\Blob\Models\AcquireLeaseOptions;
-use PEAR2\WindowsAzure\Services\Blob\Models\AcquireLeaseResult;
-use PEAR2\WindowsAzure\Services\Blob\Models\CreateBlobPagesOptions;
-use PEAR2\WindowsAzure\Services\Blob\Models\CreateBlobPagesResult;
-use PEAR2\WindowsAzure\Services\Blob\Models\PageWriteOption;
-use PEAR2\WindowsAzure\Services\Blob\Models\ListPageBlobRangesOptions;
-use PEAR2\WindowsAzure\Services\Blob\Models\ListPageBlobRangesResult;
-use PEAR2\WindowsAzure\Services\Blob\Models\CreateBlobBlockOptions;
-use PEAR2\WindowsAzure\Services\Blob\Models\CommitBlobBlocksOptions;
-use PEAR2\WindowsAzure\Services\Blob\Models\BlockList;
-use PEAR2\WindowsAzure\Services\Blob\Models\ListBlobBlocksOptions;
-use PEAR2\WindowsAzure\Services\Blob\Models\ListBlobBlocksResult;
+namespace WindowsAzure\Services\Blob;
+use WindowsAzure\Utilities;
+use WindowsAzure\Resources;
+use WindowsAzure\Core\WindowsAzureUtilities;
+use WindowsAzure\Services\Core\ServiceRestProxy;
+use WindowsAzure\Services\Blob\IBlob;
+use WindowsAzure\Services\Blob\Models\BlobServiceOptions;
+use WindowsAzure\Services\Core\Models\GetServicePropertiesResult;
+use WindowsAzure\Services\Blob\Models\ListContainersOptions;
+use WindowsAzure\Services\Blob\Models\ListContainersResult;
+use WindowsAzure\Services\Blob\Models\CreateContainerOptions;
+use WindowsAzure\Services\Blob\Models\GetContainerPropertiesResult;
+use WindowsAzure\Services\Blob\Models\GetContainerAclResult;
+use WindowsAzure\Services\Blob\Models\SetContainerMetadataOptions;
+use WindowsAzure\Services\Blob\Models\ListBlobsOptions;
+use WindowsAzure\Services\Blob\Models\ListBlobsResult;
+use WindowsAzure\Services\Blob\Models\BlobType;
+use WindowsAzure\Services\Blob\Models\CreateBlobOptions;
+use WindowsAzure\Services\Blob\Models\BlobProperties;
+use WindowsAzure\Services\Blob\Models\GetBlobPropertiesOptions;
+use WindowsAzure\Services\Blob\Models\GetBlobPropertiesResult;
+use WindowsAzure\Services\Blob\Models\SetBlobPropertiesOptions;
+use WindowsAzure\Services\Blob\Models\SetBlobPropertiesResult;
+use WindowsAzure\Services\Blob\Models\GetBlobMetadataOptions;
+use WindowsAzure\Services\Blob\Models\GetBlobMetadataResult;
+use WindowsAzure\Services\Blob\Models\SetBlobMetadataOptions;
+use WindowsAzure\Services\Blob\Models\SetBlobMetadataResult;
+use WindowsAzure\Services\Blob\Models\GetBlobOptions;
+use WindowsAzure\Services\Blob\Models\GetBlobResult;
+use WindowsAzure\Services\Blob\Models\DeleteBlobOptions;
+use WindowsAzure\Services\Blob\Models\LeaseMode;
+use WindowsAzure\Services\Blob\Models\AcquireLeaseOptions;
+use WindowsAzure\Services\Blob\Models\AcquireLeaseResult;
+use WindowsAzure\Services\Blob\Models\CreateBlobPagesOptions;
+use WindowsAzure\Services\Blob\Models\CreateBlobPagesResult;
+use WindowsAzure\Services\Blob\Models\PageWriteOption;
+use WindowsAzure\Services\Blob\Models\ListPageBlobRangesOptions;
+use WindowsAzure\Services\Blob\Models\ListPageBlobRangesResult;
+use WindowsAzure\Services\Blob\Models\CreateBlobBlockOptions;
+use WindowsAzure\Services\Blob\Models\CommitBlobBlocksOptions;
+use WindowsAzure\Services\Blob\Models\BlockList;
+use WindowsAzure\Services\Blob\Models\ListBlobBlocksOptions;
+use WindowsAzure\Services\Blob\Models\ListBlobBlocksResult;
 
 /**
  * This class constructs HTTP requests and receive HTTP responses for blob
  * service layer.
  *
  * @category  Microsoft
- * @package   PEAR2\WindowsAzure\Services\Blob\BlobRestProxy
+ * @package   WindowsAzure\Services\Blob\BlobRestProxy
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
@@ -137,7 +137,7 @@ class BlobRestProxy extends ServiceRestProxy implements IBlob
     private function _getContainerPropertiesImpl($container, $options = null,
         $operation = null
     ) {
-        $method      = \HTTP_Request2::METHOD_GET;
+        $method      = Resources::HTTP_GET;
         $headers     = array();
         $queryParams = array();
         $path        = $container;
@@ -245,7 +245,7 @@ class BlobRestProxy extends ServiceRestProxy implements IBlob
     private function _putLeaseImpl($leaseAction, $container, $blob, $leaseId, 
         $options, $accessCondition = null
     ) {
-        $method      = \HTTP_Request2::METHOD_PUT;
+        $method      = Resources::HTTP_PUT;
         $headers     = array();
         $queryParams = array();
         $path        = $container . '/' . $blob;
@@ -301,7 +301,7 @@ class BlobRestProxy extends ServiceRestProxy implements IBlob
     private function _updatePageBlobPagesImpl($action, $container, $blob, $range,
         $content, $options = null
     ) {
-        $method      = \HTTP_Request2::METHOD_PUT;
+        $method      = Resources::HTTP_PUT;
         $headers     = array();
         $queryParams = array();
         $path        = $container . '/' . $blob;
@@ -339,13 +339,13 @@ class BlobRestProxy extends ServiceRestProxy implements IBlob
      * 
      * @param Models\BlobServiceOptions $options optional blob service options.
      * 
-     * @return PEAR2\WindowsAzure\Services\Core\Models\GetServicePropertiesResult
+     * @return WindowsAzure\Services\Core\Models\GetServicePropertiesResult
      * 
      * @see http://msdn.microsoft.com/en-us/library/windowsazure/hh452239.aspx
      */
     public function getServiceProperties($options = null)
     {
-        $method      = \HTTP_Request2::METHOD_GET;
+        $method      = Resources::HTTP_GET;
         $headers     = array();
         $queryParams = array();
         $path        = Resources::EMPTY_STRING;
@@ -377,7 +377,7 @@ class BlobRestProxy extends ServiceRestProxy implements IBlob
      */
     public function setServiceProperties($serviceProperties, $options = null)
     {
-        $method      = \HTTP_Request2::METHOD_PUT;
+        $method      = Resources::HTTP_PUT;
         $headers     = array();
         $queryParams = array();
         $statusCode  = Resources::STATUS_ACCEPTED;
@@ -402,13 +402,13 @@ class BlobRestProxy extends ServiceRestProxy implements IBlob
      * 
      * @param Models\ListContainersOptions $options optional parameters
      * 
-     * @return PEAR2\WindowsAzure\Services\Blob\Models\ListContainersResult
+     * @return WindowsAzure\Services\Blob\Models\ListContainersResult
      * 
      * @see http://msdn.microsoft.com/en-us/library/windowsazure/dd179352.aspx
      */
     public function listContainers($options = null)
     {
-        $method      = \HTTP_Request2::METHOD_GET;
+        $method      = Resources::HTTP_GET;
         $headers     = array();
         $queryParams = array();
         $path        = Resources::EMPTY_STRING;
@@ -444,7 +444,7 @@ class BlobRestProxy extends ServiceRestProxy implements IBlob
      */
     public function createContainer($container, $options = null)
     {
-        $method      = \HTTP_Request2::METHOD_PUT;
+        $method      = Resources::HTTP_PUT;
         $headers     = array();
         $queryParams = array(Resources::QP_REST_TYPE => 'container');
         $path        = $container;
@@ -478,7 +478,7 @@ class BlobRestProxy extends ServiceRestProxy implements IBlob
      */
     public function deleteContainer($container, $options = null)
     {
-        $method      = \HTTP_Request2::METHOD_DELETE;
+        $method      = Resources::HTTP_DELETE;
         $headers     = array();
         $queryParams = array();
         $path        = $container;
@@ -537,7 +537,7 @@ class BlobRestProxy extends ServiceRestProxy implements IBlob
      */
     public function getContainerAcl($container, $options = null)
     {
-        $method      = \HTTP_Request2::METHOD_GET;
+        $method      = Resources::HTTP_GET;
         $headers     = array();
         $queryParams = array();
         $path        = $container;
@@ -574,7 +574,7 @@ class BlobRestProxy extends ServiceRestProxy implements IBlob
      */
     public function setContainerAcl($container, $acl, $options = null)
     {
-        $method      = \HTTP_Request2::METHOD_PUT;
+        $method      = Resources::HTTP_PUT;
         $headers     = array();
         $queryParams = array();
         $path        = $container;
@@ -608,7 +608,7 @@ class BlobRestProxy extends ServiceRestProxy implements IBlob
      */
     public function setContainerMetadata($container, $metadata, $options = null)
     {
-        $method      = \HTTP_Request2::METHOD_PUT;
+        $method      = Resources::HTTP_PUT;
         $headers     = WindowsAzureUtilities::generateMetadataHeaders($metadata);
         $queryParams = array();
         $path        = $container;
@@ -641,7 +641,7 @@ class BlobRestProxy extends ServiceRestProxy implements IBlob
      */
     public function listBlobs($container, $options = null)
     {
-        $method      = \HTTP_Request2::METHOD_GET;
+        $method      = Resources::HTTP_GET;
         $headers     = array();
         $queryParams = array();
         $path        = $container;
@@ -697,7 +697,7 @@ class BlobRestProxy extends ServiceRestProxy implements IBlob
      */
     public function createPageBlob($container, $blob, $length, $options = null)
     {
-        $method      = \HTTP_Request2::METHOD_PUT;
+        $method      = Resources::HTTP_PUT;
         $headers     = array();
         $queryParams = array();
         $path        = $container . '/' . $blob;
@@ -741,12 +741,12 @@ class BlobRestProxy extends ServiceRestProxy implements IBlob
      */
     public function createBlockBlob($container, $blob, $content, $options = null)
     {
-        $method      = \HTTP_Request2::METHOD_PUT;
+        $method      = Resources::HTTP_PUT;
         $headers     = array();
         $queryParams = array();
         $path        = $container . '/' . $blob;
         $statusCode  = Resources::STATUS_CREATED;
-        // If read file failed for any reason it'll throw an exception.
+        // If read file failed for any reason it will throw an exception.
         $body = is_resource($content) ? Utilities::readFile($content) : $content;
         
         if (is_null($options)) {
@@ -831,7 +831,7 @@ class BlobRestProxy extends ServiceRestProxy implements IBlob
     public function createBlobBlock($container, $blob, $blockId, $content,
         $options = null
     ) {
-        $method      = \HTTP_Request2::METHOD_PUT;
+        $method      = Resources::HTTP_PUT;
         $headers     = array();
         $queryParams = array();
         $path        = $container . '/' . $blob;
@@ -874,7 +874,7 @@ class BlobRestProxy extends ServiceRestProxy implements IBlob
      */
     public function commitBlobBlocks($container, $blob, $blockList, $options = null)
     {
-        $method      = \HTTP_Request2::METHOD_PUT;
+        $method      = Resources::HTTP_PUT;
         $headers     = array();
         $queryParams = array();
         $path        = $container . '/' . $blob;
@@ -935,7 +935,7 @@ class BlobRestProxy extends ServiceRestProxy implements IBlob
      */
     public function listBlobBlocks($container, $blob, $options = null)
     {
-        $method      = \HTTP_Request2::METHOD_GET;
+        $method      = Resources::HTTP_GET;
         $headers     = array();
         $queryParams = array();
         $path        = $container . '/' . $blob;
@@ -970,7 +970,7 @@ class BlobRestProxy extends ServiceRestProxy implements IBlob
      */
     public function getBlobProperties($container, $blob, $options = null)
     {
-        $method      = \HTTP_Request2::METHOD_HEAD;
+        $method      = Resources::HTTP_HEAD;
         $headers     = array();
         $queryParams = array();
         $path        = $container . '/' . $blob;
@@ -1006,7 +1006,7 @@ class BlobRestProxy extends ServiceRestProxy implements IBlob
      */
     public function getBlobMetadata($container, $blob, $options = null)
     {
-        $method      = \HTTP_Request2::METHOD_HEAD;
+        $method      = Resources::HTTP_HEAD;
         $headers     = array();
         $queryParams = array();
         $path        = $container . '/' . $blob;
@@ -1044,7 +1044,7 @@ class BlobRestProxy extends ServiceRestProxy implements IBlob
      */
     public function listPageBlobRanges($container, $blob, $options = null)
     {
-        $method      = \HTTP_Request2::METHOD_GET;
+        $method      = Resources::HTTP_GET;
         $headers     = array();
         $queryParams = array();
         $path        = $container . '/' . $blob;
@@ -1086,7 +1086,7 @@ class BlobRestProxy extends ServiceRestProxy implements IBlob
      */
     public function setBlobProperties($container, $blob, $options = null)
     {
-        $method      = \HTTP_Request2::METHOD_PUT;
+        $method      = Resources::HTTP_PUT;
         $headers     = array();
         $queryParams = array();
         $path        = $container . '/' . $blob;
@@ -1141,7 +1141,7 @@ class BlobRestProxy extends ServiceRestProxy implements IBlob
      */
     public function setBlobMetadata($container, $blob, $metadata, $options = null)
     {
-        $method      = \HTTP_Request2::METHOD_PUT;
+        $method      = Resources::HTTP_PUT;
         $headers     = array();
         $queryParams = array();
         $path        = $container . '/' . $blob;
@@ -1179,7 +1179,7 @@ class BlobRestProxy extends ServiceRestProxy implements IBlob
      */
     public function getBlob($container, $blob, $options = null)
     {
-        $method      = \HTTP_Request2::METHOD_GET;
+        $method      = Resources::HTTP_GET;
         $headers     = array();
         $queryParams = array();
         $path        = $container . '/' . $blob;
@@ -1221,7 +1221,7 @@ class BlobRestProxy extends ServiceRestProxy implements IBlob
      */
     public function deleteBlob($container, $blob, $options = null)
     {
-        $method      = \HTTP_Request2::METHOD_DELETE;
+        $method      = Resources::HTTP_DELETE;
         $headers     = array();
         $queryParams = array();
         $path        = $container . '/' . $blob;

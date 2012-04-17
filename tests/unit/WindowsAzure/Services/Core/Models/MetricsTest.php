@@ -15,24 +15,24 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   PEAR2\Tests\Unit\WindowsAzure\Services\Core\Models
+ * @package   Tests\Unit\WindowsAzure\Services\Core\Models
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
 
-namespace PEAR2\Tests\Unit\WindowsAzure\Services\Core\Models;
-use PEAR2\WindowsAzure\Services\Core\Models\Metrics;
-use PEAR2\WindowsAzure\Utilities;
-use PEAR2\Tests\Framework\TestResources;
-use PEAR2\WindowsAzure\Services\Core\Models\RetentionPolicy;
+namespace Tests\Unit\WindowsAzure\Services\Core\Models;
+use WindowsAzure\Services\Core\Models\Metrics;
+use WindowsAzure\Utilities;
+use Tests\Framework\TestResources;
+use WindowsAzure\Services\Core\Models\RetentionPolicy;
 
 /**
  * Unit tests for class Metrics
  *
  * @category  Microsoft
- * @package   PEAR2\Tests\Unit\WindowsAzure\Services\Core\Models
+ * @package   Tests\Unit\WindowsAzure\Services\Core\Models
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
@@ -42,7 +42,7 @@ use PEAR2\WindowsAzure\Services\Core\Models\RetentionPolicy;
 class MetricsTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @covers PEAR2\WindowsAzure\Services\Core\Models\Metrics::create
+     * @covers WindowsAzure\Services\Core\Models\Metrics::create
      */
     public function testCreate()
     {
@@ -60,7 +60,7 @@ class MetricsTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers PEAR2\WindowsAzure\Services\Core\Models\Metrics::getRetentionPolicy
+     * @covers WindowsAzure\Services\Core\Models\Metrics::getRetentionPolicy
      */
     public function testGetRetentionPolicy()
     {
@@ -78,7 +78,7 @@ class MetricsTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers PEAR2\WindowsAzure\Services\Core\Models\Metrics::setRetentionPolicy
+     * @covers WindowsAzure\Services\Core\Models\Metrics::setRetentionPolicy
      */
     public function testSetRetentionPolicy()
     {
@@ -96,7 +96,7 @@ class MetricsTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers PEAR2\WindowsAzure\Services\Core\Models\Metrics::getVersion
+     * @covers WindowsAzure\Services\Core\Models\Metrics::getVersion
      */
     public function testGetVersion()
     {
@@ -114,7 +114,7 @@ class MetricsTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers PEAR2\WindowsAzure\Services\Core\Models\Metrics::setVersion
+     * @covers WindowsAzure\Services\Core\Models\Metrics::setVersion
      */
     public function testSetVersion()
     {
@@ -132,7 +132,7 @@ class MetricsTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers PEAR2\WindowsAzure\Services\Core\Models\Metrics::getEnabled
+     * @covers WindowsAzure\Services\Core\Models\Metrics::getEnabled
      */
     public function testGetEnabled()
     {
@@ -150,7 +150,7 @@ class MetricsTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers PEAR2\WindowsAzure\Services\Core\Models\Metrics::setEnabled
+     * @covers WindowsAzure\Services\Core\Models\Metrics::setEnabled
      */
     public function testSetEnabled()
     {
@@ -168,7 +168,7 @@ class MetricsTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers PEAR2\WindowsAzure\Services\Core\Models\Metrics::getIncludeAPIs
+     * @covers WindowsAzure\Services\Core\Models\Metrics::getIncludeAPIs
      */
     public function testGetIncludeAPIs()
     {
@@ -186,7 +186,7 @@ class MetricsTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers PEAR2\WindowsAzure\Services\Core\Models\Metrics::setIncludeAPIs
+     * @covers WindowsAzure\Services\Core\Models\Metrics::setIncludeAPIs
      */
     public function testSetIncludeAPIs()
     {
@@ -204,7 +204,7 @@ class MetricsTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers PEAR2\WindowsAzure\Services\Core\Models\Metrics::toArray
+     * @covers WindowsAzure\Services\Core\Models\Metrics::toArray
      */
     public function testToArray()
     {
@@ -226,7 +226,7 @@ class MetricsTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers PEAR2\WindowsAzure\Services\Core\Models\Metrics::toArray
+     * @covers WindowsAzure\Services\Core\Models\Metrics::toArray
      */
     public function testToArrayWithNotEnabled()
     {

@@ -15,22 +15,22 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   PEAR2\Tests\Unit\WindowsAzure\ServiceRuntime
+ * @package   Tests\Unit\WindowsAzure\ServiceRuntime
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
-namespace PEAR2\Tests\Unit\WindowsAzure\ServiceRuntime;
-use PEAR2\Tests\Framework\TestResources;
-use PEAR2\WindowsAzure\Core\WindowsAzureUtilities;
-use PEAR2\WindowsAzure\ServiceRuntime\Protocol1RuntimeClientFactory;
+namespace Tests\Unit\WindowsAzure\ServiceRuntime;
+use Tests\Framework\TestResources;
+use WindowsAzure\Core\WindowsAzureUtilities;
+use WindowsAzure\ServiceRuntime\Protocol1RuntimeClientFactory;
 
 /**
  * Unit tests for class Protocol1RuntimeClientFactory.
  *
  * @category  Microsoft
- * @package   PEAR2\Tests\Unit\WindowsAzure\ServiceRuntime
+ * @package   Tests\Unit\WindowsAzure\ServiceRuntime
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
@@ -40,7 +40,7 @@ use PEAR2\WindowsAzure\ServiceRuntime\Protocol1RuntimeClientFactory;
 class Protocol1RuntimeClientFactoryTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @covers PEAR2\WindowsAzure\ServiceRuntime\Protocol1RuntimeClientFactory::getVersion
+     * @covers WindowsAzure\ServiceRuntime\Protocol1RuntimeClientFactory::getVersion
      */
     public function testGetVersion()
     {
@@ -53,7 +53,7 @@ class Protocol1RuntimeClientFactoryTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers PEAR2\WindowsAzure\ServiceRuntime\Protocol1RuntimeClientFactory::createRuntimeClient
+     * @covers WindowsAzure\ServiceRuntime\Protocol1RuntimeClientFactory::createRuntimeClient
      */
     public function testCreateRuntimeClient()
     {
@@ -66,7 +66,7 @@ class Protocol1RuntimeClientFactoryTest extends \PHPUnit_Framework_TestCase
                 
         // Test
         $this->assertInstanceOf(
-            'PEAR2\\WindowsAzure\\ServiceRuntime\\Protocol1RuntimeClient',
+            '\WindowsAzure\\ServiceRuntime\\Protocol1RuntimeClient',
             $protocol1RuntimeClient
         );
     }

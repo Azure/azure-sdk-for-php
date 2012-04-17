@@ -15,28 +15,28 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   PEAR2\Tests\Unit\WindowsAzure\Services\Core
+ * @package   Tests\Unit\WindowsAzure\Services\Core
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
 
-namespace PEAR2\Tests\Unit\WindowsAzure\Services\Core;
-use PEAR2\Tests\Framework\TestResources;
-use PEAR2\WindowsAzure\Resources;
-use PEAR2\WindowsAzure\Services\Core\ServicesBuilder;
-use PEAR2\WindowsAzure\Services\Core\Configuration;
-use PEAR2\WindowsAzure\Services\Queue\QueueSettings;
-use PEAR2\WindowsAzure\Services\Blob\BlobSettings;
-use PEAR2\WindowsAzure\Services\Table\TableSettings;
-use PEAR2\WindowsAzure\Core\InvalidArgumentTypeException;
+namespace Tests\Unit\WindowsAzure\Services\Core;
+use Tests\Framework\TestResources;
+use WindowsAzure\Resources;
+use WindowsAzure\Services\Core\ServicesBuilder;
+use WindowsAzure\Services\Core\Configuration;
+use WindowsAzure\Services\Queue\QueueSettings;
+use WindowsAzure\Services\Blob\BlobSettings;
+use WindowsAzure\Services\Table\TableSettings;
+use WindowsAzure\Core\InvalidArgumentTypeException;
 
 /**
  * Unit tests for class ServicesBuilder
  *
  * @category  Microsoft
- * @package   PEAR2\Tests\Unit\WindowsAzure\Services\Core
+ * @package   Tests\Unit\WindowsAzure\Services\Core
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
@@ -46,9 +46,9 @@ use PEAR2\WindowsAzure\Core\InvalidArgumentTypeException;
 class ServicesBuilderTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @covers PEAR2\WindowsAzure\Services\Core\ServicesBuilder::build
-     * @covers PEAR2\WindowsAzure\Services\Core\ServicesBuilder::_buildQueue
-     * @covers PEAR2\WindowsAzure\Services\Core\ServicesBuilder::_addHeadersFilter
+     * @covers WindowsAzure\Services\Core\ServicesBuilder::build
+     * @covers WindowsAzure\Services\Core\ServicesBuilder::_buildQueue
+     * @covers WindowsAzure\Services\Core\ServicesBuilder::_addHeadersFilter
      */
     public function testBuildForQueue()
     {
@@ -64,13 +64,13 @@ class ServicesBuilderTest extends \PHPUnit_Framework_TestCase
         $queueWrapper = $builder->build($config, Resources::QUEUE_TYPE_NAME);
         
         // Assert
-        $this->assertInstanceOf('PEAR2\WindowsAzure\Services\Queue\IQueue', $queueWrapper);
+        $this->assertInstanceOf('WindowsAzure\Services\Queue\IQueue', $queueWrapper);
     }
     
     /**
-     * @covers PEAR2\WindowsAzure\Services\Core\ServicesBuilder::build
-     * @covers PEAR2\WindowsAzure\Services\Core\ServicesBuilder::_buildBlob
-     * @covers PEAR2\WindowsAzure\Services\Core\ServicesBuilder::_addHeadersFilter
+     * @covers WindowsAzure\Services\Core\ServicesBuilder::build
+     * @covers WindowsAzure\Services\Core\ServicesBuilder::_buildBlob
+     * @covers WindowsAzure\Services\Core\ServicesBuilder::_addHeadersFilter
      */
     public function testBuildForBlob()
     {
@@ -86,13 +86,13 @@ class ServicesBuilderTest extends \PHPUnit_Framework_TestCase
         $blobWrapper = $builder->build($config, Resources::BLOB_TYPE_NAME);
         
         // Assert
-        $this->assertInstanceOf('PEAR2\WindowsAzure\Services\Blob\IBlob', $blobWrapper);
+        $this->assertInstanceOf('WindowsAzure\Services\Blob\IBlob', $blobWrapper);
     }
     
     /**
-     * @covers PEAR2\WindowsAzure\Services\Core\ServicesBuilder::build
-     * @covers PEAR2\WindowsAzure\Services\Core\ServicesBuilder::_buildTable
-     * @covers PEAR2\WindowsAzure\Services\Core\ServicesBuilder::_addHeadersFilter
+     * @covers WindowsAzure\Services\Core\ServicesBuilder::build
+     * @covers WindowsAzure\Services\Core\ServicesBuilder::_buildTable
+     * @covers WindowsAzure\Services\Core\ServicesBuilder::_addHeadersFilter
      */
     public function testBuildForTable()
     {
@@ -108,12 +108,12 @@ class ServicesBuilderTest extends \PHPUnit_Framework_TestCase
         $tableWrapper = $builder->build($config, Resources::TABLE_TYPE_NAME);
         
         // Assert
-        $this->assertInstanceOf('PEAR2\WindowsAzure\Services\Table\ITable', $tableWrapper);
+        $this->assertInstanceOf('WindowsAzure\Services\Table\ITable', $tableWrapper);
     }
     
     /**
-     * @covers PEAR2\WindowsAzure\Services\Core\ServicesBuilder::build
-     * @covers PEAR2\WindowsAzure\Services\Core\ServicesBuilder::_buildQueue
+     * @covers WindowsAzure\Services\Core\ServicesBuilder::build
+     * @covers WindowsAzure\Services\Core\ServicesBuilder::_buildQueue
      */
     public function testBuildWithInvalidTypeFail()
     {

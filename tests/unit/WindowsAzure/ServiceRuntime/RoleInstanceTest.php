@@ -15,22 +15,22 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   PEAR2\Tests\Unit\WindowsAzure\ServiceRuntime
+ * @package   Tests\Unit\WindowsAzure\ServiceRuntime
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
-namespace PEAR2\Tests\Unit\WindowsAzure\ServiceRuntime;
-use PEAR2\Tests\Framework\TestResources;
-use PEAR2\WindowsAzure\ServiceRuntime\Role;
-use PEAR2\WindowsAzure\ServiceRuntime\RoleInstance;
+namespace Tests\Unit\WindowsAzure\ServiceRuntime;
+use Tests\Framework\TestResources;
+use WindowsAzure\ServiceRuntime\Role;
+use WindowsAzure\ServiceRuntime\RoleInstance;
 
 /**
  * Unit tests for class RoleInstance.
  *
  * @category  Microsoft
- * @package   PEAR2\Tests\Unit\WindowsAzure\ServiceRuntime
+ * @package   Tests\Unit\WindowsAzure\ServiceRuntime
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
@@ -40,8 +40,8 @@ use PEAR2\WindowsAzure\ServiceRuntime\RoleInstance;
 class RoleInstanceTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @covers PEAR2\WindowsAzure\ServiceRuntime\RoleInstance::__construct
-     * @covers PEAR2\WindowsAzure\ServiceRuntime\RoleInstance::getId
+     * @covers WindowsAzure\ServiceRuntime\RoleInstance::__construct
+     * @covers WindowsAzure\ServiceRuntime\RoleInstance::getId
      */
     public function testGetId()
     {
@@ -55,7 +55,7 @@ class RoleInstanceTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers PEAR2\WindowsAzure\ServiceRuntime\RoleInstance::getFaultDomain
+     * @covers WindowsAzure\ServiceRuntime\RoleInstance::getFaultDomain
      */
     public function testGetFaultDomain()
     {
@@ -69,7 +69,7 @@ class RoleInstanceTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers PEAR2\WindowsAzure\ServiceRuntime\RoleInstance::getUpdateDomain
+     * @covers WindowsAzure\ServiceRuntime\RoleInstance::getUpdateDomain
      */
     public function testGetUpdateDomain()
     {
@@ -83,7 +83,7 @@ class RoleInstanceTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers PEAR2\WindowsAzure\ServiceRuntime\RoleInstance::getInstanceEndpoints
+     * @covers WindowsAzure\ServiceRuntime\RoleInstance::getInstanceEndpoints
      */
     public function testGetInstanceEndpoints()
     {
@@ -98,8 +98,8 @@ class RoleInstanceTest extends \PHPUnit_Framework_TestCase
     }    
     
     /**
-     * @covers PEAR2\WindowsAzure\ServiceRuntime\RoleInstance::getRole
-     * @covers PEAR2\WindowsAzure\ServiceRuntime\RoleInstance::setRole
+     * @covers WindowsAzure\ServiceRuntime\RoleInstance::getRole
+     * @covers WindowsAzure\ServiceRuntime\RoleInstance::setRole
      */
     public function testGetSetRole()
     {

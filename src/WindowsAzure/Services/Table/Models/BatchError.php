@@ -15,24 +15,24 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   PEAR2\WindowsAzure\Services\Table\Models
+ * @package   WindowsAzure\Services\Table\Models
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
  
-namespace PEAR2\WindowsAzure\Services\Table\Models;
-use PEAR2\WindowsAzure\Resources;
-use PEAR2\WindowsAzure\Utilities;
-use PEAR2\WindowsAzure\Validate;
-use PEAR2\WindowsAzure\Core\ServiceException;
+namespace WindowsAzure\Services\Table\Models;
+use WindowsAzure\Resources;
+use WindowsAzure\Utilities;
+use WindowsAzure\Validate;
+use WindowsAzure\Core\ServiceException;
 
 /**
  * Represents an error returned from call to batch API.
  *
  * @category  Microsoft
- * @package   PEAR2\WindowsAzure\Services\Table\Models
+ * @package   WindowsAzure\Services\Table\Models
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
@@ -42,7 +42,7 @@ use PEAR2\WindowsAzure\Core\ServiceException;
 class BatchError
 {
     /**
-     * @var PEAR2\WindowsAzure\Core\ServiceException 
+     * @var WindowsAzure\Core\ServiceException 
      */
     private $_error;
     
@@ -54,10 +54,10 @@ class BatchError
     /**
      * Creates BatchError object.
      * 
-     * @param PEAR2\WindowsAzure\Core\ServiceException $error   The error object.
-     * @param array                                    $headers The response headers.
+     * @param WindowsAzure\Core\ServiceException $error   The error object.
+     * @param array                              $headers The response headers.
      * 
-     * @return \PEAR2\WindowsAzure\Services\Table\Models\BatchError 
+     * @return \WindowsAzure\Services\Table\Models\BatchError 
      */
     public static function create($error, $headers)
     {
@@ -80,7 +80,7 @@ class BatchError
     /**
      * Gets the error.
      * 
-     * @return PEAR2\WindowsAzure\Core\ServiceException
+     * @return WindowsAzure\Core\ServiceException
      */
     public function getError()
     {
@@ -90,7 +90,7 @@ class BatchError
     /**
      * Sets the error.
      * 
-     * @param PEAR2\WindowsAzure\Core\ServiceException $error The error object.
+     * @param WindowsAzure\Core\ServiceException $error The error object.
      * 
      * @return none
      */

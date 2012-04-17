@@ -15,21 +15,21 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   PEAR2\WindowsAzure\Services\Table\Models
+ * @package   WindowsAzure\Services\Table\Models
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
  
-namespace PEAR2\WindowsAzure\Services\Table\Models;
-use PEAR2\WindowsAzure\Utilities;
+namespace WindowsAzure\Services\Table\Models;
+use WindowsAzure\Utilities;
 
 /**
  * Holds result of getTable API.
  *
  * @category  Microsoft
- * @package   PEAR2\WindowsAzure\Services\Table\Models
+ * @package   WindowsAzure\Services\Table\Models
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
@@ -49,7 +49,7 @@ class GetTableResult
      * @param string           $body           The HTTP response body.
      * @param AtomReaderWriter $atomSerializer The Atom reader and writer.
      * 
-     * @return \PEAR2\WindowsAzure\Services\Table\Models\GetTableResult
+     * @return \WindowsAzure\Services\Table\Models\GetTableResult
      */
     public static function create($body, $atomSerializer)
     {

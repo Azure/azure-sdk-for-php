@@ -15,22 +15,22 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   PEAR2\Tests\Unit\WindowsAzure\Core
+ * @package   Tests\Unit\WindowsAzure\Core
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
 
-namespace PEAR2\Tests\Unit\WindowsAzure\Core;
-use PEAR2\WindowsAzure\Core\HttpCallContext;
-use PEAR2\WindowsAzure\Core\Url;
+namespace Tests\Unit\WindowsAzure\Core;
+use WindowsAzure\Core\HttpCallContext;
+use WindowsAzure\Core\Url;
 
 /**
  * Unit tests for class HttpCallContext
  *
  * @category  Microsoft
- * @package   PEAR2\Tests\Unit\WindowsAzure\Core
+ * @package   Tests\Unit\WindowsAzure\Core
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
@@ -40,7 +40,7 @@ use PEAR2\WindowsAzure\Core\Url;
 class HttpCallContextTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @covers PEAR2\WindowsAzure\Core\HttpCallContext::__construct
+     * @covers WindowsAzure\Core\HttpCallContext::__construct
      */
     public function test__construct()
     {
@@ -60,8 +60,8 @@ class HttpCallContextTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers PEAR2\WindowsAzure\Core\HttpCallContext::getMethod
-     * @covers PEAR2\WindowsAzure\Core\HttpCallContext::setMethod
+     * @covers WindowsAzure\Core\HttpCallContext::getMethod
+     * @covers WindowsAzure\Core\HttpCallContext::setMethod
      * @depends test__construct
      */
     public function testSetMethod($context)
@@ -77,8 +77,8 @@ class HttpCallContextTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers PEAR2\WindowsAzure\Core\HttpCallContext::getBody
-     * @covers PEAR2\WindowsAzure\Core\HttpCallContext::setBody
+     * @covers WindowsAzure\Core\HttpCallContext::getBody
+     * @covers WindowsAzure\Core\HttpCallContext::setBody
      * @depends test__construct
      */
     public function testSetBody($context)
@@ -94,8 +94,8 @@ class HttpCallContextTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers PEAR2\WindowsAzure\Core\HttpCallContext::getPath
-     * @covers PEAR2\WindowsAzure\Core\HttpCallContext::setPath
+     * @covers WindowsAzure\Core\HttpCallContext::getPath
+     * @covers WindowsAzure\Core\HttpCallContext::setPath
      * @depends test__construct
      */
     public function testSetPath($context)
@@ -111,8 +111,8 @@ class HttpCallContextTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers PEAR2\WindowsAzure\Core\HttpCallContext::getUri
-     * @covers PEAR2\WindowsAzure\Core\HttpCallContext::setUri
+     * @covers WindowsAzure\Core\HttpCallContext::getUri
+     * @covers WindowsAzure\Core\HttpCallContext::setUri
      * @depends test__construct
      */
     public function testSetUri($context)
@@ -128,9 +128,9 @@ class HttpCallContextTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers PEAR2\WindowsAzure\Core\HttpCallContext::getHeaders
-     * @covers PEAR2\WindowsAzure\Core\HttpCallContext::setHeaders
-     * @covers PEAR2\WindowsAzure\Core\HttpCallContext::addHeader
+     * @covers WindowsAzure\Core\HttpCallContext::getHeaders
+     * @covers WindowsAzure\Core\HttpCallContext::setHeaders
+     * @covers WindowsAzure\Core\HttpCallContext::addHeader
      * @depends test__construct
      */
     public function testSetHeaders($context)
@@ -146,9 +146,9 @@ class HttpCallContextTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers PEAR2\WindowsAzure\Core\HttpCallContext::getQueryParameters
-     * @covers PEAR2\WindowsAzure\Core\HttpCallContext::setQueryParameters
-     * @covers PEAR2\WindowsAzure\Core\HttpCallContext::addQueryParameter
+     * @covers WindowsAzure\Core\HttpCallContext::getQueryParameters
+     * @covers WindowsAzure\Core\HttpCallContext::setQueryParameters
+     * @covers WindowsAzure\Core\HttpCallContext::addQueryParameter
      * @depends test__construct
      */
     public function testSetQueryParameters($context)
@@ -164,9 +164,9 @@ class HttpCallContextTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers PEAR2\WindowsAzure\Core\HttpCallContext::getStatusCodes
-     * @covers PEAR2\WindowsAzure\Core\HttpCallContext::setStatusCodes
-     * @covers PEAR2\WindowsAzure\Core\HttpCallContext::addStatusCode
+     * @covers WindowsAzure\Core\HttpCallContext::getStatusCodes
+     * @covers WindowsAzure\Core\HttpCallContext::setStatusCodes
+     * @covers WindowsAzure\Core\HttpCallContext::addStatusCode
      * @depends test__construct
      */
     public function testSetStatusCodes($context)
@@ -182,8 +182,8 @@ class HttpCallContextTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers PEAR2\WindowsAzure\Core\HttpCallContext::getHeader
-     * @covers PEAR2\WindowsAzure\Core\HttpCallContext::addHeader
+     * @covers WindowsAzure\Core\HttpCallContext::getHeader
+     * @covers WindowsAzure\Core\HttpCallContext::addHeader
      * @depends test__construct
      */
     public function testAddHeader($context)
@@ -200,9 +200,9 @@ class HttpCallContextTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers PEAR2\WindowsAzure\Core\HttpCallContext::removeHeader
-     * @covers PEAR2\WindowsAzure\Core\HttpCallContext::getHeaders
-     * @covers PEAR2\WindowsAzure\Core\HttpCallContext::addHeader
+     * @covers WindowsAzure\Core\HttpCallContext::removeHeader
+     * @covers WindowsAzure\Core\HttpCallContext::getHeaders
+     * @covers WindowsAzure\Core\HttpCallContext::addHeader
      * @depends test__construct
      */
     public function testRemoveHeader($context)
@@ -220,7 +220,7 @@ class HttpCallContextTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers PEAR2\WindowsAzure\Core\HttpCallContext::__toString
+     * @covers WindowsAzure\Core\HttpCallContext::__toString
      * @depends test__construct
      */
     public function test__toString($context)
