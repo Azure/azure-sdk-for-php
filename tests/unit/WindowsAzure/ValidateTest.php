@@ -22,6 +22,7 @@
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
 
+namespace PEAR2\Tests\Unit\WindowsAzure;
 use PEAR2\WindowsAzure\Validate;
 use PEAR2\WindowsAzure\Core\InvalidArgumentTypeException;
 use PEAR2\WindowsAzure\Resources;
