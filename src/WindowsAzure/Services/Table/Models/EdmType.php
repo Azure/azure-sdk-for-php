@@ -81,10 +81,12 @@ class EdmType
         if (is_null($value)) return null;
         
         switch ($type) {
-        case self::BINARY:
         case self::GUID:
         case self::STRING:
             return $value;
+            
+        case self::BINARY:
+            return base64_decode($value);
 
         case self::DATETIME:
             return Utilities::convertToDateTime($value);

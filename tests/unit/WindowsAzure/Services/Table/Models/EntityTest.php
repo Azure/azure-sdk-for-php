@@ -163,13 +163,13 @@ class EntityTest extends \PHPUnit_Framework_TestCase
     /**
      * @covers PEAR2\WindowsAzure\Services\Table\Models\Entity::addProperty
      */
-    public function testNewProperty()
+    public function testAddProperty()
     {
         // Setup
         $entity = new Entity();
         $name = 'test';
         $expected = new Property();
-        $edmType = EdmType::BINARY;
+        $edmType = EdmType::STRING;
         $value = '01231232290234210';
         $expected->setEdmType($edmType);
         $expected->setValue($value);
