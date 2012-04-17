@@ -69,8 +69,8 @@ class Configuration
     /**
      * Configures $config to run against the storage emulator
      *
-     * @param WindowsAzure\Services\Core\Configuration $config configuration.
-     * @param string                                         $type   type name.
+     * @param WindowsAzure\Services\Core\Configuration $config The configuration.
+     * @param string                                   $type   The type name.
      * 
      * @return none.
      */

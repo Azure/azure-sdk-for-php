@@ -93,16 +93,14 @@ class EdmType
             
         case EdmType::INT64:
             return $value . 'L';
-            break;
 
         case EdmType::GUID:
             return 'guid\'' . $value . '\'';
 
-        // NULL also is treated as EdmType::STRING
         case null:
         case EdmType::STRING:
+            // NULL also is treated as EdmType::STRING
             return '\'' . str_replace('\'', '\'\'', $value) . '\'';
-            break;
 
         default:
             throw new \InvalidArgumentException();

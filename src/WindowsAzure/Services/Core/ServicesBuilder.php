@@ -212,8 +212,8 @@ class ServicesBuilder implements IServiceBuilder
     /**
      * Creates an object passed $type configured with $config.
      *
-     * @param WindowsAzure\Services\Core\Configuration $config configuration.
-     * @param string                                         $type   type name.
+     * @param WindowsAzure\Services\Core\Configuration $config The configuration.
+     * @param string                                   $type   The type name.
      * 
      * @return WindowsAzure\Services\Queue\IQueue
      *       | WindowsAzure\Services\Blob\IBlob

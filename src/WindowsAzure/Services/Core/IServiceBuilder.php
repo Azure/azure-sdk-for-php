@@ -48,10 +48,10 @@ interface IServiceBuilder
     /**
      * Creates an object passed $type configured with $config.
      *
-     * @param WindowsAzure\Services\Core\Configuration $config configuration.
-     * @param string                                         $type   type name.
+     * @param WindowsAzure\Services\Core\Configuration $config The configuration.
+     * @param string                                   $type   The type name.
      * 
-     * @return mixed.
+     * @return mixed
      */
     public static function build($config, $type);
 }

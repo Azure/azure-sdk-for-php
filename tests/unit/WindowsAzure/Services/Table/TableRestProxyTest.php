@@ -469,9 +469,10 @@ class TableRestProxyTest extends TableServiceRestProxyTestBase
         $expected->addProperty('CustomerPlace', EdmType::STRING, 'Redmond');
         
         // Test
-        $this->wrapper->UpdateEntity($name, $expected);
+        $result = $this->wrapper->UpdateEntity($name, $expected);
         
         // Assert
+        $this->assertNotNull($result);
         $result = $this->wrapper->queryEntities($name);
         $entities = $result->getEntities();
         $actual = $entities[0];
@@ -504,9 +505,10 @@ class TableRestProxyTest extends TableServiceRestProxyTestBase
         $expected->addProperty('CustomerPhone', EdmType::STRING, '99999999');
         
         // Test
-        $this->wrapper->mergeEntity($name, $expected);
+        $result = $this->wrapper->mergeEntity($name, $expected);
         
         // Assert
+        $this->assertNotNull($result);
         $result = $this->wrapper->queryEntities($name);
         $entities = $result->getEntities();
         $actual = $entities[0];
@@ -539,9 +541,10 @@ class TableRestProxyTest extends TableServiceRestProxyTestBase
         $expected->addProperty('CustomerPlace', EdmType::STRING, 'Redmond');
         
         // Test
-        $this->wrapper->InsertOrReplaceEntity($name, $expected);
+        $result = $this->wrapper->InsertOrReplaceEntity($name, $expected);
         
         // Assert
+        $this->assertNotNull($result);
         $result = $this->wrapper->queryEntities($name);
         $entities = $result->getEntities();
         $actual = $entities[0];
@@ -574,9 +577,10 @@ class TableRestProxyTest extends TableServiceRestProxyTestBase
         $expected->addProperty('CustomerPhone', EdmType::STRING, '99999999');
         
         // Test
-        $this->wrapper->InsertOrMergeEntity($name, $expected);
+        $result = $this->wrapper->InsertOrMergeEntity($name, $expected);
         
         // Assert
+        $this->assertNotNull($result);
         $result = $this->wrapper->queryEntities($name);
         $entities = $result->getEntities();
         $actual = $entities[0];

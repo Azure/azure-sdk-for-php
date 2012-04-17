@@ -60,13 +60,11 @@ class ServiceRestProxy
     protected $url;
     
     /**
-     * Constructor
+     * Constructor.
      *
-     * @param WindowsAzure\Core\IHttpClient $channel http client to send 
-     * HTTP requests
-     * @param string                              $uri     storage account uri.
-     * 
-     * @return ServiceRestProxy.
+     * @param WindowsAzure\Core\IHttpClient $channel The http client used to send 
+     * HTTP requests.
+     * @param string                        $uri     The storage account uri.
      */
     public function __construct($channel, $uri)
     {

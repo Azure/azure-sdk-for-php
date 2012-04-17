@@ -563,18 +563,16 @@ class TableRestProxy extends ServiceRestProxy implements ITable
     }
     
     /**
-     * Constructor
+     * Constructor.
      * 
-     * @param WindowsAzure\Core\IHttpClient $channel        The HTTP client 
+     * @param WindowsAzure\Core\IHttpClient     $channel        The HTTP client 
      * channel.
-     * @param string                              $uri            The storage account
+     * @param string                            $uri            The storage account
      * uri.
-     * @param Table\Utilities\IAtomReaderWriter   $atomSerializer The atom 
+     * @param Table\Utilities\IAtomReaderWriter $atomSerializer The atom 
      * serializer.
-     * @param Table\Utilities\IMimeReaderWriter   $mimeSerializer The MIME 
+     * @param Table\Utilities\IMimeReaderWriter $mimeSerializer The MIME 
      * serializer.
-     * 
-     * @return TableRestProxy
      */
     public function __construct($channel, $uri, $atomSerializer, $mimeSerializer)
     {
