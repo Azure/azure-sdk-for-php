@@ -152,7 +152,7 @@ spl_autoload_register(
             'windowsazure\\services\\table\\models\\filters\\binaryfilter' => '/WindowsAzure/Services/Table/Models/Filters/BinaryFilter.php',
             'windowsazure\\services\\table\\models\\filters\\constantfilter' => '/WindowsAzure/Services/Table/Models/Filters/ConstantFilter.php',
             'windowsazure\\services\\table\\models\\filters\\filter' => '/WindowsAzure/Services/Table/Models/Filters/Filter.php',
-            'windowsazure\\services\\table\\models\\filters\\literalfilter' => '/WindowsAzure/Services/Table/Models/Filters/LiteralFilter.php',
+            'windowsazure\\services\\table\\models\\filters\\propertynamefilter' => '/WindowsAzure/Services/Table/Models/Filters/LiteralFilter.php',
             'windowsazure\\services\\table\\models\\filters\\querystringfilter' => '/WindowsAzure/Services/Table/Models/Filters/QueryStringFilter.php',
             'windowsazure\\services\\table\\models\\filters\\unaryfilter' => '/WindowsAzure/Services/Table/Models/Filters/UnaryFilter.php',
             'windowsazure\\services\\table\\models\\getentityresult' => '/WindowsAzure/Services/Table/Models/GetEntityResult.php',

@@ -45,7 +45,7 @@ use WindowsAzure\Services\Table\Models\DeleteEntityOptions;
 use WindowsAzure\Services\Table\Models\Filters\BinaryFilter;
 use WindowsAzure\Services\Table\Models\Filters\ConstantFilter;
 use WindowsAzure\Services\Table\Models\Filters\Filter;
-use WindowsAzure\Services\Table\Models\Filters\LiteralFilter;
+use WindowsAzure\Services\Table\Models\Filters\PropertyNameFilter;
 use WindowsAzure\Services\Table\Models\Filters\QueryStringFilter;
 use WindowsAzure\Services\Table\Models\Filters\UnaryFilter;
 
@@ -574,7 +574,7 @@ class TableServiceIntegrationTest extends IntegrationTestBase {
         }
 
         $qopts = new QueryEntitiesOptions();
-        $qopts->setFilter(Filter::applyEq(Filter::applyLiteral('RowKey'), Filter::applyConstant('key\'with\'quotes', EdmType::STRING)));
+        $qopts->setFilter(Filter::applyEq(Filter::applyPropertyName('RowKey'), Filter::applyConstant('key\'with\'quotes', EdmType::STRING)));
         $assertResult2 = $this->wrapper->queryEntities(self::$TEST_TABLE_8, $qopts);
 
         $this->assertEquals(0, count($assertResult2->getEntities()), 'entities returned');
@@ -789,7 +789,7 @@ class TableServiceIntegrationTest extends IntegrationTestBase {
 
         {
             // Act
-            $f = Filter::applyEq(Filter::applyLiteral('RowKey'), Filter::applyConstant('queryEntitiesWithFilterWorks-3', EdmType::STRING));
+            $f = Filter::applyEq(Filter::applyPropertyName('RowKey'), Filter::applyConstant('queryEntitiesWithFilterWorks-3', EdmType::STRING));
             $q =new Query();
             $q->setFilter($f);
             $qeo = new QueryEntitiesOptions();
@@ -821,7 +821,7 @@ class TableServiceIntegrationTest extends IntegrationTestBase {
         {
             // Act
             $q = new Query();
-            $q->setFilter(Filter::applyLiteral('test'));
+            $q->setFilter(Filter::applyPropertyName('test'));
             $qeo = new QueryEntitiesOptions();
             $qeo->setQuery($q);
             $result = $this->wrapper->queryEntities($table, $qeo);
@@ -834,7 +834,7 @@ class TableServiceIntegrationTest extends IntegrationTestBase {
         {
             // Act
             $q = new Query();
-            $q->setFilter(Filter::applyEq(Filter::applyLiteral('test2'), Filter::applyConstant('\'value" 3', EdmType::STRING)));
+            $q->setFilter(Filter::applyEq(Filter::applyPropertyName('test2'), Filter::applyConstant('\'value" 3', EdmType::STRING)));
             $qeo = new QueryEntitiesOptions();
             $qeo->setQuery($q);
             $result = $this->wrapper->queryEntities($table, $qeo);
@@ -849,7 +849,7 @@ class TableServiceIntegrationTest extends IntegrationTestBase {
         {
             // Act
             $q = new Query();
-            $q->setFilter(Filter::applyEq(Filter::applyLiteral('test4'), Filter::applyConstant(12345678903, EdmType::INT64)));
+            $q->setFilter(Filter::applyEq(Filter::applyPropertyName('test4'), Filter::applyConstant(12345678903, EdmType::INT64)));
             $qeo = new QueryEntitiesOptions();
             $qeo->setQuery($q);
             $result = $this->wrapper->queryEntities($table, $qeo);
@@ -864,7 +864,7 @@ class TableServiceIntegrationTest extends IntegrationTestBase {
         {
             // Act
             $q = new Query();
-            $q->setFilter(Filter::applyEq(Filter::applyLiteral('test5'), Filter::applyConstant(new \DateTime('2012-01-03', EdmType::DATETIME))));
+            $q->setFilter(Filter::applyEq(Filter::applyPropertyName('test5'), Filter::applyConstant(new \DateTime('2012-01-03', EdmType::DATETIME))));
             $qeo = new QueryEntitiesOptions();
             $qeo->setQuery($q);
             $result = $this->wrapper->queryEntities($table, $qeo);
@@ -880,7 +880,7 @@ class TableServiceIntegrationTest extends IntegrationTestBase {
             // Act
             $q = new Query();
             $ent3 = $entities[3];
-            $q->setFilter(Filter::applyEq(Filter::applyLiteral('test6'), Filter::applyConstant(chr(3), EdmType::BINARY)));
+            $q->setFilter(Filter::applyEq(Filter::applyPropertyName('test6'), Filter::applyConstant(chr(3), EdmType::BINARY)));
             $qeo = new QueryEntitiesOptions();
             $qeo->setQuery($q);
             $result = $this->wrapper->queryEntities($table, $qeo);
@@ -896,7 +896,7 @@ class TableServiceIntegrationTest extends IntegrationTestBase {
             // Act
             $q = new Query();
             $ent3 = $entities[3];
-            $q->setFilter(Filter::applyEq(Filter::applyLiteral('test7'), Filter::applyConstant($ent3->getPropertyValue('test7'))));
+            $q->setFilter(Filter::applyEq(Filter::applyPropertyName('test7'), Filter::applyConstant($ent3->getPropertyValue('test7'))));
             $qeo = new QueryEntitiesOptions();
             $qeo->setQuery($q);
             $result = $this->wrapper->queryEntities($table, $qeo);

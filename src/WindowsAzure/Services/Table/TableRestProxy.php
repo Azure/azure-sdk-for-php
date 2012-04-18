@@ -458,8 +458,8 @@ class TableRestProxy extends ServiceRestProxy implements ITable
             return;
         }
         
-        if ($filter instanceof Filters\LiteralFilter) {
-            $e .= $filter->getLiteral();
+        if ($filter instanceof Filters\PropertyNameFilter) {
+            $e .= $filter->getPropertyName();
         } else if ($filter instanceof Filters\ConstantFilter) {
             $value = $filter->getValue();
             // If the value is null we just append null regardless of the edmType.
@@ -671,11 +671,11 @@ class TableRestProxy extends ServiceRestProxy implements ITable
             // is prefix + '{'
             $prefixFilter = Filter::applyAnd(
                 Filter::applyGe(
-                    Filter::applyLiteral('TableName'),
+                    Filter::applyPropertyName('TableName'),
                     Filter::applyConstant($prefix, EdmType::STRING)
                 ),
                 Filter::applyLe(
-                    Filter::applyLiteral('TableName'),
+                    Filter::applyPropertyName('TableName'),
                     Filter::applyConstant($prefix . '{', EdmType::STRING)
                 )
             );

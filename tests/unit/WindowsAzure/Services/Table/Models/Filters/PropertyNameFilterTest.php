@@ -23,10 +23,10 @@
  */
 
 namespace Tests\Unit\WindowsAzure\Services\Table\Models\Filters;
-use WindowsAzure\Services\Table\Models\Filters\LiteralFilter;
+use WindowsAzure\Services\Table\Models\Filters\PropertyNameFilter;
 
 /**
- * Unit tests for class LiteralFilter
+ * Unit tests for class PropertyNameFilter
  *
  * @category  Microsoft
  * @package   Tests\Unit\WindowsAzure\Services\Table\Models\Filters
@@ -36,20 +36,20 @@ use WindowsAzure\Services\Table\Models\Filters\LiteralFilter;
  * @version   Release: @package_version@
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
-class LiteralFilterTest extends \PHPUnit_Framework_TestCase
+class PropertyNameFilterTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @covers WindowsAzure\Services\Table\Models\Filters\LiteralFilter::__construct
-     * @covers WindowsAzure\Services\Table\Models\Filters\LiteralFilter::getLiteral
+     * @covers WindowsAzure\Services\Table\Models\Filters\PropertyNameFilter::__construct
+     * @covers WindowsAzure\Services\Table\Models\Filters\PropertyNameFilter::getPropertyName
      */
-    public function testGetLiteral()
+    public function testGetPropertyName()
     {
         // Setup
         $expected = 'x';
-        $filter = new LiteralFilter($expected);
+        $filter = new PropertyNameFilter($expected);
         
         // Assert
-        $this->assertEquals($expected, $filter->getLiteral());
+        $this->assertEquals($expected, $filter->getPropertyName());
     }
 }
 

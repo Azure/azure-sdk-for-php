@@ -177,15 +177,15 @@ class Filter
     }
 
     /**
-     * Apply literal filter on $value
+     * Apply propertyName filter on $value
      * 
      * @param string $value The filter value
      * 
-     * @return \WindowsAzure\Services\Table\Models\Filters\LiteralFilter 
+     * @return \WindowsAzure\Services\Table\Models\Filters\PropertyNameFilter 
      */
-    public static function applyLiteral($value)
+    public static function applyPropertyName($value)
     {
-        $filter = new LiteralFilter($value);
+        $filter = new PropertyNameFilter($value);
         return $filter;
     }
 

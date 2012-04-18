@@ -146,7 +146,7 @@ spl_autoload_register(
             'tests\\unit\\windowsazure\\services\\table\\models\\filters\\binaryfiltertest' => '/unit/WindowsAzure/Services/Table/Models/Filters/BinaryFilterTest.php',
             'tests\\unit\\windowsazure\\services\\table\\models\\filters\\constantfiltertest' => '/unit/WindowsAzure/Services/Table/Models/Filters/ConstantFilterTest.php',
             'tests\\unit\\windowsazure\\services\\table\\models\\filters\\filtertest' => '/unit/WindowsAzure/Services/Table/Models/Filters/FilterTest.php',
-            'tests\\unit\\windowsazure\\services\\table\\models\\filters\\literalfiltertest' => '/unit/WindowsAzure/Services/Table/Models/Filters/LiteralFilterTest.php',
+            'tests\\unit\\windowsazure\\services\\table\\models\\filters\\propertynamefiltertest' => '/unit/WindowsAzure/Services/Table/Models/Filters/PropertyNameFilterTest.php',
             'tests\\unit\\windowsazure\\services\\table\\models\\filters\\querystringfiltertest' => '/unit/WindowsAzure/Services/Table/Models/Filters/QueryStringFilterTest.php',
             'tests\\unit\\windowsazure\\services\\table\\models\\filters\\unaryfiltertest' => '/unit/WindowsAzure/Services/Table/Models/Filters/UnaryFilterTest.php',
             'tests\\unit\\windowsazure\\services\\table\\models\\getentityresulttest' => '/unit/WindowsAzure/Services/Table/Models/GetEntityResultTest.php',
