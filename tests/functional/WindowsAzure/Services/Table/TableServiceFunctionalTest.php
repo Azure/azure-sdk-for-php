@@ -28,6 +28,7 @@ namespace Tests\Functional\WindowsAzure\Services\Table;
 
 use Tests\Functional\WindowsAzure\Services\Table\FakeTableInfoEntry;
 use Tests\Functional\WindowsAzure\Services\Table\MutatePivot;
+use WindowsAzure\Utilities;
 use WindowsAzure\Core\ServiceException;
 use WindowsAzure\Core\WindowsAzureUtilities;
 use WindowsAzure\Services\Core\Models\Logging;
@@ -52,7 +53,6 @@ use WindowsAzure\Services\Table\Models\QueryTablesOptions;
 use WindowsAzure\Services\Table\Models\QueryTablesResult;
 use WindowsAzure\Services\Table\Models\TableServiceOptions;
 use WindowsAzure\Services\Table\Models\UpdateEntityResult;
-use WindowsAzure\Utilities;
 
 class OpType {
     const deleteEntity          = 'deleteEntity';

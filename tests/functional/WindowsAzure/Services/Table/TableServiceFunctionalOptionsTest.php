@@ -33,17 +33,17 @@ use WindowsAzure\Services\Core\Models\ServiceProperties;
 use WindowsAzure\Services\Table\Models\DeleteEntityOptions;
 use WindowsAzure\Services\Table\Models\EdmType;
 use WindowsAzure\Services\Table\Models\Entity;
+use WindowsAzure\Services\Table\Models\Property;
+use WindowsAzure\Services\Table\Models\Query;
+use WindowsAzure\Services\Table\Models\QueryEntitiesOptions;
+use WindowsAzure\Services\Table\Models\QueryTablesOptions;
+use WindowsAzure\Services\Table\Models\TableServiceOptions;
 use WindowsAzure\Services\Table\Models\Filters\BinaryFilter;
 use WindowsAzure\Services\Table\Models\Filters\ConstantFilter;
 use WindowsAzure\Services\Table\Models\Filters\Filter;
 use WindowsAzure\Services\Table\Models\Filters\LiteralFilter;
 use WindowsAzure\Services\Table\Models\Filters\RawStringFilter;
 use WindowsAzure\Services\Table\Models\Filters\UnaryFilter;
-use WindowsAzure\Services\Table\Models\Property;
-use WindowsAzure\Services\Table\Models\Query;
-use WindowsAzure\Services\Table\Models\QueryEntitiesOptions;
-use WindowsAzure\Services\Table\Models\QueryTablesOptions;
-use WindowsAzure\Services\Table\Models\TableServiceOptions;
 
 class TableServiceFunctionalOptionsTest extends \PHPUnit_Framework_TestCase {
     // -------------------------------

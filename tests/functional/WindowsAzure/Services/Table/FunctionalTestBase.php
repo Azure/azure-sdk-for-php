@@ -30,15 +30,15 @@ use Tests\Framework\FiddlerFilter;
 use Tests\Framework\TableServiceRestProxyTestBase;
 use Tests\Framework\TestResources;
 use Tests\Functional\WindowsAzure\Services\Table\TableServiceFunctionalTestData;
+use WindowsAzure\Resources;
+use WindowsAzure\Utilities;
 use WindowsAzure\Core\ServiceException;
 use WindowsAzure\Core\WindowsAzureUtilities;
-use WindowsAzure\Resources;
 use WindowsAzure\Services\Core\Configuration;
-use WindowsAzure\Services\Table\Models\Entity;
-use WindowsAzure\Services\Table\Models\Filters\Filter;
 use WindowsAzure\Services\Table\TableService;
 use WindowsAzure\Services\Table\TableSettings;
-use WindowsAzure\Utilities;
+use WindowsAzure\Services\Table\Models\Entity;
+use WindowsAzure\Services\Table\Models\Filters\Filter;
 
 class FunctionalTestBase extends TableServiceRestProxyTestBase {
     public function __construct()

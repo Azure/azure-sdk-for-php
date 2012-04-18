@@ -30,9 +30,9 @@ use WindowsAzure\Core\ServiceException;
 use WindowsAzure\Services\Table\Models\BatchOperations;
 use WindowsAzure\Services\Table\Models\EdmType;
 use WindowsAzure\Services\Table\Models\Entity;
-use WindowsAzure\Services\Table\Models\Filters\Filter;
 use WindowsAzure\Services\Table\Models\Query;
 use WindowsAzure\Services\Table\Models\QueryEntitiesOptions;
+use WindowsAzure\Services\Table\Models\Filters\Filter;
 
 class TableServiceFunctionalQueryTest extends FunctionalTestBase {
     private static $entitiesInTable;
