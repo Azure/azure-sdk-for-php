@@ -483,7 +483,7 @@ class TableRestProxy extends ServiceRestProxy implements ITable
             $this->_buildFilterExpressionRec($filter->getRight(), $e);
             $e .= ')';
         } else if ($filter instanceof Filters\QueryStringFilter) {
-            $e .= $filter->getQueryStringFilter();
+            $e .= $filter->getQueryString();
         }
         
         return $e;
