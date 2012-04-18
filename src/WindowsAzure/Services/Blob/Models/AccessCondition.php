@@ -26,7 +26,7 @@ namespace WindowsAzure\Services\Blob\Models;
 use WindowsAzure\Services\Blob\Models\AccessConditionHeaderType;
 use WindowsAzure\Validate;
 use WindowsAzure\Resources;
-use WindowsAzure\Core\WindowsAzureUtilities;
+use WindowsAzure\Core\Utilities;
 
 /**
  * Represents a set of access conditions to be used for operations against the 
@@ -122,7 +122,7 @@ class AccessCondition
     {
         return new AccessCondition(
             AccessConditionHeaderType::IF_MODIFIED_SINCE,
-            WindowsAzureUtilities::rfc1123ToDateTime($lastModified)
+            Utilities::convertToEdmDateTime($lastModified)
         );
     }
     
@@ -170,7 +170,7 @@ class AccessCondition
     {
         return new AccessCondition(
             AccessConditionHeaderType::IF_UNMODIFIED_SINCE,
-            WindowsAzureUtilities::rfc1123ToDateTime($lastModified)
+            Utilities::convertToEdmDateTime($lastModified)
         );
     }
     
