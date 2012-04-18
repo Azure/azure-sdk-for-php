@@ -39,36 +39,30 @@ use WindowsAzure\Services\Table\Models\Filters\UnaryFilter;
 class UnaryFilterTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @covers WindowsAzure\Services\Table\Models\Filters\UnaryFilter::setOperator
+     * @covers WindowsAzure\Services\Table\Models\Filters\UnaryFilter::__construct
      * @covers WindowsAzure\Services\Table\Models\Filters\UnaryFilter::getOperator
      */
-    public function testSetOperator()
+    public function testGetOperator()
     {
         // Setup
-        $filter = new UnaryFilter();
         $expected = 'x';
+        $filter = new UnaryFilter($expected, null);
         
-        // Test
-        $filter->setOperator($expected);
-        
-        // Test
+        // Assert
         $this->assertEquals($expected, $filter->getOperator());
     }
     
     /**
-     * @covers WindowsAzure\Services\Table\Models\Filters\UnaryFilter::setOperand
+     * @covers WindowsAzure\Services\Table\Models\Filters\UnaryFilter::__construct
      * @covers WindowsAzure\Services\Table\Models\Filters\UnaryFilter::getOperand
      */
-    public function testSetOperand()
+    public function testGetOperand()
     {
         // Setup
-        $filter = new UnaryFilter();
-        $expected = new UnaryFilter();
+        $expected = null;
+        $filter = new UnaryFilter(null, $expected);
         
-        // Test
-        $filter->setOperand($expected);
-        
-        // Test
+        // Assert
         $this->assertEquals($expected, $filter->getOperand());
     }
 }

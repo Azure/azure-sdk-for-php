@@ -23,10 +23,10 @@
  */
 
 namespace Tests\Unit\WindowsAzure\Services\Table\Models\Filters;
-use WindowsAzure\Services\Table\Models\Filters\RawStringFilter;
+use WindowsAzure\Services\Table\Models\Filters\PropertyNameFilter;
 
 /**
- * Unit tests for class RawStringFilter
+ * Unit tests for class PropertyNameFilter
  *
  * @category  Microsoft
  * @package   Tests\Unit\WindowsAzure\Services\Table\Models\Filters
@@ -36,23 +36,20 @@ use WindowsAzure\Services\Table\Models\Filters\RawStringFilter;
  * @version   Release: @package_version@
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
-class RawStringFilterTest extends \PHPUnit_Framework_TestCase
+class PropertyNameFilterTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @covers WindowsAzure\Services\Table\Models\Filters\RawStringFilter::setRawString
-     * @covers WindowsAzure\Services\Table\Models\Filters\RawStringFilter::getRawString
+     * @covers WindowsAzure\Services\Table\Models\Filters\PropertyNameFilter::__construct
+     * @covers WindowsAzure\Services\Table\Models\Filters\PropertyNameFilter::getPropertyName
      */
-    public function testSetRawString()
+    public function testGetPropertyName()
     {
         // Setup
-        $filter = new RawStringFilter();
         $expected = 'x';
+        $filter = new PropertyNameFilter($expected);
         
-        // Test
-        $filter->setRawString($expected);
-        
-        // Test
-        $this->assertEquals($expected, $filter->getRawString());
+        // Assert
+        $this->assertEquals($expected, $filter->getPropertyName());
     }
 }
 

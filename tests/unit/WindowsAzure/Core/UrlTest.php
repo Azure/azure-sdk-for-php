@@ -63,7 +63,7 @@ class UrlTest extends PHPUnit_Framework_TestCase
     {
         // Setup
         $urlString = '';
-        $this->setExpectedException(get_class(new \RuntimeException(Resources::INVALID_URL_MSG)));
+        $this->setExpectedException(get_class(new \InvalidArgumentException(Resources::INVALID_URL_MSG)));
         
         // Test
         new Url($urlString);
@@ -76,7 +76,7 @@ class UrlTest extends PHPUnit_Framework_TestCase
     {
         // Setup
         $urlString = 1;
-        $this->setExpectedException(get_class(new \RuntimeException(Resources::INVALID_URL_MSG)));
+        $this->setExpectedException(get_class(new \InvalidArgumentException(Resources::INVALID_URL_MSG)));
         
         // Test
         new Url($urlString);
@@ -89,7 +89,7 @@ class UrlTest extends PHPUnit_Framework_TestCase
     {
         // Setup
         $urlString = 'ww.invalidurl,com';
-        $this->setExpectedException(get_class(new \RuntimeException(Resources::INVALID_URL_MSG)));
+        $this->setExpectedException(get_class(new \InvalidArgumentException(Resources::INVALID_URL_MSG)));
         
         // Test
         new Url($urlString);

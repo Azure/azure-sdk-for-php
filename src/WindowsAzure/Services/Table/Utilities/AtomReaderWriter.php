@@ -76,21 +76,17 @@ class AtomReaderWriter implements IAtomReaderWriter
             if (!is_null($entry->getEdmType())) {
                 $value[] = ' m:type="' . $entry->getEdmType() . '"';
             }
+            
             if (is_null($entry->getValue())) {
                 $value[] = ' m:null="true"'; 
             }
             $value[] = '>';
-
-            if (!is_null($entry->getValue())) {
-                if ($entry->getEdmType() == EdmType::BOOLEAN) {
-                    $value[] = ($entry->getValue() == true ? '1' : '0');
-                } else if ($entry->getEdmType() == EdmType::DATETIME) {
-                    $value[] = Utilities::convertToEdmDateTime($entry->getValue());
-                } else {
-                    $value[] = htmlspecialchars($entry->getValue());
-                }
-            }
-
+            
+            $value[] = EdmType::serializeValue(
+                $entry->getEdmType(),
+                $entry->getValue()
+            );
+            
             $value[] = '</d:' . $name . '>';
             $xml[]   = implode('', $value);
         }
@@ -277,7 +273,7 @@ class AtomReaderWriter implements IAtomReaderWriter
             $entity->addProperty(
                 (string)$key,
                 (string)$type,
-                $isnull ? null : $value
+                $isnull ? null : (string)$value
             );
         }
         

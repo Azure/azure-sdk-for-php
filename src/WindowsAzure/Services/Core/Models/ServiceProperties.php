@@ -112,8 +112,8 @@ class ServiceProperties
     public function toArray()
     {
         return array(
-            'Logging' => $this->_logging->toArray(),
-            'Metrics' => $this->_metrics->toArray(),
+            'Logging' => !empty($this->_logging) ? $this->_logging->toArray() : null,
+            'Metrics' => !empty($this->_metrics) ? $this->_metrics->toArray() : null
         );
     }
     

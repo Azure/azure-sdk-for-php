@@ -54,6 +54,9 @@ use WindowsAzure\Services\Table\Models\BatchOperations;
  */
 class TableRestProxyTest extends TableServiceRestProxyTestBase
 {
+    /**
+     * @covers  WindowsAzure\Services\Table\TableRestProxy::__construct
+     */
     public function test__construct()
     {
         // Setup
@@ -72,7 +75,7 @@ class TableRestProxyTest extends TableServiceRestProxyTestBase
     /**
      * @covers WindowsAzure\Services\Table\TableRestProxy::getServiceProperties
      * @covers WindowsAzure\Services\Core\ServiceRestProxy::sendContext
-    */
+     */
     public function testGetServiceProperties()
     {
         if (WindowsAzureUtilities::isEmulated()) {
@@ -89,7 +92,7 @@ class TableRestProxyTest extends TableServiceRestProxyTestBase
     /**
      * @covers WindowsAzure\Services\Table\TableRestProxy::setServiceProperties
      * @covers WindowsAzure\Services\Core\ServiceRestProxy::sendContext
-    */
+     */
     public function testSetServiceProperties()
     {
         if (WindowsAzureUtilities::isEmulated()) {
@@ -98,6 +101,29 @@ class TableRestProxyTest extends TableServiceRestProxyTestBase
         
         // Setup
         $expected = ServiceProperties::create(TestResources::setServicePropertiesSample());
+        
+        // Test
+        $this->setServiceProperties($expected);
+        $actual = $this->wrapper->getServiceProperties();
+        
+        // Assert
+        $this->assertEquals($expected->toXml(), $actual->getValue()->toXml());
+    }
+    
+    /**
+     * @covers WindowsAzure\Services\Table\TableRestProxy::setServiceProperties
+     * @covers WindowsAzure\Services\Core\ServiceRestProxy::sendContext
+     */
+    public function testSetServicePropertiesWithEmptyParts()
+    {
+        if (WindowsAzureUtilities::isEmulated()) {
+            $this->markTestSkipped(self::NOT_SUPPORTED);
+        }
+        
+        // Setup
+        $xml = TestResources::setServicePropertiesSample();
+        $xml['Metrics']['RetentionPolicy'] = null;
+        $expected = ServiceProperties::create($xml);
         
         // Test
         $this->setServiceProperties($expected);
@@ -171,7 +197,7 @@ class TableRestProxyTest extends TableServiceRestProxyTestBase
      * @covers WindowsAzure\Services\Table\TableRestProxy::_addOptionalQuery
      * @covers WindowsAzure\Services\Table\TableRestProxy::_encodeODataUriValues
      * @covers WindowsAzure\Services\Table\TableRestProxy::_encodeODataUriValue
-     * @covers WindowsAzure\Services\Table\Models\EdmType::serializeValue
+     * @covers WindowsAzure\Services\Table\Models\EdmType::serializeQueryValue
      * @covers WindowsAzure\Services\Table\Models\QueryTablesResult::create
      * @covers WindowsAzure\Services\Table\Utilities\AtomReaderWriter::_parseBody
      * @covers WindowsAzure\Services\Table\Utilities\AtomReaderWriter::parseTableEntries
@@ -202,7 +228,7 @@ class TableRestProxyTest extends TableServiceRestProxyTestBase
      * @covers WindowsAzure\Services\Table\TableRestProxy::_addOptionalQuery
      * @covers WindowsAzure\Services\Table\TableRestProxy::_encodeODataUriValues
      * @covers WindowsAzure\Services\Table\TableRestProxy::_encodeODataUriValue
-     * @covers WindowsAzure\Services\Table\Models\EdmType::serializeValue
+     * @covers WindowsAzure\Services\Table\Models\EdmType::serializeQueryValue
      * @covers WindowsAzure\Services\Table\Models\QueryTablesResult::create
      * @covers WindowsAzure\Services\Table\Utilities\AtomReaderWriter::_parseBody
      * @covers WindowsAzure\Services\Table\Utilities\AtomReaderWriter::parseTableEntries
@@ -230,7 +256,7 @@ class TableRestProxyTest extends TableServiceRestProxyTestBase
      * @covers WindowsAzure\Services\Table\TableRestProxy::_addOptionalQuery
      * @covers WindowsAzure\Services\Table\TableRestProxy::_encodeODataUriValues
      * @covers WindowsAzure\Services\Table\TableRestProxy::_encodeODataUriValue
-     * @covers WindowsAzure\Services\Table\Models\EdmType::serializeValue
+     * @covers WindowsAzure\Services\Table\Models\EdmType::serializeQueryValue
      * @covers WindowsAzure\Services\Table\Models\QueryTablesResult::create
      * @covers WindowsAzure\Services\Table\Utilities\AtomReaderWriter::_parseBody
      * @covers WindowsAzure\Services\Table\Utilities\AtomReaderWriter::parseTableEntries
@@ -253,7 +279,7 @@ class TableRestProxyTest extends TableServiceRestProxyTestBase
      * @covers WindowsAzure\Services\Table\TableRestProxy::_addOptionalQuery
      * @covers WindowsAzure\Services\Table\TableRestProxy::_encodeODataUriValues
      * @covers WindowsAzure\Services\Table\TableRestProxy::_encodeODataUriValue
-     * @covers WindowsAzure\Services\Table\Models\EdmType::serializeValue
+     * @covers WindowsAzure\Services\Table\Models\EdmType::serializeQueryValue
      * @covers WindowsAzure\Services\Table\Models\QueryTablesResult::create
      * @covers WindowsAzure\Services\Table\Utilities\AtomReaderWriter::_parseBody
      * @covers WindowsAzure\Services\Table\Utilities\AtomReaderWriter::parseTableEntries
@@ -288,6 +314,7 @@ class TableRestProxyTest extends TableServiceRestProxyTestBase
     /**
      * @covers WindowsAzure\Services\Table\TableRestProxy::insertEntity
      * @covers WindowsAzure\Services\Table\TableRestProxy::_constructInsertEntityContext
+     * @covers WindowsAzure\Services\Table\Models\EdmType::serializeValue
      * @covers WindowsAzure\Services\Table\Utilities\AtomReaderWriter::_parseBody
      * @covers WindowsAzure\Services\Table\Utilities\AtomReaderWriter::getEntity
      * @covers WindowsAzure\Services\Table\Utilities\AtomReaderWriter::_generatePropertiesXml
@@ -450,6 +477,7 @@ class TableRestProxyTest extends TableServiceRestProxyTestBase
      * @covers WindowsAzure\Services\Table\TableRestProxy::_getEntityPath
      * @covers WindowsAzure\Services\Table\TableRestProxy::_putOrMergeEntityImpl
      * @covers WindowsAzure\Services\Table\TableRestProxy::_constructPutOrMergeEntityContext
+     * @covers WindowsAzure\Services\Table\Models\EdmType::serializeValue
      * @covers WindowsAzure\Services\Table\Utilities\AtomReaderWriter::_parseBody
      * @covers WindowsAzure\Services\Table\Utilities\AtomReaderWriter::getEntity
      * @covers WindowsAzure\Services\Table\Utilities\AtomReaderWriter::_generatePropertiesXml
@@ -482,10 +510,43 @@ class TableRestProxyTest extends TableServiceRestProxyTestBase
     }
     
     /**
+     * @covers WindowsAzure\Services\Table\TableRestProxy::insertEntity
+     * @covers WindowsAzure\Services\Table\TableRestProxy::_constructInsertEntityContext
+     * @covers WindowsAzure\Services\Table\Models\EdmType::serializeValue
+     * @covers WindowsAzure\Services\Table\Utilities\AtomReaderWriter::_parseBody
+     * @covers WindowsAzure\Services\Table\Utilities\AtomReaderWriter::getEntity
+     * @covers WindowsAzure\Services\Table\Utilities\AtomReaderWriter::_generatePropertiesXml
+     * @covers WindowsAzure\Services\Table\Utilities\AtomReaderWriter::parseEntity
+     * @covers WindowsAzure\Services\Table\Utilities\AtomReaderWriter::_parseOneEntity
+     * WindowsAzure\Services\Table\Models\InsertEntityResult::create
+     * @covers WindowsAzure\Services\Core\ServiceRestProxy::sendContext
+     */
+    public function testUpdateEntityWithDeleteProperty()
+    {
+        // Setup
+        $name = 'updateentitywithdeleteproperty';
+        $this->createTable($name);
+        $expected = TestResources::getTestEntity('123', '456');
+        $this->wrapper->insertEntity($name, $expected);
+        $expected->setPropertyValue('CustomerId', null);
+        
+        // Test
+        $result = $this->wrapper->updateEntity($name, $expected);
+        
+        // Assert
+        $this->assertNotNull($result);
+        $actual = $this->wrapper->getEntity($name, $expected->getPartitionKey(), $expected->getRowKey());
+        $this->assertEquals($expected->getPartitionKey(), $actual->getEntity()->getPartitionKey());
+        $this->assertEquals($expected->getRowKey(), $actual->getEntity()->getRowKey());
+        $this->assertCount(count($expected->getProperties()) - 1, $actual->getEntity()->getProperties());
+    }
+    
+    /**
      * @covers WindowsAzure\Services\Table\TableRestProxy::mergeEntity
      * @covers WindowsAzure\Services\Table\TableRestProxy::_getEntityPath
      * @covers WindowsAzure\Services\Table\TableRestProxy::_putOrMergeEntityImpl
      * @covers WindowsAzure\Services\Table\TableRestProxy::_constructPutOrMergeEntityContext
+     * @covers WindowsAzure\Services\Table\Models\EdmType::serializeValue
      * @covers WindowsAzure\Services\Table\Utilities\AtomReaderWriter::_parseBody
      * @covers WindowsAzure\Services\Table\Utilities\AtomReaderWriter::getEntity
      * @covers WindowsAzure\Services\Table\Utilities\AtomReaderWriter::_generatePropertiesXml
@@ -615,6 +676,31 @@ class TableRestProxyTest extends TableServiceRestProxyTestBase
     }
     
     /**
+     * @covers WindowsAzure\Services\Table\TableRestProxy::deleteEntity
+     * @covers WindowsAzure\Services\Table\TableRestProxy::_getEntityPath
+     * @covers WindowsAzure\Services\Table\TableRestProxy::_constructDeleteEntityContext
+     * @covers WindowsAzure\Services\Core\ServiceRestProxy::sendContext
+     */
+    public function testDeleteEntityWithSpecialChars()
+    {
+        // Setup
+        $name = 'deleteentitywithspecialchars';
+        $this->createTable($name);
+        $partitionKey = '123';
+        $rowKey = 'key with spaces';
+        $entity = TestResources::getTestEntity($partitionKey, $rowKey);
+        $result = $this->wrapper->insertEntity($name, $entity);
+        
+        // Test
+        $this->wrapper->deleteEntity($name, $partitionKey, $rowKey);
+        
+        // Assert
+        $result = $this->wrapper->queryEntities($name);
+        $entities = $result->getEntities();
+        $this->assertCount(0, $entities);
+    }
+    
+    /**
      * @covers WindowsAzure\Services\Table\TableRestProxy::getEntity
      * @covers WindowsAzure\Services\Table\Utilities\AtomReaderWriter::_parseBody
      * @covers WindowsAzure\Services\Table\Utilities\AtomReaderWriter::parseEntity
@@ -697,10 +783,9 @@ class TableRestProxyTest extends TableServiceRestProxyTestBase
         $partitionKey = '123';
         $rowKey = '456';
         $expected = TestResources::getTestEntity($partitionKey, $rowKey);
-        $r = $this->wrapper->insertEntity($name, $expected);
+        $this->wrapper->insertEntity($name, $expected);
         $operations = new BatchOperations();
-        $etag = $r->getEntity()->getEtag();
-        $operations->addDeleteEntity($name, $partitionKey, $rowKey, $etag);
+        $operations->addDeleteEntity($name, $partitionKey, $rowKey);
         
         // Test
         $this->wrapper->batch($operations);

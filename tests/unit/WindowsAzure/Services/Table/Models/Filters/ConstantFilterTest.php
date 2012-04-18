@@ -40,34 +40,28 @@ use WindowsAzure\Services\Table\Models\EdmType;
 class ConstantFilterTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @covers WindowsAzure\Services\Table\Models\Filters\ConstantFilter::setValue
+     * @covers WindowsAzure\Services\Table\Models\Filters\ConstantFilter::__construct
      * @covers WindowsAzure\Services\Table\Models\Filters\ConstantFilter::getValue
      */
-    public function testSetValue()
+    public function testGetValue()
     {
         // Setup
-        $filter = new ConstantFilter();
         $expected = 'x';
+        $filter = new ConstantFilter(null, $expected);
         
-        // Test
-        $filter->setValue($expected);
-        
-        // Test
+        // Assert
         $this->assertEquals($expected, $filter->getValue());
     }
     
     /**
-     * @covers WindowsAzure\Services\Table\Models\Filters\ConstantFilter::setEdmType
+     * @covers WindowsAzure\Services\Table\Models\Filters\ConstantFilter::__construct
      * @covers WindowsAzure\Services\Table\Models\Filters\ConstantFilter::getEdmType
      */
-    public function testSetEdmType()
+    public function testGetEdmType()
     {
         // Setup
-        $filter = new ConstantFilter();
         $expected = EdmType::BINARY;
-        
-        // Test
-        $filter->setEdmType($expected);
+        $filter = new ConstantFilter($expected, '1234');
         
         // Assert
         $this->assertEquals($expected, $filter->getEdmType());

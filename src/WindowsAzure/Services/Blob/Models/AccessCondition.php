@@ -113,7 +113,7 @@ class AccessCondition
      * <a href= 'http://go.microsoft.com/fwlink/?LinkID=224642&clcid=0x409'>
      * Specifying Conditional Headers for Blob Service Operations</a>.
      *
-     * @param \DateTime $lastModified date object that represents the last-modified 
+     * @param string $lastModified date string that represents the last-modified 
      * time to check for the resource.
      *
      * @return \WindowsAzure\Services\Blob\Models\AccessCondition
@@ -161,7 +161,7 @@ class AccessCondition
      * <a href= 'http://go.microsoft.com/fwlink/?LinkID=224642&clcid=0x409'>
      * Specifying Conditional Headers for Blob Service Operations</a>.
      *
-     * @param \DateTime $lastModified date object that represents the last-modified 
+     * @param string $lastModified date string that represents the last-modified 
      * time to check for the resource.
      *
      * @return \WindowsAzure\Services\Blob\Models\AccessCondition

@@ -43,17 +43,19 @@ class Utilities
      * Returns the specified value of the $key passed from $array and in case that
      * this $key doesn't exist, the default value is returned.
      *
-     * @param array $array   Array to be used.
-     * @param mixed $key     Array key.
-     * @param mixed $default Value to return if $key is not found in $array.
+     * @param array $array   The array to be used.
+     * @param mix   $key     The array key.
+     * @param mix   $default The value to return if $key is not found in $array.
      * 
      * @static
      * 
-     * @return mixed
+     * @return mix
      */
     public static function tryGetValue($array, $key, $default = null)
     {
-        return array_key_exists($key, $array) ? $array[$key] : $default;
+        return is_array($array) && array_key_exists($key, $array)
+            ? $array[$key]
+            : $default;
     }
     
     /**
@@ -64,12 +66,16 @@ class Utilities
      * 
      * @static
      * 
-     * @return mixed
+     * @return mix
      */
     public static function tryGetKeysChainValue($array)
     {
         $arguments    = func_get_args();
         $numArguments = func_num_args();
+        
+        if (!is_array($array)) {
+            return null;
+        }
         
         $currentArray = $array;
         for ($i = 1; $i < $numArguments; $i++) {
@@ -343,21 +349,27 @@ class Utilities
     }
     
     /**
-     * Reads the contents of a file.
+     * Reads the contents of a stream.
      * 
-     * @param stream $stream The file strea with read permissions.
+     * @param resource $stream The stream handle with read permissions.
      * 
      * @return string
      */
-    public static function readFile($stream)
+    public static function readStream($stream)
     {
-        $contents = Resources::EMPTY_STRING;
-        
-        while (!feof($stream)) {
-            $contents .= fgets($stream);
-        }
-        
-        return $contents;
+        return stream_get_contents($stream);
+    }
+    
+    /**
+     * Converts string to stream handle.
+     * 
+     * @param type $string The string contents.
+     * 
+     * @return resource
+     */
+    public static function stringToStream($string)
+    {
+        return fopen('data://text/plain,' . $string, 'r');
     }
 }
 

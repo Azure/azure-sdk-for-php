@@ -15,53 +15,41 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   WindowsAzure\Services\Table\Models\Filters
+ * @package   Tests\Unit\WindowsAzure\Services\Table\Models\Filters
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
- 
-namespace WindowsAzure\Services\Table\Models\Filters;
+
+namespace Tests\Unit\WindowsAzure\Services\Table\Models\Filters;
+use WindowsAzure\Services\Table\Models\Filters\QueryStringFilter;
 
 /**
- * Constant filter
+ * Unit tests for class QueryStringFilter
  *
  * @category  Microsoft
- * @package   WindowsAzure\Services\Table\Models\Filters
+ * @package   Tests\Unit\WindowsAzure\Services\Table\Models\Filters
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @version   Release: @package_version@
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
-class RawStringFilter extends Filter
+class QueryStringFilterTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @var string
+     * @covers WindowsAzure\Services\Table\Models\Filters\QueryStringFilter::__construct
+     * @covers WindowsAzure\Services\Table\Models\Filters\QueryStringFilter::getQueryString
      */
-    private $_rawString;
-    
-    /**
-     * Gets raw string filter
-     * 
-     * @return string 
-     */
-    public function getRawString()
+    public function testGetQueryString()
     {
-        return $this->_rawString;
-    }
-    
-    /**
-     * Sets raw string filter
-     * 
-     * @param string $rawString value 
-     * 
-     * @return none
-     */
-    public function setRawString($rawString)
-    {
-        $this->_rawString = $rawString;
+        // Setup
+        $expected = 'x';
+        $filter = new QueryStringFilter($expected);
+        
+        // Assert
+        $this->assertEquals($expected, $filter->getQueryString());
     }
 }
 

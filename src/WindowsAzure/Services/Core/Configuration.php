@@ -134,7 +134,7 @@ class Configuration
      *
      * @param string $key index of the property value.
      * 
-     * @return mixed.
+     * @return mix.
      */
     public function getProperty($key)
     {

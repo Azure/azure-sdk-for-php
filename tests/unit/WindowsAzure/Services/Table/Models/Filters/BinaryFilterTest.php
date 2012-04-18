@@ -39,53 +39,44 @@ use WindowsAzure\Services\Table\Models\Filters\BinaryFilter;
 class BinaryFilterTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @covers WindowsAzure\Services\Table\Models\Filters\BinaryFilter::setOperator
+     * @covers WindowsAzure\Services\Table\Models\Filters\BinaryFilter::__construct
      * @covers WindowsAzure\Services\Table\Models\Filters\BinaryFilter::getOperator
      */
-    public function testSetOperator()
+    public function testGetOperator()
     {
         // Setup
-        $filter = new BinaryFilter();
         $expected = 'x';
+        $filter = new BinaryFilter(null, $expected, null);
         
-        // Test
-        $filter->setOperator($expected);
-        
-        // Test
+        // Assert
         $this->assertEquals($expected, $filter->getOperator());
     }
     
     /**
-     * @covers WindowsAzure\Services\Table\Models\Filters\BinaryFilter::setLeft
+     * @covers WindowsAzure\Services\Table\Models\Filters\BinaryFilter::__construct
      * @covers WindowsAzure\Services\Table\Models\Filters\BinaryFilter::getLeft
      */
-    public function testSetLeft()
+    public function testGetLeft()
     {
         // Setup
-        $filter = new BinaryFilter();
-        $expected = new BinaryFilter();
+        $expected = null;
+        $filter = new BinaryFilter($expected, null, null);
         
-        // Test
-        $filter->setLeft($expected);
-        
-        // Test
+        // Assert
         $this->assertEquals($expected, $filter->getLeft());
     }
     
     /**
-     * @covers WindowsAzure\Services\Table\Models\Filters\BinaryFilter::setRight
+     * @covers WindowsAzure\Services\Table\Models\Filters\BinaryFilter::__construct
      * @covers WindowsAzure\Services\Table\Models\Filters\BinaryFilter::getRight
      */
-    public function testSetRight()
+    public function testGetRight()
     {
         // Setup
-        $filter = new BinaryFilter();
-        $expected = new BinaryFilter();
+        $expected = null;
+        $filter = new BinaryFilter(null, null, $expected);
         
-        // Test
-        $filter->setRight($expected);
-        
-        // Test
+        // Assert
         $this->assertEquals($expected, $filter->getRight());
     }
 }

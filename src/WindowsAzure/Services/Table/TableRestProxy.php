@@ -232,7 +232,6 @@ class TableRestProxy extends ServiceRestProxy implements ITable
                 break;
         
             case BatchOperationType::DELETE_ENTITY_OPERATION:
-                $context->removeHeader(Resources::CONTENT_TYPE);
                 break;
 
             default:
@@ -276,10 +275,9 @@ class TableRestProxy extends ServiceRestProxy implements ITable
         }
         
         $etagObj                            = $options->getEtag();
-        $ETag                               = !is_null($etagObj);
+        $Etag                               = !is_null($etagObj);
         $queryParams[Resources::QP_TIMEOUT] = strval($options->getTimeout());
-        $headers[Resources::CONTENT_TYPE]   = Resources::XML_ATOM_CONTENT_TYPE;
-        $headers[Resources::IF_MATCH]       = $ETag ? $etagObj : Resources::ASTERISK;
+        $headers[Resources::IF_MATCH]       = $Etag ? $etagObj : Resources::ASTERISK;
         
         $context = new HttpCallContext();
         $context->setHeaders($headers);
@@ -300,21 +298,17 @@ class TableRestProxy extends ServiceRestProxy implements ITable
      * @param string                     $table   The table name.
      * @param Models\Entity              $entity  The entity instance to use.
      * @param string                     $verb    The HTTP method.
-     * @param boolean                    $useETag The flag to include etag or not.
+     * @param boolean                    $useEtag The flag to include etag or not.
      * @param Models\TableServiceOptions $options The optional parameters.
      * 
      * @return HttpCallContext
      */
     private function _constructPutOrMergeEntityContext($table, $entity, $verb,
-        $useETag, $options
+        $useEtag, $options
     ) {
         Validate::isValidString($table);
         Validate::notNullOrEmpty($entity);
-        Validate::isTrue($entity->isValid(), Resources::INVALID_ENTITY_MSG);
-        
-        if ($useETag) {
-            Validate::notNullOrEmpty($entity->getEtag());
-        }
+        Validate::isTrue($entity->isValid($msg), $msg);
         
         $method       = $verb;
         $headers      = array();
@@ -324,15 +318,20 @@ class TableRestProxy extends ServiceRestProxy implements ITable
         $rowKey       = $entity->getRowKey();
         $path         = $this->_getEntityPath($table, $partitionKey, $rowKey);
         $body         = $this->_atomSerializer->getEntity($entity);
-        $ifMatchValue = $useETag ? $entity->getEtag() : Resources::ASTERISK;
         
         if (is_null($options)) {
             $options = new TableServiceOptions();
         }
         
+        if ($useEtag) {
+            $etag         = $entity->getEtag();
+            $ifMatchValue = is_null($etag) ? Resources::ASTERISK : $etag;
+            
+            $headers[Resources::IF_MATCH] = $ifMatchValue;
+        }
+        
         $queryParams[Resources::QP_TIMEOUT] = strval($options->getTimeout());
         $headers[Resources::CONTENT_TYPE]   = Resources::XML_ATOM_CONTENT_TYPE;
-        $headers[Resources::IF_MATCH]       = $ifMatchValue;
         
         $context = new HttpCallContext();
         $context->setBody($body);
@@ -410,19 +409,19 @@ class TableRestProxy extends ServiceRestProxy implements ITable
      * @param string                     $table   The table name.
      * @param Models\Entity              $entity  The entity instance to use.
      * @param string                     $verb    The HTTP method.
-     * @param boolean                    $useETag The flag to include etag or not.
+     * @param boolean                    $useEtag The flag to include etag or not.
      * @param Models\TableServiceOptions $options The optional parameters.
      * 
      * @return Models\UpdateEntityResult
      */
-    private function _putOrMergeEntityImpl($table, $entity, $verb, $useETag,
+    private function _putOrMergeEntityImpl($table, $entity, $verb, $useEtag,
         $options
     ) {
         $context = $this->_constructPutOrMergeEntityContext(
             $table,
             $entity,
             $verb,
-            $useETag,
+            $useEtag,
             $options
         );
         
@@ -460,8 +459,8 @@ class TableRestProxy extends ServiceRestProxy implements ITable
             return;
         }
         
-        if ($filter instanceof Filters\LiteralFilter) {
-            $e .= $filter->getLiteral();
+        if ($filter instanceof Filters\PropertyNameFilter) {
+            $e .= $filter->getPropertyName();
         } else if ($filter instanceof Filters\ConstantFilter) {
             $value = $filter->getValue();
             // If the value is null we just append null regardless of the edmType.
@@ -469,7 +468,7 @@ class TableRestProxy extends ServiceRestProxy implements ITable
                 $e .= 'null';
             } else {
                 $type = $filter->getEdmType();
-                $e   .= EdmType::serializeValue($type, $value);
+                $e   .= EdmType::serializeQueryValue($type, $value);
             }
         } else if ($filter instanceof Filters\UnaryFilter) {
             $e .= $filter->getOperator();
@@ -484,8 +483,8 @@ class TableRestProxy extends ServiceRestProxy implements ITable
             $e .= ' ';
             $this->_buildFilterExpressionRec($filter->getRight(), $e);
             $e .= ')';
-        } else if ($filter instanceof Filters\RawStringFilter) {
-            $e .= $filter->getRawStringFilter();
+        } else if ($filter instanceof Filters\QueryStringFilter) {
+            $e .= $filter->getQueryString();
         }
         
         return $e;
@@ -557,7 +556,7 @@ class TableRestProxy extends ServiceRestProxy implements ITable
         $value = str_replace('\'', '\'\'', $value);
         
         // Encode the special URL characters
-        $value = urlencode($value);
+        $value = rawurlencode($value);
         
         return $value;
     }
@@ -673,11 +672,11 @@ class TableRestProxy extends ServiceRestProxy implements ITable
             // is prefix + '{'
             $prefixFilter = Filter::applyAnd(
                 Filter::applyGe(
-                    Filter::applyLiteral('TableName'),
+                    Filter::applyPropertyName('TableName'),
                     Filter::applyConstant($prefix, EdmType::STRING)
                 ),
                 Filter::applyLe(
-                    Filter::applyLiteral('TableName'),
+                    Filter::applyPropertyName('TableName'),
                     Filter::applyConstant($prefix . '{', EdmType::STRING)
                 )
             );

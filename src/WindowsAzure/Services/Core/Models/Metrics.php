@@ -58,6 +58,10 @@ class Metrics
      * @var bool
      */
     private $_includeAPIs;
+    
+    /**
+     * @var WindowsAzure\Services\Core\Models\RetentionPolicy
+     */
     private $_retentionPolicy;
     
     /**
@@ -187,7 +191,9 @@ class Metrics
         if ($this->_enabled) {
             $array['IncludeAPIs'] = Utilities::booleanToString($this->_includeAPIs);
         }
-        $array['RetentionPolicy'] = $this->_retentionPolicy->toArray();
+        $array['RetentionPolicy'] = !empty($this->_retentionPolicy)
+            ? $this->_retentionPolicy->toArray()
+            : null;
         
         return $array;
     }

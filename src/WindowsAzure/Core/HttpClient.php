@@ -134,7 +134,7 @@ class HttpClient implements IHttpClient
      * 
      * @param string $method request's HTTP method.
      * 
-     * @return none.
+     * @return none
      */
     public function setMethod($method)
     {
@@ -171,7 +171,7 @@ class HttpClient implements IHttpClient
      * @param bool   $replace whether to replace previous header with the same name
      * or append to its value (comma separated)
      * 
-     * @return none.
+     * @return none
      */
     public function setHeader($header, $value, $replace = false)
     {
@@ -185,7 +185,7 @@ class HttpClient implements IHttpClient
      * 
      * @param array $headers headers key-value array
      * 
-     * @return none.
+     * @return none
      */
     public function setHeaders($headers)
     {
@@ -204,7 +204,7 @@ class HttpClient implements IHttpClient
      * 
      * @throws WindowsAzure\Core\ServiceException
      * 
-     * @return string The response body.
+     * @return string The response body
      */
     public function send($filters, $url = null)
     {
@@ -254,7 +254,7 @@ class HttpClient implements IHttpClient
      * 
      * @param array|string $statusCodes successful status code.
      * 
-     * @return none.
+     * @return none
      */
     public function setExpectedStatusCode($statusCodes)
     {
@@ -268,7 +268,7 @@ class HttpClient implements IHttpClient
     /**
      * Gets successful status code
      * 
-     * @return array.
+     * @return array
      */
     public function getSuccessfulStatusCode()
     {
@@ -278,10 +278,10 @@ class HttpClient implements IHttpClient
     /**
      * Sets configuration parameter.
      * 
-     * @param string $name  configuration parameter name.
-     * @param mixed  $value configuration parameter value.
+     * @param string $name  The configuration parameter name.
+     * @param mix    $value The configuration parameter value.
      * 
-     * @return none.
+     * @return none
      */
     public function setConfig($name, $value = null)
     {
@@ -296,7 +296,7 @@ class HttpClient implements IHttpClient
      * 
      * @param string $name configuration parameter name.
      * 
-     * @return string.
+     * @return string
      */
     public function getConfig($name)
     {
@@ -308,7 +308,7 @@ class HttpClient implements IHttpClient
      * 
      * @param string $body body to use.
      * 
-     * @return none.
+     * @return none
      */
     public function setBody($body)
     {
@@ -319,7 +319,7 @@ class HttpClient implements IHttpClient
     /**
      * Gets the request body.
      * 
-     * @return string.
+     * @return string
      */
     public function getBody()
     {
@@ -329,7 +329,7 @@ class HttpClient implements IHttpClient
     /**
      * Gets the response object.
      * 
-     * @return \HTTP_Request2_Response.
+     * @return \HTTP_Request2_Response
      */
     public function getResponse()
     {

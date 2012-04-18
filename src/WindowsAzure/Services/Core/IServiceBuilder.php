@@ -51,7 +51,7 @@ interface IServiceBuilder
      * @param WindowsAzure\Services\Core\Configuration $config The configuration.
      * @param string                                   $type   The type name.
      * 
-     * @return mixed
+     * @return mix
      */
     public static function build($config, $type);
 }

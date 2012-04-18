@@ -65,7 +65,50 @@ class EdmType
     }
     
     /**
-     * Serializes EDM value into proper value for sending to Windows Azure service.
+     * Validates that the value associated with the EDM type is valid.
+     * 
+     * @param string $type  The EDM type.
+     * @param mix    $value The EDM value.
+     * 
+     * @return boolean
+     * 
+     * @throws \InvalidArgumentException 
+     */
+    public static function validateEdmValue($type, $value)
+    {
+        // Having null value means that the user wants to remove the property name
+        // associated with this value. Leave the value as null so this hold.
+        if (is_null($value)) {
+            return true;
+        } else {
+            switch ($type) {
+            case EdmType::GUID:
+            case EdmType::BINARY:
+            case EdmType::STRING:
+                return is_string($value);
+
+            case EdmType::DOUBLE:
+            case EdmType::INT32:
+            case EdmType::INT64:
+                return is_int($value);
+
+            case EdmType::DATETIME:
+                return $value instanceof \DateTime;
+
+            case EdmType::BOOLEAN:
+                return is_bool($value);
+
+            case null:
+                return is_null($value);
+
+            default:
+                throw new \InvalidArgumentException();
+            }
+        }
+    }
+    
+    /**
+     * Serializes EDM value into proper value for sending it to Windows Azure.
      * 
      * @param string $type  The EDM type.
      * @param mix    $value The EDM value.
@@ -75,6 +118,42 @@ class EdmType
      * @throws \InvalidArgumentException 
      */
     public static function serializeValue($type, $value)
+    {
+        switch ($type) {
+        case EdmType::DOUBLE:
+        case EdmType::INT32:
+        case EdmType::INT64:
+        case EdmType::GUID:
+        case EdmType::STRING:
+        case null:
+            // Convert special characters to HTML entities.
+            return htmlspecialchars($value);
+            
+        case EdmType::BINARY:
+            return base64_encode($value);
+            
+        case EdmType::DATETIME:
+            return Utilities::convertToEdmDateTime($value);
+
+        case EdmType::BOOLEAN:
+            return ($value == true ? '1' : '0');
+
+        default:
+            throw new \InvalidArgumentException();
+        }
+    }
+    
+    /**
+     * Serializes EDM value into proper value to be used in query.
+     * 
+     * @param string $type  The EDM type.
+     * @param mix    $value The EDM value.
+     * 
+     * @return string
+     * 
+     * @throws \InvalidArgumentException 
+     */
+    public static function serializeQueryValue($type, $value)
     {
         switch ($type) {
         case EdmType::DATETIME:
@@ -117,7 +196,7 @@ class EdmType
      * 
      * @throws \InvalidArgumentException
      */
-    public static function unserializeValue($type, $value)
+    public static function unserializeQueryValue($type, $value)
     {
         // Having null value means that the user wants to remove the property name
         // associated with this value. Leave the value as null so this hold.
