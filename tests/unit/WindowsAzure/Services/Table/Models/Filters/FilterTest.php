@@ -41,14 +41,14 @@ class FilterTest extends \PHPUnit_Framework_TestCase
 {
     /**
      * @covers WindowsAzure\Services\Table\Models\Filters\Filter::applyAnd
-     * @covers WindowsAzure\Services\Table\Models\Filters\Filter::applyLiteral
-     * @covers WindowsAzure\Services\Table\Models\Filters\Filter::applyRawString
+     * @covers WindowsAzure\Services\Table\Models\Filters\Filter::applyPropertyName
+     * @covers WindowsAzure\Services\Table\Models\Filters\Filter::applyQueryString
      */
     public function testApplyAnd()
     {
         // Setup
-        $left = Filter::applyLiteral('test');
-        $right = Filter::applyRawString('raw string');
+        $left = Filter::applyPropertyName('test');
+        $right = Filter::applyQueryString('raw string');
         
         // Test
         $actual = Filter::applyAnd($left, $right);
@@ -76,14 +76,14 @@ class FilterTest extends \PHPUnit_Framework_TestCase
     
     /**
      * @covers WindowsAzure\Services\Table\Models\Filters\Filter::applyOr
-     * @covers WindowsAzure\Services\Table\Models\Filters\Filter::applyLiteral
-     * @covers WindowsAzure\Services\Table\Models\Filters\Filter::applyRawString
+     * @covers WindowsAzure\Services\Table\Models\Filters\Filter::applyPropertyName
+     * @covers WindowsAzure\Services\Table\Models\Filters\Filter::applyQueryString
      */
     public function testApplyOr()
     {
         // Setup
-        $left = Filter::applyLiteral('test');
-        $right = Filter::applyRawString('raw string');
+        $left = Filter::applyPropertyName('test');
+        $right = Filter::applyQueryString('raw string');
         
         // Test
         $actual = Filter::applyOr($left, $right);
@@ -95,14 +95,14 @@ class FilterTest extends \PHPUnit_Framework_TestCase
     
     /**
      * @covers WindowsAzure\Services\Table\Models\Filters\Filter::applyEq
-     * @covers WindowsAzure\Services\Table\Models\Filters\Filter::applyLiteral
-     * @covers WindowsAzure\Services\Table\Models\Filters\Filter::applyRawString
+     * @covers WindowsAzure\Services\Table\Models\Filters\Filter::applyPropertyName
+     * @covers WindowsAzure\Services\Table\Models\Filters\Filter::applyQueryString
      */
     public function testApplyEq()
     {
         // Setup
-        $left = Filter::applyLiteral('test');
-        $right = Filter::applyRawString('raw string');
+        $left = Filter::applyPropertyName('test');
+        $right = Filter::applyQueryString('raw string');
         
         // Test
         $actual = Filter::applyEq($left, $right);
@@ -114,14 +114,14 @@ class FilterTest extends \PHPUnit_Framework_TestCase
     
     /**
      * @covers WindowsAzure\Services\Table\Models\Filters\Filter::applyNe
-     * @covers WindowsAzure\Services\Table\Models\Filters\Filter::applyLiteral
-     * @covers WindowsAzure\Services\Table\Models\Filters\Filter::applyRawString
+     * @covers WindowsAzure\Services\Table\Models\Filters\Filter::applyPropertyName
+     * @covers WindowsAzure\Services\Table\Models\Filters\Filter::applyQueryString
      */
     public function testApplyNe()
     {
         // Setup
-        $left = Filter::applyLiteral('test');
-        $right = Filter::applyRawString('raw string');
+        $left = Filter::applyPropertyName('test');
+        $right = Filter::applyQueryString('raw string');
         
         // Test
         $actual = Filter::applyNe($left, $right);
@@ -133,14 +133,14 @@ class FilterTest extends \PHPUnit_Framework_TestCase
     
     /**
      * @covers WindowsAzure\Services\Table\Models\Filters\Filter::applyGe
-     * @covers WindowsAzure\Services\Table\Models\Filters\Filter::applyLiteral
-     * @covers WindowsAzure\Services\Table\Models\Filters\Filter::applyRawString
+     * @covers WindowsAzure\Services\Table\Models\Filters\Filter::applyPropertyName
+     * @covers WindowsAzure\Services\Table\Models\Filters\Filter::applyQueryString
      */
     public function testApplyGe()
     {
         // Setup
-        $left = Filter::applyLiteral('test');
-        $right = Filter::applyRawString('raw string');
+        $left = Filter::applyPropertyName('test');
+        $right = Filter::applyQueryString('raw string');
         
         // Test
         $actual = Filter::applyGe($left, $right);
@@ -152,14 +152,14 @@ class FilterTest extends \PHPUnit_Framework_TestCase
     
     /**
      * @covers WindowsAzure\Services\Table\Models\Filters\Filter::applyGt
-     * @covers WindowsAzure\Services\Table\Models\Filters\Filter::applyLiteral
-     * @covers WindowsAzure\Services\Table\Models\Filters\Filter::applyRawString
+     * @covers WindowsAzure\Services\Table\Models\Filters\Filter::applyPropertyName
+     * @covers WindowsAzure\Services\Table\Models\Filters\Filter::applyQueryString
      */
     public function testApplyGt()
     {
         // Setup
-        $left = Filter::applyLiteral('test');
-        $right = Filter::applyRawString('raw string');
+        $left = Filter::applyPropertyName('test');
+        $right = Filter::applyQueryString('raw string');
         
         // Test
         $actual = Filter::applyGt($left, $right);
@@ -171,14 +171,14 @@ class FilterTest extends \PHPUnit_Framework_TestCase
     
     /**
      * @covers WindowsAzure\Services\Table\Models\Filters\Filter::applyLt
-     * @covers WindowsAzure\Services\Table\Models\Filters\Filter::applyLiteral
-     * @covers WindowsAzure\Services\Table\Models\Filters\Filter::applyRawString
+     * @covers WindowsAzure\Services\Table\Models\Filters\Filter::applyPropertyName
+     * @covers WindowsAzure\Services\Table\Models\Filters\Filter::applyQueryString
      */
     public function testApplyLt()
     {
         // Setup
-        $left = Filter::applyLiteral('test');
-        $right = Filter::applyRawString('raw string');
+        $left = Filter::applyPropertyName('test');
+        $right = Filter::applyQueryString('raw string');
         
         // Test
         $actual = Filter::applyLt($left, $right);
@@ -190,14 +190,14 @@ class FilterTest extends \PHPUnit_Framework_TestCase
     
     /**
      * @covers WindowsAzure\Services\Table\Models\Filters\Filter::applyLe
-     * @covers WindowsAzure\Services\Table\Models\Filters\Filter::applyLiteral
-     * @covers WindowsAzure\Services\Table\Models\Filters\Filter::applyRawString
+     * @covers WindowsAzure\Services\Table\Models\Filters\Filter::applyPropertyName
+     * @covers WindowsAzure\Services\Table\Models\Filters\Filter::applyQueryString
      */
     public function testApplyLe()
     {
         // Setup
-        $left = Filter::applyLiteral('test');
-        $right = Filter::applyRawString('raw string');
+        $left = Filter::applyPropertyName('test');
+        $right = Filter::applyQueryString('raw string');
         
         // Test
         $actual = Filter::applyLe($left, $right);

@@ -151,7 +151,7 @@ class ValidateTest extends \PHPUnit_Framework_TestCase
      */
     public function testIsTrueWithFalse()
     {
-        $this->setExpectedException('\RuntimeException');
+        $this->setExpectedException('\InvalidArgumentException');
         Validate::isTrue(false, Resources::EMPTY_STRING);
     }
     

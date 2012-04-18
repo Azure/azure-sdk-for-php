@@ -219,7 +219,9 @@ class Logging
             'Delete'          => Utilities::booleanToString($this->_delete),
             'Read'            => Utilities::booleanToString($this->_read),
             'Write'           => Utilities::booleanToString($this->_write),
-            'RetentionPolicy' => $this->_retentionPolicy->toArray()
+            'RetentionPolicy' => !empty($this->_retentionPolicy)
+                ? $this->_retentionPolicy->toArray()
+                : null
         );
     }
 }

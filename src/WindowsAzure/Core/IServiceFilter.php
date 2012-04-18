@@ -41,19 +41,19 @@ interface IServiceFilter
     /**
      * Processes HTTP request before send.
      *
-     * @param mixed $request HTTP request object.
+     * @param mix $request HTTP request object.
      * 
-     * @return mixed processed HTTP request object.
+     * @return mix processed HTTP request object.
      */
     public function handleRequest($request);
 
     /**
      * Processes HTTP response after send.
      *
-     * @param mixed $request  HTTP request object.
-     * @param mixed $response HTTP response object.
+     * @param mix $request  HTTP request object.
+     * @param mix $response HTTP response object.
      * 
-     * @return mixed processed HTTP response object.
+     * @return mix processed HTTP response object.
      */
     public function handleResponse($request, $response);
 }

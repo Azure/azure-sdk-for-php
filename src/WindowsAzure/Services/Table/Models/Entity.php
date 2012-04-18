@@ -64,7 +64,12 @@ class Entity
         foreach ($properties as $key => $value) {
             Validate::isString($key);
             Validate::isTrue(
-                $value instanceof Property, Resources::INVALID_PROP_MSG
+                $value instanceof Property,
+                Resources::INVALID_PROP_MSG
+            );
+            Validate::isTrue(
+                EdmType::validateEdmValue($value->getEdmType(), $value->getValue()),
+                sprintf(Resources::INVALID_PROP_VAL_MSG, $key)
             );
         }
     }
@@ -78,8 +83,27 @@ class Entity
      */
     public function getPropertyValue($name)
     {
-        $p = $this->_properties[$name];
+        $p = Utilities::tryGetValue($this->_properties, $name);
         return is_null($p) ? null : $p->getValue();
+    }
+    
+    /**
+     * Sets property value.
+     * 
+     * Note that if the property doesn't exist, it doesn't add it. Use addProperty
+     * to add new properties.
+     * 
+     * @param string $name  The property name.
+     * @param mix    $value The property value. 
+     * 
+     * @return mix
+     */
+    public function setPropertyValue($name, $value)
+    {
+        $p = Utilities::tryGetValue($this->_properties, $name);
+        if (!is_null($p)) {
+            $p->setValue($value);
+        }
     }
     
     /**
@@ -231,7 +255,7 @@ class Entity
     public function addProperty($name, $edmType, $value)
     {
         $edmType = EdmType::processType($edmType);
-        $value   = EdmType::unserializeValue($edmType, $value);
+        $value   = EdmType::unserializeQueryValue($edmType, $value);
         
         $p = new Property();
         $p->setEdmType($edmType);
@@ -244,22 +268,23 @@ class Entity
      * Valid means the partition and row key exists for this entity along with the
      * timestamp.
      * 
-     * @return boolean 
+     * @param string &$msg The error message.
+     * 
+     * @return boolean
      */
-    public function isValid()
+    public function isValid(&$msg = null)
     {
-        $validProperties = null;
         try {
             $this->_validateProperties($this->_properties);
-            $validProperties = true;
         } catch (\Exception $exc) {
-            $validProperties = false;
+            $msg = $exc->getMessage();
+            return false;
         }
 
-        if (   !$validProperties
-            || is_null($this->getPartitionKey())
+        if (   is_null($this->getPartitionKey())
             || is_null($this->getRowKey())
         ) {
+            $msg = Resources::NULL_TABLE_KEY_MSG;
             return false;
         } else {
             return true;

@@ -42,7 +42,7 @@ class Validate
     /**
      * Throws exception if the provided variable type is not array.
      *
-     * @param mixed $var variable to check against.
+     * @param mix $var variable to check against.
      * 
      * @throws InvalidArgumentTypeException.
      * 
@@ -58,7 +58,7 @@ class Validate
     /**
      * Throws exception if the provided variable type is not string.
      *
-     * @param mixed $var variable to check against.
+     * @param mix $var variable to check against.
      * 
      * @throws InvalidArgumentTypeException
      * 
@@ -74,7 +74,7 @@ class Validate
     /**
      * Throws exception if the provided variable type is not boolean.
      *
-     * @param mixed $var variable to check against.
+     * @param mix $var variable to check against.
      * 
      * @throws InvalidArgumentTypeException
      * 
@@ -90,7 +90,7 @@ class Validate
     /**
      * Throws exception if the provided variable type is not integer.
      *
-     * @param mixed $var variable to check against.
+     * @param mix $var variable to check against.
      * 
      * @throws InvalidArgumentTypeException
      * 
@@ -106,7 +106,7 @@ class Validate
     /**
      * Throws exception if the provided variable is set to null.
      *
-     * @param mixed $var variable to check against.
+     * @param mix $var variable to check against.
      * 
      * @throws \InvalidArgumentException
      * 
@@ -132,14 +132,14 @@ class Validate
     public static function isTrue($isSatisfied, $failureMessage)
     {
         if (!$isSatisfied) {
-            throw new \RuntimeException($failureMessage);
+            throw new \InvalidArgumentException($failureMessage);
         }
     }
     
     /**
      * Throws exception if the provided $date is not of type \DateTime
      *
-     * @param mixed $date variable to check against.
+     * @param mix $date variable to check against.
      * 
      * @throws WindowsAzure\Core\InvalidArgumentTypeException
      * 

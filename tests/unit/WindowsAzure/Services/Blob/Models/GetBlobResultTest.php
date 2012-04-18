@@ -22,6 +22,7 @@
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
 namespace Tests\Unit\WindowsAzure\Services\Blob\Models;
+use WindowsAzure\Utilities;
 use WindowsAzure\Services\Blob\Models\GetBlobResult;
 use WindowsAzure\Services\Blob\Models\BlobProperties;
 
@@ -111,9 +112,8 @@ class GetBlobResultTest extends \PHPUnit_Framework_TestCase
     public function testSetContentStream()
     {
         // Setup
-        $expected = '0x8CAFB82EFF70C46';
+        $expected = Utilities::stringToStream('0x8CAFB82EFF70C46');
         $result = new GetBlobResult();
-        $result->setContentStream($expected);
         
         // Test
         $result->setContentStream($expected);

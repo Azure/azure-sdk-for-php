@@ -35,33 +35,31 @@ namespace WindowsAzure\Services\Table\Models\Filters;
  * @version   Release: @package_version@
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
-class LiteralFilter extends Filter
+class PropertyNameFilter extends Filter
 {
     /**
      * @var string
      */
-    private $_literal;
+    private $_propertyName;
     
     /**
-     * Gets literal
+     * Constructor.
+     * 
+     * @param string $propertyName The propertyName.
+     */
+    public function __construct($propertyName)
+    {
+        $this->_propertyName = $propertyName;
+    }
+    
+    /**
+     * Gets propertyName
      * 
      * @return string 
      */
-    public function getLiteral()
+    public function getPropertyName()
     {
-        return $this->_literal;
-    }
-
-    /**
-     * Sets literal
-     * 
-     * @param string $literal value 
-     * 
-     * @return none
-     */
-    public function setLiteral($literal)
-    {
-        $this->_literal = $literal;
+        return $this->_propertyName;
     }
 }
 
