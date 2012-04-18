@@ -50,7 +50,7 @@ class AccessConditionHeaderType
      * 
      * @var string
      */
-    const IF_UNMODIFIED_SINCE = 'If-Modified-Since';
+    const IF_UNMODIFIED_SINCE = 'If-Unmodified-Since';
 
     /**
      * Specifies the <i>If-Match</i> conditional header is set.
@@ -64,7 +64,7 @@ class AccessConditionHeaderType
      * 
      * @var string
      */
-    const IF_MODIFIED_SINCE = 'If-Unmodified-Since';
+    const IF_MODIFIED_SINCE = 'If-Modified-Since';
 
     /**
      * Specifies the <i>If-None-Match</i> conditional header is set.
