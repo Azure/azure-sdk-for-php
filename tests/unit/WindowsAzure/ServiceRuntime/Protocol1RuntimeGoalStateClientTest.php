@@ -189,6 +189,28 @@ class Protocol1RuntimeGoalStateClientTest extends \PHPUnit_Framework_TestCase
         $runtimeGoalStateClient->setKeepOpen(false);
         $this->assertEquals(false, $runtimeGoalStateClient->getKeepOpen());
     }
+    
+    /**
+     * @covers WindowsAzure\ServiceRuntime\Protocol1RuntimeGoalStateClient::setEndpoint
+     * @covers WindowsAzure\ServiceRuntime\Protocol1RuntimeGoalStateClient::getEndpoint
+     */
+    public function testSetGetEndpoint()
+    {
+        // Setup
+        $runtimeGoalStateClient = new Protocol1RuntimeGoalStateClient(
+            null,
+            null,
+            null,
+            null
+        );
+
+        // Test
+        $runtimeGoalStateClient->setEndpoint('endpoint1');
+        $this->assertEquals('endpoint1', $runtimeGoalStateClient->getEndpoint());
+
+        $runtimeGoalStateClient->setEndpoint('endpoint2');
+        $this->assertEquals('endpoint2', $runtimeGoalStateClient->getEndpoint());
+    }
 }
 
 ?>
