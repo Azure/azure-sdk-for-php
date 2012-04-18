@@ -275,9 +275,9 @@ class TableRestProxy extends ServiceRestProxy implements ITable
         }
         
         $etagObj                            = $options->getEtag();
-        $ETag                               = !is_null($etagObj);
+        $Etag                               = !is_null($etagObj);
         $queryParams[Resources::QP_TIMEOUT] = strval($options->getTimeout());
-        $headers[Resources::IF_MATCH]       = $ETag ? $etagObj : Resources::ASTERISK;
+        $headers[Resources::IF_MATCH]       = $Etag ? $etagObj : Resources::ASTERISK;
         
         $context = new HttpCallContext();
         $context->setHeaders($headers);
@@ -298,19 +298,19 @@ class TableRestProxy extends ServiceRestProxy implements ITable
      * @param string                     $table   The table name.
      * @param Models\Entity              $entity  The entity instance to use.
      * @param string                     $verb    The HTTP method.
-     * @param boolean                    $useETag The flag to include etag or not.
+     * @param boolean                    $useEtag The flag to include etag or not.
      * @param Models\TableServiceOptions $options The optional parameters.
      * 
      * @return HttpCallContext
      */
     private function _constructPutOrMergeEntityContext($table, $entity, $verb,
-        $useETag, $options
+        $useEtag, $options
     ) {
         Validate::isValidString($table);
         Validate::notNullOrEmpty($entity);
         Validate::isTrue($entity->isValid($msg), $msg);
         
-        if ($useETag) {
+        if ($useEtag) {
             Validate::notNullOrEmpty($entity->getEtag());
         }
         
@@ -322,15 +322,20 @@ class TableRestProxy extends ServiceRestProxy implements ITable
         $rowKey       = $entity->getRowKey();
         $path         = $this->_getEntityPath($table, $partitionKey, $rowKey);
         $body         = $this->_atomSerializer->getEntity($entity);
-        $ifMatchValue = $useETag ? $entity->getEtag() : Resources::ASTERISK;
         
         if (is_null($options)) {
             $options = new TableServiceOptions();
         }
         
+        if ($useEtag) {
+            $etag         = $entity->getEtag();
+            $ifMatchValue = is_null($etag) ? Resources::ASTERISK : $etag;
+            
+            $headers[Resources::IF_MATCH] = $ifMatchValue;
+        }
+        
         $queryParams[Resources::QP_TIMEOUT] = strval($options->getTimeout());
         $headers[Resources::CONTENT_TYPE]   = Resources::XML_ATOM_CONTENT_TYPE;
-        $headers[Resources::IF_MATCH]       = $ifMatchValue;
         
         $context = new HttpCallContext();
         $context->setBody($body);
@@ -408,19 +413,19 @@ class TableRestProxy extends ServiceRestProxy implements ITable
      * @param string                     $table   The table name.
      * @param Models\Entity              $entity  The entity instance to use.
      * @param string                     $verb    The HTTP method.
-     * @param boolean                    $useETag The flag to include etag or not.
+     * @param boolean                    $useEtag The flag to include etag or not.
      * @param Models\TableServiceOptions $options The optional parameters.
      * 
      * @return Models\UpdateEntityResult
      */
-    private function _putOrMergeEntityImpl($table, $entity, $verb, $useETag,
+    private function _putOrMergeEntityImpl($table, $entity, $verb, $useEtag,
         $options
     ) {
         $context = $this->_constructPutOrMergeEntityContext(
             $table,
             $entity,
             $verb,
-            $useETag,
+            $useEtag,
             $options
         );
         
