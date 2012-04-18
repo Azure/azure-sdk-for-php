@@ -29,19 +29,19 @@ namespace Tests\Functional\WindowsAzure\Services\Table;
 use WindowsAzure\Core\ServiceException;
 use WindowsAzure\Core\WindowsAzureUtilities;
 use WindowsAzure\Services\Table\TableService;
+use WindowsAzure\Services\Table\Models\BatchOperations;
+use WindowsAzure\Services\Table\Models\DeleteEntityOptions;
 use WindowsAzure\Services\Table\Models\EdmType;
-use WindowsAzure\Services\Table\Models\InsertEntityResult;
 use WindowsAzure\Services\Table\Models\Entity;
+use WindowsAzure\Services\Table\Models\InsertEntityResult;
 use WindowsAzure\Services\Table\Models\Property;
 use WindowsAzure\Services\Table\Models\Query;
 use WindowsAzure\Services\Table\Models\QueryEntitiesOptions;
-use WindowsAzure\Services\Table\Models\BatchOperations;
 use WindowsAzure\Services\Table\Models\QueryEntitiesResult;
-use WindowsAzure\Services\Table\Models\QueryTablesOptions;
 use WindowsAzure\Services\Table\Models\QueryTableResults;
+use WindowsAzure\Services\Table\Models\QueryTablesOptions;
 use WindowsAzure\Services\Table\Models\TableServiceOptions;
 use WindowsAzure\Services\Table\Models\UpdateEntityResult;
-use WindowsAzure\Services\Table\Models\DeleteEntityOptions;
 use WindowsAzure\Services\Table\Models\Filters\BinaryFilter;
 use WindowsAzure\Services\Table\Models\Filters\ConstantFilter;
 use WindowsAzure\Services\Table\Models\Filters\Filter;
@@ -62,7 +62,6 @@ class TableServiceIntegrationTest extends IntegrationTestBase {
     private static $TEST_TABLE_8;
     private static $CREATABLE_TABLE_1;
     private static $CREATABLE_TABLE_2;
-    //private static String CREATABLE_TABLE_3;
     private static $creatableTables;
     private static $testTables;
 
@@ -92,7 +91,6 @@ class TableServiceIntegrationTest extends IntegrationTestBase {
 
         self::$CREATABLE_TABLE_1 = self::$creatableTables[0];
         self::$CREATABLE_TABLE_2 = self::$creatableTables[1];
-        //CREATABLE_TABLE_3 = $creatableTables[2];
 
         // Create all test containers and their content
         self::deleteAllTables(self::$testTables);
@@ -134,6 +132,7 @@ class TableServiceIntegrationTest extends IntegrationTestBase {
             }
             catch (ServiceException $e) {
                 // Ignore
+                error_log($e->getMessage());
             }
         }
     }
@@ -235,7 +234,7 @@ class TableServiceIntegrationTest extends IntegrationTestBase {
     * @covers WindowsAzure\Services\Table\TableRestProxy::getTable
     */
     public function testCreateTablesWorks() {
-        $this->fail("Need to implement getTable");
+        $this->fail('Need to implement getTable');
         // Act
         try {
             $this->wrapper->getTable(self::$CREATABLE_TABLE_1);
@@ -258,7 +257,7 @@ class TableServiceIntegrationTest extends IntegrationTestBase {
     * @covers WindowsAzure\Services\Table\TableRestProxy::getTable
     */
     public function testDeleteTablesWorks() {
-        $this->fail("Need to implement getTable");
+        $this->fail('Need to implement getTable');
 
         // Act
         $this->wrapper->createTable(self::$CREATABLE_TABLE_2);
@@ -306,7 +305,7 @@ class TableServiceIntegrationTest extends IntegrationTestBase {
     * @covers WindowsAzure\Services\Table\TableRestProxy::getTable
     */
     public function testGetTableWorks() {
-        $this->fail("Need to implement getTable");
+        $this->fail('Need to implement getTable');
 
         // Act
         $result = $this->wrapper->getTable(self::$TEST_TABLE_1);
@@ -412,7 +411,7 @@ class TableServiceIntegrationTest extends IntegrationTestBase {
         if(WindowsAzureUtilities::isEmulated()) {
             try {
                 $this->wrapper->insertOrReplaceEntity(self::$TEST_TABLE_2, $entity);
-                $this->assertFalse(WindowsAzureUtilities::isEmulated(), "Expect failure when in emulator");
+                $this->assertFalse(WindowsAzureUtilities::isEmulated(), 'Expect failure when in emulator');
             } catch (ServiceException $e) {
                 $this->assertEquals(404, $e->getCode(), 'e->getCode');
             }
@@ -445,7 +444,7 @@ class TableServiceIntegrationTest extends IntegrationTestBase {
         if(WindowsAzureUtilities::isEmulated()) {
             try {
                 $this->wrapper->insertOrMergeEntity(self::$TEST_TABLE_2, $entity);
-                $this->assertFalse(WindowsAzureUtilities::isEmulated(), "Expect failure when in emulator");
+                $this->assertFalse(WindowsAzureUtilities::isEmulated(), 'Expect failure when in emulator');
             } catch (ServiceException $e) {
                 $this->assertEquals(404, $e->getCode(), 'e->getCode');
             }
@@ -768,6 +767,8 @@ class TableServiceIntegrationTest extends IntegrationTestBase {
     * @covers WindowsAzure\Services\Table\TableRestProxy::queryEntities
     */
     public function testQueryEntitiesWithFilterWorks() {
+        $this->fail('Skipping because of fatal error, https://github.com/WindowsAzure/azure-sdk-for-php/issues/158');
+        
         // Arrange
         $table = self::$TEST_TABLE_5;
         $numberOfEntries = 5;
@@ -821,7 +822,7 @@ class TableServiceIntegrationTest extends IntegrationTestBase {
         {
             // Act
             $q = new Query();
-            $q->setFilter(Filter::applyLiteral('test'));
+            $q->setFilter(Filter::applyLiteral('test', EdmType::BOOLEAN));
             $qeo = new QueryEntitiesOptions();
             $qeo->setQuery($q);
             $result = $this->wrapper->queryEntities($table, $qeo);
@@ -943,7 +944,6 @@ class TableServiceIntegrationTest extends IntegrationTestBase {
     * @covers WindowsAzure\Services\Table\TableRestProxy::insertEntity
     */
     public function testBatchUpdateWorks() {
-        $this->fail('Need to implement BatchOperations');
         // Arrange
         $table = self::$TEST_TABLE_6;
         $partitionKey = '001';
@@ -1006,7 +1006,7 @@ class TableServiceIntegrationTest extends IntegrationTestBase {
     public function testBatchInsertOrReplaceWorks() {
         // Arrange
         
-        // Don"t run this test with emulator, as v1.6 doesn"t support this method
+        // Do not run this test with emulator, as v1.6 does not support this method
         if (WindowsAzureUtilities::isEmulated()) {
             return;
         }
@@ -1040,7 +1040,7 @@ class TableServiceIntegrationTest extends IntegrationTestBase {
     public function testBatchInsertOrMergeWorks() {
         // Arrange
         
-        // Don"t run this test with emulator, as v1.6 doesn"t support this method
+        // Do not run this test with emulator, as v1.6 does not support this method
         if (WindowsAzureUtilities::isEmulated()) {
             return;
         }
@@ -1130,8 +1130,6 @@ class TableServiceIntegrationTest extends IntegrationTestBase {
         $this->assertNotNull($result, '$result');
         $this->assertEquals($insertCount, count($result->getEntries()), 'count($result->getEntries())');
         for ($i = 0; $i < $insertCount; $i++) {
-           // $this->assertEquals(InsertEntity->class, $result->getEntries()->get(i)->getClass(), '$result->getEntries()->get(i)->getClass()');
-
             $entity = $result->getEntries();
             $entity = $entity[$i]->getEntity();
 
@@ -1229,7 +1227,7 @@ class TableServiceIntegrationTest extends IntegrationTestBase {
         $entity3->addProperty('test3', EdmType::INT32, 5);
         $batchOperations->addMergeEntity($table, $entity3);
         $entity4->addProperty('test3', EdmType::INT32, 5);
-        // Use different behavior in the emulator, as v1.6 doesn"t support this method
+        // Use different behavior in the emulator, as v1.6 does not support this method
         if (!WindowsAzureUtilities::isEmulated()) {
             $batchOperations->addInsertOrReplaceEntity($table, $entity4);
         }
@@ -1245,7 +1243,7 @@ class TableServiceIntegrationTest extends IntegrationTestBase {
         $entity5->addProperty('test3', EdmType::INT32, 3);
         $entity5->addProperty('test4', EdmType::INT64, 12345678901);
         $entity5->addProperty('test5', EdmType::DATETIME, new \DateTime());
-        // Use different behavior in the emulator, as v1.6 doesn"t support this method
+        // Use different behavior in the emulator, as v1.6 does not support this method
         if (!WindowsAzureUtilities::isEmulated()) {
             $batchOperations->addInsertOrMergeEntity($table, $entity5);
         }
@@ -1316,7 +1314,7 @@ class TableServiceIntegrationTest extends IntegrationTestBase {
         // TODO: Fails because of https://github.com/WindowsAzure/azure-sdk-for-php/issues/187
         $this->assertEquals(count($batchOperations->getOperations()), count($entries), 'count($result->getEntries())');
         if (WindowsAzureUtilities::isEmulated()) {
-            // Don"t run this test with emulator, as v1.6 doesn"t support ordering the results
+            // Do not run this test with emulator, as v1.6 does not support ordering the results
             $this->assertNotNull($entries[0], 'First $result should not be null');
             $this->assertTrue($entries[0] instanceof Error, 'First $result type');
             $error = $entries[0];
@@ -1334,3 +1332,5 @@ class TableServiceIntegrationTest extends IntegrationTestBase {
         }
     }
 }
+
+?>
