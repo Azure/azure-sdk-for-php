@@ -26,7 +26,7 @@ namespace WindowsAzure\Services\Blob\Models;
 use WindowsAzure\Services\Blob\Models\AccessConditionHeaderType;
 use WindowsAzure\Validate;
 use WindowsAzure\Resources;
-use WindowsAzure\Core\Utilities;
+use WindowsAzure\Core\WindowsAzureUtilities;
 
 /**
  * Represents a set of access conditions to be used for operations against the 
@@ -113,7 +113,7 @@ class AccessCondition
      * <a href= 'http://go.microsoft.com/fwlink/?LinkID=224642&clcid=0x409'>
      * Specifying Conditional Headers for Blob Service Operations</a>.
      *
-     * @param \DateTime $lastModified date object that represents the last-modified 
+     * @param string $lastModified date string that represents the last-modified 
      * time to check for the resource.
      *
      * @return \WindowsAzure\Services\Blob\Models\AccessCondition
@@ -122,7 +122,7 @@ class AccessCondition
     {
         return new AccessCondition(
             AccessConditionHeaderType::IF_MODIFIED_SINCE,
-            Utilities::convertToEdmDateTime($lastModified)
+            WindowsAzureUtilities::rfc1123ToDateTime($lastModified)
         );
     }
     
@@ -161,7 +161,7 @@ class AccessCondition
      * <a href= 'http://go.microsoft.com/fwlink/?LinkID=224642&clcid=0x409'>
      * Specifying Conditional Headers for Blob Service Operations</a>.
      *
-     * @param \DateTime $lastModified date object that represents the last-modified 
+     * @param string $lastModified date string that represents the last-modified 
      * time to check for the resource.
      *
      * @return \WindowsAzure\Services\Blob\Models\AccessCondition
@@ -170,7 +170,7 @@ class AccessCondition
     {
         return new AccessCondition(
             AccessConditionHeaderType::IF_UNMODIFIED_SINCE,
-            Utilities::convertToEdmDateTime($lastModified)
+            WindowsAzureUtilities::rfc1123ToDateTime($lastModified)
         );
     }
     
