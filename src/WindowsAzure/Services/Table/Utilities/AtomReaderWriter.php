@@ -83,9 +83,9 @@ class AtomReaderWriter implements IAtomReaderWriter
             $value[] = '>';
             
             $value[] = EdmType::serializeValue(
-                    $entry->getEdmType(),
-                    $entry->getValue()
-                );
+                $entry->getEdmType(),
+                $entry->getValue()
+            );
             
             $value[] = '</d:' . $name . '>';
             $xml[]   = implode('', $value);

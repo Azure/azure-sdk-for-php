@@ -49,6 +49,18 @@ class ConstantFilter extends Filter
     private $_edmType;
     
     /**
+     * Constructor.
+     * 
+     * @param string $edmType The EDM type.
+     * @param string $value   The EDM value.
+     */
+    public function __construct($edmType, $value)
+    {
+        $this->_edmType = EdmType::processType($edmType);
+        $this->_value   = $value;
+    }
+
+    /**
      * Gets value
      * 
      * @return mix 
@@ -59,18 +71,6 @@ class ConstantFilter extends Filter
     }
     
     /**
-     * Sets value
-     * 
-     * @param mix $value value 
-     * 
-     * @return none
-     */
-    public function setValue($value)
-    {
-        $this->_value = $value;
-    }
-    
-    /**
      * Gets the type of the constant.
      * 
      * @return string
@@ -78,18 +78,6 @@ class ConstantFilter extends Filter
     public function getEdmType()
     {
         return $this->_edmType;
-    }
-    
-    /**
-     * Sets the value of the constant.
-     * 
-     * @param string $edmType The constant type.
-     * 
-     * @return none
-     */
-    public function setEdmType($edmType)
-    {
-        $this->_edmType = EdmType::processType($edmType);
     }
 }
 

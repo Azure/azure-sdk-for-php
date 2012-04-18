@@ -48,6 +48,18 @@ class UnaryFilter extends Filter
     private $_operand;
     
     /**
+     * Constructor.
+     * 
+     * @param string $operator The operator.
+     * @param Filter $operand  The operand filter.
+     */
+    public function __construct($operator, $operand)
+    {
+        $this->_operand  = $operand;
+        $this->_operator = $operator;
+    }
+    
+    /**
      * Gets operator
      * 
      * @return string 
@@ -58,18 +70,6 @@ class UnaryFilter extends Filter
     }
 
     /**
-     * Sets operator
-     * 
-     * @param string $operator value
-     * 
-     * @return none. 
-     */
-    public function setOperator($operator)
-    {
-        $this->_operator = $operator;
-    }
-
-    /**
      * Gets operand
      * 
      * @return Filter 
@@ -77,18 +77,6 @@ class UnaryFilter extends Filter
     public function getOperand()
     {
         return $this->_operand;
-    }
-
-    /**
-     * Sets operand
-     * 
-     * @param Filter $operand value
-     * 
-     * @return Filter 
-     */
-    public function setOperand($operand)
-    {
-        $this->_operand = $operand;
     }
 }
 

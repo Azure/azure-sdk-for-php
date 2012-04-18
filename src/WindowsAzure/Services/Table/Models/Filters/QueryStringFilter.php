@@ -15,44 +15,52 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   Tests\Unit\WindowsAzure\Services\Table\Models\Filters
+ * @package   WindowsAzure\Services\Table\Models\Filters
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
-
-namespace Tests\Unit\WindowsAzure\Services\Table\Models\Filters;
-use WindowsAzure\Services\Table\Models\Filters\RawStringFilter;
+ 
+namespace WindowsAzure\Services\Table\Models\Filters;
 
 /**
- * Unit tests for class RawStringFilter
+ * Constant filter
  *
  * @category  Microsoft
- * @package   Tests\Unit\WindowsAzure\Services\Table\Models\Filters
+ * @package   WindowsAzure\Services\Table\Models\Filters
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @version   Release: @package_version@
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
-class RawStringFilterTest extends \PHPUnit_Framework_TestCase
+class QueryStringFilter extends Filter
 {
     /**
-     * @covers WindowsAzure\Services\Table\Models\Filters\RawStringFilter::setRawString
-     * @covers WindowsAzure\Services\Table\Models\Filters\RawStringFilter::getRawString
+     * @var string
      */
-    public function testSetRawString()
+    private $_queryString;
+    
+    /**
+     * Constructor.
+     * 
+     * @param string $queryString The OData query string.
+     */
+    public function __construct($queryString)
     {
-        // Setup
-        $filter = new RawStringFilter();
-        $expected = 'x';
-        
-        // Test
-        $filter->setRawString($expected);
-        
-        // Test
-        $this->assertEquals($expected, $filter->getRawString());
+        $this->_queryString = $queryString;
+    }
+
+
+    /**
+     * Gets raw string filter
+     * 
+     * @return string 
+     */
+    public function getQueryString()
+    {
+        return $this->_queryString;
     }
 }
 

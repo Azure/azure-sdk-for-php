@@ -53,6 +53,20 @@ class BinaryFilter extends Filter
     private $_right;
     
     /**
+     * Constructor.
+     * 
+     * @param Filter $left     The left operand.
+     * @param string $operator The operator.
+     * @param Filter $right    The right operand.
+     */
+    public function __construct($left, $operator, $right)
+    {
+        $this->_left     = $left;
+        $this->_operator = $operator;
+        $this->_right    = $right;
+    }
+    
+    /**
      * Gets operator
      * 
      * @return string 
@@ -60,18 +74,6 @@ class BinaryFilter extends Filter
     public function getOperator() 
     {
         return $this->_operator;
-    }
-
-    /**
-     * Sets operator
-     * 
-     * @param string $operator value
-     * 
-     * @return none. 
-     */
-    public function setOperator($operator)
-    {
-        $this->_operator = $operator;
     }
 
     /**
@@ -85,18 +87,6 @@ class BinaryFilter extends Filter
     }
 
     /**
-     * Sets left
-     * 
-     * @param Filter $left value
-     * 
-     * @return none 
-     */
-    public function setLeft($left)
-    {
-        $this->_left = $left;
-    }
-
-    /**
      * Gets right
      * 
      * @return Filter 
@@ -104,18 +94,6 @@ class BinaryFilter extends Filter
     public function getRight()
     {
         return $this->_right;
-    }
-
-    /**
-     * Sets right
-     * 
-     * @param Filter $right value
-     * 
-     * @return none 
-     */
-    public function setRight($right)
-    {
-        $this->_right = $right;
     }
 }
 

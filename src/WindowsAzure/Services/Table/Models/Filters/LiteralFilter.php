@@ -43,6 +43,16 @@ class LiteralFilter extends Filter
     private $_literal;
     
     /**
+     * Constructor.
+     * 
+     * @param string $literal The literal.
+     */
+    public function __construct($literal)
+    {
+        $this->_literal = $literal;
+    }
+    
+    /**
      * Gets literal
      * 
      * @return string 
@@ -50,18 +60,6 @@ class LiteralFilter extends Filter
     public function getLiteral()
     {
         return $this->_literal;
-    }
-
-    /**
-     * Sets literal
-     * 
-     * @param string $literal value 
-     * 
-     * @return none
-     */
-    public function setLiteral($literal)
-    {
-        $this->_literal = $literal;
     }
 }
 

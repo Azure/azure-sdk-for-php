@@ -46,7 +46,7 @@ use WindowsAzure\Services\Table\Models\Filters\BinaryFilter;
 use WindowsAzure\Services\Table\Models\Filters\ConstantFilter;
 use WindowsAzure\Services\Table\Models\Filters\Filter;
 use WindowsAzure\Services\Table\Models\Filters\LiteralFilter;
-use WindowsAzure\Services\Table\Models\Filters\RawStringFilter;
+use WindowsAzure\Services\Table\Models\Filters\QueryStringFilter;
 use WindowsAzure\Services\Table\Models\Filters\UnaryFilter;
 
 class TableServiceIntegrationTest extends IntegrationTestBase {
@@ -806,7 +806,7 @@ class TableServiceIntegrationTest extends IntegrationTestBase {
         {
             // Act
             $q = new Query();
-            $q->setFilter(Filter::applyRawString('RowKey eq \'queryEntitiesWithFilterWorks-3\''));
+            $q->setFilter(Filter::applyQueryString('RowKey eq \'queryEntitiesWithFilterWorks-3\''));
             $qeo = new QueryEntitiesOptions();
             $qeo->setQuery($q);
             $result = $this->wrapper->queryEntities($table, $qeo);

@@ -47,11 +47,7 @@ class Filter
      */
     public static function applyAnd($left, $right)
     {
-        $filter = new BinaryFilter();
-        $filter->setOperator('and');
-        $filter->setLeft($left);
-        $filter->setRight($right);
-        
+        $filter = new BinaryFilter($left, 'and', $right);
         return $filter;
     }
    
@@ -64,10 +60,7 @@ class Filter
      */
     public static function applyNot($operand)
     {
-        $filter = new UnaryFilter();
-        $filter->setOperator('not');
-        $filter->setOperand($operand);
-        
+        $filter = new UnaryFilter('not', $operand);
         return $filter;
     }
 
@@ -81,11 +74,7 @@ class Filter
      */
     public static function applyOr($left, $right)
     {
-        $filter = new BinaryFilter();
-        $filter->setOperator('or');
-        $filter->setLeft($left);
-        $filter->setRight($right);
-        
+        $filter = new BinaryFilter($left, 'or', $right);
         return $filter;
     }
 
@@ -99,11 +88,7 @@ class Filter
      */
     public static function applyEq($left, $right)
     {
-        $filter = new BinaryFilter();
-        $filter->setOperator('eq');
-        $filter->setLeft($left);
-        $filter->setRight($right);
-        
+        $filter = new BinaryFilter($left, 'eq', $right);
         return $filter;
     }
 
@@ -117,11 +102,7 @@ class Filter
      */
     public static function applyNe($left, $right)
     {
-        $filter = new BinaryFilter();
-        $filter->setOperator('ne');
-        $filter->setLeft($left);
-        $filter->setRight($right);
-        
+        $filter = new BinaryFilter($left, 'ne', $right);
         return $filter;
     }
 
@@ -135,11 +116,7 @@ class Filter
      */
     public static function applyGe($left, $right)
     {
-        $filter = new BinaryFilter();
-        $filter->setOperator('ge');
-        $filter->setLeft($left);
-        $filter->setRight($right);
-        
+        $filter = new BinaryFilter($left, 'ge', $right);
         return $filter;
     }
 
@@ -153,11 +130,7 @@ class Filter
      */
     public static function applyGt($left, $right)
     {
-        $filter = new BinaryFilter();
-        $filter->setOperator('gt');
-        $filter->setLeft($left);
-        $filter->setRight($right);
-        
+        $filter = new BinaryFilter($left, 'gt', $right);
         return $filter;
     }
 
@@ -171,11 +144,7 @@ class Filter
      */
     public static function applyLt($left, $right)
     {
-        $filter = new BinaryFilter();
-        $filter->setOperator('lt');
-        $filter->setLeft($left);
-        $filter->setRight($right);
-        
+        $filter = new BinaryFilter($left, 'lt', $right);
         return $filter;
     }
 
@@ -189,11 +158,7 @@ class Filter
      */
     public static function applyLe($left, $right)
     {
-        $filter = new BinaryFilter();
-        $filter->setOperator('le');
-        $filter->setLeft($left);
-        $filter->setRight($right);
-        
+        $filter = new BinaryFilter($left, 'le', $right);
         return $filter;
     }
 
@@ -207,10 +172,7 @@ class Filter
      */
     public static function applyConstant($value, $edmType = null)
     {
-        $filter = new ConstantFilter();
-        $filter->setValue($value);
-        $filter->setEdmType($edmType);
-        
+        $filter = new ConstantFilter($edmType, $value);
         return $filter;
     }
 
@@ -223,9 +185,7 @@ class Filter
      */
     public static function applyLiteral($value)
     {
-        $filter = new LiteralFilter();
-        $filter->setLiteral($value);
-        
+        $filter = new LiteralFilter($value);
         return $filter;
     }
 
@@ -234,13 +194,11 @@ class Filter
      * 
      * @param string $value The raw string filter expression
      * 
-     * @return \WindowsAzure\Services\Table\Models\Filters\RawStringFilter 
+     * @return \WindowsAzure\Services\Table\Models\Filters\QueryStringFilter 
      */
-    public static function applyRawString($value)
+    public static function applyQueryString($value)
     {
-        $filter = new RawStringFilter();
-        $filter->setRawString($value);
-        
+        $filter = new QueryStringFilter($value);
         return $filter;
     }
 }

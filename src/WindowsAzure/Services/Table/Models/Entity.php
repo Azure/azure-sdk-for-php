@@ -249,6 +249,8 @@ class Entity
      * Valid means the partition and row key exists for this entity along with the
      * timestamp.
      * 
+     * @param string &$msg The error message.
+     * 
      * @return boolean
      */
     public function isValid(&$msg = null)

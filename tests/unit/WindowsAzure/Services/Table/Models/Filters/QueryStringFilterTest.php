@@ -23,10 +23,10 @@
  */
 
 namespace Tests\Unit\WindowsAzure\Services\Table\Models\Filters;
-use WindowsAzure\Services\Table\Models\Filters\LiteralFilter;
+use WindowsAzure\Services\Table\Models\Filters\QueryStringFilter;
 
 /**
- * Unit tests for class LiteralFilter
+ * Unit tests for class QueryStringFilter
  *
  * @category  Microsoft
  * @package   Tests\Unit\WindowsAzure\Services\Table\Models\Filters
@@ -36,23 +36,20 @@ use WindowsAzure\Services\Table\Models\Filters\LiteralFilter;
  * @version   Release: @package_version@
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
-class LiteralFilterTest extends \PHPUnit_Framework_TestCase
+class QueryStringFilterTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @covers WindowsAzure\Services\Table\Models\Filters\LiteralFilter::setLiteral
-     * @covers WindowsAzure\Services\Table\Models\Filters\LiteralFilter::getLiteral
+     * @covers WindowsAzure\Services\Table\Models\Filters\QueryStringFilter::__construct
+     * @covers WindowsAzure\Services\Table\Models\Filters\QueryStringFilter::getQueryString
      */
-    public function testSetLiteral()
+    public function testGetQueryString()
     {
         // Setup
-        $filter = new LiteralFilter();
         $expected = 'x';
+        $filter = new QueryStringFilter($expected);
         
-        // Test
-        $filter->setLiteral($expected);
-        
-        // Test
-        $this->assertEquals($expected, $filter->getLiteral());
+        // Assert
+        $this->assertEquals($expected, $filter->getQueryString());
     }
 }
 
