@@ -25,10 +25,11 @@
 namespace Tests\Unit\WindowsAzure\Services\Blob;
 use Tests\Framework\VirtualFileSystem;
 use Tests\Framework\BlobServiceRestProxyTestBase;
-use WindowsAzure\Core\WindowsAzureUtilities;
-use WindowsAzure\Core\ServiceException;
 use Tests\Framework\TestResources;
 use WindowsAzure\Resources;
+use WindowsAzure\Utilities;
+use WindowsAzure\Core\WindowsAzureUtilities;
+use WindowsAzure\Core\ServiceException;
 use WindowsAzure\Services\Core\Models\ServiceProperties;
 use WindowsAzure\Services\Blob\Models\ListContainersOptions;
 use WindowsAzure\Services\Blob\Models\ListContainersResult;
@@ -880,7 +881,7 @@ class BlobRestProxyTest extends BlobServiceRestProxyTestBase
         // Assert
         $this->assertEquals(BlobType::BLOCK_BLOB, $result->getProperties()->getBlobType());
         $this->assertEquals($metadata, $result->getMetadata());
-        $this->assertEquals($contentStream, $result->getContentStream());
+        $this->assertEquals($contentStream, Utilities::readStream($result->getContentStream()));
     }
     
     /**

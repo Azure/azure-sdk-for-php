@@ -130,7 +130,7 @@ interface IHttpClient
      * Sets a configuration element for the request.
      * 
      * @param string $name  configuration parameter name.
-     * @param mixed  $value configuration parameter value.
+     * @param mix    $value configuration parameter value.
      * 
      * @return none.
      */

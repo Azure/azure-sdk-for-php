@@ -510,6 +510,38 @@ class TableRestProxyTest extends TableServiceRestProxyTestBase
     }
     
     /**
+     * @covers WindowsAzure\Services\Table\TableRestProxy::insertEntity
+     * @covers WindowsAzure\Services\Table\TableRestProxy::_constructInsertEntityContext
+     * @covers WindowsAzure\Services\Table\Models\EdmType::serializeValue
+     * @covers WindowsAzure\Services\Table\Utilities\AtomReaderWriter::_parseBody
+     * @covers WindowsAzure\Services\Table\Utilities\AtomReaderWriter::getEntity
+     * @covers WindowsAzure\Services\Table\Utilities\AtomReaderWriter::_generatePropertiesXml
+     * @covers WindowsAzure\Services\Table\Utilities\AtomReaderWriter::parseEntity
+     * @covers WindowsAzure\Services\Table\Utilities\AtomReaderWriter::_parseOneEntity
+     * WindowsAzure\Services\Table\Models\InsertEntityResult::create
+     * @covers WindowsAzure\Services\Core\ServiceRestProxy::sendContext
+     */
+    public function testUpdateEntityWithDeleteProperty()
+    {
+        // Setup
+        $name = 'updateentitywithdeleteproperty';
+        $this->createTable($name);
+        $expected = TestResources::getTestEntity('123', '456');
+        $this->wrapper->insertEntity($name, $expected);
+        $expected->setPropertyValue('CustomerId', null);
+        
+        // Test
+        $result = $this->wrapper->updateEntity($name, $expected);
+        
+        // Assert
+        $this->assertNotNull($result);
+        $actual = $this->wrapper->getEntity($name, $expected->getPartitionKey(), $expected->getRowKey());
+        $this->assertEquals($expected->getPartitionKey(), $actual->getEntity()->getPartitionKey());
+        $this->assertEquals($expected->getRowKey(), $actual->getEntity()->getRowKey());
+        $this->assertCount(count($expected->getProperties()) - 1, $actual->getEntity()->getProperties());
+    }
+    
+    /**
      * @covers WindowsAzure\Services\Table\TableRestProxy::mergeEntity
      * @covers WindowsAzure\Services\Table\TableRestProxy::_getEntityPath
      * @covers WindowsAzure\Services\Table\TableRestProxy::_putOrMergeEntityImpl
@@ -631,6 +663,31 @@ class TableRestProxyTest extends TableServiceRestProxyTestBase
         $this->createTable($name);
         $partitionKey = '123';
         $rowKey = '456';
+        $entity = TestResources::getTestEntity($partitionKey, $rowKey);
+        $result = $this->wrapper->insertEntity($name, $entity);
+        
+        // Test
+        $this->wrapper->deleteEntity($name, $partitionKey, $rowKey);
+        
+        // Assert
+        $result = $this->wrapper->queryEntities($name);
+        $entities = $result->getEntities();
+        $this->assertCount(0, $entities);
+    }
+    
+    /**
+     * @covers WindowsAzure\Services\Table\TableRestProxy::deleteEntity
+     * @covers WindowsAzure\Services\Table\TableRestProxy::_getEntityPath
+     * @covers WindowsAzure\Services\Table\TableRestProxy::_constructDeleteEntityContext
+     * @covers WindowsAzure\Services\Core\ServiceRestProxy::sendContext
+     */
+    public function testDeleteEntityWithSpecialChars()
+    {
+        // Setup
+        $name = 'deleteentitywithspecialchars';
+        $this->createTable($name);
+        $partitionKey = '123';
+        $rowKey = 'key with spaces';
         $entity = TestResources::getTestEntity($partitionKey, $rowKey);
         $result = $this->wrapper->insertEntity($name, $entity);
         

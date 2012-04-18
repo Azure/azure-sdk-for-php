@@ -76,28 +76,34 @@ class EdmType
      */
     public static function validateEdmValue($type, $value)
     {
-        switch ($type) {
-        case EdmType::GUID:
-        case EdmType::BINARY:
-        case EdmType::STRING:
-            return is_string($value);
-            
-        case EdmType::DOUBLE:
-        case EdmType::INT32:
-        case EdmType::INT64:
-            return is_int($value);
-            
-        case EdmType::DATETIME:
-            return $value instanceof \DateTime;
+        // Having null value means that the user wants to remove the property name
+        // associated with this value. Leave the value as null so this hold.
+        if (is_null($value)) {
+            return true;
+        } else {
+            switch ($type) {
+            case EdmType::GUID:
+            case EdmType::BINARY:
+            case EdmType::STRING:
+                return is_string($value);
 
-        case EdmType::BOOLEAN:
-            return is_bool($value);
+            case EdmType::DOUBLE:
+            case EdmType::INT32:
+            case EdmType::INT64:
+                return is_int($value);
 
-        case null:
-            return is_null($value);
-        
-        default:
-            throw new \InvalidArgumentException();
+            case EdmType::DATETIME:
+                return $value instanceof \DateTime;
+
+            case EdmType::BOOLEAN:
+                return is_bool($value);
+
+            case null:
+                return is_null($value);
+
+            default:
+                throw new \InvalidArgumentException();
+            }
         }
     }
     
@@ -114,14 +120,17 @@ class EdmType
     public static function serializeValue($type, $value)
     {
         switch ($type) {
-        case EdmType::BINARY:
         case EdmType::DOUBLE:
         case EdmType::INT32:
         case EdmType::INT64:
         case EdmType::GUID:
         case EdmType::STRING:
         case null:
+            // Convert special characters to HTML entities.
             return htmlspecialchars($value);
+            
+        case EdmType::BINARY:
+            return base64_encode($value);
             
         case EdmType::DATETIME:
             return Utilities::convertToEdmDateTime($value);

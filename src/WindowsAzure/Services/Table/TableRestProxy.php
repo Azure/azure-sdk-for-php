@@ -310,10 +310,6 @@ class TableRestProxy extends ServiceRestProxy implements ITable
         Validate::notNullOrEmpty($entity);
         Validate::isTrue($entity->isValid($msg), $msg);
         
-        if ($useEtag) {
-            Validate::notNullOrEmpty($entity->getEtag());
-        }
-        
         $method       = $verb;
         $headers      = array();
         $queryParams  = array();
@@ -560,7 +556,7 @@ class TableRestProxy extends ServiceRestProxy implements ITable
         $value = str_replace('\'', '\'\'', $value);
         
         // Encode the special URL characters
-        $value = urlencode($value);
+        $value = rawurlencode($value);
         
         return $value;
     }

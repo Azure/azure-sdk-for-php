@@ -42,17 +42,24 @@ class EntityTest extends \PHPUnit_Framework_TestCase
 {
     /**
      * @covers WindowsAzure\Services\Table\Models\Entity::getPropertyValue
+     * @covers WindowsAzure\Services\Table\Models\Entity::setPropertyValue
      */
     public function testGetPropertyValue()
     {
         // Setup
         $entity = new Entity();
+        $name = 'name';
+        $edmType = EdmType::STRING;
+        $value = 'MyName';
+        $expected = 'MyNewName';
+        $entity->addProperty($name, $edmType, $value);
+        $entity->setPropertyValue($name, $expected);
         
         // Test
-        $actual = $entity->getPropertyValue('dummy');
+        $actual = $entity->getPropertyValue($name);
         
         // Assert
-        $this->assertNull($actual);
+        $this->assertEquals($actual, $expected);
     }
     
     /**
@@ -206,6 +213,22 @@ class EntityTest extends \PHPUnit_Framework_TestCase
     {
         // Setup
         $entity = new Entity();
+        
+        // Assert
+        $actual = $entity->isValid();
+        
+        // Assert
+        $this->assertFalse($actual);
+    }
+    
+    /**
+     * @covers WindowsAzure\Services\Table\Models\Entity::isValid
+     */
+    public function testIsValidWithEmptyPartitionKey()
+    {
+        // Setup
+        $entity = new Entity();
+        $entity->addProperty('name', EdmType::STRING, 'string');
         
         // Assert
         $actual = $entity->isValid();

@@ -88,6 +88,25 @@ class Entity
     }
     
     /**
+     * Sets property value.
+     * 
+     * Note that if the property doesn't exist, it doesn't add it. Use addProperty
+     * to add new properties.
+     * 
+     * @param string $name  The property name.
+     * @param mix    $value The property value. 
+     * 
+     * @return mix
+     */
+    public function setPropertyValue($name, $value)
+    {
+        $p = Utilities::tryGetValue($this->_properties, $name);
+        if (!is_null($p)) {
+            $p->setValue($value);
+        }
+    }
+    
+    /**
      * Gets entity etag.
      *
      * @return string

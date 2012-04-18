@@ -281,8 +281,8 @@ class EdmTypeTest extends \PHPUnit_Framework_TestCase
     {
         // Setup
         $type = EdmType::BINARY;
-        $value = 'MTIzNDU=';
-        $expected = htmlspecialchars($value);
+        $value = '010101010111';
+        $expected = base64_encode($value);
         
         // Test
         $actual = EdmType::serializeValue($type, $value);
