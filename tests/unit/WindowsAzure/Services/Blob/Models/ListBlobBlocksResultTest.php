@@ -111,37 +111,37 @@ class ListBlobBlocksResultTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers WindowsAzure\Services\Blob\Models\ListBlobBlocksResult::setUncommittedBlock
-     * @covers WindowsAzure\Services\Blob\Models\ListBlobBlocksResult::getUncommittedBlock
+     * @covers WindowsAzure\Services\Blob\Models\ListBlobBlocksResult::setUncommittedBlocks
+     * @covers WindowsAzure\Services\Blob\Models\ListBlobBlocksResult::getUncommittedBlocks
      */
-    public function testSetUncommittedBlock()
+    public function testSetUncommittedBlocks()
     {
         // Setup
         $result = new ListBlobBlocksResult();
         $expected = array('Block1' => 10, 'Block2' => 20, 'Block3' => 30);
         
         // Test
-        $result->setUncommittedBlock($expected);
+        $result->setUncommittedBlocks($expected);
         
         // Assert
-        $this->assertEquals($expected, $result->getUncommittedBlock());
+        $this->assertEquals($expected, $result->getUncommittedBlocks());
     }
     
     /**
-     * @covers WindowsAzure\Services\Blob\Models\ListBlobBlocksResult::setCommittedBlock
-     * @covers WindowsAzure\Services\Blob\Models\ListBlobBlocksResult::getCommittedBlock
+     * @covers WindowsAzure\Services\Blob\Models\ListBlobBlocksResult::setCommittedBlocks
+     * @covers WindowsAzure\Services\Blob\Models\ListBlobBlocksResult::getCommittedBlocks
      */
-    public function testSetCommittedBlock()
+    public function testSetCommittedBlocks()
     {
         // Setup
         $result = new ListBlobBlocksResult();
         $expected = array('Block1' => 10, 'Block2' => 20, 'Block3' => 30);
         
         // Test
-        $result->setCommittedBlock($expected);
+        $result->setCommittedBlocks($expected);
         
         // Assert
-        $this->assertEquals($expected, $result->getCommittedBlock());
+        $this->assertEquals($expected, $result->getCommittedBlocks());
     }
 }
 

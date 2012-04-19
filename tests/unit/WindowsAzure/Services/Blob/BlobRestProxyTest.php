@@ -1201,8 +1201,8 @@ class BlobRestProxyTest extends BlobServiceRestProxyTestBase
         // Assert
         $this->assertNull($result->getEtag());
         $this->assertEquals(0, $result->getContentLength());
-        $this->assertCount(2, $result->getUncommittedBlock());
-        $this->assertCount(0, $result->getCommittedBlock());
+        $this->assertCount(2, $result->getUncommittedBlocks());
+        $this->assertCount(0, $result->getCommittedBlocks());
     }
     
     /**
@@ -1225,8 +1225,8 @@ class BlobRestProxyTest extends BlobServiceRestProxyTestBase
         // Assert
         $this->assertNotNull($result->getEtag());
         $this->assertEquals(strlen($content), $result->getContentLength());
-        $this->assertCount(0, $result->getUncommittedBlock());
-        $this->assertCount(0, $result->getCommittedBlock());
+        $this->assertCount(0, $result->getUncommittedBlocks());
+        $this->assertCount(0, $result->getCommittedBlocks());
     }
 }
 
