@@ -36,7 +36,7 @@ use Tests\Framework\TestResources;
  * @version   Release: @package_version@
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
-class ListBlobOptionsTest extends \PHPUnit_Framework_TestCase
+class ListBlobsOptionsTest extends \PHPUnit_Framework_TestCase
 {
     /**
      * @covers WindowsAzure\Services\Blob\Models\ListBlobsOptions::setPrefix

@@ -37,7 +37,7 @@ use Tests\Framework\TestResources;
  * @version   Release: @package_version@
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
-class ListQueueResultTest extends \PHPUnit_Framework_TestCase
+class ListQueuesResultTest extends \PHPUnit_Framework_TestCase
 {
     /**
      * @covers WindowsAzure\Services\Queue\Models\ListQueuesResult::create 
