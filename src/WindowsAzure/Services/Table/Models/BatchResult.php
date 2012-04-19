@@ -88,8 +88,8 @@ class BatchResult
     /**
      * Compares between two responses by Content-ID header.
      * 
-     * @param \HTTP_Response2 $r1 The first response object.
-     * @param \HTTP_Response2 $r2 The second response object.
+     * @param \HTTP_Request2_Response $r1 The first response object.
+     * @param \HTTP_Request2_Response $r2 The second response object.
      * 
      * @return boolean
      */

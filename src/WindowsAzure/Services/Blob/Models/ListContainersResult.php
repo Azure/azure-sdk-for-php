@@ -122,7 +122,7 @@ class ListContainersResult
     }
 
     /**
-     * Gets perfix.
+     * Gets prefix.
      *
      * @return string.
      */
@@ -132,7 +132,7 @@ class ListContainersResult
     }
 
     /**
-     * Sets perfix.
+     * Sets prefix.
      *
      * @param string $prefix value.
      * 

@@ -123,6 +123,7 @@ spl_autoload_register(
             'tests\\unit\\windowsazure\\services\\core\\authentication\\tablesharedkeyliteauthschemetest' => '/unit/WindowsAzure/Services/Core/Authentication/TableSharedKeyLiteAuthSchemeTest.php',
             'tests\\unit\\windowsazure\\services\\core\\configurationtest' => '/unit/WindowsAzure/Services/Core/ConfigurationTest.php',
             'tests\\unit\\windowsazure\\services\\core\\filters\\datefiltertest' => '/unit/WindowsAzure/Services/Core/Filters/DateFilterTest.php',
+            'tests\\unit\\windowsazure\\services\\core\\filters\\exponentialretrypolicytest' => '/unit/WindowsAzure/Services/Core/Filters/ExponentialRetryPolicyTest.php',
             'tests\\unit\\windowsazure\\services\\core\\filters\\headersfiltertest' => '/unit/WindowsAzure/Services/Core/Filters/HeadersFilterTest.php',
             'tests\\unit\\windowsazure\\services\\core\\models\\getservicepropertiesresulttest' => '/unit/WindowsAzure/Services/Core/Models/GetServicePropertiesResultTest.php',
             'tests\\unit\\windowsazure\\services\\core\\models\\loggingtest' => '/unit/WindowsAzure/Services/Core/Models/LoggingTest.php',
