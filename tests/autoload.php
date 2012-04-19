@@ -72,7 +72,6 @@ spl_autoload_register(
             'tests\\unit\\windowsazure\\serviceruntime\\xmlroleenvironmentdatadeserializertest' => '/unit/WindowsAzure/ServiceRuntime/XmlRoleEnvironmentDataDeserializerTest.php',
             'tests\\unit\\windowsazure\\services\\blob\\blobrestproxytest' => '/unit/WindowsAzure/Services/Blob/BlobRestProxyTest.php',
             'tests\\unit\\windowsazure\\services\\blob\\blobservicetest' => '/unit/WindowsAzure/Services/Blob/BlobServiceTest.php',
-            'tests\\unit\\windowsazure\\services\\blob\\models\\accessconditionheadertypetest' => '/unit/WindowsAzure/Services/Blob/Models/AccessConditionHeaderTypeTest.php',
             'tests\\unit\\windowsazure\\services\\blob\\models\\accessconditiontest' => '/unit/WindowsAzure/Services/Blob/Models/AccessConditionTest.php',
             'tests\\unit\\windowsazure\\services\\blob\\models\\accesspolicytest' => '/unit/WindowsAzure/Services/Blob/Models/AccessPolicyTest.php',
             'tests\\unit\\windowsazure\\services\\blob\\models\\acquireleaseoptionstest' => '/unit/WindowsAzure/Services/Blob/Models/AcquireLeaseOptionsTest.php',

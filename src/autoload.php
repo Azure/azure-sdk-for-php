@@ -58,7 +58,6 @@ spl_autoload_register(
             'windowsazure\\services\\blob\\blobsettings' => '/WindowsAzure/Services/Blob/BlobSettings.php',
             'windowsazure\\services\\blob\\iblob' => '/WindowsAzure/Services/Blob/IBlob.php',
             'windowsazure\\services\\blob\\models\\accesscondition' => '/WindowsAzure/Services/Blob/Models/AccessCondition.php',
-            'windowsazure\\services\\blob\\models\\accessconditionheadertype' => '/WindowsAzure/Services/Blob/Models/AccessConditionHeaderType.php',
             'windowsazure\\services\\blob\\models\\accesspolicy' => '/WindowsAzure/Services/Blob/Models/AccessPolicy.php',
             'windowsazure\\services\\blob\\models\\acquireleaseoptions' => '/WindowsAzure/Services/Blob/Models/AcquireLeaseOptions.php',
             'windowsazure\\services\\blob\\models\\acquireleaseresult' => '/WindowsAzure/Services/Blob/Models/AcquireLeaseResult.php',
