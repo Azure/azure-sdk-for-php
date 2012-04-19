@@ -39,15 +39,18 @@ use WindowsAzure\Resources;
 class InvalidArgumentTypeException extends \InvalidArgumentException
 {
     /**
-     * Constructor
+     * Constructor.
      *
-     * @param string $validType valid type that should be provided by the user.
+     * @param string $validType The valid type that should be provided by the user.
+     * @param string $name      The parameter name.
      * 
      * @return WindowsAzure\Core\InvalidArgumentTypeException
      */
-    public function __construct($validType)
+    public function __construct($validType, $name = null)
     {
-        parent::__construct(Resources::INVALID_TYPE_MSG . $validType);
+        parent::__construct(
+            sprintf(Resources::INVALID_PARAM_MSG, $name, $validType)
+        );
     }
 }
 

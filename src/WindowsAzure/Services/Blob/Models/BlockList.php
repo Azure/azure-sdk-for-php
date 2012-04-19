@@ -24,6 +24,8 @@
  
 namespace WindowsAzure\Services\Blob\Models;
 use WindowsAzure\Utilities;
+use WindowsAzure\Validate;
+use WindowsAzure\Resources;
 
 /**
  * Holds block list used for commitBlobBlocks
@@ -54,6 +56,12 @@ class BlockList
      */
     public function setEntry($blockId, $type)
     {
+        Validate::isString($blockId);
+        Validate::isTrue(
+            BlobBlockType::isValid($type),
+            sprintf(Resources::INVALID_BTE_MSG, get_class(new BlobBlockType()))
+        );
+        
         $this->_entries[$blockId] = $type;
     }
     
@@ -66,7 +74,7 @@ class BlockList
      */
     public function getEntry($blockId)
     {
-        return $this->_entries[$blockId];
+        return Utilities::tryGetValue($this->_entries, $blockId);
     }
     
     /**
