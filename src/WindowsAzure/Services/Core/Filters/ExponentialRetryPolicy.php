@@ -84,28 +84,27 @@ class ExponentialRetryPolicy extends RetryPolicy
     /**
      * Indicates if there should be a retry or not.
      * 
-     * @param integer         $retryCount The retry count.
+     * @param integer                 $retryCount The retry count.
      * @param \HTTP_Request2_Response $response   The HTTP response object.
      * 
      * @return boolean
      */
     public function shouldRetry($retryCount, $response)
     {
-         if (  $retryCount >= $this->_maximumAttempts
+        if (  $retryCount >= $this->_maximumAttempts
             || array_search($response->getStatus(), $this->_retryableStatusCodes)
-            || is_null($response)
-                 
-         ) {
+            || is_null($response)     
+        ) {
             return false;
-         } else {
+        } else {
             return true;
-         }
+        }
     }
     
     /**
      * Calculates the backoff for the retry policy.
      * 
-     * @param integer         $retryCount The retry count.
+     * @param integer                 $retryCount The retry count.
      * @param \HTTP_Request2_Response $response   The HTTP response object.
      * 
      * @return integer
@@ -117,9 +116,12 @@ class ExponentialRetryPolicy extends RetryPolicy
         // exponential
         $incrementDelta   = (int) (pow(2, $retryCount) - 1);
         $boundedRandDelta = (int) ($this->_deltaBackoffIntervalInMs * 0.8)
-            + mt_rand(0, (int) ($this->_deltaBackoffIntervalInMs * 1.2)
-            - (int) ($this->_deltaBackoffIntervalInMs * 0.8));
-        $incrementDelta *= $boundedRandDelta;
+            + mt_rand(
+                0,
+                (int) ($this->_deltaBackoffIntervalInMs * 1.2)
+                - (int) ($this->_deltaBackoffIntervalInMs * 0.8)
+            );
+        $incrementDelta  *= $boundedRandDelta;
 
         // Enforce max / min backoffs
         return min(

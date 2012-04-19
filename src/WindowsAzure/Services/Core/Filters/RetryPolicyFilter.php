@@ -42,7 +42,12 @@ class RetryPolicyFilter implements IServiceFilter
      * @var RetryPolicy
      */
     private $_retryPolicy;
-    
+
+    /**
+     * Initializes new object from RetryPolicyFilter.
+     * 
+     * @param RetryPolicy $retryPolicy The retry policy object.
+     */
     public function __construct($retryPolicy)
     {
         $this->_retryPolicy = $retryPolicy;
@@ -63,7 +68,7 @@ class RetryPolicyFilter implements IServiceFilter
     /**
      * Handles the response after sending.
      * 
-     * @param \HTTP_Request2  $request  The HTTP request.
+     * @param \HTTP_Request2          $request  The HTTP request.
      * @param \HTTP_Request2_Response $response The HTTP response.
      * 
      * @return \HTTP_Request2_Response

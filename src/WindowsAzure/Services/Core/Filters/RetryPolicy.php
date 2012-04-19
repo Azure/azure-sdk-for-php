@@ -45,7 +45,7 @@ abstract class RetryPolicy
     /**
      * Indicates if there should be a retry or not.
      * 
-     * @param integer         $retryCount The retry count.
+     * @param integer                 $retryCount The retry count.
      * @param \HTTP_Request2_Response $response   The HTTP response object.
      * 
      * @return boolean
@@ -55,7 +55,7 @@ abstract class RetryPolicy
     /**
      * Calculates the backoff for the retry policy.
      * 
-     * @param integer         $retryCount The retry count.
+     * @param integer                 $retryCount The retry count.
      * @param \HTTP_Request2_Response $response   The HTTP response object.
      * 
      * @return integer
