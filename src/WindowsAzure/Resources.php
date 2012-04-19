@@ -42,7 +42,7 @@ class Resources
     const INVALID_META_MSG     = 'Metadata cannot contain newline characters.';
     const AZURE_ERROR_MSG      = "Fail:\nCode: %s\nValue: %s\ndetails (if any): %s.";
     const NOT_IMPLEMENTED_MSG  = 'This method is not implemented.';
-    const NULL_ERROR_MSG       = "%s can\'t be NULL or empty.";
+    const NULL_ERROR_MSG       = "'%s' can't be NULL or empty.";
     const INVALID_URL_MSG      = 'Provided URL is invalid.';
     const INVALID_HT_MSG       = 'The header type provided is invalid.';
     const INVALID_EDM_MSG      = 'The provided EDM type is invalid.';
@@ -56,7 +56,7 @@ class Resources
     const NULL_TABLE_KEY_MSG   = 'Partition and raw keys can\'t be NULL.';
     const BATCH_ENTITY_DEL_MSG = 'The entity was deleted successfully.';
     const INVALID_PROP_VAL_MSG = "The property %s value doesn\'t match the EdmType.";
-    const INVALID_PARAM_MSG    = "The provided variable %s should be of type %s";
+    const INVALID_PARAM_MSG    = "The provided variable '%s' should be of type '%s'";
     const INVALID_BTE_MSG      = "The blob block type must exist in %s";
 
     // HTTP Headers
