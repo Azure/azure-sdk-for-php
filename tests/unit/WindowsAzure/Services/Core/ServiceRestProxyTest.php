@@ -23,11 +23,11 @@
  */
 
 use WindowsAzure\Services\Core\ServiceRestProxy;
+use WindowsAzure\Resources;
 use WindowsAzure\Core\HttpClient;
 use WindowsAzure\Core\Url;
 use Tests\Mock\WindowsAzure\Services\Core\Filters\SimpleFilterMock;
 use WindowsAzure\Services\Blob\Models\AccessCondition;
-use WindowsAzure\Services\Blob\Models\AccessConditionHeaderType;
 
 /**
  * Unit tests for class ServiceRestProxy
@@ -103,7 +103,7 @@ class ServiceRestProxyTest extends \PHPUnit_Framework_TestCase
     public function testAddOptionalAccessContitionHeader($restWrapper)
     {
         // Setup
-        $expectedHeader = AccessConditionHeaderType::IF_MATCH;
+        $expectedHeader = Resources::IF_MATCH;
         $expectedValue = '0x8CAFB82EFF70C46';
         $accessCondition = AccessCondition::ifMatch($expectedValue);
         $headers = array('Header1' => 'Value1', 'Header2' => 'Value2');

@@ -86,7 +86,10 @@ class ListBlobBlocksResult
         if (is_array($parsed)) {
             $rawEntries = array();
          
-            if (!empty($parsed[$type])) {
+            if (   array_key_exists($type, $parsed)
+                &&     is_array($parsed[$type])
+                &&     !empty($parsed[$type])
+            ) {
                 $rawEntries = Utilities::getArray($parsed[$type]['Block']);
             }
             

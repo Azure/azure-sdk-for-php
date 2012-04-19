@@ -29,7 +29,6 @@ use WindowsAzure\Core\Url;
 use WindowsAzure\Core\HttpCallContext;
 use WindowsAzure\Core\IHttpClient;
 use WindowsAzure\Core\WindowsAzureUtilities;
-use WindowsAzure\Services\Blob\Models\AccessConditionHeaderType;
 
 /**
  * Base class for all services rest proxies.
@@ -183,7 +182,7 @@ class ServiceRestProxy
         if (!is_null($accessCondition)) {
             $header = $accessCondition->getHeader();
             
-            if ($header != AccessConditionHeaderType::NONE) {
+            if ($header != Resources::EMPTY_STRING) {
                 $headers[$header] = $accessCondition->getValue();
             }
         }

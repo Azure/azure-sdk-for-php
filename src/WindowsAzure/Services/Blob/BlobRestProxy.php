@@ -25,6 +25,7 @@
 namespace WindowsAzure\Services\Blob;
 use WindowsAzure\Utilities;
 use WindowsAzure\Resources;
+use WindowsAzure\Validate;
 use WindowsAzure\Core\WindowsAzureUtilities;
 use WindowsAzure\Services\Core\ServiceRestProxy;
 use WindowsAzure\Services\Blob\IBlob;
@@ -81,9 +82,27 @@ use WindowsAzure\Services\Blob\Models\ListBlobBlocksResult;
 class BlobRestProxy extends ServiceRestProxy implements IBlob
 {
     /**
-     * Creates GetBlobPropertiesResult from headers array
+     * Creates URI path for blob.
      * 
-     * @param array $headers HTTP response headers array
+     * @param string $container The container name.
+     * @param string $blob      The blob name.
+     * 
+     * @return string
+     */
+    private function _createPath($container, $blob)
+    {
+        // Empty container means accessing default container
+        if (empty($container)) {
+            return $blob;
+        } else {
+            return $container . '/' . $blob;
+        }
+    }
+    
+    /**
+     * Creates GetBlobPropertiesResult from headers array.
+     * 
+     * @param array $headers The HTTP response headers array.
      * 
      * @return GetBlobPropertiesResult
      */
@@ -126,13 +145,14 @@ class BlobRestProxy extends ServiceRestProxy implements IBlob
     }
     
     /**
-     * Helper method for getContainerProperties and getContainerMetadata
+     * Helper method for getContainerProperties and getContainerMetadata,
      * 
-     * @param string             $container name
-     * @param BlobServiceOptions $options   optional parameters
-     * @param string             $operation should be 'metadata' to get metadata
+     * @param string                    $container The container name.
+     * @param Models\BlobServiceOptions $options   The optional parameters.
+     * @param string                    $operation The operation string. Should be
+     * 'metadata' to get metadata.
      * 
-     * @return GetContainerPropertiesResult
+     * @return Models\GetContainerPropertiesResult
      */
     private function _getContainerPropertiesImpl($container, $options = null,
         $operation = null
@@ -245,10 +265,13 @@ class BlobRestProxy extends ServiceRestProxy implements IBlob
     private function _putLeaseImpl($leaseAction, $container, $blob, $leaseId, 
         $options, $accessCondition = null
     ) {
+        Validate::isValidString($blob, 'blob');
+        Validate::isString($container, 'container');
+        
         $method      = Resources::HTTP_PUT;
         $headers     = array();
         $queryParams = array();
-        $path        = $container . '/' . $blob;
+        $path        = $this->_createPath($container, $blob);
         $statusCode  = Resources::EMPTY_STRING;
         
         switch ($leaseAction) {
@@ -287,26 +310,42 @@ class BlobRestProxy extends ServiceRestProxy implements IBlob
     }
     
     /**
-     * Does actual work for create and clear blob pages
+     * Does actual work for create and clear blob pages.
      * 
-     * @param string                 $action    either clear or create
-     * @param string                 $container container name
-     * @param string                 $blob      blob name
-     * @param PageRange              $range     page ranges
-     * @param string                 $content   the content stream
-     * @param CreateBlobPagesOptions $options   optional parameters
+     * @param string                 $action    Either clear or create.
+     * @param string                 $container The container name.
+     * @param string                 $blob      The blob name.
+     * @param PageRange              $range     The page ranges.
+     * @param string|resource        $content   The content stream.
+     * @param CreateBlobPagesOptions $options   The optional parameters.
      * 
      * @return CreateBlobPagesResult
      */
     private function _updatePageBlobPagesImpl($action, $container, $blob, $range,
         $content, $options = null
     ) {
+        Validate::isValidString($blob, 'blob');
+        Validate::isString($container, 'container');
+        Validate::isTrue(
+            $range instanceof Models\PageRange,
+            sprintf(
+                Resources::INVALID_PARAM_MSG,
+                'range',
+                get_class(new Models\PageRange())
+            )
+        );
+        Validate::isTrue(
+            is_string($content) || is_resource($content),
+            sprintf(Resources::INVALID_PARAM_MSG, 'content', 'string|resource')
+        );
+        
         $method      = Resources::HTTP_PUT;
         $headers     = array();
         $queryParams = array();
-        $path        = $container . '/' . $blob;
+        $path        = $this->_createPath($container, $blob);
         $statusCode  = Resources::STATUS_CREATED;
-        $body        = $content;
+        // If read file failed for any reason it will throw an exception.
+        $body = is_resource($content) ? Utilities::readStream($content) : $content;
         
         if (is_null($options)) {
             $options = new CreateBlobPagesOptions();
@@ -444,6 +483,8 @@ class BlobRestProxy extends ServiceRestProxy implements IBlob
      */
     public function createContainer($container, $options = null)
     {
+        Validate::isValidString($container, 'container');
+        
         $method      = Resources::HTTP_PUT;
         $headers     = array();
         $queryParams = array(Resources::QP_REST_TYPE => 'container');
@@ -478,6 +519,8 @@ class BlobRestProxy extends ServiceRestProxy implements IBlob
      */
     public function deleteContainer($container, $options = null)
     {
+        Validate::isValidString($container, 'container');
+        
         $method      = Resources::HTTP_DELETE;
         $headers     = array();
         $queryParams = array();
@@ -537,6 +580,8 @@ class BlobRestProxy extends ServiceRestProxy implements IBlob
      */
     public function getContainerAcl($container, $options = null)
     {
+        Validate::isString($container, 'container');
+        
         $method      = Resources::HTTP_GET;
         $headers     = array();
         $queryParams = array();
@@ -574,6 +619,9 @@ class BlobRestProxy extends ServiceRestProxy implements IBlob
      */
     public function setContainerAcl($container, $acl, $options = null)
     {
+        Validate::isString($container, 'container');
+        Validate::notNullOrEmpty($acl, 'acl');
+        
         $method      = Resources::HTTP_PUT;
         $headers     = array();
         $queryParams = array();
@@ -608,6 +656,9 @@ class BlobRestProxy extends ServiceRestProxy implements IBlob
      */
     public function setContainerMetadata($container, $metadata, $options = null)
     {
+        Validate::isString($container, 'container');
+        WindowsAzureUtilities::isValidMetadata($metadata);
+        
         $method      = Resources::HTTP_PUT;
         $headers     = WindowsAzureUtilities::generateMetadataHeaders($metadata);
         $queryParams = array();
@@ -641,6 +692,8 @@ class BlobRestProxy extends ServiceRestProxy implements IBlob
      */
     public function listBlobs($container, $options = null)
     {
+        Validate::isString($container, 'container');
+        
         $method      = Resources::HTTP_GET;
         $headers     = array();
         $queryParams = array();
@@ -697,10 +750,14 @@ class BlobRestProxy extends ServiceRestProxy implements IBlob
      */
     public function createPageBlob($container, $blob, $length, $options = null)
     {
+        Validate::isString($container, 'container');
+        Validate::isValidString($blob, 'blob');
+        Validate::isValidInteger($length, 'length');
+        
         $method      = Resources::HTTP_PUT;
         $headers     = array();
         $queryParams = array();
-        $path        = $container . '/' . $blob;
+        $path        = $this->_createPath($container, $blob);
         $statusCode  = Resources::STATUS_CREATED;
         
         if (is_null($options)) {
@@ -741,10 +798,17 @@ class BlobRestProxy extends ServiceRestProxy implements IBlob
      */
     public function createBlockBlob($container, $blob, $content, $options = null)
     {
+        Validate::isString($container, 'container');
+        Validate::isValidString($blob, 'blob');
+        Validate::isTrue(
+            is_string($content) || is_resource($content),
+            sprintf(Resources::INVALID_PARAM_MSG, 'content', 'string|resource')
+        );
+        
         $method      = Resources::HTTP_PUT;
         $headers     = array();
         $queryParams = array();
-        $path        = $container . '/' . $blob;
+        $path        = $this->_createPath($container, $blob);
         $statusCode  = Resources::STATUS_CREATED;
         // If read file failed for any reason it will throw an exception.
         $body = is_resource($content) ? Utilities::readStream($content) : $content;
@@ -831,10 +895,18 @@ class BlobRestProxy extends ServiceRestProxy implements IBlob
     public function createBlobBlock($container, $blob, $blockId, $content,
         $options = null
     ) {
+        Validate::isString($container, 'container');
+        Validate::isValidString($blob, 'blob');
+        Validate::isValidString($blockId, 'blockId');
+        Validate::isTrue(
+            is_string($content) || is_resource($content),
+            sprintf(Resources::INVALID_PARAM_MSG, 'content', 'string|resource')
+        );
+        
         $method      = Resources::HTTP_PUT;
         $headers     = array();
         $queryParams = array();
-        $path        = $container . '/' . $blob;
+        $path        = $this->_createPath($container, $blob);
         $statusCode  = Resources::STATUS_CREATED;
         $body        = $content;
         
@@ -874,10 +946,21 @@ class BlobRestProxy extends ServiceRestProxy implements IBlob
      */
     public function commitBlobBlocks($container, $blob, $blockList, $options = null)
     {
+        Validate::isString($container, 'container');
+        Validate::isValidString($blob, 'blob');
+        Validate::isTrue(
+            $blockList instanceof BlockList,
+            sprintf(
+                Resources::INVALID_PARAM_MSG,
+                'blockList',
+                get_class(new BlockList())
+            )
+        );
+        
         $method      = Resources::HTTP_PUT;
         $headers     = array();
         $queryParams = array();
-        $path        = $container . '/' . $blob;
+        $path        = $this->_createPath($container, $blob);
         $statusCode  = Resources::STATUS_CREATED;
         $body        = $blockList->toXml();
         
@@ -935,10 +1018,13 @@ class BlobRestProxy extends ServiceRestProxy implements IBlob
      */
     public function listBlobBlocks($container, $blob, $options = null)
     {
+        Validate::isString($container, 'container');
+        Validate::isValidString($blob, 'blob');
+        
         $method      = Resources::HTTP_GET;
         $headers     = array();
         $queryParams = array();
-        $path        = $container . '/' . $blob;
+        $path        = $this->_createPath($container, $blob);
         $statusCode  = Resources::STATUS_OK;
         
         if (is_null($options)) {
@@ -970,10 +1056,13 @@ class BlobRestProxy extends ServiceRestProxy implements IBlob
      */
     public function getBlobProperties($container, $blob, $options = null)
     {
+        Validate::isString($container, 'container');
+        Validate::isValidString($blob, 'blob');
+        
         $method      = Resources::HTTP_HEAD;
         $headers     = array();
         $queryParams = array();
-        $path        = $container . '/' . $blob;
+        $path        = $this->_createPath($container, $blob);
         $statusCode  = Resources::STATUS_OK;
         
         if (is_null($options)) {
@@ -1006,10 +1095,13 @@ class BlobRestProxy extends ServiceRestProxy implements IBlob
      */
     public function getBlobMetadata($container, $blob, $options = null)
     {
+        Validate::isString($container, 'container');
+        Validate::isValidString($blob, 'blob');
+        
         $method      = Resources::HTTP_HEAD;
         $headers     = array();
         $queryParams = array();
-        $path        = $container . '/' . $blob;
+        $path        = $this->_createPath($container, $blob);
         $statusCode  = Resources::STATUS_OK;
         
         if (is_null($options)) {
@@ -1044,10 +1136,13 @@ class BlobRestProxy extends ServiceRestProxy implements IBlob
      */
     public function listPageBlobRanges($container, $blob, $options = null)
     {
+        Validate::isString($container, 'container');
+        Validate::isValidString($blob, 'blob');
+        
         $method      = Resources::HTTP_GET;
         $headers     = array();
         $queryParams = array();
-        $path        = $container . '/' . $blob;
+        $path        = $this->_createPath($container, $blob);
         $statusCode  = Resources::STATUS_OK;
         
         if (is_null($options)) {
@@ -1086,10 +1181,13 @@ class BlobRestProxy extends ServiceRestProxy implements IBlob
      */
     public function setBlobProperties($container, $blob, $options = null)
     {
+        Validate::isString($container, 'container');
+        Validate::isValidString($blob, 'blob');
+        
         $method      = Resources::HTTP_PUT;
         $headers     = array();
         $queryParams = array();
-        $path        = $container . '/' . $blob;
+        $path        = $this->_createPath($container, $blob);
         $statusCode  = Resources::STATUS_OK;
         
         if (is_null($options)) {
@@ -1141,10 +1239,14 @@ class BlobRestProxy extends ServiceRestProxy implements IBlob
      */
     public function setBlobMetadata($container, $blob, $metadata, $options = null)
     {
+        Validate::isString($container, 'container');
+        Validate::isValidString($blob, 'blob');
+        WindowsAzureUtilities::isValidMetadata($metadata);
+        
         $method      = Resources::HTTP_PUT;
         $headers     = array();
         $queryParams = array();
-        $path        = $container . '/' . $blob;
+        $path        = $this->_createPath($container, $blob);
         $statusCode  = Resources::STATUS_OK;
         
         if (is_null($options)) {
@@ -1179,11 +1281,17 @@ class BlobRestProxy extends ServiceRestProxy implements IBlob
      */
     public function getBlob($container, $blob, $options = null)
     {
+        Validate::isString($container, 'container');
+        Validate::isValidString($blob, 'blob');
+        
         $method      = Resources::HTTP_GET;
         $headers     = array();
         $queryParams = array();
-        $path        = $container . '/' . $blob;
-        $statusCode  = Resources::STATUS_OK;
+        $path        = $this->_createPath($container, $blob);
+        $statusCode  = array(
+            Resources::STATUS_OK,
+            Resources::STATUS_PARTIAL_CONTENT
+        );
         
         if (is_null($options)) {
             $options = new GetBlobOptions();
@@ -1221,10 +1329,13 @@ class BlobRestProxy extends ServiceRestProxy implements IBlob
      */
     public function deleteBlob($container, $blob, $options = null)
     {
+        Validate::isString($container, 'container');
+        Validate::isValidString($blob, 'blob');
+        
         $method      = Resources::HTTP_DELETE;
         $headers     = array();
         $queryParams = array();
-        $path        = $container . '/' . $blob;
+        $path        = $this->_createPath($container, $blob);
         $statusCode  = Resources::STATUS_ACCEPTED;
         
         if (is_null($options)) {

@@ -48,6 +48,7 @@ use WindowsAzure\Services\Blob\Models\PageRange;
 use WindowsAzure\Services\Blob\Models\CreateBlobPagesResult;
 use WindowsAzure\Services\Blob\Models\BlockList;
 use WindowsAzure\Services\Blob\Models\BlobBlockType;
+use WindowsAzure\Services\Blob\Models\GetBlobOptions;
 
 /**
  * Unit tests for class BlobRestProxy
@@ -885,6 +886,38 @@ class BlobRestProxyTest extends BlobServiceRestProxyTestBase
     }
     
     /**
+     * @covers WindowsAzure\Services\Blob\BlobRestProxy::getBlob
+     * @covers WindowsAzure\Services\Blob\BlobRestProxy::_addOptionalRangeHeader
+     * @covers WindowsAzure\Services\Blob\Models\GetBlobResult::create
+     */
+    public function testGetBlobWithRange()
+    {
+        // Setup
+        $name = '$root';
+        $blob = 'myblob';
+        $this->wrapper->createContainer($name);
+        $this->_createdContainers[] = '$root';
+        $length = 512;
+        $range = new PageRange(0, 511);
+        $contentStream = Resources::EMPTY_STRING;
+        $this->wrapper->createPageBlob('', $blob, $length);
+        for ($i = 0; $i < 512; $i++) {
+            $contentStream .= 'A';
+        }
+        $this->wrapper->createBlobPages('', $blob, $range, $contentStream);
+        $options = new GetBlobOptions();
+        $options->setRangeStart(0);
+        $options->setRangeEnd(511);
+        
+        // Test
+        $result = $this->wrapper->getBlob('', $blob, $options);
+        
+        // Assert
+        $this->assertEquals(BlobType::PAGE_BLOB, $result->getProperties()->getBlobType());
+        $this->assertEquals($contentStream, Utilities::readStream($result->getContentStream()));
+    }
+    
+    /**
      * @covers WindowsAzure\Services\Blob\BlobRestProxy::deleteBlob
      */
     public function testDeleteBlob()
@@ -909,6 +942,7 @@ class BlobRestProxyTest extends BlobServiceRestProxyTestBase
     /**
      * @covers WindowsAzure\Services\Blob\BlobRestProxy::acquireLease
      * @covers WindowsAzure\Services\Blob\BlobRestProxy::_putLeaseImpl
+     * @covers WindowsAzure\Services\Blob\BlobRestProxy::_createPath
      */
     public function testAcquireLease()
     {

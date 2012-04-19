@@ -42,32 +42,34 @@ class Validate
     /**
      * Throws exception if the provided variable type is not array.
      *
-     * @param mix $var variable to check against.
+     * @param mix    $var  The variable to check.
+     * @param string $name The parameter name.
      * 
      * @throws InvalidArgumentTypeException.
      * 
      * @return none
      */
-    public static function isArray($var)
+    public static function isArray($var, $name = null)
     {
         if (!is_array($var)) {
-            throw new InvalidArgumentTypeException(gettype(array()));
+            throw new InvalidArgumentTypeException($name, gettype(array()));
         }
     }
 
     /**
      * Throws exception if the provided variable type is not string.
      *
-     * @param mix $var variable to check against.
+     * @param mix    $var  The variable to check.
+     * @param string $name The parameter name.
      * 
      * @throws InvalidArgumentTypeException
      * 
      * @return none
      */
-    public static function isString($var)
+    public static function isString($var, $name = null)
     {
         if (!is_string($var) && $var != Resources::EMPTY_STRING) {
-            throw new InvalidArgumentTypeException(gettype(''));
+            throw new InvalidArgumentTypeException(gettype(''), $name);
         }
     }
     
@@ -90,32 +92,36 @@ class Validate
     /**
      * Throws exception if the provided variable type is not integer.
      *
-     * @param mix $var variable to check against.
+     * @param mix    $var  The variable to check.
+     * @param string $name The parameter name.
      * 
      * @throws InvalidArgumentTypeException
      * 
      * @return none
      */
-    public static function isInteger($var)
+    public static function isInteger($var, $name = null)
     {
         if (!is_int($var)) {
-            throw new InvalidArgumentTypeException(gettype(123));
+            throw new InvalidArgumentTypeException($name, gettype(123));
         }
     }
     
     /**
      * Throws exception if the provided variable is set to null.
      *
-     * @param mix $var variable to check against.
+     * @param mix    $var  The variable to check.
+     * @param string $name The parameter name.
      * 
      * @throws \InvalidArgumentException
      * 
      * @return none
      */
-    public static function notNullOrEmpty($var)
+    public static function notNullOrEmpty($var, $name = null)
     {
         if (is_null($var) || empty($var)) {
-            throw new \InvalidArgumentException(Resources::NULL_ERROR_MSG);
+            throw new \InvalidArgumentException(
+                sprintf(Resources::NULL_ERROR_MSG, $name)
+            );
         }
     }
     
@@ -153,16 +159,31 @@ class Validate
     }
     
     /**
-     * Validates if the given variable is string and not null or empty
+     * Validates if the given variable is string and not null or empty.
      * 
-     * @param mix $var The variable to check.
+     * @param mix    $var  The variable to check.
+     * @param string $name The parameter name.
      * 
      * @return none
      */
-    public static function isValidString($var)
+    public static function isValidString($var, $name = null)
     {
-        self::isString($var);
-        self::notNullOrEmpty($var);
+        self::isString($var, $name);
+        self::notNullOrEmpty($var, $name);
+    }
+    
+    /**
+     * Validates if the given variable is integer and not null or empty.
+     * 
+     * @param mix    $var  The variable to check.
+     * @param string $name The parameter name.
+     * 
+     * @return none
+     */
+    public static function isValidInteger($var, $name = null)
+    {
+        self::isInteger($var, $name);
+        self::notNullOrEmpty($var, $name);
     }
 }
 
