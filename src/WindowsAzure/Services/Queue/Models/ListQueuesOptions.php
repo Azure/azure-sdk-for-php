@@ -55,7 +55,7 @@ class ListQueuesOptions extends QueueServiceOptions
     }
 
     /**
-     * Sets perfix.
+     * Sets prefix.
      *
      * @param string $prefix value.
      * 

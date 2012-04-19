@@ -84,7 +84,7 @@ class ListBlobsOptions extends BlobServiceOptions
     }
 
     /**
-     * Sets perfix.
+     * Sets prefix.
      *
      * @param string $prefix value.
      * 
@@ -107,7 +107,7 @@ class ListBlobsOptions extends BlobServiceOptions
     }
 
     /**
-     * Sets perfix.
+     * Sets prefix.
      *
      * @param string $delimiter value.
      * 

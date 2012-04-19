@@ -87,7 +87,7 @@ class ListContainersOptions extends BlobServiceOptions
     }
 
     /**
-     * Sets perfix.
+     * Sets prefix.
      *
      * @param string $prefix value.
      * 

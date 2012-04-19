@@ -112,7 +112,7 @@ class ListQueuesResult
     }
 
     /**
-     * Gets perfix.
+     * Gets prefix.
      *
      * @return string.
      */
@@ -122,7 +122,7 @@ class ListQueuesResult
     }
 
     /**
-     * Sets perfix.
+     * Sets prefix.
      *
      * @param string $prefix value.
      * 
