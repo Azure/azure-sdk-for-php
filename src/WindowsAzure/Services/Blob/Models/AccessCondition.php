@@ -23,7 +23,6 @@
  */
  
 namespace WindowsAzure\Services\Blob\Models;
-use WindowsAzure\Services\Blob\Models\AccessConditionHeaderType;
 use WindowsAzure\Validate;
 use WindowsAzure\Resources;
 use WindowsAzure\Core\WindowsAzureUtilities;
@@ -47,7 +46,7 @@ class AccessCondition
      * 
      * @var string
      */
-    private $_header = AccessConditionHeaderType::NONE;
+    private $_header = Resources::EMPTY_STRING;
     
     /**
      * Represents the header value.
@@ -75,7 +74,7 @@ class AccessCondition
      */
     public static function none()
     {
-        return new AccessCondition(AccessConditionHeaderType::NONE, null);
+        return new AccessCondition(Resources::EMPTY_STRING, null);
     }
     
     /**
@@ -97,7 +96,7 @@ class AccessCondition
      */
     public static function ifMatch($etag)
     {
-        return new AccessCondition(AccessConditionHeaderType::IF_MATCH, $etag);
+        return new AccessCondition(Resources::IF_MATCH, $etag);
     }
     
     /**
@@ -121,7 +120,7 @@ class AccessCondition
     public static function ifModifiedSince($lastModified)
     {
         return new AccessCondition(
-            AccessConditionHeaderType::IF_MODIFIED_SINCE,
+            Resources::IF_MODIFIED_SINCE,
             WindowsAzureUtilities::rfc1123ToDateTime($lastModified)
         );
     }
@@ -145,7 +144,7 @@ class AccessCondition
      */
     public static function ifNoneMatch($etag)
     {
-        return new AccessCondition(AccessConditionHeaderType::IF_NONE_MATCH, $etag);
+        return new AccessCondition(Resources::IF_NONE_MATCH, $etag);
     }
     
     /**
@@ -169,7 +168,7 @@ class AccessCondition
     public static function ifNotModifiedSince($lastModified)
     {
         return new AccessCondition(
-            AccessConditionHeaderType::IF_UNMODIFIED_SINCE,
+            Resources::IF_UNMODIFIED_SINCE,
             WindowsAzureUtilities::rfc1123ToDateTime($lastModified)
         );
     }
@@ -177,13 +176,13 @@ class AccessCondition
     /**
      * Sets header type
      * 
-     * @param string $headerType can be one of AccessConditionHeaderType
+     * @param string $headerType can be one of Resources
      * 
      * @return none.
      */
     public function setHeader($headerType)
     {
-        $valid = AccessConditionHeaderType::isValid($headerType);
+        $valid = AccessCondition::isValid($headerType);
         Validate::isTrue($valid, Resources::INVALID_HT_MSG);
         
         $this->_header = $headerType;
@@ -219,6 +218,27 @@ class AccessCondition
     public function getValue()
     {
         return $this->_value;
+    }
+    
+    /**
+     * Check if the $headerType belongs to valid header types
+     * 
+     * @param string $headerType candidate header type
+     * 
+     * @return boolean 
+     */
+    public static function isValid($headerType)
+    {
+        if (   $headerType == Resources::EMPTY_STRING
+            || $headerType == Resources::IF_UNMODIFIED_SINCE
+            || $headerType == Resources::IF_MATCH
+            || $headerType == Resources::IF_MODIFIED_SINCE
+            || $headerType == Resources::IF_NONE_MATCH
+        ) {
+            return true;
+        } else {
+            return false;
+        }
     }
 }
 

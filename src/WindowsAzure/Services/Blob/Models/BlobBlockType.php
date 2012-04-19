@@ -40,6 +40,26 @@ class BlobBlockType
     const COMMITTED_TYPE   = 'Committed';
     const UNCOMMITTED_TYPE = 'Uncommitted';
     const LATEST_TYPE      = 'Latest';
+    
+    /**
+     * Validates the provided type.
+     * 
+     * @param string $type The entry type.
+     * 
+     * @return boolean
+     */
+    public static function isValid($type)
+    {
+        switch ($type) {
+        case self::COMMITTED_TYPE:
+        case self::LATEST_TYPE:
+        case self::UNCOMMITTED_TYPE:
+            return true;
+        
+        default:
+            return false;
+        }
+    }
 }
 
 ?>

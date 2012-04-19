@@ -115,8 +115,7 @@ class ConfigurationTest extends \PHPUnit_Framework_TestCase
     public function testSetPropertyWithNonStringKeyFail()
     {
         $invalidKey = 1;
-        $this->setExpectedException(get_class(new InvalidArgumentTypeException('')), 
-                Resources::INVALID_TYPE_MSG . gettype(''));
+        $this->setExpectedException(get_class(new InvalidArgumentTypeException('')));
         $config = $this->config = new Configuration();
         $config->setProperty($invalidKey, TestResources::VALUE1);
     }
@@ -143,7 +142,7 @@ class ConfigurationTest extends \PHPUnit_Framework_TestCase
     public function testCreateWithInvalidTypeFail()
     {
         $invalidType = gettype('');
-        $this->setExpectedException(get_class(new InvalidArgumentTypeException('')), Resources::INVALID_TYPE_MSG . Resources::QUEUE_TYPE_NAME);
+        $this->setExpectedException(get_class(new InvalidArgumentTypeException('')));
         $config = $this->config = new Configuration();
         $config->setProperty(QueueSettings::ACCOUNT_KEY, TestResources::KEY1);
         $config->setProperty(QueueSettings::ACCOUNT_NAME, TestResources::ACCOUNT_NAME);

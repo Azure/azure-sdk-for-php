@@ -23,7 +23,6 @@
  */
 namespace Tests\Unit\WindowsAzure\Services\Blob\Models;
 use WindowsAzure\Services\Blob\Models\AccessCondition;
-use WindowsAzure\Services\Blob\Models\AccessConditionHeaderType;
 use WindowsAzure\Resources;
 use WindowsAzure\Core\WindowsAzureUtilities;
 
@@ -50,7 +49,7 @@ class AccessConditionTest extends \PHPUnit_Framework_TestCase
     public function test__construct()
     {
         // Setup
-        $expectedHeaderType = AccessConditionHeaderType::IF_MATCH;
+        $expectedHeaderType = Resources::IF_MATCH;
         $expectedValue = '0x8CAFB82EFF70C46';
         
         // Test
@@ -69,7 +68,7 @@ class AccessConditionTest extends \PHPUnit_Framework_TestCase
     public function testNone()
     {
         // Setup
-        $expectedHeader = AccessConditionHeaderType::NONE;
+        $expectedHeader = Resources::EMPTY_STRING;
         $expectedValue = null;
         
         // Test
@@ -88,7 +87,7 @@ class AccessConditionTest extends \PHPUnit_Framework_TestCase
     public function testIfModifiedSince()
     {
         // Setup
-        $expectedHeader = AccessConditionHeaderType::IF_MODIFIED_SINCE;
+        $expectedHeader = Resources::IF_MODIFIED_SINCE;
         $date = 'Sun, 25 Sep 2011 00:42:49 GMT';
         $expectedValue = WindowsAzureUtilities::rfc1123ToDateTime($date);
         
@@ -108,7 +107,7 @@ class AccessConditionTest extends \PHPUnit_Framework_TestCase
     public function testIfMatch()
     {
         // Setup
-        $expectedHeader = AccessConditionHeaderType::IF_MATCH;
+        $expectedHeader = Resources::IF_MATCH;
         $expectedValue = '0x8CAFB82EFF70C46';
         
         // Test
@@ -127,7 +126,7 @@ class AccessConditionTest extends \PHPUnit_Framework_TestCase
     public function testIfNoneMatch()
     {
         // Setup
-        $expectedHeader = AccessConditionHeaderType::IF_NONE_MATCH;
+        $expectedHeader = Resources::IF_NONE_MATCH;
         $expectedValue = '0x8CAFB82EFF70C46';
         
         // Test
@@ -146,7 +145,7 @@ class AccessConditionTest extends \PHPUnit_Framework_TestCase
     public function testIfNotModifiedSince()
     {
         // Setup
-        $expectedHeader = AccessConditionHeaderType::IF_UNMODIFIED_SINCE;
+        $expectedHeader = Resources::IF_UNMODIFIED_SINCE;
         $date = 'Sun, 25 Sep 2011 00:42:49 GMT';
         $expectedValue = WindowsAzureUtilities::rfc1123ToDateTime($date);
         
@@ -156,6 +155,30 @@ class AccessConditionTest extends \PHPUnit_Framework_TestCase
         // Assert
         $this->assertEquals($expectedHeader, $actual->getHeader());
         $this->assertEquals($expectedValue, $actual->getValue());
+    }
+    
+    /**
+     * @covers WindowsAzure\Services\Blob\Models\AccessCondition::isValid
+     */
+    public function testIsValidWithValid()
+    {
+        // Test
+        $actual = AccessCondition::isValid(Resources::IF_MATCH);
+        
+        // Assert
+        $this->assertTrue($actual);
+    }
+    
+    /**
+     * @covers WindowsAzure\Services\Blob\Models\AccessCondition::isValid
+     */
+    public function testIsValidWithInvalid()
+    {
+        // Test
+        $actual = AccessCondition::isValid('1234');
+        
+        // Assert
+        $this->assertFalse($actual);
     }
 }
 

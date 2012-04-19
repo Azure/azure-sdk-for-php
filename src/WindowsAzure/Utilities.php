@@ -290,13 +290,13 @@ class Utilities
     }
 
     /**
-    * Generate ISO 8601 compliant date string in UTC time zone
-    * 
-    * @param int $timestamp The unix timestamp to convert 
-    *     (for DateTime check date_timestamp_get).
-    *
-    * @return string
-    */
+     * Generate ISO 8601 compliant date string in UTC time zone
+     * 
+     * @param int $timestamp The unix timestamp to convert 
+     *     (for DateTime check date_timestamp_get).
+     *
+     * @return string
+     */
     public static function isoDate($timestamp = null)
     {        
         $tz = date_default_timezone_get();
@@ -314,13 +314,13 @@ class Utilities
     }
     
     /**
-        * Converts a DateTime object into an Edm.DaeTime value in UTC timezone,
-        * represented as a string.
-        * 
-        * @param \DateTime $value The datetime value.
-        * 
-        * @return string
-        */
+     * Converts a DateTime object into an Edm.DaeTime value in UTC timezone,
+     * represented as a string.
+     * 
+     * @param \DateTime $value The datetime value.
+     * 
+     * @return string
+     */
     public static function convertToEdmDateTime($value) 
     {
         $cloned = clone $value;
@@ -329,12 +329,12 @@ class Utilities
     }
     
     /**
-        * Converts a string to a \DateTime object. Returns false on failure.
-        * 
-        * @param string $value The string value to parse.
-        * 
-        * @return \DateTime
-        */
+     * Converts a string to a \DateTime object. Returns false on failure.
+     * 
+     * @param string $value The string value to parse.
+     * 
+     * @return \DateTime
+     */
     public static function convertToDateTime($value)
     {
         if ($value instanceof \DateTime) {

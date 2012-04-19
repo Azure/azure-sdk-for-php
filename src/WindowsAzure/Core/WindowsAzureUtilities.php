@@ -25,6 +25,7 @@
 namespace WindowsAzure\Core;
 use WindowsAzure\Resources;
 use WindowsAzure\Utilities;
+use WindowsAzure\Validate;
 
 /**
  * General utilities for communicating with azure.
@@ -95,6 +96,23 @@ class WindowsAzureUtilities
         }
         
         return $metadata;
+    }
+    
+    /**
+     * Validates the provided metadata array.
+     * 
+     * @param mix $metadata The metadata array.
+     * 
+     * @return none
+     */
+    public static function isValidMetadata($metadata)
+    {
+        Validate::isArray($metadata, 'metadata');
+        
+        foreach ($metadata as $key => $value) {
+            Validate::isString($key, 'metadata key');
+            Validate::isString($value, 'metadata value');
+        }
     }
     
     /**
