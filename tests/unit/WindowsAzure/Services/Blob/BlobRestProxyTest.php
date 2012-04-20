@@ -49,6 +49,7 @@ use WindowsAzure\Services\Blob\Models\CreateBlobPagesResult;
 use WindowsAzure\Services\Blob\Models\BlockList;
 use WindowsAzure\Services\Blob\Models\BlobBlockType;
 use WindowsAzure\Services\Blob\Models\GetBlobOptions;
+use WindowsAzure\Services\Blob\Models\Block;
 
 /**
  * Unit tests for class BlobRestProxy
@@ -1170,6 +1171,36 @@ class BlobRestProxyTest extends BlobServiceRestProxyTestBase
         $blockList = new BlockList();
         $blockList->addEntry($id1, BlobBlockType::LATEST_TYPE);
         $blockList->addEntry($id2, BlobBlockType::LATEST_TYPE);
+        
+        // Test
+        $this->wrapper->commitBlobBlocks($name, $blob, $blockList);
+        
+        // Assert
+        $result = $this->wrapper->listBlobs($name);
+        $this->assertCount(1, $result->getBlobs());
+    }
+    
+    /**
+     * @covers WindowsAzure\Services\Blob\BlobRestProxy::commitBlobBlocks
+     * @covers WindowsAzure\Services\Blob\Models\BlockList::toXml
+     */
+    public function testCommitBlobBlocksWithArray()
+    {
+        // Setup
+        $name = 'commitblobblockswitharray';
+        $blob = 'myblob';
+        $id1 = 'AAAAAA==';
+        $id2 = 'ANAAAA==';
+        $block1 = new Block();
+        $block1->setBlockId($id1);
+        $block1->setType(BlobBlockType::LATEST_TYPE);
+        $block2 = new Block();
+        $block2->setBlockId($id2);
+        $block2->setType(BlobBlockType::LATEST_TYPE);
+        $blockList = array($block1, $block2);
+        $this->createContainer($name);
+        $this->wrapper->createBlobBlock($name, $blob, $id1, 'Hello world');
+        $this->wrapper->createBlobBlock($name, $blob, $id2, 'Hello world');
         
         // Test
         $this->wrapper->commitBlobBlocks($name, $blob, $blockList);

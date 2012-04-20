@@ -45,8 +45,26 @@ class BlockList
      */
     private $_entries;
     public static $xmlRootName = 'BlockList';
-	
-	/**
+    
+    /**
+     * Creates block list from array of blocks.
+     * 
+     * @param array $array The blocks array.
+     * 
+     * @return BlockList
+     */
+    public static function create($array)
+    {
+        $blockList = new BlockList();
+        
+        foreach ($array as $value) {
+            $blockList->addEntry($value->getBlockId(), $value->getType());
+        }
+        
+        return $blockList;
+    }
+    
+    /**
      * Adds new entry to the block list entries.
      * 
      * @param string $blockId The block id.

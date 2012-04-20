@@ -24,6 +24,7 @@
 namespace Tests\Unit\WindowsAzure\Services\Blob\Models;
 use WindowsAzure\Services\Blob\Models\BlockList;
 use WindowsAzure\Services\Blob\Models\BlobBlockType;
+use WindowsAzure\Services\Blob\Models\Block;
 
 /**
  * Unit tests for class BlockList
@@ -133,6 +134,35 @@ class BlockListTest extends \PHPUnit_Framework_TestCase
         $entry = $blockList->getEntry($expectedId);
         $this->assertEquals($expectedId, $entry->getBlockId());
         $this->assertEquals($expectedType, $entry->getType());
+    }
+    
+    /**
+     * @covers WindowsAzure\Services\Blob\Models\BlockList::create
+     */
+    public function testCreate()
+    {
+        // Setup
+        $block1 = new Block();
+        $block1->setBlockId('123');
+        $block1->setType(BlobBlockType::COMMITTED_TYPE);
+        $block2 = new Block();
+        $block2->setBlockId('223');
+        $block2->setType(BlobBlockType::UNCOMMITTED_TYPE);
+        $block3 = new Block();
+        $block3->setBlockId('333');
+        $block3->setType(BlobBlockType::LATEST_TYPE);
+        
+        // Test
+        $blockList = BlockList::create(array($block1, $block2, $block3));
+        
+        // Assert
+        $this->assertCount(3, $blockList->getEntries());
+        $b1 = $blockList->getEntry($block1->getBlockId());
+        $b2 = $blockList->getEntry($block2->getBlockId());
+        $b3 = $blockList->getEntry($block3->getBlockId());
+        $this->assertEquals($block1, $b1);
+        $this->assertEquals($block2, $b2);
+        $this->assertEquals($block3, $b3);
     }
 }
 
