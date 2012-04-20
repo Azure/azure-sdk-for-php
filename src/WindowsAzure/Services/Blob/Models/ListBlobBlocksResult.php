@@ -232,7 +232,7 @@ class ListBlobBlocksResult
      * 
      * @return array
      */
-    public function getUncommittedBlock()
+    public function getUncommittedBlocks()
     {
         return $this->_uncommittedBlocks;
     }
@@ -244,7 +244,7 @@ class ListBlobBlocksResult
      * 
      * @return none.
      */
-    public function setUncommittedBlock($uncommittedBlocks)
+    public function setUncommittedBlocks($uncommittedBlocks)
     {
         $this->_uncommittedBlocks = $uncommittedBlocks;
     }
@@ -254,7 +254,7 @@ class ListBlobBlocksResult
      * 
      * @return array
      */
-    public function getCommittedBlock()
+    public function getCommittedBlocks()
     {
         return $this->_committedBlocks;
     }
@@ -266,7 +266,7 @@ class ListBlobBlocksResult
      * 
      * @return none.
      */
-    public function setCommittedBlock($committedBlocks)
+    public function setCommittedBlocks($committedBlocks)
     {
         $this->_committedBlocks = $committedBlocks;
     }

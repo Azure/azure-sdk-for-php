@@ -114,9 +114,8 @@ class PageRangeTest extends \PHPUnit_Framework_TestCase
     public function testGetLength($obj)
     {
         // Setup
-        $length = 10;
-        $expected = 8;
-        $obj->setLength($length);
+        $expected = 10;
+        $obj->setLength($expected);
         
         // Test
         $actual = $obj->getLength();

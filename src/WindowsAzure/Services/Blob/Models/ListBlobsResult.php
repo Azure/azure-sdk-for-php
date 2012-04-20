@@ -198,7 +198,7 @@ class ListBlobsResult
     }
 
     /**
-     * Gets perfix.
+     * Gets prefix.
      *
      * @return string.
      */
@@ -208,7 +208,7 @@ class ListBlobsResult
     }
 
     /**
-     * Sets perfix.
+     * Sets prefix.
      *
      * @param string $prefix value.
      * 
@@ -220,7 +220,7 @@ class ListBlobsResult
     }
     
     /**
-     * Gets perfix.
+     * Gets prefix.
      *
      * @return string.
      */
@@ -230,7 +230,7 @@ class ListBlobsResult
     }
 
     /**
-     * Sets perfix.
+     * Sets prefix.
      *
      * @param string $delimiter value.
      * 

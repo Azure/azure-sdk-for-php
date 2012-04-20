@@ -112,7 +112,7 @@ class PageRange
      */
     public function getLength()
     {
-        return $this->_end - $this->_start - 1;
+        return $this->_end - $this->_start + 1;
     }
     
     /**
