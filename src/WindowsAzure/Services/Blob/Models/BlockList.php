@@ -139,6 +139,8 @@ class BlockList
      */
     public function toXml()
     {
+        // Ehance this part to use SimpleXml document instead of manual construction
+        // https://github.com/WindowsAzure/azure-sdk-for-php/issues/144
         $xml  = '<?xml version="1.0" encoding="utf-8"?>' . "\r\n";
         $xml .= '<BlockList>' . "\r\n";
         
