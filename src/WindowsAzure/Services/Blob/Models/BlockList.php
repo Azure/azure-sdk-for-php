@@ -23,9 +23,9 @@
  */
  
 namespace WindowsAzure\Services\Blob\Models;
-use WindowsAzure\Utilities;
 use WindowsAzure\Validate;
 use WindowsAzure\Resources;
+use WindowsAzure\Services\Blob\Models\Block;
 
 /**
  * Holds block list used for commitBlobBlocks
@@ -45,40 +45,85 @@ class BlockList
      */
     private $_entries;
     public static $xmlRootName = 'BlockList';
-    
-    /**
-     * Adds new entry to the block list entries
+	
+	/**
+     * Adds new entry to the block list entries.
      * 
-     * @param string $blockId The block id
-     * @param string $type    The entry type, you can use BlobBlockType
+     * @param string $blockId The block id.
+     * @param string $type    The entry type, you can use BlobBlockType.
      * 
-     * @return none.
+     * @return none
      */
-    public function setEntry($blockId, $type)
+    public function addEntry($blockId, $type)
     {
         Validate::isString($blockId);
         Validate::isTrue(
             BlobBlockType::isValid($type),
             sprintf(Resources::INVALID_BTE_MSG, get_class(new BlobBlockType()))
         );
+        $block = new Block();
+        $block->setBlockId($blockId);
+        $block->setType($type);
         
-        $this->_entries[$blockId] = $type;
+        $this->_entries[] = $block;
     }
     
     /**
-     * Gets blob block entry type
+     * Addds committed block entry.
      * 
-     * @param string $blockId The id of the block
+     * @param string $blockId The block id.
      * 
-     * @return string
+     * @return none
+     */
+    public function addCommittedEntry($blockId)
+    {
+        $this->addEntry($blockId, BlobBlockType::COMMITTED_TYPE);
+    }
+    
+    /**
+     * Addds uncommitted block entry.
+     * 
+     * @param string $blockId The block id.
+     * 
+     * @return none
+     */
+    public function addUncommittedEntry($blockId)
+    {
+        $this->addEntry($blockId, BlobBlockType::UNCOMMITTED_TYPE);
+    }
+    
+    /**
+     * Addds latest block entry.
+     * 
+     * @param string $blockId The block id.
+     * 
+     * @return none
+     */
+    public function addLatestEntry($blockId)
+    {
+        $this->addEntry($blockId, BlobBlockType::LATEST_TYPE);
+    }
+    
+    /**
+     * Gets blob block entry type.
+     * 
+     * @param string $blockId The id of the block.
+     * 
+     * @return Block
      */
     public function getEntry($blockId)
     {
-        return Utilities::tryGetValue($this->_entries, $blockId);
+        foreach ($this->_entries as $value) {
+            if ($blockId == $value->getBlockId()) {
+                return $value;
+            }
+        }
+        
+        return null;
     }
     
     /**
-     * Gets all blob block entries
+     * Gets all blob block entries.
      * 
      * @return string
      */
@@ -97,9 +142,11 @@ class BlockList
         $xml  = '<?xml version="1.0" encoding="utf-8"?>' . "\r\n";
         $xml .= '<BlockList>' . "\r\n";
         
-        foreach ($this->_entries as $key => $value) {
+        foreach ($this->_entries as $value) {
+            $type = $value->getType();
+            $id   = $value->getBlockId();
             $xml .= '     ';
-            $xml .= '<' . $value . '>' . base64_encode($key) . '</' . $value . '>';
+            $xml .= '<' . $type . '>' . base64_encode($id) . '</' . $type . '>';
             $xml .= "\r\n";
         }
         

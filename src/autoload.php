@@ -67,6 +67,7 @@ spl_autoload_register(
             'windowsazure\\services\\blob\\models\\blobproperties' => '/WindowsAzure/Services/Blob/Models/BlobProperties.php',
             'windowsazure\\services\\blob\\models\\blobserviceoptions' => '/WindowsAzure/Services/Blob/Models/BlobServiceOptions.php',
             'windowsazure\\services\\blob\\models\\blobtype' => '/WindowsAzure/Services/Blob/Models/BlobType.php',
+            'windowsazure\\services\\blob\\models\\block' => '/WindowsAzure/Services/Blob/Models/Block.php',
             'windowsazure\\services\\blob\\models\\blocklist' => '/WindowsAzure/Services/Blob/Models/BlockList.php',
             'windowsazure\\services\\blob\\models\\commitblobblocksoptions' => '/WindowsAzure/Services/Blob/Models/CommitBlobBlocksOptions.php',
             'windowsazure\\services\\blob\\models\\container' => '/WindowsAzure/Services/Blob/Models/Container.php',

@@ -39,10 +39,10 @@ use WindowsAzure\Services\Blob\Models\BlobBlockType;
 class BlockListTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @covers WindowsAzure\Services\Blob\Models\BlockList::setEntry
+     * @covers WindowsAzure\Services\Blob\Models\BlockList::addEntry
      * @covers WindowsAzure\Services\Blob\Models\BlockList::getEntry
      */
-    public function testSetEntry()
+    public function testAddEntry()
     {
         // Setup
         $expectedId = '1234';
@@ -50,10 +50,11 @@ class BlockListTest extends \PHPUnit_Framework_TestCase
         $blockList = new BlockList();
         
         // Test
-        $blockList->setEntry($expectedId, $expectedType);
+        $blockList->addEntry($expectedId, $expectedType);
         
         // Assert
-        $this->assertEquals($expectedType, $blockList->getEntry($expectedId));
+        $entry = $blockList->getEntry($expectedId);
+        $this->assertEquals($expectedType, $entry->getType());
     }
     
     /**
@@ -65,13 +66,73 @@ class BlockListTest extends \PHPUnit_Framework_TestCase
         $expectedId = '1234';
         $expectedType = BlobBlockType::COMMITTED_TYPE;
         $blockList = new BlockList();
-        $blockList->setEntry($expectedId, $expectedType);
+        $blockList->addEntry($expectedId, $expectedType);
         
         // Test
         $entries = $blockList->getEntries();
         
         // Assert
         $this->assertCount(1, $entries);
+    }
+    
+    /**
+     * @covers WindowsAzure\Services\Blob\Models\BlockList::addCommittedEntry
+     * @covers WindowsAzure\Services\Blob\Models\BlockList::getEntry
+     */
+    public function testAddCommittedEntry()
+    {
+        // Setup
+        $expectedId = '1234';
+        $expectedType = BlobBlockType::COMMITTED_TYPE;
+        $blockList = new BlockList();
+        
+        // Test
+        $blockList->addCommittedEntry($expectedId, $expectedType);
+        
+        // Assert
+        $entry = $blockList->getEntry($expectedId);
+        $this->assertEquals($expectedId, $entry->getBlockId());
+        $this->assertEquals($expectedType, $entry->getType());
+    }
+    
+    /**
+     * @covers WindowsAzure\Services\Blob\Models\BlockList::addUncommittedEntry
+     * @covers WindowsAzure\Services\Blob\Models\BlockList::getEntry
+     */
+    public function testAddUncommittedEntry()
+    {
+        // Setup
+        $expectedId = '1234';
+        $expectedType = BlobBlockType::UNCOMMITTED_TYPE;
+        $blockList = new BlockList();
+        
+        // Test
+        $blockList->addUncommittedEntry($expectedId, $expectedType);
+        
+        // Assert
+        $entry = $blockList->getEntry($expectedId);
+        $this->assertEquals($expectedId, $entry->getBlockId());
+        $this->assertEquals($expectedType, $entry->getType());
+    }
+    
+    /**
+     * @covers WindowsAzure\Services\Blob\Models\BlockList::addLatestEntry
+     * @covers WindowsAzure\Services\Blob\Models\BlockList::getEntry
+     */
+    public function testAddLatestEntry()
+    {
+        // Setup
+        $expectedId = '1234';
+        $expectedType = BlobBlockType::LATEST_TYPE;
+        $blockList = new BlockList();
+        
+        // Test
+        $blockList->addLatestEntry($expectedId, $expectedType);
+        
+        // Assert
+        $entry = $blockList->getEntry($expectedId);
+        $this->assertEquals($expectedId, $entry->getBlockId());
+        $this->assertEquals($expectedType, $entry->getType());
     }
 }
 

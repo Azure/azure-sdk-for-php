@@ -1168,8 +1168,8 @@ class BlobRestProxyTest extends BlobServiceRestProxyTestBase
         $this->wrapper->createBlobBlock($name, $blob, $id1, 'Hello world');
         $this->wrapper->createBlobBlock($name, $blob, $id2, 'Hello world');
         $blockList = new BlockList();
-        $blockList->setEntry($id1, BlobBlockType::LATEST_TYPE);
-        $blockList->setEntry($id2, BlobBlockType::LATEST_TYPE);
+        $blockList->addEntry($id1, BlobBlockType::LATEST_TYPE);
+        $blockList->addEntry($id2, BlobBlockType::LATEST_TYPE);
         
         // Test
         $this->wrapper->commitBlobBlocks($name, $blob, $blockList);
