@@ -123,7 +123,7 @@ class BlockList
     }
     
     /**
-     * Gets blob block entry type.
+     * Gets blob block entry.
      * 
      * @param string $blockId The id of the block.
      * 

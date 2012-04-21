@@ -72,7 +72,7 @@ class Block
     /**
      * Sets the type.
      * 
-     * @param string $type The id of the block.
+     * @param string $type The type of the block.
      * 
      * @return none
      */
