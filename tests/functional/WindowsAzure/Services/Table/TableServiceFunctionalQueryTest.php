@@ -46,15 +46,25 @@ class TableServiceFunctionalQueryTest extends FunctionalTestBase {
         $table = TableServiceFunctionalTestData::$TEST_TABLE_NAMES[0];
         self::$entitiesInTable = self::getEntitiesToQueryOver();  
         $baseWithWrapper = new FunctionalTestBase();
-        $batch = new BatchOperations();
+        $parts = array();
         foreach(self::$entitiesInTable as $entity)  {
-            $batch->addInsertEntity($table, $entity);
+            if (array_key_exists($entity->getPartitionKey(), $parts) === false) {
+                $parts[$entity->getPartitionKey()] = array();                
+            }
+            array_push($parts[$entity->getPartitionKey()], $entity);
         }
-        $baseWithWrapper->wrapper->batch($batch);
+        foreach($parts as $part) {
+            $batch = new BatchOperations();
+            foreach($part as $entity)  {
+//                echo self::tmptostring($entity) . "\n";
+                $batch->addInsertEntity($table, $entity);
+            }
+            $baseWithWrapper->wrapper->batch($batch);
+        }
     }
     
     private static function getNewEntity() {
-        if (self::$curPartition == null || self::$curPartition == self::$Partitions->length - 1) {
+        if (is_null(self::$curPartition) || self::$curPartition == count(self::$Partitions) - 1) {
             self::$curPartition = 0;
             self::$curRowKey = TableServiceFunctionalTestData::getNewKey();
         }
@@ -200,7 +210,7 @@ class TableServiceFunctionalQueryTest extends FunctionalTestBase {
 
         $options = new QueryEntitiesOptions();
         $query = new Query();
-        $filter = Filter::applyLiteral('BOOLEAN');
+        $filter = Filter::applyPropertyName('BOOLEAN');
         $query->setFilter($filter);
         $options->setQuery($query);
         array_push($ret, $options);
@@ -214,21 +224,21 @@ class TableServiceFunctionalQueryTest extends FunctionalTestBase {
 
         $options = new QueryEntitiesOptions();
         $query = new Query();
-        $filter = Filter::applyEq(Filter::applyConstant(23, EdmType::INT32), Filter::applyLiteral('INT32'));
+        $filter = Filter::applyEq(Filter::applyConstant(23, EdmType::INT32), Filter::applyPropertyName('INT32'));
         $query->setFilter($filter);
         $options->setQuery($query);
         array_push($ret, $options);
 
         $options = new QueryEntitiesOptions();
         $query = new Query();
-        $filter = Filter::applyNe(Filter::applyConstant(23, EdmType::INT32), Filter::applyLiteral('INT32'));
+        $filter = Filter::applyNe(Filter::applyConstant(23, EdmType::INT32), Filter::applyPropertyName('INT32'));
         $query->setFilter($filter);
         $options->setQuery($query);
         array_push($ret, $options);
 
         $options = new QueryEntitiesOptions();
         $query = new Query();
-        $filter = Filter::applyNot(Filter::applyEq(Filter::applyConstant(23, EdmType::INT32), Filter::applyLiteral('INT32')));
+        $filter = Filter::applyNot(Filter::applyEq(Filter::applyConstant(23, EdmType::INT32), Filter::applyPropertyName('INT32')));
         $query->setFilter($filter);
         $options->setQuery($query);
         array_push($ret, $options);
@@ -290,7 +300,7 @@ class TableServiceFunctionalQueryTest extends FunctionalTestBase {
                     }
                     else {
                         $key = $boolPropNames[mt_rand(0, count($boolPropNames) - 1)];
-                        return Filter::applyLiteral($key);
+                        return Filter::applyPropertyName($key);
                     }
                 default:
                     return null;
@@ -331,7 +341,7 @@ class TableServiceFunctionalQueryTest extends FunctionalTestBase {
 
         $prop = $e->getProperty($key);
         $f1 = Filter::applyConstant($prop->getValue(), $prop->getEdmType());
-        $f2 = Filter::applyLiteral($key);
+        $f2 = Filter::applyPropertyName($key);
 
         if (mt_rand(0,1) == 1) {
             // Try swapping.
@@ -489,13 +499,13 @@ class TableServiceFunctionalQueryTest extends FunctionalTestBase {
         $table = TableServiceFunctionalTestData::$TEST_TABLE_NAMES[0];
 
         try {
-            $ret = ($options == null ? $this->wrapper->queryEntities($table) : $this->wrapper->queryEntities($table, $options));
+            $ret = (is_null($options) ? $this->wrapper->queryEntities($table) : $this->wrapper->queryEntities($table, $options));
 
-            if ($options == null) {
+            if (is_null($options)) {
                 $options = new QueryEntitiesOptions();
             }
 
-            if ($options->getQuery() != null && $options->getQuery()->getTop() != null && $options->getQuery()->getTop() <= 0) {
+            if (!is_null($options->getQuery()) && !is_null($options->getQuery()->getTop()) && $options->getQuery()->getTop() <= 0) {
                 $this->assertTrue(false, 'Expect non-positive Top in $options->query to throw');
             }
 
@@ -507,7 +517,7 @@ class TableServiceFunctionalQueryTest extends FunctionalTestBase {
             // To test that scenario, set NextTable in the $options.
         }
         catch (ServiceException $e) {
-            if ($options->getQuery() != null && $options->getQuery()->getTop() != null && $options->getQuery()->getTop() <= 0) {
+            if (!is_null($options->getQuery()) && !is_null($options->getQuery()->getTop()) && $options->getQuery()->getTop() <= 0) {
                 $this->assertEquals(400, $e->getCode(), 'getCode');
             }
             else {
@@ -527,8 +537,8 @@ class TableServiceFunctionalQueryTest extends FunctionalTestBase {
         sort($expectedData);
 
         $projected = false;
-        if ($options->getQuery() == null) {
-            if ($options->getNextPartitionKey() != null && $options->getNextRowKey() != null) {
+        if (is_null($options->getQuery())) {
+            if (!is_null($options->getNextPartitionKey()) && !is_null($options->getNextRowKey())) {
                 $expectedDataTmp = array();
                 foreach($expectedData as $e)  {
                     if ( ($e->getPartitionKey() >  $options->getNextPartitionKey()) || 
@@ -547,7 +557,7 @@ class TableServiceFunctionalQueryTest extends FunctionalTestBase {
 
             $expectedData = TableServiceFunctionalTestUtils::filterEntityList($expectedFilter, $expectedData);
 
-            if ($q->getTop() != null && $q->getTop() < count($expectedData)) {
+            if (!is_null($q->getTop()) && $q->getTop() < count($expectedData)) {
                 $expectedDataTmp = array();
                 for ($i = 0; $i < $q->getTop(); $i++) {
                     array_push($expectedDataTmp, $expectedData[$i]);
@@ -581,7 +591,7 @@ class TableServiceFunctionalQueryTest extends FunctionalTestBase {
         $counter = 0;
         $ret = array();
         foreach($values as $o)  {
-            $f = self::getBinaryFilterFromIndex($counter, Filter::applyLiteral($name), Filter::applyConstant($o, $edmType));
+            $f = self::getBinaryFilterFromIndex($counter, Filter::applyPropertyName($name), Filter::applyConstant($o, $edmType));
             $q = new Query();
             $q->setFilter($f);
             $qeo = new QueryEntitiesOptions();

@@ -314,7 +314,7 @@ class TableServiceFunctionalTest extends FunctionalTestBase {
                     }
                 }
 
-                $this->assertEquals(count($expectedData), count($ret->getTables()), 'getTablea');
+                $this->assertEquals(count($expectedData), count($ret->getTables()), 'getTables');
                 $tables = $ret->getTables();
                 for ($i = 0; $i < count($expectedData); $i++) {
                     $this->assertEquals($expectedData[$i]->TableName, $tables[$i], 'getTables(');
@@ -507,7 +507,6 @@ class TableServiceFunctionalTest extends FunctionalTestBase {
     * @covers WindowsAzure\Services\Table\TableRestProxy::getTable
     */
     private function getTableWorker($options) {
-        $this->fail('SDK needs to implement getTable. Issue 166');
         $table = TableServiceFunctionalTestData::getInterestingTableName();
         $created = false;
 
@@ -1684,8 +1683,7 @@ class TableServiceFunctionalTest extends FunctionalTestBase {
             $ger = $this->wrapper->getEntity($table, $targetEnt->getPartitionKey(), $targetEnt->getRowKey());
             $this->assertEquals($opResult->getEtag(), $ger->getEntity()->getEtag(), 'op->getEtag');
         }
-        else if ($opResult instanceof DeleteEntityResult || is_null($opResult)) {
-            // TODO: Revisit the is_null part: https://github.com/WindowsAzure/azure-sdk-for-php/issues/185 
+        else if (is_string($opResult)) {
             // Nothing special to do.
         }
         else if ($opResult instanceof Error) {
@@ -1704,10 +1702,9 @@ class TableServiceFunctionalTest extends FunctionalTestBase {
                             'When opType=' . $opType . ' expect opResult instanceof InsertEntityResult');
                     break;
                 case OpType::deleteEntity:
-                    // TODO: Revisit this: https://github.com/WindowsAzure/azure-sdk-for-php/issues/185 
-                    $this->assertNull($opResult, 'When opType=' . $opType . ' expect opResult null');
-//                    $this->assertTrue($opResult instanceof DeleteEntityResult,
-//                            'When opType=' . $opType . ' expect opResult instanceof DeleteEntityResult');
+//                    $this->assertNull($opResult, 'When opType=' . $opType . ' expect opResult null');
+                    $this->assertTrue(is_string($opResult),
+                            'When opType=' . $opType . ' expect opResult is a string');
                     break;
                 case OpType::updateEntity:
                 case OpType::insertOrReplaceEntity: 

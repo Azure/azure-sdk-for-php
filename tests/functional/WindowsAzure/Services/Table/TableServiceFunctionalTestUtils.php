@@ -44,8 +44,8 @@ use WindowsAzure\Services\Table\Models\UpdateEntityResult;
 use WindowsAzure\Services\Table\Models\Filters\BinaryFilter;
 use WindowsAzure\Services\Table\Models\Filters\ConstantFilter;
 use WindowsAzure\Services\Table\Models\Filters\Filter;
-use WindowsAzure\Services\Table\Models\Filters\LiteralFilter;
-use WindowsAzure\Services\Table\Models\Filters\RawStringFilter;
+use WindowsAzure\Services\Table\Models\Filters\PropertyNameFilter;
+use WindowsAzure\Services\Table\Models\Filters\QueryStringFilter;
 use WindowsAzure\Services\Table\Models\Filters\UnaryFilter;
 
 class MutatePivot {
@@ -90,9 +90,9 @@ class TableServiceFunctionalTestUtils {
     }
 
     private static function cloneRemoveEqNotInTopLevelWorker($filter, $depth) {
-        if ($filter instanceof LiteralFilter) {
-            $ret = new LiteralFilter();
-            $ret->setLiteral($filter->getLiteral());
+        if ($filter instanceof PropertyNameFilter) {
+            $ret = new PropertyNameFilter();
+            $ret->setPropertyName($filter->getPropertyName());
             return $ret;
         }
         else if ($filter instanceof ConstantFilter) {
@@ -119,9 +119,9 @@ class TableServiceFunctionalTestUtils {
             $ret->setRight($right);
             return $ret;
         }
-        else if ($filter instanceof RawStringFilter) {
-            $ret = new RawStringFilter();
-            $ret->setRawString($filter->getRawString());
+        else if ($filter instanceof QueryStringFilter) {
+            $ret = new QueryStringFilter();
+            $ret->setQueryString($filter->getQueryString());
             return $ret;
         }
         else {
@@ -270,8 +270,8 @@ class TableServiceFunctionalTestUtils {
         if (is_null($filter)) {
             return $pad . 'filter <null>' . "\n";
         }
-        else if ($filter instanceof LiteralFilter) {
-            return $pad . 'entity.' . $filter->getLiteral() . "\n";
+        else if ($filter instanceof PropertyNameFilter) {
+            return $pad . 'entity.' . $filter->getPropertyName() . "\n";
         }
         else if ($filter instanceof ConstantFilter) {
            $ret = $pad;
@@ -304,8 +304,8 @@ class TableServiceFunctionalTestUtils {
         else if (is_null($obj)) {
             return false;
         }
-        else if ($filter instanceof LiteralFilter) {
-            $name = $filter->getLiteral();
+        else if ($filter instanceof PropertyNameFilter) {
+            $name = $filter->getPropertyName();
             $value = ($obj instanceof Entity ? $obj->getPropertyValue($name) : $obj->{$name});
             return $value;
         }
