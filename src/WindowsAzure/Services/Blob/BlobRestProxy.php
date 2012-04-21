@@ -935,12 +935,12 @@ class BlobRestProxy extends ServiceRestProxy implements IBlob
      * block list or from the uncommitted block list, or to commit the most recently
      * uploaded version of the block, whichever list it may belong to.
      * 
-     * @param string                         $container name of the container
-     * @param string                         $blob      name of the blob
-     * @param Models\BlockList               $blockList the block list entries
-     * @param Models\CommitBlobBlocksOptions $options   optional parameters
+     * @param string                         $container The container name.
+     * @param string                         $blob      The blob name.
+     * @param Models\BlockList|array         $blockList The block entries.
+     * @param Models\CommitBlobBlocksOptions $options   The optional parameters.
      * 
-     * @return none.
+     * @return none
      * 
      * @see http://msdn.microsoft.com/en-us/library/windowsazure/dd179467.aspx 
      */
@@ -949,7 +949,7 @@ class BlobRestProxy extends ServiceRestProxy implements IBlob
         Validate::isString($container, 'container');
         Validate::isValidString($blob, 'blob');
         Validate::isTrue(
-            $blockList instanceof BlockList,
+            $blockList instanceof BlockList || is_array($blockList),
             sprintf(
                 Resources::INVALID_PARAM_MSG,
                 'blockList',
@@ -962,6 +962,8 @@ class BlobRestProxy extends ServiceRestProxy implements IBlob
         $queryParams = array();
         $path        = $this->_createPath($container, $blob);
         $statusCode  = Resources::STATUS_CREATED;
+        $isArray     = is_array($blockList);
+        $blockList   = $isArray ? BlockList::create($blockList) : $blockList;
         $body        = $blockList->toXml();
         
         if (is_null($options)) {
