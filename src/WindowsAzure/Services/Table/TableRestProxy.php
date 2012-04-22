@@ -358,7 +358,7 @@ class TableRestProxy extends ServiceRestProxy implements ITable
     {
         Validate::isValidString($table);
         Validate::notNullOrEmpty($entity);
-        Validate::isTrue($entity->isValid(), Resources::INVALID_ENTITY_MSG);
+        Validate::isTrue($entity->isValid($msg), $msg);
         
         $method      = Resources::HTTP_POST;
         $context     = new HttpCallContext();
