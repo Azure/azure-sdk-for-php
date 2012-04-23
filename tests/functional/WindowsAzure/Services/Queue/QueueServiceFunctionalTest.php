@@ -333,9 +333,7 @@ class QueueServiceFunctionalTest extends FunctionalTestBase {
         $this->assertNotNull($ret->getQueues(), 'getQueues');
          
         if ($options->getMaxResults() == 0) {
-            $this->assertEquals(0, count($ret->getNextMarker()),
-                    'When MaxResults is 0, expect getNextMarker (' . 
-                    $ret->getNextMarker() . ')to be have length 0');
+            $this->assertNull($ret->getNextMarker(), 'When MaxResults is 0, expect getNextMarker (' . $ret->getNextMarker() . ')to be null');
 
             if ($options->getPrefix() != null && $options->getPrefix() == QueueServiceFunctionalTestData::$nonExistQueuePrefix) {
                 $this->assertEquals(0, count($ret->getQueues()), 'when MaxResults=0 and Prefix=(\'' . $options->getPrefix() . '\'), then Queues->length');
