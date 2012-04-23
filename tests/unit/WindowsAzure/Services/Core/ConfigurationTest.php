@@ -114,7 +114,7 @@ class ConfigurationTest extends \PHPUnit_Framework_TestCase
     */
     public function testSetPropertyWithNonStringKeyFail()
     {
-        $invalidKey = 1;
+        $invalidKey = new \DateTime();
         $this->setExpectedException(get_class(new InvalidArgumentTypeException('')));
         $config = $this->config = new Configuration();
         $config->setProperty($invalidKey, TestResources::VALUE1);

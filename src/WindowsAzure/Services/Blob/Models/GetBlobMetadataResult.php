@@ -116,7 +116,7 @@ class GetBlobMetadataResult
      */
     public function setEtag($etag)
     {
-        Validate::notNullOrEmpty($etag);
+        Validate::isString($etag);
         $this->_etag = $etag;
     }
     

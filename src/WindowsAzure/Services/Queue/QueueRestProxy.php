@@ -110,7 +110,7 @@ class QueueRestProxy extends ServiceRestProxy implements IQueue
      */
     public function clearMessages($queueName, $queueServiceOptions = null)
     {
-        Validate::notNullOrEmpty($queueName);
+        Validate::isString($queueName);
         
         $method      = Resources::HTTP_DELETE;
         $headers     = array();
@@ -214,9 +214,9 @@ class QueueRestProxy extends ServiceRestProxy implements IQueue
     public function deleteMessage($queueName, $messageId, $popReceipt, 
         $queueServiceOptions = null
     ) {
-        Validate::notNullOrEmpty($queueName);
-        Validate::notNullOrEmpty($messageId);
-        Validate::notNullOrEmpty($popReceipt);
+        Validate::isString($queueName);
+        Validate::isString($messageId);
+        Validate::isString($popReceipt);
         
         $method      = Resources::HTTP_DELETE;
         $headers     = array();
@@ -476,10 +476,10 @@ class QueueRestProxy extends ServiceRestProxy implements IQueue
     public function updateMessage($queueName, $messageId, $popReceipt, $messageText, 
         $visibilityTimeoutInSeconds, $queueServiceOptions = null
     ) {
-        Validate::notNullOrEmpty($queueName);
-        Validate::notNullOrEmpty($messageId);
-        Validate::notNullOrEmpty($popReceipt);
-        Validate::notNullOrEmpty($visibilityTimeoutInSeconds);
+        Validate::isString($queueName);
+        Validate::isString($messageId);
+        Validate::isString($popReceipt);
+        Validate::isString($visibilityTimeoutInSeconds);
         
         $method      = Resources::HTTP_PUT;
         $headers     = array();

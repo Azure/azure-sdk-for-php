@@ -80,7 +80,7 @@ class CreateContainerOptionsTest extends \PHPUnit_Framework_TestCase
     {
         // Setup
         $properties = new CreateContainerOptions();
-        $expected = 1234;
+        $expected = new \DateTime();
         $this->setExpectedException(get_class(new InvalidArgumentTypeException('')));
         
         // Test
