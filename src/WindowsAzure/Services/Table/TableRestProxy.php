@@ -582,14 +582,14 @@ class TableRestProxy extends ServiceRestProxy implements ITable
     }
     
     /**
-    * Gets the properties of the Table service.
-    * 
-    * @param Models\TableServiceOptions $options optional table service options.
-    * 
-    * @return WindowsAzure\Services\Core\Models\GetServicePropertiesResult
-    * 
-    * @see http://msdn.microsoft.com/en-us/library/windowsazure/hh452238.aspx
-    */
+     * Gets the properties of the Table service.
+     * 
+     * @param Models\TableServiceOptions $options optional table service options.
+     * 
+     * @return WindowsAzure\Services\Core\Models\GetServicePropertiesResult
+     * 
+     * @see http://msdn.microsoft.com/en-us/library/windowsazure/hh452238.aspx
+     */
     public function getServiceProperties($options = null)
     {
         if (is_null($options)) {
@@ -611,15 +611,18 @@ class TableRestProxy extends ServiceRestProxy implements ITable
     }
 
     /**
-    * Sets the properties of the Table service.
-    * 
-    * @param ServiceProperties          $serviceProperties new service properties
-    * @param Models\TableServiceOptions $options           optional parameters
-    * 
-    * @return none.
-    * 
-    * @see http://msdn.microsoft.com/en-us/library/windowsazure/hh452240.aspx
-    */
+     * Sets the properties of the Table service.
+     * 
+     * It's recommended to use getServiceProperties, alter the returned object and
+     * then use setServiceProperties with this altered object.
+     * 
+     * @param ServiceProperties          $serviceProperties new service properties
+     * @param Models\TableServiceOptions $options           optional parameters
+     * 
+     * @return none.
+     * 
+     * @see http://msdn.microsoft.com/en-us/library/windowsazure/hh452240.aspx
+     */
     public function setServiceProperties($serviceProperties, $options = null)
     {
         Validate::isTrue(

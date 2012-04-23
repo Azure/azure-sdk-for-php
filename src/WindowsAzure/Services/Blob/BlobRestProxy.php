@@ -408,6 +408,9 @@ class BlobRestProxy extends ServiceRestProxy implements IBlob
     /**
      * Sets the properties of the Blob service.
      * 
+     * It's recommended to use getServiceProperties, alter the returned object and
+     * then use setServiceProperties with this altered object.
+     * 
      * @param ServiceProperties         $serviceProperties new service properties.
      * @param Models\BlobServiceOptions $options           optional parameters
      * 

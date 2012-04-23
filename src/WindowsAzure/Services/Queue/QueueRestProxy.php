@@ -442,6 +442,9 @@ class QueueRestProxy extends ServiceRestProxy implements IQueue
     /**
      * Sets the properties of the Queue service.
      * 
+     * It's recommended to use getServiceProperties, alter the returned object and
+     * then use setServiceProperties with this altered object.
+     * 
      * @param ServiceProperties   $serviceProperties   New service properties.
      * @param QueueServiceOptions $queueServiceOptions Optional queue service options
      * 
