@@ -197,7 +197,6 @@ class EntityTest extends \PHPUnit_Framework_TestCase
         $entity = new Entity();
         $entity->setPartitionKey('123');
         $entity->setRowKey('456');
-        $entity->setTimestamp('2008-10-01T15:26:13Z');
         
         // Assert
         $actual = $entity->isValid();

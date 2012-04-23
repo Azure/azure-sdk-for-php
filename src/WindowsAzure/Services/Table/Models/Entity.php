@@ -253,10 +253,7 @@ class Entity
      * @return none
      */
     public function addProperty($name, $edmType, $value)
-    {
-        $edmType = EdmType::processType($edmType);
-        $value   = EdmType::unserializeQueryValue($edmType, $value);
-        
+    {        
         $p = new Property();
         $p->setEdmType($edmType);
         $p->setValue($value);

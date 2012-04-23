@@ -269,11 +269,12 @@ class AtomReaderWriter implements IAtomReaderWriter
             $attributes = $value->attributes($metadata);
             $type       = $attributes['type'];
             $isnull     = $attributes['null'];
+            $value      = EdmType::unserializeQueryValue((string)$type, $value);
             
             $entity->addProperty(
                 (string)$key,
                 (string)$type,
-                $isnull ? null : (string)$value
+                $isnull ? null : $value
             );
         }
         

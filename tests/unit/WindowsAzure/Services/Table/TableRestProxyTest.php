@@ -337,7 +337,8 @@ class TableRestProxyTest extends TableServiceRestProxyTestBase
         $actual = $result->getEntity();
         $this->assertEquals($expected->getPartitionKey(), $actual->getPartitionKey());
         $this->assertEquals($expected->getRowKey(), $actual->getRowKey());
-        $this->assertCount(count($expected->getProperties()), $actual->getProperties());
+        // Add extra count for the properties because the Timestamp property
+        $this->assertCount(count($expected->getProperties()) + 1, $actual->getProperties());
     }
     
     /**
@@ -538,7 +539,8 @@ class TableRestProxyTest extends TableServiceRestProxyTestBase
         $actual = $this->wrapper->getEntity($name, $expected->getPartitionKey(), $expected->getRowKey());
         $this->assertEquals($expected->getPartitionKey(), $actual->getEntity()->getPartitionKey());
         $this->assertEquals($expected->getRowKey(), $actual->getEntity()->getRowKey());
-        $this->assertCount(count($expected->getProperties()) - 1, $actual->getEntity()->getProperties());
+        // Add +1 to the count to include Timestamp property.
+        $this->assertCount(count($expected->getProperties()), $actual->getEntity()->getProperties());
     }
     
     /**
@@ -724,7 +726,8 @@ class TableRestProxyTest extends TableServiceRestProxyTestBase
         $actual = $result->getEntity();
         $this->assertEquals($expected->getPartitionKey(), $actual->getPartitionKey());
         $this->assertEquals($expected->getRowKey(), $actual->getRowKey());
-        $this->assertCount(count($expected->getProperties()), $actual->getProperties());
+        // Increase thec properties count to incloude the Timestamp property.
+        $this->assertCount(count($expected->getProperties()) + 1, $actual->getProperties());
     }
     
     /**
@@ -759,7 +762,8 @@ class TableRestProxyTest extends TableServiceRestProxyTestBase
         $actual = $entries[0]->getEntity();
         $this->assertEquals($expected->getPartitionKey(), $actual->getPartitionKey());
         $this->assertEquals($expected->getRowKey(), $actual->getRowKey());
-        $this->assertCount(count($expected->getProperties()), $actual->getProperties());
+        // Increase the properties count to include Timestamp property.
+        $this->assertCount(count($expected->getProperties()) + 1, $actual->getProperties());
     }
     
     /**

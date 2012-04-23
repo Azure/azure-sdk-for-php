@@ -68,7 +68,8 @@ class Property
      */
     public function setEdmType($edmType)
     {
-        $this->_edmType = EdmType::processType($edmType);
+        EdmType::isValid($edmType);
+        $this->_edmType = $edmType;
     }
     
     /**
