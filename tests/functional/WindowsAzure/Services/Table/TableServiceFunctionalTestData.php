@@ -26,6 +26,7 @@
 
 namespace Tests\Functional\WindowsAzure\Services\Table;
 
+use WindowsAzure\Utilities;
 use WindowsAzure\Services\Core\Models\Logging;
 use WindowsAzure\Services\Core\Models\Metrics;
 use WindowsAzure\Services\Core\Models\RetentionPolicy;
@@ -105,7 +106,7 @@ class TableServiceFunctionalTestData {
     public static $TEST_TABLE_NAMES;
 
     const IntegerMAX_VALUE = 2147483647;
-    const IntegerMIN_VALUE = -2147483648;
+    public static $IntegerMIN_VALUE;
     const LongBigValue = 1234567890;
     const LongBigNegativeValue = -123456789032;
 
@@ -114,6 +115,7 @@ class TableServiceFunctionalTestData {
     }
 
     public static function setupData() {
+        self::$IntegerMIN_VALUE = -1 - self::IntegerMAX_VALUE;
         $rint = rand(0,1000000);
         self::$testUniqueId = 'qaX' . $rint . 'X';
         self::$nonExistTablePrefix = 'qaX' . ($rint + 1) . 'X';
@@ -399,11 +401,11 @@ class TableServiceFunctionalTestData {
         $e->setPartitionKey(self::getNewKey());
         $e->setRowKey(self::getNewKey());
         $e->addProperty('BINARY', EdmType::BINARY, chr(0) . chr(1) . chr(2) . chr(3) . chr(4));
-        $e->addProperty('BOOLEAN', EdmType::BOOLEAN, 'true');
-        $e->addProperty('DATETIME', EdmType::DATETIME, '2012-01-26T18:26:19.0000473Z');
-        $e->addProperty('DOUBLE', EdmType::DOUBLE, '12345678901');
+        $e->addProperty('BOOLEAN', EdmType::BOOLEAN, true);
+        $e->addProperty('DATETIME', EdmType::DATETIME, Utilities::convertToDateTime('2012-01-26T18:26:19.0000473Z'));
+        $e->addProperty('DOUBLE', EdmType::DOUBLE, 12345678901);
         $e->addProperty('GUID', EdmType::GUID, '90ab64d6-d3f8-49ec-b837-b8b5b6367b74');
-        $e->addProperty('INT32', EdmType::INT32, '23');
+        $e->addProperty('INT32', EdmType::INT32, 23);
         $e->addProperty('INT64', EdmType::INT64, '-1');
         $now = new \DateTime();
         $e->addProperty('STRING', EdmType::STRING, $now->format(\DateTime::COOKIE));
@@ -507,8 +509,8 @@ class TableServiceFunctionalTestData {
         $ret = array();
         array_push($ret, true);
         array_push($ret, false);
-        array_push($ret, 'TRUE');
-        array_push($ret, 1);
+//        array_push($ret, 'TRUE');
+//        array_push($ret, 1);
         return $ret;
     }
 
@@ -581,7 +583,7 @@ class TableServiceFunctionalTestData {
         $ret = array();
         array_push($ret, 0);
         array_push($ret, self::IntegerMAX_VALUE);
-        array_push($ret, self::IntegerMIN_VALUE);
+        array_push($ret, self::$IntegerMIN_VALUE);
         array_push($ret, 35536);
         return $ret;
     }

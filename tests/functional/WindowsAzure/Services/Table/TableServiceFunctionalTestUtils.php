@@ -26,6 +26,7 @@
 
 namespace Tests\Functional\WindowsAzure\Services\Table;
 
+use WindowsAzure\Utilities;
 use WindowsAzure\Core\ServiceException;
 use WindowsAzure\Core\WindowsAzureUtilities;
 use WindowsAzure\Services\Table\TableService;
@@ -91,37 +92,29 @@ class TableServiceFunctionalTestUtils {
 
     private static function cloneRemoveEqNotInTopLevelWorker($filter, $depth) {
         if ($filter instanceof PropertyNameFilter) {
-            $ret = new PropertyNameFilter();
-            $ret->setPropertyName($filter->getPropertyName());
+            $ret = new PropertyNameFilter($filter->getPropertyName());
             return $ret;
         }
         else if ($filter instanceof ConstantFilter) {
-            $ret = new ConstantFilter();
-            $ret->setValue($filter->getValue());
+            $ret = new ConstantFilter($filter->getEdmType(), $filter->getValue());
             return $ret;
         }
         else if ($filter instanceof UnaryFilter) {
-            $ret = new UnaryFilter();
-            $ret->setOperator($filter->getOperator());
             $operand = self::cloneRemoveEqNotInTopLevelWorker($filter->getOperand(), $depth + 1);
-            $ret->setOperand($operand);
+            $ret = new UnaryFilter($filter->getOperator(), $operand);
             return $ret;
         }
         else if ($filter instanceof BinaryFilter) {
             if ($filter->getOperator() == ('eq') && $depth != 0) {
                 return Filter::applyConstant(false);
             }
-            $ret = new BinaryFilter();
-            $ret->setOperator($filter->getOperator());
             $left = self::cloneRemoveEqNotInTopLevelWorker($filter->getLeft(), $depth + 1);
             $right = self::cloneRemoveEqNotInTopLevelWorker($filter->getRight(), $depth + 1);
-            $ret->setLeft($left);
-            $ret->setRight($right);
+            $ret = new BinaryFilter($left, $filter->getOperator(), $right);
             return $ret;
         }
         else if ($filter instanceof QueryStringFilter) {
-            $ret = new QueryStringFilter();
-            $ret->setQueryString($filter->getQueryString());
+            $ret = new QueryStringFilter($filter->getQueryString());
             return $ret;
         }
         else {
@@ -185,11 +178,11 @@ class TableServiceFunctionalTestUtils {
             self::mutateEntityChangeValues($ent);
         }
         else if ($pivot == MutatePivot::AddProperty) {
-            $ent->addProperty('BOOLEAN' . TableServiceFunctionalTestData::getNewKey(), EdmType::BOOLEAN, 'true');
-            $ent->addProperty('DATETIME' . TableServiceFunctionalTestData::getNewKey(), EdmType::DATETIME, '2012-01-26T18:26:19.0000473Z');
-            $ent->addProperty('DOUBLE' . TableServiceFunctionalTestData::getNewKey(), EdmType::DOUBLE, '12345678901');
+            $ent->addProperty('BOOLEAN' . TableServiceFunctionalTestData::getNewKey(), EdmType::BOOLEAN, true);
+            $ent->addProperty('DATETIME' . TableServiceFunctionalTestData::getNewKey(), EdmType::DATETIME, Utilities::convertToDateTime('2012-01-26T18:26:19.0000473Z'));
+            $ent->addProperty('DOUBLE' . TableServiceFunctionalTestData::getNewKey(), EdmType::DOUBLE, 12345678901);
             $ent->addProperty('GUID' . TableServiceFunctionalTestData::getNewKey(), EdmType::GUID, '90ab64d6-d3f8-49ec-b837-b8b5b6367b74');
-            $ent->addProperty('INT32' . TableServiceFunctionalTestData::getNewKey(), EdmType::INT32, '23');
+            $ent->addProperty('INT32' . TableServiceFunctionalTestData::getNewKey(), EdmType::INT32, 23);
             $ent->addProperty('INT64' . TableServiceFunctionalTestData::getNewKey(), EdmType::INT64, '-1');
             $ent->addProperty('STRING' . TableServiceFunctionalTestData::getNewKey(), EdmType::STRING, 'this is a test!');
         }
