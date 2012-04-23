@@ -41,8 +41,8 @@ use WindowsAzure\Services\Table\Models\TableServiceOptions;
 use WindowsAzure\Services\Table\Models\Filters\BinaryFilter;
 use WindowsAzure\Services\Table\Models\Filters\ConstantFilter;
 use WindowsAzure\Services\Table\Models\Filters\Filter;
-use WindowsAzure\Services\Table\Models\Filters\LiteralFilter;
-use WindowsAzure\Services\Table\Models\Filters\RawStringFilter;
+use WindowsAzure\Services\Table\Models\Filters\PropertyNameFilter;
+use WindowsAzure\Services\Table\Models\Filters\QueryStringFilter;
 use WindowsAzure\Services\Table\Models\Filters\UnaryFilter;
 
 class TableServiceFunctionalOptionsTest extends \PHPUnit_Framework_TestCase {
@@ -185,20 +185,18 @@ class TableServiceFunctionalOptionsTest extends \PHPUnit_Framework_TestCase {
     }
 
     public function testCheckBinaryFilter() {
-        $filter = new BinaryFilter();
+        $filter = new BinaryFilter(null, null, null);
         $this->assertNotNull($filter, 'Default $filter');
 
         $this->assertNull($filter->getLeft(), 'Default BinaryFilter->getFilter');
         $this->assertNull($filter->getOperator(), 'Default BinaryFilter->getOperator');
         $this->assertNull($filter->getRight(), 'Default BinaryFilter->getRight');
 
-        $left = new UnaryFilter();
+        $left = new UnaryFilter(null, null);
         $operator = 'foo';
-        $right = new ConstantFilter();
+        $right = new ConstantFilter(null, EdmType::STRING);
 
-        $filter->setLeft($left);
-        $filter->setOperator($operator);
-        $filter->setRight($right);
+        $filter = new BinaryFilter($left, $operator, $right);
 
         $this->assertEquals($left, $filter->getLeft(), 'Set BinaryFilter->getLeft');
         $this->assertEquals($operator, $filter->getOperator(), 'Set BinaryFilter->getOperator');
@@ -247,13 +245,13 @@ class TableServiceFunctionalOptionsTest extends \PHPUnit_Framework_TestCase {
     }
 
     public function testCheckConstantFilter() {
-        $filter = new ConstantFilter();
+        $filter = new ConstantFilter(EdmType::STRING, null);
         $this->assertNotNull($filter, 'Default $filter');
 
         $this->assertNull($filter->getValue(), 'Default ConstantFilter->getValue');
 
         $value = 'foo';
-        $filter->setValue($value);
+        $filter = new ConstantFilter(EdmType::STRING, $value);
 
         $this->assertEquals($value, $filter->getValue(), 'Set ConstantFilter->getValue');
 
@@ -263,54 +261,53 @@ class TableServiceFunctionalOptionsTest extends \PHPUnit_Framework_TestCase {
         $this->assertEquals($value, $filter->getValue(), 'constant factory ConstantFilter->getValue');
     }
 
-    public function testCheckLiteralFilter() {
-        $filter = new LiteralFilter();
+    public function testCheckPropertyNameFilter() {
+        $filter = new PropertyNameFilter(null);
         $this->assertNotNull($filter, 'Default $filter');
 
-        $this->assertNull($filter->getLiteral(), 'Default LiteralFilter->getLiteral');
+        $this->assertNull($filter->getPropertyName(), 'Default PropertyNameFilter->getPropertyName');
 
-        $literal = 'foo';
-        $filter->setLiteral($literal);
-        $this->assertEquals($literal, $filter->getLiteral(), 'Set LiteralFilter->getLiteral');
+        $propertyName = 'foo';
+        $filter = new PropertyNameFilter($propertyName);
+        $this->assertEquals($propertyName, $filter->getPropertyName(), 'Set PropertyNameFilter->getPropertyName');
 
         // Now check the factory.
-        $literal = 'bar';
-        $filter = Filter::applyliteral($literal);
-        $this->assertEquals($literal, $filter->getLiteral(), 'Literal factory LiteralFilter->getLiteral');
+        $PropertyName = 'bar';
+        $filter = Filter::applyPropertyName($propertyName);
+        $this->assertEquals($propertyName, $filter->getPropertyName(), 'PropertyName factory PropertyNameFilter->getPropertyName');
     }
 
-    public function testCheckRawStringFilter() {
-        $filter = new RawStringFilter();
+    public function testCheckQueryStringFilter() {
+        $filter = new QueryStringFilter(null);
         $this->assertNotNull($filter, 'Default $filter');
 
-        $this->assertNull($filter->getRawString(), 'Default RawStringFilter->getRawString');
+        $this->assertNull($filter->getQueryString(), 'Default QueryStringFilter->getQueryString');
 
-        $rawString = 'foo';
-        $filter->setRawString($rawString);
-        $this->assertEquals($rawString, $filter->getRawString(), 'Set RawStringFilter->getRawString');
+        $queryString = 'foo';
+        $filter = new QueryStringFilter($queryString);
+        $this->assertEquals($queryString, $filter->getQueryString(), 'Set QueryStringFilter->getQueryString');
 
         // Now check the factory.
-        $rawString = 'bar';
-        $filter = Filter::applyRawString($rawString);
-        $this->assertEquals($rawString, $filter->getRawString(), 'RawString factory RawStringFilter->getRawString');
+        $queryString = 'bar';
+        $filter = Filter::applyQueryString($queryString);
+        $this->assertEquals($queryString, $filter->getQueryString(), 'QueryString factory QueryStringFilter->getQueryString');
     }
 
     public function testCheckUnaryFilter() {
-        $filter = new UnaryFilter();
+        $filter = new UnaryFilter(null, null);
         $this->assertNotNull($filter, 'Default $filter');
 
         $this->assertNull($filter->getOperand(), 'Default UnaryFilter->getOperand');
         $this->assertNull($filter->getOperator(), 'Default UnaryFilter->getOperator');
 
-        $operand = new BinaryFilter();
+        $operand = new BinaryFilter(null, null, null);
         $operator = 'foo';
-        $filter->setOperand($operand);
-        $filter->setOperator($operator);
+        $filter = new UnaryFilter($operator, $operand);
         $this->assertEquals($operand, $filter->getOperand(), 'Set UnaryFilter->getOperand');
         $this->assertEquals($operator, $filter->getOperator(), 'Set UnaryFilter->getOperator');
 
         // Now check the factory.
-        $operand = new ConstantFilter();
+        $operand = new ConstantFilter(EdmType::STRING, null);
         $filter = Filter::applyNot($operand);
         $this->assertEquals($operand, $filter->getOperand(), 'Unary factory UnaryFilter->getOperand');
         $this->assertEquals('not', $filter->getOperator(), 'Unary factory UnaryFilter->getOperator');

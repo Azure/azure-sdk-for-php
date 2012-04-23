@@ -115,6 +115,8 @@ class FunctionalTestBase extends TableServiceRestProxyTestBase {
             return Utilities::convertToEdmDateTime($value);
         } else if ($value instanceof Entity) {
             return self::entityToString($value);
+        } else if (is_array($value)) {
+            return self::entityPropsToString($value);
         } else if ($value instanceof Filter) {
             return TableServiceFunctionalTestUtils::filtertoString($value);
         } else {
