@@ -92,7 +92,7 @@ class Validate
     /**
      * Throws exception if the provided variable is set to null.
      *
-     * @param mix $var The variable to check.
+     * @param mix    $var  The variable to check.
      * @param string $name The parameter name.
      *
      * @throws \InvalidArgumentException

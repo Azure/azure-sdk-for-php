@@ -71,7 +71,8 @@ class Entity
                 EdmType::validateEdmValue(
                     $value->getEdmType(),
                     $value->getValue(),
-                    $condition),
+                    $condition
+                ),
                 sprintf(Resources::INVALID_PROP_VAL_MSG, $key, $condition)
             );
         }

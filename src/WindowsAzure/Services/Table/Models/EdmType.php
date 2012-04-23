@@ -86,8 +86,8 @@ class EdmType
             case EdmType::GUID:
             case EdmType::BINARY:
             case EdmType::STRING:
-            // NULL also is treated as EdmType::STRING
             case null:
+                // NULL also is treated as EdmType::STRING
                 $condition = 'is_string';
                 return is_string($value);
 
@@ -136,8 +136,8 @@ class EdmType
         case EdmType::INT64:
         case EdmType::GUID:
         case EdmType::STRING:
-        // NULL also is treated as EdmType::STRING
         case null:
+            // NULL also is treated as EdmType::STRING
             // Convert special characters to HTML entities.
             return htmlspecialchars($value);
             
@@ -188,9 +188,9 @@ class EdmType
         case EdmType::GUID:
             return 'guid\'' . $value . '\'';
 
-        // NULL also is treated as EdmType::STRING
         case null:
         case EdmType::STRING:
+            // NULL also is treated as EdmType::STRING
             return '\'' . str_replace('\'', '\'\'', $value) . '\'';
 
         default:
@@ -219,8 +219,8 @@ class EdmType
             case self::GUID:
             case self::STRING:
             case self::INT64:
-            // NULL also is treated as EdmType::STRING
             case null:
+                // NULL also is treated as EdmType::STRING
                 return strval($value);
 
             case self::BINARY:
@@ -262,8 +262,8 @@ class EdmType
         case $type == self::INT32:
         case $type == self::INT64:
         case $type == self::STRING:
-        // NULL also is treated as EdmType::STRING
         case $type == null:
+            // NULL also is treated as EdmType::STRING
             return true;
         
         default:
