@@ -59,6 +59,7 @@ class Resources
     const INVALID_PARAM_MSG    = "The provided variable '%s' should be of type '%s'";
     const INVALID_BTE_MSG      = "The blob block type must exist in %s";
     const INVALID_BLOB_PAT_MSG = 'The provided access type is invalid.';
+    const INVALID_SVC_PROP_MSG = 'The provided service properties is invalid.';
 
     // HTTP Headers
     const X_MS_HEADER_PREFIX                 = 'x-ms-';

@@ -27,6 +27,7 @@ use WindowsAzure\Utilities;
 use WindowsAzure\Resources;
 use WindowsAzure\Validate;
 use WindowsAzure\Core\WindowsAzureUtilities;
+use WindowsAzure\Services\Core\Models\ServiceProperties;
 use WindowsAzure\Services\Core\ServiceRestProxy;
 use WindowsAzure\Services\Blob\IBlob;
 use WindowsAzure\Services\Blob\Models\BlobServiceOptions;
@@ -416,6 +417,11 @@ class BlobRestProxy extends ServiceRestProxy implements IBlob
      */
     public function setServiceProperties($serviceProperties, $options = null)
     {
+        Validate::isTrue(
+            $serviceProperties instanceof ServiceProperties,
+            Resources::INVALID_SVC_PROP_MSG
+        );
+        
         $method      = Resources::HTTP_PUT;
         $headers     = array();
         $queryParams = array();

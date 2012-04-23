@@ -144,6 +144,9 @@ class QueueRestProxy extends ServiceRestProxy implements IQueue
     public function createMessage($queueName, $messageText,
         $createMessageOptions = null
     ) {
+        Validate::isString($queueName);
+        Validate::isString($messageText);
+        
         $method      = Resources::HTTP_POST;
         $headers     = array();
         $queryParams = array();
@@ -181,6 +184,8 @@ class QueueRestProxy extends ServiceRestProxy implements IQueue
      */
     public function createQueue($queueName, $createQueueOptions = null)
     {
+        Validate::isString($queueName);
+        
         $method      = Resources::HTTP_PUT;
         $headers     = array();
         $queryParams = array();
@@ -247,6 +252,8 @@ class QueueRestProxy extends ServiceRestProxy implements IQueue
      */
     public function deleteQueue($queueName)
     {
+        Validate::isString($queueName);
+        
         $method      = Resources::HTTP_DELETE;
         $headers     = array();
         $queryParams = array();
@@ -266,6 +273,8 @@ class QueueRestProxy extends ServiceRestProxy implements IQueue
      */
     public function getQueueMetadata($queueName, $queueServiceOptions = null)
     {
+        Validate::isString($queueName);
+        
         $method      = Resources::HTTP_GET;
         $headers     = array();
         $queryParams = array();
@@ -333,6 +342,8 @@ class QueueRestProxy extends ServiceRestProxy implements IQueue
      */
     public function listMessages($queueName, $listMessagesOptions = null)
     {
+        Validate::isString($queueName);
+        
         $method      = Resources::HTTP_GET;
         $headers     = array();
         $queryParams = array();
@@ -366,6 +377,8 @@ class QueueRestProxy extends ServiceRestProxy implements IQueue
      */
     public function peekMessages($queueName, $peekMessagesOptions = null)
     {
+        Validate::isString($queueName);
+        
         $method      = Resources::HTTP_GET;
         $headers     = array();
         $queryParams = array();
@@ -400,6 +413,9 @@ class QueueRestProxy extends ServiceRestProxy implements IQueue
     public function setQueueMetadata($queueName, $metadata, 
         $queueServiceOptions = null
     ) {
+        Validate::isString($queueName);
+        Validate::isArray($metadata);
+        
         $method      = Resources::HTTP_PUT;
         $headers     = array();
         $queryParams = array();
@@ -434,6 +450,11 @@ class QueueRestProxy extends ServiceRestProxy implements IQueue
     public function setServiceProperties($serviceProperties, 
         $queueServiceOptions = null
     ) {
+        Validate::isTrue(
+            $serviceProperties instanceof ServiceProperties,
+            Resources::INVALID_SVC_PROP_MSG
+        );
+                
         $method      = Resources::HTTP_PUT;
         $headers     = array();
         $queryParams = array();
@@ -479,7 +500,8 @@ class QueueRestProxy extends ServiceRestProxy implements IQueue
         Validate::isString($queueName);
         Validate::isString($messageId);
         Validate::isString($popReceipt);
-        Validate::isString($visibilityTimeoutInSeconds);
+        Validate::isString($messageText);
+        Validate::isInteger($visibilityTimeoutInSeconds);
         
         $method      = Resources::HTTP_PUT;
         $headers     = array();

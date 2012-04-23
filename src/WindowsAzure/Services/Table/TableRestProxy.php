@@ -27,6 +27,7 @@ use WindowsAzure\Resources;
 use WindowsAzure\Utilities;
 use WindowsAzure\Validate;
 use WindowsAzure\Core\HttpCallContext;
+use WindowsAzure\Services\Core\Models\ServiceProperties;
 use WindowsAzure\Services\Core\ServiceRestProxy;
 use WindowsAzure\Services\Table\Models\TableServiceOptions;
 use WindowsAzure\Services\Core\Models\GetServicePropertiesResult;
@@ -621,6 +622,11 @@ class TableRestProxy extends ServiceRestProxy implements ITable
     */
     public function setServiceProperties($serviceProperties, $options = null)
     {
+        Validate::isTrue(
+            $serviceProperties instanceof ServiceProperties,
+            Resources::INVALID_SVC_PROP_MSG
+        );
+        
         $method      = Resources::HTTP_PUT;
         $headers     = array();
         $queryParams = array();
