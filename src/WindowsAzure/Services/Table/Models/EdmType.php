@@ -67,14 +67,15 @@ class EdmType
     /**
      * Validates that the value associated with the EDM type is valid.
      * 
-     * @param string $type  The EDM type.
-     * @param mix    $value The EDM value.
+     * @param string $type       The EDM type.
+     * @param mix    $value      The EDM value.
+     * @param string &$condition The error message.
      * 
      * @return boolean
      * 
      * @throws \InvalidArgumentException 
      */
-    public static function validateEdmValue($type, $value)
+    public static function validateEdmValue($type, $value, &$condition = null)
     {
         // Having null value means that the user wants to remove the property name
         // associated with this value. Leave the value as null so this hold.
@@ -87,22 +88,28 @@ class EdmType
             case EdmType::STRING:
             // NULL also is treated as EdmType::STRING
             case null:
+                $condition = 'is_string';
                 return is_string($value);
 
             case EdmType::DOUBLE:
+                $condition = 'is_double';
                 return is_double($value);
                 
             case EdmType::INT32:
             case EdmType::INT64:
+                $condition = 'is_int';
                 return is_int($value);
 
             case EdmType::DATETIME:
+                $condition = 'instanceof \DateTime';
                 return $value instanceof \DateTime;
 
             case EdmType::BOOLEAN:
+                $condition = 'is_bool';
                 return is_bool($value);
 
             case null:
+                $condition = 'is_null';
                 return is_null($value);
 
             default:

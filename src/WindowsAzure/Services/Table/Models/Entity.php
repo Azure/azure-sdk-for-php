@@ -68,8 +68,11 @@ class Entity
                 Resources::INVALID_PROP_MSG
             );
             Validate::isTrue(
-                EdmType::validateEdmValue($value->getEdmType(), $value->getValue()),
-                sprintf(Resources::INVALID_PROP_VAL_MSG, $key)
+                EdmType::validateEdmValue(
+                    $value->getEdmType(),
+                    $value->getValue(),
+                    $condition),
+                sprintf(Resources::INVALID_PROP_VAL_MSG, $key, $condition)
             );
         }
     }
