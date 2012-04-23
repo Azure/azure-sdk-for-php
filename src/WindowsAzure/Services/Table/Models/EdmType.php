@@ -88,6 +88,8 @@ class EdmType
                 return is_string($value);
 
             case EdmType::DOUBLE:
+                return is_double($value);
+                
             case EdmType::INT32:
             case EdmType::INT64:
                 return is_int($value);
@@ -219,6 +221,8 @@ class EdmType
                 return Utilities::toBoolean($value);
 
             case self::DOUBLE:
+                return doubleval($value);
+                
             case self::INT32:
                 return intval($value);
 
