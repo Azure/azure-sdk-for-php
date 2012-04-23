@@ -72,9 +72,6 @@ class TableServiceFunctionalParametersTest extends FunctionalTestBase {
     * @covers WindowsAzure\Services\Table\TableRestProxy::setServiceProperties
     */
     public function testSetServicePropertiesNullOptions1() {
-        // TODO: Remove https://github.com/WindowsAzure/azure-sdk-for-php/issues/165
-        $this->fail('This gives fatal error: Issue #165');
-        
         try {
             $this->wrapper->setServiceProperties(new ServiceProperties());
             $this->fail('Expect default service properties to cause service to error');
@@ -122,9 +119,6 @@ class TableServiceFunctionalParametersTest extends FunctionalTestBase {
     * @covers WindowsAzure\Services\Table\TableRestProxy::setServiceProperties
     */
     public function testSetServicePropertiesNullOptions4() {
-        // TODO: Remove https://github.com/WindowsAzure/azure-sdk-for-php/issues/165
-        $this->fail('This gives fatal error: Issue #165');
-        
         try {
             $this->wrapper->setServiceProperties(new ServiceProperties(), null);
             $this->fail('Expect default service properties to cause service to error');
@@ -174,9 +168,6 @@ class TableServiceFunctionalParametersTest extends FunctionalTestBase {
     * @covers WindowsAzure\Services\Table\TableRestProxy::getTable
     */
     public function testGetTableNullOptions() {
-        // TODO: https://github.com/WindowsAzure/azure-sdk-for-php/issues/166
-        $this->fail('SDK needs to implement getTable');
-
         try {
             $this->wrapper->getTable(null);
             $this->fail('Expect null table to throw');
