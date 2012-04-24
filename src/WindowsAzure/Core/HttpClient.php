@@ -285,9 +285,6 @@ class HttpClient implements IHttpClient
      */
     public function setConfig($name, $value = null)
     {
-        Validate::isString($name);
-        Validate::notNullOrEmpty($name);
-        
         $this->_request->setConfig($name, $value);
     }
     

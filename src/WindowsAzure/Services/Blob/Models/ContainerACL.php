@@ -23,11 +23,13 @@
  */
 
 namespace WindowsAzure\Services\Blob\Models;
+use WindowsAzure\Utilities;
+use WindowsAzure\Validate;
+use WindowsAzure\Resources;
 use WindowsAzure\Services\Blob\Models\AccessPolicy;
 use WindowsAzure\Services\Blob\Models\SignedIdentifier;
 use WindowsAzure\Core\WindowsAzureUtilities;
-use WindowsAzure\Utilities;
-use WindowsAzure\Validate;
+use WindowsAzure\Services\Blob\Models\PublicAccessType;
 
 /**
  * Holds conatiner ACL members.
@@ -172,7 +174,7 @@ class ContainerAcl
      */
     public function setEtag($etag)
     {
-        Validate::notNullOrEmpty($etag);
+        Validate::isString($etag);
         $this->_etag = $etag;
     }
 
@@ -195,7 +197,10 @@ class ContainerAcl
      */
     public function setPublicAccess($publicAccess)
     {
-        Validate::notNullOrEmpty($publicAccess);
+        Validate::isTrue(
+            PublicAccessType::isValid($publicAccess),
+            Resources::INVALID_BLOB_PAT_MSG
+        );
         $this->_publicAccess = $publicAccess;
     }
 
@@ -222,7 +227,6 @@ class ContainerAcl
      */
     public function addSignedIdentifier($id, $start, $expiry, $permission)
     {
-        Validate::notNullOrEmpty($id);
         Validate::isString($id);
         Validate::isString($start);
         Validate::isString($expiry);

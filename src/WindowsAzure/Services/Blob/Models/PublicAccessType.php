@@ -41,6 +41,26 @@ class PublicAccessType
     const NONE                = Resources::EMPTY_STRING;
     const BLOBS_ONLY          = 'blob';
     const CONTAINER_AND_BLOBS = 'container';
+    
+    /**
+     * Validates the public access.
+     * 
+     * @param string $type The public access type.
+     * 
+     * @return boolean
+     */
+    public static function isValid($type)
+    {
+        switch ($type) {
+        case self::NONE:
+        case self::BLOBS_ONLY:
+        case self::CONTAINER_AND_BLOBS:
+            return true;
+
+        default:
+            return false;
+        }
+    }
 }
 
 ?>

@@ -98,7 +98,7 @@ class UpdateMessageResult
      */
     public function setPopReceipt($popReceipt)
     {
-        Validate::notNullOrEmpty($popReceipt);
+        Validate::isString($popReceipt);
         $this->_popReceipt = $popReceipt;
     }
 }

@@ -68,8 +68,12 @@ class Entity
                 Resources::INVALID_PROP_MSG
             );
             Validate::isTrue(
-                EdmType::validateEdmValue($value->getEdmType(), $value->getValue()),
-                sprintf(Resources::INVALID_PROP_VAL_MSG, $key)
+                EdmType::validateEdmValue(
+                    $value->getEdmType(),
+                    $value->getValue(),
+                    $condition
+                ),
+                sprintf(Resources::INVALID_PROP_VAL_MSG, $key, $condition)
             );
         }
     }
@@ -253,10 +257,7 @@ class Entity
      * @return none
      */
     public function addProperty($name, $edmType, $value)
-    {
-        $edmType = EdmType::processType($edmType);
-        $value   = EdmType::unserializeQueryValue($edmType, $value);
-        
+    {        
         $p = new Property();
         $p->setEdmType($edmType);
         $p->setValue($value);

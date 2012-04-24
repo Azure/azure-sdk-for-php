@@ -76,7 +76,7 @@ class ValidateTest extends \PHPUnit_Framework_TestCase
     public function testIsStringWithNonString()
     {
         $this->setExpectedException(get_class(new InvalidArgumentTypeException('')));
-        Validate::isString(123);
+        Validate::isString(new \DateTime());
     }
     
     /**
@@ -87,15 +87,6 @@ class ValidateTest extends \PHPUnit_Framework_TestCase
         Validate::isBoolean(true);
         
         $this->assertTrue(true);
-    }
-    
-    /**
-     * @covers WindowsAzure\Validate::isBoolean
-     */
-    public function testIsBooleanWithNonBoolean()
-    {
-        $this->setExpectedException(get_class(new InvalidArgumentTypeException('')));
-        Validate::isBoolean('I\'m not boolean');
     }
     
     /**
@@ -114,26 +105,7 @@ class ValidateTest extends \PHPUnit_Framework_TestCase
     public function testIsIntegerWithNonInteger()
     {
         $this->setExpectedException(get_class(new InvalidArgumentTypeException('')));
-        Validate::isInteger('I\'m not Integer');
-    }
-    
-    /**
-     * @covers WindowsAzure\Validate::notNullOrEmpty
-     */
-    public function testNotNullOrEmptyWithNonEmpty()
-    {
-        Validate::notNullOrEmpty(1234);
-        
-        $this->assertTrue(true);
-    }
-    
-    /**
-     * @covers WindowsAzure\Validate::notNullOrEmpty
-     */
-    public function testNotNullOrEmptyWithEmpty()
-    {
-        $this->setExpectedException('\InvalidArgumentException');
-        Validate::notNullOrEmpty(Resources::EMPTY_STRING);
+        Validate::isInteger(new \DateTime());
     }
     
     /**
@@ -175,10 +147,23 @@ class ValidateTest extends \PHPUnit_Framework_TestCase
         Validate::isDate('not date');
     }
     
-    public function testIsValidString()
+        /**
+* @covers WindowsAzure\Validate::notNullOrEmpty
+*/
+    public function testNotNullOrEmptyWithNonEmpty()
     {
-        Validate::isValidString('ValidString');
+        Validate::notNullOrEmpty(1234);
+        
         $this->assertTrue(true);
+    }
+    
+    /**
+* @covers WindowsAzure\Validate::notNullOrEmpty
+*/
+    public function testNotNullOrEmptyWithEmpty()
+    {
+        $this->setExpectedException('\InvalidArgumentException');
+        Validate::notNullOrEmpty(Resources::EMPTY_STRING);
     }
 }
 

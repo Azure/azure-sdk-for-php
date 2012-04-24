@@ -68,7 +68,9 @@ class Validate
      */
     public static function isString($var, $name = null)
     {
-        if (!is_string($var) && $var != Resources::EMPTY_STRING) {
+        try {
+            (string)$var;
+        } catch (\Exception $e) {
             throw new InvalidArgumentTypeException(gettype(''), $name);
         }
     }
@@ -84,8 +86,25 @@ class Validate
      */
     public static function isBoolean($var)
     {
-        if (!is_bool($var)) {
-            throw new InvalidArgumentTypeException(gettype(true));
+        (bool)$var;
+    }
+    
+    /**
+     * Throws exception if the provided variable is set to null.
+     *
+     * @param mix    $var  The variable to check.
+     * @param string $name The parameter name.
+     *
+     * @throws \InvalidArgumentException
+     *
+     * @return none
+     */
+    public static function notNullOrEmpty($var, $name = null)
+    {
+        if (is_null($var) || empty($var)) {
+            throw new \InvalidArgumentException(
+                sprintf(Resources::NULL_ERROR_MSG, $name)
+            );
         }
     }
     
@@ -101,27 +120,10 @@ class Validate
      */
     public static function isInteger($var, $name = null)
     {
-        if (!is_int($var)) {
-            throw new InvalidArgumentTypeException($name, gettype(123));
-        }
-    }
-    
-    /**
-     * Throws exception if the provided variable is set to null.
-     *
-     * @param mix    $var  The variable to check.
-     * @param string $name The parameter name.
-     * 
-     * @throws \InvalidArgumentException
-     * 
-     * @return none
-     */
-    public static function notNullOrEmpty($var, $name = null)
-    {
-        if (is_null($var) || empty($var)) {
-            throw new \InvalidArgumentException(
-                sprintf(Resources::NULL_ERROR_MSG, $name)
-            );
+        try {
+            (int)$var;
+        } catch (\Exception $e) {
+            throw new InvalidArgumentTypeException(gettype(123), $name);
         }
     }
     
@@ -156,34 +158,6 @@ class Validate
         if (gettype($date) != 'object' || get_class($date) != 'DateTime') {
             throw new InvalidArgumentTypeException('DateTime');
         }
-    }
-    
-    /**
-     * Validates if the given variable is string and not null or empty.
-     * 
-     * @param mix    $var  The variable to check.
-     * @param string $name The parameter name.
-     * 
-     * @return none
-     */
-    public static function isValidString($var, $name = null)
-    {
-        self::isString($var, $name);
-        self::notNullOrEmpty($var, $name);
-    }
-    
-    /**
-     * Validates if the given variable is integer and not null or empty.
-     * 
-     * @param mix    $var  The variable to check.
-     * @param string $name The parameter name.
-     * 
-     * @return none
-     */
-    public static function isValidInteger($var, $name = null)
-    {
-        self::isInteger($var, $name);
-        self::notNullOrEmpty($var, $name);
     }
 }
 

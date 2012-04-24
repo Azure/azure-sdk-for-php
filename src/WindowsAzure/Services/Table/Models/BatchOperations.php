@@ -104,7 +104,7 @@ class BatchOperations
      */
     public function addInsertEntity($table, $entity)
     {
-        Validate::isValidString($table);
+        Validate::isString($table);
         Validate::notNullOrEmpty($entity);
         
         $operation = new BatchOperation();
@@ -125,7 +125,7 @@ class BatchOperations
      */
     public function addUpdateEntity($table, $entity)
     {
-        Validate::isValidString($table);
+        Validate::isString($table);
         Validate::notNullOrEmpty($entity);
         
         $operation = new BatchOperation();
@@ -146,7 +146,7 @@ class BatchOperations
      */
     public function addMergeEntity($table, $entity)
     {
-        Validate::isValidString($table);
+        Validate::isString($table);
         Validate::notNullOrEmpty($entity);
         
         $operation = new BatchOperation();
@@ -167,7 +167,7 @@ class BatchOperations
      */
     public function addInsertOrReplaceEntity($table, $entity)
     {
-        Validate::isValidString($table);
+        Validate::isString($table);
         Validate::notNullOrEmpty($entity);
         
         $operation = new BatchOperation();
@@ -188,7 +188,7 @@ class BatchOperations
      */
     public function addInsertOrMergeEntity($table, $entity)
     {
-        Validate::isValidString($table);
+        Validate::isString($table);
         Validate::notNullOrEmpty($entity);
         
         $operation = new BatchOperation();
@@ -211,7 +211,7 @@ class BatchOperations
      */
     public function addDeleteEntity($table, $partitionKey, $rowKey, $etag = null)
     {
-        Validate::isValidString($table);
+        Validate::isString($table);
         Validate::isTrue(!is_null($partitionKey), Resources::NULL_TABLE_KEY_MSG);
         Validate::isTrue(!is_null($rowKey), Resources::NULL_TABLE_KEY_MSG);
         
