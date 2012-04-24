@@ -777,6 +777,16 @@ class TableRestProxy extends ServiceRestProxy implements ITable
             $timeout
         );
         
+        // One can specify the NextTableName option to get table entities starting 
+        // from the specified name. However, there appears to be an issue in the 
+        // Azure Table service where this does not engage on the server unless 
+        // $filter appears in the URL. The current behavior is to just ignore the 
+        // NextTableName options, which is not expected or easily detectable.
+        if (   array_key_exists(Resources::QP_NEXT_TABLE_NAME, $queryParams)
+            && !array_key_exists(Resources::QP_FILTER, $queryParams)) {
+            $queryParams[Resources::QP_FILTER] = Resources::EMPTY_STRING;
+        }
+        
         $response = $this->send($method, $headers, $queryParams, $path, $statusCode);
         $tables   = $this->_atomSerializer->parseTableEntries($response->getBody());
         
