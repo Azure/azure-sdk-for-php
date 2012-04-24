@@ -38,62 +38,67 @@ use PEAR2\WindowsAzure\Validate;
  */
 class CopyBlobOptions extends BlobServiceOptions
 { 
-    /*
+    /**
+     * @var AccessCondition
+     */
+    private $_accessCondition;
+    
+    /**
      * @var \Date
      */
     private $_date;
 
-    /*
+    /**
      * @var string
      */
-    private $_version;
+    private $_copySource;
     
-    /*
-     * @var \Name
-     */
-    private $_copySourceName;
-    
-    /*
-     * @var \NameValue collection
+    /**
+     * @var array
      */
     private $_metadata;
     
-    /*
+    /**
      * @var \DateTime
      */
     private $_sourceIfModifiedSince;
     
-    /*
+    /**
      * @var \DateTime
      */
     private $_sourceIfUnModifiedSince;
     
-    /*
+    /**
      * @var string
      */
     private $_sourceIfMatch;
     
-    /*
+    /**
      * @var string
      */
     private $_sourceIfNoneMatch; 
     
-    /*
+    /**
+     * @var string 
+     */
+    private $_sourceSnapshot;
+    
+    /**
      * @var \DateTime
      */
     private $_ifModifiedSince; 
     
-    /*
+    /**
      * @var \DateTime
      */
     private $_ifUnmodifiedSince; 
     
-    /* 
+    /** 
      * @var string
      */
     private $_ifMatch;
     
-    /*
+    /**
      * @var string
      */
     private $_ifNoneMatch; 
@@ -103,10 +108,32 @@ class CopyBlobOptions extends BlobServiceOptions
      */
     private $_leaseId;
     
-    /*
+    /**
      * @var sourceLeaseId
      */
     private $_sourceLeaseId;
+    
+        /**
+     * Gets access condition
+     * 
+     * @return AccessCondition
+     */
+    public function getAccessCondition()
+    {
+        return $this->_accessCondition;
+    }
+    
+    /**
+     * Sets access condition
+     * 
+     * @param AccessCondition $accessCondition value to use.
+     * 
+     * @return none.
+     */
+    public function setAccessCondition($accessCondition)
+    {
+        $this->_accessCondition = $accessCondition;
+    }
     
     /**
      * Gets the Coordinated Universal Time (UTC) for the request.
@@ -128,28 +155,6 @@ class CopyBlobOptions extends BlobServiceOptions
     public function setDate($date)
     {
         $this->_date = $date;
-    }
-    
-    /**
-     * Gets storage service version.
-     *
-     * @return string.
-     */
-    public function getVersion()
-    {
-        return $this->_storageServiceVersion;
-    }
-
-    /**
-     * Sets storage service version.
-     *
-     * @param string $version value.
-     *
-     * @return none.
-     */
-    public function setVersion($version)
-    {
-        $this->_storageServiceVersion = $version;
     }
     
     /**
@@ -175,9 +180,9 @@ class CopyBlobOptions extends BlobServiceOptions
     }
     
     /**
-     * Gets meta data.
+     * Gets metadata.
      *
-     * @return string.
+     * @return array.
      */
     public function getMetadata()
     {
@@ -185,9 +190,9 @@ class CopyBlobOptions extends BlobServiceOptions
     }
 
     /**
-     * Sets meta data.
+     * Sets metadata.
      *
-     * @param string $metadata value.
+     * @param array $metadata value.
      *
      * @return none.
      */
@@ -199,7 +204,7 @@ class CopyBlobOptions extends BlobServiceOptions
     /**
      * Gets source if modified since.
      *
-     * @return \@DateTime.
+     * @return \DateTime.
      */
     public function getSourceIfModifiedSince()
     {
@@ -209,7 +214,7 @@ class CopyBlobOptions extends BlobServiceOptions
     /**
      * Sets source if modified since.
      *
-     * @param string $sourceIfModifiedSince value to use.
+     * @param \DateTime $sourceIfModifiedSince value to use.
      * 
      * @return none.
      */
@@ -221,7 +226,7 @@ class CopyBlobOptions extends BlobServiceOptions
     /**
      * Gets source if unmodified since.
      *
-     * @return string.
+     * @return \DateTime.
      */
     public function getSourceIfUnmodifiedSince()
     {
@@ -231,7 +236,7 @@ class CopyBlobOptions extends BlobServiceOptions
     /**
      * Sets source if unmodified since.
      *
-     * @param string $sourceIfUnmodifiedSince value.
+     * @param \DateTime $sourceIfUnmodifiedSince value.
      *
      * @return none.
      */
@@ -285,6 +290,28 @@ class CopyBlobOptions extends BlobServiceOptions
     }
     
     /**
+     * Gets source snapshot. 
+     * 
+     * @return string
+     */
+    public function getSourceSnapshot()
+    {
+        return $this->_sourceSnapshot;
+    }
+       
+    /**
+     * Sets source snapshot. 
+     * 
+     * @param type $sourceSnapshot 
+     * 
+     * @return none
+     */
+    public function setSourceSnapshot($sourceSnapshot)
+    {
+        $this->_sourceSnapshot = $sourceSnapshot;
+    }
+    
+    /**
      * Gets if modified since.
      *
      * @return \DateTime.
@@ -297,7 +324,7 @@ class CopyBlobOptions extends BlobServiceOptions
     /**
      * Sets if modified since.
      *
-     * @param string $ifModifiedSince value.
+     * @param \DateTime $ifModifiedSince value.
      *
      * @return none.
      */
@@ -319,7 +346,7 @@ class CopyBlobOptions extends BlobServiceOptions
     /**
      * Sets if unmodified since.
      *
-     * @param string $ifUnmodifiedSince value.
+     * @param \DateTime $ifUnmodifiedSince value.
      *
      * @return none.
      */
@@ -375,7 +402,7 @@ class CopyBlobOptions extends BlobServiceOptions
     /**
      * Gets lease ID.
      *
-     * @return array.
+     * @return string.
      */
     public function getLeaseId()
     {

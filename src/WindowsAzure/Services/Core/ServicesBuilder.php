@@ -91,7 +91,9 @@ class ServicesBuilder implements IServiceBuilder
         $httpClient = new HttpClient();
 
         $blobWrapper = new BlobRestProxy(
-            $httpClient, $config->getProperty(BlobSettings::URI)
+            $httpClient, 
+            $config->getProperty(BlobSettings::URI),
+            $config->getProperty(BlobSettings::ACCOUNT_NAME)
         );
 
         // Adding date filter

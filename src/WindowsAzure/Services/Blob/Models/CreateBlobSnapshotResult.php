@@ -29,7 +29,7 @@ use PEAR2\WindowsAzure\Utilities;
 use PEAR2\WindowsAzure\Core\WindowsAzureUtilities;
 
 /**
- * The result of snapshotting a blob. 
+ * The result of creating Blob snapshot. 
  *
  * @category  Microsoft
  * @package   PEAR2\WindowsAzure\Services\Blob\Models
@@ -39,9 +39,9 @@ use PEAR2\WindowsAzure\Core\WindowsAzureUtilities;
  * @version   Release: @package_version@
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
-class SnapshotBlobResult
+class CreateBlobSnapshotResult
 {
-    /*
+    /**
      * A DateTime value which uniquely identifies the snapshot. 
      * @var \DateTime
      */
@@ -78,7 +78,8 @@ class SnapshotBlobResult
     private $_date;
     
     /**
-     * Creates snapshotBlobResult object from the response of the copy blob request.
+     * Creates CreateBlobSnapshotResult object from the response of the 
+     * create Blob snapshot request.
      * 
      * @param array $header HTTP response header
      * 
@@ -86,33 +87,31 @@ class SnapshotBlobResult
      */
     public static function create($header)
     {
-        $snapshotBlobResult = new snapshotBlobResult();
+        $createBlobSnapshotResult = new CreateBlobSnapshotResult();
         $headerWithLowerCaseKey  = Utilities::keysToLower($header);
-
-        $snapshotBlobResult->setSnapshot(
-            $headerWithLowerCaseKey[Resources::Snapshot]
-            );
         
-        $snapshotBlobResult->setEtag($headerWithLowerCaseKey[Resources::ETAG]);
+        $createBlobSnapshotResult->setEtag(
+            $headerWithLowerCaseKey[Resources::ETAG]);
         
-        $snapshotBlobResult->setLastModified(
+        $createBlobSnapshotResult->setLastModified(
             WindowsAzureUtilities::rfc1123ToDateTime(
                 $headerWithLowerCaseKey[Resources::LAST_MODIFIED]
             ));
         
-        $snapshotBlobResult->setRequestId(
+        $createBlobSnapshotResult->setRequestId(
             $headerWithLowerCaseKey[Resources::X_MS_REQUEST_ID]
             );
         
-        $snapshotBlobResult->setVersion(
+        $createBlobSnapshotResult->setVersion(
             $headerWithLowerCaseKey[Resources::X_MS_VERSION]
             );
         
-        $snapshotBlobResult->setDate(
-            $headerWithLowerCaseKey[Resources::DATE]
-            );
+        $createBlobSnapshotResult->setDate(
+            WindowsAzureUtilities::rfc1123ToDateTime(
+                $headerWithLowerCaseKey[Resources::DATE]
+            ));
         
-        return $snapshotBlobResult;
+        return $createBlobSnapshotResult;
     }
     
     /**

@@ -46,6 +46,7 @@ class ServiceRestProxy
     private $_channel;
     private $_filters;
     private $_url;
+    private $_accountName;
     
     /**
      * Constructor
@@ -56,11 +57,12 @@ class ServiceRestProxy
      * 
      * @return array.
      */
-    public function __construct($channel, $uri)
+    public function __construct($channel, $uri, $accountName = '')
     {
-        $this->_url     = new Url($uri);
-        $this->_channel = $channel;
-        $this->_filters = array();
+        $this->_url         = new Url($uri);
+        $this->_channel     = $channel;
+        $this->_accountName = $accountName;
+        $this->_filters     = array();
     }
     
     /**
@@ -71,6 +73,16 @@ class ServiceRestProxy
     public function getFilters()
     {
         return $this->_filters;
+    }
+    
+    /**
+     * Get the account name.
+     *
+     * @return string
+     */
+    public function getAccountName()
+    {
+        return $this->_accountName;
     }
     
     /**
@@ -88,7 +100,7 @@ class ServiceRestProxy
      */
     protected function send($method, $headers, $queryParams, $path, $statusCode,
         $body = Resources::EMPTY_STRING, $config = array()
-    ) {
+    ) {    
         $channel = clone $this->_channel;
         $url     = clone $this->_url;
         
@@ -110,8 +122,7 @@ class ServiceRestProxy
         foreach ($config as $key => $value) {
             if (!empty($value)) {
                 $channel->setConfig($key, $value);
-            }
-                
+            }      
         }
         
         $channel->send($this->_filters, $url);

@@ -120,6 +120,15 @@ class Validate
     }
     
     /**
+     * Returns whether the variable is an empty or null string. 
+     * @param string  $var 
+     */
+    public static function IsNullOrEmptyString($var)
+    {
+        return (!isset($var) || trim($var)==='');
+    }
+    
+    /**
      * Throws exception if the provided condition is not satisfied.
      *
      * @param bool   $isSatisfied    condition result.
@@ -151,6 +160,7 @@ class Validate
             throw new InvalidArgumentTypeException('DateTime');
         }
     }
+
 }
 
 ?>

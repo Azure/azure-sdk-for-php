@@ -36,39 +36,39 @@ use PEAR2\WindowsAzure\Validate;
  * @version   Release: @package_version@
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
-class SnapshotBlobOptions extends BlobServiceOptions
+class CreateBlobSnapshotOptions extends BlobServiceOptions
 { 
-    /*
+    /**
      * @var \DateTime
      */
     private $_date;
 
-    /*
+    /**
      * @var string
      */
     private $_version;
     
-    /*
-     * @var \NameValue
+    /**
+     * @var array
      */
-    private $_metaData;
+    private $_metadata;
     
-    /*
+    /**
      * @var \DateTime
      */
     private $_ifModifiedSince; 
     
-    /*
+    /**
      * @var \DateTime
      */
     private $_ifUnmodifiedSince; 
     
-    /* 
+    /**
      * @var string
      */
     private $_ifMatch;
     
-    /*
+    /**
      * @var string
      */
     private $_ifNoneMatch; 
@@ -123,28 +123,28 @@ class SnapshotBlobOptions extends BlobServiceOptions
     }
     
     /**
-     * Gets meta data.
+     * Gets metadata.
      *
-     * @return string.
+     * @return array.
      */
-    public function getMetaData()
+    public function getMetadata()
     {
-        return $this->_metaData;
+        return $this->_metadata;
     }
 
     /**
-     * Sets meta data.
+     * Sets metadata.
      *
-     * @param string $metadata value.
+     * @param array $metadata value.
      *
      * @return none.
      */
-    public function setMetaData($metaData)
+    public function setMetadata($metadata)
     {
-        $this->_metaData = $metaData;
+        $this->_metadata = $metadata;
     }
     
-    /*
+    /**
      * Gets if modified since.
      * 
      * return \DateTime.
@@ -154,7 +154,7 @@ class SnapshotBlobOptions extends BlobServiceOptions
         return $this->_ifModifiedSince;
     }
     
-    /*
+    /**
      * Sets if modified since.
      * 
      * @param \DateTime $ifModifiedSince value
@@ -233,7 +233,7 @@ class SnapshotBlobOptions extends BlobServiceOptions
     /**
      * Gets lease ID.
      *
-     * @return array.
+     * @return string.
      */
     public function getLeaseId()
     {
