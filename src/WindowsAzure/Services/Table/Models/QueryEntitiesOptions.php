@@ -53,6 +53,14 @@ class QueryEntitiesOptions extends TableServiceOptions
     private $_nextRowKey;
     
     /**
+     * Constructs new QueryEntitiesOptions object.
+     */
+    public function __construct()
+    {
+        $this->_query = new Query();
+    }
+    
+    /**
      * Gets query.
      * 
      * @return Query
@@ -116,6 +124,84 @@ class QueryEntitiesOptions extends TableServiceOptions
     public function setNextRowKey($nextRowKey)
     {
         $this->_nextRowKey = $nextRowKey;
+    }
+    
+    /**
+     * Gets filter.
+     *
+     * @return Filters\Filter
+     */
+    public function getFilter()
+    {
+        return $this->_query->getFilter();
+    }
+
+    /**
+     * Sets filter.
+     *
+     * @param Filters\Filter $filter value.
+     * 
+     * @return none.
+     */
+    public function setFilter($filter)
+    {
+        $this->_query->setFilter($filter);
+    }
+    
+    /**
+     * Gets top.
+     *
+     * @return integer.
+     */
+    public function getTop()
+    {
+        return $this->_query->getTop();
+    }
+
+    /**
+     * Sets top.
+     *
+     * @param integer $top value.
+     * 
+     * @return none.
+     */
+    public function setTop($top)
+    {
+        $this->_query->setTop($top);
+    }
+    
+    /**
+     * Adds a field to select fields.
+     * 
+     * @param string $field The value of the field.
+     * 
+     * @return none.
+     */
+    public function addSelectField($field)
+    {
+        $this->_query->addSelectField($field);
+    }
+    
+    /**
+     * Gets selectFields.
+     *
+     * @return array.
+     */
+    public function getSelectFields()
+    {
+        return $this->_query->getSelectFields();
+    }
+
+    /**
+     * Sets selectFields.
+     *
+     * @param array $selectFields value.
+     * 
+     * @return none.
+     */
+    public function setSelectFields($selectFields)
+    {
+        $this->_query->setSelectFields($selectFields);
     }
 }
 
