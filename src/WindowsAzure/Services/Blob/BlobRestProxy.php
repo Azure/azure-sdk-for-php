@@ -1247,36 +1247,111 @@ class BlobRestProxy extends ServiceRestProxy implements IBlob
      * 
      * @param string                           $container name of the container
      * @param string                           $blob      name of the blob
-     * @param Models\CreateBlobSnapshotOptions $options   optional parameters
+     * @param Models\SnapshotBlobOptions $options   optional parameters
      * 
-     * @return Models\CreateBlobSnapshotResult
+     * @return Models\SnapshotBlobResult
      * 
      * @see http://msdn.microsoft.com/en-us/library/windowsazure/ee691971.aspx
      */
-    public function createBlobSnapshot($container, $blob, $options = null)
+    public function SnapshotBlob($container, $blob, $options = null)
     {
-        throw new \Exception(Resources::NOT_IMPLEMENTED_MSG);
+        $method              = \HTTP_Request2::METHOD_PUT;
+        $header              = array();
+        $queryParams         = array();
+        $path                = $container . '/' . $blob;
+        $expectedStatusCode  = Resources::STATUS_CREATED;
+        
+        if (is_null($options)) {
+            $options = new SnapshotBlobOptions();
+        }  
+        
+        $header[Resources::QP_TIMEOUT]            = $options->getTimeout();
+        $header[Resources::X_MS_DATE]             = $options->getDate();
+        $header[Resources::X_MS_VERSION]          = $options->getVersion();
+        $metadata = $options->getMetaData();
+        if (!is_null($metadata))
+        {
+            $metadataHeader = 
+                WindowsAzureUtilities::generateMetadataHeaders($metadata);
+            $header = \array_merge($header, $metadataHeader);
+        }
+        $header[Resources::IF_MODIFIED_SINCE]     = $options->getModifiedSince();
+        $header[Resources::IF_UNMODIFIED_SINCE]   = $options->getIfUnmodifiedSince();
+        $header[Resources::IF_MATCH]              = $options->getIfMatch();
+        $header[Resources::IF_NONE_MATCH]         = $options->getIfNoneMatch();
+        $header[Resources::X_MS_LEASE_ID]         = $options->getLeaseId();
+        
+        $this->send($method, $header, $queryParams, $path, $expectedStatusCode);
     }
     
     /**
      * Copies a source blob to a destination blob within the same storage account.
      * 
-     * @param string                 $destinationContainer name of container
-     * @param string                 $destinationBlob      name of blob
-     * @param string                 $sourceContainer      name of container
-     * @param string                 $sourceBlob           name of blob
+     * @param string                 $destinationContainer name of the destination container
+     * @param string                 $destinationBlob      name of the destination blob
+     * @param string                 $sourceContainer      name of the source container
+     * @param string                 $sourceBlob           name of the source blob
      * @param Models\CopyBlobOptions $options              optional parameters
      * 
      * @return none
      * 
      * @see http://msdn.microsoft.com/en-us/library/windowsazure/dd894037.aspx
      */
-    public function copyBlob($destinationContainer, $destinationBlob,
-        $sourceContainer, $sourceBlob, $options = null
-    ) {
-        throw new \Exception(Resources::NOT_IMPLEMENTED_MSG);
+    public function copyBlob(
+        $destinationContainer, 
+        $destinationBlob,
+        $sourceContainer, 
+        $sourceBlob, 
+        $options = null) 
+    {
+        $method               = \HTTP_Request2::METHOD_PUT;
+        $header               = array();
+        $queryParams          = array();
+        $destinationBlobPath  = $destinationContainer . '/' . $destinationBlob;
+        $sourceBlobPath       = $sourceContainer . '/' . $sourceBlob;
+        $statusCode           = Resources::STATUS_CREATED;
+        
+        if (is_null($options)) {
+            $options = new CopyBlobOptions();
+        }
+        
+        $header[Resources::QP_TIMEOUT]            = $options->getTimeout();
+        $header[Resources::DATE]                  = $options->getDate();
+        $header[Resources::X_MS_VERSION]          = $options->getVersion(); 
+        $header[Resources::X_MS_COPY_SOURCE]      = $sourceBlobPath;
+        
+        $metadata = $options->getMetaData();
+        if (!is_null($metadata))
+        {
+            $metadataHeader = 
+                WindowsAzureUtilities::generateMetadataHeaders($metadata);
+            $header = \array_merge($header, $metadataHeader);
+        }
+        
+        $header[Resources::X_MS_SOURCE_IF_MODIFIED_SINCE] 
+            = $options->getSourceIfModifiedSince();
+        $header[Resources::X_MS_SOURCE_IF_UNMODIFIED_SINCE]
+            = $options->getSourceIfUnmodifiedSince();
+        $header[Resources::X_MS_SOURCE_IF_MATCH]
+            = $options->getIfMatch(); 
+        $header[Resources::X_MS_SOURCE_IF_NONE_MATCH]
+            = $options->getIfNoneMatch(); 
+        $header[Resources::IF_MODIFIED_SINCE] = $options->getIfModifiedSince(); 
+        $header[Resources::IF_UNMODIFIED_SINCE] 
+            = $options->getIfUnmodifiedSince();
+        $header[Resources::If_MATCH]              = $options->getIfMatch();
+        $header[Resources::If_NONE_MATCH]         = $options->getIfNoneMatch(); 
+        $header[Resources::X_MS_LEASE_ID]         = $options->getLeaseId();
+        $header[Resources::X_MS_SOURCE_LEASE_ID]  = $options->getSourceLeaseId();
+        
+        $this->send(
+                $method, 
+                $header, 
+                $queryParams, 
+                $destinationBlobPath, 
+                $statusCode);
     }
-    
+        
     /**
      * Establishes an exclusive one-minute write lock on a blob. To write to a locked
      * blob, a client must provide a lease ID.
