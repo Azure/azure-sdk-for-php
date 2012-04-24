@@ -152,7 +152,7 @@ class ValidateTest extends \PHPUnit_Framework_TestCase
 */
     public function testNotNullOrEmptyWithNonEmpty()
     {
-        Validate::notNullOrEmpty(1234);
+        Validate::notNullOrEmpty(1234, 'not null');
         
         $this->assertTrue(true);
     }
@@ -163,7 +163,7 @@ class ValidateTest extends \PHPUnit_Framework_TestCase
     public function testNotNullOrEmptyWithEmpty()
     {
         $this->setExpectedException('\InvalidArgumentException');
-        Validate::notNullOrEmpty(Resources::EMPTY_STRING);
+        Validate::notNullOrEmpty(Resources::EMPTY_STRING, 'variable');
     }
 }
 
