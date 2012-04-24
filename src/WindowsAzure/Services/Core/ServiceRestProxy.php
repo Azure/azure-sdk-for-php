@@ -143,10 +143,8 @@ class ServiceRestProxy
         
         if (is_array($statusCode)) {
             $context->setStatusCodes($statusCode);
-        } else if (is_integer($statusCode)) {
-            $context->addStatusCode($statusCode);
         } else {
-            throw new \InvalidArgumentException();
+            $context->addStatusCode($statusCode);
         }
         
         return $this->sendContext($context);
