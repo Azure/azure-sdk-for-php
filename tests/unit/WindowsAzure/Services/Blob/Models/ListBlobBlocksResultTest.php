@@ -15,21 +15,21 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   PEAR2\Tests\Unit\WindowsAzure\Services\Blob\Models
+ * @package   Tests\Unit\WindowsAzure\Services\Blob\Models
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
-namespace PEAR2\Tests\Unit\WindowsAzure\Services\Blob\Models;
-use PEAR2\WindowsAzure\Services\Blob\Models\ListBlobBlocksResult;
-use PEAR2\WindowsAzure\Core\WindowsAzureUtilities;
+namespace Tests\Unit\WindowsAzure\Services\Blob\Models;
+use WindowsAzure\Services\Blob\Models\ListBlobBlocksResult;
+use WindowsAzure\Core\WindowsAzureUtilities;
 
 /**
  * Unit tests for class ListBlobBlocksResult
  *
  * @category  Microsoft
- * @package   PEAR2\Tests\Unit\WindowsAzure\Services\Blob\Models
+ * @package   Tests\Unit\WindowsAzure\Services\Blob\Models
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
@@ -39,8 +39,8 @@ use PEAR2\WindowsAzure\Core\WindowsAzureUtilities;
 class ListBlobBlocksResultTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @covers PEAR2\WindowsAzure\Services\Blob\Models\ListBlobBlocksResult::setLastModified
-     * @covers PEAR2\WindowsAzure\Services\Blob\Models\ListBlobBlocksResult::getLastModified
+     * @covers WindowsAzure\Services\Blob\Models\ListBlobBlocksResult::setLastModified
+     * @covers WindowsAzure\Services\Blob\Models\ListBlobBlocksResult::getLastModified
      */
     public function testSetLastModified()
     {
@@ -57,8 +57,8 @@ class ListBlobBlocksResultTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers PEAR2\WindowsAzure\Services\Blob\Models\ListBlobBlocksResult::setEtag
-     * @covers PEAR2\WindowsAzure\Services\Blob\Models\ListBlobBlocksResult::getEtag
+     * @covers WindowsAzure\Services\Blob\Models\ListBlobBlocksResult::setEtag
+     * @covers WindowsAzure\Services\Blob\Models\ListBlobBlocksResult::getEtag
      */
     public function testSetEtag()
     {
@@ -75,8 +75,8 @@ class ListBlobBlocksResultTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers PEAR2\WindowsAzure\Services\Blob\Models\ListBlobBlocksResult::setContentType
-     * @covers PEAR2\WindowsAzure\Services\Blob\Models\ListBlobBlocksResult::getContentType
+     * @covers WindowsAzure\Services\Blob\Models\ListBlobBlocksResult::setContentType
+     * @covers WindowsAzure\Services\Blob\Models\ListBlobBlocksResult::getContentType
      */
     public function testSetContentType()
     {
@@ -93,8 +93,8 @@ class ListBlobBlocksResultTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers PEAR2\WindowsAzure\Services\Blob\Models\ListBlobBlocksResult::setContentLength
-     * @covers PEAR2\WindowsAzure\Services\Blob\Models\ListBlobBlocksResult::getContentLength
+     * @covers WindowsAzure\Services\Blob\Models\ListBlobBlocksResult::setContentLength
+     * @covers WindowsAzure\Services\Blob\Models\ListBlobBlocksResult::getContentLength
      */
     public function testSetContentLength()
     {
@@ -111,37 +111,37 @@ class ListBlobBlocksResultTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers PEAR2\WindowsAzure\Services\Blob\Models\ListBlobBlocksResult::setUncommittedBlock
-     * @covers PEAR2\WindowsAzure\Services\Blob\Models\ListBlobBlocksResult::getUncommittedBlock
+     * @covers WindowsAzure\Services\Blob\Models\ListBlobBlocksResult::setUncommittedBlocks
+     * @covers WindowsAzure\Services\Blob\Models\ListBlobBlocksResult::getUncommittedBlocks
      */
-    public function testSetUncommittedBlock()
+    public function testSetUncommittedBlocks()
     {
         // Setup
         $result = new ListBlobBlocksResult();
         $expected = array('Block1' => 10, 'Block2' => 20, 'Block3' => 30);
         
         // Test
-        $result->setUncommittedBlock($expected);
+        $result->setUncommittedBlocks($expected);
         
         // Assert
-        $this->assertEquals($expected, $result->getUncommittedBlock());
+        $this->assertEquals($expected, $result->getUncommittedBlocks());
     }
     
     /**
-     * @covers PEAR2\WindowsAzure\Services\Blob\Models\ListBlobBlocksResult::setCommittedBlock
-     * @covers PEAR2\WindowsAzure\Services\Blob\Models\ListBlobBlocksResult::getCommittedBlock
+     * @covers WindowsAzure\Services\Blob\Models\ListBlobBlocksResult::setCommittedBlocks
+     * @covers WindowsAzure\Services\Blob\Models\ListBlobBlocksResult::getCommittedBlocks
      */
-    public function testSetCommittedBlock()
+    public function testSetCommittedBlocks()
     {
         // Setup
         $result = new ListBlobBlocksResult();
         $expected = array('Block1' => 10, 'Block2' => 20, 'Block3' => 30);
         
         // Test
-        $result->setCommittedBlock($expected);
+        $result->setCommittedBlocks($expected);
         
         // Assert
-        $this->assertEquals($expected, $result->getCommittedBlock());
+        $this->assertEquals($expected, $result->getCommittedBlocks());
     }
 }
 

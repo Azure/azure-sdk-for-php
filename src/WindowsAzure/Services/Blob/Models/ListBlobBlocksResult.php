@@ -15,24 +15,24 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   PEAR2\WindowsAzure\Services\Blob\Models
+ * @package   WindowsAzure\Services\Blob\Models
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
  
-namespace PEAR2\WindowsAzure\Services\Blob\Models;
-use PEAR2\WindowsAzure\Validate;
-use PEAR2\WindowsAzure\Resources;
-use PEAR2\WindowsAzure\Utilities;
-use PEAR2\WindowsAzure\Core\WindowsAzureUtilities;
+namespace WindowsAzure\Services\Blob\Models;
+use WindowsAzure\Validate;
+use WindowsAzure\Resources;
+use WindowsAzure\Utilities;
+use WindowsAzure\Core\WindowsAzureUtilities;
 
 /**
  * Holds result of listBlobBlocks
  *
  * @category  Microsoft
- * @package   PEAR2\WindowsAzure\Services\Blob\Models
+ * @package   WindowsAzure\Services\Blob\Models
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
@@ -86,7 +86,10 @@ class ListBlobBlocksResult
         if (is_array($parsed)) {
             $rawEntries = array();
          
-            if (is_array($parsed[$type])) {
+            if (   array_key_exists($type, $parsed)
+                &&     is_array($parsed[$type])
+                &&     !empty($parsed[$type])
+            ) {
                 $rawEntries = Utilities::getArray($parsed[$type]['Block']);
             }
             
@@ -229,7 +232,7 @@ class ListBlobBlocksResult
      * 
      * @return array
      */
-    public function getUncommittedBlock()
+    public function getUncommittedBlocks()
     {
         return $this->_uncommittedBlocks;
     }
@@ -241,7 +244,7 @@ class ListBlobBlocksResult
      * 
      * @return none.
      */
-    public function setUncommittedBlock($uncommittedBlocks)
+    public function setUncommittedBlocks($uncommittedBlocks)
     {
         $this->_uncommittedBlocks = $uncommittedBlocks;
     }
@@ -251,7 +254,7 @@ class ListBlobBlocksResult
      * 
      * @return array
      */
-    public function getCommittedBlock()
+    public function getCommittedBlocks()
     {
         return $this->_committedBlocks;
     }
@@ -263,7 +266,7 @@ class ListBlobBlocksResult
      * 
      * @return none.
      */
-    public function setCommittedBlock($committedBlocks)
+    public function setCommittedBlocks($committedBlocks)
     {
         $this->_committedBlocks = $committedBlocks;
     }

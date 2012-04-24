@@ -15,22 +15,22 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   PEAR2\Tests\Unit\WindowsAzure\ServiceRuntime
+ * @package   Tests\Unit\WindowsAzure\ServiceRuntime
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
-namespace PEAR2\Tests\Unit\WindowsAzure\ServiceRuntime;
-use PEAR2\Tests\Framework\TestResources;
-use PEAR2\WindowsAzure\Core\WindowsAzureUtilities;
-use PEAR2\WindowsAzure\ServiceRuntime\GoalState;
+namespace Tests\Unit\WindowsAzure\ServiceRuntime;
+use Tests\Framework\TestResources;
+use WindowsAzure\Core\WindowsAzureUtilities;
+use WindowsAzure\ServiceRuntime\GoalState;
 
 /**
- * Unit tests for class CurrentState
+ * Unit tests for class CurrentState.
  *
  * @category  Microsoft
- * @package   PEAR2\Tests\Unit\WindowsAzure\ServiceRuntime\GoalStateTest
+ * @package   Tests\Unit\WindowsAzure\ServiceRuntime
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
@@ -40,7 +40,7 @@ use PEAR2\WindowsAzure\ServiceRuntime\GoalState;
 class GoalStateTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @covers PEAR2\WindowsAzure\ServiceRuntime\GoalState::getDeadline
+     * @covers WindowsAzure\ServiceRuntime\GoalState::getDeadline
      */
     public function testGetDeadline()
     {
@@ -54,7 +54,7 @@ class GoalStateTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers PEAR2\WindowsAzure\ServiceRuntime\GoalState::getCurrentStateEndpoint
+     * @covers WindowsAzure\ServiceRuntime\GoalState::getCurrentStateEndpoint
      */
     public function testGetCurrentStateEndpoint()
     {
@@ -69,7 +69,7 @@ class GoalStateTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers PEAR2\WindowsAzure\ServiceRuntime\GoalState::getEnvironmentPath
+     * @covers WindowsAzure\ServiceRuntime\GoalState::getEnvironmentPath
      */
     public function testGetEnvironmentPath()
     {
@@ -84,7 +84,7 @@ class GoalStateTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers PEAR2\WindowsAzure\ServiceRuntime\GoalState::getExpectedState
+     * @covers WindowsAzure\ServiceRuntime\GoalState::getExpectedState
      */
     public function testGetExpectedState()
     {
@@ -99,7 +99,7 @@ class GoalStateTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers PEAR2\WindowsAzure\ServiceRuntime\GoalState::getIncarnation
+     * @covers WindowsAzure\ServiceRuntime\GoalState::getIncarnation
      */
     public function testGetIncarnation()
     {
@@ -114,7 +114,7 @@ class GoalStateTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers PEAR2\WindowsAzure\ServiceRuntime\GoalState::__construct
+     * @covers WindowsAzure\ServiceRuntime\GoalState::__construct
      */
     public function testConstructor()
     {
@@ -125,7 +125,7 @@ class GoalStateTest extends \PHPUnit_Framework_TestCase
         $goalState = new GoalState($incarnation, null, null, $deadline, null);
         
         // Test
-        $this->assertInstanceOf('PEAR2\\WindowsAzure\\ServiceRuntime\\GoalState',
+        $this->assertInstanceOf('\WindowsAzure\\ServiceRuntime\\GoalState',
             $goalState);
     }
 }

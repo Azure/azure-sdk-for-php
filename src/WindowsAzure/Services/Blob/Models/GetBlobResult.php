@@ -15,22 +15,23 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   PEAR2\WindowsAzure\Services\Blob\Models
+ * @package   WindowsAzure\Services\Blob\Models
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
  
-namespace PEAR2\WindowsAzure\Services\Blob\Models;
-use PEAR2\WindowsAzure\Services\Blob\Models\BlobProperties;
-use PEAR2\WindowsAzure\Core\WindowsAzureUtilities;
+namespace WindowsAzure\Services\Blob\Models;
+use WindowsAzure\Services\Blob\Models\BlobProperties;
+use WindowsAzure\Core\WindowsAzureUtilities;
+use WindowsAzure\Utilities;
 
 /**
- * Holds result of calling GetBlob
+ * Holds result of GetBlob API.
  *
  * @category  Microsoft
- * @package   PEAR2\WindowsAzure\Services\Blob\Models
+ * @package   WindowsAzure\Services\Blob\Models
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
@@ -55,10 +56,10 @@ class GetBlobResult
     private $_contentStream;
     
     /**
-     * Creates GetBlobResult from getBlob call
+     * Creates GetBlobResult from getBlob call.
      * 
-     * @param array  $headers HTTP response headers
-     * @param string $body    Response body
+     * @param array  $headers The HTTP response headers.
+     * @param string $body    The response body.
      * 
      * @return GetBlobResult
      */
@@ -66,7 +67,7 @@ class GetBlobResult
     {
         $result = new GetBlobResult();
         
-        $result->setContentStream($body);
+        $result->setContentStream(Utilities::stringToStream($body));
         $result->setProperties(BlobProperties::create($headers));
         $result->setMetadata(WindowsAzureUtilities::getMetadataArray($headers));
         
@@ -76,7 +77,7 @@ class GetBlobResult
     /**
      * Gets blob metadata.
      *
-     * @return array.
+     * @return array
      */
     public function getMetadata()
     {
@@ -88,7 +89,7 @@ class GetBlobResult
      *
      * @param string $metadata value.
      * 
-     * @return none.
+     * @return none
      */
     public function setMetadata($metadata)
     {
@@ -98,7 +99,7 @@ class GetBlobResult
     /**
      * Gets blob properties.
      *
-     * @return BlobProperties.
+     * @return BlobProperties
      */
     public function getProperties()
     {
@@ -110,7 +111,7 @@ class GetBlobResult
      *
      * @param BlobProperties $properties value.
      * 
-     * @return none.
+     * @return none
      */
     public function setProperties($properties)
     {
@@ -120,7 +121,7 @@ class GetBlobResult
     /**
      * Gets blob contentStream.
      *
-     * @return string.
+     * @return resource
      */
     public function getContentStream()
     {
@@ -130,9 +131,9 @@ class GetBlobResult
     /**
      * Sets blob contentStream.
      *
-     * @param string $contentStream value.
+     * @param resource $contentStream The stream handle.
      * 
-     * @return none.
+     * @return none
      */
     public function setContentStream($contentStream)
     {

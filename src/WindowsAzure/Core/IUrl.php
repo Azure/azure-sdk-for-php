@@ -15,20 +15,20 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   PEAR2\WindowsAzure\Core
+ * @package   WindowsAzure\Core
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
  
-namespace PEAR2\WindowsAzure\Core;
+namespace WindowsAzure\Core;
 
 /**
  * Defines what are main url functionalities that should be supported
  *
  * @category  Microsoft
- * @package   PEAR2\WindowsAzure\Core
+ * @package   WindowsAzure\Core
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
@@ -97,7 +97,7 @@ interface IUrl
     /**
      * Makes deep copy from the current object.
      * 
-     * @return PEAR2\WindowsAzure\Core\Url
+     * @return WindowsAzure\Core\Url
      */
     public function __clone();
     

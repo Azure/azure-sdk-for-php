@@ -15,31 +15,32 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   PEAR2\Tests\Unit\WindowsAzure
+ * @package   Tests\Unit\WindowsAzure\Services\Queue\Models
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
 
-use PEAR2\WindowsAzure\Services\Queue\Models\ListQueuesResult;
-use PEAR2\Tests\Framework\TestResources;
+namespace Tests\Unit\WindowsAzure\Services\Queue\Models;
+use WindowsAzure\Services\Queue\Models\ListQueuesResult;
+use Tests\Framework\TestResources;
 
 /**
  * Unit tests for class ListQueuesResult
  *
  * @category  Microsoft
- * @package   PEAR2\Tests\Unit\WindowsAzure
+ * @package   Tests\Unit\WindowsAzure\Services\Queue\Models
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @version   Release: @package_version@
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
-class ListQueueResultTest extends PHPUnit_Framework_TestCase
+class ListQueuesResultTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @covers PEAR2\WindowsAzure\Services\Queue\Models\ListQueuesResult::create 
+     * @covers WindowsAzure\Services\Queue\Models\ListQueuesResult::create 
      */
     public function testCreateWithEmpty()
     {
@@ -55,7 +56,7 @@ class ListQueueResultTest extends PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers PEAR2\WindowsAzure\Services\Queue\Models\ListQueuesResult::create 
+     * @covers WindowsAzure\Services\Queue\Models\ListQueuesResult::create 
      */
     public function testCreateWithOneEntry()
     {
@@ -76,7 +77,7 @@ class ListQueueResultTest extends PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers PEAR2\WindowsAzure\Services\Queue\Models\ListQueuesResult::create 
+     * @covers WindowsAzure\Services\Queue\Models\ListQueuesResult::create 
      */
     public function testCreateWithMultipleEntries()
     {
@@ -100,7 +101,7 @@ class ListQueueResultTest extends PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers PEAR2\WindowsAzure\Services\Queue\Models\ListQueuesResult::getQueues
+     * @covers WindowsAzure\Services\Queue\Models\ListQueuesResult::getQueues
      * @depends testCreateWithMultipleEntries
      */
     public function testGetQueues($result)
@@ -113,7 +114,7 @@ class ListQueueResultTest extends PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers PEAR2\WindowsAzure\Services\Queue\Models\ListQueuesResult::setQueues
+     * @covers WindowsAzure\Services\Queue\Models\ListQueuesResult::setQueues
      * @depends testCreateWithMultipleEntries
      */
     public function testSetQueues($result)
@@ -132,7 +133,7 @@ class ListQueueResultTest extends PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers PEAR2\WindowsAzure\Services\Queue\Models\ListQueuesResult::setPrefix
+     * @covers WindowsAzure\Services\Queue\Models\ListQueuesResult::setPrefix
      */
     public function testSetPrefix()
     {
@@ -148,7 +149,7 @@ class ListQueueResultTest extends PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers PEAR2\WindowsAzure\Services\Queue\Models\ListQueuesResult::getPrefix
+     * @covers WindowsAzure\Services\Queue\Models\ListQueuesResult::getPrefix
      */
     public function testGetPrefix()
     {
@@ -165,7 +166,7 @@ class ListQueueResultTest extends PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers PEAR2\WindowsAzure\Services\Queue\Models\ListQueuesResult::setNextMarker
+     * @covers WindowsAzure\Services\Queue\Models\ListQueuesResult::setNextMarker
      */
     public function testSetNextMarker()
     {
@@ -181,7 +182,7 @@ class ListQueueResultTest extends PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers PEAR2\WindowsAzure\Services\Queue\Models\ListQueuesResult::getNextMarker
+     * @covers WindowsAzure\Services\Queue\Models\ListQueuesResult::getNextMarker
      */
     public function testGetNextMarker()
     {
@@ -198,7 +199,7 @@ class ListQueueResultTest extends PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers PEAR2\WindowsAzure\Services\Queue\Models\ListQueuesResult::setMarker
+     * @covers WindowsAzure\Services\Queue\Models\ListQueuesResult::setMarker
      */
     public function testSetMarker()
     {
@@ -214,7 +215,7 @@ class ListQueueResultTest extends PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers PEAR2\WindowsAzure\Services\Queue\Models\ListQueuesResult::getMarker
+     * @covers WindowsAzure\Services\Queue\Models\ListQueuesResult::getMarker
      */
     public function testGetMarker()
     {
@@ -231,7 +232,7 @@ class ListQueueResultTest extends PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers PEAR2\WindowsAzure\Services\Queue\Models\ListQueuesResult::setMaxResults
+     * @covers WindowsAzure\Services\Queue\Models\ListQueuesResult::setMaxResults
      */
     public function testSetMaxResults()
     {
@@ -247,7 +248,7 @@ class ListQueueResultTest extends PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers PEAR2\WindowsAzure\Services\Queue\Models\ListQueuesResult::getMaxResults
+     * @covers WindowsAzure\Services\Queue\Models\ListQueuesResult::getMaxResults
      */
     public function testGetMaxResults()
     {

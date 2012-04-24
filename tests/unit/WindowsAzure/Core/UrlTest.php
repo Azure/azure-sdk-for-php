@@ -15,23 +15,23 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   PEAR2\Tests\Unit\WindowsAzure
+ * @package   Tests\Unit\WindowsAzure
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
 
-use PEAR2\WindowsAzure\Core\Url;
-use PEAR2\Tests\Framework\TestResources;
-use PEAR2\WindowsAzure\Resources;
-use PEAR2\WindowsAzure\Core\InvalidArgumentTypeException;
+use WindowsAzure\Core\Url;
+use Tests\Framework\TestResources;
+use WindowsAzure\Resources;
+use WindowsAzure\Core\InvalidArgumentTypeException;
 
 /**
  * Unit tests for class Url
  *
  * @category  Microsoft
- * @package   PEAR2\Tests\Unit\WindowsAzure
+ * @package   Tests\Unit\WindowsAzure
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
@@ -41,8 +41,8 @@ use PEAR2\WindowsAzure\Core\InvalidArgumentTypeException;
 class UrlTest extends PHPUnit_Framework_TestCase
 {
     /**
-     * @covers PEAR2\WindowsAzure\Core\Url::__construct
-     * @covers PEAR2\WindowsAzure\Core\Url::_setPathIfEmpty
+     * @covers WindowsAzure\Core\Url::__construct
+     * @covers WindowsAzure\Core\Url::_setPathIfEmpty
      */
     public function test__construct()
     {
@@ -57,46 +57,46 @@ class UrlTest extends PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers PEAR2\WindowsAzure\Core\Url::__construct
+     * @covers WindowsAzure\Core\Url::__construct
      */
     public function test__constructEmptyUrlFail()
     {
         // Setup
         $urlString = '';
-        $this->setExpectedException(get_class(new \RuntimeException(Resources::INVALID_URL_MSG)));
+        $this->setExpectedException(get_class(new \InvalidArgumentException(Resources::INVALID_URL_MSG)));
         
         // Test
         new Url($urlString);
     }
     
     /**
-     * @covers PEAR2\WindowsAzure\Core\Url::__construct
+     * @covers WindowsAzure\Core\Url::__construct
      */
     public function test__constructNonStringUrlFail()
     {
         // Setup
         $urlString = 1;
-        $this->setExpectedException(get_class(new \RuntimeException(Resources::INVALID_URL_MSG)));
+        $this->setExpectedException(get_class(new \InvalidArgumentException(Resources::INVALID_URL_MSG)));
         
         // Test
         new Url($urlString);
     }
     
     /**
-     * @covers PEAR2\WindowsAzure\Core\Url::__construct
+     * @covers WindowsAzure\Core\Url::__construct
      */
     public function test__constructInvalidUrlFail()
     {
         // Setup
         $urlString = 'ww.invalidurl,com';
-        $this->setExpectedException(get_class(new \RuntimeException(Resources::INVALID_URL_MSG)));
+        $this->setExpectedException(get_class(new \InvalidArgumentException(Resources::INVALID_URL_MSG)));
         
         // Test
         new Url($urlString);
     }
     
     /**
-     * @covers PEAR2\WindowsAzure\Core\Url::__construct
+     * @covers WindowsAzure\Core\Url::__construct
      */
     public function test__constructWithUrlPath()
     {
@@ -110,7 +110,7 @@ class UrlTest extends PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers PEAR2\WindowsAzure\Core\Url::getQuery
+     * @covers WindowsAzure\Core\Url::getQuery
      */
     public function testGetQuery()
     {
@@ -127,7 +127,7 @@ class UrlTest extends PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers PEAR2\WindowsAzure\Core\Url::getQueryVariables
+     * @covers WindowsAzure\Core\Url::getQueryVariables
      */
     public function testGetQueryVariables()
     {
@@ -144,7 +144,7 @@ class UrlTest extends PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers PEAR2\WindowsAzure\Core\Url::setQueryVariable
+     * @covers WindowsAzure\Core\Url::setQueryVariable
      */
     public function testSetQueryVariable()
     {
@@ -161,13 +161,13 @@ class UrlTest extends PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers PEAR2\WindowsAzure\Core\Url::setQueryVariable
+     * @covers WindowsAzure\Core\Url::setQueryVariable
      */
     public function testSetQueryVariableInvalidKeyFail()
     {
         // Setup
         $urlString = TestResources::VALID_URL;
-        $invalidKey = 123;
+        $invalidKey = new \DateTime();
         $value = 'ValidValue';
         $url = new Url($urlString);
         $this->setExpectedException(get_class(new InvalidArgumentTypeException(gettype(''))));
@@ -177,13 +177,13 @@ class UrlTest extends PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers PEAR2\WindowsAzure\Core\Url::setQueryVariable
+     * @covers WindowsAzure\Core\Url::setQueryVariable
      */
     public function testSetQueryVariableEmptyKeyFail()
     {
         // Setup
         $urlString = TestResources::VALID_URL;
-        $invalidKey = '';
+        $invalidKey = new \DateTime();
         $value = 'ValidValue';
         $url = new Url($urlString);
         $this->setExpectedException(get_class(new \InvalidArgumentException(Resources::NULL_ERROR_MSG)));
@@ -193,14 +193,14 @@ class UrlTest extends PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers PEAR2\WindowsAzure\Core\Url::setQueryVariable
+     * @covers WindowsAzure\Core\Url::setQueryVariable
      */
     public function testSetQueryVariableInvalidValueFail()
     {
         // Setup
         $urlString = TestResources::VALID_URL;
         $key = 'ValidKey';
-        $invalidValue = 123;
+        $invalidValue = new \DateTime();
         $url = new Url($urlString);
         $this->setExpectedException(get_class(new InvalidArgumentTypeException(gettype(''))));
         
@@ -209,7 +209,7 @@ class UrlTest extends PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers PEAR2\WindowsAzure\Core\Url::setQueryVariable
+     * @covers WindowsAzure\Core\Url::setQueryVariable
      */
     public function testSetQueryVariableSetEmptyValue()
     {
@@ -227,8 +227,8 @@ class UrlTest extends PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers PEAR2\WindowsAzure\Core\Url::getUrl
-     * @covers PEAR2\WindowsAzure\Core\Url::_setPathIfEmpty
+     * @covers WindowsAzure\Core\Url::getUrl
+     * @covers WindowsAzure\Core\Url::_setPathIfEmpty
      */
     public function testGetUrl()
     {
@@ -244,7 +244,7 @@ class UrlTest extends PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers PEAR2\WindowsAzure\Core\Url::setUrlPath
+     * @covers WindowsAzure\Core\Url::setUrlPath
      */
     public function testSetUrlPath()
     {
@@ -261,7 +261,7 @@ class UrlTest extends PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers PEAR2\WindowsAzure\Core\Url::appendUrlPath
+     * @covers WindowsAzure\Core\Url::appendUrlPath
      */
     public function testAppendUrlPath()
     {
@@ -279,8 +279,8 @@ class UrlTest extends PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers PEAR2\WindowsAzure\Core\Url::__toString
-     * @covers PEAR2\WindowsAzure\Core\Url::_setPathIfEmpty
+     * @covers WindowsAzure\Core\Url::__toString
+     * @covers WindowsAzure\Core\Url::_setPathIfEmpty
      */
     public function test__toString()
     {
@@ -296,7 +296,7 @@ class UrlTest extends PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers PEAR2\WindowsAzure\Core\Url::__clone
+     * @covers WindowsAzure\Core\Url::__clone
      */
     public function test__clone()
     {
@@ -313,7 +313,7 @@ class UrlTest extends PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers PEAR2\WindowsAzure\Core\Url::setQueryVariables
+     * @covers WindowsAzure\Core\Url::setQueryVariables
      */
     public function testSetQueryVariables()
     {

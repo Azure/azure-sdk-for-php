@@ -15,32 +15,33 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   PEAR2\Tests\Unit\WindowsAzure
+ * @package   Tests\Unit\WindowsAzure\Services\Queue\Models
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
 
-use PEAR2\WindowsAzure\Services\Queue\Models\ListMessagesResult;
-use PEAR2\Tests\Framework\TestResources;
-use PEAR2\WindowsAzure\Core\WindowsAzureUtilities;
+namespace Tests\Unit\WindowsAzure\Services\Queue\Models;
+use WindowsAzure\Services\Queue\Models\ListMessagesResult;
+use Tests\Framework\TestResources;
+use WindowsAzure\Core\WindowsAzureUtilities;
 
 /**
  * Unit tests for class ListMessagesResult
  *
  * @category  Microsoft
- * @package   PEAR2\Tests\Unit\WindowsAzure
+ * @package   Tests\Unit\WindowsAzure\Services\Queue\Models
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @version   Release: @package_version@
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
-class ListMessagesResultTest extends PHPUnit_Framework_TestCase
+class ListMessagesResultTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @covers PEAR2\WindowsAzure\Services\Queue\Models\ListMessagesResult::create
+     * @covers WindowsAzure\Services\Queue\Models\ListMessagesResult::create
      */
     public function testCreate()
     {
@@ -64,7 +65,7 @@ class ListMessagesResultTest extends PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers PEAR2\WindowsAzure\Services\Queue\Models\ListMessagesResult::create
+     * @covers WindowsAzure\Services\Queue\Models\ListMessagesResult::create
      */
     public function testCreateMultiple()
     {
@@ -95,7 +96,7 @@ class ListMessagesResultTest extends PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers PEAR2\WindowsAzure\Services\Queue\Models\ListMessagesResult::getQueueMessages
+     * @covers WindowsAzure\Services\Queue\Models\ListMessagesResult::getQueueMessages
      */
     public function testGetQueueMessages()
     {
@@ -114,7 +115,7 @@ class ListMessagesResultTest extends PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers PEAR2\WindowsAzure\Services\Queue\Models\ListMessagesResult::setQueueMessages
+     * @covers WindowsAzure\Services\Queue\Models\ListMessagesResult::setQueueMessages
      */
     public function testSetQueueMessages()
     {

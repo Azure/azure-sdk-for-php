@@ -15,21 +15,21 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   PEAR2\WindowsAzure\Services\Core\Models
+ * @package   WindowsAzure\Services\Core\Models
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
  
-namespace PEAR2\WindowsAzure\Services\Core\Models;
-use PEAR2\WindowsAzure\Utilities;
+namespace WindowsAzure\Services\Core\Models;
+use WindowsAzure\Utilities;
 
 /**
  * Holds elements of queue properties metrics field.
  *
  * @category  Microsoft
- * @package   PEAR2\WindowsAzure\Services\Core\Models
+ * @package   WindowsAzure\Services\Core\Models
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
@@ -58,6 +58,10 @@ class Metrics
      * @var bool
      */
     private $_includeAPIs;
+    
+    /**
+     * @var WindowsAzure\Services\Core\Models\RetentionPolicy
+     */
     private $_retentionPolicy;
     
     /**
@@ -65,7 +69,7 @@ class Metrics
      * 
      * @param array $parsedResponse XML response parsed into array.
      * 
-     * @return PEAR2\WindowsAzure\Services\Core\Models\Metrics
+     * @return WindowsAzure\Services\Core\Models\Metrics
      */
     public static function create($parsedResponse)
     {
@@ -87,7 +91,7 @@ class Metrics
     /**
      * Gets retention policy
      * 
-     * @return PEAR2\WindowsAzure\Services\Core\Models\RetentionPolicy
+     * @return WindowsAzure\Services\Core\Models\RetentionPolicy
      *  
      */
     public function getRetentionPolicy()
@@ -187,7 +191,9 @@ class Metrics
         if ($this->_enabled) {
             $array['IncludeAPIs'] = Utilities::booleanToString($this->_includeAPIs);
         }
-        $array['RetentionPolicy'] = $this->_retentionPolicy->toArray();
+        $array['RetentionPolicy'] = !empty($this->_retentionPolicy)
+            ? $this->_retentionPolicy->toArray()
+            : null;
         
         return $array;
     }

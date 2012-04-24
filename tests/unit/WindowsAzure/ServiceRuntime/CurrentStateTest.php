@@ -15,21 +15,21 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   PEAR2\Tests\Unit\WindowsAzure\ServiceRuntime
+ * @package   Tests\Unit\WindowsAzure\ServiceRuntime
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
-namespace PEAR2\Tests\Unit\WindowsAzure\ServiceRuntime;
-use PEAR2\Tests\Framework\TestResources;
-use PEAR2\WindowsAzure\ServiceRuntime\CurrentState;
+namespace Tests\Unit\WindowsAzure\ServiceRuntime;
+use Tests\Framework\TestResources;
+use WindowsAzure\ServiceRuntime\CurrentState;
 
 /**
- * Unit tests for class CurrentState
+ * Unit tests for class CurrentState.
  *
  * @category  Microsoft
- * @package   PEAR2\Tests\Unit\WindowsAzure\ServiceRuntime\CurrentStateTest
+ * @package   Tests\Unit\WindowsAzure\ServiceRuntime
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
@@ -39,7 +39,7 @@ use PEAR2\WindowsAzure\ServiceRuntime\CurrentState;
 class CurrentStateTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @covers PEAR2\WindowsAzure\ServiceRuntime\CurrentState::getClientId
+     * @covers WindowsAzure\ServiceRuntime\CurrentState::getClientId
      */
     public function testGetClientId()
     {
@@ -51,7 +51,7 @@ class CurrentStateTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers PEAR2\WindowsAzure\ServiceRuntime\CurrentState::__construct
+     * @covers WindowsAzure\ServiceRuntime\CurrentState::__construct
      */
     public function testConstruct()
     {
@@ -60,7 +60,7 @@ class CurrentStateTest extends \PHPUnit_Framework_TestCase
         
         // Test
         $this->assertInstanceOf(
-            'PEAR2\\WindowsAzure\\ServiceRuntime\\CurrentState', $currentState);
+            '\WindowsAzure\\ServiceRuntime\\CurrentState', $currentState);
     }
 }
 

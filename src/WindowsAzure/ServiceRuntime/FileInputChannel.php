@@ -15,21 +15,20 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   PEAR2\WindowsAzure\ServiceRuntime
+ * @package   WindowsAzure\ServiceRuntime
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
 
-namespace PEAR2\WindowsAzure\ServiceRuntime;
-use PEAR2\WindowsAzure\Resources;
+namespace WindowsAzure\ServiceRuntime;
 
 /**
  * The file input channel.
  *
  * @category  Microsoft
- * @package   PEAR2\WindowsAzure\ServiceRuntime\FileInputChannel
+ * @package   WindowsAzure\ServiceRuntime
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
@@ -39,6 +38,11 @@ use PEAR2\WindowsAzure\Resources;
 class FileInputChannel implements IInputChannel
 {
     /**
+     * @var Resource
+     */
+    private $_inputStream;
+    
+    /**
      * Gets the input stream.
      * 
      * @param string $name The input stream path.
@@ -47,7 +51,25 @@ class FileInputChannel implements IInputChannel
      */
     public function getInputStream($name)
     {
-        throw new \Exception(Resources::NOT_IMPLEMENTED_MSG);
+        if (file_exists($name)) {
+            $this->_inputStream = fopen($name, 'r');
+            return $this->_inputStream;
+        } else {
+            throw new ChannelNotAvailableException();
+        }
+    }
+    
+    /**
+     * Closes the input stream.
+     * 
+     * @return none
+     */
+    public function closeInputStream() 
+    {
+        if (!is_null($this->_inputStream)) {
+            fclose($this->_inputStream);
+            $this->_inputStream = null;
+        }
     }
 }
 

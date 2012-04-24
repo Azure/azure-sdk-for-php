@@ -15,23 +15,23 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   PEAR2\WindowsAzure\Services\Queue\Models
+ * @package   WindowsAzure\Services\Queue\Models
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
  
-namespace PEAR2\WindowsAzure\Services\Queue\Models;
-use PEAR2\WindowsAzure\Resources;
-use PEAR2\WindowsAzure\Services\Queue\Models\Queue;
-use PEAR2\WindowsAzure\Utilities;
+namespace WindowsAzure\Services\Queue\Models;
+use WindowsAzure\Resources;
+use WindowsAzure\Services\Queue\Models\Queue;
+use WindowsAzure\Utilities;
 
 /**
  * Container to hold list queue response object.
  *
  * @category  Microsoft
- * @package   PEAR2\WindowsAzure\Services\Queue\Models
+ * @package   WindowsAzure\Services\Queue\Models
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
@@ -51,7 +51,7 @@ class ListQueuesResult
      *
      * @param array $parsedResponse XML response parsed into array.
      * 
-     * @return PEAR2\WindowsAzure\Services\Queue\Models\ListQueuesResult.
+     * @return WindowsAzure\Services\Queue\Models\ListQueuesResult.
      */
     public static function create($parsedResponse)
     {
@@ -71,7 +71,7 @@ class ListQueuesResult
         $result->_queues     = array();
         $rawQueues           = array();
         
-        if (is_array($parsedResponse['Queues'])) {
+        if ( !empty($parsedResponse['Queues']) ) {
             $rawQueues = Utilities::getArray($parsedResponse['Queues']['Queue']);
         }
         
@@ -112,7 +112,7 @@ class ListQueuesResult
     }
 
     /**
-     * Gets perfix.
+     * Gets prefix.
      *
      * @return string.
      */
@@ -122,7 +122,7 @@ class ListQueuesResult
     }
 
     /**
-     * Sets perfix.
+     * Sets prefix.
      *
      * @param string $prefix value.
      * 

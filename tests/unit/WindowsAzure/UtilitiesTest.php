@@ -15,31 +15,35 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   PEAR2\Tests\Unit\WindowsAzure
+ * @package   Tests\Unit\WindowsAzure
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
 
-use PEAR2\WindowsAzure\Utilities;
-use PEAR2\Tests\Framework\TestResources;
+namespace Tests\Unit\WindowsAzure;
+use WindowsAzure\Utilities;
+use WindowsAzure\Resources;
+use Tests\Framework\TestResources;
+use Tests\Framework\VirtualFileSystem;
+use WindowsAzure\Services\Core\Models\ServiceProperties;
 
 /**
  * Unit tests for class Utilities
  *
  * @category  Microsoft
- * @package   PEAR2\Tests\Unit\WindowsAzure
+ * @package   Tests\Unit\WindowsAzure
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @version   Release: @package_version@
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
-class UtilitiesTest extends PHPUnit_Framework_TestCase
+class UtilitiesTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @covers PEAR2\WindowsAzure\Utilities::tryGetValue
+     * @covers WindowsAzure\Utilities::tryGetValue
      */
     public function testTryGetValue()
     {
@@ -55,7 +59,7 @@ class UtilitiesTest extends PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers PEAR2\WindowsAzure\Utilities::tryGetValue
+     * @covers WindowsAzure\Utilities::tryGetValue
      */
     public function testTryGetValueUsingDefault()
     {
@@ -71,7 +75,7 @@ class UtilitiesTest extends PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers PEAR2\WindowsAzure\Utilities::tryGetValue
+     * @covers WindowsAzure\Utilities::tryGetValue
      */
     public function testTryGetValueWithNull()
     {
@@ -84,9 +88,35 @@ class UtilitiesTest extends PHPUnit_Framework_TestCase
         
         $this->assertNull($actual);
     }
+
+    /**
+     * @covers WindowsAzure\Utilities::tryGetKeysChainValue
+     */
+    public function testTryGetKeysChainValue()
+    {
+        // Setup
+        $array = array();
+        $array['a1'] = array();
+        $array['a2'] = 'value1';
+        $array['a1']['b1'] = array();
+        $array['a1']['b2'] = 'value2';
+        $array['a1']['b1']['c1'] = 'value3';
+        
+        // Test - Level 1
+        $this->assertEquals('value1', Utilities::tryGetKeysChainValue($array, 'a2'));
+        $this->assertEquals(null, Utilities::tryGetKeysChainValue($array, 'a3'));
+        
+        // Test - Level 2
+        $this->assertEquals('value2', Utilities::tryGetKeysChainValue($array, 'a1', 'b2'));
+        $this->assertEquals(null, Utilities::tryGetKeysChainValue($array, 'a1', 'b3'));
+        
+        // Test - Level 3
+        $this->assertEquals('value3', Utilities::tryGetKeysChainValue($array, 'a1', 'b1', 'c1'));
+        $this->assertEquals(null, Utilities::tryGetKeysChainValue($array, 'a1', 'b1', 'c2'));
+    }
     
     /**
-     * @covers PEAR2\WindowsAzure\Utilities::startsWith
+     * @covers WindowsAzure\Utilities::startsWith
      */
     public function testStartsWith()
     {
@@ -101,7 +131,7 @@ class UtilitiesTest extends PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers PEAR2\WindowsAzure\Utilities::startsWith
+     * @covers WindowsAzure\Utilities::startsWith
      */
     public function testStartsWithDoesNotStartWithPrefix()
     {
@@ -116,7 +146,7 @@ class UtilitiesTest extends PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers PEAR2\WindowsAzure\Utilities::getArray
+     * @covers WindowsAzure\Utilities::getArray
      */
     public function testGetArray()
     {
@@ -130,7 +160,7 @@ class UtilitiesTest extends PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers PEAR2\WindowsAzure\Utilities::getArray
+     * @covers WindowsAzure\Utilities::getArray
      */
     public function testGetArrayWithFlatValue()
     {
@@ -145,7 +175,7 @@ class UtilitiesTest extends PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers PEAR2\WindowsAzure\Utilities::getArray
+     * @covers WindowsAzure\Utilities::getArray
      */
     public function testGetArrayWithMixtureValue()
     {
@@ -160,12 +190,12 @@ class UtilitiesTest extends PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers PEAR2\WindowsAzure\Utilities::getArray
+     * @covers WindowsAzure\Utilities::getArray
      */
     public function testGetArrayWithEmptyValue()
     {
         // Setup
-        $empty = PEAR2\WindowsAzure\Resources::EMPTY_STRING;
+        $empty = Resources::EMPTY_STRING;
         $expected = array();
         
         // Test
@@ -175,13 +205,14 @@ class UtilitiesTest extends PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers PEAR2\WindowsAzure\Utilities::unserialize
+     * @covers WindowsAzure\Utilities::unserialize
+     * @covers WindowsAzure\Utilities::_sxml2arr
      */
     public function testUnserialize()
     {
         // Setup
         $propertiesSample = TestResources::getServicePropertiesSample();
-        $properties = \PEAR2\WindowsAzure\Services\Core\Models\ServiceProperties::create($propertiesSample);
+        $properties = ServiceProperties::create($propertiesSample);
         $xml = $properties->toXml();
         $expected = $properties->toArray();
         
@@ -192,24 +223,64 @@ class UtilitiesTest extends PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers PEAR2\WindowsAzure\Utilities::serialize
+     * @covers WindowsAzure\Utilities::serialize
+     * @covers WindowsAzure\Utilities::_arr2xml
      */
     public function testSerialize()
     {
         // Setup
         $propertiesSample = TestResources::getServicePropertiesSample();
-        $properties = \PEAR2\WindowsAzure\Services\Core\Models\ServiceProperties::create($propertiesSample);
+        $properties = ServiceProperties::create($propertiesSample);
         $expected = $properties->toXml();
         $array = $properties->toArray();
         
         // Test
-        $actual = Utilities::serialize($array, \PEAR2\WindowsAzure\Services\Core\Models\ServiceProperties::$xmlRootName);
+        $actual = Utilities::serialize($array, ServiceProperties::$xmlRootName);
+        
+        $this->assertEquals($expected, $actual);
+    }
+
+    /**
+     * @covers WindowsAzure\Utilities::serialize
+     * @covers WindowsAzure\Utilities::_arr2xml
+     */
+    public function testSerializeNoArray()
+    {
+        // Setup
+        $expected = false;
+        $array = 'not an array';
+        
+        // Test
+        $actual = Utilities::serialize($array, ServiceProperties::$xmlRootName);
         
         $this->assertEquals($expected, $actual);
     }
     
     /**
-     * @covers PEAR2\WindowsAzure\Utilities::toBoolean
+     * @covers WindowsAzure\Utilities::serialize
+     * @covers WindowsAzure\Utilities::_arr2xml
+     */
+    public function testSerializeAttribute()
+    {
+        // Setup
+        $expected = '<?xml version="1.0" encoding="UTF-8"?>' . "\n" .
+            '<Object field1="value1" field2="value2"/>';
+        
+        $object = array(
+            '@attributes' => array(
+                'field1' => 'value1',
+                'field2' => 'value2'
+            )
+        );
+        
+        // Test
+        $actual = Utilities::serialize($object, 'Object');
+        
+        $this->assertEquals($expected, $actual);
+    }
+    
+    /**
+     * @covers WindowsAzure\Utilities::toBoolean
      */
     public function testToBoolean()
     {
@@ -226,7 +297,7 @@ class UtilitiesTest extends PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers PEAR2\WindowsAzure\Utilities::booleanToString
+     * @covers WindowsAzure\Utilities::booleanToString
      */
     public function testBooleanToString()
     {
@@ -242,7 +313,7 @@ class UtilitiesTest extends PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers PEAR2\WindowsAzure\Utilities::keysToLower
+     * @covers WindowsAzure\Utilities::keysToLower
      */
     public function testKeysToLower()
     {
@@ -255,6 +326,90 @@ class UtilitiesTest extends PHPUnit_Framework_TestCase
         
         // Assert
         $this->assertEquals($expected, $actual);
+    }
+    
+    /**
+     * @covers WindowsAzure\Utilities::isoDate
+     */
+    public function testIsoDate()
+    {
+        // Test
+        $date = Utilities::isoDate();
+        
+        // Assert
+        $this->assertNotNull($date);
+    }
+    
+    /**
+     * @covers WindowsAzure\Utilities::convertToEdmDateTime
+     */
+    public function testConvertToEdmDateTime()
+    {
+        // Test
+        $actual = Utilities::convertToEdmDateTime(new \DateTime());
+        
+        // Assert
+        $this->assertNotNull($actual);
+    }
+    
+    /**
+     * @covers WindowsAzure\Utilities::convertToDateTime
+     */
+    public function testConvertToDateTime()
+    {
+        // Setup
+        $date = '2008-10-01T15:26:13Z';
+        
+        // Test
+        $actual = Utilities::convertToDateTime($date);
+        
+        // Assert
+        $this->assertInstanceOf('\DateTime', $actual);
+    }
+    
+    /**
+     * @covers WindowsAzure\Utilities::convertToDateTime
+     */
+    public function testConvertToDateTimeWithDate()
+    {
+        // Setup
+        $date = new \DateTime();
+        
+        // Test
+        $actual = Utilities::convertToDateTime($date);
+        
+        // Assert
+        $this->assertEquals($date, $actual);
+    }
+    
+    /**
+     * @covers WindowsAzure\Utilities::readStream
+     */
+    public function testReadStream()
+    {
+        $expected = 'FileDummyContent';
+        $stream = fopen(VirtualFileSystem::newFile($expected), 'r');
+        
+        // Test
+        $actual = Utilities::readStream($stream);
+        
+        // Assert
+        $this->assertEquals($expected, $actual);
+    }
+    
+    /**
+     * @covers WindowsAzure\Utilities::stringToStream
+     */
+    public function testStringToStream()
+    {
+        $data = 'This is string';
+        $expected = fopen('data://text/plain,' . $data, 'r');
+        
+        // Test
+        $actual = Utilities::stringToStream($data);
+        
+        // Assert
+        $this->assertEquals(Utilities::readStream($expected), Utilities::readStream($actual));
     }
 }
 

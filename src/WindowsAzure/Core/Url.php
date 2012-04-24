@@ -15,24 +15,24 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   PEAR2\WindowsAzure\Core
+ * @package   WindowsAzure\Core
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
  
-namespace PEAR2\WindowsAzure\Core;
-use PEAR2\WindowsAzure\Validate;
-use PEAR2\WindowsAzure\Resources;
-use PEAR2\WindowsAzure\Core\IUrl;
+namespace WindowsAzure\Core;
 require_once 'Net/URL2.php';
+use WindowsAzure\Validate;
+use WindowsAzure\Resources;
+use WindowsAzure\Core\IUrl;
 
 /**
  * Default IUrl implementation.
  *
  * @category  Microsoft
- * @package   PEAR2\WindowsAzure\Core
+ * @package   WindowsAzure\Core
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
@@ -67,7 +67,7 @@ class Url implements IUrl
      * 
      * @param string $url the url to set.
      * 
-     * @return PEAR2\WindowsAzure\Core\Url
+     * @return WindowsAzure\Core\Url
      */
     public function __construct($url)
     {
@@ -81,7 +81,7 @@ class Url implements IUrl
     /**
      * Makes deep copy from the current object.
      * 
-     * @return PEAR2\WindowsAzure\Core\Url
+     * @return WindowsAzure\Core\Url
      */
     public function __clone()
     {
@@ -121,7 +121,6 @@ class Url implements IUrl
     public function setQueryVariable($key, $value, $force = false)
     {
         Validate::isString($key);
-        Validate::notNullOrEmpty($key);
         Validate::isString($value);
         
         if (!empty($value) && !is_null($value) || $force) {
@@ -149,7 +148,6 @@ class Url implements IUrl
     public function setUrlPath($urlPath)
     {
         Validate::isString($urlPath);
-        Validate::notNullOrEmpty($urlPath);
         
         $this->_url->setPath($urlPath);
     }
@@ -164,7 +162,6 @@ class Url implements IUrl
     public function appendUrlPath($urlPath)
     {
         Validate::isString($urlPath);
-        Validate::notNullOrEmpty($urlPath);
         
         $newUrlPath = parse_url($this->_url, PHP_URL_PATH) . $urlPath;
         $this->_url->setPath($newUrlPath);

@@ -15,22 +15,21 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   PEAR2\WindowsAzure\ServiceRuntime
+ * @package   WindowsAzure\ServiceRuntime
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
 
-namespace PEAR2\WindowsAzure\ServiceRuntime;
-use PEAR2\WindowsAzure\Resources;
-
+namespace WindowsAzure\ServiceRuntime;
+use WindowsAzure\Utilities;
 
 /**
  * The runtime version protocol client.
  *
  * @category  Microsoft
- * @package   PEAR2\WindowsAzure\ServiceRuntime\RuntimeVersionProtocolClient
+ * @package   WindowsAzure\ServiceRuntime
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
@@ -65,7 +64,28 @@ class RuntimeVersionProtocolClient
      */
     public function getVersionMap($connectionPath)
     {
-        throw new \Exception(Resources::NOT_IMPLEMENTED_MSG);
+        $versions = array();
+       
+        $input    = $this->_inputChannel->getInputStream($connectionPath);
+        $contents = stream_get_contents($input);
+
+        $discoveryInfo = Utilities::unserialize($contents);
+        
+        $endpoints = $discoveryInfo['RuntimeServerEndpoints']
+            ['RuntimeServerEndpoint'];
+
+        if (array_key_exists('@attributes', $endpoints)) {
+            $endpoints   = array();
+            $endpoints[] = $discoveryInfo
+                ['RuntimeServerEndpoints']['RuntimeServerEndpoint'];
+        }
+        
+        foreach ($endpoints as $endpoint) {
+            $versions[$endpoint['@attributes']['version']] = $endpoint
+                ['@attributes']['path'];
+        }
+
+        return $versions;
     }
 }
 

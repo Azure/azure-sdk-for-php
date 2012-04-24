@@ -15,18 +15,18 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   PEAR2\WindowsAzure\Services\Core
+ * @package   WindowsAzure\Services\Core
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
  
-namespace PEAR2\WindowsAzure\Services\Core;
+namespace WindowsAzure\Services\Core;
 
 /**
  * By implementing this interface you can control how 
- * PEAR2\WindowsAzure\Services\Core\Configuration creates your object when create
+ * WindowsAzure\Services\Core\Configuration creates your object when create
  * function is called. This can be useful if you want to add any processing layer
  * to the REST API wrapper (like handeling exceptions). So you can have a builder
  * with this build function:
@@ -36,7 +36,7 @@ namespace PEAR2\WindowsAzure\Services\Core;
  * </code>
  *
  * @category  Microsoft
- * @package   PEAR2\WindowsAzure\Services\Core
+ * @package   WindowsAzure\Services\Core
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
@@ -48,10 +48,10 @@ interface IServiceBuilder
     /**
      * Creates an object passed $type configured with $config.
      *
-     * @param PEAR2\WindowsAzure\Services\Core\Configuration $config configuration.
-     * @param string                                         $type   type name.
+     * @param WindowsAzure\Services\Core\Configuration $config The configuration.
+     * @param string                                   $type   The type name.
      * 
-     * @return mixed.
+     * @return mix
      */
     public static function build($config, $type);
 }

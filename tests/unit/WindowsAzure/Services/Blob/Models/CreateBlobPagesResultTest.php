@@ -15,23 +15,23 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   PEAR2\Tests\Unit\WindowsAzure\Services\Blob\Models
+ * @package   Tests\Unit\WindowsAzure\Services\Blob\Models
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
-namespace PEAR2\Tests\Unit\WindowsAzure\Services\Blob\Models;
-use PEAR2\Tests\Framework\TestResources;
-use PEAR2\WindowsAzure\Core\WindowsAzureUtilities;
-use PEAR2\WindowsAzure\Services\Blob\Models\CreateBlobPagesResult;
+namespace Tests\Unit\WindowsAzure\Services\Blob\Models;
+use Tests\Framework\TestResources;
+use WindowsAzure\Core\WindowsAzureUtilities;
+use WindowsAzure\Services\Blob\Models\CreateBlobPagesResult;
 
 
 /**
  * Unit tests for class CreateBlobPagesResult
  *
  * @category  Microsoft
- * @package   PEAR2\Tests\Unit\WindowsAzure\Services\Blob\Models
+ * @package   Tests\Unit\WindowsAzure\Services\Blob\Models
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
@@ -41,7 +41,7 @@ use PEAR2\WindowsAzure\Services\Blob\Models\CreateBlobPagesResult;
 class CreateBlobPagesResultTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @covers PEAR2\WindowsAzure\Services\Blob\Models\CreateBlobPagesResult::create
+     * @covers WindowsAzure\Services\Blob\Models\CreateBlobPagesResult::create
      */
     public function testCreate()
     {
@@ -61,8 +61,8 @@ class CreateBlobPagesResultTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers PEAR2\WindowsAzure\Services\Blob\Models\CreateBlobPagesResult::setLastModified
-     * @covers PEAR2\WindowsAzure\Services\Blob\Models\CreateBlobPagesResult::getLastModified
+     * @covers WindowsAzure\Services\Blob\Models\CreateBlobPagesResult::setLastModified
+     * @covers WindowsAzure\Services\Blob\Models\CreateBlobPagesResult::getLastModified
      */
     public function testSetLastModified()
     {
@@ -79,8 +79,8 @@ class CreateBlobPagesResultTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers PEAR2\WindowsAzure\Services\Blob\Models\CreateBlobPagesResult::setEtag
-     * @covers PEAR2\WindowsAzure\Services\Blob\Models\CreateBlobPagesResult::getEtag
+     * @covers WindowsAzure\Services\Blob\Models\CreateBlobPagesResult::setEtag
+     * @covers WindowsAzure\Services\Blob\Models\CreateBlobPagesResult::getEtag
      */
     public function testSetEtag()
     {
@@ -97,8 +97,8 @@ class CreateBlobPagesResultTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers PEAR2\WindowsAzure\Services\Blob\Models\CreateBlobPagesResult::setContentMD5
-     * @covers PEAR2\WindowsAzure\Services\Blob\Models\CreateBlobPagesResult::getContentMD5
+     * @covers WindowsAzure\Services\Blob\Models\CreateBlobPagesResult::setContentMD5
+     * @covers WindowsAzure\Services\Blob\Models\CreateBlobPagesResult::getContentMD5
      */
     public function testSetContentMD5()
     {
@@ -115,8 +115,8 @@ class CreateBlobPagesResultTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers PEAR2\WindowsAzure\Services\Blob\Models\CreateBlobPagesResult::setSequenceNumber
-     * @covers PEAR2\WindowsAzure\Services\Blob\Models\CreateBlobPagesResult::getSequenceNumber
+     * @covers WindowsAzure\Services\Blob\Models\CreateBlobPagesResult::setSequenceNumber
+     * @covers WindowsAzure\Services\Blob\Models\CreateBlobPagesResult::getSequenceNumber
      */
     public function testSetSequenceNumber()
     {

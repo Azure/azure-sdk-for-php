@@ -15,21 +15,21 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   PEAR2\WindowsAzure\Services\Blob\Models
+ * @package   WindowsAzure\Services\Blob\Models
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
  
-namespace PEAR2\WindowsAzure\Services\Blob\Models;
-use PEAR2\WindowsAzure\Resources;
+namespace WindowsAzure\Services\Blob\Models;
+use WindowsAzure\Resources;
 
 /**
  * Holds public acces types for a container.
  *
  * @category  Microsoft
- * @package   PEAR2\WindowsAzure\Services\Blob\Models
+ * @package   WindowsAzure\Services\Blob\Models
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
@@ -41,6 +41,26 @@ class PublicAccessType
     const NONE                = Resources::EMPTY_STRING;
     const BLOBS_ONLY          = 'blob';
     const CONTAINER_AND_BLOBS = 'container';
+    
+    /**
+     * Validates the public access.
+     * 
+     * @param string $type The public access type.
+     * 
+     * @return boolean
+     */
+    public static function isValid($type)
+    {
+        switch ($type) {
+        case self::NONE:
+        case self::BLOBS_ONLY:
+        case self::CONTAINER_AND_BLOBS:
+            return true;
+
+        default:
+            return false;
+        }
+    }
 }
 
 ?>

@@ -15,25 +15,24 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   PEAR2\WindowsAzure\Services\Blob\Models
+ * @package   WindowsAzure\Services\Blob\Models
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
  
-namespace PEAR2\WindowsAzure\Services\Blob\Models;
-use PEAR2\WindowsAzure\Services\Blob\Models\AccessConditionHeaderType;
-use PEAR2\WindowsAzure\Validate;
-use PEAR2\WindowsAzure\Resources;
-use PEAR2\WindowsAzure\Core\WindowsAzureUtilities;
+namespace WindowsAzure\Services\Blob\Models;
+use WindowsAzure\Validate;
+use WindowsAzure\Resources;
+use WindowsAzure\Core\WindowsAzureUtilities;
 
 /**
  * Represents a set of access conditions to be used for operations against the 
  * storage services.
  *
  * @category  Microsoft
- * @package   PEAR2\WindowsAzure\Services\Blob\Models
+ * @package   WindowsAzure\Services\Blob\Models
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
@@ -47,7 +46,7 @@ class AccessCondition
      * 
      * @var string
      */
-    private $_header = AccessConditionHeaderType::NONE;
+    private $_header = Resources::EMPTY_STRING;
     
     /**
      * Represents the header value.
@@ -71,11 +70,11 @@ class AccessCondition
     /**
      * Specifies that no access condition is set.
      * 
-     * @return \PEAR2\WindowsAzure\Services\Blob\Models\AccessCondition 
+     * @return \WindowsAzure\Services\Blob\Models\AccessCondition 
      */
     public static function none()
     {
-        return new AccessCondition(AccessConditionHeaderType::NONE, null);
+        return new AccessCondition(Resources::EMPTY_STRING, null);
     }
     
     /**
@@ -93,11 +92,11 @@ class AccessCondition
      *
      * @param string $etag a string that represents the ETag value to check.
      *
-     * @return \PEAR2\WindowsAzure\Services\Blob\Models\AccessCondition
+     * @return \WindowsAzure\Services\Blob\Models\AccessCondition
      */
     public static function ifMatch($etag)
     {
-        return new AccessCondition(AccessConditionHeaderType::IF_MATCH, $etag);
+        return new AccessCondition(Resources::IF_MATCH, $etag);
     }
     
     /**
@@ -113,15 +112,15 @@ class AccessCondition
      * <a href= 'http://go.microsoft.com/fwlink/?LinkID=224642&clcid=0x409'>
      * Specifying Conditional Headers for Blob Service Operations</a>.
      *
-     * @param \DateTime $lastModified date object that represents the last-modified 
+     * @param string $lastModified date string that represents the last-modified 
      * time to check for the resource.
      *
-     * @return \PEAR2\WindowsAzure\Services\Blob\Models\AccessCondition
+     * @return \WindowsAzure\Services\Blob\Models\AccessCondition
      */
     public static function ifModifiedSince($lastModified)
     {
         return new AccessCondition(
-            AccessConditionHeaderType::IF_MODIFIED_SINCE,
+            Resources::IF_MODIFIED_SINCE,
             WindowsAzureUtilities::rfc1123ToDateTime($lastModified)
         );
     }
@@ -141,11 +140,11 @@ class AccessCondition
      *
      * @param string $etag string that represents the ETag value to check.
      *
-     * @return \PEAR2\WindowsAzure\Services\Blob\Models\AccessCondition
+     * @return \WindowsAzure\Services\Blob\Models\AccessCondition
      */
     public static function ifNoneMatch($etag)
     {
-        return new AccessCondition(AccessConditionHeaderType::IF_NONE_MATCH, $etag);
+        return new AccessCondition(Resources::IF_NONE_MATCH, $etag);
     }
     
     /**
@@ -161,15 +160,15 @@ class AccessCondition
      * <a href= 'http://go.microsoft.com/fwlink/?LinkID=224642&clcid=0x409'>
      * Specifying Conditional Headers for Blob Service Operations</a>.
      *
-     * @param \DateTime $lastModified date object that represents the last-modified 
+     * @param string $lastModified date string that represents the last-modified 
      * time to check for the resource.
      *
-     * @return \PEAR2\WindowsAzure\Services\Blob\Models\AccessCondition
+     * @return \WindowsAzure\Services\Blob\Models\AccessCondition
      */
     public static function ifNotModifiedSince($lastModified)
     {
         return new AccessCondition(
-            AccessConditionHeaderType::IF_UNMODIFIED_SINCE,
+            Resources::IF_UNMODIFIED_SINCE,
             WindowsAzureUtilities::rfc1123ToDateTime($lastModified)
         );
     }
@@ -177,13 +176,13 @@ class AccessCondition
     /**
      * Sets header type
      * 
-     * @param string $headerType can be one of AccessConditionHeaderType
+     * @param string $headerType can be one of Resources
      * 
      * @return none.
      */
     public function setHeader($headerType)
     {
-        $valid = AccessConditionHeaderType::isValid($headerType);
+        $valid = AccessCondition::isValid($headerType);
         Validate::isTrue($valid, Resources::INVALID_HT_MSG);
         
         $this->_header = $headerType;
@@ -219,6 +218,27 @@ class AccessCondition
     public function getValue()
     {
         return $this->_value;
+    }
+    
+    /**
+     * Check if the $headerType belongs to valid header types
+     * 
+     * @param string $headerType candidate header type
+     * 
+     * @return boolean 
+     */
+    public static function isValid($headerType)
+    {
+        if (   $headerType == Resources::EMPTY_STRING
+            || $headerType == Resources::IF_UNMODIFIED_SINCE
+            || $headerType == Resources::IF_MATCH
+            || $headerType == Resources::IF_MODIFIED_SINCE
+            || $headerType == Resources::IF_NONE_MATCH
+        ) {
+            return true;
+        } else {
+            return false;
+        }
     }
 }
 

@@ -23,7 +23,10 @@
  * @link       http://pear.php.net/package/azure-sdk-for-php
  */
  
-namespace PEAR2\Tests\Framework;
+namespace Tests\Framework;
+use WindowsAzure\Services\Table\Models\EdmType;
+use WindowsAzure\Services\Table\Models\Entity;
+use WindowsAzure\Utilities;
 
 /**
  * Resources for testing framework.
@@ -357,6 +360,19 @@ class TestResources
         $sample['NextMarker'] = 'value';
         
         return $sample;
+    }
+    
+    public static function getTestEntity($partitionKey, $rowKey)
+    {
+        $entity = new Entity();
+        $entity->setPartitionKey($partitionKey);
+        $entity->setRowKey($rowKey);
+        $entity->addProperty('CustomerId', EdmType::INT32, 890);
+        $entity->addProperty('CustomerName', null, 'John');
+        $entity->addProperty('IsNew', EdmType::BOOLEAN, true);
+        $entity->addProperty('JoinDate', EdmType::DATETIME, new \DateTime());
+        
+        return $entity;
     }
 }
 

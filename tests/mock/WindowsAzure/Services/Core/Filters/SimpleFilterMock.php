@@ -15,28 +15,28 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   PEAR2\Tests\Mock\WindowsAzure\Services\Core\Filters
+ * @package   Tests\Mock\WindowsAzure\Services\Core\Filters
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
  
-namespace PEAR2\Tests\Mock\WindowsAzure\Services\Core\Filters;
-use PEAR2\Tests\Framework\TestResources;
+namespace Tests\Mock\WindowsAzure\Services\Core\Filters;
+use Tests\Framework\TestResources;
 
 /**
  * Alters request headers and response to mock real filter
  *
  * @category  Microsoft
- * @package   PEAR2\Tests\Mock\WindowsAzure\Services\Core\Filters
+ * @package   Tests\Mock\WindowsAzure\Services\Core\Filters
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @version   Release: @package_version@
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
-class SimpleFilterMock implements \PEAR2\WindowsAzure\Core\IServiceFilter
+class SimpleFilterMock implements \WindowsAzure\Core\IServiceFilter
 {
     private $_headerName;
     private $_data;

@@ -15,21 +15,20 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   PEAR2\WindowsAzure\ServiceRuntime
+ * @package   WindowsAzure\ServiceRuntime
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
 
-namespace PEAR2\WindowsAzure\ServiceRuntime;
-use PEAR2\WindowsAzure\Resources;
+namespace WindowsAzure\ServiceRuntime;
 
 /**
  * The runtime kernel.
  *
  * @category  Microsoft
- * @package   PEAR2\WindowsAzure\ServiceRuntime\RoleInstance
+ * @package   WindowsAzure\ServiceRuntime
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
@@ -147,11 +146,14 @@ class RuntimeKernel
     /**
      * Gets the current kernel instance.
      * 
+     * @param boolean $forceNewInstance Boolean value indicating if a new instance
+     * should be obtained even if a previous one exists.
+     * 
      * @return RuntimeKernel
      */
-    public static function getKernel()
+    public static function getKernel($forceNewInstance = false)
     {
-        if (self::$_theKernel == null) {
+        if (is_null(self::$_theKernel) || $forceNewInstance) {
             self::$_theKernel = new RuntimeKernel();
         }
         

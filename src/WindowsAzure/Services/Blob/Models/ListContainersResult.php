@@ -15,24 +15,24 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   PEAR2\WindowsAzure\Services\Blob\Models
+ * @package   WindowsAzure\Services\Blob\Models
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
  
-namespace PEAR2\WindowsAzure\Services\Blob\Models;
-use PEAR2\WindowsAzure\Resources;
-use PEAR2\WindowsAzure\Services\Blob\Models\Container;
-use PEAR2\WindowsAzure\Utilities;
-use PEAR2\WindowsAzure\Core\WindowsAzureUtilities;
+namespace WindowsAzure\Services\Blob\Models;
+use WindowsAzure\Resources;
+use WindowsAzure\Services\Blob\Models\Container;
+use WindowsAzure\Utilities;
+use WindowsAzure\Core\WindowsAzureUtilities;
 
 /**
  * Container to hold list container response object.
  *
  * @category  Microsoft
- * @package   PEAR2\WindowsAzure\Services\Blob\Models
+ * @package   WindowsAzure\Services\Blob\Models
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
@@ -52,7 +52,7 @@ class ListContainersResult
      *
      * @param array $parsedResponse XML response parsed into array.
      * 
-     * @return PEAR2\WindowsAzure\Services\Blob\Models\ListBlobResult.
+     * @return WindowsAzure\Services\Blob\Models\ListBlobResult.
      */
     public static function create($parsedResponse)
     {
@@ -72,7 +72,7 @@ class ListContainersResult
         $result->_containers = array();
         $rawContainer        = array();
         
-        if (is_array($parsedResponse['Containers'])) {
+        if ( !empty($parsedResponse['Containers']) ) {
             $containersArray = $parsedResponse['Containers']['Container'];
             $rawContainer    = Utilities::getArray($containersArray);
         }
@@ -122,7 +122,7 @@ class ListContainersResult
     }
 
     /**
-     * Gets perfix.
+     * Gets prefix.
      *
      * @return string.
      */
@@ -132,7 +132,7 @@ class ListContainersResult
     }
 
     /**
-     * Sets perfix.
+     * Sets prefix.
      *
      * @param string $prefix value.
      * 

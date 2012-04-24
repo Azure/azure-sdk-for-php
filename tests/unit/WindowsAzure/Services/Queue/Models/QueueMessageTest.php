@@ -15,29 +15,32 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   PEAR2\Tests\Unit\WindowsAzure
+ * @package   Tests\Unit\WindowsAzure\Services\Queue\Models
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
-use PEAR2\WindowsAzure\Services\Queue\Models\QueueMessage;
+
+namespace Tests\Unit\WindowsAzure\Services\Queue\Models;
+use WindowsAzure\Utilities;
+use WindowsAzure\Services\Queue\Models\QueueMessage;
 
 /**
  * Unit tests for class QueueMessage
  *
  * @category  Microsoft
- * @package   PEAR2\Tests\Unit\WindowsAzure
+ * @package   Tests\Unit\WindowsAzure\Services\Queue\Models
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @version   Release: @package_version@
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
-class QueueMessageTest extends PHPUnit_Framework_TestCase
+class QueueMessageTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @covers PEAR2\WindowsAzure\Services\Queue\Models\QueueMessage::getMessageText
+     * @covers WindowsAzure\Services\Queue\Models\QueueMessage::getMessageText
      */
     public function testGetMessageText()
     {
@@ -54,7 +57,7 @@ class QueueMessageTest extends PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers PEAR2\WindowsAzure\Services\Queue\Models\QueueMessage::setMessageText
+     * @covers WindowsAzure\Services\Queue\Models\QueueMessage::setMessageText
      */
     public function testSetMessageText()
     {
@@ -71,7 +74,7 @@ class QueueMessageTest extends PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers PEAR2\WindowsAzure\Services\Queue\Models\QueueMessage::toXml
+     * @covers WindowsAzure\Services\Queue\Models\QueueMessage::toXml
      */
     public function testToXml()
     {
@@ -79,7 +82,7 @@ class QueueMessageTest extends PHPUnit_Framework_TestCase
         $queueMessage = new QueueMessage();
         $messageText = 'this is message text';
         $array = array('MessageText' => $messageText);
-        $expected = PEAR2\WindowsAzure\Utilities::serialize($array, QueueMessage::$xmlRootName);
+        $expected = Utilities::serialize($array, QueueMessage::$xmlRootName);
         $queueMessage->setMessageText($messageText);
         
         // Test

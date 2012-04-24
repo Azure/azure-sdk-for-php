@@ -15,33 +15,34 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   PEAR2\Tests\Unit\WindowsAzure
+ * @package   Tests\Unit\WindowsAzure\Services\Blob
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
 
-use PEAR2\WindowsAzure\Services\Blob\BlobService;
-use PEAR2\WindowsAzure\Services\Core\Configuration;
-use PEAR2\Tests\Framework\TestResources;
-use PEAR2\WindowsAzure\Services\Blob\BlobSettings;
+namespace Tests\Unit\WindowsAzure\Services\Blob;
+use WindowsAzure\Services\Blob\BlobService;
+use WindowsAzure\Services\Core\Configuration;
+use Tests\Framework\TestResources;
+use WindowsAzure\Services\Blob\BlobSettings;
 
 /**
  * Unit tests for class BlobService
  *
  * @category  Microsoft
- * @package   PEAR2\Tests\Unit\WindowsAzure
+ * @package   Tests\Unit\WindowsAzure\Services\Blob
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @version   Release: @package_version@
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
-class BlobServiceTest extends PHPUnit_Framework_TestCase
+class BlobServiceTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @covers PEAR2\WindowsAzure\Services\Blob\BlobService::create
+     * @covers WindowsAzure\Services\Blob\BlobService::create
      */
     public function testCreateWithConfig()
     {
@@ -56,7 +57,7 @@ class BlobServiceTest extends PHPUnit_Framework_TestCase
         $blobWrapper = BlobService::create($config);
         
         // Assert
-        $this->assertInstanceOf('PEAR2\\WindowsAzure\\Services\\Blob\\IBlob', $blobWrapper);
+        $this->assertInstanceOf('\WindowsAzure\\Services\\Blob\\IBlob', $blobWrapper);
     }
 }
 

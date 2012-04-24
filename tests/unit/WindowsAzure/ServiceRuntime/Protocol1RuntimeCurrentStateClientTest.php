@@ -15,24 +15,27 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   PEAR2\Tests\Unit\WindowsAzure\ServiceRuntime
+ * @package   Tests\Unit\WindowsAzure\ServiceRuntime
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
-namespace PEAR2\Tests\Unit\WindowsAzure\ServiceRuntime;
-use PEAR2\Tests\Framework\TestResources;
-use PEAR2\WindowsAzure\Core\WindowsAzureUtilities;
-use PEAR2\WindowsAzure\ServiceRuntime\FileOutputChannel;
-use PEAR2\WindowsAzure\ServiceRuntime\Protocol1RuntimeCurrentStateClient;
-use PEAR2\WindowsAzure\ServiceRuntime\XmlCurrentStateSerializer;
+namespace Tests\Unit\WindowsAzure\ServiceRuntime;
+use Tests\Framework\TestResources;
+use WindowsAzure\Core\WindowsAzureUtilities;
+use WindowsAzure\ServiceRuntime\AcquireCurrentState;
+use WindowsAzure\ServiceRuntime\CurrentStatus;
+use WindowsAzure\ServiceRuntime\FileInputChannel;
+use WindowsAzure\ServiceRuntime\FileOutputChannel;
+use WindowsAzure\ServiceRuntime\Protocol1RuntimeCurrentStateClient;
+use WindowsAzure\ServiceRuntime\XmlCurrentStateSerializer;
 
 /**
- * Unit tests for class Protocol1RuntimeCurrentStateClient
+ * Unit tests for class Protocol1RuntimeCurrentStateClient.
  *
  * @category  Microsoft
- * @package   PEAR2\Tests\Unit\WindowsAzure\ServiceRuntime\Protocol1RuntimeCurrentStateClientTest
+ * @package   Tests\Unit\WindowsAzure\ServiceRuntime
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
@@ -42,7 +45,7 @@ use PEAR2\WindowsAzure\ServiceRuntime\XmlCurrentStateSerializer;
 class Protocol1RuntimeCurrentStateClientTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @covers PEAR2\WindowsAzure\ServiceRuntime\Protocol1RuntimeCurrentStateClient::__construct
+     * @covers WindowsAzure\ServiceRuntime\Protocol1RuntimeCurrentStateClient::__construct
      */
     public function testConstruct()
     {
@@ -56,8 +59,66 @@ class Protocol1RuntimeCurrentStateClientTest extends \PHPUnit_Framework_TestCase
                 $outputChannel);
         
         // Test
-        $this->assertInstanceOf('PEAR2\\WindowsAzure\\ServiceRuntime\\Protocol1RuntimeCurrentStateClient',
+        $this->assertInstanceOf('\WindowsAzure\\ServiceRuntime\\Protocol1RuntimeCurrentStateClient',
             $protocol1RuntimeCurrentStateClient);
+    }
+    
+    /**
+     * @covers WindowsAzure\ServiceRuntime\Protocol1RuntimeCurrentStateClient::setEndpoint
+     * @covers WindowsAzure\ServiceRuntime\Protocol1RuntimeCurrentStateClient::setCurrentState
+     */
+    public function testSetCurrentState()
+    {
+        // Setup
+        $rootDirectory = 'root';
+        $fileName = 'test';
+        $fileContents = '<?xml version="1.0" encoding="UTF-8"?>' . "\n" .
+            '<CurrentState>' .
+            '<StatusLease ClientId="clientId">' .
+            '<Acquire>' .
+            '<Incarnation>1</Incarnation>' .
+            '<Status>Recycle</Status>' .
+            '<Expiration>2000-01-01T00:00:00.0000000Z</Expiration>' .
+            '</Acquire>' .
+            '</StatusLease>' .
+            '</CurrentState>';
+        
+        \vfsStreamWrapper::register(); 
+        \vfsStreamWrapper::setRoot(new \vfsStreamDirectory($rootDirectory));
+        
+        $file = \vfsStream::newFile($fileName);
+        \vfsStreamWrapper::getRoot()->addChild($file);
+        
+        $serializer = new XmlCurrentStateSerializer();
+        $fileOutputChannel = new FileOutputChannel();
+
+        $protocol1RuntimeCurrentStateClient =
+            new Protocol1RuntimeCurrentStateClient(
+                $serializer,
+                $fileOutputChannel
+            );
+        
+        $protocol1RuntimeCurrentStateClient->setEndpoint(
+            \vfsStream::url($rootDirectory . '/' . $fileName)
+        );
+        
+        // Test
+        $recycleState = new AcquireCurrentState(
+            'clientId',
+            1,
+            CurrentStatus::RECYCLE,
+            new \DateTime('2000-01-01', new \DateTimeZone('UTC'))
+        );
+        
+        $protocol1RuntimeCurrentStateClient->setCurrentState($recycleState);
+        
+        $fileInputChannel = new FileInputChannel();
+        $fileInputStream = $fileInputChannel->getInputStream(
+            \vfsStream::url($rootDirectory . '/' . $fileName)
+        );
+        
+        $inputChannelContents = stream_get_contents($fileInputStream);
+        $this->assertEquals($fileContents, $inputChannelContents);
     }
 }
 

@@ -15,30 +15,31 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   PEAR2\Tests\Unit\WindowsAzure
+ * @package   Tests\Unit\WindowsAzure\Services\Queue\Models
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
 
-use PEAR2\WindowsAzure\Services\Queue\Models\ListMessagesOptions;
+namespace Tests\Unit\WindowsAzure\Services\Queue\Models;
+use WindowsAzure\Services\Queue\Models\ListMessagesOptions;
 
 /**
  * Unit tests for class ListMessagesOptions
  *
  * @category  Microsoft
- * @package   PEAR2\Tests\Unit\WindowsAzure
+ * @package   Tests\Unit\WindowsAzure\Services\Queue\Models
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @version   Release: @package_version@
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
-class ListMessagesOptionsTest extends PHPUnit_Framework_TestCase
+class ListMessagesOptionsTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @covers PEAR2\WindowsAzure\Services\Queue\Models\ListMessagesOptions::getVisibilityTimeoutInSeconds
+     * @covers WindowsAzure\Services\Queue\Models\ListMessagesOptions::getVisibilityTimeoutInSeconds
      */
     public function testGetVisibilityTimeoutInSeconds()
     {
@@ -55,7 +56,7 @@ class ListMessagesOptionsTest extends PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers PEAR2\WindowsAzure\Services\Queue\Models\ListMessagesOptions::setVisibilityTimeoutInSeconds
+     * @covers WindowsAzure\Services\Queue\Models\ListMessagesOptions::setVisibilityTimeoutInSeconds
      */
     public function testSetVisibilityTimeoutInSeconds()
     {
@@ -72,7 +73,7 @@ class ListMessagesOptionsTest extends PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers PEAR2\WindowsAzure\Services\Queue\Models\ListMessagesOptions::getNumberOfMessages
+     * @covers WindowsAzure\Services\Queue\Models\ListMessagesOptions::getNumberOfMessages
      */
     public function testGetNumberOfMessages()
     {
@@ -89,7 +90,7 @@ class ListMessagesOptionsTest extends PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers PEAR2\WindowsAzure\Services\Queue\Models\ListMessagesOptions::setNumberOfMessages
+     * @covers WindowsAzure\Services\Queue\Models\ListMessagesOptions::setNumberOfMessages
      */
     public function testSetNumberOfMessages()
     {

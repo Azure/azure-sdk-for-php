@@ -15,21 +15,21 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   PEAR2\WindowsAzure\ServiceRuntime
+ * @package   WindowsAzure\ServiceRuntime
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
 
-namespace PEAR2\WindowsAzure\ServiceRuntime;
-use PEAR2\WindowsAzure\Resources;
+namespace WindowsAzure\ServiceRuntime;
+use WindowsAzure\Resources;
 
 /**
  * The runtime version manager.
  *
  * @category  Microsoft
- * @package   PEAR2\WindowsAzure\ServiceRuntime\RuntimeVersionManager
+ * @package   WindowsAzure\ServiceRuntime
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
@@ -41,7 +41,7 @@ class RuntimeVersionManager
     /**
      * The protocol client.
      * 
-     * @var Protocol1RuntimeClient
+     * @var RuntimeVersionProtocolClient
      */
     private $_protocolClient;
     
@@ -55,11 +55,18 @@ class RuntimeVersionManager
     /**
      * Constructor
      * 
-     * @param Protocol1RuntimeClient $protocolClient The protocol client.
+     * @param RuntimeVersionProtocolClient $protocolClient The runtime version 
+     * protocol client.
      */
     public function __construct($protocolClient)
     {
         $this->_protocolClient = $protocolClient;
+        
+        $this->_supportedVersionList = array();
+        array_push(
+            $this->_supportedVersionList,
+            new Protocol1RuntimeClientFactory()
+        );
     }
     
     /**
@@ -71,7 +78,17 @@ class RuntimeVersionManager
      */
     public function getRuntimeClient($versionEndpoint)
     {
-        throw new \Exception(Resources::NOT_IMPLEMENTED_MSG);
+        $versionMap = $this->_protocolClient->getVersionMap($versionEndpoint);
+        
+        foreach ($this->_supportedVersionList as $factory) {
+            if (array_key_exists($factory->getVersion(), $versionMap)) {
+                return $factory->createRuntimeClient(
+                    $versionMap[$factory->getVersion()]
+                );
+            }
+        }
+        
+        throw new \RuntimeException(Resources::INVALID_VERSION_MSG);
     }
 }
 

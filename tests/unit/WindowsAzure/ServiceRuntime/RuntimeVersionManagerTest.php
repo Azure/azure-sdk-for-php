@@ -15,23 +15,25 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   PEAR2\Tests\Unit\WindowsAzure\ServiceRuntime
+ * @package   Tests\Unit\WindowsAzure\ServiceRuntime
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
-namespace PEAR2\Tests\Unit\WindowsAzure\ServiceRuntime;
-use PEAR2\Tests\Framework\TestResources;
-use PEAR2\WindowsAzure\Core\WindowsAzureUtilities;
-use PEAR2\WindowsAzure\ServiceRuntime\RuntimeVersionManager;
-use PEAR2\WindowsAzure\Resources;
+namespace Tests\Unit\WindowsAzure\ServiceRuntime;
+use Tests\Framework\TestResources;
+use WindowsAzure\Core\WindowsAzureUtilities;
+use WindowsAzure\ServiceRuntime\FileInputChannel;
+use WindowsAzure\ServiceRuntime\RuntimeVersionProtocolClient;
+use WindowsAzure\ServiceRuntime\RuntimeVersionManager;
+use WindowsAzure\Resources;
 
 /**
- * Unit tests for class RuntimeVersionManager
+ * Unit tests for class RuntimeVersionManager.
  *
  * @category  Microsoft
- * @package   PEAR2\Tests\Unit\WindowsAzure\ServiceRuntime\RuntimeVersionManagerTest
+ * @package   Tests\Unit\WindowsAzure\ServiceRuntime
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
@@ -41,7 +43,7 @@ use PEAR2\WindowsAzure\Resources;
 class RuntimeVersionManagerTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @covers PEAR2\WindowsAzure\ServiceRuntime\RuntimeVersionManager::__construct
+     * @covers WindowsAzure\ServiceRuntime\RuntimeVersionManager::__construct
      */
     public function testConstruct()
     {
@@ -50,8 +52,88 @@ class RuntimeVersionManagerTest extends \PHPUnit_Framework_TestCase
         
         // Test
         $this->assertInstanceOf(
-            'PEAR2\\WindowsAzure\\ServiceRuntime\\RuntimeVersionManager',
+            '\WindowsAzure\\ServiceRuntime\\RuntimeVersionManager',
             $runtimeVersionManager);
+    }
+    
+    /**
+     * @covers WindowsAzure\ServiceRuntime\RuntimeVersionManager::getRuntimeClient
+     */
+    public function testGetRuntimeClientInvalid()
+    {
+        // Setup
+        $rootDirectory = 'root';
+
+        \vfsStreamWrapper::register(); 
+        \vfsStreamWrapper::setRoot(new \vfsStreamDirectory($rootDirectory));
+                
+        // Fake version will force the exception
+        $fileName = 'versionendpoint';
+        $fileContent = '<?xml version="1.0" encoding="utf-8"?>' .
+            '<RuntimeServerDiscovery xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" ' .
+            'xmlns:xsd="http://www.w3.org/2001/XMLSchema">' .
+            '<RuntimeServerEndpoints>' .
+            '<RuntimeServerEndpoint version="2099-03-08" path="myPath1" />' .
+            '</RuntimeServerEndpoints>' .
+            '</RuntimeServerDiscovery>';
+        
+        $file = \vfsStream::newFile($fileName);
+        $file->setContent($fileContent); 
+
+        \vfsStreamWrapper::getRoot()->addChild($file);
+        
+        $runtimeVersionProtocolClient =
+            new RuntimeVersionProtocolClient(new FileInputChannel());
+        
+        $runtimeVersionManager = new RuntimeVersionManager(
+            $runtimeVersionProtocolClient
+        );
+
+        // Test
+        $this->setExpectedException(get_class(new \RuntimeException()));
+        $runtimeVersionManager->getRuntimeClient(
+            \vfsStream::url($rootDirectory . '/' . $fileName)
+        );
+    }
+    
+    /**
+     * @covers WindowsAzure\ServiceRuntime\RuntimeVersionManager::getRuntimeClient
+     */
+    public function testGetRuntimeClient()
+    {
+        // Setup
+        $rootDirectory = 'root';
+
+        \vfsStreamWrapper::register(); 
+        \vfsStreamWrapper::setRoot(new \vfsStreamDirectory($rootDirectory));
+                
+        $fileName = 'versionendpoint';
+        $fileContent = '<?xml version="1.0" encoding="utf-8"?>' .
+            '<RuntimeServerDiscovery xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" ' .
+            'xmlns:xsd="http://www.w3.org/2001/XMLSchema">' .
+            '<RuntimeServerEndpoints>' .
+            '<RuntimeServerEndpoint version="2011-03-08" path="myPath1" />' .
+            '</RuntimeServerEndpoints>' .
+            '</RuntimeServerDiscovery>';
+        
+        $file = \vfsStream::newFile($fileName);
+        $file->setContent($fileContent); 
+
+        \vfsStreamWrapper::getRoot()->addChild($file);
+        
+        $runtimeVersionProtocolClient =
+            new RuntimeVersionProtocolClient(new FileInputChannel());
+        
+        $runtimeVersionManager = new RuntimeVersionManager(
+            $runtimeVersionProtocolClient
+        );
+        
+        $runtimeClient = $runtimeVersionManager->getRuntimeClient(
+            \vfsStream::url($rootDirectory . '/' . $fileName)
+        );
+        
+        // Test
+        $this->assertNotEquals(null, $runtimeClient);
     }
 }
 

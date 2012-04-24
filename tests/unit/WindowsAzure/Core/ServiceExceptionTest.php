@@ -15,20 +15,20 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   PEAR2\Tests\Unit\WindowsAzure
+ * @package   Tests\Unit\WindowsAzure
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
 
-use PEAR2\WindowsAzure\Core\ServiceException;
+use WindowsAzure\Core\ServiceException;
 
 /**
  * Unit tests for class ServiceException
  *
  * @category  Microsoft
- * @package   PEAR2\Tests\Unit\WindowsAzure
+ * @package   Tests\Unit\WindowsAzure
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
@@ -38,7 +38,7 @@ use PEAR2\WindowsAzure\Core\ServiceException;
 class ServiceExceptionTest extends PHPUnit_Framework_TestCase
 {
     /**
-     * @covers PEAR2\WindowsAzure\Core\ServiceException::__construct
+     * @covers WindowsAzure\Core\ServiceException::__construct
      */
     public function test__construct()
     {
@@ -57,7 +57,7 @@ class ServiceExceptionTest extends PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers PEAR2\WindowsAzure\Core\ServiceException::getErrorText
+     * @covers WindowsAzure\Core\ServiceException::getErrorText
      */
     public function testGetErrorText()
     {
@@ -74,7 +74,7 @@ class ServiceExceptionTest extends PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers PEAR2\WindowsAzure\Core\ServiceException::getErrorReason
+     * @covers WindowsAzure\Core\ServiceException::getErrorReason
      */
     public function testGetErrorReason()
     {

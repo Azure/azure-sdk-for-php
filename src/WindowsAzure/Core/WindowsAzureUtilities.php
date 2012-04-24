@@ -15,22 +15,23 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   PEAR2\WindowsAzure\Core
+ * @package   WindowsAzure\Core
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
  
-namespace PEAR2\WindowsAzure\Core;
-use PEAR2\WindowsAzure\Resources;
-use PEAR2\WindowsAzure\Utilities;
+namespace WindowsAzure\Core;
+use WindowsAzure\Resources;
+use WindowsAzure\Utilities;
+use WindowsAzure\Validate;
 
 /**
  * General utilities for communicating with azure.
  *
  * @category  Microsoft
- * @package   PEAR2\WindowsAzure\Core
+ * @package   WindowsAzure\Core
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
@@ -95,6 +96,23 @@ class WindowsAzureUtilities
         }
         
         return $metadata;
+    }
+    
+    /**
+     * Validates the provided metadata array.
+     * 
+     * @param mix $metadata The metadata array.
+     * 
+     * @return none
+     */
+    public static function isValidMetadata($metadata)
+    {
+        Validate::isArray($metadata, 'metadata');
+        
+        foreach ($metadata as $key => $value) {
+            Validate::isString($key, 'metadata key');
+            Validate::isString($value, 'metadata value');
+        }
     }
     
     /**

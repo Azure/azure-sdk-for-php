@@ -15,22 +15,23 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   PEAR2\WindowsAzure
+ * @package   WindowsAzure
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
  
-namespace PEAR2\WindowsAzure;
+namespace WindowsAzure;
 require_once 'XML/Unserializer.php';
 require_once 'XML/Serializer.php';
+use WindowsAzure\Validate;
 
 /**
  * Utilities for the project
  *
  * @category  Microsoft
- * @package   PEAR2\WindowsAzure
+ * @package   WindowsAzure
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
@@ -41,19 +42,52 @@ class Utilities
 {
     /**
      * Returns the specified value of the $key passed from $array and in case that
-     * this $key doesn't exist, the default value is retured.
+     * this $key doesn't exist, the default value is returned.
      *
-     * @param array $array   Array to be used.
-     * @param mixed $key     Array key.
-     * @param mixed $default Value to return if $key is not found in $array.
+     * @param array $array   The array to be used.
+     * @param mix   $key     The array key.
+     * @param mix   $default The value to return if $key is not found in $array.
      * 
      * @static
      * 
-     * @return mixed.
+     * @return mix
      */
     public static function tryGetValue($array, $key, $default = null)
     {
-        return array_key_exists($key, $array) ? $array[$key] : $default;
+        return is_array($array) && array_key_exists($key, $array)
+            ? $array[$key]
+            : $default;
+    }
+    
+    /**
+     * Returns the specified value of the key chain passed from $array and in case
+     * that key chain doesn't exist, null is returned.
+     *
+     * @param array $array Array to be used.
+     * 
+     * @static
+     * 
+     * @return mix
+     */
+    public static function tryGetKeysChainValue($array)
+    {
+        $arguments    = func_get_args();
+        $numArguments = func_num_args();
+        
+        if (!is_array($array)) {
+            return null;
+        }
+        
+        $currentArray = $array;
+        for ($i = 1; $i < $numArguments; $i++) {
+            if (array_key_exists($arguments[$i], $currentArray)) {
+                $currentArray = $currentArray[$arguments[$i]];
+            } else {
+                return null;
+            }
+        }
+        
+        return $currentArray;
     }
     
     /**
@@ -64,7 +98,7 @@ class Utilities
      * 
      * @static
      * 
-     * @return bool.
+     * @return bool
      */
     public static function startsWith($string, $prefix)
     {
@@ -78,7 +112,7 @@ class Utilities
      * 
      * @static
      * 
-     * @return array.
+     * @return array
      */
     public static function getArray($var)
     {
@@ -87,9 +121,14 @@ class Utilities
         }
         
         foreach ($var as $value) {
-            if (!is_array($value)) {
+            if ((gettype($value) == 'object')
+                && (get_class($value) == 'SimpleXMLElement')
+            ) {
+                return (array) $var;
+            } else if (!is_array($value)) {
                 return array($var);
             }
+
         }
         
         return $var;
@@ -102,13 +141,37 @@ class Utilities
      * 
      * @static
      * 
-     * @return array.
+     * @return array
      */
     public static function unserialize($xml)
     {
-        $unserializer = new \XML_Unserializer();
-        $unserializer->unserialize($xml);
-        return $unserializer->getUnserializedData();
+        $sxml = new \SimpleXMLElement($xml);
+
+        return self::_sxml2arr($sxml);
+    }
+
+    /**
+     * Converts a SimpleXML object to an Array recursively
+     * ensuring all sub-elements are arrays as well.
+     *
+     * @param string $sxml SimpleXML object
+     * @param array  $arr  Array into which to store results
+     * 
+     * @static
+     * 
+     * @return array
+     */
+    private static function _sxml2arr($sxml, $arr = array ()) 
+    { 
+        foreach ((array) $sxml as $key => $value) {
+            if (is_object($value) || (is_array($value))) {
+                $arr[$key] = self::_sxml2arr($value);
+            } else {
+                $arr[$key] = $value;
+            }
+        }
+
+        return $arr; 
     }
     
     /**
@@ -118,24 +181,71 @@ class Utilities
      * @param array  $array      object to serialize represented in array.
      * @param string $rootName   name of the XML root element.
      * @param string $defaultTag default tag for non-tagged elements.
+     * @param string $standalone adds 'standalone' header tag, values 'yes'/'no'
      * 
      * @return string
      */
-    public static function serialize($array, $rootName, $defaultTag = null)
+    public static function serialize($array, $rootName, $defaultTag = null,
+        $standalone = null
+    ) {
+        $xmlVersion  = '1.0';
+        $xmlEncoding = 'UTF-8';
+
+        if (!is_array($array)) {
+            return false;
+        }
+
+        $xmlw = new \XmlWriter();
+        $xmlw->openMemory();
+        $xmlw->startDocument($xmlVersion, $xmlEncoding, $standalone);
+        
+        $xmlw->startElement($rootName);
+
+        self::_arr2xml($xmlw, $array, $defaultTag);
+
+        $xmlw->endElement();
+
+        return $xmlw->outputMemory(true); 
+    }
+    
+    /**
+     * Takes an array and produces XML based on it.
+     *
+     * @param XMLWriter $xmlw       XMLWriter object that was previously instanted
+     * and is used for creating the XML.
+     * @param array     $data       Array to be converted to XML
+     * @param string    $defaultTag Default XML tag to be used if none specified.
+     * 
+     * @static
+     * 
+     * @return void
+     */
+    private static function _arr2xml(\XMLWriter $xmlw, $data, $defaultTag = null)
     {
-        $options = array(
-            XML_SERIALIZER_OPTION_INDENT           => '    ',
-            XML_SERIALIZER_OPTION_XML_DECL_ENABLED => true,
-            XML_SERIALIZER_OPTION_RETURN_RESULT    => true,
-            XML_SERIALIZER_OPTION_XML_ENCODING     => "UTF-8",
-            XML_SERIALIZER_OPTION_ROOT_NAME        => $rootName,
-            XML_SERIALIZER_OPTION_DEFAULT_TAG      => $defaultTag
-        );
-        
-        $serializer = new \XML_Serializer($options);
-        $xml        = $serializer->serialize($array);
-        
-        return $xml;
+        foreach ($data as $key => $value) {
+            if (strcmp($key, '@attributes') == 0) {
+                foreach ($value as $attributeName => $attributeValue) {
+                    $xmlw->writeAttribute($attributeName, $attributeValue);
+                }
+            } else if (is_array($value)) {
+                if (!is_int($key)) {
+                    if ($key != Resources::EMPTY_STRING) {
+                        $xmlw->startElement($key);
+                    } else {
+                        $xmlw->startElement($defaultTag);
+                    }
+                }
+                
+                self::_arr2xml($xmlw, $value);
+                
+                if (!is_int($key)) {
+                    $xmlw->endElement();
+                }
+                continue;
+            } else {
+                $xmlw->writeElement($key, $value);
+            }
+        }
     }
     
     /**
@@ -180,6 +290,94 @@ class Utilities
         return $clean;
     }
 
+    /**
+     * Generate ISO 8601 compliant date string in UTC time zone
+     * 
+     * @param int $timestamp The unix timestamp to convert 
+     *     (for DateTime check date_timestamp_get).
+     *
+     * @return string
+     */
+    public static function isoDate($timestamp = null)
+    {        
+        $tz = date_default_timezone_get();
+        date_default_timezone_set('UTC');
+
+        if (is_null($timestamp)) {
+            $timestamp = time();
+        }
+
+        $returnValue = str_replace(
+            '+00:00', '.0000000Z', date('c', $timestamp)
+        );
+        date_default_timezone_set($tz);
+        return $returnValue;
+    }
+    
+    /**
+     * Converts a DateTime object into an Edm.DaeTime value in UTC timezone,
+     * represented as a string.
+     * 
+     * @param \DateTime $value The datetime value.
+     * 
+     * @return string
+     */
+    public static function convertToEdmDateTime($value) 
+    {
+        if (empty($value)) {
+            return $value;
+        }
+        
+        Validate::isDate($value);
+            
+        $cloned = clone $value;
+        $cloned->setTimezone(new \DateTimeZone('UTC'));
+        return str_replace('+0000', 'Z', $cloned->format(\DateTime::ISO8601));
+    }
+    
+    /**
+     * Converts a string to a \DateTime object. Returns false on failure.
+     * 
+     * @param string $value The string value to parse.
+     * 
+     * @return \DateTime
+     */
+    public static function convertToDateTime($value)
+    {
+        if ($value instanceof \DateTime) {
+            return $value;
+        }
+        
+        if (substr($value, -1) == 'Z') {
+            $value = substr($value, 0, strlen($value) - 1);
+        }
+            
+        return new \DateTime($value, new \DateTimeZone('UTC'));
+    }
+    
+    /**
+     * Reads the contents of a stream.
+     * 
+     * @param resource $stream The stream handle with read permissions.
+     * 
+     * @return string
+     */
+    public static function readStream($stream)
+    {
+        return stream_get_contents($stream);
+    }
+    
+    /**
+     * Converts string to stream handle.
+     * 
+     * @param type $string The string contents.
+     * 
+     * @return resource
+     */
+    public static function stringToStream($string)
+    {
+        return fopen('data://text/plain,' . $string, 'r');
+    }
 }
 
 ?>

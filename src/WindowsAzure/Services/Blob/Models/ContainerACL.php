@@ -15,25 +15,27 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   PEAR2\WindowsAzure\Services\Blob\Models
+ * @package   WindowsAzure\Services\Blob\Models
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
 
-namespace PEAR2\WindowsAzure\Services\Blob\Models;
-use PEAR2\WindowsAzure\Services\Blob\Models\AccessPolicy;
-use PEAR2\WindowsAzure\Services\Blob\Models\SignedIdentifier;
-use PEAR2\WindowsAzure\Core\WindowsAzureUtilities;
-use PEAR2\WindowsAzure\Utilities;
-use PEAR2\WindowsAzure\Validate;
+namespace WindowsAzure\Services\Blob\Models;
+use WindowsAzure\Utilities;
+use WindowsAzure\Validate;
+use WindowsAzure\Resources;
+use WindowsAzure\Services\Blob\Models\AccessPolicy;
+use WindowsAzure\Services\Blob\Models\SignedIdentifier;
+use WindowsAzure\Core\WindowsAzureUtilities;
+use WindowsAzure\Services\Blob\Models\PublicAccessType;
 
 /**
  * Holds conatiner ACL members.
  * 
  * @category  Microsoft
- * @package   PEAR2\WindowsAzure\Services\Blob\Models
+ * @package   WindowsAzure\Services\Blob\Models
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
@@ -172,7 +174,7 @@ class ContainerAcl
      */
     public function setEtag($etag)
     {
-        Validate::notNullOrEmpty($etag);
+        Validate::isString($etag);
         $this->_etag = $etag;
     }
 
@@ -195,7 +197,10 @@ class ContainerAcl
      */
     public function setPublicAccess($publicAccess)
     {
-        Validate::notNullOrEmpty($publicAccess);
+        Validate::isTrue(
+            PublicAccessType::isValid($publicAccess),
+            Resources::INVALID_BLOB_PAT_MSG
+        );
         $this->_publicAccess = $publicAccess;
     }
 
@@ -222,7 +227,6 @@ class ContainerAcl
      */
     public function addSignedIdentifier($id, $start, $expiry, $permission)
     {
-        Validate::notNullOrEmpty($id);
         Validate::isString($id);
         Validate::isString($start);
         Validate::isString($expiry);

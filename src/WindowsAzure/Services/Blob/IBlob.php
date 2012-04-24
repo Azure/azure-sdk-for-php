@@ -15,20 +15,21 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   PEAR2\WindowsAzure\Services\Blob
+ * @package   WindowsAzure\Services\Blob
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
  
-namespace PEAR2\WindowsAzure\Services\Blob;
+namespace WindowsAzure\Services\Blob;
+use WindowsAzure\Services\Core\FilterableService;
 
 /**
  * This interface has all REST APIs provided by Windows Azure for Blob service.
  *
  * @category  Microsoft
- * @package   PEAR2\WindowsAzure\Services\Blob
+ * @package   WindowsAzure\Services\Blob
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
@@ -36,25 +37,14 @@ namespace PEAR2\WindowsAzure\Services\Blob;
  * @link      http://pear.php.net/package/azure-sdk-for-php
  * @see       http://msdn.microsoft.com/en-us/library/windowsazure/dd135733.aspx
  */
-interface IBlob
+interface IBlob extends FilterableService
 {
-    /**
-    * Adds new filter to blob proxy object and returns new BlobRestProxy with
-    * that filter.
-    *
-    * @param PEAR2\WindowsAzure\Core\IServiceFilter $filter Filter to add for 
-    * the pipeline.
-    * 
-    * @return PEAR2\WindowsAzure\Services\Blob\IBlob.
-    */
-    public function withFilter($filter);
-
     /**
     * Gets the properties of the Blob service.
     * 
     * @param Models\BlobServiceOptions $options optional blob service options.
     * 
-    * @return PEAR2\WindowsAzure\Services\Core\Models\GetServicePropertiesResult
+    * @return WindowsAzure\Services\Core\Models\GetServicePropertiesResult
     * 
     * @see http://msdn.microsoft.com/en-us/library/windowsazure/hh452239.aspx
     */
@@ -77,7 +67,7 @@ interface IBlob
     * 
     * @param Models\ListContainersOptions $options optional parameters
     * 
-    * @return PEAR2\WindowsAzure\Services\Blob\Models\ListContainersResult
+    * @return WindowsAzure\Services\Blob\Models\ListContainersResult
     * 
     * @see http://msdn.microsoft.com/en-us/library/windowsazure/dd179352.aspx
     */

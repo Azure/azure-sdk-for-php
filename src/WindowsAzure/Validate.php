@@ -15,22 +15,22 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   PEAR2\WindowsAzure
+ * @package   WindowsAzure
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
  
-namespace PEAR2\WindowsAzure;
-use PEAR2\WindowsAzure\Core\InvalidArgumentTypeException;
-use PEAR2\WindowsAzure\Resources;
+namespace WindowsAzure;
+use WindowsAzure\Core\InvalidArgumentTypeException;
+use WindowsAzure\Resources;
 
 /**
  * Validates aganist a condition and throws an exception in case of failure.
  *
  * @category  Microsoft
- * @package   PEAR2\WindowsAzure
+ * @package   WindowsAzure
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
@@ -42,80 +42,88 @@ class Validate
     /**
      * Throws exception if the provided variable type is not array.
      *
-     * @param mixed $var variable to check against.
+     * @param mix    $var  The variable to check.
+     * @param string $name The parameter name.
      * 
      * @throws InvalidArgumentTypeException.
      * 
-     * @return none.
+     * @return none
      */
-    public static function isArray($var)
+    public static function isArray($var, $name = null)
     {
         if (!is_array($var)) {
-            throw new InvalidArgumentTypeException(gettype(array()));
+            throw new InvalidArgumentTypeException($name, gettype(array()));
         }
     }
 
     /**
      * Throws exception if the provided variable type is not string.
      *
-     * @param mixed $var variable to check against.
+     * @param mix    $var  The variable to check.
+     * @param string $name The parameter name.
      * 
      * @throws InvalidArgumentTypeException
      * 
-     * @return none.
+     * @return none
      */
-    public static function isString($var)
+    public static function isString($var, $name = null)
     {
-        if (!is_string($var) && $var != Resources::EMPTY_STRING) {
-            throw new InvalidArgumentTypeException(gettype(''));
+        try {
+            (string)$var;
+        } catch (\Exception $e) {
+            throw new InvalidArgumentTypeException(gettype(''), $name);
         }
     }
     
     /**
      * Throws exception if the provided variable type is not boolean.
      *
-     * @param mixed $var variable to check against.
+     * @param mix $var variable to check against.
      * 
      * @throws InvalidArgumentTypeException
      * 
-     * @return none.
+     * @return none
      */
     public static function isBoolean($var)
     {
-        if (!is_bool($var)) {
-            throw new InvalidArgumentTypeException(gettype(true));
+        (bool)$var;
+    }
+    
+    /**
+     * Throws exception if the provided variable is set to null.
+     *
+     * @param mix    $var  The variable to check.
+     * @param string $name The parameter name.
+     *
+     * @throws \InvalidArgumentException
+     *
+     * @return none
+     */
+    public static function notNullOrEmpty($var, $name = null)
+    {
+        if (is_null($var) || empty($var)) {
+            throw new \InvalidArgumentException(
+                sprintf(Resources::NULL_ERROR_MSG, $name)
+            );
         }
     }
     
     /**
      * Throws exception if the provided variable type is not integer.
      *
-     * @param mixed $var variable to check against.
+     * @param mix    $var  The variable to check.
+     * @param string $name The parameter name.
      * 
      * @throws InvalidArgumentTypeException
      * 
-     * @return none.
+     * @return none
      */
-    public static function isInteger($var)
+    public static function isInteger($var, $name = null)
     {
-        if (!is_int($var)) {
-            throw new InvalidArgumentTypeException(gettype(123));
-        }
-    }
-    
-    /**
-     * Throws exception if the provided variable is set to null.
-     *
-     * @param mixed $var variable to check against.
-     * 
-     * @throws \InvalidArgumentException
-     * 
-     * @return none.
-     */
-    public static function notNullOrEmpty($var)
-    {
-        if (is_null($var) || empty($var)) {
-            throw new \InvalidArgumentException(Resources::NULL_ERROR_MSG);
+        try {
+            (int)$var;
+        } catch (\Exception $e) {
+            throw new InvalidArgumentTypeException(gettype(123), $name);
         }
     }
     
@@ -136,23 +144,23 @@ class Validate
      * 
      * @throws \Exception
      * 
-     * @return none.
+     * @return none
      */
     public static function isTrue($isSatisfied, $failureMessage)
     {
         if (!$isSatisfied) {
-            throw new \RuntimeException($failureMessage);
+            throw new \InvalidArgumentException($failureMessage);
         }
     }
     
     /**
      * Throws exception if the provided $date is not of type \DateTime
      *
-     * @param mixed $date variable to check against.
+     * @param mix $date variable to check against.
      * 
-     * @throws PEAR2\WindowsAzure\Core\InvalidArgumentTypeException
+     * @throws WindowsAzure\Core\InvalidArgumentTypeException
      * 
-     * @return none.
+     * @return none
      */
     public static function isDate($date)
     {

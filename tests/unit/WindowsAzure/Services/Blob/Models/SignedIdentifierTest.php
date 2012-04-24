@@ -15,21 +15,21 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   PEAR2\Tests\Unit\WindowsAzure\Services\Blob\Models
+ * @package   Tests\Unit\WindowsAzure\Services\Blob\Models
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
-namespace PEAR2\Tests\Unit\WindowsAzure\Services\Blob\Models;
-use PEAR2\WindowsAzure\Services\Blob\Models\SignedIdentifier;
-use PEAR2\WindowsAzure\Services\Blob\Models\AccessPolicy;
+namespace Tests\Unit\WindowsAzure\Services\Blob\Models;
+use WindowsAzure\Services\Blob\Models\SignedIdentifier;
+use WindowsAzure\Services\Blob\Models\AccessPolicy;
 
 /**
  * Unit tests for class SignedIdentifier
  *
  * @category  Microsoft
- * @package   PEAR2\Tests\Unit\WindowsAzure\Services\Blob\Models
+ * @package   Tests\Unit\WindowsAzure\Services\Blob\Models
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
@@ -39,7 +39,7 @@ use PEAR2\WindowsAzure\Services\Blob\Models\AccessPolicy;
 class SignedIdentifierTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @covers PEAR2\WindowsAzure\Services\Blob\Models\SignedIdentifier::getId 
+     * @covers WindowsAzure\Services\Blob\Models\SignedIdentifier::getId 
      */
     public function testGetId()
     {
@@ -56,7 +56,7 @@ class SignedIdentifierTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers PEAR2\WindowsAzure\Services\Blob\Models\SignedIdentifier::setId 
+     * @covers WindowsAzure\Services\Blob\Models\SignedIdentifier::setId 
      */
     public function testSetId()
     {
@@ -72,7 +72,7 @@ class SignedIdentifierTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers PEAR2\WindowsAzure\Services\Blob\Models\SignedIdentifier::getAccessPolicy 
+     * @covers WindowsAzure\Services\Blob\Models\SignedIdentifier::getAccessPolicy 
      */
     public function testGetAccessPolicy()
     {
@@ -92,7 +92,7 @@ class SignedIdentifierTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers PEAR2\WindowsAzure\Services\Blob\Models\SignedIdentifier::setAccessPolicy
+     * @covers WindowsAzure\Services\Blob\Models\SignedIdentifier::setAccessPolicy
      */
     public function testSetAccessPolicy()
     {
@@ -113,7 +113,7 @@ class SignedIdentifierTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers PEAR2\WindowsAzure\Services\Blob\Models\SignedIdentifier::toXml
+     * @covers WindowsAzure\Services\Blob\Models\SignedIdentifier::toXml
      * @depends testSetAccessPolicy
      */
     public function testToXml($signedIdentifier)
@@ -126,8 +126,8 @@ class SignedIdentifierTest extends \PHPUnit_Framework_TestCase
         $array = $signedIdentifier->toXml();
         
         // Assert
-        $this->assertEquals($id, $array['Id']);
-        $this->assertArrayHasKey('AccessPolicy', $array);
+        $this->assertEquals($id, $array['SignedIdentifier']['Id']);
+        $this->assertArrayHasKey('AccessPolicy', $array['SignedIdentifier']);
     }
 }
 

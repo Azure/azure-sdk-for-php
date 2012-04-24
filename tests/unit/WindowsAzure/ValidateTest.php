@@ -15,33 +15,34 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   PEAR2\Tests\Unit\WindowsAzure
+ * @package   Tests\Unit\WindowsAzure
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
 
-use PEAR2\WindowsAzure\Validate;
-use PEAR2\WindowsAzure\Core\InvalidArgumentTypeException;
-use PEAR2\WindowsAzure\Resources;
-use PEAR2\WindowsAzure\Core\WindowsAzureUtilities;
+namespace Tests\Unit\WindowsAzure;
+use WindowsAzure\Validate;
+use WindowsAzure\Core\InvalidArgumentTypeException;
+use WindowsAzure\Resources;
+use WindowsAzure\Core\WindowsAzureUtilities;
 
 /**
  * Unit tests for class ValidateTest
  *
  * @category  Microsoft
- * @package   PEAR2\Tests\Unit\WindowsAzure
+ * @package   Tests\Unit\WindowsAzure
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @version   Release: @package_version@
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
-class ValidateTest extends PHPUnit_Framework_TestCase
+class ValidateTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @covers PEAR2\WindowsAzure\Validate::isArray
+     * @covers WindowsAzure\Validate::isArray
      */
     public function testIsArrayWithArray()
     {
@@ -51,7 +52,7 @@ class ValidateTest extends PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers PEAR2\WindowsAzure\Validate::isArray
+     * @covers WindowsAzure\Validate::isArray
      */
     public function testIsArrayWithNonArray()
     {
@@ -60,7 +61,7 @@ class ValidateTest extends PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers PEAR2\WindowsAzure\Validate::isString
+     * @covers WindowsAzure\Validate::isString
      */
     public function testIsStringWithString()
     {
@@ -70,16 +71,16 @@ class ValidateTest extends PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers PEAR2\WindowsAzure\Validate::isString
+     * @covers WindowsAzure\Validate::isString
      */
     public function testIsStringWithNonString()
     {
         $this->setExpectedException(get_class(new InvalidArgumentTypeException('')));
-        Validate::isString(123);
+        Validate::isString(new \DateTime());
     }
     
     /**
-     * @covers PEAR2\WindowsAzure\Validate::isBoolean
+     * @covers WindowsAzure\Validate::isBoolean
      */
     public function testIsBooleanWithBoolean()
     {
@@ -89,16 +90,7 @@ class ValidateTest extends PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers PEAR2\WindowsAzure\Validate::isBoolean
-     */
-    public function testIsBooleanWithNonBoolean()
-    {
-        $this->setExpectedException(get_class(new InvalidArgumentTypeException('')));
-        Validate::isBoolean('I\'m not boolean');
-    }
-    
-    /**
-     * @covers PEAR2\WindowsAzure\Validate::isInteger
+     * @covers WindowsAzure\Validate::isInteger
      */
     public function testIsIntegerWithInteger()
     {
@@ -108,35 +100,16 @@ class ValidateTest extends PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers PEAR2\WindowsAzure\Validate::isInteger
+     * @covers WindowsAzure\Validate::isInteger
      */
     public function testIsIntegerWithNonInteger()
     {
         $this->setExpectedException(get_class(new InvalidArgumentTypeException('')));
-        Validate::isInteger('I\'m not Integer');
+        Validate::isInteger(new \DateTime());
     }
     
     /**
-     * @covers PEAR2\WindowsAzure\Validate::notNullOrEmpty
-     */
-    public function testNotNullOrEmptyWithNonEmpty()
-    {
-        Validate::notNullOrEmpty(1234);
-        
-        $this->assertTrue(true);
-    }
-    
-    /**
-     * @covers PEAR2\WindowsAzure\Validate::notNullOrEmpty
-     */
-    public function testNotNullOrEmptyWithEmpty()
-    {
-        $this->setExpectedException('\InvalidArgumentException');
-        Validate::notNullOrEmpty(Resources::EMPTY_STRING);
-    }
-    
-    /**
-     * @covers PEAR2\WindowsAzure\Validate::isTrue
+     * @covers WindowsAzure\Validate::isTrue
      */
     public function testIsTrueWithTrue()
     {
@@ -146,16 +119,16 @@ class ValidateTest extends PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers PEAR2\WindowsAzure\Validate::isTrue
+     * @covers WindowsAzure\Validate::isTrue
      */
     public function testIsTrueWithFalse()
     {
-        $this->setExpectedException('\RuntimeException');
+        $this->setExpectedException('\InvalidArgumentException');
         Validate::isTrue(false, Resources::EMPTY_STRING);
     }
     
     /**
-     * @covers PEAR2\WindowsAzure\Validate::isDate
+     * @covers WindowsAzure\Validate::isDate
      */
     public function testIsDateWithDate()
     {
@@ -166,12 +139,31 @@ class ValidateTest extends PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers PEAR2\WindowsAzure\Validate::isDate
+     * @covers WindowsAzure\Validate::isDate
      */
     public function testIsDateWithNonDate()
     {
         $this->setExpectedException(get_class(new InvalidArgumentTypeException('DateTime')));
         Validate::isDate('not date');
+    }
+    
+        /**
+* @covers WindowsAzure\Validate::notNullOrEmpty
+*/
+    public function testNotNullOrEmptyWithNonEmpty()
+    {
+        Validate::notNullOrEmpty(1234);
+        
+        $this->assertTrue(true);
+    }
+    
+    /**
+* @covers WindowsAzure\Validate::notNullOrEmpty
+*/
+    public function testNotNullOrEmptyWithEmpty()
+    {
+        $this->setExpectedException('\InvalidArgumentException');
+        Validate::notNullOrEmpty(Resources::EMPTY_STRING);
     }
 }
 

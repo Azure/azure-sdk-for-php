@@ -15,32 +15,33 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   PEAR2\Tests\Unit\WindowsAzure
+ * @package   Tests\Unit\WindowsAzure\Services\Queue\Models
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
 
-use PEAR2\WindowsAzure\Services\Queue\Models\WindowsAzureQueueMessage;
-use PEAR2\Tests\Framework\TestResources;
-use PEAR2\WindowsAzure\Core\WindowsAzureUtilities;
+namespace Tests\Unit\WindowsAzure\Services\Queue\Models;
+use WindowsAzure\Services\Queue\Models\WindowsAzureQueueMessage;
+use Tests\Framework\TestResources;
+use WindowsAzure\Core\WindowsAzureUtilities;
 
 /**
  * Unit tests for class WindowsAzureQueueMessageTest
  *
  * @category  Microsoft
- * @package   PEAR2\Tests\Unit\WindowsAzure
+ * @package   Tests\Unit\WindowsAzure\Services\Queue\Models
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @version   Release: @package_version@
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
-class WindowsAzureQueueMessageTest extends PHPUnit_Framework_TestCase
+class WindowsAzureQueueMessageTest extends \PHPUnit_Framework_TestCase
 {
     /**
-    * @covers PEAR2\WindowsAzure\Services\Queue\Models\WindowsAzureQueueMessage::createFromListMessages
+    * @covers WindowsAzure\Services\Queue\Models\WindowsAzureQueueMessage::createFromListMessages
     */
     public function testCreateListMessages()
     {
@@ -62,7 +63,7 @@ class WindowsAzureQueueMessageTest extends PHPUnit_Framework_TestCase
     }
     
     /**
-    * @covers PEAR2\WindowsAzure\Services\Queue\Models\WindowsAzureQueueMessage::createFromPeekMessages
+    * @covers WindowsAzure\Services\Queue\Models\WindowsAzureQueueMessage::createFromPeekMessages
     */
     public function testCreateFromPeekMessages()
     {
@@ -82,7 +83,7 @@ class WindowsAzureQueueMessageTest extends PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers PEAR2\WindowsAzure\Services\Queue\Models\WindowsAzureQueueMessage::getMessageText
+     * @covers WindowsAzure\Services\Queue\Models\WindowsAzureQueueMessage::getMessageText
      */
     public function testGetMessageText()
     {
@@ -99,7 +100,7 @@ class WindowsAzureQueueMessageTest extends PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers PEAR2\WindowsAzure\Services\Queue\Models\WindowsAzureQueueMessage::setMessageText
+     * @covers WindowsAzure\Services\Queue\Models\WindowsAzureQueueMessage::setMessageText
      */
     public function testSetMessageText()
     {
@@ -116,7 +117,7 @@ class WindowsAzureQueueMessageTest extends PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers PEAR2\WindowsAzure\Services\Queue\Models\WindowsAzureQueueMessage::getMessageId
+     * @covers WindowsAzure\Services\Queue\Models\WindowsAzureQueueMessage::getMessageId
      */
     public function testGetMessageId()
     {
@@ -133,7 +134,7 @@ class WindowsAzureQueueMessageTest extends PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers PEAR2\WindowsAzure\Services\Queue\Models\WindowsAzureQueueMessage::setMessageId
+     * @covers WindowsAzure\Services\Queue\Models\WindowsAzureQueueMessage::setMessageId
      */
     public function testSetMessageId()
     {
@@ -150,7 +151,7 @@ class WindowsAzureQueueMessageTest extends PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers PEAR2\WindowsAzure\Services\Queue\Models\WindowsAzureQueueMessage::getInsertionDate
+     * @covers WindowsAzure\Services\Queue\Models\WindowsAzureQueueMessage::getInsertionDate
      */
     public function testGetInsertionDate()
     {
@@ -167,7 +168,7 @@ class WindowsAzureQueueMessageTest extends PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers PEAR2\WindowsAzure\Services\Queue\Models\WindowsAzureQueueMessage::setInsertionDate
+     * @covers WindowsAzure\Services\Queue\Models\WindowsAzureQueueMessage::setInsertionDate
      */
     public function testSetInsertionDate()
     {
@@ -184,7 +185,7 @@ class WindowsAzureQueueMessageTest extends PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers PEAR2\WindowsAzure\Services\Queue\Models\WindowsAzureQueueMessage::getExpirationDate
+     * @covers WindowsAzure\Services\Queue\Models\WindowsAzureQueueMessage::getExpirationDate
      */
     public function testGetExpirationDate()
     {
@@ -201,7 +202,7 @@ class WindowsAzureQueueMessageTest extends PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers PEAR2\WindowsAzure\Services\Queue\Models\WindowsAzureQueueMessage::setExpirationDate
+     * @covers WindowsAzure\Services\Queue\Models\WindowsAzureQueueMessage::setExpirationDate
      */
     public function testSetExpirationDate()
     {
@@ -218,7 +219,7 @@ class WindowsAzureQueueMessageTest extends PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers PEAR2\WindowsAzure\Services\Queue\Models\WindowsAzureQueueMessage::getPopReceipt
+     * @covers WindowsAzure\Services\Queue\Models\WindowsAzureQueueMessage::getPopReceipt
      */
     public function testGetPopReceipt()
     {
@@ -235,7 +236,7 @@ class WindowsAzureQueueMessageTest extends PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers PEAR2\WindowsAzure\Services\Queue\Models\WindowsAzureQueueMessage::setPopReceipt
+     * @covers WindowsAzure\Services\Queue\Models\WindowsAzureQueueMessage::setPopReceipt
      */
     public function testSetPopReceipt()
     {
@@ -252,7 +253,7 @@ class WindowsAzureQueueMessageTest extends PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers PEAR2\WindowsAzure\Services\Queue\Models\WindowsAzureQueueMessage::getTimeNextVisible
+     * @covers WindowsAzure\Services\Queue\Models\WindowsAzureQueueMessage::getTimeNextVisible
      */
     public function testGetTimeNextVisible()
     {
@@ -269,7 +270,7 @@ class WindowsAzureQueueMessageTest extends PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers PEAR2\WindowsAzure\Services\Queue\Models\WindowsAzureQueueMessage::setTimeNextVisible
+     * @covers WindowsAzure\Services\Queue\Models\WindowsAzureQueueMessage::setTimeNextVisible
      */
     public function testSetTimeNextVisible()
     {
@@ -286,7 +287,7 @@ class WindowsAzureQueueMessageTest extends PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers PEAR2\WindowsAzure\Services\Queue\Models\WindowsAzureQueueMessage::getDequeueCount
+     * @covers WindowsAzure\Services\Queue\Models\WindowsAzureQueueMessage::getDequeueCount
      */
     public function testGetDequeueCount()
     {
@@ -303,7 +304,7 @@ class WindowsAzureQueueMessageTest extends PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers PEAR2\WindowsAzure\Services\Queue\Models\WindowsAzureQueueMessage::setDequeueCount
+     * @covers WindowsAzure\Services\Queue\Models\WindowsAzureQueueMessage::setDequeueCount
      */
     public function testSetDequeueCount()
     {

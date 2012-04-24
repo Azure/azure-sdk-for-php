@@ -15,21 +15,21 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   PEAR2\Tests\Unit\WindowsAzure\ServiceRuntime
+ * @package   Tests\Unit\WindowsAzure\ServiceRuntime
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
-namespace PEAR2\Tests\Unit\WindowsAzure\ServiceRuntime;
-use PEAR2\Tests\Framework\TestResources;
-use PEAR2\WindowsAzure\ServiceRuntime\RuntimeKernel;
+namespace Tests\Unit\WindowsAzure\ServiceRuntime;
+use Tests\Framework\TestResources;
+use WindowsAzure\ServiceRuntime\RuntimeKernel;
 
 /**
- * Unit tests for class RuntimeKernel
+ * Unit tests for class RuntimeKernel.
  *
  * @category  Microsoft
- * @package   PEAR2\Tests\Unit\WindowsAzure\ServiceRuntime\RuntimeKernelTest
+ * @package   Tests\Unit\WindowsAzure\ServiceRuntime
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
@@ -39,21 +39,21 @@ use PEAR2\WindowsAzure\ServiceRuntime\RuntimeKernel;
 class RuntimeKernelTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @covers PEAR2\WindowsAzure\ServiceRuntime\RuntimeKernel::__construct
-     * @covers PEAR2\WindowsAzure\ServiceRuntime\RuntimeKernel::getKernel
+     * @covers WindowsAzure\ServiceRuntime\RuntimeKernel::__construct
+     * @covers WindowsAzure\ServiceRuntime\RuntimeKernel::getKernel
      */
     public function testGetKernel()
     {
         // Setup
-        $runtimeKernel = RuntimeKernel::getKernel();
+        $runtimeKernel = RuntimeKernel::getKernel(true);
         
         // Test
         $this->assertInstanceOf(
-            'PEAR2\\WindowsAzure\\ServiceRuntime\\RuntimeKernel', $runtimeKernel);
+            '\WindowsAzure\\ServiceRuntime\\RuntimeKernel', $runtimeKernel);
     }
     
     /**
-     * @covers PEAR2\WindowsAzure\ServiceRuntime\RuntimeKernel::getCurrentStateSerializer
+     * @covers WindowsAzure\ServiceRuntime\RuntimeKernel::getCurrentStateSerializer
      */
     public function testGetCurrentStateSerializer()
     {
@@ -62,12 +62,12 @@ class RuntimeKernelTest extends \PHPUnit_Framework_TestCase
         
         // Test
         $this->assertInstanceOf(
-            'PEAR2\\WindowsAzure\\ServiceRuntime\\XmlCurrentStateSerializer',
+            '\WindowsAzure\\ServiceRuntime\\XmlCurrentStateSerializer',
             $runtimeKernel->getCurrentStateSerializer());
     }
     
     /**
-     * @covers PEAR2\WindowsAzure\ServiceRuntime\RuntimeKernel::getGoalStateDeserializer
+     * @covers WindowsAzure\ServiceRuntime\RuntimeKernel::getGoalStateDeserializer
      */
     public function testGetGoalStateDeserializer()
     {
@@ -76,12 +76,12 @@ class RuntimeKernelTest extends \PHPUnit_Framework_TestCase
         
         // Test
         $this->assertInstanceOf(
-            'PEAR2\\WindowsAzure\\ServiceRuntime\\ChunkedGoalStateDeserializer',
+            '\WindowsAzure\\ServiceRuntime\\ChunkedGoalStateDeserializer',
             $runtimeKernel->getGoalStateDeserializer());
     }
     
     /**
-     * @covers PEAR2\WindowsAzure\ServiceRuntime\RuntimeKernel::getInputChannel
+     * @covers WindowsAzure\ServiceRuntime\RuntimeKernel::getInputChannel
      */
     public function testGetInputChannel()
     {
@@ -90,12 +90,12 @@ class RuntimeKernelTest extends \PHPUnit_Framework_TestCase
         
         // Test
         $this->assertInstanceOf(
-            'PEAR2\\WindowsAzure\\ServiceRuntime\\FileInputChannel',
+            '\WindowsAzure\\ServiceRuntime\\FileInputChannel',
             $runtimeKernel->getInputChannel());
     }
     
     /**
-     * @covers PEAR2\WindowsAzure\ServiceRuntime\RuntimeKernel::getOutputChannel
+     * @covers WindowsAzure\ServiceRuntime\RuntimeKernel::getOutputChannel
      */
     public function testGetOutputChannel()
     {
@@ -104,12 +104,12 @@ class RuntimeKernelTest extends \PHPUnit_Framework_TestCase
         
         // Test
         $this->assertInstanceOf(
-            'PEAR2\\WindowsAzure\\ServiceRuntime\\FileOutputChannel',
+            '\WindowsAzure\\ServiceRuntime\\FileOutputChannel',
             $runtimeKernel->getOutputChannel());
     }
     
     /**
-     * @covers PEAR2\WindowsAzure\ServiceRuntime\RuntimeKernel::getProtocol1RuntimeCurrentStateClient
+     * @covers WindowsAzure\ServiceRuntime\RuntimeKernel::getProtocol1RuntimeCurrentStateClient
      */
     public function testGetProtocol1RuntimeCurrentStateClient()
     {
@@ -118,12 +118,12 @@ class RuntimeKernelTest extends \PHPUnit_Framework_TestCase
         
         // Test
         $this->assertInstanceOf(
-            'PEAR2\\WindowsAzure\\ServiceRuntime\\Protocol1RuntimeCurrentStateClient',
+            '\WindowsAzure\\ServiceRuntime\\Protocol1RuntimeCurrentStateClient',
             $runtimeKernel->getProtocol1RuntimeCurrentStateClient());
     }
     
     /**
-     * @covers PEAR2\WindowsAzure\ServiceRuntime\RuntimeKernel::getRoleEnvironmentDataDeserializer
+     * @covers WindowsAzure\ServiceRuntime\RuntimeKernel::getRoleEnvironmentDataDeserializer
      */
     public function testGetRoleEnvironmentDataDeserializer()
     {
@@ -132,12 +132,12 @@ class RuntimeKernelTest extends \PHPUnit_Framework_TestCase
         
         // Test
         $this->assertInstanceOf(
-            'PEAR2\\WindowsAzure\\ServiceRuntime\\XmlRoleEnvironmentDataDeserializer',
+            '\WindowsAzure\\ServiceRuntime\\XmlRoleEnvironmentDataDeserializer',
             $runtimeKernel->getRoleEnvironmentDataDeserializer());
     }
     
     /**
-     * @covers PEAR2\WindowsAzure\ServiceRuntime\RuntimeKernel::getProtocol1RuntimeGoalStateClient
+     * @covers WindowsAzure\ServiceRuntime\RuntimeKernel::getProtocol1RuntimeGoalStateClient
      */
     public function testGetProtocol1RuntimeGoalStateClient()
     {
@@ -146,12 +146,12 @@ class RuntimeKernelTest extends \PHPUnit_Framework_TestCase
         
         // Test
         $this->assertInstanceOf(
-            'PEAR2\\WindowsAzure\\ServiceRuntime\\Protocol1RuntimeGoalStateClient',
+            '\WindowsAzure\\ServiceRuntime\\Protocol1RuntimeGoalStateClient',
             $runtimeKernel->getProtocol1RuntimeGoalStateClient());
     }
     
     /**
-     * @covers PEAR2\WindowsAzure\ServiceRuntime\RuntimeKernel::getRuntimeVersionProtocolClient
+     * @covers WindowsAzure\ServiceRuntime\RuntimeKernel::getRuntimeVersionProtocolClient
      */
     public function testGetRuntimeVersionProtocolClient()
     {
@@ -160,12 +160,12 @@ class RuntimeKernelTest extends \PHPUnit_Framework_TestCase
         
         // Test
         $this->assertInstanceOf(
-            'PEAR2\\WindowsAzure\\ServiceRuntime\\RuntimeVersionProtocolClient',
+            '\WindowsAzure\\ServiceRuntime\\RuntimeVersionProtocolClient',
             $runtimeKernel->getRuntimeVersionProtocolClient());
     }
 
     /**
-     * @covers PEAR2\WindowsAzure\ServiceRuntime\RuntimeKernel::getRuntimeVersionManager
+     * @covers WindowsAzure\ServiceRuntime\RuntimeKernel::getRuntimeVersionManager
      */
     public function testGetRuntimeVersionManager()
     {
@@ -174,7 +174,7 @@ class RuntimeKernelTest extends \PHPUnit_Framework_TestCase
         
         // Test
         $this->assertInstanceOf(
-            'PEAR2\\WindowsAzure\\ServiceRuntime\\RuntimeVersionManager',
+            '\WindowsAzure\\ServiceRuntime\\RuntimeVersionManager',
             $runtimeKernel->getRuntimeVersionManager());
     }
 }
