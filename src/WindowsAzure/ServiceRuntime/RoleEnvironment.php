@@ -51,7 +51,7 @@ class RoleEnvironment
      * 
      * @var string
      */
-    const VERSION_ENDPOINT_FIXED_PATH = '\\.\pipe\WindowsAzureRuntime';
+    const VERSION_ENDPOINT_FIXED_PATH = '\\\\.\\pipe\\WindowsAzureRuntime';
 
     /**
      * @var string
