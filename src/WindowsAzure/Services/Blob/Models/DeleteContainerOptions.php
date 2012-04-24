@@ -15,65 +15,53 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   WindowsAzure\Services\Queue\Models
+ * @package   WindowsAzure
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
  
-namespace WindowsAzure\Services\Queue\Models;
+namespace WindowsAzure\Services\Blob\Models;
 
 /**
- * Optional parameters for Create Queue REST API.
+ * The optional for deleteContainer API.
  *
  * @category  Microsoft
- * @package   WindowsAzure\Services\Queue\Models
+ * @package   WindowsAzure
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @version   Release: @package_version@
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
-class CreateQueueOptions extends QueueServiceOptions
+class DeleteContainerOptions extends BlobServiceOptions
 {
-    private $_metadata;
+    /**
+     * @var AccessCondition
+     */
+    private $_accessCondition;
     
     /**
-     * Gets user defined metadata.
+     * Gets access condition
      * 
-     * @return array.
+     * @return AccessCondition
      */
-    public function getMetadata()
+    public function getAccessCondition()
     {
-        return $this->_metadata;
+        return $this->_accessCondition;
     }
     
     /**
-     * Sets user defined metadata. This metadata should be added without the header
-     * prefix (x-ms-meta-*).
+     * Sets access condition
      * 
-     * @param array $metadata user defined metadata object in array form.
-     * 
-     * @return none.
-     */
-    public function setMetadata($metadata)
-    {
-        $this->_metadata = $metadata;
-    }
-    
-    /**
-     * Adds new metadata element. This element should be added without the header
-     * prefix (x-ms-meta-*).
-     * 
-     * @param string $key   metadata key element.
-     * @param string $value metadata value element.
+     * @param AccessCondition $accessCondition value to use.
      * 
      * @return none.
      */
-    public function addMetadata($key, $value)
+    public function setAccessCondition($accessCondition)
     {
-        $this->_metadata[$key] = $value;
+        $this->_accessCondition = $accessCondition;
     }
 }
 

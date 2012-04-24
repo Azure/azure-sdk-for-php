@@ -95,7 +95,7 @@ class ListContainersOptions extends BlobServiceOptions
      */
     public function setPrefix($prefix)
     {
-        Validate::isString($prefix);
+        Validate::isString($prefix, 'prefix');
         $this->_prefix = $prefix;
     }
 
@@ -118,7 +118,7 @@ class ListContainersOptions extends BlobServiceOptions
      */
     public function setMarker($marker)
     {
-        Validate::isString($marker);
+        Validate::isString($marker, 'marker');
         $this->_marker = $marker;
     }
 
@@ -141,7 +141,7 @@ class ListContainersOptions extends BlobServiceOptions
      */
     public function setMaxResults($maxResults)
     {
-        Validate::isString($maxResults);
+        Validate::isString($maxResults, 'maxResults');
         $this->_maxResults = $maxResults;
     }
 

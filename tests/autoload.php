@@ -94,6 +94,7 @@ spl_autoload_register(
             'tests\\unit\\windowsazure\\services\\blob\\models\\createblobpagesresulttest' => '/unit/WindowsAzure/Services/Blob/Models/CreateBlobPagesResultTest.php',
             'tests\\unit\\windowsazure\\services\\blob\\models\\createcontaineroptionstest' => '/unit/WindowsAzure/Services/Blob/Models/CreateContainerOptionsTest.php',
             'tests\\unit\\windowsazure\\services\\blob\\models\\deletebloboptionstest' => '/unit/WindowsAzure/Services/Blob/Models/DeleteBlobOptionsTest.php',
+            'tests\\unit\\windowsazure\\services\\blob\\models\\deletecontaineroptionstest' => '/unit/WindowsAzure/Services/Blob/Models/DeleteContainerOptionsTest.php',
             'tests\\unit\\windowsazure\\services\\blob\\models\\getblobmetadataoptionstest' => '/unit/WindowsAzure/Services/Blob/Models/GetBlobMetadataOptionsTest.php',
             'tests\\unit\\windowsazure\\services\\blob\\models\\getblobmetadataresulttest' => '/unit/WindowsAzure/Services/Blob/Models/GetBlobMetadataResultTest.php',
             'tests\\unit\\windowsazure\\services\\blob\\models\\getbloboptionstest' => '/unit/WindowsAzure/Services/Blob/Models/GetBlobOptionsTest.php',

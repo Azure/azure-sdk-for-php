@@ -63,7 +63,7 @@ class ListQueuesOptions extends QueueServiceOptions
      */
     public function setPrefix($prefix)
     {
-        Validate::isString($prefix);
+        Validate::isString($prefix, 'prefix');
         $this->_prefix = $prefix;
     }
 
@@ -86,7 +86,7 @@ class ListQueuesOptions extends QueueServiceOptions
      */
     public function setMarker($marker)
     {
-        Validate::isString($marker);
+        Validate::isString($marker, 'marker');
         $this->_marker = $marker;
     }
 
@@ -109,7 +109,7 @@ class ListQueuesOptions extends QueueServiceOptions
      */
     public function setMaxResults($maxResults)
     {
-        Validate::isString($maxResults);
+        Validate::isString($maxResults, 'maxResults');
         $this->_maxResults = $maxResults;
     }
 

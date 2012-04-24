@@ -79,6 +79,7 @@ spl_autoload_register(
             'windowsazure\\services\\blob\\models\\createblobpagesresult' => '/WindowsAzure/Services/Blob/Models/CreateBlobPagesResult.php',
             'windowsazure\\services\\blob\\models\\createcontaineroptions' => '/WindowsAzure/Services/Blob/Models/CreateContainerOptions.php',
             'windowsazure\\services\\blob\\models\\deletebloboptions' => '/WindowsAzure/Services/Blob/Models/DeleteBlobOptions.php',
+            'windowsazure\\services\\blob\\models\\deletecontaineroptions' => '/WindowsAzure/Services/Blob/Models/DeleteContainerOptions.php',
             'windowsazure\\services\\blob\\models\\getblobmetadataoptions' => '/WindowsAzure/Services/Blob/Models/GetBlobMetadataOptions.php',
             'windowsazure\\services\\blob\\models\\getblobmetadataresult' => '/WindowsAzure/Services/Blob/Models/GetBlobMetadataResult.php',
             'windowsazure\\services\\blob\\models\\getbloboptions' => '/WindowsAzure/Services/Blob/Models/GetBlobOptions.php',

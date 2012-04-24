@@ -56,7 +56,7 @@ class Role
      */
     public function __construct($name, $instances)
     {
-        Validate::isArray($instances);
+        Validate::isArray($instances, 'instances');
         
         $this->_name      = $name;
         $this->_instances = $instances;

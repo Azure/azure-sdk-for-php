@@ -59,10 +59,10 @@ class Entity
      */
     private function _validateProperties($properties)
     {
-        Validate::isArray($properties);
+        Validate::isArray($properties, 'entity properties');
         
         foreach ($properties as $key => $value) {
-            Validate::isString($key);
+            Validate::isString($key, 'key');
             Validate::isTrue(
                 $value instanceof Property,
                 Resources::INVALID_PROP_MSG

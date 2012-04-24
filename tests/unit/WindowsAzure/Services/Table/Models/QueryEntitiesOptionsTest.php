@@ -24,6 +24,8 @@
 namespace Tests\Unit\WindowsAzure\Services\Table\Models;
 use WindowsAzure\Services\Table\Models\QueryEntitiesOptions;
 use WindowsAzure\Services\Table\Models\Query;
+use WindowsAzure\Services\Table\Models\Filters\Filter;
+use WindowsAzure\Services\Table\Models\EdmType;
 
 /**
  * Unit tests for class QueryEntitiesOptions
@@ -41,6 +43,7 @@ class QueryEntitiesOptionsTest extends \PHPUnit_Framework_TestCase
     /**
      * @covers WindowsAzure\Services\Table\Models\QueryEntitiesOptions::setQuery
      * @covers WindowsAzure\Services\Table\Models\QueryEntitiesOptions::getQuery
+     * @covers WindowsAzure\Services\Table\Models\QueryEntitiesOptions::__construct
      */
     public function testSetQuery()
     {
@@ -87,6 +90,75 @@ class QueryEntitiesOptionsTest extends \PHPUnit_Framework_TestCase
         
         // Assert
         $this->assertEquals($expected, $options->getNextRowKey());
+    }
+    
+    /**
+     * @covers WindowsAzure\Services\Table\Models\QueryEntitiesOptions::setSelectFields
+     * @covers WindowsAzure\Services\Table\Models\QueryEntitiesOptions::getSelectFields
+     */
+    public function testSetSelectFields()
+    {
+        // Setup
+        $options = new QueryEntitiesOptions();
+        $expected = array('customerId', 'customerName');
+        
+        // Test
+        $options->setSelectFields($expected);
+        
+        // Assert
+        $this->assertEquals($expected, $options->getSelectFields());
+    }
+    
+    /**
+     * @covers WindowsAzure\Services\Table\Models\QueryEntitiesOptions::setTop
+     * @covers WindowsAzure\Services\Table\Models\QueryEntitiesOptions::getTop
+     */
+    public function testSetTop()
+    {
+        // Setup
+        $options = new QueryEntitiesOptions();
+        $expected = 123;
+        
+        // Test
+        $options->setTop($expected);
+        
+        // Assert
+        $this->assertEquals($expected, $options->getTop());
+    }
+    
+    /**
+     * @covers WindowsAzure\Services\Table\Models\QueryEntitiesOptions::setFilter
+     * @covers WindowsAzure\Services\Table\Models\QueryEntitiesOptions::getFilter
+     */
+    public function testSetFilter()
+    {
+        // Setup
+        $options = new QueryEntitiesOptions();
+        $expected = Filter::applyConstant('constValue', EdmType::STRING);
+        
+        // Test
+        $options->setFilter($expected);
+        
+        // Assert
+        $this->assertEquals($expected, $options->getFilter());
+    }
+    
+    /**
+     * @covers WindowsAzure\Services\Table\Models\QueryEntitiesOptions::addSelectField
+     * @covers WindowsAzure\Services\Table\Models\QueryEntitiesOptions::getSelectFields
+     */
+    public function testAddSelectField()
+    {
+        // Setup
+        $options = new QueryEntitiesOptions();
+        $field = 'customerId';
+        $expected = array($field);
+        
+        // Test
+        $options->addSelectField($field);
+        
+        // Assert
+        $this->assertEquals($expected, $options->getSelectFields());
     }
 }
 

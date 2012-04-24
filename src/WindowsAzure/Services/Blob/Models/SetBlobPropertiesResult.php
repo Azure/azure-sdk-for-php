@@ -118,7 +118,7 @@ class SetBlobPropertiesResult
      */
     public function setEtag($etag)
     {
-        Validate::isString($etag);
+        Validate::isString($etag, 'etag');
         $this->_etag = $etag;
     }
     
@@ -141,7 +141,7 @@ class SetBlobPropertiesResult
      */
     public function setSequenceNumber($sequenceNumber)
     {
-        Validate::isInteger($sequenceNumber);
+        Validate::isInteger($sequenceNumber, 'sequenceNumber');
         $this->_sequenceNumber = $sequenceNumber;
     }
 }

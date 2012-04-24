@@ -53,7 +53,7 @@ class Resources
     const INVALID_BO_PN_MSG    = 'Batch operation parameter is not supported.';
     const INVALID_OC_COUNT_MSG = 'Operations and contexts must be of same size.';
     const INVALID_EXC_OBJ_MSG  = 'Exception object type should be ServiceException.';
-    const NULL_TABLE_KEY_MSG   = 'Partition and raw keys can\'t be NULL.';
+    const NULL_TABLE_KEY_MSG   = 'Partition and row keys can\'t be NULL.';
     const BATCH_ENTITY_DEL_MSG = 'The entity was deleted successfully.';
     const INVALID_PROP_VAL_MSG = "'%s' property value must satisfy %s.";
     const INVALID_PARAM_MSG    = "The provided variable '%s' should be of type '%s'";
@@ -146,23 +146,30 @@ class Resources
     const ACCEPT_CHARSET_VALUE           = 'utf-8';
 
     // Query parameter names
-    const QP_PREFIX          = 'Prefix';
-    const QP_MAX_RESULTS     = 'MaxResults';
-    const QP_METADATA        = 'Metadata';
-    const QP_MARKER          = 'Marker';
-    const QP_NEXT_MARKER     = 'NextMarker';
-    const QP_COMP            = 'comp';
-    const QP_INCLUDE         = 'include';
-    const QP_TIMEOUT         = 'timeout';
-    const QP_DELIMITER       = 'Delimiter';
-    const QP_REST_TYPE       = 'restype';
-    const QP_SNAPSHOT        = 'snapshot';
-    const QP_SELECT          = '$select';
-    const QP_TOP             = '$top';
-    const QP_FILTER          = '$filter';
-    const QP_NEXT_TABLE_NAME = 'NextTableName';
-    const QP_NEXT_PK         = 'NextPartitionKey';
-    const QP_NEXT_RK         = 'NextRowKey';
+    const QP_PREFIX             = 'Prefix';
+    const QP_MAX_RESULTS        = 'MaxResults';
+    const QP_METADATA           = 'Metadata';
+    const QP_MARKER             = 'Marker';
+    const QP_NEXT_MARKER        = 'NextMarker';
+    const QP_COMP               = 'comp';
+    const QP_VISIBILITY_TIMEOUT = 'visibilitytimeout';
+    const QP_POPRECEIPT         = 'popreceipt';
+    const QP_NUM_OF_MESSAGES    = 'numofmessages';
+    const QP_PEEK_ONLY          = 'peekonly';
+    const QP_MESSAGE_TTL        = 'messagettl';
+    const QP_INCLUDE            = 'include';
+    const QP_TIMEOUT            = 'timeout';
+    const QP_DELIMITER          = 'Delimiter';
+    const QP_REST_TYPE          = 'restype';
+    const QP_SNAPSHOT           = 'snapshot';
+    const QP_BLOCKID            = 'blockid';
+    const QP_BLOCK_LIST_TYPE    = 'blocklisttype';
+    const QP_SELECT             = '$select';
+    const QP_TOP                = '$top';
+    const QP_FILTER             = '$filter';
+    const QP_NEXT_TABLE_NAME    = 'NextTableName';
+    const QP_NEXT_PK            = 'NextPartitionKey';
+    const QP_NEXT_RK            = 'NextRowKey';
     
     // Request body content types
     const XML_CONTENT_TYPE      = 'application/x-www-form-urlencoded';
