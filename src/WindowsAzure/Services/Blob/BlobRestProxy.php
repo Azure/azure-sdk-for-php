@@ -38,6 +38,7 @@ use WindowsAzure\Services\Blob\Models\CreateContainerOptions;
 use WindowsAzure\Services\Blob\Models\GetContainerPropertiesResult;
 use WindowsAzure\Services\Blob\Models\GetContainerAclResult;
 use WindowsAzure\Services\Blob\Models\SetContainerMetadataOptions;
+use WindowsAzure\Services\Blob\Models\DeleteContainerOptions;
 use WindowsAzure\Services\Blob\Models\ListBlobsOptions;
 use WindowsAzure\Services\Blob\Models\ListBlobsResult;
 use WindowsAzure\Services\Blob\Models\BlobType;
@@ -669,8 +670,8 @@ class BlobRestProxy extends ServiceRestProxy implements IBlob
     /**
      * Creates a new container in the given storage account.
      * 
-     * @param string                    $container The container name.
-     * @param Models\BlobServiceOptions $options   The optional parameters.
+     * @param string                        $container The container name.
+     * @param Models\DeleteContainerOptions $options   The optional parameters.
      * 
      * @return none
      * 
@@ -688,8 +689,12 @@ class BlobRestProxy extends ServiceRestProxy implements IBlob
         $statusCode  = Resources::STATUS_ACCEPTED;
         
         if (is_null($options)) {
-            $options = new BlobServiceOptions();
+            $options = new DeleteContainerOptions();
         }
+        
+        $headers = $this->addOptionalAccessConditionHeader(
+            $headers, $options->getAccessCondition()
+        );
         
         $this->addOptionalQueryParam(
             $queryParams,
