@@ -102,16 +102,9 @@ class ServiceRestProxy
         $channel->setMethod($context->getMethod());
         $channel->setExpectedStatusCode($statusCodes);
         $channel->setBody($body);
-        foreach ($headers as $key => $value) {
-            if (!is_null($value) && !empty($value)) {
-                $channel->setHeader($key, $value);
-            }
-        }
-        
+        $channel->setHeaders($headers);
         $url->setQueryVariables($queryParams);
-        if (!empty($path)) {
-            $url->appendUrlPath($path);
-        }
+        $url->appendUrlPath($path);
         
         $channel->send($this->_filters, $url);
         
@@ -127,12 +120,11 @@ class ServiceRestProxy
      * @param string $path        URL path
      * @param int    $statusCode  Expected status code received in the response
      * @param string $body        Request body
-     * @param array  $config      Request configuration parameters.
      * 
      * @return \HTTP_Request2_Response
      */
     protected function send($method, $headers, $queryParams, $path, $statusCode,
-        $body = Resources::EMPTY_STRING, $config = array()
+        $body = Resources::EMPTY_STRING
     ) {
         $context = new HttpCallContext();
         $context->setBody($body);
@@ -186,6 +178,50 @@ class ServiceRestProxy
         }
         
         return $headers;
+    }
+    
+    /**
+     * Adds optional query parameter.
+     * 
+     * Doesn't add the value if it satisfies empty().
+     * 
+     * @param array  &$queryParameters The query parameters.
+     * @param string $key              The query variable name.
+     * @param string $value            The query variable value.
+     * 
+     * @return none
+     */
+    protected function addOptionalQueryParam(&$queryParameters, $key, $value)
+    {
+        Validate::isArray($queryParameters, 'queryParameters');
+        Validate::isString($key, 'key');
+        Validate::isString($value, 'value');
+                
+        if (!empty($value)) {
+            $queryParameters[$key] = $value;
+        }
+    }
+    
+    /**
+     * Adds optional header.
+     * 
+     * Doesn't add the value if it satisfies empty().
+     * 
+     * @param array  &$headers The HTTP header parameters.
+     * @param string $key      The HTTP header name.
+     * @param string $value    The HTTP header value.
+     * 
+     * @return none
+     */
+    protected function addOptionalHeader(&$headers, $key, $value)
+    {
+        Validate::isArray($headers, 'headers');
+        Validate::isString($key, 'key');
+        Validate::isString($value, 'value');
+                
+        if (!empty($value)) {
+            $headers[$key] = $value;
+        }
     }
     
     /**

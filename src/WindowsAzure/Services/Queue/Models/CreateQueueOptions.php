@@ -35,7 +35,7 @@ namespace WindowsAzure\Services\Queue\Models;
  * @version   Release: @package_version@
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
-class CreateQueueOptions
+class CreateQueueOptions extends QueueServiceOptions
 {
     private $_metadata;
     

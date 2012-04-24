@@ -114,18 +114,15 @@ class Url implements IUrl
      * 
      * @param string $key   query parameter name.
      * @param string $value query value.
-     * @param bool   $force sets the header even if $value is not set.
      * 
-     * @return none.
+     * @return none
      */
-    public function setQueryVariable($key, $value, $force = false)
+    public function setQueryVariable($key, $value)
     {
         Validate::isString($key, 'key');
         Validate::isString($value, 'value');
         
-        if (!empty($value) && !is_null($value) || $force) {
-            $this->_url->setQueryVariable(strtolower($key), $value);
-        }
+        $this->_url->setQueryVariable(strtolower($key), $value);
     }
     
     /**

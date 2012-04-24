@@ -120,6 +120,8 @@ class HttpCallContext
      */
     public function setMethod($method)
     {
+        Validate::isString($method, 'method');
+        
         $this->_method = $method;
     }
     
@@ -196,6 +198,8 @@ class HttpCallContext
      */
     public function setUri($uri)
     {
+        Validate::isString($uri, 'uri');
+        
         $this->_uri = $uri;
     }
     
@@ -218,6 +222,8 @@ class HttpCallContext
      */
     public function setPath($path)
     {
+        Validate::isString($path, 'path');
+        
         $this->_path = $path;
     }
     
@@ -265,13 +271,13 @@ class HttpCallContext
      */
     public function setBody($body)
     {
+        Validate::isString($body, 'body');
+        
         $this->_body = $body;
     }
     
     /**
      * Adds or sets header pair.
-     * 
-     * Ignores the header if its value is empty.
      * 
      * @param string $name  The HTTP header name.
      * @param mix    $value The HTTP header value.
@@ -280,6 +286,27 @@ class HttpCallContext
      */
     public function addHeader($name, $value)
     {
+        Validate::isString($name, 'name');
+        Validate::isString($value, 'value');
+        
+        $this->_headers[$name] = $value;
+    }
+    
+    /**
+     * Adds or sets header pair.
+     * 
+     * Ignores header if it's value satisfies empty().
+     * 
+     * @param string $name  The HTTP header name.
+     * @param mix    $value The HTTP header value.
+     * 
+     * @return none
+     */
+    public function addOptionalHeader($name, $value)
+    {
+        Validate::isString($name, 'name');
+        Validate::isString($value, 'value');
+        
         if (!empty($value)) {
             $this->_headers[$name] = $value;
         }
@@ -295,13 +322,13 @@ class HttpCallContext
     public function removeHeader($name)
     {
         Validate::isString($name, 'name');
+        Validate::notNullOrEmpty($name, 'name');
+        
         unset($this->_headers[$name]);
     }
     
     /**
      * Adds or sets query parameter pair.
-     * 
-     * Ignores the query variable if its value is empty.
      * 
      * @param string $name  The URI query parameter name.
      * @param mix    $value The URI query parameter value.
@@ -310,6 +337,27 @@ class HttpCallContext
      */
     public function addQueryParameter($name, $value)
     {
+        Validate::isString($name, 'name');
+        Validate::isString($value, 'value');
+        
+        $this->_queryParams[$name] = $value;
+    }
+    
+    /**
+     * Adds or sets query parameter pair.
+     * 
+     * Ignores query parameter if it's value satisfies empty().
+     * 
+     * @param string $name  The URI query parameter name.
+     * @param mix    $value The URI query parameter value.
+     * 
+     * @return none
+     */
+    public function addOptionalQueryParameter($name, $value)
+    {
+        Validate::isString($name, 'name');
+        Validate::isString($value, 'value');
+        
         if (!empty($value)) {
             $this->_queryParams[$name] = $value;
         }
@@ -325,6 +373,7 @@ class HttpCallContext
     public function addStatusCode($statusCode)
     {
         Validate::isInteger($statusCode, 'statusCode');
+        
         $this->_statusCodes[] = $statusCode;
     }
     

@@ -128,7 +128,7 @@ class QueueRestProxyTest extends QueueServiceRestProxyTestBase
         parent::createQueue($queue2);
         parent::createQueue($queue3);
         $options = new ListQueuesOptions();
-        $options->setMaxResults('2');
+        $options->setMaxResults(2);
         
         // Test
         $result = $this->wrapper->listQueues($options);
@@ -166,7 +166,7 @@ class QueueRestProxyTest extends QueueServiceRestProxyTestBase
         parent::createQueue($queue2);
         parent::createQueue($queue3);
         $options = new ListQueuesOptions();
-        $options->setMaxResults('2');
+        $options->setMaxResults(2);
         $this->setExpectedException(get_class(new ServiceException('409')));
         
         // Test
