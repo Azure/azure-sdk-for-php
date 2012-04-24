@@ -389,36 +389,6 @@ class HttpClientTest extends PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers WindowsAzure\Core\HttpClient::setConfig
-     */
-    public function testSetConfigNotStringNameFail()
-    {
-        // Setup
-        $channel = new HttpClient();
-        $name = 123;
-        $value = 10;
-        $this->setExpectedException(get_class(new InvalidArgumentTypeException(gettype(''))));
-        
-        // Test
-        $channel->setConfig($name, $value);
-    }
-    
-    /**
-     * @covers WindowsAzure\Core\HttpClient::setConfig
-     */
-    public function testSetConfigEmptyNameFail()
-    {
-        // Setup
-        $channel = new HttpClient();
-        $name = '';
-        $value = 10;
-        $this->setExpectedException(get_class(new InvalidArgumentException(Resources::NULL_ERROR_MSG)));
-        
-        // Test
-        $channel->setConfig($name, $value);
-    }
-    
-    /**
      * @covers WindowsAzure\Core\HttpClient::getConfig
      */
     public function testGetConfig()

@@ -67,14 +67,15 @@ class EdmType
     /**
      * Validates that the value associated with the EDM type is valid.
      * 
-     * @param string $type  The EDM type.
-     * @param mix    $value The EDM value.
+     * @param string $type       The EDM type.
+     * @param mix    $value      The EDM value.
+     * @param string &$condition The error message.
      * 
      * @return boolean
      * 
      * @throws \InvalidArgumentException 
      */
-    public static function validateEdmValue($type, $value)
+    public static function validateEdmValue($type, $value, &$condition = null)
     {
         // Having null value means that the user wants to remove the property name
         // associated with this value. Leave the value as null so this hold.
@@ -85,20 +86,30 @@ class EdmType
             case EdmType::GUID:
             case EdmType::BINARY:
             case EdmType::STRING:
+            case null:
+                // NULL also is treated as EdmType::STRING
+                $condition = 'is_string';
                 return is_string($value);
 
             case EdmType::DOUBLE:
+                $condition = 'is_double';
+                return is_double($value);
+                
             case EdmType::INT32:
             case EdmType::INT64:
+                $condition = 'is_int';
                 return is_int($value);
 
             case EdmType::DATETIME:
+                $condition = 'instanceof \DateTime';
                 return $value instanceof \DateTime;
 
             case EdmType::BOOLEAN:
+                $condition = 'is_bool';
                 return is_bool($value);
 
             case null:
+                $condition = 'is_null';
                 return is_null($value);
 
             default:
@@ -126,6 +137,7 @@ class EdmType
         case EdmType::GUID:
         case EdmType::STRING:
         case null:
+            // NULL also is treated as EdmType::STRING
             // Convert special characters to HTML entities.
             return htmlspecialchars($value);
             
@@ -207,7 +219,9 @@ class EdmType
             case self::GUID:
             case self::STRING:
             case self::INT64:
-                return $value;
+            case null:
+                // NULL also is treated as EdmType::STRING
+                return strval($value);
 
             case self::BINARY:
                 return base64_decode($value);
@@ -219,6 +233,8 @@ class EdmType
                 return Utilities::toBoolean($value);
 
             case self::DOUBLE:
+                return doubleval($value);
+                
             case self::INT32:
                 return intval($value);
 
@@ -246,6 +262,8 @@ class EdmType
         case $type == self::INT32:
         case $type == self::INT64:
         case $type == self::STRING:
+        case $type == null:
+            // NULL also is treated as EdmType::STRING
             return true;
         
         default:

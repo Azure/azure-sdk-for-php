@@ -27,6 +27,7 @@ use WindowsAzure\Resources;
 use WindowsAzure\Utilities;
 use WindowsAzure\Validate;
 use WindowsAzure\Core\HttpCallContext;
+use WindowsAzure\Services\Core\Models\ServiceProperties;
 use WindowsAzure\Services\Core\ServiceRestProxy;
 use WindowsAzure\Services\Table\Models\TableServiceOptions;
 use WindowsAzure\Services\Core\Models\GetServicePropertiesResult;
@@ -260,7 +261,7 @@ class TableRestProxy extends ServiceRestProxy implements ITable
     private function _constructDeleteEntityContext($table, $partitionKey, $rowKey, 
         $options
     ) {
-        Validate::isValidString($table);
+        Validate::isString($table);
         Validate::isTrue(!is_null($partitionKey), Resources::NULL_TABLE_KEY_MSG);
         Validate::isTrue(!is_null($rowKey), Resources::NULL_TABLE_KEY_MSG);
         
@@ -306,7 +307,7 @@ class TableRestProxy extends ServiceRestProxy implements ITable
     private function _constructPutOrMergeEntityContext($table, $entity, $verb,
         $useEtag, $options
     ) {
-        Validate::isValidString($table);
+        Validate::isString($table);
         Validate::notNullOrEmpty($entity);
         Validate::isTrue($entity->isValid($msg), $msg);
         
@@ -356,9 +357,9 @@ class TableRestProxy extends ServiceRestProxy implements ITable
      */
     private function _constructInsertEntityContext($table, $entity, $options)
     {
-        Validate::isValidString($table);
+        Validate::isString($table);
         Validate::notNullOrEmpty($entity);
-        Validate::isTrue($entity->isValid(), Resources::INVALID_ENTITY_MSG);
+        Validate::isTrue($entity->isValid($msg), $msg);
         
         $method      = Resources::HTTP_POST;
         $context     = new HttpCallContext();
@@ -581,14 +582,14 @@ class TableRestProxy extends ServiceRestProxy implements ITable
     }
     
     /**
-    * Gets the properties of the Table service.
-    * 
-    * @param Models\TableServiceOptions $options optional table service options.
-    * 
-    * @return WindowsAzure\Services\Core\Models\GetServicePropertiesResult
-    * 
-    * @see http://msdn.microsoft.com/en-us/library/windowsazure/hh452238.aspx
-    */
+     * Gets the properties of the Table service.
+     * 
+     * @param Models\TableServiceOptions $options optional table service options.
+     * 
+     * @return WindowsAzure\Services\Core\Models\GetServicePropertiesResult
+     * 
+     * @see http://msdn.microsoft.com/en-us/library/windowsazure/hh452238.aspx
+     */
     public function getServiceProperties($options = null)
     {
         if (is_null($options)) {
@@ -610,17 +611,25 @@ class TableRestProxy extends ServiceRestProxy implements ITable
     }
 
     /**
-    * Sets the properties of the Table service.
-    * 
-    * @param ServiceProperties          $serviceProperties new service properties
-    * @param Models\TableServiceOptions $options           optional parameters
-    * 
-    * @return none.
-    * 
-    * @see http://msdn.microsoft.com/en-us/library/windowsazure/hh452240.aspx
-    */
+     * Sets the properties of the Table service.
+     * 
+     * It's recommended to use getServiceProperties, alter the returned object and
+     * then use setServiceProperties with this altered object.
+     * 
+     * @param ServiceProperties          $serviceProperties new service properties
+     * @param Models\TableServiceOptions $options           optional parameters
+     * 
+     * @return none.
+     * 
+     * @see http://msdn.microsoft.com/en-us/library/windowsazure/hh452240.aspx
+     */
     public function setServiceProperties($serviceProperties, $options = null)
     {
+        Validate::isTrue(
+            $serviceProperties instanceof ServiceProperties,
+            Resources::INVALID_SVC_PROP_MSG
+        );
+        
         $method      = Resources::HTTP_PUT;
         $headers     = array();
         $queryParams = array();
@@ -720,7 +729,7 @@ class TableRestProxy extends ServiceRestProxy implements ITable
      */
     public function createTable($table, $options = null)
     {
-        Validate::isValidString($table);
+        Validate::isString($table);
         
         $method      = Resources::HTTP_POST;
         $headers     = array();
@@ -749,7 +758,7 @@ class TableRestProxy extends ServiceRestProxy implements ITable
      */
     public function getTable($table, $options = null)
     {
-        Validate::isValidString($table);
+        Validate::isString($table);
         
         $method      = Resources::HTTP_GET;
         $headers     = array();
@@ -781,7 +790,7 @@ class TableRestProxy extends ServiceRestProxy implements ITable
      */
     public function deleteTable($table, $options = null)
     {
-        Validate::isValidString($table);
+        Validate::isString($table);
         
         $method      = Resources::HTTP_DELETE;
         $headers     = array();
@@ -810,7 +819,7 @@ class TableRestProxy extends ServiceRestProxy implements ITable
      */
     public function queryEntities($table, $options = null)
     {
-        Validate::isValidString($table);
+        Validate::isString($table);
         
         $method      = Resources::HTTP_GET;
         $headers     = array();
@@ -999,7 +1008,7 @@ class TableRestProxy extends ServiceRestProxy implements ITable
      */
     public function getEntity($table, $partitionKey, $rowKey, $options = null)
     {
-        Validate::isValidString($table);
+        Validate::isString($table);
         Validate::isTrue(!is_null($partitionKey), Resources::NULL_TABLE_KEY_MSG);
         Validate::isTrue(!is_null($rowKey), Resources::NULL_TABLE_KEY_MSG);
         

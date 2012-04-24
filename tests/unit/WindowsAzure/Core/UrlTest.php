@@ -167,7 +167,7 @@ class UrlTest extends PHPUnit_Framework_TestCase
     {
         // Setup
         $urlString = TestResources::VALID_URL;
-        $invalidKey = 123;
+        $invalidKey = new \DateTime();
         $value = 'ValidValue';
         $url = new Url($urlString);
         $this->setExpectedException(get_class(new InvalidArgumentTypeException(gettype(''))));
@@ -183,7 +183,7 @@ class UrlTest extends PHPUnit_Framework_TestCase
     {
         // Setup
         $urlString = TestResources::VALID_URL;
-        $invalidKey = '';
+        $invalidKey = new \DateTime();
         $value = 'ValidValue';
         $url = new Url($urlString);
         $this->setExpectedException(get_class(new \InvalidArgumentException(Resources::NULL_ERROR_MSG)));
@@ -200,7 +200,7 @@ class UrlTest extends PHPUnit_Framework_TestCase
         // Setup
         $urlString = TestResources::VALID_URL;
         $key = 'ValidKey';
-        $invalidValue = 123;
+        $invalidValue = new \DateTime();
         $url = new Url($urlString);
         $this->setExpectedException(get_class(new InvalidArgumentTypeException(gettype(''))));
         

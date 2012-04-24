@@ -25,6 +25,7 @@
 namespace WindowsAzure;
 require_once 'XML/Unserializer.php';
 require_once 'XML/Serializer.php';
+use WindowsAzure\Validate;
 
 /**
  * Utilities for the project
@@ -323,6 +324,12 @@ class Utilities
      */
     public static function convertToEdmDateTime($value) 
     {
+        if (empty($value)) {
+            return $value;
+        }
+        
+        Validate::isDate($value);
+            
         $cloned = clone $value;
         $cloned->setTimezone(new \DateTimeZone('UTC'));
         return str_replace('+0000', 'Z', $cloned->format(\DateTime::ISO8601));

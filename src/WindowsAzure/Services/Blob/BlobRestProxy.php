@@ -27,6 +27,7 @@ use WindowsAzure\Utilities;
 use WindowsAzure\Resources;
 use WindowsAzure\Validate;
 use WindowsAzure\Core\WindowsAzureUtilities;
+use WindowsAzure\Services\Core\Models\ServiceProperties;
 use WindowsAzure\Services\Core\ServiceRestProxy;
 use WindowsAzure\Services\Blob\IBlob;
 use WindowsAzure\Services\Blob\Models\BlobServiceOptions;
@@ -265,7 +266,7 @@ class BlobRestProxy extends ServiceRestProxy implements IBlob
     private function _putLeaseImpl($leaseAction, $container, $blob, $leaseId, 
         $options, $accessCondition = null
     ) {
-        Validate::isValidString($blob, 'blob');
+        Validate::isString($blob, 'blob');
         Validate::isString($container, 'container');
         
         $method      = Resources::HTTP_PUT;
@@ -324,7 +325,7 @@ class BlobRestProxy extends ServiceRestProxy implements IBlob
     private function _updatePageBlobPagesImpl($action, $container, $blob, $range,
         $content, $options = null
     ) {
-        Validate::isValidString($blob, 'blob');
+        Validate::isString($blob, 'blob');
         Validate::isString($container, 'container');
         Validate::isTrue(
             $range instanceof Models\PageRange,
@@ -407,6 +408,9 @@ class BlobRestProxy extends ServiceRestProxy implements IBlob
     /**
      * Sets the properties of the Blob service.
      * 
+     * It's recommended to use getServiceProperties, alter the returned object and
+     * then use setServiceProperties with this altered object.
+     * 
      * @param ServiceProperties         $serviceProperties new service properties.
      * @param Models\BlobServiceOptions $options           optional parameters
      * 
@@ -416,6 +420,11 @@ class BlobRestProxy extends ServiceRestProxy implements IBlob
      */
     public function setServiceProperties($serviceProperties, $options = null)
     {
+        Validate::isTrue(
+            $serviceProperties instanceof ServiceProperties,
+            Resources::INVALID_SVC_PROP_MSG
+        );
+        
         $method      = Resources::HTTP_PUT;
         $headers     = array();
         $queryParams = array();
@@ -483,7 +492,7 @@ class BlobRestProxy extends ServiceRestProxy implements IBlob
      */
     public function createContainer($container, $options = null)
     {
-        Validate::isValidString($container, 'container');
+        Validate::isString($container, 'container');
         
         $method      = Resources::HTTP_PUT;
         $headers     = array();
@@ -519,7 +528,7 @@ class BlobRestProxy extends ServiceRestProxy implements IBlob
      */
     public function deleteContainer($container, $options = null)
     {
-        Validate::isValidString($container, 'container');
+        Validate::isString($container, 'container');
         
         $method      = Resources::HTTP_DELETE;
         $headers     = array();
@@ -751,8 +760,8 @@ class BlobRestProxy extends ServiceRestProxy implements IBlob
     public function createPageBlob($container, $blob, $length, $options = null)
     {
         Validate::isString($container, 'container');
-        Validate::isValidString($blob, 'blob');
-        Validate::isValidInteger($length, 'length');
+        Validate::isString($blob, 'blob');
+        Validate::isInteger($length, 'length');
         
         $method      = Resources::HTTP_PUT;
         $headers     = array();
@@ -799,7 +808,7 @@ class BlobRestProxy extends ServiceRestProxy implements IBlob
     public function createBlockBlob($container, $blob, $content, $options = null)
     {
         Validate::isString($container, 'container');
-        Validate::isValidString($blob, 'blob');
+        Validate::isString($blob, 'blob');
         Validate::isTrue(
             is_string($content) || is_resource($content),
             sprintf(Resources::INVALID_PARAM_MSG, 'content', 'string|resource')
@@ -896,8 +905,8 @@ class BlobRestProxy extends ServiceRestProxy implements IBlob
         $options = null
     ) {
         Validate::isString($container, 'container');
-        Validate::isValidString($blob, 'blob');
-        Validate::isValidString($blockId, 'blockId');
+        Validate::isString($blob, 'blob');
+        Validate::isString($blockId, 'blockId');
         Validate::isTrue(
             is_string($content) || is_resource($content),
             sprintf(Resources::INVALID_PARAM_MSG, 'content', 'string|resource')
@@ -947,7 +956,7 @@ class BlobRestProxy extends ServiceRestProxy implements IBlob
     public function commitBlobBlocks($container, $blob, $blockList, $options = null)
     {
         Validate::isString($container, 'container');
-        Validate::isValidString($blob, 'blob');
+        Validate::isString($blob, 'blob');
         Validate::isTrue(
             $blockList instanceof BlockList || is_array($blockList),
             sprintf(
@@ -1021,7 +1030,7 @@ class BlobRestProxy extends ServiceRestProxy implements IBlob
     public function listBlobBlocks($container, $blob, $options = null)
     {
         Validate::isString($container, 'container');
-        Validate::isValidString($blob, 'blob');
+        Validate::isString($blob, 'blob');
         
         $method      = Resources::HTTP_GET;
         $headers     = array();
@@ -1059,7 +1068,7 @@ class BlobRestProxy extends ServiceRestProxy implements IBlob
     public function getBlobProperties($container, $blob, $options = null)
     {
         Validate::isString($container, 'container');
-        Validate::isValidString($blob, 'blob');
+        Validate::isString($blob, 'blob');
         
         $method      = Resources::HTTP_HEAD;
         $headers     = array();
@@ -1098,7 +1107,7 @@ class BlobRestProxy extends ServiceRestProxy implements IBlob
     public function getBlobMetadata($container, $blob, $options = null)
     {
         Validate::isString($container, 'container');
-        Validate::isValidString($blob, 'blob');
+        Validate::isString($blob, 'blob');
         
         $method      = Resources::HTTP_HEAD;
         $headers     = array();
@@ -1139,7 +1148,7 @@ class BlobRestProxy extends ServiceRestProxy implements IBlob
     public function listPageBlobRanges($container, $blob, $options = null)
     {
         Validate::isString($container, 'container');
-        Validate::isValidString($blob, 'blob');
+        Validate::isString($blob, 'blob');
         
         $method      = Resources::HTTP_GET;
         $headers     = array();
@@ -1184,7 +1193,7 @@ class BlobRestProxy extends ServiceRestProxy implements IBlob
     public function setBlobProperties($container, $blob, $options = null)
     {
         Validate::isString($container, 'container');
-        Validate::isValidString($blob, 'blob');
+        Validate::isString($blob, 'blob');
         
         $method      = Resources::HTTP_PUT;
         $headers     = array();
@@ -1242,7 +1251,7 @@ class BlobRestProxy extends ServiceRestProxy implements IBlob
     public function setBlobMetadata($container, $blob, $metadata, $options = null)
     {
         Validate::isString($container, 'container');
-        Validate::isValidString($blob, 'blob');
+        Validate::isString($blob, 'blob');
         WindowsAzureUtilities::isValidMetadata($metadata);
         
         $method      = Resources::HTTP_PUT;
@@ -1284,7 +1293,7 @@ class BlobRestProxy extends ServiceRestProxy implements IBlob
     public function getBlob($container, $blob, $options = null)
     {
         Validate::isString($container, 'container');
-        Validate::isValidString($blob, 'blob');
+        Validate::isString($blob, 'blob');
         
         $method      = Resources::HTTP_GET;
         $headers     = array();
@@ -1332,7 +1341,7 @@ class BlobRestProxy extends ServiceRestProxy implements IBlob
     public function deleteBlob($container, $blob, $options = null)
     {
         Validate::isString($container, 'container');
-        Validate::isValidString($blob, 'blob');
+        Validate::isString($blob, 'blob');
         
         $method      = Resources::HTTP_DELETE;
         $headers     = array();

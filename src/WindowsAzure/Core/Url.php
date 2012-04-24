@@ -121,7 +121,6 @@ class Url implements IUrl
     public function setQueryVariable($key, $value, $force = false)
     {
         Validate::isString($key);
-        Validate::notNullOrEmpty($key);
         Validate::isString($value);
         
         if (!empty($value) && !is_null($value) || $force) {
@@ -149,7 +148,6 @@ class Url implements IUrl
     public function setUrlPath($urlPath)
     {
         Validate::isString($urlPath);
-        Validate::notNullOrEmpty($urlPath);
         
         $this->_url->setPath($urlPath);
     }
@@ -164,7 +162,6 @@ class Url implements IUrl
     public function appendUrlPath($urlPath)
     {
         Validate::isString($urlPath);
-        Validate::notNullOrEmpty($urlPath);
         
         $newUrlPath = parse_url($this->_url, PHP_URL_PATH) . $urlPath;
         $this->_url->setPath($newUrlPath);
