@@ -229,7 +229,10 @@ class TableRestProxy extends ServiceRestProxy implements ITable
                 $context->addOptionalHeader(Resources::CONTENT_TYPE, $contentType);
                 // Use mb_strlen instead of strlen to get the length of the string
                 // in bytes instead of the length in chars.
-                $context->addOptionalHeader(Resources::CONTENT_LENGTH, mb_strlen($body));
+                $context->addOptionalHeader(
+                    Resources::CONTENT_LENGTH,
+                    mb_strlen($body)
+                );
                 break;
         
             case BatchOperationType::DELETE_ENTITY_OPERATION:
