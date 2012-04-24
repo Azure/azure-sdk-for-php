@@ -55,7 +55,7 @@ class Resources
     const INVALID_EXC_OBJ_MSG  = 'Exception object type should be ServiceException.';
     const NULL_TABLE_KEY_MSG   = 'Partition and raw keys can\'t be NULL.';
     const BATCH_ENTITY_DEL_MSG = 'The entity was deleted successfully.';
-    const INVALID_PROP_VAL_MSG = "'%s' property  value must satisfy %s.";
+    const INVALID_PROP_VAL_MSG = "'%s' property value must satisfy %s.";
     const INVALID_PARAM_MSG    = "The provided variable '%s' should be of type '%s'";
     const INVALID_BTE_MSG      = "The blob block type must exist in %s";
     const INVALID_BLOB_PAT_MSG = 'The provided access type is invalid.';

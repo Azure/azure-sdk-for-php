@@ -123,7 +123,7 @@ class Validate
         try {
             (int)$var;
         } catch (\Exception $e) {
-            throw new InvalidArgumentTypeException(gettype(''), $name);
+            throw new InvalidArgumentTypeException(gettype(123), $name);
         }
     }
     
