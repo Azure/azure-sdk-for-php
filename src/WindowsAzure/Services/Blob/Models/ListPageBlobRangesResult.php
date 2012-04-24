@@ -141,7 +141,7 @@ class ListPageBlobRangesResult
      */
     public function setEtag($etag)
     {
-        Validate::isString($etag);
+        Validate::isString($etag, 'etag');
         $this->_etag = $etag;
     }
     
@@ -164,7 +164,7 @@ class ListPageBlobRangesResult
      */
     public function setContentLength($contentLength)
     {
-        Validate::isInteger($contentLength);
+        Validate::isInteger($contentLength, 'contentLength');
         $this->_contentLength = $contentLength;
     }
     

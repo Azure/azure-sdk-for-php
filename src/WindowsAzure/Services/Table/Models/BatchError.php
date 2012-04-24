@@ -65,7 +65,7 @@ class BatchError
             $error instanceof ServiceException,
             Resources::INVALID_EXC_OBJ_MSG
         );
-        Validate::isArray($headers);
+        Validate::isArray($headers, 'headers');
         
         $result = new BatchError();
         $clean  = Utilities::keysToLower($headers);

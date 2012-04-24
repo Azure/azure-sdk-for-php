@@ -148,7 +148,7 @@ class EdmType
             return Utilities::convertToEdmDateTime($value);
 
         case EdmType::BOOLEAN:
-            return ($value == true ? '1' : '0');
+            return (is_null($value) ? '' : ($value == true ? '1' : '0'));
 
         default:
             throw new \InvalidArgumentException();

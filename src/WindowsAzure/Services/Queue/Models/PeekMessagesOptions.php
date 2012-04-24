@@ -35,7 +35,7 @@ namespace WindowsAzure\Services\Queue\Models;
  * @version   Release: @package_version@
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
-class PeekMessagesOptions
+class PeekMessagesOptions extends QueueServiceOptions
 {
     /**
      * A nonzero integer value that specifies the number of messages to peek from 

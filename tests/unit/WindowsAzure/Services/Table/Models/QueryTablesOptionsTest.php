@@ -74,20 +74,37 @@ class QueryTablesOptionsTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers WindowsAzure\Services\Table\Models\QueryTablesOptions::setQuery
+     * @covers WindowsAzure\Services\Table\Models\QueryTablesOptions::setTop
+     * @covers WindowsAzure\Services\Table\Models\QueryTablesOptions::getTop
+     * @covers WindowsAzure\Services\Table\Models\QueryTablesOptions::__construct
+     */
+    public function testSetTop()
+    {
+        // Setup
+        $options = new QueryTablesOptions();
+        $expected = 123;
+        
+        // Test
+        $options->setTop($expected);
+        
+        // Assert
+        $this->assertEquals($expected, $options->getTop());
+    }
+    
+    /**
      * @covers WindowsAzure\Services\Table\Models\QueryTablesOptions::getQuery
      */
-    public function testSetQuery()
+    public function testGetQuery()
     {
         // Setup
         $options = new QueryTablesOptions();
         $expected = new Query();
         
         // Test
-        $options->setQuery($expected);
+        $actual = $options->getQuery();
         
         // Assert
-        $this->assertEquals($expected, $options->getQuery());
+        $this->assertEquals($expected, $actual);
     }
 }
 

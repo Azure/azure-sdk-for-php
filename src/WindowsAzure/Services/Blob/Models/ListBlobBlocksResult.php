@@ -223,7 +223,7 @@ class ListBlobBlocksResult
      */
     public function setContentLength($contentLength)
     {
-        Validate::isInteger($contentLength);
+        Validate::isInteger($contentLength, 'contentLength');
         $this->_contentLength = $contentLength;
     }
     

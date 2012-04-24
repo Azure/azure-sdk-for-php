@@ -174,7 +174,7 @@ class ContainerAcl
      */
     public function setEtag($etag)
     {
-        Validate::isString($etag);
+        Validate::isString($etag, 'etag');
         $this->_etag = $etag;
     }
 
@@ -227,10 +227,10 @@ class ContainerAcl
      */
     public function addSignedIdentifier($id, $start, $expiry, $permission)
     {
-        Validate::isString($id);
-        Validate::isString($start);
-        Validate::isString($expiry);
-        Validate::isString($permission);
+        Validate::isString($id, 'id');
+        Validate::isString($start, 'start');
+        Validate::isString($expiry, 'expiry');
+        Validate::isString($permission, 'permission');
         
         $accessPolicy = new AccessPolicy();
         $accessPolicy->setStart($start);

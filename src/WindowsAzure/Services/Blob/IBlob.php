@@ -88,8 +88,8 @@ interface IBlob extends FilterableService
     /**
     * Creates a new container in the given storage account.
     * 
-    * @param string                    $container name
-    * @param Models\BlobServiceOptions $options   optional parameters
+    * @param string                        $container name
+    * @param Models\DeleteContainerOptions $options   optional parameters
     * 
     * @return none.
     * 

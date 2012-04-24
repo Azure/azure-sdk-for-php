@@ -151,8 +151,8 @@ class Configuration
      */
     public function setProperty($key, $value)
     {
-        Validate::isString($key);
-        Validate::isString($value);
+        Validate::isString($key, 'key');
+        Validate::isString($value, 'value');
 
         $this->_properties[$key] = $value;
     }

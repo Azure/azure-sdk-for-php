@@ -42,159 +42,156 @@ interface IQueue extends FilterableService
     /**
      * Gets the properties of the Queue service.
      * 
-     * @param WindowsAzure\Services\Core\Models\QueueServiceOptions 
-     * $queueServiceOptions optional queue service options.
+     * @param QueueServiceOptions $options The optional parameters.
      * 
      * @return WindowsAzure\Services\Core\Models\GetServicePropertiesResult
      */
-    public function getServiceProperties($queueServiceOptions = null);
+    public function getServiceProperties($options = null);
 
     /**
      * Sets the properties of the Queue service.
      * 
-     * @param array               $serviceProperties   New service properties.
-     * @param QueueServiceOptions $queueServiceOptions Optional queue service options
+     * It's recommended to use getServiceProperties, alter the returned object and
+     * then use setServiceProperties with this altered object.
      * 
-     * @return none.
+     * @param array               $serviceProperties The new service properties.
+     * @param QueueServiceOptions $options           The optional parameters.  
+     * 
+     * @return none
      */
-    public function setServiceProperties($serviceProperties, 
-        $queueServiceOptions = null
-    );
+    public function setServiceProperties($serviceProperties, $options = null);
 
     /**
      * Creates a new queue under the storage account.
      * 
-     * @param string             $queueName          New queue name.
-     * @param QueueCreateOptions $createQueueOptions Optional queue create options.
+     * @param string             $queueName The queue name.
+     * @param QueueCreateOptions $options   The optional queue create options.
      * 
-     * @return none.
+     * @return none
      */
-    public function createQueue($queueName, $createQueueOptions = null);
+    public function createQueue($queueName, $options = null);
 
     /**
      * Deletes a queue.
      * 
-     * @param string $queueName Queue to delete.
+     * @param string              $queueName The queue name.
+     * @param QueueServiceOptions $options   The optional parameters.
      * 
-     * @return none.
+     * @return none
      */
-    public function deleteQueue($queueName);
+    public function deleteQueue($queueName, $options);
 
     /**
      * Lists all queues in the storage account.
      * 
-     * @param ListQueuesOptions $listQueuesOptions Optional list queue options.
+     * @param ListQueuesOptions $options The optional parameters.
      * 
-     * @return WindowsAzure\Services\Core\Models\ListQueuesResult.
+     * @return WindowsAzure\Services\Core\Models\ListQueuesResult
      */
-    public function listQueues($listQueuesOptions = null);
+    public function listQueues($options = null);
 
     /**
      * Returns queue properties, including user-defined metadata.
      * 
-     * @param string              $queueName           Name of the queue.
-     * @param QueueServiceOptions $queueServiceOptions Optional queue service options
+     * @param string              $queueName The queue name.
+     * @param QueueServiceOptions $options   The optional parameters.
      * 
-     * @return WindowsAzure\Services\Core\Models\GetQueueMetadataResult.
+     * @return WindowsAzure\Services\Core\Models\GetQueueMetadataResult
      */
-    public function getQueueMetadata($queueName, $queueServiceOptions = null);
+    public function getQueueMetadata($queueName, $options = null);
 
     /**
      * Sets user-defined metadata on the queue. To delete queue metadata, call 
      * this API without specifying any metadata in $metadata.
      * 
-     * @param string              $queueName           Name of the queue.
-     * @param array               $metadata            Metadata to set
-     * @param QueueServiceOptions $queueServiceOptions Optional queue service options
+     * @param string              $queueName The queue name.
+     * @param array               $metadata  The metadata array.
+     * @param QueueServiceOptions $options   The optional parameters.
      * 
-     * @return none.
+     * @return none
      */
-    public function setQueueMetadata($queueName, $metadata, 
-        $queueServiceOptions = null
-    );
+    public function setQueueMetadata($queueName, $metadata, $options = null);
 
     /**
      * Adds a message to the queue and optionally sets a visibility timeout 
      * for the message.
      * 
-     * @param string               $queueName            Name of the queue.
-     * @param string               $messageText          Message contents.
-     * @param CreateMessageOptions $createMessageOptions optional create options.
+     * @param string               $queueName   The queue name.
+     * @param string               $messageText The message contents.
+     * @param CreateMessageOptions $options     The optional parameters.
      * 
-     * @return none.
+     * @return none
      */
-    public function createMessage($queueName, $messageText, 
-        $createMessageOptions = null
-    );
+    public function createMessage($queueName, $messageText, $options = null);
 
     /**
      * Updates the visibility timeout of a message and/or the message contents.
      * 
-     * @param string              $queueName                  Name of the queue.
-     * @param string              $messageId                  Id of the message.
-     * @param string              $popReceipt                 Specifies the valid 
-     * pop receipt value returned from an earlier call to the Get Messages or 
-     * Update Message operation
-     * @param string              $messageText                Message contents.
+     * @param string              $queueName                  The queue name.
+     * @param string              $messageId                  The id of the message.
+     * @param string              $popReceipt                 The valid pop receipt 
+     * value returned from an earlier call to the Get Messages or Update Message
+     * operation.
+     * @param string              $messageText                The message contents.
      * @param int                 $visibilityTimeoutInSeconds Specifies the new 
      * visibility timeout value, in seconds, relative to server time. 
      * The new value must be larger than or equal to 0, and cannot be larger 
      * than 7 days. The visibility timeout of a message cannot be set to a value 
      * later than the expiry time. A message can be updated until it has been 
      * deleted or has expired.
-     * @param QueueServiceOptions $queueServiceOptions        Optional queue 
-     * service options
+     * @param QueueServiceOptions $options                    The optional 
+     * parameters.
      * 
-     * @return WindowsAzure\Services\Core\Models\UpdateMessageResult.
+     * @return WindowsAzure\Services\Core\Models\UpdateMessageResult
      */
     public function updateMessage($queueName, $messageId, $popReceipt, $messageText, 
-        $visibilityTimeoutInSeconds, $queueServiceOptions = null
+        $visibilityTimeoutInSeconds, $options = null
     );
 
     /**
      * Deletes a specified message from the queue.
      * 
-     * @param string              $queueName           Name of the queue.
-     * @param string              $messageId           Id of the message.
-     * @param string              $popReceipt          A valid pop receipt value
-     * returned from an earlier call to the Get Messages or Update Message operation.
-     * @param QueueServiceOptions $queueServiceOptions Optional queue service options
+     * @param string              $queueName  The queue name.
+     * @param string              $messageId  The id of the message.
+     * @param string              $popReceipt The valid pop receipt value returned
+     * from an earlier call to the Get Messages or Update Message operation.
+     * @param QueueServiceOptions $options    The optional parameters.
      * 
-     * @return none.
+     * @return none
      */
     public function deleteMessage($queueName, $messageId, $popReceipt, 
-        $queueServiceOptions = null
+        $options = null
     );
 
     /**
-     * Lists all messages in the queue
+     * Lists all messages in the queue.
      * 
-     * @param string              $queueName           Name of the queue.
-     * @param ListMessagesOptions $listMessagesOptions Optional list messages options
+     * @param string              $queueName The queue name.
+     * @param ListMessagesOptions $options   The optional parameters.
      * 
-     * @return WindowsAzure\Services\Core\Models\ListMessagesResult.
+     * @return WindowsAzure\Services\Core\Models\ListMessagesResult
      */
-    public function listMessages($queueName, $listMessagesOptions = null);
+    public function listMessages($queueName, $options = null);
 
     /**
      * Retrieves a message from the front of the queue, without changing 
      * the message visibility.
      * 
-     * @param string              $queueName           Name of the queue.
-     * @param PeekMessagesOptions $peekMessagesOptions Optional peek messages options
+     * @param string              $queueName The queue name.
+     * @param PeekMessagesOptions $options   The optional parameters.
      * 
-     * @return WindowsAzure\Services\Core\Models\PeekMessagesResult.
+     * @return WindowsAzure\Services\Core\Models\PeekMessagesResult
      */
-    public function peekMessages($queueName, $peekMessagesOptions = null);
+    public function peekMessages($queueName, $options = null);
 
     /**
      * Clears all messages from the queue.
      * 
-     * @param string              $queueName           Name of the queue.
-     * @param QueueServiceOptions $queueServiceOptions Optional queue service options
+     * @param string              $queueName The queue name.
+     * @param QueueServiceOptions $options   The optional parameters.
      * 
-     * @return WindowsAzure\Services\Core\Models\PeekMessagesResult.
+     * @return WindowsAzure\Services\Core\Models\PeekMessagesResult
      */
-    public function clearMessages($queueName, $queueServiceOptions = null);
+    public function clearMessages($queueName, $options = null);
 }
 ?>

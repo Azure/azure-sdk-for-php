@@ -35,7 +35,7 @@ namespace WindowsAzure\Services\Queue\Models;
  * @version   Release: @package_version@
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
-class CreateMessageOptions
+class CreateMessageOptions extends QueueServiceOptions
 {
     /**
      * If specified, the request must be made using an x-ms-version 

@@ -175,7 +175,7 @@ class HttpClient implements IHttpClient
      */
     public function setHeader($header, $value, $replace = false)
     {
-        Validate::isString($value);
+        Validate::isString($value, 'value');
         
         $this->_request->setHeader($header, $value, $replace);
     }
@@ -309,7 +309,7 @@ class HttpClient implements IHttpClient
      */
     public function setBody($body)
     {
-        Validate::isString($body);
+        Validate::isString($body, 'body');
         $this->_request->setBody($body);
     }
     
