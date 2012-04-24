@@ -199,7 +199,7 @@ class ServiceRestProxy
      */
     public function groupQueryValues($values)
     {
-        Validate::isArray($values);
+        Validate::isArray($values, 'values');
         $joined = Resources::EMPTY_STRING;
         
         foreach ($values as $value) {

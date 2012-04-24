@@ -110,7 +110,7 @@ class QueueRestProxy extends ServiceRestProxy implements IQueue
      */
     public function clearMessages($queueName, $queueServiceOptions = null)
     {
-        Validate::isString($queueName);
+        Validate::isString($queueName, 'queueName');
         
         $method      = Resources::HTTP_DELETE;
         $headers     = array();
@@ -144,8 +144,8 @@ class QueueRestProxy extends ServiceRestProxy implements IQueue
     public function createMessage($queueName, $messageText,
         $createMessageOptions = null
     ) {
-        Validate::isString($queueName);
-        Validate::isString($messageText);
+        Validate::isString($queueName, 'queueName');
+        Validate::isString($messageText, 'messageText');
         
         $method      = Resources::HTTP_POST;
         $headers     = array();
@@ -184,7 +184,7 @@ class QueueRestProxy extends ServiceRestProxy implements IQueue
      */
     public function createQueue($queueName, $createQueueOptions = null)
     {
-        Validate::isString($queueName);
+        Validate::isString($queueName, 'queueName');
         
         $method      = Resources::HTTP_PUT;
         $headers     = array();
@@ -219,9 +219,9 @@ class QueueRestProxy extends ServiceRestProxy implements IQueue
     public function deleteMessage($queueName, $messageId, $popReceipt, 
         $queueServiceOptions = null
     ) {
-        Validate::isString($queueName);
-        Validate::isString($messageId);
-        Validate::isString($popReceipt);
+        Validate::isString($queueName, 'queueName');
+        Validate::isString($messageId, 'messageId');
+        Validate::isString($popReceipt, 'popReceipt');
         
         $method      = Resources::HTTP_DELETE;
         $headers     = array();
@@ -252,7 +252,7 @@ class QueueRestProxy extends ServiceRestProxy implements IQueue
      */
     public function deleteQueue($queueName)
     {
-        Validate::isString($queueName);
+        Validate::isString($queueName, 'queueName');
         
         $method      = Resources::HTTP_DELETE;
         $headers     = array();
@@ -273,7 +273,7 @@ class QueueRestProxy extends ServiceRestProxy implements IQueue
      */
     public function getQueueMetadata($queueName, $queueServiceOptions = null)
     {
-        Validate::isString($queueName);
+        Validate::isString($queueName, 'queueName');
         
         $method      = Resources::HTTP_GET;
         $headers     = array();
@@ -342,7 +342,7 @@ class QueueRestProxy extends ServiceRestProxy implements IQueue
      */
     public function listMessages($queueName, $listMessagesOptions = null)
     {
-        Validate::isString($queueName);
+        Validate::isString($queueName, 'queueName');
         
         $method      = Resources::HTTP_GET;
         $headers     = array();
@@ -377,7 +377,7 @@ class QueueRestProxy extends ServiceRestProxy implements IQueue
      */
     public function peekMessages($queueName, $peekMessagesOptions = null)
     {
-        Validate::isString($queueName);
+        Validate::isString($queueName, 'queueName');
         
         $method      = Resources::HTTP_GET;
         $headers     = array();
@@ -413,8 +413,8 @@ class QueueRestProxy extends ServiceRestProxy implements IQueue
     public function setQueueMetadata($queueName, $metadata, 
         $queueServiceOptions = null
     ) {
-        Validate::isString($queueName);
-        Validate::isArray($metadata);
+        Validate::isString($queueName, 'queueName');
+        Validate::isArray($metadata, 'metadata');
         
         $method      = Resources::HTTP_PUT;
         $headers     = array();
@@ -500,10 +500,10 @@ class QueueRestProxy extends ServiceRestProxy implements IQueue
     public function updateMessage($queueName, $messageId, $popReceipt, $messageText, 
         $visibilityTimeoutInSeconds, $queueServiceOptions = null
     ) {
-        Validate::isString($queueName);
-        Validate::isString($messageId);
-        Validate::isString($popReceipt);
-        Validate::isString($messageText);
+        Validate::isString($queueName, 'queueName');
+        Validate::isString($messageId, 'messageId');
+        Validate::isString($popReceipt, 'popReceipt');
+        Validate::isString($messageText, 'messageText');
         Validate::isInteger($visibilityTimeoutInSeconds);
         
         $method      = Resources::HTTP_PUT;

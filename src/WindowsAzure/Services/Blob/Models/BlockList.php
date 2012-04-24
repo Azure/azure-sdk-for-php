@@ -74,7 +74,7 @@ class BlockList
      */
     public function addEntry($blockId, $type)
     {
-        Validate::isString($blockId);
+        Validate::isString($blockId, 'blockId');
         Validate::isTrue(
             BlobBlockType::isValid($type),
             sprintf(Resources::INVALID_BTE_MSG, get_class(new BlobBlockType()))

@@ -118,7 +118,7 @@ class SetBlobPropertiesResult
      */
     public function setEtag($etag)
     {
-        Validate::isString($etag);
+        Validate::isString($etag, 'etag');
         $this->_etag = $etag;
     }
     

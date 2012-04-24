@@ -294,7 +294,7 @@ class HttpCallContext
      */
     public function removeHeader($name)
     {
-        Validate::isString($name);
+        Validate::isString($name, 'name');
         unset($this->_headers[$name]);
     }
     

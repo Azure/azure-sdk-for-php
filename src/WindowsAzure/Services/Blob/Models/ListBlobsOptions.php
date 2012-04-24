@@ -92,7 +92,7 @@ class ListBlobsOptions extends BlobServiceOptions
      */
     public function setPrefix($prefix)
     {
-        Validate::isString($prefix);
+        Validate::isString($prefix, 'prefix');
         $this->_prefix = $prefix;
     }
     
@@ -115,7 +115,7 @@ class ListBlobsOptions extends BlobServiceOptions
      */
     public function setDelimiter($delimiter)
     {
-        Validate::isString($delimiter);
+        Validate::isString($delimiter, 'delimiter');
         $this->_delimiter = $delimiter;
     }
 
@@ -138,7 +138,7 @@ class ListBlobsOptions extends BlobServiceOptions
      */
     public function setMarker($marker)
     {
-        Validate::isString($marker);
+        Validate::isString($marker, 'marker');
         $this->_marker = $marker;
     }
 
