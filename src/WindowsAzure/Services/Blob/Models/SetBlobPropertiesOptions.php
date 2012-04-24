@@ -129,7 +129,7 @@ class SetBlobPropertiesOptions
      */
     public function setSequenceNumber($sequenceNumber)
     {
-        Validate::isInteger($sequenceNumber);
+        Validate::isInteger($sequenceNumber, 'sequenceNumber');
         $this->_sequenceNumber = $sequenceNumber;
     }
     
@@ -196,7 +196,7 @@ class SetBlobPropertiesOptions
      */
     public function setBlobContentLength($blobContentLength)
     {
-        Validate::isInteger($blobContentLength);
+        Validate::isInteger($blobContentLength, 'blobContentLength');
         $this->_blobContentLength = $blobContentLength;
     }
     

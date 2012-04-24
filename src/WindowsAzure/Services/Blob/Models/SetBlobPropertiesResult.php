@@ -141,7 +141,7 @@ class SetBlobPropertiesResult
      */
     public function setSequenceNumber($sequenceNumber)
     {
-        Validate::isInteger($sequenceNumber);
+        Validate::isInteger($sequenceNumber, 'sequenceNumber');
         $this->_sequenceNumber = $sequenceNumber;
     }
 }

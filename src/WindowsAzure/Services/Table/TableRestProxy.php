@@ -308,7 +308,7 @@ class TableRestProxy extends ServiceRestProxy implements ITable
         $useEtag, $options
     ) {
         Validate::isString($table, 'table');
-        Validate::notNullOrEmpty($entity);
+        Validate::notNullOrEmpty($entity, 'entity');
         Validate::isTrue($entity->isValid($msg), $msg);
         
         $method       = $verb;
@@ -358,7 +358,7 @@ class TableRestProxy extends ServiceRestProxy implements ITable
     private function _constructInsertEntityContext($table, $entity, $options)
     {
         Validate::isString($table, 'table');
-        Validate::notNullOrEmpty($entity);
+        Validate::notNullOrEmpty($entity, 'entity');
         Validate::isTrue($entity->isValid($msg), $msg);
         
         $method      = Resources::HTTP_POST;
@@ -1050,7 +1050,7 @@ class TableRestProxy extends ServiceRestProxy implements ITable
      */
     public function batch($batchOperations, $options = null)
     {
-        Validate::notNullOrEmpty($batchOperations);
+        Validate::notNullOrEmpty($batchOperations, 'batchOperations');
         
         $method      = Resources::HTTP_POST;
         $operations  = $batchOperations->getOperations();

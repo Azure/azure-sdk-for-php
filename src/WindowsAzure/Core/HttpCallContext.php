@@ -324,7 +324,7 @@ class HttpCallContext
      */
     public function addStatusCode($statusCode)
     {
-        Validate::isInteger($statusCode);
+        Validate::isInteger($statusCode, 'statusCode');
         $this->_statusCodes[] = $statusCode;
     }
     

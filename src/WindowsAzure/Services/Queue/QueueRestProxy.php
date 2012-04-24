@@ -504,7 +504,7 @@ class QueueRestProxy extends ServiceRestProxy implements IQueue
         Validate::isString($messageId, 'messageId');
         Validate::isString($popReceipt, 'popReceipt');
         Validate::isString($messageText, 'messageText');
-        Validate::isInteger($visibilityTimeoutInSeconds);
+        Validate::isInteger($visibilityTimeoutInSeconds, 'visibilityTimeoutInSeconds');
         
         $method      = Resources::HTTP_PUT;
         $headers     = array();

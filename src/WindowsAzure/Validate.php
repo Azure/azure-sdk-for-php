@@ -49,7 +49,7 @@ class Validate
      * 
      * @return none
      */
-    public static function isArray($var, $name = null)
+    public static function isArray($var, $name)
     {
         if (!is_array($var)) {
             throw new InvalidArgumentTypeException($name, gettype(array()));
@@ -66,7 +66,7 @@ class Validate
      * 
      * @return none
      */
-    public static function isString($var, $name = null)
+    public static function isString($var, $name)
     {
         try {
             (string)$var;
@@ -99,7 +99,7 @@ class Validate
      *
      * @return none
      */
-    public static function notNullOrEmpty($var, $name = null)
+    public static function notNullOrEmpty($var, $name)
     {
         if (is_null($var) || empty($var)) {
             throw new \InvalidArgumentException(
@@ -118,7 +118,7 @@ class Validate
      * 
      * @return none
      */
-    public static function isInteger($var, $name = null)
+    public static function isInteger($var, $name)
     {
         try {
             (int)$var;

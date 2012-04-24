@@ -269,7 +269,7 @@ class BlobProperties
      */
     public function setContentLength($contentLength)
     {
-        Validate::isInteger($contentLength);
+        Validate::isInteger($contentLength, 'contentLength');
         $this->_contentLength = $contentLength;
     }
     
@@ -424,7 +424,7 @@ class BlobProperties
      */
     public function setSequenceNumber($sequenceNumber)
     {
-        Validate::isInteger($sequenceNumber);
+        Validate::isInteger($sequenceNumber, 'sequenceNumber');
         $this->_sequenceNumber = $sequenceNumber;
     }
 }

@@ -161,7 +161,7 @@ class ListBlobsOptions extends BlobServiceOptions
      */
     public function setMaxResults($maxResults)
     {
-        Validate::isInteger($maxResults);
+        Validate::isInteger($maxResults, 'maxResults');
         $this->_maxResults = $maxResults;
     }
 
