@@ -644,6 +644,7 @@ class RoleEnvironment
         try {
             self::_initialize();
         } catch (RoleEnvironmentNotAvailableException $ex) {
+            return false;
         } catch (ChannelNotAvailableException $ex) {
             return false;
         }
