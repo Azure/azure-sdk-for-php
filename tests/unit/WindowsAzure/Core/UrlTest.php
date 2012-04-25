@@ -186,7 +186,7 @@ class UrlTest extends PHPUnit_Framework_TestCase
         $invalidKey = new \DateTime();
         $value = 'ValidValue';
         $url = new Url($urlString);
-        $this->setExpectedException(get_class(new \InvalidArgumentException(Resources::NULL_ERROR_MSG)));
+        $this->setExpectedException(get_class(new \InvalidArgumentException(Resources::NULL_OR_EMPTY_MSG)));
         
         // Test
         $url->setQueryVariable($invalidKey, $value);

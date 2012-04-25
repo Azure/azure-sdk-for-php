@@ -103,7 +103,7 @@ class Validate
     {
         if (is_null($var) || empty($var)) {
             throw new \InvalidArgumentException(
-                sprintf(Resources::NULL_ERROR_MSG, $name)
+                sprintf(Resources::NULL_OR_EMPTY_MSG, $name)
             );
         }
     }
@@ -157,6 +157,23 @@ class Validate
     {
         if (gettype($date) != 'object' || get_class($date) != 'DateTime') {
             throw new InvalidArgumentTypeException('DateTime');
+        }
+    }
+    
+    /**
+     * Throws exception if the provided variable is set to null.
+     *
+     * @param mix    $var  The variable to check.
+     * @param string $name The parameter name.
+     *
+     * @throws \InvalidArgumentException
+     *
+     * @return none
+     */
+    public static function notNull($var, $name)
+    {
+        if (is_null($var)) {
+            throw new \InvalidArgumentException(sprintf(Resources::NULL_MSG, $name));
         }
     }
 }

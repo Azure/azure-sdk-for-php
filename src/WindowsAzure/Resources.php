@@ -42,7 +42,8 @@ class Resources
     const INVALID_META_MSG     = 'Metadata cannot contain newline characters.';
     const AZURE_ERROR_MSG      = "Fail:\nCode: %s\nValue: %s\ndetails (if any): %s.";
     const NOT_IMPLEMENTED_MSG  = 'This method is not implemented.';
-    const NULL_ERROR_MSG       = "'%s' can't be NULL or empty.";
+    const NULL_OR_EMPTY_MSG    = "'%s' can't be NULL or empty.";
+    const NULL_MSG             = "'%s' can't be NULL.";
     const INVALID_URL_MSG      = 'Provided URL is invalid.';
     const INVALID_HT_MSG       = 'The header type provided is invalid.';
     const INVALID_EDM_MSG      = 'The provided EDM type is invalid.';

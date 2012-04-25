@@ -606,6 +606,10 @@ class QueueRestProxy extends ServiceRestProxy implements IQueue
             $visibilityTimeoutInSeconds,
             'visibilityTimeoutInSeconds'
         );
+        Validate::notNull(
+            $visibilityTimeoutInSeconds,
+            'visibilityTimeoutInSeconds'
+        );
         
         $method      = Resources::HTTP_PUT;
         $headers     = array();

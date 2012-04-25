@@ -1003,6 +1003,7 @@ class BlobRestProxy extends ServiceRestProxy implements IBlob
         Validate::isString($blob, 'blob');
         Validate::notNullOrEmpty($blob, 'blob');
         Validate::isInteger($length, 'length');
+        Validate::notNull($length, 'length');
         
         $method      = Resources::HTTP_PUT;
         $headers     = array();
