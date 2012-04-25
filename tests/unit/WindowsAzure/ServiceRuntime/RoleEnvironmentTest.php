@@ -59,7 +59,7 @@ class RoleEnvironmentTest extends \PHPUnit_Framework_TestCase
         
         $endpoint = self::getStaticPropertyValue('_versionEndpoint');
         
-        $this->assertEquals('\\.\pipe\WindowsAzureRuntime', $endpoint);
+        $this->assertEquals('\\\\.\\pipe\\WindowsAzureRuntime', $endpoint);
         
         // Test 2 - Environment variable
         putenv('WaRuntimeEndpoint=endpoint1');
