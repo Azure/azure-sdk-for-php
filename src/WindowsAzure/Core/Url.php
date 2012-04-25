@@ -122,7 +122,7 @@ class Url implements IUrl
         Validate::isString($key, 'key');
         Validate::isString($value, 'value');
         
-        $this->_url->setQueryVariable(strtolower($key), $value);
+        $this->_url->setQueryVariable($key, $value);
     }
     
     /**

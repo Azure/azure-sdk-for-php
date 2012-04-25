@@ -130,6 +130,8 @@ abstract class StorageAuthScheme
      */
     protected function computeCanonicalizedResource($url, $queryParams)
     {
+        $queryParams = Utilities::keysToLower($queryParams);
+        
         // 1. Beginning with an empty string (""), append a forward slash (/), 
         //    followed by the name of the account that owns the accessed resource.
         $canonicalizedResource = '/' . $this->accountName;
@@ -158,7 +160,7 @@ abstract class StorageAuthScheme
             sort($values);
             $separated = implode(Resources::SEPARATOR, $values);
             
-            $canonicalizedResource .= "\n" . strtolower($key) . ':' . 
+            $canonicalizedResource .= "\n" . $key . ':' . 
                 rawurldecode($separated);
         }
 
