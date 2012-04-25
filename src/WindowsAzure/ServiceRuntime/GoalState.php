@@ -87,7 +87,7 @@ class GoalState
     /**
      * Gets the incarnation.
      * 
-     * @return string.
+     * @return string
      */
     public function getIncarnation()
     {
@@ -97,7 +97,7 @@ class GoalState
     /**
      * Gets the expected state.
      * 
-     * @return string.
+     * @return string
      */
     public function getExpectedState()
     {
@@ -107,7 +107,7 @@ class GoalState
     /**
      * Gets the environment path.
      * 
-     * @return string.
+     * @return string
      */
     public function getEnvironmentPath()
     {
@@ -117,7 +117,7 @@ class GoalState
     /**
      * Gets the deadline.
      * 
-     * @return string.
+     * @return string
      */
     public function getDeadline()
     {
@@ -127,7 +127,7 @@ class GoalState
     /**
      * Gets the current state endpoint.
      * 
-     * @return string.
+     * @return string
      */
     public function getCurrentStateEndpoint()
     {
