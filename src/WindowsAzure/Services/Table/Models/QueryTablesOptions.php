@@ -135,6 +135,28 @@ class QueryTablesOptions extends TableServiceOptions
     {
         return $this->_query;
     }
+    
+    /**
+     * Gets filter.
+     *
+     * @return Filters\Filter
+     */
+    public function getFilter()
+    {
+        return $this->_query->getFilter();
+    }
+
+    /**
+     * Sets filter.
+     *
+     * @param Filters\Filter $filter value.
+     * 
+     * @return none.
+     */
+    public function setFilter($filter)
+    {
+        $this->_query->setFilter($filter);
+    }
 }
 
 ?>
