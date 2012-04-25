@@ -59,7 +59,8 @@ class LocalResource
      * @param string $name                   The name.
      * @param string $rootPath               The root path.
      */
-    public function __construct ($maximumSizeInMegabytes, $name, $rootPath) {
+    public function __construct ($maximumSizeInMegabytes, $name, $rootPath)
+    {
         $this->_maximumSizeInMegabytes = $maximumSizeInMegabytes;
         $this->_name                   = $name;
         $this->_rootPath               = $rootPath;
@@ -72,7 +73,8 @@ class LocalResource
      * @return The maximum size, in megabytes, allocated for the local storage
      *         resource.
      */
-    public function getMaximumSizeInMegabytes() {
+    public function getMaximumSizeInMegabytes()
+    {
         return $this->_maximumSizeInMegabytes;
     }
 
@@ -82,7 +84,8 @@ class LocalResource
      * 
      * @return A string object that represents the name of the local store.
      */
-    public function getName() {
+    public function getName()
+    {
         return $this->_name;
     }
 
@@ -92,7 +95,8 @@ class LocalResource
      * @return A string object that represents the path to the local storage 
      * resource.
      */
-    public function getRootPath() {
+    public function getRootPath()
+    {
         return $this->_rootPath;
     }
 }
