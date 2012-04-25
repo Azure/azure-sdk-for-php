@@ -25,6 +25,8 @@
 namespace Tests\Unit\WindowsAzure\Services\Table\Models;
 use WindowsAzure\Services\Table\Models\QueryTablesOptions;
 use WindowsAzure\Services\Table\Models\Query;
+use WindowsAzure\Services\Table\Models\Filters\Filter;
+use WindowsAzure\Services\Table\Models\EdmType;
 
 /**
  * Unit tests for class QueryTablesOptions
@@ -105,6 +107,23 @@ class QueryTablesOptionsTest extends \PHPUnit_Framework_TestCase
         
         // Assert
         $this->assertEquals($expected, $actual);
+    }
+    
+    /**
+     * @covers WindowsAzure\Services\Table\Models\QueryTablesOptions::setFilter
+     * @covers WindowsAzure\Services\Table\Models\QueryTablesOptions::getFilter
+     */
+    public function testSetFilter()
+    {
+        // Setup
+        $options = new QueryTablesOptions();
+        $expected = Filter::applyConstant('constValue', EdmType::STRING);
+        
+        // Test
+        $options->setFilter($expected);
+        
+        // Assert
+        $this->assertEquals($expected, $options->getFilter());
     }
 }
 
