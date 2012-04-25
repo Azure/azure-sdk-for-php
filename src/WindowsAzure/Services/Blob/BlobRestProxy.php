@@ -22,55 +22,6 @@
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
  
-<<<<<<< HEAD
-namespace PEAR2\WindowsAzure\Services\Blob;
-use PEAR2\WindowsAzure\Utilities;
-use PEAR2\WindowsAzure\Resources;
-use PEAR2\WindowsAzure\Validate;
-use PEAR2\WindowsAzure\Core\WindowsAzureUtilities;
-use PEAR2\WindowsAzure\Services\Core\ServiceRestProxy;
-use PEAR2\WindowsAzure\Services\Blob\IBlob;
-use PEAR2\WindowsAzure\Services\Blob\Models\BlobServiceOptions;
-use PEAR2\WindowsAzure\Services\Core\Models\GetServicePropertiesResult;
-use PEAR2\WindowsAzure\Services\Blob\Models\ListContainersOptions;
-use PEAR2\WindowsAzure\Services\Blob\Models\ListContainersResult;
-use PEAR2\WindowsAzure\Services\Blob\Models\CreateContainerOptions;
-use PEAR2\WindowsAzure\Services\Blob\Models\GetContainerPropertiesResult;
-use PEAR2\WindowsAzure\Services\Blob\Models\GetContainerAclResult;
-use PEAR2\WindowsAzure\Services\Blob\Models\SetContainerMetadataOptions;
-use PEAR2\WindowsAzure\Services\Blob\Models\ListBlobsOptions;
-use PEAR2\WindowsAzure\Services\Blob\Models\ListBlobsResult;
-use PEAR2\WindowsAzure\Services\Blob\Models\BlobType;
-use PEAR2\WindowsAzure\Services\Blob\Models\CreateBlobOptions;
-use PEAR2\WindowsAzure\Services\Blob\Models\CopyBlobOptions;
-use PEAR2\WindowsAzure\Services\Blob\Models\CreateBlobSnapshotOptions;
-use PEAR2\WindowsAzure\Services\Blob\Models\CreateBlobSnapshotResult;
-use PEAR2\WindowsAzure\Services\Blob\Models\BlobProperties;
-use PEAR2\WindowsAzure\Services\Blob\Models\GetBlobPropertiesOptions;
-use PEAR2\WindowsAzure\Services\Blob\Models\GetBlobPropertiesResult;
-use PEAR2\WindowsAzure\Services\Blob\Models\SetBlobPropertiesOptions;
-use PEAR2\WindowsAzure\Services\Blob\Models\SetBlobPropertiesResult;
-use PEAR2\WindowsAzure\Services\Blob\Models\GetBlobMetadataOptions;
-use PEAR2\WindowsAzure\Services\Blob\Models\GetBlobMetadataResult;
-use PEAR2\WindowsAzure\Services\Blob\Models\SetBlobMetadataOptions;
-use PEAR2\WindowsAzure\Services\Blob\Models\SetBlobMetadataResult;
-use PEAR2\WindowsAzure\Services\Blob\Models\GetBlobOptions;
-use PEAR2\WindowsAzure\Services\Blob\Models\GetBlobResult;
-use PEAR2\WindowsAzure\Services\Blob\Models\DeleteBlobOptions;
-use PEAR2\WindowsAzure\Services\Blob\Models\LeaseMode;
-use PEAR2\WindowsAzure\Services\Blob\Models\AcquireLeaseOptions;
-use PEAR2\WindowsAzure\Services\Blob\Models\AcquireLeaseResult;
-use PEAR2\WindowsAzure\Services\Blob\Models\CreateBlobPagesOptions;
-use PEAR2\WindowsAzure\Services\Blob\Models\CreateBlobPagesResult;
-use PEAR2\WindowsAzure\Services\Blob\Models\PageWriteOption;
-use PEAR2\WindowsAzure\Services\Blob\Models\ListPageBlobRangesOptions;
-use PEAR2\WindowsAzure\Services\Blob\Models\ListPageBlobRangesResult;
-use PEAR2\WindowsAzure\Services\Blob\Models\CreateBlobBlockOptions;
-use PEAR2\WindowsAzure\Services\Blob\Models\CommitBlobBlocksOptions;
-use PEAR2\WindowsAzure\Services\Blob\Models\BlockList;
-use PEAR2\WindowsAzure\Services\Blob\Models\ListBlobBlocksOptions;
-use PEAR2\WindowsAzure\Services\Blob\Models\ListBlobBlocksResult;
-=======
 namespace WindowsAzure\Services\Blob;
 use WindowsAzure\Utilities;
 use WindowsAzure\Resources;
@@ -116,7 +67,9 @@ use WindowsAzure\Services\Blob\Models\CommitBlobBlocksOptions;
 use WindowsAzure\Services\Blob\Models\BlockList;
 use WindowsAzure\Services\Blob\Models\ListBlobBlocksOptions;
 use WindowsAzure\Services\Blob\Models\ListBlobBlocksResult;
->>>>>>> 5bf9d542a690f36c0ba8e4b231b52097cbdda19e
+use WindowsAzure\Services\Blob\Models\CopyBlobOptions;
+use WindowsAzure\Services\Blob\Models\CreateBlobSnapshotOptions;
+use WindowsAzure\Services\Blob\Models\CreateBlobSnapshotResult;
 
 /**
  * This class constructs HTTP requests and receive HTTP responses for blob

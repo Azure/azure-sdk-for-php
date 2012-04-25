@@ -4,9 +4,6 @@ spl_autoload_register(
       static $classes = null;
       if ($classes === null) {
          $classes = array(
-            'pear2\\windowsazure\\services\\blob\\models\\copybloboptions' => '/WindowsAzure/Services/Blob/Models/CopyBlobOptions.php',
-            'pear2\\windowsazure\\services\\blob\\models\\createblobsnapshotoptions' => '/WindowsAzure/Services/Blob/Models/CreateBlobSnapshotOptions.php',
-            'pear2\\windowsazure\\services\\blob\\models\\createblobsnapshotresult' => '/WindowsAzure/Services/Blob/Models/CreateBlobSnapshotResult.php',
             'windowsazure\\core\\httpcallcontext' => '/WindowsAzure/Core/HttpCallContext.php',
             'windowsazure\\core\\httpclient' => '/WindowsAzure/Core/HttpClient.php',
             'windowsazure\\core\\ihttpclient' => '/WindowsAzure/Core/IHttpClient.php',
@@ -56,6 +53,7 @@ spl_autoload_register(
             'windowsazure\\serviceruntime\\xmlcurrentstateserializer' => '/WindowsAzure/ServiceRuntime/XmlCurrentStateSerializer.php',
             'windowsazure\\serviceruntime\\xmlgoalstatedeserializer' => '/WindowsAzure/ServiceRuntime/XmlGoalStateDeserializer.php',
             'windowsazure\\serviceruntime\\xmlroleenvironmentdatadeserializer' => '/WindowsAzure/ServiceRuntime/XmlRoleEnvironmentDataDeserializer.php',
+            'windowsazure\\services\\blob\\blobrestproxy' => '/WindowsAzure/Services/Blob/BlobRestProxy.php',
             'windowsazure\\services\\blob\\blobservice' => '/WindowsAzure/Services/Blob/BlobService.php',
             'windowsazure\\services\\blob\\blobsettings' => '/WindowsAzure/Services/Blob/BlobSettings.php',
             'windowsazure\\services\\blob\\iblob' => '/WindowsAzure/Services/Blob/IBlob.php',
@@ -75,10 +73,13 @@ spl_autoload_register(
             'windowsazure\\services\\blob\\models\\container' => '/WindowsAzure/Services/Blob/Models/Container.php',
             'windowsazure\\services\\blob\\models\\containeracl' => '/WindowsAzure/Services/Blob/Models/ContainerACL.php',
             'windowsazure\\services\\blob\\models\\containerproperties' => '/WindowsAzure/Services/Blob/Models/ContainerProperties.php',
+            'windowsazure\\services\\blob\\models\\copybloboptions' => '/WindowsAzure/Services/Blob/Models/CopyBlobOptions.php',
             'windowsazure\\services\\blob\\models\\createblobblockoptions' => '/WindowsAzure/Services/Blob/Models/CreateBlobBlockOptions.php',
             'windowsazure\\services\\blob\\models\\createbloboptions' => '/WindowsAzure/Services/Blob/Models/CreateBlobOptions.php',
             'windowsazure\\services\\blob\\models\\createblobpagesoptions' => '/WindowsAzure/Services/Blob/Models/CreateBlobPagesOptions.php',
             'windowsazure\\services\\blob\\models\\createblobpagesresult' => '/WindowsAzure/Services/Blob/Models/CreateBlobPagesResult.php',
+            'windowsazure\\services\\blob\\models\\createblobsnapshotoptions' => '/WindowsAzure/Services/Blob/Models/CreateBlobSnapshotOptions.php',
+            'windowsazure\\services\\blob\\models\\createblobsnapshotresult' => '/WindowsAzure/Services/Blob/Models/CreateBlobSnapshotResult.php',
             'windowsazure\\services\\blob\\models\\createcontaineroptions' => '/WindowsAzure/Services/Blob/Models/CreateContainerOptions.php',
             'windowsazure\\services\\blob\\models\\deletebloboptions' => '/WindowsAzure/Services/Blob/Models/DeleteBlobOptions.php',
             'windowsazure\\services\\blob\\models\\getblobmetadataoptions' => '/WindowsAzure/Services/Blob/Models/GetBlobMetadataOptions.php',

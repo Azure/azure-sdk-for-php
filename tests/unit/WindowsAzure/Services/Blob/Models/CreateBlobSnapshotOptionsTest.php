@@ -15,22 +15,22 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   PEAR2\Tests\Unit\WindowsAzure\Services\Blob\Models
+ * @package   Tests\Unit\WindowsAzure\Services\Blob\Models
  * @author    Albert Cheng <gongchen at the largest software company> 
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
-namespace PEAR2\Tests\Unit\WindowsAzure\Services\Blob\Models;
-use PEAR2\Tests\Framework\TestResources;
-use PEAR2\WindowsAzure\Core\WindowsAzureUtilities;
-use PEAR2\WindowsAzure\Services\Blob\Models\CreateBlobSnapshotOptions;
+namespace Tests\Unit\WindowsAzure\Services\Blob\Models;
+use Tests\Framework\TestResources;
+use WindowsAzure\Core\WindowsAzureUtilities;
+use WindowsAzure\Services\Blob\Models\CreateBlobSnapshotOptions;
 
 /**
  * Unit tests for class CreateBlobSnapshotOptions
  *
  * @category  Microsoft
- * @package   PEAR2\Tests\Unit\WindowsAzure\Services\Blob\Models
+ * @package   Tests\Unit\WindowsAzure\Services\Blob\Models
  * @author    Albert Cheng <gongchen at the largest software company>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
@@ -40,8 +40,8 @@ use PEAR2\WindowsAzure\Services\Blob\Models\CreateBlobSnapshotOptions;
 class CreateBlobSnapshotOptionsTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @covers PEAR2\WindowsAzure\Services\Blob\Models\CreateBlobSnapshotOptions::setDate
-     * @covers PEAR2\WindowsAzure\Services\Blob\Models\CreateBlobSnapshotOptions::getDate
+     * @covers WindowsAzure\Services\Blob\Models\CreateBlobSnapshotOptions::setDate
+     * @covers WindowsAzure\Services\Blob\Models\CreateBlobSnapshotOptions::getDate
      */
     public function testSetDate()
     {
@@ -57,8 +57,8 @@ class CreateBlobSnapshotOptionsTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers PEAR2\WindowsAzure\Services\Blob\Models\CreateBlobSnapshotOptions::setVersion
-     * @covers PEAR2\WindowsAzure\Services\Blob\Models\CreateBlobSnapshotOptions::getVersion
+     * @covers WindowsAzure\Services\Blob\Models\CreateBlobSnapshotOptions::setVersion
+     * @covers WindowsAzure\Services\Blob\Models\CreateBlobSnapshotOptions::getVersion
      */
     public function testSetVersion()
     {
@@ -75,8 +75,8 @@ class CreateBlobSnapshotOptionsTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers PEAR2\WindowsAzure\Services\Blob\Models\CreateBlobSnapshotOptions::setMetadata
-     * @covers PEAR2\WindowsAzure\Services\Blob\Models\CreateBlobSnapshotOptions::getMetadata
+     * @covers WindowsAzure\Services\Blob\Models\CreateBlobSnapshotOptions::setMetadata
+     * @covers WindowsAzure\Services\Blob\Models\CreateBlobSnapshotOptions::getMetadata
      */
     public function testSetMetadata()
     {
@@ -91,8 +91,8 @@ class CreateBlobSnapshotOptionsTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers PEAR2\WindowsAzure\Services\Blob\Models\CreateBlobSnapshotOptions::setIfModifiedSince
-     * @covers PEAR2\WindowsAzure\Services\Blob\Models\CreateBlobSnapshotOptions::getIfModifiedSince
+     * @covers WindowsAzure\Services\Blob\Models\CreateBlobSnapshotOptions::setIfModifiedSince
+     * @covers WindowsAzure\Services\Blob\Models\CreateBlobSnapshotOptions::getIfModifiedSince
      */
     public function testSetIfModifiedSince()
     {
@@ -107,8 +107,8 @@ class CreateBlobSnapshotOptionsTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers PEAR2\WindowsAzure\Services\Blob\Models\CreateBlobSnapshotOptions::setIfUnmodifiedSince
-     * @covers PEAR2\WindowsAzure\Services\Blob\Models\CreateBlobSnapshotOptions::getIfUnmodifiedSince
+     * @covers WindowsAzure\Services\Blob\Models\CreateBlobSnapshotOptions::setIfUnmodifiedSince
+     * @covers WindowsAzure\Services\Blob\Models\CreateBlobSnapshotOptions::getIfUnmodifiedSince
      */
     public function testSetIfUnmodifiedSince()
     {
@@ -123,8 +123,8 @@ class CreateBlobSnapshotOptionsTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers PEAR2\WindowsAzure\Services\Blob\Models\CreateBlobSnapshotOptions::setIfMatch
-     * @covers PEAR2\WindowsAzure\Services\Blob\Models\CreateBlobSnapshotOptions::getIfMatch
+     * @covers WindowsAzure\Services\Blob\Models\CreateBlobSnapshotOptions::setIfMatch
+     * @covers WindowsAzure\Services\Blob\Models\CreateBlobSnapshotOptions::getIfMatch
      */
     public function testSetIfMatch()
     {
@@ -139,8 +139,8 @@ class CreateBlobSnapshotOptionsTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers PEAR2\WindowsAzure\Services\Blob\Models\CreateBlobSnapshotOptions::setIfNoneMatch
-     * @covers PEAR2\WindowsAzure\Services\Blob\Models\CreateBlobSnapshotOptions::getIfNoneMatch
+     * @covers WindowsAzure\Services\Blob\Models\CreateBlobSnapshotOptions::setIfNoneMatch
+     * @covers WindowsAzure\Services\Blob\Models\CreateBlobSnapshotOptions::getIfNoneMatch
      */
     public function testSetIfNoneMatch()
     {
@@ -155,8 +155,8 @@ class CreateBlobSnapshotOptionsTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers PEAR2\WindowsAzure\Services\Blob\Models\CreateBlobSnapshotOptions::setLeaseId
-     * @covers PEAR2\WindowsAzure\Services\Blob\Models\CreateBlobSnapshotOptions::getLeaseId
+     * @covers WindowsAzure\Services\Blob\Models\CreateBlobSnapshotOptions::setLeaseId
+     * @covers WindowsAzure\Services\Blob\Models\CreateBlobSnapshotOptions::getLeaseId
      */
     public function testSetLeaseId()
     {

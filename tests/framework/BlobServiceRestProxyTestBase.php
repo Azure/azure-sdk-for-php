@@ -15,25 +15,13 @@
  * PHP version 5
  *
  * @category  Microsoft
-<<<<<<< HEAD:tests/framework/BlobRestProxyTestBase.php
- * @package   PEAR2\Tests\Framework
-=======
  * @package   Tests\Framework
->>>>>>> 5bf9d542a690f36c0ba8e4b231b52097cbdda19e:tests/framework/BlobServiceRestProxyTestBase.php
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
-<<<<<<< HEAD:tests/framework/BlobRestProxyTestBase.php
-namespace PEAR2\Tests\Framework;
-use PEAR2\Tests\Framework\RestProxyTestBase;
-use PEAR2\WindowsAzure\Services\Core\Configuration;
-use PEAR2\WindowsAzure\Services\Blob\BlobSettings;
-use PEAR2\WindowsAzure\Services\Blob\BlobService;
-use PEAR2\Tests\Framework\TestResources;
-use PEAR2\WindowsAzure\Services\Blob\Models\CreateContainerOptions;
-=======
+
 namespace Tests\Framework;
 use Tests\Framework\ServiceRestProxyTestBase;
 use WindowsAzure\Services\Core\Configuration;
@@ -41,17 +29,12 @@ use WindowsAzure\Services\Blob\BlobSettings;
 use WindowsAzure\Services\Blob\BlobService;
 use Tests\Framework\TestResources;
 use WindowsAzure\Services\Blob\Models\CreateContainerOptions;
->>>>>>> 5bf9d542a690f36c0ba8e4b231b52097cbdda19e:tests/framework/BlobServiceRestProxyTestBase.php
 
 /**
  * TestBase class for each unit test class.
  *
  * @category  Microsoft
-<<<<<<< HEAD:tests/framework/BlobRestProxyTestBase.php
- * @package   PEAR2\Tests\Framework
-=======
  * @package   Tests\Framework
->>>>>>> 5bf9d542a690f36c0ba8e4b231b52097cbdda19e:tests/framework/BlobServiceRestProxyTestBase.php
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0

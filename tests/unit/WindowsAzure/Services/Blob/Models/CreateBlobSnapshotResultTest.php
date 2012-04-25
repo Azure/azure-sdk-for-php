@@ -15,23 +15,23 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   PEAR2\Tests\Unit\WindowsAzure\Services\Blob\Models
+ * @package   Tests\Unit\WindowsAzure\Services\Blob\Models
  * @author    Albert Cheng <gongchen at the largest software company> 
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
-namespace PEAR2\Tests\Unit\WindowsAzure\Services\Blob\Models;
-use PEAR2\Tests\Framework\TestResources;
-use PEAR2\WindowsAzure\Core\WindowsAzureUtilities;
-use PEAR2\WindowsAzure\Services\Blob\Models\CreateBlobSnapshotResult;
-use PEAR2\WindowsAzure\Services\Blob\Models\AccessCondition;
+namespace Tests\Unit\WindowsAzure\Services\Blob\Models;
+use Tests\Framework\TestResources;
+use WindowsAzure\Core\WindowsAzureUtilities;
+use WindowsAzure\Services\Blob\Models\CreateBlobSnapshotResult;
+use WindowsAzure\Services\Blob\Models\AccessCondition;
 
 /**
  * Unit tests for class SnapshotBlobResult
  *
  * @category  Microsoft
- * @package   PEAR2\Tests\Unit\WindowsAzure\Services\Blob\Models
+ * @package   Tests\Unit\WindowsAzure\Services\Blob\Models
  * @author    Albert Cheng <gongchen at the largest software company>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
@@ -41,8 +41,8 @@ use PEAR2\WindowsAzure\Services\Blob\Models\AccessCondition;
 class CreateBlobSnapshotResultTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @covers PEAR2\WindowsAzure\Services\Blob\Models\CreateBlobSnapshotResult::getSnapshot
-     * @covers PEAR2\WindowsAzure\Services\Blob\Models\CreateBlobSnapshotResult::setSnapshot
+     * @covers WindowsAzure\Services\Blob\Models\CreateBlobSnapshotResult::getSnapshot
+     * @covers WindowsAzure\Services\Blob\Models\CreateBlobSnapshotResult::setSnapshot
      */
     public function testSetSnapshot()
     {
@@ -57,8 +57,8 @@ class CreateBlobSnapshotResultTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers PEAR2\WindowsAzure\Services\Blob\Models\CreateBlobSnapshotResult::getETag
-     * @covers PEAR2\WindowsAzure\Services\Blob\Models\CreateBlobSnapshotResult::setETag
+     * @covers WindowsAzure\Services\Blob\Models\CreateBlobSnapshotResult::getETag
+     * @covers WindowsAzure\Services\Blob\Models\CreateBlobSnapshotResult::setETag
      */
     public function testSetETag()
     {
@@ -73,8 +73,8 @@ class CreateBlobSnapshotResultTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers PEAR2\WindowsAzure\Services\Blob\Models\CreateBlobSnapshotResult::getLastModified
-     * @covers PEAR2\WindowsAzure\Services\Blob\Models\CreateBlobSnapshotResult::setLastModified
+     * @covers WindowsAzure\Services\Blob\Models\CreateBlobSnapshotResult::getLastModified
+     * @covers WindowsAzure\Services\Blob\Models\CreateBlobSnapshotResult::setLastModified
      */
     public function testSetLastModified()
     {
@@ -90,8 +90,8 @@ class CreateBlobSnapshotResultTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers PEAR2\WindowsAzure\Services\Blob\Models\CreateBlobSnapshotResult::getRequestId
-     * @covers PEAR2\WindowsAzure\Services\Blob\Models\CreateBlobSnapshotResult::setRequestId
+     * @covers WindowsAzure\Services\Blob\Models\CreateBlobSnapshotResult::getRequestId
+     * @covers WindowsAzure\Services\Blob\Models\CreateBlobSnapshotResult::setRequestId
      */
     public function testSetRequestId()
     {
@@ -106,8 +106,8 @@ class CreateBlobSnapshotResultTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers PEAR2\WindowsAzure\Services\Blob\Models\CreateBlobSnapshotResult::getVersion
-     * @covers PEAR2\WindowsAzure\Services\Blob\Models\CreateBlobSnapshotResult::setVersion
+     * @covers WindowsAzure\Services\Blob\Models\CreateBlobSnapshotResult::getVersion
+     * @covers WindowsAzure\Services\Blob\Models\CreateBlobSnapshotResult::setVersion
      */
     public function testSetVersion()
     {
@@ -122,8 +122,8 @@ class CreateBlobSnapshotResultTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers PEAR2\WindowsAzure\Services\Blob\Models\CreateBlobSnapshotResult::getDate
-     * @covers PEAR2\WindowsAzure\Services\Blob\Models\CreateBlobSnapshotResult::setDate
+     * @covers WindowsAzure\Services\Blob\Models\CreateBlobSnapshotResult::getDate
+     * @covers WindowsAzure\Services\Blob\Models\CreateBlobSnapshotResult::setDate
      */
     public function testSetDate()
     {

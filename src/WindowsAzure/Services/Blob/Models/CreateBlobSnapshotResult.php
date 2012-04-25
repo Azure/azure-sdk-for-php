@@ -22,11 +22,11 @@
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
  
-namespace PEAR2\WindowsAzure\Services\Blob\Models;
-use PEAR2\WindowsAzure\Resources;
-use PEAR2\WindowsAzure\Validate;
-use PEAR2\WindowsAzure\Utilities;
-use PEAR2\WindowsAzure\Core\WindowsAzureUtilities;
+namespace WindowsAzure\Services\Blob\Models;
+use WindowsAzure\Resources;
+use WindowsAzure\Validate;
+use WindowsAzure\Utilities;
+use WindowsAzure\Core\WindowsAzureUtilities;
 
 /**
  * The result of creating Blob snapshot. 

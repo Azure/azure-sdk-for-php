@@ -15,16 +15,16 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   PEAR2\Tests\Unit\WindowsAzure\Services\Blob\Models
+ * @package   Tests\Unit\WindowsAzure\Services\Blob\Models
  * @author    Albert Cheng <gongchen at the largest software company> 
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
-namespace PEAR2\Tests\Unit\WindowsAzure\Services\Blob\Models;
-use PEAR2\Tests\Framework\TestResources;
-use PEAR2\WindowsAzure\Core\WindowsAzureUtilities;
-use PEAR2\WindowsAzure\Services\Blob\Models\CopyBlobOptions;
+namespace Tests\Unit\WindowsAzure\Services\Blob\Models;
+use Tests\Framework\TestResources;
+use WindowsAzure\Core\WindowsAzureUtilities;
+use WindowsAzure\Services\Blob\Models\CopyBlobOptions;
 
 /**
  * Unit tests for class CopyBlobBlobOptions
@@ -40,8 +40,8 @@ use PEAR2\WindowsAzure\Services\Blob\Models\CopyBlobOptions;
 class CopyBlobOptionsTest extends \PHPUnit_Framework_TestCase
 {
     /** 
-     * @covers PEAR2\WindowsAzure\Services\Blob\Models\CopyBlobOptions::setDate
-     * @covers PEAR2\WindowsAzure\Services\Blob\Models\CopyBlobOptions::getDate
+     * @covers WindowsAzure\Services\Blob\Models\CopyBlobOptions::setDate
+     * @covers WindowsAzure\Services\Blob\Models\CopyBlobOptions::getDate
      */
     public function testSetDate()
     {
@@ -56,8 +56,8 @@ class CopyBlobOptionsTest extends \PHPUnit_Framework_TestCase
     }
     
     /** 
-     * @covers PEAR2\WindowsAzure\Services\Blob\Models\CopyBlobOptions::setCopySource
-     * @covers PEAR2\WindowsAzure\Services\Blob\Models\CopyBlobOptions::getCopySource
+     * @covers WindowsAzure\Services\Blob\Models\CopyBlobOptions::setCopySource
+     * @covers WindowsAzure\Services\Blob\Models\CopyBlobOptions::getCopySource
      */
     public function testSetCopySource()
     {
@@ -73,8 +73,8 @@ class CopyBlobOptionsTest extends \PHPUnit_Framework_TestCase
     }
     
     /** 
-     * @covers PEAR2\WindowsAzure\Services\Blob\Models\CopyBlobOptions::setMetadata
-     * @covers PEAR2\WindowsAzure\Services\Blob\Models\CopyBlobOptions::getMetadata
+     * @covers WindowsAzure\Services\Blob\Models\CopyBlobOptions::setMetadata
+     * @covers WindowsAzure\Services\Blob\Models\CopyBlobOptions::getMetadata
      */
     public function testSetMetadata()
     {
@@ -89,8 +89,8 @@ class CopyBlobOptionsTest extends \PHPUnit_Framework_TestCase
     }
     
     /** 
-     * @covers PEAR2\WindowsAzure\Services\Blob\Models\CopyBlobOptions::setSourceIfModifiedSince
-     * @covers PEAR2\WindowsAzure\Services\Blob\Models\CopyBlobOptions::getSourceIfModifiedSince
+     * @covers WindowsAzure\Services\Blob\Models\CopyBlobOptions::setSourceIfModifiedSince
+     * @covers WindowsAzure\Services\Blob\Models\CopyBlobOptions::getSourceIfModifiedSince
      */
     public function testSetSourceIfModifiedSince()
     {
@@ -106,8 +106,8 @@ class CopyBlobOptionsTest extends \PHPUnit_Framework_TestCase
     }
     
     /** 
-     * @covers PEAR2\WindowsAzure\Services\Blob\Models\CopyBlobOptions::setSourceIfUnmodifiedSince
-     * @covers PEAR2\WindowsAzure\Services\Blob\Models\CopyBlobOptions::getSourceIfUnmodifiedSince
+     * @covers WindowsAzure\Services\Blob\Models\CopyBlobOptions::setSourceIfUnmodifiedSince
+     * @covers WindowsAzure\Services\Blob\Models\CopyBlobOptions::getSourceIfUnmodifiedSince
      */
     public function testSetSourceIfUnmodifiedSince()
     {
@@ -122,8 +122,8 @@ class CopyBlobOptionsTest extends \PHPUnit_Framework_TestCase
     }
     
     /** 
-     * @covers PEAR2\WindowsAzure\Services\Blob\Models\CopyBlobOptions::setSourceIfMatch
-     * @covers PEAR2\WindowsAzure\Services\Blob\Models\CopyBlobOptions::getSourceIfMatch
+     * @covers WindowsAzure\Services\Blob\Models\CopyBlobOptions::setSourceIfMatch
+     * @covers WindowsAzure\Services\Blob\Models\CopyBlobOptions::getSourceIfMatch
      */
     public function testSetSourceIfMatch()
     {
@@ -138,8 +138,8 @@ class CopyBlobOptionsTest extends \PHPUnit_Framework_TestCase
     }
     
     /** 
-     * @covers PEAR2\WindowsAzure\Services\Blob\Models\CopyBlobOptions::setSourceIfNoneMatch
-     * @covers PEAR2\WindowsAzure\Services\Blob\Models\CopyBlobOptions::getSourceIfNoneMatch
+     * @covers WindowsAzure\Services\Blob\Models\CopyBlobOptions::setSourceIfNoneMatch
+     * @covers WindowsAzure\Services\Blob\Models\CopyBlobOptions::getSourceIfNoneMatch
      */
     public function testSetSourceIfNoneMatch()
     {
@@ -154,8 +154,8 @@ class CopyBlobOptionsTest extends \PHPUnit_Framework_TestCase
     }
     
     /** 
-     * @covers PEAR2\WindowsAzure\Services\Blob\Models\CopyBlobOptions::setIfModifiedSince
-     * @covers PEAR2\WindowsAzure\Services\Blob\Models\CopyBlobOptions::getIfModifiedSince
+     * @covers WindowsAzure\Services\Blob\Models\CopyBlobOptions::setIfModifiedSince
+     * @covers WindowsAzure\Services\Blob\Models\CopyBlobOptions::getIfModifiedSince
      */
     public function testSetIfModifiedSince()
     {
@@ -170,8 +170,8 @@ class CopyBlobOptionsTest extends \PHPUnit_Framework_TestCase
     }
     
     /** 
-     * @covers PEAR2\WindowsAzure\Services\Blob\Models\CopyBlobOptions::setIfUnmodifiedSince
-     * @covers PEAR2\WindowsAzure\Services\Blob\Models\CopyBlobOptions::getIfUnmodifiedSince
+     * @covers WindowsAzure\Services\Blob\Models\CopyBlobOptions::setIfUnmodifiedSince
+     * @covers WindowsAzure\Services\Blob\Models\CopyBlobOptions::getIfUnmodifiedSince
      */
     public function testSetIfUnmodifiedSince()
     {
@@ -186,8 +186,8 @@ class CopyBlobOptionsTest extends \PHPUnit_Framework_TestCase
     }
     
     /** 
-     * @covers PEAR2\WindowsAzure\Services\Blob\Models\CopyBlobOptions::setIfMatch
-     * @covers PEAR2\WindowsAzure\Services\Blob\Models\CopyBlobOptions::getIfMatch
+     * @covers WindowsAzure\Services\Blob\Models\CopyBlobOptions::setIfMatch
+     * @covers WindowsAzure\Services\Blob\Models\CopyBlobOptions::getIfMatch
      */
     public function testSetIfMatch()
     {
@@ -202,8 +202,8 @@ class CopyBlobOptionsTest extends \PHPUnit_Framework_TestCase
     }
     
     /** 
-     * @covers PEAR2\WindowsAzure\Services\Blob\Models\CopyBlobOptions::setIfNoneMatch
-     * @covers PEAR2\WindowsAzure\Services\Blob\Models\CopyBlobOptions::getIfNoneMatch
+     * @covers WindowsAzure\Services\Blob\Models\CopyBlobOptions::setIfNoneMatch
+     * @covers WindowsAzure\Services\Blob\Models\CopyBlobOptions::getIfNoneMatch
      */
     public function testSetIfNoneMatch()
     {
@@ -218,8 +218,8 @@ class CopyBlobOptionsTest extends \PHPUnit_Framework_TestCase
     }
 
     /** 
-     * @covers PEAR2\WindowsAzure\Services\Blob\Models\CopyBlobOptions::setLeaseId
-     * @covers PEAR2\WindowsAzure\Services\Blob\Models\CopyBlobOptions::getLeaseId
+     * @covers WindowsAzure\Services\Blob\Models\CopyBlobOptions::setLeaseId
+     * @covers WindowsAzure\Services\Blob\Models\CopyBlobOptions::getLeaseId
      */
     public function testSetLeaseId()
     {
@@ -231,8 +231,8 @@ class CopyBlobOptionsTest extends \PHPUnit_Framework_TestCase
     }
     
     /** 
-     * @covers PEAR2\WindowsAzure\Services\Blob\Models\CopyBlobOptions::setSourceLeaseId
-     * @covers PEAR2\WindowsAzure\Services\Blob\Models\CopyBlobOptions::getSourceLeaseId
+     * @covers WindowsAzure\Services\Blob\Models\CopyBlobOptions::setSourceLeaseId
+     * @covers WindowsAzure\Services\Blob\Models\CopyBlobOptions::getSourceLeaseId
      */
     public function testSetSourceLeaseId()
     {

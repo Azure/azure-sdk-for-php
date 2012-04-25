@@ -52,12 +52,9 @@ class ServiceRestProxy
      * @var array
      */
     private $_filters;
-<<<<<<< HEAD
     private $_url;
     private $_accountName;
-=======
->>>>>>> 5bf9d542a690f36c0ba8e4b231b52097cbdda19e
-    
+
     /**
      * @var string
      */
@@ -72,16 +69,10 @@ class ServiceRestProxy
      */
     public function __construct($channel, $uri, $accountName = '')
     {
-<<<<<<< HEAD
         $this->_url         = new Url($uri);
         $this->_channel     = $channel;
         $this->_accountName = $accountName;
         $this->_filters     = array();
-=======
-        $this->url      = $uri;
-        $this->_channel = $channel;
-        $this->_filters = array();
->>>>>>> 5bf9d542a690f36c0ba8e4b231b52097cbdda19e
     }
     
     /**
@@ -95,7 +86,6 @@ class ServiceRestProxy
     }
     
     /**
-<<<<<<< HEAD
      * Get the account name.
      *
      * @return string
@@ -106,29 +96,16 @@ class ServiceRestProxy
     }
     
     /**
-     * Sends HTTP request with the specified parameters.
-=======
      * Sends HTTP request with the specified HTTP call context.
->>>>>>> 5bf9d542a690f36c0ba8e4b231b52097cbdda19e
      * 
      * @param WindowsAzure\Core\HttpCallContext $context The HTTP call context.
      * 
      * @return \HTTP_Request2_Response
      */
-<<<<<<< HEAD
-    protected function send($method, $headers, $queryParams, $path, $statusCode,
-        $body = Resources::EMPTY_STRING, $config = array()
-    ) {    
-        $channel = clone $this->_channel;
-        $url     = clone $this->_url;
-        
-        $channel->setMethod($method);
-        
-=======
     protected function sendContext($context)
     {
         $channel     = clone $this->_channel;
-        $url         = new Url($this->url);
+        $url         = clone $this->_url;
         $headers     = $context->getHeaders();
         $statusCodes = $context->getStatusCodes();
         $body        = $context->getBody();
@@ -138,7 +115,6 @@ class ServiceRestProxy
         $channel->setMethod($context->getMethod());
         $channel->setExpectedStatusCode($statusCodes);
         $channel->setBody($body);
->>>>>>> 5bf9d542a690f36c0ba8e4b231b52097cbdda19e
         foreach ($headers as $key => $value) {
             if (!is_null($value) && !empty($value)) {
                 $channel->setHeader($key, $value);
@@ -150,15 +126,6 @@ class ServiceRestProxy
             $url->appendUrlPath($path);
         }
         
-<<<<<<< HEAD
-        foreach ($config as $key => $value) {
-            if (!empty($value)) {
-                $channel->setConfig($key, $value);
-            }      
-        }
-        
-=======
->>>>>>> 5bf9d542a690f36c0ba8e4b231b52097cbdda19e
         $channel->send($this->_filters, $url);
         
         return $channel->getResponse();
