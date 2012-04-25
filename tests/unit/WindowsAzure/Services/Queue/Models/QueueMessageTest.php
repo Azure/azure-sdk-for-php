@@ -25,6 +25,7 @@
 namespace Tests\Unit\WindowsAzure\Services\Queue\Models;
 use WindowsAzure\Utilities;
 use WindowsAzure\Services\Queue\Models\QueueMessage;
+use WindowsAzure\Core\Serialization\XmlSerializer;
 
 /**
  * Unit tests for class QueueMessage
@@ -84,9 +85,10 @@ class QueueMessageTest extends \PHPUnit_Framework_TestCase
         $array = array('MessageText' => $messageText);
         $expected = Utilities::serialize($array, QueueMessage::$xmlRootName);
         $queueMessage->setMessageText($messageText);
+        $xmlSerializer = new XmlSerializer();
         
         // Test
-        $actual = $queueMessage->toXml();
+        $actual = $queueMessage->toXml($xmlSerializer);
         
         // Assert
         $this->assertEquals($expected, $actual);

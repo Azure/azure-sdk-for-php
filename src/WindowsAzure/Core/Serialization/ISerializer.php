@@ -15,69 +15,47 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   WindowsAzure\Services\Queue\Models
+ * @package   WindowsAzure\Core\Serialization
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
  
-namespace WindowsAzure\Services\Queue\Models;
-use WindowsAzure\Utilities;
-use WindowsAzure\Core\Serialization\XmlSerializer;
+namespace WindowsAzure\Core\Serialization;
 
 /**
- * Wrappers queue message text.
+ * The serialization interface.
  *
  * @category  Microsoft
- * @package   WindowsAzure\Services\Queue\Models
+ * @package   WindowsAzure\Core\Serialization
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @version   Release: @package_version@
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
-class QueueMessage
+interface ISerializer
 {
-    private $_messageText;
-    public static $xmlRootName = 'QueueMessage';
+    /**
+     * Serializes given array. The array indecies must be string to use them as
+     * as element name.
+     * 
+     * @param array $array      The object to serialize represented in array.
+     * @param array $properties The used properties in the serialization process.
+     * 
+     * @return string
+     */
+    public function serialize($array, $properties = null);
     
     /**
-     * Gets message text field.
+     * Unserializes given serialized string.
      * 
-     * @return string.
+     * @param string $serialized The serialized object in string representation.
+     * 
+     * @return array
      */
-    public function getMessageText()
-    {
-        return $this->_messageText;
-    }
-    
-    /**
-     * Sets message text field.
-     * 
-     * @param string $messageText message contents.
-     * 
-     * @return string.
-     */
-    public function setMessageText($messageText)
-    {
-        $this->_messageText = $messageText;
-    }
-    
-    /**
-     * Converts this current object to XML representation.
-     * 
-     * @param XmlSerializer $xmlSerializer The XML serializer.
-     * 
-     * @return string. 
-     */
-    public function toXml($xmlSerializer)
-    {
-        $array      = array('MessageText' => $this->_messageText);
-        $properties = array(XmlSerializer::ROOT_NAME => self::$xmlRootName);
-        
-        return $xmlSerializer->serialize($array, $properties);
-    }
+    public function unserialize($serialized);
 }
 
 ?>
