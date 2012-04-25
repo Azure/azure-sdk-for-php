@@ -226,6 +226,25 @@ class QueueRestProxyTest extends QueueServiceRestProxyTestBase
     /**
     * @covers WindowsAzure\Services\Queue\QueueRestProxy::createQueue
     */
+    public function testCreateQueueWithExistingQueue()
+    {
+        // Setup
+        $queueName = 'createqueuewithexistingqueue';
+        $this->createQueue($queueName);
+        
+        // Test
+        $this->createQueue($queueName);
+        
+        // Assert
+        $result = $this->wrapper->listQueues();
+        $queues = $result->getQueues();
+        $this->assertEquals(1, count($queues));
+        $this->assertEquals($queues[0]->getName(), $queueName);
+    }
+    
+    /**
+    * @covers WindowsAzure\Services\Queue\QueueRestProxy::createQueue
+    */
     public function testCreateQueueWithMetadata()
     {
         $queueName     = 'createqueuewithmetadata';
