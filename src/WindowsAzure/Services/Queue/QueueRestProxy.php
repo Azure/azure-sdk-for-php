@@ -216,7 +216,10 @@ class QueueRestProxy extends ServiceRestProxy implements IQueue
         $headers     = array();
         $queryParams = array();
         $path        = $queueName;
-        $statusCode  = Resources::STATUS_CREATED;
+        $statusCode  = array(
+            Resources::STATUS_CREATED,
+            Resources::STATUS_NO_CONTENT
+        );
         
         if (is_null($options)) {
             $options = new CreateQueueOptions();
