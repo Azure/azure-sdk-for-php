@@ -39,6 +39,7 @@ use WindowsAzure\Services\Table\TableRestProxy;
 use WindowsAzure\Services\Table\TableSettings;
 use WindowsAzure\Services\Table\Utilities\AtomReaderWriter;
 use WindowsAzure\Services\Table\Utilities\MimeReaderWriter;
+use WindowsAzure\Core\Serialization\XmlSerializer;
 
 /**
  * Builds azure service objects.
@@ -105,10 +106,11 @@ class ServicesBuilder implements IServiceBuilder
      */
     private static function _buildQueue($config)
     {
-        $httpClient = new HttpClient();
+        $httpClient    = new HttpClient();
+        $xmlSerializer = new XmlSerializer();
         
         $queueWrapper = new QueueRestProxy(
-            $httpClient, $config->getProperty(QueueSettings::URI)
+            $httpClient, $config->getProperty(QueueSettings::URI), $xmlSerializer
         );
 
         // Adding headers filter
@@ -141,10 +143,11 @@ class ServicesBuilder implements IServiceBuilder
      */
     private static function _buildBlob($config)
     {
-        $httpClient = new HttpClient();
+        $httpClient    = new HttpClient();
+        $xmlSerializer = new XmlSerializer();
 
         $blobWrapper = new BlobRestProxy(
-            $httpClient, $config->getProperty(BlobSettings::URI)
+            $httpClient, $config->getProperty(BlobSettings::URI), $xmlSerializer
         );
 
         // Adding headers filter
@@ -180,12 +183,14 @@ class ServicesBuilder implements IServiceBuilder
         $httpClient     = new HttpClient();
         $atomSerializer = new AtomReaderWriter();
         $mimeSerializer = new MimeReaderWriter();
+        $xmlSerializer  = new XmlSerializer();
 
         $tableWrapper = new TableRestProxy(
             $httpClient,
             $config->getProperty(TableSettings::URI),
             $atomSerializer,
-            $mimeSerializer
+            $mimeSerializer,
+            $xmlSerializer
         );
 
         // Adding headers filter

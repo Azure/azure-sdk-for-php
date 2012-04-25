@@ -153,9 +153,11 @@ class BlockList
     /**
      * Converts the  BlockList object to XML representation
      * 
+     * @param XmlSerializer $xmlSerializer The XML serializer.
+     * 
      * @return string
      */
-    public function toXml()
+    public function toXml($xmlSerializer)
     {
         // Ehance this part to use SimpleXml document instead of manual construction
         // https://github.com/WindowsAzure/azure-sdk-for-php/issues/144

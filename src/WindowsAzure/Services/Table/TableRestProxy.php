@@ -605,20 +605,23 @@ class TableRestProxy extends ServiceRestProxy implements ITable
     }
     
     /**
-     * Constructor.
+     * Initializes new TableRestProxy object.
      * 
-     * @param WindowsAzure\Core\IHttpClient     $channel        The HTTP client 
-     * channel.
-     * @param string                            $uri            The storage account
-     * uri.
-     * @param Table\Utilities\IAtomReaderWriter $atomSerializer The atom 
+     * @param WindowsAzure\Core\IHttpClient                 $channel        The HTTP
+     * client channel.
+     * @param string                                        $uri            The 
+     * storage account uri.
+     * @param Table\Utilities\IAtomReaderWriter             $atomSerializer The atom 
      * serializer.
-     * @param Table\Utilities\IMimeReaderWriter $mimeSerializer The MIME 
+     * @param Table\Utilities\IMimeReaderWriter             $mimeSerializer The MIME 
+     * serializer.
+     * @param WindowsAzure\Core\Serialization\ISerializable $dataSerializer The data
      * serializer.
      */
-    public function __construct($channel, $uri, $atomSerializer, $mimeSerializer)
-    {
-        parent::__construct($channel, $uri);
+    public function __construct($channel, $uri, $atomSerializer, $mimeSerializer, 
+        $dataSerializer
+    ) {
+        parent::__construct($channel, $uri, $dataSerializer);
         $this->_atomSerializer = $atomSerializer;
         $this->_mimeSerializer = $mimeSerializer;
     }
@@ -647,7 +650,7 @@ class TableRestProxy extends ServiceRestProxy implements ITable
         $context->addStatusCode(Resources::STATUS_OK);
         
         $response = $this->sendContext($context);
-        $parsed   = Utilities::unserialize($response->getBody());
+        $parsed   = $this->dataSerializer->unserialize($response->getBody());
         
         return GetServicePropertiesResult::create($parsed);
     }
@@ -704,7 +707,7 @@ class TableRestProxy extends ServiceRestProxy implements ITable
             Resources::CONTENT_TYPE,
             Resources::XML_ATOM_CONTENT_TYPE
         );
-        $body = $serviceProperties->toXml();
+        $body = $serviceProperties->toXml($this->dataSerializer);
         
         $this->send($method, $headers, $queryParams, $path, $statusCode, $body);
     }
@@ -784,7 +787,8 @@ class TableRestProxy extends ServiceRestProxy implements ITable
         // $filter appears in the URL. The current behavior is to just ignore the 
         // NextTableName options, which is not expected or easily detectable.
         if (   array_key_exists(Resources::QP_NEXT_TABLE_NAME, $queryParams)
-            && !array_key_exists(Resources::QP_FILTER, $queryParams)) {
+            && !array_key_exists(Resources::QP_FILTER, $queryParams)
+        ) {
             $queryParams[Resources::QP_FILTER] = Resources::EMPTY_STRING;
         }
         

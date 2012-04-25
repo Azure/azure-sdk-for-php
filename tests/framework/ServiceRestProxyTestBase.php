@@ -25,6 +25,7 @@ namespace Tests\Framework;
 use WindowsAzure\Services\Core\Configuration;
 use Tests\Framework\TestResources;
 use WindowsAzure\Services\Core\Models\ServiceProperties;
+use WindowsAzure\Core\Serialization\XmlSerializer;
 
 /**
  * TestBase class for each unit test class.
@@ -43,11 +44,13 @@ class ServiceRestProxyTestBase extends \PHPUnit_Framework_TestCase
     protected $propertiesChanged;
     protected $defaultProperties;
     protected $wrapper;
-    
+    protected $xmlSerializer;
+
     const NOT_SUPPORTED = 'The storage emulator doesn\'t support this API';
     
     private function _createDefaultProperties()
     {
+        
         $this->propertiesChanged = false;
         $propertiesArray = array();
         $propertiesArray['Logging']['Version'] = '1.0';
@@ -68,6 +71,7 @@ class ServiceRestProxyTestBase extends \PHPUnit_Framework_TestCase
         $this->wrapper = $serviceWrapper;
         $this->_createDefaultProperties();
         \WindowsAzure\Logger::setLogFile('C:\log.txt');
+        $this->xmlSerializer = new XmlSerializer();
     }
     
     public function setServiceProperties($properties, $options = null)

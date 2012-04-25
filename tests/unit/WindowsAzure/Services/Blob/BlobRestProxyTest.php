@@ -97,7 +97,7 @@ class BlobRestProxyTest extends BlobServiceRestProxyTestBase
         $actual = $this->wrapper->getServiceProperties();
         
         // Assert
-        $this->assertEquals($expected->toXml(), $actual->getValue()->toXml());
+        $this->assertEquals($expected->toXml($this->xmlSerializer), $actual->getValue()->toXml($this->xmlSerializer));
     }
     
     /**

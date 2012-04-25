@@ -113,7 +113,7 @@ class SignedIdentifierTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers WindowsAzure\Services\Blob\Models\SignedIdentifier::toXml
+     * @covers WindowsAzure\Services\Blob\Models\SignedIdentifier::toArray
      * @depends testSetAccessPolicy
      */
     public function testToXml($signedIdentifier)
@@ -123,7 +123,7 @@ class SignedIdentifierTest extends \PHPUnit_Framework_TestCase
         $signedIdentifier->setId($id);
         
         // Test
-        $array = $signedIdentifier->toXml();
+        $array = $signedIdentifier->toArray();
         
         // Assert
         $this->assertEquals($id, $array['SignedIdentifier']['Id']);

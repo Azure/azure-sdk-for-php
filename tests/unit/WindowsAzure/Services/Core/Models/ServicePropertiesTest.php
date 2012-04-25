@@ -29,6 +29,7 @@ use WindowsAzure\Services\Core\Models\Logging;
 use WindowsAzure\Services\Core\Models\Metrics;
 use WindowsAzure\Services\Core\Models\ServiceProperties;
 use WindowsAzure\Services\Core\Models\GetServicePropertiesResult;
+use WindowsAzure\Core\Serialization\XmlSerializer;
 
 /**
  * Unit tests for class ServiceProperties
@@ -157,9 +158,10 @@ class ServicePropertiesTest extends \PHPUnit_Framework_TestCase
     {
         // Setup
         $properties = ServiceProperties::create(TestResources::getServicePropertiesSample());
+        $xmlSerializer = new xmlSerializer();
         
         // Test
-        $actual = $properties->toXml();
+        $actual = $properties->toXml($xmlSerializer);
         
         // Assert
         $actualParsed = Utilities::unserialize($actual);

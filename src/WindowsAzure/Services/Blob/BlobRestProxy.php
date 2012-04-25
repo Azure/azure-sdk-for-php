@@ -505,7 +505,7 @@ class BlobRestProxy extends ServiceRestProxy implements IBlob
         );
         
         $response = $this->send($method, $headers, $queryParams, $path, $statusCode);
-        $parsed   = Utilities::unserialize($response->getBody());
+        $parsed   = $this->dataSerializer->unserialize($response->getBody());
         
         return GetServicePropertiesResult::create($parsed);
     }
@@ -535,7 +535,7 @@ class BlobRestProxy extends ServiceRestProxy implements IBlob
         $queryParams = array();
         $statusCode  = Resources::STATUS_ACCEPTED;
         $path        = Resources::EMPTY_STRING;
-        $body        = $serviceProperties->toXml();
+        $body        = $serviceProperties->toXml($this->dataSerializer);
         
         if (is_null($options)) {
             $options = new BlobServiceOptions();
@@ -620,7 +620,7 @@ class BlobRestProxy extends ServiceRestProxy implements IBlob
         );
         
         $response = $this->send($method, $headers, $queryParams, $path, $statusCode);
-        $parsed   = Utilities::unserialize($response->getBody());
+        $parsed   = $this->dataSerializer->unserialize($response->getBody());
         
         return ListContainersResult::create($parsed);
     }
@@ -786,7 +786,7 @@ class BlobRestProxy extends ServiceRestProxy implements IBlob
         $access       = $response->getHeader(Resources::X_MS_BLOB_PUBLIC_ACCESS);
         $etag         = $response->getHeader(Resources::ETAG);
         $lastModified = $response->getHeader(Resources::LAST_MODIFIED);
-        $parsed       = Utilities::unserialize($response->getBody());
+        $parsed       = $this->dataSerializer->unserialize($response->getBody());
                 
         return GetContainerAclResult::create($access, $etag, $lastModified, $parsed);
     }
@@ -812,7 +812,7 @@ class BlobRestProxy extends ServiceRestProxy implements IBlob
         $queryParams = array();
         $path        = $container;
         $statusCode  = Resources::STATUS_OK;
-        $body        = $acl->toXml();
+        $body        = $acl->toXml($this->dataSerializer);
         
         if (is_null($options)) {
             $options = new BlobServiceOptions();
@@ -976,7 +976,7 @@ class BlobRestProxy extends ServiceRestProxy implements IBlob
         );
         
         $response = $this->send($method, $headers, $queryParams, $path, $statusCode);
-        $parsed   = Utilities::unserialize($response->getBody());
+        $parsed   = $this->dataSerializer->unserialize($response->getBody());
         
         return ListBlobsResult::create($parsed);
     }
@@ -1264,7 +1264,7 @@ class BlobRestProxy extends ServiceRestProxy implements IBlob
         $statusCode  = Resources::STATUS_CREATED;
         $isArray     = is_array($blockList);
         $blockList   = $isArray ? BlockList::create($blockList) : $blockList;
-        $body        = $blockList->toXml();
+        $body        = $blockList->toXml($this->dataSerializer);
         
         if (is_null($options)) {
             $options = new CommitBlobBlocksOptions();
@@ -1397,7 +1397,7 @@ class BlobRestProxy extends ServiceRestProxy implements IBlob
         );
         
         $response = $this->send($method, $headers, $queryParams, $path, $statusCode);
-        $parsed   = Utilities::unserialize($response->getBody());
+        $parsed   = $this->dataSerializer->unserialize($response->getBody());
         
         return ListBlobBlocksResult::create($response->getHeader(), $parsed);
     }
@@ -1569,7 +1569,7 @@ class BlobRestProxy extends ServiceRestProxy implements IBlob
         );
         
         $response = $this->send($method, $headers, $queryParams, $path, $statusCode);
-        $parsed   = Utilities::unserialize($response->getBody());
+        $parsed   = $this->dataSerializer->unserialize($response->getBody());
         
         return ListPageBlobRangesResult::create($response->getHeader(), $parsed);
     }
