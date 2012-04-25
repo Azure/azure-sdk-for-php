@@ -279,20 +279,6 @@ class QueueRestProxyTest extends QueueServiceRestProxyTestBase
     }
     
     /**
-    * @covers WindowsAzure\Services\Queue\QueueRestProxy::createQueue
-    */
-    public function testCreateQueueAlreadyExitsFail()
-    {
-        // Setup
-        $queueName = 'createqueuealreadyexitsfail';
-        $this->setExpectedException(get_class(new ServiceException('204')));
-        $this->createQueue($queueName);
-
-        // Test
-        $this->createQueue($queueName);
-    }
-    
-    /**
     * @covers WindowsAzure\Services\Queue\QueueRestProxy::deleteQueue
     */
     public function testDeleteQueue()
