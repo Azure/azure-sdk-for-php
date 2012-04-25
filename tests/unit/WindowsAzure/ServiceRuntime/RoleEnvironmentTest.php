@@ -698,8 +698,8 @@ class RoleEnvironmentTest extends \PHPUnit_Framework_TestCase
         // Test
         $localResources = RoleEnvironment::getLocalResources();
         $this->assertTrue(array_key_exists('DiagnosticStore', $localResources));
-        $this->assertEquals('somepath.DiagnosticStore', $localResources['DiagnosticStore']['path']);
-        $this->assertEquals('4096', $localResources['DiagnosticStore']['sizeInMB']);
+        $this->assertEquals('somepath.DiagnosticStore', $localResources['DiagnosticStore']->getRootPath());
+        $this->assertEquals('4096', $localResources['DiagnosticStore']->getMaximumSizeInMegabytes());
     }
     
     /**

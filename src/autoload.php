@@ -33,6 +33,7 @@ spl_autoload_register(
             'windowsazure\\serviceruntime\\iruntimeclientfactory' => '/WindowsAzure/ServiceRuntime/IRuntimeClientFactory.php',
             'windowsazure\\serviceruntime\\iruntimecurrentstateclient' => '/WindowsAzure/ServiceRuntime/IRuntimeCurrentStateClient.php',
             'windowsazure\\serviceruntime\\iruntimegoalstateclient' => '/WindowsAzure/ServiceRuntime/IRuntimeGoalStateClient.php',
+            'windowsazure\\serviceruntime\\localresource' => '/WindowsAzure/ServiceRuntime/LocalResource.php',
             'windowsazure\\serviceruntime\\protocol1runtimeclient' => '/WindowsAzure/ServiceRuntime/Protocol1RuntimeClient.php',
             'windowsazure\\serviceruntime\\protocol1runtimeclientfactory' => '/WindowsAzure/ServiceRuntime/Protocol1RuntimeClientFactory.php',
             'windowsazure\\serviceruntime\\protocol1runtimecurrentstateclient' => '/WindowsAzure/ServiceRuntime/Protocol1RuntimeCurrentStateClient.php',
