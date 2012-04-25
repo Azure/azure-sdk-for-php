@@ -52,7 +52,9 @@ class ServiceRestProxy
      * @var array
      */
     private $_filters;
-    
+    private $_url;
+    private $_accountName;
+
     /**
      * @var string
      */
@@ -65,11 +67,12 @@ class ServiceRestProxy
      * HTTP requests.
      * @param string                        $uri     The storage account uri.
      */
-    public function __construct($channel, $uri)
+    public function __construct($channel, $uri, $accountName = '')
     {
-        $this->url      = $uri;
-        $this->_channel = $channel;
-        $this->_filters = array();
+        $this->_url         = new Url($uri);
+        $this->_channel     = $channel;
+        $this->_accountName = $accountName;
+        $this->_filters     = array();
     }
     
     /**
@@ -83,6 +86,16 @@ class ServiceRestProxy
     }
     
     /**
+     * Get the account name.
+     *
+     * @return string
+     */
+    public function getAccountName()
+    {
+        return $this->_accountName;
+    }
+    
+    /**
      * Sends HTTP request with the specified HTTP call context.
      * 
      * @param WindowsAzure\Core\HttpCallContext $context The HTTP call context.
@@ -92,7 +105,7 @@ class ServiceRestProxy
     protected function sendContext($context)
     {
         $channel     = clone $this->_channel;
-        $url         = new Url($this->url);
+        $url         = clone $this->_url;
         $headers     = $context->getHeaders();
         $statusCodes = $context->getStatusCodes();
         $body        = $context->getBody();

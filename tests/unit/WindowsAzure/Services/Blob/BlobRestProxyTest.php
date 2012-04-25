@@ -15,8 +15,13 @@
  * PHP version 5
  *
  * @category  Microsoft
+<<<<<<< HEAD
+ * @package   PEAR2\Tests\Unit\WindowsAzure\Services\Blob
+=======
  * @package   Tests\Unit\WindowsAzure\Services\Blob
+>>>>>>> 5bf9d542a690f36c0ba8e4b231b52097cbdda19e
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
+ *            Albert Cheng <gongchen at the largest software company>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link      http://pear.php.net/package/azure-sdk-for-php
@@ -50,6 +55,9 @@ use WindowsAzure\Services\Blob\Models\BlockList;
 use WindowsAzure\Services\Blob\Models\BlobBlockType;
 use WindowsAzure\Services\Blob\Models\GetBlobOptions;
 use WindowsAzure\Services\Blob\Models\Block;
+use WindowsAzure\Services\Blob\Models\CopyBlobOptions;
+use WindowsAzure\Services\Blob\Models\CreateBlobSnapshotOptions;
+use WindowsAzure\Services\Blob\Models\CreateBlobSnapshotResult;
 
 /**
  * Unit tests for class BlobRestProxy
@@ -1145,15 +1153,15 @@ class BlobRestProxyTest extends BlobServiceRestProxyTestBase
         $this->createContainer($name);
         $options = new ListBlobsOptions();
         $options->setIncludeUncommittedBlobs(true);
-        
+
         // Test
         $this->wrapper->createBlobBlock($name, 'myblob', 'AAAAAA==', 'Hello world');
-        
+
         // Assert
         $result = $this->wrapper->listBlobs($name, $options);
         $this->assertCount(1, $result->getBlobs());
     }
-    
+
     /**
      * @covers WindowsAzure\Services\Blob\BlobRestProxy::commitBlobBlocks
      * @covers WindowsAzure\Services\Blob\Models\BlockList::toXml
@@ -1169,6 +1177,7 @@ class BlobRestProxyTest extends BlobServiceRestProxyTestBase
         $this->wrapper->createBlobBlock($name, $blob, $id1, 'Hello world');
         $this->wrapper->createBlobBlock($name, $blob, $id2, 'Hello world');
         $blockList = new BlockList();
+        
         $blockList->addEntry($id1, BlobBlockType::LATEST_TYPE);
         $blockList->addEntry($id2, BlobBlockType::LATEST_TYPE);
         
@@ -1204,38 +1213,40 @@ class BlobRestProxyTest extends BlobServiceRestProxyTestBase
         
         // Test
         $this->wrapper->commitBlobBlocks($name, $blob, $blockList);
-        
+
         // Assert
         $result = $this->wrapper->listBlobs($name);
         $this->assertCount(1, $result->getBlobs());
     }
-    
-    /**
-     * @covers WindowsAzure\Services\Blob\BlobRestProxy::listBlobBlocks
-     * @covers WindowsAzure\Services\Blob\Models\ListBlobBlocksResult::create
-     * @covers WindowsAzure\Services\Blob\Models\ListBlobBlocksResult::_getEntries
-     */
-    public function testListBlobBlocks()
-    {
-        // Setup
-        $name = 'listblobblocks';
-        $blob = 'myblob';
-        $id1 = 'AAAAAA==';
-        $id2 = 'ANAAAA==';
-        $this->createContainer($name);
-        $this->wrapper->createBlobBlock($name, $blob, $id1, 'Hello world');
-        $this->wrapper->createBlobBlock($name, $blob, $id2, 'Hello world');
-        
-        // Test
-        $result = $this->wrapper->listBlobBlocks($name, $blob);
-        
-        // Assert
-        $this->assertNull($result->getEtag());
-        $this->assertEquals(0, $result->getContentLength());
-        $this->assertCount(2, $result->getUncommittedBlocks());
-        $this->assertCount(0, $result->getCommittedBlocks());
+     
+   /**
+    * @covers WindowsAzure\Services\Blob\BlobRestProxy::listBlobBlocks
+    * @covers WindowsAzure\Services\Blob\Models\ListBlobBlocksResult::create
+    * @covers WindowsAzure\Services\Blob\Models\ListBlobBlocksResult::getContentLength     
+    * @covers WindowsAzure\Services\Blob\Models\ListBlobBlocksResult::getUncommittedBlocks
+    * @covers WindowsAzure\Services\Blob\Models\ListBlobBlocksResult::getCommittedBlocks
+    */
+   public function testListBlobBlocks()
+   {
+       // Setup
+       $name = 'listblobblocks';
+       $blob = 'myblob';
+       $id1 = 'AAAAAA==';
+       $id2 = 'ANAAAA==';
+       $this->createContainer($name);
+       $this->wrapper->createBlobBlock($name, $blob, $id1, 'Hello world');
+       $this->wrapper->createBlobBlock($name, $blob, $id2, 'Hello world');
+
+       // Test
+       $result = $this->wrapper->listBlobBlocks($name, $blob);
+
+       // Assert
+       $this->assertNull($result->getEtag());
+       $this->assertEquals(0, $result->getContentLength());
+       $this->assertCount(2, $result->getUncommittedBlocks());
+       $this->assertCount(0, $result->getCommittedBlocks());
     }
-    
+      
     /**
      * @covers WindowsAzure\Services\Blob\BlobRestProxy::listBlobBlocks
      * @covers WindowsAzure\Services\Blob\Models\ListBlobBlocksResult::create
@@ -1258,7 +1269,92 @@ class BlobRestProxyTest extends BlobServiceRestProxyTestBase
         $this->assertEquals(strlen($content), $result->getContentLength());
         $this->assertCount(0, $result->getUncommittedBlocks());
         $this->assertCount(0, $result->getCommittedBlocks());
-    }
-}
 
-?>
+    }
+
+    /** 
+     * @covers WindowsAzure\Services\Blob\BlobRestProxy::copyBlob 
+     */ 
+    public function testCopyBlobSuccess() 
+    { 
+        $sourceContainerName = 'copyblobsuccesssource'; 
+        $sourceBlobName = 'sourceBlobName';
+        $sourceBlobFullName = $sourceContainerName.'/'.$sourceBlobName;
+        $blobValue = 'testBlobValue'; 
+        $version = '2011-08-18';
+        $date = new \DateTime();
+        
+        $this->createContainer($sourceContainerName); 
+        $this->wrapper->createBlockBlob( 
+            $sourceContainerName, $sourceBlobName, $blobValue); 
+        $destinationContainerName = 'copyblobsuccessdestination'; 
+        $this->createContainer($destinationContainerName); 
+        $destinationBlobName = 'destinationBlob'; 
+        
+        $copyBlobOptions = new CopyBlobOptions(); 
+        $copyBlobOptions->setDate($date);
+        $copyBlobOptions->setCopySource($sourceBlobFullName);
+        
+        $this->wrapper->copyBlob( 
+            $destinationContainerName, 
+            $destinationBlobName, 
+            $sourceContainerName, 
+            $sourceBlobName, 
+            $copyBlobOptions 
+            ); 
+        $sourceListBlobResult = $this->wrapper->listBlobs( 
+            $sourceContainerName 
+            ); 
+        $sourceBlobs = $sourceListBlobResult->getBlobs(); 
+        $sourceBlob = $sourceBlobs[0]; 
+        $destinationListBlobResult = $this->wrapper->listBlobs( 
+            $destinationContainerName 
+            ); 
+
+        $destinationBlobs = $destinationListBlobResult->getBlobs(); 
+
+        $destinationBlob = $destinationBlobs[0]; 
+        $this->assertEquals( 
+            Resources::BINARY_FILE_TYPE,  
+            $sourceBlob->getProperties()->getContentType()); 
+        
+        $this->assertEquals( 
+            Resources::BINARY_FILE_TYPE, 
+            $destinationBlob->getProperties()->getContentType()); 
+
+        $sourceBlobContent = Utilities::readStream(
+            $this->wrapper->getBlob(
+            $sourceContainerName, 
+            $sourceBlobName)->getContentStream());
+                
+        $destinationBlobContent = Utilities::readStream(
+            $this->wrapper->getBlob(
+            $destinationContainerName,
+            $destinationBlobName)->getContentStream());
+        
+        $this->assertEquals( 
+            $sourceBlobContent,
+            $destinationBlobContent);
+    }
+    
+  /**  
+  * @covers WindowsAzure\Services\Blob\BlobRestProxy::createBlobSnapshot 
+  * @covers WindowsAzure\Services\Blob\Models\createBlobSnapshotResult::create 
+  */ 
+    public function testCreateBlobSnapshotWorks() 
+    { 
+        $containerName = 'createblobsnapshotsuccess'; 
+        $blobName = 'testBlob'; 
+        $blobValue = 'TestBlobValue'; 
+        $this->createContainer($containerName); 
+        
+        $this->wrapper->createBlockBlob( 
+            $containerName, $blobName, $blobValue);
+        $createBlobSnapshotResult = $this->wrapper->createBlobSnapshot(
+            $containerName, $blobName);
+        $this->assertNotNull($createBlobSnapshotResult);
+        
+    }    
+  
+} 
+
