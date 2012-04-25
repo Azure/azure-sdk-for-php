@@ -51,8 +51,8 @@ class FileInputChannel implements IInputChannel
      */
     public function getInputStream($name)
     {
-        if (file_exists($name)) {
-            $this->_inputStream = fopen($name, 'r');
+        $this->_inputStream = @fopen($name, 'r');
+        if ($this->_inputStream) {
             return $this->_inputStream;
         } else {
             throw new ChannelNotAvailableException();
