@@ -68,6 +68,7 @@ class ServicesBuilder implements IServiceBuilder
         switch ($type) {
         case Resources::QUEUE_TYPE_NAME:
         case Resources::BLOB_TYPE_NAME:
+        case Resources::SERVICE_MANAGEMENT_TYPE_NAME:
             $headers[Resources::X_MS_VERSION] = Resources::API_VERSION;
             break;
         
@@ -215,10 +216,37 @@ class ServicesBuilder implements IServiceBuilder
     }
     
     /**
+     * Builds a service management object.
+     *
+     * @param WindowsAzure\Core\Configuration $config The configuration.
+     * 
+     * @return WindowsAzure\ServiceManagement\IServiceManagement
+     */
+    private function _buildServiceManagement($config)
+    {
+        $certificatePath = ServiceManagementSettings::CERTIFICATE_PATH;
+        $httpClient      = new HttpClient($certificatePath);
+        $xmlSerializer   = new XmlSerializer();
+
+        $serviceManagementWrapper = new ServiceManagementRestProxy(
+            $httpClient,
+            $config->getProperty(ServiceManagementSettings::SUBSCRIPTION_ID),
+            $xmlSerializer
+        );
+
+        // Adding headers filter
+        $serviceManagementWrapper = self::_addHeadersFilter(
+            $serviceManagementWrapper, Resources::SERVICE_MANAGEMENT_TYPE_NAME
+        );
+
+        return $serviceManagementWrapper;
+    }
+    
+    /**
      * Creates an object passed $type configured with $config.
      *
      * @param WindowsAzure\Core\Configuration $config The configuration.
-     * @param string                                   $type   The type name.
+     * @param string                          $type   The type name.
      * 
      * @return WindowsAzure\Services\Queue\IQueue
      *       | WindowsAzure\Services\Blob\IBlob
@@ -235,11 +263,15 @@ class ServicesBuilder implements IServiceBuilder
             
         case Resources::TABLE_TYPE_NAME:
             return self::_buildTable($config);
-
+            
+        case Resources::SERVICE_MANAGEMENT_TYPE_NAME:
+            return self::_buildServiceManagement($config);
+            
         default:
             $expected  = Resources::QUEUE_TYPE_NAME;
             $expected .= '|' . Resources::BLOB_TYPE_NAME;
             $expected .= '|' . Resources::TABLE_TYPE_NAME;
+            $expected .= '|' . Resources::SERVICE_MANAGEMENT_TYPE_NAME;
             throw new InvalidArgumentTypeException($expected);
         }
     }

@@ -42,13 +42,14 @@ class QueueService
     /**
      * Creates new object based on the builder type in the $config.
      *
-     * @param WindowsAzure\Core\Configuration $config config object.
+     * @param WindowsAzure\Core\Configuration    $config  The config object.
+     * @param WindowsAzure\Core\IServicesBuilder $builder The builder object.
      * 
-     * @return WindowsAzure\Services\Queue\IQueue.
+     * @return WindowsAzure\Services\Queue\IQueue
      */
-    public static function create($config)
+    public static function create($config, $builder = null)
     {
-        return $config->create(Resources::QUEUE_TYPE_NAME);
+        return $config->create(Resources::QUEUE_TYPE_NAME, $builder);
     }
 }
 
