@@ -23,7 +23,7 @@
  */
  
 namespace WindowsAzure\Services\Blob;
-use WindowsAzure\Services\Core\Configuration;
+use WindowsAzure\Core\Configuration;
 use WindowsAzure\Resources;
 
 /**
@@ -42,7 +42,7 @@ class BlobService
     /**
      * Creates new object based on the builder type in the $config.
      *
-     * @param WindowsAzure\Services\Core\Configuration $config config object.
+     * @param WindowsAzure\Core\Configuration $config config object.
      * 
      * @return WindowsAzure\Services\Blob\IBlob.
      */

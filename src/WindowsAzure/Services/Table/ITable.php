@@ -23,7 +23,7 @@
  */
  
 namespace WindowsAzure\Services\Table;
-use WindowsAzure\Services\Core\FilterableService;
+use WindowsAzure\Core\FilterableService;
 
 /**
  * This interface has all REST APIs provided by Windows Azure for Table service.

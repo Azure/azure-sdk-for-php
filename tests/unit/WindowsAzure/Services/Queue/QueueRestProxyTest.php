@@ -26,7 +26,7 @@
 namespace Tests\Unit\WindowsAzure\Services\Queue;
 use WindowsAzure\Core\WindowsAzureUtilities;
 use Tests\Framework\QueueServiceRestProxyTestBase;
-use WindowsAzure\Services\Core\Configuration;
+use WindowsAzure\Core\Configuration;
 use WindowsAzure\Services\Core\Models\ServiceProperties;
 use WindowsAzure\Services\Queue\QueueRestProxy;
 use WindowsAzure\Services\Queue\IQueue;

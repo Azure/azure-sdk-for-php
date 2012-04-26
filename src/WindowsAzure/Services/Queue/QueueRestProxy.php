@@ -40,9 +40,9 @@ use WindowsAzure\Services\Queue\Models\ListMessagesResult;
 use WindowsAzure\Services\Queue\Models\PeekMessagesOptions;
 use WindowsAzure\Services\Queue\Models\PeekMessagesResult;
 use WindowsAzure\Services\Queue\Models\UpdateMessageResult;
-use WindowsAzure\Core\IHttpClient;
+use WindowsAzure\Core\Http\IHttpClient;
 use WindowsAzure\Utilities;
-use WindowsAzure\Core\Url;
+use WindowsAzure\Core\Http\Url;
 use WindowsAzure\Core\WindowsAzureUtilities;
 
 /**

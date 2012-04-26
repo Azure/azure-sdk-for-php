@@ -15,49 +15,52 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   Tests\Mock\WindowsAzure\Core\Filters
+ * @package   WindowsAzure\Core\Filters
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
  
-namespace Tests\Mock\WindowsAzure\Core\Filters;
-use Tests\Framework\TestResources;
+namespace WindowsAzure\Core\Filters;
 
 /**
- * Alters request headers and response to mock real filter
+ * The retry policy abstract class.
  *
  * @category  Microsoft
- * @package   Tests\Mock\WindowsAzure\Core\Filters
+ * @package   WindowsAzure\Core\Filters
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @version   Release: @package_version@
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
-class SimpleFilterMock implements \WindowsAzure\Core\IServiceFilter
+abstract class RetryPolicy
 {
-    private $_headerName;
-    private $_data;
+    const DEFAULT_CLIENT_BACKOFF     = 30000;
+    const DEFAULT_CLIENT_RETRY_COUNT = 3;
+    const DEFAULT_MAX_BACKOFF        = 90000;
+    const DEFAULT_MIN_BACKOFF        = 300;
     
-    public function __construct($headerName, $data)
-    {
-        $this->_data       = $data;
-        $this->_headerName = $headerName;
-    }
+    /**
+     * Indicates if there should be a retry or not.
+     * 
+     * @param integer                 $retryCount The retry count.
+     * @param \HTTP_Request2_Response $response   The HTTP response object.
+     * 
+     * @return boolean
+     */
+    public abstract function shouldRetry($retryCount, $response);
     
-    public function handleRequest($request)
-    {
-        $request->setHeader($this->_headerName, $this->_data);
-        return $request;
-    }
-    
-    public function handleResponse($request, $response)
-    {
-        $response->appendBody($this->_data);
-        return $response;
-    }
+    /**
+     * Calculates the backoff for the retry policy.
+     * 
+     * @param integer                 $retryCount The retry count.
+     * @param \HTTP_Request2_Response $response   The HTTP response object.
+     * 
+     * @return integer
+     */
+    public abstract function calculateBackoff($retryCount, $response);
 }
 
 ?>
