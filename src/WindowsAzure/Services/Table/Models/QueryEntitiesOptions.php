@@ -73,6 +73,9 @@ class QueryEntitiesOptions extends TableServiceOptions
     /**
      * Sets query.
      * 
+     * You can either sets the whole query *or* use the individual query functions
+     * like (setTop).
+     * 
      * @param string $query The query instance.
      * 
      * @return none
@@ -139,6 +142,9 @@ class QueryEntitiesOptions extends TableServiceOptions
     /**
      * Sets filter.
      *
+     * You can either use this individual function or use setQuery to set the whole
+     * query object.
+     * 
      * @param Filters\Filter $filter value.
      * 
      * @return none.
@@ -161,6 +167,9 @@ class QueryEntitiesOptions extends TableServiceOptions
     /**
      * Sets top.
      *
+     * You can either use this individual function or use setQuery to set the whole
+     * query object.
+     * 
      * @param integer $top value.
      * 
      * @return none.
@@ -172,6 +181,9 @@ class QueryEntitiesOptions extends TableServiceOptions
     
     /**
      * Adds a field to select fields.
+     * 
+     * You can either use this individual function or use setQuery to set the whole
+     * query object.
      * 
      * @param string $field The value of the field.
      * 
@@ -195,6 +207,9 @@ class QueryEntitiesOptions extends TableServiceOptions
     /**
      * Sets selectFields.
      *
+     * You can either use this individual function or use setQuery to set the whole
+     * query object.
+     * 
      * @param array $selectFields value.
      * 
      * @return none.

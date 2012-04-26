@@ -59,17 +59,23 @@ class ServiceRestProxy
     protected $url;
     
     /**
-     * Constructor.
-     *
-     * @param WindowsAzure\Core\IHttpClient $channel The http client used to send 
-     * HTTP requests.
-     * @param string                        $uri     The storage account uri.
+     * @var WindowsAzure\Core\Serialization\ISerializer
      */
-    public function __construct($channel, $uri)
+    protected $dataSerializer;
+    
+    /**
+     * Initializes new ServiceRestProxy object.
+     *
+     * @param IHttpClient $channel        The HTTP client used to send HTTP requests.
+     * @param string      $uri            The storage account uri.
+     * @param ISerializer $dataSerializer The data serializer.
+     */
+    public function __construct($channel, $uri, $dataSerializer)
     {
-        $this->url      = $uri;
-        $this->_channel = $channel;
-        $this->_filters = array();
+        $this->url            = $uri;
+        $this->_channel       = $channel;
+        $this->_filters       = array();
+        $this->dataSerializer = $dataSerializer;
     }
     
     /**
@@ -197,7 +203,7 @@ class ServiceRestProxy
         Validate::isString($key, 'key');
         Validate::isString($value, 'value');
                 
-        if (!empty($value)) {
+        if (!is_null($value) && Resources::EMPTY_STRING !== $value) {
             $queryParameters[$key] = $value;
         }
     }
@@ -219,7 +225,7 @@ class ServiceRestProxy
         Validate::isString($key, 'key');
         Validate::isString($value, 'value');
                 
-        if (!empty($value)) {
+        if (!is_null($value) && Resources::EMPTY_STRING !== $value) {
             $headers[$key] = $value;
         }
     }

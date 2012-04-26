@@ -10,6 +10,8 @@ spl_autoload_register(
             'windowsazure\\core\\invalidargumenttypeexception' => '/WindowsAzure/Core/InvalidArgumentTypeException.php',
             'windowsazure\\core\\iservicefilter' => '/WindowsAzure/Core/IServiceFilter.php',
             'windowsazure\\core\\iurl' => '/WindowsAzure/Core/IUrl.php',
+            'windowsazure\\core\\serialization\\iserializer' => '/WindowsAzure/Core/Serialization/ISerializer.php',
+            'windowsazure\\core\\serialization\\xmlserializer' => '/WindowsAzure/Core/Serialization/XmlSerializer.php',
             'windowsazure\\core\\serviceexception' => '/WindowsAzure/Core/ServiceException.php',
             'windowsazure\\core\\url' => '/WindowsAzure/Core/Url.php',
             'windowsazure\\core\\windowsazureutilities' => '/WindowsAzure/Core/WindowsAzureUtilities.php',

@@ -123,7 +123,7 @@ class AccessPolicy
      * 
      * @return array.
      */
-    public function toXml()
+    public function toArray()
     {
         $array = array();
         

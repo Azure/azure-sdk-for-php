@@ -97,7 +97,7 @@ class QueueRestProxy extends ServiceRestProxy implements IQueue
         );
         
         $response = $this->send($method, $headers, $queryParams, $path, $statusCode);
-        $parsed   = Utilities::unserialize($response->getBody());
+        $parsed   = $this->dataSerializer->unserialize($response->getBody());
         
         return ListQueuesResult::create($parsed);
     }
@@ -167,7 +167,7 @@ class QueueRestProxy extends ServiceRestProxy implements IQueue
         $statusCode  = Resources::STATUS_CREATED;
         $message     = new QueueMessage();
         $message->setMessageText($messageText);
-        $body = $message->toXml();
+        $body = $message->toXml($this->dataSerializer);
         
         
         if (is_null($options)) {
@@ -216,7 +216,10 @@ class QueueRestProxy extends ServiceRestProxy implements IQueue
         $headers     = array();
         $queryParams = array();
         $path        = $queueName;
-        $statusCode  = Resources::STATUS_CREATED;
+        $statusCode  = array(
+            Resources::STATUS_CREATED,
+            Resources::STATUS_NO_CONTENT
+        );
         
         if (is_null($options)) {
             $options = new CreateQueueOptions();
@@ -388,7 +391,7 @@ class QueueRestProxy extends ServiceRestProxy implements IQueue
         );
         
         $response = $this->send($method, $headers, $queryParams, $path, $statusCode);
-        $parsed   = Utilities::unserialize($response->getBody());
+        $parsed   = $this->dataSerializer->unserialize($response->getBody());
         
         return GetServicePropertiesResult::create($parsed);
     }
@@ -433,7 +436,7 @@ class QueueRestProxy extends ServiceRestProxy implements IQueue
         );
         
         $response = $this->send($method, $headers, $queryParams, $path, $statusCode);
-        $parsed   = Utilities::unserialize($response->getBody());
+        $parsed   = $this->dataSerializer->unserialize($response->getBody());
         
         return ListMessagesResult::create($parsed);
     }
@@ -474,7 +477,7 @@ class QueueRestProxy extends ServiceRestProxy implements IQueue
         );
         
         $response = $this->send($method, $headers, $queryParams, $path, $statusCode);
-        $parsed   = Utilities::unserialize($response->getBody());
+        $parsed   = $this->dataSerializer->unserialize($response->getBody());
         
         return PeekMessagesResult::create($parsed);
     }
@@ -542,7 +545,7 @@ class QueueRestProxy extends ServiceRestProxy implements IQueue
         $queryParams = array();
         $statusCode  = Resources::STATUS_ACCEPTED;
         $path        = Resources::EMPTY_STRING;
-        $body        = $serviceProperties->toXml();
+        $body        = $serviceProperties->toXml($this->dataSerializer);
         
         if (is_null($options)) {
             $options = new QueueServiceOptions();
@@ -606,6 +609,10 @@ class QueueRestProxy extends ServiceRestProxy implements IQueue
             $visibilityTimeoutInSeconds,
             'visibilityTimeoutInSeconds'
         );
+        Validate::notNull(
+            $visibilityTimeoutInSeconds,
+            'visibilityTimeoutInSeconds'
+        );
         
         $method      = Resources::HTTP_PUT;
         $headers     = array();
@@ -643,7 +650,7 @@ class QueueRestProxy extends ServiceRestProxy implements IQueue
         
             $message = new QueueMessage();
             $message->setMessageText($messageText);
-            $body = $message->toXml();
+            $body = $message->toXml($this->dataSerializer);
         }
         
         $response        = $this->send(

@@ -147,9 +147,9 @@ class ValidateTest extends \PHPUnit_Framework_TestCase
         Validate::isDate('not date');
     }
     
-        /**
-* @covers WindowsAzure\Validate::notNullOrEmpty
-*/
+    /**
+     * @covers WindowsAzure\Validate::notNullOrEmpty
+     */
     public function testNotNullOrEmptyWithNonEmpty()
     {
         Validate::notNullOrEmpty(1234, 'not null');
@@ -158,12 +158,21 @@ class ValidateTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-* @covers WindowsAzure\Validate::notNullOrEmpty
-*/
+     * @covers WindowsAzure\Validate::notNullOrEmpty
+     */
     public function testNotNullOrEmptyWithEmpty()
     {
         $this->setExpectedException('\InvalidArgumentException');
         Validate::notNullOrEmpty(Resources::EMPTY_STRING, 'variable');
+    }
+    
+    /**
+     * @covers WindowsAzure\Validate::notNull
+     */
+    public function testNotNullWithNull()
+    {
+        $this->setExpectedException('\InvalidArgumentException');
+        Validate::notNullOrEmpty(null, 'variable');
     }
 }
 
