@@ -40,6 +40,8 @@ use WindowsAzure\Services\Table\TableSettings;
 use WindowsAzure\Services\Table\Utilities\AtomReaderWriter;
 use WindowsAzure\Services\Table\Utilities\MimeReaderWriter;
 use WindowsAzure\Core\Serialization\XmlSerializer;
+use WindowsAzure\ServiceManagement\ServiceManagementSettings;
+use WindowsAzure\ServiceManagement\ServiceManagementRestProxy;
 
 /**
  * Builds azure service objects.
