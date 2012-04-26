@@ -70,17 +70,20 @@ class HttpClient implements IHttpClient
     private $_expectedStatusCodes;
     
     /**
-     * Constructor
+     * Initializes new HttpClient object.
+     * 
+     * @param string $certificatePath The certificate path.
      * 
      * @return WindowsAzure\Core\Http\HttpClient
      */
-    function __construct()
+    function __construct($certificatePath = Resources::EMPTY_STRING)
     {
         $this->_request = new \HTTP_Request2(
             null, null, array(
                 Resources::USE_BRACKETS    => true,
                 Resources::SSL_VERIFY_PEER => false,
-                Resources::SSL_VERIFY_HOST => false
+                Resources::SSL_VERIFY_HOST => false,
+                Resources::SSL_LOCAL_CERT  => $certificatePath
                 )
         );
 
