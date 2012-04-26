@@ -47,15 +47,15 @@ use WindowsAzure\Resources;
 use WindowsAzure\Core\ServiceException;
 
 /**
-* Unit tests for QueueRestProxy class
-*
-* @package    Tests\Unit\WindowsAzure\Services\Queue
-* @author     Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
-* @copyright  2012 Microsoft Corporation
-* @license    http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
-* @version    Release: @package_version@
-* @link       http://pear.php.net/package/azure-sdk-for-php
-*/
+ * Unit tests for QueueRestProxy class
+ *
+ * @package    Tests\Unit\WindowsAzure\Services\Queue
+ * @author     Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
+ * @copyright  2012 Microsoft Corporation
+ * @license    http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
+ * @version    Release: @package_version@
+ * @link       http://pear.php.net/package/azure-sdk-for-php
+ */
 class QueueRestProxyTest extends QueueServiceRestProxyTestBase
 {
     /**
@@ -84,8 +84,8 @@ class QueueRestProxyTest extends QueueServiceRestProxyTestBase
     }
 
     /**
-    * @covers WindowsAzure\Services\Queue\QueueRestProxy::listQueues
-    */
+     * @covers WindowsAzure\Services\Queue\QueueRestProxy::listQueues
+     */
     public function testListQueuesWithOptions()
     {
         // Setup
@@ -116,8 +116,8 @@ class QueueRestProxyTest extends QueueServiceRestProxyTestBase
     }
 
     /**
-    * @covers WindowsAzure\Services\Queue\QueueRestProxy::listQueues
-    */
+     * @covers WindowsAzure\Services\Queue\QueueRestProxy::listQueues
+     */
     public function testListQueuesWithNextMarker()
     {
         // Setup
@@ -150,8 +150,8 @@ class QueueRestProxyTest extends QueueServiceRestProxyTestBase
     }
     
     /**
-    * @covers WindowsAzure\Services\Queue\QueueRestProxy::listQueues
-    */
+     * @covers WindowsAzure\Services\Queue\QueueRestProxy::listQueues
+     */
     public function testListQueuesWithInvalidNextMarkerFail()
     {
         if (WindowsAzureUtilities::isEmulated()) {
@@ -176,8 +176,8 @@ class QueueRestProxyTest extends QueueServiceRestProxyTestBase
     }
 
     /**
-    * @covers WindowsAzure\Services\Queue\QueueRestProxy::listQueues
-    */
+     * @covers WindowsAzure\Services\Queue\QueueRestProxy::listQueues
+     */
     public function testListQueuesWithNoQueues()
     {
         // Test
@@ -189,8 +189,8 @@ class QueueRestProxyTest extends QueueServiceRestProxyTestBase
     }
 
     /**
-    * @covers WindowsAzure\Services\Queue\QueueRestProxy::listQueues
-    */
+     * @covers WindowsAzure\Services\Queue\QueueRestProxy::listQueues
+     */
     public function testListQueuesWithOneResult()
     {
         // Setup
@@ -206,8 +206,8 @@ class QueueRestProxyTest extends QueueServiceRestProxyTestBase
     }
 
     /**
-    * @covers WindowsAzure\Services\Queue\QueueRestProxy::createQueue
-    */
+     * @covers WindowsAzure\Services\Queue\QueueRestProxy::createQueue
+     */
     public function testCreateQueueSimple()
     {
         // Setup
@@ -224,8 +224,8 @@ class QueueRestProxyTest extends QueueServiceRestProxyTestBase
     }
     
     /**
-    * @covers WindowsAzure\Services\Queue\QueueRestProxy::createQueue
-    */
+     * @covers WindowsAzure\Services\Queue\QueueRestProxy::createQueue
+     */
     public function testCreateQueueWithExistingQueue()
     {
         // Setup
@@ -243,8 +243,8 @@ class QueueRestProxyTest extends QueueServiceRestProxyTestBase
     }
     
     /**
-    * @covers WindowsAzure\Services\Queue\QueueRestProxy::createQueue
-    */
+     * @covers WindowsAzure\Services\Queue\QueueRestProxy::createQueue
+     */
     public function testCreateQueueWithMetadata()
     {
         $queueName     = 'createqueuewithmetadata';
@@ -266,8 +266,8 @@ class QueueRestProxyTest extends QueueServiceRestProxyTestBase
     }
     
     /**
-    * @covers WindowsAzure\Services\Queue\QueueRestProxy::createQueue
-    */
+     * @covers WindowsAzure\Services\Queue\QueueRestProxy::createQueue
+     */
     public function testCreateQueueInvalidNameFail()
     {
         // Setup
@@ -279,8 +279,8 @@ class QueueRestProxyTest extends QueueServiceRestProxyTestBase
     }
     
     /**
-    * @covers WindowsAzure\Services\Queue\QueueRestProxy::deleteQueue
-    */
+     * @covers WindowsAzure\Services\Queue\QueueRestProxy::deleteQueue
+     */
     public function testDeleteQueue()
     {
         // Setup
@@ -297,8 +297,8 @@ class QueueRestProxyTest extends QueueServiceRestProxyTestBase
     }
     
     /**
-    * @covers WindowsAzure\Services\Queue\QueueRestProxy::deleteQueue
-    */
+     * @covers WindowsAzure\Services\Queue\QueueRestProxy::deleteQueue
+     */
     public function testDeleteQueueFail()
     {
         // Setup
@@ -310,8 +310,8 @@ class QueueRestProxyTest extends QueueServiceRestProxyTestBase
     }
     
     /**
-    * @covers WindowsAzure\Services\Queue\QueueRestProxy::getServiceProperties
-    */
+     * @covers WindowsAzure\Services\Queue\QueueRestProxy::getServiceProperties
+     */
     public function testGetServiceProperties()
     {
         if (WindowsAzureUtilities::isEmulated()) {
@@ -326,8 +326,8 @@ class QueueRestProxyTest extends QueueServiceRestProxyTestBase
     }
     
     /**
-    * @covers WindowsAzure\Services\Queue\QueueRestProxy::setServiceProperties
-    */
+     * @covers WindowsAzure\Services\Queue\QueueRestProxy::setServiceProperties
+     */
     public function testSetServiceProperties()
     {
         if (WindowsAzureUtilities::isEmulated()) {
@@ -346,8 +346,8 @@ class QueueRestProxyTest extends QueueServiceRestProxyTestBase
     }
     
     /**
-    * @covers WindowsAzure\Services\Queue\QueueRestProxy::getQueueMetadata
-    */
+     * @covers WindowsAzure\Services\Queue\QueueRestProxy::getQueueMetadata
+     */
     public function testGetQueueMetadata()
     {
         // Setup
@@ -367,8 +367,8 @@ class QueueRestProxyTest extends QueueServiceRestProxyTestBase
     }
     
     /**
-    * @covers WindowsAzure\Services\Queue\QueueRestProxy::setQueueMetadata
-    */
+     * @covers WindowsAzure\Services\Queue\QueueRestProxy::setQueueMetadata
+     */
     public function testSetQueueMetadata()
     {
         // Setup
@@ -406,8 +406,8 @@ class QueueRestProxyTest extends QueueServiceRestProxyTestBase
     }
     
     /**
-    * @covers WindowsAzure\Services\Queue\QueueRestProxy::listMessages
-    */
+     * @covers WindowsAzure\Services\Queue\QueueRestProxy::listMessages
+     */
     public function testListMessagesEmpty()
     {
         // Setup
@@ -423,8 +423,8 @@ class QueueRestProxyTest extends QueueServiceRestProxyTestBase
     }
     
     /**
-    * @covers WindowsAzure\Services\Queue\QueueRestProxy::listMessages
-    */
+     * @covers WindowsAzure\Services\Queue\QueueRestProxy::listMessages
+     */
     public function testListMessagesOneMessage()
     {
         // Setup
@@ -444,8 +444,8 @@ class QueueRestProxyTest extends QueueServiceRestProxyTestBase
     }
     
     /**
-    * @covers WindowsAzure\Services\Queue\QueueRestProxy::listMessages
-    */
+     * @covers WindowsAzure\Services\Queue\QueueRestProxy::listMessages
+     */
     public function testListMessagesCreateMultiplesReturnOne()
     {
         // Setup
@@ -468,8 +468,8 @@ class QueueRestProxyTest extends QueueServiceRestProxyTestBase
     }
     
     /**
-    * @covers WindowsAzure\Services\Queue\QueueRestProxy::listMessages
-    */
+     * @covers WindowsAzure\Services\Queue\QueueRestProxy::listMessages
+     */
     public function testListMessagesMultiplesMessages()
     {
         // Setup
@@ -496,8 +496,8 @@ class QueueRestProxyTest extends QueueServiceRestProxyTestBase
     }
     
     /**
-    * @covers WindowsAzure\Services\Queue\QueueRestProxy::peekMessages
-    */
+     * @covers WindowsAzure\Services\Queue\QueueRestProxy::peekMessages
+     */
     public function testPeekMessagesEmpty()
     {
         // Setup
@@ -513,8 +513,8 @@ class QueueRestProxyTest extends QueueServiceRestProxyTestBase
     }
     
     /**
-    * @covers WindowsAzure\Services\Queue\QueueRestProxy::peekMessages
-    */
+     * @covers WindowsAzure\Services\Queue\QueueRestProxy::peekMessages
+     */
     public function testPeekMessagesOneMessage()
     {
         // Setup
@@ -534,8 +534,8 @@ class QueueRestProxyTest extends QueueServiceRestProxyTestBase
     }
     
     /**
-    * @covers WindowsAzure\Services\Queue\QueueRestProxy::peekMessages
-    */
+     * @covers WindowsAzure\Services\Queue\QueueRestProxy::peekMessages
+     */
     public function testPeekMessagesCreateMultiplesReturnOne()
     {
         // Setup
@@ -558,8 +558,8 @@ class QueueRestProxyTest extends QueueServiceRestProxyTestBase
     }
     
     /**
-    * @covers WindowsAzure\Services\Queue\QueueRestProxy::peekMessages
-    */
+     * @covers WindowsAzure\Services\Queue\QueueRestProxy::peekMessages
+     */
     public function testPeekMessagesMultiplesMessages()
     {
         // Setup
@@ -586,8 +586,8 @@ class QueueRestProxyTest extends QueueServiceRestProxyTestBase
     }
     
     /**
-    * @covers WindowsAzure\Services\Queue\QueueRestProxy::deleteMessage
-    */
+     * @covers WindowsAzure\Services\Queue\QueueRestProxy::deleteMessage
+     */
     public function testDeleteMessage()
     {
         // Setup
@@ -662,8 +662,8 @@ class QueueRestProxyTest extends QueueServiceRestProxyTestBase
     }
     
     /**
-    * @covers WindowsAzure\Services\Queue\QueueRestProxy::updateMessage
-    */
+     * @covers WindowsAzure\Services\Queue\QueueRestProxy::updateMessage
+     */
     public function testUpdateMessage()
     {
         // Setup

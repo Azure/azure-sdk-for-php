@@ -175,7 +175,7 @@ class Utilities
     }
     
     /**
-     * Serializes given array into xml. The array indecies must be string to use
+     * Serializes given array into xml. The array indices must be string to use
      * them as XML tags.
      * 
      * @param array  $array      object to serialize represented in array.
