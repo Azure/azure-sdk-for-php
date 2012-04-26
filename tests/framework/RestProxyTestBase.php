@@ -25,6 +25,7 @@
 namespace Tests\Framework;
 use WindowsAzure\Logger;
 use WindowsAzure\Core\Serialization\XmlSerializer;
+use WindowsAzure\Core\WindowsAzureUtilities;
 
 /**
  * Testbase for all REST proxy tests.
@@ -45,7 +46,14 @@ class RestProxyTestBase extends \PHPUnit_Framework_TestCase
     
     const NOT_SUPPORTED = 'The storage emulator doesn\'t support this API';
     
-    public function __construct($config, $serviceWrapper)
+    protected function skipIfEmulated()
+    {
+        if (WindowsAzureUtilities::isEmulated()) {
+            $this->markTestSkipped(self::NOT_SUPPORTED);
+        }
+    }
+    
+    public function __construct($config = null, $serviceWrapper = null)
     {
         $this->config = $config;
         $this->wrapper = $serviceWrapper;

@@ -109,6 +109,7 @@ class Configuration
         } else {
             $expected  = Resources::QUEUE_TYPE_NAME;
             $expected .= '|' . Resources::BLOB_TYPE_NAME;
+            $expected .= '|' . Resources::TABLE_TYPE_NAME;
             throw new InvalidArgumentTypeException($expected);
         }
     }
