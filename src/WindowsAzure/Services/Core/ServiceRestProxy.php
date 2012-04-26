@@ -203,7 +203,7 @@ class ServiceRestProxy
         Validate::isString($key, 'key');
         Validate::isString($value, 'value');
                 
-        if (!empty($value)) {
+        if (!is_null($value) && Resources::EMPTY_STRING !== $value) {
             $queryParameters[$key] = $value;
         }
     }
@@ -225,7 +225,7 @@ class ServiceRestProxy
         Validate::isString($key, 'key');
         Validate::isString($value, 'value');
                 
-        if (!empty($value)) {
+        if (!is_null($value) && Resources::EMPTY_STRING !== $value) {
             $headers[$key] = $value;
         }
     }
