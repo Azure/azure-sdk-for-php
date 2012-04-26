@@ -191,6 +191,7 @@ class Resources
     const USE_BRACKETS    = 'use_brackets';
     const SSL_VERIFY_PEER = 'ssl_verify_peer';
     const SSL_VERIFY_HOST = 'ssl_verify_host';
+    const SSL_LOCAL_CERT  = 'ssl_local_cert';
     const CONNECT_TIMEOUT = 'connect_timeout';
 }
 
