@@ -26,7 +26,7 @@ namespace WindowsAzure\Services\Table;
 use WindowsAzure\Resources;
 use WindowsAzure\Utilities;
 use WindowsAzure\Validate;
-use WindowsAzure\Core\HttpCallContext;
+use WindowsAzure\Core\Http\HttpCallContext;
 use WindowsAzure\Services\Core\Models\ServiceProperties;
 use WindowsAzure\Services\Core\ServiceRestProxy;
 use WindowsAzure\Services\Table\Models\TableServiceOptions;
@@ -141,7 +141,7 @@ class TableRestProxy extends ServiceRestProxy implements ITable
      * @param Models\Entity $entity The entity object.
      * @param string        $type   The API type.
      * 
-     * @return WindowsAzure\Core\HttpCallContext
+     * @return WindowsAzure\Core\Http\HttpCallContext
      * 
      * @throws \InvalidArgumentException 
      */
@@ -607,7 +607,7 @@ class TableRestProxy extends ServiceRestProxy implements ITable
     /**
      * Initializes new TableRestProxy object.
      * 
-     * @param WindowsAzure\Core\IHttpClient                 $channel        The HTTP
+     * @param WindowsAzure\Core\Http\IHttpClient            $channel        The HTTP
      * client channel.
      * @param string                                        $uri            The 
      * storage account uri.

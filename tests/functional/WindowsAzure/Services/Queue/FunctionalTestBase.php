@@ -36,7 +36,7 @@ use Tests\Functional\WindowsAzure\Services\Queue\QueueServiceFunctionalTestData;
 use WindowsAzure\Core\ServiceException;
 use WindowsAzure\Core\WindowsAzureUtilities;
 use WindowsAzure\Resources;
-use WindowsAzure\Services\Core\Configuration;
+use WindowsAzure\Core\Configuration;
 use WindowsAzure\Services\Queue\QueueService;
 use WindowsAzure\Services\Queue\QueueSettings;
 

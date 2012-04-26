@@ -113,9 +113,10 @@ class Resources
     const ACCEPT_CHARSET                     = 'accept-charset';
 
     // Type
-    const QUEUE_TYPE_NAME = 'IQueue';
-    const BLOB_TYPE_NAME  = 'IBlob';
-    const TABLE_TYPE_NAME = 'ITable';
+    const QUEUE_TYPE_NAME              = 'IQueue';
+    const BLOB_TYPE_NAME               = 'IBlob';
+    const TABLE_TYPE_NAME              = 'ITable';
+    const SERVICE_MANAGEMENT_TYPE_NAME = 'IServiceManagement';
     
     // HTTP Methods
     const HTTP_GET    = 'GET';
@@ -137,10 +138,11 @@ class Resources
     const EMULATOR_QUEUE_URI = '127.0.0.1:10001';
     const EMULATOR_TABLE_URI = '127.0.0.1:10002';
     const ASTERISK           = '*';
+    const SM_URL             = 'https://management.core.windows.net';
 
     // Header values
-    const API_VERSION                    = '2011-08-18';
-    const API_VERSION_2009_4             = '2009-04-14';
+    const STORAGE_API_LATEST_VERSION     = '2011-08-18';
+    const SM_API_LATEST_VERSION          = '2011-10-01';
     const DATA_SERVICE_VERSION_VALUE     = '1.0;NetFx';
     const MAX_DATA_SERVICE_VERSION_VALUE = '2.0;NetFx';
     const ACCEPT_HEADER_VALUE            = 'application/atom+xml,application/xml';
@@ -190,6 +192,7 @@ class Resources
     const USE_BRACKETS    = 'use_brackets';
     const SSL_VERIFY_PEER = 'ssl_verify_peer';
     const SSL_VERIFY_HOST = 'ssl_verify_host';
+    const SSL_LOCAL_CERT  = 'ssl_local_cert';
     const CONNECT_TIMEOUT = 'connect_timeout';
 }
 
