@@ -861,7 +861,7 @@ class BlobRestProxy extends ServiceRestProxy implements IBlob
     public function setContainerMetadata($container, $metadata, $options = null)
     {
         Validate::isString($container, 'container');
-        WindowsAzureUtilities::isValidMetadata($metadata);
+        WindowsAzureUtilities::validateMetadata($metadata);
         
         $method      = Resources::HTTP_PUT;
         $headers     = WindowsAzureUtilities::generateMetadataHeaders($metadata);
@@ -1685,7 +1685,7 @@ class BlobRestProxy extends ServiceRestProxy implements IBlob
         Validate::isString($container, 'container');
         Validate::isString($blob, 'blob');
         Validate::notNullOrEmpty($blob, 'blob');
-        WindowsAzureUtilities::isValidMetadata($metadata);
+        WindowsAzureUtilities::validateMetadata($metadata);
         
         $method      = Resources::HTTP_PUT;
         $headers     = array();

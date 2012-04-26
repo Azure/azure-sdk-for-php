@@ -105,13 +105,12 @@ class WindowsAzureUtilities
      * 
      * @return none
      */
-    public static function isValidMetadata($metadata)
+    public static function validateMetadata($metadata)
     {
         if (!is_null($metadata)) {
             Validate::isArray($metadata, 'metadata');
         } else {
-            // Accept NULL metadata.
-            return;
+            $metadata = array();
         }
         
         foreach ($metadata as $key => $value) {

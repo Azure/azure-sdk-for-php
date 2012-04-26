@@ -496,7 +496,7 @@ class QueueRestProxy extends ServiceRestProxy implements IQueue
     {
         Validate::isString($queueName, 'queueName');
         Validate::notNullOrEmpty($queueName, 'queueName');
-        WindowsAzureUtilities::isValidMetadata($metadata);
+        WindowsAzureUtilities::validateMetadata($metadata);
         
         $method      = Resources::HTTP_PUT;
         $headers     = array();
