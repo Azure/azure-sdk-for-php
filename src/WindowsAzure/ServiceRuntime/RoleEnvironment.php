@@ -813,6 +813,8 @@ class RoleEnvironment
      * Adds an event listener for the changed event, which occurs
      * after a configuration change has been applied to a role instance.
      * 
+     * To listen for events, one should call trackChanges.
+     * 
      * @param function $listener The changed listener.
      * 
      * @return none
@@ -862,6 +864,8 @@ class RoleEnvironment
      * recycled. When the instance is recycled, the configuration change is 
      * applied when it restarts.
      * 
+     * To listen for events, one should call trackChanges.
+     * 
      * @param function $listener The changing listener.
      * 
      * @static
@@ -896,7 +900,8 @@ class RoleEnvironment
 
     /**
      * Adds an event listener for the Stopping event, which occurs
-     * wheen the role is stopping.
+     * when the role is stopping.
+     * To listen for events, one should call trackChanges.
      * 
      * @param function $listener The stopping listener.
      * 
