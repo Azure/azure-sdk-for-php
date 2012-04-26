@@ -113,9 +113,10 @@ class Resources
     const ACCEPT_CHARSET                     = 'accept-charset';
 
     // Type
-    const QUEUE_TYPE_NAME = 'IQueue';
-    const BLOB_TYPE_NAME  = 'IBlob';
-    const TABLE_TYPE_NAME = 'ITable';
+    const QUEUE_TYPE_NAME              = 'IQueue';
+    const BLOB_TYPE_NAME               = 'IBlob';
+    const TABLE_TYPE_NAME              = 'ITable';
+    const SERVICE_MANAGEMENT_TYPE_NAME = 'IServiceManagement';
     
     // HTTP Methods
     const HTTP_GET    = 'GET';

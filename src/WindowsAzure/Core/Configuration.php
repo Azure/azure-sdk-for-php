@@ -60,31 +60,18 @@ class Configuration
     private $_properties;
     
     /**
-     * @var IServicesBuilder
-     */
-    private $_builder;
-    
-    /**
      * @var Configuration
      */
     private static $_instance;
 
     /**
      * Initializes new Configuration object.
-     * 
-     * @param IServicesBuilder $builder The services builder.
      *
      * @return WindowsAzure\Core\Configuration
      */
-    public function __construct($builder = null)
+    public function __construct()
     {
         $this->_properties = array();
-        
-        if (is_null($builder)) {
-            $this->_builder = new ServicesBuilder();
-        } else {
-            $this->_builder = $builder;
-        }
     }
     
     /**
@@ -182,17 +169,21 @@ class Configuration
      * Builds and returns an object from the specified type.
      *
      * @param string $type the desired object type.
+     * @param IServicesBuilder $builder The services builder.
      * 
-     * @return WindowsAzure\Services\Queue\IQueue
-     *       | WindowsAzure\Services\Blob\IBlob
+     * @return mix
      */
-    public function create($type)
+    public function create($type, $builder = null)
     {
         if (WindowsAzureUtilities::isEmulated()) {
             self::_useStorageEmulatorConfig($this, $type);
         }
         
-        return $this->_builder->build($this, $type);
+        if (is_null($builder)) {
+            $builder = new ServicesBuilder();
+        }
+        
+        return $builder->build($this, $type);
     }
 }
 
