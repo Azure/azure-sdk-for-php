@@ -15,21 +15,21 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   Tests\Mock\WindowsAzure\Services\Core\Filters
+ * @package   Tests\Mock\WindowsAzure\Core\Filters
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
  
-namespace Tests\Mock\WindowsAzure\Services\Core\Filters;
+namespace Tests\Mock\WindowsAzure\Core\Filters;
 use Tests\Framework\TestResources;
 
 /**
  * Alters request headers and response to mock real filter
  *
  * @category  Microsoft
- * @package   Tests\Mock\WindowsAzure\Services\Core\Filters
+ * @package   Tests\Mock\WindowsAzure\Core\Filters
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0

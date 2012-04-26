@@ -23,7 +23,7 @@
  */
 
 namespace Tests\Unit\WindowsAzure\Services\Table;
-use WindowsAzure\Core\HttpClient;
+use WindowsAzure\Core\Http\HttpClient;
 use WindowsAzure\Services\Table\Utilities\AtomReaderWriter;
 use WindowsAzure\Services\Table\Utilities\MimeReaderWriter;
 use Tests\Framework\TableServiceRestProxyTestBase;

@@ -34,7 +34,7 @@ use WindowsAzure\Resources;
 use WindowsAzure\Utilities;
 use WindowsAzure\Core\ServiceException;
 use WindowsAzure\Core\WindowsAzureUtilities;
-use WindowsAzure\Services\Core\Configuration;
+use WindowsAzure\Core\Configuration;
 use WindowsAzure\Services\Table\TableService;
 use WindowsAzure\Services\Table\TableSettings;
 use WindowsAzure\Services\Table\Models\Entity;

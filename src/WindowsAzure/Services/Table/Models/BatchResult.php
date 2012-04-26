@@ -26,7 +26,7 @@ namespace WindowsAzure\Services\Table\Models;
 require_once 'HTTP/Request2/Response.php';
 use WindowsAzure\Resources;
 use WindowsAzure\Utilities;
-use WindowsAzure\Core\HttpClient;
+use WindowsAzure\Core\Http\HttpClient;
 use WindowsAzure\Core\ServiceException;
 use WindowsAzure\Services\Table\Models\BatchError;
 use WindowsAzure\Services\Table\Models\InsertEntityResult;
