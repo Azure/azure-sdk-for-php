@@ -106,6 +106,8 @@ class Configuration
             );
             $config->setProperty(TableSettings::ACCOUNT_NAME, $name);
             $config->setProperty(TableSettings::ACCOUNT_KEY, $key);
+        } else if($type == Resources::SERVICE_MANAGEMENT_TYPE_NAME) {
+            // Service management doesn't have emulator support.
         } else {
             $expected  = Resources::QUEUE_TYPE_NAME;
             $expected .= '|' . Resources::BLOB_TYPE_NAME;

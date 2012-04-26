@@ -26,6 +26,7 @@ namespace WindowsAzure\Core\Http;
 use WindowsAzure\Utilities;
 use WindowsAzure\Resources;
 use WindowsAzure\Validate;
+use WindowsAzure\Core\Http\Url;
 
 /**
  * Holds basic elements for making HTTP call.
@@ -397,12 +398,14 @@ class HttpCallContext
     public function __toString()
     {
         $headers = Resources::EMPTY_STRING;
+        $uri     = new Url($this->_uri);
+        $uri     = $uri->getUrl();
         
         foreach ($this->_headers as $key => $value) {
             $headers .= "$key: $value\n";
         }
         
-        $str  = "$this->_method $this->_uri/$this->_path HTTP/1.1\n$headers\n";
+        $str  = "$this->_method $uri$this->_path HTTP/1.1\n$headers\n";
         $str .= "$this->_body";
         
         return $str;
