@@ -607,7 +607,7 @@ class TableRestProxy extends ServiceRestProxy implements ITable
     /**
      * Initializes new TableRestProxy object.
      * 
-     * @param WindowsAzure\Core\Http\IHttpClient                 $channel        The HTTP
+     * @param WindowsAzure\Core\Http\IHttpClient            $channel        The HTTP
      * client channel.
      * @param string                                        $uri            The 
      * storage account uri.

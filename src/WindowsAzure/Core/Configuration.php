@@ -78,7 +78,7 @@ class Configuration
      * Configures $config to run against the storage emulator
      *
      * @param WindowsAzure\Core\Configuration $config The configuration.
-     * @param string                                   $type   The type name.
+     * @param string                          $type   The type name.
      * 
      * @return none.
      */
@@ -168,7 +168,7 @@ class Configuration
     /**
      * Builds and returns an object from the specified type.
      *
-     * @param string $type the desired object type.
+     * @param string           $type    The desired  object type.
      * @param IServicesBuilder $builder The services builder.
      * 
      * @return mix

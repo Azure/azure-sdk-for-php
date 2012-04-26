@@ -49,7 +49,7 @@ interface IServiceBuilder
      * Creates an object passed $type configured with $config.
      *
      * @param WindowsAzure\Core\Configuration $config The configuration.
-     * @param string                                   $type   The type name.
+     * @param string                          $type   The type name.
      * 
      * @return mix
      */
