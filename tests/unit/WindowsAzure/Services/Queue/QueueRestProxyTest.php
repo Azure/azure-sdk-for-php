@@ -154,9 +154,7 @@ class QueueRestProxyTest extends QueueServiceRestProxyTestBase
      */
     public function testListQueuesWithInvalidNextMarkerFail()
     {
-        if (WindowsAzureUtilities::isEmulated()) {
-            $this->markTestSkipped(self::NOT_SUPPORTED);
-        }
+        $this->skipIfEmulated();
         
         // Setup
         $queue1 = 'listqueueswithinvalidnextmarker1';
@@ -314,9 +312,7 @@ class QueueRestProxyTest extends QueueServiceRestProxyTestBase
      */
     public function testGetServiceProperties()
     {
-        if (WindowsAzureUtilities::isEmulated()) {
-            $this->markTestSkipped(self::NOT_SUPPORTED);
-        }
+        $this->skipIfEmulated();
         
         // Test
         $result = $this->wrapper->getServiceProperties();
@@ -330,9 +326,7 @@ class QueueRestProxyTest extends QueueServiceRestProxyTestBase
      */
     public function testSetServiceProperties()
     {
-        if (WindowsAzureUtilities::isEmulated()) {
-            $this->markTestSkipped(self::NOT_SUPPORTED);
-        }
+        $this->skipIfEmulated();
         
         // Setup
         $expected = ServiceProperties::create(TestResources::setServicePropertiesSample());

@@ -80,9 +80,7 @@ class TableRestProxyTest extends TableServiceRestProxyTestBase
      */
     public function testGetServiceProperties()
     {
-        if (WindowsAzureUtilities::isEmulated()) {
-            $this->markTestSkipped(self::NOT_SUPPORTED);
-        }
+        $this->skipIfEmulated();
         
         // Test
         $result = $this->wrapper->getServiceProperties();
@@ -97,9 +95,7 @@ class TableRestProxyTest extends TableServiceRestProxyTestBase
      */
     public function testSetServiceProperties()
     {
-        if (WindowsAzureUtilities::isEmulated()) {
-            $this->markTestSkipped(self::NOT_SUPPORTED);
-        }
+        $this->skipIfEmulated();
         
         // Setup
         $expected = ServiceProperties::create(TestResources::setServicePropertiesSample());
@@ -118,9 +114,7 @@ class TableRestProxyTest extends TableServiceRestProxyTestBase
      */
     public function testSetServicePropertiesWithEmptyParts()
     {
-        if (WindowsAzureUtilities::isEmulated()) {
-            $this->markTestSkipped(self::NOT_SUPPORTED);
-        }
+        $this->skipIfEmulated();
         
         // Setup
         $xml = TestResources::setServicePropertiesSample();
@@ -289,9 +283,7 @@ class TableRestProxyTest extends TableServiceRestProxyTestBase
      */
     public function testQueryTablesWithPrefix()
     {
-        if (WindowsAzureUtilities::isEmulated()) {
-            $this->markTestSkipped(self::NOT_SUPPORTED);
-        }
+        $this->skipIfEmulated();
         
         // Setup
         $name1 = 'wquerytableswithprefix1';
@@ -402,9 +394,7 @@ class TableRestProxyTest extends TableServiceRestProxyTestBase
      */
     public function testQueryEntitiesWithMultipleEntities()
     {
-        if (WindowsAzureUtilities::isEmulated()) {
-            $this->markTestSkipped(self::NOT_SUPPORTED);
-        }
+        $this->skipIfEmulated();
         
         // Setup
         $name = 'queryentitieswithmultipleentities';
@@ -526,6 +516,8 @@ class TableRestProxyTest extends TableServiceRestProxyTestBase
      */
     public function testUpdateEntityWithDeleteProperty()
     {
+        $this->skipIfEmulated();
+        
         // Setup
         $name = 'updateentitywithdeleteproperty';
         $this->createTable($name);
@@ -595,6 +587,8 @@ class TableRestProxyTest extends TableServiceRestProxyTestBase
      */
     public function testInsertOrReplaceEntity()
     {
+        $this->skipIfEmulated();
+        
         // Setup
         $name = 'insertorreplaceentity';
         $this->createTable($name);
@@ -631,6 +625,8 @@ class TableRestProxyTest extends TableServiceRestProxyTestBase
      */
     public function testInsertOrMergeEntity()
     {
+        $this->skipIfEmulated();
+        
         // Setup
         $name = 'insertormergeentity';
         $this->createTable($name);
@@ -903,6 +899,8 @@ class TableRestProxyTest extends TableServiceRestProxyTestBase
      */
     public function testBatchWithInsertOrReplace()
     {
+        $this->skipIfEmulated();
+        
         // Setup
         $name = 'batchwithinsertorreplace';
         $this->createTable($name);
@@ -946,6 +944,8 @@ class TableRestProxyTest extends TableServiceRestProxyTestBase
      */
     public function testBatchWithInsertOrMerge()
     {
+        $this->skipIfEmulated();
+        
         // Setup
         $name = 'batchwithinsertormerge';
         $this->createTable($name);
