@@ -181,6 +181,8 @@ class RoleEnvironment
     /**
      * Tracks role environment changes raising events as necessary.
      * 
+     * This method is blocking and can/should be called in a separate fork.
+     * 
      * @static
      * 
      * @return none
