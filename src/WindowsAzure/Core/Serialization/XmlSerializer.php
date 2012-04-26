@@ -96,7 +96,6 @@ class XmlSerializer implements ISerializer
                 if (!is_int($key)) {
                     $xmlw->endElement();
                 }
-                continue;
             } else {
                 $xmlw->writeElement($key, $value);
             }
@@ -104,7 +103,7 @@ class XmlSerializer implements ISerializer
     }
     
     /**
-     * Serializes given array. The array indecies must be string to use them as
+     * Serializes given array. The array indices must be string to use them as
      * as element name.
      * 
      * @param array $array      The object to serialize represented in array.

@@ -38,7 +38,7 @@ namespace WindowsAzure\Core\Serialization;
 interface ISerializer
 {
     /**
-     * Serializes given array. The array indecies must be string to use them as
+     * Serializes given array. The array indices must be string to use them as
      * as element name.
      * 
      * @param array $array      The object to serialize represented in array.
