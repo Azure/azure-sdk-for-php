@@ -78,7 +78,7 @@ class ListQueuesResult
         foreach ($rawQueues as $value) {
             $queue = new Queue($value['Name'], $value['Url']);
             $queue->setMetadata(
-                Utilities::tryGetValue($value, Resources::QP_METADATA)
+                Utilities::tryGetValue($value, Resources::QP_METADATA, array())
             );
             $result->_queues[] = $queue;
         }

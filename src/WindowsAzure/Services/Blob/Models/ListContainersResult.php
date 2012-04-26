@@ -82,7 +82,7 @@ class ListContainersResult
             $container->setName($value['Name']);
             $container->setUrl($value['Url']);
             $container->setMetadata(
-                Utilities::tryGetValue($value, Resources::QP_METADATA)
+                Utilities::tryGetValue($value, Resources::QP_METADATA, array())
             );
             $properties = new ContainerProperties();
             $date       = $value['Properties']['Last-Modified'];
