@@ -235,7 +235,7 @@ class EdmTypeTest extends \PHPUnit_Framework_TestCase
     {
         // Setup
         $type = EdmType::INT64;
-        $value = 123;
+        $value = '123';
         $expected = true;
         
         // Test
