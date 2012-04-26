@@ -70,8 +70,7 @@ class LocalResource
      * Returns the maximum size, in megabytes, allocated for the local storage
      * resource, as defined in the service.
      * 
-     * @return The maximum size, in megabytes, allocated for the local storage
-     *         resource.
+     * @return int
      */
     public function getMaximumSizeInMegabytes()
     {
@@ -82,7 +81,7 @@ class LocalResource
      * Returns the name of the local store as declared in the service definition
      * file.
      * 
-     * @return A string object that represents the name of the local store.
+     * @return string
      */
     public function getName()
     {
@@ -92,8 +91,7 @@ class LocalResource
     /**
      * Returns the full directory path to the local storage resource.
      * 
-     * @return A string object that represents the path to the local storage 
-     * resource.
+     * @return string
      */
     public function getRootPath()
     {
