@@ -65,11 +65,11 @@ class GetBlobResult
      */
     public static function create($headers, $body)
     {
-        $result = new GetBlobResult();
-        
+        $result   = new GetBlobResult();
+        $metadata = WindowsAzureUtilities::getMetadataArray($headers);
         $result->setContentStream(Utilities::stringToStream($body));
         $result->setProperties(BlobProperties::create($headers));
-        $result->setMetadata(WindowsAzureUtilities::getMetadataArray($headers));
+        $result->setMetadata(is_null($metadata) ? array() : $metadata);
         
         return $result;
     }

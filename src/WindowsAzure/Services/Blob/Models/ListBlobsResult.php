@@ -125,7 +125,7 @@ class ListBlobsResult
                 )
             );
             $blob->setMetadata(
-                Utilities::tryGetValue($value, Resources::QP_METADATA)
+                Utilities::tryGetValue($value, Resources::QP_METADATA, array())
             );
             
             $result->_blobs[] = $blob;
