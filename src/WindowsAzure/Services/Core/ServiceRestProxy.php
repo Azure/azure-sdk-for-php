@@ -157,7 +157,7 @@ class ServiceRestProxy extends RestProxy
      */
     protected function addMetadataHeaders($headers, $metadata)
     {
-        WindowsAzureUtilities::isValidMetadata($metadata);
+        WindowsAzureUtilities::validateMetadata($metadata);
         
         $metadata = WindowsAzureUtilities::generateMetadataHeaders($metadata);
         $headers  = array_merge($headers, $metadata);
