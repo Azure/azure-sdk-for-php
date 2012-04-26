@@ -52,6 +52,7 @@ spl_autoload_register(
             'tests\\unit\\windowsazure\\serviceruntime\\fileinputchanneltest' => '/unit/WindowsAzure/ServiceRuntime/FileInputChannelTest.php',
             'tests\\unit\\windowsazure\\serviceruntime\\fileoutputchanneltest' => '/unit/WindowsAzure/ServiceRuntime/FileOutputChannelTest.php',
             'tests\\unit\\windowsazure\\serviceruntime\\goalstatetest' => '/unit/WindowsAzure/ServiceRuntime/GoalStateTest.php',
+            'tests\\unit\\windowsazure\\serviceruntime\\localresourcetest' => '/unit/WindowsAzure/ServiceRuntime/LocalResourceTest.php',
             'tests\\unit\\windowsazure\\serviceruntime\\protocol1runtimeclientfactorytest' => '/unit/WindowsAzure/ServiceRuntime/Protocol1RuntimeClientFactoryTest.php',
             'tests\\unit\\windowsazure\\serviceruntime\\protocol1runtimeclienttest' => '/unit/WindowsAzure/ServiceRuntime/Protocol1RuntimeClientTest.php',
             'tests\\unit\\windowsazure\\serviceruntime\\protocol1runtimecurrentstateclienttest' => '/unit/WindowsAzure/ServiceRuntime/Protocol1RuntimeCurrentStateClientTest.php',

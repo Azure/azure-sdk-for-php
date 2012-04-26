@@ -129,7 +129,7 @@ class Protocol1RuntimeGoalStateClient implements IRuntimeGoalStateClient
             $current = $this->_currentGoalState;
 
             if (is_null($current->getEnvironmentPath())) {
-                throw new \Exception(
+                throw new RoleEnvironmentnotAvailableException(
                     'No role environment data for the current goal state'
                 );
             }
