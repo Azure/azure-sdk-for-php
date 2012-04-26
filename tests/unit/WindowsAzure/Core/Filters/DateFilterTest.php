@@ -15,48 +15,62 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   Tests\Mock\WindowsAzure\Core\Filters
+ * @package   Tests\Unit\WindowsAzure\Core\Filters
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
- 
-namespace Tests\Mock\WindowsAzure\Core\Filters;
-use Tests\Framework\TestResources;
+
+namespace Tests\Unit\WindowsAzure\Core\Filters;
+use WindowsAzure\Core\Filters\DateFilter;
+use WindowsAzure\Core\Http\HttpClient;
+use WindowsAzure\Resources;
 
 /**
- * Alters request headers and response to mock real filter
+ * Unit tests for class DateFilter
  *
  * @category  Microsoft
- * @package   Tests\Mock\WindowsAzure\Core\Filters
+ * @package   Tests\Unit\WindowsAzure\Core\Filters
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @version   Release: @package_version@
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
-class SimpleFilterMock implements \WindowsAzure\Core\IServiceFilter
+class DateFilterTest extends \PHPUnit_Framework_TestCase
 {
-    private $_headerName;
-    private $_data;
-    
-    public function __construct($headerName, $data)
+    /**
+     * @covers WindowsAzure\Core\Filters\DateFilter::handleRequest
+     */
+    public function testHandleRequest()
     {
-        $this->_data       = $data;
-        $this->_headerName = $headerName;
+        // Setup
+        $channel = new HttpClient();
+        $filter = new DateFilter();
+        
+        // Test
+        $request = $filter->handleRequest($channel);
+        
+        // Assert
+        $this->assertArrayHasKey(Resources::DATE, $request->getHeaders());
     }
     
-    public function handleRequest($request)
+    /**
+     * @covers WindowsAzure\Core\Filters\DateFilter::handleResponse
+     */
+    public function testHandleResponse()
     {
-        $request->setHeader($this->_headerName, $this->_data);
-        return $request;
-    }
-    
-    public function handleResponse($request, $response)
-    {
-        $response->appendBody($this->_data);
-        return $response;
+        // Setup
+        $channel = new HttpClient();
+        $response = null;
+        $filter = new DateFilter();
+        
+        // Test
+        $response = $filter->handleResponse($channel, $response);
+        
+        // Assert
+        $this->assertNull($response);
     }
 }
 

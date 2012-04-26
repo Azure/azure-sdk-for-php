@@ -15,49 +15,45 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   Tests\Mock\WindowsAzure\Core\Filters
+ * @package   WindowsAzure\Core
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
  
-namespace Tests\Mock\WindowsAzure\Core\Filters;
-use Tests\Framework\TestResources;
+namespace WindowsAzure\Core;
 
 /**
- * Alters request headers and response to mock real filter
+ * By implementing this interface you can control how 
+ * WindowsAzure\Core\Configuration creates your object when create
+ * function is called. This can be useful if you want to add any processing layer
+ * to the REST API wrapper (like handeling exceptions). So you can have a builder
+ * with this build function:
+ * <code>
+ * $queueRestWrapper   = new QueueRestProxy(...)
+ * $exceptionProcessor = new ExceptionProcessor($queueRestWrapper);
+ * </code>
  *
  * @category  Microsoft
- * @package   Tests\Mock\WindowsAzure\Core\Filters
+ * @package   WindowsAzure\Core
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @version   Release: @package_version@
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
-class SimpleFilterMock implements \WindowsAzure\Core\IServiceFilter
+interface IServiceBuilder
 {
-    private $_headerName;
-    private $_data;
-    
-    public function __construct($headerName, $data)
-    {
-        $this->_data       = $data;
-        $this->_headerName = $headerName;
-    }
-    
-    public function handleRequest($request)
-    {
-        $request->setHeader($this->_headerName, $this->_data);
-        return $request;
-    }
-    
-    public function handleResponse($request, $response)
-    {
-        $response->appendBody($this->_data);
-        return $response;
-    }
+    /**
+     * Creates an object passed $type configured with $config.
+     *
+     * @param WindowsAzure\Core\Configuration $config The configuration.
+     * @param string                                   $type   The type name.
+     * 
+     * @return mix
+     */
+    public function build($config, $type);
 }
 
 ?>

@@ -15,47 +15,56 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   Tests\Mock\WindowsAzure\Core\Filters
+ * @package   WindowsAzure\Core\Filters
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
  
-namespace Tests\Mock\WindowsAzure\Core\Filters;
-use Tests\Framework\TestResources;
+namespace WindowsAzure\Core\Filters;
+use WindowsAzure\Resources;
+use WindowsAzure\Core\IServiceFilter;
 
 /**
- * Alters request headers and response to mock real filter
+ * Adds date header to the http request.
  *
  * @category  Microsoft
- * @package   Tests\Mock\WindowsAzure\Core\Filters
+ * @package   WindowsAzure\Core\Filters
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @version   Release: @package_version@
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
-class SimpleFilterMock implements \WindowsAzure\Core\IServiceFilter
+class DateFilter implements IServiceFilter
 {
-    private $_headerName;
-    private $_data;
-    
-    public function __construct($headerName, $data)
+    /**
+     * Adds date (in GMT format) header to the request headers.
+     *
+     * @param HttpClient $request HTTP channel object.
+     * 
+     * @return \HTTP_Request2
+     */
+    public function handleRequest($request) 
     {
-        $this->_data       = $data;
-        $this->_headerName = $headerName;
-    }
-    
-    public function handleRequest($request)
-    {
-        $request->setHeader($this->_headerName, $this->_data);
+        $date = gmdate(Resources::AZURE_DATE_FORMAT, time());
+        $request->setHeader(Resources::DATE, $date);
+
         return $request;
     }
-    
-    public function handleResponse($request, $response)
+
+    /**
+     * Does nothing with the response.
+     *
+     * @param HttpClient              $request  HTTP channel object.
+     * @param \HTTP_Request2_Response $response HTTP response object.
+     * 
+     * @return \HTTP_Request2_Response
+     */
+    public function handleResponse($request, $response) 
     {
-        $response->appendBody($this->_data);
+        // Do nothing with the response.
         return $response;
     }
 }

@@ -15,49 +15,38 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   Tests\Mock\WindowsAzure\Core\Filters
+ * @package   WindowsAzure\Core
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
  
-namespace Tests\Mock\WindowsAzure\Core\Filters;
-use Tests\Framework\TestResources;
+namespace WindowsAzure\Core;
 
 /**
- * Alters request headers and response to mock real filter
+ * Interface for service with filers.
  *
  * @category  Microsoft
- * @package   Tests\Mock\WindowsAzure\Core\Filters
+ * @package   WindowsAzure\Core
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @version   Release: @package_version@
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
-class SimpleFilterMock implements \WindowsAzure\Core\IServiceFilter
+interface FilterableService
 {
-    private $_headerName;
-    private $_data;
-    
-    public function __construct($headerName, $data)
-    {
-        $this->_data       = $data;
-        $this->_headerName = $headerName;
-    }
-    
-    public function handleRequest($request)
-    {
-        $request->setHeader($this->_headerName, $this->_data);
-        return $request;
-    }
-    
-    public function handleResponse($request, $response)
-    {
-        $response->appendBody($this->_data);
-        return $response;
-    }
+    /**
+    * Adds new filter to proxy object and returns new BlobRestProxy with
+    * that filter.
+    *
+    * @param WindowsAzure\Core\IServiceFilter $filter Filter to add for 
+    * the pipeline.
+    * 
+    * @return mix.
+    */
+    public function withFilter($filter);
 }
 
 ?>

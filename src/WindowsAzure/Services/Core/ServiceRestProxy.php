@@ -25,9 +25,9 @@
 namespace WindowsAzure\Services\Core;
 use WindowsAzure\Resources;
 use WindowsAzure\Validate;
-use WindowsAzure\Core\Url;
-use WindowsAzure\Core\HttpCallContext;
-use WindowsAzure\Core\IHttpClient;
+use WindowsAzure\Core\Http\Url;
+use WindowsAzure\Core\Http\HttpCallContext;
+use WindowsAzure\Core\Http\IHttpClient;
 use WindowsAzure\Core\WindowsAzureUtilities;
 
 /**
@@ -44,7 +44,7 @@ use WindowsAzure\Core\WindowsAzureUtilities;
 class ServiceRestProxy
 {
     /**
-     * @var WindowsAzure\Core\IHttpClient
+     * @var WindowsAzure\Core\Http\IHttpClient
      */
     private $_channel;
     
@@ -91,7 +91,7 @@ class ServiceRestProxy
     /**
      * Sends HTTP request with the specified HTTP call context.
      * 
-     * @param WindowsAzure\Core\HttpCallContext $context The HTTP call context.
+     * @param WindowsAzure\Core\Http\HttpCallContext $context The HTTP call context.
      * 
      * @return \HTTP_Request2_Response
      */

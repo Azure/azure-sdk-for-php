@@ -22,7 +22,7 @@
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
 namespace Tests\Framework;
-use WindowsAzure\Services\Core\Configuration;
+use WindowsAzure\Core\Configuration;
 use Tests\Framework\TestResources;
 use WindowsAzure\Services\Core\Models\ServiceProperties;
 use WindowsAzure\Core\Serialization\XmlSerializer;
