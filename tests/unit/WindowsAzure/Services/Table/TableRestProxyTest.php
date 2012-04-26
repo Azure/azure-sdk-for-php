@@ -80,9 +80,7 @@ class TableRestProxyTest extends TableServiceRestProxyTestBase
      */
     public function testGetServiceProperties()
     {
-        if (WindowsAzureUtilities::isEmulated()) {
-            $this->markTestSkipped(self::NOT_SUPPORTED);
-        }
+        $this->skipIfEmulated();
         
         // Test
         $result = $this->wrapper->getServiceProperties();
@@ -97,9 +95,7 @@ class TableRestProxyTest extends TableServiceRestProxyTestBase
      */
     public function testSetServiceProperties()
     {
-        if (WindowsAzureUtilities::isEmulated()) {
-            $this->markTestSkipped(self::NOT_SUPPORTED);
-        }
+        $this->skipIfEmulated();
         
         // Setup
         $expected = ServiceProperties::create(TestResources::setServicePropertiesSample());
@@ -118,9 +114,7 @@ class TableRestProxyTest extends TableServiceRestProxyTestBase
      */
     public function testSetServicePropertiesWithEmptyParts()
     {
-        if (WindowsAzureUtilities::isEmulated()) {
-            $this->markTestSkipped(self::NOT_SUPPORTED);
-        }
+        $this->skipIfEmulated();
         
         // Setup
         $xml = TestResources::setServicePropertiesSample();
@@ -289,9 +283,7 @@ class TableRestProxyTest extends TableServiceRestProxyTestBase
      */
     public function testQueryTablesWithPrefix()
     {
-        if (WindowsAzureUtilities::isEmulated()) {
-            $this->markTestSkipped(self::NOT_SUPPORTED);
-        }
+        $this->skipIfEmulated();
         
         // Setup
         $name1 = 'wquerytableswithprefix1';
@@ -402,9 +394,7 @@ class TableRestProxyTest extends TableServiceRestProxyTestBase
      */
     public function testQueryEntitiesWithMultipleEntities()
     {
-        if (WindowsAzureUtilities::isEmulated()) {
-            $this->markTestSkipped(self::NOT_SUPPORTED);
-        }
+        $this->skipIfEmulated();
         
         // Setup
         $name = 'queryentitieswithmultipleentities';
@@ -526,9 +516,7 @@ class TableRestProxyTest extends TableServiceRestProxyTestBase
      */
     public function testUpdateEntityWithDeleteProperty()
     {
-        if (WindowsAzureUtilities::isEmulated()) {
-            $this->markTestSkipped(self::NOT_SUPPORTED);
-        }
+        $this->skipIfEmulated();
         
         // Setup
         $name = 'updateentitywithdeleteproperty';
@@ -599,9 +587,7 @@ class TableRestProxyTest extends TableServiceRestProxyTestBase
      */
     public function testInsertOrReplaceEntity()
     {
-        if (WindowsAzureUtilities::isEmulated()) {
-            $this->markTestSkipped(self::NOT_SUPPORTED);
-        }
+        $this->skipIfEmulated();
         
         // Setup
         $name = 'insertorreplaceentity';
@@ -639,9 +625,7 @@ class TableRestProxyTest extends TableServiceRestProxyTestBase
      */
     public function testInsertOrMergeEntity()
     {
-        if (WindowsAzureUtilities::isEmulated()) {
-            $this->markTestSkipped(self::NOT_SUPPORTED);
-        }
+        $this->skipIfEmulated();
         
         // Setup
         $name = 'insertormergeentity';
@@ -915,9 +899,7 @@ class TableRestProxyTest extends TableServiceRestProxyTestBase
      */
     public function testBatchWithInsertOrReplace()
     {
-        if (WindowsAzureUtilities::isEmulated()) {
-            $this->markTestSkipped(self::NOT_SUPPORTED);
-        }
+        $this->skipIfEmulated();
         
         // Setup
         $name = 'batchwithinsertorreplace';
@@ -962,9 +944,7 @@ class TableRestProxyTest extends TableServiceRestProxyTestBase
      */
     public function testBatchWithInsertOrMerge()
     {
-        if (WindowsAzureUtilities::isEmulated()) {
-            $this->markTestSkipped(self::NOT_SUPPORTED);
-        }
+        $this->skipIfEmulated();
         
         // Setup
         $name = 'batchwithinsertormerge';

@@ -110,7 +110,7 @@ class WindowsAzureUtilities
         if (!is_null($metadata)) {
             Validate::isArray($metadata, 'metadata');
         } else {
-            // We accept NULL metadata.
+            // Accept NULL metadata.
             return;
         }
         
@@ -142,7 +142,7 @@ class WindowsAzureUtilities
      */
     public static function isEmulated()
     {
-        return getenv(Resources::EMULATED);
+        return (bool)getenv(Resources::EMULATED);
     }
 }
 
