@@ -12,6 +12,7 @@ spl_autoload_register(
             'tests\\framework\\blobservicerestproxytestbase' => '/framework/BlobServiceRestProxyTestBase.php',
             'tests\\framework\\fiddlerfilter' => '/framework/FiddlerFilter.php',
             'tests\\framework\\queueservicerestproxytestbase' => '/framework/QueueServiceRestProxyTestBase.php',
+            'tests\\framework\\restproxytestbase' => '/framework/RestProxyTestBase.php',
             'tests\\framework\\servicerestproxytestbase' => '/framework/ServiceRestProxyTestBase.php',
             'tests\\framework\\tableservicerestproxytestbase' => '/framework/TableServiceRestProxyTestBase.php',
             'tests\\framework\\testresources' => '/framework/TestResources.php',

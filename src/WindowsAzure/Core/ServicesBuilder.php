@@ -70,8 +70,7 @@ class ServicesBuilder implements IServiceBuilder
         switch ($type) {
         case Resources::QUEUE_TYPE_NAME:
         case Resources::BLOB_TYPE_NAME:
-        case Resources::SERVICE_MANAGEMENT_TYPE_NAME:
-            $headers[Resources::X_MS_VERSION] = Resources::API_VERSION;
+            $headers[Resources::X_MS_VERSION] = Resources::STORAGE_API_LATEST_VERSION;
             break;
         
         case Resources::TABLE_TYPE_NAME:
@@ -80,12 +79,16 @@ class ServicesBuilder implements IServiceBuilder
             $accept         = Resources::ACCEPT_HEADER_VALUE;
             $acceptCharset  = Resources::ACCEPT_CHARSET_VALUE;
             
-            $headers[Resources::X_MS_VERSION]             = Resources::API_VERSION;
+            $headers[Resources::X_MS_VERSION]             = Resources::STORAGE_API_LATEST_VERSION;
             $headers[Resources::DATA_SERVICE_VERSION]     = $currentVersion;
             $headers[Resources::MAX_DATA_SERVICE_VERSION] = $maxVersion;
             $headers[Resources::MAX_DATA_SERVICE_VERSION] = $maxVersion;
             $headers[Resources::ACCEPT_HEADER]            = $accept;
             $headers[Resources::ACCEPT_CHARSET]           = $acceptCharset;
+            break;
+        
+        case Resources::SERVICE_MANAGEMENT_TYPE_NAME:
+            $headers[Resources::X_MS_VERSION] = Resources::SM_API_LATEST_VERSION;
             break;
 
         default:
@@ -226,9 +229,11 @@ class ServicesBuilder implements IServiceBuilder
      */
     private function _buildServiceManagement($config)
     {
-        $certificatePath = ServiceManagementSettings::CERTIFICATE_PATH;
-        $httpClient      = new HttpClient($certificatePath);
-        $xmlSerializer   = new XmlSerializer();
+        $certificatePath          = $config->getProperty(
+            ServiceManagementSettings::CERTIFICATE_PATH
+        );
+        $httpClient               = new HttpClient($certificatePath);
+        $xmlSerializer            = new XmlSerializer();
 
         $serviceManagementWrapper = new ServiceManagementRestProxy(
             $httpClient,
