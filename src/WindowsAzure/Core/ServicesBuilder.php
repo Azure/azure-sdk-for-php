@@ -66,11 +66,12 @@ class ServicesBuilder implements IServiceBuilder
      */
     private function _addHeadersFilter($wrapper, $type)
     {
-        $headers = array();
+        $headers               = array();
+        $latestServicesVersion = Resources::STORAGE_API_LATEST_VERSION;
         switch ($type) {
         case Resources::QUEUE_TYPE_NAME:
         case Resources::BLOB_TYPE_NAME:
-            $headers[Resources::X_MS_VERSION] = Resources::STORAGE_API_LATEST_VERSION;
+            $headers[Resources::X_MS_VERSION] = $latestServicesVersion;
             break;
         
         case Resources::TABLE_TYPE_NAME:
@@ -79,7 +80,7 @@ class ServicesBuilder implements IServiceBuilder
             $accept         = Resources::ACCEPT_HEADER_VALUE;
             $acceptCharset  = Resources::ACCEPT_CHARSET_VALUE;
             
-            $headers[Resources::X_MS_VERSION]             = Resources::STORAGE_API_LATEST_VERSION;
+            $headers[Resources::X_MS_VERSION]             = $latestServicesVersion;
             $headers[Resources::DATA_SERVICE_VERSION]     = $currentVersion;
             $headers[Resources::MAX_DATA_SERVICE_VERSION] = $maxVersion;
             $headers[Resources::MAX_DATA_SERVICE_VERSION] = $maxVersion;
@@ -234,7 +235,6 @@ class ServicesBuilder implements IServiceBuilder
         );
         $httpClient               = new HttpClient($certificatePath);
         $xmlSerializer            = new XmlSerializer();
-
         $serviceManagementWrapper = new ServiceManagementRestProxy(
             $httpClient,
             $config->getProperty(ServiceManagementSettings::SUBSCRIPTION_ID),
