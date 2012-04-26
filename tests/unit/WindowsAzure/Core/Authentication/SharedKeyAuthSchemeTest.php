@@ -73,7 +73,7 @@ class SharedKeyAuthSchemeTest extends \PHPUnit_Framework_TestCase
         $queryParams = array(Resources::QP_COMP => 'list');
         $url = TestResources::URI1;
         $date = TestResources::DATE1;
-        $apiVersion = Resources::API_VERSION;
+        $apiVersion = Resources::STORAGE_API_LATEST_VERSION;
         $accountName = TestResources::ACCOUNT_NAME;
         $headers = array(Resources::X_MS_DATE => $date, Resources::X_MS_VERSION => $apiVersion);
         $expected = "GET\n\n\n\n\n\n\n\n\n\n\n\n" . Resources::X_MS_DATE . ":$date\n" . Resources::X_MS_VERSION . 
@@ -91,7 +91,7 @@ class SharedKeyAuthSchemeTest extends \PHPUnit_Framework_TestCase
     public function testGetAuthorizationHeaderSimple()
     {
         $accountName = TestResources::ACCOUNT_NAME;
-        $apiVersion = Resources::API_VERSION;
+        $apiVersion = Resources::STORAGE_API_LATEST_VERSION;
         $accountKey = TestResources::KEY4;
         $url = TestResources::URI2;
         $date1 = TestResources::DATE2;

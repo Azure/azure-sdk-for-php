@@ -138,10 +138,11 @@ class Resources
     const EMULATOR_QUEUE_URI = '127.0.0.1:10001';
     const EMULATOR_TABLE_URI = '127.0.0.1:10002';
     const ASTERISK           = '*';
+    const SM_URL             = 'https://management.core.windows.net';
 
     // Header values
-    const API_VERSION                    = '2011-08-18';
-    const API_VERSION_2009_4             = '2009-04-14';
+    const STORAGE_API_LATEST_VERSION     = '2011-08-18';
+    const SM_API_LATEST_VERSION          = '2011-10-01';
     const DATA_SERVICE_VERSION_VALUE     = '1.0;NetFx';
     const MAX_DATA_SERVICE_VERSION_VALUE = '2.0;NetFx';
     const ACCEPT_HEADER_VALUE            = 'application/atom+xml,application/xml';

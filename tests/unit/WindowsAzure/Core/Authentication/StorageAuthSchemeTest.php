@@ -59,10 +59,10 @@ class StorageAuthSchemeTest extends \PHPUnit_Framework_TestCase
         $date = TestResources::DATE1;
         $headers = array();
         $headers[Resources::X_MS_DATE] = $date;
-        $headers[Resources::X_MS_VERSION] = Resources::API_VERSION;
+        $headers[Resources::X_MS_VERSION] = Resources::STORAGE_API_LATEST_VERSION;
         $expected = array();
         $expected[] = Resources::X_MS_DATE . ':' . $date;
-        $expected[] = Resources::X_MS_VERSION . ':' . Resources::API_VERSION;
+        $expected[] = Resources::X_MS_VERSION . ':' . Resources::STORAGE_API_LATEST_VERSION;
         $mock = new StorageAuthSchemeMock(TestResources::ACCOUNT_NAME, TestResources::KEY4);
 
         $actual = $mock->computeCanonicalizedHeadersMock($headers);
