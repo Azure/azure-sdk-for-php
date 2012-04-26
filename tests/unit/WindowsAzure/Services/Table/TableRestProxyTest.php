@@ -526,6 +526,10 @@ class TableRestProxyTest extends TableServiceRestProxyTestBase
      */
     public function testUpdateEntityWithDeleteProperty()
     {
+        if (WindowsAzureUtilities::isEmulated()) {
+            $this->markTestSkipped(self::NOT_SUPPORTED);
+        }
+        
         // Setup
         $name = 'updateentitywithdeleteproperty';
         $this->createTable($name);
@@ -595,6 +599,10 @@ class TableRestProxyTest extends TableServiceRestProxyTestBase
      */
     public function testInsertOrReplaceEntity()
     {
+        if (WindowsAzureUtilities::isEmulated()) {
+            $this->markTestSkipped(self::NOT_SUPPORTED);
+        }
+        
         // Setup
         $name = 'insertorreplaceentity';
         $this->createTable($name);
@@ -631,6 +639,10 @@ class TableRestProxyTest extends TableServiceRestProxyTestBase
      */
     public function testInsertOrMergeEntity()
     {
+        if (WindowsAzureUtilities::isEmulated()) {
+            $this->markTestSkipped(self::NOT_SUPPORTED);
+        }
+        
         // Setup
         $name = 'insertormergeentity';
         $this->createTable($name);
@@ -903,6 +915,10 @@ class TableRestProxyTest extends TableServiceRestProxyTestBase
      */
     public function testBatchWithInsertOrReplace()
     {
+        if (WindowsAzureUtilities::isEmulated()) {
+            $this->markTestSkipped(self::NOT_SUPPORTED);
+        }
+        
         // Setup
         $name = 'batchwithinsertorreplace';
         $this->createTable($name);
@@ -946,6 +962,10 @@ class TableRestProxyTest extends TableServiceRestProxyTestBase
      */
     public function testBatchWithInsertOrMerge()
     {
+        if (WindowsAzureUtilities::isEmulated()) {
+            $this->markTestSkipped(self::NOT_SUPPORTED);
+        }
+        
         // Setup
         $name = 'batchwithinsertormerge';
         $this->createTable($name);

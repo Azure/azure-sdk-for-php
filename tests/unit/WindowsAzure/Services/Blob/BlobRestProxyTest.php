@@ -543,6 +543,10 @@ class BlobRestProxyTest extends BlobServiceRestProxyTestBase
     */
     public function testListBlobsWithOptionsWithDelimiter()
     {
+        if (WindowsAzureUtilities::isEmulated()) {
+            $this->markTestSkipped(self::NOT_SUPPORTED);
+        }
+        
         // Setup
         $name  = 'listblobswithoptionswithdelimiter';
         $blob1 = 'blob1';
