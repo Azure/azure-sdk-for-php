@@ -25,7 +25,7 @@
 namespace WindowsAzure\ServiceRuntime;
 
 /**
- * The file input channel.
+ * The local resource.
  *
  * @category  Microsoft
  * @package   WindowsAzure\ServiceRuntime
@@ -35,41 +35,67 @@ namespace WindowsAzure\ServiceRuntime;
  * @version   Release: @package_version@
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
-class FileInputChannel implements IInputChannel
+class LocalResource
 {
     /**
-     * @var Resource
+     * @var int
      */
-    private $_inputStream;
+    private $_maximumSizeInMegabytes;
+
+    /**
+     * @var string
+     */
+    private $_name;
     
     /**
-     * Gets the input stream.
-     * 
-     * @param string $name The input stream path.
-     * 
-     * @return none
+     * @var string
      */
-    public function getInputStream($name)
+    private $_rootPath;
+   
+    /**
+     * Package accessible constructor.
+     * 
+     * @param string $maximumSizeInMegabytes Maximum size in megabytes.
+     * @param string $name                   The name.
+     * @param string $rootPath               The root path.
+     */
+    public function __construct ($maximumSizeInMegabytes, $name, $rootPath)
     {
-        $this->_inputStream = @fopen($name, 'r');
-        if ($this->_inputStream) {
-            return $this->_inputStream;
-        } else {
-            throw new ChannelNotAvailableException();
-        }
+        $this->_maximumSizeInMegabytes = $maximumSizeInMegabytes;
+        $this->_name                   = $name;
+        $this->_rootPath               = $rootPath;
     }
     
     /**
-     * Closes the input stream.
+     * Returns the maximum size, in megabytes, allocated for the local storage
+     * resource, as defined in the service.
      * 
-     * @return none
+     * @return int
      */
-    public function closeInputStream() 
+    public function getMaximumSizeInMegabytes()
     {
-        if (!is_null($this->_inputStream)) {
-            fclose($this->_inputStream);
-            $this->_inputStream = null;
-        }
+        return $this->_maximumSizeInMegabytes;
+    }
+
+    /**
+     * Returns the name of the local store as declared in the service definition
+     * file.
+     * 
+     * @return string
+     */
+    public function getName()
+    {
+        return $this->_name;
+    }
+
+    /**
+     * Returns the full directory path to the local storage resource.
+     * 
+     * @return string
+     */
+    public function getRootPath()
+    {
+        return $this->_rootPath;
     }
 }
 
