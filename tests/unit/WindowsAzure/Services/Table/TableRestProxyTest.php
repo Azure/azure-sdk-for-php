@@ -40,6 +40,7 @@ use WindowsAzure\Services\Table\Models\Entity;
 use WindowsAzure\Services\Table\Models\EdmType;
 use WindowsAzure\Services\Table\Models\QueryEntitiesOptions;
 use WindowsAzure\Services\Table\Models\BatchOperations;
+use WindowsAzure\Core\Serialization\XmlSerializer;
 
 /**
  * Unit tests for class TableRestProxy
@@ -63,10 +64,11 @@ class TableRestProxyTest extends TableServiceRestProxyTestBase
         $channel = new HttpClient();
         $atomSerializer = new AtomReaderWriter();
         $mimeSerializer = new MimeReaderWriter();
+        $xmlSerializer = new XmlSerializer();
         $url = 'http:://www.microsoft.com';
         
         // Test
-        $tableRestProxy = new TableRestProxy($channel, $atomSerializer, $mimeSerializer, $url);
+        $tableRestProxy = new TableRestProxy($channel, $atomSerializer, $mimeSerializer, $url, $xmlSerializer);
         
         // Assert
         $this->assertNotNull($tableRestProxy);
@@ -107,7 +109,7 @@ class TableRestProxyTest extends TableServiceRestProxyTestBase
         $actual = $this->wrapper->getServiceProperties();
         
         // Assert
-        $this->assertEquals($expected->toXml(), $actual->getValue()->toXml());
+        $this->assertEquals($expected->toXml($this->xmlSerializer), $actual->getValue()->toXml($this->xmlSerializer));
     }
     
     /**
@@ -130,7 +132,7 @@ class TableRestProxyTest extends TableServiceRestProxyTestBase
         $actual = $this->wrapper->getServiceProperties();
         
         // Assert
-        $this->assertEquals($expected->toXml(), $actual->getValue()->toXml());
+        $this->assertEquals($expected->toXml($this->xmlSerializer), $actual->getValue()->toXml($this->xmlSerializer));
     }
     
     /**

@@ -28,6 +28,7 @@ use WindowsAzure\Core\HttpClient;
 use WindowsAzure\Core\Url;
 use Tests\Mock\WindowsAzure\Services\Core\Filters\SimpleFilterMock;
 use WindowsAzure\Services\Blob\Models\AccessCondition;
+use WindowsAzure\Core\Serialization\XmlSerializer;
 
 /**
  * Unit tests for class ServiceRestProxy
@@ -48,11 +49,12 @@ class ServiceRestProxyTest extends \PHPUnit_Framework_TestCase
     public function test__construct()
     {
         // Setup
-        $channel = new HttpClient();
-        $url     = new Url('http://www.microsoft.com');
+        $channel       = new HttpClient();
+        $url           = new Url('http://www.microsoft.com');
+        $xmlSerializer = new XmlSerializer();
         
         // Test
-        $actual = new ServiceRestProxy($channel, $url);
+        $actual = new ServiceRestProxy($channel, $url, $xmlSerializer);
         
         // Assert
         $this->assertTrue(isset($actual));
