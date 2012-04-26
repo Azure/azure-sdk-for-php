@@ -26,6 +26,7 @@ use Tests\Framework\TestResources;
 use WindowsAzure\ServiceRuntime\ChannelNotAvailableException;
 use WindowsAzure\ServiceRuntime\FileInputChannel;
 use WindowsAzure\ServiceRuntime\RoleEnvironment;
+use WindowsAzure\ServiceRuntime\RoleEnvironmentNotAvailableException;
 use WindowsAzure\ServiceRuntime\RoleInstanceStatus;
 use WindowsAzure\ServiceRuntime\RuntimeKernel;
 
@@ -44,6 +45,19 @@ require_once 'vfsStream/vfsStream.php';
  */
 class RoleEnvironmentTest extends \PHPUnit_Framework_TestCase
 {
+    public function testRoleNotAvailable()
+    {
+        // Setup
+        putenv('WaRuntimeEndpoint=');
+        
+        // Test
+        $this->setExpectedException(get_class(
+            new RoleEnvironmentNotAvailableException()
+        ));
+
+        RoleEnvironment::getCurrentRoleInstance();
+    }
+    
     /**
      * @covers WindowsAzure\ServiceRuntime\RoleEnvironment::_initialize
      * @covers WindowsAzure\ServiceRuntime\RoleEnvironment::init
@@ -55,7 +69,7 @@ class RoleEnvironmentTest extends \PHPUnit_Framework_TestCase
         
         try {
             RoleEnvironment::getDeploymentId();
-        } catch (ChannelNotAvailableException $exception) { }
+        } catch (RoleEnvironmentNotAvailableException $exception) { }
         
         $endpoint = self::getStaticPropertyValue('_versionEndpoint');
         
@@ -66,7 +80,7 @@ class RoleEnvironmentTest extends \PHPUnit_Framework_TestCase
 
         try {
             RoleEnvironment::getDeploymentId();
-        } catch (ChannelNotAvailableException $exception) { }
+        } catch (RoleEnvironmentNotAvailableException $exception) { }
         
         $endpoint = self::getStaticPropertyValue('_versionEndpoint');
         

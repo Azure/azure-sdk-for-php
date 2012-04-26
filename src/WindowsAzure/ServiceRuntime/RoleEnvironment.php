@@ -143,32 +143,38 @@ class RoleEnvironment
      */
     private static function _initialize($keepOpen = false)
     {
-        if (is_null(self::$_runtimeClient)) {
-            self::$_versionEndpoint = getenv(
-                self::VERSION_ENDPOINT_ENVIRONMENT_NAME
-            );
-            
-            if (self::$_versionEndpoint == false) {
-                self::$_versionEndpoint = self::VERSION_ENDPOINT_FIXED_PATH;
-            }
+        try {
+            if (is_null(self::$_runtimeClient)) {
+                self::$_versionEndpoint = getenv(
+                    self::VERSION_ENDPOINT_ENVIRONMENT_NAME
+                );
 
-            $kernel = RuntimeKernel::getKernel();
-            $kernel->getProtocol1RuntimeGoalStateClient()->setKeepOpen($keepOpen);
-            
-            self::$_runtimeClient = $kernel->getRuntimeVersionManager()
-                ->getRuntimeClient(self::$_versionEndpoint);
-            
-            self::$_currentGoalState = self::$_runtimeClient
-                ->getCurrentGoalState();
-            
-            self::$_currentEnvironmentData = self::$_runtimeClient
-                ->getRoleEnvironmentData();
-        } else {
-            self::$_currentGoalState = self::$_runtimeClient
-                ->getCurrentGoalState();
-            
-            self::$_currentEnvironmentData = self::$_runtimeClient
-                ->getRoleEnvironmentData();
+                if (self::$_versionEndpoint == false) {
+                    self::$_versionEndpoint = self::VERSION_ENDPOINT_FIXED_PATH;
+                }
+
+                $kernel = RuntimeKernel::getKernel();
+                $kernel->getProtocol1RuntimeGoalStateClient()->setKeepOpen(
+                    $keepOpen
+                );
+
+                self::$_runtimeClient = $kernel->getRuntimeVersionManager()
+                    ->getRuntimeClient(self::$_versionEndpoint);
+
+                self::$_currentGoalState = self::$_runtimeClient
+                    ->getCurrentGoalState();
+
+                self::$_currentEnvironmentData = self::$_runtimeClient
+                    ->getRoleEnvironmentData();
+            } else {
+                self::$_currentGoalState = self::$_runtimeClient
+                    ->getCurrentGoalState();
+
+                self::$_currentEnvironmentData = self::$_runtimeClient
+                    ->getRoleEnvironmentData();
+            }
+        } catch (ChannelNotAvailableException $ex) {
+            throw new RoleEnvironmentnotAvailableException();
         }
     }
 
