@@ -15,40 +15,48 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   WindowsAzure\ServiceManagement\Models
+ * @package   Tests\Unit\WindowsAzure\ServiceManagement
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
- 
-namespace WindowsAzure\ServiceManagement\Models;
+
+namespace Tests\Unit\WindowsAzure\ServiceManagement;
+use Tests\Framework\TestResources;
+use WindowsAzure\Core\Configuration;
+use WindowsAzure\ServiceManagement\ServiceManagementSettings;
+use WindowsAzure\ServiceManagement\ServiceManagementService;
 
 /**
- * Available data center locations on Windows Azure.
+ * Unit tests for class ServiceManagementService
  *
  * @category  Microsoft
- * @package   WindowsAzure\ServiceManagement\Models
+ * @package   Tests\Unit\WindowsAzure\ServiceManagement
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @version   Release: @package_version@
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
-class Locations
+class ServiceManagementServiceTest extends \PHPUnit_Framework_TestCase
 {
-    const ANYWHERE_US      = 'Anywhere US';
-    const NORTH_CENTRAL_US = 'North Central US';
-    const SOUTH_CENTRAL_US = 'South Central US';
-    const WEST_US          = 'West US';
-    const EAST_US          = 'East US';
-    const ANYWHERE_EUROPE  = 'Anywhere Europe';
-    const WEST_EUROPE      = 'West Europe';
-    const NORTH_EUROPE     = 'North Europe';
-    const ANYWHERE_ASIA    = 'Anywhere Asia';
-    const SOUTHEAST_ASIA   = 'Southeast Asia';
-    const EAST_ASIA        = 'East Asia';
-    const COUNT            = 11;
+    /**
+     * @covers WindowsAzure\ServiceManagement\ServiceManagementService::create
+     */
+    public function testCreateWithConfig()
+    {
+        // Setup
+        $config = new Configuration();
+        $config->setProperty(ServiceManagementSettings::SUBSCRIPTION_ID, '1234-45432');
+        $config->setProperty(ServiceManagementSettings::CERTIFICATE_PATH, '1234');
+        
+        // Test
+        $servicemanagementWrapper = ServiceManagementService::create($config);
+        
+        // Assert
+        $this->assertInstanceOf('WindowsAzure\ServiceManagement\IServiceManagement', $servicemanagementWrapper);
+    }
 }
 
 ?>

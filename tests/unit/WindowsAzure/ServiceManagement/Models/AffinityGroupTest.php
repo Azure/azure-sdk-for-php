@@ -170,6 +170,31 @@ class AffinityGroupTest extends \PHPUnit_Framework_TestCase
         // Test
         $affinityGroup->serialize(new AffinityGroup());        
     }
+    
+    /**
+     * @covers WindowsAzure\ServiceManagement\Models\AffinityGroup::create
+     */
+    public function testCreate()
+    {
+        // Setup
+        $name = 'name';
+        $location = 'Anywhere US';
+        $label = base64_encode($name);
+        $arr = array(
+            Resources::XTAG_NAME => $name,
+            Resources::XTAG_LOCATION => $location,
+            Resources::XTAG_LABEL => $label,
+        );
+        
+        // Test
+        $actual = AffinityGroup::create($arr);
+        
+        // Assert
+        $this->assertEquals($name, $actual->getName());
+        $this->assertEquals($location, $actual->getLocation());
+        $this->assertEquals($label, $actual->getLabel());
+        $this->assertNull($actual->getDescription());
+    }
 }
 
 ?>

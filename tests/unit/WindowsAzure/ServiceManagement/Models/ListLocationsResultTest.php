@@ -15,40 +15,46 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   WindowsAzure\ServiceManagement\Models
+ * @package   Tests\Unit\WindowsAzure\ServiceManagement\Models
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
- 
-namespace WindowsAzure\ServiceManagement\Models;
+
+namespace Tests\Unit\WindowsAzure\ServiceManagement\Models;
+use WindowsAzure\ServiceManagement\Models\ListLocationsResult;
 
 /**
- * Available data center locations on Windows Azure.
+ * Unit tests for class ListLocationsResult
  *
  * @category  Microsoft
- * @package   WindowsAzure\ServiceManagement\Models
+ * @package   Tests\Unit\WindowsAzure\ServiceManagement\Models
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @version   Release: @package_version@
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
-class Locations
+class ListLocationsResultTest extends \PHPUnit_Framework_TestCase
 {
-    const ANYWHERE_US      = 'Anywhere US';
-    const NORTH_CENTRAL_US = 'North Central US';
-    const SOUTH_CENTRAL_US = 'South Central US';
-    const WEST_US          = 'West US';
-    const EAST_US          = 'East US';
-    const ANYWHERE_EUROPE  = 'Anywhere Europe';
-    const WEST_EUROPE      = 'West Europe';
-    const NORTH_EUROPE     = 'North Europe';
-    const ANYWHERE_ASIA    = 'Anywhere Asia';
-    const SOUTHEAST_ASIA   = 'Southeast Asia';
-    const EAST_ASIA        = 'East Asia';
-    const COUNT            = 11;
+    /**
+     * @covers WindowsAzure\ServiceManagement\Models\ListLocationsResult::setLocations
+     * @covers WindowsAzure\ServiceManagement\Models\ListLocationsResult::getLocations
+     */
+    public function testSetLocations()
+    {
+        // Setup
+        $result = new ListLocationsResult();
+        $expected = array('Anywhere US', 'West US');
+        
+        // Test
+        $result->setLocations($expected);
+        
+        
+        // Assert
+        $this->assertEquals($expected, $result->getLocations());
+    }
 }
 
 ?>

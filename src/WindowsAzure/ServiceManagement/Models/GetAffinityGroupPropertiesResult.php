@@ -76,11 +76,25 @@ class GetAffinityGroupPropertiesResult
         $result->_affinityGroup = AffinityGroup::create($parsed);
         
         foreach ($hostedServices as $value) {
-            $result->_hostedServices[] = Service::create($value);
+            $service = new Service();
+            $service->setServiceName(
+                Utilities::tryGetValue($value, Resources::XTAG_SERVICE_NAME)
+            );
+            $service->setUrl(
+                Utilities::tryGetValue($value, Resources::XTAG_URL)
+            );
+            $result->_hostedServices[] = $service;
         }
         
         foreach ($storageAccounts as $value) {
-            $result->_storageServices[] = Service::create($value);
+            $service = new Service();
+            $service->setServiceName(
+                Utilities::tryGetValue($value, Resources::XTAG_SERVICE_NAME)
+            );
+            $service->setUrl(
+                Utilities::tryGetValue($value, Resources::XTAG_URL)
+            );
+            $result->_storageServices[] = $service;
         }
         
         return $result;

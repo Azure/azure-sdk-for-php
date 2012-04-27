@@ -27,7 +27,6 @@ use Tests\Framework\ServiceManagementRestProxyTestBase;
 use WindowsAzure\Core\Http\HttpClient;
 use WindowsAzure\Core\Serialization\XmlSerializer;
 use WindowsAzure\ServiceManagement\ServiceManagementRestProxy;
-use WindowsAzure\ServiceManagement\Models\CreateAffinityGroupOptions;
 use WindowsAzure\ServiceManagement\Models\Locations;
 
 /**
@@ -58,6 +57,47 @@ class ServiceManagementRestProxyTest extends ServiceManagementRestProxyTestBase
         
         // Assert
         $this->assertNotNull($actual);
+    }
+    
+    /**
+     * This test makes sure that the list of location constants in the SDK are 
+     * consistant with what is used by Windows Azure.
+     * 
+     * @covers WindowsAzure\ServiceManagement\Models\Locations
+     */
+    public function testLocations()
+    {
+        // Setup
+        $locations = array(
+            Locations::ANYWHERE_ASIA,
+            Locations::ANYWHERE_EUROPE,
+            Locations::ANYWHERE_US,
+            Locations::EAST_ASIA,
+            Locations::WEST_US,
+            Locations::EAST_US,
+            Locations::NORTH_CENTRAL_US,
+            Locations::NORTH_EUROPE,
+            Locations::SOUTHEAST_ASIA,
+            Locations::SOUTH_CENTRAL_US,
+            Locations::WEST_EUROPE
+        );
+        
+        // Test
+        $actual = $this->wrapper->listLocations();
+        
+        // Assert
+        $windowsAzureLocations = $actual->getLocations();
+        $this->assertCount(count($locations), $windowsAzureLocations);
+        foreach ($locations as $value) {
+            $exists = false;
+            foreach ($windowsAzureLocations as $location) {
+                if ($value == $location->getName()) {
+                    $exists = true;
+                    break;
+                }
+            }
+            $this->assertTrue($exists);
+        }
     }
     
     /**
@@ -176,17 +216,13 @@ class ServiceManagementRestProxyTest extends ServiceManagementRestProxyTestBase
         $label = base64_encode($name);
         $location = 'West US';
         $expectedLabel = base64_encode('newlabel');
-        $expectedDesc = 'My affinity group';
         $this->createAffinityGroup($name, $label, $location);
-        $options = new CreateAffinityGroupOptions();
-        $options->setDescription($expectedDesc);
         
         // Test
-        $this->wrapper->updateAffinityGroup($name, $expectedLabel, $options);
+        $this->wrapper->updateAffinityGroup($name, $expectedLabel);
         
         // Assert
         $affinityGroup = $this->getAffinityGroup($name);
-        $this->assertEquals($expectedDesc, $affinityGroup->getDescription());
         $this->assertEquals($expectedLabel, $affinityGroup->getLabel());
     }
     
