@@ -41,13 +41,14 @@ class TableService
     /**
      * Creates new object based on the builder type in the $config.
      *
-     * @param WindowsAzure\Services\Core\Configuration $config config object.
+     * @param WindowsAzure\Core\Configuration    $config  The config object.
+     * @param WindowsAzure\Core\IServicesBuilder $builder The builder object.
      * 
-     * @return WindowsAzure\Services\Table\ITable.
+     * @return WindowsAzure\Services\Table\ITable
      */
-    public static function create($config)
+    public static function create($config, $builder = null)
     {
-        return $config->create(Resources::TABLE_TYPE_NAME);
+        return $config->create(Resources::TABLE_TYPE_NAME, $builder);
     }
 }
 

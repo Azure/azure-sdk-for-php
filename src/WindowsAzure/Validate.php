@@ -49,10 +49,10 @@ class Validate
      * 
      * @return none
      */
-    public static function isArray($var, $name = null)
+    public static function isArray($var, $name)
     {
         if (!is_array($var)) {
-            throw new InvalidArgumentTypeException($name, gettype(array()));
+            throw new InvalidArgumentTypeException(gettype(array()), $name);
         }
     }
 
@@ -66,7 +66,7 @@ class Validate
      * 
      * @return none
      */
-    public static function isString($var, $name = null)
+    public static function isString($var, $name)
     {
         try {
             (string)$var;
@@ -99,11 +99,11 @@ class Validate
      *
      * @return none
      */
-    public static function notNullOrEmpty($var, $name = null)
+    public static function notNullOrEmpty($var, $name)
     {
         if (is_null($var) || empty($var)) {
             throw new \InvalidArgumentException(
-                sprintf(Resources::NULL_ERROR_MSG, $name)
+                sprintf(Resources::NULL_OR_EMPTY_MSG, $name)
             );
         }
     }
@@ -118,7 +118,7 @@ class Validate
      * 
      * @return none
      */
-    public static function isInteger($var, $name = null)
+    public static function isInteger($var, $name)
     {
         try {
             (int)$var;
@@ -168,7 +168,23 @@ class Validate
             throw new InvalidArgumentTypeException('DateTime');
         }
     }
-
+    
+    /**
+     * Throws exception if the provided variable is set to null.
+     *
+     * @param mix    $var  The variable to check.
+     * @param string $name The parameter name.
+     *
+     * @throws \InvalidArgumentException
+     *
+     * @return none
+     */
+    public static function notNull($var, $name)
+    {
+        if (is_null($var)) {
+            throw new \InvalidArgumentException(sprintf(Resources::NULL_MSG, $name));
+        }
+    }
 }
 
 ?>

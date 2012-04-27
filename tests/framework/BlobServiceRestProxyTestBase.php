@@ -24,7 +24,7 @@
 
 namespace Tests\Framework;
 use Tests\Framework\ServiceRestProxyTestBase;
-use WindowsAzure\Services\Core\Configuration;
+use WindowsAzure\Core\Configuration;
 use WindowsAzure\Services\Blob\BlobSettings;
 use WindowsAzure\Services\Blob\BlobService;
 use Tests\Framework\TestResources;

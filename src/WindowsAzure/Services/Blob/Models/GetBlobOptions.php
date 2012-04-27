@@ -153,7 +153,7 @@ class GetBlobOptions extends BlobServiceOptions
      */
     public function setRangeStart($rangeStart)
     {
-        Validate::isInteger($rangeStart);
+        Validate::isInteger($rangeStart, 'rangeStart');
         $this->_rangeStart = $rangeStart;
     }
     
@@ -176,7 +176,7 @@ class GetBlobOptions extends BlobServiceOptions
      */
     public function setRangeEnd($rangeEnd)
     {
-        Validate::isInteger($rangeEnd);
+        Validate::isInteger($rangeEnd, 'rangeEnd');
         $this->_rangeEnd = $rangeEnd;
     }
     

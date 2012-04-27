@@ -42,7 +42,8 @@ class Resources
     const INVALID_META_MSG     = 'Metadata cannot contain newline characters.';
     const AZURE_ERROR_MSG      = "Fail:\nCode: %s\nValue: %s\ndetails (if any): %s.";
     const NOT_IMPLEMENTED_MSG  = 'This method is not implemented.';
-    const NULL_ERROR_MSG       = "'%s' can't be NULL or empty.";
+    const NULL_OR_EMPTY_MSG    = "'%s' can't be NULL or empty.";
+    const NULL_MSG             = "'%s' can't be NULL.";
     const INVALID_URL_MSG      = 'Provided URL is invalid.';
     const INVALID_HT_MSG       = 'The header type provided is invalid.';
     const INVALID_EDM_MSG      = 'The provided EDM type is invalid.';
@@ -53,7 +54,7 @@ class Resources
     const INVALID_BO_PN_MSG    = 'Batch operation parameter is not supported.';
     const INVALID_OC_COUNT_MSG = 'Operations and contexts must be of same size.';
     const INVALID_EXC_OBJ_MSG  = 'Exception object type should be ServiceException.';
-    const NULL_TABLE_KEY_MSG   = 'Partition and raw keys can\'t be NULL.';
+    const NULL_TABLE_KEY_MSG   = 'Partition and row keys can\'t be NULL.';
     const BATCH_ENTITY_DEL_MSG = 'The entity was deleted successfully.';
     const INVALID_PROP_VAL_MSG = "'%s' property value must satisfy %s.";
     const INVALID_PARAM_MSG    = "The provided variable '%s' should be of type '%s'";
@@ -120,9 +121,10 @@ class Resources
     const ACCEPT_CHARSET                   = 'accept-charset';
     
     // Type
-    const QUEUE_TYPE_NAME = 'IQueue';
-    const BLOB_TYPE_NAME  = 'IBlob';
-    const TABLE_TYPE_NAME = 'ITable';
+    const QUEUE_TYPE_NAME              = 'IQueue';
+    const BLOB_TYPE_NAME               = 'IBlob';
+    const TABLE_TYPE_NAME              = 'ITable';
+    const SERVICE_MANAGEMENT_TYPE_NAME = 'IServiceManagement';
     
     // HTTP Methods
     const HTTP_GET    = 'GET';
@@ -144,33 +146,41 @@ class Resources
     const EMULATOR_QUEUE_URI = '127.0.0.1:10001';
     const EMULATOR_TABLE_URI = '127.0.0.1:10002';
     const ASTERISK           = '*';
+    const SM_URL             = 'https://management.core.windows.net';
 
     // Header values
-    const API_VERSION                    = '2011-08-18';
-    const API_VERSION_2009_4             = '2009-04-14';
+    const STORAGE_API_LATEST_VERSION     = '2011-08-18';
+    const SM_API_LATEST_VERSION          = '2011-10-01';
     const DATA_SERVICE_VERSION_VALUE     = '1.0;NetFx';
     const MAX_DATA_SERVICE_VERSION_VALUE = '2.0;NetFx';
     const ACCEPT_HEADER_VALUE            = 'application/atom+xml,application/xml';
     const ACCEPT_CHARSET_VALUE           = 'utf-8';
 
     // Query parameter names
-    const QP_PREFIX          = 'Prefix';
-    const QP_MAX_RESULTS     = 'MaxResults';
-    const QP_METADATA        = 'Metadata';
-    const QP_MARKER          = 'Marker';
-    const QP_NEXT_MARKER     = 'NextMarker';
-    const QP_COMP            = 'comp';
-    const QP_INCLUDE         = 'include';
-    const QP_TIMEOUT         = 'timeout';
-    const QP_DELIMITER       = 'Delimiter';
-    const QP_REST_TYPE       = 'restype';
-    const QP_SNAPSHOT        = 'snapshot';
-    const QP_SELECT          = '$select';
-    const QP_TOP             = '$top';
-    const QP_FILTER          = '$filter';
-    const QP_NEXT_TABLE_NAME = 'NextTableName';
-    const QP_NEXT_PK         = 'NextPartitionKey';
-    const QP_NEXT_RK         = 'NextRowKey';
+    const QP_PREFIX             = 'Prefix';
+    const QP_MAX_RESULTS        = 'MaxResults';
+    const QP_METADATA           = 'Metadata';
+    const QP_MARKER             = 'Marker';
+    const QP_NEXT_MARKER        = 'NextMarker';
+    const QP_COMP               = 'comp';
+    const QP_VISIBILITY_TIMEOUT = 'visibilitytimeout';
+    const QP_POPRECEIPT         = 'popreceipt';
+    const QP_NUM_OF_MESSAGES    = 'numofmessages';
+    const QP_PEEK_ONLY          = 'peekonly';
+    const QP_MESSAGE_TTL        = 'messagettl';
+    const QP_INCLUDE            = 'include';
+    const QP_TIMEOUT            = 'timeout';
+    const QP_DELIMITER          = 'Delimiter';
+    const QP_REST_TYPE          = 'restype';
+    const QP_SNAPSHOT           = 'snapshot';
+    const QP_BLOCKID            = 'blockid';
+    const QP_BLOCK_LIST_TYPE    = 'blocklisttype';
+    const QP_SELECT             = '$select';
+    const QP_TOP                = '$top';
+    const QP_FILTER             = '$filter';
+    const QP_NEXT_TABLE_NAME    = 'NextTableName';
+    const QP_NEXT_PK            = 'NextPartitionKey';
+    const QP_NEXT_RK            = 'NextRowKey';
     
     // Request body content types
     const XML_CONTENT_TYPE      = 'application/x-www-form-urlencoded';
@@ -190,6 +200,7 @@ class Resources
     const USE_BRACKETS    = 'use_brackets';
     const SSL_VERIFY_PEER = 'ssl_verify_peer';
     const SSL_VERIFY_HOST = 'ssl_verify_host';
+    const SSL_LOCAL_CERT  = 'ssl_local_cert';
     const CONNECT_TIMEOUT = 'connect_timeout';
 }
 

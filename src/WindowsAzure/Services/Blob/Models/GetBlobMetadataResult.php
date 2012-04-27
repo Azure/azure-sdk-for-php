@@ -65,11 +65,12 @@ class GetBlobMetadataResult
      */
     public static function create($headers)
     {
-        $result = new GetBlobMetadataResult();
-        $date   = $headers[Resources::LAST_MODIFIED];
+        $result   = new GetBlobMetadataResult();
+        $date     = $headers[Resources::LAST_MODIFIED];
+        $metadata = WindowsAzureUtilities::getMetadataArray($headers);
         $result->setLastModified(WindowsAzureUtilities::rfc1123ToDateTime($date));
         $result->setEtag($headers[Resources::ETAG]);
-        $result->setMetadata(WindowsAzureUtilities::getMetadataArray($headers));
+        $result->setMetadata(is_null($metadata) ? array() : $metadata);
         
         return $result;
     }
@@ -116,7 +117,7 @@ class GetBlobMetadataResult
      */
     public function setEtag($etag)
     {
-        Validate::isString($etag);
+        Validate::isString($etag, 'etag');
         $this->_etag = $etag;
     }
     

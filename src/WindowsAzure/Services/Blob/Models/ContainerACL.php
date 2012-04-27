@@ -30,6 +30,7 @@ use WindowsAzure\Services\Blob\Models\AccessPolicy;
 use WindowsAzure\Services\Blob\Models\SignedIdentifier;
 use WindowsAzure\Core\WindowsAzureUtilities;
 use WindowsAzure\Services\Blob\Models\PublicAccessType;
+use WindowsAzure\Core\Serialization\XmlSerializer;
 
 /**
  * Holds conatiner ACL members.
@@ -174,7 +175,7 @@ class ContainerAcl
      */
     public function setEtag($etag)
     {
-        Validate::isString($etag);
+        Validate::isString($etag, 'etag');
         $this->_etag = $etag;
     }
 
@@ -227,10 +228,10 @@ class ContainerAcl
      */
     public function addSignedIdentifier($id, $start, $expiry, $permission)
     {
-        Validate::isString($id);
-        Validate::isString($start);
-        Validate::isString($expiry);
-        Validate::isString($permission);
+        Validate::isString($id, 'id');
+        Validate::isString($start, 'start');
+        Validate::isString($expiry, 'expiry');
+        Validate::isString($permission, 'permission');
         
         $accessPolicy = new AccessPolicy();
         $accessPolicy->setStart($start);
@@ -254,7 +255,7 @@ class ContainerAcl
         $array = array();
         
         foreach ($this->_signedIdentifiers as $value) {
-            $array[] = $value->toXml();
+            $array[] = $value->toArray();
         }
         
         return $array;
@@ -263,13 +264,18 @@ class ContainerAcl
     /**
      * Converts this current object to XML representation.
      * 
+     * @param XmlSerializer $xmlSerializer The XML serializer.
+     * 
      * @return string.
      */
-    public function toXml()
+    public function toXml($xmlSerializer)
     {
-        return Utilities::serialize(
-            $this->toArray(), self::$xmlRootName, 'SignedIdentifier'
+        $properties = array(
+            XmlSerializer::DEFAULT_TAG => 'SignedIdentifier',
+            XmlSerializer::ROOT_NAME => self::$xmlRootName
         );
+        
+        return $xmlSerializer->serialize($this->toArray(), $properties);
     }
 }
 

@@ -105,9 +105,13 @@ class WindowsAzureUtilities
      * 
      * @return none
      */
-    public static function isValidMetadata($metadata)
+    public static function validateMetadata($metadata)
     {
-        Validate::isArray($metadata, 'metadata');
+        if (!is_null($metadata)) {
+            Validate::isArray($metadata, 'metadata');
+        } else {
+            $metadata = array();
+        }
         
         foreach ($metadata as $key => $value) {
             Validate::isString($key, 'metadata key');
@@ -137,7 +141,7 @@ class WindowsAzureUtilities
      */
     public static function isEmulated()
     {
-        return getenv(Resources::EMULATED);
+        return (bool)getenv(Resources::EMULATED);
     }
 }
 

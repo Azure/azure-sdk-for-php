@@ -23,9 +23,10 @@
  */
  
 namespace WindowsAzure\Services\Core\Models;
+use WindowsAzure\Utilities;
 use WindowsAzure\Services\Core\Models\Logging;
 use WindowsAzure\Services\Core\Models\Metrics;
-use WindowsAzure\Utilities;
+use WindowsAzure\Core\Serialization\XmlSerializer;
 
 /**
  * Encapsulates service properties
@@ -120,11 +121,15 @@ class ServiceProperties
     /**
      * Converts this current object to XML representation.
      * 
+     * @param XmlSerializer $xmlSerializer The XML serializer.
+     * 
      * @return string
      */
-    public function toXml()
+    public function toXml($xmlSerializer)
     {
-        return Utilities::serialize($this->toArray(), self::$xmlRootName);
+        $properties = array(XmlSerializer::ROOT_NAME => self::$xmlRootName);
+        
+        return $xmlSerializer->serialize($this->toArray(), $properties);
     }
 }
 

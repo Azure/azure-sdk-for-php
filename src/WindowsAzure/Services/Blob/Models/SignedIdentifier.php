@@ -90,12 +90,12 @@ class SignedIdentifier
      * 
      * @return array.
      */
-    public function toXml()
+    public function toArray()
     {
         $array = array();
         
         $array['SignedIdentifier']['Id']           = $this->_id;
-        $array['SignedIdentifier']['AccessPolicy'] = $this->_accessPolicy->toXml();
+        $array['SignedIdentifier']['AccessPolicy'] = $this->_accessPolicy->toArray();
         
         return $array;
     }

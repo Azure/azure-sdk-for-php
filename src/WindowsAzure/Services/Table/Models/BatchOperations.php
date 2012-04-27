@@ -104,8 +104,8 @@ class BatchOperations
      */
     public function addInsertEntity($table, $entity)
     {
-        Validate::isString($table);
-        Validate::notNullOrEmpty($entity);
+        Validate::isString($table, 'table');
+        Validate::notNullOrEmpty($entity, 'entity');
         
         $operation = new BatchOperation();
         $type      = BatchOperationType::INSERT_ENTITY_OPERATION;
@@ -125,8 +125,8 @@ class BatchOperations
      */
     public function addUpdateEntity($table, $entity)
     {
-        Validate::isString($table);
-        Validate::notNullOrEmpty($entity);
+        Validate::isString($table, 'table');
+        Validate::notNullOrEmpty($entity, 'entity');
         
         $operation = new BatchOperation();
         $type      = BatchOperationType::UPDATE_ENTITY_OPERATION;
@@ -146,8 +146,8 @@ class BatchOperations
      */
     public function addMergeEntity($table, $entity)
     {
-        Validate::isString($table);
-        Validate::notNullOrEmpty($entity);
+        Validate::isString($table, 'table');
+        Validate::notNullOrEmpty($entity, 'entity');
         
         $operation = new BatchOperation();
         $type      = BatchOperationType::MERGE_ENTITY_OPERATION;
@@ -167,8 +167,8 @@ class BatchOperations
      */
     public function addInsertOrReplaceEntity($table, $entity)
     {
-        Validate::isString($table);
-        Validate::notNullOrEmpty($entity);
+        Validate::isString($table, 'table');
+        Validate::notNullOrEmpty($entity, 'entity');
         
         $operation = new BatchOperation();
         $type      = BatchOperationType::INSERT_REPLACE_ENTITY_OPERATION;
@@ -188,8 +188,8 @@ class BatchOperations
      */
     public function addInsertOrMergeEntity($table, $entity)
     {
-        Validate::isString($table);
-        Validate::notNullOrEmpty($entity);
+        Validate::isString($table, 'table');
+        Validate::notNullOrEmpty($entity, 'entity');
         
         $operation = new BatchOperation();
         $type      = BatchOperationType::INSERT_MERGE_ENTITY_OPERATION;
@@ -211,7 +211,7 @@ class BatchOperations
      */
     public function addDeleteEntity($table, $partitionKey, $rowKey, $etag = null)
     {
-        Validate::isString($table);
+        Validate::isString($table, 'table');
         Validate::isTrue(!is_null($partitionKey), Resources::NULL_TABLE_KEY_MSG);
         Validate::isTrue(!is_null($rowKey), Resources::NULL_TABLE_KEY_MSG);
         

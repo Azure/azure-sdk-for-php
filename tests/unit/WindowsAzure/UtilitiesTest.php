@@ -28,6 +28,7 @@ use WindowsAzure\Resources;
 use Tests\Framework\TestResources;
 use Tests\Framework\VirtualFileSystem;
 use WindowsAzure\Services\Core\Models\ServiceProperties;
+use WindowsAzure\Core\Serialization\XmlSerializer;
 
 /**
  * Unit tests for class Utilities
@@ -213,7 +214,8 @@ class UtilitiesTest extends \PHPUnit_Framework_TestCase
         // Setup
         $propertiesSample = TestResources::getServicePropertiesSample();
         $properties = ServiceProperties::create($propertiesSample);
-        $xml = $properties->toXml();
+        $xmlSerializer = new XmlSerializer();
+        $xml = $properties->toXml($xmlSerializer);
         $expected = $properties->toArray();
         
         // Test
@@ -231,7 +233,8 @@ class UtilitiesTest extends \PHPUnit_Framework_TestCase
         // Setup
         $propertiesSample = TestResources::getServicePropertiesSample();
         $properties = ServiceProperties::create($propertiesSample);
-        $expected = $properties->toXml();
+        $xmlSerializer = new XmlSerializer();
+        $expected = $properties->toXml($xmlSerializer);
         $array = $properties->toArray();
         
         // Test

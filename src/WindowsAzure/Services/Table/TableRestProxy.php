@@ -26,7 +26,7 @@ namespace WindowsAzure\Services\Table;
 use WindowsAzure\Resources;
 use WindowsAzure\Utilities;
 use WindowsAzure\Validate;
-use WindowsAzure\Core\HttpCallContext;
+use WindowsAzure\Core\Http\HttpCallContext;
 use WindowsAzure\Services\Core\Models\ServiceProperties;
 use WindowsAzure\Services\Core\ServiceRestProxy;
 use WindowsAzure\Services\Table\Models\TableServiceOptions;
@@ -141,7 +141,7 @@ class TableRestProxy extends ServiceRestProxy implements ITable
      * @param Models\Entity $entity The entity object.
      * @param string        $type   The API type.
      * 
-     * @return WindowsAzure\Core\HttpCallContext
+     * @return WindowsAzure\Core\Http\HttpCallContext
      * 
      * @throws \InvalidArgumentException 
      */
@@ -226,10 +226,13 @@ class TableRestProxy extends ServiceRestProxy implements ITable
                 $contentType  = $context->getHeader(Resources::CONTENT_TYPE);
                 $body         = $context->getBody();
                 $contentType .= ';type=entry';
-                $context->addHeader(Resources::CONTENT_TYPE, $contentType);
+                $context->addOptionalHeader(Resources::CONTENT_TYPE, $contentType);
                 // Use mb_strlen instead of strlen to get the length of the string
                 // in bytes instead of the length in chars.
-                $context->addHeader(Resources::CONTENT_LENGTH, mb_strlen($body));
+                $context->addOptionalHeader(
+                    Resources::CONTENT_LENGTH,
+                    mb_strlen($body)
+                );
                 break;
         
             case BatchOperationType::DELETE_ENTITY_OPERATION:
@@ -239,7 +242,7 @@ class TableRestProxy extends ServiceRestProxy implements ITable
                 throw new \InvalidArgumentException();
             }
             
-            $context->addHeader(Resources::CONTENT_ID, $contentId);
+            $context->addOptionalHeader(Resources::CONTENT_ID, $contentId);
             $mimeBodyPart    = $context->__toString();
             $mimeBodyParts[] = $mimeBodyPart;
             $contentId++;
@@ -261,7 +264,8 @@ class TableRestProxy extends ServiceRestProxy implements ITable
     private function _constructDeleteEntityContext($table, $partitionKey, $rowKey, 
         $options
     ) {
-        Validate::isString($table);
+        Validate::isString($table, 'table');
+        Validate::notNullOrEmpty($table, 'table');
         Validate::isTrue(!is_null($partitionKey), Resources::NULL_TABLE_KEY_MSG);
         Validate::isTrue(!is_null($rowKey), Resources::NULL_TABLE_KEY_MSG);
         
@@ -275,10 +279,18 @@ class TableRestProxy extends ServiceRestProxy implements ITable
             $options = new DeleteEntityOptions();
         }
         
-        $etagObj                            = $options->getEtag();
-        $Etag                               = !is_null($etagObj);
-        $queryParams[Resources::QP_TIMEOUT] = strval($options->getTimeout());
-        $headers[Resources::IF_MATCH]       = $Etag ? $etagObj : Resources::ASTERISK;
+        $etagObj = $options->getEtag();
+        $Etag    = !is_null($etagObj);
+        $this->addOptionalQueryParam(
+            $queryParams,
+            Resources::QP_TIMEOUT,
+            $options->getTimeout()
+        );
+        $this->addOptionalHeader(
+            $headers,
+            Resources::IF_MATCH,
+            $Etag ? $etagObj : Resources::ASTERISK
+        );
         
         $context = new HttpCallContext();
         $context->setHeaders($headers);
@@ -307,8 +319,9 @@ class TableRestProxy extends ServiceRestProxy implements ITable
     private function _constructPutOrMergeEntityContext($table, $entity, $verb,
         $useEtag, $options
     ) {
-        Validate::isString($table);
-        Validate::notNullOrEmpty($entity);
+        Validate::isString($table, 'table');
+        Validate::notNullOrEmpty($table, 'table');
+        Validate::notNullOrEmpty($entity, 'entity');
         Validate::isTrue($entity->isValid($msg), $msg);
         
         $method       = $verb;
@@ -328,11 +341,19 @@ class TableRestProxy extends ServiceRestProxy implements ITable
             $etag         = $entity->getEtag();
             $ifMatchValue = is_null($etag) ? Resources::ASTERISK : $etag;
             
-            $headers[Resources::IF_MATCH] = $ifMatchValue;
+            $this->addOptionalHeader($headers, Resources::IF_MATCH, $ifMatchValue);
         }
         
-        $queryParams[Resources::QP_TIMEOUT] = strval($options->getTimeout());
-        $headers[Resources::CONTENT_TYPE]   = Resources::XML_ATOM_CONTENT_TYPE;
+        $this->addOptionalQueryParam(
+            $queryParams,
+            Resources::QP_TIMEOUT,
+            $options->getTimeout()
+        );
+        $this->addOptionalHeader(
+            $headers,
+            Resources::CONTENT_TYPE,
+            Resources::XML_ATOM_CONTENT_TYPE
+        );
         
         $context = new HttpCallContext();
         $context->setBody($body);
@@ -357,8 +378,9 @@ class TableRestProxy extends ServiceRestProxy implements ITable
      */
     private function _constructInsertEntityContext($table, $entity, $options)
     {
-        Validate::isString($table);
-        Validate::notNullOrEmpty($entity);
+        Validate::isString($table, 'table');
+        Validate::notNullOrEmpty($table, 'table');
+        Validate::notNullOrEmpty($entity, 'entity');
         Validate::isTrue($entity->isValid($msg), $msg);
         
         $method      = Resources::HTTP_POST;
@@ -373,8 +395,16 @@ class TableRestProxy extends ServiceRestProxy implements ITable
             $options = new TableServiceOptions();
         }
         
-        $queryParams[Resources::QP_TIMEOUT] = strval($options->getTimeout());
-        $headers[Resources::CONTENT_TYPE]   = Resources::XML_ATOM_CONTENT_TYPE;
+        $this->addOptionalQueryParam(
+            $queryParams,
+            Resources::QP_TIMEOUT,
+            $options->getTimeout()
+        );
+        $this->addOptionalHeader(
+            $headers,
+            Resources::CONTENT_TYPE,
+            Resources::XML_ATOM_CONTENT_TYPE
+        );
         
         $context->setBody($body);
         $context->setHeaders($headers);
@@ -506,19 +536,31 @@ class TableRestProxy extends ServiceRestProxy implements ITable
             if (!empty($selectedFields)) {
                 $final = $this->_encodeODataUriValues($selectedFields); 
                 
-                $queryParam[Resources::QP_SELECT] = implode(',', $final);
+                $this->addOptionalQueryParam(
+                    $queryParam,
+                    Resources::QP_SELECT,
+                    implode(',', $final)
+                );
             }
             
             if (!is_null($query->getTop())) {
                 $final = strval($this->_encodeODataUriValue($query->getTop()));
                 
-                $queryParam[Resources::QP_TOP] = $final;
+                $this->addOptionalQueryParam(
+                    $queryParam,
+                    Resources::QP_TOP,
+                    $final
+                );
             }
             
             if (!is_null($query->getFilter())) {
                 $final = $this->_buildFilterExpression($query->getFilter());
                 
-                $queryParam[Resources::QP_FILTER] = $final;
+                $this->addOptionalQueryParam(
+                    $queryParam,
+                    Resources::QP_FILTER,
+                    $final
+                );
             }
         }
         
@@ -563,20 +605,23 @@ class TableRestProxy extends ServiceRestProxy implements ITable
     }
     
     /**
-     * Constructor.
+     * Initializes new TableRestProxy object.
      * 
-     * @param WindowsAzure\Core\IHttpClient     $channel        The HTTP client 
-     * channel.
-     * @param string                            $uri            The storage account
-     * uri.
-     * @param Table\Utilities\IAtomReaderWriter $atomSerializer The atom 
+     * @param WindowsAzure\Core\Http\IHttpClient            $channel        The HTTP
+     * client channel.
+     * @param string                                        $uri            The 
+     * storage account uri.
+     * @param Table\Utilities\IAtomReaderWriter             $atomSerializer The atom 
      * serializer.
-     * @param Table\Utilities\IMimeReaderWriter $mimeSerializer The MIME 
+     * @param Table\Utilities\IMimeReaderWriter             $mimeSerializer The MIME 
+     * serializer.
+     * @param WindowsAzure\Core\Serialization\ISerializable $dataSerializer The data
      * serializer.
      */
-    public function __construct($channel, $uri, $atomSerializer, $mimeSerializer)
-    {
-        parent::__construct($channel, $uri);
+    public function __construct($channel, $uri, $atomSerializer, $mimeSerializer, 
+        $dataSerializer
+    ) {
+        parent::__construct($channel, $uri, $dataSerializer);
         $this->_atomSerializer = $atomSerializer;
         $this->_mimeSerializer = $mimeSerializer;
     }
@@ -597,15 +642,15 @@ class TableRestProxy extends ServiceRestProxy implements ITable
         }
         
         $context = new HttpCallContext();
-        $timeout = strval($options->getTimeout());
+        $timeout = $options->getTimeout();
         $context->setMethod(Resources::HTTP_GET);
-        $context->addQueryParameter(Resources::QP_REST_TYPE, 'service');
-        $context->addQueryParameter(Resources::QP_COMP, 'properties');
-        $context->addQueryParameter(Resources::QP_TIMEOUT, $timeout);
+        $context->addOptionalQueryParameter(Resources::QP_REST_TYPE, 'service');
+        $context->addOptionalQueryParameter(Resources::QP_COMP, 'properties');
+        $context->addOptionalQueryParameter(Resources::QP_TIMEOUT, $timeout);
         $context->addStatusCode(Resources::STATUS_OK);
         
         $response = $this->sendContext($context);
-        $parsed   = Utilities::unserialize($response->getBody());
+        $parsed   = $this->dataSerializer->unserialize($response->getBody());
         
         return GetServicePropertiesResult::create($parsed);
     }
@@ -641,11 +686,28 @@ class TableRestProxy extends ServiceRestProxy implements ITable
             $options = new TableServiceOptions();
         }
         
-        $queryParams[Resources::QP_REST_TYPE] = 'service';
-        $queryParams[Resources::QP_COMP]      = 'properties';
-        $queryParams[Resources::QP_TIMEOUT]   = strval($options->getTimeout());
-        $body                                 = $serviceProperties->toXml();
-        $headers[Resources::CONTENT_TYPE]     = Resources::XML_CONTENT_TYPE;
+        $this->addOptionalQueryParam(
+            $queryParams,
+            Resources::QP_TIMEOUT,
+            $options->getTimeout()
+        );
+        $this->addOptionalQueryParam(
+            $queryParams,
+            Resources::QP_REST_TYPE,
+            'service'
+        );
+        $this->addOptionalQueryParam(
+            $queryParams,
+            Resources::QP_COMP,
+            'properties'
+        );
+        
+        $this->addOptionalHeader(
+            $headers,
+            Resources::CONTENT_TYPE,
+            Resources::XML_ATOM_CONTENT_TYPE
+        );
+        $body = $serviceProperties->toXml($this->dataSerializer);
         
         $this->send($method, $headers, $queryParams, $path, $statusCode, $body);
     }
@@ -674,7 +736,7 @@ class TableRestProxy extends ServiceRestProxy implements ITable
         $query   = $options->getQuery();
         $next    = $options->getNextTableName();
         $prefix  = $options->getPrefix();
-        $timeout = strval($options->getTimeout());
+        $timeout = $options->getTimeout();
         
         if (!empty($prefix)) {
             // Append Max char to end '{' is 1 + 'z' in AsciiTable ==> upperBound 
@@ -708,8 +770,27 @@ class TableRestProxy extends ServiceRestProxy implements ITable
         
         $queryParams = $this->_addOptionalQuery($queryParams, $query);
         
-        $queryParams[Resources::QP_NEXT_TABLE_NAME] = $next;
-        $queryParams[Resources::QP_TIMEOUT]         = $timeout;
+        $this->addOptionalQueryParam(
+            $queryParams,
+            Resources::QP_NEXT_TABLE_NAME,
+            $next
+        );
+        $this->addOptionalQueryParam(
+            $queryParams,
+            Resources::QP_TIMEOUT,
+            $timeout
+        );
+        
+        // One can specify the NextTableName option to get table entities starting 
+        // from the specified name. However, there appears to be an issue in the 
+        // Azure Table service where this does not engage on the server unless 
+        // $filter appears in the URL. The current behavior is to just ignore the 
+        // NextTableName options, which is not expected or easily detectable.
+        if (   array_key_exists(Resources::QP_NEXT_TABLE_NAME, $queryParams)
+            && !array_key_exists(Resources::QP_FILTER, $queryParams)
+        ) {
+            $queryParams[Resources::QP_FILTER] = Resources::EMPTY_STRING;
+        }
         
         $response = $this->send($method, $headers, $queryParams, $path, $statusCode);
         $tables   = $this->_atomSerializer->parseTableEntries($response->getBody());
@@ -729,7 +810,8 @@ class TableRestProxy extends ServiceRestProxy implements ITable
      */
     public function createTable($table, $options = null)
     {
-        Validate::isString($table);
+        Validate::isString($table, 'table');
+        Validate::notNullOrEmpty($table, 'table');
         
         $method      = Resources::HTTP_POST;
         $headers     = array();
@@ -742,8 +824,16 @@ class TableRestProxy extends ServiceRestProxy implements ITable
             $options = new TableServiceOptions();
         }
         
-        $queryParams[Resources::QP_TIMEOUT] = strval($options->getTimeout());
-        $headers[Resources::CONTENT_TYPE]   = Resources::XML_ATOM_CONTENT_TYPE;
+        $this->addOptionalHeader(
+            $headers,
+            Resources::CONTENT_TYPE,
+            Resources::XML_ATOM_CONTENT_TYPE
+        );
+        $this->addOptionalQueryParam(
+            $queryParams,
+            Resources::QP_TIMEOUT,
+            $options->getTimeout()
+        );
         
         $this->send($method, $headers, $queryParams, $path, $statusCode, $body);
     }
@@ -758,7 +848,8 @@ class TableRestProxy extends ServiceRestProxy implements ITable
      */
     public function getTable($table, $options = null)
     {
-        Validate::isString($table);
+        Validate::isString($table, 'table');
+        Validate::notNullOrEmpty($table, 'table');
         
         $method      = Resources::HTTP_GET;
         $headers     = array();
@@ -770,8 +861,16 @@ class TableRestProxy extends ServiceRestProxy implements ITable
             $options = new TableServiceOptions();
         }
         
-        $queryParams[Resources::QP_TIMEOUT] = strval($options->getTimeout());
-        $headers[Resources::CONTENT_TYPE]   = Resources::XML_ATOM_CONTENT_TYPE;
+        $this->addOptionalHeader(
+            $headers,
+            Resources::CONTENT_TYPE,
+            Resources::XML_ATOM_CONTENT_TYPE
+        );
+        $this->addOptionalQueryParam(
+            $queryParams,
+            Resources::QP_TIMEOUT,
+            $options->getTimeout()
+        );
         
         $response = $this->send($method, $headers, $queryParams, $path, $statusCode);
         
@@ -790,7 +889,8 @@ class TableRestProxy extends ServiceRestProxy implements ITable
      */
     public function deleteTable($table, $options = null)
     {
-        Validate::isString($table);
+        Validate::isString($table, 'table');
+        Validate::notNullOrEmpty($table, 'table');
         
         $method      = Resources::HTTP_DELETE;
         $headers     = array();
@@ -802,7 +902,11 @@ class TableRestProxy extends ServiceRestProxy implements ITable
             $options = new TableServiceOptions();
         }
         
-        $queryParams[Resources::QP_TIMEOUT] = strval($options->getTimeout());
+        $this->addOptionalQueryParam(
+            $queryParams,
+            Resources::QP_TIMEOUT,
+            $options->getTimeout()
+        );
         
         $this->send($method, $headers, $queryParams, $path, $statusCode);
     }
@@ -819,7 +923,8 @@ class TableRestProxy extends ServiceRestProxy implements ITable
      */
     public function queryEntities($table, $options = null)
     {
-        Validate::isString($table);
+        Validate::isString($table, 'table');
+        Validate::notNullOrEmpty($table, 'table');
         
         $method      = Resources::HTTP_GET;
         $headers     = array();
@@ -835,10 +940,27 @@ class TableRestProxy extends ServiceRestProxy implements ITable
         $encodedRK   = $this->_encodeODataUriValue($options->getNextRowKey());
         $queryParams = $this->_addOptionalQuery($queryParams, $options->getQuery());
         
-        $queryParams[Resources::QP_TIMEOUT] = strval($options->getTimeout());
-        $queryParams[Resources::QP_NEXT_PK] = $encodedPK;
-        $queryParams[Resources::QP_NEXT_RK] = $encodedRK;
-        $headers[Resources::CONTENT_TYPE]   = Resources::XML_ATOM_CONTENT_TYPE;
+        $this->addOptionalQueryParam(
+            $queryParams,
+            Resources::QP_TIMEOUT,
+            $options->getTimeout()
+        );
+        $this->addOptionalQueryParam(
+            $queryParams,
+            Resources::QP_NEXT_PK,
+            $encodedPK
+        );
+        $this->addOptionalQueryParam(
+            $queryParams,
+            Resources::QP_NEXT_RK,
+            $encodedRK
+        );
+        
+        $this->addOptionalHeader(
+            $headers,
+            Resources::CONTENT_TYPE,
+            Resources::XML_ATOM_CONTENT_TYPE
+        );
         
         if (!is_null($options->getQuery())) {
             $dsHeader   = Resources::DATA_SERVICE_VERSION;
@@ -846,7 +968,7 @@ class TableRestProxy extends ServiceRestProxy implements ITable
             $fields     = $options->getQuery()->getSelectFields();
             $hasSelect  = !empty($fields);
             if ($hasSelect) {
-                $headers[$dsHeader] = $maxdsValue;
+                $this->addOptionalHeader($headers, $dsHeader, $maxdsValue);
             }
         }
         
@@ -1008,7 +1130,8 @@ class TableRestProxy extends ServiceRestProxy implements ITable
      */
     public function getEntity($table, $partitionKey, $rowKey, $options = null)
     {
-        Validate::isString($table);
+        Validate::isString($table, 'table');
+        Validate::notNullOrEmpty($table, 'table');
         Validate::isTrue(!is_null($partitionKey), Resources::NULL_TABLE_KEY_MSG);
         Validate::isTrue(!is_null($rowKey), Resources::NULL_TABLE_KEY_MSG);
         
@@ -1022,8 +1145,16 @@ class TableRestProxy extends ServiceRestProxy implements ITable
             $options = new TableServiceOptions();
         }
         
-        $queryParams[Resources::QP_TIMEOUT] = strval($options->getTimeout());
-        $headers[Resources::CONTENT_TYPE]   = Resources::XML_ATOM_CONTENT_TYPE;
+        $this->addOptionalHeader(
+            $headers,
+            Resources::CONTENT_TYPE,
+            Resources::XML_ATOM_CONTENT_TYPE
+        );
+        $this->addOptionalQueryParam(
+            $queryParams,
+            Resources::QP_TIMEOUT,
+            $options->getTimeout()
+        );
         
         $context = new HttpCallContext();
         $context->setHeaders($headers);
@@ -1050,7 +1181,7 @@ class TableRestProxy extends ServiceRestProxy implements ITable
      */
     public function batch($batchOperations, $options = null)
     {
-        Validate::notNullOrEmpty($batchOperations);
+        Validate::notNullOrEmpty($batchOperations, 'batchOperations');
         
         $method      = Resources::HTTP_POST;
         $operations  = $batchOperations->getOperations();
@@ -1066,7 +1197,11 @@ class TableRestProxy extends ServiceRestProxy implements ITable
             $options = new TableServiceOptions();
         }
         
-        $queryParams[Resources::QP_TIMEOUT] = strval($options->getTimeout());
+        $this->addOptionalQueryParam(
+            $queryParams,
+            Resources::QP_TIMEOUT,
+            $options->getTimeout()
+        );
         
         $response = $this->send(
             $method, $headers, $queryParams, $path, $statusCode, $body

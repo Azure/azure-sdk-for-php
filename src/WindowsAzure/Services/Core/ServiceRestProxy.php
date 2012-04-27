@@ -25,10 +25,10 @@
 namespace WindowsAzure\Services\Core;
 use WindowsAzure\Resources;
 use WindowsAzure\Validate;
-use WindowsAzure\Core\Url;
-use WindowsAzure\Core\HttpCallContext;
-use WindowsAzure\Core\IHttpClient;
+use WindowsAzure\Core\RestProxy;
 use WindowsAzure\Core\WindowsAzureUtilities;
+use WindowsAzure\Core\Http\Url;
+use WindowsAzure\Core\Http\HttpCallContext;
 
 /**
  * Base class for all services rest proxies.
@@ -41,48 +41,24 @@ use WindowsAzure\Core\WindowsAzureUtilities;
  * @version   Release: @package_version@
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
-class ServiceRestProxy
+class ServiceRestProxy extends RestProxy
 {
-    /**
-     * @var WindowsAzure\Core\IHttpClient
-     */
-    private $_channel;
-    
-    /**
-     * @var array
-     */
-    private $_filters;
+
     private $_url;
     private $_accountName;
-
-    /**
-     * @var string
-     */
-    protected $url;
     
     /**
-     * Constructor.
+     * Initializes new ServiceRestProxy object.
      *
-     * @param WindowsAzure\Core\IHttpClient $channel The http client used to send 
-     * HTTP requests.
-     * @param string                        $uri     The storage account uri.
+     * @param IHttpClient $channel        The HTTP client used to send HTTP requests.
+     * @param string      $uri            The storage account uri.
+     * @param ISerializer $dataSerializer The data serializer.
      */
-    public function __construct($channel, $uri, $accountName = '')
+    public function __construct($channel, $uri, $accountName = '', $dataSerializer)
     {
-        $this->_url         = new Url($uri);
-        $this->_channel     = $channel;
-        $this->_accountName = $accountName;
-        $this->_filters     = array();
-    }
-    
-    /**
-     * Gets HTTP filters that will process each request.
-     * 
-     * @return array
-     */
-    public function getFilters()
-    {
-        return $this->_filters;
+		parent::_construct($channel, $dataSerializer);
+        $this->_url      = $uri;
+		$this->_accountName = $accountName;
     }
     
     /**
@@ -98,37 +74,14 @@ class ServiceRestProxy
     /**
      * Sends HTTP request with the specified HTTP call context.
      * 
-     * @param WindowsAzure\Core\HttpCallContext $context The HTTP call context.
+     * @param WindowsAzure\Core\Http\HttpCallContext $context The HTTP call context.
      * 
      * @return \HTTP_Request2_Response
      */
     protected function sendContext($context)
     {
-        $channel     = clone $this->_channel;
-        $url         = clone $this->_url;
-        $headers     = $context->getHeaders();
-        $statusCodes = $context->getStatusCodes();
-        $body        = $context->getBody();
-        $queryParams = $context->getQueryParameters();
-        $path        = $context->getPath();
-
-        $channel->setMethod($context->getMethod());
-        $channel->setExpectedStatusCode($statusCodes);
-        $channel->setBody($body);
-        foreach ($headers as $key => $value) {
-            if (!is_null($value) && !empty($value)) {
-                $channel->setHeader($key, $value);
-            }
-        }
-        
-        $url->setQueryVariables($queryParams);
-        if (!empty($path)) {
-            $url->appendUrlPath($path);
-        }
-        
-        $channel->send($this->_filters, $url);
-        
-        return $channel->getResponse();
+        $context->setUri($this->_url);
+        return parent::sendContext($context);
     }
     
     /**
@@ -140,12 +93,16 @@ class ServiceRestProxy
      * @param string $path        URL path
      * @param int    $statusCode  Expected status code received in the response
      * @param string $body        Request body
-     * @param array  $config      Request configuration parameters.
      * 
      * @return \HTTP_Request2_Response
      */
-    protected function send($method, $headers, $queryParams, $path, $statusCode,
-        $body = Resources::EMPTY_STRING, $config = array()
+    protected function send(
+		$method, 
+		$headers, 
+		$queryParams, 
+		$path, 
+		$statusCode,
+        $body = Resources::EMPTY_STRING
     ) {
         $context = new HttpCallContext();
         $context->setBody($body);
@@ -156,31 +113,13 @@ class ServiceRestProxy
         
         if (is_array($statusCode)) {
             $context->setStatusCodes($statusCode);
-        } else if (is_integer($statusCode)) {
-            $context->addStatusCode($statusCode);
         } else {
-            throw new \InvalidArgumentException();
+            $context->addStatusCode($statusCode);
         }
         
         return $this->sendContext($context);
     }
 
-    /**
-     * Adds new filter to queue proxy object and returns new QueueRestProxy with
-     * that filter.
-     *
-     * @param WindowsAzure\Core\IServiceFilter $filter Filter to add for 
-     * the pipeline.
-     * 
-     * @return WindowsAzure\Services\Queue\IQueue.
-     */
-    public function withFilter($filter)
-    {
-        $queueWithFilter             = clone $this;
-        $queueWithFilter->_filters[] = $filter;
-
-        return $queueWithFilter;
-    }
     
     /**
      * Adds optional header to headers if set
@@ -212,7 +151,7 @@ class ServiceRestProxy
      */
     public function groupQueryValues($values)
     {
-        Validate::isArray($values);
+        Validate::isArray($values, 'values');
         $joined = Resources::EMPTY_STRING;
         
         foreach ($values as $value) {
@@ -234,10 +173,10 @@ class ServiceRestProxy
      */
     protected function addMetadataHeaders($headers, $metadata)
     {
-        if (!is_null($metadata) && !empty($metadata)) {
-            $metadata = WindowsAzureUtilities::generateMetadataHeaders($metadata);
-            $headers  = array_merge($headers, $metadata);
-        }
+        WindowsAzureUtilities::validateMetadata($metadata);
+        
+        $metadata = WindowsAzureUtilities::generateMetadataHeaders($metadata);
+        $headers  = array_merge($headers, $metadata);
         
         return $headers;
     }

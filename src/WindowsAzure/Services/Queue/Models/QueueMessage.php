@@ -24,6 +24,7 @@
  
 namespace WindowsAzure\Services\Queue\Models;
 use WindowsAzure\Utilities;
+use WindowsAzure\Core\Serialization\XmlSerializer;
 
 /**
  * Wrappers queue message text.
@@ -66,12 +67,16 @@ class QueueMessage
     /**
      * Converts this current object to XML representation.
      * 
+     * @param XmlSerializer $xmlSerializer The XML serializer.
+     * 
      * @return string. 
      */
-    public function toXml()
+    public function toXml($xmlSerializer)
     {
-        $array = array('MessageText' => $this->_messageText);
-        return Utilities::serialize($array, self::$xmlRootName);
+        $array      = array('MessageText' => $this->_messageText);
+        $properties = array(XmlSerializer::ROOT_NAME => self::$xmlRootName);
+        
+        return $xmlSerializer->serialize($array, $properties);
     }
 }
 

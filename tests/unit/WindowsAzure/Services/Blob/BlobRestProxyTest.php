@@ -77,9 +77,7 @@ class BlobRestProxyTest extends BlobServiceRestProxyTestBase
     */
     public function testGetServiceProperties()
     {
-        if (WindowsAzureUtilities::isEmulated()) {
-            $this->markTestSkipped(self::NOT_SUPPORTED);
-        }
+        $this->skipIfEmulated();
         
         // Test
         $result = $this->wrapper->getServiceProperties();
@@ -93,9 +91,7 @@ class BlobRestProxyTest extends BlobServiceRestProxyTestBase
     */
     public function testSetServiceProperties()
     {
-        if (WindowsAzureUtilities::isEmulated()) {
-            $this->markTestSkipped(self::NOT_SUPPORTED);
-        }
+        $this->skipIfEmulated();
         
         // Setup
         $expected = ServiceProperties::create(TestResources::setServicePropertiesSample());
@@ -105,7 +101,7 @@ class BlobRestProxyTest extends BlobServiceRestProxyTestBase
         $actual = $this->wrapper->getServiceProperties();
         
         // Assert
-        $this->assertEquals($expected->toXml(), $actual->getValue()->toXml());
+        $this->assertEquals($expected->toXml($this->xmlSerializer), $actual->getValue()->toXml($this->xmlSerializer));
     }
     
     /**
@@ -204,9 +200,7 @@ class BlobRestProxyTest extends BlobServiceRestProxyTestBase
     */
     public function testListContainersWithInvalidNextMarkerFail()
     {
-        if (\WindowsAzure\Core\WindowsAzureUtilities::isEmulated()) {
-            $this->markTestSkipped(self::NOT_SUPPORTED);
-        }
+        $this->skipIfEmulated();
         
         // Setup
         $container1 = 'listcontainerswithinvalidnextmarker1';
@@ -551,6 +545,8 @@ class BlobRestProxyTest extends BlobServiceRestProxyTestBase
     */
     public function testListBlobsWithOptionsWithDelimiter()
     {
+        $this->skipIfEmulated();
+        
         // Setup
         $name  = 'listblobswithoptionswithdelimiter';
         $blob1 = 'blob1';

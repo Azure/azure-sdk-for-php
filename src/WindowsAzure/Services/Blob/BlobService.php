@@ -23,7 +23,7 @@
  */
  
 namespace WindowsAzure\Services\Blob;
-use WindowsAzure\Services\Core\Configuration;
+use WindowsAzure\Core\Configuration;
 use WindowsAzure\Resources;
 
 /**
@@ -42,13 +42,14 @@ class BlobService
     /**
      * Creates new object based on the builder type in the $config.
      *
-     * @param WindowsAzure\Services\Core\Configuration $config config object.
+     * @param WindowsAzure\Core\Configuration    $config  The config object.
+     * @param WindowsAzure\Core\IServicesBuilder $builder The builder object.
      * 
-     * @return WindowsAzure\Services\Blob\IBlob.
+     * @return WindowsAzure\Services\Blob\IBlob
      */
-    public static function create($config)
+    public static function create($config, $builder = null)
     {
-        return $config->create(Resources::BLOB_TYPE_NAME);
+        return $config->create(Resources::BLOB_TYPE_NAME, $builder);
     }
 }
 

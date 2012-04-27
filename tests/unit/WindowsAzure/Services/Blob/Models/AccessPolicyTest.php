@@ -137,9 +137,9 @@ class AccessPolicyTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers WindowsAzure\Services\Blob\Models\AccessPolicy::toXml
+     * @covers WindowsAzure\Services\Blob\Models\AccessPolicy::toArray
      */
-    public function testToXml()
+    public function testToArray()
     {
         // Setup
         $accessPolicy = new AccessPolicy();
@@ -151,7 +151,7 @@ class AccessPolicyTest extends \PHPUnit_Framework_TestCase
         $accessPolicy->setExpiry($expiry);
         
         // Test
-        $actual = $accessPolicy->toXml();
+        $actual = $accessPolicy->toArray();
         
         // Assert
         $this->assertEquals($permission, $actual['Permission']);

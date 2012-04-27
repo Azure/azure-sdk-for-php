@@ -86,6 +86,7 @@ class EdmType
             case EdmType::GUID:
             case EdmType::BINARY:
             case EdmType::STRING:
+            case EdmType::INT64:
             case null:
                 // NULL also is treated as EdmType::STRING
                 $condition = 'is_string';
@@ -96,7 +97,6 @@ class EdmType
                 return is_double($value);
                 
             case EdmType::INT32:
-            case EdmType::INT64:
                 $condition = 'is_int';
                 return is_int($value);
 
@@ -148,7 +148,7 @@ class EdmType
             return Utilities::convertToEdmDateTime($value);
 
         case EdmType::BOOLEAN:
-            return ($value == true ? '1' : '0');
+            return (is_null($value) ? '' : ($value == true ? '1' : '0'));
 
         default:
             throw new \InvalidArgumentException();

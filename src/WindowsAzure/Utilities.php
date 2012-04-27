@@ -74,14 +74,14 @@ class Utilities
         $arguments    = func_get_args();
         $numArguments = func_num_args();
         
-        if (!is_array($array)) {
-            return null;
-        }
-        
         $currentArray = $array;
         for ($i = 1; $i < $numArguments; $i++) {
-            if (array_key_exists($arguments[$i], $currentArray)) {
-                $currentArray = $currentArray[$arguments[$i]];
+            if (is_array($currentArray)) {
+                if (array_key_exists($arguments[$i], $currentArray)) {
+                    $currentArray = $currentArray[$arguments[$i]];
+                } else {
+                    return null;
+                }
             } else {
                 return null;
             }
@@ -161,8 +161,8 @@ class Utilities
      * 
      * @return array
      */
-    private static function _sxml2arr($sxml, $arr = array ()) 
-    { 
+    private static function _sxml2arr($sxml, $arr = null)
+    {
         foreach ((array) $sxml as $key => $value) {
             if (is_object($value) || (is_array($value))) {
                 $arr[$key] = self::_sxml2arr($value);
@@ -175,7 +175,7 @@ class Utilities
     }
     
     /**
-     * Serializes given array into xml. The array indecies must be string to use
+     * Serializes given array into xml. The array indices must be string to use
      * them as XML tags.
      * 
      * @param array  $array      object to serialize represented in array.

@@ -25,6 +25,8 @@
 namespace Tests\Unit\WindowsAzure\Services\Table\Models;
 use WindowsAzure\Services\Table\Models\QueryTablesOptions;
 use WindowsAzure\Services\Table\Models\Query;
+use WindowsAzure\Services\Table\Models\Filters\Filter;
+use WindowsAzure\Services\Table\Models\EdmType;
 
 /**
  * Unit tests for class QueryTablesOptions
@@ -74,20 +76,54 @@ class QueryTablesOptionsTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers WindowsAzure\Services\Table\Models\QueryTablesOptions::setQuery
+     * @covers WindowsAzure\Services\Table\Models\QueryTablesOptions::setTop
+     * @covers WindowsAzure\Services\Table\Models\QueryTablesOptions::getTop
+     * @covers WindowsAzure\Services\Table\Models\QueryTablesOptions::__construct
+     */
+    public function testSetTop()
+    {
+        // Setup
+        $options = new QueryTablesOptions();
+        $expected = 123;
+        
+        // Test
+        $options->setTop($expected);
+        
+        // Assert
+        $this->assertEquals($expected, $options->getTop());
+    }
+    
+    /**
      * @covers WindowsAzure\Services\Table\Models\QueryTablesOptions::getQuery
      */
-    public function testSetQuery()
+    public function testGetQuery()
     {
         // Setup
         $options = new QueryTablesOptions();
         $expected = new Query();
         
         // Test
-        $options->setQuery($expected);
+        $actual = $options->getQuery();
         
         // Assert
-        $this->assertEquals($expected, $options->getQuery());
+        $this->assertEquals($expected, $actual);
+    }
+    
+    /**
+     * @covers WindowsAzure\Services\Table\Models\QueryTablesOptions::setFilter
+     * @covers WindowsAzure\Services\Table\Models\QueryTablesOptions::getFilter
+     */
+    public function testSetFilter()
+    {
+        // Setup
+        $options = new QueryTablesOptions();
+        $expected = Filter::applyConstant('constValue', EdmType::STRING);
+        
+        // Test
+        $options->setFilter($expected);
+        
+        // Assert
+        $this->assertEquals($expected, $options->getFilter());
     }
 }
 

@@ -53,6 +53,14 @@ class QueryTablesOptions extends TableServiceOptions
     private $_prefix;
     
     /**
+     * Constructs new QueryTablesOptions object.
+     */
+    public function __construct()
+    {
+        $this->_query = new Query();
+    }
+    
+    /**
      * Gets nextTableName
      * 
      * @return string
@@ -97,7 +105,29 @@ class QueryTablesOptions extends TableServiceOptions
     }
     
     /**
-     * Gets query
+     * Gets top.
+     *
+     * @return integer.
+     */
+    public function getTop()
+    {
+        return $this->_query->getTop();
+    }
+
+    /**
+     * Sets top.
+     *
+     * @param integer $top value.
+     * 
+     * @return none.
+     */
+    public function setTop($top)
+    {
+        $this->_query->setTop($top);
+    }
+    
+    /**
+     * Gets query.
      * 
      * @return Query
      */
@@ -107,15 +137,25 @@ class QueryTablesOptions extends TableServiceOptions
     }
     
     /**
-     * Sets query
-     * 
-     * @param string $query value
-     * 
-     * @return none
+     * Gets filter.
+     *
+     * @return Filters\Filter
      */
-    public function setQuery($query)
+    public function getFilter()
     {
-        $this->_query = $query;
+        return $this->_query->getFilter();
+    }
+
+    /**
+     * Sets filter.
+     *
+     * @param Filters\Filter $filter value.
+     * 
+     * @return none.
+     */
+    public function setFilter($filter)
+    {
+        $this->_query->setFilter($filter);
     }
 }
 

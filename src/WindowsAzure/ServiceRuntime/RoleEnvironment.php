@@ -51,7 +51,7 @@ class RoleEnvironment
      * 
      * @var string
      */
-    const VERSION_ENDPOINT_FIXED_PATH = '\\.\pipe\WindowsAzureRuntime';
+    const VERSION_ENDPOINT_FIXED_PATH = '\\\\.\\pipe\\WindowsAzureRuntime';
 
     /**
      * @var string
@@ -143,37 +143,45 @@ class RoleEnvironment
      */
     private static function _initialize($keepOpen = false)
     {
-        if (is_null(self::$_runtimeClient)) {
-            self::$_versionEndpoint = getenv(
-                self::VERSION_ENDPOINT_ENVIRONMENT_NAME
-            );
-            
-            if (self::$_versionEndpoint == false) {
-                self::$_versionEndpoint = self::VERSION_ENDPOINT_FIXED_PATH;
-            }
+        try {
+            if (is_null(self::$_runtimeClient)) {
+                self::$_versionEndpoint = getenv(
+                    self::VERSION_ENDPOINT_ENVIRONMENT_NAME
+                );
 
-            $kernel = RuntimeKernel::getKernel();
-            $kernel->getProtocol1RuntimeGoalStateClient()->setKeepOpen($keepOpen);
-            
-            self::$_runtimeClient = $kernel->getRuntimeVersionManager()
-                ->getRuntimeClient(self::$_versionEndpoint);
-            
-            self::$_currentGoalState = self::$_runtimeClient
-                ->getCurrentGoalState();
-            
-            self::$_currentEnvironmentData = self::$_runtimeClient
-                ->getRoleEnvironmentData();
-        } else {
-            self::$_currentGoalState = self::$_runtimeClient
-                ->getCurrentGoalState();
-            
-            self::$_currentEnvironmentData = self::$_runtimeClient
-                ->getRoleEnvironmentData();
+                if (self::$_versionEndpoint == false) {
+                    self::$_versionEndpoint = self::VERSION_ENDPOINT_FIXED_PATH;
+                }
+
+                $kernel = RuntimeKernel::getKernel();
+                $kernel->getProtocol1RuntimeGoalStateClient()->setKeepOpen(
+                    $keepOpen
+                );
+
+                self::$_runtimeClient = $kernel->getRuntimeVersionManager()
+                    ->getRuntimeClient(self::$_versionEndpoint);
+
+                self::$_currentGoalState = self::$_runtimeClient
+                    ->getCurrentGoalState();
+
+                self::$_currentEnvironmentData = self::$_runtimeClient
+                    ->getRoleEnvironmentData();
+            } else {
+                self::$_currentGoalState = self::$_runtimeClient
+                    ->getCurrentGoalState();
+
+                self::$_currentEnvironmentData = self::$_runtimeClient
+                    ->getRoleEnvironmentData();
+            }
+        } catch (ChannelNotAvailableException $ex) {
+            throw new RoleEnvironmentnotAvailableException();
         }
     }
 
     /**
      * Tracks role environment changes raising events as necessary.
+     * 
+     * This method is blocking and can/should be called in a separate fork.
      * 
      * @static
      * 
@@ -644,6 +652,7 @@ class RoleEnvironment
         try {
             self::_initialize();
         } catch (RoleEnvironmentNotAvailableException $ex) {
+            return false;
         } catch (ChannelNotAvailableException $ex) {
             return false;
         }
@@ -806,6 +815,8 @@ class RoleEnvironment
      * Adds an event listener for the changed event, which occurs
      * after a configuration change has been applied to a role instance.
      * 
+     * To listen for events, one should call trackChanges.
+     * 
      * @param function $listener The changed listener.
      * 
      * @return none
@@ -855,6 +866,8 @@ class RoleEnvironment
      * recycled. When the instance is recycled, the configuration change is 
      * applied when it restarts.
      * 
+     * To listen for events, one should call trackChanges.
+     * 
      * @param function $listener The changing listener.
      * 
      * @static
@@ -889,7 +902,8 @@ class RoleEnvironment
 
     /**
      * Adds an event listener for the Stopping event, which occurs
-     * wheen the role is stopping.
+     * when the role is stopping.
+     * To listen for events, one should call trackChanges.
      * 
      * @param function $listener The stopping listener.
      * 

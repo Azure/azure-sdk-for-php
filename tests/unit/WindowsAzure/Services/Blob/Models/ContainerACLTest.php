@@ -27,6 +27,7 @@ use Tests\Framework\TestResources;
 use WindowsAzure\Resources;
 use WindowsAzure\Core\WindowsAzureUtilities;
 use WindowsAzure\Utilities;
+use WindowsAzure\Core\Serialization\XmlSerializer;
 
 /**
  * Unit tests for class ContainerAcl
@@ -219,9 +220,10 @@ class ContainerAclTest extends \PHPUnit_Framework_TestCase
         $sample = TestResources::getContainerAclMultipleEntriesSample();
         $expected = ContainerAcl::create('container', 
             '123', 'Sun, 25 Sep 2011 19:42:18 GMT', $sample['SignedIdentifiers']);
+        $xmlSerializer = new XmlSerializer();
         
         // Test
-        $xml = $acl->toXml();
+        $xml = $acl->toXml($xmlSerializer);
         
         // Assert
         $array = Utilities::unserialize($xml);

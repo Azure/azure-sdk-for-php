@@ -23,7 +23,7 @@
  */
  
 namespace WindowsAzure\Services\Blob;
-use WindowsAzure\Services\Core\FilterableService;
+use WindowsAzure\Core\FilterableService;
 
 /**
  * This interface has all REST APIs provided by Windows Azure for Blob service.
@@ -88,8 +88,8 @@ interface IBlob extends FilterableService
     /**
     * Creates a new container in the given storage account.
     * 
-    * @param string                    $container name
-    * @param Models\BlobServiceOptions $options   optional parameters
+    * @param string                        $container name
+    * @param Models\DeleteContainerOptions $options   optional parameters
     * 
     * @return none.
     * 

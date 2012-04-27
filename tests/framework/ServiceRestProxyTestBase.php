@@ -22,12 +22,13 @@
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
 namespace Tests\Framework;
-use WindowsAzure\Services\Core\Configuration;
+use WindowsAzure\Core\Configuration;
 use Tests\Framework\TestResources;
 use WindowsAzure\Services\Core\Models\ServiceProperties;
+use WindowsAzure\Core\Serialization\XmlSerializer;
 
 /**
- * TestBase class for each unit test class.
+ * TestBase class for Storage Services test classes.
  *
  * @category  Microsoft
  * @package   Tests\Framework
@@ -37,14 +38,10 @@ use WindowsAzure\Services\Core\Models\ServiceProperties;
  * @version   Release: @package_version@
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
-class ServiceRestProxyTestBase extends \PHPUnit_Framework_TestCase
+class ServiceRestProxyTestBase extends RestProxyTestBase
 {
-    protected $config;
     protected $propertiesChanged;
     protected $defaultProperties;
-    protected $wrapper;
-    
-    const NOT_SUPPORTED = 'The storage emulator doesn\'t support this API';
     
     private function _createDefaultProperties()
     {
@@ -64,10 +61,8 @@ class ServiceRestProxyTestBase extends \PHPUnit_Framework_TestCase
     
     public function __construct($config, $serviceWrapper)
     {
-        $this->config = $config;
-        $this->wrapper = $serviceWrapper;
+        parent::__construct($config, $serviceWrapper);
         $this->_createDefaultProperties();
-        \WindowsAzure\Logger::setLogFile('C:\log.txt');
     }
     
     public function setServiceProperties($properties, $options = null)
@@ -78,15 +73,11 @@ class ServiceRestProxyTestBase extends \PHPUnit_Framework_TestCase
 
     protected function tearDown()
     {
+        parent::tearDown();
+        
         if ($this->propertiesChanged) {
             $this->wrapper->setServiceProperties($this->defaultProperties);
         }
-    }
-    
-    protected function onNotSuccessfulTest(\Exception $e)
-    {
-        $this->tearDown();
-        throw $e;
     }
 }
 
