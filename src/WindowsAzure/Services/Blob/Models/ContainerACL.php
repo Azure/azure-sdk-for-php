@@ -272,7 +272,7 @@ class ContainerAcl
     {
         $properties = array(
             XmlSerializer::DEFAULT_TAG => 'SignedIdentifier',
-            XmlSerializer::ROOT_NAME => self::$xmlRootName
+            XmlSerializer::ROOT_NAME   => self::$xmlRootName
         );
         
         return $xmlSerializer->serialize($this->toArray(), $properties);

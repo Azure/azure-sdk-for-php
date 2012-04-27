@@ -60,6 +60,28 @@ class Utilities
     }
     
     /**
+     * Adds the given key/value pair into array if the value doesn't satisfy empty().
+     * 
+     * This function just validates that the given $array is actually array. If it's
+     * NULL the function treats it as array.
+     * 
+     * @param string $key    The key.
+     * @param string $value  The value.
+     * @param array  &$array The array. If NULL will be used as array.
+     */
+    public static function addIfNotEmpty($key, $value, &$array)
+    {
+        if (!is_null($array)) {
+            Validate::isArray($array, 'array');
+        }
+        
+        if (!empty($value)) {
+            $array[$key] = $value;
+        }
+    }
+
+
+    /**
      * Returns the specified value of the key chain passed from $array and in case
      * that key chain doesn't exist, null is returned.
      *
