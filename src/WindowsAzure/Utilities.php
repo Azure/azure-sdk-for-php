@@ -60,6 +60,49 @@ class Utilities
     }
     
     /**
+     * tries to get nested array with index name $key from $array.
+     * 
+     * Returns empty array object if the value is NULL.
+     * 
+     * @param string $key The index name.
+     * @param type $array The array object.
+     * 
+     * @static
+     * 
+     * @return array
+     */
+    public static function tryGetArray($key, $array)
+    {
+        return Utilities::getArray(Utilities::tryGetValue($array, $key));
+    }
+    
+    /**
+     * Adds the given key/value pair into array if the value doesn't satisfy empty().
+     * 
+     * This function just validates that the given $array is actually array. If it's
+     * NULL the function treats it as array.
+     * 
+     * @param string $key    The key.
+     * @param string $value  The value.
+     * @param array  &$array The array. If NULL will be used as array.
+     * 
+     * @static 
+     * 
+     * @return none
+     */
+    public static function addIfNotEmpty($key, $value, &$array)
+    {
+        if (!is_null($array)) {
+            Validate::isArray($array, 'array');
+        }
+        
+        if (!empty($value)) {
+            $array[$key] = $value;
+        }
+    }
+
+
+    /**
      * Returns the specified value of the key chain passed from $array and in case
      * that key chain doesn't exist, null is returned.
      *
