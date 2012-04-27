@@ -184,13 +184,16 @@ class Resources
     const MULTIPART_MIXED_TYPE  = 'multipart/mixed';
     
     // Common used XML tags
-    const XTAG_ATTRIBUTES     = '@attributes';
-    const XTAG_NAMESPACE      = '@namespace';
-    const XTAG_LABEL          = 'Label';
-    const XTAG_NAME           = 'Name';
-    const XTAG_DESCRIPTION    = 'Description';
-    const XTAG_LOCATION       = 'Location';
-    const XTAG_AFFINITY_GROUP = 'AffinityGroup';
+    const XTAG_ATTRIBUTES       = '@attributes';
+    const XTAG_NAMESPACE        = '@namespace';
+    const XTAG_LABEL            = 'Label';
+    const XTAG_NAME             = 'Name';
+    const XTAG_DESCRIPTION      = 'Description';
+    const XTAG_LOCATION         = 'Location';
+    const XTAG_AFFINITY_GROUP   = 'AffinityGroup';
+    const XTAG_HOSTED_SERVICES  = 'HostedServices';
+    const XTAG_STORAGE_SERVICES = 'StorageServices';
+    const XTAG_DISPLAY_NAME     = 'DisplayName';
     
     // Status Codes
     const STATUS_OK              = 200;
