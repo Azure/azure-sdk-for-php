@@ -169,7 +169,6 @@ class ServiceManagementRestProxy extends RestProxy
         throw new \Exception(Resources::NOT_IMPLEMENTED_MSG);
     }
     
-    
     /**
      * Regenerates the primary or secondary access key for the specified storage 
      * account.
@@ -317,6 +316,9 @@ class ServiceManagementRestProxy extends RestProxy
      */
     public function deleteAffinityGroup($name)
     {
+        Validate::isString($name, 'name');
+        Validate::notNullOrEmpty($name, 'name');
+        
         $context = new HttpCallContext();
         $context->setMethod(Resources::HTTP_DELETE);
         $context->setPath($this->_getAffinityGroupPath($name));
