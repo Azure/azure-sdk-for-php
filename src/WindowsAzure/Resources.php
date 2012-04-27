@@ -61,6 +61,7 @@ class Resources
     const INVALID_BTE_MSG      = "The blob block type must exist in %s";
     const INVALID_BLOB_PAT_MSG = 'The provided access type is invalid.';
     const INVALID_SVC_PROP_MSG = 'The provided service properties is invalid.';
+    const UNKNOWN_SRILZER_MSG  = 'The provided serializer type is unknown';
 
     // HTTP Headers
     const X_MS_HEADER_PREFIX                 = 'x-ms-';
@@ -139,6 +140,7 @@ class Resources
     const EMULATOR_TABLE_URI = '127.0.0.1:10002';
     const ASTERISK           = '*';
     const SM_URL             = 'https://management.core.windows.net';
+    const WA_XML_NAMESPACE   = 'http://schemas.microsoft.com/windowsazure';
 
     // Header values
     const STORAGE_API_LATEST_VERSION     = '2011-08-18';
@@ -180,6 +182,18 @@ class Resources
     const XML_ATOM_CONTENT_TYPE = 'application/atom+xml';
     const HTTP_TYPE             = 'application/http';
     const MULTIPART_MIXED_TYPE  = 'multipart/mixed';
+    
+    // Common used XML tags
+    const XTAG_ATTRIBUTES       = '@attributes';
+    const XTAG_NAMESPACE        = '@namespace';
+    const XTAG_LABEL            = 'Label';
+    const XTAG_NAME             = 'Name';
+    const XTAG_DESCRIPTION      = 'Description';
+    const XTAG_LOCATION         = 'Location';
+    const XTAG_AFFINITY_GROUP   = 'AffinityGroup';
+    const XTAG_HOSTED_SERVICES  = 'HostedServices';
+    const XTAG_STORAGE_SERVICES = 'StorageServices';
+    const XTAG_DISPLAY_NAME     = 'DisplayName';
     
     // Status Codes
     const STATUS_OK              = 200;
