@@ -52,29 +52,53 @@ class FunctionalTestBase extends QueueServiceRestProxyTestBase {
     
     public function setUp() {
         parent::setUp();
-        QueueServiceFunctionalTestData::setupData();
         $this->accountName = $this->config->getProperty(QueueSettings::ACCOUNT_NAME);
+    }
+
+    public static function setUpBeforeClass() {
+        parent::setUpBeforeClass();
+        $service = self::createService();
+        QueueServiceFunctionalTestData::setupData();
         
         foreach(QueueServiceFunctionalTestData::$TEST_QUEUE_NAMES as $name)  {
-            $this->safeDeleteQueue($name);
+            self::staticSafeDeleteQueue($service, $name);
         }
 
         foreach(QueueServiceFunctionalTestData::$TEST_QUEUE_NAMES as $name)  {
             self::println('Creating queue: ' . $name);
-            $this->createQueue($name);
+            $service->createQueue($name);
         }
     }
 
-    protected function tearDown()
+    public static function tearDownAfterClass()
     {
-        parent::tearDown();
+        parent::tearDownAfterClass();
+        $service = self::createService();
         if (!WindowsAzureUtilities::isEmulated()) {
             $serviceProperties = QueueServiceFunctionalTestData::getDefaultServiceProperties();
-            $this->wrapper->setServiceProperties($serviceProperties);
+            $service->setServiceProperties($serviceProperties);
         }
         
         foreach(QueueServiceFunctionalTestData::$TEST_QUEUE_NAMES as $name)  {
-            $this->safeDeleteQueue($name);
+            self::staticSafeDeleteQueue($service, $name);
+        }
+    }
+
+    private static function createService() {
+        $tmp = new FunctionalTestBase();
+        return $tmp->wrapper;
+    }
+    
+    private static function staticSafeDeleteQueue($service, $queueName)
+    {
+        try
+        {
+            $service->deleteQueue($queueName);
+        }
+        catch (\Exception $e)
+        {
+            // Ignore exception and continue, will assume that this queue doesn't exist in the sotrage account
+            error_log($e->getMessage());
         }
     }
     
