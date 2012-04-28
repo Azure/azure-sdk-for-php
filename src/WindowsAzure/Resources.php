@@ -194,6 +194,8 @@ class Resources
     const XTAG_HOSTED_SERVICES  = 'HostedServices';
     const XTAG_STORAGE_SERVICES = 'StorageServices';
     const XTAG_DISPLAY_NAME     = 'DisplayName';
+    const XTAG_SERVICE_NAME     = 'ServiceName';
+    const XTAG_URL              = 'Url';
     
     // Status Codes
     const STATUS_OK              = 200;
