@@ -79,8 +79,8 @@ class AffinityGroup
         $result->setLocation(Utilities::tryGetValue($raw, Resources::XTAG_LOCATION));
         $result->setName(Utilities::tryGetValue($raw, Resources::XTAG_NAME));
         $result->setDescription(
-                Utilities::tryGetValue($raw, Resources::XTAG_DESCRIPTION)
-            );
+            Utilities::tryGetValue($raw, Resources::XTAG_DESCRIPTION)
+        );
         
         return $result;
     }
@@ -212,7 +212,7 @@ class AffinityGroup
         $serialized = Resources::EMPTY_STRING;
         
         if ($serializer instanceof XmlSerializer) {
-            $arr = array();
+            $arr                            = array();
             $arr[Resources::XTAG_NAMESPACE] = array(
                 Resources::WA_XML_NAMESPACE => null,
             );
