@@ -104,7 +104,6 @@ class ServiceManagementRestProxyTest extends ServiceManagementRestProxyTestBase
      * @covers WindowsAzure\ServiceManagement\ServiceManagementRestProxy::createAffinityGroup
      * @covers WindowsAzure\ServiceManagement\ServiceManagementRestProxy::_getAffinityGroupPath
      * @covers WindowsAzure\ServiceManagement\ServiceManagementRestProxy::_getPath
-     * @covers WindowsAzure\ServiceManagement\ServiceManagementRestProxy::_send
      */
     public function testCreateAffinityGroup()
     {
@@ -125,7 +124,6 @@ class ServiceManagementRestProxyTest extends ServiceManagementRestProxyTestBase
      * @covers WindowsAzure\ServiceManagement\ServiceManagementRestProxy::deleteAffinityGroup
      * @covers WindowsAzure\ServiceManagement\ServiceManagementRestProxy::_getAffinityGroupPath
      * @covers WindowsAzure\ServiceManagement\ServiceManagementRestProxy::_getPath
-     * @covers WindowsAzure\ServiceManagement\ServiceManagementRestProxy::_send
      */
     public function testDeleteAffinityGroup()
     {
@@ -147,7 +145,6 @@ class ServiceManagementRestProxyTest extends ServiceManagementRestProxyTestBase
      * @covers WindowsAzure\ServiceManagement\Models\ListAffinityGroupsResult::create
      * @covers WindowsAzure\ServiceManagement\ServiceManagementRestProxy::_getAffinityGroupPath
      * @covers WindowsAzure\ServiceManagement\ServiceManagementRestProxy::_getPath
-     * @covers WindowsAzure\ServiceManagement\ServiceManagementRestProxy::_send
      */
     public function testListAffinityGroupsWithEmpty()
     {
@@ -164,7 +161,6 @@ class ServiceManagementRestProxyTest extends ServiceManagementRestProxyTestBase
      * @covers WindowsAzure\ServiceManagement\Models\ListAffinityGroupsResult::create
      * @covers WindowsAzure\ServiceManagement\ServiceManagementRestProxy::_getAffinityGroupPath
      * @covers WindowsAzure\ServiceManagement\ServiceManagementRestProxy::_getPath
-     * @covers WindowsAzure\ServiceManagement\ServiceManagementRestProxy::_send
      */
     public function testListAffinityGroupsWithOneEntry()
     {
@@ -185,7 +181,6 @@ class ServiceManagementRestProxyTest extends ServiceManagementRestProxyTestBase
      * @covers WindowsAzure\ServiceManagement\Models\ListAffinityGroupsResult::create
      * @covers WindowsAzure\ServiceManagement\ServiceManagementRestProxy::_getAffinityGroupPath
      * @covers WindowsAzure\ServiceManagement\ServiceManagementRestProxy::_getPath
-     * @covers WindowsAzure\ServiceManagement\ServiceManagementRestProxy::_send
      */
     public function testListAffinityGroupsWithMultipleEntries()
     {
@@ -207,7 +202,6 @@ class ServiceManagementRestProxyTest extends ServiceManagementRestProxyTestBase
      * @covers WindowsAzure\ServiceManagement\ServiceManagementRestProxy::updateAffinityGroup
      * @covers WindowsAzure\ServiceManagement\ServiceManagementRestProxy::_getAffinityGroupPath
      * @covers WindowsAzure\ServiceManagement\ServiceManagementRestProxy::_getPath
-     * @covers WindowsAzure\ServiceManagement\ServiceManagementRestProxy::_send
      */
     public function testUpdateAffinityGroup()
     {
@@ -231,7 +225,6 @@ class ServiceManagementRestProxyTest extends ServiceManagementRestProxyTestBase
      * @covers WindowsAzure\ServiceManagement\Models\GetAffinityGroupPropertiesResult::create
      * @covers WindowsAzure\ServiceManagement\ServiceManagementRestProxy::_getAffinityGroupPath
      * @covers WindowsAzure\ServiceManagement\ServiceManagementRestProxy::_getPath
-     * @covers WindowsAzure\ServiceManagement\ServiceManagementRestProxy::_send
      */
     public function testGetAffinityGroupProperties()
     {
@@ -254,7 +247,6 @@ class ServiceManagementRestProxyTest extends ServiceManagementRestProxyTestBase
      * @covers WindowsAzure\ServiceManagement\Models\ListLocationsResult::create
      * @covers WindowsAzure\ServiceManagement\ServiceManagementRestProxy::_getLocationPath
      * @covers WindowsAzure\ServiceManagement\ServiceManagementRestProxy::_getPath
-     * @covers WindowsAzure\ServiceManagement\ServiceManagementRestProxy::_send
      */
     public function testListLocations()
     {

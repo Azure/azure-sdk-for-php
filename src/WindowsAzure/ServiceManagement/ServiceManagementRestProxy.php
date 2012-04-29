@@ -96,19 +96,6 @@ class ServiceManagementRestProxy extends RestProxy
     }
     
     /**
-     * Sets the context URL and sends it.
-     * 
-     * @param HttpCallContext $context The HTTP call context.
-     * 
-     * @return \HTTP_Request2_Response
-     */
-    private function _send($context)
-    {
-        $context->setUri(Resources::SM_URL);
-        return $this->sendContext($context);
-    }
-    
-    /**
      * Initializes new ServiceManagementRestProxy object.
      * 
      * @param WindowsAzure\Core\Http\IHttpClient          $channel        The HTTP
@@ -120,7 +107,7 @@ class ServiceManagementRestProxy extends RestProxy
      */
     public function __construct($channel, $subscriptionId, $dataSerializer)
     {
-        parent::__construct($channel, $dataSerializer);
+        parent::__construct($channel, $dataSerializer, Resources::SM_URL);
         $this->_subscriptionId = $subscriptionId;
     }
     
@@ -248,7 +235,7 @@ class ServiceManagementRestProxy extends RestProxy
         $context->setPath($this->_getAffinityGroupPath());
         $context->addStatusCode(Resources::STATUS_OK);
         
-        $response   = $this->_send($context);
+        $response   = $this->sendContext($context);
         $serialized = $this->dataSerializer->unserialize($response->getBody());
         
         return ListAffinityGroupsResult::create($serialized);
@@ -302,7 +289,7 @@ class ServiceManagementRestProxy extends RestProxy
             Resources::XML_ATOM_CONTENT_TYPE
         );
         
-        $this->_send($context);
+        $this->sendContext($context);
     }
     
     /**
@@ -324,7 +311,7 @@ class ServiceManagementRestProxy extends RestProxy
         $context->setPath($this->_getAffinityGroupPath($name));
         $context->addStatusCode(Resources::STATUS_OK);
         
-        $this->_send($context);
+        $this->sendContext($context);
     }
     
     /**
@@ -368,7 +355,7 @@ class ServiceManagementRestProxy extends RestProxy
             Resources::XML_ATOM_CONTENT_TYPE
         );
         
-        $this->_send($context);
+        $this->sendContext($context);
     }
     
     /**
@@ -390,7 +377,7 @@ class ServiceManagementRestProxy extends RestProxy
         $context->setPath($this->_getAffinityGroupPath($name));
         $context->addStatusCode(Resources::STATUS_OK);
         
-        $response = $this->_send($context);
+        $response = $this->sendContext($context);
         $parsed   = $this->dataSerializer->unserialize($response->getBody());
         
         return GetAffinityGroupPropertiesResult::create($parsed);
@@ -410,7 +397,7 @@ class ServiceManagementRestProxy extends RestProxy
         $context->setPath($this->_getLocationPath());
         $context->addStatusCode(Resources::STATUS_OK);
         
-        $response   = $this->_send($context);
+        $response   = $this->sendContext($context);
         $serialized = $this->dataSerializer->unserialize($response->getBody());
         
         return ListLocationsResult::create($serialized);
