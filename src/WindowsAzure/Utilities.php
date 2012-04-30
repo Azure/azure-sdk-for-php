@@ -421,6 +421,27 @@ class Utilities
     {
         return fopen('data://text/plain,' . $string, 'r');
     }
+    
+    /**
+     * Sorts an array based on given keys order.
+     * 
+     * @param array $array The array to sort.
+     * @param array $order The keys order array.
+     * 
+     * @return array
+     */
+    public function orderArray($array, $order)
+    {
+        $ordered = array();
+        
+        foreach ($order as $key) {
+            if (array_key_exists($key, $array)) {
+                $ordered[$key] = $array[$key];
+            }
+        }
+        
+        return $ordered;
+    }
 }
 
 ?>
