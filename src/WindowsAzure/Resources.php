@@ -178,6 +178,7 @@ class Resources
     const QP_NEXT_TABLE_NAME    = 'NextTableName';
     const QP_NEXT_PK            = 'NextPartitionKey';
     const QP_NEXT_RK            = 'NextRowKey';
+    const QP_ACTION             = 'action';
     
     // Request body content types
     const XML_CONTENT_TYPE      = 'application/x-www-form-urlencoded';
@@ -207,6 +208,10 @@ class Resources
     const XTAG_MESSAGE                    = 'Message';
     const XTAG_STORAGE_SERVICE_PROPERTIES = 'StorageServiceProperties';
     const XTAG_ENDPOINTS                  = 'Endpoints';
+    const XTAG_PRIMARY                    = 'Primary';
+    const XTAG_SECONDARY                  = 'Secondary';
+    const XTAG_KEY_TYPE                   = 'KeyType';
+    const XTAG_STORAGE_SERVICE_KEYS       = 'StorageServiceKeys';
     
     // Status Codes
     const STATUS_OK              = 200;
