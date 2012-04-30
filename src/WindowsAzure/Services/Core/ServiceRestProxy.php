@@ -44,11 +44,6 @@ use WindowsAzure\Core\Http\HttpCallContext;
 class ServiceRestProxy extends RestProxy
 {
     /**
-     * @var string
-     */
-    protected $url;
-    
-    /**
      * Initializes new ServiceRestProxy object.
      *
      * @param IHttpClient $channel        The HTTP client used to send HTTP requests.
@@ -57,21 +52,7 @@ class ServiceRestProxy extends RestProxy
      */
     public function __construct($channel, $uri, $dataSerializer)
     {
-        parent::__construct($channel, $dataSerializer);
-        $this->url = $uri;
-    }
-    
-    /**
-     * Sends HTTP request with the specified HTTP call context.
-     * 
-     * @param WindowsAzure\Core\Http\HttpCallContext $context The HTTP call context.
-     * 
-     * @return \HTTP_Request2_Response
-     */
-    protected function sendContext($context)
-    {
-        $context->setUri($this->url);
-        return parent::sendContext($context);
+        parent::__construct($channel, $dataSerializer, $uri);
     }
     
     /**
