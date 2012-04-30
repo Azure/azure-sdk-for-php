@@ -62,6 +62,7 @@ class Resources
     const INVALID_BLOB_PAT_MSG = 'The provided access type is invalid.';
     const INVALID_SVC_PROP_MSG = 'The provided service properties is invalid.';
     const UNKNOWN_SRILZER_MSG  = 'The provided serializer type is unknown';
+    const INVALID_CSA_OPT_MSG  = 'Must provide valid location or affinity group.';
 
     // HTTP Headers
     const X_MS_HEADER_PREFIX                 = 'x-ms-';
