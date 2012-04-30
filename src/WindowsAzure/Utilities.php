@@ -64,8 +64,8 @@ class Utilities
      * 
      * Returns empty array object if the value is NULL.
      * 
-     * @param string $key The index name.
-     * @param type $array The array object.
+     * @param string $key   The index name.
+     * @param array  $array The array object.
      * 
      * @static
      * 
