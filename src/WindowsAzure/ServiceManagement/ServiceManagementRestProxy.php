@@ -33,6 +33,12 @@ use WindowsAzure\ServiceManagement\Models\AffinityGroup;
 use WindowsAzure\ServiceManagement\Models\ListAffinityGroupsResult;
 use WindowsAzure\ServiceManagement\Models\GetAffinityGroupPropertiesResult;
 use WindowsAzure\ServiceManagement\Models\ListLocationsResult;
+use WindowsAzure\ServiceManagement\Models\StorageService;
+use WindowsAzure\ServiceManagement\Models\ListStorageAccountsResult;
+use WindowsAzure\ServiceManagement\Models\GetOperationStatusResult;
+use WindowsAzure\ServiceManagement\Models\AsynchronousOperationResult;
+use WindowsAzure\ServiceManagement\Models\UpdateStorageAccountOptions;
+use WindowsAzure\ServiceManagement\Models\GetStorageAccountPropertiesResult;
 
 /**
  * This class constructs HTTP requests and receive HTTP responses for service 
@@ -108,6 +114,18 @@ class ServiceManagementRestProxy extends RestProxy
     }
     
     /**
+     * Constructs URI path for operations.
+     * 
+     * @param string $name The operation resource name.
+     * 
+     * @return string
+     */
+    private function _getOperationPath($name = null)
+    {
+        return $this->_getPath('operations', $name);
+    }
+    
+    /**
      * Initializes new ServiceManagementRestProxy object.
      * 
      * @param WindowsAzure\Core\Http\IHttpClient          $channel        The HTTP
@@ -132,7 +150,15 @@ class ServiceManagementRestProxy extends RestProxy
      */
     public function listStorageAccounts()
     {
-        throw new \Exception(Resources::NOT_IMPLEMENTED_MSG);
+        $context = new HttpCallContext();
+        $context->setMethod(Resources::HTTP_GET);
+        $context->setPath($this->_getStorageServicePath());
+        $context->addStatusCode(Resources::STATUS_OK);
+        
+        $response   = $this->sendContext($context);
+        $serialized = $this->dataSerializer->unserialize($response->getBody());
+        
+        return ListStorageAccountsResult::create($serialized);
     }
     
     /**
@@ -150,7 +176,18 @@ class ServiceManagementRestProxy extends RestProxy
      */
     public function getStorageAccountProperties($name)
     {
-        throw new \Exception(Resources::NOT_IMPLEMENTED_MSG);
+        Validate::isString($name, 'name');
+        Validate::notNullOrEmpty($name, 'name');
+        
+        $context = new HttpCallContext();
+        $context->setMethod(Resources::HTTP_GET);
+        $context->setPath($this->_getStorageServicePath($name));
+        $context->addStatusCode(Resources::STATUS_OK);
+        
+        $response = $this->sendContext($context);
+        $parsed   = $this->dataSerializer->unserialize($response->getBody());
+        
+        return GetStorageAccountPropertiesResult::create($parsed);
     }
     
     /**
@@ -188,6 +225,11 @@ class ServiceManagementRestProxy extends RestProxy
      * Creates a new storage account in Windows Azure.
      * 
      * In the optional parameters either location or affinity group must be provided.
+     * Because Create Storage Account is an asynchronous operation, it always returns
+     * status code 202 (Accepted). To determine the status code for the operation 
+     * once it is complete, call getOperationStatus API. The status code is embedded 
+     * in the response for this operation; if successful, it will be 
+     * status code 200 (OK).
      * 
      * @param string                             $name    The storage account name.
      * @param string                             $label   Name for the storage
@@ -196,13 +238,48 @@ class ServiceManagementRestProxy extends RestProxy
      * your tracking purposes.
      * @param Models\CreateStorageAccountOptions $options The optional parameters.
      * 
-     * @return none
+     * @return Models\AsynchronousOperationResult
      * 
      * @see http://msdn.microsoft.com/en-us/library/windowsazure/hh264518.aspx 
      */
     public function createStorageAccount($name, $label, $options)
     {
-        throw new \Exception(Resources::NOT_IMPLEMENTED_MSG);
+        Validate::isString($name, 'name');
+        Validate::notNullOrEmpty($name, 'name');
+        Validate::isString($label, 'label');
+        Validate::notNullOrEmpty($label, 'label');
+        Validate::notNullOrEmpty($options, 'options');
+        $affinityGroup = $options->getAffinityGroup();
+        $location      = $options->getLocation();
+        Validate::isTrue(
+            !empty($location) || !empty($affinityGroup),
+            Resources::INVALID_CSA_OPT_MSG
+        );
+        
+        $storageService = new StorageService();
+        $storageService->setName($name);
+        $storageService->setLabel($label);
+        $storageService->setLocation($options->getLocation());
+        $storageService->setAffinityGroup($options->getAffinityGroup());
+        $storageService->setDescription($options->getDescription());
+        $storageService->addSerializationProperty(
+            XmlSerializer::ROOT_NAME,
+            'CreateStorageServiceInput'
+        );
+        
+        $context = new HttpCallContext();
+        $context->setMethod(Resources::HTTP_POST);
+        $context->setPath($this->_getStorageServicePath());
+        $context->addStatusCode(Resources::STATUS_ACCEPTED);
+        $context->setBody($storageService->serialize($this->dataSerializer));
+        $context->addHeader(
+            Resources::CONTENT_TYPE,
+            Resources::XML_ATOM_CONTENT_TYPE
+        );
+        
+        $response = $this->sendContext($context);
+        
+        return AsynchronousOperationResult::create($response->getHeader());
     }
     
     /**
@@ -216,7 +293,15 @@ class ServiceManagementRestProxy extends RestProxy
      */
     public function deleteStorageAccount($name)
     {
-        throw new \Exception(Resources::NOT_IMPLEMENTED_MSG);
+        Validate::isString($name, 'name');
+        Validate::notNullOrEmpty($name, 'name');
+        
+        $context = new HttpCallContext();
+        $context->setMethod(Resources::HTTP_DELETE);
+        $context->setPath($this->_getStorageServicePath($name));
+        $context->addStatusCode(Resources::STATUS_OK);
+        
+        $this->sendContext($context);
     }
     
     /**
@@ -230,9 +315,39 @@ class ServiceManagementRestProxy extends RestProxy
      * 
      * @see http://msdn.microsoft.com/en-us/library/windowsazure/hh264516.aspx 
      */
-    public function updateStorageAccount($name, $options = null)
+    public function updateStorageAccount($name, $options)
     {
-        throw new \Exception(Resources::NOT_IMPLEMENTED_MSG);
+        Validate::isString($name, 'name');
+        Validate::notNullOrEmpty($name, 'name');
+        $label       = $options->getLabel();
+        $description = $options->getDescription();
+        Validate::isTrue(
+            !empty($label) || !empty($description),
+            Resources::INVALID_USA_OPT_MSG
+        );
+        
+        if (is_null($options)) {
+            $options = new UpdateStorageAccountOptions();
+        }
+        
+        $storageService = new StorageService();
+        $storageService->setLabel($options->getLabel());
+        $storageService->setDescription($options->getDescription());
+        $storageService->addSerializationProperty(
+            XmlSerializer::ROOT_NAME,
+            'UpdateStorageServiceInput'
+        );
+        
+        $context = new HttpCallContext();
+        $context->setMethod(Resources::HTTP_PUT);
+        $context->setPath($this->_getStorageServicePath($name));
+        $context->addStatusCode(Resources::STATUS_OK);
+        $context->setBody($storageService->serialize($this->dataSerializer));
+        $context->addHeader(
+            Resources::CONTENT_TYPE,
+            Resources::XML_ATOM_CONTENT_TYPE
+        );
+        $this->sendContext($context);
     }
     
     /**
@@ -415,6 +530,30 @@ class ServiceManagementRestProxy extends RestProxy
         $serialized = $this->dataSerializer->unserialize($response->getBody());
         
         return ListLocationsResult::create($serialized);
+    }
+    
+    /**
+     * Returns the status of the specified operation. After calling an asynchronous 
+     * operation, you can call Get Operation Status to determine whether the 
+     * operation has succeeded, failed, or is still in progress.
+     * 
+     * @param string $requestId The request ID for the request you wish to track.
+     * 
+     * @return Models\GetOperationStatusResult
+     * 
+     * @see http://msdn.microsoft.com/en-us/library/windowsazure/ee460783.aspx
+     */
+    public function getOperationStatus($requestId)
+    {
+        $context = new HttpCallContext();
+        $context->setMethod(Resources::HTTP_GET);
+        $context->setPath($this->_getOperationPath($requestId));
+        $context->addStatusCode(Resources::STATUS_OK);
+        
+        $response   = $this->sendContext($context);
+        $serialized = $this->dataSerializer->unserialize($response->getBody());
+        
+        return GetOperationStatusResult::create($serialized);
     }
 }
 

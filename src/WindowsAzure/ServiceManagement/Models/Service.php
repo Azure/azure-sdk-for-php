@@ -74,7 +74,6 @@ class Service
     {
         $this->setLabel(Utilities::tryGetValue($raw, Resources::XTAG_LABEL));
         $this->setLocation(Utilities::tryGetValue($raw, Resources::XTAG_LOCATION));
-        $this->setName(Utilities::tryGetValue($raw, Resources::XTAG_NAME));
         $this->setDescription(
             Utilities::tryGetValue($raw, Resources::XTAG_DESCRIPTION)
         );
@@ -204,7 +203,7 @@ class Service
         $arr[Resources::XTAG_NAMESPACE] = array(
             Resources::WA_XML_NAMESPACE => null,
         );
-        Utilities::addIfNotEmpty(Resources::XTAG_NAME, $this->_name, $arr);
+        
         Utilities::addIfNotEmpty(Resources::XTAG_LABEL, $this->_label, $arr);
         Utilities::addIfNotEmpty(
             Resources::XTAG_DESCRIPTION,

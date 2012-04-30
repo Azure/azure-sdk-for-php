@@ -26,7 +26,7 @@ namespace WindowsAzure\ServiceManagement\Models;
 use WindowsAzure\Validate;
 
 /**
- * The optional parameters for createAffinityGroup API.
+ * Optional parameters for createStorageAccount API.
  *
  * @category  Microsoft
  * @package   WindowsAzure\ServiceManagement\Models
@@ -36,12 +36,72 @@ use WindowsAzure\Validate;
  * @version   Release: @package_version@
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
-class CreateAffinityGroupOptions
+class CreateStorageAccountOptions
 {
     /**
      * @var string
      */
+    private $_location;
+    
+    /**
+     * @var string
+     */
+    private $_affinityGroup;
+    
+    /**
+     * @var string
+     */
     private $_description;
+    
+    /**
+     * Gets the location.
+     * 
+     * @return string
+     */
+    public function getLocation()
+    {
+        return $this->_location;
+    }
+    
+    /**
+     * Sets the location.
+     * 
+     * @param string $location The location.
+     * 
+     * @return none
+     */
+    public function setLocation($location)
+    {
+        Validate::isString($location, 'location');
+        Validate::notNullOrEmpty($location, 'location');
+        
+        $this->_location = $location;
+    }
+    
+    /**
+     * Gets the affinityGroup.
+     * 
+     * @return string
+     */
+    public function getAffinityGroup()
+    {
+        return $this->_affinityGroup;
+    }
+    
+    /**
+     * Sets the affinityGroup.
+     * 
+     * @param string $affinityGroup The affinityGroup.
+     * 
+     * @return none
+     */
+    public function setAffinityGroup($affinityGroup)
+    {
+        Validate::isString($affinityGroup, 'affinityGroup');
+        Validate::notNullOrEmpty($affinityGroup, 'affinityGroup');
+        
+        $this->_affinityGroup = $affinityGroup;
+    }
     
     /**
      * Gets the description.

@@ -28,6 +28,8 @@ use WindowsAzure\Core\Configuration;
 use WindowsAzure\ServiceManagement\ServiceManagementSettings;
 use WindowsAzure\ServiceManagement\ServiceManagementService;
 use WindowsAzure\Core\WindowsAzureUtilities;
+use WindowsAzure\ServiceManagement\Models\CreateStorageAccountOptions;
+use WindowsAzure\ServiceManagement\Models\OperationStatus;
 
 /**
  * Test base for ServiceManagementTest class.
@@ -115,8 +117,26 @@ class ServiceManagementRestProxyTestBase extends RestProxyTestBase
     
     public function createStorageAccount($name, $options = null)
     {
-        $this->wrapper->createStorageAccount($name);
+        $label = base64_encode($name);
+        $options = new CreateStorageAccountOptions();
+        $options->setLocation('West US');
+        
+        $result = $this->wrapper->createStorageAccount($name, $label, $options);
+        $this->blockUntilAsyncSucceed($result->getRequestId());
         $this->createdStorageAccounts[] = $name;
+    }
+    
+    protected function blockUntilAsyncSucceed($requestId)
+    {
+        $status = null;
+        
+        do {
+            sleep(5);
+            $result = $this->wrapper->getOperationStatus($requestId);
+            $status = $result->getStatus();
+        }while(OperationStatus::IN_PROGRESS == $status);
+        
+        $this->assertEquals(OperationStatus::SUCCEEDED, $status);
     }
     
     public function storageAccountExists($name)

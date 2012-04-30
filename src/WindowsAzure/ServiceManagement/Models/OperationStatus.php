@@ -23,11 +23,9 @@
  */
  
 namespace WindowsAzure\ServiceManagement\Models;
-use WindowsAzure\Resources;
-use WindowsAzure\Utilities;
 
 /**
- * The affinity group class.
+ * The possible staus values of asynchronous request.
  *
  * @category  Microsoft
  * @package   WindowsAzure\ServiceManagement\Models
@@ -37,39 +35,11 @@ use WindowsAzure\Utilities;
  * @version   Release: @package_version@
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
-class AffinityGroup extends Service
+class OperationStatus
 {
-    /**
-     * Constructs new affinity group object.
-     * 
-     * @param array $raw The array representation for affinity group.
-     */
-    public function __construct($raw = null)
-    {
-        parent::__construct($raw);
-        $this->setName(Utilities::tryGetValue($raw, Resources::XTAG_NAME));
-    }
-    
-    /**
-     * Converts the current object into ordered array representation.
-     * 
-     * @return array
-     */
-    protected function toArray()
-    {
-        $arr     = parent::toArray();
-        $order   = array(
-            Resources::XTAG_NAMESPACE,
-            Resources::XTAG_NAME,
-            Resources::XTAG_LABEL,
-            Resources::XTAG_DESCRIPTION,
-            Resources::XTAG_LOCATION
-        );
-        Utilities::addIfNotEmpty(Resources::XTAG_NAME, $this->getName(), $arr);
-        $ordered = Utilities::orderArray($arr, $order);
-        
-        return $ordered;
-    }
+    const IN_PROGRESS = 'InProgress';
+    const SUCCEEDED   = 'Succeeded';
+    const FAILED      = 'Failed';
 }
 
 ?>

@@ -23,11 +23,10 @@
  */
  
 namespace WindowsAzure\ServiceManagement\Models;
-use WindowsAzure\Resources;
-use WindowsAzure\Utilities;
+use WindowsAzure\Validate;
 
 /**
- * The affinity group class.
+ * The optional parameters for updateStorageAccount API.
  *
  * @category  Microsoft
  * @package   WindowsAzure\ServiceManagement\Models
@@ -37,38 +36,64 @@ use WindowsAzure\Utilities;
  * @version   Release: @package_version@
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
-class AffinityGroup extends Service
+class UpdateStorageAccountOptions
 {
     /**
-     * Constructs new affinity group object.
-     * 
-     * @param array $raw The array representation for affinity group.
+     * @var string
      */
-    public function __construct($raw = null)
+    private $_label;
+    
+    /**
+     * @var string
+     */
+    private $_description;
+    
+    /**
+     * Gets the label.
+     * 
+     * @return string
+     */
+    public function getLabel()
     {
-        parent::__construct($raw);
-        $this->setName(Utilities::tryGetValue($raw, Resources::XTAG_NAME));
+        return $this->_label;
     }
     
     /**
-     * Converts the current object into ordered array representation.
+     * Sets the label.
      * 
-     * @return array
+     * @param string $label The label.
+     * 
+     * @return none
      */
-    protected function toArray()
+    public function setLabel($label)
     {
-        $arr     = parent::toArray();
-        $order   = array(
-            Resources::XTAG_NAMESPACE,
-            Resources::XTAG_NAME,
-            Resources::XTAG_LABEL,
-            Resources::XTAG_DESCRIPTION,
-            Resources::XTAG_LOCATION
-        );
-        Utilities::addIfNotEmpty(Resources::XTAG_NAME, $this->getName(), $arr);
-        $ordered = Utilities::orderArray($arr, $order);
+        Validate::isString($label, 'label');
         
-        return $ordered;
+        $this->_label = $label;
+    }
+    
+    /**
+     * Gets the description.
+     * 
+     * @return string
+     */
+    public function getDescription()
+    {
+        return $this->_description;
+    }
+    
+    /**
+     * Sets the description.
+     * 
+     * @param string $description The description.
+     * 
+     * @return none
+     */
+    public function setDescription($description)
+    {
+        Validate::isString($description, 'description');
+        
+        $this->_description = $description;
     }
 }
 

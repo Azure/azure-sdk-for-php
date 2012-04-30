@@ -27,7 +27,7 @@ use WindowsAzure\Resources;
 use WindowsAzure\Utilities;
 
 /**
- * The affinity group class.
+ * The result of an asynchronous operation.
  *
  * @category  Microsoft
  * @package   WindowsAzure\ServiceManagement\Models
@@ -37,38 +37,44 @@ use WindowsAzure\Utilities;
  * @version   Release: @package_version@
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
-class AffinityGroup extends Service
+class AsynchronousOperationResult
 {
     /**
-     * Constructs new affinity group object.
-     * 
-     * @param array $raw The array representation for affinity group.
+     * @var string
      */
-    public function __construct($raw = null)
+    private $_requestId;
+    
+    public function create($headers)
     {
-        parent::__construct($raw);
-        $this->setName(Utilities::tryGetValue($raw, Resources::XTAG_NAME));
+        $result = new AsynchronousOperationResult();
+        $result->_requestId = Utilities::tryGetValue(
+            $headers,
+            Resources::X_MS_REQUEST_ID
+        );
+        
+        return $result;
     }
     
     /**
-     * Converts the current object into ordered array representation.
+     * Gets the requestid.
      * 
-     * @return array
+     * @return string
      */
-    protected function toArray()
+    public function getRequestId()
     {
-        $arr     = parent::toArray();
-        $order   = array(
-            Resources::XTAG_NAMESPACE,
-            Resources::XTAG_NAME,
-            Resources::XTAG_LABEL,
-            Resources::XTAG_DESCRIPTION,
-            Resources::XTAG_LOCATION
-        );
-        Utilities::addIfNotEmpty(Resources::XTAG_NAME, $this->getName(), $arr);
-        $ordered = Utilities::orderArray($arr, $order);
-        
-        return $ordered;
+        return $this->_requestId;
+    }
+    
+    /**
+     * Sets the requestid.
+     * 
+     * @param string $requestid The requestid.
+     * 
+     * @return none
+     */
+    public function setRequestId($requestid)
+    {
+        $this->_requestId = $requestid;
     }
 }
 

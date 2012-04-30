@@ -92,6 +92,11 @@ interface IServiceManagement extends FilterableService
      * Creates a new storage account in Windows Azure.
      * 
      * In the optional parameters either location or affinity group must be provided.
+     * Because Create Storage Account is an asynchronous operation, it always returns
+     * status code 202 (Accepted). To determine the status code for the operation 
+     * once it is complete, call Get Operation Status. The status code is embedded 
+     * in the response for this operation; if successful, it will be 
+     * status code 200 (OK).
      * 
      * @param string                             $name    The storage account name.
      * @param string                             $label   Name for the storage
@@ -100,7 +105,7 @@ interface IServiceManagement extends FilterableService
      * your tracking purposes.
      * @param Models\CreateStorageAccountOptions $options The optional parameters.
      * 
-     * @return none
+     * @return Models\AsynchronousOperationResult
      * 
      * @see http://msdn.microsoft.com/en-us/library/windowsazure/hh264518.aspx 
      */
@@ -128,7 +133,7 @@ interface IServiceManagement extends FilterableService
      * 
      * @see http://msdn.microsoft.com/en-us/library/windowsazure/hh264516.aspx 
      */
-    public function updateStorageAccount($name, $options = null);
+    public function updateStorageAccount($name, $options);
     
     /**
      * Lists the affinity groups associated with the specified subscription.
@@ -200,6 +205,19 @@ interface IServiceManagement extends FilterableService
      * @see http://msdn.microsoft.com/en-us/library/windowsazure/gg441293.aspx
      */
     public function listLocations();
+    
+    /**
+     * Returns the status of the specified operation. After calling an asynchronous 
+     * operation, you can call Get Operation Status to determine whether the 
+     * operation has succeeded, failed, or is still in progress.
+     * 
+     * @param string $requestId The request ID for the request you wish to track.
+     * 
+     * @return Models\GetOperationStatusResult
+     * 
+     * @see http://msdn.microsoft.com/en-us/library/windowsazure/ee460783.aspx
+     */
+    public function getOperationStatus($requestId);
 }
 
 ?>

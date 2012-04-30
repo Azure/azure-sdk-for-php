@@ -143,7 +143,6 @@ class ServiceTest extends \PHPUnit_Framework_TestCase
         $serializer = new XmlSerializer();
         $expected = '<?xml version="1.0" encoding="UTF-8"?>' . "\n";
         $expected .= '<CreateService xmlns="http://schemas.microsoft.com/windowsazure">' . "\n";
-        $expected .= ' <Name>Name</Name>' . "\n";
         $expected .= ' <Label>Label</Label>' . "\n";
         $expected .= ' <Description>Description</Description>' . "\n";
         $expected .= ' <Location>Location</Location>' . "\n";

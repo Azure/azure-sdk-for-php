@@ -23,11 +23,11 @@
  */
  
 namespace WindowsAzure\ServiceManagement\Models;
-use WindowsAzure\Resources;
 use WindowsAzure\Utilities;
+use WindowsAzure\Resources;
 
 /**
- * The affinity group class.
+ * The result of calling listStorageAccounts API.
  *
  * @category  Microsoft
  * @package   WindowsAzure\ServiceManagement\Models
@@ -37,38 +37,64 @@ use WindowsAzure\Utilities;
  * @version   Release: @package_version@
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
-class AffinityGroup extends Service
+class ListStorageAccountsResult
 {
     /**
-     * Constructs new affinity group object.
-     * 
-     * @param array $raw The array representation for affinity group.
+     * @var array
      */
-    public function __construct($raw = null)
+    private $_storageAccounts;
+    
+    /**
+     * Creates new ListStorageAccountsResult from parsed response body.
+     * 
+     * @param array $parsed The parsed response body.
+     * 
+     * @return ListStorageAccountsResult
+     */
+    public static function create($parsed)
     {
-        parent::__construct($raw);
-        $this->setName(Utilities::tryGetValue($raw, Resources::XTAG_NAME));
+        $result = new ListStorageAccountsResult();
+        
+        $result->_storageAccounts = array();
+        $entries                  = Utilities::tryGetArray(
+            Resources::XTAG_STORAGE_SERVICE,
+            $parsed
+        );
+        
+        foreach ($entries as $value) {
+            $properties = new ServiceProperties();
+            $properties->setServiceName(
+                Utilities::tryGetValue($value, Resources::XTAG_SERVICE_NAME)
+            );
+            $properties->setUrl(
+                Utilities::tryGetValue($value, Resources::XTAG_URL)
+            );
+            $result->_storageAccounts[] = $properties;
+        }
+        
+        return $result;
     }
     
     /**
-     * Converts the current object into ordered array representation.
+     * Gets storage accounts.
      * 
      * @return array
      */
-    protected function toArray()
+    public function getStorageAccounts()
     {
-        $arr     = parent::toArray();
-        $order   = array(
-            Resources::XTAG_NAMESPACE,
-            Resources::XTAG_NAME,
-            Resources::XTAG_LABEL,
-            Resources::XTAG_DESCRIPTION,
-            Resources::XTAG_LOCATION
-        );
-        Utilities::addIfNotEmpty(Resources::XTAG_NAME, $this->getName(), $arr);
-        $ordered = Utilities::orderArray($arr, $order);
-        
-        return $ordered;
+        return $this->_storageAccounts;
+    }
+    
+    /**
+     * Sets storage accounts.
+     * 
+     * @param array $storageAccounts The storage accounts.
+     * 
+     * @return none
+     */
+    public function setStorageAccounts($storageAccounts)
+    {
+        $this->_storageAccounts = $storageAccounts;
     }
 }
 

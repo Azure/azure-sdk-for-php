@@ -28,6 +28,8 @@ use WindowsAzure\Core\Http\HttpClient;
 use WindowsAzure\Core\Serialization\XmlSerializer;
 use WindowsAzure\ServiceManagement\ServiceManagementRestProxy;
 use WindowsAzure\ServiceManagement\Models\Locations;
+use WindowsAzure\ServiceManagement\Models\CreateStorageAccountOptions;
+use WindowsAzure\ServiceManagement\Models\UpdateStorageAccountOptions;
 
 /**
  * Unit tests for class ServiceManagementRestProxy
@@ -42,6 +44,8 @@ use WindowsAzure\ServiceManagement\Models\Locations;
  */
 class ServiceManagementRestProxyTest extends ServiceManagementRestProxyTestBase
 {
+    private $_storageAccountName = 'createstorageaccount';
+    
     /**
      * @covers WindowsAzure\ServiceManagement\ServiceManagementRestProxy::__construct
      */
@@ -256,6 +260,114 @@ class ServiceManagementRestProxyTest extends ServiceManagementRestProxyTestBase
         // Assert
         $locations = $result->getLocations();
         $this->assertCount(Locations::COUNT, $locations);
+    }
+
+    /**
+     * @covers WindowsAzure\ServiceManagement\ServiceManagementRestProxy::createStorageAccount
+     * @covers WindowsAzure\ServiceManagement\ServiceManagementRestProxy::getOperationStatus
+     * @covers WindowsAzure\ServiceManagement\ServiceManagementRestProxy::_getOperationPath
+     * @covers WindowsAzure\ServiceManagement\ServiceManagementRestProxy::_getStorageServicePath
+     * @covers WindowsAzure\ServiceManagement\ServiceManagementRestProxy::_getPath
+     */
+    public function testCreateStorageAccount()
+    {
+        // Setup
+        $name = $this->_storageAccountName;
+        $label = base64_encode($name);
+        $options = new CreateStorageAccountOptions();
+        $options->setLocation('West US');
+        
+        // Test
+        $result = $this->wrapper->createStorageAccount($name, $label, $options);
+        $this->blockUntilAsyncSucceed($result->getRequestId());
+        
+        // Assert
+        $this->assertTrue($this->storageAccountExists($name));
+    }
+    
+    /**
+     * @covers WindowsAzure\ServiceManagement\ServiceManagementRestProxy::listStorageAccounts
+     * @covers WindowsAzure\ServiceManagement\Models\ListStorageAccountsResult::create
+     * @covers WindowsAzure\ServiceManagement\ServiceManagementRestProxy::_getStorageServicePath
+     * @covers WindowsAzure\ServiceManagement\ServiceManagementRestProxy::_getPath
+     * @depends testCreateStorageAccount
+     */
+    public function testListStorageAccounts()
+    {
+        // Setup
+        $expected = 1;
+        
+         // Test
+        $result = $this->wrapper->listStorageAccounts();
+        
+        // Assert
+        $this->assertCount($expected, $result->getStorageAccounts());
+    }
+    
+    /**
+     * @covers WindowsAzure\ServiceManagement\ServiceManagementRestProxy::updateStorageAccount
+     * @covers WindowsAzure\ServiceManagement\ServiceManagementRestProxy::_getStorageServicePath
+     * @covers WindowsAzure\ServiceManagement\ServiceManagementRestProxy::_getPath
+     * @depends testListStorageAccounts
+     */
+    public function testUpdateStorageAccount()
+    {
+        // Setup
+        $name = $this->_storageAccountName;
+        $options = new UpdateStorageAccountOptions();
+        $expectedDesc = 'My description';
+        $expectedLabel = base64_encode('new label');
+        $options->setDescription($expectedDesc);
+        $options->setLabel($expectedLabel);
+        
+        // Test
+        $this->wrapper->updateStorageAccount($name, $options);
+        
+        // Assert
+        $result = $this->wrapper->getStorageAccountProperties($name);
+        $this->assertEquals($expectedDesc, $result->getStorageService()->getDescription());
+        $this->assertEquals($expectedLabel, $result->getStorageService()->getLabel());
+    }
+    
+    /**
+     * @covers WindowsAzure\ServiceManagement\ServiceManagementRestProxy::updateStorageAccount
+     * @covers WindowsAzure\ServiceManagement\ServiceManagementRestProxy::_getStorageServicePath
+     * @covers WindowsAzure\ServiceManagement\ServiceManagementRestProxy::_getPath
+     * @covers WindowsAzure\ServiceManagement\Models\GetStorageAccountPropertiesResult::create
+     * @depends testUpdateStorageAccount
+     */
+    public function testGetStorageAccountProperties()
+    {
+        // Setup
+        $name = $this->_storageAccountName;
+        
+        // Test
+        $result = $this->wrapper->getStorageAccountProperties($name);
+        
+        // Assert
+        $this->assertEquals($name, $result->getStorageService()->getName());
+    }
+    
+    /**
+     * @covers WindowsAzure\ServiceManagement\ServiceManagementRestProxy::deleteStorageAccount
+     * @covers WindowsAzure\ServiceManagement\ServiceManagementRestProxy::_getStorageServicePath
+     * @covers WindowsAzure\ServiceManagement\ServiceManagementRestProxy::_getPath
+     * @depends testGetStorageAccountProperties
+     */
+    public function testDeleteStorageAccount()
+    {
+        // From build time perspective, this method must be called as the last unit
+        // test (by specifying @depends) because all other unit tests use the storage 
+        // account this method deletes.
+        
+        // Setup
+        $name = $this->_storageAccountName;
+        
+         // Test
+        $this->wrapper->deleteStorageAccount($name);
+        
+        // Assert
+        $this->assertFalse($this->storageAccountExists($name));
     }
 }
 
