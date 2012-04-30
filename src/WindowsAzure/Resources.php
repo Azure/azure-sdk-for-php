@@ -63,6 +63,7 @@ class Resources
     const INVALID_SVC_PROP_MSG = 'The provided service properties is invalid.';
     const UNKNOWN_SRILZER_MSG  = 'The provided serializer type is unknown';
     const INVALID_CSA_OPT_MSG  = 'Must provide valid location or affinity group.';
+    const INVALID_USA_OPT_MSG  = 'Must provide either description or label.';
 
     // HTTP Headers
     const X_MS_HEADER_PREFIX                 = 'x-ms-';
@@ -92,6 +93,7 @@ class Resources
     const X_MS_CONTINUATION_NEXTTABLENAME    = 'x-ms-continuation-nexttablename';
     const X_MS_CONTINUATION_NEXTPARTITIONKEY = 'x-ms-continuation-nextpartitionkey';
     const X_MS_CONTINUATION_NEXTROWKEY       = 'x-ms-continuation-nextrowkey';
+    const X_MS_REQUEST_ID                    = 'x-ms-request-id';
     const ETAG                               = 'etag';
     const LAST_MODIFIED                      = 'last-modified';
     const DATE                               = 'date';
@@ -185,18 +187,26 @@ class Resources
     const MULTIPART_MIXED_TYPE  = 'multipart/mixed';
     
     // Common used XML tags
-    const XTAG_ATTRIBUTES       = '@attributes';
-    const XTAG_NAMESPACE        = '@namespace';
-    const XTAG_LABEL            = 'Label';
-    const XTAG_NAME             = 'Name';
-    const XTAG_DESCRIPTION      = 'Description';
-    const XTAG_LOCATION         = 'Location';
-    const XTAG_AFFINITY_GROUP   = 'AffinityGroup';
-    const XTAG_HOSTED_SERVICES  = 'HostedServices';
-    const XTAG_STORAGE_SERVICES = 'StorageServices';
-    const XTAG_DISPLAY_NAME     = 'DisplayName';
-    const XTAG_SERVICE_NAME     = 'ServiceName';
-    const XTAG_URL              = 'Url';
+    const XTAG_ATTRIBUTES                 = '@attributes';
+    const XTAG_NAMESPACE                  = '@namespace';
+    const XTAG_LABEL                      = 'Label';
+    const XTAG_NAME                       = 'Name';
+    const XTAG_DESCRIPTION                = 'Description';
+    const XTAG_LOCATION                   = 'Location';
+    const XTAG_AFFINITY_GROUP             = 'AffinityGroup';
+    const XTAG_HOSTED_SERVICES            = 'HostedServices';
+    const XTAG_STORAGE_SERVICES           = 'StorageServices';
+    const XTAG_STORAGE_SERVICE            = 'StorageService';
+    const XTAG_DISPLAY_NAME               = 'DisplayName';
+    const XTAG_SERVICE_NAME               = 'ServiceName';
+    const XTAG_URL                        = 'Url';
+    const XTAG_ID                         = 'ID';
+    const XTAG_STATUS                     = 'Status';
+    const XTAG_HTTP_STATUS_CODE           = 'HttpStatusCode';
+    const XTAG_CODE                       = 'Code';
+    const XTAG_MESSAGE                    = 'Message';
+    const XTAG_STORAGE_SERVICE_PROPERTIES = 'StorageServiceProperties';
+    const XTAG_ENDPOINTS                  = 'Endpoints';
     
     // Status Codes
     const STATUS_OK              = 200;
