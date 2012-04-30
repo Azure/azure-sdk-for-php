@@ -267,7 +267,6 @@ class ServiceManagementRestProxy extends RestProxy
         
         $response = $this->sendContext($context);
         $parsed   = $this->dataSerializer->unserialize($response->getBody());
-        \WindowsAzure\Logger::log($response->getBody());
         
         return GetStorageAccountKeysResult::create($parsed);
     }
