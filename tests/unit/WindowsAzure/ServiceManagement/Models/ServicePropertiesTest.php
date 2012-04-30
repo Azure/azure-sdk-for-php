@@ -15,80 +15,61 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   WindowsAzure\ServiceManagement\Models
+ * @package   Tests\Unit\WindowsAzure\ServiceManagement\Models
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
- 
-namespace WindowsAzure\ServiceManagement\Models;
+
+namespace Tests\Unit\WindowsAzure\ServiceManagement\Models;
+use WindowsAzure\ServiceManagement\Models\ServiceProperties;
 
 /**
- * The location class.
+ * Unit tests for class ServiceProperties
  *
  * @category  Microsoft
- * @package   WindowsAzure\ServiceManagement\Models
+ * @package   Tests\Unit\WindowsAzure\ServiceManagement\Models
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @version   Release: @package_version@
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
-class Location
+class ServicePropertiesTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @var string
+     * @covers WindowsAzure\ServiceManagement\Models\ServiceProperties::setUrl
+     * @covers WindowsAzure\ServiceManagement\Models\ServiceProperties::getUrl
      */
-    private $_name;
-    
-    /**
-     * @var string
-     */
-    private $_displayName;
-    
-    /**
-     * Gets the name.
-     * 
-     * @return string
-     */
-    public function getName()
+    public function testSetUrl()
     {
-        return $this->_name;
+        // Setup
+        $service = new ServiceProperties();
+        $expected = 'Url';
+        
+        // Test
+        $service->setUrl($expected);
+        
+        // Assert
+        $this->assertEquals($expected, $service->getUrl());
     }
     
     /**
-     * Sets the name.
-     * 
-     * @param string $name The name.
-     * 
-     * @return none
+     * @covers WindowsAzure\ServiceManagement\Models\ServiceProperties::setServiceName
+     * @covers WindowsAzure\ServiceManagement\Models\ServiceProperties::getServiceName
      */
-    public function setName($name)
+    public function testSetServiceName()
     {
-        $this->_name = $name;
-    }
-    
-    /**
-     * Gets the displayName.
-     * 
-     * @return string
-     */
-    public function getDisplayName()
-    {
-        return $this->_displayName;
-    }
-    
-    /**
-     * Sets the displayName.
-     * 
-     * @param string $displayName The displayName.
-     * 
-     * @return none
-     */
-    public function setDisplayName($displayName)
-    {
-        $this->_displayName = $displayName;
+        // Setup
+        $service = new ServiceProperties();
+        $expected = 'ServiceName';
+        
+        // Test
+        $service->setServiceName($expected);
+        
+        // Assert
+        $this->assertEquals($expected, $service->getServiceName());
     }
 }
 

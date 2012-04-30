@@ -24,6 +24,9 @@
 
 namespace Tests\Unit\WindowsAzure\ServiceManagement\Models;
 use WindowsAzure\ServiceManagement\Models\Service;
+use WindowsAzure\Core\Serialization\XmlSerializer;
+use WindowsAzure\Resources;
+
 
 /**
  * Unit tests for class Service
@@ -39,37 +42,140 @@ use WindowsAzure\ServiceManagement\Models\Service;
 class ServiceTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @covers WindowsAzure\ServiceManagement\Models\Service::setUrl
-     * @covers WindowsAzure\ServiceManagement\Models\Service::getUrl
+     * @covers WindowsAzure\ServiceManagement\Models\Service::setName
+     * @covers WindowsAzure\ServiceManagement\Models\Service::getName
+     * @covers WindowsAzure\ServiceManagement\Models\Service::__construct
      */
-    public function testSetUrl()
+    public function testSetName()
     {
         // Setup
         $service = new Service();
-        $expected = 'Url';
+        $expected = 'Name';
         
         // Test
-        $service->setUrl($expected);
+        $service->setName($expected);
         
         // Assert
-        $this->assertEquals($expected, $service->getUrl());
+        $this->assertEquals($expected, $service->getName());
     }
     
     /**
-     * @covers WindowsAzure\ServiceManagement\Models\Service::setServiceName
-     * @covers WindowsAzure\ServiceManagement\Models\Service::getServiceName
+     * @covers WindowsAzure\ServiceManagement\Models\Service::setLabel
+     * @covers WindowsAzure\ServiceManagement\Models\Service::getLabel
+     * @covers WindowsAzure\ServiceManagement\Models\Service::__construct
      */
-    public function testSetServiceName()
+    public function testSetLabel()
     {
         // Setup
         $service = new Service();
-        $expected = 'ServiceName';
+        $expected = 'Label';
         
         // Test
-        $service->setServiceName($expected);
+        $service->setLabel($expected);
         
         // Assert
-        $this->assertEquals($expected, $service->getServiceName());
+        $this->assertEquals($expected, $service->getLabel());
+    }
+    
+    /**
+     * @covers WindowsAzure\ServiceManagement\Models\Service::setDescription
+     * @covers WindowsAzure\ServiceManagement\Models\Service::getDescription
+     * @covers WindowsAzure\ServiceManagement\Models\Service::__construct
+     */
+    public function testSetDescription()
+    {
+        // Setup
+        $service = new Service();
+        $expected = 'Description';
+        
+        // Test
+        $service->setDescription($expected);
+        
+        // Assert
+        $this->assertEquals($expected, $service->getDescription());
+    }
+    
+    /**
+     * @covers WindowsAzure\ServiceManagement\Models\Service::setLocation
+     * @covers WindowsAzure\ServiceManagement\Models\Service::getLocation
+     * @covers WindowsAzure\ServiceManagement\Models\Service::__construct
+     */
+    public function testSetLocation()
+    {
+        // Setup
+        $service = new Service();
+        $expected = 'Location';
+        
+        // Test
+        $service->setLocation($expected);
+        
+        // Assert
+        $this->assertEquals($expected, $service->getLocation());
+    }
+    
+    /**
+     * @covers WindowsAzure\ServiceManagement\Models\Service::addSerializationProperty
+     * @covers WindowsAzure\ServiceManagement\Models\Service::getSerializationPropertyValue
+     * @covers WindowsAzure\ServiceManagement\Models\Service::__construct
+     */
+    public function testAddSerializationProperty()
+    {
+        // Setup
+        $service = new Service();
+        $expectedKey = 'Key';
+        $expectedValue = 'Value';
+        
+        // Test
+        $service->addSerializationProperty($expectedKey, $expectedValue);
+        
+        // Assert
+        $this->assertEquals($expectedValue, $service->getSerializationPropertyValue($expectedKey));
+    }
+    
+    /**
+     * @covers WindowsAzure\ServiceManagement\Models\Service::serialize
+     * @covers WindowsAzure\ServiceManagement\Models\Service::__construct
+     * @covers WindowsAzure\ServiceManagement\Models\Service::toArray
+     */
+    public function testSerialize()
+    {
+        // Setup
+        $serializer = new XmlSerializer();
+        $expected = '<?xml version="1.0" encoding="UTF-8"?>' . "\n";
+        $expected .= '<CreateService xmlns="http://schemas.microsoft.com/windowsazure">' . "\n";
+        $expected .= ' <Name>Name</Name>' . "\n";
+        $expected .= ' <Label>Label</Label>' . "\n";
+        $expected .= ' <Description>Description</Description>' . "\n";
+        $expected .= ' <Location>Location</Location>' . "\n";
+        $expected .= '</CreateService>' . "\n";
+        $service = new Service();
+        $service->setName('Name');
+        $service->setLabel('Label');
+        $service->setLocation('Location');
+        $service->setDescription('Description');
+        $service->addSerializationProperty(
+            XmlSerializer::ROOT_NAME,
+            'CreateService'
+        );
+        
+        // Test
+        $actual = $service->serialize($serializer);
+        
+        // Assert
+        $this->assertEquals($expected, $actual);
+    }
+    
+    /**
+     * @covers WindowsAzure\ServiceManagement\Models\Service::serialize
+     */
+    public function testSerializeWithInvalidSerializer()
+    {
+        // Setup
+        $this->setExpectedException('\InvalidArgumentException', Resources::UNKNOWN_SRILZER_MSG);
+        $service = new Service();
+        
+        // Test
+        $service->serialize(new Service());        
     }
 }
 

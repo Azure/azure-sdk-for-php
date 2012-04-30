@@ -27,7 +27,6 @@ use WindowsAzure\ServiceManagement\Models\AffinityGroup;
 use WindowsAzure\Core\Serialization\XmlSerializer;
 use WindowsAzure\Resources;
 
-
 /**
  * Unit tests for class AffinityGroup
  *
@@ -42,158 +41,35 @@ use WindowsAzure\Resources;
 class AffinityGroupTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @covers WindowsAzure\ServiceManagement\Models\AffinityGroup::setName
-     * @covers WindowsAzure\ServiceManagement\Models\AffinityGroup::getName
-     */
-    public function testSetName()
-    {
-        // Setup
-        $affinityGroup = new AffinityGroup();
-        $expected = 'Name';
-        
-        // Test
-        $affinityGroup->setName($expected);
-        
-        // Assert
-        $this->assertEquals($expected, $affinityGroup->getName());
-    }
-    
-    /**
-     * @covers WindowsAzure\ServiceManagement\Models\AffinityGroup::setLabel
-     * @covers WindowsAzure\ServiceManagement\Models\AffinityGroup::getLabel
-     */
-    public function testSetLabel()
-    {
-        // Setup
-        $affinityGroup = new AffinityGroup();
-        $expected = 'Label';
-        
-        // Test
-        $affinityGroup->setLabel($expected);
-        
-        // Assert
-        $this->assertEquals($expected, $affinityGroup->getLabel());
-    }
-    
-    /**
-     * @covers WindowsAzure\ServiceManagement\Models\AffinityGroup::setDescription
-     * @covers WindowsAzure\ServiceManagement\Models\AffinityGroup::getDescription
-     */
-    public function testSetDescription()
-    {
-        // Setup
-        $affinityGroup = new AffinityGroup();
-        $expected = 'Description';
-        
-        // Test
-        $affinityGroup->setDescription($expected);
-        
-        // Assert
-        $this->assertEquals($expected, $affinityGroup->getDescription());
-    }
-    
-    /**
-     * @covers WindowsAzure\ServiceManagement\Models\AffinityGroup::setLocation
-     * @covers WindowsAzure\ServiceManagement\Models\AffinityGroup::getLocation
-     */
-    public function testSetLocation()
-    {
-        // Setup
-        $affinityGroup = new AffinityGroup();
-        $expected = 'Location';
-        
-        // Test
-        $affinityGroup->setLocation($expected);
-        
-        // Assert
-        $this->assertEquals($expected, $affinityGroup->getLocation());
-    }
-    
-    /**
-     * @covers WindowsAzure\ServiceManagement\Models\AffinityGroup::addSerializationProperty
-     * @covers WindowsAzure\ServiceManagement\Models\AffinityGroup::getSerializationPropertyValue
-     */
-    public function testAddSerializationProperty()
-    {
-        // Setup
-        $affinityGroup = new AffinityGroup();
-        $expectedKey = 'Key';
-        $expectedValue = 'Value';
-        
-        // Test
-        $affinityGroup->addSerializationProperty($expectedKey, $expectedValue);
-        
-        // Assert
-        $this->assertEquals($expectedValue, $affinityGroup->getSerializationPropertyValue($expectedKey));
-    }
-    
-    /**
-     * @covers WindowsAzure\ServiceManagement\Models\AffinityGroup::serialize
+     * @covers WindowsAzure\ServiceManagement\Models\AffinityGroup::toArray
+     * @covers WindowsAzure\ServiceManagement\Models\AffinityGroup::__construct
      */
     public function testSerialize()
     {
         // Setup
         $serializer = new XmlSerializer();
         $expected = '<?xml version="1.0" encoding="UTF-8"?>' . "\n";
-        $expected .= '<CreateAffinityGroup xmlns="http://schemas.microsoft.com/windowsazure">' . "\n";
+        $expected .= '<CreateService xmlns="http://schemas.microsoft.com/windowsazure">' . "\n";
         $expected .= ' <Name>Name</Name>' . "\n";
         $expected .= ' <Label>Label</Label>' . "\n";
         $expected .= ' <Description>Description</Description>' . "\n";
         $expected .= ' <Location>Location</Location>' . "\n";
-        $expected .= '</CreateAffinityGroup>' . "\n";
-        $affinityGroup = new AffinityGroup();
-        $affinityGroup->setName('Name');
-        $affinityGroup->setLabel('Label');
-        $affinityGroup->setLocation('Location');
-        $affinityGroup->setDescription('Description');
-        $affinityGroup->addSerializationProperty(
+        $expected .= '</CreateService>' . "\n";
+        $affinitygroup = new AffinityGroup();
+        $affinitygroup->setName('Name');
+        $affinitygroup->setLabel('Label');
+        $affinitygroup->setLocation('Location');
+        $affinitygroup->setDescription('Description');
+        $affinitygroup->addSerializationProperty(
             XmlSerializer::ROOT_NAME,
-            'CreateAffinityGroup'
+            'CreateService'
         );
         
         // Test
-        $actual = $affinityGroup->serialize($serializer);
+        $actual = $affinitygroup->serialize($serializer);
         
         // Assert
         $this->assertEquals($expected, $actual);
-    }
-    
-    /**
-     * @covers WindowsAzure\ServiceManagement\Models\AffinityGroup::serialize
-     */
-    public function testSerializeWithInvalidSerializer()
-    {
-        // Setup
-        $this->setExpectedException('\InvalidArgumentException', Resources::UNKNOWN_SRILZER_MSG);
-        $affinityGroup = new AffinityGroup();
-        
-        // Test
-        $affinityGroup->serialize(new AffinityGroup());        
-    }
-    
-    /**
-     * @covers WindowsAzure\ServiceManagement\Models\AffinityGroup::create
-     */
-    public function testCreate()
-    {
-        // Setup
-        $name = 'name';
-        $location = 'Anywhere US';
-        $label = base64_encode($name);
-        $arr = array(
-            Resources::XTAG_NAME => $name,
-            Resources::XTAG_LOCATION => $location,
-            Resources::XTAG_LABEL => $label,
-        );
-        
-        // Test
-        $actual = AffinityGroup::create($arr);
-        
-        // Assert
-        $this->assertEquals($name, $actual->getName());
-        $this->assertEquals($location, $actual->getLocation());
-        $this->assertEquals($label, $actual->getLabel());
-        $this->assertNull($actual->getDescription());
     }
 }
 

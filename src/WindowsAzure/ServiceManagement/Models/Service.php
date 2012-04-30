@@ -23,9 +23,12 @@
  */
  
 namespace WindowsAzure\ServiceManagement\Models;
+use WindowsAzure\Resources;
+use WindowsAzure\Utilities;
+use WindowsAzure\Core\Serialization\XmlSerializer;
 
 /**
- * The Windows Azure service class.
+ * Windows Azure service basic elements.
  *
  * @category  Microsoft
  * @package   WindowsAzure\ServiceManagement\Models
@@ -40,55 +43,207 @@ class Service
     /**
      * @var string
      */
-    private $_url;
+    private $_name;
     
     /**
      * @var string
      */
-    private $_serviceName;
+    private $_label;
     
     /**
-     * Gets the url.
+     * @var string
+     */
+    private $_description;
+    
+    /**
+     * @var string
+     */
+    private $_location;
+    
+    /**
+     * @var array 
+     */
+    private $_serializationProperties;
+    
+    /**
+     * Creates Service object from the given raw array.
+     * 
+     * @param array $raw The service members in array representation.
+     */
+    public function __construct($raw = null)
+    {
+        $this->setLabel(Utilities::tryGetValue($raw, Resources::XTAG_LABEL));
+        $this->setLocation(Utilities::tryGetValue($raw, Resources::XTAG_LOCATION));
+        $this->setName(Utilities::tryGetValue($raw, Resources::XTAG_NAME));
+        $this->setDescription(
+            Utilities::tryGetValue($raw, Resources::XTAG_DESCRIPTION)
+        );
+    }
+    
+    /**
+     * Gets the name.
      * 
      * @return string
      */
-    public function getUrl()
+    public function getName()
     {
-        return $this->_url;
+        return $this->_name;
     }
     
     /**
-     * Sets the url.
+     * Sets the name.
      * 
-     * @param string $url The url.
+     * @param string $name The name.
      * 
      * @return none
      */
-    public function setUrl($url)
+    public function setName($name)
     {
-        $this->_url = $url;
+        $this->_name = $name;
     }
     
     /**
-     * Gets the serviceName.
+     * Gets the label.
      * 
      * @return string
      */
-    public function getServiceName()
+    public function getLabel()
     {
-        return $this->_serviceName;
+        return $this->_label;
     }
     
     /**
-     * Sets the serviceName.
+     * Sets the label.
      * 
-     * @param string $serviceName The serviceName.
+     * @param string $label The label.
      * 
      * @return none
      */
-    public function setServiceName($serviceName)
+    public function setLabel($label)
     {
-        $this->_serviceName = $serviceName;
+        $this->_label = $label;
+    }
+    
+    /**
+     * Gets the description.
+     * 
+     * @return string
+     */
+    public function getDescription()
+    {
+        return $this->_description;
+    }
+    
+    /**
+     * Sets the description.
+     * 
+     * @param string $description The description.
+     * 
+     * @return none
+     */
+    public function setDescription($description)
+    {
+        $this->_description = $description;
+    }
+    
+    /**
+     * Gets the location.
+     * 
+     * @return string
+     */
+    public function getLocation()
+    {
+        return $this->_location;
+    }
+    
+    /**
+     * Sets the location.
+     * 
+     * @param string $location The location.
+     * 
+     * @return none
+     */
+    public function setLocation($location)
+    {
+        $this->_location = $location;
+    }
+    
+    /**
+     * Adds serialization property.
+     * 
+     * @param string $key   The property name.
+     * @param string $value The property value.
+     * 
+     * @return none
+     */
+    public function addSerializationProperty($key, $value)
+    {
+        $this->_serializationProperties[$key] = $value;
+    }
+    
+    /**
+     * Gets serialization property value.
+     * 
+     * @param string $key The property key.
+     * 
+     * @return string
+     */
+    public function getSerializationPropertyValue($key)
+    {
+        return Utilities::tryGetValue($this->_serializationProperties, $key);
+    }
+    
+    /**
+     * Converts the current object into array representation.
+     * 
+     * @return array
+     */
+    protected function toArray()
+    {
+        $arr                            = array();
+        $arr[Resources::XTAG_NAMESPACE] = array(
+            Resources::WA_XML_NAMESPACE => null,
+        );
+        Utilities::addIfNotEmpty(Resources::XTAG_NAME, $this->_name, $arr);
+        Utilities::addIfNotEmpty(Resources::XTAG_LABEL, $this->_label, $arr);
+        Utilities::addIfNotEmpty(
+            Resources::XTAG_DESCRIPTION,
+            $this->_description,
+            $arr
+        );
+        Utilities::addIfNotEmpty(
+            Resources::XTAG_LOCATION,
+            $this->_location,
+            $arr
+        );
+        
+        return $arr;
+    }
+    
+    /**
+     * Serializes the current object.
+     * 
+     * @param ISerializer $serializer The serializer.
+     * 
+     * @return string
+     * 
+     * @throws \InvalidArgumentException
+     */
+    public function serialize($serializer)
+    {
+        $serialized = Resources::EMPTY_STRING;
+        
+        if ($serializer instanceof XmlSerializer) {
+            $arr        = $this->toArray();
+            $serialized = $serializer->serialize(
+                $arr,
+                $this->_serializationProperties
+            );
+        } else {
+            throw new \InvalidArgumentException(Resources::UNKNOWN_SRILZER_MSG);
+        }
+        
+        return $serialized;
     }
 }
 

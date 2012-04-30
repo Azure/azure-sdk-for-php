@@ -63,7 +63,7 @@ class ListAffinityGroupsResult
         }
         
         foreach ($entries as $value) {
-            $result->_affinityGroups[] = AffinityGroup::create($value);
+            $result->_affinityGroups[] = new AffinityGroup($value);
         }
         
         return $result;

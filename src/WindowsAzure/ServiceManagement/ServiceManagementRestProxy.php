@@ -96,6 +96,18 @@ class ServiceManagementRestProxy extends RestProxy
     }
     
     /**
+     * Constructs URI path for storage services.
+     * 
+     * @param string $name The storage service name.
+     * 
+     * @return string
+     */
+    private function _getStorageServicePath($name = null)
+    {
+        return $this->_getPath('services/storageservices', $name);
+    }
+    
+    /**
      * Initializes new ServiceManagementRestProxy object.
      * 
      * @param WindowsAzure\Core\Http\IHttpClient          $channel        The HTTP
@@ -175,6 +187,8 @@ class ServiceManagementRestProxy extends RestProxy
     /**
      * Creates a new storage account in Windows Azure.
      * 
+     * In the optional parameters either location or affinity group must be provided.
+     * 
      * @param string                             $name    The storage account name.
      * @param string                             $label   Name for the storage
      * account specified as a base64-encoded string. The name may be up to 100
@@ -186,7 +200,7 @@ class ServiceManagementRestProxy extends RestProxy
      * 
      * @see http://msdn.microsoft.com/en-us/library/windowsazure/hh264518.aspx 
      */
-    public function createStorageAccount($name, $label, $options = null)
+    public function createStorageAccount($name, $label, $options)
     {
         throw new \Exception(Resources::NOT_IMPLEMENTED_MSG);
     }

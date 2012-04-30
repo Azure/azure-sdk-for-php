@@ -91,6 +91,8 @@ interface IServiceManagement extends FilterableService
     /**
      * Creates a new storage account in Windows Azure.
      * 
+     * In the optional parameters either location or affinity group must be provided.
+     * 
      * @param string                             $name    The storage account name.
      * @param string                             $label   Name for the storage
      * account specified as a base64-encoded string. The name may be up to 100
@@ -102,7 +104,7 @@ interface IServiceManagement extends FilterableService
      * 
      * @see http://msdn.microsoft.com/en-us/library/windowsazure/hh264518.aspx 
      */
-    public function createStorageAccount($name, $label, $options = null);
+    public function createStorageAccount($name, $label, $options);
     
     /**
      * Deletes the specified storage account from Windows Azure.

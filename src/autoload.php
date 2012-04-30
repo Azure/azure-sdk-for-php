@@ -40,6 +40,8 @@ spl_autoload_register(
             'windowsazure\\servicemanagement\\models\\location' => '/WindowsAzure/ServiceManagement/Models/Location.php',
             'windowsazure\\servicemanagement\\models\\locations' => '/WindowsAzure/ServiceManagement/Models/Locations.php',
             'windowsazure\\servicemanagement\\models\\service' => '/WindowsAzure/ServiceManagement/Models/Service.php',
+            'windowsazure\\servicemanagement\\models\\serviceproperties' => '/WindowsAzure/ServiceManagement/Models/ServiceProperties.php',
+            'windowsazure\\servicemanagement\\models\\storageservice' => '/WindowsAzure/ServiceManagement/Models/StorageService.php',
             'windowsazure\\servicemanagement\\servicemanagementrestproxy' => '/WindowsAzure/ServiceManagement/ServiceManagementRestProxy.php',
             'windowsazure\\servicemanagement\\servicemanagementservice' => '/WindowsAzure/ServiceManagement/ServiceManagementService.php',
             'windowsazure\\servicemanagement\\servicemanagementsettings' => '/WindowsAzure/ServiceManagement/ServiceManagementSettings.php',

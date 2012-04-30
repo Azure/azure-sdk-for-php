@@ -25,7 +25,7 @@
 namespace WindowsAzure\ServiceManagement\Models;
 
 /**
- * The location class.
+ * Basic Windows Azure service properties.
  *
  * @category  Microsoft
  * @package   WindowsAzure\ServiceManagement\Models
@@ -35,60 +35,60 @@ namespace WindowsAzure\ServiceManagement\Models;
  * @version   Release: @package_version@
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
-class Location
+class ServiceProperties
 {
     /**
      * @var string
      */
-    private $_name;
+    private $_url;
     
     /**
      * @var string
      */
-    private $_displayName;
+    private $_serviceName;
     
     /**
-     * Gets the name.
+     * Gets the url.
      * 
      * @return string
      */
-    public function getName()
+    public function getUrl()
     {
-        return $this->_name;
+        return $this->_url;
     }
     
     /**
-     * Sets the name.
+     * Sets the url.
      * 
-     * @param string $name The name.
+     * @param string $url The url.
      * 
      * @return none
      */
-    public function setName($name)
+    public function setUrl($url)
     {
-        $this->_name = $name;
+        $this->_url = $url;
     }
     
     /**
-     * Gets the displayName.
+     * Gets the serviceName.
      * 
      * @return string
      */
-    public function getDisplayName()
+    public function getServiceName()
     {
-        return $this->_displayName;
+        return $this->_serviceName;
     }
     
     /**
-     * Sets the displayName.
+     * Sets the serviceName.
      * 
-     * @param string $displayName The displayName.
+     * @param string $serviceName The serviceName.
      * 
      * @return none
      */
-    public function setDisplayName($displayName)
+    public function setServiceName($serviceName)
     {
-        $this->_displayName = $displayName;
+        $this->_serviceName = $serviceName;
     }
 }
 
