@@ -57,8 +57,8 @@ class AffinityGroup extends Service
      */
     protected function toArray()
     {
-        $arr     = parent::toArray();
-        $order   = array(
+        $arr   = parent::toArray();
+        $order = array(
             Resources::XTAG_NAMESPACE,
             Resources::XTAG_NAME,
             Resources::XTAG_LABEL,

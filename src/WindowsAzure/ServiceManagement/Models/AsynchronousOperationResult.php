@@ -44,9 +44,16 @@ class AsynchronousOperationResult
      */
     private $_requestId;
     
+    /**
+     * Creates new AsynchronousOperationResult from response HTTP headers.
+     * 
+     * @param array $headers The HTTP response headers array.
+     * 
+     * @return AsynchronousOperationResult 
+     */
     public function create($headers)
     {
-        $result = new AsynchronousOperationResult();
+        $result             = new AsynchronousOperationResult();
         $result->_requestId = Utilities::tryGetValue(
             $headers,
             Resources::X_MS_REQUEST_ID

@@ -330,7 +330,7 @@ class ServiceManagementRestProxyTest extends ServiceManagementRestProxyTestBase
     }
     
     /**
-     * @covers WindowsAzure\ServiceManagement\ServiceManagementRestProxy::updateStorageAccount
+     * @covers WindowsAzure\ServiceManagement\ServiceManagementRestProxy::getStorageAccountProperties
      * @covers WindowsAzure\ServiceManagement\ServiceManagementRestProxy::_getStorageServicePath
      * @covers WindowsAzure\ServiceManagement\ServiceManagementRestProxy::_getPath
      * @covers WindowsAzure\ServiceManagement\Models\GetStorageAccountPropertiesResult::create

@@ -326,10 +326,6 @@ class ServiceManagementRestProxy extends RestProxy
             Resources::INVALID_USA_OPT_MSG
         );
         
-        if (is_null($options)) {
-            $options = new UpdateStorageAccountOptions();
-        }
-        
         $storageService = new StorageService();
         $storageService->setLabel($options->getLabel());
         $storageService->setDescription($options->getDescription());
