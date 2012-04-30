@@ -201,7 +201,7 @@ class Service
     {
         $arr                            = array();
         $arr[Resources::XTAG_NAMESPACE] = array(
-            Resources::WA_XML_NAMESPACE => null,
+            Resources::WA_XML_NAMESPACE => null
         );
         
         Utilities::addIfNotEmpty(Resources::XTAG_LABEL, $this->_label, $arr);

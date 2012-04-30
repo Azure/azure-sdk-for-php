@@ -40,12 +40,24 @@ use WindowsAzure\Core\ServiceException;
  */
 class GetOperationStatusResult
 {
+    /**
+     * @var string
+     */
     private $_id;
     
+    /**
+     * @var string
+     */
     private $_status;
     
+    /**
+     * @var string
+     */
     private $_httpStatusCode;
     
+    /**
+     * @var ServiceException
+     */
     private $_error;
     
     /**

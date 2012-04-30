@@ -30,6 +30,7 @@ use WindowsAzure\ServiceManagement\ServiceManagementRestProxy;
 use WindowsAzure\ServiceManagement\Models\Locations;
 use WindowsAzure\ServiceManagement\Models\CreateStorageAccountOptions;
 use WindowsAzure\ServiceManagement\Models\UpdateStorageAccountOptions;
+use WindowsAzure\ServiceManagement\Models\KeyType;
 
 /**
  * Unit tests for class ServiceManagementRestProxy
@@ -268,6 +269,8 @@ class ServiceManagementRestProxyTest extends ServiceManagementRestProxyTestBase
      * @covers WindowsAzure\ServiceManagement\ServiceManagementRestProxy::_getOperationPath
      * @covers WindowsAzure\ServiceManagement\ServiceManagementRestProxy::_getStorageServicePath
      * @covers WindowsAzure\ServiceManagement\ServiceManagementRestProxy::_getPath
+     * @covers WindowsAzure\ServiceManagement\Models\GetOperationStatusResult::create
+     * @covers WindowsAzure\ServiceManagement\Models\StorageService::toArray
      */
     public function testCreateStorageAccount()
     {
@@ -349,10 +352,52 @@ class ServiceManagementRestProxyTest extends ServiceManagementRestProxyTestBase
     }
     
     /**
+     * @covers WindowsAzure\ServiceManagement\ServiceManagementRestProxy::getStorageAccountKeys
+     * @covers WindowsAzure\ServiceManagement\ServiceManagementRestProxy::_getPath
+     * @covers WindowsAzure\ServiceManagement\ServiceManagementRestProxy::_getStorageServiceKeysPath
+     * @covers WindowsAzure\ServiceManagement\Models\GetStorageAccountKeysResult::create
+     * @depends testGetStorageAccountProperties
+     */
+    public function testGetStorageAccountKeys()
+    {
+        // Setup
+        $name = $this->_storageAccountName;
+        
+        // Test
+        $result = $this->wrapper->getStorageAccountKeys($name);
+        
+        // Assert
+        $this->assertNotNull($result->getUrl());
+        $this->assertNotNull($result->getPrimary());
+        $this->assertNotNull($result->getSecondary());
+    }
+    
+    /**
+     * @covers WindowsAzure\ServiceManagement\ServiceManagementRestProxy::regenerateStorageAccountKeys
+     * @covers WindowsAzure\ServiceManagement\ServiceManagementRestProxy::_getPath
+     * @covers WindowsAzure\ServiceManagement\ServiceManagementRestProxy::_getStorageServiceKeysPath
+     * @covers WindowsAzure\ServiceManagement\Models\GetStorageAccountKeysResult::create
+     * @depends testGetStorageAccountKeys
+     */
+    public function testRegenerateStorageAccountKeys()
+    {
+        // Setup
+        $name = $this->_storageAccountName;
+        $old = $this->wrapper->getStorageAccountKeys($name);
+        
+        // Test
+        $new = $this->wrapper->regenerateStorageAccountKeys($name, KeyType::PRIMARY_KEY);
+        
+        // Assert
+        $this->assertNotEquals($old->getPrimary(), $new->getPrimary());
+        $this->assertEquals($old->getSecondary(), $new->getSecondary());
+    }
+    
+    /**
      * @covers WindowsAzure\ServiceManagement\ServiceManagementRestProxy::deleteStorageAccount
      * @covers WindowsAzure\ServiceManagement\ServiceManagementRestProxy::_getStorageServicePath
      * @covers WindowsAzure\ServiceManagement\ServiceManagementRestProxy::_getPath
-     * @depends testGetStorageAccountProperties
+     * @depends testRegenerateStorageAccountKeys
      */
     public function testDeleteStorageAccount()
     {

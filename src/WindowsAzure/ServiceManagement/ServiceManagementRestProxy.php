@@ -39,6 +39,7 @@ use WindowsAzure\ServiceManagement\Models\GetOperationStatusResult;
 use WindowsAzure\ServiceManagement\Models\AsynchronousOperationResult;
 use WindowsAzure\ServiceManagement\Models\UpdateStorageAccountOptions;
 use WindowsAzure\ServiceManagement\Models\GetStorageAccountPropertiesResult;
+use WindowsAzure\ServiceManagement\Models\GetStorageAccountKeysResult;
 
 /**
  * This class constructs HTTP requests and receive HTTP responses for service 
@@ -111,6 +112,18 @@ class ServiceManagementRestProxy extends RestProxy
     private function _getStorageServicePath($name = null)
     {
         return $this->_getPath('services/storageservices', $name);
+    }
+    
+    /**
+     * Constructs URI path for storage service key.
+     * 
+     * @param string $name The storage service name.
+     * 
+     * @return string
+     */
+    private function _getStorageServiceKeysPath($name = null)
+    {
+        return $this->_getPath('services/storageservices', $name) . '/keys';
     }
     
     /**
@@ -202,7 +215,18 @@ class ServiceManagementRestProxy extends RestProxy
      */
     public function getStorageAccountKeys($name)
     {
-        throw new \Exception(Resources::NOT_IMPLEMENTED_MSG);
+        Validate::isString($name, 'name');
+        Validate::notNullOrEmpty($name, 'name');
+        
+        $context = new HttpCallContext();
+        $context->setMethod(Resources::HTTP_GET);
+        $context->setPath($this->_getStorageServiceKeysPath($name));
+        $context->addStatusCode(Resources::STATUS_OK);
+        
+        $response = $this->sendContext($context);
+        $parsed   = $this->dataSerializer->unserialize($response->getBody());
+        
+        return GetStorageAccountKeysResult::create($parsed);
     }
     
     /**
@@ -212,13 +236,40 @@ class ServiceManagementRestProxy extends RestProxy
      * @param string $name    The storage account name.
      * @param string $keyType Specifies which key to regenerate.
      * 
-     * @return Models\RegenerateStorageAccountKeysResult
+     * @return Models\GetStorageAccountKeysResult
      * 
      * @see http://msdn.microsoft.com/en-us/library/windowsazure/ee460795.aspx
      */
     public function regenerateStorageAccountKeys($name, $keyType)
     {
-        throw new \Exception(Resources::NOT_IMPLEMENTED_MSG);
+        Validate::isString($name, 'name');
+        Validate::notNullOrEmpty($name, 'name');
+        Validate::isString($keyType, '$keyType');
+        Validate::notNullOrEmpty($keyType, '$keyType');
+
+        $properties = array(XmlSerializer::ROOT_NAME => 'RegenerateKeys');
+        $reqArray   = array(
+            Resources::XTAG_NAMESPACE => array(Resources::WA_XML_NAMESPACE => null),
+            Resources::XTAG_KEY_TYPE  => $keyType
+        );
+        $body       = $this->dataSerializer->serialize($reqArray, $properties);
+        
+        $context = new HttpCallContext();
+        $context->setMethod(Resources::HTTP_POST);
+        $context->setPath($this->_getStorageServiceKeysPath($name));
+        $context->addStatusCode(Resources::STATUS_OK);
+        $context->addQueryParameter(Resources::QP_ACTION, 'regenerate');
+        $context->setBody($body);
+        $context->addHeader(
+            Resources::CONTENT_TYPE,
+            Resources::XML_ATOM_CONTENT_TYPE
+        );
+        
+        $response = $this->sendContext($context);
+        $parsed   = $this->dataSerializer->unserialize($response->getBody());
+        \WindowsAzure\Logger::log($response->getBody());
+        
+        return GetStorageAccountKeysResult::create($parsed);
     }
     
     /**

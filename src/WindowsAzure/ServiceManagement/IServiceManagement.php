@@ -82,7 +82,7 @@ interface IServiceManagement extends FilterableService
      * @param string $name    The storage account name.
      * @param string $keyType Specifies which key to regenerate.
      * 
-     * @return Models\RegenerateStorageAccountKeysResult
+     * @return Models\GetStorageAccountKeysResult
      * 
      * @see http://msdn.microsoft.com/en-us/library/windowsazure/ee460795.aspx
      */
