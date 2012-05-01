@@ -29,6 +29,7 @@ namespace Tests\Functional\WindowsAzure\Services\Table;
 use WindowsAzure\Core\ServiceException;
 use WindowsAzure\Core\WindowsAzureUtilities;
 use WindowsAzure\Services\Table\TableService;
+use WindowsAzure\Services\Table\Models\BatchError;
 use WindowsAzure\Services\Table\Models\BatchOperations;
 use WindowsAzure\Services\Table\Models\DeleteEntityOptions;
 use WindowsAzure\Services\Table\Models\EdmType;
@@ -234,13 +235,12 @@ class TableServiceIntegrationTest extends IntegrationTestBase {
     * @covers WindowsAzure\Services\Table\TableRestProxy::getTable
     */
     public function testCreateTablesWorks() {
-        $this->fail('Need to implement getTable');
         // Act
         try {
             $this->wrapper->getTable(self::$CREATABLE_TABLE_1);
             $error = null;
         }
-        catch (Exception $e) {
+        catch (ServiceException $e) {
             $error = $e;
         }
         $this->wrapper->createTable(self::$CREATABLE_TABLE_1);
@@ -257,8 +257,6 @@ class TableServiceIntegrationTest extends IntegrationTestBase {
     * @covers WindowsAzure\Services\Table\TableRestProxy::getTable
     */
     public function testDeleteTablesWorks() {
-        $this->fail('Need to implement getTable');
-
         // Act
         $this->wrapper->createTable(self::$CREATABLE_TABLE_2);
         $result = $this->wrapper->getTable(self::$CREATABLE_TABLE_2);
@@ -268,7 +266,7 @@ class TableServiceIntegrationTest extends IntegrationTestBase {
             $this->wrapper->getTable(self::$CREATABLE_TABLE_2);
             $error = null;
         }
-        catch (Exception $e) {
+        catch (ServiceException $e) {
             $error = $e;
         }
 
@@ -305,8 +303,6 @@ class TableServiceIntegrationTest extends IntegrationTestBase {
     * @covers WindowsAzure\Services\Table\TableRestProxy::getTable
     */
     public function testGetTableWorks() {
-        $this->fail('Need to implement getTable');
-
         // Act
         $result = $this->wrapper->getTable(self::$TEST_TABLE_1);
 
@@ -327,7 +323,7 @@ class TableServiceIntegrationTest extends IntegrationTestBase {
         $entity->addProperty('test', EdmType::BOOLEAN, true);
         $entity->addProperty('test2', EdmType::STRING, 'value');
         $entity->addProperty('test3', EdmType::INT32, 3);
-        $entity->addProperty('test4', EdmType::INT64, 12345678901);
+        $entity->addProperty('test4', EdmType::INT64, '12345678901');
         $entity->addProperty('test5', EdmType::DATETIME, new \DateTime());
         $entity->addProperty('test6', EdmType::BINARY, $binaryData);
         $entity->addProperty('test7', EdmType::GUID, $uuid);
@@ -354,7 +350,7 @@ class TableServiceIntegrationTest extends IntegrationTestBase {
         $this->assertEquals(3, $result->getEntity()->getProperty('test3')->getValue(), '$result->getEntity()->getProperty(\'test3\')->getValue()');
 
         $this->assertNotNull($result->getEntity()->getProperty('test4'), '$result->getEntity()->getProperty(\'test4\')');
-        $this->assertEquals(12345678901, $result->getEntity()->getProperty('test4')->getValue(), '$result->getEntity()->getProperty(\'test4\')->getValue()');
+        $this->assertEquals('12345678901', $result->getEntity()->getProperty('test4')->getValue(), '$result->getEntity()->getProperty(\'test4\')->getValue()');
 
         $this->assertNotNull($result->getEntity()->getProperty('test5'), '$result->getEntity()->getProperty(\'test5\')');
         $this->assertTrue($result->getEntity()->getProperty('test5')->getValue() instanceof \DateTime, '$result->getEntity()->getProperty(\'test5\')->getValue() instanceof \DateTime');
@@ -381,7 +377,7 @@ class TableServiceIntegrationTest extends IntegrationTestBase {
         $entity->addProperty('test', EdmType::BOOLEAN, true);
         $entity->addProperty('test2', EdmType::STRING, 'value');
         $entity->addProperty('test3', EdmType::INT32, 3);
-        $entity->addProperty('test4', EdmType::INT64, 12345678901);
+        $entity->addProperty('test4', EdmType::INT64, '12345678901');
         $entity->addProperty('test5', EdmType::DATETIME, new \DateTime());
 
         // Act
@@ -404,7 +400,7 @@ class TableServiceIntegrationTest extends IntegrationTestBase {
         $entity->addProperty('test', EdmType::BOOLEAN, true);
         $entity->addProperty('test2', EdmType::STRING, 'value');
         $entity->addProperty('test3', EdmType::INT32, 3);
-        $entity->addProperty('test4', EdmType::INT64, 12345678901);
+        $entity->addProperty('test4', EdmType::INT64, '12345678901');
         $entity->addProperty('test5', EdmType::DATETIME, new \DateTime());
 
         // Act
@@ -437,7 +433,7 @@ class TableServiceIntegrationTest extends IntegrationTestBase {
         $entity->addProperty('test', EdmType::BOOLEAN, true);
         $entity->addProperty('test2', EdmType::STRING, 'value');
         $entity->addProperty('test3', EdmType::INT32, 3);
-        $entity->addProperty('test4', EdmType::INT64, 12345678901);
+        $entity->addProperty('test4', EdmType::INT64, '12345678901');
         $entity->addProperty('test5', EdmType::DATETIME, new \DateTime());
 
         // Act
@@ -471,7 +467,7 @@ class TableServiceIntegrationTest extends IntegrationTestBase {
         $entity->addProperty('test', EdmType::BOOLEAN, true);
         $entity->addProperty('test2', EdmType::STRING, 'value');
         $entity->addProperty('test3', EdmType::INT32, 3);
-        $entity->addProperty('test4', EdmType::INT64, 12345678901);
+        $entity->addProperty('test4', EdmType::INT64, '12345678901');
         $entity->addProperty('test5', EdmType::DATETIME, new \DateTime());
 
         // Act
@@ -497,7 +493,7 @@ class TableServiceIntegrationTest extends IntegrationTestBase {
         $entity->addProperty('test', EdmType::BOOLEAN, true);
         $entity->addProperty('test2', EdmType::STRING, 'value');
         $entity->addProperty('test3', EdmType::INT32, 3);
-        $entity->addProperty('test4', EdmType::INT64, 12345678901);
+        $entity->addProperty('test4', EdmType::INT64, '12345678901');
         $entity->addProperty('test5', EdmType::DATETIME, new \DateTime());
 
         // Act
@@ -510,10 +506,10 @@ class TableServiceIntegrationTest extends IntegrationTestBase {
     }
 
     /**
-    * @covers WindowsAzure\Services\Queue\QueueRestProxy::deleteEntity
-    * @covers WindowsAzure\Services\Queue\QueueRestProxy::getEntity
-    * @covers WindowsAzure\Services\Queue\QueueRestProxy::insertEntity
-    * @covers WindowsAzure\Services\Queue\QueueRestProxy::queryEntities
+    * @covers WindowsAzure\Services\Table\TableRestProxy::deleteEntity
+    * @covers WindowsAzure\Services\Table\TableRestProxy::getEntity
+    * @covers WindowsAzure\Services\Table\TableRestProxy::insertEntity
+    * @covers WindowsAzure\Services\Table\TableRestProxy::queryEntities
     */
     public function testDeleteEntityTroublesomeKeyWorks() {
         // For issue https://github.com/WindowsAzure/azure-sdk-for-php/issues/180
@@ -598,7 +594,7 @@ class TableServiceIntegrationTest extends IntegrationTestBase {
         $entity->addProperty('test', EdmType::BOOLEAN, true);
         $entity->addProperty('test2', EdmType::STRING, 'value');
         $entity->addProperty('test3', EdmType::INT32, 3);
-        $entity->addProperty('test4', EdmType::INT64, 12345678901);
+        $entity->addProperty('test4', EdmType::INT64, '12345678901');
         $entity->addProperty('test5', EdmType::DATETIME, new \DateTime());
 
         // Act
@@ -627,7 +623,7 @@ class TableServiceIntegrationTest extends IntegrationTestBase {
         $entity->addProperty('test', EdmType::BOOLEAN, true);
         $entity->addProperty('test2', EdmType::STRING, 'value');
         $entity->addProperty('test3', EdmType::INT32, 3);
-        $entity->addProperty('test4', EdmType::INT64, 12345678901);
+        $entity->addProperty('test4', EdmType::INT64, '12345678901');
         $entity->addProperty('test5', EdmType::DATETIME, new \DateTime());
         $entity->addProperty('test6', EdmType::BINARY, $binaryData);
         $entity->addProperty('test7', EdmType::GUID, $uuid);
@@ -655,7 +651,7 @@ class TableServiceIntegrationTest extends IntegrationTestBase {
         $this->assertEquals(3, $result->getEntity()->getProperty('test3')->getValue(), '$result->getEntity()->getProperty(\'test3\')->getValue()');
 
         $this->assertNotNull($result->getEntity()->getProperty('test4'), '$result->getEntity()->getProperty(\'test4\')');
-        $this->assertEquals(12345678901, $result->getEntity()->getProperty('test4')->getValue(), '$result->getEntity()->getProperty(\'test4\')->getValue()');
+        $this->assertEquals('12345678901', $result->getEntity()->getProperty('test4')->getValue(), '$result->getEntity()->getProperty(\'test4\')->getValue()');
 
         $this->assertNotNull($result->getEntity()->getProperty('test5'), '$result->getEntity()->getProperty(\'test5\')');
         $this->assertTrue($result->getEntity()->getProperty('test5')->getValue() instanceof \DateTime, '$result->getEntity()->getProperty(\'test5\')->getValue() instanceof \DateTime');
@@ -683,7 +679,7 @@ class TableServiceIntegrationTest extends IntegrationTestBase {
         $entity->addProperty('test', EdmType::BOOLEAN, true);
         $entity->addProperty('test2', EdmType::STRING, 'value');
         $entity->addProperty('test3', EdmType::INT32, 3);
-        $entity->addProperty('test4', EdmType::INT64, 12345678901);
+        $entity->addProperty('test4', EdmType::INT64, '12345678901');
         $entity->addProperty('test5', EdmType::DATETIME, new \DateTime());
 
         // Act
@@ -713,7 +709,7 @@ class TableServiceIntegrationTest extends IntegrationTestBase {
         $this->assertEquals(3, $entities[0]->getProperty('test3')->getValue(), '$entities[0]->getProperty(\'test3\')->getValue()');
 
         $this->assertNotNull($entities[0]->getProperty('test4'), '$entities[0]->getProperty(\'test4\')');
-        $this->assertEquals(12345678901, $entities[0]->getProperty('test4')->getValue(), '$entities[0]->getProperty(\'test4\')->getValue()');
+        $this->assertEquals('12345678901', $entities[0]->getProperty('test4')->getValue(), '$entities[0]->getProperty(\'test4\')->getValue()');
 
         $this->assertNotNull($entities[0]->getProperty('test5'), '$entities[0]->getProperty(\'test5\')');
         $this->assertTrue($entities[0]->getProperty('test5')->getValue() instanceof \DateTime, '$entities[0]->getProperty(\'test5\')->getValue() instanceof \DateTime');
@@ -734,7 +730,7 @@ class TableServiceIntegrationTest extends IntegrationTestBase {
             $entity->addProperty('test', EdmType::BOOLEAN, true);
             $entity->addProperty('test2', EdmType::STRING, 'value');
             $entity->addProperty('test3', EdmType::INT32, 3);
-            $entity->addProperty('test4', EdmType::INT64, 12345678901);
+            $entity->addProperty('test4', EdmType::INT64, '12345678901');
             $entity->addProperty('test5', EdmType::DATETIME, new \DateTime());
 
             $this->wrapper->insertEntity($table, $entity);
@@ -752,7 +748,7 @@ class TableServiceIntegrationTest extends IntegrationTestBase {
 
             $entryCount += count($result->getEntities());
 
-            if ($nextPartitionKey == null) break;
+            if (is_null($nextPartitionKey)) break;
 
             $nextPartitionKey = $result->getNextPartitionKey();
             $nextRowKey = $result->getNextRowKey();
@@ -767,8 +763,6 @@ class TableServiceIntegrationTest extends IntegrationTestBase {
     * @covers WindowsAzure\Services\Table\TableRestProxy::queryEntities
     */
     public function testQueryEntitiesWithFilterWorks() {
-        $this->fail('Skipping because of fatal error, https://github.com/WindowsAzure/azure-sdk-for-php/issues/158');
-        
         // Arrange
         $table = self::$TEST_TABLE_5;
         $numberOfEntries = 5;
@@ -780,7 +774,7 @@ class TableServiceIntegrationTest extends IntegrationTestBase {
             $entity->addProperty('test', EdmType::BOOLEAN, $i % 2 == 0);
             $entity->addProperty('test2', EdmType::STRING, '\'value" ' . $i);
             $entity->addProperty('test3', EdmType::INT32, $i);
-            $entity->addProperty('test4', EdmType::INT64, 12345678901 + $i);
+            $entity->addProperty('test4', EdmType::INT64, strval('12345678901' + $i));
             $entity->addProperty('test5', EdmType::DATETIME, new \DateTime('2012-01-0' . $i));
             $entity->addProperty('test6', EdmType::BINARY, chr($i));
             $entity->addProperty('test7', EdmType::GUID, strtolower(trim(com_create_guid(), '{}')));
@@ -822,7 +816,7 @@ class TableServiceIntegrationTest extends IntegrationTestBase {
         {
             // Act
             $q = new Query();
-            $q->setFilter(Filter::applyPropertyName('test', EdmType::BOOLEAN));
+            $q->setFilter(Filter::applyEq(Filter::applyPropertyName('test'), Filter::applyConstant(true, EdmType::BOOLEAN)));
             $qeo = new QueryEntitiesOptions();
             $qeo->setQuery($q);
             $result = $this->wrapper->queryEntities($table, $qeo);
@@ -865,7 +859,7 @@ class TableServiceIntegrationTest extends IntegrationTestBase {
         {
             // Act
             $q = new Query();
-            $q->setFilter(Filter::applyEq(Filter::applyPropertyName('test5'), Filter::applyConstant(new \DateTime('2012-01-03', EdmType::DATETIME))));
+            $q->setFilter(Filter::applyEq(Filter::applyPropertyName('test5'), Filter::applyConstant(new \DateTime('2012-01-03'), EdmType::DATETIME)));
             $qeo = new QueryEntitiesOptions();
             $qeo->setQuery($q);
             $result = $this->wrapper->queryEntities($table, $qeo);
@@ -897,7 +891,7 @@ class TableServiceIntegrationTest extends IntegrationTestBase {
             // Act
             $q = new Query();
             $ent3 = $entities[3];
-            $q->setFilter(Filter::applyEq(Filter::applyPropertyName('test7'), Filter::applyConstant($ent3->getPropertyValue('test7'))));
+            $q->setFilter(Filter::applyEq(Filter::applyPropertyName('test7'), Filter::applyConstant($ent3->getPropertyValue('test7'), EdmType::GUID)));
             $qeo = new QueryEntitiesOptions();
             $qeo->setQuery($q);
             $result = $this->wrapper->queryEntities($table, $qeo);
@@ -925,7 +919,7 @@ class TableServiceIntegrationTest extends IntegrationTestBase {
         $entity->addProperty('test', EdmType::BOOLEAN, true);
         $entity->addProperty('test2', EdmType::STRING, 'value');
         $entity->addProperty('test3', EdmType::INT32, 3);
-        $entity->addProperty('test4', EdmType::INT64, 12345678901);
+        $entity->addProperty('test4', EdmType::INT64, '12345678901');
         $entity->addProperty('test5', EdmType::DATETIME, new \DateTime());
 
         $bo = new BatchOperations();
@@ -953,7 +947,7 @@ class TableServiceIntegrationTest extends IntegrationTestBase {
         $entity->addProperty('test', EdmType::BOOLEAN, true);
         $entity->addProperty('test2', EdmType::STRING, 'value');
         $entity->addProperty('test3', EdmType::INT32, 3);
-        $entity->addProperty('test4', EdmType::INT64, 12345678901);
+        $entity->addProperty('test4', EdmType::INT64, '12345678901');
         $entity->addProperty('test5', EdmType::DATETIME, new \DateTime());
         $entity = $this->wrapper->insertEntity($table, $entity)->getEntity();
 
@@ -984,7 +978,7 @@ class TableServiceIntegrationTest extends IntegrationTestBase {
         $entity->addProperty('test', EdmType::BOOLEAN, true);
         $entity->addProperty('test2', EdmType::STRING, 'value');
         $entity->addProperty('test3', EdmType::INT32, 3);
-        $entity->addProperty('test4', EdmType::INT64, 12345678901);
+        $entity->addProperty('test4', EdmType::INT64, '12345678901');
         $entity->addProperty('test5', EdmType::DATETIME, new \DateTime());
         $entity = $this->wrapper->insertEntity($table, $entity)->getEntity();
 
@@ -1004,12 +998,8 @@ class TableServiceIntegrationTest extends IntegrationTestBase {
     * @covers WindowsAzure\Services\Table\TableRestProxy::batch
     */
     public function testBatchInsertOrReplaceWorks() {
-        // Arrange
-        
-        // Do not run this test with emulator, as v1.6 does not support this method
-        if (WindowsAzureUtilities::isEmulated()) {
-            return;
-        }
+        $this->skipIfEmulated();
+
         $table = self::$TEST_TABLE_6;
         $partitionKey = '001';
 
@@ -1020,7 +1010,7 @@ class TableServiceIntegrationTest extends IntegrationTestBase {
         $entity->addProperty('test', EdmType::BOOLEAN, true);
         $entity->addProperty('test2', EdmType::STRING, 'value');
         $entity->addProperty('test3', EdmType::INT32, 3);
-        $entity->addProperty('test4', EdmType::INT64, 12345678901);
+        $entity->addProperty('test4', EdmType::INT64, '12345678901');
         $entity->addProperty('test5', EdmType::DATETIME, new \DateTime());
 
         $bo = new BatchOperations();
@@ -1038,12 +1028,7 @@ class TableServiceIntegrationTest extends IntegrationTestBase {
     * @covers WindowsAzure\Services\Table\TableRestProxy::batch
     */
     public function testBatchInsertOrMergeWorks() {
-        // Arrange
-        
-        // Do not run this test with emulator, as v1.6 does not support this method
-        if (WindowsAzureUtilities::isEmulated()) {
-            return;
-        }
+        $this->skipIfEmulated();
 
         $table = self::$TEST_TABLE_6;
         $partitionKey = '001';
@@ -1055,7 +1040,7 @@ class TableServiceIntegrationTest extends IntegrationTestBase {
         $entity->addProperty('test', EdmType::BOOLEAN, true);
         $entity->addProperty('test2', EdmType::STRING, 'value');
         $entity->addProperty('test3', EdmType::INT32, 3);
-        $entity->addProperty('test4', EdmType::INT64, 12345678901);
+        $entity->addProperty('test4', EdmType::INT64, '12345678901');
         $entity->addProperty('test5', EdmType::DATETIME, new \DateTime());
 
         $bo = new BatchOperations();
@@ -1083,7 +1068,7 @@ class TableServiceIntegrationTest extends IntegrationTestBase {
         $entity->addProperty('test', EdmType::BOOLEAN, true);
         $entity->addProperty('test2', EdmType::STRING, 'value');
         $entity->addProperty('test3', EdmType::INT32, 3);
-        $entity->addProperty('test4', EdmType::INT64, 12345678901);
+        $entity->addProperty('test4', EdmType::INT64, '12345678901');
         $entity->addProperty('test5', EdmType::DATETIME, new \DateTime());
         $entity = $this->wrapper->insertEntity($table, $entity)->getEntity();
 
@@ -1096,8 +1081,7 @@ class TableServiceIntegrationTest extends IntegrationTestBase {
         $this->assertNotNull($result, '$result');
         $this->assertEquals(1, count($result->getEntries()), 'count($result->getEntries())');
         $ents = $result->getEntries();
-        // TODO: Fails due to https://github.com/WindowsAzure/azure-sdk-for-php/issues/185
-        $this->assertTrue($ents[0] instanceof DeleteEntryResult, '$result->getEntries()->get(0)->getClass()');
+        $this->assertTrue(is_string($ents[0]), '$result->getEntries()[0] is string');
     }
 
     /**
@@ -1119,7 +1103,7 @@ class TableServiceIntegrationTest extends IntegrationTestBase {
             $entity->addProperty('test', EdmType::BOOLEAN, true);
             $entity->addProperty('test2', EdmType::STRING, 'value');
             $entity->addProperty('test3', EdmType::INT32, 3);
-            $entity->addProperty('test4', EdmType::INT64, 12345678901);
+            $entity->addProperty('test4', EdmType::INT64, '12345678901');
             $entity->addProperty('test5', EdmType::DATETIME, new \DateTime());
 
             $batchOperations->addInsertEntity($table, $entity);
@@ -1148,7 +1132,7 @@ class TableServiceIntegrationTest extends IntegrationTestBase {
             $this->assertEquals(3, $entity->getProperty('test3')->getValue(), '$entity->getProperty(\'test3\')->getValue()');
 
             $this->assertNotNull($entity->getProperty('test4'), '$entity->getProperty(\'test4\')');
-            $this->assertEquals(12345678901, $entity->getProperty('test4')->getValue(), '$entity->getProperty(\'test4\')->getValue()');
+            $this->assertEquals('12345678901', $entity->getProperty('test4')->getValue(), '$entity->getProperty(\'test4\')->getValue()');
 
             $this->assertNotNull($entity->getProperty('test5'), '$entity->getProperty(\'test5\')');
             $this->assertTrue($entity->getProperty('test5')->getValue() instanceof \DateTime, '$entity->getProperty(\'test5\')->getValue() instanceof \DateTime');
@@ -1171,7 +1155,7 @@ class TableServiceIntegrationTest extends IntegrationTestBase {
         $entity1->addProperty('test', EdmType::BOOLEAN, true);
         $entity1->addProperty('test2', EdmType::STRING, 'value');
         $entity1->addProperty('test3', EdmType::INT32, 3);
-        $entity1->addProperty('test4', EdmType::INT64, 12345678901);
+        $entity1->addProperty('test4', EdmType::INT64, '12345678901');
         $entity1->addProperty('test5', EdmType::DATETIME, new \DateTime());
 
         $entity1 = $this->wrapper->insertEntity($table, $entity1)->getEntity();
@@ -1182,7 +1166,7 @@ class TableServiceIntegrationTest extends IntegrationTestBase {
         $entity2->addProperty('test', EdmType::BOOLEAN, true);
         $entity2->addProperty('test2', EdmType::STRING, 'value');
         $entity2->addProperty('test3', EdmType::INT32, 3);
-        $entity2->addProperty('test4', EdmType::INT64, 12345678901);
+        $entity2->addProperty('test4', EdmType::INT64, '12345678901');
         $entity2->addProperty('test5', EdmType::DATETIME, new \DateTime());
 
         $entity2 = $this->wrapper->insertEntity($table, $entity2)->getEntity();
@@ -1193,7 +1177,7 @@ class TableServiceIntegrationTest extends IntegrationTestBase {
         $entity3->addProperty('test', EdmType::BOOLEAN, true);
         $entity3->addProperty('test2', EdmType::STRING, 'value');
         $entity3->addProperty('test3', EdmType::INT32, 3);
-        $entity3->addProperty('test4', EdmType::INT64, 12345678901);
+        $entity3->addProperty('test4', EdmType::INT64, '12345678901');
         $entity3->addProperty('test5', EdmType::DATETIME, new \DateTime());
 
         $entity3 = $this->wrapper->insertEntity($table, $entity3)->getEntity();
@@ -1204,7 +1188,7 @@ class TableServiceIntegrationTest extends IntegrationTestBase {
         $entity4->addProperty('test', EdmType::BOOLEAN, true);
         $entity4->addProperty('test2', EdmType::STRING, 'value');
         $entity4->addProperty('test3', EdmType::INT32, 3);
-        $entity4->addProperty('test4', EdmType::INT64, 12345678901);
+        $entity4->addProperty('test4', EdmType::INT64, '12345678901');
         $entity4->addProperty('test5', EdmType::DATETIME, new \DateTime());
 
         $entity4 = $this->wrapper->insertEntity($table, $entity4)->getEntity();
@@ -1218,7 +1202,7 @@ class TableServiceIntegrationTest extends IntegrationTestBase {
         $entity->addProperty('test', EdmType::BOOLEAN, true);
         $entity->addProperty('test2', EdmType::STRING, 'value');
         $entity->addProperty('test3', EdmType::INT32, 3);
-        $entity->addProperty('test4', EdmType::INT64, 12345678901);
+        $entity->addProperty('test4', EdmType::INT64, '12345678901');
         $entity->addProperty('test5', EdmType::DATETIME, new \DateTime());
         $batchOperations->addInsertEntity($table, $entity);
         $batchOperations->addDeleteEntity($table, $entity1->getPartitionKey(), $entity1->getRowKey(), $entity1->getEtag());
@@ -1241,14 +1225,14 @@ class TableServiceIntegrationTest extends IntegrationTestBase {
         $entity5->addProperty('test', EdmType::BOOLEAN, true);
         $entity5->addProperty('test2', EdmType::STRING, 'value');
         $entity5->addProperty('test3', EdmType::INT32, 3);
-        $entity5->addProperty('test4', EdmType::INT64, 12345678901);
+        $entity5->addProperty('test4', EdmType::INT64, '12345678901');
         $entity5->addProperty('test5', EdmType::DATETIME, new \DateTime());
         // Use different behavior in the emulator, as v1.6 does not support this method
-        if (!WindowsAzureUtilities::isEmulated()) {
-            $batchOperations->addInsertOrMergeEntity($table, $entity5);
+        if (WindowsAzureUtilities::isEmulated()) {
+            $batchOperations->addInsertEntity($table, $entity5);
         }
         else {
-            $batchOperations->addInsertEntity($table, $entity5);
+            $batchOperations->addInsertOrMergeEntity($table, $entity5);
         }
 
         $result = $this->wrapper->batch($batchOperations);
@@ -1259,18 +1243,22 @@ class TableServiceIntegrationTest extends IntegrationTestBase {
 
         $ents = $result->getEntries();
         $this->assertTrue($ents[0] instanceof InsertEntityResult, '$result->getEntries()->get(0)->getClass()');
-        // TODO: Fails due to https://github.com/WindowsAzure/azure-sdk-for-php/issues/185
-        $this->assertTrue($ents[1] instanceof DeleteEntityResult, '$result->getEntries()->get(1)->getClass()');
+        $this->assertTrue(is_string($ents[1]), '$result->getEntries()->get(1)->getClass()');
         $this->assertTrue($ents[2] instanceof UpdateEntityResult, '$result->getEntries()->get(2)->getClass()');
         $this->assertTrue($ents[3] instanceof UpdateEntityResult, '$result->getEntries()->get(3)->getClass()');
         $this->assertTrue($ents[4] instanceof UpdateEntityResult, '$result->getEntries()->get(4)->getClass()');
-        $this->assertTrue($ents[5] instanceof UpdateEntityResult, '$result->getEntries()->get(5)->getClass()');
+        if (WindowsAzureUtilities::isEmulated()) {
+            $this->assertTrue($ents[5] instanceof InsertEntityResult, '$result->getEntries()->get(5)->getClass()');
+        }
+        else {
+            $this->assertTrue($ents[5] instanceof UpdateEntityResult, '$result->getEntries()->get(5)->getClass()');            
+        }
     }
 
     /**
-    * @covers WindowsAzure\Services\Queue\QueueRestProxy::batch
-    * @covers WindowsAzure\Services\Queue\QueueRestProxy::insertEntity
-    * @covers WindowsAzure\Services\Queue\QueueRestProxy::updateEntity
+    * @covers WindowsAzure\Services\Table\TableRestProxy::batch
+    * @covers WindowsAzure\Services\Table\TableRestProxy::insertEntity
+    * @covers WindowsAzure\Services\Table\TableRestProxy::updateEntity
     */
     public function testBatchNegativeWorks() {
         // Arrange
@@ -1311,25 +1299,11 @@ class TableServiceIntegrationTest extends IntegrationTestBase {
         // Assert
         $this->assertNotNull($result, '$result');
         $entries = $result->getEntries();
-        // TODO: Fails because of https://github.com/WindowsAzure/azure-sdk-for-php/issues/187
-        $this->assertEquals(count($batchOperations->getOperations()), count($entries), 'count($result->getEntries())');
-        if (WindowsAzureUtilities::isEmulated()) {
-            // Do not run this test with emulator, as v1.6 does not support ordering the results
-            $this->assertNotNull($entries[0], 'First $result should not be null');
-            $this->assertTrue($entries[0] instanceof Error, 'First $result type');
-            $error = $entries[0];
-            $this->assertEquals(412, $error->getError()->getCode(), 'First $result status code');
-            $this->assertNull($entries[1], 'Second $result should be null');
-            $this->assertNull($entries[2], 'Third $result should be null');
-        }
-        else {
-            $this->assertNull($entries[0], 'First $result should be null');
-            $this->assertNotNull($entries[1], 'Second $result should not be null');
-            $this->assertTrue($entries[1] instanceof Error, 'Second $result type');
-            $error = $entries[1];
-            $this->assertEquals(412, $error->getError()->getCode(), 'Second $result status code');
-            $this->assertNull($entries[2], 'Third $result should be null');
-        }
+        $this->assertEquals(1, count($entries), 'count($result->getEntries())');
+        $this->assertNotNull($entries[0], 'First $result should not be null');
+        $this->assertTrue($entries[0] instanceof BatchError, 'First $result type');
+        $error = $entries[0];
+        $this->assertEquals(412, $error->getError()->getCode(), 'First $result status code');
     }
 }
 

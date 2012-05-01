@@ -716,8 +716,19 @@ class QueueServiceFunctionalTest extends FunctionalTestBase {
     * @covers WindowsAzure\Services\Queue\QueueRestProxy::listMessages
     */
     public function testCreateMessageUnicodeMessage() {
-        $this->createMessageWorker('Some unicode: \uB2E4\uB974\uB2E4\uB294\u0625 \u064A\u062F\u064A\u0648', QueueServiceFunctionalTestData::getSimpleCreateMessageOptions());
-    }
+        $this->createMessageWorker('Some unicode: ' .
+                chr(0xEB) . chr(0x8B) . chr(0xA4) . // \uB2E4 in UTF-8
+                chr(0xEB) . chr(0xA5) . chr(0xB4) . // \uB974 in UTF-8
+                chr(0xEB) . chr(0x8B) . chr(0xA4) . // \uB2E4 in UTF-8
+                chr(0xEB) . chr(0x8A) . chr(0x94) . // \uB294 in UTF-8
+                chr(0xD8) . chr(0xA5) .             // \u0625 in UTF-8
+                ' ' . 
+                chr(0xD9) . chr(0x8A) .             // \u064A in UTF-8
+                chr(0xD8) . chr(0xAF) .             // \u062F in UTF-8
+                chr(0xD9) . chr(0x8A) .             // \u064A in UTF-8
+                chr(0xD9) . chr(0x88),              // \u0648 in UTF-8
+                QueueServiceFunctionalTestData::getSimpleCreateMessageOptions());
+        }
 
     /**
     * @covers WindowsAzure\Services\Queue\QueueRestProxy::clearMessages
@@ -813,9 +824,9 @@ class QueueServiceFunctionalTest extends FunctionalTestBase {
             else if (!is_null($options->getTimeToLiveInSeconds()) && $options->getTimeToLiveInSeconds() <= 0) {
                 $this->assertTrue(false, 'Expect negative getVisibilityTimeoutInSeconds in $options to throw');
             }
-            else if (!is_null($options->getVisibilityTimeoutInSeconds()) && 
-                    !is_null($options->getTimeToLiveInSeconds()) && 
-                    $options->getVisibilityTimeoutInSeconds() > 0 && 
+            else if (!is_null($options->getVisibilityTimeoutInSeconds()) &&
+                    !is_null($options->getTimeToLiveInSeconds()) &&
+                    $options->getVisibilityTimeoutInSeconds() > 0 &&
                     $options->getTimeToLiveInSeconds() <= $options->getVisibilityTimeoutInSeconds()) {
                 $this->assertTrue(false, 'Expect getTimeToLiveInSeconds() <= getVisibilityTimeoutInSeconds in $options to throw');
             }
@@ -855,7 +866,6 @@ class QueueServiceFunctionalTest extends FunctionalTestBase {
             else if (!is_null($options->getVisibilityTimeoutInSeconds()) && $options->getVisibilityTimeoutInSeconds() < 0) {
                 // Trying to pass bad metadata
                 $this->assertEquals(400, $e->getCode(), 'getCode');
-                // TODO: Can check more?
             }
             else if (!is_null($options->getTimeToLiveInSeconds()) && $options->getTimeToLiveInSeconds() <= 0) {
                 $this->assertEquals(400, $e->getCode(), 'getCode');
