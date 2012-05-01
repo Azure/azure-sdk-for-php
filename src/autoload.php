@@ -126,6 +126,7 @@ spl_autoload_register(
             'windowsazure\\services\\blob\\models\\setblobpropertiesresult' => '/WindowsAzure/Services/Blob/Models/SetBlobPropertiesResult.php',
             'windowsazure\\services\\blob\\models\\setcontainermetadataoptions' => '/WindowsAzure/Services/Blob/Models/SetContainerMetadataOptions.php',
             'windowsazure\\services\\blob\\models\\signedidentifier' => '/WindowsAzure/Services/Blob/Models/SignedIdentifier.php',
+            'windowsazure\\services\\blob\\models\\sourceaccesscondition' => '/WindowsAzure/Services/Blob/Models/SourceAccessCondition.php',
             'windowsazure\\services\\core\\models\\getservicepropertiesresult' => '/WindowsAzure/Services/Core/Models/GetServicePropertiesResult.php',
             'windowsazure\\services\\core\\models\\logging' => '/WindowsAzure/Services/Core/Models/Logging.php',
             'windowsazure\\services\\core\\models\\metrics' => '/WindowsAzure/Services/Core/Models/Metrics.php',

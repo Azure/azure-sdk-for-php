@@ -117,7 +117,10 @@ class ServicesBuilder implements IServiceBuilder
         $xmlSerializer = new XmlSerializer();
         
         $queueWrapper = new QueueRestProxy(
-            $httpClient, $config->getProperty(QueueSettings::URI), $xmlSerializer
+            $httpClient, 
+            $config->getProperty(QueueSettings::URI), 
+            '', 
+            $xmlSerializer
         );
 
         // Adding headers filter

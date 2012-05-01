@@ -15,7 +15,7 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   PEAR2\WindowsAzure\Services\Blob\Models
+ * @package   WindowsAzure\Services\Blob\Models
  * @author    Albert Cheng <gongchen at the largest software company>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
@@ -32,7 +32,7 @@ use WindowsAzure\Core\WindowsAzureUtilities;
  * The result of creating Blob snapshot. 
  *
  * @category  Microsoft
- * @package   PEAR2\WindowsAzure\Services\Blob\Models
+ * @package   WindowsAzure\Services\Blob\Models
  * @author    Albert Cheng <gongchen at the largest software company>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
@@ -66,12 +66,6 @@ class CreateBlobSnapshotResult
     private $_requestId;
     
     /**
-     * The version of the Blob service. 
-     * @var string
-     */
-    private $_version;
-    
-    /**
      * The date/time value (in UTC) of when the response was initiatied. 
      * @var \DateTime
      */
@@ -100,10 +94,6 @@ class CreateBlobSnapshotResult
         
         $createBlobSnapshotResult->setRequestId(
             $headerWithLowerCaseKey[Resources::X_MS_REQUEST_ID]
-            );
-        
-        $createBlobSnapshotResult->setVersion(
-            $headerWithLowerCaseKey[Resources::X_MS_VERSION]
             );
         
         $createBlobSnapshotResult->setDate(
@@ -194,28 +184,6 @@ class CreateBlobSnapshotResult
     public function setRequestId($requestId)
     {
         $this->_requestId = $requestId;
-    }
-    
-    /** 
-     * Gets version.  
-     * 
-     * @return string.
-     */
-    public function getVersion()
-    {
-        return $this->_version;
-    }
-    
-    /**
-     * Sets version. 
-     * 
-     * @param string $version value.
-     * 
-     * @return none. 
-     */
-    public function setVersion($version)
-    {
-        $this->_version = $version; 
     }
     
     /**

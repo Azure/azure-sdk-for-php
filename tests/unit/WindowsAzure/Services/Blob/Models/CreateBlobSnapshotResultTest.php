@@ -106,22 +106,6 @@ class CreateBlobSnapshotResultTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers WindowsAzure\Services\Blob\Models\CreateBlobSnapshotResult::getVersion
-     * @covers WindowsAzure\Services\Blob\Models\CreateBlobSnapshotResult::setVersion
-     */
-    public function testSetVersion()
-    {
-        $createBlobSnapshotResult = new CreateBlobSnapshotResult();
-        $expected = "2008-8-8";
-        $createBlobSnapshotResult->setVersion($expected);
-        
-        $this->assertEquals(
-            $expected,
-            $createBlobSnapshotResult->getVersion()
-            );
-    }
-    
-    /**
      * @covers WindowsAzure\Services\Blob\Models\CreateBlobSnapshotResult::getDate
      * @covers WindowsAzure\Services\Blob\Models\CreateBlobSnapshotResult::setDate
      */

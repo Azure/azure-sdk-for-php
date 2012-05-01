@@ -38,42 +38,7 @@ use WindowsAzure\Services\Blob\Models\CreateBlobSnapshotOptions;
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
 class CreateBlobSnapshotOptionsTest extends \PHPUnit_Framework_TestCase
-{
-    /**
-     * @covers WindowsAzure\Services\Blob\Models\CreateBlobSnapshotOptions::setDate
-     * @covers WindowsAzure\Services\Blob\Models\CreateBlobSnapshotOptions::getDate
-     */
-    public function testSetDate()
-    {
-        $createBlobSnapshotOptions = new CreateBlobSnapshotOptions();
-        $expected = new \DateTime("2011-8-8");
-        
-        $createBlobSnapshotOptions->setDate($expected);
-        
-        $this->assertEquals(
-            $expected,
-            $createBlobSnapshotOptions->getDate()
-            );
-    }
-    
-    /**
-     * @covers WindowsAzure\Services\Blob\Models\CreateBlobSnapshotOptions::setVersion
-     * @covers WindowsAzure\Services\Blob\Models\CreateBlobSnapshotOptions::getVersion
-     */
-    public function testSetVersion()
-    {
-        $createBlobSnapshotOptions = new CreateBlobSnapshotOptions();
-        $expected = "2008-8-8";
-        
-        $createBlobSnapshotOptions->setVersion($expected);
-        
-        $this->assertEquals(
-            $expected,
-            $createBlobSnapshotOptions->getVersion()
-            );
-             
-    }
-    
+{  
     /**
      * @covers WindowsAzure\Services\Blob\Models\CreateBlobSnapshotOptions::setMetadata
      * @covers WindowsAzure\Services\Blob\Models\CreateBlobSnapshotOptions::getMetadata
@@ -90,69 +55,6 @@ class CreateBlobSnapshotOptionsTest extends \PHPUnit_Framework_TestCase
             );
     }
     
-    /**
-     * @covers WindowsAzure\Services\Blob\Models\CreateBlobSnapshotOptions::setIfModifiedSince
-     * @covers WindowsAzure\Services\Blob\Models\CreateBlobSnapshotOptions::getIfModifiedSince
-     */
-    public function testSetIfModifiedSince()
-    {
-        $createBlobSnapshotOptions = new CreateBlobSnapshotOptions();
-        $expected = new \DateTime("2008-8-8");
-        $createBlobSnapshotOptions->setIfModifiedSince($expected);
-        
-        $this->assertEquals(
-            $expected,
-            $createBlobSnapshotOptions->getIfModifiedSince()
-            );
-    }
-    
-    /**
-     * @covers WindowsAzure\Services\Blob\Models\CreateBlobSnapshotOptions::setIfUnmodifiedSince
-     * @covers WindowsAzure\Services\Blob\Models\CreateBlobSnapshotOptions::getIfUnmodifiedSince
-     */
-    public function testSetIfUnmodifiedSince()
-    {
-        $createBlobSnapshotOptions = new CreateBlobSnapshotOptions();
-        $expected = new \DateTime("2008-8-8");
-        $createBlobSnapshotOptions->setIfUnmodifiedSince($expected);
-        
-        $this->assertEquals(
-            $expected,
-            $createBlobSnapshotOptions->getIfUnmodifiedSince()
-            );
-    }
-    
-    /**
-     * @covers WindowsAzure\Services\Blob\Models\CreateBlobSnapshotOptions::setIfMatch
-     * @covers WindowsAzure\Services\Blob\Models\CreateBlobSnapshotOptions::getIfMatch
-     */
-    public function testSetIfMatch()
-    {
-        $createBlobSnapshotOptions = new CreateBlobSnapshotOptions();
-        $expected = "12345678";
-        $createBlobSnapshotOptions->setIfMatch($expected);
-        
-        $this->assertEquals(
-            $expected,
-            $createBlobSnapshotOptions->getIfMatch()
-            );
-    }
-    
-    /**
-     * @covers WindowsAzure\Services\Blob\Models\CreateBlobSnapshotOptions::setIfNoneMatch
-     * @covers WindowsAzure\Services\Blob\Models\CreateBlobSnapshotOptions::getIfNoneMatch
-     */
-    public function testSetIfNoneMatch()
-    {
-        $createBlobSnapshotOptions = new CreateBlobSnapshotOptions();
-        $expected = "12345678";
-        $createBlobSnapshotOptions->setIfNoneMatch($expected);
-        
-        $this->assertEquals(
-            $expected,
-            $createBlobSnapshotOptions->getIfNoneMatch()
-            );
-    }
     
     /**
      * @covers WindowsAzure\Services\Blob\Models\CreateBlobSnapshotOptions::setLeaseId

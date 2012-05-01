@@ -1870,23 +1870,25 @@ class BlobRestProxy extends ServiceRestProxy implements IBlob
             $options = new CreateBlobSnapshotOptions();
         }  
         
-        $header[Resources::QP_TIMEOUT]            = $options->getTimeout();
-        $header[Resources::X_MS_DATE]             = $options->getDate();
-        $header[Resources::X_MS_VERSION]          = $options->getVersion();
-        $header[Resources::X_MS_BLOB_TYPE]        = 'BlockBlob';
+        $this->addOptionalAccessConditionHeader(
+            $header,
+            $options->getAccessCondition()
+        );
         
         $metadata = $options->getMetaData();
         if (!is_null($metadata)) {
             $metadataHeader = 
                 WindowsAzureUtilities::generateMetadataHeaders($metadata);
-            $header = \array_merge($header, $metadataHeader);
+            $header = array_merge($header, $metadataHeader);
         }
         
-        $header[Resources::IF_MODIFIED_SINCE]     = $options->getIfModifiedSince();
-        $header[Resources::IF_UNMODIFIED_SINCE]   = $options->getIfUnmodifiedSince();
-        $header[Resources::IF_MATCH]              = $options->getIfMatch();
-        $header[Resources::IF_NONE_MATCH]         = $options->getIfNoneMatch();
-        $header[Resources::X_MS_LEASE_ID]         = $options->getLeaseId();
+        $header[Resources::X_MS_BLOB_TYPE] = $options->getBlobType();
+        
+        $this->addOptionalHeader(
+            $header,
+            Resources::X_MS_LEASE_ID,
+            $options->getLeaseId()
+        );
         
         $response = $this->send(
             $method, 
@@ -1922,10 +1924,9 @@ class BlobRestProxy extends ServiceRestProxy implements IBlob
         $options = null) 
     {
         $method               = \HTTP_Request2::METHOD_PUT;
-        $header               = array();
+        $headers               = array();
         $queryParams          = array();
         $destinationBlobPath  = $destinationContainer . '/' . $destinationBlob;
-        
         $statusCode           = Resources::STATUS_CREATED;
         
         if (is_null($options)) {
@@ -1937,40 +1938,44 @@ class BlobRestProxy extends ServiceRestProxy implements IBlob
             $options
             );
         
-        $header = $this->addOptionalAccessConditionHeader(
-            $header, 
+        $this->addOptionalAccessConditionHeader(
+            $headers, 
             $options->getAccessCondition()
             );
         
-        $header[Resources::QP_TIMEOUT]            = $options->getTimeout();
-        $header[Resources::X_MS_COPY_SOURCE]      = $sourceBlobPath;
+        $this->addOptionalSourceAccessConditionHeader(
+            $headers,
+            $options->getSourceAccessCondition()
+        );
+        
+        $this->addOptionalHeader(
+            $headers, 
+            Resources::X_MS_COPY_SOURCE, 
+            $sourceBlobPath
+        );
         
         $metadata = $options->getMetaData();
         if (!is_null($metadata)) {
             $metadataHeader = 
                 WindowsAzureUtilities::generateMetadataHeaders($metadata);
-            $header = \array_merge($header, $metadataHeader);
+            $headers = \array_merge($headers, $metadataHeader);
         }
         
-        $header[Resources::X_MS_SOURCE_IF_MODIFIED_SINCE] 
-            = $options->getSourceIfModifiedSince();
-        $header[Resources::X_MS_SOURCE_IF_UNMODIFIED_SINCE]
-            = $options->getSourceIfUnmodifiedSince();
-        $header[Resources::X_MS_SOURCE_IF_MATCH]
-            = $options->getIfMatch(); 
-        $header[Resources::X_MS_SOURCE_IF_NONE_MATCH]
-            = $options->getIfNoneMatch(); 
-        $header[Resources::IF_MODIFIED_SINCE] = $options->getIfModifiedSince(); 
-        $header[Resources::IF_UNMODIFIED_SINCE] 
-            = $options->getIfUnmodifiedSince();
-        $header[Resources::IF_MATCH]              = $options->getIfMatch();
-        $header[Resources::IF_NONE_MATCH]         = $options->getIfNoneMatch(); 
-        $header[Resources::X_MS_LEASE_ID]         = $options->getLeaseId();
-        $header[Resources::X_MS_SOURCE_LEASE_ID]  = $options->getSourceLeaseId();
+        $this->addOptionalHeader(
+            $headers, 
+            Resources::X_MS_LEASE_ID,
+            $options->getLeaseId()
+        );
+        
+        $this->addOptionalHeader(
+            $headers, 
+            Resources::X_MS_SOURCE_LEASE_ID,
+            $options->getSourceLeaseId()
+        );
         
         $this->send(
             $method, 
-            $header, 
+            $headers, 
             $queryParams, 
             $destinationBlobPath, 
             $statusCode
@@ -2073,7 +2078,8 @@ class BlobRestProxy extends ServiceRestProxy implements IBlob
     }
     
     /**
-     *
+     * Gets the copy blob source name with specified parameters. 
+     * 
      * @param string                    $containerName the name of the container.
      * @param string                    $blobName      the name of the blob.
      * @param Models\CopyBlobOptions    $options       the optional parameters. 
@@ -2081,7 +2087,6 @@ class BlobRestProxy extends ServiceRestProxy implements IBlob
      */
     private function getCopyBlobSourceName($containerName, $blobName, $options)
     {
-        
         $copyBlobSourceName = '/'.$this->getAccountName();
        
         if (!Validate::IsNullOrEmptyString($containerName))

@@ -133,6 +133,12 @@ class Validate
      */
     public static function IsNullOrEmptyString($var)
     {
+        try {
+            (string)$var;
+        } catch (\Exception $e) {
+            return false; 
+        }
+        
         return (!isset($var) || trim($var)==='');
     }
     

@@ -15,7 +15,7 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   PEAR2\WindowsAzure\Services\Blob\Models
+ * @package   WindowsAzure\Services\Blob\Models
  * @author    Albert Cheng <gongchen at the largest software company>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
@@ -37,41 +37,16 @@ use WindowsAzure\Validate;
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
 class CreateBlobSnapshotOptions extends BlobServiceOptions
-{ 
-    /**
-     * @var \DateTime
-     */
-    private $_date;
-
-    /**
-     * @var string
-     */
-    private $_version;
-    
+{
     /**
      * @var array
      */
     private $_metadata;
     
     /**
-     * @var \DateTime
+     * @var \AccessCondition
      */
-    private $_ifModifiedSince; 
-    
-    /**
-     * @var \DateTime
-     */
-    private $_ifUnmodifiedSince; 
-    
-    /**
-     * @var string
-     */
-    private $_ifMatch;
-    
-    /**
-     * @var string
-     */
-    private $_ifNoneMatch; 
+    private $_accessCondition;
     
     /**
      * @var string
@@ -79,47 +54,28 @@ class CreateBlobSnapshotOptions extends BlobServiceOptions
     private $_leaseId;
      
     /**
-     * Gets the Coordinated Universal Time (UTC) for the request.
-     *
-     * @return \DateTime.
+     * @var string
      */
-    public function getDate()
-    {
-        return $this->_date;
-    }
-
+    private $_blobType;
+    
     /**
-     * Sets the Coordinated Universal Time (UTC) for the request.
-     *
-     * @param \DateTime $date value.
-     *
-     * @return none.
+     * Gets blob type.
+     * 
+     * @return type. 
      */
-    public function setDate($date)
+    public function getBlobType()
     {
-        $this->_date = $date;
+        return $this->_blobType;
     }
     
     /**
-     * Gets storage service version.
-     *
-     * @return string.
+     * Sets blob type. 
+     * 
+     * @param type $blobType 
      */
-    public function getVersion()
+    public function setBlobType($blobType)
     {
-        return $this->_version;
-    }
-
-    /**
-     * Sets storage service version.
-     *
-     * @param string $version value.
-     *
-     * @return none.
-     */
-    public function setVersion($version)
-    {
-        $this->_version = $version;
+        $this->_blobType = $blobType;
     }
     
     /**
@@ -145,89 +101,23 @@ class CreateBlobSnapshotOptions extends BlobServiceOptions
     }
     
     /**
-     * Gets if modified since.
+     * Gets access condition.
      * 
-     * return \DateTime.
+     * return \AccessCondition.
      */
-    public function getIfModifiedSince()
+    public function getAccessCondition()
     {
-        return $this->_ifModifiedSince;
+        return $this->_accessCondition;
     }
     
     /**
-     * Sets if modified since.
+     * Sets access condition.
      * 
-     * @param \DateTime $ifModifiedSince value
+     * @param \AccessCondition $accessCondition value
      */
-    public function setIfModifiedSince($ifModifiedSince)
+    public function setAccessCondition($accessCondition)
     {
-        $this->_ifModifiedSince = $ifModifiedSince;
-    }
-    
-    /**
-     * Gets if unmodified since.
-     *
-     * @return \DateTime.
-     */
-    public function getIfUnmodifiedSince()
-    {
-        return $this->_ifUnmodifiedSince;
-    }
-
-    /**
-     * Sets if unmodified since.
-     *
-     * @param \DateTime $ifUnmodifiedsince value.
-     *
-     * @return none.
-     */
-    public function setIfUnmodifiedSince($ifUnmodifiedSince)
-    {
-        $this->_ifUnmodifiedSince = $ifUnmodifiedSince;
-    }
-    
-    /**
-     * Gets ifMatch.
-     *
-     * @return string.
-     */
-    public function getIfMatch()
-    {
-        return $this->_ifMatch;
-    }
-    
-    /**
-     * Sets if match.
-     *
-     * @param string $ifMatch value.
-     * 
-     * @return none.
-     */
-    public function setIfMatch($ifMatch)
-    {
-        $this->_ifMatch = $ifMatch;
-    }
-    
-    /**
-     * Gets if none match.
-     * 
-     * @return string.
-     */
-    public function getIfNoneMatch()
-    {
-        return $this->_ifNoneMatch;
-    }
-    
-    /**
-     * Sets if none match.
-     * 
-     * @param string if none match.
-     * 
-     * @return none.
-     */
-    public function setIfNoneMatch($ifNoneMatch)
-    {
-        $this->_ifNoneMatch = $ifNoneMatch;
+        $this->_accessCondition = $accessCondition;
     }
     
     /**

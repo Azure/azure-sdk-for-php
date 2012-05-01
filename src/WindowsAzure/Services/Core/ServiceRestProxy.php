@@ -56,13 +56,13 @@ class ServiceRestProxy extends RestProxy
      */
     public function __construct($channel, $uri, $accountName = '', $dataSerializer)
     {
-		parent::_construct($channel, $dataSerializer);
+		parent::__construct($channel, $dataSerializer);
         $this->_url      = $uri;
 		$this->_accountName = $accountName;
     }
     
     /**
-     * Get the account name.
+     * Gets the account name.
      *
      * @return string
      */
@@ -71,6 +71,14 @@ class ServiceRestProxy extends RestProxy
         return $this->_accountName;
     }
     
+    /**
+     * Gets the URL.
+     * @return type 
+     */
+    public function getUrl()
+    {
+        return $this->_url;
+    }
     /**
      * Sends HTTP request with the specified HTTP call context.
      * 
@@ -136,6 +144,29 @@ class ServiceRestProxy extends RestProxy
             
             if ($header != Resources::EMPTY_STRING) {
                 $headers[$header] = $accessCondition->getValue();
+            }
+        }
+        
+        return $headers;
+    }
+    
+    /**
+     * Adds optional header to headers if set
+     * 
+     * @param array                 $headers               array of request headers
+     * @param SourceAccessCondition $sourceAccessCondition the access condition object
+     * 
+     * @return array
+     */
+    public function addOptionalSourceAccessConditionHeader(
+        $headers, 
+        $sourceAccessCondition)
+    {
+        if (!is_null($sourceAccessCondition)) {
+            $header = $sourceAccessCondition->getHeader();
+            
+            if ($header != Resources::EMPTY_STRING) {
+                $headers[$header] = $sourceAccessCondition->getValue();
             }
         }
         

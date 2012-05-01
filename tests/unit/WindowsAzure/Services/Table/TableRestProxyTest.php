@@ -67,7 +67,7 @@ class TableRestProxyTest extends TableServiceRestProxyTestBase
         $url = 'http://www.microsoft.com';
         
         // Test
-        $tableRestProxy = new TableRestProxy($channel, $url, $atomSerializer, $mimeSerializer);
+        $tableRestProxy = new TableRestProxy($channel, $url, $atomSerializer, $mimeSerializer, null);
         
         // Assert
         $this->assertNotNull($tableRestProxy);

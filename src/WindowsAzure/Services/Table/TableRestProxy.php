@@ -298,7 +298,7 @@ class TableRestProxy extends ServiceRestProxy implements ITable
         $context->setPath($path);
         $context->setQueryParameters($queryParams);
         $context->addStatusCode($statusCode);
-        $context->setUri($this->url);
+        $context->setUri($this->getUrl());
         $context->setBody('');
         
         return $context;
@@ -362,7 +362,7 @@ class TableRestProxy extends ServiceRestProxy implements ITable
         $context->setPath($path);
         $context->setQueryParameters($queryParams);
         $context->addStatusCode($statusCode);
-        $context->setUri($this->url);
+        $context->setUri($this->getUrl());
         
         return $context;
     }
@@ -412,7 +412,7 @@ class TableRestProxy extends ServiceRestProxy implements ITable
         $context->setPath($path);
         $context->setQueryParameters($queryParams);
         $context->addStatusCode($statusCode);
-        $context->setUri($this->url);
+        $context->setUri($this->getUrl());
         
         return $context;
     }
@@ -621,7 +621,7 @@ class TableRestProxy extends ServiceRestProxy implements ITable
     public function __construct($channel, $uri, $atomSerializer, $mimeSerializer, 
         $dataSerializer
     ) {
-        parent::__construct($channel, $uri, $dataSerializer);
+        parent::__construct($channel, $uri, '', $dataSerializer);
         $this->_atomSerializer = $atomSerializer;
         $this->_mimeSerializer = $mimeSerializer;
     }

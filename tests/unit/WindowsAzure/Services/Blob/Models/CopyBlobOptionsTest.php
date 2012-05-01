@@ -24,7 +24,9 @@
 namespace Tests\Unit\WindowsAzure\Services\Blob\Models;
 use Tests\Framework\TestResources;
 use WindowsAzure\Core\WindowsAzureUtilities;
+use WindowsAzure\Services\Blob\Models\AccessCondition;
 use WindowsAzure\Services\Blob\Models\CopyBlobOptions;
+use WindowsAzure\Services\Blob\Models\SourceAccessCondition;
 
 /**
  * Unit tests for class CopyBlobBlobOptions
@@ -38,23 +40,7 @@ use WindowsAzure\Services\Blob\Models\CopyBlobOptions;
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
 class CopyBlobOptionsTest extends \PHPUnit_Framework_TestCase
-{
-    /** 
-     * @covers WindowsAzure\Services\Blob\Models\CopyBlobOptions::setDate
-     * @covers WindowsAzure\Services\Blob\Models\CopyBlobOptions::getDate
-     */
-    public function testSetDate()
-    {
-        $copyBlobOptions = new CopyBlobOptions();
-        $expected = new \DateTime("2011-09-29 23:50:26");
-        
-        $copyBlobOptions->setDate(($expected));
-        $this->assertEquals(
-            $expected,
-            $copyBlobOptions->getDate()
-            );  
-    }
-    
+{  
     /** 
      * @covers WindowsAzure\Services\Blob\Models\CopyBlobOptions::setCopySource
      * @covers WindowsAzure\Services\Blob\Models\CopyBlobOptions::getCopySource
@@ -69,7 +55,6 @@ class CopyBlobOptionsTest extends \PHPUnit_Framework_TestCase
             $expected,
             $copyBlobOptions->getCopySource()
             );
-        
     }
     
     /** 
@@ -88,135 +73,38 @@ class CopyBlobOptionsTest extends \PHPUnit_Framework_TestCase
             );
     }
     
-    /** 
-     * @covers WindowsAzure\Services\Blob\Models\CopyBlobOptions::setSourceIfModifiedSince
-     * @covers WindowsAzure\Services\Blob\Models\CopyBlobOptions::getSourceIfModifiedSince
+    /**
+     * @covers WindowsAzure\Services\Blob\Models\CopyBlobOptions::setAccessCondition
+     * @covers WindowsAzure\Services\Blob\Models\CopyBlobOptions::getAccessCondition
      */
-    public function testSetSourceIfModifiedSince()
+    public function testSetAccessCondition()
     {
         $copyBlobOptions = new CopyBlobOptions();
-        $expected = new \DateTime("2012-1-1");
-        $copyBlobOptions->setSourceIfModifiedSince($expected);
+        $expected = AccessCondition::ifMatch("12345");
+        $copyBlobOptions->setAccessCondition($expected);
         
         $this->assertEquals(
             $expected,
-            $copyBlobOptions->getSourceIfModifiedSince()
-            );
-        
+            $copyBlobOptions->getAccessCondition()
+        );
     }
     
-    /** 
-     * @covers WindowsAzure\Services\Blob\Models\CopyBlobOptions::setSourceIfUnmodifiedSince
-     * @covers WindowsAzure\Services\Blob\Models\CopyBlobOptions::getSourceIfUnmodifiedSince
+    /**
+     * @covers WindowsAzure\Services\Blob\Models\CopyBlobOptions::setSourceAccessCondition
+     * @covers WindowsAzure\Services\Blob\Models\CopyBlobOptions::getSourceAccessCondition
      */
-    public function testSetSourceIfUnmodifiedSince()
+    public function testSetSourceAccessCondition()
     {
         $copyBlobOptions = new CopyBlobOptions();
-        $expected = new \DateTime("2012-1-1");
-        $copyBlobOptions->setSourceIfUnmodifiedSince($expected);
+        $expected = SourceAccessCondition::sourceIfMatch("x");
+        $copyBlobOptions->setSourceAccessCondition($expected);
         
         $this->assertEquals(
             $expected,
-            $copyBlobOptions->getSourceIfUnmodifiedSince()
-            );
+            $copyBlobOptions->getSourceAccessCondition()
+         );
     }
     
-    /** 
-     * @covers WindowsAzure\Services\Blob\Models\CopyBlobOptions::setSourceIfMatch
-     * @covers WindowsAzure\Services\Blob\Models\CopyBlobOptions::getSourceIfMatch
-     */
-    public function testSetSourceIfMatch()
-    {
-        $copyBlobOptions = new CopyBlobOptions();
-        $expected = "123456789" ;
-        
-        $copyBlobOptions->setSourceIfMatch($expected);
-        $this->assertEquals(
-            $expected,
-            $copyBlobOptions->getSourceIfMatch()
-            );
-    }
-    
-    /** 
-     * @covers WindowsAzure\Services\Blob\Models\CopyBlobOptions::setSourceIfNoneMatch
-     * @covers WindowsAzure\Services\Blob\Models\CopyBlobOptions::getSourceIfNoneMatch
-     */
-    public function testSetSourceIfNoneMatch()
-    {
-        $copyBlobOptions = new CopyBlobOptions();
-        $expected = "123456789" ;
-        
-        $copyBlobOptions->setSourceIfNoneMatch($expected);
-        $this->assertEquals(
-            $expected,
-            $copyBlobOptions->getSourceIfNoneMatch()
-            );
-    }
-    
-    /** 
-     * @covers WindowsAzure\Services\Blob\Models\CopyBlobOptions::setIfModifiedSince
-     * @covers WindowsAzure\Services\Blob\Models\CopyBlobOptions::getIfModifiedSince
-     */
-    public function testSetIfModifiedSince()
-    {
-        $copyBlobOptions = new CopyBlobOptions();
-        $expected = new \DateTime("2012-1-1");
-        $copyBlobOptions->setIfModifiedSince($expected);
-        
-        $this->assertEquals(
-            $expected,
-            $copyBlobOptions->getIfModifiedSince()
-            );
-    }
-    
-    /** 
-     * @covers WindowsAzure\Services\Blob\Models\CopyBlobOptions::setIfUnmodifiedSince
-     * @covers WindowsAzure\Services\Blob\Models\CopyBlobOptions::getIfUnmodifiedSince
-     */
-    public function testSetIfUnmodifiedSince()
-    {
-        $copyBlobOptions = new CopyBlobOptions();
-        $expected = new \DateTime("2012-1-1");
-        $copyBlobOptions->setIfUnmodifiedSince($expected);
-        
-        $this->assertEquals(
-            $expected,
-            $copyBlobOptions->getIfUnmodifiedSince()
-            );
-    }
-    
-    /** 
-     * @covers WindowsAzure\Services\Blob\Models\CopyBlobOptions::setIfMatch
-     * @covers WindowsAzure\Services\Blob\Models\CopyBlobOptions::getIfMatch
-     */
-    public function testSetIfMatch()
-    {
-        $copyBlobOptions = new CopyBlobOptions();
-        $expected = "123456789" ;
-        
-        $copyBlobOptions->setIfMatch($expected);
-        $this->assertEquals(
-            $expected,
-            $copyBlobOptions->getIfMatch()
-            );
-    }
-    
-    /** 
-     * @covers WindowsAzure\Services\Blob\Models\CopyBlobOptions::setIfNoneMatch
-     * @covers WindowsAzure\Services\Blob\Models\CopyBlobOptions::getIfNoneMatch
-     */
-    public function testSetIfNoneMatch()
-    {
-        $copyBlobOptions = new CopyBlobOptions();
-        $expected = "123456789" ;
-        
-        $copyBlobOptions->setIfNoneMatch($expected);
-        $this->assertEquals(
-            $expected,
-            $copyBlobOptions->getIfNoneMatch()
-            );
-    }
-
     /** 
      * @covers WindowsAzure\Services\Blob\Models\CopyBlobOptions::setLeaseId
      * @covers WindowsAzure\Services\Blob\Models\CopyBlobOptions::getLeaseId

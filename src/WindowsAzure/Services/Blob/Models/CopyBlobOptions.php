@@ -39,14 +39,14 @@ use WindowsAzure\Validate;
 class CopyBlobOptions extends BlobServiceOptions
 { 
     /**
-     * @var AccessCondition
+     * @var \AccessCondition
      */
     private $_accessCondition;
     
     /**
-     * @var \Date
+     * @var \AccessCondition
      */
-    private $_date;
+    private $_sourceAccessCondition;
 
     /**
      * @var string
@@ -59,49 +59,9 @@ class CopyBlobOptions extends BlobServiceOptions
     private $_metadata;
     
     /**
-     * @var \DateTime
-     */
-    private $_sourceIfModifiedSince;
-    
-    /**
-     * @var \DateTime
-     */
-    private $_sourceIfUnModifiedSince;
-    
-    /**
-     * @var string
-     */
-    private $_sourceIfMatch;
-    
-    /**
-     * @var string
-     */
-    private $_sourceIfNoneMatch; 
-    
-    /**
      * @var string 
      */
     private $_sourceSnapshot;
-    
-    /**
-     * @var \DateTime
-     */
-    private $_ifModifiedSince; 
-    
-    /**
-     * @var \DateTime
-     */
-    private $_ifUnmodifiedSince; 
-    
-    /** 
-     * @var string
-     */
-    private $_ifMatch;
-    
-    /**
-     * @var string
-     */
-    private $_ifNoneMatch; 
     
     /**
      * @var string
@@ -112,8 +72,8 @@ class CopyBlobOptions extends BlobServiceOptions
      * @var sourceLeaseId
      */
     private $_sourceLeaseId;
-    
-        /**
+  
+    /**
      * Gets access condition
      * 
      * @return AccessCondition
@@ -136,25 +96,25 @@ class CopyBlobOptions extends BlobServiceOptions
     }
     
     /**
-     * Gets the Coordinated Universal Time (UTC) for the request.
-     *
-     * @return \DateTime.
+     * Gets source access condition
+     * 
+     * @return SourceAccessCondition
      */
-    public function getDate()
+    public function getSourceAccessCondition()
     {
-        return $this->_date;
+        return $this->_sourceAccessCondition;
     }
-
+    
     /**
-     * Sets the Coordinated Universal Time (UTC) for the request.
-     *
-     * @param \DateTime $date value.
-     *
+     * Sets source access condition
+     * 
+     * @param SourceAccessCondition $sourceAccessCondition value to use.
+     * 
      * @return none.
      */
-    public function setDate($date)
+    public function setSourceAccessCondition($sourceAccessCondition)
     {
-        $this->_date = $date;
+        $this->_sourceAccessCondition = $sourceAccessCondition;
     }
     
     /**
@@ -202,94 +162,6 @@ class CopyBlobOptions extends BlobServiceOptions
     }
     
     /**
-     * Gets source if modified since.
-     *
-     * @return \DateTime.
-     */
-    public function getSourceIfModifiedSince()
-    {
-        return $this->_sourceIfModifiedSince;
-    }
-    
-    /**
-     * Sets source if modified since.
-     *
-     * @param \DateTime $sourceIfModifiedSince value to use.
-     * 
-     * @return none.
-     */
-    public function setSourceIfModifiedSince($sourceIfModifiedSince)
-    {
-        $this->_sourceIfModifiedSince = $sourceIfModifiedSince;
-    }
-    
-    /**
-     * Gets source if unmodified since.
-     *
-     * @return \DateTime.
-     */
-    public function getSourceIfUnmodifiedSince()
-    {
-        return $this->_sourceIfUnModifiedSince;
-    }
-
-    /**
-     * Sets source if unmodified since.
-     *
-     * @param \DateTime $sourceIfUnmodifiedSince value.
-     *
-     * @return none.
-     */
-    public function setSourceIfUnmodifiedSince($sourceIfUnmodifiedSince)
-    {
-        $this->_sourceIfUnModifiedSince = $sourceIfUnmodifiedSince;
-    }
-    
-    /**
-     * Gets source if match.
-     *
-     * @return string.
-     */
-    public function getSourceIfMatch()
-    {
-        return $this->_sourceIfMatch;
-    }
-
-    /**
-     * Sets source if match.
-     *
-     * @param string $sourceIfMatch value.
-     *
-     * @return none.
-     */
-    public function setSourceIfMatch($sourceIfMatch)
-    {
-        $this->_sourceIfMatch = $sourceIfMatch;
-    }
-    
-    /**
-     * Gets source if none match.
-     *
-     * @return string.
-     */
-    public function getSourceIfNoneMatch()
-    {
-        return $this->_sourceIfNoneMatch;
-    }
-
-    /**
-     * Sets source if none match.
-     *
-     * @param $sourceIfNoneMatch value.
-     *
-     * @return none.
-     */
-    public function setSourceIfNoneMatch($sourceIfNoneMatch)
-    {
-        $this->_sourceIfNoneMatch = $sourceIfNoneMatch;
-    }
-    
-    /**
      * Gets source snapshot. 
      * 
      * @return string
@@ -310,95 +182,7 @@ class CopyBlobOptions extends BlobServiceOptions
     {
         $this->_sourceSnapshot = $sourceSnapshot;
     }
-    
-    /**
-     * Gets if modified since.
-     *
-     * @return \DateTime.
-     */
-    public function getIfModifiedSince()
-    {
-        return $this->_ifModifiedSince;
-    }
-
-    /**
-     * Sets if modified since.
-     *
-     * @param \DateTime $ifModifiedSince value.
-     *
-     * @return none.
-     */
-    public function setIfModifiedSince($ifModifiedSince)
-    {
-        $this->_ifModifiedSince = $ifModifiedSince;
-    }
-    
-    /**
-     * Gets if unmodified since.
-     *
-     * @return \DateTime.
-     */
-    public function getIfUnmodifiedSince()
-    {
-        return $this->_ifUnmodifiedSince;
-    }
-
-    /**
-     * Sets if unmodified since.
-     *
-     * @param \DateTime $ifUnmodifiedSince value.
-     *
-     * @return none.
-     */
-    public function setIfUnmodifiedSince($ifUnmodifiedSince)
-    {
-        $this->_ifUnmodifiedSince = $ifUnmodifiedSince;
-    }
-    
-    /**
-     * Gets ifMatch.
-     *
-     * @return string.
-     */
-    public function getIfMatch()
-    {
-        return $this->_ifMatch;
-    }
-    
-    /**
-     * Sets if match.
-     *
-     * @param string $ifMatch value.
-     * 
-     * @return none.
-     */
-    public function setIfMatch($ifMatch)
-    {
-        $this->_ifMatch = $ifMatch;
-    }
-    
-    /**
-     * Gets if none match.
-     * 
-     * @return string.
-     */
-    public function getIfNoneMatch()
-    {
-        return $this->_ifNoneMatch;
-    }
-    
-    /**
-     * Sets if none match.
-     * 
-     * @param string if none match.
-     * 
-     * @return none.
-     */
-    public function setIfNoneMatch($ifNoneMatch)
-    {
-        $this->_ifNoneMatch = $ifNoneMatch;
-    }
-    
+   
     /**
      * Gets lease ID.
      *

@@ -15,11 +15,7 @@
  * PHP version 5
  *
  * @category  Microsoft
-<<<<<<< HEAD
- * @package   PEAR2\Tests\Unit\WindowsAzure\Services\Blob
-=======
  * @package   Tests\Unit\WindowsAzure\Services\Blob
->>>>>>> 5bf9d542a690f36c0ba8e4b231b52097cbdda19e
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  *            Albert Cheng <gongchen at the largest software company>
  * @copyright 2012 Microsoft Corporation
@@ -1277,7 +1273,6 @@ class BlobRestProxyTest extends BlobServiceRestProxyTestBase
         $sourceBlobName = 'sourceBlobName';
         $sourceBlobFullName = $sourceContainerName.'/'.$sourceBlobName;
         $blobValue = 'testBlobValue'; 
-        $version = '2011-08-18';
         $date = new \DateTime();
         
         $this->createContainer($sourceContainerName); 
@@ -1287,8 +1282,7 @@ class BlobRestProxyTest extends BlobServiceRestProxyTestBase
         $this->createContainer($destinationContainerName); 
         $destinationBlobName = 'destinationBlob'; 
         
-        $copyBlobOptions = new CopyBlobOptions(); 
-        $copyBlobOptions->setDate($date);
+        $copyBlobOptions = new CopyBlobOptions();
         $copyBlobOptions->setCopySource($sourceBlobFullName);
         
         $this->wrapper->copyBlob( 
@@ -1342,12 +1336,15 @@ class BlobRestProxyTest extends BlobServiceRestProxyTestBase
         $containerName = 'createblobsnapshotsuccess'; 
         $blobName = 'testBlob'; 
         $blobValue = 'TestBlobValue'; 
-        $this->createContainer($containerName); 
+        $this->createContainer($containerName);
+        
+        $createBlobSnapshotOptions = new CreateBlobSnapshotOptions();
+        $createBlobSnapshotOptions->setBlobType('BlockBlob');
         
         $this->wrapper->createBlockBlob( 
             $containerName, $blobName, $blobValue);
         $createBlobSnapshotResult = $this->wrapper->createBlobSnapshot(
-            $containerName, $blobName);
+            $containerName, $blobName, $createBlobSnapshotOptions);
         $this->assertNotNull($createBlobSnapshotResult);
         
     }    
