@@ -23,12 +23,10 @@
  */
 
 namespace Tests\Unit\WindowsAzure\ServiceManagement\Models;
-use WindowsAzure\ServiceManagement\Models\AffinityGroup;
-use WindowsAzure\Core\Serialization\XmlSerializer;
-use WindowsAzure\Resources;
+use WindowsAzure\ServiceManagement\Models\AsynchronousOperationResult;
 
 /**
- * Unit tests for class AffinityGroup
+ * Unit tests for class AsynchronousOperationResult
  *
  * @category  Microsoft
  * @package   Tests\Unit\WindowsAzure\ServiceManagement\Models
@@ -38,38 +36,39 @@ use WindowsAzure\Resources;
  * @version   Release: @package_version@
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
-class AffinityGroupTest extends \PHPUnit_Framework_TestCase
+class AsynchronousOperationResultTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @covers WindowsAzure\ServiceManagement\Models\AffinityGroup::toArray
-     * @covers WindowsAzure\ServiceManagement\Models\AffinityGroup::__construct
+     * @covers WindowsAzure\ServiceManagement\Models\AsynchronousOperationResult::create
      */
-    public function testSerialize()
+    public function testCreate()
     {
         // Setup
-        $serializer = new XmlSerializer();
-        $expected = '<?xml version="1.0" encoding="UTF-8"?>' . "\n";
-        $expected .= '<CreateService xmlns="http://schemas.microsoft.com/windowsazure">' . "\n";
-        $expected .= ' <Name>Name</Name>' . "\n";
-        $expected .= ' <Label>Label</Label>' . "\n";
-        $expected .= ' <Description>Description</Description>' . "\n";
-        $expected .= ' <Location>Location</Location>' . "\n";
-        $expected .= '</CreateService>' . "\n";
-        $affinitygroup = new AffinityGroup();
-        $affinitygroup->setName('Name');
-        $affinitygroup->setLabel('Label');
-        $affinitygroup->setLocation('Location');
-        $affinitygroup->setDescription('Description');
-        $affinitygroup->addSerializationProperty(
-            XmlSerializer::ROOT_NAME,
-            'CreateService'
-        );
+        $requestId = '1sqwsqe34';
+        $headers = array('x-ms-request-id' => $requestId);
         
         // Test
-        $actual = $affinitygroup->serialize($serializer);
+        $actual = AsynchronousOperationResult::create($headers);
         
         // Assert
-        $this->assertEquals($expected, $actual);
+        $this->assertEquals($requestId, $actual->getRequestId());
+    }
+    
+    /**
+     * @covers WindowsAzure\ServiceManagement\Models\AsynchronousOperationResult::setRequestId
+     * @covers WindowsAzure\ServiceManagement\Models\AsynchronousOperationResult::getRequestId
+     */
+    public function testSetRequestId()
+    {
+        // Setup
+        $expected = 'rsqasqoni12';
+        $result = new AsynchronousOperationResult();
+        
+        // Test
+        $result->setRequestId($expected);
+        
+        // Assert
+        $this->assertEquals($expected, $result->getRequestId());
     }
 }
 

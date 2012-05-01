@@ -23,9 +23,10 @@
  */
  
 namespace WindowsAzure\ServiceManagement\Models;
+use WindowsAzure\Validate;
 
 /**
- * The location class.
+ * The optional parameters for updateStorageAccount API.
  *
  * @category  Microsoft
  * @package   WindowsAzure\ServiceManagement\Models
@@ -35,60 +36,64 @@ namespace WindowsAzure\ServiceManagement\Models;
  * @version   Release: @package_version@
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
-class Location
+class UpdateStorageAccountOptions
 {
     /**
      * @var string
      */
-    private $_name;
+    private $_label;
     
     /**
      * @var string
      */
-    private $_displayName;
+    private $_description;
     
     /**
-     * Gets the name.
+     * Gets the label.
      * 
      * @return string
      */
-    public function getName()
+    public function getLabel()
     {
-        return $this->_name;
+        return $this->_label;
     }
     
     /**
-     * Sets the name.
+     * Sets the label.
      * 
-     * @param string $name The name.
+     * @param string $label The label.
      * 
      * @return none
      */
-    public function setName($name)
+    public function setLabel($label)
     {
-        $this->_name = $name;
+        Validate::isString($label, 'label');
+        
+        $this->_label = $label;
     }
     
     /**
-     * Gets the displayName.
+     * Gets the description.
      * 
      * @return string
      */
-    public function getDisplayName()
+    public function getDescription()
     {
-        return $this->_displayName;
+        return $this->_description;
     }
     
     /**
-     * Sets the displayName.
+     * Sets the description.
      * 
-     * @param string $displayName The displayName.
+     * @param string $description The description.
      * 
      * @return none
      */
-    public function setDisplayName($displayName)
+    public function setDescription($description)
     {
-        $this->_displayName = $displayName;
+        Validate::isString($description, 'description');
+        
+        $this->_description = $description;
     }
 }
 
