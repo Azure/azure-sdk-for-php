@@ -41,6 +41,27 @@ use WindowsAzure\ServiceManagement\Models\OperationStatus;
 class GetOperationStatusResultTest extends \PHPUnit_Framework_TestCase
 {
     /**
+     * @covers WindowsAzure\ServiceManagement\Models\GetOperationStatusResult::create
+     */
+    public function testCreateWithError()
+    {
+        // Setup
+        $expected = new ServiceException('400', 'error message');
+        $input = array(
+          'Error' => array(
+              'Code'    => '400',
+              'Message' => 'error message'
+          )
+        );
+        
+        // Test
+        $result = GetOperationStatusResult::create($input);
+        
+        // Assert
+        $this->assertEquals($expected, $result->getError());
+    }
+    
+    /**
      * @covers WindowsAzure\ServiceManagement\Models\GetOperationStatusResult::setId
      * @covers WindowsAzure\ServiceManagement\Models\GetOperationStatusResult::getId
      */

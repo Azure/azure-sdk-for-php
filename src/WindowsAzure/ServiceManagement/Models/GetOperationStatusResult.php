@@ -83,15 +83,17 @@ class GetOperationStatusResult
             $parsed,
             Resources::XTAG_HTTP_STATUS_CODE
         );
-        $code                    = Utilities::tryGetValue(
+        $error                   = Utilities::tryGetValue(
             $parsed,
-            Resources::XTAG_CODE
+            Resources::XTAG_ERROR
         );
-        $message                 = Utilities::tryGetValue(
-            $parsed,
-            Resources::XTAG_MESSAGE
-        );
-        $result->_error          = new ServiceException($code, $message);
+        
+        if (!empty($error)) {
+            $code    = Utilities::tryGetValue($error, Resources::XTAG_CODE);
+            $message = Utilities::tryGetValue($error, Resources::XTAG_MESSAGE);
+            
+            $result->_error = new ServiceException($code, $message);
+        }        
         
         return $result;
     }

@@ -150,7 +150,7 @@ class ServiceManagementRestProxy extends RestProxy
      */
     public function __construct($channel, $subscriptionId, $dataSerializer)
     {
-        parent::__construct($channel, $dataSerializer, Resources::SM_URL);
+        parent::__construct($channel, $dataSerializer, Resources::SERVICE_MANAGEMENT_URL);
         $this->_subscriptionId = $subscriptionId;
     }
     

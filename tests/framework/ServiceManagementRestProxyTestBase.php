@@ -30,6 +30,7 @@ use WindowsAzure\ServiceManagement\ServiceManagementService;
 use WindowsAzure\Core\WindowsAzureUtilities;
 use WindowsAzure\ServiceManagement\Models\CreateStorageAccountOptions;
 use WindowsAzure\ServiceManagement\Models\OperationStatus;
+use WindowsAzure\ServiceManagement\Models\Locations;
 
 /**
  * Test base for ServiceManagementTest class.
@@ -46,11 +47,18 @@ class ServiceManagementRestProxyTestBase extends RestProxyTestBase
 {
     protected $createdStorageAccounts;
     protected $createdAffinityGroups;
+    protected $storageCount;
+    protected $affinityGroupCount;
     
-    protected function setUp()
+    public static function setUpBeforeClass()
     {
-        $this->skipIfEmulated();
-        
+        if (WindowsAzureUtilities::isEmulated()) {
+            throw new \Exception(self::NOT_SUPPORTED);
+        }
+    }
+    
+    public function __construct()
+    {
         $config = new Configuration();
         $config->setProperty(
             ServiceManagementSettings::SUBSCRIPTION_ID,
@@ -62,16 +70,17 @@ class ServiceManagementRestProxyTestBase extends RestProxyTestBase
         );
         $serviceManagementWrapper = ServiceManagementService::create($config);
         
-        $this->config = $config;
-        $this->wrapper = $serviceManagementWrapper;
+        parent::__construct($config, $serviceManagementWrapper);
         
         $this->createdStorageAccounts = array();
         $this->createdAffinityGroups = array();
+        $this->storageCount = count($this->wrapper->listStorageAccounts()->getStorageAccounts());
+        $this->affinityGroupCount = count($this->wrapper->listAffinityGroups()->getAffinityGroups());
     }
 
     public function createAffinityGroup($name)
     {
-        $location = 'West US';
+        $location = Locations::WEST_US;
         $label = base64_encode($name);
         
         $this->wrapper->createAffinityGroup($name, $label, $location);

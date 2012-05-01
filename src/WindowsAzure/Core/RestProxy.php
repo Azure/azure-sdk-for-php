@@ -65,7 +65,7 @@ class RestProxy
      *
      * @param IHttpClient $channel        The HTTP client used to send HTTP requests.
      * @param ISerializer $dataSerializer The data serializer.
-     * @param string      $url            The url.
+     * @param string      $url            The URL of the Azure REST service.
      */
     public function __construct($channel, $dataSerializer, $url)
     {

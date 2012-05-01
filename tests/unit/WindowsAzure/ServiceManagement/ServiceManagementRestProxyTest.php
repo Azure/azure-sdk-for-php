@@ -115,7 +115,7 @@ class ServiceManagementRestProxyTest extends ServiceManagementRestProxyTestBase
         // Setup
         $name  = 'createaffinitygroup';
         $label = base64_encode($name);
-        $location = 'West US';
+        $location = Locations::WEST_US;
         
         // Test
         $this->wrapper->createAffinityGroup($name, $label, $location);
@@ -135,7 +135,7 @@ class ServiceManagementRestProxyTest extends ServiceManagementRestProxyTestBase
         // Setup
         $name = 'deleteaffinitygroup';
         $label = base64_encode($name);
-        $location = 'West US';
+        $location = Locations::WEST_US;
         $this->wrapper->createAffinityGroup($name, $label, $location);
         
         // Test
@@ -158,7 +158,7 @@ class ServiceManagementRestProxyTest extends ServiceManagementRestProxyTestBase
         
         // Assert
         $affinityGroups = $result->getAffinityGroups();
-        $this->assertCount(0, $affinityGroups);
+        $this->assertCount(0 + $this->affinityGroupCount, $affinityGroups);
     }
     
     /**
@@ -178,7 +178,7 @@ class ServiceManagementRestProxyTest extends ServiceManagementRestProxyTestBase
         
         // Assert
         $affinityGroups = $result->getAffinityGroups();
-        $this->assertCount(1, $affinityGroups);
+        $this->assertCount(1 + $this->affinityGroupCount, $affinityGroups);
     }
     
     /**
@@ -200,7 +200,7 @@ class ServiceManagementRestProxyTest extends ServiceManagementRestProxyTestBase
         
         // Assert
         $affinityGroups = $result->getAffinityGroups();
-        $this->assertCount(2, $affinityGroups);
+        $this->assertCount(2 + $this->affinityGroupCount, $affinityGroups);
     }
     
     /**
@@ -213,7 +213,7 @@ class ServiceManagementRestProxyTest extends ServiceManagementRestProxyTestBase
         // Setup
         $name  = 'updateaffinitygroup';
         $label = base64_encode($name);
-        $location = 'West US';
+        $location = Locations::WEST_US;
         $expectedLabel = base64_encode('newlabel');
         $this->createAffinityGroup($name, $label, $location);
         
@@ -304,7 +304,7 @@ class ServiceManagementRestProxyTest extends ServiceManagementRestProxyTestBase
         $result = $this->wrapper->listStorageAccounts();
         
         // Assert
-        $this->assertCount($expected, $result->getStorageAccounts());
+        $this->assertCount($expected + $this->storageCount, $result->getStorageAccounts());
     }
     
     /**
