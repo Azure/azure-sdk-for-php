@@ -97,7 +97,6 @@ class Resources
     const X_MS_SOURCE_IF_MATCH               = 'x-ms-source-if-match';
     const X_MS_SOURCE_IF_NONE_MATCH          = 'x-ms-source-if-none-match';
     const X_MS_SOURCE_LEASE_ID               = 'x-ms-source-lease-id';
-    const X_MS_REQUEST_ID                    = 'x-ms-request-id';
     const X_MS_CONTINUATION_NEXTTABLENAME    = 'x-ms-continuation-nexttablename';
     const X_MS_CONTINUATION_NEXTPARTITIONKEY = 'x-ms-continuation-nextpartitionkey';
     const X_MS_CONTINUATION_NEXTROWKEY       = 'x-ms-continuation-nextrowkey';

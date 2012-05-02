@@ -298,7 +298,7 @@ class TableRestProxy extends ServiceRestProxy implements ITable
         $context->setPath($path);
         $context->setQueryParameters($queryParams);
         $context->addStatusCode($statusCode);
-        $context->setUri($this->getUrl());
+        $context->setUri($this->getUri());
         $context->setBody('');
         
         return $context;
@@ -362,7 +362,7 @@ class TableRestProxy extends ServiceRestProxy implements ITable
         $context->setPath($path);
         $context->setQueryParameters($queryParams);
         $context->addStatusCode($statusCode);
-        $context->setUri($this->getUrl());
+        $context->setUri($this->getUri());
         
         return $context;
     }
@@ -412,7 +412,7 @@ class TableRestProxy extends ServiceRestProxy implements ITable
         $context->setPath($path);
         $context->setQueryParameters($queryParams);
         $context->addStatusCode($statusCode);
-        $context->setUri($this->getUrl());
+        $context->setUri($this->getUri());
         
         return $context;
     }
