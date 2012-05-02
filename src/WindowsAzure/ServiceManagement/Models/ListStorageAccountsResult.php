@@ -23,9 +23,11 @@
  */
  
 namespace WindowsAzure\ServiceManagement\Models;
+use WindowsAzure\Utilities;
+use WindowsAzure\Resources;
 
 /**
- * The location class.
+ * The result of calling listStorageAccounts API.
  *
  * @category  Microsoft
  * @package   WindowsAzure\ServiceManagement\Models
@@ -35,60 +37,64 @@ namespace WindowsAzure\ServiceManagement\Models;
  * @version   Release: @package_version@
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
-class Location
+class ListStorageAccountsResult
 {
     /**
-     * @var string
+     * @var array
      */
-    private $_name;
+    private $_storageAccounts;
     
     /**
-     * @var string
-     */
-    private $_displayName;
-    
-    /**
-     * Gets the name.
+     * Creates new ListStorageAccountsResult from parsed response body.
      * 
-     * @return string
+     * @param array $parsed The parsed response body.
+     * 
+     * @return ListStorageAccountsResult
      */
-    public function getName()
+    public static function create($parsed)
     {
-        return $this->_name;
+        $result = new ListStorageAccountsResult();
+        
+        $result->_storageAccounts = array();
+        $entries                  = Utilities::tryGetArray(
+            Resources::XTAG_STORAGE_SERVICE,
+            $parsed
+        );
+        
+        foreach ($entries as $value) {
+            $properties = new ServiceProperties();
+            $properties->setServiceName(
+                Utilities::tryGetValue($value, Resources::XTAG_SERVICE_NAME)
+            );
+            $properties->setUrl(
+                Utilities::tryGetValue($value, Resources::XTAG_URL)
+            );
+            $result->_storageAccounts[] = $properties;
+        }
+        
+        return $result;
     }
     
     /**
-     * Sets the name.
+     * Gets storage accounts.
      * 
-     * @param string $name The name.
+     * @return array
+     */
+    public function getStorageAccounts()
+    {
+        return $this->_storageAccounts;
+    }
+    
+    /**
+     * Sets storage accounts.
+     * 
+     * @param array $storageAccounts The storage accounts.
      * 
      * @return none
      */
-    public function setName($name)
+    public function setStorageAccounts($storageAccounts)
     {
-        $this->_name = $name;
-    }
-    
-    /**
-     * Gets the displayName.
-     * 
-     * @return string
-     */
-    public function getDisplayName()
-    {
-        return $this->_displayName;
-    }
-    
-    /**
-     * Sets the displayName.
-     * 
-     * @param string $displayName The displayName.
-     * 
-     * @return none
-     */
-    public function setDisplayName($displayName)
-    {
-        $this->_displayName = $displayName;
+        $this->_storageAccounts = $storageAccounts;
     }
 }
 

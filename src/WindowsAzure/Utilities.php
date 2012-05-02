@@ -64,8 +64,8 @@ class Utilities
      * 
      * Returns empty array object if the value is NULL.
      * 
-     * @param string $key The index name.
-     * @param type   $array The array object.
+     * @param string $key   The index name.
+     * @param array  $array The array object.
      * 
      * @static
      * 
@@ -420,6 +420,27 @@ class Utilities
     public static function stringToStream($string)
     {
         return fopen('data://text/plain,' . $string, 'r');
+    }
+    
+    /**
+     * Sorts an array based on given keys order.
+     * 
+     * @param array $array The array to sort.
+     * @param array $order The keys order array.
+     * 
+     * @return array
+     */
+    public function orderArray($array, $order)
+    {
+        $ordered = array();
+        
+        foreach ($order as $key) {
+            if (array_key_exists($key, $array)) {
+                $ordered[$key] = $array[$key];
+            }
+        }
+        
+        return $ordered;
     }
 }
 

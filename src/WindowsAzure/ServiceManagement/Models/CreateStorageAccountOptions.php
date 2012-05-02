@@ -23,9 +23,10 @@
  */
  
 namespace WindowsAzure\ServiceManagement\Models;
+use WindowsAzure\Validate;
 
 /**
- * The location class.
+ * Optional parameters for createStorageAccount API.
  *
  * @category  Microsoft
  * @package   WindowsAzure\ServiceManagement\Models
@@ -35,60 +36,95 @@ namespace WindowsAzure\ServiceManagement\Models;
  * @version   Release: @package_version@
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
-class Location
+class CreateStorageAccountOptions
 {
     /**
      * @var string
      */
-    private $_name;
+    private $_location;
     
     /**
      * @var string
      */
-    private $_displayName;
+    private $_affinityGroup;
     
     /**
-     * Gets the name.
+     * @var string
+     */
+    private $_description;
+    
+    /**
+     * Gets the location.
      * 
      * @return string
      */
-    public function getName()
+    public function getLocation()
     {
-        return $this->_name;
+        return $this->_location;
     }
     
     /**
-     * Sets the name.
+     * Sets the location.
      * 
-     * @param string $name The name.
+     * @param string $location The location.
      * 
      * @return none
      */
-    public function setName($name)
+    public function setLocation($location)
     {
-        $this->_name = $name;
+        Validate::isString($location, 'location');
+        Validate::notNullOrEmpty($location, 'location');
+        
+        $this->_location = $location;
     }
     
     /**
-     * Gets the displayName.
+     * Gets the affinityGroup.
      * 
      * @return string
      */
-    public function getDisplayName()
+    public function getAffinityGroup()
     {
-        return $this->_displayName;
+        return $this->_affinityGroup;
     }
     
     /**
-     * Sets the displayName.
+     * Sets the affinityGroup.
      * 
-     * @param string $displayName The displayName.
+     * @param string $affinityGroup The affinityGroup.
      * 
      * @return none
      */
-    public function setDisplayName($displayName)
+    public function setAffinityGroup($affinityGroup)
     {
-        $this->_displayName = $displayName;
+        Validate::isString($affinityGroup, 'affinityGroup');
+        Validate::notNullOrEmpty($affinityGroup, 'affinityGroup');
+        
+        $this->_affinityGroup = $affinityGroup;
+    }
+    
+    /**
+     * Gets the description.
+     * 
+     * @return string
+     */
+    public function getDescription()
+    {
+        return $this->_description;
+    }
+    
+    /**
+     * Sets the description.
+     * 
+     * @param string $description The description.
+     * 
+     * @return none
+     */
+    public function setDescription($description)
+    {
+        Validate::isString($description, 'description');
+        
+        $this->_description = $description;
     }
 }
 

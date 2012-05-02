@@ -27,7 +27,7 @@ use WindowsAzure\Resources;
 use WindowsAzure\Utilities;
 
 /**
- * The affinity group class.
+ * The storage service class.
  *
  * @category  Microsoft
  * @package   WindowsAzure\ServiceManagement\Models
@@ -37,17 +37,27 @@ use WindowsAzure\Utilities;
  * @version   Release: @package_version@
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
-class AffinityGroup extends Service
+class StorageService extends Service
 {
     /**
-     * Constructs new affinity group object.
+     * @var string
+     */
+    private $_affinityGroup;
+    
+    /**
+     * Constructs new storage service object.
      * 
-     * @param array $raw The array representation for affinity group.
+     * @param array $raw The array representation for storage service.
      */
     public function __construct($raw = null)
     {
         parent::__construct($raw);
-        $this->setName(Utilities::tryGetValue($raw, Resources::XTAG_NAME));
+        $this->setAffinityGroup(
+            Utilities::tryGetValue($raw, Resources::XTAG_AFFINITY_GROUP)
+        );
+        $this->setName(
+            Utilities::tryGetValue($raw, Resources::XTAG_SERVICE_NAME)
+        );
     }
     
     /**
@@ -60,15 +70,45 @@ class AffinityGroup extends Service
         $arr   = parent::toArray();
         $order = array(
             Resources::XTAG_NAMESPACE,
-            Resources::XTAG_NAME,
-            Resources::XTAG_LABEL,
+            Resources::XTAG_SERVICE_NAME,
             Resources::XTAG_DESCRIPTION,
+            Resources::XTAG_LABEL,
+            Resources::XTAG_AFFINITY_GROUP,
             Resources::XTAG_LOCATION
         );
-        Utilities::addIfNotEmpty(Resources::XTAG_NAME, $this->getName(), $arr);
+        Utilities::addIfNotEmpty(
+            Resources::XTAG_SERVICE_NAME, $this->getName(),
+            $arr
+        );
+        Utilities::addIfNotEmpty(
+            Resources::XTAG_AFFINITY_GROUP, $this->_affinityGroup,
+            $arr
+        );
         $ordered = Utilities::orderArray($arr, $order);
         
         return $ordered;
+    }
+    
+    /**
+     * Gets the affinityGroup name.
+     * 
+     * @return string 
+     */
+    public function getAffinityGroup()
+    {
+        return $this->_affinityGroup;
+    }
+    
+    /**
+     * Sets the affinityGroup name.
+     * 
+     * @param string $affinityGroup The affinityGroup name.
+     * 
+     * @return none
+     */
+    public function setAffinityGroup($affinityGroup)
+    {
+        $this->_affinityGroup = $affinityGroup;
     }
 }
 

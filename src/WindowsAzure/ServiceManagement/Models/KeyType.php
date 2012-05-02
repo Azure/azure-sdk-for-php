@@ -25,7 +25,7 @@
 namespace WindowsAzure\ServiceManagement\Models;
 
 /**
- * The location class.
+ * The storage account key type.
  *
  * @category  Microsoft
  * @package   WindowsAzure\ServiceManagement\Models
@@ -35,61 +35,10 @@ namespace WindowsAzure\ServiceManagement\Models;
  * @version   Release: @package_version@
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
-class Location
+class KeyType
 {
-    /**
-     * @var string
-     */
-    private $_name;
-    
-    /**
-     * @var string
-     */
-    private $_displayName;
-    
-    /**
-     * Gets the name.
-     * 
-     * @return string
-     */
-    public function getName()
-    {
-        return $this->_name;
-    }
-    
-    /**
-     * Sets the name.
-     * 
-     * @param string $name The name.
-     * 
-     * @return none
-     */
-    public function setName($name)
-    {
-        $this->_name = $name;
-    }
-    
-    /**
-     * Gets the displayName.
-     * 
-     * @return string
-     */
-    public function getDisplayName()
-    {
-        return $this->_displayName;
-    }
-    
-    /**
-     * Sets the displayName.
-     * 
-     * @param string $displayName The displayName.
-     * 
-     * @return none
-     */
-    public function setDisplayName($displayName)
-    {
-        $this->_displayName = $displayName;
-    }
+    const PRIMARY_KEY   = 'Primary';
+    const SECONDARY_KEY = 'Secondary';
 }
 
 ?>

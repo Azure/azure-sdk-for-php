@@ -23,9 +23,11 @@
  */
  
 namespace WindowsAzure\ServiceManagement\Models;
+use WindowsAzure\Resources;
+use WindowsAzure\Utilities;
 
 /**
- * The location class.
+ * The result of an asynchronous operation.
  *
  * @category  Microsoft
  * @package   WindowsAzure\ServiceManagement\Models
@@ -35,60 +37,51 @@ namespace WindowsAzure\ServiceManagement\Models;
  * @version   Release: @package_version@
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
-class Location
+class AsynchronousOperationResult
 {
     /**
      * @var string
      */
-    private $_name;
+    private $_requestId;
     
     /**
-     * @var string
+     * Creates new AsynchronousOperationResult from response HTTP headers.
+     * 
+     * @param array $headers The HTTP response headers array.
+     * 
+     * @return AsynchronousOperationResult 
      */
-    private $_displayName;
+    public function create($headers)
+    {
+        $result             = new AsynchronousOperationResult();
+        $result->_requestId = Utilities::tryGetValue(
+            $headers,
+            Resources::X_MS_REQUEST_ID
+        );
+        
+        return $result;
+    }
     
     /**
-     * Gets the name.
+     * Gets the requestId.
      * 
      * @return string
      */
-    public function getName()
+    public function getrequestId()
     {
-        return $this->_name;
+        return $this->_requestId;
     }
     
     /**
-     * Sets the name.
+     * Sets the requestId.
      * 
-     * @param string $name The name.
+     * @param string $requestId The request Id of the asynchronous operation.
      * 
      * @return none
      */
-    public function setName($name)
+    public function setrequestId($requestId)
     {
-        $this->_name = $name;
-    }
-    
-    /**
-     * Gets the displayName.
-     * 
-     * @return string
-     */
-    public function getDisplayName()
-    {
-        return $this->_displayName;
-    }
-    
-    /**
-     * Sets the displayName.
-     * 
-     * @param string $displayName The displayName.
-     * 
-     * @return none
-     */
-    public function setDisplayName($displayName)
-    {
-        $this->_displayName = $displayName;
+        $this->_requestId = $requestId;
     }
 }
 

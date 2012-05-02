@@ -56,14 +56,13 @@ class ListAffinityGroupsResult
         $result = new ListAffinityGroupsResult();
         
         $result->_affinityGroups = array();
-        $entries                 = array();
-        
-        if (!empty($parsed)) {
-            $entries = Utilities::getArray($parsed[Resources::XTAG_AFFINITY_GROUP]);
-        }
+        $entries                 = Utilities::tryGetArray(
+            Resources::XTAG_AFFINITY_GROUP,
+            $parsed
+        );
         
         foreach ($entries as $value) {
-            $result->_affinityGroups[] = AffinityGroup::create($value);
+            $result->_affinityGroups[] = new AffinityGroup($value);
         }
         
         return $result;

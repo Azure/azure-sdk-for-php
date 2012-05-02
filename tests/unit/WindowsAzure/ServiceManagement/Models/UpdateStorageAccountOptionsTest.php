@@ -23,12 +23,10 @@
  */
 
 namespace Tests\Unit\WindowsAzure\ServiceManagement\Models;
-use WindowsAzure\ServiceManagement\Models\AffinityGroup;
-use WindowsAzure\Core\Serialization\XmlSerializer;
-use WindowsAzure\Resources;
+use WindowsAzure\ServiceManagement\Models\UpdateStorageAccountOptions;
 
 /**
- * Unit tests for class AffinityGroup
+ * Unit tests for class UpdateStorageAccountOptions
  *
  * @category  Microsoft
  * @package   Tests\Unit\WindowsAzure\ServiceManagement\Models
@@ -38,38 +36,40 @@ use WindowsAzure\Resources;
  * @version   Release: @package_version@
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
-class AffinityGroupTest extends \PHPUnit_Framework_TestCase
+class UpdateStorageAccountOptionsTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @covers WindowsAzure\ServiceManagement\Models\AffinityGroup::toArray
-     * @covers WindowsAzure\ServiceManagement\Models\AffinityGroup::__construct
+     * @covers WindowsAzure\ServiceManagement\Models\UpdateStorageAccountOptions::setDescription
+     * @covers WindowsAzure\ServiceManagement\Models\UpdateStorageAccountOptions::getDescription
      */
-    public function testSerialize()
+    public function testSetDescription()
     {
         // Setup
-        $serializer = new XmlSerializer();
-        $expected = '<?xml version="1.0" encoding="UTF-8"?>' . "\n";
-        $expected .= '<CreateService xmlns="http://schemas.microsoft.com/windowsazure">' . "\n";
-        $expected .= ' <Name>Name</Name>' . "\n";
-        $expected .= ' <Label>Label</Label>' . "\n";
-        $expected .= ' <Description>Description</Description>' . "\n";
-        $expected .= ' <Location>Location</Location>' . "\n";
-        $expected .= '</CreateService>' . "\n";
-        $affinitygroup = new AffinityGroup();
-        $affinitygroup->setName('Name');
-        $affinitygroup->setLabel('Label');
-        $affinitygroup->setLocation('Location');
-        $affinitygroup->setDescription('Description');
-        $affinitygroup->addSerializationProperty(
-            XmlSerializer::ROOT_NAME,
-            'CreateService'
-        );
+        $options = new UpdateStorageAccountOptions();
+        $expected = 'Description';
         
         // Test
-        $actual = $affinitygroup->serialize($serializer);
+        $options->setDescription($expected);
         
         // Assert
-        $this->assertEquals($expected, $actual);
+        $this->assertEquals($expected, $options->getDescription());
+    }
+    
+    /**
+     * @covers WindowsAzure\ServiceManagement\Models\UpdateStorageAccountOptions::setLabel
+     * @covers WindowsAzure\ServiceManagement\Models\UpdateStorageAccountOptions::getLabel
+     */
+    public function testSetLabel()
+    {
+        // Setup
+        $options = new UpdateStorageAccountOptions();
+        $expected = 'Label';
+        
+        // Test
+        $options->setLabel($expected);
+        
+        // Assert
+        $this->assertEquals($expected, $options->getLabel());
     }
 }
 

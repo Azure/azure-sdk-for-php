@@ -23,6 +23,7 @@
  */
  
 namespace WindowsAzure\ServiceManagement\Models;
+use WindowsAzure\Validate;
 
 /**
  * The optional parameters for createAffinityGroup API.
@@ -61,6 +62,8 @@ class CreateAffinityGroupOptions
      */
     public function setDescription($description)
     {
+        Validate::isString($description, 'description');
+        
         $this->_description = $description;
     }
 }
