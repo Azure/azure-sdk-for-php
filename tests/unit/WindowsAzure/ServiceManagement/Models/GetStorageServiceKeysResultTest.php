@@ -23,10 +23,10 @@
  */
 
 namespace Tests\Unit\WindowsAzure\ServiceManagement\Models;
-use WindowsAzure\ServiceManagement\Models\GetStorageAccountKeysResult;
+use WindowsAzure\ServiceManagement\Models\GetStorageServiceKeysResult;
 
 /**
- * Unit tests for class GetStorageAccountKeysResult
+ * Unit tests for class GetStorageServiceKeysResult
  *
  * @category  Microsoft
  * @package   Tests\Unit\WindowsAzure\ServiceManagement\Models
@@ -36,17 +36,17 @@ use WindowsAzure\ServiceManagement\Models\GetStorageAccountKeysResult;
  * @version   Release: @package_version@
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
-class GetStorageAccountKeysResultTest extends \PHPUnit_Framework_TestCase
+class GetStorageServiceKeysResultTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @covers WindowsAzure\ServiceManagement\Models\GetStorageAccountKeysResult::setUrl
-     * @covers WindowsAzure\ServiceManagement\Models\GetStorageAccountKeysResult::getUrl
+     * @covers WindowsAzure\ServiceManagement\Models\GetStorageServiceKeysResult::setUrl
+     * @covers WindowsAzure\ServiceManagement\Models\GetStorageServiceKeysResult::getUrl
      */
     public function testSetUrl()
     {
         // Setup
         $expected = 'Url';
-        $result = new GetStorageAccountKeysResult();
+        $result = new GetStorageServiceKeysResult();
         
         // Test
         $result->setUrl($expected);
@@ -56,14 +56,14 @@ class GetStorageAccountKeysResultTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers WindowsAzure\ServiceManagement\Models\GetStorageAccountKeysResult::setPrimary
-     * @covers WindowsAzure\ServiceManagement\Models\GetStorageAccountKeysResult::getPrimary
+     * @covers WindowsAzure\ServiceManagement\Models\GetStorageServiceKeysResult::setPrimary
+     * @covers WindowsAzure\ServiceManagement\Models\GetStorageServiceKeysResult::getPrimary
      */
     public function testSetPrimary()
     {
         // Setup
         $expected = 'Primary';
-        $result = new GetStorageAccountKeysResult();
+        $result = new GetStorageServiceKeysResult();
         
         // Test
         $result->setPrimary($expected);
@@ -73,14 +73,14 @@ class GetStorageAccountKeysResultTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers WindowsAzure\ServiceManagement\Models\GetStorageAccountKeysResult::setSecondary
-     * @covers WindowsAzure\ServiceManagement\Models\GetStorageAccountKeysResult::getSecondary
+     * @covers WindowsAzure\ServiceManagement\Models\GetStorageServiceKeysResult::setSecondary
+     * @covers WindowsAzure\ServiceManagement\Models\GetStorageServiceKeysResult::getSecondary
      */
     public function testSetSecondary()
     {
         // Setup
         $expected = 'Secondary';
-        $result = new GetStorageAccountKeysResult();
+        $result = new GetStorageServiceKeysResult();
         
         // Test
         $result->setSecondary($expected);

@@ -68,7 +68,7 @@ class GetAffinityGroupPropertiesResult
             Resources::XTAG_HOSTED_SERVICES,
             $parsed
         );
-        $storageAccounts = Utilities::tryGetArray(
+        $storageServices = Utilities::tryGetArray(
             Resources::XTAG_STORAGE_SERVICES,
             $parsed
         );
@@ -86,7 +86,7 @@ class GetAffinityGroupPropertiesResult
             $result->_hostedServices[] = $service;
         }
         
-        foreach ($storageAccounts as $value) {
+        foreach ($storageServices as $value) {
             $service = new ServiceProperties();
             $service->setServiceName(
                 Utilities::tryGetValue($value, Resources::XTAG_SERVICE_NAME)

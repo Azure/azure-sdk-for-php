@@ -26,7 +26,7 @@ namespace WindowsAzure\ServiceManagement\Models;
 use WindowsAzure\Validate;
 
 /**
- * The optional parameters for updateStorageAccount API.
+ * Optional parameters for createStorageService API.
  *
  * @category  Microsoft
  * @package   WindowsAzure\ServiceManagement\Models
@@ -36,12 +36,17 @@ use WindowsAzure\Validate;
  * @version   Release: @package_version@
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
-class UpdateStorageAccountOptions
+class CreateStorageServiceOptions
 {
     /**
      * @var string
      */
-    private $_label;
+    private $_location;
+    
+    /**
+     * @var string
+     */
+    private $_affinityGroup;
     
     /**
      * @var string
@@ -49,27 +54,53 @@ class UpdateStorageAccountOptions
     private $_description;
     
     /**
-     * Gets the label.
+     * Gets the location.
      * 
      * @return string
      */
-    public function getLabel()
+    public function getLocation()
     {
-        return $this->_label;
+        return $this->_location;
     }
     
     /**
-     * Sets the label.
+     * Sets the location.
      * 
-     * @param string $label The label.
+     * @param string $location The location.
      * 
      * @return none
      */
-    public function setLabel($label)
+    public function setLocation($location)
     {
-        Validate::isString($label, 'label');
+        Validate::isString($location, 'location');
+        Validate::notNullOrEmpty($location, 'location');
         
-        $this->_label = $label;
+        $this->_location = $location;
+    }
+    
+    /**
+     * Gets the affinityGroup.
+     * 
+     * @return string
+     */
+    public function getAffinityGroup()
+    {
+        return $this->_affinityGroup;
+    }
+    
+    /**
+     * Sets the affinityGroup.
+     * 
+     * @param string $affinityGroup The affinityGroup.
+     * 
+     * @return none
+     */
+    public function setAffinityGroup($affinityGroup)
+    {
+        Validate::isString($affinityGroup, 'affinityGroup');
+        Validate::notNullOrEmpty($affinityGroup, 'affinityGroup');
+        
+        $this->_affinityGroup = $affinityGroup;
     }
     
     /**
