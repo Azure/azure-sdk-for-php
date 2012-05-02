@@ -822,7 +822,7 @@ class TableServiceIntegrationTest extends IntegrationTestBase {
         {
             // Act
             $q = new Query();
-            $q->setFilter(Filter::applyLiteral('test', EdmType::BOOLEAN));
+            $q->setFilter(Filter::applyPropertyName('test', EdmType::BOOLEAN));
             $qeo = new QueryEntitiesOptions();
             $qeo->setQuery($q);
             $result = $this->wrapper->queryEntities($table, $qeo);

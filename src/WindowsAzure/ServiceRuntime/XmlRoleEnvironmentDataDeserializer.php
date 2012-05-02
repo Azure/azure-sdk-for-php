@@ -130,10 +130,14 @@ class XmlRoleEnvironmentDataDeserializer
                 $localResourcesInfo = array(0 => $localResourcesInfo);
             }
 
-            foreach ($localResourcesInfo as $localResource) {
-                $localResourcesMap
-                    [$localResource['@attributes']['name']] = $localResource
-                        ['@attributes'];
+            foreach ($localResourcesInfo as $localResourceInfo) {
+                $localResource = new LocalResource(
+                    $localResourceInfo['@attributes']['sizeInMB'],
+                    $localResourceInfo['@attributes']['name'],
+                    $localResourceInfo['@attributes']['path']
+                );
+                
+                $localResourcesMap[$localResource->getName()] = $localResource;
             }
         }
 

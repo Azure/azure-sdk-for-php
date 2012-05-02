@@ -26,6 +26,7 @@ use Tests\Framework\TestResources;
 use WindowsAzure\ServiceRuntime\ChannelNotAvailableException;
 use WindowsAzure\ServiceRuntime\FileInputChannel;
 use WindowsAzure\ServiceRuntime\RoleEnvironment;
+use WindowsAzure\ServiceRuntime\RoleEnvironmentNotAvailableException;
 use WindowsAzure\ServiceRuntime\RoleInstanceStatus;
 use WindowsAzure\ServiceRuntime\RuntimeKernel;
 
@@ -44,6 +45,19 @@ require_once 'vfsStream/vfsStream.php';
  */
 class RoleEnvironmentTest extends \PHPUnit_Framework_TestCase
 {
+    public function testRoleNotAvailable()
+    {
+        // Setup
+        putenv('WaRuntimeEndpoint=');
+        
+        // Test
+        $this->setExpectedException(get_class(
+            new RoleEnvironmentNotAvailableException()
+        ));
+
+        RoleEnvironment::getCurrentRoleInstance();
+    }
+    
     /**
      * @covers WindowsAzure\ServiceRuntime\RoleEnvironment::_initialize
      * @covers WindowsAzure\ServiceRuntime\RoleEnvironment::init
@@ -55,18 +69,18 @@ class RoleEnvironmentTest extends \PHPUnit_Framework_TestCase
         
         try {
             RoleEnvironment::getDeploymentId();
-        } catch (ChannelNotAvailableException $exception) { }
+        } catch (RoleEnvironmentNotAvailableException $exception) { }
         
         $endpoint = self::getStaticPropertyValue('_versionEndpoint');
         
-        $this->assertEquals('\\.\pipe\WindowsAzureRuntime', $endpoint);
+        $this->assertEquals('\\\\.\\pipe\\WindowsAzureRuntime', $endpoint);
         
         // Test 2 - Environment variable
         putenv('WaRuntimeEndpoint=endpoint1');
 
         try {
             RoleEnvironment::getDeploymentId();
-        } catch (ChannelNotAvailableException $exception) { }
+        } catch (RoleEnvironmentNotAvailableException $exception) { }
         
         $endpoint = self::getStaticPropertyValue('_versionEndpoint');
         
@@ -698,8 +712,8 @@ class RoleEnvironmentTest extends \PHPUnit_Framework_TestCase
         // Test
         $localResources = RoleEnvironment::getLocalResources();
         $this->assertTrue(array_key_exists('DiagnosticStore', $localResources));
-        $this->assertEquals('somepath.DiagnosticStore', $localResources['DiagnosticStore']['path']);
-        $this->assertEquals('4096', $localResources['DiagnosticStore']['sizeInMB']);
+        $this->assertEquals('somepath.DiagnosticStore', $localResources['DiagnosticStore']->getRootPath());
+        $this->assertEquals('4096', $localResources['DiagnosticStore']->getMaximumSizeInMegabytes());
     }
     
     /**

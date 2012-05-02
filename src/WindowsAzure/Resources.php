@@ -83,6 +83,7 @@ class Resources
     const X_MS_BLOB_CONTENT_MD5              = 'x-ms-blob-content-md5';
     const X_MS_BLOB_CACHE_CONTROL            = 'x-ms-blob-cache-control';
     const X_MS_BLOB_CONTENT_LENGTH           = 'x-ms-blob-content-length';
+    const X_MS_COPY_SOURCE                   = 'x-ms-copy-source';
     const X_MS_RANGE                         = 'x-ms-range';
     const X_MS_RANGE_GET_CONTENT_MD5         = 'x-ms-range-get-content-md5';
     const X_MS_LEASE_ID                      = 'x-ms-lease-id';
@@ -90,6 +91,12 @@ class Resources
     const X_MS_LEASE_ACTION                  = 'x-ms-lease-action';
     const X_MS_DELETE_SNAPSHOTS              = 'x-ms-delete-snapshots';
     const X_MS_PAGE_WRITE                    = 'x-ms-page-write';
+    const X_MS_SNAPSHOT                      = 'x-ms-snapshot';
+    const X_MS_SOURCE_IF_MODIFIED_SINCE      = 'x-ms-source-if-modified-since';
+    const X_MS_SOURCE_IF_UNMODIFIED_SINCE    = 'x-ms-source-if-unmodified-since';
+    const X_MS_SOURCE_IF_MATCH               = 'x-ms-source-if-match';
+    const X_MS_SOURCE_IF_NONE_MATCH          = 'x-ms-source-if-none-match';
+    const X_MS_SOURCE_LEASE_ID               = 'x-ms-source-lease-id';
     const X_MS_CONTINUATION_NEXTTABLENAME    = 'x-ms-continuation-nexttablename';
     const X_MS_CONTINUATION_NEXTPARTITIONKEY = 'x-ms-continuation-nextpartitionkey';
     const X_MS_CONTINUATION_NEXTROWKEY       = 'x-ms-continuation-nextrowkey';
@@ -115,7 +122,7 @@ class Resources
     const MAX_DATA_SERVICE_VERSION           = 'maxdataserviceversion';
     const ACCEPT_HEADER                      = 'accept';
     const ACCEPT_CHARSET                     = 'accept-charset';
-
+    
     // Type
     const QUEUE_TYPE_NAME              = 'IQueue';
     const BLOB_TYPE_NAME               = 'IBlob';
