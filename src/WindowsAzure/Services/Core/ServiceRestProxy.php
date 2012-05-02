@@ -43,10 +43,8 @@ use WindowsAzure\Core\Http\HttpCallContext;
  */
 class ServiceRestProxy extends RestProxy
 {
-
-    private $_url;
     private $_accountName;
-    
+
     /**
      * Initializes new ServiceRestProxy object.
      *
@@ -57,9 +55,8 @@ class ServiceRestProxy extends RestProxy
      */
     public function __construct($channel, $uri, $accountName, $dataSerializer)
     {
-        parent::__construct($channel, $dataSerializer);
-        $this->_url   = $uri;
         $this->_accountName = $accountName;
+        parent::__construct($channel, $dataSerializer, $uri);
     }
     
     /**
@@ -71,17 +68,7 @@ class ServiceRestProxy extends RestProxy
     {
         return $this->_accountName;
     }
-    
-    /**
-     * Gets the URL.
-     *
-     * @return type 
-     *
-     */
-    public function getUrl()
-    {
-        return $this->_url;
-    }
+     
     /**
      * Sends HTTP request with the specified HTTP call context.
      * 
@@ -91,7 +78,7 @@ class ServiceRestProxy extends RestProxy
      */
     protected function sendContext($context)
     {
-        $context->setUri($this->_url);
+        $context->setUri($this->getUri());
         return parent::sendContext($context);
     }
     
