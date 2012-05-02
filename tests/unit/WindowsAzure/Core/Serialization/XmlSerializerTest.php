@@ -106,7 +106,7 @@ class XmlSerializerTest extends \PHPUnit_Framework_TestCase
         // Setup
         $xmlSerializer = new XmlSerializer();
         $expected = '<?xml version="1.0" encoding="UTF-8"?>' . "\n" .
-            '<Object field1="value1" field2="value2"/>';
+            '<Object field1="value1" field2="value2"/>' . "\n";
         
         $object = array(
             '@attributes' => array(

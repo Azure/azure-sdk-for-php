@@ -43,22 +43,20 @@ use WindowsAzure\Core\Http\HttpCallContext;
  */
 class ServiceRestProxy extends RestProxy
 {
-    /**
-     * @var string
-     */
-    protected $url;
-    
+    private $_accountName;
+
     /**
      * Initializes new ServiceRestProxy object.
      *
      * @param IHttpClient $channel        The HTTP client used to send HTTP requests.
      * @param string      $uri            The storage account uri.
+     * @param string      $accountName    The name of the account.
      * @param ISerializer $dataSerializer The data serializer.
      */
-    public function __construct($channel, $uri, $dataSerializer)
+    public function __construct($channel, $uri, $accountName, $dataSerializer)
     {
-        parent::__construct($channel, $dataSerializer);
-        $this->url = $uri;
+        $this->_accountName = $accountName;
+        parent::__construct($channel, $dataSerializer, $uri);
     }
     
     /**
@@ -70,7 +68,7 @@ class ServiceRestProxy extends RestProxy
      */
     protected function sendContext($context)
     {
-        $context->setUri($this->url);
+        $context->setUri($this->getUri());
         return parent::sendContext($context);
     }
     
@@ -86,7 +84,12 @@ class ServiceRestProxy extends RestProxy
      * 
      * @return \HTTP_Request2_Response
      */
-    protected function send($method, $headers, $queryParams, $path, $statusCode,
+    protected function send(
+        $method, 
+        $headers, 
+        $queryParams, 
+        $path, 
+        $statusCode,
         $body = Resources::EMPTY_STRING
     ) {
         $context = new HttpCallContext();
@@ -104,6 +107,7 @@ class ServiceRestProxy extends RestProxy
         
         return $this->sendContext($context);
     }
+
     
     /**
      * Adds optional header to headers if set
@@ -120,6 +124,31 @@ class ServiceRestProxy extends RestProxy
             
             if ($header != Resources::EMPTY_STRING) {
                 $headers[$header] = $accessCondition->getValue();
+            }
+        }
+        
+        return $headers;
+    }
+    
+    /**
+     * Adds optional header to headers if set
+     * 
+     * @param array                 $headers               array of request headers
+     * @param SourceAccessCondition $sourceAccessCondition the access condition 
+     * object
+     * 
+     * @return array
+     */
+    public function addOptionalSourceAccessConditionHeader(
+        $headers, 
+        $sourceAccessCondition
+    ) {
+
+        if (!is_null($sourceAccessCondition)) {
+            $header = $sourceAccessCondition->getHeader();
+            
+            if ($header != Resources::EMPTY_STRING) {
+                $headers[$header] = $sourceAccessCondition->getValue();
             }
         }
         

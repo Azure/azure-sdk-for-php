@@ -78,7 +78,7 @@ class XmlSerializer implements ISerializer
     private function _arr2xml(\XMLWriter $xmlw, $data, $defaultTag = null)
     {
         foreach ($data as $key => $value) {
-            if (strcmp($key, '@attributes') == 0) {
+            if ($key === Resources::XTAG_ATTRIBUTES) {
                 foreach ($value as $attributeName => $attributeValue) {
                     $xmlw->writeAttribute($attributeName, $attributeValue);
                 }
@@ -113,11 +113,16 @@ class XmlSerializer implements ISerializer
      */
     public function serialize($array, $properties = null)
     {
-        $xmlVersion  = '1.0';
-        $xmlEncoding = 'UTF-8';
-        $standalone  = Utilities::tryGetValue($properties, self::STANDALONE);
-        $defaultTag  = Utilities::tryGetValue($properties, self::DEFAULT_TAG);
-        $rootName    = Utilities::tryGetValue($properties, self::ROOT_NAME);
+        $xmlVersion   = '1.0';
+        $xmlEncoding  = 'UTF-8';
+        $standalone   = Utilities::tryGetValue($properties, self::STANDALONE);
+        $defaultTag   = Utilities::tryGetValue($properties, self::DEFAULT_TAG);
+        $rootName     = Utilities::tryGetValue($properties, self::ROOT_NAME);
+        $docNamespace = Utilities::tryGetValue(
+            $array,
+            Resources::XTAG_NAMESPACE,
+            null
+        );
 
         if (!is_array($array)) {
             return false;
@@ -125,10 +130,19 @@ class XmlSerializer implements ISerializer
 
         $xmlw = new \XmlWriter();
         $xmlw->openMemory();
+        $xmlw->setIndent(true);
         $xmlw->startDocument($xmlVersion, $xmlEncoding, $standalone);
         
-        $xmlw->startElement($rootName);
-
+        if (is_null($docNamespace)) {
+            $xmlw->startElement($rootName);
+        } else {
+            foreach ($docNamespace as $uri => $prefix) {
+                $xmlw->startElementNS($prefix, $rootName, $uri);
+                break;
+            }
+        }
+        
+        unset($array[Resources::XTAG_NAMESPACE]);
         $this->_arr2xml($xmlw, $array, $defaultTag);
 
         $xmlw->endElement();

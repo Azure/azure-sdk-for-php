@@ -16,140 +16,106 @@
  *
  * @category  Microsoft
  * @package   PEAR2\WindowsAzure\Services\Blob\Models
- * @author    Albert Cheng <gongchen at the largest software company>
+ * @author    Azure PHP SDK <azurephpsdk@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
  
-namespace PEAR2\WindowsAzure\Services\Blob\Models;
-use PEAR2\WindowsAzure\Validate;
+namespace WindowsAzure\Services\Blob\Models;
+use WindowsAzure\Validate;
 
 /**
  * optional parameters for CopyBlobOptions wrapper
  *
  * @category  Microsoft
  * @package   PEAR2\WindowsAzure\Services\Blob\Models
- * @author    Albert Cheng <gongchen at the largest software company>
+ * @author    Azure PHP SDK <azurephpsdk@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @version   Release: @package_version@
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
 class CopyBlobOptions extends BlobServiceOptions
-{ 
-    /*
-     * @var \Date
-     */
-    private $_date;
+{
 
-    /*
+    /**
+     * @var \AccessCondition
+     */
+    private $_accessCondition;
+    
+    /**
+     * @var \AccessCondition
+     */
+    private $_sourceAccessCondition;
+
+    /**
      * @var string
      */
-    private $_version;
+    private $_copySource;
     
-    /*
-     * @var \Name
-     */
-    private $_copySourceName;
-    
-    /*
-     * @var \NameValue collection
+    /**
+     * @var array
      */
     private $_metadata;
     
-    /*
-     * @var \DateTime
+    /**
+     * @var string 
      */
-    private $_sourceIfModifiedSince;
-    
-    /*
-     * @var \DateTime
-     */
-    private $_sourceIfUnModifiedSince;
-    
-    /*
-     * @var string
-     */
-    private $_sourceIfMatch;
-    
-    /*
-     * @var string
-     */
-    private $_sourceIfNoneMatch; 
-    
-    /*
-     * @var \DateTime
-     */
-    private $_ifModifiedSince; 
-    
-    /*
-     * @var \DateTime
-     */
-    private $_ifUnmodifiedSince; 
-    
-    /* 
-     * @var string
-     */
-    private $_ifMatch;
-    
-    /*
-     * @var string
-     */
-    private $_ifNoneMatch; 
+    private $_sourceSnapshot;
     
     /**
      * @var string
      */
     private $_leaseId;
     
-    /*
+    /**
      * @var sourceLeaseId
      */
     private $_sourceLeaseId;
-    
+  
     /**
-     * Gets the Coordinated Universal Time (UTC) for the request.
-     *
-     * @return \DateTime.
+     * Gets access condition
+     * 
+     * @return AccessCondition
      */
-    public function getDate()
+    public function getAccessCondition()
     {
-        return $this->_date;
-    }
-
-    /**
-     * Sets the Coordinated Universal Time (UTC) for the request.
-     *
-     * @param \DateTime $date value.
-     *
-     * @return none.
-     */
-    public function setDate($date)
-    {
-        $this->_date = $date;
+        return $this->_accessCondition;
     }
     
     /**
-     * Gets storage service version.
-     *
-     * @return string.
-     */
-    public function getVersion()
-    {
-        return $this->_storageServiceVersion;
-    }
-
-    /**
-     * Sets storage service version.
-     *
-     * @param string $version value.
-     *
+     * Sets access condition
+     * 
+     * @param AccessCondition $accessCondition value to use.
+     * 
      * @return none.
      */
-    public function setVersion($version)
+    public function setAccessCondition($accessCondition)
     {
-        $this->_storageServiceVersion = $version;
+        $this->_accessCondition = $accessCondition;
+    }
+    
+    /**
+     * Gets source access condition
+     * 
+     * @return SourceAccessCondition
+     */
+    public function getSourceAccessCondition()
+    {
+        return $this->_sourceAccessCondition;
+    }
+    
+    /**
+     * Sets source access condition
+     * 
+     * @param SourceAccessCondition $sourceAccessCondition value to use.
+     * 
+     * @return none.
+     */
+    public function setSourceAccessCondition($sourceAccessCondition)
+    {
+        $this->_sourceAccessCondition = $sourceAccessCondition;
     }
     
     /**
@@ -175,9 +141,9 @@ class CopyBlobOptions extends BlobServiceOptions
     }
     
     /**
-     * Gets meta data.
+     * Gets metadata.
      *
-     * @return string.
+     * @return array.
      */
     public function getMetadata()
     {
@@ -185,9 +151,9 @@ class CopyBlobOptions extends BlobServiceOptions
     }
 
     /**
-     * Sets meta data.
+     * Sets metadata.
      *
-     * @param string $metadata value.
+     * @param array $metadata value.
      *
      * @return none.
      */
@@ -197,185 +163,31 @@ class CopyBlobOptions extends BlobServiceOptions
     }
     
     /**
-     * Gets source if modified since.
-     *
-     * @return \@DateTime.
-     */
-    public function getSourceIfModifiedSince()
-    {
-        return $this->_sourceIfModifiedSince;
-    }
-    
-    /**
-     * Sets source if modified since.
-     *
-     * @param string $sourceIfModifiedSince value to use.
+     * Gets source snapshot. 
      * 
-     * @return none.
+     * @return string
      */
-    public function setSourceIfModifiedSince($sourceIfModifiedSince)
+    public function getSourceSnapshot()
     {
-        $this->_sourceIfModifiedSince = $sourceIfModifiedSince;
+        return $this->_sourceSnapshot;
     }
-    
+       
     /**
-     * Gets source if unmodified since.
-     *
-     * @return string.
-     */
-    public function getSourceIfUnmodifiedSince()
-    {
-        return $this->_sourceIfUnModifiedSince;
-    }
-
-    /**
-     * Sets source if unmodified since.
-     *
-     * @param string $sourceIfUnmodifiedSince value.
-     *
-     * @return none.
-     */
-    public function setSourceIfUnmodifiedSince($sourceIfUnmodifiedSince)
-    {
-        $this->_sourceIfUnModifiedSince = $sourceIfUnmodifiedSince;
-    }
-    
-    /**
-     * Gets source if match.
-     *
-     * @return string.
-     */
-    public function getSourceIfMatch()
-    {
-        return $this->_sourceIfMatch;
-    }
-
-    /**
-     * Sets source if match.
-     *
-     * @param string $sourceIfMatch value.
-     *
-     * @return none.
-     */
-    public function setSourceIfMatch($sourceIfMatch)
-    {
-        $this->_sourceIfMatch = $sourceIfMatch;
-    }
-    
-    /**
-     * Gets source if none match.
-     *
-     * @return string.
-     */
-    public function getSourceIfNoneMatch()
-    {
-        return $this->_sourceIfNoneMatch;
-    }
-
-    /**
-     * Sets source if none match.
-     *
-     * @param $sourceIfNoneMatch value.
-     *
-     * @return none.
-     */
-    public function setSourceIfNoneMatch($sourceIfNoneMatch)
-    {
-        $this->_sourceIfNoneMatch = $sourceIfNoneMatch;
-    }
-    
-    /**
-     * Gets if modified since.
-     *
-     * @return \DateTime.
-     */
-    public function getIfModifiedSince()
-    {
-        return $this->_ifModifiedSince;
-    }
-
-    /**
-     * Sets if modified since.
-     *
-     * @param string $ifModifiedSince value.
-     *
-     * @return none.
-     */
-    public function setIfModifiedSince($ifModifiedSince)
-    {
-        $this->_ifModifiedSince = $ifModifiedSince;
-    }
-    
-    /**
-     * Gets if unmodified since.
-     *
-     * @return \DateTime.
-     */
-    public function getIfUnmodifiedSince()
-    {
-        return $this->_ifUnmodifiedSince;
-    }
-
-    /**
-     * Sets if unmodified since.
-     *
-     * @param string $ifUnmodifiedSince value.
-     *
-     * @return none.
-     */
-    public function setIfUnmodifiedSince($ifUnmodifiedSince)
-    {
-        $this->_ifUnmodifiedSince = $ifUnmodifiedSince;
-    }
-    
-    /**
-     * Gets ifMatch.
-     *
-     * @return string.
-     */
-    public function getIfMatch()
-    {
-        return $this->_ifMatch;
-    }
-    
-    /**
-     * Sets if match.
-     *
-     * @param string $ifMatch value.
+     * Sets source snapshot. 
      * 
-     * @return none.
-     */
-    public function setIfMatch($ifMatch)
-    {
-        $this->_ifMatch = $ifMatch;
-    }
-    
-    /**
-     * Gets if none match.
+     * @param string $sourceSnapshot value.
      * 
-     * @return string.
+     * @return none
      */
-    public function getIfNoneMatch()
+    public function setSourceSnapshot($sourceSnapshot)
     {
-        return $this->_ifNoneMatch;
+        $this->_sourceSnapshot = $sourceSnapshot;
     }
-    
-    /**
-     * Sets if none match.
-     * 
-     * @param string if none match.
-     * 
-     * @return none.
-     */
-    public function setIfNoneMatch($ifNoneMatch)
-    {
-        $this->_ifNoneMatch = $ifNoneMatch;
-    }
-    
+   
     /**
      * Gets lease ID.
      *
-     * @return array.
+     * @return string
      */
     public function getLeaseId()
     {
@@ -387,7 +199,7 @@ class CopyBlobOptions extends BlobServiceOptions
      *
      * @param string $leaseId value.
      * 
-     * @return none.
+     * @return none
      */
     public function setLeaseId($leaseId)
     {
@@ -397,7 +209,7 @@ class CopyBlobOptions extends BlobServiceOptions
     /**
      * Gets source lease ID.
      *
-     * @return string.
+     * @return string
      */
     public function getSourceLeaseId()
     {
@@ -409,7 +221,7 @@ class CopyBlobOptions extends BlobServiceOptions
      *
      * @param string $sourceLeaseId value.
      * 
-     * @return none.
+     * @return none
      */
     public function setSourceLeaseId($sourceLeaseId)
     {

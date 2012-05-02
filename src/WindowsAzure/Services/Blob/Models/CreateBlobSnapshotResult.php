@@ -15,33 +15,33 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   PEAR2\WindowsAzure\Services\Blob\Models
- * @author    Albert Cheng <gongchen at the largest software company>
+ * @package   WindowsAzure\Services\Blob\Models
+ * @author    Azure PHP SDK <azurephpsdk@microsoft.com> 
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
  
-namespace PEAR2\WindowsAzure\Services\Blob\Models;
-use PEAR2\WindowsAzure\Resources;
-use PEAR2\WindowsAzure\Validate;
-use PEAR2\WindowsAzure\Utilities;
-use PEAR2\WindowsAzure\Core\WindowsAzureUtilities;
+namespace WindowsAzure\Services\Blob\Models;
+use WindowsAzure\Resources;
+use WindowsAzure\Validate;
+use WindowsAzure\Utilities;
+use WindowsAzure\Core\WindowsAzureUtilities;
 
 /**
- * The result of snapshotting a blob. 
+ * The result of creating Blob snapshot. 
  *
  * @category  Microsoft
- * @package   PEAR2\WindowsAzure\Services\Blob\Models
- * @author    Albert Cheng <gongchen at the largest software company>
+ * @package   WindowsAzure\Services\Blob\Models
+ * @author    Azure PHP SDK <azurephpsdk@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @version   Release: @package_version@
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
-class SnapshotBlobResult
+class CreateBlobSnapshotResult
 {
-    /*
+    /**
      * A DateTime value which uniquely identifies the snapshot. 
      * @var \DateTime
      */
@@ -66,19 +66,14 @@ class SnapshotBlobResult
     private $_requestId;
     
     /**
-     * The version of the Blob service. 
-     * @var string
-     */
-    private $_version;
-    
-    /**
      * The date/time value (in UTC) of when the response was initiatied. 
      * @var \DateTime
      */
     private $_date;
     
     /**
-     * Creates snapshotBlobResult object from the response of the copy blob request.
+     * Creates CreateBlobSnapshotResult object from the response of the 
+     * create Blob snapshot request.
      * 
      * @param array $header HTTP response header
      * 
@@ -86,37 +81,35 @@ class SnapshotBlobResult
      */
     public static function create($header)
     {
-        $snapshotBlobResult = new snapshotBlobResult();
-        $headerWithLowerCaseKey  = Utilities::keysToLower($header);
-
-        $snapshotBlobResult->setSnapshot(
-            $headerWithLowerCaseKey[Resources::Snapshot]
-            );
+        $createBlobSnapshotResult = new CreateBlobSnapshotResult();
+        $headerWithLowerCaseKey   = Utilities::keysToLower($header);
         
-        $snapshotBlobResult->setEtag($headerWithLowerCaseKey[Resources::ETAG]);
+        $createBlobSnapshotResult->setEtag(
+            $headerWithLowerCaseKey[Resources::ETAG]
+        );
         
-        $snapshotBlobResult->setLastModified(
+        $createBlobSnapshotResult->setLastModified(
             WindowsAzureUtilities::rfc1123ToDateTime(
                 $headerWithLowerCaseKey[Resources::LAST_MODIFIED]
-            ));
+            )
+        );
         
-        $snapshotBlobResult->setRequestId(
+        $createBlobSnapshotResult->setRequestId(
             $headerWithLowerCaseKey[Resources::X_MS_REQUEST_ID]
-            );
+        );
         
-        $snapshotBlobResult->setVersion(
-            $headerWithLowerCaseKey[Resources::X_MS_VERSION]
-            );
+        $createBlobSnapshotResult->setDate(
+            WindowsAzureUtilities::rfc1123ToDateTime(
+                $headerWithLowerCaseKey[Resources::DATE]
+            )
+        );
         
-        $snapshotBlobResult->setDate(
-            $headerWithLowerCaseKey[Resources::DATE]
-            );
-        
-        return $snapshotBlobResult;
+        return $createBlobSnapshotResult;
     }
     
     /**
      * Gets snapshot. 
+     *
      * @return \DateTime. 
      */
     public function getSnapshot()
@@ -125,6 +118,8 @@ class SnapshotBlobResult
     }
     
     /**
+     * Sets snapshot.
+     * 
      * @param \DateTime $snapshot value.
      *
      * @return none.
@@ -146,6 +141,10 @@ class SnapshotBlobResult
 
     /**
      * Sets ETag.
+     *
+     * @param string $eTag value.
+     *
+     * @return none.
      */
     public function setETag($eTag)
     {
@@ -195,28 +194,6 @@ class SnapshotBlobResult
     public function setRequestId($requestId)
     {
         $this->_requestId = $requestId;
-    }
-    
-    /** 
-     * Gets version.  
-     * 
-     * @return string.
-     */
-    public function getVersion()
-    {
-        return $this->_version;
-    }
-    
-    /**
-     * Sets version. 
-     * 
-     * @param string $version value.
-     * 
-     * @return none. 
-     */
-    public function setVersion($version)
-    {
-        $this->_version = $version; 
     }
     
     /**

@@ -233,8 +233,12 @@ class UtilitiesTest extends \PHPUnit_Framework_TestCase
         // Setup
         $propertiesSample = TestResources::getServicePropertiesSample();
         $properties = ServiceProperties::create($propertiesSample);
-        $xmlSerializer = new XmlSerializer();
-        $expected = $properties->toXml($xmlSerializer);
+        $expected  = '<?xml version="1.0" encoding="UTF-8"?>' . "\n";
+        $expected .= '<StorageServiceProperties><Logging><Version>1.0</Version><Delete>true</Delete>';
+        $expected .= '<Read>false</Read><Write>true</Write><RetentionPolicy><Enabled>true</Enabled>';
+        $expected .= '<Days>20</Days></RetentionPolicy></Logging><Metrics><Version>1.0</Version>';
+        $expected .= '<Enabled>true</Enabled><IncludeAPIs>false</IncludeAPIs><RetentionPolicy>';
+        $expected .= '<Enabled>true</Enabled><Days>20</Days></RetentionPolicy></Metrics></StorageServiceProperties>';
         $array = $properties->toArray();
         
         // Test

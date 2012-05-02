@@ -61,6 +61,9 @@ class Resources
     const INVALID_BTE_MSG      = "The blob block type must exist in %s";
     const INVALID_BLOB_PAT_MSG = 'The provided access type is invalid.';
     const INVALID_SVC_PROP_MSG = 'The provided service properties is invalid.';
+    const UNKNOWN_SRILZER_MSG  = 'The provided serializer type is unknown';
+    const INVALID_CSA_OPT_MSG  = 'Must provide valid location or affinity group.';
+    const INVALID_USA_OPT_MSG  = 'Must provide either description or label.';
 
     // HTTP Headers
     const X_MS_HEADER_PREFIX                 = 'x-ms-';
@@ -80,6 +83,7 @@ class Resources
     const X_MS_BLOB_CONTENT_MD5              = 'x-ms-blob-content-md5';
     const X_MS_BLOB_CACHE_CONTROL            = 'x-ms-blob-cache-control';
     const X_MS_BLOB_CONTENT_LENGTH           = 'x-ms-blob-content-length';
+    const X_MS_COPY_SOURCE                   = 'x-ms-copy-source';
     const X_MS_RANGE                         = 'x-ms-range';
     const X_MS_RANGE_GET_CONTENT_MD5         = 'x-ms-range-get-content-md5';
     const X_MS_LEASE_ID                      = 'x-ms-lease-id';
@@ -87,9 +91,16 @@ class Resources
     const X_MS_LEASE_ACTION                  = 'x-ms-lease-action';
     const X_MS_DELETE_SNAPSHOTS              = 'x-ms-delete-snapshots';
     const X_MS_PAGE_WRITE                    = 'x-ms-page-write';
+    const X_MS_SNAPSHOT                      = 'x-ms-snapshot';
+    const X_MS_SOURCE_IF_MODIFIED_SINCE      = 'x-ms-source-if-modified-since';
+    const X_MS_SOURCE_IF_UNMODIFIED_SINCE    = 'x-ms-source-if-unmodified-since';
+    const X_MS_SOURCE_IF_MATCH               = 'x-ms-source-if-match';
+    const X_MS_SOURCE_IF_NONE_MATCH          = 'x-ms-source-if-none-match';
+    const X_MS_SOURCE_LEASE_ID               = 'x-ms-source-lease-id';
     const X_MS_CONTINUATION_NEXTTABLENAME    = 'x-ms-continuation-nexttablename';
     const X_MS_CONTINUATION_NEXTPARTITIONKEY = 'x-ms-continuation-nextpartitionkey';
     const X_MS_CONTINUATION_NEXTROWKEY       = 'x-ms-continuation-nextrowkey';
+    const X_MS_REQUEST_ID                    = 'x-ms-request-id';
     const ETAG                               = 'etag';
     const LAST_MODIFIED                      = 'last-modified';
     const DATE                               = 'date';
@@ -111,7 +122,7 @@ class Resources
     const MAX_DATA_SERVICE_VERSION           = 'maxdataserviceversion';
     const ACCEPT_HEADER                      = 'accept';
     const ACCEPT_CHARSET                     = 'accept-charset';
-
+    
     // Type
     const QUEUE_TYPE_NAME              = 'IQueue';
     const BLOB_TYPE_NAME               = 'IBlob';
@@ -127,18 +138,19 @@ class Resources
     const HTTP_MERGE  = 'MERGE';
     
     // Misc
-    const EMPTY_STRING       = '';
-    const SEPARATOR          = ',';
-    const AZURE_DATE_FORMAT  = 'D, d M Y H:i:s T';
-    const TIMESTAMP_FORMAT   = 'Y-m-d H:i:s';
-    const EMULATED           = 'EMULATED';
-    const DEV_STORE_NAME     = 'devstoreaccount1';
-    const DEV_STORE_KEY      = 'Eby8vdM02xNOcqFlqUwJPLlmEtlCDXJ1OUzFT50uSRZ6IFsuFq2UVErCz4I6tq/K1SZFPTOtr/KBHBeksoGMGw==';
-    const EMULATOR_BLOB_URI  = '127.0.0.1:10000';
-    const EMULATOR_QUEUE_URI = '127.0.0.1:10001';
-    const EMULATOR_TABLE_URI = '127.0.0.1:10002';
-    const ASTERISK           = '*';
-    const SM_URL             = 'https://management.core.windows.net';
+    const EMPTY_STRING           = '';
+    const SEPARATOR              = ',';
+    const AZURE_DATE_FORMAT      = 'D, d M Y H:i:s T';
+    const TIMESTAMP_FORMAT       = 'Y-m-d H:i:s';
+    const EMULATED               = 'EMULATED';
+    const DEV_STORE_NAME         = 'devstoreaccount1';
+    const DEV_STORE_KEY          = 'Eby8vdM02xNOcqFlqUwJPLlmEtlCDXJ1OUzFT50uSRZ6IFsuFq2UVErCz4I6tq/K1SZFPTOtr/KBHBeksoGMGw==';
+    const EMULATOR_BLOB_URI      = '127.0.0.1:10000';
+    const EMULATOR_QUEUE_URI     = '127.0.0.1:10001';
+    const EMULATOR_TABLE_URI     = '127.0.0.1:10002';
+    const ASTERISK               = '*';
+    const SERVICE_MANAGEMENT_URL = 'https://management.core.windows.net';
+    const WA_XML_NAMESPACE       = 'http://schemas.microsoft.com/windowsazure';
 
     // Header values
     const STORAGE_API_LATEST_VERSION     = '2011-08-18';
@@ -173,6 +185,7 @@ class Resources
     const QP_NEXT_TABLE_NAME    = 'NextTableName';
     const QP_NEXT_PK            = 'NextPartitionKey';
     const QP_NEXT_RK            = 'NextRowKey';
+    const QP_ACTION             = 'action';
     
     // Request body content types
     const XML_CONTENT_TYPE      = 'application/x-www-form-urlencoded';
@@ -180,6 +193,34 @@ class Resources
     const XML_ATOM_CONTENT_TYPE = 'application/atom+xml';
     const HTTP_TYPE             = 'application/http';
     const MULTIPART_MIXED_TYPE  = 'multipart/mixed';
+    
+    // Common used XML tags
+    const XTAG_ATTRIBUTES                 = '@attributes';
+    const XTAG_NAMESPACE                  = '@namespace';
+    const XTAG_LABEL                      = 'Label';
+    const XTAG_NAME                       = 'Name';
+    const XTAG_DESCRIPTION                = 'Description';
+    const XTAG_LOCATION                   = 'Location';
+    const XTAG_AFFINITY_GROUP             = 'AffinityGroup';
+    const XTAG_HOSTED_SERVICES            = 'HostedServices';
+    const XTAG_STORAGE_SERVICES           = 'StorageServices';
+    const XTAG_STORAGE_SERVICE            = 'StorageService';
+    const XTAG_DISPLAY_NAME               = 'DisplayName';
+    const XTAG_SERVICE_NAME               = 'ServiceName';
+    const XTAG_URL                        = 'Url';
+    const XTAG_ID                         = 'ID';
+    const XTAG_STATUS                     = 'Status';
+    const XTAG_HTTP_STATUS_CODE           = 'HttpStatusCode';
+    const XTAG_CODE                       = 'Code';
+    const XTAG_MESSAGE                    = 'Message';
+    const XTAG_STORAGE_SERVICE_PROPERTIES = 'StorageServiceProperties';
+    const XTAG_ENDPOINT                   = 'Endpoint';
+    const XTAG_ENDPOINTS                  = 'Endpoints';
+    const XTAG_PRIMARY                    = 'Primary';
+    const XTAG_SECONDARY                  = 'Secondary';
+    const XTAG_KEY_TYPE                   = 'KeyType';
+    const XTAG_STORAGE_SERVICE_KEYS       = 'StorageServiceKeys';
+    const XTAG_ERROR                      = 'Error';
     
     // Status Codes
     const STATUS_OK              = 200;

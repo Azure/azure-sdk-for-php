@@ -64,12 +64,22 @@ class TestResources
 
     public static function accountName()
     {
-        return getenv('AZURE_ACCOUNT');
+        return getenv('AZURE_STORAGE_ACCOUNT');
     }
     
     public static function accountKey()
     {
-        return getenv('AZURE_KEY');
+        return getenv('AZURE_STORAGE_KEY');
+    }
+    
+    public static function serviceManagementSubscriptionId()
+    {
+        return getenv('SERVICE_MANAGEMENT_SUBSCRIPTION_ID');
+    }
+    
+    public static function serviceManagementCertificatePath()
+    {
+        return getenv('SERVICE_MANAGEMENT_CERTIFICATE_PATH');
     }
     
     public static function serviceManagementSubscriptionId()

@@ -56,16 +56,23 @@ class RestProxy
     protected $dataSerializer;
     
     /**
+     * @var string
+     */
+    private $_uri;
+    
+    /**
      * Initializes new RestProxy object.
      *
      * @param IHttpClient $channel        The HTTP client used to send HTTP requests.
      * @param ISerializer $dataSerializer The data serializer.
+     * @param string      $uri            The uri of the service.
      */
-    public function __construct($channel, $dataSerializer)
+    public function __construct($channel, $dataSerializer, $uri)
     {
         $this->_channel       = $channel;
         $this->_filters       = array();
         $this->dataSerializer = $dataSerializer;
+        $this->_uri           = $uri;
     }
     
     /**
@@ -76,6 +83,16 @@ class RestProxy
     public function getFilters()
     {
         return $this->_filters;
+    }
+
+    /**
+     * Gets the Uri of the service.
+     * 
+     * @return string
+     */
+    public function getUri()
+    {
+        return $this->_uri;
     }
     
     /**
@@ -88,7 +105,8 @@ class RestProxy
     protected function sendContext($context)
     {
         $channel     = clone $this->_channel;
-        $url         = new Url($context->getUri());
+        $contextUrl  = $context->getUri();
+        $url         = new Url(empty($contextUrl) ? $this->_uri : $contextUrl);
         $headers     = $context->getHeaders();
         $statusCodes = $context->getStatusCodes();
         $body        = $context->getBody();

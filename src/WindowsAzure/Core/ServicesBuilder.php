@@ -117,7 +117,12 @@ class ServicesBuilder implements IServiceBuilder
         $xmlSerializer = new XmlSerializer();
         
         $queueWrapper = new QueueRestProxy(
+            $httpClient, $config->getProperty(QueueSettings::URI)
             $httpClient, $config->getProperty(QueueSettings::URI), $xmlSerializer
+            $httpClient, 
+            $config->getProperty(QueueSettings::URI), 
+            '', 
+            $xmlSerializer
         );
 
         // Adding headers filter
@@ -154,7 +159,12 @@ class ServicesBuilder implements IServiceBuilder
         $xmlSerializer = new XmlSerializer();
 
         $blobWrapper = new BlobRestProxy(
+            $httpClient, $config->getProperty(BlobSettings::URI)
             $httpClient, $config->getProperty(BlobSettings::URI), $xmlSerializer
+            $httpClient, 
+            $config->getProperty(BlobSettings::URI),
+            $config->getProperty(BlobSettings::ACCOUNT_NAME),
+            $xmlSerializer
         );
 
         // Adding headers filter
