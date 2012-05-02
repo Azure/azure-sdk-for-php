@@ -73,10 +73,6 @@ class FileOutputChannelTest extends \PHPUnit_Framework_TestCase
         
         $inputChannelContents = stream_get_contents($fileInputStream);
         $this->assertEquals($fileContents, $inputChannelContents);
-        
-        // invalid file
-        $this->setExpectedException(get_class(new ChannelNotAvailableException()));
-        $fileOutputChannel->getOutputStream('fake');
     }
 }
 

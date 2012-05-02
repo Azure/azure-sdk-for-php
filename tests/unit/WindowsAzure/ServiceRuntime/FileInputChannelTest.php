@@ -72,7 +72,7 @@ class FileInputChannelTest extends \PHPUnit_Framework_TestCase
         
         // invalid file
         $this->setExpectedException(get_class(new ChannelNotAvailableException()));
-        $fileInputChannel->getInputStream('fake');
+        $fileInputChannel->getInputStream(\vfsStream::url($rootDirectory . '/' . 'fakeinput'));
     }
 }
 
