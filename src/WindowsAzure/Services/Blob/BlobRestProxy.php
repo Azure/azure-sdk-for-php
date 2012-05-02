@@ -1962,7 +1962,7 @@ class BlobRestProxy extends ServiceRestProxy implements IBlob
         
         $metadata = $options->getMetaData();
         if (!is_null($metadata)) {
-            $metadataHeader 
+            $metadataHeader
                 = WindowsAzureUtilities::generateMetadataHeaders($metadata);
             $headers        = \array_merge($headers, $metadataHeader);
         }
