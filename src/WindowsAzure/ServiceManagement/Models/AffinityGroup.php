@@ -15,58 +15,60 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   Tests\Framework
+ * @package   WindowsAzure\ServiceManagement\Models
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
  
-namespace Tests\Framework;
-use WindowsAzure\Logger;
-use WindowsAzure\Core\Serialization\XmlSerializer;
-use WindowsAzure\Core\WindowsAzureUtilities;
+namespace WindowsAzure\ServiceManagement\Models;
+use WindowsAzure\Resources;
+use WindowsAzure\Utilities;
 
 /**
- * Testbase for all REST proxy tests.
+ * The affinity group class.
  *
  * @category  Microsoft
- * @package   Tests\Framework
+ * @package   WindowsAzure\ServiceManagement\Models
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @version   Release: @package_version@
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
-class RestProxyTestBase extends \PHPUnit_Framework_TestCase
+class AffinityGroup extends Service
 {
-    protected $config;
-    protected $wrapper;
-    protected $xmlSerializer;
-    
-    const NOT_SUPPORTED = 'The storage emulator doesn\'t support this API';
-    
-    protected function skipIfEmulated()
+    /**
+     * Constructs new affinity group object.
+     * 
+     * @param array $raw The array representation for affinity group.
+     */
+    public function __construct($raw = null)
     {
-        if (WindowsAzureUtilities::isEmulated()) {
-            $this->markTestSkipped(self::NOT_SUPPORTED);
-        }
+        parent::__construct($raw);
+        $this->setName(Utilities::tryGetValue($raw, Resources::XTAG_NAME));
     }
     
-    public function __construct($config, $serviceWrapper)
+    /**
+     * Converts the current object into ordered array representation.
+     * 
+     * @return array
+     */
+    protected function toArray()
     {
-        $this->config = $config;
-        $this->wrapper = $serviceWrapper;
-        $this->xmlSerializer = new XmlSerializer();
-        Logger::setLogFile('C:\log.txt');
-    }
-    
-    protected function onNotSuccessfulTest(\Exception $e)
-    {
-        parent::onNotSuccessfulTest($e);
+        $arr   = parent::toArray();
+        $order = array(
+            Resources::XTAG_NAMESPACE,
+            Resources::XTAG_NAME,
+            Resources::XTAG_LABEL,
+            Resources::XTAG_DESCRIPTION,
+            Resources::XTAG_LOCATION
+        );
+        Utilities::addIfNotEmpty(Resources::XTAG_NAME, $this->getName(), $arr);
+        $ordered = Utilities::orderArray($arr, $order);
         
-        $this->tearDown();
-        throw $e;
+        return $ordered;
     }
 }
 
