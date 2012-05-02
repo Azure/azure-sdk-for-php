@@ -58,21 +58,21 @@ class RestProxy
     /**
      * @var string
      */
-    protected $url;
+    private $_url;
     
     /**
      * Initializes new RestProxy object.
      *
      * @param IHttpClient $channel        The HTTP client used to send HTTP requests.
      * @param ISerializer $dataSerializer The data serializer.
-     * @param string      $url            The url.
+     * @param string      $url            The URL of the Azure REST service.
      */
     public function __construct($channel, $dataSerializer, $url)
     {
         $this->_channel       = $channel;
         $this->_filters       = array();
         $this->dataSerializer = $dataSerializer;
-        $this->url            = $url;
+        $this->_url           = $url;
     }
     
     /**
@@ -96,7 +96,7 @@ class RestProxy
     {
         $channel     = clone $this->_channel;
         $contextUrl  = $context->getUri();
-        $url         = new Url(empty($contextUrl) ? $this->url : $contextUrl);
+        $url         = new Url(empty($contextUrl) ? $this->_url : $contextUrl);
         $headers     = $context->getHeaders();
         $statusCodes = $context->getStatusCodes();
         $body        = $context->getBody();
@@ -174,6 +174,28 @@ class RestProxy
         if (!is_null($value) && Resources::EMPTY_STRING !== $value) {
             $headers[$key] = $value;
         }
+    }
+    
+    /**
+     * Gets the service url.
+     * 
+     * @return string
+     */
+    public function getUrl()
+    {
+        return $this->_url;
+    }
+    
+    /**
+     * Sets the service url.
+     * 
+     * @param string $url The service url.
+     * 
+     * @return none
+     */
+    public function setUrl($url)
+    {
+        $this->_url = $url;
     }
 }
 
