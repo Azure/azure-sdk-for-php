@@ -160,7 +160,7 @@ class ServicesBuilder implements IServiceBuilder
             $httpClient, 
             $config->getProperty(BlobSettings::URI),
             $config->getProperty(BlobSettings::ACCOUNT_NAME),
-			$xmlSerializer
+            $xmlSerializer
         );
 
         // Adding headers filter

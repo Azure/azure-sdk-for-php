@@ -16,7 +16,7 @@
  *
  * @category  Microsoft
  * @package   PEAR2\WindowsAzure\Services\Blob\Models
- * @author    Albert Cheng <gongchen at the largest software company>
+ * @author    Azure PHP SDK <azurephpsdk@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link      http://pear.php.net/package/azure-sdk-for-php
@@ -30,14 +30,15 @@ use WindowsAzure\Validate;
  *
  * @category  Microsoft
  * @package   PEAR2\WindowsAzure\Services\Blob\Models
- * @author    Albert Cheng <gongchen at the largest software company>
+ * @author    Azure PHP SDK <azurephpsdk@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @version   Release: @package_version@
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
 class CopyBlobOptions extends BlobServiceOptions
-{ 
+{
+
     /**
      * @var \AccessCondition
      */
@@ -174,7 +175,7 @@ class CopyBlobOptions extends BlobServiceOptions
     /**
      * Sets source snapshot. 
      * 
-     * @param type $sourceSnapshot 
+     * @param string $sourceSnapshot value.
      * 
      * @return none
      */
@@ -186,7 +187,7 @@ class CopyBlobOptions extends BlobServiceOptions
     /**
      * Gets lease ID.
      *
-     * @return string.
+     * @return string
      */
     public function getLeaseId()
     {
@@ -198,7 +199,7 @@ class CopyBlobOptions extends BlobServiceOptions
      *
      * @param string $leaseId value.
      * 
-     * @return none.
+     * @return none
      */
     public function setLeaseId($leaseId)
     {
@@ -208,7 +209,7 @@ class CopyBlobOptions extends BlobServiceOptions
     /**
      * Gets source lease ID.
      *
-     * @return string.
+     * @return string
      */
     public function getSourceLeaseId()
     {
@@ -220,7 +221,7 @@ class CopyBlobOptions extends BlobServiceOptions
      *
      * @param string $sourceLeaseId value.
      * 
-     * @return none.
+     * @return none
      */
     public function setSourceLeaseId($sourceLeaseId)
     {

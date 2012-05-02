@@ -1860,11 +1860,11 @@ class BlobRestProxy extends ServiceRestProxy implements IBlob
      */
     public function createBlobSnapshot($container, $blob, $options = null)
     {
-        $method              = \HTTP_Request2::METHOD_PUT;
-        $header              = array();
-        $queryParams         = array();
-        $path                = $container . '/' . $blob;
-        $expectedStatusCode  = Resources::STATUS_CREATED;
+        $method             = \HTTP_Request2::METHOD_PUT;
+        $header             = array();
+        $queryParams        = array();
+        $path               = $container . '/' . $blob;
+        $expectedStatusCode = Resources::STATUS_CREATED;
         
         if (is_null($options)) {
             $options = new CreateBlobSnapshotOptions();
@@ -1877,9 +1877,10 @@ class BlobRestProxy extends ServiceRestProxy implements IBlob
         
         $metadata = $options->getMetaData();
         if (!is_null($metadata)) {
-            $metadataHeader = 
-                WindowsAzureUtilities::generateMetadataHeaders($metadata);
-            $header = array_merge($header, $metadataHeader);
+            $metadataHeader = WindowsAzureUtilities::generateMetadataHeaders(
+                $metadata
+            );
+            $header         = array_merge($header, $metadataHeader);
         }
         
         $header[Resources::X_MS_BLOB_TYPE] = $options->getBlobType();
@@ -1906,10 +1907,14 @@ class BlobRestProxy extends ServiceRestProxy implements IBlob
     /**
      * Copies a source blob to a destination blob within the same storage account.
      * 
-     * @param string                 $destinationContainer name of the destination container
-     * @param string                 $destinationBlob      name of the destination blob
-     * @param string                 $sourceContainer      name of the source container
-     * @param string                 $sourceBlob           name of the source blob
+     * @param string                 $destinationContainer name of the destination 
+     * container
+     * @param string                 $destinationBlob      name of the destination 
+     * blob
+     * @param string                 $sourceContainer      name of the source 
+     * container
+     * @param string                 $sourceBlob           name of the source
+     * blob
      * @param Models\CopyBlobOptions $options              optional parameters
      * 
      * @return none
@@ -1921,27 +1926,28 @@ class BlobRestProxy extends ServiceRestProxy implements IBlob
         $destinationBlob,
         $sourceContainer, 
         $sourceBlob, 
-        $options = null) 
-    {
-        $method               = \HTTP_Request2::METHOD_PUT;
-        $headers               = array();
-        $queryParams          = array();
-        $destinationBlobPath  = $destinationContainer . '/' . $destinationBlob;
-        $statusCode           = Resources::STATUS_CREATED;
+        $options = null
+    ) {
+
+        $method              = \HTTP_Request2::METHOD_PUT;
+        $headers             = array();
+        $queryParams         = array();
+        $destinationBlobPath = $destinationContainer . '/' . $destinationBlob;
+        $statusCode          = Resources::STATUS_CREATED;
         
         if (is_null($options)) {
             $options = new CopyBlobOptions();
         }
-        $sourceBlobPath       = $this->getCopyBlobSourceName(
+        $sourceBlobPath = $this->_getCopyBlobSourceName(
             $sourceContainer, 
             $sourceBlob,
             $options
-            );
+        );
         
         $this->addOptionalAccessConditionHeader(
             $headers, 
             $options->getAccessCondition()
-            );
+        );
         
         $this->addOptionalSourceAccessConditionHeader(
             $headers,
@@ -1956,9 +1962,9 @@ class BlobRestProxy extends ServiceRestProxy implements IBlob
         
         $metadata = $options->getMetaData();
         if (!is_null($metadata)) {
-            $metadataHeader = 
-                WindowsAzureUtilities::generateMetadataHeaders($metadata);
-            $headers = \array_merge($headers, $metadataHeader);
+            $metadataHeader 
+                = WindowsAzureUtilities::generateMetadataHeaders($metadata);
+            $headers        = \array_merge($headers, $metadataHeader);
         }
         
         $this->addOptionalHeader(
@@ -2080,25 +2086,24 @@ class BlobRestProxy extends ServiceRestProxy implements IBlob
     /**
      * Gets the copy blob source name with specified parameters. 
      * 
-     * @param string                    $containerName the name of the container.
-     * @param string                    $blobName      the name of the blob.
-     * @param Models\CopyBlobOptions    $options       the optional parameters. 
+     * @param string                 $containerName the name of the container. 
+     * @param string                 $blobName      the name of the blob.
+     * @param Models\CopyBlobOptions $options       the optional parameters.
+     *
      * @return string 
      */
-    private function getCopyBlobSourceName($containerName, $blobName, $options)
+    private function _getCopyBlobSourceName($containerName, $blobName, $options)
     {
         $copyBlobSourceName = '/'.$this->getAccountName();
        
-        if (!Validate::IsNullOrEmptyString($containerName))
-        {
+        if (!Validate::isNullOrEmptyString($containerName)) {
             /* @var $containerName type */
             $copyBlobSourceName .= '/'.$containerName;
         }
         
         $copyBlobSourceName .= '/'.$blobName;
         
-        if (($options != null) && ($options->getSourceSnapshot() != null))
-        {
+        if (($options != null) && ($options->getSourceSnapshot() != null)) {
             $copyBlobSourceName .= '?snapshot='.$options->getSourceSnapshot();
         }
         

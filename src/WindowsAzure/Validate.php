@@ -129,9 +129,12 @@ class Validate
     
     /**
      * Returns whether the variable is an empty or null string. 
-     * @param string  $var 
+     * 
+     * @param string $var value.
+     * 
+     * @return boolean
      */
-    public static function IsNullOrEmptyString($var)
+    public static function isNullOrEmptyString($var)
     {
         try {
             (string)$var;

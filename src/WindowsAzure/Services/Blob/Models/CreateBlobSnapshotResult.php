@@ -16,7 +16,7 @@
  *
  * @category  Microsoft
  * @package   WindowsAzure\Services\Blob\Models
- * @author    Albert Cheng <gongchen at the largest software company>
+ * @author    Azure PHP SDK <azurephpsdk@microsoft.com> 
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link      http://pear.php.net/package/azure-sdk-for-php
@@ -33,7 +33,7 @@ use WindowsAzure\Core\WindowsAzureUtilities;
  *
  * @category  Microsoft
  * @package   WindowsAzure\Services\Blob\Models
- * @author    Albert Cheng <gongchen at the largest software company>
+ * @author    Azure PHP SDK <azurephpsdk@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @version   Release: @package_version@
@@ -82,30 +82,34 @@ class CreateBlobSnapshotResult
     public static function create($header)
     {
         $createBlobSnapshotResult = new CreateBlobSnapshotResult();
-        $headerWithLowerCaseKey  = Utilities::keysToLower($header);
+        $headerWithLowerCaseKey   = Utilities::keysToLower($header);
         
         $createBlobSnapshotResult->setEtag(
-            $headerWithLowerCaseKey[Resources::ETAG]);
+            $headerWithLowerCaseKey[Resources::ETAG]
+        );
         
         $createBlobSnapshotResult->setLastModified(
             WindowsAzureUtilities::rfc1123ToDateTime(
                 $headerWithLowerCaseKey[Resources::LAST_MODIFIED]
-            ));
+            )
+        );
         
         $createBlobSnapshotResult->setRequestId(
             $headerWithLowerCaseKey[Resources::X_MS_REQUEST_ID]
-            );
+        );
         
         $createBlobSnapshotResult->setDate(
             WindowsAzureUtilities::rfc1123ToDateTime(
                 $headerWithLowerCaseKey[Resources::DATE]
-            ));
+            )
+        );
         
         return $createBlobSnapshotResult;
     }
     
     /**
      * Gets snapshot. 
+     *
      * @return \DateTime. 
      */
     public function getSnapshot()
@@ -114,6 +118,8 @@ class CreateBlobSnapshotResult
     }
     
     /**
+     * Sets snapshot.
+     * 
      * @param \DateTime $snapshot value.
      *
      * @return none.
@@ -135,6 +141,10 @@ class CreateBlobSnapshotResult
 
     /**
      * Sets ETag.
+     *
+     * @param string $eTag value.
+     *
+     * @return none.
      */
     public function setETag($eTag)
     {

@@ -16,7 +16,7 @@
  *
  * @category  Microsoft
  * @package   WindowsAzure\Services\Blob\Models
- * @author    Albert Cheng <gongchen at the largest software company>
+ * @author    Azure PHP SDK <azurephpsdk@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link      http://pear.php.net/package/azure-sdk-for-php
@@ -30,7 +30,7 @@ use WindowsAzure\Validate;
  *
  * @category  Microsoft
  * @package   PEAR2\WindowsAzure\Services\Blob\Models
- * @author    Albert Cheng <gongchen at the largest software company>
+ * @author    Azure PHP SDK <azurephpsdk@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @version   Release: @package_version@
@@ -61,7 +61,7 @@ class CreateBlobSnapshotOptions extends BlobServiceOptions
     /**
      * Gets blob type.
      * 
-     * @return type. 
+     * @return string. 
      */
     public function getBlobType()
     {
@@ -71,7 +71,9 @@ class CreateBlobSnapshotOptions extends BlobServiceOptions
     /**
      * Sets blob type. 
      * 
-     * @param type $blobType 
+     * @param string $blobType value. 
+     *
+     * @return none.
      */
     public function setBlobType($blobType)
     {
@@ -103,7 +105,7 @@ class CreateBlobSnapshotOptions extends BlobServiceOptions
     /**
      * Gets access condition.
      * 
-     * return \AccessCondition.
+     * @return \AccessCondition.
      */
     public function getAccessCondition()
     {
@@ -114,6 +116,8 @@ class CreateBlobSnapshotOptions extends BlobServiceOptions
      * Sets access condition.
      * 
      * @param \AccessCondition $accessCondition value
+     * 
+     * @return none.
      */
     public function setAccessCondition($accessCondition)
     {

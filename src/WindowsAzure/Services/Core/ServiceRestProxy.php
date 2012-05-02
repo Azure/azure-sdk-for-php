@@ -52,13 +52,14 @@ class ServiceRestProxy extends RestProxy
      *
      * @param IHttpClient $channel        The HTTP client used to send HTTP requests.
      * @param string      $uri            The storage account uri.
+     * @param string      $accountName    The name of the account.
      * @param ISerializer $dataSerializer The data serializer.
      */
-    public function __construct($channel, $uri, $accountName = '', $dataSerializer)
+    public function __construct($channel, $uri, $accountName, $dataSerializer)
     {
-		parent::__construct($channel, $dataSerializer);
-        $this->_url      = $uri;
-		$this->_accountName = $accountName;
+        parent::__construct($channel, $dataSerializer);
+        $this->_url   = $uri;
+        $this->_accountName = $accountName;
     }
     
     /**
@@ -73,7 +74,9 @@ class ServiceRestProxy extends RestProxy
     
     /**
      * Gets the URL.
+     *
      * @return type 
+     *
      */
     public function getUrl()
     {
@@ -105,11 +108,11 @@ class ServiceRestProxy extends RestProxy
      * @return \HTTP_Request2_Response
      */
     protected function send(
-		$method, 
-		$headers, 
-		$queryParams, 
-		$path, 
-		$statusCode,
+        $method, 
+        $headers, 
+        $queryParams, 
+        $path, 
+        $statusCode,
         $body = Resources::EMPTY_STRING
     ) {
         $context = new HttpCallContext();
@@ -154,14 +157,16 @@ class ServiceRestProxy extends RestProxy
      * Adds optional header to headers if set
      * 
      * @param array                 $headers               array of request headers
-     * @param SourceAccessCondition $sourceAccessCondition the access condition object
+     * @param SourceAccessCondition $sourceAccessCondition the access condition 
+     * object
      * 
      * @return array
      */
     public function addOptionalSourceAccessConditionHeader(
         $headers, 
-        $sourceAccessCondition)
-    {
+        $sourceAccessCondition
+    ) {
+
         if (!is_null($sourceAccessCondition)) {
             $header = $sourceAccessCondition->getHeader();
             

@@ -16,7 +16,7 @@
  *
  * @category  Microsoft
  * @package   WindowsAzure\Services\Blob\Models
- * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
+ * @author    Azure PHP SDK <azurephpsdk@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link      http://pear.php.net/package/azure-sdk-for-php
@@ -28,12 +28,12 @@ use WindowsAzure\Resources;
 use WindowsAzure\Core\WindowsAzureUtilities;
 
 /**
- * Represents a set of source access conditions to be used for operations against the 
- * storage services.
+ * Represents a set of source access conditions to be used for operations
+ * against the storage services.
  *
  * @category  Microsoft
  * @package   WindowsAzure\Services\Blob\Models
- * @author    Albert Cheng (gongchen at the largest software company)
+ * @author    Azure PHP SDK <azurephpsdk@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @version   Release: @package_version@
@@ -82,9 +82,9 @@ class SourceAccessCondition
      * the resource's ETag value matches the specified ETag value.
      * <p>
      * Setting this access condition modifies the request to include the HTTP 
-     * <i>x-ms-source-if-match</i> conditional header. If this access condition is set, the 
-     * operation is performed only if the ETag of the resource matches the specified
-     * ETag.
+     * <i>x-ms-source-if-match</i> conditional header. If this access condition 
+     * is set, the operation is performed only if the ETag of the resource 
+     * matches the specified ETag.
      * <p>
      * For more information, see 
      * <a href= 'http://go.microsoft.com/fwlink/?LinkID=224642&clcid=0x409'>
@@ -100,13 +100,14 @@ class SourceAccessCondition
     }
     
     /**
-     * Returns an source access condition such that an operation will be performed only if 
-     * the resource has been modified since the specified time.
+     * Returns an source access condition such that an operation will be 
+     * performed only if the resource has been modified since the specified 
+     * time.
      * <p>
      * Setting this access condition modifies the request to include the HTTP 
-     * <i>x-ms-source-if-modified-since</i> conditional header. If this access condition is set,
-     * the operation is performed only if the resource has been modified since the 
-     * specified time.
+     * <i>x-ms-source-if-modified-since</i> conditional header. If this 
+     * access condition is set, the operation is performed only if the 
+     * resource has been modified since the specified time.
      * <p>
      * For more information, see 
      * <a href= 'http://go.microsoft.com/fwlink/?LinkID=224642&clcid=0x409'>
@@ -126,35 +127,39 @@ class SourceAccessCondition
     }
     
     /**
-     * Returns a source access condition such that an operation will be performed only if 
-     * the resource's ETag value does not match the specified ETag value.
+     * Returns a source access condition such that an operation will be 
+     * performed only if the resource's ETag value does not match the 
+     * specified ETag value.
      * <p>
      * Setting this access condition modifies the request to include the HTTP 
-     * <i>x-ms-source-if-none-match</i> conditional header. If this access condition is set,
-     * the operation is performed only if the ETag of the resource does not match the
-     * specified ETag.
+     * <i>x-ms-source-if-none-match</i> conditional header. If this access 
+     * condition is set, the operation is performed only if the ETag of 
+     * the resource does not match the specified ETag.
      * <p>
      * For more information,
      * see <a href= 'http://go.microsoft.com/fwlink/?LinkID=224642&clcid=0x409'>
      * Specifying Conditional Headers for Blob Service Operations</a>.
      *
-     * @param string $etag string that represents the ETag value to check.
+     * @param string $eTag string that represents the ETag value to check.
      *
      * @return \WindowsAzure\Services\Blob\Models\SourceAccessCondition
      */
-    public static function sourceIfNoneMatch($etag)
+    public static function sourceIfNoneMatch($eTag)
     {
-        return new SourceAccessCondition(Resources::X_MS_SOURCE_IF_NONE_MATCH, $etag);
+        return new SourceAccessCondition(
+            Resources::X_MS_SOURCE_IF_NONE_MATCH, 
+            $eTag
+        );
     }
     
     /**
-     * Returns a source access condition such that an operation will be performed only if
-     * the resource has not been modified since the specified time.
+     * Returns a source access condition such that an operation will be performed 
+     * only if the resource has not been modified since the specified time.
      * <p>
      * Setting this access condition modifies the request to include the HTTP 
-     * <i>x-ms-source-if-unmodified-since</i> conditional header. If this access condition 
-     * is set, the operation is performed only if the resource has not been modified 
-     * since the specified time.
+     * <i>x-ms-source-if-unmodified-since</i> conditional header. If this access
+     * condition is set, the operation is performed only if the resource has not 
+     * been modified since the specified time.
      * <p>
      * For more information, see
      * <a href= 'http://go.microsoft.com/fwlink/?LinkID=224642&clcid=0x409'>
