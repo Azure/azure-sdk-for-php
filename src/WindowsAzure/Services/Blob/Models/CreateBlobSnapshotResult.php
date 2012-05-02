@@ -1,0 +1,222 @@
+<?php
+
+/**
+ * LICENSE: Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ * 
+ * PHP version 5
+ *
+ * @category  Microsoft
+ * @package   WindowsAzure\Services\Blob\Models
+ * @author    Azure PHP SDK <azurephpsdk@microsoft.com> 
+ * @copyright 2012 Microsoft Corporation
+ * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
+ * @link      http://pear.php.net/package/azure-sdk-for-php
+ */
+ 
+namespace WindowsAzure\Services\Blob\Models;
+use WindowsAzure\Resources;
+use WindowsAzure\Validate;
+use WindowsAzure\Utilities;
+use WindowsAzure\Core\WindowsAzureUtilities;
+
+/**
+ * The result of creating Blob snapshot. 
+ *
+ * @category  Microsoft
+ * @package   WindowsAzure\Services\Blob\Models
+ * @author    Azure PHP SDK <azurephpsdk@microsoft.com>
+ * @copyright 2012 Microsoft Corporation
+ * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
+ * @version   Release: @package_version@
+ * @link      http://pear.php.net/package/azure-sdk-for-php
+ */
+class CreateBlobSnapshotResult
+{
+    /**
+     * A DateTime value which uniquely identifies the snapshot. 
+     * @var \DateTime
+     */
+    private $_snapshot;
+            
+    /**
+     * The ETag for the destination blob. 
+     * @var string
+     */
+    private $_eTag;
+    
+    /**
+     * The date/time that the copy operation to the destination blob completed. 
+     * @var \DateTime
+     */
+    private $_lastModified;
+    
+    /**
+     * The unique identifier of the request. 
+     * @var string
+     */
+    private $_requestId;
+    
+    /**
+     * The date/time value (in UTC) of when the response was initiatied. 
+     * @var \DateTime
+     */
+    private $_date;
+    
+    /**
+     * Creates CreateBlobSnapshotResult object from the response of the 
+     * create Blob snapshot request.
+     * 
+     * @param array $header HTTP response header
+     * 
+     * @return snapshotBlobResult
+     */
+    public static function create($header)
+    {
+        $createBlobSnapshotResult = new CreateBlobSnapshotResult();
+        $headerWithLowerCaseKey   = Utilities::keysToLower($header);
+        
+        $createBlobSnapshotResult->setEtag(
+            $headerWithLowerCaseKey[Resources::ETAG]
+        );
+        
+        $createBlobSnapshotResult->setLastModified(
+            WindowsAzureUtilities::rfc1123ToDateTime(
+                $headerWithLowerCaseKey[Resources::LAST_MODIFIED]
+            )
+        );
+        
+        $createBlobSnapshotResult->setRequestId(
+            $headerWithLowerCaseKey[Resources::X_MS_REQUEST_ID]
+        );
+        
+        $createBlobSnapshotResult->setDate(
+            WindowsAzureUtilities::rfc1123ToDateTime(
+                $headerWithLowerCaseKey[Resources::DATE]
+            )
+        );
+        
+        return $createBlobSnapshotResult;
+    }
+    
+    /**
+     * Gets snapshot. 
+     *
+     * @return \DateTime. 
+     */
+    public function getSnapshot()
+    {
+        return $this->_snapshot;
+    }
+    
+    /**
+     * Sets snapshot.
+     * 
+     * @param \DateTime $snapshot value.
+     *
+     * @return none.
+     */
+    public function setSnapshot($snapshot)
+    {
+        $this->_snapshot = $snapshot;
+    }
+    
+    /**
+     * Gets ETag.
+     * 
+     * @return string. 
+     */
+    public function getETag()
+    {
+        return $this->_eTag;
+    }
+
+    /**
+     * Sets ETag.
+     *
+     * @param string $eTag value.
+     *
+     * @return none.
+     */
+    public function setETag($eTag)
+    {
+        $this->_eTag = $eTag;
+    }
+    
+    /**
+     * Gets blob lastModified.
+     *
+     * @return \DateTime.
+     */
+    public function getLastModified()
+    {
+        return $this->_lastModified;
+    }
+
+    /**
+     * Sets blob lastModified.
+     *
+     * @param \DateTime $lastModified value.
+     *
+     * @return none.
+     */
+    public function setLastModified($lastModified)
+    {
+        Validate::isDate($lastModified);
+        $this->_lastModified = $lastModified;
+    }
+    
+    /**
+     * Gets request ID.
+     * 
+     * @return string.   
+     */
+    public function getRequestId()
+    {
+        return $this->_requestId;    
+    }
+    
+    /**
+     * Sets request ID. 
+     * 
+     * @param string $requestId value. 
+     * 
+     * @return none.
+     */
+    public function setRequestId($requestId)
+    {
+        $this->_requestId = $requestId;
+    }
+    
+    /**
+     * Gets date.  
+     * 
+     * @return \DateTime. 
+     */
+    public function getDate()
+    {
+        return $this->_date;
+    }
+    
+    /**
+     * Sets date. 
+     * 
+     * @param \DateTime $date value.
+     * 
+     * @return none; 
+     */
+    public function setDate($date)
+    {
+        $this->_date = $date; 
+    }
+}
+
+?>
