@@ -80,9 +80,13 @@ class GetStorageServicePropertiesResult
         );
         $result->_status    = Utilities::tryGetValue($prop, Resources::XTAG_STATUS);
         $result->_url       = Utilities::tryGetValue($parsed, Resources::XTAG_URL);
-        $result->_endpoints = Utilities::tryGetValue(
-            $parsed,
+        $endpoints          = Utilities::tryGetValue(
+            $prop,
             Resources::XTAG_ENDPOINTS
+        );
+        $result->_endpoints = Utilities::tryGetValue(
+            $endpoints,
+            Resources::XTAG_ENDPOINT
         );
         
         return $result;
