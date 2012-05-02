@@ -15,58 +15,56 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   Tests\Framework
+ * @package   WindowsAzure\ServiceManagement\Models
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
  
-namespace Tests\Framework;
-use WindowsAzure\Logger;
-use WindowsAzure\Core\Serialization\XmlSerializer;
-use WindowsAzure\Core\WindowsAzureUtilities;
+namespace WindowsAzure\ServiceManagement\Models;
+use WindowsAzure\Validate;
 
 /**
- * Testbase for all REST proxy tests.
+ * The optional parameters for createAffinityGroup API.
  *
  * @category  Microsoft
- * @package   Tests\Framework
+ * @package   WindowsAzure\ServiceManagement\Models
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @version   Release: @package_version@
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
-class RestProxyTestBase extends \PHPUnit_Framework_TestCase
+class CreateAffinityGroupOptions
 {
-    protected $config;
-    protected $wrapper;
-    protected $xmlSerializer;
+    /**
+     * @var string
+     */
+    private $_description;
     
-    const NOT_SUPPORTED = 'The storage emulator doesn\'t support this API';
-    
-    protected function skipIfEmulated()
+    /**
+     * Gets the description.
+     * 
+     * @return string
+     */
+    public function getDescription()
     {
-        if (WindowsAzureUtilities::isEmulated()) {
-            $this->markTestSkipped(self::NOT_SUPPORTED);
-        }
+        return $this->_description;
     }
     
-    public function __construct($config, $serviceWrapper)
+    /**
+     * Sets the description.
+     * 
+     * @param string $description The description.
+     * 
+     * @return none
+     */
+    public function setDescription($description)
     {
-        $this->config = $config;
-        $this->wrapper = $serviceWrapper;
-        $this->xmlSerializer = new XmlSerializer();
-        Logger::setLogFile('C:\log.txt');
-    }
-    
-    protected function onNotSuccessfulTest(\Exception $e)
-    {
-        parent::onNotSuccessfulTest($e);
+        Validate::isString($description, 'description');
         
-        $this->tearDown();
-        throw $e;
+        $this->_description = $description;
     }
 }
 

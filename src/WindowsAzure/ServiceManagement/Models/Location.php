@@ -15,58 +15,80 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   Tests\Framework
+ * @package   WindowsAzure\ServiceManagement\Models
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
  
-namespace Tests\Framework;
-use WindowsAzure\Logger;
-use WindowsAzure\Core\Serialization\XmlSerializer;
-use WindowsAzure\Core\WindowsAzureUtilities;
+namespace WindowsAzure\ServiceManagement\Models;
 
 /**
- * Testbase for all REST proxy tests.
+ * The location class.
  *
  * @category  Microsoft
- * @package   Tests\Framework
+ * @package   WindowsAzure\ServiceManagement\Models
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @version   Release: @package_version@
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
-class RestProxyTestBase extends \PHPUnit_Framework_TestCase
+class Location
 {
-    protected $config;
-    protected $wrapper;
-    protected $xmlSerializer;
+    /**
+     * @var string
+     */
+    private $_name;
     
-    const NOT_SUPPORTED = 'The storage emulator doesn\'t support this API';
+    /**
+     * @var string
+     */
+    private $_displayName;
     
-    protected function skipIfEmulated()
+    /**
+     * Gets the name.
+     * 
+     * @return string
+     */
+    public function getName()
     {
-        if (WindowsAzureUtilities::isEmulated()) {
-            $this->markTestSkipped(self::NOT_SUPPORTED);
-        }
+        return $this->_name;
     }
     
-    public function __construct($config, $serviceWrapper)
+    /**
+     * Sets the name.
+     * 
+     * @param string $name The name.
+     * 
+     * @return none
+     */
+    public function setName($name)
     {
-        $this->config = $config;
-        $this->wrapper = $serviceWrapper;
-        $this->xmlSerializer = new XmlSerializer();
-        Logger::setLogFile('C:\log.txt');
+        $this->_name = $name;
     }
     
-    protected function onNotSuccessfulTest(\Exception $e)
+    /**
+     * Gets the displayName.
+     * 
+     * @return string
+     */
+    public function getDisplayName()
     {
-        parent::onNotSuccessfulTest($e);
-        
-        $this->tearDown();
-        throw $e;
+        return $this->_displayName;
+    }
+    
+    /**
+     * Sets the displayName.
+     * 
+     * @param string $displayName The displayName.
+     * 
+     * @return none
+     */
+    public function setDisplayName($displayName)
+    {
+        $this->_displayName = $displayName;
     }
 }
 

@@ -15,58 +15,80 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   Tests\Framework
+ * @package   WindowsAzure\ServiceManagement\Models
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
  
-namespace Tests\Framework;
-use WindowsAzure\Logger;
-use WindowsAzure\Core\Serialization\XmlSerializer;
-use WindowsAzure\Core\WindowsAzureUtilities;
+namespace WindowsAzure\ServiceManagement\Models;
 
 /**
- * Testbase for all REST proxy tests.
+ * Basic Windows Azure service properties.
  *
  * @category  Microsoft
- * @package   Tests\Framework
+ * @package   WindowsAzure\ServiceManagement\Models
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @version   Release: @package_version@
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
-class RestProxyTestBase extends \PHPUnit_Framework_TestCase
+class ServiceProperties
 {
-    protected $config;
-    protected $wrapper;
-    protected $xmlSerializer;
+    /**
+     * @var string
+     */
+    private $_url;
     
-    const NOT_SUPPORTED = 'The storage emulator doesn\'t support this API';
+    /**
+     * @var string
+     */
+    private $_serviceName;
     
-    protected function skipIfEmulated()
+    /**
+     * Gets the url.
+     * 
+     * @return string
+     */
+    public function getUrl()
     {
-        if (WindowsAzureUtilities::isEmulated()) {
-            $this->markTestSkipped(self::NOT_SUPPORTED);
-        }
+        return $this->_url;
     }
     
-    public function __construct($config, $serviceWrapper)
+    /**
+     * Sets the url.
+     * 
+     * @param string $url The url.
+     * 
+     * @return none
+     */
+    public function setUrl($url)
     {
-        $this->config = $config;
-        $this->wrapper = $serviceWrapper;
-        $this->xmlSerializer = new XmlSerializer();
-        Logger::setLogFile('C:\log.txt');
+        $this->_url = $url;
     }
     
-    protected function onNotSuccessfulTest(\Exception $e)
+    /**
+     * Gets the serviceName.
+     * 
+     * @return string
+     */
+    public function getServiceName()
     {
-        parent::onNotSuccessfulTest($e);
-        
-        $this->tearDown();
-        throw $e;
+        return $this->_serviceName;
+    }
+    
+    /**
+     * Sets the serviceName.
+     * 
+     * @param string $serviceName The serviceName.
+     * 
+     * @return none
+     */
+    public function setServiceName($serviceName)
+    {
+        $this->_serviceName = $serviceName;
     }
 }
 

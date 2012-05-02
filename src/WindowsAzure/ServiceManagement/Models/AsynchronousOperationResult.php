@@ -15,58 +15,73 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   Tests\Framework
+ * @package   WindowsAzure\ServiceManagement\Models
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
  
-namespace Tests\Framework;
-use WindowsAzure\Logger;
-use WindowsAzure\Core\Serialization\XmlSerializer;
-use WindowsAzure\Core\WindowsAzureUtilities;
+namespace WindowsAzure\ServiceManagement\Models;
+use WindowsAzure\Resources;
+use WindowsAzure\Utilities;
 
 /**
- * Testbase for all REST proxy tests.
+ * The result of an asynchronous operation.
  *
  * @category  Microsoft
- * @package   Tests\Framework
+ * @package   WindowsAzure\ServiceManagement\Models
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @version   Release: @package_version@
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
-class RestProxyTestBase extends \PHPUnit_Framework_TestCase
+class AsynchronousOperationResult
 {
-    protected $config;
-    protected $wrapper;
-    protected $xmlSerializer;
+    /**
+     * @var string
+     */
+    private $_requestId;
     
-    const NOT_SUPPORTED = 'The storage emulator doesn\'t support this API';
-    
-    protected function skipIfEmulated()
+    /**
+     * Creates new AsynchronousOperationResult from response HTTP headers.
+     * 
+     * @param array $headers The HTTP response headers array.
+     * 
+     * @return AsynchronousOperationResult 
+     */
+    public function create($headers)
     {
-        if (WindowsAzureUtilities::isEmulated()) {
-            $this->markTestSkipped(self::NOT_SUPPORTED);
-        }
-    }
-    
-    public function __construct($config, $serviceWrapper)
-    {
-        $this->config = $config;
-        $this->wrapper = $serviceWrapper;
-        $this->xmlSerializer = new XmlSerializer();
-        Logger::setLogFile('C:\log.txt');
-    }
-    
-    protected function onNotSuccessfulTest(\Exception $e)
-    {
-        parent::onNotSuccessfulTest($e);
+        $result             = new AsynchronousOperationResult();
+        $result->_requestId = Utilities::tryGetValue(
+            $headers,
+            Resources::X_MS_REQUEST_ID
+        );
         
-        $this->tearDown();
-        throw $e;
+        return $result;
+    }
+    
+    /**
+     * Gets the requestId.
+     * 
+     * @return string
+     */
+    public function getrequestId()
+    {
+        return $this->_requestId;
+    }
+    
+    /**
+     * Sets the requestId.
+     * 
+     * @param string $requestId The request Id of the asynchronous operation.
+     * 
+     * @return none
+     */
+    public function setrequestId($requestId)
+    {
+        $this->_requestId = $requestId;
     }
 }
 

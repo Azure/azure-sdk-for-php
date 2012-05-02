@@ -15,59 +15,40 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   Tests\Framework
+ * @package   WindowsAzure\ServiceManagement\Models
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
  
-namespace Tests\Framework;
-use WindowsAzure\Logger;
-use WindowsAzure\Core\Serialization\XmlSerializer;
-use WindowsAzure\Core\WindowsAzureUtilities;
+namespace WindowsAzure\ServiceManagement\Models;
 
 /**
- * Testbase for all REST proxy tests.
+ * Available data center locations on Windows Azure.
  *
  * @category  Microsoft
- * @package   Tests\Framework
+ * @package   WindowsAzure\ServiceManagement\Models
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @version   Release: @package_version@
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
-class RestProxyTestBase extends \PHPUnit_Framework_TestCase
+class Locations
 {
-    protected $config;
-    protected $wrapper;
-    protected $xmlSerializer;
-    
-    const NOT_SUPPORTED = 'The storage emulator doesn\'t support this API';
-    
-    protected function skipIfEmulated()
-    {
-        if (WindowsAzureUtilities::isEmulated()) {
-            $this->markTestSkipped(self::NOT_SUPPORTED);
-        }
-    }
-    
-    public function __construct($config, $serviceWrapper)
-    {
-        $this->config = $config;
-        $this->wrapper = $serviceWrapper;
-        $this->xmlSerializer = new XmlSerializer();
-        Logger::setLogFile('C:\log.txt');
-    }
-    
-    protected function onNotSuccessfulTest(\Exception $e)
-    {
-        parent::onNotSuccessfulTest($e);
-        
-        $this->tearDown();
-        throw $e;
-    }
+    const ANYWHERE_US      = 'Anywhere US';
+    const NORTH_CENTRAL_US = 'North Central US';
+    const SOUTH_CENTRAL_US = 'South Central US';
+    const WEST_US          = 'West US';
+    const EAST_US          = 'East US';
+    const ANYWHERE_EUROPE  = 'Anywhere Europe';
+    const WEST_EUROPE      = 'West Europe';
+    const NORTH_EUROPE     = 'North Europe';
+    const ANYWHERE_ASIA    = 'Anywhere Asia';
+    const SOUTHEAST_ASIA   = 'Southeast Asia';
+    const EAST_ASIA        = 'East Asia';
+    const COUNT            = 11;
 }
 
 ?>

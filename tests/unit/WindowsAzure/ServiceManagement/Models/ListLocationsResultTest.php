@@ -15,58 +15,45 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   Tests\Framework
+ * @package   Tests\Unit\WindowsAzure\ServiceManagement\Models
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
- 
-namespace Tests\Framework;
-use WindowsAzure\Logger;
-use WindowsAzure\Core\Serialization\XmlSerializer;
-use WindowsAzure\Core\WindowsAzureUtilities;
+
+namespace Tests\Unit\WindowsAzure\ServiceManagement\Models;
+use WindowsAzure\ServiceManagement\Models\ListLocationsResult;
 
 /**
- * Testbase for all REST proxy tests.
+ * Unit tests for class ListLocationsResult
  *
  * @category  Microsoft
- * @package   Tests\Framework
+ * @package   Tests\Unit\WindowsAzure\ServiceManagement\Models
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @version   Release: @package_version@
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
-class RestProxyTestBase extends \PHPUnit_Framework_TestCase
+class ListLocationsResultTest extends \PHPUnit_Framework_TestCase
 {
-    protected $config;
-    protected $wrapper;
-    protected $xmlSerializer;
-    
-    const NOT_SUPPORTED = 'The storage emulator doesn\'t support this API';
-    
-    protected function skipIfEmulated()
+    /**
+     * @covers WindowsAzure\ServiceManagement\Models\ListLocationsResult::setLocations
+     * @covers WindowsAzure\ServiceManagement\Models\ListLocationsResult::getLocations
+     */
+    public function testSetLocations()
     {
-        if (WindowsAzureUtilities::isEmulated()) {
-            $this->markTestSkipped(self::NOT_SUPPORTED);
-        }
-    }
-    
-    public function __construct($config, $serviceWrapper)
-    {
-        $this->config = $config;
-        $this->wrapper = $serviceWrapper;
-        $this->xmlSerializer = new XmlSerializer();
-        Logger::setLogFile('C:\log.txt');
-    }
-    
-    protected function onNotSuccessfulTest(\Exception $e)
-    {
-        parent::onNotSuccessfulTest($e);
+        // Setup
+        $result = new ListLocationsResult();
+        $expected = array('Anywhere US', 'West US');
         
-        $this->tearDown();
-        throw $e;
+        // Test
+        $result->setLocations($expected);
+        
+        
+        // Assert
+        $this->assertEquals($expected, $result->getLocations());
     }
 }
 
