@@ -55,7 +55,7 @@ class ServiceRestProxyTest extends \PHPUnit_Framework_TestCase
         $xmlSerializer = new XmlSerializer();
         
         // Test
-        $actual = new ServiceRestProxy($channel, $url, $xmlSerializer);
+        $actual = new ServiceRestProxy($channel, $url, '', $xmlSerializer);
         
         // Assert
         $this->assertTrue(isset($actual));
