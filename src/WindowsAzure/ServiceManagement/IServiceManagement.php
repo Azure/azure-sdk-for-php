@@ -41,11 +41,11 @@ interface IServiceManagement extends FilterableService
     /**
      * Lists the storage accounts available under the current subscription.
      * 
-     * @return Models\ListStorageAccountsResult
+     * @return Models\ListStorageServicesResult
      * 
      * @see http://msdn.microsoft.com/en-us/library/windowsazure/ee460787.aspx
      */
-    public function listStorageAccounts();
+    public function listStorageServices();
     
     /**
      * Returns the system properties for the specified storage account.
@@ -56,11 +56,11 @@ interface IServiceManagement extends FilterableService
      * 
      * @param string $name The storage account name.
      * 
-     * @return Models\GetStorageAccountPropertiesResult
+     * @return Models\GetStorageServicePropertiesResult
      * 
      * @see http://msdn.microsoft.com/en-us/library/windowsazure/ee460802.aspx 
      */
-    public function getStorageAccountProperties($name);
+    public function getStorageServiceProperties($name);
     
     /**
      * Returns the primary and secondary access keys for the specified storage 
@@ -68,11 +68,11 @@ interface IServiceManagement extends FilterableService
      * 
      * @param string $name The storage account name.
      * 
-     * @return Models\GetStorageAccountKeysResult
+     * @return Models\GetStorageServiceKeysResult
      * 
      * @see http://msdn.microsoft.com/en-us/library/windowsazure/ee460785.aspx 
      */
-    public function getStorageAccountKeys($name);
+    public function getStorageServiceKeys($name);
     
     
     /**
@@ -82,11 +82,11 @@ interface IServiceManagement extends FilterableService
      * @param string $name    The storage account name.
      * @param string $keyType Specifies which key to regenerate.
      * 
-     * @return Models\GetStorageAccountKeysResult
+     * @return Models\GetStorageServiceKeysResult
      * 
      * @see http://msdn.microsoft.com/en-us/library/windowsazure/ee460795.aspx
      */
-    public function regenerateStorageAccountKeys($name, $keyType);
+    public function regenerateStorageServiceKeys($name, $keyType);
     
     /**
      * Creates a new storage account in Windows Azure.
@@ -103,13 +103,13 @@ interface IServiceManagement extends FilterableService
      * account specified as a base64-encoded string. The name may be up to 100
      * characters in length. The name can be used identify the storage account for
      * your tracking purposes.
-     * @param Models\CreateStorageAccountOptions $options The optional parameters.
+     * @param Models\CreateStorageServiceOptions $options The optional parameters.
      * 
      * @return Models\AsynchronousOperationResult
      * 
      * @see http://msdn.microsoft.com/en-us/library/windowsazure/hh264518.aspx 
      */
-    public function createStorageAccount($name, $label, $options);
+    public function createStorageService($name, $label, $options);
     
     /**
      * Deletes the specified storage account from Windows Azure.
@@ -120,20 +120,20 @@ interface IServiceManagement extends FilterableService
      * 
      * @see http://msdn.microsoft.com/en-us/library/windowsazure/hh264517.aspx 
      */
-    public function deleteStorageAccount($name);
+    public function deleteStorageService($name);
     
     /**
      * Updates the label and/or the description for a storage account in Windows 
      * Azure.
      * 
      * @param string                             $name    The storage account name.
-     * @param Models\UpdateStorageAccountOptions $options The optional parameters.
+     * @param Models\UpdateStorageServiceOptions $options The optional parameters.
      * 
      * @return none
      * 
      * @see http://msdn.microsoft.com/en-us/library/windowsazure/hh264516.aspx 
      */
-    public function updateStorageAccount($name, $options);
+    public function updateStorageService($name, $options);
     
     /**
      * Lists the affinity groups associated with the specified subscription.

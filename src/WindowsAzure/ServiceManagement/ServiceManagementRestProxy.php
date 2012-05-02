@@ -34,12 +34,12 @@ use WindowsAzure\ServiceManagement\Models\ListAffinityGroupsResult;
 use WindowsAzure\ServiceManagement\Models\GetAffinityGroupPropertiesResult;
 use WindowsAzure\ServiceManagement\Models\ListLocationsResult;
 use WindowsAzure\ServiceManagement\Models\StorageService;
-use WindowsAzure\ServiceManagement\Models\ListStorageAccountsResult;
+use WindowsAzure\ServiceManagement\Models\ListStorageServicesResult;
 use WindowsAzure\ServiceManagement\Models\GetOperationStatusResult;
 use WindowsAzure\ServiceManagement\Models\AsynchronousOperationResult;
-use WindowsAzure\ServiceManagement\Models\UpdateStorageAccountOptions;
-use WindowsAzure\ServiceManagement\Models\GetStorageAccountPropertiesResult;
-use WindowsAzure\ServiceManagement\Models\GetStorageAccountKeysResult;
+use WindowsAzure\ServiceManagement\Models\UpdateStorageServiceOptions;
+use WindowsAzure\ServiceManagement\Models\GetStorageServicePropertiesResult;
+use WindowsAzure\ServiceManagement\Models\GetStorageServiceKeysResult;
 
 /**
  * This class constructs HTTP requests and receive HTTP responses for service 
@@ -161,11 +161,11 @@ class ServiceManagementRestProxy extends RestProxy
     /**
      * Lists the storage accounts available under the current subscription.
      * 
-     * @return Models\ListStorageAccountsResult
+     * @return Models\ListStorageServicesResult
      * 
      * @see http://msdn.microsoft.com/en-us/library/windowsazure/ee460787.aspx
      */
-    public function listStorageAccounts()
+    public function listStorageServices()
     {
         $context = new HttpCallContext();
         $context->setMethod(Resources::HTTP_GET);
@@ -175,7 +175,7 @@ class ServiceManagementRestProxy extends RestProxy
         $response   = $this->sendContext($context);
         $serialized = $this->dataSerializer->unserialize($response->getBody());
         
-        return ListStorageAccountsResult::create($serialized);
+        return ListStorageServicesResult::create($serialized);
     }
     
     /**
@@ -187,11 +187,11 @@ class ServiceManagementRestProxy extends RestProxy
      * 
      * @param string $name The storage account name.
      * 
-     * @return Models\GetStorageAccountPropertiesResult
+     * @return Models\GetStorageServicePropertiesResult
      * 
      * @see http://msdn.microsoft.com/en-us/library/windowsazure/ee460802.aspx 
      */
-    public function getStorageAccountProperties($name)
+    public function getStorageServiceProperties($name)
     {
         Validate::isString($name, 'name');
         Validate::notNullOrEmpty($name, 'name');
@@ -204,7 +204,7 @@ class ServiceManagementRestProxy extends RestProxy
         $response = $this->sendContext($context);
         $parsed   = $this->dataSerializer->unserialize($response->getBody());
         
-        return GetStorageAccountPropertiesResult::create($parsed);
+        return GetStorageServicePropertiesResult::create($parsed);
     }
     
     /**
@@ -213,11 +213,11 @@ class ServiceManagementRestProxy extends RestProxy
      * 
      * @param string $name The storage account name.
      * 
-     * @return Models\GetStorageAccountKeysResult
+     * @return Models\GetStorageServiceKeysResult
      * 
      * @see http://msdn.microsoft.com/en-us/library/windowsazure/ee460785.aspx 
      */
-    public function getStorageAccountKeys($name)
+    public function getStorageServiceKeys($name)
     {
         Validate::isString($name, 'name');
         Validate::notNullOrEmpty($name, 'name');
@@ -230,7 +230,7 @@ class ServiceManagementRestProxy extends RestProxy
         $response = $this->sendContext($context);
         $parsed   = $this->dataSerializer->unserialize($response->getBody());
         
-        return GetStorageAccountKeysResult::create($parsed);
+        return GetStorageServiceKeysResult::create($parsed);
     }
     
     /**
@@ -240,11 +240,11 @@ class ServiceManagementRestProxy extends RestProxy
      * @param string $name    The storage account name.
      * @param string $keyType Specifies which key to regenerate.
      * 
-     * @return Models\GetStorageAccountKeysResult
+     * @return Models\GetStorageServiceKeysResult
      * 
      * @see http://msdn.microsoft.com/en-us/library/windowsazure/ee460795.aspx
      */
-    public function regenerateStorageAccountKeys($name, $keyType)
+    public function regenerateStorageServiceKeys($name, $keyType)
     {
         Validate::isString($name, 'name');
         Validate::notNullOrEmpty($name, 'name');
@@ -272,7 +272,7 @@ class ServiceManagementRestProxy extends RestProxy
         $response = $this->sendContext($context);
         $parsed   = $this->dataSerializer->unserialize($response->getBody());
         
-        return GetStorageAccountKeysResult::create($parsed);
+        return GetStorageServiceKeysResult::create($parsed);
     }
     
     /**
@@ -290,13 +290,13 @@ class ServiceManagementRestProxy extends RestProxy
      * account specified as a base64-encoded string. The name may be up to 100
      * characters in length. The name can be used identify the storage account for
      * your tracking purposes.
-     * @param Models\CreateStorageAccountOptions $options The optional parameters.
+     * @param Models\CreateStorageServiceOptions $options The optional parameters.
      * 
      * @return Models\AsynchronousOperationResult
      * 
      * @see http://msdn.microsoft.com/en-us/library/windowsazure/hh264518.aspx 
      */
-    public function createStorageAccount($name, $label, $options)
+    public function createStorageService($name, $label, $options)
     {
         Validate::isString($name, 'name');
         Validate::notNullOrEmpty($name, 'name');
@@ -345,7 +345,7 @@ class ServiceManagementRestProxy extends RestProxy
      * 
      * @see http://msdn.microsoft.com/en-us/library/windowsazure/hh264517.aspx 
      */
-    public function deleteStorageAccount($name)
+    public function deleteStorageService($name)
     {
         Validate::isString($name, 'name');
         Validate::notNullOrEmpty($name, 'name');
@@ -363,13 +363,13 @@ class ServiceManagementRestProxy extends RestProxy
      * Azure.
      * 
      * @param string                             $name    The storage account name.
-     * @param Models\UpdateStorageAccountOptions $options The optional parameters.
+     * @param Models\UpdateStorageServiceOptions $options The optional parameters.
      * 
      * @return none
      * 
      * @see http://msdn.microsoft.com/en-us/library/windowsazure/hh264516.aspx 
      */
-    public function updateStorageAccount($name, $options)
+    public function updateStorageService($name, $options)
     {
         Validate::isString($name, 'name');
         Validate::notNullOrEmpty($name, 'name');

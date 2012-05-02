@@ -28,7 +28,7 @@ use WindowsAzure\Core\Configuration;
 use WindowsAzure\ServiceManagement\ServiceManagementSettings;
 use WindowsAzure\ServiceManagement\ServiceManagementService;
 use WindowsAzure\Core\WindowsAzureUtilities;
-use WindowsAzure\ServiceManagement\Models\CreateStorageAccountOptions;
+use WindowsAzure\ServiceManagement\Models\CreateStorageServiceOptions;
 use WindowsAzure\ServiceManagement\Models\OperationStatus;
 use WindowsAzure\ServiceManagement\Models\Locations;
 
@@ -45,7 +45,7 @@ use WindowsAzure\ServiceManagement\Models\Locations;
  */
 class ServiceManagementRestProxyTestBase extends RestProxyTestBase
 {
-    protected $createdStorageAccounts;
+    protected $createdStorageServices;
     protected $createdAffinityGroups;
     protected $storageCount;
     protected $affinityGroupCount;
@@ -72,9 +72,9 @@ class ServiceManagementRestProxyTestBase extends RestProxyTestBase
         
         parent::__construct($config, $serviceManagementWrapper);
         
-        $this->createdStorageAccounts = array();
+        $this->createdStorageServices = array();
         $this->createdAffinityGroups = array();
-        $this->storageCount = count($this->wrapper->listStorageAccounts()->getStorageAccounts());
+        $this->storageCount = count($this->wrapper->listStorageServices()->getStorageServices());
         $this->affinityGroupCount = count($this->wrapper->listAffinityGroups()->getAffinityGroups());
     }
 
@@ -124,15 +124,15 @@ class ServiceManagementRestProxyTestBase extends RestProxyTestBase
         }
     }
     
-    public function createStorageAccount($name, $options = null)
+    public function createStorageService($name, $options = null)
     {
         $label = base64_encode($name);
-        $options = new CreateStorageAccountOptions();
+        $options = new CreateStorageServiceOptions();
         $options->setLocation('West US');
         
-        $result = $this->wrapper->createStorageAccount($name, $label, $options);
+        $result = $this->wrapper->createStorageService($name, $label, $options);
         $this->blockUntilAsyncSucceed($result->getRequestId());
-        $this->createdStorageAccounts[] = $name;
+        $this->createdStorageServices[] = $name;
     }
     
     protected function blockUntilAsyncSucceed($requestId)
@@ -148,13 +148,13 @@ class ServiceManagementRestProxyTestBase extends RestProxyTestBase
         $this->assertEquals(OperationStatus::SUCCEEDED, $status);
     }
     
-    public function storageAccountExists($name)
+    public function storageServiceExists($name)
     {
-        $result = $this->wrapper->listStorageAccounts();
-        $storageAccounts = $result->getStorageAccounts();
+        $result = $this->wrapper->listStorageServices();
+        $storageServices = $result->getStorageServices();
         
-        foreach ($storageAccounts as $storageAccount) {
-            if ($storageAccount->getServiceName() == $name) {
+        foreach ($storageServices as $storageService) {
+            if ($storageService->getServiceName() == $name) {
                 return true;
             }
         }
@@ -162,16 +162,16 @@ class ServiceManagementRestProxyTestBase extends RestProxyTestBase
         return false;
     }
     
-    public function deleteStorageAccount($name)
+    public function deleteStorageService($name)
     {
-        $this->wrapper->deleteStorageAccount($name);
+        $this->wrapper->deleteStorageService($name);
     }
     
-    public function safeDeleteStorageAccount($name)
+    public function safeDeleteStorageService($name)
     {
         try
         {
-            $this->deleteStorageAccount($name);
+            $this->deleteStorageService($name);
         }
         catch (\Exception $e)
         {
@@ -184,8 +184,8 @@ class ServiceManagementRestProxyTestBase extends RestProxyTestBase
     {
         parent::tearDown();
         
-        foreach ($this->createdStorageAccounts as $value) {
-            $this->safeDeleteStorageAccount($value);
+        foreach ($this->createdStorageServices as $value) {
+            $this->safeDeleteStorageService($value);
         }
         
         foreach ($this->createdAffinityGroups as $value) {
