@@ -27,7 +27,7 @@ use WindowsAzure\Utilities;
 use WindowsAzure\Resources;
 
 /**
- * The result of calling getStorageAccountProperties API.
+ * The result of calling getStorageServiceProperties API.
  *
  * @category  Microsoft
  * @package   WindowsAzure\ServiceManagement\Models
@@ -37,7 +37,7 @@ use WindowsAzure\Resources;
  * @version   Release: @package_version@
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
-class GetStorageAccountPropertiesResult
+class GetStorageServicePropertiesResult
 {
     /**
      * @var StorageService
@@ -60,15 +60,15 @@ class GetStorageAccountPropertiesResult
     private $_status;
     
     /**
-     * Creates GetStorageAccountPropertiesResult from parsed response.
+     * Creates GetStorageServicePropertiesResult from parsed response.
      * 
      * @param array $parsed The parsed response in array representation.
      * 
-     * @return GetStorageAccountPropertiesResult 
+     * @return GetStorageServicePropertiesResult 
      */
     public static function create($parsed)
     {
-        $result = new GetStorageAccountPropertiesResult();
+        $result = new GetStorageServicePropertiesResult();
         $prop   = Utilities::tryGetValue(
             $parsed,
             Resources::XTAG_STORAGE_SERVICE_PROPERTIES
@@ -80,9 +80,13 @@ class GetStorageAccountPropertiesResult
         );
         $result->_status    = Utilities::tryGetValue($prop, Resources::XTAG_STATUS);
         $result->_url       = Utilities::tryGetValue($parsed, Resources::XTAG_URL);
-        $result->_endpoints = Utilities::tryGetValue(
-            $parsed,
+        $endpoints          = Utilities::tryGetValue(
+            $prop,
             Resources::XTAG_ENDPOINTS
+        );
+        $result->_endpoints = Utilities::tryGetValue(
+            $endpoints,
+            Resources::XTAG_ENDPOINT
         );
         
         return $result;

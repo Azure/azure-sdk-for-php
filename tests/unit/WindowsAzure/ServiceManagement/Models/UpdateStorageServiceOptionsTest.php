@@ -23,10 +23,10 @@
  */
 
 namespace Tests\Unit\WindowsAzure\ServiceManagement\Models;
-use WindowsAzure\ServiceManagement\Models\UpdateStorageAccountOptions;
+use WindowsAzure\ServiceManagement\Models\UpdateStorageServiceOptions;
 
 /**
- * Unit tests for class UpdateStorageAccountOptions
+ * Unit tests for class UpdateStorageServiceOptions
  *
  * @category  Microsoft
  * @package   Tests\Unit\WindowsAzure\ServiceManagement\Models
@@ -36,16 +36,16 @@ use WindowsAzure\ServiceManagement\Models\UpdateStorageAccountOptions;
  * @version   Release: @package_version@
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
-class UpdateStorageAccountOptionsTest extends \PHPUnit_Framework_TestCase
+class UpdateStorageServiceOptionsTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @covers WindowsAzure\ServiceManagement\Models\UpdateStorageAccountOptions::setDescription
-     * @covers WindowsAzure\ServiceManagement\Models\UpdateStorageAccountOptions::getDescription
+     * @covers WindowsAzure\ServiceManagement\Models\UpdateStorageServiceOptions::setDescription
+     * @covers WindowsAzure\ServiceManagement\Models\UpdateStorageServiceOptions::getDescription
      */
     public function testSetDescription()
     {
         // Setup
-        $options = new UpdateStorageAccountOptions();
+        $options = new UpdateStorageServiceOptions();
         $expected = 'Description';
         
         // Test
@@ -56,13 +56,13 @@ class UpdateStorageAccountOptionsTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers WindowsAzure\ServiceManagement\Models\UpdateStorageAccountOptions::setLabel
-     * @covers WindowsAzure\ServiceManagement\Models\UpdateStorageAccountOptions::getLabel
+     * @covers WindowsAzure\ServiceManagement\Models\UpdateStorageServiceOptions::setLabel
+     * @covers WindowsAzure\ServiceManagement\Models\UpdateStorageServiceOptions::getLabel
      */
     public function testSetLabel()
     {
         // Setup
-        $options = new UpdateStorageAccountOptions();
+        $options = new UpdateStorageServiceOptions();
         $expected = 'Label';
         
         // Test

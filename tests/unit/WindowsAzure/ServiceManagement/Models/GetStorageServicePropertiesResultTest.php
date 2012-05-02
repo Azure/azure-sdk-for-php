@@ -23,11 +23,11 @@
  */
 
 namespace Tests\Unit\WindowsAzure\ServiceManagement\Models;
-use WindowsAzure\ServiceManagement\Models\GetStorageAccountPropertiesResult;
+use WindowsAzure\ServiceManagement\Models\GetStorageServicePropertiesResult;
 use WindowsAzure\ServiceManagement\Models\StorageService;
 
 /**
- * Unit tests for class GetStorageAccountPropertiesResult
+ * Unit tests for class GetStorageServicePropertiesResult
  *
  * @category  Microsoft
  * @package   Tests\Unit\WindowsAzure\ServiceManagement\Models
@@ -37,17 +37,17 @@ use WindowsAzure\ServiceManagement\Models\StorageService;
  * @version   Release: @package_version@
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
-class GetStorageAccountPropertiesResultTest extends \PHPUnit_Framework_TestCase
+class GetStorageServicePropertiesResultTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @covers WindowsAzure\ServiceManagement\Models\GetStorageAccountPropertiesResult::setStorageService
-     * @covers WindowsAzure\ServiceManagement\Models\GetStorageAccountPropertiesResult::getStorageService
+     * @covers WindowsAzure\ServiceManagement\Models\GetStorageServicePropertiesResult::setStorageService
+     * @covers WindowsAzure\ServiceManagement\Models\GetStorageServicePropertiesResult::getStorageService
      */
     public function testSetStorageService()
     {
         // Setup
         $expected = new StorageService();
-        $result = new GetStorageAccountPropertiesResult();
+        $result = new GetStorageServicePropertiesResult();
         
         // Test
         $result->setStorageService($expected);
@@ -57,14 +57,14 @@ class GetStorageAccountPropertiesResultTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers WindowsAzure\ServiceManagement\Models\GetStorageAccountPropertiesResult::setUrl
-     * @covers WindowsAzure\ServiceManagement\Models\GetStorageAccountPropertiesResult::getUrl
+     * @covers WindowsAzure\ServiceManagement\Models\GetStorageServicePropertiesResult::setUrl
+     * @covers WindowsAzure\ServiceManagement\Models\GetStorageServicePropertiesResult::getUrl
      */
     public function testSetUrl()
     {
         // Setup
         $expected = 'url';
-        $result = new GetStorageAccountPropertiesResult();
+        $result = new GetStorageServicePropertiesResult();
         
         // Test
         $result->setUrl($expected);
@@ -74,14 +74,14 @@ class GetStorageAccountPropertiesResultTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers WindowsAzure\ServiceManagement\Models\GetStorageAccountPropertiesResult::setEndpoints
-     * @covers WindowsAzure\ServiceManagement\Models\GetStorageAccountPropertiesResult::getEndpoints
+     * @covers WindowsAzure\ServiceManagement\Models\GetStorageServicePropertiesResult::setEndpoints
+     * @covers WindowsAzure\ServiceManagement\Models\GetStorageServicePropertiesResult::getEndpoints
      */
     public function testSetEndpoints()
     {
         // Setup
         $expected = array();
-        $result = new GetStorageAccountPropertiesResult();
+        $result = new GetStorageServicePropertiesResult();
         
         // Test
         $result->setEndpoints($expected);
@@ -91,14 +91,14 @@ class GetStorageAccountPropertiesResultTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers WindowsAzure\ServiceManagement\Models\GetStorageAccountPropertiesResult::setStatus
-     * @covers WindowsAzure\ServiceManagement\Models\GetStorageAccountPropertiesResult::getStatus
+     * @covers WindowsAzure\ServiceManagement\Models\GetStorageServicePropertiesResult::setStatus
+     * @covers WindowsAzure\ServiceManagement\Models\GetStorageServicePropertiesResult::getStatus
      */
     public function testSetStatus()
     {
         // Setup
         $expected = 'status';
-        $result = new GetStorageAccountPropertiesResult();
+        $result = new GetStorageServicePropertiesResult();
         
         // Test
         $result->setStatus($expected);

@@ -15,44 +15,85 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   Tests\Unit\WindowsAzure\ServiceManagement\Models
+ * @package   WindowsAzure\ServiceManagement\Models
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
-
-namespace Tests\Unit\WindowsAzure\ServiceManagement\Models;
-use WindowsAzure\ServiceManagement\Models\ListStorageAccountsResult;
+ 
+namespace WindowsAzure\ServiceManagement\Models;
+use WindowsAzure\Validate;
 
 /**
- * Unit tests for class ListStorageAccountsResult
+ * The optional parameters for updateStorageService API.
  *
  * @category  Microsoft
- * @package   Tests\Unit\WindowsAzure\ServiceManagement\Models
+ * @package   WindowsAzure\ServiceManagement\Models
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @version   Release: @package_version@
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
-class ListStorageAccountsResultTest extends \PHPUnit_Framework_TestCase
+class UpdateStorageServiceOptions
 {
     /**
-     * @covers WindowsAzure\ServiceManagement\Models\ListStorageAccountsResult::setStorageAccounts
-     * @covers WindowsAzure\ServiceManagement\Models\ListStorageAccountsResult::getStorageAccounts
+     * @var string
      */
-    public function testSetStorageAccounts()
+    private $_label;
+    
+    /**
+     * @var string
+     */
+    private $_description;
+    
+    /**
+     * Gets the label.
+     * 
+     * @return string
+     */
+    public function getLabel()
     {
-        // Setup
-        $expected = array();
-        $result = new ListStorageAccountsResult();
+        return $this->_label;
+    }
+    
+    /**
+     * Sets the label.
+     * 
+     * @param string $label The label.
+     * 
+     * @return none
+     */
+    public function setLabel($label)
+    {
+        Validate::isString($label, 'label');
         
-        // Test
-        $result->setStorageAccounts($expected);
+        $this->_label = $label;
+    }
+    
+    /**
+     * Gets the description.
+     * 
+     * @return string
+     */
+    public function getDescription()
+    {
+        return $this->_description;
+    }
+    
+    /**
+     * Sets the description.
+     * 
+     * @param string $description The description.
+     * 
+     * @return none
+     */
+    public function setDescription($description)
+    {
+        Validate::isString($description, 'description');
         
-        // Assert
-        $this->assertEquals($expected, $result->getStorageAccounts());
+        $this->_description = $description;
     }
 }
 

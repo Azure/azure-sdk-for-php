@@ -27,7 +27,7 @@ use WindowsAzure\Resources;
 use WindowsAzure\Utilities;
 
 /**
- * The result of calling getStorageAccountKeys and regenerateStorageAccountKeys API.
+ * The result of calling getStorageServiceKeys and regenerateStorageServiceKeys API.
  *
  * @category  Microsoft
  * @package   WindowsAzure\ServiceManagement\Models
@@ -37,7 +37,7 @@ use WindowsAzure\Utilities;
  * @version   Release: @package_version@
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
-class GetStorageAccountKeysResult
+class GetStorageServiceKeysResult
 {
     /**
      * @var string
@@ -55,15 +55,15 @@ class GetStorageAccountKeysResult
     private $_secondary;
     
     /**
-     * Creates new GetStorageAccountKeysResult object from parsed response.
+     * Creates new GetStorageServiceKeysResult object from parsed response.
      * 
      * @param array $parsed The HTTP parsed response into array representation.
      * 
-     * @return GetStorageAccountKeysResult
+     * @return GetStorageServiceKeysResult
      */
     public static function create($parsed)
     {
-        $result             = new GetStorageAccountKeysResult();
+        $result             = new GetStorageServiceKeysResult();
         $keys               = Utilities::tryGetValue(
             $parsed,
             Resources::XTAG_STORAGE_SERVICE_KEYS

@@ -27,7 +27,7 @@ use WindowsAzure\Utilities;
 use WindowsAzure\Resources;
 
 /**
- * The result of calling listStorageAccounts API.
+ * The result of calling listStorageServices API.
  *
  * @category  Microsoft
  * @package   WindowsAzure\ServiceManagement\Models
@@ -37,25 +37,25 @@ use WindowsAzure\Resources;
  * @version   Release: @package_version@
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
-class ListStorageAccountsResult
+class ListStorageServicesResult
 {
     /**
      * @var array
      */
-    private $_storageAccounts;
+    private $_storageServices;
     
     /**
-     * Creates new ListStorageAccountsResult from parsed response body.
+     * Creates new ListStorageServicesResult from parsed response body.
      * 
      * @param array $parsed The parsed response body.
      * 
-     * @return ListStorageAccountsResult
+     * @return ListStorageServicesResult
      */
     public static function create($parsed)
     {
-        $result = new ListStorageAccountsResult();
+        $result = new ListStorageServicesResult();
         
-        $result->_storageAccounts = array();
+        $result->_storageServices = array();
         $entries                  = Utilities::tryGetArray(
             Resources::XTAG_STORAGE_SERVICE,
             $parsed
@@ -69,7 +69,7 @@ class ListStorageAccountsResult
             $properties->setUrl(
                 Utilities::tryGetValue($value, Resources::XTAG_URL)
             );
-            $result->_storageAccounts[] = $properties;
+            $result->_storageServices[] = $properties;
         }
         
         return $result;
@@ -80,21 +80,21 @@ class ListStorageAccountsResult
      * 
      * @return array
      */
-    public function getStorageAccounts()
+    public function getStorageServices()
     {
-        return $this->_storageAccounts;
+        return $this->_storageServices;
     }
     
     /**
      * Sets storage accounts.
      * 
-     * @param array $storageAccounts The storage accounts.
+     * @param array $storageServices The storage accounts.
      * 
      * @return none
      */
-    public function setStorageAccounts($storageAccounts)
+    public function setStorageServices($storageServices)
     {
-        $this->_storageAccounts = $storageAccounts;
+        $this->_storageServices = $storageServices;
     }
 }
 
