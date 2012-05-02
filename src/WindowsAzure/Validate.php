@@ -128,6 +128,24 @@ class Validate
     }
     
     /**
+     * Returns whether the variable is an empty or null string. 
+     * 
+     * @param string $var value.
+     * 
+     * @return boolean
+     */
+    public static function isNullOrEmptyString($var)
+    {
+        try {
+            (string)$var;
+        } catch (\Exception $e) {
+            return false; 
+        }
+        
+        return (!isset($var) || trim($var)==='');
+    }
+    
+    /**
      * Throws exception if the provided condition is not satisfied.
      *
      * @param bool   $isSatisfied    condition result.

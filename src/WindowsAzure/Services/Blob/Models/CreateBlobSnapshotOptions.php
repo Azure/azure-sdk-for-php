@@ -1,0 +1,151 @@
+<?php
+
+/**
+ * LICENSE: Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ * 
+ * PHP version 5
+ *
+ * @category  Microsoft
+ * @package   WindowsAzure\Services\Blob\Models
+ * @author    Azure PHP SDK <azurephpsdk@microsoft.com>
+ * @copyright 2012 Microsoft Corporation
+ * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
+ * @link      http://pear.php.net/package/azure-sdk-for-php
+ */
+ 
+namespace WindowsAzure\Services\Blob\Models;
+use WindowsAzure\Validate;
+
+/**
+ * optional parameters for CopyBlobOptions wrapper
+ *
+ * @category  Microsoft
+ * @package   PEAR2\WindowsAzure\Services\Blob\Models
+ * @author    Azure PHP SDK <azurephpsdk@microsoft.com>
+ * @copyright 2012 Microsoft Corporation
+ * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
+ * @version   Release: @package_version@
+ * @link      http://pear.php.net/package/azure-sdk-for-php
+ */
+class CreateBlobSnapshotOptions extends BlobServiceOptions
+{
+    /**
+     * @var array
+     */
+    private $_metadata;
+    
+    /**
+     * @var \AccessCondition
+     */
+    private $_accessCondition;
+    
+    /**
+     * @var string
+     */
+    private $_leaseId;
+     
+    /**
+     * @var string
+     */
+    private $_blobType;
+    
+    /**
+     * Gets blob type.
+     * 
+     * @return string. 
+     */
+    public function getBlobType()
+    {
+        return $this->_blobType;
+    }
+    
+    /**
+     * Sets blob type. 
+     * 
+     * @param string $blobType value. 
+     *
+     * @return none.
+     */
+    public function setBlobType($blobType)
+    {
+        $this->_blobType = $blobType;
+    }
+    
+    /**
+     * Gets metadata.
+     *
+     * @return array.
+     */
+    public function getMetadata()
+    {
+        return $this->_metadata;
+    }
+
+    /**
+     * Sets metadata.
+     *
+     * @param array $metadata value.
+     *
+     * @return none.
+     */
+    public function setMetadata($metadata)
+    {
+        $this->_metadata = $metadata;
+    }
+    
+    /**
+     * Gets access condition.
+     * 
+     * @return \AccessCondition.
+     */
+    public function getAccessCondition()
+    {
+        return $this->_accessCondition;
+    }
+    
+    /**
+     * Sets access condition.
+     * 
+     * @param \AccessCondition $accessCondition value
+     * 
+     * @return none.
+     */
+    public function setAccessCondition($accessCondition)
+    {
+        $this->_accessCondition = $accessCondition;
+    }
+    
+    /**
+     * Gets lease ID.
+     *
+     * @return string.
+     */
+    public function getLeaseId()
+    {
+        return $this->_leaseId;
+    }
+
+    /**
+     * Sets lease ID.
+     *
+     * @param string $leaseId value.
+     * 
+     * @return none.
+     */
+    public function setLeaseId($leaseId)
+    {
+        $this->_leaseId = $leaseId;
+    }
+
+}
+
+?>
