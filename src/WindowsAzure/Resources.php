@@ -138,19 +138,19 @@ class Resources
     const HTTP_MERGE  = 'MERGE';
     
     // Misc
-    const EMPTY_STRING       = '';
-    const SEPARATOR          = ',';
-    const AZURE_DATE_FORMAT  = 'D, d M Y H:i:s T';
-    const TIMESTAMP_FORMAT   = 'Y-m-d H:i:s';
-    const EMULATED           = 'EMULATED';
-    const DEV_STORE_NAME     = 'devstoreaccount1';
-    const DEV_STORE_KEY      = 'Eby8vdM02xNOcqFlqUwJPLlmEtlCDXJ1OUzFT50uSRZ6IFsuFq2UVErCz4I6tq/K1SZFPTOtr/KBHBeksoGMGw==';
-    const EMULATOR_BLOB_URI  = '127.0.0.1:10000';
-    const EMULATOR_QUEUE_URI = '127.0.0.1:10001';
-    const EMULATOR_TABLE_URI = '127.0.0.1:10002';
-    const ASTERISK           = '*';
-    const SM_URL             = 'https://management.core.windows.net';
-    const WA_XML_NAMESPACE   = 'http://schemas.microsoft.com/windowsazure';
+    const EMPTY_STRING           = '';
+    const SEPARATOR              = ',';
+    const AZURE_DATE_FORMAT      = 'D, d M Y H:i:s T';
+    const TIMESTAMP_FORMAT       = 'Y-m-d H:i:s';
+    const EMULATED               = 'EMULATED';
+    const DEV_STORE_NAME         = 'devstoreaccount1';
+    const DEV_STORE_KEY          = 'Eby8vdM02xNOcqFlqUwJPLlmEtlCDXJ1OUzFT50uSRZ6IFsuFq2UVErCz4I6tq/K1SZFPTOtr/KBHBeksoGMGw==';
+    const EMULATOR_BLOB_URI      = '127.0.0.1:10000';
+    const EMULATOR_QUEUE_URI     = '127.0.0.1:10001';
+    const EMULATOR_TABLE_URI     = '127.0.0.1:10002';
+    const ASTERISK               = '*';
+    const SERVICE_MANAGEMENT_URL = 'https://management.core.windows.net';
+    const WA_XML_NAMESPACE       = 'http://schemas.microsoft.com/windowsazure';
 
     // Header values
     const STORAGE_API_LATEST_VERSION     = '2011-08-18';
@@ -214,11 +214,13 @@ class Resources
     const XTAG_CODE                       = 'Code';
     const XTAG_MESSAGE                    = 'Message';
     const XTAG_STORAGE_SERVICE_PROPERTIES = 'StorageServiceProperties';
+    const XTAG_ENDPOINT                   = 'Endpoint';
     const XTAG_ENDPOINTS                  = 'Endpoints';
     const XTAG_PRIMARY                    = 'Primary';
     const XTAG_SECONDARY                  = 'Secondary';
     const XTAG_KEY_TYPE                   = 'KeyType';
     const XTAG_STORAGE_SERVICE_KEYS       = 'StorageServiceKeys';
+    const XTAG_ERROR                      = 'Error';
     
     // Status Codes
     const STATUS_OK              = 200;
