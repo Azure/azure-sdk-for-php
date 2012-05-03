@@ -5,3 +5,9 @@ This sample acts as simple to do list application where you can do the following
 * Destroy the list. (deletes the used storage service)
 
 You need to provide subscription id along with certificate which is authorized to access the associated subscription. For more information check [Authenticating Service Management Requests](http://msdn.microsoft.com/en-us/library/windowsazure/ee460782.aspx)
+
+What you will learn?
+* Create new storage service.
+* Create new table service.
+* Query all table entities.
+* Delete table entity.
