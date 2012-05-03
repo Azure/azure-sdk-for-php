@@ -35,6 +35,9 @@ use WindowsAzure\Services\Queue\QueueRestProxy;
 use WindowsAzure\Services\Queue\QueueSettings;
 use WindowsAzure\Services\Blob\BlobRestProxy;
 use WindowsAzure\Services\Blob\BlobSettings;
+use WindowsAzure\Services\ServiceBus\ServiceBusRestProxy;
+use WindowsAzure\Services\ServiceBus\ServiceBusSettings;
+use WindowsAzure\Services\ServiceBus\WrapRestProxy;
 use WindowsAzure\Services\Table\TableRestProxy;
 use WindowsAzure\Services\Table\TableSettings;
 use WindowsAzure\Services\Table\Utilities\AtomReaderWriter;
@@ -91,11 +94,19 @@ class ServicesBuilder implements IServiceBuilder
         case Resources::SERVICE_MANAGEMENT_TYPE_NAME:
             $headers[Resources::X_MS_VERSION] = Resources::SM_API_LATEST_VERSION;
             break;
+    
+        case Resources::SERVICE_BUS_TYPE_NAME:
+            break;
+
+        case Resources::WRAP_TYPE_NAME:
+            break;
 
         default:
             $expected  = Resources::QUEUE_TYPE_NAME;
             $expected .= '|' . Resources::BLOB_TYPE_NAME;
             $expected .= '|' . Resources::TABLE_TYPE_NAME;
+            $expected .= '|' . Resources::SERVICE_BUS_TYPE_NAME;
+            $expected .= '|' . Resources::WRAP_TYPE_NAME;
             throw new InvalidArgumentTypeException($expected);
         }
         
@@ -117,8 +128,6 @@ class ServicesBuilder implements IServiceBuilder
         $xmlSerializer = new XmlSerializer();
         
         $queueWrapper = new QueueRestProxy(
-            $httpClient, $config->getProperty(QueueSettings::URI)
-            $httpClient, $config->getProperty(QueueSettings::URI), $xmlSerializer
             $httpClient, 
             $config->getProperty(QueueSettings::URI), 
             '', 
@@ -159,8 +168,6 @@ class ServicesBuilder implements IServiceBuilder
         $xmlSerializer = new XmlSerializer();
 
         $blobWrapper = new BlobRestProxy(
-            $httpClient, $config->getProperty(BlobSettings::URI)
-            $httpClient, $config->getProperty(BlobSettings::URI), $xmlSerializer
             $httpClient, 
             $config->getProperty(BlobSettings::URI),
             $config->getProperty(BlobSettings::ACCOUNT_NAME),
@@ -187,7 +194,7 @@ class ServicesBuilder implements IServiceBuilder
 
         return $blobWrapper;
     }
-    
+
     /**
      * Builds a table object.
      *
@@ -230,6 +237,19 @@ class ServicesBuilder implements IServiceBuilder
 
         return $tableWrapper;
     }
+
+    private function _buildServiceBus($config)
+    { 
+        $httpClient     = new HttpClient();
+        $xmlSerializer   = new XmlSerializer();
+        $serviceBusWrapper   = new ServiceBusRestProxy(
+            $httpClient,
+            $config->getProperty(ServiceBusSettings::URI),
+            $xmlSerializer
+        );
+        
+        return $serviceBusWrapper;
+    }
     
     /**
      * Builds a service management object.
@@ -258,6 +278,19 @@ class ServicesBuilder implements IServiceBuilder
 
         return $serviceManagementWrapper;
     }
+
+    private function _buildWrap($config)
+    {
+        $httpClient             = new HttpClient();
+        $xmlSerializer          = new XmlSerializer();
+        $wrapWrapper            = new WrapRestProxy(
+            $httpClient,
+            $config->getProperty(ServiceBusSettings::WRAP_URI),
+            $xmlSerializer
+        );
+
+        return $wrapWrapper;
+    }
     
     /**
      * Creates an object passed $type configured with $config.
@@ -268,6 +301,7 @@ class ServicesBuilder implements IServiceBuilder
      * @return WindowsAzure\Services\Queue\IQueue
      *       | WindowsAzure\Services\Blob\IBlob
      *       | WindowsAzure\Services\Blob\ITable
+     *       | WindowsAzure\Services\ServiceBus\IServiceBus 
      */
     public function build($config, $type)
     {
@@ -283,12 +317,20 @@ class ServicesBuilder implements IServiceBuilder
             
         case Resources::SERVICE_MANAGEMENT_TYPE_NAME:
             return self::_buildServiceManagement($config);
+
+        case Resources::SERVICE_BUS_TYPE_NAME:
+            return self::_buildServiceBus($config);
+            
+        case Resources::WRAP_TYPE_NAME:
+            return self::_buildWrap($config);
             
         default:
             $expected  = Resources::QUEUE_TYPE_NAME;
             $expected .= '|' . Resources::BLOB_TYPE_NAME;
             $expected .= '|' . Resources::TABLE_TYPE_NAME;
             $expected .= '|' . Resources::SERVICE_MANAGEMENT_TYPE_NAME;
+            $expected .= '|' . Resources::SERVICE_BUS_TYPE_NAME;
+            $expected .= '|' . Resources::WRAP_TYPE_NAME;
             throw new InvalidArgumentTypeException($expected);
         }
     }

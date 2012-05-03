@@ -27,16 +27,15 @@ namespace Tests\Unit\WindowsAzure\Services\ServiceBus;
 
 use WindowsAzure\Services\Core\Models\ServiceProperties;
 use Tests\Framework\TestResources;
-use Tests\Framework\WrapRestProxyTestBase;
+use Tests\Framework\ServiceBusRestProxyTestBase;
 use WindowsAzure\Core\Configuration;
 use WindowsAzure\Core\ServiceException;
 use WindowsAzure\Core\WindowsAzureUtilities;
-use WindowsAzure\Services\ServiceBus\WrapRestProxy;
-use WindowsAzure\Services\ServiceBus\ServiceBusSettings;
+use WindowsAzure\Services\ServiceBus\ServiceBusRestProxy;
 use WindowsAzure\Resources;
 
 /**
- * Unit tests for WrapRestProxy class
+ * Unit tests for ServiceBusRestProxy class
  *
  * @package    Tests\Unit\WindowsAzure\Services\ServiceBus
  * @author     Azure PHP SDK <azurephpsdk@microsoft.com>
@@ -45,11 +44,11 @@ use WindowsAzure\Resources;
  * @version    Release: @package_version@
  * @link       http://pear.php.net/package/azure-sdk-for-php
  */
-class WrapRestProxyTest extends WrapRestProxyTestBase
+class ServiceBusRestProxyTest extends ServiceBusRestProxyTestBase
 {
-    public function testFoo() 
+    public function testFoo()
     {
-        $this->assertTrue(true);   
+        $this->assertTrue(true);
     }
 }
 

@@ -47,13 +47,18 @@ use WindowsAzure\Validate;
  */
 class WrapRestProxy extends ServiceRestProxy 
 {
+    
+    public function __construct($channel, $uri, $dataSerializer)
+    {
+        parent::__construct($channel, $uri, '', $dataSerializer);
+    }
     /**
-     * Lists all queues in the storage account.
+     * Gets a WRAP access token with specified parameters.
      * 
-     * @param string $uri       The URI of the service bus service.
-     * @param string $name      The name of the service bus service. 
-     * @param string $password  The password of the service bus service. 
-     * @param string $scope     The scope of the service bus service. 
+     * @param string $uri       The URI of the WRAP service.
+     * @param string $name      The user name of the WRAP service. 
+     * @param string $password  The password of the WRAP service. 
+     * @param string $scope     The scope of the WRAP service. 
      * 
      * @return WindowsAzure\Services\ServiceBus\Models\WrapAccessTokenResult
      */

@@ -26,8 +26,9 @@ use Tests\Framework\ServiceRestProxyTestBase;
 use Tests\Framework\TestResources;
 use WindowsAzure\Core\Configuration;
 use WindowsAzure\Services\Core\Models\ServiceProperties;
-use WindowsAzure\Services\ServiceBus\WrapSettings;
+use WindowsAzure\Services\ServiceBus\ServiceBusSettings;
 use WindowsAzure\Services\ServiceBus\WrapService;
+use WindowsAzure\Services\ServiceBus\WrapRestProxy;
 
 /**
  * TestBase class for each unit test class.
@@ -45,11 +46,31 @@ class WrapRestProxyTestBase extends ServiceRestProxyTestBase
     public function __construct()
     {
         $config = new Configuration();
-        $config->setProperty(ServiceBusSettings::URI, TestResources::serviceBusUri());
-        $config->setProperty(ServiceBusSettings::WRAP_URI, TestResources::wrapUri());
-        $config->setProperty(ServiceBusSettings::WRAP_NAME, TestResources::wrapName());        
-        $config->setProperty(ServiceBusSettings::WRAP_PASSWORD, TestResources::wrapPassword());        
-        $wrapWrapper = WrapRestProxy::create($config);
+        $config->setProperty(
+            ServiceBusSettings::URI, 
+            'https://'
+            .TestResources::serviceBusNameSpace()
+            .'.servicebus.windows.net'
+        );
+        
+        $config->setProperty(
+            ServiceBusSettings::WRAP_URI, 
+            'https://'
+            .TestResources::serviceBusNameSpace()
+            .'-sb.accesscontrol.windows.net/WRAPv0.9'
+        );
+        
+        $config->setProperty(
+            ServiceBusSettings::WRAP_NAME, 
+            TestResources::wrapAuthenticationName()
+        );    
+        
+        $config->setProperty(
+            ServiceBusSettings::WRAP_PASSWORD, 
+            TestResources::wrapPassword()
+        );
+        
+        $wrapWrapper = WrapService::create($config);
         parent::__construct($config, $wrapWrapper);
     }
     

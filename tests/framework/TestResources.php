@@ -71,7 +71,7 @@ class TestResources
     {
         return getenv('AZURE_STORAGE_KEY');
     }
-    
+
     public static function serviceManagementSubscriptionId()
     {
         return getenv('SERVICE_MANAGEMENT_SUBSCRIPTION_ID');
@@ -81,15 +81,20 @@ class TestResources
     {
         return getenv('SERVICE_MANAGEMENT_CERTIFICATE_PATH');
     }
-    
-    public static function serviceManagementSubscriptionId()
+
+    public static function serviceBusNameSpace()
     {
-        return getenv('SERVICE_MANAGEMENT_SUBSCRIPTION_ID');
+        return getenv('SERVICE_BUS_NAMESPACE');
     }
-    
-    public static function serviceManagementCertificatePath()
+
+    public static function wrapAuthenticationName()
     {
-        return getenv('SERVICE_MANAGEMENT_CERTIFICATE_PATH');
+        return getenv('WRAP_AUTHENTICATION_NAME');
+    }
+
+    public static function wrapPassword()
+    {
+        return getenv('WRAP_PASSWORD');
     }
     
     public static function getServicePropertiesSample()

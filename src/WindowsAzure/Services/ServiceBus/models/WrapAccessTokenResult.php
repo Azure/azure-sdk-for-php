@@ -44,7 +44,7 @@ class WrapAccessTokenResult
     private $_expiresIn;
 
     /**
-     * Creates ListQueuesResult object from parsed XML response.
+     * Creates WrapAccesTokenResult object from parsed XML response.
      *
      * @param array $parsedResponse XML response parsed into array.
      * 

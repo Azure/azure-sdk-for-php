@@ -128,6 +128,8 @@ class Resources
     const BLOB_TYPE_NAME               = 'IBlob';
     const TABLE_TYPE_NAME              = 'ITable';
     const SERVICE_MANAGEMENT_TYPE_NAME = 'IServiceManagement';
+    const WRAP_TYPE_NAME               = 'IWrap';
+    const SERVICE_BUS_TYPE_NAME        = 'IServiceBus';
     
     // HTTP Methods
     const HTTP_GET    = 'GET';
