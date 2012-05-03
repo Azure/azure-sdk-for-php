@@ -15,43 +15,47 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   WindowsAzure\ServiceRuntime
+ * @package   Tests\Unit\WindowsAzure\ServiceManagement
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
 
-namespace WindowsAzure\ServiceRuntime;
+namespace Tests\Unit\WindowsAzure\ServiceManagement;
+use Tests\Framework\TestResources;
+use WindowsAzure\Core\Configuration;
+use WindowsAzure\ServiceManagement\ServiceManagementSettings;
+use WindowsAzure\ServiceManagement\ServiceManagementService;
 
 /**
- * The file output channel.
+ * Unit tests for class ServiceManagementService
  *
  * @category  Microsoft
- * @package   WindowsAzure\ServiceRuntime
+ * @package   Tests\Unit\WindowsAzure\ServiceManagement
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @version   Release: @package_version@
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
-class FileOutputChannel implements IOutputChannel
+class ServiceManagementServiceTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * Gets the output stream.
-     * 
-     * @param string $name The output channel path.
-     * 
-     * @return none
+     * @covers WindowsAzure\ServiceManagement\ServiceManagementService::create
      */
-    public function getOutputStream($name)
+    public function testCreateWithConfig()
     {
-        $fp = @fopen($name, 'w');
-        if ($fp) {
-            return $fp;
-        } else {
-            throw new ChannelNotAvailableException();
-        }
+        // Setup
+        $config = new Configuration();
+        $config->setProperty(ServiceManagementSettings::SUBSCRIPTION_ID, '1234-45432');
+        $config->setProperty(ServiceManagementSettings::CERTIFICATE_PATH, '1234');
+        
+        // Test
+        $servicemanagementWrapper = ServiceManagementService::create($config);
+        
+        // Assert
+        $this->assertInstanceOf('WindowsAzure\ServiceManagement\IServiceManagement', $servicemanagementWrapper);
     }
 }
 

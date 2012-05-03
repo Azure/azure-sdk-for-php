@@ -15,43 +15,41 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   WindowsAzure\ServiceRuntime
+ * @package   WindowsAzure\ServiceManagement
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
-
-namespace WindowsAzure\ServiceRuntime;
+ 
+namespace WindowsAzure\ServiceManagement;
+use WindowsAzure\Core\Configuration;
+use WindowsAzure\Resources;
 
 /**
- * The file output channel.
+ * Factory for creating IServiceManagement objects
  *
  * @category  Microsoft
- * @package   WindowsAzure\ServiceRuntime
+ * @package   WindowsAzure\ServiceManagement
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @version   Release: @package_version@
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
-class FileOutputChannel implements IOutputChannel
+class ServiceManagementService
 {
     /**
-     * Gets the output stream.
+     * Creates new object based on the builder type in the $config.
+     *
+     * @param WindowsAzure\Core\Configuration    $config  The config object.
+     * @param WindowsAzure\Core\IServicesBuilder $builder The builder object.
      * 
-     * @param string $name The output channel path.
-     * 
-     * @return none
+     * @return WindowsAzure\ServiceManagement\IServiceManagement
      */
-    public function getOutputStream($name)
+    public static function create($config, $builder = null)
     {
-        $fp = @fopen($name, 'w');
-        if ($fp) {
-            return $fp;
-        } else {
-            throw new ChannelNotAvailableException();
-        }
+        return $config->create(Resources::SERVICE_MANAGEMENT_TYPE_NAME, $builder);
     }
 }
 

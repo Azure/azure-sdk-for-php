@@ -15,43 +15,56 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   WindowsAzure\ServiceRuntime
+ * @package   WindowsAzure\ServiceManagement\Models
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
-
-namespace WindowsAzure\ServiceRuntime;
+ 
+namespace WindowsAzure\ServiceManagement\Models;
+use WindowsAzure\Validate;
 
 /**
- * The file output channel.
+ * The optional parameters for createAffinityGroup API.
  *
  * @category  Microsoft
- * @package   WindowsAzure\ServiceRuntime
+ * @package   WindowsAzure\ServiceManagement\Models
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @version   Release: @package_version@
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
-class FileOutputChannel implements IOutputChannel
+class CreateAffinityGroupOptions
 {
     /**
-     * Gets the output stream.
+     * @var string
+     */
+    private $_description;
+    
+    /**
+     * Gets the description.
      * 
-     * @param string $name The output channel path.
+     * @return string
+     */
+    public function getDescription()
+    {
+        return $this->_description;
+    }
+    
+    /**
+     * Sets the description.
+     * 
+     * @param string $description The description.
      * 
      * @return none
      */
-    public function getOutputStream($name)
+    public function setDescription($description)
     {
-        $fp = @fopen($name, 'w');
-        if ($fp) {
-            return $fp;
-        } else {
-            throw new ChannelNotAvailableException();
-        }
+        Validate::isString($description, 'description');
+        
+        $this->_description = $description;
     }
 }
 

@@ -15,43 +15,80 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   WindowsAzure\ServiceRuntime
+ * @package   WindowsAzure\ServiceManagement\Models
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
-
-namespace WindowsAzure\ServiceRuntime;
+ 
+namespace WindowsAzure\ServiceManagement\Models;
 
 /**
- * The file output channel.
+ * The location class.
  *
  * @category  Microsoft
- * @package   WindowsAzure\ServiceRuntime
+ * @package   WindowsAzure\ServiceManagement\Models
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @version   Release: @package_version@
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
-class FileOutputChannel implements IOutputChannel
+class Location
 {
     /**
-     * Gets the output stream.
+     * @var string
+     */
+    private $_name;
+    
+    /**
+     * @var string
+     */
+    private $_displayName;
+    
+    /**
+     * Gets the name.
      * 
-     * @param string $name The output channel path.
+     * @return string
+     */
+    public function getName()
+    {
+        return $this->_name;
+    }
+    
+    /**
+     * Sets the name.
+     * 
+     * @param string $name The name.
      * 
      * @return none
      */
-    public function getOutputStream($name)
+    public function setName($name)
     {
-        $fp = @fopen($name, 'w');
-        if ($fp) {
-            return $fp;
-        } else {
-            throw new ChannelNotAvailableException();
-        }
+        $this->_name = $name;
+    }
+    
+    /**
+     * Gets the displayName.
+     * 
+     * @return string
+     */
+    public function getDisplayName()
+    {
+        return $this->_displayName;
+    }
+    
+    /**
+     * Sets the displayName.
+     * 
+     * @param string $displayName The displayName.
+     * 
+     * @return none
+     */
+    public function setDisplayName($displayName)
+    {
+        $this->_displayName = $displayName;
     }
 }
 

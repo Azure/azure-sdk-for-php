@@ -15,43 +15,60 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   WindowsAzure\ServiceRuntime
+ * @package   WindowsAzure\ServiceManagement\Models
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
-
-namespace WindowsAzure\ServiceRuntime;
+ 
+namespace WindowsAzure\ServiceManagement\Models;
+use WindowsAzure\Resources;
+use WindowsAzure\Utilities;
 
 /**
- * The file output channel.
+ * The affinity group class.
  *
  * @category  Microsoft
- * @package   WindowsAzure\ServiceRuntime
+ * @package   WindowsAzure\ServiceManagement\Models
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @version   Release: @package_version@
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
-class FileOutputChannel implements IOutputChannel
+class AffinityGroup extends Service
 {
     /**
-     * Gets the output stream.
+     * Constructs new affinity group object.
      * 
-     * @param string $name The output channel path.
-     * 
-     * @return none
+     * @param array $raw The array representation for affinity group.
      */
-    public function getOutputStream($name)
+    public function __construct($raw = null)
     {
-        $fp = @fopen($name, 'w');
-        if ($fp) {
-            return $fp;
-        } else {
-            throw new ChannelNotAvailableException();
-        }
+        parent::__construct($raw);
+        $this->setName(Utilities::tryGetValue($raw, Resources::XTAG_NAME));
+    }
+    
+    /**
+     * Converts the current object into ordered array representation.
+     * 
+     * @return array
+     */
+    protected function toArray()
+    {
+        $arr   = parent::toArray();
+        $order = array(
+            Resources::XTAG_NAMESPACE,
+            Resources::XTAG_NAME,
+            Resources::XTAG_LABEL,
+            Resources::XTAG_DESCRIPTION,
+            Resources::XTAG_LOCATION
+        );
+        Utilities::addIfNotEmpty(Resources::XTAG_NAME, $this->getName(), $arr);
+        $ordered = Utilities::orderArray($arr, $order);
+        
+        return $ordered;
     }
 }
 

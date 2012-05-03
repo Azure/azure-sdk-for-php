@@ -15,43 +15,45 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   WindowsAzure\ServiceRuntime
+ * @package   Tests\Unit\WindowsAzure\ServiceManagement\Models
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
 
-namespace WindowsAzure\ServiceRuntime;
+namespace Tests\Unit\WindowsAzure\ServiceManagement\Models;
+use WindowsAzure\ServiceManagement\Models\ListLocationsResult;
 
 /**
- * The file output channel.
+ * Unit tests for class ListLocationsResult
  *
  * @category  Microsoft
- * @package   WindowsAzure\ServiceRuntime
+ * @package   Tests\Unit\WindowsAzure\ServiceManagement\Models
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @version   Release: @package_version@
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
-class FileOutputChannel implements IOutputChannel
+class ListLocationsResultTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * Gets the output stream.
-     * 
-     * @param string $name The output channel path.
-     * 
-     * @return none
+     * @covers WindowsAzure\ServiceManagement\Models\ListLocationsResult::setLocations
+     * @covers WindowsAzure\ServiceManagement\Models\ListLocationsResult::getLocations
      */
-    public function getOutputStream($name)
+    public function testSetLocations()
     {
-        $fp = @fopen($name, 'w');
-        if ($fp) {
-            return $fp;
-        } else {
-            throw new ChannelNotAvailableException();
-        }
+        // Setup
+        $result = new ListLocationsResult();
+        $expected = array('Anywhere US', 'West US');
+        
+        // Test
+        $result->setLocations($expected);
+        
+        
+        // Assert
+        $this->assertEquals($expected, $result->getLocations());
     }
 }
 

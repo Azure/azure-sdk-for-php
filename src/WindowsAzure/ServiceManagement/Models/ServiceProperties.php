@@ -15,43 +15,80 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   WindowsAzure\ServiceRuntime
+ * @package   WindowsAzure\ServiceManagement\Models
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
-
-namespace WindowsAzure\ServiceRuntime;
+ 
+namespace WindowsAzure\ServiceManagement\Models;
 
 /**
- * The file output channel.
+ * Basic Windows Azure service properties.
  *
  * @category  Microsoft
- * @package   WindowsAzure\ServiceRuntime
+ * @package   WindowsAzure\ServiceManagement\Models
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @version   Release: @package_version@
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
-class FileOutputChannel implements IOutputChannel
+class ServiceProperties
 {
     /**
-     * Gets the output stream.
+     * @var string
+     */
+    private $_url;
+    
+    /**
+     * @var string
+     */
+    private $_serviceName;
+    
+    /**
+     * Gets the url.
      * 
-     * @param string $name The output channel path.
+     * @return string
+     */
+    public function getUrl()
+    {
+        return $this->_url;
+    }
+    
+    /**
+     * Sets the url.
+     * 
+     * @param string $url The url.
      * 
      * @return none
      */
-    public function getOutputStream($name)
+    public function setUrl($url)
     {
-        $fp = @fopen($name, 'w');
-        if ($fp) {
-            return $fp;
-        } else {
-            throw new ChannelNotAvailableException();
-        }
+        $this->_url = $url;
+    }
+    
+    /**
+     * Gets the serviceName.
+     * 
+     * @return string
+     */
+    public function getServiceName()
+    {
+        return $this->_serviceName;
+    }
+    
+    /**
+     * Sets the serviceName.
+     * 
+     * @param string $serviceName The serviceName.
+     * 
+     * @return none
+     */
+    public function setServiceName($serviceName)
+    {
+        $this->_serviceName = $serviceName;
     }
 }
 

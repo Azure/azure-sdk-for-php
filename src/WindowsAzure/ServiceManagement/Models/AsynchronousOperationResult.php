@@ -15,43 +15,73 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   WindowsAzure\ServiceRuntime
+ * @package   WindowsAzure\ServiceManagement\Models
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
-
-namespace WindowsAzure\ServiceRuntime;
+ 
+namespace WindowsAzure\ServiceManagement\Models;
+use WindowsAzure\Resources;
+use WindowsAzure\Utilities;
 
 /**
- * The file output channel.
+ * The result of an asynchronous operation.
  *
  * @category  Microsoft
- * @package   WindowsAzure\ServiceRuntime
+ * @package   WindowsAzure\ServiceManagement\Models
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @version   Release: @package_version@
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
-class FileOutputChannel implements IOutputChannel
+class AsynchronousOperationResult
 {
     /**
-     * Gets the output stream.
+     * @var string
+     */
+    private $_requestId;
+    
+    /**
+     * Creates new AsynchronousOperationResult from response HTTP headers.
      * 
-     * @param string $name The output channel path.
+     * @param array $headers The HTTP response headers array.
+     * 
+     * @return AsynchronousOperationResult 
+     */
+    public function create($headers)
+    {
+        $result             = new AsynchronousOperationResult();
+        $result->_requestId = Utilities::tryGetValue(
+            $headers,
+            Resources::X_MS_REQUEST_ID
+        );
+        
+        return $result;
+    }
+    
+    /**
+     * Gets the requestId.
+     * 
+     * @return string
+     */
+    public function getrequestId()
+    {
+        return $this->_requestId;
+    }
+    
+    /**
+     * Sets the requestId.
+     * 
+     * @param string $requestId The request Id of the asynchronous operation.
      * 
      * @return none
      */
-    public function getOutputStream($name)
+    public function setrequestId($requestId)
     {
-        $fp = @fopen($name, 'w');
-        if ($fp) {
-            return $fp;
-        } else {
-            throw new ChannelNotAvailableException();
-        }
+        $this->_requestId = $requestId;
     }
 }
 

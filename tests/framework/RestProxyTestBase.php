@@ -53,7 +53,7 @@ class RestProxyTestBase extends \PHPUnit_Framework_TestCase
         }
     }
     
-    public function __construct($config = null, $serviceWrapper = null)
+    public function __construct($config, $serviceWrapper)
     {
         $this->config = $config;
         $this->wrapper = $serviceWrapper;

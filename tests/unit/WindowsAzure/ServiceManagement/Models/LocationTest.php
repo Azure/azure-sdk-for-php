@@ -15,43 +15,61 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   WindowsAzure\ServiceRuntime
+ * @package   Tests\Unit\WindowsAzure\ServiceManagement\Models
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
 
-namespace WindowsAzure\ServiceRuntime;
+namespace Tests\Unit\WindowsAzure\ServiceManagement\Models;
+use WindowsAzure\ServiceManagement\Models\Location;
 
 /**
- * The file output channel.
+ * Unit tests for class Location
  *
  * @category  Microsoft
- * @package   WindowsAzure\ServiceRuntime
+ * @package   Tests\Unit\WindowsAzure\ServiceManagement\Models
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @version   Release: @package_version@
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
-class FileOutputChannel implements IOutputChannel
+class LocationTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * Gets the output stream.
-     * 
-     * @param string $name The output channel path.
-     * 
-     * @return none
+     * @covers WindowsAzure\ServiceManagement\Models\Location::setName
+     * @covers WindowsAzure\ServiceManagement\Models\Location::getName
      */
-    public function getOutputStream($name)
+    public function testSetName()
     {
-        $fp = @fopen($name, 'w');
-        if ($fp) {
-            return $fp;
-        } else {
-            throw new ChannelNotAvailableException();
-        }
+        // Setup
+        $Location = new Location();
+        $expected = 'Name';
+        
+        // Test
+        $Location->setName($expected);
+        
+        // Assert
+        $this->assertEquals($expected, $Location->getName());
+    }
+    
+    /**
+     * @covers WindowsAzure\ServiceManagement\Models\Location::setDisplayName
+     * @covers WindowsAzure\ServiceManagement\Models\Location::getDisplayName
+     */
+    public function testSetDisplayName()
+    {
+        // Setup
+        $Location = new Location();
+        $expected = 'DisplayName';
+        
+        // Test
+        $Location->setDisplayName($expected);
+        
+        // Assert
+        $this->assertEquals($expected, $Location->getDisplayName());
     }
 }
 
