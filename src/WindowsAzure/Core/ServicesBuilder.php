@@ -238,6 +238,14 @@ class ServicesBuilder implements IServiceBuilder
         return $tableWrapper;
     }
 
+    /**
+     * Builds a service bus client. 
+     * 
+     * @param WindowsAzure\Core\Configuration $config The configuration
+     * for the service bus. 
+     * 
+     * @return WindowsAzure\Services\ServiceBus\IServiceBus
+     */
     private function _buildServiceBus($config)
     { 
         $httpClient     = new HttpClient();
@@ -279,6 +287,13 @@ class ServicesBuilder implements IServiceBuilder
         return $serviceManagementWrapper;
     }
 
+    /**
+     * Builds a WRAP client. 
+     * 
+     * @param WindowsAzure\Core\Configuration $config The configuration. 
+     *
+     * @return WindowsAzure\Services\ServiceBus\IWrap
+     */
     private function _buildWrap($config)
     {
         $httpClient             = new HttpClient();
