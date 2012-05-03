@@ -8,6 +8,7 @@ You need to provide subscription id along with certificate which is authorized t
 
 What you will learn?
 * Create new storage service.
+* Delete storage service.
 * Create new table service.
 * Query all table entities.
 * Delete table entity.

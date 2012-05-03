@@ -28,16 +28,16 @@ limitations under the License.
         </tr>
 <?php
 
-require_once '..\Client.php';
+require_once '..\Client\Client.php';
 use Client\CloudSubscription;
 use Client\CloudTable;
 use WindowsAzure\Utilities;
 use WindowsAzure\Services\Table\Models\EdmType;
 
-$subscriptionId     = 'Your Subscription Id';
-$certificatePath    = 'Subscription Certificate';
+$subscriptionId     = 'Windows Azure Subscription';
+$certificatePath    = 'Authorized Certificate';
 $defaultParitionKey = '123';
-$storageServiceName = 'azuresdkexamples'; // The storage service name would be changed if it already exists in another subscription.
+$storageServiceName = 'azurephpsdkexamples'; // Storage name should change if it is already used in another subscription.
 $tasksTableName     = 'tasks';
 
 $cloudSubscription   = new CloudSubscription($subscriptionId, $certificatePath);
@@ -46,7 +46,7 @@ destroyListAction($cloudSubscription, $storageServiceName);
 
 $cloudStorageService = $cloudSubscription->createStorageService($storageServiceName);
 
-$deleted = clearListAction($cloudStorageService, $tasksTableName);
+$deleted = completeListAction($cloudStorageService, $tasksTableName);
 
 if ($deleted) {
     // Sleep until the table is deleted.
@@ -72,9 +72,9 @@ function destroyListAction($cloudSubscription, $storageServiceName)
     }
 }
 
-function clearListAction($cloudStorageService, $tasksTableName)
+function completeListAction($cloudStorageService, $tasksTableName)
 {
-    $clear = Utilities::tryGetValue($_POST, 'ClearList');
+    $clear = Utilities::tryGetValue($_POST, 'CompleteList');
     if (!is_null($clear)) {
         $cloudStorageService->deleteTable($tasksTableName);
         return true;
@@ -150,8 +150,11 @@ function listEntries($cloudTable)
         </table>
         <p>
             <input type="submit" value="Add item" name="AddItem"/>
-            <input type="submit" value="Clear List" name="ClearList"/>
-            <input type="submit" value="Destroy List" name="DestroyList"/>
+            <input type="submit" value="Complete List" name="CompleteList"/>
+            <hr />
+            Clean and remove storage service
+            <br />
+            <input type="submit" value="Click me!" name="DestroyList" />
         </p>
     </form>
     <form action="index.php" method="post">
