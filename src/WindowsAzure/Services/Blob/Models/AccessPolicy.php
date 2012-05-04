@@ -127,8 +127,8 @@ class AccessPolicy
     {
         $array = array();
         
-        $array['Start']      = $this->_start;
-        $array['Expiry']     = $this->_expiry;
+        $array['Start']      = \WindowsAzure\Utilities::convertToEdmDateTime($this->_start);
+        $array['Expiry']     = \WindowsAzure\Utilities::convertToEdmDateTime($this->_expiry);
         $array['Permission'] = $this->_permission;
         
         return $array;

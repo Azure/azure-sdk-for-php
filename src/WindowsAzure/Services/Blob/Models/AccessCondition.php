@@ -119,9 +119,10 @@ class AccessCondition
      */
     public static function ifModifiedSince($lastModified)
     {
+        \WindowsAzure\Validate::isDate($lastModified);
         return new AccessCondition(
             Resources::IF_MODIFIED_SINCE,
-            WindowsAzureUtilities::rfc1123ToDateTime($lastModified)
+            $lastModified->format(Resources::AZURE_DATE_FORMAT)
         );
     }
     
@@ -167,9 +168,10 @@ class AccessCondition
      */
     public static function ifNotModifiedSince($lastModified)
     {
+        \WindowsAzure\Validate::isDate($lastModified);
         return new AccessCondition(
             Resources::IF_UNMODIFIED_SINCE,
-            WindowsAzureUtilities::rfc1123ToDateTime($lastModified)
+            $lastModified->format(Resources::AZURE_DATE_FORMAT)
         );
     }
     

@@ -45,7 +45,7 @@ class GetContainerAclResult
      * 
      * @param string $publicAccess container public access
      * @param string $etag         container etag
-     * @param string $lastModified last modification in string representation
+     * @param \DateTime $lastModified last modification date
      * @param array  $parsed       parsed response into array representation
      * 
      * @return none.

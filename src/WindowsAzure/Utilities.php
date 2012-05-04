@@ -371,11 +371,27 @@ class Utilities
             return $value;
         }
         
+        if (is_string($value)) {
+            $value =  self::convertToDateTime($value);
+        }
         Validate::isDate($value);
             
         $cloned = clone $value;
         $cloned->setTimezone(new \DateTimeZone('UTC'));
         return str_replace('+0000', 'Z', $cloned->format(\DateTime::ISO8601));
+    }
+    
+    public static function convertToRfc1123($value) 
+    {
+        if (empty($value)) {
+            return $value;
+        }
+        
+        Validate::isDate($value);
+            
+        $cloned = clone $value;
+        $cloned->setTimezone(new \DateTimeZone('GMT'));
+        return $cloned->format(Resources::AZURE_DATE_FORMAT);
     }
     
     /**
