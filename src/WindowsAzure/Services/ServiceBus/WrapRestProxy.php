@@ -15,8 +15,8 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   WindowsAzure\Services\Queue
- * @author    azurephp@microsoft.com
+ * @package   WindowsAzure\Services\ServiceBus
+ * @author    Azure PHP SDK <azurephp@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link      http://pear.php.net/package/azure-sdk-for-php
@@ -38,40 +38,52 @@ use WindowsAzure\Validate;
  * service layer.
  *
  * @category  Microsoft
- * @package   WindowsAzure\Services\Queue
- * @author    azurephp@microsoft.com
+ * @package   WindowsAzure\Services\ServiceBus
+ * @author    Azure PHP SDK <azurephpsdk@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @version   Release: @package_version@
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
-class WrapRestProxy extends ServiceRestProxy 
+class WrapRestProxy extends ServiceRestProxy
 {
-    
+    /** 
+     * Creates a WrapRestProxy with specified parameters. 
+     * 
+     * @param \IHttpClient $channel        The channel to send the WRAP request. 
+     * @param string       $uri            The Uri of the WRAP service. 
+     * @param \ISerializer $dataSerializer The serializer of the data.
+     * 
+     * @return none
+     */
     public function __construct($channel, $uri, $dataSerializer)
     {
         parent::__construct($channel, $uri, '', $dataSerializer);
     }
+
     /**
      * Gets a WRAP access token with specified parameters.
      * 
-     * @param string $uri       The URI of the WRAP service.
-     * @param string $name      The user name of the WRAP service. 
-     * @param string $password  The password of the WRAP service. 
-     * @param string $scope     The scope of the WRAP service. 
+     * @param string $uri      The URI of the WRAP service.
+     * @param string $name     The user name of the WRAP service. 
+     * @param string $password The password of the WRAP service. 
+     * @param string $scope    The scope of the WRAP service. 
      * 
      * @return WindowsAzure\Services\ServiceBus\Models\WrapAccessTokenResult
      */
     public function wrapAccessToken($uri, $name, $password, $scope)
     {
-	 	
         $method      = Resources::HTTP_POST;
         $headers     = array();
         $queryParams = array();
         $statusCode  = Resources::STATUS_OK;
         
         $this->addOptionalQueryParam($queryParams, Resources::WRAP_NAME, $name);
-        $this->addOptionalQueryParam($queryParams, Resources::WRAP_PASSWORD, $password);
+        $this->addOptionalQueryParam(
+            $queryParams, 
+            Resources::WRAP_PASSWORD, 
+            $password
+        );
         $this->addOptionalQueryParam($queryParams, Resources::WRAP_SCOPE, $scope);
         
         $response = $this->send($method, $headers, $queryParams, $uri, $statusCode);

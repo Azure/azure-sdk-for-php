@@ -46,12 +46,15 @@ use WindowsAzure\Resources;
  */
 class ServiceBusSettingsTest extends \PHPUnit_Framework_TestCase
 {
+    /*
+     * @covers WindowsAzure\Services\ServiceBus\ServiceBusSettings::ConfigureWithWrapAuthentication
+     */ 
     public function testConfigureWithWrapAuthenticationTest()
     {
         //setup
         $configuration = new Configuration();
         
-        // act
+        // test
         $configuration = ServiceBusSettings::configureWithWrapAuthentication(
             $configuration,
             "alpha", 
@@ -67,7 +70,7 @@ class ServiceBusSettingsTest extends \PHPUnit_Framework_TestCase
         
         $this->assertEquals(
             'https://alpha-sb.accesscontrol.windows.net/WRAPv0.9',
-            $configuration->getProperty("serviceBus.wrap.uri")
+            $configuration->getProperty('serviceBus.wrap.uri')
         );
         
         $this->assertEquals(

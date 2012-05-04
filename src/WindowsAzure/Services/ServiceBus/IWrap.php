@@ -15,42 +15,42 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   WindowsAzure\Services\ServiceBus
- * @author    Azure PHP SDK <azurephpsdk@microsoft.com>
+ * @package   WindowsAzure\Services\Queue
+ * @author    Azure PHP SDK <azurephp@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
- 
+
 namespace WindowsAzure\Services\ServiceBus;
-use WindowsAzure\Core\Configuration;
-use WindowsAzure\Resources;
+use WindowsAzure\Core\FilterableService;
 
 /**
- * Factory for creating IServiceBus objects
+ * This class constructs HTTP requests and receive HTTP responses for queue 
+ * service layer.
  *
  * @category  Microsoft
- * @package   WindowsAzure\Services\ServiceBus
- * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
+ * @package   WindowsAzure\Services\Queue
+ * @author    Azure PHP SDK <azurephp@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @version   Release: @package_version@
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
-class WrapService
+interface IWrap extends FilterableService
 {
+    
     /**
-     * Creates new object based on the builder type in the $config.
-     *
-     * @param WindowsAzure\Core\Configuration    $config  The config object.
-     * @param WindowsAzure\Core\IServicesBuilder $builder The builder object.
+     * Gets a WRAP access token with specified parameters.
      * 
-     * @return WindowsAzure\Services\ServiceBus\IServiceBus
+     * @param string $uri      The URI of the WRAP service.
+     * @param string $name     The user name of the WRAP service. 
+     * @param string $password The password of the WRAP service. 
+     * @param string $scope    The scope of the WRAP service. 
+     *
+     * @return WindowsAzure\Services\ServiceBus\Models\WrapAccessTokenResult
      */
-    public static function create($config, $builder = null)
-    {
-        return $config->create(Resources::WRAP_TYPE_NAME, $builder);
-    }
-}
+    public function wrapAccessToken($uri, $name, $password, $scope);
 
+}
 ?>

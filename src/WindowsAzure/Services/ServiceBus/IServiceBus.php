@@ -1,7 +1,7 @@
 <?php
 
 /**
- * LICENSE: Licensed under the Apache License, Version 2.0 (the "License");
+ * LICENSE: Licensed under the Apache License, Version 2.0 (the "License");;
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  * http://www.apache.org/licenses/LICENSE-2.0
@@ -23,16 +23,7 @@
  */
 
 namespace WindowsAzure\Services\ServiceBus;
-use WindowsAzure\Core\Http\IHttpClient;
-use WindowsAzure\Core\Http\Url;
-use WindowsAzure\Core\WindowsAzureUtilities;
-use WindowsAzure\Services\Core\Models\GetServicePropertiesResult;
-use WindowsAzure\Services\Core\Models\ServiceProperties;
-use WindowsAzure\Services\Core\ServiceRestProxy;
-use WindowsAzure\Services\ServiceBus\IServiceBus;
-use WindowsAzure\Resources;
-use WindowsAzure\Utilities;
-use WindowsAzure\Validate;
+use WindowsAzure\Core\FilterableService;
 
 /**
  * This class constructs HTTP requests and receive HTTP responses for service bus.
@@ -45,22 +36,8 @@ use WindowsAzure\Validate;
  * @version   Release: @package_version@
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
-class ServiceBusRestProxy extends ServiceRestProxy implements IServiceBus
+interface IServiceBus extends FilterableService
 {
-    /**
-     * Creates a ServiceBusRestProxy with specified parameter. 
-     * 
-     * @param IHttpClient $channel        The channel to communicate. 
-     * @param string      $uri            The URI of service bus service.
-     * @param ISerializer $dataSerializer The serializer of the service bus.
-     *
-     * @return none
-     */
-    public function __construct($channel, $uri, $dataSerializer)
-    {
-        parent::__construct($channel, $uri, '', $dataSerializer);
-    }
-    
     /**
      * Sends a brokered message. 
      * 
@@ -70,10 +47,7 @@ class ServiceBusRestProxy extends ServiceRestProxy implements IServiceBus
      * @throws Exception 
      * @return none
      */
-    public function sendMessage($path, $brokeredMessage)
-    {
-        throw new Exception(Resources::NOT_IMPLEMENTED_MSG);
-    }
+    public function sendMessage($path, $brokeredMessage);
 
     /**
      * Sends a queue message. 
@@ -84,10 +58,7 @@ class ServiceBusRestProxy extends ServiceRestProxy implements IServiceBus
      * @throws Exception 
      * @return none
      */
-    public function sendQueueMessage($path, $brokeredMessage)
-    {
-        throw new Exception(Resources::NOT_IMPLEMENTED_MSG);
-    }
+    public function sendQueueMessage($path, $brokeredMessage);
     
     /**
      * Receives a queue message. 
@@ -100,10 +71,7 @@ class ServiceBusRestProxy extends ServiceRestProxy implements IServiceBus
      * @throws Exception 
      * @return none
      */
-    public function receiveQueueMessage($queuePath, $receivedMessageOptions)
-    {
-        throw new Exception(Resources::NOT_IMPLEMENTED_MSG);
-    }
+    public function receiveQueueMessage($queuePath, $receivedMessageOptions);
 
     /**
      * Receives a message. 
@@ -116,10 +84,7 @@ class ServiceBusRestProxy extends ServiceRestProxy implements IServiceBus
      * @throws Exception 
      * @return none
      */
-    public function receiveMessage($path, $receiveMessageOptions)
-    {
-        throw new Exception(Resources::NOT_IMPLEMENTED_MSG);
-    }
+    public function receiveMessage($path, $receiveMessageOptions);
 
     /**
      * Sends a brokered message to a specified topic. 
@@ -130,10 +95,7 @@ class ServiceBusRestProxy extends ServiceRestProxy implements IServiceBus
      * @throws Exception 
      * @return none
      */
-    public function sendTopicMessage($topicName, $brokeredMessage)
-    {
-        throw new Exception(Resources::NOT_IMPLEMENTED_MSG);
-    } 
+    public function sendTopicMessage($topicName, $brokeredMessage);
 
     /**
      * Receives a subscription message. 
@@ -152,9 +114,7 @@ class ServiceBusRestProxy extends ServiceRestProxy implements IServiceBus
         $topicName, 
         $subscriptionName, 
         $receiveMessageOptions
-    ) {
-        throw new Exception(Resources::NOT_IMPLEMENTED_MSG);
-    }
+    );
 
     /**
      * Unlocks a brokered message. 
@@ -164,10 +124,7 @@ class ServiceBusRestProxy extends ServiceRestProxy implements IServiceBus
      * @throws Exception 
      * @return none
      */
-    public function unlockMessage($brokeredMessage)
-    {
-        throw new Exception(Resources::NOT_IMPLEMENTED_MSG);
-    }
+    public function unlockMessage($brokeredMessage);
     
     /**
      * Deletes a brokered message. 
@@ -177,10 +134,7 @@ class ServiceBusRestProxy extends ServiceRestProxy implements IServiceBus
      * @throws Exception 
      * @return none
      */
-    public function deleteMessage($brokeredMessage)
-    {
-        throw new Exception(Resources::NOT_IMPLEMENTED_MSG);
-    }
+    public function deleteMessage($brokeredMessage);
    
     /**
      * Creates a queue with specified queue info. 
@@ -190,10 +144,7 @@ class ServiceBusRestProxy extends ServiceRestProxy implements IServiceBus
      * @throws Exception 
      * @return none
      */
-    public function createQueue($queueInfo)
-    {
-        throw new Exception(Resources::NOT_IMPLEMENTED_MSG);
-    } 
+    public function createQueue($queueInfo);
 
     /**
      * Deletes a queue. 
@@ -203,10 +154,7 @@ class ServiceBusRestProxy extends ServiceRestProxy implements IServiceBus
      * @throws Exception 
      * @return none
      */
-    public function deleteQueue($queuePath)
-    {
-        throw new Exception(Resources::NOT_IMPLEMENTED_MSG);
-    }
+    public function deleteQueue($queuePath);
 
     /**
      * Gets a queue with specified path. 
@@ -216,10 +164,7 @@ class ServiceBusRestProxy extends ServiceRestProxy implements IServiceBus
      * @throws Exception 
      * @return none
      */
-    public function getQueue($queuePath)
-    {
-        throw new Exception(Resources::NOT_IMPLEMENTED_MSG);
-    }
+    public function getQueue($queuePath);
 
     /**
      * Lists a queue. 
@@ -230,10 +175,7 @@ class ServiceBusRestProxy extends ServiceRestProxy implements IServiceBus
      * @throws Exception 
      * @return none
      */
-    public function listQueues($listQueueOptions)
-    {
-        throw new Exception(Resources::NOT_IMPLEMENTED_MSG);
-    }
+    public function listQueues($listQueueOptions);
 
     /**
      * Creates a topic with specified topic info.  
@@ -243,10 +185,7 @@ class ServiceBusRestProxy extends ServiceRestProxy implements IServiceBus
      * @throws Exception 
      * @return none
      */
-    public function createTopic($topicInfo)
-    {
-        throw new Exception(Resources::NOT_IMPLEMENTED_MSG);
-    }
+    public function createTopic($topicInfo);
 
     /**
      * Deletes a topic with specified topic path. 
@@ -256,10 +195,7 @@ class ServiceBusRestProxy extends ServiceRestProxy implements IServiceBus
      * @throws Exception 
      * @return none
      */
-    public function deleteTopic($topicPath)
-    {
-        throw new Exception(Resources::NOT_IMPLEMENTED_MSG);
-    }
+    public function deleteTopic($topicPath);
     
     /**
      * Gets a topic. 
@@ -269,10 +205,7 @@ class ServiceBusRestProxy extends ServiceRestProxy implements IServiceBus
      * @throws Exception 
      * @return none
      */
-    public function getTopic($topicPath) 
-    {
-        throw new Exception(Resources::NOT_IMPLEMENTED_MSG);
-    }
+    public function getTopic($topicPath); 
     
     /**
      * Lists topics. 
@@ -283,10 +216,7 @@ class ServiceBusRestProxy extends ServiceRestProxy implements IServiceBus
      * @throws Exception 
      * @return none 
      */
-    public function listTopics($listTopicsOptions) 
-    {
-        throw new Exception(Resources::NOT_IMPLEMENTED_MSG);
-    }
+    public function listTopics($listTopicsOptions); 
 
     /**
      * Creates a subscription with specified topic path and 
@@ -299,10 +229,7 @@ class ServiceBusRestProxy extends ServiceRestProxy implements IServiceBus
      * @throws Exception 
      * @return none
      */
-    public function createSubscription($topicPath, $subscriptionInfo) 
-    {
-        throw new Exception(Resources::NOT_IMPLEMENTED_MSG);
-    }
+    public function createSubscription($topicPath, $subscriptionInfo); 
 
     /**
      * Deletes a subscription. 
@@ -313,10 +240,7 @@ class ServiceBusRestProxy extends ServiceRestProxy implements IServiceBus
      * @throws Exception 
      * @return none
      */
-    public function deleteSubscription($topicPath, $subscriptionName) 
-    {
-        throw new Exception(Resources::NOT_IMPLEMENTED_MSG);
-    }
+    public function deleteSubscription($topicPath, $subscriptionName); 
     
     /**
      * Gets a subscription. 
@@ -327,10 +251,7 @@ class ServiceBusRestProxy extends ServiceRestProxy implements IServiceBus
      * @throws Exception 
      * @return none 
      */
-    public function getSubscription($topicPath, $subscriptionName) 
-    {
-        throw new Exception(Resources::NOT_IMPLEMENTED_MSG);
-    }
+    public function getSubscription($topicPath, $subscriptionName); 
 
     /**
      * Lists subscription. 
@@ -343,10 +264,7 @@ class ServiceBusRestProxy extends ServiceRestProxy implements IServiceBus
      * @throws Exception 
      * @return none
      */
-    public function listSubscription($topicPath, $listSubscriptionOptions) 
-    {
-        throw new Exception(Resources::NOT_IMPLEMENTED_MSG);
-    }
+    public function listSubscription($topicPath, $listSubscriptionOptions); 
 
     /**
      * Creates a rule. 
@@ -358,10 +276,7 @@ class ServiceBusRestProxy extends ServiceRestProxy implements IServiceBus
      * @throws Exception 
      * @return none
      */
-    public function createRule($topicPath, $subscriptionName, $ruleInfo)
-    {
-        throw new Exception(Resources::NOT_IMPLEMENTED_MSG);
-    }
+    public function createRule($topicPath, $subscriptionName, $ruleInfo);
 
     /**
      * Deletes a rule. 
@@ -373,10 +288,7 @@ class ServiceBusRestProxy extends ServiceRestProxy implements IServiceBus
      * @throws Exception 
      * @return none
      */
-    public function deleteRule($topicPath, $subscriptionName, $ruleName) 
-    {
-        throw new Exception(Resources::NOT_IMPLEMENTED_MSG);
-    }
+    public function deleteRule($topicPath, $subscriptionName, $ruleName); 
 
     /**
      * Gets a rule. 
@@ -388,10 +300,7 @@ class ServiceBusRestProxy extends ServiceRestProxy implements IServiceBus
      * @throws Exception 
      * @return none
      */
-    public function getRule($topicPath, $subscriptionName, $ruleName) 
-    {
-        throw new Exception(Resources::NOT_IMPLEMENTED_MSG);
-    }
+    public function getRule($topicPath, $subscriptionName, $ruleName); 
 
     /**
      * Lists rules. 
@@ -403,9 +312,6 @@ class ServiceBusRestProxy extends ServiceRestProxy implements IServiceBus
      * @throws Exception 
      * @return none
      */
-    public function listRules($topicPath, $subscriptionName, $listRulesOptions) 
-    {
-        throw new Exception(Resources::NOT_IMPLEMENTED_MSG);
-    }
+    public function listRules($topicPath, $subscriptionName, $listRulesOptions); 
     
 }

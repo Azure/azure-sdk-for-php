@@ -248,9 +248,9 @@ class ServicesBuilder implements IServiceBuilder
      */
     private function _buildServiceBus($config)
     { 
-        $httpClient     = new HttpClient();
-        $xmlSerializer   = new XmlSerializer();
-        $serviceBusWrapper   = new ServiceBusRestProxy(
+        $httpClient        = new HttpClient();
+        $xmlSerializer     = new XmlSerializer();
+        $serviceBusWrapper = new ServiceBusRestProxy(
             $httpClient,
             $config->getProperty(ServiceBusSettings::URI),
             $xmlSerializer
@@ -296,9 +296,9 @@ class ServicesBuilder implements IServiceBuilder
      */
     private function _buildWrap($config)
     {
-        $httpClient             = new HttpClient();
-        $xmlSerializer          = new XmlSerializer();
-        $wrapWrapper            = new WrapRestProxy(
+        $httpClient    = new HttpClient();
+        $xmlSerializer = new XmlSerializer();
+        $wrapWrapper   = new WrapRestProxy(
             $httpClient,
             $config->getProperty(ServiceBusSettings::WRAP_URI),
             $xmlSerializer
@@ -317,6 +317,7 @@ class ServicesBuilder implements IServiceBuilder
      *       | WindowsAzure\Services\Blob\IBlob
      *       | WindowsAzure\Services\Blob\ITable
      *       | WindowsAzure\Services\ServiceBus\IServiceBus 
+     *       | WindowsAzure\Services\ServiceBus\IWrap 
      */
     public function build($config, $type)
     {

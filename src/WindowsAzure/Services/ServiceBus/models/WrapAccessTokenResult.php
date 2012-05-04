@@ -16,7 +16,7 @@
  *
  * @category  Microsoft
  * @package   WindowsAzure\Services\Queue\Models
- * @author    Albert Cheng <gongchen at the largest software company>
+ * @author    Azure PHP SDK <azurephpsdk@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link      http://pear.php.net/package/azure-sdk-for-php
@@ -32,7 +32,7 @@ use WindowsAzure\Utilities;
  *
  * @category  Microsoft
  * @package   WindowsAzure\Services\ServiceBus\Models
- * @author    Albert Cheng <gongchen at the largest software company>
+ * @author    Azure PHP SDK <azurephpsdk@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @version   Release: @package_version@
@@ -40,7 +40,14 @@ use WindowsAzure\Utilities;
  */
 class WrapAccessTokenResult
 {
+    /**
+     * @var string
+     */
     private $_accessToken;
+
+    /**
+     * @var integer
+     */
     private $_expiresIn;
 
     /**
@@ -52,11 +59,11 @@ class WrapAccessTokenResult
      */
     public static function create($parsedResponse)
     {
-        $wrapAccessTokenResult                  = new WrapAccessTokenResult();
-        $wrapAccessTokenResult->_accessToken    = Utilities::tryGetValue(
+        $wrapAccessTokenResult               = new WrapAccessTokenResult();
+        $wrapAccessTokenResult->_accessToken = Utilities::tryGetValue(
             $parsedResponse, Resources::WRAP_ACCESS_TOKEN
         );
-        $wrapAccessTokenResult->_expiresIn      = Utilities::tryGetValue(
+        $wrapAccessTokenResult->_expiresIn   = Utilities::tryGetValue(
             $parsedResponse, Resources::WRAP_ACCESS_TOKEN_EXPIRES_IN
         );
         
@@ -76,7 +83,7 @@ class WrapAccessTokenResult
     /**
      * Sets access token.
      *
-     * @param string $accessToken
+     * @param string $accessToken The access token.
      * 
      * @return none.
      */

@@ -174,6 +174,8 @@ spl_autoload_register(
             'windowsazure\\services\\queue\\queuerestproxy' => '/WindowsAzure/Services/Queue/QueueRestProxy.php',
             'windowsazure\\services\\queue\\queueservice' => '/WindowsAzure/Services/Queue/QueueService.php',
             'windowsazure\\services\\queue\\queuesettings' => '/WindowsAzure/Services/Queue/QueueSettings.php',
+            'windowsazure\\services\\servicebus\\iservicebus' => '/WindowsAzure/Services/ServiceBus/IServiceBus.php',
+            'windowsazure\\services\\servicebus\\iwrap' => '/WindowsAzure/Services/ServiceBus/IWrap.php',
             'windowsazure\\services\\servicebus\\models\\wrapaccesstokenresult' => '/WindowsAzure/Services/ServiceBus/models/WrapAccessTokenResult.php',
             'windowsazure\\services\\servicebus\\servicebusrestproxy' => '/WindowsAzure/Services/ServiceBus/ServiceBusRestProxy.php',
             'windowsazure\\services\\servicebus\\servicebusservice' => '/WindowsAzure/Services/ServiceBus/ServiceBusService.php',

@@ -43,58 +43,13 @@ class ServiceBusSettings
     const WRAP_PASSWORD = 'serviceBus.wrap.password';
     
     /**
-     * Sets a configuration with specified service bus profile 
-     * and WRAP authentication parameters. 
-     * 
-     * @param type $profile
-     * @param type $configuration
-     * @param type $namespace
-     * @param type $authenticationName
-     * @param type $authenticationPassword
-     * @return type 
-     */
-    public static function configureWithProfileAndWrapAuthentication(
-        $profile,
-        $configuration,
-        $namespace,
-        $authenticationName,
-        $authenticationPassword
-    ) {
-        
-        if (is_null($profile))
-        {
-            $profile = '';
-        }else if ((length($profile) !=0) 
-            && substr_compare($profile, '.', -1) != 0) {
-            $profile .= '.';
-        }
-        
-        $configuration->setProperty(
-            $profile.ServiceBusSettings::URI, 
-            'https://'.$namespace.'.servicebus.windows.net');
-        
-        $configuration->setProperty(
-            $profile.ServiceBusSettings::WRAP_URI,
-            'https://'.$namespace.'-sb.accesscontrol.windows.net/WRAPv0.9');
-        
-        $configuration->setProperty(
-            $profile.ServiceBusSettings::WRAP_NAME,
-            $authenticationName);
-        
-        $configuration->setProperty(
-            $profile.ServiceBusSettings::WRAP_PASSWORD,
-            $authenticationPassword);
-            
-        return $configuration; 
-    }       
-
-    /**
      * Sets a configuration with specified WRAP authentication parameters. 
      * 
-     * @param \Configuration $configuration
-     * @param string $namespace
-     * @param string $authenticationName
-     * @param string $authenticationPassword
+     * @param \Configuration $configuration          The configuration. 
+     * @param string         $namespace              The WRAP service namespace. 
+     * @param string         $authenticationName     The user name. 
+     * @param string         $authenticationPassword The password.
+     *
      * @return \Configuration
      */
     public static function configureWithWrapAuthentication(
@@ -103,14 +58,30 @@ class ServiceBusSettings
         $authenticationName,
         $authenticationPassword
     ) {
-        return ServiceBusSettings::configureWithProfileAndWrapAuthentication(
-            null,
-            $configuration,
-            $namespace,
-            $authenticationName,
-            $authenticationPassword);
-    }
-    
+        
+        $configuration->setProperty(
+            ServiceBusSettings::URI, 
+            'https://'.$namespace.'.servicebus.windows.net'
+        );
+        
+        $configuration->setProperty(
+            ServiceBusSettings::WRAP_URI,
+            'https://'.$namespace.'-sb.accesscontrol.windows.net/WRAPv0.9'
+        );
+        
+        $configuration->setProperty(
+            ServiceBusSettings::WRAP_NAME,
+            $authenticationName
+        );
+        
+        $configuration->setProperty(
+            ServiceBusSettings::WRAP_PASSWORD,
+            $authenticationPassword
+        );
+            
+        return $configuration; 
+    }       
+
 }
 
 ?>
