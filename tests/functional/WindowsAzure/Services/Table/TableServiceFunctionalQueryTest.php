@@ -56,7 +56,6 @@ class TableServiceFunctionalQueryTest extends FunctionalTestBase {
         foreach($parts as $part) {
             $batch = new BatchOperations();
             foreach($part as $entity)  {
-//                echo self::tmptostring($entity) . "\n";
                 $batch->addInsertEntity($table, $entity);
             }
             $baseWithWrapper->wrapper->batch($batch);
@@ -124,11 +123,11 @@ class TableServiceFunctionalQueryTest extends FunctionalTestBase {
         array_push($ret, $entity);
 
         $entity = self::getNewEntity();
-        $entity->addProperty('INT64', EdmType::INT64, -1);
+        $entity->addProperty('INT64', EdmType::INT64, '-1');
         array_push($ret, $entity);
 
         $entity = self::getNewEntity();
-        $entity->addProperty('INT64', EdmType::INT64, TableServiceFunctionalTestData::LongBigValue);
+        $entity->addProperty('INT64', EdmType::INT64, strval(TableServiceFunctionalTestData::LongBigValue));
         array_push($ret, $entity);
 
         $entity = self::getNewEntity();
@@ -145,7 +144,7 @@ class TableServiceFunctionalQueryTest extends FunctionalTestBase {
         $e->addProperty('test', EdmType::BOOLEAN, true);
         $e->addProperty('test2', EdmType::STRING, 'value');
         $e->addProperty('test3', EdmType::INT32, 3);
-        $e->addProperty('test4', EdmType::INT64, 12345678901);
+        $e->addProperty('test4', EdmType::INT64, '12345678901');
         $e->addProperty('test5', EdmType::DATETIME, new \DateTime());
         array_push($ret, $e);
 
@@ -375,7 +374,9 @@ class TableServiceFunctionalQueryTest extends FunctionalTestBase {
     * @covers WindowsAzure\Services\Table\TableRestProxy::queryEntities
     */
     public function testQueryEntities() {
-        // TODO: Fails because of https://github.com/WindowsAzure/azure-sdk-for-php/issues/193
+        // The emulator has problems with non-standard queries tested here.
+        $this->skipIfEmulated();
+
         $interestingqueryEntitiesOptions = self::getInterestingQueryEntitiesOptions();
         foreach($interestingqueryEntitiesOptions as $options)  {
             $this->queryEntitiesWorker($options);
@@ -386,7 +387,9 @@ class TableServiceFunctionalQueryTest extends FunctionalTestBase {
     * @covers WindowsAzure\Services\Table\TableRestProxy::queryEntities
     */
     public function testQueryEntitiesBooleanLevel1() {
-        // TODO: Fails because of https://github.com/WindowsAzure/azure-sdk-for-php/issues/156
+        // The emulator has problems with non-standard queries tested here.
+        $this->skipIfEmulated();
+
         $interestingqueryEntitiesOptions = self::addBinaryFilter('BOOLEAN', EdmType::BOOLEAN, TableServiceFunctionalTestData::getInterestingGoodBooleans());
         foreach($interestingqueryEntitiesOptions as $options)  {
             $this->queryEntitiesWorker($options);
@@ -397,7 +400,9 @@ class TableServiceFunctionalQueryTest extends FunctionalTestBase {
     * @covers WindowsAzure\Services\Table\TableRestProxy::queryEntities
     */
     public function testQueryEntitiesDateTimeLevel1() {
-        // TODO: Fails because of https://github.com/WindowsAzure/azure-sdk-for-php/issues/156
+        // The emulator has problems with non-standard queries tested here.
+        $this->skipIfEmulated();
+
         $interestingqueryEntitiesOptions = self::addBinaryFilter('DATETIME', EdmType::DATETIME, TableServiceFunctionalTestData::getInterestingGoodDates());
         foreach($interestingqueryEntitiesOptions as $options)  {
             $this->queryEntitiesWorker($options);
@@ -408,7 +413,9 @@ class TableServiceFunctionalQueryTest extends FunctionalTestBase {
     * @covers WindowsAzure\Services\Table\TableRestProxy::queryEntities
     */
     public function testQueryEntitiesDoubleLevel1() {
-        // TODO: Fails because of https://github.com/WindowsAzure/azure-sdk-for-php/issues/156
+        // The emulator has problems with non-standard queries tested here.
+        $this->skipIfEmulated();
+
         $interestingqueryEntitiesOptions = self::addBinaryFilter('DOUBLE', EdmType::DOUBLE, TableServiceFunctionalTestData::getInterestingGoodDoubles());
         foreach($interestingqueryEntitiesOptions as $options)  {
             $this->queryEntitiesWorker($options);
@@ -419,7 +426,9 @@ class TableServiceFunctionalQueryTest extends FunctionalTestBase {
     * @covers WindowsAzure\Services\Table\TableRestProxy::queryEntities
     */
     public function testQueryEntitiesGuidLevel1() {
-        // TODO: Fails because of https://github.com/WindowsAzure/azure-sdk-for-php/issues/156
+        // The emulator has problems with non-standard queries tested here.
+        $this->skipIfEmulated();
+
         $interestingqueryEntitiesOptions = self::addBinaryFilter('GUID', EdmType::GUID, TableServiceFunctionalTestData::getInterestingGoodGuids());
         foreach($interestingqueryEntitiesOptions as $options)  {
             $this->queryEntitiesWorker($options);
@@ -430,8 +439,10 @@ class TableServiceFunctionalQueryTest extends FunctionalTestBase {
     * @covers WindowsAzure\Services\Table\TableRestProxy::queryEntities
     */
     public function testQueryEntitiesIntLevel1() {
-        // TODO: Fails because of https://github.com/WindowsAzure/azure-sdk-for-php/issues/156
-        $interestingqueryEntitiesOptions = self::addBinaryFilter('INT32', EdmType::INT32, TableServiceFunctionalTestData::getInterestingGoodInts());
+        // The emulator has problems with non-standard queries tested here.
+        $this->skipIfEmulated();
+
+         $interestingqueryEntitiesOptions = self::addBinaryFilter('INT32', EdmType::INT32, TableServiceFunctionalTestData::getInterestingGoodInts());
         foreach($interestingqueryEntitiesOptions as $options)  {
             $this->queryEntitiesWorker($options);
         }
@@ -441,7 +452,9 @@ class TableServiceFunctionalQueryTest extends FunctionalTestBase {
     * @covers WindowsAzure\Services\Table\TableRestProxy::queryEntities
     */
     public function testQueryEntitiesLongLevel1() {
-        // TODO: Fails because of https://github.com/WindowsAzure/azure-sdk-for-php/issues/156
+        // The emulator has problems with non-standard queries tested here.
+        $this->skipIfEmulated();
+
         $interestingqueryEntitiesOptions = self::addBinaryFilter('INT64', EdmType::INT64, TableServiceFunctionalTestData::getInterestingGoodLongs());
         foreach($interestingqueryEntitiesOptions as $options)  {
             $this->queryEntitiesWorker($options);
@@ -452,7 +465,9 @@ class TableServiceFunctionalQueryTest extends FunctionalTestBase {
     * @covers WindowsAzure\Services\Table\TableRestProxy::queryEntities
     */
     public function testQueryEntitiesStringLevel1() {
-        // TODO: Fails because of https://github.com/WindowsAzure/azure-sdk-for-php/issues/156
+        // The emulator has problems with non-standard queries tested here.
+        $this->skipIfEmulated();
+
         $interestingqueryEntitiesOptions = self::addBinaryFilter('STRING', EdmType::STRING, TableServiceFunctionalTestData::getInterestingGoodStrings());
         foreach($interestingqueryEntitiesOptions as $options)  {
             $this->queryEntitiesWorker($options);
@@ -463,7 +478,9 @@ class TableServiceFunctionalQueryTest extends FunctionalTestBase {
     * @covers WindowsAzure\Services\Table\TableRestProxy::queryEntities
     */
     public function testQueryEntitiesBinaryLevel1() {
-        // TODO: Fails because of https://github.com/WindowsAzure/azure-sdk-for-php/issues/156
+        // The emulator has problems with non-standard queries tested here.
+        $this->skipIfEmulated();
+
         $interestingqueryEntitiesOptions = self::addBinaryFilter('BINARY', EdmType::BINARY, TableServiceFunctionalTestData::getInterestingGoodBinaries());
         foreach($interestingqueryEntitiesOptions as $options)  {
             $this->queryEntitiesWorker($options);
@@ -474,7 +491,9 @@ class TableServiceFunctionalQueryTest extends FunctionalTestBase {
     * @covers WindowsAzure\Services\Table\TableRestProxy::queryEntities
     */
     public function testQueryEntitiesLevel2() {
-        // TODO: Fails because of https://github.com/WindowsAzure/azure-sdk-for-php/issues/156
+        // The emulator has problems with non-standard queries tested here.
+        $this->skipIfEmulated();
+
         $interestingqueryEntitiesOptions = self::getInterestingQueryEntitiesOptionsOfDepth(2);
         foreach($interestingqueryEntitiesOptions as $options)  {
             $this->queryEntitiesWorker($options);
@@ -485,7 +504,9 @@ class TableServiceFunctionalQueryTest extends FunctionalTestBase {
     * @covers WindowsAzure\Services\Table\TableRestProxy::queryEntities
     */
     public function testQueryEntitiesLevel3() {
-        // TODO: Fails because of https://github.com/WindowsAzure/azure-sdk-for-php/issues/156
+        // The emulator has problems with non-standard queries tested here.
+        $this->skipIfEmulated();
+
         $interestingqueryEntitiesOptions = self::getInterestingQueryEntitiesOptionsOfDepth(3);
         foreach($interestingqueryEntitiesOptions as $options)  {
             $this->queryEntitiesWorker($options);
@@ -537,33 +558,31 @@ class TableServiceFunctionalQueryTest extends FunctionalTestBase {
         sort($expectedData);
 
         $projected = false;
-        if (is_null($options->getQuery())) {
-            if (!is_null($options->getNextPartitionKey()) && !is_null($options->getNextRowKey())) {
-                $expectedDataTmp = array();
-                foreach($expectedData as $e)  {
-                    if ( ($e->getPartitionKey() >  $options->getNextPartitionKey()) || 
-                        (($e->getPartitionKey() == $options->getNextPartitionKey()) && 
-                         ($e->getRowKey()       >  $options->getNextRowKey()))) {
-                        array_push($expectedDataTmp, $e);
-                    }
+
+        if (!is_null($options->getNextPartitionKey()) && !is_null($options->getNextRowKey())) {
+            $expectedDataTmp = array();
+            foreach($expectedData as $e)  {
+                if ( ($e->getPartitionKey() >  $options->getNextPartitionKey()) ||
+                    (($e->getPartitionKey() == $options->getNextPartitionKey()) &&
+                     ($e->getRowKey()       >= $options->getNextRowKey()))) {
+                    array_push($expectedDataTmp, $e);
                 }
-                $expectedData = $expectedDataTmp;
             }
+            $expectedData = $expectedDataTmp;
         }
-        else {
-            $q = $options->getQuery();
-            $expectedFilter = $q->getFilter();
-            $projected = count($q->getSelectFields()) != 0;
 
-            $expectedData = TableServiceFunctionalTestUtils::filterEntityList($expectedFilter, $expectedData);
+        $q = $options->getQuery();
+        $expectedFilter = $q->getFilter();
+        $projected = (count($q->getSelectFields()) != 0);
 
-            if (!is_null($q->getTop()) && $q->getTop() < count($expectedData)) {
-                $expectedDataTmp = array();
-                for ($i = 0; $i < $q->getTop(); $i++) {
-                    array_push($expectedDataTmp, $expectedData[$i]);
-                }
-                $expectedData = $expectedDataTmp;
+        $expectedData = TableServiceFunctionalTestUtils::filterEntityList($expectedFilter, $expectedData);
+
+        if (!is_null($q->getTop()) && $q->getTop() < count($expectedData)) {
+            $expectedDataTmp = array();
+            for ($i = 0; $i < $q->getTop(); $i++) {
+                array_push($expectedDataTmp, $expectedData[$i]);
             }
+            $expectedData = $expectedDataTmp;
         }
 
         $this->compareEntityLists($ret->getEntities(), $expectedData, $projected);

@@ -58,9 +58,9 @@ class ServiceRestProxy extends RestProxy
         $this->_accountName = $accountName;
         parent::__construct($channel, $dataSerializer, $uri);
     }
-    
+
     /**
-     * Gets the account name.
+     * Gets the account name. 
      *
      * @return string
      */
@@ -68,7 +68,7 @@ class ServiceRestProxy extends RestProxy
     {
         return $this->_accountName;
     }
-     
+    
     /**
      * Sends HTTP request with the specified HTTP call context.
      * 

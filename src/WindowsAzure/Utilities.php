@@ -23,6 +23,8 @@
  */
  
 namespace WindowsAzure;
+require_once 'XML/Unserializer.php';
+require_once 'XML/Serializer.php';
 use WindowsAzure\Validate;
 
 /**

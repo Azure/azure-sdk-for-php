@@ -14,7 +14,7 @@ limitations under the License.
 -->
 
 <?php
-require_once 'WindowsAzure.php';
+require_once 'autoload.php';
 
 spl_autoload_register(
    function($class) {

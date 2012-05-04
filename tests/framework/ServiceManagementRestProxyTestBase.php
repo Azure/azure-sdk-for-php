@@ -25,12 +25,12 @@
 namespace Tests\Framework;
 use WindowsAzure\Resources;
 use WindowsAzure\Core\Configuration;
-use WindowsAzure\Services\ServiceManagement\ServiceManagementSettings;
-use WindowsAzure\Services\ServiceManagement\ServiceManagementService;
+use WindowsAzure\ServiceManagement\ServiceManagementSettings;
+use WindowsAzure\ServiceManagement\ServiceManagementService;
 use WindowsAzure\Core\WindowsAzureUtilities;
-use WindowsAzure\Services\ServiceManagement\Models\CreateStorageServiceOptions;
-use WindowsAzure\Services\ServiceManagement\Models\OperationStatus;
-use WindowsAzure\Services\ServiceManagement\Models\Locations;
+use WindowsAzure\ServiceManagement\Models\CreateStorageServiceOptions;
+use WindowsAzure\ServiceManagement\Models\OperationStatus;
+use WindowsAzure\ServiceManagement\Models\Locations;
 
 /**
  * Test base for ServiceManagementTest class.
