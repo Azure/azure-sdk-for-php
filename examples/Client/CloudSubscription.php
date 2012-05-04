@@ -155,7 +155,7 @@ class CloudSubscription
             sleep(5);
             $result = $this->_proxy->getOperationStatus($requestId);
             $status = $result->getStatus();
-        }while(OperationStatus::IN_PROGRESS == $status);
+        } while(OperationStatus::IN_PROGRESS == $status);
         
         if (OperationStatus::SUCCEEDED != $status) {
             throw $result->getError();

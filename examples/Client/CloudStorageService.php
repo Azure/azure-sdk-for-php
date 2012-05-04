@@ -137,7 +137,7 @@ class CloudStorageService
             $result        = $this->_tableProxy->queryTables();
             $nextTableName = $result->getNextTableName();
             $tables = array_merge($tables, $result->getTables());
-        }while(!is_null($nextTableName));
+        } while(!is_null($nextTableName));
         
         return $tables;
     }
