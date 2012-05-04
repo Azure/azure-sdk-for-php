@@ -46,10 +46,6 @@ use WindowsAzure\Services\Table\Models\Filters\QueryStringFilter;
 use WindowsAzure\Services\Table\Models\Filters\UnaryFilter;
 
 class TableServiceFunctionalOptionsTest extends \PHPUnit_Framework_TestCase {
-    // -------------------------------
-    // -- Check the Options classes --
-    // -------------------------------
-
     public function testCheckTableServiceOptions() {
         $options = new TableServiceOptions();
         $this->assertNotNull($options, 'Default TableServiceOptions');
@@ -122,14 +118,18 @@ class TableServiceFunctionalOptionsTest extends \PHPUnit_Framework_TestCase {
     public function testCheckQueryTablesOptions() {
         $options = new QueryTablesOptions();
         $nextTableName = 'foo';
-        $query = new Query();
+        $filter = new Filter();
 
         $this->assertNull($options->getNextTableName(), 'Default QueryTablesOptions->getNextTableName');
-        $this->assertNull($options->getQuery(), 'Default QueryTablesOptions->getQuery');
+        $this->assertNotNull($options->getQuery(), 'Default QueryTablesOptions->getQuery');
         $options->setNextTableName($nextTableName);
-        $options->setQuery($query);
+        $options->setFilter($filter);
+        $options->setTop(10);
         $this->assertEquals($nextTableName, $options->getNextTableName(), 'Set QueryTablesOptions->getNextTableName');
-        $this->assertEquals($query, $options->getQuery(), 'Set QueryTablesOptions->getQuery');
+        $this->assertEquals($filter, $options->getFilter(), 'Set QueryTablesOptions->getFilter');
+        $this->assertEquals($filter, $options->getQuery()->getFilter(), 'Set QueryTablesOptions->getQuery->getFilter');
+        $this->assertEquals(10, $options->getTop(), 'Set QueryTablesOptions->getTop');
+        $this->assertEquals(10, $options->getQuery()->getTop(), 'Set QueryTablesOptions->getQuery->getTop');
     }
 
     public function testCheckDeleteEntityOptions() {
@@ -149,13 +149,32 @@ class TableServiceFunctionalOptionsTest extends \PHPUnit_Framework_TestCase {
 
         $this->assertNull($options->getNextPartitionKey(), 'Default QueryEntitiesOptions->getNextPartitionKey');
         $this->assertNull($options->getNextRowKey(), 'Default QueryEntitiesOptions->getNextRowKey');
-        $this->assertNull($options->getQuery(), 'Default QueryEntitiesOptions->getQuery');
+        $this->assertNotNull($options->getQuery(), 'Default QueryEntitiesOptions->getQuery');
         $options->setNextPartitionKey($nextPartitionKey);
         $options->setNextRowKey($nextRowKey);
         $options->setQuery($query);
         $this->assertEquals($nextPartitionKey, $options->getNextPartitionKey(), 'Set QueryEntitiesOptions->getNextPartitionKey');
         $this->assertEquals($nextRowKey, $options->getNextRowKey(), 'Set QueryEntitiesOptions->getNextRowKey');
         $this->assertEquals($query, $options->getQuery(), 'Set QueryEntitiesOptions->getQuery');
+
+        $options->addSelectField('bar');
+        $options->addSelectField('baz');
+        $this->assertNotNull($options->getSelectFields(), 'Add $options->getSelectFields');
+        $this->assertNotNull($options->getQuery()->getSelectFields(), 'Add $options->getQuery->getSelectFields');
+        $this->assertEquals(2, count($options->getSelectFields()), 'Add $options->getSelectFields->size');
+        $this->assertEquals(2, count($options->getQuery()->getSelectFields()), 'Add $options->getQuery->getSelectFields->size');
+
+        $filter = Filter::applyConstant('foo', EdmType::STRING);
+        $options->setFilter($filter);
+        $options->setSelectFields(null);
+        $options->setTop(TableServiceFunctionalTestData::IntegerMAX_VALUE);
+
+        $this->assertEquals($filter, $options->getFilter(), 'Set $options->getFilter');
+        $this->assertEquals($filter, $options->getQuery()->getFilter(), 'Set $options->getQuery->getFilter');
+        $this->assertNull($options->getSelectFields(), 'Set $options->getSelectFields');
+        $this->assertNull($options->getQuery()->getSelectFields(), 'Set $options->getQuery->getSelectFields');
+        $this->assertEquals(TableServiceFunctionalTestData::IntegerMAX_VALUE, $options->getTop(), 'Set $options->getTop');
+        $this->assertEquals(TableServiceFunctionalTestData::IntegerMAX_VALUE, $options->getQuery()->getTop(), 'Set $options->getQuery->getTop');
     }
 
     public function testCheckQuery() {

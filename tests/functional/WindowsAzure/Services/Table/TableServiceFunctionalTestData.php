@@ -27,6 +27,7 @@
 namespace Tests\Functional\WindowsAzure\Services\Table;
 
 use WindowsAzure\Utilities;
+use WindowsAzure\Core\WindowsAzureUtilities;
 use WindowsAzure\Services\Core\Models\Logging;
 use WindowsAzure\Services\Core\Models\Metrics;
 use WindowsAzure\Services\Core\Models\RetentionPolicy;
@@ -130,6 +131,19 @@ class TableServiceFunctionalTestData {
         return self::$testUniqueId . 'key' . (self::$tempTableCounter++);
     }
 
+    static function getUnicodeString() {
+        return  chr(0xEB) . chr(0x8B) . chr(0xA4) . // \uB2E4 in UTF-8
+                chr(0xEB) . chr(0xA5) . chr(0xB4) . // \uB974 in UTF-8
+                chr(0xEB) . chr(0x8B) . chr(0xA4) . // \uB2E4 in UTF-8
+                chr(0xEB) . chr(0x8A) . chr(0x94) . // \uB294 in UTF-8
+                chr(0xD8) . chr(0xA5) .             // \u0625 in UTF-8
+                ' ' . 
+                chr(0xD9) . chr(0x8A) .             // \u064A in UTF-8
+                chr(0xD8) . chr(0xAF) .             // \u062F in UTF-8
+                chr(0xD9) . chr(0x8A) .             // \u064A in UTF-8
+                chr(0xD9) . chr(0x88);              // \u0648 in UTF-8
+    }
+    
     public static function getDefaultServiceProperties() {
         // This is the default that comes from the server.
         $rp = new RetentionPolicy();
@@ -252,116 +266,83 @@ class TableServiceFunctionalTestData {
         array_push($ret, $options);
 
         $options = new QueryTablesOptions();
-        $query = new Query();
-        $options->setQuery($query);
+        $options->setTop(2);
+        $options->setPrefix(self::$nonExistTablePrefix);
         array_push($ret, $options);
 
         $options = new QueryTablesOptions();
-        $query = new Query();
-        $query->setTop(2);
-        $options->setQuery($query);
+        $options->setTop(-2);
         array_push($ret, $options);
 
         $options = new QueryTablesOptions();
-        $query = new Query();
-        $query->setTop(-2);
-        $options->setQuery($query);
-        array_push($ret, $options);
-
-        // Cannot select a non-existant field: One of the request inputs is not valid.
-        $options = new QueryTablesOptions();
-        $query = new Query();
-        $query->addSelectField('TableName');
-        $options->setQuery($query);
-        array_push($ret, $options);
-
-        $options = new QueryTablesOptions();
-        $query = new Query();
         $filter = Filter::applyEq(Filter::applyConstant(self::$TEST_TABLE_NAMES[1]), Filter::applyPropertyName('TableName'));
-        $query->setFilter($filter);
-        $options->setQuery($query);
+        $options->setFilter($filter);
         array_push($ret, $options);
 
         $options = new QueryTablesOptions();
-        $query = new Query();
         $filter = Filter::applyEq(Filter::applyConstant(self::$TEST_TABLE_NAMES[2]), Filter::applyPropertyName('TableName'));
-        $query->setFilter($filter);
-        $options->setQuery($query);
+        $options->setFilter($filter);
         array_push($ret, $options);
 
         $options = new QueryTablesOptions();
-        $query = new Query();
-        
         $filter = Filter::applyAnd(
                 Filter::applyEq(Filter::applyConstant(self::$TEST_TABLE_NAMES[1]), Filter::applyPropertyName('TableName')),
                 Filter::applyEq(Filter::applyConstant(self::$TEST_TABLE_NAMES[2]), Filter::applyPropertyName('TableName')));
-        $query->setFilter($filter);
-        $options->setQuery($query);
+        $options->setFilter($filter);
         array_push($ret, $options);
 
         $options = new QueryTablesOptions();
-        $query = new Query();
         $filter = Filter::applyAnd(
                 Filter::applyGe(Filter::applyPropertyName('TableName'), Filter::applyConstant(self::$TEST_TABLE_NAMES[1])), 
                 Filter::applyLe(Filter::applyPropertyName('TableName'), Filter::applyConstant(self::$TEST_TABLE_NAMES[2])));
-        $query->setFilter($filter);
-        $options->setQuery($query);
+        $options->setFilter($filter);
         array_push($ret, $options);
 
         $options = new QueryTablesOptions();
-        $query = new Query();
         $filter = Filter::applyOr(
                 Filter::applyGe(Filter::applyPropertyName('TableName'), Filter::applyConstant(self::$TEST_TABLE_NAMES[1])), 
                 Filter::applyGe(Filter::applyPropertyName('TableName'), Filter::applyConstant(self::$TEST_TABLE_NAMES[2])));
-        $query->setFilter($filter);
-        $options->setQuery($query);
+        $options->setFilter($filter);
         array_push($ret, $options);
 
         $options = new QueryTablesOptions();
-        $query = new Query();
         $filter = Filter::applyAnd(
                 Filter::applyEq(Filter::applyPropertyName('TableName'), Filter::applyConstant(self::$TEST_TABLE_NAMES[1])), 
                 Filter::applyGe(Filter::applyPropertyName('TableName'), Filter::applyConstant(self::$TEST_TABLE_NAMES[0])));
-        $query->setFilter($filter);
-        $options->setQuery($query);
+        $options->setFilter($filter);
         array_push($ret, $options);
 
         $options = new QueryTablesOptions();
-        $query = new Query();
         $filter = Filter::applyOr(
                 Filter::applyEq(Filter::applyPropertyName('TableName'), Filter::applyConstant(self::$TEST_TABLE_NAMES[1])), 
                 Filter::applyGe(Filter::applyPropertyName('TableName'), Filter::applyConstant(self::$TEST_TABLE_NAMES[2])));
-        $query->setFilter($filter);
-        $options->setQuery($query);
+        $options->setFilter($filter);
         array_push($ret, $options);
 
         $options = new QueryTablesOptions();
-        $query = new Query();
         $filter = Filter::applyOr(
                 Filter::applyEq(Filter::applyPropertyName('TableName'), Filter::applyConstant(self::$TEST_TABLE_NAMES[1])), 
                 Filter::applyEq(Filter::applyPropertyName('TableName'), Filter::applyConstant(self::$TEST_TABLE_NAMES[2])));
-        $query->setFilter($filter);
-        $options->setQuery($query);
+        $options->setFilter($filter);
         array_push($ret, $options);
 
         $options = new QueryTablesOptions();
-        $query = new Query();
         $filter = Filter::applyOr(
                 Filter::applyEq(Filter::applyConstant(self::$TEST_TABLE_NAMES[1]), Filter::applyPropertyName('TableName')), 
                 Filter::applyEq(Filter::applyConstant(self::$TEST_TABLE_NAMES[2]), Filter::applyPropertyName('TableName')));
-        $query->setFilter($filter);
-        $options->setQuery($query);
+        $options->setFilter($filter);
         array_push($ret, $options);
 
         $options = new QueryTablesOptions();
         $options->setPrefix(self::$nonExistTablePrefix);
         array_push($ret, $options);
 
-        $options = new QueryTablesOptions();
-        $options->setPrefix(self::$testUniqueId);
-        array_push($ret, $options);
+        if (!WindowsAzureUtilities::isEmulated()) {
+            $options = new QueryTablesOptions();
+            $options->setPrefix(self::$testUniqueId);
+            array_push($ret, $options);
+        }
 
-        // This fails because of https://github.com/WindowsAzure/azure-sdk-for-php/issues/175
         $options = new QueryTablesOptions();
         $nextTableName = self::$TEST_TABLE_NAMES[1];
         $options->setNextTableName($nextTableName);
@@ -417,8 +398,6 @@ class TableServiceFunctionalTestData {
         $e->addProperty('test', EdmType::BOOLEAN, true);
         $e->addProperty('test2', EdmType::STRING, 'value');
         $e->addProperty('test3', EdmType::INT32, 3);
-        // TODO: Uncomment when validation allows ints
-//        $e->addProperty('test4', EdmType::INT64, 12345678901);
         $e->addProperty('test4', EdmType::INT64, '12345678901');
         $e->addProperty('test5', EdmType::DATETIME, new \DateTime());
         array_push($ret, $e);
@@ -489,8 +468,7 @@ class TableServiceFunctionalTestData {
             self::addProperty($e, 'DOUBLE', EdmType::DOUBLE, $doubles);
             self::addProperty($e, 'GUID', EdmType::GUID, $guids);
             self::addProperty($e, 'INT32', EdmType::INT32, $ints);
-            // TODO: Uncomment when validation is fixed, and allow non-strings
-//            self::addProperty($e, 'INT64', EdmType::INT64, $longs);
+            self::addProperty($e, 'INT64', EdmType::INT64, $longs);
             self::addProperty($e, 'STRING', EdmType::STRING, $strings);
             array_push($ret, $e);
         }
@@ -551,9 +529,9 @@ class TableServiceFunctionalTestData {
     static function getInterestingGoodDoubles() {
         $ret = array();
         array_push($ret, pi());
-        array_push($ret, 0);
-        array_push($ret, self::IntegerMAX_VALUE);
-        array_push($ret, self::LongBigValue);
+        array_push($ret, 0.0);
+        array_push($ret, floatval(self::IntegerMAX_VALUE));
+        array_push($ret, floatval(self::LongBigValue));
         array_push($ret, 2.3456);
         array_push($ret, 1.0e-10);
         return $ret;
@@ -597,10 +575,10 @@ class TableServiceFunctionalTestData {
     
     static function getInterestingGoodLongs() {
         $ret = array();
-        array_push($ret, 0);
-        array_push($ret, self::LongBigValue);
-        array_push($ret, self::LongBigNegativeValue);
-        array_push($ret, 35536);
+        array_push($ret, '0');
+        array_push($ret, strval(self::LongBigValue));
+        array_push($ret, strval(self::LongBigNegativeValue));
+        array_push($ret, '35536');
         return $ret;
     }
 
@@ -633,10 +611,8 @@ class TableServiceFunctionalTestData {
         array_push($ret, '12345');
         array_push($ret, '\\' . '\\' . '\'' . '(?++\\.&==/&?\'\'$@://   .ne');
         array_push($ret, '12345');
-        // TODO: Replace with UTF-8 encodings of those Unicode characters
-        array_push($ret, 'Some unicode: \uB2E4\uB974\uB2E4\uB294\u0625 \u064A\u062F\u064A\u0648');
-        // TOOD: Uncomment 
-//        array_push($ret, self::IntegerMAX_VALUE);
+        array_push($ret, 'Some unicode: ' . self::getUnicodeString());
+        array_push($ret, strval(self::IntegerMAX_VALUE));
         array_push($ret, '<some><XML></stuff>');
         return $ret;
     }
