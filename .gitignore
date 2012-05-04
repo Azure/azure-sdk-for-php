@@ -6,4 +6,4 @@ build/pdepend
 build/phpdox
 phpunit.xml
 cache.properties
-/nbproject/
+nbproject
