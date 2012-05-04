@@ -151,11 +151,18 @@ class CloudStorageService
      */
     public function createTable($name)
     {
-        if (!$this->tableExists($name)) {
+        $cloudTable = null;
+        
+        try {
             $this->_tableProxy->createTable($name);
+            $cloudTable = new CloudTable($name, $this->_tableProxy);
+        } catch (\Exception $e) {
+            if ($e->getCode() == WindowsAzureErrorCodes::TABLE_ALREADY_EXISTS) {
+                $cloudTable = new CloudTable($name, $this->_tableProxy);
+            }
         }
         
-        return new CloudTable($name, $this->_tableProxy);
+        return $cloudTable;
     }
     
     /**
@@ -163,12 +170,15 @@ class CloudStorageService
      * 
      * @param string $name The table name.
      * 
-     * @return none
+     * @return boolean Indicates if the table was deleted or not.
      */
     public function deleteTable($name)
     {
-        if ($this->tableExists($name)) {
+        try {
             $this->_tableProxy->deleteTable($name);
+            return true;
+        } catch(\Exception $ex) {
+            return false;
         }
     }
 }

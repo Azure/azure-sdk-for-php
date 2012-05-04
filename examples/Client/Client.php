@@ -24,7 +24,8 @@ spl_autoload_register(
             'client\\cloudstorageservice' => '/CloudStorageService.php',
 			'client\\cloudsubscription' => '/CloudSubscription.php',
 			'client\\cloudtable' => '/CloudTable.php',
-			'client\\errormessages' => '/ErrorMessages.php'
+			'client\\errormessages' => '/ErrorMessages.php',
+			'client\\windowsazureerrorcodes' => '/WindowsAzureErrorCodes.php'
           );
       }
       $cn = strtolower($class);
