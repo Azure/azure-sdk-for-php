@@ -165,7 +165,7 @@ class TableServiceIntegrationTest extends IntegrationTestBase {
         $shouldReturn = false;
         try {
             $props = $this->wrapper->getServiceProperties()->getValue();
-            $this->assertTrue(!WindowsAzureUtilities::isEmulated(), 'Should succeed iff not running in emulator');
+            $this->assertTrue(!WindowsAzureUtilities::isEmulated(), 'Should succeed if and only if not running in emulator');
         } catch (ServiceException $e) {
             // Expect failure in emulator, as v1.6 doesn't support this method
             if (WindowsAzureUtilities::isEmulated()) {
@@ -200,7 +200,7 @@ class TableServiceIntegrationTest extends IntegrationTestBase {
         $shouldReturn = false;
         try {
             $props = $this->wrapper->getServiceProperties()->getValue();
-            $this->assertTrue(!WindowsAzureUtilities::isEmulated(), 'Should succeed iff not running in emulator');
+            $this->assertTrue(!WindowsAzureUtilities::isEmulated(), 'Should succeed if and only if not running in emulator');
         } catch (ServiceException $e) {
             // Expect failure in emulator, as v1.6 doesn't support this method
             if (WindowsAzureUtilities::isEmulated()) {
