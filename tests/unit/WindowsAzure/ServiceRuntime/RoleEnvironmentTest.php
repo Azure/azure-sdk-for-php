@@ -1199,7 +1199,7 @@ class RoleEnvironmentTest extends \PHPUnit_Framework_TestCase
      */    
     public function testCalculateChanges()
     {
-       // Setup
+        // Setup
         $rootDirectory = 'root';
 
         \vfsStreamWrapper::register();
@@ -1678,7 +1678,7 @@ class RoleEnvironmentTest extends \PHPUnit_Framework_TestCase
      */    
     public function testProcessGoalStateChange()
     {
-       // Setup
+        // Setup
         $rootDirectory = 'root';
 
         \vfsStreamWrapper::register();
@@ -1778,7 +1778,119 @@ class RoleEnvironmentTest extends \PHPUnit_Framework_TestCase
 
         $this->assertEquals('state3', RoleEnvironment::getDeploymentId());
     }
-    
+
+    /**
+     * @covers WindowsAzure\ServiceRuntime\RoleEnvironment::trackChanges
+     * @covers WindowsAzure\ServiceRuntime\RoleEnvironment::_raiseStoppingEvent
+     */    
+    public function testTrackChanges()
+    {
+        // Setup
+        $rootDirectory = 'root';
+
+        \vfsStreamWrapper::register();
+        \vfsStreamWrapper::setRoot(new \vfsStreamDirectory($rootDirectory));
+        
+        $roleEnvironmentFileName = 'roleEnvironment';
+        $roleEnvironmentFileContent = '<?xml version="1.0" encoding="utf-8"?>' .
+            '<RoleEnvironment xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" ' .
+            'xmlns:xsd="http://www.w3.org/2001/XMLSchema">' .
+            '<Deployment id="state1" emulated="false" />' .
+            '<CurrentInstance id="id3" roleName="roleName" faultDomain="4" updateDomain="5">' .
+            '<LocalResources>' .
+            '<LocalResource name="DiagnosticStore" path="somepath.DiagnosticStore" sizeInMB="4096" />' .
+            '</LocalResources>' .
+            '</CurrentInstance>' .
+            '<Roles />' .
+            '</RoleEnvironment>';
+        
+        $roleEnvironmentFile = \vfsStream::newFile($roleEnvironmentFileName);
+        $roleEnvironmentFile->setContent($roleEnvironmentFileContent); 
+        
+        \vfsStreamWrapper::getRoot()->addChild($roleEnvironmentFile);
+        
+        $currentGoalStateFileName = 'currentGoalStateFile';
+        $currentGoalStateFile = \vfsStream::newFile($currentGoalStateFileName);
+        \vfsStreamWrapper::getRoot()->addChild($currentGoalStateFile);
+        
+        $goalStateFileName = 'goalstate';
+        $goalStateFileContent = '<?xml version="1.0" encoding="utf-8"?>' .
+            '<GoalState xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" ' .
+            'xmlns:xsd="http://www.w3.org/2001/XMLSchema">' .
+            '<Incarnation>1</Incarnation>' .
+            '<ExpectedState>Started</ExpectedState>' .
+            '<RoleEnvironmentPath>' .
+            \vfsStream::url($rootDirectory . '/' . $roleEnvironmentFileName) .
+            '</RoleEnvironmentPath>' .
+            '<CurrentStateEndpoint>' .
+            \vfsStream::url($rootDirectory . '/' . $currentGoalStateFileName) .
+            '</CurrentStateEndpoint>' .
+            '<Deadline>9999-12-31T23:59:59.9999999</Deadline>' .
+            '</GoalState>';
+        
+        $goalStateFileContent = dechex(strlen($goalStateFileContent)) . "\n" . $goalStateFileContent;
+        
+        $goalStateFile = \vfsStream::newFile($goalStateFileName);
+        $goalStateFile->setContent($goalStateFileContent);
+        
+        \vfsStreamWrapper::getRoot()->addChild($goalStateFile);
+        
+        $fileName = 'versionendpoint';
+        $fileContent = '<?xml version="1.0" encoding="utf-8"?>' .
+            '<RuntimeServerDiscovery xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" ' .
+            'xmlns:xsd="http://www.w3.org/2001/XMLSchema">' .
+            '<RuntimeServerEndpoints>' .
+            '<RuntimeServerEndpoint version="2011-03-08" path="' .
+            \vfsStream::url($rootDirectory . '/' . $goalStateFileName) .
+            '" />' .
+            '</RuntimeServerEndpoints>' .
+            '</RuntimeServerDiscovery>';
+        
+        $file = \vfsStream::newFile($fileName);
+        $file->setContent($fileContent);
+        
+        \vfsStreamWrapper::getRoot()->addChild($file);
+        
+        putenv('WaRuntimeEndpoint=' . \vfsStream::url($rootDirectory . '/' . $fileName));
+        
+        // Test
+        $this->assertEquals('state1', RoleEnvironment::getDeploymentId());
+
+        $currentGoalState = self::getStaticPropertyValue('_currentGoalState');
+        
+        // Process goal state to the previous state
+        $args = array();
+        $args[] = $currentGoalState;
+        
+        self::setStaticPropertyValue('_tracking', 1);
+        RoleEnvironment::trackChanges();
+
+        $goalStateFileContent = '<?xml version="1.0" encoding="utf-8"?>' .
+            '<GoalState xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" ' .
+            'xmlns:xsd="http://www.w3.org/2001/XMLSchema">' .
+            '<Incarnation>1</Incarnation>' .
+            '<ExpectedState>Stopped</ExpectedState>' .
+            '<RoleEnvironmentPath>' .
+            \vfsStream::url($rootDirectory . '/' . $roleEnvironmentFileName) .
+            '</RoleEnvironmentPath>' .
+            '<CurrentStateEndpoint>' .
+            \vfsStream::url($rootDirectory . '/' . $currentGoalStateFileName) .
+            '</CurrentStateEndpoint>' .
+            '<Deadline>9999-12-31T23:59:59.9999999</Deadline>' .
+            '</GoalState>';
+        
+        $goalStateFileContent = dechex(strlen($goalStateFileContent)) . "\n" . $goalStateFileContent;
+        
+        $goalStateFile->setContent($goalStateFileContent);
+        
+        RoleEnvironment::addRoleEnvironmentStoppingListener(array('Tests\Unit\WindowsAzure\ServiceRuntime\myclass', 'execute'));
+        
+        self::setStaticPropertyValue('_tracking', 1);
+        RoleEnvironment::trackChanges();
+        
+        $this->assertEquals(true, myclass::$_executed);
+    }
+
     protected static function getMethod($name)
     {
         $class = new \ReflectionClass('WindowsAzure\ServiceRuntime\RoleEnvironment');
@@ -1786,12 +1898,29 @@ class RoleEnvironmentTest extends \PHPUnit_Framework_TestCase
         $method->setAccessible(true);
         return $method;
     }
-    
+
     protected static function getStaticPropertyValue($property) 
     {
         $class = new \ReflectionClass('WindowsAzure\ServiceRuntime\RoleEnvironment');
         $properties = $class->getStaticProperties();
         return $properties[$property];
+    }
+
+    protected static function setStaticPropertyValue($property, $value)
+    {
+        $class = new \ReflectionClass('WindowsAzure\ServiceRuntime\RoleEnvironment');
+        $propertyObject = $class->getProperty($property);
+        $propertyObject->setAccessible(true);
+        $propertyObject->setValue(null, $value);
+    }
+}
+
+class myclass {
+    public static $_executed;
+    
+    static function execute()
+    {
+        self::$_executed = true;
     }
 }
 

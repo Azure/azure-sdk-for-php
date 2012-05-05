@@ -97,10 +97,16 @@ class RoleEnvironment
      * @var CurrentState
      */
     private static $_lastState;
+
     /**
      * @var string
      */
     private static $_versionEndpoint;
+
+    /**
+     * @var string
+     */
+    private static $_tracking;
 
     /**
      * Initializes the role environment.
@@ -117,6 +123,8 @@ class RoleEnvironment
         self::$_maxDateTime = new \DateTime(
             date(Resources::TIMESTAMP_FORMAT, PHP_INT_MAX)
         );
+        
+        self::$_tracking = true;
     }
     
     /**
@@ -191,10 +199,10 @@ class RoleEnvironment
     {
         self::_initialize(true);
 
-        while (true) {
+        while (self::$_tracking) {
             $newGoalState = self::$_runtimeClient->getCurrentGoalState();
 
-            switch ($newGoalState) {
+            switch ($newGoalState->getExpectedState()) {
             case CurrentStatus::STARTED:
                 $newIncarnation     = $newGoalState->getIncarnation();
                 $currentIncarnation = self::$_currentGoalState->getIncarnation();
@@ -216,6 +224,10 @@ class RoleEnvironment
 
                 self::$_runtimeClient->setCurrentState($stoppedState);
                 break;
+            }
+            
+            if (is_int(self::$_tracking)) {
+                self::$_tracking--;
             }
         }
     }
