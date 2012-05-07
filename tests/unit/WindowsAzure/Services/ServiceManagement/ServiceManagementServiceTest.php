@@ -24,6 +24,7 @@
 
 namespace Tests\Unit\WindowsAzure\Services\ServiceManagement;
 use Tests\Framework\TestResources;
+use WindowsAzure\Resources;
 use WindowsAzure\Core\Configuration;
 use WindowsAzure\Services\ServiceManagement\ServiceManagementSettings;
 use WindowsAzure\Services\ServiceManagement\ServiceManagementService;
@@ -50,6 +51,7 @@ class ServiceManagementServiceTest extends \PHPUnit_Framework_TestCase
         $config = new Configuration();
         $config->setProperty(ServiceManagementSettings::SUBSCRIPTION_ID, '1234-45432');
         $config->setProperty(ServiceManagementSettings::CERTIFICATE_PATH, '1234');
+        $config->setProperty(ServiceManagementSettings::URI, Resources::SERVICE_MANAGEMENT_URL);
         
         // Test
         $servicemanagementWrapper = ServiceManagementService::create($config);
