@@ -104,7 +104,7 @@ class RoleEnvironment
     private static $_versionEndpoint;
 
     /**
-     * @var string
+     * @var mix
      */
     private static $_tracking;
 
