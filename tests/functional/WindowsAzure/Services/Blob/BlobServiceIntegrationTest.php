@@ -63,80 +63,48 @@ use WindowsAzure\Services\Blob\Models\PublicAccessType;
 use WindowsAzure\Services\Blob\Models\BlobBlockType;
 
 class BlobServiceIntegrationTest extends IntegrationTestBase {
-    private static $testContainersPrefix = 'sdktest-';
-    private static $createableContainersPrefix = 'csdktest-';
-    private static $BLOB_FOR_ROOT_CONTAINER = 'sdktestroot';
-    private static $CREATEABLE_CONTAINER_1;
-    private static $CREATEABLE_CONTAINER_2;
-    private static $CREATEABLE_CONTAINER_3;
-    private static $CREATEABLE_CONTAINER_4;
-    private static $TEST_CONTAINER_FOR_BLOBS;
-    private static $TEST_CONTAINER_FOR_BLOBS_2;
-    private static $TEST_CONTAINER_FOR_LISTING;
-    private static $creatableContainers;
-    private static $testContainers;
+    private static $_testContainersPrefix = 'sdktest-';
+    private static $_createableContainersPrefix = 'csdktest-';
+    private static $_blob_for_root_container = 'sdktestroot';
+    private static $_creatable_container_1;
+    private static $_creatable_container_2;
+    private static $_creatable_container_3;
+    private static $_creatable_container_4;
+    private static $_test_container_for_blobs;
+    private static $_test_container_for_blobs_2;
+    private static $_test_container_for_listing;
+    private static $_creatableContainers;
+    private static $_testContainers;
 
     public function setUp() {
         // Setup container names array (list of container names used by
         // integration tests)
-        self::$testContainers = array();
+        self::$_testContainers = array();
         for ($i = 0; $i < 10; $i++) {
-            self::$testContainers[$i] = self::$testContainersPrefix . ($i + 1);
+            self::$_testContainers[$i] = self::$_testContainersPrefix . ($i + 1);
         }
 
-        self::$creatableContainers = array();
+        self::$_creatableContainers = array();
         for ($i = 0; $i < 10; $i++) {
-            self::$creatableContainers[$i] = self::$createableContainersPrefix . ($i + 1);
+            self::$_creatableContainers[$i] = self::$_createableContainersPrefix . ($i + 1);
         }
 
-        self::$CREATEABLE_CONTAINER_1 = self::$creatableContainers[0];
-        self::$CREATEABLE_CONTAINER_2 = self::$creatableContainers[1];
-        self::$CREATEABLE_CONTAINER_3 = self::$creatableContainers[2];
-        self::$CREATEABLE_CONTAINER_4 = self::$creatableContainers[3];
+        self::$_creatable_container_1 = self::$_creatableContainers[0];
+        self::$_creatable_container_2 = self::$_creatableContainers[1];
+        self::$_creatable_container_3 = self::$_creatableContainers[2];
+        self::$_creatable_container_4 = self::$_creatableContainers[3];
 
-        self::$TEST_CONTAINER_FOR_BLOBS = self::$testContainers[0];
-        self::$TEST_CONTAINER_FOR_BLOBS_2 = self::$testContainers[1];
-        self::$TEST_CONTAINER_FOR_LISTING = self::$testContainers[2];
+        self::$_test_container_for_blobs = self::$_testContainers[0];
+        self::$_test_container_for_blobs_2 = self::$_testContainers[1];
+        self::$_test_container_for_listing = self::$_testContainers[2];
 
         // Create all test containers and their content
-        self::createContainers(self::$testContainersPrefix, self::$testContainers);
+        $this->createContainers(self::$_testContainers, self::$_testContainersPrefix);
     }
 
     public function tearDown() {
-        self::deleteContainers(self::$testContainersPrefix, self::$testContainers);
-        self::deleteContainers(self::$createableContainersPrefix, self::$creatableContainers);
-    }
-
-    private static function createContainers($prefix, $list) {
-        $service = self::createService();
-        $containers = self::listContainers($prefix);
-        foreach($list as $item) {
-            if (array_search($item, $containers) === FALSE) {
-                $service->createContainer($item);
-            }
-        }
-    }
-
-    private static function deleteContainers($prefix, $list) {
-        $service = self::createService();
-        $containers = self::listContainers($prefix);
-        foreach($list as $item)  {
-            if (!(array_search($item, $containers) === FALSE)) {
-                $service->deleteContainer($item);
-            }
-        }
-    }
-
-    private static function listContainers($prefix) {
-        $service = self::createService();
-        $result = array();
-        $opts = new ListContainersOptions();
-        $opts->setPrefix($prefix);
-        $list = $service->listContainers($opts);
-        foreach($list->getContainers() as $item)  {
-            array_push($result, $item->getName());
-        }
-        return $result;
+        $this->deleteContainers(self::$_testContainers, self::$_testContainersPrefix);
+        $this->deleteContainers(self::$_creatableContainers,self::$_createableContainersPrefix);
     }
 
     private static function createService() {
@@ -212,7 +180,7 @@ class BlobServiceIntegrationTest extends IntegrationTestBase {
 
     public function testCreateContainerWorks() {
         // Act
-        $this->wrapper->createContainer(self::$CREATEABLE_CONTAINER_1);
+        $this->wrapper->createContainer(self::$_creatable_container_1);
         
         // Assert
         $this->assertTrue(true, 'success');
@@ -227,18 +195,18 @@ class BlobServiceIntegrationTest extends IntegrationTestBase {
         $opts->setPublicAccess('blob');
         $opts->addMetadata('test', 'bar');
         $opts->addMetadata('blah', 'bleah');
-        $this->wrapper->createContainer(self::$CREATEABLE_CONTAINER_2, $opts);
+        $this->wrapper->createContainer(self::$_creatable_container_2, $opts);
 
-        $prop = $this->wrapper->getContainerMetadata(self::$CREATEABLE_CONTAINER_2);
-        $prop2 = $this->wrapper->getContainerProperties(self::$CREATEABLE_CONTAINER_2);
-        $acl = $this->wrapper->getContainerACL(self::$CREATEABLE_CONTAINER_2)->getContainerACL();
+        $prop = $this->wrapper->getContainerMetadata(self::$_creatable_container_2);
+        $prop2 = $this->wrapper->getContainerProperties(self::$_creatable_container_2);
+        $acl = $this->wrapper->getContainerACL(self::$_creatable_container_2)->getContainerACL();
 
         $opts = new ListContainersOptions();
-        $opts->setPrefix(self::$CREATEABLE_CONTAINER_2);
+        $opts->setPrefix(self::$_creatable_container_2);
         $opts->setIncludeMetadata(true);
         $results2 = $this->wrapper->listContainers($opts);
 
-        $this->wrapper->deleteContainer(self::$CREATEABLE_CONTAINER_2);
+        $this->wrapper->deleteContainer(self::$_creatable_container_2);
 
         // Assert
         $this->assertNotNull($prop, '$prop');
@@ -246,9 +214,9 @@ class BlobServiceIntegrationTest extends IntegrationTestBase {
         $this->assertNotNull($prop->getLastModified(), '$prop->getLastModified()');
         $this->assertNotNull($prop->getMetadata(), '$prop->getMetadata()');
         $this->assertEquals(2, count($prop->getMetadata()), 'count($prop->getMetadata())');
-        $this->assertTrue(self::case_insensitive_array_key_exists('test', $prop->getMetadata()), 'self::case_insensitive_array_key_exists(\'test\', $prop->getMetadata())');
+        $this->assertTrue(Utilities::arrayKeyExistsIgnoreCase('test', $prop->getMetadata()), 'Utilities::arrayKeyExistsIgnoreCase(\'test\', $prop->getMetadata())');
         $this->assertTrue(!(array_search('bar', $prop->getMetadata()) === FALSE), '!(array_search(\'bar\', $prop->getMetadata()) === FALSE)');
-        $this->assertTrue(self::case_insensitive_array_key_exists('blah', $prop->getMetadata()), 'self::case_insensitive_array_key_exists(\'blah\', $prop->getMetadata())');
+        $this->assertTrue(Utilities::arrayKeyExistsIgnoreCase('blah', $prop->getMetadata()), 'Utilities::arrayKeyExistsIgnoreCase(\'blah\', $prop->getMetadata())');
         $this->assertTrue(!(array_search('bleah', $prop->getMetadata()) === FALSE), '!(array_search(\'bleah\', $prop->getMetadata()) === FALSE)');
 
         $this->assertNotNull($prop2, '$prop2');
@@ -256,9 +224,9 @@ class BlobServiceIntegrationTest extends IntegrationTestBase {
         $this->assertNotNull($prop2->getLastModified(), '$prop2->getLastModified()');
         $this->assertNotNull($prop2->getMetadata(), '$prop2->getMetadata()');
         $this->assertEquals(2, count($prop2->getMetadata()), 'count($prop2->getMetadata())');
-        $this->assertTrue(self::case_insensitive_array_key_exists('test', $prop2->getMetadata()), 'self::case_insensitive_array_key_exists(\'test\', $prop2->getMetadata())');
+        $this->assertTrue(Utilities::arrayKeyExistsIgnoreCase('test', $prop2->getMetadata()), 'Utilities::arrayKeyExistsIgnoreCase(\'test\', $prop2->getMetadata())');
         $this->assertTrue(!(array_search('bar', $prop2->getMetadata()) === FALSE), '!(array_search(\'bar\', $prop2->getMetadata()) === FALSE)');
-        $this->assertTrue(self::case_insensitive_array_key_exists('blah', $prop2->getMetadata()), 'self::case_insensitive_array_key_exists(\'blah\', $prop2->getMetadata())');
+        $this->assertTrue(Utilities::arrayKeyExistsIgnoreCase('blah', $prop2->getMetadata()), 'Utilities::arrayKeyExistsIgnoreCase(\'blah\', $prop2->getMetadata())');
         $this->assertTrue(!(array_search('bleah', $prop2->getMetadata()) === FALSE), '!(array_search(\'bleah\', $prop2->getMetadata()) === FALSE)');
 
         $this->assertNotNull($results2, '$results2');
@@ -266,33 +234,23 @@ class BlobServiceIntegrationTest extends IntegrationTestBase {
         $container0 = $results2->getContainers();
         $container0 = $container0[0];
         // The capitalizaion gets changed.
-        $this->assertTrue(self::case_insensitive_array_key_exists('test', $container0->getMetadata()), 'self::case_insensitive_array_key_exists(\'test\', $container0->getMetadata())');
+        $this->assertTrue(Utilities::arrayKeyExistsIgnoreCase('test', $container0->getMetadata()), 'Utilities::arrayKeyExistsIgnoreCase(\'test\', $container0->getMetadata())');
         $this->assertTrue(!(array_search('bar', $container0->getMetadata()) === FALSE), '!(array_search(\'bar\', $container0->getMetadata()) === FALSE)');
-        $this->assertTrue(self::case_insensitive_array_key_exists('blah', $container0->getMetadata()), 'self::case_insensitive_array_key_exists(\'blah\', $container0->getMetadata())');
+        $this->assertTrue(Utilities::arrayKeyExistsIgnoreCase('blah', $container0->getMetadata()), 'Utilities::arrayKeyExistsIgnoreCase(\'blah\', $container0->getMetadata())');
         $this->assertTrue(!(array_search('bleah', $container0->getMetadata()) === FALSE), '!(array_search(\'bleah\', $container0->getMetadata()) === FALSE)');
 
         $this->assertNotNull($acl, '$acl');
     }
     
-    private static function case_insensitive_array_key_exists($key, array $search) {
-        $lowerCaseKey = strtolower($key);
-        foreach(array_keys($search) as $originalKey) {
-            if ($lowerCaseKey == strtolower($originalKey)) {
-                return true;
-            }
-        }
-        return false;
-    }            
-
     public function testSetContainerMetadataWorks() {
         // Act
-        $this->wrapper->createContainer(self::$CREATEABLE_CONTAINER_3);
+        $this->wrapper->createContainer(self::$_creatable_container_3);
 
         $metadata = array(
             'test' => 'bar',
             'blah' => 'bleah');
-        $this->wrapper->setContainerMetadata(self::$CREATEABLE_CONTAINER_3, $metadata);
-        $prop = $this->wrapper->getContainerMetadata(self::$CREATEABLE_CONTAINER_3);
+        $this->wrapper->setContainerMetadata(self::$_creatable_container_3, $metadata);
+        $prop = $this->wrapper->getContainerMetadata(self::$_creatable_container_3);
 
         // Assert
         $this->assertNotNull($prop, '$prop');
@@ -300,15 +258,15 @@ class BlobServiceIntegrationTest extends IntegrationTestBase {
         $this->assertNotNull($prop->getLastModified(), '$prop->getLastModified()');
         $this->assertNotNull($prop->getMetadata(), '$prop->getMetadata()');
         $this->assertEquals(2, count($prop->getMetadata()), 'count($prop->getMetadata())');
-        $this->assertTrue(self::case_insensitive_array_key_exists('test', $prop->getMetadata()), 'self::case_insensitive_array_key_exists(\'test\', $prop->getMetadata())');
+        $this->assertTrue(Utilities::arrayKeyExistsIgnoreCase('test', $prop->getMetadata()), 'Utilities::arrayKeyExistsIgnoreCase(\'test\', $prop->getMetadata())');
         $this->assertTrue(!(array_search('bar', $prop->getMetadata()) === FALSE), '!(array_search(\'bar\', $prop->getMetadata()) === FALSE)');
-        $this->assertTrue(self::case_insensitive_array_key_exists('blah', $prop->getMetadata()), 'self::case_insensitive_array_key_exists(\'blah\', $prop->getMetadata())');
+        $this->assertTrue(Utilities::arrayKeyExistsIgnoreCase('blah', $prop->getMetadata()), 'Utilities::arrayKeyExistsIgnoreCase(\'blah\', $prop->getMetadata())');
         $this->assertTrue(!(array_search('bleah', $prop->getMetadata()) === FALSE), '!(array_search(\'bleah\', $prop->getMetadata()) === FALSE)');
     }
 
     public function testSetContainerACLWorks() {
         // Arrange
-        $container = self::$CREATEABLE_CONTAINER_4;
+        $container = self::$_creatable_container_4;
         
         $expiryStartDate = new \DateTime;
         $expiryStartDate->setDate(2010, 1, 1);  
@@ -320,10 +278,8 @@ class BlobServiceIntegrationTest extends IntegrationTestBase {
         $acl = new ContainerACL();
         $acl->setPublicAccess(PublicAccessType::BLOBS_ONLY);
         
-        // TODO: Revert when fixed:
-        // https://github.com/WindowsAzure/azure-sdk-for-php/issues/134
-        $expiryStartDate = \WindowsAzure\Utilities::convertToEdmDateTime($expiryStartDate); //->format('Y-m-d')) . 'T00:00:00.0000000Z';
-        $expiryEndDate = \WindowsAzure\Utilities::convertToEdmDateTime($expiryEndDate); //->format('Y-m-d') . 'T00:00:00.0000000Z';
+        $expiryStartDate = \WindowsAzure\Utilities::convertToEdmDateTime($expiryStartDate);
+        $expiryEndDate = \WindowsAzure\Utilities::convertToEdmDateTime($expiryEndDate);
                 
         $acl->addSignedIdentifier('test', $expiryStartDate, $expiryEndDate, 'rwd');
         $this->wrapper->setContainerACL($container, $acl);
@@ -340,8 +296,8 @@ class BlobServiceIntegrationTest extends IntegrationTestBase {
         $this->assertEquals(1, count($acl2->getSignedIdentifiers()), 'count($acl2->getSignedIdentifiers())');
         $signedids = $acl2->getSignedIdentifiers();
         $this->assertEquals('test', $signedids[0]->getId(), '$signedids[0]->getId()');
-//        $expiryStartDate = $expiryStartDate->setTimezone(new \DateTimeZone('UTC'));
-//        $expiryEndDate = $expiryEndDate->setTimezone(new \DateTimeZone('UTC'));
+        $expiryStartDate = $expiryStartDate->setTimezone(new \DateTimeZone('UTC'));
+        $expiryEndDate = $expiryEndDate->setTimezone(new \DateTimeZone('UTC'));
         $this->assertEquals(
                 \WindowsAzure\Utilities::convertToDateTime($expiryStartDate), 
                 \WindowsAzure\Utilities::convertToDateTime($signedids[0]->getAccessPolicy()->getStart()),
@@ -359,7 +315,7 @@ class BlobServiceIntegrationTest extends IntegrationTestBase {
 
         // Assert
         $this->assertNotNull($results, '$results');
-        $this->assertTrue(count(self::$testContainers) <= count($results->getContainers()), 'count(self::$testContainers) <= count($results->getContainers())');
+        $this->assertTrue(count(self::$_testContainers) <= count($results->getContainers()), 'count(self::$_testContainers) <= count($results->getContainers())');
         $container0 = $results->getContainers();
         $container0 = $container0[0];
         $this->assertNotNull($container0->getName(), '$container0->getName()');
@@ -373,10 +329,7 @@ class BlobServiceIntegrationTest extends IntegrationTestBase {
     public function testListContainersWithPaginationWorks() {
         // Act
         $opts = new ListContainersOptions();
-        // TODO: Revert when fixed:
-        // https://github.com/WindowsAzure/azure-sdk-for-php/issues/69
-//        $opts->setMaxResults(3);
-        $opts->setMaxResults('3');
+        $opts->setMaxResults(3);
         $results = $this->wrapper->listContainers($opts);
         $opts2 = new ListContainersOptions();
         $opts2->setMarker($results ->getNextMarker());
@@ -389,7 +342,7 @@ class BlobServiceIntegrationTest extends IntegrationTestBase {
         $this->assertEquals(3, $results->getMaxResults(), '$results->getMaxResults()');
 
         $this->assertNotNull($results2, '$results2');
-        $this->assertTrue(count(self::$testContainers) - 3 <= count($results2->getContainers()), 'count(self::$testContainers) - 3 <= count($results2->getContainers())');
+        $this->assertTrue(count(self::$_testContainers) - 3 <= count($results2->getContainers()), 'count(self::$_testContainers) - 3 <= count($results2->getContainers())');
         $this->assertEquals('', $results2->getNextMarker(), '$results2->getNextMarker()');
         $this->assertEquals(0, $results2->getMaxResults(), '$results2->getMaxResults()');
     }
@@ -397,11 +350,8 @@ class BlobServiceIntegrationTest extends IntegrationTestBase {
     public function testListContainersWithPrefixWorks() {
         // Act
         $opts = new ListContainersOptions();
-        $opts->setPrefix(self::$testContainersPrefix);
-        // TODO: Revert when fixed:
-        // https://github.com/WindowsAzure/azure-sdk-for-php/issues/69
-//        $opts->setMaxResults(3);
-        $opts->setMaxResults('3');
+        $opts->setPrefix(self::$_testContainersPrefix);
+        $opts->setMaxResults(3);
         $results = $this->wrapper->listContainers($opts);
         // Assert
         $this->assertNotNull($results, '$results');
@@ -411,7 +361,7 @@ class BlobServiceIntegrationTest extends IntegrationTestBase {
 
         // Act
         $opts = new ListContainersOptions();
-        $opts->setPrefix( self::$testContainersPrefix);
+        $opts->setPrefix( self::$_testContainersPrefix);
         $opts->setMarker($results->getNextMarker());
         $results2 = $this->wrapper->listContainers($opts);
 
@@ -422,7 +372,7 @@ class BlobServiceIntegrationTest extends IntegrationTestBase {
 
         // Act
         $opts = new ListContainersOptions();
-        $opts->setPrefix(self::$testContainersPrefix);
+        $opts->setPrefix(self::$_testContainersPrefix);
         $results3 = $this->wrapper->listContainers($opts);
 
         // Assert
@@ -445,10 +395,10 @@ class BlobServiceIntegrationTest extends IntegrationTestBase {
         // Work with root container explicitly ('$root')
         {
             // Act
-            $this->wrapper->createPageBlob('$root', self::$BLOB_FOR_ROOT_CONTAINER, 512);
+            $this->wrapper->createPageBlob('$root', self::$_blob_for_root_container, 512);
             $list = $this->wrapper->listBlobs('$root');
-            $properties = $this->wrapper->getBlobProperties('$root', self::$BLOB_FOR_ROOT_CONTAINER);
-            $metadata = $this->wrapper->getBlobMetadata('$root', self::$BLOB_FOR_ROOT_CONTAINER);
+            $properties = $this->wrapper->getBlobProperties('$root', self::$_blob_for_root_container);
+            $metadata = $this->wrapper->getBlobMetadata('$root', self::$_blob_for_root_container);
 
             // Assert
             $this->assertNotNull($list, '$list');
@@ -457,17 +407,17 @@ class BlobServiceIntegrationTest extends IntegrationTestBase {
             $this->assertNotNull($metadata, '$metadata');
 
             // Act
-            $this->wrapper->deleteBlob('$root', self::$BLOB_FOR_ROOT_CONTAINER);
+            $this->wrapper->deleteBlob('$root', self::$_blob_for_root_container);
         }
 
         // Work with root container implicitly ('')
         {
             // Act
-            $this->wrapper->createPageBlob('', self::$BLOB_FOR_ROOT_CONTAINER, 512);
+            $this->wrapper->createPageBlob('', self::$_blob_for_root_container, 512);
             // '$root' must be explicit when listing blobs in the root container
             $list = $this->wrapper->listBlobs('$root');
-            $properties = $this->wrapper->getBlobProperties('', self::$BLOB_FOR_ROOT_CONTAINER);
-            $metadata = $this->wrapper->getBlobMetadata('', self::$BLOB_FOR_ROOT_CONTAINER);
+            $properties = $this->wrapper->getBlobProperties('', self::$_blob_for_root_container);
+            $metadata = $this->wrapper->getBlobMetadata('', self::$_blob_for_root_container);
 
             // Assert
             $this->assertNotNull($list, '$list');
@@ -476,7 +426,7 @@ class BlobServiceIntegrationTest extends IntegrationTestBase {
             $this->assertNotNull($metadata, '$metadata');
 
             // Act
-            $this->wrapper->deleteBlob('', self::$BLOB_FOR_ROOT_CONTAINER);
+            $this->wrapper->deleteBlob('', self::$_blob_for_root_container);
         }
 
         // If container was created, delete it
@@ -489,14 +439,14 @@ class BlobServiceIntegrationTest extends IntegrationTestBase {
         // Arrange
         $blobNames = array( 'myblob1', 'myblob2', 'other-blob1', 'other-blob2' );
         foreach($blobNames as $blob)  {
-            $this->wrapper->createPageBlob(self::$TEST_CONTAINER_FOR_LISTING, $blob, 512);
+            $this->wrapper->createPageBlob(self::$_test_container_for_listing, $blob, 512);
         }
 
         // Act
-        $results = $this->wrapper->listBlobs(self::$TEST_CONTAINER_FOR_LISTING);
+        $results = $this->wrapper->listBlobs(self::$_test_container_for_listing);
 
         foreach($blobNames as $blob)  {
-            $this->wrapper->deleteBlob(self::$TEST_CONTAINER_FOR_LISTING, $blob);
+            $this->wrapper->deleteBlob(self::$_test_container_for_listing, $blob);
         }
 
         // Assert
@@ -508,19 +458,19 @@ class BlobServiceIntegrationTest extends IntegrationTestBase {
         // Arrange
         $blobNames = array( 'myblob1', 'myblob2', 'otherblob1', 'otherblob2' );
         foreach($blobNames as $blob)  {
-            $this->wrapper->createPageBlob(self::$TEST_CONTAINER_FOR_LISTING, $blob, 512);
+            $this->wrapper->createPageBlob(self::$_test_container_for_listing, $blob, 512);
         }
 
         // Act
         $opts = new ListBlobsOptions();
         $opts->setPrefix('myblob');
-        $results = $this->wrapper->listBlobs(self::$TEST_CONTAINER_FOR_LISTING, $opts);
+        $results = $this->wrapper->listBlobs(self::$_test_container_for_listing, $opts);
         $opts = new ListBlobsOptions();
         $opts->setPrefix('o');
-        $results2 = $this->wrapper->listBlobs(self::$TEST_CONTAINER_FOR_LISTING, $opts);
+        $results2 = $this->wrapper->listBlobs(self::$_test_container_for_listing, $opts);
 
         foreach($blobNames as $blob)  {
-            $this->wrapper->deleteBlob(self::$TEST_CONTAINER_FOR_LISTING, $blob);
+            $this->wrapper->deleteBlob(self::$_test_container_for_listing, $blob);
         }
 
         // Assert
@@ -541,17 +491,17 @@ class BlobServiceIntegrationTest extends IntegrationTestBase {
         // Arrange
         $blobNames = array( 'myblob1', 'myblob2', 'otherblob1', 'otherblob2' );
         foreach($blobNames as $blob)  {
-            $this->wrapper->createPageBlob(self::$TEST_CONTAINER_FOR_LISTING, $blob, 512);
+            $this->wrapper->createPageBlob(self::$_test_container_for_listing, $blob, 512);
         }
 
         // Act
         $opts = new ListBlobsOptions();
         $opts->setIncludeMetadata(true);
         $opts->setIncludeSnapshots(true);
-        $results = $this->wrapper->listBlobs(self::$TEST_CONTAINER_FOR_LISTING, $opts);
+        $results = $this->wrapper->listBlobs(self::$_test_container_for_listing, $opts);
 
         foreach($blobNames as $blob)  {
-            $this->wrapper->deleteBlob(self::$TEST_CONTAINER_FOR_LISTING, $blob);
+            $this->wrapper->deleteBlob(self::$_test_container_for_listing, $blob);
         }
 
         // Assert
@@ -563,26 +513,26 @@ class BlobServiceIntegrationTest extends IntegrationTestBase {
         // Arrange
         $blobNames = array( 'myblob1', 'myblob2', 'dir1-blob1', 'dir1-blob2', 'dir2-dir21-blob3', 'dir2-dir22-blob3' );
         foreach($blobNames as $blob)  {
-            $this->wrapper->createPageBlob(self::$TEST_CONTAINER_FOR_LISTING, $blob, 512);
+            $this->wrapper->createPageBlob(self::$_test_container_for_listing, $blob, 512);
         }
 
         // Act
         $opts = new ListBlobsOptions();
         $opts->setDelimiter('-');
-        $results = $this->wrapper->listBlobs(self::$TEST_CONTAINER_FOR_LISTING, $opts);
+        $results = $this->wrapper->listBlobs(self::$_test_container_for_listing, $opts);
         $opts->setPrefix('dir1-');
-        $results2 = $this->wrapper->listBlobs(self::$TEST_CONTAINER_FOR_LISTING, $opts);
+        $results2 = $this->wrapper->listBlobs(self::$_test_container_for_listing, $opts);
         $opts->setPrefix('dir2-');
-        $results3 = $this->wrapper->listBlobs(self::$TEST_CONTAINER_FOR_LISTING, $opts);
+        $results3 = $this->wrapper->listBlobs(self::$_test_container_for_listing, $opts);
         $opts->setPrefix('dir2-dir21-');
-        $results4 = $this->wrapper->listBlobs(self::$TEST_CONTAINER_FOR_LISTING, $opts);
+        $results4 = $this->wrapper->listBlobs(self::$_test_container_for_listing, $opts);
         $opts->setPrefix('dir2-dir22-');
-        $results5 = $this->wrapper->listBlobs(self::$TEST_CONTAINER_FOR_LISTING, $opts);
+        $results5 = $this->wrapper->listBlobs(self::$_test_container_for_listing, $opts);
         $opts->setPrefix('dir2-dir44-');
-        $results6 = $this->wrapper->listBlobs(self::$TEST_CONTAINER_FOR_LISTING, $opts);
+        $results6 = $this->wrapper->listBlobs(self::$_test_container_for_listing, $opts);
 
         foreach($blobNames as $blob)  {
-            $this->wrapper->deleteBlob(self::$TEST_CONTAINER_FOR_LISTING, $blob);
+            $this->wrapper->deleteBlob(self::$_test_container_for_listing, $blob);
         }
 
         // Assert
@@ -608,7 +558,7 @@ class BlobServiceIntegrationTest extends IntegrationTestBase {
 
     public function testCreatePageBlobWorks() {
         // Act
-        $this->wrapper->createPageBlob(self::$TEST_CONTAINER_FOR_BLOBS, 'test', 512);
+        $this->wrapper->createPageBlob(self::$_test_container_for_blobs, 'test', 512);
 
         // Assert
         $this->assertTrue(true, 'success');
@@ -626,9 +576,9 @@ class BlobServiceIntegrationTest extends IntegrationTestBase {
         $opts->setContentEncoding('UTF-8');
         // $opts->setContentMD5('1234');
         $opts->setContentType('text/plain');
-        $this->wrapper->createPageBlob(self::$TEST_CONTAINER_FOR_BLOBS, 'test', 512, $opts);
+        $this->wrapper->createPageBlob(self::$_test_container_for_blobs, 'test', 512, $opts);
 
-        $result = $this->wrapper->getBlobProperties(self::$TEST_CONTAINER_FOR_BLOBS, 'test');
+        $result = $this->wrapper->getBlobProperties(self::$_test_container_for_blobs, 'test');
 
         // Assert
         $this->assertNotNull($result, '$result');
@@ -653,7 +603,7 @@ class BlobServiceIntegrationTest extends IntegrationTestBase {
 
     public function testClearBlobPagesWorks() {
         // Act
-        $container = self::$TEST_CONTAINER_FOR_BLOBS;
+        $container = self::$_test_container_for_blobs;
         $blob = 'test';
         $this->wrapper->createPageBlob($container, $blob, 512);
 
@@ -669,7 +619,7 @@ class BlobServiceIntegrationTest extends IntegrationTestBase {
 
     public function testCreateBlobPagesWorks() {
         // Act
-        $container = self::$TEST_CONTAINER_FOR_BLOBS;
+        $container = self::$_test_container_for_blobs;
         $blob = 'test';
         $content = str_pad('', 512);
         $this->wrapper->createPageBlob($container, $blob, 512);
@@ -686,7 +636,7 @@ class BlobServiceIntegrationTest extends IntegrationTestBase {
 
     public function testListBlobRegionsWorks() {
         // Act
-        $container = self::$TEST_CONTAINER_FOR_BLOBS;
+        $container = self::$_test_container_for_blobs;
         $blob = 'test';
         $content = str_pad('', 512);
         $this->wrapper->createPageBlob($container, $blob, 16384 + 512);
@@ -719,7 +669,7 @@ class BlobServiceIntegrationTest extends IntegrationTestBase {
 
     public function testListBlobBlocksOnEmptyBlobWorks() {
         // Act
-        $container = self::$TEST_CONTAINER_FOR_BLOBS;
+        $container = self::$_test_container_for_blobs;
         $blob = 'test13';
         $content = str_pad('', 512);
         $this->wrapper->createBlockBlob($container, $blob, $content);
@@ -739,7 +689,7 @@ class BlobServiceIntegrationTest extends IntegrationTestBase {
 
     public function testListBlobBlocksWorks() {
         // Act
-        $container = self::$TEST_CONTAINER_FOR_BLOBS;
+        $container = self::$_test_container_for_blobs;
         $blob = 'test14';
         $this->wrapper->createBlockBlob($container, $blob, '');
         $this->wrapper->createBlobBlock($container, $blob, '123', str_pad('', 256));
@@ -772,7 +722,7 @@ class BlobServiceIntegrationTest extends IntegrationTestBase {
 
     public function testListBlobBlocksWithOptionsWorks() {
         // Act
-        $container = self::$TEST_CONTAINER_FOR_BLOBS;
+        $container = self::$_test_container_for_blobs;
         $blob = 'test14';
         $this->wrapper->createBlockBlob($container, $blob, '');
         $this->wrapper->createBlobBlock($container, $blob, '123', str_pad('', 256));
@@ -808,7 +758,7 @@ class BlobServiceIntegrationTest extends IntegrationTestBase {
 
     public function testCommitBlobBlocksWorks() {
         // Act
-        $container = self::$TEST_CONTAINER_FOR_BLOBS;
+        $container = self::$_test_container_for_blobs;
         $blob = 'test14';
         $blockId1 = '1fedcba';
         $blockId2 = '2abcdef';
@@ -850,7 +800,7 @@ class BlobServiceIntegrationTest extends IntegrationTestBase {
 
     public function testCreateBlobBlockWorks() {
         // Act
-        $container = self::$TEST_CONTAINER_FOR_BLOBS;
+        $container = self::$_test_container_for_blobs;
         $blob = 'test13';
         $content = str_pad('', 512);
         $this->wrapper->createBlockBlob($container, $blob, $content);
@@ -863,7 +813,7 @@ class BlobServiceIntegrationTest extends IntegrationTestBase {
 
     public function testCreateBlockBlobWorks() {
         // Act
-        $this->wrapper->createBlockBlob(self::$TEST_CONTAINER_FOR_BLOBS, 'test2', 'some content');
+        $this->wrapper->createBlockBlob(self::$_test_container_for_blobs, 'test2', 'some content');
 
         // Assert
         $this->assertTrue(true, 'success');
@@ -882,9 +832,9 @@ class BlobServiceIntegrationTest extends IntegrationTestBase {
         $opts->setContentEncoding('UTF-8');
         // $opts->setContentMD5('1234');
         $opts->setContentType('text/plain');
-        $this->wrapper->createBlockBlob(self::$TEST_CONTAINER_FOR_BLOBS, 'test2', $content, $opts);
+        $this->wrapper->createBlockBlob(self::$_test_container_for_blobs, 'test2', $content, $opts);
 
-        $result = $this->wrapper->getBlobProperties(self::$TEST_CONTAINER_FOR_BLOBS, 'test2');
+        $result = $this->wrapper->getBlobProperties(self::$_test_container_for_blobs, 'test2');
 
         // Assert
         $this->assertNotNull($result, '$result');
@@ -909,7 +859,7 @@ class BlobServiceIntegrationTest extends IntegrationTestBase {
 
     public function testCreateBlobSnapshotWorks() {
         // Act
-        $container = self::$TEST_CONTAINER_FOR_BLOBS;
+        $container = self::$_test_container_for_blobs;
         $blob = 'test3';
         $this->wrapper->createBlockBlob($container, $blob, 'some content');
         $snapshot = $this->wrapper->createBlobSnapshot($container, $blob);
@@ -923,7 +873,7 @@ class BlobServiceIntegrationTest extends IntegrationTestBase {
 
     public function testCreateBlobSnapshotWithOptionsWorks() {
         // Act
-        $container = self::$TEST_CONTAINER_FOR_BLOBS;
+        $container = self::$_test_container_for_blobs;
         $blob = 'test3';
         $this->wrapper->createBlockBlob($container, $blob, 'some content');
         $opts = new CreateBlobSnapshotOptions();
@@ -942,9 +892,9 @@ class BlobServiceIntegrationTest extends IntegrationTestBase {
         $this->assertEquals($snapshot->getEtag(), $result->getProperties()->getEtag(), '$result->getProperties()->getEtag()');
         $this->assertEquals($snapshot->getLastModified(), $result->getProperties()->getLastModified(), '$result->getProperties()->getLastModified()');
         // The capitalizaion gets changed.
-        $this->assertTrue(self::case_insensitive_array_key_exists('test', $result->getMetadata()), 'self::case_insensitive_array_key_exists(\'test\', $result->getMetadata())');
+        $this->assertTrue(Utilities::arrayKeyExistsIgnoreCase('test', $result->getMetadata()), 'Utilities::arrayKeyExistsIgnoreCase(\'test\', $result->getMetadata())');
         $this->assertTrue(!(array_search('bar', $result->getMetadata()) === FALSE), '!(array_search(\'bar\', $result->getMetadata()) === FALSE)');
-        $this->assertTrue(self::case_insensitive_array_key_exists('blah', $result->getMetadata()), 'self::case_insensitive_array_key_exists(\'blah\', $result->getMetadata())');
+        $this->assertTrue(Utilities::arrayKeyExistsIgnoreCase('blah', $result->getMetadata()), 'Utilities::arrayKeyExistsIgnoreCase(\'blah\', $result->getMetadata())');
         $this->assertTrue(!(array_search('bleah', $result->getMetadata()) === FALSE), '!(array_search(\'bleah\', $result->getMetadata()) === FALSE)');
         }
 
@@ -961,9 +911,9 @@ class BlobServiceIntegrationTest extends IntegrationTestBase {
         $opts->setContentEncoding('UTF-8');
         // $opts->setContentMD5('1234');
         $opts->setContentType('text/plain');
-        $this->wrapper->createBlockBlob(self::$TEST_CONTAINER_FOR_BLOBS, 'test2', $content, $opts);
+        $this->wrapper->createBlockBlob(self::$_test_container_for_blobs, 'test2', $content, $opts);
 
-        $result = $this->wrapper->getBlob(self::$TEST_CONTAINER_FOR_BLOBS, 'test2');
+        $result = $this->wrapper->getBlob(self::$_test_container_for_blobs, 'test2');
 
         // Assert
         $this->assertNotNull($result, '$result');
@@ -999,9 +949,9 @@ class BlobServiceIntegrationTest extends IntegrationTestBase {
         $opts->setContentEncoding('UTF-8');
         // $opts->setContentMD5('1234');
         $opts->setContentType('text/plain');
-        $this->wrapper->createPageBlob(self::$TEST_CONTAINER_FOR_BLOBS, 'test', 4096, $opts);
+        $this->wrapper->createPageBlob(self::$_test_container_for_blobs, 'test', 4096, $opts);
 
-        $result = $this->wrapper->getBlob(self::$TEST_CONTAINER_FOR_BLOBS, 'test');
+        $result = $this->wrapper->getBlob(self::$_test_container_for_blobs, 'test');
 
         // Assert
         $this->assertNotNull($result, '$result');
@@ -1026,11 +976,11 @@ class BlobServiceIntegrationTest extends IntegrationTestBase {
 
     public function testGetBlobWithIfMatchETagAccessConditionWorks() {
         // Act
-        $this->wrapper->createPageBlob(self::$TEST_CONTAINER_FOR_BLOBS, 'test', 4096);
+        $this->wrapper->createPageBlob(self::$_test_container_for_blobs, 'test', 4096);
         try {
             $opts = new GetBlobOptions();
             $opts->setAccessCondition(AccessCondition::ifMatch('123'));
-            $this->wrapper->getBlob(self::$TEST_CONTAINER_FOR_BLOBS, 'test', $opts);
+            $this->wrapper->getBlob(self::$_test_container_for_blobs, 'test', $opts);
             $this->fail('getBlob should throw an exception');
         }
         catch (ServiceException $e) {
@@ -1040,12 +990,12 @@ class BlobServiceIntegrationTest extends IntegrationTestBase {
 
     public function testGetBlobWithIfNoneMatchETagAccessConditionWorks() {
         // Act
-        $this->wrapper->createPageBlob(self::$TEST_CONTAINER_FOR_BLOBS, 'test', 4096);
-        $props = $this->wrapper->getBlobProperties(self::$TEST_CONTAINER_FOR_BLOBS, 'test');
+        $this->wrapper->createPageBlob(self::$_test_container_for_blobs, 'test', 4096);
+        $props = $this->wrapper->getBlobProperties(self::$_test_container_for_blobs, 'test');
         try {
             $opts = new GetBlobOptions();
             $opts->setAccessCondition(AccessCondition::ifNoneMatch($props->getProperties()->getEtag()));
-            $this->wrapper->getBlob(self::$TEST_CONTAINER_FOR_BLOBS, 'test', $opts);
+            $this->wrapper->getBlob(self::$_test_container_for_blobs, 'test', $opts);
             $this->fail('getBlob should throw an exception');
         }
         catch (ServiceException $e) {
@@ -1055,13 +1005,13 @@ class BlobServiceIntegrationTest extends IntegrationTestBase {
 
     public function testGetBlobWithIfModifiedSinceAccessConditionWorks() {
         // Act
-        $this->wrapper->createPageBlob(self::$TEST_CONTAINER_FOR_BLOBS, 'test', 4096);
-        $props = $this->wrapper->getBlobProperties(self::$TEST_CONTAINER_FOR_BLOBS, 'test');
+        $this->wrapper->createPageBlob(self::$_test_container_for_blobs, 'test', 4096);
+        $props = $this->wrapper->getBlobProperties(self::$_test_container_for_blobs, 'test');
         try {
             $opts = new GetBlobOptions();
             $lastMod = $props->getProperties()->getLastModified()->format(\WindowsAzure\Resources::AZURE_DATE_FORMAT);
             $opts->setAccessCondition(AccessCondition::ifModifiedSince($lastMod));
-            $this->wrapper->getBlob(self::$TEST_CONTAINER_FOR_BLOBS, 'test', $opts);
+            $this->wrapper->getBlob(self::$_test_container_for_blobs, 'test', $opts);
             $this->fail('getBlob should throw an exception');
         }
         catch (ServiceException $e) {
@@ -1071,7 +1021,7 @@ class BlobServiceIntegrationTest extends IntegrationTestBase {
 
     public function testGetBlobWithIfNotModifiedSinceAccessConditionWorks() {
         // Act
-        $container = self::$TEST_CONTAINER_FOR_BLOBS;
+        $container = self::$_test_container_for_blobs;
         $blob = 'test';
         $this->wrapper->createPageBlob($container, $blob, 4096);
         $props = $this->wrapper->getBlobProperties($container, $blob);
@@ -1102,7 +1052,7 @@ class BlobServiceIntegrationTest extends IntegrationTestBase {
 
     public function testGetBlobPropertiesWorks() {
         // Act
-        $container = self::$TEST_CONTAINER_FOR_BLOBS;
+        $container = self::$_test_container_for_blobs;
         $blob = 'test';
         $this->wrapper->createPageBlob($container, $blob, 4096);
         $result = $this->wrapper->getBlobProperties($container, $blob);
@@ -1130,7 +1080,7 @@ class BlobServiceIntegrationTest extends IntegrationTestBase {
 
     public function testGetBlobMetadataWorks() {
         // Act
-        $container = self::$TEST_CONTAINER_FOR_BLOBS;
+        $container = self::$_test_container_for_blobs;
         $blob = 'test';
         $opts = new CreateBlobOptions();
         $metadata = $opts->getMetadata();
@@ -1145,16 +1095,16 @@ class BlobServiceIntegrationTest extends IntegrationTestBase {
         $this->assertNotNull($props->getEtag(), '$props->getEtag()');
         $this->assertNotNull($props->getMetadata(), '$props->getMetadata()');
         $this->assertEquals(2, count($props->getMetadata()), 'count($props->getMetadata())');
-        $this->assertTrue(self::case_insensitive_array_key_exists('test', $props->getMetadata()), 'self::case_insensitive_array_key_exists(\'test\', $props->getMetadata())');
+        $this->assertTrue(Utilities::arrayKeyExistsIgnoreCase('test', $props->getMetadata()), 'Utilities::arrayKeyExistsIgnoreCase(\'test\', $props->getMetadata())');
         $this->assertTrue(!(array_search('bar', $props->getMetadata()) === FALSE), '!(array_search(\'bar\', $props->getMetadata()) === FALSE)');
-        $this->assertTrue(self::case_insensitive_array_key_exists('blah', $props->getMetadata()), 'self::case_insensitive_array_key_exists(\'blah\', $props->getMetadata())');
+        $this->assertTrue(Utilities::arrayKeyExistsIgnoreCase('blah', $props->getMetadata()), 'Utilities::arrayKeyExistsIgnoreCase(\'blah\', $props->getMetadata())');
         $this->assertTrue(!(array_search('bleah', $props->getMetadata()) === FALSE), '!(array_search(\'bleah\', $props->getMetadata()) === FALSE)');        
         $this->assertNotNull($props->getLastModified(), '$props->getLastModified()');
     }
 
     public function testSetBlobPropertiesWorks() {
         // Act
-        $container = self::$TEST_CONTAINER_FOR_BLOBS;
+        $container = self::$_test_container_for_blobs;
         $blob = 'test10';
         $this->wrapper->createPageBlob($container, $blob, 4096);
         $opts = new SetBlobPropertiesOptions();
@@ -1197,7 +1147,7 @@ class BlobServiceIntegrationTest extends IntegrationTestBase {
 
     public function testSetBlobMetadataWorks() {
         // Act
-        $container = self::$TEST_CONTAINER_FOR_BLOBS;
+        $container = self::$_test_container_for_blobs;
         $blob = 'test11';
         $metadata = array(
             'test' => 'bar',
@@ -1215,18 +1165,18 @@ class BlobServiceIntegrationTest extends IntegrationTestBase {
         $this->assertNotNull($props, '$props');
         $this->assertNotNull($props->getMetadata(), '$props->getMetadata()');
         $this->assertEquals(2, count($props->getMetadata()), 'count($props->getMetadata())');
-        $this->assertTrue(self::case_insensitive_array_key_exists('test', $props->getMetadata()), 'self::case_insensitive_array_key_exists(\'test\', $props->getMetadata())');
+        $this->assertTrue(Utilities::arrayKeyExistsIgnoreCase('test', $props->getMetadata()), 'Utilities::arrayKeyExistsIgnoreCase(\'test\', $props->getMetadata())');
         $this->assertTrue(!(array_search('bar', $props->getMetadata()) === FALSE), '!(array_search(\'bar\', $props->getMetadata()) === FALSE)');
-        $this->assertTrue(self::case_insensitive_array_key_exists('blah', $props->getMetadata()), 'self::case_insensitive_array_key_exists(\'blah\', $props->getMetadata())');
+        $this->assertTrue(Utilities::arrayKeyExistsIgnoreCase('blah', $props->getMetadata()), 'Utilities::arrayKeyExistsIgnoreCase(\'blah\', $props->getMetadata())');
         $this->assertTrue(!(array_search('bleah', $props->getMetadata()) === FALSE), '!(array_search(\'bleah\', $props->getMetadata()) === FALSE)');
     }   
 
     public function testDeleteBlobWorks() {
         // Act
         $content = 'some $content';
-        $this->wrapper->createBlockBlob(self::$TEST_CONTAINER_FOR_BLOBS, 'test2', $content);
+        $this->wrapper->createBlockBlob(self::$_test_container_for_blobs, 'test2', $content);
 
-        $this->wrapper->deleteBlob(self::$TEST_CONTAINER_FOR_BLOBS, 'test2');
+        $this->wrapper->deleteBlob(self::$_test_container_for_blobs, 'test2');
 
         // Assert
         $this->assertTrue(true, 'success');
@@ -1235,10 +1185,10 @@ class BlobServiceIntegrationTest extends IntegrationTestBase {
     public function testCopyBlobWorks() {
         // Act
         $content = 'some content2';
-        $this->wrapper->createBlockBlob(self::$TEST_CONTAINER_FOR_BLOBS, 'test6', $content);
-        $this->wrapper->copyBlob(self::$TEST_CONTAINER_FOR_BLOBS_2, 'test5', self::$TEST_CONTAINER_FOR_BLOBS, 'test6');
+        $this->wrapper->createBlockBlob(self::$_test_container_for_blobs, 'test6', $content);
+        $this->wrapper->copyBlob(self::$_test_container_for_blobs_2, 'test5', self::$_test_container_for_blobs, 'test6');
 
-        $result = $this->wrapper->getBlob(self::$TEST_CONTAINER_FOR_BLOBS_2, 'test5');
+        $result = $this->wrapper->getBlob(self::$_test_container_for_blobs_2, 'test5');
 
         // Assert
         $this->assertNotNull($result, '$result');
@@ -1261,9 +1211,9 @@ class BlobServiceIntegrationTest extends IntegrationTestBase {
     public function testAcquireLeaseWorks() {
         // Act
         $content = 'some content2';
-        $this->wrapper->createBlockBlob(self::$TEST_CONTAINER_FOR_BLOBS, 'test6', $content);
-        $leaseId = $this->wrapper->acquireLease(self::$TEST_CONTAINER_FOR_BLOBS, 'test6')->getLeaseId();
-        $this->wrapper->releaseLease(self::$TEST_CONTAINER_FOR_BLOBS, 'test6', $leaseId);
+        $this->wrapper->createBlockBlob(self::$_test_container_for_blobs, 'test6', $content);
+        $leaseId = $this->wrapper->acquireLease(self::$_test_container_for_blobs, 'test6')->getLeaseId();
+        $this->wrapper->releaseLease(self::$_test_container_for_blobs, 'test6', $leaseId);
 
         // Assert
         $this->assertNotNull($leaseId, '$leaseId');
@@ -1272,10 +1222,10 @@ class BlobServiceIntegrationTest extends IntegrationTestBase {
     public function testRenewLeaseWorks() {
         // Act
         $content = 'some content2';
-        $this->wrapper->createBlockBlob(self::$TEST_CONTAINER_FOR_BLOBS, 'test6', $content);
-        $leaseId = $this->wrapper->acquireLease(self::$TEST_CONTAINER_FOR_BLOBS, 'test6')->getLeaseId();
-        $leaseId2 = $this->wrapper->renewLease(self::$TEST_CONTAINER_FOR_BLOBS, 'test6', $leaseId)->getLeaseId();
-        $this->wrapper->releaseLease(self::$TEST_CONTAINER_FOR_BLOBS, 'test6', $leaseId);
+        $this->wrapper->createBlockBlob(self::$_test_container_for_blobs, 'test6', $content);
+        $leaseId = $this->wrapper->acquireLease(self::$_test_container_for_blobs, 'test6')->getLeaseId();
+        $leaseId2 = $this->wrapper->renewLease(self::$_test_container_for_blobs, 'test6', $leaseId)->getLeaseId();
+        $this->wrapper->releaseLease(self::$_test_container_for_blobs, 'test6', $leaseId);
 
         // Assert
         $this->assertNotNull($leaseId, '$leaseId');
@@ -1285,10 +1235,10 @@ class BlobServiceIntegrationTest extends IntegrationTestBase {
     public function testBreakLeaseWorks() {
         // Act
         $content = 'some content2';
-        $this->wrapper->createBlockBlob(self::$TEST_CONTAINER_FOR_BLOBS, 'test6', $content);
-        $leaseId = $this->wrapper->acquireLease(self::$TEST_CONTAINER_FOR_BLOBS, 'test6')->getLeaseId();
-        $this->wrapper->breakLease(self::$TEST_CONTAINER_FOR_BLOBS, 'test6', $leaseId);
-        $this->wrapper->releaseLease(self::$TEST_CONTAINER_FOR_BLOBS, 'test6', $leaseId);
+        $this->wrapper->createBlockBlob(self::$_test_container_for_blobs, 'test6', $content);
+        $leaseId = $this->wrapper->acquireLease(self::$_test_container_for_blobs, 'test6')->getLeaseId();
+        $this->wrapper->breakLease(self::$_test_container_for_blobs, 'test6', $leaseId);
+        $this->wrapper->releaseLease(self::$_test_container_for_blobs, 'test6', $leaseId);
 
         // Assert
         $this->assertNotNull($leaseId, '$leaseId');

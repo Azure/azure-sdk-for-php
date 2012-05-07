@@ -101,7 +101,6 @@ class Utilities
         }
     }
 
-
     /**
      * Returns the specified value of the key chain passed from $array and in case
      * that key chain doesn't exist, null is returned.
@@ -331,6 +330,19 @@ class Utilities
         }
         
         return $clean;
+    }
+
+    /**
+     * Checks if the given key exists in the array, with any
+     * capitaliation.
+     *
+     * @param string $key    Value to check.
+     * @param array  $search An array with keys to check.
+     *
+     * @return bool
+     */
+    public static function arrayKeyExistsIgnoreCase($key, array $search) {
+        array_key_exists(strtolower($key), array_change_key_case($search));
     }
 
     /**
