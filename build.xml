@@ -43,7 +43,7 @@
  <target name="phpab" description="Generate autoloader scripts">
   <exec executable="phpab.bat">
    <arg value="--output" />
-   <arg path="${basedir}/src/autoload.php" />
+   <arg path="${basedir}/src/WindowsAzure.php" />
    <arg value="--template" />
    <arg path="${basedir}/build/src_autoload.php.in" />
    <arg value="--indent" />
@@ -53,7 +53,7 @@
 
   <exec executable="phpab.bat">
    <arg value="--output" />
-   <arg path="${basedir}/tests/autoload.php" />
+   <arg path="${basedir}/tests/WindowsAzureTests.php" />
    <arg value="--template" />
    <arg path="${basedir}/build/tests_autoload.php.in" />
    <arg value="--indent" />
