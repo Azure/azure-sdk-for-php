@@ -15,42 +15,45 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   WindowsAzure\Services\ServiceBus
+ * @package   Tests\Unit\WindowsAzure\Services\Queue\Models
  * @author    Azure PHP SDK <azurephpsdk@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
- 
-namespace WindowsAzure\Services\ServiceBus;
-use WindowsAzure\Core\Configuration;
-use WindowsAzure\Resources;
+
+namespace Tests\Unit\WindowsAzure\Services\ServiceBus\Models;
+use WindowsAzure\Services\ServiceBus\Models\ActiveToken;
+use WindowsAzure\Services\ServiceBus\Models\WrapAccessTokenResult;
 
 /**
- * Factory for creating IWrap objects
+ * Unit tests for class WrapAccessTokenResult
  *
  * @category  Microsoft
- * @package   WindowsAzure\Services\ServiceBus
+ * @package   Tests\Unit\WindowsAzure\Services\Queue\Models
  * @author    Azure PHP SDK <azurephpsdk@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @version   Release: @package_version@
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
-class WrapService
+class ActiveTokenTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * Creates new object based on the builder type in the $config.
-     *
-     * @param WindowsAzure\Core\Configuration    $config  The config object.
-     * @param WindowsAzure\Core\IServicesBuilder $builder The builder object.
-     * 
-     * @return WindowsAzure\Services\ServiceBus\IWrap
+     * @covers WindowsAzure\Services\ServiceBus\Models\ActiveToken::__construct
      */
-    public static function create($config, $builder = null)
+    public function testActiveTokenConstructor()
     {
-        return $config->create(Resources::WRAP_TYPE_NAME, $builder);
+        // Setup
+        $wrapAccessTokenResult = new WrapAccessTokenResult();
+        
+        // Test
+        $activeToken = new ActiveToken($wrapAccessTokenResult);
+        
+        // Assert
+        $this->assertNotNull($activeToken);
     }
+    
 }
 
 ?>

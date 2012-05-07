@@ -94,6 +94,15 @@ class RestProxy
     {
         return $this->_uri;
     }
+
+    /** 
+     * Sets the Uri of the service. 
+     *
+     */
+    public function setUri($uri)
+    {
+        $this->_uri = $uri;
+    }
     
     /**
      * Sends HTTP request with the specified HTTP call context.
@@ -111,12 +120,14 @@ class RestProxy
         $statusCodes = $context->getStatusCodes();
         $body        = $context->getBody();
         $queryParams = $context->getQueryParameters();
+        $postParameters = $context->getPostParameters();
         $path        = $context->getPath();
 
         $channel->setMethod($context->getMethod());
         $channel->setExpectedStatusCode($statusCodes);
         $channel->setBody($body);
         $channel->setHeaders($headers);
+        $channel->setPostParameters($postParameters);
         $url->setQueryVariables($queryParams);
         $url->appendUrlPath($path);
         
@@ -132,14 +143,14 @@ class RestProxy
      * @param WindowsAzure\Core\IServiceFilter $filter Filter to add for 
      * the pipeline.
      * 
-     * @return WindowsAzure\Services\Queue\IQueue.
+     * @return RestProxy.
      */
     public function withFilter($filter)
     {
-        $queueWithFilter             = clone $this;
-        $queueWithFilter->_filters[] = $filter;
+        $serviceProxyWithFilter             = clone $this;
+        $serviceProxyWithFilter->_filters[] = $filter;
 
-        return $queueWithFilter;
+        return $serviceProxyWithFilter;
     }
     
     /**

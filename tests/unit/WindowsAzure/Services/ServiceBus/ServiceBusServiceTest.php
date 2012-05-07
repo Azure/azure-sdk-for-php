@@ -27,15 +27,16 @@ namespace Tests\Unit\WindowsAzure\Services\ServiceBus;
 
 use WindowsAzure\Services\Core\Models\ServiceProperties;
 use Tests\Framework\TestResources;
-use Tests\Framework\ServiceBusRestProxyTestBase;
+use Tests\Framework\WrapRestProxyTestBase;
 use WindowsAzure\Core\Configuration;
 use WindowsAzure\Core\ServiceException;
 use WindowsAzure\Core\WindowsAzureUtilities;
-use WindowsAzure\Services\ServiceBus\ServiceBusRestProxy;
+use WindowsAzure\Services\ServiceBus\WrapRestProxy;
+use WindowsAzure\Services\ServiceBus\ServiceBusSettings;
 use WindowsAzure\Resources;
 
 /**
- * Unit tests for ServiceBusRestProxy class
+ * Unit tests for WrapRestProxy class
  *
  * @package    Tests\Unit\WindowsAzure\Services\ServiceBus
  * @author     Azure PHP SDK <azurephpsdk@microsoft.com>
@@ -44,18 +45,35 @@ use WindowsAzure\Resources;
  * @version    Release: @package_version@
  * @link       http://pear.php.net/package/azure-sdk-for-php
  */
-class ServiceBusRestProxyTest extends ServiceBusRestProxyTestBase
+class ServiceBusServiceTest extends WrapRestProxyTestBase
 {
     /**
-     * @covers WindowsAzure\Services\ServiceBus\ServiceBusRestProxy::deleteQueue
+     * @covers WindowsAzure\Services\ServiceBus\ServiceBusService::create
      */
-    public function testDeleteQueueNonExistQueueFail()
+    public function testServiceBusServiceCreate() 
     {
-        $this->setExpectedException(get_class(
-            new ServiceException(''))
-        );
+        
+        $serviceBusUri = 'https://'
+            .TestResources::serviceBusNamespace()
+            .'.servicebus.windows.net';
 
-        $this->wrapper->deleteQueue('IDoNotExist');
+        $wrapUri = 'https://'
+            .TestResources::serviceBusNamespace()
+            .'-sb.accesscontrol.windows.net';
+
+        $wrapName = TestResources::wrapAuthenticationName();
+        $wrapPassword = TestResources::wrapPassword();
+
+        $config = new Configuration();
+        $config->setProperty(ServiceBusSettings::URI, $serviceBusUri);
+        $config->setProperty(ServiceBusSettings::WRAP_URI, $wrapUri);
+        $config->setProperty(ServiceBusSettings::WRAP_NAME, $wrapName);
+        $config->setProperty(ServiceBusSettings::WRAP_PASSWORD, $wrapPassword);
+
+        $serviceBusRestProxy = $config->create(Resources::SERVICE_BUS_TYPE_NAME);
+
+        $this->assertNotNull($serviceBusRestProxy);
+        
     }
 }
 

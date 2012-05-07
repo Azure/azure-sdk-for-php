@@ -98,6 +98,7 @@ class ServiceRestProxy extends RestProxy
         $method, 
         $headers, 
         $queryParams, 
+        $postParameters,
         $path, 
         $statusCode,
         $body = Resources::EMPTY_STRING
@@ -108,6 +109,7 @@ class ServiceRestProxy extends RestProxy
         $context->setMethod($method);
         $context->setPath($path);
         $context->setQueryParameters($queryParams);
+        $context->setPostParameters($postParameters);
         
         if (is_array($statusCode)) {
             $context->setStatusCodes($statusCode);
@@ -163,6 +165,16 @@ class ServiceRestProxy extends RestProxy
         }
         
         return $headers;
+    }
+    
+    public function addPostParameter(
+        $postParameters,
+        $key,
+        $value
+    ) {
+        Validate::isArray($postParameters, 'postParameters');
+        $postParameters[$key] = $value;
+        return $postParameters; 
     }
     
     /**

@@ -29,13 +29,14 @@ use WindowsAzure\Core\WindowsAzureUtilities;
 use WindowsAzure\Services\Core\Models\GetServicePropertiesResult;
 use WindowsAzure\Services\Core\Models\ServiceProperties;
 use WindowsAzure\Services\Core\ServiceRestProxy;
+use WindowsAzure\services\ServiceBus\ServiceBusSettings;
+use WindowsAzure\services\ServiceBus\Models\WrapAccessTokenResult;
 use WindowsAzure\Resources;
 use WindowsAzure\Utilities;
 use WindowsAzure\Validate;
 
 /**
- * This class constructs HTTP requests and receive HTTP responses for queue 
- * service layer.
+ * The WRAP service layer. 
  *
  * @category  Microsoft
  * @package   WindowsAzure\Services\ServiceBus
@@ -56,9 +57,9 @@ class WrapRestProxy extends ServiceRestProxy
      * 
      * @return none
      */
-    public function __construct($channel, $uri, $dataSerializer)
+    public function __construct($channel, $uri)
     {
-        parent::__construct($channel, $uri, '', $dataSerializer);
+        parent::__construct($channel, $uri, '', null);
     }
 
     /**
@@ -73,23 +74,42 @@ class WrapRestProxy extends ServiceRestProxy
      */
     public function wrapAccessToken($uri, $name, $password, $scope)
     {
-        $method      = Resources::HTTP_POST;
-        $headers     = array();
-        $queryParams = array();
-        $statusCode  = Resources::STATUS_OK;
+        $method         = Resources::HTTP_POST;
+        $headers        = array();
+        $queryParams    = array();
+        $postParameters = array();
+        $statusCode     = Resources::STATUS_OK;
         
-        $this->addOptionalQueryParam($queryParams, Resources::WRAP_NAME, $name);
-        $this->addOptionalQueryParam(
-            $queryParams, 
+        $postParameters = $this->addPostParameter(
+            $postParameters, 
+            Resources::WRAP_NAME, 
+            $name
+        );
+        
+        $postParameters = $this->addPostParameter(
+            $postParameters, 
             Resources::WRAP_PASSWORD, 
             $password
         );
-        $this->addOptionalQueryParam($queryParams, Resources::WRAP_SCOPE, $scope);
         
-        $response = $this->send($method, $headers, $queryParams, $uri, $statusCode);
-        $parsed   = $this->dataSerializer->unserialize($response->getBody());
-
-        return WrapAccessTokenResult::create($parsed);
+        $postParameters = $this->addPostParameter(
+            $postParameters, 
+            Resources::WRAP_SCOPE, 
+            $scope
+        );
+        
+        $this->setUri($uri);
+        
+        $response = $this->send(
+            $method, 
+            $headers, 
+            $queryParams, 
+            $postParameters, 
+            Resources::EMPTY_STRING, 
+            $statusCode
+        );
+        
+        return WrapAccessTokenResult::create($response->getBody());
     }
 
 }

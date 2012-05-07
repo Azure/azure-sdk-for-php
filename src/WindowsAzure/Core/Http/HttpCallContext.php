@@ -61,6 +61,13 @@ class HttpCallContext
      * @var array
      */
     private $_queryParams;
+
+    /** 
+     * The HTTP POST parameters.
+     * 
+     * @var array.
+     */
+    private $_postParameters;
     
     /**
      * @var string
@@ -93,13 +100,14 @@ class HttpCallContext
      */
     public function __construct()
     {
-        $this->_method      = null;
-        $this->_body        = null;
-        $this->_path        = null;
-        $this->_uri         = null;
-        $this->_queryParams = array();
-        $this->_statusCodes = array();
-        $this->_headers     = array();
+        $this->_method         = null;
+        $this->_body           = null;
+        $this->_path           = null;
+        $this->_uri            = null;
+        $this->_queryParams    = array();
+        $this->_postParameters = array();
+        $this->_statusCodes    = array();
+        $this->_headers        = array();
     }
     
     /**
@@ -342,6 +350,28 @@ class HttpCallContext
         Validate::isString($value, 'value');
         
         $this->_queryParams[$name] = $value;
+    }
+    
+    /** 
+     * Gets HTTP POST parameters. 
+     *
+     * @return array
+     */
+    public function getPostParameters()
+    {   
+        return $this->_postParameters;
+    }
+
+    /** 
+     * Sets HTTP POST parameters.
+     * 
+     * @param array $postPaameters The HTTP POST parameters.
+     * 
+     * @return none
+     */
+    public function setPostParameters($postParameters)
+    {
+        $this->_postParameters = $postParameters;
     }
     
     /**
