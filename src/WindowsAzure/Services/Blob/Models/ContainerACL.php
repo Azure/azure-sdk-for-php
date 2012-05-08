@@ -80,18 +80,16 @@ class ContainerAcl
      * 
      * @param string $publicAccess container public access
      * @param string $etag         container etag
-     * @param string $lastModified last modification in string representation
+     * @param \DateTime $lastModified last modification in DateTime
      * @param array  $parsed       parsed response into array representation
      * 
      * @return none.
      */
     public static function create($publicAccess, $etag, $lastModified, $parsed)
     {
-        $date = WindowsAzureUtilities::rfc1123ToDateTime($lastModified);
-        
         $result                     = new ContainerAcl();
         $result->_etag              = $etag;
-        $result->_lastModified      = $date;
+        $result->_lastModified      = $lastModified;
         $result->_publicAccess      = $publicAccess;
         $result->_signedIdentifiers = array();
         
@@ -100,8 +98,8 @@ class ContainerAcl
             $temp    = Utilities::getArray($entries);
 
             foreach ($temp as $value) {
-                $start      = urldecode($value['AccessPolicy']['Start']);
-                $expiry     = urldecode($value['AccessPolicy']['Expiry']);
+                $start      = \WindowsAzure\Utilities::convertToDateTime(urldecode($value['AccessPolicy']['Start']));
+                $expiry     = \WindowsAzure\Utilities::convertToDateTime(urldecode($value['AccessPolicy']['Expiry']));
                 $permission = $value['AccessPolicy']['Permission'];
                 $id         = $value['Id'];
                 $result->addSignedIdentifier($id, $start, $expiry, $permission);
@@ -229,8 +227,8 @@ class ContainerAcl
     public function addSignedIdentifier($id, $start, $expiry, $permission)
     {
         Validate::isString($id, 'id');
-        Validate::isString($start, 'start');
-        Validate::isString($expiry, 'expiry');
+        Validate::isDate($start, 'start');
+        Validate::isDate($expiry, 'expiry');
         Validate::isString($permission, 'permission');
         
         $accessPolicy = new AccessPolicy();
