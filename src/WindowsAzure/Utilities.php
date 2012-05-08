@@ -340,7 +340,7 @@ class Utilities
      * @return bool
      */
     public static function arrayKeyExistsIgnoreCase($key, array $search) {
-        array_key_exists(strtolower($key), array_change_key_case($search));
+        return array_key_exists(strtolower($key), array_change_key_case($search));
     }
 
     /**
