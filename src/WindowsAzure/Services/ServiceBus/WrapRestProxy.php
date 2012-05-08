@@ -51,15 +51,14 @@ class WrapRestProxy extends ServiceRestProxy
     /** 
      * Creates a WrapRestProxy with specified parameters. 
      * 
-     * @param \IHttpClient $channel        The channel to send the WRAP request. 
-     * @param string       $uri            The Uri of the WRAP service. 
-     * @param \ISerializer $dataSerializer The serializer of the data.
+     * @param IHttpClient $channel The channel to send the WRAP request. 
+     * @param string      $uri     The Uri of the WRAP service. 
      * 
      * @return none
      */
     public function __construct($channel, $uri)
     {
-        parent::__construct($channel, $uri, '', null);
+        parent::__construct($channel, $uri, Resources::EMPTY_STRING, null);
     }
 
     /**

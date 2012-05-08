@@ -98,6 +98,9 @@ class RestProxy
     /** 
      * Sets the Uri of the service. 
      *
+     * @param string $uri The URI of the request.
+     * 
+     * @return none
      */
     public function setUri($uri)
     {
@@ -113,15 +116,15 @@ class RestProxy
      */
     protected function sendContext($context)
     {
-        $channel     = clone $this->_channel;
-        $contextUrl  = $context->getUri();
-        $url         = new Url(empty($contextUrl) ? $this->_uri : $contextUrl);
-        $headers     = $context->getHeaders();
-        $statusCodes = $context->getStatusCodes();
-        $body        = $context->getBody();
-        $queryParams = $context->getQueryParameters();
+        $channel        = clone $this->_channel;
+        $contextUrl     = $context->getUri();
+        $url            = new Url(empty($contextUrl) ? $this->_uri : $contextUrl);
+        $headers        = $context->getHeaders();
+        $statusCodes    = $context->getStatusCodes();
+        $body           = $context->getBody();
+        $queryParams    = $context->getQueryParameters();
         $postParameters = $context->getPostParameters();
-        $path        = $context->getPath();
+        $path           = $context->getPath();
 
         $channel->setMethod($context->getMethod());
         $channel->setExpectedStatusCode($statusCodes);

@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 /**
  * LICENSE: Licensed under the Apache License, Version 2.0 (the "License");
@@ -73,7 +73,7 @@ class WrapTokenManager
     /** 
      * The active WRAP access tokens.
      * 
-     * @var \array.
+     * @var array.
      */
     private static $_activeTokens;
 
@@ -88,14 +88,15 @@ class WrapTokenManager
      */
     public function __construct($wrapUri, $wrapName, $wrapPassword) 
     {
-        $this->_wrapUri = $wrapUri;
-        $this->_wrapName = $wrapName;
+        $this->_wrapUri      = $wrapUri;
+        $this->_wrapName     = $wrapName;
         $this->_wrapPassword = $wrapPassword;
         
         $config = new configuration();
         $config->setProperty(
             ServiceBusSettings::WRAP_URI, 
-            $this->_wrapUri);
+            $this->_wrapUri
+        );
             
         $config->setProperty(
             ServiceBusSettings::WRAP_NAME, 
@@ -118,15 +119,14 @@ class WrapTokenManager
      * 
      * @param string $targetUri The target Uri of the WRAP access Token. 
      * 
-     * return string
+     * @return string
      */
     public function getAccessToken($targetUri) 
     {
-        $this->sweepExpiredTokens();
-        $scopeUri = $this->createScopeUri($targetUri);
+        $this->_sweepExpiredTokens();
+        $scopeUri = $this->_createScopeUri($targetUri);
         
-        if (array_key_exists($scopeUri, $this->_activeTokens))
-        {
+        if (array_key_exists($scopeUri, $this->_activeTokens)) {
             $activeToken = $this->activeTokens[$scopeUri];
             return $activeToken->getWrapAccessTokenResult->getAccessToken();
         }
@@ -139,9 +139,9 @@ class WrapTokenManager
         );
         
         $expirationDateTime = new \DateTime("now");
-        $expiresIn = intval($wrapAccessTokenResult->getExpiresIn() / 2); 
+        $expiresIn          = intval($wrapAccessTokenResult->getExpiresIn() / 2); 
         $expirationDateTime = $expirationDateTime->add(
-                new \DateInterval('PT'.$expiresIn.'S')
+            new \DateInterval('PT'.$expiresIn.'S')
         );
 
         $acquiredActiveToken = new ActiveToken($wrapAccessTokenResult);
@@ -150,73 +150,91 @@ class WrapTokenManager
         return $wrapAccessTokenResult->getAccessToken(); 
     }
     
-    private function sweepExpiredTokens()
+    /** 
+     * Removes the expired WRAP access tokens. 
+     * 
+     * @return none
+     */
+    private function _sweepExpiredTokens()
     {
-        foreach ($this->_activeTokens as $scopeUri => $activeToken) 
-        {
+        foreach ($this->_activeTokens as $scopeUri => $activeToken) {
             $currentDateTime = new DateTime("now");
-            if ($activeToken->getExpirationDateTime() > $currentDateTime )
-            {
+            if ($activeToken->getExpirationDateTime() > $currentDateTime ) {
                 unset($this->_activeTokens[$scopeUri]);
             }
         }
     }
 
-    private function createScopeUri($targetUri)
+    /**
+     * Creates a SCOPE URI with specified target URI. 
+     *
+     * @param array $targetUri The target URI.
+     * 
+     * @return string
+     */   
+    private function _createScopeUri($targetUri)
     {   
         $targetUriComponents = parse_url($targetUri);
 
-        $scopeUri = '';
-        $authority = '';
-        if ($this->containsValidAuthority($targetUriComponents))
-        {
-            $authority = $this->createAuthority($targetUriComponents);
-            
+        $scopeUri  = Resources::EMPTY_STRING;
+        $authority = Resources::EMPTY_STRING;
+        if ($this->_containsValidAuthority($targetUriComponents)) {
+            $authority = $this->_createAuthority($targetUriComponents);
         }
     
         $scopeUri = 'http://'
             .$authority
             .$targetUriComponents[Resources::PHP_URL_HOST];
         
-        if (array_key_exists(Resources::PHP_URL_PATH, $targetUriComponents))
-        {
+        if (array_key_exists(Resources::PHP_URL_PATH, $targetUriComponents)) {
             $scopeUri .= $targetUriComponents[Resources::PHP_URL_PATH];
         }
 
         return $scopeUri;
     }
 
-    private function containsValidAuthority($targetUriComponents)
+    /** 
+     * Gets whether the authority related elements are valid. 
+     * 
+     * @param array $uriComponents The components of an URI.
+     * 
+     * @return boolean
+     */
+    private function _containsValidAuthority($uriComponents)
     {
-        if (! array_key_exists(Resources::PHP_URL_USER, $targetUriComponents))
-        {
+        if (! array_key_exists(Resources::PHP_URL_USER, $uriComponents)) {
             return false;
         }
 
-        if (empty($targetUriComponents[Resources::PHP_URL_USER]))
-        {
+        if (empty($uriComponents[Resources::PHP_URL_USER])) {
             return false;
         }
 
-        if (! array_key_exists(Resources::PHP_URL_PASS, $targetUriComponents))
-        {
+        if (! array_key_exists(Resources::PHP_URL_PASS, $uriComponents)) {
             return false;
         }
 
-        if (empty($targetUriComponents[Resources::PHP_URL_PASS]))
-        {
+        if (empty($uriComponents[Resources::PHP_URL_PASS])) {
             return false;
         }
 
         return true;
     }
 
-    private function createAuthority($targetUriComponents)
+    /** 
+     * Creates an authority string with specified Uri components. 
+     *
+     * @param array $uriComponents The URI components
+     *
+     * @return string 
+     */
+    private function _createAuthority($uriComponents)
     {
-        $authority = $targetUriComponents[Resources::PHP_URL_USER]
-            .'@'
-            .$targetUriComponents[Resources::PHP_URL_PASS]
-            .'/'; 
+        $authority = sprintf(
+            Resources::AUTHORITY_FORMAT,
+            $uriComponents[Resources::PHP_URL_USER],
+            $uriComponents[Resources::PHP_URL_PASS]
+        );
 
         return $authority;
     }

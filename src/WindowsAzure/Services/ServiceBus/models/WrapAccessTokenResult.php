@@ -53,20 +53,25 @@ class WrapAccessTokenResult
     /**
      * Creates WrapAccesTokenResult object from parsed XML response.
      *
-     * @param array $parsedResponse XML response parsed into array.
+     * @param array $response The get WRAP access token response.
      * 
      * @return WindowsAzure\Services\ServiceBus\Models\WrapAccessTokenResult.
      */
     public static function create($response)
     {
-        $wrapAccessTokenResult                  = new WrapAccessTokenResult();
+        $wrapAccessTokenResult = new WrapAccessTokenResult();
         parse_str($response, $parsedResponse);
 
-        $wrapAccessTokenResult->_accessToken    = Utilities::tryGetValue(
-            $parsedResponse, Resources::WRAP_ACCESS_TOKEN
+        $wrapAccessTokenResult->setAccessToken(
+            Utilities::tryGetValue(
+                $parsedResponse, Resources::WRAP_ACCESS_TOKEN
+            )
         );
-        $wrapAccessTokenResult->_expiresIn      = Utilities::tryGetValue(
-            $parsedResponse, Resources::WRAP_ACCESS_TOKEN_EXPIRES_IN
+
+        $wrapAccessTokenResult->setExpiresIn(
+            Utilities::tryGetValue(
+                $parsedResponse, Resources::WRAP_ACCESS_TOKEN_EXPIRES_IN
+            )
         );
         
         return $wrapAccessTokenResult;

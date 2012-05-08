@@ -303,8 +303,8 @@ class ServicesBuilder implements IServiceBuilder
      */
     private function _buildWrap($config)
     {
-        $httpClient    = new HttpClient();
-        $wrapWrapper   = new WrapRestProxy(
+        $httpClient  = new HttpClient();
+        $wrapWrapper = new WrapRestProxy(
             $httpClient,
             $config->getProperty(ServiceBusSettings::WRAP_URI) 
         );

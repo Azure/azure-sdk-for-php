@@ -53,7 +53,7 @@ class WrapFilter implements IServiceFilter
      * Creates a WrapFilter with specified WRAP parameters.
      *
      * @param string $wrapUri      The URI of the WRAP service. 
-     * @param string $wrapUserName The user name of the WRAP account.
+     * @param string $wrapUsername The user name of the WRAP account.
      * @param string $wrapPassword The password of the WRAP account.
      * 
      * @return
@@ -63,8 +63,8 @@ class WrapFilter implements IServiceFilter
     public function __construct(
         $wrapUri, 
         $wrapUsername, 
-        $wrapPassword)
-    {
+        $wrapPassword
+    ) {
         $this->_wrapTokenManager = new WrapTokenManager(
             $wrapUri, 
             $wrapUsername, 

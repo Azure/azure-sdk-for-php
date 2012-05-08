@@ -511,7 +511,7 @@ class QueueRestProxy extends ServiceRestProxy implements IQueue
             $statusCode
         );
 
-        $parsed   = $this->dataSerializer->unserialize($response->getBody());
+        $parsed = $this->dataSerializer->unserialize($response->getBody());
         
         return ListMessagesResult::create($parsed);
     }

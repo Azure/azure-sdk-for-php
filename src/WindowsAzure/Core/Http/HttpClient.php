@@ -84,8 +84,7 @@ class HttpClient implements IHttpClient
             Resources::SSL_VERIFY_HOST => false 
         );
 
-        if (!empty($certificatePath))
-        {
+        if (!empty($certificatePath)) {
             $config[Resources::SSL_LOCAL_CERT] = $certificatePath;
         }
 

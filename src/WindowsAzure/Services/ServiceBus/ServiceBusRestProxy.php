@@ -215,7 +215,15 @@ class ServiceBusRestProxy extends ServiceRestProxy implements IServiceBus
         $path        = $queuePath;
         $statusCode  = Resources::STATUS_CREATED;
         
-        $this->send($method, $headers, $queryParams, $postParams, $path, $statusCode);
+        $this->send(
+            $method, 
+            $headers, 
+            $queryParams, 
+            $postParams, 
+            $path, 
+            $statusCode
+        );
+
     }
 
     /**

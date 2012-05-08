@@ -365,12 +365,13 @@ class HttpCallContext
     /** 
      * Sets HTTP POST parameters.
      * 
-     * @param array $postPaameters The HTTP POST parameters.
+     * @param array $postParameters The HTTP POST parameters.
      * 
      * @return none
      */
     public function setPostParameters($postParameters)
     {
+        Validate::isArray($postParameters, 'postParameters');
         $this->_postParameters = $postParameters;
     }
     

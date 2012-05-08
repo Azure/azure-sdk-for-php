@@ -673,7 +673,7 @@ class BlobRestProxy extends ServiceRestProxy implements IBlob
             $statusCode
         );
 
-        $parsed   = $this->dataSerializer->unserialize($response->getBody());
+        $parsed = $this->dataSerializer->unserialize($response->getBody());
         
         return ListContainersResult::create($parsed);
     }
@@ -775,7 +775,8 @@ class BlobRestProxy extends ServiceRestProxy implements IBlob
             $queryParams, 
             $postParams,
             $path, 
-            $statusCode);
+            $statusCode
+        );
     }
     
     /**
@@ -1078,7 +1079,7 @@ class BlobRestProxy extends ServiceRestProxy implements IBlob
             $statusCode
         );
 
-        $parsed   = $this->dataSerializer->unserialize($response->getBody());
+        $parsed = $this->dataSerializer->unserialize($response->getBody());
         
         return ListBlobsResult::create($parsed);
     }
@@ -1539,9 +1540,10 @@ class BlobRestProxy extends ServiceRestProxy implements IBlob
             $queryParams, 
             $postParams,
             $path, 
-            $statusCode);
+            $statusCode
+        );
 
-        $parsed   = $this->dataSerializer->unserialize($response->getBody());
+        $parsed = $this->dataSerializer->unserialize($response->getBody());
         
         return ListBlobBlocksResult::create($response->getHeader(), $parsed);
     }
@@ -2162,8 +2164,9 @@ class BlobRestProxy extends ServiceRestProxy implements IBlob
         
         $metadata = $options->getMetaData();
         if (!is_null($metadata)) {
-            $metadataHeader
-                = WindowsAzureUtilities::generateMetadataHeaders($metadata);
+            $metadataHeader = WindowsAzureUtilities::generateMetadataHeaders(
+                $metadata
+            );
             $headers        = \array_merge($headers, $metadataHeader);
         }
         
