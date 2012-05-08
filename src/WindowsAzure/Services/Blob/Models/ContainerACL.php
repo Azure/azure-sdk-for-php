@@ -230,8 +230,8 @@ class ContainerAcl
     public function addSignedIdentifier($id, $start, $expiry, $permission)
     {
         Validate::isString($id, 'id');
-        Validate::isDate($start, 'start');
-        Validate::isDate($expiry, 'expiry');
+        Validate::isDate($start);
+        Validate::isDate($expiry);
         Validate::isString($permission, 'permission');
         
         $accessPolicy = new AccessPolicy();
