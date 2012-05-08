@@ -102,6 +102,130 @@ class ChunkedGoalStateDeserializerTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($incarnation, $goalState->getIncarnation());
         $this->assertEquals($expectedState, $goalState->getExpectedState());
     }
+    
+    /**
+     * @covers WindowsAzure\ServiceRuntime\ChunkedGoalStateDeserializer::__construct
+     * @covers WindowsAzure\ServiceRuntime\ChunkedGoalStateDeserializer::initialize
+     * @covers WindowsAzure\ServiceRuntime\ChunkedGoalStateDeserializer::deserialize
+     */
+    public function testDeserializeWithNewLineEnd()
+    {
+        // Setup
+        $rootDirectory = 'root';
+
+        \vfsStreamWrapper::register(); 
+        \vfsStreamWrapper::setRoot(new \vfsStreamDirectory($rootDirectory));
+        
+        $roleEnvironmentPath = 'mypath';
+        $currentStateEndpoint = 'endpoint';
+        $incarnation = 1;
+        $expectedState = 'started';
+        
+        $fileName = 'file';
+        $fileContent = '<?xml version="1.0" encoding="utf-8"?>' .
+            '<GoalState xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" ' .
+            'xmlns:xsd="http://www.w3.org/2001/XMLSchema">' .
+            '<Incarnation>' .
+            $incarnation .
+            '</Incarnation>' .
+            '<ExpectedState>' .
+            $expectedState .
+            '</ExpectedState>' .
+            '<RoleEnvironmentPath>' .
+            $roleEnvironmentPath .
+            '</RoleEnvironmentPath>' .
+            '<CurrentStateEndpoint>' .
+            $currentStateEndpoint .
+            '</CurrentStateEndpoint>' .
+            '<Deadline>9999-12-31T23:59:59.9999999</Deadline>' .
+            '</GoalState>';
+        
+        $fileContent = dechex(strlen($fileContent)) . "\n" . $fileContent . "\n";
+        
+        $file = \vfsStream::newFile($fileName);
+        $file->setContent($fileContent); 
+        
+        \vfsStreamWrapper::getRoot()->addChild($file);
+        
+        $fileInputChannel = new FileInputChannel();
+        $fileInputStream = $fileInputChannel->getInputStream(
+            \vfsStream::url($rootDirectory . '/' . $fileName)
+        );
+        
+        $chunkedGoalStateDeserializer = new ChunkedGoalStateDeserializer();
+        $chunkedGoalStateDeserializer->initialize($fileInputStream);
+        $goalState = $chunkedGoalStateDeserializer->deserialize();
+        
+        // Test
+        $this->assertNotEquals(null, $goalState);
+        $this->assertEquals($roleEnvironmentPath, $goalState->getEnvironmentPath());
+        $this->assertNotEquals(null, $goalState->getDeadline());
+        $this->assertEquals($currentStateEndpoint, $goalState->getCurrentStateEndpoint());
+        $this->assertEquals($incarnation, $goalState->getIncarnation());
+        $this->assertEquals($expectedState, $goalState->getExpectedState());
+    }
+    
+    /**
+     * @covers WindowsAzure\ServiceRuntime\ChunkedGoalStateDeserializer::__construct
+     * @covers WindowsAzure\ServiceRuntime\ChunkedGoalStateDeserializer::initialize
+     * @covers WindowsAzure\ServiceRuntime\ChunkedGoalStateDeserializer::deserialize
+     */
+    public function testDeserializeWithNewLineStart()
+    {
+        // Setup
+        $rootDirectory = 'root';
+
+        \vfsStreamWrapper::register(); 
+        \vfsStreamWrapper::setRoot(new \vfsStreamDirectory($rootDirectory));
+        
+        $roleEnvironmentPath = 'mypath';
+        $currentStateEndpoint = 'endpoint';
+        $incarnation = 1;
+        $expectedState = 'started';
+        
+        $fileName = 'file';
+        $fileContent = '<?xml version="1.0" encoding="utf-8"?>' .
+            '<GoalState xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" ' .
+            'xmlns:xsd="http://www.w3.org/2001/XMLSchema">' .
+            '<Incarnation>' .
+            $incarnation .
+            '</Incarnation>' .
+            '<ExpectedState>' .
+            $expectedState .
+            '</ExpectedState>' .
+            '<RoleEnvironmentPath>' .
+            $roleEnvironmentPath .
+            '</RoleEnvironmentPath>' .
+            '<CurrentStateEndpoint>' .
+            $currentStateEndpoint .
+            '</CurrentStateEndpoint>' .
+            '<Deadline>9999-12-31T23:59:59.9999999</Deadline>' .
+            '</GoalState>';
+        
+        $fileContent = "\n" . dechex(strlen($fileContent)) . "\n" . $fileContent;
+        
+        $file = \vfsStream::newFile($fileName);
+        $file->setContent($fileContent); 
+        
+        \vfsStreamWrapper::getRoot()->addChild($file);
+        
+        $fileInputChannel = new FileInputChannel();
+        $fileInputStream = $fileInputChannel->getInputStream(
+            \vfsStream::url($rootDirectory . '/' . $fileName)
+        );
+        
+        $chunkedGoalStateDeserializer = new ChunkedGoalStateDeserializer();
+        $chunkedGoalStateDeserializer->initialize($fileInputStream);
+        $goalState = $chunkedGoalStateDeserializer->deserialize();
+        
+        // Test
+        $this->assertNotEquals(null, $goalState);
+        $this->assertEquals($roleEnvironmentPath, $goalState->getEnvironmentPath());
+        $this->assertNotEquals(null, $goalState->getDeadline());
+        $this->assertEquals($currentStateEndpoint, $goalState->getCurrentStateEndpoint());
+        $this->assertEquals($incarnation, $goalState->getIncarnation());
+        $this->assertEquals($expectedState, $goalState->getExpectedState());
+    }
 }
 
 ?>

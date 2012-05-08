@@ -35,12 +35,12 @@ use WindowsAzure\Services\Core\Models\Logging;
 use WindowsAzure\Services\Core\Models\Metrics;
 use WindowsAzure\Services\Core\Models\RetentionPolicy;
 use WindowsAzure\Services\Core\Models\ServiceProperties;
+use WindowsAzure\Services\Table\Models\BatchError;
 use WindowsAzure\Services\Table\Models\BatchOperations;
 use WindowsAzure\Services\Table\Models\BatchResult;
 use WindowsAzure\Services\Table\Models\DeleteEntityOptions;
 use WindowsAzure\Services\Table\Models\EdmType;
 use WindowsAzure\Services\Table\Models\Entity;
-use WindowsAzure\Services\Table\Models\Filter;
 use WindowsAzure\Services\Table\Models\GetEntityResult;
 use WindowsAzure\Services\Table\Models\GetServicePropertiesResult;
 use WindowsAzure\Services\Table\Models\GetTableResult;
@@ -53,6 +53,7 @@ use WindowsAzure\Services\Table\Models\QueryTablesOptions;
 use WindowsAzure\Services\Table\Models\QueryTablesResult;
 use WindowsAzure\Services\Table\Models\TableServiceOptions;
 use WindowsAzure\Services\Table\Models\UpdateEntityResult;
+use WindowsAzure\Services\Table\Models\Filters\Filter;
 
 class OpType {
     const deleteEntity          = 'deleteEntity';
@@ -91,14 +92,14 @@ class TableServiceFunctionalTest extends FunctionalTestBase {
     */
     public function testGetServicePropertiesNoOptions() {
         $serviceProperties = TableServiceFunctionalTestData::getDefaultServiceProperties();
-       
+
         $shouldReturn = false;
         try {
             $this->wrapper->setServiceProperties($serviceProperties);
-            $this->assertFalse(WindowsAzureUtilities::isEmulated() == 1, 'Should succeed when not running in emulator');
+            $this->assertFalse(WindowsAzureUtilities::isEmulated(), 'Should succeed when not running in emulator');
         } catch (ServiceException $e) {
             // Expect failure in emulator, as v1.6 doesn't support this method
-            if (WindowsAzureUtilities::isEmulated()==1) {
+            if (WindowsAzureUtilities::isEmulated()) {
                 $this->assertEquals(400, $e->getCode(), 'getCode');
                 $shouldReturn = true;
             } else {
@@ -121,7 +122,7 @@ class TableServiceFunctionalTest extends FunctionalTestBase {
 
         try {
             $this->wrapper->setServiceProperties($serviceProperties);
-            $this->assertFalse(WindowsAzureUtilities::isEmulated() == 1, 'Should succeed when not running in emulator');
+            $this->assertFalse(WindowsAzureUtilities::isEmulated(), 'Should succeed when not running in emulator');
         } catch (ServiceException $e) {
             // Expect failure in emulator, as v1.6 doesn't support this method
             if (WindowsAzureUtilities::isEmulated()) {
@@ -140,7 +141,7 @@ class TableServiceFunctionalTest extends FunctionalTestBase {
         $effOptions = (is_null($options) ? new TableServiceOptions() : $options);
         try {
             $ret = (is_null($options) ? $this->wrapper->getServiceProperties() : $this->wrapper->getServiceProperties($effOptions));
-            $this->assertFalse(WindowsAzureUtilities::isEmulated()==1, 'Should succeed when not running in emulator');
+            $this->assertFalse(WindowsAzureUtilities::isEmulated(), 'Should succeed when not running in emulator');
             $this->verifyServicePropertiesWorker($ret, null);
         }
         catch (ServiceException $e) {
@@ -221,7 +222,7 @@ class TableServiceFunctionalTest extends FunctionalTestBase {
                 $this->wrapper->setServiceProperties($serviceProperties, $options);
             }
 
-            $this->assertFalse(WindowsAzureUtilities::isEmulated()==1, 'Should succeed when not running in emulator');
+            $this->assertFalse(WindowsAzureUtilities::isEmulated(), 'Should succeed when not running in emulator');
             $ret = (is_null($options) ? $this->wrapper->getServiceProperties() : $this->wrapper->getServiceProperties($options));
             $this->verifyServicePropertiesWorker($ret, $serviceProperties);
         } catch (ServiceException $e) {
@@ -244,9 +245,6 @@ class TableServiceFunctionalTest extends FunctionalTestBase {
     * @covers WindowsAzure\Services\Table\TableRestProxy::queryTables
     */
     public function testQueryTables() {
-        // This fails because of
-        // https://github.com/WindowsAzure/azure-sdk-for-php/issues/175
-        // https://github.com/WindowsAzure/azure-sdk-for-php/issues/197
         $interestingqueryTablesOptions = TableServiceFunctionalTestData::getInterestingQueryTablesOptions();
         foreach($interestingqueryTablesOptions as $options)  {
             $this->queryTablesWorker($options);
@@ -264,20 +262,18 @@ class TableServiceFunctionalTest extends FunctionalTestBase {
                 $options = new QueryTablesOptions();
             }
 
-            if (!is_null($options->getQuery()) && !is_null($options->getQuery()->getTop()) && $options->getQuery()->getTop() <= 0) {
-                $this->fail('Expect non-positive Top in $options->query to throw');
-            }
-            if (!is_null($options->getQuery()) && !is_null($options->getQuery()->getSelectFields()) && count($options->getQuery()->getSelectFields()) > 0) {
-                $this->fail('Expect selecting fields in $options->query to throw');
+            if ((!is_null($options->getTop()) && $options->getTop() <= 0)) {
+                if (WindowsAzureUtilities::isEmulated()) {
+                    $this->assertEquals(0, count($ret->getTables()), "should be no tables");
+                } else {
+                    $this->fail('Expect non-positive Top in $options to throw');
+                }
             }
 
             $this->verifyqueryTablesWorker($ret, $options);
         }
         catch (ServiceException $e) {
-            if (!is_null($options->getQuery()) && !is_null($options->getQuery()->getTop()) && $options->getQuery()->getTop() <= 0) {
-                $this->assertEquals(400, $e->getCode(), 'getCode');
-            }
-            else if (!is_null($options->getQuery()) && !is_null($options->getQuery()->getSelectFields()) && count($options->getQuery()->getSelectFields()) > 0) {
+            if ((!is_null($options->getTop()) && $options->getTop() <= 0) && !WindowsAzureUtilities::isEmulated()) {
                 $this->assertEquals(400, $e->getCode(), 'getCode');
             }
             else {
@@ -294,86 +290,34 @@ class TableServiceFunctionalTest extends FunctionalTestBase {
             $effectivePrefix = '';
         }
 
-        if (is_null($options->getQuery())) {
-            if (!is_null($options->getNextTableName())) {
-                $expectedData = array();
-                $foundNext = false;
-                foreach(TableServiceFunctionalTestData::$TEST_TABLE_NAMES as $s)  {
-                    if ($s == $options->getNextTableName()) {
-                        $foundNext = true;
-                    }
+        $expectedFilter = $options->getFilter();
+        if (TableServiceFunctionalTestUtils::isEqNotInTopLevel($expectedFilter)) {
+            // This seems wrong, but appears to be a bug in the $service itself.
+            // So working around the limitation.
+            $expectedFilter = TableServiceFunctionalTestUtils::cloneRemoveEqNotInTopLevel($expectedFilter);
+        }
 
-                    if (!$foundNext) {
-                        continue;
-                    }
-
-                    if (substr($s, 0, strlen($effectivePrefix)) == $effectivePrefix) {
-                        $fte = new FakeTableInfoEntry();
-                        $fte->TableName = $s;
-                        array_push($expectedData,$fte);
-                    }
-                }
-
-//                $this->assertEquals(count($expectedData), count($ret->getTables()), 'getTables');
-//                $tables = $ret->getTables();
-//                for ($i = 0; $i < count($expectedData); $i++) {
-//                    $this->assertEquals($expectedData[$i]->TableName, $tables[$i], 'getTables(');
-//                }
-
-                $tables = $ret->getTables();
-                foreach ($expectedData as $expected) {                    
-                    $expected = $expected->TableName;
-                    // Assume there are other tables. Make sure the expected ones are there.
-                    $found = false;
-                    foreach($ret->getTables() as $actual) {
-                        if ($expected == $actual) {
-                            $found = true;
-                            break;
-                        }
-                    }
-                    $this->assertTrue($found, $expected . ' should be in getTables');
-                }
-            }
-            else if (!is_null($options->getPrefix())) {
-                $expectedData = array();
-                foreach(TableServiceFunctionalTestData::$TEST_TABLE_NAMES as $s)  {
-                    if (substr($s, 0, strlen($effectivePrefix)) == $effectivePrefix) {
-                        $fte = new FakeTableInfoEntry();
-                        $fte->TableName = $s;
-                        array_push($expectedData, $fte);
-                    }
-                }
-                $this->assertEquals(count($expectedData), count($ret->getTables()), 'getTables');
-                $tables = $ret->getTables();
-                for ($i = 0; $i < count($expectedData); $i++) {
-                    $this->assertEquals($expectedData[$i]->TableName, $tables[$i], 'getTables(');
-                }
-            }
-            else {
-                // Assume there are other tables. Make sure the expected ones are there.
-                foreach(TableServiceFunctionalTestData::$TEST_TABLE_NAMES as $expected) {
-                    $found = false;
-                    foreach($ret->getTables() as $actual) {
-                        if ($expected == $actual) {
-                            $found = true;
-                            break;
-                        }
-                    }
-                    $this->assertTrue($found, $expected . ' should be in getTables');
-                }
+        $expectedData = array();
+        foreach(TableServiceFunctionalTestData::$TEST_TABLE_NAMES as $s)  {
+            if (substr($s, 0, strlen($effectivePrefix)) == $effectivePrefix) {
+                $fte = new FakeTableInfoEntry();
+                $fte->TableName = $s;
+                array_push($expectedData, $fte);
             }
         }
-        else {
-            $q = $options->getQuery();
-            $expectedFilter = $q->getFilter();
-            if (TableServiceFunctionalTestUtils::isEqNotInTopLevel($expectedFilter)) {
-                // This seems wrong, but appears to be a bug in the $service itself.
-                // So working around the limitation.
-                $expectedFilter = TableServiceFunctionalTestUtils::cloneRemoveEqNotInTopLevel($expectedFilter);
-            }
 
-            $expectedData = array();
-            foreach(TableServiceFunctionalTestData::$TEST_TABLE_NAMES as $s)  {
+        if (!is_null($options->getNextTableName())) {
+            $tmpExpectedData = array();
+            $foundNext = false;
+            foreach($expectedData as $s)  {
+                if ($s == $options->getNextTableName()) {
+                    $foundNext = true;
+                }
+
+                if (!$foundNext) {
+                    continue;
+                }
+
                 if (substr($s, 0, strlen($effectivePrefix)) == $effectivePrefix) {
                     $fte = new FakeTableInfoEntry();
                     $fte->TableName = $s;
@@ -381,22 +325,26 @@ class TableServiceFunctionalTest extends FunctionalTestBase {
                 }
             }
 
-            $expectedData = TableServiceFunctionalTestUtils::filterList($expectedFilter, $expectedData);
-            $expectedCount = min((is_null($q->getTop()) ? TableServiceFunctionalTestData::IntegerMAX_VALUE : (int) $q->getTop()), count($expectedData));
+            $expectedData = $tmpExpectedData;
+        }
 
-            $tables = $ret->getTables();
-            for ($i = 0; $i < $expectedCount; $i++) {
-                $expected = $expectedData[$i]->TableName;
-                // Assume there are other tables. Make sure the expected ones are there.
-                $found = false;
-                foreach($ret->getTables() as $actual) {
-                    if ($expected == $actual) {
-                        $found = true;
-                        break;
-                    }
+
+        $expectedData = TableServiceFunctionalTestUtils::filterList($expectedFilter, $expectedData);
+        $effectiveTop = (is_null($options->getTop()) ? 100000 : $options->getTop());
+        $expectedCount = min($effectiveTop, count($expectedData));
+
+        $tables = $ret->getTables();
+        for ($i = 0; $i < $expectedCount; $i++) {
+            $expected = $expectedData[$i]->TableName;
+            // Assume there are other tables. Make sure the expected ones are there.
+            $foundNext = false;
+            foreach($tables as $actual) {
+                if ($expected == $actual) {
+                    $foundNext = true;
+                    break;
                 }
-                $this->assertTrue($found, $expected . ' should be in getTables');
             }
+            $this->assertTrue($foundNext, $expected . ' should be in getTables');
         }
     }
 
@@ -428,26 +376,34 @@ class TableServiceFunctionalTest extends FunctionalTestBase {
         $table = TableServiceFunctionalTestData::getInterestingTableName();
         $created = false;
 
-            if (is_null($options)) {
-                $this->wrapper->createTable($table);
-            }
-            else {
-                $this->wrapper->createTable($table, $options);
-            }
-            $created = true;
-
-            if (is_null($options)) {
-                $options = new TableServiceOptions();
-            }
-
-            // Make sure that the list of all applicable Tables is correctly updated.
-            $qto = new QueryTablesOptions();
+        // Make sure that the list of all applicable Tables is correctly updated.
+        $qto = new QueryTablesOptions();
+        if (!WindowsAzureUtilities::isEmulated()) {
+            // The emulator has problems with some queries,
+            // but full Azure allow this to be more efficient:
             $qto->setPrefix(TableServiceFunctionalTestData::$testUniqueId);
-            $qs = $this->wrapper->queryTables($qto);
-            $this->assertEquals(count($qs->getTables()), count(TableServiceFunctionalTestData::$TEST_TABLE_NAMES) + 1, 'After adding one, with Prefix=(\'' . TableServiceFunctionalTestData::$testUniqueId . '\'), then count(Tables)');
-            if ($created) {
-                $this->wrapper->deleteTable($table);
-            }
+        }
+        $qsStart = $this->wrapper->queryTables($qto);
+
+        if (is_null($options)) {
+            $this->wrapper->createTable($table);
+        }
+        else {
+            $this->wrapper->createTable($table, $options);
+        }
+        $created = true;
+
+        if (is_null($options)) {
+            $options = new TableServiceOptions();
+        }
+
+        // Make sure that the list of all applicable Tables is correctly updated.
+        $qs = $this->wrapper->queryTables($qto);
+        if ($created) {
+            $this->wrapper->deleteTable($table);
+        }
+
+        $this->assertEquals(count($qsStart->getTables()) + 1, count($qs->getTables()), 'After adding one, with Prefix=(\'' . TableServiceFunctionalTestData::$testUniqueId . '\'), then count(Tables)');
     }
 
     /**
@@ -477,14 +433,21 @@ class TableServiceFunctionalTest extends FunctionalTestBase {
     private function deleteTableWorker($options) {
         $Table = TableServiceFunctionalTestData::getInterestingTableName();
 
+        // Make sure that the list of all applicable Tables is correctly updated.
+        $qto = new QueryTablesOptions();
+        if (!WindowsAzureUtilities::isEmulated()) {
+            // The emulator has problems with some queries,
+            // but full Azure allow this to be more efficient:
+            $qto->setPrefix(TableServiceFunctionalTestData::$testUniqueId);
+        }
+        $qsStart = $this->wrapper->queryTables($qto);
+
         // Make sure there is something to delete.
         $this->wrapper->createTable($Table);
 
         // Make sure that the list of all applicable Tables is correctly updated.
-        $qto = new QueryTablesOptions();
-        $qto->setPrefix(TableServiceFunctionalTestData::$testUniqueId);
         $qs = $this->wrapper->queryTables($qto);
-        $this->assertEquals(count($qs->getTables()), count(TableServiceFunctionalTestData::$TEST_TABLE_NAMES) + 1, 'After adding one, with Prefix=(\'' . TableServiceFunctionalTestData::$testUniqueId . '\'), then count Tables');
+        $this->assertEquals(count($qsStart->getTables()) + 1, count($qs->getTables()), 'After adding one, with Prefix=(\'' . TableServiceFunctionalTestData::$testUniqueId . '\'), then count Tables');
 
         $deleted = false;
         if (is_null($options)) {
@@ -501,17 +464,15 @@ class TableServiceFunctionalTest extends FunctionalTestBase {
         }
 
         // Make sure that the list of all applicable Tables is correctly updated.
-        $qto = new QueryTablesOptions();
-        $qto->setPrefix(TableServiceFunctionalTestData::$testUniqueId);
         $qs = $this->wrapper->queryTables($qto);
-        $this->assertEquals(count($qs->getTables()), count(TableServiceFunctionalTestData::$TEST_TABLE_NAMES), 'After adding then deleting one, with Prefix=(\'' . TableServiceFunctionalTestData::$testUniqueId . '\'), then count Tables');
 
-        // Nothing else interesting to check for the options.
         if (!$deleted) {
             $this->println('Test didn\'t delete the $Table, so try again more simply');
             // Try again. If it doesn't work, not much else to try.
             $this->wrapper->deleteTable($Table);
         }
+
+        $this->assertEquals(count($qsStart->getTables()), count($qs->getTables()),'After adding then deleting one, with Prefix=(\'' . TableServiceFunctionalTestData::$testUniqueId . '\'), then count(Tables)');
     }
 
     /**
@@ -568,7 +529,6 @@ class TableServiceFunctionalTest extends FunctionalTestBase {
     * @covers WindowsAzure\Services\Table\TableRestProxy::insertEntity
     */
     public function testGetEntity() {
-        // TODO: Fails because of https://github.com/WindowsAzure/azure-sdk-for-php/issues/208
         $ents = TableServiceFunctionalTestData::getInterestingEntities();
         foreach($ents as $ent)  {
             $options = new TableServiceOptions();
@@ -639,24 +599,23 @@ class TableServiceFunctionalTest extends FunctionalTestBase {
         }
         $this->assertNotNull($ent->getProperties(), 'getProperties');
 
+        $nullCount = 0;
+        foreach($entReturned->getProperties() as $pname => $actualProp) {
+            if (is_null($actualProp->getValue())) {
+                $nullCount++;
+            }
+        }
+
         // Need to skip null values from the count.
-        $this->assertEquals(count($expectedProps), count($entReturned->getProperties()), 'getProperties()');
+        $this->assertEquals(count($expectedProps) + $nullCount, count($entReturned->getProperties()), 'getProperties()');
 
         foreach($entReturned->getProperties() as $pname => $actualProp)  {
             $this->println($actualProp->getEdmType() . ':' . (is_null($actualProp->getValue()) ? 'NULL' :
                 ($actualProp->getValue() instanceof \DateTime ? "date" : $actualProp->getValue())));
         }
 
-//        echo "VVVV\n";
-//        echo self::entityPropsToString($expectedProps);
-//        echo "-----\n";
-//        echo self::entityPropsToString($ent->getProperties());
-//        echo "-----\n";
-//        echo self::entityPropsToString($entReturned->getProperties());
-//        echo "^^^^^^^\n";
-
         foreach($entReturned->getProperties() as $pname => $actualProp)  {
-            $expectedProp = $expectedProps[$pname];
+            $expectedProp = Utilities::tryGetValue($expectedProps, $pname, null);
             $this->assertNotNull($actualProp, 'getProperties[\'' . $pname . '\']');
             if (!is_null($expectedProp)) {
                 $this->compareProperties($pname, $actualProp, $expectedProp);
@@ -732,7 +691,6 @@ class TableServiceFunctionalTest extends FunctionalTestBase {
     * @covers WindowsAzure\Services\Table\TableRestProxy::queryEntities
     */
     public function testInsertEntity() {
-        // TODO: Fails because of https://github.com/WindowsAzure/azure-sdk-for-php/issues/156
         $ents = TableServiceFunctionalTestData::getInterestingEntities();
         foreach($ents as $ent)  {
             $options = new TableServiceOptions();
@@ -757,13 +715,12 @@ class TableServiceFunctionalTest extends FunctionalTestBase {
             }
         }
     }
-    
+
     /**
     * @covers WindowsAzure\Services\Table\TableRestProxy::insertEntity
     * @covers WindowsAzure\Services\Table\TableRestProxy::queryEntities
     */
     public function testInsertEntityBoolean() {
-        // TODO: Fails because of https://github.com/WindowsAzure/azure-sdk-for-php/issues/156
         foreach(TableServiceFunctionalTestData::getInterestingGoodBooleans() as $o)  {
             $ent = new Entity();
             $ent->setPartitionKey(TableServiceFunctionalTestData::getNewKey());
@@ -772,14 +729,12 @@ class TableServiceFunctionalTest extends FunctionalTestBase {
             $this->insertEntityWorker($ent, true, null, $o);
         }
     }
-    
+
     /**
     * @covers WindowsAzure\Services\Table\TableRestProxy::insertEntity
     * @covers WindowsAzure\Services\Table\TableRestProxy::queryEntities
     */
     public function testInsertEntityBooleanNegative() {
-        // TODO: Fails because of https://github.com/WindowsAzure/azure-sdk-for-php/issues/169
-        // TODO: Fails because of https://github.com/WindowsAzure/azure-sdk-for-php/issues/156
         foreach(TableServiceFunctionalTestData::getInterestingBadBooleans() as $o)  {
             $ent = new Entity();
             $ent->setPartitionKey(TableServiceFunctionalTestData::getNewKey());
@@ -800,7 +755,6 @@ class TableServiceFunctionalTest extends FunctionalTestBase {
     * @covers WindowsAzure\Services\Table\TableRestProxy::queryEntities
     */
     public function testInsertEntityDate() {
-        // TODO: Fails because of https://github.com/WindowsAzure/azure-sdk-for-php/issues/156
         foreach(TableServiceFunctionalTestData::getInterestingGoodDates() as $o)  {
             $ent = new Entity();
             $ent->setPartitionKey(TableServiceFunctionalTestData::getNewKey());
@@ -815,8 +769,6 @@ class TableServiceFunctionalTest extends FunctionalTestBase {
     * @covers WindowsAzure\Services\Table\TableRestProxy::queryEntities
     */
     public function testInsertEntityDateNegative() {
-        // TODO: Fails because of https://github.com/WindowsAzure/azure-sdk-for-php/issues/169
-        // TODO: Fails because of https://github.com/WindowsAzure/azure-sdk-for-php/issues/156
         foreach(TableServiceFunctionalTestData::getInterestingBadDates() as $o)  {
             $ent = new Entity();
             $ent->setPartitionKey(TableServiceFunctionalTestData::getNewKey());
@@ -837,7 +789,6 @@ class TableServiceFunctionalTest extends FunctionalTestBase {
     * @covers WindowsAzure\Services\Table\TableRestProxy::queryEntities
     */
     public function testInsertEntityDouble() {
-        // TODO: Fails because of https://github.com/WindowsAzure/azure-sdk-for-php/issues/156
         foreach(TableServiceFunctionalTestData::getInterestingGoodDoubles() as $o)  {
             $ent = new Entity();
             $ent->setPartitionKey(TableServiceFunctionalTestData::getNewKey());
@@ -852,7 +803,6 @@ class TableServiceFunctionalTest extends FunctionalTestBase {
     * @covers WindowsAzure\Services\Table\TableRestProxy::queryEntities
     */
     public function testInsertEntityDoubleNegative() {
-        // TODO: Fails because of https://github.com/WindowsAzure/azure-sdk-for-php/issues/156
         foreach(TableServiceFunctionalTestData::getInterestingBadDoubles() as $o)  {
             $ent = new Entity();
             $ent->setPartitionKey(TableServiceFunctionalTestData::getNewKey());
@@ -873,7 +823,6 @@ class TableServiceFunctionalTest extends FunctionalTestBase {
     * @covers WindowsAzure\Services\Table\TableRestProxy::queryEntities
     */
     public function testInsertEntityGuid() {
-        // TODO: Fails because of https://github.com/WindowsAzure/azure-sdk-for-php/issues/156
         foreach(TableServiceFunctionalTestData::getInterestingGoodGuids() as $o)  {
             $ent = new Entity();
             $ent->setPartitionKey(TableServiceFunctionalTestData::getNewKey());
@@ -908,7 +857,6 @@ class TableServiceFunctionalTest extends FunctionalTestBase {
     * @covers WindowsAzure\Services\Table\TableRestProxy::queryEntities
     */
     public function testInsertEntityInt() {
-        // TODO: Fails because of https://github.com/WindowsAzure/azure-sdk-for-php/issues/156
         foreach(TableServiceFunctionalTestData::getInterestingGoodInts() as $o)  {
             $ent = new Entity();
             $ent->setPartitionKey(TableServiceFunctionalTestData::getNewKey());
@@ -923,7 +871,6 @@ class TableServiceFunctionalTest extends FunctionalTestBase {
     * @covers WindowsAzure\Services\Table\TableRestProxy::queryEntities
     */
     public function testInsertEntityIntNegative() {
-        // TODO: Fails because of https://github.com/WindowsAzure/azure-sdk-for-php/issues/156
         foreach(TableServiceFunctionalTestData::getInterestingBadInts() as $o)  {
             $ent = new Entity();
             $ent->setPartitionKey(TableServiceFunctionalTestData::getNewKey());
@@ -944,7 +891,6 @@ class TableServiceFunctionalTest extends FunctionalTestBase {
     * @covers WindowsAzure\Services\Table\TableRestProxy::queryEntities
     */
     public function testInsertEntityLong() {
-        // TODO: Fails because of https://github.com/WindowsAzure/azure-sdk-for-php/issues/156
         foreach(TableServiceFunctionalTestData::getInterestingGoodLongs() as $o)  {
             $ent = new Entity();
             $ent->setPartitionKey(TableServiceFunctionalTestData::getNewKey());
@@ -979,7 +925,6 @@ class TableServiceFunctionalTest extends FunctionalTestBase {
     * @covers WindowsAzure\Services\Table\TableRestProxy::queryEntities
     */
     public function testInsertEntityBinary() {
-        // TODO: Fails because of https://github.com/WindowsAzure/azure-sdk-for-php/issues/156
         foreach(TableServiceFunctionalTestData::getInterestingGoodBinaries() as $o)  {
             $ent = new Entity();
             $ent->setPartitionKey(TableServiceFunctionalTestData::getNewKey());
@@ -994,8 +939,6 @@ class TableServiceFunctionalTest extends FunctionalTestBase {
     * @covers WindowsAzure\Services\Table\TableRestProxy::queryEntities
     */
     public function testInsertEntityBinaryNegative() {
-        // TODO: Fails because of https://github.com/WindowsAzure/azure-sdk-for-php/issues/169
-        // TODO: Fails because of https://github.com/WindowsAzure/azure-sdk-for-php/issues/156
         foreach(TableServiceFunctionalTestData::getInterestingBadBinaries() as $o)  {
             $ent = new Entity();
             $ent->setPartitionKey(TableServiceFunctionalTestData::getNewKey());
@@ -1016,7 +959,6 @@ class TableServiceFunctionalTest extends FunctionalTestBase {
     * @covers WindowsAzure\Services\Table\TableRestProxy::queryEntities
     */
     public function testInsertEntityString() {
-        // TODO: Fails because of https://github.com/WindowsAzure/azure-sdk-for-php/issues/156
         foreach(TableServiceFunctionalTestData::getInterestingGoodStrings() as $o)  {
             $ent = new Entity();
             $ent->setPartitionKey(TableServiceFunctionalTestData::getNewKey());
@@ -1081,20 +1023,12 @@ class TableServiceFunctionalTest extends FunctionalTestBase {
     * @covers WindowsAzure\Services\Table\TableRestProxy::updateEntity
     */
     public function testUpdateEntity() {
-        // TODO: Fails because of https://github.com/WindowsAzure/azure-sdk-for-php/issues/157
         $ents = TableServiceFunctionalTestData::getSimpleEntities(2);
         foreach(MutatePivot::values() as $mutatePivot) {
             foreach($ents as $initialEnt)  {
                 $options = new TableServiceOptions();
                 $ent = TableServiceFunctionalTestUtils::cloneEntity($initialEnt);
                 TableServiceFunctionalTestUtils::mutateEntity($ent, $mutatePivot);
-
-//                echo "VVVV\n";
-//                echo self::entityPropsToString($initialEnt->getProperties());
-//                echo "-----\n";
-//                echo self::entityPropsToString($ent->getProperties());
-//                echo "^^^^^^^\n";
-
                 $this->updateEntityWorker($initialEnt, $ent, $options);
             }
         }
@@ -1139,7 +1073,6 @@ class TableServiceFunctionalTest extends FunctionalTestBase {
     * @covers WindowsAzure\Services\Table\TableRestProxy::queryEntities
     */
     public function testMergeEntity() {
-        // TODO: Fails because of https://github.com/WindowsAzure/azure-sdk-for-php/issues/157
         $ents = TableServiceFunctionalTestData::getSimpleEntities(2);
         foreach(MutatePivot::values() as $mutatePivot) {
             foreach($ents as $initialEnt)  {
@@ -1197,7 +1130,17 @@ class TableServiceFunctionalTest extends FunctionalTestBase {
                 $options = new TableServiceOptions();
                 $ent = TableServiceFunctionalTestUtils::cloneEntity($initialEnt);
                 TableServiceFunctionalTestUtils::mutateEntity($ent, $mutatePivot);
-                $this->insertOrReplaceEntityWorker($initialEnt, $ent, $options);
+                try {
+                    $this->insertOrReplaceEntityWorker($initialEnt, $ent, $options);
+                    $this->assertFalse(WindowsAzureUtilities::isEmulated(), 'Should succeed when not running in emulator');
+                } catch (ServiceException $e) {
+                    // Expect failure in emulator, as v1.6 doesn't support this method
+                    if (WindowsAzureUtilities::isEmulated()) {
+                        $this->assertEquals(400, $e->getCode(), 'getCode');
+                    } else {
+                        throw $e;
+                    }
+                }
             }
         }
     }
@@ -1241,14 +1184,23 @@ class TableServiceFunctionalTest extends FunctionalTestBase {
     * @covers WindowsAzure\Services\Table\TableRestProxy::queryEntities
     */
     public function testInsertOrMergeEntity() {
-        // TODO: Fails because of https://github.com/WindowsAzure/azure-sdk-for-php/issues/156
         $ents = TableServiceFunctionalTestData::getSimpleEntities(2);
         foreach(MutatePivot::values() as $mutatePivot) {
             foreach($ents as $initialEnt)  {
                 $options = new TableServiceOptions();
                 $ent = TableServiceFunctionalTestUtils::cloneEntity($initialEnt);
                 TableServiceFunctionalTestUtils::mutateEntity($ent, $mutatePivot);
-                $this->insertOrMergeEntityWorker($initialEnt, $ent, $options);
+                try {
+                    $this->insertOrMergeEntityWorker($initialEnt, $ent, $options);
+                    $this->assertFalse(WindowsAzureUtilities::isEmulated(), 'Should succeed when not running in emulator');
+                } catch (ServiceException $e) {
+                    // Expect failure in emulator, as v1.6 doesn't support this method
+                    if (WindowsAzureUtilities::isEmulated()) {
+                        $this->assertEquals(400, $e->getCode(), 'getCode');
+                    } else {
+                        throw $e;
+                    }
+                }
             }
         }
     }
@@ -1260,7 +1212,7 @@ class TableServiceFunctionalTest extends FunctionalTestBase {
     */
     private function insertOrMergeEntityWorker($initialEnt, $ent, $options) {
         $table = $this->getCleanTable();
-        
+
         // Upload the entity.
         $this->wrapper->insertEntity($table, $initialEnt);
 
@@ -1317,7 +1269,6 @@ class TableServiceFunctionalTest extends FunctionalTestBase {
     * @covers WindowsAzure\Services\Table\TableRestProxy::updateEntity
     */
     public function testCRUDinsertEntity() {
-        // TODO: Fails because of https://github.com/WindowsAzure/azure-sdk-for-php/issues/156
         foreach(ConcurType::values() as $concurType)  {
             foreach(MutatePivot::values() as $mutatePivot) {
                 for ($i = 0; $i <= 1; $i++) {
@@ -1339,6 +1290,8 @@ class TableServiceFunctionalTest extends FunctionalTestBase {
     * @covers WindowsAzure\Services\Table\TableRestProxy::updateEntity
     */
     public function testCRUDinsertOrMergeEntity() {
+        $this->skipIfEmulated();
+
         foreach(ConcurType::values() as $concurType)  {
             foreach(MutatePivot::values() as $mutatePivot) {
                 for ($i = 0; $i <= 1; $i++) {
@@ -1360,6 +1313,8 @@ class TableServiceFunctionalTest extends FunctionalTestBase {
     * @covers WindowsAzure\Services\Table\TableRestProxy::updateEntity
     */
     public function testCRUDinsertOrReplaceEntity() {
+        $this->skipIfEmulated();
+
         foreach(ConcurType::values() as $concurType)  {
             foreach(MutatePivot::values() as $mutatePivot) {
                 for ($i = 0; $i <= 1; $i++) {
@@ -1425,19 +1380,11 @@ class TableServiceFunctionalTest extends FunctionalTestBase {
     private function crudWorker($opType, $concurType, $mutatePivot, $ent, $options) {
         $exptErr = $this->expectConcurrencyFailure($opType, $concurType);
         $table = $this->getCleanTable();
-        
+
         try {
             // Upload the entity.
             $initial = $this->wrapper->insertEntity($table, $ent);
             $targetEnt = $this->createTargetEntity($table, $initial->getEntity(), $concurType, $mutatePivot);
-
-//            echo "VVVV\n";
-//            echo self::entityToString($ent);
-//            echo "-----\n";
-//            echo self::entityToString($initial->getEntity());
-//            echo "-----\n";
-//            echo self::entityToString($targetEnt);
-//            echo "^^^^^^^\n";            
 
             $this->executeCrudMethod($table, $targetEnt, $opType, $concurType, $options);
 
@@ -1479,6 +1426,7 @@ class TableServiceFunctionalTest extends FunctionalTestBase {
     * @covers WindowsAzure\Services\Table\TableRestProxy::insertEntity
     */
     public function testBatchPositiveFirstKeyMatchEtagMismatch() {
+        $this->skipIfEmulated();
         $this->batchPositiveOuter(ConcurType::KeyMatchEtagMismatch, 345);
     }
 
@@ -1495,11 +1443,11 @@ class TableServiceFunctionalTest extends FunctionalTestBase {
     * @covers WindowsAzure\Services\Table\TableRestProxy::insertEntity
     */
     public function testBatchNegative() {
+        $this->skipIfEmulated();
+
         // The random here is not to generate random values, but to
         // get a good mix of values in the table entities.
 
-        // TODO: This is failing because of
-        // https://github.com/WindowsAzure/azure-sdk-for-php/issues/187
         mt_srand(456);
         $concurTypes = ConcurType::values();
         $mutatePivots = MutatePivot::values();
@@ -1518,8 +1466,6 @@ class TableServiceFunctionalTest extends FunctionalTestBase {
 
             for ($i = 0; $i <= 1; $i++) {
                 $options = ($i == 0 ? null : new TableServiceOptions());
-                // TODO: Currently fails because batch loses mapping between my ops and what is returned->
-                // https://github.com/WindowsAzure/azure-sdk-for-php/issues/187
                 $this->batchWorker($configs, $options);
             }
         }
@@ -1561,7 +1507,7 @@ class TableServiceFunctionalTest extends FunctionalTestBase {
 
         $effectiveProps = array();
         foreach($entReturned->getProperties() as $pname => $actualProp)  {
-            // This is to work with Dev Storage, which returns items for all 
+            // This is to work with Dev Storage, which returns items for all
             // columns, null valued or not.
             if (!is_null($actualProp) && !is_null($actualProp->getValue())) {
                 $cloneProp = new Property();
@@ -1570,7 +1516,7 @@ class TableServiceFunctionalTest extends FunctionalTestBase {
                 $effectiveProps[$pname] = $cloneProp;
             }
         }
-        
+
         // Compare the entities to make sure they match.
         $this->assertEquals($ent->getPartitionKey(), $entReturned->getPartitionKey(), 'getPartitionKey');
         $this->assertEquals($ent->getRowKey(), $entReturned->getRowKey(), 'getRowKey');
@@ -1604,7 +1550,7 @@ class TableServiceFunctionalTest extends FunctionalTestBase {
             $this->assertEquals($entReturned->getPropertyValue($pname), $actualProp->getValue(), 'getPropertyValue(\'' . $pname . '\')');
         }
     }
-    
+
     /**
     * @covers WindowsAzure\Services\Table\TableRestProxy::batch
     * @covers WindowsAzure\Services\Table\TableRestProxy::insertEntity
@@ -1623,6 +1569,12 @@ class TableServiceFunctionalTest extends FunctionalTestBase {
                 // Want to know there is at least one part that does not fail.
                 continue;
             }
+            if (WindowsAzureUtilities::isEmulated() && (
+                    ($firstOpType == OpType::insertOrMergeEntity) ||
+                    ($firstOpType == OpType::insertOrReplaceEntity))) {
+                // Emulator does not support these operations.
+                continue;
+            }
 
             $simpleEntities = TableServiceFunctionalTestData::getSimpleEntities(6);
             $configs = array();
@@ -1638,6 +1590,14 @@ class TableServiceFunctionalTest extends FunctionalTestBase {
                 while (!is_null($this->expectConcurrencyFailure($config->opType, $config->concurType))) {
                     $config->concurType = $concurTypes[mt_rand(0, count($concurTypes))];
                     $config->opType = $opTypes[mt_rand(0, count($opTypes))];
+                    if (WindowsAzureUtilities::isEmulated()) {
+                        if ($config->opType == OpType::insertOrMergeEntity) {
+                            $config->opType = OpType::mergeEntity;
+                        }
+                        if ($config->opType == OpType::insertOrReplaceEntity) {
+                            $config->opType = OpType::updateEntity;
+                        }
+                    }
                 }
                 $config->mutatePivot = $mutatePivots[mt_rand(0, count($mutatePivots) -1)];
                 $config->ent = $simpleEntities[$i];
@@ -1646,11 +1606,20 @@ class TableServiceFunctionalTest extends FunctionalTestBase {
 
             for ($i = 0; $i <= 1; $i++) {
                 $options = ($i == 0 ? null : new TableServiceOptions());
-                $this->batchWorker($configs, $options);
+                if (WindowsAzureUtilities::isEmulated()) {
+                    // The emulator has trouble with some batches.
+                    for ($j = 0; $j < count($configs); $j++) {
+                        $tmpconfigs = array();
+                        $tmpconfigs[] = $configs[$j];
+                        $this->batchWorker($tmpconfigs, $options);
+                    }
+                } else {
+                    $this->batchWorker($configs, $options);
+                }
             }
         }
     }
-    
+
     /**
     * @covers WindowsAzure\Services\Table\TableRestProxy::batch
     * @covers WindowsAzure\Services\Table\TableRestProxy::insertEntity
@@ -1659,10 +1628,12 @@ class TableServiceFunctionalTest extends FunctionalTestBase {
         $exptErrs = array();
         $expectedReturned = count($configs);
         $expectedError = false;
+        $expectedErrorCount = 0;
         for ($i = 0; $i < count($configs); $i++) {
             $err = $this->expectConcurrencyFailure($configs[$i]->opType, $configs[$i]->concurType);
-            if (!is_null($err) && !$expectedError) {
-                $expectedError = true;
+            if (!is_null($err)) {
+                $expectedErrorCount++;
+                $expectedError = true;                
             }
             array_push($exptErrs, $err);
         }
@@ -1674,7 +1645,7 @@ class TableServiceFunctionalTest extends FunctionalTestBase {
             $targetEnts = array();
             for ($i = 0; $i < count($configs); $i++) {
                 $initial = $this->wrapper->insertEntity($table, $configs[$i]->ent);
-                array_push($targetEnts, $this->createTargetEntity($table, $initial->getEntity(), 
+                array_push($targetEnts, $this->createTargetEntity($table, $initial->getEntity(),
                         $configs[$i]->concurType,
                         $configs[$i]->mutatePivot));
             }
@@ -1696,36 +1667,24 @@ class TableServiceFunctionalTest extends FunctionalTestBase {
             }
 
             // Verify results.
-            $this->assertEquals($expectedReturned, count($ret->getEntries()), 'count $ret->getEntries()');
-            $errorCount = 0;
-            for ($i = 0; $i < count($ret->getEntries()); $i++) {
-                $opResult = $ret->getEntries();
-                $opResult = $opResult[$i];
-                if ($expectedError && is_null($exptErrs[$i])) {
-                    $this->assertNull($opResult, 'When an op should succeed, but other ops fail, expect no reult');
-                }
-                else if ($expectedError && is_null($opResult)) {
-                    // This is OK, because only one failing op is needed.
-                }
-                else {
-                    if (!is_null($exptErrs[$i])) {
-                        $errorCount++;
-                    }
-                    $this->verifyBatchEntryType($configs[$i]->opType, $exptErrs[$i], $opResult);
-                    $this->verifyEntryData($table, $exptErrs[$i], $targetEnts[$i], $opResult);
-                }
-                // Check out the entities.
-                if ($expectedError) {
-                    // No changes should have gone through.
+            if ($expectedError) {
+                $this->assertEquals($expectedErrorCount, count($ret->getEntries()), 'count $ret->getEntries()');
+
+                // No changes should have gone through.
+                for ($i = 0; $i < count($configs); $i++) {
                     $this->verifyCrudWorker($configs[$i]->opType, $table, $configs[$i]->ent, $configs[$i]->ent, false);
                 }
-                else {
+            }
+            else {
+                $this->assertEquals($expectedReturned, count($ret->getEntries()), 'count $ret->getEntries()');
+                for ($i = 0; $i < count($ret->getEntries()); $i++) {
+                    $opResult = $ret->getEntries();
+                    $opResult = $opResult[$i];
+                    $this->verifyBatchEntryType($configs[$i]->opType, $exptErrs[$i], $opResult);
+                    $this->verifyEntryData($table, $exptErrs[$i], $targetEnts[$i], $opResult);
+                    // Check out the entities.
                     $this->verifyCrudWorker($configs[$i]->opType, $table, $configs[$i]->ent, $targetEnts[$i], true);
                 }
-            }
-
-            if ($expectedError) {
-                $this->assertTrue($errorCount > 0, 'When there is an error, need at least one error returned, and we got' . $errorCount);
             }
         }
         catch (ServiceException $e) {
@@ -1754,7 +1713,7 @@ class TableServiceFunctionalTest extends FunctionalTestBase {
         else if (is_string($opResult)) {
             // Nothing special to do.
         }
-        else if ($opResult instanceof Error) {
+        else if ($opResult instanceof BatchError) {
             $this->assertEquals($exptErr, $opResult->getError()->getCode(), 'getError()->getCode');
         }
         else {
@@ -1770,21 +1729,20 @@ class TableServiceFunctionalTest extends FunctionalTestBase {
                             'When opType=' . $opType . ' expect opResult instanceof InsertEntityResult');
                     break;
                 case OpType::deleteEntity:
-//                    $this->assertNull($opResult, 'When opType=' . $opType . ' expect opResult null');
                     $this->assertTrue(is_string($opResult),
                             'When opType=' . $opType . ' expect opResult is a string');
                     break;
                 case OpType::updateEntity:
-                case OpType::insertOrReplaceEntity: 
-                case OpType::mergeEntity: 
-                case OpType::insertOrMergeEntity: 
+                case OpType::insertOrReplaceEntity:
+                case OpType::mergeEntity:
+                case OpType::insertOrMergeEntity:
                     $this->assertTrue($opResult instanceof UpdateEntityResult,
                             'When opType=' . $opType . ' expect opResult instanceof UpdateEntityResult');
                     break;
             }
         }
         else {
-            $this->assertTrue($opResult instanceof Error, 'When expect an error, expect opResult instanceof Error');
+            $this->assertTrue($opResult instanceof BatchError, 'When expect an error, expect opResult instanceof Error');
         }
     }
 
@@ -1804,13 +1762,13 @@ class TableServiceFunctionalTest extends FunctionalTestBase {
             case OpType::insertOrMergeEntity:
                 $operations->addInsertOrMergeEntity($table, $targetEnt);
                 break;
-            case OpType::insertOrReplaceEntity: 
+            case OpType::insertOrReplaceEntity:
                 $operations->addInsertOrReplaceEntity($table, $targetEnt);
                 break;
             case OpType::mergeEntity:
                 $operations->addMergeEntity($table, $targetEnt);
                 break;
-            case OpType::updateEntity: 
+            case OpType::updateEntity:
                 $operations->addUpdateEntity($table, $targetEnt);
                 break;
         }
@@ -1903,7 +1861,7 @@ class TableServiceFunctionalTest extends FunctionalTestBase {
                 $this->assertNotNull($entInTable, 'Entity from table');
                 $this->verifyinsertEntityWorker($targetEnt, $entInTable);
                 break;
-            case OpType::insertOrMergeEntity: 
+            case OpType::insertOrMergeEntity:
                 $this->assertNotNull($entInTable, 'Entity from table');
                 $this->verifymergeEntityWorker($initialEnt, $targetEnt, $entInTable);
                 break;
@@ -1912,7 +1870,7 @@ class TableServiceFunctionalTest extends FunctionalTestBase {
                 $this->assertNotNull($entInTable, 'Entity from table');
                 $this->verifyinsertEntityWorker($targetEnt, $entInTable);
                 break;
-            case OpType::mergeEntity: 
+            case OpType::mergeEntity:
                 $this->assertNotNull($entInTable, 'Entity from table');
                 $this->verifymergeEntityWorker($initialEnt, $targetEnt, $entInTable);
                 break;
@@ -1939,12 +1897,12 @@ class TableServiceFunctionalTest extends FunctionalTestBase {
             case ConcurType::KeyMatchNoEtag:
                 $targetEnt->setEtag(null);
                 break;
-            case ConcurType::KeyMatchEtagMismatch: 
+            case ConcurType::KeyMatchEtagMismatch:
                 $newEtag =  $this->wrapper->updateEntity($table, $initialEnt)->getEtag();
                 $initialEnt->setEtag($newEtag);
                 // Now the $targetEnt Etag will not match.
                 $this->assertTrue($targetEnt->getEtag() != $initialEnt->getEtag(), 'targetEnt->Etag(\'' . $targetEnt->getEtag() . '\') !=  updated->Etag(\'' . $initialEnt->getEtag() . '\')');
-                        
+
                 break;
             case ConcurType::KeyMatchEtagMatch:
                 // Don't worry here.
@@ -1967,7 +1925,7 @@ class TableServiceFunctionalTest extends FunctionalTestBase {
                     return 404;
                 }
                 break;
-            case ConcurType::KeyMatchNoEtag: 
+            case ConcurType::KeyMatchNoEtag:
                 if ($opType == OpType::insertEntity) {
                     return 409;
                 }
@@ -1989,12 +1947,12 @@ class TableServiceFunctionalTest extends FunctionalTestBase {
         }
         return null;
     }
-    
+
     function compareProperties($pname, $actualProp, $expectedProp) {
         $effectiveExpectedProp = (is_null($expectedProp->getEdmType()) ? EdmType::STRING : $expectedProp->getEdmType());
         $effectiveActualProp = (is_null($expectedProp->getEdmType()) ? EdmType::STRING : $expectedProp->getEdmType());
 
-        $this->assertEquals($effectiveExpectedProp, $effectiveActualProp, 
+        $this->assertEquals($effectiveExpectedProp, $effectiveActualProp,
                 'getProperties()->get(\'' . $pname . '\')->getEdmType');
 
         $effExp = $expectedProp->getValue();
@@ -2006,7 +1964,7 @@ class TableServiceFunctionalTest extends FunctionalTestBase {
         if ($effAct instanceof \DateTime) {
             $effAct = $effAct->setTimezone(new \DateTimeZone('UTC'));
         }
-        
+
         $this->assertEquals($expectedProp->getValue(), $actualProp->getValue(), 'getProperties()->get(\'' . $pname . '\')->getValue [' . $effectiveExpectedProp . ']');
     }
 

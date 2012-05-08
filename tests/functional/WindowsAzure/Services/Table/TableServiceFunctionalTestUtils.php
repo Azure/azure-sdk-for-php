@@ -220,12 +220,16 @@ class TableServiceFunctionalTestUtils {
 
             $ptype = $initialProp->getEdmType();
             if (is_null($ptype)) {
-                $eff = $initialProp->getValue()->toString();
+                $eff = $initialProp->getValue();
                 $initialProp->setValue($eff . 'AndMore');
             }
             else if ($ptype == (EdmType::DATETIME)) {
                 $value = $initialProp->getValue();
+                if (is_null($value)) {
+                    $value = new \DateTime("1/26/1692");
+                }
                 $value->modify('+1 day');
+                $initialProp->setValue($value);
             }
             else if ($ptype == (EdmType::BINARY)) {
                 $eff = $initialProp->getValue();
@@ -250,7 +254,7 @@ class TableServiceFunctionalTestUtils {
             else if ($ptype == (EdmType::INT64)) {
                 $eff = $initialProp->getValue();
                 $eff = ($eff > 10 ? 0 : $eff + 1);
-                $initialProp->setValue($eff);
+                $initialProp->setValue(strval($eff));
             }
             else if ($ptype == (EdmType::STRING)) {
                 $eff = $initialProp->getValue();
@@ -318,8 +322,6 @@ class TableServiceFunctionalTestUtils {
                     $ret = !$op;
                 }
 
-//                echo 'not(\'' . FunctionalTestBase::tmptostring($op) . '\') = ' . 
-//                        FunctionalTestBase::tmptostring($ret) . "\n";
                 return $ret;
             }
         }
@@ -353,10 +355,6 @@ class TableServiceFunctionalTestUtils {
                 $ret = self::nullPropLe($left, $right);
             }
 
-//            echo ' (' . FunctionalTestBase::tmptostring($left) . ') ' . 
-//                    $filter->getOperator() . ' (' . 
-//                    FunctionalTestBase::tmptostring($right) . ') = ' . 
-//                    FunctionalTestBase::tmptostring($ret) . "\n";
             return $ret;
         }
 
@@ -451,20 +449,21 @@ class TableServiceFunctionalTestUtils {
     }
     
     public static function showEntityListDiff($actualData, $expectedData) {
+        $ret = '';
         if (count($expectedData) != count($actualData))
             {
-            echo 'VVV actual VVV' . "\n";
+            $ret .= 'VVV actual VVV' . "\n";
             for ($i = 0; $i < count($actualData); $i++) {
                 $e = $actualData[$i];
-                echo $e->getPartitionKey() . '/' . $e->getRowKey() . "\n";
+                $ret .= $e->getPartitionKey() . '/' . $e->getRowKey() . "\n";
             }
-            echo '-----------------' . "\n";
+            $ret .= '-----------------' . "\n";
 
             for ($i = 0; $i < count($expectedData); $i++) {
                 $e = $expectedData[$i];
-                echo $e->getPartitionKey() . '/' . $e->getRowKey() . "\n";
+                $ret .= $e->getPartitionKey() . '/' . $e->getRowKey() . "\n";
             }
-            echo '^^^ expected ^^^' . "\n";
+            $ret .= '^^^ expected ^^^' . "\n";
 
             for ($i = 0; $i < count($actualData); $i++) {
                 $in = false;
@@ -476,7 +475,7 @@ class TableServiceFunctionalTestUtils {
                     }
                 }
                 if (!$in) {
-                    echo 'returned ' . $this->tmptostring($ei). "\n";
+                    $ret .= 'returned ' . $this->tmptostring($ei). "\n";
                 }
             }
 
@@ -490,10 +489,11 @@ class TableServiceFunctionalTestUtils {
                     }
                 }
                 if (!$in) {
-                    echo 'expected ' . $this->tmptostring($ej). "\n";
+                    $ret .= 'expected ' . $this->tmptostring($ej). "\n";
                 }
             }
         }
+    return $ret;
     }
 }
 
