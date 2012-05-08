@@ -187,9 +187,6 @@ class BlobServiceIntegrationTest extends IntegrationTestBase {
     }
 
     public function testCreateContainerWithMetadataWorks() {
-        // This fails due to 
-        // https://github.com/WindowsAzure/azure-sdk-for-php/issues/94
-
         // Act
         $opts = new CreateContainerOptions();
         $opts->setPublicAccess('blob');
@@ -278,9 +275,6 @@ class BlobServiceIntegrationTest extends IntegrationTestBase {
         $acl = new ContainerACL();
         $acl->setPublicAccess(PublicAccessType::BLOBS_ONLY);
         
-        $expiryStartDate = \WindowsAzure\Utilities::convertToEdmDateTime($expiryStartDate);
-        $expiryEndDate = \WindowsAzure\Utilities::convertToEdmDateTime($expiryEndDate);
-                
         $acl->addSignedIdentifier('test', $expiryStartDate, $expiryEndDate, 'rwd');
         $this->wrapper->setContainerACL($container, $acl);
 
