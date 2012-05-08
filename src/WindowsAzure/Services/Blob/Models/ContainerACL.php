@@ -78,15 +78,17 @@ class ContainerAcl
     /**
      * Parses the given array into signed identifiers
      * 
-     * @param string $publicAccess container public access
-     * @param string $etag         container etag
+     * @param string $publicAccess    container public access
+     * @param string $etag            container etag
      * @param \DateTime $lastModified last modification in DateTime
-     * @param array  $parsed       parsed response into array representation
+     * @param array  $parsed          parsed response into array representation
      * 
      * @return none.
      */
     public static function create($publicAccess, $etag, $lastModified, $parsed)
     {
+        Validate::isDate($lastModified);
+
         $result                     = new ContainerAcl();
         $result->_etag              = $etag;
         $result->_lastModified      = $lastModified;
@@ -98,10 +100,13 @@ class ContainerAcl
             $temp    = Utilities::getArray($entries);
 
             foreach ($temp as $value) {
-                $start      = \WindowsAzure\Utilities::convertToDateTime(urldecode($value['AccessPolicy']['Start']));
-                $expiry     = \WindowsAzure\Utilities::convertToDateTime(urldecode($value['AccessPolicy']['Expiry']));
-                $permission = $value['AccessPolicy']['Permission'];
-                $id         = $value['Id'];
+                $startString  = urldecode($value['AccessPolicy']['Start']);
+                $expiryString = urldecode($value['AccessPolicy']['Expiry']);
+
+                $start        = Utilities::convertToDateTime($startString);
+                $expiry       = Utilities::convertToDateTime($expiryString);
+                $permission   = $value['AccessPolicy']['Permission'];
+                $id           = $value['Id'];
                 $result->addSignedIdentifier($id, $start, $expiry, $permission);
             }
         }
@@ -206,17 +211,15 @@ class ContainerAcl
     /**
      * Adds new signed modifier
      * 
-     * @param string $id         a unique id for this modifier
-     * @param string $start      The time at which the Shared Access Signature 
-     * becomes valid. The time must be specified in a valid ISO 8061 format. 
-     * If omitted, start time for this call is assumed to be the time when the 
-     * Blob service receives the request.
-     * @param string $expiry     The time at which the Shared Access Signature 
-     * becomes invalid. The time must be specified in a valid ISO 8061 format. 
-     * This field may be omitted if it has been specified as part of a 
-     * container-level access policy.
-     * @param string $permission The permissions associated with the Shared 
-     * Access Signature. The user is restricted to operations allowed by the 
+     * @param string $id        a unique id for this modifier
+     * @param \DateTime $start  The time at which the Shared Access Signature
+     * becomes valid. If omitted, start time for this call is assumed to be
+     * the time when the Blob service receives the request.
+     * @param \DateTime $expiry The time at which the Shared Access Signature
+     * becomes invalid. This field may be omitted if it has been specified as
+     * part of a container-level access policy.
+     * @param string $permission The permissions associated with the Shared
+     * Access Signature. The user is restricted to operations allowed by the
      * permissions. Valid permissions values are read (r), write (w), delete (d) and
      * list (l).
      * 

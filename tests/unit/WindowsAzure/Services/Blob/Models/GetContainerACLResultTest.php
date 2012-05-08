@@ -49,13 +49,12 @@ class GetContainerAclResultTest extends \PHPUnit_Framework_TestCase
         // Setup
         $sample = Resources::EMPTY_STRING;
         $expectedEtag = '0x8CAFB82EFF70C46';
-        $expectedLastModified = 'Sun, 25 Sep 2011 19:42:18 GMT';
-        $expectedDate = WindowsAzureUtilities::rfc1123ToDateTime($expectedLastModified);
+        $expectedDate = new \DateTime('Sun, 25 Sep 2011 19:42:18 GMT');
         $expectedPublicAccess = 'container';
         
         // Test
         $result = GetContainerAclResult::create($expectedPublicAccess, $expectedEtag, 
-            $expectedLastModified, $sample);
+            $expectedDate, $sample);
         
         // Assert
         $acl = $result->getContainerAcl();
