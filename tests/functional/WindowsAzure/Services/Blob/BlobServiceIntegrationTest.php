@@ -183,7 +183,15 @@ class BlobServiceIntegrationTest extends IntegrationTestBase {
         $this->wrapper->createContainer(self::$_creatable_container_1);
         
         // Assert
-        $this->assertTrue(true, 'success');
+        $opts = new ListContainersOptions();
+        $opts->setPrefix(self::$_creatable_container_1);
+        $results = $this->wrapper->listContainers($opts);
+
+        $this->assertNotNull($results, '$results');
+        $this->assertEquals(1, count($results->getContainers()), 'count($results->getContainers())');
+        $container0 = $results->getContainers();
+        $container0 = $container0[0];
+        $this->assertEquals(self::$_creatable_container_1, $container0->getName(), '$results->getContainers()[0]->getName');
     }
 
     public function testCreateContainerWithMetadataWorks() {
