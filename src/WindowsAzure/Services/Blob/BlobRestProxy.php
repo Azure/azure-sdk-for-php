@@ -117,8 +117,8 @@ class BlobRestProxy extends ServiceRestProxy implements IBlob
         $properties = new BlobProperties();
         $d          = $headers[Resources::LAST_MODIFIED];
         $bType      = $headers[Resources::X_MS_BLOB_TYPE];
-        $lStatus    = $headers[Resources::X_MS_LEASE_STATUS];
         $cLength    = intval($headers[Resources::CONTENT_LENGTH]);
+        $lStatus    = Utilities::tryGetValue($headers, Resources::X_MS_LEASE_STATUS);
         $cType      = Utilities::tryGetValue($headers, Resources::CONTENT_TYPE);
         $cMD5       = Utilities::tryGetValue($headers, Resources::CONTENT_MD5);
         $cEncoding  = Utilities::tryGetValue($headers, Resources::CONTENT_ENCODING);
