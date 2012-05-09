@@ -66,7 +66,7 @@ class CloudTable
     {
         $this->_name  			   = $name;
         $this->_proxy 			   = $proxy;
-		$this->_defaultParitionKey = uniqid();
+        $this->_defaultParitionKey = uniqid();
     }
     
     /**
