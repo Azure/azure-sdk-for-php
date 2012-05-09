@@ -73,7 +73,7 @@ class ListPageBlobRangesResult
     public static function create($headers, $parsed)
     {
         $result  = new ListPageBlobRangesResult();
-        $headers = Utilities::keysToLower($headers);
+        $headers = array_change_key_case($headers);
         
         $date          = $headers[Resources::LAST_MODIFIED];
         $date          = WindowsAzureUtilities::rfc1123ToDateTime($date);
@@ -81,7 +81,7 @@ class ListPageBlobRangesResult
         $rawPageRanges = array();
         
         if (!empty($parsed['PageRange'])) {
-            $parsed        = Utilities::keysToLower($parsed);
+            $parsed        = array_change_key_case($parsed);
             $rawPageRanges = Utilities::getArray($parsed['pagerange']);
         }
         

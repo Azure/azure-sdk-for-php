@@ -112,7 +112,7 @@ class ListBlobBlocksResult
     public static function create($headers, $parsed)
     {
         $result = new ListBlobBlocksResult();
-        $clean  = Utilities::keysToLower($headers);
+        $clean  = array_change_key_case($headers);
         
         $result->setEtag(Utilities::tryGetValue($clean, Resources::ETAG));
         $date = Utilities::tryGetValue($clean, Resources::LAST_MODIFIED);

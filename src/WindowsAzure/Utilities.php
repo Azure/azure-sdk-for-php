@@ -312,24 +312,6 @@ class Utilities
     {
         return $obj ? 'true' : 'false';
     }
-    
-    /**
-     * Converts all string keys in the given $array into lower case
-     * 
-     * @param array $array array to be used
-     * 
-     * @return array 
-     */
-    public static function keysToLower($array)
-    {
-        $clean = array();
-        
-        foreach ($array as $key => $value) {
-            $clean[strtolower($key)] = $value;
-        }
-        
-        return $clean;
-    }
 
     /**
      * Generate ISO 8601 compliant date string in UTC time zone

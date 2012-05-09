@@ -97,7 +97,7 @@ abstract class StorageAuthScheme
      */
     protected function computeCanonicalizedResourceForTable($url, $queryParams)
     {
-        $queryParams = Utilities::keysToLower($queryParams);
+        $queryParams = array_change_key_case($queryParams);
         
         // 1. Beginning with an empty string (""), append a forward slash (/), 
         //    followed by the name of the account that owns the accessed resource.
@@ -130,7 +130,7 @@ abstract class StorageAuthScheme
      */
     protected function computeCanonicalizedResource($url, $queryParams)
     {
-        $queryParams = Utilities::keysToLower($queryParams);
+        $queryParams = array_change_key_case($queryParams);
         
         // 1. Beginning with an empty string (""), append a forward slash (/), 
         //    followed by the name of the account that owns the accessed resource.

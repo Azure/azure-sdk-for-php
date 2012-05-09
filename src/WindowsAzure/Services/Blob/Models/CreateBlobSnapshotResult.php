@@ -51,7 +51,7 @@ class CreateBlobSnapshotResult
      * The ETag for the destination blob. 
      * @var string
      */
-    private $_eTag;
+    private $_etag;
     
     /**
      * The date/time that the copy operation to the destination blob completed. 
@@ -60,51 +60,33 @@ class CreateBlobSnapshotResult
     private $_lastModified;
     
     /**
-     * The unique identifier of the request. 
-     * @var string
-     */
-    private $_requestId;
-    
-    /**
-     * The date/time value (in UTC) of when the response was initiatied. 
-     * @var \DateTime
-     */
-    private $_date;
-    
-    /**
      * Creates CreateBlobSnapshotResult object from the response of the 
      * create Blob snapshot request.
      * 
-     * @param array $header HTTP response header
+     * @param array $headers The HTTP response headers in array representation.
      * 
-     * @return snapshotBlobResult
+     * @return CreateBlobSnapshotResult
      */
-    public static function create($header)
+    public static function create($headers)
     {
-        $createBlobSnapshotResult = new CreateBlobSnapshotResult();
-        $headerWithLowerCaseKey   = Utilities::keysToLower($header);
+        $result                 = new CreateBlobSnapshotResult();
+        $headerWithLowerCaseKey = array_change_key_case($headers);
         
-        $createBlobSnapshotResult->setEtag(
-            $headerWithLowerCaseKey[Resources::ETAG]
-        );
+        $result->setEtag($headerWithLowerCaseKey[Resources::ETAG]);
         
-        $createBlobSnapshotResult->setLastModified(
+        $result->setLastModified(
             WindowsAzureUtilities::rfc1123ToDateTime(
                 $headerWithLowerCaseKey[Resources::LAST_MODIFIED]
             )
         );
         
-        $createBlobSnapshotResult->setRequestId(
-            $headerWithLowerCaseKey[Resources::X_MS_REQUEST_ID]
-        );
-        
-        $createBlobSnapshotResult->setDate(
-            WindowsAzureUtilities::rfc1123ToDateTime(
-                $headerWithLowerCaseKey[Resources::DATE]
+        $result->setSnapshot(
+            Utilities::convertToDateTime(
+                $headerWithLowerCaseKey[Resources::X_MS_SNAPSHOT]
             )
         );
         
-        return $createBlobSnapshotResult;
+        return $result;
     }
     
     /**
@@ -136,19 +118,19 @@ class CreateBlobSnapshotResult
      */
     public function getETag()
     {
-        return $this->_eTag;
+        return $this->_etag;
     }
 
     /**
      * Sets ETag.
      *
-     * @param string $eTag value.
+     * @param string $etag value.
      *
      * @return none.
      */
-    public function setETag($eTag)
+    public function setETag($etag)
     {
-        $this->_eTag = $eTag;
+        $this->_etag = $etag;
     }
     
     /**
@@ -172,50 +154,6 @@ class CreateBlobSnapshotResult
     {
         Validate::isDate($lastModified);
         $this->_lastModified = $lastModified;
-    }
-    
-    /**
-     * Gets request ID.
-     * 
-     * @return string.   
-     */
-    public function getRequestId()
-    {
-        return $this->_requestId;    
-    }
-    
-    /**
-     * Sets request ID. 
-     * 
-     * @param string $requestId value. 
-     * 
-     * @return none.
-     */
-    public function setRequestId($requestId)
-    {
-        $this->_requestId = $requestId;
-    }
-    
-    /**
-     * Gets date.  
-     * 
-     * @return \DateTime. 
-     */
-    public function getDate()
-    {
-        return $this->_date;
-    }
-    
-    /**
-     * Sets date. 
-     * 
-     * @param \DateTime $date value.
-     * 
-     * @return none; 
-     */
-    public function setDate($date)
-    {
-        $this->_date = $date; 
     }
 }
 

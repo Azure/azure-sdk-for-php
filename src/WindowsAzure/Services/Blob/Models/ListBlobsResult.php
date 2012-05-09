@@ -117,7 +117,9 @@ class ListBlobsResult
             $blob->setName($value['Name']);
             $blob->setUrl($value['Url']);
             $blob->setSnapshot(
-                Utilities::tryGetValue($value, 'Snapshot')
+                Utilities::convertToDateTime(
+                        Utilities::tryGetValue($value, 'Snapshot')
+                )
             );
             $blob->setProperties(
                 BlobProperties::create(

@@ -497,6 +497,10 @@ class BlobRestProxyTest extends BlobServiceRestProxyTestBase
         $this->assertEquals($blob1, $blobs[0]->getName());
         $this->assertEquals($blob2, $blobs[1]->getName());
         $this->assertEquals($blob3, $blobs[2]->getName());
+        $this->assertInstanceOf('\DateTime', $blobs[2]->getSnapshot());
+        $this->assertNotNull($blobs[2]->getUrl());
+        $this->assertCount(0, $blobs[2]->getMetadata());
+        $this->assertInstanceOf('WindowsAzure\Services\Blob\Models\BlobProperties', $blobs[2]->getProperties());
     }
 
     /**
@@ -1273,7 +1277,6 @@ class BlobRestProxyTest extends BlobServiceRestProxyTestBase
         $sourceBlobName = 'sourceBlobName';
         $sourceBlobFullName = $sourceContainerName.'/'.$sourceBlobName;
         $blobValue = 'testBlobValue'; 
-        $date = new \DateTime();
         
         $this->createContainer($sourceContainerName); 
         $this->wrapper->createBlockBlob( 
@@ -1327,26 +1330,32 @@ class BlobRestProxyTest extends BlobServiceRestProxyTestBase
             $destinationBlobContent);
     }
     
-  /**  
-  * @covers WindowsAzure\Services\Blob\BlobRestProxy::createBlobSnapshot 
-  * @covers WindowsAzure\Services\Blob\Models\createBlobSnapshotResult::create 
-  */ 
-    public function testCreateBlobSnapshotWorks() 
+   /**  
+    * @covers WindowsAzure\Services\Blob\BlobRestProxy::createBlobSnapshot 
+    * @covers WindowsAzure\Services\Blob\Models\createBlobSnapshotResult::create 
+    */ 
+    public function testCreateBlobSnapshot() 
     { 
-        $containerName = 'createblobsnapshotsuccess'; 
+        // Setup
+        $containerName = 'createblobsnapshot'; 
         $blobName = 'testBlob'; 
         $blobValue = 'TestBlobValue'; 
         $this->createContainer($containerName);
+        $this->wrapper->createBlockBlob($containerName, $blobName, $blobValue);
         
-        $createBlobSnapshotOptions = new CreateBlobSnapshotOptions();
-        $createBlobSnapshotOptions->setBlobType('BlockBlob');
+        // Test
+        $snapshotResult = $this->wrapper->createBlobSnapshot($containerName, $blobName);
         
-        $this->wrapper->createBlockBlob( 
-            $containerName, $blobName, $blobValue);
-        $createBlobSnapshotResult = $this->wrapper->createBlobSnapshot(
-            $containerName, $blobName, $createBlobSnapshotOptions);
-        $this->assertNotNull($createBlobSnapshotResult);
-        
+        // Assert
+        $listOptions = new ListBlobsOptions();
+        $listOptions->setIncludeSnapshots(true);
+        $blobsResult = $this->wrapper->listBlobs($containerName, $listOptions);
+        $blobs = $blobsResult->getBlobs();
+        $actualBlob = $blobs[0];
+        $this->assertNotNull($snapshotResult->getEtag());
+        $this->assertInstanceOf('\DateTime', $snapshotResult->getLastModified());
+        $this->assertInstanceOf('\DateTime', $snapshotResult->getSnapshot());
+        $this->assertEquals($snapshotResult->getSnapshot(), $actualBlob->getSnapshot());
     }    
   
 } 

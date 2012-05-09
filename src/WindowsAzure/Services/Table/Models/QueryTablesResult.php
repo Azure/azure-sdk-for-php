@@ -60,7 +60,7 @@ class QueryTablesResult
     public static function create($headers, $entries)
     {
         $result  = new QueryTablesResult();
-        $headers = Utilities::keysToLower($headers);
+        $headers = array_change_key_case($headers);
         
         $result->setNextTableName(
             Utilities::tryGetValue(
