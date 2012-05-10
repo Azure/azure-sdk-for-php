@@ -23,10 +23,9 @@
  */
  
 namespace WindowsAzure\Services\Blob\Models;
-use WindowsAzure\Validate;
 
 /**
- * optional parameters for CopyBlobOptions wrapper
+ * The optional parameters for createBlobSnapshot wrapper.
  *
  * @category  Microsoft
  * @package   PEAR2\WindowsAzure\Services\Blob\Models
@@ -44,7 +43,7 @@ class CreateBlobSnapshotOptions extends BlobServiceOptions
     private $_metadata;
     
     /**
-     * @var \AccessCondition
+     * @var AccessCondition
      */
     private $_accessCondition;
     
@@ -52,38 +51,11 @@ class CreateBlobSnapshotOptions extends BlobServiceOptions
      * @var string
      */
     private $_leaseId;
-     
-    /**
-     * @var string
-     */
-    private $_blobType;
-    
-    /**
-     * Gets blob type.
-     * 
-     * @return string. 
-     */
-    public function getBlobType()
-    {
-        return $this->_blobType;
-    }
-    
-    /**
-     * Sets blob type. 
-     * 
-     * @param string $blobType value. 
-     *
-     * @return none.
-     */
-    public function setBlobType($blobType)
-    {
-        $this->_blobType = $blobType;
-    }
     
     /**
      * Gets metadata.
      *
-     * @return array.
+     * @return array
      */
     public function getMetadata()
     {
@@ -93,9 +65,9 @@ class CreateBlobSnapshotOptions extends BlobServiceOptions
     /**
      * Sets metadata.
      *
-     * @param array $metadata value.
+     * @param array $metadata The metadata array.
      *
-     * @return none.
+     * @return none
      */
     public function setMetadata($metadata)
     {
@@ -105,7 +77,7 @@ class CreateBlobSnapshotOptions extends BlobServiceOptions
     /**
      * Gets access condition.
      * 
-     * @return \AccessCondition.
+     * @return AccessCondition
      */
     public function getAccessCondition()
     {
@@ -115,9 +87,9 @@ class CreateBlobSnapshotOptions extends BlobServiceOptions
     /**
      * Sets access condition.
      * 
-     * @param \AccessCondition $accessCondition value
+     * @param AccessCondition $accessCondition The access condition object.
      * 
-     * @return none.
+     * @return none
      */
     public function setAccessCondition($accessCondition)
     {
@@ -125,9 +97,9 @@ class CreateBlobSnapshotOptions extends BlobServiceOptions
     }
     
     /**
-     * Gets lease ID.
+     * Gets lease Id.
      *
-     * @return string.
+     * @return string
      */
     public function getLeaseId()
     {
@@ -135,11 +107,11 @@ class CreateBlobSnapshotOptions extends BlobServiceOptions
     }
 
     /**
-     * Sets lease ID.
+     * Sets lease Id.
      *
-     * @param string $leaseId value.
+     * @param string $leaseId The lease Id.
      * 
-     * @return none.
+     * @return none
      */
     public function setLeaseId($leaseId)
     {

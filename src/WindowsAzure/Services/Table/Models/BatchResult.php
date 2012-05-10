@@ -95,8 +95,8 @@ class BatchResult
      */
     private static function _compareUsingContentId($r1, $r2)
     {
-        $h1 = Utilities::keysToLower($r1->getHeader());
-        $h2 = Utilities::keysToLower($r2->getHeader());
+        $h1 = array_change_key_case($r1->getHeader());
+        $h2 = array_change_key_case($r2->getHeader());
         $c1 = Utilities::tryGetValue($h1, Resources::CONTENT_ID, 0);
         $c2 = Utilities::tryGetValue($h2, Resources::CONTENT_ID, 0);
         

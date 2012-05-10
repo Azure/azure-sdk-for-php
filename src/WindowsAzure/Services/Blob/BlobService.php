@@ -23,7 +23,9 @@
  */
  
 namespace WindowsAzure\Services\Blob;
+use WindowsAzure\Validate;
 use WindowsAzure\Core\Configuration;
+use WindowsAzure\Core\IServiceBuilder;
 use WindowsAzure\Resources;
 
 /**
@@ -49,6 +51,17 @@ class BlobService
      */
     public static function create($config, $builder = null)
     {
+        Validate::isTrue(
+            $config instanceof Configuration,
+            Resources::INVALID_CONFIG_MSG
+        );
+        if (!is_null($builder)) {
+            Validate::isTrue(
+                $builder instanceof IServiceBuilder,
+                Resources::INVALID_BUILDER_MSG
+            );
+        }
+        
         return $config->create(Resources::BLOB_TYPE_NAME, $builder);
     }
 }

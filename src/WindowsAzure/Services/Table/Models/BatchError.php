@@ -68,7 +68,7 @@ class BatchError
         Validate::isArray($headers, 'headers');
         
         $result = new BatchError();
-        $clean  = Utilities::keysToLower($headers);
+        $clean  = array_change_key_case($headers);
         
         $result->setError($error);
         $contentId = Utilities::tryGetValue($clean, Resources::CONTENT_ID);

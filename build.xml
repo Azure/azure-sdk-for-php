@@ -120,7 +120,7 @@
          description="Find coding standard violations using PHP_CodeSniffer">
   <exec executable="phpcs.bat">
    <arg value="--standard=${basedir}/build/phpcs.xml" />
-   <arg value="--ignore=autoload.php" />
+   <arg value="--ignore=WindowsAzure.php" />
    <arg path="${basedir}/src" />
   </exec>
  </target>
@@ -131,7 +131,7 @@
    <arg value="--report=checkstyle" />
    <arg value="--report-file=${basedir}/build/logs/checkstyle.xml" />
    <arg value="--standard=${basedir}/build/phpcs.xml" />
-   <arg value="--ignore=autoload.php" />
+   <arg value="--ignore=WindowsAzure.php" />
    <arg path="${basedir}/src" />
   </exec>
  </target>
