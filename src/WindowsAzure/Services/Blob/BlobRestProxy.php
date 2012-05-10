@@ -422,7 +422,7 @@ class BlobRestProxy extends ServiceRestProxy implements IBlob
         $path        = $this->_createPath($container, $blob);
         $statusCode  = Resources::STATUS_CREATED;
         // If read file failed for any reason it will throw an exception.
-        $body = is_resource($content) ? Utilities::readStream($content) : $content;
+        $body = is_resource($content) ? stream_get_contents($content) : $content;
         
         if (is_null($options)) {
             $options = new CreateBlobPagesOptions();
@@ -1079,7 +1079,7 @@ class BlobRestProxy extends ServiceRestProxy implements IBlob
         $path        = $this->_createPath($container, $blob);
         $statusCode  = Resources::STATUS_CREATED;
         // If read file failed for any reason it will throw an exception.
-        $body = is_resource($content) ? Utilities::readStream($content) : $content;
+        $body = is_resource($content) ? stream_get_contents($content) : $content;
         
         if (is_null($options)) {
             $options = new CreateBlobOptions();

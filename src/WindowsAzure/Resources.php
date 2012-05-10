@@ -65,7 +65,7 @@ class Resources
     const INVALID_CSA_OPT_MSG  = 'Must provide valid location or affinity group.';
     const INVALID_USA_OPT_MSG  = 'Must provide either description or label.';
     const INVALID_CONFIG_MSG   = 'Config object must be of type Configuration';
-    const INVALID_BUILDER_MSG  = 'Builder object must be of type IServicesBuilder';
+    const INVALID_BUILDER_MSG  = 'Builder object must implement IServicesBuilder';
 
     // HTTP Headers
     const X_MS_HEADER_PREFIX                 = 'x-ms-';

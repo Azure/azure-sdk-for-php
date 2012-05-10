@@ -379,18 +379,6 @@ class Utilities
     }
     
     /**
-     * Reads the contents of a stream.
-     * 
-     * @param resource $stream The stream handle with read permissions.
-     * 
-     * @return string
-     */
-    public static function readStream($stream)
-    {
-        return stream_get_contents($stream);
-    }
-    
-    /**
      * Converts string to stream handle.
      * 
      * @param type $string The string contents.

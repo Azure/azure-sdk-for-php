@@ -374,21 +374,6 @@ class UtilitiesTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers WindowsAzure\Utilities::readStream
-     */
-    public function testReadStream()
-    {
-        $expected = 'FileDummyContent';
-        $stream = fopen(VirtualFileSystem::newFile($expected), 'r');
-        
-        // Test
-        $actual = Utilities::readStream($stream);
-        
-        // Assert
-        $this->assertEquals($expected, $actual);
-    }
-    
-    /**
      * @covers WindowsAzure\Utilities::stringToStream
      */
     public function testStringToStream()
@@ -400,7 +385,7 @@ class UtilitiesTest extends \PHPUnit_Framework_TestCase
         $actual = Utilities::stringToStream($data);
         
         // Assert
-        $this->assertEquals(Utilities::readStream($expected), Utilities::readStream($actual));
+        $this->assertEquals(stream_get_contents($expected), stream_get_contents($actual));
     }
 }
 
