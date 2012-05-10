@@ -8,7 +8,7 @@
          verbose="true">
   <testsuites>
     <testsuite name="azure-sdk-for-php">
-      <directory suffix="Test.php">tests/unit/WindowsAzure/Blob</directory>
+      <directory suffix="Test.php">tests/unit</directory>
     </testsuite>
   </testsuites>
 
