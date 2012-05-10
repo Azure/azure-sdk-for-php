@@ -402,7 +402,7 @@ class Utilities
      */
     public static function stringToStream($string)
     {
-        return fopen('data://text/plain,' . $string, 'r');
+        return fopen('data://text/plain,' . urlencode($string), 'rb');
     }
     
     /**
