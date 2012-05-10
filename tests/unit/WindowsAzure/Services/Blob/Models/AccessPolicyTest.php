@@ -22,6 +22,8 @@
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
 namespace Tests\Unit\WindowsAzure\Services\Blob\Models;
+
+use WindowsAzure\Core\WindowsAzureUtilities;
 use WindowsAzure\Services\Blob\Models\AccessPolicy;
 
 /**
@@ -44,7 +46,7 @@ class AccessPolicyTest extends \PHPUnit_Framework_TestCase
     {
         // Setup
         $accessPolicy = new AccessPolicy();
-        $expected = '2009-09-28T08:49:37.0000000Z';
+        $expected = new \DateTime('2009-09-28T08:49:37');
         $accessPolicy->setStart($expected);
         
         // Test
@@ -61,7 +63,7 @@ class AccessPolicyTest extends \PHPUnit_Framework_TestCase
     {
         // Setup
         $accessPolicy = new AccessPolicy();
-        $expected = '2009-09-28T08:49:37.0000000Z';
+        $expected = new \DateTime('2009-09-28T08:49:37');
         
         // Test
         $accessPolicy->setStart($expected);
@@ -77,7 +79,7 @@ class AccessPolicyTest extends \PHPUnit_Framework_TestCase
     {
         // Setup
         $accessPolicy = new AccessPolicy();
-        $expected = '2009-09-28T08:49:37.0000000Z';
+        $expected = new \DateTime('2009-09-28T08:49:37');
         $accessPolicy->setExpiry($expected);
         
         // Test
@@ -94,7 +96,7 @@ class AccessPolicyTest extends \PHPUnit_Framework_TestCase
     {
         // Setup
         $accessPolicy = new AccessPolicy();
-        $expected = '2009-09-28T08:49:37.0000000Z';
+        $expected = new \DateTime('2009-09-28T08:49:37');
         
         // Test
         $accessPolicy->setExpiry($expected);
@@ -144,11 +146,13 @@ class AccessPolicyTest extends \PHPUnit_Framework_TestCase
         // Setup
         $accessPolicy = new AccessPolicy();
         $permission = 'rw';
-        $start = '2009-09-28T08:49:37.0000000Z';
-        $expiry = '2009-10-28T08:49:37.0000000Z';
+        $start = '2009-09-28T08:49:37Z';
+        $expiry = '2009-10-28T08:49:37Z';
+        $startDate = new \DateTime($start);
+        $expiryDate = new \DateTime($expiry);
         $accessPolicy->setPermission($permission);
-        $accessPolicy->setStart($start);
-        $accessPolicy->setExpiry($expiry);
+        $accessPolicy->setStart($startDate);
+        $accessPolicy->setExpiry($expiryDate);
         
         // Test
         $actual = $accessPolicy->toArray();
