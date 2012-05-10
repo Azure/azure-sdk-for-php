@@ -24,7 +24,7 @@
  
 namespace WindowsAzure\Services\Queue\Models;
 use WindowsAzure\Resources;
-use WindowsAzure\Core\WindowsAzureUtilities;
+use WindowsAzure\Utilities;
 
 /**
  * Holds data for single WindowsAzure queue message.
@@ -104,7 +104,7 @@ class WindowsAzureQueueMessage
         $timeNextVisible = $parsedResponse['TimeNextVisible'];
         
         $msg  = self::createFromPeekMessages($parsedResponse);
-        $date = WindowsAzureUtilities::rfc1123ToDateTime($timeNextVisible);
+        $date = Utilities::rfc1123ToDateTime($timeNextVisible);
         $msg->setTimeNextVisible($date);
         $msg->setPopReceipt($parsedResponse['PopReceipt']);
         
@@ -127,10 +127,10 @@ class WindowsAzureQueueMessage
         
         $msg->setDequeueCount(intval($parsedResponse['DequeueCount']));
         
-        $date = WindowsAzureUtilities::rfc1123ToDateTime($expirationDate);
+        $date = Utilities::rfc1123ToDateTime($expirationDate);
         $msg->setExpirationDate($date);
         
-        $date = WindowsAzureUtilities::rfc1123ToDateTime($insertionDate);
+        $date = Utilities::rfc1123ToDateTime($insertionDate);
         $msg->setInsertionDate($date);
         
         $msg->setMessageId($parsedResponse['MessageId']);

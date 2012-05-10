@@ -621,7 +621,12 @@ class TableRestProxy extends ServiceRestProxy implements ITable
     public function __construct($channel, $uri, $atomSerializer, $mimeSerializer, 
         $dataSerializer
     ) {
-        parent::__construct($channel, $uri, '', $dataSerializer);
+        parent::__construct(
+            $channel,
+            $uri,
+            Resources::EMPTY_STRING,
+            $dataSerializer
+        );
         $this->_atomSerializer = $atomSerializer;
         $this->_mimeSerializer = $mimeSerializer;
     }
@@ -724,7 +729,8 @@ class TableRestProxy extends ServiceRestProxy implements ITable
     /**
      * Quries tables in the given storage account.
      * 
-     * @param Models\QueryTablesOptions $options optional parameters
+     * @param Models\QueryTablesOptions|string|Models\Filter $options Could be
+     * optional parameters, table prefix or filter to apply.
      * 
      * @return Models\QueryTablesResult
      * 
@@ -741,6 +747,14 @@ class TableRestProxy extends ServiceRestProxy implements ITable
         
         if (is_null($options)) {
             $options = new QueryTablesOptions();
+        } else if (is_string($options)) {
+            $prefix  = $options;
+            $options = new QueryTablesOptions();
+            $options->setPrefix($prefix);
+        } else if ($options instanceof Filter) {
+            $filter  = $options;
+            $options = new QueryTablesOptions();
+            $options->setFilter($filter);
         }
         
         $query   = $options->getQuery();
@@ -956,8 +970,10 @@ class TableRestProxy extends ServiceRestProxy implements ITable
     /**
      * Quries entities for the given table name
      * 
-     * @param string                      $table   name of the table
-     * @param Models\QueryEntitiesOptions $options optional parameters
+     * @param string                                           $table   The name of
+     * the table.
+     * @param Models\QueryEntitiesOptions|string|Models\Filter $options Coule be
+     * optional parameters, query string or filter to apply.
      * 
      * @return Models\QueryEntitiesResult
      * 
@@ -977,6 +993,14 @@ class TableRestProxy extends ServiceRestProxy implements ITable
         
         if (is_null($options)) {
             $options = new QueryEntitiesOptions();
+        } else if (is_string($options)) {
+            $queryString  = $options;
+            $options      = new QueryEntitiesOptions();
+            $options->setFilter(Filter::applyQueryString($queryString));
+        } else if ($options instanceof Filter) {
+            $filter  = $options;
+            $options = new QueryEntitiesOptions();
+            $options->setFilter($filter);
         }
         
         $encodedPK   = $this->_encodeODataUriValue($options->getNextPartitionKey());

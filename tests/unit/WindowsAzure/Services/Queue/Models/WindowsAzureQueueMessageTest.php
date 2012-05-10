@@ -25,7 +25,7 @@
 namespace Tests\Unit\WindowsAzure\Services\Queue\Models;
 use WindowsAzure\Services\Queue\Models\WindowsAzureQueueMessage;
 use Tests\Framework\TestResources;
-use WindowsAzure\Core\WindowsAzureUtilities;
+use WindowsAzure\Utilities;
 
 /**
  * Unit tests for class WindowsAzureQueueMessageTest
@@ -54,10 +54,10 @@ class WindowsAzureQueueMessageTest extends \PHPUnit_Framework_TestCase
         
         // Assert
         $this->assertEquals($sample['MessageId'] , $actual->getMessageId());
-        $this->assertEquals(WindowsAzureUtilities::rfc1123ToDateTime($sample['InsertionTime']) , $actual->getInsertionDate());
-        $this->assertEquals(WindowsAzureUtilities::rfc1123ToDateTime($sample['ExpirationTime']) , $actual->getExpirationDate());
+        $this->assertEquals(Utilities::rfc1123ToDateTime($sample['InsertionTime']) , $actual->getInsertionDate());
+        $this->assertEquals(Utilities::rfc1123ToDateTime($sample['ExpirationTime']) , $actual->getExpirationDate());
         $this->assertEquals($sample['PopReceipt'] , $actual->getPopReceipt());
-        $this->assertEquals(WindowsAzureUtilities::rfc1123ToDateTime($sample['TimeNextVisible']), $actual->getTimeNextVisible());
+        $this->assertEquals(Utilities::rfc1123ToDateTime($sample['TimeNextVisible']), $actual->getTimeNextVisible());
         $this->assertEquals(intval($sample['DequeueCount']) , $actual->getDequeueCount());
         $this->assertEquals($sample['MessageText'] , $actual->getMessageText());
     }
@@ -76,8 +76,8 @@ class WindowsAzureQueueMessageTest extends \PHPUnit_Framework_TestCase
         
         // Assert
         $this->assertEquals($sample['MessageId'] , $actual->getMessageId());
-        $this->assertEquals(WindowsAzureUtilities::rfc1123ToDateTime($sample['InsertionTime']) , $actual->getInsertionDate());
-        $this->assertEquals(WindowsAzureUtilities::rfc1123ToDateTime($sample['ExpirationTime']) , $actual->getExpirationDate());
+        $this->assertEquals(Utilities::rfc1123ToDateTime($sample['InsertionTime']) , $actual->getInsertionDate());
+        $this->assertEquals(Utilities::rfc1123ToDateTime($sample['ExpirationTime']) , $actual->getExpirationDate());
         $this->assertEquals(intval($sample['DequeueCount']) , $actual->getDequeueCount());
         $this->assertEquals($sample['MessageText'] , $actual->getMessageText());
     }

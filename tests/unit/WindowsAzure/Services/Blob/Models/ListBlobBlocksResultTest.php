@@ -23,7 +23,7 @@
  */
 namespace Tests\Unit\WindowsAzure\Services\Blob\Models;
 use WindowsAzure\Services\Blob\Models\ListBlobBlocksResult;
-use WindowsAzure\Core\WindowsAzureUtilities;
+use WindowsAzure\Utilities;
 
 /**
  * Unit tests for class ListBlobBlocksResult
@@ -45,7 +45,7 @@ class ListBlobBlocksResultTest extends \PHPUnit_Framework_TestCase
     public function testSetLastModified()
     {
         // Setup
-        $expected = WindowsAzureUtilities::rfc1123ToDateTime('Sun, 25 Sep 2011 19:42:18 GMT');
+        $expected = Utilities::rfc1123ToDateTime('Sun, 25 Sep 2011 19:42:18 GMT');
         $result = new ListBlobBlocksResult();
         $result->setLastModified($expected);
         

@@ -25,7 +25,6 @@
 namespace WindowsAzure\Services\ServiceBus;
 use WindowsAzure\Core\Http\IHttpClient;
 use WindowsAzure\Core\Http\Url;
-use WindowsAzure\Core\WindowsAzureUtilities;
 use WindowsAzure\Services\Core\Models\GetServicePropertiesResult;
 use WindowsAzure\Services\Core\Models\ServiceProperties;
 use WindowsAzure\Services\Core\ServiceRestProxy;

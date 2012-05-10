@@ -28,7 +28,7 @@ namespace Tests\Functional\WindowsAzure\Services\Table;
 
 use WindowsAzure\Resources;
 use WindowsAzure\Core\ServiceException;
-use WindowsAzure\Core\WindowsAzureUtilities;
+use WindowsAzure\Core\Configuration;
 use WindowsAzure\Services\Core\Models\Logging;
 use WindowsAzure\Services\Core\Models\Metrics;
 use WindowsAzure\Services\Core\Models\RetentionPolicy;
@@ -58,11 +58,11 @@ class TableServiceFunctionalParametersTest extends FunctionalTestBase {
     public function testGetServicePropertiesNullOptions() {
         try {
             $this->wrapper->getServiceProperties(null);
-            $this->assertFalse(WindowsAzureUtilities::isEmulated(), 'Should fail if and only if in emulator');
+            $this->assertFalse(Configuration::isEmulated(), 'Should fail if and only if in emulator');
         }
         catch (ServiceException $e) {
             // Expect failure when run this test with emulator, as v1.6 doesn't support this method
-            if (WindowsAzureUtilities::isEmulated()) {
+            if (Configuration::isEmulated()) {
                 // Properties are not supported in emulator
                 $this->assertEquals(400, $e->getCode(), 'getCode');
             } else {
@@ -1033,11 +1033,11 @@ class TableServiceFunctionalParametersTest extends FunctionalTestBase {
 
         try {
             $this->wrapper->insertOrMergeEntity($table, TableServiceFunctionalTestData::getSimpleEntity(), null);
-            $this->assertFalse(WindowsAzureUtilities::isEmulated(), 'Should fail if and only if in emulator');
+            $this->assertFalse(Configuration::isEmulated(), 'Should fail if and only if in emulator');
         }
         catch (ServiceException $e) {
             // Expect failure when run this test with emulator, as v1.6 doesn't support this method
-            if (WindowsAzureUtilities::isEmulated()) {
+            if (Configuration::isEmulated()) {
                 $this->assertEquals(404, $e->getCode(), 'getCode');
             }
         }
@@ -1137,11 +1137,11 @@ class TableServiceFunctionalParametersTest extends FunctionalTestBase {
 
         try {
             $this->wrapper->insertOrReplaceEntity($table, TableServiceFunctionalTestData::getSimpleEntity(), null);
-            $this->assertFalse(WindowsAzureUtilities::isEmulated(), 'Should fail if and only if in emulator');
+            $this->assertFalse(Configuration::isEmulated(), 'Should fail if and only if in emulator');
         }
         catch (ServiceException $e) {
             // Expect failure when run this test with emulator, as v1.6 doesn't support this method
-            if (WindowsAzureUtilities::isEmulated()) {
+            if (Configuration::isEmulated()) {
                 $this->assertEquals(404, $e->getCode(), 'getCode');
             }
         }

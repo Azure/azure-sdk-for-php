@@ -34,7 +34,6 @@ use Tests\Framework\QueueServiceRestProxyTestBase;
 use Tests\Framework\TestResources;
 use Tests\Functional\WindowsAzure\Services\Queue\QueueServiceFunctionalTestData;
 use WindowsAzure\Core\ServiceException;
-use WindowsAzure\Core\WindowsAzureUtilities;
 use WindowsAzure\Resources;
 use WindowsAzure\Core\Configuration;
 use WindowsAzure\Services\Queue\QueueService;
@@ -74,7 +73,7 @@ class FunctionalTestBase extends QueueServiceRestProxyTestBase {
     {
         parent::tearDownAfterClass();
         $service = self::createService();
-        if (!WindowsAzureUtilities::isEmulated()) {
+        if (!Configuration::isEmulated()) {
             $serviceProperties = QueueServiceFunctionalTestData::getDefaultServiceProperties();
             $service->setServiceProperties($serviceProperties);
         }

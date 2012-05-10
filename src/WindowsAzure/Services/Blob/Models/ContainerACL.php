@@ -28,7 +28,6 @@ use WindowsAzure\Validate;
 use WindowsAzure\Resources;
 use WindowsAzure\Services\Blob\Models\AccessPolicy;
 use WindowsAzure\Services\Blob\Models\SignedIdentifier;
-use WindowsAzure\Core\WindowsAzureUtilities;
 use WindowsAzure\Services\Blob\Models\PublicAccessType;
 use WindowsAzure\Core\Serialization\XmlSerializer;
 

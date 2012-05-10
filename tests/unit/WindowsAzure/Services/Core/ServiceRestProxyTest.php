@@ -15,33 +15,59 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   Tests\Unit\WindowsAzure
+ * @package   Tests\Unit\WindowsAzure\Services\Core
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
 
-use WindowsAzure\Core\WindowsAzureUtilities;
+namespace Tests\Unit\WindowsAzure\Services\Core;
 use WindowsAzure\Resources;
+use WindowsAzure\Services\Core\ServiceRestProxy;
+use WindowsAzure\Core\Http\HttpClient;
+use WindowsAzure\Core\Serialization\XmlSerializer;
 
 /**
- * Unit tests for class WindowsAzureUtilities
+ * Unit tests for class ServiceRestProxy
  *
  * @category  Microsoft
- * @package   Tests\Unit\WindowsAzure
+ * @package   Tests\Unit\WindowsAzure\Services\Core
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @version   Release: @package_version@
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
-class WindowsAzureUtilitiesTest extends PHPUnit_Framework_TestCase
+class ServiceRestProxyTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @covers WindowsAzure\Core\WindowsAzureUtilities::generateMetadataHeaders
+     * @covers WindowsAzure\Services\Core\ServiceRestProxy::generateMetadataHeaders
      */
-    public function testGenerateMetadataHeader()
+    public function test__construct()
+    {
+        // Setup
+        $channel = new HttpClient();
+        $uri     = 'http://www.microsoft.com';
+        $accountName = 'myaccount';
+        $dataSerializer = new XmlSerializer();
+        
+        // Test
+        $proxy = new ServiceRestProxy($channel, $uri, $accountName, $dataSerializer);
+        
+        // Assert
+        $this->assertNotNull($proxy);
+        $this->assertEquals($accountName, $proxy->getAccountName());
+        $this->assertEquals($uri, $proxy->getUri());
+        
+        return $proxy;
+    }
+    
+    /**
+     * @covers WindowsAzure\Services\Core\ServiceRestProxy::generateMetadataHeaders
+     * @depends test__construct
+     */
+    public function testGenerateMetadataHeader($proxy)
     {
         // Setup
         $metadata = array('key1' => 'value1', 'MyName' => 'WindowsAzure', 'MyCompany' => 'Microsoft_');
@@ -51,29 +77,31 @@ class WindowsAzureUtilitiesTest extends PHPUnit_Framework_TestCase
         }
         
         // Test
-        $actual = WindowsAzureUtilities::generateMetadataHeaders($metadata);
+        $actual = $proxy->generateMetadataHeaders($metadata);
         
         // Assert
         $this->assertEquals($expected, $actual);
     }
     
     /**
-     * @covers WindowsAzure\Core\WindowsAzureUtilities::generateMetadataHeaders
+     * @covers WindowsAzure\Services\Core\ServiceRestProxy::generateMetadataHeaders
+     * @depends test__construct
      */
-    public function testGenerateMetadataHeaderInvalidNameFail()
+    public function testGenerateMetadataHeaderInvalidNameFail($proxy)
     {
         // Setup
         $metadata = array('key1' => "value1\n", 'MyName' => "\rAzurr", 'MyCompany' => "Micr\r\nosoft_");
         $this->setExpectedException(get_class(new \InvalidArgumentException(Resources::INVALID_META_MSG)));
         
         // Test
-        WindowsAzureUtilities::generateMetadataHeaders($metadata);
+        $proxy->generateMetadataHeaders($metadata);
     }
     
     /**
-     * @covers WindowsAzure\Core\WindowsAzureUtilities::getMetadataArray
+     * @covers WindowsAzure\Services\Core\ServiceRestProxy::getMetadataArray
+     * @depends test__construct
      */
-    public function testGetMetadataArray()
+    public function testGetMetadataArray($proxy)
     {
         // Setup
         $expected = array('key1' => 'value1', 'myname' => 'azure', 'mycompany' => 'microsoft_');
@@ -83,16 +111,17 @@ class WindowsAzureUtilitiesTest extends PHPUnit_Framework_TestCase
         }
         
         // Test
-        $actual = WindowsAzureUtilities::getMetadataArray($metadataHeaders);
+        $actual = $proxy->getMetadataArray($metadataHeaders);
         
         // Assert
         $this->assertEquals($expected, $actual);
     }
     
     /**
-     * @covers WindowsAzure\Core\WindowsAzureUtilities::getMetadataArray
+     * @covers WindowsAzure\Services\Core\ServiceRestProxy::getMetadataArray
+     * @depends test__construct
      */
-    public function testGetMetadataArrayWithMsHeaders()
+    public function testGetMetadataArrayWithMsHeaders($proxy)
     {
         // Setup
         $key = 'name';
@@ -102,38 +131,11 @@ class WindowsAzureUtilitiesTest extends PHPUnit_Framework_TestCase
                           $validMetadataKey => $value, 'mycompany' => 'microsoft_');
         
         // Test
-        $actual = WindowsAzureUtilities::getMetadataArray($metadataHeaders);
+        $actual = $proxy->getMetadataArray($metadataHeaders);
         
         // Assert
         $this->assertCount(1, $actual);
         $this->assertEquals($value, $actual[$key]);
-    }
-    
-    /**
-     * @covers WindowsAzure\Core\WindowsAzureUtilities::rfc1123ToDateTime
-     */
-    public function testWindowsAzureDateToDateTime()
-    {
-        // Setup
-        $expected = 'Fri, 16 Oct 2009 21:04:30 GMT';
-        
-        // Test
-        $actual = WindowsAzureUtilities::rfc1123ToDateTime($expected);
-        
-        // Assert
-        $this->assertEquals($expected, $actual->format('D, d M Y H:i:s T'));
-    }
-    
-    /**
-     * @covers WindowsAzure\Core\WindowsAzureUtilities::isEmulated
-     */
-    public function testIsEmulated()
-    {
-        // Test
-        $actual = WindowsAzureUtilities::isEmulated();
-        
-        // Assert
-        $this->assertTrue(isset($actual));
     }
 }
 

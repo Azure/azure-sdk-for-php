@@ -25,7 +25,7 @@
 namespace WindowsAzure\Services\Blob\Models;
 use WindowsAzure\Resources;
 use WindowsAzure\Validate;
-use WindowsAzure\Core\WindowsAzureUtilities;
+use WindowsAzure\Utilities;
 
 /**
  * Holds results of calling getBlobMetadata wrapper
@@ -59,16 +59,16 @@ class GetBlobMetadataResult
     /**
      * Creates GetBlobMetadataResult from response headers.
      * 
-     * @param array $headers response headers
+     * @param array $headers  The HTTP response headers.
+     * @param array $metadata The blob metadata array.
      * 
      * @return GetBlobMetadataResult
      */
-    public static function create($headers)
+    public static function create($headers, $metadata)
     {
         $result   = new GetBlobMetadataResult();
         $date     = $headers[Resources::LAST_MODIFIED];
-        $metadata = WindowsAzureUtilities::getMetadataArray($headers);
-        $result->setLastModified(WindowsAzureUtilities::rfc1123ToDateTime($date));
+        $result->setLastModified(Utilities::rfc1123ToDateTime($date));
         $result->setEtag($headers[Resources::ETAG]);
         $result->setMetadata(is_null($metadata) ? array() : $metadata);
         

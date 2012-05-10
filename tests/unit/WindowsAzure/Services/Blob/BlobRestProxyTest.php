@@ -29,7 +29,6 @@ use Tests\Framework\BlobServiceRestProxyTestBase;
 use Tests\Framework\TestResources;
 use WindowsAzure\Resources;
 use WindowsAzure\Utilities;
-use WindowsAzure\Core\WindowsAzureUtilities;
 use WindowsAzure\Core\ServiceException;
 use WindowsAzure\Services\Core\Models\ServiceProperties;
 use WindowsAzure\Services\Blob\Models\ListContainersOptions;
@@ -919,6 +918,34 @@ class BlobRestProxyTest extends BlobServiceRestProxyTestBase
         
         // Assert
         $this->assertEquals(BlobType::PAGE_BLOB, $result->getProperties()->getBlobType());
+        $this->assertEquals($contentStream, stream_get_contents($result->getContentStream()));
+    }
+    
+    /**
+     * @covers WindowsAzure\Services\Blob\BlobRestProxy::getBlob
+     * @covers WindowsAzure\Services\Blob\BlobRestProxy::_addOptionalRangeHeader
+     * @covers WindowsAzure\Services\Blob\Models\GetBlobResult::create
+     */
+    public function testGetBlobGarbage()
+    {
+        // Setup
+        $name = 'getblobwithgarbage';
+        $blob = 'myblob';
+        $metadata = array('m1' => 'v1', 'm2' => 'v2');
+        $contentType = 'text/plain; charset=UTF-8';
+        $contentStream = chr(0);
+        $this->createContainer($name);
+        $options = new CreateBlobOptions();
+        $options->setContentType($contentType);
+        $options->setMetadata($metadata);
+        $this->wrapper->createBlockBlob($name, $blob, $contentStream, $options);
+        
+        // Test
+        $result = $this->wrapper->getBlob($name, $blob);
+        
+        // Assert
+        $this->assertEquals(BlobType::BLOCK_BLOB, $result->getProperties()->getBlobType());
+        $this->assertEquals($metadata, $result->getMetadata());
         $this->assertEquals($contentStream, stream_get_contents($result->getContentStream()));
     }
     

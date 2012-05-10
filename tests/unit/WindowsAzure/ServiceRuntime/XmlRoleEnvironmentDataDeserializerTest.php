@@ -23,7 +23,6 @@
  */
 namespace Tests\Unit\WindowsAzure\ServiceRuntime;
 use Tests\Framework\TestResources;
-use WindowsAzure\Core\WindowsAzureUtilities;
 use WindowsAzure\ServiceRuntime\FileInputChannel;
 use WindowsAzure\ServiceRuntime\XmlRoleEnvironmentDataDeserializer;
 

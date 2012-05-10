@@ -22,7 +22,7 @@
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
 namespace Tests\Unit\WindowsAzure\Services\Blob\Models;
-use WindowsAzure\Core\WindowsAzureUtilities;
+use WindowsAzure\Utilities;
 use WindowsAzure\Services\Blob\Models\GetBlobMetadataResult;
 
 /**
@@ -79,7 +79,7 @@ class GetBlobMetadataResultTest extends \PHPUnit_Framework_TestCase
     {
         // Setup
         $getBlobMetadataResult = new GetBlobMetadataResult();
-        $expected = WindowsAzureUtilities::rfc1123ToDateTime('Fri, 09 Oct 2009 21:04:30 GMT');
+        $expected = Utilities::rfc1123ToDateTime('Fri, 09 Oct 2009 21:04:30 GMT');
         $getBlobMetadataResult->setLastModified($expected);
         
         // Test
@@ -96,7 +96,7 @@ class GetBlobMetadataResultTest extends \PHPUnit_Framework_TestCase
     {
         // Setup
         $getBlobMetadataResult = new GetBlobMetadataResult();
-        $expected = WindowsAzureUtilities::rfc1123ToDateTime('Fri, 09 Oct 2009 21:04:30 GMT');
+        $expected = Utilities::rfc1123ToDateTime('Fri, 09 Oct 2009 21:04:30 GMT');
         
         // Test
         $getBlobMetadataResult->setLastModified($expected);

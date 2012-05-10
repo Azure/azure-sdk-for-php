@@ -27,7 +27,7 @@
 namespace Tests\Functional\WindowsAzure\Services\Table;
 
 use WindowsAzure\Utilities;
-use WindowsAzure\Core\WindowsAzureUtilities;
+use WindowsAzure\Core\Configuration;
 use WindowsAzure\Services\Core\Models\Logging;
 use WindowsAzure\Services\Core\Models\Metrics;
 use WindowsAzure\Services\Core\Models\RetentionPolicy;
@@ -337,7 +337,7 @@ class TableServiceFunctionalTestData {
         $options->setPrefix(self::$nonExistTablePrefix);
         array_push($ret, $options);
 
-        if (!WindowsAzureUtilities::isEmulated()) {
+        if (!Configuration::isEmulated()) {
             $options = new QueryTablesOptions();
             $options->setPrefix(self::$testUniqueId);
             array_push($ret, $options);

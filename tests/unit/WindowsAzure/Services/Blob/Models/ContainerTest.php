@@ -26,7 +26,7 @@ namespace Tests\Unit\WindowsAzure\Services\Blob\Models;
 use WindowsAzure\Services\Blob\Models\Container;
 use Tests\Framework\TestResources;
 use WindowsAzure\Services\Blob\Models\ContainerProperties;
-use WindowsAzure\Core\WindowsAzureUtilities;
+use WindowsAzure\Utilities;
 
 /**
  * Unit tests for class Container
@@ -146,7 +146,7 @@ class ContainerTest extends \PHPUnit_Framework_TestCase
     public function testSetProperties()
     {
         // Setup
-        $date = WindowsAzureUtilities::rfc1123ToDateTime('Wed, 12 Aug 2009 20:39:39 GMT');
+        $date = Utilities::rfc1123ToDateTime('Wed, 12 Aug 2009 20:39:39 GMT');
         $container = new Container();
         $expected = new ContainerProperties();
         $expected->setEtag('0x8CACB9BD7C1EEEC');
@@ -165,7 +165,7 @@ class ContainerTest extends \PHPUnit_Framework_TestCase
     public function testGetProperties()
     {
         // Setup
-        $date = WindowsAzureUtilities::rfc1123ToDateTime('Wed, 12 Aug 2009 20:39:39 GMT');
+        $date = Utilities::rfc1123ToDateTime('Wed, 12 Aug 2009 20:39:39 GMT');
         $container = new Container();
         $expected = new ContainerProperties();
         $expected->setEtag('0x8CACB9BD7C1EEEC');

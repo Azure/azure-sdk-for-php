@@ -47,7 +47,7 @@ class QueueServiceRestProxyTestBase extends ServiceRestProxyTestBase
     public function __construct()
     {
         $config = new Configuration();
-        $queueUri = 'http://' . TestResources::accountName() . '.queue.core.windows.net';
+        $queueUri = TestResources::accountName() . '.queue.core.windows.net';
         $config->setProperty(QueueSettings::ACCOUNT_KEY, TestResources::accountKey());
         $config->setProperty(QueueSettings::ACCOUNT_NAME, TestResources::accountName());        
         $config->setProperty(QueueSettings::URI, $queueUri);
