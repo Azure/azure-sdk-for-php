@@ -283,6 +283,7 @@ class ServicesBuilder implements IServiceBuilder
         $serviceManagementWrapper = new ServiceManagementRestProxy(
             $httpClient,
             $config->getProperty(ServiceManagementSettings::SUBSCRIPTION_ID),
+            $config->getProperty(ServiceManagementSettings::URI),
             $xmlSerializer
         );
 

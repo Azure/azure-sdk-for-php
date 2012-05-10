@@ -54,7 +54,7 @@ class UpdateEntityResult
     public static function create($headers)
     {
         $result = new UpdateEntityResult();
-        $clean  = Utilities::keysToLower($headers);
+        $clean  = array_change_key_case($headers);
         $result->setEtag($clean[Resources::ETAG]);
         
         return $result;

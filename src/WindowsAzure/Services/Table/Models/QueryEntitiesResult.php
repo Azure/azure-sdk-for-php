@@ -65,7 +65,7 @@ class QueryEntitiesResult
     public static function create($headers, $entities)
     {
         $result  = new QueryEntitiesResult();
-        $headers = Utilities::keysToLower($headers);
+        $headers = array_change_key_case($headers);
         $nextPK  = Utilities::tryGetValue(
             $headers, Resources::X_MS_CONTINUATION_NEXTPARTITIONKEY
         );

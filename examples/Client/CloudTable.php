@@ -56,14 +56,17 @@ class CloudTable
     
     /**
      * Initializes new CloudTable object using the provided parameters.
+	 * 
+	 * Sets default partition key by default using uniqid() function.
      * 
      * @param string                             $name  The table name.
      * @param WindowsAzure\Services\Table\ITable $proxy The table REST proxy.
      */
     public function __construct($name, $proxy)
     {
-        $this->_name  = $name;
-        $this->_proxy = $proxy;
+        $this->_name  			   = $name;
+        $this->_proxy 			   = $proxy;
+        $this->_defaultParitionKey = uniqid();
     }
     
     /**

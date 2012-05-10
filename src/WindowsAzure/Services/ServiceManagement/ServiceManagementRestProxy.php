@@ -145,15 +145,17 @@ class ServiceManagementRestProxy extends RestProxy
      * channel.
      * @param string                                      $subscriptionId The user
      * subscription id.
+     * @param string                                      $uri            The service
+     * URI.
      * @param WindowsAzure\Core\Serialization\ISerializer $dataSerializer The data
      * serializer.
      */
-    public function __construct($channel, $subscriptionId, $dataSerializer)
+    public function __construct($channel, $subscriptionId, $uri, $dataSerializer)
     {
         parent::__construct(
             $channel,
             $dataSerializer,
-            Resources::SERVICE_MANAGEMENT_URL
+            $uri
         );
         $this->_subscriptionId = $subscriptionId;
     }

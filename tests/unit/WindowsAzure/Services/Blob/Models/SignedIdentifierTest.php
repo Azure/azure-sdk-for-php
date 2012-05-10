@@ -79,9 +79,9 @@ class SignedIdentifierTest extends \PHPUnit_Framework_TestCase
         // Setup
         $signedIdentifier = new SignedIdentifier();
         $expected = new AccessPolicy();
-        $expected->setExpiry('2009-09-29T08%3a49%3a37.0000000Z');
+        $expected->setExpiry(new \DateTime('2009-09-29T08:49:37'));
         $expected->setPermission('rwd');
-        $expected->setStart('2009-09-28T08%3a49%3a37.0000000Z');
+        $expected->setStart(new \DateTime('2009-09-28T08:49:37'));
         $signedIdentifier->setAccessPolicy($expected);
         
         // Test
@@ -99,9 +99,9 @@ class SignedIdentifierTest extends \PHPUnit_Framework_TestCase
         // Setup
         $signedIdentifier = new SignedIdentifier();
         $expected = new AccessPolicy();
-        $expected->setExpiry('2009-09-29T08%3a49%3a37.0000000Z');
+        $expected->setExpiry(new \DateTime('2009-09-29T08:49:37'));
         $expected->setPermission('rwd');
-        $expected->setStart('2009-09-28T08%3a49%3a37.0000000Z');
+        $expected->setStart(new \DateTime('2009-09-28T08:49:37'));
         
         // Test
         $signedIdentifier->setAccessPolicy($expected);

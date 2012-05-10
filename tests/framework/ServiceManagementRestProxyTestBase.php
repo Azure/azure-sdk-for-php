@@ -65,6 +65,10 @@ class ServiceManagementRestProxyTestBase extends RestProxyTestBase
             TestResources::serviceManagementSubscriptionId()
         );
         $config->setProperty(
+            ServiceManagementSettings::URI,
+            Resources::SERVICE_MANAGEMENT_URL
+        );
+        $config->setProperty(
             ServiceManagementSettings::CERTIFICATE_PATH,
             TestResources::serviceManagementCertificatePath()
         );

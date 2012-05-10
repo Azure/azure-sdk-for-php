@@ -312,24 +312,6 @@ class Utilities
     {
         return $obj ? 'true' : 'false';
     }
-    
-    /**
-     * Converts all string keys in the given $array into lower case
-     * 
-     * @param array $array array to be used
-     * 
-     * @return array 
-     */
-    public static function keysToLower($array)
-    {
-        $clean = array();
-        
-        foreach ($array as $key => $value) {
-            $clean[strtolower($key)] = $value;
-        }
-        
-        return $clean;
-    }
 
     /**
      * Generate ISO 8601 compliant date string in UTC time zone
@@ -369,6 +351,10 @@ class Utilities
             return $value;
         }
         
+        if (is_string($value)) {
+            $value =  self::convertToDateTime($value);
+        }
+
         Validate::isDate($value);
             
         $cloned = clone $value;
@@ -394,18 +380,6 @@ class Utilities
         }
             
         return new \DateTime($value, new \DateTimeZone('UTC'));
-    }
-    
-    /**
-     * Reads the contents of a stream.
-     * 
-     * @param resource $stream The stream handle with read permissions.
-     * 
-     * @return string
-     */
-    public static function readStream($stream)
-    {
-        return stream_get_contents($stream);
     }
     
     /**

@@ -111,7 +111,7 @@ class BlobProperties
     public static function create($parsed)
     {
         $result = new BlobProperties();
-        $clean  = Utilities::keysToLower($parsed);
+        $clean  = array_change_key_case($parsed);
         
         $date = Utilities::tryGetValue($clean, Resources::LAST_MODIFIED);
         $result->setBlobType(Utilities::tryGetValue($clean, 'blobtype'));
