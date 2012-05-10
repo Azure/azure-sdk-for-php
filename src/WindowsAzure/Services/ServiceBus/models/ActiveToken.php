@@ -24,11 +24,11 @@
  
 namespace WindowsAzure\Services\ServiceBus\Models;
 use WindowsAzure\Resources;
-use WindowsAzure\Services\ServiceBus\Models;
+use WindowsAzure\Services\ServiceBus\Models\WrapAccessTokenResult;
 use WindowsAzure\Utilities;
 
 /**
- * Container to hold wrap accesss token response object.
+ * An active WRAP access Token.
  *
  * @category  Microsoft
  * @package   WindowsAzure\Services\ServiceBus\Models
@@ -38,87 +38,76 @@ use WindowsAzure\Utilities;
  * @version   Release: @package_version@
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
-class WrapAccessTokenResult
+class ActiveToken
 {
     /** 
-     * @var string
+     * The WRAP access token result. 
+     * 
+     * @var WrapAccessTokenResult
      */
-    private $_accessToken;
+    private $_wrapAccessTokenResult;
 
     /** 
-     * @var integer
+     * When the WRAP access token expires. 
+     * 
+     * @var \DateTime
      */
-    private $_expiresIn;
+    private $_expirationDateTime;
 
     /**
-     * Creates WrapAccesTokenResult object from parsed XML response.
+     * Creates an ActiveToken with specified WRAP 
+     * access token result.
      *
-     * @param array $response The get WRAP access token response.
+     * @param array $wrapAccessTokenResult A WRAP access token result.
      * 
-     * @return WindowsAzure\Services\ServiceBus\Models\WrapAccessTokenResult.
      */
-    public static function create($response)
+    public function __construct($wrapAccessTokenResult)
     {
-        $wrapAccessTokenResult = new WrapAccessTokenResult();
-        parse_str($response, $parsedResponse);
-
-        $wrapAccessTokenResult->setAccessToken(
-            Utilities::tryGetValue(
-                $parsedResponse, Resources::WRAP_ACCESS_TOKEN
-            )
-        );
-
-        $wrapAccessTokenResult->setExpiresIn(
-            Utilities::tryGetValue(
-                $parsedResponse, Resources::WRAP_ACCESS_TOKEN_EXPIRES_IN
-            )
-        );
-        
-        return $wrapAccessTokenResult;
+        $this->_wrapAccessTokenResult = $wrapAccessTokenResult;
     }
 
     /**
-     * Gets access token.
+     * Gets WRAP access token.
      *
-     * @return string.
+     * @return WrapAccessTokenResult
      */
-    public function getAccessToken()
+    public function getWrapAccessTokenResult()
     {
-        return $this->_accessToken;
+        return $this->_wrapAccessTokenResult;
     }
     
     /**
-     * Sets access token.
+     * Sets WRAP access token.
      *
-     * @param string $accessToken The access token.
+     * @param string $wrapAccessTokenResult The WRAP access token result.
      * 
-     * @return none.
+     * @return none
      */
-    public function setAccessToken($accessToken)
+    public function setWrapAccessTokenResult($wrapAccessTokenResult)
     {
-        $this->_accessToken = $accessToken;
+        $this->_wrapAccessTokenResult = $wrapAccessTokenResult;
     }
 
     /**
-     * Gets expires in.
+     * Gets expiration time.  
      *
-     * @return integer.
+     * @return \DateTime
      */
-    public function getExpiresIn()
+    public function getExpirationDateTime()
     {
-        return $this->_expiresIn;
+        return $this->_expirationDateTime;
     }
 
     /**
-     * Sets expires in.
+     * Sets expiration time.
      *
-     * @param integer $expiresIn value.
+     * @param \DateTime $expirationDateTime value.
      * 
-     * @return none.
+     * @return none
      */
-    public function setExpiresIn($expiresIn)
+    public function setExpirationDateTime($expirationDateTime)
     {
-        $this->_expiresIn = $expiresIn;
+        $this->_expirationDateTime = $expirationDateTime;
     }
 }
 

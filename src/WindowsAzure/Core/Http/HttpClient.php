@@ -78,13 +78,18 @@ class HttpClient implements IHttpClient
      */
     function __construct($certificatePath = Resources::EMPTY_STRING)
     {
+        $config = array(
+            Resources::USE_BRACKETS    => true,
+            Resources::SSL_VERIFY_PEER => false,
+            Resources::SSL_VERIFY_HOST => false 
+        );
+
+        if (!empty($certificatePath)) {
+            $config[Resources::SSL_LOCAL_CERT] = $certificatePath;
+        }
+
         $this->_request = new \HTTP_Request2(
-            null, null, array(
-                Resources::USE_BRACKETS    => true,
-                Resources::SSL_VERIFY_PEER => false,
-                Resources::SSL_VERIFY_HOST => false,
-                Resources::SSL_LOCAL_CERT  => $certificatePath
-                )
+            null, null, $config
         );
 
         $this->setHeader('user-agent', null);
@@ -195,6 +200,18 @@ class HttpClient implements IHttpClient
         foreach ($headers as $key => $value) {
             $this->setHeader($key, $value);
         }
+    }
+
+    /**
+     * Sets HTTP POST parameters.
+     * 
+     * @param array $postParameters The HTTP POST parameters.
+     * 
+     * @return none
+     */
+    public function setPostParameters($postParameters)
+    {
+        $this->_request->addPostParameter($postParameters);
     }
 
     /**
