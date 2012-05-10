@@ -65,7 +65,8 @@ interface ITable extends FilterableService
     /**
      * Quries tables in the given storage account.
      * 
-     * @param Models\QueryTablesOptions $options optional parameters
+     * @param Models\QueryTablesOptions|string|Models\Filter $options Could be
+     * optional parameters, table prefix or filter to apply.
      * 
      * @return Models\QueryTablesResult
      * 
@@ -110,8 +111,10 @@ interface ITable extends FilterableService
     /**
      * Quries entities for the given table name
      * 
-     * @param string                      $table   name of the table
-     * @param Models\QueryEntitiesOptions $options optional parameters
+     * @param string                                           $table   The name of
+     * the table.
+     * @param Models\QueryEntitiesOptions|string|Models\Filter $options Coule be
+     * optional parameters, query string or filter to apply.
      * 
      * @return Models\QueryEntitiesResult
      * 
