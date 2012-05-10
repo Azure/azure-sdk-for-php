@@ -85,12 +85,13 @@ class ServiceRestProxy extends RestProxy
     /**
      * Sends HTTP request with the specified parameters.
      * 
-     * @param string $method      HTTP method used in the request
-     * @param array  $headers     HTTP headers.
-     * @param array  $queryParams URL query parameters.
-     * @param string $path        URL path
-     * @param int    $statusCode  Expected status code received in the response
-     * @param string $body        Request body
+     * @param string $method         HTTP method used in the request
+     * @param array  $headers        HTTP headers.
+     * @param array  $queryParams    URL query parameters.
+     * @param array  $postParameters The HTTP POST parameters.
+     * @param string $path           URL path
+     * @param int    $statusCode     Expected status code received in the response
+     * @param string $body           Request body
      * 
      * @return \HTTP_Request2_Response
      */
@@ -98,6 +99,7 @@ class ServiceRestProxy extends RestProxy
         $method, 
         $headers, 
         $queryParams, 
+        $postParameters,
         $path, 
         $statusCode,
         $body = Resources::EMPTY_STRING
@@ -108,6 +110,7 @@ class ServiceRestProxy extends RestProxy
         $context->setMethod($method);
         $context->setPath($path);
         $context->setQueryParameters($queryParams);
+        $context->setPostParameters($postParameters);
         
         if (is_array($statusCode)) {
             $context->setStatusCodes($statusCode);
@@ -163,6 +166,25 @@ class ServiceRestProxy extends RestProxy
         }
         
         return $headers;
+    }
+    
+    /**
+     * Adds HTTP POST parameter to the specified 
+     * 
+     * @param array  $postParameters An array of HTTP POST parameters.
+     * @param string $key            The key of a HTTP POST parameter. 
+     * @param string $value          the value of a HTTP POST parameter. 
+     * 
+     * @return array
+     */
+    public function addPostParameter(
+        $postParameters,
+        $key,
+        $value
+    ) {
+        Validate::isArray($postParameters, 'postParameters');
+        $postParameters[$key] = $value;
+        return $postParameters; 
     }
     
     /**

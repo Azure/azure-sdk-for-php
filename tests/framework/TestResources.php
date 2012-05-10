@@ -82,7 +82,7 @@ class TestResources
         return getenv('SERVICE_MANAGEMENT_CERTIFICATE_PATH');
     }
 
-    public static function serviceBusNameSpace()
+    public static function serviceBusNamespace()
     {
         return getenv('SERVICE_BUS_NAMESPACE');
     }

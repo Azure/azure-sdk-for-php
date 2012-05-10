@@ -205,7 +205,25 @@ class ServiceBusRestProxy extends ServiceRestProxy implements IServiceBus
      */
     public function deleteQueue($queuePath)
     {
-        throw new Exception(Resources::NOT_IMPLEMENTED_MSG);
+        Validate::isString($queuePath, 'queuePath');
+        Validate::notNullOrEmpty($queuePath, 'queuePath');
+        
+        $method      = Resources::HTTP_DELETE;
+        $headers     = array();
+        $queryParams = array();
+        $postParams  = array();
+        $path        = $queuePath;
+        $statusCode  = Resources::STATUS_CREATED;
+        
+        $this->send(
+            $method, 
+            $headers, 
+            $queryParams, 
+            $postParams, 
+            $path, 
+            $statusCode
+        );
+
     }
 
     /**

@@ -107,6 +107,7 @@ class Resources
     const LAST_MODIFIED                      = 'last-modified';
     const DATE                               = 'date';
     const AUTHENTICATION                     = 'authorization';
+    const WRAP_AUTHORIZATION                 = 'WRAP access_token={%s}';
     const CONTENT_ENCODING                   = 'content-encoding';
     const CONTENT_LANGUAGE                   = 'content-language';
     const CONTENT_LENGTH                     = 'content-length';
@@ -132,6 +133,13 @@ class Resources
     const SERVICE_MANAGEMENT_TYPE_NAME = 'IServiceManagement';
     const SERVICE_BUS_TYPE_NAME        = 'IServiceBus';
     const WRAP_TYPE_NAME               = 'IWrap';
+
+    // WRAP
+    const WRAP_ACCESS_TOKEN            = 'wrap_access_token'; 
+    const WRAP_ACCESS_TOKEN_EXPIRES_IN = 'wrap_access_token_expires_in'; 
+    const WRAP_NAME                    = 'wrap_name';
+    const WRAP_PASSWORD                = 'wrap_password';
+    const WRAP_SCOPE                   = 'wrap_scope'; 
     
     // HTTP Methods
     const HTTP_GET    = 'GET';
@@ -225,6 +233,16 @@ class Resources
     const XTAG_KEY_TYPE                   = 'KeyType';
     const XTAG_STORAGE_SERVICE_KEYS       = 'StorageServiceKeys';
     const XTAG_ERROR                      = 'Error';
+
+    // PHP URL Keys
+    const PHP_URL_SCHEME   = 'scheme';
+    const PHP_URL_HOST     = 'host';
+    const PHP_URL_PORT     = 'port';
+    const PHP_URL_USER     = 'user';
+    const PHP_URL_PASS     = 'pass';
+    const PHP_URL_PATH     = 'path';
+    const PHP_URL_QUERY    = 'query';
+    const PHP_URL_FRAGMENT = 'fragment';
     
     // Status Codes
     const STATUS_OK              = 200;

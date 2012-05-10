@@ -167,6 +167,7 @@ class BlobRestProxy extends ServiceRestProxy implements IBlob
         $method      = Resources::HTTP_GET;
         $headers     = array();
         $queryParams = array();
+        $postParams  = array();
         $path        = $container;
         $statusCode  = Resources::STATUS_OK;
         
@@ -190,7 +191,15 @@ class BlobRestProxy extends ServiceRestProxy implements IBlob
             $options->getTimeout()
         );
         
-        $response = $this->send($method, $headers, $queryParams, $path, $statusCode);
+        $response = $this->send(
+            $method, 
+            $headers, 
+            $queryParams, 
+            $postParams, 
+            $path, 
+            $statusCode
+        );
+
         $result   = new GetContainerPropertiesResult();
         $metadata = WindowsAzureUtilities::getMetadataArray($response->getHeader());
         $date     = $response->getHeader(Resources::LAST_MODIFIED);
@@ -339,6 +348,7 @@ class BlobRestProxy extends ServiceRestProxy implements IBlob
         $method      = Resources::HTTP_PUT;
         $headers     = array();
         $queryParams = array();
+        $postParams  = array();
         $path        = $this->_createPath($container, $blob);
         $statusCode  = Resources::EMPTY_STRING;
         
@@ -380,7 +390,14 @@ class BlobRestProxy extends ServiceRestProxy implements IBlob
             $options->getTimeout()
         );
         
-        $response = $this->send($method, $headers, $queryParams, $path, $statusCode);
+        $response = $this->send(
+            $method, 
+            $headers, 
+            $queryParams, 
+            $postParams,
+            $path, 
+            $statusCode
+        );
         
         return AcquireLeaseResult::create($response->getHeader());
     }
@@ -419,6 +436,7 @@ class BlobRestProxy extends ServiceRestProxy implements IBlob
         $method      = Resources::HTTP_PUT;
         $headers     = array();
         $queryParams = array();
+        $postParams  = array();
         $path        = $this->_createPath($container, $blob);
         $statusCode  = Resources::STATUS_CREATED;
         // If read file failed for any reason it will throw an exception.
@@ -464,7 +482,13 @@ class BlobRestProxy extends ServiceRestProxy implements IBlob
         );
         
         $response = $this->send(
-            $method, $headers, $queryParams, $path, $statusCode, $body
+            $method, 
+            $headers, 
+            $queryParams, 
+            $postParams,
+            $path, 
+            $statusCode, 
+            $body
         );
         
         return CreateBlobPagesResult::create($response->getHeader());
@@ -484,6 +508,7 @@ class BlobRestProxy extends ServiceRestProxy implements IBlob
         $method      = Resources::HTTP_GET;
         $headers     = array();
         $queryParams = array();
+        $postParams  = array();
         $path        = Resources::EMPTY_STRING;
         $statusCode  = Resources::STATUS_OK;
         
@@ -507,7 +532,14 @@ class BlobRestProxy extends ServiceRestProxy implements IBlob
             'properties'
         );
         
-        $response = $this->send($method, $headers, $queryParams, $path, $statusCode);
+        $response = $this->send(
+            $method, 
+            $headers, 
+            $queryParams, 
+            $postParams,
+            $path, 
+            $statusCode
+        );
         $parsed   = $this->dataSerializer->unserialize($response->getBody());
         
         return GetServicePropertiesResult::create($parsed);
@@ -536,6 +568,7 @@ class BlobRestProxy extends ServiceRestProxy implements IBlob
         $method      = Resources::HTTP_PUT;
         $headers     = array();
         $queryParams = array();
+        $postParams  = array();
         $statusCode  = Resources::STATUS_ACCEPTED;
         $path        = Resources::EMPTY_STRING;
         $body        = $serviceProperties->toXml($this->dataSerializer);
@@ -565,7 +598,15 @@ class BlobRestProxy extends ServiceRestProxy implements IBlob
             Resources::XML_CONTENT_TYPE
         );
         
-        $this->send($method, $headers, $queryParams, $path, $statusCode, $body);
+        $this->send(
+            $method, 
+            $headers, 
+            $queryParams, 
+            $postParams,
+            $path, 
+            $statusCode, 
+            $body
+        );
     }
     
     /**
@@ -582,6 +623,7 @@ class BlobRestProxy extends ServiceRestProxy implements IBlob
         $method      = Resources::HTTP_GET;
         $headers     = array();
         $queryParams = array();
+        $postParams  = array();
         $path        = Resources::EMPTY_STRING;
         $statusCode  = Resources::STATUS_OK;
         
@@ -622,8 +664,16 @@ class BlobRestProxy extends ServiceRestProxy implements IBlob
             $isInclude
         );
         
-        $response = $this->send($method, $headers, $queryParams, $path, $statusCode);
-        $parsed   = $this->dataSerializer->unserialize($response->getBody());
+        $response = $this->send(
+            $method, 
+            $headers, 
+            $queryParams, 
+            $postParams,
+            $path, 
+            $statusCode
+        );
+
+        $parsed = $this->dataSerializer->unserialize($response->getBody());
         
         return ListContainersResult::create($parsed);
     }
@@ -645,6 +695,7 @@ class BlobRestProxy extends ServiceRestProxy implements IBlob
         
         $method      = Resources::HTTP_PUT;
         $headers     = array();
+        $postParams  = array();
         $queryParams = array(Resources::QP_REST_TYPE => 'container');
         $path        = $container;
         $statusCode  = Resources::STATUS_CREATED;
@@ -667,7 +718,14 @@ class BlobRestProxy extends ServiceRestProxy implements IBlob
             $options->getPublicAccess()
         );
         
-        $this->send($method, $headers, $queryParams, $path, $statusCode);
+        $this->send(
+            $method, 
+            $headers, 
+            $queryParams, 
+            $postParams, 
+            $path, 
+            $statusCode
+        );
     }
     
     /**
@@ -687,6 +745,7 @@ class BlobRestProxy extends ServiceRestProxy implements IBlob
         
         $method      = Resources::HTTP_DELETE;
         $headers     = array();
+        $postParams  = array();
         $queryParams = array();
         $path        = $container;
         $statusCode  = Resources::STATUS_ACCEPTED;
@@ -710,7 +769,14 @@ class BlobRestProxy extends ServiceRestProxy implements IBlob
             'container'
         );
         
-        $this->send($method, $headers, $queryParams, $path, $statusCode);
+        $this->send(
+            $method, 
+            $headers, 
+            $queryParams, 
+            $postParams,
+            $path, 
+            $statusCode
+        );
     }
     
     /**
@@ -760,6 +826,7 @@ class BlobRestProxy extends ServiceRestProxy implements IBlob
         
         $method      = Resources::HTTP_GET;
         $headers     = array();
+        $postParams  = array();
         $queryParams = array();
         $path        = $container;
         $statusCode  = Resources::STATUS_OK;
@@ -784,7 +851,14 @@ class BlobRestProxy extends ServiceRestProxy implements IBlob
             'acl'
         );
         
-        $response = $this->send($method, $headers, $queryParams, $path, $statusCode);
+        $response = $this->send(
+            $method, 
+            $headers, 
+            $queryParams, 
+            $postParams,
+            $path, 
+            $statusCode
+        );
         
         $access       = $response->getHeader(Resources::X_MS_BLOB_PUBLIC_ACCESS);
         $etag         = $response->getHeader(Resources::ETAG);
@@ -813,6 +887,7 @@ class BlobRestProxy extends ServiceRestProxy implements IBlob
         
         $method      = Resources::HTTP_PUT;
         $headers     = array();
+        $postParams  = array();
         $queryParams = array();
         $path        = $container;
         $statusCode  = Resources::STATUS_OK;
@@ -848,7 +923,15 @@ class BlobRestProxy extends ServiceRestProxy implements IBlob
             Resources::XML_CONTENT_TYPE
         );
 
-        $this->send($method, $headers, $queryParams, $path, $statusCode, $body);
+        $this->send(
+            $method,    
+            $headers, 
+            $queryParams, 
+            $postParams,
+            $path, 
+            $statusCode, 
+            $body
+        );
     }
     
     /**
@@ -869,6 +952,7 @@ class BlobRestProxy extends ServiceRestProxy implements IBlob
         
         $method      = Resources::HTTP_PUT;
         $headers     = WindowsAzureUtilities::generateMetadataHeaders($metadata);
+        $postParams  = array();
         $queryParams = array();
         $path        = $container;
         $statusCode  = Resources::STATUS_OK;
@@ -898,7 +982,14 @@ class BlobRestProxy extends ServiceRestProxy implements IBlob
             $options->getAccessCondition()
         );
 
-        $this->send($method, $headers, $queryParams, $path, $statusCode);
+        $this->send(
+            $method, 
+            $headers, 
+            $queryParams, 
+            $postParams, 
+            $path, 
+            $statusCode
+        );
     }
     
     /**
@@ -917,6 +1008,7 @@ class BlobRestProxy extends ServiceRestProxy implements IBlob
         
         $method      = Resources::HTTP_GET;
         $headers     = array();
+        $postParams  = array();
         $queryParams = array();
         $path        = $container;
         $statusCode  = Resources::STATUS_OK;
@@ -979,8 +1071,16 @@ class BlobRestProxy extends ServiceRestProxy implements IBlob
             $includeValue
         );
         
-        $response = $this->send($method, $headers, $queryParams, $path, $statusCode);
-        $parsed   = $this->dataSerializer->unserialize($response->getBody());
+        $response = $this->send(
+            $method, 
+            $headers, 
+            $queryParams,
+            $postParams,
+            $path, 
+            $statusCode
+        );
+
+        $parsed = $this->dataSerializer->unserialize($response->getBody());
         
         return ListBlobsResult::create($parsed);
     }
@@ -1011,6 +1111,7 @@ class BlobRestProxy extends ServiceRestProxy implements IBlob
         
         $method      = Resources::HTTP_PUT;
         $headers     = array();
+        $postParams  = array();
         $queryParams = array();
         $path        = $this->_createPath($container, $blob);
         $statusCode  = Resources::STATUS_CREATED;
@@ -1042,7 +1143,14 @@ class BlobRestProxy extends ServiceRestProxy implements IBlob
             $options->getTimeout()
         );
         
-        $this->send($method, $headers, $queryParams, $path, $statusCode);
+        $this->send(
+            $method, 
+            $headers, 
+            $queryParams, 
+            $postParams,
+            $path, 
+            $statusCode
+        );
     }
     
     /**
@@ -1076,6 +1184,7 @@ class BlobRestProxy extends ServiceRestProxy implements IBlob
         
         $method      = Resources::HTTP_PUT;
         $headers     = array();
+        $postParams  = array();
         $queryParams = array();
         $path        = $this->_createPath($container, $blob);
         $statusCode  = Resources::STATUS_CREATED;
@@ -1099,7 +1208,15 @@ class BlobRestProxy extends ServiceRestProxy implements IBlob
             $options->getTimeout()
         );
         
-        $this->send($method, $headers, $queryParams, $path, $statusCode, $body);
+        $this->send(
+            $method, 
+            $headers, 
+            $queryParams, 
+            $postParams,
+            $path, 
+            $statusCode,
+            $body
+        );
     }
     
     /**
@@ -1184,6 +1301,7 @@ class BlobRestProxy extends ServiceRestProxy implements IBlob
         
         $method      = Resources::HTTP_PUT;
         $headers     = array();
+        $postParams  = array();
         $queryParams = array();
         $path        = $this->_createPath($container, $blob);
         $statusCode  = Resources::STATUS_CREATED;
@@ -1224,7 +1342,15 @@ class BlobRestProxy extends ServiceRestProxy implements IBlob
             base64_encode($blockId)
         );
         
-        $this->send($method, $headers, $queryParams, $path, $statusCode, $body);
+        $this->send(
+            $method, 
+            $headers, 
+            $queryParams, 
+            $postParams,
+            $path, 
+            $statusCode,
+            $body
+        );
     }
     
     /**
@@ -1263,6 +1389,7 @@ class BlobRestProxy extends ServiceRestProxy implements IBlob
         
         $method      = Resources::HTTP_PUT;
         $headers     = array();
+        $postParams  = array();
         $queryParams = array();
         $path        = $this->_createPath($container, $blob);
         $statusCode  = Resources::STATUS_CREATED;
@@ -1335,7 +1462,15 @@ class BlobRestProxy extends ServiceRestProxy implements IBlob
             'blocklist'
         );
         
-        $this->send($method, $headers, $queryParams, $path, $statusCode, $body);
+        $this->send(
+            $method, 
+            $headers, 
+            $queryParams, 
+            $postParams, 
+            $path, 
+            $statusCode, 
+            $body
+        );
     }
     
     /**
@@ -1365,6 +1500,7 @@ class BlobRestProxy extends ServiceRestProxy implements IBlob
         
         $method      = Resources::HTTP_GET;
         $headers     = array();
+        $postParams  = array();
         $queryParams = array();
         $path        = $this->_createPath($container, $blob);
         $statusCode  = Resources::STATUS_OK;
@@ -1400,8 +1536,16 @@ class BlobRestProxy extends ServiceRestProxy implements IBlob
             'blocklist'
         );
         
-        $response = $this->send($method, $headers, $queryParams, $path, $statusCode);
-        $parsed   = $this->dataSerializer->unserialize($response->getBody());
+        $response = $this->send(
+            $method, 
+            $headers, 
+            $queryParams, 
+            $postParams,
+            $path, 
+            $statusCode
+        );
+
+        $parsed = $this->dataSerializer->unserialize($response->getBody());
         
         return ListBlobBlocksResult::create($response->getHeader(), $parsed);
     }
@@ -1425,6 +1569,7 @@ class BlobRestProxy extends ServiceRestProxy implements IBlob
         
         $method      = Resources::HTTP_HEAD;
         $headers     = array();
+        $postParams  = array();
         $queryParams = array();
         $path        = $this->_createPath($container, $blob);
         $statusCode  = Resources::STATUS_OK;
@@ -1453,7 +1598,14 @@ class BlobRestProxy extends ServiceRestProxy implements IBlob
             $options->getTimeout()
         );
         
-        $response = $this->send($method, $headers, $queryParams, $path, $statusCode);
+        $response = $this->send(
+            $method, 
+            $headers, 
+            $queryParams, 
+            $postParams, 
+            $path, 
+            $statusCode
+        );
         
         return $this->_getBlobPropertiesResultFromResponse($response->getHeader());
     }
@@ -1477,6 +1629,7 @@ class BlobRestProxy extends ServiceRestProxy implements IBlob
         
         $method      = Resources::HTTP_HEAD;
         $headers     = array();
+        $postParams  = array();
         $queryParams = array();
         $path        = $this->_createPath($container, $blob);
         $statusCode  = Resources::STATUS_OK;
@@ -1510,7 +1663,14 @@ class BlobRestProxy extends ServiceRestProxy implements IBlob
             'metadata'
         );
         
-        $response = $this->send($method, $headers, $queryParams, $path, $statusCode);
+        $response = $this->send(
+            $method, 
+            $headers, 
+            $queryParams, 
+            $postParams, 
+            $path, 
+            $statusCode
+        );
         
         return GetBlobMetadataResult::create($response->getHeader());
     }
@@ -1536,6 +1696,7 @@ class BlobRestProxy extends ServiceRestProxy implements IBlob
         $method      = Resources::HTTP_GET;
         $headers     = array();
         $queryParams = array();
+        $postParams  = array();
         $path        = $this->_createPath($container, $blob);
         $statusCode  = Resources::STATUS_OK;
         
@@ -1572,7 +1733,14 @@ class BlobRestProxy extends ServiceRestProxy implements IBlob
             'pagelist'
         );
         
-        $response = $this->send($method, $headers, $queryParams, $path, $statusCode);
+        $response = $this->send(
+            $method, 
+            $headers, 
+            $queryParams, 
+            $postParams, 
+            $path, 
+            $statusCode
+        );
         $parsed   = $this->dataSerializer->unserialize($response->getBody());
         
         return ListPageBlobRangesResult::create($response->getHeader(), $parsed);
@@ -1597,6 +1765,7 @@ class BlobRestProxy extends ServiceRestProxy implements IBlob
         
         $method      = Resources::HTTP_PUT;
         $headers     = array();
+        $postParams  = array();
         $queryParams = array();
         $path        = $this->_createPath($container, $blob);
         $statusCode  = Resources::STATUS_OK;
@@ -1667,7 +1836,14 @@ class BlobRestProxy extends ServiceRestProxy implements IBlob
 
         $this->addOptionalQueryParam($queryParams, Resources::QP_COMP, 'properties');
         
-        $response = $this->send($method, $headers, $queryParams, $path, $statusCode);
+        $response = $this->send(
+            $method, 
+            $headers, 
+            $queryParams, 
+            $postParams, 
+            $path, 
+            $statusCode
+        );
         
         return SetBlobPropertiesResult::create($response->getHeader());
     }
@@ -1693,6 +1869,7 @@ class BlobRestProxy extends ServiceRestProxy implements IBlob
         
         $method      = Resources::HTTP_PUT;
         $headers     = array();
+        $postParams  = array();
         $queryParams = array();
         $path        = $this->_createPath($container, $blob);
         $statusCode  = Resources::STATUS_OK;
@@ -1722,7 +1899,14 @@ class BlobRestProxy extends ServiceRestProxy implements IBlob
             'metadata'
         );
         
-        $response = $this->send($method, $headers, $queryParams, $path, $statusCode);
+        $response = $this->send(
+            $method, 
+            $headers, 
+            $queryParams, 
+            $postParams, 
+            $path, 
+            $statusCode
+        );
         
         return SetBlobMetadataResult::create($response->getHeader());
     }
@@ -1746,6 +1930,7 @@ class BlobRestProxy extends ServiceRestProxy implements IBlob
         
         $method      = Resources::HTTP_GET;
         $headers     = array();
+        $postParams  = array();
         $queryParams = array();
         $path        = $this->_createPath($container, $blob);
         $statusCode  = array(
@@ -1786,7 +1971,14 @@ class BlobRestProxy extends ServiceRestProxy implements IBlob
             $options->getSnapshot()
         );
         
-        $response = $this->send($method, $headers, $queryParams, $path, $statusCode);
+        $response = $this->send(
+            $method, 
+            $headers, 
+            $queryParams, 
+            $postParams, 
+            $path, 
+            $statusCode
+        );
         
         return GetBlobResult::create($response->getHeader(), $response->getBody());
     }
@@ -1810,6 +2002,7 @@ class BlobRestProxy extends ServiceRestProxy implements IBlob
         
         $method      = Resources::HTTP_DELETE;
         $headers     = array();
+        $postParams  = array();
         $queryParams = array();
         $path        = $this->_createPath($container, $blob);
         $statusCode  = Resources::STATUS_ACCEPTED;
@@ -1845,7 +2038,14 @@ class BlobRestProxy extends ServiceRestProxy implements IBlob
             $options->getSnapshot()
         );
         
-        $this->send($method, $headers, $queryParams, $path, $statusCode);
+        $this->send(
+            $method, 
+            $headers, 
+            $queryParams, 
+            $postParams, 
+            $path, 
+            $statusCode
+        );
     }
     
     /**
@@ -1867,6 +2067,7 @@ class BlobRestProxy extends ServiceRestProxy implements IBlob
         
         $method             = Resources::HTTP_PUT;
         $headers            = array();
+        $postParams         = array();
         $queryParams        = array();
         $path               = $this->_createPath($container, $blob);
         $expectedStatusCode = Resources::STATUS_CREATED;
@@ -1892,6 +2093,7 @@ class BlobRestProxy extends ServiceRestProxy implements IBlob
             $method, 
             $headers, 
             $queryParams, 
+            $postParams, 
             $path, 
             $expectedStatusCode
         );
@@ -1926,6 +2128,7 @@ class BlobRestProxy extends ServiceRestProxy implements IBlob
 
         $method              = \HTTP_Request2::METHOD_PUT;
         $headers             = array();
+        $postParams          = array();
         $queryParams         = array();
         $destinationBlobPath = $destinationContainer . '/' . $destinationBlob;
         $statusCode          = Resources::STATUS_CREATED;
@@ -1959,7 +2162,7 @@ class BlobRestProxy extends ServiceRestProxy implements IBlob
         if (!is_null($metadata)) {
             $metadataHeader = WindowsAzureUtilities::generateMetadataHeaders(
                 $metadata
-            );    
+            );
             $headers        = \array_merge($headers, $metadataHeader);
         }
         
@@ -1979,6 +2182,7 @@ class BlobRestProxy extends ServiceRestProxy implements IBlob
             $method, 
             $headers, 
             $queryParams, 
+            $postParams, 
             $destinationBlobPath, 
             $statusCode
         );

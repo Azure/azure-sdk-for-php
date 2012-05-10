@@ -27,15 +27,17 @@ namespace Tests\Unit\WindowsAzure\Services\ServiceBus;
 
 use WindowsAzure\Services\Core\Models\ServiceProperties;
 use Tests\Framework\TestResources;
-use Tests\Framework\ServiceBusRestProxyTestBase;
+use Tests\Framework\WrapRestProxyTestBase;
 use WindowsAzure\Core\Configuration;
 use WindowsAzure\Core\ServiceException;
 use WindowsAzure\Core\WindowsAzureUtilities;
-use WindowsAzure\Services\ServiceBus\ServiceBusRestProxy;
+use WindowsAzure\Services\ServiceBus\WrapRestProxy;
+use WindowsAzure\Services\ServiceBus\WrapService;
+use WindowsAzure\Services\ServiceBus\ServiceBusSettings;
 use WindowsAzure\Resources;
 
 /**
- * Unit tests for ServiceBusRestProxy class
+ * Unit tests for WrapService class
  *
  * @package    Tests\Unit\WindowsAzure\Services\ServiceBus
  * @author     Azure PHP SDK <azurephpsdk@microsoft.com>
@@ -44,19 +46,31 @@ use WindowsAzure\Resources;
  * @version    Release: @package_version@
  * @link       http://pear.php.net/package/azure-sdk-for-php
  */
-class ServiceBusRestProxyTest extends ServiceBusRestProxyTestBase
+class WrapServiceTest extends \PHPUnit_Framework_TestCase
 {
-    /**
-     * @covers WindowsAzure\Services\ServiceBus\ServiceBusRestProxy::deleteQueue
+    /** 
+     * @covers WindowsAzure\Services\ServiceBus\WrapService::create
      */
-    public function testDeleteQueueNonExistQueueFail()
+    public function testWrapServiceCreate() 
     {
-        $this->setExpectedException(get_class(
-            new ServiceException(''))
-        );
+        $wrapUri = 'https://'
+            .TestResources::serviceBusNamespace()
+            .'-sb.accesscontrol.windows.net';
 
-        $this->wrapper->deleteQueue('IDoNotExist');
+        $wrapName = TestResources::wrapAuthenticationName();
+        $wrapPassword = TestResources::wrapPassword();
+        
+        $config = new Configuration();
+        $config->setProperty(ServiceBusSettings::WRAP_URI, $wrapUri);
+        $config->setProperty(ServiceBusSettings::WRAP_NAME, $wrapName);
+        $config->setProperty(ServiceBusSettings::WRAP_PASSWORD, $wrapPassword);
+        
+        $wrapRestProxy = WrapService::create($config);
+        
+        $this->assertNotNull($wrapRestProxy);
+        $this->assertInstanceOf('\WindowsAzure\\Services\\ServiceBus\\WrapRestProxy', $wrapRestProxy);
     }
+    
 }
 
 ?>
