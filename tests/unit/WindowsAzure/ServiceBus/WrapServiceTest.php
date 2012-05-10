@@ -23,7 +23,7 @@
  * @link       http://pear.php.net/package/azure-sdk-for-php
  */
 
-namespace Tests\Unit\WindowsAzure\Services\ServiceBus;
+namespace Tests\Unit\WindowsAzure\ServiceBus;
 
 use WindowsAzure\Common\Models\ServiceProperties;
 use Tests\Framework\TestResources;
@@ -31,15 +31,15 @@ use Tests\Framework\WrapRestProxyTestBase;
 use WindowsAzure\Common\Configuration;
 use WindowsAzure\Common\Internal\ServiceException;
 use WindowsAzure\Common\Internal\WindowsAzureUtilities;
-use WindowsAzure\Services\ServiceBus\WrapRestProxy;
-use WindowsAzure\Services\ServiceBus\WrapService;
-use WindowsAzure\Services\ServiceBus\ServiceBusSettings;
+use WindowsAzure\ServiceBus\Internal\WrapRestProxy;
+use WindowsAzure\ServiceBus\WrapService;
+use WindowsAzure\ServiceBus\ServiceBusSettings;
 use WindowsAzure\Common\Internal\Resources;
 
 /**
  * Unit tests for WrapService class
  *
- * @package    Tests\Unit\WindowsAzure\Services\ServiceBus
+ * @package    Tests\Unit\WindowsAzure\ServiceBus
  * @author     Azure PHP SDK <azurephpsdk@microsoft.com>
  * @copyright  2012 Microsoft Corporation
  * @license    http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
@@ -49,7 +49,7 @@ use WindowsAzure\Common\Internal\Resources;
 class WrapServiceTest extends \PHPUnit_Framework_TestCase
 {
     /** 
-     * @covers WindowsAzure\Services\ServiceBus\WrapService::create
+     * @covers WindowsAzure\ServiceBus\WrapService::create
      */
     public function testWrapServiceCreate() 
     {
@@ -68,7 +68,7 @@ class WrapServiceTest extends \PHPUnit_Framework_TestCase
         $wrapRestProxy = WrapService::create($config);
         
         $this->assertNotNull($wrapRestProxy);
-        $this->assertInstanceOf('\WindowsAzure\\Services\\ServiceBus\\WrapRestProxy', $wrapRestProxy);
+        $this->assertInstanceOf('WindowsAzure\ServiceBus\Internal\WrapRestProxy', $wrapRestProxy);
     }
     
 }

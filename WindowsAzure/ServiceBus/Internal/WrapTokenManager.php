@@ -15,24 +15,26 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   WindowsAzure\Services\ServiceBus
+ * @package   WindowsAzure\ServiceBus\Internal
  * @author    Azure PHP SDK <azurephpsdk@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
  
-namespace WindowsAzure\Services\ServiceBus;
+namespace WindowsAzure\ServiceBus\Internal;
 use WindowsAzure\Common\Configuration;
 use WindowsAzure\Common\Internal\Resources;
-use WindowsAzure\Services\ServiceBus\WrapRestProxy;
-use WindowsAzure\Services\ServiceBus\Models\ActiveToken;
+use WindowsAzure\ServiceBus\Internal\WrapRestProxy;
+use WindowsAzure\ServiceBus\Models\ActiveToken;
+use WindowsAzure\ServiceBus\ServiceBusSettings;
+use WindowsAzure\ServiceBus\WrapService;
 
 /**
  * Manages WRAP tokens. 
  *
  * @category  Microsoft
- * @package   WindowsAzure\Services\ServiceBus
+ * @package   WindowsAzure\ServiceBus\Internal
  * @author    Azure PHP SDK <azurephpsdk@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
@@ -84,7 +86,7 @@ class WrapTokenManager
      * @param string $wrapName     The user name of the WRAP service. 
      * @param string $wrapPassword The password of the WRAP service. 
      * 
-     * @return WindowsAzure\Services\ServiceBus\WrapTokenManager
+     * @return WindowsAzure\ServiceBus\Internal\WrapTokenManager
      */
     public function __construct($wrapUri, $wrapName, $wrapPassword) 
     {

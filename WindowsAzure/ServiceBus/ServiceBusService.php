@@ -22,7 +22,7 @@
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
  
-namespace WindowsAzure\Services\ServiceBus;
+namespace WindowsAzure\ServiceBus;
 use WindowsAzure\Common\Configuration;
 use WindowsAzure\Common\Internal\Resources;
 
@@ -45,7 +45,7 @@ class ServiceBusService
      * @param WindowsAzure\Common\Configuration    $config  The config object.
      * @param WindowsAzure\Common\Internal\IServicesBuilder $builder The builder object.
      * 
-     * @return WindowsAzure\Services\ServiceBus\IServiceBus
+     * @return WindowsAzure\ServiceBus\Internal\IServiceBus
      */
     public static function create($config, $builder = null)
     {

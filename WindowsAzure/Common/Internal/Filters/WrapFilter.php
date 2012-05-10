@@ -29,7 +29,7 @@ use WindowsAzure\Common\Internal\IServiceFilter;
 use WindowsAzure\Common\Internal\Authentication\SharedKeyAuthScheme;
 use WindowsAzure\Common\Internal\Authentication\TableSharedKeyLiteAuthScheme;
 use WindowsAzure\Common\Internal\InvalidArgumentTypeException;
-use WindowsAzure\Services\ServiceBus\WrapTokenManager;
+use WindowsAzure\ServiceBus\Internal\WrapTokenManager;
 
 /**
  * Adds WRAP authentication header to the http request object.

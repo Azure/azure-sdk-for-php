@@ -16,14 +16,14 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- * @package    Tests\Unit\WindowsAzure\Services\ServiceBus
+ * @package    Tests\Unit\WindowsAzure\ServiceBus
  * @author     Azure PHP SDK <azurephpsdk@microsoft.com>
  * @copyright  2012 Microsoft Corporation
  * @license    http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link       http://pear.php.net/package/azure-sdk-for-php
  */
 
-namespace Tests\Unit\WindowsAzure\Services\ServiceBus;
+namespace Tests\Unit\WindowsAzure\ServiceBus;
 
 use WindowsAzure\Common\Models\ServiceProperties;
 use Tests\Framework\TestResources;
@@ -31,13 +31,13 @@ use Tests\Framework\WrapRestProxyTestBase;
 use WindowsAzure\Common\Configuration;
 use WindowsAzure\Common\Internal\ServiceException;
 use WindowsAzure\Common\Internal\Utilities;
-use WindowsAzure\Services\ServiceBus\ServiceBusSettings;
+use WindowsAzure\ServiceBus\ServiceBusSettings;
 use WindowsAzure\Common\Internal\Resources;
 
 /**
  * Unit tests for ServiceBusSettings class
  *
- * @package    Tests\Unit\WindowsAzure\Services\ServiceBus
+ * @package    Tests\Unit\WindowsAzure\ServiceBus
  * @author     Azure PHP SDK <azurephpsdk@microsoft.com>
  * @copyright  2012 Microsoft Corporation
  * @license    http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
@@ -47,7 +47,7 @@ use WindowsAzure\Common\Internal\Resources;
 class ServiceBusSettingsTest extends \PHPUnit_Framework_TestCase
 {
     /*
-     * @covers WindowsAzure\Services\ServiceBus\ServiceBusSettings::ConfigureWithWrapAuthentication
+     * @covers WindowsAzure\ServiceBus\ServiceBusSettings::ConfigureWithWrapAuthentication
      */ 
     public function testConfigureWithWrapAuthenticationTest()
     {

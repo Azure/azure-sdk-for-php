@@ -22,9 +22,9 @@
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
 
-namespace Tests\Unit\WindowsAzure\Services\ServiceBus\Models;
-use WindowsAzure\Services\ServiceBus\Models\ActiveToken;
-use WindowsAzure\Services\ServiceBus\Models\WrapAccessTokenResult;
+namespace Tests\Unit\WindowsAzure\ServiceBus\Models;
+use WindowsAzure\ServiceBus\Models\ActiveToken;
+use WindowsAzure\ServiceBus\Models\WrapAccessTokenResult;
 
 /**
  * Unit tests for class WrapAccessTokenResult
@@ -40,7 +40,7 @@ use WindowsAzure\Services\ServiceBus\Models\WrapAccessTokenResult;
 class ActiveTokenTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @covers WindowsAzure\Services\ServiceBus\Models\ActiveToken::__construct
+     * @covers WindowsAzure\ServiceBus\Models\ActiveToken::__construct
      */
     public function testActiveTokenConstructor()
     {
@@ -55,8 +55,8 @@ class ActiveTokenTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\Services\ServiceBus\Models\ActiveToken::getWrapAccessTokenResult
-     * @covers WindowsAzure\Services\ServiceBus\Models\ActiveToken::setWrapAccessTokenResult
+     * @covers WindowsAzure\ServiceBus\Models\ActiveToken::getWrapAccessTokenResult
+     * @covers WindowsAzure\ServiceBus\Models\ActiveToken::setWrapAccessTokenResult
      */
     public function testActiveTokenGetSetWrapAccessTokenResult()
     {
@@ -76,8 +76,8 @@ class ActiveTokenTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\Services\ServiceBus\Models\ActiveToken::getExpirationDateTime
-     * @covers WindowsAzure\Services\ServiceBus\Models\ActiveToken::setExpirationDateTime
+     * @covers WindowsAzure\ServiceBus\Models\ActiveToken::getExpirationDateTime
+     * @covers WindowsAzure\ServiceBus\Models\ActiveToken::setExpirationDateTime
      */
     public function testActiveTokenGetSetExpirationDateTimeResult()
     {

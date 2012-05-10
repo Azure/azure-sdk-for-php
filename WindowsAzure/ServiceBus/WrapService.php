@@ -15,14 +15,14 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   WindowsAzure\Services\ServiceBus
+ * @package   WindowsAzure\ServiceBus
  * @author    Azure PHP SDK <azurephpsdk@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
  
-namespace WindowsAzure\Services\ServiceBus;
+namespace WindowsAzure\ServiceBus;
 use WindowsAzure\Common\Configuration;
 use WindowsAzure\Common\Internal\Resources;
 
@@ -30,7 +30,7 @@ use WindowsAzure\Common\Internal\Resources;
  * Factory for creating IWrap objects
  *
  * @category  Microsoft
- * @package   WindowsAzure\Services\ServiceBus
+ * @package   WindowsAzure\ServiceBus
  * @author    Azure PHP SDK <azurephpsdk@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
@@ -45,7 +45,7 @@ class WrapService
      * @param WindowsAzure\Common\Configuration    $config  The config object.
      * @param WindowsAzure\Common\Internal\IServicesBuilder $builder The builder object.
      * 
-     * @return WindowsAzure\Services\ServiceBus\IWrap
+     * @return WindowsAzure\ServiceBus\Internal\IWrap
      */
     public static function create($config, $builder = null)
     {

@@ -15,14 +15,14 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   WindowsAzure\Services\Queue
+ * @package   WindowsAzure\ServiceBus\Internal
  * @author    Azure PHP SDK <azurephp@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
 
-namespace WindowsAzure\Services\ServiceBus;
+namespace WindowsAzure\ServiceBus\Internal;
 use WindowsAzure\Common\Internal\FilterableService;
 
 /**
@@ -30,7 +30,7 @@ use WindowsAzure\Common\Internal\FilterableService;
  * service layer.
  *
  * @category  Microsoft
- * @package   WindowsAzure\Services\Queue
+ * @package   WindowsAzure\ServiceBus\Internal
  * @author    Azure PHP SDK <azurephp@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
@@ -48,7 +48,7 @@ interface IWrap extends FilterableService
      * @param string $password The password of the WRAP service. 
      * @param string $scope    The scope of the WRAP service. 
      *
-     * @return WindowsAzure\Services\ServiceBus\Models\WrapAccessTokenResult
+     * @return WindowsAzure\ServiceBus\Models\WrapAccessTokenResult
      */
     public function wrapAccessToken($uri, $name, $password, $scope);
 

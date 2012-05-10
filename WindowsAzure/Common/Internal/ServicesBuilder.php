@@ -37,9 +37,9 @@ use WindowsAzure\Queue\Internal\QueueRestProxy;
 use WindowsAzure\Queue\QueueSettings;
 use WindowsAzure\Blob\Internal\BlobRestProxy;
 use WindowsAzure\Blob\BlobSettings;
-use WindowsAzure\Services\ServiceBus\ServiceBusRestProxy;
-use WindowsAzure\Services\ServiceBus\ServiceBusSettings;
-use WindowsAzure\Services\ServiceBus\WrapRestProxy;
+use WindowsAzure\ServiceBus\Internal\ServiceBusRestProxy;
+use WindowsAzure\ServiceBus\ServiceBusSettings;
+use WindowsAzure\ServiceBus\Internal\WrapRestProxy;
 use WindowsAzure\Services\Table\TableRestProxy;
 use WindowsAzure\Services\Table\TableSettings;
 use WindowsAzure\Services\Table\Utilities\AtomReaderWriter;
@@ -255,7 +255,7 @@ class ServicesBuilder implements IServiceBuilder
      * @param WindowsAzure\Common\Configuration $config The configuration
      * for the service bus. 
      * 
-     * @return WindowsAzure\Services\ServiceBus\IServiceBus
+     * @return WindowsAzure\ServiceBus\Internal\IServiceBus
      */
     private function _buildServiceBus($config)
     { 
@@ -315,7 +315,7 @@ class ServicesBuilder implements IServiceBuilder
      * 
      * @param WindowsAzure\Common\Configuration $config The configuration. 
      *
-     * @return WindowsAzure\Services\ServiceBus\IWrap
+     * @return WindowsAzure\ServiceBus\Internal\IWrap
      */
     private function _buildWrap($config)
     {
@@ -337,8 +337,8 @@ class ServicesBuilder implements IServiceBuilder
      * @return WindowsAzure\Queue\Internal\IQueue
      *       | WindowsAzure\Blob\Internal\IBlob
      *       | WindowsAzure\Services\Blob\ITable
-     *       | WindowsAzure\Services\ServiceBus\IServiceBus 
-     *       | WindowsAzure\Services\ServiceBus\IWrap 
+     *       | WindowsAzure\ServiceBus\Internal\IServiceBus 
+     *       | WindowsAzure\ServiceBus\Internal\IWrap 
      */
     public function build($config, $type)
     {

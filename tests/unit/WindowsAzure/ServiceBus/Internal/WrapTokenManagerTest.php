@@ -16,14 +16,14 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- * @package    Tests\Unit\WindowsAzure\Services\Queue
+ * @package    Tests\Unit\WindowsAzure\ServiceBus\Internal
  * @author     Azure PHP SDK <azurephpsdk@microsoft.com>
  * @copyright  2012 Microsoft Corporation
  * @license    http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link       http://pear.php.net/package/azure-sdk-for-php
  */
 
-namespace Tests\Unit\WindowsAzure\Services\ServiceBus;
+namespace Tests\Unit\WindowsAzure\ServiceBus\Internal;
 
 use WindowsAzure\Common\Models\ServiceProperties;
 use Tests\Framework\TestResources;
@@ -31,15 +31,15 @@ use Tests\Framework\WrapRestProxyTestBase;
 use WindowsAzure\Common\Configuration;
 use WindowsAzure\Common\Internal\ServiceException;
 use WindowsAzure\Common\Internal\WindowsAzureUtilities;
-use WindowsAzure\Services\ServiceBus\ServiceBusSettings;
-use WindowsAzure\Services\ServiceBus\WrapRestProxy;
-use WindowsAzure\Services\ServiceBus\WrapTokenManager;
+use WindowsAzure\ServiceBus\ServiceBusSettings;
+use WindowsAzure\ServiceBus\Internal\WrapRestProxy;
+use WindowsAzure\ServiceBus\Internal\WrapTokenManager;
 use WindowsAzure\Common\Internal\Resources;
 
 /**
  * Unit tests for WrapRestProxy class
  *
- * @package    Tests\Unit\WindowsAzure\Services\ServiceBus
+ * @package    Tests\Unit\WindowsAzure\ServiceBus\Internal
  * @author     Azure PHP SDK <azurephpsdk@microsoft.com>
  * @copyright  2012 Microsoft Corporation
  * @license    http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
@@ -49,8 +49,8 @@ use WindowsAzure\Common\Internal\Resources;
 class WrapTokenManagerTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @covers WindowsAzure\Services\ServiceBus\WrapTokenManager::__construct
-     * @covers WindowsAzure\Services\ServiceBus\WrapTokenManager::getAccessToken
+     * @covers WindowsAzure\ServiceBus\Internal\WrapTokenManager::__construct
+     * @covers WindowsAzure\ServiceBus\Internal\WrapTokenManager::getAccessToken
      */
     public function testGetAccessTokenSuccess() 
     {
@@ -81,7 +81,7 @@ class WrapTokenManagerTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers WindowsAzure\Services\ServiceBus\WrapTokenManager::__construct
+     * @covers WindowsAzure\ServiceBus\Internal\WrapTokenManager::__construct
      */
     public function testGetAccessTokenFailedWithInvalidWrapUri()
     {
@@ -106,7 +106,7 @@ class WrapTokenManagerTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers WindowsAzure\Services\ServiceBus\WrapTokenManager::__construct
+     * @covers WindowsAzure\ServiceBus\Internal\WrapTokenManager::__construct
      */
     public function testGetAccessTokenFailedWithInvalidUserName()
     {
@@ -134,7 +134,7 @@ class WrapTokenManagerTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers WindowsAzure\Services\ServiceBus\WrapTokenManager::__construct
+     * @covers WindowsAzure\ServiceBus\Internal\WrapTokenManager::__construct
      */
     public function testGetAccesTokenFailedWithInvalidPassword()
     {
