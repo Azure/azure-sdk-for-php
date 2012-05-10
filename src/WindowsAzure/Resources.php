@@ -163,6 +163,8 @@ class Resources
     const ASTERISK               = '*';
     const SERVICE_MANAGEMENT_URL = 'https://management.core.windows.net';
     const WA_XML_NAMESPACE       = 'http://schemas.microsoft.com/windowsazure';
+    const HTTP_SCHEME            = 'http';
+    const HTTPS_SCHEME           = 'https';
 
     // Header values
     const STORAGE_API_LATEST_VERSION     = '2011-08-18';

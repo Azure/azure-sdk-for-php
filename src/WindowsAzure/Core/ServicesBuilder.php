@@ -291,7 +291,8 @@ class ServicesBuilder implements IServiceBuilder
         $httpClient               = new HttpClient($certificatePath);
         $xmlSerializer            = new XmlSerializer();
         $uri                      = Utilities::tryAddUrlScheme(
-            $config->getProperty(ServiceManagementSettings::URI)
+            $config->getProperty(ServiceManagementSettings::URI),
+            Resources::HTTPS_SCHEME
         );
         
         $serviceManagementWrapper = new ServiceManagementRestProxy(
