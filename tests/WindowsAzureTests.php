@@ -145,7 +145,7 @@ spl_autoload_register(
             'tests\\unit\\windowsazure\\services\\core\\models\\metricstest' => '/unit/WindowsAzure/Services/Core/Models/MetricsTest.php',
             'tests\\unit\\windowsazure\\services\\core\\models\\retentionpolicytest' => '/unit/WindowsAzure/Services/Core/Models/RetentionPolicyTest.php',
             'tests\\unit\\windowsazure\\services\\core\\models\\servicepropertiestest' => '/unit/WindowsAzure/Services/Core/Models/ServicePropertiesTest.php',
-            'tests\\unit\\windowsazure\\services\\core\\servicesrestproxytest' => '/unit/WindowsAzure/Services/Core/ServicesRestProxyTest.php',
+            'tests\\unit\\windowsazure\\services\\core\\servicerestproxytest' => '/unit/WindowsAzure/Services/Core/ServiceRestProxyTest.php',
             'tests\\unit\\windowsazure\\services\\queue\\models\\createmessageoptionstest' => '/unit/WindowsAzure/Services/Queue/Models/CreateMessageOptionsTest.php',
             'tests\\unit\\windowsazure\\services\\queue\\models\\createqueueoptionstest' => '/unit/WindowsAzure/Services/Queue/Models/CreateQueueOptionsTest.php',
             'tests\\unit\\windowsazure\\services\\queue\\models\\getqueuemetadataresulttest' => '/unit/WindowsAzure/Services/Queue/Models/GetQueueMetadataResultTest.php',
