@@ -435,7 +435,7 @@ class BlobRestProxyTest extends BlobServiceRestProxyTestBase
         $this->createContainer($name);
         $sample = TestResources::getContainerAclMultipleEntriesSample();
         $expectedEtag = '0x8CAFB82EFF70C46';
-        $expectedLastModified = 'Sun, 25 Sep 2011 19:42:18 GMT';
+        $expectedLastModified = new \DateTime('Sun, 25 Sep 2011 19:42:18 GMT');
         $expectedPublicAccess = 'container';
         $acl = ContainerAcl::create($expectedPublicAccess, $expectedEtag, 
             $expectedLastModified, $sample['SignedIdentifiers']);

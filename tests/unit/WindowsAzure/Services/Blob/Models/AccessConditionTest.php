@@ -88,11 +88,10 @@ class AccessConditionTest extends \PHPUnit_Framework_TestCase
     {
         // Setup
         $expectedHeader = Resources::IF_MODIFIED_SINCE;
-        $date = 'Sun, 25 Sep 2011 00:42:49 GMT';
-        $expectedValue = WindowsAzureUtilities::rfc1123ToDateTime($date);
+        $expectedValue = new \DateTime('Sun, 25 Sep 2011 00:42:49 GMT');
         
         // Test
-        $actual = AccessCondition::ifModifiedSince($date);
+        $actual = AccessCondition::ifModifiedSince($expectedValue);
         
         // Assert
         $this->assertEquals($expectedHeader, $actual->getHeader());
@@ -146,11 +145,10 @@ class AccessConditionTest extends \PHPUnit_Framework_TestCase
     {
         // Setup
         $expectedHeader = Resources::IF_UNMODIFIED_SINCE;
-        $date = 'Sun, 25 Sep 2011 00:42:49 GMT';
-        $expectedValue = WindowsAzureUtilities::rfc1123ToDateTime($date);
+        $expectedValue = new \DateTime('Sun, 25 Sep 2011 00:42:49 GMT');
         
         // Test
-        $actual = AccessCondition::ifNotModifiedSince($date);
+        $actual = AccessCondition::ifNotModifiedSince($expectedValue);
         
         // Assert
         $this->assertEquals($expectedHeader, $actual->getHeader());

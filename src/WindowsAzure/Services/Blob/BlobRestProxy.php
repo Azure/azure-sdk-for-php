@@ -788,10 +788,11 @@ class BlobRestProxy extends ServiceRestProxy implements IBlob
         
         $access       = $response->getHeader(Resources::X_MS_BLOB_PUBLIC_ACCESS);
         $etag         = $response->getHeader(Resources::ETAG);
-        $lastModified = $response->getHeader(Resources::LAST_MODIFIED);
+        $modified     = $response->getHeader(Resources::LAST_MODIFIED);
+        $modifiedDate = Utilities::convertToDateTime($modified);
         $parsed       = $this->dataSerializer->unserialize($response->getBody());
                 
-        return GetContainerAclResult::create($access, $etag, $lastModified, $parsed);
+        return GetContainerAclResult::create($access, $etag, $modifiedDate, $parsed);
     }
     
     /**
