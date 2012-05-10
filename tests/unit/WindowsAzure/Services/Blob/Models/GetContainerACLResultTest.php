@@ -26,7 +26,7 @@ use WindowsAzure\Services\Blob\Models\GetContainerAclResult;
 use WindowsAzure\Services\Blob\Models\ContainerAcl;
 use Tests\Framework\TestResources;
 use WindowsAzure\Resources;
-use WindowsAzure\Core\WindowsAzureUtilities;
+use WindowsAzure\Utilities;
 
 /**
  * Unit tests for class GetContainerAclResult
@@ -50,7 +50,7 @@ class GetContainerAclResultTest extends \PHPUnit_Framework_TestCase
         $sample = Resources::EMPTY_STRING;
         $expectedEtag = '0x8CAFB82EFF70C46';
         $expectedLastModified = 'Sun, 25 Sep 2011 19:42:18 GMT';
-        $expectedDate = WindowsAzureUtilities::rfc1123ToDateTime($expectedLastModified);
+        $expectedDate = Utilities::rfc1123ToDateTime($expectedLastModified);
         $expectedPublicAccess = 'container';
         
         // Test

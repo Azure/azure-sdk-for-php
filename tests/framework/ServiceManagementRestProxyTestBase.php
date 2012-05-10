@@ -27,7 +27,6 @@ use WindowsAzure\Resources;
 use WindowsAzure\Core\Configuration;
 use WindowsAzure\Services\ServiceManagement\ServiceManagementSettings;
 use WindowsAzure\Services\ServiceManagement\ServiceManagementService;
-use WindowsAzure\Core\WindowsAzureUtilities;
 use WindowsAzure\Services\ServiceManagement\Models\CreateStorageServiceOptions;
 use WindowsAzure\Services\ServiceManagement\Models\OperationStatus;
 use WindowsAzure\Services\ServiceManagement\Models\Locations;
@@ -52,7 +51,7 @@ class ServiceManagementRestProxyTestBase extends RestProxyTestBase
     
     public static function setUpBeforeClass()
     {
-        if (WindowsAzureUtilities::isEmulated()) {
+        if (Configuration::isEmulated()) {
             throw new \Exception(self::NOT_SUPPORTED);
         }
     }

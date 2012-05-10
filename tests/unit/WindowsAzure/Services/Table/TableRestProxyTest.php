@@ -27,7 +27,7 @@ use WindowsAzure\Core\Http\HttpClient;
 use WindowsAzure\Services\Table\Utilities\AtomReaderWriter;
 use WindowsAzure\Services\Table\Utilities\MimeReaderWriter;
 use Tests\Framework\TableServiceRestProxyTestBase;
-use WindowsAzure\Core\WindowsAzureUtilities;
+use WindowsAzure\Utilities;
 use WindowsAzure\Core\ServiceException;
 use Tests\Framework\TestResources;
 use WindowsAzure\Resources;

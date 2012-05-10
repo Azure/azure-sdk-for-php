@@ -25,7 +25,7 @@
 namespace Tests\Framework;
 use WindowsAzure\Logger;
 use WindowsAzure\Core\Serialization\XmlSerializer;
-use WindowsAzure\Core\WindowsAzureUtilities;
+use WindowsAzure\Core\Configuration;
 
 /**
  * Testbase for all REST proxy tests.
@@ -48,7 +48,7 @@ class RestProxyTestBase extends \PHPUnit_Framework_TestCase
     
     protected function skipIfEmulated()
     {
-        if (WindowsAzureUtilities::isEmulated()) {
+        if (Configuration::isEmulated()) {
             $this->markTestSkipped(self::NOT_SUPPORTED);
         }
     }

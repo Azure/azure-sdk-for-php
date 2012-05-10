@@ -24,7 +24,7 @@
 namespace Tests\Unit\WindowsAzure\Services\Blob\Models;
 use WindowsAzure\Services\Blob\Models\AccessCondition;
 use WindowsAzure\Resources;
-use WindowsAzure\Core\WindowsAzureUtilities;
+use WindowsAzure\Utilities;
 
 /**
  * Unit tests for class AccessCondition
@@ -89,7 +89,7 @@ class AccessConditionTest extends \PHPUnit_Framework_TestCase
         // Setup
         $expectedHeader = Resources::IF_MODIFIED_SINCE;
         $date = 'Sun, 25 Sep 2011 00:42:49 GMT';
-        $expectedValue = WindowsAzureUtilities::rfc1123ToDateTime($date);
+        $expectedValue = Utilities::rfc1123ToDateTime($date);
         
         // Test
         $actual = AccessCondition::ifModifiedSince($date);
@@ -147,7 +147,7 @@ class AccessConditionTest extends \PHPUnit_Framework_TestCase
         // Setup
         $expectedHeader = Resources::IF_UNMODIFIED_SINCE;
         $date = 'Sun, 25 Sep 2011 00:42:49 GMT';
-        $expectedValue = WindowsAzureUtilities::rfc1123ToDateTime($date);
+        $expectedValue = Utilities::rfc1123ToDateTime($date);
         
         // Test
         $actual = AccessCondition::ifNotModifiedSince($date);

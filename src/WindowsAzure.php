@@ -28,7 +28,6 @@ spl_autoload_register(
             'windowsazure\\core\\serialization\\xmlserializer' => '/WindowsAzure/Core/Serialization/XmlSerializer.php',
             'windowsazure\\core\\serviceexception' => '/WindowsAzure/Core/ServiceException.php',
             'windowsazure\\core\\servicesbuilder' => '/WindowsAzure/Core/ServicesBuilder.php',
-            'windowsazure\\core\\windowsazureutilities' => '/WindowsAzure/Core/WindowsAzureUtilities.php',
             'windowsazure\\logger' => '/WindowsAzure/Logger.php',
             'windowsazure\\resources' => '/WindowsAzure/Resources.php',
             'windowsazure\\serviceruntime\\acquirecurrentstate' => '/WindowsAzure/ServiceRuntime/AcquireCurrentState.php',

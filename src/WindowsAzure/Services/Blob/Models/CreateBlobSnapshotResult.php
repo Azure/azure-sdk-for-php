@@ -26,7 +26,6 @@ namespace WindowsAzure\Services\Blob\Models;
 use WindowsAzure\Resources;
 use WindowsAzure\Validate;
 use WindowsAzure\Utilities;
-use WindowsAzure\Core\WindowsAzureUtilities;
 
 /**
  * The result of creating Blob snapshot. 
@@ -75,7 +74,7 @@ class CreateBlobSnapshotResult
         $result->setEtag($headerWithLowerCaseKey[Resources::ETAG]);
         
         $result->setLastModified(
-            WindowsAzureUtilities::rfc1123ToDateTime(
+            Utilities::rfc1123ToDateTime(
                 $headerWithLowerCaseKey[Resources::LAST_MODIFIED]
             )
         );

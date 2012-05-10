@@ -26,7 +26,6 @@ namespace WindowsAzure\Services\Blob\Models;
 use WindowsAzure\Validate;
 use WindowsAzure\Resources;
 use WindowsAzure\Utilities;
-use WindowsAzure\Core\WindowsAzureUtilities;
 
 /**
  * Holds result of listBlobBlocks
@@ -117,7 +116,7 @@ class ListBlobBlocksResult
         $result->setEtag(Utilities::tryGetValue($clean, Resources::ETAG));
         $date = Utilities::tryGetValue($clean, Resources::LAST_MODIFIED);
         if (!is_null($date)) {
-            $date = WindowsAzureUtilities::rfc1123ToDateTime($date);
+            $date = Utilities::rfc1123ToDateTime($date);
             $result->setLastModified($date);
         }
         $result->setContentLength(

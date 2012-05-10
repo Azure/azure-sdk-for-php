@@ -29,7 +29,6 @@ use Tests\Framework\BlobServiceRestProxyTestBase;
 use Tests\Framework\TestResources;
 use WindowsAzure\Resources;
 use WindowsAzure\Utilities;
-use WindowsAzure\Core\WindowsAzureUtilities;
 use WindowsAzure\Core\ServiceException;
 use WindowsAzure\Services\Core\Models\ServiceProperties;
 use WindowsAzure\Services\Blob\Models\ListContainersOptions;

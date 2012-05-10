@@ -27,7 +27,7 @@
 namespace Tests\Functional\WindowsAzure\Services\Table;
 
 use WindowsAzure\Core\ServiceException;
-use WindowsAzure\Core\WindowsAzureUtilities;
+use WindowsAzure\Core\Configuration;
 use WindowsAzure\Services\Table\TableService;
 use WindowsAzure\Services\Table\Models\BatchError;
 use WindowsAzure\Services\Table\Models\BatchOperations;
@@ -165,10 +165,10 @@ class TableServiceIntegrationTest extends IntegrationTestBase {
         $shouldReturn = false;
         try {
             $props = $this->wrapper->getServiceProperties()->getValue();
-            $this->assertTrue(!WindowsAzureUtilities::isEmulated(), 'Should succeed if and only if not running in emulator');
+            $this->assertTrue(!Configuration::isEmulated(), 'Should succeed if and only if not running in emulator');
         } catch (ServiceException $e) {
             // Expect failure in emulator, as v1.6 doesn't support this method
-            if (WindowsAzureUtilities::isEmulated()) {
+            if (Configuration::isEmulated()) {
                 $this->assertEquals(400, $e->getCode(), 'getCode');
                 $shouldReturn = true;
             }
@@ -200,10 +200,10 @@ class TableServiceIntegrationTest extends IntegrationTestBase {
         $shouldReturn = false;
         try {
             $props = $this->wrapper->getServiceProperties()->getValue();
-            $this->assertTrue(!WindowsAzureUtilities::isEmulated(), 'Should succeed if and only if not running in emulator');
+            $this->assertTrue(!Configuration::isEmulated(), 'Should succeed if and only if not running in emulator');
         } catch (ServiceException $e) {
             // Expect failure in emulator, as v1.6 doesn't support this method
-            if (WindowsAzureUtilities::isEmulated()) {
+            if (Configuration::isEmulated()) {
                 $this->assertEquals(400, $e->getCode(), 'getCode');
                 $shouldReturn = true;
             }
@@ -404,10 +404,10 @@ class TableServiceIntegrationTest extends IntegrationTestBase {
         $entity->addProperty('test5', EdmType::DATETIME, new \DateTime());
 
         // Act
-        if(WindowsAzureUtilities::isEmulated()) {
+        if(Configuration::isEmulated()) {
             try {
                 $this->wrapper->insertOrReplaceEntity(self::$TEST_TABLE_2, $entity);
-                $this->assertFalse(WindowsAzureUtilities::isEmulated(), 'Expect failure when in emulator');
+                $this->assertFalse(Configuration::isEmulated(), 'Expect failure when in emulator');
             } catch (ServiceException $e) {
                 $this->assertEquals(404, $e->getCode(), 'e->getCode');
             }
@@ -437,10 +437,10 @@ class TableServiceIntegrationTest extends IntegrationTestBase {
         $entity->addProperty('test5', EdmType::DATETIME, new \DateTime());
 
         // Act
-        if(WindowsAzureUtilities::isEmulated()) {
+        if(Configuration::isEmulated()) {
             try {
                 $this->wrapper->insertOrMergeEntity(self::$TEST_TABLE_2, $entity);
-                $this->assertFalse(WindowsAzureUtilities::isEmulated(), 'Expect failure when in emulator');
+                $this->assertFalse(Configuration::isEmulated(), 'Expect failure when in emulator');
             } catch (ServiceException $e) {
                 $this->assertEquals(404, $e->getCode(), 'e->getCode');
             }
@@ -1212,7 +1212,7 @@ class TableServiceIntegrationTest extends IntegrationTestBase {
         $batchOperations->addMergeEntity($table, $entity3);
         $entity4->addProperty('test3', EdmType::INT32, 5);
         // Use different behavior in the emulator, as v1.6 does not support this method
-        if (!WindowsAzureUtilities::isEmulated()) {
+        if (!Configuration::isEmulated()) {
             $batchOperations->addInsertOrReplaceEntity($table, $entity4);
         }
         else {
@@ -1228,7 +1228,7 @@ class TableServiceIntegrationTest extends IntegrationTestBase {
         $entity5->addProperty('test4', EdmType::INT64, '12345678901');
         $entity5->addProperty('test5', EdmType::DATETIME, new \DateTime());
         // Use different behavior in the emulator, as v1.6 does not support this method
-        if (WindowsAzureUtilities::isEmulated()) {
+        if (Configuration::isEmulated()) {
             $batchOperations->addInsertEntity($table, $entity5);
         }
         else {
@@ -1247,7 +1247,7 @@ class TableServiceIntegrationTest extends IntegrationTestBase {
         $this->assertTrue($ents[2] instanceof UpdateEntityResult, '$result->getEntries()->get(2)->getClass()');
         $this->assertTrue($ents[3] instanceof UpdateEntityResult, '$result->getEntries()->get(3)->getClass()');
         $this->assertTrue($ents[4] instanceof UpdateEntityResult, '$result->getEntries()->get(4)->getClass()');
-        if (WindowsAzureUtilities::isEmulated()) {
+        if (Configuration::isEmulated()) {
             $this->assertTrue($ents[5] instanceof InsertEntityResult, '$result->getEntries()->get(5)->getClass()');
         }
         else {

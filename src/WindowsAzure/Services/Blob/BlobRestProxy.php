@@ -26,7 +26,6 @@ namespace WindowsAzure\Services\Blob;
 use WindowsAzure\Utilities;
 use WindowsAzure\Resources;
 use WindowsAzure\Validate;
-use WindowsAzure\Core\WindowsAzureUtilities;
 use WindowsAzure\Services\Core\Models\ServiceProperties;
 use WindowsAzure\Services\Core\ServiceRestProxy;
 use WindowsAzure\Services\Blob\IBlob;
@@ -125,7 +124,7 @@ class BlobRestProxy extends ServiceRestProxy implements IBlob
         $cLanguage  = Utilities::tryGetValue($headers, Resources::CONTENT_LANGUAGE);
         $cControl   = Utilities::tryGetValue($headers, Resources::CACHE_CONTROL);
         $etag       = $headers[Resources::ETAG];
-        $metadata   = WindowsAzureUtilities::getMetadataArray($headers);
+        $metadata   = $this->getMetadataArray($headers);
         
         if (array_key_exists(Resources::X_MS_BLOB_SEQUENCE_NUMBER, $headers)) {
             $sNumber = intval($headers[Resources::X_MS_BLOB_SEQUENCE_NUMBER]);
@@ -140,7 +139,7 @@ class BlobRestProxy extends ServiceRestProxy implements IBlob
         $properties->setContentMD5($cMD5);
         $properties->setContentType($cType);
         $properties->setEtag($etag);
-        $properties->setLastModified(WindowsAzureUtilities::rfc1123ToDateTime($d));
+        $properties->setLastModified(Utilities::rfc1123ToDateTime($d));
         $properties->setLeaseStatus($lStatus);
         
         $result->setProperties($properties);
@@ -192,9 +191,9 @@ class BlobRestProxy extends ServiceRestProxy implements IBlob
         
         $response = $this->send($method, $headers, $queryParams, $path, $statusCode);
         $result   = new GetContainerPropertiesResult();
-        $metadata = WindowsAzureUtilities::getMetadataArray($response->getHeader());
+        $metadata = $this->getMetadataArray($response->getHeader());
         $date     = $response->getHeader(Resources::LAST_MODIFIED);
-        $date     = WindowsAzureUtilities::rfc1123ToDateTime($date);
+        $date     = Utilities::rfc1123ToDateTime($date);
         $result->setEtag($response->getHeader(Resources::ETAG));
         $result->setMetadata($metadata);
         $result->setLastModified($date);
@@ -660,7 +659,7 @@ class BlobRestProxy extends ServiceRestProxy implements IBlob
         );
 
         $metadata = $options->getMetadata();
-        $headers  = WindowsAzureUtilities::generateMetadataHeaders($metadata);
+        $headers  = $this->generateMetadataHeaders($metadata);
         $this->addOptionalHeader(
             $headers,
             Resources::X_MS_BLOB_PUBLIC_ACCESS,
@@ -864,10 +863,10 @@ class BlobRestProxy extends ServiceRestProxy implements IBlob
     public function setContainerMetadata($container, $metadata, $options = null)
     {
         Validate::isString($container, 'container');
-        WindowsAzureUtilities::validateMetadata($metadata);
+        $this->validateMetadata($metadata);
         
         $method      = Resources::HTTP_PUT;
-        $headers     = WindowsAzureUtilities::generateMetadataHeaders($metadata);
+        $headers     = $this->generateMetadataHeaders($metadata);
         $queryParams = array();
         $path        = $container;
         $statusCode  = Resources::STATUS_OK;
@@ -1282,7 +1281,7 @@ class BlobRestProxy extends ServiceRestProxy implements IBlob
         $contentType         = Resources::XML_CONTENT_TYPE;
         
         $metadata = $options->getMetadata();
-        $headers  = WindowsAzureUtilities::generateMetadataHeaders($metadata);
+        $headers  = $this->generateMetadataHeaders($metadata);
         $headers  = $this->addOptionalAccessConditionHeader(
             $headers, $options->getAccessCondition()
         );
@@ -1510,8 +1509,9 @@ class BlobRestProxy extends ServiceRestProxy implements IBlob
         );
         
         $response = $this->send($method, $headers, $queryParams, $path, $statusCode);
+        $metadata = $this->getMetadataArray($response->getHeader());
         
-        return GetBlobMetadataResult::create($response->getHeader());
+        return GetBlobMetadataResult::create($response->getHeader(), $metadata);
     }
     
     /**
@@ -1688,7 +1688,7 @@ class BlobRestProxy extends ServiceRestProxy implements IBlob
         Validate::isString($container, 'container');
         Validate::isString($blob, 'blob');
         Validate::notNullOrEmpty($blob, 'blob');
-        WindowsAzureUtilities::validateMetadata($metadata);
+        $this->validateMetadata($metadata);
         
         $method      = Resources::HTTP_PUT;
         $headers     = array();
@@ -1786,8 +1786,13 @@ class BlobRestProxy extends ServiceRestProxy implements IBlob
         );
         
         $response = $this->send($method, $headers, $queryParams, $path, $statusCode);
+        $metadata = $this->getMetadataArray($response->getHeader());
         
-        return GetBlobResult::create($response->getHeader(), $response->getBody());
+        return GetBlobResult::create(
+            $response->getHeader(),
+            $response->getBody(),
+            $metadata
+        );
     }
     
     /**
@@ -1956,7 +1961,7 @@ class BlobRestProxy extends ServiceRestProxy implements IBlob
         
         $metadata = $options->getMetadata();
         if (!is_null($metadata)) {
-            $metadataHeader = WindowsAzureUtilities::generateMetadataHeaders(
+            $metadataHeader = $this->generateMetadataHeaders(
                 $metadata
             );    
             $headers        = \array_merge($headers, $metadataHeader);

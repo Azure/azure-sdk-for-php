@@ -28,7 +28,6 @@ use WindowsAzure\Validate;
 use WindowsAzure\Resources;
 use WindowsAzure\Services\Blob\Models\AccessPolicy;
 use WindowsAzure\Services\Blob\Models\SignedIdentifier;
-use WindowsAzure\Core\WindowsAzureUtilities;
 use WindowsAzure\Services\Blob\Models\PublicAccessType;
 use WindowsAzure\Core\Serialization\XmlSerializer;
 
@@ -87,7 +86,7 @@ class ContainerAcl
      */
     public static function create($publicAccess, $etag, $lastModified, $parsed)
     {
-        $date = WindowsAzureUtilities::rfc1123ToDateTime($lastModified);
+        $date = Utilities::rfc1123ToDateTime($lastModified);
         
         $result                     = new ContainerAcl();
         $result->_etag              = $etag;

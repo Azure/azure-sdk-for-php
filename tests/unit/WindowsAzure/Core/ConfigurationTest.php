@@ -149,6 +149,18 @@ class ConfigurationTest extends \PHPUnit_Framework_TestCase
         $config->setProperty(QueueSettings::URI, TestResources::QUEUE_URI);
         $config->create($invalidType);
     }
+    
+    /**
+     * @covers WindowsAzure\Core\Configuration::isEmulated
+     */
+    public function testIsEmulated()
+    {
+        // Test
+        $actual = Configuration::isEmulated();
+        
+        // Assert
+        $this->assertTrue(isset($actual));
+    }
 }
 
 ?>

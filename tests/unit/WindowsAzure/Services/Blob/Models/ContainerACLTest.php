@@ -25,7 +25,6 @@ namespace Tests\Unit\WindowsAzure\Services\Blob\Models;
 use WindowsAzure\Services\Blob\Models\ContainerAcl;
 use Tests\Framework\TestResources;
 use WindowsAzure\Resources;
-use WindowsAzure\Core\WindowsAzureUtilities;
 use WindowsAzure\Utilities;
 use WindowsAzure\Core\Serialization\XmlSerializer;
 
@@ -56,7 +55,7 @@ class ContainerAclTest extends \PHPUnit_Framework_TestCase
         $sample = Resources::EMPTY_STRING;
         $expectedEtag = '0x8CAFB82EFF70C46';
         $expectedLastModified = 'Sun, 25 Sep 2011 19:42:18 GMT';
-        $expectedDate = WindowsAzureUtilities::rfc1123ToDateTime($expectedLastModified);
+        $expectedDate = Utilities::rfc1123ToDateTime($expectedLastModified);
         $expectedPublicAccess = 'container';
         
         // Test
@@ -84,7 +83,7 @@ class ContainerAclTest extends \PHPUnit_Framework_TestCase
         $sample = TestResources::getContainerAclOneEntrySample();
         $expectedEtag = '0x8CAFB82EFF70C46';
         $expectedLastModified = 'Sun, 25 Sep 2011 19:42:18 GMT';
-        $expectedDate = WindowsAzureUtilities::rfc1123ToDateTime($expectedLastModified);
+        $expectedDate = Utilities::rfc1123ToDateTime($expectedLastModified);
         $expectedPublicAccess = 'container';
         
         // Test
@@ -112,7 +111,7 @@ class ContainerAclTest extends \PHPUnit_Framework_TestCase
         $sample = TestResources::getContainerAclMultipleEntriesSample();
         $expectedEtag = '0x8CAFB82EFF70C46';
         $expectedLastModified = 'Sun, 25 Sep 2011 19:42:18 GMT';
-        $expectedDate = WindowsAzureUtilities::rfc1123ToDateTime($expectedLastModified);
+        $expectedDate = Utilities::rfc1123ToDateTime($expectedLastModified);
         $expectedPublicAccess = 'container';
         
         // Test
@@ -138,7 +137,7 @@ class ContainerAclTest extends \PHPUnit_Framework_TestCase
         $sample = TestResources::getContainerAclOneEntrySample();
         $expectedEtag = '0x8CAFB82EFF70C46';
         $expectedLastModified = 'Sun, 25 Sep 2011 19:42:18 GMT';
-        $expectedDate = WindowsAzureUtilities::rfc1123ToDateTime($expectedLastModified);
+        $expectedDate = Utilities::rfc1123ToDateTime($expectedLastModified);
         $expectedPublicAccess = 'container';
         $acl = ContainerAcl::create($expectedPublicAccess, $expectedEtag, 
             $expectedLastModified, $sample['SignedIdentifiers']);
@@ -162,7 +161,7 @@ class ContainerAclTest extends \PHPUnit_Framework_TestCase
     public function testSetLastModified()
     {
         // Setup
-        $expected = WindowsAzureUtilities::rfc1123ToDateTime('Sun, 25 Sep 2011 19:42:18 GMT');
+        $expected = Utilities::rfc1123ToDateTime('Sun, 25 Sep 2011 19:42:18 GMT');
         $acl = new ContainerAcl();
         $acl->setLastModified($expected);
         

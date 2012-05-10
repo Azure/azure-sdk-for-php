@@ -387,6 +387,21 @@ class UtilitiesTest extends \PHPUnit_Framework_TestCase
         // Assert
         $this->assertEquals(stream_get_contents($expected), stream_get_contents($actual));
     }
+    
+    /**
+     * @covers WindowsAzure\Utilities::rfc1123ToDateTime
+     */
+    public function testWindowsAzureDateToDateTime()
+    {
+        // Setup
+        $expected = 'Fri, 16 Oct 2009 21:04:30 GMT';
+        
+        // Test
+        $actual = Utilities::rfc1123ToDateTime($expected);
+        
+        // Assert
+        $this->assertEquals($expected, $actual->format('D, d M Y H:i:s T'));
+    }
 }
 
 ?>

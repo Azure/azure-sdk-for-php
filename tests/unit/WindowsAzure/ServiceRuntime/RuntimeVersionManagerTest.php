@@ -23,7 +23,7 @@
  */
 namespace Tests\Unit\WindowsAzure\ServiceRuntime;
 use Tests\Framework\TestResources;
-use WindowsAzure\Core\WindowsAzureUtilities;
+use WindowsAzure\Utilities;
 use WindowsAzure\ServiceRuntime\FileInputChannel;
 use WindowsAzure\ServiceRuntime\RuntimeVersionProtocolClient;
 use WindowsAzure\ServiceRuntime\RuntimeVersionManager;

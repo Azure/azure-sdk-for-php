@@ -25,7 +25,7 @@
 namespace WindowsAzure\Services\Blob\Models;
 use WindowsAzure\Validate;
 use WindowsAzure\Resources;
-use WindowsAzure\Core\WindowsAzureUtilities;
+use WindowsAzure\Utilities;
 
 /**
  * Represents a set of source access conditions to be used for operations
@@ -122,7 +122,7 @@ class SourceAccessCondition
     {
         return new SourceAccessCondition(
             Resources::X_MS_SOURCE_IF_MODIFIED_SINCE,
-            WindowsAzureUtilities::rfc1123ToDateTime($lastModified)
+            Utilities::rfc1123ToDateTime($lastModified)
         );
     }
     
@@ -174,7 +174,7 @@ class SourceAccessCondition
     {
         return new SourceAccessCondition(
             Resources::X_MS_SOURCE_IF_UNMODIFIED_SINCE,
-            WindowsAzureUtilities::rfc1123ToDateTime($lastModified)
+            Utilities::rfc1123ToDateTime($lastModified)
         );
     }
     

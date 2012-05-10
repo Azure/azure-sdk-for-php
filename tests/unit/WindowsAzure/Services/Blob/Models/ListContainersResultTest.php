@@ -25,7 +25,7 @@
 namespace Tests\Unit\WindowsAzure\Services\Blob\Models;
 use WindowsAzure\Services\Blob\Models\ListContainersResult;
 use Tests\Framework\TestResources;
-use WindowsAzure\Core\WindowsAzureUtilities;
+use WindowsAzure\Utilities;
 
 /**
  * Unit tests for class ListContainersResult
@@ -73,7 +73,7 @@ class ListContainersResultTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($sample['Containers']['Container']['Name'], $containers[0]->getName());
         $this->assertEquals($sample['Containers']['Container']['Url'], $containers[0]->getUrl());
         $this->assertEquals(
-         WindowsAzureUtilities::rfc1123ToDateTime($sample['Containers']['Container']['Properties']['Last-Modified']),
+         Utilities::rfc1123ToDateTime($sample['Containers']['Container']['Properties']['Last-Modified']),
         $containers[0]->getProperties()->getLastModified());
         $this->assertEquals(
             $sample['Containers']['Container']['Properties']['Etag'],
@@ -100,7 +100,7 @@ class ListContainersResultTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($sample['Containers']['Container'][0]['Name'], $containers[0]->getName());
         $this->assertEquals($sample['Containers']['Container'][0]['Url'], $containers[0]->getUrl());
         $this->assertEquals(
-            WindowsAzureUtilities::rfc1123ToDateTime($sample['Containers']['Container'][0]['Properties']['Last-Modified']), 
+            Utilities::rfc1123ToDateTime($sample['Containers']['Container'][0]['Properties']['Last-Modified']), 
             $containers[0]->getProperties()->getLastModified());
         $this->assertEquals(
             $sample['Containers']['Container'][0]['Properties']['Etag'],
@@ -108,7 +108,7 @@ class ListContainersResultTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($sample['Containers']['Container'][1]['Name'], $containers[1]->getName());
         $this->assertEquals($sample['Containers']['Container'][1]['Url'], $containers[1]->getUrl());
         $this->assertEquals(
-            WindowsAzureUtilities::rfc1123ToDateTime($sample['Containers']['Container'][1]['Properties']['Last-Modified']), 
+            Utilities::rfc1123ToDateTime($sample['Containers']['Container'][1]['Properties']['Last-Modified']), 
             $containers[1]->getProperties()->getLastModified());
         $this->assertEquals(
             $sample['Containers']['Container'][1]['Properties']['Etag'],

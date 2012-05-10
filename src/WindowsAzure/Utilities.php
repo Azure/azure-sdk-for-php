@@ -312,6 +312,21 @@ class Utilities
     {
         return $obj ? 'true' : 'false';
     }
+    
+    /**
+     * Converts a given date string into \DateTime object
+     * 
+     * @param string $date windows azure date ins string represntation.
+     * 
+     * @return \DateTime
+     */
+    public static function rfc1123ToDateTime($date)
+    {
+        $timeZone = new \DateTimeZone('GMT');
+        $format   = Resources::AZURE_DATE_FORMAT;
+        
+        return \DateTime::createFromFormat($format, $date, $timeZone);
+    }
 
     /**
      * Generate ISO 8601 compliant date string in UTC time zone

@@ -23,9 +23,12 @@
  */
 
 namespace WindowsAzure\Services\Queue;
-use WindowsAzure\Services\Core\ServiceRestProxy;
 use WindowsAzure\Resources;
 use WindowsAzure\Validate;
+use WindowsAzure\Utilities;
+use WindowsAzure\Core\Http\IHttpClient;
+use WindowsAzure\Core\Http\Url;
+use WindowsAzure\Services\Core\ServiceRestProxy;
 use WindowsAzure\Services\Core\Models\GetServicePropertiesResult;
 use WindowsAzure\Services\Core\Models\ServiceProperties;
 use WindowsAzure\Services\Queue\Models\ListQueuesOptions;
@@ -40,10 +43,6 @@ use WindowsAzure\Services\Queue\Models\ListMessagesResult;
 use WindowsAzure\Services\Queue\Models\PeekMessagesOptions;
 use WindowsAzure\Services\Queue\Models\PeekMessagesResult;
 use WindowsAzure\Services\Queue\Models\UpdateMessageResult;
-use WindowsAzure\Core\Http\IHttpClient;
-use WindowsAzure\Utilities;
-use WindowsAzure\Core\Http\Url;
-use WindowsAzure\Core\WindowsAzureUtilities;
 
 /**
  * This class constructs HTTP requests and receive HTTP responses for queue 
@@ -227,7 +226,7 @@ class QueueRestProxy extends ServiceRestProxy implements IQueue
 
         $metadata = $options->getMetadata();
         $timeout  = $options->getTimeout();
-        $headers  = WindowsAzureUtilities::generateMetadataHeaders($metadata);
+        $headers  = $this->generateMetadataHeaders($metadata);
         
         $this->addOptionalQueryParam($queryParams, Resources::QP_TIMEOUT, $timeout);
         
@@ -347,7 +346,7 @@ class QueueRestProxy extends ServiceRestProxy implements IQueue
             $method, $headers, $queryParams, $path, $statusCode, $body
         );
         
-        $metadata = WindowsAzureUtilities::getMetadataArray($response->getHeader());
+        $metadata = $this->getMetadataArray($response->getHeader());
         $maxCount = intval(
             $response->getHeader(Resources::X_MS_APPROXIMATE_MESSAGES_COUNT)
         );
@@ -496,7 +495,7 @@ class QueueRestProxy extends ServiceRestProxy implements IQueue
     {
         Validate::isString($queueName, 'queueName');
         Validate::notNullOrEmpty($queueName, 'queueName');
-        WindowsAzureUtilities::validateMetadata($metadata);
+        $this->validateMetadata($metadata);
         
         $method      = Resources::HTTP_PUT;
         $headers     = array();
@@ -516,7 +515,7 @@ class QueueRestProxy extends ServiceRestProxy implements IQueue
             $options->getTimeout()
         );
         
-        $metadataHeaders = WindowsAzureUtilities::generateMetadataHeaders($metadata);
+        $metadataHeaders = $this->generateMetadataHeaders($metadata);
         $headers         = $metadataHeaders;
         
         $this->send($method, $headers, $queryParams, $path, $statusCode, $body);
@@ -659,7 +658,7 @@ class QueueRestProxy extends ServiceRestProxy implements IQueue
         $popReceipt      = $response->getHeader(Resources::X_MS_POPRECEIPT);
         $timeNextVisible = $response->getHeader(Resources::X_MS_TIME_NEXT_VISIBLE);
         
-        $date   = WindowsAzureUtilities::rfc1123ToDateTime($timeNextVisible);
+        $date   = Utilities::rfc1123ToDateTime($timeNextVisible);
         $result = new UpdateMessageResult();
         $result->setPopReceipt($popReceipt);
         $result->setTimeNextVisible($date);

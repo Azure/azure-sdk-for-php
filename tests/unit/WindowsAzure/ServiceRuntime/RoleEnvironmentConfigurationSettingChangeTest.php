@@ -23,7 +23,7 @@
  */
 namespace Tests\Unit\WindowsAzure\ServiceRuntime;
 use Tests\Framework\TestResources;
-use WindowsAzure\Core\WindowsAzureUtilities;
+use WindowsAzure\Utilities;
 use WindowsAzure\ServiceRuntime\RoleEnvironmentConfigurationSettingChange;
 
 /**

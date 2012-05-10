@@ -25,7 +25,7 @@
 namespace WindowsAzure\Services\Blob\Models;
 use WindowsAzure\Resources;
 use WindowsAzure\Validate;
-use WindowsAzure\Core\WindowsAzureUtilities;
+use WindowsAzure\Utilities;
 
 /**
  * Holds results of calling getBlobMetadata wrapper
@@ -62,7 +62,7 @@ class SetBlobMetadataResult
     {
         $result = new SetBlobMetadataResult();
         $date   = $headers[Resources::LAST_MODIFIED];
-        $result->setLastModified(WindowsAzureUtilities::rfc1123ToDateTime($date));
+        $result->setLastModified(Utilities::rfc1123ToDateTime($date));
         $result->setEtag($headers[Resources::ETAG]);
         
         return $result;
