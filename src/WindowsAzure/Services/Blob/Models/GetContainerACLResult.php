@@ -43,10 +43,10 @@ class GetContainerAclResult
     /**
      * Parses the given array into signed identifiers
      * 
-     * @param string $publicAccess    container public access
-     * @param string $etag            container etag
+     * @param string    $publicAccess container public access
+     * @param string    $etag         container etag
      * @param \DateTime $lastModified last modification date
-     * @param array  $parsed          parsed response into array
+     * @param array     $parsed       parsed response into array
      * representation
      * 
      * @return none.

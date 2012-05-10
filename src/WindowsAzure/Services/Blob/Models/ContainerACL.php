@@ -78,10 +78,10 @@ class ContainerAcl
     /**
      * Parses the given array into signed identifiers
      * 
-     * @param string $publicAccess    container public access
-     * @param string $etag            container etag
+     * @param string    $publicAccess container public access
+     * @param string    $etag         container etag
      * @param \DateTime $lastModified last modification in DateTime
-     * @param array  $parsed          parsed response into array representation
+     * @param array     $parsed       parsed response into array representation
      * 
      * @return none.
      */
@@ -102,7 +102,6 @@ class ContainerAcl
             foreach ($temp as $value) {
                 $startString  = urldecode($value['AccessPolicy']['Start']);
                 $expiryString = urldecode($value['AccessPolicy']['Expiry']);
-
                 $start        = Utilities::convertToDateTime($startString);
                 $expiry       = Utilities::convertToDateTime($expiryString);
                 $permission   = $value['AccessPolicy']['Permission'];
@@ -211,14 +210,14 @@ class ContainerAcl
     /**
      * Adds new signed modifier
      * 
-     * @param string $id        a unique id for this modifier
-     * @param \DateTime $start  The time at which the Shared Access Signature
+     * @param string    $id         a unique id for this modifier
+     * @param \DateTime $start      The time at which the Shared Access Signature
      * becomes valid. If omitted, start time for this call is assumed to be
      * the time when the Blob service receives the request.
-     * @param \DateTime $expiry The time at which the Shared Access Signature
+     * @param \DateTime $expiry     The time at which the Shared Access Signature
      * becomes invalid. This field may be omitted if it has been specified as
      * part of a container-level access policy.
-     * @param string $permission The permissions associated with the Shared
+     * @param string    $permission The permissions associated with the Shared
      * Access Signature. The user is restricted to operations allowed by the
      * permissions. Valid permissions values are read (r), write (w), delete (d) and
      * list (l).
