@@ -23,14 +23,14 @@
  */
  
 namespace WindowsAzure\Services\Table;
-use WindowsAzure\Resources;
-use WindowsAzure\Utilities;
-use WindowsAzure\Validate;
-use WindowsAzure\Core\Http\HttpCallContext;
-use WindowsAzure\Services\Core\Models\ServiceProperties;
-use WindowsAzure\Services\Core\ServiceRestProxy;
+use WindowsAzure\Common\Internal\Resources;
+use WindowsAzure\Common\Internal\Utilities;
+use WindowsAzure\Common\Internal\Validate;
+use WindowsAzure\Common\Internal\Http\HttpCallContext;
+use WindowsAzure\Common\Models\ServiceProperties;
+use WindowsAzure\Common\Internal\ServiceRestProxy;
 use WindowsAzure\Services\Table\Models\TableServiceOptions;
-use WindowsAzure\Services\Core\Models\GetServicePropertiesResult;
+use WindowsAzure\Common\Models\GetServicePropertiesResult;
 use WindowsAzure\Services\Table\Models\EdmType;
 use WindowsAzure\Services\Table\Models\Filters;
 use WindowsAzure\Services\Table\Models\Filters\Filter;
@@ -141,7 +141,7 @@ class TableRestProxy extends ServiceRestProxy implements ITable
      * @param Models\Entity $entity The entity object.
      * @param string        $type   The API type.
      * 
-     * @return WindowsAzure\Core\Http\HttpCallContext
+     * @return WindowsAzure\Common\Internal\Http\HttpCallContext
      * 
      * @throws \InvalidArgumentException 
      */
@@ -607,7 +607,7 @@ class TableRestProxy extends ServiceRestProxy implements ITable
     /**
      * Initializes new TableRestProxy object.
      * 
-     * @param WindowsAzure\Core\Http\IHttpClient            $channel        The HTTP
+     * @param WindowsAzure\Common\Internal\Http\IHttpClient            $channel        The HTTP
      * client channel.
      * @param string                                        $uri            The 
      * storage account uri.
@@ -615,7 +615,7 @@ class TableRestProxy extends ServiceRestProxy implements ITable
      * serializer.
      * @param Table\Utilities\IMimeReaderWriter             $mimeSerializer The MIME 
      * serializer.
-     * @param WindowsAzure\Core\Serialization\ISerializable $dataSerializer The data
+     * @param WindowsAzure\Common\Internal\Serialization\ISerializable $dataSerializer The data
      * serializer.
      */
     public function __construct($channel, $uri, $atomSerializer, $mimeSerializer, 
@@ -636,7 +636,7 @@ class TableRestProxy extends ServiceRestProxy implements ITable
      * 
      * @param Models\TableServiceOptions $options optional table service options.
      * 
-     * @return WindowsAzure\Services\Core\Models\GetServicePropertiesResult
+     * @return WindowsAzure\Common\Models\GetServicePropertiesResult
      * 
      * @see http://msdn.microsoft.com/en-us/library/windowsazure/hh452238.aspx
      */

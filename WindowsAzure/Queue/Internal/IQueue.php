@@ -23,7 +23,7 @@
  */
 
 namespace WindowsAzure\Services\Queue;
-use WindowsAzure\Core\FilterableService;
+use WindowsAzure\Common\Internal\FilterableService;
 
 /**
  * This interface has all REST APIs provided by Windows Azure for queue service
@@ -44,7 +44,7 @@ interface IQueue extends FilterableService
      * 
      * @param QueueServiceOptions $options The optional parameters.
      * 
-     * @return WindowsAzure\Services\Core\Models\GetServicePropertiesResult
+     * @return WindowsAzure\Common\Models\GetServicePropertiesResult
      */
     public function getServiceProperties($options = null);
 
@@ -86,7 +86,7 @@ interface IQueue extends FilterableService
      * 
      * @param ListQueuesOptions $options The optional parameters.
      * 
-     * @return WindowsAzure\Services\Core\Models\ListQueuesResult
+     * @return WindowsAzure\Common\Models\ListQueuesResult
      */
     public function listQueues($options = null);
 
@@ -96,7 +96,7 @@ interface IQueue extends FilterableService
      * @param string              $queueName The queue name.
      * @param QueueServiceOptions $options   The optional parameters.
      * 
-     * @return WindowsAzure\Services\Core\Models\GetQueueMetadataResult
+     * @return WindowsAzure\Common\Models\GetQueueMetadataResult
      */
     public function getQueueMetadata($queueName, $options = null);
 
@@ -142,7 +142,7 @@ interface IQueue extends FilterableService
      * @param QueueServiceOptions $options                    The optional 
      * parameters.
      * 
-     * @return WindowsAzure\Services\Core\Models\UpdateMessageResult
+     * @return WindowsAzure\Common\Models\UpdateMessageResult
      */
     public function updateMessage($queueName, $messageId, $popReceipt, $messageText, 
         $visibilityTimeoutInSeconds, $options = null
@@ -169,7 +169,7 @@ interface IQueue extends FilterableService
      * @param string              $queueName The queue name.
      * @param ListMessagesOptions $options   The optional parameters.
      * 
-     * @return WindowsAzure\Services\Core\Models\ListMessagesResult
+     * @return WindowsAzure\Common\Models\ListMessagesResult
      */
     public function listMessages($queueName, $options = null);
 
@@ -180,7 +180,7 @@ interface IQueue extends FilterableService
      * @param string              $queueName The queue name.
      * @param PeekMessagesOptions $options   The optional parameters.
      * 
-     * @return WindowsAzure\Services\Core\Models\PeekMessagesResult
+     * @return WindowsAzure\Common\Models\PeekMessagesResult
      */
     public function peekMessages($queueName, $options = null);
 
@@ -190,7 +190,7 @@ interface IQueue extends FilterableService
      * @param string              $queueName The queue name.
      * @param QueueServiceOptions $options   The optional parameters.
      * 
-     * @return WindowsAzure\Services\Core\Models\PeekMessagesResult
+     * @return WindowsAzure\Common\Models\PeekMessagesResult
      */
     public function clearMessages($queueName, $options = null);
 }

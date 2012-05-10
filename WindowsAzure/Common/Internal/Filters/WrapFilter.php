@@ -15,27 +15,27 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   WindowsAzure\Core\Filters
+ * @package   WindowsAzure\Common\Internal\Filters
  * @author    Azure PHP SDK <azurephpsdk@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
  
-namespace WindowsAzure\Core\Filters;
-use WindowsAzure\Resources;
-use WindowsAzure\Validate;
-use WindowsAzure\Core\IServiceFilter;
-use WindowsAzure\Core\Authentication\SharedKeyAuthScheme;
-use WindowsAzure\Core\Authentication\TableSharedKeyLiteAuthScheme;
-use WindowsAzure\Core\InvalidArgumentTypeException;
+namespace WindowsAzure\Common\Internal\Filters;
+use WindowsAzure\Common\Internal\Resources;
+use WindowsAzure\Common\Internal\Validate;
+use WindowsAzure\Common\Internal\IServiceFilter;
+use WindowsAzure\Common\Internal\Authentication\SharedKeyAuthScheme;
+use WindowsAzure\Common\Internal\Authentication\TableSharedKeyLiteAuthScheme;
+use WindowsAzure\Common\Internal\InvalidArgumentTypeException;
 use WindowsAzure\Services\ServiceBus\WrapTokenManager;
 
 /**
  * Adds WRAP authentication header to the http request object.
  *
  * @category  Microsoft
- * @package   WindowsAzure\Core\Filters
+ * @package   WindowsAzure\Common\Internal\Filters
  * @author    Azure PHP SDK <azurephpsdk@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
@@ -57,7 +57,7 @@ class WrapFilter implements IServiceFilter
      * @param string $wrapPassword The password of the WRAP account.
      * 
      * @return
-     * WindowsAzure\Core\Filter\WrapFilter
+     * WindowsAzure\Common\Internal\Filter\WrapFilter
      *         
      */
     public function __construct(

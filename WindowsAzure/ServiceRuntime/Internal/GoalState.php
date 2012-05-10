@@ -23,7 +23,7 @@
  */
 
 namespace WindowsAzure\ServiceRuntime;
-use WindowsAzure\Validate;
+use WindowsAzure\Common\Internal\Validate;
 
 /**
  * The goal state representation.

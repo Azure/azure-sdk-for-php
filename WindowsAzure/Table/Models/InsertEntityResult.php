@@ -23,8 +23,8 @@
  */
  
 namespace WindowsAzure\Services\Table\Models;
-use WindowsAzure\Utilities;
-use WindowsAzure\Resources;
+use WindowsAzure\Common\Internal\Utilities;
+use WindowsAzure\Common\Internal\Resources;
 
 /**
  * Holds result of calling insertEntity wrapper

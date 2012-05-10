@@ -23,8 +23,8 @@
  */
  
 namespace WindowsAzure\Services\ServiceManagement\Models;
-use WindowsAzure\Resources;
-use WindowsAzure\Utilities;
+use WindowsAzure\Common\Internal\Resources;
+use WindowsAzure\Common\Internal\Utilities;
 
 /**
  * The result of calling getAffinityGroupProperties API.

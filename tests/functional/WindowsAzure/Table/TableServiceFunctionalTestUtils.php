@@ -26,8 +26,8 @@
 
 namespace Tests\Functional\WindowsAzure\Services\Table;
 
-use WindowsAzure\Utilities;
-use WindowsAzure\Core\ServiceException;
+use WindowsAzure\Common\Internal\Utilities;
+use WindowsAzure\Common\Internal\ServiceException;
 use WindowsAzure\Services\Table\TableService;
 use WindowsAzure\Services\Table\Models\DeleteEntityOptions;
 use WindowsAzure\Services\Table\Models\EdmType;

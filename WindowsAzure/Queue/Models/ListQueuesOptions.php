@@ -24,7 +24,7 @@
  
 namespace WindowsAzure\Services\Queue\Models;
 use WindowsAzure\Services\Queue\Models\QueueServiceOptions;
-use \WindowsAzure\Validate;
+use \WindowsAzure\Common\Internal\Validate;
 
 /**
  * Options for listQueues API.

@@ -15,21 +15,21 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   WindowsAzure\Services\Core\Models
+ * @package   WindowsAzure\Common\Models
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
  
-namespace WindowsAzure\Services\Core\Models;
-use WindowsAzure\Utilities;
+namespace WindowsAzure\Common\Models;
+use WindowsAzure\Common\Internal\Utilities;
 
 /**
  * Holds elements of queue properties retention policy field.
  *
  * @category  Microsoft
- * @package   WindowsAzure\Services\Core\Models
+ * @package   WindowsAzure\Common\Models
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
@@ -60,7 +60,7 @@ class RetentionPolicy
      * 
      * @param array $parsedResponse XML response parsed into array.
      * 
-     * @return WindowsAzure\Services\Core\Models\RetentionPolicy
+     * @return WindowsAzure\Common\Models\RetentionPolicy
      */
     public static function create($parsedResponse)
     {

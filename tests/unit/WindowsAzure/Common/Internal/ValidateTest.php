@@ -23,10 +23,10 @@
  */
 
 namespace Tests\Unit\WindowsAzure;
-use WindowsAzure\Validate;
-use WindowsAzure\Core\InvalidArgumentTypeException;
-use WindowsAzure\Resources;
-use WindowsAzure\Utilities;
+use WindowsAzure\Common\Internal\Validate;
+use WindowsAzure\Common\Internal\InvalidArgumentTypeException;
+use WindowsAzure\Common\Internal\Resources;
+use WindowsAzure\Common\Internal\Utilities;
 
 /**
  * Unit tests for class ValidateTest
@@ -42,7 +42,7 @@ use WindowsAzure\Utilities;
 class ValidateTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @covers WindowsAzure\Validate::isArray
+     * @covers WindowsAzure\Common\Internal\Validate::isArray
      */
     public function testIsArrayWithArray()
     {
@@ -52,7 +52,7 @@ class ValidateTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers WindowsAzure\Validate::isArray
+     * @covers WindowsAzure\Common\Internal\Validate::isArray
      */
     public function testIsArrayWithNonArray()
     {
@@ -61,7 +61,7 @@ class ValidateTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers WindowsAzure\Validate::isString
+     * @covers WindowsAzure\Common\Internal\Validate::isString
      */
     public function testIsStringWithString()
     {
@@ -71,7 +71,7 @@ class ValidateTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers WindowsAzure\Validate::isString
+     * @covers WindowsAzure\Common\Internal\Validate::isString
      */
     public function testIsStringWithNonString()
     {
@@ -80,7 +80,7 @@ class ValidateTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers WindowsAzure\Validate::isBoolean
+     * @covers WindowsAzure\Common\Internal\Validate::isBoolean
      */
     public function testIsBooleanWithBoolean()
     {
@@ -90,7 +90,7 @@ class ValidateTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers WindowsAzure\Validate::isInteger
+     * @covers WindowsAzure\Common\Internal\Validate::isInteger
      */
     public function testIsIntegerWithInteger()
     {
@@ -100,7 +100,7 @@ class ValidateTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers WindowsAzure\Validate::isInteger
+     * @covers WindowsAzure\Common\Internal\Validate::isInteger
      */
     public function testIsIntegerWithNonInteger()
     {
@@ -109,7 +109,7 @@ class ValidateTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers WindowsAzure\Validate::isTrue
+     * @covers WindowsAzure\Common\Internal\Validate::isTrue
      */
     public function testIsTrueWithTrue()
     {
@@ -119,7 +119,7 @@ class ValidateTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers WindowsAzure\Validate::isTrue
+     * @covers WindowsAzure\Common\Internal\Validate::isTrue
      */
     public function testIsTrueWithFalse()
     {
@@ -128,7 +128,7 @@ class ValidateTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers WindowsAzure\Validate::isDate
+     * @covers WindowsAzure\Common\Internal\Validate::isDate
      */
     public function testIsDateWithDate()
     {
@@ -139,7 +139,7 @@ class ValidateTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers WindowsAzure\Validate::isDate
+     * @covers WindowsAzure\Common\Internal\Validate::isDate
      */
     public function testIsDateWithNonDate()
     {
@@ -148,7 +148,7 @@ class ValidateTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers WindowsAzure\Validate::notNullOrEmpty
+     * @covers WindowsAzure\Common\Internal\Validate::notNullOrEmpty
      */
     public function testNotNullOrEmptyWithNonEmpty()
     {
@@ -158,7 +158,7 @@ class ValidateTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers WindowsAzure\Validate::notNullOrEmpty
+     * @covers WindowsAzure\Common\Internal\Validate::notNullOrEmpty
      */
     public function testNotNullOrEmptyWithEmpty()
     {
@@ -167,7 +167,7 @@ class ValidateTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers WindowsAzure\Validate::notNull
+     * @covers WindowsAzure\Common\Internal\Validate::notNull
      */
     public function testNotNullWithNull()
     {

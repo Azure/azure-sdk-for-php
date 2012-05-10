@@ -23,9 +23,9 @@
  */
  
 namespace WindowsAzure\Services\Queue\Models;
-use WindowsAzure\Resources;
+use WindowsAzure\Common\Internal\Resources;
 use WindowsAzure\Services\Queue\Models\Queue;
-use WindowsAzure\Utilities;
+use WindowsAzure\Common\Internal\Utilities;
 
 /**
  * Container to hold list queue response object.

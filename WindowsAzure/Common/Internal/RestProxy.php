@@ -15,23 +15,23 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   WindowsAzure\Core
+ * @package   WindowsAzure\Common\Internal
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
  
-namespace WindowsAzure\Core;
-use WindowsAzure\Resources;
-use WindowsAzure\Validate;
-use WindowsAzure\Core\Http\Url;
+namespace WindowsAzure\Common\Internal;
+use WindowsAzure\Common\Internal\Resources;
+use WindowsAzure\Common\Internal\Validate;
+use WindowsAzure\Common\Internal\Http\Url;
 
 /**
  * Base class for all REST proxies.
  *
  * @category  Microsoft
- * @package   WindowsAzure\Core
+ * @package   WindowsAzure\Common\Internal
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
@@ -41,7 +41,7 @@ use WindowsAzure\Core\Http\Url;
 class RestProxy
 {
     /**
-     * @var WindowsAzure\Core\Http\IHttpClient
+     * @var WindowsAzure\Common\Internal\Http\IHttpClient
      */
     private $_channel;
     
@@ -51,7 +51,7 @@ class RestProxy
     private $_filters;
     
     /**
-     * @var WindowsAzure\Core\Serialization\ISerializer
+     * @var WindowsAzure\Common\Internal\Serialization\ISerializer
      */
     protected $dataSerializer;
     
@@ -110,7 +110,7 @@ class RestProxy
     /**
      * Sends HTTP request with the specified HTTP call context.
      * 
-     * @param WindowsAzure\Core\Http\HttpCallContext $context The HTTP call context.
+     * @param WindowsAzure\Common\Internal\Http\HttpCallContext $context The HTTP call context.
      * 
      * @return \HTTP_Request2_Response
      */
@@ -145,7 +145,7 @@ class RestProxy
     /**
      * Adds new filter to new service rest proxy object and returns that object back.
      *
-     * @param WindowsAzure\Core\IServiceFilter $filter Filter to add for 
+     * @param WindowsAzure\Common\Internal\IServiceFilter $filter Filter to add for 
      * the pipeline.
      * 
      * @return RestProxy.

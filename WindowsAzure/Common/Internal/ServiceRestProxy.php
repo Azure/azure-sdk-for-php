@@ -15,26 +15,26 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   WindowsAzure\Services\Core
+ * @package   WindowsAzure\Common\Internal
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
  
-namespace WindowsAzure\Services\Core;
-use WindowsAzure\Resources;
-use WindowsAzure\Validate;
-use WindowsAzure\Utilities;
-use WindowsAzure\Core\RestProxy;
-use WindowsAzure\Core\Http\Url;
-use WindowsAzure\Core\Http\HttpCallContext;
+namespace WindowsAzure\Common\Internal;
+use WindowsAzure\Common\Internal\Resources;
+use WindowsAzure\Common\Internal\Validate;
+use WindowsAzure\Common\Internal\Utilities;
+use WindowsAzure\Common\Internal\RestProxy;
+use WindowsAzure\Common\Internal\Http\Url;
+use WindowsAzure\Common\Internal\Http\HttpCallContext;
 
 /**
  * Base class for all services rest proxies.
  *
  * @category  Microsoft
- * @package   WindowsAzure\Services\Core
+ * @package   WindowsAzure\Common\Internal
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
@@ -75,7 +75,7 @@ class ServiceRestProxy extends RestProxy
     /**
      * Sends HTTP request with the specified HTTP call context.
      * 
-     * @param WindowsAzure\Core\Http\HttpCallContext $context The HTTP call context.
+     * @param WindowsAzure\Common\Internal\Http\HttpCallContext $context The HTTP call context.
      * 
      * @return \HTTP_Request2_Response
      */

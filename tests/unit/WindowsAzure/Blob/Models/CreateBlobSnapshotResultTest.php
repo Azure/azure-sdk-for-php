@@ -23,7 +23,7 @@
  */
 namespace Tests\Unit\WindowsAzure\Blob\Models;
 use Tests\Framework\TestResources;
-use WindowsAzure\Utilities;
+use WindowsAzure\Common\Internal\Utilities;
 use WindowsAzure\Blob\Models\CreateBlobSnapshotResult;
 use WindowsAzure\Blob\Models\AccessCondition;
 

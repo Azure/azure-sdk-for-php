@@ -26,7 +26,7 @@ namespace WindowsAzure\Services\Table\Utilities;
 require_once 'PEAR.php';
 require_once 'Mail/mimePart.php';
 require_once 'Mail/mimeDecode.php';
-use WindowsAzure\Resources;
+use WindowsAzure\Common\Internal\Resources;
 
 /**
  * Reads and writes MIME for batch API.

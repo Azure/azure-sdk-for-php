@@ -22,8 +22,6 @@
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
 namespace Tests\Unit\WindowsAzure\Blob\Models;
-
-use WindowsAzure\Core\WindowsAzureUtilities;
 use WindowsAzure\Blob\Models\AccessPolicy;
 
 /**

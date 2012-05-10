@@ -25,15 +25,15 @@
 
 namespace Tests\Unit\WindowsAzure\Services\ServiceBus;
 
-use WindowsAzure\Services\Core\Models\ServiceProperties;
+use WindowsAzure\Common\Models\ServiceProperties;
 use Tests\Framework\TestResources;
 use Tests\Framework\WrapRestProxyTestBase;
-use WindowsAzure\Core\Configuration;
-use WindowsAzure\Core\ServiceException;
-use WindowsAzure\Utilities;
+use WindowsAzure\Common\Configuration;
+use WindowsAzure\Common\Internal\ServiceException;
+use WindowsAzure\Common\Internal\Utilities;
 use WindowsAzure\Services\ServiceBus\WrapRestProxy;
 use WindowsAzure\Services\ServiceBus\ServiceBusSettings;
-use WindowsAzure\Resources;
+use WindowsAzure\Common\Internal\Resources;
 
 /**
  * Unit tests for WrapRestProxy class

@@ -15,20 +15,20 @@
  * PHP version 5
  * 
  * @category  Microsoft
- * @package   WindowsAzure\Core\Http
+ * @package   WindowsAzure\Common\Internal\Http
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
  
-namespace WindowsAzure\Core\Http;
-use WindowsAzure\Core\Http\IHttpClient;
-use WindowsAzure\Core\IServiceFilter;
-use WindowsAzure\Resources;
-use WindowsAzure\Core\ServiceException;
-use WindowsAzure\Validate;
-use WindowsAzure\Core\Http\IUrl;
+namespace WindowsAzure\Common\Internal\Http;
+use WindowsAzure\Common\Internal\Http\IHttpClient;
+use WindowsAzure\Common\Internal\IServiceFilter;
+use WindowsAzure\Common\Internal\Resources;
+use WindowsAzure\Common\Internal\ServiceException;
+use WindowsAzure\Common\Internal\Validate;
+use WindowsAzure\Common\Internal\Http\IUrl;
 
 require_once 'HTTP/Request2.php';
 
@@ -36,7 +36,7 @@ require_once 'HTTP/Request2.php';
  * HTTP client which sends and receives HTTP requests and responses.
  *
  * @category  Microsoft
- * @package   WindowsAzure\Core\Http
+ * @package   WindowsAzure\Common\Internal\Http
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
@@ -51,7 +51,7 @@ class HttpClient implements IHttpClient
     private $_request;
     
     /**
-     * @var WindowsAzure\Core\Http\IUrl 
+     * @var WindowsAzure\Common\Internal\Http\IUrl 
      */
     private $_requestUrl;
     
@@ -74,7 +74,7 @@ class HttpClient implements IHttpClient
      * 
      * @param string $certificatePath The certificate path.
      * 
-     * @return WindowsAzure\Core\Http\HttpClient
+     * @return WindowsAzure\Common\Internal\Http\HttpClient
      */
     function __construct($certificatePath = Resources::EMPTY_STRING)
     {
@@ -102,7 +102,7 @@ class HttpClient implements IHttpClient
     /**
      * Makes deep copy from the current object.
      * 
-     * @return WindowsAzure\Core\Http\HttpClient
+     * @return WindowsAzure\Common\Internal\Http\HttpClient
      */
     public function __clone()
     {
@@ -116,7 +116,7 @@ class HttpClient implements IHttpClient
     /**
      * Sets the request url.
      *
-     * @param WindowsAzure\Core\Http\IUrl $url request url.
+     * @param WindowsAzure\Common\Internal\Http\IUrl $url request url.
      * 
      * @return none.
      */
@@ -129,7 +129,7 @@ class HttpClient implements IHttpClient
      * Gets request url. Note that you must check if the returned object is null or
      * not.
      *
-     * @return WindowsAzure\Core\Http\IUrl
+     * @return WindowsAzure\Common\Internal\Http\IUrl
      */ 
     public function getUrl()
     {
@@ -222,7 +222,7 @@ class HttpClient implements IHttpClient
      * send and then applied to the response.
      * @param IUrl  $url     Request url.
      * 
-     * @throws WindowsAzure\Core\ServiceException
+     * @throws WindowsAzure\Common\Internal\ServiceException
      * 
      * @return string The response body
      */

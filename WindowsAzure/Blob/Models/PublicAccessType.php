@@ -23,7 +23,7 @@
  */
  
 namespace WindowsAzure\Blob\Models;
-use WindowsAzure\Resources;
+use WindowsAzure\Common\Internal\Resources;
 
 /**
  * Holds public acces types for a container.

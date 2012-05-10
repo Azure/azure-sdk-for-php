@@ -23,7 +23,7 @@
  */
 
 namespace WindowsAzure\ServiceRuntime;
-use WindowsAzure\Resources;
+use WindowsAzure\Common\Internal\Resources;
 
 /**
  * The runtime version manager.

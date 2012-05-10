@@ -23,7 +23,7 @@
  */
  
 namespace WindowsAzure\Services\ServiceManagement;
-use WindowsAzure\Core\FilterableService;
+use WindowsAzure\Common\Internal\FilterableService;
 
 /**
  * The Windows Azure service management REST API wrappers.

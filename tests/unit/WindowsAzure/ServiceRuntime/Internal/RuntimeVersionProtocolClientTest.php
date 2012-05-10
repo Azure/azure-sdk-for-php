@@ -23,10 +23,10 @@
  */
 namespace Tests\Unit\WindowsAzure\ServiceRuntime;
 use Tests\Framework\TestResources;
-use WindowsAzure\Utilities;
+use WindowsAzure\Common\Internal\Utilities;
 use WindowsAzure\ServiceRuntime\FileInputChannel;
 use WindowsAzure\ServiceRuntime\RuntimeVersionProtocolClient;
-use WindowsAzure\Resources;
+use WindowsAzure\Common\Internal\Resources;
 
 require_once 'vfsStream/vfsStream.php';
 

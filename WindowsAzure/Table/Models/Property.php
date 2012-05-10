@@ -24,7 +24,7 @@
  
 namespace WindowsAzure\Services\Table\Models;
 use WindowsAzure\Services\Table\Models\EdmType;
-use WindowsAzure\Validate;
+use WindowsAzure\Common\Internal\Validate;
 
 /**
  * Represents entity property.

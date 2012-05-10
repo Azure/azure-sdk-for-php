@@ -22,7 +22,7 @@
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
 
-use WindowsAzure\Core\InvalidArgumentTypeException;
+use WindowsAzure\Common\Internal\InvalidArgumentTypeException;
 
 /**
  * Unit tests for class InvalidArgumentTypeException
@@ -38,7 +38,7 @@ use WindowsAzure\Core\InvalidArgumentTypeException;
 class InvalidArgumentTypeExceptionTest extends PHPUnit_Framework_TestCase
 {
     /**
-     * @covers WindowsAzure\Core\InvalidArgumentTypeException::__construct
+     * @covers WindowsAzure\Common\Internal\InvalidArgumentTypeException::__construct
      */
     public function test__construct()
     {

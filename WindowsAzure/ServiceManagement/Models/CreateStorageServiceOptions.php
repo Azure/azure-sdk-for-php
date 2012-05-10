@@ -23,7 +23,7 @@
  */
  
 namespace WindowsAzure\Services\ServiceManagement\Models;
-use WindowsAzure\Validate;
+use WindowsAzure\Common\Internal\Validate;
 
 /**
  * Optional parameters for createStorageService API.

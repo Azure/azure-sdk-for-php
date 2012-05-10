@@ -26,8 +26,8 @@
 
 namespace Tests\Functional\WindowsAzure\Services\Queue;
 
-use WindowsAzure\Core\ServiceException;
-use WindowsAzure\Core\Configuration;
+use WindowsAzure\Common\Internal\ServiceException;
+use WindowsAzure\Common\Configuration;
 use WindowsAzure\Services\Queue\QueueService;
 use WindowsAzure\Services\Queue\Models\ListQueuesOptions;
 use WindowsAzure\Services\Queue\Models\ListQueuesResult;

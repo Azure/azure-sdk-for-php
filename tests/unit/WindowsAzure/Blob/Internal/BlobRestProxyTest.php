@@ -27,10 +27,10 @@ namespace Tests\Unit\WindowsAzure\Services\Blob;
 use Tests\Framework\VirtualFileSystem;
 use Tests\Framework\BlobServiceRestProxyTestBase;
 use Tests\Framework\TestResources;
-use WindowsAzure\Resources;
-use WindowsAzure\Utilities;
-use WindowsAzure\Core\ServiceException;
-use WindowsAzure\Services\Core\Models\ServiceProperties;
+use WindowsAzure\Common\Internal\Resources;
+use WindowsAzure\Common\Internal\Utilities;
+use WindowsAzure\Common\Internal\ServiceException;
+use WindowsAzure\Common\Models\ServiceProperties;
 use WindowsAzure\Blob\Models\ListContainersOptions;
 use WindowsAzure\Blob\Models\ListContainersResult;
 use WindowsAzure\Blob\Models\CreateContainerOptions;
@@ -101,7 +101,7 @@ class BlobRestProxyTest extends BlobServiceRestProxyTestBase
     
     /**
      * @covers WindowsAzure\Blob\Internal\BlobRestProxy::listContainers
-     * @covers WindowsAzure\Services\Core\ServiceRestProxy::send
+     * @covers WindowsAzure\Common\Internal\ServiceRestProxy::send
      */
     public function testListContainersSimple()
     {
@@ -472,7 +472,7 @@ class BlobRestProxyTest extends BlobServiceRestProxyTestBase
     
     /**
      * @covers WindowsAzure\Blob\Internal\BlobRestProxy::listBlobs
-     * @covers WindowsAzure\Services\Core\ServiceRestProxy::send
+     * @covers WindowsAzure\Common\Internal\ServiceRestProxy::send
      */
     public function testListBlobsSimple()
     {
@@ -842,7 +842,7 @@ class BlobRestProxyTest extends BlobServiceRestProxyTestBase
     /**
      * @covers WindowsAzure\Blob\Internal\BlobRestProxy::setBlobMetadata
      * @covers WindowsAzure\Blob\Models\SetBlobMetadataResult::create
-     * @covers WindowsAzure\Services\Core\ServiceRestProxy::addMetadataHeaders
+     * @covers WindowsAzure\Common\Internal\ServiceRestProxy::addMetadataHeaders
      */
     public function testSetBlobMetadata()
     {

@@ -23,7 +23,7 @@
  */
 
 namespace WindowsAzure\Services\ServiceBus;
-use WindowsAzure\Core\FilterableService;
+use WindowsAzure\Common\Internal\FilterableService;
 
 /**
  * This class constructs HTTP requests and receive HTTP responses for queue 

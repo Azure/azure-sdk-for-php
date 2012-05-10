@@ -25,7 +25,7 @@
 namespace Tests\Unit\WindowsAzure\Services\Queue\Models;
 use WindowsAzure\Services\Queue\Models\ListMessagesResult;
 use Tests\Framework\TestResources;
-use WindowsAzure\Utilities;
+use WindowsAzure\Common\Internal\Utilities;
 
 /**
  * Unit tests for class ListMessagesResult

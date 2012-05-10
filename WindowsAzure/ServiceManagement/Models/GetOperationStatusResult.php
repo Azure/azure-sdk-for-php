@@ -23,9 +23,9 @@
  */
  
 namespace WindowsAzure\Services\ServiceManagement\Models;
-use WindowsAzure\Utilities;
-use WindowsAzure\Resources;
-use WindowsAzure\Core\ServiceException;
+use WindowsAzure\Common\Internal\Utilities;
+use WindowsAzure\Common\Internal\Resources;
+use WindowsAzure\Common\Internal\ServiceException;
 
 /**
  * The result of calling getOperationStatus API.

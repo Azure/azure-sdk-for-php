@@ -26,13 +26,13 @@
 
 namespace Tests\Functional\WindowsAzure\Services\Table;
 
-use WindowsAzure\Resources;
-use WindowsAzure\Core\ServiceException;
-use WindowsAzure\Core\Configuration;
-use WindowsAzure\Services\Core\Models\Logging;
-use WindowsAzure\Services\Core\Models\Metrics;
-use WindowsAzure\Services\Core\Models\RetentionPolicy;
-use WindowsAzure\Services\Core\Models\ServiceProperties;
+use WindowsAzure\Common\Internal\Resources;
+use WindowsAzure\Common\Internal\ServiceException;
+use WindowsAzure\Common\Configuration;
+use WindowsAzure\Common\Models\Logging;
+use WindowsAzure\Common\Models\Metrics;
+use WindowsAzure\Common\Models\RetentionPolicy;
+use WindowsAzure\Common\Models\ServiceProperties;
 use WindowsAzure\Services\Table\Models\DeleteEntityOptions;
 use WindowsAzure\Services\Table\Models\EdmType;
 use WindowsAzure\Services\Table\Models\Entity;

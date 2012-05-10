@@ -23,8 +23,8 @@
  */
  
 namespace WindowsAzure\Blob\Models;
-use WindowsAzure\Resources;
-use WindowsAzure\Utilities;
+use WindowsAzure\Common\Internal\Resources;
+use WindowsAzure\Common\Internal\Utilities;
 
 /**
  * WindowsAzure container object.

@@ -23,7 +23,7 @@
  */
  
 namespace WindowsAzure\Services\Queue\Models;
-use WindowsAzure\Validate;
+use WindowsAzure\Common\Internal\Validate;
 
 /**
  * Holds results of updateMessage wrapper.

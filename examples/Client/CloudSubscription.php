@@ -23,8 +23,8 @@
  */
  
 namespace Client;
-use WindowsAzure\Core\Configuration;
-use WindowsAzure\Resources;
+use WindowsAzure\Common\Configuration;
+use WindowsAzure\Common\Internal\Resources;
 use WindowsAzure\Services\ServiceManagement\ServiceManagementService;
 use WindowsAzure\Services\ServiceManagement\ServiceManagementSettings;
 use WindowsAzure\Services\ServiceManagement\Models\Locations;
@@ -148,7 +148,7 @@ class CloudSubscription
      * 
      * @param string $requestId The asynchronous operation request id.
      * 
-     * @throws WindowsAzure\Core\ServiceException
+     * @throws WindowsAzure\Common\Internal\ServiceException
      * 
      * @return none
      */

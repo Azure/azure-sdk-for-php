@@ -23,7 +23,7 @@
  */
 
 namespace WindowsAzure\ServiceRuntime;
-use WindowsAzure\Utilities;
+use WindowsAzure\Common\Internal\Utilities;
 
 /**
  * The XML role environment data deserializer.

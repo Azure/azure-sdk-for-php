@@ -23,7 +23,7 @@
  */
 namespace Tests\Unit\WindowsAzure\Blob\Models;
 use WindowsAzure\Blob\Models\SetBlobPropertiesResult;
-use WindowsAzure\Utilities;
+use WindowsAzure\Common\Internal\Utilities;
 
 /**
  * Unit tests for class SetBlobPropertiesResult

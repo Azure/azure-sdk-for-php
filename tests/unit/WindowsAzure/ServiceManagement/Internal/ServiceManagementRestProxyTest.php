@@ -24,9 +24,9 @@
 
 namespace Tests\Unit\WindowsAzure\Services\ServiceManagement;
 use Tests\Framework\ServiceManagementRestProxyTestBase;
-use WindowsAzure\Resources;
-use WindowsAzure\Core\Http\HttpClient;
-use WindowsAzure\Core\Serialization\XmlSerializer;
+use WindowsAzure\Common\Internal\Resources;
+use WindowsAzure\Common\Internal\Http\HttpClient;
+use WindowsAzure\Common\Internal\Serialization\XmlSerializer;
 use WindowsAzure\Services\ServiceManagement\ServiceManagementRestProxy;
 use WindowsAzure\Services\ServiceManagement\Models\Locations;
 use WindowsAzure\Services\ServiceManagement\Models\CreateStorageServiceOptions;

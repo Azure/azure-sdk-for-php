@@ -24,7 +24,7 @@
  
 namespace Client;
 use WindowsAzure\Services\Table\Models\Entity;
-use WindowsAzure\Utilities;
+use WindowsAzure\Common\Internal\Utilities;
 
 /**
  * The cloud table class.

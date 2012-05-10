@@ -23,16 +23,16 @@
  */
 
 namespace WindowsAzure\Services\ServiceBus;
-use WindowsAzure\Core\Http\IHttpClient;
-use WindowsAzure\Core\Http\Url;
-use WindowsAzure\Services\Core\Models\GetServicePropertiesResult;
-use WindowsAzure\Services\Core\Models\ServiceProperties;
-use WindowsAzure\Services\Core\ServiceRestProxy;
+use WindowsAzure\Common\Internal\Http\IHttpClient;
+use WindowsAzure\Common\Internal\Http\Url;
+use WindowsAzure\Common\Models\GetServicePropertiesResult;
+use WindowsAzure\Common\Models\ServiceProperties;
+use WindowsAzure\Common\Internal\ServiceRestProxy;
 use WindowsAzure\services\ServiceBus\ServiceBusSettings;
 use WindowsAzure\services\ServiceBus\Models\WrapAccessTokenResult;
-use WindowsAzure\Resources;
-use WindowsAzure\Utilities;
-use WindowsAzure\Validate;
+use WindowsAzure\Common\Internal\Resources;
+use WindowsAzure\Common\Internal\Utilities;
+use WindowsAzure\Common\Internal\Validate;
 
 /**
  * The WRAP service layer. 

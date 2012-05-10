@@ -23,8 +23,8 @@
  */
  
 namespace WindowsAzure\Services\Table\Utilities;
-use WindowsAzure\Utilities;
-use WindowsAzure\Resources;
+use WindowsAzure\Common\Internal\Utilities;
+use WindowsAzure\Common\Internal\Resources;
 use WindowsAzure\Services\Table\Models\EdmType;
 use WindowsAzure\Services\Table\Models\Entity;
 

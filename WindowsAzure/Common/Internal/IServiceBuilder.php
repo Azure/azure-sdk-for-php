@@ -15,18 +15,18 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   WindowsAzure\Core
+ * @package   WindowsAzure\Common\Internal
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
  
-namespace WindowsAzure\Core;
+namespace WindowsAzure\Common\Internal;
 
 /**
  * By implementing this interface you can control how 
- * WindowsAzure\Core\Configuration creates your object when create
+ * WindowsAzure\Common\Configuration creates your object when create
  * function is called. This can be useful if you want to add any processing layer
  * to the REST API wrapper (like handeling exceptions). So you can have a builder
  * with this build function:
@@ -36,7 +36,7 @@ namespace WindowsAzure\Core;
  * </code>
  *
  * @category  Microsoft
- * @package   WindowsAzure\Core
+ * @package   WindowsAzure\Common\Internal
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
@@ -48,7 +48,7 @@ interface IServiceBuilder
     /**
      * Creates an object passed $type configured with $config.
      *
-     * @param WindowsAzure\Core\Configuration $config The configuration.
+     * @param WindowsAzure\Common\Configuration $config The configuration.
      * @param string                          $type   The type name.
      * 
      * @return mix

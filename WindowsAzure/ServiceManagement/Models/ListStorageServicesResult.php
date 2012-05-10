@@ -23,8 +23,8 @@
  */
  
 namespace WindowsAzure\Services\ServiceManagement\Models;
-use WindowsAzure\Utilities;
-use WindowsAzure\Resources;
+use WindowsAzure\Common\Internal\Utilities;
+use WindowsAzure\Common\Internal\Resources;
 
 /**
  * The result of calling listStorageServices API.

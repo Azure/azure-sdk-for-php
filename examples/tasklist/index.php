@@ -32,7 +32,7 @@
 require_once '..\client\client.php';
 use Client\CloudSubscription;
 use Client\CloudTable;
-use WindowsAzure\Utilities;
+use WindowsAzure\Common\Internal\Utilities;
 use WindowsAzure\Services\Table\Models\EdmType;
 
 $subscriptionId      = 'Your subscription';

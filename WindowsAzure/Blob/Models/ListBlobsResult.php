@@ -23,10 +23,10 @@
  */
  
 namespace WindowsAzure\Blob\Models;
-use WindowsAzure\Resources;
+use WindowsAzure\Common\Internal\Resources;
 use WindowsAzure\Blob\Models\Blob;
-use WindowsAzure\Utilities;
-use WindowsAzure\Core\InvalidArgumentTypeException;
+use WindowsAzure\Common\Internal\Utilities;
+use WindowsAzure\Common\Internal\InvalidArgumentTypeException;
 
 /**
  * Hold result of calliing listBlobs wrapper.

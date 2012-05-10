@@ -23,7 +23,7 @@
  */
 namespace Tests\Unit\WindowsAzure\ServiceRuntime;
 use Tests\Framework\TestResources;
-use WindowsAzure\Utilities;
+use WindowsAzure\Common\Internal\Utilities;
 use WindowsAzure\ServiceRuntime\ChunkedGoalStateDeserializer;
 use WindowsAzure\ServiceRuntime\FileInputChannel;
 use WindowsAzure\ServiceRuntime\Protocol1RuntimeCurrentStateClient;

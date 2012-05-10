@@ -15,24 +15,24 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   Tests\Unit\WindowsAzure\Core\Http
+ * @package   Tests\Unit\WindowsAzure\Common\Internal\Http
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
 
-namespace Tests\Unit\WindowsAzure\Core\Http;
-use WindowsAzure\Core\Http\Url;
+namespace Tests\Unit\WindowsAzure\Common\Internal\Http;
+use WindowsAzure\Common\Internal\Http\Url;
 use Tests\Framework\TestResources;
-use WindowsAzure\Resources;
-use WindowsAzure\Core\InvalidArgumentTypeException;
+use WindowsAzure\Common\Internal\Resources;
+use WindowsAzure\Common\Internal\InvalidArgumentTypeException;
 
 /**
  * Unit tests for class Url
  *
  * @category  Microsoft
- * @package   Tests\Unit\WindowsAzure\Core\Http
+ * @package   Tests\Unit\WindowsAzure\Common\Internal\Http
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
@@ -42,8 +42,8 @@ use WindowsAzure\Core\InvalidArgumentTypeException;
 class UrlTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @covers WindowsAzure\Core\Http\Url::__construct
-     * @covers WindowsAzure\Core\Http\Url::_setPathIfEmpty
+     * @covers WindowsAzure\Common\Internal\Http\Url::__construct
+     * @covers WindowsAzure\Common\Internal\Http\Url::_setPathIfEmpty
      */
     public function test__construct()
     {
@@ -58,7 +58,7 @@ class UrlTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers WindowsAzure\Core\Http\Url::__construct
+     * @covers WindowsAzure\Common\Internal\Http\Url::__construct
      */
     public function test__constructEmptyUrlFail()
     {
@@ -71,7 +71,7 @@ class UrlTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers WindowsAzure\Core\Http\Url::__construct
+     * @covers WindowsAzure\Common\Internal\Http\Url::__construct
      */
     public function test__constructNonStringUrlFail()
     {
@@ -84,7 +84,7 @@ class UrlTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers WindowsAzure\Core\Http\Url::__construct
+     * @covers WindowsAzure\Common\Internal\Http\Url::__construct
      */
     public function test__constructInvalidUrlFail()
     {
@@ -97,7 +97,7 @@ class UrlTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers WindowsAzure\Core\Http\Url::__construct
+     * @covers WindowsAzure\Common\Internal\Http\Url::__construct
      */
     public function test__constructWithUrlPath()
     {
@@ -111,7 +111,7 @@ class UrlTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers WindowsAzure\Core\Http\Url::getQuery
+     * @covers WindowsAzure\Common\Internal\Http\Url::getQuery
      */
     public function testGetQuery()
     {
@@ -128,7 +128,7 @@ class UrlTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers WindowsAzure\Core\Http\Url::getQueryVariables
+     * @covers WindowsAzure\Common\Internal\Http\Url::getQueryVariables
      */
     public function testGetQueryVariables()
     {
@@ -145,7 +145,7 @@ class UrlTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers WindowsAzure\Core\Http\Url::setQueryVariable
+     * @covers WindowsAzure\Common\Internal\Http\Url::setQueryVariable
      */
     public function testSetQueryVariable()
     {
@@ -162,7 +162,7 @@ class UrlTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers WindowsAzure\Core\Http\Url::setQueryVariable
+     * @covers WindowsAzure\Common\Internal\Http\Url::setQueryVariable
      */
     public function testSetQueryVariableInvalidKeyFail()
     {
@@ -178,7 +178,7 @@ class UrlTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers WindowsAzure\Core\Http\Url::setQueryVariable
+     * @covers WindowsAzure\Common\Internal\Http\Url::setQueryVariable
      */
     public function testSetQueryVariableEmptyKeyFail()
     {
@@ -194,7 +194,7 @@ class UrlTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers WindowsAzure\Core\Http\Url::setQueryVariable
+     * @covers WindowsAzure\Common\Internal\Http\Url::setQueryVariable
      */
     public function testSetQueryVariableInvalidValueFail()
     {
@@ -210,7 +210,7 @@ class UrlTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers WindowsAzure\Core\Http\Url::setQueryVariable
+     * @covers WindowsAzure\Common\Internal\Http\Url::setQueryVariable
      */
     public function testSetQueryVariableSetEmptyValue()
     {
@@ -228,8 +228,8 @@ class UrlTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers WindowsAzure\Core\Http\Url::getUrl
-     * @covers WindowsAzure\Core\Http\Url::_setPathIfEmpty
+     * @covers WindowsAzure\Common\Internal\Http\Url::getUrl
+     * @covers WindowsAzure\Common\Internal\Http\Url::_setPathIfEmpty
      */
     public function testGetUrl()
     {
@@ -245,7 +245,7 @@ class UrlTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers WindowsAzure\Core\Http\Url::setUrlPath
+     * @covers WindowsAzure\Common\Internal\Http\Url::setUrlPath
      */
     public function testSetUrlPath()
     {
@@ -262,7 +262,7 @@ class UrlTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers WindowsAzure\Core\Http\Url::appendUrlPath
+     * @covers WindowsAzure\Common\Internal\Http\Url::appendUrlPath
      */
     public function testAppendUrlPath()
     {
@@ -280,8 +280,8 @@ class UrlTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers WindowsAzure\Core\Http\Url::__toString
-     * @covers WindowsAzure\Core\Http\Url::_setPathIfEmpty
+     * @covers WindowsAzure\Common\Internal\Http\Url::__toString
+     * @covers WindowsAzure\Common\Internal\Http\Url::_setPathIfEmpty
      */
     public function test__toString()
     {
@@ -297,7 +297,7 @@ class UrlTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers WindowsAzure\Core\Http\Url::__clone
+     * @covers WindowsAzure\Common\Internal\Http\Url::__clone
      */
     public function test__clone()
     {
@@ -314,7 +314,7 @@ class UrlTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers WindowsAzure\Core\Http\Url::setQueryVariables
+     * @covers WindowsAzure\Common\Internal\Http\Url::setQueryVariables
      */
     public function testSetQueryVariables()
     {

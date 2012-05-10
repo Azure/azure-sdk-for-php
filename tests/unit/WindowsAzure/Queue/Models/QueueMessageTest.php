@@ -23,9 +23,9 @@
  */
 
 namespace Tests\Unit\WindowsAzure\Services\Queue\Models;
-use WindowsAzure\Utilities;
+use WindowsAzure\Common\Internal\Utilities;
 use WindowsAzure\Services\Queue\Models\QueueMessage;
-use WindowsAzure\Core\Serialization\XmlSerializer;
+use WindowsAzure\Common\Internal\Serialization\XmlSerializer;
 
 /**
  * Unit tests for class QueueMessage

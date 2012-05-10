@@ -23,8 +23,8 @@
  */
  
 namespace WindowsAzure\Services\Queue\Models;
-use WindowsAzure\Utilities;
-use WindowsAzure\Core\Serialization\XmlSerializer;
+use WindowsAzure\Common\Internal\Utilities;
+use WindowsAzure\Common\Internal\Serialization\XmlSerializer;
 
 /**
  * Wrappers queue message text.

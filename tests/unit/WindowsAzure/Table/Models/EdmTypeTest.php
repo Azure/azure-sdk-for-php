@@ -23,7 +23,7 @@
  */
 namespace Tests\Unit\WindowsAzure\Services\Table\Models;
 use WindowsAzure\Services\Table\Models\EdmType;
-use WindowsAzure\Utilities;
+use WindowsAzure\Common\Internal\Utilities;
 
 /**
  * Unit tests for class EdmTypeTest

@@ -23,7 +23,7 @@
  */
 
 namespace WindowsAzure\ServiceRuntime;
-use WindowsAzure\Resources;
+use WindowsAzure\Common\Internal\Resources;
 
 /**
  * Represents the Windows Azure environment in which an instance of a role is 

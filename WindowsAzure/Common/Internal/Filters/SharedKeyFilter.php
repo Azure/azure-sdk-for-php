@@ -15,25 +15,25 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   WindowsAzure\Core\Filters
+ * @package   WindowsAzure\Common\Internal\Filters
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
  
-namespace WindowsAzure\Core\Filters;
-use WindowsAzure\Resources;
-use WindowsAzure\Core\IServiceFilter;
-use WindowsAzure\Core\Authentication\SharedKeyAuthScheme;
-use WindowsAzure\Core\Authentication\TableSharedKeyLiteAuthScheme;
-use WindowsAzure\Core\InvalidArgumentTypeException;
+namespace WindowsAzure\Common\Internal\Filters;
+use WindowsAzure\Common\Internal\Resources;
+use WindowsAzure\Common\Internal\IServiceFilter;
+use WindowsAzure\Common\Internal\Authentication\SharedKeyAuthScheme;
+use WindowsAzure\Common\Internal\Authentication\TableSharedKeyLiteAuthScheme;
+use WindowsAzure\Common\Internal\InvalidArgumentTypeException;
 
 /**
  * Adds authentication header to the http request object.
  *
  * @category  Microsoft
- * @package   WindowsAzure\Core\Filters
+ * @package   WindowsAzure\Common\Internal\Filters
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
@@ -52,7 +52,7 @@ class SharedKeyFilter implements IServiceFilter
      * @param string $type        storage account type.
      * 
      * @return
-     * WindowsAzure\Core\Authentication\StorageAuthScheme
+     * WindowsAzure\Common\Internal\Authentication\StorageAuthScheme
      *         
      */
     public function __construct($accountName, $accountKey, $type)

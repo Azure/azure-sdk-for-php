@@ -23,7 +23,7 @@
  */
  
 namespace WindowsAzure\Services\Table\Models;
-use WindowsAzure\Utilities;
+use WindowsAzure\Common\Internal\Utilities;
 
 /**
  * Holds result of getTable API.

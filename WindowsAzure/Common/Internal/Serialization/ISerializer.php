@@ -15,20 +15,20 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   WindowsAzure\Core\Serialization
+ * @package   WindowsAzure\Common\Internal\Serialization
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
  
-namespace WindowsAzure\Core\Serialization;
+namespace WindowsAzure\Common\Internal\Serialization;
 
 /**
  * The serialization interface.
  *
  * @category  Microsoft
- * @package   WindowsAzure\Core\Serialization
+ * @package   WindowsAzure\Common\Internal\Serialization
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0

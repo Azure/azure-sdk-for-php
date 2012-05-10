@@ -15,22 +15,22 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   WindowsAzure\Core\Authentication
+ * @package   WindowsAzure\Common\Internal\Authentication
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
  
-namespace WindowsAzure\Core\Authentication;
-use WindowsAzure\Resources;
-use WindowsAzure\Utilities;
+namespace WindowsAzure\Common\Internal\Authentication;
+use WindowsAzure\Common\Internal\Resources;
+use WindowsAzure\Common\Internal\Utilities;
 
 /**
  * Base class for azure authentication schemes.
  *
  * @category  Microsoft
- * @package   WindowsAzure\Core\Authentication
+ * @package   WindowsAzure\Common\Internal\Authentication
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
@@ -49,7 +49,7 @@ abstract class StorageAuthScheme
      * @param string $accountKey  storage account primary or secondary key.
      * 
      * @return 
-     * WindowsAzure\Core\Authentication\StorageAuthScheme
+     * WindowsAzure\Common\Internal\Authentication\StorageAuthScheme
      */
     public function __construct($accountName, $accountKey)
     {

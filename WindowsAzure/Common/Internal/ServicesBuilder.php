@@ -15,24 +15,24 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   WindowsAzure\Core
+ * @package   WindowsAzure\Common\Internal
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
  
-namespace WindowsAzure\Core;
-use WindowsAzure\Resources;
-use WindowsAzure\Utilities;
-use WindowsAzure\Core\Http\HttpClient;
-use WindowsAzure\Core\IServiceBuilder;
-use WindowsAzure\Core\Configuration;
-use WindowsAzure\Core\Filters\DateFilter;
-use WindowsAzure\Core\Filters\HeadersFilter;
-use WindowsAzure\Core\Filters\SharedKeyFilter;
-use WindowsAzure\Core\Filters\WrapFilter;
-use WindowsAzure\Core\InvalidArgumentTypeException;
+namespace WindowsAzure\Common\Internal;
+use WindowsAzure\Common\Internal\Resources;
+use WindowsAzure\Common\Internal\Utilities;
+use WindowsAzure\Common\Internal\Http\HttpClient;
+use WindowsAzure\Common\Internal\IServiceBuilder;
+use WindowsAzure\Common\Configuration;
+use WindowsAzure\Common\Internal\Filters\DateFilter;
+use WindowsAzure\Common\Internal\Filters\HeadersFilter;
+use WindowsAzure\Common\Internal\Filters\SharedKeyFilter;
+use WindowsAzure\Common\Internal\Filters\WrapFilter;
+use WindowsAzure\Common\Internal\InvalidArgumentTypeException;
 use WindowsAzure\Services\Queue\QueueRestProxy;
 use WindowsAzure\Services\Queue\QueueSettings;
 use WindowsAzure\Blob\Internal\BlobRestProxy;
@@ -44,7 +44,7 @@ use WindowsAzure\Services\Table\TableRestProxy;
 use WindowsAzure\Services\Table\TableSettings;
 use WindowsAzure\Services\Table\Utilities\AtomReaderWriter;
 use WindowsAzure\Services\Table\Utilities\MimeReaderWriter;
-use WindowsAzure\Core\Serialization\XmlSerializer;
+use WindowsAzure\Common\Internal\Serialization\XmlSerializer;
 use WindowsAzure\Services\ServiceManagement\ServiceManagementSettings;
 use WindowsAzure\Services\ServiceManagement\ServiceManagementRestProxy;
 
@@ -52,7 +52,7 @@ use WindowsAzure\Services\ServiceManagement\ServiceManagementRestProxy;
  * Builds azure service objects.
  *
  * @category  Microsoft
- * @package   WindowsAzure\Core
+ * @package   WindowsAzure\Common\Internal
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
@@ -120,7 +120,7 @@ class ServicesBuilder implements IServiceBuilder
     /**
      * Builds a queue object.
      *
-     * @param WindowsAzure\Core\Configuration $config configuration.
+     * @param WindowsAzure\Common\Configuration $config configuration.
      * 
      * @return WindowsAzure\Services\Queue\IQueue.
      */
@@ -163,7 +163,7 @@ class ServicesBuilder implements IServiceBuilder
     /**
      * Builds a blob object.
      *
-     * @param WindowsAzure\Core\Configuration $config configuration.
+     * @param WindowsAzure\Common\Configuration $config configuration.
      * 
      * @return WindowsAzure\Blob\Internal\IBlob.
      */
@@ -206,7 +206,7 @@ class ServicesBuilder implements IServiceBuilder
     /**
      * Builds a table object.
      *
-     * @param WindowsAzure\Core\Configuration $config configuration.
+     * @param WindowsAzure\Common\Configuration $config configuration.
      * 
      * @return WindowsAzure\Services\Table\ITable.
      */
@@ -252,7 +252,7 @@ class ServicesBuilder implements IServiceBuilder
     /**
      * Builds a service bus client. 
      * 
-     * @param WindowsAzure\Core\Configuration $config The configuration
+     * @param WindowsAzure\Common\Configuration $config The configuration
      * for the service bus. 
      * 
      * @return WindowsAzure\Services\ServiceBus\IServiceBus
@@ -279,7 +279,7 @@ class ServicesBuilder implements IServiceBuilder
     /**
      * Builds a service management object.
      *
-     * @param WindowsAzure\Core\Configuration $config The configuration.
+     * @param WindowsAzure\Common\Configuration $config The configuration.
      * 
      * @return WindowsAzure\Services\ServiceManagement\IServiceManagement
      */
@@ -313,7 +313,7 @@ class ServicesBuilder implements IServiceBuilder
     /**
      * Builds a WRAP client. 
      * 
-     * @param WindowsAzure\Core\Configuration $config The configuration. 
+     * @param WindowsAzure\Common\Configuration $config The configuration. 
      *
      * @return WindowsAzure\Services\ServiceBus\IWrap
      */
@@ -331,7 +331,7 @@ class ServicesBuilder implements IServiceBuilder
     /**
      * Creates an object passed $type configured with $config.
      *
-     * @param WindowsAzure\Core\Configuration $config The configuration.
+     * @param WindowsAzure\Common\Configuration $config The configuration.
      * @param string                          $type   The type name.
      * 
      * @return WindowsAzure\Services\Queue\IQueue

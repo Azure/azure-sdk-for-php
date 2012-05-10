@@ -23,14 +23,14 @@
  */
 
 namespace WindowsAzure\Services\Queue;
-use WindowsAzure\Resources;
-use WindowsAzure\Validate;
-use WindowsAzure\Utilities;
-use WindowsAzure\Core\Http\IHttpClient;
-use WindowsAzure\Core\Http\Url;
-use WindowsAzure\Services\Core\ServiceRestProxy;
-use WindowsAzure\Services\Core\Models\GetServicePropertiesResult;
-use WindowsAzure\Services\Core\Models\ServiceProperties;
+use WindowsAzure\Common\Internal\Resources;
+use WindowsAzure\Common\Internal\Validate;
+use WindowsAzure\Common\Internal\Utilities;
+use WindowsAzure\Common\Internal\Http\IHttpClient;
+use WindowsAzure\Common\Internal\Http\Url;
+use WindowsAzure\Common\Internal\ServiceRestProxy;
+use WindowsAzure\Common\Models\GetServicePropertiesResult;
+use WindowsAzure\Common\Models\ServiceProperties;
 use WindowsAzure\Services\Queue\Models\ListQueuesOptions;
 use WindowsAzure\Services\Queue\Models\ListQueuesResult;
 use WindowsAzure\Services\Queue\Models\CreateQueueOptions;
@@ -368,7 +368,7 @@ class QueueRestProxy extends ServiceRestProxy implements IQueue
      * @param string              $queueName The queue name.
      * @param QueueServiceOptions $options   The optional parameters.
      * 
-     * @return WindowsAzure\Services\Core\Models\GetQueueMetadataResult
+     * @return WindowsAzure\Common\Models\GetQueueMetadataResult
      */
     public function getQueueMetadata($queueName, $options = null)
     {
@@ -417,7 +417,7 @@ class QueueRestProxy extends ServiceRestProxy implements IQueue
      * 
      * @param QueueServiceOptions $options The optional parameters.
      * 
-     * @return WindowsAzure\Services\Core\Models\GetServicePropertiesResult
+     * @return WindowsAzure\Common\Models\GetServicePropertiesResult
      */
     public function getServiceProperties($options = null)
     {
@@ -467,7 +467,7 @@ class QueueRestProxy extends ServiceRestProxy implements IQueue
      * @param string              $queueName The queue name.
      * @param ListMessagesOptions $options   The optional parameters.
      * 
-     * @return WindowsAzure\Services\Core\Models\ListMessagesResult
+     * @return WindowsAzure\Common\Models\ListMessagesResult
      */
     public function listMessages($queueName, $options = null)
     {
@@ -522,7 +522,7 @@ class QueueRestProxy extends ServiceRestProxy implements IQueue
      * @param string              $queueName The queue name.
      * @param PeekMessagesOptions $options   The optional parameters.
      * 
-     * @return WindowsAzure\Services\Core\Models\PeekMessagesResult
+     * @return WindowsAzure\Common\Models\PeekMessagesResult
      */
     public function peekMessages($queueName, $options = null)
     {
@@ -693,7 +693,7 @@ class QueueRestProxy extends ServiceRestProxy implements IQueue
      * @param QueueServiceOptions $options                    The optional 
      * parameters.
      * 
-     * @return WindowsAzure\Services\Core\Models\UpdateMessageResult
+     * @return WindowsAzure\Common\Models\UpdateMessageResult
      */
     public function updateMessage($queueName, $messageId, $popReceipt, $messageText, 
         $visibilityTimeoutInSeconds, $options = null

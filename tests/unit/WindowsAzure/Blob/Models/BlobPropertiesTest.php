@@ -24,7 +24,7 @@
 namespace Tests\Unit\WindowsAzure\Blob\Models;
 use Tests\Framework\TestResources;
 use WindowsAzure\Blob\Models\BlobProperties;
-use WindowsAzure\Utilities;
+use WindowsAzure\Common\Internal\Utilities;
 
 /**
  * Unit tests for class BlobProperties

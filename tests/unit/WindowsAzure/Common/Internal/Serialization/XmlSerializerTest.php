@@ -15,23 +15,23 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   Tests\Unit\WindowsAzure\Core\Serialization
+ * @package   Tests\Unit\WindowsAzure\Common\Internal\Serialization
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
 
-namespace Tests\Unit\WindowsAzure\Core\Serialization;
+namespace Tests\Unit\WindowsAzure\Common\Internal\Serialization;
 use Tests\Framework\TestResources;
-use WindowsAzure\Core\Serialization\XmlSerializer;
-use WindowsAzure\Services\Core\Models\ServiceProperties;
+use WindowsAzure\Common\Internal\Serialization\XmlSerializer;
+use WindowsAzure\Common\Models\ServiceProperties;
 
 /**
  * Unit tests for class XmlSerializer
  *
  * @category  Microsoft
- * @package   Tests\Unit\WindowsAzure\Core\Serialization
+ * @package   Tests\Unit\WindowsAzure\Common\Internal\Serialization
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
@@ -41,8 +41,8 @@ use WindowsAzure\Services\Core\Models\ServiceProperties;
 class XmlSerializerTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @covers WindowsAzure\Core\Serialization\XmlSerializer::unserialize
-     * @covers WindowsAzure\Core\Serialization\XmlSerializer::_sxml2arr
+     * @covers WindowsAzure\Common\Internal\Serialization\XmlSerializer::unserialize
+     * @covers WindowsAzure\Common\Internal\Serialization\XmlSerializer::_sxml2arr
      */
     public function testUnserialize()
     {
@@ -60,8 +60,8 @@ class XmlSerializerTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers WindowsAzure\Core\Serialization\XmlSerializer::serialize
-     * @covers WindowsAzure\Core\Serialization\XmlSerializer::_arr2xml
+     * @covers WindowsAzure\Common\Internal\Serialization\XmlSerializer::serialize
+     * @covers WindowsAzure\Common\Internal\Serialization\XmlSerializer::_arr2xml
      */
     public function testSerialize()
     {
@@ -80,8 +80,8 @@ class XmlSerializerTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\Core\Serialization\XmlSerializer::serialize
-     * @covers WindowsAzure\Core\Serialization\XmlSerializer::_arr2xml
+     * @covers WindowsAzure\Common\Internal\Serialization\XmlSerializer::serialize
+     * @covers WindowsAzure\Common\Internal\Serialization\XmlSerializer::_arr2xml
      */
     public function testSerializeNoArray()
     {
@@ -98,8 +98,8 @@ class XmlSerializerTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers WindowsAzure\Core\Serialization\XmlSerializer::serialize
-     * @covers WindowsAzure\Core\Serialization\XmlSerializer::_arr2xml
+     * @covers WindowsAzure\Common\Internal\Serialization\XmlSerializer::serialize
+     * @covers WindowsAzure\Common\Internal\Serialization\XmlSerializer::_arr2xml
      */
     public function testSerializeAttribute()
     {

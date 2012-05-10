@@ -24,7 +24,7 @@
  
 namespace Tests\Framework;
 
-use WindowsAzure\Core\IServiceFilter;
+use WindowsAzure\Common\Internal\IServiceFilter;
 
 class FiddlerFilter implements IServiceFilter {
     protected $site = '127.0.0.1';

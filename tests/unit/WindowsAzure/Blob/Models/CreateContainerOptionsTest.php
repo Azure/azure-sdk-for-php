@@ -24,7 +24,7 @@
 
 namespace Tests\Unit\WindowsAzure\Blob\Models;
 use WindowsAzure\Blob\Models\CreateContainerOptions;
-use WindowsAzure\Core\InvalidArgumentTypeException;
+use WindowsAzure\Common\Internal\InvalidArgumentTypeException;
 
 /**
  * Unit tests for class CreateContainerOptions

@@ -23,9 +23,9 @@
  */
  
 namespace WindowsAzure\Services\Table\Models;
-use WindowsAzure\Utilities;
-use WindowsAzure\Validate;
-use WindowsAzure\Resources;
+use WindowsAzure\Common\Internal\Utilities;
+use WindowsAzure\Common\Internal\Validate;
+use WindowsAzure\Common\Internal\Resources;
 
 /**
  * Basic Windows Azure EDM Types used for table entity properties.

@@ -24,7 +24,7 @@
 
 namespace WindowsAzure\Services\Queue\Models;
 use WindowsAzure\Services\Queue\Models\WindowsAzureQueueMessage;
-use WindowsAzure\Utilities;
+use WindowsAzure\Common\Internal\Utilities;
 
 /**
  * Holds results of listMessages wrapper.

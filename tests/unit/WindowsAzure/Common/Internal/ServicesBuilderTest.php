@@ -15,28 +15,28 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   Tests\Unit\WindowsAzure\Core
+ * @package   Tests\Unit\WindowsAzure\Common\Internal
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
 
-namespace Tests\Unit\WindowsAzure\Core;
+namespace Tests\Unit\WindowsAzure\Common\Internal;
 use Tests\Framework\TestResources;
-use WindowsAzure\Resources;
-use WindowsAzure\Core\ServicesBuilder;
-use WindowsAzure\Core\Configuration;
+use WindowsAzure\Common\Internal\Resources;
+use WindowsAzure\Common\Internal\ServicesBuilder;
+use WindowsAzure\Common\Configuration;
 use WindowsAzure\Services\Queue\QueueSettings;
 use WindowsAzure\Blob\BlobSettings;
 use WindowsAzure\Services\Table\TableSettings;
-use WindowsAzure\Core\InvalidArgumentTypeException;
+use WindowsAzure\Common\Internal\InvalidArgumentTypeException;
 
 /**
  * Unit tests for class ServicesBuilder
  *
  * @category  Microsoft
- * @package   Tests\Unit\WindowsAzure\Core
+ * @package   Tests\Unit\WindowsAzure\Common\Internal
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
@@ -46,9 +46,9 @@ use WindowsAzure\Core\InvalidArgumentTypeException;
 class ServicesBuilderTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @covers WindowsAzure\Core\ServicesBuilder::build
-     * @covers WindowsAzure\Core\ServicesBuilder::_buildQueue
-     * @covers WindowsAzure\Core\ServicesBuilder::_addHeadersFilter
+     * @covers WindowsAzure\Common\Internal\ServicesBuilder::build
+     * @covers WindowsAzure\Common\Internal\ServicesBuilder::_buildQueue
+     * @covers WindowsAzure\Common\Internal\ServicesBuilder::_addHeadersFilter
      */
     public function testBuildForQueue()
     {
@@ -68,9 +68,9 @@ class ServicesBuilderTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers WindowsAzure\Core\ServicesBuilder::build
-     * @covers WindowsAzure\Core\ServicesBuilder::_buildBlob
-     * @covers WindowsAzure\Core\ServicesBuilder::_addHeadersFilter
+     * @covers WindowsAzure\Common\Internal\ServicesBuilder::build
+     * @covers WindowsAzure\Common\Internal\ServicesBuilder::_buildBlob
+     * @covers WindowsAzure\Common\Internal\ServicesBuilder::_addHeadersFilter
      */
     public function testBuildForBlob()
     {
@@ -90,9 +90,9 @@ class ServicesBuilderTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers WindowsAzure\Core\ServicesBuilder::build
-     * @covers WindowsAzure\Core\ServicesBuilder::_buildTable
-     * @covers WindowsAzure\Core\ServicesBuilder::_addHeadersFilter
+     * @covers WindowsAzure\Common\Internal\ServicesBuilder::build
+     * @covers WindowsAzure\Common\Internal\ServicesBuilder::_buildTable
+     * @covers WindowsAzure\Common\Internal\ServicesBuilder::_addHeadersFilter
      */
     public function testBuildForTable()
     {
@@ -112,8 +112,8 @@ class ServicesBuilderTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers WindowsAzure\Core\ServicesBuilder::build
-     * @covers WindowsAzure\Core\ServicesBuilder::_buildQueue
+     * @covers WindowsAzure\Common\Internal\ServicesBuilder::build
+     * @covers WindowsAzure\Common\Internal\ServicesBuilder::_buildQueue
      */
     public function testBuildWithInvalidTypeFail()
     {

@@ -23,8 +23,8 @@
  */
  
 namespace WindowsAzure\Services\ServiceBus;
-use WindowsAzure\Core\Configuration;
-use WindowsAzure\Resources;
+use WindowsAzure\Common\Configuration;
+use WindowsAzure\Common\Internal\Resources;
 
 /**
  * Factory for creating IServiceBus objects
@@ -42,8 +42,8 @@ class ServiceBusService
     /**
      * Creates new object based on the builder type in the $config.
      *
-     * @param WindowsAzure\Core\Configuration    $config  The config object.
-     * @param WindowsAzure\Core\IServicesBuilder $builder The builder object.
+     * @param WindowsAzure\Common\Configuration    $config  The config object.
+     * @param WindowsAzure\Common\Internal\IServicesBuilder $builder The builder object.
      * 
      * @return WindowsAzure\Services\ServiceBus\IServiceBus
      */

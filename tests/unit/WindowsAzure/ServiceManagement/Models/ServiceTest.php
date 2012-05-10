@@ -24,8 +24,8 @@
 
 namespace Tests\Unit\WindowsAzure\Services\ServiceManagement\Models;
 use WindowsAzure\Services\ServiceManagement\Models\Service;
-use WindowsAzure\Core\Serialization\XmlSerializer;
-use WindowsAzure\Resources;
+use WindowsAzure\Common\Internal\Serialization\XmlSerializer;
+use WindowsAzure\Common\Internal\Resources;
 
 
 /**

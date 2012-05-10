@@ -17,24 +17,24 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- * @package    Tests\Unit\WindowsAzure\Core
+ * @package    Tests\Unit\WindowsAzure\Common\Internal
  * @author     Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright  2012 Microsoft Corporation
  * @license    http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link       http://pear.php.net/package/azure-sdk-for-php
  */
 
-namespace Tests\Unit\WindowsAzure\Core;
-use WindowsAzure\Core\Configuration;
+namespace Tests\Unit\WindowsAzure\Common\Internal;
+use WindowsAzure\Common\Configuration;
 use Tests\Framework\TestResources;
-use WindowsAzure\Resources;
-use WindowsAzure\Core\InvalidArgumentTypeException;
+use WindowsAzure\Common\Internal\Resources;
+use WindowsAzure\Common\Internal\InvalidArgumentTypeException;
 use WindowsAzure\Services\Queue\QueueSettings;
 
 /**
  * Unit tests for Configuration class
  *
- * @package    Tests\Unit\WindowsAzure\Core
+ * @package    Tests\Unit\WindowsAzure\Common\Internal
  * @author     Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright  2012 Microsoft Corporation
  * @license    http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
@@ -44,7 +44,7 @@ use WindowsAzure\Services\Queue\QueueSettings;
 class ConfigurationTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @covers WindowsAzure\Core\Configuration::__construct
+     * @covers WindowsAzure\Common\Configuration::__construct
      */
     public function test__construct()
     {
@@ -57,7 +57,7 @@ class ConfigurationTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-    * @covers WindowsAzure\Core\Configuration::getInstance
+    * @covers WindowsAzure\Common\Configuration::getInstance
     */
     public function testGetInstance()
     {
@@ -67,7 +67,7 @@ class ConfigurationTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-    * @covers WindowsAzure\Core\Configuration::getProperties
+    * @covers WindowsAzure\Common\Configuration::getProperties
     */
     public function testGetProperties()
     {
@@ -80,7 +80,7 @@ class ConfigurationTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-    * @covers WindowsAzure\Core\Configuration::getProperty
+    * @covers WindowsAzure\Common\Configuration::getProperty
     */
     public function testGetProperty()
     {
@@ -93,7 +93,7 @@ class ConfigurationTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-    * @covers WindowsAzure\Core\Configuration::setProperty
+    * @covers WindowsAzure\Common\Configuration::setProperty
     */
     public function testSetProperty()
     {
@@ -110,7 +110,7 @@ class ConfigurationTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-    * @covers WindowsAzure\Core\Configuration::setProperty
+    * @covers WindowsAzure\Common\Configuration::setProperty
     */
     public function testSetPropertyWithNonStringKeyFail()
     {
@@ -121,8 +121,8 @@ class ConfigurationTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-    * @covers WindowsAzure\Core\Configuration::create
-    * @covers WindowsAzure\Core\Configuration::_useStorageEmulatorConfig
+    * @covers WindowsAzure\Common\Configuration::create
+    * @covers WindowsAzure\Common\Configuration::_useStorageEmulatorConfig
     */
     public function testCreate()
     {
@@ -136,8 +136,8 @@ class ConfigurationTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-    * @covers WindowsAzure\Core\Configuration::create
-    * @covers WindowsAzure\Core\Configuration::_useStorageEmulatorConfig
+    * @covers WindowsAzure\Common\Configuration::create
+    * @covers WindowsAzure\Common\Configuration::_useStorageEmulatorConfig
     */
     public function testCreateWithInvalidTypeFail()
     {
@@ -151,7 +151,7 @@ class ConfigurationTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers WindowsAzure\Core\Configuration::isEmulated
+     * @covers WindowsAzure\Common\Configuration::isEmulated
      */
     public function testIsEmulated()
     {

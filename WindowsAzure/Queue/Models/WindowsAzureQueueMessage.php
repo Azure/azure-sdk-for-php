@@ -23,8 +23,8 @@
  */
  
 namespace WindowsAzure\Services\Queue\Models;
-use WindowsAzure\Resources;
-use WindowsAzure\Utilities;
+use WindowsAzure\Common\Internal\Resources;
+use WindowsAzure\Common\Internal\Utilities;
 
 /**
  * Holds data for single WindowsAzure queue message.

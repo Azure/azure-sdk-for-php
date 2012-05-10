@@ -23,10 +23,10 @@
  */
  
 namespace WindowsAzure\Blob;
-use WindowsAzure\Validate;
-use WindowsAzure\Core\Configuration;
-use WindowsAzure\Core\IServiceBuilder;
-use WindowsAzure\Resources;
+use WindowsAzure\Common\Internal\Validate;
+use WindowsAzure\Common\Configuration;
+use WindowsAzure\Common\Internal\IServiceBuilder;
+use WindowsAzure\Common\Internal\Resources;
 
 /**
  * Factory for creating IBlob objects.
@@ -44,8 +44,8 @@ class BlobService
     /**
      * Creates new object based on the builder type in the $config.
      *
-     * @param WindowsAzure\Core\Configuration    $config  The config object.
-     * @param WindowsAzure\Core\IServicesBuilder $builder The builder object.
+     * @param WindowsAzure\Common\Configuration    $config  The config object.
+     * @param WindowsAzure\Common\Internal\IServicesBuilder $builder The builder object.
      * 
      * @return WindowsAzure\Blob\Internal\IBlob
      */

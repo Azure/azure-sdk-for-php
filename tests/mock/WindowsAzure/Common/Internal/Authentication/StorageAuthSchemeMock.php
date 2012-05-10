@@ -23,8 +23,8 @@
  * @link       http://pear.php.net/package/azure-sdk-for-php
  */
  
-namespace Tests\Mock\WindowsAzure\Core\Authentication;
-use WindowsAzure\Core\Authentication\StorageAuthScheme;
+namespace Tests\Mock\WindowsAzure\Common\Internal\Authentication;
+use WindowsAzure\Common\Internal\Authentication\StorageAuthScheme;
 
 /**
  * Mock class to wrap StorageAuthScheme class.

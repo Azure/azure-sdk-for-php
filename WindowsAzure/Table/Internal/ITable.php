@@ -23,7 +23,7 @@
  */
  
 namespace WindowsAzure\Services\Table;
-use WindowsAzure\Core\FilterableService;
+use WindowsAzure\Common\Internal\FilterableService;
 
 /**
  * This interface has all REST APIs provided by Windows Azure for Table service.
@@ -44,7 +44,7 @@ interface ITable extends FilterableService
     * 
     * @param Models\TableServiceOptions $options optional table service options.
     * 
-    * @return WindowsAzure\Services\Core\Models\GetServicePropertiesResult
+    * @return WindowsAzure\Common\Models\GetServicePropertiesResult
     * 
     * @see http://msdn.microsoft.com/en-us/library/windowsazure/hh452238.aspx
     */

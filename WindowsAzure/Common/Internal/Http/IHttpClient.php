@@ -15,20 +15,20 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   WindowsAzure\Core\Http
+ * @package   WindowsAzure\Common\Internal\Http
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
  
-namespace WindowsAzure\Core\Http;
+namespace WindowsAzure\Common\Internal\Http;
 
 /**
  * Defines required methods for a HTTP client proxy.
  *
  * @category  Microsoft
- * @package   WindowsAzure\Core\Http
+ * @package   WindowsAzure\Common\Internal\Http
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
@@ -40,7 +40,7 @@ interface IHttpClient
     /**
      * Sets the request url.
      *
-     * @param WindowsAzure\Core\Http\IUrl $url request url.
+     * @param WindowsAzure\Common\Internal\Http\IUrl $url request url.
      * 
      * @return none.
      */
@@ -49,7 +49,7 @@ interface IHttpClient
     /**
      * Gets request url.
      *
-     * @return WindowsAzure\Core\Http\IUrl
+     * @return WindowsAzure\Common\Internal\Http\IUrl
      */
     public function getUrl();
     
@@ -173,7 +173,7 @@ interface IHttpClient
     /**
      * Makes deep copy from the current object.
      * 
-     * @return WindowsAzure\Core\Http\HttpClient
+     * @return WindowsAzure\Common\Internal\Http\HttpClient
      */
     public function __clone();
     

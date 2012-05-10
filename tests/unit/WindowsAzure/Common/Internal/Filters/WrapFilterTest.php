@@ -22,11 +22,11 @@
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
 use Tests\Framework\TestResources;
-use WindowsAzure\Core\Filters\WrapFilter;
-use WindowsAzure\Core\Http\HttpClient;
-use WindowsAzure\Core\Http\Url;
-use WindowsAzure\Resources;
-use WindowsAzure\Core\InvalidArgumentTypeException;
+use WindowsAzure\Common\Internal\Filters\WrapFilter;
+use WindowsAzure\Common\Internal\Http\HttpClient;
+use WindowsAzure\Common\Internal\Http\Url;
+use WindowsAzure\Common\Internal\Resources;
+use WindowsAzure\Common\Internal\InvalidArgumentTypeException;
 
 /**
  * Unit tests for class WrapFilterTest
@@ -42,8 +42,8 @@ use WindowsAzure\Core\InvalidArgumentTypeException;
 class WrapFilterTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @covers WindowsAzure\Core\Filters\WrapFilter::handleRequest
-     * @covers WindowsAzure\Core\Filters\WrapFilter::__construct
+     * @covers WindowsAzure\Common\Internal\Filters\WrapFilter::handleRequest
+     * @covers WindowsAzure\Common\Internal\Filters\WrapFilter::__construct
      */
     public function testHandleRequest()
     {
@@ -80,7 +80,7 @@ class WrapFilterTest extends \PHPUnit_Framework_TestCase
     
     
     /**
-     * @covers WindowsAzure\Core\Filters\WrapFilter::handleResponse
+     * @covers WindowsAzure\Common\Internal\Filters\WrapFilter::handleResponse
      */
     public function testHandleResponse()
     {

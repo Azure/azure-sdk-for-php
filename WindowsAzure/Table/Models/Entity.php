@@ -23,9 +23,9 @@
  */
  
 namespace WindowsAzure\Services\Table\Models;
-use WindowsAzure\Utilities;
-use WindowsAzure\Resources;
-use WindowsAzure\Validate;
+use WindowsAzure\Common\Internal\Utilities;
+use WindowsAzure\Common\Internal\Resources;
+use WindowsAzure\Common\Internal\Validate;
 
 /**
  * Represents entity object used in tables

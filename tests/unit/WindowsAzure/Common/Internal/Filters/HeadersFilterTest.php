@@ -15,23 +15,23 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   Tests\Unit\WindowsAzure\Core\Filters
+ * @package   Tests\Unit\WindowsAzure\Common\Internal\Filters
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
 
-namespace Tests\Unit\WindowsAzure\Core\Filters;
-use WindowsAzure\Core\Filters\HeadersFilter;
-use WindowsAzure\Core\Http\HttpClient;
-use WindowsAzure\Resources;
+namespace Tests\Unit\WindowsAzure\Common\Internal\Filters;
+use WindowsAzure\Common\Internal\Filters\HeadersFilter;
+use WindowsAzure\Common\Internal\Http\HttpClient;
+use WindowsAzure\Common\Internal\Resources;
 
 /**
  * Unit tests for class HeadersFilter
  *
  * @category  Microsoft
- * @package   Tests\Unit\WindowsAzure\Core\Filters
+ * @package   Tests\Unit\WindowsAzure\Common\Internal\Filters
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
@@ -41,8 +41,8 @@ use WindowsAzure\Resources;
 class HeadersFilterTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @covers WindowsAzure\Core\Filters\HeadersFilter::handleRequest
-     * @covers WindowsAzure\Core\Filters\HeadersFilter::__construct
+     * @covers WindowsAzure\Common\Internal\Filters\HeadersFilter::handleRequest
+     * @covers WindowsAzure\Common\Internal\Filters\HeadersFilter::__construct
      */
     public function testHandleRequestEmptyHeaders()
     {
@@ -58,8 +58,8 @@ class HeadersFilterTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers WindowsAzure\Core\Filters\HeadersFilter::handleRequest
-     * @covers WindowsAzure\Core\Filters\HeadersFilter::__construct
+     * @covers WindowsAzure\Common\Internal\Filters\HeadersFilter::handleRequest
+     * @covers WindowsAzure\Common\Internal\Filters\HeadersFilter::__construct
      */
     public function testHandleRequestOneHeader()
     {
@@ -79,8 +79,8 @@ class HeadersFilterTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers WindowsAzure\Core\Filters\HeadersFilter::handleRequest
-     * @covers WindowsAzure\Core\Filters\HeadersFilter::__construct
+     * @covers WindowsAzure\Common\Internal\Filters\HeadersFilter::handleRequest
+     * @covers WindowsAzure\Common\Internal\Filters\HeadersFilter::__construct
      */
     public function testHandleRequestMultipleHeaders()
     {
@@ -103,7 +103,7 @@ class HeadersFilterTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers WindowsAzure\Core\Filters\HeadersFilter::handleResponse
+     * @covers WindowsAzure\Common\Internal\Filters\HeadersFilter::handleResponse
      */
     public function testHandleResponse()
     {

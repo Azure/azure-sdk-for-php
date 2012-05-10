@@ -15,22 +15,22 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   WindowsAzure\Services\Core\Models
+ * @package   WindowsAzure\Common\Models
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
  
-namespace WindowsAzure\Services\Core\Models;
-use WindowsAzure\Services\Core\Models\RetentionPolicy;
-use WindowsAzure\Utilities;
+namespace WindowsAzure\Common\Models;
+use WindowsAzure\Common\Models\RetentionPolicy;
+use WindowsAzure\Common\Internal\Utilities;
 
 /**
  * Holds elements of queue properties logging field.
  *
  * @category  Microsoft
- * @package   WindowsAzure\Services\Core\Models
+ * @package   WindowsAzure\Common\Models
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
@@ -71,7 +71,7 @@ class Logging
     private $_write;
     
     /**
-     * @var WindowsAzure\Services\Core\Models\RetentionPolicy
+     * @var WindowsAzure\Common\Models\RetentionPolicy
      */
     private $_retentionPolicy;
     
@@ -80,7 +80,7 @@ class Logging
      * 
      * @param array $parsedResponse XML response parsed into array.
      * 
-     * @return WindowsAzure\Services\Core\Models\Logging
+     * @return WindowsAzure\Common\Models\Logging
      */
     public static function create($parsedResponse)
     {
@@ -99,7 +99,7 @@ class Logging
     /**
      * Gets retention policy
      * 
-     * @return WindowsAzure\Services\Core\Models\RetentionPolicy
+     * @return WindowsAzure\Common\Models\RetentionPolicy
      *  
      */
     public function getRetentionPolicy()

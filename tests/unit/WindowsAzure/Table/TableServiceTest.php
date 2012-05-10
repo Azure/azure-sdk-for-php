@@ -24,7 +24,7 @@
 
 namespace Tests\Unit\WindowsAzure\Services\Table;
 use WindowsAzure\Services\Table\TableService;
-use WindowsAzure\Core\Configuration;
+use WindowsAzure\Common\Configuration;
 use Tests\Framework\TestResources;
 use WindowsAzure\Services\Table\TableSettings;
 

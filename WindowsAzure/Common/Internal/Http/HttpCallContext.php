@@ -15,24 +15,24 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   WindowsAzure\Core\Http
+ * @package   WindowsAzure\Common\Internal\Http
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
  
-namespace WindowsAzure\Core\Http;
-use WindowsAzure\Utilities;
-use WindowsAzure\Resources;
-use WindowsAzure\Validate;
-use WindowsAzure\Core\Http\Url;
+namespace WindowsAzure\Common\Internal\Http;
+use WindowsAzure\Common\Internal\Utilities;
+use WindowsAzure\Common\Internal\Resources;
+use WindowsAzure\Common\Internal\Validate;
+use WindowsAzure\Common\Internal\Http\Url;
 
 /**
  * Holds basic elements for making HTTP call.
  *
  * @category  Microsoft
- * @package   WindowsAzure\Core\Http
+ * @package   WindowsAzure\Common\Internal\Http
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0

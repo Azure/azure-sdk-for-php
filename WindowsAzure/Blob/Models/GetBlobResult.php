@@ -24,7 +24,7 @@
  
 namespace WindowsAzure\Blob\Models;
 use WindowsAzure\Blob\Models\BlobProperties;
-use WindowsAzure\Utilities;
+use WindowsAzure\Common\Internal\Utilities;
 
 /**
  * Holds result of GetBlob API.

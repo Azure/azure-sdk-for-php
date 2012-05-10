@@ -15,24 +15,24 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   WindowsAzure\Core\Authentication
+ * @package   WindowsAzure\Common\Internal\Authentication
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
  
-namespace WindowsAzure\Core\Authentication;
-use WindowsAzure\Core\Authentication\StorageAuthScheme;
-use WindowsAzure\Resources;
-use WindowsAzure\Utilities;
+namespace WindowsAzure\Common\Internal\Authentication;
+use WindowsAzure\Common\Internal\Authentication\StorageAuthScheme;
+use WindowsAzure\Common\Internal\Resources;
+use WindowsAzure\Common\Internal\Utilities;
 
 /**
  * Provides shared key authentication scheme for blob and queue. For more info
  * check: http://msdn.microsoft.com/en-us/library/windowsazure/dd179428.aspx
  *
  * @category  Microsoft
- * @package   WindowsAzure\Core\Authentication
+ * @package   WindowsAzure\Common\Internal\Authentication
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
@@ -50,7 +50,7 @@ class SharedKeyAuthScheme extends StorageAuthScheme
      * @param string $accountKey  storage account primary or secondary key.
      * 
      * @return 
-     * WindowsAzure\Core\Authentication\SharedKeyAuthScheme
+     * WindowsAzure\Common\Internal\Authentication\SharedKeyAuthScheme
      */
     public function __construct($accountName, $accountKey)
     {

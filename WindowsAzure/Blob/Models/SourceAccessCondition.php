@@ -23,9 +23,9 @@
  */
  
 namespace WindowsAzure\Blob\Models;
-use WindowsAzure\Validate;
-use WindowsAzure\Resources;
-use WindowsAzure\Utilities;
+use WindowsAzure\Common\Internal\Validate;
+use WindowsAzure\Common\Internal\Resources;
+use WindowsAzure\Common\Internal\Utilities;
 
 /**
  * Represents a set of source access conditions to be used for operations

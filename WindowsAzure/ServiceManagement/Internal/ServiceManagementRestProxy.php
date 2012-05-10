@@ -23,11 +23,11 @@
  */
  
 namespace WindowsAzure\Services\ServiceManagement;
-use WindowsAzure\Resources;
-use WindowsAzure\Validate;
-use WindowsAzure\Core\RestProxy;
-use WindowsAzure\Core\Http\HttpCallContext;
-use WindowsAzure\Core\Serialization\XmlSerializer;
+use WindowsAzure\Common\Internal\Resources;
+use WindowsAzure\Common\Internal\Validate;
+use WindowsAzure\Common\Internal\RestProxy;
+use WindowsAzure\Common\Internal\Http\HttpCallContext;
+use WindowsAzure\Common\Internal\Serialization\XmlSerializer;
 use WindowsAzure\Services\ServiceManagement\Models\CreateAffinityGroupOptions;
 use WindowsAzure\Services\ServiceManagement\Models\AffinityGroup;
 use WindowsAzure\Services\ServiceManagement\Models\ListAffinityGroupsResult;
@@ -141,13 +141,13 @@ class ServiceManagementRestProxy extends RestProxy
     /**
      * Initializes new ServiceManagementRestProxy object.
      * 
-     * @param WindowsAzure\Core\Http\IHttpClient          $channel        The HTTP
+     * @param WindowsAzure\Common\Internal\Http\IHttpClient          $channel        The HTTP
      * channel.
      * @param string                                      $subscriptionId The user
      * subscription id.
      * @param string                                      $uri            The service
      * URI.
-     * @param WindowsAzure\Core\Serialization\ISerializer $dataSerializer The data
+     * @param WindowsAzure\Common\Internal\Serialization\ISerializer $dataSerializer The data
      * serializer.
      */
     public function __construct($channel, $subscriptionId, $uri, $dataSerializer)

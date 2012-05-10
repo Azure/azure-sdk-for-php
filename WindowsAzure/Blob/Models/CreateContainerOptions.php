@@ -24,7 +24,7 @@
  
 namespace WindowsAzure\Blob\Models;
 use WindowsAzure\Blob\Models\BlobServiceOptions;
-use WindowsAzure\Validate;
+use WindowsAzure\Common\Internal\Validate;
 
 /**
  * Optional parameters for createContainer API

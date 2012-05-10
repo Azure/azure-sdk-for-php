@@ -23,8 +23,8 @@
  */
 
 namespace Tests\Unit\WindowsAzure;
-use WindowsAzure\Logger;
-use WindowsAzure\Resources;
+use WindowsAzure\Common\Internal\Logger;
+use WindowsAzure\Common\Internal\Resources;
 use Tests\Framework\VirtualFileSystem;
 
 /**
@@ -41,8 +41,8 @@ use Tests\Framework\VirtualFileSystem;
 class LoggerTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @covers WindowsAzure\Logger::log
-     * @covers WindowsAzure\Logger::setLogFile
+     * @covers WindowsAzure\Common\Internal\Logger::log
+     * @covers WindowsAzure\Common\Internal\Logger::setLogFile
      */
     public function testLogWithArray()
     {
@@ -61,8 +61,8 @@ class LoggerTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers WindowsAzure\Logger::log
-     * @covers WindowsAzure\Logger::setLogFile
+     * @covers WindowsAzure\Common\Internal\Logger::log
+     * @covers WindowsAzure\Common\Internal\Logger::setLogFile
      */
     public function testLogWithString()
     {

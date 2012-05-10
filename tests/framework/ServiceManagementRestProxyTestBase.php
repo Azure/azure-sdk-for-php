@@ -23,8 +23,8 @@
  */
  
 namespace Tests\Framework;
-use WindowsAzure\Resources;
-use WindowsAzure\Core\Configuration;
+use WindowsAzure\Common\Internal\Resources;
+use WindowsAzure\Common\Configuration;
 use WindowsAzure\Services\ServiceManagement\ServiceManagementSettings;
 use WindowsAzure\Services\ServiceManagement\ServiceManagementService;
 use WindowsAzure\Services\ServiceManagement\Models\CreateStorageServiceOptions;

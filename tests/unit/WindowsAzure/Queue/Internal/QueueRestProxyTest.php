@@ -24,10 +24,10 @@
  */
 
 namespace Tests\Unit\WindowsAzure\Services\Queue;
-use WindowsAzure\Utilities;
+use WindowsAzure\Common\Internal\Utilities;
 use Tests\Framework\QueueServiceRestProxyTestBase;
-use WindowsAzure\Core\Configuration;
-use WindowsAzure\Services\Core\Models\ServiceProperties;
+use WindowsAzure\Common\Configuration;
+use WindowsAzure\Common\Models\ServiceProperties;
 use WindowsAzure\Services\Queue\QueueRestProxy;
 use WindowsAzure\Services\Queue\IQueue;
 use WindowsAzure\Services\Queue\QueueService;
@@ -43,8 +43,8 @@ use WindowsAzure\Services\Queue\Models\PeekMessagesOptions;
 use WindowsAzure\Services\Queue\Models\UpdateMessageResult;
 use WindowsAzure\Services\Queue\Models\QueueServiceOptions;
 use Tests\Framework\TestResources;
-use WindowsAzure\Resources;
-use WindowsAzure\Core\ServiceException;
+use WindowsAzure\Common\Internal\Resources;
+use WindowsAzure\Common\Internal\ServiceException;
 
 /**
  * Unit tests for QueueRestProxy class
@@ -60,7 +60,7 @@ class QueueRestProxyTest extends QueueServiceRestProxyTestBase
 {
     /**
      * @covers WindowsAzure\Services\Queue\QueueRestProxy::listQueues
-     * @covers WindowsAzure\Services\Core\ServiceRestProxy::send
+     * @covers WindowsAzure\Common\Internal\ServiceRestProxy::send
      */
     public function testListQueuesSimple()
     {
@@ -380,7 +380,7 @@ class QueueRestProxyTest extends QueueServiceRestProxyTestBase
     
     /**
      * @covers WindowsAzure\Services\Queue\QueueRestProxy::createMessage
-     * @covers WindowsAzure\Services\Core\ServiceRestProxy::send
+     * @covers WindowsAzure\Common\Internal\ServiceRestProxy::send
      */
     public function testCreateMessage()
     {
@@ -605,7 +605,7 @@ class QueueRestProxyTest extends QueueServiceRestProxyTestBase
     
     /**
      * @covers WindowsAzure\Services\Queue\QueueRestProxy::clearMessages
-     * @covers WindowsAzure\Services\Core\ServiceRestProxy::send
+     * @covers WindowsAzure\Common\Internal\ServiceRestProxy::send
      */
     public function testClearMessagesWithOptions()
     {
@@ -632,7 +632,7 @@ class QueueRestProxyTest extends QueueServiceRestProxyTestBase
     
     /**
      * @covers WindowsAzure\Services\Queue\QueueRestProxy::clearMessages
-     * @covers WindowsAzure\Services\Core\ServiceRestProxy::send
+     * @covers WindowsAzure\Common\Internal\ServiceRestProxy::send
      */
     public function testClearMessages()
     {

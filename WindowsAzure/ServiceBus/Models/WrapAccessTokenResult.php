@@ -23,9 +23,9 @@
  */
  
 namespace WindowsAzure\Services\ServiceBus\Models;
-use WindowsAzure\Resources;
+use WindowsAzure\Common\Internal\Resources;
 use WindowsAzure\Services\ServiceBus\Models;
-use WindowsAzure\Utilities;
+use WindowsAzure\Common\Internal\Utilities;
 
 /**
  * Container to hold wrap accesss token response object.

@@ -15,27 +15,27 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   Tests\Unit\WindowsAzure\Core\Http
+ * @package   Tests\Unit\WindowsAzure\Common\Internal\Http
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
 
-namespace Tests\Unit\WindowsAzure\Core\Http;
+namespace Tests\Unit\WindowsAzure\Common\Internal\Http;
 use Tests\Framework\TestResources;
-use Tests\Mock\WindowsAzure\Core\Filters\SimpleFilterMock;
-use WindowsAzure\Resources;
-use WindowsAzure\Core\Http\HttpClient;
-use WindowsAzure\Core\Http\Url;
-use WindowsAzure\Core\ServiceException;
-use WindowsAzure\Core\InvalidArgumentTypeException;
+use Tests\Mock\WindowsAzure\Common\Internal\Filters\SimpleFilterMock;
+use WindowsAzure\Common\Internal\Resources;
+use WindowsAzure\Common\Internal\Http\HttpClient;
+use WindowsAzure\Common\Internal\Http\Url;
+use WindowsAzure\Common\Internal\ServiceException;
+use WindowsAzure\Common\Internal\InvalidArgumentTypeException;
 
 /**
  * Unit tests for class HttpClient
  *
  * @category  Microsoft
- * @package   Tests\Unit\WindowsAzure\Core\Http
+ * @package   Tests\Unit\WindowsAzure\Common\Internal\Http
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
@@ -45,7 +45,7 @@ use WindowsAzure\Core\InvalidArgumentTypeException;
 class HttpClientTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @covers WindowsAzure\Core\Http\HttpClient::__construct
+     * @covers WindowsAzure\Common\Internal\Http\HttpClient::__construct
      */
     public function test__construct()
     {
@@ -58,7 +58,7 @@ class HttpClientTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers WindowsAzure\Core\Http\HttpClient::setUrl
+     * @covers WindowsAzure\Common\Internal\Http\HttpClient::setUrl
      */
     public function testSetUrl()
     {
@@ -70,11 +70,11 @@ class HttpClientTest extends \PHPUnit_Framework_TestCase
         $channel->setUrl($url);
         
         // Assert
-        $this->assertInstanceOf('\WindowsAzure\Core\Http\IUrl', $channel->getUrl());
+        $this->assertInstanceOf('\WindowsAzure\Common\Internal\Http\IUrl', $channel->getUrl());
     }
     
     /**
-     * @covers WindowsAzure\Core\Http\HttpClient::getUrl
+     * @covers WindowsAzure\Common\Internal\Http\HttpClient::getUrl
      */
     public function testGetUrl()
     {
@@ -87,12 +87,12 @@ class HttpClientTest extends \PHPUnit_Framework_TestCase
         $channelUrl = $channel->getUrl();
         
         // Assert
-        $this->assertInstanceOf('WindowsAzure\Core\Http\IUrl', $channelUrl);
+        $this->assertInstanceOf('WindowsAzure\Common\Internal\Http\IUrl', $channelUrl);
         $this->assertEquals(TestResources::VALID_URL . '/', $channelUrl);
     }
     
     /**
-     * @covers WindowsAzure\Core\Http\HttpClient::setMethod
+     * @covers WindowsAzure\Common\Internal\Http\HttpClient::setMethod
      */
     public function testSetMethod()
     {
@@ -108,7 +108,7 @@ class HttpClientTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers WindowsAzure\Core\Http\HttpClient::getMethod
+     * @covers WindowsAzure\Common\Internal\Http\HttpClient::getMethod
      */
     public function testGetMethod()
     {
@@ -125,7 +125,7 @@ class HttpClientTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers WindowsAzure\Core\Http\HttpClient::setHeaders
+     * @covers WindowsAzure\Common\Internal\Http\HttpClient::setHeaders
      */
     public function testSetHeaders()
     {
@@ -148,7 +148,7 @@ class HttpClientTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers WindowsAzure\Core\Http\HttpClient::getHeaders
+     * @covers WindowsAzure\Common\Internal\Http\HttpClient::getHeaders
      */
     public function testGetHeaders()
     {
@@ -171,7 +171,7 @@ class HttpClientTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers WindowsAzure\Core\Http\HttpClient::setHeader
+     * @covers WindowsAzure\Common\Internal\Http\HttpClient::setHeader
      */
     public function testSetHeaderNewHeader()
     {
@@ -188,7 +188,7 @@ class HttpClientTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers WindowsAzure\Core\Http\HttpClient::setHeader
+     * @covers WindowsAzure\Common\Internal\Http\HttpClient::setHeader
      */
     public function testSetHeaderExistingHeaderReplace()
     {
@@ -206,7 +206,7 @@ class HttpClientTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers WindowsAzure\Core\Http\HttpClient::setHeader
+     * @covers WindowsAzure\Common\Internal\Http\HttpClient::setHeader
      */
     public function testSetHeaderExistingHeaderAppend()
     {
@@ -225,7 +225,7 @@ class HttpClientTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers WindowsAzure\Core\Http\HttpClient::send
+     * @covers WindowsAzure\Common\Internal\Http\HttpClient::send
      */
     public function testSendSimple()
     {
@@ -242,7 +242,7 @@ class HttpClientTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers WindowsAzure\Core\Http\HttpClient::send
+     * @covers WindowsAzure\Common\Internal\Http\HttpClient::send
      */
     public function testSendWithContent()
     {
@@ -259,7 +259,7 @@ class HttpClientTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers WindowsAzure\Core\Http\HttpClient::send
+     * @covers WindowsAzure\Common\Internal\Http\HttpClient::send
      */
     public function testSendWithOneFilter()
     {
@@ -282,7 +282,7 @@ class HttpClientTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers WindowsAzure\Core\Http\HttpClient::send
+     * @covers WindowsAzure\Common\Internal\Http\HttpClient::send
      */
     public function testSendWithMultipleFilters()
     {
@@ -310,7 +310,7 @@ class HttpClientTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers WindowsAzure\Core\Http\HttpClient::send
+     * @covers WindowsAzure\Common\Internal\Http\HttpClient::send
      */
     public function testSendFail()
     {
@@ -325,7 +325,7 @@ class HttpClientTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers WindowsAzure\Core\Http\HttpClient::setExpectedStatusCode
+     * @covers WindowsAzure\Common\Internal\Http\HttpClient::setExpectedStatusCode
      */
     public function testSetSuccessfulStatusCodeSimple()
     {
@@ -341,7 +341,7 @@ class HttpClientTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers WindowsAzure\Core\Http\HttpClient::setExpectedStatusCode
+     * @covers WindowsAzure\Common\Internal\Http\HttpClient::setExpectedStatusCode
      */
     public function testSetSuccessfulStatusCodeArray()
     {
@@ -357,7 +357,7 @@ class HttpClientTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers WindowsAzure\Core\Http\HttpClient::getSuccessfulStatusCode
+     * @covers WindowsAzure\Common\Internal\Http\HttpClient::getSuccessfulStatusCode
      */
     public function testGetSuccessfulStatusCode()
     {
@@ -374,7 +374,7 @@ class HttpClientTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers WindowsAzure\Core\Http\HttpClient::setConfig
+     * @covers WindowsAzure\Common\Internal\Http\HttpClient::setConfig
      */
     public function testSetConfig()
     {
@@ -391,7 +391,7 @@ class HttpClientTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers WindowsAzure\Core\Http\HttpClient::getConfig
+     * @covers WindowsAzure\Common\Internal\Http\HttpClient::getConfig
      */
     public function testGetConfig()
     {
@@ -409,7 +409,7 @@ class HttpClientTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers WindowsAzure\Core\Http\HttpClient::setBody
+     * @covers WindowsAzure\Common\Internal\Http\HttpClient::setBody
      */
     public function testSetBody()
     {
@@ -425,7 +425,7 @@ class HttpClientTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers WindowsAzure\Core\Http\HttpClient::getBody
+     * @covers WindowsAzure\Common\Internal\Http\HttpClient::getBody
      */
     public function testGetBody()
     {
@@ -442,7 +442,7 @@ class HttpClientTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers WindowsAzure\Core\Http\HttpClient::__clone
+     * @covers WindowsAzure\Common\Internal\Http\HttpClient::__clone
      */
     public function test__clone()
     {
@@ -462,7 +462,7 @@ class HttpClientTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers WindowsAzure\Core\Http\HttpClient::getResponse
+     * @covers WindowsAzure\Common\Internal\Http\HttpClient::getResponse
      */
     public function testGetResponse()
     {
@@ -480,7 +480,7 @@ class HttpClientTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers WindowsAzure\Core\Http\HttpClient::throwIfError
+     * @covers WindowsAzure\Common\Internal\Http\HttpClient::throwIfError
      */
     public function testThrowIfError()
     {

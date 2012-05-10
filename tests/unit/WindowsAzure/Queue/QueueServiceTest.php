@@ -24,7 +24,7 @@
 
 namespace Tests\Unit\WindowsAzure\Services\Queue;
 use WindowsAzure\Services\Queue\QueueService;
-use WindowsAzure\Core\Configuration;
+use WindowsAzure\Common\Configuration;
 use Tests\Framework\TestResources;
 use WindowsAzure\Services\Queue\QueueSettings;
 

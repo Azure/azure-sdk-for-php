@@ -23,7 +23,7 @@
  */
 namespace Tests\Unit\WindowsAzure\ServiceRuntime;
 use Tests\Framework\TestResources;
-use WindowsAzure\Utilities;
+use WindowsAzure\Common\Internal\Utilities;
 use WindowsAzure\ServiceRuntime\AcquireCurrentState;
 use WindowsAzure\ServiceRuntime\CurrentStatus;
 use WindowsAzure\ServiceRuntime\FileInputChannel;

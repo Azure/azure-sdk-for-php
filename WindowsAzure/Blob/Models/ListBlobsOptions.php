@@ -23,7 +23,7 @@
  */
  
 namespace WindowsAzure\Blob\Models;
-use WindowsAzure\Validate;
+use WindowsAzure\Common\Internal\Validate;
 
 /**
  * Short description

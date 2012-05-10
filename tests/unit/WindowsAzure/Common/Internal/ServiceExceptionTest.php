@@ -22,7 +22,7 @@
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
 
-use WindowsAzure\Core\ServiceException;
+use WindowsAzure\Common\Internal\ServiceException;
 
 /**
  * Unit tests for class ServiceException
@@ -38,7 +38,7 @@ use WindowsAzure\Core\ServiceException;
 class ServiceExceptionTest extends PHPUnit_Framework_TestCase
 {
     /**
-     * @covers WindowsAzure\Core\ServiceException::__construct
+     * @covers WindowsAzure\Common\Internal\ServiceException::__construct
      */
     public function test__construct()
     {
@@ -57,7 +57,7 @@ class ServiceExceptionTest extends PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers WindowsAzure\Core\ServiceException::getErrorText
+     * @covers WindowsAzure\Common\Internal\ServiceException::getErrorText
      */
     public function testGetErrorText()
     {
@@ -74,7 +74,7 @@ class ServiceExceptionTest extends PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers WindowsAzure\Core\ServiceException::getErrorReason
+     * @covers WindowsAzure\Common\Internal\ServiceException::getErrorReason
      */
     public function testGetErrorReason()
     {

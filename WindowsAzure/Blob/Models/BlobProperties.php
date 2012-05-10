@@ -23,9 +23,9 @@
  */
  
 namespace WindowsAzure\Blob\Models;
-use WindowsAzure\Resources;
-use WindowsAzure\Validate;
-use WindowsAzure\Utilities;
+use WindowsAzure\Common\Internal\Resources;
+use WindowsAzure\Common\Internal\Validate;
+use WindowsAzure\Common\Internal\Utilities;
 
 /**
  * Represents blob properties

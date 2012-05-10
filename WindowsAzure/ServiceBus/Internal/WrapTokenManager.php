@@ -23,8 +23,8 @@
  */
  
 namespace WindowsAzure\Services\ServiceBus;
-use WindowsAzure\Core\Configuration;
-use WindowsAzure\Resources;
+use WindowsAzure\Common\Configuration;
+use WindowsAzure\Common\Internal\Resources;
 use WindowsAzure\Services\ServiceBus\WrapRestProxy;
 use WindowsAzure\Services\ServiceBus\Models\ActiveToken;
 

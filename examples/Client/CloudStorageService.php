@@ -23,7 +23,7 @@
  */
  
 namespace Client;
-use WindowsAzure\Core\Configuration;
+use WindowsAzure\Common\Configuration;
 use WindowsAzure\Services\Table\TableService;
 use WindowsAzure\Services\Table\TableSettings;
 use WindowsAzure\Blob\BlobService;

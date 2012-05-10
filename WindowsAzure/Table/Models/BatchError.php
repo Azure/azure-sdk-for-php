@@ -23,10 +23,10 @@
  */
  
 namespace WindowsAzure\Services\Table\Models;
-use WindowsAzure\Resources;
-use WindowsAzure\Utilities;
-use WindowsAzure\Validate;
-use WindowsAzure\Core\ServiceException;
+use WindowsAzure\Common\Internal\Resources;
+use WindowsAzure\Common\Internal\Utilities;
+use WindowsAzure\Common\Internal\Validate;
+use WindowsAzure\Common\Internal\ServiceException;
 
 /**
  * Represents an error returned from call to batch API.
@@ -42,7 +42,7 @@ use WindowsAzure\Core\ServiceException;
 class BatchError
 {
     /**
-     * @var WindowsAzure\Core\ServiceException 
+     * @var WindowsAzure\Common\Internal\ServiceException 
      */
     private $_error;
     
@@ -54,7 +54,7 @@ class BatchError
     /**
      * Creates BatchError object.
      * 
-     * @param WindowsAzure\Core\ServiceException $error   The error object.
+     * @param WindowsAzure\Common\Internal\ServiceException $error   The error object.
      * @param array                              $headers The response headers.
      * 
      * @return \WindowsAzure\Services\Table\Models\BatchError 
@@ -80,7 +80,7 @@ class BatchError
     /**
      * Gets the error.
      * 
-     * @return WindowsAzure\Core\ServiceException
+     * @return WindowsAzure\Common\Internal\ServiceException
      */
     public function getError()
     {
@@ -90,7 +90,7 @@ class BatchError
     /**
      * Sets the error.
      * 
-     * @param WindowsAzure\Core\ServiceException $error The error object.
+     * @param WindowsAzure\Common\Internal\ServiceException $error The error object.
      * 
      * @return none
      */

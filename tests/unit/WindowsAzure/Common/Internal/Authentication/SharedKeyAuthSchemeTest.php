@@ -17,22 +17,22 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- * @package    Tests\Unit\WindowsAzure\Core\Authentication
+ * @package    Tests\Unit\WindowsAzure\Common\Internal\Authentication
  * @author     Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright  2012 Microsoft Corporation
  * @license    http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link       http://pear.php.net/package/azure-sdk-for-php
  */
 
-namespace Tests\Unit\WindowsAzure\Core\Authentication;
-use Tests\Mock\WindowsAzure\Core\Authentication\SharedKeyAuthSchemeMock;
-use WindowsAzure\Resources;
+namespace Tests\Unit\WindowsAzure\Common\Internal\Authentication;
+use Tests\Mock\WindowsAzure\Common\Internal\Authentication\SharedKeyAuthSchemeMock;
+use WindowsAzure\Common\Internal\Resources;
 use Tests\Framework\TestResources;
 
 /**
  * Unit tests for SharedKeyAuthScheme class.
  *
- * @package    Tests\Unit\WindowsAzure\Core\Authentication
+ * @package    Tests\Unit\WindowsAzure\Common\Internal\Authentication
  * @author     Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright  2012 Microsoft Corporation
  * @license    http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
@@ -42,7 +42,7 @@ use Tests\Framework\TestResources;
 class SharedKeyAuthSchemeTest extends \PHPUnit_Framework_TestCase
 {
     /**
-    * @covers WindowsAzure\Core\Authentication\SharedKeyAuthScheme::__construct
+    * @covers WindowsAzure\Common\Internal\Authentication\SharedKeyAuthScheme::__construct
     */
     public function test__construct()
     {
@@ -65,7 +65,7 @@ class SharedKeyAuthSchemeTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-    * @covers WindowsAzure\Core\Authentication\SharedKeyAuthScheme::computeSignature
+    * @covers WindowsAzure\Common\Internal\Authentication\SharedKeyAuthScheme::computeSignature
     */
     public function testComputeSignatureSimple()
     {
@@ -86,7 +86,7 @@ class SharedKeyAuthSchemeTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\Core\Authentication\SharedKeyAuthScheme::getAuthorizationHeader
+     * @covers WindowsAzure\Common\Internal\Authentication\SharedKeyAuthScheme::getAuthorizationHeader
      */
     public function testGetAuthorizationHeaderSimple()
     {

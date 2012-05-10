@@ -23,9 +23,9 @@
  */
  
 namespace WindowsAzure\Services\ServiceManagement\Models;
-use WindowsAzure\Resources;
-use WindowsAzure\Utilities;
-use WindowsAzure\Core\Serialization\XmlSerializer;
+use WindowsAzure\Common\Internal\Resources;
+use WindowsAzure\Common\Internal\Utilities;
+use WindowsAzure\Common\Internal\Serialization\XmlSerializer;
 
 /**
  * Windows Azure service basic elements.

@@ -23,14 +23,14 @@
  */
 
 namespace WindowsAzure\Blob\Internal;
-use WindowsAzure\Utilities;
-use WindowsAzure\Resources;
-use WindowsAzure\Validate;
-use WindowsAzure\Services\Core\Models\ServiceProperties;
-use WindowsAzure\Services\Core\ServiceRestProxy;
+use WindowsAzure\Common\Internal\Utilities;
+use WindowsAzure\Common\Internal\Resources;
+use WindowsAzure\Common\Internal\Validate;
+use WindowsAzure\Common\Models\ServiceProperties;
+use WindowsAzure\Common\Internal\ServiceRestProxy;
 use WindowsAzure\Blob\Internal\IBlob;
 use WindowsAzure\Blob\Models\BlobServiceOptions;
-use WindowsAzure\Services\Core\Models\GetServicePropertiesResult;
+use WindowsAzure\Common\Models\GetServicePropertiesResult;
 use WindowsAzure\Blob\Models\ListContainersOptions;
 use WindowsAzure\Blob\Models\ListContainersResult;
 use WindowsAzure\Blob\Models\CreateContainerOptions;
@@ -499,7 +499,7 @@ class BlobRestProxy extends ServiceRestProxy implements IBlob
      * 
      * @param Models\BlobServiceOptions $options The optional parameters.
      * 
-     * @return WindowsAzure\Services\Core\Models\GetServicePropertiesResult
+     * @return WindowsAzure\Common\Models\GetServicePropertiesResult
      * 
      * @see http://msdn.microsoft.com/en-us/library/windowsazure/hh452239.aspx
      */

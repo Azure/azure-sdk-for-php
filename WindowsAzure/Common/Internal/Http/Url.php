@@ -15,24 +15,24 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   WindowsAzure\Core\Http
+ * @package   WindowsAzure\Common\Internal\Http
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
  
-namespace WindowsAzure\Core\Http;
+namespace WindowsAzure\Common\Internal\Http;
 require_once 'Net/URL2.php';
-use WindowsAzure\Validate;
-use WindowsAzure\Resources;
-use WindowsAzure\Core\Http\IUrl;
+use WindowsAzure\Common\Internal\Validate;
+use WindowsAzure\Common\Internal\Resources;
+use WindowsAzure\Common\Internal\Http\IUrl;
 
 /**
  * Default IUrl implementation.
  *
  * @category  Microsoft
- * @package   WindowsAzure\Core\Http
+ * @package   WindowsAzure\Common\Internal\Http
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
@@ -67,7 +67,7 @@ class Url implements IUrl
      * 
      * @param string $url the url to set.
      * 
-     * @return WindowsAzure\Core\Http\Url
+     * @return WindowsAzure\Common\Internal\Http\Url
      */
     public function __construct($url)
     {
@@ -81,7 +81,7 @@ class Url implements IUrl
     /**
      * Makes deep copy from the current object.
      * 
-     * @return WindowsAzure\Core\Http\Url
+     * @return WindowsAzure\Common\Internal\Http\Url
      */
     public function __clone()
     {

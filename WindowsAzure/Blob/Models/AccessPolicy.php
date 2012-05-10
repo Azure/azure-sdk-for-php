@@ -24,8 +24,8 @@
  
 namespace WindowsAzure\Blob\Models;
 
-use WindowsAzure\Utilities;
-use WindowsAzure\Validate;
+use WindowsAzure\Common\Internal\Utilities;
+use WindowsAzure\Common\Internal\Validate;
 
 /**
  * Holds container access policy elements

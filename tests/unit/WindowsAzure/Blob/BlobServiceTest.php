@@ -24,7 +24,7 @@
 
 namespace Tests\Unit\WindowsAzure\Services\Blob;
 use WindowsAzure\Blob\BlobService;
-use WindowsAzure\Core\Configuration;
+use WindowsAzure\Common\Configuration;
 use Tests\Framework\TestResources;
 use WindowsAzure\Blob\BlobSettings;
 

@@ -23,7 +23,7 @@
  */
  
 namespace WindowsAzure\Blob\Internal;
-use WindowsAzure\Core\FilterableService;
+use WindowsAzure\Common\Internal\FilterableService;
 
 /**
  * This interface has all REST APIs provided by Windows Azure for Blob service.
@@ -44,7 +44,7 @@ interface IBlob extends FilterableService
     * 
     * @param Models\BlobServiceOptions $options optional blob service options.
     * 
-    * @return WindowsAzure\Services\Core\Models\GetServicePropertiesResult
+    * @return WindowsAzure\Common\Models\GetServicePropertiesResult
     * 
     * @see http://msdn.microsoft.com/en-us/library/windowsazure/hh452239.aspx
     */

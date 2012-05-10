@@ -15,24 +15,24 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   Tests\Unit\WindowsAzure\Services\Core\Models
+ * @package   Tests\Unit\WindowsAzure\Common\Models
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
 
-namespace Tests\Unit\WindowsAzure\Services\Core\Models;
-use WindowsAzure\Services\Core\Models\Logging;
+namespace Tests\Unit\WindowsAzure\Common\Models;
+use WindowsAzure\Common\Models\Logging;
 use Tests\Framework\TestResources;
-use WindowsAzure\Services\Core\Models\RetentionPolicy;
-use WindowsAzure\Utilities;
+use WindowsAzure\Common\Models\RetentionPolicy;
+use WindowsAzure\Common\Internal\Utilities;
 
 /**
  * Unit tests for class Logging
  *
  * @category  Microsoft
- * @package   Tests\Unit\WindowsAzure\Services\Core\Models
+ * @package   Tests\Unit\WindowsAzure\Common\Models
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
@@ -42,7 +42,7 @@ use WindowsAzure\Utilities;
 class LoggingTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @covers WindowsAzure\Services\Core\Models\Logging::create
+     * @covers WindowsAzure\Common\Models\Logging::create
      */
     public function testCreate()
     {
@@ -61,7 +61,7 @@ class LoggingTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers WindowsAzure\Services\Core\Models\Logging::getRetentionPolicy
+     * @covers WindowsAzure\Common\Models\Logging::getRetentionPolicy
      */
     public function testGetRetentionPolicy()
     {
@@ -79,7 +79,7 @@ class LoggingTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers WindowsAzure\Services\Core\Models\Logging::setRetentionPolicy
+     * @covers WindowsAzure\Common\Models\Logging::setRetentionPolicy
      */
     public function testSetRetentionPolicy()
     {
@@ -97,7 +97,7 @@ class LoggingTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers WindowsAzure\Services\Core\Models\Logging::getWrite
+     * @covers WindowsAzure\Common\Models\Logging::getWrite
      */
     public function testGetWrite()
     {
@@ -115,7 +115,7 @@ class LoggingTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers WindowsAzure\Services\Core\Models\Logging::setWrite
+     * @covers WindowsAzure\Common\Models\Logging::setWrite
      */
     public function testSetWrite()
     {
@@ -133,7 +133,7 @@ class LoggingTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers WindowsAzure\Services\Core\Models\Logging::getRead
+     * @covers WindowsAzure\Common\Models\Logging::getRead
      */
     public function testGetRead()
     {
@@ -151,7 +151,7 @@ class LoggingTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers WindowsAzure\Services\Core\Models\Logging::setRead
+     * @covers WindowsAzure\Common\Models\Logging::setRead
      */
     public function testSetRead()
     {
@@ -169,7 +169,7 @@ class LoggingTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers WindowsAzure\Services\Core\Models\Logging::getDelete
+     * @covers WindowsAzure\Common\Models\Logging::getDelete
      */
     public function testGetDelete()
     {
@@ -187,7 +187,7 @@ class LoggingTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers WindowsAzure\Services\Core\Models\Logging::setDelete
+     * @covers WindowsAzure\Common\Models\Logging::setDelete
      */
     public function testSetDelete()
     {
@@ -205,7 +205,7 @@ class LoggingTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers WindowsAzure\Services\Core\Models\Logging::getVersion
+     * @covers WindowsAzure\Common\Models\Logging::getVersion
      */
     public function testGetVersion()
     {
@@ -223,7 +223,7 @@ class LoggingTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers WindowsAzure\Services\Core\Models\Logging::setVersion
+     * @covers WindowsAzure\Common\Models\Logging::setVersion
      */
     public function testSetVersion()
     {
@@ -241,7 +241,7 @@ class LoggingTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers WindowsAzure\Services\Core\Models\Logging::toArray
+     * @covers WindowsAzure\Common\Models\Logging::toArray
      */
     public function testToArray()
     {

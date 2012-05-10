@@ -15,20 +15,20 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   WindowsAzure\Core
+ * @package   WindowsAzure\Common\Internal
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
  
-namespace WindowsAzure\Core;
+namespace WindowsAzure\Common\Internal;
 
 /**
  * Interface for service with filers.
  *
  * @category  Microsoft
- * @package   WindowsAzure\Core
+ * @package   WindowsAzure\Common\Internal
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
@@ -41,7 +41,7 @@ interface FilterableService
     * Adds new filter to proxy object and returns new BlobRestProxy with
     * that filter.
     *
-    * @param WindowsAzure\Core\IServiceFilter $filter Filter to add for 
+    * @param WindowsAzure\Common\Internal\IServiceFilter $filter Filter to add for 
     * the pipeline.
     * 
     * @return mix.

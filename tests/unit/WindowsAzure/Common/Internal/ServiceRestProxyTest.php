@@ -15,27 +15,27 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   Tests\Unit\WindowsAzure\Core
+ * @package   Tests\Unit\WindowsAzure\Common\Internal
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
 
-namespace Tests\Unit\WindowsAzure\Core;
-use WindowsAzure\Services\Core\ServiceRestProxy;
-use WindowsAzure\Resources;
-use WindowsAzure\Core\Http\HttpClient;
-use WindowsAzure\Core\Http\Url;
-use Tests\Mock\WindowsAzure\Core\Filters\SimpleFilterMock;
+namespace Tests\Unit\WindowsAzure\Common\Internal;
+use WindowsAzure\Common\Internal\ServiceRestProxy;
+use WindowsAzure\Common\Internal\Resources;
+use WindowsAzure\Common\Internal\Http\HttpClient;
+use WindowsAzure\Common\Internal\Http\Url;
+use Tests\Mock\WindowsAzure\Common\Internal\Filters\SimpleFilterMock;
 use WindowsAzure\Blob\Models\AccessCondition;
-use WindowsAzure\Core\Serialization\XmlSerializer;
+use WindowsAzure\Common\Internal\Serialization\XmlSerializer;
 
 /**
  * Unit tests for class ServiceRestProxy
  *
  * @category  Microsoft
- * @package   Tests\Unit\WindowsAzure\Core
+ * @package   Tests\Unit\WindowsAzure\Common\Internal
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
@@ -45,7 +45,7 @@ use WindowsAzure\Core\Serialization\XmlSerializer;
 class ServiceRestProxyTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @covers WindowsAzure\Services\Core\ServiceRestProxy::generateMetadataHeaders
+     * @covers WindowsAzure\Common\Internal\ServiceRestProxy::generateMetadataHeaders
      */
     public function test__construct()
     {
@@ -67,7 +67,7 @@ class ServiceRestProxyTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers  WindowsAzure\Services\Core\ServiceRestProxy::withFilter
+     * @covers  WindowsAzure\Common\Internal\ServiceRestProxy::withFilter
      * @depends test__construct
      */
     public function testWithFilter($restWrapper)
@@ -84,7 +84,7 @@ class ServiceRestProxyTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers  WindowsAzure\Services\Core\ServiceRestProxy::getFilters
+     * @covers  WindowsAzure\Common\Internal\ServiceRestProxy::getFilters
      * @depends test__construct
      */
     public function testGetFilters($restWrapper)
@@ -103,7 +103,7 @@ class ServiceRestProxyTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers  WindowsAzure\Services\Core\ServiceRestProxy::addOptionalAccessConditionHeader
+     * @covers  WindowsAzure\Common\Internal\ServiceRestProxy::addOptionalAccessConditionHeader
      * @depends test__construct
      */
     public function testAddOptionalAccessContitionHeader($restWrapper)
@@ -123,7 +123,7 @@ class ServiceRestProxyTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers  WindowsAzure\Services\Core\ServiceRestProxy::groupQueryValues
+     * @covers  WindowsAzure\Common\Internal\ServiceRestProxy::groupQueryValues
      * @depends test__construct
      */
     public function testGroupQueryValues($restWrapper)
@@ -140,7 +140,7 @@ class ServiceRestProxyTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers  WindowsAzure\Services\Core\ServiceRestProxy::groupQueryValues
+     * @covers  WindowsAzure\Common\Internal\ServiceRestProxy::groupQueryValues
      * @depends test__construct
      */
     public function testGroupQueryValuesWithNulls($restWrapper)
@@ -156,7 +156,7 @@ class ServiceRestProxyTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers  WindowsAzure\Services\Core\ServiceRestProxy::groupQueryValues
+     * @covers  WindowsAzure\Common\Internal\ServiceRestProxy::groupQueryValues
      * @depends test__construct
      */
     public function testGroupQueryValuesWithMix($restWrapper)
@@ -173,7 +173,7 @@ class ServiceRestProxyTest extends \PHPUnit_Framework_TestCase
     }
 
     /** 
-    * @covers WindowsAzure\Services\Core\ServiceRestProxy::addPostParameter
+    * @covers WindowsAzure\Common\Internal\ServiceRestProxy::addPostParameter
     * @depends test__construct
     */
     public function testPostParameter($restWrapper)
@@ -195,7 +195,7 @@ class ServiceRestProxyTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers WindowsAzure\Services\Core\ServiceRestProxy::generateMetadataHeaders
+     * @covers WindowsAzure\Common\Internal\ServiceRestProxy::generateMetadataHeaders
      * @depends test__construct
      */
     public function testGenerateMetadataHeader($proxy)
@@ -215,7 +215,7 @@ class ServiceRestProxyTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers WindowsAzure\Services\Core\ServiceRestProxy::generateMetadataHeaders
+     * @covers WindowsAzure\Common\Internal\ServiceRestProxy::generateMetadataHeaders
      * @depends test__construct
      */
     public function testGenerateMetadataHeaderInvalidNameFail($proxy)
@@ -229,7 +229,7 @@ class ServiceRestProxyTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers WindowsAzure\Services\Core\ServiceRestProxy::getMetadataArray
+     * @covers WindowsAzure\Common\Internal\ServiceRestProxy::getMetadataArray
      * @depends test__construct
      */
     public function testGetMetadataArray($proxy)
@@ -249,7 +249,7 @@ class ServiceRestProxyTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers WindowsAzure\Services\Core\ServiceRestProxy::getMetadataArray
+     * @covers WindowsAzure\Common\Internal\ServiceRestProxy::getMetadataArray
      * @depends test__construct
      */
     public function testGetMetadataArrayWithMsHeaders($proxy)

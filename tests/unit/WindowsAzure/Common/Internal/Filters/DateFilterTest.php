@@ -15,23 +15,23 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   Tests\Unit\WindowsAzure\Core\Filters
+ * @package   Tests\Unit\WindowsAzure\Common\Internal\Filters
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
 
-namespace Tests\Unit\WindowsAzure\Core\Filters;
-use WindowsAzure\Core\Filters\DateFilter;
-use WindowsAzure\Core\Http\HttpClient;
-use WindowsAzure\Resources;
+namespace Tests\Unit\WindowsAzure\Common\Internal\Filters;
+use WindowsAzure\Common\Internal\Filters\DateFilter;
+use WindowsAzure\Common\Internal\Http\HttpClient;
+use WindowsAzure\Common\Internal\Resources;
 
 /**
  * Unit tests for class DateFilter
  *
  * @category  Microsoft
- * @package   Tests\Unit\WindowsAzure\Core\Filters
+ * @package   Tests\Unit\WindowsAzure\Common\Internal\Filters
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
@@ -41,7 +41,7 @@ use WindowsAzure\Resources;
 class DateFilterTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @covers WindowsAzure\Core\Filters\DateFilter::handleRequest
+     * @covers WindowsAzure\Common\Internal\Filters\DateFilter::handleRequest
      */
     public function testHandleRequest()
     {
@@ -57,7 +57,7 @@ class DateFilterTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers WindowsAzure\Core\Filters\DateFilter::handleResponse
+     * @covers WindowsAzure\Common\Internal\Filters\DateFilter::handleResponse
      */
     public function testHandleResponse()
     {

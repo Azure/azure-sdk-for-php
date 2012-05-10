@@ -26,7 +26,7 @@
 
 namespace Tests\Functional\WindowsAzure\Services\Table;
 
-use WindowsAzure\Core\ServiceException;
+use WindowsAzure\Common\Internal\ServiceException;
 use WindowsAzure\Services\Table\Models\BatchOperations;
 use WindowsAzure\Services\Table\Models\EdmType;
 use WindowsAzure\Services\Table\Models\Entity;

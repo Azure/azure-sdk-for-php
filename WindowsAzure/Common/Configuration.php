@@ -15,18 +15,18 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   WindowsAzure\Core
+ * @package   WindowsAzure\Common
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
  
-namespace WindowsAzure\Core;
-use WindowsAzure\Validate;
-use WindowsAzure\Resources;
-use WindowsAzure\Core\InvalidArgumentTypeException;
-use WindowsAzure\Core\ServicesBuilder;
+namespace WindowsAzure\Common;
+use WindowsAzure\Common\Internal\Validate;
+use WindowsAzure\Common\Internal\Resources;
+use WindowsAzure\Common\Internal\InvalidArgumentTypeException;
+use WindowsAzure\Common\Internal\ServicesBuilder;
 use WindowsAzure\Services\Queue\QueueSettings;
 use WindowsAzure\Blob\BlobSettings;
 use WindowsAzure\Services\Table\TableSettings;
@@ -44,7 +44,7 @@ use WindowsAzure\Services\Table\TableSettings;
  * </code>
  * 
  * @category  Microsoft
- * @package   WindowsAzure\Core
+ * @package   WindowsAzure\Common
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
@@ -66,7 +66,7 @@ class Configuration
     /**
      * Initializes new Configuration object.
      *
-     * @return WindowsAzure\Core\Configuration
+     * @return WindowsAzure\Common\Configuration
      */
     public function __construct()
     {
@@ -76,7 +76,7 @@ class Configuration
     /**
      * Configures $config to run against the storage emulator
      *
-     * @param WindowsAzure\Core\Configuration $config The configuration.
+     * @param WindowsAzure\Common\Configuration $config The configuration.
      * @param string                          $type   The type name.
      * 
      * @return none.
@@ -116,7 +116,7 @@ class Configuration
     /**
      * Access point to the static _instance of the class.
      *
-     * @return WindowsAzure\Core\Configuration.
+     * @return WindowsAzure\Common\Configuration.
      */
     public static function getInstance()
     {

@@ -24,7 +24,7 @@
 
 namespace Tests\Unit\WindowsAzure\Services\ServiceManagement\Models;
 use WindowsAzure\Services\ServiceManagement\Models\StorageService;
-use WindowsAzure\Resources;
+use WindowsAzure\Common\Internal\Resources;
 
 /**
  * Unit tests for class StorageService

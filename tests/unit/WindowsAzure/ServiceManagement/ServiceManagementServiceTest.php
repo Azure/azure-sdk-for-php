@@ -24,8 +24,8 @@
 
 namespace Tests\Unit\WindowsAzure\Services\ServiceManagement;
 use Tests\Framework\TestResources;
-use WindowsAzure\Resources;
-use WindowsAzure\Core\Configuration;
+use WindowsAzure\Common\Internal\Resources;
+use WindowsAzure\Common\Configuration;
 use WindowsAzure\Services\ServiceManagement\ServiceManagementSettings;
 use WindowsAzure\Services\ServiceManagement\ServiceManagementService;
 
