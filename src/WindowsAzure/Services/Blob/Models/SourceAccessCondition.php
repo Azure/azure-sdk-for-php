@@ -113,16 +113,17 @@ class SourceAccessCondition
      * <a href= 'http://go.microsoft.com/fwlink/?LinkID=224642&clcid=0x409'>
      * Specifying Conditional Headers for Blob Service Operations</a>.
      *
-     * @param string $lastModified date string that represents the last-modified 
+     * @param \DateTime $lastModified date that represents the last-modified
      * time to check for the resource.
      *
      * @return \WindowsAzure\Services\Blob\Models\SourceAccessCondition
      */
     public static function sourceIfModifiedSince($lastModified)
     {
+        Validate::isDate($lastModified);
         return new SourceAccessCondition(
             Resources::X_MS_SOURCE_IF_MODIFIED_SINCE,
-            Utilities::rfc1123ToDateTime($lastModified)
+            $lastModified
         );
     }
     
@@ -165,16 +166,17 @@ class SourceAccessCondition
      * <a href= 'http://go.microsoft.com/fwlink/?LinkID=224642&clcid=0x409'>
      * Specifying Conditional Headers for Blob Service Operations</a>.
      *
-     * @param string $lastModified date string that represents the last-modified 
+     * @param \DateTime $lastModified date that represents the last-modified
      * time to check for the resource.
      *
      * @return \WindowsAzure\Services\Blob\Models\SourceAccessCondition
      */
     public static function sourceIfNotModifiedSince($lastModified)
     {
+        Validate::isDate($lastModified);
         return new SourceAccessCondition(
             Resources::X_MS_SOURCE_IF_UNMODIFIED_SINCE,
-            Utilities::rfc1123ToDateTime($lastModified)
+            $lastModified
         );
     }
     

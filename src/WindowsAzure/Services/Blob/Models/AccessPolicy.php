@@ -24,6 +24,9 @@
  
 namespace WindowsAzure\Services\Blob\Models;
 
+use WindowsAzure\Utilities;
+use WindowsAzure\Validate;
+
 /**
  * Holds container access policy elements
  *
@@ -43,19 +46,19 @@ class AccessPolicy
     private $_start;
     
     /**
-     * @var string
+     * @var \DateTime
      */
     private $_expiry;
     
     /**
-     * @var string
+     * @var \DateTime
      */
     private $_permission;
     
     /**
      * Gets start.
      *
-     * @return string.
+     * @return \DateTime.
      */
     public function getStart()
     {
@@ -65,19 +68,20 @@ class AccessPolicy
     /**
      * Sets start.
      *
-     * @param string $start value.
+     * @param \DateTime $start value.
      * 
      * @return none.
      */
     public function setStart($start)
     {
+        Validate::isDate($start);
         $this->_start = $start;
     }
     
     /**
      * Gets expiry.
      *
-     * @return string.
+     * @return \DateTime.
      */
     public function getExpiry()
     {
@@ -87,12 +91,13 @@ class AccessPolicy
     /**
      * Sets expiry.
      *
-     * @param string $expiry value.
+     * @param \DateTime $expiry value.
      * 
      * @return none.
      */
     public function setExpiry($expiry)
     {
+        Validate::isDate($expiry);
         $this->_expiry = $expiry;
     }
     
@@ -127,8 +132,8 @@ class AccessPolicy
     {
         $array = array();
         
-        $array['Start']      = $this->_start;
-        $array['Expiry']     = $this->_expiry;
+        $array['Start']      = Utilities::convertToEdmDateTime($this->_start);
+        $array['Expiry']     = Utilities::convertToEdmDateTime($this->_expiry);
         $array['Permission'] = $this->_permission;
         
         return $array;

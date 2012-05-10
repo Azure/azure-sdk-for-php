@@ -366,6 +366,10 @@ class Utilities
             return $value;
         }
         
+        if (is_string($value)) {
+            $value =  self::convertToDateTime($value);
+        }
+
         Validate::isDate($value);
             
         $cloned = clone $value;

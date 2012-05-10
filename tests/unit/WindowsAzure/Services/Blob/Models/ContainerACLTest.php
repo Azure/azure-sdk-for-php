@@ -54,13 +54,12 @@ class ContainerAclTest extends \PHPUnit_Framework_TestCase
         // Setup
         $sample = Resources::EMPTY_STRING;
         $expectedEtag = '0x8CAFB82EFF70C46';
-        $expectedLastModified = 'Sun, 25 Sep 2011 19:42:18 GMT';
-        $expectedDate = Utilities::rfc1123ToDateTime($expectedLastModified);
+        $expectedDate = new \DateTime('Sun, 25 Sep 2011 19:42:18 GMT');
         $expectedPublicAccess = 'container';
         
         // Test
         $acl = ContainerAcl::create($expectedPublicAccess, $expectedEtag, 
-            $expectedLastModified, $sample);
+            $expectedDate, $sample);
         
         // Assert
         $this->assertEquals($expectedEtag, $acl->getEtag());
@@ -82,13 +81,12 @@ class ContainerAclTest extends \PHPUnit_Framework_TestCase
         // Setup
         $sample = TestResources::getContainerAclOneEntrySample();
         $expectedEtag = '0x8CAFB82EFF70C46';
-        $expectedLastModified = 'Sun, 25 Sep 2011 19:42:18 GMT';
-        $expectedDate = Utilities::rfc1123ToDateTime($expectedLastModified);
+        $expectedDate = new \DateTime('Sun, 25 Sep 2011 19:42:18 GMT');
         $expectedPublicAccess = 'container';
         
         // Test
         $acl = ContainerAcl::create($expectedPublicAccess, $expectedEtag, 
-            $expectedLastModified, $sample['SignedIdentifiers']);
+            $expectedDate, $sample['SignedIdentifiers']);
         
         // Assert
         $this->assertEquals($expectedEtag, $acl->getEtag());
@@ -110,13 +108,12 @@ class ContainerAclTest extends \PHPUnit_Framework_TestCase
         // Setup
         $sample = TestResources::getContainerAclMultipleEntriesSample();
         $expectedEtag = '0x8CAFB82EFF70C46';
-        $expectedLastModified = 'Sun, 25 Sep 2011 19:42:18 GMT';
-        $expectedDate = Utilities::rfc1123ToDateTime($expectedLastModified);
+        $expectedDate = new \DateTime('Sun, 25 Sep 2011 19:42:18 GMT');
         $expectedPublicAccess = 'container';
         
         // Test
         $acl = ContainerAcl::create($expectedPublicAccess, $expectedEtag, 
-            $expectedLastModified, $sample['SignedIdentifiers']);
+            $expectedDate, $sample['SignedIdentifiers']);
         
         // Assert
         $this->assertEquals($expectedEtag, $acl->getEtag());
@@ -136,11 +133,10 @@ class ContainerAclTest extends \PHPUnit_Framework_TestCase
         // Setup
         $sample = TestResources::getContainerAclOneEntrySample();
         $expectedEtag = '0x8CAFB82EFF70C46';
-        $expectedLastModified = 'Sun, 25 Sep 2011 19:42:18 GMT';
-        $expectedDate = Utilities::rfc1123ToDateTime($expectedLastModified);
+        $expectedDate = new \DateTime('Sun, 25 Sep 2011 19:42:18 GMT');
         $expectedPublicAccess = 'container';
         $acl = ContainerAcl::create($expectedPublicAccess, $expectedEtag, 
-            $expectedLastModified, $sample['SignedIdentifiers']);
+            $expectedDate, $sample['SignedIdentifiers']);
         $expected = $acl->getSignedIdentifiers();
         $expected[0]->setId('newXid');
         
@@ -161,7 +157,7 @@ class ContainerAclTest extends \PHPUnit_Framework_TestCase
     public function testSetLastModified()
     {
         // Setup
-        $expected = Utilities::rfc1123ToDateTime('Sun, 25 Sep 2011 19:42:18 GMT');
+        $expected = new \DateTime('Sun, 25 Sep 2011 19:42:18 GMT');
         $acl = new ContainerAcl();
         $acl->setLastModified($expected);
         
@@ -217,8 +213,12 @@ class ContainerAclTest extends \PHPUnit_Framework_TestCase
     {
         // Setup
         $sample = TestResources::getContainerAclMultipleEntriesSample();
-        $expected = ContainerAcl::create('container', 
-            '123', 'Sun, 25 Sep 2011 19:42:18 GMT', $sample['SignedIdentifiers']);
+        $expected = ContainerAcl::create(
+            'container',
+            '123',
+            new \DateTime('Sun, 25 Sep 2011 19:42:18 GMT'),
+            $sample['SignedIdentifiers']
+        );
         $xmlSerializer = new XmlSerializer();
         
         // Test
@@ -226,7 +226,12 @@ class ContainerAclTest extends \PHPUnit_Framework_TestCase
         
         // Assert
         $array = Utilities::unserialize($xml);
-        $acl = ContainerAcl::create('container', '123', 'Sun, 25 Sep 2011 19:42:18 GMT', $array);
+        $acl = ContainerAcl::create(
+            'container',
+            '123',
+            new \DateTime('Sun, 25 Sep 2011 19:42:18 GMT'),
+            $array
+        );
         $this->assertEquals($expected->getSignedIdentifiers(), $acl->getSignedIdentifiers());
     }
 }

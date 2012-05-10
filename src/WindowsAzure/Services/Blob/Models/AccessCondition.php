@@ -23,9 +23,9 @@
  */
  
 namespace WindowsAzure\Services\Blob\Models;
-use WindowsAzure\Validate;
 use WindowsAzure\Resources;
-use WindowsAzure\Utilities;
+use WindowsAzure\Validate;
+use WindowsAzure\Core\WindowsAzureUtilities;
 
 /**
  * Represents a set of access conditions to be used for operations against the 
@@ -112,16 +112,17 @@ class AccessCondition
      * <a href= 'http://go.microsoft.com/fwlink/?LinkID=224642&clcid=0x409'>
      * Specifying Conditional Headers for Blob Service Operations</a>.
      *
-     * @param string $lastModified date string that represents the last-modified 
+     * @param \DateTime $lastModified date that represents the last-modified
      * time to check for the resource.
      *
      * @return \WindowsAzure\Services\Blob\Models\AccessCondition
      */
     public static function ifModifiedSince($lastModified)
     {
+        Validate::isDate($lastModified);
         return new AccessCondition(
             Resources::IF_MODIFIED_SINCE,
-            Utilities::rfc1123ToDateTime($lastModified)
+            $lastModified
         );
     }
     
@@ -160,16 +161,17 @@ class AccessCondition
      * <a href= 'http://go.microsoft.com/fwlink/?LinkID=224642&clcid=0x409'>
      * Specifying Conditional Headers for Blob Service Operations</a>.
      *
-     * @param string $lastModified date string that represents the last-modified 
+     * @param \DateTime $lastModified date that represents the last-modified
      * time to check for the resource.
      *
      * @return \WindowsAzure\Services\Blob\Models\AccessCondition
      */
     public static function ifNotModifiedSince($lastModified)
     {
+        Validate::isDate($lastModified);
         return new AccessCondition(
             Resources::IF_UNMODIFIED_SINCE,
-            Utilities::rfc1123ToDateTime($lastModified)
+            $lastModified
         );
     }
     
