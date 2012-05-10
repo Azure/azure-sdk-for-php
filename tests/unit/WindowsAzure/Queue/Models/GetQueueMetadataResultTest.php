@@ -15,21 +15,21 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   Tests\Unit\WindowsAzure\Services\Queue\Models
+ * @package   Tests\Unit\WindowsAzure\Queue\Models
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
 
-namespace Tests\Unit\WindowsAzure\Services\Queue\Models;
-use WindowsAzure\Services\Queue\Models\GetQueueMetadataResult;
+namespace Tests\Unit\WindowsAzure\Queue\Models;
+use WindowsAzure\Queue\Models\GetQueueMetadataResult;
 
 /**
  * Unit tests for class GetQueueMetadataResult
  *
  * @category  Microsoft
- * @package   Tests\Unit\WindowsAzure\Services\Queue\Models
+ * @package   Tests\Unit\WindowsAzure\Queue\Models
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
@@ -39,7 +39,7 @@ use WindowsAzure\Services\Queue\Models\GetQueueMetadataResult;
 class GetQueueMetadataResultTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @covers WindowsAzure\Services\Queue\Models\GetQueueMetadataResult::__construct
+     * @covers WindowsAzure\Queue\Models\GetQueueMetadataResult::__construct
      */
     public function test__construct()
     {
@@ -56,7 +56,7 @@ class GetQueueMetadataResultTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers WindowsAzure\Services\Queue\Models\GetQueueMetadataResult::getApproximateMessageCount
+     * @covers WindowsAzure\Queue\Models\GetQueueMetadataResult::getApproximateMessageCount
      */
     public function testGetApproximateMessageCount()
     {
@@ -72,7 +72,7 @@ class GetQueueMetadataResultTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers WindowsAzure\Services\Queue\Models\GetQueueMetadataResult::setApproximateMessageCount
+     * @covers WindowsAzure\Queue\Models\GetQueueMetadataResult::setApproximateMessageCount
      */
     public function testSetApproximateMessageCount()
     {
@@ -88,7 +88,7 @@ class GetQueueMetadataResultTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers WindowsAzure\Services\Queue\Models\GetQueueMetadataResult::getMetadata
+     * @covers WindowsAzure\Queue\Models\GetQueueMetadataResult::getMetadata
      */
     public function testGetMetadata()
     {
@@ -104,7 +104,7 @@ class GetQueueMetadataResultTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers WindowsAzure\Services\Queue\Models\GetQueueMetadataResult::setMetadata
+     * @covers WindowsAzure\Queue\Models\GetQueueMetadataResult::setMetadata
      */
     public function testSetMetadata()
     {

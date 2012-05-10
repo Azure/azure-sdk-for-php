@@ -15,22 +15,22 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   WindowsAzure\Services\Queue\Models
+ * @package   WindowsAzure\Queue\Models
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
  
-namespace WindowsAzure\Services\Queue\Models;
-use WindowsAzure\Services\Queue\Models\QueueServiceOptions;
+namespace WindowsAzure\Queue\Models;
+use WindowsAzure\Queue\Models\QueueServiceOptions;
 use \WindowsAzure\Common\Internal\Validate;
 
 /**
  * Options for listQueues API.
  *
  * @category  Microsoft
- * @package   WindowsAzure\Services\Queue\Models
+ * @package   WindowsAzure\Queue\Models
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0

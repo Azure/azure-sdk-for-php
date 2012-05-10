@@ -15,7 +15,7 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   WindowsAzure\Services\Queue\Models
+ * @package   WindowsAzure\Queue\Models
  * @author    Azure PHP SDK <azurephpsdk@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0

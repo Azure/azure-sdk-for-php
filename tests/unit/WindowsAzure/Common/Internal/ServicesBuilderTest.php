@@ -27,7 +27,7 @@ use Tests\Framework\TestResources;
 use WindowsAzure\Common\Internal\Resources;
 use WindowsAzure\Common\Internal\ServicesBuilder;
 use WindowsAzure\Common\Configuration;
-use WindowsAzure\Services\Queue\QueueSettings;
+use WindowsAzure\Queue\QueueSettings;
 use WindowsAzure\Blob\BlobSettings;
 use WindowsAzure\Services\Table\TableSettings;
 use WindowsAzure\Common\Internal\InvalidArgumentTypeException;
@@ -64,7 +64,7 @@ class ServicesBuilderTest extends \PHPUnit_Framework_TestCase
         $queueWrapper = $builder->build($config, Resources::QUEUE_TYPE_NAME);
         
         // Assert
-        $this->assertInstanceOf('WindowsAzure\Services\Queue\IQueue', $queueWrapper);
+        $this->assertInstanceOf('WindowsAzure\Queue\Internal\IQueue', $queueWrapper);
     }
     
     /**

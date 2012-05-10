@@ -26,8 +26,8 @@ use Tests\Framework\ServiceRestProxyTestBase;
 use Tests\Framework\TestResources;
 use WindowsAzure\Common\Configuration;
 use WindowsAzure\Common\Models\ServiceProperties;
-use WindowsAzure\Services\Queue\QueueSettings;
-use WindowsAzure\Services\Queue\QueueService;
+use WindowsAzure\Queue\QueueSettings;
+use WindowsAzure\Queue\QueueService;
 
 /**
  * TestBase class for each unit test class.

@@ -15,14 +15,14 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   WindowsAzure\Services\Queue\Models
+ * @package   WindowsAzure\Queue\Models
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
  
-namespace WindowsAzure\Services\Queue\Models;
+namespace WindowsAzure\Queue\Models;
 use WindowsAzure\Common\Internal\Resources;
 use WindowsAzure\Common\Internal\Utilities;
 
@@ -30,7 +30,7 @@ use WindowsAzure\Common\Internal\Utilities;
  * Holds data for single WindowsAzure queue message.
  *
  * @category  Microsoft
- * @package   WindowsAzure\Services\Queue\Models
+ * @package   WindowsAzure\Queue\Models
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
@@ -97,7 +97,7 @@ class WindowsAzureQueueMessage
      *
      * @param array $parsedResponse XML response parsed into array.
      * 
-     * @return WindowsAzure\Services\Queue\Models\WindowsAzureQueueMessage.
+     * @return WindowsAzure\Queue\Models\WindowsAzureQueueMessage.
      */
     public static function createFromListMessages($parsedResponse)
     {
@@ -117,7 +117,7 @@ class WindowsAzureQueueMessage
      *
      * @param array $parsedResponse XML response parsed into array.
      * 
-     * @return WindowsAzure\Services\Queue\Models\WindowsAzureQueueMessage.
+     * @return WindowsAzure\Queue\Models\WindowsAzureQueueMessage.
      */
     public static function createFromPeekMessages($parsedResponse)
     {

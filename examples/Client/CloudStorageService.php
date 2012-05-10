@@ -28,8 +28,8 @@ use WindowsAzure\Services\Table\TableService;
 use WindowsAzure\Services\Table\TableSettings;
 use WindowsAzure\Blob\BlobService;
 use WindowsAzure\Blob\BlobSettings;
-use WindowsAzure\Services\Queue\QueueService;
-use WindowsAzure\Services\Queue\QueueSettings;
+use WindowsAzure\Queue\QueueService;
+use WindowsAzure\Queue\QueueSettings;
 use WindowsAzure\Services\Table\Models\QueryTablesOptions;
 
 /**

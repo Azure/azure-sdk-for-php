@@ -15,22 +15,22 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   Tests\Unit\WindowsAzure\Services\Queue\Models
+ * @package   Tests\Unit\WindowsAzure\Queue\Models
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
 
-namespace Tests\Unit\WindowsAzure\Services\Queue\Models;
-use WindowsAzure\Services\Queue\Models\Queue;
+namespace Tests\Unit\WindowsAzure\Queue\Models;
+use WindowsAzure\Queue\Models\Queue;
 use Tests\Framework\TestResources;
 
 /**
  * Unit tests for class Queue
  *
  * @category  Microsoft
- * @package   Tests\Unit\WindowsAzure\Services\Queue\Models
+ * @package   Tests\Unit\WindowsAzure\Queue\Models
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
@@ -40,7 +40,7 @@ use Tests\Framework\TestResources;
 class QueueTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @covers WindowsAzure\Services\Queue\Models\Queue::__construct
+     * @covers WindowsAzure\Queue\Models\Queue::__construct
      */
     public function test__construct()
     {
@@ -57,7 +57,7 @@ class QueueTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers WindowsAzure\Services\Queue\Models\Queue::setName
+     * @covers WindowsAzure\Queue\Models\Queue::setName
      */
     public function testSetName()
     {
@@ -73,7 +73,7 @@ class QueueTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers WindowsAzure\Services\Queue\Models\Queue::getName
+     * @covers WindowsAzure\Queue\Models\Queue::getName
      */
     public function testGetName()
     {
@@ -90,7 +90,7 @@ class QueueTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers WindowsAzure\Services\Queue\Models\Queue::setUrl
+     * @covers WindowsAzure\Queue\Models\Queue::setUrl
      */
     public function testSetUrl()
     {
@@ -106,7 +106,7 @@ class QueueTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers WindowsAzure\Services\Queue\Models\Queue::getUrl
+     * @covers WindowsAzure\Queue\Models\Queue::getUrl
      */
     public function testGetUrl()
     {
@@ -123,7 +123,7 @@ class QueueTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers WindowsAzure\Services\Queue\Models\Queue::setMetadata
+     * @covers WindowsAzure\Queue\Models\Queue::setMetadata
      */
     public function testSetMetadata()
     {
@@ -139,7 +139,7 @@ class QueueTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers WindowsAzure\Services\Queue\Models\Queue::getMetadata
+     * @covers WindowsAzure\Queue\Models\Queue::getMetadata
      */
     public function testGetMetadata()
     {

@@ -30,9 +30,9 @@ use WindowsAzure\Common\Models\Logging;
 use WindowsAzure\Common\Models\Metrics;
 use WindowsAzure\Common\Models\RetentionPolicy;
 use WindowsAzure\Common\Models\ServiceProperties;
-use WindowsAzure\Services\Queue\Models\CreateMessageOptions;
-use WindowsAzure\Services\Queue\Models\CreateQueueOptions;
-use WindowsAzure\Services\Queue\Models\ListQueuesOptions;
+use WindowsAzure\Queue\Models\CreateMessageOptions;
+use WindowsAzure\Queue\Models\CreateQueueOptions;
+use WindowsAzure\Queue\Models\ListQueuesOptions;
 
 class QueueServiceFunctionalTestData {
     const INTERESTING_TTL = 4;

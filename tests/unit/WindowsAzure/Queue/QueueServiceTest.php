@@ -23,10 +23,10 @@
  */
 
 namespace Tests\Unit\WindowsAzure\Services\Queue;
-use WindowsAzure\Services\Queue\QueueService;
+use WindowsAzure\Queue\QueueService;
 use WindowsAzure\Common\Configuration;
 use Tests\Framework\TestResources;
-use WindowsAzure\Services\Queue\QueueSettings;
+use WindowsAzure\Queue\QueueSettings;
 
 /**
  * Unit tests for class QueueService
@@ -42,7 +42,7 @@ use WindowsAzure\Services\Queue\QueueSettings;
 class QueueServiceTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @covers WindowsAzure\Services\Queue\QueueService::create
+     * @covers WindowsAzure\Queue\QueueService::create
      */
     public function testCreateWithConfig()
     {
@@ -57,7 +57,7 @@ class QueueServiceTest extends \PHPUnit_Framework_TestCase
         $queueWrapper = QueueService::create($config);
         
         // Assert
-        $this->assertInstanceOf('\WindowsAzure\\Services\\Queue\\IQueue', $queueWrapper);
+        $this->assertInstanceOf('WindowsAzure\Queue\Internal\IQueue', $queueWrapper);
     }
 }
 

@@ -15,14 +15,14 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   WindowsAzure\Services\Queue
+ * @package   WindowsAzure\Queue\Internal
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
 
-namespace WindowsAzure\Services\Queue;
+namespace WindowsAzure\Queue\Internal;
 use WindowsAzure\Common\Internal\Resources;
 use WindowsAzure\Common\Internal\Validate;
 use WindowsAzure\Common\Internal\Utilities;
@@ -31,25 +31,25 @@ use WindowsAzure\Common\Internal\Http\Url;
 use WindowsAzure\Common\Internal\ServiceRestProxy;
 use WindowsAzure\Common\Models\GetServicePropertiesResult;
 use WindowsAzure\Common\Models\ServiceProperties;
-use WindowsAzure\Services\Queue\Models\ListQueuesOptions;
-use WindowsAzure\Services\Queue\Models\ListQueuesResult;
-use WindowsAzure\Services\Queue\Models\CreateQueueOptions;
-use WindowsAzure\Services\Queue\Models\QueueServiceOptions;
-use WindowsAzure\Services\Queue\Models\GetQueueMetadataResult;
-use WindowsAzure\Services\Queue\Models\CreateMessageOptions;
-use WindowsAzure\Services\Queue\Models\QueueMessage;
-use WindowsAzure\Services\Queue\Models\ListMessagesOptions;
-use WindowsAzure\Services\Queue\Models\ListMessagesResult;
-use WindowsAzure\Services\Queue\Models\PeekMessagesOptions;
-use WindowsAzure\Services\Queue\Models\PeekMessagesResult;
-use WindowsAzure\Services\Queue\Models\UpdateMessageResult;
+use WindowsAzure\Queue\Models\ListQueuesOptions;
+use WindowsAzure\Queue\Models\ListQueuesResult;
+use WindowsAzure\Queue\Models\CreateQueueOptions;
+use WindowsAzure\Queue\Models\QueueServiceOptions;
+use WindowsAzure\Queue\Models\GetQueueMetadataResult;
+use WindowsAzure\Queue\Models\CreateMessageOptions;
+use WindowsAzure\Queue\Models\QueueMessage;
+use WindowsAzure\Queue\Models\ListMessagesOptions;
+use WindowsAzure\Queue\Models\ListMessagesResult;
+use WindowsAzure\Queue\Models\PeekMessagesOptions;
+use WindowsAzure\Queue\Models\PeekMessagesResult;
+use WindowsAzure\Queue\Models\UpdateMessageResult;
 
 /**
  * This class constructs HTTP requests and receive HTTP responses for queue 
  * service layer.
  *
  * @category  Microsoft
- * @package   WindowsAzure\Services\Queue
+ * @package   WindowsAzure\Queue\Internal
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
@@ -63,7 +63,7 @@ class QueueRestProxy extends ServiceRestProxy implements IQueue
      * 
      * @param ListQueuesOptions $options The optional list queue options.
      * 
-     * @return WindowsAzure\Services\Queue\Models\ListQueuesResult
+     * @return WindowsAzure\Queue\Models\ListQueuesResult
      */
     public function listQueues($options = null)
     {

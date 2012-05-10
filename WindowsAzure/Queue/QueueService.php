@@ -15,24 +15,24 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   WindowsAzure\Services\Queue
+ * @package   WindowsAzure\Queue
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
  
-namespace WindowsAzure\Services\Queue;
+namespace WindowsAzure\Queue;
 use WindowsAzure\Common\Internal\Validate;
 use WindowsAzure\Common\Configuration;
 use WindowsAzure\Common\Internal\IServiceBuilder;
 use WindowsAzure\Common\Internal\Resources;
 
 /**
- * Factory for creating IQueue objects
+ * Factory for creating IQueue objects.
  *
  * @category  Microsoft
- * @package   WindowsAzure\Services\Queue
+ * @package   WindowsAzure\Queue
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
@@ -47,7 +47,7 @@ class QueueService
      * @param WindowsAzure\Common\Configuration    $config  The config object.
      * @param WindowsAzure\Common\Internal\IServicesBuilder $builder The builder object.
      * 
-     * @return WindowsAzure\Services\Queue\IQueue
+     * @return WindowsAzure\Queue\Internal\IQueue
      */
     public static function create($config, $builder = null)
     {

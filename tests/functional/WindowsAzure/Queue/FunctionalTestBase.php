@@ -32,12 +32,12 @@ use ReflectionMethod;
 use Tests\Framework\FiddlerFilter;
 use Tests\Framework\QueueServiceRestProxyTestBase;
 use Tests\Framework\TestResources;
-use Tests\Functional\WindowsAzure\Services\Queue\QueueServiceFunctionalTestData;
+use Tests\Functional\WindowsAzure\Queue\QueueServiceFunctionalTestData;
 use WindowsAzure\Common\Internal\ServiceException;
 use WindowsAzure\Common\Internal\Resources;
 use WindowsAzure\Common\Configuration;
-use WindowsAzure\Services\Queue\QueueService;
-use WindowsAzure\Services\Queue\QueueSettings;
+use WindowsAzure\Queue\QueueService;
+use WindowsAzure\Queue\QueueSettings;
 
 class FunctionalTestBase extends QueueServiceRestProxyTestBase {
     protected $accountName;

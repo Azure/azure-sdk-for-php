@@ -15,21 +15,21 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   Tests\Unit\WindowsAzure\Services\Queue\Models
+ * @package   Tests\Unit\WindowsAzure\Queue\Models
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
 
-namespace Tests\Unit\WindowsAzure\Services\Queue\Models;
-use WindowsAzure\Services\Queue\Models\CreateQueueOptions;
+namespace Tests\Unit\WindowsAzure\Queue\Models;
+use WindowsAzure\Queue\Models\CreateQueueOptions;
 
 /**
  * Unit tests for class CreateQueueOptions
  *
  * @category  Microsoft
- * @package   Tests\Unit\WindowsAzure\Services\Queue\Models
+ * @package   Tests\Unit\WindowsAzure\Queue\Models
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
@@ -39,7 +39,7 @@ use WindowsAzure\Services\Queue\Models\CreateQueueOptions;
 class CreateQueueOptionsTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @covers WindowsAzure\Services\Queue\Models\CreateQueueOptions::setMetadata
+     * @covers WindowsAzure\Queue\Models\CreateQueueOptions::setMetadata
      */
     public function testSetMetadata()
     {
@@ -55,7 +55,7 @@ class CreateQueueOptionsTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers WindowsAzure\Services\Queue\Models\CreateQueueOptions::getMetadata
+     * @covers WindowsAzure\Queue\Models\CreateQueueOptions::getMetadata
      */
     public function testGetMetadata()
     {
@@ -72,7 +72,7 @@ class CreateQueueOptionsTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers WindowsAzure\Services\Queue\Models\CreateQueueOptions::addMetadata
+     * @covers WindowsAzure\Queue\Models\CreateQueueOptions::addMetadata
      */
     public function testAddMetadata()
     {

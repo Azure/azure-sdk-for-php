@@ -15,22 +15,22 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   WindowsAzure\Services\Queue\Models
+ * @package   WindowsAzure\Queue\Models
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
 
-namespace WindowsAzure\Services\Queue\Models;
-use WindowsAzure\Services\Queue\Models\WindowsAzureQueueMessage;
+namespace WindowsAzure\Queue\Models;
+use WindowsAzure\Queue\Models\WindowsAzureQueueMessage;
 use WindowsAzure\Common\Internal\Utilities;
 
 /**
  * Holds results of listMessages wrapper.
  *
  * @category  Microsoft
- * @package   WindowsAzure\Services\Queue\Models
+ * @package   WindowsAzure\Queue\Models
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
@@ -51,7 +51,7 @@ class ListMessagesResult
      *
      * @param array $parsedResponse XML response parsed into array.
      * 
-     * @return WindowsAzure\Services\Queue\Models\ListMessagesResult.
+     * @return WindowsAzure\Queue\Models\ListMessagesResult.
      */
     public static function create($parsedResponse)
     {

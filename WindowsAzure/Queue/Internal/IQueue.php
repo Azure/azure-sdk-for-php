@@ -15,21 +15,21 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   WindowsAzure\Services\Queue
+ * @package   WindowsAzure\Queue\Internal
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
 
-namespace WindowsAzure\Services\Queue;
+namespace WindowsAzure\Queue\Internal;
 use WindowsAzure\Common\Internal\FilterableService;
 
 /**
  * This interface has all REST APIs provided by Windows Azure for queue service
  *
  * @category  Microsoft
- * @package   WindowsAzure\Services\Queue
+ * @package   WindowsAzure\Queue\Internal
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0

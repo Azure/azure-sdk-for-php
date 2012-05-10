@@ -15,15 +15,15 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   Tests\Unit\WindowsAzure\Services\Queue\Models
+ * @package   Tests\Unit\WindowsAzure\Queue\Models
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
 
-namespace Tests\Unit\WindowsAzure\Services\Queue\Models;
-use WindowsAzure\Services\Queue\Models\PeekMessagesResult;
+namespace Tests\Unit\WindowsAzure\Queue\Models;
+use WindowsAzure\Queue\Models\PeekMessagesResult;
 use Tests\Framework\TestResources;
 use WindowsAzure\Common\Internal\Utilities;
 
@@ -31,7 +31,7 @@ use WindowsAzure\Common\Internal\Utilities;
  * Unit tests for class PeekMessagesResult
  *
  * @category  Microsoft
- * @package   Tests\Unit\WindowsAzure\Services\Queue\Models
+ * @package   Tests\Unit\WindowsAzure\Queue\Models
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
@@ -41,7 +41,7 @@ use WindowsAzure\Common\Internal\Utilities;
 class PeekMessagesResultTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @covers WindowsAzure\Services\Queue\Models\PeekMessagesResult::create
+     * @covers WindowsAzure\Queue\Models\PeekMessagesResult::create
      */
     public function testCreate()
     {
@@ -63,7 +63,7 @@ class PeekMessagesResultTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers WindowsAzure\Services\Queue\Models\PeekMessagesResult::create
+     * @covers WindowsAzure\Queue\Models\PeekMessagesResult::create
      */
     public function testCreateMultiple()
     {
@@ -90,7 +90,7 @@ class PeekMessagesResultTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers WindowsAzure\Services\Queue\Models\PeekMessagesResult::getQueueMessages
+     * @covers WindowsAzure\Queue\Models\PeekMessagesResult::getQueueMessages
      */
     public function testGetQueueMessages()
     {
@@ -109,7 +109,7 @@ class PeekMessagesResultTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers WindowsAzure\Services\Queue\Models\PeekMessagesResult::setQueueMessages
+     * @covers WindowsAzure\Queue\Models\PeekMessagesResult::setQueueMessages
      */
     public function testSetQueueMessages()
     {

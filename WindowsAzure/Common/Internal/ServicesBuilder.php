@@ -33,8 +33,8 @@ use WindowsAzure\Common\Internal\Filters\HeadersFilter;
 use WindowsAzure\Common\Internal\Filters\SharedKeyFilter;
 use WindowsAzure\Common\Internal\Filters\WrapFilter;
 use WindowsAzure\Common\Internal\InvalidArgumentTypeException;
-use WindowsAzure\Services\Queue\QueueRestProxy;
-use WindowsAzure\Services\Queue\QueueSettings;
+use WindowsAzure\Queue\Internal\QueueRestProxy;
+use WindowsAzure\Queue\QueueSettings;
 use WindowsAzure\Blob\Internal\BlobRestProxy;
 use WindowsAzure\Blob\BlobSettings;
 use WindowsAzure\Services\ServiceBus\ServiceBusRestProxy;
@@ -122,7 +122,7 @@ class ServicesBuilder implements IServiceBuilder
      *
      * @param WindowsAzure\Common\Configuration $config configuration.
      * 
-     * @return WindowsAzure\Services\Queue\IQueue.
+     * @return WindowsAzure\Queue\Internal\IQueue.
      */
     private function _buildQueue($config)
     {
@@ -334,7 +334,7 @@ class ServicesBuilder implements IServiceBuilder
      * @param WindowsAzure\Common\Configuration $config The configuration.
      * @param string                          $type   The type name.
      * 
-     * @return WindowsAzure\Services\Queue\IQueue
+     * @return WindowsAzure\Queue\Internal\IQueue
      *       | WindowsAzure\Blob\Internal\IBlob
      *       | WindowsAzure\Services\Blob\ITable
      *       | WindowsAzure\Services\ServiceBus\IServiceBus 
