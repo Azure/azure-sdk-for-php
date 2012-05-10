@@ -118,7 +118,6 @@ class Utilities
         }
     }
 
-
     /**
      * Returns the specified value of the key chain passed from $array and in case
      * that key chain doesn't exist, null is returned.
@@ -345,6 +344,19 @@ class Utilities
         $format   = Resources::AZURE_DATE_FORMAT;
         
         return \DateTime::createFromFormat($format, $date, $timeZone);
+    }
+
+    /**
+     * Checks if the given key exists in the array, with any
+     * capitaliation.
+     *
+     * @param string $key    Value to check.
+     * @param array  $search An array with keys to check.
+     *
+     * @return boolean
+     */
+    public static function arrayKeyExistsIgnoreCase($key, array $search) {
+        return array_key_exists(strtolower($key), array_change_key_case($search));
     }
 
     /**
