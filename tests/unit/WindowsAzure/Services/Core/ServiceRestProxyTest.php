@@ -23,6 +23,7 @@
  */
 
 namespace Tests\Unit\WindowsAzure\Services\Core;
+use WindowsAzure\Resources;
 use WindowsAzure\Services\Core\ServiceRestProxy;
 use WindowsAzure\Core\Http\HttpClient;
 use WindowsAzure\Core\Serialization\XmlSerializer;
@@ -42,7 +43,6 @@ class ServiceRestProxyTest extends \PHPUnit_Framework_TestCase
 {
     /**
      * @covers WindowsAzure\Services\Core\ServiceRestProxy::generateMetadataHeaders
-     * @depends test__construct
      */
     public function test__construct()
     {
