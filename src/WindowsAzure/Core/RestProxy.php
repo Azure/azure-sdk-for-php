@@ -130,7 +130,10 @@ class RestProxy
         $channel->setExpectedStatusCode($statusCodes);
         $channel->setBody($body);
         $channel->setHeaders($headers);
-        $channel->setPostParameters($postParameters);
+
+        if (count($postParameters) > 0) {
+            $channel->setPostParameters($postParameters);
+        }
         $url->setQueryVariables($queryParams);
         $url->appendUrlPath($path);
         

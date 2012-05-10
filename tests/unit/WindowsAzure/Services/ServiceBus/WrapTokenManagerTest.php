@@ -54,6 +54,7 @@ class WrapTokenManagerTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetAccessTokenSuccess() 
     {
+        // Setup
         $wrapUri = 'https://'
             .TestResources::serviceBusNamespace()
             .'-sb.accesscontrol.windows.net/WRAPv0.9';
@@ -64,21 +65,23 @@ class WrapTokenManagerTest extends \PHPUnit_Framework_TestCase
             .TestResources::serviceBusNameSpace()
             .'.servicebus.windows.net';
         
+        // Execute 
         $wrapTokenManager = new WrapTokenManager(
             $wrapUri,
             $wrapUserName,
             $wrapPassword
         );
         
-        $accesToken = $wrapTokenManager->getAccessToken($scope);
-        
-        $this->assertNotNull($accesToken);
+        // Asserts
+        $accessToken = $wrapTokenManager->getAccessToken($scope);
+        parse_str($accessToken, $parsedAccessToken);
+        $this->assertNotNull($accessToken);
+        $this->assertTrue(is_array($parsedAccessToken));
 
     }
     
     /**
      * @covers WindowsAzure\Services\ServiceBus\WrapTokenManager::__construct
-     * @covers WindowsAzure\Services\ServiceBus\WrapTokenManager::getAccessToken
      */
     public function testGetAccessTokenFailedWithInvalidWrapUri()
     {
@@ -99,12 +102,11 @@ class WrapTokenManagerTest extends \PHPUnit_Framework_TestCase
             $wrapPassword
         );
         
-        $accesToken = $wrapTokenManager->getAccessToken($scope);
+        $accessToken = $wrapTokenManager->getAccessToken($scope);
     }
     
     /**
      * @covers WindowsAzure\Services\ServiceBus\WrapTokenManager::__construct
-     * @covers WindowsAzure\Services\ServiceBus\WrapTokenManager::getAccessToken
      */
     public function testGetAccessTokenFailedWithInvalidUserName()
     {
@@ -127,13 +129,12 @@ class WrapTokenManagerTest extends \PHPUnit_Framework_TestCase
             $wrapPassword
         );
 
-        $accesToken = $wrapTokenManager->getAccessToken($scope);
+        $accessToken = $wrapTokenManager->getAccessToken($scope);
         
     }
     
     /**
      * @covers WindowsAzure\Services\ServiceBus\WrapTokenManager::__construct
-     * @covers WindowsAzure\Services\ServiceBus\WrapTokenManager::getAccessToken
      */
     public function testGetAccesTokenFailedWithInvalidPassword()
     {
@@ -156,7 +157,7 @@ class WrapTokenManagerTest extends \PHPUnit_Framework_TestCase
             $wrapPassword
         );
         
-        $accesToken = $wrapTokenManager->getAccessToken($scope);
+        $accessToken = $wrapTokenManager->getAccessToken($scope);
         
     }
 }

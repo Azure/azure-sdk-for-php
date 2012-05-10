@@ -53,6 +53,50 @@ class ActiveTokenTest extends \PHPUnit_Framework_TestCase
         // Assert
         $this->assertNotNull($activeToken);
     }
+
+    /**
+     * @covers WindowsAzure\Services\ServiceBus\Models\ActiveToken::getWrapAccessTokenResult
+     * @covers WindowsAzure\Services\ServiceBus\Models\ActiveToken::setWrapAccessTokenResult
+     */
+    public function testActiveTokenGetSetWrapAccessTokenResult()
+    {
+        // Setup
+        $expected = new WrapAccessTokenResult();
+        
+        // Test
+        $activeToken = new ActiveToken($expected);
+        $activeToken->setWrapAccessTokenResult($expected);
+        $actual = $activeToken->getWrapAccessTokenResult();
+        
+        // Assert
+        $this->assertEquals(
+            $expected,
+            $actual
+        );
+    }
+
+    /**
+     * @covers WindowsAzure\Services\ServiceBus\Models\ActiveToken::getExpirationDateTime
+     * @covers WindowsAzure\Services\ServiceBus\Models\ActiveToken::setExpirationDateTime
+     */
+    public function testActiveTokenGetSetExpirationDateTimeResult()
+    {
+        // Setup
+        $expected = new \DateTime();
+        $wrapAccessTokenResult = new WrapAccessTokenResult(); 
+        
+        // Test
+        $activeToken = new ActiveToken($wrapAccessTokenResult);
+        $activeToken->setExpirationDateTime($expected);
+        $actual = $activeToken->getExpirationDateTime();
+        
+        // Assert
+        $this->assertEquals(
+            $expected,
+            $actual
+        );
+    }
+    
     
 }
 

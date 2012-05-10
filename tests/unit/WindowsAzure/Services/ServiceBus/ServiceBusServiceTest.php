@@ -31,7 +31,8 @@ use Tests\Framework\WrapRestProxyTestBase;
 use WindowsAzure\Core\Configuration;
 use WindowsAzure\Core\ServiceException;
 use WindowsAzure\Core\WindowsAzureUtilities;
-use WindowsAzure\Services\ServiceBus\WrapRestProxy;
+use WindowsAzure\Services\ServiceBus\ServiceBusRestProxy;
+use WindowsAzure\Services\ServiceBus\ServiceBusService;
 use WindowsAzure\Services\ServiceBus\ServiceBusSettings;
 use WindowsAzure\Resources;
 
@@ -70,9 +71,13 @@ class ServiceBusServiceTest extends WrapRestProxyTestBase
         $config->setProperty(ServiceBusSettings::WRAP_NAME, $wrapName);
         $config->setProperty(ServiceBusSettings::WRAP_PASSWORD, $wrapPassword);
 
-        $serviceBusRestProxy = $config->create(Resources::SERVICE_BUS_TYPE_NAME);
+        $serviceBusRestProxy = ServiceBusService::create($config);
 
         $this->assertNotNull($serviceBusRestProxy);
+        $this->assertInstanceOf(
+            '\WindowsAzure\\Services\ServiceBus\\IServiceBus', 
+            $serviceBusRestProxy
+        );
         
     }
 }

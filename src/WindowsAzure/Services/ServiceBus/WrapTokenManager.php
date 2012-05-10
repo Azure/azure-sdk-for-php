@@ -45,35 +45,35 @@ class WrapTokenManager
     /** 
      * The Uri of the WRAP service.
      * 
-     * @var string.
+     * @var string
      */
     private $_wrapUri;
 
     /** 
      * The user name of the WRAP service.
      * 
-     * @var string.
+     * @var string
      */
     private $_wrapName;
 
     /** 
      * The password of the WRAP service.
      * 
-     * @var string.
+     * @var string
      */
     private $_wrapPassword;
 
     /** 
      * The proxy of the WRAP service.
      * 
-     * @var string.
+     * @var string
      */
     private $_wrapRestProxy;
 
     /** 
      * The active WRAP access tokens.
      * 
-     * @var array.
+     * @var array
      */
     private static $_activeTokens;
 

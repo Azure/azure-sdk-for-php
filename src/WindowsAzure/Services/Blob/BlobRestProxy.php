@@ -951,7 +951,7 @@ class BlobRestProxy extends ServiceRestProxy implements IBlob
         
         $method      = Resources::HTTP_PUT;
         $headers     = WindowsAzureUtilities::generateMetadataHeaders($metadata);
-        $PostParams  = array();
+        $postParams  = array();
         $queryParams = array();
         $path        = $container;
         $statusCode  = Resources::STATUS_OK;
@@ -1213,7 +1213,8 @@ class BlobRestProxy extends ServiceRestProxy implements IBlob
             $queryParams, 
             $postParams,
             $path, 
-            $statusCode
+            $statusCode,
+            $body
         );
     }
     

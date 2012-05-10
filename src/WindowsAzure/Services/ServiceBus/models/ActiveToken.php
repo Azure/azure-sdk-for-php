@@ -60,7 +60,6 @@ class ActiveToken
      *
      * @param array $wrapAccessTokenResult A WRAP access token result.
      * 
-     * @return WindowsAzure\Services\ServiceBus\Models\ActiveToken.
      */
     public function __construct($wrapAccessTokenResult)
     {
@@ -70,7 +69,7 @@ class ActiveToken
     /**
      * Gets WRAP access token.
      *
-     * @return WrapAccessTokenResult.
+     * @return WrapAccessTokenResult
      */
     public function getWrapAccessTokenResult()
     {
@@ -82,9 +81,9 @@ class ActiveToken
      *
      * @param string $wrapAccessTokenResult The WRAP access token result.
      * 
-     * @return none.
+     * @return none
      */
-    public function setWrapAccessToken($wrapAccessTokenResult)
+    public function setWrapAccessTokenResult($wrapAccessTokenResult)
     {
         $this->_wrapAccessTokenResult = $wrapAccessTokenResult;
     }
@@ -92,7 +91,7 @@ class ActiveToken
     /**
      * Gets expiration time.  
      *
-     * @return \DateTime.
+     * @return \DateTime
      */
     public function getExpirationDateTime()
     {
@@ -104,7 +103,7 @@ class ActiveToken
      *
      * @param \DateTime $expirationDateTime value.
      * 
-     * @return none.
+     * @return none
      */
     public function setExpirationDateTime($expirationDateTime)
     {

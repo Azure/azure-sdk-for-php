@@ -46,7 +46,7 @@ use WindowsAzure\Validate;
  * @version   Release: @package_version@
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
-class WrapRestProxy extends ServiceRestProxy
+class WrapRestProxy extends ServiceRestProxy implements IWrap
 {
     /** 
      * Creates a WrapRestProxy with specified parameters. 

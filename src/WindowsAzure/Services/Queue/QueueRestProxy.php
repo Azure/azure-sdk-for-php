@@ -717,6 +717,7 @@ class QueueRestProxy extends ServiceRestProxy implements IQueue
         
         $method      = Resources::HTTP_PUT;
         $headers     = array();
+        $postParams  = array();
         $queryParams = array();
         $path        = $queueName . '/messages' . '/' . $messageId;
         $body        = Resources::EMPTY_STRING;
