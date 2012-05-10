@@ -28,11 +28,12 @@ namespace Tests\Functional\WindowsAzure\Services\Blob;
 
 use WindowsAzure\Utilities;
 use WindowsAzure\Resources;
+use WindowsAzure\Core\Configuration;
 use WindowsAzure\Core\ServiceException;
-use WindowsAzure\Core\WindowsAzureUtilities;
 use WindowsAzure\Services\Blob\BlobService;
 use WindowsAzure\Services\Blob\Models\AccessCondition;
 use WindowsAzure\Services\Blob\Models\BlobProperties;
+use WindowsAzure\Services\Blob\Models\Block;
 use WindowsAzure\Services\Blob\Models\BlockList;
 use WindowsAzure\Services\Blob\Models\ContainerACL;
 use WindowsAzure\Services\Blob\Models\CreateBlobOptions;
@@ -76,7 +77,8 @@ class BlobServiceIntegrationTest extends IntegrationTestBase {
     private static $_creatableContainers;
     private static $_testContainers;
 
-    public function setUp() {
+    public static function setUpBeforeClass() {
+        parent::setUpBeforeClass();
         // Setup container names array (list of container names used by
         // integration tests)
         self::$_testContainers = array();
@@ -99,12 +101,15 @@ class BlobServiceIntegrationTest extends IntegrationTestBase {
         self::$_test_container_for_listing = self::$_testContainers[2];
 
         // Create all test containers and their content
-        $this->createContainers(self::$_testContainers, self::$_testContainersPrefix);
+        $inst = new IntegrationTestBase();
+        $inst->createContainers(self::$_testContainers, self::$_testContainersPrefix);
     }
 
-    public function tearDown() {
-        $this->deleteContainers(self::$_testContainers, self::$_testContainersPrefix);
-        $this->deleteContainers(self::$_creatableContainers,self::$_createableContainersPrefix);
+    public static function tearDownAfterClass() {
+        parent::tearDownAfterClass();
+        $inst = new IntegrationTestBase();
+        $inst->deleteContainers(self::$_testContainers, self::$_testContainersPrefix);
+        $inst->deleteContainers(self::$_creatableContainers,self::$_createableContainersPrefix);
     }
 
     private static function createService() {
@@ -117,10 +122,10 @@ class BlobServiceIntegrationTest extends IntegrationTestBase {
         $shouldReturn = false;
         try {
             $props = $this->wrapper->getServiceProperties()->getValue();
-            $this->assertTrue(!WindowsAzureUtilities::isEmulated(), 'Should succeed if and only if not running in emulator');
+            $this->assertTrue(!Configuration::isEmulated(), 'Should succeed if and only if not running in emulator');
         } catch (ServiceException $e) {
             // Expect failure in emulator, as v1.6 doesn't support this method
-            if (WindowsAzureUtilities::isEmulated()) {
+            if (Configuration::isEmulated()) {
                 $this->assertEquals(400, $e->getCode(), 'getCode');
                 $shouldReturn = true;
             }
@@ -146,10 +151,10 @@ class BlobServiceIntegrationTest extends IntegrationTestBase {
         $shouldReturn = false;
         try {
             $props = $this->wrapper->getServiceProperties()->getValue();
-            $this->assertTrue(!WindowsAzureUtilities::isEmulated(), 'Should succeed if and only if not running in emulator');
+            $this->assertTrue(!Configuration::isEmulated(), 'Should succeed if and only if not running in emulator');
         } catch (ServiceException $e) {
             // Expect failure in emulator, as v1.6 doesn't support this method
-            if (WindowsAzureUtilities::isEmulated()) {
+            if (Configuration::isEmulated()) {
                 $this->assertEquals(400, $e->getCode(), 'getCode');
                 $shouldReturn = true;
             }
@@ -161,7 +166,6 @@ class BlobServiceIntegrationTest extends IntegrationTestBase {
             return;
         }
 
-        $props->setDefaultServiceVersion('2009-09-19');
         $props->getLogging()->setRead(true);
         $this->wrapper->setServiceProperties($props);
 
@@ -169,7 +173,6 @@ class BlobServiceIntegrationTest extends IntegrationTestBase {
 
         // Assert
         $this->assertNotNull($props, '$props');
-        $this->assertEquals('2009-09-19', $props->getDefaultServiceVersion(), '$props->getDefaultServiceVersion()');
         $this->assertNotNull($props->getLogging(), '$props->getLogging');
         $this->assertNotNull($props->getLogging()->getRetentionPolicy(), '$props->getLogging()->getRetentionPolicy');
         $this->assertNotNull($props->getLogging()->getVersion(), '$props->getLogging()->getVersion');
@@ -301,12 +304,12 @@ class BlobServiceIntegrationTest extends IntegrationTestBase {
         $expiryStartDate = $expiryStartDate->setTimezone(new \DateTimeZone('UTC'));
         $expiryEndDate = $expiryEndDate->setTimezone(new \DateTimeZone('UTC'));
         $this->assertEquals(
-                \WindowsAzure\Utilities::convertToDateTime($expiryStartDate), 
-                \WindowsAzure\Utilities::convertToDateTime($signedids[0]->getAccessPolicy()->getStart()),
+                Utilities::convertToDateTime($expiryStartDate), 
+                Utilities::convertToDateTime($signedids[0]->getAccessPolicy()->getStart()),
                 '$signedids[0]->getAccessPolicy()->getStart()');
         $this->assertEquals(
-                \WindowsAzure\Utilities::convertToDateTime($expiryEndDate),
-                \WindowsAzure\Utilities::convertToDateTime($signedids[0]->getAccessPolicy()->getExpiry()),
+                Utilities::convertToDateTime($expiryEndDate),
+                Utilities::convertToDateTime($signedids[0]->getAccessPolicy()->getExpiry()),
                 '$signedids[0]->getAccessPolicy()->getExpiry()');
         $this->assertEquals('rwd', $signedids[0]->getAccessPolicy()->getPermission(), '$signedids[0]->getAccessPolicy()->getPermission()');
     }
@@ -800,6 +803,53 @@ class BlobServiceIntegrationTest extends IntegrationTestBase {
         $this->assertEquals(0, count($result->getUncommittedBlocks()), 'count($result->getUncommittedBlocks())');
     }
 
+    public function testCommitBlobBlocksWithArrayWorks() {
+        // Act
+        $container = self::$_test_container_for_blobs;
+        $blob = 'test14a';
+        $blockId1 = '1fedcba';
+        $blockId2 = '2abcdef';
+        $blockId3 = '3zzzzzz';
+        $this->wrapper->createBlockBlob($container, $blob, '');
+        $this->wrapper->createBlobBlock($container, $blob, $blockId1, str_pad('', 256));
+        $this->wrapper->createBlobBlock($container, $blob, $blockId2, str_pad('', 512));
+        $this->wrapper->createBlobBlock($container, $blob, $blockId3, str_pad('', 195));
+
+        $block1 = new Block();
+        $block1->setBlockId($blockId1);
+        $block1->setType(BlobBlockType::UNCOMMITTED_TYPE);
+        $block2 = new Block();
+        $block2->setBlockId($blockId2);
+        $block2->setType(BlobBlockType::LATEST_TYPE);
+        $blockList = array($block1, $block2);
+
+        $this->wrapper->commitBlobBlocks($container, $blob, $blockList);
+
+        $opts = new ListBlobBlocksOptions();
+        $opts->setIncludeCommittedBlobs(true);
+        $opts->setIncludeUncommittedBlobs(true);
+        $result = $this->wrapper->listBlobBlocks($container, $blob, $opts);
+
+        // Assert
+        $this->assertNotNull($result, '$result');
+        $this->assertNotNull($result->getLastModified(), '$result->getLastModified()');
+        $this->assertNotNull($result->getEtag(), '$result->getEtag()');
+        $this->assertEquals(256 + 195, $result->getContentLength(), '$result->getContentLength()');
+
+        $this->assertNotNull($result->getCommittedBlocks(), '$result->getCommittedBlocks()');
+        $this->assertEquals(2, count($result->getCommittedBlocks()), 'count($result->getCommittedBlocks())');
+        $comblk = $result->getCommittedBlocks();
+        $keys = array_keys($comblk);
+        $this->assertEquals($blockId1, $keys[0], '$keys[0]');
+        $this->assertEquals(256, $comblk[$keys[0]], '$comblk[$keys[0]]');
+        $this->assertEquals($blockId3, $keys[1], '$keys[1]');
+        $this->assertEquals(195, $comblk[$keys[1]], '$comblk[$keys[1]]');
+
+        $this->assertNotNull($result->getUncommittedBlocks(), '$result->getUncommittedBlocks()');
+        $this->assertEquals(0, count($result->getUncommittedBlocks()), 'count($result->getUncommittedBlocks())');
+    }
+
+
     public function testCreateBlobBlockWorks() {
         // Act
         $container = self::$_test_container_for_blobs;
@@ -1011,7 +1061,7 @@ class BlobServiceIntegrationTest extends IntegrationTestBase {
         $props = $this->wrapper->getBlobProperties(self::$_test_container_for_blobs, 'test');
         try {
             $opts = new GetBlobOptions();
-            $lastMod = $props->getProperties()->getLastModified()->format(\WindowsAzure\Resources::AZURE_DATE_FORMAT);
+            $lastMod = $props->getProperties()->getLastModified();
             $opts->setAccessCondition(AccessCondition::ifModifiedSince($lastMod));
             $this->wrapper->getBlob(self::$_test_container_for_blobs, 'test', $opts);
             $this->fail('getBlob should throw an exception');
@@ -1043,7 +1093,7 @@ class BlobServiceIntegrationTest extends IntegrationTestBase {
         }
         try {
             $opts = new GetBlobOptions();
-            $opts->setAccessCondition(AccessCondition::ifNotModifiedSince($lastModifiedBase->format(\WindowsAzure\Resources::AZURE_DATE_FORMAT)));
+            $opts->setAccessCondition(AccessCondition::ifNotModifiedSince($lastModifiedBase));
             $this->wrapper->getBlob($container, $blob, $opts);
             $this->fail('getBlob should throw an exception');
         }

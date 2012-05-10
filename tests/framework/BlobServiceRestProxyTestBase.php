@@ -74,6 +74,21 @@ class BlobServiceRestProxyTestBase extends ServiceRestProxyTestBase
         foreach($containerList as $container) {
             if (array_search($container, $containers) === FALSE) {
                 $this->createContainer($container);
+            } else {
+                $listResults = $this->wrapper->listBlobs($container);
+                $blobs = $listResults->getBlobs();
+                foreach($blobs as $blob)  {
+                    try
+                    {
+                        $this->wrapper->deleteBlob($container, $blob->getName());
+                    }
+                    catch (\Exception $e)
+                    {
+                        var_dump($e);
+                        // Ignore exception and continue.
+                        error_log($e->getMessage());
+                    }
+                }
             }
         }
     }

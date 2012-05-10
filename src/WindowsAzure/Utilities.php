@@ -353,7 +353,7 @@ class Utilities
      * @param string $key    Value to check.
      * @param array  $search An array with keys to check.
      *
-     * @return bool
+     * @return boolean
      */
     public static function arrayKeyExistsIgnoreCase($key, array $search) {
         return array_key_exists(strtolower($key), array_change_key_case($search));
