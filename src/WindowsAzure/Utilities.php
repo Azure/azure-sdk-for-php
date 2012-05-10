@@ -58,6 +58,25 @@ class Utilities
     }
     
     /**
+     * Adds a url scheme if there is no scheme.
+     * 
+     * @param string $url    The URL.
+     * @param string $scheme The scheme. By default HTTP
+     * 
+     * @return string
+     */
+    public static function tryAddUrlScheme($url, $scheme = 'http')
+    {
+        $urlScheme = parse_url($url, PHP_URL_SCHEME);
+        
+        if (empty($urlScheme)) {
+            $url = "$scheme://" . $url;
+        }
+        
+        return $url;
+    }
+    
+    /**
      * tries to get nested array with index name $key from $array.
      * 
      * Returns empty array object if the value is NULL.
@@ -312,6 +331,21 @@ class Utilities
     {
         return $obj ? 'true' : 'false';
     }
+    
+    /**
+     * Converts a given date string into \DateTime object
+     * 
+     * @param string $date windows azure date ins string represntation.
+     * 
+     * @return \DateTime
+     */
+    public static function rfc1123ToDateTime($date)
+    {
+        $timeZone = new \DateTimeZone('GMT');
+        $format   = Resources::AZURE_DATE_FORMAT;
+        
+        return \DateTime::createFromFormat($format, $date, $timeZone);
+    }
 
     /**
      * Generate ISO 8601 compliant date string in UTC time zone
@@ -391,7 +425,7 @@ class Utilities
      */
     public static function stringToStream($string)
     {
-        return fopen('data://text/plain,' . $string, 'r');
+        return fopen('data://text/plain,' . urlencode($string), 'rb');
     }
     
     /**

@@ -25,7 +25,6 @@ namespace Tests\Unit\WindowsAzure\Services\Blob\Models;
 use WindowsAzure\Services\Blob\Models\ContainerAcl;
 use Tests\Framework\TestResources;
 use WindowsAzure\Resources;
-use WindowsAzure\Core\WindowsAzureUtilities;
 use WindowsAzure\Utilities;
 use WindowsAzure\Core\Serialization\XmlSerializer;
 

@@ -24,7 +24,6 @@
  
 namespace WindowsAzure\Services\Blob\Models;
 use WindowsAzure\Services\Blob\Models\BlobProperties;
-use WindowsAzure\Core\WindowsAzureUtilities;
 use WindowsAzure\Utilities;
 
 /**
@@ -58,15 +57,15 @@ class GetBlobResult
     /**
      * Creates GetBlobResult from getBlob call.
      * 
-     * @param array  $headers The HTTP response headers.
-     * @param string $body    The response body.
+     * @param array  $headers  The HTTP response headers.
+     * @param string $body     The response body.
+     * @param array  $metadata The blob metadata.
      * 
      * @return GetBlobResult
      */
-    public static function create($headers, $body)
+    public static function create($headers, $body, $metadata)
     {
         $result   = new GetBlobResult();
-        $metadata = WindowsAzureUtilities::getMetadataArray($headers);
         $result->setContentStream(Utilities::stringToStream($body));
         $result->setProperties(BlobProperties::create($headers));
         $result->setMetadata(is_null($metadata) ? array() : $metadata);

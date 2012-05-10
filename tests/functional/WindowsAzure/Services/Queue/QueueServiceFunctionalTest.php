@@ -28,7 +28,7 @@ namespace Tests\Functional\WindowsAzure\Services\Queue;
 
 use \HTTP_Request2_LogicException;
 use WindowsAzure\Core\ServiceException;
-use WindowsAzure\Core\WindowsAzureUtilities;
+use WindowsAzure\Core\Configuration;
 use WindowsAzure\Services\Core\Models\Logging;
 use WindowsAzure\Services\Core\Models\Metrics;
 use WindowsAzure\Services\Core\Models\RetentionPolicy;
@@ -51,10 +51,10 @@ class QueueServiceFunctionalTest extends FunctionalTestBase {
         $shouldReturn = false;
         try {
             $this->wrapper->setServiceProperties($serviceProperties);
-            $this->assertFalse(WindowsAzureUtilities::isEmulated(), 'Should succeed when not running in emulator');
+            $this->assertFalse(Configuration::isEmulated(), 'Should succeed when not running in emulator');
         } catch (ServiceException $e) {
             // Expect failure in emulator, as v1.6 doesn't support this method
-            if (WindowsAzureUtilities::isEmulated()) {
+            if (Configuration::isEmulated()) {
                 $this->assertEquals(400, $e->getCode(), 'getCode');
                 $shouldReturn = true;
             } else {
@@ -78,10 +78,10 @@ class QueueServiceFunctionalTest extends FunctionalTestBase {
         $shouldReturn = false;
         try {
             $this->wrapper->setServiceProperties($serviceProperties);
-            $this->assertFalse(WindowsAzureUtilities::isEmulated(), 'Should succeed when not running in emulator');
+            $this->assertFalse(Configuration::isEmulated(), 'Should succeed when not running in emulator');
         } catch (ServiceException $e) {
             // Expect failure in emulator, as v1.6 doesn't support this method
-            if (WindowsAzureUtilities::isEmulated()) {
+            if (Configuration::isEmulated()) {
                 $this->assertEquals(400, $e->getCode(), 'getCode');
                 $shouldReturn = true;
             } else {
@@ -110,12 +110,12 @@ class QueueServiceFunctionalTest extends FunctionalTestBase {
             if (!is_null($effOptions->getTimeout()) && $effOptions->getTimeout() < 1) {
                 $this->True('Expect negative timeouts in $options to throw', false);
             } else {
-                $this->assertFalse(WindowsAzureUtilities::isEmulated(), 'Should succeed when not running in emulator');
+                $this->assertFalse(Configuration::isEmulated(), 'Should succeed when not running in emulator');
             }
             $this->verifyServicePropertiesWorker($ret, null);
         }
         catch (ServiceException $e) {
-            if (WindowsAzureUtilities::isEmulated()) {
+            if (Configuration::isEmulated()) {
                 if (!is_null($options->getTimeout()) && $options->getTimeout() < 0) {
                     $this->assertEquals(500, $e->getCode(), 'getCode');
                 } else {
@@ -187,7 +187,7 @@ class QueueServiceFunctionalTest extends FunctionalTestBase {
             }
         }
 
-        if (!WindowsAzureUtilities::isEmulated()) {
+        if (!Configuration::isEmulated()) {
             $this->wrapper->setServiceProperties($interestingServiceProperties[0]);
         }
     }
@@ -207,7 +207,7 @@ class QueueServiceFunctionalTest extends FunctionalTestBase {
             if (!is_null($options->getTimeout()) && $options->getTimeout() < 1) {
                 $this->assertTrue(false, 'Expect negative timeouts in $options to throw');
             } else {
-                $this->assertFalse(WindowsAzureUtilities::isEmulated(), 'Should succeed when not running in emulator');
+                $this->assertFalse(Configuration::isEmulated(), 'Should succeed when not running in emulator');
             }
 
             $ret = (is_null($options) ? $this->wrapper->getServiceProperties() : $this->wrapper->getServiceProperties($options));
@@ -217,7 +217,7 @@ class QueueServiceFunctionalTest extends FunctionalTestBase {
                 $options = new QueueServiceOptions();
             }
 
-            if (WindowsAzureUtilities::isEmulated()) {
+            if (Configuration::isEmulated()) {
                 if (!is_null($options->getTimeout()) && $options->getTimeout() < 1) {
                     $this->assertEquals(500, $e->getCode(), 'getCode');
                 } else {

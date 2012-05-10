@@ -24,9 +24,8 @@
  
 namespace WindowsAzure\Services\Blob\Models;
 use WindowsAzure\Resources;
-use WindowsAzure\Services\Blob\Models\Container;
 use WindowsAzure\Utilities;
-use WindowsAzure\Core\WindowsAzureUtilities;
+use WindowsAzure\Services\Blob\Models\Container;
 
 /**
  * Container to hold list container response object.
@@ -86,7 +85,7 @@ class ListContainersResult
             );
             $properties = new ContainerProperties();
             $date       = $value['Properties']['Last-Modified'];
-            $date       = WindowsAzureUtilities::rfc1123ToDateTime($date);
+            $date       = Utilities::rfc1123ToDateTime($date);
             $properties->setLastModified($date);
             $properties->setEtag($value['Properties']['Etag']);
             $container->setProperties($properties);

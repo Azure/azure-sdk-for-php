@@ -27,7 +27,6 @@ use WindowsAzure\Resources;
 use WindowsAzure\Core\Configuration;
 use WindowsAzure\Services\ServiceManagement\ServiceManagementSettings;
 use WindowsAzure\Services\ServiceManagement\ServiceManagementService;
-use WindowsAzure\Core\WindowsAzureUtilities;
 use WindowsAzure\Services\ServiceManagement\Models\CreateStorageServiceOptions;
 use WindowsAzure\Services\ServiceManagement\Models\OperationStatus;
 use WindowsAzure\Services\ServiceManagement\Models\Locations;
@@ -52,8 +51,19 @@ class ServiceManagementRestProxyTestBase extends RestProxyTestBase
     
     public static function setUpBeforeClass()
     {
-        if (WindowsAzureUtilities::isEmulated()) {
+        if (Configuration::isEmulated()) {
             throw new \Exception(self::NOT_SUPPORTED);
+        }
+        
+        $subscriptionId = TestResources::serviceManagementSubscriptionId();
+        $certificatePath = TestResources::serviceManagementCertificatePath();
+        
+        if (empty($subscriptionId)) {
+            throw new \Exception('SERVICE_MANAGEMENT_SUBSCRIPTION_ID envionment variable is missing');
+        }
+        
+        if (empty($certificatePath)) {
+            throw new \Exception('SERVICE_MANAGEMENT_CERTIFICATE_PATH envionment variable is missing');
         }
     }
     

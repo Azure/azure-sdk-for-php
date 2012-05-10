@@ -25,8 +25,8 @@
 namespace WindowsAzure\Services\Core;
 use WindowsAzure\Resources;
 use WindowsAzure\Validate;
+use WindowsAzure\Utilities;
 use WindowsAzure\Core\RestProxy;
-use WindowsAzure\Core\WindowsAzureUtilities;
 use WindowsAzure\Core\Http\Url;
 use WindowsAzure\Core\Http\HttpCallContext;
 
@@ -43,6 +43,9 @@ use WindowsAzure\Core\Http\HttpCallContext;
  */
 class ServiceRestProxy extends RestProxy
 {
+    /**
+     * @var string
+     */
     private $_accountName;
 
     /**
@@ -55,8 +58,8 @@ class ServiceRestProxy extends RestProxy
      */
     public function __construct($channel, $uri, $accountName, $dataSerializer)
     {
-        $this->_accountName = $accountName;
         parent::__construct($channel, $dataSerializer, $uri);
+        $this->_accountName = $accountName;
     }
 
     /**
@@ -218,12 +221,91 @@ class ServiceRestProxy extends RestProxy
      */
     protected function addMetadataHeaders($headers, $metadata)
     {
-        WindowsAzureUtilities::validateMetadata($metadata);
+        $this->validateMetadata($metadata);
         
-        $metadata = WindowsAzureUtilities::generateMetadataHeaders($metadata);
+        $metadata = $this->generateMetadataHeaders($metadata);
         $headers  = array_merge($headers, $metadata);
         
         return $headers;
+    }
+    
+    /**
+     * Generates metadata headers by prefixing each element with 'x-ms-meta'.
+     *
+     * @param array $metadata user defined metadata.
+     * 
+     * @return array.
+     */
+    public function generateMetadataHeaders($metadata)
+    {
+        $metadataHeaders = array();
+        
+        if (is_array($metadata) && !empty($metadata)) {
+            foreach ($metadata as $key => $value) {
+                $headerName = Resources::X_MS_META_HEADER_PREFIX;
+                if (   strpos($value, "\r") !== false
+                    || strpos($value, "\n") !== false
+                ) {
+                    throw new \InvalidArgumentException(Resources::INVALID_META_MSG);
+                }
+                
+                $headerName                  .= strtolower($key);
+                $metadataHeaders[$headerName] = $value;
+            }
+        }
+        
+        return $metadataHeaders;
+    }
+    
+    /**
+     * Gets metadata array by parsing them from given headers.
+     *
+     * @param array $headers HTTP headers containing metadata elements.
+     * 
+     * @return array.
+     */
+    public function getMetadataArray($headers)
+    {
+        $metadata = array();
+        foreach ($headers as $key => $value) {
+            $isMetadataHeader = Utilities::startsWith(
+                strtolower($key),
+                Resources::X_MS_META_HEADER_PREFIX
+            );
+            
+            if ($isMetadataHeader) {
+                $MetadataName = str_replace(
+                    Resources::X_MS_META_HEADER_PREFIX,
+                    Resources::EMPTY_STRING,
+                    strtolower($key)
+                );
+                
+                $metadata[$MetadataName] = $value;
+            }
+        }
+        
+        return $metadata;
+    }
+    
+    /**
+     * Validates the provided metadata array.
+     * 
+     * @param mix $metadata The metadata array.
+     * 
+     * @return none
+     */
+    public function validateMetadata($metadata)
+    {
+        if (!is_null($metadata)) {
+            Validate::isArray($metadata, 'metadata');
+        } else {
+            $metadata = array();
+        }
+        
+        foreach ($metadata as $key => $value) {
+            Validate::isString($key, 'metadata key');
+            Validate::isString($value, 'metadata value');
+        }
     }
 }
 

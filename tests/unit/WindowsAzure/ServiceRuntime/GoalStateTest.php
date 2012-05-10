@@ -23,7 +23,7 @@
  */
 namespace Tests\Unit\WindowsAzure\ServiceRuntime;
 use Tests\Framework\TestResources;
-use WindowsAzure\Core\WindowsAzureUtilities;
+use WindowsAzure\Utilities;
 use WindowsAzure\ServiceRuntime\GoalState;
 
 /**
@@ -44,7 +44,7 @@ class GoalStateTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetDeadline()
     {
-        $deadline = WindowsAzureUtilities::rfc1123ToDateTime('Sun, 25 Sep 2011 19:42:18 GMT');
+        $deadline = Utilities::rfc1123ToDateTime('Sun, 25 Sep 2011 19:42:18 GMT');
         
         // Setup
         $goalState = new GoalState(null, null, null, $deadline, null);
@@ -58,7 +58,7 @@ class GoalStateTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetCurrentStateEndpoint()
     {
-        $deadline = WindowsAzureUtilities::rfc1123ToDateTime('Sun, 25 Sep 2011 19:42:18 GMT');
+        $deadline = Utilities::rfc1123ToDateTime('Sun, 25 Sep 2011 19:42:18 GMT');
         $currentStateEndpoint = 'endpoint';
         
         // Setup
@@ -73,7 +73,7 @@ class GoalStateTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetEnvironmentPath()
     {
-        $deadline = WindowsAzureUtilities::rfc1123ToDateTime('Sun, 25 Sep 2011 19:42:18 GMT');
+        $deadline = Utilities::rfc1123ToDateTime('Sun, 25 Sep 2011 19:42:18 GMT');
         $environmentPath = 'path';
         
         // Setup
@@ -88,7 +88,7 @@ class GoalStateTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetExpectedState()
     {
-        $deadline = WindowsAzureUtilities::rfc1123ToDateTime('Sun, 25 Sep 2011 19:42:18 GMT');
+        $deadline = Utilities::rfc1123ToDateTime('Sun, 25 Sep 2011 19:42:18 GMT');
         $expectedState = 'expectedState';
         
         // Setup
@@ -103,7 +103,7 @@ class GoalStateTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetIncarnation()
     {
-        $deadline = WindowsAzureUtilities::rfc1123ToDateTime('Sun, 25 Sep 2011 19:42:18 GMT');
+        $deadline = Utilities::rfc1123ToDateTime('Sun, 25 Sep 2011 19:42:18 GMT');
         $incarnation = 1;
         
         // Setup
@@ -118,7 +118,7 @@ class GoalStateTest extends \PHPUnit_Framework_TestCase
      */
     public function testConstructor()
     {
-        $deadline = WindowsAzureUtilities::rfc1123ToDateTime('Sun, 25 Sep 2011 19:42:18 GMT');
+        $deadline = Utilities::rfc1123ToDateTime('Sun, 25 Sep 2011 19:42:18 GMT');
         $incarnation = 1;
         
         // Setup

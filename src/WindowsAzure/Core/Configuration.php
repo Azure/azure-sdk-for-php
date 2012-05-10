@@ -26,7 +26,6 @@ namespace WindowsAzure\Core;
 use WindowsAzure\Validate;
 use WindowsAzure\Resources;
 use WindowsAzure\Core\InvalidArgumentTypeException;
-use WindowsAzure\Core\WindowsAzureUtilities;
 use WindowsAzure\Core\ServicesBuilder;
 use WindowsAzure\Services\Queue\QueueSettings;
 use WindowsAzure\Services\Blob\BlobSettings;
@@ -176,7 +175,7 @@ class Configuration
      */
     public function create($type, $builder = null)
     {
-        if (WindowsAzureUtilities::isEmulated()) {
+        if (self::isEmulated()) {
             self::_useStorageEmulatorConfig($this, $type);
         }
         
@@ -185,6 +184,16 @@ class Configuration
         }
         
         return $builder->build($this, $type);
+    }
+    
+    /**
+     * Returns boolean flag indicating if running aganist emulator or not.
+     * 
+     * @return bool
+     */
+    public static function isEmulated()
+    {
+        return (bool)getenv(Resources::EMULATED);
     }
 }
 

@@ -26,7 +26,7 @@ use WindowsAzure\Services\Blob\Models\GetContainerAclResult;
 use WindowsAzure\Services\Blob\Models\ContainerAcl;
 use Tests\Framework\TestResources;
 use WindowsAzure\Resources;
-use WindowsAzure\Core\WindowsAzureUtilities;
+use WindowsAzure\Utilities;
 
 /**
  * Unit tests for class GetContainerAclResult

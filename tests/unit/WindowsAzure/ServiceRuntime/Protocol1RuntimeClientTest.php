@@ -24,7 +24,7 @@
 namespace Tests\Unit\WindowsAzure\ServiceRuntime;
 
 use Tests\Framework\TestResources;
-use WindowsAzure\Core\WindowsAzureUtilities;
+use WindowsAzure\Utilities;
 use WindowsAzure\ServiceRuntime\AcquireCurrentState;
 use WindowsAzure\ServiceRuntime\ChunkedGoalStateDeserializer;
 use WindowsAzure\ServiceRuntime\CurrentStatus;

@@ -43,6 +43,20 @@ class ServiceRestProxyTestBase extends RestProxyTestBase
     protected $propertiesChanged;
     protected $defaultProperties;
     
+    public static function setUpBeforeClass()
+    {
+        $storageKey = TestResources::accountKey();
+        $storageName = TestResources::accountName();
+        
+        if (empty($storageKey)) {
+            throw new \Exception('AZURE_STORAGE_KEY envionment variable is missing');
+        }
+        
+        if (empty($storageName)) {
+            throw new \Exception('AZURE_STORAGE_ACCOUNT envionment variable is missing');
+        }
+    }
+    
     private function _createDefaultProperties()
     {
         $this->propertiesChanged = false;

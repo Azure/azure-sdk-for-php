@@ -26,7 +26,6 @@ namespace WindowsAzure\Services\Blob\Models;
 use WindowsAzure\Resources;
 use WindowsAzure\Validate;
 use WindowsAzure\Utilities;
-use WindowsAzure\Core\WindowsAzureUtilities;
 
 /**
  * Represents blob properties
@@ -119,7 +118,7 @@ class BlobProperties
         $result->setEtag(Utilities::tryGetValue($clean, Resources::ETAG));
         
         if (!is_null($date)) {
-            $date = WindowsAzureUtilities::rfc1123ToDateTime($date);
+            $date = Utilities::rfc1123ToDateTime($date);
             $result->setLastModified($date);
         }
         

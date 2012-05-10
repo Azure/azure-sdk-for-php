@@ -23,7 +23,7 @@
  */
 namespace Tests\Unit\WindowsAzure\Services\Blob\Models;
 use Tests\Framework\TestResources;
-use WindowsAzure\Core\WindowsAzureUtilities;
+use WindowsAzure\Utilities;
 use WindowsAzure\Services\Blob\Models\CreateBlobPagesResult;
 
 
@@ -48,7 +48,7 @@ class CreateBlobPagesResultTest extends \PHPUnit_Framework_TestCase
         // Setup
         $sample = TestResources::listBlobsOneEntry();
         $expected = $sample['Blobs']['Blob']['Properties'];
-        $expectedDate = WindowsAzureUtilities::rfc1123ToDateTime($expected['Last-Modified']);
+        $expectedDate = Utilities::rfc1123ToDateTime($expected['Last-Modified']);
         
         // Test
         $actual = CreateBlobPagesResult::create($expected);
@@ -67,7 +67,7 @@ class CreateBlobPagesResultTest extends \PHPUnit_Framework_TestCase
     public function testSetLastModified()
     {
         // Setup
-        $expected = WindowsAzureUtilities::rfc1123ToDateTime('Sun, 25 Sep 2011 19:42:18 GMT');
+        $expected = Utilities::rfc1123ToDateTime('Sun, 25 Sep 2011 19:42:18 GMT');
         $options = new CreateBlobPagesResult();
         $options->setLastModified($expected);
         

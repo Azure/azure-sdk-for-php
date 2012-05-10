@@ -33,7 +33,6 @@ use Tests\Functional\WindowsAzure\Services\Table\TableServiceFunctionalTestData;
 use WindowsAzure\Resources;
 use WindowsAzure\Utilities;
 use WindowsAzure\Core\ServiceException;
-use WindowsAzure\Core\WindowsAzureUtilities;
 use WindowsAzure\Core\Configuration;
 use WindowsAzure\Services\Table\TableService;
 use WindowsAzure\Services\Table\TableSettings;
@@ -63,7 +62,7 @@ class FunctionalTestBase extends TableServiceRestProxyTestBase {
     {
         parent::tearDownAfterClass();
         $service = self::createService();
-        if (!WindowsAzureUtilities::isEmulated()) {
+        if (!Configuration::isEmulated()) {
             $serviceProperties = TableServiceFunctionalTestData::getDefaultServiceProperties();
             $service->setServiceProperties($serviceProperties);
         }

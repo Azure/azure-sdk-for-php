@@ -25,7 +25,7 @@
 namespace WindowsAzure\Services\Blob\Models;
 use WindowsAzure\Resources;
 use WindowsAzure\Validate;
-use WindowsAzure\Core\WindowsAzureUtilities;
+use WindowsAzure\Utilities;
 
 /**
  * Holds result of calling setBlobProperties wrapper
@@ -66,7 +66,7 @@ class SetBlobPropertiesResult
     {
         $result = new SetBlobPropertiesResult();
         $date   = $headers[Resources::LAST_MODIFIED];
-        $result->setLastModified(WindowsAzureUtilities::rfc1123ToDateTime($date));
+        $result->setLastModified(Utilities::rfc1123ToDateTime($date));
         $result->setEtag($headers[Resources::ETAG]);
         if (array_key_exists(Resources::X_MS_BLOB_SEQUENCE_NUMBER, $headers)) {
             $sNumber = $headers[Resources::X_MS_BLOB_SEQUENCE_NUMBER];
