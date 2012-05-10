@@ -240,7 +240,7 @@ class ServiceRestProxy extends RestProxy
     {
         $metadataHeaders = array();
         
-        if (is_array($metadata) && !empty($metadata)) {
+        if (is_array($metadata) && !is_null($metadata)) {
             foreach ($metadata as $key => $value) {
                 $headerName = Resources::X_MS_META_HEADER_PREFIX;
                 if (   strpos($value, "\r") !== false
