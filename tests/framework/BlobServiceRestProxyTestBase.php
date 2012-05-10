@@ -84,7 +84,6 @@ class BlobServiceRestProxyTestBase extends ServiceRestProxyTestBase
                     }
                     catch (\Exception $e)
                     {
-                        var_dump($e);
                         // Ignore exception and continue.
                         error_log($e->getMessage());
                     }
