@@ -731,6 +731,14 @@ class TableRestProxy extends ServiceRestProxy implements ITable
         
         if (is_null($options)) {
             $options = new QueryTablesOptions();
+        } else if (is_string($options)) {
+            $prefix  = $options;
+            $options = new QueryTablesOptions();
+            $options->setPrefix($prefix);
+        } else if ($options instanceof Filter) {
+            $filter  = $options;
+            $options = new QueryTablesOptions();
+            $options->setFilter($filter);
         }
         
         $query   = $options->getQuery();
@@ -934,6 +942,14 @@ class TableRestProxy extends ServiceRestProxy implements ITable
         
         if (is_null($options)) {
             $options = new QueryEntitiesOptions();
+        } else if (is_string($options)) {
+            $queryString  = $options;
+            $options      = new QueryEntitiesOptions();
+            $options->setFilter(Filter::applyQueryString($queryString));
+        } else if ($options instanceof Filter) {
+            $filter  = $options;
+            $options = new QueryEntitiesOptions();
+            $options->setFilter($filter);
         }
         
         $encodedPK   = $this->_encodeODataUriValue($options->getNextPartitionKey());

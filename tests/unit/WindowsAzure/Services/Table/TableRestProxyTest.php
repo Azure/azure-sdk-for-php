@@ -305,6 +305,88 @@ class TableRestProxyTest extends TableServiceRestProxyTestBase
     }
     
     /**
+     * @covers WindowsAzure\Services\Table\TableRestProxy::queryTables
+     * @covers WindowsAzure\Services\Table\TableRestProxy::_buildFilterExpression
+     * @covers WindowsAzure\Services\Table\TableRestProxy::_buildFilterExpressionRec
+     * @covers WindowsAzure\Services\Table\TableRestProxy::_addOptionalQuery
+     * @covers WindowsAzure\Services\Table\TableRestProxy::_encodeODataUriValues
+     * @covers WindowsAzure\Services\Table\TableRestProxy::_encodeODataUriValue
+     * @covers WindowsAzure\Services\Table\Models\EdmType::serializeQueryValue
+     * @covers WindowsAzure\Services\Table\Models\QueryTablesResult::create
+     * @covers WindowsAzure\Services\Table\Utilities\AtomReaderWriter::_parseBody
+     * @covers WindowsAzure\Services\Table\Utilities\AtomReaderWriter::parseTableEntries
+     * @covers WindowsAzure\Services\Core\ServiceRestProxy::sendContext
+     */
+    public function testQueryTablesWithStringOption()
+    {
+        $this->skipIfEmulated();
+        
+        // Setup
+        $name1 = 'wquerytableswithstringoption1';
+        $name2 = 'querytableswithstringoption2';
+        $name3 = 'querytableswithstringoption3';
+        $prefix = 'q';
+        $this->createTable($name1);
+        $this->createTable($name2);
+        $this->createTable($name3);
+        
+        // Test
+        $result = $this->wrapper->queryTables($prefix);
+        
+        // Assert
+        $tables = $result->getTables();
+        $this->assertCount(2, $tables);
+        $this->assertEquals($name2, $tables[0]);
+        $this->assertEquals($name3, $tables[1]);
+    }
+    
+    /**
+     * @covers WindowsAzure\Services\Table\TableRestProxy::queryTables
+     * @covers WindowsAzure\Services\Table\TableRestProxy::_buildFilterExpression
+     * @covers WindowsAzure\Services\Table\TableRestProxy::_buildFilterExpressionRec
+     * @covers WindowsAzure\Services\Table\TableRestProxy::_addOptionalQuery
+     * @covers WindowsAzure\Services\Table\TableRestProxy::_encodeODataUriValues
+     * @covers WindowsAzure\Services\Table\TableRestProxy::_encodeODataUriValue
+     * @covers WindowsAzure\Services\Table\Models\EdmType::serializeQueryValue
+     * @covers WindowsAzure\Services\Table\Models\QueryTablesResult::create
+     * @covers WindowsAzure\Services\Table\Utilities\AtomReaderWriter::_parseBody
+     * @covers WindowsAzure\Services\Table\Utilities\AtomReaderWriter::parseTableEntries
+     * @covers WindowsAzure\Services\Core\ServiceRestProxy::sendContext
+     */
+    public function testQueryTablesWithFilterOption()
+    {
+        $this->skipIfEmulated();
+        
+        // Setup
+        $name1 = 'wquerytableswithfilteroption1';
+        $name2 = 'querytableswithfilteroption2';
+        $name3 = 'querytableswithfilteroption3';
+        $prefix = 'q';
+        $prefixFilter = Filter::applyAnd(
+                Filter::applyGe(
+                    Filter::applyPropertyName('TableName'),
+                    Filter::applyConstant($prefix, EdmType::STRING)
+                ),
+                Filter::applyLe(
+                    Filter::applyPropertyName('TableName'),
+                    Filter::applyConstant($prefix . '{', EdmType::STRING)
+                )
+            );
+        $this->createTable($name1);
+        $this->createTable($name2);
+        $this->createTable($name3);
+        
+        // Test
+        $result = $this->wrapper->queryTables($prefixFilter);
+        
+        // Assert
+        $tables = $result->getTables();
+        $this->assertCount(2, $tables);
+        $this->assertEquals($name2, $tables[0]);
+        $this->assertEquals($name3, $tables[1]);
+    }
+    
+    /**
      * @covers WindowsAzure\Services\Table\TableRestProxy::insertEntity
      * @covers WindowsAzure\Services\Table\TableRestProxy::_constructInsertEntityContext
      * @covers WindowsAzure\Services\Table\Models\EdmType::serializeValue
@@ -374,6 +456,81 @@ class TableRestProxyTest extends TableServiceRestProxyTestBase
         
         // Test
         $result = $this->wrapper->queryEntities($name);
+        
+        // Assert
+        $entities = $result->getEntities();
+        $this->assertCount(1, $entities);
+        $this->assertEquals($pk1, $entities[0]->getPartitionKey());
+    }
+    
+    /**
+     * @covers WindowsAzure\Services\Table\TableRestProxy::queryEntities
+     * @covers WindowsAzure\Services\Table\TableRestProxy::_addOptionalQuery
+     * @covers WindowsAzure\Services\Table\TableRestProxy::_encodeODataUriValues
+     * @covers WindowsAzure\Services\Table\TableRestProxy::_encodeODataUriValue
+     * @covers WindowsAzure\Services\Table\Utilities\AtomReaderWriter::_parseBody
+     * @covers WindowsAzure\Services\Table\Utilities\AtomReaderWriter::parseEntities
+     * @covers WindowsAzure\Services\Table\Utilities\AtomReaderWriter::_parseOneEntity
+     * @covers WindowsAzure\Services\Core\ServiceRestProxy::sendContext
+     */
+    public function testQueryEntitiesQueryStringOption()
+    {
+        $this->skipIfEmulated();
+        
+        // Setup
+        $name = 'queryentitieswithquerystringoption';
+        $pk1 = '123';
+        $pk2 = '124';
+        $pk3 = '125';
+        $e1 = TestResources::getTestEntity($pk1, '1');
+        $e2 = TestResources::getTestEntity($pk2, '2');
+        $e3 = TestResources::getTestEntity($pk3, '3');
+        $this->createTable($name);
+        $this->wrapper->insertEntity($name, $e1);
+        $this->wrapper->insertEntity($name, $e2);
+        $this->wrapper->insertEntity($name, $e3);
+        $queryString = "PartitionKey eq '123'";
+        
+        // Test
+        $result = $this->wrapper->queryEntities($name, $queryString);
+        
+        // Assert
+        $entities = $result->getEntities();
+        $this->assertCount(1, $entities);
+        $this->assertEquals($pk1, $entities[0]->getPartitionKey());
+    }
+    
+    /**
+     * @covers WindowsAzure\Services\Table\TableRestProxy::queryEntities
+     * @covers WindowsAzure\Services\Table\TableRestProxy::_addOptionalQuery
+     * @covers WindowsAzure\Services\Table\TableRestProxy::_encodeODataUriValues
+     * @covers WindowsAzure\Services\Table\TableRestProxy::_encodeODataUriValue
+     * @covers WindowsAzure\Services\Table\Utilities\AtomReaderWriter::_parseBody
+     * @covers WindowsAzure\Services\Table\Utilities\AtomReaderWriter::parseEntities
+     * @covers WindowsAzure\Services\Table\Utilities\AtomReaderWriter::_parseOneEntity
+     * @covers WindowsAzure\Services\Core\ServiceRestProxy::sendContext
+     */
+    public function testQueryEntitiesFilterOption()
+    {
+        $this->skipIfEmulated();
+        
+        // Setup
+        $name = 'queryentitieswithfilteroption';
+        $pk1 = '123';
+        $pk2 = '124';
+        $pk3 = '125';
+        $e1 = TestResources::getTestEntity($pk1, '1');
+        $e2 = TestResources::getTestEntity($pk2, '2');
+        $e3 = TestResources::getTestEntity($pk3, '3');
+        $this->createTable($name);
+        $this->wrapper->insertEntity($name, $e1);
+        $this->wrapper->insertEntity($name, $e2);
+        $this->wrapper->insertEntity($name, $e3);
+        $queryString = "PartitionKey eq '123'";
+        $filter = Filter::applyQueryString($queryString);
+        
+        // Test
+        $result = $this->wrapper->queryEntities($name, $filter);
         
         // Assert
         $entities = $result->getEntities();
