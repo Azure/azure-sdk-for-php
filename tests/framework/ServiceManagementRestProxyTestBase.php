@@ -54,6 +54,17 @@ class ServiceManagementRestProxyTestBase extends RestProxyTestBase
         if (Configuration::isEmulated()) {
             throw new \Exception(self::NOT_SUPPORTED);
         }
+        
+        $subscriptionId = TestResources::serviceManagementSubscriptionId();
+        $certificatePath = TestResources::serviceManagementCertificatePath();
+        
+        if (empty($subscriptionId)) {
+            throw new \Exception('SERVICE_MANAGEMENT_SUBSCRIPTION_ID envionment variable is missing');
+        }
+        
+        if (empty($certificatePath)) {
+            throw new \Exception('SERVICE_MANAGEMENT_CERTIFICATE_PATH envionment variable is missing');
+        }
     }
     
     public function __construct()
