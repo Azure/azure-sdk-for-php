@@ -24,7 +24,7 @@
 namespace Tests\Unit\WindowsAzure\Services\Blob\Models;
 use Tests\Framework\TestResources;
 use WindowsAzure\Services\Blob\Models\BlobProperties;
-use WindowsAzure\Core\WindowsAzureUtilities;
+use WindowsAzure\Utilities;
 
 /**
  * Unit tests for class BlobProperties
@@ -47,7 +47,7 @@ class BlobPropertiesTest extends \PHPUnit_Framework_TestCase
         // Setup
         $sample = TestResources::listBlobsOneEntry();
         $expected = $sample['Blobs']['Blob']['Properties'];
-        $expectedDate = WindowsAzureUtilities::rfc1123ToDateTime($expected['Last-Modified']);
+        $expectedDate = Utilities::rfc1123ToDateTime($expected['Last-Modified']);
         
         // Test
         $actual = BlobProperties::create($expected);
@@ -73,7 +73,7 @@ class BlobPropertiesTest extends \PHPUnit_Framework_TestCase
     public function testSetLastModified()
     {
         // Setup
-        $expected = WindowsAzureUtilities::rfc1123ToDateTime('Sun, 25 Sep 2011 19:42:18 GMT');
+        $expected = Utilities::rfc1123ToDateTime('Sun, 25 Sep 2011 19:42:18 GMT');
         $properties = new BlobProperties();
         $properties->setLastModified($expected);
         

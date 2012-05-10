@@ -26,7 +26,6 @@ namespace WindowsAzure\Services\Blob\Models;
 use WindowsAzure\Validate;
 use WindowsAzure\Utilities;
 use WindowsAzure\Resources;
-use WindowsAzure\Core\WindowsAzureUtilities;
 use WindowsAzure\Services\Blob\Models\PageRange;
 
 /**
@@ -76,7 +75,7 @@ class ListPageBlobRangesResult
         $headers = array_change_key_case($headers);
         
         $date          = $headers[Resources::LAST_MODIFIED];
-        $date          = WindowsAzureUtilities::rfc1123ToDateTime($date);
+        $date          = Utilities::rfc1123ToDateTime($date);
         $blobLength    = intval($headers[Resources::X_MS_BLOB_CONTENT_LENGTH]);
         $rawPageRanges = array();
         

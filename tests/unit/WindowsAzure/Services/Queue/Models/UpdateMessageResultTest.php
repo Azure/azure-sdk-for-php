@@ -24,7 +24,7 @@
 
 namespace Tests\Unit\WindowsAzure\Services\Queue\Models;
 use WindowsAzure\Services\Queue\Models\UpdateMessageResult;
-use WindowsAzure\Core\WindowsAzureUtilities;
+use WindowsAzure\Utilities;
 
 /**
  * Unit tests for class UpdateMessageResult
@@ -80,7 +80,7 @@ class UpdateMessageResultTest extends \PHPUnit_Framework_TestCase
     {
         // Setup
         $updateMessageResult = new UpdateMessageResult();
-        $expected = WindowsAzureUtilities::rfc1123ToDateTime('Fri, 09 Oct 2009 23:29:20 GMT');
+        $expected = Utilities::rfc1123ToDateTime('Fri, 09 Oct 2009 23:29:20 GMT');
         $updateMessageResult->setTimeNextVisible($expected);
         
         // Test
@@ -97,7 +97,7 @@ class UpdateMessageResultTest extends \PHPUnit_Framework_TestCase
     {
         // Setup
         $updateMessageResult = new UpdateMessageResult();
-        $expected = WindowsAzureUtilities::rfc1123ToDateTime('Fri, 09 Oct 2009 23:29:20 GMT');
+        $expected = Utilities::rfc1123ToDateTime('Fri, 09 Oct 2009 23:29:20 GMT');
         
         // Test
         $updateMessageResult->setTimeNextVisible($expected);

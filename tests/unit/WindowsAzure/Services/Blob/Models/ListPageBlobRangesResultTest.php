@@ -22,7 +22,7 @@
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
 namespace Tests\Unit\WindowsAzure\Services\Blob\Models;
-use WindowsAzure\Core\WindowsAzureUtilities;
+use WindowsAzure\Utilities;
 use WindowsAzure\Services\Blob\Models\ListPageBlobRangesResult;
 use WindowsAzure\Services\Blob\Models\PageRange;
 
@@ -46,7 +46,7 @@ class ListPageBlobRangesResultTest extends \PHPUnit_Framework_TestCase
     public function testSetLastModified()
     {
         // Setup
-        $expected = WindowsAzureUtilities::rfc1123ToDateTime('Sun, 25 Sep 2011 19:42:18 GMT');
+        $expected = Utilities::rfc1123ToDateTime('Sun, 25 Sep 2011 19:42:18 GMT');
         $result = new ListPageBlobRangesResult();
         $result->setLastModified($expected);
         

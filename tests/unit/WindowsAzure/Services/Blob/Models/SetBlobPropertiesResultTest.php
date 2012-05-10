@@ -23,7 +23,7 @@
  */
 namespace Tests\Unit\WindowsAzure\Services\Blob\Models;
 use WindowsAzure\Services\Blob\Models\SetBlobPropertiesResult;
-use WindowsAzure\Core\WindowsAzureUtilities;
+use WindowsAzure\Utilities;
 
 /**
  * Unit tests for class SetBlobPropertiesResult
@@ -45,7 +45,7 @@ class SetBlobPropertiesResultTest extends \PHPUnit_Framework_TestCase
     public function testSetLastModified()
     {
         // Setup
-        $expected = WindowsAzureUtilities::rfc1123ToDateTime('Sun, 25 Sep 2011 19:42:18 GMT');
+        $expected = Utilities::rfc1123ToDateTime('Sun, 25 Sep 2011 19:42:18 GMT');
         $prooperties = new SetBlobPropertiesResult();
         $prooperties->setLastModified($expected);
         

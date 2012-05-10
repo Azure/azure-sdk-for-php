@@ -26,7 +26,6 @@ namespace WindowsAzure\Services\Blob\Models;
 use WindowsAzure\Resources;
 use WindowsAzure\Validate;
 use WindowsAzure\Utilities;
-use WindowsAzure\Core\WindowsAzureUtilities;
 
 /**
  * Holds result of calling create or clear blob pages
@@ -75,7 +74,7 @@ class CreateBlobPagesResult
         $clean  = array_change_key_case($headers);
         
         $date = $clean[Resources::LAST_MODIFIED];
-        $date = WindowsAzureUtilities::rfc1123ToDateTime($date);
+        $date = Utilities::rfc1123ToDateTime($date);
         $result->setEtag($clean[Resources::ETAG]);
         $result->setLastModified($date);
         $result->setContentMD5(
