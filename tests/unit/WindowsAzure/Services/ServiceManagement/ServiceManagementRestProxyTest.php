@@ -24,6 +24,7 @@
 
 namespace Tests\Unit\WindowsAzure\Services\ServiceManagement;
 use Tests\Framework\ServiceManagementRestProxyTestBase;
+use WindowsAzure\Resources;
 use WindowsAzure\Core\Http\HttpClient;
 use WindowsAzure\Core\Serialization\XmlSerializer;
 use WindowsAzure\Services\ServiceManagement\ServiceManagementRestProxy;
@@ -58,10 +59,16 @@ class ServiceManagementRestProxyTest extends ServiceManagementRestProxyTestBase
         $dataSerializer = new XmlSerializer();
         
         // Test
-        $actual = new ServiceManagementRestProxy($channel, $subscriptionId, $dataSerializer);
+        $actual = new ServiceManagementRestProxy(
+            $channel,
+            $subscriptionId,
+            Resources::SERVICE_MANAGEMENT_URL,
+            $dataSerializer
+        );
         
         // Assert
         $this->assertNotNull($actual);
+        $this->assertEquals(Resources::SERVICE_MANAGEMENT_URL, $actual->getUri());
     }
     
     /**

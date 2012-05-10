@@ -88,37 +88,5 @@ class CreateBlobSnapshotResultTest extends \PHPUnit_Framework_TestCase
             );
         
     }
-    
-    /**
-     * @covers WindowsAzure\Services\Blob\Models\CreateBlobSnapshotResult::getRequestId
-     * @covers WindowsAzure\Services\Blob\Models\CreateBlobSnapshotResult::setRequestId
-     */
-    public function testSetRequestId()
-    {
-        $createBlobSnapshotResult = new CreateBlobSnapshotResult();
-        $expected = "12345";
-        $createBlobSnapshotResult->setRequestId($expected);
-        
-        $this->assertEquals(
-            $expected,
-            $createBlobSnapshotResult->getRequestId($expected)
-            );
-    }
-    
-    /**
-     * @covers WindowsAzure\Services\Blob\Models\CreateBlobSnapshotResult::getDate
-     * @covers WindowsAzure\Services\Blob\Models\CreateBlobSnapshotResult::setDate
-     */
-    public function testSetDate()
-    {
-        $createBlobSnapshotResult = new CreateBlobSnapshotResult();
-        $expected = new \DateTime("2008-8-8");
-        $createBlobSnapshotResult->setDate($expected);
-        
-        $this->assertEquals(
-            $expected,
-            $createBlobSnapshotResult->getDate()
-            );
-    }
 }
 ?>

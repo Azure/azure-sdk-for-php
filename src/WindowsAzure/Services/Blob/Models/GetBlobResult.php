@@ -51,7 +51,7 @@ class GetBlobResult
     private $_metadata;
     
     /**
-     * @var string
+     * @var resource
      */
     private $_contentStream;
     

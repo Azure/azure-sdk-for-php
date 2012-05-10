@@ -72,7 +72,7 @@ class CreateBlobPagesResult
     public static function create($headers)
     {
         $result = new CreateBlobPagesResult();
-        $clean  = Utilities::keysToLower($headers);
+        $clean  = array_change_key_case($headers);
         
         $date = $clean[Resources::LAST_MODIFIED];
         $date = WindowsAzureUtilities::rfc1123ToDateTime($date);

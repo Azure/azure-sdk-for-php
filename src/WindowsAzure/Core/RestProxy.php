@@ -126,8 +126,7 @@ class RestProxy
     }
 
     /**
-     * Adds new filter to queue proxy object and returns new QueueRestProxy with
-     * that filter.
+     * Adds new filter to new service rest proxy object and returns that object back.
      *
      * @param WindowsAzure\Core\IServiceFilter $filter Filter to add for 
      * the pipeline.

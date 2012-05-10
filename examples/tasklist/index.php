@@ -37,7 +37,6 @@ use WindowsAzure\Services\Table\Models\EdmType;
 
 $subscriptionId      = 'Your subscription';
 $certificatePath     = 'Certificate path';
-$defaultParitionKey  = '123';
 $storageServiceName  = 'phpsdkexamples'; // Storage account may change if it already exists in another subscription.
 $tasksTableName      = 'tasks';
 $cloudSubscription   = null;
@@ -48,7 +47,6 @@ $cloudTable          = null;
 $cloudSubscription   = new CloudSubscription($subscriptionId, $certificatePath);
 $cloudStorageService = $cloudSubscription->createStorageService($storageServiceName);
 $cloudTable          = $cloudStorageService->createTable($tasksTableName);
-$cloudTable->setDefaultPartitionKey($defaultParitionKey);
 
 if (array_key_exists('Completed', $_POST)) {
     // Remove completed item.

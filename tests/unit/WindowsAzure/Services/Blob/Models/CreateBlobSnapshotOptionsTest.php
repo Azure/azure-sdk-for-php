@@ -52,7 +52,7 @@ class CreateBlobSnapshotOptionsTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(
             $expected,
             $createBlobSnapshotOptions->getMetadata()
-            );
+        );
     }
     
     
@@ -69,8 +69,7 @@ class CreateBlobSnapshotOptionsTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(
             $expected,
             $createBlobSnapshotOptions->getLeaseId()
-            );
-        
+        );
     }
 }
 ?>

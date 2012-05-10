@@ -24,6 +24,7 @@
  
 namespace Client;
 use WindowsAzure\Core\Configuration;
+use WindowsAzure\Resources;
 use WindowsAzure\Services\ServiceManagement\ServiceManagementService;
 use WindowsAzure\Services\ServiceManagement\ServiceManagementSettings;
 use WindowsAzure\Services\ServiceManagement\Models\Locations;
@@ -67,6 +68,10 @@ class CloudSubscription
         $config->setProperty(
             ServiceManagementSettings::CERTIFICATE_PATH,
             $certificatePath
+        );
+        $config->setProperty(
+            ServiceManagementSettings::URI,
+            Resources::SERVICE_MANAGEMENT_URL
         );
         $this->_proxy = ServiceManagementService::create($config);
     }
