@@ -47,10 +47,32 @@ use WindowsAzure\Resources;
  */
 class WrapRestProxyTest extends WrapRestProxyTestBase
 {
-    public function testFoo() 
+    /**
+     * @covers WindowsAzure\Services\ServiceBus\WrapRestProxy::__construct
+     * @covers WindowsAzure\Services\ServiceBus\WrapRestProxy::wrapAccessToken
+     */
+    public function testWrapAccessToken() 
     {
-        $this->assertTrue(true);   
+        $wrapUri = 'https://'
+            .TestResources::serviceBusNamespace()
+            .'-sb.accesscontrol.windows.net/WRAPv0.9';
+        $wrapUserName = TestResources::wrapAuthenticationName();
+        $wrapPassword = TestResources::wrapPassword();
+        $scope = 'http://'
+            .TestResources::serviceBusNameSpace()
+            .'.servicebus.windows.net';
+        
+        $wrapAccessTokenResult = $this->wrapper->wrapAccessToken(
+            $wrapUri, 
+            $wrapUserName, 
+            $wrapPassword, 
+            $scope
+        );
+        
+        $this->assertNotNull($wrapAccessTokenResult);
+        $this->assertNotNull($wrapAccessTokenResult->getAccessToken());
     }
+    
 }
 
 ?>

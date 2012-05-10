@@ -168,6 +168,28 @@ class ServiceRestProxyTest extends \PHPUnit_Framework_TestCase
         // Assert
         $this->assertEquals($expected, $actual);
     }
+
+    /** 
+    * @covers WindowsAzure\Services\Core\ServiceRestProxy::addPostParameter
+    * @depends test__construct
+    */
+    public function testPostParameter($restWrapper)
+    {
+        // Setup
+        $postParameters = array();
+        $key = 'a';
+        $expected = 'b';
+    
+        // Test
+        $processedPostParameters = $restWrapper->addPostParameter($postParameters, $key, $expected);
+        $actual = $processedPostParameters[$key];
+
+        // Assert
+        $this->assertEquals(
+            $expected,
+            $actual
+        );
+    }
 }
 
 ?>

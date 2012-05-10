@@ -677,6 +677,7 @@ class TableRestProxy extends ServiceRestProxy implements ITable
         
         $method      = Resources::HTTP_PUT;
         $headers     = array();
+        $postParams  = array();
         $queryParams = array();
         $statusCode  = Resources::STATUS_ACCEPTED;
         $path        = Resources::EMPTY_STRING;
@@ -709,7 +710,15 @@ class TableRestProxy extends ServiceRestProxy implements ITable
         );
         $body = $serviceProperties->toXml($this->dataSerializer);
         
-        $this->send($method, $headers, $queryParams, $path, $statusCode, $body);
+        $this->send(
+            $method, 
+            $headers, 
+            $queryParams, 
+            $postParams, 
+            $path, 
+            $statusCode, 
+            $body
+        );
     }
     
     /**
@@ -725,6 +734,7 @@ class TableRestProxy extends ServiceRestProxy implements ITable
     {
         $method      = Resources::HTTP_GET;
         $headers     = array();
+        $postParams  = array();
         $queryParams = array();
         $statusCode  = Resources::STATUS_OK;
         $path        = 'Tables';
@@ -792,7 +802,14 @@ class TableRestProxy extends ServiceRestProxy implements ITable
             $queryParams[Resources::QP_FILTER] = Resources::EMPTY_STRING;
         }
         
-        $response = $this->send($method, $headers, $queryParams, $path, $statusCode);
+        $response = $this->send(
+            $method, 
+            $headers, 
+            $queryParams, 
+            $postParams, 
+            $path, 
+            $statusCode
+        );
         $tables   = $this->_atomSerializer->parseTableEntries($response->getBody());
         
         return QueryTablesResult::create($response->getHeader(), $tables);
@@ -815,6 +832,7 @@ class TableRestProxy extends ServiceRestProxy implements ITable
         
         $method      = Resources::HTTP_POST;
         $headers     = array();
+        $postParams  = array();
         $queryParams = array();
         $statusCode  = Resources::STATUS_CREATED;
         $path        = 'Tables';
@@ -835,7 +853,15 @@ class TableRestProxy extends ServiceRestProxy implements ITable
             $options->getTimeout()
         );
         
-        $this->send($method, $headers, $queryParams, $path, $statusCode, $body);
+        $this->send(
+            $method, 
+            $headers, 
+            $queryParams, 
+            $postParams, 
+            $path, 
+            $statusCode, 
+            $body
+        );
     }
     
     /**
@@ -853,6 +879,7 @@ class TableRestProxy extends ServiceRestProxy implements ITable
         
         $method      = Resources::HTTP_GET;
         $headers     = array();
+        $postParams  = array();
         $queryParams = array();
         $statusCode  = Resources::STATUS_OK;
         $path        = "Tables('$table')";
@@ -872,7 +899,14 @@ class TableRestProxy extends ServiceRestProxy implements ITable
             $options->getTimeout()
         );
         
-        $response = $this->send($method, $headers, $queryParams, $path, $statusCode);
+        $response = $this->send(
+            $method, 
+            $headers, 
+            $queryParams, 
+            $postParams, 
+            $path, 
+            $statusCode
+        );
         
         return GetTableResult::create($response->getBody(), $this->_atomSerializer);
     }
@@ -894,6 +928,7 @@ class TableRestProxy extends ServiceRestProxy implements ITable
         
         $method      = Resources::HTTP_DELETE;
         $headers     = array();
+        $postParams  = array();
         $queryParams = array();
         $statusCode  = Resources::STATUS_NO_CONTENT;
         $path        = "Tables('$table')";
@@ -908,7 +943,14 @@ class TableRestProxy extends ServiceRestProxy implements ITable
             $options->getTimeout()
         );
         
-        $this->send($method, $headers, $queryParams, $path, $statusCode);
+        $this->send(
+            $method, 
+            $headers, 
+            $queryParams, 
+            $postParams, 
+            $path, 
+            $statusCode
+        );
     }
     
     /**
@@ -928,6 +970,7 @@ class TableRestProxy extends ServiceRestProxy implements ITable
         
         $method      = Resources::HTTP_GET;
         $headers     = array();
+        $postParams  = array();
         $queryParams = array();
         $statusCode  = Resources::STATUS_OK;
         $path        = $table;
@@ -972,7 +1015,15 @@ class TableRestProxy extends ServiceRestProxy implements ITable
             }
         }
         
-        $response = $this->send($method, $headers, $queryParams, $path, $statusCode);
+        $response = $this->send(
+            $method,
+            $headers, 
+            $queryParams, 
+            $postParams, 
+            $path, 
+            $statusCode
+        );
+
         $entities = $this->_atomSerializer->parseEntities($response->getBody());
         
         return QueryEntitiesResult::create($response->getHeader(), $entities);
@@ -1189,6 +1240,7 @@ class TableRestProxy extends ServiceRestProxy implements ITable
         $mime        = $this->_createBatchRequestBody($operations, $contexts);
         $body        = $mime['body'];
         $headers     = $mime['headers'];
+        $postParams  = array();
         $queryParams = array();
         $statusCode  = Resources::STATUS_ACCEPTED;
         $path        = '$batch';
@@ -1204,7 +1256,13 @@ class TableRestProxy extends ServiceRestProxy implements ITable
         );
         
         $response = $this->send(
-            $method, $headers, $queryParams, $path, $statusCode, $body
+            $method, 
+            $headers, 
+            $queryParams, 
+            $postParams, 
+            $path, 
+            $statusCode, 
+            $body
         );
         
         return BatchResult::create(

@@ -163,10 +163,14 @@ spl_autoload_register(
             'tests\\unit\\windowsazure\\services\\queue\\models\\windowsazurequeuemessagetest' => '/unit/WindowsAzure/Services/Queue/Models/WindowsAzureQueueMessageTest.php',
             'tests\\unit\\windowsazure\\services\\queue\\queuerestproxytest' => '/unit/WindowsAzure/Services/Queue/QueueRestProxyTest.php',
             'tests\\unit\\windowsazure\\services\\queue\\queueservicetest' => '/unit/WindowsAzure/Services/Queue/QueueServiceTest.php',
+            'tests\\unit\\windowsazure\\services\\servicebus\\models\\activetokentest' => '/unit/WindowsAzure/Services/ServiceBus/models/ActiveTokenTest.php',
             'tests\\unit\\windowsazure\\services\\servicebus\\models\\wrapaccesstokenresulttest' => '/unit/WindowsAzure/Services/ServiceBus/models/WrapAccessTokenResultTest.php',
             'tests\\unit\\windowsazure\\services\\servicebus\\servicebusrestproxytest' => '/unit/WindowsAzure/Services/ServiceBus/ServiceBusRestProxyTest.php',
+            'tests\\unit\\windowsazure\\services\\servicebus\\servicebusservicetest' => '/unit/WindowsAzure/Services/ServiceBus/ServiceBusServiceTest.php',
             'tests\\unit\\windowsazure\\services\\servicebus\\servicebussettingstest' => '/unit/WindowsAzure/Services/ServiceBus/ServiceBusSettingsTest.php',
             'tests\\unit\\windowsazure\\services\\servicebus\\wraprestproxytest' => '/unit/WindowsAzure/Services/ServiceBus/WrapRestProxyTest.php',
+            'tests\\unit\\windowsazure\\services\\servicebus\\wrapservicetest' => '/unit/WindowsAzure/Services/ServiceBus/WrapServiceTest.php',
+            'tests\\unit\\windowsazure\\services\\servicebus\\wraptokenmanagertest' => '/unit/WindowsAzure/Services/ServiceBus/WrapTokenManagerTest.php',
             'tests\\unit\\windowsazure\\services\\servicemanagement\\models\\affinitygrouptest' => '/unit/WindowsAzure/Services/ServiceManagement/Models/AffinityGroupTest.php',
             'tests\\unit\\windowsazure\\services\\servicemanagement\\models\\asynchronousoperationresulttest' => '/unit/WindowsAzure/Services/ServiceManagement/Models/AsynchronousOperationResultTest.php',
             'tests\\unit\\windowsazure\\services\\servicemanagement\\models\\createaffinitygroupoptionstest' => '/unit/WindowsAzure/Services/ServiceManagement/Models/CreateAffinityGroupOptionsTest.php',
@@ -214,7 +218,8 @@ spl_autoload_register(
             'tests\\unit\\windowsazure\\services\\table\\tableservicetest' => '/unit/WindowsAzure/Services/Table/TableServiceTest.php',
             'tests\\unit\\windowsazure\\utilitiestest' => '/unit/WindowsAzure/UtilitiesTest.php',
             'tests\\unit\\windowsazure\\validatetest' => '/unit/WindowsAzure/ValidateTest.php',
-            'windowsazureutilitiestest' => '/unit/WindowsAzure/Core/WindowsAzureUtilitiesTest.php'
+            'windowsazureutilitiestest' => '/unit/WindowsAzure/Core/WindowsAzureUtilitiesTest.php',
+            'wrapfiltertest' => '/unit/WindowsAzure/Core/Filters/WrapFilterTest.php'
           );
       }
       $cn = strtolower($class);
