@@ -15,22 +15,22 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   Tests\Unit\WindowsAzure\Services\Blob\Models
+ * @package   Tests\Unit\WindowsAzure\Blob\Models
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
 
-namespace Tests\Unit\WindowsAzure\Services\Blob\Models;
-use WindowsAzure\Services\Blob\Models\ListContainersOptions;
+namespace Tests\Unit\WindowsAzure\Blob\Models;
+use WindowsAzure\Blob\Models\ListContainersOptions;
 use Tests\Framework\TestResources;
 
 /**
  * Unit tests for class ListContainersOptions
  *
  * @category  Microsoft
- * @package   Tests\Unit\WindowsAzure\Services\Blob\Models
+ * @package   Tests\Unit\WindowsAzure\Blob\Models
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
@@ -40,7 +40,7 @@ use Tests\Framework\TestResources;
 class ListContainersOptionsTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @covers WindowsAzure\Services\Blob\Models\ListContainersOptions::setPrefix
+     * @covers WindowsAzure\Blob\Models\ListContainersOptions::setPrefix
      */
     public function testSetPrefix()
     {
@@ -56,7 +56,7 @@ class ListContainersOptionsTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers WindowsAzure\Services\Blob\Models\ListContainersOptions::getPrefix
+     * @covers WindowsAzure\Blob\Models\ListContainersOptions::getPrefix
      */
     public function testGetPrefix()
     {
@@ -73,7 +73,7 @@ class ListContainersOptionsTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers WindowsAzure\Services\Blob\Models\ListContainersOptions::setMarker
+     * @covers WindowsAzure\Blob\Models\ListContainersOptions::setMarker
      */
     public function testSetMarker()
     {
@@ -89,7 +89,7 @@ class ListContainersOptionsTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers WindowsAzure\Services\Blob\Models\ListContainersOptions::getMarker
+     * @covers WindowsAzure\Blob\Models\ListContainersOptions::getMarker
      */
     public function testGetMarker()
     {
@@ -106,7 +106,7 @@ class ListContainersOptionsTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers WindowsAzure\Services\Blob\Models\ListContainersOptions::setMaxResults
+     * @covers WindowsAzure\Blob\Models\ListContainersOptions::setMaxResults
      */
     public function testSetMaxResults()
     {
@@ -122,7 +122,7 @@ class ListContainersOptionsTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers WindowsAzure\Services\Blob\Models\ListContainersOptions::getMaxResults
+     * @covers WindowsAzure\Blob\Models\ListContainersOptions::getMaxResults
      */
     public function testGetMaxResults()
     {
@@ -139,7 +139,7 @@ class ListContainersOptionsTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers WindowsAzure\Services\Blob\Models\ListContainersOptions::setIncludeMetadata
+     * @covers WindowsAzure\Blob\Models\ListContainersOptions::setIncludeMetadata
      */
     public function testSetIncludeMetadata()
     {
@@ -155,7 +155,7 @@ class ListContainersOptionsTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers WindowsAzure\Services\Blob\Models\ListContainersOptions::getIncludeMetadata
+     * @covers WindowsAzure\Blob\Models\ListContainersOptions::getIncludeMetadata
      */
     public function testGetIncludeMetadata()
     {

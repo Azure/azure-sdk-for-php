@@ -15,24 +15,24 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   Tests\Unit\WindowsAzure\Services\Blob\Models
+ * @package   Tests\Unit\WindowsAzure\Blob\Models
  * @author    Albert Cheng <gongchen at the largest software company> 
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
-namespace Tests\Unit\WindowsAzure\Services\Blob\Models;
+namespace Tests\Unit\WindowsAzure\Blob\Models;
 use Tests\Framework\TestResources;
 use WindowsAzure\Utilities;
-use WindowsAzure\Services\Blob\Models\AccessCondition;
-use WindowsAzure\Services\Blob\Models\CopyBlobOptions;
-use WindowsAzure\Services\Blob\Models\SourceAccessCondition;
+use WindowsAzure\Blob\Models\AccessCondition;
+use WindowsAzure\Blob\Models\CopyBlobOptions;
+use WindowsAzure\Blob\Models\SourceAccessCondition;
 
 /**
  * Unit tests for class CopyBlobBlobOptions
  *
  * @category  Microsoft
- * @package   PEAR2\Tests\Unit\WindowsAzure\Services\Blob\Models
+ * @package   PEAR2\Tests\Unit\WindowsAzure\Blob\Models
  * @author    Albert Cheng <gongchen at the largest software company>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
@@ -42,8 +42,8 @@ use WindowsAzure\Services\Blob\Models\SourceAccessCondition;
 class CopyBlobOptionsTest extends \PHPUnit_Framework_TestCase
 {  
     /** 
-     * @covers WindowsAzure\Services\Blob\Models\CopyBlobOptions::setCopySource
-     * @covers WindowsAzure\Services\Blob\Models\CopyBlobOptions::getCopySource
+     * @covers WindowsAzure\Blob\Models\CopyBlobOptions::setCopySource
+     * @covers WindowsAzure\Blob\Models\CopyBlobOptions::getCopySource
      */
     public function testSetCopySource()
     {
@@ -58,8 +58,8 @@ class CopyBlobOptionsTest extends \PHPUnit_Framework_TestCase
     }
     
     /** 
-     * @covers WindowsAzure\Services\Blob\Models\CopyBlobOptions::setMetadata
-     * @covers WindowsAzure\Services\Blob\Models\CopyBlobOptions::getMetadata
+     * @covers WindowsAzure\Blob\Models\CopyBlobOptions::setMetadata
+     * @covers WindowsAzure\Blob\Models\CopyBlobOptions::getMetadata
      */
     public function testSetMetadata()
     {
@@ -74,8 +74,8 @@ class CopyBlobOptionsTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers WindowsAzure\Services\Blob\Models\CopyBlobOptions::setAccessCondition
-     * @covers WindowsAzure\Services\Blob\Models\CopyBlobOptions::getAccessCondition
+     * @covers WindowsAzure\Blob\Models\CopyBlobOptions::setAccessCondition
+     * @covers WindowsAzure\Blob\Models\CopyBlobOptions::getAccessCondition
      */
     public function testSetAccessCondition()
     {
@@ -90,8 +90,8 @@ class CopyBlobOptionsTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers WindowsAzure\Services\Blob\Models\CopyBlobOptions::setSourceAccessCondition
-     * @covers WindowsAzure\Services\Blob\Models\CopyBlobOptions::getSourceAccessCondition
+     * @covers WindowsAzure\Blob\Models\CopyBlobOptions::setSourceAccessCondition
+     * @covers WindowsAzure\Blob\Models\CopyBlobOptions::getSourceAccessCondition
      */
     public function testSetSourceAccessCondition()
     {
@@ -106,8 +106,8 @@ class CopyBlobOptionsTest extends \PHPUnit_Framework_TestCase
     }
     
     /** 
-     * @covers WindowsAzure\Services\Blob\Models\CopyBlobOptions::setLeaseId
-     * @covers WindowsAzure\Services\Blob\Models\CopyBlobOptions::getLeaseId
+     * @covers WindowsAzure\Blob\Models\CopyBlobOptions::setLeaseId
+     * @covers WindowsAzure\Blob\Models\CopyBlobOptions::getLeaseId
      */
     public function testSetLeaseId()
     {
@@ -119,8 +119,8 @@ class CopyBlobOptionsTest extends \PHPUnit_Framework_TestCase
     }
     
     /** 
-     * @covers WindowsAzure\Services\Blob\Models\CopyBlobOptions::setSourceLeaseId
-     * @covers WindowsAzure\Services\Blob\Models\CopyBlobOptions::getSourceLeaseId
+     * @covers WindowsAzure\Blob\Models\CopyBlobOptions::setSourceLeaseId
+     * @covers WindowsAzure\Blob\Models\CopyBlobOptions::getSourceLeaseId
      */
     public function testSetSourceLeaseId()
     {

@@ -15,24 +15,24 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   WindowsAzure\Services\Blob
+ * @package   WindowsAzure\Blob
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
  
-namespace WindowsAzure\Services\Blob;
+namespace WindowsAzure\Blob;
 use WindowsAzure\Validate;
 use WindowsAzure\Core\Configuration;
 use WindowsAzure\Core\IServiceBuilder;
 use WindowsAzure\Resources;
 
 /**
- * Factory for creating IBlob objects
+ * Factory for creating IBlob objects.
  *
  * @category  Microsoft
- * @package   WindowsAzure\Services\Blob
+ * @package   WindowsAzure\Blob
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
@@ -47,7 +47,7 @@ class BlobService
      * @param WindowsAzure\Core\Configuration    $config  The config object.
      * @param WindowsAzure\Core\IServicesBuilder $builder The builder object.
      * 
-     * @return WindowsAzure\Services\Blob\IBlob
+     * @return WindowsAzure\Blob\Internal\IBlob
      */
     public static function create($config, $builder = null)
     {

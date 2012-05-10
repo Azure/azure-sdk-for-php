@@ -15,15 +15,15 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   Tests\Unit\WindowsAzure\Services\Blob\Models
+ * @package   Tests\Unit\WindowsAzure\Blob\Models
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
-namespace Tests\Unit\WindowsAzure\Services\Blob\Models;
-use WindowsAzure\Services\Blob\Models\GetContainerAclResult;
-use WindowsAzure\Services\Blob\Models\ContainerAcl;
+namespace Tests\Unit\WindowsAzure\Blob\Models;
+use WindowsAzure\Blob\Models\GetContainerAclResult;
+use WindowsAzure\Blob\Models\ContainerAcl;
 use Tests\Framework\TestResources;
 use WindowsAzure\Resources;
 use WindowsAzure\Utilities;
@@ -32,7 +32,7 @@ use WindowsAzure\Utilities;
  * Unit tests for class GetContainerAclResult
  *
  * @category  Microsoft
- * @package   Tests\Unit\WindowsAzure\Services\Blob\Models
+ * @package   Tests\Unit\WindowsAzure\Blob\Models
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
@@ -42,7 +42,7 @@ use WindowsAzure\Utilities;
 class GetContainerAclResultTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @covers WindowsAzure\Services\Blob\Models\GetContainerAclResult::create
+     * @covers WindowsAzure\Blob\Models\GetContainerAclResult::create
      */
     public function testCreate()
     {
@@ -65,7 +65,7 @@ class GetContainerAclResultTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers WindowsAzure\Services\Blob\Models\GetContainerAclResult::getContainerAcl
+     * @covers WindowsAzure\Blob\Models\GetContainerAclResult::getContainerAcl
      */
     public function testGetContainerAcl()
     {
@@ -84,7 +84,7 @@ class GetContainerAclResultTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers WindowsAzure\Services\Blob\Models\GetContainerAclResult::setContainerAcl
+     * @covers WindowsAzure\Blob\Models\GetContainerAclResult::setContainerAcl
      */
     public function testSetContainerAcl()
     {

@@ -15,21 +15,21 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   Tests\Unit\WindowsAzure\Services\Blob\Models
+ * @package   Tests\Unit\WindowsAzure\Blob\Models
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
-namespace Tests\Unit\WindowsAzure\Services\Blob\Models;
-use WindowsAzure\Services\Blob\Models\CommitBlobBlocksOptions;
-use WindowsAzure\Services\Blob\Models\AccessCondition;
+namespace Tests\Unit\WindowsAzure\Blob\Models;
+use WindowsAzure\Blob\Models\CommitBlobBlocksOptions;
+use WindowsAzure\Blob\Models\AccessCondition;
 
 /**
  * Unit tests for class CommitBlobBlocksOptions
  *
  * @category  Microsoft
- * @package   Tests\Unit\WindowsAzure\Services\Blob\Models
+ * @package   Tests\Unit\WindowsAzure\Blob\Models
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
@@ -39,8 +39,8 @@ use WindowsAzure\Services\Blob\Models\AccessCondition;
 class CommitBlobBlocksOptionsTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @covers WindowsAzure\Services\Blob\Models\CommitBlobBlocksOptions::setBlobContentType
-     * @covers WindowsAzure\Services\Blob\Models\CommitBlobBlocksOptions::getBlobContentType
+     * @covers WindowsAzure\Blob\Models\CommitBlobBlocksOptions::setBlobContentType
+     * @covers WindowsAzure\Blob\Models\CommitBlobBlocksOptions::getBlobContentType
      */
     public function testSetBlobContentType()
     {
@@ -57,8 +57,8 @@ class CommitBlobBlocksOptionsTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers WindowsAzure\Services\Blob\Models\CommitBlobBlocksOptions::setBlobContentEncoding
-     * @covers WindowsAzure\Services\Blob\Models\CommitBlobBlocksOptions::getBlobContentEncoding
+     * @covers WindowsAzure\Blob\Models\CommitBlobBlocksOptions::setBlobContentEncoding
+     * @covers WindowsAzure\Blob\Models\CommitBlobBlocksOptions::getBlobContentEncoding
      */
     public function testSetBlobContentEncoding()
     {
@@ -75,8 +75,8 @@ class CommitBlobBlocksOptionsTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers WindowsAzure\Services\Blob\Models\CommitBlobBlocksOptions::setBlobContentLanguage
-     * @covers WindowsAzure\Services\Blob\Models\CommitBlobBlocksOptions::getBlobContentLanguage
+     * @covers WindowsAzure\Blob\Models\CommitBlobBlocksOptions::setBlobContentLanguage
+     * @covers WindowsAzure\Blob\Models\CommitBlobBlocksOptions::getBlobContentLanguage
      */
     public function testSetBlobContentLanguage()
     {
@@ -93,8 +93,8 @@ class CommitBlobBlocksOptionsTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers WindowsAzure\Services\Blob\Models\CommitBlobBlocksOptions::setBlobContentMD5
-     * @covers WindowsAzure\Services\Blob\Models\CommitBlobBlocksOptions::getBlobContentMD5
+     * @covers WindowsAzure\Blob\Models\CommitBlobBlocksOptions::setBlobContentMD5
+     * @covers WindowsAzure\Blob\Models\CommitBlobBlocksOptions::getBlobContentMD5
      */
     public function testSetBlobContentMD5()
     {
@@ -111,8 +111,8 @@ class CommitBlobBlocksOptionsTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers WindowsAzure\Services\Blob\Models\CommitBlobBlocksOptions::setBlobCacheControl
-     * @covers WindowsAzure\Services\Blob\Models\CommitBlobBlocksOptions::getBlobCacheControl
+     * @covers WindowsAzure\Blob\Models\CommitBlobBlocksOptions::setBlobCacheControl
+     * @covers WindowsAzure\Blob\Models\CommitBlobBlocksOptions::getBlobCacheControl
      */
     public function testSetBlobCacheControl()
     {
@@ -129,8 +129,8 @@ class CommitBlobBlocksOptionsTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers WindowsAzure\Services\Blob\Models\CommitBlobBlocksOptions::setLeaseId
-     * @covers WindowsAzure\Services\Blob\Models\CommitBlobBlocksOptions::getLeaseId
+     * @covers WindowsAzure\Blob\Models\CommitBlobBlocksOptions::setLeaseId
+     * @covers WindowsAzure\Blob\Models\CommitBlobBlocksOptions::getLeaseId
      */
     public function testSetLeaseId()
     {
@@ -147,7 +147,7 @@ class CommitBlobBlocksOptionsTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers WindowsAzure\Services\Blob\Models\CommitBlobBlocksOptions::setMetadata
+     * @covers WindowsAzure\Blob\Models\CommitBlobBlocksOptions::setMetadata
      */
     public function testSetMetadata()
     {
@@ -163,7 +163,7 @@ class CommitBlobBlocksOptionsTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers WindowsAzure\Services\Blob\Models\CommitBlobBlocksOptions::getMetadata
+     * @covers WindowsAzure\Blob\Models\CommitBlobBlocksOptions::getMetadata
      */
     public function testGetMetadata()
     {
@@ -180,7 +180,7 @@ class CommitBlobBlocksOptionsTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers WindowsAzure\Services\Blob\Models\CommitBlobBlocksOptions::getAccessCondition
+     * @covers WindowsAzure\Blob\Models\CommitBlobBlocksOptions::getAccessCondition
      */
     public function testGetAccessCondition()
     {
@@ -197,7 +197,7 @@ class CommitBlobBlocksOptionsTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers WindowsAzure\Services\Blob\Models\CommitBlobBlocksOptions::setAccessCondition
+     * @covers WindowsAzure\Blob\Models\CommitBlobBlocksOptions::setAccessCondition
      */
     public function testSetAccessCondition()
     {

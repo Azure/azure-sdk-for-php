@@ -15,21 +15,21 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   Tests\Unit\WindowsAzure\Services\Blob\Models
+ * @package   Tests\Unit\WindowsAzure\Blob\Models
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
 
-namespace Tests\Unit\WindowsAzure\Services\Blob\Models;
-use WindowsAzure\Services\Blob\Models\ContainerProperties;
+namespace Tests\Unit\WindowsAzure\Blob\Models;
+use WindowsAzure\Blob\Models\ContainerProperties;
 
 /**
  * Unit tests for class ContainerProperties
  *
  * @category  Microsoft
- * @package   Tests\Unit\WindowsAzure\Services\Blob\Models
+ * @package   Tests\Unit\WindowsAzure\Blob\Models
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
@@ -39,7 +39,7 @@ use WindowsAzure\Services\Blob\Models\ContainerProperties;
 class ContainerPropertiesTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @covers WindowsAzure\Services\Blob\Models\ContainerProperties::getEtag
+     * @covers WindowsAzure\Blob\Models\ContainerProperties::getEtag
      */
     public function testGetEtag()
     {
@@ -56,7 +56,7 @@ class ContainerPropertiesTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers WindowsAzure\Services\Blob\Models\ContainerProperties::setEtag
+     * @covers WindowsAzure\Blob\Models\ContainerProperties::setEtag
      */
     public function testSetEtag()
     {
@@ -73,7 +73,7 @@ class ContainerPropertiesTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers WindowsAzure\Services\Blob\Models\ContainerProperties::getLastModified
+     * @covers WindowsAzure\Blob\Models\ContainerProperties::getLastModified
      */
     public function testGetLastModified()
     {
@@ -90,7 +90,7 @@ class ContainerPropertiesTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers WindowsAzure\Services\Blob\Models\ContainerProperties::setLastModified
+     * @covers WindowsAzure\Blob\Models\ContainerProperties::setLastModified
      */
     public function testSetLastModified()
     {

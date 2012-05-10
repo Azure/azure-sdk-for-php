@@ -15,16 +15,16 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   WindowsAzure\Services\Blob\Models
+ * @package   WindowsAzure\Blob\Models
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
  
-namespace WindowsAzure\Services\Blob\Models;
+namespace WindowsAzure\Blob\Models;
 use WindowsAzure\Resources;
-use WindowsAzure\Services\Blob\Models\Blob;
+use WindowsAzure\Blob\Models\Blob;
 use WindowsAzure\Utilities;
 use WindowsAzure\Core\InvalidArgumentTypeException;
 
@@ -32,7 +32,7 @@ use WindowsAzure\Core\InvalidArgumentTypeException;
  * Hold result of calliing listBlobs wrapper.
  *
  * @category  Microsoft
- * @package   WindowsAzure\Services\Blob\Models
+ * @package   WindowsAzure\Blob\Models
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
@@ -81,7 +81,7 @@ class ListBlobsResult
      *
      * @param array $parsed XML response parsed into array.
      * 
-     * @return WindowsAzure\Services\Blob\Models\ListBlobsResult.
+     * @return WindowsAzure\Blob\Models\ListBlobsResult.
      */
     public static function create($parsed)
     {

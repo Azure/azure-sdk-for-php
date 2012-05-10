@@ -25,10 +25,10 @@
 namespace Tests\Framework;
 use Tests\Framework\ServiceRestProxyTestBase;
 use WindowsAzure\Core\Configuration;
-use WindowsAzure\Services\Blob\BlobSettings;
-use WindowsAzure\Services\Blob\BlobService;
+use WindowsAzure\Blob\BlobSettings;
+use WindowsAzure\Blob\BlobService;
 use Tests\Framework\TestResources;
-use WindowsAzure\Services\Blob\Models\CreateContainerOptions;
+use WindowsAzure\Blob\Models\CreateContainerOptions;
 
 /**
  * TestBase class for each unit test class.

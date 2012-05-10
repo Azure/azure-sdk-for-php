@@ -15,21 +15,21 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   Tests\Unit\WindowsAzure\Services\Blob\Models
+ * @package   Tests\Unit\WindowsAzure\Blob\Models
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
-namespace Tests\Unit\WindowsAzure\Services\Blob\Models;
-use WindowsAzure\Services\Blob\Models\GetBlobPropertiesResult;
-use WindowsAzure\Services\Blob\Models\BlobProperties;
+namespace Tests\Unit\WindowsAzure\Blob\Models;
+use WindowsAzure\Blob\Models\GetBlobPropertiesResult;
+use WindowsAzure\Blob\Models\BlobProperties;
 
 /**
  * Unit tests for class GetBlobPropertiesResult
  *
  * @category  Microsoft
- * @package   Tests\Unit\WindowsAzure\Services\Blob\Models
+ * @package   Tests\Unit\WindowsAzure\Blob\Models
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
@@ -39,7 +39,7 @@ use WindowsAzure\Services\Blob\Models\BlobProperties;
 class GetBlobPropertiesResultTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @covers WindowsAzure\Services\Blob\Models\GetBlobPropertiesResult::setMetadata
+     * @covers WindowsAzure\Blob\Models\GetBlobPropertiesResult::setMetadata
      */
     public function testSetMetadata()
     {
@@ -55,7 +55,7 @@ class GetBlobPropertiesResultTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers WindowsAzure\Services\Blob\Models\GetBlobPropertiesResult::getMetadata
+     * @covers WindowsAzure\Blob\Models\GetBlobPropertiesResult::getMetadata
      */
     public function testGetMetadata()
     {
@@ -72,7 +72,7 @@ class GetBlobPropertiesResultTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers WindowsAzure\Services\Blob\Models\GetBlobPropertiesResult::setProperties
+     * @covers WindowsAzure\Blob\Models\GetBlobPropertiesResult::setProperties
      */
     public function testSetProperties()
     {
@@ -88,7 +88,7 @@ class GetBlobPropertiesResultTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers WindowsAzure\Services\Blob\Models\GetBlobPropertiesResult::getProperties
+     * @covers WindowsAzure\Blob\Models\GetBlobPropertiesResult::getProperties
      */
     public function testGetProperties()
     {

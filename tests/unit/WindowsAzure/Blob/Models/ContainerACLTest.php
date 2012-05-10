@@ -15,14 +15,14 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   Tests\Unit\WindowsAzure\Services\Blob\Models
+ * @package   Tests\Unit\WindowsAzure\Blob\Models
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
-namespace Tests\Unit\WindowsAzure\Services\Blob\Models;
-use WindowsAzure\Services\Blob\Models\ContainerAcl;
+namespace Tests\Unit\WindowsAzure\Blob\Models;
+use WindowsAzure\Blob\Models\ContainerAcl;
 use Tests\Framework\TestResources;
 use WindowsAzure\Resources;
 use WindowsAzure\Utilities;
@@ -32,7 +32,7 @@ use WindowsAzure\Core\Serialization\XmlSerializer;
  * Unit tests for class ContainerAcl
  *
  * @category  Microsoft
- * @package   Tests\Unit\WindowsAzure\Services\Blob\Models
+ * @package   Tests\Unit\WindowsAzure\Blob\Models
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
@@ -42,12 +42,12 @@ use WindowsAzure\Core\Serialization\XmlSerializer;
 class ContainerAclTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @covers WindowsAzure\Services\Blob\Models\ContainerAcl::create
-     * @covers WindowsAzure\Services\Blob\Models\ContainerAcl::getEtag
-     * @covers WindowsAzure\Services\Blob\Models\ContainerAcl::getLastModified
-     * @covers WindowsAzure\Services\Blob\Models\ContainerAcl::getPublicAccess
-     * @covers WindowsAzure\Services\Blob\Models\ContainerAcl::getSignedIdentifiers
-     * @covers WindowsAzure\Services\Blob\Models\ContainerAcl::addSignedIdentifier
+     * @covers WindowsAzure\Blob\Models\ContainerAcl::create
+     * @covers WindowsAzure\Blob\Models\ContainerAcl::getEtag
+     * @covers WindowsAzure\Blob\Models\ContainerAcl::getLastModified
+     * @covers WindowsAzure\Blob\Models\ContainerAcl::getPublicAccess
+     * @covers WindowsAzure\Blob\Models\ContainerAcl::getSignedIdentifiers
+     * @covers WindowsAzure\Blob\Models\ContainerAcl::addSignedIdentifier
      */
     public function testCreateEmpty()
     {
@@ -69,12 +69,12 @@ class ContainerAclTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers WindowsAzure\Services\Blob\Models\ContainerAcl::create
-     * @covers WindowsAzure\Services\Blob\Models\ContainerAcl::getEtag
-     * @covers WindowsAzure\Services\Blob\Models\ContainerAcl::getLastModified
-     * @covers WindowsAzure\Services\Blob\Models\ContainerAcl::getPublicAccess
-     * @covers WindowsAzure\Services\Blob\Models\ContainerAcl::getSignedIdentifiers
-     * @covers WindowsAzure\Services\Blob\Models\ContainerAcl::addSignedIdentifier
+     * @covers WindowsAzure\Blob\Models\ContainerAcl::create
+     * @covers WindowsAzure\Blob\Models\ContainerAcl::getEtag
+     * @covers WindowsAzure\Blob\Models\ContainerAcl::getLastModified
+     * @covers WindowsAzure\Blob\Models\ContainerAcl::getPublicAccess
+     * @covers WindowsAzure\Blob\Models\ContainerAcl::getSignedIdentifiers
+     * @covers WindowsAzure\Blob\Models\ContainerAcl::addSignedIdentifier
      */
     public function testCreateOneEntry()
     {
@@ -96,12 +96,12 @@ class ContainerAclTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers WindowsAzure\Services\Blob\Models\ContainerAcl::create
-     * @covers WindowsAzure\Services\Blob\Models\ContainerAcl::getEtag
-     * @covers WindowsAzure\Services\Blob\Models\ContainerAcl::getLastModified
-     * @covers WindowsAzure\Services\Blob\Models\ContainerAcl::getPublicAccess
-     * @covers WindowsAzure\Services\Blob\Models\ContainerAcl::getSignedIdentifiers
-     * @covers WindowsAzure\Services\Blob\Models\ContainerAcl::addSignedIdentifier
+     * @covers WindowsAzure\Blob\Models\ContainerAcl::create
+     * @covers WindowsAzure\Blob\Models\ContainerAcl::getEtag
+     * @covers WindowsAzure\Blob\Models\ContainerAcl::getLastModified
+     * @covers WindowsAzure\Blob\Models\ContainerAcl::getPublicAccess
+     * @covers WindowsAzure\Blob\Models\ContainerAcl::getSignedIdentifiers
+     * @covers WindowsAzure\Blob\Models\ContainerAcl::addSignedIdentifier
      */
     public function testCreateMultipleEntries()
     {
@@ -125,8 +125,8 @@ class ContainerAclTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers WindowsAzure\Services\Blob\Models\ContainerAcl::setSignedIdentifiers
-     * @covers WindowsAzure\Services\Blob\Models\ContainerAcl::getSignedIdentifiers
+     * @covers WindowsAzure\Blob\Models\ContainerAcl::setSignedIdentifiers
+     * @covers WindowsAzure\Blob\Models\ContainerAcl::getSignedIdentifiers
      */
     public function testSetSignedIdentifiers()
     {
@@ -151,8 +151,8 @@ class ContainerAclTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers WindowsAzure\Services\Blob\Models\ContainerAcl::setLastModified
-     * @covers WindowsAzure\Services\Blob\Models\ContainerAcl::getLastModified
+     * @covers WindowsAzure\Blob\Models\ContainerAcl::setLastModified
+     * @covers WindowsAzure\Blob\Models\ContainerAcl::getLastModified
      */
     public function testSetLastModified()
     {
@@ -169,8 +169,8 @@ class ContainerAclTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers WindowsAzure\Services\Blob\Models\ContainerAcl::setEtag
-     * @covers WindowsAzure\Services\Blob\Models\ContainerAcl::getEtag
+     * @covers WindowsAzure\Blob\Models\ContainerAcl::setEtag
+     * @covers WindowsAzure\Blob\Models\ContainerAcl::getEtag
      */
     public function testSetEtag()
     {
@@ -187,8 +187,8 @@ class ContainerAclTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers WindowsAzure\Services\Blob\Models\ContainerAcl::setPublicAccess
-     * @covers WindowsAzure\Services\Blob\Models\ContainerAcl::getPublicAccess
+     * @covers WindowsAzure\Blob\Models\ContainerAcl::setPublicAccess
+     * @covers WindowsAzure\Blob\Models\ContainerAcl::getPublicAccess
      */
     public function testSetPublicAccess()
     {
@@ -205,8 +205,8 @@ class ContainerAclTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers WindowsAzure\Services\Blob\Models\ContainerAcl::toXml
-     * @covers WindowsAzure\Services\Blob\Models\ContainerAcl::toArray
+     * @covers WindowsAzure\Blob\Models\ContainerAcl::toXml
+     * @covers WindowsAzure\Blob\Models\ContainerAcl::toArray
      * @depends testCreateMultipleEntries
      */
     public function testToXml($acl)

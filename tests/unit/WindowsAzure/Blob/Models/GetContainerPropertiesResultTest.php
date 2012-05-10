@@ -15,21 +15,21 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   Tests\Unit\WindowsAzure\Services\Blob\Models
+ * @package   Tests\Unit\WindowsAzure\Blob\Models
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
 
-namespace Tests\Unit\WindowsAzure\Services\Blob\Models;
-use WindowsAzure\Services\Blob\Models\GetContainerPropertiesResult;
+namespace Tests\Unit\WindowsAzure\Blob\Models;
+use WindowsAzure\Blob\Models\GetContainerPropertiesResult;
 
 /**
  * Unit tests for class GetContainerPropertiesResult
  *
  * @category  Microsoft
- * @package   Tests\Unit\WindowsAzure\Services\Blob\Models
+ * @package   Tests\Unit\WindowsAzure\Blob\Models
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
@@ -39,7 +39,7 @@ use WindowsAzure\Services\Blob\Models\GetContainerPropertiesResult;
 class GetContainerPropertiesResultTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @covers WindowsAzure\Services\Blob\Models\GetContainerPropertiesResult::getEtag
+     * @covers WindowsAzure\Blob\Models\GetContainerPropertiesResult::getEtag
      */
     public function testGetEtag()
     {
@@ -56,7 +56,7 @@ class GetContainerPropertiesResultTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers WindowsAzure\Services\Blob\Models\GetContainerPropertiesResult::setEtag
+     * @covers WindowsAzure\Blob\Models\GetContainerPropertiesResult::setEtag
      */
     public function testSetEtag()
     {
@@ -73,7 +73,7 @@ class GetContainerPropertiesResultTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers WindowsAzure\Services\Blob\Models\GetContainerPropertiesResult::getLastModified
+     * @covers WindowsAzure\Blob\Models\GetContainerPropertiesResult::getLastModified
      */
     public function testGetLastModified()
     {
@@ -90,7 +90,7 @@ class GetContainerPropertiesResultTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers WindowsAzure\Services\Blob\Models\GetContainerPropertiesResult::setLastModified
+     * @covers WindowsAzure\Blob\Models\GetContainerPropertiesResult::setLastModified
      */
     public function testSetLastModified()
     {
@@ -107,7 +107,7 @@ class GetContainerPropertiesResultTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers WindowsAzure\Services\Blob\Models\GetContainerPropertiesResult::setMetadata
+     * @covers WindowsAzure\Blob\Models\GetContainerPropertiesResult::setMetadata
      */
     public function testSetMetadata()
     {
@@ -123,7 +123,7 @@ class GetContainerPropertiesResultTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers WindowsAzure\Services\Blob\Models\GetContainerPropertiesResult::getMetadata
+     * @covers WindowsAzure\Blob\Models\GetContainerPropertiesResult::getMetadata
      */
     public function testGetMetadata()
     {

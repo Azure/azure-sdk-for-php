@@ -15,68 +15,69 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   WindowsAzure\Services\Blob
+ * @package   WindowsAzure\Blob\Internal
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
- 
-namespace WindowsAzure\Services\Blob;
+
+namespace WindowsAzure\Blob\Internal;
 use WindowsAzure\Utilities;
 use WindowsAzure\Resources;
 use WindowsAzure\Validate;
 use WindowsAzure\Services\Core\Models\ServiceProperties;
 use WindowsAzure\Services\Core\ServiceRestProxy;
-use WindowsAzure\Services\Blob\IBlob;
-use WindowsAzure\Services\Blob\Models\BlobServiceOptions;
+use WindowsAzure\Blob\Internal\IBlob;
+use WindowsAzure\Blob\Models\BlobServiceOptions;
 use WindowsAzure\Services\Core\Models\GetServicePropertiesResult;
-use WindowsAzure\Services\Blob\Models\ListContainersOptions;
-use WindowsAzure\Services\Blob\Models\ListContainersResult;
-use WindowsAzure\Services\Blob\Models\CreateContainerOptions;
-use WindowsAzure\Services\Blob\Models\GetContainerPropertiesResult;
-use WindowsAzure\Services\Blob\Models\GetContainerAclResult;
-use WindowsAzure\Services\Blob\Models\SetContainerMetadataOptions;
-use WindowsAzure\Services\Blob\Models\DeleteContainerOptions;
-use WindowsAzure\Services\Blob\Models\ListBlobsOptions;
-use WindowsAzure\Services\Blob\Models\ListBlobsResult;
-use WindowsAzure\Services\Blob\Models\BlobType;
-use WindowsAzure\Services\Blob\Models\CreateBlobOptions;
-use WindowsAzure\Services\Blob\Models\BlobProperties;
-use WindowsAzure\Services\Blob\Models\GetBlobPropertiesOptions;
-use WindowsAzure\Services\Blob\Models\GetBlobPropertiesResult;
-use WindowsAzure\Services\Blob\Models\SetBlobPropertiesOptions;
-use WindowsAzure\Services\Blob\Models\SetBlobPropertiesResult;
-use WindowsAzure\Services\Blob\Models\GetBlobMetadataOptions;
-use WindowsAzure\Services\Blob\Models\GetBlobMetadataResult;
-use WindowsAzure\Services\Blob\Models\SetBlobMetadataOptions;
-use WindowsAzure\Services\Blob\Models\SetBlobMetadataResult;
-use WindowsAzure\Services\Blob\Models\GetBlobOptions;
-use WindowsAzure\Services\Blob\Models\GetBlobResult;
-use WindowsAzure\Services\Blob\Models\DeleteBlobOptions;
-use WindowsAzure\Services\Blob\Models\LeaseMode;
-use WindowsAzure\Services\Blob\Models\AcquireLeaseOptions;
-use WindowsAzure\Services\Blob\Models\AcquireLeaseResult;
-use WindowsAzure\Services\Blob\Models\CreateBlobPagesOptions;
-use WindowsAzure\Services\Blob\Models\CreateBlobPagesResult;
-use WindowsAzure\Services\Blob\Models\PageWriteOption;
-use WindowsAzure\Services\Blob\Models\ListPageBlobRangesOptions;
-use WindowsAzure\Services\Blob\Models\ListPageBlobRangesResult;
-use WindowsAzure\Services\Blob\Models\CreateBlobBlockOptions;
-use WindowsAzure\Services\Blob\Models\CommitBlobBlocksOptions;
-use WindowsAzure\Services\Blob\Models\BlockList;
-use WindowsAzure\Services\Blob\Models\ListBlobBlocksOptions;
-use WindowsAzure\Services\Blob\Models\ListBlobBlocksResult;
-use WindowsAzure\Services\Blob\Models\CopyBlobOptions;
-use WindowsAzure\Services\Blob\Models\CreateBlobSnapshotOptions;
-use WindowsAzure\Services\Blob\Models\CreateBlobSnapshotResult;
+use WindowsAzure\Blob\Models\ListContainersOptions;
+use WindowsAzure\Blob\Models\ListContainersResult;
+use WindowsAzure\Blob\Models\CreateContainerOptions;
+use WindowsAzure\Blob\Models\GetContainerPropertiesResult;
+use WindowsAzure\Blob\Models\GetContainerAclResult;
+use WindowsAzure\Blob\Models\SetContainerMetadataOptions;
+use WindowsAzure\Blob\Models\DeleteContainerOptions;
+use WindowsAzure\Blob\Models\ListBlobsOptions;
+use WindowsAzure\Blob\Models\ListBlobsResult;
+use WindowsAzure\Blob\Models\BlobType;
+use WindowsAzure\Blob\Models\CreateBlobOptions;
+use WindowsAzure\Blob\Models\BlobProperties;
+use WindowsAzure\Blob\Models\GetBlobPropertiesOptions;
+use WindowsAzure\Blob\Models\GetBlobPropertiesResult;
+use WindowsAzure\Blob\Models\SetBlobPropertiesOptions;
+use WindowsAzure\Blob\Models\SetBlobPropertiesResult;
+use WindowsAzure\Blob\Models\GetBlobMetadataOptions;
+use WindowsAzure\Blob\Models\GetBlobMetadataResult;
+use WindowsAzure\Blob\Models\SetBlobMetadataOptions;
+use WindowsAzure\Blob\Models\SetBlobMetadataResult;
+use WindowsAzure\Blob\Models\GetBlobOptions;
+use WindowsAzure\Blob\Models\GetBlobResult;
+use WindowsAzure\Blob\Models\DeleteBlobOptions;
+use WindowsAzure\Blob\Models\LeaseMode;
+use WindowsAzure\Blob\Models\AcquireLeaseOptions;
+use WindowsAzure\Blob\Models\AcquireLeaseResult;
+use WindowsAzure\Blob\Models\CreateBlobPagesOptions;
+use WindowsAzure\Blob\Models\CreateBlobPagesResult;
+use WindowsAzure\Blob\Models\PageWriteOption;
+use WindowsAzure\Blob\Models\ListPageBlobRangesOptions;
+use WindowsAzure\Blob\Models\ListPageBlobRangesResult;
+use WindowsAzure\Blob\Models\CreateBlobBlockOptions;
+use WindowsAzure\Blob\Models\CommitBlobBlocksOptions;
+use WindowsAzure\Blob\Models\BlockList;
+use WindowsAzure\Blob\Models\ListBlobBlocksOptions;
+use WindowsAzure\Blob\Models\ListBlobBlocksResult;
+use WindowsAzure\Blob\Models\CopyBlobOptions;
+use WindowsAzure\Blob\Models\CreateBlobSnapshotOptions;
+use WindowsAzure\Blob\Models\CreateBlobSnapshotResult;
+use WindowsAzure\Blob\Models\PageRange;
 
 /**
  * This class constructs HTTP requests and receive HTTP responses for blob
  * service layer.
  *
  * @category  Microsoft
- * @package   WindowsAzure\Services\Blob
+ * @package   WindowsAzure\Blob\Internal
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
@@ -420,11 +421,11 @@ class BlobRestProxy extends ServiceRestProxy implements IBlob
         Validate::notNullOrEmpty($blob, 'blob');
         Validate::isString($container, 'container');
         Validate::isTrue(
-            $range instanceof Models\PageRange,
+            $range instanceof PageRange,
             sprintf(
                 Resources::INVALID_PARAM_MSG,
                 'range',
-                get_class(new Models\PageRange())
+                get_class(new PageRange())
             )
         );
         Validate::isTrue(
@@ -613,7 +614,7 @@ class BlobRestProxy extends ServiceRestProxy implements IBlob
      * 
      * @param Models\ListContainersOptions $options The optional parameters.
      * 
-     * @return WindowsAzure\Services\Blob\Models\ListContainersResult
+     * @return WindowsAzure\Blob\Models\ListContainersResult
      * 
      * @see http://msdn.microsoft.com/en-us/library/windowsazure/dd179352.aspx
      */

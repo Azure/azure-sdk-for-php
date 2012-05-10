@@ -15,23 +15,23 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   WindowsAzure\Services\Blob\Models
+ * @package   WindowsAzure\Blob\Models
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
  
-namespace WindowsAzure\Services\Blob\Models;
+namespace WindowsAzure\Blob\Models;
 use WindowsAzure\Resources;
 use WindowsAzure\Utilities;
-use WindowsAzure\Services\Blob\Models\Container;
+use WindowsAzure\Blob\Models\Container;
 
 /**
  * Container to hold list container response object.
  *
  * @category  Microsoft
- * @package   WindowsAzure\Services\Blob\Models
+ * @package   WindowsAzure\Blob\Models
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
@@ -51,7 +51,7 @@ class ListContainersResult
      *
      * @param array $parsedResponse XML response parsed into array.
      * 
-     * @return WindowsAzure\Services\Blob\Models\ListBlobResult.
+     * @return WindowsAzure\Blob\Models\ListBlobResult.
      */
     public static function create($parsedResponse)
     {

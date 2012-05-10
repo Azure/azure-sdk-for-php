@@ -28,7 +28,7 @@ use WindowsAzure\Resources;
 use WindowsAzure\Core\InvalidArgumentTypeException;
 use WindowsAzure\Core\ServicesBuilder;
 use WindowsAzure\Services\Queue\QueueSettings;
-use WindowsAzure\Services\Blob\BlobSettings;
+use WindowsAzure\Blob\BlobSettings;
 use WindowsAzure\Services\Table\TableSettings;
 
 /**

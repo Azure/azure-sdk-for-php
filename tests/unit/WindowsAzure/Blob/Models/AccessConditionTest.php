@@ -15,14 +15,14 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   Tests\Unit\WindowsAzure\Services\Blob\Models
+ * @package   Tests\Unit\WindowsAzure\Blob\Models
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
-namespace Tests\Unit\WindowsAzure\Services\Blob\Models;
-use WindowsAzure\Services\Blob\Models\AccessCondition;
+namespace Tests\Unit\WindowsAzure\Blob\Models;
+use WindowsAzure\Blob\Models\AccessCondition;
 use WindowsAzure\Resources;
 use WindowsAzure\Utilities;
 
@@ -30,7 +30,7 @@ use WindowsAzure\Utilities;
  * Unit tests for class AccessCondition
  *
  * @category  Microsoft
- * @package   Tests\Unit\WindowsAzure\Services\Blob\Models
+ * @package   Tests\Unit\WindowsAzure\Blob\Models
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
@@ -40,11 +40,11 @@ use WindowsAzure\Utilities;
 class AccessConditionTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @covers WindowsAzure\Services\Blob\Models\AccessCondition::__construct
-     * @covers WindowsAzure\Services\Blob\Models\AccessCondition::getHeader
-     * @covers WindowsAzure\Services\Blob\Models\AccessCondition::getValue
-     * @covers WindowsAzure\Services\Blob\Models\AccessCondition::setHeader
-     * @covers WindowsAzure\Services\Blob\Models\AccessCondition::setValue
+     * @covers WindowsAzure\Blob\Models\AccessCondition::__construct
+     * @covers WindowsAzure\Blob\Models\AccessCondition::getHeader
+     * @covers WindowsAzure\Blob\Models\AccessCondition::getValue
+     * @covers WindowsAzure\Blob\Models\AccessCondition::setHeader
+     * @covers WindowsAzure\Blob\Models\AccessCondition::setValue
      */
     public function test__construct()
     {
@@ -61,9 +61,9 @@ class AccessConditionTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers WindowsAzure\Services\Blob\Models\AccessCondition::none
-     * @covers WindowsAzure\Services\Blob\Models\AccessCondition::getHeader
-     * @covers WindowsAzure\Services\Blob\Models\AccessCondition::getValue
+     * @covers WindowsAzure\Blob\Models\AccessCondition::none
+     * @covers WindowsAzure\Blob\Models\AccessCondition::getHeader
+     * @covers WindowsAzure\Blob\Models\AccessCondition::getValue
      */
     public function testNone()
     {
@@ -80,9 +80,9 @@ class AccessConditionTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers WindowsAzure\Services\Blob\Models\AccessCondition::ifModifiedSince
-     * @covers WindowsAzure\Services\Blob\Models\AccessCondition::getHeader
-     * @covers WindowsAzure\Services\Blob\Models\AccessCondition::getValue
+     * @covers WindowsAzure\Blob\Models\AccessCondition::ifModifiedSince
+     * @covers WindowsAzure\Blob\Models\AccessCondition::getHeader
+     * @covers WindowsAzure\Blob\Models\AccessCondition::getValue
      */
     public function testIfModifiedSince()
     {
@@ -99,9 +99,9 @@ class AccessConditionTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers WindowsAzure\Services\Blob\Models\AccessCondition::ifMatch
-     * @covers WindowsAzure\Services\Blob\Models\AccessCondition::getHeader
-     * @covers WindowsAzure\Services\Blob\Models\AccessCondition::getValue
+     * @covers WindowsAzure\Blob\Models\AccessCondition::ifMatch
+     * @covers WindowsAzure\Blob\Models\AccessCondition::getHeader
+     * @covers WindowsAzure\Blob\Models\AccessCondition::getValue
      */
     public function testIfMatch()
     {
@@ -118,9 +118,9 @@ class AccessConditionTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers WindowsAzure\Services\Blob\Models\AccessCondition::ifNoneMatch
-     * @covers WindowsAzure\Services\Blob\Models\AccessCondition::getHeader
-     * @covers WindowsAzure\Services\Blob\Models\AccessCondition::getValue
+     * @covers WindowsAzure\Blob\Models\AccessCondition::ifNoneMatch
+     * @covers WindowsAzure\Blob\Models\AccessCondition::getHeader
+     * @covers WindowsAzure\Blob\Models\AccessCondition::getValue
      */
     public function testIfNoneMatch()
     {
@@ -137,9 +137,9 @@ class AccessConditionTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers WindowsAzure\Services\Blob\Models\AccessCondition::ifNotModifiedSince
-     * @covers WindowsAzure\Services\Blob\Models\AccessCondition::getHeader
-     * @covers WindowsAzure\Services\Blob\Models\AccessCondition::getValue
+     * @covers WindowsAzure\Blob\Models\AccessCondition::ifNotModifiedSince
+     * @covers WindowsAzure\Blob\Models\AccessCondition::getHeader
+     * @covers WindowsAzure\Blob\Models\AccessCondition::getValue
      */
     public function testIfNotModifiedSince()
     {
@@ -156,7 +156,7 @@ class AccessConditionTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers WindowsAzure\Services\Blob\Models\AccessCondition::isValid
+     * @covers WindowsAzure\Blob\Models\AccessCondition::isValid
      */
     public function testIsValidWithValid()
     {
@@ -168,7 +168,7 @@ class AccessConditionTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers WindowsAzure\Services\Blob\Models\AccessCondition::isValid
+     * @covers WindowsAzure\Blob\Models\AccessCondition::isValid
      */
     public function testIsValidWithInvalid()
     {

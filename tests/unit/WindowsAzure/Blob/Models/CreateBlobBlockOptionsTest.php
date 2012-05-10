@@ -15,20 +15,20 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   Tests\Unit\WindowsAzure\Services\Blob\Models
+ * @package   Tests\Unit\WindowsAzure\Blob\Models
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
-namespace Tests\Unit\WindowsAzure\Services\Blob\Models;
-use WindowsAzure\Services\Blob\Models\CreateBlobBlockOptions;
+namespace Tests\Unit\WindowsAzure\Blob\Models;
+use WindowsAzure\Blob\Models\CreateBlobBlockOptions;
 
 /**
  * Unit tests for class CreateBlobBlockOptions
  *
  * @category  Microsoft
- * @package   Tests\Unit\WindowsAzure\Services\Blob\Models
+ * @package   Tests\Unit\WindowsAzure\Blob\Models
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
@@ -38,8 +38,8 @@ use WindowsAzure\Services\Blob\Models\CreateBlobBlockOptions;
 class CreateBlobBlockOptionsTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @covers WindowsAzure\Services\Blob\Models\CreateBlobBlockOptions::setContentMD5
-     * @covers WindowsAzure\Services\Blob\Models\CreateBlobBlockOptions::getContentMD5
+     * @covers WindowsAzure\Blob\Models\CreateBlobBlockOptions::setContentMD5
+     * @covers WindowsAzure\Blob\Models\CreateBlobBlockOptions::getContentMD5
      */
     public function testSetContentMD5()
     {
@@ -56,8 +56,8 @@ class CreateBlobBlockOptionsTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers WindowsAzure\Services\Blob\Models\CreateBlobBlockOptions::setLeaseId
-     * @covers WindowsAzure\Services\Blob\Models\CreateBlobBlockOptions::getLeaseId
+     * @covers WindowsAzure\Blob\Models\CreateBlobBlockOptions::setLeaseId
+     * @covers WindowsAzure\Blob\Models\CreateBlobBlockOptions::getLeaseId
      */
     public function testSetLeaseId()
     {

@@ -15,21 +15,21 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   Tests\Unit\WindowsAzure\Services\Blob\Models
+ * @package   Tests\Unit\WindowsAzure\Blob\Models
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
-namespace Tests\Unit\WindowsAzure\Services\Blob\Models;
-use WindowsAzure\Services\Blob\Models\ListBlobBlocksResult;
+namespace Tests\Unit\WindowsAzure\Blob\Models;
+use WindowsAzure\Blob\Models\ListBlobBlocksResult;
 use WindowsAzure\Utilities;
 
 /**
  * Unit tests for class ListBlobBlocksResult
  *
  * @category  Microsoft
- * @package   Tests\Unit\WindowsAzure\Services\Blob\Models
+ * @package   Tests\Unit\WindowsAzure\Blob\Models
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
@@ -39,8 +39,8 @@ use WindowsAzure\Utilities;
 class ListBlobBlocksResultTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @covers WindowsAzure\Services\Blob\Models\ListBlobBlocksResult::setLastModified
-     * @covers WindowsAzure\Services\Blob\Models\ListBlobBlocksResult::getLastModified
+     * @covers WindowsAzure\Blob\Models\ListBlobBlocksResult::setLastModified
+     * @covers WindowsAzure\Blob\Models\ListBlobBlocksResult::getLastModified
      */
     public function testSetLastModified()
     {
@@ -57,8 +57,8 @@ class ListBlobBlocksResultTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers WindowsAzure\Services\Blob\Models\ListBlobBlocksResult::setEtag
-     * @covers WindowsAzure\Services\Blob\Models\ListBlobBlocksResult::getEtag
+     * @covers WindowsAzure\Blob\Models\ListBlobBlocksResult::setEtag
+     * @covers WindowsAzure\Blob\Models\ListBlobBlocksResult::getEtag
      */
     public function testSetEtag()
     {
@@ -75,8 +75,8 @@ class ListBlobBlocksResultTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers WindowsAzure\Services\Blob\Models\ListBlobBlocksResult::setContentType
-     * @covers WindowsAzure\Services\Blob\Models\ListBlobBlocksResult::getContentType
+     * @covers WindowsAzure\Blob\Models\ListBlobBlocksResult::setContentType
+     * @covers WindowsAzure\Blob\Models\ListBlobBlocksResult::getContentType
      */
     public function testSetContentType()
     {
@@ -93,8 +93,8 @@ class ListBlobBlocksResultTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers WindowsAzure\Services\Blob\Models\ListBlobBlocksResult::setContentLength
-     * @covers WindowsAzure\Services\Blob\Models\ListBlobBlocksResult::getContentLength
+     * @covers WindowsAzure\Blob\Models\ListBlobBlocksResult::setContentLength
+     * @covers WindowsAzure\Blob\Models\ListBlobBlocksResult::getContentLength
      */
     public function testSetContentLength()
     {
@@ -111,8 +111,8 @@ class ListBlobBlocksResultTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers WindowsAzure\Services\Blob\Models\ListBlobBlocksResult::setUncommittedBlocks
-     * @covers WindowsAzure\Services\Blob\Models\ListBlobBlocksResult::getUncommittedBlocks
+     * @covers WindowsAzure\Blob\Models\ListBlobBlocksResult::setUncommittedBlocks
+     * @covers WindowsAzure\Blob\Models\ListBlobBlocksResult::getUncommittedBlocks
      */
     public function testSetUncommittedBlocks()
     {
@@ -128,8 +128,8 @@ class ListBlobBlocksResultTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers WindowsAzure\Services\Blob\Models\ListBlobBlocksResult::setCommittedBlocks
-     * @covers WindowsAzure\Services\Blob\Models\ListBlobBlocksResult::getCommittedBlocks
+     * @covers WindowsAzure\Blob\Models\ListBlobBlocksResult::setCommittedBlocks
+     * @covers WindowsAzure\Blob\Models\ListBlobBlocksResult::getCommittedBlocks
      */
     public function testSetCommittedBlocks()
     {

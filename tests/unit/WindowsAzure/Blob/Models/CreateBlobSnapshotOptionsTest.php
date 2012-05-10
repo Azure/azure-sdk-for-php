@@ -15,22 +15,22 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   Tests\Unit\WindowsAzure\Services\Blob\Models
+ * @package   Tests\Unit\WindowsAzure\Blob\Models
  * @author    Albert Cheng <gongchen at the largest software company> 
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
-namespace Tests\Unit\WindowsAzure\Services\Blob\Models;
+namespace Tests\Unit\WindowsAzure\Blob\Models;
 use Tests\Framework\TestResources;
 use WindowsAzure\Utilities;
-use WindowsAzure\Services\Blob\Models\CreateBlobSnapshotOptions;
+use WindowsAzure\Blob\Models\CreateBlobSnapshotOptions;
 
 /**
  * Unit tests for class CreateBlobSnapshotOptions
  *
  * @category  Microsoft
- * @package   Tests\Unit\WindowsAzure\Services\Blob\Models
+ * @package   Tests\Unit\WindowsAzure\Blob\Models
  * @author    Albert Cheng <gongchen at the largest software company>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
@@ -40,8 +40,8 @@ use WindowsAzure\Services\Blob\Models\CreateBlobSnapshotOptions;
 class CreateBlobSnapshotOptionsTest extends \PHPUnit_Framework_TestCase
 {  
     /**
-     * @covers WindowsAzure\Services\Blob\Models\CreateBlobSnapshotOptions::setMetadata
-     * @covers WindowsAzure\Services\Blob\Models\CreateBlobSnapshotOptions::getMetadata
+     * @covers WindowsAzure\Blob\Models\CreateBlobSnapshotOptions::setMetadata
+     * @covers WindowsAzure\Blob\Models\CreateBlobSnapshotOptions::getMetadata
      */
     public function testSetMetadata()
     {
@@ -57,8 +57,8 @@ class CreateBlobSnapshotOptionsTest extends \PHPUnit_Framework_TestCase
     
     
     /**
-     * @covers WindowsAzure\Services\Blob\Models\CreateBlobSnapshotOptions::setLeaseId
-     * @covers WindowsAzure\Services\Blob\Models\CreateBlobSnapshotOptions::getLeaseId
+     * @covers WindowsAzure\Blob\Models\CreateBlobSnapshotOptions::setLeaseId
+     * @covers WindowsAzure\Blob\Models\CreateBlobSnapshotOptions::getLeaseId
      */
     public function testSetLeaseId()
     {

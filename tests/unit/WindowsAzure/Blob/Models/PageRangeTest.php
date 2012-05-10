@@ -15,20 +15,20 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   Tests\Unit\WindowsAzure\Services\Blob\Models
+ * @package   Tests\Unit\WindowsAzure\Blob\Models
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
-namespace Tests\Unit\WindowsAzure\Services\Blob\Models;
-use WindowsAzure\Services\Blob\Models\PageRange;
+namespace Tests\Unit\WindowsAzure\Blob\Models;
+use WindowsAzure\Blob\Models\PageRange;
 
 /**
  * Unit tests for class PageRange
  *
  * @category  Microsoft
- * @package   Tests\Unit\WindowsAzure\Services\Blob\Models
+ * @package   Tests\Unit\WindowsAzure\Blob\Models
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
@@ -38,9 +38,9 @@ use WindowsAzure\Services\Blob\Models\PageRange;
 class PageRangeTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @covers WindowsAzure\Services\Blob\Models\PageRange::__construct
-     * @covers WindowsAzure\Services\Blob\Models\PageRange::getStart
-     * @covers WindowsAzure\Services\Blob\Models\PageRange::getEnd
+     * @covers WindowsAzure\Blob\Models\PageRange::__construct
+     * @covers WindowsAzure\Blob\Models\PageRange::getStart
+     * @covers WindowsAzure\Blob\Models\PageRange::getEnd
      */
     public function test__construct()
     {
@@ -59,7 +59,7 @@ class PageRangeTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers WindowsAzure\Services\Blob\Models\PageRange::setStart
+     * @covers WindowsAzure\Blob\Models\PageRange::setStart
      * @depends test__construct
      */
     public function testSetStart($obj)
@@ -75,7 +75,7 @@ class PageRangeTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers WindowsAzure\Services\Blob\Models\PageRange::setEnd
+     * @covers WindowsAzure\Blob\Models\PageRange::setEnd
      * @depends test__construct
      */
     public function testSetEnd($obj)
@@ -91,7 +91,7 @@ class PageRangeTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers WindowsAzure\Services\Blob\Models\PageRange::setLength
+     * @covers WindowsAzure\Blob\Models\PageRange::setLength
      * @depends test__construct
      */
     public function testSetLength($obj)
@@ -108,7 +108,7 @@ class PageRangeTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers WindowsAzure\Services\Blob\Models\PageRange::getLength
+     * @covers WindowsAzure\Blob\Models\PageRange::getLength
      * @depends test__construct
      */
     public function testGetLength($obj)

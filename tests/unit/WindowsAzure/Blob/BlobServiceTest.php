@@ -23,10 +23,10 @@
  */
 
 namespace Tests\Unit\WindowsAzure\Services\Blob;
-use WindowsAzure\Services\Blob\BlobService;
+use WindowsAzure\Blob\BlobService;
 use WindowsAzure\Core\Configuration;
 use Tests\Framework\TestResources;
-use WindowsAzure\Services\Blob\BlobSettings;
+use WindowsAzure\Blob\BlobSettings;
 
 /**
  * Unit tests for class BlobService
@@ -42,7 +42,7 @@ use WindowsAzure\Services\Blob\BlobSettings;
 class BlobServiceTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @covers WindowsAzure\Services\Blob\BlobService::create
+     * @covers WindowsAzure\Blob\BlobService::create
      */
     public function testCreateWithConfig()
     {
@@ -57,7 +57,7 @@ class BlobServiceTest extends \PHPUnit_Framework_TestCase
         $blobWrapper = BlobService::create($config);
         
         // Assert
-        $this->assertInstanceOf('\WindowsAzure\\Services\\Blob\\IBlob', $blobWrapper);
+        $this->assertInstanceOf('WindowsAzure\Blob\Internal\IBlob', $blobWrapper);
     }
 }
 

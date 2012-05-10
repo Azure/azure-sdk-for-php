@@ -15,21 +15,21 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   Tests\Unit\WindowsAzure\Services\Blob\Models
+ * @package   Tests\Unit\WindowsAzure\Blob\Models
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
-namespace Tests\Unit\WindowsAzure\Services\Blob\Models;
-use WindowsAzure\Services\Blob\Models\DeleteContainerOptions;
-use WindowsAzure\Services\Blob\Models\AccessCondition;
+namespace Tests\Unit\WindowsAzure\Blob\Models;
+use WindowsAzure\Blob\Models\DeleteContainerOptions;
+use WindowsAzure\Blob\Models\AccessCondition;
 
 /**
  * Unit tests for class DeleteContainerOptions
  *
  * @category  Microsoft
- * @package   Tests\Unit\WindowsAzure\Services\Blob\Models
+ * @package   Tests\Unit\WindowsAzure\Blob\Models
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
@@ -39,7 +39,7 @@ use WindowsAzure\Services\Blob\Models\AccessCondition;
 class DeleteContainerOptionsTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @covers WindowsAzure\Services\Blob\Models\DeleteContainerOptions::getAccessCondition
+     * @covers WindowsAzure\Blob\Models\DeleteContainerOptions::getAccessCondition
      */
     public function testGetAccessCondition()
     {
@@ -56,7 +56,7 @@ class DeleteContainerOptionsTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers WindowsAzure\Services\Blob\Models\DeleteContainerOptions::setAccessCondition
+     * @covers WindowsAzure\Blob\Models\DeleteContainerOptions::setAccessCondition
      */
     public function testSetAccessCondition()
     {

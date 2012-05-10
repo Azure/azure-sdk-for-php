@@ -15,22 +15,22 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   Tests\Unit\WindowsAzure\Services\Blob\Models
+ * @package   Tests\Unit\WindowsAzure\Blob\Models
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
-namespace Tests\Unit\WindowsAzure\Services\Blob\Models;
-use WindowsAzure\Services\Blob\Models\ListPageBlobRangesOptions;
-use WindowsAzure\Services\Blob\Models\AccessCondition;
+namespace Tests\Unit\WindowsAzure\Blob\Models;
+use WindowsAzure\Blob\Models\ListPageBlobRangesOptions;
+use WindowsAzure\Blob\Models\AccessCondition;
 use Tests\Framework\TestResources;
 
 /**
  * Unit tests for class ListPageBlobRangesOptions
  *
  * @category  Microsoft
- * @package   Tests\Unit\WindowsAzure\Services\Blob\Models
+ * @package   Tests\Unit\WindowsAzure\Blob\Models
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
@@ -40,8 +40,8 @@ use Tests\Framework\TestResources;
 class ListPageBlobRangesOptionsTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @covers WindowsAzure\Services\Blob\Models\ListPageBlobRangesOptions::setLeaseId
-     * @covers WindowsAzure\Services\Blob\Models\ListPageBlobRangesOptions::getLeaseId
+     * @covers WindowsAzure\Blob\Models\ListPageBlobRangesOptions::setLeaseId
+     * @covers WindowsAzure\Blob\Models\ListPageBlobRangesOptions::getLeaseId
      */
     public function testSetLeaseId()
     {
@@ -58,7 +58,7 @@ class ListPageBlobRangesOptionsTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers WindowsAzure\Services\Blob\Models\ListPageBlobRangesOptions::getAccessCondition
+     * @covers WindowsAzure\Blob\Models\ListPageBlobRangesOptions::getAccessCondition
      */
     public function testGetAccessCondition()
     {
@@ -75,7 +75,7 @@ class ListPageBlobRangesOptionsTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers WindowsAzure\Services\Blob\Models\ListPageBlobRangesOptions::setAccessCondition
+     * @covers WindowsAzure\Blob\Models\ListPageBlobRangesOptions::setAccessCondition
      */
     public function testSetAccessCondition()
     {
@@ -91,7 +91,7 @@ class ListPageBlobRangesOptionsTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers WindowsAzure\Services\Blob\Models\ListPageBlobRangesOptions::setSnapshot
+     * @covers WindowsAzure\Blob\Models\ListPageBlobRangesOptions::setSnapshot
      */
     public function testSetSnapshot()
     {
@@ -107,7 +107,7 @@ class ListPageBlobRangesOptionsTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers WindowsAzure\Services\Blob\Models\ListPageBlobRangesOptions::getSnapshot
+     * @covers WindowsAzure\Blob\Models\ListPageBlobRangesOptions::getSnapshot
      */
     public function testGetSnapshot()
     {
@@ -124,8 +124,8 @@ class ListPageBlobRangesOptionsTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers WindowsAzure\Services\Blob\Models\ListPageBlobRangesOptions::setRangeStart
-     * @covers WindowsAzure\Services\Blob\Models\ListPageBlobRangesOptions::getRangeStart
+     * @covers WindowsAzure\Blob\Models\ListPageBlobRangesOptions::setRangeStart
+     * @covers WindowsAzure\Blob\Models\ListPageBlobRangesOptions::getRangeStart
      */
     public function testSetRangeStart()
     {
@@ -142,8 +142,8 @@ class ListPageBlobRangesOptionsTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers WindowsAzure\Services\Blob\Models\ListPageBlobRangesOptions::setRangeEnd
-     * @covers WindowsAzure\Services\Blob\Models\ListPageBlobRangesOptions::getRangeEnd
+     * @covers WindowsAzure\Blob\Models\ListPageBlobRangesOptions::setRangeEnd
+     * @covers WindowsAzure\Blob\Models\ListPageBlobRangesOptions::getRangeEnd
      */
     public function testSetRangeEnd()
     {

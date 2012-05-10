@@ -15,21 +15,21 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   Tests\Unit\WindowsAzure\Services\Blob\Models
+ * @package   Tests\Unit\WindowsAzure\Blob\Models
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
-namespace Tests\Unit\WindowsAzure\Services\Blob\Models;
-use WindowsAzure\Services\Blob\Models\SetBlobPropertiesResult;
+namespace Tests\Unit\WindowsAzure\Blob\Models;
+use WindowsAzure\Blob\Models\SetBlobPropertiesResult;
 use WindowsAzure\Utilities;
 
 /**
  * Unit tests for class SetBlobPropertiesResult
  *
  * @category  Microsoft
- * @package   Tests\Unit\WindowsAzure\Services\Blob\Models
+ * @package   Tests\Unit\WindowsAzure\Blob\Models
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
@@ -39,8 +39,8 @@ use WindowsAzure\Utilities;
 class SetBlobPropertiesResultTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @covers WindowsAzure\Services\Blob\Models\SetBlobPropertiesResult::setLastModified
-     * @covers WindowsAzure\Services\Blob\Models\SetBlobPropertiesResult::getLastModified
+     * @covers WindowsAzure\Blob\Models\SetBlobPropertiesResult::setLastModified
+     * @covers WindowsAzure\Blob\Models\SetBlobPropertiesResult::getLastModified
      */
     public function testSetLastModified()
     {
@@ -57,8 +57,8 @@ class SetBlobPropertiesResultTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers WindowsAzure\Services\Blob\Models\SetBlobPropertiesResult::setEtag
-     * @covers WindowsAzure\Services\Blob\Models\SetBlobPropertiesResult::getEtag
+     * @covers WindowsAzure\Blob\Models\SetBlobPropertiesResult::setEtag
+     * @covers WindowsAzure\Blob\Models\SetBlobPropertiesResult::getEtag
      */
     public function testSetEtag()
     {
@@ -75,8 +75,8 @@ class SetBlobPropertiesResultTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers WindowsAzure\Services\Blob\Models\SetBlobPropertiesResult::setSequenceNumber
-     * @covers WindowsAzure\Services\Blob\Models\SetBlobPropertiesResult::getSequenceNumber
+     * @covers WindowsAzure\Blob\Models\SetBlobPropertiesResult::setSequenceNumber
+     * @covers WindowsAzure\Blob\Models\SetBlobPropertiesResult::getSequenceNumber
      */
     public function testSetSequenceNumber()
     {

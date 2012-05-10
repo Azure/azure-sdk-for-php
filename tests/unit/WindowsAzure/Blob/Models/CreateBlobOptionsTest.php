@@ -15,23 +15,23 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   Tests\Unit\WindowsAzure\Services\Blob\Models
+ * @package   Tests\Unit\WindowsAzure\Blob\Models
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
-namespace Tests\Unit\WindowsAzure\Services\Blob\Models;
+namespace Tests\Unit\WindowsAzure\Blob\Models;
 use Tests\Framework\TestResources;
 use WindowsAzure\Utilities;
-use WindowsAzure\Services\Blob\Models\CreateBlobOptions;
-use WindowsAzure\Services\Blob\Models\AccessCondition;
+use WindowsAzure\Blob\Models\CreateBlobOptions;
+use WindowsAzure\Blob\Models\AccessCondition;
 
 /**
  * Unit tests for class CreateBlobOptions
  *
  * @category  Microsoft
- * @package   Tests\Unit\WindowsAzure\Services\Blob\Models
+ * @package   Tests\Unit\WindowsAzure\Blob\Models
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
@@ -41,8 +41,8 @@ use WindowsAzure\Services\Blob\Models\AccessCondition;
 class CreateBlobOptionsTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @covers WindowsAzure\Services\Blob\Models\CreateBlobOptions::setContentType
-     * @covers WindowsAzure\Services\Blob\Models\CreateBlobOptions::getContentType
+     * @covers WindowsAzure\Blob\Models\CreateBlobOptions::setContentType
+     * @covers WindowsAzure\Blob\Models\CreateBlobOptions::getContentType
      */
     public function testSetContentType()
     {
@@ -59,8 +59,8 @@ class CreateBlobOptionsTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers WindowsAzure\Services\Blob\Models\CreateBlobOptions::setContentEncoding
-     * @covers WindowsAzure\Services\Blob\Models\CreateBlobOptions::getContentEncoding
+     * @covers WindowsAzure\Blob\Models\CreateBlobOptions::setContentEncoding
+     * @covers WindowsAzure\Blob\Models\CreateBlobOptions::getContentEncoding
      */
     public function testSetContentEncoding()
     {
@@ -77,8 +77,8 @@ class CreateBlobOptionsTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers WindowsAzure\Services\Blob\Models\CreateBlobOptions::setContentLanguage
-     * @covers WindowsAzure\Services\Blob\Models\CreateBlobOptions::getContentLanguage
+     * @covers WindowsAzure\Blob\Models\CreateBlobOptions::setContentLanguage
+     * @covers WindowsAzure\Blob\Models\CreateBlobOptions::getContentLanguage
      */
     public function testSetContentLanguage()
     {
@@ -95,8 +95,8 @@ class CreateBlobOptionsTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers WindowsAzure\Services\Blob\Models\CreateBlobOptions::setContentMD5
-     * @covers WindowsAzure\Services\Blob\Models\CreateBlobOptions::getContentMD5
+     * @covers WindowsAzure\Blob\Models\CreateBlobOptions::setContentMD5
+     * @covers WindowsAzure\Blob\Models\CreateBlobOptions::getContentMD5
      */
     public function testSetContentMD5()
     {
@@ -113,8 +113,8 @@ class CreateBlobOptionsTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers WindowsAzure\Services\Blob\Models\CreateBlobOptions::setCacheControl
-     * @covers WindowsAzure\Services\Blob\Models\CreateBlobOptions::getCacheControl
+     * @covers WindowsAzure\Blob\Models\CreateBlobOptions::setCacheControl
+     * @covers WindowsAzure\Blob\Models\CreateBlobOptions::getCacheControl
      */
     public function testSetCacheControl()
     {
@@ -131,8 +131,8 @@ class CreateBlobOptionsTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers WindowsAzure\Services\Blob\Models\CreateBlobOptions::setBlobContentType
-     * @covers WindowsAzure\Services\Blob\Models\CreateBlobOptions::getBlobContentType
+     * @covers WindowsAzure\Blob\Models\CreateBlobOptions::setBlobContentType
+     * @covers WindowsAzure\Blob\Models\CreateBlobOptions::getBlobContentType
      */
     public function testSetBlobContentType()
     {
@@ -149,8 +149,8 @@ class CreateBlobOptionsTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers WindowsAzure\Services\Blob\Models\CreateBlobOptions::setBlobContentEncoding
-     * @covers WindowsAzure\Services\Blob\Models\CreateBlobOptions::getBlobContentEncoding
+     * @covers WindowsAzure\Blob\Models\CreateBlobOptions::setBlobContentEncoding
+     * @covers WindowsAzure\Blob\Models\CreateBlobOptions::getBlobContentEncoding
      */
     public function testSetBlobContentEncoding()
     {
@@ -167,8 +167,8 @@ class CreateBlobOptionsTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers WindowsAzure\Services\Blob\Models\CreateBlobOptions::setBlobContentLanguage
-     * @covers WindowsAzure\Services\Blob\Models\CreateBlobOptions::getBlobContentLanguage
+     * @covers WindowsAzure\Blob\Models\CreateBlobOptions::setBlobContentLanguage
+     * @covers WindowsAzure\Blob\Models\CreateBlobOptions::getBlobContentLanguage
      */
     public function testSetBlobContentLanguage()
     {
@@ -185,8 +185,8 @@ class CreateBlobOptionsTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers WindowsAzure\Services\Blob\Models\CreateBlobOptions::setBlobContentMD5
-     * @covers WindowsAzure\Services\Blob\Models\CreateBlobOptions::getBlobContentMD5
+     * @covers WindowsAzure\Blob\Models\CreateBlobOptions::setBlobContentMD5
+     * @covers WindowsAzure\Blob\Models\CreateBlobOptions::getBlobContentMD5
      */
     public function testSetBlobContentMD5()
     {
@@ -203,8 +203,8 @@ class CreateBlobOptionsTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers WindowsAzure\Services\Blob\Models\CreateBlobOptions::setBlobCacheControl
-     * @covers WindowsAzure\Services\Blob\Models\CreateBlobOptions::getBlobCacheControl
+     * @covers WindowsAzure\Blob\Models\CreateBlobOptions::setBlobCacheControl
+     * @covers WindowsAzure\Blob\Models\CreateBlobOptions::getBlobCacheControl
      */
     public function testSetBlobCacheControl()
     {
@@ -221,8 +221,8 @@ class CreateBlobOptionsTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers WindowsAzure\Services\Blob\Models\CreateBlobOptions::setLeaseId
-     * @covers WindowsAzure\Services\Blob\Models\CreateBlobOptions::getLeaseId
+     * @covers WindowsAzure\Blob\Models\CreateBlobOptions::setLeaseId
+     * @covers WindowsAzure\Blob\Models\CreateBlobOptions::getLeaseId
      */
     public function testSetLeaseId()
     {
@@ -239,8 +239,8 @@ class CreateBlobOptionsTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\Services\Blob\Models\CreateBlobOptions::setSequenceNumber
-     * @covers WindowsAzure\Services\Blob\Models\CreateBlobOptions::getSequenceNumber
+     * @covers WindowsAzure\Blob\Models\CreateBlobOptions::setSequenceNumber
+     * @covers WindowsAzure\Blob\Models\CreateBlobOptions::getSequenceNumber
      */
     public function testSetSequenceNumber()
     {
@@ -257,7 +257,7 @@ class CreateBlobOptionsTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers WindowsAzure\Services\Blob\Models\CreateBlobOptions::setMetadata
+     * @covers WindowsAzure\Blob\Models\CreateBlobOptions::setMetadata
      */
     public function testSetMetadata()
     {
@@ -273,7 +273,7 @@ class CreateBlobOptionsTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers WindowsAzure\Services\Blob\Models\CreateBlobOptions::getMetadata
+     * @covers WindowsAzure\Blob\Models\CreateBlobOptions::getMetadata
      */
     public function testGetMetadata()
     {
@@ -290,7 +290,7 @@ class CreateBlobOptionsTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers WindowsAzure\Services\Blob\Models\CreateBlobOptions::getAccessCondition
+     * @covers WindowsAzure\Blob\Models\CreateBlobOptions::getAccessCondition
      */
     public function testGetAccessCondition()
     {
@@ -307,7 +307,7 @@ class CreateBlobOptionsTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers WindowsAzure\Services\Blob\Models\CreateBlobOptions::setAccessCondition
+     * @covers WindowsAzure\Blob\Models\CreateBlobOptions::setAccessCondition
      */
     public function testSetAccessCondition()
     {

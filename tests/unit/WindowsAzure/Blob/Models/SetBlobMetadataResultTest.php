@@ -15,21 +15,21 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   Tests\Unit\WindowsAzure\Services\Blob\Models
+ * @package   Tests\Unit\WindowsAzure\Blob\Models
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
-namespace Tests\Unit\WindowsAzure\Services\Blob\Models;
+namespace Tests\Unit\WindowsAzure\Blob\Models;
 use WindowsAzure\Utilities;
-use WindowsAzure\Services\Blob\Models\SetBlobMetadataResult;
+use WindowsAzure\Blob\Models\SetBlobMetadataResult;
 
 /**
  * Unit tests for class SetBlobMetadataResult
  *
  * @category  Microsoft
- * @package   Tests\Unit\WindowsAzure\Services\Blob\Models
+ * @package   Tests\Unit\WindowsAzure\Blob\Models
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
@@ -39,7 +39,7 @@ use WindowsAzure\Services\Blob\Models\SetBlobMetadataResult;
 class SetBlobMetadataResultTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @covers WindowsAzure\Services\Blob\Models\SetBlobMetadataResult::getEtag
+     * @covers WindowsAzure\Blob\Models\SetBlobMetadataResult::getEtag
      */
     public function testGetEtag()
     {
@@ -56,7 +56,7 @@ class SetBlobMetadataResultTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers WindowsAzure\Services\Blob\Models\SetBlobMetadataResult::setEtag
+     * @covers WindowsAzure\Blob\Models\SetBlobMetadataResult::setEtag
      */
     public function testSetEtag()
     {
@@ -73,7 +73,7 @@ class SetBlobMetadataResultTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers WindowsAzure\Services\Blob\Models\SetBlobMetadataResult::getLastModified
+     * @covers WindowsAzure\Blob\Models\SetBlobMetadataResult::getLastModified
      */
     public function testGetLastModified()
     {
@@ -90,7 +90,7 @@ class SetBlobMetadataResultTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers WindowsAzure\Services\Blob\Models\SetBlobMetadataResult::setLastModified
+     * @covers WindowsAzure\Blob\Models\SetBlobMetadataResult::setLastModified
      */
     public function testSetLastModified()
     {

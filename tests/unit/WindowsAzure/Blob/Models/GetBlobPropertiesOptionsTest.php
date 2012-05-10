@@ -15,22 +15,22 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   Tests\Unit\WindowsAzure\Services\Blob\Models
+ * @package   Tests\Unit\WindowsAzure\Blob\Models
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
-namespace Tests\Unit\WindowsAzure\Services\Blob\Models;
+namespace Tests\Unit\WindowsAzure\Blob\Models;
 use Tests\Framework\TestResources;
-use WindowsAzure\Services\Blob\Models\AccessCondition;
-use WindowsAzure\Services\Blob\Models\GetBlobPropertiesOptions;
+use WindowsAzure\Blob\Models\AccessCondition;
+use WindowsAzure\Blob\Models\GetBlobPropertiesOptions;
 
 /**
  * Unit tests for class GetBlobPropertiesOptions
  *
  * @category  Microsoft
- * @package   Tests\Unit\WindowsAzure\Services\Blob\Models
+ * @package   Tests\Unit\WindowsAzure\Blob\Models
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
@@ -40,8 +40,8 @@ use WindowsAzure\Services\Blob\Models\GetBlobPropertiesOptions;
 class GetBlobPropertiesOptionsTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @covers WindowsAzure\Services\Blob\Models\GetBlobPropertiesOptions::setLeaseId
-     * @covers WindowsAzure\Services\Blob\Models\GetBlobPropertiesOptions::getLeaseId
+     * @covers WindowsAzure\Blob\Models\GetBlobPropertiesOptions::setLeaseId
+     * @covers WindowsAzure\Blob\Models\GetBlobPropertiesOptions::getLeaseId
      */
     public function testSetLeaseId()
     {
@@ -58,7 +58,7 @@ class GetBlobPropertiesOptionsTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers WindowsAzure\Services\Blob\Models\GetBlobPropertiesOptions::getAccessCondition
+     * @covers WindowsAzure\Blob\Models\GetBlobPropertiesOptions::getAccessCondition
      */
     public function testGetAccessCondition()
     {
@@ -75,7 +75,7 @@ class GetBlobPropertiesOptionsTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers WindowsAzure\Services\Blob\Models\GetBlobPropertiesOptions::setAccessCondition
+     * @covers WindowsAzure\Blob\Models\GetBlobPropertiesOptions::setAccessCondition
      */
     public function testSetAccessCondition()
     {
@@ -91,7 +91,7 @@ class GetBlobPropertiesOptionsTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers WindowsAzure\Services\Blob\Models\GetBlobPropertiesOptions::setSnapshot
+     * @covers WindowsAzure\Blob\Models\GetBlobPropertiesOptions::setSnapshot
      */
     public function testSetSnapshot()
     {
@@ -107,7 +107,7 @@ class GetBlobPropertiesOptionsTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers WindowsAzure\Services\Blob\Models\GetBlobPropertiesOptions::getSnapshot
+     * @covers WindowsAzure\Blob\Models\GetBlobPropertiesOptions::getSnapshot
      */
     public function testGetSnapshot()
     {

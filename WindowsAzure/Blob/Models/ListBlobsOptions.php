@@ -22,7 +22,7 @@
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
  
-namespace WindowsAzure\Services\Blob\Models;
+namespace WindowsAzure\Blob\Models;
 use WindowsAzure\Validate;
 
 /**

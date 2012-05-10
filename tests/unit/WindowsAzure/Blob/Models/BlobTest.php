@@ -15,22 +15,22 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   Tests\Unit\WindowsAzure\Services\Blob\Models
+ * @package   Tests\Unit\WindowsAzure\Blob\Models
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
-namespace Tests\Unit\WindowsAzure\Services\Blob\Models;
-use WindowsAzure\Services\Blob\Models\Blob;
+namespace Tests\Unit\WindowsAzure\Blob\Models;
+use WindowsAzure\Blob\Models\Blob;
 use Tests\Framework\TestResources;
-use WindowsAzure\Services\Blob\Models\BlobProperties;
+use WindowsAzure\Blob\Models\BlobProperties;
 
 /**
  * Unit tests for class Blob
  *
  * @category  Microsoft
- * @package   Tests\Unit\WindowsAzure\Services\Blob\Models
+ * @package   Tests\Unit\WindowsAzure\Blob\Models
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
@@ -40,7 +40,7 @@ use WindowsAzure\Services\Blob\Models\BlobProperties;
 class BlobTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @covers WindowsAzure\Services\Blob\Models\Blob::setName
+     * @covers WindowsAzure\Blob\Models\Blob::setName
      */
     public function testSetName()
     {
@@ -56,7 +56,7 @@ class BlobTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers WindowsAzure\Services\Blob\Models\Blob::getName
+     * @covers WindowsAzure\Blob\Models\Blob::getName
      */
     public function testGetName()
     {
@@ -73,7 +73,7 @@ class BlobTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers WindowsAzure\Services\Blob\Models\Blob::setUrl
+     * @covers WindowsAzure\Blob\Models\Blob::setUrl
      */
     public function testSetUrl()
     {
@@ -89,7 +89,7 @@ class BlobTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers WindowsAzure\Services\Blob\Models\Blob::getUrl
+     * @covers WindowsAzure\Blob\Models\Blob::getUrl
      */
     public function testGetUrl()
     {
@@ -106,7 +106,7 @@ class BlobTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers WindowsAzure\Services\Blob\Models\Blob::setSnapshot
+     * @covers WindowsAzure\Blob\Models\Blob::setSnapshot
      */
     public function testSetSnapshot()
     {
@@ -122,7 +122,7 @@ class BlobTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers WindowsAzure\Services\Blob\Models\Blob::getSnapshot
+     * @covers WindowsAzure\Blob\Models\Blob::getSnapshot
      */
     public function testGetSnapshot()
     {
@@ -139,7 +139,7 @@ class BlobTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers WindowsAzure\Services\Blob\Models\Blob::setMetadata
+     * @covers WindowsAzure\Blob\Models\Blob::setMetadata
      */
     public function testSetMetadata()
     {
@@ -155,7 +155,7 @@ class BlobTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers WindowsAzure\Services\Blob\Models\Blob::getMetadata
+     * @covers WindowsAzure\Blob\Models\Blob::getMetadata
      */
     public function testGetMetadata()
     {
@@ -172,7 +172,7 @@ class BlobTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers WindowsAzure\Services\Blob\Models\Blob::setProperties
+     * @covers WindowsAzure\Blob\Models\Blob::setProperties
      */
     public function testSetProperties()
     {
@@ -188,7 +188,7 @@ class BlobTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers WindowsAzure\Services\Blob\Models\Blob::getProperties
+     * @covers WindowsAzure\Blob\Models\Blob::getProperties
      */
     public function testGetProperties()
     {

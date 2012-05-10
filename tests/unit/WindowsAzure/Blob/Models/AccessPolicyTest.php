@@ -15,22 +15,22 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   Tests\Unit\WindowsAzure\Services\Blob\Models
+ * @package   Tests\Unit\WindowsAzure\Blob\Models
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
-namespace Tests\Unit\WindowsAzure\Services\Blob\Models;
+namespace Tests\Unit\WindowsAzure\Blob\Models;
 
 use WindowsAzure\Core\WindowsAzureUtilities;
-use WindowsAzure\Services\Blob\Models\AccessPolicy;
+use WindowsAzure\Blob\Models\AccessPolicy;
 
 /**
  * Unit tests for class AccessPolicy
  *
  * @category  Microsoft
- * @package   Tests\Unit\WindowsAzure\Services\Blob\Models
+ * @package   Tests\Unit\WindowsAzure\Blob\Models
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
@@ -40,7 +40,7 @@ use WindowsAzure\Services\Blob\Models\AccessPolicy;
 class AccessPolicyTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @covers WindowsAzure\Services\Blob\Models\AccessPolicy::getStart 
+     * @covers WindowsAzure\Blob\Models\AccessPolicy::getStart 
      */
     public function testGetStart()
     {
@@ -57,7 +57,7 @@ class AccessPolicyTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers WindowsAzure\Services\Blob\Models\AccessPolicy::setStart 
+     * @covers WindowsAzure\Blob\Models\AccessPolicy::setStart 
      */
     public function testSetStart()
     {
@@ -73,7 +73,7 @@ class AccessPolicyTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers WindowsAzure\Services\Blob\Models\AccessPolicy::getExpiry 
+     * @covers WindowsAzure\Blob\Models\AccessPolicy::getExpiry 
      */
     public function testGetExpiry()
     {
@@ -90,7 +90,7 @@ class AccessPolicyTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers WindowsAzure\Services\Blob\Models\AccessPolicy::setExpiry 
+     * @covers WindowsAzure\Blob\Models\AccessPolicy::setExpiry 
      */
     public function testSetExpiry()
     {
@@ -106,7 +106,7 @@ class AccessPolicyTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers WindowsAzure\Services\Blob\Models\AccessPolicy::getPermission 
+     * @covers WindowsAzure\Blob\Models\AccessPolicy::getPermission 
      */
     public function testGetPermission()
     {
@@ -123,7 +123,7 @@ class AccessPolicyTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers WindowsAzure\Services\Blob\Models\AccessPolicy::setPermission 
+     * @covers WindowsAzure\Blob\Models\AccessPolicy::setPermission 
      */
     public function testSetPermission()
     {
@@ -139,7 +139,7 @@ class AccessPolicyTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers WindowsAzure\Services\Blob\Models\AccessPolicy::toArray
+     * @covers WindowsAzure\Blob\Models\AccessPolicy::toArray
      */
     public function testToArray()
     {

@@ -15,14 +15,14 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   WindowsAzure\Services\Blob\Models
+ * @package   WindowsAzure\Blob\Models
  * @author    Azure PHP SDK <azurephpsdk@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
  
-namespace WindowsAzure\Services\Blob\Models;
+namespace WindowsAzure\Blob\Models;
 use WindowsAzure\Validate;
 use WindowsAzure\Resources;
 use WindowsAzure\Utilities;
@@ -32,7 +32,7 @@ use WindowsAzure\Utilities;
  * against the storage services.
  *
  * @category  Microsoft
- * @package   WindowsAzure\Services\Blob\Models
+ * @package   WindowsAzure\Blob\Models
  * @author    Azure PHP SDK <azurephpsdk@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
@@ -70,7 +70,7 @@ class SourceAccessCondition
     /**
      * Specifies that no access condition is set.
      * 
-     * @return \WindowsAzure\Services\Blob\Models\SourceAccessCondition 
+     * @return \WindowsAzure\Blob\Models\SourceAccessCondition 
      */
     public static function none()
     {
@@ -92,7 +92,7 @@ class SourceAccessCondition
      *
      * @param string $etag a string that represents the ETag value to check.
      *
-     * @return \WindowsAzure\Services\Blob\Models\SourceAccessCondition
+     * @return \WindowsAzure\Blob\Models\SourceAccessCondition
      */
     public static function sourceIfMatch($etag)
     {
@@ -116,7 +116,7 @@ class SourceAccessCondition
      * @param \DateTime $lastModified date that represents the last-modified
      * time to check for the resource.
      *
-     * @return \WindowsAzure\Services\Blob\Models\SourceAccessCondition
+     * @return \WindowsAzure\Blob\Models\SourceAccessCondition
      */
     public static function sourceIfModifiedSince($lastModified)
     {
@@ -143,7 +143,7 @@ class SourceAccessCondition
      *
      * @param string $eTag string that represents the ETag value to check.
      *
-     * @return \WindowsAzure\Services\Blob\Models\SourceAccessCondition
+     * @return \WindowsAzure\Blob\Models\SourceAccessCondition
      */
     public static function sourceIfNoneMatch($eTag)
     {
@@ -169,7 +169,7 @@ class SourceAccessCondition
      * @param \DateTime $lastModified date that represents the last-modified
      * time to check for the resource.
      *
-     * @return \WindowsAzure\Services\Blob\Models\SourceAccessCondition
+     * @return \WindowsAzure\Blob\Models\SourceAccessCondition
      */
     public static function sourceIfNotModifiedSince($lastModified)
     {

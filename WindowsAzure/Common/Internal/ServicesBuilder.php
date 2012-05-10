@@ -35,8 +35,8 @@ use WindowsAzure\Core\Filters\WrapFilter;
 use WindowsAzure\Core\InvalidArgumentTypeException;
 use WindowsAzure\Services\Queue\QueueRestProxy;
 use WindowsAzure\Services\Queue\QueueSettings;
-use WindowsAzure\Services\Blob\BlobRestProxy;
-use WindowsAzure\Services\Blob\BlobSettings;
+use WindowsAzure\Blob\Internal\BlobRestProxy;
+use WindowsAzure\Blob\BlobSettings;
 use WindowsAzure\Services\ServiceBus\ServiceBusRestProxy;
 use WindowsAzure\Services\ServiceBus\ServiceBusSettings;
 use WindowsAzure\Services\ServiceBus\WrapRestProxy;
@@ -165,7 +165,7 @@ class ServicesBuilder implements IServiceBuilder
      *
      * @param WindowsAzure\Core\Configuration $config configuration.
      * 
-     * @return WindowsAzure\Services\Blob\IBlob.
+     * @return WindowsAzure\Blob\Internal\IBlob.
      */
     private function _buildBlob($config)
     {
@@ -335,7 +335,7 @@ class ServicesBuilder implements IServiceBuilder
      * @param string                          $type   The type name.
      * 
      * @return WindowsAzure\Services\Queue\IQueue
-     *       | WindowsAzure\Services\Blob\IBlob
+     *       | WindowsAzure\Blob\Internal\IBlob
      *       | WindowsAzure\Services\Blob\ITable
      *       | WindowsAzure\Services\ServiceBus\IServiceBus 
      *       | WindowsAzure\Services\ServiceBus\IWrap 

@@ -15,22 +15,22 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   Tests\Unit\WindowsAzure\Services\Blob\Models
+ * @package   Tests\Unit\WindowsAzure\Blob\Models
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
-namespace Tests\Unit\WindowsAzure\Services\Blob\Models;
+namespace Tests\Unit\WindowsAzure\Blob\Models;
 use WindowsAzure\Utilities;
-use WindowsAzure\Services\Blob\Models\ListPageBlobRangesResult;
-use WindowsAzure\Services\Blob\Models\PageRange;
+use WindowsAzure\Blob\Models\ListPageBlobRangesResult;
+use WindowsAzure\Blob\Models\PageRange;
 
 /**
  * Unit tests for class ListPageBlobRangesResultTest
  *
  * @category  Microsoft
- * @package   Tests\Unit\WindowsAzure\Services\Blob\Models
+ * @package   Tests\Unit\WindowsAzure\Blob\Models
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
@@ -40,8 +40,8 @@ use WindowsAzure\Services\Blob\Models\PageRange;
 class ListPageBlobRangesResultTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @covers WindowsAzure\Services\Blob\Models\ListPageBlobRangesResult::setLastModified
-     * @covers WindowsAzure\Services\Blob\Models\ListPageBlobRangesResult::getLastModified
+     * @covers WindowsAzure\Blob\Models\ListPageBlobRangesResult::setLastModified
+     * @covers WindowsAzure\Blob\Models\ListPageBlobRangesResult::getLastModified
      */
     public function testSetLastModified()
     {
@@ -58,8 +58,8 @@ class ListPageBlobRangesResultTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers WindowsAzure\Services\Blob\Models\ListPageBlobRangesResult::setEtag
-     * @covers WindowsAzure\Services\Blob\Models\ListPageBlobRangesResult::getEtag
+     * @covers WindowsAzure\Blob\Models\ListPageBlobRangesResult::setEtag
+     * @covers WindowsAzure\Blob\Models\ListPageBlobRangesResult::getEtag
      */
     public function testSetEtag()
     {
@@ -76,8 +76,8 @@ class ListPageBlobRangesResultTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers WindowsAzure\Services\Blob\Models\ListPageBlobRangesResult::setContentLength
-     * @covers WindowsAzure\Services\Blob\Models\ListPageBlobRangesResult::getContentLength
+     * @covers WindowsAzure\Blob\Models\ListPageBlobRangesResult::setContentLength
+     * @covers WindowsAzure\Blob\Models\ListPageBlobRangesResult::getContentLength
      */
     public function testSetContentLength()
     {
@@ -94,8 +94,8 @@ class ListPageBlobRangesResultTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers WindowsAzure\Services\Blob\Models\ListPageBlobRangesResult::setPageRanges
-     * @covers WindowsAzure\Services\Blob\Models\ListPageBlobRangesResult::getPageRanges
+     * @covers WindowsAzure\Blob\Models\ListPageBlobRangesResult::setPageRanges
+     * @covers WindowsAzure\Blob\Models\ListPageBlobRangesResult::getPageRanges
      */
     public function testSetPageRanges()
     {

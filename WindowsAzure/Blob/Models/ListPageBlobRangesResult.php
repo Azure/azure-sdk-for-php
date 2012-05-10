@@ -15,24 +15,24 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   WindowsAzure\Services\Blob\Models
+ * @package   WindowsAzure\Blob\Models
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
  
-namespace WindowsAzure\Services\Blob\Models;
+namespace WindowsAzure\Blob\Models;
 use WindowsAzure\Validate;
 use WindowsAzure\Utilities;
 use WindowsAzure\Resources;
-use WindowsAzure\Services\Blob\Models\PageRange;
+use WindowsAzure\Blob\Models\PageRange;
 
 /**
  * Holds result of calling listPageBlobRanges wrapper
  *
  * @category  Microsoft
- * @package   WindowsAzure\Services\Blob\Models
+ * @package   WindowsAzure\Blob\Models
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0

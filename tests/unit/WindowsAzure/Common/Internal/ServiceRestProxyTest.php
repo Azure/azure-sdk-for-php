@@ -28,7 +28,7 @@ use WindowsAzure\Resources;
 use WindowsAzure\Core\Http\HttpClient;
 use WindowsAzure\Core\Http\Url;
 use Tests\Mock\WindowsAzure\Core\Filters\SimpleFilterMock;
-use WindowsAzure\Services\Blob\Models\AccessCondition;
+use WindowsAzure\Blob\Models\AccessCondition;
 use WindowsAzure\Core\Serialization\XmlSerializer;
 
 /**
