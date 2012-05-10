@@ -46,9 +46,16 @@ use WindowsAzure\Resources;
  */
 class ServiceBusRestProxyTest extends ServiceBusRestProxyTestBase
 {
-    public function testFoo()
+    /**
+     * @covers WindowsAzure\Services\ServiceBus\ServiceBusRestProxy::deleteQueue
+     */
+    public function testDeleteQueueNonExistQueueFail()
     {
-        $this->assertTrue(true);
+        $this->setExpectedException(get_class(
+            new ServiceException(''))
+        );
+
+        $this->wrapper->deleteQueue('IDoNotExist');
     }
 }
 

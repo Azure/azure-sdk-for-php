@@ -30,8 +30,9 @@ use Tests\Framework\TestResources;
 use Tests\Framework\WrapRestProxyTestBase;
 use WindowsAzure\Core\Configuration;
 use WindowsAzure\Core\ServiceException;
-use WindowsAzure\Utilities;
-use WindowsAzure\Services\ServiceBus\WrapRestProxy;
+use WindowsAzure\Core\WindowsAzureUtilities;
+use WindowsAzure\Services\ServiceBus\ServiceBusRestProxy;
+use WindowsAzure\Services\ServiceBus\ServiceBusService;
 use WindowsAzure\Services\ServiceBus\ServiceBusSettings;
 use WindowsAzure\Resources;
 
@@ -45,34 +46,40 @@ use WindowsAzure\Resources;
  * @version    Release: @package_version@
  * @link       http://pear.php.net/package/azure-sdk-for-php
  */
-class WrapRestProxyTest extends WrapRestProxyTestBase
+class ServiceBusServiceTest extends WrapRestProxyTestBase
 {
     /**
-     * @covers WindowsAzure\Services\ServiceBus\WrapRestProxy::__construct
-     * @covers WindowsAzure\Services\ServiceBus\WrapRestProxy::wrapAccessToken
+     * @covers WindowsAzure\Services\ServiceBus\ServiceBusService::create
      */
-    public function testWrapAccessToken() 
+    public function testServiceBusServiceCreate() 
     {
+        
+        $serviceBusUri = 'https://'
+            .TestResources::serviceBusNamespace()
+            .'.servicebus.windows.net';
+
         $wrapUri = 'https://'
             .TestResources::serviceBusNamespace()
-            .'-sb.accesscontrol.windows.net/WRAPv0.9';
-        $wrapUserName = TestResources::wrapAuthenticationName();
+            .'-sb.accesscontrol.windows.net';
+
+        $wrapName = TestResources::wrapAuthenticationName();
         $wrapPassword = TestResources::wrapPassword();
-        $scope = 'http://'
-            .TestResources::serviceBusNameSpace()
-            .'.servicebus.windows.net';
-        
-        $wrapAccessTokenResult = $this->wrapper->wrapAccessToken(
-            $wrapUri, 
-            $wrapUserName, 
-            $wrapPassword, 
-            $scope
+
+        $config = new Configuration();
+        $config->setProperty(ServiceBusSettings::URI, $serviceBusUri);
+        $config->setProperty(ServiceBusSettings::WRAP_URI, $wrapUri);
+        $config->setProperty(ServiceBusSettings::WRAP_NAME, $wrapName);
+        $config->setProperty(ServiceBusSettings::WRAP_PASSWORD, $wrapPassword);
+
+        $serviceBusRestProxy = ServiceBusService::create($config);
+
+        $this->assertNotNull($serviceBusRestProxy);
+        $this->assertInstanceOf(
+            '\WindowsAzure\\Services\ServiceBus\\IServiceBus', 
+            $serviceBusRestProxy
         );
         
-        $this->assertNotNull($wrapAccessTokenResult);
-        $this->assertNotNull($wrapAccessTokenResult->getAccessToken());
     }
-    
 }
 
 ?>

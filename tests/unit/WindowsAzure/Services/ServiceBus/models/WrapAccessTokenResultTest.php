@@ -38,6 +38,41 @@ use WindowsAzure\Services\ServiceBus\Models\WrapAccessTokenResult;
  */
 class WrapAccessTokenResultTest extends \PHPUnit_Framework_TestCase
 {
+
+    /**
+     * @covers WindowsAzure\Services\ServiceBus\Models\WrapAccessTokenResult::create
+     */
+    public function testCreateWrapAccessTokenSuccess()
+    {
+        // Setup
+        $expectedWrapAccessToken = 'WRAP_ACCESS_TOKEN';
+        $expectedWrapAccessTokenExpiresIn = 300;
+
+        $queryParameter = array(
+            'wrap_access_token' => 'WRAP_ACCESS_TOKEN',
+            'wrap_access_token_expires_in' => 300
+        );
+
+        $queryString = http_build_query($queryParameter);
+
+        // Test
+        $wrapAccessTokenResult = WrapAccessTokenResult::create($queryString);;
+        $actualWrapAccessToken = $wrapAccessTokenResult->getAccessToken();
+        $actualWrapAccessTokenExpiresIn = $wrapAccessTokenResult->getExpiresIn();
+
+        // Assert
+        $this->assertEquals(
+            $expectedWrapAccessToken,
+            $actualWrapAccessToken
+        );
+
+        $this->assertEquals(
+            $expectedWrapAccessTokenExpiresIn,
+            $actualWrapAccessTokenExpiresIn
+        );
+
+    }
+
     /**
      * @covers WindowsAzure\Services\ServiceBus\Models\WrapAccessTokenResult::getAccessToken
      * @covers WindowsAzure\Services\ServiceBus\Models\WrapAccessTokenResult::setAccessToken
@@ -62,11 +97,11 @@ class WrapAccessTokenResultTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetExpiresIn()
     {
-        // Setup
-        $wrapAccessTokenResult = new WrapAccessTokenResult();
-        $expected = 1000;
+        // Setup 
+        $wrapAccessTokenResult = new WrapAccessTokenResult(); 
+        $expected = 1000; 
         
-        // Test
+        // Test 
         $wrapAccessTokenResult->setExpiresIn($expected);
         
         // Assert

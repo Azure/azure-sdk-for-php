@@ -28,9 +28,10 @@ use WindowsAzure\Utilities;
 use WindowsAzure\Core\Http\HttpClient;
 use WindowsAzure\Core\IServiceBuilder;
 use WindowsAzure\Core\Configuration;
-use WindowsAzure\Core\Filters\SharedKeyFilter;
 use WindowsAzure\Core\Filters\DateFilter;
 use WindowsAzure\Core\Filters\HeadersFilter;
+use WindowsAzure\Core\Filters\SharedKeyFilter;
+use WindowsAzure\Core\Filters\WrapFilter;
 use WindowsAzure\Core\InvalidArgumentTypeException;
 use WindowsAzure\Services\Queue\QueueRestProxy;
 use WindowsAzure\Services\Queue\QueueSettings;
@@ -266,7 +267,13 @@ class ServicesBuilder implements IServiceBuilder
             $xmlSerializer
         );
         
-        return $serviceBusWrapper;
+        $wrapFilter = new WrapFilter(
+            $config->getProperty(ServiceBusSettings::WRAP_URI),
+            $config->getProperty(ServiceBusSettings::WRAP_NAME),
+            $config->getProperty(ServiceBusSettings::WRAP_PASSWORD)
+        );
+        
+        return $serviceBusWrapper->withFilter($wrapFilter);
     }
     
     /**
@@ -311,12 +318,10 @@ class ServicesBuilder implements IServiceBuilder
      */
     private function _buildWrap($config)
     {
-        $httpClient    = new HttpClient();
-        $xmlSerializer = new XmlSerializer();
-        $wrapWrapper   = new WrapRestProxy(
+        $httpClient  = new HttpClient();
+        $wrapWrapper = new WrapRestProxy(
             $httpClient,
-            $config->getProperty(ServiceBusSettings::WRAP_URI),
-            $xmlSerializer
+            $config->getProperty(ServiceBusSettings::WRAP_URI) 
         );
 
         return $wrapWrapper;

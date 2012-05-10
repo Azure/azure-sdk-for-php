@@ -99,6 +99,15 @@ interface IHttpClient
     public function setHeaders($headers);
 
     /**
+     * Sets HTTP POST parameters.
+     *
+     * @param array $postParameters The HTTP POST parameters.
+     *
+     * @return none
+     */
+    public function setPostParameters($postParameters);
+
+    /**
      * Processes the reuqest through HTTP pipeline with passed $filters, 
      * sends HTTP request to the wire and process the response in the HTTP pipeline.
      * 

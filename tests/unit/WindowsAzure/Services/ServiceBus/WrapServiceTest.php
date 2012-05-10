@@ -30,13 +30,14 @@ use Tests\Framework\TestResources;
 use Tests\Framework\WrapRestProxyTestBase;
 use WindowsAzure\Core\Configuration;
 use WindowsAzure\Core\ServiceException;
-use WindowsAzure\Utilities;
+use WindowsAzure\Core\WindowsAzureUtilities;
 use WindowsAzure\Services\ServiceBus\WrapRestProxy;
+use WindowsAzure\Services\ServiceBus\WrapService;
 use WindowsAzure\Services\ServiceBus\ServiceBusSettings;
 use WindowsAzure\Resources;
 
 /**
- * Unit tests for WrapRestProxy class
+ * Unit tests for WrapService class
  *
  * @package    Tests\Unit\WindowsAzure\Services\ServiceBus
  * @author     Azure PHP SDK <azurephpsdk@microsoft.com>
@@ -45,32 +46,29 @@ use WindowsAzure\Resources;
  * @version    Release: @package_version@
  * @link       http://pear.php.net/package/azure-sdk-for-php
  */
-class WrapRestProxyTest extends WrapRestProxyTestBase
+class WrapServiceTest extends \PHPUnit_Framework_TestCase
 {
-    /**
-     * @covers WindowsAzure\Services\ServiceBus\WrapRestProxy::__construct
-     * @covers WindowsAzure\Services\ServiceBus\WrapRestProxy::wrapAccessToken
+    /** 
+     * @covers WindowsAzure\Services\ServiceBus\WrapService::create
      */
-    public function testWrapAccessToken() 
+    public function testWrapServiceCreate() 
     {
         $wrapUri = 'https://'
             .TestResources::serviceBusNamespace()
-            .'-sb.accesscontrol.windows.net/WRAPv0.9';
-        $wrapUserName = TestResources::wrapAuthenticationName();
+            .'-sb.accesscontrol.windows.net';
+
+        $wrapName = TestResources::wrapAuthenticationName();
         $wrapPassword = TestResources::wrapPassword();
-        $scope = 'http://'
-            .TestResources::serviceBusNameSpace()
-            .'.servicebus.windows.net';
         
-        $wrapAccessTokenResult = $this->wrapper->wrapAccessToken(
-            $wrapUri, 
-            $wrapUserName, 
-            $wrapPassword, 
-            $scope
-        );
+        $config = new Configuration();
+        $config->setProperty(ServiceBusSettings::WRAP_URI, $wrapUri);
+        $config->setProperty(ServiceBusSettings::WRAP_NAME, $wrapName);
+        $config->setProperty(ServiceBusSettings::WRAP_PASSWORD, $wrapPassword);
         
-        $this->assertNotNull($wrapAccessTokenResult);
-        $this->assertNotNull($wrapAccessTokenResult->getAccessToken());
+        $wrapRestProxy = WrapService::create($config);
+        
+        $this->assertNotNull($wrapRestProxy);
+        $this->assertInstanceOf('\WindowsAzure\\Services\\ServiceBus\\WrapRestProxy', $wrapRestProxy);
     }
     
 }
