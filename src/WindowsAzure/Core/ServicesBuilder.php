@@ -24,6 +24,7 @@
  
 namespace WindowsAzure\Core;
 use WindowsAzure\Resources;
+use WindowsAzure\Utilities;
 use WindowsAzure\Core\Http\HttpClient;
 use WindowsAzure\Core\IServiceBuilder;
 use WindowsAzure\Core\Configuration;
@@ -126,11 +127,14 @@ class ServicesBuilder implements IServiceBuilder
     {
         $httpClient    = new HttpClient();
         $xmlSerializer = new XmlSerializer();
+        $uri           = Utilities::tryAddUrlScheme(
+            $config->getProperty(QueueSettings::URI)
+        );
         
         $queueWrapper = new QueueRestProxy(
             $httpClient, 
-            $config->getProperty(QueueSettings::URI), 
-            '', 
+            $uri,
+            Resources::EMPTY_STRING, 
             $xmlSerializer
         );
 
@@ -166,10 +170,13 @@ class ServicesBuilder implements IServiceBuilder
     {
         $httpClient    = new HttpClient();
         $xmlSerializer = new XmlSerializer();
+        $uri           = Utilities::tryAddUrlScheme(
+            $config->getProperty(BlobSettings::URI)
+        );
 
         $blobWrapper = new BlobRestProxy(
             $httpClient, 
-            $config->getProperty(BlobSettings::URI),
+            $uri,
             $config->getProperty(BlobSettings::ACCOUNT_NAME),
             $xmlSerializer
         );
@@ -208,10 +215,13 @@ class ServicesBuilder implements IServiceBuilder
         $atomSerializer = new AtomReaderWriter();
         $mimeSerializer = new MimeReaderWriter();
         $xmlSerializer  = new XmlSerializer();
+        $uri            = Utilities::tryAddUrlScheme(
+            $config->getProperty(TableSettings::URI)
+        );
 
         $tableWrapper = new TableRestProxy(
             $httpClient,
-            $config->getProperty(TableSettings::URI),
+            $uri,
             $atomSerializer,
             $mimeSerializer,
             $xmlSerializer
@@ -273,10 +283,14 @@ class ServicesBuilder implements IServiceBuilder
         );
         $httpClient               = new HttpClient($certificatePath);
         $xmlSerializer            = new XmlSerializer();
+        $uri                      = Utilities::tryAddUrlScheme(
+            $config->getProperty(ServiceManagementSettings::URI)
+        );
+        
         $serviceManagementWrapper = new ServiceManagementRestProxy(
             $httpClient,
             $config->getProperty(ServiceManagementSettings::SUBSCRIPTION_ID),
-            $config->getProperty(ServiceManagementSettings::URI),
+            $uri,
             $xmlSerializer
         );
 

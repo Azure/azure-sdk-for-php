@@ -621,7 +621,12 @@ class TableRestProxy extends ServiceRestProxy implements ITable
     public function __construct($channel, $uri, $atomSerializer, $mimeSerializer, 
         $dataSerializer
     ) {
-        parent::__construct($channel, $uri, '', $dataSerializer);
+        parent::__construct(
+            $channel,
+            $uri,
+            Resources::EMPTY_STRING,
+            $dataSerializer
+        );
         $this->_atomSerializer = $atomSerializer;
         $this->_mimeSerializer = $mimeSerializer;
     }

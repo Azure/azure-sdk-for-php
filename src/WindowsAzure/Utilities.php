@@ -58,6 +58,25 @@ class Utilities
     }
     
     /**
+     * Adds a url scheme if there is no scheme.
+     * 
+     * @param string $url    The URL.
+     * @param string $scheme The scheme. By default HTTP
+     * 
+     * @return string
+     */
+    public static function tryAddUrlScheme($url, $scheme = 'http')
+    {
+        $urlScheme = parse_url($url, PHP_URL_SCHEME);
+        
+        if (empty($urlScheme)) {
+            $url = "$scheme://" . $url;
+        }
+        
+        return $url;
+    }
+    
+    /**
      * tries to get nested array with index name $key from $array.
      * 
      * Returns empty array object if the value is NULL.

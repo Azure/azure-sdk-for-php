@@ -402,6 +402,37 @@ class UtilitiesTest extends \PHPUnit_Framework_TestCase
         // Assert
         $this->assertEquals($expected, $actual->format('D, d M Y H:i:s T'));
     }
+    
+    /**
+     * @covers WindowsAzure\Utilities::tryAddUrlScheme
+     */
+    public function testTryAddUrlSchemeWithScheme()
+    {
+        // Setup
+        $url = 'http://microsoft.com';
+        
+        // Test
+        $actual = Utilities::tryAddUrlScheme($url);
+        
+        // Assert
+        $this->assertEquals($url, $actual);
+    }
+    
+    /**
+     * @covers WindowsAzure\Utilities::tryAddUrlScheme
+     */
+    public function testTryAddUrlSchemeWithoutScheme()
+    {
+        // Setup
+        $url = 'microsoft.com';
+        $expected = 'http://microsoft.com';
+        
+        // Test
+        $actual = Utilities::tryAddUrlScheme($url);
+        
+        // Assert
+        $this->assertEquals($expected, $actual);
+    }
 }
 
 ?>
