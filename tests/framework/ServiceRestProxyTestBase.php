@@ -45,10 +45,6 @@ class ServiceRestProxyTestBase extends RestProxyTestBase
     
     public static function setUpBeforeClass()
     {
-        if (Configuration::isEmulated()) {
-            throw new \Exception(self::NOT_SUPPORTED);
-        }
-        
         $storageKey = TestResources::accountKey();
         $storageName = TestResources::accountName();
         
