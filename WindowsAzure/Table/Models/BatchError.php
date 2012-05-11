@@ -54,8 +54,10 @@ class BatchError
     /**
      * Creates BatchError object.
      * 
-     * @param WindowsAzure\Common\Internal\ServiceException $error   The error object.
-     * @param array                              $headers The response headers.
+     * @param WindowsAzure\Common\Internal\ServiceException $error   The error 
+     * object.
+     * @param array                                         $headers The response 
+     * headers.
      * 
      * @return \WindowsAzure\Table\Models\BatchError 
      */

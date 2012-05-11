@@ -76,11 +76,13 @@ class ChunkedGoalStateDeserializer implements IGoalStateDeserializer
     {
         do {
             $lengthString = stream_get_line($this->_inputStream, 100, "\n");
-        } while (empty($lengthString) || $lengthString == "\n" || $lengthString == "\r");
+        } while (
+            empty($lengthString) || $lengthString == "\n" || $lengthString == "\r"
+        );
 
         $intLengthString = hexdec(trim($lengthString));
+        
         $chunkData = stream_get_contents($this->_inputStream, $intLengthString);
-
         $goalState = $this->_deserializer->deserialize($chunkData);
 
         return $goalState;

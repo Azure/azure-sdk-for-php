@@ -354,7 +354,8 @@ class Utilities
      *
      * @return boolean
      */
-    public static function arrayKeyExistsIgnoreCase($key, array $search) {
+    public static function arrayKeyExistsIgnoreCase($key, array $search)
+    {
         return array_key_exists(strtolower($key), array_change_key_case($search));
     }
 
