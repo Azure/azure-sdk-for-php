@@ -26,7 +26,7 @@
 
 namespace Tests\Functional\WindowsAzure\Table;
 
-use WindowsAzure\Common\Internal\ServiceException;
+use WindowsAzure\Common\ServiceException;
 use WindowsAzure\Common\Configuration;
 use WindowsAzure\Table\TableService;
 use WindowsAzure\Table\Models\BatchError;

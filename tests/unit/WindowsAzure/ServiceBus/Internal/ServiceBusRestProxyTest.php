@@ -29,7 +29,7 @@ use WindowsAzure\Common\Models\ServiceProperties;
 use Tests\Framework\TestResources;
 use Tests\Framework\ServiceBusRestProxyTestBase;
 use WindowsAzure\Common\Configuration;
-use WindowsAzure\Common\Internal\ServiceException;
+use WindowsAzure\Common\ServiceException;
 use WindowsAzure\Common\Internal\Utilities;
 use WindowsAzure\ServiceBus\Internal\ServiceBusRestProxy;
 use WindowsAzure\Common\Internal\Resources;

@@ -148,7 +148,7 @@ class CloudSubscription
      * 
      * @param string $requestId The asynchronous operation request id.
      * 
-     * @throws WindowsAzure\Common\Internal\ServiceException
+     * @throws WindowsAzure\Common\ServiceException
      * 
      * @return none
      */

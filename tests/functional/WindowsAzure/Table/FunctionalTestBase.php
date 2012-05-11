@@ -32,7 +32,7 @@ use Tests\Framework\TestResources;
 use Tests\Functional\WindowsAzure\Table\TableServiceFunctionalTestData;
 use WindowsAzure\Common\Internal\Resources;
 use WindowsAzure\Common\Internal\Utilities;
-use WindowsAzure\Common\Internal\ServiceException;
+use WindowsAzure\Common\ServiceException;
 use WindowsAzure\Common\Configuration;
 use WindowsAzure\Table\TableService;
 use WindowsAzure\Table\TableSettings;
