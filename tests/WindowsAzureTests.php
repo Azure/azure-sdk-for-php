@@ -20,6 +20,8 @@ spl_autoload_register(
             'tests\\framework\\testresources' => '/framework/TestResources.php',
             'tests\\framework\\virtualfilesystem' => '/framework/VirtualFileSystem.php',
             'tests\\framework\\wraprestproxytestbase' => '/framework/WrapRestProxyTestBase.php',
+            'tests\\functional\\windowsazure\\blob\\blobserviceintegrationtest' => '/functional/WindowsAzure/Blob/BlobServiceIntegrationTest.php',
+            'tests\\functional\\windowsazure\\blob\\integrationtestbase' => '/functional/WindowsAzure/Blob/IntegrationTestBase.php',
             'tests\\functional\\windowsazure\\queue\\functionaltestbase' => '/functional/WindowsAzure/Queue/FunctionalTestBase.php',
             'tests\\functional\\windowsazure\\queue\\integrationtestbase' => '/functional/WindowsAzure/Queue/IntegrationTestBase.php',
             'tests\\functional\\windowsazure\\queue\\queueservicefunctionaloptionstest' => '/functional/WindowsAzure/Queue/QueueServiceFunctionalOptionsTest.php',
