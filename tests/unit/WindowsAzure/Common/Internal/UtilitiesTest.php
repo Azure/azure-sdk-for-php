@@ -435,9 +435,9 @@ class UtilitiesTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\Utilities::arrayKeyExistsIgnoreCase
+     * @covers WindowsAzure\Common\Internal\Utilities::arrayKeyExistsIgnoreCase
      */
-    public function testKeysToLower()
+    public function testArrayKeyExistsIgnoreCase()
     {
         // Setup
         $expected = true;
