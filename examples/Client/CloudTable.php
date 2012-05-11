@@ -23,8 +23,8 @@
  */
  
 namespace Client;
-use WindowsAzure\Services\Table\Models\Entity;
-use WindowsAzure\Utilities;
+use WindowsAzure\Table\Models\Entity;
+use WindowsAzure\Common\Internal\Utilities;
 
 /**
  * The cloud table class.
@@ -60,7 +60,7 @@ class CloudTable
 	 * Sets default partition key by default using uniqid() function.
      * 
      * @param string                             $name  The table name.
-     * @param WindowsAzure\Services\Table\ITable $proxy The table REST proxy.
+     * @param WindowsAzure\Table\Internal\ITable $proxy The table REST proxy.
      */
     public function __construct($name, $proxy)
     {

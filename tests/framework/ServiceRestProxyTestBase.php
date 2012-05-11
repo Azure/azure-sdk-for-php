@@ -22,10 +22,10 @@
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
 namespace Tests\Framework;
-use WindowsAzure\Core\Configuration;
+use WindowsAzure\Common\Configuration;
 use Tests\Framework\TestResources;
-use WindowsAzure\Services\Core\Models\ServiceProperties;
-use WindowsAzure\Core\Serialization\XmlSerializer;
+use WindowsAzure\Common\Models\ServiceProperties;
+use WindowsAzure\Common\Internal\Serialization\XmlSerializer;
 
 /**
  * TestBase class for Storage Services test classes.

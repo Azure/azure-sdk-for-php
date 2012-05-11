@@ -24,10 +24,10 @@
 namespace Tests\Framework;
 use Tests\Framework\ServiceRestProxyTestBase;
 use Tests\Framework\TestResources;
-use WindowsAzure\Core\Configuration;
-use WindowsAzure\Services\Core\Models\ServiceProperties;
-use WindowsAzure\Services\Queue\QueueSettings;
-use WindowsAzure\Services\Queue\QueueService;
+use WindowsAzure\Common\Configuration;
+use WindowsAzure\Common\Models\ServiceProperties;
+use WindowsAzure\Queue\QueueSettings;
+use WindowsAzure\Queue\QueueService;
 
 /**
  * TestBase class for each unit test class.

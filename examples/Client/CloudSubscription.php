@@ -23,13 +23,13 @@
  */
  
 namespace Client;
-use WindowsAzure\Core\Configuration;
-use WindowsAzure\Resources;
-use WindowsAzure\Services\ServiceManagement\ServiceManagementService;
-use WindowsAzure\Services\ServiceManagement\ServiceManagementSettings;
-use WindowsAzure\Services\ServiceManagement\Models\Locations;
-use WindowsAzure\Services\ServiceManagement\Models\OperationStatus;
-use WindowsAzure\Services\ServiceManagement\Models\CreateStorageServiceOptions;
+use WindowsAzure\Common\Configuration;
+use WindowsAzure\Common\Internal\Resources;
+use WindowsAzure\ServiceManagement\ServiceManagementService;
+use WindowsAzure\ServiceManagement\ServiceManagementSettings;
+use WindowsAzure\ServiceManagement\Models\Locations;
+use WindowsAzure\ServiceManagement\Models\OperationStatus;
+use WindowsAzure\ServiceManagement\Models\CreateStorageServiceOptions;
 
 /**
  * Encapsulates Windows Azure subscription basic operations.
@@ -148,7 +148,7 @@ class CloudSubscription
      * 
      * @param string $requestId The asynchronous operation request id.
      * 
-     * @throws WindowsAzure\Core\ServiceException
+     * @throws WindowsAzure\Common\Internal\ServiceException
      * 
      * @return none
      */
