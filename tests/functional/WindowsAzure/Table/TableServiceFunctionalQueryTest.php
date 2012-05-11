@@ -17,22 +17,22 @@
  * limitations under the License.
  *
  * @category   Microsoft
- * @package    Tests\Functional\WindowsAzure\Services\Table
+ * @package    Tests\Functional\WindowsAzure\Table
  * @author     Jason Cooke <jcooke@microsoft.com>
  * @copyright  2012 Microsoft Corporation
  * @license    http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link       http://pear.php.net/package/azure-sdk-for-php
  */
 
-namespace Tests\Functional\WindowsAzure\Services\Table;
+namespace Tests\Functional\WindowsAzure\Table;
 
 use WindowsAzure\Common\Internal\ServiceException;
-use WindowsAzure\Services\Table\Models\BatchOperations;
-use WindowsAzure\Services\Table\Models\EdmType;
-use WindowsAzure\Services\Table\Models\Entity;
-use WindowsAzure\Services\Table\Models\Query;
-use WindowsAzure\Services\Table\Models\QueryEntitiesOptions;
-use WindowsAzure\Services\Table\Models\Filters\Filter;
+use WindowsAzure\Table\Models\BatchOperations;
+use WindowsAzure\Table\Models\EdmType;
+use WindowsAzure\Table\Models\Entity;
+use WindowsAzure\Table\Models\Query;
+use WindowsAzure\Table\Models\QueryEntitiesOptions;
+use WindowsAzure\Table\Models\Filters\Filter;
 
 class TableServiceFunctionalQueryTest extends FunctionalTestBase {
     private static $entitiesInTable;
@@ -371,7 +371,7 @@ class TableServiceFunctionalQueryTest extends FunctionalTestBase {
     }
 
     /**
-    * @covers WindowsAzure\Services\Table\TableRestProxy::queryEntities
+    * @covers WindowsAzure\Table\Internal\TableRestProxy::queryEntities
     */
     public function testQueryEntities() {
         // The emulator has problems with non-standard queries tested here.
@@ -384,7 +384,7 @@ class TableServiceFunctionalQueryTest extends FunctionalTestBase {
     }
 
     /**
-    * @covers WindowsAzure\Services\Table\TableRestProxy::queryEntities
+    * @covers WindowsAzure\Table\Internal\TableRestProxy::queryEntities
     */
     public function testQueryEntitiesBooleanLevel1() {
         // The emulator has problems with non-standard queries tested here.
@@ -397,7 +397,7 @@ class TableServiceFunctionalQueryTest extends FunctionalTestBase {
     }
 
     /**
-    * @covers WindowsAzure\Services\Table\TableRestProxy::queryEntities
+    * @covers WindowsAzure\Table\Internal\TableRestProxy::queryEntities
     */
     public function testQueryEntitiesDateTimeLevel1() {
         // The emulator has problems with non-standard queries tested here.
@@ -410,7 +410,7 @@ class TableServiceFunctionalQueryTest extends FunctionalTestBase {
     }
 
     /**
-    * @covers WindowsAzure\Services\Table\TableRestProxy::queryEntities
+    * @covers WindowsAzure\Table\Internal\TableRestProxy::queryEntities
     */
     public function testQueryEntitiesDoubleLevel1() {
         // The emulator has problems with non-standard queries tested here.
@@ -423,7 +423,7 @@ class TableServiceFunctionalQueryTest extends FunctionalTestBase {
     }
 
     /**
-    * @covers WindowsAzure\Services\Table\TableRestProxy::queryEntities
+    * @covers WindowsAzure\Table\Internal\TableRestProxy::queryEntities
     */
     public function testQueryEntitiesGuidLevel1() {
         // The emulator has problems with non-standard queries tested here.
@@ -436,7 +436,7 @@ class TableServiceFunctionalQueryTest extends FunctionalTestBase {
     }
 
     /**
-    * @covers WindowsAzure\Services\Table\TableRestProxy::queryEntities
+    * @covers WindowsAzure\Table\Internal\TableRestProxy::queryEntities
     */
     public function testQueryEntitiesIntLevel1() {
         // The emulator has problems with non-standard queries tested here.
@@ -449,7 +449,7 @@ class TableServiceFunctionalQueryTest extends FunctionalTestBase {
     }
 
     /**
-    * @covers WindowsAzure\Services\Table\TableRestProxy::queryEntities
+    * @covers WindowsAzure\Table\Internal\TableRestProxy::queryEntities
     */
     public function testQueryEntitiesLongLevel1() {
         // The emulator has problems with non-standard queries tested here.
@@ -462,7 +462,7 @@ class TableServiceFunctionalQueryTest extends FunctionalTestBase {
     }
 
     /**
-    * @covers WindowsAzure\Services\Table\TableRestProxy::queryEntities
+    * @covers WindowsAzure\Table\Internal\TableRestProxy::queryEntities
     */
     public function testQueryEntitiesStringLevel1() {
         // The emulator has problems with non-standard queries tested here.
@@ -475,7 +475,7 @@ class TableServiceFunctionalQueryTest extends FunctionalTestBase {
     }
 
     /**
-    * @covers WindowsAzure\Services\Table\TableRestProxy::queryEntities
+    * @covers WindowsAzure\Table\Internal\TableRestProxy::queryEntities
     */
     public function testQueryEntitiesBinaryLevel1() {
         // The emulator has problems with non-standard queries tested here.
@@ -488,7 +488,7 @@ class TableServiceFunctionalQueryTest extends FunctionalTestBase {
     }
 
     /**
-    * @covers WindowsAzure\Services\Table\TableRestProxy::queryEntities
+    * @covers WindowsAzure\Table\Internal\TableRestProxy::queryEntities
     */
     public function testQueryEntitiesLevel2() {
         // The emulator has problems with non-standard queries tested here.
@@ -501,7 +501,7 @@ class TableServiceFunctionalQueryTest extends FunctionalTestBase {
     }
 
     /**
-    * @covers WindowsAzure\Services\Table\TableRestProxy::queryEntities
+    * @covers WindowsAzure\Table\Internal\TableRestProxy::queryEntities
     */
     public function testQueryEntitiesLevel3() {
         // The emulator has problems with non-standard queries tested here.
@@ -514,7 +514,7 @@ class TableServiceFunctionalQueryTest extends FunctionalTestBase {
     }
 
     /**
-    * @covers WindowsAzure\Services\Table\TableRestProxy::queryEntities
+    * @covers WindowsAzure\Table\Internal\TableRestProxy::queryEntities
     */
     private function queryEntitiesWorker($options) {
         $table = TableServiceFunctionalTestData::$TEST_TABLE_NAMES[0];

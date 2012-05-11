@@ -15,24 +15,24 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   Tests\Unit\WindowsAzure\Services\Table
+ * @package   Tests\Unit\WindowsAzure\Table
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
 
-namespace Tests\Unit\WindowsAzure\Services\Table;
-use WindowsAzure\Services\Table\TableService;
+namespace Tests\Unit\WindowsAzure\Table;
+use WindowsAzure\Table\TableService;
 use WindowsAzure\Common\Configuration;
 use Tests\Framework\TestResources;
-use WindowsAzure\Services\Table\TableSettings;
+use WindowsAzure\Table\TableSettings;
 
 /**
  * Unit tests for class TableService
  *
  * @category  Microsoft
- * @package   Tests\Unit\WindowsAzure\Services\Table
+ * @package   Tests\Unit\WindowsAzure\Table
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
@@ -42,7 +42,7 @@ use WindowsAzure\Services\Table\TableSettings;
 class TableServiceTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @covers WindowsAzure\Services\Table\TableService::create
+     * @covers WindowsAzure\Table\TableService::create
      */
     public function testCreateWithConfig()
     {
@@ -57,7 +57,7 @@ class TableServiceTest extends \PHPUnit_Framework_TestCase
         $tableWrapper = TableService::create($config);
         
         // Assert
-        $this->assertInstanceOf('WindowsAzure\Services\Table\ITable', $tableWrapper);
+        $this->assertInstanceOf('WindowsAzure\Table\Internal\ITable', $tableWrapper);
     }
 }
 

@@ -15,21 +15,21 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   Tests\Unit\WindowsAzure\Services\Table\Models
+ * @package   Tests\Unit\WindowsAzure\Table\Models
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
-namespace Tests\Unit\WindowsAzure\Services\Table\Models;
-use WindowsAzure\Services\Table\Models\Property;
-use WindowsAzure\Services\Table\Models\EdmType;
+namespace Tests\Unit\WindowsAzure\Table\Models;
+use WindowsAzure\Table\Models\Property;
+use WindowsAzure\Table\Models\EdmType;
 
 /**
  * Unit tests for class Property
  *
  * @category  Microsoft
- * @package   Tests\Unit\WindowsAzure\Services\Table\Models
+ * @package   Tests\Unit\WindowsAzure\Table\Models
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
@@ -39,8 +39,8 @@ use WindowsAzure\Services\Table\Models\EdmType;
 class PropertyTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @covers WindowsAzure\Services\Table\Models\Property::setEdmType
-     * @covers WindowsAzure\Services\Table\Models\Property::getEdmType
+     * @covers WindowsAzure\Table\Models\Property::setEdmType
+     * @covers WindowsAzure\Table\Models\Property::getEdmType
      */
     public function testSetEdmType()
     {
@@ -56,8 +56,8 @@ class PropertyTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers WindowsAzure\Services\Table\Models\Property::setValue
-     * @covers WindowsAzure\Services\Table\Models\Property::getValue
+     * @covers WindowsAzure\Table\Models\Property::setValue
+     * @covers WindowsAzure\Table\Models\Property::getValue
      */
     public function testSetValue()
     {

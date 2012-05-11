@@ -15,21 +15,21 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   Tests\Unit\WindowsAzure\Services\Table\Models
+ * @package   Tests\Unit\WindowsAzure\Table\Models
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
 
-namespace Tests\Unit\WindowsAzure\Services\Table\Models;
-use WindowsAzure\Services\Table\Models\TableServiceOptions;
+namespace Tests\Unit\WindowsAzure\Table\Models;
+use WindowsAzure\Table\Models\TableServiceOptions;
 
 /**
  * Unit tests for class TableServiceOptions
  *
  * @category  Microsoft
- * @package   Tests\Unit\WindowsAzure\Services\Table\Models
+ * @package   Tests\Unit\WindowsAzure\Table\Models
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
@@ -39,7 +39,7 @@ use WindowsAzure\Services\Table\Models\TableServiceOptions;
 class TableServiceOptionsTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @covers WindowsAzure\Services\Table\Models\TableServiceOptions::setTimeout
+     * @covers WindowsAzure\Table\Models\TableServiceOptions::setTimeout
      */
     public function testSetTimeout()
     {
@@ -55,7 +55,7 @@ class TableServiceOptionsTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers WindowsAzure\Services\Table\Models\TableServiceOptions::getTimeout
+     * @covers WindowsAzure\Table\Models\TableServiceOptions::getTimeout
      */
     public function testGetTimeout()
     {

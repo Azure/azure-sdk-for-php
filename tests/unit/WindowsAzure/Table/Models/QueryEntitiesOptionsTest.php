@@ -15,23 +15,23 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   Tests\Unit\WindowsAzure\Services\Table\Models
+ * @package   Tests\Unit\WindowsAzure\Table\Models
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
-namespace Tests\Unit\WindowsAzure\Services\Table\Models;
-use WindowsAzure\Services\Table\Models\QueryEntitiesOptions;
-use WindowsAzure\Services\Table\Models\Query;
-use WindowsAzure\Services\Table\Models\Filters\Filter;
-use WindowsAzure\Services\Table\Models\EdmType;
+namespace Tests\Unit\WindowsAzure\Table\Models;
+use WindowsAzure\Table\Models\QueryEntitiesOptions;
+use WindowsAzure\Table\Models\Query;
+use WindowsAzure\Table\Models\Filters\Filter;
+use WindowsAzure\Table\Models\EdmType;
 
 /**
  * Unit tests for class QueryEntitiesOptions
  *
  * @category  Microsoft
- * @package   Tests\Unit\WindowsAzure\Services\Table\Models
+ * @package   Tests\Unit\WindowsAzure\Table\Models
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
@@ -41,9 +41,9 @@ use WindowsAzure\Services\Table\Models\EdmType;
 class QueryEntitiesOptionsTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @covers WindowsAzure\Services\Table\Models\QueryEntitiesOptions::setQuery
-     * @covers WindowsAzure\Services\Table\Models\QueryEntitiesOptions::getQuery
-     * @covers WindowsAzure\Services\Table\Models\QueryEntitiesOptions::__construct
+     * @covers WindowsAzure\Table\Models\QueryEntitiesOptions::setQuery
+     * @covers WindowsAzure\Table\Models\QueryEntitiesOptions::getQuery
+     * @covers WindowsAzure\Table\Models\QueryEntitiesOptions::__construct
      */
     public function testSetQuery()
     {
@@ -59,8 +59,8 @@ class QueryEntitiesOptionsTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers WindowsAzure\Services\Table\Models\QueryEntitiesOptions::setNextPartitionKey
-     * @covers WindowsAzure\Services\Table\Models\QueryEntitiesOptions::getNextPartitionKey
+     * @covers WindowsAzure\Table\Models\QueryEntitiesOptions::setNextPartitionKey
+     * @covers WindowsAzure\Table\Models\QueryEntitiesOptions::getNextPartitionKey
      */
     public function testSetNextPartitionKey()
     {
@@ -76,8 +76,8 @@ class QueryEntitiesOptionsTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers WindowsAzure\Services\Table\Models\QueryEntitiesOptions::setNextRowKey
-     * @covers WindowsAzure\Services\Table\Models\QueryEntitiesOptions::getNextRowKey
+     * @covers WindowsAzure\Table\Models\QueryEntitiesOptions::setNextRowKey
+     * @covers WindowsAzure\Table\Models\QueryEntitiesOptions::getNextRowKey
      */
     public function testSetNextRowKey()
     {
@@ -93,8 +93,8 @@ class QueryEntitiesOptionsTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers WindowsAzure\Services\Table\Models\QueryEntitiesOptions::setSelectFields
-     * @covers WindowsAzure\Services\Table\Models\QueryEntitiesOptions::getSelectFields
+     * @covers WindowsAzure\Table\Models\QueryEntitiesOptions::setSelectFields
+     * @covers WindowsAzure\Table\Models\QueryEntitiesOptions::getSelectFields
      */
     public function testSetSelectFields()
     {
@@ -110,8 +110,8 @@ class QueryEntitiesOptionsTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers WindowsAzure\Services\Table\Models\QueryEntitiesOptions::setTop
-     * @covers WindowsAzure\Services\Table\Models\QueryEntitiesOptions::getTop
+     * @covers WindowsAzure\Table\Models\QueryEntitiesOptions::setTop
+     * @covers WindowsAzure\Table\Models\QueryEntitiesOptions::getTop
      */
     public function testSetTop()
     {
@@ -127,8 +127,8 @@ class QueryEntitiesOptionsTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers WindowsAzure\Services\Table\Models\QueryEntitiesOptions::setFilter
-     * @covers WindowsAzure\Services\Table\Models\QueryEntitiesOptions::getFilter
+     * @covers WindowsAzure\Table\Models\QueryEntitiesOptions::setFilter
+     * @covers WindowsAzure\Table\Models\QueryEntitiesOptions::getFilter
      */
     public function testSetFilter()
     {
@@ -144,8 +144,8 @@ class QueryEntitiesOptionsTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers WindowsAzure\Services\Table\Models\QueryEntitiesOptions::addSelectField
-     * @covers WindowsAzure\Services\Table\Models\QueryEntitiesOptions::getSelectFields
+     * @covers WindowsAzure\Table\Models\QueryEntitiesOptions::addSelectField
+     * @covers WindowsAzure\Table\Models\QueryEntitiesOptions::getSelectFields
      */
     public function testAddSelectField()
     {

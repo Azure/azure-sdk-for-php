@@ -15,21 +15,21 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   Tests\Unit\WindowsAzure\Services\Table\Models
+ * @package   Tests\Unit\WindowsAzure\Table\Models
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
 
-namespace Tests\Unit\WindowsAzure\Services\Table\Models;
-use WindowsAzure\Services\Table\Models\QueryTablesResult;
+namespace Tests\Unit\WindowsAzure\Table\Models;
+use WindowsAzure\Table\Models\QueryTablesResult;
 
 /**
  * Unit tests for class QueryTablesResult
  *
  * @category  Microsoft
- * @package   Tests\Unit\WindowsAzure\Services\Table\Models
+ * @package   Tests\Unit\WindowsAzure\Table\Models
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
@@ -39,8 +39,8 @@ use WindowsAzure\Services\Table\Models\QueryTablesResult;
 class QueryTablesResultTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @covers WindowsAzure\Services\Table\Models\QueryTablesResult::setNextTableName
-     * @covers WindowsAzure\Services\Table\Models\QueryTablesResult::getNextTableName
+     * @covers WindowsAzure\Table\Models\QueryTablesResult::setNextTableName
+     * @covers WindowsAzure\Table\Models\QueryTablesResult::getNextTableName
      */
     public function testSetNextTableName()
     {
@@ -56,8 +56,8 @@ class QueryTablesResultTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers WindowsAzure\Services\Table\Models\QueryTablesResult::setTables
-     * @covers WindowsAzure\Services\Table\Models\QueryTablesResult::getTables
+     * @covers WindowsAzure\Table\Models\QueryTablesResult::setTables
+     * @covers WindowsAzure\Table\Models\QueryTablesResult::getTables
      */
     public function testSetTables()
     {

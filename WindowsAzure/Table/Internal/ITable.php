@@ -15,21 +15,21 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   WindowsAzure\Services\Table
+ * @package   WindowsAzure\Table\Internal
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
  
-namespace WindowsAzure\Services\Table;
+namespace WindowsAzure\Table\Internal;
 use WindowsAzure\Common\Internal\FilterableService;
 
 /**
  * This interface has all REST APIs provided by Windows Azure for Table service.
  *
  * @category  Microsoft
- * @package   WindowsAzure\Services\Table
+ * @package   WindowsAzure\Table\Internal
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0

@@ -15,22 +15,22 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   Tests\Unit\WindowsAzure\Services\Table\Models\Filters
+ * @package   Tests\Unit\WindowsAzure\Table\Models\Filters
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
 
-namespace Tests\Unit\WindowsAzure\Services\Table\Models\Filters;
-use WindowsAzure\Services\Table\Models\Filters\Filter;
-use WindowsAzure\Services\Table\Models\EdmType;
+namespace Tests\Unit\WindowsAzure\Table\Models\Filters;
+use WindowsAzure\Table\Models\Filters\Filter;
+use WindowsAzure\Table\Models\EdmType;
 
 /**
  * Unit tests for class Filter
  *
  * @category  Microsoft
- * @package   Tests\Unit\WindowsAzure\Services\Table\Models\Filters
+ * @package   Tests\Unit\WindowsAzure\Table\Models\Filters
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
@@ -40,9 +40,9 @@ use WindowsAzure\Services\Table\Models\EdmType;
 class FilterTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @covers WindowsAzure\Services\Table\Models\Filters\Filter::applyAnd
-     * @covers WindowsAzure\Services\Table\Models\Filters\Filter::applyPropertyName
-     * @covers WindowsAzure\Services\Table\Models\Filters\Filter::applyQueryString
+     * @covers WindowsAzure\Table\Models\Filters\Filter::applyAnd
+     * @covers WindowsAzure\Table\Models\Filters\Filter::applyPropertyName
+     * @covers WindowsAzure\Table\Models\Filters\Filter::applyQueryString
      */
     public function testApplyAnd()
     {
@@ -59,8 +59,8 @@ class FilterTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers WindowsAzure\Services\Table\Models\Filters\Filter::applyNot
-     * @covers WindowsAzure\Services\Table\Models\Filters\Filter::applyConstant
+     * @covers WindowsAzure\Table\Models\Filters\Filter::applyNot
+     * @covers WindowsAzure\Table\Models\Filters\Filter::applyConstant
      */
     public function testApplyNot()
     {
@@ -75,9 +75,9 @@ class FilterTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers WindowsAzure\Services\Table\Models\Filters\Filter::applyOr
-     * @covers WindowsAzure\Services\Table\Models\Filters\Filter::applyPropertyName
-     * @covers WindowsAzure\Services\Table\Models\Filters\Filter::applyQueryString
+     * @covers WindowsAzure\Table\Models\Filters\Filter::applyOr
+     * @covers WindowsAzure\Table\Models\Filters\Filter::applyPropertyName
+     * @covers WindowsAzure\Table\Models\Filters\Filter::applyQueryString
      */
     public function testApplyOr()
     {
@@ -94,9 +94,9 @@ class FilterTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers WindowsAzure\Services\Table\Models\Filters\Filter::applyEq
-     * @covers WindowsAzure\Services\Table\Models\Filters\Filter::applyPropertyName
-     * @covers WindowsAzure\Services\Table\Models\Filters\Filter::applyQueryString
+     * @covers WindowsAzure\Table\Models\Filters\Filter::applyEq
+     * @covers WindowsAzure\Table\Models\Filters\Filter::applyPropertyName
+     * @covers WindowsAzure\Table\Models\Filters\Filter::applyQueryString
      */
     public function testApplyEq()
     {
@@ -113,9 +113,9 @@ class FilterTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers WindowsAzure\Services\Table\Models\Filters\Filter::applyNe
-     * @covers WindowsAzure\Services\Table\Models\Filters\Filter::applyPropertyName
-     * @covers WindowsAzure\Services\Table\Models\Filters\Filter::applyQueryString
+     * @covers WindowsAzure\Table\Models\Filters\Filter::applyNe
+     * @covers WindowsAzure\Table\Models\Filters\Filter::applyPropertyName
+     * @covers WindowsAzure\Table\Models\Filters\Filter::applyQueryString
      */
     public function testApplyNe()
     {
@@ -132,9 +132,9 @@ class FilterTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers WindowsAzure\Services\Table\Models\Filters\Filter::applyGe
-     * @covers WindowsAzure\Services\Table\Models\Filters\Filter::applyPropertyName
-     * @covers WindowsAzure\Services\Table\Models\Filters\Filter::applyQueryString
+     * @covers WindowsAzure\Table\Models\Filters\Filter::applyGe
+     * @covers WindowsAzure\Table\Models\Filters\Filter::applyPropertyName
+     * @covers WindowsAzure\Table\Models\Filters\Filter::applyQueryString
      */
     public function testApplyGe()
     {
@@ -151,9 +151,9 @@ class FilterTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers WindowsAzure\Services\Table\Models\Filters\Filter::applyGt
-     * @covers WindowsAzure\Services\Table\Models\Filters\Filter::applyPropertyName
-     * @covers WindowsAzure\Services\Table\Models\Filters\Filter::applyQueryString
+     * @covers WindowsAzure\Table\Models\Filters\Filter::applyGt
+     * @covers WindowsAzure\Table\Models\Filters\Filter::applyPropertyName
+     * @covers WindowsAzure\Table\Models\Filters\Filter::applyQueryString
      */
     public function testApplyGt()
     {
@@ -170,9 +170,9 @@ class FilterTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers WindowsAzure\Services\Table\Models\Filters\Filter::applyLt
-     * @covers WindowsAzure\Services\Table\Models\Filters\Filter::applyPropertyName
-     * @covers WindowsAzure\Services\Table\Models\Filters\Filter::applyQueryString
+     * @covers WindowsAzure\Table\Models\Filters\Filter::applyLt
+     * @covers WindowsAzure\Table\Models\Filters\Filter::applyPropertyName
+     * @covers WindowsAzure\Table\Models\Filters\Filter::applyQueryString
      */
     public function testApplyLt()
     {
@@ -189,9 +189,9 @@ class FilterTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers WindowsAzure\Services\Table\Models\Filters\Filter::applyLe
-     * @covers WindowsAzure\Services\Table\Models\Filters\Filter::applyPropertyName
-     * @covers WindowsAzure\Services\Table\Models\Filters\Filter::applyQueryString
+     * @covers WindowsAzure\Table\Models\Filters\Filter::applyLe
+     * @covers WindowsAzure\Table\Models\Filters\Filter::applyPropertyName
+     * @covers WindowsAzure\Table\Models\Filters\Filter::applyQueryString
      */
     public function testApplyLe()
     {

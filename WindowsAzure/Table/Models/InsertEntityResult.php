@@ -15,14 +15,14 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   WindowsAzure\Services\Table\Models
+ * @package   WindowsAzure\Table\Models
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
  
-namespace WindowsAzure\Services\Table\Models;
+namespace WindowsAzure\Table\Models;
 use WindowsAzure\Common\Internal\Utilities;
 use WindowsAzure\Common\Internal\Resources;
 
@@ -30,7 +30,7 @@ use WindowsAzure\Common\Internal\Resources;
  * Holds result of calling insertEntity wrapper
  *
  * @category  Microsoft
- * @package   WindowsAzure\Services\Table\Models
+ * @package   WindowsAzure\Table\Models
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
@@ -51,7 +51,7 @@ class InsertEntityResult
      * @param array             $headers        The HTTP response headers.
      * @param IAtomReaderWriter $atomSerializer The atom reader and writer.
      * 
-     * @return \WindowsAzure\Services\Table\Models\InsertEntityResult
+     * @return \WindowsAzure\Table\Models\InsertEntityResult
      * 
      * @static
      */

@@ -15,14 +15,14 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   WindowsAzure\Services\Table\Models
+ * @package   WindowsAzure\Table\Models
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
  
-namespace WindowsAzure\Services\Table\Models;
+namespace WindowsAzure\Table\Models;
 use WindowsAzure\Common\Internal\Utilities;
 use WindowsAzure\Common\Internal\Resources;
 
@@ -30,7 +30,7 @@ use WindowsAzure\Common\Internal\Resources;
  * QueryTablesResult
  *
  * @category  Microsoft
- * @package   WindowsAzure\Services\Table\Models
+ * @package   WindowsAzure\Table\Models
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
@@ -55,7 +55,7 @@ class QueryTablesResult
      * @param array $headers The HTTP response headers
      * @param array $entries The table entriess
      * 
-     * @return \WindowsAzure\Services\Table\Models\QueryTablesResult 
+     * @return \WindowsAzure\Table\Models\QueryTablesResult 
      */
     public static function create($headers, $entries)
     {

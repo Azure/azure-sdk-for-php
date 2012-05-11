@@ -15,20 +15,20 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   WindowsAzure\Services\Table\Utilities
+ * @package   WindowsAzure\Table\Internal
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
  
-namespace WindowsAzure\Services\Table\Utilities;
+namespace WindowsAzure\Table\Internal;
 
 /**
  * Interface for MIME reading and writing.
  *
  * @category  Microsoft
- * @package   WindowsAzure\Services\Table\Utilities
+ * @package   WindowsAzure\Table\Internal
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0

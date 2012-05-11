@@ -29,7 +29,7 @@ use WindowsAzure\Common\Internal\InvalidArgumentTypeException;
 use WindowsAzure\Common\Internal\ServicesBuilder;
 use WindowsAzure\Queue\QueueSettings;
 use WindowsAzure\Blob\BlobSettings;
-use WindowsAzure\Services\Table\TableSettings;
+use WindowsAzure\Table\TableSettings;
 
 /**
  * Contains configuration used to access azure storage accounts. 

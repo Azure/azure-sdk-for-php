@@ -15,22 +15,22 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   WindowsAzure\Services\Table\Models
+ * @package   WindowsAzure\Table\Models
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
  
-namespace WindowsAzure\Services\Table\Models;
-use WindowsAzure\Services\Table\Models\EdmType;
+namespace WindowsAzure\Table\Models;
+use WindowsAzure\Table\Models\EdmType;
 use WindowsAzure\Common\Internal\Validate;
 
 /**
  * Represents entity property.
  *
  * @category  Microsoft
- * @package   WindowsAzure\Services\Table\Models
+ * @package   WindowsAzure\Table\Models
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0

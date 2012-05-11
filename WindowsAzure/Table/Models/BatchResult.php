@@ -15,28 +15,28 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   WindowsAzure\Services\Table\Models
+ * @package   WindowsAzure\Table\Models
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
  
-namespace WindowsAzure\Services\Table\Models;
+namespace WindowsAzure\Table\Models;
 require_once 'HTTP/Request2/Response.php';
 use WindowsAzure\Common\Internal\Resources;
 use WindowsAzure\Common\Internal\Utilities;
 use WindowsAzure\Common\Internal\Http\HttpClient;
 use WindowsAzure\Common\Internal\ServiceException;
-use WindowsAzure\Services\Table\Models\BatchError;
-use WindowsAzure\Services\Table\Models\InsertEntityResult;
-use WindowsAzure\Services\Table\Models\UpdateEntityResult;
+use WindowsAzure\Table\Models\BatchError;
+use WindowsAzure\Table\Models\InsertEntityResult;
+use WindowsAzure\Table\Models\UpdateEntityResult;
 
 /**
  * Holds results from batch API.
  *
  * @category  Microsoft
- * @package   WindowsAzure\Services\Table\Models
+ * @package   WindowsAzure\Table\Models
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
@@ -113,7 +113,7 @@ class BatchResult
      * @param IAtomReaderWriter $atomSerializer The Atom reader and writer.
      * @param IMimeReaderWriter $mimeSerializer The MIME reader and writer.
      * 
-     * @return \WindowsAzure\Services\Table\Models\BatchResult
+     * @return \WindowsAzure\Table\Models\BatchResult
      * 
      * @throws \InvalidArgumentException 
      */

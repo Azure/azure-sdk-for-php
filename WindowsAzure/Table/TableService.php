@@ -15,14 +15,14 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   WindowsAzure\Services\Table
+ * @package   WindowsAzure\Table
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
  
-namespace WindowsAzure\Services\Table;
+namespace WindowsAzure\Table;
 use WindowsAzure\Common\Internal\Validate;
 use WindowsAzure\Common\Configuration;
 use WindowsAzure\Common\Internal\IServiceBuilder;
@@ -32,7 +32,7 @@ use WindowsAzure\Common\Internal\Resources;
  * Factory for creating ITable objects
  *
  * @category  Microsoft
- * @package   WindowsAzure\Services\Table
+ * @package   WindowsAzure\Table
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
@@ -47,7 +47,7 @@ class TableService
      * @param WindowsAzure\Common\Configuration    $config  The config object.
      * @param WindowsAzure\Common\Internal\IServicesBuilder $builder The builder object.
      * 
-     * @return WindowsAzure\Services\Table\ITable
+     * @return WindowsAzure\Table\Internal\ITable
      */
     public static function create($config, $builder = null)
     {

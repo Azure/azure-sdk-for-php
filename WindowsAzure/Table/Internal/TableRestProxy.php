@@ -15,44 +15,44 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   WindowsAzure\Services\Table
+ * @package   WindowsAzure\Table\Internal
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
  
-namespace WindowsAzure\Services\Table;
+namespace WindowsAzure\Table\Internal;
 use WindowsAzure\Common\Internal\Resources;
 use WindowsAzure\Common\Internal\Utilities;
 use WindowsAzure\Common\Internal\Validate;
 use WindowsAzure\Common\Internal\Http\HttpCallContext;
 use WindowsAzure\Common\Models\ServiceProperties;
 use WindowsAzure\Common\Internal\ServiceRestProxy;
-use WindowsAzure\Services\Table\Models\TableServiceOptions;
+use WindowsAzure\Table\Models\TableServiceOptions;
 use WindowsAzure\Common\Models\GetServicePropertiesResult;
-use WindowsAzure\Services\Table\Models\EdmType;
-use WindowsAzure\Services\Table\Models\Filters;
-use WindowsAzure\Services\Table\Models\Filters\Filter;
-use WindowsAzure\Services\Table\Models\GetTableResult;
-use WindowsAzure\Services\Table\Models\QueryTablesOptions;
-use WindowsAzure\Services\Table\Models\QueryTablesResult;
-use WindowsAzure\Services\Table\Models\InsertEntityResult;
-use WindowsAzure\Services\Table\Models\UpdateEntityResult;
-use WindowsAzure\Services\Table\Models\QueryEntitiesOptions;
-use WindowsAzure\Services\Table\Models\QueryEntitiesResult;
-use WindowsAzure\Services\Table\Models\DeleteEntityOptions;
-use WindowsAzure\Services\Table\Models\GetEntityResult;
-use WindowsAzure\Services\Table\Models\BatchOperationType;
-use WindowsAzure\Services\Table\Models\BatchOperationParameterName;
-use WindowsAzure\Services\Table\Models\BatchResult;
+use WindowsAzure\Table\Models\EdmType;
+use WindowsAzure\Table\Models\Filters;
+use WindowsAzure\Table\Models\Filters\Filter;
+use WindowsAzure\Table\Models\GetTableResult;
+use WindowsAzure\Table\Models\QueryTablesOptions;
+use WindowsAzure\Table\Models\QueryTablesResult;
+use WindowsAzure\Table\Models\InsertEntityResult;
+use WindowsAzure\Table\Models\UpdateEntityResult;
+use WindowsAzure\Table\Models\QueryEntitiesOptions;
+use WindowsAzure\Table\Models\QueryEntitiesResult;
+use WindowsAzure\Table\Models\DeleteEntityOptions;
+use WindowsAzure\Table\Models\GetEntityResult;
+use WindowsAzure\Table\Models\BatchOperationType;
+use WindowsAzure\Table\Models\BatchOperationParameterName;
+use WindowsAzure\Table\Models\BatchResult;
 
 /**
  * This class constructs HTTP requests and receive HTTP responses for table
  * service layer.
  *
  * @category  Microsoft
- * @package   WindowsAzure\Services\Table
+ * @package   WindowsAzure\Table\Internal
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0

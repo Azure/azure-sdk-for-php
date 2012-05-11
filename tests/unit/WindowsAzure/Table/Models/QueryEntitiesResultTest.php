@@ -15,20 +15,20 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   Tests\Unit\WindowsAzure\Services\Table\Models
+ * @package   Tests\Unit\WindowsAzure\Table\Models
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
-namespace Tests\Unit\WindowsAzure\Services\Table\Models;
-use WindowsAzure\Services\Table\Models\QueryEntitiesResult;
+namespace Tests\Unit\WindowsAzure\Table\Models;
+use WindowsAzure\Table\Models\QueryEntitiesResult;
 
 /**
  * Unit tests for class QueryEntitiesResult
  *
  * @category  Microsoft
- * @package   Tests\Unit\WindowsAzure\Services\Table\Models
+ * @package   Tests\Unit\WindowsAzure\Table\Models
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
@@ -38,7 +38,7 @@ use WindowsAzure\Services\Table\Models\QueryEntitiesResult;
 class QueryEntitiesResultTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @covers WindowsAzure\Services\Table\Models\QueryEntitiesResult::create
+     * @covers WindowsAzure\Table\Models\QueryEntitiesResult::create
      */
     public function testCreate()
     {
@@ -52,8 +52,8 @@ class QueryEntitiesResultTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers WindowsAzure\Services\Table\Models\QueryEntitiesResult::setNextPartitionKey
-     * @covers WindowsAzure\Services\Table\Models\QueryEntitiesResult::getNextPartitionKey
+     * @covers WindowsAzure\Table\Models\QueryEntitiesResult::setNextPartitionKey
+     * @covers WindowsAzure\Table\Models\QueryEntitiesResult::getNextPartitionKey
      */
     public function testSetNextPartitionKey()
     {
@@ -69,8 +69,8 @@ class QueryEntitiesResultTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers WindowsAzure\Services\Table\Models\QueryEntitiesResult::setNextRowKey
-     * @covers WindowsAzure\Services\Table\Models\QueryEntitiesResult::getNextRowKey
+     * @covers WindowsAzure\Table\Models\QueryEntitiesResult::setNextRowKey
+     * @covers WindowsAzure\Table\Models\QueryEntitiesResult::getNextRowKey
      */
     public function testSetNextRowKey()
     {
@@ -86,8 +86,8 @@ class QueryEntitiesResultTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers WindowsAzure\Services\Table\Models\QueryEntitiesResult::setEntities
-     * @covers WindowsAzure\Services\Table\Models\QueryEntitiesResult::getEntities
+     * @covers WindowsAzure\Table\Models\QueryEntitiesResult::setEntities
+     * @covers WindowsAzure\Table\Models\QueryEntitiesResult::getEntities
      */
     public function testSetEntities()
     {

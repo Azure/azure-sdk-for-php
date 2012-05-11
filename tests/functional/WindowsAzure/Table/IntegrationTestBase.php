@@ -17,18 +17,18 @@
  * limitations under the License.
  *
  * @category   Microsoft
- * @package    Tests\Functional\WindowsAzure\Services\Table
+ * @package    Tests\Functional\WindowsAzure\Table
  * @author     Jason Cooke <jcooke@microsoft.com>
  * @copyright  2012 Microsoft Corporation
  * @license    http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link       http://pear.php.net/package/azure-sdk-for-php
  */
 
-namespace Tests\Functional\WindowsAzure\Services\Table;
+namespace Tests\Functional\WindowsAzure\Table;
 
 use Tests\Framework\FiddlerFilter;
 use Tests\Framework\TableServiceRestProxyTestBase;
-use WindowsAzure\Services\Table\TableService;
+use WindowsAzure\Table\TableService;
 
 class IntegrationTestBase extends TableServiceRestProxyTestBase {
     public function __construct()

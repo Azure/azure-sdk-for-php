@@ -15,21 +15,21 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   Tests\Unit\WindowsAzure\Services\Table\Models\Filters
+ * @package   Tests\Unit\WindowsAzure\Table\Models\Filters
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
 
-namespace Tests\Unit\WindowsAzure\Services\Table\Models\Filters;
-use WindowsAzure\Services\Table\Models\Filters\BinaryFilter;
+namespace Tests\Unit\WindowsAzure\Table\Models\Filters;
+use WindowsAzure\Table\Models\Filters\BinaryFilter;
 
 /**
  * Unit tests for class BinaryFilter
  *
  * @category  Microsoft
- * @package   Tests\Unit\WindowsAzure\Services\Table\Models\Filters
+ * @package   Tests\Unit\WindowsAzure\Table\Models\Filters
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
@@ -39,8 +39,8 @@ use WindowsAzure\Services\Table\Models\Filters\BinaryFilter;
 class BinaryFilterTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @covers WindowsAzure\Services\Table\Models\Filters\BinaryFilter::__construct
-     * @covers WindowsAzure\Services\Table\Models\Filters\BinaryFilter::getOperator
+     * @covers WindowsAzure\Table\Models\Filters\BinaryFilter::__construct
+     * @covers WindowsAzure\Table\Models\Filters\BinaryFilter::getOperator
      */
     public function testGetOperator()
     {
@@ -53,8 +53,8 @@ class BinaryFilterTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers WindowsAzure\Services\Table\Models\Filters\BinaryFilter::__construct
-     * @covers WindowsAzure\Services\Table\Models\Filters\BinaryFilter::getLeft
+     * @covers WindowsAzure\Table\Models\Filters\BinaryFilter::__construct
+     * @covers WindowsAzure\Table\Models\Filters\BinaryFilter::getLeft
      */
     public function testGetLeft()
     {
@@ -67,8 +67,8 @@ class BinaryFilterTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers WindowsAzure\Services\Table\Models\Filters\BinaryFilter::__construct
-     * @covers WindowsAzure\Services\Table\Models\Filters\BinaryFilter::getRight
+     * @covers WindowsAzure\Table\Models\Filters\BinaryFilter::__construct
+     * @covers WindowsAzure\Table\Models\Filters\BinaryFilter::getRight
      */
     public function testGetRight()
     {

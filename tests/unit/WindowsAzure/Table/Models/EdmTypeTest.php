@@ -15,21 +15,21 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   Tests\Unit\WindowsAzure\Services\Table\Models
+ * @package   Tests\Unit\WindowsAzure\Table\Models
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
-namespace Tests\Unit\WindowsAzure\Services\Table\Models;
-use WindowsAzure\Services\Table\Models\EdmType;
+namespace Tests\Unit\WindowsAzure\Table\Models;
+use WindowsAzure\Table\Models\EdmType;
 use WindowsAzure\Common\Internal\Utilities;
 
 /**
  * Unit tests for class EdmTypeTest
  *
  * @category  Microsoft
- * @package   Tests\Unit\WindowsAzure\Services\Table\Models
+ * @package   Tests\Unit\WindowsAzure\Table\Models
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
@@ -39,7 +39,7 @@ use WindowsAzure\Common\Internal\Utilities;
 class EdmTypeTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @covers WindowsAzure\Services\Table\Models\EdmType::processType
+     * @covers WindowsAzure\Table\Models\EdmType::processType
      */
     public function testProcessTypeWithNull()
     {
@@ -54,7 +54,7 @@ class EdmTypeTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers WindowsAzure\Services\Table\Models\EdmType::processType
+     * @covers WindowsAzure\Table\Models\EdmType::processType
      */
     public function testProcessType()
     {
@@ -69,7 +69,7 @@ class EdmTypeTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers WindowsAzure\Services\Table\Models\EdmType::unserializeQueryValue
+     * @covers WindowsAzure\Table\Models\EdmType::unserializeQueryValue
      */
     public function testUnserializeQueryValueWithString()
     {
@@ -86,7 +86,7 @@ class EdmTypeTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers WindowsAzure\Services\Table\Models\EdmType::unserializeQueryValue
+     * @covers WindowsAzure\Table\Models\EdmType::unserializeQueryValue
      */
     public function testUnserializeQueryValueWithBinary()
     {
@@ -103,7 +103,7 @@ class EdmTypeTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers WindowsAzure\Services\Table\Models\EdmType::unserializeQueryValue
+     * @covers WindowsAzure\Table\Models\EdmType::unserializeQueryValue
      */
     public function testUnserializeQueryValueWithDate()
     {
@@ -119,7 +119,7 @@ class EdmTypeTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers WindowsAzure\Services\Table\Models\EdmType::unserializeQueryValue
+     * @covers WindowsAzure\Table\Models\EdmType::unserializeQueryValue
      */
     public function testUnserializeQueryValueWithInt()
     {
@@ -136,7 +136,7 @@ class EdmTypeTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers WindowsAzure\Services\Table\Models\EdmType::unserializeQueryValue
+     * @covers WindowsAzure\Table\Models\EdmType::unserializeQueryValue
      */
     public function testUnserializeQueryValueWithBoolean()
     {
@@ -153,7 +153,7 @@ class EdmTypeTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers WindowsAzure\Services\Table\Models\EdmType::unserializeQueryValue
+     * @covers WindowsAzure\Table\Models\EdmType::unserializeQueryValue
      */
     public function testUnserializeQueryValueWithInvalid()
     {
@@ -165,7 +165,7 @@ class EdmTypeTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers WindowsAzure\Services\Table\Models\EdmType::isValid
+     * @covers WindowsAzure\Table\Models\EdmType::isValid
      */
     public function testIsValid()
     {
@@ -180,7 +180,7 @@ class EdmTypeTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers WindowsAzure\Services\Table\Models\EdmType::isValid
+     * @covers WindowsAzure\Table\Models\EdmType::isValid
      */
     public function testIsValidWithInvalid()
     {
@@ -195,7 +195,7 @@ class EdmTypeTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers WindowsAzure\Services\Table\Models\EdmType::validateEdmValue
+     * @covers WindowsAzure\Table\Models\EdmType::validateEdmValue
      */
     public function testValidateEdmValueWithBinary()
     {
@@ -212,7 +212,7 @@ class EdmTypeTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers WindowsAzure\Services\Table\Models\EdmType::validateEdmValue
+     * @covers WindowsAzure\Table\Models\EdmType::validateEdmValue
      */
     public function testValidateEdmValueWithDate()
     {
@@ -229,7 +229,7 @@ class EdmTypeTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers WindowsAzure\Services\Table\Models\EdmType::validateEdmValue
+     * @covers WindowsAzure\Table\Models\EdmType::validateEdmValue
      */
     public function testValidateEdmValueWithInt()
     {
@@ -246,7 +246,7 @@ class EdmTypeTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers WindowsAzure\Services\Table\Models\EdmType::validateEdmValue
+     * @covers WindowsAzure\Table\Models\EdmType::validateEdmValue
      */
     public function testValidateEdmValueWithBoolean()
     {
@@ -263,7 +263,7 @@ class EdmTypeTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers WindowsAzure\Services\Table\Models\EdmType::validateEdmValue
+     * @covers WindowsAzure\Table\Models\EdmType::validateEdmValue
      */
     public function testValidateEdmValueWithInvalid()
     {
@@ -275,7 +275,7 @@ class EdmTypeTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers WindowsAzure\Services\Table\Models\EdmType::serializeValue
+     * @covers WindowsAzure\Table\Models\EdmType::serializeValue
      */
     public function testSerializeValueWithBinary()
     {
@@ -292,7 +292,7 @@ class EdmTypeTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers WindowsAzure\Services\Table\Models\EdmType::serializeValue
+     * @covers WindowsAzure\Table\Models\EdmType::serializeValue
      */
     public function testSerializeValueWithDate()
     {
@@ -309,7 +309,7 @@ class EdmTypeTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers WindowsAzure\Services\Table\Models\EdmType::serializeValue
+     * @covers WindowsAzure\Table\Models\EdmType::serializeValue
      */
     public function testSerializeValueWithInt()
     {
@@ -326,7 +326,7 @@ class EdmTypeTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers WindowsAzure\Services\Table\Models\EdmType::serializeValue
+     * @covers WindowsAzure\Table\Models\EdmType::serializeValue
      */
     public function testSerializeValueWithBoolean()
     {
@@ -343,7 +343,7 @@ class EdmTypeTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers WindowsAzure\Services\Table\Models\EdmType::serializeValue
+     * @covers WindowsAzure\Table\Models\EdmType::serializeValue
      */
     public function testSerializeValueWithInvalid()
     {

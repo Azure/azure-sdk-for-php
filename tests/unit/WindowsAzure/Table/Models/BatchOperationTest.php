@@ -15,23 +15,23 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   Tests\Unit\WindowsAzure\Services\Table\Models
+ * @package   Tests\Unit\WindowsAzure\Table\Models
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
 
-namespace Tests\Unit\WindowsAzure\Services\Table\Models;
-use WindowsAzure\Services\Table\Models\BatchOperation;
-use WindowsAzure\Services\Table\Models\BatchOperationType;
-use WindowsAzure\Services\Table\Models\BatchOperationParameterName;
+namespace Tests\Unit\WindowsAzure\Table\Models;
+use WindowsAzure\Table\Models\BatchOperation;
+use WindowsAzure\Table\Models\BatchOperationType;
+use WindowsAzure\Table\Models\BatchOperationParameterName;
 
 /**
  * Unit tests for class BatchOperation
  *
  * @category  Microsoft
- * @package   Tests\Unit\WindowsAzure\Services\Table\Models
+ * @package   Tests\Unit\WindowsAzure\Table\Models
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
@@ -41,8 +41,8 @@ use WindowsAzure\Services\Table\Models\BatchOperationParameterName;
 class BatchOperationTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @covers WindowsAzure\Services\Table\Models\BatchOperation::setType
-     * @covers WindowsAzure\Services\Table\Models\BatchOperation::getType
+     * @covers WindowsAzure\Table\Models\BatchOperation::setType
+     * @covers WindowsAzure\Table\Models\BatchOperation::getType
      */
     public function testSetType()
     {
@@ -58,8 +58,8 @@ class BatchOperationTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers WindowsAzure\Services\Table\Models\BatchOperation::addParameter
-     * @covers WindowsAzure\Services\Table\Models\BatchOperation::getParameter
+     * @covers WindowsAzure\Table\Models\BatchOperation::addParameter
+     * @covers WindowsAzure\Table\Models\BatchOperation::getParameter
      */
     public function testAddParameter()
     {

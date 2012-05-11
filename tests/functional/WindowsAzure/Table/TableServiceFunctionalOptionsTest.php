@@ -17,33 +17,33 @@
  * limitations under the License.
  *
  * @category   Microsoft
- * @package    Tests\Functional\WindowsAzure\Services\Table
+ * @package    Tests\Functional\WindowsAzure\Table
  * @author     Jason Cooke <jcooke@microsoft.com>
  * @copyright  2012 Microsoft Corporation
  * @license    http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link       http://pear.php.net/package/azure-sdk-for-php
  */
 
-namespace Tests\Functional\WindowsAzure\Services\Table;
+namespace Tests\Functional\WindowsAzure\Table;
 
 use WindowsAzure\Common\Models\Logging;
 use WindowsAzure\Common\Models\Metrics;
 use WindowsAzure\Common\Models\RetentionPolicy;
 use WindowsAzure\Common\Models\ServiceProperties;
-use WindowsAzure\Services\Table\Models\DeleteEntityOptions;
-use WindowsAzure\Services\Table\Models\EdmType;
-use WindowsAzure\Services\Table\Models\Entity;
-use WindowsAzure\Services\Table\Models\Property;
-use WindowsAzure\Services\Table\Models\Query;
-use WindowsAzure\Services\Table\Models\QueryEntitiesOptions;
-use WindowsAzure\Services\Table\Models\QueryTablesOptions;
-use WindowsAzure\Services\Table\Models\TableServiceOptions;
-use WindowsAzure\Services\Table\Models\Filters\BinaryFilter;
-use WindowsAzure\Services\Table\Models\Filters\ConstantFilter;
-use WindowsAzure\Services\Table\Models\Filters\Filter;
-use WindowsAzure\Services\Table\Models\Filters\PropertyNameFilter;
-use WindowsAzure\Services\Table\Models\Filters\QueryStringFilter;
-use WindowsAzure\Services\Table\Models\Filters\UnaryFilter;
+use WindowsAzure\Table\Models\DeleteEntityOptions;
+use WindowsAzure\Table\Models\EdmType;
+use WindowsAzure\Table\Models\Entity;
+use WindowsAzure\Table\Models\Property;
+use WindowsAzure\Table\Models\Query;
+use WindowsAzure\Table\Models\QueryEntitiesOptions;
+use WindowsAzure\Table\Models\QueryTablesOptions;
+use WindowsAzure\Table\Models\TableServiceOptions;
+use WindowsAzure\Table\Models\Filters\BinaryFilter;
+use WindowsAzure\Table\Models\Filters\ConstantFilter;
+use WindowsAzure\Table\Models\Filters\Filter;
+use WindowsAzure\Table\Models\Filters\PropertyNameFilter;
+use WindowsAzure\Table\Models\Filters\QueryStringFilter;
+use WindowsAzure\Table\Models\Filters\UnaryFilter;
 
 class TableServiceFunctionalOptionsTest extends \PHPUnit_Framework_TestCase {
     public function testCheckTableServiceOptions() {

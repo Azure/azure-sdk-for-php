@@ -29,7 +29,7 @@ use WindowsAzure\Common\Internal\ServicesBuilder;
 use WindowsAzure\Common\Configuration;
 use WindowsAzure\Queue\QueueSettings;
 use WindowsAzure\Blob\BlobSettings;
-use WindowsAzure\Services\Table\TableSettings;
+use WindowsAzure\Table\TableSettings;
 use WindowsAzure\Common\Internal\InvalidArgumentTypeException;
 
 /**
@@ -108,7 +108,7 @@ class ServicesBuilderTest extends \PHPUnit_Framework_TestCase
         $tableWrapper = $builder->build($config, Resources::TABLE_TYPE_NAME);
         
         // Assert
-        $this->assertInstanceOf('WindowsAzure\Services\Table\ITable', $tableWrapper);
+        $this->assertInstanceOf('WindowsAzure\Table\Internal\ITable', $tableWrapper);
     }
     
     /**

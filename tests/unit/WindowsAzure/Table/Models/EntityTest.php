@@ -15,23 +15,23 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   Tests\Unit\WindowsAzure\Services\Table\Models
+ * @package   Tests\Unit\WindowsAzure\Table\Models
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
-namespace Tests\Unit\WindowsAzure\Services\Table\Models;
-use WindowsAzure\Services\Table\Models\Entity;
-use WindowsAzure\Services\Table\Models\Property;
-use WindowsAzure\Services\Table\Models\EdmType;
+namespace Tests\Unit\WindowsAzure\Table\Models;
+use WindowsAzure\Table\Models\Entity;
+use WindowsAzure\Table\Models\Property;
+use WindowsAzure\Table\Models\EdmType;
 use WindowsAzure\Common\Internal\Utilities;
 
 /**
  * Unit tests for class Entity
  *
  * @category  Microsoft
- * @package   Tests\Unit\WindowsAzure\Services\Table\Models
+ * @package   Tests\Unit\WindowsAzure\Table\Models
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
@@ -41,8 +41,8 @@ use WindowsAzure\Common\Internal\Utilities;
 class EntityTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @covers WindowsAzure\Services\Table\Models\Entity::getPropertyValue
-     * @covers WindowsAzure\Services\Table\Models\Entity::setPropertyValue
+     * @covers WindowsAzure\Table\Models\Entity::getPropertyValue
+     * @covers WindowsAzure\Table\Models\Entity::setPropertyValue
      */
     public function testGetPropertyValue()
     {
@@ -63,8 +63,8 @@ class EntityTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers WindowsAzure\Services\Table\Models\Entity::setEtag
-     * @covers WindowsAzure\Services\Table\Models\Entity::getEtag
+     * @covers WindowsAzure\Table\Models\Entity::setEtag
+     * @covers WindowsAzure\Table\Models\Entity::getEtag
      */
     public function testSetEtag()
     {
@@ -81,8 +81,8 @@ class EntityTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers WindowsAzure\Services\Table\Models\Entity::setPartitionKey
-     * @covers WindowsAzure\Services\Table\Models\Entity::getPartitionKey
+     * @covers WindowsAzure\Table\Models\Entity::setPartitionKey
+     * @covers WindowsAzure\Table\Models\Entity::getPartitionKey
      */
     public function testSetPartitionKey()
     {
@@ -98,8 +98,8 @@ class EntityTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers WindowsAzure\Services\Table\Models\Entity::setRowKey
-     * @covers WindowsAzure\Services\Table\Models\Entity::getRowKey
+     * @covers WindowsAzure\Table\Models\Entity::setRowKey
+     * @covers WindowsAzure\Table\Models\Entity::getRowKey
      */
     public function testSetRowKey()
     {
@@ -115,8 +115,8 @@ class EntityTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers WindowsAzure\Services\Table\Models\Entity::setTimestamp
-     * @covers WindowsAzure\Services\Table\Models\Entity::getTimestamp
+     * @covers WindowsAzure\Table\Models\Entity::setTimestamp
+     * @covers WindowsAzure\Table\Models\Entity::getTimestamp
      */
     public function testSetTimestamp()
     {
@@ -132,9 +132,9 @@ class EntityTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers WindowsAzure\Services\Table\Models\Entity::setProperties
-     * @covers WindowsAzure\Services\Table\Models\Entity::getProperties
-     * @covers WindowsAzure\Services\Table\Models\Entity::_validateProperties
+     * @covers WindowsAzure\Table\Models\Entity::setProperties
+     * @covers WindowsAzure\Table\Models\Entity::getProperties
+     * @covers WindowsAzure\Table\Models\Entity::_validateProperties
      */
     public function testSetProperties()
     {
@@ -150,8 +150,8 @@ class EntityTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers WindowsAzure\Services\Table\Models\Entity::getProperty
-     * @covers WindowsAzure\Services\Table\Models\Entity::setProperty
+     * @covers WindowsAzure\Table\Models\Entity::getProperty
+     * @covers WindowsAzure\Table\Models\Entity::setProperty
      */
     public function testSetProperty()
     {
@@ -168,7 +168,7 @@ class EntityTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers WindowsAzure\Services\Table\Models\Entity::addProperty
+     * @covers WindowsAzure\Table\Models\Entity::addProperty
      */
     public function testAddProperty()
     {
@@ -189,7 +189,7 @@ class EntityTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers WindowsAzure\Services\Table\Models\Entity::isValid
+     * @covers WindowsAzure\Table\Models\Entity::isValid
      */
     public function testIsValid()
     {
@@ -206,7 +206,7 @@ class EntityTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers WindowsAzure\Services\Table\Models\Entity::isValid
+     * @covers WindowsAzure\Table\Models\Entity::isValid
      */
     public function testIsValidWithInvalid()
     {
@@ -221,7 +221,7 @@ class EntityTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers WindowsAzure\Services\Table\Models\Entity::isValid
+     * @covers WindowsAzure\Table\Models\Entity::isValid
      */
     public function testIsValidWithEmptyPartitionKey()
     {
