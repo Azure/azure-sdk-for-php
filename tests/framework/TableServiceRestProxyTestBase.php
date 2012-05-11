@@ -24,9 +24,9 @@
 namespace Tests\Framework;
 use Tests\Framework\ServiceRestProxyTestBase;
 use Tests\Framework\TestResources;
-use WindowsAzure\Core\Configuration;
-use WindowsAzure\Services\Table\TableSettings;
-use WindowsAzure\Services\Table\TableService;
+use WindowsAzure\Common\Configuration;
+use WindowsAzure\Table\TableSettings;
+use WindowsAzure\Table\TableService;
 
 /**
  * TestBase class for each unit test class.

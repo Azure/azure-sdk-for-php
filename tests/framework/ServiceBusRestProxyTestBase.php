@@ -23,10 +23,10 @@
  */
 namespace Tests\Framework;
 use Tests\Framework\TestResources;
-use WindowsAzure\Core\Configuration;
-use WindowsAzure\Services\Core\Models\ServiceProperties;
-use WindowsAzure\Services\ServiceBus\ServiceBusSettings;
-use WindowsAzure\Services\ServiceBus\ServiceBusService;
+use WindowsAzure\Common\Configuration;
+use WindowsAzure\Common\Models\ServiceProperties;
+use WindowsAzure\ServiceBus\ServiceBusSettings;
+use WindowsAzure\ServiceBus\ServiceBusService;
 
 /**
  * TestBase class for each unit test class.

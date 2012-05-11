@@ -24,9 +24,9 @@
  */
  
 namespace Tests\Framework;
-use WindowsAzure\Services\Table\Models\EdmType;
-use WindowsAzure\Services\Table\Models\Entity;
-use WindowsAzure\Utilities;
+use WindowsAzure\Table\Models\EdmType;
+use WindowsAzure\Table\Models\Entity;
+use WindowsAzure\Common\Internal\Utilities;
 
 /**
  * Resources for testing framework.

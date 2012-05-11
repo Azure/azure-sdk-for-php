@@ -23,14 +23,14 @@
  */
  
 namespace Client;
-use WindowsAzure\Core\Configuration;
-use WindowsAzure\Services\Table\TableService;
-use WindowsAzure\Services\Table\TableSettings;
-use WindowsAzure\Services\Blob\BlobService;
-use WindowsAzure\Services\Blob\BlobSettings;
-use WindowsAzure\Services\Queue\QueueService;
-use WindowsAzure\Services\Queue\QueueSettings;
-use WindowsAzure\Services\Table\Models\QueryTablesOptions;
+use WindowsAzure\Common\Configuration;
+use WindowsAzure\Table\TableService;
+use WindowsAzure\Table\TableSettings;
+use WindowsAzure\Blob\BlobService;
+use WindowsAzure\Blob\BlobSettings;
+use WindowsAzure\Queue\QueueService;
+use WindowsAzure\Queue\QueueSettings;
+use WindowsAzure\Table\Models\QueryTablesOptions;
 
 /**
  * Encapsulates Windows Azure storage service operations.
