@@ -29,7 +29,7 @@ use WindowsAzure\Blob\BlobSettings;
 use WindowsAzure\Blob\BlobService;
 use Tests\Framework\TestResources;
 use WindowsAzure\Blob\Models\CreateContainerOptions;
-use WindowsAzure\Services\Blob\Models\ListContainersOptions;
+use WindowsAzure\Blob\Models\ListContainersOptions;
 
 /**
  * TestBase class for each unit test class.

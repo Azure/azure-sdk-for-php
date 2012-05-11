@@ -17,51 +17,51 @@
  * limitations under the License.
  *
  * @category   Microsoft
- * @package    Tests\Functional\WindowsAzure\Services\Blob
+ * @package    Tests\Functional\WindowsAzure\Blob
  * @author     Jason Cooke <jcooke@microsoft.com>
  * @copyright  2012 Microsoft Corporation
  * @license    http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link       http://pear.php.net/package/azure-sdk-for-php
  */
 
-namespace Tests\Functional\WindowsAzure\Services\Blob;
+namespace Tests\Functional\WindowsAzure\Blob;
 
 use WindowsAzure\Utilities;
 use WindowsAzure\Resources;
 use WindowsAzure\Core\Configuration;
 use WindowsAzure\Core\ServiceException;
-use WindowsAzure\Services\Blob\BlobService;
-use WindowsAzure\Services\Blob\Models\AccessCondition;
-use WindowsAzure\Services\Blob\Models\BlobProperties;
-use WindowsAzure\Services\Blob\Models\Block;
-use WindowsAzure\Services\Blob\Models\BlockList;
-use WindowsAzure\Services\Blob\Models\ContainerACL;
-use WindowsAzure\Services\Blob\Models\CreateBlobOptions;
-use WindowsAzure\Services\Blob\Models\CreateBlobPagesResult;
-use WindowsAzure\Services\Blob\Models\CreateBlobSnapshotOptions;
-use WindowsAzure\Services\Blob\Models\CreateBlobSnapshotResult;
-use WindowsAzure\Services\Blob\Models\CreateContainerOptions;
-use WindowsAzure\Services\Blob\Models\GetBlobMetadataResult;
-use WindowsAzure\Services\Blob\Models\GetBlobOptions;
-use WindowsAzure\Services\Blob\Models\GetBlobPropertiesOptions;
-use WindowsAzure\Services\Blob\Models\GetBlobPropertiesResult;
-use WindowsAzure\Services\Blob\Models\GetBlobResult;
-use WindowsAzure\Services\Blob\Models\GetContainerPropertiesResult;
-use WindowsAzure\Services\Blob\Models\ListBlobBlocksOptions;
-use WindowsAzure\Services\Blob\Models\ListBlobBlocksResult;
-use WindowsAzure\Services\Blob\Models\ListBlobRegionsResult;
-use WindowsAzure\Services\Blob\Models\ListBlobsOptions;
-use WindowsAzure\Services\Blob\Models\ListBlobsResult;
-use WindowsAzure\Services\Blob\Models\ListContainersOptions;
-use WindowsAzure\Services\Blob\Models\ListContainersResult\Container;
-use WindowsAzure\Services\Blob\Models\ListContainersResult;
-use WindowsAzure\Services\Blob\Models\PageRange;
-use WindowsAzure\Services\Blob\Models\ServiceProperties;
-use WindowsAzure\Services\Blob\Models\SetBlobMetadataResult;
-use WindowsAzure\Services\Blob\Models\SetBlobPropertiesOptions;
-use WindowsAzure\Services\Blob\Models\SetBlobPropertiesResult;
-use WindowsAzure\Services\Blob\Models\PublicAccessType;
-use WindowsAzure\Services\Blob\Models\BlobBlockType;
+use WindowsAzure\Blob\BlobService;
+use WindowsAzure\Blob\Models\AccessCondition;
+use WindowsAzure\Blob\Models\BlobProperties;
+use WindowsAzure\Blob\Models\Block;
+use WindowsAzure\Blob\Models\BlockList;
+use WindowsAzure\Blob\Models\ContainerACL;
+use WindowsAzure\Blob\Models\CreateBlobOptions;
+use WindowsAzure\Blob\Models\CreateBlobPagesResult;
+use WindowsAzure\Blob\Models\CreateBlobSnapshotOptions;
+use WindowsAzure\Blob\Models\CreateBlobSnapshotResult;
+use WindowsAzure\Blob\Models\CreateContainerOptions;
+use WindowsAzure\Blob\Models\GetBlobMetadataResult;
+use WindowsAzure\Blob\Models\GetBlobOptions;
+use WindowsAzure\Blob\Models\GetBlobPropertiesOptions;
+use WindowsAzure\Blob\Models\GetBlobPropertiesResult;
+use WindowsAzure\Blob\Models\GetBlobResult;
+use WindowsAzure\Blob\Models\GetContainerPropertiesResult;
+use WindowsAzure\Blob\Models\ListBlobBlocksOptions;
+use WindowsAzure\Blob\Models\ListBlobBlocksResult;
+use WindowsAzure\Blob\Models\ListBlobRegionsResult;
+use WindowsAzure\Blob\Models\ListBlobsOptions;
+use WindowsAzure\Blob\Models\ListBlobsResult;
+use WindowsAzure\Blob\Models\ListContainersOptions;
+use WindowsAzure\Blob\Models\ListContainersResult\Container;
+use WindowsAzure\Blob\Models\ListContainersResult;
+use WindowsAzure\Blob\Models\PageRange;
+use WindowsAzure\Blob\Models\ServiceProperties;
+use WindowsAzure\Blob\Models\SetBlobMetadataResult;
+use WindowsAzure\Blob\Models\SetBlobPropertiesOptions;
+use WindowsAzure\Blob\Models\SetBlobPropertiesResult;
+use WindowsAzure\Blob\Models\PublicAccessType;
+use WindowsAzure\Blob\Models\BlobBlockType;
 
 class BlobServiceIntegrationTest extends IntegrationTestBase {
     private static $_testContainersPrefix = 'sdktest-';
