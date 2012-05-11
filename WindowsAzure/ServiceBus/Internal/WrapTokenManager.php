@@ -88,7 +88,8 @@ class WrapTokenManager
      * of the WRAP service.
      * @param string                             $wrapPassword The password
      * of the WRAP service.
-     * @param WindowsAzure\Core\IServicesBuilder $builder The builder object.
+     * @param WindowsAzure\Core\IServicesBuilder $builder      The builder
+     * object.
      * 
      * @return WindowsAzure\ServiceBus\Internal\WrapTokenManager
      */
