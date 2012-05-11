@@ -607,16 +607,11 @@ class TableRestProxy extends ServiceRestProxy implements ITable
     /**
      * Initializes new TableRestProxy object.
      * 
-     * @param WindowsAzure\Common\Internal\Http\IHttpClient            $channel        The HTTP
-     * client channel.
-     * @param string                                        $uri            The 
-     * storage account uri.
-     * @param Table\Utilities\IAtomReaderWriter             $atomSerializer The atom 
-     * serializer.
-     * @param Table\Utilities\IMimeReaderWriter             $mimeSerializer The MIME 
-     * serializer.
-     * @param WindowsAzure\Common\Internal\Serialization\ISerializable $dataSerializer The data
-     * serializer.
+     * @param IHttpClient       $channel        The HTTP client channel.
+     * @param string            $uri            The storage account uri.
+     * @param IAtomReaderWriter $atomSerializer The atom serializer.
+     * @param IMimeReaderWriter $mimeSerializer The MIME serializer.
+     * @param ISerializable     $dataSerializer The data serializer.
      */
     public function __construct($channel, $uri, $atomSerializer, $mimeSerializer, 
         $dataSerializer
@@ -994,8 +989,8 @@ class TableRestProxy extends ServiceRestProxy implements ITable
         if (is_null($options)) {
             $options = new QueryEntitiesOptions();
         } else if (is_string($options)) {
-            $queryString  = $options;
-            $options      = new QueryEntitiesOptions();
+            $queryString = $options;
+            $options     = new QueryEntitiesOptions();
             $options->setFilter(Filter::applyQueryString($queryString));
         } else if ($options instanceof Filter) {
             $filter  = $options;

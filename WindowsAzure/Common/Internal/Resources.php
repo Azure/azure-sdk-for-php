@@ -37,6 +37,8 @@ namespace WindowsAzure\Common\Internal;
  */
 class Resources
 {
+    // @codingStandardsIgnoreStart
+    
     // Messages
     const INVALID_TYPE_MSG     = 'The provided variable should be of type: ';
     const INVALID_META_MSG     = 'Metadata cannot contain newline characters.';
@@ -259,6 +261,8 @@ class Resources
     const SSL_VERIFY_HOST = 'ssl_verify_host';
     const SSL_LOCAL_CERT  = 'ssl_local_cert';
     const CONNECT_TIMEOUT = 'connect_timeout';
+    
+    // @codingStandardsIgnoreEnd
 }
 
 ?>

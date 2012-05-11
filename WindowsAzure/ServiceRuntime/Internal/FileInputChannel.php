@@ -37,6 +37,8 @@ namespace WindowsAzure\ServiceRuntime\Internal;
  */
 class FileInputChannel implements IInputChannel
 {
+    // @codingStandardsIgnoreStart
+    
     /**
      * @var Resource
      */
@@ -71,6 +73,8 @@ class FileInputChannel implements IInputChannel
             $this->_inputStream = null;
         }
     }
+    
+    // @codingStandardsIgnoreEnd
 }
 
 ?>

@@ -74,12 +74,12 @@ class Configuration
     }
     
     /**
-     * Configures $config to run against the storage emulator
+     * Configures $config to run against the storage emulator.
      *
      * @param WindowsAzure\Common\Configuration $config The configuration.
-     * @param string                          $type   The type name.
+     * @param string                            $type   The type name.
      * 
-     * @return none.
+     * @return none
      */
     private static function _useStorageEmulatorConfig($config, $type)
     {
@@ -116,7 +116,7 @@ class Configuration
     /**
      * Access point to the static _instance of the class.
      *
-     * @return WindowsAzure\Common\Configuration.
+     * @return WindowsAzure\Common\Configuration
      */
     public static function getInstance()
     {
@@ -130,7 +130,7 @@ class Configuration
     /**
      * Gets the configuration property set.
      *
-     * @return array.
+     * @return array
      */
     public function getProperties()
     {
@@ -142,7 +142,7 @@ class Configuration
      *
      * @param string $key index of the property value.
      * 
-     * @return mix.
+     * @return mix
      */
     public function getProperty($key)
     {
@@ -155,7 +155,7 @@ class Configuration
      * @param string $key   index of the property value.
      * @param string $value actual value to store.
      * 
-     * @return none.
+     * @return none
      */
     public function setProperty($key, $value)
     {

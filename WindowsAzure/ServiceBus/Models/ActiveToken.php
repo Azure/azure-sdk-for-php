@@ -59,7 +59,6 @@ class ActiveToken
      * access token result.
      *
      * @param array $wrapAccessTokenResult A WRAP access token result.
-     * 
      */
     public function __construct($wrapAccessTokenResult)
     {

@@ -65,7 +65,7 @@ class GetBlobResult
      */
     public static function create($headers, $body, $metadata)
     {
-        $result   = new GetBlobResult();
+        $result = new GetBlobResult();
         $result->setContentStream(Utilities::stringToStream($body));
         $result->setProperties(BlobProperties::create($headers));
         $result->setMetadata(is_null($metadata) ? array() : $metadata);

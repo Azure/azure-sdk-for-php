@@ -40,6 +40,8 @@ use WindowsAzure\Common\Internal\Resources;
  */
 class EdmType
 {
+    // @codingStandardsIgnoreStart
+    
     const DATETIME = 'Edm.DateTime';
     const BINARY   = 'Edm.Binary';
     const BOOLEAN  = 'Edm.Boolean';
@@ -107,10 +109,6 @@ class EdmType
             case EdmType::BOOLEAN:
                 $condition = 'is_bool';
                 return is_bool($value);
-
-            case null:
-                $condition = 'is_null';
-                return is_null($value);
 
             default:
                 throw new \InvalidArgumentException();
@@ -271,6 +269,8 @@ class EdmType
                 
         }
     }
+    
+    // @codingStandardsIgnoreEnd
 }
 
 ?>
