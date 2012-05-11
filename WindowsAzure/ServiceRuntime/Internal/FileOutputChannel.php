@@ -37,6 +37,8 @@ namespace WindowsAzure\ServiceRuntime\Internal;
  */
 class FileOutputChannel implements IOutputChannel
 {
+    // @codingStandardsIgnoreStart
+    
     /**
      * Gets the output stream.
      * 
@@ -46,13 +48,15 @@ class FileOutputChannel implements IOutputChannel
      */
     public function getOutputStream($name)
     {
-        $fp = fopen($name, 'w');
+        $fp = @fopen($name, 'w');
         if ($fp) {
             return $fp;
         } else {
             throw new ChannelNotAvailableException();
         }
     }
+    
+    // @codingStandardsIgnoreEnd
 }
 
 ?>

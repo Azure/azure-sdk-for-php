@@ -37,6 +37,8 @@ namespace WindowsAzure\ServiceRuntime\Internal;
  */
 class FileInputChannel implements IInputChannel
 {
+    // @codingStandardsIgnoreStart
+    
     /**
      * @var Resource
      */
@@ -51,7 +53,7 @@ class FileInputChannel implements IInputChannel
      */
     public function getInputStream($name)
     {
-        $this->_inputStream = fopen($name, 'r');
+        $this->_inputStream = @fopen($name, 'r');
         if ($this->_inputStream) {
             return $this->_inputStream;
         } else {
@@ -71,6 +73,8 @@ class FileInputChannel implements IInputChannel
             $this->_inputStream = null;
         }
     }
+    
+    // @codingStandardsIgnoreEnd
 }
 
 ?>
