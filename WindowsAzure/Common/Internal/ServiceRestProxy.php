@@ -75,7 +75,8 @@ class ServiceRestProxy extends RestProxy
     /**
      * Sends HTTP request with the specified HTTP call context.
      * 
-     * @param WindowsAzure\Common\Internal\Http\HttpCallContext $context The HTTP call context.
+     * @param WindowsAzure\Common\Internal\Http\HttpCallContext $context The HTTP 
+     * call context.
      * 
      * @return \HTTP_Request2_Response
      */

@@ -141,14 +141,10 @@ class ServiceManagementRestProxy extends RestProxy
     /**
      * Initializes new ServiceManagementRestProxy object.
      * 
-     * @param WindowsAzure\Common\Internal\Http\IHttpClient          $channel        The HTTP
-     * channel.
-     * @param string                                      $subscriptionId The user
-     * subscription id.
-     * @param string                                      $uri            The service
-     * URI.
-     * @param WindowsAzure\Common\Internal\Serialization\ISerializer $dataSerializer The data
-     * serializer.
+     * @param IHttpClient $channel        The HTTP channel.
+     * @param string      $subscriptionId The user subscription id.
+     * @param string      $uri            The service URI.
+     * @param ISerializer $dataSerializer The data serializer.
      */
     public function __construct($channel, $subscriptionId, $uri, $dataSerializer)
     {

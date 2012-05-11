@@ -46,7 +46,7 @@ class FileOutputChannel implements IOutputChannel
      */
     public function getOutputStream($name)
     {
-        $fp = @fopen($name, 'w');
+        $fp = fopen($name, 'w');
         if ($fp) {
             return $fp;
         } else {

@@ -66,8 +66,8 @@ class GetBlobMetadataResult
      */
     public static function create($headers, $metadata)
     {
-        $result   = new GetBlobMetadataResult();
-        $date     = $headers[Resources::LAST_MODIFIED];
+        $result = new GetBlobMetadataResult();
+        $date   = $headers[Resources::LAST_MODIFIED];
         $result->setLastModified(Utilities::rfc1123ToDateTime($date));
         $result->setEtag($headers[Resources::ETAG]);
         $result->setMetadata(is_null($metadata) ? array() : $metadata);

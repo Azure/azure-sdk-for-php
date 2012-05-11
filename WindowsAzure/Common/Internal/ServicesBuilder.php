@@ -285,12 +285,12 @@ class ServicesBuilder implements IServiceBuilder
      */
     private function _buildServiceManagement($config)
     {
-        $certificatePath          = $config->getProperty(
+        $certificatePath = $config->getProperty(
             ServiceManagementSettings::CERTIFICATE_PATH
         );
-        $httpClient               = new HttpClient($certificatePath);
-        $xmlSerializer            = new XmlSerializer();
-        $uri                      = Utilities::tryAddUrlScheme(
+        $httpClient      = new HttpClient($certificatePath);
+        $xmlSerializer   = new XmlSerializer();
+        $uri             = Utilities::tryAddUrlScheme(
             $config->getProperty(ServiceManagementSettings::URI),
             Resources::HTTPS_SCHEME
         );
@@ -332,7 +332,7 @@ class ServicesBuilder implements IServiceBuilder
      * Creates an object passed $type configured with $config.
      *
      * @param WindowsAzure\Common\Configuration $config The configuration.
-     * @param string                          $type   The type name.
+     * @param string                            $type   The type name.
      * 
      * @return WindowsAzure\Queue\Internal\IQueue
      *       | WindowsAzure\Blob\Internal\IBlob
