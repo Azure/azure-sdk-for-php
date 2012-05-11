@@ -33,7 +33,7 @@ use Tests\Framework\FiddlerFilter;
 use Tests\Framework\QueueServiceRestProxyTestBase;
 use Tests\Framework\TestResources;
 use Tests\Functional\WindowsAzure\Queue\QueueServiceFunctionalTestData;
-use WindowsAzure\Common\Internal\ServiceException;
+use WindowsAzure\Common\ServiceException;
 use WindowsAzure\Common\Internal\Resources;
 use WindowsAzure\Common\Configuration;
 use WindowsAzure\Queue\QueueService;

@@ -24,7 +24,7 @@
 
 namespace Tests\Unit\WindowsAzure\ServiceManagement\Models;
 use WindowsAzure\ServiceManagement\Models\GetOperationStatusResult;
-use WindowsAzure\Common\Internal\ServiceException;
+use WindowsAzure\Common\ServiceException;
 use WindowsAzure\ServiceManagement\Models\OperationStatus;
 
 /**

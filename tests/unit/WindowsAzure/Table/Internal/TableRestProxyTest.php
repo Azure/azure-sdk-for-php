@@ -28,7 +28,7 @@ use WindowsAzure\Table\Internal\AtomReaderWriter;
 use WindowsAzure\Table\Internal\MimeReaderWriter;
 use Tests\Framework\TableServiceRestProxyTestBase;
 use WindowsAzure\Common\Internal\Utilities;
-use WindowsAzure\Common\Internal\ServiceException;
+use WindowsAzure\Common\ServiceException;
 use Tests\Framework\TestResources;
 use WindowsAzure\Common\Internal\Resources;
 use WindowsAzure\Table\Internal\TableRestProxy;
