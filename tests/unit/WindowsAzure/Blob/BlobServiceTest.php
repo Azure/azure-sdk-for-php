@@ -15,14 +15,14 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   Tests\Unit\WindowsAzure\Services\Blob
+ * @package   Tests\Unit\WindowsAzure\Blob
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
 
-namespace Tests\Unit\WindowsAzure\Services\Blob;
+namespace Tests\Unit\WindowsAzure\Blob;
 use WindowsAzure\Blob\BlobService;
 use WindowsAzure\Common\Configuration;
 use Tests\Framework\TestResources;
@@ -32,7 +32,7 @@ use WindowsAzure\Blob\BlobSettings;
  * Unit tests for class BlobService
  *
  * @category  Microsoft
- * @package   Tests\Unit\WindowsAzure\Services\Blob
+ * @package   Tests\Unit\WindowsAzure\Blob
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0

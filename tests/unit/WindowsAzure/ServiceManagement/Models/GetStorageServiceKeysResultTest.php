@@ -15,21 +15,21 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   Tests\Unit\WindowsAzure\Services\ServiceManagement\Models
+ * @package   Tests\Unit\WindowsAzure\ServiceManagement\Models
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
 
-namespace Tests\Unit\WindowsAzure\Services\ServiceManagement\Models;
-use WindowsAzure\Services\ServiceManagement\Models\GetStorageServiceKeysResult;
+namespace Tests\Unit\WindowsAzure\ServiceManagement\Models;
+use WindowsAzure\ServiceManagement\Models\GetStorageServiceKeysResult;
 
 /**
  * Unit tests for class GetStorageServiceKeysResult
  *
  * @category  Microsoft
- * @package   Tests\Unit\WindowsAzure\Services\ServiceManagement\Models
+ * @package   Tests\Unit\WindowsAzure\ServiceManagement\Models
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
@@ -39,8 +39,8 @@ use WindowsAzure\Services\ServiceManagement\Models\GetStorageServiceKeysResult;
 class GetStorageServiceKeysResultTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @covers WindowsAzure\Services\ServiceManagement\Models\GetStorageServiceKeysResult::setUrl
-     * @covers WindowsAzure\Services\ServiceManagement\Models\GetStorageServiceKeysResult::getUrl
+     * @covers WindowsAzure\ServiceManagement\Models\GetStorageServiceKeysResult::setUrl
+     * @covers WindowsAzure\ServiceManagement\Models\GetStorageServiceKeysResult::getUrl
      */
     public function testSetUrl()
     {
@@ -56,8 +56,8 @@ class GetStorageServiceKeysResultTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers WindowsAzure\Services\ServiceManagement\Models\GetStorageServiceKeysResult::setPrimary
-     * @covers WindowsAzure\Services\ServiceManagement\Models\GetStorageServiceKeysResult::getPrimary
+     * @covers WindowsAzure\ServiceManagement\Models\GetStorageServiceKeysResult::setPrimary
+     * @covers WindowsAzure\ServiceManagement\Models\GetStorageServiceKeysResult::getPrimary
      */
     public function testSetPrimary()
     {
@@ -73,8 +73,8 @@ class GetStorageServiceKeysResultTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers WindowsAzure\Services\ServiceManagement\Models\GetStorageServiceKeysResult::setSecondary
-     * @covers WindowsAzure\Services\ServiceManagement\Models\GetStorageServiceKeysResult::getSecondary
+     * @covers WindowsAzure\ServiceManagement\Models\GetStorageServiceKeysResult::setSecondary
+     * @covers WindowsAzure\ServiceManagement\Models\GetStorageServiceKeysResult::getSecondary
      */
     public function testSetSecondary()
     {

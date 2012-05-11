@@ -15,29 +15,29 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   Tests\Unit\WindowsAzure\Services\ServiceManagement
+ * @package   Tests\Unit\WindowsAzure\ServiceManagement\Internal
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
 
-namespace Tests\Unit\WindowsAzure\Services\ServiceManagement;
+namespace Tests\Unit\WindowsAzure\ServiceManagement\Internal;
 use Tests\Framework\ServiceManagementRestProxyTestBase;
 use WindowsAzure\Common\Internal\Resources;
 use WindowsAzure\Common\Internal\Http\HttpClient;
 use WindowsAzure\Common\Internal\Serialization\XmlSerializer;
-use WindowsAzure\Services\ServiceManagement\ServiceManagementRestProxy;
-use WindowsAzure\Services\ServiceManagement\Models\Locations;
-use WindowsAzure\Services\ServiceManagement\Models\CreateStorageServiceOptions;
-use WindowsAzure\Services\ServiceManagement\Models\UpdateStorageServiceOptions;
-use WindowsAzure\Services\ServiceManagement\Models\KeyType;
+use WindowsAzure\ServiceManagement\Internal\ServiceManagementRestProxy;
+use WindowsAzure\ServiceManagement\Models\Locations;
+use WindowsAzure\ServiceManagement\Models\CreateStorageServiceOptions;
+use WindowsAzure\ServiceManagement\Models\UpdateStorageServiceOptions;
+use WindowsAzure\ServiceManagement\Models\KeyType;
 
 /**
  * Unit tests for class ServiceManagementRestProxy
  *
  * @category  Microsoft
- * @package   Tests\Unit\WindowsAzure\Services\ServiceManagement
+ * @package   Tests\Unit\WindowsAzure\ServiceManagement\Internal
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
@@ -49,7 +49,7 @@ class ServiceManagementRestProxyTest extends ServiceManagementRestProxyTestBase
     private $_storageServiceName = 'createstorageservice';
     
     /**
-     * @covers WindowsAzure\Services\ServiceManagement\ServiceManagementRestProxy::__construct
+     * @covers WindowsAzure\ServiceManagement\Internal\ServiceManagementRestProxy::__construct
      */
     public function test__construct()
     {
@@ -75,7 +75,7 @@ class ServiceManagementRestProxyTest extends ServiceManagementRestProxyTestBase
      * This test makes sure that the list of location constants in the SDK are 
      * consistant with what is used by Windows Azure.
      * 
-     * @covers WindowsAzure\Services\ServiceManagement\Models\Locations
+     * @covers WindowsAzure\ServiceManagement\Models\Locations
      */
     public function testLocations()
     {
@@ -113,9 +113,9 @@ class ServiceManagementRestProxyTest extends ServiceManagementRestProxyTestBase
     }
     
     /**
-     * @covers WindowsAzure\Services\ServiceManagement\ServiceManagementRestProxy::createAffinityGroup
-     * @covers WindowsAzure\Services\ServiceManagement\ServiceManagementRestProxy::_getAffinityGroupPath
-     * @covers WindowsAzure\Services\ServiceManagement\ServiceManagementRestProxy::_getPath
+     * @covers WindowsAzure\ServiceManagement\Internal\ServiceManagementRestProxy::createAffinityGroup
+     * @covers WindowsAzure\ServiceManagement\Internal\ServiceManagementRestProxy::_getAffinityGroupPath
+     * @covers WindowsAzure\ServiceManagement\Internal\ServiceManagementRestProxy::_getPath
      */
     public function testCreateAffinityGroup()
     {
@@ -133,9 +133,9 @@ class ServiceManagementRestProxyTest extends ServiceManagementRestProxyTestBase
     }
     
     /**
-     * @covers WindowsAzure\Services\ServiceManagement\ServiceManagementRestProxy::deleteAffinityGroup
-     * @covers WindowsAzure\Services\ServiceManagement\ServiceManagementRestProxy::_getAffinityGroupPath
-     * @covers WindowsAzure\Services\ServiceManagement\ServiceManagementRestProxy::_getPath
+     * @covers WindowsAzure\ServiceManagement\Internal\ServiceManagementRestProxy::deleteAffinityGroup
+     * @covers WindowsAzure\ServiceManagement\Internal\ServiceManagementRestProxy::_getAffinityGroupPath
+     * @covers WindowsAzure\ServiceManagement\Internal\ServiceManagementRestProxy::_getPath
      */
     public function testDeleteAffinityGroup()
     {
@@ -153,10 +153,10 @@ class ServiceManagementRestProxyTest extends ServiceManagementRestProxyTestBase
     }
     
     /**
-     * @covers WindowsAzure\Services\ServiceManagement\ServiceManagementRestProxy::listAffinityGroups 
-     * @covers WindowsAzure\Services\ServiceManagement\Models\ListAffinityGroupsResult::create
-     * @covers WindowsAzure\Services\ServiceManagement\ServiceManagementRestProxy::_getAffinityGroupPath
-     * @covers WindowsAzure\Services\ServiceManagement\ServiceManagementRestProxy::_getPath
+     * @covers WindowsAzure\ServiceManagement\Internal\ServiceManagementRestProxy::listAffinityGroups 
+     * @covers WindowsAzure\ServiceManagement\Models\ListAffinityGroupsResult::create
+     * @covers WindowsAzure\ServiceManagement\Internal\ServiceManagementRestProxy::_getAffinityGroupPath
+     * @covers WindowsAzure\ServiceManagement\Internal\ServiceManagementRestProxy::_getPath
      */
     public function testListAffinityGroupsWithEmpty()
     {
@@ -169,10 +169,10 @@ class ServiceManagementRestProxyTest extends ServiceManagementRestProxyTestBase
     }
     
     /**
-     * @covers WindowsAzure\Services\ServiceManagement\ServiceManagementRestProxy::listAffinityGroups 
-     * @covers WindowsAzure\Services\ServiceManagement\Models\ListAffinityGroupsResult::create
-     * @covers WindowsAzure\Services\ServiceManagement\ServiceManagementRestProxy::_getAffinityGroupPath
-     * @covers WindowsAzure\Services\ServiceManagement\ServiceManagementRestProxy::_getPath
+     * @covers WindowsAzure\ServiceManagement\Internal\ServiceManagementRestProxy::listAffinityGroups 
+     * @covers WindowsAzure\ServiceManagement\Models\ListAffinityGroupsResult::create
+     * @covers WindowsAzure\ServiceManagement\Internal\ServiceManagementRestProxy::_getAffinityGroupPath
+     * @covers WindowsAzure\ServiceManagement\Internal\ServiceManagementRestProxy::_getPath
      */
     public function testListAffinityGroupsWithOneEntry()
     {
@@ -189,10 +189,10 @@ class ServiceManagementRestProxyTest extends ServiceManagementRestProxyTestBase
     }
     
     /**
-     * @covers WindowsAzure\Services\ServiceManagement\ServiceManagementRestProxy::listAffinityGroups 
-     * @covers WindowsAzure\Services\ServiceManagement\Models\ListAffinityGroupsResult::create
-     * @covers WindowsAzure\Services\ServiceManagement\ServiceManagementRestProxy::_getAffinityGroupPath
-     * @covers WindowsAzure\Services\ServiceManagement\ServiceManagementRestProxy::_getPath
+     * @covers WindowsAzure\ServiceManagement\Internal\ServiceManagementRestProxy::listAffinityGroups 
+     * @covers WindowsAzure\ServiceManagement\Models\ListAffinityGroupsResult::create
+     * @covers WindowsAzure\ServiceManagement\Internal\ServiceManagementRestProxy::_getAffinityGroupPath
+     * @covers WindowsAzure\ServiceManagement\Internal\ServiceManagementRestProxy::_getPath
      */
     public function testListAffinityGroupsWithMultipleEntries()
     {
@@ -211,9 +211,9 @@ class ServiceManagementRestProxyTest extends ServiceManagementRestProxyTestBase
     }
     
     /**
-     * @covers WindowsAzure\Services\ServiceManagement\ServiceManagementRestProxy::updateAffinityGroup
-     * @covers WindowsAzure\Services\ServiceManagement\ServiceManagementRestProxy::_getAffinityGroupPath
-     * @covers WindowsAzure\Services\ServiceManagement\ServiceManagementRestProxy::_getPath
+     * @covers WindowsAzure\ServiceManagement\Internal\ServiceManagementRestProxy::updateAffinityGroup
+     * @covers WindowsAzure\ServiceManagement\Internal\ServiceManagementRestProxy::_getAffinityGroupPath
+     * @covers WindowsAzure\ServiceManagement\Internal\ServiceManagementRestProxy::_getPath
      */
     public function testUpdateAffinityGroup()
     {
@@ -233,10 +233,10 @@ class ServiceManagementRestProxyTest extends ServiceManagementRestProxyTestBase
     }
     
     /**
-     * @covers WindowsAzure\Services\ServiceManagement\ServiceManagementRestProxy::getAffinityGroupProperties
-     * @covers WindowsAzure\Services\ServiceManagement\Models\GetAffinityGroupPropertiesResult::create
-     * @covers WindowsAzure\Services\ServiceManagement\ServiceManagementRestProxy::_getAffinityGroupPath
-     * @covers WindowsAzure\Services\ServiceManagement\ServiceManagementRestProxy::_getPath
+     * @covers WindowsAzure\ServiceManagement\Internal\ServiceManagementRestProxy::getAffinityGroupProperties
+     * @covers WindowsAzure\ServiceManagement\Models\GetAffinityGroupPropertiesResult::create
+     * @covers WindowsAzure\ServiceManagement\Internal\ServiceManagementRestProxy::_getAffinityGroupPath
+     * @covers WindowsAzure\ServiceManagement\Internal\ServiceManagementRestProxy::_getPath
      */
     public function testGetAffinityGroupProperties()
     {
@@ -255,10 +255,10 @@ class ServiceManagementRestProxyTest extends ServiceManagementRestProxyTestBase
     }
     
     /**
-     * @covers WindowsAzure\Services\ServiceManagement\ServiceManagementRestProxy::listLocations
-     * @covers WindowsAzure\Services\ServiceManagement\Models\ListLocationsResult::create
-     * @covers WindowsAzure\Services\ServiceManagement\ServiceManagementRestProxy::_getLocationPath
-     * @covers WindowsAzure\Services\ServiceManagement\ServiceManagementRestProxy::_getPath
+     * @covers WindowsAzure\ServiceManagement\Internal\ServiceManagementRestProxy::listLocations
+     * @covers WindowsAzure\ServiceManagement\Models\ListLocationsResult::create
+     * @covers WindowsAzure\ServiceManagement\Internal\ServiceManagementRestProxy::_getLocationPath
+     * @covers WindowsAzure\ServiceManagement\Internal\ServiceManagementRestProxy::_getPath
      */
     public function testListLocations()
     {
@@ -271,13 +271,13 @@ class ServiceManagementRestProxyTest extends ServiceManagementRestProxyTestBase
     }
 
     /**
-     * @covers WindowsAzure\Services\ServiceManagement\ServiceManagementRestProxy::createStorageService
-     * @covers WindowsAzure\Services\ServiceManagement\ServiceManagementRestProxy::getOperationStatus
-     * @covers WindowsAzure\Services\ServiceManagement\ServiceManagementRestProxy::_getOperationPath
-     * @covers WindowsAzure\Services\ServiceManagement\ServiceManagementRestProxy::_getStorageServicePath
-     * @covers WindowsAzure\Services\ServiceManagement\ServiceManagementRestProxy::_getPath
-     * @covers WindowsAzure\Services\ServiceManagement\Models\GetOperationStatusResult::create
-     * @covers WindowsAzure\Services\ServiceManagement\Models\StorageService::toArray
+     * @covers WindowsAzure\ServiceManagement\Internal\ServiceManagementRestProxy::createStorageService
+     * @covers WindowsAzure\ServiceManagement\Internal\ServiceManagementRestProxy::getOperationStatus
+     * @covers WindowsAzure\ServiceManagement\Internal\ServiceManagementRestProxy::_getOperationPath
+     * @covers WindowsAzure\ServiceManagement\Internal\ServiceManagementRestProxy::_getStorageServicePath
+     * @covers WindowsAzure\ServiceManagement\Internal\ServiceManagementRestProxy::_getPath
+     * @covers WindowsAzure\ServiceManagement\Models\GetOperationStatusResult::create
+     * @covers WindowsAzure\ServiceManagement\Models\StorageService::toArray
      */
     public function testCreateStorageService()
     {
@@ -296,10 +296,10 @@ class ServiceManagementRestProxyTest extends ServiceManagementRestProxyTestBase
     }
     
     /**
-     * @covers WindowsAzure\Services\ServiceManagement\ServiceManagementRestProxy::listStorageServices
-     * @covers WindowsAzure\Services\ServiceManagement\Models\ListStorageServicesResult::create
-     * @covers WindowsAzure\Services\ServiceManagement\ServiceManagementRestProxy::_getStorageServicePath
-     * @covers WindowsAzure\Services\ServiceManagement\ServiceManagementRestProxy::_getPath
+     * @covers WindowsAzure\ServiceManagement\Internal\ServiceManagementRestProxy::listStorageServices
+     * @covers WindowsAzure\ServiceManagement\Models\ListStorageServicesResult::create
+     * @covers WindowsAzure\ServiceManagement\Internal\ServiceManagementRestProxy::_getStorageServicePath
+     * @covers WindowsAzure\ServiceManagement\Internal\ServiceManagementRestProxy::_getPath
      * @depends testCreateStorageService
      */
     public function testListStorageServices()
@@ -315,9 +315,9 @@ class ServiceManagementRestProxyTest extends ServiceManagementRestProxyTestBase
     }
     
     /**
-     * @covers WindowsAzure\Services\ServiceManagement\ServiceManagementRestProxy::updateStorageService
-     * @covers WindowsAzure\Services\ServiceManagement\ServiceManagementRestProxy::_getStorageServicePath
-     * @covers WindowsAzure\Services\ServiceManagement\ServiceManagementRestProxy::_getPath
+     * @covers WindowsAzure\ServiceManagement\Internal\ServiceManagementRestProxy::updateStorageService
+     * @covers WindowsAzure\ServiceManagement\Internal\ServiceManagementRestProxy::_getStorageServicePath
+     * @covers WindowsAzure\ServiceManagement\Internal\ServiceManagementRestProxy::_getPath
      * @depends testListStorageServices
      */
     public function testUpdateStorageService()
@@ -340,10 +340,10 @@ class ServiceManagementRestProxyTest extends ServiceManagementRestProxyTestBase
     }
     
     /**
-     * @covers WindowsAzure\Services\ServiceManagement\ServiceManagementRestProxy::getStorageServiceProperties
-     * @covers WindowsAzure\Services\ServiceManagement\ServiceManagementRestProxy::_getStorageServicePath
-     * @covers WindowsAzure\Services\ServiceManagement\ServiceManagementRestProxy::_getPath
-     * @covers WindowsAzure\Services\ServiceManagement\Models\GetStorageServicePropertiesResult::create
+     * @covers WindowsAzure\ServiceManagement\Internal\ServiceManagementRestProxy::getStorageServiceProperties
+     * @covers WindowsAzure\ServiceManagement\Internal\ServiceManagementRestProxy::_getStorageServicePath
+     * @covers WindowsAzure\ServiceManagement\Internal\ServiceManagementRestProxy::_getPath
+     * @covers WindowsAzure\ServiceManagement\Models\GetStorageServicePropertiesResult::create
      * @depends testUpdateStorageService
      */
     public function testGetStorageServiceProperties()
@@ -359,10 +359,10 @@ class ServiceManagementRestProxyTest extends ServiceManagementRestProxyTestBase
     }
     
     /**
-     * @covers WindowsAzure\Services\ServiceManagement\ServiceManagementRestProxy::getStorageServiceKeys
-     * @covers WindowsAzure\Services\ServiceManagement\ServiceManagementRestProxy::_getPath
-     * @covers WindowsAzure\Services\ServiceManagement\ServiceManagementRestProxy::_getStorageServiceKeysPath
-     * @covers WindowsAzure\Services\ServiceManagement\Models\GetStorageServiceKeysResult::create
+     * @covers WindowsAzure\ServiceManagement\Internal\ServiceManagementRestProxy::getStorageServiceKeys
+     * @covers WindowsAzure\ServiceManagement\Internal\ServiceManagementRestProxy::_getPath
+     * @covers WindowsAzure\ServiceManagement\Internal\ServiceManagementRestProxy::_getStorageServiceKeysPath
+     * @covers WindowsAzure\ServiceManagement\Models\GetStorageServiceKeysResult::create
      * @depends testGetStorageServiceProperties
      */
     public function testGetStorageServiceKeys()
@@ -380,10 +380,10 @@ class ServiceManagementRestProxyTest extends ServiceManagementRestProxyTestBase
     }
     
     /**
-     * @covers WindowsAzure\Services\ServiceManagement\ServiceManagementRestProxy::regenerateStorageServiceKeys
-     * @covers WindowsAzure\Services\ServiceManagement\ServiceManagementRestProxy::_getPath
-     * @covers WindowsAzure\Services\ServiceManagement\ServiceManagementRestProxy::_getStorageServiceKeysPath
-     * @covers WindowsAzure\Services\ServiceManagement\Models\GetStorageServiceKeysResult::create
+     * @covers WindowsAzure\ServiceManagement\Internal\ServiceManagementRestProxy::regenerateStorageServiceKeys
+     * @covers WindowsAzure\ServiceManagement\Internal\ServiceManagementRestProxy::_getPath
+     * @covers WindowsAzure\ServiceManagement\Internal\ServiceManagementRestProxy::_getStorageServiceKeysPath
+     * @covers WindowsAzure\ServiceManagement\Models\GetStorageServiceKeysResult::create
      * @depends testGetStorageServiceKeys
      */
     public function testRegenerateStorageServiceKeys()
@@ -401,9 +401,9 @@ class ServiceManagementRestProxyTest extends ServiceManagementRestProxyTestBase
     }
     
     /**
-     * @covers WindowsAzure\Services\ServiceManagement\ServiceManagementRestProxy::deleteStorageService
-     * @covers WindowsAzure\Services\ServiceManagement\ServiceManagementRestProxy::_getStorageServicePath
-     * @covers WindowsAzure\Services\ServiceManagement\ServiceManagementRestProxy::_getPath
+     * @covers WindowsAzure\ServiceManagement\Internal\ServiceManagementRestProxy::deleteStorageService
+     * @covers WindowsAzure\ServiceManagement\Internal\ServiceManagementRestProxy::_getStorageServicePath
+     * @covers WindowsAzure\ServiceManagement\Internal\ServiceManagementRestProxy::_getPath
      * @depends testRegenerateStorageServiceKeys
      */
     public function testDeleteStorageService()

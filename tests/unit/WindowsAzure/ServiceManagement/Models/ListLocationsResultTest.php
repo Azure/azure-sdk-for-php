@@ -15,21 +15,21 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   Tests\Unit\WindowsAzure\Services\ServiceManagement\Models
+ * @package   Tests\Unit\WindowsAzure\ServiceManagement\Models
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
 
-namespace Tests\Unit\WindowsAzure\Services\ServiceManagement\Models;
-use WindowsAzure\Services\ServiceManagement\Models\ListLocationsResult;
+namespace Tests\Unit\WindowsAzure\ServiceManagement\Models;
+use WindowsAzure\ServiceManagement\Models\ListLocationsResult;
 
 /**
  * Unit tests for class ListLocationsResult
  *
  * @category  Microsoft
- * @package   Tests\Unit\WindowsAzure\Services\ServiceManagement\Models
+ * @package   Tests\Unit\WindowsAzure\ServiceManagement\Models
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
@@ -39,8 +39,8 @@ use WindowsAzure\Services\ServiceManagement\Models\ListLocationsResult;
 class ListLocationsResultTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @covers WindowsAzure\Services\ServiceManagement\Models\ListLocationsResult::setLocations
-     * @covers WindowsAzure\Services\ServiceManagement\Models\ListLocationsResult::getLocations
+     * @covers WindowsAzure\ServiceManagement\Models\ListLocationsResult::setLocations
+     * @covers WindowsAzure\ServiceManagement\Models\ListLocationsResult::getLocations
      */
     public function testSetLocations()
     {

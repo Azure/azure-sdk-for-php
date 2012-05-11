@@ -15,22 +15,22 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   Tests\Unit\WindowsAzure\Services\ServiceManagement\Models
+ * @package   Tests\Unit\WindowsAzure\ServiceManagement\Models
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
 
-namespace Tests\Unit\WindowsAzure\Services\ServiceManagement\Models;
-use WindowsAzure\Services\ServiceManagement\Models\GetStorageServicePropertiesResult;
-use WindowsAzure\Services\ServiceManagement\Models\StorageService;
+namespace Tests\Unit\WindowsAzure\ServiceManagement\Models;
+use WindowsAzure\ServiceManagement\Models\GetStorageServicePropertiesResult;
+use WindowsAzure\ServiceManagement\Models\StorageService;
 
 /**
  * Unit tests for class GetStorageServicePropertiesResult
  *
  * @category  Microsoft
- * @package   Tests\Unit\WindowsAzure\Services\ServiceManagement\Models
+ * @package   Tests\Unit\WindowsAzure\ServiceManagement\Models
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
@@ -40,8 +40,8 @@ use WindowsAzure\Services\ServiceManagement\Models\StorageService;
 class GetStorageServicePropertiesResultTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @covers WindowsAzure\Services\ServiceManagement\Models\GetStorageServicePropertiesResult::setStorageService
-     * @covers WindowsAzure\Services\ServiceManagement\Models\GetStorageServicePropertiesResult::getStorageService
+     * @covers WindowsAzure\ServiceManagement\Models\GetStorageServicePropertiesResult::setStorageService
+     * @covers WindowsAzure\ServiceManagement\Models\GetStorageServicePropertiesResult::getStorageService
      */
     public function testSetStorageService()
     {
@@ -57,8 +57,8 @@ class GetStorageServicePropertiesResultTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers WindowsAzure\Services\ServiceManagement\Models\GetStorageServicePropertiesResult::setUrl
-     * @covers WindowsAzure\Services\ServiceManagement\Models\GetStorageServicePropertiesResult::getUrl
+     * @covers WindowsAzure\ServiceManagement\Models\GetStorageServicePropertiesResult::setUrl
+     * @covers WindowsAzure\ServiceManagement\Models\GetStorageServicePropertiesResult::getUrl
      */
     public function testSetUrl()
     {
@@ -74,8 +74,8 @@ class GetStorageServicePropertiesResultTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers WindowsAzure\Services\ServiceManagement\Models\GetStorageServicePropertiesResult::setEndpoints
-     * @covers WindowsAzure\Services\ServiceManagement\Models\GetStorageServicePropertiesResult::getEndpoints
+     * @covers WindowsAzure\ServiceManagement\Models\GetStorageServicePropertiesResult::setEndpoints
+     * @covers WindowsAzure\ServiceManagement\Models\GetStorageServicePropertiesResult::getEndpoints
      */
     public function testSetEndpoints()
     {
@@ -91,8 +91,8 @@ class GetStorageServicePropertiesResultTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers WindowsAzure\Services\ServiceManagement\Models\GetStorageServicePropertiesResult::setStatus
-     * @covers WindowsAzure\Services\ServiceManagement\Models\GetStorageServicePropertiesResult::getStatus
+     * @covers WindowsAzure\ServiceManagement\Models\GetStorageServicePropertiesResult::setStatus
+     * @covers WindowsAzure\ServiceManagement\Models\GetStorageServicePropertiesResult::getStatus
      */
     public function testSetStatus()
     {

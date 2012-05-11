@@ -16,14 +16,14 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- * @package    Tests\Unit\WindowsAzure\Services\Queue
+ * @package    Tests\Unit\WindowsAzure\Queue\Internal
  * @author     Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright  2012 Microsoft Corporation
  * @license    http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link       http://pear.php.net/package/azure-sdk-for-php
  */
 
-namespace Tests\Unit\WindowsAzure\Services\Queue;
+namespace Tests\Unit\WindowsAzure\Queue\Internal;
 use WindowsAzure\Common\Internal\Utilities;
 use Tests\Framework\QueueServiceRestProxyTestBase;
 use WindowsAzure\Common\Configuration;
@@ -49,7 +49,7 @@ use WindowsAzure\Common\Internal\ServiceException;
 /**
  * Unit tests for QueueRestProxy class
  *
- * @package    Tests\Unit\WindowsAzure\Services\Queue
+ * @package    Tests\Unit\WindowsAzure\Queue\Internal
  * @author     Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright  2012 Microsoft Corporation
  * @license    http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0

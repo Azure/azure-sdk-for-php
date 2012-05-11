@@ -25,11 +25,11 @@
 namespace Client;
 use WindowsAzure\Common\Configuration;
 use WindowsAzure\Common\Internal\Resources;
-use WindowsAzure\Services\ServiceManagement\ServiceManagementService;
-use WindowsAzure\Services\ServiceManagement\ServiceManagementSettings;
-use WindowsAzure\Services\ServiceManagement\Models\Locations;
-use WindowsAzure\Services\ServiceManagement\Models\OperationStatus;
-use WindowsAzure\Services\ServiceManagement\Models\CreateStorageServiceOptions;
+use WindowsAzure\ServiceManagement\ServiceManagementService;
+use WindowsAzure\ServiceManagement\ServiceManagementSettings;
+use WindowsAzure\ServiceManagement\Models\Locations;
+use WindowsAzure\ServiceManagement\Models\OperationStatus;
+use WindowsAzure\ServiceManagement\Models\CreateStorageServiceOptions;
 
 /**
  * Encapsulates Windows Azure subscription basic operations.

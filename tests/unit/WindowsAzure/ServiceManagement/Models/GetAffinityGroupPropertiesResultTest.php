@@ -15,22 +15,22 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   Tests\Unit\WindowsAzure\Services\ServiceManagement\Models
+ * @package   Tests\Unit\WindowsAzure\ServiceManagement\Models
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
 
-namespace Tests\Unit\WindowsAzure\Services\ServiceManagement\Models;
-use WindowsAzure\Services\ServiceManagement\Models\GetAffinityGroupPropertiesResult;
-use WindowsAzure\Services\ServiceManagement\Models\AffinityGroup;
+namespace Tests\Unit\WindowsAzure\ServiceManagement\Models;
+use WindowsAzure\ServiceManagement\Models\GetAffinityGroupPropertiesResult;
+use WindowsAzure\ServiceManagement\Models\AffinityGroup;
 
 /**
  * Unit tests for class GetAffinityGroupPropertiesResult
  *
  * @category  Microsoft
- * @package   Tests\Unit\WindowsAzure\Services\ServiceManagement\Models
+ * @package   Tests\Unit\WindowsAzure\ServiceManagement\Models
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
@@ -40,7 +40,7 @@ use WindowsAzure\Services\ServiceManagement\Models\AffinityGroup;
 class GetAffinityGroupPropertiesResultTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @covers WindowsAzure\Services\ServiceManagement\Models\GetAffinityGroupPropertiesResult::create
+     * @covers WindowsAzure\ServiceManagement\Models\GetAffinityGroupPropertiesResult::create
      */
     public function testCreate()
     {
@@ -65,8 +65,8 @@ class GetAffinityGroupPropertiesResultTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers WindowsAzure\Services\ServiceManagement\Models\GetAffinityGroupPropertiesResult::setAffinityGroup
-     * @covers WindowsAzure\Services\ServiceManagement\Models\GetAffinityGroupPropertiesResult::getAffinityGroup
+     * @covers WindowsAzure\ServiceManagement\Models\GetAffinityGroupPropertiesResult::setAffinityGroup
+     * @covers WindowsAzure\ServiceManagement\Models\GetAffinityGroupPropertiesResult::getAffinityGroup
      */
     public function testSetAffinityGroup()
     {
@@ -82,8 +82,8 @@ class GetAffinityGroupPropertiesResultTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers WindowsAzure\Services\ServiceManagement\Models\GetAffinityGroupPropertiesResult::setHostedServices
-     * @covers WindowsAzure\Services\ServiceManagement\Models\GetAffinityGroupPropertiesResult::getHostedServices
+     * @covers WindowsAzure\ServiceManagement\Models\GetAffinityGroupPropertiesResult::setHostedServices
+     * @covers WindowsAzure\ServiceManagement\Models\GetAffinityGroupPropertiesResult::getHostedServices
      */
     public function testSetHostedServices()
     {
@@ -99,8 +99,8 @@ class GetAffinityGroupPropertiesResultTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers WindowsAzure\Services\ServiceManagement\Models\GetAffinityGroupPropertiesResult::setStorageServices
-     * @covers WindowsAzure\Services\ServiceManagement\Models\GetAffinityGroupPropertiesResult::getStorageServices
+     * @covers WindowsAzure\ServiceManagement\Models\GetAffinityGroupPropertiesResult::setStorageServices
+     * @covers WindowsAzure\ServiceManagement\Models\GetAffinityGroupPropertiesResult::getStorageServices
      */
     public function testSetStorageServices()
     {

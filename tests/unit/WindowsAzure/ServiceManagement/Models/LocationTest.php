@@ -15,21 +15,21 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   Tests\Unit\WindowsAzure\Services\ServiceManagement\Models
+ * @package   Tests\Unit\WindowsAzure\ServiceManagement\Models
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
 
-namespace Tests\Unit\WindowsAzure\Services\ServiceManagement\Models;
-use WindowsAzure\Services\ServiceManagement\Models\Location;
+namespace Tests\Unit\WindowsAzure\ServiceManagement\Models;
+use WindowsAzure\ServiceManagement\Models\Location;
 
 /**
  * Unit tests for class Location
  *
  * @category  Microsoft
- * @package   Tests\Unit\WindowsAzure\Services\ServiceManagement\Models
+ * @package   Tests\Unit\WindowsAzure\ServiceManagement\Models
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
@@ -39,8 +39,8 @@ use WindowsAzure\Services\ServiceManagement\Models\Location;
 class LocationTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @covers WindowsAzure\Services\ServiceManagement\Models\Location::setName
-     * @covers WindowsAzure\Services\ServiceManagement\Models\Location::getName
+     * @covers WindowsAzure\ServiceManagement\Models\Location::setName
+     * @covers WindowsAzure\ServiceManagement\Models\Location::getName
      */
     public function testSetName()
     {
@@ -56,8 +56,8 @@ class LocationTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers WindowsAzure\Services\ServiceManagement\Models\Location::setDisplayName
-     * @covers WindowsAzure\Services\ServiceManagement\Models\Location::getDisplayName
+     * @covers WindowsAzure\ServiceManagement\Models\Location::setDisplayName
+     * @covers WindowsAzure\ServiceManagement\Models\Location::getDisplayName
      */
     public function testSetDisplayName()
     {

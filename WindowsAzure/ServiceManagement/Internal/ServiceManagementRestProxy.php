@@ -15,38 +15,38 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   WindowsAzure\Services\ServiceManagement
+ * @package   WindowsAzure\ServiceManagement\Internal
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
  
-namespace WindowsAzure\Services\ServiceManagement;
+namespace WindowsAzure\ServiceManagement\Internal;
 use WindowsAzure\Common\Internal\Resources;
 use WindowsAzure\Common\Internal\Validate;
 use WindowsAzure\Common\Internal\RestProxy;
 use WindowsAzure\Common\Internal\Http\HttpCallContext;
 use WindowsAzure\Common\Internal\Serialization\XmlSerializer;
-use WindowsAzure\Services\ServiceManagement\Models\CreateAffinityGroupOptions;
-use WindowsAzure\Services\ServiceManagement\Models\AffinityGroup;
-use WindowsAzure\Services\ServiceManagement\Models\ListAffinityGroupsResult;
-use WindowsAzure\Services\ServiceManagement\Models\GetAffinityGroupPropertiesResult;
-use WindowsAzure\Services\ServiceManagement\Models\ListLocationsResult;
-use WindowsAzure\Services\ServiceManagement\Models\StorageService;
-use WindowsAzure\Services\ServiceManagement\Models\ListStorageServicesResult;
-use WindowsAzure\Services\ServiceManagement\Models\GetOperationStatusResult;
-use WindowsAzure\Services\ServiceManagement\Models\AsynchronousOperationResult;
-use WindowsAzure\Services\ServiceManagement\Models\UpdateStorageServiceOptions;
-use WindowsAzure\Services\ServiceManagement\Models\GetStorageServicePropertiesResult;
-use WindowsAzure\Services\ServiceManagement\Models\GetStorageServiceKeysResult;
+use WindowsAzure\ServiceManagement\Models\CreateAffinityGroupOptions;
+use WindowsAzure\ServiceManagement\Models\AffinityGroup;
+use WindowsAzure\ServiceManagement\Models\ListAffinityGroupsResult;
+use WindowsAzure\ServiceManagement\Models\GetAffinityGroupPropertiesResult;
+use WindowsAzure\ServiceManagement\Models\ListLocationsResult;
+use WindowsAzure\ServiceManagement\Models\StorageService;
+use WindowsAzure\ServiceManagement\Models\ListStorageServicesResult;
+use WindowsAzure\ServiceManagement\Models\GetOperationStatusResult;
+use WindowsAzure\ServiceManagement\Models\AsynchronousOperationResult;
+use WindowsAzure\ServiceManagement\Models\UpdateStorageServiceOptions;
+use WindowsAzure\ServiceManagement\Models\GetStorageServicePropertiesResult;
+use WindowsAzure\ServiceManagement\Models\GetStorageServiceKeysResult;
 
 /**
  * This class constructs HTTP requests and receive HTTP responses for service 
  * management service layer.
  *
  * @category  Microsoft
- * @package   WindowsAzure\Services\ServiceManagement
+ * @package   WindowsAzure\ServiceManagement\Internal
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0

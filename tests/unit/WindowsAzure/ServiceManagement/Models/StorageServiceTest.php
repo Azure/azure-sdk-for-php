@@ -15,22 +15,22 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   Tests\Unit\WindowsAzure\Services\ServiceManagement\Models
+ * @package   Tests\Unit\WindowsAzure\ServiceManagement\Models
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
 
-namespace Tests\Unit\WindowsAzure\Services\ServiceManagement\Models;
-use WindowsAzure\Services\ServiceManagement\Models\StorageService;
+namespace Tests\Unit\WindowsAzure\ServiceManagement\Models;
+use WindowsAzure\ServiceManagement\Models\StorageService;
 use WindowsAzure\Common\Internal\Resources;
 
 /**
  * Unit tests for class StorageService
  *
  * @category  Microsoft
- * @package   Tests\Unit\WindowsAzure\Services\ServiceManagement\Models
+ * @package   Tests\Unit\WindowsAzure\ServiceManagement\Models
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
@@ -40,7 +40,7 @@ use WindowsAzure\Common\Internal\Resources;
 class StorageServiceTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @covers WindowsAzure\Services\ServiceManagement\Models\StorageService::__construct
+     * @covers WindowsAzure\ServiceManagement\Models\StorageService::__construct
      */
     public function test__construct()
     {
@@ -63,8 +63,8 @@ class StorageServiceTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers WindowsAzure\Services\ServiceManagement\Models\StorageService::setAffinityGroup
-     * @covers WindowsAzure\Services\ServiceManagement\Models\StorageService::getAffinityGroup
+     * @covers WindowsAzure\ServiceManagement\Models\StorageService::setAffinityGroup
+     * @covers WindowsAzure\ServiceManagement\Models\StorageService::getAffinityGroup
      */
     public function testSetAffinityGroup()
     {

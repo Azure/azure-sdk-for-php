@@ -24,6 +24,15 @@
 
 namespace WindowsAzure\ServiceRuntime;
 use WindowsAzure\Common\Internal\Resources;
+use WindowsAzure\ServiceRuntime\Internal\RuntimeKernel;
+use WindowsAzure\ServiceRuntime\Internal\RoleEnvironmentNotAvailableException;
+use WindowsAzure\ServiceRuntime\Internal\ChannelNotAvailableException;
+use WindowsAzure\ServiceRuntime\Internal\CurrentStatus;
+use WindowsAzure\ServiceRuntime\Internal\AcquireCurrentState;
+use WindowsAzure\ServiceRuntime\Internal\ReleaseCurrentState;
+use WindowsAzure\ServiceRuntime\Internal\RoleInstanceStatus;
+use WindowsAzure\ServiceRuntime\Internal\RoleEnvironmentConfigurationSettingChange;
+use WindowsAzure\ServiceRuntime\Internal\RoleEnvironmentTopologyChange;
 
 /**
  * Represents the Windows Azure environment in which an instance of a role is 
@@ -182,7 +191,7 @@ class RoleEnvironment
                     ->getRoleEnvironmentData();
             }
         } catch (ChannelNotAvailableException $ex) {
-            throw new RoleEnvironmentnotAvailableException();
+            throw new RoleEnvironmentNotAvailableException();
         }
     }
 

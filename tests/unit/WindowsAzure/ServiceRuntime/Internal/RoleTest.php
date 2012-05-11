@@ -15,21 +15,21 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   Tests\Unit\WindowsAzure\ServiceRuntime
+ * @package   Tests\Unit\WindowsAzure\ServiceRuntime\Internal
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
-namespace Tests\Unit\WindowsAzure\ServiceRuntime;
+namespace Tests\Unit\WindowsAzure\ServiceRuntime\Internal;
 use Tests\Framework\TestResources;
-use WindowsAzure\ServiceRuntime\Role;
+use WindowsAzure\ServiceRuntime\Internal\Role;
 
 /**
  * Unit tests for class Role.
  *
  * @category  Microsoft
- * @package   Tests\Unit\WindowsAzure\ServiceRuntime
+ * @package   Tests\Unit\WindowsAzure\ServiceRuntime\Internal
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
@@ -39,8 +39,8 @@ use WindowsAzure\ServiceRuntime\Role;
 class RoleTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @covers WindowsAzure\ServiceRuntime\Role::__construct
-     * @covers WindowsAzure\ServiceRuntime\Role::getName
+     * @covers WindowsAzure\ServiceRuntime\Internal\Role::__construct
+     * @covers WindowsAzure\ServiceRuntime\Internal\Role::getName
      */
     public function testGetName()
     {
@@ -54,7 +54,7 @@ class RoleTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\ServiceRuntime\Role::getInstances
+     * @covers WindowsAzure\ServiceRuntime\Internal\Role::getInstances
      */
     public function testGetInstances()
     {

@@ -15,25 +15,25 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   Tests\Unit\WindowsAzure\ServiceRuntime
+ * @package   Tests\Unit\WindowsAzure\ServiceRuntime\Internal
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
-namespace Tests\Unit\WindowsAzure\ServiceRuntime;
+namespace Tests\Unit\WindowsAzure\ServiceRuntime\Internal;
 use Tests\Framework\TestResources;
 use WindowsAzure\Common\Internal\Utilities;
-use WindowsAzure\ServiceRuntime\FileInputChannel;
-use WindowsAzure\ServiceRuntime\RuntimeVersionProtocolClient;
-use WindowsAzure\ServiceRuntime\RuntimeVersionManager;
+use WindowsAzure\ServiceRuntime\Internal\FileInputChannel;
+use WindowsAzure\ServiceRuntime\Internal\RuntimeVersionProtocolClient;
+use WindowsAzure\ServiceRuntime\Internal\RuntimeVersionManager;
 use WindowsAzure\Common\Internal\Resources;
 
 /**
  * Unit tests for class RuntimeVersionManager.
  *
  * @category  Microsoft
- * @package   Tests\Unit\WindowsAzure\ServiceRuntime
+ * @package   Tests\Unit\WindowsAzure\ServiceRuntime\Internal
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
@@ -43,7 +43,7 @@ use WindowsAzure\Common\Internal\Resources;
 class RuntimeVersionManagerTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @covers WindowsAzure\ServiceRuntime\RuntimeVersionManager::__construct
+     * @covers WindowsAzure\ServiceRuntime\Internal\RuntimeVersionManager::__construct
      */
     public function testConstruct()
     {
@@ -52,12 +52,12 @@ class RuntimeVersionManagerTest extends \PHPUnit_Framework_TestCase
         
         // Test
         $this->assertInstanceOf(
-            '\WindowsAzure\\ServiceRuntime\\RuntimeVersionManager',
+            'WindowsAzure\ServiceRuntime\Internal\RuntimeVersionManager',
             $runtimeVersionManager);
     }
     
     /**
-     * @covers WindowsAzure\ServiceRuntime\RuntimeVersionManager::getRuntimeClient
+     * @covers WindowsAzure\ServiceRuntime\Internal\RuntimeVersionManager::getRuntimeClient
      */
     public function testGetRuntimeClientInvalid()
     {
@@ -97,7 +97,7 @@ class RuntimeVersionManagerTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers WindowsAzure\ServiceRuntime\RuntimeVersionManager::getRuntimeClient
+     * @covers WindowsAzure\ServiceRuntime\Internal\RuntimeVersionManager::getRuntimeClient
      */
     public function testGetRuntimeClient()
     {

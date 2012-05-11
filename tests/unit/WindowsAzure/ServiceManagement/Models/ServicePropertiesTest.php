@@ -15,21 +15,21 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   Tests\Unit\WindowsAzure\Services\ServiceManagement\Models
+ * @package   Tests\Unit\WindowsAzure\ServiceManagement\Models
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
 
-namespace Tests\Unit\WindowsAzure\Services\ServiceManagement\Models;
-use WindowsAzure\Services\ServiceManagement\Models\ServiceProperties;
+namespace Tests\Unit\WindowsAzure\ServiceManagement\Models;
+use WindowsAzure\ServiceManagement\Models\ServiceProperties;
 
 /**
  * Unit tests for class ServiceProperties
  *
  * @category  Microsoft
- * @package   Tests\Unit\WindowsAzure\Services\ServiceManagement\Models
+ * @package   Tests\Unit\WindowsAzure\ServiceManagement\Models
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
@@ -39,8 +39,8 @@ use WindowsAzure\Services\ServiceManagement\Models\ServiceProperties;
 class ServicePropertiesTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @covers WindowsAzure\Services\ServiceManagement\Models\ServiceProperties::setUrl
-     * @covers WindowsAzure\Services\ServiceManagement\Models\ServiceProperties::getUrl
+     * @covers WindowsAzure\ServiceManagement\Models\ServiceProperties::setUrl
+     * @covers WindowsAzure\ServiceManagement\Models\ServiceProperties::getUrl
      */
     public function testSetUrl()
     {
@@ -56,8 +56,8 @@ class ServicePropertiesTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers WindowsAzure\Services\ServiceManagement\Models\ServiceProperties::setServiceName
-     * @covers WindowsAzure\Services\ServiceManagement\Models\ServiceProperties::getServiceName
+     * @covers WindowsAzure\ServiceManagement\Models\ServiceProperties::setServiceName
+     * @covers WindowsAzure\ServiceManagement\Models\ServiceProperties::getServiceName
      */
     public function testSetServiceName()
     {

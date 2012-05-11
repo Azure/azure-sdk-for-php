@@ -15,22 +15,22 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   Tests\Unit\WindowsAzure\ServiceRuntime
+ * @package   Tests\Unit\WindowsAzure\ServiceRuntime\Internal
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
-namespace Tests\Unit\WindowsAzure\ServiceRuntime;
+namespace Tests\Unit\WindowsAzure\ServiceRuntime\Internal;
 use Tests\Framework\TestResources;
-use WindowsAzure\ServiceRuntime\CurrentStatus;
-use WindowsAzure\ServiceRuntime\ReleaseCurrentState;
+use WindowsAzure\ServiceRuntime\Internal\CurrentStatus;
+use WindowsAzure\ServiceRuntime\Internal\ReleaseCurrentState;
 
 /**
  * Unit tests for class ReleaseCurrentState.
  *
  * @category  Microsoft
- * @package   Tests\Unit\WindowsAzure\ServiceRuntime
+ * @package   Tests\Unit\WindowsAzure\ServiceRuntime\Internal
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
@@ -40,7 +40,7 @@ use WindowsAzure\ServiceRuntime\ReleaseCurrentState;
 class ReleaseCurrentStateTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @covers WindowsAzure\ServiceRuntime\ReleaseCurrentState::__construct
+     * @covers WindowsAzure\ServiceRuntime\Internal\ReleaseCurrentState::__construct
      */
     public function testConstruct()
     {

@@ -15,22 +15,22 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   Tests\Unit\WindowsAzure\ServiceRuntime
+ * @package   Tests\Unit\WindowsAzure\ServiceRuntime\Internal
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
-namespace Tests\Unit\WindowsAzure\ServiceRuntime;
+namespace Tests\Unit\WindowsAzure\ServiceRuntime\Internal;
 use Tests\Framework\TestResources;
 use WindowsAzure\Common\Internal\Utilities;
-use WindowsAzure\ServiceRuntime\LocalResource;
+use WindowsAzure\ServiceRuntime\Internal\LocalResource;
 
 /**
  * Unit tests for class LocalResource.
  *
  * @category  Microsoft
- * @package   Tests\Unit\WindowsAzure\ServiceRuntime
+ * @package   Tests\Unit\WindowsAzure\ServiceRuntime\Internal
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
@@ -40,8 +40,8 @@ use WindowsAzure\ServiceRuntime\LocalResource;
 class LocalResourceTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @covers WindowsAzure\ServiceRuntime\LocalResource::__construct
-     * @covers WindowsAzure\ServiceRuntime\LocalResource::getMaximumSizeInMegabytes
+     * @covers WindowsAzure\ServiceRuntime\Internal\LocalResource::__construct
+     * @covers WindowsAzure\ServiceRuntime\Internal\LocalResource::getMaximumSizeInMegabytes
      */
     public function testGetMaximumSizeInMegabytes()
     {
@@ -53,7 +53,7 @@ class LocalResourceTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers WindowsAzure\ServiceRuntime\LocalResource::getName
+     * @covers WindowsAzure\ServiceRuntime\Internal\LocalResource::getName
      */
     public function testGetName()
     {
@@ -65,7 +65,7 @@ class LocalResourceTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers WindowsAzure\ServiceRuntime\LocalResource::getRootPath
+     * @covers WindowsAzure\ServiceRuntime\Internal\LocalResource::getRootPath
      */
     public function testGetRootPath()
     {

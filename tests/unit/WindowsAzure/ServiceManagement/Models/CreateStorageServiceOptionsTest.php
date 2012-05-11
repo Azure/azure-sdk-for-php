@@ -23,7 +23,7 @@
  */
 
 namespace Tests\Unit\WindowsAzure\CreateStorageServiceOptionsManagement\Models;
-use WindowsAzure\Services\ServiceManagement\Models\CreateStorageServiceOptions;
+use WindowsAzure\ServiceManagement\Models\CreateStorageServiceOptions;
 
 /**
  * Unit tests for class CreateStorageServiceOptions
@@ -39,8 +39,8 @@ use WindowsAzure\Services\ServiceManagement\Models\CreateStorageServiceOptions;
 class CreateStorageServiceOptionsTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @covers WindowsAzure\Services\ServiceManagement\Models\CreateStorageServiceOptions::setDescription
-     * @covers WindowsAzure\Services\ServiceManagement\Models\CreateStorageServiceOptions::getDescription
+     * @covers WindowsAzure\ServiceManagement\Models\CreateStorageServiceOptions::setDescription
+     * @covers WindowsAzure\ServiceManagement\Models\CreateStorageServiceOptions::getDescription
      */
     public function testSetDescription()
     {
@@ -56,8 +56,8 @@ class CreateStorageServiceOptionsTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers WindowsAzure\Services\ServiceManagement\Models\CreateStorageServiceOptions::setLocation
-     * @covers WindowsAzure\Services\ServiceManagement\Models\CreateStorageServiceOptions::getLocation
+     * @covers WindowsAzure\ServiceManagement\Models\CreateStorageServiceOptions::setLocation
+     * @covers WindowsAzure\ServiceManagement\Models\CreateStorageServiceOptions::getLocation
      */
     public function testSetLocation()
     {
@@ -73,8 +73,8 @@ class CreateStorageServiceOptionsTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers WindowsAzure\Services\ServiceManagement\Models\CreateStorageServiceOptions::setAffinityGroup
-     * @covers WindowsAzure\Services\ServiceManagement\Models\CreateStorageServiceOptions::getAffinityGroup
+     * @covers WindowsAzure\ServiceManagement\Models\CreateStorageServiceOptions::setAffinityGroup
+     * @covers WindowsAzure\ServiceManagement\Models\CreateStorageServiceOptions::getAffinityGroup
      */
     public function testSetAffinityGroup()
     {

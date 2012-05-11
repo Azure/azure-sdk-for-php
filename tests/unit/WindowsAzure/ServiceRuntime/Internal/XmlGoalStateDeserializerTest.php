@@ -15,16 +15,16 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   Tests\Unit\WindowsAzure\ServiceRuntime
+ * @package   Tests\Unit\WindowsAzure\ServiceRuntime\Internal
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
-namespace Tests\Unit\WindowsAzure\ServiceRuntime;
+namespace Tests\Unit\WindowsAzure\ServiceRuntime\Internal;
 use Tests\Framework\TestResources;
-use WindowsAzure\ServiceRuntime\GoalState;
-use WindowsAzure\ServiceRuntime\XmlGoalStateDeserializer;
+use WindowsAzure\ServiceRuntime\Internal\GoalState;
+use WindowsAzure\ServiceRuntime\Internal\XmlGoalStateDeserializer;
 
 require_once 'vfsStream/vfsStream.php';
 
@@ -32,7 +32,7 @@ require_once 'vfsStream/vfsStream.php';
  * Unit tests for class XmlGoalStateDeserializer.
  *
  * @category  Microsoft
- * @package   Tests\Unit\WindowsAzure\ServiceRuntime
+ * @package   Tests\Unit\WindowsAzure\ServiceRuntime\Internal
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
@@ -42,7 +42,7 @@ require_once 'vfsStream/vfsStream.php';
 class XmlGoalStateDeserializerTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @covers WindowsAzure\ServiceRuntime\XmlGoalStateDeserializer::deserialize
+     * @covers WindowsAzure\ServiceRuntime\Internal\XmlGoalStateDeserializer::deserialize
      */
     public function testDeserialize()
     {

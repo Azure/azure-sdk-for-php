@@ -45,8 +45,8 @@ use WindowsAzure\Services\Table\TableSettings;
 use WindowsAzure\Services\Table\Utilities\AtomReaderWriter;
 use WindowsAzure\Services\Table\Utilities\MimeReaderWriter;
 use WindowsAzure\Common\Internal\Serialization\XmlSerializer;
-use WindowsAzure\Services\ServiceManagement\ServiceManagementSettings;
-use WindowsAzure\Services\ServiceManagement\ServiceManagementRestProxy;
+use WindowsAzure\ServiceManagement\ServiceManagementSettings;
+use WindowsAzure\ServiceManagement\Internal\ServiceManagementRestProxy;
 
 /**
  * Builds azure service objects.
@@ -281,7 +281,7 @@ class ServicesBuilder implements IServiceBuilder
      *
      * @param WindowsAzure\Common\Configuration $config The configuration.
      * 
-     * @return WindowsAzure\Services\ServiceManagement\IServiceManagement
+     * @return WindowsAzure\ServiceManagement\Internal\IServiceManagement
      */
     private function _buildServiceManagement($config)
     {
@@ -336,7 +336,7 @@ class ServicesBuilder implements IServiceBuilder
      * 
      * @return WindowsAzure\Queue\Internal\IQueue
      *       | WindowsAzure\Blob\Internal\IBlob
-     *       | WindowsAzure\Services\Blob\ITable
+     *       | WindowsAzure\Table\Internal\ITable
      *       | WindowsAzure\ServiceBus\Internal\IServiceBus 
      *       | WindowsAzure\ServiceBus\Internal\IWrap 
      */

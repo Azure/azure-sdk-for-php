@@ -15,14 +15,14 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   WindowsAzure\Services\ServiceManagement
+ * @package   WindowsAzure\ServiceManagement
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
  
-namespace WindowsAzure\Services\ServiceManagement;
+namespace WindowsAzure\ServiceManagement;
 use WindowsAzure\Common\Internal\Validate;
 use WindowsAzure\Common\Configuration;
 use WindowsAzure\Common\Internal\IServiceBuilder;
@@ -32,7 +32,7 @@ use WindowsAzure\Common\Internal\Resources;
  * Factory for creating IServiceManagement objects
  *
  * @category  Microsoft
- * @package   WindowsAzure\Services\ServiceManagement
+ * @package   WindowsAzure\ServiceManagement
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
@@ -47,7 +47,7 @@ class ServiceManagementService
      * @param WindowsAzure\Common\Configuration    $config  The config object.
      * @param WindowsAzure\Common\Internal\IServicesBuilder $builder The builder object.
      * 
-     * @return WindowsAzure\Services\ServiceManagement\IServiceManagement
+     * @return WindowsAzure\ServiceManagement\Internal\IServiceManagement
      */
     public static function create($config, $builder = null)
     {

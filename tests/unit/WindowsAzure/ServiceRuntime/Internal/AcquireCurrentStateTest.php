@@ -15,22 +15,22 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   Tests\Unit\WindowsAzure\ServiceRuntime
+ * @package   Tests\Unit\WindowsAzure\ServiceRuntime\Internal
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
-namespace Tests\Unit\WindowsAzure\ServiceRuntime;
+namespace Tests\Unit\WindowsAzure\ServiceRuntime\Internal;
 use Tests\Framework\TestResources;
-use WindowsAzure\ServiceRuntime\AcquireCurrentState;
-use WindowsAzure\ServiceRuntime\CurrentStatus;
+use WindowsAzure\ServiceRuntime\Internal\AcquireCurrentState;
+use WindowsAzure\ServiceRuntime\Internal\CurrentStatus;
 
 /**
  * Unit tests for class AcquireCurrentState.
  *
  * @category  Microsoft
- * @package   Tests\Unit\WindowsAzure\ServiceRuntime
+ * @package   Tests\Unit\WindowsAzure\ServiceRuntime\Internal
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
@@ -40,10 +40,10 @@ use WindowsAzure\ServiceRuntime\CurrentStatus;
 class AcquireCurrentStateTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @covers WindowsAzure\ServiceRuntime\AcquireCurrentState::__construct
-     * @covers WindowsAzure\ServiceRuntime\AcquireCurrentState::getIncarnation
-     * @covers WindowsAzure\ServiceRuntime\AcquireCurrentState::getStatus
-     * @covers WindowsAzure\ServiceRuntime\AcquireCurrentState::getExpiration
+     * @covers WindowsAzure\ServiceRuntime\Internal\AcquireCurrentState::__construct
+     * @covers WindowsAzure\ServiceRuntime\Internal\AcquireCurrentState::getIncarnation
+     * @covers WindowsAzure\ServiceRuntime\Internal\AcquireCurrentState::getStatus
+     * @covers WindowsAzure\ServiceRuntime\Internal\AcquireCurrentState::getExpiration
      */
     public function testConstruct()
     {

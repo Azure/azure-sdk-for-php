@@ -15,20 +15,20 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   Tests\Unit\WindowsAzure\ServiceRuntime
+ * @package   Tests\Unit\WindowsAzure\ServiceRuntime\Internal
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
-namespace Tests\Unit\WindowsAzure\ServiceRuntime;
+namespace Tests\Unit\WindowsAzure\ServiceRuntime\Internal;
 use Tests\Framework\TestResources;
-use WindowsAzure\ServiceRuntime\AcquireCurrentState;
-use WindowsAzure\ServiceRuntime\CurrentStatus;
-use WindowsAzure\ServiceRuntime\FileInputChannel;
-use WindowsAzure\ServiceRuntime\FileOutputChannel;
-use WindowsAzure\ServiceRuntime\ReleaseCurrentState;
-use WindowsAzure\ServiceRuntime\XmlCurrentStateSerializer;
+use WindowsAzure\ServiceRuntime\Internal\AcquireCurrentState;
+use WindowsAzure\ServiceRuntime\Internal\CurrentStatus;
+use WindowsAzure\ServiceRuntime\Internal\FileInputChannel;
+use WindowsAzure\ServiceRuntime\Internal\FileOutputChannel;
+use WindowsAzure\ServiceRuntime\Internal\ReleaseCurrentState;
+use WindowsAzure\ServiceRuntime\Internal\XmlCurrentStateSerializer;
 
 require_once 'vfsStream/vfsStream.php';
 
@@ -36,7 +36,7 @@ require_once 'vfsStream/vfsStream.php';
  * Unit tests for class XmlCurrentStateSerializer.
  *
  * @category  Microsoft
- * @package   Tests\Unit\WindowsAzure\ServiceRuntime
+ * @package   Tests\Unit\WindowsAzure\ServiceRuntime\Internal
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
@@ -46,7 +46,7 @@ require_once 'vfsStream/vfsStream.php';
 class XmlCurrentStateSerializerTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @covers WindowsAzure\ServiceRuntime\XmlCurrentStateSerializer::serialize
+     * @covers WindowsAzure\ServiceRuntime\Internal\XmlCurrentStateSerializer::serialize
      */
     public function testSerializeAcquire()
     {
@@ -98,7 +98,7 @@ class XmlCurrentStateSerializerTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers WindowsAzure\ServiceRuntime\XmlCurrentStateSerializer::serialize
+     * @covers WindowsAzure\ServiceRuntime\Internal\XmlCurrentStateSerializer::serialize
      */
     public function testSerializeRelease()
     {

@@ -15,32 +15,32 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   Tests\Unit\WindowsAzure\ServiceRuntime
+ * @package   Tests\Unit\WindowsAzure\ServiceRuntime\Internal
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
-namespace Tests\Unit\WindowsAzure\ServiceRuntime;
+namespace Tests\Unit\WindowsAzure\ServiceRuntime\Internal;
 
 use Tests\Framework\TestResources;
 use WindowsAzure\Common\Internal\Utilities;
-use WindowsAzure\ServiceRuntime\AcquireCurrentState;
-use WindowsAzure\ServiceRuntime\ChunkedGoalStateDeserializer;
-use WindowsAzure\ServiceRuntime\CurrentStatus;
-use WindowsAzure\ServiceRuntime\FileInputChannel;
-use WindowsAzure\ServiceRuntime\FileOutputChannel;
-use WindowsAzure\ServiceRuntime\Protocol1RuntimeClient;
-use WindowsAzure\ServiceRuntime\Protocol1RuntimeCurrentStateClient;
-use WindowsAzure\ServiceRuntime\Protocol1RuntimeGoalStateClient;
-use WindowsAzure\ServiceRuntime\XmlCurrentStateSerializer;
-use WindowsAzure\ServiceRuntime\XmlRoleEnvironmentDataDeserializer;
+use WindowsAzure\ServiceRuntime\Internal\AcquireCurrentState;
+use WindowsAzure\ServiceRuntime\Internal\ChunkedGoalStateDeserializer;
+use WindowsAzure\ServiceRuntime\Internal\CurrentStatus;
+use WindowsAzure\ServiceRuntime\Internal\FileInputChannel;
+use WindowsAzure\ServiceRuntime\Internal\FileOutputChannel;
+use WindowsAzure\ServiceRuntime\Internal\Protocol1RuntimeClient;
+use WindowsAzure\ServiceRuntime\Internal\Protocol1RuntimeCurrentStateClient;
+use WindowsAzure\ServiceRuntime\Internal\Protocol1RuntimeGoalStateClient;
+use WindowsAzure\ServiceRuntime\Internal\XmlCurrentStateSerializer;
+use WindowsAzure\ServiceRuntime\Internal\XmlRoleEnvironmentDataDeserializer;
 
 /**
  * Unit tests for class Protocol1RuntimeClient.
  *
  * @category  Microsoft
- * @package   Tests\Unit\WindowsAzure\ServiceRuntime
+ * @package   Tests\Unit\WindowsAzure\ServiceRuntime\Internal
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
@@ -50,7 +50,7 @@ use WindowsAzure\ServiceRuntime\XmlRoleEnvironmentDataDeserializer;
 class Protocol1RuntimeClientTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @covers WindowsAzure\ServiceRuntime\Protocol1RuntimeClient::__construct
+     * @covers WindowsAzure\ServiceRuntime\Internal\Protocol1RuntimeClient::__construct
      */
     public function testConstruct()
     {
@@ -69,12 +69,12 @@ class Protocol1RuntimeClientTest extends \PHPUnit_Framework_TestCase
             $endpoint);
         
         // Test
-        $this->assertInstanceOf('\WindowsAzure\\ServiceRuntime\\Protocol1RuntimeClient',
+        $this->assertInstanceOf('WindowsAzure\ServiceRuntime\Internal\Protocol1RuntimeClient',
             $protocol1RuntimeClient);
     }
     
     /**
-     * @covers WindowsAzure\ServiceRuntime\Protocol1RuntimeClient::getCurrentGoalState
+     * @covers WindowsAzure\ServiceRuntime\Internal\Protocol1RuntimeClient::getCurrentGoalState
      */
     public function testGetCurrentGoalState()
     {
@@ -144,13 +144,13 @@ class Protocol1RuntimeClientTest extends \PHPUnit_Framework_TestCase
 
         // Test
         $this->assertInstanceOf(
-            '\WindowsAzure\\ServiceRuntime\\GoalState',
+            'WindowsAzure\ServiceRuntime\Internal\GoalState',
             $protocol1RuntimeClient->getCurrentGoalState()
         );
     }
     
    /**
-     * @covers WindowsAzure\ServiceRuntime\Protocol1RuntimeClient::getRoleEnvironmentData
+     * @covers WindowsAzure\ServiceRuntime\Internal\Protocol1RuntimeClient::getRoleEnvironmentData
      */
     public function testGetRoleEnvironmentData()
     {
@@ -220,13 +220,13 @@ class Protocol1RuntimeClientTest extends \PHPUnit_Framework_TestCase
 
         // Test
         $this->assertInstanceOf(
-            '\WindowsAzure\\ServiceRuntime\\RoleEnvironmentData',
+            'WindowsAzure\ServiceRuntime\Internal\RoleEnvironmentData',
             $protocol1RuntimeClient->getRoleEnvironmentData()
         );
     }
     
     /**
-     * @covers WindowsAzure\ServiceRuntime\Protocol1RuntimeClient::setCurrentState
+     * @covers WindowsAzure\ServiceRuntime\Internal\Protocol1RuntimeClient::setCurrentState
      */
     public function testSetCurrentState()
     {

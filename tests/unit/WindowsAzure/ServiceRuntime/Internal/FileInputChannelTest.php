@@ -15,17 +15,17 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   Tests\Unit\WindowsAzure\ServiceRuntime
+ * @package   Tests\Unit\WindowsAzure\ServiceRuntime\Internal
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
-namespace Tests\Unit\WindowsAzure\ServiceRuntime;
+namespace Tests\Unit\WindowsAzure\ServiceRuntime\Internal;
 use Tests\Framework\TestResources;
 use WindowsAzure\Common\Internal\Utilities;
-use WindowsAzure\ServiceRuntime\ChannelNotAvailableException;
-use WindowsAzure\ServiceRuntime\FileInputChannel;
+use WindowsAzure\ServiceRuntime\Internal\ChannelNotAvailableException;
+use WindowsAzure\ServiceRuntime\Internal\FileInputChannel;
 
 require_once 'vfsStream/vfsStream.php';
 
@@ -33,7 +33,7 @@ require_once 'vfsStream/vfsStream.php';
  * Unit tests for class FileInputChannel.
  *
  * @category  Microsoft
- * @package   Tests\Unit\WindowsAzure\ServiceRuntime
+ * @package   Tests\Unit\WindowsAzure\ServiceRuntime\Internal
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
@@ -43,8 +43,8 @@ require_once 'vfsStream/vfsStream.php';
 class FileInputChannelTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @covers WindowsAzure\ServiceRuntime\FileInputChannel::getInputStream
-     * @covers WindowsAzure\ServiceRuntime\FileInputChannel::closeInputStream
+     * @covers WindowsAzure\ServiceRuntime\Internal\FileInputChannel::getInputStream
+     * @covers WindowsAzure\ServiceRuntime\Internal\FileInputChannel::closeInputStream
      */
     public function testGetInputStream()
     {

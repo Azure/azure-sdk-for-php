@@ -15,21 +15,21 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   WindowsAzure\Services\ServiceManagement
+ * @package   WindowsAzure\ServiceManagement\Internal
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
  
-namespace WindowsAzure\Services\ServiceManagement;
+namespace WindowsAzure\ServiceManagement\Internal;
 use WindowsAzure\Common\Internal\FilterableService;
 
 /**
  * The Windows Azure service management REST API wrappers.
  *
  * @category  Microsoft
- * @package   WindowsAzure\Services\ServiceManagement
+ * @package   WindowsAzure\ServiceManagement\Internal
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0

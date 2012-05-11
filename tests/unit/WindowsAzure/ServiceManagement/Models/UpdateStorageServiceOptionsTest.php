@@ -15,21 +15,21 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   Tests\Unit\WindowsAzure\Services\ServiceManagement\Models
+ * @package   Tests\Unit\WindowsAzure\ServiceManagement\Models
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
 
-namespace Tests\Unit\WindowsAzure\Services\ServiceManagement\Models;
-use WindowsAzure\Services\ServiceManagement\Models\UpdateStorageServiceOptions;
+namespace Tests\Unit\WindowsAzure\ServiceManagement\Models;
+use WindowsAzure\ServiceManagement\Models\UpdateStorageServiceOptions;
 
 /**
  * Unit tests for class UpdateStorageServiceOptions
  *
  * @category  Microsoft
- * @package   Tests\Unit\WindowsAzure\Services\ServiceManagement\Models
+ * @package   Tests\Unit\WindowsAzure\ServiceManagement\Models
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
@@ -39,8 +39,8 @@ use WindowsAzure\Services\ServiceManagement\Models\UpdateStorageServiceOptions;
 class UpdateStorageServiceOptionsTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @covers WindowsAzure\Services\ServiceManagement\Models\UpdateStorageServiceOptions::setDescription
-     * @covers WindowsAzure\Services\ServiceManagement\Models\UpdateStorageServiceOptions::getDescription
+     * @covers WindowsAzure\ServiceManagement\Models\UpdateStorageServiceOptions::setDescription
+     * @covers WindowsAzure\ServiceManagement\Models\UpdateStorageServiceOptions::getDescription
      */
     public function testSetDescription()
     {
@@ -56,8 +56,8 @@ class UpdateStorageServiceOptionsTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers WindowsAzure\Services\ServiceManagement\Models\UpdateStorageServiceOptions::setLabel
-     * @covers WindowsAzure\Services\ServiceManagement\Models\UpdateStorageServiceOptions::getLabel
+     * @covers WindowsAzure\ServiceManagement\Models\UpdateStorageServiceOptions::setLabel
+     * @covers WindowsAzure\ServiceManagement\Models\UpdateStorageServiceOptions::getLabel
      */
     public function testSetLabel()
     {

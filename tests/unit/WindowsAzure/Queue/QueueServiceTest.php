@@ -15,14 +15,14 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   Tests\Unit\WindowsAzure\Services\Queue
+ * @package   Tests\Unit\WindowsAzure\Queue
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
 
-namespace Tests\Unit\WindowsAzure\Services\Queue;
+namespace Tests\Unit\WindowsAzure\Queue;
 use WindowsAzure\Queue\QueueService;
 use WindowsAzure\Common\Configuration;
 use Tests\Framework\TestResources;
@@ -32,7 +32,7 @@ use WindowsAzure\Queue\QueueSettings;
  * Unit tests for class QueueService
  *
  * @category  Microsoft
- * @package   Tests\Unit\WindowsAzure\Services\Queue
+ * @package   Tests\Unit\WindowsAzure\Queue
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0

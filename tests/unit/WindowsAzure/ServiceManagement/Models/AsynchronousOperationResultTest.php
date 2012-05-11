@@ -15,21 +15,21 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   Tests\Unit\WindowsAzure\Services\ServiceManagement\Models
+ * @package   Tests\Unit\WindowsAzure\ServiceManagement\Models
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
 
-namespace Tests\Unit\WindowsAzure\Services\ServiceManagement\Models;
-use WindowsAzure\Services\ServiceManagement\Models\AsynchronousOperationResult;
+namespace Tests\Unit\WindowsAzure\ServiceManagement\Models;
+use WindowsAzure\ServiceManagement\Models\AsynchronousOperationResult;
 
 /**
  * Unit tests for class AsynchronousOperationResult
  *
  * @category  Microsoft
- * @package   Tests\Unit\WindowsAzure\Services\ServiceManagement\Models
+ * @package   Tests\Unit\WindowsAzure\ServiceManagement\Models
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
@@ -39,7 +39,7 @@ use WindowsAzure\Services\ServiceManagement\Models\AsynchronousOperationResult;
 class AsynchronousOperationResultTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @covers WindowsAzure\Services\ServiceManagement\Models\AsynchronousOperationResult::create
+     * @covers WindowsAzure\ServiceManagement\Models\AsynchronousOperationResult::create
      */
     public function testCreate()
     {
@@ -55,8 +55,8 @@ class AsynchronousOperationResultTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers WindowsAzure\Services\ServiceManagement\Models\AsynchronousOperationResult::setRequestId
-     * @covers WindowsAzure\Services\ServiceManagement\Models\AsynchronousOperationResult::getRequestId
+     * @covers WindowsAzure\ServiceManagement\Models\AsynchronousOperationResult::setRequestId
+     * @covers WindowsAzure\ServiceManagement\Models\AsynchronousOperationResult::getRequestId
      */
     public function testSetRequestId()
     {

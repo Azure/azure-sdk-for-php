@@ -15,16 +15,16 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   Tests\Unit\WindowsAzure\ServiceRuntime
+ * @package   Tests\Unit\WindowsAzure\ServiceRuntime\Internal
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
-namespace Tests\Unit\WindowsAzure\ServiceRuntime;
+namespace Tests\Unit\WindowsAzure\ServiceRuntime\Internal;
 use Tests\Framework\TestResources;
-use WindowsAzure\ServiceRuntime\FileInputChannel;
-use WindowsAzure\ServiceRuntime\XmlRoleEnvironmentDataDeserializer;
+use WindowsAzure\ServiceRuntime\Internal\FileInputChannel;
+use WindowsAzure\ServiceRuntime\Internal\XmlRoleEnvironmentDataDeserializer;
 
 require_once 'vfsStream/vfsStream.php';
 
@@ -32,7 +32,7 @@ require_once 'vfsStream/vfsStream.php';
  * Unit tests for class XmlRoleEnvironmentDataDeserializer.
  *
  * @category  Microsoft
- * @package   Tests\Unit\WindowsAzure\ServiceRuntime
+ * @package   Tests\Unit\WindowsAzure\ServiceRuntime\Internal
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
@@ -42,7 +42,7 @@ require_once 'vfsStream/vfsStream.php';
 class XmlRoleEnvironmentDataDeserializerTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @covers WindowsAzure\ServiceRuntime\XmlRoleEnvironmentDataDeserializer::deserialize
+     * @covers WindowsAzure\ServiceRuntime\Internal\XmlRoleEnvironmentDataDeserializer::deserialize
      */
     public function testDeserialize()
     {
@@ -90,7 +90,7 @@ class XmlRoleEnvironmentDataDeserializerTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\ServiceRuntime\XmlRoleEnvironmentDataDeserializer::_translateConfigurationSettings
+     * @covers WindowsAzure\ServiceRuntime\Internal\XmlRoleEnvironmentDataDeserializer::_translateConfigurationSettings
      */
     public function testTranslateConfigurationSettings_NoSettings() {
         // Setup
@@ -130,7 +130,7 @@ class XmlRoleEnvironmentDataDeserializerTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers WindowsAzure\ServiceRuntime\XmlRoleEnvironmentDataDeserializer::_translateConfigurationSettings
+     * @covers WindowsAzure\ServiceRuntime\Internal\XmlRoleEnvironmentDataDeserializer::_translateConfigurationSettings
      */
     public function testTranslateConfigurationSettings_OneSetting() {
         // Setup
@@ -172,7 +172,7 @@ class XmlRoleEnvironmentDataDeserializerTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers WindowsAzure\ServiceRuntime\XmlRoleEnvironmentDataDeserializer::_translateConfigurationSettings
+     * @covers WindowsAzure\ServiceRuntime\Internal\XmlRoleEnvironmentDataDeserializer::_translateConfigurationSettings
      */
     public function testTranslateConfigurationSettings_MultipleSettings() {
         // Setup
@@ -215,7 +215,7 @@ class XmlRoleEnvironmentDataDeserializerTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers WindowsAzure\ServiceRuntime\XmlRoleEnvironmentDataDeserializer::_translateLocalResources
+     * @covers WindowsAzure\ServiceRuntime\Internal\XmlRoleEnvironmentDataDeserializer::_translateLocalResources
      */
     public function testTranslateLocalResources_NoSettings() {
         // Setup
@@ -255,7 +255,7 @@ class XmlRoleEnvironmentDataDeserializerTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers WindowsAzure\ServiceRuntime\XmlRoleEnvironmentDataDeserializer::_translateLocalResources
+     * @covers WindowsAzure\ServiceRuntime\Internal\XmlRoleEnvironmentDataDeserializer::_translateLocalResources
      */
     public function testTranslateLocalResources_OneSetting() {
         // Setup
@@ -297,7 +297,7 @@ class XmlRoleEnvironmentDataDeserializerTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers WindowsAzure\ServiceRuntime\XmlRoleEnvironmentDataDeserializer::_translateLocalResources
+     * @covers WindowsAzure\ServiceRuntime\Internal\XmlRoleEnvironmentDataDeserializer::_translateLocalResources
      */
     public function testTranslateLocalResources_MultipleSettings() {
         // Setup
@@ -340,8 +340,8 @@ class XmlRoleEnvironmentDataDeserializerTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers WindowsAzure\ServiceRuntime\XmlRoleEnvironmentDataDeserializer::_translateCurrentInstance
-     * @covers WindowsAzure\ServiceRuntime\XmlRoleEnvironmentDataDeserializer::_translateRoleInstanceEndpoints
+     * @covers WindowsAzure\ServiceRuntime\Internal\XmlRoleEnvironmentDataDeserializer::_translateCurrentInstance
+     * @covers WindowsAzure\ServiceRuntime\Internal\XmlRoleEnvironmentDataDeserializer::_translateRoleInstanceEndpoints
      */
     public function testTranslateCurrentInstance_OneEndpoint() {
         // Setup
@@ -383,8 +383,8 @@ class XmlRoleEnvironmentDataDeserializerTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers WindowsAzure\ServiceRuntime\XmlRoleEnvironmentDataDeserializer::_translateCurrentInstance
-     * @covers WindowsAzure\ServiceRuntime\XmlRoleEnvironmentDataDeserializer::_translateRoleInstanceEndpoints
+     * @covers WindowsAzure\ServiceRuntime\Internal\XmlRoleEnvironmentDataDeserializer::_translateCurrentInstance
+     * @covers WindowsAzure\ServiceRuntime\Internal\XmlRoleEnvironmentDataDeserializer::_translateRoleInstanceEndpoints
      */
     public function testTranslateCurrentInstance_MultipleEndpoints() {
         // Setup
@@ -427,8 +427,8 @@ class XmlRoleEnvironmentDataDeserializerTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers WindowsAzure\ServiceRuntime\XmlRoleEnvironmentDataDeserializer::_translateRoles
-     * @covers WindowsAzure\ServiceRuntime\XmlRoleEnvironmentDataDeserializer::_translateRoleInstances
+     * @covers WindowsAzure\ServiceRuntime\Internal\XmlRoleEnvironmentDataDeserializer::_translateRoles
+     * @covers WindowsAzure\ServiceRuntime\Internal\XmlRoleEnvironmentDataDeserializer::_translateRoleInstances
      */
     public function testTranslateRoles_MultipleRoles() {
         // Setup
@@ -493,8 +493,8 @@ class XmlRoleEnvironmentDataDeserializerTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers WindowsAzure\ServiceRuntime\XmlRoleEnvironmentDataDeserializer::_translateRoles
-     * @covers WindowsAzure\ServiceRuntime\XmlRoleEnvironmentDataDeserializer::_translateRoleInstances
+     * @covers WindowsAzure\ServiceRuntime\Internal\XmlRoleEnvironmentDataDeserializer::_translateRoles
+     * @covers WindowsAzure\ServiceRuntime\Internal\XmlRoleEnvironmentDataDeserializer::_translateRoleInstances
      */
     public function testTranslateRoles_OneRoles() {
         // Setup

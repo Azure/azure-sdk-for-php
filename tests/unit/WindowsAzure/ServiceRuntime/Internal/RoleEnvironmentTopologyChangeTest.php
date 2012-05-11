@@ -15,22 +15,22 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   Tests\Unit\WindowsAzure\ServiceRuntime
+ * @package   Tests\Unit\WindowsAzure\ServiceRuntime\Internal
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
-namespace Tests\Unit\WindowsAzure\ServiceRuntime;
+namespace Tests\Unit\WindowsAzure\ServiceRuntime\Internal;
 use Tests\Framework\TestResources;
 use WindowsAzure\Common\Internal\Utilities;
-use WindowsAzure\ServiceRuntime\RoleEnvironmentTopologyChange;
+use WindowsAzure\ServiceRuntime\Internal\RoleEnvironmentTopologyChange;
 
 /**
  * Unit tests for class RoleEnvironmentTopologyChange.
  *
  * @category  Microsoft
- * @package   Tests\Unit\WindowsAzure\ServiceRuntime
+ * @package   Tests\Unit\WindowsAzure\ServiceRuntime\Internal
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
@@ -40,8 +40,8 @@ use WindowsAzure\ServiceRuntime\RoleEnvironmentTopologyChange;
 class RoleEnvironmentTopologyChangeTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @covers WindowsAzure\ServiceRuntime\RoleEnvironmentTopologyChange::__construct
-     * @covers WindowsAzure\ServiceRuntime\RoleEnvironmentTopologyChange::getRoleName
+     * @covers WindowsAzure\ServiceRuntime\Internal\RoleEnvironmentTopologyChange::__construct
+     * @covers WindowsAzure\ServiceRuntime\Internal\RoleEnvironmentTopologyChange::getRoleName
      */
     public function testGetRoleName()
     {

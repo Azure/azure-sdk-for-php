@@ -15,7 +15,7 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   Tests\Unit\WindowsAzure\Services\Blob
+ * @package   Tests\Unit\WindowsAzure\Blob
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  *            Albert Cheng <gongchen at the largest software company>
  * @copyright 2012 Microsoft Corporation
@@ -23,7 +23,7 @@
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
 
-namespace Tests\Unit\WindowsAzure\Services\Blob;
+namespace Tests\Unit\WindowsAzure\Blob;
 use Tests\Framework\VirtualFileSystem;
 use Tests\Framework\BlobServiceRestProxyTestBase;
 use Tests\Framework\TestResources;
@@ -58,7 +58,7 @@ use WindowsAzure\Blob\Models\CreateBlobSnapshotResult;
  * Unit tests for class BlobRestProxy
  *
  * @category  Microsoft
- * @package   Tests\Unit\WindowsAzure\Services\Blob
+ * @package   Tests\Unit\WindowsAzure\Blob
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0

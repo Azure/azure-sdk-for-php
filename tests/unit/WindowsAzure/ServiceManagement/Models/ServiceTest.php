@@ -15,15 +15,15 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   Tests\Unit\WindowsAzure\Services\ServiceManagement\Models
+ * @package   Tests\Unit\WindowsAzure\ServiceManagement\Models
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
 
-namespace Tests\Unit\WindowsAzure\Services\ServiceManagement\Models;
-use WindowsAzure\Services\ServiceManagement\Models\Service;
+namespace Tests\Unit\WindowsAzure\ServiceManagement\Models;
+use WindowsAzure\ServiceManagement\Models\Service;
 use WindowsAzure\Common\Internal\Serialization\XmlSerializer;
 use WindowsAzure\Common\Internal\Resources;
 
@@ -32,7 +32,7 @@ use WindowsAzure\Common\Internal\Resources;
  * Unit tests for class Service
  *
  * @category  Microsoft
- * @package   Tests\Unit\WindowsAzure\Services\ServiceManagement\Models
+ * @package   Tests\Unit\WindowsAzure\ServiceManagement\Models
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
@@ -42,9 +42,9 @@ use WindowsAzure\Common\Internal\Resources;
 class ServiceTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @covers WindowsAzure\Services\ServiceManagement\Models\Service::setName
-     * @covers WindowsAzure\Services\ServiceManagement\Models\Service::getName
-     * @covers WindowsAzure\Services\ServiceManagement\Models\Service::__construct
+     * @covers WindowsAzure\ServiceManagement\Models\Service::setName
+     * @covers WindowsAzure\ServiceManagement\Models\Service::getName
+     * @covers WindowsAzure\ServiceManagement\Models\Service::__construct
      */
     public function testSetName()
     {
@@ -60,9 +60,9 @@ class ServiceTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers WindowsAzure\Services\ServiceManagement\Models\Service::setLabel
-     * @covers WindowsAzure\Services\ServiceManagement\Models\Service::getLabel
-     * @covers WindowsAzure\Services\ServiceManagement\Models\Service::__construct
+     * @covers WindowsAzure\ServiceManagement\Models\Service::setLabel
+     * @covers WindowsAzure\ServiceManagement\Models\Service::getLabel
+     * @covers WindowsAzure\ServiceManagement\Models\Service::__construct
      */
     public function testSetLabel()
     {
@@ -78,9 +78,9 @@ class ServiceTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers WindowsAzure\Services\ServiceManagement\Models\Service::setDescription
-     * @covers WindowsAzure\Services\ServiceManagement\Models\Service::getDescription
-     * @covers WindowsAzure\Services\ServiceManagement\Models\Service::__construct
+     * @covers WindowsAzure\ServiceManagement\Models\Service::setDescription
+     * @covers WindowsAzure\ServiceManagement\Models\Service::getDescription
+     * @covers WindowsAzure\ServiceManagement\Models\Service::__construct
      */
     public function testSetDescription()
     {
@@ -96,9 +96,9 @@ class ServiceTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers WindowsAzure\Services\ServiceManagement\Models\Service::setLocation
-     * @covers WindowsAzure\Services\ServiceManagement\Models\Service::getLocation
-     * @covers WindowsAzure\Services\ServiceManagement\Models\Service::__construct
+     * @covers WindowsAzure\ServiceManagement\Models\Service::setLocation
+     * @covers WindowsAzure\ServiceManagement\Models\Service::getLocation
+     * @covers WindowsAzure\ServiceManagement\Models\Service::__construct
      */
     public function testSetLocation()
     {
@@ -114,9 +114,9 @@ class ServiceTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers WindowsAzure\Services\ServiceManagement\Models\Service::addSerializationProperty
-     * @covers WindowsAzure\Services\ServiceManagement\Models\Service::getSerializationPropertyValue
-     * @covers WindowsAzure\Services\ServiceManagement\Models\Service::__construct
+     * @covers WindowsAzure\ServiceManagement\Models\Service::addSerializationProperty
+     * @covers WindowsAzure\ServiceManagement\Models\Service::getSerializationPropertyValue
+     * @covers WindowsAzure\ServiceManagement\Models\Service::__construct
      */
     public function testAddSerializationProperty()
     {
@@ -133,9 +133,9 @@ class ServiceTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers WindowsAzure\Services\ServiceManagement\Models\Service::serialize
-     * @covers WindowsAzure\Services\ServiceManagement\Models\Service::__construct
-     * @covers WindowsAzure\Services\ServiceManagement\Models\Service::toArray
+     * @covers WindowsAzure\ServiceManagement\Models\Service::serialize
+     * @covers WindowsAzure\ServiceManagement\Models\Service::__construct
+     * @covers WindowsAzure\ServiceManagement\Models\Service::toArray
      */
     public function testSerialize()
     {
@@ -165,7 +165,7 @@ class ServiceTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers WindowsAzure\Services\ServiceManagement\Models\Service::serialize
+     * @covers WindowsAzure\ServiceManagement\Models\Service::serialize
      */
     public function testSerializeWithInvalidSerializer()
     {

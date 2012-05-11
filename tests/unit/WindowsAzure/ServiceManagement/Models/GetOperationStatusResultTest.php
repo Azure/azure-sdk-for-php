@@ -15,23 +15,23 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   Tests\Unit\WindowsAzure\Services\ServiceManagement\Models
+ * @package   Tests\Unit\WindowsAzure\ServiceManagement\Models
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
 
-namespace Tests\Unit\WindowsAzure\Services\ServiceManagement\Models;
-use WindowsAzure\Services\ServiceManagement\Models\GetOperationStatusResult;
+namespace Tests\Unit\WindowsAzure\ServiceManagement\Models;
+use WindowsAzure\ServiceManagement\Models\GetOperationStatusResult;
 use WindowsAzure\Common\Internal\ServiceException;
-use WindowsAzure\Services\ServiceManagement\Models\OperationStatus;
+use WindowsAzure\ServiceManagement\Models\OperationStatus;
 
 /**
  * Unit tests for class GetOperationStatusResult
  *
  * @category  Microsoft
- * @package   Tests\Unit\WindowsAzure\Services\ServiceManagement\Models
+ * @package   Tests\Unit\WindowsAzure\ServiceManagement\Models
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
@@ -41,7 +41,7 @@ use WindowsAzure\Services\ServiceManagement\Models\OperationStatus;
 class GetOperationStatusResultTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @covers WindowsAzure\Services\ServiceManagement\Models\GetOperationStatusResult::create
+     * @covers WindowsAzure\ServiceManagement\Models\GetOperationStatusResult::create
      */
     public function testCreateWithError()
     {
@@ -62,8 +62,8 @@ class GetOperationStatusResultTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers WindowsAzure\Services\ServiceManagement\Models\GetOperationStatusResult::setId
-     * @covers WindowsAzure\Services\ServiceManagement\Models\GetOperationStatusResult::getId
+     * @covers WindowsAzure\ServiceManagement\Models\GetOperationStatusResult::setId
+     * @covers WindowsAzure\ServiceManagement\Models\GetOperationStatusResult::getId
      */
     public function testSetId()
     {
@@ -79,8 +79,8 @@ class GetOperationStatusResultTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers WindowsAzure\Services\ServiceManagement\Models\GetOperationStatusResult::setStatus
-     * @covers WindowsAzure\Services\ServiceManagement\Models\GetOperationStatusResult::getStatus
+     * @covers WindowsAzure\ServiceManagement\Models\GetOperationStatusResult::setStatus
+     * @covers WindowsAzure\ServiceManagement\Models\GetOperationStatusResult::getStatus
      */
     public function testSetStatus()
     {
@@ -96,8 +96,8 @@ class GetOperationStatusResultTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers WindowsAzure\Services\ServiceManagement\Models\GetOperationStatusResult::setHttpStatusCode
-     * @covers WindowsAzure\Services\ServiceManagement\Models\GetOperationStatusResult::getHttpStatusCode
+     * @covers WindowsAzure\ServiceManagement\Models\GetOperationStatusResult::setHttpStatusCode
+     * @covers WindowsAzure\ServiceManagement\Models\GetOperationStatusResult::getHttpStatusCode
      */
     public function testSetHttpStatusCode()
     {
@@ -113,8 +113,8 @@ class GetOperationStatusResultTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers WindowsAzure\Services\ServiceManagement\Models\GetOperationStatusResult::setError
-     * @covers WindowsAzure\Services\ServiceManagement\Models\GetOperationStatusResult::getError
+     * @covers WindowsAzure\ServiceManagement\Models\GetOperationStatusResult::setError
+     * @covers WindowsAzure\ServiceManagement\Models\GetOperationStatusResult::getError
      */
     public function testSetError()
     {

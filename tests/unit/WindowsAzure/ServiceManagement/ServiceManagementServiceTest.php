@@ -15,25 +15,25 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   Tests\Unit\WindowsAzure\Services\ServiceManagement
+ * @package   Tests\Unit\WindowsAzure\ServiceManagement
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
 
-namespace Tests\Unit\WindowsAzure\Services\ServiceManagement;
+namespace Tests\Unit\WindowsAzure\ServiceManagement;
 use Tests\Framework\TestResources;
 use WindowsAzure\Common\Internal\Resources;
 use WindowsAzure\Common\Configuration;
-use WindowsAzure\Services\ServiceManagement\ServiceManagementSettings;
-use WindowsAzure\Services\ServiceManagement\ServiceManagementService;
+use WindowsAzure\ServiceManagement\ServiceManagementSettings;
+use WindowsAzure\ServiceManagement\ServiceManagementService;
 
 /**
  * Unit tests for class ServiceManagementService
  *
  * @category  Microsoft
- * @package   Tests\Unit\WindowsAzure\Services\ServiceManagement
+ * @package   Tests\Unit\WindowsAzure\ServiceManagement
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
@@ -43,7 +43,7 @@ use WindowsAzure\Services\ServiceManagement\ServiceManagementService;
 class ServiceManagementServiceTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @covers WindowsAzure\Services\ServiceManagement\ServiceManagementService::create
+     * @covers WindowsAzure\ServiceManagement\ServiceManagementService::create
      */
     public function testCreateWithConfig()
     {
@@ -57,7 +57,7 @@ class ServiceManagementServiceTest extends \PHPUnit_Framework_TestCase
         $servicemanagementWrapper = ServiceManagementService::create($config);
         
         // Assert
-        $this->assertInstanceOf('WindowsAzure\Services\ServiceManagement\IServiceManagement', $servicemanagementWrapper);
+        $this->assertInstanceOf('WindowsAzure\ServiceManagement\Internal\IServiceManagement', $servicemanagementWrapper);
     }
 }
 
