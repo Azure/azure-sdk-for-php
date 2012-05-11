@@ -29,6 +29,7 @@ use WindowsAzure\Blob\BlobSettings;
 use WindowsAzure\Blob\BlobService;
 use Tests\Framework\TestResources;
 use WindowsAzure\Blob\Models\CreateContainerOptions;
+use WindowsAzure\Services\Blob\Models\ListContainersOptions;
 
 /**
  * TestBase class for each unit test class.
@@ -67,12 +68,59 @@ class BlobServiceRestProxyTestBase extends ServiceRestProxyTestBase
         $this->wrapper->createContainer($containerName, $options);
         $this->_createdContainers[] = $containerName;
     }
-    
+
+    public function createContainers($containerList, $containerPrefix = null) {
+        $containers = $this->listContainers($containerPrefix);
+        foreach($containerList as $container) {
+            if (array_search($container, $containers) === FALSE) {
+                $this->createContainer($container);
+            } else {
+                $listResults = $this->wrapper->listBlobs($container);
+                $blobs = $listResults->getBlobs();
+                foreach($blobs as $blob)  {
+                    try
+                    {
+                        $this->wrapper->deleteBlob($container, $blob->getName());
+                    }
+                    catch (\Exception $e)
+                    {
+                        // Ignore exception and continue.
+                        error_log($e->getMessage());
+                    }
+                }
+            }
+        }
+    }
+
     public function deleteContainer($containerName)
     {
         $this->wrapper->deleteContainer($containerName);
     }
-    
+
+    public function deleteContainers($containerList, $containerPrefix = null) {
+        $containers = $this->listContainers($containerPrefix);
+        foreach($containerList as $container)  {
+            if (!(array_search($container, $containers) === FALSE)) {
+                $this->deleteContainer($container);
+            }
+        }
+    }
+
+    public function listContainers($containerPrefix = null) {
+        $result = array();
+        $opts = new ListContainersOptions();
+        if (!is_null($containerPrefix)) {
+            $opts->setPrefix($containerPrefix);
+        }
+
+        $list = $this->wrapper->listContainers($opts);
+        foreach($list->getContainers() as $item)  {
+            array_push($result, $item->getName());
+        }
+
+        return $result;
+    }
+
     protected function tearDown()
     {
         parent::tearDown();

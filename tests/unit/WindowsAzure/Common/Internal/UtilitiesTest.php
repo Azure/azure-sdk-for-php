@@ -433,6 +433,23 @@ class UtilitiesTest extends \PHPUnit_Framework_TestCase
         // Assert
         $this->assertEquals($expected, $actual);
     }
+
+    /**
+     * @covers WindowsAzure\Utilities::arrayKeyExistsIgnoreCase
+     */
+    public function testKeysToLower()
+    {
+        // Setup
+        $expected = true;
+        $testKey = 'VaLuE';
+        $testArray = array('NamE' => 1, 'VALUe' => 20, '12M3' => 0);
+        
+        // Test
+        $actual = Utilities::arrayKeyExistsIgnoreCase($testKey, $testArray);
+        
+        // Assert
+        $this->assertEquals($expected, $actual);
+    }
 }
 
 ?>
