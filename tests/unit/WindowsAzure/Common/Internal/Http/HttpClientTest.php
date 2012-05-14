@@ -28,7 +28,7 @@ use Tests\Mock\WindowsAzure\Common\Internal\Filters\SimpleFilterMock;
 use WindowsAzure\Common\Internal\Resources;
 use WindowsAzure\Common\Internal\Http\HttpClient;
 use WindowsAzure\Common\Internal\Http\Url;
-use WindowsAzure\Common\Internal\ServiceException;
+use WindowsAzure\Common\ServiceException;
 use WindowsAzure\Common\Internal\InvalidArgumentTypeException;
 
 /**

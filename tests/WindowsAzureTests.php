@@ -7,7 +7,7 @@ spl_autoload_register(
       if ($classes === null) {
          $classes = array(
             'invalidargumenttypeexceptiontest' => '/unit/WindowsAzure/Common/Internal/InvalidArgumentTypeExceptionTest.php',
-            'serviceexceptiontest' => '/unit/WindowsAzure/Common/Internal/ServiceExceptionTest.php',
+            'serviceexceptiontest' => '/unit/WindowsAzure/Common/ServiceExceptionTest.php',
             'sharedkeyfiltertest' => '/unit/WindowsAzure/Common/Internal/Filters/SharedKeyFilterTest.php',
             'tests\\framework\\blobservicerestproxytestbase' => '/framework/BlobServiceRestProxyTestBase.php',
             'tests\\framework\\fiddlerfilter' => '/framework/FiddlerFilter.php',

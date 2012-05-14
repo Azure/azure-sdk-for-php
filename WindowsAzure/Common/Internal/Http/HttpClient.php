@@ -26,7 +26,7 @@ namespace WindowsAzure\Common\Internal\Http;
 use WindowsAzure\Common\Internal\Http\IHttpClient;
 use WindowsAzure\Common\Internal\IServiceFilter;
 use WindowsAzure\Common\Internal\Resources;
-use WindowsAzure\Common\Internal\ServiceException;
+use WindowsAzure\Common\ServiceException;
 use WindowsAzure\Common\Internal\Validate;
 use WindowsAzure\Common\Internal\Http\IUrl;
 
@@ -222,7 +222,7 @@ class HttpClient implements IHttpClient
      * send and then applied to the response.
      * @param IUrl  $url     Request url.
      * 
-     * @throws WindowsAzure\Common\Internal\ServiceException
+     * @throws WindowsAzure\Common\ServiceException
      * 
      * @return string The response body
      */

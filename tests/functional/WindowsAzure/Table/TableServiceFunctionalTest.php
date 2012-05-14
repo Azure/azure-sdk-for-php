@@ -29,7 +29,7 @@ namespace Tests\Functional\WindowsAzure\Table;
 use Tests\Functional\WindowsAzure\Table\FakeTableInfoEntry;
 use Tests\Functional\WindowsAzure\Table\MutatePivot;
 use WindowsAzure\Common\Internal\Utilities;
-use WindowsAzure\Common\Internal\ServiceException;
+use WindowsAzure\Common\ServiceException;
 use WindowsAzure\Common\Configuration;
 use WindowsAzure\Common\Models\Logging;
 use WindowsAzure\Common\Models\Metrics;
