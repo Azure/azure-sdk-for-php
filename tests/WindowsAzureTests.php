@@ -67,6 +67,7 @@ spl_autoload_register(
             'tests\\unit\\windowsazure\\blob\\models\\containerpropertiestest' => '/unit/WindowsAzure/Blob/Models/ContainerPropertiesTest.php',
             'tests\\unit\\windowsazure\\blob\\models\\containertest' => '/unit/WindowsAzure/Blob/Models/ContainerTest.php',
             'tests\\unit\\windowsazure\\blob\\models\\copybloboptionstest' => '/unit/WindowsAzure/Blob/Models/CopyBlobOptionsTest.php',
+            'tests\\unit\\windowsazure\\blob\\models\\copyblobresulttest' => '/unit/WindowsAzure/Blob/Models/CopyBlobResultTest.php',
             'tests\\unit\\windowsazure\\blob\\models\\createblobblockoptionstest' => '/unit/WindowsAzure/Blob/Models/CreateBlobBlockOptionsTest.php',
             'tests\\unit\\windowsazure\\blob\\models\\createbloboptionstest' => '/unit/WindowsAzure/Blob/Models/CreateBlobOptionsTest.php',
             'tests\\unit\\windowsazure\\blob\\models\\createblobpagesoptionstest' => '/unit/WindowsAzure/Blob/Models/CreateBlobPagesOptionsTest.php',

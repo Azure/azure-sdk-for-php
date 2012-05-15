@@ -40,19 +40,14 @@ class CopyBlobOptions extends BlobServiceOptions
 {
 
     /**
-     * @var \AccessCondition
+     * @var AccessCondition
      */
     private $_accessCondition;
     
     /**
-     * @var \AccessCondition
+     * @var AccessCondition
      */
     private $_sourceAccessCondition;
-
-    /**
-     * @var string
-     */
-    private $_copySource;
     
     /**
      * @var array
@@ -116,28 +111,6 @@ class CopyBlobOptions extends BlobServiceOptions
     public function setSourceAccessCondition($sourceAccessCondition)
     {
         $this->_sourceAccessCondition = $sourceAccessCondition;
-    }
-    
-    /**
-     * Gets copy source.
-     *
-     * @return string.
-     */
-    public function getCopySource()
-    {
-        return $this->_copySource;
-    }
-
-    /**
-     * Sets copy source.
-     *
-     * @param string $copySource value.
-     *
-     * @return none.
-     */
-    public function setCopySource($copySource)
-    {
-        $this->_copySource = $copySource;
     }
     
     /**

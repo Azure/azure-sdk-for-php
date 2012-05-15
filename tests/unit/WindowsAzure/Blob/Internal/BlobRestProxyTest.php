@@ -496,7 +496,7 @@ class BlobRestProxyTest extends BlobServiceRestProxyTestBase
         $this->assertEquals($blob1, $blobs[0]->getName());
         $this->assertEquals($blob2, $blobs[1]->getName());
         $this->assertEquals($blob3, $blobs[2]->getName());
-        $this->assertInstanceOf('\DateTime', $blobs[2]->getSnapshot());
+        $this->assertNull($blobs[2]->getSnapshot());
         $this->assertNotNull($blobs[2]->getUrl());
         $this->assertCount(0, $blobs[2]->getMetadata());
         $this->assertInstanceOf('WindowsAzure\Blob\Models\BlobProperties', $blobs[2]->getProperties());
@@ -1297,71 +1297,144 @@ class BlobRestProxyTest extends BlobServiceRestProxyTestBase
 
     /** 
      * @covers WindowsAzure\Blob\Internal\BlobRestProxy::copyBlob 
+     * @covers WindowsAzure\Blob\Internal\BlobRestProxy::_getCopyBlobSourceName
      */ 
-    public function testCopyBlobSuccess() 
-    { 
-        $sourceContainerName = 'copyblobsuccesssource'; 
-        $sourceBlobName = 'sourceBlobName';
-        $sourceBlobFullName = $sourceContainerName.'/'.$sourceBlobName;
+    public function testCopyBlobDifferentContainer()
+    {
+        // Setup
+        $sourceContainerName = 'copyblobdiffcontainerssource';
+        $sourceBlobName = 'sourceblob';
         $blobValue = 'testBlobValue'; 
-        
-        $this->createContainer($sourceContainerName); 
-        $this->wrapper->createBlockBlob( 
-            $sourceContainerName, $sourceBlobName, $blobValue); 
-        $destinationContainerName = 'copyblobsuccessdestination'; 
+        $destinationContainerName = 'copyblobdiffcontainersdestination'; 
+        $destinationBlobName = 'destinationblob';
+        $this->createContainer($sourceContainerName);
         $this->createContainer($destinationContainerName); 
-        $destinationBlobName = 'destinationBlob'; 
+        $this->wrapper->createBlockBlob($sourceContainerName, $sourceBlobName, $blobValue); 
         
-        $copyBlobOptions = new CopyBlobOptions();
-        $copyBlobOptions->setCopySource($sourceBlobFullName);
-        
-        $this->wrapper->copyBlob( 
+        // Test
+        $result = $this->wrapper->copyBlob( 
             $destinationContainerName, 
             $destinationBlobName, 
             $sourceContainerName, 
-            $sourceBlobName, 
-            $copyBlobOptions 
-            ); 
-        $sourceListBlobResult = $this->wrapper->listBlobs( 
-            $sourceContainerName 
-            ); 
-        $sourceBlobs = $sourceListBlobResult->getBlobs(); 
-        $sourceBlob = $sourceBlobs[0]; 
-        $destinationListBlobResult = $this->wrapper->listBlobs( 
-            $destinationContainerName 
-            ); 
-
-        $destinationBlobs = $destinationListBlobResult->getBlobs(); 
-
-        $destinationBlob = $destinationBlobs[0]; 
-        $this->assertEquals( 
-            Resources::BINARY_FILE_TYPE,  
-            $sourceBlob->getProperties()->getContentType()); 
+            $sourceBlobName
+        ); 
         
-        $this->assertEquals( 
-            Resources::BINARY_FILE_TYPE, 
-            $destinationBlob->getProperties()->getContentType()); 
-
-        $sourceBlobContent = stream_get_contents(
-            $this->wrapper->getBlob(
-            $sourceContainerName, 
-            $sourceBlobName)->getContentStream());
-                
-        $destinationBlobContent = stream_get_contents(
-            $this->wrapper->getBlob(
-            $destinationContainerName,
-            $destinationBlobName)->getContentStream());
+        // Assert
+        $sourceBlob = $this->wrapper->getBlob($sourceContainerName, $sourceBlobName);
+        $destinationBlob = $this->wrapper->getBlob($destinationContainerName, $destinationBlobName);
+        $sourceBlobContent = stream_get_contents($sourceBlob->getContentStream());
+        $destinationBlobContent = stream_get_contents($destinationBlob->getContentStream());
         
-        $this->assertEquals( 
-            $sourceBlobContent,
-            $destinationBlobContent);
+        $this->assertEquals($sourceBlobContent, $destinationBlobContent);
+        $this->assertNotNull($result->getEtag());
+        $this->assertInstanceOf('\DateTime', $result->getlastModified());
+    }
+    
+    /** 
+     * @covers WindowsAzure\Blob\Internal\BlobRestProxy::copyBlob 
+     * @covers WindowsAzure\Blob\Internal\BlobRestProxy::_getCopyBlobSourceName
+     */ 
+    public function testCopyBlobSameContainer()
+    {
+        // Setup
+        $containerName = 'copyblobsamecontainer';
+        $sourceBlobName = 'sourceblob';
+        $blobValue = 'testBlobValue'; 
+        $destinationBlobName = 'destinationblob';
+        $this->createContainer($containerName);
+        $this->wrapper->createBlockBlob($containerName, $sourceBlobName, $blobValue); 
+        
+        // Test
+        $this->wrapper->copyBlob( 
+            $containerName, 
+            $destinationBlobName, 
+            $containerName, 
+            $sourceBlobName
+        ); 
+        
+        // Assert
+        $sourceBlob = $this->wrapper->getBlob($containerName, $sourceBlobName);
+        $destinationBlob = $this->wrapper->getBlob($containerName, $destinationBlobName);
+
+        $sourceBlobContent = stream_get_contents($sourceBlob->getContentStream());
+        $destinationBlobContent = stream_get_contents($destinationBlob->getContentStream());
+        $this->assertEquals($sourceBlobContent, $destinationBlobContent);
+    }
+    
+    /** 
+     * @covers WindowsAzure\Blob\Internal\BlobRestProxy::copyBlob 
+     * @covers WindowsAzure\Blob\Internal\BlobRestProxy::_getCopyBlobSourceName
+     */ 
+    public function testCopyBlobExistingBlob()
+    {
+        // Setup
+        $containerName = 'copyblobexistingblob';
+        $sourceBlobName = 'sourceblob';
+        $blobValue = 'testBlobValue'; 
+        $oldBlobValue = 'oldBlobValue';
+        $destinationBlobName = 'destinationblob';
+        $this->createContainer($containerName);
+        $this->wrapper->createBlockBlob($containerName, $sourceBlobName, $blobValue); 
+        $this->wrapper->createBlockBlob($containerName, $destinationBlobName, $oldBlobValue); 
+        
+        // Test
+        $this->wrapper->copyBlob( 
+            $containerName, 
+            $destinationBlobName, 
+            $containerName, 
+            $sourceBlobName
+        ); 
+        
+        // Assert
+        $sourceBlob = $this->wrapper->getBlob($containerName, $sourceBlobName);
+        $destinationBlob = $this->wrapper->getBlob($containerName, $destinationBlobName);
+        $sourceBlobContent = stream_get_contents($sourceBlob->getContentStream());
+        $destinationBlobContent = stream_get_contents($destinationBlob->getContentStream());
+        
+        $this->assertEquals($sourceBlobContent, $destinationBlobContent);
+        $this->assertNotEquals($destinationBlobContent, $oldBlobValue);
+    }
+    
+    /** 
+     * @covers WindowsAzure\Blob\Internal\BlobRestProxy::copyBlob 
+     * @covers WindowsAzure\Blob\Internal\BlobRestProxy::_getCopyBlobSourceName
+     */ 
+    public function testCopyBlobSnapshot()
+    {
+        // Setup
+        $containerName = 'copyblobsnapshot';
+        $sourceBlobName = 'sourceblob';
+        $blobValue = 'testBlobValue'; 
+        $destinationBlobName = 'destinationblob';
+        $this->createContainer($containerName);
+        $this->wrapper->createBlockBlob($containerName, $sourceBlobName, $blobValue);
+        $snapshotResult = $this->wrapper->createBlobSnapshot($containerName, $sourceBlobName);
+        $options = new CopyBlobOptions();
+        $options->setSourceSnapshot($snapshotResult->getSnapshot());
+        
+        // Test
+        $this->wrapper->copyBlob(
+            $containerName, 
+            $destinationBlobName, 
+            $containerName, 
+            $sourceBlobName,
+            $options
+        ); 
+        
+        // Assert
+        $sourceBlob = $this->wrapper->getBlob($containerName, $sourceBlobName);
+        $destinationBlob = $this->wrapper->getBlob($containerName, $destinationBlobName);
+        $sourceBlobContent = stream_get_contents($sourceBlob->getContentStream());
+        $destinationBlobContent = stream_get_contents($destinationBlob->getContentStream());
+        
+        $this->assertEquals($sourceBlobContent, $destinationBlobContent);
     }
     
    /**  
     * @covers WindowsAzure\Blob\Internal\BlobRestProxy::createBlobSnapshot 
     * @covers WindowsAzure\Blob\Models\createBlobSnapshotResult::create 
     */ 
-    public function testCreateBlobSnapshot() 
+    public function testCreateBlobSnapshot()
     { 
         // Setup
         $containerName = 'createblobsnapshot'; 
@@ -1380,10 +1453,9 @@ class BlobRestProxyTest extends BlobServiceRestProxyTestBase
         $blobs = $blobsResult->getBlobs();
         $actualBlob = $blobs[0];
         $this->assertNotNull($snapshotResult->getEtag());
-        $this->assertInstanceOf('\DateTime', $snapshotResult->getLastModified());
-        $this->assertInstanceOf('\DateTime', $snapshotResult->getSnapshot());
+        $this->assertNotNull($snapshotResult->getLastModified());
+        $this->assertNotNull($snapshotResult->getSnapshot());
         $this->assertEquals($snapshotResult->getSnapshot(), $actualBlob->getSnapshot());
     }    
-  
-} 
+}
 
