@@ -154,9 +154,8 @@ class ServiceRestProxy extends RestProxy
     /**
      * Adds optional header to headers if set
      * 
-     * @param array           $headers               The array of request headers.
-     * @param AccessCondition $sourceAccessCondition The access condition 
-     * object
+     * @param array           $headers         The array of request headers.
+     * @param AccessCondition $accessCondition The access condition object.
      * 
      * @return array
      */

@@ -27,7 +27,7 @@ use WindowsAzure\Common\Internal\Resources;
 use WindowsAzure\Common\Internal\Utilities;
 
 /**
- * The result of calling copyBlob API/ 
+ * The result of calling copyBlob API.
  *
  * @category  Microsoft
  * @package   WindowsAzure\Blob\Models
