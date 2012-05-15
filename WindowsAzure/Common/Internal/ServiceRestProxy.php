@@ -129,8 +129,8 @@ class ServiceRestProxy extends RestProxy
     /**
      * Adds optional header to headers if set
      * 
-     * @param array           $headers         array of request headers
-     * @param AccessCondition $accessCondition the access condition object
+     * @param array           $headers         The array of request headers.
+     * @param AccessCondition $accessCondition The access condition object.
      * 
      * @return array
      */
@@ -140,6 +140,10 @@ class ServiceRestProxy extends RestProxy
             $header = $accessCondition->getHeader();
             
             if ($header != Resources::EMPTY_STRING) {
+                $value = $accessCondition->getValue();
+                if ($value instanceof \DateTime) {
+                    $value = Utilities::isoDate(date_timestamp_get($value));
+                }
                 $headers[$header] = $accessCondition->getValue();
             }
         }
@@ -150,23 +154,47 @@ class ServiceRestProxy extends RestProxy
     /**
      * Adds optional header to headers if set
      * 
-     * @param array                 $headers               array of request headers
-     * @param SourceAccessCondition $sourceAccessCondition the access condition 
-     * object
+     * @param array           $headers         The array of request headers.
+     * @param AccessCondition $accessCondition The access condition object.
      * 
      * @return array
      */
     public function addOptionalSourceAccessConditionHeader(
         $headers, 
-        $sourceAccessCondition
+        $accessCondition
     ) {
-
-        if (!is_null($sourceAccessCondition)) {
-            $header = $sourceAccessCondition->getHeader();
-            
-            if ($header != Resources::EMPTY_STRING) {
-                $headers[$header] = $sourceAccessCondition->getValue();
+        if (!is_null($accessCondition)) {
+            $header     = $accessCondition->getHeader();
+            $headerName = null;
+            if (!empty($header)) {
+                switch($header) {
+                case Resources::IF_MATCH:
+                    $headerName = Resources::X_MS_SOURCE_IF_MATCH;
+                    break;
+                
+                case Resources::IF_UNMODIFIED_SINCE:
+                    $headerName = Resources::X_MS_SOURCE_IF_UNMODIFIED_SINCE;
+                    break;
+                
+                case Resources::IF_MODIFIED_SINCE:
+                    $headerName = Resources::X_MS_SOURCE_IF_MODIFIED_SINCE;
+                    break;
+                
+                case Resources::IF_NONE_MATCH:
+                    $headerName = Resources::X_MS_SOURCE_IF_NONE_MATCH;
+                    break;
+                
+                default:
+                    throw new \Exception(Resources::INVALID_ACH_MSG);
+                    break;
+                }
             }
+            $value = $accessCondition->getValue();
+            if ($value instanceof \DateTime) {
+                $value = Utilities::isoDate(date_timestamp_get($value));
+            }
+            
+            $this->addOptionalHeader($headers, $headerName, $value);
         }
         
         return $headers;

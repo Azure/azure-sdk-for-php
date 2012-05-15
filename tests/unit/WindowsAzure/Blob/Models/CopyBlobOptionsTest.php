@@ -26,7 +26,6 @@ use Tests\Framework\TestResources;
 use WindowsAzure\Common\Internal\Utilities;
 use WindowsAzure\Blob\Models\AccessCondition;
 use WindowsAzure\Blob\Models\CopyBlobOptions;
-use WindowsAzure\Blob\Models\SourceAccessCondition;
 
 /**
  * Unit tests for class CopyBlobBlobOptions
@@ -41,22 +40,6 @@ use WindowsAzure\Blob\Models\SourceAccessCondition;
  */
 class CopyBlobOptionsTest extends \PHPUnit_Framework_TestCase
 {  
-    /** 
-     * @covers WindowsAzure\Blob\Models\CopyBlobOptions::setCopySource
-     * @covers WindowsAzure\Blob\Models\CopyBlobOptions::getCopySource
-     */
-    public function testSetCopySource()
-    {
-        $copyBlobOptions = new CopyBlobOptions();
-        $expected = "\container1\blob1";
-        
-        $copyBlobOptions->setCopySource($expected);
-        $this->assertEquals(
-            $expected,
-            $copyBlobOptions->getCopySource()
-            );
-    }
-    
     /** 
      * @covers WindowsAzure\Blob\Models\CopyBlobOptions::setMetadata
      * @covers WindowsAzure\Blob\Models\CopyBlobOptions::getMetadata
@@ -96,7 +79,7 @@ class CopyBlobOptionsTest extends \PHPUnit_Framework_TestCase
     public function testSetSourceAccessCondition()
     {
         $copyBlobOptions = new CopyBlobOptions();
-        $expected = SourceAccessCondition::sourceIfMatch("x");
+        $expected = AccessCondition::IfMatch("x");
         $copyBlobOptions->setSourceAccessCondition($expected);
         
         $this->assertEquals(
