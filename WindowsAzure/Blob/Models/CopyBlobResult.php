@@ -24,11 +24,10 @@
  
 namespace WindowsAzure\Blob\Models;
 use WindowsAzure\Common\Internal\Resources;
-use WindowsAzure\Common\Internal\Validate;
 use WindowsAzure\Common\Internal\Utilities;
 
 /**
- * The result of creating Blob snapshot. 
+ * The result of calling copyBlob API/ 
  *
  * @category  Microsoft
  * @package   WindowsAzure\Blob\Models
@@ -38,72 +37,38 @@ use WindowsAzure\Common\Internal\Utilities;
  * @version   Release: @package_version@
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
-class CreateBlobSnapshotResult
+class CopyBlobResult
 {
     /**
-     * A DateTime value which uniquely identifies the snapshot. 
-     * @var string
-     */
-    private $_snapshot;
-            
-    /**
-     * The ETag for the destination blob. 
      * @var string
      */
     private $_etag;
     
     /**
-     * The date/time that the copy operation to the destination blob completed. 
      * @var \DateTime
      */
     private $_lastModified;
     
     /**
-     * Creates CreateBlobSnapshotResult object from the response of the 
-     * create Blob snapshot request.
+     * Creates CopyBlobResult object from the response of the copy blob request.
      * 
      * @param array $headers The HTTP response headers in array representation.
      * 
-     * @return CreateBlobSnapshotResult
+     * @return CopyBlobResult
      */
     public static function create($headers)
     {
-        $result                 = new CreateBlobSnapshotResult();
+        $result                 = new CopyBlobResult();
         $headerWithLowerCaseKey = array_change_key_case($headers);
-        
+
         $result->setEtag($headerWithLowerCaseKey[Resources::ETAG]);
-        
         $result->setLastModified(
             Utilities::rfc1123ToDateTime(
                 $headerWithLowerCaseKey[Resources::LAST_MODIFIED]
             )
         );
         
-        $result->setSnapshot($headerWithLowerCaseKey[Resources::X_MS_SNAPSHOT]);
-        
         return $result;
-    }
-    
-    /**
-     * Gets snapshot. 
-     *
-     * @return string
-     */
-    public function getSnapshot()
-    {
-        return $this->_snapshot;
-    }
-    
-    /**
-     * Sets snapshot.
-     * 
-     * @param string $snapshot value.
-     *
-     * @return none
-     */
-    public function setSnapshot($snapshot)
-    {
-        $this->_snapshot = $snapshot;
     }
     
     /**

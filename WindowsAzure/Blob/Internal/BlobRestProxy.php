@@ -71,6 +71,7 @@ use WindowsAzure\Blob\Models\CopyBlobOptions;
 use WindowsAzure\Blob\Models\CreateBlobSnapshotOptions;
 use WindowsAzure\Blob\Models\CreateBlobSnapshotResult;
 use WindowsAzure\Blob\Models\PageRange;
+use WindowsAzure\Blob\Models\CopyBlobResult;
 
 /**
  * This class constructs HTTP requests and receive HTTP responses for blob
@@ -86,6 +87,27 @@ use WindowsAzure\Blob\Models\PageRange;
  */
 class BlobRestProxy extends ServiceRestProxy implements IBlob
 {
+    /**
+     * Gets the copy blob source name with specified parameters. 
+     * 
+     * @param string                 $containerName The name of the container. 
+     * @param string                 $blobName      The name of the blob.
+     * @param Models\CopyBlobOptions $options       The optional parameters.
+     *
+     * @return string 
+     */
+    private function _getCopyBlobSourceName($containerName, $blobName, $options)
+    {
+        $sourceName  = '/'. $this->getAccountName();
+        $sourceName .= '/'. $this->_createPath($containerName, $blobName);
+
+        if (!is_null($options->getSourceSnapshot())) {
+            $sourceName .= '?snapshot=' . $options->getSourceSnapshot();
+        }
+
+        return $sourceName;
+    }
+    
     /**
      * Creates URI path for blob.
      * 
@@ -2120,7 +2142,7 @@ class BlobRestProxy extends ServiceRestProxy implements IBlob
      * blob
      * @param Models\CopyBlobOptions $options              optional parameters
      * 
-     * @return none
+     * @return CopyBlobResult
      * 
      * @see http://msdn.microsoft.com/en-us/library/windowsazure/dd894037.aspx
      */
@@ -2132,7 +2154,7 @@ class BlobRestProxy extends ServiceRestProxy implements IBlob
         $options = null
     ) {
 
-        $method              = \HTTP_Request2::METHOD_PUT;
+        $method              = Resources::HTTP_PUT;
         $headers             = array();
         $postParams          = array();
         $queryParams         = array();
@@ -2164,13 +2186,7 @@ class BlobRestProxy extends ServiceRestProxy implements IBlob
             $sourceBlobPath
         );
         
-        $metadata = $options->getMetadata();
-        if (!is_null($metadata)) {
-            $metadataHeader = $this->generateMetadataHeaders(
-                $metadata
-            );
-            $headers        = \array_merge($headers, $metadataHeader);
-        }
+        $headers = $this->addMetadataHeaders($headers, $options->getMetadata());
         
         $this->addOptionalHeader(
             $headers, 
@@ -2184,7 +2200,7 @@ class BlobRestProxy extends ServiceRestProxy implements IBlob
             $options->getSourceLeaseId()
         );
         
-        $this->send(
+        $response = $this->send(
             $method, 
             $headers, 
             $queryParams, 
@@ -2192,6 +2208,8 @@ class BlobRestProxy extends ServiceRestProxy implements IBlob
             $destinationBlobPath, 
             $statusCode
         );
+        
+        return CopyBlobResult::create($response->getHeader());
     }
         
     /**
@@ -2287,33 +2305,6 @@ class BlobRestProxy extends ServiceRestProxy implements IBlob
             $leaseId,
             is_null($options) ? new BlobServiceOptions() : $options
         );
-    }
-    
-    /**
-     * Gets the copy blob source name with specified parameters. 
-     * 
-     * @param string                 $containerName the name of the container. 
-     * @param string                 $blobName      the name of the blob.
-     * @param Models\CopyBlobOptions $options       the optional parameters.
-     *
-     * @return string 
-     */
-    private function _getCopyBlobSourceName($containerName, $blobName, $options)
-    {
-        $copyBlobSourceName = '/'.$this->getAccountName();
-       
-        if (!Validate::isNullOrEmptyString($containerName)) {
-            /* @var $containerName type */
-            $copyBlobSourceName .= '/'.$containerName;
-        }
-        
-        $copyBlobSourceName .= '/'.$blobName;
-        
-        if (($options != null) && ($options->getSourceSnapshot() != null)) {
-            $copyBlobSourceName .= '?snapshot='.$options->getSourceSnapshot();
-        }
-        
-        return $copyBlobSourceName;
     }
 }
 

@@ -68,6 +68,7 @@ class Resources
     const INVALID_USA_OPT_MSG  = 'Must provide either description or label.';
     const INVALID_CONFIG_MSG   = 'Config object must be of type Configuration';
     const INVALID_BUILDER_MSG  = 'Builder object must implement IServicesBuilder';
+    const INVALID_ACH_MSG      = 'The provided access condition header is invalid';
 
     // HTTP Headers
     const X_MS_HEADER_PREFIX                 = 'x-ms-';
