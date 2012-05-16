@@ -26,7 +26,7 @@ use WindowsAzure\Resources;
 use WindowsAzure\Utilities;
 
 /**
- * A list options.
+ * The base class for the options for list request.
  *
  * @category  Microsoft
  * @package   WindowsAzure\Services\ServiceBus\Models

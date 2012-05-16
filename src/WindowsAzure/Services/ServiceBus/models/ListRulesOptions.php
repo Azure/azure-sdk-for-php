@@ -25,7 +25,7 @@ namespace WindowsAzure\Services\ServiceBus\Models;
 use WindowsAzure\Services\ServiceBus\Models\ListOptions;
 
 /**
- * This class constructs HTTP requests and receive HTTP responses for service bus.
+ * The options to specify a list rules request.
  *
  * @category  Microsoft
  * @package   WindowsAzure\Services\ServiceBus

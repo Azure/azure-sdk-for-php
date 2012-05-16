@@ -28,7 +28,7 @@ use WindowsAzure\Core\Atom\Feed;
 use WindowsAzure\Core\Atom\Content;
 
 /**
- * This class constructs HTTP requests and receive HTTP responses for service bus.
+ * The results of list queues request. 
  *
  * @category  Microsoft
  * @package   WindowsAzure\Services\ServiceBus
@@ -40,7 +40,18 @@ use WindowsAzure\Core\Atom\Content;
  */
 class ListQueuesResult
 {
+    /**
+     * The description of the queue. 
+     *
+     * @var QueueDescription
+     */
     private $_queueDescription;
+
+    /** 
+     * Creates a list queue result instance with specified response from the server. 
+     * 
+     * @param string $response the response of the list queue request. 
+     */
     public static function create($response)
     {
         $getQueueResult = new ListQueuesResult();
@@ -50,11 +61,21 @@ class ListQueuesResult
         $getQueueResult->setQueueDescription($queueDescription);
     }
 
+    /**
+     * Gets the queue description. 
+     * 
+     * @return QueueDescription
+     */
     public function getQueueDescription()
     {
         return $this->_queueDescription;
     }
 
+    /**
+     * Sets the description of the queue. 
+     * 
+     * @param QueueDescription $queueDescription The description of the queue. 
+     */
     public function setQueueDescription($queueDescription)
     {
         $this->_queueDescription = $queueDescription;

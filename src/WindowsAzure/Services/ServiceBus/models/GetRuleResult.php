@@ -41,7 +41,18 @@ use WindowsAzure\Core\Atom\Content;
 
 class GetRuleResult
 {
+    /**
+     * The description of the rule. 
+     * 
+     * @var RuleDescription
+     */
     private $_ruleDescription;
+    
+    /**
+     * Creates a get rule result with specified response. 
+     * 
+     * @param string $response The response of the get rule request from the server. 
+     */
     public static function create($response)
     {
         $getRuleResult = new GetRuleResult();
@@ -51,11 +62,22 @@ class GetRuleResult
         $getRuleResult->setRuleDescription($ruleDescription);
         return $getRuleResult;
     }
+
+    /**
+     * Gets the description of the rule. 
+     * 
+     * @return RuleDescription
+     */
     public function getRuleDescription()
     {
         return $this->_ruleDescription;
     }
 
+    /**
+     * Sets the description of the rule. 
+     * 
+     * @param RuleDescription 
+     */
     public function setRuleDescription($ruleDescription)
     {
         $this->_ruleDescription = $ruleDescription;

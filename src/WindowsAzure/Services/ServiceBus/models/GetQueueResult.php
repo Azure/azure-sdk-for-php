@@ -48,6 +48,11 @@ class GetQueueResult
      */
     private $_queueDescription;
 
+    /** 
+     * Create a queue result with specified response. 
+     * 
+     * @param string $response The body of the response from Azure Server. 
+     */
     public static function create($response)
     {
         $getQueueResult = new GetQueueResult();
@@ -57,11 +62,19 @@ class GetQueueResult
         $getQueueResult->setQueueDescription($queueDescription);
     }
 
+    /** 
+     * Gets the description of the queue. 
+     */
     public function getQueueDescription()
     {
         return $this->_queueDescription;
     }
 
+    /** 
+     * Sets the description of the queue. 
+     *
+     * @param QueueDescription $queueDescription The description of the queue. 
+     */
     public function setQueueDescription($queueDescription)
     {
         $this->_queueDescription = $queueDescription;

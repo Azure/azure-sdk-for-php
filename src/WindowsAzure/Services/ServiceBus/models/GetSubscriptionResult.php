@@ -41,7 +41,18 @@ use WindowsAzure\Core\Atom\Content;
  
 class GetSubscriptionResult
 {
+    /**
+     * The information of a subscription. 
+     *
+     * @var SubscriptionInfo
+     */
     private $_subscriptionInfo;
+
+    /**
+     * Creates a subscription information instance with specified response. 
+     * 
+     * @param string $response The response from the server. 
+     */ 
     public static function create($response)
     {
         $getSubscriptionResult = new GetSubscriptionResult();
@@ -52,11 +63,21 @@ class GetSubscriptionResult
         return $getSubscriptionResult;
     }
 
+    /** 
+     * Gets the subscription information.
+     *
+     * @return SubscriptionInfo
+     */ 
     public function getSubscriptionInfo()
     {
         return $this->_subscriptionInfo;
     }
 
+    /**
+     * Sets the subscription information.
+     * 
+     * @param SubscriptionInfo $subscriptionInfo The information of the subscription.
+     */
     public function setSubscriptionInfo($subscriptionInfo)
     {
         $this->_subscriptionInfo = $subscriptionInfo;

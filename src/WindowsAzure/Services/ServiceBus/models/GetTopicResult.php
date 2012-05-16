@@ -27,7 +27,7 @@ use WindowsAzure\Core\Atom\Feed;
 use WindowsAzure\Core\Atom\Content;
 
 /**
- * This class constructs HTTP requests and receive HTTP responses for service bus.
+ * The result of a get topic request. 
  *
  * @category  Microsoft
  * @package   WindowsAzure\Services\ServiceBus
@@ -39,8 +39,16 @@ use WindowsAzure\Core\Atom\Content;
  */
 class GetTopicResult
 {
+    /**
+     * The description of the topic. 
+     */
     private $_topicDescription;
 
+    /**
+     * Creates a get topic result instance with specified response from the server. 
+     * 
+     * @param string $response The response from the get topic request. 
+     */ 
     public static function create($response)
     {
         $getTopicResult = new GetTopicResult();
@@ -50,11 +58,22 @@ class GetTopicResult
         $getTopicResult->setTopicDescription($topicDescription);
         return $getTopicResult;
     }    
+
+    /**
+     * Gets the description of the topic. 
+     * 
+     * @return the description of the topic.
+     */ 
     public function getTopicDescription()
     {
         return $this->_topicDescription;
     }
 
+    /**
+     * Sets the description of the topic. 
+     * 
+     * @param TopicDescription $topicDescription The description of the topic. 
+     */
     public function setTopicDescription($topicDescription)
     {
         $this->_topicDescription = $topicDescription; 

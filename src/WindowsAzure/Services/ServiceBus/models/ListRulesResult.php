@@ -40,7 +40,18 @@ use WindowsAzure\Core\Atom\Content;
  */
 class ListRulesResult
 {
+    /**
+     * The description of the rule. 
+     * 
+     * @RuleDescription 
+     */
     private $_ruleDescription;
+
+    /** 
+     * Creates a list rule result with specified response from the server. 
+     * 
+     * @param string $response The response of a list rule request. 
+     */
     public static function create($response)
     {
         $getRulesResult = new ListRulesResult();
@@ -50,11 +61,21 @@ class ListRulesResult
         $getRulesResult->setRulesDescription($ruleDescription);
     }
 
+    /**
+     * Gets the description of the rules. 
+     * 
+     * @return RuleDescription
+     */
     public function getRuleDescription()
     {
         return $this->_ruleDescription;
     }
 
+    /** 
+     * Sets the description of the rule. 
+     * 
+     * @param RuleDescription $ruleDescription The description of the rule. 
+     */ 
     public function setRuleDescription($ruleDescription)
     {
         $this->_ruleDescription = $ruleDescription;
