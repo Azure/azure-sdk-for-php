@@ -57,7 +57,6 @@ class ServiceException extends \LogicException
         );
         $this->code   = $errorCode;
         $this->_error = $error;
-        // Need to improve message parsing issue #32
         $this->_reason = $reason;
     }
     
