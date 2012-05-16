@@ -123,6 +123,26 @@ class ServiceRestProxyTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
+     * @covers  WindowsAzure\Common\Internal\ServiceRestProxy::addOptionalSourceAccessConditionHeader
+     * @depends test__construct
+     */
+    public function testAddOptionalSourceAccessContitionHeader($restWrapper)
+    {
+        // Setup
+        $expectedHeader = Resources::X_MS_SOURCE_IF_MATCH;
+        $expectedValue = '0x8CAFB82EFF70C46';
+        $accessCondition = AccessCondition::ifMatch($expectedValue);
+        $headers = array('Header1' => 'Value1', 'Header2' => 'Value2');
+        
+        // Test
+        $actual = $restWrapper->addOptionalSourceAccessConditionHeader($headers, $accessCondition);
+        
+        // Assert
+        $this->assertCount(3, $actual);
+        $this->assertEquals($expectedValue, $actual[$expectedHeader]);
+    }
+    
+    /**
      * @covers  WindowsAzure\Common\Internal\ServiceRestProxy::groupQueryValues
      * @depends test__construct
      */

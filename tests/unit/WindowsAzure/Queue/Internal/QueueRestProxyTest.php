@@ -44,7 +44,7 @@ use WindowsAzure\Queue\Models\UpdateMessageResult;
 use WindowsAzure\Queue\Models\QueueServiceOptions;
 use Tests\Framework\TestResources;
 use WindowsAzure\Common\Internal\Resources;
-use WindowsAzure\Common\Internal\ServiceException;
+use WindowsAzure\Common\ServiceException;
 
 /**
  * Unit tests for QueueRestProxy class

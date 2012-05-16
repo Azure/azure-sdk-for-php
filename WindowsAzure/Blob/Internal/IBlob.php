@@ -418,7 +418,7 @@ interface IBlob extends FilterableService
     * @param string                 $sourceBlob           name of blob
     * @param Models\CopyBlobOptions $options              optional parameters
     * 
-    * @return none
+    * @return CopyBlobResult
     * 
     * @see http://msdn.microsoft.com/en-us/library/windowsazure/dd894037.aspx
     */

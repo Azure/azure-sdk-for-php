@@ -24,7 +24,7 @@
 
 namespace Tests\Unit\WindowsAzure\Table\Models;
 use WindowsAzure\Table\Models\BatchError;
-use WindowsAzure\Common\Internal\ServiceException;
+use WindowsAzure\Common\ServiceException;
 
 /**
  * Unit tests for class BatchError

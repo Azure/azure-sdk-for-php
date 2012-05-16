@@ -37,6 +37,8 @@ namespace WindowsAzure\ServiceRuntime\Internal;
  */
 class FileOutputChannel implements IOutputChannel
 {
+    // @codingStandardsIgnoreStart
+    
     /**
      * Gets the output stream.
      * 
@@ -53,6 +55,8 @@ class FileOutputChannel implements IOutputChannel
             throw new ChannelNotAvailableException();
         }
     }
+    
+    // @codingStandardsIgnoreEnd
 }
 
 ?>

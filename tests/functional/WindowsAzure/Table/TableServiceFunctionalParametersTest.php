@@ -27,7 +27,7 @@
 namespace Tests\Functional\WindowsAzure\Table;
 
 use WindowsAzure\Common\Internal\Resources;
-use WindowsAzure\Common\Internal\ServiceException;
+use WindowsAzure\Common\ServiceException;
 use WindowsAzure\Common\Configuration;
 use WindowsAzure\Common\Models\Logging;
 use WindowsAzure\Common\Models\Metrics;

@@ -37,6 +37,8 @@ namespace WindowsAzure\Common\Internal;
  */
 class Resources
 {
+    // @codingStandardsIgnoreStart
+    
     // Messages
     const INVALID_TYPE_MSG     = 'The provided variable should be of type: ';
     const INVALID_META_MSG     = 'Metadata cannot contain newline characters.';
@@ -66,6 +68,7 @@ class Resources
     const INVALID_USA_OPT_MSG  = 'Must provide either description or label.';
     const INVALID_CONFIG_MSG   = 'Config object must be of type Configuration';
     const INVALID_BUILDER_MSG  = 'Builder object must implement IServicesBuilder';
+    const INVALID_ACH_MSG      = 'The provided access condition header is invalid';
 
     // HTTP Headers
     const X_MS_HEADER_PREFIX                 = 'x-ms-';
@@ -259,6 +262,8 @@ class Resources
     const SSL_VERIFY_HOST = 'ssl_verify_host';
     const SSL_LOCAL_CERT  = 'ssl_local_cert';
     const CONNECT_TIMEOUT = 'connect_timeout';
+    
+    // @codingStandardsIgnoreEnd
 }
 
 ?>

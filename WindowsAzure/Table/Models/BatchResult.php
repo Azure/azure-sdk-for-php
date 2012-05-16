@@ -27,7 +27,7 @@ require_once 'HTTP/Request2/Response.php';
 use WindowsAzure\Common\Internal\Resources;
 use WindowsAzure\Common\Internal\Utilities;
 use WindowsAzure\Common\Internal\Http\HttpClient;
-use WindowsAzure\Common\Internal\ServiceException;
+use WindowsAzure\Common\ServiceException;
 use WindowsAzure\Table\Models\BatchError;
 use WindowsAzure\Table\Models\InsertEntityResult;
 use WindowsAzure\Table\Models\UpdateEntityResult;

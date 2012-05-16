@@ -44,8 +44,10 @@ class QueueService
     /**
      * Creates new object based on the builder type in the $config.
      *
-     * @param WindowsAzure\Common\Configuration    $config  The config object.
-     * @param WindowsAzure\Common\Internal\IServicesBuilder $builder The builder object.
+     * @param WindowsAzure\Common\Configuration             $config  The config
+     * object.
+     * @param WindowsAzure\Common\Internal\IServicesBuilder $builder The builder
+     * object.
      * 
      * @return WindowsAzure\Queue\Internal\IQueue
      */
