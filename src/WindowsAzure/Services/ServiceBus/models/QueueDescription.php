@@ -27,7 +27,7 @@ use WindowsAzure\Resources;
 use WindowsAzure\Utilities;
 
 /**
- * An active WRAP access Token.
+ * A description of the queue.
  *
  * @category  Microsoft
  * @package   WindowsAzure\Services\ServiceBus\Models
@@ -39,37 +39,87 @@ use WindowsAzure\Utilities;
  */
 class QueueDescription
 {
-    private $_lockDuration;
-    private $_maxSizeInMegabytes;
     /**
-     * @var bool 
+     * The duration of the lock.     
+     * 
+     * @var integer
+     */
+    private $_lockDuration;
+
+    /** 
+     * The maximum size in mega bytes. 
+     * 
+     * @var integer
+     */
+    private $_maxSizeInMegabytes;
+
+    /**
+     * Requires duplicate detection for queue.
+     * 
+     * @var boolean 
      */
     private $_requiresDuplicateDetection;
+
+    /**
+     * Requires session for the queue. 
+     * 
+     * @var boolean 
+     */
     private $_requiresSession;
+
+    /**
+     * The default message time to live. 
+     * 
+     * @var string 
+     */
     private $_defaultMessageTimeToLive;
+
+    /**
+     * The dead lettering on message expiration. 
+     *
+     * @var string 
+     */ 
     private $_deadLetteringOnMessageExpiration;
 
     /** 
+     * The duplicate detection history time window. 
+     * 
      * @var integer
      */
     private $_duplicateDetectionHistoryTimeWindow;
+
+    /**
+     * The maximum delivery count. 
+     * 
+     * @var integer
+     */
     private $_maxDeliveryCount;
+
+    /**
+     * Enables batched operations. 
+     * 
+     * @var boolean 
+     */
     private $_enableBatchedOperations;
+
+    /**
+     * The size in bytes. 
+     * 
+     * @var integer 
+     */
     private $_sizeInBytes;
+
+    /**
+     * The count of the message. 
+     * 
+     * @var integer 
+     */ 
     private $_messageCount;    
 
     /**
-     * Creates an ActiveToken with specified WRAP 
-     * access token result.
+     * Gets the lock duration.
      *
-     * @param array $wrapAccessTokenResult A WRAP access token result.
-     * 
-     */
-
-    /**
-     * Gets WRAP access token.
-     *
-     * @return WrapAccessTokenResult
+     * @return string  
      */
     public function getLockDuration()
     {
@@ -77,9 +127,9 @@ class QueueDescription
     }
     
     /**
-     * Sets WRAP access token.
+     * Sets the lock duration.
      *
-     * @param string $wrapAccessTokenResult The WRAP access token result.
+     * @param string $lockDuration The lock duration.
      * 
      * @return none
      */
@@ -87,102 +137,222 @@ class QueueDescription
     {
         $this->_lockDuration = $lockDuration;
     }
-
+    
+    /**
+     * gets the maximum size in mega bytes. 
+     * 
+     * @return integer 
+     */
     public function getMaxSizeInMegabytes()
     {
         return $this->_maxSizeInMegabytes;
     }
 
+    /**
+     * Sets the lock duration.
+     *
+     * @param string $lockDuration The lock duration.
+     * 
+     * @return none
+     */
     public function setMaxSizeInMegabytes($maxSizeInMegabytes)
     {
         $this->_maxSizeInMegabytes = $maxSizeInMegabytes;
     }
 
+    /**
+     * Gets requires duplicate detection.
+     * 
+     * @return boolean
+     */
     public function getRequeiresDuplicateDetection()
     {
         return $this->_requiresDuplicateDetection;
     }
 
+    /**
+     * Sets the lock duration.
+     *
+     * @param string $lockDuration The lock duration.
+     * 
+     * @return none
+     */
     public function setRequiresDuplicateDetection($requiresDuplicateDetection)
     {
         $this->_requiresDuplicateDetection = $requiresDuplicateDetection;
     }
 
+    /**
+     * Gets the requires session. 
+     * 
+     * @return boolean
+     */ 
     public function getRequiresSession()
     {
         return $this->_requiresSession;
     }
 
+    /**
+     * Sets the lock duration.
+     *
+     * @param string $lockDuration The lock duration.
+     * 
+     * @return none
+     */
     public function setRequiresSession($requiresSession)
     {
         $this->_requiresSession = $requiresSession;
     }
 
+    /**
+     * gets the default message time to live. 
+     * 
+     * @return string 
+     */
     public function getDefaultMessageTimeToLive()
     {
         return $this->_defaultMessageTimeToLive;
     }
 
+    /**
+     * Sets the lock duration.
+     *
+     * @param string $lockDuration The lock duration.
+     * 
+     * @return none
+     */
     public function setDefaultMessageTimeToLive($defaultMessageTimeToLive)
     {   
         $this->_defaultMessageTimeToLive = $defaultMessageTimeToLive;
     }
 
+    /**
+     * Gets dead lettering on message expiration.
+     * 
+     * @return string 
+     */
     public function getDeadLetteringOnMessageExpiration()
     {
         return $this->_deadLetteringOnMessageExpiration;
     }
 
+    /**
+     * Sets the lock duration.
+     *
+     * @param string $lockDuration The lock duration.
+     * 
+     * @return none
+     */
     public function setDeadLetteringOnMessageExpiration($deadLetteringOnMessageExpiration)
     {
         $this->_deadLetteringOnMessageExpiration = $deadLetteringOnMessageExpiration;
     }
 
+    /**
+     * Gets duplicate detection history time window. 
+     * 
+     * @return string 
+     */
     public function getDuplicateDetectionHistoryTimeWindow()
     {
         return $this->_duplicateDetectionHistoryTimeWindow;
     }
 
+    /**
+     * Sets the lock duration.
+     *
+     * @param string $lockDuration The lock duration.
+     * 
+     * @return none
+     */
     public function setDuplicateDetectionHistoryTimeWindow($duplicateDetectionHistoryTimeWindow)
     {
         $this->_duplicateDetectionHistoryTimeWindow = $duplicateDEtectionHistoryTimeWindow;
     }
 
+    /**
+     * Gets maximum delivery count. 
+     * 
+     * @return string 
+     */
     public function getMaxDeliveryCount()
     {
         return $this->_maxDeliveryCount;
     }
 
+    /**
+     * Sets the lock duration.
+     *
+     * @param string $lockDuration The lock duration.
+     * 
+     * @return none
+     */
     public function setMaxDeliveryCount($maxDeliveryCount)
     {
         $this->_maxDeliveryCount = $maxDeliveryCount;
     }
 
+    /**
+     * Gets enable batched operation.
+     * 
+     * @return boolean
+     */
     public function getEnableBatchedOperation()
     {
         return $this->_enableBatchedOperation;
     }
 
+    /**
+     * Sets the lock duration.
+     *
+     * @param string $lockDuration The lock duration.
+     * 
+     * @return none
+     */
     public function setEnableBatchedOperation($enableBatchedOperation)
     {
         $this->_enableBatchedOperation = $enableBatchedOperation; 
     }
 
+    /**
+     * Gets the size in bytes. 
+     * 
+     * @return integer
+     */
     public function getSizeInBytes()
     {
         return $this->_sizeInBytes;
     }
 
+    /**
+     * Sets the lock duration.
+     *
+     * @param string $lockDuration The lock duration.
+     * 
+     * @return none
+     */
     public function setSizeInBytes($sizeInBytes)
     {
         $this->_sizeInBytes = $sizeInBytes;
     }
 
+    /**
+     * Gets the message count. 
+     * 
+     * @return integer
+     */
     public function getMessageCount()
     {
         return $this->_messageCount;
     }
 
+    /**
+     * Sets the lock duration.
+     *
+     * @param string $lockDuration The lock duration.
+     * 
+     * @return none
+     */
     public function setMessageCount($messageCount)
     {
         $this->_messageCount = $messageCount;

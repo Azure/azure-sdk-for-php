@@ -40,22 +40,43 @@ use WindowsAzure\Core\Atom\Content;
  */
 class ListTopicsResult
 {
+    /**
+     * Gets the description of the topic. 
+     * 
+     * @var TopicDescription
+     */ 
     private $_topicDescription;
+
+    /**
+     * Creates a list topics result. 
+     *
+     * @var string $response The response of the list topic request.
+     */ 
     public static function create($response)
     {
-        $getTopicsResult = new ListSubscriptionsResult();
+        $getTopicsResult = new ListTopicsResult();
         $feed = Feed::create($response);
         $content = $feed->getContent();
         $topicDescription = XmlSerializer::objectDeserialize($content->getText());  
-        $getTopicsResult->setSubscriptionsDescription($topicDescription);
+        $getTopicsResult->setTopicsDescription($topicDescription);
     }
 
-    public function getRuleDescription()
+    /**
+     * Gets the description of the topic. 
+     *  
+     * @return TopicDescription
+     */
+    public function getTopicDescription()
     {
         return $this->_topicDescription;
     }
 
-    public function setRuleDescription($topicDescription)
+    /**
+     * Sets the topic description.
+     *
+     * @var TopicDescription $topicDescription The description of the topics. 
+     */
+    public function setTopicDescription($topicDescription)
     {
         $this->_topicDescription = $topicDescription;
     }

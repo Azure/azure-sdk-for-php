@@ -28,7 +28,7 @@ use WindowsAzure\Core\Atom\Feed;
 use WindowsAzure\Core\Atom\Content;
 
 /**
- * This class constructs HTTP requests and receive HTTP responses for service bus.
+ * The result of the list subscription reaction. 
  *
  * @category  Microsoft
  * @package   WindowsAzure\Services\ServiceBus
@@ -40,7 +40,18 @@ use WindowsAzure\Core\Atom\Content;
  */
 class ListSubscriptionsResult
 {
+    /**
+     * The description of the subscription. 
+     * 
+     * @var SubscriptionDescription
+     */
     private $_subscriptionDescription;
+
+    /**
+     * Creates a list subscription result instance with specified response from the server. 
+     * 
+     * @param string $response The response of the list subscription result. 
+     */
     public static function create($response)
     {
         $getSubscriptionsResult = new ListSubscriptionsResult();
@@ -49,12 +60,23 @@ class ListSubscriptionsResult
         $subscriptionDescription = XmlSerializer::objectDeserialize($content->getText());  
         $getSubscriptionsResult->setSubscriptionsDescription($subscriptionDescription);
     }
-
+    
+    /**
+     * Gets the description of the subscription. 
+     * 
+     * @return SubscriptionDescription
+     */
     public function getRuleDescription()
     {
         return $this->_subscriptionDescription;
     }
 
+    /**
+     * Sets the description of the rule. 
+     * 
+     * @param SubscriptionDescription $subscriptionDescription The description of the
+     * subscription.
+     */
     public function setRuleDescription($subscriptionDescription)
     {
         $this->_subscriptionDescription = $subscriptionDescription;

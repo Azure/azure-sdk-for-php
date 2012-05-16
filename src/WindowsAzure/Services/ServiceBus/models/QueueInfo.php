@@ -28,7 +28,7 @@ use WindowsAzure\Services\ServiceBus\Models\QueueDescription;
 use WindowsAzure\Utilities;
 
 /**
- * An active WRAP access Token.
+ * The information of a queue.
  *
  * @category  Microsoft
  * @package   WindowsAzure\Services\ServiceBus\Models
@@ -41,11 +41,17 @@ use WindowsAzure\Utilities;
 class QueueInfo
 {
     /** 
-     * The WRAP access token result. 
+     * The name of the queue.
      * 
-     * @var WrapAccessTokenResult
+     * @var string
      */
     private $_name;
+
+    /**
+     * The description of the queue. 
+     * 
+     * @var QueueDescription
+     */
     private $_queueDescription;
 
     /**
@@ -67,62 +73,42 @@ class QueueInfo
     }
 
     /**
-     * Gets the name of the 
+     * Gets the name of the queue.
      *
-     * @return WrapAccessTokenResult
+     * @return string
      */
     public function getName()
     {
         return $this->_name;
     }
 
+    /**
+     * Sets the name of the queue. 
+     * 
+     * @param string $name The name of the queue. 
+     */
     public function setName($name)
     {
         $this->_name = $name;
     }
 
+    /**
+     * Get the description of the queue. 
+     */
     public function getQueueDescription()
     {
         return $this->_queueDescription;
     }
 
+    /**
+     * Sets the description of the queue. 
+     *
+     * @param QueueDescription $queueDescription The description of the queue.
+     */
     public function setQueueDescription($queueDescription)
     {
         $this->_queueDescription = $queueDescription;
     }
     
-    /**
-     * Sets WRAP access token.
-     *
-     * @param string $wrapAccessTokenResult The WRAP access token result.
-     * 
-     * @return none
-     */
-    public function setWrapAccessTokenResult($wrapAccessTokenResult)
-    {
-        $this->_wrapAccessTokenResult = $wrapAccessTokenResult;
-    }
-
-    /**
-     * Gets expiration time.  
-     *
-     * @return \DateTime
-     */
-    public function getExpirationDateTime()
-    {
-        return $this->_expirationDateTime;
-    }
-
-    /**
-     * Sets expiration time.
-     *
-     * @param \DateTime $expirationDateTime value.
-     * 
-     * @return none
-     */
-    public function setExpirationDateTime($expirationDateTime)
-    {
-        $this->_expirationDateTime = $expirationDateTime;
-    }
 }
 
