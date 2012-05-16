@@ -328,7 +328,7 @@ class BlobServiceFunctionalTest extends FunctionalTestBase
                 $this->assertEquals(count(BlobServiceFunctionalTestData::$TEST_CONTAINER_NAMES), count($ret->getContainers()), 'when MaxResults=0 and Prefix=(\'' . $options->getPrefix() . '\'), then Blobs length');
             }
             else {
-                // Don"t know how many there should be
+                // Do not know how many there should be
             }
         }
         else if (strlen($ret->getNextMarker()) == 0) {
@@ -349,7 +349,7 @@ class BlobServiceFunctionalTest extends FunctionalTestBase
                         'when no next marker and Prefix=(\'' . $options->getPrefix() . '\'), then Blobs length');
             }
             else {
-                // Don"t know how many there should be
+                // Do not know how many there should be
             }
         }
         else {
@@ -562,7 +562,7 @@ class BlobServiceFunctionalTest extends FunctionalTestBase
         }
 
         if (!$deleted) {
-            // Try again. If it doesn"t work, not much else to try.
+            // Try again. If it does not work, not much else to try.
             $this->wrapper->deleteContainer($container);
         }
     }
@@ -1177,7 +1177,7 @@ class BlobServiceFunctionalTest extends FunctionalTestBase
                 $this->assertEquals(0, count($ret->getBlobs()), 'when MaxResults=0 and Prefix=(\'' . $options->getPrefix() . '\'), then Blobs length');
             }
             else {
-                // Don"t know how many there should be
+                // Do not know how many there should be
             }
         }
         else if (strlen($ret->getNextMarker()) == 0) {
@@ -1199,7 +1199,7 @@ class BlobServiceFunctionalTest extends FunctionalTestBase
                         'when no next marker and Prefix=(\'' . $options->getPrefix() . '\'), then Blobs length');
             }
             else {
-                // Don"t know how many there should be
+                // Do not know how many there should be
             }
         }
         else {
