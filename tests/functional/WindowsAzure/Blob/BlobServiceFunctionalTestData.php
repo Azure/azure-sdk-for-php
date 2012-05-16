@@ -44,7 +44,8 @@ use WindowsAzure\Common\Internal\Resources;
 use WindowsAzure\Blob\Models\ContainerAcl;
 use WindowsAzure\Blob\Models\PublicAccessType;
 
-class BlobServiceFunctionalTestData {
+class BlobServiceFunctionalTestData
+{
     public static $INTERESTING_TTL = 4;
     public static $testUniqueId;
     public static $tempBlobCounter = 1;
@@ -54,7 +55,8 @@ class BlobServiceFunctionalTestData {
     public static $TEST_BLOB_NAMES;
     private static $_accountName;
 
-    public static function setupData($accountName) {
+    public static function setupData($accountName)
+    {
         $rint = mt_rand(0, 1000000);
         self::$_accountName = $accountName;
         self::$testUniqueId = 'qa-' . $rint . '-';
@@ -64,19 +66,23 @@ class BlobServiceFunctionalTestData {
         self::$TEST_BLOB_NAMES = array( 'b' . self::$testUniqueId . 'a1', 'b' . self::$testUniqueId . 'a2', 'b' . self::$testUniqueId . 'b1' );
     }
 
-    public static function getInterestingContainerName() {
+    public static function getInterestingContainerName()
+    {
         return self::$testUniqueId . 'con-' . (self::$tempBlobCounter++);
     }
 
-    public static function getInterestingBlobName() {
+    public static function getInterestingBlobName()
+    {
         return self::$testUniqueId . 'int-' . (self::$tempBlobCounter++);
     }
 
-    public static function getSimpleMessageText() {
+    public static function getSimpleMessageText()
+    {
         return 'foo bar' . (self::$tempBlobCounter++);
     }
-    
-    public static function diffInTotalSeconds($date1, $date2) {
+
+    public static function diffInTotalSeconds($date1, $date2)
+    {
         $diff = $date1->diff($date2);
         $sec = $diff->s
                 + 60 * ( $diff->i
@@ -84,17 +90,18 @@ class BlobServiceFunctionalTestData {
                 + 24 * ( $diff->d
                 + 30 * ( $diff->m
                 + 12 * ( $diff->y )))));
-        return abs($sec);      
+        return abs($sec);
     }
 
 
-    public static function passTemporalAccessCondition($ac) {
+    public static function passTemporalAccessCondition($ac)
+    {
         if ($ac == null) {
             return true;
         }
 
         $now = new \DateTime();
-        
+
         if ($ac->getHeader() == Resources::IF_UNMODIFIED_SINCE) {
             return $ac->getValue() > $now;
         } else if ($ac->getHeader() == Resources::IF_MODIFIED_SINCE) {
@@ -104,7 +111,8 @@ class BlobServiceFunctionalTestData {
         }
     }
 
-    public static function getInterestingTimeoutValues() {
+    public static function getInterestingTimeoutValues()
+    {
         $ret = array();
         array_push($ret, null);
         array_push($ret, -1);
@@ -115,7 +123,8 @@ class BlobServiceFunctionalTestData {
         return $ret;
     }
 
-    public static function getDefaultServiceProperties() {
+    public static function getDefaultServiceProperties()
+    {
         // This is the default that comes from the server.
         $rp = new RetentionPolicy();
         $l = new Logging();
@@ -138,11 +147,13 @@ class BlobServiceFunctionalTestData {
         return $sp;
     }
 
-    public static function getContainerName() {
+    public static function getContainerName()
+    {
         return self::$TEST_CONTAINER_NAMES[0];
     }
 
-    public static function getInterestingServiceProperties() {
+    public static function getInterestingServiceProperties()
+    {
         $ret = array();
 
         {
@@ -236,7 +247,8 @@ class BlobServiceFunctionalTestData {
         return $ret;
     }
 
-    public static function getInterestingListContainersOptions() {
+    public static function getInterestingListContainersOptions()
+    {
         $ret = array();
 
 
@@ -304,7 +316,8 @@ class BlobServiceFunctionalTestData {
         return $ret;
     }
 
-    public static function getInterestingMetadata() {
+    public static function getInterestingMetadata()
+    {
         $ret = self::getNiceMetadata();
 
         // Some metadata that HTTP will not like.
@@ -314,7 +327,8 @@ class BlobServiceFunctionalTestData {
         return $ret;
     }
 
-    public static function getNiceMetadata() {
+    public static function getNiceMetadata()
+    {
         $ret = array();
 
         $metadata = array();
@@ -329,7 +343,8 @@ class BlobServiceFunctionalTestData {
         return $ret;
     }
 
-    public static function getInterestingCreateBlobOptions() {
+    public static function getInterestingCreateBlobOptions()
+    {
         $ret = array();
 
         $options = new CreateBlobOptions();
@@ -361,7 +376,8 @@ class BlobServiceFunctionalTestData {
         return $ret;
     }
 
-    public static function getInterestingListBlobsOptions() {
+    public static function getInterestingListBlobsOptions()
+    {
         $ret = array();
 
         $options = new ListBlobsOptions();
@@ -411,7 +427,8 @@ class BlobServiceFunctionalTestData {
         return $ret;
     }
 
-    public static function getInterestingCreateContainerOptions() {
+    public static function getInterestingCreateContainerOptions()
+    {
         $ret = array();
 
         $options = new CreateContainerOptions();
@@ -444,7 +461,8 @@ class BlobServiceFunctionalTestData {
         return $ret;
     }
 
-    public static function getInterestingDeleteContainerOptions() {
+    public static function getInterestingDeleteContainerOptions()
+    {
         $ret = array();
 
              $past = new \DateTime("01/01/2010");
@@ -461,10 +479,6 @@ class BlobServiceFunctionalTestData {
         $options->setTimeout(-10);
         array_push($ret, $options);
 
-//        $options = new DeleteContainerOptions();
-//        $options->setAccessCondition(AccessCondition::NONE);
-//        array_push($ret, $options);
-
         $options = new DeleteContainerOptions();
         $options->setAccessCondition(AccessCondition::ifModifiedSince($past));
         array_push($ret, $options);
@@ -484,7 +498,8 @@ class BlobServiceFunctionalTestData {
         return $ret;
     }
 
-    public static function getSetContainerMetadataOptions() {
+    public static function getSetContainerMetadataOptions()
+    {
         $ret = array();
 
           $past = new \DateTime("01/01/2010");
@@ -501,10 +516,6 @@ class BlobServiceFunctionalTestData {
         $options->setTimeout(-10);
         array_push($ret, $options);
 
-//        $options = new SetContainerMetadataOptions();
-//        $options->setAccessCondition(AccessCondition::NONE);
-//        array_push($ret, $options);
-
         $options = new SetContainerMetadataOptions();
         $options->setAccessCondition(AccessCondition::ifModifiedSince($past));
         array_push($ret, $options);
@@ -524,7 +535,8 @@ class BlobServiceFunctionalTestData {
         return $ret;
     }
 
-    public static function getInterestingACL() {
+    public static function getInterestingACL()
+    {
         $ret = array();
 
         $past = new \DateTime("01/01/2010");
@@ -533,8 +545,6 @@ class BlobServiceFunctionalTestData {
         $acl = new ContainerACL();
         array_push($ret, $acl);
 
-        // TODO: Remove these once after the following is fixed: 
-        // https://github->com/WindowsAzure/azure-sdk-for-java/issues/73
         $acl = new ContainerACL();
         $acl->setEtag('bogus etag');
         array_push($ret, $acl);

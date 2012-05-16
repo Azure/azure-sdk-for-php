@@ -49,11 +49,13 @@ use WindowsAzure\Blob\Models\ContainerAcl;
 use WindowsAzure\Blob\BlobSettings;
 use WindowsAzure\Blob\Models\PublicAccessType;
 
-class BlobServiceFunctionalTest extends FunctionalTestBase {
+class BlobServiceFunctionalTest extends FunctionalTestBase
+{
     /**
      * @covers WindowsAzure\Blob\Internal\BlobRestProxy::getServiceProperties
      */
-    public function testGetServicePropertiesNoOptions() {
+    public function testGetServicePropertiesNoOptions()
+    {
         $serviceProperties = BlobServiceFunctionalTestData::getDefaultServiceProperties();
         $shouldReturn = false;
         try {
@@ -78,7 +80,8 @@ class BlobServiceFunctionalTest extends FunctionalTestBase {
     /**
      * @covers WindowsAzure\Blob\Internal\BlobRestProxy::getServiceProperties
      */
-    public function testGetServiceProperties() {
+    public function testGetServiceProperties()
+    {
         $serviceProperties = BlobServiceFunctionalTestData::getDefaultServiceProperties();
 
         $shouldReturn = false;
@@ -110,7 +113,8 @@ class BlobServiceFunctionalTest extends FunctionalTestBase {
     /**
      * @covers WindowsAzure\Blob\Internal\BlobRestProxy::getServiceProperties
      */
-    private function getServicePropertiesWorker($options) {
+    private function getServicePropertiesWorker($options)
+    {
         $effOptions = (is_null($options) ? new BlobServiceOptions() : $options);
         try {
             $ret = (is_null($options) ? $this->wrapper->getServiceProperties() : $this->wrapper->getServiceProperties($effOptions));
@@ -141,7 +145,8 @@ class BlobServiceFunctionalTest extends FunctionalTestBase {
         }
     }
 
-    private function verifyServicePropertiesWorker($ret, $serviceProperties) {
+    private function verifyServicePropertiesWorker($ret, $serviceProperties)
+    {
         if (is_null($serviceProperties)) {
             $serviceProperties = BlobServiceFunctionalTestData::getDefaultServiceProperties();
         }
@@ -175,7 +180,8 @@ class BlobServiceFunctionalTest extends FunctionalTestBase {
      * @covers WindowsAzure\Blob\Internal\BlobRestProxy::getServiceProperties
      * @covers WindowsAzure\Blob\Internal\BlobRestProxy::setServiceProperties
      */
-    public function testSetServicePropertiesNoOptions() {
+    public function testSetServicePropertiesNoOptions()
+    {
         $serviceProperties = BlobServiceFunctionalTestData::getDefaultServiceProperties();
         $this->setServicePropertiesWorker($serviceProperties, null);
     }
@@ -184,7 +190,8 @@ class BlobServiceFunctionalTest extends FunctionalTestBase {
      * @covers WindowsAzure\Blob\Internal\BlobRestProxy::getServiceProperties
      * @covers WindowsAzure\Blob\Internal\BlobRestProxy::setServiceProperties
      */
-    public function testSetServiceProperties() {
+    public function testSetServiceProperties()
+    {
         $interestingServiceProperties = BlobServiceFunctionalTestData::getInterestingServiceProperties();
         foreach($interestingServiceProperties as $serviceProperties)  {
             $interestingTimeouts = BlobServiceFunctionalTestData::getInterestingTimeoutValues();
@@ -204,7 +211,8 @@ class BlobServiceFunctionalTest extends FunctionalTestBase {
      * @covers WindowsAzure\Blob\Internal\BlobRestProxy::getServiceProperties
      * @covers WindowsAzure\Blob\Internal\BlobRestProxy::setServiceProperties
      */
-    private function setServicePropertiesWorker($serviceProperties, $options) {
+    private function setServicePropertiesWorker($serviceProperties, $options)
+    {
         try {
             if (is_null($options)) {
                 $this->wrapper->setServiceProperties($serviceProperties);
@@ -248,14 +256,16 @@ class BlobServiceFunctionalTest extends FunctionalTestBase {
     /**
      * @covers WindowsAzure\Blob\Internal\BlobRestProxy::listContainers
      */
-    public function testListContainersNoOptions() {
+    public function testListContainersNoOptions()
+    {
         $this->listContainersWorker(null);
     }
 
     /**
      * @covers WindowsAzure\Blob\Internal\BlobRestProxy::listContainers
      */
-    public function testListContainers() {
+    public function testListContainers()
+    {
         $interestingListContainersOptions = BlobServiceFunctionalTestData::getInterestingListContainersOptions();
         foreach($interestingListContainersOptions as $options)  {
             $this->listContainersWorker($options);
@@ -265,7 +275,8 @@ class BlobServiceFunctionalTest extends FunctionalTestBase {
     /**
      * @covers WindowsAzure\Blob\Internal\BlobRestProxy::listContainers
      */
-    private function listContainersWorker($options) {
+    private function listContainersWorker($options)
+    {
         $finished = false;
         while (!$finished) {
             try {
@@ -299,7 +310,8 @@ class BlobServiceFunctionalTest extends FunctionalTestBase {
         }
     }
 
-    private function verifyListContainersWorker($ret, $options) {
+    private function verifyListContainersWorker($ret, $options)
+    {
         // Cannot really check the next marker. Just make sure it is not null.
         $this->assertEquals($options->getMarker(), $ret->getMarker(), 'getMarker');
         $this->assertEquals($options->getMaxResults(), $ret->getMaxResults(), 'getMaxResults');
@@ -332,7 +344,7 @@ class BlobServiceFunctionalTest extends FunctionalTestBase {
                     $expectedCount += 1;
                 }
                 $this->assertEquals(
-                        $expectedCount, 
+                        $expectedCount,
                         count($ret->getContainers()),
                         'when no next marker and Prefix=(\'' . $options->getPrefix() . '\'), then Blobs length');
             }
@@ -342,8 +354,8 @@ class BlobServiceFunctionalTest extends FunctionalTestBase {
         }
         else {
             $this->assertEquals(
-                    count($ret->getContainers()), 
-                    $options->getMaxResults(), 
+                    count($ret->getContainers()),
+                    $options->getMaxResults(),
                     'when NextMarker (' . $ret->getNextMarker() . ')!=\'\', Blobs length (' . count($ret->getContainers()) . ') should be == MaxResults (' . $options->getMaxResults() . ')');
 
             if ($options->getPrefix() !== null && $options->getPrefix() == BlobServiceFunctionalTestData::$nonExistBlobPrefix) {
@@ -359,7 +371,8 @@ class BlobServiceFunctionalTest extends FunctionalTestBase {
      * @covers WindowsAzure\Blob\Internal\BlobRestProxy::getContainerMetadata
      * @covers WindowsAzure\Blob\Internal\BlobRestProxy::listContainers
      */
-    public function testCreateContainerNoOptions() {
+    public function testCreateContainerNoOptions()
+    {
         $this->createContainerWorker(null);
     }
 
@@ -369,7 +382,8 @@ class BlobServiceFunctionalTest extends FunctionalTestBase {
      * @covers WindowsAzure\Blob\Internal\BlobRestProxy::getContainerMetadata
      * @covers WindowsAzure\Blob\Internal\BlobRestProxy::listContainers
      */
-    public function testCreateContainer() {
+    public function testCreateContainer()
+    {
         $interestingCreateContainerOptions = BlobServiceFunctionalTestData::getInterestingCreateContainerOptions();
         foreach($interestingCreateContainerOptions as $options)  {
             $this->createContainerWorker($options);
@@ -382,7 +396,8 @@ class BlobServiceFunctionalTest extends FunctionalTestBase {
      * @covers WindowsAzure\Blob\Internal\BlobRestProxy::getContainerMetadata
      * @covers WindowsAzure\Blob\Internal\BlobRestProxy::listContainers
      */
-    private function createContainerWorker($options) {
+    private function createContainerWorker($options)
+    {
         $container = BlobServiceFunctionalTestData::getInterestingContainerName();
         $created = false;
 
@@ -420,7 +435,7 @@ class BlobServiceFunctionalTest extends FunctionalTestBase {
             if ($options === null) {
                 $options = new CreateContainerOptions();
             }
-            
+
             if ($options->getTimeout() === null || $options->getTimeout() >= 1) {
                 throw $e;
             }
@@ -437,8 +452,9 @@ class BlobServiceFunctionalTest extends FunctionalTestBase {
             }
         }
     }
-    
-    private function verifyCreateContainerWorker($ret, $options) {
+
+    private function verifyCreateContainerWorker($ret, $options)
+    {
         if ($options->getMetadata() === null) {
             $this->assertNotNull($ret->getMetadata(), 'container Metadata');
             $this->assertEquals(0, count($ret->getMetadata()), 'count container Metadata');
@@ -458,7 +474,8 @@ class BlobServiceFunctionalTest extends FunctionalTestBase {
      * @covers WindowsAzure\Blob\Internal\BlobRestProxy::deleteContainer
      * @covers WindowsAzure\Blob\Internal\BlobRestProxy::listContainers
      */
-    public function testDeleteContainerNoOptions() {
+    public function testDeleteContainerNoOptions()
+    {
         $this->deleteContainerWorker(null);
     }
 
@@ -467,7 +484,8 @@ class BlobServiceFunctionalTest extends FunctionalTestBase {
      * @covers WindowsAzure\Blob\Internal\BlobRestProxy::deleteContainer
      * @covers WindowsAzure\Blob\Internal\BlobRestProxy::listContainers
      */
-    public function testDeleteContainer() {
+    public function testDeleteContainer()
+    {
         $interestingDeleteContainerOptions = BlobServiceFunctionalTestData::getInterestingDeleteContainerOptions();
         foreach($interestingDeleteContainerOptions as $options)  {
             $this->deleteContainerWorker($options);
@@ -479,7 +497,8 @@ class BlobServiceFunctionalTest extends FunctionalTestBase {
      * @covers WindowsAzure\Blob\Internal\BlobRestProxy::deleteContainer
      * @covers WindowsAzure\Blob\Internal\BlobRestProxy::listContainers
      */
-    private function deleteContainerWorker($options) {
+    private function deleteContainerWorker($options)
+    {
         $container = BlobServiceFunctionalTestData::getInterestingContainerName();
 
         // Make sure there is something to delete.
@@ -490,7 +509,7 @@ class BlobServiceFunctionalTest extends FunctionalTestBase {
         $opts->setPrefix(BlobServiceFunctionalTestData::$testUniqueId);
         $qs = $this->wrapper->listContainers($opts);
         $this->assertEquals(
-                count($qs->getContainers()), 
+                count($qs->getContainers()),
                 count(BlobServiceFunctionalTestData::$TEST_CONTAINER_NAMES) + 1,
                 'After adding one, with Prefix=(\'' . BlobServiceFunctionalTestData::$testUniqueId . '\'), then Containers length');
 
@@ -521,8 +540,8 @@ class BlobServiceFunctionalTest extends FunctionalTestBase {
             $opts->setPrefix(BlobServiceFunctionalTestData::$testUniqueId);
             $qs = $this->wrapper->listContainers($opts);
             $this->assertEquals(
-                    count($qs->getContainers()), 
-                    count(BlobServiceFunctionalTestData::$TEST_CONTAINER_NAMES), 
+                    count($qs->getContainers()),
+                    count(BlobServiceFunctionalTestData::$TEST_CONTAINER_NAMES),
                     'After adding then deleting one, with Prefix=(\'' . BlobServiceFunctionalTestData::$testUniqueId . '\'), then Containers length');
 
             // Nothing else interesting to check for the $options.
@@ -554,7 +573,8 @@ class BlobServiceFunctionalTest extends FunctionalTestBase {
      * @covers WindowsAzure\Blob\Internal\BlobRestProxy::getContainerMetadata
      * @covers WindowsAzure\Blob\Internal\BlobRestProxy::setContainerMetadata
      */
-    public function testGetContainerMetadataNoOptions() {
+    public function testGetContainerMetadataNoOptions()
+    {
         $interestingMetadata = BlobServiceFunctionalTestData::getNiceMetadata();
         foreach ($interestingMetadata as $metadata) {
             $this->getContainerMetadataWorker(null, $metadata);
@@ -567,7 +587,8 @@ class BlobServiceFunctionalTest extends FunctionalTestBase {
      * @covers WindowsAzure\Blob\Internal\BlobRestProxy::getContainerMetadata
      * @covers WindowsAzure\Blob\Internal\BlobRestProxy::setContainerMetadata
      */
-    public function testGetContainerMetadata() {
+    public function testGetContainerMetadata()
+    {
         $interestingTimeouts = BlobServiceFunctionalTestData::getInterestingTimeoutValues();
         $interestingMetadata = BlobServiceFunctionalTestData::getNiceMetadata();
 
@@ -586,7 +607,8 @@ class BlobServiceFunctionalTest extends FunctionalTestBase {
      * @covers WindowsAzure\Blob\Internal\BlobRestProxy::getContainerMetadata
      * @covers WindowsAzure\Blob\Internal\BlobRestProxy::setContainerMetadata
      */
-    private function getContainerMetadataWorker($options, $metadata) {
+    private function getContainerMetadataWorker($options, $metadata)
+    {
         $container = BlobServiceFunctionalTestData::getInterestingContainerName();
 
         // Make sure there is something to test
@@ -618,7 +640,8 @@ class BlobServiceFunctionalTest extends FunctionalTestBase {
         $this->wrapper->deleteContainer($container);
     }
 
-    private function verifyGetContainerMetadataWorker($ret, $metadata) {
+    private function verifyGetContainerMetadataWorker($ret, $metadata)
+    {
         $this->assertNotNull($ret->getMetadata(), 'container Metadata');
         $this->assertNotNull($ret->getEtag(), 'container getEtag');
         $this->assertNotNull($ret->getLastModified(), 'container getLastModified');
@@ -636,14 +659,15 @@ class BlobServiceFunctionalTest extends FunctionalTestBase {
                 'Last modified date (' . $ret->getLastModified()->format(\DateTime::RFC1123) . ')'.
                 ' should be within 10 seconds of $now (' . $now->format(\DateTime::RFC1123) . ')');
     }
-    
+
     /**
      * @covers WindowsAzure\Blob\Internal\BlobRestProxy::createContainer
      * @covers WindowsAzure\Blob\Internal\BlobRestProxy::deleteContainer
      * @covers WindowsAzure\Blob\Internal\BlobRestProxy::getContainerMetadata
      * @covers WindowsAzure\Blob\Internal\BlobRestProxy::setContainerMetadata
      */
-    public function testSetContainerMetadataNoOptions() {
+    public function testSetContainerMetadataNoOptions()
+    {
         $interestingMetadata = BlobServiceFunctionalTestData::getInterestingMetadata();
         foreach($interestingMetadata as $metadata) {
             $this->setContainerMetadataWorker(null, $metadata);
@@ -656,7 +680,8 @@ class BlobServiceFunctionalTest extends FunctionalTestBase {
      * @covers WindowsAzure\Blob\Internal\BlobRestProxy::getContainerMetadata
      * @covers WindowsAzure\Blob\Internal\BlobRestProxy::setContainerMetadata
      */
-    public function testSetContainerMetadata() {
+    public function testSetContainerMetadata()
+    {
         $interestingSetContainerMetadataOptions = BlobServiceFunctionalTestData::getSetContainerMetadataOptions();
         $interestingMetadata = BlobServiceFunctionalTestData::getInterestingMetadata();
 
@@ -673,7 +698,8 @@ class BlobServiceFunctionalTest extends FunctionalTestBase {
      * @covers WindowsAzure\Blob\Internal\BlobRestProxy::getContainerMetadata
      * @covers WindowsAzure\Blob\Internal\BlobRestProxy::setContainerMetadata
      */
-    private function setContainerMetadataWorker($options, $metadata) {
+    private function setContainerMetadataWorker($options, $metadata)
+    {
         $container = BlobServiceFunctionalTestData::getInterestingContainerName();
 
         // Make sure there is something to test
@@ -700,7 +726,7 @@ class BlobServiceFunctionalTest extends FunctionalTestBase {
                 }
 
                 $this->assertFalse(
-                     Utilities::startsWith($firstkey, '<'), 
+                     Utilities::startsWith($firstkey, '<'),
                     'Should get HTTP request error if the metadata is invalid');
 
                 if ($options->getTimeout() !== null && $options->getTimeout() < 1) {
@@ -708,9 +734,9 @@ class BlobServiceFunctionalTest extends FunctionalTestBase {
                 }
 
                 // setMetadata only honors If-Modified-Since
-                if (!Configuration::isEmulated() && 
-                        !BlobServiceFunctionalTestData::passTemporalAccessCondition($options->getAccessCondition()) 
-                        && ($options->getAccessCondition() !== null 
+                if (!Configuration::isEmulated() &&
+                        !BlobServiceFunctionalTestData::passTemporalAccessCondition($options->getAccessCondition())
+                        && ($options->getAccessCondition() !== null
                         && $options->getAccessCondition()->getHeader() != Resources::IF_UNMODIFIED_SINCE)) {
                     $this->assertTrue(false, 'Expect failing access condition to throw');
                 }
@@ -720,13 +746,13 @@ class BlobServiceFunctionalTest extends FunctionalTestBase {
             }
             catch (\HTTP_Request2_LogicException $e) {
                 $this->assertTrue(
-                        Utilities::startsWith($firstkey, '<'), 
+                        Utilities::startsWith($firstkey, '<'),
                         'Should get HTTP request error only if the metadata is invalid');
             }
         }
         catch (ServiceException $e) {
             if (!Configuration::isEmulated() &&
-                    !BlobServiceFunctionalTestData::passTemporalAccessCondition($options->getAccessCondition()) && 
+                    !BlobServiceFunctionalTestData::passTemporalAccessCondition($options->getAccessCondition()) &&
                     ($options->getAccessCondition() !== null &&
                     $options->getAccessCondition()->getHeader() != Resources::IF_UNMODIFIED_SINCE)) {
                 // setMetadata only honors If-Modified-Since
@@ -750,7 +776,8 @@ class BlobServiceFunctionalTest extends FunctionalTestBase {
       * @covers WindowsAzure\Blob\Internal\BlobRestProxy::getContainerProperties
       * @covers WindowsAzure\Blob\Internal\BlobRestProxy::setContainerMetadata
       */
-    public function testGetContainerPropertiesNoOptions() {
+    public function testGetContainerPropertiesNoOptions()
+    {
         $interestingMetadata = BlobServiceFunctionalTestData::getNiceMetadata();
         foreach ($interestingMetadata as $metadata) {
             $this->getContainerPropertiesWorker(null, $metadata);
@@ -763,7 +790,8 @@ class BlobServiceFunctionalTest extends FunctionalTestBase {
      * @covers WindowsAzure\Blob\Internal\BlobRestProxy::getContainerProperties
      * @covers WindowsAzure\Blob\Internal\BlobRestProxy::setContainerMetadata
      */
-    public function testGetContainerProperties() {
+    public function testGetContainerProperties()
+    {
 
         $interestingTimeouts = BlobServiceFunctionalTestData::getInterestingTimeoutValues();
         $interestingMetadata = BlobServiceFunctionalTestData::getNiceMetadata();
@@ -782,7 +810,8 @@ class BlobServiceFunctionalTest extends FunctionalTestBase {
      * @covers WindowsAzure\Blob\Internal\BlobRestProxy::getContainerProperties
      * @covers WindowsAzure\Blob\Internal\BlobRestProxy::setContainerMetadata
      */
-    private function getContainerPropertiesWorker($options, $metadata) {
+    private function getContainerPropertiesWorker($options, $metadata)
+    {
         $container = BlobServiceFunctionalTestData::getInterestingContainerName();
 
         // Make sure there is something to test
@@ -820,7 +849,8 @@ class BlobServiceFunctionalTest extends FunctionalTestBase {
      * @covers WindowsAzure\Blob\Internal\BlobRestProxy::deleteContainer
      * @covers WindowsAzure\Blob\Internal\BlobRestProxy::getContainerACL
      */
-    public function testGetContainerACLNoOptions() {
+    public function testGetContainerACLNoOptions()
+    {
         $this->getContainerACLWorker(null);
     }
 
@@ -829,7 +859,8 @@ class BlobServiceFunctionalTest extends FunctionalTestBase {
      * @covers WindowsAzure\Blob\Internal\BlobRestProxy::deleteContainer
      * @covers WindowsAzure\Blob\Internal\BlobRestProxy::getContainerACL
      */
-    public function testGetContainerACL() {
+    public function testGetContainerACL()
+    {
 
         $interestingTimeouts = BlobServiceFunctionalTestData::getInterestingTimeoutValues();
         foreach($interestingTimeouts as $timeout)  {
@@ -844,7 +875,8 @@ class BlobServiceFunctionalTest extends FunctionalTestBase {
      * @covers WindowsAzure\Blob\Internal\BlobRestProxy::deleteContainer
      * @covers WindowsAzure\Blob\Internal\BlobRestProxy::getContainerACL
      */
-    private function getContainerACLWorker($options) {
+    private function getContainerACLWorker($options)
+    {
         $container = BlobServiceFunctionalTestData::getInterestingContainerName();
 
         // Make sure there is something to test
@@ -876,7 +908,8 @@ class BlobServiceFunctionalTest extends FunctionalTestBase {
         $this->wrapper->deleteContainer($container);
     }
 
-    private function verifyGetContainerACLWorker($ret) {
+    private function verifyGetContainerACLWorker($ret)
+    {
         $this->assertNotNull($ret->getContainerACL(), '$ret->getContainerACL');
         $this->assertNotNull($ret->getContainerACL()->getEtag(), '$ret->getContainerACL->getEtag');
         $this->assertNotNull($ret->getContainerACL()->getLastModified(), '$ret->getContainerACL->getLastModified');
@@ -900,7 +933,8 @@ class BlobServiceFunctionalTest extends FunctionalTestBase {
      * @covers WindowsAzure\Blob\Internal\BlobRestProxy::getContainerACL
      * @covers WindowsAzure\Blob\Internal\BlobRestProxy::setContainerACL
      */
-    public function testSetContainerACLNoOptions() {
+    public function testSetContainerACLNoOptions()
+    {
         $interestingACL = BlobServiceFunctionalTestData::getInterestingACL();
         foreach($interestingACL as $acl)  {
             $this->setContainerACLWorker(null, $acl);
@@ -914,7 +948,8 @@ class BlobServiceFunctionalTest extends FunctionalTestBase {
      * @covers WindowsAzure\Blob\Internal\BlobRestProxy::getContainerACL
      * @covers WindowsAzure\Blob\Internal\BlobRestProxy::setContainerACL
      */
-    public function testSetContainerACL() {
+    public function testSetContainerACL()
+    {
         $interestingACL = BlobServiceFunctionalTestData::getInterestingACL();
         $interestingTimeouts = BlobServiceFunctionalTestData::getInterestingTimeoutValues();
         foreach($interestingTimeouts as $timeout)  {
@@ -933,7 +968,8 @@ class BlobServiceFunctionalTest extends FunctionalTestBase {
      * @covers WindowsAzure\Blob\Internal\BlobRestProxy::getContainerACL
      * @covers WindowsAzure\Blob\Internal\BlobRestProxy::setContainerACL
      */
-    private function setContainerACLWorker($options, $acl) {
+    private function setContainerACLWorker($options, $acl)
+    {
         $container = BlobServiceFunctionalTestData::getInterestingContainerName();
 
         // Make sure there is something to test
@@ -980,7 +1016,8 @@ class BlobServiceFunctionalTest extends FunctionalTestBase {
         $this->wrapper->deleteContainer($container);
     }
 
-    private function verifySetContainerACLWorker($ret, $container, $acl, $blobContent) {
+    private function verifySetContainerACLWorker($ret, $container, $acl, $blobContent)
+    {
         $this->assertNotNull($ret->getContainerACL(), '$ret->getContainerACL');
         $this->assertNotNull($ret->getContainerACL()->getEtag(), '$ret->getContainerACL->getEtag');
         $now = new \DateTime();
@@ -1003,23 +1040,23 @@ class BlobServiceFunctionalTest extends FunctionalTestBase {
             $actId = $actIds[$i];
             $this->assertEquals($expId->getId(), $actId->getId(), 'SignedIdentifiers['+$i+']->getId');
             $this->assertEquals(
-                    $expId->getAccessPolicy()->getPermission(), 
-                    $actId->getAccessPolicy()->getPermission(), 
+                    $expId->getAccessPolicy()->getPermission(),
+                    $actId->getAccessPolicy()->getPermission(),
                     'SignedIdentifiers['+$i+']->getAccessPolicy->getPermission');
             $this->assertTrue(BlobServiceFunctionalTestData::diffInTotalSeconds(
-                    $expId->getAccessPolicy()->getStart(), 
+                    $expId->getAccessPolicy()->getStart(),
                     $actId->getAccessPolicy()->getStart()) < 1,
                     'SignedIdentifiers['+$i+']->getAccessPolicy->getStart should match within 1 second, ' .
                     'exp=' . $expId->getAccessPolicy()->getStart()->format(\DateTime::RFC1123) . ', ' .
                     'act=' . $actId->getAccessPolicy()->getStart()->format(\DateTime::RFC1123));
             $this->assertTrue(BlobServiceFunctionalTestData::diffInTotalSeconds(
-                    $expId->getAccessPolicy()->getExpiry(), 
+                    $expId->getAccessPolicy()->getExpiry(),
                     $actId->getAccessPolicy()->getExpiry()) < 1,
                     'SignedIdentifiers['+$i+']->getAccessPolicy->getExpiry should match within 1 second, ' .
                     'exp=' . $expId->getAccessPolicy()->getExpiry()->format(\DateTime::RFC1123) . ', ' .
                     'act=' . $actId->getAccessPolicy()->getExpiry()->format(\DateTime::RFC1123));
         }
-        
+
         if (!Configuration::isEmulated()) {
             $containerAddress = $this->config->getProperty(BlobSettings::URI) . '/' . $container;
             $blobListAddress = $containerAddress . '?restype=container&comp=list';
@@ -1038,7 +1075,7 @@ class BlobServiceFunctionalTest extends FunctionalTestBase {
             }
             else if ($acl->getPublicAccess() !== null && $acl->getPublicAccess() == PublicAccessType::BLOBS_ONLY) {
                 // Public read access for blobs only: Blob data within this container
-                // can be read via anonymous request, but $container data is not available. 
+                // can be read via anonymous request, but $container data is not available.
                 // Clients cannot enumerate blobs within the $container via anonymous request.
                 $this->assertFalse($canDownloadBlobList, '$canDownloadBlobList when ' . $acl->getPublicAccess());
                 $this->assertTrue($canDownloadBlob, '$canDownloadBlob when ' . $acl->getPublicAccess());
@@ -1051,7 +1088,8 @@ class BlobServiceFunctionalTest extends FunctionalTestBase {
         }
     }
 
-    private function canDownloadFromUrl($blobAddress, $expectedStartingValue) {
+    private function canDownloadFromUrl($blobAddress, $expectedStartingValue)
+    {
         $url = parse_url($blobAddress);
         $host = $url['host'];
         $fp = fsockopen($host, '80');
@@ -1066,7 +1104,8 @@ class BlobServiceFunctionalTest extends FunctionalTestBase {
     /**
      * @covers WindowsAzure\Blob\Internal\BlobRestProxy::listBlobs
      */
-    public function testListBlobsNoOptions() {
+    public function testListBlobsNoOptions()
+    {
         $container = BlobServiceFunctionalTestData::getContainerName();
         $this->listBlobsWorker($container, null);
     }
@@ -1074,7 +1113,8 @@ class BlobServiceFunctionalTest extends FunctionalTestBase {
     /**
      * @covers WindowsAzure\Blob\Internal\BlobRestProxy::listBlobs
      */
-    public function testListBlobs() {
+    public function testListBlobs()
+    {
         $interestingListBlobsOptions = BlobServiceFunctionalTestData::getInterestingListBlobsOptions();
         $container = BlobServiceFunctionalTestData::getContainerName();
         foreach($interestingListBlobsOptions as $options)  {
@@ -1085,7 +1125,8 @@ class BlobServiceFunctionalTest extends FunctionalTestBase {
     /**
      * @covers WindowsAzure\Blob\Internal\BlobRestProxy::listBlobs
      */
-    private function listBlobsWorker($container, $options) {
+    private function listBlobsWorker($container, $options)
+    {
         $finished = false;
         while (!$finished) {
             try {
@@ -1119,7 +1160,8 @@ class BlobServiceFunctionalTest extends FunctionalTestBase {
         }
     }
 
-    private function verifyListBlobsWorker($ret, $options) {
+    private function verifyListBlobsWorker($ret, $options)
+    {
         $this->assertEquals($options->getMarker(), $ret->getMarker(), 'getMarker');
         $this->assertEquals($options->getMaxResults(), $ret->getMaxResults(), 'getMaxResults');
         $this->assertEquals($options->getPrefix(), $ret->getPrefix(), 'getPrefix');
@@ -1140,20 +1182,20 @@ class BlobServiceFunctionalTest extends FunctionalTestBase {
         }
         else if (strlen($ret->getNextMarker()) == 0) {
             $this->assertTrue(
-                    count($ret->getBlobs()) <= $options->getMaxResults(), 
+                    count($ret->getBlobs()) <= $options->getMaxResults(),
                     'when NextMarker (\'' . $ret->getNextMarker() . '\')==\'\', Blobs length (' . count($ret->getBlobs()) . ') should be <= MaxResults (' . $options->getMaxResults() . ')');
 
             if (BlobServiceFunctionalTestData::$nonExistBlobPrefix == $options->getPrefix()) {
                 $this->assertEquals(
-                        0, 
+                        0,
                         count($ret->getBlobs()),
                         'when no next marker and Prefix=(\'' . $options->getPrefix() . '\'), then Blobs length');
             }
             else if (BlobServiceFunctionalTestData::$testUniqueId == $options->getPrefix()) {
                 // Need to futz with the mod because you are allowed to get MaxResults items returned.
                 $this->assertEquals(
-                        0, 
-                        count($ret->getBlobs()) % $options->getMaxResults(), 
+                        0,
+                        count($ret->getBlobs()) % $options->getMaxResults(),
                         'when no next marker and Prefix=(\'' . $options->getPrefix() . '\'), then Blobs length');
             }
             else {
@@ -1168,7 +1210,7 @@ class BlobServiceFunctionalTest extends FunctionalTestBase {
             }
         }
     }
-    
+
     //    getBlobProperties
     //    getBlobMetadata
     //    setBlobProperties

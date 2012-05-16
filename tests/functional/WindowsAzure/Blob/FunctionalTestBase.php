@@ -38,16 +38,26 @@ use WindowsAzure\Common\Configuration;
 use WindowsAzure\Blob\BlobService;
 use WindowsAzure\Blob\BlobSettings;
 
-class FunctionalTestBase extends BlobServiceRestProxyTestBase {
+class FunctionalTestBase extends BlobServiceRestProxyTestBase
+{
 
+    /**
+     * @covers WindowsAzure\Blob\Internal\BlobRestProxy::withFilter
+     */
     public function __construct()
     {
         parent::__construct();
         $fiddlerFilter = new FiddlerFilter();
         $this->wrapper = $this->wrapper->withFilter($fiddlerFilter);
     }
-    
-    public function setUp() {
+
+    /**
+     * @covers WindowsAzure\Blob\Internal\BlobRestProxy::createContainer
+     * @covers WindowsAzure\Blob\Internal\BlobRestProxy::deleteContainer
+     * @covers WindowsAzure\Blob\Internal\BlobRestProxy::listContainers
+     */
+    public function setUp()
+    {
         parent::setUp();
         $accountName = $this->config->getProperty(BlobSettings::URI);
         $firstSlash = strpos($accountName, '/');
@@ -66,7 +76,11 @@ class FunctionalTestBase extends BlobServiceRestProxyTestBase {
         }
     }
 
-    public function tearDown() {
+    /**
+     * @covers WindowsAzure\Blob\Internal\BlobRestProxy::deleteContainer
+     */
+    public function tearDown()
+    {
         foreach(BlobServiceFunctionalTestData::$TEST_CONTAINER_NAMES as $name)  {
             $this->wrapper->deleteContainer($name);
         }
