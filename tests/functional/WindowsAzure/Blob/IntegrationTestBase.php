@@ -30,7 +30,11 @@ use Tests\Framework\FiddlerFilter;
 use Tests\Framework\BlobServiceRestProxyTestBase;
 use WindowsAzure\Blob\BlobService;
 
-class IntegrationTestBase extends BlobServiceRestProxyTestBase {
+class IntegrationTestBase extends BlobServiceRestProxyTestBase
+{
+    /**
+     * @covers WindowsAzure\Blob\Internal\BlobRestProxy::withFilter
+     */
     public function __construct()
     {
         parent::__construct();
