@@ -15,52 +15,43 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   WindowsAzure\Core\Serialization
- * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
+ * @package   Tests\Unit\WindowsAzure\Services\Queue\Models
+ * @author    Azure PHP SDK <azurephpsdk@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
- 
-namespace WindowsAzure\Core\Serialization;
+
+namespace Tests\Unit\WindowsAzure\Services\ServiceBus\Models;
+use WindowsAzure\Services\ServiceBus\Models\RuleInfo;
 
 /**
- * The serialization interface.
+ * Unit tests for class WrapAccessTokenResult
  *
  * @category  Microsoft
- * @package   WindowsAzure\Core\Serialization
- * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
+ * @package   Tests\Unit\WindowsAzure\Services\Queue\Models
+ * @author    Azure PHP SDK <azurephpsdk@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @version   Release: @package_version@
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
-interface ISerializer
+class RuleInfoTest extends \PHPUnit_Framework_TestCase
 {
-
-    public function objectSerialize($targetObject, $rootName, $properties = null);
-    public function objectUnserialize($serialized);
-
     /**
-     * Serializes given array. The array indices must be string to use them as
-     * as element name.
-     * 
-     * @param array $array      The object to serialize represented in array.
-     * @param array $properties The used properties in the serialization process.
-     * 
-     * @return string
+     * @covers WindowsAzure\Services\ServiceBus\Models\RuleInfo::__construct
      */
-    public function serialize($array, $properties = null);
+    public function testRuleInfoConstructor()
+    {
+        // Setup
+        
+        // Test
+        $ruleInfo = new RuleInfo();
+        
+        // Assert
+        $this->assertNotNull($ruleInfo);
+    }
 
-    
-    /**
-     * Unserializes given serialized string.
-     * 
-     * @param string $serialized The serialized object in string representation.
-     * 
-     * @return array
-     */
-    public function unserialize($serialized);
 }
 
 ?>

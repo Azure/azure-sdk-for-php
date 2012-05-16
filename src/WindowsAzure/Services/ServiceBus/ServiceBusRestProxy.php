@@ -23,13 +23,32 @@
  */
 
 namespace WindowsAzure\Services\ServiceBus;
+use WindowsAzure\Core\Atom\Content;
+use WindowsAzure\Core\Atom\Entry;
+use WindowsAzure\Core\Atom\Feed;
 use WindowsAzure\Core\Http\IHttpClient;
+use WindowsAzure\Core\Http\HttpCallContext;
 use WindowsAzure\Core\Http\Url;
+use WindowsAzure\Core\Serialization\XmlSerializer;
 use WindowsAzure\Core\WindowsAzureUtilities;
 use WindowsAzure\Services\Core\Models\GetServicePropertiesResult;
 use WindowsAzure\Services\Core\Models\ServiceProperties;
 use WindowsAzure\Services\Core\ServiceRestProxy;
 use WindowsAzure\Services\ServiceBus\IServiceBus;
+use WindowsAzure\Services\ServiceBus\Models\BrokeredMessage;
+use WindowsAzure\Services\ServiceBus\Models\BrokerProperties;
+use WindowsAzure\Services\ServiceBus\Models\CreateQueueResult;
+use WindowsAzure\Services\ServiceBus\Models\CreateRuleResult;
+use WindowsAzure\Services\ServiceBus\Models\CreateTopicResult;
+use WindowsAzure\Services\ServiceBus\Models\CreateSubscriptionResult;
+use WindowsAzure\Services\ServiceBus\Models\QueueDescription;
+use WindowsAzure\Services\ServiceBus\Models\QueueInfo;
+use WindowsAzure\Services\ServiceBus\Models\RuleDescription;
+use WindowsAzure\Services\ServiceBus\Models\RuleInfo;
+use WindowsAzure\Services\ServiceBus\Models\SubscriptionDescription;
+use WindowsAzure\Services\ServiceBus\Models\SubscriptionInfo;
+use WindowsAzure\Services\ServiceBus\Models\TopicDescription;
+use WindowsAzure\Services\ServiceBus\Models\TopicInfo;
 use WindowsAzure\Resources;
 use WindowsAzure\Utilities;
 use WindowsAzure\Validate;
@@ -45,6 +64,7 @@ use WindowsAzure\Validate;
  * @version   Release: @package_version@
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
+
 class ServiceBusRestProxy extends ServiceRestProxy implements IServiceBus
 {
     /**
@@ -67,12 +87,34 @@ class ServiceBusRestProxy extends ServiceRestProxy implements IServiceBus
      * @param type $path            The path to send message. 
      * @param type $brokeredMessage The brokered message. 
      *
-     * @throws Exception 
      * @return none
      */
     public function sendMessage($path, $brokeredMessage)
     {
-        throw new Exception(Resources::NOT_IMPLEMENTED_MSG);
+        $httpCallContext = new HttpCallContext();
+        $httpCallContext->setMethod(Resources::HTTP_POST);
+        $httpCallContext->addStatusCode(Resources::STATUS_OK);
+        $contentType = $brokeredMessage->getContentType();
+
+        if (!is_null($contentType))
+        {
+            $httpCallContext->addHeader(
+                Resources::CONTENT_TYPE,
+                $brokeredMessage->getContentType()
+            );
+        }
+        
+        $brokerProperties = $brokeredMessage->getBrokerProperties();
+        if (!is_null($brokerProperties))
+        {
+            $httpCallContext->addHeader(
+                Resources::BROKER_PROPERTIES,
+                $brokerProperties->ToString()
+            );
+        } 
+
+        $httpCallContext->setBody($brokeredMessage->getBody());
+        $this->sendContext($httpCallContext);
     }
 
     /**
@@ -81,118 +123,211 @@ class ServiceBusRestProxy extends ServiceRestProxy implements IServiceBus
      * @param string           $path            The path to send message.
      * @param \BrokeredMessage $brokeredMessage The brokered message. 
      *
-     * @throws Exception 
      * @return none
      */
     public function sendQueueMessage($path, $brokeredMessage)
     {
-        throw new Exception(Resources::NOT_IMPLEMENTED_MSG);
+        $this->sendMessage($path, $brokeredMessage);
     }
     
     /**
      * Receives a queue message. 
      * 
-     * @param string                  $queuePath              The path to the
+     * @param string                $queuePath             The path of the
      * queue. 
-     * @param \ReceivedMessageOptions $receivedMessageOptions The options to 
+     * @param ReceiveMessageOptions $receiveMessageOptions The options to 
      * receive the message. 
      *
-     * @throws Exception 
-     * @return none
+     * @return BrokeredMessage
      */
-    public function receiveQueueMessage($queuePath, $receivedMessageOptions)
+    public function receiveQueueMessage($queuePath, $receiveMessageOptions)
     {
-        throw new Exception(Resources::NOT_IMPLEMENTED_MSG);
+        $queueMessagePath = sprintf(Resources::QUEUE_MESSAGE_PATH, $queuePath);
+        return receiveMessage($queueMessagePath, $receiveMessageOptions);
     }
 
     /**
      * Receives a message. 
      * 
-     * @param string                  $path                  The path of the 
+     * @param string                 $path                  The path of the 
      * message. 
-     * @param \ReceivedMessageOptions $receiveMessageOptions The options to 
+     * @param ReceivedMessageOptions $receiveMessageOptions The options to 
      * receive the message. 
      *
-     * @throws Exception 
-     * @return none
+     * @return BrokeredMessage
      */
     public function receiveMessage($path, $receiveMessageOptions)
     {
-        throw new Exception(Resources::NOT_IMPLEMENTED_MSG);
+        $httpCallContext = new HttpCallContext();
+        $timeout = $receiveMessageOptions->getTimeout();
+        if (!is_null($timeout))
+        {
+            $httpCallContext->addQueryParameter('timeout', $timeout);
+        }
+
+        if ($receiveMessageOptions->getIsReceiveAndDelete()) {
+            $httpCallContext->setMethod(Resources::HTTP_DELETE);
+        }
+        else if ($receiveMessageOptions->getIsPeekLock()) {
+            $httpCallContext->setMethod(Resources::HTTP_POST);
+        }
+        else {
+            throw new ArgumentException(
+                'The receive message option is in an unknown mode.'
+            );
+        }
+
+        $response = $this->sendContext($httpCallContext);
+        
+        $responseHeaders = $response->getHeader(); 
+        if (array_key_exists('BrokerProperties', $resonseHeaders))
+        {
+            $brokerProperties = BrokerProperties::create(
+                $responseHeaders['BrokerProperties']
+            );
+        }
+        else {
+            $brokerProperties = new BrokerProperties();
+        }
+        
+        if (array_key_exists('Location', $responseHeaders))
+        {
+            $brokerProperties->setLockLocation(
+                $responseHeaders['Location']);
+        }
+        
+        $brokeredMessage = new BrokeredMessage($brokerProperties);
+        
+        if (array_key_exists(Resources::CONTENT_TYPE, $responseHeaders))
+        {
+            $brokeredMessage->setContentType($responseHeaders[Resources::CONTENT_TYPE]);
+        }
+
+        if (array_key_exists('Date', $responseHeaders))
+        {
+            $brokeredMessage->setDate($responseHeaders['Date']);
+        }
+
+        $brokeredMessage->setBody($respose->getBody());
+
+        foreach (array_keys($responseHeaders) as $headerKey)
+        {
+            $brokeredMessage->setProperty(
+                $headerKey, 
+                $responseHeaders[$headerKey]
+            );
+        }
+        
+       return $brokeredMessage; 
     }
 
     /**
      * Sends a brokered message to a specified topic. 
      * 
-     * @param string           $topicName       The name of the topic. 
-     * @param \BrokeredMessage $brokeredMessage The brokered message. 
+     * @param string          $topicName       The name of the topic. 
+     * @param BrokeredMessage $brokeredMessage The brokered message. 
      *
-     * @throws Exception 
      * @return none
      */
     public function sendTopicMessage($topicName, $brokeredMessage)
     {
-        throw new Exception(Resources::NOT_IMPLEMENTED_MSG);
+        $this->sendMessage($topicName);
     } 
 
     /**
      * Receives a subscription message. 
      * 
-     * @param string                 $topicName             The name of the 
+     * @param string                $topicName             The name of the 
      * topic.
-     * @param string                 $subscriptionName      The name of the 
+     * @param string                $subscriptionName      The name of the 
      * subscription.
-     * @param \ReceiveMessageOptions $receiveMessageOptions The options to 
+     * @param ReceiveMessageOptions $receiveMessageOptions The options to 
      * receive the subscription message. 
      *
-     * @throws Exception 
-     * @return none
+     * @return ReceiveSubscriptionMessageResult
      */
     public function receiveSubscriptionMessage(
         $topicName, 
         $subscriptionName, 
         $receiveMessageOptions
     ) {
-        throw new Exception(Resources::NOT_IMPLEMENTED_MSG);
+        $httpCallContext = new HttpCallContext();
+        $httpCallContext->setMethod(Resources::HTTP_GET);
+        $messagePath = sprintf(
+            Resources::SUBSCRIPTION_MESSAGE_PATH, 
+            $topicName,
+            $subscriptionName
+        );
+        $httpCallContext->setPath($messagePath);
+        $httpCallContext->addStatusCode(Resouces::STATUS_OK);
+
+        $response = $this->sendContext($httpCallContext); 
+
+        $receiveSubscriptionMessageResult 
+            = ReceiveSubscriptionMessageResult::create($response->getBody());
+
+        return $receiveSubscriptionMessageResult;
     }
 
     /**
      * Unlocks a brokered message. 
      * 
-     * @param \BrokeredMessage $brokeredMessage The brokered message. 
+     * @param BrokeredMessage $brokeredMessage The brokered message. 
      *
-     * @throws Exception 
      * @return none
      */
     public function unlockMessage($brokeredMessage)
     {
-        throw new Exception(Resources::NOT_IMPLEMENTED_MSG);
+        $httpCallContext = new HttpCallContext();
+        $httpCallContext->setMethod(Resources::HTTP_PUT);
+        $httpCallContext->setPath($brokeredMessage->getLockLocation());
+        $httpCallContext->addStatusCode(Resources::STATUS_OK);
+        $this->sendContext($httpCallContext);
     }
     
     /**
      * Deletes a brokered message. 
      * 
-     * @param \BrokeredMessage $brokeredMessage The borkered message.
+     * @param BrokeredMessage $brokeredMessage The borkered message.
      *
-     * @throws Exception 
      * @return none
      */
     public function deleteMessage($brokeredMessage)
     {
-        throw new Exception(Resources::NOT_IMPLEMENTED_MSG);
+        $httpCallContext = new HttpCallContext();
+        $httpCallContext->setMethod(Resources::HTTP_DELETE);
+        $httpCallContext->setPath($brokeredMessage->getLockLocation());
+        $httpCallContext->addStatusCode(Resources::STATUS_OK);
+        $this->sendContext($httpCallContext);
     }
    
     /**
      * Creates a queue with specified queue info. 
      * 
-     * @param \QueueInfo $queueInfo The information of the queue.
+     * @param QueueInfo $queueInfo The information of the queue.
      *
-     * @throws Exception 
-     * @return none
+     * @return CreateQueueResult
      */
     public function createQueue($queueInfo)
     {
-        throw new Exception(Resources::NOT_IMPLEMENTED_MSG);
+        $httpCallContext = new HttpCallContext();
+        $httpCallContext->setMethod(Resources::HTTP_PUT);
+        $httpCallContext->setPath($queueInfo->getName());
+        $httpCallContext->addStatusCode(Resources::STATUS_CREATED);
+        
+        $queueDescriptionXml = XmlSerializer::objectSerialize(
+            $queueInfo->getQueueDescription(),
+            'QueueDescription'
+        );
+
+        $entry = new Entry();
+        $content = new Content();
+        $content->setText($queueDescriptionXml);
+        $entry->setContent($content);
+        $httpCallContext->setBody($entry->toXml());
+        $response = $this->sendContext($httpCallContext);
+        $createQueueResult = CreateQueueResult::create($response->getBody());
+        return $createQueueResult;
     } 
 
     /**
@@ -200,7 +335,6 @@ class ServiceBusRestProxy extends ServiceRestProxy implements IServiceBus
      * 
      * @param string $queuePath The path of the queue.
      *
-     * @throws Exception 
      * @return none
      */
     public function deleteQueue($queuePath)
@@ -208,22 +342,12 @@ class ServiceBusRestProxy extends ServiceRestProxy implements IServiceBus
         Validate::isString($queuePath, 'queuePath');
         Validate::notNullOrEmpty($queuePath, 'queuePath');
         
-        $method      = Resources::HTTP_DELETE;
-        $headers     = array();
-        $queryParams = array();
-        $postParams  = array();
-        $path        = $queuePath;
-        $statusCode  = Resources::STATUS_CREATED;
+        $httpCallContext = new HttpCallContext();
+        $httpCallContext->setMethod(Resources::HTTP_DELETE);
+        $httpCallContext->addStatusCode(Resources::STATUS_OK);
+        $httpCallContext->setPath($queuePath);
         
-        $this->send(
-            $method, 
-            $headers, 
-            $queryParams, 
-            $postParams, 
-            $path, 
-            $statusCode
-        );
-
+        $this->sendContext($httpCallContext);
     }
 
     /**
@@ -236,47 +360,94 @@ class ServiceBusRestProxy extends ServiceRestProxy implements IServiceBus
      */
     public function getQueue($queuePath)
     {
-        throw new Exception(Resources::NOT_IMPLEMENTED_MSG);
+        $httpCallContext = new HttpCallContext();
+        $httpCallContext->setPath($queuePath);
+        $httpCallContext->setMethod(Resources::HTTP_GET);
+        $response = $this->sendContext($httpCallContext);
+        $getQueueResult = GetQueueResult::create($response->getBody());
+        return $getQueueResult;
     }
 
     /**
      * Lists a queue. 
      * 
-     * @param \ListQueueOptions $listQueueOptions The options to list the 
+     * @param ListQueueOptions $listQueueOptions The options to list the 
      * queues.
      *
      * @throws Exception 
-     * @return none
+     * @return ListQueuesResult;
      */
     public function listQueues($listQueueOptions)
     {
-        throw new Exception(Resources::NOT_IMPLEMENTED_MSG);
+        $httpCallContext = new HttpCallContext();
+        $httpCallContext->setMethod(ResourceS::HTTP_GET);
+        $httpCallContext->setPath(Resources::LIST_QUEUE_PATH);
+        $response = $this->sendContext($httpCallContext);
+        $listQueueResult = ListQueuesResult::create($response->getBody());
+        return $listQueueResult;
     }
 
     /**
      * Creates a topic with specified topic info.  
      * 
-     * @param \TopicInfo $topicInfo The information of the topic. 
+     * @param  TopicInfo $topicInfo The information of the topic. 
      *
      * @throws Exception 
-     * @return none
+     *
+     * @return CreateTopicResult 
      */
     public function createTopic($topicInfo)
     {
-        throw new Exception(Resources::NOT_IMPLEMENTED_MSG);
-    }
+        Validate::notNullOrEmpty($topicInfo);
+        $httpCallContext = new HttpCallContext();
+        $httpCallContext->setMethod(Resources::HTTP_PUT);
+        $httpCallContext->addStatusCode(Resources::STATUS_CREATED);
+        $httpCallContext->setPath($topicInfo->getName());
+        $httpCallContext->addHeader(
+            Resources::CONTENT_TYPE,
+            Resources::ATOM_ENTRY_CONTENT_TYPE
+        );
+        
+        $topicDescriptionAttributes = array(
+            'xmlns:i' => 'http://www.w3.org/2001/XMLSchema-instace',
+            'xmlns' => 'http://schemas.microsoft.com/netservices/2010/10/servicebus/connect'
+        );
+
+        $content = new Content(
+            XmlSerializer::objectSerialize(
+                $topicInfo->getTopicDescription(), 
+                'TopicDescription',
+                $topicDescriptionAttributes
+            )
+        );
+        $content->setType('application/xml');
+
+        $entry = new Entry();
+        $entry->setContent($content);
+        $entry->setTitle($topicInfo->getName());
+
+        $httpCallContext->setBody($entry->toXml());
+
+        $response = $this->sendContext($httpCallContext);
+
+        return CreateTopicResult::create($response->getBody());
+    } 
 
     /**
      * Deletes a topic with specified topic path. 
      * 
      * @param string $topicPath The path of the topic.
      *
-     * @throws Exception 
      * @return none
      */
     public function deleteTopic($topicPath)
     {
-        throw new Exception(Resources::NOT_IMPLEMENTED_MSG);
+        $httpCallContext = new HttpCallContext();
+        $httpCallContext->setMethod(Resources::HTTP_DELETE);
+        $httpCallContext->setPath($topicPath);     
+        $httpCallContext->addStatusCode(Resources::STATUS_OK);
+        
+        $this->sendContext($httpCallContext);
     }
     
     /**
@@ -284,42 +455,65 @@ class ServiceBusRestProxy extends ServiceRestProxy implements IServiceBus
      * 
      * @param string $topicPath The path of the topic.
      *
-     * @throws Exception 
-     * @return none
+     * @return GetTopicResult;
      */
     public function getTopic($topicPath) 
     {
-        throw new Exception(Resources::NOT_IMPLEMENTED_MSG);
+        $httpCallContext = new HttpCallContext();
+        $httpCallContext->setMethod(Resources::HTTP_GET);
+        $httpCallContext->setPath($topicPath);
+        $httpCallContext->addStatusCode(Resources::STATUS_OK);
+        $response = $this->sendContext($httpCallContext);
+        $getTopicResult = GetTopicResult::create($response->getBody());
+        return $getTopicResult; 
     }
     
     /**
      * Lists topics. 
      * 
-     * @param \ListTopicsOptions $listTopicsOptions The options to list 
+     * @param ListTopicsOptions $listTopicsOptions The options to list 
      * the topics. 
      *
-     * @throws Exception 
-     * @return none 
+     * @return ListTopicsResults
      */
     public function listTopics($listTopicsOptions) 
     {
-        throw new Exception(Resources::NOT_IMPLEMENTED_MSG);
+        $httpCallContext = new HttpCallContext();
+        $httpCallContext->setPath(Resources::LIST_TOPIC_PATH);
+        $response = $this->sendContext($httpCallContext);
+        $listTopicResult = ListTopicResult::create(
+            $response->getBody()
+        );
+        return $listTopicResult; 
     }
 
     /**
      * Creates a subscription with specified topic path and 
      * subscription info. 
      * 
-     * @param string            $topicPath        The path of the topic.
-     * @param \SubscriptionInfo $subscriptionInfo The information of the 
-     * subscription.
+     * @param string                  $topicPath               The path of
+     * the topic.
+     * @param SubscriptionDescription $subscriptionDescription The description
+     * of the subscription.
      *
-     * @throws Exception 
-     * @return none
+     * @return CreateSubscriptionResult
      */
     public function createSubscription($topicPath, $subscriptionInfo) 
     {
-        throw new Exception(Resources::NOT_IMPLEMENTED_MSG);
+        $httpCallContext = new HttpCallContext(); 
+        $httpCallContext->setMethod(Resources::HTTP_PUT);
+        $subscriptionPath = sprintf(
+            Resources::SUBSCRIPTION_PATH, 
+            $topicPath,
+            $subscriptionInfo->getName()
+        );
+        $httpCallContext->setPath($subscriptionPath);
+        $httpCallContext->setContentType(Resources::ATOM_ENTRY_CONTENT_TYPE);
+
+   
+        $response = $this->send($httpCallContext);
+        $createSubscriptionResult = CreateSubscriptionResult::create($response->getBody());
+        return $createSubscriptionResult;
     }
 
     /**
@@ -328,12 +522,19 @@ class ServiceBusRestProxy extends ServiceRestProxy implements IServiceBus
      * @param string $topicPath        The path of the topic.
      * @param string $subscriptionName The name of the subscription.
      *
-     * @throws Exception 
      * @return none
      */
     public function deleteSubscription($topicPath, $subscriptionName) 
     {
-        throw new Exception(Resources::NOT_IMPLEMENTED_MSG);
+        $httpCallContext = new HttpCallContext();
+        $httpCallContext->setMethod(Resources::HTTP_DELETE);
+        $subscriptionPath = sprintf(
+            Resources::SUBSCRIPTION_PATH,
+            $topicPath,
+            $subscriptionName
+        );
+        $httpCallContext->setPath($subscriptionPath);
+        $this->send($httpCallContext);
     }
     
     /**
@@ -342,43 +543,71 @@ class ServiceBusRestProxy extends ServiceRestProxy implements IServiceBus
      * @param string $topicPath        The path of the topic.
      * @param string $subscriptionName The name of the subscription.
      *
-     * @throws Exception 
-     * @return none 
+     * @return GetSubscriptionResult
      */
     public function getSubscription($topicPath, $subscriptionName) 
     {
-        throw new Exception(Resources::NOT_IMPLEMENTED_MSG);
+        $httpCallContext = new HttpCallContext();
+        $httpCallContext->setMethod(Resources::HTTP_GET);
+        $httpCallContext->addStatusCode(Resources::STATUS_OK);
+        $subscriptionPath = sprintf(
+            Resources::SUBSCRIPTION_PATH,
+            $topicPath,
+            $subscriptionName
+        );
+        $httpCallContext->setPath($subscriptionPath);
+        $response = $this->sendContext($httpCallContext);
+        $getSubscriptionResult = GetSubscriptionResult::create($response->getBody()); 
+        return $getSubscriptionResult;
     }
 
     /**
      * Lists subscription. 
      * 
-     * @param string                   $topicPath               The path of 
+     * @param string                  $topicPath               The path of 
      * the topic.
-     * @param \ListSubscriptionOptions $listSubscriptionOptions The options
+     * @param ListSubscriptionOptions $listSubscriptionOptions The options
      * to list the subscription. 
      *
-     * @throws Exception 
-     * @return none
+     * @return ListSubscription
      */
     public function listSubscription($topicPath, $listSubscriptionOptions) 
     {
-        throw new Exception(Resources::NOT_IMPLEMENTED_MSG);
+        $httpCallContext = new HttpCallContext();
+        $httpCallContext->setMethod(Resources::HTTP_GET);
+        $httpCallContext->setPath(Resources::LIST_SUBSCRIPTION_PATH);
+        $httpCallContext->setContentType(Resources::ATOM_ENTRY_CONTENT_TYPE);
+        $response = $this->send($httpCallContext);
+        $listSubscriptionResult = ListSubscriptionResult::create($response->getBody());
+        return $listSubscriptionResult; 
     }
 
     /**
      * Creates a rule. 
      * 
-     * @param string    $topicPath        The path of the topic.
-     * @param string    $subscriptionName The name of the subscription. 
-     * @param \RuleInfo $ruleInfo         The info of the rule.
+     * @param string          $topicPath        The path of the topic.
+     * @param string          $subscriptionName The name of the subscription. 
+     * @param RuleDescription $ruleDescription  The description of the rule.
      *
      * @throws Exception 
-     * @return none
+     * @return CreateRuleResult;
      */
-    public function createRule($topicPath, $subscriptionName, $ruleInfo)
+    public function createRule($topicPath, $subscriptionName, $ruleDescription)
     {
-        throw new Exception(Resources::NOT_IMPLEMENTED_MSG);
+        $httpCallContext = new HttpCallContext();
+        $httpCallContext->setMethod(Resources::HTTP_PUT);
+        $httpCallContext->addStatusCode(Resources::STATUS_CREATED);
+        $httpCallContext->setContentType(Resources::ATOM_ENTRY_CONTENT_TYPE);
+        $rulePath = sprintf(
+            Resources::RULE_PATH,
+            $topicPath,
+            $subscriptionName,
+            $ruleDescription->getName()
+        );
+        $httpCallContext->setPath($rulePath);
+        $response = $this->sendContext($httpCallContext);
+        $createRuleResult = CreateRuleResult::create($response->getBody()); 
+        return $createRuleResult;
     }
 
     /**
@@ -388,12 +617,20 @@ class ServiceBusRestProxy extends ServiceRestProxy implements IServiceBus
      * @param string $subscriptionName The name of the subscription.
      * @param string $ruleName         The name of the rule.
      *
-     * @throws Exception 
      * @return none
      */
     public function deleteRule($topicPath, $subscriptionName, $ruleName) 
     {
-        throw new Exception(Resources::NOT_IMPLEMENTED_MSG);
+        $httpCallContext = new HttpCallContext();
+        $httpCallContext->setMethod(Resources::HTTP_DELETE);
+        $rulePath = sprintf(
+            Resources::RULE_PATH,
+            $topicPath,
+            $subscriptionName,
+            $ruleDescription->getName()
+        );
+        $httpCallContext->setPath($rulePath);
+        $this->sendContext($httpCallContext);
     }
 
     /**
@@ -403,27 +640,50 @@ class ServiceBusRestProxy extends ServiceRestProxy implements IServiceBus
      * @param string $subscriptionName The name of the subscription.
      * @param string $ruleName         The name of the rule.
      *
-     * @throws Exception 
-     * @return none
+     * @return GetRuleResult
      */
     public function getRule($topicPath, $subscriptionName, $ruleName) 
     {
-        throw new Exception(Resources::NOT_IMPLEMENTED_MSG);
+        $httpCallContext = new HttpCallContext();
+        $httpCallContext->setMethod(Resources::HTTP_GET);
+        $rulePath = sprintf(
+            Resources::RULE_PATH,
+            $topicPath,
+            $subscriptionName,
+            $ruleName
+        );
+        $httpCallContext->setPath($rulePath);
+        $response = $this->sendContext($httpCallContext);
+        $getRuleResult = GetRuleResult::create($response->getBody());
+        return $getRuleResult;
     }
 
     /**
      * Lists rules. 
      * 
-     * @param string            $topicPath        The path of the topic.
-     * @param string            $subscriptionName The name of the subscription.
-     * @param \ListRulesOptions $listRulesOptions The options to list the rules.
+     * @param string           $topicPath        The path of the topic.
+     * @param string           $subscriptionName The name of the subscription.
+     * @param ListRulesOptions $listRulesOptions The options to list the rules.
      *
-     * @throws Exception 
-     * @return none
+     * @return ListRuleResult
      */
     public function listRules($topicPath, $subscriptionName, $listRulesOptions) 
     {
-        throw new Exception(Resources::NOT_IMPLEMENTED_MSG);
+        $httpCallContext = new HttpCallContext();
+        $httpCallContext->setMethod(Resources::HTTP_GET);
+        $ruleName = $listRulesOptions->getName();
+        $rulePath = sprintf(
+            Resources::RULE_PATH,
+            $topicPath,
+            $subscriptionName,
+            $ruleName
+        );
+
+        $httpCallContext->setPath($rulePath);
+        $response = $this->sendContext($httpCallContext);
+        $listRuleResult = ListRuleResult::create($response->getBody());
+
+        return $listRuleResult;
     }
     
 }

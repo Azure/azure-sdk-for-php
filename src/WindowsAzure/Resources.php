@@ -107,7 +107,7 @@ class Resources
     const LAST_MODIFIED                      = 'last-modified';
     const DATE                               = 'date';
     const AUTHENTICATION                     = 'authorization';
-    const WRAP_AUTHORIZATION                 = 'WRAP access_token={%s}';
+    const WRAP_AUTHORIZATION                 = 'WRAP access_token="%s"';
     const CONTENT_ENCODING                   = 'content-encoding';
     const CONTENT_LANGUAGE                   = 'content-language';
     const CONTENT_LENGTH                     = 'content-length';
@@ -170,6 +170,8 @@ class Resources
     const DATA_SERVICE_VERSION_VALUE     = '1.0;NetFx';
     const MAX_DATA_SERVICE_VERSION_VALUE = '2.0;NetFx';
     const ACCEPT_HEADER_VALUE            = 'application/atom+xml,application/xml';
+    const ATOM_ENTRY_CONTENT_TYPE      
+        = 'application/atom+xml;type=entry;charset=utf-8';
     const ACCEPT_CHARSET_VALUE           = 'utf-8';
 
     // Query parameter names
@@ -233,6 +235,16 @@ class Resources
     const XTAG_KEY_TYPE                   = 'KeyType';
     const XTAG_STORAGE_SERVICE_KEYS       = 'StorageServiceKeys';
     const XTAG_ERROR                      = 'Error';
+
+    // Service Bus
+    const LIST_TOPIC_PATH = '$Resources/Topics';
+    const LIST_QUEUE_PATH = '$Resources/Queues';
+    const QUEUE_MESSAGE_PATH = '%s/messages/head';
+    const RULE_PATH = '%s/subscriptions/%s/rules/%s';
+    const SUBSCRIPTION_PATH = '%s/subscriptions/%s';
+    const DEFAULT_RULE_NAME = '$Default';
+    const UNIQUE_ID_PREFIX = 'urn:uuid:';
+    const SERVICE_BUS_NAMESPACE = 'http://schemas.microsoft.com/netservices/2010/10/servicebus/connect';
 
     // PHP URL Keys
     const PHP_URL_SCHEME   = 'scheme';

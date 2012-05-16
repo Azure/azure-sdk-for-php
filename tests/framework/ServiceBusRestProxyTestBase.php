@@ -27,6 +27,9 @@ use WindowsAzure\Core\Configuration;
 use WindowsAzure\Services\Core\Models\ServiceProperties;
 use WindowsAzure\Services\ServiceBus\ServiceBusSettings;
 use WindowsAzure\Services\ServiceBus\ServiceBusService;
+use WindowsAzure\Services\ServiceBus\ServiceBusRestProxy;
+use WindowsAzure\Services\ServiceBus\IServiceBus;
+use WindowsAzure\Services\ServiceBus\Models\SubscriptionInfo;
 
 /**
  * TestBase class for each unit test class.
@@ -41,6 +44,11 @@ use WindowsAzure\Services\ServiceBus\ServiceBusService;
  */
 class ServiceBusRestProxyTestBase extends ServiceRestProxyTestBase
 {
+    private $_createdTopics; 
+    private $_createdSubscriptions; 
+    private $_createdRules;
+    private $_createdQueues;
+
     public function __construct()
     {
         $config = new Configuration();
@@ -52,12 +60,113 @@ class ServiceBusRestProxyTestBase extends ServiceRestProxyTestBase
         );
 
         $serviceBusWrapper = ServiceBusService::create($config);
+        $_createdTopics = array();
+        $_createdSubscriptions = array();
+        $_createdRules = array();
+        $_createdQueues = array();
         parent::__construct($config, $serviceBusWrapper);
+    }
+    
+    public function createQueue($queueInfo)
+    {
+        $this->wrapper->createQueue($queueInfo);
+        $this->_createdQueues[] = $queueInfo->getName();
+    }
+    
+    public function createTopic($topicInfo)
+    {
+        $this->wrapper->createTopic($topicInfo);
+        $this->_createdTopics[] = $topicInfo->getName();
+    }
+
+    public function createSubscription($topicName, $subscriptionInfo) 
+    {
+        $this->wrapper->createSubscription($topicName, $subscriptionInfo);
+        $topicSubscriptionNameArray = array($topicName, $subscripitionInfo->getName());
+        $this->_createdSubscriptions[] = join('::', $topicSubscriptionNameArray);
+    }
+
+    public function createRule($topicName, $subscriptionName, $ruleInfo) 
+    {
+        $this->wrapper->createRule($topicName, $subscriptionName, $ruleInfo);
+        $topicSubscriptionRuleArray = array($topicName, $subscriptionName, $ruleInfo->getName);
+        $this->_createdRules[] = join('::', $topicSubscriptionRuleArray());
+    }
+
+    public function safeDeleteQueue($queueName)
+    {   
+        try
+        {
+            $this->wrapper->deleteQueue($queueName);
+        }
+        catch (\Exception $e)
+        {
+            error_log($e->getMessage());
+        }
+    }
+
+    public function safeDeleteRule($topicName, $subscriptionName, $ruleName)
+    {
+        try
+        {
+            $this->wrapper->deleteRule($topicName, $subscriptionName, $ruleName);
+        }
+        catch (\Exception $e)
+        {
+            error_log($e->getMessage());
+        }
+    }
+
+    public function safeDeleteSubscription($topicName, $subscriptionName)
+    {
+        try 
+        {
+            $this->wrapper->deleteSubscription($topicName, $subscriptionName);
+        }
+        catch (\Exception $e)
+        {
+            error_log($e->getMessage());
+        }
+    }
+
+    public function safeDeleteTopic($topicName)
+    {
+        try 
+        {
+            $this->wrapper->deleteTopic($topicName);
+        }
+        catch (\Exception $e)
+        {
+            error_log($e->getMessage());
+        } 
     }
     
     protected function tearDown()
     {
         parent::tearDown();
+
+        foreach ($this->_createdRules as $topicSubscriptionRuleName) {
+            $topicSubscriptionRuleNameArray = explode('::', $topicSubscriptionRuleName);
+            $topicName = $topicSubscriptionRuleNameArray[0];
+            $subscriptionName = $topicSubscriptionRuleNameArray[1];
+            $RuleName = $topicSubscriptionRuleNameArray[2];
+            $this->safeDeleteRule($topicName, $subscriptionName, $ruleName);
+        }
+        
+        foreach ($this->_createdSubscriptions as $topicSubscriptionName) {
+            $topicSubscriptionNameArray = explode('::', $topicSubscriptionName);
+            $topicName = $topicSubscriptionNameArray[0];
+            $subscriptionName = $topicSubscriptionNameArray[1];
+            $this->safeDeleteSubscription($topicName, $subscriptionName);
+        } 
+
+        foreach ($this->_createdTopics as $topicName) {
+            $this->safeDeleteTopic($topicName);
+        }
+
+        foreach ($this->_createdQueues as $queueName) {
+            $this->safeDeleteQueue($queueName);
+        } 
     }
 }
 

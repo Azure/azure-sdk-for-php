@@ -101,6 +101,105 @@ class XmlSerializer implements ISerializer
             }
         }
     }
+
+    private function _getInstanceProperty($targetObject, $methodArray)
+    {
+        foreach ($methodArray as $method)
+        {
+            if ($method->name == 'getProperties')
+            {
+                $classProperty = $method->invoke($targetObject);
+                return $classProperty;
+            }
+        }
+        return null;
+    }
+
+    public function objectSerialize($targetObject, $rootName, $attributes = null)
+    {
+        $xmlWriter = new \XmlWriter();
+        $xmlWriter->openMemory(); 
+        $xmlWriter->setIndent(true);
+        $reflectionClass = new \ReflectionClass($targetObject);
+        $arrayData = array();
+
+        $methodArray = $reflectionClass->getMethods();
+        
+        $instanceAttributes = self::_getInstanceProperty(
+            $targetObject, 
+            $methodArray
+        );
+         
+        $xmlWriter->startElement($rootName);
+        if (!is_null($attributes))
+        {
+            foreach(array_keys($attributes) as $attributeKey)
+            {
+               $xmlWriter->writeAttribute($attributeKey, $attributes[$attributeKey]); 
+            }
+        }
+
+        foreach ($methodArray as $method)
+        {
+            if ((strpos($method->name, 'get') === 0) && $method->isPublic())
+            {
+                $variableName  = substr($method->name, 3);
+                $variableValue = $method->invoke($targetObject);
+                if (!empty($variableValue))
+                {
+                if (gettype($variableValue) === 'object') {
+                    $xmlWriter->writeRaw(
+                        $this->objectSerialize(
+                            $variableValue, $variableName, $instanceAttributes
+                        )
+                    );
+                }
+                else 
+                {
+                    $xmlWriter->writeElement($variableName, $variableValue);
+                } 
+                }
+            }
+        } 
+        $xmlWriter->endElement();
+        return $xmlWriter->outputMemory(true);
+    }
+
+    public function objectUnserialize($root)
+    {
+        $result = array();
+        $counter = 0;
+        foreach ($root as $element)
+        { 
+            $reflectionClass = new ReflectionClass($element->getName());
+            $instance = $reflectionClass->newInstance();
+            foreach ($element as $child)
+            {
+                $setter = $reflectionClass->getMethod('set'.$child->getName());
+                if (count($child->children())==0)
+                {
+                    $setter->invoke($instance, $child);
+                }
+                else
+                {
+                    $setter->invoke(
+                        $instance, 
+                        $this->objectUnserialize($child->children())
+                    );
+                }
+            }
+            if (count($root) === 1) 
+            {
+                return $instance;
+            }
+            else
+            {
+                $result[$counter] = $instance;
+                $counter++;
+            }
+        }
+        return $result;
+    }
     
     /**
      * Serializes given array. The array indices must be string to use them as
@@ -143,7 +242,7 @@ class XmlSerializer implements ISerializer
         }
         
         unset($array[Resources::XTAG_NAMESPACE]);
-        $this->_arr2xml($xmlw, $array, $defaultTag);
+        self::_arr2xml($xmlw, $array, $defaultTag);
 
         $xmlw->endElement();
 

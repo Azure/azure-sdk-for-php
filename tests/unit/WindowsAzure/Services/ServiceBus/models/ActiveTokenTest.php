@@ -27,7 +27,7 @@ use WindowsAzure\Services\ServiceBus\Models\ActiveToken;
 use WindowsAzure\Services\ServiceBus\Models\WrapAccessTokenResult;
 
 /**
- * Unit tests for class WrapAccessTokenResult
+ * Unit tests for class ActiveToken
  *
  * @category  Microsoft
  * @package   Tests\Unit\WindowsAzure\Services\Queue\Models

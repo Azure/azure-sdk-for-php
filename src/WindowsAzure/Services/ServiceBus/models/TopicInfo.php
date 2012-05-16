@@ -15,7 +15,7 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   WindowsAzure\Services\ServiceBus\Models
+ * @package   WindowsAzure\Services\Queue\Models
  * @author    Azure PHP SDK <azurephpsdk@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
@@ -24,11 +24,11 @@
  
 namespace WindowsAzure\Services\ServiceBus\Models;
 use WindowsAzure\Resources;
-use WindowsAzure\Services\ServiceBus\Models\WrapAccessTokenResult;
+use WindowsAzure\Services\ServiceBus\Models\TopicDescription;
 use WindowsAzure\Utilities;
 
 /**
- * An active WRAP access Token.
+ * The information of a topic.
  *
  * @category  Microsoft
  * @package   WindowsAzure\Services\ServiceBus\Models
@@ -38,76 +38,74 @@ use WindowsAzure\Utilities;
  * @version   Release: @package_version@
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
-class ActiveToken
+class TopicInfo
 {
     /** 
      * The WRAP access token result. 
      * 
      * @var WrapAccessTokenResult
      */
-    private $_wrapAccessTokenResult;
+    private $_name;
+    private $_topicDescription;
+
+    /**
+     * Creates an TopicInfo with specified parameters.
+     *
+     * @param string           $name             The name of the topic.
+     * @param TopicDescription $topicDescription The description of the topic.
+     * 
+     */
+    public function __construct($name, $topicDescription = null)
+    {
+        $this->_name = $name;
+        if (is_null($topicDescription))
+        {
+            $topicDescription = new TopicDescription();
+        }
+
+        $this->_topicDescription = $topicDescription;
+    }
+
+    /**
+     * Gets the name of the topic.
+     *
+     * @return string.
+     */
+    public function getName()
+    {
+        return $this->_name;
+    }
+
+    /**
+     * Sets the name of the topic information.
+     * 
+     * @param string $name The name of the topic. 
+     */
+    public function setName($name)
+    {
+        $this->_name = $name;
+    }
+
+    /**
+     * Gets the descriptions of the topic. 
+     * 
+     * @return TopicDescription
+     */
+    public function getTopicDescription()
+    {
+        return $this->_topicDescription;
+    }
 
     /** 
-     * When the WRAP access token expires. 
+     * Sets the descriptions of the topic. 
      * 
-     * @var \DateTime
+     * @param TopicDescription $topicDescription The description of the topic. 
      */
-    private $_expirationDateTime;
-
-    /**
-     * Creates an ActiveToken with specified WRAP 
-     * access token result.
-     *
-     * @param array $wrapAccessTokenResult A WRAP access token result.
-     * 
-     */
-    public function __construct($wrapAccessTokenResult)
+    public function setTopicDescription($topicDescription)
     {
-        $this->_wrapAccessTokenResult = $wrapAccessTokenResult;
-    }
-
-    /**
-     * Gets WRAP access token.
-     *
-     * @return WrapAccessTokenResult
-     */
-    public function getWrapAccessTokenResult()
-    {
-        return $this->_wrapAccessTokenResult;
+        $this->_topicDescription = $topicDescription;
     }
     
-    /**
-     * Sets WRAP access token.
-     *
-     * @param string $wrapAccessTokenResult The WRAP access token result.
-     * 
-     * @return none
-     */
-    public function setWrapAccessTokenResult($wrapAccessTokenResult)
-    {
-        $this->_wrapAccessTokenResult = $wrapAccessTokenResult;
-    }
-
-    /**
-     * Gets expiration time.  
-     *
-     * @return \DateTime
-     */
-    public function getExpirationDateTime()
-    {
-        return $this->_expirationDateTime;
-    }
-
-    /**
-     * Sets expiration time.
-     *
-     * @param \DateTime $expirationDateTime value.
-     * 
-     * @return none
-     */
-    public function setExpirationDateTime($expirationDateTime)
-    {
-        $this->_expirationDateTime = $expirationDateTime;
-    }
 }
+?>
 
