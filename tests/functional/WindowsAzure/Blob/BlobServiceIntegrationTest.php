@@ -32,6 +32,7 @@ use WindowsAzure\Core\Configuration;
 use WindowsAzure\Core\ServiceException;
 use WindowsAzure\Blob\BlobService;
 use WindowsAzure\Blob\Models\AccessCondition;
+use WindowsAzure\Blob\Models\BlobBlockType;
 use WindowsAzure\Blob\Models\BlobProperties;
 use WindowsAzure\Blob\Models\Block;
 use WindowsAzure\Blob\Models\BlockList;
@@ -53,15 +54,14 @@ use WindowsAzure\Blob\Models\ListBlobRegionsResult;
 use WindowsAzure\Blob\Models\ListBlobsOptions;
 use WindowsAzure\Blob\Models\ListBlobsResult;
 use WindowsAzure\Blob\Models\ListContainersOptions;
-use WindowsAzure\Blob\Models\ListContainersResult\Container;
 use WindowsAzure\Blob\Models\ListContainersResult;
+use WindowsAzure\Blob\Models\ListContainersResult\Container;
 use WindowsAzure\Blob\Models\PageRange;
+use WindowsAzure\Blob\Models\PublicAccessType;
 use WindowsAzure\Blob\Models\ServiceProperties;
 use WindowsAzure\Blob\Models\SetBlobMetadataResult;
 use WindowsAzure\Blob\Models\SetBlobPropertiesOptions;
 use WindowsAzure\Blob\Models\SetBlobPropertiesResult;
-use WindowsAzure\Blob\Models\PublicAccessType;
-use WindowsAzure\Blob\Models\BlobBlockType;
 
 class BlobServiceIntegrationTest extends IntegrationTestBase {
     private static $_testContainersPrefix = 'sdktest-';
