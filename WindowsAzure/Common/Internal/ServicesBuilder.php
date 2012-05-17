@@ -33,20 +33,20 @@ use WindowsAzure\Common\Internal\Filters\HeadersFilter;
 use WindowsAzure\Common\Internal\Filters\SharedKeyFilter;
 use WindowsAzure\Common\Internal\Filters\WrapFilter;
 use WindowsAzure\Common\Internal\InvalidArgumentTypeException;
-use WindowsAzure\Queue\Internal\QueueRestProxy;
+use WindowsAzure\Queue\QueueRestProxy;
 use WindowsAzure\Queue\QueueSettings;
-use WindowsAzure\Blob\Internal\BlobRestProxy;
+use WindowsAzure\Blob\BlobRestProxy;
 use WindowsAzure\Blob\BlobSettings;
-use WindowsAzure\ServiceBus\Internal\ServiceBusRestProxy;
+use WindowsAzure\ServiceBus\ServiceBusRestProxy;
 use WindowsAzure\ServiceBus\ServiceBusSettings;
-use WindowsAzure\ServiceBus\Internal\WrapRestProxy;
-use WindowsAzure\Table\Internal\TableRestProxy;
+use WindowsAzure\ServiceBus\WrapRestProxy;
+use WindowsAzure\Table\TableRestProxy;
 use WindowsAzure\Table\TableSettings;
 use WindowsAzure\Table\Internal\AtomReaderWriter;
 use WindowsAzure\Table\Internal\MimeReaderWriter;
 use WindowsAzure\Common\Internal\Serialization\XmlSerializer;
 use WindowsAzure\ServiceManagement\ServiceManagementSettings;
-use WindowsAzure\ServiceManagement\Internal\ServiceManagementRestProxy;
+use WindowsAzure\ServiceManagement\ServiceManagementRestProxy;
 
 /**
  * Builds azure service objects.

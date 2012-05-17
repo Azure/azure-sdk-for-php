@@ -27,15 +27,16 @@ namespace Tests\Unit\WindowsAzure\ServiceBus\Internal;
 
 use WindowsAzure\Common\Models\ServiceProperties;
 use Tests\Framework\TestResources;
-use Tests\Framework\ServiceBusRestProxyTestBase;
+use Tests\Framework\WrapRestProxyTestBase;
 use WindowsAzure\Common\Configuration;
 use WindowsAzure\Common\ServiceException;
 use WindowsAzure\Common\Internal\Utilities;
-use WindowsAzure\ServiceBus\Internal\ServiceBusRestProxy;
+use WindowsAzure\ServiceBus\WrapRestProxy;
+use WindowsAzure\ServiceBus\ServiceBusSettings;
 use WindowsAzure\Common\Internal\Resources;
 
 /**
- * Unit tests for ServiceBusRestProxy class
+ * Unit tests for WrapRestProxy class
  *
  * @package    Tests\Unit\WindowsAzure\ServiceBus\Internal
  * @author     Azure PHP SDK <azurephpsdk@microsoft.com>
@@ -44,19 +45,34 @@ use WindowsAzure\Common\Internal\Resources;
  * @version    Release: @package_version@
  * @link       http://pear.php.net/package/azure-sdk-for-php
  */
-class ServiceBusRestProxyTest extends ServiceBusRestProxyTestBase
+class WrapRestProxyTest extends WrapRestProxyTestBase
 {
     /**
-     * @covers WindowsAzure\ServiceBus\Internal\ServiceBusRestProxy::deleteQueue
+     * @covers WindowsAzure\ServiceBus\WrapRestProxy::__construct
+     * @covers WindowsAzure\ServiceBus\WrapRestProxy::wrapAccessToken
      */
-    public function testDeleteQueueNonExistQueueFail()
+    public function testWrapAccessToken() 
     {
-        $this->setExpectedException(get_class(
-            new ServiceException(''))
+        $wrapUri = 'https://'
+            .TestResources::serviceBusNamespace()
+            .'-sb.accesscontrol.windows.net/WRAPv0.9';
+        $wrapUserName = TestResources::wrapAuthenticationName();
+        $wrapPassword = TestResources::wrapPassword();
+        $scope = 'http://'
+            .TestResources::serviceBusNameSpace()
+            .'.servicebus.windows.net';
+        
+        $wrapAccessTokenResult = $this->restProxy->wrapAccessToken(
+            $wrapUri, 
+            $wrapUserName, 
+            $wrapPassword, 
+            $scope
         );
-
-        $this->wrapper->deleteQueue('IDoNotExist');
+        
+        $this->assertNotNull($wrapAccessTokenResult);
+        $this->assertNotNull($wrapAccessTokenResult->getAccessToken());
     }
+    
 }
 
 ?>

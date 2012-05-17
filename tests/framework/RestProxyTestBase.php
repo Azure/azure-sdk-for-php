@@ -41,7 +41,7 @@ use WindowsAzure\Common\Configuration;
 class RestProxyTestBase extends \PHPUnit_Framework_TestCase
 {
     protected $config;
-    protected $wrapper;
+    protected $restProxy;
     protected $xmlSerializer;
     
     const NOT_SUPPORTED = 'The storage emulator doesn\'t support this API';
@@ -53,10 +53,10 @@ class RestProxyTestBase extends \PHPUnit_Framework_TestCase
         }
     }
     
-    public function __construct($config, $serviceWrapper)
+    public function __construct($config, $serviceRestProxy)
     {
         $this->config = $config;
-        $this->wrapper = $serviceWrapper;
+        $this->restProxy = $serviceRestProxy;
         $this->xmlSerializer = new XmlSerializer();
         Logger::setLogFile('C:\log.txt');
     }

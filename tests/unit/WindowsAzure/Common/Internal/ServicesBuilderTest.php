@@ -61,10 +61,10 @@ class ServicesBuilderTest extends \PHPUnit_Framework_TestCase
         $builder = new ServicesBuilder();
         
         // Test
-        $queueWrapper = $builder->build($config, Resources::QUEUE_TYPE_NAME);
+        $queueRestProxy = $builder->build($config, Resources::QUEUE_TYPE_NAME);
         
         // Assert
-        $this->assertInstanceOf('WindowsAzure\Queue\Internal\IQueue', $queueWrapper);
+        $this->assertInstanceOf('WindowsAzure\Queue\Internal\IQueue', $queueRestProxy);
     }
     
     /**
@@ -83,10 +83,10 @@ class ServicesBuilderTest extends \PHPUnit_Framework_TestCase
         $builder = new ServicesBuilder();
         
         // Test
-        $blobWrapper = $builder->build($config, Resources::BLOB_TYPE_NAME);
+        $blobRestProxy = $builder->build($config, Resources::BLOB_TYPE_NAME);
         
         // Assert
-        $this->assertInstanceOf('WindowsAzure\Blob\Internal\IBlob', $blobWrapper);
+        $this->assertInstanceOf('WindowsAzure\Blob\Internal\IBlob', $blobRestProxy);
     }
     
     /**
@@ -105,10 +105,10 @@ class ServicesBuilderTest extends \PHPUnit_Framework_TestCase
         $builder = new ServicesBuilder();
         
         // Test
-        $tableWrapper = $builder->build($config, Resources::TABLE_TYPE_NAME);
+        $tableRestProxy = $builder->build($config, Resources::TABLE_TYPE_NAME);
         
         // Assert
-        $this->assertInstanceOf('WindowsAzure\Table\Internal\ITable', $tableWrapper);
+        $this->assertInstanceOf('WindowsAzure\Table\Internal\ITable', $tableRestProxy);
     }
     
     /**

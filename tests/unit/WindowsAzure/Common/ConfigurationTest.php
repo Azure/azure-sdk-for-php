@@ -130,9 +130,9 @@ class ConfigurationTest extends \PHPUnit_Framework_TestCase
         $config->setProperty(QueueSettings::ACCOUNT_KEY, TestResources::KEY1);
         $config->setProperty(QueueSettings::ACCOUNT_NAME, TestResources::ACCOUNT_NAME);
         $config->setProperty(QueueSettings::URI, 'http://' . TestResources::ACCOUNT_NAME . TestResources::QUEUE_URI);
-        $queueWrapper = $config->create(Resources::QUEUE_TYPE_NAME);
+        $queueRestProxy = $config->create(Resources::QUEUE_TYPE_NAME);
 
-        $this->assertInstanceOf('WindowsAzure\Queue\Internal\IQueue', $queueWrapper);
+        $this->assertInstanceOf('WindowsAzure\Queue\Internal\IQueue', $queueRestProxy);
     }
 
     /**

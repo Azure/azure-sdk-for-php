@@ -54,10 +54,10 @@ class ServiceManagementServiceTest extends \PHPUnit_Framework_TestCase
         $config->setProperty(ServiceManagementSettings::URI, Resources::SERVICE_MANAGEMENT_URL);
         
         // Test
-        $servicemanagementWrapper = ServiceManagementService::create($config);
+        $servicemanagementRestProxy = ServiceManagementService::create($config);
         
         // Assert
-        $this->assertInstanceOf('WindowsAzure\ServiceManagement\Internal\IServiceManagement', $servicemanagementWrapper);
+        $this->assertInstanceOf('WindowsAzure\ServiceManagement\Internal\IServiceManagement', $servicemanagementRestProxy);
     }
 }
 

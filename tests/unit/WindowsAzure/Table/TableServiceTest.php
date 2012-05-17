@@ -54,10 +54,10 @@ class TableServiceTest extends \PHPUnit_Framework_TestCase
         $config->setProperty(TableSettings::URI, $uri);
         
         // Test
-        $tableWrapper = TableService::create($config);
+        $tableRestProxy = TableService::create($config);
         
         // Assert
-        $this->assertInstanceOf('WindowsAzure\Table\Internal\ITable', $tableWrapper);
+        $this->assertInstanceOf('WindowsAzure\Table\Internal\ITable', $tableRestProxy);
     }
 }
 

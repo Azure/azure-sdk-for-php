@@ -25,7 +25,7 @@
 namespace WindowsAzure\ServiceBus\Internal;
 use WindowsAzure\Common\Configuration;
 use WindowsAzure\Common\Internal\Resources;
-use WindowsAzure\ServiceBus\Internal\WrapRestProxy;
+use WindowsAzure\ServiceBus\WrapRestProxy;
 use WindowsAzure\ServiceBus\Models\ActiveToken;
 use WindowsAzure\ServiceBus\ServiceBusSettings;
 use WindowsAzure\ServiceBus\WrapService;

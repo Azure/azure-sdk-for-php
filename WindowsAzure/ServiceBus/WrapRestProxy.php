@@ -15,14 +15,14 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   WindowsAzure\ServiceBus\Internal
+ * @package   WindowsAzure\ServiceBus
  * @author    Azure PHP SDK <azurephp@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
 
-namespace WindowsAzure\ServiceBus\Internal;
+namespace WindowsAzure\ServiceBus;
 use WindowsAzure\Common\Internal\Http\IHttpClient;
 use WindowsAzure\Common\Internal\Http\Url;
 use WindowsAzure\Common\Internal\ServiceRestProxy;
@@ -31,6 +31,7 @@ use WindowsAzure\Common\Internal\Utilities;
 use WindowsAzure\Common\Internal\Validate;
 use WindowsAzure\Common\Models\GetServicePropertiesResult;
 use WindowsAzure\Common\Models\ServiceProperties;
+use WindowsAzure\ServiceBus\Internal\IWrap;
 use WindowsAzure\ServiceBus\ServiceBusSettings;
 use WindowsAzure\ServiceBus\Models\WrapAccessTokenResult;
 
@@ -38,7 +39,7 @@ use WindowsAzure\ServiceBus\Models\WrapAccessTokenResult;
  * The WRAP service layer. 
  *
  * @category  Microsoft
- * @package   WindowsAzure\ServiceBus\Internal
+ * @package   WindowsAzure\ServiceBus
  * @author    Azure PHP SDK <azurephpsdk@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0

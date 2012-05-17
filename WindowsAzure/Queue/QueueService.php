@@ -29,7 +29,7 @@ use WindowsAzure\Common\Internal\IServiceBuilder;
 use WindowsAzure\Common\Internal\Resources;
 
 /**
- * Factory for creating IQueue objects.
+ * Factory for creating QueueRestProxy objects.
  *
  * @category  Microsoft
  * @package   WindowsAzure\Queue
@@ -49,7 +49,7 @@ class QueueService
      * @param WindowsAzure\Common\Internal\IServicesBuilder $builder The builder
      * object.
      * 
-     * @return WindowsAzure\Queue\Internal\IQueue
+     * @return WindowsAzure\Queue\QueueRestProxy
      */
     public static function create($config, $builder = null)
     {

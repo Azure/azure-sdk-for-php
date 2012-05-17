@@ -32,7 +32,7 @@ use WindowsAzure\Common\Configuration;
 use WindowsAzure\Common\ServiceException;
 use WindowsAzure\Common\Internal\WindowsAzureUtilities;
 use WindowsAzure\ServiceBus\ServiceBusSettings;
-use WindowsAzure\ServiceBus\Internal\WrapRestProxy;
+use WindowsAzure\ServiceBus\WrapRestProxy;
 use WindowsAzure\ServiceBus\Internal\WrapTokenManager;
 use WindowsAzure\Common\Internal\Resources;
 

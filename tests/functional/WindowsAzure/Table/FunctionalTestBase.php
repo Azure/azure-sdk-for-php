@@ -44,7 +44,7 @@ class FunctionalTestBase extends TableServiceRestProxyTestBase {
     {
         parent::__construct();
         $fiddlerFilter = new FiddlerFilter();
-        $this->wrapper = $this->wrapper->withFilter($fiddlerFilter);
+        $this->restProxy = $this->restProxy->withFilter($fiddlerFilter);
     }
     
     public static function setUpBeforeClass() {
@@ -82,7 +82,7 @@ class FunctionalTestBase extends TableServiceRestProxyTestBase {
 
     private static function createService() {
         $tmp = new FunctionalTestBase();
-        return $tmp->wrapper;
+        return $tmp->restProxy;
     }
     
     protected function clearTable($table) {
@@ -90,10 +90,10 @@ class FunctionalTestBase extends TableServiceRestProxyTestBase {
         if ($index !== false) {
             // This is a well-known table, so need to create a new one to replace it.
             TableServiceFunctionalTestData::$TEST_TABLE_NAMES[$index] = TableServiceFunctionalTestData::getInterestingTableName();
-            $this->wrapper->createTable(TableServiceFunctionalTestData::$TEST_TABLE_NAMES[$index]);
+            $this->restProxy->createTable(TableServiceFunctionalTestData::$TEST_TABLE_NAMES[$index]);
         }
             
-        $this->wrapper->deleteTable($table);
+        $this->restProxy->deleteTable($table);
     }
 
     protected function getCleanTable() {

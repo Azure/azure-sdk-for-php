@@ -31,7 +31,7 @@ use Tests\Framework\WrapRestProxyTestBase;
 use WindowsAzure\Common\Configuration;
 use WindowsAzure\Common\ServiceException;
 use WindowsAzure\Common\Internal\WindowsAzureUtilities;
-use WindowsAzure\ServiceBus\Internal\WrapRestProxy;
+use WindowsAzure\ServiceBus\WrapRestProxy;
 use WindowsAzure\ServiceBus\WrapService;
 use WindowsAzure\ServiceBus\ServiceBusSettings;
 use WindowsAzure\Common\Internal\Resources;
@@ -68,7 +68,7 @@ class WrapServiceTest extends \PHPUnit_Framework_TestCase
         $wrapRestProxy = WrapService::create($config);
         
         $this->assertNotNull($wrapRestProxy);
-        $this->assertInstanceOf('WindowsAzure\ServiceBus\Internal\WrapRestProxy', $wrapRestProxy);
+        $this->assertInstanceOf('WindowsAzure\ServiceBus\WrapRestProxy', $wrapRestProxy);
     }
     
 }
