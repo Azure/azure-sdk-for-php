@@ -29,7 +29,7 @@ use WindowsAzure\Common\Internal\IServiceBuilder;
 use WindowsAzure\Common\Internal\Resources;
 
 /**
- * Factory for creating IBlob objects.
+ * Factory for creating BlobRestProxy objects.
  *
  * @category  Microsoft
  * @package   WindowsAzure\Blob
@@ -49,7 +49,7 @@ class BlobService
      * @param WindowsAzure\Common\Internal\IServicesBuilder $builder The builder
      * object.
      * 
-     * @return WindowsAzure\Blob\Internal\IBlob
+     * @return WindowsAzure\Blob\BlobRestProxy
      */
     public static function create($config, $builder = null)
     {

@@ -27,7 +27,7 @@ use WindowsAzure\Common\Configuration;
 use WindowsAzure\Common\Internal\Resources;
 
 /**
- * Factory for creating IWrap objects
+ * Factory for creating WrapRestProxy objects
  *
  * @category  Microsoft
  * @package   WindowsAzure\ServiceBus
@@ -47,7 +47,7 @@ class WrapService
      * @param WindowsAzure\Common\Internal\IServicesBuilder $builder The builder 
      * object.
      * 
-     * @return WindowsAzure\ServiceBus\Internal\IWrap
+     * @return WindowsAzure\ServiceBus\WrapRestProxy
      */
     public static function create($config, $builder = null)
     {

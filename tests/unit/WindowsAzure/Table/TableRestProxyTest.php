@@ -31,7 +31,7 @@ use WindowsAzure\Common\Internal\Utilities;
 use WindowsAzure\Common\ServiceException;
 use Tests\Framework\TestResources;
 use WindowsAzure\Common\Internal\Resources;
-use WindowsAzure\Table\Internal\TableRestProxy;
+use WindowsAzure\Table\TableRestProxy;
 use WindowsAzure\Common\Models\ServiceProperties;
 use WindowsAzure\Table\Models\QueryTablesOptions;
 use WindowsAzure\Table\Models\Query;
@@ -56,7 +56,7 @@ use WindowsAzure\Common\Internal\Serialization\XmlSerializer;
 class TableRestProxyTest extends TableServiceRestProxyTestBase
 {
     /**
-     * @covers  WindowsAzure\Table\Internal\TableRestProxy::__construct
+     * @covers  WindowsAzure\Table\TableRestProxy::__construct
      */
     public function test__construct()
     {
@@ -74,7 +74,7 @@ class TableRestProxyTest extends TableServiceRestProxyTestBase
     }
     
     /**
-     * @covers WindowsAzure\Table\Internal\TableRestProxy::getServiceProperties
+     * @covers WindowsAzure\Table\TableRestProxy::getServiceProperties
      * @covers WindowsAzure\Common\Internal\ServiceRestProxy::sendContext
      */
     public function testGetServiceProperties()
@@ -89,7 +89,7 @@ class TableRestProxyTest extends TableServiceRestProxyTestBase
     }
     
     /**
-     * @covers WindowsAzure\Table\Internal\TableRestProxy::setServiceProperties
+     * @covers WindowsAzure\Table\TableRestProxy::setServiceProperties
      * @covers WindowsAzure\Common\Internal\ServiceRestProxy::sendContext
      */
     public function testSetServiceProperties()
@@ -108,7 +108,7 @@ class TableRestProxyTest extends TableServiceRestProxyTestBase
     }
     
     /**
-     * @covers WindowsAzure\Table\Internal\TableRestProxy::setServiceProperties
+     * @covers WindowsAzure\Table\TableRestProxy::setServiceProperties
      * @covers WindowsAzure\Common\Internal\ServiceRestProxy::sendContext
      */
     public function testSetServicePropertiesWithEmptyParts()
@@ -129,7 +129,7 @@ class TableRestProxyTest extends TableServiceRestProxyTestBase
     }
     
     /**
-     * @covers WindowsAzure\Table\Internal\TableRestProxy::createTable
+     * @covers WindowsAzure\Table\TableRestProxy::createTable
      * @covers WindowsAzure\Table\Internal\AtomReaderWriter::getTable
      * @covers WindowsAzure\Common\Internal\ServiceRestProxy::sendContext
      */
@@ -147,7 +147,7 @@ class TableRestProxyTest extends TableServiceRestProxyTestBase
     }
     
     /**
-     * @covers WindowsAzure\Table\Internal\TableRestProxy::getTable
+     * @covers WindowsAzure\Table\TableRestProxy::getTable
      * @covers WindowsAzure\Common\Internal\ServiceRestProxy::sendContext
      * @covers WindowsAzure\Table\Internal\AtomReaderWriter::parseTable
      * @covers WindowsAzure\Table\Internal\AtomReaderWriter::_parseBody
@@ -167,7 +167,7 @@ class TableRestProxyTest extends TableServiceRestProxyTestBase
     }
     
     /**
-     * @covers WindowsAzure\Table\Internal\TableRestProxy::deleteTable
+     * @covers WindowsAzure\Table\TableRestProxy::deleteTable
      * @covers WindowsAzure\Common\Internal\ServiceRestProxy::sendContext
      */
     public function testDeleteTable()
@@ -185,12 +185,12 @@ class TableRestProxyTest extends TableServiceRestProxyTestBase
     }
     
     /**
-     * @covers WindowsAzure\Table\Internal\TableRestProxy::queryTables
-     * @covers WindowsAzure\Table\Internal\TableRestProxy::_buildFilterExpression
-     * @covers WindowsAzure\Table\Internal\TableRestProxy::_buildFilterExpressionRec
-     * @covers WindowsAzure\Table\Internal\TableRestProxy::_addOptionalQuery
-     * @covers WindowsAzure\Table\Internal\TableRestProxy::_encodeODataUriValues
-     * @covers WindowsAzure\Table\Internal\TableRestProxy::_encodeODataUriValue
+     * @covers WindowsAzure\Table\TableRestProxy::queryTables
+     * @covers WindowsAzure\Table\TableRestProxy::_buildFilterExpression
+     * @covers WindowsAzure\Table\TableRestProxy::_buildFilterExpressionRec
+     * @covers WindowsAzure\Table\TableRestProxy::_addOptionalQuery
+     * @covers WindowsAzure\Table\TableRestProxy::_encodeODataUriValues
+     * @covers WindowsAzure\Table\TableRestProxy::_encodeODataUriValue
      * @covers WindowsAzure\Table\Models\EdmType::serializeQueryValue
      * @covers WindowsAzure\Table\Models\QueryTablesResult::create
      * @covers WindowsAzure\Table\Internal\AtomReaderWriter::_parseBody
@@ -216,12 +216,12 @@ class TableRestProxyTest extends TableServiceRestProxyTestBase
     }
     
     /**
-     * @covers WindowsAzure\Table\Internal\TableRestProxy::queryTables
-     * @covers WindowsAzure\Table\Internal\TableRestProxy::_buildFilterExpression
-     * @covers WindowsAzure\Table\Internal\TableRestProxy::_buildFilterExpressionRec
-     * @covers WindowsAzure\Table\Internal\TableRestProxy::_addOptionalQuery
-     * @covers WindowsAzure\Table\Internal\TableRestProxy::_encodeODataUriValues
-     * @covers WindowsAzure\Table\Internal\TableRestProxy::_encodeODataUriValue
+     * @covers WindowsAzure\Table\TableRestProxy::queryTables
+     * @covers WindowsAzure\Table\TableRestProxy::_buildFilterExpression
+     * @covers WindowsAzure\Table\TableRestProxy::_buildFilterExpressionRec
+     * @covers WindowsAzure\Table\TableRestProxy::_addOptionalQuery
+     * @covers WindowsAzure\Table\TableRestProxy::_encodeODataUriValues
+     * @covers WindowsAzure\Table\TableRestProxy::_encodeODataUriValue
      * @covers WindowsAzure\Table\Models\EdmType::serializeQueryValue
      * @covers WindowsAzure\Table\Models\QueryTablesResult::create
      * @covers WindowsAzure\Table\Internal\AtomReaderWriter::_parseBody
@@ -244,12 +244,12 @@ class TableRestProxyTest extends TableServiceRestProxyTestBase
     }
     
     /**
-     * @covers WindowsAzure\Table\Internal\TableRestProxy::queryTables
-     * @covers WindowsAzure\Table\Internal\TableRestProxy::_buildFilterExpression
-     * @covers WindowsAzure\Table\Internal\TableRestProxy::_buildFilterExpressionRec
-     * @covers WindowsAzure\Table\Internal\TableRestProxy::_addOptionalQuery
-     * @covers WindowsAzure\Table\Internal\TableRestProxy::_encodeODataUriValues
-     * @covers WindowsAzure\Table\Internal\TableRestProxy::_encodeODataUriValue
+     * @covers WindowsAzure\Table\TableRestProxy::queryTables
+     * @covers WindowsAzure\Table\TableRestProxy::_buildFilterExpression
+     * @covers WindowsAzure\Table\TableRestProxy::_buildFilterExpressionRec
+     * @covers WindowsAzure\Table\TableRestProxy::_addOptionalQuery
+     * @covers WindowsAzure\Table\TableRestProxy::_encodeODataUriValues
+     * @covers WindowsAzure\Table\TableRestProxy::_encodeODataUriValue
      * @covers WindowsAzure\Table\Models\EdmType::serializeQueryValue
      * @covers WindowsAzure\Table\Models\QueryTablesResult::create
      * @covers WindowsAzure\Table\Internal\AtomReaderWriter::_parseBody
@@ -267,12 +267,12 @@ class TableRestProxyTest extends TableServiceRestProxyTestBase
     }
     
     /**
-     * @covers WindowsAzure\Table\Internal\TableRestProxy::queryTables
-     * @covers WindowsAzure\Table\Internal\TableRestProxy::_buildFilterExpression
-     * @covers WindowsAzure\Table\Internal\TableRestProxy::_buildFilterExpressionRec
-     * @covers WindowsAzure\Table\Internal\TableRestProxy::_addOptionalQuery
-     * @covers WindowsAzure\Table\Internal\TableRestProxy::_encodeODataUriValues
-     * @covers WindowsAzure\Table\Internal\TableRestProxy::_encodeODataUriValue
+     * @covers WindowsAzure\Table\TableRestProxy::queryTables
+     * @covers WindowsAzure\Table\TableRestProxy::_buildFilterExpression
+     * @covers WindowsAzure\Table\TableRestProxy::_buildFilterExpressionRec
+     * @covers WindowsAzure\Table\TableRestProxy::_addOptionalQuery
+     * @covers WindowsAzure\Table\TableRestProxy::_encodeODataUriValues
+     * @covers WindowsAzure\Table\TableRestProxy::_encodeODataUriValue
      * @covers WindowsAzure\Table\Models\EdmType::serializeQueryValue
      * @covers WindowsAzure\Table\Models\QueryTablesResult::create
      * @covers WindowsAzure\Table\Internal\AtomReaderWriter::_parseBody
@@ -304,12 +304,12 @@ class TableRestProxyTest extends TableServiceRestProxyTestBase
     }
     
     /**
-     * @covers WindowsAzure\Table\Internal\TableRestProxy::queryTables
-     * @covers WindowsAzure\Table\Internal\TableRestProxy::_buildFilterExpression
-     * @covers WindowsAzure\Table\Internal\TableRestProxy::_buildFilterExpressionRec
-     * @covers WindowsAzure\Table\Internal\TableRestProxy::_addOptionalQuery
-     * @covers WindowsAzure\Table\Internal\TableRestProxy::_encodeODataUriValues
-     * @covers WindowsAzure\Table\Internal\TableRestProxy::_encodeODataUriValue
+     * @covers WindowsAzure\Table\TableRestProxy::queryTables
+     * @covers WindowsAzure\Table\TableRestProxy::_buildFilterExpression
+     * @covers WindowsAzure\Table\TableRestProxy::_buildFilterExpressionRec
+     * @covers WindowsAzure\Table\TableRestProxy::_addOptionalQuery
+     * @covers WindowsAzure\Table\TableRestProxy::_encodeODataUriValues
+     * @covers WindowsAzure\Table\TableRestProxy::_encodeODataUriValue
      * @covers WindowsAzure\Table\Models\EdmType::serializeQueryValue
      * @covers WindowsAzure\Table\Models\QueryTablesResult::create
      * @covers WindowsAzure\Table\Internal\AtomReaderWriter::_parseBody
@@ -340,12 +340,12 @@ class TableRestProxyTest extends TableServiceRestProxyTestBase
     }
     
     /**
-     * @covers WindowsAzure\Table\Internal\TableRestProxy::queryTables
-     * @covers WindowsAzure\Table\Internal\TableRestProxy::_buildFilterExpression
-     * @covers WindowsAzure\Table\Internal\TableRestProxy::_buildFilterExpressionRec
-     * @covers WindowsAzure\Table\Internal\TableRestProxy::_addOptionalQuery
-     * @covers WindowsAzure\Table\Internal\TableRestProxy::_encodeODataUriValues
-     * @covers WindowsAzure\Table\Internal\TableRestProxy::_encodeODataUriValue
+     * @covers WindowsAzure\Table\TableRestProxy::queryTables
+     * @covers WindowsAzure\Table\TableRestProxy::_buildFilterExpression
+     * @covers WindowsAzure\Table\TableRestProxy::_buildFilterExpressionRec
+     * @covers WindowsAzure\Table\TableRestProxy::_addOptionalQuery
+     * @covers WindowsAzure\Table\TableRestProxy::_encodeODataUriValues
+     * @covers WindowsAzure\Table\TableRestProxy::_encodeODataUriValue
      * @covers WindowsAzure\Table\Models\EdmType::serializeQueryValue
      * @covers WindowsAzure\Table\Models\QueryTablesResult::create
      * @covers WindowsAzure\Table\Internal\AtomReaderWriter::_parseBody
@@ -386,8 +386,8 @@ class TableRestProxyTest extends TableServiceRestProxyTestBase
     }
     
     /**
-     * @covers WindowsAzure\Table\Internal\TableRestProxy::insertEntity
-     * @covers WindowsAzure\Table\Internal\TableRestProxy::_constructInsertEntityContext
+     * @covers WindowsAzure\Table\TableRestProxy::insertEntity
+     * @covers WindowsAzure\Table\TableRestProxy::_constructInsertEntityContext
      * @covers WindowsAzure\Table\Models\EdmType::serializeValue
      * @covers WindowsAzure\Table\Internal\AtomReaderWriter::_parseBody
      * @covers WindowsAzure\Table\Internal\AtomReaderWriter::getEntity
@@ -415,7 +415,7 @@ class TableRestProxyTest extends TableServiceRestProxyTestBase
     }
     
     /**
-     * @covers WindowsAzure\Table\Internal\TableRestProxy::queryEntities
+     * @covers WindowsAzure\Table\TableRestProxy::queryEntities
      * @covers WindowsAzure\Table\Internal\AtomReaderWriter::_parseBody
      * @covers WindowsAzure\Table\Internal\AtomReaderWriter::parseEntities
      * @covers WindowsAzure\Table\Internal\AtomReaderWriter::_parseOneEntity
@@ -437,7 +437,7 @@ class TableRestProxyTest extends TableServiceRestProxyTestBase
     }
     
     /**
-     * @covers WindowsAzure\Table\Internal\TableRestProxy::queryEntities
+     * @covers WindowsAzure\Table\TableRestProxy::queryEntities
      * @covers WindowsAzure\Table\Internal\AtomReaderWriter::_parseBody
      * @covers WindowsAzure\Table\Internal\AtomReaderWriter::parseEntities
      * @covers WindowsAzure\Table\Internal\AtomReaderWriter::_parseOneEntity
@@ -462,10 +462,10 @@ class TableRestProxyTest extends TableServiceRestProxyTestBase
     }
     
     /**
-     * @covers WindowsAzure\Table\Internal\TableRestProxy::queryEntities
-     * @covers WindowsAzure\Table\Internal\TableRestProxy::_addOptionalQuery
-     * @covers WindowsAzure\Table\Internal\TableRestProxy::_encodeODataUriValues
-     * @covers WindowsAzure\Table\Internal\TableRestProxy::_encodeODataUriValue
+     * @covers WindowsAzure\Table\TableRestProxy::queryEntities
+     * @covers WindowsAzure\Table\TableRestProxy::_addOptionalQuery
+     * @covers WindowsAzure\Table\TableRestProxy::_encodeODataUriValues
+     * @covers WindowsAzure\Table\TableRestProxy::_encodeODataUriValue
      * @covers WindowsAzure\Table\Internal\AtomReaderWriter::_parseBody
      * @covers WindowsAzure\Table\Internal\AtomReaderWriter::parseEntities
      * @covers WindowsAzure\Table\Internal\AtomReaderWriter::_parseOneEntity
@@ -499,10 +499,10 @@ class TableRestProxyTest extends TableServiceRestProxyTestBase
     }
     
     /**
-     * @covers WindowsAzure\Table\Internal\TableRestProxy::queryEntities
-     * @covers WindowsAzure\Table\Internal\TableRestProxy::_addOptionalQuery
-     * @covers WindowsAzure\Table\Internal\TableRestProxy::_encodeODataUriValues
-     * @covers WindowsAzure\Table\Internal\TableRestProxy::_encodeODataUriValue
+     * @covers WindowsAzure\Table\TableRestProxy::queryEntities
+     * @covers WindowsAzure\Table\TableRestProxy::_addOptionalQuery
+     * @covers WindowsAzure\Table\TableRestProxy::_encodeODataUriValues
+     * @covers WindowsAzure\Table\TableRestProxy::_encodeODataUriValue
      * @covers WindowsAzure\Table\Internal\AtomReaderWriter::_parseBody
      * @covers WindowsAzure\Table\Internal\AtomReaderWriter::parseEntities
      * @covers WindowsAzure\Table\Internal\AtomReaderWriter::_parseOneEntity
@@ -537,10 +537,10 @@ class TableRestProxyTest extends TableServiceRestProxyTestBase
     }
     
     /**
-     * @covers WindowsAzure\Table\Internal\TableRestProxy::queryEntities
-     * @covers WindowsAzure\Table\Internal\TableRestProxy::_addOptionalQuery
-     * @covers WindowsAzure\Table\Internal\TableRestProxy::_encodeODataUriValues
-     * @covers WindowsAzure\Table\Internal\TableRestProxy::_encodeODataUriValue
+     * @covers WindowsAzure\Table\TableRestProxy::queryEntities
+     * @covers WindowsAzure\Table\TableRestProxy::_addOptionalQuery
+     * @covers WindowsAzure\Table\TableRestProxy::_encodeODataUriValues
+     * @covers WindowsAzure\Table\TableRestProxy::_encodeODataUriValue
      * @covers WindowsAzure\Table\Internal\AtomReaderWriter::_parseBody
      * @covers WindowsAzure\Table\Internal\AtomReaderWriter::parseEntities
      * @covers WindowsAzure\Table\Internal\AtomReaderWriter::_parseOneEntity
@@ -582,10 +582,10 @@ class TableRestProxyTest extends TableServiceRestProxyTestBase
     }
     
     /**
-     * @covers WindowsAzure\Table\Internal\TableRestProxy::queryEntities
-     * @covers WindowsAzure\Table\Internal\TableRestProxy::_addOptionalQuery
-     * @covers WindowsAzure\Table\Internal\TableRestProxy::_encodeODataUriValues
-     * @covers WindowsAzure\Table\Internal\TableRestProxy::_encodeODataUriValue
+     * @covers WindowsAzure\Table\TableRestProxy::queryEntities
+     * @covers WindowsAzure\Table\TableRestProxy::_addOptionalQuery
+     * @covers WindowsAzure\Table\TableRestProxy::_encodeODataUriValues
+     * @covers WindowsAzure\Table\TableRestProxy::_encodeODataUriValue
      * @covers WindowsAzure\Table\Internal\AtomReaderWriter::_parseBody
      * @covers WindowsAzure\Table\Internal\AtomReaderWriter::parseEntities
      * @covers WindowsAzure\Table\Internal\AtomReaderWriter::_parseOneEntity
@@ -620,10 +620,10 @@ class TableRestProxyTest extends TableServiceRestProxyTestBase
     }
     
     /**
-     * @covers WindowsAzure\Table\Internal\TableRestProxy::updateEntity
-     * @covers WindowsAzure\Table\Internal\TableRestProxy::_getEntityPath
-     * @covers WindowsAzure\Table\Internal\TableRestProxy::_putOrMergeEntityImpl
-     * @covers WindowsAzure\Table\Internal\TableRestProxy::_constructPutOrMergeEntityContext
+     * @covers WindowsAzure\Table\TableRestProxy::updateEntity
+     * @covers WindowsAzure\Table\TableRestProxy::_getEntityPath
+     * @covers WindowsAzure\Table\TableRestProxy::_putOrMergeEntityImpl
+     * @covers WindowsAzure\Table\TableRestProxy::_constructPutOrMergeEntityContext
      * @covers WindowsAzure\Table\Models\EdmType::serializeValue
      * @covers WindowsAzure\Table\Internal\AtomReaderWriter::_parseBody
      * @covers WindowsAzure\Table\Internal\AtomReaderWriter::getEntity
@@ -656,8 +656,8 @@ class TableRestProxyTest extends TableServiceRestProxyTestBase
     }
     
     /**
-     * @covers WindowsAzure\Table\Internal\TableRestProxy::insertEntity
-     * @covers WindowsAzure\Table\Internal\TableRestProxy::_constructInsertEntityContext
+     * @covers WindowsAzure\Table\TableRestProxy::insertEntity
+     * @covers WindowsAzure\Table\TableRestProxy::_constructInsertEntityContext
      * @covers WindowsAzure\Table\Models\EdmType::serializeValue
      * @covers WindowsAzure\Table\Internal\AtomReaderWriter::_parseBody
      * @covers WindowsAzure\Table\Internal\AtomReaderWriter::getEntity
@@ -690,10 +690,10 @@ class TableRestProxyTest extends TableServiceRestProxyTestBase
     }
     
     /**
-     * @covers WindowsAzure\Table\Internal\TableRestProxy::mergeEntity
-     * @covers WindowsAzure\Table\Internal\TableRestProxy::_getEntityPath
-     * @covers WindowsAzure\Table\Internal\TableRestProxy::_putOrMergeEntityImpl
-     * @covers WindowsAzure\Table\Internal\TableRestProxy::_constructPutOrMergeEntityContext
+     * @covers WindowsAzure\Table\TableRestProxy::mergeEntity
+     * @covers WindowsAzure\Table\TableRestProxy::_getEntityPath
+     * @covers WindowsAzure\Table\TableRestProxy::_putOrMergeEntityImpl
+     * @covers WindowsAzure\Table\TableRestProxy::_constructPutOrMergeEntityContext
      * @covers WindowsAzure\Table\Models\EdmType::serializeValue
      * @covers WindowsAzure\Table\Internal\AtomReaderWriter::_parseBody
      * @covers WindowsAzure\Table\Internal\AtomReaderWriter::getEntity
@@ -726,10 +726,10 @@ class TableRestProxyTest extends TableServiceRestProxyTestBase
     }
     
     /**
-     * @covers WindowsAzure\Table\Internal\TableRestProxy::insertOrReplaceEntity
-     * @covers WindowsAzure\Table\Internal\TableRestProxy::_getEntityPath
-     * @covers WindowsAzure\Table\Internal\TableRestProxy::_putOrMergeEntityImpl
-     * @covers WindowsAzure\Table\Internal\TableRestProxy::_constructPutOrMergeEntityContext
+     * @covers WindowsAzure\Table\TableRestProxy::insertOrReplaceEntity
+     * @covers WindowsAzure\Table\TableRestProxy::_getEntityPath
+     * @covers WindowsAzure\Table\TableRestProxy::_putOrMergeEntityImpl
+     * @covers WindowsAzure\Table\TableRestProxy::_constructPutOrMergeEntityContext
      * @covers WindowsAzure\Table\Internal\AtomReaderWriter::_parseBody
      * @covers WindowsAzure\Table\Internal\AtomReaderWriter::getEntity
      * @covers WindowsAzure\Table\Models\UpdateEntityResult::create
@@ -763,10 +763,10 @@ class TableRestProxyTest extends TableServiceRestProxyTestBase
     }
     
     /**
-     * @covers WindowsAzure\Table\Internal\TableRestProxy::InsertOrMergeEntity
-     * @covers WindowsAzure\Table\Internal\TableRestProxy::_getEntityPath
-     * @covers WindowsAzure\Table\Internal\TableRestProxy::_putOrMergeEntityImpl
-     * @covers WindowsAzure\Table\Internal\TableRestProxy::_constructPutOrMergeEntityContext
+     * @covers WindowsAzure\Table\TableRestProxy::InsertOrMergeEntity
+     * @covers WindowsAzure\Table\TableRestProxy::_getEntityPath
+     * @covers WindowsAzure\Table\TableRestProxy::_putOrMergeEntityImpl
+     * @covers WindowsAzure\Table\TableRestProxy::_constructPutOrMergeEntityContext
      * @covers WindowsAzure\Table\Internal\AtomReaderWriter::_parseBody
      * @covers WindowsAzure\Table\Internal\AtomReaderWriter::getEntity
      * @covers WindowsAzure\Table\Models\UpdateEntityResult::create
@@ -800,9 +800,9 @@ class TableRestProxyTest extends TableServiceRestProxyTestBase
     }
     
     /**
-     * @covers WindowsAzure\Table\Internal\TableRestProxy::deleteEntity
-     * @covers WindowsAzure\Table\Internal\TableRestProxy::_getEntityPath
-     * @covers WindowsAzure\Table\Internal\TableRestProxy::_constructDeleteEntityContext
+     * @covers WindowsAzure\Table\TableRestProxy::deleteEntity
+     * @covers WindowsAzure\Table\TableRestProxy::_getEntityPath
+     * @covers WindowsAzure\Table\TableRestProxy::_constructDeleteEntityContext
      * @covers WindowsAzure\Common\Internal\ServiceRestProxy::sendContext
      */
     public function testDeleteEntity()
@@ -825,9 +825,9 @@ class TableRestProxyTest extends TableServiceRestProxyTestBase
     }
     
     /**
-     * @covers WindowsAzure\Table\Internal\TableRestProxy::deleteEntity
-     * @covers WindowsAzure\Table\Internal\TableRestProxy::_getEntityPath
-     * @covers WindowsAzure\Table\Internal\TableRestProxy::_constructDeleteEntityContext
+     * @covers WindowsAzure\Table\TableRestProxy::deleteEntity
+     * @covers WindowsAzure\Table\TableRestProxy::_getEntityPath
+     * @covers WindowsAzure\Table\TableRestProxy::_constructDeleteEntityContext
      * @covers WindowsAzure\Common\Internal\ServiceRestProxy::sendContext
      */
     public function testDeleteEntityWithSpecialChars()
@@ -850,7 +850,7 @@ class TableRestProxyTest extends TableServiceRestProxyTestBase
     }
     
     /**
-     * @covers WindowsAzure\Table\Internal\TableRestProxy::getEntity
+     * @covers WindowsAzure\Table\TableRestProxy::getEntity
      * @covers WindowsAzure\Table\Internal\AtomReaderWriter::_parseBody
      * @covers WindowsAzure\Table\Internal\AtomReaderWriter::parseEntity
      * @covers WindowsAzure\Table\Internal\AtomReaderWriter::_parseOneEntity
@@ -878,11 +878,11 @@ class TableRestProxyTest extends TableServiceRestProxyTestBase
     }
     
     /**
-     * @covers WindowsAzure\Table\Internal\TableRestProxy::batch
-     * @covers WindowsAzure\Table\Internal\TableRestProxy::_createBatchRequestBody
-     * @covers WindowsAzure\Table\Internal\TableRestProxy::_getOperationContext
-     * @covers WindowsAzure\Table\Internal\TableRestProxy::_constructInsertEntityContext
-     * @covers WindowsAzure\Table\Internal\TableRestProxy::_createOperationsContexts
+     * @covers WindowsAzure\Table\TableRestProxy::batch
+     * @covers WindowsAzure\Table\TableRestProxy::_createBatchRequestBody
+     * @covers WindowsAzure\Table\TableRestProxy::_getOperationContext
+     * @covers WindowsAzure\Table\TableRestProxy::_constructInsertEntityContext
+     * @covers WindowsAzure\Table\TableRestProxy::_createOperationsContexts
      * @covers WindowsAzure\Table\Internal\MimeReaderWriter::encodeMimeMultipart
      * @covers WindowsAzure\Table\Internal\MimeReaderWriter::decodeMimeMultipart
      * @covers WindowsAzure\Table\Models\BatchResult::create
@@ -914,11 +914,11 @@ class TableRestProxyTest extends TableServiceRestProxyTestBase
     }
     
     /**
-     * @covers WindowsAzure\Table\Internal\TableRestProxy::batch
-     * @covers WindowsAzure\Table\Internal\TableRestProxy::_createBatchRequestBody
-     * @covers WindowsAzure\Table\Internal\TableRestProxy::_getOperationContext
-     * @covers WindowsAzure\Table\Internal\TableRestProxy::_createOperationsContexts
-     * @covers WindowsAzure\Table\Internal\TableRestProxy::_constructDeleteEntityContext
+     * @covers WindowsAzure\Table\TableRestProxy::batch
+     * @covers WindowsAzure\Table\TableRestProxy::_createBatchRequestBody
+     * @covers WindowsAzure\Table\TableRestProxy::_getOperationContext
+     * @covers WindowsAzure\Table\TableRestProxy::_createOperationsContexts
+     * @covers WindowsAzure\Table\TableRestProxy::_constructDeleteEntityContext
      * @covers WindowsAzure\Table\Internal\MimeReaderWriter::encodeMimeMultipart
      * @covers WindowsAzure\Table\Internal\MimeReaderWriter::decodeMimeMultipart
      * @covers WindowsAzure\Table\Models\BatchResult::create
@@ -948,11 +948,11 @@ class TableRestProxyTest extends TableServiceRestProxyTestBase
     }
     
     /**
-     * @covers WindowsAzure\Table\Internal\TableRestProxy::batch
-     * @covers WindowsAzure\Table\Internal\TableRestProxy::_createBatchRequestBody
-     * @covers WindowsAzure\Table\Internal\TableRestProxy::_getOperationContext
-     * @covers WindowsAzure\Table\Internal\TableRestProxy::_createOperationsContexts
-     * @covers WindowsAzure\Table\Internal\TableRestProxy::_constructPutOrMergeEntityContext
+     * @covers WindowsAzure\Table\TableRestProxy::batch
+     * @covers WindowsAzure\Table\TableRestProxy::_createBatchRequestBody
+     * @covers WindowsAzure\Table\TableRestProxy::_getOperationContext
+     * @covers WindowsAzure\Table\TableRestProxy::_createOperationsContexts
+     * @covers WindowsAzure\Table\TableRestProxy::_constructPutOrMergeEntityContext
      * @covers WindowsAzure\Table\Internal\MimeReaderWriter::encodeMimeMultipart
      * @covers WindowsAzure\Table\Internal\MimeReaderWriter::decodeMimeMultipart
      * @covers WindowsAzure\Table\Models\BatchResult::create
@@ -991,11 +991,11 @@ class TableRestProxyTest extends TableServiceRestProxyTestBase
     }
     
     /**
-     * @covers WindowsAzure\Table\Internal\TableRestProxy::batch
-     * @covers WindowsAzure\Table\Internal\TableRestProxy::_createBatchRequestBody
-     * @covers WindowsAzure\Table\Internal\TableRestProxy::_getOperationContext
-     * @covers WindowsAzure\Table\Internal\TableRestProxy::_createOperationsContexts
-     * @covers WindowsAzure\Table\Internal\TableRestProxy::_constructPutOrMergeEntityContext
+     * @covers WindowsAzure\Table\TableRestProxy::batch
+     * @covers WindowsAzure\Table\TableRestProxy::_createBatchRequestBody
+     * @covers WindowsAzure\Table\TableRestProxy::_getOperationContext
+     * @covers WindowsAzure\Table\TableRestProxy::_createOperationsContexts
+     * @covers WindowsAzure\Table\TableRestProxy::_constructPutOrMergeEntityContext
      * @covers WindowsAzure\Table\Internal\MimeReaderWriter::encodeMimeMultipart
      * @covers WindowsAzure\Table\Internal\MimeReaderWriter::decodeMimeMultipart
      * @covers WindowsAzure\Table\Models\BatchResult::create
@@ -1034,11 +1034,11 @@ class TableRestProxyTest extends TableServiceRestProxyTestBase
     }
     
     /**
-     * @covers WindowsAzure\Table\Internal\TableRestProxy::batch
-     * @covers WindowsAzure\Table\Internal\TableRestProxy::_createBatchRequestBody
-     * @covers WindowsAzure\Table\Internal\TableRestProxy::_getOperationContext
-     * @covers WindowsAzure\Table\Internal\TableRestProxy::_createOperationsContexts
-     * @covers WindowsAzure\Table\Internal\TableRestProxy::_constructPutOrMergeEntityContext
+     * @covers WindowsAzure\Table\TableRestProxy::batch
+     * @covers WindowsAzure\Table\TableRestProxy::_createBatchRequestBody
+     * @covers WindowsAzure\Table\TableRestProxy::_getOperationContext
+     * @covers WindowsAzure\Table\TableRestProxy::_createOperationsContexts
+     * @covers WindowsAzure\Table\TableRestProxy::_constructPutOrMergeEntityContext
      * @covers WindowsAzure\Table\Internal\MimeReaderWriter::encodeMimeMultipart
      * @covers WindowsAzure\Table\Internal\MimeReaderWriter::decodeMimeMultipart
      * @covers WindowsAzure\Table\Models\BatchResult::create
@@ -1079,11 +1079,11 @@ class TableRestProxyTest extends TableServiceRestProxyTestBase
     }
     
     /**
-     * @covers WindowsAzure\Table\Internal\TableRestProxy::batch
-     * @covers WindowsAzure\Table\Internal\TableRestProxy::_createBatchRequestBody
-     * @covers WindowsAzure\Table\Internal\TableRestProxy::_getOperationContext
-     * @covers WindowsAzure\Table\Internal\TableRestProxy::_createOperationsContexts
-     * @covers WindowsAzure\Table\Internal\TableRestProxy::_constructPutOrMergeEntityContext
+     * @covers WindowsAzure\Table\TableRestProxy::batch
+     * @covers WindowsAzure\Table\TableRestProxy::_createBatchRequestBody
+     * @covers WindowsAzure\Table\TableRestProxy::_getOperationContext
+     * @covers WindowsAzure\Table\TableRestProxy::_createOperationsContexts
+     * @covers WindowsAzure\Table\TableRestProxy::_constructPutOrMergeEntityContext
      * @covers WindowsAzure\Table\Internal\MimeReaderWriter::encodeMimeMultipart
      * @covers WindowsAzure\Table\Internal\MimeReaderWriter::decodeMimeMultipart
      * @covers WindowsAzure\Table\Models\BatchResult::create
@@ -1124,11 +1124,11 @@ class TableRestProxyTest extends TableServiceRestProxyTestBase
     }
     
     /**
-     * @covers WindowsAzure\Table\Internal\TableRestProxy::batch
-     * @covers WindowsAzure\Table\Internal\TableRestProxy::_createBatchRequestBody
-     * @covers WindowsAzure\Table\Internal\TableRestProxy::_getOperationContext
-     * @covers WindowsAzure\Table\Internal\TableRestProxy::_createOperationsContexts
-     * @covers WindowsAzure\Table\Internal\TableRestProxy::_constructPutOrMergeEntityContext
+     * @covers WindowsAzure\Table\TableRestProxy::batch
+     * @covers WindowsAzure\Table\TableRestProxy::_createBatchRequestBody
+     * @covers WindowsAzure\Table\TableRestProxy::_getOperationContext
+     * @covers WindowsAzure\Table\TableRestProxy::_createOperationsContexts
+     * @covers WindowsAzure\Table\TableRestProxy::_constructPutOrMergeEntityContext
      * @covers WindowsAzure\Table\Internal\MimeReaderWriter::encodeMimeMultipart
      * @covers WindowsAzure\Table\Internal\MimeReaderWriter::decodeMimeMultipart
      * @covers WindowsAzure\Table\Models\BatchResult::create
@@ -1168,11 +1168,11 @@ class TableRestProxyTest extends TableServiceRestProxyTestBase
     }
     
     /**
-     * @covers WindowsAzure\Table\Internal\TableRestProxy::batch
-     * @covers WindowsAzure\Table\Internal\TableRestProxy::_createBatchRequestBody
-     * @covers WindowsAzure\Table\Internal\TableRestProxy::_getOperationContext
-     * @covers WindowsAzure\Table\Internal\TableRestProxy::_createOperationsContexts
-     * @covers WindowsAzure\Table\Internal\TableRestProxy::_constructPutOrMergeEntityContext
+     * @covers WindowsAzure\Table\TableRestProxy::batch
+     * @covers WindowsAzure\Table\TableRestProxy::_createBatchRequestBody
+     * @covers WindowsAzure\Table\TableRestProxy::_getOperationContext
+     * @covers WindowsAzure\Table\TableRestProxy::_createOperationsContexts
+     * @covers WindowsAzure\Table\TableRestProxy::_constructPutOrMergeEntityContext
      * @covers WindowsAzure\Table\Internal\MimeReaderWriter::encodeMimeMultipart
      * @covers WindowsAzure\Table\Internal\MimeReaderWriter::decodeMimeMultipart
      * @covers WindowsAzure\Table\Models\BatchResult::create

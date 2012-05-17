@@ -15,14 +15,14 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   WindowsAzure\ServiceBus\Internal
+ * @package   WindowsAzure\ServiceBus
  * @author    Azure PHP SDK <azurephpsdk@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
 
-namespace WindowsAzure\ServiceBus\Internal;
+namespace WindowsAzure\ServiceBus;
 use WindowsAzure\Common\Internal\Http\IHttpClient;
 use WindowsAzure\Common\Internal\Http\Url;
 use WindowsAzure\Common\Models\GetServicePropertiesResult;
@@ -37,7 +37,7 @@ use WindowsAzure\Common\Internal\Validate;
  * This class constructs HTTP requests and receive HTTP responses for service bus.
  *
  * @category  Microsoft
- * @package   WindowsAzure\ServiceBus\Internal
+ * @package   WindowsAzure\ServiceBus
  * @author    Azure PHP SDK <azurephpsdk@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0

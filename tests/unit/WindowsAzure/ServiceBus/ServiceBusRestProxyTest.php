@@ -31,7 +31,7 @@ use Tests\Framework\ServiceBusRestProxyTestBase;
 use WindowsAzure\Common\Configuration;
 use WindowsAzure\Common\ServiceException;
 use WindowsAzure\Common\Internal\Utilities;
-use WindowsAzure\ServiceBus\Internal\ServiceBusRestProxy;
+use WindowsAzure\ServiceBus\ServiceBusRestProxy;
 use WindowsAzure\Common\Internal\Resources;
 
 /**
@@ -47,7 +47,7 @@ use WindowsAzure\Common\Internal\Resources;
 class ServiceBusRestProxyTest extends ServiceBusRestProxyTestBase
 {
     /**
-     * @covers WindowsAzure\ServiceBus\Internal\ServiceBusRestProxy::deleteQueue
+     * @covers WindowsAzure\ServiceBus\ServiceBusRestProxy::deleteQueue
      */
     public function testDeleteQueueNonExistQueueFail()
     {

@@ -68,7 +68,7 @@ use WindowsAzure\Blob\Models\CreateBlobSnapshotResult;
 class BlobRestProxyTest extends BlobServiceRestProxyTestBase
 {
     /**
-    * @covers WindowsAzure\Blob\Internal\BlobRestProxy::getServiceProperties
+    * @covers WindowsAzure\Blob\BlobRestProxy::getServiceProperties
     */
     public function testGetServiceProperties()
     {
@@ -82,7 +82,7 @@ class BlobRestProxyTest extends BlobServiceRestProxyTestBase
     }
     
     /**
-    * @covers WindowsAzure\Blob\Internal\BlobRestProxy::setServiceProperties
+    * @covers WindowsAzure\Blob\BlobRestProxy::setServiceProperties
     */
     public function testSetServiceProperties()
     {
@@ -100,7 +100,7 @@ class BlobRestProxyTest extends BlobServiceRestProxyTestBase
     }
     
     /**
-     * @covers WindowsAzure\Blob\Internal\BlobRestProxy::listContainers
+     * @covers WindowsAzure\Blob\BlobRestProxy::listContainers
      * @covers WindowsAzure\Common\Internal\ServiceRestProxy::send
      */
     public function testListContainersSimple()
@@ -125,7 +125,7 @@ class BlobRestProxyTest extends BlobServiceRestProxyTestBase
     }
 
     /**
-    * @covers WindowsAzure\Blob\Internal\BlobRestProxy::listContainers
+    * @covers WindowsAzure\Blob\BlobRestProxy::listContainers
     */
     public function testListContainersWithOptions()
     {
@@ -157,7 +157,7 @@ class BlobRestProxyTest extends BlobServiceRestProxyTestBase
     }
 
     /**
-    * @covers WindowsAzure\Blob\Internal\BlobRestProxy::listContainers
+    * @covers WindowsAzure\Blob\BlobRestProxy::listContainers
     */
     public function testListContainersWithNextMarker()
     {
@@ -191,7 +191,7 @@ class BlobRestProxyTest extends BlobServiceRestProxyTestBase
     }
     
     /**
-    * @covers WindowsAzure\Blob\Internal\BlobRestProxy::listContainers
+    * @covers WindowsAzure\Blob\BlobRestProxy::listContainers
     */
     public function testListContainersWithInvalidNextMarkerFail()
     {
@@ -215,7 +215,7 @@ class BlobRestProxyTest extends BlobServiceRestProxyTestBase
     }
 
     /**
-    * @covers WindowsAzure\Blob\Internal\BlobRestProxy::listContainers
+    * @covers WindowsAzure\Blob\BlobRestProxy::listContainers
     */
     public function testListContainersWithNoContainers()
     {
@@ -228,7 +228,7 @@ class BlobRestProxyTest extends BlobServiceRestProxyTestBase
     }
 
     /**
-    * @covers WindowsAzure\Blob\Internal\BlobRestProxy::listContainers
+    * @covers WindowsAzure\Blob\BlobRestProxy::listContainers
     */
     public function testListContainersWithOneResult()
     {
@@ -245,7 +245,7 @@ class BlobRestProxyTest extends BlobServiceRestProxyTestBase
     }
     
     /**
-    * @covers WindowsAzure\Blob\Internal\BlobRestProxy::createContainer
+    * @covers WindowsAzure\Blob\BlobRestProxy::createContainer
     */
     public function testCreateContainerSimple()
     {
@@ -263,7 +263,7 @@ class BlobRestProxyTest extends BlobServiceRestProxyTestBase
     }
     
     /**
-    * @covers WindowsAzure\Blob\Internal\BlobRestProxy::createContainer
+    * @covers WindowsAzure\Blob\BlobRestProxy::createContainer
     */
     public function testCreateContainerWithoutOptions()
     {
@@ -282,7 +282,7 @@ class BlobRestProxyTest extends BlobServiceRestProxyTestBase
     }
     
     /**
-    * @covers WindowsAzure\Blob\Internal\BlobRestProxy::createContainer
+    * @covers WindowsAzure\Blob\BlobRestProxy::createContainer
     */
     public function testCreateContainerWithMetadata()
     {
@@ -306,7 +306,7 @@ class BlobRestProxyTest extends BlobServiceRestProxyTestBase
     }
     
     /**
-    * @covers WindowsAzure\Blob\Internal\BlobRestProxy::createContainer
+    * @covers WindowsAzure\Blob\BlobRestProxy::createContainer
     */
     public function testCreateContainerInvalidNameFail()
     {
@@ -319,7 +319,7 @@ class BlobRestProxyTest extends BlobServiceRestProxyTestBase
     }
     
     /**
-    * @covers WindowsAzure\Blob\Internal\BlobRestProxy::createContainer
+    * @covers WindowsAzure\Blob\BlobRestProxy::createContainer
     */
     public function testCreateContainerAlreadyExitsFail()
     {
@@ -333,7 +333,7 @@ class BlobRestProxyTest extends BlobServiceRestProxyTestBase
     }
     
     /**
-    * @covers WindowsAzure\Blob\Internal\BlobRestProxy::deleteContainer
+    * @covers WindowsAzure\Blob\BlobRestProxy::deleteContainer
     */
     public function testDeleteContainer()
     {
@@ -351,7 +351,7 @@ class BlobRestProxyTest extends BlobServiceRestProxyTestBase
     }
     
     /**
-    * @covers WindowsAzure\Blob\Internal\BlobRestProxy::deleteContainer
+    * @covers WindowsAzure\Blob\BlobRestProxy::deleteContainer
     */
     public function testDeleteContainerFail()
     {
@@ -364,8 +364,8 @@ class BlobRestProxyTest extends BlobServiceRestProxyTestBase
     }
     
     /**
-     * @covers WindowsAzure\Blob\Internal\BlobRestProxy::getContainerProperties
-     * @covers WindowsAzure\Blob\Internal\BlobRestProxy::_getContainerPropertiesImpl
+     * @covers WindowsAzure\Blob\BlobRestProxy::getContainerProperties
+     * @covers WindowsAzure\Blob\BlobRestProxy::_getContainerPropertiesImpl
      */
     public function testGetContainerProperties()
     {
@@ -383,8 +383,8 @@ class BlobRestProxyTest extends BlobServiceRestProxyTestBase
     }
     
     /**
-     * @covers WindowsAzure\Blob\Internal\BlobRestProxy::getContainerMetadata
-     * @covers WindowsAzure\Blob\Internal\BlobRestProxy::_getContainerPropertiesImpl
+     * @covers WindowsAzure\Blob\BlobRestProxy::getContainerMetadata
+     * @covers WindowsAzure\Blob\BlobRestProxy::_getContainerPropertiesImpl
      */
     public function testGetContainerMetadata()
     {
@@ -408,7 +408,7 @@ class BlobRestProxyTest extends BlobServiceRestProxyTestBase
     }
 
     /**
-     * @covers WindowsAzure\Blob\Internal\BlobRestProxy::getContainerAcl
+     * @covers WindowsAzure\Blob\BlobRestProxy::getContainerAcl
      */
     public function testGetContainerAcl()
     {
@@ -425,7 +425,7 @@ class BlobRestProxyTest extends BlobServiceRestProxyTestBase
     }
     
     /**
-     * @covers WindowsAzure\Blob\Internal\BlobRestProxy::setContainerAcl
+     * @covers WindowsAzure\Blob\BlobRestProxy::setContainerAcl
      */
     public function testSetContainerAcl()
     {
@@ -449,7 +449,7 @@ class BlobRestProxyTest extends BlobServiceRestProxyTestBase
     }
     
     /**
-     * @covers WindowsAzure\Blob\Internal\BlobRestProxy::setContainerMetadata
+     * @covers WindowsAzure\Blob\BlobRestProxy::setContainerMetadata
      */
     public function testSetContainerMetadata()
     {
@@ -471,7 +471,7 @@ class BlobRestProxyTest extends BlobServiceRestProxyTestBase
     }
     
     /**
-     * @covers WindowsAzure\Blob\Internal\BlobRestProxy::listBlobs
+     * @covers WindowsAzure\Blob\BlobRestProxy::listBlobs
      * @covers WindowsAzure\Common\Internal\ServiceRestProxy::send
      */
     public function testListBlobsSimple()
@@ -503,7 +503,7 @@ class BlobRestProxyTest extends BlobServiceRestProxyTestBase
     }
 
     /**
-    * @covers WindowsAzure\Blob\Internal\BlobRestProxy::listBlobs
+    * @covers WindowsAzure\Blob\BlobRestProxy::listBlobs
     */
     public function testListBlobsWithOptions()
     {
@@ -540,7 +540,7 @@ class BlobRestProxyTest extends BlobServiceRestProxyTestBase
     }
     
     /**
-    * @covers WindowsAzure\Blob\Internal\BlobRestProxy::listBlobs
+    * @covers WindowsAzure\Blob\BlobRestProxy::listBlobs
     */
     public function testListBlobsWithOptionsWithDelimiter()
     {
@@ -577,7 +577,7 @@ class BlobRestProxyTest extends BlobServiceRestProxyTestBase
     }
 
     /**
-    * @covers WindowsAzure\Blob\Internal\BlobRestProxy::listBlobs
+    * @covers WindowsAzure\Blob\BlobRestProxy::listBlobs
     */
     public function testListBlobsWithNextMarker()
     {
@@ -611,7 +611,7 @@ class BlobRestProxyTest extends BlobServiceRestProxyTestBase
     }
 
     /**
-    * @covers WindowsAzure\Blob\Internal\BlobRestProxy::listBlobs
+    * @covers WindowsAzure\Blob\BlobRestProxy::listBlobs
     */
     public function testListBlobsWithNoBlobs()
     {
@@ -625,7 +625,7 @@ class BlobRestProxyTest extends BlobServiceRestProxyTestBase
     }
 
     /**
-     * @covers WindowsAzure\Blob\Internal\BlobRestProxy::listBlobs
+     * @covers WindowsAzure\Blob\BlobRestProxy::listBlobs
      */
     public function testListBlobsWithOneResult()
     {
@@ -640,8 +640,8 @@ class BlobRestProxyTest extends BlobServiceRestProxyTestBase
     }
     
     /**
-     * @covers WindowsAzure\Blob\Internal\BlobRestProxy::createPageBlob
-     * @covers WindowsAzure\Blob\Internal\BlobRestProxy::_addCreateBlobOptionalHeaders
+     * @covers WindowsAzure\Blob\BlobRestProxy::createPageBlob
+     * @covers WindowsAzure\Blob\BlobRestProxy::_addCreateBlobOptionalHeaders
      */
     public function testCreatePageBlob()
     {
@@ -658,8 +658,8 @@ class BlobRestProxyTest extends BlobServiceRestProxyTestBase
     }
     
     /**
-     * @covers WindowsAzure\Blob\Internal\BlobRestProxy::createPageBlob
-     * @covers WindowsAzure\Blob\Internal\BlobRestProxy::_addCreateBlobOptionalHeaders
+     * @covers WindowsAzure\Blob\BlobRestProxy::createPageBlob
+     * @covers WindowsAzure\Blob\BlobRestProxy::_addCreateBlobOptionalHeaders
      */
     public function testCreatePageBlobWithExtraOptions()
     {
@@ -681,8 +681,8 @@ class BlobRestProxyTest extends BlobServiceRestProxyTestBase
     }
     
     /**
-     * @covers WindowsAzure\Blob\Internal\BlobRestProxy::createBlockBlob
-     * @covers WindowsAzure\Blob\Internal\BlobRestProxy::_addCreateBlobOptionalHeaders
+     * @covers WindowsAzure\Blob\BlobRestProxy::createBlockBlob
+     * @covers WindowsAzure\Blob\BlobRestProxy::_addCreateBlobOptionalHeaders
      */
     public function testCreateBlockBlobWithBinary()
     {
@@ -702,8 +702,8 @@ class BlobRestProxyTest extends BlobServiceRestProxyTestBase
     }
     
     /**
-     * @covers WindowsAzure\Blob\Internal\BlobRestProxy::createBlockBlob
-     * @covers WindowsAzure\Blob\Internal\BlobRestProxy::_addCreateBlobOptionalHeaders
+     * @covers WindowsAzure\Blob\BlobRestProxy::createBlockBlob
+     * @covers WindowsAzure\Blob\BlobRestProxy::_addCreateBlobOptionalHeaders
      */
     public function testCreateBlockBlobWithPlainText()
     {
@@ -726,8 +726,8 @@ class BlobRestProxyTest extends BlobServiceRestProxyTestBase
     }
     
     /**
-     * @covers WindowsAzure\Blob\Internal\BlobRestProxy::createBlockBlob
-     * @covers WindowsAzure\Blob\Internal\BlobRestProxy::_addCreateBlobOptionalHeaders
+     * @covers WindowsAzure\Blob\BlobRestProxy::createBlockBlob
+     * @covers WindowsAzure\Blob\BlobRestProxy::_addCreateBlobOptionalHeaders
      */
     public function testCreateBlockBlobWithStream()
     {
@@ -752,8 +752,8 @@ class BlobRestProxyTest extends BlobServiceRestProxyTestBase
     }
     
     /**
-     * @covers WindowsAzure\Blob\Internal\BlobRestProxy::getBlobProperties
-     * @covers WindowsAzure\Blob\Internal\BlobRestProxy::_getBlobPropertiesResultFromResponse
+     * @covers WindowsAzure\Blob\BlobRestProxy::getBlobProperties
+     * @covers WindowsAzure\Blob\BlobRestProxy::_getBlobPropertiesResultFromResponse
      * @covers WindowsAzure\Blob\Models\SetBlobPropertiesResult::create
      */
     public function testGetBlobProperties()
@@ -772,9 +772,9 @@ class BlobRestProxyTest extends BlobServiceRestProxyTestBase
     }
     
     /**
-     * @covers WindowsAzure\Blob\Internal\BlobRestProxy::getBlobProperties
-     * @covers WindowsAzure\Blob\Internal\BlobRestProxy::setBlobProperties
-     * @covers WindowsAzure\Blob\Internal\BlobRestProxy::_getBlobPropertiesResultFromResponse
+     * @covers WindowsAzure\Blob\BlobRestProxy::getBlobProperties
+     * @covers WindowsAzure\Blob\BlobRestProxy::setBlobProperties
+     * @covers WindowsAzure\Blob\BlobRestProxy::_getBlobPropertiesResultFromResponse
      * @covers WindowsAzure\Blob\Models\SetBlobPropertiesResult::create
      */
     public function testSetBlobProperties()
@@ -797,8 +797,8 @@ class BlobRestProxyTest extends BlobServiceRestProxyTestBase
     }
     
     /**
-     * @covers WindowsAzure\Blob\Internal\BlobRestProxy::setBlobProperties
-     * @covers WindowsAzure\Blob\Internal\BlobRestProxy::_getBlobPropertiesResultFromResponse
+     * @covers WindowsAzure\Blob\BlobRestProxy::setBlobProperties
+     * @covers WindowsAzure\Blob\BlobRestProxy::_getBlobPropertiesResultFromResponse
      * @covers WindowsAzure\Blob\Models\SetBlobPropertiesResult::create
      */
     public function testSetBlobPropertiesWithNoOptions()
@@ -818,7 +818,7 @@ class BlobRestProxyTest extends BlobServiceRestProxyTestBase
     }
     
     /**
-     * @covers WindowsAzure\Blob\Internal\BlobRestProxy::getBlobMetadata
+     * @covers WindowsAzure\Blob\BlobRestProxy::getBlobMetadata
      * @covers WindowsAzure\Blob\Models\GetBlobMetadataResult::create
      */
     public function testGetBlobMetadata()
@@ -840,7 +840,7 @@ class BlobRestProxyTest extends BlobServiceRestProxyTestBase
     }
     
     /**
-     * @covers WindowsAzure\Blob\Internal\BlobRestProxy::setBlobMetadata
+     * @covers WindowsAzure\Blob\BlobRestProxy::setBlobMetadata
      * @covers WindowsAzure\Blob\Models\SetBlobMetadataResult::create
      * @covers WindowsAzure\Common\Internal\ServiceRestProxy::addMetadataHeaders
      */
@@ -862,8 +862,8 @@ class BlobRestProxyTest extends BlobServiceRestProxyTestBase
     }
 
     /**
-     * @covers WindowsAzure\Blob\Internal\BlobRestProxy::getBlob
-     * @covers WindowsAzure\Blob\Internal\BlobRestProxy::_addOptionalRangeHeader
+     * @covers WindowsAzure\Blob\BlobRestProxy::getBlob
+     * @covers WindowsAzure\Blob\BlobRestProxy::_addOptionalRangeHeader
      * @covers WindowsAzure\Blob\Models\GetBlobResult::create
      */
     public function testGetBlob()
@@ -890,8 +890,8 @@ class BlobRestProxyTest extends BlobServiceRestProxyTestBase
     }
     
     /**
-     * @covers WindowsAzure\Blob\Internal\BlobRestProxy::getBlob
-     * @covers WindowsAzure\Blob\Internal\BlobRestProxy::_addOptionalRangeHeader
+     * @covers WindowsAzure\Blob\BlobRestProxy::getBlob
+     * @covers WindowsAzure\Blob\BlobRestProxy::_addOptionalRangeHeader
      * @covers WindowsAzure\Blob\Models\GetBlobResult::create
      */
     public function testGetBlobWithRange()
@@ -922,8 +922,8 @@ class BlobRestProxyTest extends BlobServiceRestProxyTestBase
     }
     
     /**
-     * @covers WindowsAzure\Blob\Internal\BlobRestProxy::getBlob
-     * @covers WindowsAzure\Blob\Internal\BlobRestProxy::_addOptionalRangeHeader
+     * @covers WindowsAzure\Blob\BlobRestProxy::getBlob
+     * @covers WindowsAzure\Blob\BlobRestProxy::_addOptionalRangeHeader
      * @covers WindowsAzure\Blob\Models\GetBlobResult::create
      */
     public function testGetBlobGarbage()
@@ -950,7 +950,7 @@ class BlobRestProxyTest extends BlobServiceRestProxyTestBase
     }
     
     /**
-     * @covers WindowsAzure\Blob\Internal\BlobRestProxy::deleteBlob
+     * @covers WindowsAzure\Blob\BlobRestProxy::deleteBlob
      */
     public function testDeleteBlob()
     {
@@ -972,9 +972,9 @@ class BlobRestProxyTest extends BlobServiceRestProxyTestBase
     }
     
     /**
-     * @covers WindowsAzure\Blob\Internal\BlobRestProxy::acquireLease
-     * @covers WindowsAzure\Blob\Internal\BlobRestProxy::_putLeaseImpl
-     * @covers WindowsAzure\Blob\Internal\BlobRestProxy::_createPath
+     * @covers WindowsAzure\Blob\BlobRestProxy::acquireLease
+     * @covers WindowsAzure\Blob\BlobRestProxy::_putLeaseImpl
+     * @covers WindowsAzure\Blob\BlobRestProxy::_createPath
      */
     public function testAcquireLease()
     {
@@ -995,8 +995,8 @@ class BlobRestProxyTest extends BlobServiceRestProxyTestBase
     }
     
     /**
-     * @covers WindowsAzure\Blob\Internal\BlobRestProxy::renewLease
-     * @covers WindowsAzure\Blob\Internal\BlobRestProxy::_putLeaseImpl
+     * @covers WindowsAzure\Blob\BlobRestProxy::renewLease
+     * @covers WindowsAzure\Blob\BlobRestProxy::_putLeaseImpl
      */
     public function testRenewLease()
     {
@@ -1018,8 +1018,8 @@ class BlobRestProxyTest extends BlobServiceRestProxyTestBase
     }
     
     /**
-     * @covers WindowsAzure\Blob\Internal\BlobRestProxy::releaseLease
-     * @covers WindowsAzure\Blob\Internal\BlobRestProxy::_putLeaseImpl
+     * @covers WindowsAzure\Blob\BlobRestProxy::releaseLease
+     * @covers WindowsAzure\Blob\BlobRestProxy::_putLeaseImpl
      */
     public function testReleaseLease()
     {
@@ -1042,8 +1042,8 @@ class BlobRestProxyTest extends BlobServiceRestProxyTestBase
     }
     
     /**
-     * @covers WindowsAzure\Blob\Internal\BlobRestProxy::breakLease
-     * @covers WindowsAzure\Blob\Internal\BlobRestProxy::_putLeaseImpl
+     * @covers WindowsAzure\Blob\BlobRestProxy::breakLease
+     * @covers WindowsAzure\Blob\BlobRestProxy::_putLeaseImpl
      */
     public function testBreakLease()
     {
@@ -1066,9 +1066,9 @@ class BlobRestProxyTest extends BlobServiceRestProxyTestBase
     }
     
     /**
-     * @covers WindowsAzure\Blob\Internal\BlobRestProxy::createBlobPages
-     * @covers WindowsAzure\Blob\Internal\BlobRestProxy::_updatePageBlobPagesImpl
-     * @covers WindowsAzure\Blob\Internal\BlobRestProxy::_addOptionalRangeHeader
+     * @covers WindowsAzure\Blob\BlobRestProxy::createBlobPages
+     * @covers WindowsAzure\Blob\BlobRestProxy::_updatePageBlobPagesImpl
+     * @covers WindowsAzure\Blob\BlobRestProxy::_addOptionalRangeHeader
      */
     public function testCreateBlobPages()
     {
@@ -1092,9 +1092,9 @@ class BlobRestProxyTest extends BlobServiceRestProxyTestBase
     }
     
     /**
-     * @covers WindowsAzure\Blob\Internal\BlobRestProxy::clearBlobPages
-     * @covers WindowsAzure\Blob\Internal\BlobRestProxy::_updatePageBlobPagesImpl
-     * @covers WindowsAzure\Blob\Internal\BlobRestProxy::_addOptionalRangeHeader
+     * @covers WindowsAzure\Blob\BlobRestProxy::clearBlobPages
+     * @covers WindowsAzure\Blob\BlobRestProxy::_updatePageBlobPagesImpl
+     * @covers WindowsAzure\Blob\BlobRestProxy::_addOptionalRangeHeader
      */
     public function testClearBlobPages()
     {
@@ -1119,7 +1119,7 @@ class BlobRestProxyTest extends BlobServiceRestProxyTestBase
     }
     
     /**
-     * @covers WindowsAzure\Blob\Internal\BlobRestProxy::listPageBlobRanges
+     * @covers WindowsAzure\Blob\BlobRestProxy::listPageBlobRanges
      * @covers WindowsAzure\Blob\Models\ListPageBlobRangesResult::create
      */
     public function testListPageBlobRanges()
@@ -1146,7 +1146,7 @@ class BlobRestProxyTest extends BlobServiceRestProxyTestBase
     }
     
     /**
-     * @covers WindowsAzure\Blob\Internal\BlobRestProxy::listPageBlobRanges
+     * @covers WindowsAzure\Blob\BlobRestProxy::listPageBlobRanges
      * @covers WindowsAzure\Blob\Models\ListPageBlobRangesResult::create
      */
     public function testListPageBlobRangesEmpty()
@@ -1167,7 +1167,7 @@ class BlobRestProxyTest extends BlobServiceRestProxyTestBase
     }
     
     /**
-     * @covers WindowsAzure\Blob\Internal\BlobRestProxy::createBlobBlock
+     * @covers WindowsAzure\Blob\BlobRestProxy::createBlobBlock
      */
     public function testCreateBlobBlock()
     {
@@ -1186,7 +1186,7 @@ class BlobRestProxyTest extends BlobServiceRestProxyTestBase
     }
 
     /**
-     * @covers WindowsAzure\Blob\Internal\BlobRestProxy::commitBlobBlocks
+     * @covers WindowsAzure\Blob\BlobRestProxy::commitBlobBlocks
      * @covers WindowsAzure\Blob\Models\BlockList::toXml
      */
     public function testCommitBlobBlocks()
@@ -1213,7 +1213,7 @@ class BlobRestProxyTest extends BlobServiceRestProxyTestBase
     }
     
     /**
-     * @covers WindowsAzure\Blob\Internal\BlobRestProxy::commitBlobBlocks
+     * @covers WindowsAzure\Blob\BlobRestProxy::commitBlobBlocks
      * @covers WindowsAzure\Blob\Models\BlockList::toXml
      */
     public function testCommitBlobBlocksWithArray()
@@ -1243,7 +1243,7 @@ class BlobRestProxyTest extends BlobServiceRestProxyTestBase
     }
      
    /**
-    * @covers WindowsAzure\Blob\Internal\BlobRestProxy::listBlobBlocks
+    * @covers WindowsAzure\Blob\BlobRestProxy::listBlobBlocks
     * @covers WindowsAzure\Blob\Models\ListBlobBlocksResult::create
     * @covers WindowsAzure\Blob\Models\ListBlobBlocksResult::getContentLength     
     * @covers WindowsAzure\Blob\Models\ListBlobBlocksResult::getUncommittedBlocks
@@ -1271,7 +1271,7 @@ class BlobRestProxyTest extends BlobServiceRestProxyTestBase
     }
       
     /**
-     * @covers WindowsAzure\Blob\Internal\BlobRestProxy::listBlobBlocks
+     * @covers WindowsAzure\Blob\BlobRestProxy::listBlobBlocks
      * @covers WindowsAzure\Blob\Models\ListBlobBlocksResult::create
      * @covers WindowsAzure\Blob\Models\ListBlobBlocksResult::_getEntries
      */
@@ -1296,8 +1296,8 @@ class BlobRestProxyTest extends BlobServiceRestProxyTestBase
     }
 
     /** 
-     * @covers WindowsAzure\Blob\Internal\BlobRestProxy::copyBlob 
-     * @covers WindowsAzure\Blob\Internal\BlobRestProxy::_getCopyBlobSourceName
+     * @covers WindowsAzure\Blob\BlobRestProxy::copyBlob 
+     * @covers WindowsAzure\Blob\BlobRestProxy::_getCopyBlobSourceName
      */ 
     public function testCopyBlobDifferentContainer()
     {
@@ -1331,8 +1331,8 @@ class BlobRestProxyTest extends BlobServiceRestProxyTestBase
     }
     
     /** 
-     * @covers WindowsAzure\Blob\Internal\BlobRestProxy::copyBlob 
-     * @covers WindowsAzure\Blob\Internal\BlobRestProxy::_getCopyBlobSourceName
+     * @covers WindowsAzure\Blob\BlobRestProxy::copyBlob 
+     * @covers WindowsAzure\Blob\BlobRestProxy::_getCopyBlobSourceName
      */ 
     public function testCopyBlobSameContainer()
     {
@@ -1362,8 +1362,8 @@ class BlobRestProxyTest extends BlobServiceRestProxyTestBase
     }
     
     /** 
-     * @covers WindowsAzure\Blob\Internal\BlobRestProxy::copyBlob 
-     * @covers WindowsAzure\Blob\Internal\BlobRestProxy::_getCopyBlobSourceName
+     * @covers WindowsAzure\Blob\BlobRestProxy::copyBlob 
+     * @covers WindowsAzure\Blob\BlobRestProxy::_getCopyBlobSourceName
      */ 
     public function testCopyBlobExistingBlob()
     {
@@ -1396,8 +1396,8 @@ class BlobRestProxyTest extends BlobServiceRestProxyTestBase
     }
     
     /** 
-     * @covers WindowsAzure\Blob\Internal\BlobRestProxy::copyBlob 
-     * @covers WindowsAzure\Blob\Internal\BlobRestProxy::_getCopyBlobSourceName
+     * @covers WindowsAzure\Blob\BlobRestProxy::copyBlob 
+     * @covers WindowsAzure\Blob\BlobRestProxy::_getCopyBlobSourceName
      */ 
     public function testCopyBlobSnapshot()
     {
@@ -1431,7 +1431,7 @@ class BlobRestProxyTest extends BlobServiceRestProxyTestBase
     }
     
    /**  
-    * @covers WindowsAzure\Blob\Internal\BlobRestProxy::createBlobSnapshot 
+    * @covers WindowsAzure\Blob\BlobRestProxy::createBlobSnapshot 
     * @covers WindowsAzure\Blob\Models\createBlobSnapshotResult::create 
     */ 
     public function testCreateBlobSnapshot()

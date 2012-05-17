@@ -28,7 +28,7 @@ use WindowsAzure\Common\Configuration;
 use WindowsAzure\Common\Models\ServiceProperties;
 use WindowsAzure\ServiceBus\ServiceBusSettings;
 use WindowsAzure\ServiceBus\WrapService;
-use WindowsAzure\ServiceBus\Internal\WrapRestProxy;
+use WindowsAzure\ServiceBus\WrapRestProxy;
 
 /**
  * TestBase class for each unit test class.

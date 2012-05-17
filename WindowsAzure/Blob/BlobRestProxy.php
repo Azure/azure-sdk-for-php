@@ -15,14 +15,14 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   WindowsAzure\Blob\Internal
+ * @package   WindowsAzure\Blob
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
 
-namespace WindowsAzure\Blob\Internal;
+namespace WindowsAzure\Blob;
 use WindowsAzure\Common\Internal\Utilities;
 use WindowsAzure\Common\Internal\Resources;
 use WindowsAzure\Common\Internal\Validate;
@@ -78,7 +78,7 @@ use WindowsAzure\Blob\Models\CopyBlobResult;
  * service layer.
  *
  * @category  Microsoft
- * @package   WindowsAzure\Blob\Internal
+ * @package   WindowsAzure\Blob
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0

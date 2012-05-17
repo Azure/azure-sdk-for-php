@@ -31,7 +31,7 @@ use Tests\Framework\WrapRestProxyTestBase;
 use WindowsAzure\Common\Configuration;
 use WindowsAzure\Common\ServiceException;
 use WindowsAzure\Common\Internal\WindowsAzureUtilities;
-use WindowsAzure\ServiceBus\Internal\ServiceBusRestProxy;
+use WindowsAzure\ServiceBus\ServiceBusRestProxy;
 use WindowsAzure\ServiceBus\ServiceBusService;
 use WindowsAzure\ServiceBus\ServiceBusSettings;
 use WindowsAzure\Common\Internal\Resources;
