@@ -38,7 +38,20 @@ use WindowsAzure\Blob\Models\ContainerAcl;
  */
 class GetContainerAclResult
 {
+    /**
+     * @var ContainerAcl
+     */
     private $_containerACL;
+    
+    /**
+     * @var \DateTime
+     */
+    private $_lastModified;
+
+    /**
+     * @var string
+     */
+    private $_etag;
     
     /**
      * Parses the given array into signed identifiers
@@ -54,7 +67,9 @@ class GetContainerAclResult
     public static function create($publicAccess, $etag, $lastModified, $parsed)
     {
         $result = new GetContainerAclResult();
-        $acl    = ContainerAcl::create($publicAccess, $etag, $lastModified, $parsed);
+        $result->setEtag($etag);
+        $result->setLastModified($lastModified);
+        $acl    = ContainerAcl::create($publicAccess, $parsed);
         $result->setContainerAcl($acl);
         
         return $result;
@@ -80,6 +95,50 @@ class GetContainerAclResult
     public function setContainerAcl($containerACL)
     {
         $this->_containerACL = $containerACL;
+    }
+    
+    /**
+     * Gets container lastModified.
+     *
+     * @return \DateTime.
+     */
+    public function getLastModified()
+    {
+        return $this->_lastModified;
+    }
+
+    /**
+     * Sets container lastModified.
+     *
+     * @param \DateTime $lastModified value.
+     *
+     * @return none.
+     */
+    public function setLastModified($lastModified)
+    {
+        $this->_lastModified = $lastModified;
+    }
+
+    /**
+     * Gets container etag.
+     *
+     * @return string.
+     */
+    public function getEtag()
+    {
+        return $this->_etag;
+    }
+
+    /**
+     * Sets container etag.
+     *
+     * @param string $etag value.
+     *
+     * @return none.
+     */
+    public function setEtag($etag)
+    {
+        $this->_etag = $etag;
     }
 }
 

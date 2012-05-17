@@ -45,16 +45,6 @@ use WindowsAzure\Common\Internal\Serialization\XmlSerializer;
 class ContainerAcl
 {
     /**
-     * @var \DateTime
-     */
-    private $_lastModified;
-
-    /**
-     * @var string
-     */
-    private $_etag;
-
-    /**
      * All available types can be found in PublicAccessType
      *
      * @var string
@@ -78,19 +68,13 @@ class ContainerAcl
      * Parses the given array into signed identifiers
      * 
      * @param string    $publicAccess container public access
-     * @param string    $etag         container etag
-     * @param \DateTime $lastModified last modification in DateTime
      * @param array     $parsed       parsed response into array representation
      * 
      * @return none.
      */
-    public static function create($publicAccess, $etag, $lastModified, $parsed)
+    public static function create($publicAccess, $parsed)
     {
-        Validate::isDate($lastModified);
-
         $result                     = new ContainerAcl();
-        $result->_etag              = $etag;
-        $result->_lastModified      = $lastModified;
         $result->_publicAccess      = $publicAccess;
         $result->_signedIdentifiers = array();
         
@@ -132,52 +116,6 @@ class ContainerAcl
     public function setSignedIdentifiers($signedIdentifiers)
     {
         $this->_signedIdentifiers = $signedIdentifiers;
-    }
-
-    /**
-     * Gets container lastModified.
-     *
-     * @return \DateTime.
-     */
-    public function getLastModified()
-    {
-        return $this->_lastModified;
-    }
-
-    /**
-     * Sets container lastModified.
-     *
-     * @param \DateTime $lastModified value.
-     *
-     * @return none.
-     */
-    public function setLastModified($lastModified)
-    {
-        Validate::isDate($lastModified);
-        $this->_lastModified = $lastModified;
-    }
-
-    /**
-     * Gets container etag.
-     *
-     * @return string.
-     */
-    public function getEtag()
-    {
-        return $this->_etag;
-    }
-
-    /**
-     * Sets container etag.
-     *
-     * @param string $etag value.
-     *
-     * @return none.
-     */
-    public function setEtag($etag)
-    {
-        Validate::isString($etag, 'etag');
-        $this->_etag = $etag;
     }
 
     /**
