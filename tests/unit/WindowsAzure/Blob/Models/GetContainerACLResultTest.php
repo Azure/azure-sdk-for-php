@@ -57,11 +57,9 @@ class GetContainerAclResultTest extends \PHPUnit_Framework_TestCase
             $expectedDate, $sample);
         
         // Assert
-        $acl = $result->getContainerAcl();
-        $this->assertEquals($expectedEtag, $acl->getEtag());
-        $this->assertEquals($expectedDate, $acl->getLastModified());
-        $this->assertEquals($expectedPublicAccess, $acl->getPublicAccess());
-        $this->assertCount(0, $acl->getSignedIdentifiers());
+        $obj = $result->getContainerAcl();
+        $this->assertEquals($expectedPublicAccess, $obj->getPublicAccess());
+        $this->assertCount(0, $obj->getSignedIdentifiers());
     }
     
     /**
@@ -71,16 +69,13 @@ class GetContainerAclResultTest extends \PHPUnit_Framework_TestCase
     {
         // Setup
         $expected = new ContainerAcl();
-        $expected->setEtag('0x8CAFB82EFF70C46');
         $obj = new GetContainerAclResult();
         
         // Test
         $obj->setContainerAcl($expected);
         
         // Assert
-        $this->assertEquals($expected->getEtag(), $obj->getContainerAcl()->getEtag());
         $this->assertCount(0, $obj->getContainerAcl()->getSignedIdentifiers());
-        $this->assertNull($obj->getContainerAcl()->getLastModified());
     }
     
     /**
@@ -90,7 +85,6 @@ class GetContainerAclResultTest extends \PHPUnit_Framework_TestCase
     {
         // Setup
         $expected = new ContainerAcl();
-        $expected->setEtag('0x8CAFB82EFF70C46');
         $obj = new GetContainerAclResult();
         $obj->setContainerAcl($expected);
         
@@ -98,9 +92,43 @@ class GetContainerAclResultTest extends \PHPUnit_Framework_TestCase
         $actual = $obj->getContainerAcl();
         
         // Assert
-        $this->assertEquals($expected->getEtag(), $actual->getEtag());
         $this->assertCount(0, $actual->getSignedIdentifiers());
-        $this->assertNull($actual->getLastModified());
+    }
+    
+    /**
+     * @covers WindowsAzure\Blob\Models\GetContainerAclResult::setLastModified
+     * @covers WindowsAzure\Blob\Models\GetContainerAclResult::getLastModified
+     */
+    public function testSetLastModified()
+    {
+        // Setup
+        $expected = new \DateTime('Sun, 25 Sep 2011 19:42:18 GMT');
+        $obj = new GetContainerAclResult();
+        $obj->setLastModified($expected);
+        
+        // Test
+        $obj->setLastModified($expected);
+        
+        // Assert
+        $this->assertEquals($expected, $obj->getLastModified());
+    }
+    
+    /**
+     * @covers WindowsAzure\Blob\Models\GetContainerAclResult::setEtag
+     * @covers WindowsAzure\Blob\Models\GetContainerAclResult::getEtag
+     */
+    public function testSetEtag()
+    {
+        // Setup
+        $expected = '0x8CAFB82EFF70C46';
+        $obj = new GetContainerAclResult();
+        $obj->setEtag($expected);
+        
+        // Test
+        $obj->setEtag($expected);
+        
+        // Assert
+        $this->assertEquals($expected, $obj->getEtag());
     }
 }
 

@@ -194,7 +194,7 @@ class QueueRestProxy extends ServiceRestProxy implements IQueue
         $this->addOptionalHeader(
             $headers,
             Resources::CONTENT_TYPE,
-            Resources::XML_CONTENT_TYPE
+            Resources::URL_ENCODED_CONTENT_TYPE
         );
         
         $visibility = $options->getVisibilityTimeoutInSeconds();
@@ -661,7 +661,7 @@ class QueueRestProxy extends ServiceRestProxy implements IQueue
         $this->addOptionalHeader(
             $headers,
             Resources::CONTENT_TYPE,
-            Resources::XML_CONTENT_TYPE
+            Resources::URL_ENCODED_CONTENT_TYPE
         );
         
         $this->send(
@@ -746,7 +746,7 @@ class QueueRestProxy extends ServiceRestProxy implements IQueue
             $this->addOptionalHeader(
                 $headers,
                 Resources::CONTENT_TYPE,
-                Resources::XML_CONTENT_TYPE
+                Resources::URL_ENCODED_CONTENT_TYPE
             );
         
             $message = new QueueMessage();

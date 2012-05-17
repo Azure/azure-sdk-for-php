@@ -165,9 +165,15 @@ class Resources
     const EMULATOR_TABLE_URI     = '127.0.0.1:10002';
     const ASTERISK               = '*';
     const SERVICE_MANAGEMENT_URL = 'https://management.core.windows.net';
-    const WA_XML_NAMESPACE       = 'http://schemas.microsoft.com/windowsazure';
     const HTTP_SCHEME            = 'http';
     const HTTPS_SCHEME           = 'https';
+    
+    // Xml Namespaces
+    const WA_XML_NAMESPACE   = 'http://schemas.microsoft.com/windowsazure';
+    const ATOM_XML_NAMESPACE = 'http://www.w3.org/2005/Atom';
+    const DS_XML_NAMESPACE   = 'http://schemas.microsoft.com/ado/2007/08/dataservices';
+    const DSM_XML_NAMESPACE  = 'http://schemas.microsoft.com/ado/2007/08/dataservices/metadata';
+    
 
     // Header values
     const STORAGE_API_LATEST_VERSION     = '2011-08-18';
@@ -205,11 +211,12 @@ class Resources
     const QP_ACTION             = 'action';
     
     // Request body content types
-    const XML_CONTENT_TYPE      = 'application/x-www-form-urlencoded';
-    const BINARY_FILE_TYPE      = 'application/octet-stream';
-    const XML_ATOM_CONTENT_TYPE = 'application/atom+xml';
-    const HTTP_TYPE             = 'application/http';
-    const MULTIPART_MIXED_TYPE  = 'multipart/mixed';
+    const URL_ENCODED_CONTENT_TYPE = 'application/x-www-form-urlencoded';
+    const XML_CONTENT_TYPE         = 'application/xml';
+    const BINARY_FILE_TYPE         = 'application/octet-stream';
+    const XML_ATOM_CONTENT_TYPE    = 'application/atom+xml';
+    const HTTP_TYPE                = 'application/http';
+    const MULTIPART_MIXED_TYPE     = 'multipart/mixed';
     
     // Common used XML tags
     const XTAG_ATTRIBUTES                 = '@attributes';

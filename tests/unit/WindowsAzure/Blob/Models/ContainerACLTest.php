@@ -43,8 +43,6 @@ class ContainerAclTest extends \PHPUnit_Framework_TestCase
 {
     /**
      * @covers WindowsAzure\Blob\Models\ContainerAcl::create
-     * @covers WindowsAzure\Blob\Models\ContainerAcl::getEtag
-     * @covers WindowsAzure\Blob\Models\ContainerAcl::getLastModified
      * @covers WindowsAzure\Blob\Models\ContainerAcl::getPublicAccess
      * @covers WindowsAzure\Blob\Models\ContainerAcl::getSignedIdentifiers
      * @covers WindowsAzure\Blob\Models\ContainerAcl::addSignedIdentifier
@@ -53,25 +51,18 @@ class ContainerAclTest extends \PHPUnit_Framework_TestCase
     {
         // Setup
         $sample = Resources::EMPTY_STRING;
-        $expectedEtag = '0x8CAFB82EFF70C46';
-        $expectedDate = new \DateTime('Sun, 25 Sep 2011 19:42:18 GMT');
         $expectedPublicAccess = 'container';
         
         // Test
-        $acl = ContainerAcl::create($expectedPublicAccess, $expectedEtag, 
-            $expectedDate, $sample);
+        $acl = ContainerAcl::create($expectedPublicAccess, $sample);
         
         // Assert
-        $this->assertEquals($expectedEtag, $acl->getEtag());
-        $this->assertEquals($expectedDate, $acl->getLastModified());
         $this->assertEquals($expectedPublicAccess, $acl->getPublicAccess());
         $this->assertCount(0, $acl->getSignedIdentifiers());
     }
     
     /**
      * @covers WindowsAzure\Blob\Models\ContainerAcl::create
-     * @covers WindowsAzure\Blob\Models\ContainerAcl::getEtag
-     * @covers WindowsAzure\Blob\Models\ContainerAcl::getLastModified
      * @covers WindowsAzure\Blob\Models\ContainerAcl::getPublicAccess
      * @covers WindowsAzure\Blob\Models\ContainerAcl::getSignedIdentifiers
      * @covers WindowsAzure\Blob\Models\ContainerAcl::addSignedIdentifier
@@ -80,25 +71,18 @@ class ContainerAclTest extends \PHPUnit_Framework_TestCase
     {
         // Setup
         $sample = TestResources::getContainerAclOneEntrySample();
-        $expectedEtag = '0x8CAFB82EFF70C46';
-        $expectedDate = new \DateTime('Sun, 25 Sep 2011 19:42:18 GMT');
         $expectedPublicAccess = 'container';
         
         // Test
-        $acl = ContainerAcl::create($expectedPublicAccess, $expectedEtag, 
-            $expectedDate, $sample['SignedIdentifiers']);
+        $acl = ContainerAcl::create($expectedPublicAccess, $sample['SignedIdentifiers']);
         
         // Assert
-        $this->assertEquals($expectedEtag, $acl->getEtag());
-        $this->assertEquals($expectedDate, $acl->getLastModified());
         $this->assertEquals($expectedPublicAccess, $acl->getPublicAccess());
         $this->assertCount(1, $acl->getSignedIdentifiers());
     }
     
     /**
      * @covers WindowsAzure\Blob\Models\ContainerAcl::create
-     * @covers WindowsAzure\Blob\Models\ContainerAcl::getEtag
-     * @covers WindowsAzure\Blob\Models\ContainerAcl::getLastModified
      * @covers WindowsAzure\Blob\Models\ContainerAcl::getPublicAccess
      * @covers WindowsAzure\Blob\Models\ContainerAcl::getSignedIdentifiers
      * @covers WindowsAzure\Blob\Models\ContainerAcl::addSignedIdentifier
@@ -107,17 +91,12 @@ class ContainerAclTest extends \PHPUnit_Framework_TestCase
     {
         // Setup
         $sample = TestResources::getContainerAclMultipleEntriesSample();
-        $expectedEtag = '0x8CAFB82EFF70C46';
-        $expectedDate = new \DateTime('Sun, 25 Sep 2011 19:42:18 GMT');
         $expectedPublicAccess = 'container';
         
         // Test
-        $acl = ContainerAcl::create($expectedPublicAccess, $expectedEtag, 
-            $expectedDate, $sample['SignedIdentifiers']);
+        $acl = ContainerAcl::create($expectedPublicAccess, $sample['SignedIdentifiers']);
         
         // Assert
-        $this->assertEquals($expectedEtag, $acl->getEtag());
-        $this->assertEquals($expectedDate, $acl->getLastModified());
         $this->assertEquals($expectedPublicAccess, $acl->getPublicAccess());
         $this->assertCount(2, $acl->getSignedIdentifiers());
         
@@ -132,11 +111,8 @@ class ContainerAclTest extends \PHPUnit_Framework_TestCase
     {
         // Setup
         $sample = TestResources::getContainerAclOneEntrySample();
-        $expectedEtag = '0x8CAFB82EFF70C46';
-        $expectedDate = new \DateTime('Sun, 25 Sep 2011 19:42:18 GMT');
         $expectedPublicAccess = 'container';
-        $acl = ContainerAcl::create($expectedPublicAccess, $expectedEtag, 
-            $expectedDate, $sample['SignedIdentifiers']);
+        $acl = ContainerAcl::create($expectedPublicAccess, $sample['SignedIdentifiers']);
         $expected = $acl->getSignedIdentifiers();
         $expected[0]->setId('newXid');
         
@@ -144,46 +120,8 @@ class ContainerAclTest extends \PHPUnit_Framework_TestCase
         $acl->setSignedIdentifiers($expected);
         
         // Assert
-        $this->assertEquals($expectedEtag, $acl->getEtag());
-        $this->assertEquals($expectedDate, $acl->getLastModified());
         $this->assertEquals($expectedPublicAccess, $acl->getPublicAccess());
         $this->assertEquals($expected, $acl->getSignedIdentifiers());
-    }
-    
-    /**
-     * @covers WindowsAzure\Blob\Models\ContainerAcl::setLastModified
-     * @covers WindowsAzure\Blob\Models\ContainerAcl::getLastModified
-     */
-    public function testSetLastModified()
-    {
-        // Setup
-        $expected = new \DateTime('Sun, 25 Sep 2011 19:42:18 GMT');
-        $acl = new ContainerAcl();
-        $acl->setLastModified($expected);
-        
-        // Test
-        $acl->setLastModified($expected);
-        
-        // Assert
-        $this->assertEquals($expected, $acl->getLastModified());
-    }
-    
-    /**
-     * @covers WindowsAzure\Blob\Models\ContainerAcl::setEtag
-     * @covers WindowsAzure\Blob\Models\ContainerAcl::getEtag
-     */
-    public function testSetEtag()
-    {
-        // Setup
-        $expected = '0x8CAFB82EFF70C46';
-        $acl = new ContainerAcl();
-        $acl->setEtag($expected);
-        
-        // Test
-        $acl->setEtag($expected);
-        
-        // Assert
-        $this->assertEquals($expected, $acl->getEtag());
     }
     
     /**
@@ -213,12 +151,7 @@ class ContainerAclTest extends \PHPUnit_Framework_TestCase
     {
         // Setup
         $sample = TestResources::getContainerAclMultipleEntriesSample();
-        $expected = ContainerAcl::create(
-            'container',
-            '123',
-            new \DateTime('Sun, 25 Sep 2011 19:42:18 GMT'),
-            $sample['SignedIdentifiers']
-        );
+        $expected = ContainerAcl::create('container', $sample['SignedIdentifiers']);
         $xmlSerializer = new XmlSerializer();
         
         // Test
@@ -226,12 +159,7 @@ class ContainerAclTest extends \PHPUnit_Framework_TestCase
         
         // Assert
         $array = Utilities::unserialize($xml);
-        $acl = ContainerAcl::create(
-            'container',
-            '123',
-            new \DateTime('Sun, 25 Sep 2011 19:42:18 GMT'),
-            $array
-        );
+        $acl = ContainerAcl::create('container', $array);
         $this->assertEquals($expected->getSignedIdentifiers(), $acl->getSignedIdentifiers());
     }
 }
