@@ -149,54 +149,28 @@ class AtomReaderWriter implements IAtomReaderWriter
     }
     
     /** 
-     * Parse result from Microsoft_Http_Response.
+     * Creates new SimpleXml from Atom XML and registers the namespaces prefixes.
      *
      * @param string $body Response from HTTP call.
      * 
-     * @return object
+     * @return \SimpleXml
      */
     private function _parseBody($body)
     {
         $xml = simplexml_load_string($body);
 
         if ($xml !== false) {
-            // Fetch all namespaces 
-            $namespaces = array_merge(
-                $xml->getNamespaces(true), $xml->getDocNamespaces(true)
+            $xml->registerXPathNamespace(
+                $this->_dataServicesPrefix,
+                $this->_dataServicesNamespaceName
             );
-
-            // Register all namespace prefixes
-            foreach ($namespaces as $prefix => $ns) { 
-                if (!empty($prefix)) {
-                    $xml->registerXPathNamespace($prefix, $ns);
-                } 
-            } 
+            $xml->registerXPathNamespace(
+                $this->_dataServicesMetadataPrefix,
+                $this->_dataServicesMetadataNamespaceName
+            );
         }
 
         return $xml;
-    }
-    
-    /**
-     * Find a namespace prefix and return it.
-     * 
-     * @param string $xml          The XML document.
-     * @param string $namespaceUrl The namespace url.
-     * 
-     * @return string
-     */
-    private function _getNamespacePrefix($xml, $namespaceUrl)
-    {
-        $docNamespaces   = $xml->getDocNamespaces();
-        $namespacePrefix = null;
-        
-        foreach ($docNamespaces as $prefix => $url) {
-            if ($namespaceUrl == $url) {
-                $namespacePrefix = $prefix;
-                break;
-            }
-        }
-        
-        return $namespacePrefix;
     }
     
     /**
@@ -207,18 +181,9 @@ class AtomReaderWriter implements IAtomReaderWriter
      * @return string
      */
     private function _parseOneTable($result)
-    {
-        $dataServicesNamespacePrefix         = $this->_getNamespacePrefix(
-            $result,
-            $this->_dataServicesNamespaceName
-        );
-        $dataServicesMetadataNamespacePrefix = $this->_getNamespacePrefix(
-            $result,
-            $this->_dataServicesMetadataNamespaceName
-        );
-        
-        $query     = ".//$dataServicesMetadataNamespacePrefix:properties/";
-        $query    .= "$dataServicesNamespacePrefix:TableName";
+    {        
+        $query     = ".//$this->_dataServicesMetadataPrefix:properties/";
+        $query    .= "$this->_dataServicesPrefix:TableName";
         $tableName = $result->xpath($query);
         $table     = (string)$tableName[0];
         
@@ -252,10 +217,7 @@ class AtomReaderWriter implements IAtomReaderWriter
      */
     private function _parseOneEntity($result)
     {
-        $prefix = $this->_getNamespacePrefix(
-            $result,
-            $this->_dataServicesMetadataNamespaceName
-        );
+        $prefix = $this->_dataServicesMetadataPrefix;
         $prop   = $result->content->xpath(".//$prefix:properties");
         $prop   = $prop[0]->children($this->_dataServicesNamespaceName);
         $entity = new Entity();
