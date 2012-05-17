@@ -51,19 +51,19 @@ class AtomReaderWriterTest extends \PHPUnit_Framework_TestCase
         // Setup
         $atomSerializer = new AtomReaderWriter();
         $expected = '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>' . "\n" .
-                     '<entry xmlns:d="http://schemas.microsoft.com/ado/2007/08/dataservices" xmlns:m="http://schemas.microsoft.com/ado/2007/08/dataservices/metadata" xmlns="http://www.w3.org/2005/Atom">' . "\n" .
-                      ' <title/>' . "\n" .
-                      ' <updated>' . Utilities::isoDate() . '</updated>' . "\n" .
-                      ' <author>' . "\n" .
-                       '  <name/>' . "\n" .
-                      ' </author>' . "\n" .
-                      ' <id/>' . "\n" .
-                      ' <content type="application/xml">' . "\n" .
-                       '  <m:properties>' . "\n" .
-                        '   <d:TableName>customers</d:TableName>' . "\n" .
-                       '  </m:properties>' . "\n" .
-                      ' </content>' . "\n" .
-                     '</entry>' . "\n";
+                    '<entry xmlns:d="http://schemas.microsoft.com/ado/2007/08/dataservices" xmlns:m="http://schemas.microsoft.com/ado/2007/08/dataservices/metadata" xmlns="http://www.w3.org/2005/Atom">' . "\n" .
+                    ' <title/>' . "\n" .
+                    ' <updated>' . Utilities::isoDate() . '</updated>' . "\n" .
+                    ' <author>' . "\n" .
+                    '  <name/>' . "\n" .
+                    ' </author>' . "\n" .
+                    ' <id/>' . "\n" .
+                    ' <content type="application/xml">' . "\n" .
+                    '  <m:properties>' . "\n" .
+                    '   <d:TableName>customers</d:TableName>' . "\n" .
+                    '  </m:properties>' . "\n" .
+                    ' </content>' . "\n" .
+                    '</entry>' . "\n";
         
         // Test
         $actual = $atomSerializer->getTable('customers');
@@ -86,24 +86,24 @@ class AtomReaderWriterTest extends \PHPUnit_Framework_TestCase
         $atomSerializer = new AtomReaderWriter();
         $entity = TestResources::getTestEntity('123', '456');
         $expected = '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>' . "\n" .
-                     '<entry xmlns:d="http://schemas.microsoft.com/ado/2007/08/dataservices" xmlns:m="http://schemas.microsoft.com/ado/2007/08/dataservices/metadata" xmlns="http://www.w3.org/2005/Atom">' . "\n" .
-                      ' <title/>' . "\n" .
-                      ' <updated>' . Utilities::isoDate() . '</updated>' . "\n" .
-                      ' <author>' . "\n" .
-                       '  <name/>' . "\n" .
-                      ' </author>' . "\n" .
-                      ' <id/>' . "\n" .
-                      ' <content type="application/xml">' . "\n" .
-                       '  <m:properties>' . "\n" .
-                        '   <d:PartitionKey>123</d:PartitionKey>' . "\n" .
-                        '   <d:RowKey>456</d:RowKey>' . "\n" .
-                        '   <d:CustomerId m:type="Edm.Int32">890</d:CustomerId>' . "\n" .
-                        '   <d:CustomerName>John</d:CustomerName>' . "\n" .
-                        '   <d:IsNew m:type="Edm.Boolean">1</d:IsNew>' . "\n" .
-                        '   <d:JoinDate m:type="Edm.DateTime">2012-01-26T18:26:19Z</d:JoinDate>' . "\n" .
-                       '  </m:properties>' . "\n" .
-                      ' </content>' . "\n" .
-                     '</entry>' . "\n";
+                    '<entry xmlns:d="http://schemas.microsoft.com/ado/2007/08/dataservices" xmlns:m="http://schemas.microsoft.com/ado/2007/08/dataservices/metadata" xmlns="http://www.w3.org/2005/Atom">' . "\n" .
+                    ' <title/>' . "\n" .
+                    ' <updated>' . Utilities::isoDate() . '</updated>' . "\n" .
+                    ' <author>' . "\n" .
+                    '  <name/>' . "\n" .
+                    ' </author>' . "\n" .
+                    ' <id/>' . "\n" .
+                    ' <content type="application/xml">' . "\n" .
+                    '  <m:properties>' . "\n" .
+                    '   <d:PartitionKey>123</d:PartitionKey>' . "\n" .
+                    '   <d:RowKey>456</d:RowKey>' . "\n" .
+                    '   <d:CustomerId m:type="Edm.Int32">890</d:CustomerId>' . "\n" .
+                    '   <d:CustomerName>John</d:CustomerName>' . "\n" .
+                    '   <d:IsNew m:type="Edm.Boolean">1</d:IsNew>' . "\n" .
+                    '   <d:JoinDate m:type="Edm.DateTime">2012-01-26T18:26:19Z</d:JoinDate>' . "\n" .
+                    '  </m:properties>' . "\n" .
+                    ' </content>' . "\n" .
+                    '</entry>' . "\n";
         
         // Test
         $actual = $atomSerializer->getEntity($entity);

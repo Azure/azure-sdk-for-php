@@ -65,12 +65,12 @@ class ContainerAcl
 
 
     /**
-     * Parses the given array into signed identifiers
+     * Parses the given array into signed identifiers.
      * 
-     * @param string    $publicAccess container public access
-     * @param array     $parsed       parsed response into array representation
+     * @param string $publicAccess The container public access.
+     * @param array  $parsed       The parsed response into array representation.
      * 
-     * @return none.
+     * @return none
      */
     public static function create($publicAccess, $parsed)
     {

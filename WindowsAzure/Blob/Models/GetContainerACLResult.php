@@ -69,7 +69,7 @@ class GetContainerAclResult
         $result = new GetContainerAclResult();
         $result->setEtag($etag);
         $result->setLastModified($lastModified);
-        $acl    = ContainerAcl::create($publicAccess, $parsed);
+        $acl = ContainerAcl::create($publicAccess, $parsed);
         $result->setContainerAcl($acl);
         
         return $result;
