@@ -32,6 +32,7 @@ use WindowsAzure\Core\Configuration;
 use WindowsAzure\Core\ServiceException;
 use WindowsAzure\Blob\BlobService;
 use WindowsAzure\Blob\Models\AccessCondition;
+use WindowsAzure\Blob\Models\BlobBlockType;
 use WindowsAzure\Blob\Models\BlobProperties;
 use WindowsAzure\Blob\Models\Block;
 use WindowsAzure\Blob\Models\BlockList;
@@ -53,17 +54,17 @@ use WindowsAzure\Blob\Models\ListBlobRegionsResult;
 use WindowsAzure\Blob\Models\ListBlobsOptions;
 use WindowsAzure\Blob\Models\ListBlobsResult;
 use WindowsAzure\Blob\Models\ListContainersOptions;
-use WindowsAzure\Blob\Models\ListContainersResult\Container;
 use WindowsAzure\Blob\Models\ListContainersResult;
+use WindowsAzure\Blob\Models\ListContainersResult\Container;
 use WindowsAzure\Blob\Models\PageRange;
+use WindowsAzure\Blob\Models\PublicAccessType;
 use WindowsAzure\Blob\Models\ServiceProperties;
 use WindowsAzure\Blob\Models\SetBlobMetadataResult;
 use WindowsAzure\Blob\Models\SetBlobPropertiesOptions;
 use WindowsAzure\Blob\Models\SetBlobPropertiesResult;
-use WindowsAzure\Blob\Models\PublicAccessType;
-use WindowsAzure\Blob\Models\BlobBlockType;
 
-class BlobServiceIntegrationTest extends IntegrationTestBase {
+class BlobServiceIntegrationTest extends IntegrationTestBase
+{
     private static $_testContainersPrefix = 'sdktest-';
     private static $_createableContainersPrefix = 'csdktest-';
     private static $_blob_for_root_container = 'sdktestroot';
@@ -77,7 +78,8 @@ class BlobServiceIntegrationTest extends IntegrationTestBase {
     private static $_creatableContainers;
     private static $_testContainers;
 
-    public static function setUpBeforeClass() {
+    public static function setUpBeforeClass()
+    {
         parent::setUpBeforeClass();
         // Setup container names array (list of container names used by
         // integration tests)
@@ -105,19 +107,25 @@ class BlobServiceIntegrationTest extends IntegrationTestBase {
         $inst->createContainers(self::$_testContainers, self::$_testContainersPrefix);
     }
 
-    public static function tearDownAfterClass() {
+    public static function tearDownAfterClass()
+    {
         parent::tearDownAfterClass();
         $inst = new IntegrationTestBase();
         $inst->deleteContainers(self::$_testContainers, self::$_testContainersPrefix);
         $inst->deleteContainers(self::$_creatableContainers,self::$_createableContainersPrefix);
     }
 
-    private static function createService() {
+    private static function createService()
+    {
         $tmp = new IntegrationTestBase();
         return $tmp->restProxy;
     }
-    
-    public function testGetServicePropertiesWorks() {
+
+    /**
+     * @covers WindowsAzure\Blob\Internal\BlobRestProxy::getServiceProperties
+     */
+    public function testGetServicePropertiesWorks()
+    {
         // Act
         $shouldReturn = false;
         try {
@@ -146,7 +154,12 @@ class BlobServiceIntegrationTest extends IntegrationTestBase {
         $this->assertNotNull($props->getMetrics()->getVersion(), '$props->getMetrics()->getVersion');
     }
 
-    public function testSetServicePropertiesWorks() {
+    /**
+     * @covers WindowsAzure\Blob\Internal\BlobRestProxy::getServiceProperties
+     * @covers WindowsAzure\Blob\Internal\BlobRestProxy::setServiceProperties
+     */
+    public function testSetServicePropertiesWorks()
+    {
         // Act
         $shouldReturn = false;
         try {
@@ -181,10 +194,15 @@ class BlobServiceIntegrationTest extends IntegrationTestBase {
         $this->assertNotNull($props->getMetrics()->getVersion(), '$props->getMetrics()->getVersion');
     }
 
-    public function testCreateContainerWorks() {
+    /**
+     * @covers WindowsAzure\Blob\Internal\BlobRestProxy::createContainer
+     * @covers WindowsAzure\Blob\Internal\BlobRestProxy::listContainers
+     */
+    public function testCreateContainerWorks()
+    {
         // Act
         $this->restProxy->createContainer(self::$_creatable_container_1);
-        
+
         // Assert
         $opts = new ListContainersOptions();
         $opts->setPrefix(self::$_creatable_container_1);
@@ -197,7 +215,16 @@ class BlobServiceIntegrationTest extends IntegrationTestBase {
         $this->assertEquals(self::$_creatable_container_1, $container0->getName(), '$results->getContainers()[0]->getName');
     }
 
-    public function testCreateContainerWithMetadataWorks() {
+    /**
+     * @covers WindowsAzure\Blob\Internal\BlobRestProxy::createContainer
+     * @covers WindowsAzure\Blob\Internal\BlobRestProxy::deleteContainer
+     * @covers WindowsAzure\Blob\Internal\BlobRestProxy::getContainerACL
+     * @covers WindowsAzure\Blob\Internal\BlobRestProxy::getContainerMetadata
+     * @covers WindowsAzure\Blob\Internal\BlobRestProxy::getContainerProperties
+     * @covers WindowsAzure\Blob\Internal\BlobRestProxy::listContainers
+     */
+    public function testCreateContainerWithMetadataWorks()
+    {
         // Act
         $opts = new CreateContainerOptions();
         $opts->setPublicAccess('blob');
@@ -249,8 +276,14 @@ class BlobServiceIntegrationTest extends IntegrationTestBase {
 
         $this->assertNotNull($acl, '$acl');
     }
-    
-    public function testSetContainerMetadataWorks() {
+
+    /**
+     * @covers WindowsAzure\Blob\Internal\BlobRestProxy::createContainer
+     * @covers WindowsAzure\Blob\Internal\BlobRestProxy::getContainerMetadata
+     * @covers WindowsAzure\Blob\Internal\BlobRestProxy::setContainerMetadata
+     */
+    public function testSetContainerMetadataWorks()
+    {
         // Act
         $this->restProxy->createContainer(self::$_creatable_container_3);
 
@@ -272,20 +305,27 @@ class BlobServiceIntegrationTest extends IntegrationTestBase {
         $this->assertTrue(!(array_search('bleah', $prop->getMetadata()) === FALSE), '!(array_search(\'bleah\', $prop->getMetadata()) === FALSE)');
     }
 
-    public function testSetContainerACLWorks() {
+    /**
+     * @covers WindowsAzure\Blob\Internal\BlobRestProxy::createContainer
+     * @covers WindowsAzure\Blob\Internal\BlobRestProxy::deleteContainer
+     * @covers WindowsAzure\Blob\Internal\BlobRestProxy::getContainerACL
+     * @covers WindowsAzure\Blob\Internal\BlobRestProxy::setContainerACL
+     */
+    public function testSetContainerACLWorks()
+    {
         // Arrange
         $container = self::$_creatable_container_4;
-        
+
         $expiryStartDate = new \DateTime;
-        $expiryStartDate->setDate(2010, 1, 1);  
+        $expiryStartDate->setDate(2010, 1, 1);
         $expiryEndDate = new \DateTime;
-        $expiryEndDate->setDate(2020, 1, 1);  
+        $expiryEndDate->setDate(2020, 1, 1);
 
         // Act
         $this->restProxy->createContainer($container);
         $acl = new ContainerACL();
         $acl->setPublicAccess(PublicAccessType::BLOBS_ONLY);
-        
+
         $acl->addSignedIdentifier('test', $expiryStartDate, $expiryEndDate, 'rwd');
         $this->restProxy->setContainerACL($container, $acl);
 
@@ -304,7 +344,7 @@ class BlobServiceIntegrationTest extends IntegrationTestBase {
         $expiryStartDate = $expiryStartDate->setTimezone(new \DateTimeZone('UTC'));
         $expiryEndDate = $expiryEndDate->setTimezone(new \DateTimeZone('UTC'));
         $this->assertEquals(
-                Utilities::convertToDateTime($expiryStartDate), 
+                Utilities::convertToDateTime($expiryStartDate),
                 Utilities::convertToDateTime($signedids[0]->getAccessPolicy()->getStart()),
                 '$signedids[0]->getAccessPolicy()->getStart()');
         $this->assertEquals(
@@ -314,7 +354,11 @@ class BlobServiceIntegrationTest extends IntegrationTestBase {
         $this->assertEquals('rwd', $signedids[0]->getAccessPolicy()->getPermission(), '$signedids[0]->getAccessPolicy()->getPermission()');
     }
 
-    public function testListContainersWorks() {
+    /**
+     * @covers WindowsAzure\Blob\Internal\BlobRestProxy::listContainers
+     */
+    public function testListContainersWorks()
+    {
         // Act
         $results = $this->restProxy->listContainers();
 
@@ -331,7 +375,11 @@ class BlobServiceIntegrationTest extends IntegrationTestBase {
         $this->assertNotNull($container0->getUrl(), '$container0->getUrl()');
     }
 
-    public function testListContainersWithPaginationWorks() {
+    /**
+     * @covers WindowsAzure\Blob\Internal\BlobRestProxy::listContainers
+     */
+    public function testListContainersWithPaginationWorks()
+    {
         // Act
         $opts = new ListContainersOptions();
         $opts->setMaxResults(3);
@@ -352,7 +400,11 @@ class BlobServiceIntegrationTest extends IntegrationTestBase {
         $this->assertEquals(0, $results2->getMaxResults(), '$results2->getMaxResults()');
     }
 
-    public function testListContainersWithPrefixWorks() {
+    /**
+     * @covers WindowsAzure\Blob\Internal\BlobRestProxy::listContainers
+     */
+    public function testListContainersWithPrefixWorks()
+    {
         // Act
         $opts = new ListContainersOptions();
         $opts->setPrefix(self::$_testContainersPrefix);
@@ -384,7 +436,17 @@ class BlobServiceIntegrationTest extends IntegrationTestBase {
         $this->assertEquals(count($results->getContainers()) + count($results2->getContainers()), count($results3->getContainers()), 'count($results3->getContainers())');
     }
 
-    public function testWorkingWithRootContainersWorks() {
+    /**
+     * @covers WindowsAzure\Blob\Internal\BlobRestProxy::createContainer
+     * @covers WindowsAzure\Blob\Internal\BlobRestProxy::createPageBlob
+     * @covers WindowsAzure\Blob\Internal\BlobRestProxy::deleteBlob
+     * @covers WindowsAzure\Blob\Internal\BlobRestProxy::deleteContainer
+     * @covers WindowsAzure\Blob\Internal\BlobRestProxy::getBlobMetadata
+     * @covers WindowsAzure\Blob\Internal\BlobRestProxy::getBlobProperties
+     * @covers WindowsAzure\Blob\Internal\BlobRestProxy::listBlobs
+     */
+    public function testWorkingWithRootContainersWorks()
+    {
         // Ensure root container exists
         $error = null;
         try {
@@ -440,7 +502,13 @@ class BlobServiceIntegrationTest extends IntegrationTestBase {
         }
     }
 
-    public function testListBlobsWorks() {
+    /**
+     * @covers WindowsAzure\Blob\Internal\BlobRestProxy::createPageBlob
+     * @covers WindowsAzure\Blob\Internal\BlobRestProxy::deleteBlob
+     * @covers WindowsAzure\Blob\Internal\BlobRestProxy::listBlobs
+     */
+    public function testListBlobsWorks()
+    {
         // Arrange
         $blobNames = array( 'myblob1', 'myblob2', 'other-blob1', 'other-blob2' );
         foreach($blobNames as $blob)  {
@@ -459,7 +527,13 @@ class BlobServiceIntegrationTest extends IntegrationTestBase {
         $this->assertEquals(4, count($results->getBlobs()), 'count($results->getBlobs())');
     }
 
-    public function testListBlobsWithPrefixWorks() {
+    /**
+     * @covers WindowsAzure\Blob\Internal\BlobRestProxy::createPageBlob
+     * @covers WindowsAzure\Blob\Internal\BlobRestProxy::deleteBlob
+     * @covers WindowsAzure\Blob\Internal\BlobRestProxy::listBlobs
+     */
+    public function testListBlobsWithPrefixWorks()
+    {
         // Arrange
         $blobNames = array( 'myblob1', 'myblob2', 'otherblob1', 'otherblob2' );
         foreach($blobNames as $blob)  {
@@ -492,7 +566,13 @@ class BlobServiceIntegrationTest extends IntegrationTestBase {
         $this->assertEquals('otherblob2', $blobs[1]->getName(), '$blobs[1]->getName()');
     }
 
-    public function testListBlobsWithOptionsWorks() {
+    /**
+     * @covers WindowsAzure\Blob\Internal\BlobRestProxy::createPageBlob
+     * @covers WindowsAzure\Blob\Internal\BlobRestProxy::deleteBlob
+     * @covers WindowsAzure\Blob\Internal\BlobRestProxy::listBlobs
+     */
+    public function testListBlobsWithOptionsWorks()
+    {
         // Arrange
         $blobNames = array( 'myblob1', 'myblob2', 'otherblob1', 'otherblob2' );
         foreach($blobNames as $blob)  {
@@ -514,7 +594,13 @@ class BlobServiceIntegrationTest extends IntegrationTestBase {
         $this->assertEquals(4, count($results->getBlobs()), 'count($results->getBlobs())');
     }
 
-    public function testListBlobsWithDelimiterWorks() {
+    /**
+     * @covers WindowsAzure\Blob\Internal\BlobRestProxy::createPageBlob
+     * @covers WindowsAzure\Blob\Internal\BlobRestProxy::deleteBlob
+     * @covers WindowsAzure\Blob\Internal\BlobRestProxy::listBlobs
+     */
+    public function testListBlobsWithDelimiterWorks()
+    {
         // Arrange
         $blobNames = array( 'myblob1', 'myblob2', 'dir1-blob1', 'dir1-blob2', 'dir2-dir21-blob3', 'dir2-dir22-blob3' );
         foreach($blobNames as $blob)  {
@@ -561,7 +647,11 @@ class BlobServiceIntegrationTest extends IntegrationTestBase {
         $this->assertEquals(0, count($results6->getBlobPrefixes()), 'count($results6->getBlobPrefixes())');
     }
 
-    public function testCreatePageBlobWorks() {
+    /**
+     * @covers WindowsAzure\Blob\Internal\BlobRestProxy::createPageBlob
+     */
+    public function testCreatePageBlobWorks()
+    {
         // Act
         $this->restProxy->createPageBlob(self::$_test_container_for_blobs, 'test', 512);
 
@@ -569,7 +659,12 @@ class BlobServiceIntegrationTest extends IntegrationTestBase {
         $this->assertTrue(true, 'success');
     }
 
-    public function testCreatePageBlobWithOptionsWorks() {
+    /**
+     * @covers WindowsAzure\Blob\Internal\BlobRestProxy::createPageBlob
+     * @covers WindowsAzure\Blob\Internal\BlobRestProxy::getBlobProperties
+     */
+    public function testCreatePageBlobWithOptionsWorks()
+    {
         // Act
         $opts = new CreateBlobOptions();
         $opts->setBlobCacheControl('test');
@@ -606,7 +701,12 @@ class BlobServiceIntegrationTest extends IntegrationTestBase {
         $this->assertEquals(0, $props->getSequenceNumber(), '$props->getSequenceNumber()');
     }
 
-    public function testClearBlobPagesWorks() {
+    /**
+     * @covers WindowsAzure\Blob\Internal\BlobRestProxy::clearBlobPages
+     * @covers WindowsAzure\Blob\Internal\BlobRestProxy::createPageBlob
+     */
+    public function testClearBlobPagesWorks()
+    {
         // Act
         $container = self::$_test_container_for_blobs;
         $blob = 'test';
@@ -622,7 +722,12 @@ class BlobServiceIntegrationTest extends IntegrationTestBase {
         $this->assertEquals(0, $result->getSequenceNumber(), '$result->getSequenceNumber()');
     }
 
-    public function testCreateBlobPagesWorks() {
+    /**
+     * @covers WindowsAzure\Blob\Internal\BlobRestProxy::createBlobPages
+     * @covers WindowsAzure\Blob\Internal\BlobRestProxy::createPageBlob
+     */
+    public function testCreateBlobPagesWorks()
+    {
         // Act
         $container = self::$_test_container_for_blobs;
         $blob = 'test';
@@ -639,7 +744,14 @@ class BlobServiceIntegrationTest extends IntegrationTestBase {
         $this->assertEquals(0, $result->getSequenceNumber(), '$result->getSequenceNumber()');
     }
 
-    public function testListBlobRegionsWorks() {
+    /**
+     * @covers WindowsAzure\Blob\Internal\BlobRestProxy::createBlobPages
+     * @covers WindowsAzure\Blob\Internal\BlobRestProxy::createPageBlob
+     * @covers WindowsAzure\Blob\Internal\BlobRestProxy::listBlobRegions
+     * @covers WindowsAzure\Blob\Internal\BlobRestProxy::listPageBlobRanges
+     */
+    public function testListBlobRegionsWorks()
+    {
         // Act
         $container = self::$_test_container_for_blobs;
         $blob = 'test';
@@ -672,7 +784,12 @@ class BlobServiceIntegrationTest extends IntegrationTestBase {
         $this->assertEquals(16384 + 511, $ranges[3]->getEnd(), '$ranges[3]->getEnd()');
     }
 
-    public function testListBlobBlocksOnEmptyBlobWorks() {
+    /**
+     * @covers WindowsAzure\Blob\Internal\BlobRestProxy::createBlockBlob
+     * @covers WindowsAzure\Blob\Internal\BlobRestProxy::listBlobBlocks
+     */
+    public function testListBlobBlocksOnEmptyBlobWorks()
+    {
         // Act
         $container = self::$_test_container_for_blobs;
         $blob = 'test13';
@@ -692,7 +809,13 @@ class BlobServiceIntegrationTest extends IntegrationTestBase {
         $this->assertEquals(0, count($result->getUncommittedBlocks()), 'count($result->getUncommittedBlocks())');
     }
 
-    public function testListBlobBlocksWorks() {
+    /**
+     * @covers WindowsAzure\Blob\Internal\BlobRestProxy::createBlobBlock
+     * @covers WindowsAzure\Blob\Internal\BlobRestProxy::createBlockBlob
+     * @covers WindowsAzure\Blob\Internal\BlobRestProxy::listBlobBlocks
+     */
+    public function testListBlobBlocksWorks()
+    {
         // Act
         $container = self::$_test_container_for_blobs;
         $blob = 'test14';
@@ -725,7 +848,14 @@ class BlobServiceIntegrationTest extends IntegrationTestBase {
         $this->assertEquals(195, $uncom[$keys[2]], '$uncom[$keys[2]]');
     }
 
-    public function testListBlobBlocksWithOptionsWorks() {
+    /**
+     * @covers WindowsAzure\Blob\Internal\BlobRestProxy::commitBlobBlocks
+     * @covers WindowsAzure\Blob\Internal\BlobRestProxy::createBlobBlock
+     * @covers WindowsAzure\Blob\Internal\BlobRestProxy::createBlockBlob
+     * @covers WindowsAzure\Blob\Internal\BlobRestProxy::listBlobBlocks
+     */
+    public function testListBlobBlocksWithOptionsWorks()
+    {
         // Act
         $container = self::$_test_container_for_blobs;
         $blob = 'test14';
@@ -761,7 +891,14 @@ class BlobServiceIntegrationTest extends IntegrationTestBase {
         $this->assertEquals(2, count($result3->getUncommittedBlocks()), 'count($result3->getUncommittedBlocks())');
     }
 
-    public function testCommitBlobBlocksWorks() {
+    /**
+     * @covers WindowsAzure\Blob\Internal\BlobRestProxy::commitBlobBlocks
+     * @covers WindowsAzure\Blob\Internal\BlobRestProxy::createBlobBlock
+     * @covers WindowsAzure\Blob\Internal\BlobRestProxy::createBlockBlob
+     * @covers WindowsAzure\Blob\Internal\BlobRestProxy::listBlobBlocks
+     */
+    public function testCommitBlobBlocksWorks()
+    {
         // Act
         $container = self::$_test_container_for_blobs;
         $blob = 'test14';
@@ -803,7 +940,14 @@ class BlobServiceIntegrationTest extends IntegrationTestBase {
         $this->assertEquals(0, count($result->getUncommittedBlocks()), 'count($result->getUncommittedBlocks())');
     }
 
-    public function testCommitBlobBlocksWithArrayWorks() {
+    /**
+     * @covers WindowsAzure\Blob\Internal\BlobRestProxy::commitBlobBlocks
+     * @covers WindowsAzure\Blob\Internal\BlobRestProxy::createBlobBlock
+     * @covers WindowsAzure\Blob\Internal\BlobRestProxy::createBlockBlob
+     * @covers WindowsAzure\Blob\Internal\BlobRestProxy::listBlobBlocks
+     */
+    public function testCommitBlobBlocksWithArrayWorks()
+    {
         // Act
         $container = self::$_test_container_for_blobs;
         $blob = 'test14a';
@@ -850,7 +994,12 @@ class BlobServiceIntegrationTest extends IntegrationTestBase {
     }
 
 
-    public function testCreateBlobBlockWorks() {
+    /**
+     * @covers WindowsAzure\Blob\Internal\BlobRestProxy::createBlobBlock
+     * @covers WindowsAzure\Blob\Internal\BlobRestProxy::createBlockBlob
+     */
+    public function testCreateBlobBlockWorks()
+    {
         // Act
         $container = self::$_test_container_for_blobs;
         $blob = 'test13';
@@ -863,7 +1012,11 @@ class BlobServiceIntegrationTest extends IntegrationTestBase {
         $this->assertTrue(true, 'success');
     }
 
-    public function testCreateBlockBlobWorks() {
+    /**
+     * @covers WindowsAzure\Blob\Internal\BlobRestProxy::createBlockBlob
+     */
+    public function testCreateBlockBlobWorks()
+    {
         // Act
         $this->restProxy->createBlockBlob(self::$_test_container_for_blobs, 'test2', 'some content');
 
@@ -871,7 +1024,12 @@ class BlobServiceIntegrationTest extends IntegrationTestBase {
         $this->assertTrue(true, 'success');
     }
 
-    public function testCreateBlockBlobWithOptionsWorks() {
+    /**
+     * @covers WindowsAzure\Blob\Internal\BlobRestProxy::createBlockBlob
+     * @covers WindowsAzure\Blob\Internal\BlobRestProxy::getBlobProperties
+     */
+    public function testCreateBlockBlobWithOptionsWorks()
+    {
         // Act
         $content = 'some $content';
         $opts = new CreateBlobOptions();
@@ -909,13 +1067,18 @@ class BlobServiceIntegrationTest extends IntegrationTestBase {
         $this->assertEquals(0, $props->getSequenceNumber(), '$props->getSequenceNumber()');
     }
 
-    public function testCreateBlobSnapshotWorks() {
+    /**
+     * @covers WindowsAzure\Blob\Internal\BlobRestProxy::createBlobSnapshot
+     * @covers WindowsAzure\Blob\Internal\BlobRestProxy::createBlockBlob
+     */
+    public function testCreateBlobSnapshotWorks()
+    {
         // Act
         $container = self::$_test_container_for_blobs;
         $blob = 'test3';
         $this->restProxy->createBlockBlob($container, $blob, 'some content');
         $snapshot = $this->restProxy->createBlobSnapshot($container, $blob);
-        
+
         // Assert
         $this->assertNotNull($snapshot, '$snapshot');
         $this->assertNotNull($snapshot->getEtag(), '$snapshot->getEtag()');
@@ -923,7 +1086,13 @@ class BlobServiceIntegrationTest extends IntegrationTestBase {
         $this->assertNotNull($snapshot->getSnapshot(), '$snapshot->getSnapshot()');
     }
 
-    public function testCreateBlobSnapshotWithOptionsWorks() {
+    /**
+     * @covers WindowsAzure\Blob\Internal\BlobRestProxy::createBlobSnapshot
+     * @covers WindowsAzure\Blob\Internal\BlobRestProxy::createBlockBlob
+     * @covers WindowsAzure\Blob\Internal\BlobRestProxy::getBlobProperties
+     */
+    public function testCreateBlobSnapshotWithOptionsWorks()
+    {
         // Act
         $container = self::$_test_container_for_blobs;
         $blob = 'test3';
@@ -950,7 +1119,12 @@ class BlobServiceIntegrationTest extends IntegrationTestBase {
         $this->assertTrue(!(array_search('bleah', $result->getMetadata()) === FALSE), '!(array_search(\'bleah\', $result->getMetadata()) === FALSE)');
         }
 
-    public function testGetBlockBlobWorks() {
+    /**
+     * @covers WindowsAzure\Blob\Internal\BlobRestProxy::createBlockBlob
+     * @covers WindowsAzure\Blob\Internal\BlobRestProxy::getBlob
+     */
+    public function testGetBlockBlobWorks()
+    {
         // Act
         $content = 'some $content';
         $opts = new CreateBlobOptions();
@@ -989,7 +1163,12 @@ class BlobServiceIntegrationTest extends IntegrationTestBase {
         $this->assertEquals($content, stream_get_contents($result->getContentStream()), '$result->getContentStream()');
     }
 
-    public function testGetPageBlobWorks() {
+    /**
+     * @covers WindowsAzure\Blob\Internal\BlobRestProxy::createPageBlob
+     * @covers WindowsAzure\Blob\Internal\BlobRestProxy::getBlob
+     */
+    public function testGetPageBlobWorks()
+    {
         // Act
         $opts = new CreateBlobOptions();
         $opts->setBlobCacheControl('test');
@@ -1026,7 +1205,12 @@ class BlobServiceIntegrationTest extends IntegrationTestBase {
         $this->assertEquals(4096, strlen(stream_get_contents($result->getContentStream())), 'strlen($result->getContentStream())');
     }
 
-    public function testGetBlobWithIfMatchETagAccessConditionWorks() {
+    /**
+     * @covers WindowsAzure\Blob\Internal\BlobRestProxy::createPageBlob
+     * @covers WindowsAzure\Blob\Internal\BlobRestProxy::getBlob
+     */
+    public function testGetBlobWithIfMatchETagAccessConditionWorks()
+    {
         // Act
         $this->restProxy->createPageBlob(self::$_test_container_for_blobs, 'test', 4096);
         try {
@@ -1040,7 +1224,13 @@ class BlobServiceIntegrationTest extends IntegrationTestBase {
         }
     }
 
-    public function testGetBlobWithIfNoneMatchETagAccessConditionWorks() {
+    /**
+     * @covers WindowsAzure\Blob\Internal\BlobRestProxy::createPageBlob
+     * @covers WindowsAzure\Blob\Internal\BlobRestProxy::getBlob
+     * @covers WindowsAzure\Blob\Internal\BlobRestProxy::getBlobProperties
+     */
+    public function testGetBlobWithIfNoneMatchETagAccessConditionWorks()
+    {
         // Act
         $this->restProxy->createPageBlob(self::$_test_container_for_blobs, 'test', 4096);
         $props = $this->restProxy->getBlobProperties(self::$_test_container_for_blobs, 'test');
@@ -1055,7 +1245,13 @@ class BlobServiceIntegrationTest extends IntegrationTestBase {
         }
     }
 
-    public function testGetBlobWithIfModifiedSinceAccessConditionWorks() {
+    /**
+     * @covers WindowsAzure\Blob\Internal\BlobRestProxy::createPageBlob
+     * @covers WindowsAzure\Blob\Internal\BlobRestProxy::getBlob
+     * @covers WindowsAzure\Blob\Internal\BlobRestProxy::getBlobProperties
+     */
+    public function testGetBlobWithIfModifiedSinceAccessConditionWorks()
+    {
         // Act
         $this->restProxy->createPageBlob(self::$_test_container_for_blobs, 'test', 4096);
         $props = $this->restProxy->getBlobProperties(self::$_test_container_for_blobs, 'test');
@@ -1071,7 +1267,14 @@ class BlobServiceIntegrationTest extends IntegrationTestBase {
         }
     }
 
-    public function testGetBlobWithIfNotModifiedSinceAccessConditionWorks() {
+    /**
+     * @covers WindowsAzure\Blob\Internal\BlobRestProxy::createPageBlob
+     * @covers WindowsAzure\Blob\Internal\BlobRestProxy::getBlob
+     * @covers WindowsAzure\Blob\Internal\BlobRestProxy::getBlobProperties
+     * @covers WindowsAzure\Blob\Internal\BlobRestProxy::setBlobMetadata
+     */
+    public function testGetBlobWithIfNotModifiedSinceAccessConditionWorks()
+    {
         // Act
         $container = self::$_test_container_for_blobs;
         $blob = 'test';
@@ -1102,7 +1305,12 @@ class BlobServiceIntegrationTest extends IntegrationTestBase {
         }
     }
 
-    public function testGetBlobPropertiesWorks() {
+    /**
+     * @covers WindowsAzure\Blob\Internal\BlobRestProxy::createPageBlob
+     * @covers WindowsAzure\Blob\Internal\BlobRestProxy::getBlobProperties
+     */
+    public function testGetBlobPropertiesWorks()
+    {
         // Act
         $container = self::$_test_container_for_blobs;
         $blob = 'test';
@@ -1130,7 +1338,12 @@ class BlobServiceIntegrationTest extends IntegrationTestBase {
         $this->assertEquals(0, $props->getSequenceNumber(), '$props->getSequenceNumber()');
     }
 
-    public function testGetBlobMetadataWorks() {
+    /**
+     * @covers WindowsAzure\Blob\Internal\BlobRestProxy::createPageBlob
+     * @covers WindowsAzure\Blob\Internal\BlobRestProxy::getBlobMetadata
+     */
+    public function testGetBlobMetadataWorks()
+    {
         // Act
         $container = self::$_test_container_for_blobs;
         $blob = 'test';
@@ -1150,11 +1363,17 @@ class BlobServiceIntegrationTest extends IntegrationTestBase {
         $this->assertTrue(Utilities::arrayKeyExistsIgnoreCase('test', $props->getMetadata()), 'Utilities::arrayKeyExistsIgnoreCase(\'test\', $props->getMetadata())');
         $this->assertTrue(!(array_search('bar', $props->getMetadata()) === FALSE), '!(array_search(\'bar\', $props->getMetadata()) === FALSE)');
         $this->assertTrue(Utilities::arrayKeyExistsIgnoreCase('blah', $props->getMetadata()), 'Utilities::arrayKeyExistsIgnoreCase(\'blah\', $props->getMetadata())');
-        $this->assertTrue(!(array_search('bleah', $props->getMetadata()) === FALSE), '!(array_search(\'bleah\', $props->getMetadata()) === FALSE)');        
+        $this->assertTrue(!(array_search('bleah', $props->getMetadata()) === FALSE), '!(array_search(\'bleah\', $props->getMetadata()) === FALSE)');
         $this->assertNotNull($props->getLastModified(), '$props->getLastModified()');
     }
 
-    public function testSetBlobPropertiesWorks() {
+    /**
+     * @covers WindowsAzure\Blob\Internal\BlobRestProxy::createPageBlob
+     * @covers WindowsAzure\Blob\Internal\BlobRestProxy::getBlobProperties
+     * @covers WindowsAzure\Blob\Internal\BlobRestProxy::setBlobProperties
+     */
+    public function testSetBlobPropertiesWorks()
+    {
         // Act
         $container = self::$_test_container_for_blobs;
         $blob = 'test10';
@@ -1197,7 +1416,13 @@ class BlobServiceIntegrationTest extends IntegrationTestBase {
         $this->assertEquals(1, $props->getSequenceNumber(), '$props->getSequenceNumber()');
     }
 
-    public function testSetBlobMetadataWorks() {
+    /**
+     * @covers WindowsAzure\Blob\Internal\BlobRestProxy::createPageBlob
+     * @covers WindowsAzure\Blob\Internal\BlobRestProxy::getBlobProperties
+     * @covers WindowsAzure\Blob\Internal\BlobRestProxy::setBlobMetadata
+     */
+    public function testSetBlobMetadataWorks()
+    {
         // Act
         $container = self::$_test_container_for_blobs;
         $blob = 'test11';
@@ -1221,9 +1446,14 @@ class BlobServiceIntegrationTest extends IntegrationTestBase {
         $this->assertTrue(!(array_search('bar', $props->getMetadata()) === FALSE), '!(array_search(\'bar\', $props->getMetadata()) === FALSE)');
         $this->assertTrue(Utilities::arrayKeyExistsIgnoreCase('blah', $props->getMetadata()), 'Utilities::arrayKeyExistsIgnoreCase(\'blah\', $props->getMetadata())');
         $this->assertTrue(!(array_search('bleah', $props->getMetadata()) === FALSE), '!(array_search(\'bleah\', $props->getMetadata()) === FALSE)');
-    }   
+    }
 
-    public function testDeleteBlobWorks() {
+    /**
+     * @covers WindowsAzure\Blob\Internal\BlobRestProxy::createBlockBlob
+     * @covers WindowsAzure\Blob\Internal\BlobRestProxy::deleteBlob
+     */
+    public function testDeleteBlobWorks()
+    {
         // Act
         $content = 'some $content';
         $this->restProxy->createBlockBlob(self::$_test_container_for_blobs, 'test2', $content);
@@ -1234,7 +1464,13 @@ class BlobServiceIntegrationTest extends IntegrationTestBase {
         $this->assertTrue(true, 'success');
     }
 
-    public function testCopyBlobWorks() {
+    /**
+     * @covers WindowsAzure\Blob\Internal\BlobRestProxy::copyBlob
+     * @covers WindowsAzure\Blob\Internal\BlobRestProxy::createBlockBlob
+     * @covers WindowsAzure\Blob\Internal\BlobRestProxy::getBlob
+     */
+    public function testCopyBlobWorks()
+    {
         // Act
         $content = 'some content2';
         $this->restProxy->createBlockBlob(self::$_test_container_for_blobs, 'test6', $content);
@@ -1260,7 +1496,13 @@ class BlobServiceIntegrationTest extends IntegrationTestBase {
         $this->assertEquals($content, stream_get_contents($result->getContentStream()), '$result->getContentStream()');
     }
 
-    public function testAcquireLeaseWorks() {
+    /**
+     * @covers WindowsAzure\Blob\Internal\BlobRestProxy::acquireLease
+     * @covers WindowsAzure\Blob\Internal\BlobRestProxy::createBlockBlob
+     * @covers WindowsAzure\Blob\Internal\BlobRestProxy::releaseLease
+     */
+    public function testAcquireLeaseWorks()
+    {
         // Act
         $content = 'some content2';
         $this->restProxy->createBlockBlob(self::$_test_container_for_blobs, 'test6', $content);
@@ -1271,7 +1513,14 @@ class BlobServiceIntegrationTest extends IntegrationTestBase {
         $this->assertNotNull($leaseId, '$leaseId');
     }
 
-    public function testRenewLeaseWorks() {
+    /**
+     * @covers WindowsAzure\Blob\Internal\BlobRestProxy::acquireLease
+     * @covers WindowsAzure\Blob\Internal\BlobRestProxy::createBlockBlob
+     * @covers WindowsAzure\Blob\Internal\BlobRestProxy::releaseLease
+     * @covers WindowsAzure\Blob\Internal\BlobRestProxy::renewLease
+     */
+    public function testRenewLeaseWorks()
+    {
         // Act
         $content = 'some content2';
         $this->restProxy->createBlockBlob(self::$_test_container_for_blobs, 'test6', $content);
@@ -1284,7 +1533,14 @@ class BlobServiceIntegrationTest extends IntegrationTestBase {
         $this->assertNotNull($leaseId2, '$leaseId2');
     }
 
-    public function testBreakLeaseWorks() {
+    /**
+     * @covers WindowsAzure\Blob\Internal\BlobRestProxy::acquireLease
+     * @covers WindowsAzure\Blob\Internal\BlobRestProxy::breakLease
+     * @covers WindowsAzure\Blob\Internal\BlobRestProxy::createBlockBlob
+     * @covers WindowsAzure\Blob\Internal\BlobRestProxy::releaseLease
+     */
+    public function testBreakLeaseWorks()
+    {
         // Act
         $content = 'some content2';
         $this->restProxy->createBlockBlob(self::$_test_container_for_blobs, 'test6', $content);
