@@ -117,7 +117,11 @@ class AtomReaderWriter implements IAtomReaderWriter
         $xmlw = new \XmlWriter();
         $xmlw->openMemory();
         $xmlw->setIndent(true);
-        $xmlw->startDocument($this->_xmlVersion, $this->_xmlEncoding, 'yes');
+        $xmlw->startDocument(
+            strtoupper($this->_xmlVersion),
+            $this->_xmlEncoding,
+            'yes'
+        );
         $xmlw->startElementNS(null, 'entry', $this->_atomNamespaceName);
         $xmlw->writeAttribute(
             "xmlns:$this->_dataServicesPrefix",
@@ -250,20 +254,13 @@ class AtomReaderWriter implements IAtomReaderWriter
      */
     public function __construct()
     {
-        $this->_atomNamespaceName = 'http://www.w3.org/2005/Atom';
-        
-        $this->_dataServicesNamespaceName  = 'http://schemas.microsoft.com/';
-        $this->_dataServicesNamespaceName .= 'ado/2007/08/dataservices';
-        
-        $this->_dataServicesMetadataNamespaceName  = 'http://schemas.microsoft.com/';
-        $this->_dataServicesMetadataNamespaceName .= 'ado/2007/08/dataservices/';
-        $this->_dataServicesMetadataNamespaceName .= 'metadata';
-        
-        $this->_dataServicesPrefix         = 'd';
-        $this->_dataServicesMetadataPrefix = 'm';
-        
-        $this->_xmlVersion  = '1.0';
-        $this->_xmlEncoding = 'UTF-8';
+        $this->_atomNamespaceName                 = Resources::ATOM_XML_NAMESPACE;
+        $this->_dataServicesNamespaceName         = Resources::DS_XML_NAMESPACE;
+        $this->_dataServicesMetadataNamespaceName = Resources::DSM_XML_NAMESPACE;
+        $this->_dataServicesPrefix                = 'd';
+        $this->_dataServicesMetadataPrefix        = 'm';
+        $this->_xmlVersion                        = '1.0';
+        $this->_xmlEncoding                       = 'UTF-8';
     }
     
     /**
