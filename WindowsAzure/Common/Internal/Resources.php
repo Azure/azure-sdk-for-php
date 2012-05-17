@@ -205,11 +205,12 @@ class Resources
     const QP_ACTION             = 'action';
     
     // Request body content types
-    const XML_CONTENT_TYPE      = 'application/x-www-form-urlencoded';
-    const BINARY_FILE_TYPE      = 'application/octet-stream';
-    const XML_ATOM_CONTENT_TYPE = 'application/atom+xml';
-    const HTTP_TYPE             = 'application/http';
-    const MULTIPART_MIXED_TYPE  = 'multipart/mixed';
+    const URL_ENCODED_CONTENT_TYPE = 'application/x-www-form-urlencoded';
+    const XML_CONTENT_TYPE         = 'application/xml';
+    const BINARY_FILE_TYPE         = 'application/octet-stream';
+    const XML_ATOM_CONTENT_TYPE    = 'application/atom+xml';
+    const HTTP_TYPE                = 'application/http';
+    const MULTIPART_MIXED_TYPE     = 'multipart/mixed';
     
     // Common used XML tags
     const XTAG_ATTRIBUTES                 = '@attributes';

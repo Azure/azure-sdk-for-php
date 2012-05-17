@@ -494,7 +494,7 @@ class BlobRestProxy extends ServiceRestProxy implements IBlob
         $this->addOptionalHeader(
             $headers,
             Resources::CONTENT_TYPE,
-            Resources::XML_CONTENT_TYPE
+            Resources::URL_ENCODED_CONTENT_TYPE
         );
         $this->addOptionalQueryParam($queryParams, Resources::QP_COMP, 'page');
         $this->addOptionalQueryParam(
@@ -617,7 +617,7 @@ class BlobRestProxy extends ServiceRestProxy implements IBlob
         $this->addOptionalHeader(
             $headers,
             Resources::CONTENT_TYPE,
-            Resources::XML_CONTENT_TYPE
+            Resources::URL_ENCODED_CONTENT_TYPE
         );
         
         $this->send(
@@ -942,7 +942,7 @@ class BlobRestProxy extends ServiceRestProxy implements IBlob
         $this->addOptionalHeader(
             $headers,
             Resources::CONTENT_TYPE,
-            Resources::XML_CONTENT_TYPE
+            Resources::URL_ENCODED_CONTENT_TYPE
         );
 
         $this->send(
@@ -1346,7 +1346,7 @@ class BlobRestProxy extends ServiceRestProxy implements IBlob
         $this->addOptionalHeader(
             $headers,
             Resources::CONTENT_TYPE,
-            Resources::XML_CONTENT_TYPE
+            Resources::URL_ENCODED_CONTENT_TYPE
         );
         $this->addOptionalQueryParam(
             $queryParams,
@@ -1429,7 +1429,7 @@ class BlobRestProxy extends ServiceRestProxy implements IBlob
         $blobContentMD5      = $options->getBlobContentMD5();
         $blobCacheControl    = $options->getBlobCacheControl();
         $leaseId             = $options->getLeaseId();
-        $contentType         = Resources::XML_CONTENT_TYPE;
+        $contentType         = Resources::URL_ENCODED_CONTENT_TYPE;
         
         $metadata = $options->getMetadata();
         $headers  = $this->generateMetadataHeaders($metadata);

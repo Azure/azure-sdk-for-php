@@ -44,7 +44,7 @@ interface IAtomReaderWriter
      * 
      * @return string
      */
-    public static function getTable($name);
+    public function getTable($name);
     
     /**
      * Parses one table entry.
@@ -53,7 +53,7 @@ interface IAtomReaderWriter
      * 
      * @return string 
      */
-    public static function parseTable($body);
+    public function parseTable($body);
     
     /**
      * Constructs array of tables from HTTP response body.
@@ -62,7 +62,7 @@ interface IAtomReaderWriter
      * 
      * @return array
      */
-    public static function parseTableEntries($body);
+    public function parseTableEntries($body);
     
     /**
      * Constructs XML representation for entity.
@@ -71,7 +71,7 @@ interface IAtomReaderWriter
      * 
      * @return string
      */
-    public static function getEntity($entity);
+    public function getEntity($entity);
     
     /**
      * Constructs entity from HTTP response body.
@@ -80,7 +80,7 @@ interface IAtomReaderWriter
      * 
      * @return Models\Entity
      */
-    public static function parseEntity($body);
+    public function parseEntity($body);
     
     /**
      * Constructs array of entities from HTTP response body.
@@ -89,7 +89,7 @@ interface IAtomReaderWriter
      * 
      * @return array
      */
-    public static function parseEntities($body);
+    public function parseEntities($body);
 }
 
 ?>

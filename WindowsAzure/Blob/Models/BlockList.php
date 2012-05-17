@@ -25,6 +25,7 @@
 namespace WindowsAzure\Blob\Models;
 use WindowsAzure\Common\Internal\Validate;
 use WindowsAzure\Common\Internal\Resources;
+use WindowsAzure\Common\Internal\Serialization\XmlSerializer;
 use WindowsAzure\Blob\Models\Block;
 
 /**
@@ -159,22 +160,16 @@ class BlockList
      */
     public function toXml($xmlSerializer)
     {
-        // Ehance this part to use SimpleXml document instead of manual construction
-        // https://github.com/WindowsAzure/azure-sdk-for-php/issues/144
-        $xml  = '<?xml version="1.0" encoding="utf-8"?>' . "\r\n";
-        $xml .= '<BlockList>' . "\r\n";
+        $properties = array(XmlSerializer::ROOT_NAME => self::$xmlRootName);
+        $array      = array();
         
         foreach ($this->_entries as $value) {
-            $type = $value->getType();
-            $id   = $value->getBlockId();
-            $xml .= '     ';
-            $xml .= '<' . $type . '>' . base64_encode($id) . '</' . $type . '>';
-            $xml .= "\r\n";
+            $array[] = array(
+                $value->getType() => base64_encode($value->getBlockId())
+            );
         }
         
-        $xml .= '</BlockList>';
-        
-        return $xml;
+        return $xmlSerializer->serialize($array, $properties);
     }
 }
 

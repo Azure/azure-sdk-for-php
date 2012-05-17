@@ -42,56 +42,110 @@ use WindowsAzure\Table\Models\Entity;
 class AtomReaderWriter implements IAtomReaderWriter
 {
     /**
-     * Fills text template with variables from key/value array.
-     * 
-     * @param string $templateText The template text.
-     * @param array  $variables    The array containing key/value pairs.
-     * 
-     * @return string
+     * @var string
      */
-    private static function _fillTemplate($templateText, $variables = array())
-    {
-        foreach ($variables as $key => $value) {
-            $templateText = str_replace('{tpl:' . $key . '}', $value, $templateText);
-        }
-        return $templateText;
-    }
+    private $_atomNamespaceName;
     
     /**
-     * Generate Windows Azure representation from entity. Creates atompub markup 
-     * from properties.
+     * @var string
+     */
+    private $_dataServicesNamespaceName;
+    
+    /**
+     * @var string 
+     */
+    private $_dataServicesMetadataNamespaceName;
+    
+    /**
+     * @var string
+     */
+    private $_xmlVersion;
+    
+    /**
+     * @var string
+     */
+    private $_xmlEncoding;
+    
+    /**
+     * @var string
+     */
+    private $_dataServicesPrefix;
+    
+    /**
+     * @var string
+     */
+    private $_dataServicesMetadataPrefix;
+    
+    /**
+     * Generates the atom XML properties.
      * 
-     * @param Models\Entity $entity The entity instance.
+     * @param \XmlWriter $xmlw       The XML writer.
+     * @param array      $properties The atom properties.
+     * 
+     * @return none
+     */
+    private function _generateProperties($xmlw, $properties)
+    {
+        foreach ($properties as $key => $value) {
+            $content    = key($value);
+            $attributes = $value[$content];
+            $xmlw->startElementNS($this->_dataServicesPrefix, $key, null);
+            if (!is_null($attributes)) {
+                foreach ($attributes as $attribute => $attributeValue) {
+                    $xmlw->writeAttributeNS(
+                        $this->_dataServicesMetadataPrefix,
+                        $attribute,
+                        null,
+                        $attributeValue
+                    );
+                }
+            }
+            $xmlw->text($content);
+            $xmlw->endElement();
+        }
+    }
+
+    /**
+     * Serializes the atom into XML representation.
+     * 
+     * @param array $properties The atom properties.
      * 
      * @return string
      */
-    private static function _generatePropertiesXml($entity)
+    private function _serializeAtom($properties)
     {
-        $xml        = array();
-        $properties = $entity->getProperties();
-
-        foreach ($properties as $name => $entry) {
-            $value   = array();
-            $value[] = '<d:' . $name;
-            if (!is_null($entry->getEdmType())) {
-                $value[] = ' m:type="' . $entry->getEdmType() . '"';
-            }
-            
-            if (is_null($entry->getValue())) {
-                $value[] = ' m:null="true"'; 
-            }
-            $value[] = '>';
-            
-            $value[] = EdmType::serializeValue(
-                $entry->getEdmType(),
-                $entry->getValue()
-            );
-            
-            $value[] = '</d:' . $name . '>';
-            $xml[]   = implode('', $value);
-        }
-
-        return implode('', $xml);
+        $xmlw = new \XmlWriter();
+        $xmlw->openMemory();
+        $xmlw->setIndent(true);
+        $xmlw->startDocument($this->_xmlVersion, $this->_xmlEncoding, 'yes');
+        $xmlw->startElementNS(null, 'entry', $this->_atomNamespaceName);
+        $xmlw->writeAttribute(
+            "xmlns:$this->_dataServicesPrefix",
+            $this->_dataServicesNamespaceName
+        );
+        $xmlw->writeAttribute(
+            "xmlns:$this->_dataServicesMetadataPrefix",
+            $this->_dataServicesMetadataNamespaceName
+        );
+        $xmlw->writeElement('title');
+        $xmlw->writeElement('updated', Utilities::isoDate());
+        $xmlw->startElement('author');
+        $xmlw->writeElement('name');
+        $xmlw->endElement();
+        $xmlw->writeElement('id');
+        $xmlw->startElement('content');
+        $xmlw->writeAttribute('type', Resources::XML_CONTENT_TYPE);
+        $xmlw->startElementNS(
+            $this->_dataServicesMetadataPrefix,
+            'properties',
+            null
+        );
+        $this->_generateProperties($xmlw, $properties);
+        $xmlw->endElement();
+        $xmlw->endElement();
+        $xmlw->endElement();
+        
+        return $xmlw->outputMemory(true);
     }
     
     /** 
@@ -101,7 +155,7 @@ class AtomReaderWriter implements IAtomReaderWriter
      * 
      * @return object
      */
-    private static function _parseBody($body)
+    private function _parseBody($body)
     {
         $xml = simplexml_load_string($body);
 
@@ -113,7 +167,7 @@ class AtomReaderWriter implements IAtomReaderWriter
 
             // Register all namespace prefixes
             foreach ($namespaces as $prefix => $ns) { 
-                if ($prefix != '') {
+                if (!empty($prefix)) {
                     $xml->registerXPathNamespace($prefix, $ns);
                 } 
             } 
@@ -123,126 +177,70 @@ class AtomReaderWriter implements IAtomReaderWriter
     }
     
     /**
-     * Constructs XML representation for table entry.
+     * Find a namespace prefix and return it.
      * 
-     * @param type $name the name of the table.
+     * @param string $xml          The XML document.
+     * @param string $namespaceUrl The namespace url.
      * 
      * @return string
      */
-    public static function getTable($name)
+    private function _getNamespacePrefix($xml, $namespaceUrl)
     {
-        $xml = '<?xml version="1.0" encoding="utf-8" standalone="yes"?>
-        <entry
-            xmlns:d="http://schemas.microsoft.com/ado/2007/08/dataservices"
-            xmlns:m="http://schemas.microsoft.com/ado/2007/08/dataservices/metadata"
-            xmlns="http://www.w3.org/2005/Atom">
-            <title />
-            <updated>{tpl:Updated}</updated>
-            <author>
-            <name />
-            </author>
-            <id />
-            <content type="application/xml">
-            <m:properties>
-                <d:TableName>{tpl:TableName}</d:TableName>
-            </m:properties>
-            </content>
-        </entry>';
+        $docNamespaces   = $xml->getDocNamespaces();
+        $namespacePrefix = null;
         
-        $xml = self::_fillTemplate(
-            $xml, array(
-                'TableName' => htmlspecialchars($name),
-                'Updated'   => Utilities::isoDate(),
-            )
+        foreach ($docNamespaces as $prefix => $url) {
+            if ($namespaceUrl == $url) {
+                $namespacePrefix = $prefix;
+                break;
+            }
+        }
+        
+        return $namespacePrefix;
+    }
+    
+    /**
+     * Parses one table entry and returns the table name.
+     * 
+     * @param \SimpleXml $result The original XML body loaded in XML.
+     * 
+     * @return string
+     */
+    private function _parseOneTable($result)
+    {
+        $dataServicesNamespacePrefix         = $this->_getNamespacePrefix(
+            $result,
+            $this->_dataServicesNamespaceName
+        );
+        $dataServicesMetadataNamespacePrefix = $this->_getNamespacePrefix(
+            $result,
+            $this->_dataServicesMetadataNamespaceName
         );
         
-        return $xml;
-    }
-    
-    /**
-     * Constructs array of tables from HTTP response body.
-     * 
-     * @param string $body The HTTP response body.
-     * 
-     * @return array
-     */
-    public static function parseTableEntries($body)
-    {
-        $tables = array();
-        $result = self::_parseBody($body);
-        
-        if (!$result || !$result->entry) {
-            return array();
-        }
-        
-        $rawEntries = null;
-        if (count($result->entry) > 1) {
-            $rawEntries = $result->entry;
-        } else {
-            $rawEntries = array($result->entry);
-        }
-        
-        foreach ($rawEntries as $entry) {
-            $tableName = $entry->xpath('.//m:properties/d:TableName');
-            $tables[]  = (string)$tableName[0];
-        }
-        
-        return $tables;
-    }
-    
-    /**
-     * Parses one table entry.
-     * 
-     * @param string $body The HTTP response body.
-     * 
-     * @return string 
-     */
-    public static function parseTable($body)
-    {
-        $result    = self::_parseBody($body);
-        $tableName = $result->xpath('.//m:properties/d:TableName');
+        $query     = ".//$dataServicesMetadataNamespacePrefix:properties/";
+        $query    .= "$dataServicesNamespacePrefix:TableName";
+        $tableName = $result->xpath($query);
         $table     = (string)$tableName[0];
         
         return $table;
     }
     
     /**
-     * Constructs XML representation for entity.
+     * Gets entry nodes from the XML body.
      * 
-     * @param Models\Entity $entity The entity instance.
+     * @param \SimpleXml $body The original XML body loaded in XML.
      * 
-     * @return string
+     * @return array
      */
-    public static function getEntity($entity)
+    private function _getRawEntries($body)
     {
-        // There are extra spaces at the end of lines 2, 3 and 4 which are important
-        // for having the code works fine with emulator.
-        $xml = '<?xml version="1.0" encoding="utf-8" standalone="yes"?>
-            <entry 
-            xmlns:d="http://schemas.microsoft.com/ado/2007/08/dataservices" 
-            xmlns:m="http://schemas.microsoft.com/ado/2007/08/dataservices/metadata" 
-            xmlns="http://www.w3.org/2005/Atom">
-            <title />
-            <updated>{tpl:Updated}</updated>
-            <author>
-            <name />
-            </author>
-            <id />
-            <content type="application/xml">
-                <m:properties>
-                    {tpl:Properties}
-                </m:properties>
-            </content>
-        </entry>';
-     
-        $xml = self::_fillTemplate(
-            $xml, array(
-                'Updated'    => Utilities::isoDate(),
-                'Properties' => self::_generatePropertiesXml($entity)
-            )
-        );
+        $rawEntries = array();
         
-        return $xml;
+        if (!is_null($body) && $body->entry) {
+            $rawEntries = $body->entry;
+        }
+        
+        return $rawEntries;
     }
     
     /**
@@ -252,21 +250,25 @@ class AtomReaderWriter implements IAtomReaderWriter
      * 
      * @return \WindowsAzure\Table\Models\Entity
      */
-    private static function _parseOneEntity($result)
+    private function _parseOneEntity($result)
     {
-        $services = 'http://schemas.microsoft.com/ado/2007/08/dataservices';
-        $metadata = 'http://schemas.microsoft.com/ado/2007/08/dataservices/metadata';
-        $prop     = $result->content->xpath('.//m:properties');
-        $prop     = $prop[0]->children($services);
-        $entity   = new Entity();
+        $prefix = $this->_getNamespacePrefix(
+            $result,
+            $this->_dataServicesMetadataNamespaceName
+        );
+        $prop   = $result->content->xpath(".//$prefix:properties");
+        $prop   = $prop[0]->children($this->_dataServicesNamespaceName);
+        $entity = new Entity();
         
         // Set Etag
-        $etag = $result->attributes($metadata);
+        $etag = $result->attributes($this->_dataServicesMetadataNamespaceName);
         $etag = $etag[Resources::ETAG];
         $entity->setEtag((string)$etag);
         
         foreach ($prop as $key => $value) {
-            $attributes = $value->attributes($metadata);
+            $attributes = $value->attributes(
+                $this->_dataServicesMetadataNamespaceName
+            );
             $type       = $attributes['type'];
             $isnull     = $attributes['null'];
             $value      = EdmType::unserializeQueryValue((string)$type, $value);
@@ -282,16 +284,111 @@ class AtomReaderWriter implements IAtomReaderWriter
     }
     
     /**
+     * Constructs new AtomReaderWriter object. 
+     */
+    public function __construct()
+    {
+        $this->_atomNamespaceName = 'http://www.w3.org/2005/Atom';
+        
+        $this->_dataServicesNamespaceName  = 'http://schemas.microsoft.com/';
+        $this->_dataServicesNamespaceName .= 'ado/2007/08/dataservices';
+        
+        $this->_dataServicesMetadataNamespaceName  = 'http://schemas.microsoft.com/';
+        $this->_dataServicesMetadataNamespaceName .= 'ado/2007/08/dataservices/';
+        $this->_dataServicesMetadataNamespaceName .= 'metadata';
+        
+        $this->_dataServicesPrefix         = 'd';
+        $this->_dataServicesMetadataPrefix = 'm';
+        
+        $this->_xmlVersion  = '1.0';
+        $this->_xmlEncoding = 'UTF-8';
+    }
+    
+    /**
+     * Constructs XML representation for table entry.
+     * 
+     * @param string $name The name of the table.
+     * 
+     * @return string
+     */
+    public function getTable($name)
+    {
+        return $this->_serializeAtom(array('TableName' => array($name => null)));
+    }
+    
+    /**
+     * Parses one table entry.
+     * 
+     * @param string $body The HTTP response body.
+     * 
+     * @return string 
+     */
+    public function parseTable($body)
+    {
+        $result = $this->_parseBody($body);
+        return $this->_parseOneTable($result);
+    }
+    
+    /**
+     * Constructs array of tables from HTTP response body.
+     * 
+     * @param string $body The HTTP response body.
+     * 
+     * @return array
+     */
+    public function parseTableEntries($body)
+    {
+        $tables     = array();
+        $result     = $this->_parseBody($body);
+        $rawEntries = $this->_getRawEntries($result);
+        
+        foreach ($rawEntries as $entry) {
+            $tables[] = $this->_parseOneTable($entry);
+        }
+        
+        return $tables;
+    }
+    
+    /**
+     * Constructs XML representation for entity.
+     * 
+     * @param Models\Entity $entity The entity instance.
+     * 
+     * @return string
+     */
+    public function getEntity($entity)
+    {
+        $entityProperties = $entity->getProperties();
+        $properties       = array();
+        
+        foreach ($entityProperties as $name => $property) {
+            $attributes = array();
+            $edmType    = $property->getEdmType();
+            $edmValue   = $property->getValue();
+            if (!is_null($edmType)) {
+                $attributes['type'] = $edmType;
+            }
+            if (is_null($edmValue)) {
+                $attributes['null'] = 'true';
+            }
+            $value             = EdmType::serializeValue($edmType, $edmValue);
+            $properties[$name] = array($value => $attributes);
+        }
+        
+        return $this->_serializeAtom($properties);
+    }
+    
+    /**
      * Constructs entity from HTTP response body.
      * 
      * @param string $body The HTTP response body.
      * 
      * @return Entity
      */
-    public static function parseEntity($body)
+    public function parseEntity($body)
     {
-        $result = self::_parseBody($body);
-        $entity = self::_parseOneEntity($result);
+        $result = $this->_parseBody($body);
+        $entity = $this->_parseOneEntity($result);
         return $entity;
     }
     
@@ -302,24 +399,14 @@ class AtomReaderWriter implements IAtomReaderWriter
      * 
      * @return array
      */
-    public static function parseEntities($body)
+    public function parseEntities($body)
     {
-        $result = self::_parseBody($body);
-
-        $rawEntries = null;
-        if ($result->entry) {
-            if (count($result->entry) > 1) {
-                $rawEntries = $result->entry;
-            } else {
-                $rawEntries = array($result->entry);
-            }
-        } else {
-            return array();
-        }
+        $result     = $this->_parseBody($body);
+        $entities   = array();
+        $rawEntries = $this->_getRawEntries($result);
         
-        $entities = array();
         foreach ($rawEntries as $entity) {
-            $entities[] = self::_parseOneEntity($entity);
+            $entities[] = $this->_parseOneEntity($entity);
         }
         
         return $entities;
