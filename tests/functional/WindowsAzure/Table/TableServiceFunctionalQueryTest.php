@@ -45,7 +45,7 @@ class TableServiceFunctionalQueryTest extends FunctionalTestBase {
         
         $table = TableServiceFunctionalTestData::$TEST_TABLE_NAMES[0];
         self::$entitiesInTable = self::getEntitiesToQueryOver();  
-        $baseWithWrapper = new FunctionalTestBase();
+        $baseWithRestProxy = new FunctionalTestBase();
         $parts = array();
         foreach(self::$entitiesInTable as $entity)  {
             if (array_key_exists($entity->getPartitionKey(), $parts) === false) {
@@ -58,7 +58,7 @@ class TableServiceFunctionalQueryTest extends FunctionalTestBase {
             foreach($part as $entity)  {
                 $batch->addInsertEntity($table, $entity);
             }
-            $baseWithWrapper->wrapper->batch($batch);
+            $baseWithRestProxy->restProxy->batch($batch);
         }
     }
     
@@ -520,7 +520,7 @@ class TableServiceFunctionalQueryTest extends FunctionalTestBase {
         $table = TableServiceFunctionalTestData::$TEST_TABLE_NAMES[0];
 
         try {
-            $ret = (is_null($options) ? $this->wrapper->queryEntities($table) : $this->wrapper->queryEntities($table, $options));
+            $ret = (is_null($options) ? $this->restProxy->queryEntities($table) : $this->restProxy->queryEntities($table, $options));
 
             if (is_null($options)) {
                 $options = new QueryEntitiesOptions();

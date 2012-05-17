@@ -55,7 +55,7 @@ class ServiceBusRestProxyTest extends ServiceBusRestProxyTestBase
             new ServiceException(''))
         );
 
-        $this->wrapper->deleteQueue('IDoNotExist');
+        $this->restProxy->deleteQueue('IDoNotExist');
     }
 }
 

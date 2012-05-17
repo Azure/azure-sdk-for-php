@@ -51,8 +51,8 @@ class ServiceBusRestProxyTestBase extends ServiceRestProxyTestBase
             TestResources::wrapPassword()
         );
 
-        $serviceBusWrapper = ServiceBusService::create($config);
-        parent::__construct($config, $serviceBusWrapper);
+        $serviceBusRestProxy = ServiceBusService::create($config);
+        parent::__construct($config, $serviceBusRestProxy);
     }
     
     protected function tearDown()

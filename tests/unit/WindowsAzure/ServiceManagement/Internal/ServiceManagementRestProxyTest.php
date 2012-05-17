@@ -96,7 +96,7 @@ class ServiceManagementRestProxyTest extends ServiceManagementRestProxyTestBase
         
         // Test
         try {
-            $actual = $this->wrapper->listLocations();
+            $actual = $this->restProxy->listLocations();
         } catch (\HTTP_Request2_MessageException $e) {
             $msg  = 'The test is skipped because Windows Azure replied with corrupted response.';
             $msg .= 'This doesn\'t happen frequently but when it does happen the test is skipped';
@@ -131,7 +131,7 @@ class ServiceManagementRestProxyTest extends ServiceManagementRestProxyTestBase
         $location = Locations::WEST_US;
         
         // Test
-        $this->wrapper->createAffinityGroup($name, $label, $location);
+        $this->restProxy->createAffinityGroup($name, $label, $location);
         
         // Assert
         $this->assertTrue($this->affinityGroupExists($name));
@@ -149,10 +149,10 @@ class ServiceManagementRestProxyTest extends ServiceManagementRestProxyTestBase
         $name = 'deleteaffinitygroup';
         $label = base64_encode($name);
         $location = Locations::WEST_US;
-        $this->wrapper->createAffinityGroup($name, $label, $location);
+        $this->restProxy->createAffinityGroup($name, $label, $location);
         
         // Test
-        $this->wrapper->deleteAffinityGroup($name);
+        $this->restProxy->deleteAffinityGroup($name);
         
         // Assert
         $this->assertFalse($this->affinityGroupExists($name));
@@ -167,7 +167,7 @@ class ServiceManagementRestProxyTest extends ServiceManagementRestProxyTestBase
     public function testListAffinityGroupsWithEmpty()
     {
         // Test
-        $result = $this->wrapper->listAffinityGroups();
+        $result = $this->restProxy->listAffinityGroups();
         
         // Assert
         $affinityGroups = $result->getAffinityGroups();
@@ -187,7 +187,7 @@ class ServiceManagementRestProxyTest extends ServiceManagementRestProxyTestBase
         $this->createAffinityGroup($name);
         
         // Test
-        $result = $this->wrapper->listAffinityGroups();
+        $result = $this->restProxy->listAffinityGroups();
         
         // Assert
         $affinityGroups = $result->getAffinityGroups();
@@ -209,7 +209,7 @@ class ServiceManagementRestProxyTest extends ServiceManagementRestProxyTestBase
         $this->createAffinityGroup($name2);
         
         // Test
-        $result = $this->wrapper->listAffinityGroups();
+        $result = $this->restProxy->listAffinityGroups();
         
         // Assert
         $affinityGroups = $result->getAffinityGroups();
@@ -231,7 +231,7 @@ class ServiceManagementRestProxyTest extends ServiceManagementRestProxyTestBase
         $this->createAffinityGroup($name, $label, $location);
         
         // Test
-        $this->wrapper->updateAffinityGroup($name, $expectedLabel);
+        $this->restProxy->updateAffinityGroup($name, $expectedLabel);
         
         // Assert
         $affinityGroup = $this->getAffinityGroup($name);
@@ -251,7 +251,7 @@ class ServiceManagementRestProxyTest extends ServiceManagementRestProxyTestBase
         $this->createAffinityGroup($name);
         
         // Test
-        $result = $this->wrapper->getAffinityGroupProperties($name);
+        $result = $this->restProxy->getAffinityGroupProperties($name);
         
         // Assert
         $expected = $this->getAffinityGroup($name);
@@ -269,7 +269,7 @@ class ServiceManagementRestProxyTest extends ServiceManagementRestProxyTestBase
     public function testListLocations()
     {
         // Test
-        $result = $this->wrapper->listLocations();
+        $result = $this->restProxy->listLocations();
         
         // Assert
         $locations = $result->getLocations();
@@ -294,7 +294,7 @@ class ServiceManagementRestProxyTest extends ServiceManagementRestProxyTestBase
         $options->setLocation('West US');
         
         // Test
-        $result = $this->wrapper->createStorageService($name, $label, $options);
+        $result = $this->restProxy->createStorageService($name, $label, $options);
         $this->blockUntilAsyncSucceed($result->getRequestId());
         
         // Assert
@@ -314,7 +314,7 @@ class ServiceManagementRestProxyTest extends ServiceManagementRestProxyTestBase
         $expected = 1;
         
          // Test
-        $result = $this->wrapper->listStorageServices();
+        $result = $this->restProxy->listStorageServices();
         
         // Assert
         $this->assertCount($expected + $this->storageCount, $result->getStorageServices());
@@ -337,10 +337,10 @@ class ServiceManagementRestProxyTest extends ServiceManagementRestProxyTestBase
         $options->setLabel($expectedLabel);
         
         // Test
-        $this->wrapper->updateStorageService($name, $options);
+        $this->restProxy->updateStorageService($name, $options);
         
         // Assert
-        $result = $this->wrapper->getStorageServiceProperties($name);
+        $result = $this->restProxy->getStorageServiceProperties($name);
         $this->assertEquals($expectedDesc, $result->getStorageService()->getDescription());
         $this->assertEquals($expectedLabel, $result->getStorageService()->getLabel());
     }
@@ -358,7 +358,7 @@ class ServiceManagementRestProxyTest extends ServiceManagementRestProxyTestBase
         $name = $this->_storageServiceName;
         
         // Test
-        $result = $this->wrapper->getStorageServiceProperties($name);
+        $result = $this->restProxy->getStorageServiceProperties($name);
         
         // Assert
         $this->assertEquals($name, $result->getStorageService()->getName());
@@ -377,7 +377,7 @@ class ServiceManagementRestProxyTest extends ServiceManagementRestProxyTestBase
         $name = $this->_storageServiceName;
         
         // Test
-        $result = $this->wrapper->getStorageServiceKeys($name);
+        $result = $this->restProxy->getStorageServiceKeys($name);
         
         // Assert
         $this->assertNotNull($result->getUrl());
@@ -396,10 +396,10 @@ class ServiceManagementRestProxyTest extends ServiceManagementRestProxyTestBase
     {
         // Setup
         $name = $this->_storageServiceName;
-        $old = $this->wrapper->getStorageServiceKeys($name);
+        $old = $this->restProxy->getStorageServiceKeys($name);
         
         // Test
-        $new = $this->wrapper->regenerateStorageServiceKeys($name, KeyType::PRIMARY_KEY);
+        $new = $this->restProxy->regenerateStorageServiceKeys($name, KeyType::PRIMARY_KEY);
         
         // Assert
         $this->assertNotEquals($old->getPrimary(), $new->getPrimary());
@@ -422,7 +422,7 @@ class ServiceManagementRestProxyTest extends ServiceManagementRestProxyTestBase
         $name = $this->_storageServiceName;
         
          // Test
-        $this->wrapper->deleteStorageService($name);
+        $this->restProxy->deleteStorageService($name);
         
         // Assert
         $this->assertFalse($this->storageServiceExists($name));

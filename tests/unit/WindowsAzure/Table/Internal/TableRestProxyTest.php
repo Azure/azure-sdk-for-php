@@ -82,7 +82,7 @@ class TableRestProxyTest extends TableServiceRestProxyTestBase
         $this->skipIfEmulated();
         
         // Test
-        $result = $this->wrapper->getServiceProperties();
+        $result = $this->restProxy->getServiceProperties();
         
         // Assert
         $this->assertEquals($this->defaultProperties->toArray(), $result->getValue()->toArray());
@@ -101,7 +101,7 @@ class TableRestProxyTest extends TableServiceRestProxyTestBase
         
         // Test
         $this->setServiceProperties($expected);
-        $actual = $this->wrapper->getServiceProperties();
+        $actual = $this->restProxy->getServiceProperties();
         
         // Assert
         $this->assertEquals($expected->toXml($this->xmlSerializer), $actual->getValue()->toXml($this->xmlSerializer));
@@ -122,7 +122,7 @@ class TableRestProxyTest extends TableServiceRestProxyTestBase
         
         // Test
         $this->setServiceProperties($expected);
-        $actual = $this->wrapper->getServiceProperties();
+        $actual = $this->restProxy->getServiceProperties();
         
         // Assert
         $this->assertEquals($expected->toXml($this->xmlSerializer), $actual->getValue()->toXml($this->xmlSerializer));
@@ -142,7 +142,7 @@ class TableRestProxyTest extends TableServiceRestProxyTestBase
         $this->createTable($name);
         
         // Assert
-        $result = $this->wrapper->queryTables();
+        $result = $this->restProxy->queryTables();
         $this->assertCount(1, $result->getTables());
     }
     
@@ -160,7 +160,7 @@ class TableRestProxyTest extends TableServiceRestProxyTestBase
         $this->createTable($name);
         
         // Test
-        $result = $this->wrapper->getTable($name);
+        $result = $this->restProxy->getTable($name);
         
         // Assert
         $this->assertEquals($name, $result->getName());
@@ -174,13 +174,13 @@ class TableRestProxyTest extends TableServiceRestProxyTestBase
     {
         // Setup
         $name = 'deletetable';
-        $this->wrapper->createTable($name);
+        $this->restProxy->createTable($name);
         
         // Test
-        $this->wrapper->deleteTable($name);
+        $this->restProxy->deleteTable($name);
         
         // Assert
-        $result = $this->wrapper->queryTables();
+        $result = $this->restProxy->queryTables();
         $this->assertCount(0, $result->getTables());
     }
     
@@ -206,7 +206,7 @@ class TableRestProxyTest extends TableServiceRestProxyTestBase
         $this->createTable($name2);
         
         // Test
-        $result = $this->wrapper->queryTables();
+        $result = $this->restProxy->queryTables();
         
         // Assert
         $tables = $result->getTables();
@@ -235,7 +235,7 @@ class TableRestProxyTest extends TableServiceRestProxyTestBase
         $this->createTable($name1);
         
         // Test
-        $result = $this->wrapper->queryTables();
+        $result = $this->restProxy->queryTables();
         
         // Assert
         $tables = $result->getTables();
@@ -259,7 +259,7 @@ class TableRestProxyTest extends TableServiceRestProxyTestBase
     public function testQueryTablesEmpty()
     {
         // Test
-        $result = $this->wrapper->queryTables();
+        $result = $this->restProxy->queryTables();
         
         // Assert
         $tables = $result->getTables();
@@ -294,7 +294,7 @@ class TableRestProxyTest extends TableServiceRestProxyTestBase
         $this->createTable($name3);
         
         // Test
-        $result = $this->wrapper->queryTables($options);
+        $result = $this->restProxy->queryTables($options);
         
         // Assert
         $tables = $result->getTables();
@@ -330,7 +330,7 @@ class TableRestProxyTest extends TableServiceRestProxyTestBase
         $this->createTable($name3);
         
         // Test
-        $result = $this->wrapper->queryTables($prefix);
+        $result = $this->restProxy->queryTables($prefix);
         
         // Assert
         $tables = $result->getTables();
@@ -376,7 +376,7 @@ class TableRestProxyTest extends TableServiceRestProxyTestBase
         $this->createTable($name3);
         
         // Test
-        $result = $this->wrapper->queryTables($prefixFilter);
+        $result = $this->restProxy->queryTables($prefixFilter);
         
         // Assert
         $tables = $result->getTables();
@@ -404,7 +404,7 @@ class TableRestProxyTest extends TableServiceRestProxyTestBase
         $expected = TestResources::getTestEntity('123', '456');
         
         // Test
-        $result = $this->wrapper->insertEntity($name, $expected);
+        $result = $this->restProxy->insertEntity($name, $expected);
         
         // Assert
         $actual = $result->getEntity();
@@ -428,7 +428,7 @@ class TableRestProxyTest extends TableServiceRestProxyTestBase
         $this->createTable($name);
         
         // Test
-        $result = $this->wrapper->queryEntities($name);
+        $result = $this->restProxy->queryEntities($name);
         
         // Assert
         $entities = $result->getEntities();
@@ -450,10 +450,10 @@ class TableRestProxyTest extends TableServiceRestProxyTestBase
         $pk1 = '123';
         $e1 = TestResources::getTestEntity($pk1, '1');
         $this->createTable($name);
-        $this->wrapper->insertEntity($name, $e1);
+        $this->restProxy->insertEntity($name, $e1);
         
         // Test
-        $result = $this->wrapper->queryEntities($name);
+        $result = $this->restProxy->queryEntities($name);
         
         // Assert
         $entities = $result->getEntities();
@@ -484,13 +484,13 @@ class TableRestProxyTest extends TableServiceRestProxyTestBase
         $e2 = TestResources::getTestEntity($pk2, '2');
         $e3 = TestResources::getTestEntity($pk3, '3');
         $this->createTable($name);
-        $this->wrapper->insertEntity($name, $e1);
-        $this->wrapper->insertEntity($name, $e2);
-        $this->wrapper->insertEntity($name, $e3);
+        $this->restProxy->insertEntity($name, $e1);
+        $this->restProxy->insertEntity($name, $e2);
+        $this->restProxy->insertEntity($name, $e3);
         $queryString = "PartitionKey eq '123'";
         
         // Test
-        $result = $this->wrapper->queryEntities($name, $queryString);
+        $result = $this->restProxy->queryEntities($name, $queryString);
         
         // Assert
         $entities = $result->getEntities();
@@ -521,14 +521,14 @@ class TableRestProxyTest extends TableServiceRestProxyTestBase
         $e2 = TestResources::getTestEntity($pk2, '2');
         $e3 = TestResources::getTestEntity($pk3, '3');
         $this->createTable($name);
-        $this->wrapper->insertEntity($name, $e1);
-        $this->wrapper->insertEntity($name, $e2);
-        $this->wrapper->insertEntity($name, $e3);
+        $this->restProxy->insertEntity($name, $e1);
+        $this->restProxy->insertEntity($name, $e2);
+        $this->restProxy->insertEntity($name, $e3);
         $queryString = "PartitionKey eq '123'";
         $filter = Filter::applyQueryString($queryString);
         
         // Test
-        $result = $this->wrapper->queryEntities($name, $filter);
+        $result = $this->restProxy->queryEntities($name, $filter);
         
         // Assert
         $entities = $result->getEntities();
@@ -562,16 +562,16 @@ class TableRestProxyTest extends TableServiceRestProxyTestBase
         $e2 = TestResources::getTestEntity($pk2, '2');
         $e3 = TestResources::getTestEntity($pk3, '3');
         $this->createTable($name);
-        $this->wrapper->insertEntity($name, $e1);
-        $this->wrapper->insertEntity($name, $e2);
-        $this->wrapper->insertEntity($name, $e3);
+        $this->restProxy->insertEntity($name, $e1);
+        $this->restProxy->insertEntity($name, $e2);
+        $this->restProxy->insertEntity($name, $e3);
         $query = new Query();
         $query->addSelectField('CustomerId');
         $options = new QueryEntitiesOptions();
         $options->setQuery($query);
         
         // Test
-        $result = $this->wrapper->queryEntities($name, $options);
+        $result = $this->restProxy->queryEntities($name, $options);
         
         // Assert
         $entities = $result->getEntities();
@@ -602,16 +602,16 @@ class TableRestProxyTest extends TableServiceRestProxyTestBase
         $e2 = TestResources::getTestEntity($pk2, '2');
         $e3 = TestResources::getTestEntity($pk3, '3');
         $this->createTable($name);
-        $this->wrapper->insertEntity($name, $e1);
-        $this->wrapper->insertEntity($name, $e2);
-        $this->wrapper->insertEntity($name, $e3);
+        $this->restProxy->insertEntity($name, $e1);
+        $this->restProxy->insertEntity($name, $e2);
+        $this->restProxy->insertEntity($name, $e3);
         $query = new Query();
         $query->setTop(1);
         $options = new QueryEntitiesOptions();
         $options->setQuery($query);
         
         // Test
-        $result = $this->wrapper->queryEntities($name, $options);
+        $result = $this->restProxy->queryEntities($name, $options);
         
         // Assert
         $entities = $result->getEntities();
@@ -636,18 +636,18 @@ class TableRestProxyTest extends TableServiceRestProxyTestBase
         $name = 'updateentity';
         $this->createTable($name);
         $expected = TestResources::getTestEntity('123', '456');
-        $this->wrapper->insertEntity($name, $expected);
-        $result = $this->wrapper->queryEntities($name);
+        $this->restProxy->insertEntity($name, $expected);
+        $result = $this->restProxy->queryEntities($name);
         $entities = $result->getEntities();
         $expected = $entities[0];
         $expected->addProperty('CustomerPlace', EdmType::STRING, 'Redmond');
         
         // Test
-        $result = $this->wrapper->UpdateEntity($name, $expected);
+        $result = $this->restProxy->UpdateEntity($name, $expected);
         
         // Assert
         $this->assertNotNull($result);
-        $result = $this->wrapper->queryEntities($name);
+        $result = $this->restProxy->queryEntities($name);
         $entities = $result->getEntities();
         $actual = $entities[0];
         $this->assertEquals($expected->getPartitionKey(), $actual->getPartitionKey());
@@ -674,15 +674,15 @@ class TableRestProxyTest extends TableServiceRestProxyTestBase
         $name = 'updateentitywithdeleteproperty';
         $this->createTable($name);
         $expected = TestResources::getTestEntity('123', '456');
-        $this->wrapper->insertEntity($name, $expected);
+        $this->restProxy->insertEntity($name, $expected);
         $expected->setPropertyValue('CustomerId', null);
         
         // Test
-        $result = $this->wrapper->updateEntity($name, $expected);
+        $result = $this->restProxy->updateEntity($name, $expected);
         
         // Assert
         $this->assertNotNull($result);
-        $actual = $this->wrapper->getEntity($name, $expected->getPartitionKey(), $expected->getRowKey());
+        $actual = $this->restProxy->getEntity($name, $expected->getPartitionKey(), $expected->getRowKey());
         $this->assertEquals($expected->getPartitionKey(), $actual->getEntity()->getPartitionKey());
         $this->assertEquals($expected->getRowKey(), $actual->getEntity()->getRowKey());
         // Add +1 to the count to include Timestamp property.
@@ -706,18 +706,18 @@ class TableRestProxyTest extends TableServiceRestProxyTestBase
         $name = 'mergeentity';
         $this->createTable($name);
         $expected = TestResources::getTestEntity('123', '456');
-        $this->wrapper->insertEntity($name, $expected);
-        $result = $this->wrapper->queryEntities($name);
+        $this->restProxy->insertEntity($name, $expected);
+        $result = $this->restProxy->queryEntities($name);
         $entities = $result->getEntities();
         $expected = $entities[0];
         $expected->addProperty('CustomerPhone', EdmType::STRING, '99999999');
         
         // Test
-        $result = $this->wrapper->mergeEntity($name, $expected);
+        $result = $this->restProxy->mergeEntity($name, $expected);
         
         // Assert
         $this->assertNotNull($result);
-        $result = $this->wrapper->queryEntities($name);
+        $result = $this->restProxy->queryEntities($name);
         $entities = $result->getEntities();
         $actual = $entities[0];
         $this->assertEquals($expected->getPartitionKey(), $actual->getPartitionKey());
@@ -743,18 +743,18 @@ class TableRestProxyTest extends TableServiceRestProxyTestBase
         $name = 'insertorreplaceentity';
         $this->createTable($name);
         $expected = TestResources::getTestEntity('123', '456');
-        $this->wrapper->insertEntity($name, $expected);
-        $result = $this->wrapper->queryEntities($name);
+        $this->restProxy->insertEntity($name, $expected);
+        $result = $this->restProxy->queryEntities($name);
         $entities = $result->getEntities();
         $expected = $entities[0];
         $expected->addProperty('CustomerPlace', EdmType::STRING, 'Redmond');
         
         // Test
-        $result = $this->wrapper->InsertOrReplaceEntity($name, $expected);
+        $result = $this->restProxy->InsertOrReplaceEntity($name, $expected);
         
         // Assert
         $this->assertNotNull($result);
-        $result = $this->wrapper->queryEntities($name);
+        $result = $this->restProxy->queryEntities($name);
         $entities = $result->getEntities();
         $actual = $entities[0];
         $this->assertEquals($expected->getPartitionKey(), $actual->getPartitionKey());
@@ -780,18 +780,18 @@ class TableRestProxyTest extends TableServiceRestProxyTestBase
         $name = 'insertormergeentity';
         $this->createTable($name);
         $expected = TestResources::getTestEntity('123', '456');
-        $this->wrapper->insertEntity($name, $expected);
-        $result = $this->wrapper->queryEntities($name);
+        $this->restProxy->insertEntity($name, $expected);
+        $result = $this->restProxy->queryEntities($name);
         $entities = $result->getEntities();
         $expected = $entities[0];
         $expected->addProperty('CustomerPhone', EdmType::STRING, '99999999');
         
         // Test
-        $result = $this->wrapper->InsertOrMergeEntity($name, $expected);
+        $result = $this->restProxy->InsertOrMergeEntity($name, $expected);
         
         // Assert
         $this->assertNotNull($result);
-        $result = $this->wrapper->queryEntities($name);
+        $result = $this->restProxy->queryEntities($name);
         $entities = $result->getEntities();
         $actual = $entities[0];
         $this->assertEquals($expected->getPartitionKey(), $actual->getPartitionKey());
@@ -813,13 +813,13 @@ class TableRestProxyTest extends TableServiceRestProxyTestBase
         $partitionKey = '123';
         $rowKey = '456';
         $entity = TestResources::getTestEntity($partitionKey, $rowKey);
-        $result = $this->wrapper->insertEntity($name, $entity);
+        $result = $this->restProxy->insertEntity($name, $entity);
         
         // Test
-        $this->wrapper->deleteEntity($name, $partitionKey, $rowKey);
+        $this->restProxy->deleteEntity($name, $partitionKey, $rowKey);
         
         // Assert
-        $result = $this->wrapper->queryEntities($name);
+        $result = $this->restProxy->queryEntities($name);
         $entities = $result->getEntities();
         $this->assertCount(0, $entities);
     }
@@ -838,13 +838,13 @@ class TableRestProxyTest extends TableServiceRestProxyTestBase
         $partitionKey = '123';
         $rowKey = 'key with spaces';
         $entity = TestResources::getTestEntity($partitionKey, $rowKey);
-        $result = $this->wrapper->insertEntity($name, $entity);
+        $result = $this->restProxy->insertEntity($name, $entity);
         
         // Test
-        $this->wrapper->deleteEntity($name, $partitionKey, $rowKey);
+        $this->restProxy->deleteEntity($name, $partitionKey, $rowKey);
         
         // Assert
-        $result = $this->wrapper->queryEntities($name);
+        $result = $this->restProxy->queryEntities($name);
         $entities = $result->getEntities();
         $this->assertCount(0, $entities);
     }
@@ -864,10 +864,10 @@ class TableRestProxyTest extends TableServiceRestProxyTestBase
         $partitionKey = '123';
         $rowKey = '456';
         $expected = TestResources::getTestEntity($partitionKey, $rowKey);
-        $this->wrapper->insertEntity($name, $expected);
+        $this->restProxy->insertEntity($name, $expected);
         
         // Test
-        $result = $this->wrapper->getEntity($name, $partitionKey, $rowKey);
+        $result = $this->restProxy->getEntity($name, $partitionKey, $rowKey);
         
         // Assert
         $actual = $result->getEntity();
@@ -902,7 +902,7 @@ class TableRestProxyTest extends TableServiceRestProxyTestBase
         $operations->addInsertEntity($name, $expected);
         
         // Test
-        $result = $this->wrapper->batch($operations);
+        $result = $this->restProxy->batch($operations);
         
         // Assert
         $entries = $result->getEntries();
@@ -934,15 +934,15 @@ class TableRestProxyTest extends TableServiceRestProxyTestBase
         $partitionKey = '123';
         $rowKey = '456';
         $expected = TestResources::getTestEntity($partitionKey, $rowKey);
-        $this->wrapper->insertEntity($name, $expected);
+        $this->restProxy->insertEntity($name, $expected);
         $operations = new BatchOperations();
         $operations->addDeleteEntity($name, $partitionKey, $rowKey);
         
         // Test
-        $this->wrapper->batch($operations);
+        $this->restProxy->batch($operations);
         
         // Assert
-        $result = $this->wrapper->queryEntities($name);
+        $result = $this->restProxy->queryEntities($name);
         $entities = $result->getEntities();
         $this->assertCount(0, $entities);
     }
@@ -968,8 +968,8 @@ class TableRestProxyTest extends TableServiceRestProxyTestBase
         $partitionKey = '123';
         $rowKey = '456';
         $expected = TestResources::getTestEntity($partitionKey, $rowKey);
-        $this->wrapper->insertEntity($name, $expected);
-        $result = $this->wrapper->queryEntities($name);
+        $this->restProxy->insertEntity($name, $expected);
+        $result = $this->restProxy->queryEntities($name);
         $entities = $result->getEntities();
         $expected = $entities[0];
         $expected->addProperty('CustomerPlace', EdmType::STRING, 'Redmond');
@@ -977,12 +977,12 @@ class TableRestProxyTest extends TableServiceRestProxyTestBase
         $operations->addUpdateEntity($name, $expected);
         
         // Test
-        $result = $this->wrapper->batch($operations);
+        $result = $this->restProxy->batch($operations);
         
         // Assert
         $entries = $result->getEntries();
         $this->assertNotNull($entries[0]->getEtag());
-        $result = $this->wrapper->queryEntities($name);
+        $result = $this->restProxy->queryEntities($name);
         $entities = $result->getEntities();
         $actual = $entities[0];
         $this->assertEquals($expected->getPartitionKey(), $actual->getPartitionKey());
@@ -1011,8 +1011,8 @@ class TableRestProxyTest extends TableServiceRestProxyTestBase
         $partitionKey = '123';
         $rowKey = '456';
         $expected = TestResources::getTestEntity($partitionKey, $rowKey);
-        $this->wrapper->insertEntity($name, $expected);
-        $result = $this->wrapper->queryEntities($name);
+        $this->restProxy->insertEntity($name, $expected);
+        $result = $this->restProxy->queryEntities($name);
         $entities = $result->getEntities();
         $expected = $entities[0];
         $expected->addProperty('CustomerPlace', EdmType::STRING, 'Redmond');
@@ -1020,12 +1020,12 @@ class TableRestProxyTest extends TableServiceRestProxyTestBase
         $operations->addMergeEntity($name, $expected);
         
         // Test
-        $result = $this->wrapper->batch($operations);
+        $result = $this->restProxy->batch($operations);
         
         // Assert
         $entries = $result->getEntries();
         $this->assertNotNull($entries[0]->getEtag());
-        $result = $this->wrapper->queryEntities($name);
+        $result = $this->restProxy->queryEntities($name);
         $entities = $result->getEntities();
         $actual = $entities[0];
         $this->assertEquals($expected->getPartitionKey(), $actual->getPartitionKey());
@@ -1056,8 +1056,8 @@ class TableRestProxyTest extends TableServiceRestProxyTestBase
         $partitionKey = '123';
         $rowKey = '456';
         $expected = TestResources::getTestEntity($partitionKey, $rowKey);
-        $this->wrapper->insertEntity($name, $expected);
-        $result = $this->wrapper->queryEntities($name);
+        $this->restProxy->insertEntity($name, $expected);
+        $result = $this->restProxy->queryEntities($name);
         $entities = $result->getEntities();
         $expected = $entities[0];
         $expected->addProperty('CustomerPlace', EdmType::STRING, 'Redmond');
@@ -1065,12 +1065,12 @@ class TableRestProxyTest extends TableServiceRestProxyTestBase
         $operations->addInsertOrReplaceEntity($name, $expected);
         
         // Test
-        $result = $this->wrapper->batch($operations);
+        $result = $this->restProxy->batch($operations);
         
         // Assert
         $entries = $result->getEntries();
         $this->assertNotNull($entries[0]->getEtag());
-        $result = $this->wrapper->queryEntities($name);
+        $result = $this->restProxy->queryEntities($name);
         $entities = $result->getEntities();
         $actual = $entities[0];
         $this->assertEquals($expected->getPartitionKey(), $actual->getPartitionKey());
@@ -1101,8 +1101,8 @@ class TableRestProxyTest extends TableServiceRestProxyTestBase
         $partitionKey = '123';
         $rowKey = '456';
         $expected = TestResources::getTestEntity($partitionKey, $rowKey);
-        $this->wrapper->insertEntity($name, $expected);
-        $result = $this->wrapper->queryEntities($name);
+        $this->restProxy->insertEntity($name, $expected);
+        $result = $this->restProxy->queryEntities($name);
         $entities = $result->getEntities();
         $expected = $entities[0];
         $expected->addProperty('CustomerPlace', EdmType::STRING, 'Redmond');
@@ -1110,12 +1110,12 @@ class TableRestProxyTest extends TableServiceRestProxyTestBase
         $operations->addInsertOrMergeEntity($name, $expected);
         
         // Test
-        $result = $this->wrapper->batch($operations);
+        $result = $this->restProxy->batch($operations);
         
         // Assert
         $entries = $result->getEntries();
         $this->assertNotNull($entries[0]->getEtag());
-        $result = $this->wrapper->queryEntities($name);
+        $result = $this->restProxy->queryEntities($name);
         $entities = $result->getEntities();
         $actual = $entities[0];
         $this->assertEquals($expected->getPartitionKey(), $actual->getPartitionKey());
@@ -1148,9 +1148,9 @@ class TableRestProxyTest extends TableServiceRestProxyTestBase
         $delete = TestResources::getTestEntity($partitionKey, $rk1);
         $insert = TestResources::getTestEntity($partitionKey, $rk2);
         $update = TestResources::getTestEntity($partitionKey, $rk3);
-        $this->wrapper->insertEntity($name, $delete);
-        $this->wrapper->insertEntity($name, $update);
-        $result = $this->wrapper->queryEntities($name);
+        $this->restProxy->insertEntity($name, $delete);
+        $this->restProxy->insertEntity($name, $update);
+        $result = $this->restProxy->queryEntities($name);
         $entities = $result->getEntities();
         $delete = $entities[0];
         $update = $entities[1];
@@ -1161,7 +1161,7 @@ class TableRestProxyTest extends TableServiceRestProxyTestBase
         $operations->addDeleteEntity($name, $delete->getPartitionKey(), $delete->getRowKey(), $delete->getEtag());
         
         // Test
-        $result = $this->wrapper->batch($operations);
+        $result = $this->restProxy->batch($operations);
         
         // Assert
         $this->assertTrue(true);
@@ -1190,9 +1190,9 @@ class TableRestProxyTest extends TableServiceRestProxyTestBase
         $rk3 = '458';
         $delete = TestResources::getTestEntity($partitionKey, $rk1);
         $update = TestResources::getTestEntity($partitionKey, $rk3);
-        $this->wrapper->insertEntity($name, $delete);
-        $this->wrapper->insertEntity($name, $update);
-        $result = $this->wrapper->queryEntities($name);
+        $this->restProxy->insertEntity($name, $delete);
+        $this->restProxy->insertEntity($name, $update);
+        $result = $this->restProxy->queryEntities($name);
         $entities = $result->getEntities();
         $delete = $entities[0];
         $update = $entities[1];
@@ -1202,7 +1202,7 @@ class TableRestProxyTest extends TableServiceRestProxyTestBase
         $operations->addDeleteEntity($name, '125', $delete->getRowKey(), $delete->getEtag());
         
         // Test
-        $result = $this->wrapper->batch($operations);
+        $result = $this->restProxy->batch($operations);
         
         // Assert
         $this->assertTrue(true);

@@ -53,8 +53,8 @@ class BlobServiceRestProxyTestBase extends ServiceRestProxyTestBase
         $config->setProperty(BlobSettings::ACCOUNT_KEY, TestResources::accountKey());
         $config->setProperty(BlobSettings::ACCOUNT_NAME, TestResources::accountName());        
         $config->setProperty(BlobSettings::URI, $blobUri);
-        $blobWrapper = BlobService::create($config);
-        parent::__construct($config, $blobWrapper);
+        $blobRestProxy = BlobService::create($config);
+        parent::__construct($config, $blobRestProxy);
         $this->_createdContainers = array();
     }
     
@@ -65,7 +65,7 @@ class BlobServiceRestProxyTestBase extends ServiceRestProxyTestBase
             $options->setPublicAccess('container');
         }
         
-        $this->wrapper->createContainer($containerName, $options);
+        $this->restProxy->createContainer($containerName, $options);
         $this->_createdContainers[] = $containerName;
     }
 
@@ -75,12 +75,12 @@ class BlobServiceRestProxyTestBase extends ServiceRestProxyTestBase
             if (array_search($container, $containers) === FALSE) {
                 $this->createContainer($container);
             } else {
-                $listResults = $this->wrapper->listBlobs($container);
+                $listResults = $this->restProxy->listBlobs($container);
                 $blobs = $listResults->getBlobs();
                 foreach($blobs as $blob)  {
                     try
                     {
-                        $this->wrapper->deleteBlob($container, $blob->getName());
+                        $this->restProxy->deleteBlob($container, $blob->getName());
                     }
                     catch (\Exception $e)
                     {
@@ -94,7 +94,7 @@ class BlobServiceRestProxyTestBase extends ServiceRestProxyTestBase
 
     public function deleteContainer($containerName)
     {
-        $this->wrapper->deleteContainer($containerName);
+        $this->restProxy->deleteContainer($containerName);
     }
 
     public function deleteContainers($containerList, $containerPrefix = null) {
@@ -113,7 +113,7 @@ class BlobServiceRestProxyTestBase extends ServiceRestProxyTestBase
             $opts->setPrefix($containerPrefix);
         }
 
-        $list = $this->wrapper->listContainers($opts);
+        $list = $this->restProxy->listContainers($opts);
         foreach($list->getContainers() as $item)  {
             array_push($result, $item->getName());
         }

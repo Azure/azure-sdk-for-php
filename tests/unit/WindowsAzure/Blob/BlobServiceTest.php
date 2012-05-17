@@ -54,10 +54,10 @@ class BlobServiceTest extends \PHPUnit_Framework_TestCase
         $config->setProperty(BlobSettings::URI, $uri);
         
         // Test
-        $blobWrapper = BlobService::create($config);
+        $blobRestProxy = BlobService::create($config);
         
         // Assert
-        $this->assertInstanceOf('WindowsAzure\Blob\Internal\IBlob', $blobWrapper);
+        $this->assertInstanceOf('WindowsAzure\Blob\Internal\IBlob', $blobRestProxy);
     }
 }
 

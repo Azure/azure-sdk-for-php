@@ -62,7 +62,7 @@ class WrapRestProxyTest extends WrapRestProxyTestBase
             .TestResources::serviceBusNameSpace()
             .'.servicebus.windows.net';
         
-        $wrapAccessTokenResult = $this->wrapper->wrapAccessToken(
+        $wrapAccessTokenResult = $this->restProxy->wrapAccessToken(
             $wrapUri, 
             $wrapUserName, 
             $wrapPassword, 

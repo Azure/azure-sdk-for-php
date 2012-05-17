@@ -50,20 +50,20 @@ class TableServiceRestProxyTestBase extends ServiceRestProxyTestBase
         $config->setProperty(TableSettings::ACCOUNT_KEY, TestResources::accountKey());
         $config->setProperty(TableSettings::ACCOUNT_NAME, TestResources::accountName());        
         $config->setProperty(TableSettings::URI, $tableUri);
-        $tableWrapper = TableService::create($config);
-        parent::__construct($config, $tableWrapper);
+        $tableRestProxy = TableService::create($config);
+        parent::__construct($config, $tableRestProxy);
         $this->_createdTables = array();
     }
 
     public function createTable($tableName, $options = null)
     {
-        $this->wrapper->createTable($tableName, $options);
+        $this->restProxy->createTable($tableName, $options);
         $this->_createdTables[] = $tableName;
     }
     
     public function deleteTable($tableName)
     {
-        $this->wrapper->deleteTable($tableName);
+        $this->restProxy->deleteTable($tableName);
     }
     
     public function safeDeleteTable($tableName)

@@ -57,7 +57,7 @@ class TableServiceFunctionalParametersTest extends FunctionalTestBase {
     */
     public function testGetServicePropertiesNullOptions() {
         try {
-            $this->wrapper->getServiceProperties(null);
+            $this->restProxy->getServiceProperties(null);
             $this->assertFalse(Configuration::isEmulated(), 'Should fail if and only if in emulator');
         }
         catch (ServiceException $e) {
@@ -76,7 +76,7 @@ class TableServiceFunctionalParametersTest extends FunctionalTestBase {
     */
     public function testSetServicePropertiesNullOptions1() {
         try {
-            $this->wrapper->setServiceProperties(new ServiceProperties());
+            $this->restProxy->setServiceProperties(new ServiceProperties());
             $this->fail('Expect default service properties to cause service to error');
         }
         catch (ServiceException $e) {
@@ -89,7 +89,7 @@ class TableServiceFunctionalParametersTest extends FunctionalTestBase {
     */
     public function testSetServicePropertiesNullOptions2() {
         try {
-            $this->wrapper->setServiceProperties(null);
+            $this->restProxy->setServiceProperties(null);
             $this->fail('Expect null service properties to throw');
         }
         catch (\InvalidArgumentException $e) {
@@ -103,7 +103,7 @@ class TableServiceFunctionalParametersTest extends FunctionalTestBase {
     */
     public function testSetServicePropertiesNullOptions3() {
         try {
-            $this->wrapper->setServiceProperties(null, null);
+            $this->restProxy->setServiceProperties(null, null);
             $this->fail('Expect service properties to throw');
         }
         catch (\InvalidArgumentException $e) {
@@ -117,7 +117,7 @@ class TableServiceFunctionalParametersTest extends FunctionalTestBase {
     */
     public function testSetServicePropertiesNullOptions4() {
         try {
-            $this->wrapper->setServiceProperties(new ServiceProperties(), null);
+            $this->restProxy->setServiceProperties(new ServiceProperties(), null);
             $this->fail('Expect default service properties to cause service to error');
         }
         catch (ServiceException $e) {
@@ -129,7 +129,7 @@ class TableServiceFunctionalParametersTest extends FunctionalTestBase {
     * @covers WindowsAzure\Table\Internal\TableRestProxy::queryTables
     */
     public function testQueryTablesNullOptions() {
-        $this->wrapper->queryTables(null);
+        $this->restProxy->queryTables(null);
         $this->assertTrue(true, 'Null options should be fine.');
     }
 
@@ -138,7 +138,7 @@ class TableServiceFunctionalParametersTest extends FunctionalTestBase {
     */
     public function testCreateTableNullOptions() {
         try {
-            $this->wrapper->createTable(null);
+            $this->restProxy->createTable(null);
             $this->fail('Expect null table to throw');
         }
         catch (\InvalidArgumentException $e) {
@@ -152,7 +152,7 @@ class TableServiceFunctionalParametersTest extends FunctionalTestBase {
     */
     public function testDeleteTableNullOptions() {
         try {
-            $this->wrapper->deleteTable(null);
+            $this->restProxy->deleteTable(null);
             $this->fail('Expect null table to throw');
         }
         catch (\InvalidArgumentException $e) {
@@ -166,7 +166,7 @@ class TableServiceFunctionalParametersTest extends FunctionalTestBase {
     */
     public function testGetTableNullOptions() {
         try {
-            $this->wrapper->getTable(null);
+            $this->restProxy->getTable(null);
             $this->fail('Expect null table to throw');
         }
         catch (\InvalidArgumentException $e) {
@@ -183,7 +183,7 @@ class TableServiceFunctionalParametersTest extends FunctionalTestBase {
         $table = TableServiceFunctionalTestData::$TEST_TABLE_NAMES[0];
 
         try {
-            $this->wrapper->insertEntity($table, null);
+            $this->restProxy->insertEntity($table, null);
             $this->fail('Expect null entity to throw');
         }
         catch (\InvalidArgumentException $e) {
@@ -200,7 +200,7 @@ class TableServiceFunctionalParametersTest extends FunctionalTestBase {
         $table = TableServiceFunctionalTestData::$TEST_TABLE_NAMES[0];
 
         try {
-            $this->wrapper->insertEntity(null, null);
+            $this->restProxy->insertEntity(null, null);
             $this->fail('Expect null table and entity to throw');
         }
         catch (\InvalidArgumentException $e) {
@@ -217,7 +217,7 @@ class TableServiceFunctionalParametersTest extends FunctionalTestBase {
         $table = TableServiceFunctionalTestData::$TEST_TABLE_NAMES[0];
 
         try {
-            $this->wrapper->insertEntity(null, new Entity());
+            $this->restProxy->insertEntity(null, new Entity());
             $this->fail('Expect null table to throw');
         }
         catch (\InvalidArgumentException $e) {
@@ -234,7 +234,7 @@ class TableServiceFunctionalParametersTest extends FunctionalTestBase {
         $table = TableServiceFunctionalTestData::$TEST_TABLE_NAMES[0];
 
         try {
-            $this->wrapper->insertEntity($table, null, null);
+            $this->restProxy->insertEntity($table, null, null);
             $this->fail('Expect null entity to throw');
         }
         catch (\InvalidArgumentException $e) {
@@ -251,7 +251,7 @@ class TableServiceFunctionalParametersTest extends FunctionalTestBase {
         $table = TableServiceFunctionalTestData::$TEST_TABLE_NAMES[0];
 
         try {
-            $this->wrapper->insertEntity($table, null, TableServiceFunctionalTestData::getSimpleinsertEntityOptions());
+            $this->restProxy->insertEntity($table, null, TableServiceFunctionalTestData::getSimpleinsertEntityOptions());
             $this->fail('Expect null entity to throw');
         }
         catch (\InvalidArgumentException $e) {
@@ -267,7 +267,7 @@ class TableServiceFunctionalParametersTest extends FunctionalTestBase {
     public function testInsertEntityOptionsNull() {
         $table = TableServiceFunctionalTestData::$TEST_TABLE_NAMES[0];
 
-        $this->wrapper->insertEntity($table, TableServiceFunctionalTestData::getSimpleEntity(), null);
+        $this->restProxy->insertEntity($table, TableServiceFunctionalTestData::getSimpleEntity(), null);
         $this->clearTable($table);
         $this->assertTrue(true, 'Null options should be fine.');
     }
@@ -282,7 +282,7 @@ class TableServiceFunctionalParametersTest extends FunctionalTestBase {
         $e = new Entity();
         $e->setPartitionKey('normalRowKey');
         $e->setRowKey('');
-        $this->wrapper->insertEntity($table, $e);
+        $this->restProxy->insertEntity($table, $e);
         $this->clearTable($table);
         $this->assertTrue(true, 'Should be fine.');
     }
@@ -297,7 +297,7 @@ class TableServiceFunctionalParametersTest extends FunctionalTestBase {
         $e = new Entity();
         $e->setPartitionKey('normalPartitionKey');
         $e->setRowKey('');
-        $this->wrapper->insertEntity($table, $e);
+        $this->restProxy->insertEntity($table, $e);
         $this->clearTable($table);
         $this->assertTrue(true, 'Should be fine.');
     }
@@ -335,7 +335,7 @@ class TableServiceFunctionalParametersTest extends FunctionalTestBase {
 
         $e->addProperty('foo', EdmType::STRING, $k);
 
-        $ret = $this->wrapper->insertEntity($table, $e);
+        $ret = $this->restProxy->insertEntity($table, $e);
         $this->assertNotNull($ret, '$ret');
         $this->assertNotNull($ret->getEntity(), '$ret->getEntity');
 
@@ -352,7 +352,7 @@ class TableServiceFunctionalParametersTest extends FunctionalTestBase {
         $table = TableServiceFunctionalTestData::$TEST_TABLE_NAMES[0];
 
         try {
-            $this->wrapper->getEntity($table, null, TableServiceFunctionalTestData::getNewKey());
+            $this->restProxy->getEntity($table, null, TableServiceFunctionalTestData::getNewKey());
             $this->fail('Expect null options to throw');
         }
         catch (\InvalidArgumentException $e) {
@@ -370,7 +370,7 @@ class TableServiceFunctionalParametersTest extends FunctionalTestBase {
         $table = TableServiceFunctionalTestData::$TEST_TABLE_NAMES[0];
 
         try {
-            $this->wrapper->getEntity($table, TableServiceFunctionalTestData::getNewKey(), null);
+            $this->restProxy->getEntity($table, TableServiceFunctionalTestData::getNewKey(), null);
             $this->assertTrue(true, 'Expect null row key to throw');
         }
         catch (\InvalidArgumentException $e) {
@@ -388,7 +388,7 @@ class TableServiceFunctionalParametersTest extends FunctionalTestBase {
         $table = TableServiceFunctionalTestData::$TEST_TABLE_NAMES[0];
 
         try {
-            $this->wrapper->getEntity($table, null, null);
+            $this->restProxy->getEntity($table, null, null);
             $this->fail('Expect null partition and row keys to throw');
         }
         catch (\InvalidArgumentException $e) {
@@ -405,7 +405,7 @@ class TableServiceFunctionalParametersTest extends FunctionalTestBase {
         $table = TableServiceFunctionalTestData::$TEST_TABLE_NAMES[0];
 
         try {
-            $this->wrapper->getEntity(null, null, null);
+            $this->restProxy->getEntity(null, null, null);
             $this->fail('Expect null table name to throw');
         }
         catch (\InvalidArgumentException $e) {
@@ -422,7 +422,7 @@ class TableServiceFunctionalParametersTest extends FunctionalTestBase {
         $table = TableServiceFunctionalTestData::$TEST_TABLE_NAMES[0];
 
         try {
-            $this->wrapper->getEntity(null, TableServiceFunctionalTestData::getNewKey(), TableServiceFunctionalTestData::getNewKey());
+            $this->restProxy->getEntity(null, TableServiceFunctionalTestData::getNewKey(), TableServiceFunctionalTestData::getNewKey());
             $this->fail('Expect null table name to throw');
         }
         catch (\InvalidArgumentException $e) {
@@ -440,7 +440,7 @@ class TableServiceFunctionalParametersTest extends FunctionalTestBase {
         $table = TableServiceFunctionalTestData::$TEST_TABLE_NAMES[0];
 
         try {
-            $this->wrapper->getEntity($table, null, null, null);
+            $this->restProxy->getEntity($table, null, null, null);
             $this->fail('Expect keys to throw');
         }
         catch (\InvalidArgumentException $e) {
@@ -460,8 +460,8 @@ class TableServiceFunctionalParametersTest extends FunctionalTestBase {
         $ent = TableServiceFunctionalTestData::getSimpleEntity();
 
         try {
-            $this->wrapper->insertEntity($table, $ent);
-            $this->wrapper->getEntity($table, null, null, new TableServiceOptions());
+            $this->restProxy->insertEntity($table, $ent);
+            $this->restProxy->getEntity($table, null, null, new TableServiceOptions());
             $this->fail('Expect null keys to throw');
         }
         catch (\InvalidArgumentException $e) {
@@ -479,8 +479,8 @@ class TableServiceFunctionalParametersTest extends FunctionalTestBase {
         $table = TableServiceFunctionalTestData::$TEST_TABLE_NAMES[0];
         $ent = TableServiceFunctionalTestData::getSimpleEntity();
 
-        $this->wrapper->insertEntity($table, $ent);
-        $this->wrapper->getEntity($table, $ent->getPartitionKey(), $ent->getRowKey(), null);
+        $this->restProxy->insertEntity($table, $ent);
+        $this->restProxy->getEntity($table, $ent->getPartitionKey(), $ent->getRowKey(), null);
         $this->clearTable($table);
         $this->assertTrue(true, 'Null options should be fine.');
     }
@@ -493,7 +493,7 @@ class TableServiceFunctionalParametersTest extends FunctionalTestBase {
         $table = TableServiceFunctionalTestData::$TEST_TABLE_NAMES[0];
 
         try {
-            $this->wrapper->deleteEntity($table, null, TableServiceFunctionalTestData::getNewKey());
+            $this->restProxy->deleteEntity($table, null, TableServiceFunctionalTestData::getNewKey());
             $this->fail('Expect null partition key to throw');
         }
         catch (\InvalidArgumentException $e) {
@@ -511,7 +511,7 @@ class TableServiceFunctionalParametersTest extends FunctionalTestBase {
         $table = TableServiceFunctionalTestData::$TEST_TABLE_NAMES[0];
 
         try {
-            $this->wrapper->deleteEntity($table, TableServiceFunctionalTestData::getNewKey(), null);
+            $this->restProxy->deleteEntity($table, TableServiceFunctionalTestData::getNewKey(), null);
             $this->fail('Expect null row key to throw');
         }
         catch (\InvalidArgumentException $e) {
@@ -529,7 +529,7 @@ class TableServiceFunctionalParametersTest extends FunctionalTestBase {
         $table = TableServiceFunctionalTestData::$TEST_TABLE_NAMES[0];
 
         try {
-            $this->wrapper->deleteEntity($table, null, null);
+            $this->restProxy->deleteEntity($table, null, null);
             $this->fail('Expect null keys to throw');
         }
         catch (\InvalidArgumentException $e) {
@@ -546,7 +546,7 @@ class TableServiceFunctionalParametersTest extends FunctionalTestBase {
         $table = TableServiceFunctionalTestData::$TEST_TABLE_NAMES[0];
 
         try {
-            $this->wrapper->deleteEntity(null, null, null);
+            $this->restProxy->deleteEntity(null, null, null);
             $this->fail('Expect null table name to throw');
         }
         catch (\InvalidArgumentException $e) {
@@ -563,7 +563,7 @@ class TableServiceFunctionalParametersTest extends FunctionalTestBase {
         $table = TableServiceFunctionalTestData::$TEST_TABLE_NAMES[0];
 
         try {
-            $this->wrapper->deleteEntity(null, TableServiceFunctionalTestData::getNewKey(), TableServiceFunctionalTestData::getNewKey());
+            $this->restProxy->deleteEntity(null, TableServiceFunctionalTestData::getNewKey(), TableServiceFunctionalTestData::getNewKey());
             $this->fail('Expect null table name to throw');
         }
         catch (\InvalidArgumentException $e) {
@@ -581,7 +581,7 @@ class TableServiceFunctionalParametersTest extends FunctionalTestBase {
         $table = TableServiceFunctionalTestData::$TEST_TABLE_NAMES[0];
 
         try {
-            $this->wrapper->deleteEntity($table, null, null, null);
+            $this->restProxy->deleteEntity($table, null, null, null);
             $this->fail('Expect null keys to throw');
         }
         catch (\InvalidArgumentException $e) {
@@ -601,8 +601,8 @@ class TableServiceFunctionalParametersTest extends FunctionalTestBase {
         $ent = TableServiceFunctionalTestData::getSimpleEntity();
 
         try {
-            $this->wrapper->insertEntity($table, $ent);
-            $this->wrapper->deleteEntity($table, null, null, new DeleteEntityOptions());
+            $this->restProxy->insertEntity($table, $ent);
+            $this->restProxy->deleteEntity($table, null, null, new DeleteEntityOptions());
             $this->fail('Expect null keys to throw');
         }
         catch (\InvalidArgumentException $e) {
@@ -620,8 +620,8 @@ class TableServiceFunctionalParametersTest extends FunctionalTestBase {
         $table = TableServiceFunctionalTestData::$TEST_TABLE_NAMES[0];
         $ent = TableServiceFunctionalTestData::getSimpleEntity();
 
-        $this->wrapper->insertEntity($table, $ent);
-        $this->wrapper->deleteEntity($table, $ent->getPartitionKey(), $ent->getRowKey(), null);
+        $this->restProxy->insertEntity($table, $ent);
+        $this->restProxy->deleteEntity($table, $ent->getPartitionKey(), $ent->getRowKey(), null);
         $this->assertTrue(true, 'Expect null options to be fine');
         $this->clearTable($table);
     }
@@ -651,31 +651,31 @@ class TableServiceFunctionalParametersTest extends FunctionalTestBase {
         $e = new Entity();
         $e->setPartitionKey('partition\'Key\'');
         $e->setRowKey('niceKey');
-        $this->wrapper->insertEntity($table, $e);
-        $this->wrapper->deleteEntity($table, $e->getPartitionKey(), $e->getRowKey());
+        $this->restProxy->insertEntity($table, $e);
+        $this->restProxy->deleteEntity($table, $e->getPartitionKey(), $e->getRowKey());
         $qopts = new QueryEntitiesOptions();
         $qopts->setFilter(Filter::applyEq(Filter::applyPropertyName('PartitionKey'), Filter::applyConstant($e->getRowKey(), EdmType::STRING)));
-        $queryres = $this->wrapper->queryEntities($table, $qopts);
+        $queryres = $this->restProxy->queryEntities($table, $qopts);
         $this->assertEquals(0, count($queryres->getEntities()), 'entities returned');
 
         $e = new Entity();
         $e->setPartitionKey('partition Key');
         $e->setRowKey('niceKey');
-        $this->wrapper->insertEntity($table, $e);
-        $this->wrapper->deleteEntity($table, $e->getPartitionKey(), $e->getRowKey());
+        $this->restProxy->insertEntity($table, $e);
+        $this->restProxy->deleteEntity($table, $e->getPartitionKey(), $e->getRowKey());
         $qopts = new QueryEntitiesOptions();
         $qopts->setFilter(Filter::applyEq(Filter::applyPropertyName('PartitionKey'), Filter::applyConstant($e->getRowKey(), EdmType::STRING)));
-        $queryres = $this->wrapper->queryEntities($table, $qopts);
+        $queryres = $this->restProxy->queryEntities($table, $qopts);
         $this->assertEquals(0, count($queryres->getEntities()), 'entities returned');
 
         $e = new Entity();
         $e->setPartitionKey('partition '. TableServiceFunctionalTestData::getUnicodeString());
         $e->setRowKey('niceKey');
-        $this->wrapper->insertEntity($table, $e);
-        $this->wrapper->deleteEntity($table, $e->getPartitionKey(), $e->getRowKey());
+        $this->restProxy->insertEntity($table, $e);
+        $this->restProxy->deleteEntity($table, $e->getPartitionKey(), $e->getRowKey());
         $qopts = new QueryEntitiesOptions();
         $qopts->setFilter(Filter::applyEq(Filter::applyPropertyName('PartitionKey'), Filter::applyConstant($e->getRowKey(), EdmType::STRING)));
-        $queryres = $this->wrapper->queryEntities($table, $qopts);
+        $queryres = $this->restProxy->queryEntities($table, $qopts);
         $this->assertEquals(0, count($queryres->getEntities()), 'entities returned');
 
         $this->clearTable($table);
@@ -706,31 +706,31 @@ class TableServiceFunctionalParametersTest extends FunctionalTestBase {
         $e = new Entity();
         $e->setRowKey('row\'Key\'');
         $e->setPartitionKey('niceKey');
-        $this->wrapper->insertEntity($table, $e);
-        $this->wrapper->deleteEntity($table, $e->getPartitionKey(), $e->getRowKey());
+        $this->restProxy->insertEntity($table, $e);
+        $this->restProxy->deleteEntity($table, $e->getPartitionKey(), $e->getRowKey());
         $qopts = new QueryEntitiesOptions();
         $qopts->setFilter(Filter::applyEq(Filter::applyPropertyName('RowKey'), Filter::applyConstant($e->getRowKey(), EdmType::STRING)));
-        $queryres = $this->wrapper->queryEntities($table, $qopts);
+        $queryres = $this->restProxy->queryEntities($table, $qopts);
         $this->assertEquals(0, count($queryres->getEntities()), 'entities returned');
 
         $e = new Entity();
         $e->setRowKey('row Key');
         $e->setPartitionKey('niceKey');
-        $this->wrapper->insertEntity($table, $e);
-        $this->wrapper->deleteEntity($table, $e->getPartitionKey(), $e->getRowKey());
+        $this->restProxy->insertEntity($table, $e);
+        $this->restProxy->deleteEntity($table, $e->getPartitionKey(), $e->getRowKey());
         $qopts = new QueryEntitiesOptions();
         $qopts->setFilter(Filter::applyEq(Filter::applyPropertyName('RowKey'), Filter::applyConstant($e->getRowKey(), EdmType::STRING)));
-        $queryres = $this->wrapper->queryEntities($table, $qopts);
+        $queryres = $this->restProxy->queryEntities($table, $qopts);
         $this->assertEquals(0, count($queryres->getEntities()), 'entities returned');
 
         $e = new Entity();
         $e->setRowKey('row ' . TableServiceFunctionalTestData::getUnicodeString());
         $e->setPartitionKey('niceKey');
-        $this->wrapper->insertEntity($table, $e);
-        $this->wrapper->deleteEntity($table, $e->getPartitionKey(), $e->getRowKey());
+        $this->restProxy->insertEntity($table, $e);
+        $this->restProxy->deleteEntity($table, $e->getPartitionKey(), $e->getRowKey());
         $qopts = new QueryEntitiesOptions();
         $qopts->setFilter(Filter::applyEq(Filter::applyPropertyName('RowKey'), Filter::applyConstant($e->getRowKey(), EdmType::STRING)));
-        $queryres = $this->wrapper->queryEntities($table, $qopts);
+        $queryres = $this->restProxy->queryEntities($table, $qopts);
         $this->assertEquals(0, count($queryres->getEntities()), 'entities returned');
 
         $this->clearTable($table);
@@ -743,7 +743,7 @@ class TableServiceFunctionalParametersTest extends FunctionalTestBase {
         $table = TableServiceFunctionalTestData::$TEST_TABLE_NAMES[0];
 
         try {
-            $this->wrapper->mergeEntity($table, null);
+            $this->restProxy->mergeEntity($table, null);
             $this->assertTrue('Expect null entity to throw');
         }
         catch (\InvalidArgumentException $e) {
@@ -760,7 +760,7 @@ class TableServiceFunctionalParametersTest extends FunctionalTestBase {
         $table = TableServiceFunctionalTestData::$TEST_TABLE_NAMES[0];
 
         try {
-            $this->wrapper->mergeEntity(null, null);
+            $this->restProxy->mergeEntity(null, null);
             $this->fail('Expect null table name and entity to throw');
         }
         catch (\InvalidArgumentException $e) {
@@ -777,7 +777,7 @@ class TableServiceFunctionalParametersTest extends FunctionalTestBase {
         $table = TableServiceFunctionalTestData::$TEST_TABLE_NAMES[0];
 
         try {
-            $this->wrapper->mergeEntity(null, TableServiceFunctionalTestData::getSimpleEntity());
+            $this->restProxy->mergeEntity(null, TableServiceFunctionalTestData::getSimpleEntity());
             $this->fail('Expect null table name to throw');
         }
         catch (\InvalidArgumentException $e) {
@@ -794,7 +794,7 @@ class TableServiceFunctionalParametersTest extends FunctionalTestBase {
         $table = TableServiceFunctionalTestData::$TEST_TABLE_NAMES[0];
 
         try {
-            $this->wrapper->mergeEntity($table, null, null);
+            $this->restProxy->mergeEntity($table, null, null);
             $this->fail('Expect null entity to throw');
         }
         catch (\InvalidArgumentException $e) {
@@ -811,7 +811,7 @@ class TableServiceFunctionalParametersTest extends FunctionalTestBase {
         $table = TableServiceFunctionalTestData::$TEST_TABLE_NAMES[0];
 
         try {
-            $this->wrapper->mergeEntity($table, null, TableServiceFunctionalTestData::getSimpleinsertEntityOptions());
+            $this->restProxy->mergeEntity($table, null, TableServiceFunctionalTestData::getSimpleinsertEntityOptions());
             $this->fail('Expect null entity to throw');
         }
         catch (\InvalidArgumentException $e) {
@@ -829,7 +829,7 @@ class TableServiceFunctionalParametersTest extends FunctionalTestBase {
         $table = TableServiceFunctionalTestData::$TEST_TABLE_NAMES[0];
 
         try {
-            $this->wrapper->mergeEntity($table, TableServiceFunctionalTestData::getSimpleEntity(), null);
+            $this->restProxy->mergeEntity($table, TableServiceFunctionalTestData::getSimpleEntity(), null);
             $this->fail('Expect 404 when merging with non-existant entity');
         }
         catch (ServiceException $e) {
@@ -845,7 +845,7 @@ class TableServiceFunctionalParametersTest extends FunctionalTestBase {
         $table = TableServiceFunctionalTestData::$TEST_TABLE_NAMES[0];
 
         try {
-            $this->wrapper->updateEntity($table, null);
+            $this->restProxy->updateEntity($table, null);
             $this->fail('Expect null entity to throw');
         }
         catch (\InvalidArgumentException $e) {
@@ -862,7 +862,7 @@ class TableServiceFunctionalParametersTest extends FunctionalTestBase {
         $table = TableServiceFunctionalTestData::$TEST_TABLE_NAMES[0];
 
         try {
-            $this->wrapper->updateEntity(null, null);
+            $this->restProxy->updateEntity(null, null);
             $this->fail('Expect null table name and entity to throw');
         }
         catch (\InvalidArgumentException $e) {
@@ -879,7 +879,7 @@ class TableServiceFunctionalParametersTest extends FunctionalTestBase {
         $table = TableServiceFunctionalTestData::$TEST_TABLE_NAMES[0];
 
         try {
-            $this->wrapper->updateEntity(null, TableServiceFunctionalTestData::getSimpleEntity());
+            $this->restProxy->updateEntity(null, TableServiceFunctionalTestData::getSimpleEntity());
             $this->fail('Expect null options to throw');
         }
         catch (\InvalidArgumentException $e) {
@@ -896,7 +896,7 @@ class TableServiceFunctionalParametersTest extends FunctionalTestBase {
         $table = TableServiceFunctionalTestData::$TEST_TABLE_NAMES[0];
 
         try {
-            $this->wrapper->updateEntity($table, null, null);
+            $this->restProxy->updateEntity($table, null, null);
             $this->fail('Expect null entity to throw');
         }
         catch (\InvalidArgumentException $e) {
@@ -913,7 +913,7 @@ class TableServiceFunctionalParametersTest extends FunctionalTestBase {
         $table = TableServiceFunctionalTestData::$TEST_TABLE_NAMES[0];
 
         try {
-            $this->wrapper->updateEntity($table, null, TableServiceFunctionalTestData::getSimpleinsertEntityOptions());
+            $this->restProxy->updateEntity($table, null, TableServiceFunctionalTestData::getSimpleinsertEntityOptions());
             $this->fail('Expect null entity to throw');
         }
         catch (\InvalidArgumentException $e) {
@@ -931,7 +931,7 @@ class TableServiceFunctionalParametersTest extends FunctionalTestBase {
         $table = TableServiceFunctionalTestData::$TEST_TABLE_NAMES[0];
 
         try {
-            $this->wrapper->updateEntity($table, TableServiceFunctionalTestData::getSimpleEntity(), null);
+            $this->restProxy->updateEntity($table, TableServiceFunctionalTestData::getSimpleEntity(), null);
             $this->fail('Expect 404 when updating non-existant entity');
         }
         catch (ServiceException $e) {
@@ -947,7 +947,7 @@ class TableServiceFunctionalParametersTest extends FunctionalTestBase {
         $table = TableServiceFunctionalTestData::$TEST_TABLE_NAMES[0];
 
         try {
-            $this->wrapper->insertOrMergeEntity($table, null);
+            $this->restProxy->insertOrMergeEntity($table, null);
             $this->fail('Expect to throw for null entity');
         }
         catch (\InvalidArgumentException $e) {
@@ -964,7 +964,7 @@ class TableServiceFunctionalParametersTest extends FunctionalTestBase {
         $table = TableServiceFunctionalTestData::$TEST_TABLE_NAMES[0];
 
         try {
-            $this->wrapper->insertOrMergeEntity(null, null);
+            $this->restProxy->insertOrMergeEntity(null, null);
             $this->fail('Expect to throw for null table name and entity');
         }
         catch (\InvalidArgumentException $e) {
@@ -981,7 +981,7 @@ class TableServiceFunctionalParametersTest extends FunctionalTestBase {
         $table = TableServiceFunctionalTestData::$TEST_TABLE_NAMES[0];
 
         try {
-            $this->wrapper->insertOrMergeEntity(null, new Entity());
+            $this->restProxy->insertOrMergeEntity(null, new Entity());
             $this->fail('Expect to throw for null table name');
         }
         catch (\InvalidArgumentException $e) {
@@ -998,7 +998,7 @@ class TableServiceFunctionalParametersTest extends FunctionalTestBase {
         $table = TableServiceFunctionalTestData::$TEST_TABLE_NAMES[0];
 
         try {
-            $this->wrapper->insertOrMergeEntity($table, null, null);
+            $this->restProxy->insertOrMergeEntity($table, null, null);
             $this->fail('Expect to throw for null entity');
         }
         catch (\InvalidArgumentException $e) {
@@ -1015,7 +1015,7 @@ class TableServiceFunctionalParametersTest extends FunctionalTestBase {
         $table = TableServiceFunctionalTestData::$TEST_TABLE_NAMES[0];
 
         try {
-            $this->wrapper->insertOrMergeEntity($table, null, TableServiceFunctionalTestData::getSimpleinsertEntityOptions());
+            $this->restProxy->insertOrMergeEntity($table, null, TableServiceFunctionalTestData::getSimpleinsertEntityOptions());
             $this->fail('Expect to throw for null entity');
         }
         catch (\InvalidArgumentException $e) {
@@ -1032,7 +1032,7 @@ class TableServiceFunctionalParametersTest extends FunctionalTestBase {
         $table = TableServiceFunctionalTestData::$TEST_TABLE_NAMES[0];
 
         try {
-            $this->wrapper->insertOrMergeEntity($table, TableServiceFunctionalTestData::getSimpleEntity(), null);
+            $this->restProxy->insertOrMergeEntity($table, TableServiceFunctionalTestData::getSimpleEntity(), null);
             $this->assertFalse(Configuration::isEmulated(), 'Should fail if and only if in emulator');
         }
         catch (ServiceException $e) {
@@ -1051,7 +1051,7 @@ class TableServiceFunctionalParametersTest extends FunctionalTestBase {
         $table = TableServiceFunctionalTestData::$TEST_TABLE_NAMES[0];
 
         try {
-            $this->wrapper->insertOrReplaceEntity($table, null);
+            $this->restProxy->insertOrReplaceEntity($table, null);
             $this->fail('Expect to throw for null entity');
         }
         catch (\InvalidArgumentException $e) {
@@ -1068,7 +1068,7 @@ class TableServiceFunctionalParametersTest extends FunctionalTestBase {
         $table = TableServiceFunctionalTestData::$TEST_TABLE_NAMES[0];
 
         try {
-            $this->wrapper->insertOrReplaceEntity(null, null);
+            $this->restProxy->insertOrReplaceEntity(null, null);
             $this->fail('Expect to throw for null table name and entity');
         }
         catch (\InvalidArgumentException $e) {
@@ -1085,7 +1085,7 @@ class TableServiceFunctionalParametersTest extends FunctionalTestBase {
         $table = TableServiceFunctionalTestData::$TEST_TABLE_NAMES[0];
 
         try {
-            $this->wrapper->insertOrReplaceEntity(null, new Entity());
+            $this->restProxy->insertOrReplaceEntity(null, new Entity());
             $this->fail('Expect to throw for null table name');
         }
         catch (\InvalidArgumentException $e) {
@@ -1102,7 +1102,7 @@ class TableServiceFunctionalParametersTest extends FunctionalTestBase {
         $table = TableServiceFunctionalTestData::$TEST_TABLE_NAMES[0];
 
         try {
-            $this->wrapper->insertOrReplaceEntity($table, null, null);
+            $this->restProxy->insertOrReplaceEntity($table, null, null);
             $this->fail('Expect to throw for null entity');
         }
         catch (\InvalidArgumentException $e) {
@@ -1119,7 +1119,7 @@ class TableServiceFunctionalParametersTest extends FunctionalTestBase {
         $table = TableServiceFunctionalTestData::$TEST_TABLE_NAMES[0];
 
         try {
-            $this->wrapper->insertOrReplaceEntity($table, null, TableServiceFunctionalTestData::getSimpleinsertEntityOptions());
+            $this->restProxy->insertOrReplaceEntity($table, null, TableServiceFunctionalTestData::getSimpleinsertEntityOptions());
             $this->fail('Expect to throw for null entity');
         }
         catch (\InvalidArgumentException $e) {
@@ -1136,7 +1136,7 @@ class TableServiceFunctionalParametersTest extends FunctionalTestBase {
         $table = TableServiceFunctionalTestData::$TEST_TABLE_NAMES[0];
 
         try {
-            $this->wrapper->insertOrReplaceEntity($table, TableServiceFunctionalTestData::getSimpleEntity(), null);
+            $this->restProxy->insertOrReplaceEntity($table, TableServiceFunctionalTestData::getSimpleEntity(), null);
             $this->assertFalse(Configuration::isEmulated(), 'Should fail if and only if in emulator');
         }
         catch (ServiceException $e) {
@@ -1155,7 +1155,7 @@ class TableServiceFunctionalParametersTest extends FunctionalTestBase {
         $table = TableServiceFunctionalTestData::$TEST_TABLE_NAMES[0];
 
         try {
-            $this->wrapper->queryEntities(null);
+            $this->restProxy->queryEntities(null);
             $this->fail('Expect to throw for null table name');
         }
         catch (\InvalidArgumentException $e) {
@@ -1172,7 +1172,7 @@ class TableServiceFunctionalParametersTest extends FunctionalTestBase {
         $table = TableServiceFunctionalTestData::$TEST_TABLE_NAMES[0];
 
         try {
-            $this->wrapper->queryEntities(null, null);
+            $this->restProxy->queryEntities(null, null);
             $this->fail('Expect to throw for null table name');
         }
         catch (\InvalidArgumentException $e) {
@@ -1189,7 +1189,7 @@ class TableServiceFunctionalParametersTest extends FunctionalTestBase {
         $table = TableServiceFunctionalTestData::$TEST_TABLE_NAMES[0];
 
         try {
-            $this->wrapper->queryEntities(null, new QueryEntitiesOptions());
+            $this->restProxy->queryEntities(null, new QueryEntitiesOptions());
             $this->fail('Expect to throw for null table name');
         }
         catch (\InvalidArgumentException $e) {
@@ -1205,7 +1205,7 @@ class TableServiceFunctionalParametersTest extends FunctionalTestBase {
     public function testQueryEntitiesOptionsNull() {
         $table = TableServiceFunctionalTestData::$TEST_TABLE_NAMES[0];
 
-        $this->wrapper->queryEntities($table, null);
+        $this->restProxy->queryEntities($table, null);
         $this->clearTable($table);
         $this->assertTrue(true, 'Null options should be fine.');
     }

@@ -70,8 +70,8 @@ class WrapRestProxyTestBase extends ServiceRestProxyTestBase
             TestResources::wrapPassword()
         );
         
-        $wrapWrapper = WrapService::create($config);
-        parent::__construct($config, $wrapWrapper);
+        $wrapRestProxy = WrapService::create($config);
+        parent::__construct($config, $wrapRestProxy);
     }
     
 }

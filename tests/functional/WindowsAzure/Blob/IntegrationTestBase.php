@@ -35,6 +35,6 @@ class IntegrationTestBase extends BlobServiceRestProxyTestBase {
     {
         parent::__construct();
         $fiddlerFilter = new FiddlerFilter();
-        $this->wrapper = $this->wrapper->withFilter($fiddlerFilter);
+        $this->restProxy = $this->restProxy->withFilter($fiddlerFilter);
     }
 }

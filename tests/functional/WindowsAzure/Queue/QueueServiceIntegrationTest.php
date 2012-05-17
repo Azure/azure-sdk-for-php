@@ -97,7 +97,7 @@ class QueueServiceIntegrationTest extends IntegrationTestBase {
         $containers = self::listQueues($prefix);
         foreach($list as $item)  {
             if (!in_array($item, $containers)) {
-                $this->wrapper->createQueue($item);
+                $this->restProxy->createQueue($item);
             }
         }
     }
@@ -109,7 +109,7 @@ class QueueServiceIntegrationTest extends IntegrationTestBase {
         $containers = self::listQueues($prefix);
         foreach($list as $item)  {
             if (in_array($item, $containers)) {
-                $this->wrapper->deleteQueue($item);
+                $this->restProxy->deleteQueue($item);
             }
         }
     }
@@ -121,7 +121,7 @@ class QueueServiceIntegrationTest extends IntegrationTestBase {
         $result = array();
         $opts = new ListQueuesOptions();
         $opts->setPrefix($prefix);
-        $list = $this->wrapper->listQueues($opts);
+        $list = $this->restProxy->listQueues($opts);
         foreach($list->getQueues() as $item)  {
             array_push($result, $item->getName());
         }
@@ -137,7 +137,7 @@ class QueueServiceIntegrationTest extends IntegrationTestBase {
         // Act
         $shouldReturn = false;
         try {
-            $props = $this->wrapper->getServiceProperties()->getValue();
+            $props = $this->restProxy->getServiceProperties()->getValue();
             $this->assertFalse(Configuration::isEmulated(), 'Should succeed when not running in emulator');
         } catch (ServiceException $e) {
             // Expect failure in emulator, as v1.6 doesn't support this method
@@ -169,7 +169,7 @@ class QueueServiceIntegrationTest extends IntegrationTestBase {
         // Act
         $shouldReturn = false;
         try {
-            $props = $this->wrapper->getServiceProperties()->getValue();
+            $props = $this->restProxy->getServiceProperties()->getValue();
             $this->assertFalse(Configuration::isEmulated(), 'Should succeed when not running in emulator');
         } catch (ServiceException $e) {
             // Expect failure in emulator, as v1.6 doesn't support this method
@@ -183,9 +183,9 @@ class QueueServiceIntegrationTest extends IntegrationTestBase {
         }
 
         $props->getLogging()->setRead(true);
-        $this->wrapper->setServiceProperties($props);
+        $this->restProxy->setServiceProperties($props);
 
-        $props = $this->wrapper->getServiceProperties()->getValue();
+        $props = $this->restProxy->getServiceProperties()->getValue();
 
         // Assert
         $this->assertNotNull($props, '$props');
@@ -206,9 +206,9 @@ class QueueServiceIntegrationTest extends IntegrationTestBase {
         // Arrange
 
         // Act
-        $this->wrapper->createQueue(self::$CREATABLE_QUEUE_1);
-        $result = $this->wrapper->getQueueMetadata(self::$CREATABLE_QUEUE_1);
-        $this->wrapper->deleteQueue(self::$CREATABLE_QUEUE_1);
+        $this->restProxy->createQueue(self::$CREATABLE_QUEUE_1);
+        $result = $this->restProxy->getQueueMetadata(self::$CREATABLE_QUEUE_1);
+        $this->restProxy->deleteQueue(self::$CREATABLE_QUEUE_1);
 
         // Assert
         $this->assertNotNull($result, 'result');
@@ -229,9 +229,9 @@ class QueueServiceIntegrationTest extends IntegrationTestBase {
         $opts = new CreateQueueOptions();
         $opts->addMetadata('foo', 'bar');
         $opts->addMetadata('test', 'blah');
-        $this->wrapper->createQueue(self::$CREATABLE_QUEUE_2, $opts);
-        $result = $this->wrapper->getQueueMetadata(self::$CREATABLE_QUEUE_2);
-        $this->wrapper->deleteQueue(self::$CREATABLE_QUEUE_2);
+        $this->restProxy->createQueue(self::$CREATABLE_QUEUE_2, $opts);
+        $result = $this->restProxy->getQueueMetadata(self::$CREATABLE_QUEUE_2);
+        $this->restProxy->deleteQueue(self::$CREATABLE_QUEUE_2);
 
         // Assert
         $this->assertNotNull($result, '$result');
@@ -250,7 +250,7 @@ class QueueServiceIntegrationTest extends IntegrationTestBase {
         // Arrange
 
         // Act
-        $result = $this->wrapper->listQueues();
+        $result = $this->restProxy->listQueues();
 
         // Assert
         $this->assertNotNull($result, '$result');
@@ -278,13 +278,13 @@ class QueueServiceIntegrationTest extends IntegrationTestBase {
         $opts->setMaxResults('3');
         $opts->setIncludeMetadata(true);
         $opts->setPrefix(self::$testQueuesPrefix);
-        $result = $this->wrapper->listQueues($opts);
+        $result = $this->restProxy->listQueues($opts);
 
         $opts = new ListQueuesOptions();
         $opts->setMarker($result->getNextMarker());
         $opts->setIncludeMetadata(false);
         $opts->setPrefix(self::$testQueuesPrefix);
-        $result2 = $this->wrapper->listQueues($opts);
+        $result2 = $this->restProxy->listQueues($opts);
 
         // Assert
         $this->assertNotNull($result, '$result');
@@ -328,17 +328,17 @@ class QueueServiceIntegrationTest extends IntegrationTestBase {
         // Arrange
 
         // Act
-        $this->wrapper->createQueue(self::$CREATABLE_QUEUE_3);
+        $this->restProxy->createQueue(self::$CREATABLE_QUEUE_3);
 
         $metadata = array(
             'foo' => 'bar',
             'test' => 'blah',
             );
-        $this->wrapper->setQueueMetadata(self::$CREATABLE_QUEUE_3, $metadata);
+        $this->restProxy->setQueueMetadata(self::$CREATABLE_QUEUE_3, $metadata);
 
-        $result = $this->wrapper->getQueueMetadata(self::$CREATABLE_QUEUE_3);
+        $result = $this->restProxy->getQueueMetadata(self::$CREATABLE_QUEUE_3);
 
-        $this->wrapper->deleteQueue(self::$CREATABLE_QUEUE_3);
+        $this->restProxy->deleteQueue(self::$CREATABLE_QUEUE_3);
 
         // Assert
         $this->assertNotNull($result, '$result');
@@ -357,10 +357,10 @@ class QueueServiceIntegrationTest extends IntegrationTestBase {
         // Arrange
 
         // Act
-        $this->wrapper->createMessage(self::$TEST_QUEUE_FOR_MESSAGES, 'message1');
-        $this->wrapper->createMessage(self::$TEST_QUEUE_FOR_MESSAGES, 'message2');
-        $this->wrapper->createMessage(self::$TEST_QUEUE_FOR_MESSAGES, 'message3');
-        $this->wrapper->createMessage(self::$TEST_QUEUE_FOR_MESSAGES, 'message4');
+        $this->restProxy->createMessage(self::$TEST_QUEUE_FOR_MESSAGES, 'message1');
+        $this->restProxy->createMessage(self::$TEST_QUEUE_FOR_MESSAGES, 'message2');
+        $this->restProxy->createMessage(self::$TEST_QUEUE_FOR_MESSAGES, 'message3');
+        $this->restProxy->createMessage(self::$TEST_QUEUE_FOR_MESSAGES, 'message4');
 
         // Assert
         $this->assertTrue(true, 'if get there, it is working');
@@ -376,11 +376,11 @@ class QueueServiceIntegrationTest extends IntegrationTestBase {
         $year2010->setDate(2010, 1, 1);
 
         // Act
-        $this->wrapper->createMessage(self::$TEST_QUEUE_FOR_MESSAGES_2, 'message1');
-        $this->wrapper->createMessage(self::$TEST_QUEUE_FOR_MESSAGES_2, 'message2');
-        $this->wrapper->createMessage(self::$TEST_QUEUE_FOR_MESSAGES_2, 'message3');
-        $this->wrapper->createMessage(self::$TEST_QUEUE_FOR_MESSAGES_2, 'message4');
-        $result = $this->wrapper->listMessages(self::$TEST_QUEUE_FOR_MESSAGES_2);
+        $this->restProxy->createMessage(self::$TEST_QUEUE_FOR_MESSAGES_2, 'message1');
+        $this->restProxy->createMessage(self::$TEST_QUEUE_FOR_MESSAGES_2, 'message2');
+        $this->restProxy->createMessage(self::$TEST_QUEUE_FOR_MESSAGES_2, 'message3');
+        $this->restProxy->createMessage(self::$TEST_QUEUE_FOR_MESSAGES_2, 'message4');
+        $result = $this->restProxy->listMessages(self::$TEST_QUEUE_FOR_MESSAGES_2);
 
         // Assert
         $this->assertNotNull($result, '$result');
@@ -414,14 +414,14 @@ class QueueServiceIntegrationTest extends IntegrationTestBase {
         $year2010->setDate(2010, 1, 1);
 
         // Act
-        $this->wrapper->createMessage(self::$TEST_QUEUE_FOR_MESSAGES_3, 'message1');
-        $this->wrapper->createMessage(self::$TEST_QUEUE_FOR_MESSAGES_3, 'message2');
-        $this->wrapper->createMessage(self::$TEST_QUEUE_FOR_MESSAGES_3, 'message3');
-        $this->wrapper->createMessage(self::$TEST_QUEUE_FOR_MESSAGES_3, 'message4');
+        $this->restProxy->createMessage(self::$TEST_QUEUE_FOR_MESSAGES_3, 'message1');
+        $this->restProxy->createMessage(self::$TEST_QUEUE_FOR_MESSAGES_3, 'message2');
+        $this->restProxy->createMessage(self::$TEST_QUEUE_FOR_MESSAGES_3, 'message3');
+        $this->restProxy->createMessage(self::$TEST_QUEUE_FOR_MESSAGES_3, 'message4');
         $opts = new ListMessagesOptions();
         $opts->setNumberOfMessages(4);
         $opts->setVisibilityTimeoutInSeconds(20);
-        $result = $this->wrapper->listMessages(self::$TEST_QUEUE_FOR_MESSAGES_3, $opts);
+        $result = $this->restProxy->listMessages(self::$TEST_QUEUE_FOR_MESSAGES_3, $opts);
 
         // Assert
         $this->assertNotNull($result, '$result');
@@ -457,11 +457,11 @@ class QueueServiceIntegrationTest extends IntegrationTestBase {
         $year2010->setDate(2010, 1, 1);
 
         // Act
-        $this->wrapper->createMessage(self::$TEST_QUEUE_FOR_MESSAGES_4, 'message1');
-        $this->wrapper->createMessage(self::$TEST_QUEUE_FOR_MESSAGES_4, 'message2');
-        $this->wrapper->createMessage(self::$TEST_QUEUE_FOR_MESSAGES_4, 'message3');
-        $this->wrapper->createMessage(self::$TEST_QUEUE_FOR_MESSAGES_4, 'message4');
-        $result = $this->wrapper->peekMessages(self::$TEST_QUEUE_FOR_MESSAGES_4);
+        $this->restProxy->createMessage(self::$TEST_QUEUE_FOR_MESSAGES_4, 'message1');
+        $this->restProxy->createMessage(self::$TEST_QUEUE_FOR_MESSAGES_4, 'message2');
+        $this->restProxy->createMessage(self::$TEST_QUEUE_FOR_MESSAGES_4, 'message3');
+        $this->restProxy->createMessage(self::$TEST_QUEUE_FOR_MESSAGES_4, 'message4');
+        $result = $this->restProxy->peekMessages(self::$TEST_QUEUE_FOR_MESSAGES_4);
 
         // Assert
         $this->assertNotNull($result, '$result');
@@ -491,13 +491,13 @@ class QueueServiceIntegrationTest extends IntegrationTestBase {
         $year2010->setDate(2010, 1, 1);
 
         // Act
-        $this->wrapper->createMessage(self::$TEST_QUEUE_FOR_MESSAGES_5, 'message1');
-        $this->wrapper->createMessage(self::$TEST_QUEUE_FOR_MESSAGES_5, 'message2');
-        $this->wrapper->createMessage(self::$TEST_QUEUE_FOR_MESSAGES_5, 'message3');
-        $this->wrapper->createMessage(self::$TEST_QUEUE_FOR_MESSAGES_5, 'message4');
+        $this->restProxy->createMessage(self::$TEST_QUEUE_FOR_MESSAGES_5, 'message1');
+        $this->restProxy->createMessage(self::$TEST_QUEUE_FOR_MESSAGES_5, 'message2');
+        $this->restProxy->createMessage(self::$TEST_QUEUE_FOR_MESSAGES_5, 'message3');
+        $this->restProxy->createMessage(self::$TEST_QUEUE_FOR_MESSAGES_5, 'message4');
         $opts = new PeekMessagesOptions();
         $opts->setNumberOfMessages(4);
-        $result = $this->wrapper->peekMessages(self::$TEST_QUEUE_FOR_MESSAGES_5, $opts);
+        $result = $this->restProxy->peekMessages(self::$TEST_QUEUE_FOR_MESSAGES_5, $opts);
 
         // Assert
         $this->assertNotNull($result, '$result');
@@ -527,13 +527,13 @@ class QueueServiceIntegrationTest extends IntegrationTestBase {
         // Arrange
 
         // Act
-        $this->wrapper->createMessage(self::$TEST_QUEUE_FOR_MESSAGES_6, 'message1');
-        $this->wrapper->createMessage(self::$TEST_QUEUE_FOR_MESSAGES_6, 'message2');
-        $this->wrapper->createMessage(self::$TEST_QUEUE_FOR_MESSAGES_6, 'message3');
-        $this->wrapper->createMessage(self::$TEST_QUEUE_FOR_MESSAGES_6, 'message4');
-        $this->wrapper->clearMessages(self::$TEST_QUEUE_FOR_MESSAGES_6);
+        $this->restProxy->createMessage(self::$TEST_QUEUE_FOR_MESSAGES_6, 'message1');
+        $this->restProxy->createMessage(self::$TEST_QUEUE_FOR_MESSAGES_6, 'message2');
+        $this->restProxy->createMessage(self::$TEST_QUEUE_FOR_MESSAGES_6, 'message3');
+        $this->restProxy->createMessage(self::$TEST_QUEUE_FOR_MESSAGES_6, 'message4');
+        $this->restProxy->clearMessages(self::$TEST_QUEUE_FOR_MESSAGES_6);
 
-        $result = $this->wrapper->peekMessages(self::$TEST_QUEUE_FOR_MESSAGES_6);
+        $result = $this->restProxy->peekMessages(self::$TEST_QUEUE_FOR_MESSAGES_6);
 
         // Assert
         $this->assertNotNull($result, '$result');
@@ -549,19 +549,19 @@ class QueueServiceIntegrationTest extends IntegrationTestBase {
         // Arrange
 
         // Act
-        $this->wrapper->createMessage(self::$TEST_QUEUE_FOR_MESSAGES_7, 'message1');
-        $this->wrapper->createMessage(self::$TEST_QUEUE_FOR_MESSAGES_7, 'message2');
-        $this->wrapper->createMessage(self::$TEST_QUEUE_FOR_MESSAGES_7, 'message3');
-        $this->wrapper->createMessage(self::$TEST_QUEUE_FOR_MESSAGES_7, 'message4');
+        $this->restProxy->createMessage(self::$TEST_QUEUE_FOR_MESSAGES_7, 'message1');
+        $this->restProxy->createMessage(self::$TEST_QUEUE_FOR_MESSAGES_7, 'message2');
+        $this->restProxy->createMessage(self::$TEST_QUEUE_FOR_MESSAGES_7, 'message3');
+        $this->restProxy->createMessage(self::$TEST_QUEUE_FOR_MESSAGES_7, 'message4');
 
-        $result = $this->wrapper->listMessages(self::$TEST_QUEUE_FOR_MESSAGES_7);
+        $result = $this->restProxy->listMessages(self::$TEST_QUEUE_FOR_MESSAGES_7);
         $message0 = $result->getQueueMessages();
         $message0 = $message0[0];
 
-        $this->wrapper->deleteMessage(self::$TEST_QUEUE_FOR_MESSAGES_7, $message0->getMessageId(), $message0->getPopReceipt());
+        $this->restProxy->deleteMessage(self::$TEST_QUEUE_FOR_MESSAGES_7, $message0->getMessageId(), $message0->getPopReceipt());
         $opts = new ListMessagesOptions();
         $opts->setNumberOfMessages(32);
-        $result2 = $this->wrapper->listMessages(self::$TEST_QUEUE_FOR_MESSAGES_7, $opts);
+        $result2 = $this->restProxy->listMessages(self::$TEST_QUEUE_FOR_MESSAGES_7, $opts);
 
         // Assert
         $this->assertNotNull($result2, '$result2');
@@ -579,23 +579,23 @@ class QueueServiceIntegrationTest extends IntegrationTestBase {
         $year2010->setDate(2010, 1, 1);
 
         // Act
-        $this->wrapper->createMessage(self::$TEST_QUEUE_FOR_MESSAGES_8, 'message1');
+        $this->restProxy->createMessage(self::$TEST_QUEUE_FOR_MESSAGES_8, 'message1');
 
-        $listResult1 = $this->wrapper->listMessages(self::$TEST_QUEUE_FOR_MESSAGES_8);
+        $listResult1 = $this->restProxy->listMessages(self::$TEST_QUEUE_FOR_MESSAGES_8);
         $message0 = $listResult1->getQueueMessages();
         $message0 = $message0[0];
 
         // TODO: Change the last parameter to 0 when the following is fixed:
         // https://github.com/WindowsAzure/azure-sdk-for-php/issues/99
         // Also, remove the sleep.
-        $updateResult = $this->wrapper->updateMessage(
+        $updateResult = $this->restProxy->updateMessage(
                 self::$TEST_QUEUE_FOR_MESSAGES_8,
                 $message0->getMessageId(),
                 $message0->getPopReceipt(),
                 'new text',
                 1);
         sleep(2);
-        $listResult2 = $this->wrapper->listMessages(self::$TEST_QUEUE_FOR_MESSAGES_8);
+        $listResult2 = $this->restProxy->listMessages(self::$TEST_QUEUE_FOR_MESSAGES_8);
 
         // Assert
         $this->assertNotNull($updateResult, '$updateResult');

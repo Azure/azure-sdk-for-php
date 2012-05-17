@@ -114,14 +114,14 @@ class BlobServiceIntegrationTest extends IntegrationTestBase {
 
     private static function createService() {
         $tmp = new IntegrationTestBase();
-        return $tmp->wrapper;
+        return $tmp->restProxy;
     }
     
     public function testGetServicePropertiesWorks() {
         // Act
         $shouldReturn = false;
         try {
-            $props = $this->wrapper->getServiceProperties()->getValue();
+            $props = $this->restProxy->getServiceProperties()->getValue();
             $this->assertTrue(!Configuration::isEmulated(), 'Should succeed if and only if not running in emulator');
         } catch (ServiceException $e) {
             // Expect failure in emulator, as v1.6 doesn't support this method
@@ -150,7 +150,7 @@ class BlobServiceIntegrationTest extends IntegrationTestBase {
         // Act
         $shouldReturn = false;
         try {
-            $props = $this->wrapper->getServiceProperties()->getValue();
+            $props = $this->restProxy->getServiceProperties()->getValue();
             $this->assertTrue(!Configuration::isEmulated(), 'Should succeed if and only if not running in emulator');
         } catch (ServiceException $e) {
             // Expect failure in emulator, as v1.6 doesn't support this method
@@ -167,9 +167,9 @@ class BlobServiceIntegrationTest extends IntegrationTestBase {
         }
 
         $props->getLogging()->setRead(true);
-        $this->wrapper->setServiceProperties($props);
+        $this->restProxy->setServiceProperties($props);
 
-        $props = $this->wrapper->getServiceProperties()->getValue();
+        $props = $this->restProxy->getServiceProperties()->getValue();
 
         // Assert
         $this->assertNotNull($props, '$props');
@@ -183,12 +183,12 @@ class BlobServiceIntegrationTest extends IntegrationTestBase {
 
     public function testCreateContainerWorks() {
         // Act
-        $this->wrapper->createContainer(self::$_creatable_container_1);
+        $this->restProxy->createContainer(self::$_creatable_container_1);
         
         // Assert
         $opts = new ListContainersOptions();
         $opts->setPrefix(self::$_creatable_container_1);
-        $results = $this->wrapper->listContainers($opts);
+        $results = $this->restProxy->listContainers($opts);
 
         $this->assertNotNull($results, '$results');
         $this->assertEquals(1, count($results->getContainers()), 'count($results->getContainers())');
@@ -203,18 +203,18 @@ class BlobServiceIntegrationTest extends IntegrationTestBase {
         $opts->setPublicAccess('blob');
         $opts->addMetadata('test', 'bar');
         $opts->addMetadata('blah', 'bleah');
-        $this->wrapper->createContainer(self::$_creatable_container_2, $opts);
+        $this->restProxy->createContainer(self::$_creatable_container_2, $opts);
 
-        $prop = $this->wrapper->getContainerMetadata(self::$_creatable_container_2);
-        $prop2 = $this->wrapper->getContainerProperties(self::$_creatable_container_2);
-        $acl = $this->wrapper->getContainerACL(self::$_creatable_container_2)->getContainerACL();
+        $prop = $this->restProxy->getContainerMetadata(self::$_creatable_container_2);
+        $prop2 = $this->restProxy->getContainerProperties(self::$_creatable_container_2);
+        $acl = $this->restProxy->getContainerACL(self::$_creatable_container_2)->getContainerACL();
 
         $opts = new ListContainersOptions();
         $opts->setPrefix(self::$_creatable_container_2);
         $opts->setIncludeMetadata(true);
-        $results2 = $this->wrapper->listContainers($opts);
+        $results2 = $this->restProxy->listContainers($opts);
 
-        $this->wrapper->deleteContainer(self::$_creatable_container_2);
+        $this->restProxy->deleteContainer(self::$_creatable_container_2);
 
         // Assert
         $this->assertNotNull($prop, '$prop');
@@ -252,13 +252,13 @@ class BlobServiceIntegrationTest extends IntegrationTestBase {
     
     public function testSetContainerMetadataWorks() {
         // Act
-        $this->wrapper->createContainer(self::$_creatable_container_3);
+        $this->restProxy->createContainer(self::$_creatable_container_3);
 
         $metadata = array(
             'test' => 'bar',
             'blah' => 'bleah');
-        $this->wrapper->setContainerMetadata(self::$_creatable_container_3, $metadata);
-        $prop = $this->wrapper->getContainerMetadata(self::$_creatable_container_3);
+        $this->restProxy->setContainerMetadata(self::$_creatable_container_3, $metadata);
+        $prop = $this->restProxy->getContainerMetadata(self::$_creatable_container_3);
 
         // Assert
         $this->assertNotNull($prop, '$prop');
@@ -282,15 +282,15 @@ class BlobServiceIntegrationTest extends IntegrationTestBase {
         $expiryEndDate->setDate(2020, 1, 1);  
 
         // Act
-        $this->wrapper->createContainer($container);
+        $this->restProxy->createContainer($container);
         $acl = new ContainerACL();
         $acl->setPublicAccess(PublicAccessType::BLOBS_ONLY);
         
         $acl->addSignedIdentifier('test', $expiryStartDate, $expiryEndDate, 'rwd');
-        $this->wrapper->setContainerACL($container, $acl);
+        $this->restProxy->setContainerACL($container, $acl);
 
-        $acl2 = $this->wrapper->getContainerACL($container)->getContainerACL();
-        $this->wrapper->deleteContainer($container);
+        $acl2 = $this->restProxy->getContainerACL($container)->getContainerACL();
+        $this->restProxy->deleteContainer($container);
 
         // Assert
         $this->assertNotNull($acl2, '$acl2');
@@ -316,7 +316,7 @@ class BlobServiceIntegrationTest extends IntegrationTestBase {
 
     public function testListContainersWorks() {
         // Act
-        $results = $this->wrapper->listContainers();
+        $results = $this->restProxy->listContainers();
 
         // Assert
         $this->assertNotNull($results, '$results');
@@ -335,10 +335,10 @@ class BlobServiceIntegrationTest extends IntegrationTestBase {
         // Act
         $opts = new ListContainersOptions();
         $opts->setMaxResults(3);
-        $results = $this->wrapper->listContainers($opts);
+        $results = $this->restProxy->listContainers($opts);
         $opts2 = new ListContainersOptions();
         $opts2->setMarker($results ->getNextMarker());
-        $results2 = $this->wrapper->listContainers($opts2);
+        $results2 = $this->restProxy->listContainers($opts2);
 
         // Assert
         $this->assertNotNull($results, '$results');
@@ -357,7 +357,7 @@ class BlobServiceIntegrationTest extends IntegrationTestBase {
         $opts = new ListContainersOptions();
         $opts->setPrefix(self::$_testContainersPrefix);
         $opts->setMaxResults(3);
-        $results = $this->wrapper->listContainers($opts);
+        $results = $this->restProxy->listContainers($opts);
         // Assert
         $this->assertNotNull($results, '$results');
         $this->assertEquals(3, count($results->getContainers()), 'count($results->getContainers())');
@@ -368,7 +368,7 @@ class BlobServiceIntegrationTest extends IntegrationTestBase {
         $opts = new ListContainersOptions();
         $opts->setPrefix( self::$_testContainersPrefix);
         $opts->setMarker($results->getNextMarker());
-        $results2 = $this->wrapper->listContainers($opts);
+        $results2 = $this->restProxy->listContainers($opts);
 
         // Assert
         $this->assertNotNull($results2, '$results2');
@@ -378,7 +378,7 @@ class BlobServiceIntegrationTest extends IntegrationTestBase {
         // Act
         $opts = new ListContainersOptions();
         $opts->setPrefix(self::$_testContainersPrefix);
-        $results3 = $this->wrapper->listContainers($opts);
+        $results3 = $this->restProxy->listContainers($opts);
 
         // Assert
         $this->assertEquals(count($results->getContainers()) + count($results2->getContainers()), count($results3->getContainers()), 'count($results3->getContainers())');
@@ -388,7 +388,7 @@ class BlobServiceIntegrationTest extends IntegrationTestBase {
         // Ensure root container exists
         $error = null;
         try {
-            $this->wrapper->createContainer('$root');
+            $this->restProxy->createContainer('$root');
         }
         catch (ServiceException $e) {
             $error = $e;
@@ -400,10 +400,10 @@ class BlobServiceIntegrationTest extends IntegrationTestBase {
         // Work with root container explicitly ('$root')
         {
             // Act
-            $this->wrapper->createPageBlob('$root', self::$_blob_for_root_container, 512);
-            $list = $this->wrapper->listBlobs('$root');
-            $properties = $this->wrapper->getBlobProperties('$root', self::$_blob_for_root_container);
-            $metadata = $this->wrapper->getBlobMetadata('$root', self::$_blob_for_root_container);
+            $this->restProxy->createPageBlob('$root', self::$_blob_for_root_container, 512);
+            $list = $this->restProxy->listBlobs('$root');
+            $properties = $this->restProxy->getBlobProperties('$root', self::$_blob_for_root_container);
+            $metadata = $this->restProxy->getBlobMetadata('$root', self::$_blob_for_root_container);
 
             // Assert
             $this->assertNotNull($list, '$list');
@@ -412,17 +412,17 @@ class BlobServiceIntegrationTest extends IntegrationTestBase {
             $this->assertNotNull($metadata, '$metadata');
 
             // Act
-            $this->wrapper->deleteBlob('$root', self::$_blob_for_root_container);
+            $this->restProxy->deleteBlob('$root', self::$_blob_for_root_container);
         }
 
         // Work with root container implicitly ('')
         {
             // Act
-            $this->wrapper->createPageBlob('', self::$_blob_for_root_container, 512);
+            $this->restProxy->createPageBlob('', self::$_blob_for_root_container, 512);
             // '$root' must be explicit when listing blobs in the root container
-            $list = $this->wrapper->listBlobs('$root');
-            $properties = $this->wrapper->getBlobProperties('', self::$_blob_for_root_container);
-            $metadata = $this->wrapper->getBlobMetadata('', self::$_blob_for_root_container);
+            $list = $this->restProxy->listBlobs('$root');
+            $properties = $this->restProxy->getBlobProperties('', self::$_blob_for_root_container);
+            $metadata = $this->restProxy->getBlobMetadata('', self::$_blob_for_root_container);
 
             // Assert
             $this->assertNotNull($list, '$list');
@@ -431,12 +431,12 @@ class BlobServiceIntegrationTest extends IntegrationTestBase {
             $this->assertNotNull($metadata, '$metadata');
 
             // Act
-            $this->wrapper->deleteBlob('', self::$_blob_for_root_container);
+            $this->restProxy->deleteBlob('', self::$_blob_for_root_container);
         }
 
         // If container was created, delete it
         if ($error == null) {
-            $this->wrapper->deleteContainer('$root');
+            $this->restProxy->deleteContainer('$root');
         }
     }
 
@@ -444,14 +444,14 @@ class BlobServiceIntegrationTest extends IntegrationTestBase {
         // Arrange
         $blobNames = array( 'myblob1', 'myblob2', 'other-blob1', 'other-blob2' );
         foreach($blobNames as $blob)  {
-            $this->wrapper->createPageBlob(self::$_test_container_for_listing, $blob, 512);
+            $this->restProxy->createPageBlob(self::$_test_container_for_listing, $blob, 512);
         }
 
         // Act
-        $results = $this->wrapper->listBlobs(self::$_test_container_for_listing);
+        $results = $this->restProxy->listBlobs(self::$_test_container_for_listing);
 
         foreach($blobNames as $blob)  {
-            $this->wrapper->deleteBlob(self::$_test_container_for_listing, $blob);
+            $this->restProxy->deleteBlob(self::$_test_container_for_listing, $blob);
         }
 
         // Assert
@@ -463,19 +463,19 @@ class BlobServiceIntegrationTest extends IntegrationTestBase {
         // Arrange
         $blobNames = array( 'myblob1', 'myblob2', 'otherblob1', 'otherblob2' );
         foreach($blobNames as $blob)  {
-            $this->wrapper->createPageBlob(self::$_test_container_for_listing, $blob, 512);
+            $this->restProxy->createPageBlob(self::$_test_container_for_listing, $blob, 512);
         }
 
         // Act
         $opts = new ListBlobsOptions();
         $opts->setPrefix('myblob');
-        $results = $this->wrapper->listBlobs(self::$_test_container_for_listing, $opts);
+        $results = $this->restProxy->listBlobs(self::$_test_container_for_listing, $opts);
         $opts = new ListBlobsOptions();
         $opts->setPrefix('o');
-        $results2 = $this->wrapper->listBlobs(self::$_test_container_for_listing, $opts);
+        $results2 = $this->restProxy->listBlobs(self::$_test_container_for_listing, $opts);
 
         foreach($blobNames as $blob)  {
-            $this->wrapper->deleteBlob(self::$_test_container_for_listing, $blob);
+            $this->restProxy->deleteBlob(self::$_test_container_for_listing, $blob);
         }
 
         // Assert
@@ -496,17 +496,17 @@ class BlobServiceIntegrationTest extends IntegrationTestBase {
         // Arrange
         $blobNames = array( 'myblob1', 'myblob2', 'otherblob1', 'otherblob2' );
         foreach($blobNames as $blob)  {
-            $this->wrapper->createPageBlob(self::$_test_container_for_listing, $blob, 512);
+            $this->restProxy->createPageBlob(self::$_test_container_for_listing, $blob, 512);
         }
 
         // Act
         $opts = new ListBlobsOptions();
         $opts->setIncludeMetadata(true);
         $opts->setIncludeSnapshots(true);
-        $results = $this->wrapper->listBlobs(self::$_test_container_for_listing, $opts);
+        $results = $this->restProxy->listBlobs(self::$_test_container_for_listing, $opts);
 
         foreach($blobNames as $blob)  {
-            $this->wrapper->deleteBlob(self::$_test_container_for_listing, $blob);
+            $this->restProxy->deleteBlob(self::$_test_container_for_listing, $blob);
         }
 
         // Assert
@@ -518,26 +518,26 @@ class BlobServiceIntegrationTest extends IntegrationTestBase {
         // Arrange
         $blobNames = array( 'myblob1', 'myblob2', 'dir1-blob1', 'dir1-blob2', 'dir2-dir21-blob3', 'dir2-dir22-blob3' );
         foreach($blobNames as $blob)  {
-            $this->wrapper->createPageBlob(self::$_test_container_for_listing, $blob, 512);
+            $this->restProxy->createPageBlob(self::$_test_container_for_listing, $blob, 512);
         }
 
         // Act
         $opts = new ListBlobsOptions();
         $opts->setDelimiter('-');
-        $results = $this->wrapper->listBlobs(self::$_test_container_for_listing, $opts);
+        $results = $this->restProxy->listBlobs(self::$_test_container_for_listing, $opts);
         $opts->setPrefix('dir1-');
-        $results2 = $this->wrapper->listBlobs(self::$_test_container_for_listing, $opts);
+        $results2 = $this->restProxy->listBlobs(self::$_test_container_for_listing, $opts);
         $opts->setPrefix('dir2-');
-        $results3 = $this->wrapper->listBlobs(self::$_test_container_for_listing, $opts);
+        $results3 = $this->restProxy->listBlobs(self::$_test_container_for_listing, $opts);
         $opts->setPrefix('dir2-dir21-');
-        $results4 = $this->wrapper->listBlobs(self::$_test_container_for_listing, $opts);
+        $results4 = $this->restProxy->listBlobs(self::$_test_container_for_listing, $opts);
         $opts->setPrefix('dir2-dir22-');
-        $results5 = $this->wrapper->listBlobs(self::$_test_container_for_listing, $opts);
+        $results5 = $this->restProxy->listBlobs(self::$_test_container_for_listing, $opts);
         $opts->setPrefix('dir2-dir44-');
-        $results6 = $this->wrapper->listBlobs(self::$_test_container_for_listing, $opts);
+        $results6 = $this->restProxy->listBlobs(self::$_test_container_for_listing, $opts);
 
         foreach($blobNames as $blob)  {
-            $this->wrapper->deleteBlob(self::$_test_container_for_listing, $blob);
+            $this->restProxy->deleteBlob(self::$_test_container_for_listing, $blob);
         }
 
         // Assert
@@ -563,7 +563,7 @@ class BlobServiceIntegrationTest extends IntegrationTestBase {
 
     public function testCreatePageBlobWorks() {
         // Act
-        $this->wrapper->createPageBlob(self::$_test_container_for_blobs, 'test', 512);
+        $this->restProxy->createPageBlob(self::$_test_container_for_blobs, 'test', 512);
 
         // Assert
         $this->assertTrue(true, 'success');
@@ -581,9 +581,9 @@ class BlobServiceIntegrationTest extends IntegrationTestBase {
         $opts->setContentEncoding('UTF-8');
         // $opts->setContentMD5('1234');
         $opts->setContentType('text/plain');
-        $this->wrapper->createPageBlob(self::$_test_container_for_blobs, 'test', 512, $opts);
+        $this->restProxy->createPageBlob(self::$_test_container_for_blobs, 'test', 512, $opts);
 
-        $result = $this->wrapper->getBlobProperties(self::$_test_container_for_blobs, 'test');
+        $result = $this->restProxy->getBlobProperties(self::$_test_container_for_blobs, 'test');
 
         // Assert
         $this->assertNotNull($result, '$result');
@@ -610,9 +610,9 @@ class BlobServiceIntegrationTest extends IntegrationTestBase {
         // Act
         $container = self::$_test_container_for_blobs;
         $blob = 'test';
-        $this->wrapper->createPageBlob($container, $blob, 512);
+        $this->restProxy->createPageBlob($container, $blob, 512);
 
-        $result = $this->wrapper->clearBlobPages($container, $blob, new PageRange(0, 511));
+        $result = $this->restProxy->clearBlobPages($container, $blob, new PageRange(0, 511));
 
         // Assert
         $this->assertNotNull($result, '$result');
@@ -627,9 +627,9 @@ class BlobServiceIntegrationTest extends IntegrationTestBase {
         $container = self::$_test_container_for_blobs;
         $blob = 'test';
         $content = str_pad('', 512);
-        $this->wrapper->createPageBlob($container, $blob, 512);
+        $this->restProxy->createPageBlob($container, $blob, 512);
 
-        $result = $this->wrapper->createBlobPages($container, $blob, new PageRange(0, 511), $content);
+        $result = $this->restProxy->createBlobPages($container, $blob, new PageRange(0, 511), $content);
 
         // Assert
         $this->assertNotNull($result, '$result');
@@ -644,15 +644,15 @@ class BlobServiceIntegrationTest extends IntegrationTestBase {
         $container = self::$_test_container_for_blobs;
         $blob = 'test';
         $content = str_pad('', 512);
-        $this->wrapper->createPageBlob($container, $blob, 16384 + 512);
+        $this->restProxy->createPageBlob($container, $blob, 16384 + 512);
 
-        $this->wrapper->createBlobPages($container, $blob, new PageRange(0, 511), $content);
-        $this->wrapper->createBlobPages($container, $blob, new PageRange(1024, 1024 + 511), $content);
-        $this->wrapper->createBlobPages($container, $blob, new PageRange(8192, 8192 + 511), $content);
-        $this->wrapper->createBlobPages($container, $blob, new PageRange(16384, 16384 + 511), $content);
+        $this->restProxy->createBlobPages($container, $blob, new PageRange(0, 511), $content);
+        $this->restProxy->createBlobPages($container, $blob, new PageRange(1024, 1024 + 511), $content);
+        $this->restProxy->createBlobPages($container, $blob, new PageRange(8192, 8192 + 511), $content);
+        $this->restProxy->createBlobPages($container, $blob, new PageRange(16384, 16384 + 511), $content);
 
-//        $result = $this->wrapper->listBlobRegions($container, $blob);
-        $result = $this->wrapper->listPageBlobRanges($container, $blob);
+//        $result = $this->restProxy->listBlobRegions($container, $blob);
+        $result = $this->restProxy->listPageBlobRanges($container, $blob);
 
         // Assert
         $this->assertNotNull($result, '$result');
@@ -677,9 +677,9 @@ class BlobServiceIntegrationTest extends IntegrationTestBase {
         $container = self::$_test_container_for_blobs;
         $blob = 'test13';
         $content = str_pad('', 512);
-        $this->wrapper->createBlockBlob($container, $blob, $content);
+        $this->restProxy->createBlockBlob($container, $blob, $content);
 
-        $result = $this->wrapper->listBlobBlocks($container, $blob);
+        $result = $this->restProxy->listBlobBlocks($container, $blob);
 
         // Assert
         $this->assertNotNull($result, '$result');
@@ -696,15 +696,15 @@ class BlobServiceIntegrationTest extends IntegrationTestBase {
         // Act
         $container = self::$_test_container_for_blobs;
         $blob = 'test14';
-        $this->wrapper->createBlockBlob($container, $blob, '');
-        $this->wrapper->createBlobBlock($container, $blob, '123', str_pad('', 256));
-        $this->wrapper->createBlobBlock($container, $blob, '124', str_pad('', 512));
-        $this->wrapper->createBlobBlock($container, $blob, '125', str_pad('', 195));
+        $this->restProxy->createBlockBlob($container, $blob, '');
+        $this->restProxy->createBlobBlock($container, $blob, '123', str_pad('', 256));
+        $this->restProxy->createBlobBlock($container, $blob, '124', str_pad('', 512));
+        $this->restProxy->createBlobBlock($container, $blob, '125', str_pad('', 195));
 
         $opts = new ListBlobBlocksOptions();
         $opts->setIncludeCommittedBlobs(true);
         $opts->setIncludeUncommittedBlobs(true);
-        $result = $this->wrapper->listBlobBlocks($container, $blob, $opts);
+        $result = $this->restProxy->listBlobBlocks($container, $blob, $opts);
 
         // Assert
         $this->assertNotNull($result, '$result');
@@ -729,26 +729,26 @@ class BlobServiceIntegrationTest extends IntegrationTestBase {
         // Act
         $container = self::$_test_container_for_blobs;
         $blob = 'test14';
-        $this->wrapper->createBlockBlob($container, $blob, '');
-        $this->wrapper->createBlobBlock($container, $blob, '123', str_pad('', 256));
+        $this->restProxy->createBlockBlob($container, $blob, '');
+        $this->restProxy->createBlobBlock($container, $blob, '123', str_pad('', 256));
 
         $blockList = new BlockList();
         $blockList->addUncommittedEntry('123');
-        $this->wrapper->commitBlobBlocks($container, $blob, $blockList);
+        $this->restProxy->commitBlobBlocks($container, $blob, $blockList);
 
-        $this->wrapper->createBlobBlock($container, $blob, '124', str_pad('', 512));
-        $this->wrapper->createBlobBlock($container, $blob, '125', str_pad('', 195));
+        $this->restProxy->createBlobBlock($container, $blob, '124', str_pad('', 512));
+        $this->restProxy->createBlobBlock($container, $blob, '125', str_pad('', 195));
 
         $opts = new ListBlobBlocksOptions();
         $opts->setIncludeCommittedBlobs(true);
         $opts->setIncludeUncommittedBlobs(true);
-        $result1 = $this->wrapper->listBlobBlocks($container, $blob, $opts);
+        $result1 = $this->restProxy->listBlobBlocks($container, $blob, $opts);
         $opts = new ListBlobBlocksOptions();
         $opts->setIncludeCommittedBlobs(true);
-        $result2 = $this->wrapper->listBlobBlocks($container, $blob, $opts);
+        $result2 = $this->restProxy->listBlobBlocks($container, $blob, $opts);
         $opts = new ListBlobBlocksOptions();
         $opts->setIncludeUncommittedBlobs(true);
-        $result3 = $this->wrapper->listBlobBlocks($container, $blob, $opts);
+        $result3 = $this->restProxy->listBlobBlocks($container, $blob, $opts);
 
         // Assert
         $this->assertEquals(1, count($result1->getCommittedBlocks()), 'count($result1->getCommittedBlocks())');
@@ -768,21 +768,21 @@ class BlobServiceIntegrationTest extends IntegrationTestBase {
         $blockId1 = '1fedcba';
         $blockId2 = '2abcdef';
         $blockId3 = '3zzzzzz';
-        $this->wrapper->createBlockBlob($container, $blob, '');
-        $this->wrapper->createBlobBlock($container, $blob, $blockId1, str_pad('', 256));
-        $this->wrapper->createBlobBlock($container, $blob, $blockId2, str_pad('', 512));
-        $this->wrapper->createBlobBlock($container, $blob, $blockId3, str_pad('', 195));
+        $this->restProxy->createBlockBlob($container, $blob, '');
+        $this->restProxy->createBlobBlock($container, $blob, $blockId1, str_pad('', 256));
+        $this->restProxy->createBlobBlock($container, $blob, $blockId2, str_pad('', 512));
+        $this->restProxy->createBlobBlock($container, $blob, $blockId3, str_pad('', 195));
 
         $blockList = new BlockList();
         $blockList->addUncommittedEntry($blockId1);
         $blockList->addLatestEntry($blockId3);
 
-        $this->wrapper->commitBlobBlocks($container, $blob, $blockList);
+        $this->restProxy->commitBlobBlocks($container, $blob, $blockList);
 
         $opts = new ListBlobBlocksOptions();
         $opts->setIncludeCommittedBlobs(true);
         $opts->setIncludeUncommittedBlobs(true);
-        $result = $this->wrapper->listBlobBlocks($container, $blob, $opts);
+        $result = $this->restProxy->listBlobBlocks($container, $blob, $opts);
 
         // Assert
         $this->assertNotNull($result, '$result');
@@ -810,10 +810,10 @@ class BlobServiceIntegrationTest extends IntegrationTestBase {
         $blockId1 = '1fedcba';
         $blockId2 = '2abcdef';
         $blockId3 = '3zzzzzz';
-        $this->wrapper->createBlockBlob($container, $blob, '');
-        $this->wrapper->createBlobBlock($container, $blob, $blockId1, str_pad('', 256));
-        $this->wrapper->createBlobBlock($container, $blob, $blockId2, str_pad('', 512));
-        $this->wrapper->createBlobBlock($container, $blob, $blockId3, str_pad('', 195));
+        $this->restProxy->createBlockBlob($container, $blob, '');
+        $this->restProxy->createBlobBlock($container, $blob, $blockId1, str_pad('', 256));
+        $this->restProxy->createBlobBlock($container, $blob, $blockId2, str_pad('', 512));
+        $this->restProxy->createBlobBlock($container, $blob, $blockId3, str_pad('', 195));
 
         $block1 = new Block();
         $block1->setBlockId($blockId1);
@@ -823,12 +823,12 @@ class BlobServiceIntegrationTest extends IntegrationTestBase {
         $block2->setType(BlobBlockType::LATEST_TYPE);
         $blockList = array($block1, $block2);
 
-        $this->wrapper->commitBlobBlocks($container, $blob, $blockList);
+        $this->restProxy->commitBlobBlocks($container, $blob, $blockList);
 
         $opts = new ListBlobBlocksOptions();
         $opts->setIncludeCommittedBlobs(true);
         $opts->setIncludeUncommittedBlobs(true);
-        $result = $this->wrapper->listBlobBlocks($container, $blob, $opts);
+        $result = $this->restProxy->listBlobBlocks($container, $blob, $opts);
 
         // Assert
         $this->assertNotNull($result, '$result');
@@ -855,9 +855,9 @@ class BlobServiceIntegrationTest extends IntegrationTestBase {
         $container = self::$_test_container_for_blobs;
         $blob = 'test13';
         $content = str_pad('', 512);
-        $this->wrapper->createBlockBlob($container, $blob, $content);
-        $this->wrapper->createBlobBlock($container, $blob, '123', $content);
-        $this->wrapper->createBlobBlock($container, $blob, '124', $content);
+        $this->restProxy->createBlockBlob($container, $blob, $content);
+        $this->restProxy->createBlobBlock($container, $blob, '123', $content);
+        $this->restProxy->createBlobBlock($container, $blob, '124', $content);
 
         // Assert
         $this->assertTrue(true, 'success');
@@ -865,7 +865,7 @@ class BlobServiceIntegrationTest extends IntegrationTestBase {
 
     public function testCreateBlockBlobWorks() {
         // Act
-        $this->wrapper->createBlockBlob(self::$_test_container_for_blobs, 'test2', 'some content');
+        $this->restProxy->createBlockBlob(self::$_test_container_for_blobs, 'test2', 'some content');
 
         // Assert
         $this->assertTrue(true, 'success');
@@ -884,9 +884,9 @@ class BlobServiceIntegrationTest extends IntegrationTestBase {
         $opts->setContentEncoding('UTF-8');
         // $opts->setContentMD5('1234');
         $opts->setContentType('text/plain');
-        $this->wrapper->createBlockBlob(self::$_test_container_for_blobs, 'test2', $content, $opts);
+        $this->restProxy->createBlockBlob(self::$_test_container_for_blobs, 'test2', $content, $opts);
 
-        $result = $this->wrapper->getBlobProperties(self::$_test_container_for_blobs, 'test2');
+        $result = $this->restProxy->getBlobProperties(self::$_test_container_for_blobs, 'test2');
 
         // Assert
         $this->assertNotNull($result, '$result');
@@ -913,8 +913,8 @@ class BlobServiceIntegrationTest extends IntegrationTestBase {
         // Act
         $container = self::$_test_container_for_blobs;
         $blob = 'test3';
-        $this->wrapper->createBlockBlob($container, $blob, 'some content');
-        $snapshot = $this->wrapper->createBlobSnapshot($container, $blob);
+        $this->restProxy->createBlockBlob($container, $blob, 'some content');
+        $snapshot = $this->restProxy->createBlobSnapshot($container, $blob);
         
         // Assert
         $this->assertNotNull($snapshot, '$snapshot');
@@ -927,17 +927,17 @@ class BlobServiceIntegrationTest extends IntegrationTestBase {
         // Act
         $container = self::$_test_container_for_blobs;
         $blob = 'test3';
-        $this->wrapper->createBlockBlob($container, $blob, 'some content');
+        $this->restProxy->createBlockBlob($container, $blob, 'some content');
         $opts = new CreateBlobSnapshotOptions();
         $metadata = array(
             'test' => 'bar',
             'blah' => 'bleah');
         $opts->setMetadata($metadata);
-        $snapshot = $this->wrapper->createBlobSnapshot($container, $blob, $opts);
+        $snapshot = $this->restProxy->createBlobSnapshot($container, $blob, $opts);
 
         $opts = new GetBlobPropertiesOptions();
         $opts->setSnapshot($snapshot->getSnapshot());
-        $result = $this->wrapper->getBlobProperties($container, $blob, $opts);
+        $result = $this->restProxy->getBlobProperties($container, $blob, $opts);
 
         // Assert
         $this->assertNotNull($result, '$result');
@@ -963,9 +963,9 @@ class BlobServiceIntegrationTest extends IntegrationTestBase {
         $opts->setContentEncoding('UTF-8');
         // $opts->setContentMD5('1234');
         $opts->setContentType('text/plain');
-        $this->wrapper->createBlockBlob(self::$_test_container_for_blobs, 'test2', $content, $opts);
+        $this->restProxy->createBlockBlob(self::$_test_container_for_blobs, 'test2', $content, $opts);
 
-        $result = $this->wrapper->getBlob(self::$_test_container_for_blobs, 'test2');
+        $result = $this->restProxy->getBlob(self::$_test_container_for_blobs, 'test2');
 
         // Assert
         $this->assertNotNull($result, '$result');
@@ -1001,9 +1001,9 @@ class BlobServiceIntegrationTest extends IntegrationTestBase {
         $opts->setContentEncoding('UTF-8');
         // $opts->setContentMD5('1234');
         $opts->setContentType('text/plain');
-        $this->wrapper->createPageBlob(self::$_test_container_for_blobs, 'test', 4096, $opts);
+        $this->restProxy->createPageBlob(self::$_test_container_for_blobs, 'test', 4096, $opts);
 
-        $result = $this->wrapper->getBlob(self::$_test_container_for_blobs, 'test');
+        $result = $this->restProxy->getBlob(self::$_test_container_for_blobs, 'test');
 
         // Assert
         $this->assertNotNull($result, '$result');
@@ -1028,11 +1028,11 @@ class BlobServiceIntegrationTest extends IntegrationTestBase {
 
     public function testGetBlobWithIfMatchETagAccessConditionWorks() {
         // Act
-        $this->wrapper->createPageBlob(self::$_test_container_for_blobs, 'test', 4096);
+        $this->restProxy->createPageBlob(self::$_test_container_for_blobs, 'test', 4096);
         try {
             $opts = new GetBlobOptions();
             $opts->setAccessCondition(AccessCondition::ifMatch('123'));
-            $this->wrapper->getBlob(self::$_test_container_for_blobs, 'test', $opts);
+            $this->restProxy->getBlob(self::$_test_container_for_blobs, 'test', $opts);
             $this->fail('getBlob should throw an exception');
         }
         catch (ServiceException $e) {
@@ -1042,12 +1042,12 @@ class BlobServiceIntegrationTest extends IntegrationTestBase {
 
     public function testGetBlobWithIfNoneMatchETagAccessConditionWorks() {
         // Act
-        $this->wrapper->createPageBlob(self::$_test_container_for_blobs, 'test', 4096);
-        $props = $this->wrapper->getBlobProperties(self::$_test_container_for_blobs, 'test');
+        $this->restProxy->createPageBlob(self::$_test_container_for_blobs, 'test', 4096);
+        $props = $this->restProxy->getBlobProperties(self::$_test_container_for_blobs, 'test');
         try {
             $opts = new GetBlobOptions();
             $opts->setAccessCondition(AccessCondition::ifNoneMatch($props->getProperties()->getEtag()));
-            $this->wrapper->getBlob(self::$_test_container_for_blobs, 'test', $opts);
+            $this->restProxy->getBlob(self::$_test_container_for_blobs, 'test', $opts);
             $this->fail('getBlob should throw an exception');
         }
         catch (ServiceException $e) {
@@ -1057,13 +1057,13 @@ class BlobServiceIntegrationTest extends IntegrationTestBase {
 
     public function testGetBlobWithIfModifiedSinceAccessConditionWorks() {
         // Act
-        $this->wrapper->createPageBlob(self::$_test_container_for_blobs, 'test', 4096);
-        $props = $this->wrapper->getBlobProperties(self::$_test_container_for_blobs, 'test');
+        $this->restProxy->createPageBlob(self::$_test_container_for_blobs, 'test', 4096);
+        $props = $this->restProxy->getBlobProperties(self::$_test_container_for_blobs, 'test');
         try {
             $opts = new GetBlobOptions();
             $lastMod = $props->getProperties()->getLastModified();
             $opts->setAccessCondition(AccessCondition::ifModifiedSince($lastMod));
-            $this->wrapper->getBlob(self::$_test_container_for_blobs, 'test', $opts);
+            $this->restProxy->getBlob(self::$_test_container_for_blobs, 'test', $opts);
             $this->fail('getBlob should throw an exception');
         }
         catch (ServiceException $e) {
@@ -1075,8 +1075,8 @@ class BlobServiceIntegrationTest extends IntegrationTestBase {
         // Act
         $container = self::$_test_container_for_blobs;
         $blob = 'test';
-        $this->wrapper->createPageBlob($container, $blob, 4096);
-        $props = $this->wrapper->getBlobProperties($container, $blob);
+        $this->restProxy->createPageBlob($container, $blob, 4096);
+        $props = $this->restProxy->getBlobProperties($container, $blob);
 
         // To test for "IfNotModifiedSince", we need to make updates to the blob
         // until at least 1 second has passed since the blob creation
@@ -1088,13 +1088,13 @@ class BlobServiceIntegrationTest extends IntegrationTestBase {
 
         while (true) {
             $metadata = array('test' => 'test1');
-            $result = $this->wrapper->setBlobMetadata($container, $blob, $metadata);
+            $result = $this->restProxy->setBlobMetadata($container, $blob, $metadata);
             if ($result->getLastModified() >= $lastModifiedNext) break;
         }
         try {
             $opts = new GetBlobOptions();
             $opts->setAccessCondition(AccessCondition::ifNotModifiedSince($lastModifiedBase));
-            $this->wrapper->getBlob($container, $blob, $opts);
+            $this->restProxy->getBlob($container, $blob, $opts);
             $this->fail('getBlob should throw an exception');
         }
         catch (ServiceException $e) {
@@ -1106,8 +1106,8 @@ class BlobServiceIntegrationTest extends IntegrationTestBase {
         // Act
         $container = self::$_test_container_for_blobs;
         $blob = 'test';
-        $this->wrapper->createPageBlob($container, $blob, 4096);
-        $result = $this->wrapper->getBlobProperties($container, $blob);
+        $this->restProxy->createPageBlob($container, $blob, 4096);
+        $result = $this->restProxy->getBlobProperties($container, $blob);
 
         // Assert
         $this->assertNotNull($result, '$result');
@@ -1139,8 +1139,8 @@ class BlobServiceIntegrationTest extends IntegrationTestBase {
         $metadata['test'] = 'bar';
         $metadata['blah'] = 'bleah';
         $opts->setMetadata($metadata);
-        $this->wrapper->createPageBlob($container, $blob, 4096, $opts);
-        $props = $this->wrapper->getBlobMetadata($container, $blob);
+        $this->restProxy->createPageBlob($container, $blob, 4096, $opts);
+        $props = $this->restProxy->getBlobMetadata($container, $blob);
 
         // Assert
         $this->assertNotNull($props, '$props');
@@ -1158,7 +1158,7 @@ class BlobServiceIntegrationTest extends IntegrationTestBase {
         // Act
         $container = self::$_test_container_for_blobs;
         $blob = 'test10';
-        $this->wrapper->createPageBlob($container, $blob, 4096);
+        $this->restProxy->createPageBlob($container, $blob, 4096);
         $opts = new SetBlobPropertiesOptions();
         $opts->setBlobCacheControl('test');
         $opts->setBlobContentEncoding('UTF-8');
@@ -1167,9 +1167,9 @@ class BlobServiceIntegrationTest extends IntegrationTestBase {
         $opts->setBlobContentMD5(null);
         $opts->setBlobContentType('text/plain');
         $opts->setSequenceNumberAction('increment');
-        $result = $this->wrapper->setBlobProperties($container, $blob, $opts);
+        $result = $this->restProxy->setBlobProperties($container, $blob, $opts);
 
-        $getResult = $this->wrapper->getBlobProperties($container, $blob);
+        $getResult = $this->restProxy->getBlobProperties($container, $blob);
 
         // Assert
         $this->assertNotNull($result, '$result');
@@ -1205,9 +1205,9 @@ class BlobServiceIntegrationTest extends IntegrationTestBase {
             'test' => 'bar',
             'blah' => 'bleah');
 
-        $this->wrapper->createPageBlob($container, $blob, 4096);
-        $result = $this->wrapper->setBlobMetadata($container, $blob, $metadata);
-        $props = $this->wrapper->getBlobProperties($container, $blob);
+        $this->restProxy->createPageBlob($container, $blob, 4096);
+        $result = $this->restProxy->setBlobMetadata($container, $blob, $metadata);
+        $props = $this->restProxy->getBlobProperties($container, $blob);
 
         // Assert
         $this->assertNotNull($result, '$result');
@@ -1226,9 +1226,9 @@ class BlobServiceIntegrationTest extends IntegrationTestBase {
     public function testDeleteBlobWorks() {
         // Act
         $content = 'some $content';
-        $this->wrapper->createBlockBlob(self::$_test_container_for_blobs, 'test2', $content);
+        $this->restProxy->createBlockBlob(self::$_test_container_for_blobs, 'test2', $content);
 
-        $this->wrapper->deleteBlob(self::$_test_container_for_blobs, 'test2');
+        $this->restProxy->deleteBlob(self::$_test_container_for_blobs, 'test2');
 
         // Assert
         $this->assertTrue(true, 'success');
@@ -1237,10 +1237,10 @@ class BlobServiceIntegrationTest extends IntegrationTestBase {
     public function testCopyBlobWorks() {
         // Act
         $content = 'some content2';
-        $this->wrapper->createBlockBlob(self::$_test_container_for_blobs, 'test6', $content);
-        $this->wrapper->copyBlob(self::$_test_container_for_blobs_2, 'test5', self::$_test_container_for_blobs, 'test6');
+        $this->restProxy->createBlockBlob(self::$_test_container_for_blobs, 'test6', $content);
+        $this->restProxy->copyBlob(self::$_test_container_for_blobs_2, 'test5', self::$_test_container_for_blobs, 'test6');
 
-        $result = $this->wrapper->getBlob(self::$_test_container_for_blobs_2, 'test5');
+        $result = $this->restProxy->getBlob(self::$_test_container_for_blobs_2, 'test5');
 
         // Assert
         $this->assertNotNull($result, '$result');
@@ -1263,9 +1263,9 @@ class BlobServiceIntegrationTest extends IntegrationTestBase {
     public function testAcquireLeaseWorks() {
         // Act
         $content = 'some content2';
-        $this->wrapper->createBlockBlob(self::$_test_container_for_blobs, 'test6', $content);
-        $leaseId = $this->wrapper->acquireLease(self::$_test_container_for_blobs, 'test6')->getLeaseId();
-        $this->wrapper->releaseLease(self::$_test_container_for_blobs, 'test6', $leaseId);
+        $this->restProxy->createBlockBlob(self::$_test_container_for_blobs, 'test6', $content);
+        $leaseId = $this->restProxy->acquireLease(self::$_test_container_for_blobs, 'test6')->getLeaseId();
+        $this->restProxy->releaseLease(self::$_test_container_for_blobs, 'test6', $leaseId);
 
         // Assert
         $this->assertNotNull($leaseId, '$leaseId');
@@ -1274,10 +1274,10 @@ class BlobServiceIntegrationTest extends IntegrationTestBase {
     public function testRenewLeaseWorks() {
         // Act
         $content = 'some content2';
-        $this->wrapper->createBlockBlob(self::$_test_container_for_blobs, 'test6', $content);
-        $leaseId = $this->wrapper->acquireLease(self::$_test_container_for_blobs, 'test6')->getLeaseId();
-        $leaseId2 = $this->wrapper->renewLease(self::$_test_container_for_blobs, 'test6', $leaseId)->getLeaseId();
-        $this->wrapper->releaseLease(self::$_test_container_for_blobs, 'test6', $leaseId);
+        $this->restProxy->createBlockBlob(self::$_test_container_for_blobs, 'test6', $content);
+        $leaseId = $this->restProxy->acquireLease(self::$_test_container_for_blobs, 'test6')->getLeaseId();
+        $leaseId2 = $this->restProxy->renewLease(self::$_test_container_for_blobs, 'test6', $leaseId)->getLeaseId();
+        $this->restProxy->releaseLease(self::$_test_container_for_blobs, 'test6', $leaseId);
 
         // Assert
         $this->assertNotNull($leaseId, '$leaseId');
@@ -1287,10 +1287,10 @@ class BlobServiceIntegrationTest extends IntegrationTestBase {
     public function testBreakLeaseWorks() {
         // Act
         $content = 'some content2';
-        $this->wrapper->createBlockBlob(self::$_test_container_for_blobs, 'test6', $content);
-        $leaseId = $this->wrapper->acquireLease(self::$_test_container_for_blobs, 'test6')->getLeaseId();
-        $this->wrapper->breakLease(self::$_test_container_for_blobs, 'test6', $leaseId);
-        $this->wrapper->releaseLease(self::$_test_container_for_blobs, 'test6', $leaseId);
+        $this->restProxy->createBlockBlob(self::$_test_container_for_blobs, 'test6', $content);
+        $leaseId = $this->restProxy->acquireLease(self::$_test_container_for_blobs, 'test6')->getLeaseId();
+        $this->restProxy->breakLease(self::$_test_container_for_blobs, 'test6', $leaseId);
+        $this->restProxy->releaseLease(self::$_test_container_for_blobs, 'test6', $leaseId);
 
         // Assert
         $this->assertNotNull($leaseId, '$leaseId');

@@ -152,7 +152,7 @@ class TableServiceIntegrationTest extends IntegrationTestBase {
 
     private static function createService() {
         $tmp = new IntegrationTestBase();
-        return $tmp->wrapper;
+        return $tmp->restProxy;
     }
     
     /**
@@ -164,7 +164,7 @@ class TableServiceIntegrationTest extends IntegrationTestBase {
         // Act
         $shouldReturn = false;
         try {
-            $props = $this->wrapper->getServiceProperties()->getValue();
+            $props = $this->restProxy->getServiceProperties()->getValue();
             $this->assertTrue(!Configuration::isEmulated(), 'Should succeed if and only if not running in emulator');
         } catch (ServiceException $e) {
             // Expect failure in emulator, as v1.6 doesn't support this method
@@ -199,7 +199,7 @@ class TableServiceIntegrationTest extends IntegrationTestBase {
         // Act
         $shouldReturn = false;
         try {
-            $props = $this->wrapper->getServiceProperties()->getValue();
+            $props = $this->restProxy->getServiceProperties()->getValue();
             $this->assertTrue(!Configuration::isEmulated(), 'Should succeed if and only if not running in emulator');
         } catch (ServiceException $e) {
             // Expect failure in emulator, as v1.6 doesn't support this method
@@ -216,9 +216,9 @@ class TableServiceIntegrationTest extends IntegrationTestBase {
         }
 
         $props->getLogging()->setRead(true);
-        $this->wrapper->setServiceProperties($props);
+        $this->restProxy->setServiceProperties($props);
 
-        $props = $this->wrapper->getServiceProperties()->getValue();
+        $props = $this->restProxy->getServiceProperties()->getValue();
 
         // Assert
         $this->assertNotNull($props, '$props');
@@ -237,14 +237,14 @@ class TableServiceIntegrationTest extends IntegrationTestBase {
     public function testCreateTablesWorks() {
         // Act
         try {
-            $this->wrapper->getTable(self::$CREATABLE_TABLE_1);
+            $this->restProxy->getTable(self::$CREATABLE_TABLE_1);
             $error = null;
         }
         catch (ServiceException $e) {
             $error = $e;
         }
-        $this->wrapper->createTable(self::$CREATABLE_TABLE_1);
-        $result = $this->wrapper->getTable(self::$CREATABLE_TABLE_1);
+        $this->restProxy->createTable(self::$CREATABLE_TABLE_1);
+        $result = $this->restProxy->getTable(self::$CREATABLE_TABLE_1);
 
         // Assert
         $this->assertNotNull($error, '$error');
@@ -258,12 +258,12 @@ class TableServiceIntegrationTest extends IntegrationTestBase {
     */
     public function testDeleteTablesWorks() {
         // Act
-        $this->wrapper->createTable(self::$CREATABLE_TABLE_2);
-        $result = $this->wrapper->getTable(self::$CREATABLE_TABLE_2);
+        $this->restProxy->createTable(self::$CREATABLE_TABLE_2);
+        $result = $this->restProxy->getTable(self::$CREATABLE_TABLE_2);
 
-        $this->wrapper->deleteTable(self::$CREATABLE_TABLE_2);
+        $this->restProxy->deleteTable(self::$CREATABLE_TABLE_2);
         try {
-            $this->wrapper->getTable(self::$CREATABLE_TABLE_2);
+            $this->restProxy->getTable(self::$CREATABLE_TABLE_2);
             $error = null;
         }
         catch (ServiceException $e) {
@@ -280,7 +280,7 @@ class TableServiceIntegrationTest extends IntegrationTestBase {
     */
     public function testQueryTablesWorks() {
         // Act
-        $result = $this->wrapper->queryTables();
+        $result = $this->restProxy->queryTables();
 
         // Assert
         $this->assertNotNull($result, '$result');
@@ -293,7 +293,7 @@ class TableServiceIntegrationTest extends IntegrationTestBase {
         // Act
         $qto = new QueryTablesOptions();
         $qto->setPrefix(self::$testTablesPrefix);
-        $result = $this->wrapper->queryTables($qto);
+        $result = $this->restProxy->queryTables($qto);
 
         // Assert
         $this->assertNotNull($result, '$result');
@@ -304,7 +304,7 @@ class TableServiceIntegrationTest extends IntegrationTestBase {
     */
     public function testGetTableWorks() {
         // Act
-        $result = $this->wrapper->getTable(self::$TEST_TABLE_1);
+        $result = $this->restProxy->getTable(self::$TEST_TABLE_1);
 
         // Assert
         $this->assertNotNull($result, '$result');
@@ -329,7 +329,7 @@ class TableServiceIntegrationTest extends IntegrationTestBase {
         $entity->addProperty('test7', EdmType::GUID, $uuid);
 
         // Act
-        $result = $this->wrapper->insertEntity(self::$TEST_TABLE_2, $entity);
+        $result = $this->restProxy->insertEntity(self::$TEST_TABLE_2, $entity);
 
         // Assert
         $this->assertNotNull($result, '$result');
@@ -381,9 +381,9 @@ class TableServiceIntegrationTest extends IntegrationTestBase {
         $entity->addProperty('test5', EdmType::DATETIME, new \DateTime());
 
         // Act
-        $result = $this->wrapper->insertEntity(self::$TEST_TABLE_2, $entity);
+        $result = $this->restProxy->insertEntity(self::$TEST_TABLE_2, $entity);
         $result->getEntity()->addProperty('test4', EdmType::INT32, 5);
-        $this->wrapper->updateEntity(self::$TEST_TABLE_2, $result->getEntity());
+        $this->restProxy->updateEntity(self::$TEST_TABLE_2, $result->getEntity());
 
         // Assert
         $this->assertTrue(true, 'Expect success in testUpdateEntityWorks');
@@ -406,16 +406,16 @@ class TableServiceIntegrationTest extends IntegrationTestBase {
         // Act
         if(Configuration::isEmulated()) {
             try {
-                $this->wrapper->insertOrReplaceEntity(self::$TEST_TABLE_2, $entity);
+                $this->restProxy->insertOrReplaceEntity(self::$TEST_TABLE_2, $entity);
                 $this->assertFalse(Configuration::isEmulated(), 'Expect failure when in emulator');
             } catch (ServiceException $e) {
                 $this->assertEquals(404, $e->getCode(), 'e->getCode');
             }
         } else {
-            $this->wrapper->insertOrReplaceEntity(self::$TEST_TABLE_2, $entity);
+            $this->restProxy->insertOrReplaceEntity(self::$TEST_TABLE_2, $entity);
             $entity->addProperty('test4', EdmType::INT32, 5);
             $entity->addProperty('test6', EdmType::INT32, 6);
-            $this->wrapper->insertOrReplaceEntity(self::$TEST_TABLE_2, $entity);
+            $this->restProxy->insertOrReplaceEntity(self::$TEST_TABLE_2, $entity);
 
             // Assert
             $this->assertTrue(true, 'Expect success in testInsertOrReplaceEntityWorks');
@@ -439,16 +439,16 @@ class TableServiceIntegrationTest extends IntegrationTestBase {
         // Act
         if(Configuration::isEmulated()) {
             try {
-                $this->wrapper->insertOrMergeEntity(self::$TEST_TABLE_2, $entity);
+                $this->restProxy->insertOrMergeEntity(self::$TEST_TABLE_2, $entity);
                 $this->assertFalse(Configuration::isEmulated(), 'Expect failure when in emulator');
             } catch (ServiceException $e) {
                 $this->assertEquals(404, $e->getCode(), 'e->getCode');
             }
         } else {
-            $this->wrapper->insertOrMergeEntity(self::$TEST_TABLE_2, $entity);
+            $this->restProxy->insertOrMergeEntity(self::$TEST_TABLE_2, $entity);
             $entity->addProperty('test4', EdmType::INT32, 5);
             $entity->addProperty('test6', EdmType::INT32, 6);
-            $this->wrapper->insertOrMergeEntity(self::$TEST_TABLE_2, $entity);
+            $this->restProxy->insertOrMergeEntity(self::$TEST_TABLE_2, $entity);
 
             // Assert
             $this->assertTrue(true, 'Expect success in testInsertOrMergeEntityWorks');
@@ -471,11 +471,11 @@ class TableServiceIntegrationTest extends IntegrationTestBase {
         $entity->addProperty('test5', EdmType::DATETIME, new \DateTime());
 
         // Act
-        $result = $this->wrapper->insertEntity(self::$TEST_TABLE_2, $entity);
+        $result = $this->restProxy->insertEntity(self::$TEST_TABLE_2, $entity);
 
         $result->getEntity()->addProperty('test4', EdmType::INT32, 5);
         $result->getEntity()->addProperty('test6', EdmType::INT32, 6);
-        $this->wrapper->mergeEntity(self::$TEST_TABLE_2, $result->getEntity());
+        $this->restProxy->mergeEntity(self::$TEST_TABLE_2, $result->getEntity());
 
         // Assert
         $this->assertTrue(true, 'expect no errors');
@@ -497,9 +497,9 @@ class TableServiceIntegrationTest extends IntegrationTestBase {
         $entity->addProperty('test5', EdmType::DATETIME, new \DateTime());
 
         // Act
-        $result = $this->wrapper->insertEntity(self::$TEST_TABLE_2, $entity);
+        $result = $this->restProxy->insertEntity(self::$TEST_TABLE_2, $entity);
 
-        $this->wrapper->deleteEntity(self::$TEST_TABLE_2, $result->getEntity()->getPartitionKey(), $result->getEntity()->getRowKey());
+        $this->restProxy->deleteEntity(self::$TEST_TABLE_2, $result->getEntity()->getPartitionKey(), $result->getEntity()->getRowKey());
 
         // Assert
         $this->assertTrue(true, 'expect no errors');
@@ -546,21 +546,21 @@ class TableServiceIntegrationTest extends IntegrationTestBase {
         $entity5->setRowKey('Qbert_Says=.!@%^&');
  
         // Act
-        $result1 = $this->wrapper->insertEntity(self::$TEST_TABLE_8, $entity1);
-        $result2 = $this->wrapper->insertEntity(self::$TEST_TABLE_8, $entity2);
-        $result3 = $this->wrapper->insertEntity(self::$TEST_TABLE_8, $entity3);
-        $result4 = $this->wrapper->insertEntity(self::$TEST_TABLE_8, $entity4);
-        $result5 = $this->wrapper->insertEntity(self::$TEST_TABLE_8, $entity5);
+        $result1 = $this->restProxy->insertEntity(self::$TEST_TABLE_8, $entity1);
+        $result2 = $this->restProxy->insertEntity(self::$TEST_TABLE_8, $entity2);
+        $result3 = $this->restProxy->insertEntity(self::$TEST_TABLE_8, $entity3);
+        $result4 = $this->restProxy->insertEntity(self::$TEST_TABLE_8, $entity4);
+        $result5 = $this->restProxy->insertEntity(self::$TEST_TABLE_8, $entity5);
 
-        $this->wrapper->deleteEntity(self::$TEST_TABLE_8, $result1->getEntity()->getPartitionKey(), $result1->getEntity()->getRowKey());
-        $this->wrapper->deleteEntity(self::$TEST_TABLE_8, $result2->getEntity()->getPartitionKey(), $result2->getEntity()->getRowKey());
-        $this->wrapper->deleteEntity(self::$TEST_TABLE_8, $result3->getEntity()->getPartitionKey(), $result3->getEntity()->getRowKey());
-        $this->wrapper->deleteEntity(self::$TEST_TABLE_8, $result4->getEntity()->getPartitionKey(), $result4->getEntity()->getRowKey());
-        $this->wrapper->deleteEntity(self::$TEST_TABLE_8, $result5->getEntity()->getPartitionKey(), $result5->getEntity()->getRowKey());
+        $this->restProxy->deleteEntity(self::$TEST_TABLE_8, $result1->getEntity()->getPartitionKey(), $result1->getEntity()->getRowKey());
+        $this->restProxy->deleteEntity(self::$TEST_TABLE_8, $result2->getEntity()->getPartitionKey(), $result2->getEntity()->getRowKey());
+        $this->restProxy->deleteEntity(self::$TEST_TABLE_8, $result3->getEntity()->getPartitionKey(), $result3->getEntity()->getRowKey());
+        $this->restProxy->deleteEntity(self::$TEST_TABLE_8, $result4->getEntity()->getPartitionKey(), $result4->getEntity()->getRowKey());
+        $this->restProxy->deleteEntity(self::$TEST_TABLE_8, $result5->getEntity()->getPartitionKey(), $result5->getEntity()->getRowKey());
 
         // Assert
         try {
-            $this->wrapper->getEntity(self::$TEST_TABLE_8, $result1->getEntity()->getPartitionKey(), $result1->getEntity()->getRowKey());
+            $this->restProxy->getEntity(self::$TEST_TABLE_8, $result1->getEntity()->getPartitionKey(), $result1->getEntity()->getRowKey());
             $this->fail('Expect an exception when getting an entity that does not exist');
         }
         catch (ServiceException $e) {
@@ -570,11 +570,11 @@ class TableServiceIntegrationTest extends IntegrationTestBase {
 
         $qopts = new QueryEntitiesOptions();
         $qopts->setFilter(Filter::applyEq(Filter::applyPropertyName('RowKey'), Filter::applyConstant('key\'with\'quotes', EdmType::STRING)));
-        $assertResult2 = $this->wrapper->queryEntities(self::$TEST_TABLE_8, $qopts);
+        $assertResult2 = $this->restProxy->queryEntities(self::$TEST_TABLE_8, $qopts);
 
         $this->assertEquals(0, count($assertResult2->getEntities()), 'entities returned');
 
-        $assertResult3 = $this->wrapper->queryEntities(self::$TEST_TABLE_8);
+        $assertResult3 = $this->restProxy->queryEntities(self::$TEST_TABLE_8);
         foreach($assertResult3->getEntities() as $entity)  {
             $this->assertFalse($entity3->getRowKey() == $entity->getRowKey(), 'Entity3 should be removed from the table');
             $this->assertFalse($entity4->getRowKey() == $entity->getRowKey(), 'Entity4 should be removed from the table');
@@ -598,11 +598,11 @@ class TableServiceIntegrationTest extends IntegrationTestBase {
         $entity->addProperty('test5', EdmType::DATETIME, new \DateTime());
 
         // Act
-        $result = $this->wrapper->insertEntity(self::$TEST_TABLE_2, $entity);
+        $result = $this->restProxy->insertEntity(self::$TEST_TABLE_2, $entity);
 
         $deo = new DeleteEntityOptions();
         $deo->setEtag($result->getEntity()->getEtag());
-        $this->wrapper->deleteEntity(self::$TEST_TABLE_2, $result->getEntity()->getPartitionKey(), $result->getEntity()->getRowKey(),
+        $this->restProxy->deleteEntity(self::$TEST_TABLE_2, $result->getEntity()->getPartitionKey(), $result->getEntity()->getRowKey(),
                 $deo);
 
         // Assert
@@ -629,8 +629,8 @@ class TableServiceIntegrationTest extends IntegrationTestBase {
         $entity->addProperty('test7', EdmType::GUID, $uuid);
 
         // Act
-        $insertResult = $this->wrapper->insertEntity(self::$TEST_TABLE_2, $entity);
-        $result = $this->wrapper->getEntity(self::$TEST_TABLE_2, $insertResult->getEntity()->getPartitionKey(), $insertResult->getEntity()->getRowKey());
+        $insertResult = $this->restProxy->insertEntity(self::$TEST_TABLE_2, $entity);
+        $result = $this->restProxy->getEntity(self::$TEST_TABLE_2, $insertResult->getEntity()->getPartitionKey(), $insertResult->getEntity()->getRowKey());
 
         // Assert
         $this->assertNotNull($result, '$result');
@@ -683,8 +683,8 @@ class TableServiceIntegrationTest extends IntegrationTestBase {
         $entity->addProperty('test5', EdmType::DATETIME, new \DateTime());
 
         // Act
-        $this->wrapper->insertEntity(self::$TEST_TABLE_3, $entity);
-        $result = $this->wrapper->queryEntities(self::$TEST_TABLE_3);
+        $this->restProxy->insertEntity(self::$TEST_TABLE_3, $entity);
+        $result = $this->restProxy->queryEntities(self::$TEST_TABLE_3);
 
         // Assert
         $this->assertNotNull($result, '$result');
@@ -733,7 +733,7 @@ class TableServiceIntegrationTest extends IntegrationTestBase {
             $entity->addProperty('test4', EdmType::INT64, '12345678901');
             $entity->addProperty('test5', EdmType::DATETIME, new \DateTime());
 
-            $this->wrapper->insertEntity($table, $entity);
+            $this->restProxy->insertEntity($table, $entity);
         }
 
         // Act
@@ -744,7 +744,7 @@ class TableServiceIntegrationTest extends IntegrationTestBase {
             $qeo = new QueryEntitiesOptions();
             $qeo->setNextPartitionKey($nextPartitionKey);
             $qeo->setNextRowKey($nextRowKey);
-            $result = $this->wrapper->queryEntities($table, $qeo);
+            $result = $this->restProxy->queryEntities($table, $qeo);
 
             $entryCount += count($result->getEntities());
 
@@ -779,7 +779,7 @@ class TableServiceIntegrationTest extends IntegrationTestBase {
             $entity->addProperty('test6', EdmType::BINARY, chr($i));
             $entity->addProperty('test7', EdmType::GUID, strtolower(trim(com_create_guid(), '{}')));
             $entities[$i] = $entity;
-            $this->wrapper->insertEntity($table, $entity);
+            $this->restProxy->insertEntity($table, $entity);
         }
 
         {
@@ -789,7 +789,7 @@ class TableServiceIntegrationTest extends IntegrationTestBase {
             $q->setFilter($f);
             $qeo = new QueryEntitiesOptions();
             $qeo->setQuery($q);
-            $result = $this->wrapper->queryEntities($table, $qeo);
+            $result = $this->restProxy->queryEntities($table, $qeo);
 
             // Assert
             $this->assertNotNull($result, '$result');
@@ -804,7 +804,7 @@ class TableServiceIntegrationTest extends IntegrationTestBase {
             $q->setFilter(Filter::applyQueryString('RowKey eq \'queryEntitiesWithFilterWorks-3\''));
             $qeo = new QueryEntitiesOptions();
             $qeo->setQuery($q);
-            $result = $this->wrapper->queryEntities($table, $qeo);
+            $result = $this->restProxy->queryEntities($table, $qeo);
 
             // Assert
             $this->assertNotNull($result, '$result');
@@ -819,7 +819,7 @@ class TableServiceIntegrationTest extends IntegrationTestBase {
             $q->setFilter(Filter::applyEq(Filter::applyPropertyName('test'), Filter::applyConstant(true, EdmType::BOOLEAN)));
             $qeo = new QueryEntitiesOptions();
             $qeo->setQuery($q);
-            $result = $this->wrapper->queryEntities($table, $qeo);
+            $result = $this->restProxy->queryEntities($table, $qeo);
 
             // Assert
             $this->assertNotNull($result, '$result');
@@ -832,7 +832,7 @@ class TableServiceIntegrationTest extends IntegrationTestBase {
             $q->setFilter(Filter::applyEq(Filter::applyPropertyName('test2'), Filter::applyConstant('\'value" 3', EdmType::STRING)));
             $qeo = new QueryEntitiesOptions();
             $qeo->setQuery($q);
-            $result = $this->wrapper->queryEntities($table, $qeo);
+            $result = $this->restProxy->queryEntities($table, $qeo);
             
             // Assert
             $this->assertNotNull($result, '$result');
@@ -847,7 +847,7 @@ class TableServiceIntegrationTest extends IntegrationTestBase {
             $q->setFilter(Filter::applyEq(Filter::applyPropertyName('test4'), Filter::applyConstant(12345678903, EdmType::INT64)));
             $qeo = new QueryEntitiesOptions();
             $qeo->setQuery($q);
-            $result = $this->wrapper->queryEntities($table, $qeo);
+            $result = $this->restProxy->queryEntities($table, $qeo);
 
             // Assert
             $this->assertNotNull($result, '$result');
@@ -862,7 +862,7 @@ class TableServiceIntegrationTest extends IntegrationTestBase {
             $q->setFilter(Filter::applyEq(Filter::applyPropertyName('test5'), Filter::applyConstant(new \DateTime('2012-01-03'), EdmType::DATETIME)));
             $qeo = new QueryEntitiesOptions();
             $qeo->setQuery($q);
-            $result = $this->wrapper->queryEntities($table, $qeo);
+            $result = $this->restProxy->queryEntities($table, $qeo);
 
             // Assert
             $this->assertNotNull($result, '$result');
@@ -878,7 +878,7 @@ class TableServiceIntegrationTest extends IntegrationTestBase {
             $q->setFilter(Filter::applyEq(Filter::applyPropertyName('test6'), Filter::applyConstant(chr(3), EdmType::BINARY)));
             $qeo = new QueryEntitiesOptions();
             $qeo->setQuery($q);
-            $result = $this->wrapper->queryEntities($table, $qeo);
+            $result = $this->restProxy->queryEntities($table, $qeo);
 
             // Assert
             $this->assertNotNull($result, '$result');
@@ -894,7 +894,7 @@ class TableServiceIntegrationTest extends IntegrationTestBase {
             $q->setFilter(Filter::applyEq(Filter::applyPropertyName('test7'), Filter::applyConstant($ent3->getPropertyValue('test7'), EdmType::GUID)));
             $qeo = new QueryEntitiesOptions();
             $qeo->setQuery($q);
-            $result = $this->wrapper->queryEntities($table, $qeo);
+            $result = $this->restProxy->queryEntities($table, $qeo);
 
             // Assert
             $this->assertNotNull($result, '$result');
@@ -924,7 +924,7 @@ class TableServiceIntegrationTest extends IntegrationTestBase {
 
         $bo = new BatchOperations();
         $bo->addInsertEntity($table, $entity);
-        $result = $this->wrapper->batch($bo);
+        $result = $this->restProxy->batch($bo);
 
         // Assert
         $this->assertNotNull($result, '$result');
@@ -949,13 +949,13 @@ class TableServiceIntegrationTest extends IntegrationTestBase {
         $entity->addProperty('test3', EdmType::INT32, 3);
         $entity->addProperty('test4', EdmType::INT64, '12345678901');
         $entity->addProperty('test5', EdmType::DATETIME, new \DateTime());
-        $entity = $this->wrapper->insertEntity($table, $entity)->getEntity();
+        $entity = $this->restProxy->insertEntity($table, $entity)->getEntity();
 
         // Act
         $entity->addProperty('test', EdmType::BOOLEAN, false);
         $bo = new BatchOperations();
         $bo->addUpdateEntity($table, $entity);
-        $result = $this->wrapper->batch($bo);
+        $result = $this->restProxy->batch($bo);
 
         // Assert
         $this->assertNotNull($result, '$result');
@@ -980,12 +980,12 @@ class TableServiceIntegrationTest extends IntegrationTestBase {
         $entity->addProperty('test3', EdmType::INT32, 3);
         $entity->addProperty('test4', EdmType::INT64, '12345678901');
         $entity->addProperty('test5', EdmType::DATETIME, new \DateTime());
-        $entity = $this->wrapper->insertEntity($table, $entity)->getEntity();
+        $entity = $this->restProxy->insertEntity($table, $entity)->getEntity();
 
         // Act
         $bo = new BatchOperations();
         $bo->addMergeEntity($table, $entity);
-        $result = $this->wrapper->batch($bo);
+        $result = $this->restProxy->batch($bo);
 
         // Assert
         $this->assertNotNull($result, '$result');
@@ -1015,7 +1015,7 @@ class TableServiceIntegrationTest extends IntegrationTestBase {
 
         $bo = new BatchOperations();
         $bo->addInsertOrReplaceEntity($table, $entity);
-        $result = $this->wrapper->batch($bo);
+        $result = $this->restProxy->batch($bo);
 
         // Assert
         $this->assertNotNull($result, '$result');
@@ -1045,7 +1045,7 @@ class TableServiceIntegrationTest extends IntegrationTestBase {
 
         $bo = new BatchOperations();
         $bo->addInsertOrMergeEntity($table, $entity);
-        $result = $this->wrapper->batch($bo);
+        $result = $this->restProxy->batch($bo);
 
         // Assert
         $this->assertNotNull($result, '$result');
@@ -1070,12 +1070,12 @@ class TableServiceIntegrationTest extends IntegrationTestBase {
         $entity->addProperty('test3', EdmType::INT32, 3);
         $entity->addProperty('test4', EdmType::INT64, '12345678901');
         $entity->addProperty('test5', EdmType::DATETIME, new \DateTime());
-        $entity = $this->wrapper->insertEntity($table, $entity)->getEntity();
+        $entity = $this->restProxy->insertEntity($table, $entity)->getEntity();
 
         // Act
         $bo = new BatchOperations();
         $bo->addDeleteEntity($table, $entity->getPartitionKey(), $entity->getRowKey(), $entity->getEtag());
-        $result = $this->wrapper->batch($bo);
+        $result = $this->restProxy->batch($bo);
 
         // Assert
         $this->assertNotNull($result, '$result');
@@ -1108,7 +1108,7 @@ class TableServiceIntegrationTest extends IntegrationTestBase {
 
             $batchOperations->addInsertEntity($table, $entity);
         }
-        $result = $this->wrapper->batch($batchOperations);
+        $result = $this->restProxy->batch($batchOperations);
 
         // Assert
         $this->assertNotNull($result, '$result');
@@ -1158,7 +1158,7 @@ class TableServiceIntegrationTest extends IntegrationTestBase {
         $entity1->addProperty('test4', EdmType::INT64, '12345678901');
         $entity1->addProperty('test5', EdmType::DATETIME, new \DateTime());
 
-        $entity1 = $this->wrapper->insertEntity($table, $entity1)->getEntity();
+        $entity1 = $this->restProxy->insertEntity($table, $entity1)->getEntity();
 
         $entity2 = new Entity();
         $entity2->setPartitionKey($partitionKey);
@@ -1169,7 +1169,7 @@ class TableServiceIntegrationTest extends IntegrationTestBase {
         $entity2->addProperty('test4', EdmType::INT64, '12345678901');
         $entity2->addProperty('test5', EdmType::DATETIME, new \DateTime());
 
-        $entity2 = $this->wrapper->insertEntity($table, $entity2)->getEntity();
+        $entity2 = $this->restProxy->insertEntity($table, $entity2)->getEntity();
 
         $entity3 = new Entity();
         $entity3->setPartitionKey($partitionKey);
@@ -1180,7 +1180,7 @@ class TableServiceIntegrationTest extends IntegrationTestBase {
         $entity3->addProperty('test4', EdmType::INT64, '12345678901');
         $entity3->addProperty('test5', EdmType::DATETIME, new \DateTime());
 
-        $entity3 = $this->wrapper->insertEntity($table, $entity3)->getEntity();
+        $entity3 = $this->restProxy->insertEntity($table, $entity3)->getEntity();
 
         $entity4 = new Entity();
         $entity4->setPartitionKey($partitionKey);
@@ -1191,7 +1191,7 @@ class TableServiceIntegrationTest extends IntegrationTestBase {
         $entity4->addProperty('test4', EdmType::INT64, '12345678901');
         $entity4->addProperty('test5', EdmType::DATETIME, new \DateTime());
 
-        $entity4 = $this->wrapper->insertEntity($table, $entity4)->getEntity();
+        $entity4 = $this->restProxy->insertEntity($table, $entity4)->getEntity();
 
         // Act
         $batchOperations = new BatchOperations();
@@ -1235,7 +1235,7 @@ class TableServiceIntegrationTest extends IntegrationTestBase {
             $batchOperations->addInsertOrMergeEntity($table, $entity5);
         }
 
-        $result = $this->wrapper->batch($batchOperations);
+        $result = $this->restProxy->batch($batchOperations);
 
         // Assert
         $this->assertNotNull($result, '$result');
@@ -1279,10 +1279,10 @@ class TableServiceIntegrationTest extends IntegrationTestBase {
         $entity3->setRowKey('batchNegativeWorks3');
         $entity3->addProperty('test', EdmType::INT32, 3);
 
-        $entity1 = $this->wrapper->insertEntity($table, $entity1)->getEntity();
-        $entity2 = $this->wrapper->insertEntity($table, $entity2)->getEntity();
+        $entity1 = $this->restProxy->insertEntity($table, $entity1)->getEntity();
+        $entity2 = $this->restProxy->insertEntity($table, $entity2)->getEntity();
         $entity2->addProperty('test', EdmType::INT32, -2);
-        $this->wrapper->updateEntity($table, $entity2);
+        $this->restProxy->updateEntity($table, $entity2);
 
         // Act
         $batchOperations = new BatchOperations();
@@ -1294,7 +1294,7 @@ class TableServiceIntegrationTest extends IntegrationTestBase {
         $batchOperations->addUpdateEntity($table, $entity2);
         $batchOperations->addInsertEntity($table, $entity3);
 
-        $result = $this->wrapper->batch($batchOperations);
+        $result = $this->restProxy->batch($batchOperations);
 
         // Assert
         $this->assertNotNull($result, '$result');

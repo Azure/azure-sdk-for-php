@@ -50,7 +50,7 @@ class QueueServiceFunctionalTest extends FunctionalTestBase {
        
         $shouldReturn = false;
         try {
-            $this->wrapper->setServiceProperties($serviceProperties);
+            $this->restProxy->setServiceProperties($serviceProperties);
             $this->assertFalse(Configuration::isEmulated(), 'Should succeed when not running in emulator');
         } catch (ServiceException $e) {
             // Expect failure in emulator, as v1.6 doesn't support this method
@@ -77,7 +77,7 @@ class QueueServiceFunctionalTest extends FunctionalTestBase {
 
         $shouldReturn = false;
         try {
-            $this->wrapper->setServiceProperties($serviceProperties);
+            $this->restProxy->setServiceProperties($serviceProperties);
             $this->assertFalse(Configuration::isEmulated(), 'Should succeed when not running in emulator');
         } catch (ServiceException $e) {
             // Expect failure in emulator, as v1.6 doesn't support this method
@@ -105,7 +105,7 @@ class QueueServiceFunctionalTest extends FunctionalTestBase {
         self::println( 'Trying $options: ' . self::tmptostring($options));
         $effOptions = (is_null($options) ? new QueueServiceOptions() : $options);
         try {
-            $ret = (is_null($options) ? $this->wrapper->getServiceProperties() : $this->wrapper->getServiceProperties($effOptions));
+            $ret = (is_null($options) ? $this->restProxy->getServiceProperties() : $this->restProxy->getServiceProperties($effOptions));
 
             if (!is_null($effOptions->getTimeout()) && $effOptions->getTimeout() < 1) {
                 $this->True('Expect negative timeouts in $options to throw', false);
@@ -188,16 +188,16 @@ class QueueServiceFunctionalTest extends FunctionalTestBase {
         }
 
         if (!Configuration::isEmulated()) {
-            $this->wrapper->setServiceProperties($interestingServiceProperties[0]);
+            $this->restProxy->setServiceProperties($interestingServiceProperties[0]);
         }
     }
 
     private function setServicePropertiesWorker($serviceProperties, $options) {
         try {
             if (is_null($options)) {
-                $this->wrapper->setServiceProperties($serviceProperties);
+                $this->restProxy->setServiceProperties($serviceProperties);
             } else {
-                $this->wrapper->setServiceProperties($serviceProperties, $options);
+                $this->restProxy->setServiceProperties($serviceProperties, $options);
             }
 
             if (is_null($options)) {
@@ -210,7 +210,7 @@ class QueueServiceFunctionalTest extends FunctionalTestBase {
                 $this->assertFalse(Configuration::isEmulated(), 'Should succeed when not running in emulator');
             }
 
-            $ret = (is_null($options) ? $this->wrapper->getServiceProperties() : $this->wrapper->getServiceProperties($options));
+            $ret = (is_null($options) ? $this->restProxy->getServiceProperties() : $this->restProxy->getServiceProperties($options));
             $this->verifyServicePropertiesWorker($ret, $serviceProperties);
         } catch (ServiceException $e) {
             if (is_null($options)) {
@@ -254,7 +254,7 @@ class QueueServiceFunctionalTest extends FunctionalTestBase {
         $finished = false;
         while (!$finished) {
             try {
-                $ret = (is_null($options) ? $this->wrapper->listQueues() : $this->wrapper->listQueues($options));
+                $ret = (is_null($options) ? $this->restProxy->listQueues() : $this->restProxy->listQueues($options));
 
                 if (is_null($options)) {
                     $options = new ListQueuesOptions();
@@ -366,10 +366,10 @@ class QueueServiceFunctionalTest extends FunctionalTestBase {
 
         try {
             if (is_null($options)) {
-                $this->wrapper->createQueue($queue);
+                $this->restProxy->createQueue($queue);
             }
             else {
-                $this->wrapper->createQueue($queue, $options);
+                $this->restProxy->createQueue($queue, $options);
             }
             $created = true;
 
@@ -386,13 +386,13 @@ class QueueServiceFunctionalTest extends FunctionalTestBase {
             // Make sure that the list of all applicable queues is correctly updated.
             $opts = new ListQueuesOptions();
             $opts->setPrefix(QueueServiceFunctionalTestData::$testUniqueId);
-            $qs = $this->wrapper->listQueues($opts);
+            $qs = $this->restProxy->listQueues($opts);
             $this->assertEquals(count($qs->getQueues()), (count(QueueServiceFunctionalTestData::$TEST_QUEUE_NAMES) + 1), 'After adding one, with Prefix=(\'' . QueueServiceFunctionalTestData::$testUniqueId . '\'), then Queues->length');
 
             // Check the metadata on the queue
-            $ret = $this->wrapper->getQueueMetadata($queue);
+            $ret = $this->restProxy->getQueueMetadata($queue);
             $this->verifyCreateQueueWorker($ret, $options);
-            $this->wrapper->deleteQueue($queue);
+            $this->restProxy->deleteQueue($queue);
             $created = false;
         }
         catch (ServiceException $e) {
@@ -407,7 +407,7 @@ class QueueServiceFunctionalTest extends FunctionalTestBase {
             }
         }
         if ($created) {
-            $this->wrapper->deleteQueue($queue);
+            $this->restProxy->deleteQueue($queue);
         }
     }
 
@@ -462,21 +462,21 @@ class QueueServiceFunctionalTest extends FunctionalTestBase {
         $queue = QueueServiceFunctionalTestData::getInterestingQueueName();
 
         // Make sure there is something to delete.
-        $this->wrapper->createQueue($queue);
+        $this->restProxy->createQueue($queue);
 
         // Make sure that the list of all applicable queues is correctly updated.
         $opts = new ListQueuesOptions();
         $opts->setPrefix(QueueServiceFunctionalTestData::$testUniqueId);
-        $qs = $this->wrapper->listQueues($opts);
+        $qs = $this->restProxy->listQueues($opts);
         $this->assertEquals(count($qs->getQueues()), (count(QueueServiceFunctionalTestData::$TEST_QUEUE_NAMES) + 1), 'After adding one, with Prefix=(\'' . QueueServiceFunctionalTestData::$testUniqueId . '\'), then Queues->length');
 
         $deleted = false;
         try {
             if (is_null($options)) {
-                $this->wrapper->deleteQueue($queue);
+                $this->restProxy->deleteQueue($queue);
             }
             else {
-                $this->wrapper->deleteQueue($queue, $options);
+                $this->restProxy->deleteQueue($queue, $options);
             }
 
             $deleted = true;
@@ -492,7 +492,7 @@ class QueueServiceFunctionalTest extends FunctionalTestBase {
             // Make sure that the list of all applicable queues is correctly updated.
             $opts = new ListQueuesOptions();
             $opts->setPrefix(QueueServiceFunctionalTestData::$testUniqueId);
-            $qs = $this->wrapper->listQueues($opts);
+            $qs = $this->restProxy->listQueues($opts);
             $this->assertEquals(count($qs->getQueues()), count(QueueServiceFunctionalTestData::$TEST_QUEUE_NAMES), 'After adding then deleting one, with Prefix=(\'' . QueueServiceFunctionalTestData::$testUniqueId . '\'), then Queues->length');
 
             // Nothing else interesting to check for the options.
@@ -507,7 +507,7 @@ class QueueServiceFunctionalTest extends FunctionalTestBase {
         }
         if (!$deleted) {
             // Try again. If it doesn't work, not much else to try.
-            $this->wrapper->deleteQueue($queue);
+            $this->restProxy->deleteQueue($queue);
         }
     }
 
@@ -553,20 +553,20 @@ class QueueServiceFunctionalTest extends FunctionalTestBase {
         $queue = QueueServiceFunctionalTestData::getInterestingQueueName();
 
         // Make sure there is something to test
-        $this->wrapper->createQueue($queue);
+        $this->restProxy->createQueue($queue);
 
         // Put some messages to verify getApproximateMessageCount 
         if (!is_null($metadata)) {
             for ($i = 0; $i < count($metadata); $i++) {
-                $this->wrapper->createMessage($queue, 'message ' . $i);
+                $this->restProxy->createMessage($queue, 'message ' . $i);
             }
 
             // And put in some metadata
-            $this->wrapper->setQueueMetadata($queue, $metadata);
+            $this->restProxy->setQueueMetadata($queue, $metadata);
         }
 
         try {
-            $res = (is_null($options) ? $this->wrapper->getQueueMetadata($queue) : $this->wrapper->getQueueMetadata( $queue, $options));
+            $res = (is_null($options) ? $this->restProxy->getQueueMetadata($queue) : $this->restProxy->getQueueMetadata( $queue, $options));
 
             if (is_null($options)) {
                 $options = new QueueServiceOptions();
@@ -587,7 +587,7 @@ class QueueServiceFunctionalTest extends FunctionalTestBase {
             }
         }
         // Clean up->
-        $this->wrapper->deleteQueue($queue);
+        $this->restProxy->deleteQueue($queue);
     }
 
     private function verifyGetSetQueueMetadataWorker($ret, $metadata) {
@@ -656,16 +656,16 @@ class QueueServiceFunctionalTest extends FunctionalTestBase {
         $queue = QueueServiceFunctionalTestData::getInterestingQueueName();
 
         // Make sure there is something to test
-        $this->wrapper->createQueue($queue);
+        $this->restProxy->createQueue($queue);
 
         try {
           try {
             // And put in some metadata
             if (is_null($options)) {
-                $this->wrapper->setQueueMetadata($queue, $metadata);
+                $this->restProxy->setQueueMetadata($queue, $metadata);
             }
             else {
-                $this->wrapper->setQueueMetadata($queue, $metadata, $options);
+                $this->restProxy->setQueueMetadata($queue, $metadata, $options);
             }
 
             if (is_null($options)) {
@@ -676,7 +676,7 @@ class QueueServiceFunctionalTest extends FunctionalTestBase {
                 $this->assertTrue(false, 'Expect negative timeouts in $options to throw');
             }
 
-            $res = $this->wrapper->getQueueMetadata($queue);
+            $res = $this->restProxy->getQueueMetadata($queue);
             $this->verifyGetSetQueueMetadataWorker($res, $metadata);
           }
           catch (HTTP_Request2_LogicException $le) {
@@ -698,7 +698,7 @@ class QueueServiceFunctionalTest extends FunctionalTestBase {
             }
         }
         // Clean up.
-        $this->wrapper->deleteQueue($queue);
+        $this->restProxy->deleteQueue($queue);
     }
 
     /**
@@ -747,26 +747,26 @@ class QueueServiceFunctionalTest extends FunctionalTestBase {
     public function testCreateMessageWithSmallTTL() {
         $queue = QueueServiceFunctionalTestData::$TEST_QUEUE_NAMES;
         $queue = $queue[0];
-        $this->wrapper->clearMessages($queue);
+        $this->restProxy->clearMessages($queue);
         $messageText = QueueServiceFunctionalTestData::getSimpleMessageText();
 
         $options = new CreateMessageOptions();
         $options->setVisibilityTimeoutInSeconds(2);
         $options->setTimeToLiveInSeconds('4');
 
-        $this->wrapper->createMessage($queue, $messageText, $options);
+        $this->restProxy->createMessage($queue, $messageText, $options);
 
-        $lmr = $this->wrapper->listMessages($queue);
+        $lmr = $this->restProxy->listMessages($queue);
 
         // No messages, because it is not visible for 2 seconds.
         $this->assertEquals(0, count($lmr->getQueueMessages()), 'getQueueMessages() count');
         sleep(6);
         // Try again, passed the VisibilityTimeout has passed, but also the 4 second TTL has passed.
-        $lmr = $this->wrapper->listMessages($queue);
+        $lmr = $this->restProxy->listMessages($queue);
 
         $this->assertEquals(0, count($lmr->getQueueMessages()), 'getQueueMessages() count');
 
-        $this->wrapper->clearMessages($queue);
+        $this->restProxy->clearMessages($queue);
     }
 
     /**
@@ -804,14 +804,14 @@ class QueueServiceFunctionalTest extends FunctionalTestBase {
         self::println( 'Trying $options: ' . self::tmptostring($options));
         $queue = QueueServiceFunctionalTestData::$TEST_QUEUE_NAMES;
         $queue = $queue[0];
-        $this->wrapper->clearMessages($queue);
+        $this->restProxy->clearMessages($queue);
 
         try {
             if (is_null($options)) {
-                $this->wrapper->createMessage($queue, $messageText);
+                $this->restProxy->createMessage($queue, $messageText);
             }
             else {
-                $this->wrapper->createMessage($queue, $messageText, $options);
+                $this->restProxy->createMessage($queue, $messageText, $options);
             }
 
             if (is_null($options)) {
@@ -835,12 +835,12 @@ class QueueServiceFunctionalTest extends FunctionalTestBase {
             }
 
             // Check that the message matches
-            $lmr = $this->wrapper->listMessages($queue);
+            $lmr = $this->restProxy->listMessages($queue);
             if (!is_null($options->getVisibilityTimeoutInSeconds()) && $options->getVisibilityTimeoutInSeconds() > 0) {
                 $this->assertEquals(0, count($lmr->getQueueMessages()), 'getQueueMessages() count');
                 sleep(QueueServiceFunctionalTestData::INTERESTING_TTL);
                 // Try again, not that the 4 second visibility has passed
-                $lmr = $this->wrapper->listMessages($queue);
+                $lmr = $this->restProxy->listMessages($queue);
                 if ($options->getVisibilityTimeoutInSeconds() > QueueServiceFunctionalTestData::INTERESTING_TTL) {
                     $this->assertEquals(0, count($lmr->getQueueMessages()), 'getQueueMessages() count');
                 }
@@ -877,7 +877,7 @@ class QueueServiceFunctionalTest extends FunctionalTestBase {
                 $this->assertNull($e, 'Expect positive timeouts in $options to be fine');
             }
         }
-        $this->wrapper->clearMessages($queue);
+        $this->restProxy->clearMessages($queue);
     }
 
     /**
@@ -927,19 +927,19 @@ class QueueServiceFunctionalTest extends FunctionalTestBase {
                 ' and $visibilityTimeoutInSeconds: ' . self::tmptostring($visibilityTimeoutInSeconds));
         $queue = QueueServiceFunctionalTestData::$TEST_QUEUE_NAMES;
         $queue = $queue[0];
-        $this->wrapper->clearMessages($queue);
+        $this->restProxy->clearMessages($queue);
 
-        $this->wrapper->createMessage($queue, QueueServiceFunctionalTestData::getSimpleMessageText(), $startingMessage);
-        $lmr = $this->wrapper->listMessages($queue);
+        $this->restProxy->createMessage($queue, QueueServiceFunctionalTestData::getSimpleMessageText(), $startingMessage);
+        $lmr = $this->restProxy->listMessages($queue);
         $m = $lmr->getQueueMessages();
         $m = $m[0];
 
         try {
             if (is_null($options)) {
-                $this->wrapper->updateMessage($queue, $m->getMessageId(), $m->getPopReceipt(), $messageText, $visibilityTimeoutInSeconds);
+                $this->restProxy->updateMessage($queue, $m->getMessageId(), $m->getPopReceipt(), $messageText, $visibilityTimeoutInSeconds);
             }
             else {
-                $this->wrapper->updateMessage($queue, $m->getMessageId(), $m->getPopReceipt(), $messageText, $visibilityTimeoutInSeconds, $options);
+                $this->restProxy->updateMessage($queue, $m->getMessageId(), $m->getPopReceipt(), $messageText, $visibilityTimeoutInSeconds, $options);
             }
 
             if (is_null($options)) {
@@ -954,12 +954,12 @@ class QueueServiceFunctionalTest extends FunctionalTestBase {
             }
 
             // Check that the message matches
-            $lmr = $this->wrapper->listMessages($queue);
+            $lmr = $this->restProxy->listMessages($queue);
             if ($visibilityTimeoutInSeconds > 0) {
                 $this->assertEquals(0, count($lmr->getQueueMessages()), 'getQueueMessages() count');
                 sleep(QueueServiceFunctionalTestData::INTERESTING_TTL);
                 // Try again, not that the 4 second visibility has passed
-                $lmr = $this->wrapper->listMessages($queue);
+                $lmr = $this->restProxy->listMessages($queue);
                 if ($visibilityTimeoutInSeconds > QueueServiceFunctionalTestData::INTERESTING_TTL) {
                     $this->assertEquals(0, count($lmr->getQueueMessages()), 'getQueueMessages() count');
                 }
@@ -994,7 +994,7 @@ class QueueServiceFunctionalTest extends FunctionalTestBase {
                 $this->assertNull($e, 'Expect positive timeouts in $options to be fine');
             }
         }
-        $this->wrapper->clearMessages($queue);
+        $this->restProxy->clearMessages($queue);
     }
 
     /**
@@ -1026,21 +1026,21 @@ class QueueServiceFunctionalTest extends FunctionalTestBase {
         self::println( 'Trying $options: ' . self::tmptostring($options));
         $queue = QueueServiceFunctionalTestData::$TEST_QUEUE_NAMES;
         $queue = $queue[0];
-        $this->wrapper->clearMessages($queue);
+        $this->restProxy->clearMessages($queue);
 
-        $this->wrapper->createMessage($queue, 'test');
+        $this->restProxy->createMessage($queue, 'test');
         $opts = new ListMessagesOptions();
         $opts->setVisibilityTimeoutInSeconds(QueueServiceFunctionalTestData::INTERESTING_TTL);
-        $lmr = $this->wrapper->listMessages($queue, $opts);
+        $lmr = $this->restProxy->listMessages($queue, $opts);
         $m = $lmr->getQueueMessages();
         $m = $m[0];
 
         try {
             if (is_null($options)) {
-                $this->wrapper->deleteMessage($queue, $m->getMessageId(), $m->getPopReceipt());
+                $this->restProxy->deleteMessage($queue, $m->getMessageId(), $m->getPopReceipt());
             }
             else {
-                $this->wrapper->deleteMessage($queue, $m->getMessageId(), $m->getPopReceipt(), $options);
+                $this->restProxy->deleteMessage($queue, $m->getMessageId(), $m->getPopReceipt(), $options);
             }
 
             if (is_null($options)) {
@@ -1051,13 +1051,13 @@ class QueueServiceFunctionalTest extends FunctionalTestBase {
             }
 
             // Check that the message matches
-            $lmr = $this->wrapper->listMessages($queue);
+            $lmr = $this->restProxy->listMessages($queue);
             $this->assertEquals(0, count($lmr->getQueueMessages()), 'getQueueMessages() count');
 
             // Wait until the popped message should be visible again.
             sleep(QueueServiceFunctionalTestData::INTERESTING_TTL + 1);
             // Try again, to make sure the message really is gone.
-            $lmr = $this->wrapper->listMessages($queue);
+            $lmr = $this->restProxy->listMessages($queue);
             $this->assertEquals(0, count($lmr->getQueueMessages()), 'getQueueMessages() count');
         }
         catch (ServiceException $e) {
@@ -1068,7 +1068,7 @@ class QueueServiceFunctionalTest extends FunctionalTestBase {
                 $this->assertNull($e, 'Expect positive timeouts in $options to be fine');
             }
         }
-        $this->wrapper->clearMessages($queue);
+        $this->restProxy->clearMessages($queue);
     }
 
     /**
@@ -1112,12 +1112,12 @@ class QueueServiceFunctionalTest extends FunctionalTestBase {
         self::println( 'Trying $options: ' . self::tmptostring($options));
         $queue = QueueServiceFunctionalTestData::$TEST_QUEUE_NAMES;
         $queue = $queue[0];
-        $this->wrapper->clearMessages($queue);
+        $this->restProxy->clearMessages($queue);
 
         // Put three messages into the queue.
-        $this->wrapper->createMessage($queue, QueueServiceFunctionalTestData::getSimpleMessageText());
-        $this->wrapper->createMessage($queue, QueueServiceFunctionalTestData::getSimpleMessageText());
-        $this->wrapper->createMessage($queue, QueueServiceFunctionalTestData::getSimpleMessageText());
+        $this->restProxy->createMessage($queue, QueueServiceFunctionalTestData::getSimpleMessageText());
+        $this->restProxy->createMessage($queue, QueueServiceFunctionalTestData::getSimpleMessageText());
+        $this->restProxy->createMessage($queue, QueueServiceFunctionalTestData::getSimpleMessageText());
 
         // Default is 1 message
         $effectiveNumOfMessages = (is_null($options) || is_null($options->getNumberOfMessages()) ? 1 : $options ->getNumberOfMessages());
@@ -1132,7 +1132,7 @@ class QueueServiceFunctionalTest extends FunctionalTestBase {
         $expectedNumMessagesSecond = ($expectedNumMessagesSecond < 0 ? 0 : $expectedNumMessagesSecond);
 
         try {
-            $res = (is_null($options) ? $this->wrapper->listMessages($queue) : $this->wrapper->listMessages($queue, $options));
+            $res = (is_null($options) ? $this->restProxy->listMessages($queue) : $this->restProxy->listMessages($queue, $options));
 
             if (is_null($options)) {
                 $options = new ListMessagesOptions();
@@ -1151,7 +1151,7 @@ class QueueServiceFunctionalTest extends FunctionalTestBase {
             $this->assertEquals($expectedNumMessagesFirst, count($res->getQueueMessages()), 'list getQueueMessages() count');
             $opts = new PeekMessagesOptions();
             $opts->setNumberOfMessages(32);
-            $pres = $this->wrapper->peekMessages($queue, $opts);
+            $pres = $this->restProxy->peekMessages($queue, $opts);
             $this->assertEquals(3 - $expectedNumMessagesFirst, count($pres->getQueueMessages()), 'peek getQueueMessages() count');
 
             // The visibilityTimeoutInSeconds controls when the requested messages will be visible again.
@@ -1159,11 +1159,11 @@ class QueueServiceFunctionalTest extends FunctionalTestBase {
             sleep(2.5);
             $opts = new ListMessagesOptions();
             $opts->setNumberOfMessages(32);
-            $res2 = $this->wrapper->listMessages($queue, $opts);
+            $res2 = $this->restProxy->listMessages($queue, $opts);
             $this->assertEquals($expectedNumMessagesSecond, count($res2->getQueueMessages()), 'list getQueueMessages() count');
             $opts = new PeekMessagesOptions();
             $opts->setNumberOfMessages(32);
-            $pres2 = $this->wrapper->peekMessages($queue, $opts);
+            $pres2 = $this->restProxy->peekMessages($queue, $opts);
             $this->assertEquals(0, count($pres2->getQueueMessages()), 'peek getQueueMessages() count');
 
             // TODO: These might get screwy if the timing gets off. Might need to use times spaces farther apart.
@@ -1186,7 +1186,7 @@ class QueueServiceFunctionalTest extends FunctionalTestBase {
                 $this->assertNull($e, 'Expect positive timeouts in $options to be fine');
             }
         }
-        $this->wrapper->clearMessages($queue);
+        $this->restProxy->clearMessages($queue);
     }
 
     /**
@@ -1226,12 +1226,12 @@ class QueueServiceFunctionalTest extends FunctionalTestBase {
         self::println( 'Trying $options: ' . self::tmptostring($options));
         $queue = QueueServiceFunctionalTestData::$TEST_QUEUE_NAMES;
         $queue = $queue[0];
-        $this->wrapper->clearMessages($queue);
+        $this->restProxy->clearMessages($queue);
 
         // Put three messages into the queue.
-        $this->wrapper->createMessage($queue, QueueServiceFunctionalTestData::getSimpleMessageText());
-        $this->wrapper->createMessage($queue, QueueServiceFunctionalTestData::getSimpleMessageText());
-        $this->wrapper->createMessage($queue, QueueServiceFunctionalTestData::getSimpleMessageText());
+        $this->restProxy->createMessage($queue, QueueServiceFunctionalTestData::getSimpleMessageText());
+        $this->restProxy->createMessage($queue, QueueServiceFunctionalTestData::getSimpleMessageText());
+        $this->restProxy->createMessage($queue, QueueServiceFunctionalTestData::getSimpleMessageText());
 
         // Default is 1 message
         $effectiveNumOfMessages = (is_null($options) || is_null($options->getNumberOfMessages()) ? 1 : $options ->getNumberOfMessages());
@@ -1240,7 +1240,7 @@ class QueueServiceFunctionalTest extends FunctionalTestBase {
         $expectedNumMessagesFirst = ($effectiveNumOfMessages > 3 ? 3 : $effectiveNumOfMessages);
 
         try {
-            $res = (is_null($options) ? $this->wrapper->peekMessages($queue) : $this->wrapper->peekMessages($queue, $options));
+            $res = (is_null($options) ? $this->restProxy->peekMessages($queue) : $this->restProxy->peekMessages($queue, $options));
 
             if (is_null($options)) {
                 $options = new PeekMessagesOptions();
@@ -1256,12 +1256,12 @@ class QueueServiceFunctionalTest extends FunctionalTestBase {
             $this->assertEquals($expectedNumMessagesFirst, count($res->getQueueMessages()), 'getQueueMessages() count');
             $opts = new PeekMessagesOptions();
             $opts->setNumberOfMessages(32);
-            $res2 = $this->wrapper->peekMessages($queue, $opts);
+            $res2 = $this->restProxy->peekMessages($queue, $opts);
             $this->assertEquals(3, count($res2->getQueueMessages()), 'getQueueMessages() count');
-            $this->wrapper->listMessages($queue);
+            $this->restProxy->listMessages($queue);
             $opts = new PeekMessagesOptions();
             $opts->setNumberOfMessages(32);
-            $res3 = $this->wrapper->peekMessages($queue, $opts);
+            $res3 = $this->restProxy->peekMessages($queue, $opts);
             $this->assertEquals(2, count($res3->getQueueMessages()), 'getQueueMessages() count');
         }
         catch (ServiceException $e) {
@@ -1279,7 +1279,7 @@ class QueueServiceFunctionalTest extends FunctionalTestBase {
                 $this->assertNull($e, 'Expect positive timeouts in $options to be fine');
             }
         }
-        $this->wrapper->clearMessages($queue);
+        $this->restProxy->clearMessages($queue);
     }
 
     /**
@@ -1310,27 +1310,27 @@ class QueueServiceFunctionalTest extends FunctionalTestBase {
                 self::tmptostring($options));
         $queue = QueueServiceFunctionalTestData::$TEST_QUEUE_NAMES;
         $queue = $queue[0];
-        $this->wrapper->clearMessages($queue);
+        $this->restProxy->clearMessages($queue);
 
         // Put three messages into the queue.
-        $this->wrapper->createMessage($queue, QueueServiceFunctionalTestData::getSimpleMessageText());
-        $this->wrapper->createMessage($queue, QueueServiceFunctionalTestData::getSimpleMessageText());
-        $this->wrapper->createMessage($queue, QueueServiceFunctionalTestData::getSimpleMessageText());
+        $this->restProxy->createMessage($queue, QueueServiceFunctionalTestData::getSimpleMessageText());
+        $this->restProxy->createMessage($queue, QueueServiceFunctionalTestData::getSimpleMessageText());
+        $this->restProxy->createMessage($queue, QueueServiceFunctionalTestData::getSimpleMessageText());
         // Wait a bit to make sure the messages are there.
         sleep(1);
         // Make sure the messages are there, and use a short visibility timeout to make sure the are visible again later.
         $opts = new ListMessagesOptions();
         $opts->setVisibilityTimeoutInSeconds(1);
         $opts->setNumberOfMessages(32);
-        $lmr = $this->wrapper->listMessages($queue, $opts);
+        $lmr = $this->restProxy->listMessages($queue, $opts);
         $this->assertEquals(3, count($lmr->getQueueMessages()), 'getQueueMessages() count');
         sleep(2);
         try {
             if (is_null($options)) {
-                $this->wrapper->clearMessages($queue);
+                $this->restProxy->clearMessages($queue);
             }
             else {
-                $this->wrapper->clearMessages($queue, $options);
+                $this->restProxy->clearMessages($queue, $options);
             }
 
             if (is_null($options)) {
@@ -1344,7 +1344,7 @@ class QueueServiceFunctionalTest extends FunctionalTestBase {
             $opts = new ListMessagesOptions();
             $opts->setVisibilityTimeoutInSeconds(1);
             $opts->setNumberOfMessages(32);
-            $lmr = $this->wrapper->listMessages($queue, $opts);
+            $lmr = $this->restProxy->listMessages($queue, $opts);
             $this->assertEquals(0, count($lmr->getQueueMessages()), 'getQueueMessages() count');
         }
         catch (ServiceException $e) {
@@ -1359,6 +1359,6 @@ class QueueServiceFunctionalTest extends FunctionalTestBase {
                 $this->assertNull($e, 'Expect positive timeouts in $options to be fine');
             }
         }
-        $this->wrapper->clearMessages($queue);
+        $this->restProxy->clearMessages($queue);
     }
 }
