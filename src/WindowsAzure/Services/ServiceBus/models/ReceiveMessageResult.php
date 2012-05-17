@@ -36,13 +36,29 @@ namespace WindowsAzure\Services\ServiceBus\Models;
 
 class ReceiveMessageResult
 {
+    /**
+     * The brokered message. 
+     *
+     * @var BrokeredMessage 
+     */
     private $_brokeredMessage;
     
+
+    /** 
+     * Gets brokered message. 
+     * 
+     * @return BrokeredMessage
+     */ 
     public function getBrokeredMessage()
     {
         return $this->_brokeredMessage;
     }
 
+    /**
+     * Sets brokered message. 
+     * 
+     * @param BrokeredMessage $brokeredMessage The brokered message. 
+     */
     public function setBrokeredMessage($brokeredMessage)
     {
         $this->_brokeredMessage = $brokeredMessage;

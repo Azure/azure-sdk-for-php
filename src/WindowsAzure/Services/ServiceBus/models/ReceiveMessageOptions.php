@@ -36,47 +36,113 @@ namespace WindowsAzure\Services\ServiceBus\Models;
 
 class ReceiveMessageOptions
 {
+    /**
+     * The timeout value of receiving message. 
+     *
+     * @var integer
+     */
     private $_timeout;
+
+    /**
+     * The mode of receiving message. 
+     * 
+     * @var string 
+     */
     private $_receiveMode;
+
+    /**
+     * Is receive and delete mode.
+     * 
+     * @var boolean
+     */
     private $_isReceiveAndDelete;
+
+    /**
+     * Is peek lock mode.
+     * 
+     * @var boolean
+     */
     private $_isPeekLock;
 
+    /**
+     * Gets the timeout of the receive message request. 
+     * 
+     * @return integer
+     */
     public function getTimeout()
     {   
         return $this->_timeout;
     }
 
+    /**
+     * Sets the timeout of the receive message request. 
+     *
+     * @param integer $timeout The timeout of the receive message request. 
+     */
     public function setTimeout($timeout)
     {   
         $this->_timeout = $timeout;
     }
 
+    /**
+     * Gets the receive mode. 
+     * 
+     * @return string 
+     */ 
     public function getReceiveMode()
     {
         return $this->_receiveMode;
     }
     
+    /**
+     * Sets the receive mode. 
+     * 
+     * @param string $receiveMode The mode of receiving the message. 
+     */
     public function setReceiveMode($receiveMode)
     {   
         $this->_receiveMode = $receiveMode;
     }
 
+    /**
+     * Gets is receive and delete. 
+     * 
+     * @return boolean 
+     */
     public function getIsReceiveAndDelete()
     {
         return $this->_isReceiveAndDelete;
     }
 
+    /**
+     * Sets whether the mode of receiving is receive and delete. 
+     * 
+     * @param boolean $isReceiveAndDelete value. 
+     * 
+     * @return none
+     */
     public function setIsReceiveAndDelete($isReceiveAndDelete)
     {   
         $this->_isReceiveAndDelete = $isReceiveAndDelete;
     }
     
+    /**
+     * Gets peek lock. 
+     * 
+     * @return peek lock. 
+     *
+     */
     public function getPeekLock()
     {
-        return $this->_peekLock;
+        return $this->_PeekLock;
     }    
 
-    public function setPeekLock($peekLock)
+    /**
+     * Sets peek lock. 
+     * 
+     * @return none
+     */
+    public function setPeekLock($PeekLock)
     {   
         $this->_peekLock = $peekLock;
     }

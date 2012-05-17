@@ -15,7 +15,7 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   WindowsAzure\Services\Subscription\Models
+ * @package   WindowsAzure\Services\ServiceBus\Models
  * @author    Azure PHP SDK <azurephpsdk@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
@@ -27,7 +27,7 @@ use WindowsAzure\Resources;
 use WindowsAzure\Utilities;
 
 /**
- * An active WRAP access Token.
+ * The subscription description.
  *
  * @category  Microsoft
  * @package   WindowsAzure\Services\ServiceBus\Models
@@ -37,36 +37,79 @@ use WindowsAzure\Utilities;
  * @version   Release: @package_version@
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
+
 class SubscriptionDescription
 {
+    /**
+     * The duration of the lock. 
+     * 
+     * @var integer 
+     */
     private $_lockDuration;
+
+    /**
+     * Requires session.
+     * 
+     * @var boolean 
+     */
     private $_requiresSession;
+
+    /**
+     * The default message time to live. 
+     * 
+     * @var string 
+     */ 
     private $_defaultMessageTimeToLive;
+
+    /**
+     * The dead lettering on message expiration. 
+     * 
+     * @var string
+     */
     private $_deadLetteringOnMessageExpiration;
+
+    /**
+     * The dead lettering on filter evaluation exception. 
+     * 
+     * @var string 
+     */
     private $_deadLetteringOnFilterEvaluationExceptions;
+
+    /**
+     * The description of the default rule. 
+     * 
+     * @var string
+     */
     private $_defaultRuleDescription;
+
+    /**
+     * The count of the message. 
+     * 
+     * @var integer
+     */
     private $_messageCount;
+
+    /**
+     * The count of the delivery 
+     * 
+     * @var integer
+     */
     private $_maxDeliveryCount;
+    
+    /**
+     * Enables Batched operations. 
+     * 
+     * @var boolean 
+     */
     private $_enableBatchedOperations;
     /**
      * @var bool 
      */
 
-    /** 
-     * @var integer
-     */
     /**
-     * Creates an ActiveToken with specified WRAP 
-     * access token result.
+     * Gets the lock duration.
      *
-     * @param array $wrapAccessTokenResult A WRAP access token result.
-     * 
-     */
-
-    /**
-     * Gets WRAP access token.
-     *
-     * @return WrapAccessTokenResult
+     * @return integer
      */
     public function getLockDuration()
     {
@@ -74,7 +117,7 @@ class SubscriptionDescription
     }
     
     /**
-     * Sets WRAP access token.
+     * Sets the lock duration.
      *
      * @param string $wrapAccessTokenResult The WRAP access token result.
      * 

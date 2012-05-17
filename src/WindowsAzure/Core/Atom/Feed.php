@@ -123,8 +123,13 @@ class Feed
      */
     private $_extensionElement;
 
+    /**
+     * Creates a feed object with specified Xml string. 
+     */
     public static function create($xmlString)
     {
+        $feed = new Feed();
+        return $feed;
     }
 
     /**

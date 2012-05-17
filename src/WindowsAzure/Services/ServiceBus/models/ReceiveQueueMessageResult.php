@@ -23,7 +23,7 @@
 namespace WindowsAzure\Services\ServiceBus\Models;
 
 /**
- * This class constructs HTTP requests and receive HTTP responses for service bus.
+ * The result of receiving queue message request.
  *
  * @category  Microsoft
  * @package   WindowsAzure\Services\ServiceBus
@@ -34,19 +34,7 @@ namespace WindowsAzure\Services\ServiceBus\Models;
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
 
-class ReceiveQueueMessageResult
+class ReceiveQueueMessageResult extends ReceiveMessageResult
 {
-    private $_brokeredMessage;
-    
-    public function getBrokeredMessage()
-    {
-        return $this->_brokeredMessage;
-    }
-
-    public function setBrokeredMessage($brokeredMessage)
-    {
-        $this->_brokeredMessage = $brokeredMessage;
-    }
-    
 }
 ?>

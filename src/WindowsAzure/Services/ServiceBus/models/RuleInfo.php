@@ -25,9 +25,10 @@
 namespace WindowsAzure\Services\ServiceBus\Models;
 use WindowsAzure\Resources;
 use WindowsAzure\Utilities;
+use WindowsAzure\Validate;
 
 /**
- * An active WRAP access Token.
+ * The information regarding the rule.
  *
  * @category  Microsoft
  * @package   WindowsAzure\Services\ServiceBus\Models
@@ -37,25 +38,34 @@ use WindowsAzure\Utilities;
  * @version   Release: @package_version@
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
+
 class RuleInfo
 {
     /** 
-     * The WRAP access token result. 
+     * The name of the rule.
      * 
-     * @var WrapAccessTokenResult
+     * @var string
      */
     private $_name;
+    
+    /**
+     * The description of the rule.
+     * 
+     * @var RuleDescription
+     */
     private $_ruleDescription;
 
     /**
      * Creates an RuleInfo with specified parameters.
      *
-     * @param string           $name             The name of the rule.
+     * @param string          $name            The name of the rule.
      * @param RuleDescription $ruleDescription The description of the rule.
      * 
      */
     public function __construct($name, $ruleDescription = null)
     {
+        Validate::isString($name);
+
         if (is_null($ruleDescription))
         {
             $ruleDescription = new RuleDescription();
@@ -84,11 +94,25 @@ class RuleInfo
         return $this->_ruleDescription;
     }
 
+    /**
+     * Sets the rule description. 
+     * 
+     * @param $ruleDescription The description of the rule. 
+     * 
+     * @return none 
+     */
     public function setRuleDescription($ruleDescription)
     {
         $this->_ruleDescription = $ruleDescription;
     }
     
+    /**
+     * With correlation ID filter. 
+     * 
+     * @param string $correlationId The ID of the correlation.
+     * 
+     * @return none 
+     */
     public function withCorrelationIdFilter($correlationId)
     {
         $filter = new CorrelationFilter();
@@ -96,6 +120,13 @@ class RuleInfo
         $this->_ruleDescription->setFilter($filter);
     }
 
+    /**
+     * With sql expression filter. 
+     * 
+     * @param string $sqlExpression The SQL expression of the filter. 
+     * 
+     * @return none 
+     */
     public function withSqlExpressionFilter($sqlExpression)
     {
         $filter = new SqlFilter();
@@ -104,6 +135,11 @@ class RuleInfo
         $this->_ruleDescription->setFilter($filter);
     }
 
+    /**
+     * With true filter. 
+     * 
+     * @return none 
+     */
     public function withTrueFilter()
     {
         $filter = new TrueFilter();
@@ -111,6 +147,11 @@ class RuleInfo
         $this->_ruleDescription->setFilter($filter);
     }
 
+    /**
+     * With false filter. 
+     * 
+     * @return none 
+     */
     public function withFalseFilter() 
     {
         $filter = new FalseFilter();

@@ -34,19 +34,7 @@ namespace WindowsAzure\Services\ServiceBus\Models;
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
 
-class ReceiveSubscriptionMessageResult
+class ReceiveSubscriptionMessageResult extends ReceiveMessageResult
 {
-    private $_brokeredMessage;
-    
-    public function getBrokeredMessage()
-    {
-        return $this->_brokeredMessage;
-    }
-
-    public function setBrokeredMessage($brokeredMessage)
-    {
-        $this->_brokeredMessage = $brokeredMessage;
-    }
-    
 }
 ?>

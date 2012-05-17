@@ -26,7 +26,7 @@ use WindowsAzure\Resources;
 use WindowsAzure\Utilities;
 
 /**
- * An active WRAP access Token.
+ *  The description of the rule.
  *
  * @category  Microsoft
  * @package   WindowsAzure\Services\ServiceBus\Models
@@ -39,25 +39,62 @@ use WindowsAzure\Utilities;
 
 class RuleDescription
 {
+    /**
+     * The filter of the rule. 
+     * 
+     * @var Filter
+     */
     private $_filter;
+    
+    /**
+     * The action of the rule. 
+     * 
+     * @var Action
+     */
     private $_action;
+
+    /**
+     * The name of the rule. 
+     * 
+     * @var string 
+     */
     private $_name;
     
+    /**
+     * Gets the filter. 
+     *
+     * @return Filter
+     */
     public function getFilter()
     {
         return $this->_filter;
     }
 
+    /**
+     * Sets the filter of the rule description. 
+     * 
+     * @param Filter $filter The filter of the rule description. 
+     */
     public function setFilter($filter)
     {
         $this->_filter = $filter;
     }
 
+    /**
+     * Gets the action. 
+     *
+     * @return Action
+     */
     public function getAction()
     {
         return $this->_action;
     }
 
+    /**
+     * Sets the action of the rule description. 
+     * 
+     * @param Action $filter The action of the rule description. 
+     */
     public function setAction($action)
     {
         $this->_action = $action;
