@@ -372,6 +372,26 @@ class Feed
         $this->_extensionElement = $extensionElement;
     }
 
+    /**
+     * Gets the entry of the feed. 
+     * 
+     * @var Entry
+     */
+    public function getEntry()
+    {
+        return $this->_entry;
+    }
+
+    /**
+     * Sets the entry of the feed.
+     * 
+     * @param Entry $entry The entry of the feed. 
+     */
+    public function setEntry($entry)
+    {
+        $this->_entry = $entry;
+    }
+
     /** 
      * Gets an XML representing the feed object.
      * 

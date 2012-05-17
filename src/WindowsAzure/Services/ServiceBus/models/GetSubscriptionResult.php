@@ -57,7 +57,8 @@ class GetSubscriptionResult
     {
         $getSubscriptionResult = new GetSubscriptionResult();
         $feed = Feed::create($response);
-        $content = $feed->getContent($content);
+        $entry = $feed->getEntry();
+        $content = $entry->getContent($content);
         $subscriptionInfo = XmlSerializer::objectDeserialize($content->getText());
         $getSubscriptionResult->setSubscriptionInfo($subscriptionInfo);
         return $getSubscriptionResult;
