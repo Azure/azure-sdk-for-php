@@ -27,7 +27,7 @@ use WindowsAzure\Common\Configuration;
 use WindowsAzure\Common\Internal\Resources;
 
 /**
- * Factory for creating IServiceBus objects
+ * Factory for creating ServiceBusRestProxy objects
  *
  * @category  Microsoft
  * @package   WindowsAzure\Queue
@@ -47,7 +47,7 @@ class ServiceBusService
      * @param WindowsAzure\Common\Internal\IServicesBuilder $builder The builder
      * object.
      * 
-     * @return WindowsAzure\ServiceBus\Internal\IServiceBus
+     * @return WindowsAzure\ServiceBus\ServiceBusRestProxy
      */
     public static function create($config, $builder = null)
     {

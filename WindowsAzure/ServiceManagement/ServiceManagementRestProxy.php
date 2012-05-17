@@ -15,19 +15,20 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   WindowsAzure\ServiceManagement\Internal
+ * @package   WindowsAzure\ServiceManagement
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
  
-namespace WindowsAzure\ServiceManagement\Internal;
+namespace WindowsAzure\ServiceManagement;
 use WindowsAzure\Common\Internal\Resources;
 use WindowsAzure\Common\Internal\Validate;
 use WindowsAzure\Common\Internal\RestProxy;
 use WindowsAzure\Common\Internal\Http\HttpCallContext;
 use WindowsAzure\Common\Internal\Serialization\XmlSerializer;
+use WindowsAzure\ServiceManagement\Internal\IServiceManagement;
 use WindowsAzure\ServiceManagement\Models\CreateAffinityGroupOptions;
 use WindowsAzure\ServiceManagement\Models\AffinityGroup;
 use WindowsAzure\ServiceManagement\Models\ListAffinityGroupsResult;
@@ -46,7 +47,7 @@ use WindowsAzure\ServiceManagement\Models\GetStorageServiceKeysResult;
  * management service layer.
  *
  * @category  Microsoft
- * @package   WindowsAzure\ServiceManagement\Internal
+ * @package   WindowsAzure\ServiceManagement
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0

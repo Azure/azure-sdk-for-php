@@ -29,7 +29,7 @@ use WindowsAzure\Common\Internal\IServiceBuilder;
 use WindowsAzure\Common\Internal\Resources;
 
 /**
- * Factory for creating ITable objects
+ * Factory for creating TableRestProxy objects
  *
  * @category  Microsoft
  * @package   WindowsAzure\Table
@@ -49,7 +49,7 @@ class TableService
      * @param WindowsAzure\Common\Internal\IServicesBuilder $builder The builder 
      * object.
      * 
-     * @return WindowsAzure\Table\Internal\ITable
+     * @return WindowsAzure\Table\Internal\TableRestProxy
      */
     public static function create($config, $builder = null)
     {

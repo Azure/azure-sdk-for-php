@@ -70,32 +70,32 @@ class ServiceRestProxyTest extends \PHPUnit_Framework_TestCase
      * @covers  WindowsAzure\Common\Internal\ServiceRestProxy::withFilter
      * @depends test__construct
      */
-    public function testWithFilter($restWrapper)
+    public function testWithFilter($restRestProxy)
     {
         // Setup
         $filter = new SimpleFilterMock('name', 'value');
         
         // Test
-        $actual = $restWrapper->withFilter($filter);
+        $actual = $restRestProxy->withFilter($filter);
         
         // Assert
         $this->assertCount(1, $actual->getFilters());
-        $this->assertCount(0, $restWrapper->getFilters());
+        $this->assertCount(0, $restRestProxy->getFilters());
     }
     
     /**
      * @covers  WindowsAzure\Common\Internal\ServiceRestProxy::getFilters
      * @depends test__construct
      */
-    public function testGetFilters($restWrapper)
+    public function testGetFilters($restRestProxy)
     {
         // Setup
         $filter = new SimpleFilterMock('name', 'value');
-        $withFilter = $restWrapper->withFilter($filter);
+        $withFilter = $restRestProxy->withFilter($filter);
         
         // Test
         $actual1 = $withFilter->getFilters();
-        $actual2 = $restWrapper->getFilters();
+        $actual2 = $restRestProxy->getFilters();
         
         // Assert
         $this->assertCount(1, $actual1);
@@ -106,7 +106,7 @@ class ServiceRestProxyTest extends \PHPUnit_Framework_TestCase
      * @covers  WindowsAzure\Common\Internal\ServiceRestProxy::addOptionalAccessConditionHeader
      * @depends test__construct
      */
-    public function testAddOptionalAccessContitionHeader($restWrapper)
+    public function testAddOptionalAccessContitionHeader($restRestProxy)
     {
         // Setup
         $expectedHeader = Resources::IF_MATCH;
@@ -115,7 +115,7 @@ class ServiceRestProxyTest extends \PHPUnit_Framework_TestCase
         $headers = array('Header1' => 'Value1', 'Header2' => 'Value2');
         
         // Test
-        $actual = $restWrapper->addOptionalAccessConditionHeader($headers, $accessCondition);
+        $actual = $restRestProxy->addOptionalAccessConditionHeader($headers, $accessCondition);
         
         // Assert
         $this->assertCount(3, $actual);
@@ -126,7 +126,7 @@ class ServiceRestProxyTest extends \PHPUnit_Framework_TestCase
      * @covers  WindowsAzure\Common\Internal\ServiceRestProxy::addOptionalSourceAccessConditionHeader
      * @depends test__construct
      */
-    public function testAddOptionalSourceAccessContitionHeader($restWrapper)
+    public function testAddOptionalSourceAccessContitionHeader($restRestProxy)
     {
         // Setup
         $expectedHeader = Resources::X_MS_SOURCE_IF_MATCH;
@@ -135,7 +135,7 @@ class ServiceRestProxyTest extends \PHPUnit_Framework_TestCase
         $headers = array('Header1' => 'Value1', 'Header2' => 'Value2');
         
         // Test
-        $actual = $restWrapper->addOptionalSourceAccessConditionHeader($headers, $accessCondition);
+        $actual = $restRestProxy->addOptionalSourceAccessConditionHeader($headers, $accessCondition);
         
         // Assert
         $this->assertCount(3, $actual);
@@ -146,14 +146,14 @@ class ServiceRestProxyTest extends \PHPUnit_Framework_TestCase
      * @covers  WindowsAzure\Common\Internal\ServiceRestProxy::groupQueryValues
      * @depends test__construct
      */
-    public function testGroupQueryValues($restWrapper)
+    public function testGroupQueryValues($restRestProxy)
     {
         // Setup
         $values = array('A', 'B', 'C');
         $expected = 'A,B,C';
         
         // Test
-        $actual = $restWrapper->groupQueryValues($values);
+        $actual = $restRestProxy->groupQueryValues($values);
         
         // Assert
         $this->assertEquals($expected, $actual);
@@ -163,13 +163,13 @@ class ServiceRestProxyTest extends \PHPUnit_Framework_TestCase
      * @covers  WindowsAzure\Common\Internal\ServiceRestProxy::groupQueryValues
      * @depends test__construct
      */
-    public function testGroupQueryValuesWithNulls($restWrapper)
+    public function testGroupQueryValuesWithNulls($restRestProxy)
     {
         // Setup
         $values = array(null, '', null);
         
         // Test
-        $actual = $restWrapper->groupQueryValues($values);
+        $actual = $restRestProxy->groupQueryValues($values);
         
         // Assert
         $this->assertTrue(empty($actual));
@@ -179,14 +179,14 @@ class ServiceRestProxyTest extends \PHPUnit_Framework_TestCase
      * @covers  WindowsAzure\Common\Internal\ServiceRestProxy::groupQueryValues
      * @depends test__construct
      */
-    public function testGroupQueryValuesWithMix($restWrapper)
+    public function testGroupQueryValuesWithMix($restRestProxy)
     {
         // Setup
         $values = array(null, 'B', 'C', '');
         $expected = 'B,C';
         
         // Test
-        $actual = $restWrapper->groupQueryValues($values);
+        $actual = $restRestProxy->groupQueryValues($values);
         
         // Assert
         $this->assertEquals($expected, $actual);
@@ -196,7 +196,7 @@ class ServiceRestProxyTest extends \PHPUnit_Framework_TestCase
     * @covers WindowsAzure\Common\Internal\ServiceRestProxy::addPostParameter
     * @depends test__construct
     */
-    public function testPostParameter($restWrapper)
+    public function testPostParameter($restRestProxy)
     {
         // Setup
         $postParameters = array();
@@ -204,7 +204,7 @@ class ServiceRestProxyTest extends \PHPUnit_Framework_TestCase
         $expected = 'b';
     
         // Test
-        $processedPostParameters = $restWrapper->addPostParameter($postParameters, $key, $expected);
+        $processedPostParameters = $restRestProxy->addPostParameter($postParameters, $key, $expected);
         $actual = $processedPostParameters[$key];
 
         // Assert

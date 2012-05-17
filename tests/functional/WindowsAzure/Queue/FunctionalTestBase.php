@@ -46,7 +46,7 @@ class FunctionalTestBase extends QueueServiceRestProxyTestBase {
     {
         parent::__construct();
         $fiddlerFilter = new FiddlerFilter();
-        $this->wrapper = $this->wrapper->withFilter($fiddlerFilter);
+        $this->restProxy = $this->restProxy->withFilter($fiddlerFilter);
     }
     
     public function setUp() {
@@ -85,7 +85,7 @@ class FunctionalTestBase extends QueueServiceRestProxyTestBase {
 
     private static function createService() {
         $tmp = new FunctionalTestBase();
-        return $tmp->wrapper;
+        return $tmp->restProxy;
     }
     
     private static function staticSafeDeleteQueue($service, $queueName)

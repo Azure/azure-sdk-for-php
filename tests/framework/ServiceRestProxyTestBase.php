@@ -73,15 +73,15 @@ class ServiceRestProxyTestBase extends RestProxyTestBase
         $this->defaultProperties = ServiceProperties::create($propertiesArray);
     }
     
-    public function __construct($config, $serviceWrapper)
+    public function __construct($config, $serviceRestProxy)
     {
-        parent::__construct($config, $serviceWrapper);
+        parent::__construct($config, $serviceRestProxy);
         $this->_createDefaultProperties();
     }
     
     public function setServiceProperties($properties, $options = null)
     {
-        $this->wrapper->setServiceProperties($properties, $options);
+        $this->restProxy->setServiceProperties($properties, $options);
         $this->propertiesChanged = true;
     }
 
@@ -90,7 +90,7 @@ class ServiceRestProxyTestBase extends RestProxyTestBase
         parent::tearDown();
         
         if ($this->propertiesChanged) {
-            $this->wrapper->setServiceProperties($this->defaultProperties);
+            $this->restProxy->setServiceProperties($this->defaultProperties);
         }
     }
 }

@@ -54,10 +54,10 @@ class QueueServiceTest extends \PHPUnit_Framework_TestCase
         $config->setProperty(QueueSettings::URI, $uri);
         
         // Test
-        $queueWrapper = QueueService::create($config);
+        $queueRestProxy = QueueService::create($config);
         
         // Assert
-        $this->assertInstanceOf('WindowsAzure\Queue\Internal\IQueue', $queueWrapper);
+        $this->assertInstanceOf('WindowsAzure\Queue\Internal\IQueue', $queueRestProxy);
     }
 }
 

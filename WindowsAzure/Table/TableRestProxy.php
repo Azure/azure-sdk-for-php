@@ -15,22 +15,23 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   WindowsAzure\Table\Internal
+ * @package   WindowsAzure\Table
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
  
-namespace WindowsAzure\Table\Internal;
+namespace WindowsAzure\Table;
 use WindowsAzure\Common\Internal\Resources;
 use WindowsAzure\Common\Internal\Utilities;
 use WindowsAzure\Common\Internal\Validate;
 use WindowsAzure\Common\Internal\Http\HttpCallContext;
 use WindowsAzure\Common\Models\ServiceProperties;
 use WindowsAzure\Common\Internal\ServiceRestProxy;
-use WindowsAzure\Table\Models\TableServiceOptions;
 use WindowsAzure\Common\Models\GetServicePropertiesResult;
+use WindowsAzure\Table\Internal\ITable;
+use WindowsAzure\Table\Models\TableServiceOptions;
 use WindowsAzure\Table\Models\EdmType;
 use WindowsAzure\Table\Models\Filters;
 use WindowsAzure\Table\Models\Filters\Filter;
@@ -52,7 +53,7 @@ use WindowsAzure\Table\Models\BatchResult;
  * service layer.
  *
  * @category  Microsoft
- * @package   WindowsAzure\Table\Internal
+ * @package   WindowsAzure\Table
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0

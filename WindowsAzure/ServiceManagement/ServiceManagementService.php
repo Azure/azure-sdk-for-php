@@ -29,7 +29,7 @@ use WindowsAzure\Common\Internal\IServiceBuilder;
 use WindowsAzure\Common\Internal\Resources;
 
 /**
- * Factory for creating IServiceManagement objects
+ * Factory for creating ServiceManagementRestProxy objects
  *
  * @category  Microsoft
  * @package   WindowsAzure\ServiceManagement
@@ -49,7 +49,7 @@ class ServiceManagementService
      * @param WindowsAzure\Common\Internal\IServicesBuilder $builder The builder 
      * object.
      * 
-     * @return WindowsAzure\ServiceManagement\Internal\IServiceManagement
+     * @return WindowsAzure\ServiceManagement\Internal\ServiceManagementRestProxy
      */
     public static function create($config, $builder = null)
     {

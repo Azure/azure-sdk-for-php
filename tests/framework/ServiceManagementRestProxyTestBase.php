@@ -82,14 +82,14 @@ class ServiceManagementRestProxyTestBase extends RestProxyTestBase
             ServiceManagementSettings::CERTIFICATE_PATH,
             TestResources::serviceManagementCertificatePath()
         );
-        $serviceManagementWrapper = ServiceManagementService::create($config);
+        $serviceManagementRestProxy = ServiceManagementService::create($config);
         
-        parent::__construct($config, $serviceManagementWrapper);
+        parent::__construct($config, $serviceManagementRestProxy);
         
         $this->createdStorageServices = array();
         $this->createdAffinityGroups = array();
-        $this->storageCount = count($this->wrapper->listStorageServices()->getStorageServices());
-        $this->affinityGroupCount = count($this->wrapper->listAffinityGroups()->getAffinityGroups());
+        $this->storageCount = count($this->restProxy->listStorageServices()->getStorageServices());
+        $this->affinityGroupCount = count($this->restProxy->listAffinityGroups()->getAffinityGroups());
     }
 
     public function createAffinityGroup($name)
@@ -97,7 +97,7 @@ class ServiceManagementRestProxyTestBase extends RestProxyTestBase
         $location = Locations::WEST_US;
         $label = base64_encode($name);
         
-        $this->wrapper->createAffinityGroup($name, $label, $location);
+        $this->restProxy->createAffinityGroup($name, $label, $location);
         $this->createdAffinityGroups[] = $name;
     }
     
@@ -108,7 +108,7 @@ class ServiceManagementRestProxyTestBase extends RestProxyTestBase
     
     public function getAffinityGroup($name)
     {
-        $result = $this->wrapper->listAffinityGroups();
+        $result = $this->restProxy->listAffinityGroups();
         $affinityGroups = $result->getAffinityGroups();
         
         foreach ($affinityGroups as $affinityGroup) {
@@ -122,7 +122,7 @@ class ServiceManagementRestProxyTestBase extends RestProxyTestBase
     
     public function deleteAffinityGroup($name)
     {
-        $this->wrapper->deleteAffinityGroup($name);
+        $this->restProxy->deleteAffinityGroup($name);
     }
     
     public function safeDeleteAffinityGroup($name)
@@ -144,7 +144,7 @@ class ServiceManagementRestProxyTestBase extends RestProxyTestBase
         $options = new CreateStorageServiceOptions();
         $options->setLocation('West US');
         
-        $result = $this->wrapper->createStorageService($name, $label, $options);
+        $result = $this->restProxy->createStorageService($name, $label, $options);
         $this->blockUntilAsyncSucceed($result->getRequestId());
         $this->createdStorageServices[] = $name;
     }
@@ -155,7 +155,7 @@ class ServiceManagementRestProxyTestBase extends RestProxyTestBase
         
         do {
             sleep(5);
-            $result = $this->wrapper->getOperationStatus($requestId);
+            $result = $this->restProxy->getOperationStatus($requestId);
             $status = $result->getStatus();
         }while(OperationStatus::IN_PROGRESS == $status);
         
@@ -164,7 +164,7 @@ class ServiceManagementRestProxyTestBase extends RestProxyTestBase
     
     public function storageServiceExists($name)
     {
-        $result = $this->wrapper->listStorageServices();
+        $result = $this->restProxy->listStorageServices();
         $storageServices = $result->getStorageServices();
         
         foreach ($storageServices as $storageService) {
@@ -178,7 +178,7 @@ class ServiceManagementRestProxyTestBase extends RestProxyTestBase
     
     public function deleteStorageService($name)
     {
-        $this->wrapper->deleteStorageService($name);
+        $this->restProxy->deleteStorageService($name);
     }
     
     public function safeDeleteStorageService($name)
