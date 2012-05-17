@@ -15,14 +15,14 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   Tests\Unit\WindowsAzure\Table
+ * @package   Tests\Unit\WindowsAzure\Table\internal
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
 
-namespace Tests\Unit\WindowsAzure\Table;
+namespace Tests\Unit\WindowsAzure\Table\internal;
 use WindowsAzure\Common\Internal\Http\HttpClient;
 use WindowsAzure\Table\Internal\AtomReaderWriter;
 use WindowsAzure\Table\Internal\MimeReaderWriter;
@@ -46,7 +46,7 @@ use WindowsAzure\Common\Internal\Serialization\XmlSerializer;
  * Unit tests for class TableRestProxy
  *
  * @category  Microsoft
- * @package   Tests\Unit\WindowsAzure\Table
+ * @package   Tests\Unit\WindowsAzure\Table\internal
  * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
@@ -130,7 +130,6 @@ class TableRestProxyTest extends TableServiceRestProxyTestBase
     
     /**
      * @covers WindowsAzure\Table\Internal\TableRestProxy::createTable
-     * @covers WindowsAzure\Table\Internal\AtomReaderWriter::_fillTemplate
      * @covers WindowsAzure\Table\Internal\AtomReaderWriter::getTable
      * @covers WindowsAzure\Common\Internal\ServiceRestProxy::sendContext
      */
@@ -392,7 +391,6 @@ class TableRestProxyTest extends TableServiceRestProxyTestBase
      * @covers WindowsAzure\Table\Models\EdmType::serializeValue
      * @covers WindowsAzure\Table\Internal\AtomReaderWriter::_parseBody
      * @covers WindowsAzure\Table\Internal\AtomReaderWriter::getEntity
-     * @covers WindowsAzure\Table\Internal\AtomReaderWriter::_generatePropertiesXml
      * @covers WindowsAzure\Table\Internal\AtomReaderWriter::parseEntity
      * @covers WindowsAzure\Table\Internal\AtomReaderWriter::_parseOneEntity
      * WindowsAzure\Table\Models\InsertEntityResult::create
@@ -629,7 +627,6 @@ class TableRestProxyTest extends TableServiceRestProxyTestBase
      * @covers WindowsAzure\Table\Models\EdmType::serializeValue
      * @covers WindowsAzure\Table\Internal\AtomReaderWriter::_parseBody
      * @covers WindowsAzure\Table\Internal\AtomReaderWriter::getEntity
-     * @covers WindowsAzure\Table\Internal\AtomReaderWriter::_generatePropertiesXml
      * @covers WindowsAzure\Table\Models\UpdateEntityResult::create
      * @covers WindowsAzure\Common\Internal\ServiceRestProxy::sendContext
      */
@@ -664,7 +661,6 @@ class TableRestProxyTest extends TableServiceRestProxyTestBase
      * @covers WindowsAzure\Table\Models\EdmType::serializeValue
      * @covers WindowsAzure\Table\Internal\AtomReaderWriter::_parseBody
      * @covers WindowsAzure\Table\Internal\AtomReaderWriter::getEntity
-     * @covers WindowsAzure\Table\Internal\AtomReaderWriter::_generatePropertiesXml
      * @covers WindowsAzure\Table\Internal\AtomReaderWriter::parseEntity
      * @covers WindowsAzure\Table\Internal\AtomReaderWriter::_parseOneEntity
      * WindowsAzure\Table\Models\InsertEntityResult::create
@@ -701,7 +697,6 @@ class TableRestProxyTest extends TableServiceRestProxyTestBase
      * @covers WindowsAzure\Table\Models\EdmType::serializeValue
      * @covers WindowsAzure\Table\Internal\AtomReaderWriter::_parseBody
      * @covers WindowsAzure\Table\Internal\AtomReaderWriter::getEntity
-     * @covers WindowsAzure\Table\Internal\AtomReaderWriter::_generatePropertiesXml
      * @covers WindowsAzure\Table\Models\UpdateEntityResult::create
      * @covers WindowsAzure\Common\Internal\ServiceRestProxy::sendContext
      */
@@ -737,7 +732,6 @@ class TableRestProxyTest extends TableServiceRestProxyTestBase
      * @covers WindowsAzure\Table\Internal\TableRestProxy::_constructPutOrMergeEntityContext
      * @covers WindowsAzure\Table\Internal\AtomReaderWriter::_parseBody
      * @covers WindowsAzure\Table\Internal\AtomReaderWriter::getEntity
-     * @covers WindowsAzure\Table\Internal\AtomReaderWriter::_generatePropertiesXml
      * @covers WindowsAzure\Table\Models\UpdateEntityResult::create
      * @covers WindowsAzure\Common\Internal\ServiceRestProxy::sendContext
      */
@@ -775,7 +769,6 @@ class TableRestProxyTest extends TableServiceRestProxyTestBase
      * @covers WindowsAzure\Table\Internal\TableRestProxy::_constructPutOrMergeEntityContext
      * @covers WindowsAzure\Table\Internal\AtomReaderWriter::_parseBody
      * @covers WindowsAzure\Table\Internal\AtomReaderWriter::getEntity
-     * @covers WindowsAzure\Table\Internal\AtomReaderWriter::_generatePropertiesXml
      * @covers WindowsAzure\Table\Models\UpdateEntityResult::create
      * @covers WindowsAzure\Common\Internal\ServiceRestProxy::sendContext
      */

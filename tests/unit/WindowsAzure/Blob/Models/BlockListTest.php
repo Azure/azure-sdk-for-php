@@ -22,6 +22,7 @@
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
 namespace Tests\Unit\WindowsAzure\Blob\Models;
+use WindowsAzure\Common\Internal\Serialization\XmlSerializer;
 use WindowsAzure\Blob\Models\BlockList;
 use WindowsAzure\Blob\Models\BlobBlockType;
 use WindowsAzure\Blob\Models\Block;
@@ -163,6 +164,39 @@ class BlockListTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($block1, $b1);
         $this->assertEquals($block2, $b2);
         $this->assertEquals($block3, $b3);
+    }
+    
+    /**
+     * @covers WindowsAzure\Blob\Models\BlockList::toXml
+     */
+    public function testToXml()
+    {
+        // Setup
+        $blockList = new BlockList();
+        $blockList->addLatestEntry('1234');
+        $blockList->addCommittedEntry('1239');
+        $blockList->addLatestEntry('1236');
+        $blockList->addCommittedEntry('1237');
+        $blockList->addUncommittedEntry('1238');
+        $blockList->addLatestEntry('1235');
+        $blockList->addUncommittedEntry('1240');
+        $expected = '<?xml version="1.0" encoding="UTF-8"?>' . "\n" .
+                    '<BlockList>' . "\n" .
+                    ' <Latest>MTIzNA==</Latest>' . "\n" .
+                    ' <Committed>MTIzOQ==</Committed>' . "\n" .
+                    ' <Latest>MTIzNg==</Latest>' . "\n" .
+                    ' <Committed>MTIzNw==</Committed>' . "\n" .
+                    ' <Uncommitted>MTIzOA==</Uncommitted>' . "\n" .
+                    ' <Latest>MTIzNQ==</Latest>' . "\n" .
+                    ' <Uncommitted>MTI0MA==</Uncommitted>' . "\n" .
+                    '</BlockList>' . "\n";
+        
+        // Test
+        $actual = $blockList->toXml(new XmlSerializer());
+        
+        // Assert
+        $this->assertEquals($expected, $actual);
+        
     }
 }
 

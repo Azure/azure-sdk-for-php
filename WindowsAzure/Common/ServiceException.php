@@ -55,9 +55,8 @@ class ServiceException extends \LogicException
         parent::__construct(
             sprintf(Resources::AZURE_ERROR_MSG, $errorCode, $error, $reason)
         );
-        $this->code   = $errorCode;
-        $this->_error = $error;
-        // Need to improve message parsing issue #32
+        $this->code    = $errorCode;
+        $this->_error  = $error;
         $this->_reason = $reason;
     }
     
