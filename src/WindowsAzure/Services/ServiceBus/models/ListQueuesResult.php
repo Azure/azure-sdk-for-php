@@ -56,7 +56,8 @@ class ListQueuesResult
     {
         $getQueueResult = new ListQueuesResult();
         $feed = Feed::create($response);
-        $content = $feed->getContent();
+        $entry = $feed->getEntry();
+        $content = $entry->getContent();
         $queueDescription = XmlSerializer::objectDeserialize($content->getText());  
         $getQueueResult->setQueueDescription($queueDescription);
     }

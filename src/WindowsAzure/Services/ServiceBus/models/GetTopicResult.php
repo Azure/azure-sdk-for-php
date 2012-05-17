@@ -53,7 +53,8 @@ class GetTopicResult
     {
         $getTopicResult = new GetTopicResult();
         $feed = Feed::create($response);
-        $content = $feed->getContent();
+        $entry = $feed->getEntry();
+        $content = $entry->getContent();
         $topicDescription = XmlSerializer::objectUnserialize($content->getText()); 
         $getTopicResult->setTopicDescription($topicDescription);
         return $getTopicResult;

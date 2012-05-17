@@ -57,7 +57,8 @@ class GetRuleResult
     {
         $getRuleResult = new GetRuleResult();
         $feed = Feed::create($response);
-        $content = $feed->getContent();
+        $entry = $feed->getEntry();
+        $content = $entry->getContent();
         $ruleDescription = XmlSerializer::objectUnserialize($content->getText());
         $getRuleResult->setRuleDescription($ruleDescription);
         return $getRuleResult;

@@ -56,7 +56,8 @@ class ListTopicsResult
     {
         $getTopicsResult = new ListTopicsResult();
         $feed = Feed::create($response);
-        $content = $feed->getContent();
+        $entry = $feed->getEntry();
+        $content = $entry->getContent();
         $topicDescription = XmlSerializer::objectDeserialize($content->getText());  
         $getTopicsResult->setTopicsDescription($topicDescription);
     }

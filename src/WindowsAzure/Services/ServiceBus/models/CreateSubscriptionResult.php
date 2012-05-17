@@ -55,7 +55,8 @@ class CreateSubscriptionResult
     {
         $createSubscriptionResult = new CreateSubscriptionResult();
         $feed = Feed::creat($response);
-        $content = $feed->getContent();
+        $entry = $feed->getEntry();
+        $content = $entry->getContent();
         $this->_subscriptionDescription = XmlSerializer::objectDeserialize($content->getText()); 
         return $createSubscriptionResult;
     }

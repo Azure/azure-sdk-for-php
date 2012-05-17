@@ -56,7 +56,8 @@ class ListRulesResult
     {
         $getRulesResult = new ListRulesResult();
         $feed = Feed::create($response);
-        $content = $feed->getContent();
+        $entry = $feed->getEntry();
+        $content = $entry->getContent();
         $ruleDescription = XmlSerializer::objectDeserialize($content->getText());  
         $getRulesResult->setRulesDescription($ruleDescription);
     }

@@ -56,7 +56,8 @@ class ListSubscriptionsResult
     {
         $getSubscriptionsResult = new ListSubscriptionsResult();
         $feed = Feed::create($response);
-        $content = $feed->getContent();
+        $entry = $feed->getEntry();
+        $content = $entry->getContent();
         $subscriptionDescription = XmlSerializer::objectDeserialize($content->getText());  
         $getSubscriptionsResult->setSubscriptionsDescription($subscriptionDescription);
     }
