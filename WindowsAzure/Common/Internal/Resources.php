@@ -40,35 +40,37 @@ class Resources
     // @codingStandardsIgnoreStart
     
     // Messages
-    const INVALID_TYPE_MSG     = 'The provided variable should be of type: ';
-    const INVALID_META_MSG     = 'Metadata cannot contain newline characters.';
-    const AZURE_ERROR_MSG      = "Fail:\nCode: %s\nValue: %s\ndetails (if any): %s.";
-    const NOT_IMPLEMENTED_MSG  = 'This method is not implemented.';
-    const NULL_OR_EMPTY_MSG    = "'%s' can't be NULL or empty.";
-    const NULL_MSG             = "'%s' can't be NULL.";
-    const INVALID_URL_MSG      = 'Provided URL is invalid.';
-    const INVALID_HT_MSG       = 'The header type provided is invalid.';
-    const INVALID_EDM_MSG      = 'The provided EDM type is invalid.';
-    const INVALID_PROP_MSG     = 'One of the provided properties is not an instance of class Property';
-    const INVALID_ENTITY_MSG   = 'The provided entity object is invalid.';
-    const INVALID_VERSION_MSG  = 'Server does not support any known protocol versions.';
-    const INVALID_BO_TYPE_MSG  = 'Batch operation name is not supported or invalid.';
-    const INVALID_BO_PN_MSG    = 'Batch operation parameter is not supported.';
+    const INVALID_TYPE_MSG = 'The provided variable should be of type: ';
+    const INVALID_META_MSG = 'Metadata cannot contain newline characters.';
+    const AZURE_ERROR_MSG = "Fail:\nCode: %s\nValue: %s\ndetails (if any): %s.";
+    const NOT_IMPLEMENTED_MSG = 'This method is not implemented.';
+    const NULL_OR_EMPTY_MSG = "'%s' can't be NULL or empty.";
+    const NULL_MSG = "'%s' can't be NULL.";
+    const INVALID_URL_MSG = 'Provided URL is invalid.';
+    const INVALID_HT_MSG = 'The header type provided is invalid.';
+    const INVALID_EDM_MSG = 'The provided EDM type is invalid.';
+    const INVALID_PROP_MSG = 'One of the provided properties is not an instance of class Property';
+    const INVALID_ENTITY_MSG = 'The provided entity object is invalid.';
+    const INVALID_VERSION_MSG = 'Server does not support any known protocol versions.';
+    const INVALID_BO_TYPE_MSG = 'Batch operation name is not supported or invalid.';
+    const INVALID_BO_PN_MSG = 'Batch operation parameter is not supported.';
     const INVALID_OC_COUNT_MSG = 'Operations and contexts must be of same size.';
-    const INVALID_EXC_OBJ_MSG  = 'Exception object type should be ServiceException.';
-    const NULL_TABLE_KEY_MSG   = 'Partition and row keys can\'t be NULL.';
+    const INVALID_EXC_OBJ_MSG = 'Exception object type should be ServiceException.';
+    const NULL_TABLE_KEY_MSG = 'Partition and row keys can\'t be NULL.';
     const BATCH_ENTITY_DEL_MSG = 'The entity was deleted successfully.';
     const INVALID_PROP_VAL_MSG = "'%s' property value must satisfy %s.";
-    const INVALID_PARAM_MSG    = "The provided variable '%s' should be of type '%s'";
-    const INVALID_BTE_MSG      = "The blob block type must exist in %s";
+    const INVALID_PARAM_MSG = "The provided variable '%s' should be of type '%s'";
+    const INVALID_BTE_MSG = "The blob block type must exist in %s";
     const INVALID_BLOB_PAT_MSG = 'The provided access type is invalid.';
     const INVALID_SVC_PROP_MSG = 'The provided service properties is invalid.';
-    const UNKNOWN_SRILZER_MSG  = 'The provided serializer type is unknown';
-    const INVALID_CSA_OPT_MSG  = 'Must provide valid location or affinity group.';
-    const INVALID_USA_OPT_MSG  = 'Must provide either description or label.';
-    const INVALID_CONFIG_MSG   = 'Config object must be of type Configuration';
-    const INVALID_BUILDER_MSG  = 'Builder object must implement IServicesBuilder';
-    const INVALID_ACH_MSG      = 'The provided access condition header is invalid';
+    const UNKNOWN_SRILZER_MSG = 'The provided serializer type is unknown';
+    const INVALID_CSA_OPT_MSG = 'Must provide valid location or affinity group.';
+    const INVALID_USA_OPT_MSG = 'Must provide either description or label.';
+    const INVALID_CONFIG_MSG = 'Config object must be of type Configuration';
+    const INVALID_BUILDER_MSG = 'Builder object must implement IServicesBuilder';
+    const INVALID_ACH_MSG = 'The provided access condition header is invalid';
+    const MISSING_CONFIG_SETTING_KEY_MSG = "Missing configuration setting %s which is required to create %sRestProxy.";
+    const MISSING_CONFIG_SETTING_VALUE_MSG = "The value of configuration setting %s can't be null or empty.";
 
     // HTTP Headers
     const X_MS_HEADER_PREFIX                 = 'x-ms-';

@@ -24,6 +24,7 @@
  
 namespace WindowsAzure\Common\Internal;
 use WindowsAzure\Common\Internal\Resources;
+use WindowsAzure\Common\Internal\Validate;
 use WindowsAzure\Common\Internal\Utilities;
 use WindowsAzure\Common\Internal\Http\HttpClient;
 use WindowsAzure\Common\Internal\IServiceBuilder;
@@ -96,20 +97,6 @@ class ServicesBuilder implements IServiceBuilder
         case Resources::SERVICE_MANAGEMENT_TYPE_NAME:
             $headers[Resources::X_MS_VERSION] = Resources::SM_API_LATEST_VERSION;
             break;
-    
-        case Resources::SERVICE_BUS_TYPE_NAME:
-            break;
-
-        case Resources::WRAP_TYPE_NAME:
-            break;
-
-        default:
-            $expected  = Resources::QUEUE_TYPE_NAME;
-            $expected .= '|' . Resources::BLOB_TYPE_NAME;
-            $expected .= '|' . Resources::TABLE_TYPE_NAME;
-            $expected .= '|' . Resources::SERVICE_BUS_TYPE_NAME;
-            $expected .= '|' . Resources::WRAP_TYPE_NAME;
-            throw new InvalidArgumentTypeException($expected);
         }
         
         $headersFilter = new HeadersFilter($headers);
@@ -329,6 +316,181 @@ class ServicesBuilder implements IServiceBuilder
     }
     
     /**
+     * Validates that the given config setting exists in the $config and it's value
+     * is doesn't satisfy empty().
+     * 
+     * @param string                            $setting  The config setting name.
+     * @param WindowsAzure\Common\Configuration $config   The configuration object. 
+     * @param string                            $name     The setting code name.
+     * @param string                            $restType The REST type name.
+     * 
+     * @return none
+     */
+    private function _validateConfigSetting($setting, $config, $name, $restType)
+    {
+        $missingKeyMsg   = sprintf(
+            Resources::MISSING_CONFIG_SETTING_KEY_MSG,
+            $name,
+            $restType
+        );
+        $missingValueMsg = sprintf(
+            Resources::MISSING_CONFIG_SETTING_VALUE_MSG,
+            $name
+        );
+        $properties      = $config->getProperties();
+        
+        Validate::isTrue(array_key_exists($setting, $properties), $missingKeyMsg);
+        
+        $value       = $config->getProperty($setting);
+        $isNullEmpty = empty($value);
+        Validate::isTrue(!$isNullEmpty, $missingValueMsg);
+    }
+    
+    /**
+     * Validates that given config has required settings for creating the REST proxy.
+     * 
+     * @param WindowsAzure\Common\Configuration $config The configuration object.
+     * @param string                            $type   The REST proxy type.
+     * 
+     * @return none
+     * 
+     * @throws InvalidArgumentTypeException 
+     */
+    private function _validateConfig($config, $type)
+    {
+        switch ($type) {
+        case Resources::QUEUE_TYPE_NAME:
+            $this->_validateConfigSetting(
+                QueueSettings::URI,
+                $config,
+                'QueueSettings::URI',
+                'Queue'
+            );
+            $this->_validateConfigSetting(
+                QueueSettings::ACCOUNT_NAME,
+                $config,
+                'QueueSettings::ACCOUNT_NAME',
+                'Queue'
+            );
+            $this->_validateConfigSetting(
+                QueueSettings::ACCOUNT_KEY,
+                $config,
+                'QueueSettings::ACCOUNT_KEY',
+                'Queue'
+            );
+            break;
+            
+        case Resources::BLOB_TYPE_NAME:
+            $this->_validateConfigSetting(
+                BlobSettings::URI,
+                $config,
+                'BlobSettings::URI',
+                'Blob'
+            );
+            $this->_validateConfigSetting(
+                BlobSettings::ACCOUNT_NAME,
+                $config,
+                'BlobSettings::ACCOUNT_NAME',
+                'Blob'
+            );
+            $this->_validateConfigSetting(
+                BlobSettings::ACCOUNT_KEY,
+                $config,
+                'BlobSettings::ACCOUNT_KEY',
+                'Blob'
+            );
+            break;
+            
+        case Resources::TABLE_TYPE_NAME:
+            $this->_validateConfigSetting(
+                TableSettings::URI,
+                $config,
+                'TableSettings::URI',
+                'Table'
+            );
+            $this->_validateConfigSetting(
+                TableSettings::ACCOUNT_NAME,
+                $config,
+                'TableSettings::ACCOUNT_NAME',
+                'Table'
+            );
+            $this->_validateConfigSetting(
+                TableSettings::ACCOUNT_KEY,
+                $config,
+                'TableSettings::ACCOUNT_KEY',
+                'Table'
+            );
+            break;
+            
+        case Resources::SERVICE_MANAGEMENT_TYPE_NAME:
+            $this->_validateConfigSetting(
+                ServiceManagementSettings::URI,
+                $config,
+                'ServiceManagementSettings::URI',
+                'ServiceManagement'
+            );
+            $this->_validateConfigSetting(
+                ServiceManagementSettings::CERTIFICATE_PATH,
+                $config,
+                'ServiceManagementSettings::CERTIFICATE_PATH',
+                'ServiceManagement'
+            );
+            $this->_validateConfigSetting(
+                ServiceManagementSettings::SUBSCRIPTION_ID,
+                $config,
+                'ServiceManagementSettings::SUBSCRIPTION_ID',
+                'ServiceManagement'
+            );
+            break;
+            
+        case Resources::SERVICE_BUS_TYPE_NAME:
+            $this->_validateConfigSetting(
+                ServiceBusSettings::URI,
+                $config,
+                'ServiceBusSettings::URI',
+                'ServiceBus'
+            );
+            $this->_validateConfigSetting(
+                ServiceBusSettings::WRAP_URI,
+                $config,
+                'ServiceBusSettings::WRAP_URI',
+                'ServiceBus'
+            );
+            $this->_validateConfigSetting(
+                ServiceBusSettings::WRAP_NAME,
+                $config,
+                'ServiceBusSettings::WRAP_NAME',
+                'ServiceBus'
+            );
+            $this->_validateConfigSetting(
+                ServiceBusSettings::WRAP_PASSWORD,
+                $config,
+                'ServiceBusSettings::WRAP_PASSWORD',
+                'ServiceBus'
+            );
+            break;
+            
+        case Resources::WRAP_TYPE_NAME:
+            $this->_validateConfigSetting(
+                ServiceBusSettings::WRAP_URI,
+                $config,
+                'ServiceBusSettings::WRAP_URI',
+                'Wrap'
+            );
+            break;
+        
+        default:
+            $expected  = Resources::QUEUE_TYPE_NAME;
+            $expected .= '|' . Resources::BLOB_TYPE_NAME;
+            $expected .= '|' . Resources::TABLE_TYPE_NAME;
+            $expected .= '|' . Resources::SERVICE_MANAGEMENT_TYPE_NAME;
+            $expected .= '|' . Resources::SERVICE_BUS_TYPE_NAME;
+            $expected .= '|' . Resources::WRAP_TYPE_NAME;
+            throw new InvalidArgumentTypeException($expected);
+        }
+    }
+    
+    /**
      * Creates an object passed $type configured with $config.
      *
      * @param WindowsAzure\Common\Configuration $config The configuration.
@@ -342,34 +504,36 @@ class ServicesBuilder implements IServiceBuilder
      */
     public function build($config, $type)
     {
+        $this->_validateConfig($config, $type);
+        $restProxy = null;
+        
         switch ($type) {
         case Resources::QUEUE_TYPE_NAME:
-            return self::_buildQueue($config);
+            $restProxy = self::_buildQueue($config);
+            break;
             
         case Resources::BLOB_TYPE_NAME:
-            return self::_buildBlob($config);
+            $restProxy = self::_buildBlob($config);
+            break;
             
         case Resources::TABLE_TYPE_NAME:
-            return self::_buildTable($config);
+            $restProxy = self::_buildTable($config);
+            break;
             
         case Resources::SERVICE_MANAGEMENT_TYPE_NAME:
-            return self::_buildServiceManagement($config);
+            $restProxy = self::_buildServiceManagement($config);
+            break;
 
         case Resources::SERVICE_BUS_TYPE_NAME:
-            return self::_buildServiceBus($config);
+            $restProxy = self::_buildServiceBus($config);
+            break;
             
         case Resources::WRAP_TYPE_NAME:
-            return self::_buildWrap($config);
-            
-        default:
-            $expected  = Resources::QUEUE_TYPE_NAME;
-            $expected .= '|' . Resources::BLOB_TYPE_NAME;
-            $expected .= '|' . Resources::TABLE_TYPE_NAME;
-            $expected .= '|' . Resources::SERVICE_MANAGEMENT_TYPE_NAME;
-            $expected .= '|' . Resources::SERVICE_BUS_TYPE_NAME;
-            $expected .= '|' . Resources::WRAP_TYPE_NAME;
-            throw new InvalidArgumentTypeException($expected);
+            $restProxy = self::_buildWrap($config);
+            break;
         }
+        
+        return $restProxy;
     }
 }
 
