@@ -15,7 +15,7 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   WindowsAzure\Services\ServiceBus
+ * @package   WindowsAzure\Core\Atom
  * @author    Azure PHP SDK <azurephpsdk@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
@@ -23,12 +23,13 @@
  */
 
 namespace WindowsAzure\Core\Atom;
+use WindowsAzure\Validate;
 
 /**
- * This class constructs HTTP requests and receive HTTP responses for service bus.
+ * Thfor service bus.
  *
  * @category  Microsoft
- * @package   WindowsAzure\Services\ServiceBus
+ * @package   WindowsAzure\Core\Atom
  * @author    Azure PHP SDK <azurephpsdk@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
@@ -38,6 +39,19 @@ namespace WindowsAzure\Core\Atom;
 
 class Feed
 {
+    /**
+     * The attributes of the feed.
+     *
+     * @var string 
+     */
+    private $_attributes;
+
+    /**
+     * The entry of the feed. 
+     * 
+     * @var string 
+     */
+    private $_entry;
 
     /**
      * The category of the feed. 
@@ -124,13 +138,110 @@ class Feed
     private $_extensionElement;
 
     /**
-     * Creates a feed object with specified Xml string. 
+     * Creates an ATOM FEED object with default parameters. 
+     */ 
+    public function __construct()
+    {   
+        $this->_attributes = array();
+    }
+
+    /**
+     * Creates a feed object with specified XML string. 
      */
     public static function create($xmlString)
     {
         $feed = new Feed();
+        $feedXml = simplexml_load_string($xmlString);
+        $feed->setAttributes($feedXml->attributes());
+        if (array_key_exists($feedXml, 'category'))
+        {
+            $category = Categtory::create($feedXml['category']);
+            $feed->setCategory($category);
+        }
+
+        if (array_key_exists($feedXml, 'contributor'))
+        {
+            $contributor = Person::create($feedXml['contributor']);
+            $feed->setContributor($contributor);
+        }
+
+        if (array_key_exists($feedXml, 'generator'))
+        {
+            $generator = Generator::create($feedXml['generator']);
+            $feed->setGenerator($generator);
+        } 
+
+        if (array_key_exists($feedXml, 'icon'))
+        {
+            $icon = Icon::create($feedXml['icon']);
+            $feed->setIcon($icon);
+        }
+
+        if (array_key_exists($feedXml, 'id'))
+        {
+            $feed->setId($feedXml['id']);
+        }
+
+        if (array_key_exists($feedXml, 'link'))
+        {
+            $link = AtomLink::create($feedXml['link']);
+            $feed->setLink($link);
+        }
+
+        if (array_key_exists($feedXml, 'logo'))
+        {
+            $feed->setLogo($feedXml['logo']);
+        }
+
+        if (array_key_exists($feedXml, 'rights'))
+        {
+            $feed->setRights($feedXml['rights']);
+        }
+
+        if (array_key_exists($feedXml, 'subtitle'))
+        {
+            $feed->setSubtitle($feedXml['subtitle']);
+        }
+
+        if (array_key_exists($feedXml, 'title'))
+        {
+            $feed->setTitle($feedXml['title']);
+        }
+
+        if (array_key_exists($feedXml, 'updated'))
+        {
+            $feed->setUpdated($feedXml['updated']);
+        }
+         
         return $feed;
     }
+
+    /**
+     * Gets the attributes of the feed. 
+     *
+     * @return array
+     */
+    public function getAttributes()
+    {
+        return $this->_attributes;
+    }
+
+    /**
+     * Sets the attributes of the feed. 
+     *
+     * @param array $attributes The attributes of the array. 
+     *
+     */
+    public function setAttributes($attributes)
+    {
+        Validate::isArray($attributes, 'attributes');
+        $this->_attributes = $attributes;
+    }
+
+    public function addAttribute($attributeKey, $attributeValue)
+    {
+        $this->_attributes[$attributeKey] = $attributeValue;
+    }   
 
     /**
      * Gets the category of the feed.
@@ -395,14 +506,33 @@ class Feed
     /** 
      * Gets an XML representing the feed object.
      * 
+     * @param boolean $writeNamespace Whether to write the XmlNamespace.
+     * 
      * @return string 
      */
     public function toXml()
     {
-        $innerXml = '';
+        $xmlWriter = new XMLWriter();
+        
+        $xmlWriter->openMemory();
+        $xmlWriter->setIndent(true);
+        $xmlWriter->startElement('<atom:feed>');
+
+        $xmlWriter->writeAttribute('xmlns:atom', 'http://www.w3.org/2005/Atom');
+        if (!is_null($this->_attributes))
+        {
+            if (is_array($this->_attributes))
+            {
+                foreach ($this->_attributes as $attributeName => $attributeValue)
+                {
+                    $xmlWriter->writeAttribute($attributeName, $attributeValue);
+                }
+            }
+        }
+         
         if (!is_null($this->_author))
         {
-            $innerXml .= '<author>'.$this->_author.'</author>';            
+            $xmlWriter->writeElement('author', $this->_author->toXml());
         } 
 
         if (!is_null($this->_category))
@@ -411,12 +541,12 @@ class Feed
             {
                 foreach ($this->_category as $category)
                 {
-                    $innerXml .= '<category>'.$category.'</category>';
+                    $xmlWriter->writeElement('category', $category->toXml());
                 }
             }
             else
             {
-                $innerXml .= '<category>'.$this->_category.'</category>';
+                $xmlWriter->writeElement('category', $this->_category->toXml());
             }
         }
 
@@ -426,62 +556,62 @@ class Feed
             {
                 foreach ($this->_contributor as $contributor)
                 {
-                    $innerXml .= '<contributor>'.$contributor.'</contributor>';
+                    $xmlWriter->writeElement('contributor', $contributor->toXml());
                 }
             }
             else
             {
-                $innerXml .= '<contributor>'.$this->_contributor.'</contributor>';
+                $xmlWriter->writeElement('contributor', $this->_contributor->toXml());
             }
         }
 
         if (!is_null($this->_generator))
         {
-            $innerXml .= '<generator>'.$this->_generator.'</generator>';
+            $xmlWriter->writeElement('generator', $this->_generator->toXml());
         } 
 
         if (!is_null($this->_icon))
         {
-            $innerXml .= '<icon>'.$this->_icon.'</icon>';
+            $xmlWriter->writeElement('icon', $this->_icon);
         }
 
         if (!is_null($this->_logo))
         {
-            $innerXml .= '<logo>'.$this->_logo.'</logo>';
+            $xmlWriter->writeElement('logo', $this->_logo);
         }
 
         if (!is_null($this->_id))
         {
-            $innerXml .= '<id>'.$this->_id.'</id>';
+            $xmlWriter->writeElement('id', $this->_id);
         }
 
         if (!is_null($this->_link))
         {
-            $innerXml .= '<link>'.$this->_link.'</link>';
+            $xmlWriter->writeElement('link', $this->_link);
         }
 
         if (!is_null($this->_rights))
         {
-            $innerXml .= '<rights>'.$this->_rights.'</rights>';
+            $xmlWriter->writeElement('rights', $this->_rights);
         }
 
         if (!is_null($this->_subtitle))
         {
-            $innerXml .= '<subtitle>'.$this->_subtitle.'</subtitle>';
+            $xmlWriter->writeElement('subtitle', $this->_subtitle);
         }
         
         if (!is_null($this->_title))
         {
-            $innerXml .= '<title>'.$this->_title.'</title>';
+            $xmlWriter->writeElement('title', $this->_title);
         }
 
         if (!is_null($this->_updated))
         {
-            $innerXml .= '<updated>'.$this->_updated.'</updated>';
+            $xmlWriter->writeElement('updated', $this->_updated);
         }
+        $xmlWriter->endElement();
 
-        $outerXml = '<entry>'.$innerXml.'</entry>';
-        return $outerXml;
+        return $xmlWriter->outputMemory();
     }
 
 }

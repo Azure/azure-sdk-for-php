@@ -40,6 +40,13 @@ use WindowsAzure\Resources;
 
 class Entry
 {
+
+    /**
+     * The attributes of the entry 
+     * @var array
+     */
+    private $_attributes
+
     /**
      * The author of the entry.
      *
@@ -131,8 +138,88 @@ class Entry
      */
     private $_extensionElement;
 
+    /**
+     * Creates an ATOM Entry instance with default parameters. 
+     */
     public function __construct()
     {
+        $this->_attributes = array();
+    }
+
+    /**
+     * Creates an ATOM Entry instance with specified XmlString. 
+     * 
+     * @param string $xmlString A string representing an ATOM entry instance. 
+     * 
+     */
+    public static function create($xmlString)
+    {
+        $entry = new Entry();
+        $entryXml = simplexml_load_string($xmlString);
+        $entry->setAttributes($entryXml->attributes());
+        if (array_key_exists($entryXml, 'author'))
+        {
+            $author = Category::create($entryXml['author']);
+            $entry->setAuthor($author);
+        }
+
+        if (array_key_exists($entryXml, 'category'))
+        {
+            $category = Categtory::create($entryXml['category']);
+            $entry->setCategory($category);
+        }
+
+        if (array_key_exists($entryXml, 'content'))
+        {
+            $content = Content::create($entryXml['content']);
+            $entry->setContent($content);
+        }
+
+        if (array_key_exists($entryXml, 'contributor'))
+        {
+            $contributor = Person::create($entryXml['contributor']);
+            $entry->setContributor($contributor);
+        }
+
+        if (array_key_exists($entryXml, 'id'))
+        {
+            $entry->setId($entryXml['id']);
+        }
+
+        if (array_key_exists($entryXml, 'link'))
+        {
+            $link = AtomLink::create($entryXml['link']);
+            $entry->setLink($link);
+        }
+
+        if (array_key_exists($entryXml, 'published'))
+        {
+            $entry->setPublished($entryXml['published']);
+        }
+
+        if (array_key_exists($entryXml, 'rights'))
+        {
+            $entry->setRights($entryXml['rights']);
+        }
+
+        if (array_key_exists($entryXml, 'source'))
+        {
+            $source = Source::create($entryXml['source]');
+            $entry->setSource($source);
+        }
+
+        if (array_key_exists($entryXml, 'title'))
+        {
+            $entry->setTitle($entryXml['title']);
+        }
+
+        if (array_key_exists($entryXml, 'updated'))
+        {
+            $entry->setUpdated($entryXml['updated']);
+        }
+         
+        return $entry;
+
     }
 
     /**
@@ -487,4 +574,5 @@ class Entry
     }
 
 }
+
 ?>

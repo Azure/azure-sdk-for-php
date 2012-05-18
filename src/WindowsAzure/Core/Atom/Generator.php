@@ -38,52 +38,41 @@ use WindowsAzure\Resources;
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
 
-class Content
+class Generator
 {
     /**
-     * The text of the content. 
+     * The of the generator. 
      *
      * @var string  
      */
     private $_text;
 
     /**
-     * The type of the content. 
+     * The Uri of the generator. 
      *
      * @var string  
      */
-    private $_type;
+    private $_uri;
+
+    /**
+     * The version of the generator.
+     *
+     * @var string 
+     */
+    private $_version;
      
     /** 
-     * Creates a Content instance with specified text.
+     * Creates an ATOM generator instance with specified name.
      *
-     * @param string $text The text of the content.
+     * @param string $text The text content of the generator.
      */
     public function __construct($text)
     {
         $this->_text = $text;
     }
 
-    /**
-     * Creates an ATOM CONTENT instance with specified xml string. 
-     * 
-     * @param string $xmlString an XML based string of ATOM CONTENT.
-     */ 
-    public static function create($xmlString)
-    {
-        $content = new Content();
-        $contentXml = simplexml_load_string($xmlString);
-        $attributes = $contentXml->attributes();
-        if (array_key_exists($attributes, 'type'))
-        {
-            $content->setType($attributes['type']);
-        }
-        $content->setText((string)$contentXml->InnerNode);
-        return $content;
-    }
-
     /** 
-     * Gets the text of the content. 
+     * Gets the text of the generator. 
      *
      * @return string
      */
@@ -93,9 +82,9 @@ class Content
     } 
 
     /**
-     * Sets the text of the content.
+     * Sets the text of the generator.
      * 
-     * @param string $text The text of the content.
+     * @param string $text The text of the generator.
      */
     public function setText($text)
     {
@@ -103,43 +92,71 @@ class Content
     }
 
     /**
-     * Gets the type of the content. 
+     * Gets the URI of the generator. 
      * 
      * @return string
      */
-    public function getType()
+    public function getUri()
     {
-        return $this->_type;
+        return $this->_uri;
     }
 
     /**
-     * Sets the type of the content. 
+     * Sets the URI of the generator. 
      * 
-     * @param string $type The type of the content.
+     * @param string $uri The URI of the generator.
      */
-    public function setType($type)
+    public function setUri($uri)
     {
-        $this->_type = $type;
+        $this->_uri = $uri;
     }
+
     
+    /**
+     * Gets the version of the generator. 
+     * 
+     * @return string
+     */
+    public function getVersion()
+    {
+        return $this->_version;
+    }
+
+    /**
+     * Sets the version of the generator. 
+     * 
+     * @param string $version The version of the generator.
+     */
+    public function setVersion($version)
+    {
+        $this->_version = $version;
+    }
+
     /** 
-     * Gets an XML representing the content. 
+     * Gets an XML representing the generator. 
      * 
      * return string
      */
     public function toXml()
     {
         $xmlWriter = new XMLWriter();
+        
         $xmlWriter->openMemory();
-        $xmlWriter->startElement('atom:content');
-        if (!empty($this->_type))
+        $xmlWriter->startElement('atom:category');
+        if (!empty($this->_uri))
         {
-            $xmlWriter->writeAttribute('type', $this->_type);
+            $xmlWriter->writeAttribute('atom:uri', $this->_uri);
+        }
+
+        if (!empty($this->_version))
+        {
+            $xmlWriter->writeAttribute('atom:version', $this->_version);
         }
 
         $xmlWriter->writeRaw($this->_text);
-        $xmlWriter->endElement();
 
+        $xmlWriter->endElement();
+        
         return $xmlWriter->outputMemory();
     }
 }

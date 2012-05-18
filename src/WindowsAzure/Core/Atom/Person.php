@@ -38,108 +38,124 @@ use WindowsAzure\Resources;
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
 
-class Content
+class Person
 {
     /**
-     * The text of the content. 
+     * The name of the person. 
      *
      * @var string  
      */
-    private $_text;
+    private $_name;
 
     /**
-     * The type of the content. 
+     * The Uri of the person. 
      *
      * @var string  
      */
-    private $_type;
+    private $_uri;
+
+    /**
+     * The email of the person.
+     *
+     * @var string 
+     */
+    private $_email;
      
     /** 
-     * Creates a Content instance with specified text.
+     * Creates an ATOM person instance with specified name.
      *
-     * @param string $text The text of the content.
+     * @param string $name The name of the person.
      */
-    public function __construct($text)
+    public function __construct($name)
     {
-        $this->_text = $text;
-    }
-
-    /**
-     * Creates an ATOM CONTENT instance with specified xml string. 
-     * 
-     * @param string $xmlString an XML based string of ATOM CONTENT.
-     */ 
-    public static function create($xmlString)
-    {
-        $content = new Content();
-        $contentXml = simplexml_load_string($xmlString);
-        $attributes = $contentXml->attributes();
-        if (array_key_exists($attributes, 'type'))
-        {
-            $content->setType($attributes['type']);
-        }
-        $content->setText((string)$contentXml->InnerNode);
-        return $content;
+        $this->_name = $name;
     }
 
     /** 
-     * Gets the text of the content. 
+     * Gets the name of the person. 
      *
      * @return string
      */
-    public function getText()
+    public function getName()
     {   
-        return $this->_text;
+        return $this->_name;
     } 
 
     /**
-     * Sets the text of the content.
+     * Sets the name of the person.
      * 
-     * @param string $text The text of the content.
+     * @param string $name The name of the person.
      */
-    public function setText($text)
+    public function setName($name)
     {
-        $this->_text = $text; 
+        $this->_name = $name; 
     }
 
     /**
-     * Gets the type of the content. 
+     * Gets the URI of the person. 
      * 
      * @return string
      */
-    public function getType()
+    public function getUri()
     {
-        return $this->_type;
+        return $this->_uri;
     }
 
     /**
-     * Sets the type of the content. 
+     * Sets the URI of the person. 
      * 
-     * @param string $type The type of the content.
+     * @param string $uri The URI of the person.
      */
-    public function setType($type)
+    public function setUri($uri)
     {
-        $this->_type = $type;
+        $this->_uri = $uri;
     }
+
     
+    /**
+     * Gets the email of the person. 
+     * 
+     * @return string
+     */
+    public function getEmail()
+    {
+        return $this->_email;
+    }
+
+    /**
+     * Sets the email of the person. 
+     * 
+     * @param string $email The email of the person.
+     */
+    public function setEmail($email)
+    {
+        $this->_email = $email;
+    }
+
     /** 
-     * Gets an XML representing the content. 
+     * Gets an XML representing the person. 
      * 
      * return string
      */
     public function toXml()
     {
         $xmlWriter = new XMLWriter();
+
         $xmlWriter->openMemory();
-        $xmlWriter->startElement('atom:content');
-        if (!empty($this->_type))
+        $xmlWriter->startElement('<atom:person>');
+        $xmlWriter->writeElement('<atom:name>', $this->_name);
+        if (!empty($this->_uri))
         {
-            $xmlWriter->writeAttribute('type', $this->_type);
+            $xmlWriter->writeElement('atom:uri', $this->_uri);
         }
 
-        $xmlWriter->writeRaw($this->_text);
+        if (!empty($this->_email))
+        {
+            $xmlWriter->writeElement('atom:email', $this->_email);
+        }
+        
         $xmlWriter->endElement();
-
+        
         return $xmlWriter->outputMemory();
     }
 }
