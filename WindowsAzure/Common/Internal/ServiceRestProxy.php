@@ -142,9 +142,12 @@ class ServiceRestProxy extends RestProxy
             if ($header != Resources::EMPTY_STRING) {
                 $value = $accessCondition->getValue();
                 if ($value instanceof \DateTime) {
-                    $value = Utilities::isoDate(date_timestamp_get($value));
+                    $value = gmdate(
+                        Resources::AZURE_DATE_FORMAT,
+                        $value->getTimestamp()
+                    );
                 }
-                $headers[$header] = $accessCondition->getValue();
+                $headers[$header] = $value;
             }
         }
         
@@ -191,7 +194,10 @@ class ServiceRestProxy extends RestProxy
             }
             $value = $accessCondition->getValue();
             if ($value instanceof \DateTime) {
-                $value = Utilities::isoDate(date_timestamp_get($value));
+                $value = gmdate(
+                    Resources::AZURE_DATE_FORMAT,
+                    $value->getTimestamp()
+                );
             }
             
             $this->addOptionalHeader($headers, $headerName, $value);
