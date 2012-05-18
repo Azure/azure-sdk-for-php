@@ -347,7 +347,7 @@ class ServicesBuilder implements IServiceBuilder
     }
     
     /**
-     * Validates that given config has required srttings for creating the REST proxy.
+     * Validates that given config has required settings for creating the REST proxy.
      * 
      * @param WindowsAzure\Common\Configuration $config The configuration object.
      * @param string                            $type   The REST proxy type.
