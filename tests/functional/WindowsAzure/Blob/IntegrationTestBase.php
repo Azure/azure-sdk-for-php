@@ -33,7 +33,7 @@ use WindowsAzure\Blob\BlobService;
 class IntegrationTestBase extends BlobServiceRestProxyTestBase
 {
     /**
-     * @covers WindowsAzure\Blob\Internal\BlobRestProxy::withFilter
+     * @covers WindowsAzure\Blob\BlobRestProxy::withFilter
      */
     public function __construct()
     {
