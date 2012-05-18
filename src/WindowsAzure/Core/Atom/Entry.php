@@ -45,7 +45,7 @@ class Entry
      * The attributes of the entry 
      * @var array
      */
-    private $_attributes
+    private $_attributes;
 
     /**
      * The author of the entry.
@@ -204,7 +204,7 @@ class Entry
 
         if (array_key_exists($entryXml, 'source'))
         {
-            $source = Source::create($entryXml['source]');
+            $source = Source::create($entryXml['source']);
             $entry->setSource($source);
         }
 
