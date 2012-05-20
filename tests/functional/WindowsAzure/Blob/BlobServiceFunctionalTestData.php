@@ -31,6 +31,7 @@ use WindowsAzure\Common\Models\Metrics;
 use WindowsAzure\Common\Models\RetentionPolicy;
 use WindowsAzure\Common\Models\ServiceProperties;
 use WindowsAzure\Blob\Models\BlobServiceOptions;
+use WindowsAzure\Blob\Models\GetBlobOptions;
 use WindowsAzure\Blob\Models\GetServicePropertiesResult;
 use WindowsAzure\Blob\Models\ListBlobsOptions;
 use WindowsAzure\Blob\Models\ListBlobsResult;
@@ -716,6 +717,68 @@ class BlobServiceFunctionalTestData
         $acl = new ContainerACL();
         $acl->addSignedIdentifier('123', $past, $future, 'rw');
         array_push($ret, $acl);
+
+        return $ret;
+    }
+
+    public static function getGetBlobOptions()
+    {
+        $ret = array();
+
+        $options = new GetBlobOptions();
+        array_push($ret, $options);
+
+        $options = new GetBlobOptions();
+        $options->setTimeout(10);
+        array_push($ret, $options);
+
+        $options = new GetBlobOptions();
+        $options->setTimeout(-10);
+        array_push($ret, $options);
+
+        // Get Blob only supports the temporal access conditions.
+        foreach(self::getTemporalAccessConditions() as $ac)  {
+            $options = new GetBlobOptions();
+            $options->setAccessCondition($ac);
+            array_push($ret, $options);
+        }
+
+        $options = new GetBlobOptions();
+        $options->setRangeStart(50);
+        $options->setRangeEnd(200);
+        array_push($ret, $options);
+
+        $options = new GetBlobOptions();
+        $options->setRangeStart(50);
+        $options->setRangeEnd(200);
+        $options->setComputeRangeMD5(true);
+        array_push($ret, $options);
+
+        $options = new GetBlobOptions();
+        $options->setRangeStart(50);
+        array_push($ret, $options);
+
+        $options = new GetBlobOptions();
+        $options->setComputeRangeMD5(true);
+        array_push($ret, $options);
+
+        $options = new GetBlobOptions();
+        $options->setRangeEnd(200);
+        $options->setComputeRangeMD5(true);
+        array_push($ret, $options);
+
+        $options = new GetBlobOptions();
+        $options->setRangeEnd(200);
+        array_push($ret, $options);
+
+        //        $options = new GetBlobOptions();
+        //        $options->setSnapshot('sgdsfdg');
+        //        array_push($ret, $options);
+
+        // TODO: Handle Lease ID
+        //        $options = new GetBlobOptions();
+        //        $options->setLeaseId('setLeaseId');
+        //        array_push($ret, $options);
 
         return $ret;
     }
