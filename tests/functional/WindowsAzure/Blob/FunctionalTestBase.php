@@ -42,19 +42,19 @@ class FunctionalTestBase extends BlobServiceRestProxyTestBase
 {
 
     /**
-     * @covers WindowsAzure\Blob\Internal\BlobRestProxy::withFilter
+     * @covers WindowsAzure\Blob\BlobRestProxy::withFilter
      */
     public function __construct()
     {
         parent::__construct();
         $fiddlerFilter = new FiddlerFilter();
-        $this->wrapper = $this->wrapper->withFilter($fiddlerFilter);
+        $this->restProxy = $this->restProxy->withFilter($fiddlerFilter);
     }
 
     /**
-     * @covers WindowsAzure\Blob\Internal\BlobRestProxy::createContainer
-     * @covers WindowsAzure\Blob\Internal\BlobRestProxy::deleteContainer
-     * @covers WindowsAzure\Blob\Internal\BlobRestProxy::listContainers
+     * @covers WindowsAzure\Blob\BlobRestProxy::createContainer
+     * @covers WindowsAzure\Blob\BlobRestProxy::deleteContainer
+     * @covers WindowsAzure\Blob\BlobRestProxy::listContainers
      */
     public function setUp()
     {
@@ -67,22 +67,22 @@ class FunctionalTestBase extends BlobServiceRestProxyTestBase
 
         BlobServiceFunctionalTestData::setupData($accountName);
 
-        foreach($this->wrapper->listContainers()->getContainers() as $container) {
-            $this->wrapper->deleteContainer($container->getName());
+        foreach($this->restProxy->listContainers()->getContainers() as $container) {
+            $this->restProxy->deleteContainer($container->getName());
         }
 
         foreach(BlobServiceFunctionalTestData::$TEST_CONTAINER_NAMES as $name)  {
-            $this->wrapper->createContainer($name);
+            $this->restProxy->createContainer($name);
         }
     }
 
     /**
-     * @covers WindowsAzure\Blob\Internal\BlobRestProxy::deleteContainer
+     * @covers WindowsAzure\Blob\BlobRestProxy::deleteContainer
      */
     public function tearDown()
     {
         foreach(BlobServiceFunctionalTestData::$TEST_CONTAINER_NAMES as $name)  {
-            $this->wrapper->deleteContainer($name);
+            $this->restProxy->deleteContainer($name);
         }
     }
 }

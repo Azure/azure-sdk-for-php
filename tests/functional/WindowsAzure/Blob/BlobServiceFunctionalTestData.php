@@ -43,6 +43,10 @@ use WindowsAzure\Blob\Models\SetContainerMetadataOptions;
 use WindowsAzure\Common\Internal\Resources;
 use WindowsAzure\Blob\Models\ContainerAcl;
 use WindowsAzure\Blob\Models\PublicAccessType;
+use WindowsAzure\Blob\Models\GetBlobMetadataOptions;
+use WindowsAzure\Blob\Models\SetBlobMetadataOptions;
+use WindowsAzure\Blob\Models\GetBlobPropertiesOptions;
+use WindowsAzure\Blob\Models\SetBlobPropertiesOptions;
 
 class BlobServiceFunctionalTestData
 {
@@ -54,6 +58,7 @@ class BlobServiceFunctionalTestData
     public static $TEST_CONTAINER_NAMES;
     public static $TEST_BLOB_NAMES;
     private static $_accountName;
+    private static $badEtag = '0x123456789ABCDEF';
 
     public static function setupData($accountName)
     {
@@ -81,6 +86,18 @@ class BlobServiceFunctionalTestData
         return 'foo bar' . (self::$tempBlobCounter++);
     }
 
+    public static function getInterestingTimeoutValues()
+    {
+        $ret = array();
+        array_push($ret, null);
+        array_push($ret, -1);
+        array_push($ret,  0);
+        array_push($ret,  1);
+        array_push($ret,-2147483648);
+        array_push($ret, 2147483647);
+        return $ret;
+    }
+
     public static function diffInTotalSeconds($date1, $date2)
     {
         $diff = $date1->diff($date2);
@@ -92,7 +109,6 @@ class BlobServiceFunctionalTestData
                 + 12 * ( $diff->y )))));
         return abs($sec);
     }
-
 
     public static function passTemporalAccessCondition($ac)
     {
@@ -111,15 +127,54 @@ class BlobServiceFunctionalTestData
         }
     }
 
-    public static function getInterestingTimeoutValues()
+    public static function passEtagAccessCondition($ac)
+    {
+        if (is_null($ac)) {
+            return true;
+        } else if ($ac->getHeader() == Resources::IF_MATCH) {
+            return self::$badEtag != $ac->getValue();
+        } else if ($ac->getHeader() == Resources::IF_NONE_MATCH) {
+            return self::$badEtag == $ac->getValue();
+        } else {
+            return true;
+        }
+    }
+
+    public static function fixEtagAccessCondition($ac, $etag)
+    {
+        if ($ac != null) {
+            if ($ac->getHeader() == Resources::IF_MATCH || $ac->getHeader() == Resources::IF_NONE_MATCH) {
+                if ($ac->getValue() == null || self::$badEtag != $ac->getValue()) {
+                    $ac->setValue($etag);
+                }
+            }
+        }
+    }
+
+    private static function getTemporalAccessConditions()
     {
         $ret = array();
-        array_push($ret, null);
-        array_push($ret, -1);
-        array_push($ret,  0);
-        array_push($ret,  1);
-        array_push($ret,-2147483648);
-        array_push($ret, 2147483647);
+
+        $past = new \DateTime("01/01/2010");
+        $future = new \DateTime("01/01/2020");
+
+        array_push($ret, AccessCondition::ifModifiedSince($past));
+        array_push($ret, AccessCondition::ifNotModifiedSince($past));
+        array_push($ret, AccessCondition::ifModifiedSince($future));
+        array_push($ret, AccessCondition::ifNotModifiedSince($future));
+
+        return $ret;
+    }
+
+    private static function getAllAccessConditions()
+    {
+        $ret = self::getTemporalAccessConditions();
+
+        array_push($ret, AccessCondition::ifMatch(null));
+        array_push($ret, AccessCondition::ifMatch(self::$badEtag));
+        array_push($ret, AccessCondition::ifNoneMatch(null));
+        array_push($ret, AccessCondition::ifNoneMatch(self::$badEtag));
+
         return $ret;
     }
 
@@ -318,7 +373,12 @@ class BlobServiceFunctionalTestData
 
     public static function getInterestingMetadata()
     {
-        $ret = self::getNiceMetadata();
+        $ret = array();
+
+        $metadata = array();
+        array_push($ret, $metadata);
+
+        array_push($ret, self::getNiceMetadata());
 
         // Some metadata that HTTP will not like.
         $metadata = array('<>000' => '::::value');
@@ -329,18 +389,10 @@ class BlobServiceFunctionalTestData
 
     public static function getNiceMetadata()
     {
-        $ret = array();
-
-        $metadata = array();
-        array_push($ret, $metadata);
-
-        $metadata = array(
+        return array(
             'key' => 'value',
             'foo' => 'bar',
             'baz' => 'boo');
-        array_push($ret, $metadata);
-
-        return $ret;
     }
 
     public static function getInterestingCreateBlobOptions()
@@ -502,9 +554,6 @@ class BlobServiceFunctionalTestData
     {
         $ret = array();
 
-          $past = new \DateTime("01/01/2010");
-        $future = new \DateTime("01/01/2020");
-
         $options = new SetContainerMetadataOptions();
         array_push($ret, $options);
 
@@ -516,20 +565,127 @@ class BlobServiceFunctionalTestData
         $options->setTimeout(-10);
         array_push($ret, $options);
 
-        $options = new SetContainerMetadataOptions();
-        $options->setAccessCondition(AccessCondition::ifModifiedSince($past));
+        // Set Container Metadata only supports the If-Modified-Since access condition.
+        // But easier to special-case If-Unmodified-Since in the test.
+        foreach(self::getTemporalAccessConditions() as $ac)  {
+            $options = new SetContainerMetadataOptions();
+            $options->setAccessCondition($ac);
+            array_push($ret, $options);
+        }
+
+        return $ret;
+    }
+
+    public static function getSetBlobMetadataOptions()
+    {
+        $ret = array();
+
+        $options = new SetBlobMetadataOptions();
         array_push($ret, $options);
 
-        $options = new SetContainerMetadataOptions();
-        $options->setAccessCondition(AccessCondition::ifNotModifiedSince($past));
+        $options = new SetBlobMetadataOptions();
+        $options->setTimeout(10);
         array_push($ret, $options);
 
-        $options = new SetContainerMetadataOptions();
-        $options->setAccessCondition(AccessCondition::ifModifiedSince($future));
+        $options = new SetBlobMetadataOptions();
+        $options->setTimeout(-10);
         array_push($ret, $options);
 
-        $options = new SetContainerMetadataOptions();
-        $options->setAccessCondition(AccessCondition::ifNotModifiedSince($future));
+        foreach(self::getAllAccessConditions() as $ac)  {
+            $options = new SetBlobMetadataOptions();
+            $options->setAccessCondition($ac);
+            array_push($ret, $options);
+        }
+
+        // TODO: Make sure the lease id part is tested in the leasing part.
+        //        $options = new SetBlobMetadataOptions();
+        //        $options->setLeaseId(leaseId)
+        //        array_push($ret, $options);
+
+        return $ret;
+    }
+
+    public static function getGetBlobPropertiesOptions()
+    {
+        $ret = array();
+
+        $options = new GetBlobPropertiesOptions();
+        array_push($ret, $options);
+
+        $options = new GetBlobPropertiesOptions();
+        $options->setTimeout(10);
+        array_push($ret, $options);
+
+        $options = new GetBlobPropertiesOptions();
+        $options->setTimeout(-10);
+        array_push($ret, $options);
+
+        // Get Blob Properties only supports the temporal access conditions.
+        foreach(self::getTemporalAccessConditions() as $ac)  {
+            $options = new GetBlobPropertiesOptions();
+            $options->setAccessCondition($ac);
+            array_push($ret, $options);
+        }
+
+        return $ret;
+    }
+
+    public static function getSetBlobPropertiesOptions()
+    {
+        $ret = array();
+
+        $options = new SetBlobPropertiesOptions();
+        array_push($ret, $options);
+
+        $options = new SetBlobPropertiesOptions();
+        $options->setTimeout(10);
+        array_push($ret, $options);
+
+        $options = new SetBlobPropertiesOptions();
+        $options->setTimeout(-10);
+        array_push($ret, $options);
+
+        // Get Blob Properties only supports the temporal access conditions.
+        foreach(self::getTemporalAccessConditions() as $ac)  {
+            $options = new SetBlobPropertiesOptions();
+            $options->setAccessCondition($ac);
+            array_push($ret, $options);
+        }
+
+        $options = new SetBlobPropertiesOptions();
+        $options->setBlobCacheControl('setBlobCacheControl');
+        array_push($ret, $options);
+
+        $options = new SetBlobPropertiesOptions();
+        $options->setBlobContentEncoding('setBlobContentEncoding');
+        array_push($ret, $options);
+
+        $options = new SetBlobPropertiesOptions();
+        $options->setBlobContentLanguage('setBlobContentLanguage');
+        array_push($ret, $options);
+
+        // Note: This is not allowed on block blobs
+        $options = new SetBlobPropertiesOptions();
+        $options->setBlobContentLength(2048);
+        array_push($ret, $options);
+
+        $options = new SetBlobPropertiesOptions();
+        $options->setBlobContentMD5('d41d8cd98f00b204e9800998ecf8427e');
+        array_push($ret, $options);
+
+        $options = new SetBlobPropertiesOptions();
+        $options->setBlobContentType('setContentType');
+        array_push($ret, $options);
+
+        // TODO: Handle Lease ID
+        //        $options = new SetBlobPropertiesOptions();
+        //        $options->setLeaseId('setLeaseId');
+        //        array_push($ret, $options);
+
+        // Note: This is not allowed on block blobs
+        $options = new SetBlobPropertiesOptions();
+        $options->setSequenceNumber(0);
+        $options->setSequenceNumberAction('update');
         array_push($ret, $options);
 
         return $ret;
@@ -543,18 +699,6 @@ class BlobServiceFunctionalTestData
         $future = new \DateTime("01/01/2020");
 
         $acl = new ContainerACL();
-        array_push($ret, $acl);
-
-        $acl = new ContainerACL();
-        $acl->setEtag('bogus etag');
-        array_push($ret, $acl);
-
-        $acl = new ContainerACL();
-        $acl->setLastModified($past);
-        array_push($ret, $acl);
-
-        $acl = new ContainerACL();
-        $acl->setLastModified($future);
         array_push($ret, $acl);
 
         $acl = new ContainerACL();
