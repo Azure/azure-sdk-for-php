@@ -1105,6 +1105,32 @@ class BlobServiceFunctionalTest extends FunctionalTestBase
         $this->listBlobsWorker($container, null);
     }
 
+    // This fails because the service returns the container list
+    // instead of the blob list. In principle, the service can
+    // distinguish between the two, because this is of the
+    // format:
+    //     /?restype=container&comp=list
+    // whereas the container list has this format:
+    //     /?comp=list
+
+//    /**
+//     * @covers WindowsAzure\Blob\BlobRestProxy::listBlobs
+//     */
+//    public function testListBlobsNoOptionsRoot()
+//    {
+//        $container = null;
+//        $this->listBlobsWorker($container, null);
+//    }
+
+    /**
+     * @covers WindowsAzure\Blob\BlobRestProxy::listBlobs
+     */
+    public function testListBlobsNoOptionsExplicitRoot()
+    {
+        $container = '$root';
+        $this->listBlobsWorker($container, null);
+    }
+
     /**
      * @covers WindowsAzure\Blob\BlobRestProxy::listBlobs
      */
@@ -1215,7 +1241,34 @@ class BlobServiceFunctionalTest extends FunctionalTestBase
      */
     public function testGetBlobMetadataNoOptions()
     {
-        $this->getBlobMetadataWorker(null);
+        $container = BlobServiceFunctionalTestData::getContainerName();
+        $this->getBlobMetadataWorker($container, null);
+    }
+
+    /**
+     * @covers WindowsAzure\Blob\BlobRestProxy::createBlockBlob
+     * @covers WindowsAzure\Blob\BlobRestProxy::deleteBlob
+     * @covers WindowsAzure\Blob\BlobRestProxy::getBlobMetadata
+     * @covers WindowsAzure\Blob\BlobRestProxy::getBlobProperties
+     * @covers WindowsAzure\Blob\BlobRestProxy::setBlobMetadata
+     */
+    public function testGetBlobMetadataNoOptionsRoot()
+    {
+        $container = null;
+        $this->getBlobMetadataWorker($container, null);
+    }
+
+    /**
+     * @covers WindowsAzure\Blob\BlobRestProxy::createBlockBlob
+     * @covers WindowsAzure\Blob\BlobRestProxy::deleteBlob
+     * @covers WindowsAzure\Blob\BlobRestProxy::getBlobMetadata
+     * @covers WindowsAzure\Blob\BlobRestProxy::getBlobProperties
+     * @covers WindowsAzure\Blob\BlobRestProxy::setBlobMetadata
+     */
+    public function testGetBlobMetadataNoOptionsExplicitRoot()
+    {
+        $container = '$root';
+        $this->getBlobMetadataWorker($container, null);
     }
 
     /**
@@ -1227,12 +1280,13 @@ class BlobServiceFunctionalTest extends FunctionalTestBase
      */
     public function testGetBlobMetadata()
     {
+        $container = BlobServiceFunctionalTestData::getContainerName();
         $interestingTimeouts = BlobServiceFunctionalTestData::getInterestingTimeoutValues();
 
         foreach($interestingTimeouts as $timeout)  {
             $options = new GetBlobMetadataOptions();
             $options->setTimeout($timeout);
-            $this->getBlobMetadataWorker($options);
+            $this->getBlobMetadataWorker($container, $options);
         }
     }
 
@@ -1243,9 +1297,8 @@ class BlobServiceFunctionalTest extends FunctionalTestBase
      * @covers WindowsAzure\Blob\BlobRestProxy::getBlobProperties
      * @covers WindowsAzure\Blob\BlobRestProxy::setBlobMetadata
      */
-    private function getBlobMetadataWorker($options)
+    private function getBlobMetadataWorker($container, $options)
     {
-        $container = BlobServiceFunctionalTestData::$TEST_CONTAINER_NAMES[0];
         $blob = BlobServiceFunctionalTestData::getInterestingBlobName();
 
         // Make sure there is something to test
@@ -1328,9 +1381,42 @@ class BlobServiceFunctionalTest extends FunctionalTestBase
      */
     public function testSetBlobMetadataNoOptions()
     {
+        $container = BlobServiceFunctionalTestData::getContainerName();
         $interestingMetadata = BlobServiceFunctionalTestData::getInterestingMetadata();
         foreach($interestingMetadata as $properties) {
-            $this->setBlobMetadataWorker(null, $properties);
+            $this->setBlobMetadataWorker($container, null, $properties);
+        }
+    }
+
+    /**
+     * @covers WindowsAzure\Blob\BlobRestProxy::createBlockBlob
+     * @covers WindowsAzure\Blob\BlobRestProxy::deleteBlob
+     * @covers WindowsAzure\Blob\BlobRestProxy::getBlobMetadata
+     * @covers WindowsAzure\Blob\BlobRestProxy::getBlobProperties
+     * @covers WindowsAzure\Blob\BlobRestProxy::setBlobMetadata
+     */
+    public function testSetBlobMetadataNoOptionsRoot()
+    {
+        $container = null;
+        $interestingMetadata = BlobServiceFunctionalTestData::getInterestingMetadata();
+        foreach($interestingMetadata as $properties) {
+            $this->setBlobMetadataWorker($container, null, $properties);
+        }
+    }
+
+    /**
+     * @covers WindowsAzure\Blob\BlobRestProxy::createBlockBlob
+     * @covers WindowsAzure\Blob\BlobRestProxy::deleteBlob
+     * @covers WindowsAzure\Blob\BlobRestProxy::getBlobMetadata
+     * @covers WindowsAzure\Blob\BlobRestProxy::getBlobProperties
+     * @covers WindowsAzure\Blob\BlobRestProxy::setBlobMetadata
+     */
+    public function testSetBlobMetadataNoOptionsExplicitRoot()
+    {
+        $container = '$root';
+        $interestingMetadata = BlobServiceFunctionalTestData::getInterestingMetadata();
+        foreach($interestingMetadata as $properties) {
+            $this->setBlobMetadataWorker($container, null, $properties);
         }
     }
 
@@ -1343,12 +1429,13 @@ class BlobServiceFunctionalTest extends FunctionalTestBase
      */
     public function testSetBlobMetadata()
     {
+        $container = BlobServiceFunctionalTestData::getContainerName();
         $interestingSetBlobMetadataOptions = BlobServiceFunctionalTestData::getSetBlobMetadataOptions();
         $interestingMetadata = BlobServiceFunctionalTestData::getInterestingMetadata();
 
         foreach($interestingSetBlobMetadataOptions as $options)  {
             foreach($interestingMetadata as $properties) {
-                $this->setBlobMetadataWorker($options, $properties);
+                $this->setBlobMetadataWorker($container, $options, $properties);
             }
         }
     }
@@ -1360,9 +1447,8 @@ class BlobServiceFunctionalTest extends FunctionalTestBase
      * @covers WindowsAzure\Blob\BlobRestProxy::getBlobProperties
      * @covers WindowsAzure\Blob\BlobRestProxy::setBlobMetadata
      */
-    private function setBlobMetadataWorker($options, $metadata)
+    private function setBlobMetadataWorker($container, $options, $metadata)
     {
-        $container = BlobServiceFunctionalTestData::$TEST_CONTAINER_NAMES[0];
         $blob = BlobServiceFunctionalTestData::getInterestingBlobName();
 
         // Make sure there is something to test
@@ -1450,7 +1536,32 @@ class BlobServiceFunctionalTest extends FunctionalTestBase
      */
     public function testGetBlobPropertiesNoOptions()
     {
-        $this->getBlobPropertiesWorker(null);
+        $container = BlobServiceFunctionalTestData::getContainerName();
+        $this->getBlobPropertiesWorker($container, null);
+    }
+
+    /**
+     * @covers WindowsAzure\Blob\BlobRestProxy::createPageBlob
+     * @covers WindowsAzure\Blob\BlobRestProxy::deleteBlob
+     * @covers WindowsAzure\Blob\BlobRestProxy::getBlobProperties
+     * @covers WindowsAzure\Blob\BlobRestProxy::setBlobMetadata
+     */
+    public function testGetBlobPropertiesNoOptionsRoot()
+    {
+        $container = null;
+        $this->getBlobPropertiesWorker($container, null);
+    }
+
+    /**
+     * @covers WindowsAzure\Blob\BlobRestProxy::createPageBlob
+     * @covers WindowsAzure\Blob\BlobRestProxy::deleteBlob
+     * @covers WindowsAzure\Blob\BlobRestProxy::getBlobProperties
+     * @covers WindowsAzure\Blob\BlobRestProxy::setBlobMetadata
+     */
+    public function testGetBlobPropertiesNoOptionsExplicitRoot()
+    {
+        $container = '$root';
+        $this->getBlobPropertiesWorker($container, null);
     }
 
     /**
@@ -1461,10 +1572,11 @@ class BlobServiceFunctionalTest extends FunctionalTestBase
      */
     public function testGetBlobProperties()
     {
+        $container = BlobServiceFunctionalTestData::getContainerName();
         $interestingGetBlobPropertiesOptions = BlobServiceFunctionalTestData::getGetBlobPropertiesOptions();
 
         foreach($interestingGetBlobPropertiesOptions as $options)  {
-            $this->getBlobPropertiesWorker($options);
+            $this->getBlobPropertiesWorker($container, $options);
         }
     }
 
@@ -1474,9 +1586,8 @@ class BlobServiceFunctionalTest extends FunctionalTestBase
      * @covers WindowsAzure\Blob\BlobRestProxy::getBlobProperties
      * @covers WindowsAzure\Blob\BlobRestProxy::setBlobMetadata
      */
-    private function getBlobPropertiesWorker($options)
+    private function getBlobPropertiesWorker($container, $options)
     {
-        $container = BlobServiceFunctionalTestData::$TEST_CONTAINER_NAMES[0];
         $blob = BlobServiceFunctionalTestData::getInterestingBlobName();
 
         // Make sure there is something to test
@@ -1626,10 +1737,11 @@ class BlobServiceFunctionalTest extends FunctionalTestBase
      */
     public function testSetBlobProperties()
     {
+        $container = BlobServiceFunctionalTestData::getContainerName();
         $interestingSetBlobPropertiesOptions = BlobServiceFunctionalTestData::getSetBlobPropertiesOptions();
 
         foreach($interestingSetBlobPropertiesOptions as $properties)  {
-            $this->setBlobPropertiesWorker($properties);
+            $this->setBlobPropertiesWorker($container, $properties);
         }
     }
 
@@ -1639,9 +1751,34 @@ class BlobServiceFunctionalTest extends FunctionalTestBase
      * @covers WindowsAzure\Blob\BlobRestProxy::getBlobProperties
      * @covers WindowsAzure\Blob\BlobRestProxy::setBlobProperties
      */
-    private function setBlobPropertiesWorker($properties)
+    public function testSetBlobPropertiesRoot()
     {
-        $container = BlobServiceFunctionalTestData::$TEST_CONTAINER_NAMES[0];
+        $container = null;
+        $interestingSetBlobPropertiesOptions = BlobServiceFunctionalTestData::getSetBlobPropertiesOptions();
+        $this->setBlobPropertiesWorker($container, $interestingSetBlobPropertiesOptions[2]);
+    }
+
+    /**
+     * @covers WindowsAzure\Blob\BlobRestProxy::createPageBlob
+     * @covers WindowsAzure\Blob\BlobRestProxy::deleteBlob
+     * @covers WindowsAzure\Blob\BlobRestProxy::getBlobProperties
+     * @covers WindowsAzure\Blob\BlobRestProxy::setBlobProperties
+     */
+    public function testSetBlobPropertiesExplicitRoot()
+    {
+        $container = '$root';
+        $interestingSetBlobPropertiesOptions = BlobServiceFunctionalTestData::getSetBlobPropertiesOptions();
+        $this->setBlobPropertiesWorker($container, $interestingSetBlobPropertiesOptions[2]);
+    }
+
+    /**
+     * @covers WindowsAzure\Blob\BlobRestProxy::createPageBlob
+     * @covers WindowsAzure\Blob\BlobRestProxy::deleteBlob
+     * @covers WindowsAzure\Blob\BlobRestProxy::getBlobProperties
+     * @covers WindowsAzure\Blob\BlobRestProxy::setBlobProperties
+     */
+    private function setBlobPropertiesWorker($container, $properties)
+    {
         $blob = BlobServiceFunctionalTestData::getInterestingBlobName();
 
         // Make sure there is something to test
@@ -1713,7 +1850,7 @@ class BlobServiceFunctionalTest extends FunctionalTestBase
      */
     public function testGetBlobNoOptions()
     {
-        $container = BlobServiceFunctionalTestData::$TEST_CONTAINER_NAMES[0];
+        $container = BlobServiceFunctionalTestData::getContainerName();
         $this->getBlobWorker(null, $container);
     }
 
@@ -1747,7 +1884,7 @@ class BlobServiceFunctionalTest extends FunctionalTestBase
      */
     public function testGetBlob()
     {
-        $container = BlobServiceFunctionalTestData::$TEST_CONTAINER_NAMES[0];
+        $container = BlobServiceFunctionalTestData::getContainerName();
 
         $interestingGetBlobOptions = BlobServiceFunctionalTestData::getGetBlobOptions();
         foreach($interestingGetBlobOptions as $options)  {
