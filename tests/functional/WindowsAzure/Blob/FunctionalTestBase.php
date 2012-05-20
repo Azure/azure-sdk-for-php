@@ -67,12 +67,25 @@ class FunctionalTestBase extends BlobServiceRestProxyTestBase
 
         BlobServiceFunctionalTestData::setupData($accountName);
 
+        $hasRoot = false;
         foreach($this->restProxy->listContainers()->getContainers() as $container) {
-            $this->restProxy->deleteContainer($container->getName());
+            if ($container->getName() == '$root') {
+                $hasRoot = true;
+                $blobListResult = $this->restProxy->listBlobs('$root');
+                foreach ($blobListResult->getBlobs() as $blob) {
+                    $this->restProxy->deleteBlob('$root', $blob->getName());
+                }
+            } else {
+                $this->restProxy->deleteContainer($container->getName());
+            }
         }
 
         foreach(BlobServiceFunctionalTestData::$TEST_CONTAINER_NAMES as $name)  {
             $this->restProxy->createContainer($name);
+        }
+
+        if (!$hasRoot) {
+            $this->restProxy->createContainer('$root');
         }
     }
 
