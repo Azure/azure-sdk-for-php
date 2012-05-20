@@ -97,6 +97,7 @@ class FunctionalTestBase extends BlobServiceRestProxyTestBase
         foreach(BlobServiceFunctionalTestData::$TEST_CONTAINER_NAMES as $name)  {
             $this->restProxy->deleteContainer($name);
         }
+        $this->restProxy->deleteContainer('$root');
     }
 }
 
