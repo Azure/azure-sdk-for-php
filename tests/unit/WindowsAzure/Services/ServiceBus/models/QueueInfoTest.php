@@ -45,12 +45,18 @@ class QueueInfoTest extends \PHPUnit_Framework_TestCase
     public function testQueueInfoConstructor()
     {
         // Setup
+        $expected = 'testQueueName';
         
         // Test
-        $queueInfo = new QueueInfo($wrapAccessTokenResult);
+        $queueInfo = new QueueInfo($expected);
+        $actual = $queueInfo->getName();
         
         // Assert
         $this->assertNotNull($queueInfo);
+        $this->assertEquals(
+            $expected,
+            $actual
+        );
     }
 
 }

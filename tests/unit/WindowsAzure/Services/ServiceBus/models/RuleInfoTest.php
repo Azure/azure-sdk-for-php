@@ -44,12 +44,19 @@ class RuleInfoTest extends \PHPUnit_Framework_TestCase
     public function testRuleInfoConstructor()
     {
         // Setup
+        $expected = 'testRuleInfoName';
         
         // Test
-        $ruleInfo = new RuleInfo();
+        $ruleInfo = new RuleInfo($expected);
+        $actual = $ruleInfo->getName();
         
         // Assert
         $this->assertNotNull($ruleInfo);
+        $this->assertEquals(
+            $expected,
+            $actual
+        );
+         
     }
 
 }

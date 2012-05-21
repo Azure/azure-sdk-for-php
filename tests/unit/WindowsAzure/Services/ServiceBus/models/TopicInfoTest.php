@@ -47,7 +47,7 @@ class TopicInfoTest extends \PHPUnit_Framework_TestCase
         // Setup
         
         // Test
-        $topicInfo = new TopicInfo();
+        $topicInfo = new TopicInfo('testNameOfTopic');
         
         // Assert
         $this->assertNotNull($topicInfo);

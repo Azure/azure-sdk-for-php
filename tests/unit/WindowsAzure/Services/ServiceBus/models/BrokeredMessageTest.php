@@ -54,8 +54,7 @@ class BrokeredMessageTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\Services\ServiceBus\Models\BrokerMessage::__construct
-     * @covers WindowsAzure\Services\ServiceBus\Models\BrokerMessage::getBrokerProperties
+     * @covers WindowsAzure\Services\ServiceBus\Models\BrokeredMessage::getBrokerProperties
      */
     public function testBrokeredMessageConstructorWithBrokerProperties()
     {

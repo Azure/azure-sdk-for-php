@@ -46,7 +46,7 @@ class GetQueueResultTest extends \PHPUnit_Framework_TestCase
         // Setup
         
         // Test
-        $getQueueResult = new GetQueueResult($wrapAccessTokenResult);
+        $getQueueResult = new GetQueueResult();
         
         // Assert
         $this->assertNotNull($getQueueResult);

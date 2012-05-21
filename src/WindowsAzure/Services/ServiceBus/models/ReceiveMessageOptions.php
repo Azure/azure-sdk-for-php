@@ -64,6 +64,13 @@ class ReceiveMessageOptions
      */
     private $_isPeekLock;
 
+
+    /** 
+     * Creates a receive message option instance with default parameters.
+     */
+    public function __construct()
+    {
+    }
     /**
      * Gets the timeout of the receive message request. 
      * 

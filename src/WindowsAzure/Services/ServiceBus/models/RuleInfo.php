@@ -64,7 +64,7 @@ class RuleInfo
      */
     public function __construct($name, $ruleDescription = null)
     {
-        Validate::isString($name);
+        Validate::isString($name, 'name');
 
         if (is_null($ruleDescription))
         {

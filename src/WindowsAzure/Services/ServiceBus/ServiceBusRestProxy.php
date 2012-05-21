@@ -113,7 +113,7 @@ class ServiceBusRestProxy extends ServiceRestProxy implements IServiceBus
         {
             $httpCallContext->addHeader(
                 Resources::BROKER_PROPERTIES,
-                $brokerProperties->ToString()
+                $brokerProperties->toString()
             );
         } 
 
@@ -317,6 +317,10 @@ class ServiceBusRestProxy extends ServiceRestProxy implements IServiceBus
         $httpCallContext = new HttpCallContext();
         $httpCallContext->setMethod(Resources::HTTP_PUT);
         $httpCallContext->setPath($queueInfo->getName());
+        $httpCallContext->addHeader(
+            Resources::CONTENT_TYPE,
+            Resources::ATOM_ENTRY_CONTENT_TYPE
+        );
         $httpCallContext->addStatusCode(Resources::STATUS_CREATED);
         
         $queueDescriptionXml = XmlSerializer::objectSerialize(
@@ -325,9 +329,10 @@ class ServiceBusRestProxy extends ServiceRestProxy implements IServiceBus
         );
 
         $entry = new Entry();
-        $content = new Content();
-        $content->setText($queueDescriptionXml);
+        $content = new Content($queueDescriptionXml);
         $entry->setContent($content);
+        $entry->setAttribute('xmlns:atom', 'http://www.w3.org/2005/Atom');
+        $entry->setAttribute('xmlns', 'http://schemas.microsoft.com/netservices/2010/10/servicebus/connect');
         $httpCallContext->setBody($entry->toXml());
         $response = $this->sendContext($httpCallContext);
         $createQueueResult = CreateQueueResult::create($response->getBody());
@@ -402,7 +407,7 @@ class ServiceBusRestProxy extends ServiceRestProxy implements IServiceBus
      */
     public function createTopic($topicInfo)
     {
-        Validate::notNullOrEmpty($topicInfo);
+        Validate::notNullOrEmpty($topicInfo, 'topicInfo');
         $httpCallContext = new HttpCallContext();
         $httpCallContext->setMethod(Resources::HTTP_PUT);
         $httpCallContext->addStatusCode(Resources::STATUS_CREATED);

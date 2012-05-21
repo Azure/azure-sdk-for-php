@@ -116,6 +116,13 @@ class QueueDescription
      */ 
     private $_messageCount;    
 
+
+    /** 
+     * Creates a queue description instance with default parameters. 
+     */
+    public function __construct()
+    {
+    }
     /**
      * Gets the lock duration.
      *
@@ -297,21 +304,21 @@ class QueueDescription
      * 
      * @return boolean
      */
-    public function getEnableBatchedOperation()
+    public function getEnableBatchedOperations()
     {
-        return $this->_enableBatchedOperation;
+        return $this->_enableBatchedOperations;
     }
 
     /**
-     * Sets the lock duration.
+     * Sets enable batched operations.
      *
-     * @param string $lockDuration The lock duration.
+     * @param boolean $enableBatchedOperations Enable batched operations.
      * 
      * @return none
      */
-    public function setEnableBatchedOperation($enableBatchedOperation)
+    public function setEnableBatchedOperations($enableBatchedOperations)
     {
-        $this->_enableBatchedOperation = $enableBatchedOperation; 
+        $this->_enableBatchedOperations = $enableBatchedOperations; 
     }
 
     /**

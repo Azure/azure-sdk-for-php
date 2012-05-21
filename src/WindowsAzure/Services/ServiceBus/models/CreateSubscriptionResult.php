@@ -62,6 +62,13 @@ class CreateSubscriptionResult
     }
 
     /**
+     * Creates a create subscription result instance with default parameters. 
+     */
+    public function __construct()
+    {   
+    }
+
+    /**
      * Gets subscription description.
      * 
      * @return SubscriptionDescription

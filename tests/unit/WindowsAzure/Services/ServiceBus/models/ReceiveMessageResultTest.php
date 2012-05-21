@@ -50,7 +50,7 @@ class ReceiveMessageResultTest extends \PHPUnit_Framework_TestCase
         $receiveMessageResult = new ReceiveMessageResult();
         
         // Assert
-        $this->assertNotNull($receiveMessageOptions);
+        $this->assertNotNull($receiveMessageResult);
     }
 
 }

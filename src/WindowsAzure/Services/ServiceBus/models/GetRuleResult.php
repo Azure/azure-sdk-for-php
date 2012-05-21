@@ -65,6 +65,13 @@ class GetRuleResult
     }
 
     /**
+     * Creates a get rule result with default parameters. 
+     */
+    public function __construct()
+    {
+    }
+
+    /**
      * Gets the description of the rule. 
      * 
      * @return RuleDescription

@@ -61,6 +61,13 @@ class ListSubscriptionsResult
         $subscriptionDescription = XmlSerializer::objectDeserialize($content->getText());  
         $getSubscriptionsResult->setSubscriptionsDescription($subscriptionDescription);
     }
+
+    /**
+     * Creates a list subscriptions result with default parameters. 
+     */
+    public function __construct()
+    {
+    }
     
     /**
      * Gets the description of the subscription. 

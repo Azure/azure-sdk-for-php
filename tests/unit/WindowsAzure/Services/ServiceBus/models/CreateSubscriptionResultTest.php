@@ -50,12 +50,12 @@ class CreateSubscriptionResultTest extends \PHPUnit_Framework_TestCase
         $createSubscriptionResult = new CreateSubscriptionResult();
         
         // Assert
-        $this->assertNotNull($createSubscription);
+        $this->assertNotNull($createSubscriptionResult);
     }
 
     /**
-     * @covers WindowsAzure\Services\ServiceBus\Models\ActiveToken::getSubscriptionDescription
-     * @covers WindowsAzure\Services\ServiceBus\Models\ActiveToken::setSubscriptionDescription
+     * @covers WindowsAzure\Services\ServiceBus\Models\CreateSubscriptionResult::getSubscriptionDescription
+     * @covers WindowsAzure\Services\ServiceBus\Models\CreateSubscriptionResult::setSubscriptionDescription
      */
     public function testCreateSubscriptionResultGetSetSubscriptionDescription()
     {
@@ -65,6 +65,7 @@ class CreateSubscriptionResultTest extends \PHPUnit_Framework_TestCase
         
         // Test
         $createSubscriptionResult->setSubscriptionDescription($expected);
+        $actual = $createSubscriptionResult->getSubscriptionDescription();
         
         // Assert
         $this->assertEquals(

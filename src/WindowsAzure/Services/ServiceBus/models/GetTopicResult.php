@@ -61,6 +61,13 @@ class GetTopicResult
     }    
 
     /**
+     * Creates a get topic result with specified results. 
+     */
+    public function __construct()
+    {
+    }
+
+    /**
      * Gets the description of the topic. 
      * 
      * @return the description of the topic.

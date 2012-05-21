@@ -62,6 +62,13 @@ class CreateQueueResult
     }
 
     /**
+     * Creates a create queue result with default parameters. 
+     */
+    public function __construct()
+    {
+    }
+
+    /**
      * Gets queue description.
      * 
      * @return QueueDescription

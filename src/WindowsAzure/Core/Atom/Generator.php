@@ -66,9 +66,12 @@ class Generator
      *
      * @param string $text The text content of the generator.
      */
-    public function __construct($text)
+    public function __construct($text = null)
     {
-        $this->_text = $text;
+        if (!empty($text))
+        {
+            $this->_text = $text;
+        }
     }
 
     /** 

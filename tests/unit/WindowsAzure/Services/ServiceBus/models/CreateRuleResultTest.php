@@ -54,8 +54,8 @@ class CreateRuleResultTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\Services\ServiceBus\Models\ActiveToken::getRuleDescription
-     * @covers WindowsAzure\Services\ServiceBus\Models\ActiveToken::setRuleDescription
+     * @covers WindowsAzure\Services\ServiceBus\Models\CreateRuleResult::getRuleDescription
+     * @covers WindowsAzure\Services\ServiceBus\Models\CreateRuleResult::setRuleDescription
      */
     public function testCreateRuleResultGetSetRuleDescription()
     {
@@ -65,6 +65,7 @@ class CreateRuleResultTest extends \PHPUnit_Framework_TestCase
         
         // Test
         $createRuleResult->setRuleDescription($expected);
+        $actual = $createRuleResult->getRuleDescription();
         
         // Assert
         $this->assertEquals(

@@ -63,6 +63,13 @@ class ListQueuesResult
     }
 
     /**
+     * Creates a queue with default parameters. 
+     */
+    public function __construct()
+    {
+    }
+
+    /**
      * Gets the queue description. 
      * 
      * @return QueueDescription

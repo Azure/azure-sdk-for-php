@@ -64,6 +64,13 @@ class GetSubscriptionResult
         return $getSubscriptionResult;
     }
 
+    /**
+     * Creates a get subscription result instance with default parameters. 
+     */
+    public function __construct()
+    {
+    }
+
     /** 
      * Gets the subscription information.
      *

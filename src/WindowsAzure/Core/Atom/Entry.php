@@ -223,6 +223,52 @@ class Entry
     }
 
     /**
+     * Gets the attributes. 
+     * 
+     * @return array
+     */
+    public function getAttributes()
+    {   
+        return $this->_attributes;
+    }
+
+    /**
+     * Sets the attributes. 
+     * 
+     * @param array $attributes The attributes of the entry. 
+     *
+     */
+    public function setAttributes($attributes)
+    {
+        $this->_attributes = $attributes;
+    }
+
+    /**
+     * Sets the attribute of the entry. 
+     * 
+     * @param string $attributeKey   The key of the attribute. 
+     * @param mixed  $attributeValue The value of the attribute. 
+     *
+     * @return none 
+     */
+    public function setAttribute($attributeKey, $attributeValue)
+    {
+        $this->_attributes[$attributeKey] = $attributeValue;
+    }
+
+    /**
+     * Gets the attribute of the entry. 
+     * 
+     * @param string $attributeKey The key of the attribute. 
+     * 
+     * @return mixed
+     */
+    public function getAttribute($attributeKey)
+    {
+        return $this->_attributes[$attributeKey];
+    }
+
+    /**
      * Gets the author of the entry. 
      * 
      * @return string
@@ -487,11 +533,27 @@ class Entry
      */
     public function toXml()
     {
-        $innerXml = '';
+        $xmlWriter = new \XMLWriter();
+        
+        $xmlWriter->openMemory();
+        $xmlWriter->setIndent(true);
+        $xmlWriter->startElement('atom:entry');
+
+        if (!is_null($this->_attributes))
+        {
+            if (is_array($this->_attributes))
+            {
+                foreach ($this->_attributes as $attributeName => $attributeValue)
+                {
+                    $xmlWriter->writeAttribute($attributeName, $attributeValue);
+                }
+            }
+        }
+         
         if (!is_null($this->_author))
         {
-            $innerXml .= '<author>'.$this->author.'</author>';
-        }
+            $xmlWriter->writeElement('author', $this->_author->toXml());
+        } 
 
         if (!is_null($this->_category))
         {
@@ -499,18 +561,18 @@ class Entry
             {
                 foreach ($this->_category as $category)
                 {
-                    $innerXml .= '<category>'.$category.'</category>';
+                    $xmlWriter->writeElement('category', $category->toXml());
                 }
             }
             else
             {
-                $innerXml .= '<category>'.$this->_category.'</category>';
+                $xmlWriter->writeElement('category', $this->_category->toXml());
             }
         }
 
         if (!is_null($this->_content))
         {
-            $innerXml .= $this->_content->toXml();
+            $xmlWriter->writeRaw($this->_content->toXml());
         }
 
         if (!is_null($this->_contributor))
@@ -519,58 +581,58 @@ class Entry
             {
                 foreach ($this->_contributor as $contributor)
                 {
-                    $innerXml .= '<contributor>'.$contributor.'</contributor>';
+                    $xmlWriter->writeElement('contributor', $contributor->toXml());
                 }
             }
             else
             {
-                $innerXml .= '<contributor>'.$this->_contributor.'</contributor>';
+                $xmlWriter->writeElement('contributor', $this->_contributor->toXml());
             }
         }
 
         if (!is_null($this->_id))
         {
-            $innerXml .= '<id>'.Resources::UNIQUE_ID_PREFIX.$this->_id.'</id>';
+            $xmlWriter->writeElement('id', $this->_id);
         }
-        
+
         if (!is_null($this->_link))
         {
-            $innerXml .= '<link>'.$this->_link.'</link>';
-        } 
+            $xmlWriter->writeElement('link', $this->_link);
+        }
 
         if (!is_null($this->_published))
         {
-            $innerXml .= '<published>'.$this->_published.'</published>';
+            $xmlWriter->writeElement('published', $this->_published);
         }
 
         if (!is_null($this->_rights))
         {
-            $innerXml .= '<rights>'.$this->_rights.'</rights>';
+            $xmlWriter->writeElement('rights', $this->_rights);
         }
 
         if (!is_null($this->_source))
         {
-            $innerXml .= '<source>'.$this->_source.'</source>';
+            $xmlWriter->writeElement('source', $this->_source);
         }
 
         if (!is_null($this->_summary))
         {
-            $innerXml .= '<summary>'.$this->_summary.'</summary>';
-        }
-
-        if (!is_null($this->_title))
-        { 
-            $innerXml .= '<title>'.$this->_title.'</title>';
+            $xmlWriter->writeElement('summary', $this->_summary);
         }
         
-        if (!is_null($this->_updated))
+        if (!is_null($this->_title))
         {
-            $innerXml .= '<updated>'.$this->_updated.'</updated>';
+            $xmlWriter->writeElement('title', $this->_title);
         }
 
-        $outerXml = '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>'
-            .'<entry xmlns="http://www.w3.org/2005/Atom/">'.$innerXml.'</entry>';
-        return $outerXml;
+        if (!is_null($this->_updated))
+        {
+            $xmlWriter->writeElement('updated', $this->_updated);
+        }
+        $xmlWriter->endElement();
+
+        return $xmlWriter->outputMemory();
+
     }
 
 }

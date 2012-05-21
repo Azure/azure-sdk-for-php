@@ -44,6 +44,13 @@ class ReceiveMessageResult
     private $_brokeredMessage;
     
 
+    /**
+     * Creates a receive message result instance with default parameters. 
+     */
+    public function __construct()
+    {
+    }
+
     /** 
      * Gets brokered message. 
      * 

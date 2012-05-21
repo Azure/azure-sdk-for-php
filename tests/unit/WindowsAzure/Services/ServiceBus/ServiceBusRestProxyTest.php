@@ -103,7 +103,8 @@ class ServiceBusRestProxyTest extends ServiceBusRestProxyTestBase
      */
     public function testSendQueueMessageWorks()
     {
-        $brokeredMessage = new BrokeredMessage('sendQueueMessageWorksMessage');
+        $brokeredMessage = new BrokeredMessage();
+        $brokeredMessage->setBody('sendQueueMessageWorksMessage');
         $sendMessageResult = $this->wrapper->sendQueueMessage('sendQueueMessageWorksQueue', $brokeredMessage);
         $this->assertNotNull($sendMessageResult);
     }
@@ -242,7 +243,7 @@ class ServiceBusRestProxyTest extends ServiceBusRestProxyTestBase
         $queueInfo = new QueueInfo($queueName, $queueDescription);
         $expectedMessage = new BrokeredMessage();
         $expectedMessage->setBody('<data>testContentTypePassesThrough</data>');
-        $expectedMessage->setContentType(Resources::Xml); 
+        $expectedMessage->setContentType(Resources::TEXT_XML_CONTENT_TYPE); 
         $this->wrapper->createQueue($queueInfo);
         $this->wrapper->sendQueueMessage($queueName, $exptecedMessage);
         $receiveMessageResult = $this->wrapper->receiveQueueMessage(
@@ -309,7 +310,7 @@ class ServiceBusRestProxyTest extends ServiceBusRestProxyTestBase
         $topicName = 'testSubscriptionCanBeListed';
         $subscriptionName = 'sub';
         $topicInfo = new TopicInfo($topicName);
-        $subscriptionInfo = new SubscriptionInfo();
+        $subscriptionInfo = new SubscriptionInfo($subscriptionName);
         
         $this->createTopic($topicInfo);
         $this->createSubscription($topicName, $subscriptionInfo);
@@ -469,7 +470,7 @@ class ServiceBusRestProxyTest extends ServiceBusRestProxyTestBase
         $topicInfo = new TopicInfo($topicName);
         $subscriptionInfo = new SubscriptionInfo($subscriptionName);
 
-        $this->createTopic($topicName); 
+        $this->createTopic($topicInfo); 
         $this->createSubscription($topicName, $subscriptionName);
         $getRuleResult = $this->wrapper->getRule($topicName, $subscriptionName, Resources::DEFAULT_RULE_NAME);
         

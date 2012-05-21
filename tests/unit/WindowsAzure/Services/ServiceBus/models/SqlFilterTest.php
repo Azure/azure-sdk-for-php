@@ -47,7 +47,7 @@ class SqlFilterTest extends \PHPUnit_Framework_TestCase
         // Setup
         
         // Test
-        $sqlFilter = new SqlFilter($wrapAccessTokenResult);
+        $sqlFilter = new SqlFilter();
         
         // Assert
         $this->assertNotNull($sqlFilter);

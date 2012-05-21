@@ -143,6 +143,9 @@ class BrokerProperties
     private $_lockLocation;
  
 
+    /**
+     * Creates a broker properties instance with default parameters. 
+     */
     public function __construct()
     {
     }
@@ -282,5 +285,9 @@ class BrokerProperties
         $this->_lockLocation = $lockLocation;
     }
     
+    public function toString()
+    {
+        return 'brokerProperty'; 
+    }    
 }
 ?>

@@ -63,6 +63,13 @@ class ListRulesResult
     }
 
     /**
+     * Creates a list rules result instance with default parameters. 
+     */
+    public function __construct()
+    {
+    }
+
+    /**
      * Gets the description of the rules. 
      * 
      * @return RuleDescription

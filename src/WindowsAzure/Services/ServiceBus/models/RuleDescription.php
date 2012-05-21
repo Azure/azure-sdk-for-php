@@ -59,6 +59,14 @@ class RuleDescription
      * @var string 
      */
     private $_name;
+
+
+    /**
+     * Creates a rule description instance with default parameters. 
+     */
+    public function __construct()
+    {   
+    }
     
     /**
      * Gets the filter. 

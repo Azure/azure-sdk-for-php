@@ -63,6 +63,13 @@ class ListTopicsResult
     }
 
     /**
+     * Creates a list topics result with default parameters. 
+     */
+    public function __construct()
+    {
+    }
+
+    /**
      * Gets the description of the topic. 
      *  
      * @return TopicDescription

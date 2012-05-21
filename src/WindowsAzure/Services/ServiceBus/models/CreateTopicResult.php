@@ -61,6 +61,13 @@ class CreateTopicResult
         return $createTopicResult;
     }
 
+    /** 
+     * Creates a create topic result with default parameters. 
+     */
+    public function __construct()
+    {   
+    }
+
     /**
      * Gets topic description.
      * 

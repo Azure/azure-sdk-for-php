@@ -47,7 +47,7 @@ class ListTopicsResultTest extends \PHPUnit_Framework_TestCase
         // Setup
         
         // Test
-        $listTopicsResult = new ListTopicsResult($wrapAccessTokenResult);
+        $listTopicsResult = new ListTopicsResult();
         
         // Assert
         $this->assertNotNull($listTopicsResult);

@@ -62,6 +62,13 @@ class CreateRuleResult
     }
 
     /**
+     * Creates a create rule result instance with default parameters. 
+     */
+    public function __construct()
+    {
+    }
+
+    /**
      * Gets rule description.
      * 
      * @return RuleDescription

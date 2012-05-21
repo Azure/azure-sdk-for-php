@@ -50,12 +50,12 @@ class CreateQueueResultTest extends \PHPUnit_Framework_TestCase
         $createQueueResult = new CreateQueueResult();
         
         // Assert
-        $this->assertNotNull($createQueue);
+        $this->assertNotNull($createQueueResult);
     }
 
     /**
-     * @covers WindowsAzure\Services\ServiceBus\Models\ActiveToken::getQueueDescription
-     * @covers WindowsAzure\Services\ServiceBus\Models\ActiveToken::setQueueDescription
+     * @covers WindowsAzure\Services\ServiceBus\Models\CreateQueueResult::getQueueDescription
+     * @covers WindowsAzure\Services\ServiceBus\Models\CreateQueueResult::setQueueDescription
      */
     public function testCreateQueueResultGetSetQueueDescription()
     {
@@ -65,7 +65,8 @@ class CreateQueueResultTest extends \PHPUnit_Framework_TestCase
         
         // Test
         $createQueueResult->setQueueDescription($expected);
-        
+        $actual = $createQueueResult->getQueueDescription(); 
+
         // Assert
         $this->assertEquals(
             $expected,

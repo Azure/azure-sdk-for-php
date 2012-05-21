@@ -203,6 +203,7 @@ class Resources
     
     // Request body content types
     const XML_CONTENT_TYPE      = 'application/x-www-form-urlencoded';
+    const TEXT_XML_CONTENT_TYPE = 'text/xml';
     const BINARY_FILE_TYPE      = 'application/octet-stream';
     const XML_ATOM_CONTENT_TYPE = 'application/atom+xml';
     const HTTP_TYPE             = 'application/http';
@@ -245,6 +246,7 @@ class Resources
     const DEFAULT_RULE_NAME = '$Default';
     const UNIQUE_ID_PREFIX = 'urn:uuid:';
     const SERVICE_BUS_NAMESPACE = 'http://schemas.microsoft.com/netservices/2010/10/servicebus/connect';
+    const BROKER_PROPERTIES = 'BrokerProperties';
 
     // PHP URL Keys
     const PHP_URL_SCHEME   = 'scheme';

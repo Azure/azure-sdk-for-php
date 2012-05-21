@@ -59,7 +59,7 @@ class Content
      *
      * @param string $text The text of the content.
      */
-    public function __construct($text)
+    public function __construct($text = null)
     {
         $this->_text = $text;
     }
@@ -129,7 +129,7 @@ class Content
      */
     public function toXml()
     {
-        $xmlWriter = new XMLWriter();
+        $xmlWriter = new \XMLWriter();
         $xmlWriter->openMemory();
         $xmlWriter->startElement('atom:content');
         if (!empty($this->_type))

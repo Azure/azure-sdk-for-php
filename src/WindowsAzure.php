@@ -4,9 +4,12 @@ spl_autoload_register(
       static $classes = null;
       if ($classes === null) {
          $classes = array(
+            'windowsazure\\core\\atom\\category' => '/WindowsAzure/Core/Atom/Category.php',
             'windowsazure\\core\\atom\\content' => '/WindowsAzure/Core/Atom/Content.php',
             'windowsazure\\core\\atom\\entry' => '/WindowsAzure/Core/Atom/Entry.php',
             'windowsazure\\core\\atom\\feed' => '/WindowsAzure/Core/Atom/Feed.php',
+            'windowsazure\\core\\atom\\generator' => '/WindowsAzure/Core/Atom/Generator.php',
+            'windowsazure\\core\\atom\\person' => '/WindowsAzure/Core/Atom/Person.php',
             'windowsazure\\core\\authentication\\sharedkeyauthscheme' => '/WindowsAzure/Core/Authentication/SharedKeyAuthScheme.php',
             'windowsazure\\core\\authentication\\storageauthscheme' => '/WindowsAzure/Core/Authentication/StorageAuthScheme.php',
             'windowsazure\\core\\authentication\\tablesharedkeyliteauthscheme' => '/WindowsAzure/Core/Authentication/TableSharedKeyLiteAuthScheme.php',

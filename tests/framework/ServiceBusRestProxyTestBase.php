@@ -60,10 +60,10 @@ class ServiceBusRestProxyTestBase extends ServiceRestProxyTestBase
         );
 
         $serviceBusWrapper = ServiceBusService::create($config);
-        $_createdTopics = array();
-        $_createdSubscriptions = array();
-        $_createdRules = array();
-        $_createdQueues = array();
+        $this->_createdTopics = array();
+        $this->_createdSubscriptions = array();
+        $this->_createdRules = array();
+        $this->_createdQueues = array();
         parent::__construct($config, $serviceBusWrapper);
     }
     

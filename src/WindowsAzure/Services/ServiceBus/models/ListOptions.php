@@ -41,6 +41,10 @@ class ListOptions
     private $_skip; 
     private $_top;
 
+    public function __construct()
+    {
+    }
+
     public function getSkip()
     {
         return $this->_skip; 

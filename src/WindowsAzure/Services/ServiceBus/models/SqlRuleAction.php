@@ -54,6 +54,13 @@ class SqlRuleAction
      */
     private $_compatibilityLevel;
 
+    /** 
+     * Creates a SQL Rule Action instance with default parameters. 
+     */
+    public function __construct()
+    {   
+    }
+
     /**
      * Gets the SQL expression.
      * 

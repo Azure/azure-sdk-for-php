@@ -106,6 +106,15 @@ class SubscriptionDescription
      * @var bool 
      */
 
+
+    /**
+     * Creates a subscription description instance with default 
+     * parameter. 
+     */
+    public function __construct()
+    {
+
+    }
     /**
      * Gets the lock duration.
      *

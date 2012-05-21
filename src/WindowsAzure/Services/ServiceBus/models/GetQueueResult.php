@@ -64,6 +64,13 @@ class GetQueueResult
     }
 
     /** 
+     * Creates a get queue result instance with default parameters. 
+     */
+    public function __construct()
+    {
+    }
+
+    /** 
      * Gets the description of the queue. 
      */
     public function getQueueDescription()

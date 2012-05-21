@@ -41,11 +41,17 @@ use WindowsAzure\Utilities;
 class TopicInfo
 {
     /** 
-     * The WRAP access token result. 
+     * The name of the topic information.
      * 
-     * @var WrapAccessTokenResult
+     * @var TopicInfo
      */
     private $_name;
+
+    /**
+     * The description of the topics. 
+     *
+     * @TopicDescription
+     */
     private $_topicDescription;
 
     /**

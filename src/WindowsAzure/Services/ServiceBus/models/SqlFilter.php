@@ -56,6 +56,12 @@ class SqlFilter
     private $_compatibilityLevel;
 
     /**
+     * Creates a SQL filter with default parameters.
+     */
+    public function __construct()
+    {   
+    }
+    /**
      * Gets the SQL expression. 
      * 
      * @var string 

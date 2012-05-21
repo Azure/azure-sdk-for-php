@@ -50,7 +50,7 @@ class CreateTopicResultTest extends \PHPUnit_Framework_TestCase
         $createTopicResult = new CreateTopicResult();
         
         // Assert
-        $this->assertNotNull($createTopic);
+        $this->assertNotNull($createTopicResult);
     }
 
 }
