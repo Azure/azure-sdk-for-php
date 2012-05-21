@@ -1805,7 +1805,7 @@ class BlobRestProxy extends ServiceRestProxy implements IBlob
         $blobCacheControl    = $options->getBlobCacheControl();
         $leaseId             = $options->getLeaseId();
         $sNumberAction       = $options->getSequenceNumberAction();
-        $sNumber             = strval($options->getSequenceNumber());
+        $sNumber             = $options->getSequenceNumber();
         
         $headers = $this->addOptionalAccessConditionHeader(
             $headers, $options->getAccessCondition()
@@ -1858,6 +1858,11 @@ class BlobRestProxy extends ServiceRestProxy implements IBlob
         );
 
         $this->addOptionalQueryParam($queryParams, Resources::QP_COMP, 'properties');
+        $this->addOptionalQueryParam(
+            $queryParams,
+            Resources::QP_TIMEOUT,
+            $options->getTimeout()
+        );
         
         $response = $this->send(
             $method, 
