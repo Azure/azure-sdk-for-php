@@ -2016,7 +2016,11 @@ class BlobRestProxy extends ServiceRestProxy implements IBlob
     }
     
     /**
-     * Deletes a blob.
+     * Deletes a blob or blob snapshot.
+     * 
+     * Note that if the snapshot entry is specified in the $options then only this
+     * blob snapshot is deleted. To delete all blob snapshots, do not set Snapshot 
+     * and just set getDeleteSnaphotsOnly to true.
      * 
      * @param string                   $container name of the container
      * @param string                   $blob      name of the blob
@@ -2043,7 +2047,21 @@ class BlobRestProxy extends ServiceRestProxy implements IBlob
             $options = new DeleteBlobOptions();
         }
         
-        $deleteSnapshots = $options->getDeleteSnaphotsOnly() ? 'only' : 'include';
+        if (is_null($options->getSnapshot())) {
+            $delSnapshots = $options->getDeleteSnaphotsOnly() ? 'only' : 'include';
+            $this->addOptionalHeader(
+                $headers,
+                Resources::X_MS_DELETE_SNAPSHOTS,
+                $delSnapshots
+            );
+        } else {
+            $this->addOptionalQueryParam(
+                $queryParams,
+                Resources::QP_SNAPSHOT,
+                $options->getSnapshot()
+            );
+        }
+        
         $headers         = $this->addOptionalAccessConditionHeader(
             $headers, $options->getAccessCondition()
         );
@@ -2053,21 +2071,11 @@ class BlobRestProxy extends ServiceRestProxy implements IBlob
             Resources::X_MS_LEASE_ID,
             $options->getLeaseId()
         );
-        $this->addOptionalHeader(
-            $headers,
-            Resources::X_MS_DELETE_SNAPSHOTS,
-            $deleteSnapshots
-        );
         
         $this->addOptionalQueryParam(
             $queryParams,
             Resources::QP_TIMEOUT,
             $options->getTimeout()
-        );
-        $this->addOptionalQueryParam(
-            $queryParams,
-            Resources::QP_SNAPSHOT,
-            $options->getSnapshot()
         );
         
         $this->send(
