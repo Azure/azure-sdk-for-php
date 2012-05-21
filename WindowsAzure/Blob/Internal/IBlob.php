@@ -384,16 +384,20 @@ interface IBlob extends FilterableService
     public function getBlob($container, $blob, $options = null);
 
     /**
-    * Deletes a blob.
-    * 
-    * @param string                   $container name of the container
-    * @param string                   $blob      name of the blob
-    * @param Models\DeleteBlobOptions $options   optional parameters
-    * 
-    * @return none.
-    * 
-    * @see http://msdn.microsoft.com/en-us/library/windowsazure/dd179413.aspx
-    */
+     * Deletes a blob or blob snapshot.
+     * 
+     * Note that if the snapshot entry is specified in the $options then only this
+     * blob snapshot is deleted. To delete all blob snapshots, do not set Snapshot 
+     * and just set getDeleteSnaphotsOnly to true.
+     * 
+     * @param string                   $container name of the container
+     * @param string                   $blob      name of the blob
+     * @param Models\DeleteBlobOptions $options   optional parameters
+     * 
+     * @return none
+     * 
+     * @see http://msdn.microsoft.com/en-us/library/windowsazure/dd179413.aspx
+     */
     public function deleteBlob($container, $blob, $options = null);
 
     /**

@@ -53,6 +53,7 @@ use WindowsAzure\Blob\Models\Block;
 use WindowsAzure\Blob\Models\CopyBlobOptions;
 use WindowsAzure\Blob\Models\CreateBlobSnapshotOptions;
 use WindowsAzure\Blob\Models\CreateBlobSnapshotResult;
+use WindowsAzure\Blob\Models\DeleteBlobOptions;
 
 /**
  * Unit tests for class BlobRestProxy
@@ -1002,6 +1003,64 @@ class BlobRestProxyTest extends BlobServiceRestProxyTestBase
         // Assert
         $result = $this->restProxy->listBlobs($name);
         $this->assertCount(0, $result->getBlobs());
+    }
+    
+    /**
+     * @covers WindowsAzure\Blob\BlobRestProxy::deleteBlob
+     */
+    public function testDeleteBlobSnapshot()
+    {
+        // Setup
+        $name = 'deleteblobsnapshot';
+        $blob = 'myblob';
+        $contentType = 'text/plain; charset=UTF-8';
+        $this->createContainer($name);
+        $options = new CreateBlobOptions();
+        $options->setContentType($contentType);
+        $this->restProxy->createBlockBlob($name, $blob, 'Hello world', $options);
+        $snapshot = $this->restProxy->createBlobSnapshot($name, $blob);
+        $options = new DeleteBlobOptions();
+        $options->setSnapshot($snapshot->getSnapshot());
+        
+        // Test
+        $this->restProxy->deleteBlob($name, $blob, $options);
+        
+        // Assert
+        $listOptions = new ListBlobsOptions();
+        $listOptions->setIncludeSnapshots(true);
+        $blobsResult = $this->restProxy->listBlobs($name, $listOptions);
+        $blobs = $blobsResult->getBlobs();
+        $actualBlob = $blobs[0];
+        $this->assertNull($actualBlob->getSnapshot());
+    }
+    
+    /**
+     * @covers WindowsAzure\Blob\BlobRestProxy::deleteBlob
+     */
+    public function testDeleteBlobSnapshotsOnly()
+    {
+        // Setup
+        $name = 'deleteblobsnapshotsonly';
+        $blob = 'myblob';
+        $contentType = 'text/plain; charset=UTF-8';
+        $this->createContainer($name);
+        $options = new CreateBlobOptions();
+        $options->setContentType($contentType);
+        $this->restProxy->createBlockBlob($name, $blob, 'Hello world', $options);
+        $this->restProxy->createBlobSnapshot($name, $blob);
+        $options = new DeleteBlobOptions();
+        $options->setDeleteSnaphotsOnly(true);
+        
+        // Test
+        $this->restProxy->deleteBlob($name, $blob, $options);
+        
+        // Assert
+        $listOptions = new ListBlobsOptions();
+        $listOptions->setIncludeSnapshots(true);
+        $blobsResult = $this->restProxy->listBlobs($name, $listOptions);
+        $blobs = $blobsResult->getBlobs();
+        $actualBlob = $blobs[0];
+        $this->assertNull($actualBlob->getSnapshot());
     }
     
     /**
