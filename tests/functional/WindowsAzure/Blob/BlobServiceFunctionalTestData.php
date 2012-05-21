@@ -31,12 +31,14 @@ use WindowsAzure\Common\Models\Metrics;
 use WindowsAzure\Common\Models\RetentionPolicy;
 use WindowsAzure\Common\Models\ServiceProperties;
 use WindowsAzure\Blob\Models\BlobServiceOptions;
+use WindowsAzure\Blob\Models\GetBlobOptions;
 use WindowsAzure\Blob\Models\GetServicePropertiesResult;
 use WindowsAzure\Blob\Models\ListBlobsOptions;
 use WindowsAzure\Blob\Models\ListBlobsResult;
 use WindowsAzure\Blob\Models\ListContainersOptions;
 use WindowsAzure\Blob\Models\ListContainersResult;
 use WindowsAzure\Blob\Models\CreateContainerOptions;
+use WindowsAzure\Blob\Models\DeleteBlobOptions;
 use WindowsAzure\Blob\Models\DeleteContainerOptions;
 use WindowsAzure\Blob\Models\AccessCondition;
 use WindowsAzure\Blob\Models\SetContainerMetadataOptions;
@@ -112,7 +114,7 @@ class BlobServiceFunctionalTestData
 
     public static function passTemporalAccessCondition($ac)
     {
-        if ($ac == null) {
+        if (is_null($ac)) {
             return true;
         }
 
@@ -142,9 +144,9 @@ class BlobServiceFunctionalTestData
 
     public static function fixEtagAccessCondition($ac, $etag)
     {
-        if ($ac != null) {
+        if (!is_null($ac)) {
             if ($ac->getHeader() == Resources::IF_MATCH || $ac->getHeader() == Resources::IF_NONE_MATCH) {
-                if ($ac->getValue() == null || self::$badEtag != $ac->getValue()) {
+                if (is_null($ac->getValue()) || self::$badEtag != $ac->getValue()) {
                     $ac->setValue($etag);
                 }
             }
@@ -716,6 +718,68 @@ class BlobServiceFunctionalTestData
         $acl = new ContainerACL();
         $acl->addSignedIdentifier('123', $past, $future, 'rw');
         array_push($ret, $acl);
+
+        return $ret;
+    }
+
+    public static function getGetBlobOptions()
+    {
+        $ret = array();
+
+        $options = new GetBlobOptions();
+        array_push($ret, $options);
+
+        $options = new GetBlobOptions();
+        $options->setTimeout(10);
+        array_push($ret, $options);
+
+        $options = new GetBlobOptions();
+        $options->setTimeout(-10);
+        array_push($ret, $options);
+
+        // Get Blob only supports the temporal access conditions.
+        foreach(self::getTemporalAccessConditions() as $ac)  {
+            $options = new GetBlobOptions();
+            $options->setAccessCondition($ac);
+            array_push($ret, $options);
+        }
+
+        $options = new GetBlobOptions();
+        $options->setRangeStart(50);
+        $options->setRangeEnd(200);
+        array_push($ret, $options);
+
+        $options = new GetBlobOptions();
+        $options->setRangeStart(50);
+        $options->setRangeEnd(200);
+        $options->setComputeRangeMD5(true);
+        array_push($ret, $options);
+
+        $options = new GetBlobOptions();
+        $options->setRangeStart(50);
+        array_push($ret, $options);
+
+        $options = new GetBlobOptions();
+        $options->setComputeRangeMD5(true);
+        array_push($ret, $options);
+
+        $options = new GetBlobOptions();
+        $options->setRangeEnd(200);
+        $options->setComputeRangeMD5(true);
+        array_push($ret, $options);
+
+        $options = new GetBlobOptions();
+        $options->setRangeEnd(200);
+        array_push($ret, $options);
+
+        $options = new GetBlobOptions();
+        $options->setSnapshot('placeholder');
+        array_push($ret, $options);
+
+        // TODO: Handle Lease ID
+        //        $options = new GetBlobOptions();
+        //        $options->setLeaseId('setLeaseId');
+        //        array_push($ret, $options);
 
         return $ret;
     }

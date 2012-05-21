@@ -26,10 +26,10 @@
 
 namespace Tests\Functional\WindowsAzure\Blob;
 
-use WindowsAzure\Utilities;
-use WindowsAzure\Resources;
-use WindowsAzure\Core\Configuration;
-use WindowsAzure\Core\ServiceException;
+use WindowsAzure\Common\Internal\Utilities;
+use WindowsAzure\Common\ServiceException;
+use WindowsAzure\Common\Internal\Resources;
+use WindowsAzure\Common\Configuration;
 use WindowsAzure\Blob\BlobService;
 use WindowsAzure\Blob\Models\AccessCondition;
 use WindowsAzure\Blob\Models\BlobBlockType;
@@ -329,13 +329,14 @@ class BlobServiceIntegrationTest extends IntegrationTestBase
         $acl->addSignedIdentifier('test', $expiryStartDate, $expiryEndDate, 'rwd');
         $this->restProxy->setContainerACL($container, $acl);
 
-        $acl2 = $this->restProxy->getContainerACL($container)->getContainerACL();
+        $res = $this->restProxy->getContainerACL($container);
+        $acl2 = $res->getContainerACL();
         $this->restProxy->deleteContainer($container);
 
         // Assert
         $this->assertNotNull($acl2, '$acl2');
-        $this->assertNotNull($acl2->getEtag(), '$acl2->getEtag()');
-        $this->assertNotNull($acl2->getLastModified(), '$acl2->getLastModified()');
+        $this->assertNotNull($res->getEtag(), '$res->getEtag()');
+        $this->assertNotNull($res->getLastModified(), '$res->getLastModified()');
         $this->assertNotNull($acl2->getPublicAccess(), '$acl2->getPublicAccess()');
         $this->assertEquals(PublicAccessType::BLOBS_ONLY, $acl2->getPublicAccess(), '$acl2->getPublicAccess()');
         $this->assertEquals(1, count($acl2->getSignedIdentifiers()), 'count($acl2->getSignedIdentifiers())');
@@ -457,7 +458,7 @@ class BlobServiceIntegrationTest extends IntegrationTestBase
         }
 
         // Assert
-        $this->assertTrue($error == null || $error->getCode() == 409, '$error == null || $error->getCode() == 409');
+        $this->assertTrue(is_null($error) || $error->getCode() == 409, '$error is null || $error->getCode() == 409');
 
         // Work with root container explicitly ('$root')
         {
@@ -497,7 +498,7 @@ class BlobServiceIntegrationTest extends IntegrationTestBase
         }
 
         // If container was created, delete it
-        if ($error == null) {
+        if (is_null($error)) {
             $this->restProxy->deleteContainer('$root');
         }
     }
@@ -747,7 +748,6 @@ class BlobServiceIntegrationTest extends IntegrationTestBase
     /**
      * @covers WindowsAzure\Blob\BlobRestProxy::createBlobPages
      * @covers WindowsAzure\Blob\BlobRestProxy::createPageBlob
-     * @covers WindowsAzure\Blob\BlobRestProxy::listBlobRegions
      * @covers WindowsAzure\Blob\BlobRestProxy::listPageBlobRanges
      */
     public function testListBlobRegionsWorks()
@@ -962,10 +962,10 @@ class BlobServiceIntegrationTest extends IntegrationTestBase
         $block1 = new Block();
         $block1->setBlockId($blockId1);
         $block1->setType(BlobBlockType::UNCOMMITTED_TYPE);
-        $block2 = new Block();
-        $block2->setBlockId($blockId2);
-        $block2->setType(BlobBlockType::LATEST_TYPE);
-        $blockList = array($block1, $block2);
+        $block3 = new Block();
+        $block3->setBlockId($blockId3);
+        $block3->setType(BlobBlockType::LATEST_TYPE);
+        $blockList = array($block1, $block3);
 
         $this->restProxy->commitBlobBlocks($container, $blob, $blockList);
 
@@ -992,7 +992,6 @@ class BlobServiceIntegrationTest extends IntegrationTestBase
         $this->assertNotNull($result->getUncommittedBlocks(), '$result->getUncommittedBlocks()');
         $this->assertEquals(0, count($result->getUncommittedBlocks()), 'count($result->getUncommittedBlocks())');
     }
-
 
     /**
      * @covers WindowsAzure\Blob\BlobRestProxy::createBlobBlock
