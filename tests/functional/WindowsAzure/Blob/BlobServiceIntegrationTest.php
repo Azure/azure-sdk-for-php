@@ -458,7 +458,7 @@ class BlobServiceIntegrationTest extends IntegrationTestBase
         }
 
         // Assert
-        $this->assertTrue($error == null || $error->getCode() == 409, '$error == null || $error->getCode() == 409');
+        $this->assertTrue(is_null($error) || $error->getCode() == 409, '$error is null || $error->getCode() == 409');
 
         // Work with root container explicitly ('$root')
         {
@@ -498,7 +498,7 @@ class BlobServiceIntegrationTest extends IntegrationTestBase
         }
 
         // If container was created, delete it
-        if ($error == null) {
+        if (is_null($error)) {
             $this->restProxy->deleteContainer('$root');
         }
     }

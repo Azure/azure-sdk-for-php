@@ -1915,19 +1915,19 @@ class BlobServiceFunctionalTest extends FunctionalTestBase
         $snapshot = $this->restProxy->createBlobSnapshot($container, $blob);
         $this->restProxy->createBlobSnapshot($container, $blob);
 
-        if ($options != null) {
+        if (!is_null($options)) {
             BlobServiceFunctionalTestData::fixEtagAccessCondition($options->getAccessCondition(), $sbmd->getEtag());
             $options->setSnapshot(is_null($options->getSnapshot()) ? null : $snapshot->getSnapshot());
         }
 
         try {
-            $res = ($options == null ? $this->restProxy->getBlob($container, $blob) : $this->restProxy->getBlob($container, $blob, $options));
+            $res = (is_null($options) ? $this->restProxy->getBlob($container, $blob) : $this->restProxy->getBlob($container, $blob, $options));
 
-            if ($options == null) {
+            if (is_null($options)) {
                 $options = new GetBlobOptions();
             }
 
-            if ($options->getTimeout() != null && $options->getTimeout() < 1) {
+            if (!is_null($options->getTimeout()) && $options->getTimeout() < 1) {
                 $this->assertTrue(false, 'Expect negative timeouts in $options to throw');
             }
             if (!BlobServiceFunctionalTestData::passTemporalAccessCondition($options->getAccessCondition())) {
@@ -1936,14 +1936,14 @@ class BlobServiceFunctionalTest extends FunctionalTestBase
             if (!BlobServiceFunctionalTestData::passTemporalAccessCondition($options->getAccessCondition())) {
                 $this->assertTrue(false, 'Expect failing etag access condition to throw');
             }
-            if ($options->getComputeRangeMD5() && $options->getRangeStart() == null) {
+            if ($options->getComputeRangeMD5() && is_null($options->getRangeStart())) {
                 $this->assertTrue(false, 'Expect compute range MD5 to fail if range not set');
             }
 
             $this->verifyGetBlobWorker($res, $options, $dataSize, $metadata);
         }
         catch (ServiceException $e) {
-            if ($options->getTimeout() != null && $options->getTimeout() < 1) {
+            if (!is_null($options->getTimeout()) && $options->getTimeout() < 1) {
                 $this->assertEquals(500, $e->getCode(), 'bad timeout: getCode');
             }
             else if (!BlobServiceFunctionalTestData::passTemporalAccessCondition($options->getAccessCondition())) {
@@ -1957,7 +1957,7 @@ class BlobServiceFunctionalTest extends FunctionalTestBase
             else if (!BlobServiceFunctionalTestData::passEtagAccessCondition($options->getAccessCondition())) {
                 $this->assertEquals(412, $e->getCode(), 'bad etag access condition: getCode');
             }
-            else if ($options->getComputeRangeMD5() && $options->getRangeStart() == null) {
+            else if ($options->getComputeRangeMD5() && is_null($options->getRangeStart())) {
                 $this->assertEquals(400, $e->getCode(), 'Expect compute range MD5 to fail when range not set: getCode');
             }
             else {
@@ -1975,10 +1975,10 @@ class BlobServiceFunctionalTest extends FunctionalTestBase
         $content =  stream_get_contents($res->getContentStream());
 
         $rangeSize = $dataSize;
-        if ($options->getRangeEnd() != null) {
+        if (!is_null($options->getRangeEnd())) {
             $rangeSize = (int) $options->getRangeEnd() + 1;
         }
-        if ($options->getRangeStart() != null) {
+        if (!is_null($options->getRangeStart())) {
             $rangeSize -= $options->getRangeStart();
         } else {
             // One might expect that not specifying the start would just take the
