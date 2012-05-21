@@ -336,11 +336,8 @@ class BlobRestProxy extends ServiceRestProxy implements IBlob
      */
     private function _addOptionalRangeHeader($headers, $start, $end)
     {
-        if (!is_null($start)) {
-            $range = $start . '-';
-            if (!is_null($end)) {
-                $range .= $end;
-            }
+        if (!is_null($start) || !is_null($end)) {
+            $range = $start . '-' . $end;
             $rangeValue = 'bytes=' . $range;
             $this->addOptionalHeader($headers, Resources::RANGE, $rangeValue);
         }
@@ -1190,7 +1187,7 @@ class BlobRestProxy extends ServiceRestProxy implements IBlob
      * @param string|resource          $content   The content of the blob.
      * @param Models\CreateBlobOptions $options   The optional parameters.
      * 
-     * @return none
+     * @return CopyBlobResult
      * 
      * @see http://msdn.microsoft.com/en-us/library/windowsazure/dd179451.aspx
      */
@@ -1230,7 +1227,7 @@ class BlobRestProxy extends ServiceRestProxy implements IBlob
             $options->getTimeout()
         );
         
-        $this->send(
+        $response = $this->send(
             $method, 
             $headers, 
             $queryParams, 
@@ -1239,6 +1236,8 @@ class BlobRestProxy extends ServiceRestProxy implements IBlob
             $statusCode,
             $body
         );
+        
+        return CopyBlobResult::create($response->getHeader());
     }
     
     /**
@@ -1805,7 +1804,7 @@ class BlobRestProxy extends ServiceRestProxy implements IBlob
         $blobCacheControl    = $options->getBlobCacheControl();
         $leaseId             = $options->getLeaseId();
         $sNumberAction       = $options->getSequenceNumberAction();
-        $sNumber             = strval($options->getSequenceNumber());
+        $sNumber             = $options->getSequenceNumber();
         
         $headers = $this->addOptionalAccessConditionHeader(
             $headers, $options->getAccessCondition()
@@ -1858,6 +1857,11 @@ class BlobRestProxy extends ServiceRestProxy implements IBlob
         );
 
         $this->addOptionalQueryParam($queryParams, Resources::QP_COMP, 'properties');
+        $this->addOptionalQueryParam(
+            $queryParams,
+            Resources::QP_TIMEOUT,
+            $options->getTimeout()
+        );
         
         $response = $this->send(
             $method, 

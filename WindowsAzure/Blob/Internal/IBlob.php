@@ -184,7 +184,7 @@ interface IBlob extends FilterableService
     * boundary.
     * @param Models\CreateBlobOptions $options   optional parameters
     * 
-    * @return none.
+    * @return CopyBlobResult
     * 
     * @see http://msdn.microsoft.com/en-us/library/windowsazure/dd179451.aspx
     */

@@ -36,7 +36,7 @@ use WindowsAzure\Common\Internal\Validate;
  * @version   Release: @package_version@
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
-class SetBlobPropertiesOptions
+class SetBlobPropertiesOptions extends BlobServiceOptions
 {
     /**
      * @var string

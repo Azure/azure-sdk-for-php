@@ -25,7 +25,7 @@
 namespace WindowsAzure\Blob\Models;
 
 /**
- * Short description
+ * The optional parameters for setBlobMetadata API.
  *
  * @category  Microsoft
  * @package   WindowsAzure\Blob\Models
