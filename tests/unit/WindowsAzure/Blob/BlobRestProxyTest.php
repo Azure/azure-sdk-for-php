@@ -928,6 +928,37 @@ class BlobRestProxyTest extends BlobServiceRestProxyTestBase
      * @covers WindowsAzure\Blob\BlobRestProxy::_addOptionalRangeHeader
      * @covers WindowsAzure\Blob\Models\GetBlobResult::create
      */
+    public function testGetBlobWithEndRange()
+    {
+        // Setup
+        $name = 'getblobwithendrange';
+        $blob = 'myblob';
+        $this->createContainer($name);
+        $length = 512;
+        $range = new PageRange(0, 511);
+        $contentStream = Resources::EMPTY_STRING;
+        $this->restProxy->createPageBlob($name, $blob, $length);
+        for ($i = 0; $i < 512; $i++) {
+            $contentStream .= 'A';
+        }
+        $this->restProxy->createBlobPages($name, $blob, $range, $contentStream);
+        $options = new GetBlobOptions();
+        $options->setRangeStart(null);
+        $options->setRangeEnd(511);
+        
+        // Test
+        $result = $this->restProxy->getBlob($name, $blob, $options);
+        
+        // Assert
+        $this->assertEquals(BlobType::PAGE_BLOB, $result->getProperties()->getBlobType());
+        $this->assertEquals($contentStream, stream_get_contents($result->getContentStream()));
+    }
+    
+    /**
+     * @covers WindowsAzure\Blob\BlobRestProxy::getBlob
+     * @covers WindowsAzure\Blob\BlobRestProxy::_addOptionalRangeHeader
+     * @covers WindowsAzure\Blob\Models\GetBlobResult::create
+     */
     public function testGetBlobGarbage()
     {
         // Setup

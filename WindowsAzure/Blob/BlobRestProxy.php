@@ -336,11 +336,8 @@ class BlobRestProxy extends ServiceRestProxy implements IBlob
      */
     private function _addOptionalRangeHeader($headers, $start, $end)
     {
-        if (!is_null($start)) {
-            $range = $start . '-';
-            if (!is_null($end)) {
-                $range .= $end;
-            }
+        if (!is_null($start) || !is_null($end)) {
+            $range = $start . '-' . $end;
             $rangeValue = 'bytes=' . $range;
             $this->addOptionalHeader($headers, Resources::RANGE, $rangeValue);
         }
