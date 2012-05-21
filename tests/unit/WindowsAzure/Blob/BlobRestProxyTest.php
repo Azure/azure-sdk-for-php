@@ -691,12 +691,14 @@ class BlobRestProxyTest extends BlobServiceRestProxyTestBase
         $this->createContainer($name);
         
         // Test
-        $this->restProxy->createBlockBlob($name, 'myblob', '123455');
+        $createResult = $this->restProxy->createBlockBlob($name, 'myblob', '123455');
         
         // Assert
         $result = $this->restProxy->listBlobs($name);
         $blobs = $result->getBlobs();
         $blob = $blobs[0];
+        $this->assertNotNull($createResult->getEtag());
+        $this->assertInstanceOf('\DateTime', $createResult->getLastModified());
         $this->assertCount(1, $result->getBlobs());
         $this->assertEquals(Resources::BINARY_FILE_TYPE, $blob->getProperties()->getContentType());
     }

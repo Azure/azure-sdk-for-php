@@ -1190,7 +1190,7 @@ class BlobRestProxy extends ServiceRestProxy implements IBlob
      * @param string|resource          $content   The content of the blob.
      * @param Models\CreateBlobOptions $options   The optional parameters.
      * 
-     * @return none
+     * @return CopyBlobResult
      * 
      * @see http://msdn.microsoft.com/en-us/library/windowsazure/dd179451.aspx
      */
@@ -1230,7 +1230,7 @@ class BlobRestProxy extends ServiceRestProxy implements IBlob
             $options->getTimeout()
         );
         
-        $this->send(
+        $response = $this->send(
             $method, 
             $headers, 
             $queryParams, 
@@ -1239,6 +1239,8 @@ class BlobRestProxy extends ServiceRestProxy implements IBlob
             $statusCode,
             $body
         );
+        
+        return CopyBlobResult::create($response->getHeader());
     }
     
     /**
