@@ -691,12 +691,14 @@ class BlobRestProxyTest extends BlobServiceRestProxyTestBase
         $this->createContainer($name);
         
         // Test
-        $this->restProxy->createBlockBlob($name, 'myblob', '123455');
+        $createResult = $this->restProxy->createBlockBlob($name, 'myblob', '123455');
         
         // Assert
         $result = $this->restProxy->listBlobs($name);
         $blobs = $result->getBlobs();
         $blob = $blobs[0];
+        $this->assertNotNull($createResult->getEtag());
+        $this->assertInstanceOf('\DateTime', $createResult->getLastModified());
         $this->assertCount(1, $result->getBlobs());
         $this->assertEquals(Resources::BINARY_FILE_TYPE, $blob->getProperties()->getContentType());
     }
@@ -915,6 +917,37 @@ class BlobRestProxyTest extends BlobServiceRestProxyTestBase
         
         // Test
         $result = $this->restProxy->getBlob('', $blob, $options);
+        
+        // Assert
+        $this->assertEquals(BlobType::PAGE_BLOB, $result->getProperties()->getBlobType());
+        $this->assertEquals($contentStream, stream_get_contents($result->getContentStream()));
+    }
+    
+    /**
+     * @covers WindowsAzure\Blob\BlobRestProxy::getBlob
+     * @covers WindowsAzure\Blob\BlobRestProxy::_addOptionalRangeHeader
+     * @covers WindowsAzure\Blob\Models\GetBlobResult::create
+     */
+    public function testGetBlobWithEndRange()
+    {
+        // Setup
+        $name = 'getblobwithendrange';
+        $blob = 'myblob';
+        $this->createContainer($name);
+        $length = 512;
+        $range = new PageRange(0, 511);
+        $contentStream = Resources::EMPTY_STRING;
+        $this->restProxy->createPageBlob($name, $blob, $length);
+        for ($i = 0; $i < 512; $i++) {
+            $contentStream .= 'A';
+        }
+        $this->restProxy->createBlobPages($name, $blob, $range, $contentStream);
+        $options = new GetBlobOptions();
+        $options->setRangeStart(null);
+        $options->setRangeEnd(511);
+        
+        // Test
+        $result = $this->restProxy->getBlob($name, $blob, $options);
         
         // Assert
         $this->assertEquals(BlobType::PAGE_BLOB, $result->getProperties()->getBlobType());
