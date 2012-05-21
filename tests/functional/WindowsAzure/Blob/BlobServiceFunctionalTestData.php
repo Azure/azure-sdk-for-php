@@ -38,6 +38,7 @@ use WindowsAzure\Blob\Models\ListBlobsResult;
 use WindowsAzure\Blob\Models\ListContainersOptions;
 use WindowsAzure\Blob\Models\ListContainersResult;
 use WindowsAzure\Blob\Models\CreateContainerOptions;
+use WindowsAzure\Blob\Models\DeleteBlobOptions;
 use WindowsAzure\Blob\Models\DeleteContainerOptions;
 use WindowsAzure\Blob\Models\AccessCondition;
 use WindowsAzure\Blob\Models\SetContainerMetadataOptions;
@@ -771,9 +772,9 @@ class BlobServiceFunctionalTestData
         $options->setRangeEnd(200);
         array_push($ret, $options);
 
-        //        $options = new GetBlobOptions();
-        //        $options->setSnapshot('sgdsfdg');
-        //        array_push($ret, $options);
+        $options = new GetBlobOptions();
+        $options->setSnapshot('placeholder');
+        array_push($ret, $options);
 
         // TODO: Handle Lease ID
         //        $options = new GetBlobOptions();

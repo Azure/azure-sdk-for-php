@@ -71,21 +71,18 @@ class FunctionalTestBase extends BlobServiceRestProxyTestBase
         foreach($this->restProxy->listContainers()->getContainers() as $container) {
             if ($container->getName() == '$root') {
                 $hasRoot = true;
-                $blobListResult = $this->restProxy->listBlobs('$root');
-                foreach ($blobListResult->getBlobs() as $blob) {
-                    $this->restProxy->deleteBlob('$root', $blob->getName());
-                }
+                $this->safeDeleteContainerContents('$root');
             } else {
-                $this->restProxy->deleteContainer($container->getName());
+                $this->safeDeleteContainer($container->getName());
             }
         }
 
         foreach(BlobServiceFunctionalTestData::$TEST_CONTAINER_NAMES as $name)  {
-            $this->restProxy->createContainer($name);
+            $this->safeCreateContainer($name);
         }
 
         if (!$hasRoot) {
-            $this->restProxy->createContainer('$root');
+            $this->safeCreateContainer('$root');
         }
     }
 
@@ -97,7 +94,46 @@ class FunctionalTestBase extends BlobServiceRestProxyTestBase
         foreach(BlobServiceFunctionalTestData::$TEST_CONTAINER_NAMES as $name)  {
             $this->restProxy->deleteContainer($name);
         }
-        $this->restProxy->deleteContainer('$root');
+    }
+
+    /**
+     * @covers WindowsAzure\Blob\BlobRestProxy::deleteBlob
+     * @covers WindowsAzure\Blob\BlobRestProxy::listBlobs
+     */
+    private function safeDeleteContainerContents($name) {
+        $blobListResult = $this->restProxy->listBlobs($name);
+        foreach($blobListResult->getBlobs() as $blob)  {
+            try {
+                $this->restProxy->deleteBlob($name, $blob->getName());
+            }
+            catch (ServiceException $e) {
+                error_log($e->getMessage());
+            }
+        }
+    }
+
+    /**
+     * @covers WindowsAzure\Blob\BlobRestProxy::deleteContainer
+     */
+    private function safeDeleteContainer($name) {
+        try {
+            $this->restProxy->deleteContainer($name);
+        }
+        catch (ServiceException $e) {
+            error_log($e->getMessage());
+        }
+    }
+
+    /**
+     * @covers WindowsAzure\Blob\BlobRestProxy::createContainer
+     */
+    private function safeCreateContainer($name) {
+        try {
+            $this->restProxy->createContainer($name);
+        }
+        catch (ServiceException $e) {
+            error_log($e->getMessage());
+        }
     }
 }
 

@@ -977,6 +977,7 @@ class BlobServiceFunctionalTest extends FunctionalTestBase
         }
         catch (UnsupportedEncodingException $e1) {
             // UTF-8 should be fine.
+            error_log($e1->getMessage());
         }
 
         try {
@@ -1708,7 +1709,7 @@ class BlobServiceFunctionalTest extends FunctionalTestBase
             $this->assertEquals(512, $res->getProperties()->getContentLength(), 'blob getProperties->getContentLength');
         }
         else {
-            $this->assertEquals($properties->getBlobContentLength(), $res ->getProperties()->getContentLength(), 'blob getProperties->getContentLength');
+            $this->assertEquals($properties->getBlobContentLength(), $res->getProperties()->getContentLength(), 'blob getProperties->getContentLength');
         }
 
         // TODO: Should be nullable: https://github->com/WindowsAzure/azure-sdk-for-java/issues/75
@@ -1716,7 +1717,7 @@ class BlobServiceFunctionalTest extends FunctionalTestBase
             $this->assertEquals(0, $res->getProperties()->getSequenceNumber(), 'blob getProperties->getSequenceNumber');
         }
         else {
-            $this->assertEquals($properties->getSequenceNumber(), $res ->getProperties()->getSequenceNumber(), 'blob getProperties->getSequenceNumber');
+            $this->assertEquals($properties->getSequenceNumber(), $res->getProperties()->getSequenceNumber(), 'blob getProperties->getSequenceNumber');
 
         }
 
@@ -1848,7 +1849,7 @@ class BlobServiceFunctionalTest extends FunctionalTestBase
      * @covers WindowsAzure\Blob\BlobRestProxy::getBlob
      * @covers WindowsAzure\Blob\BlobRestProxy::setBlobMetadata
      */
-    public function testGetBlobNoOptions()
+    public function testGetBlob_NoOptions()
     {
         $container = BlobServiceFunctionalTestData::getContainerName();
         $this->getBlobWorker(null, $container);
@@ -1860,7 +1861,7 @@ class BlobServiceFunctionalTest extends FunctionalTestBase
      * @covers WindowsAzure\Blob\BlobRestProxy::getBlob
      * @covers WindowsAzure\Blob\BlobRestProxy::setBlobMetadata
      */
-    public function testGetBlobNoOptionsExplicitRoot()
+    public function testGetBlob_NoOptionsExplicitRoot()
     {
         $this->getBlobWorker(null, '$root');
     }
@@ -1871,7 +1872,7 @@ class BlobServiceFunctionalTest extends FunctionalTestBase
      * @covers WindowsAzure\Blob\BlobRestProxy::getBlob
      * @covers WindowsAzure\Blob\BlobRestProxy::setBlobMetadata
      */
-    public function testGetBlobNoOptionsRoot()
+    public function testGetBlob_NoOptionsRoot()
     {
         $this->getBlobWorker(null, '');
     }
@@ -1882,17 +1883,19 @@ class BlobServiceFunctionalTest extends FunctionalTestBase
      * @covers WindowsAzure\Blob\BlobRestProxy::getBlob
      * @covers WindowsAzure\Blob\BlobRestProxy::setBlobMetadata
      */
-    public function testGetBlob()
+    public function testGetBlob_AllOptions()
     {
         $container = BlobServiceFunctionalTestData::getContainerName();
 
         $interestingGetBlobOptions = BlobServiceFunctionalTestData::getGetBlobOptions();
+        var_dump($interestingGetBlobOptions);
         foreach($interestingGetBlobOptions as $options)  {
             $this->getBlobWorker($options, $container);
         }
     }
 
     /**
+     * @covers WindowsAzure\Blob\BlobRestProxy::createBlobSnapshot
      * @covers WindowsAzure\Blob\BlobRestProxy::createPageBlob
      * @covers WindowsAzure\Blob\BlobRestProxy::deleteBlob
      * @covers WindowsAzure\Blob\BlobRestProxy::getBlob
@@ -1908,8 +1911,13 @@ class BlobServiceFunctionalTest extends FunctionalTestBase
 
         $metadata = BlobServiceFunctionalTestData::getNiceMetadata();
         $sbmd = $this->restProxy->setBlobMetadata($container, $blob, $metadata);
+
+        $snapshot = $this->restProxy->createBlobSnapshot($container, $blob);
+        $this->restProxy->createBlobSnapshot($container, $blob);
+
         if ($options != null) {
             BlobServiceFunctionalTestData::fixEtagAccessCondition($options->getAccessCondition(), $sbmd->getEtag());
+            $options->setSnapshot(is_null($options->getSnapshot()) ? null : $snapshot->getSnapshot());
         }
 
         try {
@@ -1984,7 +1992,7 @@ class BlobServiceFunctionalTest extends FunctionalTestBase
         if ($options->getComputeRangeMD5()) {
             // Compute the MD5 from the stream.
             $md5 = base64_encode(md5($content, true));
-            $this->assertEquals($md5, $res->getProperties() ->getContentMD5(), 'asked for MD5, result->getProperties()->getContentMD5');
+            $this->assertEquals($md5, $res->getProperties()->getContentMD5(), 'asked for MD5, result->getProperties()->getContentMD5');
         }
         else {
             $this->assertNull($res->getProperties()->getContentMD5(), 'did not ask for MD5, result->getProperties()->getContentMD5');
