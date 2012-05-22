@@ -31,6 +31,7 @@ use WindowsAzure\Common\Models\Metrics;
 use WindowsAzure\Common\Models\RetentionPolicy;
 use WindowsAzure\Common\Models\ServiceProperties;
 use WindowsAzure\Blob\Models\BlobServiceOptions;
+use WindowsAzure\Blob\Models\CreateBlobSnapshotOptions;
 use WindowsAzure\Blob\Models\GetBlobOptions;
 use WindowsAzure\Blob\Models\GetServicePropertiesResult;
 use WindowsAzure\Blob\Models\ListBlobsOptions;
@@ -778,6 +779,80 @@ class BlobServiceFunctionalTestData
 
         // TODO: Handle Lease ID
         //        $options = new GetBlobOptions();
+        //        $options->setLeaseId('setLeaseId');
+        //        array_push($ret, $options);
+
+        return $ret;
+    }
+
+    public static function getDeleteBlobOptions()
+    {
+        $ret = array();
+
+        $options = new DeleteBlobOptions();
+        array_push($ret, $options);
+
+        $options = new DeleteBlobOptions();
+        $options->setTimeout(10);
+        array_push($ret, $options);
+
+        $options = new DeleteBlobOptions();
+        $options->setTimeout(-10);
+        array_push($ret, $options);
+
+        foreach(self::getAllAccessConditions() as $ac)  {
+            $options = new DeleteBlobOptions();
+            $options->setAccessCondition($ac);
+            array_push($ret, $options);
+        }
+
+        $options = new DeleteBlobOptions();
+        $options->setDeleteSnaphotsOnly(true);
+        array_push($ret, $options);
+
+        $options = new DeleteBlobOptions();
+        $options->setDeleteSnaphotsOnly(false);
+        array_push($ret, $options);
+
+        $options = new DeleteBlobOptions();
+        $options->setSnapshot('placeholder');
+        array_push($ret, $options);
+
+        // TODO: Handle Lease ID
+        //        $options = new DeleteBlobOptions();
+        //        $options->setLeaseId('setLeaseId');
+        //        array_push($ret, $options);
+
+        return $ret;
+    }
+
+    public static function getCreateBlobSnapshotOptions()
+    {
+        $ret = array();
+
+        $options = new CreateBlobSnapshotOptions();
+        array_push($ret, $options);
+
+        $options = new CreateBlobSnapshotOptions();
+        $options->setTimeout(10);
+        array_push($ret, $options);
+
+        $options = new CreateBlobSnapshotOptions();
+        $options->setTimeout(-10);
+        array_push($ret, $options);
+
+        foreach(self::getAllAccessConditions() as $ac)  {
+            $options = new CreateBlobSnapshotOptions();
+            $options->setAccessCondition($ac);
+            array_push($ret, $options);
+        }
+
+        $options = new CreateBlobSnapshotOptions();
+        $options->setMetadata(self::getNiceMetadata());
+        array_push($ret, $options);
+
+        // TODO: Handle Lease ID
+        //        $options = new CreateBlobSnapshotOptions();
         //        $options->setLeaseId('setLeaseId');
         //        array_push($ret, $options);
 
