@@ -191,62 +191,166 @@ class BrokeredMessage
         return $this->_customProperties;
     }
 
+    /**
+     * Gets the delivery count. 
+     * 
+     * @return integer
+     */
     public function getDeliveryCount() {
         return $this->_brokerProperties->getDeliveryCount();
     }
 
+    /**
+     * Gets the ID of the message. 
+     * 
+     * @return string 
+     */
     public function getMessageId() {
         return $this->_brokerProperties->getMessageId();
     }
     
+    /**
+     * Sets the ID of the message. 
+     * 
+     * @param string $messageId The ID of the message. 
+     */
     public function setMesageId($messageId) {
         $this->_brokerProperties->setMesageId($messageId);
     }
     
+    /** 
+     * Gets the sequence number. 
+     * 
+     * @return integer
+     */
     public function getSequenceNumber() {
         $this->_brokerProperties->getSequenceNumber();
     }
 
+    /**
+     * Sets the sequence number. 
+     * 
+     * @param integer $sequenceNumber The sequence number. 
+     */
+    public function setSequenceNumber($sequenceNumber) {
+        $this->_brokerProperties->setSequenceNumber($sequenceNumber);
+    } 
+
+    /** 
+     * Gets the time to live. 
+     * 
+     * @return integer 
+     */
     public function getTimeToLive() {
         $this->_brokerProperties->getTimeToLive();
     }
 
-    public function setTimeToLive() {
+    /**
+     * Sets the time to live. 
+     * 
+     * @param string $timeToLive The time to live. 
+     */ 
+    public function setTimeToLive($timeToLive) {
         $this->_brokerProperties->setTimeToLive($timeToLive);
     }
 
+    /**
+     * Gets the lock token. 
+     * 
+     * @return string 
+     */
     public function getLockToken() {
         return $this->_brokerProperties->getLockToken();
     }
 
+    /**
+     * Sets the lock token. 
+     * 
+     * @param string $lockToken The token of the lock. 
+     */
+    public function setLockToken($lockToken)
+    {
+        $this->_brokerProperties->setLockToken($lockToken);
+    }
+
+    /**
+     * Gets the time of locked until UTC.
+     * 
+     * @return \Date
+     */
     public function getLockUntiUtc() {
         return $this->_brokerProperties->getLockedUntilUtc();
     }
 
+    /**
+     * Sets the time of locked until UTC. 
+     * 
+     * @param \Date $lockedUntilUtc The time of locked until UTC.
+     */ 
+    public function setLockedUntilUtc($lockedUntilUtc)
+    {
+        $this->_brokerProperties->setLockedUntilUtc($lockedUntilUtc);
+    }
+
+    /**
+     * Gets the correlation ID.
+     * 
+     * @return string 
+     */
     public function getCorrelationId() {
         return $this->_brokerProperties->getCorrelationId();
     }
     
+    /**     
+     * Sets the correlation ID.
+     * 
+     * @param string $correlationId The ID of the correlation.
+     */
     public function setCorrelationId($correlationId) {
         $this->_brokerProperties->setCorrelationId($correlationId);
     }
 
+    /**
+     * Gets the session ID.
+     * 
+     * @return string
+     */
     public function getSessionId() {
         $this->_brokerProperties->getSessionId();
     }
     
+    /**
+     * Sets the session ID.
+     * 
+     * @param string $sessionId The ID of the session. 
+     */
     public function setSessionId($sessionId) {
         $this->_brokerProperities->setSessionId($sessionId);
     }
 
+    /**
+     * Gets the label.
+     * 
+     * @return string
+     */
     public function getLabel() {
         return $this->_brokerProperties->getLabel();
     }
 
+    /**
+     * Sets the label. 
+     * 
+     * @param string $label The label of the broker properties. 
+     */
     public function setLabel($label) {
         $this->_brokerProperties->setLabel($label);
     }
 
+    /**
+     * Gets reply to. 
+     * 
+     * @return string 
+     */
     public function getReplyTo() {
         return $this->_brokerProperties->getReplyTo();
     }

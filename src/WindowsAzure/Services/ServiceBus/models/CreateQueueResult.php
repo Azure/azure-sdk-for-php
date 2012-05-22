@@ -24,7 +24,6 @@
 namespace WindowsAzure\Services\ServiceBus\Models;
 use WindowsAzure\Core\Atom\Feed;
 use WindowsAzure\Core\Atom\Content;
-use WindowsAzure\Core\Serialization\XmlSerializer;
 use WindowsAzure\Services\ServiceBus\Models\QueueDescription;
 
 /**

@@ -102,10 +102,6 @@ class SubscriptionDescription
      * @var boolean 
      */
     private $_enableBatchedOperations;
-    /**
-     * @var bool 
-     */
-
 
     /**
      * Creates a subscription description instance with default 
@@ -113,8 +109,23 @@ class SubscriptionDescription
      */
     public function __construct()
     {
-
     }
+
+    /**
+     * Creates a subscription description with specified XML string. 
+     *
+     * @param string $subscriptionDescription The subscription description.
+     */
+    public static function create($subscriptionDescriptionXml)
+    {
+        $subscriptionDescription = new SubscriptionDescription();
+        $root = simplexml_load_string($subscriptionDescription);
+        $subscriptionDescriptionArray = (array)$root;
+        if (array_key_exists('LockDuration', $subscriptionDescriptionArray)) {
+            $subscriptionDescription->setLockDuration($subscriptionDescriptionArray['LockDuration']);
+        }
+    }
+
     /**
      * Gets the lock duration.
      *
@@ -137,84 +148,166 @@ class SubscriptionDescription
         $this->_lockDuration = $lockDuration;
     }
 
+    /**
+     * Gets requires session.
+     * 
+     * @return boolean
+     */
     public function getRequiresSession()
     {
         return $this->_requiresSession;
     }
 
+    /**
+     * Sets the requires session.
+     * 
+     * @param boolean $requiresSession The requires session. 
+     */
     public function setRequiresSession($requiresSession)
     {
         $this->_requiresSession = $requiresSession;
     }
 
+    /**
+     * Gets default message time to live. 
+     * 
+     * @return string 
+     */
     public function getDefaultMessageTimeToLive()
     {
         return $this->_defaultMessageTimeToLive;
     }
 
+    /**
+     * Sets default message time to live. 
+     * 
+     * @param string $defaultMessagetimeToLive The default message time to live. 
+     */
     public function setDefaultMessageTimeToLive($defaultMessageTimeToLive)
     {   
         $this->_defaultMessageTimeToLive = $defaultMessageTimeToLive;
     }
 
+    /**
+     * Gets dead lettering on message expiration. 
+     * 
+     * @return string
+     */
     public function getDeadLetteringOnMessageExpiration()
     {
         return $this->_deadLetteringOnMessageExpiration;
     }
 
+    /** 
+     * Sets dead lettering on message expiration.
+     * 
+     * @param string $deadLetteringOnMessageExpiration The dead lettering 
+     * on message expiration.
+     */
     public function setDeadLetteringOnMessageExpiration($deadLetteringOnMessageExpiration)
     {
         $this->_deadLetteringOnMessageExpiration = $deadLetteringOnMessageExpiration;
     }
 
+    /**
+     * Gets dead lettering on filter evaluation exceptions. 
+     * 
+     * @return string 
+     */
     public function getDeadLetteringOnFilterEvaluationExceptions()
     {
         return $this->_deadLetteringOnFilterEvaluationExceptions;
     }
 
+    /**
+     * Sets dead lettering on filter evaluation exceptions. 
+     * 
+     * @param string $deadLetteringOnFilterEvaluationException Sets dead lettering 
+     * on filter evaluation exceptions. 
+     */
     public function setDeadLetteringOnFilterEvaluationExceptions($deadLetteringOnFilterEvaluationExceptions)
     {
         $this->_deadLetteringOnFilterEvaluationExceptions = $deadLetteringOnFilterEvaluationExceptions;
     }
 
+    /**
+     * Gets the default rule description. 
+     * 
+     * @return RuleDescription 
+     */
     public function getDefaultRuleDescription()
     {
         return $this->_defaultRuleDescription;
     }
 
+    /**
+     * Sets the default rule description.
+     * 
+     * @param string $defaultRuleDescription The default rule description. 
+     */
     public function setDefaultRuleDescription($defaultRuleDescription)
     {
         $this->_defaultRuleDescription = $defaultRuleDescription;
     }
 
+    /**
+     * Gets the count of the message. 
+     * 
+     * @return integer
+     */
     public function getMessageCount()
     {
         return $this->_messageCount;
-    }
+    } 
 
+    /**
+     * Sets the count of the message.
+     * 
+     * @param string $messageCount The count of the message. 
+     */
     public function setMessageCount($messageCount)
     {
         $this->_messageCount = $messageCount;
     }
 
+    /**
+     * Gets maximum delivery count.
+     * 
+     * @return integer
+     */
     public function getMaxDeliveryCount()
     {
         return $this->_maxDeliveryCount;
     }
 
+    /**
+     * Sets maximum delivery count. 
+     * 
+     * @param integer $maxDeliveryCount The maximum delivery count. 
+     */
     public function setMaxDeliveryCount($maxDeliveryCount)
     {
         $this->_maxDeliveryCount = $maxDeliveryCount;
     }
 
-    public function getEnableBatchedOperation()
+    /**
+     * Gets enable batched operations. 
+     * 
+     * @return boolean
+     */
+    public function getEnableBatchedOperations()
     {
-        return $this->_enableBatchedOperation;
+        return $this->_enableBatchedOperations;
     }
 
-    public function setEnableBatchedOperation($enableBatchedOperation)
+    /**
+     * Sets enable batched operations. 
+     * 
+     * @param boolean $enableBatchedOperations Enable batched operations. 
+     */
+    public function setEnableBatchedOperations($enableBatchedOperations)
     {
-        $this->_enableBatchedOperation = $enableBatchedOperation; 
+        $this->_enableBatchedOperations = $enableBatchedOperations; 
     }
 }
 

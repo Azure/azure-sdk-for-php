@@ -81,7 +81,7 @@ class ServiceBusRestProxyTestBase extends ServiceRestProxyTestBase
 
     public function createSubscription($topicName, $subscriptionInfo) 
     {
-        $topicSubscriptionNameArray = array($topicName, $subscripitionInfo->getName());
+        $topicSubscriptionNameArray = array($topicName, $subscriptionInfo->getName());
         $this->_createdSubscriptions[] = join('::', $topicSubscriptionNameArray);
         return $this->wrapper->createSubscription($topicName, $subscriptionInfo);
     }

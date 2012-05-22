@@ -24,6 +24,7 @@
 namespace WindowsAzure\Services\ServiceBus\Models;
 use WindowsAzure\Core\Atom\Feed;
 use WindowsAzure\Core\Atom\Content;
+use WindowsAzure\Services\ServiceBus\Models\TopicDescription;
 
 /**
  * The results of a create topic request.
@@ -56,7 +57,7 @@ class CreateTopicResult
         $createTopicResult = new CreateTopicResult();
         $feed = Feed::create($response);
         $content = $feed->getContent();
-        $this->_topicDescription = TopicDescritpion::create($content->getText()); 
+        $createTopicResult->_topicDescription = TopicDescription::create($content->getText()); 
         return $createTopicResult;
     }
 

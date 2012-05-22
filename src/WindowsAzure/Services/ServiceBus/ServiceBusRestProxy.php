@@ -97,14 +97,15 @@ class ServiceBusRestProxy extends ServiceRestProxy implements IServiceBus
     {
         $httpCallContext = new HttpCallContext();
         $httpCallContext->setMethod(Resources::HTTP_POST);
-        $httpCallContext->addStatusCode(Resources::STATUS_OK);
+        $httpCallContext->addStatusCode(Resources::STATUS_CREATED);
+        $httpCallContext->setPath($path);
         $contentType = $brokeredMessage->getContentType();
 
         if (!is_null($contentType))
         {
             $httpCallContext->addHeader(
                 Resources::CONTENT_TYPE,
-                $brokeredMessage->getContentType()
+                $contentType
             );
         }
         
@@ -163,6 +164,7 @@ class ServiceBusRestProxy extends ServiceRestProxy implements IServiceBus
     public function receiveMessage($path, $receiveMessageOptions)
     {
         $httpCallContext = new HttpCallContext();
+        $httpCallContext->setPath($path);
         $timeout = $receiveMessageOptions->getTimeout();
         if (!is_null($timeout))
         {
@@ -176,7 +178,7 @@ class ServiceBusRestProxy extends ServiceRestProxy implements IServiceBus
             $httpCallContext->setMethod(Resources::HTTP_POST);
         }
         else {
-            throw new ArgumentException(
+            throw new ServiceException(
                 'The receive message option is in an unknown mode.'
             );
         }
@@ -411,35 +413,27 @@ class ServiceBusRestProxy extends ServiceRestProxy implements IServiceBus
         Validate::notNullOrEmpty($topicInfo, 'topicInfo');
         $httpCallContext = new HttpCallContext();
         $httpCallContext->setMethod(Resources::HTTP_PUT);
-        $httpCallContext->addStatusCode(Resources::STATUS_CREATED);
         $httpCallContext->setPath($topicInfo->getName());
         $httpCallContext->addHeader(
             Resources::CONTENT_TYPE,
             Resources::ATOM_ENTRY_CONTENT_TYPE
         );
-        
-        $topicDescriptionAttributes = array(
-            'xmlns:i' => 'http://www.w3.org/2001/XMLSchema-instace',
-            'xmlns' => 'http://schemas.microsoft.com/netservices/2010/10/servicebus/connect'
-        );
+        $httpCallContext->addStatusCode(Resources::STATUS_CREATED);
 
-        $content = new Content(
-            XmlSerializer::objectSerialize(
-                $topicInfo->getTopicDescription(), 
-                'TopicDescription',
-                $topicDescriptionAttributes
-            )
+        $topicDescriptionXml = XmlSerializer::objectSerialize(
+            $topicInfo->getTopicDescription(),
+            'TopicDescription'
         );
-        $content->setType('application/xml');
 
         $entry = new Entry();
-        $entry->setContent($content);
-        $entry->setTitle($topicInfo->getName());
-
+        $content = new Content($topicDescriptionXml);
+        $content->setType(Resources::APPLICATION_XML_CONTENT_TYPE);
+        $entry->setContent($content); 
+        $entry->setAttribute('xmlns:atom', 'http://www.w3.org/2005/Atom');
+        $entry->setAttribute('xmlns', 'http://schemas.microsoft.com/netservices/2010/10/servicebus/connect');
         $httpCallContext->setBody($entry->toXml());
 
         $response = $this->sendContext($httpCallContext);
-
         return CreateTopicResult::create($response->getBody());
     } 
 
@@ -518,10 +512,10 @@ class ServiceBusRestProxy extends ServiceRestProxy implements IServiceBus
             $subscriptionInfo->getName()
         );
         $httpCallContext->setPath($subscriptionPath);
-        $httpCallContext->setContentType(Resources::ATOM_ENTRY_CONTENT_TYPE);
+        $httpCallContext->addHeader(Resources::CONTENT_TYPE, Resources::ATOM_ENTRY_CONTENT_TYPE);
+        $httpCallContext->addStatusCode(Resources::STATUS_CREATED);
 
-   
-        $response = $this->send($httpCallContext);
+        $response = $this->sendContext($httpCallContext);
         $createSubscriptionResult = CreateSubscriptionResult::create($response->getBody());
         return $createSubscriptionResult;
     }
@@ -595,14 +589,14 @@ class ServiceBusRestProxy extends ServiceRestProxy implements IServiceBus
     /**
      * Creates a rule. 
      * 
-     * @param string          $topicPath        The path of the topic.
-     * @param string          $subscriptionName The name of the subscription. 
-     * @param RuleDescription $ruleDescription  The description of the rule.
+     * @param string   $topicPath        The path of the topic.
+     * @param string   $subscriptionName The name of the subscription. 
+     * @param RuleInfo $ruleDescription  The description of the rule.
      *
      * @throws Exception 
      * @return CreateRuleResult;
      */
-    public function createRule($topicPath, $subscriptionName, $ruleDescription)
+    public function createRule($topicPath, $subscriptionName, $ruleInfo)
     {
         $httpCallContext = new HttpCallContext();
         $httpCallContext->setMethod(Resources::HTTP_PUT);
@@ -612,7 +606,7 @@ class ServiceBusRestProxy extends ServiceRestProxy implements IServiceBus
             Resources::RULE_PATH,
             $topicPath,
             $subscriptionName,
-            $ruleDescription->getName()
+            $ruleInfo->getName()
         );
         $httpCallContext->setPath($rulePath);
         $response = $this->sendContext($httpCallContext);

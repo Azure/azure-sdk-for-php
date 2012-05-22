@@ -94,11 +94,19 @@ class SubscriptionInfo
         $this->_name = $name;
     }
 
+    /**
+     * Gets subscription description. 
+     */
     public function getSubscriptionDescription()
     {
         return $this->_subscriptionDescription;
     }
 
+    /**
+     * Sets subscription description. 
+     * 
+     * @param string $subscriptionDescription The description of the subscription. 
+     */
     public function setSubscriptionDescription($subscriptionDescription)
     {
         $this->_subscriptionDescription = $subscriptionDescription;

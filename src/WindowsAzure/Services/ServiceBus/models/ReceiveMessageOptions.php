@@ -139,9 +139,9 @@ class ReceiveMessageOptions
      * @return peek lock. 
      *
      */
-    public function getPeekLock()
+    public function getIsPeekLock()
     {
-        return $this->_PeekLock;
+        return $this->_isPeekLock;
     }    
 
     /**
@@ -149,9 +149,9 @@ class ReceiveMessageOptions
      * 
      * @return none
      */
-    public function setPeekLock($PeekLock)
+    public function setIsPeekLock($isPeekLock)
     {   
-        $this->_peekLock = $peekLock;
+        $this->_isPeekLock = $isPeekLock;
     }
 }
 ?>

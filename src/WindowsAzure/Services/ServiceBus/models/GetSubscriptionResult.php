@@ -57,8 +57,14 @@ class GetSubscriptionResult
     {
         $getSubscriptionResult = new GetSubscriptionResult();
         $feed = Feed::create($response);
-        $content = $feed->getContent($content);
-        $subscriptionInfo = SubscriptionInfo::create($content->getText());
+        $content = $feed->getContent();
+        if (is_null($content))
+        {
+            return null;
+        }
+        $subscriptionDescription = SubscriptionDescription::create($content->getText());
+        $subscriptionInfo = new SubscriptionInfo();
+        $subscriptionInfo->setSubscriptionDescription($subscriptionDescription);
         $getSubscriptionResult->setSubscriptionInfo($subscriptionInfo);
         return $getSubscriptionResult;
     }

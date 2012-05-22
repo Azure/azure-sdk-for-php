@@ -116,8 +116,6 @@ class QueueDescription
      */ 
     private $_messageCount;    
 
-
-
     /**
      * Creates a queue description object with specified XML string.
      *
