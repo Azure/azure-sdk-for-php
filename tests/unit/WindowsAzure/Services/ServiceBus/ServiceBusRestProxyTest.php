@@ -67,12 +67,17 @@ class ServiceBusRestProxyTest extends ServiceBusRestProxyTestBase
     {
         $queueName = 'createQueueWorks';
         $queueInfo = new QueueInfo($queueName);
+
+        try
+        {
+            $this->wrapper->deleteQueue($queueName);
+        }
+        catch(\Exception $e)
+        {
+        }
+
         $createQueueResult = $this->createQueue($queueInfo);
         $this->assertNotNull($createQueueResult);
-        $this->assertEquals(
-            'TestCreateQueueWorks',
-            $createQueueResult->getName()
-        );
     } 
 
     /**
@@ -122,7 +127,7 @@ class ServiceBusRestProxyTest extends ServiceBusRestProxyTestBase
         $expectedMessageText = 'testReceiveMessageWorks';
 
 
-        $brokeredMessage->setMessage($expectedMessageText);
+        $brokeredMessage->setBody($expectedMessageText);
         
         $this->wrapper->sendQueueMessage(
             $queueName,
@@ -149,9 +154,9 @@ class ServiceBusRestProxyTest extends ServiceBusRestProxyTestBase
         $queueInfo = new QueueInfo($queueName, $queueDescription);
         $this->createQueue($queueInfo);
         $brokeredMessage = new BrokeredMessage();
-        $brokeredMessage->setMessage($expectedMessage);
+        $brokeredMessage->setBody($expectedMessage);
 
-        $this->sendQueueMessage($queueName, $brokeredMessage);
+        $this->wrapper->sendQueueMessage($queueName, $brokeredMessage);
 
         $receiveMessageResult = $this->receveQueueMessage(
             $queueName, 
@@ -176,9 +181,9 @@ class ServiceBusRestProxyTest extends ServiceBusRestProxyTestBase
         $queueInfo = new QueueInfo($queueName, $queueDescription);
         $this->createQueue($queueInfo);
         $brokeredMessage = new BrokeredMessage();
-        $brokeredMessage->setMessage($expectedMessage);
+        $brokeredMessage->setBody($expectedMessage);
 
-        $this->sendQueueMessage($queueName, $brokeredMessage);
+        $this->wrapper->sendQueueMessage($queueName, $brokeredMessage);
 
         $receiveMessageResult = $this->receveQueueMessage(
             $queueName, 
@@ -205,9 +210,9 @@ class ServiceBusRestProxyTest extends ServiceBusRestProxyTestBase
         $queueInfo = new QueueInfo($queueName, $queueDescription);
         $this->createQueue($queueInfo);
         $brokeredMessage = new BrokeredMessage();
-        $brokeredMessage->setMessage($expectedMessage);
+        $brokeredMessage->setBody($expectedMessage);
 
-        $this->sendQueueMessage($queueName, $brokeredMessage);
+        $this->wrapper->sendQueueMessage($queueName, $brokeredMessage);
 
         $receiveMessageResult = $this->receveQueueMessage(
             $queueName, 
@@ -534,7 +539,7 @@ class ServiceBusRestProxyTest extends ServiceBusRestProxyTestBase
         $brokeredMessage = new BrokeredMessage();
         $brokeredMessage->setProperty('Hello', 'World');
         $brokeredMessage->setProperty('foo', 42);
-        $this->sendQueueMessage($queueName, $brokeredMessage);
+        $this->wrapper->sendQueueMessage($queueName, $brokeredMessage);
         $receiveMessageResult = $this->receiveQueueMessage(
             $queueName, 
             Resources::RECEIVE_AND_DELETE_5_SECONDS

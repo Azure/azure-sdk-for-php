@@ -117,6 +117,65 @@ class QueueDescription
     private $_messageCount;    
 
 
+
+    /**
+     * Creates a queue description object with specified XML string.
+     *
+     * @param string $queueDescriptionXml A XML based string describing
+     * the queue. 
+     *
+     */
+    public static function create($queueDescriptionXml)
+    {
+        $queueDescription = new QueueDescription();
+        $root = simplexml_load_string($queueDescriptionXml);
+        $queueDescriptionArray = (array)$root;
+        if (array_key_exists('LockDuration', $queueDescriptionArray)) {
+            $queueDescription->setLockDuration($queueDescriptionArray['LockDuration']);
+        }
+
+        if (array_key_exists('MaxSizeInMegabytes', $queueDescriptionArray)) {
+            $queueDescription->setMaxSizeInMegabytes($queueDescriptionArray['MaxSizeInMegabytes']);
+        }
+
+        if (array_key_exists('RequiresDuplicateDetection', $queueDescriptionArray)) {
+            $queueDescription->setRequiresDuplicateDetection($queueDescriptionArray['RequiresDuplicateDetection']);
+        }
+        
+        if (array_key_exists('RequiresSession', $queueDescriptionArray)) {
+            $queueDescription->setRequiresSession($queueDescriptionArray['RequiresSession']);
+        }
+
+        if (array_key_exists('DefaultMessageTimeToLive', $queueDescriptionArray)) {
+            $queueDescription->setDefaultMessageTimeToLive($queueDescriptionArray['DefaultMessageTimeToLive']);
+        }
+
+        if (array_key_exists('DeadLetteringOnMessageExpiration', $queueDescriptionArray)) {
+            $queueDescription->setDeadLetteringOnMessageExpiration($queueDescriptionArray['DeadLetteringOnMessageExpiration']);
+        }
+
+        if (array_key_exists('DuplicateDetectionHistoryTimeWindow', $queueDescriptionArray)) {
+            $queueDescription->setDuplicateDetectionHistoryTimeWindow($queueDescriptionArray['DuplicateDetectionHistoryTimeWindow']);
+        }
+
+        if (array_key_exists('MaxDeliveryCount', $queueDescriptionArray)) {
+            $queueDescription->setMaxDeliveryCount($queueDescriptionArray['MaxDeliveryCount']);
+        }
+
+        if (array_key_exists('EnableBatchedOperations', $queueDescriptionArray)) {
+            $queueDescription->setEnableBatchedOperations($queueDescriptionArray['EnableBatchedOperations']);
+        }
+
+        if (array_key_exists('SizeInBytes', $queueDescriptionArray)) {
+            $queueDescription->setSizeInBytes($queueDescriptionArray['SizeInBytes']);
+        }
+
+        if (array_key_exists('MessageCount', $queueDescriptionArray)) {
+            $queueDescription->setMessageCount($queueDescriptionArray['MessageCount']);
+        }
+
+        return $queueDescription;
+    }
     /** 
      * Creates a queue description instance with default parameters. 
      */
@@ -274,7 +333,7 @@ class QueueDescription
      */
     public function setDuplicateDetectionHistoryTimeWindow($duplicateDetectionHistoryTimeWindow)
     {
-        $this->_duplicateDetectionHistoryTimeWindow = $duplicateDEtectionHistoryTimeWindow;
+        $this->_duplicateDetectionHistoryTimeWindow = $duplicateDetectionHistoryTimeWindow;
     }
 
     /**

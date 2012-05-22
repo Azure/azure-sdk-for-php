@@ -74,11 +74,19 @@ class Content
         $content = new Content();
         $contentXml = simplexml_load_string($xmlString);
         $attributes = $contentXml->attributes();
-        if (array_key_exists($attributes, 'type'))
+
+        if (!empty($attributes['type']))
         {
-            $content->setType($attributes['type']);
+            $content->setType((string)$attributes['type']);
         }
-        $content->setText((string)$contentXml->InnerNode);
+
+        $text = '';
+        foreach ($contentXml->children() as $child)
+        {
+            $text .= $child->asXML();
+        } 
+
+        $content->setText($text);
         return $content;
     }
 

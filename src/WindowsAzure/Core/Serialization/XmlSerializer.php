@@ -25,6 +25,8 @@
 namespace WindowsAzure\Core\Serialization;
 use WindowsAzure\Utilities;
 use WindowsAzure\Resources;
+use WindowsAzure\Validate;
+use WindowsAzure\Services\SerivceBus\Models\QueueDescription;
 
 /**
  * Short description
@@ -165,29 +167,32 @@ class XmlSerializer implements ISerializer
         return $xmlWriter->outputMemory(true);
     }
 
-    public function objectUnserialize($root)
+    public function objectUnserialize($xmlString)
     {
+        Validate::isString($xmlString, 'xmlString');
         $result = array();
         $counter = 0;
-        foreach ($root as $element)
+        echo $xmlString;
+        echo "abcd\n";
+        $root=new \SimpleXMLElement($xmlString);
+        print_r($root);
+        $reflectionClass = new \ReflectionClass($root->getName());
+        $instance = $reflectionClass->newInstance();
+        foreach ($root->children() as $child)
         { 
-            $reflectionClass = new ReflectionClass($element->getName());
-            $instance = $reflectionClass->newInstance();
-            foreach ($element as $child)
+            $setter = $reflectionClass->getMethod('set'.$child->getName());
+            if (count($child->children())==0)
             {
-                $setter = $reflectionClass->getMethod('set'.$child->getName());
-                if (count($child->children())==0)
-                {
-                    $setter->invoke($instance, $child);
-                }
-                else
-                {
-                    $setter->invoke(
-                        $instance, 
-                        $this->objectUnserialize($child->children())
-                    );
-                }
+                $setter->invoke($instance, $child);
             }
+            else
+            {
+                $setter->invoke(
+                    $instance, 
+                    $this->objectUnserialize($child->children())
+                );
+            }
+
             if (count($root) === 1) 
             {
                 return $instance;

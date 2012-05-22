@@ -4,6 +4,7 @@ spl_autoload_register(
       static $classes = null;
       if ($classes === null) {
          $classes = array(
+            'windowsazure\\core\\atom\\atomlink' => '/WindowsAzure/Core/Atom/AtomLink.php',
             'windowsazure\\core\\atom\\category' => '/WindowsAzure/Core/Atom/Category.php',
             'windowsazure\\core\\atom\\content' => '/WindowsAzure/Core/Atom/Content.php',
             'windowsazure\\core\\atom\\entry' => '/WindowsAzure/Core/Atom/Entry.php',

@@ -60,6 +60,27 @@ class Generator
      * @var string 
      */
     private $_version;
+
+    /** 
+     * Creates a generator instance with specified XML string. 
+     */
+    public static function create($xmlString)
+    {
+        $generator = new Generator();
+        $generatorXml = new \SimpleXMLElement($xmlString);
+        $generatorArray = (array)generatorXml;
+        $attributes = $generatorXml->attributes();
+        if (array_key_exists('uri', $attributes)) {
+            $generator->setUri($attributes['uri']);
+        }
+
+        if (array_key_exists('version', $attributes)) {
+            $generator->setVersion($attributes['version']);
+        }
+
+        $generator->setText((string)$generatorXml);  
+        return $generator;
+    }
      
     /** 
      * Creates an ATOM generator instance with specified name.

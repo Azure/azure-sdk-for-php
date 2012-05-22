@@ -24,6 +24,8 @@
 namespace WindowsAzure\Services\ServiceBus\Models;
 use WindowsAzure\Core\Atom\Feed;
 use WindowsAzure\Core\Atom\Content;
+use WindowsAzure\Core\Serialization\XmlSerializer;
+use WindowsAzure\Services\ServiceBus\Models\QueueDescription;
 
 /**
  * The results of a create queue request.
@@ -54,10 +56,9 @@ class CreateQueueResult
     public static function create($response)
     {
         $createQueueResult = new CreateQueueResult();
-        $feed = Feed::creat($response);
-        $entry = $feed->getEntry();
-        $content = $entry->getContent();
-        $this->_queueDescription = XmlSerializer::objectDeserialize($content->getText()); 
+        $feed = Feed::create($response);
+        $content = $feed->getContent();
+        $createQueueResult->_queueDescription = QueueDescription::create($content->getText()); 
         return $createQueueResult;
     }
 

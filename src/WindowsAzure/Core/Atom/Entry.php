@@ -159,25 +159,25 @@ class Entry
         $entry->setAttributes($entryXml->attributes());
         if (array_key_exists($entryXml, 'author'))
         {
-            $author = Category::create($entryXml['author']);
+            $author = Category::create($entryXml['author']->asXML());
             $entry->setAuthor($author);
         }
 
         if (array_key_exists($entryXml, 'category'))
         {
-            $category = Categtory::create($entryXml['category']);
+            $category = Categtory::create($entryXml['category']->asXML());
             $entry->setCategory($category);
         }
 
         if (array_key_exists($entryXml, 'content'))
         {
-            $content = Content::create($entryXml['content']);
+            $content = Content::create($entryXml['content']->asXML());
             $entry->setContent($content);
         }
 
         if (array_key_exists($entryXml, 'contributor'))
         {
-            $contributor = Person::create($entryXml['contributor']);
+            $contributor = Person::create($entryXml['contributor']->asXML());
             $entry->setContributor($contributor);
         }
 
@@ -188,7 +188,7 @@ class Entry
 
         if (array_key_exists($entryXml, 'link'))
         {
-            $link = AtomLink::create($entryXml['link']);
+            $link = AtomLink::create($entryXml['link']->asXML());
             $entry->setLink($link);
         }
 
@@ -204,7 +204,7 @@ class Entry
 
         if (array_key_exists($entryXml, 'source'))
         {
-            $source = Source::create($entryXml['source']);
+            $source = Source::create($entryXml['source']->asXML());
             $entry->setSource($source);
         }
 
