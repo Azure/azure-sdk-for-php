@@ -100,7 +100,8 @@ class FunctionalTestBase extends BlobServiceRestProxyTestBase
      * @covers WindowsAzure\Blob\BlobRestProxy::deleteBlob
      * @covers WindowsAzure\Blob\BlobRestProxy::listBlobs
      */
-    private function safeDeleteContainerContents($name) {
+    private function safeDeleteContainerContents($name)
+    {
         $blobListResult = $this->restProxy->listBlobs($name);
         foreach($blobListResult->getBlobs() as $blob)  {
             try {
@@ -115,7 +116,8 @@ class FunctionalTestBase extends BlobServiceRestProxyTestBase
     /**
      * @covers WindowsAzure\Blob\BlobRestProxy::deleteContainer
      */
-    private function safeDeleteContainer($name) {
+    private function safeDeleteContainer($name)
+    {
         try {
             $this->restProxy->deleteContainer($name);
         }
@@ -127,7 +129,8 @@ class FunctionalTestBase extends BlobServiceRestProxyTestBase
     /**
      * @covers WindowsAzure\Blob\BlobRestProxy::createContainer
      */
-    private function safeCreateContainer($name) {
+    private function safeCreateContainer($name)
+    {
         try {
             $this->restProxy->createContainer($name);
         }
