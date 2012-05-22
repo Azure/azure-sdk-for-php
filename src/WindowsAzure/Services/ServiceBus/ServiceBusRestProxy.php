@@ -192,10 +192,10 @@ class ServiceBusRestProxy extends ServiceRestProxy implements IServiceBus
         $responseHeaders = $response->getHeader(); 
         $brokerProperties = new BrokerProperties();
 
-        if (array_key_exists('BrokerProperties', $responseHeaders))
+        if (array_key_exists('brokerproperties', $responseHeaders))
         {
             $brokerProperties = BrokerProperties::create(
-                $responseHeaders['BrokerProperties']
+                $responseHeaders['brokerproperties']
             );
         }
 

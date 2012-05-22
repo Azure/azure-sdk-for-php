@@ -155,85 +155,85 @@ class BrokerProperties
      *
      * @param string $brokerPropertiesJson A JSON string representing a broker properties.
      */
-    public static function Create($brokerPropertiesJson)
+    public static function create($brokerPropertiesJson)
     {
         $brokerProperties = new BrokerProperties();
 
-        $brokerPropertiesArray = json_decode($brokerPropertiesJson);
+        $brokerPropertiesArray = (array)json_decode($brokerPropertiesJson);
         
         if (array_key_exists('CorrelationId', $brokerPropertiesArray))
         {
-            $brokerProperties->setCorrelationId($brokerProppertiesArray['CorrelationId']);
+            $brokerProperties->setCorrelationId($brokerPropertiesArray['CorrelationId']);
         }
 
         if (array_key_exists('SessionId', $brokerPropertiesArray))
         {
-            $brokerProperties->setSessionId($brokerProppertiesArray['SessionId']);
+            $brokerProperties->setSessionId($brokerPropertiesArray['SessionId']);
         }
 
         if (array_key_exists('DeliveryCount', $brokerPropertiesArray))
         {
-            $brokerProperties->setDeliveryCount($brokerProppertiesArray['DeliveryCount']);
+            $brokerProperties->setDeliveryCount($brokerPropertiesArray['DeliveryCount']);
         }
 
         if (array_key_exists('LockedUntilUtc', $brokerPropertiesArray))
         {
-            $brokerProperties->setLockedUntilUtc($brokerProppertiesArray['LockedUntilUtc']);
+            $brokerProperties->setLockedUntilUtc($brokerPropertiesArray['LockedUntilUtc']);
         }
 
         if (array_key_exists('LockToken', $brokerPropertiesArray))
         {
-            $brokerProperties->setLockToken($brokerProppertiesArray['LockToken']);
+            $brokerProperties->setLockToken($brokerPropertiesArray['LockToken']);
         }
 
         if (array_key_exists('MessageId', $brokerPropertiesArray))
         {
-            $brokerProperties->setMessageId($brokerProppertiesArray['MessageId']);
+            $brokerProperties->setMessageId($brokerPropertiesArray['MessageId']);
         }
 
         if (array_key_exists('Label', $brokerPropertiesArray))
         {
-            $brokerProperties->setLabel($brokerProppertiesArray['Label']);
+            $brokerProperties->setLabel($brokerPropertiesArray['Label']);
         }
 
         if (array_key_exists('ReplyTo', $brokerPropertiesArray))
         {
-            $brokerProperties->setReplyTo($brokerProppertiesArray['ReplyTo']);
+            $brokerProperties->setReplyTo($brokerPropertiesArray['ReplyTo']);
         }
 
         if (array_key_exists('SequenceNumber', $brokerPropertiesArray))
         {
-            $brokerProperties->setSequenceNumber($brokerProppertiesArray['SequenceNumber']);
+            $brokerProperties->setSequenceNumber($brokerPropertiesArray['SequenceNumber']);
         }
 
         if (array_key_exists('TimeToLive', $brokerPropertiesArray))
         {
-            $brokerProperties->setTimeToLive($brokerProppertiesArray['TimeToLive']);
+            $brokerProperties->setTimeToLive($brokerPropertiesArray['TimeToLive']);
         }
 
         if (array_key_exists('To', $brokerPropertiesArray))
         {
-            $brokerProperties->setTo($brokerProppertiesArray['To']);
+            $brokerProperties->setTo($brokerPropertiesArray['To']);
         }
 
         if (array_key_exists('ScheduleEnqueueTimeUtc', $brokerPropertiesArray))
         {
-            $brokerProperties->setScheduleEnqueueTimeUtc($brokerProppertiesArray['ScheduleEnqueueTimeUtc']);
+            $brokerProperties->setScheduleEnqueueTimeUtc($brokerPropertiesArray['ScheduleEnqueueTimeUtc']);
         }
 
         if (array_key_exists('ReplyToSessionId', $brokerPropertiesArray))
         {
-            $brokerProperties->setReplyToSessionId($brokerProppertiesArray['ReplyToSessionId']);
+            $brokerProperties->setReplyToSessionId($brokerPropertiesArray['ReplyToSessionId']);
         }
 
         if (array_key_exists('MessageLocation', $brokerPropertiesArray))
         {
-            $brokerProperties->setMessageLocation($brokerProppertiesArray['MessageLocation']);
+            $brokerProperties->setMessageLocation($brokerPropertiesArray['MessageLocation']);
         }
 
         if (array_key_exists('LockLocation', $brokerPropertiesArray))
         {
-            $brokerProperties->setLockLocation($brokerProppertiesArray['LockLocation']);
+            $brokerProperties->setLockLocation($brokerPropertiesArray['LockLocation']);
         }
 
         return $brokerProperties;        
@@ -316,7 +316,7 @@ class BrokerProperties
      */
     public function setLockedUntilUtc($lockedUntilUtc)
     {
-        $this->_lockedUntilUtc;
+        $this->_lockedUntilUtc = $lockedUntilUtc;
     }
 
     /** 

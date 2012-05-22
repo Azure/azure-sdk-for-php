@@ -190,7 +190,7 @@ class ServiceBusRestProxyTest extends ServiceBusRestProxyTestBase
     }
 
     /**
-     * @covers WindowsAzure\Services\ServiceBus\ServiceBusRestProxy::peekLockMessageWorks
+     * @covers WindowsAzure\Services\ServiceBus\ServiceBusRestProxy::sendMessage
      */
     public function testPeekLockedMessageCanBeCompleted() 
     {
@@ -220,14 +220,12 @@ class ServiceBusRestProxyTest extends ServiceBusRestProxyTestBase
 
         $lockToken = $brokeredMessage->getLockToken();
         $lockedUntil = $brokeredMessage->getLockedUntilUtc();
-        $lockLocation = $brokeredMessage->getLockLocation();
         $this->assertNotNull($lockToken);
         $this->assertNotNull($lockedUntil);
-        $this->assertNotNull($lockLocation);
     } 
 
     /**
-     * @covers WindowsAzure\Services\ServiceBus\ServiceBusRestProxy::peekLockMessageWorks
+     * @covers WindowsAzure\Services\ServiceBus\ServiceBusRestProxy::unlockMessage
      */
     public function testPeekLockedMessageCanBeUnlocked()
     {
@@ -281,19 +279,22 @@ class ServiceBusRestProxyTest extends ServiceBusRestProxyTestBase
         $expectedMessage->setContentType(Resources::TEXT_XML_CONTENT_TYPE); 
 
         $this->safeDeleteQueue($queueName);
-
+        $receiveMessageOptions = new ReceiveMessageOptions();
+        $receiveMessageOptions->setTimeout(5);
+        $receiveMessageOptions->setIsReceiveAndDelete(true);
         $this->createQueue($queueInfo);
-        $this->wrapper->sendQueueMessage($queueName, $exptecedMessage);
-        $receiveMessageResult = $this->wrapper->receiveQueueMessage(
+        $this->wrapper->sendQueueMessage($queueName.'/messages', $expectedMessage);
+        $actualMessage = $this->wrapper->receiveQueueMessage(
             $queueName, 
-            Resources::RECEIVE_AND_DELETE_5_SECONDS
+            $receiveMessageOptions
         );
-        $actualMessage = $receiveMessageResult->getBrokeredMessage();
-        $this->wrapper->assertEquals(
+
+        $this->assertEquals(
             $expectedMessage->getBody(),
             $actualMessage->getBody()
         ); 
-        $this->wrapper->assertEquals(
+
+        $this->assertEquals(
             $expectedMessage->getContentType(),
             $actualMessage->getContentType()
         );
@@ -306,14 +307,10 @@ class ServiceBusRestProxyTest extends ServiceBusRestProxyTestBase
     {
         $topicName = 'createTopicSuccess';
         $topicInfo = new TopicInfo($topicName);
+
+        $this->safeDeleteTopic($topicName); 
+
         $listTopicsOptions = new ListTopicsOptions();
-        try 
-        {
-            $this->wrapper->deleteTopic($topicName);
-        }
-        catch (\Exception $e)
-        {
-        } 
         $createTopicResult = $this->createTopic($topicInfo);
         $listTopicsResult = $this->wrapper->listTopics($listTopicsOptions);
         $getTopicResult = $this->wrapper->getTopic($topicName);
