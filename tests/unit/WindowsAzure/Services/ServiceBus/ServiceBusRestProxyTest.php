@@ -147,19 +147,20 @@ class ServiceBusRestProxyTest extends ServiceBusRestProxyTestBase
             $brokeredMessage
         );
         $receiveMessageOptions = new ReceiveMessageOptions();
-        $receiveMessageOptions->setIsReceiveAndDelete(false);
-        $receiveMessageOptions->setIsPeekLock(true);
+        $receiveMessageOptions->setIsReceiveAndDelete(true);
+        $receiveMessageOptions->setIsPeekLock(false);
+        $receiveMessageOptions->setTimeout(5);
 
-        $receiveMessageResult = $this->wrapper->receiveMessage($queueName.'/messages', $receiveMessageOptions);
-        $this->assertNotNull($receiveMessageResult);
+        $receivedMessage = $this->wrapper->receiveMessage($queueName.'/messages/head', $receiveMessageOptions);
+        $this->assertNotNull($receivedMessage);
         $this->assertEquals(
             $expectedMessageText,
-            $receiveMessageResult->getBrokeredMessage()->getBody()
+            $receivedMessage->getBody()
         );
     }
 
     /**
-     * @covers WindowsAzure\Services\ServiceBus\ServiceBusRestProxy::peekLockMessageWorks
+     * @covers WindowsAzure\Services\ServiceBus\ServiceBusRestProxy::sendMessage
      */
     public function testPeekLockMessageWorks()
     {
@@ -167,18 +168,21 @@ class ServiceBusRestProxyTest extends ServiceBusRestProxyTestBase
         $queueName = 'testPeekLockMessageWorks';
         $expectedMessage = 'testPeekLockMessageWorksMessage';
         $queueInfo = new QueueInfo($queueName, $queueDescription);
+        $this->safeDeleteQueue($queueName);
         $this->createQueue($queueInfo);
         $brokeredMessage = new BrokeredMessage();
         $brokeredMessage->setBody($expectedMessage);
 
-        $this->wrapper->sendQueueMessage($queueName, $brokeredMessage);
-
-        $receiveMessageResult = $this->receveQueueMessage(
+        $this->wrapper->sendQueueMessage($queueName.'/messages', $brokeredMessage);
+        $receiveMessageOptions = new ReceiveMessageOptions();
+        $receiveMessageOptions->setTimeout(5);
+        $receiveMessageOptions->setIsReceiveAndDelete(false); 
+        $receiveMessageOptions->setIsPeekLock(true); 
+        $receivedMessage = $this->wrapper->receiveQueueMessage(
             $queueName, 
-            Resources::PEEK_LOCK_5_SECONDS
+            $receiveMessageOptions
         );
-
-        $actualMessage = $receiveMessageResult->getBrokeredMessage()->getBody();
+        $actualMessage = $receivedMessage->getBody();
         $this->assertEquals(
             $expectedMessage,
             $actualMessage
@@ -194,20 +198,28 @@ class ServiceBusRestProxyTest extends ServiceBusRestProxyTestBase
         $queueName = 'testPeekLockMessageCanBeCompleted';
         $expectedMessage = 'testPeekLockMessageCanBeCompletedMessage';
         $queueInfo = new QueueInfo($queueName, $queueDescription);
+        $this->safeDeleteQueue($queueName);
         $this->createQueue($queueInfo);
         $brokeredMessage = new BrokeredMessage();
         $brokeredMessage->setBody($expectedMessage);
 
-        $this->wrapper->sendQueueMessage($queueName, $brokeredMessage);
-
-        $receiveMessageResult = $this->receveQueueMessage(
-            $queueName, 
-            Resources::PEEK_LOCK_5_SECONDS
+        $this->wrapper->sendQueueMessage(
+            $queueName.'/messages', 
+            $brokeredMessage
         );
 
-        $brokeredMessage = $receiveMessageResult->getBrokeredMessage();
+        $receiveMessageOptions = new ReceiveMessageOptions();
+        $receiveMessageOptions->setTimeout(5);
+        $receiveMessageOptions->setIsReceiveAndDelete(false);
+        $receiveMessageOptions->setIsPeekLock(true);
+
+        $brokeredMessage = $this->wrapper->receiveQueueMessage(
+            $queueName, 
+            $receiveMessageOptions
+        );
+
         $lockToken = $brokeredMessage->getLockToken();
-        $lockedUntil = $brokeredMessage->getLockedUntiUtc();
+        $lockedUntil = $brokeredMessage->getLockedUntilUtc();
         $lockLocation = $brokeredMessage->getLockLocation();
         $this->assertNotNull($lockToken);
         $this->assertNotNull($lockedUntil);
@@ -223,28 +235,31 @@ class ServiceBusRestProxyTest extends ServiceBusRestProxyTestBase
         $queueName = 'testPeekLockMessageCanBeCompleted';
         $expectedMessage = 'testPeekLockMessageCanBeCompletedMessage';
         $queueInfo = new QueueInfo($queueName, $queueDescription);
+        $this->safeDeleteQueue($queueName);
         $this->createQueue($queueInfo);
         $brokeredMessage = new BrokeredMessage();
         $brokeredMessage->setBody($expectedMessage);
 
-        $this->wrapper->sendQueueMessage($queueName, $brokeredMessage);
+        $this->wrapper->sendQueueMessage($queueName.'/messages', $brokeredMessage);
 
-        $receiveMessageResult = $this->receveQueueMessage(
+        $receiveMessageOptions = new ReceiveMessageOptions();
+        $receiveMessageOptions->setTimeout(5);
+        $receiveMessageOptions->setIsReceiveAndDelete(false);
+        $receiveMessageOptions->setIsPeekLock(true);
+
+        $peekedMessage = $this->wrapper->receiveQueueMessage(
             $queueName, 
-            Resources::PEEK_LOCK_5_SECONDS
+            $receiveMessageOptions
         );
 
-        $peekedMessage = $receiveMessageResult->getBrokeredMessage();
         $lockToken = $peekedMessage->getLockToken();
         $lockedUnti = $peekedMessage->getLockedUntilUtc();
 
-        $this->unlockMessage($peekedMessage);
-        $unlockedMessageResult = $this->receiveQueueMessage(
+        $this->wrapper->unlockMessage($peekedMessage);
+        $unlockedMessage = $this->receiveQueueMessage(
             $queueName,
-            Resources::RECEIVE_AND_DELETE_5_SECONDS
+            $receiveMessageOptions
         );
-        
-        $unlockedMessage = $unlockedMessageResult->getBrokeredMessage();
 
         $this->assertNotNull($lockToken);
         $this->assertNotNull($lockedUntilUtc);
@@ -579,24 +594,28 @@ class ServiceBusRestProxyTest extends ServiceBusRestProxyTestBase
         $queueInfo = new QueueInfo($queueName, $queueDescription);
 
         $this->safeDeleteQueue($queueName);
-        $this->wrapper->createQueue($queueInfo);
+        $this->createQueue($queueInfo);
         $brokeredMessage = new BrokeredMessage();
         $brokeredMessage->setProperty('Hello', 'World');
         $brokeredMessage->setProperty('foo', 42);
-        $this->wrapper->sendQueueMessage($queueName, $brokeredMessage);
-        $receiveMessageResult = $this->receiveQueueMessage(
+        $this->wrapper->sendQueueMessage($queueName.'/messages', $brokeredMessage);
+        $receiveMessageOptions = new ReceiveMessageOptions();
+        $receiveMessageOptions->setTimeout(5);
+        $receiveMessageOptions->setIsReceiveAndDelete(true);
+        $receivedMessage = $this->wrapper->receiveQueueMessage(
             $queueName, 
-            Resources::RECEIVE_AND_DELETE_5_SECONDS
+            $receiveMessageOptions
         );
-        $brokeredMessage = $receiveMessageResult->getBrokeredMessage();
+
+        $this->assertNotNull($receivedMessage);
         $this->assertEquals(
             'world',
-            $brokeredMessage->getProperty('hello')
+            $receivedMessage->getProperty('hello')
         );
 
         $this->assertEquals(
             42,
-            $brokeredMessage->getProperty('foo')
+            $receivedMessage->getProperty('foo')
         );
         
     }

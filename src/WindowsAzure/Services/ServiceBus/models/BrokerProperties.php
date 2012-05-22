@@ -151,6 +151,95 @@ class BrokerProperties
     }
 
     /**
+     * Creates a broker properties instace with specified XML string. 
+     *
+     * @param string $brokerPropertiesJson A JSON string representing a broker properties.
+     */
+    public static function Create($brokerPropertiesJson)
+    {
+        $brokerProperties = new BrokerProperties();
+
+        $brokerPropertiesArray = json_decode($brokerPropertiesJson);
+        
+        if (array_key_exists('CorrelationId', $brokerPropertiesArray))
+        {
+            $brokerProperties->setCorrelationId($brokerProppertiesArray['CorrelationId']);
+        }
+
+        if (array_key_exists('SessionId', $brokerPropertiesArray))
+        {
+            $brokerProperties->setSessionId($brokerProppertiesArray['SessionId']);
+        }
+
+        if (array_key_exists('DeliveryCount', $brokerPropertiesArray))
+        {
+            $brokerProperties->setDeliveryCount($brokerProppertiesArray['DeliveryCount']);
+        }
+
+        if (array_key_exists('LockedUntilUtc', $brokerPropertiesArray))
+        {
+            $brokerProperties->setLockedUntilUtc($brokerProppertiesArray['LockedUntilUtc']);
+        }
+
+        if (array_key_exists('LockToken', $brokerPropertiesArray))
+        {
+            $brokerProperties->setLockToken($brokerProppertiesArray['LockToken']);
+        }
+
+        if (array_key_exists('MessageId', $brokerPropertiesArray))
+        {
+            $brokerProperties->setMessageId($brokerProppertiesArray['MessageId']);
+        }
+
+        if (array_key_exists('Label', $brokerPropertiesArray))
+        {
+            $brokerProperties->setLabel($brokerProppertiesArray['Label']);
+        }
+
+        if (array_key_exists('ReplyTo', $brokerPropertiesArray))
+        {
+            $brokerProperties->setReplyTo($brokerProppertiesArray['ReplyTo']);
+        }
+
+        if (array_key_exists('SequenceNumber', $brokerPropertiesArray))
+        {
+            $brokerProperties->setSequenceNumber($brokerProppertiesArray['SequenceNumber']);
+        }
+
+        if (array_key_exists('TimeToLive', $brokerPropertiesArray))
+        {
+            $brokerProperties->setTimeToLive($brokerProppertiesArray['TimeToLive']);
+        }
+
+        if (array_key_exists('To', $brokerPropertiesArray))
+        {
+            $brokerProperties->setTo($brokerProppertiesArray['To']);
+        }
+
+        if (array_key_exists('ScheduleEnqueueTimeUtc', $brokerPropertiesArray))
+        {
+            $brokerProperties->setScheduleEnqueueTimeUtc($brokerProppertiesArray['ScheduleEnqueueTimeUtc']);
+        }
+
+        if (array_key_exists('ReplyToSessionId', $brokerPropertiesArray))
+        {
+            $brokerProperties->setReplyToSessionId($brokerProppertiesArray['ReplyToSessionId']);
+        }
+
+        if (array_key_exists('MessageLocation', $brokerPropertiesArray))
+        {
+            $brokerProperties->setMessageLocation($brokerProppertiesArray['MessageLocation']);
+        }
+
+        if (array_key_exists('LockLocation', $brokerPropertiesArray))
+        {
+            $brokerProperties->setLockLocation($brokerProppertiesArray['LockLocation']);
+        }
+
+        return $brokerProperties;        
+    }
+
+    /**
      * Gets the correlation ID. 
      *
      * @return string 

@@ -148,7 +148,10 @@ class ServiceBusRestProxy extends ServiceRestProxy implements IServiceBus
     public function receiveQueueMessage($queuePath, $receiveMessageOptions)
     {
         $queueMessagePath = sprintf(Resources::QUEUE_MESSAGE_PATH, $queuePath);
-        return receiveMessage($queueMessagePath, $receiveMessageOptions);
+        return $this->receiveMessage(
+            $queueMessagePath, 
+            $receiveMessageOptions
+        );
     }
 
     /**
@@ -165,6 +168,8 @@ class ServiceBusRestProxy extends ServiceRestProxy implements IServiceBus
     {
         $httpCallContext = new HttpCallContext();
         $httpCallContext->setPath($path);
+        $httpCallContext->addStatusCode(Resources::STATUS_OK);
+        $httpCallContext->addStatusCode(Resources::STATUS_CREATED);
         $timeout = $receiveMessageOptions->getTimeout();
         if (!is_null($timeout))
         {
@@ -184,24 +189,16 @@ class ServiceBusRestProxy extends ServiceRestProxy implements IServiceBus
         }
 
         $response = $this->sendContext($httpCallContext);
-        
         $responseHeaders = $response->getHeader(); 
-        if (array_key_exists('BrokerProperties', $resonseHeaders))
+        $brokerProperties = new BrokerProperties();
+
+        if (array_key_exists('BrokerProperties', $responseHeaders))
         {
             $brokerProperties = BrokerProperties::create(
                 $responseHeaders['BrokerProperties']
             );
         }
-        else {
-            $brokerProperties = new BrokerProperties();
-        }
-        
-        if (array_key_exists('Location', $responseHeaders))
-        {
-            $brokerProperties->setLockLocation(
-                $responseHeaders['Location']);
-        }
-        
+
         $brokeredMessage = new BrokeredMessage($brokerProperties);
         
         if (array_key_exists(Resources::CONTENT_TYPE, $responseHeaders))
@@ -214,7 +211,7 @@ class ServiceBusRestProxy extends ServiceRestProxy implements IServiceBus
             $brokeredMessage->setDate($responseHeaders['Date']);
         }
 
-        $brokeredMessage->setBody($respose->getBody());
+        $brokeredMessage->setBody($response->getBody());
 
         foreach (array_keys($responseHeaders) as $headerKey)
         {

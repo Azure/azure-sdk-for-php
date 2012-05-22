@@ -73,8 +73,27 @@ class RuleDescription
      * 
      * @param string $ruleDescriptionXml A XML string describing the Rule.
      */
-    public static function create($xmlString)
+    public static function create($ruleDescriptionXml)
     {
+        $ruleDescription = new RuleDescription();
+        $root = simplexml_load_string($ruleDescriptionXml);
+        $ruleDescriptionArray = (array)$root;
+        if (array_key_exists('Filter', $ruleDescriptionArray))
+        {
+            $ruleDescription->setFilter($ruleDescriptionArray['Filter']);
+        } 
+
+        if (array_key_exists('Action', $ruleDescriptionArray))
+        {
+            $ruleDescription->setAction($ruleDescriptionArray['Action']);
+        } 
+
+        if (array_key_exists('Name', $ruleDescriptionArray))
+        {
+            $ruleDescription->setName($ruleDescriptionArray['Name']);
+        } 
+       
+        return $ruleDescription;
     }
     
     /**
@@ -110,12 +129,33 @@ class RuleDescription
     /**
      * Sets the action of the rule description. 
      * 
-     * @param Action $filter The action of the rule description. 
+     * @param Action $action The action of the rule description. 
      */
     public function setAction($action)
     {
         $this->_action = $action;
     }
+
+    /**
+     * Gets the name. 
+     *
+     * @return string
+     */
+    public function getName()
+    {
+        return $this->_name;
+    }
+
+    /**
+     * Sets the name of the rule description. 
+     * 
+     * @param string $name The name of the rule description. 
+     */
+    public function setName($name)
+    {
+        $this->_name = $name;
+    }
+
 
 }
 ?>

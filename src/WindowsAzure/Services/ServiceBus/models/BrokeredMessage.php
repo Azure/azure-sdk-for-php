@@ -278,7 +278,7 @@ class BrokeredMessage
      * 
      * @return \Date
      */
-    public function getLockUntiUtc() {
+    public function getLockedUntilUtc() {
         return $this->_brokerProperties->getLockedUntilUtc();
     }
 
