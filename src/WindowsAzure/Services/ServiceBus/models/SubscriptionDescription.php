@@ -124,6 +124,41 @@ class SubscriptionDescription
         if (array_key_exists('LockDuration', $subscriptionDescriptionArray)) {
             $subscriptionDescription->setLockDuration($subscriptionDescriptionArray['LockDuration']);
         }
+
+        if (array_key_exists('RequiresSession', $subscriptionDescriptionArray)) {
+            $subscriptionDescription->setRequiresSession($subscriptionDescriptionArray['RequiresSession']);
+        }
+
+        if (array_key_exists('DefaultMessageTimeToLive', $subscriptionDescriptionArray)) {
+            $subscriptionDescription->setDefaultMessageTimeToLive($subscriptionDescriptionArray['DefaultMessageTimeToLive']);
+        }
+
+        if (array_key_exists('DeadLetteringOnMessageExpiration', $subscriptionDescriptionArray)) {
+            $subscriptionDescription->setDeadLetteringOnMessageExpiration($subscriptionDescriptionArray['DeadLetteringOnMessageExpiration']);
+        }
+
+        if (array_key_exists('DeadLetteringOnFilterEvaluationException', $subscriptionDescriptionArray)) {
+            $subscriptionDescription->setDeadLetteringOnFilterEvaluationException(
+                $subscriptionDescriptionArray['DeadLetteringOnFilterEvaluationException']);
+        }
+
+        if (array_key_exists('DefaultRuleDescription', $subscriptionDescriptionArray)) {
+            $subscriptionDescription->setDefaultRuleDescription($subscriptionDescriptionArray['DefaultRuleDescription']);
+        }
+
+        if (array_key_exists('MessageCount', $subscriptionDescriptionArray)) {
+            $subscriptionDescription->setMessageCount($subscriptionDescriptionArray['MessageCount']);
+        }
+
+        if (array_key_exists('MaxDeliveryCount', $subscriptionDescriptionArray)) {
+            $subscriptionDescription->setMaxDeliveryCount($subscriptionDescriptionArray['MaxDeliveryCount']);
+        }
+
+        if (array_key_exists('EnableBatchedOperations', $subscriptionDescriptionArray)) {
+            $subscriptionDescription->setEnableBatchedOperations($subscriptionDescriptionArray['EnableBatchedOperations']);
+        }
+
+        return $subscriptionDescription;
     }
 
     /**

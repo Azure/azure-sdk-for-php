@@ -67,6 +67,15 @@ class RuleDescription
     public function __construct()
     {   
     }
+
+    /**
+     * Creates a Rule Description with specified XML string. 
+     * 
+     * @param string $ruleDescriptionXml A XML string describing the Rule.
+     */
+    public static function create($xmlString)
+    {
+    }
     
     /**
      * Gets the filter. 
