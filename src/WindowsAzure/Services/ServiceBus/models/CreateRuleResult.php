@@ -56,7 +56,8 @@ class CreateRuleResult
         $createRuleResult = new CreateRuleResult();
         $feed = Feed::create($response);
         $content = $feed->getContent();
-        $this->_ruleDescription = RuleDescription::create($content->getText()); 
+        $ruleDescription = RuleDescription::create($content->getText()); 
+        $createRuleResult->setRuleDescription($ruleDescription);
         return $createRuleResult;
     }
 

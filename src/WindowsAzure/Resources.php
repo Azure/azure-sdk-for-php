@@ -241,6 +241,7 @@ class Resources
     // Service Bus
     const LIST_TOPIC_PATH = '$Resources/Topics';
     const LIST_QUEUE_PATH = '$Resources/Queues';
+    const LIST_RULE_PATH = '%s/subscriptions/%s/rules';
     const QUEUE_MESSAGE_PATH = '%s/messages/head';
     const RULE_PATH = '%s/subscriptions/%s/rules/%s';
     const SUBSCRIPTION_PATH = '%s/subscriptions/%s';

@@ -149,7 +149,7 @@ class ServiceBusRestProxyTestBase extends ServiceRestProxyTestBase
             $topicSubscriptionRuleNameArray = explode('::', $topicSubscriptionRuleName);
             $topicName = $topicSubscriptionRuleNameArray[0];
             $subscriptionName = $topicSubscriptionRuleNameArray[1];
-            $RuleName = $topicSubscriptionRuleNameArray[2];
+            $ruleName = $topicSubscriptionRuleNameArray[2];
             $this->safeDeleteRule($topicName, $subscriptionName, $ruleName);
         }
         

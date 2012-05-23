@@ -38,6 +38,7 @@ use WindowsAzure\Services\ServiceBus\Models\CreateQueueResult;
 use WindowsAzure\Services\ServiceBus\Models\CreateRuleResult;
 use WindowsAzure\Services\ServiceBus\Models\CreateTopicResult;
 use WindowsAzure\Services\ServiceBus\Models\CreateSubscriptionResult;
+use WindowsAzure\Services\ServiceBus\Models\ListRulesOptions;
 use WindowsAzure\Services\ServiceBus\Models\ListTopicsOptions;
 use WindowsAzure\Services\ServiceBus\Models\ListSubscriptionsOptions;
 use WindowsAzure\Services\ServiceBus\Models\QueueDescription;
@@ -228,7 +229,7 @@ class ServiceBusRestProxyTest extends ServiceBusRestProxyTestBase
     /**
      * @covers WindowsAzure\Services\ServiceBus\ServiceBusRestProxy::unlockMessage
      */
-    public function DisabledtestPeekLockedMessageCanBeUnlocked()
+    public function testPeekLockedMessageCanBeUnlocked()
     {
         $queueDescription = new QueueDescription();
         $queueName = 'testPeekLockMessageCanBeCompleted';
@@ -307,7 +308,7 @@ class ServiceBusRestProxyTest extends ServiceBusRestProxyTestBase
      * @covers WindowsAzure\Services\ServiceBus\ServiceBusRestProxy::listTopics
      * @covers WindowsAzure\Services\ServiceBus\ServiceBusRestProxy::getTopic
      */
-    public function DisabledtestCreateListFetchAndDeleteTopicSuccess()
+    public function testCreateListFetchAndDeleteTopicSuccess()
     {
         $topicName = 'createTopicSuccess';
         $topicInfo = new TopicInfo($topicName);
@@ -331,7 +332,7 @@ class ServiceBusRestProxyTest extends ServiceBusRestProxyTestBase
     /**
      * @covers WindowsAzure\Services\ServiceBus\ServiceBusRestProxy::createSubscription
      */
-    public function DisabledtestSubscriptionCanBeCreatedOnTopics()
+    public function testSubscriptionCanBeCreatedOnTopics()
     {
         
         $topicName = 'testCreateSubscriptionWorksTopic';
@@ -353,7 +354,7 @@ class ServiceBusRestProxyTest extends ServiceBusRestProxyTestBase
     /**
      * @covers WindowsAzure\Services\ServiceBus\ServiceBusRestProxy::listSubscription
      */
-    public function DisabledtestSubscripitonsCanBeListed()
+    public function testSubscriptionsCanBeListed()
     {
         $topicName = 'testSubscriptionCanBeListed';
         $subscriptionName = 'sub';
@@ -370,8 +371,9 @@ class ServiceBusRestProxyTest extends ServiceBusRestProxyTestBase
         );
 
         $this->assertNotNull($listSubscriptionsResult);
-        $this->assertEquals(1, count(
-            $listSubscriptionsResult->getSubscriptionDescription())
+        $this->assertEquals(
+            1, 
+            count($listSubscriptionsResult->getSubscriptionDescription())
         );
     }
 
@@ -496,7 +498,7 @@ class ServiceBusRestProxyTest extends ServiceBusRestProxyTestBase
         $this->assertNotNull($createSubscriptionResult);
     }
 
-    public function DisabledtestRulesCanBeCreatedOnSubscription()
+    public function testRulesCanBeCreatedOnSubscription()
     {
         $topicName = 'testRulesCanBeCreatedOnSubscription';
         $subscriptionName = 'sub';
@@ -511,14 +513,10 @@ class ServiceBusRestProxyTest extends ServiceBusRestProxyTestBase
         $this->createSubscription($topicName, $subscriptionInfo);
         $createRuleResult = $this->createRule($topicName, $subscriptionName, $ruleInfo);
         $this->assertNotNull($createRuleResult);
-        $this->assertEquals(
-            $ruleName,
-            $createRuleResult->getName()
-        );
     
     }
 
-    public function DisabledtestRulesCanBeListedAndDefaultRuleIsPrecreated()
+    public function testRulesCanBeListedAndDefaultRuleIsPrecreated()
     {
         $topicName = 'testRulesCanBeListedAndDefaultRuleIsPrecreated';
         $subscriptionName = 'sub';
@@ -528,6 +526,7 @@ class ServiceBusRestProxyTest extends ServiceBusRestProxyTestBase
         $subscriptionInfo = new SubscriptionInfo($subscriptionName);
         $ruleInfo = new RuleInfo($ruleName);
         $secondRuleInfo = new RuleInfo($secondRuleName);
+        $listRulesOptions = new ListRulesOptions();
 
         $this->safeDeleteSubscription($topicName, $subscriptionName);
         $this->safeDeleteTopic($topicName);
@@ -537,10 +536,10 @@ class ServiceBusRestProxyTest extends ServiceBusRestProxyTestBase
         $this->createRule($topicName, $subscriptionName, $ruleInfo);
         $this->createRule($topicName, $subscriptionName, $secondRuleInfo);
         
-        $listRulesResult = $this->wrapper->listRules($topicName, $subscriptionName);
+        $listRulesResult = $this->wrapper->listRules($topicName, $subscriptionName, $listRulesOptions);
 
-        $this->assertNotNull($listRulesReslt);
-        $this->assertEquals(2, $listRulesResult->getRuleDescription());
+        $this->assertNotNull($listRulesResult);
+        $this->assertEquals(2, count($listRulesResult->getRuleDescription()));
         
     }
 
@@ -563,7 +562,7 @@ class ServiceBusRestProxyTest extends ServiceBusRestProxyTestBase
         $this->assertNotNull($getRuleResult);
     } 
 
-    public function DisabledtestRuleMayBeDeleted()
+    public function testRuleMayBeDeleted()
     {
         $topicName = 'testRuleMayBeDeleted';
         $subscriptionName = 'sub';
@@ -574,6 +573,7 @@ class ServiceBusRestProxyTest extends ServiceBusRestProxyTestBase
         $subscriptionInfo = new SubscriptionInfo($subscriptionName);
         $firstRuleInfo = new RuleInfo($firstRuleName);
         $secondRuleInfo = new RuleInfo($secondRuleName);
+        $listRulesOptions = new ListRulesOptions();
         
         $this->safeDeleteSubscription($topicName, $subscriptionName);
         $this->safeDeleteTopic($topicName);
@@ -581,17 +581,16 @@ class ServiceBusRestProxyTest extends ServiceBusRestProxyTestBase
         $this->createTopic($topicInfo);
         $this->createSubscription($topicName, $subscriptionInfo);
         $this->createRule($topicName, $subscriptionName, $firstRuleInfo);
-        $this->createRule($topicName, $subscriptionName, $SecondRuleInfo);
+        $this->createRule($topicName, $subscriptionName, $secondRuleInfo);
 
-        $this->deleteRule($topicName, $subscriptionName, $secondRuleName);
-        $this->deleteRule($topicName, $subscriptionName, Resources::DEFAULT_RULE_NAME); 
+        $this->wrapper->deleteRule($topicName, $subscriptionName, $secondRuleName);
+        $this->wrapper->deleteRule($topicName, $subscriptionName, Resources::DEFAULT_RULE_NAME); 
 
-        $listRulesResult = $this->listRule($topicName, $subscriptionName);
-        
+        $listRulesResult = $this->wrapper->listRules($topicName, $subscriptionName, $listRulesOptions);
         $ruleDescription = $listRulesResult->getRuleDescription();
         
         $this->assertNotNull($ruleDescription);
-        $this->assertEquals(1, count($ruleDescription));
+        $this->assertEquals(0, count($ruleDescription));
     }
    
     public function testRulesMayHaveActionAndFilter()

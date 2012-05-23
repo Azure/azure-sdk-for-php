@@ -54,12 +54,22 @@ class ListRulesResult
      */
     public static function create($response)
     {
-        $getRulesResult = new ListRulesResult();
+        $listRulesResult = new ListRulesResult();
         $feed = Feed::create($response);
-        $entry = $feed->getEntry();
-        $content = $entry->getContent();
-        $ruleDescription = XmlSerializer::objectDeserialize($content->getText());  
-        $getRulesResult->setRulesDescription($ruleDescription);
+        $entries = $feed->getEntry();
+        $ruleDescription = array();
+        if (!is_null($entries))
+        {
+            foreach ($entries as $entry)
+            {
+                $content = $entry->getContent();
+                $ruleDescriptionInstance = RuleDescription::create($content->getText());
+                $ruleDescription[] = $ruleDescriptionInstance;
+            }
+        }
+
+        $listRulesResult->setRuleDescription($ruleDescription);
+        return $listRulesResult;
     }
 
     /**

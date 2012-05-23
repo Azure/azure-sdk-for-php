@@ -46,6 +46,7 @@ use WindowsAzure\Services\ServiceBus\Models\GetRuleResult;
 use WindowsAzure\Services\ServiceBus\Models\GetSubscriptionResult;
 use WindowsAzure\Services\ServiceBus\Models\GetTopicResult;
 use WindowsAzure\Services\ServiceBus\Models\ListSubscriptionsResult;
+use WindowsAzure\Services\ServiceBus\Models\ListRulesResult;
 use WindowsAzure\Services\ServiceBus\Models\QueueDescription;
 use WindowsAzure\Services\ServiceBus\Models\QueueInfo;
 use WindowsAzure\Services\ServiceBus\Models\RuleDescription;
@@ -656,6 +657,27 @@ class ServiceBusRestProxy extends ServiceRestProxy implements IServiceBus
             $subscriptionName,
             $ruleInfo->getName()
         );
+
+        $ruleDescriptionXml = XmlSerializer::objectSerialize(
+            $ruleInfo->getRuleDescription(),
+            'RuleDescription'
+        );
+
+        $entry = new Entry();
+        $content = new Content($ruleDescriptionXml);
+        $content->setType(Resources::APPLICATION_XML_CONTENT_TYPE);
+        $entry->setContent($content);
+        $entry->setAttribute(
+            Resources::XMLNS_ATOM,
+            Resources::ATOM_NAMESPACE
+        );
+
+        $entry->setAttribute(
+            Resources::XMLNS,
+            Resources::SERVICE_BUS_NAMESPACE
+        );
+
+        $httpCallContext->setBody($entry->toXml());
         $httpCallContext->setPath($rulePath);
         $response = $this->sendContext($httpCallContext);
         $createRuleResult = CreateRuleResult::create($response->getBody()); 
@@ -674,12 +696,13 @@ class ServiceBusRestProxy extends ServiceRestProxy implements IServiceBus
     public function deleteRule($topicPath, $subscriptionName, $ruleName) 
     {
         $httpCallContext = new HttpCallContext();
+        $httpCallContext->addStatusCode(Resources::STATUS_OK);
         $httpCallContext->setMethod(Resources::HTTP_DELETE);
         $rulePath = sprintf(
             Resources::RULE_PATH,
             $topicPath,
             $subscriptionName,
-            $ruleDescription->getName()
+            $ruleName
         );
         $httpCallContext->setPath($rulePath);
         $this->sendContext($httpCallContext);
@@ -724,19 +747,18 @@ class ServiceBusRestProxy extends ServiceRestProxy implements IServiceBus
     {
         $httpCallContext = new HttpCallContext();
         $httpCallContext->setMethod(Resources::HTTP_GET);
-        $ruleName = $listRulesOptions->getName();
+        $httpCallContext->addStatusCode(Resources::STATUS_OK);
         $rulePath = sprintf(
-            Resources::RULE_PATH,
+            Resources::LIST_RULE_PATH,
             $topicPath,
-            $subscriptionName,
-            $ruleName
+            $subscriptionName
         );
 
         $httpCallContext->setPath($rulePath);
         $response = $this->sendContext($httpCallContext);
-        $listRuleResult = ListRuleResult::create($response->getBody());
+        $listRulesResult = ListRulesResult::create($response->getBody());
 
-        return $listRuleResult;
+        return $listRulesResult;
     }
     
 }

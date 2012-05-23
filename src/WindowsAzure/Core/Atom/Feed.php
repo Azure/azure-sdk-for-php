@@ -175,7 +175,7 @@ class Feed
             {
                 foreach ($entryXml as $entryXmlInstance)
                 {
-                    $entryInstance = Entry::create($entryXmlInstance->asXML());                    
+                    $entryInstance = Entry::create($entryXmlInstance->asXML());
                     $entry[] = $entryInstance;
                 }
             }
