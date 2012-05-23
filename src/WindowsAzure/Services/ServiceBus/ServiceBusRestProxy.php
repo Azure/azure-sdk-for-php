@@ -246,7 +246,7 @@ class ServiceBusRestProxy extends ServiceRestProxy implements IServiceBus
      */
     public function sendTopicMessage($topicName, $brokeredMessage)
     {
-        $this->sendMessage($topicName);
+        $this->sendMessage($topicName, $brokeredMessage);
     } 
 
     /**
