@@ -245,7 +245,7 @@ class ServiceBusRestProxy extends ServiceRestProxy implements IServiceBus
      */
     public function sendTopicMessage($topicName, $brokeredMessage)
     {
-        $this->sendMessage($topicName);
+        $this->sendMessage($topicName, $brokeredMessage);
     } 
 
     /**
@@ -679,7 +679,7 @@ class ServiceBusRestProxy extends ServiceRestProxy implements IServiceBus
             Resources::RULE_PATH,
             $topicPath,
             $subscriptionName,
-            $ruleDescription->getName()
+            $ruleName
         );
         $httpCallContext->setPath($rulePath);
         $this->sendContext($httpCallContext);
