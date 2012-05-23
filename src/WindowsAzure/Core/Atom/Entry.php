@@ -157,65 +157,67 @@ class Entry
         $entry = new Entry();
         $entryXml = simplexml_load_string($xmlString);
         $entry->setAttributes($entryXml->attributes());
-        if (array_key_exists($entryXml, 'author'))
+        $entryArray = (array)$entryXml;
+
+        if (array_key_exists('author', $entryArray))
         {
-            $author = Category::create($entryXml['author']->asXML());
+            $author = Category::create($entryArray['author']->asXML());
             $entry->setAuthor($author);
         }
 
-        if (array_key_exists($entryXml, 'category'))
+        if (array_key_exists('category', $entryArray))
         {
-            $category = Categtory::create($entryXml['category']->asXML());
+            $category = Categtory::create($entryArray['category']->asXML());
             $entry->setCategory($category);
         }
 
-        if (array_key_exists($entryXml, 'content'))
+        if (array_key_exists('content', $entryArray))
         {
-            $content = Content::create($entryXml['content']->asXML());
+            $content = Content::create($entryArray['content']->asXML());
             $entry->setContent($content);
         }
 
-        if (array_key_exists($entryXml, 'contributor'))
+        if (array_key_exists('contributor', $entryArray))
         {
-            $contributor = Person::create($entryXml['contributor']->asXML());
+            $contributor = Person::create($entryArray['contributor']->asXML());
             $entry->setContributor($contributor);
         }
 
-        if (array_key_exists($entryXml, 'id'))
+        if (array_key_exists('id', $entryArray))
         {
-            $entry->setId($entryXml['id']);
+            $entry->setId($entryArray['id']);
         }
 
-        if (array_key_exists($entryXml, 'link'))
+        if (array_key_exists('link', $entryArray))
         {
-            $link = AtomLink::create($entryXml['link']->asXML());
+            $link = AtomLink::create($entryArray['link']->asXML());
             $entry->setLink($link);
         }
 
-        if (array_key_exists($entryXml, 'published'))
+        if (array_key_exists('published', $entryArray))
         {
-            $entry->setPublished($entryXml['published']);
+            $entry->setPublished($entryArray['published']);
         }
 
-        if (array_key_exists($entryXml, 'rights'))
+        if (array_key_exists('rights', $entryArray))
         {
-            $entry->setRights($entryXml['rights']);
+            $entry->setRights($entryArray['rights']);
         }
 
-        if (array_key_exists($entryXml, 'source'))
+        if (array_key_exists('source', $entryArray))
         {
-            $source = Source::create($entryXml['source']->asXML());
+            $source = Source::create($entryArray['source']->asXML());
             $entry->setSource($source);
         }
 
-        if (array_key_exists($entryXml, 'title'))
+        if (array_key_exists('title', $entryArray))
         {
-            $entry->setTitle($entryXml['title']);
+            $entry->setTitle($entryArray['title']);
         }
 
-        if (array_key_exists($entryXml, 'updated'))
+        if (array_key_exists('updated', $entryArray))
         {
-            $entry->setUpdated($entryXml['updated']);
+            $entry->setUpdated($entryArray['updated']);
         }
          
         return $entry;

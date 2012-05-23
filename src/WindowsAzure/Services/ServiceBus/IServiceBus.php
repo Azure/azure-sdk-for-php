@@ -254,17 +254,17 @@ interface IServiceBus extends FilterableService
     public function getSubscription($topicPath, $subscriptionName); 
 
     /**
-     * Lists subscription. 
+     * Lists subscriptions. 
      * 
-     * @param string                   $topicPath               The path of 
+     * @param string                   $topicPath                The path of 
      * the topic.
-     * @param \ListSubscriptionOptions $listSubscriptionOptions The options
-     * to list the subscription. 
+     * @param ListSubscriptionsOptions $listSubscriptionsOptions The options
+     * to list the subscriptions. 
      *
      * @throws Exception 
      * @return none
      */
-    public function listSubscription($topicPath, $listSubscriptionOptions); 
+    public function listSubscriptions($topicPath, $listSubscriptionsOptions); 
 
     /**
      * Creates a rule. 

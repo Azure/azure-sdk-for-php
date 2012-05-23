@@ -56,9 +56,10 @@ class CreateSubscriptionResult
         $createSubscriptionResult = new CreateSubscriptionResult();
         $feed = Feed::create($response);
         $content = $feed->getContent();
-        $this->_subscriptionDescription = SubscriptionDescription::create(
+        $subscriptionDescription = SubscriptionDescription::create(
             $content->getText()
         ); 
+        $createSubscriptionResult->setSubscriptionDescription($subscriptionDescription);
         return $createSubscriptionResult;
     }
 

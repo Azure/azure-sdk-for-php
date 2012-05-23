@@ -179,7 +179,7 @@ class BrokeredMessage
      * @param string $propertyValue The value of the property.
      */
     public function setProperty($propertyName, $propertyValue) {
-        $this->customProperties[$propertyName] = $propertyValue;
+        $this->_customProperties[$propertyName] = $propertyValue;
     }
 
     /**

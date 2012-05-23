@@ -88,8 +88,8 @@ class ServiceBusRestProxyTestBase extends ServiceRestProxyTestBase
 
     public function createRule($topicName, $subscriptionName, $ruleInfo) 
     {
-        $topicSubscriptionRuleArray = array($topicName, $subscriptionName, $ruleInfo->getName);
-        $this->_createdRules[] = join('::', $topicSubscriptionRuleArray());
+        $topicSubscriptionRuleArray = array($topicName, $subscriptionName, $ruleInfo->getName());
+        $this->_createdRules[] = join('::', $topicSubscriptionRuleArray);
         return $this->wrapper->createRule($topicName, $subscriptionName, $ruleInfo);
     }
 

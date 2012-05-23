@@ -248,6 +248,11 @@ class Resources
     const UNIQUE_ID_PREFIX = 'urn:uuid:';
     const SERVICE_BUS_NAMESPACE = 'http://schemas.microsoft.com/netservices/2010/10/servicebus/connect';
     const BROKER_PROPERTIES = 'BrokerProperties';
+    const XMLNS_ATOM = 'xmlns:atom';
+    const XMLNS = 'xmlns';
+    const ATOM_NAMESPACE = 'http://www.w3.org/2005/Atom';
+    const LIST_SUBSCRIPTION_PATH ='%s/subscriptions';
+     
 
     // PHP URL Keys
     const PHP_URL_SCHEME   = 'scheme';

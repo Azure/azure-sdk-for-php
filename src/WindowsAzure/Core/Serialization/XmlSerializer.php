@@ -172,8 +172,6 @@ class XmlSerializer implements ISerializer
         Validate::isString($xmlString, 'xmlString');
         $result = array();
         $counter = 0;
-        echo $xmlString;
-        echo "abcd\n";
         $root=new \SimpleXMLElement($xmlString);
         print_r($root);
         $reflectionClass = new \ReflectionClass($root->getName());

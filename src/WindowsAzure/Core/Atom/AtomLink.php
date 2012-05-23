@@ -87,7 +87,6 @@ class AtomLink
 
         if (array_key_exists('href', $attributes))
         {
-            echo "yes, I am here.\n";
             $atomLink->setHref((string)$attributes["href"]);
         }
 

@@ -63,7 +63,7 @@ class SubscriptionInfo
      * of the subscription.
      * 
      */
-    public function __construct($name, $subscriptionDescription = null)
+    public function __construct($name = Resources::EMPTY_STRING, $subscriptionDescription = null)
     {
         $this->_name = $name;
         if (is_null($subscriptionDescription))

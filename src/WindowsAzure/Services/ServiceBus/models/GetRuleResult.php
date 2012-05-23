@@ -57,7 +57,7 @@ class GetRuleResult
     {
         $getRuleResult = new GetRuleResult();
         $feed = Feed::create($response);
-        $content = $entry->getContent();
+        $content = $feed->getContent();
         $ruleDescription = RuleDescription::create($content->getText());
         $getRuleResult->setRuleDescription($ruleDescription);
         return $getRuleResult;

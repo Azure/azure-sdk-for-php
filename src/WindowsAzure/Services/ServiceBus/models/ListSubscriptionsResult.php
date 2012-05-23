@@ -54,12 +54,23 @@ class ListSubscriptionsResult
      */
     public static function create($response)
     {
-        $getSubscriptionsResult = new ListSubscriptionsResult();
+        $listSubscriptionsResult = new ListSubscriptionsResult();
+        $subscriptionDescription = array();  
         $feed = Feed::create($response);
-        $entry = $feed->getEntry();
-        $content = $entry->getContent();
-        $subscriptionDescription = XmlSerializer::objectDeserialize($content->getText());  
-        $getSubscriptionsResult->setSubscriptionsDescription($subscriptionDescription);
+        $entries = $feed->getEntry();
+        if (!is_null($entries))
+        {
+            foreach ($entries as $entry)
+            {
+                $content=$entry->getContent();
+                $subscriptionDescriptionInstance = SubscriptionDescription::create($content->getText());
+                $subscriptionDescription[] = $subscriptionDescriptionInstance;
+            }
+        }
+
+        $listSubscriptionsResult->setSubscriptionDescription($subscriptionDescription);
+
+        return $listSubscriptionsResult;
     }
 
     /**
@@ -74,7 +85,7 @@ class ListSubscriptionsResult
      * 
      * @return SubscriptionDescription
      */
-    public function getRuleDescription()
+    public function getSubscriptionDescription()
     {
         return $this->_subscriptionDescription;
     }
@@ -85,7 +96,7 @@ class ListSubscriptionsResult
      * @param SubscriptionDescription $subscriptionDescription The description of the
      * subscription.
      */
-    public function setRuleDescription($subscriptionDescription)
+    public function setSubscriptionDescription($subscriptionDescription)
     {
         $this->_subscriptionDescription = $subscriptionDescription;
     }

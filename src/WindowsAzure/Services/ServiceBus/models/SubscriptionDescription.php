@@ -119,7 +119,7 @@ class SubscriptionDescription
     public static function create($subscriptionDescriptionXml)
     {
         $subscriptionDescription = new SubscriptionDescription();
-        $root = simplexml_load_string($subscriptionDescription);
+        $root = simplexml_load_string($subscriptionDescriptionXml);
         $subscriptionDescriptionArray = (array)$root;
         if (array_key_exists('LockDuration', $subscriptionDescriptionArray)) {
             $subscriptionDescription->setLockDuration($subscriptionDescriptionArray['LockDuration']);

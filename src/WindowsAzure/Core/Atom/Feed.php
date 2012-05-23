@@ -166,6 +166,21 @@ class Feed
             $feed->setAttributes((array)$attributes);
         }
 
+        if (array_key_exists('entry', $feedArray))
+        {
+            $entry = array();
+
+            $entryXml = $feedArray['entry'];
+            if (is_array($entryXml))
+            {
+                foreach ($entryXml as $entryXmlInstance)
+                {
+                    $entryInstance = Entry::create($entryXmlInstance->asXML());                    
+                    $entry[] = $entryInstance;
+                }
+            }
+        }
+
         if (array_key_exists('content', $feedArray))
         {
             $content = Content::create($feedArray['content']->asXML());
