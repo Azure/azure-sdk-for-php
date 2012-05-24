@@ -18,7 +18,6 @@ spl_autoload_register(
             'tests\\framework\\tableservicerestproxytestbase' => '/framework/TableServiceRestProxyTestBase.php',
             'tests\\framework\\testresources' => '/framework/TestResources.php',
             'tests\\framework\\virtualfilesystem' => '/framework/VirtualFileSystem.php',
-            'tests\\framework\\wraprestproxytestbase' => '/framework/WrapRestProxyTestBase.php',
             'tests\\functional\\windowsazure\\blob\\blobservicefunctionaltest' => '/functional/WindowsAzure/Blob/BlobServiceFunctionalTest.php',
             'tests\\functional\\windowsazure\\blob\\blobservicefunctionaltestdata' => '/functional/WindowsAzure/Blob/BlobServiceFunctionalTestData.php',
             'tests\\functional\\windowsazure\\blob\\blobserviceintegrationtest' => '/functional/WindowsAzure/Blob/BlobServiceIntegrationTest.php',
@@ -213,8 +212,7 @@ spl_autoload_register(
             'tests\\unit\\windowsazure\\table\\models\\updateentityresulttest' => '/unit/WindowsAzure/Table/Models/UpdateEntityResultTest.php',
             'tests\\unit\\windowsazure\\table\\tableservicetest' => '/unit/WindowsAzure/Table/TableServiceTest.php',
             'tests\\unit\\windowsazure\\utilitiestest' => '/unit/WindowsAzure/Common/Internal/UtilitiesTest.php',
-            'tests\\unit\\windowsazure\\validatetest' => '/unit/WindowsAzure/Common/Internal/ValidateTest.php',
-            'wrapfiltertest' => '/unit/WindowsAzure/Common/Internal/Filters/WrapFilterTest.php'
+            'tests\\unit\\windowsazure\\validatetest' => '/unit/WindowsAzure/Common/Internal/ValidateTest.php'
           );
       }
       $cn = strtolower($class);
