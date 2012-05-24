@@ -31,7 +31,6 @@ use WindowsAzure\Queue\QueueSettings;
 use WindowsAzure\Blob\BlobSettings;
 use WindowsAzure\Table\TableSettings;
 use WindowsAzure\ServiceManagement\ServiceManagementSettings;
-use WindowsAzure\ServiceBus\ServiceBusSettings;
 use WindowsAzure\Common\Internal\InvalidArgumentTypeException;
 
 /**
