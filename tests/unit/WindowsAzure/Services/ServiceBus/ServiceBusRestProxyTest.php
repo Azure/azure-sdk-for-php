@@ -229,7 +229,7 @@ class ServiceBusRestProxyTest extends ServiceBusRestProxyTestBase
     /**
      * @covers WindowsAzure\Services\ServiceBus\ServiceBusRestProxy::unlockMessage
      */
-    public function testPeekLockedMessageCanBeUnlocked()
+    public function DisabledtestPeekLockedMessageCanBeUnlocked()
     {
         $queueDescription = new QueueDescription();
         $queueName = 'testPeekLockMessageCanBeCompleted';
