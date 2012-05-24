@@ -23,7 +23,7 @@
  */
 
 namespace WindowsAzure\ServiceBus\Internal\Atom;
-use WindowsAzure\Validate;
+use WindowsAzure\Common\Internal\Validate;
 
 /**
  * Thfor service bus.
