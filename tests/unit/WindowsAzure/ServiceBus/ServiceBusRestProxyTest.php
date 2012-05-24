@@ -124,7 +124,8 @@ class ServiceBusRestProxyTest extends ServiceBusRestProxyTestBase
         $this->createQueue($queueInfo);
         $brokeredMessage = new BrokeredMessage();
         $brokeredMessage->setBody('sendQueueMessageWorksMessage');
-        $this->restProxy->sendQueueMessage('sendQueueMessageWorksQueue/messages', $brokeredMessage);
+        $this->restProxy->sendQueueMessage(
+            'sendQueueMessageWorksQueue', $brokeredMessage);
         $this->assertNotNull($brokeredMessage);
         
     }
@@ -145,7 +146,7 @@ class ServiceBusRestProxyTest extends ServiceBusRestProxyTestBase
         $brokeredMessage->setBody($expectedMessageText);
         
         $this->restProxy->sendQueueMessage(
-            $queueName.'/messages',
+            $queueName,
             $brokeredMessage
         );
         $receiveMessageOptions = new ReceiveMessageOptions();
@@ -153,7 +154,7 @@ class ServiceBusRestProxyTest extends ServiceBusRestProxyTestBase
         $receiveMessageOptions->setIsPeekLock(false);
         $receiveMessageOptions->setTimeout(5);
 
-        $receivedMessage = $this->restProxy->receiveMessage($queueName.'/messages/head', $receiveMessageOptions);
+        $receivedMessage = $this->restProxy->receiveMessage($queueName, $receiveMessageOptions);
         $this->assertNotNull($receivedMessage);
         $this->assertEquals(
             $expectedMessageText,
@@ -175,7 +176,7 @@ class ServiceBusRestProxyTest extends ServiceBusRestProxyTestBase
         $brokeredMessage = new BrokeredMessage();
         $brokeredMessage->setBody($expectedMessage);
 
-        $this->restProxy->sendQueueMessage($queueName.'/messages', $brokeredMessage);
+        $this->restProxy->sendQueueMessage($queueName, $brokeredMessage);
         $receiveMessageOptions = new ReceiveMessageOptions();
         $receiveMessageOptions->setTimeout(5);
         $receiveMessageOptions->setIsReceiveAndDelete(false); 
@@ -206,7 +207,7 @@ class ServiceBusRestProxyTest extends ServiceBusRestProxyTestBase
         $brokeredMessage->setBody($expectedMessage);
 
         $this->restProxy->sendQueueMessage(
-            $queueName.'/messages', 
+            $queueName, 
             $brokeredMessage
         );
 
@@ -229,7 +230,7 @@ class ServiceBusRestProxyTest extends ServiceBusRestProxyTestBase
     /**
      * @covers WindowsAzure\ServiceBus\ServiceBusRestProxy::unlockMessage
      */
-    public function DisabledtestPeekLockedMessageCanBeUnlocked()
+    public function testPeekLockedMessageCanBeUnlocked()
     {
         $queueDescription = new QueueDescription();
         $queueName = 'testPeekLockMessageCanBeCompleted';
@@ -240,7 +241,7 @@ class ServiceBusRestProxyTest extends ServiceBusRestProxyTestBase
         $brokeredMessage = new BrokeredMessage();
         $brokeredMessage->setBody($expectedMessage);
 
-        $this->restProxy->sendQueueMessage($queueName.'/messages', $brokeredMessage);
+        $this->restProxy->sendQueueMessage($queueName, $brokeredMessage);
 
         $receiveMessageOptions = new ReceiveMessageOptions();
         $receiveMessageOptions->setTimeout(5);
@@ -286,7 +287,7 @@ class ServiceBusRestProxyTest extends ServiceBusRestProxyTestBase
         $receiveMessageOptions->setTimeout(5);
         $receiveMessageOptions->setIsReceiveAndDelete(true);
         $this->createQueue($queueInfo);
-        $this->restProxy->sendQueueMessage($queueName.'/messages', $expectedMessage);
+        $this->restProxy->sendQueueMessage($queueName, $expectedMessage);
         $actualMessage = $this->restProxy->receiveQueueMessage(
             $queueName, 
             $receiveMessageOptions
@@ -632,7 +633,7 @@ class ServiceBusRestProxyTest extends ServiceBusRestProxyTestBase
         $brokeredMessage = new BrokeredMessage();
         $brokeredMessage->setProperty('hello', '"world"');
         $brokeredMessage->setProperty('foo', 42);
-        $this->restProxy->sendQueueMessage($queueName.'/messages', $brokeredMessage);
+        $this->restProxy->sendQueueMessage($queueName, $brokeredMessage);
         $receiveMessageOptions = new ReceiveMessageOptions();
         $receiveMessageOptions->setTimeout(5);
         $receiveMessageOptions->setIsReceiveAndDelete(true);

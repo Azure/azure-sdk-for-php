@@ -26,9 +26,9 @@ namespace WindowsAzure\ServiceBus;
 use WindowsAzure\Common\Internal\ServiceRestProxy;
 use WindowsAzure\Common\Internal\Http\HttpCallContext;
 use WindowsAzure\Common\Internal\Serialization\XmlSerializer;
-use WindowsAzure\ServiceBus\Internal\Atom\Content;
-use WindowsAzure\ServiceBus\Internal\Atom\Entry;
-use WindowsAzure\ServiceBus\Internal\Atom\Feed;
+use WindowsAzure\Common\Internal\Atom\Content;
+use WindowsAzure\Common\Internal\Atom\Entry;
+use WindowsAzure\Common\Internal\Atom\Feed;
 use WindowsAzure\ServiceBus\Internal\IServiceBus;
 use WindowsAzure\ServiceBus\Models\BrokeredMessage;
 use WindowsAzure\ServiceBus\Models\BrokerProperties;
@@ -133,13 +133,14 @@ class ServiceBusRestProxy extends ServiceRestProxy implements IServiceBus
     /**
      * Sends a queue message. 
      * 
-     * @param string           $path            The path to send message.
-     * @param \BrokeredMessage $brokeredMessage The brokered message. 
+     * @param string          $queueName       The name of the queue.
+     * @param BrokeredMessage $brokeredMessage The brokered message. 
      *
      * @return none
      */
-    public function sendQueueMessage($path, $brokeredMessage)
+    public function sendQueueMessage($queueName, $brokeredMessage)
     {
+        $path = sprintf(Resources::SEND_QUEUE_MESSAGE_PATH, $queueName);
         $this->sendMessage($path, $brokeredMessage);
     }
     
@@ -155,7 +156,7 @@ class ServiceBusRestProxy extends ServiceRestProxy implements IServiceBus
      */
     public function receiveQueueMessage($queuePath, $receiveMessageOptions)
     {
-        $queueMessagePath = sprintf(Resources::QUEUE_MESSAGE_PATH, $queuePath);
+        $queueMessagePath = sprintf(Resources::RECEIVE_QUEUE_MESSAGE_PATH, $queuePath);
         return $this->receiveMessage(
             $queueMessagePath, 
             $receiveMessageOptions

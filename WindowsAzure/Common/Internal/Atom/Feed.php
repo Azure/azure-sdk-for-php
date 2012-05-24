@@ -22,7 +22,7 @@
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
 
-namespace WindowsAzure\ServiceBus\Internal\Atom;
+namespace WindowsAzure\Common\Internal\Atom;
 use WindowsAzure\Common\Internal\Validate;
 
 /**

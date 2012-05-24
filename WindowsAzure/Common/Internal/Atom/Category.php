@@ -22,7 +22,7 @@
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
 
-namespace WindowsAzure\ServiceBus\Internal\Atom;
+namespace WindowsAzure\Common\Internal\Atom;
 use WindowsAzure\Common\Internal\Utilities;
 use WindowsAzure\Common\Internal\Resources;
 
@@ -197,7 +197,7 @@ class Category
      */
     public function toXml()
     {
-        $xmlWriter = new XMLWriter();
+        $xmlWriter = new \XMLWriter();
         $xmlWriter->openMemory();
         $xmlWriter->startElement('atom:category');
         $xmlWriter->WriteAttribute('term', $this->_term);

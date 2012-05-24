@@ -22,7 +22,7 @@
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
 
-namespace WindowsAzure\ServiceBus\Internal\Atom;
+namespace WindowsAzure\Common\Internal\Atom;
 use WindowsAzure\Common\Internal\Utilities;
 use WindowsAzure\Common\Internal\Resources;
 
@@ -38,61 +38,85 @@ use WindowsAzure\Common\Internal\Resources;
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
 
-class Person
+class Generator
 {
     /**
-     * The name of the person. 
+     * The of the generator. 
      *
      * @var string  
      */
-    private $_name;
+    private $_text;
 
     /**
-     * The Uri of the person. 
+     * The Uri of the generator. 
      *
      * @var string  
      */
     private $_uri;
 
     /**
-     * The email of the person.
+     * The version of the generator.
      *
      * @var string 
      */
-    private $_email;
+    private $_version;
+
+    /** 
+     * Creates a generator instance with specified XML string. 
+     */
+    public static function create($xmlString)
+    {
+        $generator = new Generator();
+        $generatorXml = new \SimpleXMLElement($xmlString);
+        $generatorArray = (array)generatorXml;
+        $attributes = $generatorXml->attributes();
+        if (array_key_exists('uri', $attributes)) {
+            $generator->setUri($attributes['uri']);
+        }
+
+        if (array_key_exists('version', $attributes)) {
+            $generator->setVersion($attributes['version']);
+        }
+
+        $generator->setText((string)$generatorXml);  
+        return $generator;
+    }
      
     /** 
-     * Creates an ATOM person instance with specified name.
+     * Creates an ATOM generator instance with specified name.
      *
-     * @param string $name The name of the person.
+     * @param string $text The text content of the generator.
      */
-    public function __construct($name)
+    public function __construct($text = null)
     {
-        $this->_name = $name;
+        if (!empty($text))
+        {
+            $this->_text = $text;
+        }
     }
 
     /** 
-     * Gets the name of the person. 
+     * Gets the text of the generator. 
      *
      * @return string
      */
-    public function getName()
+    public function getText()
     {   
-        return $this->_name;
+        return $this->_text;
     } 
 
     /**
-     * Sets the name of the person.
+     * Sets the text of the generator.
      * 
-     * @param string $name The name of the person.
+     * @param string $text The text of the generator.
      */
-    public function setName($name)
+    public function setText($text)
     {
-        $this->_name = $name; 
+        $this->_text = $text; 
     }
 
     /**
-     * Gets the URI of the person. 
+     * Gets the URI of the generator. 
      * 
      * @return string
      */
@@ -102,9 +126,9 @@ class Person
     }
 
     /**
-     * Sets the URI of the person. 
+     * Sets the URI of the generator. 
      * 
-     * @param string $uri The URI of the person.
+     * @param string $uri The URI of the generator.
      */
     public function setUri($uri)
     {
@@ -113,47 +137,48 @@ class Person
 
     
     /**
-     * Gets the email of the person. 
+     * Gets the version of the generator. 
      * 
      * @return string
      */
-    public function getEmail()
+    public function getVersion()
     {
-        return $this->_email;
+        return $this->_version;
     }
 
     /**
-     * Sets the email of the person. 
+     * Sets the version of the generator. 
      * 
-     * @param string $email The email of the person.
+     * @param string $version The version of the generator.
      */
-    public function setEmail($email)
+    public function setVersion($version)
     {
-        $this->_email = $email;
+        $this->_version = $version;
     }
 
     /** 
-     * Gets an XML representing the person. 
+     * Gets an XML representing the generator. 
      * 
      * return string
      */
     public function toXml()
     {
         $xmlWriter = new XMLWriter();
-
+        
         $xmlWriter->openMemory();
-        $xmlWriter->startElement('<atom:person>');
-        $xmlWriter->writeElement('<atom:name>', $this->_name);
+        $xmlWriter->startElement('atom:category');
         if (!empty($this->_uri))
         {
-            $xmlWriter->writeElement('atom:uri', $this->_uri);
+            $xmlWriter->writeAttribute('atom:uri', $this->_uri);
         }
 
-        if (!empty($this->_email))
+        if (!empty($this->_version))
         {
-            $xmlWriter->writeElement('atom:email', $this->_email);
+            $xmlWriter->writeAttribute('atom:version', $this->_version);
         }
-        
+
+        $xmlWriter->writeRaw($this->_text);
+
         $xmlWriter->endElement();
         
         return $xmlWriter->outputMemory();
