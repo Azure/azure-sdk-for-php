@@ -534,7 +534,7 @@ class ServiceBusRestProxy extends ServiceRestProxy implements IServiceBus
         );
         $entry = new Entry();
         $content = new Content($subscriptionDescriptionXml);
-        $content->setType(Resources::APPLICATION_XML_CONTENT_TYPE);
+        $content->setType(Resources::XML_CONTENT_TYPE);
         $entry->setContent($content);
         $entry->setAttribute(
             Resources::XMLNS_ATOM,
@@ -661,7 +661,7 @@ class ServiceBusRestProxy extends ServiceRestProxy implements IServiceBus
 
         $entry = new Entry();
         $content = new Content($ruleDescriptionXml);
-        $content->setType(Resources::APPLICATION_XML_CONTENT_TYPE);
+        $content->setType(Resources::XML_CONTENT_TYPE);
         $entry->setContent($content);
         $entry->setAttribute(
             Resources::XMLNS_ATOM,
