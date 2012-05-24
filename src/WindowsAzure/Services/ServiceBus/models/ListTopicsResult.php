@@ -54,12 +54,22 @@ class ListTopicsResult
      */ 
     public static function create($response)
     {
-        $getTopicsResult = new ListTopicsResult();
+        $listTopicsResult = new ListTopicsResult();
         $feed = Feed::create($response);
-        $entry = $feed->getEntry();
-        $content = $entry->getContent();
-        $topicDescription = XmlSerializer::objectDeserialize($content->getText());  
-        $getTopicsResult->setTopicsDescription($topicDescription);
+        $entries = $feed->getEntry();
+        $topicDescription = array();
+        if (!is_null($entries))
+        {
+            foreach ($entries as $entry)
+            {
+                $content = $entry->getContent();
+                $topicDescriptionInstance = TopicDescription::create($content->getText());
+                $topicDescription[] = $topicDescriptionInstance; 
+            }
+        }
+
+        $listTopicsResult->setTopicDescription($topicDescription);
+        return $listTopicsResult;
     }
 
     /**

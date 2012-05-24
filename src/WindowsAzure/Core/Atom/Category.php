@@ -73,7 +73,7 @@ class Category
      *
      * @param string $text The text of the category.
      */
-    public function __construct($undefinedContent)
+    public function __construct($undefinedContent = Resources::EMPTY_STRING)
     {
         $this->_undefinedContent = $undefinedContent;
     }
@@ -88,22 +88,19 @@ class Category
     {
         $category = new Category();
         $categoryXml = simplexml_load_string($xmlString);
-        $attributes = $categoryXml->attributes();
+        $attributes = (array)$categoryXml->attributes();
 
-        if (!array_key_exists($attributes, 'term'))
+        if (array_key_exists('term', $attributes))
         {
-            throw new ArgumentException(
-                'The category node doesn\'t contain term attribute.'
-            );
+            $category->setTerm($attribute['term']);
         }
 
-        $category->setTerm($attribute['term']);
-        if (array_key_exists($attributes, 'scheme'))
+        if (array_key_exists('scheme', $attributes))
         {
             $category->setScheme($attributes['scheme']);
         }
 
-        if (array_key_exists($attributes, 'label'))
+        if (array_key_exists('label', $attributes))
         {
             $category->setLabel($attributes['label']);
         }

@@ -320,12 +320,12 @@ class ServiceBusRestProxyTest extends ServiceBusRestProxyTestBase
         $listTopicsResult = $this->wrapper->listTopics($listTopicsOptions);
         $getTopicResult = $this->wrapper->getTopic($topicName);
         $this->wrapper->deleteTopic($topicName);
-        $listTopicsResult2 = $this->wrapper->listTopics();
+        $listTopicsResult2 = $this->wrapper->listTopics($topicInfo);
 
         $this->assertNotNull($createTopicResult);
-        $this->assertNotNull($listTopicResult);
+        $this->assertNotNull($listTopicsResult);
         $this->assertNotNull($getTopicResult);
-        $this->assertNotNull($listTopicResult2);
+        $this->assertNotNull($listTopicsResult2);
         
     }
 
@@ -352,7 +352,7 @@ class ServiceBusRestProxyTest extends ServiceBusRestProxyTestBase
     } 
 
     /**
-     * @covers WindowsAzure\Services\ServiceBus\ServiceBusRestProxy::listSubscription
+     * @covers WindowsAzure\Services\ServiceBus\ServiceBusRestProxy::listSubscriptions
      */
     public function testSubscriptionsCanBeListed()
     {
@@ -372,7 +372,7 @@ class ServiceBusRestProxyTest extends ServiceBusRestProxyTestBase
 
         $this->assertNotNull($listSubscriptionsResult);
         $this->assertEquals(
-            1, 
+            1,
             count($listSubscriptionsResult->getSubscriptionDescription())
         );
     }
@@ -466,11 +466,15 @@ class ServiceBusRestProxyTest extends ServiceBusRestProxyTestBase
             $listSubscriptionOptions
         );
 
-        $emptySubscriptionDescription = $listSubscriptionsResult->getSubscriptionDescription();
+        $emptySubscriptionDescription = $emptyListSubscriptionsResult->getSubscriptionDescription();
 
 
         $this->assertNotNull($listSubscriptionsResult);
         $this->assertNotNull($emptyListSubscriptionsResult);
+        $this->assertEquals(
+            2,
+            count($subscriptionDescription)
+        );
 
         $this->assertEquals(
             0,
@@ -539,7 +543,7 @@ class ServiceBusRestProxyTest extends ServiceBusRestProxyTestBase
         $listRulesResult = $this->wrapper->listRules($topicName, $subscriptionName, $listRulesOptions);
 
         $this->assertNotNull($listRulesResult);
-        $this->assertEquals(2, count($listRulesResult->getRuleDescription()));
+        $this->assertEquals(3, count($listRulesResult->getRuleDescription()));
         
     }
 
@@ -584,6 +588,7 @@ class ServiceBusRestProxyTest extends ServiceBusRestProxyTestBase
         $this->createRule($topicName, $subscriptionName, $secondRuleInfo);
 
         $this->wrapper->deleteRule($topicName, $subscriptionName, $secondRuleName);
+        $this->wrapper->deleteRule($topicName, $subscriptionName, $firstRuleName);
         $this->wrapper->deleteRule($topicName, $subscriptionName, Resources::DEFAULT_RULE_NAME); 
 
         $listRulesResult = $this->wrapper->listRules($topicName, $subscriptionName, $listRulesOptions);

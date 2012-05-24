@@ -179,6 +179,12 @@ class Feed
                     $entry[] = $entryInstance;
                 }
             }
+            else
+            {
+                $entry[] = Entry::create($entryXml->asXML());
+                
+            }
+            $feed->setEntry($entry);
         }
 
         if (array_key_exists('content', $feedArray))

@@ -46,6 +46,7 @@ use WindowsAzure\Services\ServiceBus\Models\GetRuleResult;
 use WindowsAzure\Services\ServiceBus\Models\GetSubscriptionResult;
 use WindowsAzure\Services\ServiceBus\Models\GetTopicResult;
 use WindowsAzure\Services\ServiceBus\Models\ListSubscriptionsResult;
+use WindowsAzure\Services\ServiceBus\Models\ListTopicsResult;
 use WindowsAzure\Services\ServiceBus\Models\ListRulesResult;
 use WindowsAzure\Services\ServiceBus\Models\QueueDescription;
 use WindowsAzure\Services\ServiceBus\Models\QueueInfo;
@@ -500,11 +501,11 @@ class ServiceBusRestProxy extends ServiceRestProxy implements IServiceBus
     public function listTopics($listTopicsOptions) 
     {
         $httpCallContext = new HttpCallContext();
+        $httpCallContext->setMethod(Resources::HTTP_GET);
+        $httpCallContext->addStatusCode(Resources::STATUS_OK);
         $httpCallContext->setPath(Resources::LIST_TOPIC_PATH);
         $response = $this->sendContext($httpCallContext);
-        $listTopicResult = ListTopicResult::create(
-            $response->getBody()
-        );
+        $listTopicResult = ListTopicsResult::create($response->getBody());
         return $listTopicResult; 
     }
 
