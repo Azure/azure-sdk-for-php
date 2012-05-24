@@ -32,8 +32,8 @@
 require_once '..\client\client.php';
 use Client\CloudSubscription;
 use Client\CloudTable;
-use WindowsAzure\Utilities;
-use WindowsAzure\Services\Table\Models\EdmType;
+use WindowsAzure\Common\Internal\Utilities;
+use WindowsAzure\Table\Models\EdmType;
 
 $subscriptionId      = 'Your subscription';
 $certificatePath     = 'Certificate path';

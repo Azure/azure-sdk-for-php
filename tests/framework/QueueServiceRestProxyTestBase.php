@@ -16,7 +16,7 @@
  *
  * @category  Microsoft
  * @package   Tests\Framework
- * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
+ * @author    Azure PHP SDK <azurephpsdk@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link      http://pear.php.net/package/azure-sdk-for-php
@@ -24,17 +24,17 @@
 namespace Tests\Framework;
 use Tests\Framework\ServiceRestProxyTestBase;
 use Tests\Framework\TestResources;
-use WindowsAzure\Core\Configuration;
-use WindowsAzure\Services\Core\Models\ServiceProperties;
-use WindowsAzure\Services\Queue\QueueSettings;
-use WindowsAzure\Services\Queue\QueueService;
+use WindowsAzure\Common\Configuration;
+use WindowsAzure\Common\Models\ServiceProperties;
+use WindowsAzure\Queue\QueueSettings;
+use WindowsAzure\Queue\QueueService;
 
 /**
  * TestBase class for each unit test class.
  *
  * @category  Microsoft
  * @package   Tests\Framework
- * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
+ * @author    Azure PHP SDK <azurephpsdk@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @version   Release: @package_version@
@@ -47,24 +47,24 @@ class QueueServiceRestProxyTestBase extends ServiceRestProxyTestBase
     public function __construct()
     {
         $config = new Configuration();
-        $queueUri = 'http://' . TestResources::accountName() . '.queue.core.windows.net';
+        $queueUri = TestResources::accountName() . '.queue.core.windows.net';
         $config->setProperty(QueueSettings::ACCOUNT_KEY, TestResources::accountKey());
         $config->setProperty(QueueSettings::ACCOUNT_NAME, TestResources::accountName());        
         $config->setProperty(QueueSettings::URI, $queueUri);
-        $queueWrapper = QueueService::create($config);
-        parent::__construct($config, $queueWrapper);
+        $queueRestProxy = QueueService::create($config);
+        parent::__construct($config, $queueRestProxy);
         $this->_createdQueues = array();
     }
     
     public function createQueue($queueName, $options = null)
     {
-        $this->wrapper->createQueue($queueName, $options);
+        $this->restProxy->createQueue($queueName, $options);
         $this->_createdQueues[] = $queueName;
     }
     
     public function deleteQueue($queueName, $options = null)
     {
-        $this->wrapper->deleteQueue($queueName, $options);
+        $this->restProxy->deleteQueue($queueName, $options);
     }
     
     public function safeDeleteQueue($queueName)

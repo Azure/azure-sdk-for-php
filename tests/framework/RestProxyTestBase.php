@@ -16,23 +16,23 @@
  *
  * @category  Microsoft
  * @package   Tests\Framework
- * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
+ * @author    Azure PHP SDK <azurephpsdk@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
  
 namespace Tests\Framework;
-use WindowsAzure\Logger;
-use WindowsAzure\Core\Serialization\XmlSerializer;
-use WindowsAzure\Core\WindowsAzureUtilities;
+use WindowsAzure\Common\Internal\Logger;
+use WindowsAzure\Common\Internal\Serialization\XmlSerializer;
+use WindowsAzure\Common\Configuration;
 
 /**
  * Testbase for all REST proxy tests.
  *
  * @category  Microsoft
  * @package   Tests\Framework
- * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
+ * @author    Azure PHP SDK <azurephpsdk@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @version   Release: @package_version@
@@ -41,22 +41,22 @@ use WindowsAzure\Core\WindowsAzureUtilities;
 class RestProxyTestBase extends \PHPUnit_Framework_TestCase
 {
     protected $config;
-    protected $wrapper;
+    protected $restProxy;
     protected $xmlSerializer;
     
     const NOT_SUPPORTED = 'The storage emulator doesn\'t support this API';
     
     protected function skipIfEmulated()
     {
-        if (WindowsAzureUtilities::isEmulated()) {
+        if (Configuration::isEmulated()) {
             $this->markTestSkipped(self::NOT_SUPPORTED);
         }
     }
     
-    public function __construct($config, $serviceWrapper)
+    public function __construct($config, $serviceRestProxy)
     {
         $this->config = $config;
-        $this->wrapper = $serviceWrapper;
+        $this->restProxy = $serviceRestProxy;
         $this->xmlSerializer = new XmlSerializer();
         Logger::setLogFile('C:\log.txt');
     }

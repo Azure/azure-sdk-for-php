@@ -16,28 +16,27 @@
  *
  * @category  Microsoft
  * @package   Tests\Framework
- * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
+ * @author    Azure PHP SDK <azurephpsdk@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
  
 namespace Tests\Framework;
-use WindowsAzure\Resources;
-use WindowsAzure\Core\Configuration;
-use WindowsAzure\Services\ServiceManagement\ServiceManagementSettings;
-use WindowsAzure\Services\ServiceManagement\ServiceManagementService;
-use WindowsAzure\Core\WindowsAzureUtilities;
-use WindowsAzure\Services\ServiceManagement\Models\CreateStorageServiceOptions;
-use WindowsAzure\Services\ServiceManagement\Models\OperationStatus;
-use WindowsAzure\Services\ServiceManagement\Models\Locations;
+use WindowsAzure\Common\Internal\Resources;
+use WindowsAzure\Common\Configuration;
+use WindowsAzure\ServiceManagement\ServiceManagementSettings;
+use WindowsAzure\ServiceManagement\ServiceManagementService;
+use WindowsAzure\ServiceManagement\Models\CreateStorageServiceOptions;
+use WindowsAzure\ServiceManagement\Models\OperationStatus;
+use WindowsAzure\ServiceManagement\Models\Locations;
 
 /**
  * Test base for ServiceManagementTest class.
  *
  * @category  Microsoft
  * @package   Tests\Framework
- * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
+ * @author    Azure PHP SDK <azurephpsdk@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @version   Release: @package_version@
@@ -52,8 +51,19 @@ class ServiceManagementRestProxyTestBase extends RestProxyTestBase
     
     public static function setUpBeforeClass()
     {
-        if (WindowsAzureUtilities::isEmulated()) {
+        if (Configuration::isEmulated()) {
             throw new \Exception(self::NOT_SUPPORTED);
+        }
+        
+        $subscriptionId = TestResources::serviceManagementSubscriptionId();
+        $certificatePath = TestResources::serviceManagementCertificatePath();
+        
+        if (empty($subscriptionId)) {
+            throw new \Exception('SERVICE_MANAGEMENT_SUBSCRIPTION_ID envionment variable is missing');
+        }
+        
+        if (empty($certificatePath)) {
+            throw new \Exception('SERVICE_MANAGEMENT_CERTIFICATE_PATH envionment variable is missing');
         }
     }
     
@@ -72,14 +82,14 @@ class ServiceManagementRestProxyTestBase extends RestProxyTestBase
             ServiceManagementSettings::CERTIFICATE_PATH,
             TestResources::serviceManagementCertificatePath()
         );
-        $serviceManagementWrapper = ServiceManagementService::create($config);
+        $serviceManagementRestProxy = ServiceManagementService::create($config);
         
-        parent::__construct($config, $serviceManagementWrapper);
+        parent::__construct($config, $serviceManagementRestProxy);
         
         $this->createdStorageServices = array();
         $this->createdAffinityGroups = array();
-        $this->storageCount = count($this->wrapper->listStorageServices()->getStorageServices());
-        $this->affinityGroupCount = count($this->wrapper->listAffinityGroups()->getAffinityGroups());
+        $this->storageCount = count($this->restProxy->listStorageServices()->getStorageServices());
+        $this->affinityGroupCount = count($this->restProxy->listAffinityGroups()->getAffinityGroups());
     }
 
     public function createAffinityGroup($name)
@@ -87,7 +97,7 @@ class ServiceManagementRestProxyTestBase extends RestProxyTestBase
         $location = Locations::WEST_US;
         $label = base64_encode($name);
         
-        $this->wrapper->createAffinityGroup($name, $label, $location);
+        $this->restProxy->createAffinityGroup($name, $label, $location);
         $this->createdAffinityGroups[] = $name;
     }
     
@@ -98,7 +108,7 @@ class ServiceManagementRestProxyTestBase extends RestProxyTestBase
     
     public function getAffinityGroup($name)
     {
-        $result = $this->wrapper->listAffinityGroups();
+        $result = $this->restProxy->listAffinityGroups();
         $affinityGroups = $result->getAffinityGroups();
         
         foreach ($affinityGroups as $affinityGroup) {
@@ -112,7 +122,7 @@ class ServiceManagementRestProxyTestBase extends RestProxyTestBase
     
     public function deleteAffinityGroup($name)
     {
-        $this->wrapper->deleteAffinityGroup($name);
+        $this->restProxy->deleteAffinityGroup($name);
     }
     
     public function safeDeleteAffinityGroup($name)
@@ -134,7 +144,7 @@ class ServiceManagementRestProxyTestBase extends RestProxyTestBase
         $options = new CreateStorageServiceOptions();
         $options->setLocation('West US');
         
-        $result = $this->wrapper->createStorageService($name, $label, $options);
+        $result = $this->restProxy->createStorageService($name, $label, $options);
         $this->blockUntilAsyncSucceed($result->getRequestId());
         $this->createdStorageServices[] = $name;
     }
@@ -145,7 +155,7 @@ class ServiceManagementRestProxyTestBase extends RestProxyTestBase
         
         do {
             sleep(5);
-            $result = $this->wrapper->getOperationStatus($requestId);
+            $result = $this->restProxy->getOperationStatus($requestId);
             $status = $result->getStatus();
         }while(OperationStatus::IN_PROGRESS == $status);
         
@@ -154,7 +164,7 @@ class ServiceManagementRestProxyTestBase extends RestProxyTestBase
     
     public function storageServiceExists($name)
     {
-        $result = $this->wrapper->listStorageServices();
+        $result = $this->restProxy->listStorageServices();
         $storageServices = $result->getStorageServices();
         
         foreach ($storageServices as $storageService) {
@@ -168,7 +178,7 @@ class ServiceManagementRestProxyTestBase extends RestProxyTestBase
     
     public function deleteStorageService($name)
     {
-        $this->wrapper->deleteStorageService($name);
+        $this->restProxy->deleteStorageService($name);
     }
     
     public function safeDeleteStorageService($name)

@@ -16,7 +16,7 @@
  *
  * @category  Microsoft
  * @package   Tests\Framework
- * @author    Albert Cheng <gongchen at the largest software company>
+ * @author    Azure PHP SDK <azurephpsdk@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link      http://pear.php.net/package/azure-sdk-for-php
@@ -24,18 +24,18 @@
 namespace Tests\Framework;
 use Tests\Framework\ServiceRestProxyTestBase;
 use Tests\Framework\TestResources;
-use WindowsAzure\Core\Configuration;
-use WindowsAzure\Services\Core\Models\ServiceProperties;
-use WindowsAzure\Services\ServiceBus\ServiceBusSettings;
-use WindowsAzure\Services\ServiceBus\WrapService;
-use WindowsAzure\Services\ServiceBus\WrapRestProxy;
+use WindowsAzure\Common\Configuration;
+use WindowsAzure\Common\Models\ServiceProperties;
+use WindowsAzure\ServiceBus\ServiceBusSettings;
+use WindowsAzure\ServiceBus\WrapService;
+use WindowsAzure\ServiceBus\WrapRestProxy;
 
 /**
  * TestBase class for each unit test class.
  *
  * @category  Microsoft
  * @package   Tests\Framework
- * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
+ * @author    Azure PHP SDK <azurephpsdk@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @version   Release: @package_version@
@@ -70,8 +70,8 @@ class WrapRestProxyTestBase extends ServiceRestProxyTestBase
             TestResources::wrapPassword()
         );
         
-        $wrapWrapper = WrapService::create($config);
-        parent::__construct($config, $wrapWrapper);
+        $wrapRestProxy = WrapService::create($config);
+        parent::__construct($config, $wrapRestProxy);
     }
     
 }
