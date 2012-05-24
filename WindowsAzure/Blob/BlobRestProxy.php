@@ -2117,6 +2117,11 @@ class BlobRestProxy extends ServiceRestProxy implements IBlob
         }  
         
         $queryParams[Resources::QP_COMP] = 'snapshot';
+        $this->addOptionalQueryParam(
+            $queryParams,
+            Resources::QP_TIMEOUT,
+            $options->getTimeout()
+        );
 
         $this->addOptionalAccessConditionHeader(
             $headers,
