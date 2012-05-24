@@ -440,7 +440,7 @@ class ServiceBusRestProxy extends ServiceRestProxy implements IServiceBus
 
         $entry = new Entry();
         $content = new Content($topicDescriptionXml);
-        $content->setType(Resources::APPLICATION_XML_CONTENT_TYPE);
+        $content->setType(Resources::XML_CONTENT_TYPE);
         $entry->setContent($content); 
         $entry->setAttribute('xmlns:atom', 'http://www.w3.org/2005/Atom');
         $entry->setAttribute('xmlns', 'http://schemas.microsoft.com/netservices/2010/10/servicebus/connect');
