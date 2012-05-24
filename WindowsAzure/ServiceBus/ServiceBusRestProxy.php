@@ -49,9 +49,9 @@ use WindowsAzure\ServiceBus\Models\SubscriptionDescription;
 use WindowsAzure\ServiceBus\Models\SubscriptionInfo;
 use WindowsAzure\ServiceBus\Models\TopicDescription;
 use WindowsAzure\ServiceBus\Models\TopicInfo;
-use WindowsAzure\Resources;
-use WindowsAzure\Utilities;
-use WindowsAzure\Validate;
+use WindowsAzure\Common\Internal\Resources;
+use WindowsAzure\Common\Internal\Utilities;
+use WindowsAzure\Common\Internal\Validate;
 
 /**
  * This class constructs HTTP requests and receive HTTP responses for service bus.
