@@ -22,17 +22,9 @@
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
  
-<<<<<<< HEAD:src/WindowsAzure/Core/Serialization/XmlSerializer.php
-namespace WindowsAzure\Core\Serialization;
-use WindowsAzure\Utilities;
-use WindowsAzure\Resources;
-use WindowsAzure\Validate;
-use WindowsAzure\Services\SerivceBus\Models\QueueDescription;
-=======
 namespace WindowsAzure\Common\Internal\Serialization;
 use WindowsAzure\Common\Internal\Utilities;
 use WindowsAzure\Common\Internal\Resources;
->>>>>>> upstream/dev:WindowsAzure/Common/Internal/Serialization/XmlSerializer.php
 
 /**
  * Short description
@@ -129,7 +121,6 @@ class XmlSerializer implements ISerializer
         $xmlWriter->openMemory(); 
         $xmlWriter->setIndent(true);
         $reflectionClass = new \ReflectionClass($targetObject);
-        $arrayData = array();
 
         $methodArray = $reflectionClass->getMethods();
         
