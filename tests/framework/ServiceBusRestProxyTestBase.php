@@ -70,34 +70,34 @@ class ServiceBusRestProxyTestBase extends ServiceRestProxyTestBase
     public function createQueue($queueInfo)
     {
         $this->_createdQueues[] = $queueInfo->getName();
-        return $this->wrapper->createQueue($queueInfo);
+        return $this->restProxy->createQueue($queueInfo);
     }
     
     public function createTopic($topicInfo)
     {
         $this->_createdTopics[] = $topicInfo->getName();
-        return $this->wrapper->createTopic($topicInfo);
+        return $this->restProxy->createTopic($topicInfo);
     }
 
     public function createSubscription($topicName, $subscriptionInfo) 
     {
         $topicSubscriptionNameArray = array($topicName, $subscriptionInfo->getName());
         $this->_createdSubscriptions[] = join('::', $topicSubscriptionNameArray);
-        return $this->wrapper->createSubscription($topicName, $subscriptionInfo);
+        return $this->restProxy->createSubscription($topicName, $subscriptionInfo);
     }
 
     public function createRule($topicName, $subscriptionName, $ruleInfo) 
     {
         $topicSubscriptionRuleArray = array($topicName, $subscriptionName, $ruleInfo->getName());
         $this->_createdRules[] = join('::', $topicSubscriptionRuleArray);
-        return $this->wrapper->createRule($topicName, $subscriptionName, $ruleInfo);
+        return $this->restProxy->createRule($topicName, $subscriptionName, $ruleInfo);
     }
 
     public function safeDeleteQueue($queueName)
     {   
         try
         {
-            $this->wrapper->deleteQueue($queueName);
+            $this->restProxy->deleteQueue($queueName);
         }
         catch (\Exception $e)
         {
@@ -109,7 +109,7 @@ class ServiceBusRestProxyTestBase extends ServiceRestProxyTestBase
     {
         try
         {
-            $this->wrapper->deleteRule($topicName, $subscriptionName, $ruleName);
+            $this->restProxy->deleteRule($topicName, $subscriptionName, $ruleName);
         }
         catch (\Exception $e)
         {
@@ -121,7 +121,7 @@ class ServiceBusRestProxyTestBase extends ServiceRestProxyTestBase
     {
         try 
         {
-            $this->wrapper->deleteSubscription($topicName, $subscriptionName);
+            $this->restProxy->deleteSubscription($topicName, $subscriptionName);
         }
         catch (\Exception $e)
         {
@@ -133,7 +133,7 @@ class ServiceBusRestProxyTestBase extends ServiceRestProxyTestBase
     {
         try 
         {
-            $this->wrapper->deleteTopic($topicName);
+            $this->restProxy->deleteTopic($topicName);
         }
         catch (\Exception $e)
         {
