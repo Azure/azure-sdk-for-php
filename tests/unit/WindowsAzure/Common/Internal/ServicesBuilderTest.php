@@ -140,49 +140,6 @@ class ServicesBuilderTest extends \PHPUnit_Framework_TestCase
     
     /**
      * @covers WindowsAzure\Common\Internal\ServicesBuilder::build
-     * @covers WindowsAzure\Common\Internal\ServicesBuilder::_buildServiceBus
-     * @covers WindowsAzure\Common\Internal\ServicesBuilder::_addHeadersFilter
-     * @covers WindowsAzure\Common\Internal\ServicesBuilder::_validateConfig
-     */
-    public function testBuildForServiceBus()
-    {
-        // Setup
-        $config = new Configuration();
-        $config->setProperty(ServiceBusSettings::URI, 'uri');
-        $config->setProperty(ServiceBusSettings::WRAP_URI, 'wrap uri');
-        $config->setProperty(ServiceBusSettings::WRAP_NAME, 'wrap name');
-        $config->setProperty(ServiceBusSettings::WRAP_PASSWORD, 'wrap password');
-        $builder = new ServicesBuilder();
-        
-        // Test
-        $serviceBusRestProxy = $builder->build($config, Resources::SERVICE_BUS_TYPE_NAME);
-        
-        // Assert
-        $this->assertInstanceOf('WindowsAzure\ServiceBus\Internal\IServiceBus', $serviceBusRestProxy);
-    }
-    
-    /**
-     * @covers WindowsAzure\Common\Internal\ServicesBuilder::build
-     * @covers WindowsAzure\Common\Internal\ServicesBuilder::_buildWrap
-     * @covers WindowsAzure\Common\Internal\ServicesBuilder::_addHeadersFilter
-     * @covers WindowsAzure\Common\Internal\ServicesBuilder::_validateConfig
-     */
-    public function testBuildForWrap()
-    {
-        // Setup
-        $config = new Configuration();
-        $config->setProperty(ServiceBusSettings::WRAP_URI, 'wrap uri');
-        $builder = new ServicesBuilder();
-        
-        // Test
-        $wrapRestProxy = $builder->build($config, Resources::WRAP_TYPE_NAME);
-        
-        // Assert
-        $this->assertInstanceOf('WindowsAzure\ServiceBus\Internal\IWrap', $wrapRestProxy);
-    }
-    
-    /**
-     * @covers WindowsAzure\Common\Internal\ServicesBuilder::build
      * @covers WindowsAzure\Common\Internal\ServicesBuilder::_validateConfig
      */
     public function testBuildWithInvalidTypeFail()
@@ -338,74 +295,6 @@ class ServicesBuilderTest extends \PHPUnit_Framework_TestCase
         $this->setExpectedException('\InvalidArgumentException', $missingValueMsg);
         
         $builder->build($config, Resources::SERVICE_MANAGEMENT_TYPE_NAME);
-    }
-    
-    /**
-     * @covers WindowsAzure\Common\Internal\ServicesBuilder::build
-     * @covers WindowsAzure\Common\Internal\ServicesBuilder::_validateConfig
-     * @covers WindowsAzure\Common\Internal\ServicesBuilder::_validateConfigSetting
-     */
-    public function testValidateConfigWithMissingServiceBusSettingConfig()
-    {
-        $missingKeyMsg   = sprintf(Resources::MISSING_CONFIG_SETTING_KEY_MSG, 'ServiceBusSettings::WRAP_PASSWORD', 'ServiceBus');
-        $config = new Configuration();
-        $config->setProperty(ServiceBusSettings::URI, 'uri');
-        $config->setProperty(ServiceBusSettings::WRAP_URI, 'wrap uri');
-        $config->setProperty(ServiceBusSettings::WRAP_NAME, 'wrap name');
-        $builder = new ServicesBuilder();
-        $this->setExpectedException('\InvalidArgumentException', $missingKeyMsg);
-        
-        $builder->build($config, Resources::SERVICE_BUS_TYPE_NAME);
-    }
-    
-    /**
-     * @covers WindowsAzure\Common\Internal\ServicesBuilder::build
-     * @covers WindowsAzure\Common\Internal\ServicesBuilder::_validateConfig
-     * @covers WindowsAzure\Common\Internal\ServicesBuilder::_validateConfigSetting
-     */
-    public function testValidateConfigWithEmptyServiceBusSettingConfig()
-    {
-        $missingValueMsg   = sprintf(Resources::MISSING_CONFIG_SETTING_VALUE_MSG, 'ServiceBusSettings::WRAP_PASSWORD');
-        $config = new Configuration();
-        $config->setProperty(ServiceBusSettings::URI, 'uri');
-        $config->setProperty(ServiceBusSettings::WRAP_URI, 'wrap uri');
-        $config->setProperty(ServiceBusSettings::WRAP_NAME, 'wrap name');
-        $config->setProperty(ServiceBusSettings::WRAP_PASSWORD, null);
-        $builder = new ServicesBuilder();
-        $this->setExpectedException('\InvalidArgumentException', $missingValueMsg);
-        
-        $builder->build($config, Resources::SERVICE_BUS_TYPE_NAME);
-    }
-    
-    /**
-     * @covers WindowsAzure\Common\Internal\ServicesBuilder::build
-     * @covers WindowsAzure\Common\Internal\ServicesBuilder::_validateConfig
-     * @covers WindowsAzure\Common\Internal\ServicesBuilder::_validateConfigSetting
-     */
-    public function testValidateConfigWithMissingWrapSettingConfig()
-    {
-        $missingKeyMsg   = sprintf(Resources::MISSING_CONFIG_SETTING_KEY_MSG, 'ServiceBusSettings::WRAP_URI', 'Wrap');
-        $config = new Configuration();
-        $builder = new ServicesBuilder();
-        $this->setExpectedException('\InvalidArgumentException', $missingKeyMsg);
-        
-        $builder->build($config, Resources::WRAP_TYPE_NAME);
-    }
-    
-    /**
-     * @covers WindowsAzure\Common\Internal\ServicesBuilder::build
-     * @covers WindowsAzure\Common\Internal\ServicesBuilder::_validateConfig
-     * @covers WindowsAzure\Common\Internal\ServicesBuilder::_validateConfigSetting
-     */
-    public function testValidateConfigWithEmptyWrapSettingConfig()
-    {
-        $missingValueMsg   = sprintf(Resources::MISSING_CONFIG_SETTING_VALUE_MSG, 'ServiceBusSettings::WRAP_URI');
-        $config = new Configuration();
-        $config->setProperty(ServiceBusSettings::WRAP_URI, '');
-        $builder = new ServicesBuilder();
-        $this->setExpectedException('\InvalidArgumentException', $missingValueMsg);
-        
-        $builder->build($config, Resources::WRAP_TYPE_NAME);
     }
 }
 
