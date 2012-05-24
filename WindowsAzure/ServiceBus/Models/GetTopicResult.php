@@ -23,8 +23,8 @@
 
 namespace WindowsAzure\ServiceBus\Models;
 
-use WindowsAzure\Core\Atom\Feed;
-use WindowsAzure\Core\Atom\Content;
+use WindowsAzure\ServiceBus\Internal\Atom\Feed;
+use WindowsAzure\ServiceBus\Internal\Atom\Content;
 
 /**
  * The result of a get topic request. 

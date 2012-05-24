@@ -23,9 +23,9 @@
  */
 
 namespace WindowsAzure\ServiceBus;
-use WindowsAzure\Core\Atom\Content;
-use WindowsAzure\Core\Atom\Entry;
-use WindowsAzure\Core\Atom\Feed;
+use WindowsAzure\ServiceBus\Internal\Atom\Content;
+use WindowsAzure\ServiceBus\Internal\Atom\Entry;
+use WindowsAzure\ServiceBus\Internal\Atom\Feed;
 use WindowsAzure\Core\Http\IHttpClient;
 use WindowsAzure\Core\Http\HttpCallContext;
 use WindowsAzure\Core\Http\Url;

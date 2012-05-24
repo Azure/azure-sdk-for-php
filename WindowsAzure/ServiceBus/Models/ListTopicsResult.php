@@ -24,8 +24,8 @@
 
 namespace WindowsAzure\ServiceBus\Models;
 
-use WindowsAzure\Core\Atom\Feed;
-use WindowsAzure\Core\Atom\Content;
+use WindowsAzure\ServiceBus\Internal\Atom\Feed;
+use WindowsAzure\ServiceBus\Internal\Atom\Content;
 
 /**
  * This class constructs HTTP requests and receive HTTP responses for service bus.
