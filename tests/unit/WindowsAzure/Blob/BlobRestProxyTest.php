@@ -650,10 +650,12 @@ class BlobRestProxyTest extends BlobServiceRestProxyTestBase
         $this->createContainer($name);
         
         // Test
-        $this->restProxy->createPageBlob($name, 'myblob', 512);
+        $createResult = $this->restProxy->createPageBlob($name, 'myblob', 512);
         
         // Assert
         $result = $this->restProxy->listBlobs($name);
+        $this->assertNotNull($createResult->getEtag());
+        $this->assertInstanceOf('\DateTime', $createResult->getLastModified());
         $this->assertCount(1, $result->getBlobs());
     }
     
