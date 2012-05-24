@@ -15,21 +15,21 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   Tests\Unit\WindowsAzure\Services\Servicebus\Models
+ * @package   Tests\Unit\WindowsAzure\ServiceBus\Models
  * @author    Azure PHP SDK <azurephpsdk@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
 
-namespace Tests\Unit\WindowsAzure\Services\ServiceBus\Models;
-use WindowsAzure\Services\ServiceBus\Models\ListSubscriptionsResult;
+namespace Tests\Unit\WindowsAzure\ServiceBus\Models;
+use WindowsAzure\ServiceBus\Models\ListSubscriptionsResult;
 
 /**
  * Unit tests for class WrapAccessTokenResult
  *
  * @category  Microsoft
- * @package   Tests\Unit\WindowsAzure\Services\ServiceBus\Models
+ * @package   Tests\Unit\WindowsAzure\ServiceBus\Models
  * @author    Azure PHP SDK <azurephpsdk@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
@@ -39,7 +39,7 @@ use WindowsAzure\Services\ServiceBus\Models\ListSubscriptionsResult;
 class ListSubscriptionsResultTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @covers WindowsAzure\Services\ServiceBus\Models\ListSubscriptionsResult::__construct
+     * @covers WindowsAzure\ServiceBus\Models\ListSubscriptionsResult::__construct
      */
     public function testListSubscriptionsResultConstructor()
     {

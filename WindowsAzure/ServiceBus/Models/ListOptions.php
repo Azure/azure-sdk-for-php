@@ -14,14 +14,14 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   WindowsAzure\Services\ServiceBus\Models
+ * @package   WindowsAzure\ServiceBus\Models
  * @author    Azure PHP SDK <azurephpsdk@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
  
-namespace WindowsAzure\Services\ServiceBus\Models;
+namespace WindowsAzure\ServiceBus\Models;
 use WindowsAzure\Resources;
 use WindowsAzure\Utilities;
 
@@ -29,7 +29,7 @@ use WindowsAzure\Utilities;
  * The base class for the options for list request.
  *
  * @category  Microsoft
- * @package   WindowsAzure\Services\ServiceBus\Models
+ * @package   WindowsAzure\ServiceBus\Models
  * @author    Azure PHP SDK <azurephpsdk@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0

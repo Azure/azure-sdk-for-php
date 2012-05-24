@@ -15,14 +15,14 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   WindowsAzure\Services\Queue
+ * @package   WindowsAzure\ServiceBus\Models
  * @author    Azure PHP SDK <azurephpsdk@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
 
-namespace WindowsAzure\Services\ServiceBus\Models;
+namespace WindowsAzure\ServiceBus\Models;
 
 use WindowsAzure\Core\Atom\Feed;
 use WindowsAzure\Core\Atom\Content;
@@ -31,7 +31,7 @@ use WindowsAzure\Core\Atom\Content;
  * The results of list queues request. 
  *
  * @category  Microsoft
- * @package   WindowsAzure\Services\ServiceBus
+ * @package   WindowsAzure\ServiceBus\Models
  * @author    Azure PHP SDK <azurephpsdk@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0

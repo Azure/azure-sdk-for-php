@@ -22,9 +22,9 @@
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
 
-namespace Tests\Unit\WindowsAzure\Services\ServiceBus\Models;
-use WindowsAzure\Services\ServiceBus\Models\CreateTopicResult;
-use WindowsAzure\Services\ServiceBus\Models\TopicDescription;
+namespace Tests\Unit\WindowsAzure\ServiceBus\Models;
+use WindowsAzure\ServiceBus\Models\CreateTopicResult;
+use WindowsAzure\ServiceBus\Models\TopicDescription;
 
 /**
  * Unit tests for class WrapAccessTokenResult
@@ -40,7 +40,7 @@ use WindowsAzure\Services\ServiceBus\Models\TopicDescription;
 class CreateTopicResultTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @covers WindowsAzure\Services\ServiceBus\Models\CreateTopicResult::__construct
+     * @covers WindowsAzure\ServiceBus\Models\CreateTopicResult::__construct
      */
     public function testCreateTopicResult()
     {

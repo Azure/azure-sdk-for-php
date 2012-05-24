@@ -14,21 +14,21 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   WindowsAzure\Services\Queue
+ * @package   WindowsAzure\ServiceBus\Models
  * @author    Azure PHP SDK <azurephpsdk@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
-namespace WindowsAzure\Services\ServiceBus\Models;
+namespace WindowsAzure\ServiceBus\Models;
 
-use WindowsAzure\Services\ServiceBus\Models\ListOptions;
+use WindowsAzure\ServiceBus\Models\ListOptions;
 
 /**
  * The options to specify a list rules request.
  *
  * @category  Microsoft
- * @package   WindowsAzure\Services\ServiceBus
+ * @package   WindowsAzure\ServiceBus\Models
  * @author    Azure PHP SDK <azurephpsdk@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0

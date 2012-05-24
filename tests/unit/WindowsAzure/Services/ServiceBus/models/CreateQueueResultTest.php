@@ -22,9 +22,9 @@
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
 
-namespace Tests\Unit\WindowsAzure\Services\ServiceBus\Models;
-use WindowsAzure\Services\ServiceBus\Models\CreateQueueResult;
-use WindowsAzure\Services\ServiceBus\Models\QueueDescription;
+namespace Tests\Unit\WindowsAzure\ServiceBus\Models;
+use WindowsAzure\ServiceBus\Models\CreateQueueResult;
+use WindowsAzure\ServiceBus\Models\QueueDescription;
 
 /**
  * Unit tests for class WrapAccessTokenResult
@@ -40,7 +40,7 @@ use WindowsAzure\Services\ServiceBus\Models\QueueDescription;
 class CreateQueueResultTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @covers WindowsAzure\Services\ServiceBus\Models\CreateQueueResult::__construct
+     * @covers WindowsAzure\ServiceBus\Models\CreateQueueResult::__construct
      */
     public function testCreateQueueResult()
     {
@@ -54,8 +54,8 @@ class CreateQueueResultTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\Services\ServiceBus\Models\CreateQueueResult::getQueueDescription
-     * @covers WindowsAzure\Services\ServiceBus\Models\CreateQueueResult::setQueueDescription
+     * @covers WindowsAzure\ServiceBus\Models\CreateQueueResult::getQueueDescription
+     * @covers WindowsAzure\ServiceBus\Models\CreateQueueResult::setQueueDescription
      */
     public function testCreateQueueResultGetSetQueueDescription()
     {

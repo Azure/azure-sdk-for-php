@@ -22,9 +22,9 @@
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
 
-namespace Tests\Unit\WindowsAzure\Services\ServiceBus\Models;
-use WindowsAzure\Services\ServiceBus\Models\ListQueuesOptions;
-use WindowsAzure\Services\ServiceBus\Models\WrapAccessTokenResult;
+namespace Tests\Unit\WindowsAzure\ServiceBus\Models;
+use WindowsAzure\ServiceBus\Models\ListQueuesOptions;
+use WindowsAzure\ServiceBus\Models\WrapAccessTokenResult;
 
 /**
  * Unit tests for class WrapAccessTokenResult
@@ -40,7 +40,7 @@ use WindowsAzure\Services\ServiceBus\Models\WrapAccessTokenResult;
 class ListQueuesOptionsTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @covers WindowsAzure\Services\ServiceBus\Models\ListQueuesOptions::__construct
+     * @covers WindowsAzure\ServiceBus\Models\ListQueuesOptions::__construct
      */
     public function testListQueuesOptionsConstructor()
     {

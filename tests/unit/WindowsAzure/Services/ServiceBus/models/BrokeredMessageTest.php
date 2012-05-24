@@ -22,9 +22,9 @@
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
 
-namespace Tests\Unit\WindowsAzure\Services\ServiceBus\Models;
-use WindowsAzure\Services\ServiceBus\Models\BrokeredMessage;
-use WindowsAzure\Services\ServiceBus\Models\BrokerProperties;
+namespace Tests\Unit\WindowsAzure\ServiceBus\Models;
+use WindowsAzure\ServiceBus\Models\BrokeredMessage;
+use WindowsAzure\ServiceBus\Models\BrokerProperties;
 
 /**
  * Unit tests for class WrapAccessTokenResult
@@ -40,7 +40,7 @@ use WindowsAzure\Services\ServiceBus\Models\BrokerProperties;
 class BrokeredMessageTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @covers WindowsAzure\Services\ServiceBus\Models\BrokeredMessage::__construct
+     * @covers WindowsAzure\ServiceBus\Models\BrokeredMessage::__construct
      */
     public function testBrokeredMessageConstructor()
     {
@@ -54,7 +54,7 @@ class BrokeredMessageTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\Services\ServiceBus\Models\BrokeredMessage::getBrokerProperties
+     * @covers WindowsAzure\ServiceBus\Models\BrokeredMessage::getBrokerProperties
      */
     public function testBrokeredMessageConstructorWithBrokerProperties()
     {

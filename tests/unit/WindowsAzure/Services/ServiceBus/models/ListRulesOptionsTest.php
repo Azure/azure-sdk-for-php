@@ -22,8 +22,8 @@
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
 
-namespace Tests\Unit\WindowsAzure\Services\ServiceBus\Models;
-use WindowsAzure\Services\ServiceBus\Models\ListRulesOptions;
+namespace Tests\Unit\WindowsAzure\ServiceBus\Models;
+use WindowsAzure\ServiceBus\Models\ListRulesOptions;
 
 /**
  * Unit tests for class WrapAccessTokenResult
@@ -39,7 +39,7 @@ use WindowsAzure\Services\ServiceBus\Models\ListRulesOptions;
 class ListRulesOptionsTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @covers WindowsAzure\Services\ServiceBus\Models\ListRulesOptions::__construct
+     * @covers WindowsAzure\ServiceBus\Models\ListRulesOptions::__construct
      */
     public function testListRulesOptionsConstructor()
     {

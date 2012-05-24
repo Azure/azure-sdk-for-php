@@ -27,9 +27,9 @@ use WindowsAzure\Common\Configuration;
 use WindowsAzure\Common\Models\ServiceProperties;
 use WindowsAzure\ServiceBus\ServiceBusSettings;
 use WindowsAzure\ServiceBus\ServiceBusService;
-use WindowsAzure\Services\ServiceBus\ServiceBusRestProxy;
-use WindowsAzure\Services\ServiceBus\IServiceBus;
-use WindowsAzure\Services\ServiceBus\Models\SubscriptionInfo;
+use WindowsAzure\ServiceBus\ServiceBusRestProxy;
+use WindowsAzure\ServiceBus\IServiceBus;
+use WindowsAzure\ServiceBus\Models\SubscriptionInfo;
 
 /**
  * TestBase class for each unit test class.

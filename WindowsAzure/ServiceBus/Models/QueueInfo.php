@@ -15,23 +15,23 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   WindowsAzure\Services\ServiceBus\Models
+ * @package   WindowsAzure\ServiceBus\Models
  * @author    Azure PHP SDK <azurephpsdk@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
  
-namespace WindowsAzure\Services\ServiceBus\Models;
+namespace WindowsAzure\ServiceBus\Models;
 use WindowsAzure\Resources;
-use WindowsAzure\Services\ServiceBus\Models\QueueDescription;
+use WindowsAzure\ServiceBus\Models\QueueDescription;
 use WindowsAzure\Utilities;
 
 /**
  * The information of a queue.
  *
  * @category  Microsoft
- * @package   WindowsAzure\Services\ServiceBus\Models
+ * @package   WindowsAzure\ServiceBus\Models
  * @author    Azure PHP SDK <azurephpsdk@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0

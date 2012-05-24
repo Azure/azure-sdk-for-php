@@ -15,22 +15,22 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   Tests\Unit\WindowsAzure\Services\ServiceBus\Models
+ * @package   Tests\Unit\WindowsAzure\ServiceBus\Models
  * @author    Azure PHP SDK <azurephpsdk@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
 
-namespace Tests\Unit\WindowsAzure\Services\ServiceBus\Models;
-use WindowsAzure\Services\ServiceBus\Models\BrokerProperties;
-use WindowsAzure\Services\ServiceBus\Models\BrokeredMessage;
+namespace Tests\Unit\WindowsAzure\ServiceBus\Models;
+use WindowsAzure\ServiceBus\Models\BrokerProperties;
+use WindowsAzure\ServiceBus\Models\BrokeredMessage;
 
 /**
  * Unit tests for class WrapAccessTokenResult
  *
  * @category  Microsoft
- * @package   Tests\Unit\WindowsAzure\Services\ServiceBus\Models
+ * @package   Tests\Unit\WindowsAzure\ServiceBus\Models
  * @author    Azure PHP SDK <azurephpsdk@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
@@ -40,7 +40,7 @@ use WindowsAzure\Services\ServiceBus\Models\BrokeredMessage;
 class BrokerPropertiesTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @covers WindowsAzure\Services\ServiceBus\Models\BrokerProperties::__construct
+     * @covers WindowsAzure\ServiceBus\Models\BrokerProperties::__construct
      */
     public function testBrokerPropertiesConstructor()
     {
@@ -52,8 +52,8 @@ class BrokerPropertiesTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\Services\ServiceBus\Models\BrokerProperties::getCorrelationId
-     * @covers WindowsAzure\Services\ServiceBus\Models\BrokerProperties::setCorrelationId
+     * @covers WindowsAzure\ServiceBus\Models\BrokerProperties::getCorrelationId
+     * @covers WindowsAzure\ServiceBus\Models\BrokerProperties::setCorrelationId
      */
     public function testBrokerPropertiesGetSetCorrelationId()
     {

@@ -22,9 +22,9 @@
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
 
-namespace Tests\Unit\WindowsAzure\Services\ServiceBus\Models;
-use WindowsAzure\Services\ServiceBus\Models\CreateRuleResult;
-use WindowsAzure\Services\ServiceBus\Models\RuleDescription;
+namespace Tests\Unit\WindowsAzure\ServiceBus\Models;
+use WindowsAzure\ServiceBus\Models\CreateRuleResult;
+use WindowsAzure\ServiceBus\Models\RuleDescription;
 
 /**
  * Unit tests for class WrapAccessTokenResult
@@ -40,7 +40,7 @@ use WindowsAzure\Services\ServiceBus\Models\RuleDescription;
 class CreateRuleResultTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @covers WindowsAzure\Services\ServiceBus\Models\CreateRuleResult::__construct
+     * @covers WindowsAzure\ServiceBus\Models\CreateRuleResult::__construct
      */
     public function testCreateRuleResult()
     {
@@ -54,8 +54,8 @@ class CreateRuleResultTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\Services\ServiceBus\Models\CreateRuleResult::getRuleDescription
-     * @covers WindowsAzure\Services\ServiceBus\Models\CreateRuleResult::setRuleDescription
+     * @covers WindowsAzure\ServiceBus\Models\CreateRuleResult::getRuleDescription
+     * @covers WindowsAzure\ServiceBus\Models\CreateRuleResult::setRuleDescription
      */
     public function testCreateRuleResultGetSetRuleDescription()
     {

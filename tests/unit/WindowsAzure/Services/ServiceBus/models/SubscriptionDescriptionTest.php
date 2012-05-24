@@ -22,8 +22,8 @@
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
 
-namespace Tests\Unit\WindowsAzure\Services\ServiceBus\Models;
-use WindowsAzure\Services\ServiceBus\Models\SubscriptionDescription;
+namespace Tests\Unit\WindowsAzure\ServiceBus\Models;
+use WindowsAzure\ServiceBus\Models\SubscriptionDescription;
 
 /**
  * Unit tests for class WrapAccessTokenResult
@@ -39,7 +39,7 @@ use WindowsAzure\Services\ServiceBus\Models\SubscriptionDescription;
 class SubscriptionDescriptionTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @covers WindowsAzure\Services\ServiceBus\Models\SubscriptionDescription::__construct
+     * @covers WindowsAzure\ServiceBus\Models\SubscriptionDescription::__construct
      */
     public function testSubscriptionDescriptionConstructor()
     {

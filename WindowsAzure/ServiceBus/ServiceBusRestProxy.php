@@ -15,7 +15,6 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   WindowsAzure\Services\Queue
  * @package   WindowsAzure\ServiceBus
  * @author    Azure PHP SDK <azurephpsdk@microsoft.com>
  * @copyright 2012 Microsoft Corporation
@@ -23,7 +22,7 @@
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
 
-namespace WindowsAzure\Services\ServiceBus;
+namespace WindowsAzure\ServiceBus;
 use WindowsAzure\Core\Atom\Content;
 use WindowsAzure\Core\Atom\Entry;
 use WindowsAzure\Core\Atom\Feed;
@@ -35,28 +34,28 @@ use WindowsAzure\Core\WindowsAzureUtilities;
 use WindowsAzure\Services\Core\Models\GetServicePropertiesResult;
 use WindowsAzure\Services\Core\Models\ServiceProperties;
 use WindowsAzure\Services\Core\ServiceRestProxy;
-use WindowsAzure\Services\ServiceBus\IServiceBus;
-use WindowsAzure\Services\ServiceBus\Models\BrokeredMessage;
-use WindowsAzure\Services\ServiceBus\Models\BrokerProperties;
-use WindowsAzure\Services\ServiceBus\Models\CreateQueueResult;
-use WindowsAzure\Services\ServiceBus\Models\CreateRuleResult;
-use WindowsAzure\Services\ServiceBus\Models\CreateTopicResult;
-use WindowsAzure\Services\ServiceBus\Models\CreateSubscriptionResult;
-use WindowsAzure\Services\ServiceBus\Models\GetQueueResult;
-use WindowsAzure\Services\ServiceBus\Models\GetRuleResult;
-use WindowsAzure\Services\ServiceBus\Models\GetSubscriptionResult;
-use WindowsAzure\Services\ServiceBus\Models\GetTopicResult;
-use WindowsAzure\Services\ServiceBus\Models\ListSubscriptionsResult;
-use WindowsAzure\Services\ServiceBus\Models\ListTopicsResult;
-use WindowsAzure\Services\ServiceBus\Models\ListRulesResult;
-use WindowsAzure\Services\ServiceBus\Models\QueueDescription;
-use WindowsAzure\Services\ServiceBus\Models\QueueInfo;
-use WindowsAzure\Services\ServiceBus\Models\RuleDescription;
-use WindowsAzure\Services\ServiceBus\Models\RuleInfo;
-use WindowsAzure\Services\ServiceBus\Models\SubscriptionDescription;
-use WindowsAzure\Services\ServiceBus\Models\SubscriptionInfo;
-use WindowsAzure\Services\ServiceBus\Models\TopicDescription;
-use WindowsAzure\Services\ServiceBus\Models\TopicInfo;
+use WindowsAzure\ServiceBus\IServiceBus;
+use WindowsAzure\ServiceBus\Models\BrokeredMessage;
+use WindowsAzure\ServiceBus\Models\BrokerProperties;
+use WindowsAzure\ServiceBus\Models\CreateQueueResult;
+use WindowsAzure\ServiceBus\Models\CreateRuleResult;
+use WindowsAzure\ServiceBus\Models\CreateTopicResult;
+use WindowsAzure\ServiceBus\Models\CreateSubscriptionResult;
+use WindowsAzure\ServiceBus\Models\GetQueueResult;
+use WindowsAzure\ServiceBus\Models\GetRuleResult;
+use WindowsAzure\ServiceBus\Models\GetSubscriptionResult;
+use WindowsAzure\ServiceBus\Models\GetTopicResult;
+use WindowsAzure\ServiceBus\Models\ListSubscriptionsResult;
+use WindowsAzure\ServiceBus\Models\ListTopicsResult;
+use WindowsAzure\ServiceBus\Models\ListRulesResult;
+use WindowsAzure\ServiceBus\Models\QueueDescription;
+use WindowsAzure\ServiceBus\Models\QueueInfo;
+use WindowsAzure\ServiceBus\Models\RuleDescription;
+use WindowsAzure\ServiceBus\Models\RuleInfo;
+use WindowsAzure\ServiceBus\Models\SubscriptionDescription;
+use WindowsAzure\ServiceBus\Models\SubscriptionInfo;
+use WindowsAzure\ServiceBus\Models\TopicDescription;
+use WindowsAzure\ServiceBus\Models\TopicInfo;
 use WindowsAzure\Resources;
 use WindowsAzure\Utilities;
 use WindowsAzure\Validate;

@@ -22,9 +22,9 @@
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
 
-namespace Tests\Unit\WindowsAzure\Services\ServiceBus\Models;
-use WindowsAzure\Services\ServiceBus\Models\RuleDescription;
-use WindowsAzure\Services\ServiceBus\Models\WrapAccessTokenResult;
+namespace Tests\Unit\WindowsAzure\ServiceBus\Models;
+use WindowsAzure\ServiceBus\Models\RuleDescription;
+use WindowsAzure\ServiceBus\Models\WrapAccessTokenResult;
 
 /**
  * Unit tests for class WrapAccessTokenResult
@@ -40,7 +40,7 @@ use WindowsAzure\Services\ServiceBus\Models\WrapAccessTokenResult;
 class RuleDescriptionTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @covers WindowsAzure\Services\ServiceBus\Models\RuleDescription::__construct
+     * @covers WindowsAzure\ServiceBus\Models\RuleDescription::__construct
      */
     public function testRuleDescriptionConstructor()
     {

@@ -15,21 +15,21 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   WindowsAzure\Core\Atom
+ * @package   WindowsAzure\ServiceBus\Internal\Atom
  * @author    Azure PHP SDK <azurephpsdk@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
 
-namespace WindowsAzure\Core\Atom;
+namespace WindowsAzure\ServiceBus\Internal\Atom;
 use WindowsAzure\Validate;
 
 /**
  * Thfor service bus.
  *
  * @category  Microsoft
- * @package   WindowsAzure\Core\Atom
+ * @package   WindowsAzure\ServiceBus\Internal\Atom
  * @author    Azure PHP SDK <azurephpsdk@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
