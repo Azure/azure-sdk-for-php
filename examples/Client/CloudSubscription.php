@@ -16,27 +16,27 @@
  *
  * @category  Microsoft
  * @package   Client
- * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
+ * @author    Azure PHP SDK <azurephpsdk@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
  
 namespace Client;
-use WindowsAzure\Core\Configuration;
-use WindowsAzure\Resources;
-use WindowsAzure\Services\ServiceManagement\ServiceManagementService;
-use WindowsAzure\Services\ServiceManagement\ServiceManagementSettings;
-use WindowsAzure\Services\ServiceManagement\Models\Locations;
-use WindowsAzure\Services\ServiceManagement\Models\OperationStatus;
-use WindowsAzure\Services\ServiceManagement\Models\CreateStorageServiceOptions;
+use WindowsAzure\Common\Configuration;
+use WindowsAzure\Common\Internal\Resources;
+use WindowsAzure\ServiceManagement\ServiceManagementService;
+use WindowsAzure\ServiceManagement\ServiceManagementSettings;
+use WindowsAzure\ServiceManagement\Models\Locations;
+use WindowsAzure\ServiceManagement\Models\OperationStatus;
+use WindowsAzure\ServiceManagement\Models\CreateStorageServiceOptions;
 
 /**
  * Encapsulates Windows Azure subscription basic operations.
  *
  * @category  Microsoft
  * @package   Client
- * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
+ * @author    Azure PHP SDK <azurephpsdk@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @version   Release: @package_version@
@@ -148,7 +148,7 @@ class CloudSubscription
      * 
      * @param string $requestId The asynchronous operation request id.
      * 
-     * @throws WindowsAzure\Core\ServiceException
+     * @throws WindowsAzure\Common\ServiceException
      * 
      * @return none
      */

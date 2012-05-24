@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8" ?>
 
 <phpdox xmlns="http://phpdox.de/config">
- <project name="azure-sdk-for-php" source="src" workdir="build/phpdox">
+ <project name="azure-sdk-for-php" source="WindowsAzure" workdir="build/phpdox">
   <collector publiconly="false">
    <include mask="*.php" />
-   <exclude mask="*Autoload.php" />
+   <exclude mask="*WindowsAzure.php" />
   </collector>
 
   <generator output="build">

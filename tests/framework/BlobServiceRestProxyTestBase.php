@@ -16,7 +16,7 @@
  *
  * @category  Microsoft
  * @package   Tests\Framework
- * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
+ * @author    Azure PHP SDK <azurephpsdk@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link      http://pear.php.net/package/azure-sdk-for-php
@@ -24,18 +24,19 @@
 
 namespace Tests\Framework;
 use Tests\Framework\ServiceRestProxyTestBase;
-use WindowsAzure\Core\Configuration;
-use WindowsAzure\Services\Blob\BlobSettings;
-use WindowsAzure\Services\Blob\BlobService;
+use WindowsAzure\Common\Configuration;
+use WindowsAzure\Blob\BlobSettings;
+use WindowsAzure\Blob\BlobService;
 use Tests\Framework\TestResources;
-use WindowsAzure\Services\Blob\Models\CreateContainerOptions;
+use WindowsAzure\Blob\Models\CreateContainerOptions;
+use WindowsAzure\Blob\Models\ListContainersOptions;
 
 /**
  * TestBase class for each unit test class.
  *
  * @category  Microsoft
  * @package   Tests\Framework
- * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
+ * @author    Azure PHP SDK <azurephpsdk@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @version   Release: @package_version@
@@ -52,8 +53,8 @@ class BlobServiceRestProxyTestBase extends ServiceRestProxyTestBase
         $config->setProperty(BlobSettings::ACCOUNT_KEY, TestResources::accountKey());
         $config->setProperty(BlobSettings::ACCOUNT_NAME, TestResources::accountName());        
         $config->setProperty(BlobSettings::URI, $blobUri);
-        $blobWrapper = BlobService::create($config);
-        parent::__construct($config, $blobWrapper);
+        $blobRestProxy = BlobService::create($config);
+        parent::__construct($config, $blobRestProxy);
         $this->_createdContainers = array();
     }
     
@@ -64,15 +65,62 @@ class BlobServiceRestProxyTestBase extends ServiceRestProxyTestBase
             $options->setPublicAccess('container');
         }
         
-        $this->wrapper->createContainer($containerName, $options);
+        $this->restProxy->createContainer($containerName, $options);
         $this->_createdContainers[] = $containerName;
     }
-    
+
+    public function createContainers($containerList, $containerPrefix = null) {
+        $containers = $this->listContainers($containerPrefix);
+        foreach($containerList as $container) {
+            if (array_search($container, $containers) === FALSE) {
+                $this->createContainer($container);
+            } else {
+                $listResults = $this->restProxy->listBlobs($container);
+                $blobs = $listResults->getBlobs();
+                foreach($blobs as $blob)  {
+                    try
+                    {
+                        $this->restProxy->deleteBlob($container, $blob->getName());
+                    }
+                    catch (\Exception $e)
+                    {
+                        // Ignore exception and continue.
+                        error_log($e->getMessage());
+                    }
+                }
+            }
+        }
+    }
+
     public function deleteContainer($containerName)
     {
-        $this->wrapper->deleteContainer($containerName);
+        $this->restProxy->deleteContainer($containerName);
     }
-    
+
+    public function deleteContainers($containerList, $containerPrefix = null) {
+        $containers = $this->listContainers($containerPrefix);
+        foreach($containerList as $container)  {
+            if (!(array_search($container, $containers) === FALSE)) {
+                $this->deleteContainer($container);
+            }
+        }
+    }
+
+    public function listContainers($containerPrefix = null) {
+        $result = array();
+        $opts = new ListContainersOptions();
+        if (!is_null($containerPrefix)) {
+            $opts->setPrefix($containerPrefix);
+        }
+
+        $list = $this->restProxy->listContainers($opts);
+        foreach($list->getContainers() as $item)  {
+            array_push($result, $item->getName());
+        }
+
+        return $result;
+    }
+
     protected function tearDown()
     {
         parent::tearDown();

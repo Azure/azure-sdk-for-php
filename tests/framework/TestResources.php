@@ -17,22 +17,22 @@
  * limitations under the License.
  *
  * @package    WindowsAzure-sdk-for-php
- * @author     Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
+ * @author     Azure PHP SDK <azurephpsdk@microsoft.com>
  * @copyright  2012 Microsoft Corporation
  * @license    http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link       http://pear.php.net/package/azure-sdk-for-php
  */
  
 namespace Tests\Framework;
-use WindowsAzure\Services\Table\Models\EdmType;
-use WindowsAzure\Services\Table\Models\Entity;
-use WindowsAzure\Utilities;
+use WindowsAzure\Table\Models\EdmType;
+use WindowsAzure\Table\Models\Entity;
+use WindowsAzure\Common\Internal\Utilities;
 
 /**
  * Resources for testing framework.
  *
  * @package    WindowsAzure-sdk-for-php
- * @author     Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
+ * @author     Azure PHP SDK <azurephpsdk@microsoft.com>
  * @copyright  2012 Microsoft Corporation
  * @license    http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @version    Release: @package_version@
@@ -395,7 +395,7 @@ class TestResources
         $entity->addProperty('CustomerId', EdmType::INT32, 890);
         $entity->addProperty('CustomerName', null, 'John');
         $entity->addProperty('IsNew', EdmType::BOOLEAN, true);
-        $entity->addProperty('JoinDate', EdmType::DATETIME, new \DateTime());
+        $entity->addProperty('JoinDate', EdmType::DATETIME, Utilities::convertToDateTime('2012-01-26T18:26:19.0000473Z'));
         
         return $entity;
     }

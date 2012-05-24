@@ -16,19 +16,19 @@
  *
  * @category  Microsoft
  * @package   Tests\Unit\WindowsAzure\ServiceRuntime
- * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
+ * @author    Azure PHP SDK <azurephpsdk@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
 namespace Tests\Unit\WindowsAzure\ServiceRuntime;
 use Tests\Framework\TestResources;
-use WindowsAzure\ServiceRuntime\ChannelNotAvailableException;
-use WindowsAzure\ServiceRuntime\FileInputChannel;
+use WindowsAzure\ServiceRuntime\Internal\FileInputChannel;
 use WindowsAzure\ServiceRuntime\RoleEnvironment;
-use WindowsAzure\ServiceRuntime\RoleEnvironmentNotAvailableException;
-use WindowsAzure\ServiceRuntime\RoleInstanceStatus;
-use WindowsAzure\ServiceRuntime\RuntimeKernel;
+use WindowsAzure\ServiceRuntime\Internal\RoleEnvironmentNotAvailableException;
+use WindowsAzure\ServiceRuntime\Internal\ChannelNotAvailableException;
+use WindowsAzure\ServiceRuntime\Internal\RoleInstanceStatus;
+use WindowsAzure\ServiceRuntime\Internal\RuntimeKernel;
 
 require_once 'vfsStream/vfsStream.php';
 
@@ -37,7 +37,7 @@ require_once 'vfsStream/vfsStream.php';
  *
  * @category  Microsoft
  * @package   Tests\Unit\WindowsAzure\ServiceRuntime
- * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
+ * @author    Azure PHP SDK <azurephpsdk@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @version   Release: @package_version@
@@ -1388,17 +1388,17 @@ class RoleEnvironmentTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(3, count($changes));
         
         $this->assertInstanceOf(
-            '\WindowsAzure\\ServiceRuntime\\RoleEnvironmentConfigurationSettingChange',
+            'WindowsAzure\ServiceRuntime\Internal\RoleEnvironmentConfigurationSettingChange',
             $changes[0]
         );
         
         $this->assertInstanceOf(
-            '\WindowsAzure\\ServiceRuntime\\RoleEnvironmentTopologyChange',
+            'WindowsAzure\ServiceRuntime\Internal\RoleEnvironmentTopologyChange',
             $changes[1]
         );
 
         $this->assertInstanceOf(
-            '\WindowsAzure\\ServiceRuntime\\RoleEnvironmentTopologyChange',
+            'WindowsAzure\ServiceRuntime\Internal\RoleEnvironmentTopologyChange',
             $changes[2]
         );
         
@@ -1494,7 +1494,7 @@ class RoleEnvironmentTest extends \PHPUnit_Framework_TestCase
         RoleEnvironment::getDeploymentId();
         
         $this->assertInstanceOf(
-            '\WindowsAzure\\ServiceRuntime\\RoleEnvironmentTopologyChange',
+            'WindowsAzure\ServiceRuntime\Internal\RoleEnvironmentTopologyChange',
             $changes[0]
         );
         
@@ -1544,7 +1544,7 @@ class RoleEnvironmentTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(1, count($changes));
 
         $this->assertInstanceOf(
-            '\WindowsAzure\\ServiceRuntime\\RoleEnvironmentTopologyChange',
+            'WindowsAzure\ServiceRuntime\Internal\RoleEnvironmentTopologyChange',
             $changes[0]
         );
         
@@ -1594,7 +1594,7 @@ class RoleEnvironmentTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(1, count($changes));
 
         $this->assertInstanceOf(
-            '\WindowsAzure\\ServiceRuntime\\RoleEnvironmentTopologyChange',
+            'WindowsAzure\ServiceRuntime\Internal\RoleEnvironmentTopologyChange',
             $changes[0]
         );
         
@@ -1629,7 +1629,7 @@ class RoleEnvironmentTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(1, count($changes));
 
         $this->assertInstanceOf(
-            '\WindowsAzure\\ServiceRuntime\\RoleEnvironmentTopologyChange',
+            'WindowsAzure\ServiceRuntime\Internal\RoleEnvironmentTopologyChange',
             $changes[0]
         );
         
@@ -1664,7 +1664,7 @@ class RoleEnvironmentTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(1, count($changes));
 
         $this->assertInstanceOf(
-            '\WindowsAzure\\ServiceRuntime\\RoleEnvironmentTopologyChange',
+            'WindowsAzure\ServiceRuntime\Internal\RoleEnvironmentTopologyChange',
             $changes[0]
         );
     }

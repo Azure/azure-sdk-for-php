@@ -16,7 +16,7 @@
  *
  * @category  Microsoft
  * @package   Tests\Framework
- * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
+ * @author    Azure PHP SDK <azurephpsdk@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link      http://pear.php.net/package/azure-sdk-for-php
@@ -24,16 +24,16 @@
 namespace Tests\Framework;
 use Tests\Framework\ServiceRestProxyTestBase;
 use Tests\Framework\TestResources;
-use WindowsAzure\Core\Configuration;
-use WindowsAzure\Services\Table\TableSettings;
-use WindowsAzure\Services\Table\TableService;
+use WindowsAzure\Common\Configuration;
+use WindowsAzure\Table\TableSettings;
+use WindowsAzure\Table\TableService;
 
 /**
  * TestBase class for each unit test class.
  *
  * @category  Microsoft
  * @package   Tests\Framework
- * @author    Abdelrahman Elogeel <Abdelrahman.Elogeel@microsoft.com>
+ * @author    Azure PHP SDK <azurephpsdk@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @version   Release: @package_version@
@@ -50,20 +50,20 @@ class TableServiceRestProxyTestBase extends ServiceRestProxyTestBase
         $config->setProperty(TableSettings::ACCOUNT_KEY, TestResources::accountKey());
         $config->setProperty(TableSettings::ACCOUNT_NAME, TestResources::accountName());        
         $config->setProperty(TableSettings::URI, $tableUri);
-        $tableWrapper = TableService::create($config);
-        parent::__construct($config, $tableWrapper);
+        $tableRestProxy = TableService::create($config);
+        parent::__construct($config, $tableRestProxy);
         $this->_createdTables = array();
     }
 
     public function createTable($tableName, $options = null)
     {
-        $this->wrapper->createTable($tableName, $options);
+        $this->restProxy->createTable($tableName, $options);
         $this->_createdTables[] = $tableName;
     }
     
     public function deleteTable($tableName)
     {
-        $this->wrapper->deleteTable($tableName);
+        $this->restProxy->deleteTable($tableName);
     }
     
     public function safeDeleteTable($tableName)
