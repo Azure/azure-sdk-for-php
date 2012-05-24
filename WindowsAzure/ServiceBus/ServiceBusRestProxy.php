@@ -25,6 +25,7 @@
 namespace WindowsAzure\ServiceBus;
 use WindowsAzure\Common\Internal\ServiceRestProxy;
 use WindowsAzure\Common\Internal\Http\HttpCallContext;
+use WindowsAzure\Common\Internal\Serialization\XmlSerializer;
 use WindowsAzure\ServiceBus\Internal\Atom\Content;
 use WindowsAzure\ServiceBus\Internal\Atom\Entry;
 use WindowsAzure\ServiceBus\Internal\Atom\Feed;
@@ -336,7 +337,7 @@ class ServiceBusRestProxy extends ServiceRestProxy implements IServiceBus
 
         $entry = new Entry();
         $content = new Content($queueDescriptionXml);
-        $content->setType(Resources::APPLICATION_XML_CONTENT_TYPE);
+        $content->setType(Resources::XML_CONTENT_TYPE);
         $entry->setContent($content);
         $entry->setAttribute(
             Resources::XMLNS_ATOM, 
@@ -439,7 +440,7 @@ class ServiceBusRestProxy extends ServiceRestProxy implements IServiceBus
 
         $entry = new Entry();
         $content = new Content($topicDescriptionXml);
-        $content->setType(Resources::APPLICATION_XML_CONTENT_TYPE);
+        $content->setType(Resources::XML_CONTENT_TYPE);
         $entry->setContent($content); 
         $entry->setAttribute('xmlns:atom', 'http://www.w3.org/2005/Atom');
         $entry->setAttribute('xmlns', 'http://schemas.microsoft.com/netservices/2010/10/servicebus/connect');
@@ -533,7 +534,7 @@ class ServiceBusRestProxy extends ServiceRestProxy implements IServiceBus
         );
         $entry = new Entry();
         $content = new Content($subscriptionDescriptionXml);
-        $content->setType(Resources::APPLICATION_XML_CONTENT_TYPE);
+        $content->setType(Resources::XML_CONTENT_TYPE);
         $entry->setContent($content);
         $entry->setAttribute(
             Resources::XMLNS_ATOM,
@@ -660,7 +661,7 @@ class ServiceBusRestProxy extends ServiceRestProxy implements IServiceBus
 
         $entry = new Entry();
         $content = new Content($ruleDescriptionXml);
-        $content->setType(Resources::APPLICATION_XML_CONTENT_TYPE);
+        $content->setType(Resources::XML_CONTENT_TYPE);
         $entry->setContent($content);
         $entry->setAttribute(
             Resources::XMLNS_ATOM,
