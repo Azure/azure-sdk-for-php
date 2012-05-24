@@ -23,9 +23,9 @@
  */
  
 namespace WindowsAzure\ServiceBus\Models;
-use WindowsAzure\Resources;
+use WindowsAzure\Common\Internal\Resources;
 use WindowsAzure\ServiceBus\Models\SubscriptionDescription;
-use WindowsAzure\Utilities;
+use WindowsAzure\Common\Internal\Utilities;
 
 /**
  * An active WRAP access Token.

@@ -23,8 +23,8 @@
  */
 
 namespace WindowsAzure\ServiceBus\Internal\Atom;
-use WindowsAzure\Utilities;
-use WindowsAzure\Resources;
+use WindowsAzure\Common\Internal\Utilities;
+use WindowsAzure\Common\Internal\Resources;
 
 /**
  * This class constructs HTTP requests and receive HTTP responses for service bus.

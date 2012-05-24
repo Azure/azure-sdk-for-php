@@ -23,9 +23,9 @@
  */
  
 namespace WindowsAzure\ServiceBus\Models;
-use WindowsAzure\Resources;
+use WindowsAzure\Common\Internal\Resources;
 use WindowsAzure\ServiceBus\Models\TopicDescription;
-use WindowsAzure\Utilities;
+use WindowsAzure\Common\Internal\Utilities;
 
 /**
  * The information of a topic.

@@ -22,8 +22,8 @@
  */
  
 namespace WindowsAzure\ServiceBus\Models;
-use WindowsAzure\Resources;
-use WindowsAzure\Utilities;
+use WindowsAzure\Common\Internal\Resources;
+use WindowsAzure\Common\Internal\Utilities;
 
 /**
  * The base class for the options for list request.

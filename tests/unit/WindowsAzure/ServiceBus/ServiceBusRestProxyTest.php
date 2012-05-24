@@ -30,6 +30,7 @@ use Tests\Framework\TestResources;
 use Tests\Framework\ServiceBusRestProxyTestBase;
 use WindowsAzure\Common\Configuration;
 use WindowsAzure\Common\ServiceException;
+use WindowsAzure\Common\Internal\Resources;
 use WindowsAzure\Common\Internal\Utilities;
 use WindowsAzure\ServiceBus\ServiceBusRestProxy;
 use WindowsAzure\ServiceBus\Models\BrokeredMessage;
@@ -50,7 +51,6 @@ use WindowsAzure\ServiceBus\Models\SubscriptionDescription;
 use WindowsAzure\ServiceBus\Models\SubscriptionInfo;
 use WindowsAzure\ServiceBus\Models\TopicDescription;
 use WindowsAzure\ServiceBus\Models\TopicInfo;
-use WindowsAzure\Resources;
 
 /**
  * Unit tests for ServiceBusRestProxy class
@@ -279,7 +279,7 @@ class ServiceBusRestProxyTest extends ServiceBusRestProxyTestBase
         $queueInfo = new QueueInfo($queueName, $queueDescription);
         $expectedMessage = new BrokeredMessage();
         $expectedMessage->setBody('<data>testContentTypePassesThrough</data>');
-        $expectedMessage->setContentType(Resources::TEXT_XML_CONTENT_TYPE); 
+        $expectedMessage->setContentType(Resources::XML_CONTENT_TYPE); 
 
         $this->safeDeleteQueue($queueName);
         $receiveMessageOptions = new ReceiveMessageOptions();

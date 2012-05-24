@@ -23,8 +23,8 @@
  */
 
 namespace WindowsAzure\ServiceBus\Internal\Atom;
-use WindowsAzure\Utilities;
-use WindowsAzure\Resources;
+use WindowsAzure\Common\Internal\Utilities;
+use WindowsAzure\Common\Internal\Resources;
 
 /**
  * The category class of the ATOM standard.

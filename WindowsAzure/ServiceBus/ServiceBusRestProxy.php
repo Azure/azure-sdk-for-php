@@ -24,6 +24,7 @@
 
 namespace WindowsAzure\ServiceBus;
 use WindowsAzure\Common\Internal\ServiceRestProxy;
+use WindowsAzure\Common\Internal\Http\HttpCallContext;
 use WindowsAzure\ServiceBus\Internal\Atom\Content;
 use WindowsAzure\ServiceBus\Internal\Atom\Entry;
 use WindowsAzure\ServiceBus\Internal\Atom\Feed;
