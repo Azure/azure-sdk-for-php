@@ -1116,7 +1116,7 @@ class BlobRestProxy extends ServiceRestProxy implements IBlob
      * boundary.
      * @param Models\CreateBlobOptions $options   The optional parameters.
      * 
-     * @return none
+     * @return CopyBlobResult
      * 
      * @see http://msdn.microsoft.com/en-us/library/windowsazure/dd179451.aspx
      */
@@ -1162,7 +1162,7 @@ class BlobRestProxy extends ServiceRestProxy implements IBlob
             $options->getTimeout()
         );
         
-        $this->send(
+        $response = $this->send(
             $method, 
             $headers, 
             $queryParams, 
@@ -1170,6 +1170,8 @@ class BlobRestProxy extends ServiceRestProxy implements IBlob
             $path, 
             $statusCode
         );
+        
+        return CopyBlobResult::create($response->getHeader());
     }
     
     /**
@@ -2117,8 +2119,13 @@ class BlobRestProxy extends ServiceRestProxy implements IBlob
         }  
         
         $queryParams[Resources::QP_COMP] = 'snapshot';
+        $this->addOptionalQueryParam(
+            $queryParams,
+            Resources::QP_TIMEOUT,
+            $options->getTimeout()
+        );
 
-        $this->addOptionalAccessConditionHeader(
+        $headers = $this->addOptionalAccessConditionHeader(
             $headers,
             $options->getAccessCondition()
         );

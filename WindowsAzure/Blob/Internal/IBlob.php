@@ -202,7 +202,7 @@ interface IBlob extends FilterableService
     * @param string                   $content   content of the blob
     * @param Models\CreateBlobOptions $options   optional parameters
     * 
-    * @return none.
+    * @return CopyBlobResult
     * 
     * @see http://msdn.microsoft.com/en-us/library/windowsazure/dd179451.aspx
     */
