@@ -215,13 +215,12 @@ class Resources
     const QP_ACTION             = 'action';
     
     // Request body content types
-    const XML_CONTENT_TYPE             = 'application/x-www-form-urlencoded';
-    const TEXT_XML_CONTENT_TYPE        = 'text/xml';
-    const APPLICATION_XML_CONTENT_TYPE = 'application/xml';
-    const BINARY_FILE_TYPE             = 'application/octet-stream';
-    const XML_ATOM_CONTENT_TYPE        = 'application/atom+xml';
-    const HTTP_TYPE                    = 'application/http';
-    const MULTIPART_MIXED_TYPE         = 'multipart/mixed';
+    const URL_ENCODED_CONTENT_TYPE = 'application/x-www-form-urlencoded';
+    const XML_CONTENT_TYPE         = 'application/xml';
+    const BINARY_FILE_TYPE         = 'application/octet-stream';
+    const XML_ATOM_CONTENT_TYPE    = 'application/atom+xml';
+    const HTTP_TYPE                = 'application/http';
+    const MULTIPART_MIXED_TYPE     = 'multipart/mixed';
     
     // Common used XML tags
     const XTAG_ATTRIBUTES                 = '@attributes';
@@ -252,19 +251,19 @@ class Resources
     const XTAG_ERROR                      = 'Error';
 
     // Service Bus
-    const LIST_TOPIC_PATH = '$Resources/Topics';
-    const LIST_QUEUE_PATH = '$Resources/Queues';
-    const LIST_RULE_PATH = '%s/subscriptions/%s/rules';
-    const QUEUE_MESSAGE_PATH = '%s/messages/head';
-    const RULE_PATH = '%s/subscriptions/%s/rules/%s';
-    const SUBSCRIPTION_PATH = '%s/subscriptions/%s';
-    const DEFAULT_RULE_NAME = '$Default';
-    const UNIQUE_ID_PREFIX = 'urn:uuid:';
-    const SERVICE_BUS_NAMESPACE = 'http://schemas.microsoft.com/netservices/2010/10/servicebus/connect';
-    const BROKER_PROPERTIES = 'BrokerProperties';
-    const XMLNS_ATOM = 'xmlns:atom';
-    const XMLNS = 'xmlns';
-    const ATOM_NAMESPACE = 'http://www.w3.org/2005/Atom';
+    const LIST_TOPIC_PATH        = '$Resources/Topics';
+    const LIST_QUEUE_PATH        = '$Resources/Queues';
+    const LIST_RULE_PATH         = '%s/subscriptions/%s/rules';
+    const QUEUE_MESSAGE_PATH     = '%s/messages/head';
+    const RULE_PATH              = '%s/subscriptions/%s/rules/%s';
+    const SUBSCRIPTION_PATH      = '%s/subscriptions/%s';
+    const DEFAULT_RULE_NAME      = '$Default';
+    const UNIQUE_ID_PREFIX       = 'urn:uuid:';
+    const SERVICE_BUS_NAMESPACE  = 'http://schemas.microsoft.com/netservices/2010/10/servicebus/connect';
+    const BROKER_PROPERTIES      = 'BrokerProperties';
+    const XMLNS_ATOM             = 'xmlns:atom';
+    const XMLNS                  = 'xmlns';
+    const ATOM_NAMESPACE         = 'http://www.w3.org/2005/Atom';
     const LIST_SUBSCRIPTION_PATH ='%s/subscriptions';
      
 

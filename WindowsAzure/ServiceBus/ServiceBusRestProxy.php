@@ -23,18 +23,11 @@
  */
 
 namespace WindowsAzure\ServiceBus;
+use WindowsAzure\Common\Internal\ServiceRestProxy;
 use WindowsAzure\ServiceBus\Internal\Atom\Content;
 use WindowsAzure\ServiceBus\Internal\Atom\Entry;
 use WindowsAzure\ServiceBus\Internal\Atom\Feed;
-use WindowsAzure\Core\Http\IHttpClient;
-use WindowsAzure\Core\Http\HttpCallContext;
-use WindowsAzure\Core\Http\Url;
-use WindowsAzure\Core\Serialization\XmlSerializer;
-use WindowsAzure\Core\WindowsAzureUtilities;
-use WindowsAzure\Services\Core\Models\GetServicePropertiesResult;
-use WindowsAzure\Services\Core\Models\ServiceProperties;
-use WindowsAzure\Services\Core\ServiceRestProxy;
-use WindowsAzure\ServiceBus\IServiceBus;
+use WindowsAzure\ServiceBus\Internal\IServiceBus;
 use WindowsAzure\ServiceBus\Models\BrokeredMessage;
 use WindowsAzure\ServiceBus\Models\BrokerProperties;
 use WindowsAzure\ServiceBus\Models\CreateQueueResult;
