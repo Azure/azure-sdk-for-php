@@ -255,7 +255,7 @@ class Resources
     const LIST_QUEUE_PATH            = '$Resources/Queues';
     const LIST_RULE_PATH             = '%s/subscriptions/%s/rules';
     const RECEIVE_QUEUE_MESSAGE_PATH = '%s/messages/head';
-    const SEND_QUEUE_MESSAGE_PATH    = '%s/messages/head';
+    const SEND_QUEUE_MESSAGE_PATH    = '%s/messages';
     const RULE_PATH                  = '%s/subscriptions/%s/rules/%s';
     const SUBSCRIPTION_PATH          = '%s/subscriptions/%s';
     const DEFAULT_RULE_NAME          = '$Default';

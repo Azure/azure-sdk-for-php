@@ -153,8 +153,10 @@ class ServiceBusRestProxyTest extends ServiceBusRestProxyTestBase
         $receiveMessageOptions->setIsReceiveAndDelete(true);
         $receiveMessageOptions->setIsPeekLock(false);
         $receiveMessageOptions->setTimeout(5);
-
-        $receivedMessage = $this->restProxy->receiveMessage($queueName, $receiveMessageOptions);
+        $receivedMessage = $this->restProxy->receiveMessage(
+            $queueName.'/messages/head',
+            $receiveMessageOptions
+        );
         $this->assertNotNull($receivedMessage);
         $this->assertEquals(
             $expectedMessageText,
@@ -233,8 +235,8 @@ class ServiceBusRestProxyTest extends ServiceBusRestProxyTestBase
     public function testPeekLockedMessageCanBeUnlocked()
     {
         $queueDescription = new QueueDescription();
-        $queueName = 'testPeekLockMessageCanBeCompleted';
-        $expectedMessage = 'testPeekLockMessageCanBeCompletedMessage';
+        $queueName = 'testPeekLockMessageCanBeUnlocked';
+        $expectedMessage = 'testPeekLockMessageCanBeUnlocked';
         $queueInfo = new QueueInfo($queueName, $queueDescription);
         $this->safeDeleteQueue($queueName);
         $this->createQueue($queueInfo);
@@ -254,10 +256,12 @@ class ServiceBusRestProxyTest extends ServiceBusRestProxyTestBase
         );
 
         $lockToken = $peekedMessage->getLockToken();
-        $lockedUnti = $peekedMessage->getLockedUntilUtc();
+        $lockedUntilUtc = $peekedMessage->getLockedUntilUtc();
 
         $this->restProxy->unlockMessage($peekedMessage);
-        $unlockedMessage = $this->receiveQueueMessage(
+        $receiveMessageOptions->setIsReceiveAndDelete(true);
+        $receiveMessageOptions->setIsPeekLock(false);
+        $unlockedMessage = $this->restProxy->receiveQueueMessage(
             $queueName,
             $receiveMessageOptions
         );
@@ -313,7 +317,6 @@ class ServiceBusRestProxyTest extends ServiceBusRestProxyTestBase
     {
         $topicName = 'createTopicSuccess';
         $topicInfo = new TopicInfo($topicName);
-
         $this->safeDeleteTopic($topicName); 
 
         $listTopicsOptions = new ListTopicsOptions();

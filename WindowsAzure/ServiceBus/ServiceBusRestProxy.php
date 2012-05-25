@@ -147,7 +147,7 @@ class ServiceBusRestProxy extends ServiceRestProxy implements IServiceBus
     /**
      * Receives a queue message. 
      * 
-     * @param string                $queuePath             The path of the
+     * @param string                $queueName             The name of the
      * queue. 
      * @param ReceiveMessageOptions $receiveMessageOptions The options to 
      * receive the message. 
@@ -206,6 +206,11 @@ class ServiceBusRestProxy extends ServiceRestProxy implements IServiceBus
             $brokerProperties = BrokerProperties::create(
                 $responseHeaders['brokerproperties']
             );
+        }
+
+        if (array_key_exists('location', $responseHeaders))
+        {
+            $brokerProperties->setLockLocation($responseHeaders['location']);
         }
 
         $brokeredMessage = new BrokeredMessage($brokerProperties);
@@ -292,7 +297,17 @@ class ServiceBusRestProxy extends ServiceRestProxy implements IServiceBus
     {
         $httpCallContext = new HttpCallContext();
         $httpCallContext->setMethod(Resources::HTTP_PUT);
-        $httpCallContext->setPath($brokeredMessage->getLockLocation());
+        $lockLocation = $brokeredMessage->getLockLocation();
+        $lockLocationArray = parse_url($lockLocation);
+        $lockLocationPath = '';
+
+        if (array_key_exists(Resources::PHP_URL_PATH, $lockLocationArray))
+        {
+            $lockLocationPath = $lockLocationArray[Resources::PHP_URL_PATH];
+            $lockLocationPath = preg_replace('@^\/@', '', $lockLocationPath);
+        } 
+
+        $httpCallContext->setPath($lockLocationPath);
         $httpCallContext->addStatusCode(Resources::STATUS_OK);
         $this->sendContext($httpCallContext);
     }

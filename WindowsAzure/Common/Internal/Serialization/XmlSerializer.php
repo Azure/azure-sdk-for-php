@@ -170,7 +170,6 @@ class XmlSerializer implements ISerializer
         $result = array();
         $counter = 0;
         $root=new \SimpleXMLElement($xmlString);
-        print_r($root);
         $reflectionClass = new \ReflectionClass($root->getName());
         $instance = $reflectionClass->newInstance();
         foreach ($root->children() as $child)

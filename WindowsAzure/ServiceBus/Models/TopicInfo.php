@@ -55,7 +55,7 @@ class TopicInfo
     private $_topicDescription;
 
     /**
-     * Creates an TopicInfo with specified parameters.
+     * Creates a TopicInfo with specified parameters.
      *
      * @param string           $name             The name of the topic.
      * @param TopicDescription $topicDescription The description of the topic.
@@ -64,11 +64,9 @@ class TopicInfo
     public function __construct($name, $topicDescription = null)
     {
         $this->_name = $name;
-        if (is_null($topicDescription))
-        {
+        if (is_null($topicDescription)) {
             $topicDescription = new TopicDescription();
         }
-
         $this->_topicDescription = $topicDescription;
     }
 
