@@ -36,30 +36,68 @@ use WindowsAzure\Common\Internal\Utilities;
  * @version   Release: @package_version@
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
+
+/**
+ The base class for all the list options. 
+*/
 class ListOptions
 {
+    /**
+     * The skip query parameter for list API.
+     * 
+     * @var integer
+     */
     private $_skip; 
+
+    /** 
+     * The top query parameter for list API.
+     * 
+     * @var integer
+     */
     private $_top;
 
+    /**
+     * Creates a list option instance with default parameters. 
+     */
     public function __construct()
     {
     }
 
+    /**
+     * Gets the skip parameter. 
+     * 
+     * @return integer
+     */
     public function getSkip()
     {
         return $this->_skip; 
     }
 
+    /**
+     * Sets the skip parameter.
+     *
+     * @param integer $skip value.
+     */ 
     public function setSkip($skip)
     {
         $this->_skip = $skip;
     }
 
+    /**
+     * Gets the top parameter. 
+     * 
+     * @return integer
+     */
     public function getTop()
     {
         return $this->_top;
     }
 
+    /**
+     * Sets the top parameter.
+     * 
+     * @param integer $top value.
+     */
     public function setTop($top)
     {
         $this->_top = $top;

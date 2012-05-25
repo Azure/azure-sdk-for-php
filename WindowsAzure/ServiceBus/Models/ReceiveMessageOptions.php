@@ -22,6 +22,8 @@
  */
 namespace WindowsAzure\ServiceBus\Models;
 
+use WindowsAzure\ServiceBus\Models\ReceiveMode;
+
 /**
  * This class constructs HTTP requests and receive HTTP responses for service bus.
  *
@@ -46,24 +48,9 @@ class ReceiveMessageOptions
     /**
      * The mode of receiving message. 
      * 
-     * @var string 
+     * @var integer 
      */
     private $_receiveMode;
-
-    /**
-     * Is receive and delete mode.
-     * 
-     * @var boolean
-     */
-    private $_isReceiveAndDelete;
-
-    /**
-     * Is peek lock mode.
-     * 
-     * @var boolean
-     */
-    private $_isPeekLock;
-
 
     /** 
      * Creates a receive message option instance with default parameters.
@@ -94,7 +81,7 @@ class ReceiveMessageOptions
     /**
      * Gets the receive mode. 
      * 
-     * @return string 
+     * @return integer
      */ 
     public function getReceiveMode()
     {
@@ -104,7 +91,7 @@ class ReceiveMessageOptions
     /**
      * Sets the receive mode. 
      * 
-     * @param string $receiveMode The mode of receiving the message. 
+     * @param integer $receiveMode The mode of receiving the message. 
      */
     public function setReceiveMode($receiveMode)
     {   
@@ -118,19 +105,17 @@ class ReceiveMessageOptions
      */
     public function getIsReceiveAndDelete()
     {
-        return $this->_isReceiveAndDelete;
+        return ($this->_receiveMode === ReceiveMode::ReceiveAndDelete);
     }
 
     /**
      * Sets whether the mode of receiving is receive and delete. 
      * 
-     * @param boolean $isReceiveAndDelete value. 
-     * 
      * @return none
      */
-    public function setIsReceiveAndDelete($isReceiveAndDelete)
+    public function setReceiveAndDelete()
     {   
-        $this->_isReceiveAndDelete = $isReceiveAndDelete;
+        $this->_receiveMode = ReceiveMode::ReceiveAndDelete;
     }
     
     /**
@@ -141,7 +126,7 @@ class ReceiveMessageOptions
      */
     public function getIsPeekLock()
     {
-        return $this->_isPeekLock;
+        return ($this->_receiveMode === ReceiveMode::PeekLock);
     }    
 
     /**
@@ -149,9 +134,10 @@ class ReceiveMessageOptions
      * 
      * @return none
      */
-    public function setIsPeekLock($isPeekLock)
+    public function setPeekLock()
     {   
-        $this->_isPeekLock = $isPeekLock;
+        $this->_receiveMode = ReceiveMode::PeekLock;
     }
 }
+
 ?>

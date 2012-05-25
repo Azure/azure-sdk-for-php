@@ -150,9 +150,8 @@ class ServiceBusRestProxyTest extends ServiceBusRestProxyTestBase
             $brokeredMessage
         );
         $receiveMessageOptions = new ReceiveMessageOptions();
-        $receiveMessageOptions->setIsReceiveAndDelete(true);
-        $receiveMessageOptions->setIsPeekLock(false);
         $receiveMessageOptions->setTimeout(5);
+        $receiveMessageOptions->setReceiveAndDelete();
         $receivedMessage = $this->restProxy->receiveMessage(
             $queueName.'/messages/head',
             $receiveMessageOptions
@@ -181,8 +180,7 @@ class ServiceBusRestProxyTest extends ServiceBusRestProxyTestBase
         $this->restProxy->sendQueueMessage($queueName, $brokeredMessage);
         $receiveMessageOptions = new ReceiveMessageOptions();
         $receiveMessageOptions->setTimeout(5);
-        $receiveMessageOptions->setIsReceiveAndDelete(false); 
-        $receiveMessageOptions->setIsPeekLock(true); 
+        $receiveMessageOptions->setPeekLock(); 
         $receivedMessage = $this->restProxy->receiveQueueMessage(
             $queueName, 
             $receiveMessageOptions
@@ -215,8 +213,7 @@ class ServiceBusRestProxyTest extends ServiceBusRestProxyTestBase
 
         $receiveMessageOptions = new ReceiveMessageOptions();
         $receiveMessageOptions->setTimeout(5);
-        $receiveMessageOptions->setIsReceiveAndDelete(false);
-        $receiveMessageOptions->setIsPeekLock(true);
+        $receiveMessageOptions->setPeekLock();
 
         $brokeredMessage = $this->restProxy->receiveQueueMessage(
             $queueName, 
@@ -247,8 +244,7 @@ class ServiceBusRestProxyTest extends ServiceBusRestProxyTestBase
 
         $receiveMessageOptions = new ReceiveMessageOptions();
         $receiveMessageOptions->setTimeout(5);
-        $receiveMessageOptions->setIsReceiveAndDelete(false);
-        $receiveMessageOptions->setIsPeekLock(true);
+        $receiveMessageOptions->setPeekLock();
 
         $peekedMessage = $this->restProxy->receiveQueueMessage(
             $queueName, 
@@ -259,8 +255,7 @@ class ServiceBusRestProxyTest extends ServiceBusRestProxyTestBase
         $lockedUntilUtc = $peekedMessage->getLockedUntilUtc();
 
         $this->restProxy->unlockMessage($peekedMessage);
-        $receiveMessageOptions->setIsReceiveAndDelete(true);
-        $receiveMessageOptions->setIsPeekLock(false);
+        $receiveMessageOptions->setReceiveAndDelete();
         $unlockedMessage = $this->restProxy->receiveQueueMessage(
             $queueName,
             $receiveMessageOptions
@@ -289,7 +284,7 @@ class ServiceBusRestProxyTest extends ServiceBusRestProxyTestBase
         $this->safeDeleteQueue($queueName);
         $receiveMessageOptions = new ReceiveMessageOptions();
         $receiveMessageOptions->setTimeout(5);
-        $receiveMessageOptions->setIsReceiveAndDelete(true);
+        $receiveMessageOptions->setReceiveAndDelete();
         $this->createQueue($queueInfo);
         $this->restProxy->sendQueueMessage($queueName, $expectedMessage);
         $actualMessage = $this->restProxy->receiveQueueMessage(
@@ -639,7 +634,7 @@ class ServiceBusRestProxyTest extends ServiceBusRestProxyTestBase
         $this->restProxy->sendQueueMessage($queueName, $brokeredMessage);
         $receiveMessageOptions = new ReceiveMessageOptions();
         $receiveMessageOptions->setTimeout(5);
-        $receiveMessageOptions->setIsReceiveAndDelete(true);
+        $receiveMessageOptions->setReceiveAndDelete();
         $receivedMessage = $this->restProxy->receiveQueueMessage(
             $queueName, 
             $receiveMessageOptions

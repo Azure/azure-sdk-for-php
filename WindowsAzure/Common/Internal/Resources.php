@@ -208,6 +208,7 @@ class Resources
     const QP_BLOCK_LIST_TYPE    = 'blocklisttype';
     const QP_SELECT             = '$select';
     const QP_TOP                = '$top';
+    const QP_SKIP               = '$skip';
     const QP_FILTER             = '$filter';
     const QP_NEXT_TABLE_NAME    = 'NextTableName';
     const QP_NEXT_PK            = 'NextPartitionKey';
@@ -251,9 +252,10 @@ class Resources
     const XTAG_ERROR                      = 'Error';
 
     // Service Bus
-    const LIST_TOPIC_PATH            = '$Resources/Topics';
-    const LIST_QUEUE_PATH            = '$Resources/Queues';
-    const LIST_RULE_PATH             = '%s/subscriptions/%s/rules';
+    const LIST_TOPICS_PATH           = '$Resources/Topics';
+    const LIST_QUEUES_PATH           = '$Resources/Queues';
+    const LIST_RULES_PATH            = '%s/subscriptions/%s/rules';
+    const LIST_SUBSCRIPTIONS_PATH    = '%s/subscriptions';
     const RECEIVE_QUEUE_MESSAGE_PATH = '%s/messages/head';
     const SEND_QUEUE_MESSAGE_PATH    = '%s/messages';
     const RULE_PATH                  = '%s/subscriptions/%s/rules/%s';
@@ -265,7 +267,6 @@ class Resources
     const XMLNS_ATOM                 = 'xmlns:atom';
     const XMLNS                      = 'xmlns';
     const ATOM_NAMESPACE             = 'http://www.w3.org/2005/Atom';
-    const LIST_SUBSCRIPTION_PATH     ='%s/subscriptions';
 
     // PHP URL Keys
     const PHP_URL_SCHEME   = 'scheme';
