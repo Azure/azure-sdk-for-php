@@ -41,9 +41,9 @@ use WindowsAzure\ServiceBus\Models\QueueDescription;
 class CreateQueueResult
 {
     /**
-     * The description of the queue. 
+     * The description of a queue. 
      *
-     * @var string 
+     * @var QueueDescription
      */
     private $_queueDescription;
 

@@ -39,6 +39,7 @@ use WindowsAzure\ServiceBus\Models\CreateQueueResult;
 use WindowsAzure\ServiceBus\Models\CreateRuleResult;
 use WindowsAzure\ServiceBus\Models\CreateTopicResult;
 use WindowsAzure\ServiceBus\Models\CreateSubscriptionResult;
+use WindowsAzure\ServiceBus\Models\ListQueuesOptions;
 use WindowsAzure\ServiceBus\Models\ListRulesOptions;
 use WindowsAzure\ServiceBus\Models\ListTopicsOptions;
 use WindowsAzure\ServiceBus\Models\ListSubscriptionsOptions;
@@ -319,7 +320,7 @@ class ServiceBusRestProxyTest extends ServiceBusRestProxyTestBase
         $listTopicsResult = $this->restProxy->listTopics($listTopicsOptions);
         $getTopicResult = $this->restProxy->getTopic($topicName);
         $this->restProxy->deleteTopic($topicName);
-        $listTopicsResult2 = $this->restProxy->listTopics($topicInfo);
+        $listTopicsResult2 = $this->restProxy->listTopics($listTopicsOptions);
 
         $this->assertNotNull($createTopicResult);
         $this->assertNotNull($listTopicsResult);
@@ -409,14 +410,16 @@ class ServiceBusRestProxyTest extends ServiceBusRestProxyTestBase
         $topicInfo = new TopicInfo($topicName);
         $subscriptionName = 'MySubscription';
         $subscriptionInfo = new SubscriptionInfo($subscriptionName);
-        
+        $listSubscriptionsOptions = new ListSubscriptionsOptions();
+        $this->safeDeleteSubscription($topicName, $subscriptionName); 
+        $this->safeDeleteTopic($topicName);
         $this->createTopic($topicInfo);
         $this->createSubscription($topicName, $subscriptionInfo);
         $this->restProxy->deleteSubscription($topicName, $subscriptionName);
 
         $listSubscriptionsResult = $this->restProxy->listSubscriptions(
             $topicName,
-            $subscriptionName
+            $listSubscriptionsOptions
         );
 
         $subscriptionDescription = $listSubscriptionsResult->getSubscriptionDescription();

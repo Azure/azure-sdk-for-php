@@ -40,9 +40,15 @@ use WindowsAzure\ServiceBus\Models\GetQueueResult;
 use WindowsAzure\ServiceBus\Models\GetRuleResult;
 use WindowsAzure\ServiceBus\Models\GetSubscriptionResult;
 use WindowsAzure\ServiceBus\Models\GetTopicResult;
+use WindowsAzure\ServiceBus\Models\ListQueuesOptions;
+use WindowsAzure\ServiceBus\Models\ListQueuesResult;
+use WindowsAzure\ServiceBus\Models\ListSubscriptionsOptions;
 use WindowsAzure\ServiceBus\Models\ListSubscriptionsResult;
+use WindowsAzure\ServiceBus\Models\ListTopicsOptions;
 use WindowsAzure\ServiceBus\Models\ListTopicsResult;
+use WindowsAzure\ServiceBus\Models\ListRulesOptions;
 use WindowsAzure\ServiceBus\Models\ListRulesResult;
+use WindowsAzure\ServiceBus\Models\ListOptions;
 use WindowsAzure\ServiceBus\Models\QueueDescription;
 use WindowsAzure\ServiceBus\Models\QueueInfo;
 use WindowsAzure\ServiceBus\Models\RuleDescription;
@@ -423,7 +429,7 @@ class ServiceBusRestProxy extends ServiceRestProxy implements IServiceBus
      * @throws Exception 
      * @return ListQueuesResult;
      */
-    public function listQueues($listQueueOptions)
+    public function listQueues($listQueuesOptions)
     {
         $response = $this->listOptions($listQueuesOptions, Resources::LIST_QUEUES_PATH);
         $listQueuesResult = ListQueuesResult::create($response->getBody());
@@ -432,22 +438,27 @@ class ServiceBusRestProxy extends ServiceRestProxy implements IServiceBus
 
     private function listOptions($listOptions, $path)
     {
+        if (is_null($listOptions))
+        {
+            $listOptions = new ListOptions();
+        }
+
         $httpCallContext = new HttpCallContext();
         $httpCallContext->setMethod(Resources::HTTP_GET);
         $httpCallContext->setPath($path);
         $httpCallContext->addStatusCode(Resources::STATUS_OK);
+        $top = $listOptions->getTop();
+        $skip = $listOptions->getSkip();
 
-        if (!empty($listOptions->getTop()))
-        {
-            $httpCallContext->addQueryParameter(Resources::QP_TOP, $listOptions->getTop());
+        if (!empty($top)) {
+            $httpCallContext->addQueryParameter(Resources::QP_TOP, $top);
         } 
 
-        if (!empty($listOptions->getSkip())
-        {
-            $httpCallContext->addQueryParameter(Resources::QP_SKIP, $listOptions->getSkip());
+        if (!empty($skip)) { 
+            $httpCallContext->addQueryParameter(Resources::QP_SKIP, $skip);
         }
 
-        return $this-sendContext($httpCallContext);
+        return $this->sendContext($httpCallContext);
     }
 
     /**
@@ -535,7 +546,7 @@ class ServiceBusRestProxy extends ServiceRestProxy implements IServiceBus
     {
         $response = $this->listOptions($listTopicsOptions, Resources::LIST_TOPICS_PATH);
         $listTopicsResult = ListTopicsResult::create($response->getBody());
-        return $listtopicsResult;
+        return $listTopicsResult;
     }
 
     /**
@@ -647,7 +658,9 @@ class ServiceBusRestProxy extends ServiceRestProxy implements IServiceBus
      *
      * @return ListSubscriptionsResult
      */
-    public function listSubscriptions($topicPath, $listSubscriptionsOptions) 
+    public function listSubscriptions(
+        $topicPath, 
+        $listSubscriptionsOptions) 
     {
         $listSubscriptionsPath = sprintf(
             Resources::LIST_SUBSCRIPTIONS_PATH, 
@@ -769,15 +782,18 @@ class ServiceBusRestProxy extends ServiceRestProxy implements IServiceBus
      *
      * @return ListRuleResult
      */
-    public function listRules($topicPath, $subscriptionName, $listRulesOptions) 
-    {
+    public function listRules(
+        $topicPath, 
+        $subscriptionName, 
+        $listRulesOptions
+    ) {
         $listRulesPath = sprintf(
             Resources::LIST_RULES_PATH,
             $topicPath,
             $subscriptionName
         );
 
-        $response = $this->listOptions($listRulesOptions, $listSubscriptionsPath);
+        $response = $this->listOptions($listRulesOptions, $listRulesPath);
         $listRulesResult = ListRulesResult::create($response->getBody());
         return $listRulesResult;
     }
