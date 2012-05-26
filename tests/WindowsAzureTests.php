@@ -32,6 +32,8 @@ spl_autoload_register(
             'tests\\functional\\windowsazure\\queue\\queueservicefunctionaltest' => '/functional/WindowsAzure/Queue/QueueServiceFunctionalTest.php',
             'tests\\functional\\windowsazure\\queue\\queueservicefunctionaltestdata' => '/functional/WindowsAzure/Queue/QueueServiceFunctionalTestData.php',
             'tests\\functional\\windowsazure\\queue\\queueserviceintegrationtest' => '/functional/WindowsAzure/Queue/QueueServiceIntegrationTest.php',
+            'tests\\functional\\windowsazure\\servicebus\\integrationtestbase' => '/functional/WindowsAzure/ServiceBus/IntegrationTestBase.php',
+            'tests\\functional\\windowsazure\\servicebus\\servicebusintegrationtest' => '/functional/WindowsAzure/ServiceBus/ServiceBusIntegrationTest.php',
             'tests\\functional\\windowsazure\\table\\batchworkerconfig' => '/functional/WindowsAzure/Table/TableServiceFunctionalTest.php',
             'tests\\functional\\windowsazure\\table\\concurtype' => '/functional/WindowsAzure/Table/TableServiceFunctionalTest.php',
             'tests\\functional\\windowsazure\\table\\faketableinfoentry' => '/functional/WindowsAzure/Table/TableServiceFunctionalTestData.php',
