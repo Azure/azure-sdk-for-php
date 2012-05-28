@@ -89,7 +89,7 @@ class ServiceBusIntegrationTest extends IntegrationTestBase
         // Arrange
 
         // Act
-        $entry = $this->restProxy->getQueue('TestAlpha')->getValue();
+        $entry = $this->restProxy->getQueue('TestAlpha');
         $feed = $this->restProxy->listQueues();
 
         // Assert
@@ -139,9 +139,10 @@ class ServiceBusIntegrationTest extends IntegrationTestBase
         }
 
         // Act
-        $this->restProxy->deleteQueue('TestDeleteQueueWorks');
+        $result = $this->restProxy->deleteQueue('TestDeleteQueueWorks');
 
         // Assert
+        $this->assertNull($result);
     }
 
     /**
@@ -370,7 +371,7 @@ class ServiceBusIntegrationTest extends IntegrationTestBase
         $this->assertNotNull($fetched, '$fetched');
         $this->assertNotNull($listed2, '$listed2');
 
-        $this->assertEquals(count($listed->getTopicDescription()) - 1, count($listed2->getTopicDescription()), '$listed2->getItems()->size()');
+        $this->assertEquals(count($listed->getTopicInfo()) - 1, count($listed2->getTopicInfo()), '$listed2->getItems()->size()');
     }
 
     // TODO: Figure out what to do with this filter.
@@ -414,7 +415,7 @@ class ServiceBusIntegrationTest extends IntegrationTestBase
         // Assert
         $this->assertNotNull($created, '$created');
         // TODO: Make sure there is something good here.
-//        $this->assertEquals('MySubscription', $created->getName(), '$created->getName()');
+//        $this->assertEquals('MySubscription', $created->getTitle(), '$created->getTitle()');
     }
 
     /**
@@ -436,11 +437,11 @@ class ServiceBusIntegrationTest extends IntegrationTestBase
         $this->assertNotNull($result, '$result');
         // TODO:
 //        $this->assertEquals(1, $result->getItems()->size(), '$result->getItems()->size()');
-//        $this->assertEquals('MySubscription2', $result->getItems()->get(0)->getName(), '$result->getItems()->get(0)->getName()');
-        $items = $result->getSubscriptionDescription();
+//        $this->assertEquals('MySubscription2', $result->getItems()->get(0)->getTitle(), '$result->getItems()->get(0)->getTitle()');
+        $items = $result->getSubscriptionInfo();
         $this->assertEquals(1, count($items), '$result->getItems()->size()');
-        // TODO: getName is not implemented
-//        $this->assertEquals('MySubscription2', $items[0]->getName(), '$result->getItems()->get(0)->getName()');
+        // TODO: getTitle is not implemented
+//        $this->assertEquals('MySubscription2', $items[0]->getTitle(), '$result->getItems()->get(0)->getTitle()');
     }
 
     /**
@@ -462,8 +463,8 @@ class ServiceBusIntegrationTest extends IntegrationTestBase
         // Assert
         $this->assertNotNull($result, '$result');
         // TODO
-//        $this->assertEquals('MySubscription3', $result->getName(), '$result->getName()');
-        $this->assertEquals('MySubscription3', $result->getSubscriptionInfo()->getName(), '$result->getSubscriptionInfo->getName()');
+//        $this->assertEquals('MySubscription3', $result->getTitle(), '$result->getTitle()');
+        $this->assertEquals('MySubscription3', $result->getSubscriptionInfo()->getTitle(), '$result->getSubscriptionInfo->getTitle()');
     }
 
     /**
@@ -488,10 +489,10 @@ class ServiceBusIntegrationTest extends IntegrationTestBase
         $result = $this->restProxy->listSubscriptions($topicName, null);
         $this->assertNotNull($result, '$result');
 //        $this->assertEquals(1, count($result->getItems()), '$result->getItems()->size()');
-        $this->assertEquals(1, count($result->getSubscriptionDescription()), '$result->getItems()->size()');
-        $items = $result->getSubscriptionDescription();
+        $this->assertEquals(1, count($result->getSubscriptionInfo()), '$result->getItems()->size()');
+        $items = $result->getSubscriptionInfo();
         // TODO: https://github.com/WindowsAzure/azure-sdk-for-php/issues/399
-//        $this->assertEquals('MySubscription5', $items[0]->getName(), '$result->getItems()->get(0)->getName()');
+//        $this->assertEquals('MySubscription5', $items[0]->getTitle(), '$result->getItems()->get(0)->getTitle()');
     }
 
     /**
@@ -522,9 +523,7 @@ class ServiceBusIntegrationTest extends IntegrationTestBase
         // Assert
         $this->assertNotNull($message, '$message');
 
-        $data = str_pad('', 100, chr(0));
-        $size = $message->getBody()->read($data);
-        $this->assertEquals('<p>Testing subscription</p>', new String($data, 0, $size), 'new String($data, 0, $size)');
+        $this->assertEquals('<p>Testing subscription</p>', $message->getBody(), '$message->getBody())');
         $this->assertEquals('text/html', $message->getContentType(), '$message->getContentType()');
     }
 
@@ -547,7 +546,7 @@ class ServiceBusIntegrationTest extends IntegrationTestBase
         // Assert
         $this->assertNotNull($created, '$created');
         // TODO
-//        $this->assertEquals('MyRule1', $created->getName(), '$created->getName()');
+//        $this->assertEquals('MyRule1', $created->getTitle(), '$created->getTitle()');
     }
 
     /**
@@ -571,20 +570,20 @@ class ServiceBusIntegrationTest extends IntegrationTestBase
         // Assert
         $this->assertNotNull($result, '$result');
 //        $this->assertEquals(2, count($result->getItems()), '$result->getItems()->size()');
-        $this->assertEquals(2, count($result->getRuleDescription()), '$result->getItems()->size()');
-        $items = $result->getRuleDescription();
+        $this->assertEquals(2, count($result->getRuleInfo()), '$result->getItems()->size()');
+        $items = $result->getRuleInfo();
         $rule0 = $items[0];
         $rule1 = $items[1];
-        if ($rule0->getName() == 'MyRule2') {
+        if ($rule0->getTitle() == 'MyRule2') {
             $swap = $rule1;
             $rule1 = $rule0;
             $rule0 = $swap;
         }
 
-        $this->assertEquals('$Default', $rule0->getName(), '$rule0->getName()');
-        $this->assertEquals('MyRule2', $rule1->getName(), '$rule1->getName()');
-        $items = $result->getRuleDescription();
-        $this->assertNotNull($items[0]->getModel(), '$result->getItems()->get(0)->getModel()');
+        $this->assertEquals('$Default', $rule0->getTitle(), '$rule0->getTitle()');
+        $this->assertEquals('MyRule2', $rule1->getTitle(), '$rule1->getTitle()');
+        $items = $result->getRuleInfo();
+        $this->assertNotNull($items[0], '$result->getItems()->get(0)');
     }
 
     /**
@@ -606,7 +605,7 @@ class ServiceBusIntegrationTest extends IntegrationTestBase
         // Assert
         $this->assertNotNull($result, '$result');
         // TODO
-//        $this->assertEquals('$Default', $result->getName(), '$result->getName()');
+//        $this->assertEquals('$Default', $result->getTitle(), '$result->getTitle()');
     }
 
     /**
@@ -637,9 +636,9 @@ class ServiceBusIntegrationTest extends IntegrationTestBase
 // TODO        
 //        $this->assertEquals(1, count($result->getItems()), '$result->getItems()->size()');
 //        $items = $result->getItems();
-        $this->assertEquals(1, count($result->getRuleDescription()), '$result->getItems()->size()');
-        $items = $result->getRuleDescription();
-        $this->assertEquals('MyRule4', $items[0]->getName(), '$result->getItems()->get(0)->getName()');
+        $this->assertEquals(1, count($result->getRuleInfo()), '$result->getItems()->size()');
+        $items = $result->getRuleInfo();
+        $this->assertEquals('MyRule4', $items[0]->getTitle(), '$result->getItems()->get(0)->getTitle()');
     }
 
 //    /**

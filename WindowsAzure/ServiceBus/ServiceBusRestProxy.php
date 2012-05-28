@@ -146,7 +146,7 @@ class ServiceBusRestProxy extends ServiceRestProxy implements IServiceBus
      */
     public function sendQueueMessage($queueName, $brokeredMessage)
     {
-        $path = sprintf(Resources::SEND_QUEUE_MESSAGE_PATH, $queueName);
+        $path = sprintf(Resources::SEND_MESSAGE_PATH, $queueName);
         $this->sendMessage($path, $brokeredMessage);
     }
     
@@ -162,7 +162,7 @@ class ServiceBusRestProxy extends ServiceRestProxy implements IServiceBus
      */
     public function receiveQueueMessage($queuePath, $receiveMessageOptions)
     {
-        $queueMessagePath = sprintf(Resources::RECEIVE_QUEUE_MESSAGE_PATH, $queuePath);
+        $queueMessagePath = sprintf(Resources::RECEIVE_MESSAGE_PATH, $queuePath);
         return $this->receiveMessage(
             $queueMessagePath, 
             $receiveMessageOptions
@@ -183,8 +183,9 @@ class ServiceBusRestProxy extends ServiceRestProxy implements IServiceBus
     {
         $httpCallContext = new HttpCallContext();
         $httpCallContext->setPath($path);
-        $httpCallContext->addStatusCode(Resources::STATUS_OK);
         $httpCallContext->addStatusCode(Resources::STATUS_CREATED);
+        $httpCallContext->addStatusCode(Resources::STATUS_NO_CONTENT);
+        $httpCallContext->addStatusCode(Resources::STATUS_OK);
         $timeout = $receiveMessageOptions->getTimeout();
         if (!is_null($timeout))
         {
@@ -255,8 +256,8 @@ class ServiceBusRestProxy extends ServiceRestProxy implements IServiceBus
     public function sendTopicMessage($topicName, $brokeredMessage)
     {
         $topicMessagePath =
-            sprintf(Resources::SEND_TOPIC_MESSAGE_PATH, $topicName);
-        $this->sendMessage($topicName, $brokeredMessage);
+            sprintf(Resources::SEND_MESSAGE_PATH, $topicName);
+        $this->sendMessage($topicMessagePath, $brokeredMessage);
     } 
 
     /**
@@ -277,17 +278,17 @@ class ServiceBusRestProxy extends ServiceRestProxy implements IServiceBus
         $receiveMessageOptions
     ) {
         $messagePath = sprintf(
-            Resources::SUBSCRIPTION_MESSAGE_PATH, 
+            Resources::RECEIVE_SUBSCRIPTION_MESSAGE_PATH, 
             $topicName,
             $subscriptionName
         );
 
-        $brokeredMessage = receiveMessage(
+        $brokeredMessage = $this->receiveMessage(
             $messagePath,
             $receiveMessageOptions
         );
 
-        return $receiveSubscriptionMessageResult;
+        return $brokeredMessage;
     }
 
     /**
@@ -418,6 +419,7 @@ class ServiceBusRestProxy extends ServiceRestProxy implements IServiceBus
         $httpCallContext = new HttpCallContext();
         $httpCallContext->setPath($queuePath);
         $httpCallContext->setMethod(Resources::HTTP_GET);
+        $httpCallContext->addStatusCode(Resources::STATUS_OK);
         $response = $this->sendContext($httpCallContext);
         $getQueueResult = new GetQueueResult();
         $getQueueResult->parseXml($response->getBody());
@@ -433,7 +435,7 @@ class ServiceBusRestProxy extends ServiceRestProxy implements IServiceBus
      * @throws Exception 
      * @return ListQueuesResult;
      */
-    public function listQueues($listQueuesOptions)
+    public function listQueues($listQueuesOptions = null)
     {
         $response = $this->listOptions($listQueuesOptions, Resources::LIST_QUEUES_PATH);
         $listQueuesResult = new ListQueuesResult();
@@ -550,7 +552,7 @@ class ServiceBusRestProxy extends ServiceRestProxy implements IServiceBus
      *
      * @return ListTopicsResults
      */
-    public function listTopics($listTopicsOptions) 
+    public function listTopics($listTopicsOptions = null) 
     {
         $response = $this->listOptions($listTopicsOptions, Resources::LIST_TOPICS_PATH);
         $listTopicsResult = new ListTopicsResult();
@@ -671,7 +673,7 @@ class ServiceBusRestProxy extends ServiceRestProxy implements IServiceBus
      */
     public function listSubscriptions(
         $topicPath, 
-        $listSubscriptionsOptions) 
+        $listSubscriptionsOptions = null) 
     {
         $listSubscriptionsPath = sprintf(
             Resources::LIST_SUBSCRIPTIONS_PATH, 
@@ -799,7 +801,7 @@ class ServiceBusRestProxy extends ServiceRestProxy implements IServiceBus
     public function listRules(
         $topicPath, 
         $subscriptionName, 
-        $listRulesOptions
+        $listRulesOptions = null
     ) {
         $listRulesPath = sprintf(
             Resources::LIST_RULES_PATH,

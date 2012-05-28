@@ -252,22 +252,22 @@ class Resources
     const XTAG_ERROR                      = 'Error';
 
     // Service Bus
-    const LIST_TOPICS_PATH           = '$Resources/Topics';
-    const LIST_QUEUES_PATH           = '$Resources/Queues';
-    const LIST_RULES_PATH            = '%s/subscriptions/%s/rules';
-    const LIST_SUBSCRIPTIONS_PATH    = '%s/subscriptions';
-    const RECEIVE_QUEUE_MESSAGE_PATH = '%s/messages/head';
-    const SEND_QUEUE_MESSAGE_PATH    = '%s/messages';
-    const SEND_TOPIC_MESSAGE_PATH    = '%s/messages';
-    const RULE_PATH                  = '%s/subscriptions/%s/rules/%s';
-    const SUBSCRIPTION_PATH          = '%s/subscriptions/%s';
-    const DEFAULT_RULE_NAME          = '$Default';
-    const UNIQUE_ID_PREFIX           = 'urn:uuid:';
-    const SERVICE_BUS_NAMESPACE      = 'http://schemas.microsoft.com/netservices/2010/10/servicebus/connect';
-    const BROKER_PROPERTIES          = 'BrokerProperties';
-    const XMLNS_ATOM                 = 'xmlns:atom';
-    const XMLNS                      = 'xmlns';
-    const ATOM_NAMESPACE             = 'http://www.w3.org/2005/Atom';
+    const LIST_TOPICS_PATH        = '$Resources/Topics';
+    const LIST_QUEUES_PATH        = '$Resources/Queues';
+    const LIST_RULES_PATH         = '%s/subscriptions/%s/rules';
+    const LIST_SUBSCRIPTIONS_PATH = '%s/subscriptions';
+    const RECEIVE_MESSAGE_PATH    = '%s/messages/head';
+    const RECEIVE_SUBSCRIPTION_MESSAGE_PATH = '%s/subscriptions/%s/messages/head';
+    const SEND_MESSAGE_PATH       = '%s/messages';
+    const RULE_PATH               = '%s/subscriptions/%s/rules/%s';
+    const SUBSCRIPTION_PATH       = '%s/subscriptions/%s';
+    const DEFAULT_RULE_NAME       = '$Default';
+    const UNIQUE_ID_PREFIX        = 'urn:uuid:';
+    const SERVICE_BUS_NAMESPACE   = 'http://schemas.microsoft.com/netservices/2010/10/servicebus/connect';
+    const BROKER_PROPERTIES       = 'BrokerProperties';
+    const XMLNS_ATOM              = 'xmlns:atom';
+    const XMLNS                   = 'xmlns';
+    const ATOM_NAMESPACE          = 'http://www.w3.org/2005/Atom';
 
     // PHP URL Keys
     const PHP_URL_SCHEME   = 'scheme';
