@@ -38,28 +38,31 @@ use WindowsAzure\Common\Internal\Atom\Content;
  * @version   Release: @package_version@
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
-class ListQueuesResult
+class ListQueuesResult extends Feed
 {
     /**
-     * The description of the queue. 
+     * The information of the queue. 
      *
-     * @var QueueDescription
+     * @var QueueInfo
      */
-    private $_queueDescription;
+    private $_queueInfo;
 
     /** 
      * Creates a list queue result instance with specified response from the server. 
      * 
      * @param string $response the response of the list queue request. 
      */
-    public static function create($response)
+    public function parseXml($response)
     {
-        $getQueueResult = new ListQueuesResult();
-        $feed = Feed::create($response);
-        $entry = $feed->getEntry();
-        $content = $entry->getContent();
-        $queueDescription = XmlSerializer::objectDeserialize($content->getText());  
-        $getQueueResult->setQueueDescription($queueDescription);
+        parent::parseXml($response);
+        $listQueuesResultXml = new \SimpleXMLElement($response);
+        $this->_queueInfo = array();
+        foreach ($listQueuesResultXml->entry as $entry)
+        {
+            $queueInfo = new QueueInfo();
+            $queueInfo->parseXml($entry->asXml());
+            $this->_queueInfo[] = $queueInfo;
+        }
     }
 
     /**
@@ -70,23 +73,23 @@ class ListQueuesResult
     }
 
     /**
-     * Gets the queue description. 
+     * Gets the queue information. 
      * 
-     * @return QueueDescription
+     * @return array
      */
-    public function getQueueDescription()
+    public function getQueueInfo()
     {
-        return $this->_queueDescription;
+        return $this->_queueInfo;
     }
 
     /**
-     * Sets the description of the queue. 
+     * Sets the information of the queue. 
      * 
-     * @param QueueDescription $queueDescription The description of the queue. 
+     * @param array $queueInfo The information of the queue. 
      */
-    public function setQueueDescription($queueDescription)
+    public function setQueueInfo($queueInfo)
     {
-        $this->_queueDescription = $queueDescription;
+        $this->_queueInfo = $queueInfo;
     }
 
 }

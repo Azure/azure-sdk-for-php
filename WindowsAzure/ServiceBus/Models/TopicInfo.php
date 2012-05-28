@@ -23,9 +23,10 @@
  */
  
 namespace WindowsAzure\ServiceBus\Models;
+use WindowsAzure\Common\Internal\Atom\Entry;
 use WindowsAzure\Common\Internal\Resources;
-use WindowsAzure\ServiceBus\Models\TopicDescription;
 use WindowsAzure\Common\Internal\Utilities;
+use WindowsAzure\ServiceBus\Models\TopicDescription;
 
 /**
  * The information of a topic.
@@ -38,15 +39,8 @@ use WindowsAzure\Common\Internal\Utilities;
  * @version   Release: @package_version@
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
-class TopicInfo
+class TopicInfo extends Entry
 {
-    /** 
-     * The name of the topic information.
-     * 
-     * @var TopicInfo
-     */
-    private $_name;
-
     /**
      * The description of the topics. 
      *
@@ -57,37 +51,40 @@ class TopicInfo
     /**
      * Creates a TopicInfo with specified parameters.
      *
-     * @param string           $name             The name of the topic.
+     * @param string           $title            The name of the topic.
      * @param TopicDescription $topicDescription The description of the topic.
      * 
      */
-    public function __construct($name, $topicDescription = null)
+    public function __construct($title = Resources::EMPTY_STRING, $topicDescription = null)
     {
-        $this->_name = $name;
+        $this->_title = $title;
         if (is_null($topicDescription)) {
             $topicDescription = new TopicDescription();
         }
         $this->_topicDescription = $topicDescription;
     }
 
-    /**
-     * Gets the name of the topic.
-     *
-     * @return string.
-     */
-    public function getName()
+    public function parseXml($xmlString)
     {
-        return $this->_name;
+        parent::parseXml($xmlString);
+        $content = $this->_content;
+        if (is_null($content)) {
+            $this->_topicDescription = null;
+        }
+        else {
+            $this->_topicDescription = TopicDescription::create($content->getText());
+        }
     }
 
-    /**
-     * Sets the name of the topic information.
-     * 
-     * @param string $name The name of the topic. 
-     */
-    public function setName($name)
+    public function writeXml()
     {
-        $this->_name = $name;
+        if (is_null($this->_topicDescription)) {
+            $this->_content = null;    
+        }
+        else {
+            $this->_content = $this->_topicDescription->writeXml(); 
+        }
+        return parent::writeXml();
     }
 
     /**

@@ -53,20 +53,11 @@ class GetSubscriptionResult
      * 
      * @param string $response The response from the server. 
      */ 
-    public static function create($response)
+    public function parseXml($response)
     {
-        $getSubscriptionResult = new GetSubscriptionResult();
-        $feed = Feed::create($response);
-        $content = $feed->getContent();
-        if (is_null($content))
-        {
-            return null;
-        }
-        $subscriptionDescription = SubscriptionDescription::create($content->getText());
         $subscriptionInfo = new SubscriptionInfo();
-        $subscriptionInfo->setSubscriptionDescription($subscriptionDescription);
-        $getSubscriptionResult->setSubscriptionInfo($subscriptionInfo);
-        return $getSubscriptionResult;
+        $subscriptionInfo->parseXml($response);
+        $this->_subscriptionInfo = $subscriptionInfo;
     }
 
     /**

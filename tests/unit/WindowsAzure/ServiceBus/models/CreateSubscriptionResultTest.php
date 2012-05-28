@@ -24,7 +24,7 @@
 
 namespace Tests\Unit\WindowsAzure\ServiceBus\Models;
 use WindowsAzure\ServiceBus\Models\CreateSubscriptionResult;
-use WindowsAzure\ServiceBus\Models\SubscriptionDescription;
+use WindowsAzure\ServiceBus\Models\SubscriptionInfo;
 
 /**
  * Unit tests for class WrapAccessTokenResult
@@ -54,18 +54,18 @@ class CreateSubscriptionResultTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\ServiceBus\Models\CreateSubscriptionResult::getSubscriptionDescription
-     * @covers WindowsAzure\ServiceBus\Models\CreateSubscriptionResult::setSubscriptionDescription
+     * @covers WindowsAzure\ServiceBus\Models\CreateSubscriptionResult::getSubscriptionInfo
+     * @covers WindowsAzure\ServiceBus\Models\CreateSubscriptionResult::setSubscriptionInfo
      */
-    public function testCreateSubscriptionResultGetSetSubscriptionDescription()
+    public function testCreateSubscriptionResultGetSetSubscriptionInfo()
     {
         // Setup
         $createSubscriptionResult = new CreateSubscriptionResult();
-        $expected = new SubscriptionDescription();
+        $expected = new SubscriptionInfo();
         
         // Test
-        $createSubscriptionResult->setSubscriptionDescription($expected);
-        $actual = $createSubscriptionResult->getSubscriptionDescription();
+        $createSubscriptionResult->setSubscriptionInfo($expected);
+        $actual = $createSubscriptionResult->getSubscriptionInfo();
         
         // Assert
         $this->assertEquals(

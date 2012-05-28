@@ -38,39 +38,31 @@ use WindowsAzure\Common\Internal\Atom\Content;
  * @version   Release: @package_version@
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
-class ListSubscriptionsResult
+class ListSubscriptionsResult extends Feed
 {
     /**
-     * The description of the subscription. 
+     * The information of the subscription. 
      * 
-     * @var SubscriptionDescription
+     * @var SubscriptionInfo
      */
-    private $_subscriptionDescription;
+    private $_subscriptionInfo;
 
     /**
      * Creates a list subscription result instance with specified response from the server. 
      * 
      * @param string $response The response of the list subscription result. 
      */
-    public static function create($response)
+    public function parseXml($response)
     {
-        $listSubscriptionsResult = new ListSubscriptionsResult();
-        $subscriptionDescription = array();  
-        $feed = Feed::create($response);
-        $entries = $feed->getEntry();
-        if (!is_null($entries))
+        parent::parseXml($response);
+        $listSubscriptionsResultXml = new \SimpleXMLElement($response);
+        $this->_subscriptionInfo = array();
+        foreach ($listSubscriptionsResultXml->entry as $entry)
         {
-            foreach ($entries as $entry)
-            {
-                $content=$entry->getContent();
-                $subscriptionDescriptionInstance = SubscriptionDescription::create($content->getText());
-                $subscriptionDescription[] = $subscriptionDescriptionInstance;
-            }
+            $subscriptionInfo = new SubscriptionInfo();
+            $subscriptionInfo->parseXml($entry->asXml());
+            $this->_subscriptionInfo[] = $subscriptionInfo;
         }
-
-        $listSubscriptionsResult->setSubscriptionDescription($subscriptionDescription);
-
-        return $listSubscriptionsResult;
     }
 
     /**
@@ -81,24 +73,24 @@ class ListSubscriptionsResult
     }
     
     /**
-     * Gets the description of the subscription. 
+     * Gets the information of the subscription. 
      * 
-     * @return SubscriptionDescription
+     * @return SubscriptionInfo
      */
-    public function getSubscriptionDescription()
+    public function getSubscriptionInfo()
     {
-        return $this->_subscriptionDescription;
+        return $this->_subscriptionInfo;
     }
 
     /**
-     * Sets the description of the rule. 
+     * Sets the information of the rule. 
      * 
-     * @param SubscriptionDescription $subscriptionDescription The description of the
+     * @param SubscriptionInfo $subscriptionInfo The information of the
      * subscription.
      */
-    public function setSubscriptionDescription($subscriptionDescription)
+    public function setSubscriptionInfo($subscriptionInfo)
     {
-        $this->_subscriptionDescription = $subscriptionDescription;
+        $this->_subscriptionInfo = $subscriptionInfo;
     }
 
 }

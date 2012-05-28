@@ -45,41 +45,39 @@ class Generator
      *
      * @var string  
      */
-    private $_text;
+    protected $_text;
 
     /**
      * The Uri of the generator. 
      *
      * @var string  
      */
-    private $_uri;
+    protected $_uri;
 
     /**
      * The version of the generator.
      *
      * @var string 
      */
-    private $_version;
+    protected $_version;
 
     /** 
      * Creates a generator instance with specified XML string. 
      */
-    public static function create($xmlString)
+    public static function parseXml($xmlString)
     {
-        $generator = new Generator();
         $generatorXml = new \SimpleXMLElement($xmlString);
         $generatorArray = (array)generatorXml;
         $attributes = $generatorXml->attributes();
         if (array_key_exists('uri', $attributes)) {
-            $generator->setUri($attributes['uri']);
+            $this->_uri = (string)$attributes['uri'];
         }
 
         if (array_key_exists('version', $attributes)) {
-            $generator->setVersion($attributes['version']);
+            $this->_version = (string)$attributes['version'];
         }
 
-        $generator->setText((string)$generatorXml);  
-        return $generator;
+        $this->_text = (string)$generatorXml;  
     }
      
     /** 

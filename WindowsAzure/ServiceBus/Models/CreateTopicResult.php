@@ -24,7 +24,7 @@
 namespace WindowsAzure\ServiceBus\Models;
 use WindowsAzure\Common\Internal\Atom\Feed;
 use WindowsAzure\Common\Internal\Atom\Content;
-use WindowsAzure\ServiceBus\Models\TopicDescription;
+use WindowsAzure\ServiceBus\Models\TopicInfo;
 
 /**
  * The results of a create topic request.
@@ -45,20 +45,18 @@ class CreateTopicResult
      *
      * @var string 
      */
-    private $_topicDescription;
+    private $_topicInfo;
 
     /**
      * Creates a create topic result object from response. 
      * 
      * @var string $response The response of the string. 
      */
-    public static function create($response)
+    public function parseXml($response)
     {
-        $createTopicResult = new CreateTopicResult();
-        $feed = Feed::create($response);
-        $content = $feed->getContent();
-        $createTopicResult->_topicDescription = TopicDescription::create($content->getText()); 
-        return $createTopicResult;
+        $topicInfo = new TopicInfo;
+        $topicInfo->parseXml($response);
+        $this->_topicInfo = $topicInfo;
     }
 
     /** 
@@ -71,21 +69,21 @@ class CreateTopicResult
     /**
      * Gets topic description.
      * 
-     * @return TopicDescription
+     * @return TopicInfo
      */
-    public function getTopicDescription()
+    public function getTopicInfo()
     {
-        return $this->_topicDescription;
+        return $this->_topicInfo;
     }
 
     /**
      * Sets the topic description. 
      * 
-     * @param TopicDescription $topicDescription The description of the topic. 
+     * @param TopicInfo $topicInfo The description of the topic. 
      */
-    public function setTopicDescription($topicDescription)
+    public function setTopicInfo($topicInfo)
     {
-        $this->_topicDescription = $topicDescription;
+        $this->_topicInfo = $topicInfo;
     } 
 }
 ?>

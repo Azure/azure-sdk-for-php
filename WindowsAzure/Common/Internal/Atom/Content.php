@@ -45,14 +45,14 @@ class Content
      *
      * @var string  
      */
-    private $_text;
+    protected $_text;
 
     /**
      * The type of the content. 
      *
      * @var string  
      */
-    private $_type;
+    protected $_type;
      
     /** 
      * Creates a Content instance with specified text.
@@ -69,15 +69,14 @@ class Content
      * 
      * @param string $xmlString an XML based string of ATOM CONTENT.
      */ 
-    public static function create($xmlString)
+    public function parseXml($xmlString)
     {
-        $content = new Content();
         $contentXml = simplexml_load_string($xmlString);
         $attributes = $contentXml->attributes();
 
         if (!empty($attributes['type']))
         {
-            $content->setType((string)$attributes['type']);
+            $this->_content = (string)$attributes['type'];
         }
 
         $text = '';
@@ -86,8 +85,7 @@ class Content
             $text .= $child->asXML();
         } 
 
-        $content->setText($text);
-        return $content;
+        $this->_text = $text;
     }
 
     /** 

@@ -69,26 +69,26 @@ class ServiceBusRestProxyTestBase extends ServiceRestProxyTestBase
     
     public function createQueue($queueInfo)
     {
-        $this->_createdQueues[] = $queueInfo->getName();
+        $this->_createdQueues[] = $queueInfo->getTitle();
         return $this->restProxy->createQueue($queueInfo);
     }
     
     public function createTopic($topicInfo)
     {
-        $this->_createdTopics[] = $topicInfo->getName();
+        $this->_createdTopics[] = $topicInfo->getTitle();
         return $this->restProxy->createTopic($topicInfo);
     }
 
     public function createSubscription($topicName, $subscriptionInfo) 
     {
-        $topicSubscriptionNameArray = array($topicName, $subscriptionInfo->getName());
+        $topicSubscriptionNameArray = array($topicName, $subscriptionInfo->getTitle());
         $this->_createdSubscriptions[] = join('::', $topicSubscriptionNameArray);
         return $this->restProxy->createSubscription($topicName, $subscriptionInfo);
     }
 
     public function createRule($topicName, $subscriptionName, $ruleInfo) 
     {
-        $topicSubscriptionRuleArray = array($topicName, $subscriptionName, $ruleInfo->getName());
+        $topicSubscriptionRuleArray = array($topicName, $subscriptionName, $ruleInfo->getTitle());
         $this->_createdRules[] = join('::', $topicSubscriptionRuleArray);
         return $this->restProxy->createRule($topicName, $subscriptionName, $ruleInfo);
     }

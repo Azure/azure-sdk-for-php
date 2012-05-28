@@ -48,7 +48,7 @@ class RuleInfoTest extends \PHPUnit_Framework_TestCase
         
         // Test
         $ruleInfo = new RuleInfo($expected);
-        $actual = $ruleInfo->getName();
+        $actual = $ruleInfo->getTitle();
         
         // Assert
         $this->assertNotNull($ruleInfo);

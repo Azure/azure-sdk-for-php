@@ -40,103 +40,102 @@ use WindowsAzure\Common\Internal\Resources;
 
 class Entry
 {
-
     /**
      * The attributes of the entry 
      * @var array
      */
-    private $_attributes;
+    protected $_attributes;
 
     /**
      * The author of the entry.
      *
      * @var string
      */
-    private $_author;
+    protected $_author;
 
     /**
      * The category of the entry.
      *
      * @var array
      */
-    private $_category;
+    protected $_category;
 
     /**
      * The content of the entry.
      *
      * @var string
      */
-    private $_content;
+    protected $_content;
 
     /**
      * The contributor of the entry.
      *
      * @var string
      */
-    private $_contributor;
+    protected $_contributor;
 
     /**
      * An unqiue ID representing the entry.
      *
      * @var string
      */
-    private $_id;
+    protected $_id;
 
     /**
      * The link of the entry.
      *
      * @var string
      */
-    private $_link;
+    protected $_link;
 
     /**
      * Is the entry published.
      *
      * @var boolean
      */
-    private $_published;
+    protected $_published;
 
     /**
      * The copy right of the entry.
      *
      * @var string
      */
-    private $_rights;
+    protected $_rights;
 
     /**
      * The source of the entry.
      *
      * @var string
      */
-    private $_source;
+    protected $_source;
 
     /**
      * The summary of the entry.
      *
      * @var string
      */
-    private $_summary;
+    protected $_summary;
 
     /**
      * The title of the entry.
      *
      * @var string
      */
-    private $_title;
+    protected $_title;
 
     /**
      * Is the entry updated.
      *
      * @var boolean
      */
-    private $_updated;
+    protected $_updated;
 
     /**
      * The extension element of the entry.
      *
      * @var string
      */
-    private $_extensionElement;
+    protected $_extensionElement;
 
     /**
      * Creates an ATOM Entry instance with default parameters. 
@@ -147,81 +146,84 @@ class Entry
     }
 
     /**
-     * Creates an ATOM Entry instance with specified XmlString. 
+     * Populate the properties of an ATOM Entry instance with specified XML.. 
      * 
      * @param string $xmlString A string representing an ATOM entry instance. 
      * 
      */
-    public static function create($xmlString)
+    public function parseXml($xmlString)
     {
-        $entry = new Entry();
         $entryXml = simplexml_load_string($xmlString);
-        $entry->setAttributes($entryXml->attributes());
+        $this->_attributes = $entryXml->attributes();
         $entryArray = (array)$entryXml;
 
         if (array_key_exists('author', $entryArray))
         {
-            $author = Category::create($entryArray['author']->asXML());
-            $entry->setAuthor($author);
+            $author = new Person();
+            $author->parseXml($entryArray['author']->asXML());
+            $this->_author = $author;
         }
 
         if (array_key_exists('category', $entryArray))
         {
-            $category = Categtory::create($entryArray['category']->asXML());
-            $entry->setCategory($category);
+            $category = new Category();
+            $category->parseXml($entryArray['category']->asXML());
+            $this->_category = $category;
         }
 
         if (array_key_exists('content', $entryArray))
         {
-            $content = Content::create($entryArray['content']->asXML());
-            $entry->setContent($content);
+            $content = new Content();
+            $content->parseXml($entryArray['content']->asXML());
+            $this->_content = $content;
         }
 
         if (array_key_exists('contributor', $entryArray))
         {
-            $contributor = Person::create($entryArray['contributor']->asXML());
-            $entry->setContributor($contributor);
+            $contributor = new Person();
+            $contributor->parseXml($entryArray['contributor']->asXML());
+            $this->_contributor = $contributor;
         }
 
         if (array_key_exists('id', $entryArray))
         {
-            $entry->setId($entryArray['id']);
+            $this->_id = (string)$entryArray['id'];
         }
 
         if (array_key_exists('link', $entryArray))
         {
-            $link = AtomLink::create($entryArray['link']->asXML());
-            $entry->setLink($link);
+            $link = new AtomLink();
+            $link->parseXml($entryArray['link']->asXML());
+            $this->_link = $link;
         }
 
         if (array_key_exists('published', $entryArray))
         {
-            $entry->setPublished($entryArray['published']);
+            $this->_published = $entryArray['published'];
         }
 
         if (array_key_exists('rights', $entryArray))
         {
-            $entry->setRights($entryArray['rights']);
+            $this->_rights = $entryArray['rights'];
         }
 
         if (array_key_exists('source', $entryArray))
         {
-            $source = Source::create($entryArray['source']->asXML());
-            $entry->setSource($source);
+            $source = new Source();
+            $source->parseXml($entryArray['source']->asXML());
+            $this->_source = $source;
         }
 
         if (array_key_exists('title', $entryArray))
         {
-            $entry->setTitle($entryArray['title']);
+            $this->_title = $entryArray['title'];
         }
 
         if (array_key_exists('updated', $entryArray))
         {
-            $entry->setUpdated($entryArray['updated']);
+            $this->_updated = $entryArray['updated'];
         }
          
-        return $entry;
-
     }
 
     /**

@@ -24,7 +24,7 @@
 
 namespace Tests\Unit\WindowsAzure\ServiceBus\Models;
 use WindowsAzure\ServiceBus\Models\CreateQueueResult;
-use WindowsAzure\ServiceBus\Models\QueueDescription;
+use WindowsAzure\ServiceBus\Models\QueueInfo;
 
 /**
  * Unit tests for class WrapAccessTokenResult
@@ -54,18 +54,18 @@ class CreateQueueResultTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\ServiceBus\Models\CreateQueueResult::getQueueDescription
-     * @covers WindowsAzure\ServiceBus\Models\CreateQueueResult::setQueueDescription
+     * @covers WindowsAzure\ServiceBus\Models\CreateQueueResult::getQueueInfo
+     * @covers WindowsAzure\ServiceBus\Models\CreateQueueResult::setQueueInfo
      */
-    public function testCreateQueueResultGetSetQueueDescription()
+    public function testCreateQueueResultGetSetQueueInfo()
     {
         // Setup
         $createQueueResult = new CreateQueueResult();
-        $expected = new QueueDescription();
+        $expected = new QueueInfo();
         
         // Test
-        $createQueueResult->setQueueDescription($expected);
-        $actual = $createQueueResult->getQueueDescription(); 
+        $createQueueResult->setQueueInfo($expected);
+        $actual = $createQueueResult->getQueueInfo(); 
 
         // Assert
         $this->assertEquals(

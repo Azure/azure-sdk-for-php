@@ -38,38 +38,32 @@ use WindowsAzure\Common\Internal\Atom\Content;
  * @version   Release: @package_version@
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
-class ListRulesResult
+class ListRulesResult extends Feed
 {
     /**
-     * The description of the rule. 
+     * The information of the rule. 
      * 
-     * @RuleDescription 
+     * @RuleInfo 
      */
-    private $_ruleDescription;
+    private $_ruleInfo;
 
     /** 
      * Creates a list rule result with specified response from the server. 
      * 
      * @param string $response The response of a list rule request. 
      */
-    public static function create($response)
+    public function parseXml($response)
     {
-        $listRulesResult = new ListRulesResult();
-        $feed = Feed::create($response);
-        $entries = $feed->getEntry();
-        $ruleDescription = array();
-        if (!is_null($entries))
+        parent::parseXml($response);
+        $listRulesResultXml = new \SimpleXMLElement($response);
+        $this->_ruleInfo = array();
+        foreach ($listRulesResultXml->entry as $entry)
         {
-            foreach ($entries as $entry)
-            {
-                $content = $entry->getContent();
-                $ruleDescriptionInstance = RuleDescription::create($content->getText());
-                $ruleDescription[] = $ruleDescriptionInstance;
-            }
+                
+                $ruleInfo = new RuleInfo();
+                $ruleInfo->parseXml($entry->asXml());
+                $this->_ruleInfo[] = $ruleInfo;
         }
-
-        $listRulesResult->setRuleDescription($ruleDescription);
-        return $listRulesResult;
     }
 
     /**
@@ -80,23 +74,23 @@ class ListRulesResult
     }
 
     /**
-     * Gets the description of the rules. 
+     * Gets the information of the rules. 
      * 
-     * @return RuleDescription
+     * @return RuleInfo
      */
-    public function getRuleDescription()
+    public function getRuleInfo()
     {
-        return $this->_ruleDescription;
+        return $this->_ruleInfo;
     }
 
     /** 
-     * Sets the description of the rule. 
+     * Sets the information of the rule. 
      * 
-     * @param RuleDescription $ruleDescription The description of the rule. 
+     * @param RuleInfo $ruleInfo The information of the rule. 
      */ 
-    public function setRuleDescription($ruleDescription)
+    public function setRuleInfo($ruleInfo)
     {
-        $this->_ruleDescription = $ruleDescription;
+        $this->_ruleInfo = $ruleInfo;
     }
 
 }

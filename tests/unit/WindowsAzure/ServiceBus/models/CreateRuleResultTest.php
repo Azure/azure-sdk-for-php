@@ -24,7 +24,7 @@
 
 namespace Tests\Unit\WindowsAzure\ServiceBus\Models;
 use WindowsAzure\ServiceBus\Models\CreateRuleResult;
-use WindowsAzure\ServiceBus\Models\RuleDescription;
+use WindowsAzure\ServiceBus\Models\RuleInfo;
 
 /**
  * Unit tests for class WrapAccessTokenResult
@@ -54,18 +54,18 @@ class CreateRuleResultTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\ServiceBus\Models\CreateRuleResult::getRuleDescription
-     * @covers WindowsAzure\ServiceBus\Models\CreateRuleResult::setRuleDescription
+     * @covers WindowsAzure\ServiceBus\Models\CreateRuleResult::getRuleInfo
+     * @covers WindowsAzure\ServiceBus\Models\CreateRuleResult::setRuleInfo
      */
-    public function testCreateRuleResultGetSetRuleDescription()
+    public function testCreateRuleResultGetSetRuleInfo()
     {
         // Setup
         $createRuleResult = new CreateRuleResult();
-        $expected = new RuleDescription();
+        $expected = new RuleInfo();
         
         // Test
-        $createRuleResult->setRuleDescription($expected);
-        $actual = $createRuleResult->getRuleDescription();
+        $createRuleResult->setRuleInfo($expected);
+        $actual = $createRuleResult->getRuleInfo();
         
         // Assert
         $this->assertEquals(

@@ -254,6 +254,8 @@ class ServiceBusRestProxy extends ServiceRestProxy implements IServiceBus
      */
     public function sendTopicMessage($topicName, $brokeredMessage)
     {
+        $topicMessagePath =
+            sprintf(Resources::SEND_TOPIC_MESSAGE_PATH, $topicName);
         $this->sendMessage($topicName, $brokeredMessage);
     } 
 
@@ -350,7 +352,7 @@ class ServiceBusRestProxy extends ServiceRestProxy implements IServiceBus
     {
         $httpCallContext = new HttpCallContext();
         $httpCallContext->setMethod(Resources::HTTP_PUT);
-        $httpCallContext->setPath($queueInfo->getName());
+        $httpCallContext->setPath($queueInfo->getTitle());
         $httpCallContext->addHeader(
             Resources::CONTENT_TYPE,
             Resources::ATOM_ENTRY_CONTENT_TYPE
@@ -378,7 +380,8 @@ class ServiceBusRestProxy extends ServiceRestProxy implements IServiceBus
 
         $httpCallContext->setBody($entry->toXml());
         $response = $this->sendContext($httpCallContext);
-        $createQueueResult = CreateQueueResult::create($response->getBody());
+        $createQueueResult = new CreateQueueResult();
+        $createQueueResult->parseXml($response->getBody());
         return $createQueueResult;
     } 
 
@@ -416,7 +419,8 @@ class ServiceBusRestProxy extends ServiceRestProxy implements IServiceBus
         $httpCallContext->setPath($queuePath);
         $httpCallContext->setMethod(Resources::HTTP_GET);
         $response = $this->sendContext($httpCallContext);
-        $getQueueResult = GetQueueResult::create($response->getBody());
+        $getQueueResult = new GetQueueResult();
+        $getQueueResult->parseXml($response->getBody());
         return $getQueueResult;
     }
 
@@ -432,7 +436,8 @@ class ServiceBusRestProxy extends ServiceRestProxy implements IServiceBus
     public function listQueues($listQueuesOptions)
     {
         $response = $this->listOptions($listQueuesOptions, Resources::LIST_QUEUES_PATH);
-        $listQueuesResult = ListQueuesResult::create($response->getBody());
+        $listQueuesResult = new ListQueuesResult();
+        $listQueuesResult->parseXml($response->getBody());
         return $listQueuesResult;
     }
 
@@ -475,7 +480,7 @@ class ServiceBusRestProxy extends ServiceRestProxy implements IServiceBus
         Validate::notNullOrEmpty($topicInfo, 'topicInfo');
         $httpCallContext = new HttpCallContext();
         $httpCallContext->setMethod(Resources::HTTP_PUT);
-        $httpCallContext->setPath($topicInfo->getName());
+        $httpCallContext->setPath($topicInfo->getTitle());
         $httpCallContext->addHeader(
             Resources::CONTENT_TYPE,
             Resources::ATOM_ENTRY_CONTENT_TYPE
@@ -496,7 +501,9 @@ class ServiceBusRestProxy extends ServiceRestProxy implements IServiceBus
         $httpCallContext->setBody($entry->toXml());
 
         $response = $this->sendContext($httpCallContext);
-        return CreateTopicResult::create($response->getBody());
+        $createTopicResult = new CreateTopicResult();
+        $createTopicResult->parseXml($response->getBody());
+        return $createTopicResult;
     } 
 
     /**
@@ -530,7 +537,8 @@ class ServiceBusRestProxy extends ServiceRestProxy implements IServiceBus
         $httpCallContext->setPath($topicPath);
         $httpCallContext->addStatusCode(Resources::STATUS_OK);
         $response = $this->sendContext($httpCallContext);
-        $getTopicResult = GetTopicResult::create($response->getBody());
+        $getTopicResult = new GetTopicResult();
+        $getTopicResult->parseXml($response->getBody());
         return $getTopicResult; 
     }
     
@@ -545,7 +553,8 @@ class ServiceBusRestProxy extends ServiceRestProxy implements IServiceBus
     public function listTopics($listTopicsOptions) 
     {
         $response = $this->listOptions($listTopicsOptions, Resources::LIST_TOPICS_PATH);
-        $listTopicsResult = ListTopicsResult::create($response->getBody());
+        $listTopicsResult = new ListTopicsResult();
+        $listTopicsResult->parseXml($response->getBody());
         return $listTopicsResult;
     }
 
@@ -567,7 +576,7 @@ class ServiceBusRestProxy extends ServiceRestProxy implements IServiceBus
         $subscriptionPath = sprintf(
             Resources::SUBSCRIPTION_PATH, 
             $topicPath,
-            $subscriptionInfo->getName()
+            $subscriptionInfo->getTitle()
         );
         $httpCallContext->setPath($subscriptionPath);
         $httpCallContext->addHeader(
@@ -598,7 +607,8 @@ class ServiceBusRestProxy extends ServiceRestProxy implements IServiceBus
         $httpCallContext->setBody($entry->toXml());
 
         $response = $this->sendContext($httpCallContext);
-        $createSubscriptionResult = CreateSubscriptionResult::create($response->getBody());
+        $createSubscriptionResult = new CreateSubscriptionResult();
+        $createSubscriptionResult->parseXml($response->getBody());
         return $createSubscriptionResult;
     }
 
@@ -644,7 +654,8 @@ class ServiceBusRestProxy extends ServiceRestProxy implements IServiceBus
         );
         $httpCallContext->setPath($subscriptionPath);
         $response = $this->sendContext($httpCallContext);
-        $getSubscriptionResult = GetSubscriptionResult::create($response->getBody()); 
+        $getSubscriptionResult = new GetSubscriptionResult();
+        $getSubscriptionResult->parseXml($response->getBody()); 
         return $getSubscriptionResult;
     }
 
@@ -667,7 +678,8 @@ class ServiceBusRestProxy extends ServiceRestProxy implements IServiceBus
             $topicPath
         );
         $response = $this->listOptions($listSubscriptionsOptions, $listSubscriptionsPath);
-        $listSubscriptionsResult = ListSubscriptionsResult::create($response->getBody());
+        $listSubscriptionsResult = new ListSubscriptionsResult();
+        $listSubscriptionsResult->parseXml($response->getBody());
         return $listSubscriptionsResult; 
     }
 
@@ -694,7 +706,7 @@ class ServiceBusRestProxy extends ServiceRestProxy implements IServiceBus
             Resources::RULE_PATH,
             $topicPath,
             $subscriptionName,
-            $ruleInfo->getName()
+            $ruleInfo->getTitle()
         );
 
         $ruleDescriptionXml = XmlSerializer::objectSerialize(
@@ -719,7 +731,8 @@ class ServiceBusRestProxy extends ServiceRestProxy implements IServiceBus
         $httpCallContext->setBody($entry->toXml());
         $httpCallContext->setPath($rulePath);
         $response = $this->sendContext($httpCallContext);
-        $createRuleResult = CreateRuleResult::create($response->getBody()); 
+        $createRuleResult = new CreateRuleResult();
+        $createRuleResult->parseXml($response->getBody()); 
         return $createRuleResult;
     }
 
@@ -769,7 +782,8 @@ class ServiceBusRestProxy extends ServiceRestProxy implements IServiceBus
         );
         $httpCallContext->setPath($rulePath);
         $response = $this->sendContext($httpCallContext);
-        $getRuleResult = GetRuleResult::create($response->getBody());
+        $getRuleResult = new GetRuleResult();
+        $getRuleResult->parseXml($response->getBody());
         return $getRuleResult;
     }
 
@@ -794,7 +808,8 @@ class ServiceBusRestProxy extends ServiceRestProxy implements IServiceBus
         );
 
         $response = $this->listOptions($listRulesOptions, $listRulesPath);
-        $listRulesResult = ListRulesResult::create($response->getBody());
+        $listRulesResult = new ListRulesResult();
+        $listRulesResult->parseXml($response->getBody());
         return $listRulesResult;
     }
     

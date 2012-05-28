@@ -45,28 +45,28 @@ class Category
      *
      * @var string  
      */
-    private $_term;
+    protected $_term;
 
     /**
      * The scheme of the category. 
      *
      * @var string  
      */
-    private $_scheme;
+    protected $_scheme;
 
     /**
      * The label of the category. 
      * 
      * @var string 
      */ 
-    private $_label;
+    protected $_label;
 
     /**
      * The undefined content of the category. 
      *  
      * @var string 
      */
-    private $_undefinedContent;
+    protected $_undefinedContent;
      
     /** 
      * Creates a Category instance with specified text.
@@ -84,30 +84,27 @@ class Category
      * @param string $xmlString an XML based string of ATOM CONTENT.
      * 
      */ 
-    public static function create($xmlString)
+    public function parseXml($xmlString)
     {
-        $category = new Category();
         $categoryXml = simplexml_load_string($xmlString);
         $attributes = (array)$categoryXml->attributes();
 
         if (array_key_exists('term', $attributes))
         {
-            $category->setTerm($attribute['term']);
+            $this->_term = (string)$attribute['term'];
         }
 
         if (array_key_exists('scheme', $attributes))
         {
-            $category->setScheme($attributes['scheme']);
+            $this->_category = (string)$attributes['scheme'];
         }
 
         if (array_key_exists('label', $attributes))
         {
-            $category->setLabel($attributes['label']);
+            $this->_label = (string)$attributes['label'];
         }
 
-        $category->setUndefinedContent((string)$categoryXml->innerNode);
-
-        return $category;
+        $this->_undefinedContent =(string)$categoryXml;
     }
 
     /** 

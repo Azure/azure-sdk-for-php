@@ -258,6 +258,7 @@ class Resources
     const LIST_SUBSCRIPTIONS_PATH    = '%s/subscriptions';
     const RECEIVE_QUEUE_MESSAGE_PATH = '%s/messages/head';
     const SEND_QUEUE_MESSAGE_PATH    = '%s/messages';
+    const SEND_TOPIC_MESSAGE_PATH    = '%s/messages';
     const RULE_PATH                  = '%s/subscriptions/%s/rules/%s';
     const SUBSCRIPTION_PATH          = '%s/subscriptions/%s';
     const DEFAULT_RULE_NAME          = '$Default';

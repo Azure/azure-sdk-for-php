@@ -44,22 +44,20 @@ class GetQueueResult
     /**
      * The description of the queue. 
      * 
-     * @var QueueDescription 
+     * @var QueueInfo 
      */
-    private $_queueDescription;
+    private $_queueInfo;
 
     /** 
      * Create a queue result with specified response. 
      * 
      * @param string $response The body of the response from Azure Server. 
      */
-    public static function create($response)
+    public function parseXml($response)
     {
-        $getQueueResult = new GetQueueResult();
-        $feed = Feed::create($response);
-        $content = $feed->getContent();
-        $queueDescription = QueueDescription::create($content->getText());  
-        $getQueueResult->setQueueDescription($queueDescription);
+        $queueInfo = new QueueInfo();
+        $queueInfo->parseXml($response);
+        $this->_queueInfo = $queueInfo;
     }
 
     /** 
@@ -72,19 +70,19 @@ class GetQueueResult
     /** 
      * Gets the description of the queue. 
      */
-    public function getQueueDescription()
+    public function getQueueInfo()
     {
-        return $this->_queueDescription;
+        return $this->_queueInfo;
     }
 
     /** 
      * Sets the description of the queue. 
      *
-     * @param QueueDescription $queueDescription The description of the queue. 
+     * @param QueueInfo $queueInfo The description of the queue. 
      */
-    public function setQueueDescription($queueDescription)
+    public function setQueueInfo($queueInfo)
     {
-        $this->_queueDescription = $queueDescription;
+        $this->_queueInfo = $queueInfo;
     }
 
 }

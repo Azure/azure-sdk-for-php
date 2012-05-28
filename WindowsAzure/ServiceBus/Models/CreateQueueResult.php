@@ -24,7 +24,7 @@
 namespace WindowsAzure\ServiceBus\Models;
 use WindowsAzure\Common\Internal\Atom\Feed;
 use WindowsAzure\Common\Internal\Atom\Content;
-use WindowsAzure\ServiceBus\Models\QueueDescription;
+use WindowsAzure\ServiceBus\Models\QueueInfo;
 
 /**
  * The results of a create queue request.
@@ -43,22 +43,20 @@ class CreateQueueResult
     /**
      * The description of a queue. 
      *
-     * @var QueueDescription
+     * @var QueueInfo
      */
-    private $_queueDescription;
+    private $_queueInfo;
 
     /**
      * Creates a create queue result object from response. 
      * 
      * @var string $response The response of the string. 
      */
-    public static function create($response)
+    public function parseXml($response)
     {
-        $createQueueResult = new CreateQueueResult();
-        $feed = Feed::create($response);
-        $content = $feed->getContent();
-        $createQueueResult->_queueDescription = QueueDescription::create($content->getText()); 
-        return $createQueueResult;
+        $queueInfo = new QueueInfo();
+        $queueInfo->parseXml($response);
+        $this->_queueInfo = $queueInfo;
     }
 
     /**
@@ -71,21 +69,21 @@ class CreateQueueResult
     /**
      * Gets queue description.
      * 
-     * @return QueueDescription
+     * @return QueueInfo
      */
-    public function getQueueDescription()
+    public function getQueueInfo()
     {
-        return $this->_queueDescription;
+        return $this->_queueInfo;
     }
 
     /**
      * Sets the queue description. 
      * 
-     * @param QueueDescription $queueDescription The description of the queue. 
+     * @param QueueInfo $queueInfo The description of the queue. 
      */
-    public function setQueueDescription($queueDescription)
+    public function setQueueInfo($queueInfo)
     {
-        $this->_queueDescription = $queueDescription;
+        $this->_queueInfo = $queueInfo;
     } 
 }
 ?>

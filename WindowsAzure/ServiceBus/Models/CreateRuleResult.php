@@ -44,21 +44,18 @@ class CreateRuleResult
      *
      * @var string 
      */
-    private $_ruleDescription;
+    private $_ruleInfo;
 
     /**
      * Creates a create rule result object from response. 
      * 
      * @var string $response The response of the string. 
      */
-    public static function create($response)
+    public function parseXml($response)
     {
-        $createRuleResult = new CreateRuleResult();
-        $feed = Feed::create($response);
-        $content = $feed->getContent();
-        $ruleDescription = RuleDescription::create($content->getText()); 
-        $createRuleResult->setRuleDescription($ruleDescription);
-        return $createRuleResult;
+        $ruleInfo = new RuleInfo();
+        $ruleInfo->parseXml($response);
+        $this->_ruleInfo = $ruleInfo;
     }
 
     /**
@@ -71,21 +68,21 @@ class CreateRuleResult
     /**
      * Gets rule description.
      * 
-     * @return RuleDescription
+     * @return RuleInfo
      */
-    public function getRuleDescription()
+    public function getRuleInfo()
     {
-        return $this->_ruleDescription;
+        return $this->_ruleInfo;
     }
 
     /**
      * Sets the rule description. 
      * 
-     * @param RuleDescription $ruleDescription The description of the rule. 
+     * @param RuleInfo $ruleInfo The description of the rule. 
      */
-    public function setRuleDescription($ruleDescription)
+    public function setRuleInfo($ruleInfo)
     {
-        $this->_ruleDescription = $ruleDescription;
+        $this->_ruleInfo = $ruleInfo;
     } 
 }
 ?>

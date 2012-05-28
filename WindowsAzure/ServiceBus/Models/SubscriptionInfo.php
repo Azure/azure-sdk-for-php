@@ -23,9 +23,11 @@
  */
  
 namespace WindowsAzure\ServiceBus\Models;
+
+use WindowsAzure\Common\Internal\Atom\Entry;
 use WindowsAzure\Common\Internal\Resources;
-use WindowsAzure\ServiceBus\Models\SubscriptionDescription;
 use WindowsAzure\Common\Internal\Utilities;
+use WindowsAzure\ServiceBus\Models\SubscriptionDescription;
 
 /**
  * An active WRAP access Token.
@@ -38,15 +40,8 @@ use WindowsAzure\Common\Internal\Utilities;
  * @version   Release: @package_version@
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
-class SubscriptionInfo
+class SubscriptionInfo extends Entry
 {
-    /** 
-     * The name of the subscription. 
-     * 
-     * @var string
-     */
-    private $_name;
-
     /** 
      * The description of the subscription. 
      * 
@@ -57,15 +52,15 @@ class SubscriptionInfo
     /**
      * Creates a SubscriptionInfo instance with specified parameters.
      *
-     * @param string                  $name                    The name of 
+     * @param string                  $title                   The name of 
      * the subscription.
      * @param SubscriptionDescription $subscriptionDescription The description 
      * of the subscription.
      * 
      */
-    public function __construct($name = Resources::EMPTY_STRING, $subscriptionDescription = null)
+    public function __construct($title = Resources::EMPTY_STRING, $subscriptionDescription = null)
     {
-        $this->_name = $name;
+        $this->_title = $title;
         if (is_null($subscriptionDescription))
         {
             $subscriptionDescription = new SubscriptionDescription();
@@ -74,24 +69,29 @@ class SubscriptionInfo
         $this->_subscriptionDescription = $subscriptionDescription;
     }
 
-    /**
-     * Gets the name of the subscription.
-     *
-     * @return string
-     */
-    public function getName()
+    public function parseXml($xmlString)
     {
-        return $this->_name;
+        parent::parseXml($xmlString);
+        $content = $this->_content;
+        if (is_null($content))
+        {
+            $this->_subscriptionDescription = null;
+        }   
+        else
+        {
+            $this->_subscriptionDescription = SubscriptionDescription::create($content->getText());
+        }
     }
 
-    /** 
-     * Sets the name of the subscription. 
-     * 
-     * @param string $name the name of the subscription. 
-     */
-    public function setName($name)
+    public function writeXml()
     {
-        $this->_name = $name;
+        if (is_null($this->_subscriptionDescription)) {
+            $this->_content = null;    
+        }
+        else {
+            $this->_content = $this->_subscriptionDescription->writeXml(); 
+        }
+        return parent::writeXml();
     }
 
     /**

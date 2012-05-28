@@ -25,6 +25,7 @@
 namespace WindowsAzure\ServiceBus\Models;
 
 use WindowsAzure\Common\Internal\Atom\Feed;
+use WindowsAzure\Common\Internal\Atom\Entry;
 use WindowsAzure\Common\Internal\Atom\Content;
 
 /**
@@ -38,38 +39,31 @@ use WindowsAzure\Common\Internal\Atom\Content;
  * @version   Release: @package_version@
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
-class ListTopicsResult
+class ListTopicsResult extends Feed
 {
     /**
-     * Gets the description of the topic. 
+     * Gets the information of the topic. 
      * 
-     * @var TopicDescription
+     * @var TopicInfo
      */ 
-    private $_topicDescription;
+    private $_topicInfo;
 
     /**
      * Creates a list topics result. 
      *
      * @var string $response The response of the list topic request.
      */ 
-    public static function create($response)
+    public function parseXml($response)
     {
-        $listTopicsResult = new ListTopicsResult();
-        $feed = Feed::create($response);
-        $entries = $feed->getEntry();
-        $topicDescription = array();
-        if (!is_null($entries))
+        parent::parseXml($response);
+        $listTopicsResultXml = new \SimpleXMLElement($response);
+        $this->_topicInfo = array();
+        foreach ($listTopicsResultXml->entry as $entry)
         {
-            foreach ($entries as $entry)
-            {
-                $content = $entry->getContent();
-                $topicDescriptionInstance = TopicDescription::create($content->getText());
-                $topicDescription[] = $topicDescriptionInstance; 
-            }
-        }
-
-        $listTopicsResult->setTopicDescription($topicDescription);
-        return $listTopicsResult;
+            $topicInfo = new TopicInfo();   
+            $topicInfo->parseXml($entry->asXml());
+            $this->_topicInfo[] = $topicInfo;
+        } 
     }
 
     /**
@@ -80,23 +74,23 @@ class ListTopicsResult
     }
 
     /**
-     * Gets the description of the topic. 
+     * Gets the information of the topic. 
      *  
-     * @return TopicDescription
+     * @return TopicInfo
      */
-    public function getTopicDescription()
+    public function getTopicInfo()
     {
-        return $this->_topicDescription;
+        return $this->_topicInfo;
     }
 
     /**
-     * Sets the topic description.
+     * Sets the topic information.
      *
-     * @var TopicDescription $topicDescription The description of the topics. 
+     * @var TopicInfo $topicInfo The information of the topics. 
      */
-    public function setTopicDescription($topicDescription)
+    public function setTopicInfo($topicInfo)
     {
-        $this->_topicDescription = $topicDescription;
+        $this->_topicInfo = $topicInfo;
     }
 
 }

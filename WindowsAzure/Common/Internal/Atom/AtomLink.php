@@ -45,24 +45,24 @@ class AtomLink
      *
      * @var string  
      */
-    private $_undefinedContent;
+    protected $_undefinedContent;
 
     /**
      * The HREF of the link. 
      *
      * @var string  
      */
-    private $_href;
+    protected $_href;
 
-    private $_rel;
+    protected $_rel;
 
-    private $_type;
+    protected $_type;
 
-    private $_hreflang;
+    protected $_hreflang;
 
-    private $_title;
+    protected $_title;
 
-    private $_length;
+    protected $_length;
 
      
     /** 
@@ -75,48 +75,46 @@ class AtomLink
     }
 
     /**
-     * Creates an ATOM CONTENT instance with specified xml string. 
+     * Parse an ATOM Link xml. 
      * 
-     * @param string $xmlString an XML based string of ATOM CONTENT.
+     * @param string $xmlString an XML based string of ATOM Link.
      */ 
-    public static function create($xmlString)
+    public function parseXml($xmlString)
     {
-        $atomLink = new AtomLink();
         $atomLinkXml = simplexml_load_string($xmlString);
-        $attributes = $atomLinkXml->attributes();
+        $attributes = (array)$atomLinkXml->attributes();
 
         if (array_key_exists('href', $attributes))
         {
-            $atomLink->setHref((string)$attributes["href"]);
+            $this->_href = (string)$attributes['href'];
         }
 
         if (array_key_exists('rel', $attributes))
         {
-            $atomLink->setHref($attributes['rel']);
+            $this->_rel = (string)$attributes['rel'];
         }
 
         if (array_key_exists('type', $attributes))
         {
-            $atomLink->setHref($attributes['type']);
+            $this->_type = (string)$attributes['type'];
         }
 
         if (array_key_exists('hreflang', $attributes))
         {
-            $atomLink->setHref($attributes['hreflang']);
+            $this->_hreflang = (string)$attributes['hreflang'];
         }
 
         if (array_key_exists('title', $attributes))
         {
-            $atomLink->setHref($attributes['title']);
+            $this->_title = (string)$attributes['title'];
         }
 
         if (array_key_exists('length', $attributes))
         {
-            $atomLink->setHref($attributes['length']);
+            $this->_length = (integer)$attributes['length'];
         }
 
-        $atomLink->setUndefinedContent((string)$atomLinkXml->InnerNode);
-        return $atomLink;
+        $this->_undefinedContent = (string)$atomLinkXml;
     }
 
     /** 

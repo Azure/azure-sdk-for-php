@@ -40,23 +40,20 @@ use WindowsAzure\Common\Internal\Atom\Content;
 class GetTopicResult
 {
     /**
-     * The description of the topic. 
+     * The information of the topic. 
      */
-    private $_topicDescription;
+    private $_topicInfo;
 
     /**
      * Creates a get topic result instance with specified response from the server. 
      * 
      * @param string $response The response from the get topic request. 
      */ 
-    public static function create($response)
+    public function parseXml($response)
     {
-        $getTopicResult = new GetTopicResult();
-        $feed = Feed::create($response);
-        $content = $feed->getContent();
-        $topicDescription = TopicDescription::create($content->getText()); 
-        $getTopicResult->setTopicDescription($topicDescription);
-        return $getTopicResult;
+        $topicInfo = new TopicInfo();
+        $topicInfo->parseXml($response);
+        $this->_topicInfo = $topicInfo;
     }    
 
     /**
@@ -67,23 +64,23 @@ class GetTopicResult
     }
 
     /**
-     * Gets the description of the topic. 
+     * Gets the information of the topic. 
      * 
-     * @return the description of the topic.
+     * @return the information of the topic.
      */ 
-    public function getTopicDescription()
+    public function getTopicInfo()
     {
-        return $this->_topicDescription;
+        return $this->_topicInfo;
     }
 
     /**
-     * Sets the description of the topic. 
+     * Sets the information of the topic. 
      * 
-     * @param TopicDescription $topicDescription The description of the topic. 
+     * @param TopicInfo $topicInfo The information of the topic. 
      */
-    public function setTopicDescription($topicDescription)
+    public function setTopicInfo($topicInfo)
     {
-        $this->_topicDescription = $topicDescription; 
+        $this->_topicInfo = $topicInfo; 
     }
 }
 ?>

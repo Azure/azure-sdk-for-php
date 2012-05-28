@@ -92,6 +92,7 @@ class ServiceBusRestProxyTest extends ServiceBusRestProxyTestBase
     {
         $queueName = 'testDeleteQueueWorks';
         $queueInfo = new QueueInfo($queueName);
+        $this->safeDeleteQueue($queueName);
         $this->restProxy->createQueue($queueInfo);
         $this->restProxy->deleteQueue($queueName);
         $this->assertNotNull($queueInfo);
@@ -361,6 +362,8 @@ class ServiceBusRestProxyTest extends ServiceBusRestProxyTestBase
         $topicInfo = new TopicInfo($topicName);
         $subscriptionInfo = new SubscriptionInfo($subscriptionName);
         $listSubscriptionOptions = new ListSubscriptionsOptions();
+        $this->safeDeleteSubscription($topicName, $subscriptionName);
+        $this->safeDeleteTopic($topicName); 
         
         $this->createTopic($topicInfo);
         $this->createSubscription($topicName, $subscriptionInfo);
@@ -369,11 +372,10 @@ class ServiceBusRestProxyTest extends ServiceBusRestProxyTestBase
             $topicName,
             $listSubscriptionOptions
         );
-
         $this->assertNotNull($listSubscriptionsResult);
         $this->assertEquals(
             1,
-            count($listSubscriptionsResult->getSubscriptionDescription())
+            count($listSubscriptionsResult->getSubscriptionInfo())
         );
     }
 
@@ -422,12 +424,12 @@ class ServiceBusRestProxyTest extends ServiceBusRestProxyTestBase
             $listSubscriptionsOptions
         );
 
-        $subscriptionDescription = $listSubscriptionsResult->getSubscriptionDescription();
+        $subscriptionInfo = $listSubscriptionsResult->getSubscriptionInfo();
 
         $this->assertNotNull($listSubscriptionsResult);
         $this->assertEquals(
             0,
-            count($subscriptionDescription)
+            count($subscriptionInfo)
         ); 
         
     }
@@ -458,7 +460,7 @@ class ServiceBusRestProxyTest extends ServiceBusRestProxyTestBase
             $listSubscriptionOptions
         );
 
-        $subscriptionDescription = $listSubscriptionsResult->getSubscriptionDescription();
+        $subscriptionInfo = $listSubscriptionsResult->getSubscriptionInfo();
 
         $this->restProxy->deleteSubscription($topicName, $secondSubscriptionName);
         $this->restProxy->deleteSubscription($topicName, $subscriptionName);
@@ -468,19 +470,19 @@ class ServiceBusRestProxyTest extends ServiceBusRestProxyTestBase
             $listSubscriptionOptions
         );
 
-        $emptySubscriptionDescription = $emptyListSubscriptionsResult->getSubscriptionDescription();
+        $emptySubscriptionInfo = $emptyListSubscriptionsResult->getSubscriptionInfo();
 
 
         $this->assertNotNull($listSubscriptionsResult);
         $this->assertNotNull($emptyListSubscriptionsResult);
         $this->assertEquals(
             2,
-            count($subscriptionDescription)
+            count($subscriptionInfo)
         );
 
         $this->assertEquals(
             0,
-            count($emptySubscriptionDescription)
+            count($emptySubscriptionInfo)
         );
     }
 
@@ -545,7 +547,7 @@ class ServiceBusRestProxyTest extends ServiceBusRestProxyTestBase
         $listRulesResult = $this->restProxy->listRules($topicName, $subscriptionName, $listRulesOptions);
 
         $this->assertNotNull($listRulesResult);
-        $this->assertEquals(3, count($listRulesResult->getRuleDescription()));
+        $this->assertEquals(3, count($listRulesResult->getRuleInfo()));
         
     }
 
@@ -594,10 +596,10 @@ class ServiceBusRestProxyTest extends ServiceBusRestProxyTestBase
         $this->restProxy->deleteRule($topicName, $subscriptionName, Resources::DEFAULT_RULE_NAME); 
 
         $listRulesResult = $this->restProxy->listRules($topicName, $subscriptionName, $listRulesOptions);
-        $ruleDescription = $listRulesResult->getRuleDescription();
+        $ruleInfo = $listRulesResult->getRuleInfo();
         
-        $this->assertNotNull($ruleDescription);
-        $this->assertEquals(0, count($ruleDescription));
+        $this->assertNotNull($ruleInfo);
+        $this->assertEquals(0, count($ruleInfo));
     }
    
     public function testRulesMayHaveActionAndFilter()

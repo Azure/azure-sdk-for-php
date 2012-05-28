@@ -45,30 +45,52 @@ class Person
      *
      * @var string  
      */
-    private $_name;
+    protected $_name;
 
     /**
      * The Uri of the person. 
      *
      * @var string  
      */
-    private $_uri;
+    protected $_uri;
 
     /**
      * The email of the person.
      *
      * @var string 
      */
-    private $_email;
+    protected $_email;
      
     /** 
      * Creates an ATOM person instance with specified name.
      *
      * @param string $name The name of the person.
      */
-    public function __construct($name)
+    public function __construct($name = Resources::EMPTY_STRING)
     {
         $this->_name = $name;
+    }
+
+    public function parseXml($xmlString)
+    {
+        $personXml = simplexml_load_string($xmlString);
+        $attributes = $personXml->attributes();
+        $personArray = (array)$personXml;
+
+        if (array_key_exists('name', $personArray))
+        {
+            $this->_name = (string)$personArray['name'];
+        }
+
+        if (array_key_exists('uri', $personArray))
+        {
+            $this->_uri = (string)$personArray['uri'];
+        }
+
+        if (array_key_exists('email', $personArray))
+        {
+            $this->_email = (string)$personArray['email'];
+        }
     }
 
     /** 

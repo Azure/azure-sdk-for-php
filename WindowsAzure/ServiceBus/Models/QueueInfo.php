@@ -23,9 +23,10 @@
  */
  
 namespace WindowsAzure\ServiceBus\Models;
+use WindowsAzure\Common\Internal\Atom\Entry;
 use WindowsAzure\Common\Internal\Resources;
-use WindowsAzure\ServiceBus\Models\QueueDescription;
 use WindowsAzure\Common\Internal\Utilities;
+use WindowsAzure\ServiceBus\Models\QueueDescription;
 
 /**
  * The information of a queue.
@@ -38,15 +39,9 @@ use WindowsAzure\Common\Internal\Utilities;
  * @version   Release: @package_version@
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
-class QueueInfo
-{
-    /** 
-     * The name of the queue.
-     * 
-     * @var string
-     */
-    private $_name;
 
+class QueueInfo extends Entry
+{
     /**
      * The description of the queue. 
      * 
@@ -61,9 +56,9 @@ class QueueInfo
      * @param QueueDescription $queueDescription The description of the queue.
      * 
      */
-    public function __construct($name, $queueDescription = null)
+    public function __construct($title = Resources::EMPTY_STRING, $queueDescription = null)
     {
-        $this->_name = $name;
+        $this->_title = $title;
         if (is_null($queueDescription))
         {
             $queueDescription = new QueueDescription();
@@ -72,24 +67,27 @@ class QueueInfo
         $this->_queueDescription = $queueDescription;
     }
 
-    /**
-     * Gets the name of the queue.
-     *
-     * @return string
-     */
-    public function getName()
+    public function parseXml($xmlString)
     {
-        return $this->_name;
+        parent::parseXml($xmlString);
+        $content = $this->_content;
+        if (is_null($content)) {
+            $this->_queueDescription = null;
+        }
+        else {
+            $this->_queueDescription = QueueDescription::create($content->getText());
+        }
     }
 
-    /**
-     * Sets the name of the queue. 
-     * 
-     * @param string $name The name of the queue. 
-     */
-    public function setName($name)
+    public function writeXml()
     {
-        $this->_name = $name;
+        if (is_null($this->_queueDescription)) {
+            $this->_content = null;    
+        }
+        else {
+            $this->_content = $this->_queueDescription->writeXml(); 
+        }
+        return parent::writeXml();
     }
 
     /**
@@ -109,6 +107,6 @@ class QueueInfo
     {
         $this->_queueDescription = $queueDescription;
     }
-    
+
 }
 

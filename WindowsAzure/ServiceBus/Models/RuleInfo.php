@@ -26,6 +26,7 @@ namespace WindowsAzure\ServiceBus\Models;
 use WindowsAzure\Common\Internal\Resources;
 use WindowsAzure\Common\Internal\Utilities;
 use WindowsAzure\Common\Internal\Validate;
+use WindowsAzure\Common\Internal\Atom\Entry;
 
 /**
  * The information regarding the rule.
@@ -39,15 +40,8 @@ use WindowsAzure\Common\Internal\Validate;
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
 
-class RuleInfo
+class RuleInfo extends Entry
 {
-    /** 
-     * The name of the rule.
-     * 
-     * @var string
-     */
-    private $_name;
-    
     /**
      * The description of the rule.
      * 
@@ -62,31 +56,39 @@ class RuleInfo
      * @param RuleDescription $ruleDescription The description of the rule.
      * 
      */
-    public function __construct($name, $ruleDescription = null)
+    public function __construct($title = Resources::EMPTY_STRING, $ruleDescription = null)
     {
-        Validate::isString($name, 'name');
+        Validate::isString($title, 'title');
 
         if (is_null($ruleDescription))
         {
             $ruleDescription = new RuleDescription();
         }
-        $this->_name = $name;
+        $this->_title = $title;
         $this->_ruleDescription = $ruleDescription;
     }
 
-    /**
-     * Gets the name of the 
-     *
-     * @return WrapAccessTokenResult
-     */
-    public function getName()
+    public function parseXml($xmlString)
     {
-        return $this->_name;
+        parent::parseXml($xmlString);
+        $content = $this->_content;
+        if (is_null($content)) {
+            $this->_ruleDescription = null;
+        }
+        else {
+            $this->_ruleDescription = RuleDescription::create($content->getText());
+        }
     }
 
-    public function setName($name)
+    public function writeXml()
     {
-        $this->_name = $name;
+        if (is_null($this->_ruleDescription)) {
+            $this->_content = null;    
+        }
+        else {
+            $this->_content = $this->_ruleDescription->writeXml(); 
+        }
+        return parent::writeXml();
     }
 
     public function getRuleDescription()

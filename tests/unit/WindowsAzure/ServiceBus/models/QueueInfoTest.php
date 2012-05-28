@@ -49,8 +49,8 @@ class QueueInfoTest extends \PHPUnit_Framework_TestCase
         
         // Test
         $queueInfo = new QueueInfo($expected);
-        $actual = $queueInfo->getName();
-        
+        $actual = $queueInfo->getTitle();
+       
         // Assert
         $this->assertNotNull($queueInfo);
         $this->assertEquals(

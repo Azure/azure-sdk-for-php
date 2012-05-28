@@ -40,27 +40,22 @@ use WindowsAzure\Common\Internal\Atom\Content;
 class CreateSubscriptionResult
 {
     /**
-     * The description of the subscription. 
+     * The information of the subscription. 
      *
      * @var string 
      */
-    private $_subscriptionDescription;
+    private $_subscriptionInfo;
 
     /**
      * Creates a create subscription result object from response. 
      * 
      * @var string $response The response of the string. 
      */
-    public static function create($response)
+    public function parseXml($response)
     {
-        $createSubscriptionResult = new CreateSubscriptionResult();
-        $feed = Feed::create($response);
-        $content = $feed->getContent();
-        $subscriptionDescription = SubscriptionDescription::create(
-            $content->getText()
-        ); 
-        $createSubscriptionResult->setSubscriptionDescription($subscriptionDescription);
-        return $createSubscriptionResult;
+        $subscriptionInfo = new SubscriptionInfo();
+        $subscriptionInfo->parseXml($response);
+        $this->_subscriptionResult = $subscriptionInfo;
     }
 
     /**
@@ -71,23 +66,23 @@ class CreateSubscriptionResult
     }
 
     /**
-     * Gets subscription description.
+     * Gets subscription information.
      * 
-     * @return SubscriptionDescription
+     * @return SubscriptionInfo
      */
-    public function getSubscriptionDescription()
+    public function getSubscriptionInfo()
     {
-        return $this->_subscriptionDescription;
+        return $this->_subscriptionInfo;
     }
 
     /**
-     * Sets the subscription description. 
+     * Sets the subscription information. 
      * 
-     * @param SubscriptionDescription $subscriptionDescription The description of the subscription. 
+     * @param SubscriptionInfo $subscriptionInfo The information of the subscription. 
      */
-    public function setSubscriptionDescription($subscriptionDescription)
+    public function setSubscriptionInfo($subscriptionInfo)
     {
-        $this->_subscriptionDescription = $subscriptionDescription;
+        $this->_subscriptionInfo = $subscriptionInfo;
     } 
 }
 ?>

@@ -44,105 +44,105 @@ class Feed
      *
      * @var string 
      */
-    private $_attributes;
+    protected $_attributes;
 
     /**
      * The entry of the feed. 
      * 
      * @var Entry
      */
-    private $_entry;
+    protected $_entry;
 
     /**
      * The content of the feed.
      * 
      * @var Content
      */
-    private $_content;
+    protected $_content;
 
     /**
      * The category of the feed. 
      * 
      * @var string
      */
-    private $_category;
+    protected $_category;
 
     /**
      * The contributor of the feed. 
      * 
      * @var string
      */
-    private $_contributor;
+    protected $_contributor;
 
     /**
      * The generator of the feed. 
      * 
      * @var string
      */
-    private $_generator;
+    protected $_generator;
 
     /**
      * The icon of the feed. 
      * 
      * @var string
      */
-    private $_icon;
+    protected $_icon;
 
     /**
      * The ID of the feed. 
      * 
      * @var string
      */
-    private $_id;
+    protected $_id;
 
     /**
      * The link of the feed. 
      * 
      * @var string
      */
-    private $_link;
+    protected $_link;
 
     /**
      * The logo of the feed. 
      * 
      * @var string
      */
-    private $_logo;
+    protected $_logo;
 
     /**
      * The rights of the feed. 
      * 
      * @var string
      */
-    private $_rights;
+    protected $_rights;
 
     /**
      * The subtitle of the feed. 
      * 
      * @var string
      */
-    private $_subtitle;
+    protected $_subtitle;
 
     /**
      * The title of the feed. 
      * 
      * @var string
      */
-    private $_title;
+    protected $_title;
 
     /**
      * The update of the feed. 
      * 
      * @var string
      */
-    private $_updated;
+    protected $_updated;
 
     /**
      * The extension element of the feed. 
      * 
      * @var string
      */
-    private $_extensionElement;
+    protected $_extensionElement;
 
     /**
      * Creates an ATOM FEED object with default parameters. 
@@ -155,15 +155,14 @@ class Feed
     /**
      * Creates a feed object with specified XML string. 
      */
-    public static function create($xmlString)
+    public function parseXml($xmlString)
     {
-        $feed = new Feed();
         $feedXml = new \SimpleXMLElement($xmlString);
         $attributes = $feedXml->attributes();
         $feedArray = (array)$feedXml;
         if (!empty($attributes))
         {
-            $feed->setAttributes((array)$attributes);
+            $this->_attributes = (array)$attributes;
         }
 
         if (array_key_exists('entry', $feedArray))
@@ -175,86 +174,92 @@ class Feed
             {
                 foreach ($entryXml as $entryXmlInstance)
                 {
-                    $entryInstance = Entry::create($entryXmlInstance->asXML());
+                    $entryInstance = new Entry();
+                    $entryInstance->parseXml($entryXmlInstance->asXML());
                     $entry[] = $entryInstance;
                 }
             }
             else
             {
-                $entry[] = Entry::create($entryXml->asXML());
+                $entryInstance = new Entry();
+                $entryInstance->parseXml($entryXml->asXML());
+                $entry[] = $entryInstance;
                 
             }
-            $feed->setEntry($entry);
+            $this->_entry = $entry;
         }
 
         if (array_key_exists('content', $feedArray))
         {
-            $content = Content::create($feedArray['content']->asXML());
-            $feed->setContent($content);
+            $content = new Content();
+            $content->parseXml($feedArray['content']->asXML());
+            $this->_content = $content;
         }
 
         if (array_key_exists('category', $feedArray))
         {
-            $category = Categtory::create($feedArray['category']->asXML());
-            $feed->setCategory($category);
+            $category = new Category();
+            $category->parseXml($feedArray['category']->asXML());
+            $this->_category = $category;
         }
 
         if (array_key_exists('contributor', $feedArray))
         {
-            $contributor = Person::create($feedArray['contributor']->asXML());
-            $feed->setContributor($contributor);
+            $contributor = new Person();
+            $contributor->parseXml($feedArray['contributor']->asXML());
+            $this->_contributor = $contributor;
         }
 
         if (array_key_exists('generator', $feedArray))
         {
             $generator = new Generator();
-            $generator->setText((string)$feedArray['generator']);
-            $feed->setGenerator($generator);
+            $generator->setText((string)$feedArray['generator']->asXML());
+            $this->_generator = $generator;
         } 
 
         if (array_key_exists('icon', $feedArray))
         {
-            $icon = Icon::create($feedArray['icon']->asXML());
-            $feed->setIcon($icon);
+            $icon = new Icon();
+            $icon->parseXml($feedArray['icon']->asXML());
+            $this->_icon = $icon;
         }
 
         if (array_key_exists('id', $feedArray))
         {
-            $feed->setId((string)$feedArray['id']);
+            $this->_id = (string)$feedArray['id'];
         }
 
         if (array_key_exists('link', $feedArray))
         {
-            $link = AtomLink::create($feedArray['link']->asXML());
-            $feed->setLink($link);
+            $link = new AtomLink();
+            $link->parseXml($feedArray['link']->asXML());
+            $this->_link = $link;
         }
 
         if (array_key_exists('logo', $feedArray))
         {
-            $feed->setLogo((string)$feedArray['logo']);
+            $this->_logo = (string)$feedArray['logo'];
         }
 
         if (array_key_exists('rights', $feedArray))
         {
-            $feed->setRights((string)$feedArray['rights']);
+            $this->_rights = (string)$feedArray['rights'];
         }
 
         if (array_key_exists('subtitle', $feedArray))
         {
-            $feed->setSubtitle((string)$feedArray['subtitle']);
+            $this->_subtitle = (string)$feedArray['subtitle'];
         }
 
         if (array_key_exists('title', $feedArray))
         {
-            $feed->setTitle((string)$feedArray['title']);
+            $this->_title = (string)$feedArray['title'];
         }
 
         if (array_key_exists('updated', $feedArray))
         {
-            $feed->setUpdated((string)$feedArray['updated']);
+            $this->_updated = (string)$feedArray['updated'];
         }
-         
-        return $feed;
     }
 
     /**
