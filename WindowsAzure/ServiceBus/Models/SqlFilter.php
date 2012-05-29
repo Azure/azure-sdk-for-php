@@ -39,7 +39,7 @@ use WindowsAzure\Common\Internal\Validate;
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
 
-class SqlFilter
+class SqlFilter extends Filter
 {
     /** 
      * The SQL expression of the filter. 
@@ -47,13 +47,6 @@ class SqlFilter
      * @var string 
      */
     private $_sqlExpression;
-
-    /**
-     * The compatibility level of the filter. 
-     * 
-     * @var string 
-     */
-    private $_compatibilityLevel;
 
     /**
      * Creates a SQL filter with default parameters.
@@ -79,26 +72,6 @@ class SqlFilter
     public function setSqlExpression($sqlExpression)
     {
         $this->_sqlExpression = $sqlExpression;
-    }
-
-    /**
-     * Gets the compatibility level. 
-     * 
-     * @return string 
-     */
-    public function getCompatiblityLevel()
-    {
-        return $this->_compatibilityLevel;
-    }
-
-    /**
-     * Sets the compatibility level. 
-     * 
-     * @param string $compatibilityLevel The compatibility level. 
-     */
-    public function setCompatibilityLevel($compatibilityLevel)
-    {
-        $this->_compatibilityLevel = $compatibilityLevel;
     }
 
 }

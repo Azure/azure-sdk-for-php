@@ -23,7 +23,12 @@
  */
 
 namespace Tests\Unit\WindowsAzure\Common\Internal\Atom;
+use WindowsAzure\Common\Internal\Atom\AtomLink;
+use WindowsAzure\Common\Internal\Atom\Content;
 use WindowsAzure\Common\Internal\Atom\Entry;
+use WindowsAzure\Common\Internal\Atom\Category;
+use WindowsAzure\Common\Internal\Atom\Person;
+use WindowsAzure\Common\Internal\Atom\Source;
 
 /**
  * Unit tests for class WrapAccessTokenResult
@@ -39,7 +44,7 @@ use WindowsAzure\Common\Internal\Atom\Entry;
 class EntryTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @covers WindowsAzure\Services\ServiceBus\Models\Entry::__construct
+     * @covers WindowsAzure\Common\Internal\Atom\Entry::__construct
      */
     public function testEntryConstructor()
     {
@@ -52,71 +57,314 @@ class EntryTest extends \PHPUnit_Framework_TestCase
         $this->assertNotNull($entry);
     }
 
+    /**
+     * @covers WindowsAzure\Common\Internal\Atom\Entry::getAuthor
+     * @covers WindowsAzure\Common\Internal\Atom\Entry::setAuthor
+     */
     public function testEntryGetSetAuthor()
     {
         // Setup 
-        $expected = 'testAuthor';
+        $expected = new Person();
+        $expected->setName('testPerson');
         $entry = new Entry();   
         
         // Test
         $entry->setAuthor($expected);
-        $actual = $entry->getAuthor();        
-    
+        $actual = $entry->getAuthor();
 
         // Assert 
+        $this->assertEquals(
+            $expected->getName(),
+            $actual->getName()
+        );
         
     }
     
+    /**
+     * @covers WindowsAzure\Common\Internal\Atom\Entry::getCategory
+     * @covers WindowsAzure\Common\Internal\Atom\Entry::setCategory
+     */
     public function testEntryGetSetCategory()
     {
+        // Setup 
+        $expected = new Category();
+        $expected->setTerm('testTerm');
+        $entry = new Entry();   
+        
+        // Test
+        $entry->setCategory($expected);
+        $actual = $entry->getCategory();
+
+        // Assert 
+        $this->assertEquals(
+            $expected->getTerm(),
+            $actual->getTerm()
+        );
+        
     }
 
+    /**
+     * @covers WindowsAzure\Common\Internal\Atom\Entry::getContent
+     * @covers WindowsAzure\Common\Internal\Atom\Entry::setContent
+     */
     public function testEntryGetSetContent()
     {
+        // Setup 
+        $expected = new Content();
+        $expected->setText('testText');
+        $entry = new Entry();   
+        
+        // Test
+        $entry->setContent($expected);
+        $actual = $entry->getContent();
+
+        // Assert 
+        $this->assertEquals(
+            $expected->getText(),
+            $actual->getText()
+        );
+        
     }
 
+    /**
+     * @covers WindowsAzure\Common\Internal\Atom\Entry::getContributor
+     * @covers WindowsAzure\Common\Internal\Atom\Entry::setContributor
+     */
     public function testEntryGetSetContributor()
     {
+        // Setup 
+        $expected = new Person();
+        $expected->setName('testContributor');
+        $entry = new Entry();   
+        
+        // Test
+        $entry->setContributor($expected);
+        $actual = $entry->getContributor();
+
+        // Assert 
+        $this->assertEquals(
+            $expected->getName(),
+            $actual->getName()
+        );
+        
     }
 
+    /**
+     * @covers WindowsAzure\Common\Internal\Atom\Entry::getId
+     * @covers WindowsAzure\Common\Internal\Atom\Entry::setId
+     */
     public function testEntryGetSetId()
     {
+        // Setup 
+        $expected = 'testId';
+        $entry = new Entry();   
+        
+        // Test
+        $entry->setId($expected);
+        $actual = $entry->getId();
+
+        // Assert 
+        $this->assertEquals(
+            $expected,
+            $actual
+        );
+        
     }
 
+    /**
+     * @covers WindowsAzure\Common\Internal\Atom\Entry::getLink
+     * @covers WindowsAzure\Common\Internal\Atom\Entry::setLink
+     */
     public function testEntryGetSetLink()
     {
+        // Setup 
+        $expected = new AtomLink('testLink');
+        $entry = new Entry();   
+        
+        // Test
+        $entry->setLink($expected);
+        $actual = $entry->getLink();
+
+        // Assert 
+        $this->assertEquals(
+            $expected,
+            $actual
+        );
+        
     }
 
+    /**
+     * @covers WindowsAzure\Common\Internal\Atom\Entry::getPublished
+     * @covers WindowsAzure\Common\Internal\Atom\Entry::setPublished
+     */
     public function testEntryGetSetPublished()
     {
+        // Setup 
+        $expected = true;
+        $entry = new Entry();   
+        
+        // Test
+        $entry->setPublished($expected);
+        $actual = $entry->getPublished();
+
+        // Assert 
+        $this->assertEquals(
+            $expected,
+            $actual
+        );
+        
     }
 
+    /**
+     * @covers WindowsAzure\Common\Internal\Atom\Entry::getRights
+     * @covers WindowsAzure\Common\Internal\Atom\Entry::setRights
+     */
     public function testEntryGetSetRights()
     {
+        // Setup 
+        $expected = 'rights';
+        $entry = new Entry();   
+        
+        // Test
+        $entry->setRights($expected);
+        $actual = $entry->getRights();
+
+        // Assert 
+        $this->assertEquals(
+            $expected,
+            $actual
+        );
+        
     }
 
+    /**
+     * @covers WindowsAzure\Common\Internal\Atom\Entry::getSource
+     * @covers WindowsAzure\Common\Internal\Atom\Entry::setSource
+     */
     public function testEntryGetSetSource()
     {
+        // Setup 
+        $expected = new Source();
+        $entry = new Entry();   
+        
+        // Test
+        $entry->setSource($expected);
+        $actual = $entry->getSource();
+
+        // Assert 
+        $this->assertEquals(
+            $expected,
+            $actual
+        );
+        
     }
 
+    /**
+     * @covers WindowsAzure\Common\Internal\Atom\Entry::getSummary
+     * @covers WindowsAzure\Common\Internal\Atom\Entry::setSummary
+     */
     public function testEntryGetSetSummary()
     {
+        // Setup 
+        $expected = 'testSummary';
+        $entry = new Entry();   
+        
+        // Test
+        $entry->setSummary($expected);
+        $actual = $entry->getSummary();
+
+        // Assert 
+        $this->assertEquals(
+            $expected,
+            $actual
+        );
+        
     }
 
+    /**
+     * @covers WindowsAzure\Common\Internal\Atom\Entry::getTitle
+     * @covers WindowsAzure\Common\Internal\Atom\Entry::setTitle
+     */
     public function testEntryGetSetTitle()
     {
+        // Setup 
+        $expected = 'testTitle';
+        $entry = new Entry();   
+        
+        // Test
+        $entry->setTitle($expected);
+        $actual = $entry->getTitle();
+
+        // Assert 
+        $this->assertEquals(
+            $expected,
+            $actual
+        );
+        
     }
 
+    /**
+     * @covers WindowsAzure\Common\Internal\Atom\Entry::getUpdated
+     * @covers WindowsAzure\Common\Internal\Atom\Entry::setUpdated
+     */
     public function testEntryGetSetUpdated()
     {
+        // Setup 
+        $expected = true;
+        $entry = new Entry();   
+        
+        // Test
+        $entry->setUpdated($expected);
+        $actual = $entry->getUpdated();
+
+        // Assert 
+        $this->assertEquals(
+            $expected,
+            $actual
+        );
+        
     }
 
+    /**
+     * @covers WindowsAzure\Common\Internal\Atom\Entry::getExtensionElement
+     * @covers WindowsAzure\Common\Internal\Atom\Entry::setExtensionElement
+     */
     public function testEntryGetSetExtensionElement()
     {   
+        // Setup 
+        $expected = 'testExtensionElement';
+        $entry = new Entry();   
+        
+        // Test
+        $entry->setExtensionElement($expected);
+        $actual = $entry->getExtensionElement();
+
+        // Assert 
+        $this->assertEquals(
+            $expected,
+            $actual
+        );
+        
     }
 
+    /**
+     * @covers WindowsAzure\Common\Internal\Atom\Entry::toXml
+     */
     public function testEntryToXml()
     {
+        // Setup 
+        $entry = new Entry();   
+        $expected = "<atom:entry/>\n";
+        
+        // Test
+        $actual = $entry->toXml();
+
+        // Assert 
+        $this->assertEquals(
+            $expected,
+            $actual
+        );
+        
     }
 
 }

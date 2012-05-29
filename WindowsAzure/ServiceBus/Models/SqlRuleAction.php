@@ -27,7 +27,7 @@ use WindowsAzure\Common\Internal\Utilities;
 use WindowsAzure\Common\Internal\Validate;
 
 /**
- * The SQL filter.
+ * The SQL rule action.
  *
  * @category  Microsoft
  * @package   WindowsAzure\ServiceBus\Models
@@ -38,7 +38,7 @@ use WindowsAzure\Common\Internal\Validate;
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
 
-class SqlRuleAction
+class SqlRuleAction extends Action
 {
     /**
      * The SQL expression.
@@ -46,13 +46,6 @@ class SqlRuleAction
      * @var string
      */
     private $_sqlExpression;
-
-    /**
-     * The compatibility level.
-     * 
-     * @var string
-     */
-    private $_compatibilityLevel;
 
     /** 
      * Creates a SQL Rule Action instance with default parameters. 
@@ -79,26 +72,6 @@ class SqlRuleAction
     public function setSqlExpression($sqlExpression)
     {
         $this->_sqlExpression = $sqlExpression;
-    }
-
-    /**
-     * Gets the compatibility level. 
-     * 
-     * @return string 
-     */
-    public function getCompatiblityLevel()
-    {
-        return $this->_compatibilityLevel;
-    }
-
-    /**
-     * Sets the compatibility level.
-     * 
-     * @param string $compatibilityLevel The level of compatibility.
-     */
-    public function setCompatibilityLevel($compatibilityLevel)
-    {
-        $this->_compatibilityLevel = $compatibilityLevel;
     }
 
 }

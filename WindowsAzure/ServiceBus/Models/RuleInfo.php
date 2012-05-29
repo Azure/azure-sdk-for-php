@@ -141,7 +141,7 @@ class RuleInfo extends Entry
     public function withCorrelationIdFilter($correlationId)
     {
         $filter = new CorrelationFilter();
-        $filter->setCorrealtionId($correaltionId);
+        $filter->setCorrelationId($correlationId);
         $this->_ruleDescription->setFilter($filter);
     }
 
@@ -156,7 +156,7 @@ class RuleInfo extends Entry
     {
         $filter = new SqlFilter();
         $filter->setSqlExpression($sqlExpression);
-        $filter->setComaptibilityLevel(20);
+        $filter->setCompatibilityLevel(20);
         $this->_ruleDescription->setFilter($filter);
     }
 
@@ -183,5 +183,28 @@ class RuleInfo extends Entry
         $filter->setCompatibilityLevel(20);
         $this->_ruleDescription->setFilter($filter);
     }
+
+    /**
+     * With empty rule action. 
+     * 
+     */
+    public function withEmptyRuleAction()
+    {
+        $action = new EmptyRuleAction();
+        $this->_ruleDescription->setAction($action);
+    }
+
+    /**
+     * With SQL rule action. 
+     * 
+     * @param string $sqlExpression 
+     */
+    public function withSqlRuleAction($sqlExpression)
+    {
+        $action = new SqlRuleAction();
+        $action->setSqlExpression($sqlExpression);
+        $this->_ruleDescription->setAction($action);
+    }
+
 }
 

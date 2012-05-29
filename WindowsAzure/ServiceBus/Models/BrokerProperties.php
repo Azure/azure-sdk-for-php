@@ -21,6 +21,7 @@
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
 namespace WindowsAzure\ServiceBus\Models;
+use WindowsAzure\Common\Internal\Validate;
 
 /**
  * The properties of the broker of a brokered message. 

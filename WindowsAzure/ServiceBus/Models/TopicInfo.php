@@ -27,6 +27,7 @@ use WindowsAzure\Common\Internal\Atom\Entry;
 use WindowsAzure\Common\Internal\Atom\Content;
 use WindowsAzure\Common\Internal\Resources;
 use WindowsAzure\Common\Internal\Utilities;
+use WindowsAzure\Common\Internal\Validate;
 use WindowsAzure\ServiceBus\Models\TopicDescription;
 
 /**
@@ -100,7 +101,7 @@ class TopicInfo extends Entry
                     $this->_topicDescription,
                     'TopicDescription'
                 )
-            )
+            );
         }
         return parent::writeXml();
     }

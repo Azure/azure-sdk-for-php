@@ -15,7 +15,7 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   Tests\Unit\WindowsAzure\Core\Atom
+ * @package   Tests\Unit\WindowsAzure\Common\Internal\Atom
  * @author    Azure PHP SDK <azurephpsdk@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
@@ -29,7 +29,7 @@ use WindowsAzure\Common\Internal\Atom\Category;
  * Unit tests for class Category.
  *
  * @category  Microsoft
- * @package   Tests\Unit\WindowsAzure\Core\Atom
+ * @package   Tests\Unit\WindowsAzure\Common\Internal\Atom
  * @author    Azure PHP SDK <azurephpsdk@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
@@ -40,7 +40,7 @@ use WindowsAzure\Common\Internal\Atom\Category;
 class CategoryTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @covers WindowsAzure\Core\Atom\Category::__construct
+     * @covers WindowsAzure\Common\Internal\Atom\Category::__construct
      */
     public function testCategoryConstructor()
     {
@@ -54,7 +54,7 @@ class CategoryTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\Core\Atom\Category::__construct
+     * @covers WindowsAzure\Common\Internal\Atom\Category::__construct
      */
     public function testCategoryConstructorWithParameterSuccess()
     {
@@ -73,8 +73,8 @@ class CategoryTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\Core\Atom\Category::getTerm
-     * @covers WindowsAzure\Core\Atom\Category::setTerm
+     * @covers WindowsAzure\Common\Internal\Atom\Category::getTerm
+     * @covers WindowsAzure\Common\Internal\Atom\Category::setTerm
      */
     public function testCategoryGetSetTerm()
     {
@@ -95,8 +95,8 @@ class CategoryTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\Core\Atom\Category::getScheme
-     * @covers WindowsAzure\Core\Atom\Category::setScheme
+     * @covers WindowsAzure\Common\Internal\Atom\Category::getScheme
+     * @covers WindowsAzure\Common\Internal\Atom\Category::setScheme
      */
     public function testCategoryGetSetScheme()
     {
@@ -117,17 +117,17 @@ class CategoryTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\Core\Atom\Category::getLabel
-     * @covers WindowsAzure\Core\Atom\Category::setLabel
+     * @covers WindowsAzure\Common\Internal\Atom\Category::getLabel
+     * @covers WindowsAzure\Common\Internal\Atom\Category::setLabel
      */
     public function testCategoryGetSetLabel()
     {
         // Setup
-        $expectedScheme = 'testCategoryGetSetLabel';
+        $expectedLabel = 'testCategoryGetSetLabel';
         $category = new Category();
         
         // Test 
-        $category->setScheme($expectedLabel);
+        $category->setLabel($expectedLabel);
         $actualLabel = $category->getLabel();
 
         // Assert
@@ -138,8 +138,8 @@ class CategoryTest extends \PHPUnit_Framework_TestCase
     }   
 
     /**
-     * @covers WindowsAzure\Core\Atom\Category::getUndefinedContent
-     * @covers WindowsAzure\Core\Atom\Category::setUndefinedContent
+     * @covers WindowsAzure\Common\Internal\Atom\Category::getUndefinedContent
+     * @covers WindowsAzure\Common\Internal\Atom\Category::setUndefinedContent
      */
     public function testCategoryGetSetUndefinedContent()
     {
@@ -148,8 +148,8 @@ class CategoryTest extends \PHPUnit_Framework_TestCase
         $category = new Category();
         
         // Test 
-        $category->setScheme($expectedUndefinedContent);
-        $actualUndefinedContent = $category->getLabel();
+        $category->setUndefinedContent($expectedUndefinedContent);
+        $actualUndefinedContent = $category->getUndefinedContent();
 
         // Assert
         $this->assertEquals(
@@ -160,29 +160,35 @@ class CategoryTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\Core\Atom\Category::create
+     * @covers WindowsAzure\Common\Internal\Atom\Category::parseXml
      */
     public function testCategoryCreate()
     {
         // Setup
-        $xml = '<atom:category/>';
+        $xml = '<category/>';
         
         // Test 
-        $category = Category::create($xml);
+        $category = new Category();
+        $category->parseXml($xml);
 
         // Assert
         $this->assertNotNull($category);
         
     }
 
+    /**
+     * @covers WindowsAzure\Common\Internal\Atom\Category::parseXml
+     * @covers WindowsAzure\Common\Internal\Atom\Category::getTerm
+     */
     public function testCategoryCreateWithTerm()
     {
         // Setup
-        $xml = '<atom:category term="testTerm"></atom:category>';
+        $xml = '<category term="testTerm"></category>';
         $expected = 'testTerm';
         
         // Test 
-        $category = Category::create($xml);
+        $category = new Category();
+        $category->parseXml($xml);
         $actual = $category->getTerm();
 
         // Assert
@@ -193,14 +199,19 @@ class CategoryTest extends \PHPUnit_Framework_TestCase
         
     }
 
+    /**
+     * @covers WindowsAzure\Common\Internal\Atom\Category::parseXml
+     * @covers WindowsAzure\Common\Internal\Atom\Category::getScheme
+     */
     public function testCategoryCreateWithScheme()
     {
         // Setup
-        $xml = '<atom:category scheme="testScheme"></atom:category>';
+        $xml = '<category scheme="testScheme"></category>';
         $expected = 'testScheme';
         
         // Test 
-        $category = Category::create($xml);
+        $category = new Category();
+        $category->parseXml($xml);
         $actual = $category->getScheme();
 
         // Assert
@@ -211,14 +222,19 @@ class CategoryTest extends \PHPUnit_Framework_TestCase
         
     }
 
+    /**
+     * @covers WindowsAzure\Common\Internal\Atom\Category::parseXml
+     * @covers WindowsAzure\Common\Internal\Atom\Category::getLabel
+     */
     public function testCategoryCreateWithLabel()
     {
         // Setup
-        $xml = '<atom:category label="testLabel"></atom:category>';
+        $xml = '<category label="testLabel"></category>';
         $expected = 'testLabel';
         
         // Test 
-        $category = Category::create($xml);
+        $category = new Category();
+        $category->parseXml($xml);
         $actual = $category->getLabel();
 
         // Assert
@@ -229,6 +245,10 @@ class CategoryTest extends \PHPUnit_Framework_TestCase
         
     }
 
+    /**
+     * @covers WindowsAzure\Common\Internal\Atom\Category::parseXml
+     * @covers WindowsAzure\Common\Internal\Atom\Category::toXml
+     */
     public function testCategoryWriteEmptyXml()
     {
         // Setup
@@ -245,13 +265,21 @@ class CategoryTest extends \PHPUnit_Framework_TestCase
         );
     }
 
+    /**
+     * @covers WindowsAzure\Common\Internal\Atom\Category::parseXml
+     * @covers WindowsAzure\Common\Internal\Atom\Category::toXml
+     */
     public function testCategoryWriteXmlSuccess()
     {
         // Setup
         $category = new Category();
-        $expected = '<atom:category term="testTerm" scheme="testScheme" label="testLabel"></atom:category>';
+        $expected = '<atom:category term="testTerm" scheme="testScheme" label="testLabel"/>';
+        $category->setTerm('testTerm');
+        $category->setScheme('testScheme');
+        $category->setLabel('testLabel');
         
         // Test 
+
         $actual = $category->toXml();
 
         // Assert

@@ -1,5 +1,4 @@
 <?php
-
 /**
  * LICENSE: Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,43 +14,60 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   Tests\Unit\WindowsAzure\Services\Queue\Models
+ * @package   WindowsAzure\ServiceBus\Models
  * @author    Azure PHP SDK <azurephpsdk@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
-
-namespace Tests\Unit\WindowsAzure\Common\Internal\Atom;
-use WindowsAzure\Common\Internal\Atom\Feed;
+namespace WindowsAzure\ServiceBus\Models;
 
 /**
- * Unit tests for class Feed
+ * The base class for rule filter.
  *
  * @category  Microsoft
- * @package   Tests\Unit\WindowsAzure\Services\Queue\Models
+ * @package   WindowsAzure\ServiceBus\Models
  * @author    Azure PHP SDK <azurephpsdk@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @version   Release: @package_version@
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
-class FeedTest extends \PHPUnit_Framework_TestCase
+
+class Filter 
 {
     /**
-     * @covers WindowsAzure\Common\Internal\Atom\Feed::__construct
+     * The compatibility level of the filter. 
+     * 
+     * @var string 
      */
-    public function testFeedConstructor()
-    {
-        // Setup
+    private $_compatibilityLevel;
 
-        // Test
-        $feed = new Feed();
-        
-        // Assert
-        $this->assertNotNull($feed);
+    /**
+     * Creates a filter with default parameters. 
+     */
+    public function __construct()
+    {
     }
 
-}
+    /**
+     * Gets the compatibility level. 
+     * 
+     * @return string 
+     */
+    public function getCompatiblityLevel()
+    {
+        return $this->_compatibilityLevel;
+    }
 
+    /**
+     * Sets the compatibility level. 
+     * 
+     * @param string $compatibilityLevel The compatibility level. 
+     */
+    public function setCompatibilityLevel($compatibilityLevel)
+    {
+        $this->_compatibilityLevel = $compatibilityLevel;
+    }
+}
 ?>

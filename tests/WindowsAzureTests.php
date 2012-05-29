@@ -113,6 +113,7 @@ spl_autoload_register(
             'tests\\unit\\windowsazure\\common\\internal\\atom\\feedtest' => '/unit/WindowsAzure/Common/Internal/Atom/FeedTest.php',
             'tests\\unit\\windowsazure\\common\\internal\\atom\\generatortest' => '/unit/WindowsAzure/Common/Internal/Atom/GeneratorTest.php',
             'tests\\unit\\windowsazure\\common\\internal\\atom\\persontest' => '/unit/WindowsAzure/Common/Internal/Atom/PersonTest.php',
+            'tests\\unit\\windowsazure\\common\\internal\\atom\\sourcetest' => '/unit/WindowsAzure/Common/Internal/Atom/SourceTest.php',
             'tests\\unit\\windowsazure\\common\\internal\\authentication\\sharedkeyauthschemetest' => '/unit/WindowsAzure/Common/Internal/Authentication/SharedKeyAuthSchemeTest.php',
             'tests\\unit\\windowsazure\\common\\internal\\authentication\\storageauthschemetest' => '/unit/WindowsAzure/Common/Internal/Authentication/StorageAuthSchemeTest.php',
             'tests\\unit\\windowsazure\\common\\internal\\authentication\\tablesharedkeyliteauthschemetest' => '/unit/WindowsAzure/Common/Internal/Authentication/TableSharedKeyLiteAuthSchemeTest.php',

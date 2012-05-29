@@ -49,7 +49,7 @@ class Entry
     /**
      * The author of the entry.
      *
-     * @var string
+     * @var Person
      */
     protected $_author;
 
@@ -275,7 +275,7 @@ class Entry
     /**
      * Gets the author of the entry. 
      * 
-     * @return string
+     * @return Person
      */
     public function getAuthor()
     {
@@ -285,11 +285,11 @@ class Entry
     /** 
      * Sets the author of the entry.
      *
-     * @param string $author The author of the entry. 
+     * @param Person $author The author of the entry. 
      */
     public function setAuthor($author)
     {
-        $this->_author;
+        $this->_author = $author;
     }
 
     /** 

@@ -1,5 +1,4 @@
 <?php
-
 /**
  * LICENSE: Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,43 +14,55 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   Tests\Unit\WindowsAzure\Services\Queue\Models
+ * @package   WindowsAzure\ServiceBus\Models
  * @author    Azure PHP SDK <azurephpsdk@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
-
-namespace Tests\Unit\WindowsAzure\Common\Internal\Atom;
-use WindowsAzure\Common\Internal\Atom\Feed;
+namespace WindowsAzure\ServiceBus\Models;
+use WindowsAzure\ServiceBus\Models\Filter;
 
 /**
- * Unit tests for class Feed
+ * The base class for rule filter.
  *
  * @category  Microsoft
- * @package   Tests\Unit\WindowsAzure\Services\Queue\Models
+ * @package   WindowsAzure\ServiceBus\Models
  * @author    Azure PHP SDK <azurephpsdk@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @version   Release: @package_version@
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
-class FeedTest extends \PHPUnit_Framework_TestCase
-{
-    /**
-     * @covers WindowsAzure\Common\Internal\Atom\Feed::__construct
-     */
-    public function testFeedConstructor()
-    {
-        // Setup
 
-        // Test
-        $feed = new Feed();
-        
-        // Assert
-        $this->assertNotNull($feed);
+class CorrelationFilter extends Filter 
+{
+
+    /**
+     * The ID of the correlation.
+     *
+     * @var string
+     */
+    private $_correlationId;
+
+    /**
+     * Gets the ID of the correlation. 
+     *
+     * @return string 
+     */
+    public function getCorrelationId()
+    {
+        return $this->_correlationId;
     }
 
+    /**
+     * Sets the ID of the correlation.
+     * 
+     * @param string $correlationId The ID of the correlation.
+     */
+    public function setCorrelationId($correlationId)
+    {
+        $this->_correlationId = $correlationId;
+    }
 }
-
 ?>

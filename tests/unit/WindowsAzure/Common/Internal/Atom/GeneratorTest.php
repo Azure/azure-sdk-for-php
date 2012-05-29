@@ -15,7 +15,7 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   Tests\Unit\WindowsAzure\Core\Atom
+ * @package   Tests\Unit\WindowsAzure\Common\Internal\Atom
  * @author    Azure PHP SDK <azurephpsdk@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
@@ -29,7 +29,7 @@ use WindowsAzure\Common\Internal\Atom\Generator;
  * Unit tests for class Generator.
  *
  * @category  Microsoft
- * @package   Tests\Unit\WindowsAzure\Core\Atom
+ * @package   Tests\Unit\WindowsAzure\Common\Internal\Atom
  * @author    Azure PHP SDK <azurephpsdk@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
@@ -40,12 +40,12 @@ use WindowsAzure\Common\Internal\Atom\Generator;
 class GeneratorTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @covers WindowsAzure\Core\Atom\Generator::__construct
+     * @covers WindowsAzure\Common\Internal\Atom\Generator::__construct
      */
     public function testGeneratorConstructor()
     {
         // Setup
-        $exptectedText = 'testGenerator';
+        $expectedText = 'testGenerator';
         
         // Test
         $generator = new Generator($expectedText);
@@ -61,8 +61,8 @@ class GeneratorTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\Core\Atom\Generator::getText
-     * @covers WindowsAzure\Core\Atom\Generator::setText
+     * @covers WindowsAzure\Common\Internal\Atom\Generator::getText
+     * @covers WindowsAzure\Common\Internal\Atom\Generator::setText
      */
     public function testGeneratorGetSetText()
     {
@@ -82,8 +82,8 @@ class GeneratorTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\Core\Atom\Generator::getUri
-     * @covers WindowsAzure\Core\Atom\Generator::setUri
+     * @covers WindowsAzure\Common\Internal\Atom\Generator::getUri
+     * @covers WindowsAzure\Common\Internal\Atom\Generator::setUri
      */
     public function testGeneratorGetSetUri()
     {
@@ -103,8 +103,8 @@ class GeneratorTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\Core\Atom\Generator::getVersion
-     * @covers WindowsAzure\Core\Atom\Generator::setVersion
+     * @covers WindowsAzure\Common\Internal\Atom\Generator::getVersion
+     * @covers WindowsAzure\Common\Internal\Atom\Generator::setVersion
      */
     public function testGeneratorGetSetVersion()    
     {

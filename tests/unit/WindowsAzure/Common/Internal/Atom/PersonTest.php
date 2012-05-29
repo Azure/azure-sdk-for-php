@@ -26,7 +26,7 @@ namespace Tests\Unit\WindowsAzure\Common\Internal\Atom;
 use WindowsAzure\Common\Internal\Atom\Person;
 
 /**
- * Unit tests for class WrapAccessTokenResult
+ * Unit tests for class Person
  *
  * @category  Microsoft
  * @package   Tests\Unit\WindowsAzure\Services\Queue\Models
@@ -39,7 +39,7 @@ use WindowsAzure\Common\Internal\Atom\Person;
 class PersonTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @covers WindowsAzure\Services\ServiceBus\Models\Person::__construct
+     * @covers WindowsAzure\Common\Internal\Atom\Person::__construct
      */
     public function testPersonConstructor()
     {

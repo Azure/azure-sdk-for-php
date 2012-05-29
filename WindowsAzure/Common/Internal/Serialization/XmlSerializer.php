@@ -148,7 +148,7 @@ class XmlSerializer implements ISerializer
                 {
                 if (gettype($variableValue) === 'object') {
                     $xmlWriter->writeRaw(
-                        $this->objectSerialize(
+                        XmlSerializer::objectSerialize(
                             $variableValue, $variableName, $instanceAttributes
                         )
                     );

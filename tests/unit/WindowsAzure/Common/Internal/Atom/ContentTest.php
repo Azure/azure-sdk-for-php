@@ -39,7 +39,7 @@ use WindowsAzure\Common\Internal\Atom\Content;
 class ContentTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @covers WindowsAzure\Core\Atom\Content::__construct
+     * @covers WindowsAzure\Common\Internal\Atom\Content::__construct
      */
     public function testContentConstructor()
     {
@@ -59,8 +59,8 @@ class ContentTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\Core\Atom\Content::getText
-     * @covers WindowsAzure\Core\Atom\Content::setText
+     * @covers WindowsAzure\Common\Internal\Atom\Content::getText
+     * @covers WindowsAzure\Common\Internal\Atom\Content::setText
      */
     public function testGetSetText()
     {
@@ -81,8 +81,8 @@ class ContentTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\Core\Atom\Content::getType
-     * @covers WindowsAzure\Core\Atom\Content::setType 
+     * @covers WindowsAzure\Common\Internal\Atom\Content::getType
+     * @covers WindowsAzure\Common\Internal\Atom\Content::setType 
      */
     public function testGetSetType()
     {
@@ -102,7 +102,7 @@ class ContentTest extends \PHPUnit_Framework_TestCase
     } 
 
     /**
-     * @covers WindowsAzure\Core\Atom\Content::toXml
+     * @covers WindowsAzure\Common\Internal\Atom\Content::toXml
      */
     public function testToXml()
     {

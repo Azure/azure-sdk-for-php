@@ -52,7 +52,7 @@ class CreateSubscriptionResult
      */
     public function parseXml($createSubscriptionResponseBody)
     {
-        $this->_subscriptionResult = new SubscriptionInfo();
+        $this->_subscriptionInfo = new SubscriptionInfo();
         $this->_subscriptionInfo->parseXml($createSubscriptionResponseBody);
     }
 

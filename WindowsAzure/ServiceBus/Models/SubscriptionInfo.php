@@ -107,6 +107,8 @@ class SubscriptionInfo extends Entry
                 XmlSerializer::objectSerialize(
                     $this->_subscriptionDescription,
                     'SubscriptionDescription'
+                )
+            );
         }
         return parent::writeXml();
     }

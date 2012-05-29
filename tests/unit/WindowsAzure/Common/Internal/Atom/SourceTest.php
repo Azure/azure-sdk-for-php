@@ -23,10 +23,10 @@
  */
 
 namespace Tests\Unit\WindowsAzure\Common\Internal\Atom;
-use WindowsAzure\Common\Internal\Atom\Feed;
+use WindowsAzure\Common\Internal\Atom\Source;
 
 /**
- * Unit tests for class Feed
+ * Unit tests for class Source
  *
  * @category  Microsoft
  * @package   Tests\Unit\WindowsAzure\Services\Queue\Models
@@ -36,17 +36,17 @@ use WindowsAzure\Common\Internal\Atom\Feed;
  * @version   Release: @package_version@
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
-class FeedTest extends \PHPUnit_Framework_TestCase
+class SourceTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @covers WindowsAzure\Common\Internal\Atom\Feed::__construct
+     * @covers WindowsAzure\Common\Internal\Atom\Source::__construct
      */
-    public function testFeedConstructor()
+    public function testSourceConstructor()
     {
         // Setup
 
         // Test
-        $feed = new Feed();
+        $feed = new Source();
         
         // Assert
         $this->assertNotNull($feed);

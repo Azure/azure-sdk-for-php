@@ -87,19 +87,18 @@ class Category
     public function parseXml($xmlString)
     {
         $categoryXml = simplexml_load_string($xmlString);
-        $attributes = (array)$categoryXml->attributes();
-
-        if (array_key_exists('term', $attributes))
+        $attributes = $categoryXml->attributes();
+        if (!empty($attributes['term']))
         {
-            $this->_term = (string)$attribute['term'];
+            $this->_term = (string)$attributes['term'];
         }
 
-        if (array_key_exists('scheme', $attributes))
+        if (!empty($attributes['scheme']))
         {
-            $this->_category = (string)$attributes['scheme'];
+            $this->_scheme = (string)$attributes['scheme'];
         }
 
-        if (array_key_exists('label', $attributes))
+        if (!empty($attributes['label']))
         {
             $this->_label = (string)$attributes['label'];
         }
@@ -197,14 +196,27 @@ class Category
         $xmlWriter = new \XMLWriter();
         $xmlWriter->openMemory();
         $xmlWriter->startElement('atom:category');
-        $xmlWriter->WriteAttribute('term', $this->_term);
-        $xmlWriter->WriteAttribute('scheme', $this->_scheme);
-        $xmlWriter->WriteAttribute('label', $this->_label);
+        if (!empty($this->_term))
+        {
+            $xmlWriter->WriteAttribute('term', $this->_term);
+        }
+
+        if (!empty($this->_scheme))
+        {
+            $xmlWriter->WriteAttribute('scheme', $this->_scheme);
+        }
+
+        if (!empty($this->_label))
+        {
+            $xmlWriter->WriteAttribute('label', $this->_label);
+        }
 
         if (!empty($this->_content))
         {
             $xmlWriter->WriteRaw($this->_content);
         }
+
+        $xmlWriter->endElement();
 
         return $xmlWriter->outputMemory();
     }

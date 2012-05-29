@@ -139,25 +139,25 @@ class TopicDescription
     }
 
     /**
-     * Gets default message to live.
+     * Gets default message time to live.
      *
      * @return string
      */
-    public function getDefaultMessageToLive()
+    public function getDefaultMessageTimeToLive()
     {
-        $this->_defaultMessageToLive;
+        $this->_defaultMessageTimeToLive;
     }
     
     /**
      * Sets the default message to live.
      *
-     * @param string $defaultMessageToLive The default message to live.
+     * @param string $defaultMessageToLive The default message time to live.
      * 
      * @return none
      */
-    public function setDefaultMessageToLive($defaultMessageToLive)
+    public function setDefaultMessageTimeToLive($defaultMessageTimeToLive)
     {
-        $this->_defaultMessageToLive = $defaultMessageToLive;
+        $this->_defaultMessageTimeToLive = $defaultMessageTimeToLive;
     }
 
     /**
