@@ -25,7 +25,7 @@ namespace WindowsAzure\ServiceBus\Models;
 use WindowsAzure\ServiceBus\Models\ReceiveMode;
 
 /**
- * This class constructs HTTP requests and receive HTTP responses for service bus.
+ * The options for a receive message request. 
  *
  * @category  Microsoft
  * @package   WindowsAzure\ServiceBus\Models
@@ -48,7 +48,7 @@ class ReceiveMessageOptions
     /**
      * The mode of receiving message. 
      * 
-     * @var integer 
+     * @var integer
      */
     private $_receiveMode;
 
@@ -121,7 +121,7 @@ class ReceiveMessageOptions
     /**
      * Gets peek lock. 
      * 
-     * @return peek lock. 
+     * @return boolean 
      *
      */
     public function getIsPeekLock()

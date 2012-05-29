@@ -27,7 +27,7 @@ use WindowsAzure\Common\Internal\Resources;
 use WindowsAzure\Common\Internal\Utilities;
 
 /**
- * A description of the queue.
+ * The description of a queue.
  *
  * @category  Microsoft
  * @package   WindowsAzure\ServiceBus\Models
@@ -42,7 +42,7 @@ class QueueDescription
     /**
      * The duration of the lock.     
      * 
-     * @var integer
+     * @var string
      */
     private $_lockDuration;
 
@@ -121,7 +121,6 @@ class QueueDescription
      *
      * @param string $queueDescriptionXml A XML based string describing
      * the queue. 
-     *
      */
     public static function create($queueDescriptionXml)
     {
@@ -129,47 +128,47 @@ class QueueDescription
         $root = simplexml_load_string($queueDescriptionXml);
         $queueDescriptionArray = (array)$root;
         if (array_key_exists('LockDuration', $queueDescriptionArray)) {
-            $queueDescription->setLockDuration($queueDescriptionArray['LockDuration']);
+            $queueDescription->setLockDuration((string)$queueDescriptionArray['LockDuration']);
         }
 
         if (array_key_exists('MaxSizeInMegabytes', $queueDescriptionArray)) {
-            $queueDescription->setMaxSizeInMegabytes($queueDescriptionArray['MaxSizeInMegabytes']);
+            $queueDescription->setMaxSizeInMegabytes((integer)$queueDescriptionArray['MaxSizeInMegabytes']);
         }
 
         if (array_key_exists('RequiresDuplicateDetection', $queueDescriptionArray)) {
-            $queueDescription->setRequiresDuplicateDetection($queueDescriptionArray['RequiresDuplicateDetection']);
+            $queueDescription->setRequiresDuplicateDetection((boolean)$queueDescriptionArray['RequiresDuplicateDetection']);
         }
         
         if (array_key_exists('RequiresSession', $queueDescriptionArray)) {
-            $queueDescription->setRequiresSession($queueDescriptionArray['RequiresSession']);
+            $queueDescription->setRequiresSession((boolean)$queueDescriptionArray['RequiresSession']);
         }
 
         if (array_key_exists('DefaultMessageTimeToLive', $queueDescriptionArray)) {
-            $queueDescription->setDefaultMessageTimeToLive($queueDescriptionArray['DefaultMessageTimeToLive']);
+            $queueDescription->setDefaultMessageTimeToLive((string)$queueDescriptionArray['DefaultMessageTimeToLive']);
         }
 
         if (array_key_exists('DeadLetteringOnMessageExpiration', $queueDescriptionArray)) {
-            $queueDescription->setDeadLetteringOnMessageExpiration($queueDescriptionArray['DeadLetteringOnMessageExpiration']);
+            $queueDescription->setDeadLetteringOnMessageExpiration((string)$queueDescriptionArray['DeadLetteringOnMessageExpiration']);
         }
 
         if (array_key_exists('DuplicateDetectionHistoryTimeWindow', $queueDescriptionArray)) {
-            $queueDescription->setDuplicateDetectionHistoryTimeWindow($queueDescriptionArray['DuplicateDetectionHistoryTimeWindow']);
+            $queueDescription->setDuplicateDetectionHistoryTimeWindow((string)$queueDescriptionArray['DuplicateDetectionHistoryTimeWindow']);
         }
 
         if (array_key_exists('MaxDeliveryCount', $queueDescriptionArray)) {
-            $queueDescription->setMaxDeliveryCount($queueDescriptionArray['MaxDeliveryCount']);
+            $queueDescription->setMaxDeliveryCount((integer)$queueDescriptionArray['MaxDeliveryCount']);
         }
 
         if (array_key_exists('EnableBatchedOperations', $queueDescriptionArray)) {
-            $queueDescription->setEnableBatchedOperations($queueDescriptionArray['EnableBatchedOperations']);
+            $queueDescription->setEnableBatchedOperations((boolean)$queueDescriptionArray['EnableBatchedOperations']);
         }
 
         if (array_key_exists('SizeInBytes', $queueDescriptionArray)) {
-            $queueDescription->setSizeInBytes($queueDescriptionArray['SizeInBytes']);
+            $queueDescription->setSizeInBytes((integer)$queueDescriptionArray['SizeInBytes']);
         }
 
         if (array_key_exists('MessageCount', $queueDescriptionArray)) {
-            $queueDescription->setMessageCount($queueDescriptionArray['MessageCount']);
+            $queueDescription->setMessageCount((integer)$queueDescriptionArray['MessageCount']);
         }
 
         return $queueDescription;
@@ -213,9 +212,9 @@ class QueueDescription
     }
 
     /**
-     * Sets the lock duration.
+     * Sets the max size in mega bytes.
      *
-     * @param string $lockDuration The lock duration.
+     * @param integer $maxSizeInMegabytes The max size in mega bytes.
      * 
      * @return none
      */
@@ -235,9 +234,9 @@ class QueueDescription
     }
 
     /**
-     * Sets the lock duration.
+     * Sets requires duplicate detection.
      *
-     * @param string $lockDuration The lock duration.
+     * @param boolean $requiresDuplicateDetection If duplicate detection is required.
      * 
      * @return none
      */
@@ -257,9 +256,9 @@ class QueueDescription
     }
 
     /**
-     * Sets the lock duration.
+     * Sets the requires session.
      *
-     * @param string $lockDuration The lock duration.
+     * @param boolean $requiresSession If session is required.
      * 
      * @return none
      */
@@ -279,9 +278,9 @@ class QueueDescription
     }
 
     /**
-     * Sets the lock duration.
+     * Sets the default message time to live. 
      *
-     * @param string $lockDuration The lock duration.
+     * @param string $defaultMessageTimeToLive The default message time to live.
      * 
      * @return none
      */
@@ -301,9 +300,9 @@ class QueueDescription
     }
 
     /**
-     * Sets the lock duration.
+     * Sets dead lettering on message expiration.
      *
-     * @param string $lockDuration The lock duration.
+     * @param string $deadLetteringOnMessageExpiration The dead lettering on message expiration.
      * 
      * @return none
      */

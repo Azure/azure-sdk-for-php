@@ -26,10 +26,9 @@ namespace WindowsAzure\ServiceBus\Models;
 
 use WindowsAzure\Common\Internal\Atom\Feed;
 use WindowsAzure\Common\Internal\Atom\Entry;
-use WindowsAzure\Common\Internal\Atom\Content;
 
 /**
- * This class constructs HTTP requests and receive HTTP responses for service bus.
+ * The result of a list topics request. 
  *
  * @category  Microsoft
  * @package   WindowsAzure\ServiceBus\Models
@@ -44,14 +43,14 @@ class ListTopicsResult extends Feed
     /**
      * Gets the information of the topic. 
      * 
-     * @var TopicInfo
+     * @var array
      */ 
     private $_topicInfo;
 
     /**
-     * Creates a list topics result. 
-     *
-     * @var string $response The response of the list topic request.
+     * Populates the properties with a the response from the list topics request.
+     * 
+     * @param string $response The body of the response of the list topics request. 
      */ 
     public function parseXml($response)
     {
@@ -76,7 +75,7 @@ class ListTopicsResult extends Feed
     /**
      * Gets the information of the topic. 
      *  
-     * @return TopicInfo
+     * @return array
      */
     public function getTopicInfo()
     {
@@ -86,7 +85,7 @@ class ListTopicsResult extends Feed
     /**
      * Sets the topic information.
      *
-     * @var TopicInfo $topicInfo The information of the topics. 
+     * @var array $topicInfo The information of the topics. 
      */
     public function setTopicInfo($topicInfo)
     {

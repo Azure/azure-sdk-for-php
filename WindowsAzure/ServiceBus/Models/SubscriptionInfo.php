@@ -27,10 +27,11 @@ namespace WindowsAzure\ServiceBus\Models;
 use WindowsAzure\Common\Internal\Atom\Entry;
 use WindowsAzure\Common\Internal\Resources;
 use WindowsAzure\Common\Internal\Utilities;
+use WindowsAzure\Common\Internal\Validate;
 use WindowsAzure\ServiceBus\Models\SubscriptionDescription;
 
 /**
- * An active WRAP access Token.
+ * The information of a subscription.
  *
  * @category  Microsoft
  * @package   WindowsAzure\ServiceBus\Models
@@ -52,7 +53,7 @@ class SubscriptionInfo extends Entry
     /**
      * Creates a SubscriptionInfo instance with specified parameters.
      *
-     * @param string                  $title                   The name of 
+     * @param string                  $title                   The title of 
      * the subscription.
      * @param SubscriptionDescription $subscriptionDescription The description 
      * of the subscription.
@@ -60,18 +61,23 @@ class SubscriptionInfo extends Entry
      */
     public function __construct($title = Resources::EMPTY_STRING, $subscriptionDescription = null)
     {
-        $this->_title = $title;
+        Validate::isString($title, 'title');
         if (is_null($subscriptionDescription))
         {
             $subscriptionDescription = new SubscriptionDescription();
         }
-
+        $this->_title = $title;
         $this->_subscriptionDescription = $subscriptionDescription;
     }
 
-    public function parseXml($xmlString)
+    /**
+     * Populates the properties of the subscription info instance with a XML string. 
+     * 
+     * @param string $entryXml A XML string representing a subscription information instance.
+     */
+    public function parseXml($entryXml)
     {
-        parent::parseXml($xmlString);
+        parent::parseXml($entryXml);
         $content = $this->_content;
         if (is_null($content))
         {
@@ -79,23 +85,34 @@ class SubscriptionInfo extends Entry
         }   
         else
         {
-            $this->_subscriptionDescription = SubscriptionDescription::create($content->getText());
+            $this->_subscriptionDescription = SubscriptionDescription::create(
+                $content->getText()
+            );
         }
     }
 
+    /**
+     * Writes XML based on the subscription information. 
+     * 
+     * @return string
+     */
     public function writeXml()
     {
         if (is_null($this->_subscriptionDescription)) {
             $this->_content = null;    
         }
         else {
-            $this->_content = $this->_subscriptionDescription->writeXml(); 
+            $this->_content = new Content();
+            $this->_content->setText(
+                XmlSerializer::objectSerialize(
+                    $this->_subscriptionDescription,
+                    'SubscriptionDescription'
         }
         return parent::writeXml();
     }
 
     /**
-     * Gets subscription description. 
+     * Gets the subscription description. 
      */
     public function getSubscriptionDescription()
     {
@@ -103,7 +120,7 @@ class SubscriptionInfo extends Entry
     }
 
     /**
-     * Sets subscription description. 
+     * Sets the subscription description. 
      * 
      * @param string $subscriptionDescription The description of the subscription. 
      */

@@ -22,8 +22,6 @@
  */
  
 namespace WindowsAzure\ServiceBus\Models;
-use WindowsAzure\Common\Internal\Resources;
-use WindowsAzure\Common\Internal\Utilities;
 
 /**
  * The base class for the options for list request.
@@ -37,9 +35,6 @@ use WindowsAzure\Common\Internal\Utilities;
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
 
-/**
- The base class for all the list options. 
-*/
 class ListOptions
 {
     /**

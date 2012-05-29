@@ -22,9 +22,7 @@
  */
 
 namespace WindowsAzure\ServiceBus\Models;
-
-use WindowsAzure\Common\Internal\Atom\Feed;
-use WindowsAzure\Common\Internal\Atom\Content;
+use WindowsAzure\ServiceBus\Models\TopicInfo;
 
 /**
  * The result of a get topic request. 
@@ -41,19 +39,20 @@ class GetTopicResult
 {
     /**
      * The information of the topic. 
+     *
+     * @var TopicInfo
      */
     private $_topicInfo;
 
     /**
-     * Creates a get topic result instance with specified response from the server. 
+     * Populate the properties with a specified get topic request response body. 
      * 
-     * @param string $response The response from the get topic request. 
+     * @param string $getTopicResponse The body of the response from a get topic request. 
      */ 
-    public function parseXml($response)
+    public function parseXml($getTopicResponse)
     {
-        $topicInfo = new TopicInfo();
-        $topicInfo->parseXml($response);
-        $this->_topicInfo = $topicInfo;
+        $this->_topicInfo = new TopicInfo();
+        $this->_topicInfo->parseXml($getTopicResponse);
     }    
 
     /**

@@ -43,7 +43,7 @@ class SubscriptionDescription
     /**
      * The duration of the lock. 
      * 
-     * @var integer 
+     * @var string
      */
     private $_lockDuration;
 
@@ -114,7 +114,7 @@ class SubscriptionDescription
     /**
      * Creates a subscription description with specified XML string. 
      *
-     * @param string $subscriptionDescription The subscription description.
+     * @param string $subscriptionDescription An XML based subscription description.
      */
     public static function create($subscriptionDescriptionXml)
     {
@@ -122,40 +122,56 @@ class SubscriptionDescription
         $root = simplexml_load_string($subscriptionDescriptionXml);
         $subscriptionDescriptionArray = (array)$root;
         if (array_key_exists('LockDuration', $subscriptionDescriptionArray)) {
-            $subscriptionDescription->setLockDuration($subscriptionDescriptionArray['LockDuration']);
+            $subscriptionDescription->setLockDuration(
+                (string)$subscriptionDescriptionArray['LockDuration']
+            );
         }
 
         if (array_key_exists('RequiresSession', $subscriptionDescriptionArray)) {
-            $subscriptionDescription->setRequiresSession($subscriptionDescriptionArray['RequiresSession']);
+            $subscriptionDescription->setRequiresSession(
+                (boolean)$subscriptionDescriptionArray['RequiresSession']
+            );
         }
 
         if (array_key_exists('DefaultMessageTimeToLive', $subscriptionDescriptionArray)) {
-            $subscriptionDescription->setDefaultMessageTimeToLive($subscriptionDescriptionArray['DefaultMessageTimeToLive']);
+            $subscriptionDescription->setDefaultMessageTimeToLive(
+                (string)$subscriptionDescriptionArray['DefaultMessageTimeToLive']
+            );
         }
 
         if (array_key_exists('DeadLetteringOnMessageExpiration', $subscriptionDescriptionArray)) {
-            $subscriptionDescription->setDeadLetteringOnMessageExpiration($subscriptionDescriptionArray['DeadLetteringOnMessageExpiration']);
+            $subscriptionDescription->setDeadLetteringOnMessageExpiration(
+                (string)$subscriptionDescriptionArray['DeadLetteringOnMessageExpiration']
+            );
         }
 
         if (array_key_exists('DeadLetteringOnFilterEvaluationException', $subscriptionDescriptionArray)) {
             $subscriptionDescription->setDeadLetteringOnFilterEvaluationException(
-                $subscriptionDescriptionArray['DeadLetteringOnFilterEvaluationException']);
+                (string)$subscriptionDescriptionArray['DeadLetteringOnFilterEvaluationException']);
         }
 
         if (array_key_exists('DefaultRuleDescription', $subscriptionDescriptionArray)) {
-            $subscriptionDescription->setDefaultRuleDescription($subscriptionDescriptionArray['DefaultRuleDescription']);
+            $subscriptionDescription->setDefaultRuleDescription(
+                (string)$subscriptionDescriptionArray['DefaultRuleDescription']
+            );
         }
 
         if (array_key_exists('MessageCount', $subscriptionDescriptionArray)) {
-            $subscriptionDescription->setMessageCount($subscriptionDescriptionArray['MessageCount']);
+            $subscriptionDescription->setMessageCount(
+                (string)$subscriptionDescriptionArray['MessageCount']
+            );
         }
 
         if (array_key_exists('MaxDeliveryCount', $subscriptionDescriptionArray)) {
-            $subscriptionDescription->setMaxDeliveryCount($subscriptionDescriptionArray['MaxDeliveryCount']);
+            $subscriptionDescription->setMaxDeliveryCount(
+                (string)$subscriptionDescriptionArray['MaxDeliveryCount']
+            );
         }
 
         if (array_key_exists('EnableBatchedOperations', $subscriptionDescriptionArray)) {
-            $subscriptionDescription->setEnableBatchedOperations($subscriptionDescriptionArray['EnableBatchedOperations']);
+            $subscriptionDescription->setEnableBatchedOperations(
+                (boolean)$subscriptionDescriptionArray['EnableBatchedOperations']
+            );
         }
 
         return $subscriptionDescription;
@@ -174,7 +190,7 @@ class SubscriptionDescription
     /**
      * Sets the lock duration.
      *
-     * @param string $wrapAccessTokenResult The WRAP access token result.
+     * @param string $lockDuration The duration of the lock. 
      * 
      * @return none
      */

@@ -28,7 +28,7 @@ use WindowsAzure\Common\Internal\Utilities;
 use WindowsAzure\ServiceBus\Models\BrokerProperties;
 
 /**
- * An active WRAP access Token.
+ * A class representing the brokered message of Windows Azure Service Bus.
  *
  * @category  Microsoft
  * @package   WindowsAzure\ServiceBus\Models
@@ -66,7 +66,7 @@ class BrokeredMessage
     private $_date;
 
     /**
-     * The custom properties.
+     * The properties of the message that are customized.
      * 
      * @var array
      */
@@ -148,7 +148,7 @@ class BrokeredMessage
     /**
      * Gets the date of the brokered message.
      * 
-     * @return \Date
+     * @return \DateTime
      */
     public function getDate() {
         return $this->_date;
@@ -157,7 +157,7 @@ class BrokeredMessage
     /** 
      * Sets the date of the brokered message. 
      * 
-     * @param \Date $date Sets the date of the brokered message. 
+     * @param \DateTime $date Sets the date of the brokered message. 
      */
     public function setDate($date) {
         $this->_date = $date;
@@ -201,6 +201,16 @@ class BrokeredMessage
     }
 
     /**
+     * Sets the delivery count.
+     * 
+     * @param integer $deliveryCount The times that the message has been delivered. 
+     */
+    public function setDeliveryCount($deliveryCount)
+    {
+        $this->_brokerProperties->setDeliveryCount($deliveryCount);
+    }
+
+    /**
      * Gets the ID of the message. 
      * 
      * @return string 
@@ -239,7 +249,7 @@ class BrokeredMessage
     /** 
      * Gets the time to live. 
      * 
-     * @return integer 
+     * @return string
      */
     public function getTimeToLive() {
         $this->_brokerProperties->getTimeToLive();
@@ -276,7 +286,7 @@ class BrokeredMessage
     /**
      * Gets the time of locked until UTC.
      * 
-     * @return \Date
+     * @return string
      */
     public function getLockedUntilUtc() {
         return $this->_brokerProperties->getLockedUntilUtc();
@@ -285,7 +295,7 @@ class BrokeredMessage
     /**
      * Sets the time of locked until UTC. 
      * 
-     * @param \Date $lockedUntilUtc The time of locked until UTC.
+     * @param string $lockedUntilUtc The time of locked until UTC.
      */ 
     public function setLockedUntilUtc($lockedUntilUtc)
     {
@@ -385,7 +395,7 @@ class BrokeredMessage
     /**
      * Gets the scheduled enqueue time. 
      * 
-     * @return \Date
+     * @return string
      */
     public function getScheduledEnqueueTimeUtc() {
         return $this->_brokerProperties->getScheduledEnqueueTimeUtc();
@@ -394,7 +404,7 @@ class BrokeredMessage
     /**
      * Sets the scheduled enqueue time. 
      * 
-     * @param \Date $scheduledEnqueueTime The date/time of the message.
+     * @param string $scheduledEnqueueTime The date/time of the message.
      */
     public function setScheduledEnqueueTimeUtc($scheduledEnqueueTime) {
         $this->_brokerProperties->setScheduledEnqueueTimeUtc($scheduledEnqueueTime);
@@ -429,12 +439,31 @@ class BrokeredMessage
     }
 
     /**
-     * Gets the location of the lock location.
+     * Sets the message location.
+     *
+     * @param string $messageLocation The location of the message. 
+     */
+    public function setMessageLocation($messageLocation) {
+        $this->_brokerProperties->setMessageLocation($messageLocation);
+    }
+    
+
+    /**
+     * Gets the location of the lock.
      * 
      * @return string
      */
     public function getLockLocation() {
         return $this->_brokerProperties->getLockLocation();
+    }
+
+    /**
+     * Sets the location of the lock.
+     * 
+     * @param string $lockLocation The location of the lock.
+     */
+    public function setLockLocation($lockLocation) {
+        $this->_brokerProperties->setLockLocation($lockLocation);
     }
     
 }

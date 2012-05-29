@@ -24,12 +24,13 @@
  
 namespace WindowsAzure\ServiceBus\Models;
 use WindowsAzure\Common\Internal\Atom\Entry;
+use WindowsAzure\Common\Internal\Atom\Content;
 use WindowsAzure\Common\Internal\Resources;
 use WindowsAzure\Common\Internal\Utilities;
 use WindowsAzure\ServiceBus\Models\TopicDescription;
 
 /**
- * The information of a topic.
+ * The description of a topic.
  *
  * @category  Microsoft
  * @package   WindowsAzure\ServiceBus\Models
@@ -44,7 +45,7 @@ class TopicInfo extends Entry
     /**
      * The description of the topics. 
      *
-     * @TopicDescription
+     * @var TopicDescription
      */
     private $_topicDescription;
 
@@ -57,13 +58,19 @@ class TopicInfo extends Entry
      */
     public function __construct($title = Resources::EMPTY_STRING, $topicDescription = null)
     {
-        $this->_title = $title;
+        Validate::isString($title, 'title');
         if (is_null($topicDescription)) {
             $topicDescription = new TopicDescription();
         }
+        $this->_title = $title;
         $this->_topicDescription = $topicDescription;
     }
-
+    
+    /**
+     * Populates properties with a specified XML string. 
+     * 
+     * @param string $xmlString An XML string representing the topic information. 
+     */
     public function parseXml($xmlString)
     {
         parent::parseXml($xmlString);
@@ -76,13 +83,24 @@ class TopicInfo extends Entry
         }
     }
 
+    /**
+     * Writes an XML string.
+     *
+     * @return string 
+     */
     public function writeXml()
     {
         if (is_null($this->_topicDescription)) {
             $this->_content = null;    
         }
         else {
-            $this->_content = $this->_topicDescription->writeXml(); 
+            $this->_content = new Content();
+            $this->_content->setText(
+                XmlSerializer::objectSerialize(
+                    $this->_topicDescription,
+                    'TopicDescription'
+                )
+            )
         }
         return parent::writeXml();
     }
@@ -106,7 +124,7 @@ class TopicInfo extends Entry
     {
         $this->_topicDescription = $topicDescription;
     }
-    
+
 }
 ?>
 

@@ -25,10 +25,11 @@
 namespace WindowsAzure\ServiceBus\Models;
 
 use WindowsAzure\Common\Internal\Atom\Feed;
-use WindowsAzure\Common\Internal\Atom\Content;
+use WindowsAzure\Common\Internal\Atom\Entry;
+use WindowsAzure\ServiceBus\Models\RuleInfo;
 
 /**
- * This class constructs HTTP requests and receive HTTP responses for service bus.
+ * The result of the list rules request.
  *
  * @category  Microsoft
  * @package   WindowsAzure\ServiceBus\Models
@@ -43,26 +44,26 @@ class ListRulesResult extends Feed
     /**
      * The information of the rule. 
      * 
-     * @RuleInfo 
+     * @var array
      */
     private $_ruleInfo;
 
     /** 
-     * Creates a list rule result with specified response from the server. 
+     * Populates the properties with a the response from the list rules request.
      * 
-     * @param string $response The response of a list rule request. 
+     * @param string $response The body of the response of the list rules request. 
      */
     public function parseXml($response)
     {
         parent::parseXml($response);
         $listRulesResultXml = new \SimpleXMLElement($response);
         $this->_ruleInfo = array();
+
         foreach ($listRulesResultXml->entry as $entry)
         {
-                
-                $ruleInfo = new RuleInfo();
-                $ruleInfo->parseXml($entry->asXml());
-                $this->_ruleInfo[] = $ruleInfo;
+            $ruleInfo = new RuleInfo();
+            $ruleInfo->parseXml($entry->asXml());
+            $this->_ruleInfo[] = $ruleInfo;
         }
     }
 
@@ -76,7 +77,7 @@ class ListRulesResult extends Feed
     /**
      * Gets the information of the rules. 
      * 
-     * @return RuleInfo
+     * @return array
      */
     public function getRuleInfo()
     {
@@ -86,7 +87,7 @@ class ListRulesResult extends Feed
     /** 
      * Sets the information of the rule. 
      * 
-     * @param RuleInfo $ruleInfo The information of the rule. 
+     * @param array $ruleInfo The information of the rule. 
      */ 
     public function setRuleInfo($ruleInfo)
     {

@@ -23,7 +23,7 @@
 namespace WindowsAzure\ServiceBus\Models;
 
 /**
- * This class constructs HTTP requests and receive HTTP responses for service bus.
+ * The properties of the broker of a brokered message. 
  *
  * @category  Microsoft
  * @package   WindowsAzure\ServiceBus\Models
@@ -36,7 +36,6 @@ namespace WindowsAzure\ServiceBus\Models;
 
 class BrokerProperties
 {
-
     /**
      * The correlation ID.
      *
@@ -54,14 +53,14 @@ class BrokerProperties
     /**
      * The delivery count.
      *
-     * @var string
+     * @var integer
      */
     private $_deliveryCount;
 
     /**
      * The locked until time.
      *
-     * @var \Date
+     * @var string
      */
     private $_lockedUntilUtc;
 
@@ -151,12 +150,14 @@ class BrokerProperties
     }
 
     /**
-     * Creates a broker properties instace with specified XML string. 
+     * Creates a broker properties instance with specified JSON message.  
      *
-     * @param string $brokerPropertiesJson A JSON string representing a broker properties.
+     * @param string $brokerPropertiesJson A JSON message representing a broker properties.
      */
     public static function create($brokerPropertiesJson)
     {
+        Validate::isString($brokerPropertiesJson, 'brokerPropertiesJson');
+
         $brokerProperties = new BrokerProperties();
 
         $brokerPropertiesArray = (array)json_decode($brokerPropertiesJson);
@@ -462,7 +463,7 @@ class BrokerProperties
     /**
      * Gets schedule enqueu time UTC. 
      * 
-     * @return \Date
+     * @return string
      */
     public function getScheduleEnqueuTimeUtc()
     {
@@ -472,7 +473,7 @@ class BrokerProperties
     /**
      * Sets schedule enqueue time UTC. 
      * 
-     * @param \Date $scheduleEnqueueTimeUtc The schedule enqueue time. 
+     * @param string $scheduleEnqueueTimeUtc The schedule enqueue time. 
      */
     public function setScheduleEnqueuTimeUtc($scheduleEnqueueTimeUtc)
     {

@@ -26,9 +26,10 @@ namespace WindowsAzure\ServiceBus\Models;
 
 use WindowsAzure\Common\Internal\Atom\Feed;
 use WindowsAzure\Common\Internal\Atom\Content;
+use WindowsAzure\ServiceBus\Models\SubscriptionInfo;
 
 /**
- * The result of the list subscription reaction. 
+ * The result of the list subscription request.
  *
  * @category  Microsoft
  * @package   WindowsAzure\ServiceBus\Models
@@ -38,19 +39,20 @@ use WindowsAzure\Common\Internal\Atom\Content;
  * @version   Release: @package_version@
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
+
 class ListSubscriptionsResult extends Feed
 {
     /**
      * The information of the subscription. 
      * 
-     * @var SubscriptionInfo
+     * @var array
      */
     private $_subscriptionInfo;
 
     /**
-     * Creates a list subscription result instance with specified response from the server. 
+     * Populates the properties with a the response from the list subscriptions request.
      * 
-     * @param string $response The response of the list subscription result. 
+     * @param string $response The body of the response of the list subscriptions request. 
      */
     public function parseXml($response)
     {
@@ -75,7 +77,7 @@ class ListSubscriptionsResult extends Feed
     /**
      * Gets the information of the subscription. 
      * 
-     * @return SubscriptionInfo
+     * @return array
      */
     public function getSubscriptionInfo()
     {
@@ -85,7 +87,7 @@ class ListSubscriptionsResult extends Feed
     /**
      * Sets the information of the rule. 
      * 
-     * @param SubscriptionInfo $subscriptionInfo The information of the
+     * @param array $subscriptionInfo The information of the
      * subscription.
      */
     public function setSubscriptionInfo($subscriptionInfo)

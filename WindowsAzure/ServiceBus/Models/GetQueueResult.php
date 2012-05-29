@@ -23,12 +23,10 @@
  */
 
 namespace WindowsAzure\ServiceBus\Models;
-
-use WindowsAzure\Common\Internal\Atom\Feed;
-use WindowsAzure\Common\Internal\Atom\Content;
+use WindowsAzure\ServiceBus\Models\QueueInfo;
 
 /**
- * This class constructs HTTP requests and receive HTTP responses for service bus.
+ * The results of a get queue request. 
  *
  * @category  Microsoft
  * @package   WindowsAzure\ServiceBus\Models
@@ -42,22 +40,21 @@ use WindowsAzure\Common\Internal\Atom\Content;
 class GetQueueResult
 {
     /**
-     * The description of the queue. 
+     * The information of the queue. 
      * 
      * @var QueueInfo 
      */
     private $_queueInfo;
 
     /** 
-     * Create a queue result with specified response. 
+     * Populate the properties with a specified get queue request response body. 
      * 
-     * @param string $response The body of the response from Azure Server. 
+     * @param string $getQueueResponse The body of the response from a get queue request. 
      */
-    public function parseXml($response)
+    public function parseXml($getQueueResponse)
     {
-        $queueInfo = new QueueInfo();
-        $queueInfo->parseXml($response);
-        $this->_queueInfo = $queueInfo;
+        $this->_queueInfo = new QueueInfo();
+        $this->_queueInfo->parseXml($getQueueResponse);
     }
 
     /** 
@@ -68,7 +65,7 @@ class GetQueueResult
     }
 
     /** 
-     * Gets the description of the queue. 
+     * Gets the information of the queue. 
      */
     public function getQueueInfo()
     {
@@ -76,9 +73,9 @@ class GetQueueResult
     }
 
     /** 
-     * Sets the description of the queue. 
+     * Sets the information of the queue. 
      *
-     * @param QueueInfo $queueInfo The description of the queue. 
+     * @param QueueInfo $queueInfo The information of the queue. 
      */
     public function setQueueInfo($queueInfo)
     {

@@ -69,9 +69,10 @@ class RuleDescription
     }
 
     /**
-     * Creates a Rule Description with specified XML string. 
+     * Creates a rule description instance with specified XML string. 
      * 
-     * @param string $ruleDescriptionXml A XML string describing the Rule.
+     * @param string $ruleDescriptionXml A XML string representing the 
+     * rule description.
      */
     public static function create($ruleDescriptionXml)
     {
@@ -137,7 +138,7 @@ class RuleDescription
     }
 
     /**
-     * Gets the name. 
+     * Gets the name of the rule description. 
      *
      * @return string
      */
@@ -155,7 +156,6 @@ class RuleDescription
     {
         $this->_name = $name;
     }
-
 
 }
 ?>

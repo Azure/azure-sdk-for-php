@@ -22,8 +22,7 @@
  */
  
 namespace WindowsAzure\ServiceBus\Models;
-use WindowsAzure\Common\Internal\Atom\Feed;
-use WindowsAzure\Common\Internal\Atom\Content;
+use WindowsAzure\ServiceBus\Models\SubscriptionInfo;
 
 /**
  * The results of a create subscription request.
@@ -42,20 +41,19 @@ class CreateSubscriptionResult
     /**
      * The information of the subscription. 
      *
-     * @var string 
+     * @var SubscriptionInfo
      */
     private $_subscriptionInfo;
 
     /**
-     * Creates a create subscription result object from response. 
+     * Populates the subscription information from the response of a create subscription request. 
      * 
-     * @var string $response The response of the string. 
+     * @var string $createSubscriptionResponseBody The response of the create rule request.
      */
-    public function parseXml($response)
+    public function parseXml($createSubscriptionResponseBody)
     {
-        $subscriptionInfo = new SubscriptionInfo();
-        $subscriptionInfo->parseXml($response);
-        $this->_subscriptionResult = $subscriptionInfo;
+        $this->_subscriptionResult = new SubscriptionInfo();
+        $this->_subscriptionInfo->parseXml($createSubscriptionResponseBody);
     }
 
     /**

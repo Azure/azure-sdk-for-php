@@ -38,6 +38,5 @@ use WindowsAzure\ServiceBus\Models\ListOptions;
 
 class ListRulesOptions extends ListOptions 
 {
-    
 }
 ?>

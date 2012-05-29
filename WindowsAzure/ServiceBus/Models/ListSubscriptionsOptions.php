@@ -37,6 +37,5 @@ use WindowsAzure\ServiceBus\Models\ListOptions;
 
 class ListSubscriptionsOptions extends ListOptions 
 {
-    
 }
 ?>

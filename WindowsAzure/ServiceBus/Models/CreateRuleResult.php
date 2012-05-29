@@ -22,8 +22,7 @@
  */
  
 namespace WindowsAzure\ServiceBus\Models;
-use WindowsAzure\Common\Internal\Atom\Feed;
-use WindowsAzure\Common\Internal\Atom\Content;
+use WindowsAzure\ServiceBus\Models\RuleInfo; 
 
 /**
  * The results of a create rule request.
@@ -40,22 +39,21 @@ use WindowsAzure\Common\Internal\Atom\Content;
 class CreateRuleResult
 {
     /**
-     * The description of the rule. 
+     * The information of the rule. 
      *
-     * @var string 
+     * @var RuleInfo
      */
     private $_ruleInfo;
 
     /**
-     * Creates a create rule result object from response. 
+     * Populates the rule information from the response of a create rule request. 
      * 
-     * @var string $response The response of the string. 
+     * @var string $createRuleResponseBody The response of the create rule request.
      */
-    public function parseXml($response)
+    public function parseXml($createRuleResponseBody)
     {
-        $ruleInfo = new RuleInfo();
-        $ruleInfo->parseXml($response);
-        $this->_ruleInfo = $ruleInfo;
+        $this->_ruleInfo = new RuleInfo();
+        $this->_ruleInfo->parseXml($createRuleResponseBody);
     }
 
     /**
@@ -66,7 +64,7 @@ class CreateRuleResult
     }
 
     /**
-     * Gets rule description.
+     * Gets rule information.
      * 
      * @return RuleInfo
      */
@@ -76,13 +74,13 @@ class CreateRuleResult
     }
 
     /**
-     * Sets the rule description. 
+     * Sets the rule information. 
      * 
-     * @param RuleInfo $ruleInfo The description of the rule. 
+     * @param RuleInfo $ruleInfo The information of the rule. 
      */
     public function setRuleInfo($ruleInfo)
     {
         $this->_ruleInfo = $ruleInfo;
-    } 
+    }
 }
 ?>

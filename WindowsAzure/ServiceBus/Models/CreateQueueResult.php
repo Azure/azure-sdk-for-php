@@ -22,8 +22,6 @@
  */
  
 namespace WindowsAzure\ServiceBus\Models;
-use WindowsAzure\Common\Internal\Atom\Feed;
-use WindowsAzure\Common\Internal\Atom\Content;
 use WindowsAzure\ServiceBus\Models\QueueInfo;
 
 /**
@@ -41,22 +39,21 @@ use WindowsAzure\ServiceBus\Models\QueueInfo;
 class CreateQueueResult
 {
     /**
-     * The description of a queue. 
+     * The information of a queue. 
      *
      * @var QueueInfo
      */
     private $_queueInfo;
 
     /**
-     * Creates a create queue result object from response. 
+     * Populates the queue information from the response of a create queue request. 
      * 
-     * @var string $response The response of the string. 
+     * @var string $createQueueResponseBody The response of the create queue request.
      */
-    public function parseXml($response)
+    public function parseXml($createQueueResponseBody)
     {
-        $queueInfo = new QueueInfo();
-        $queueInfo->parseXml($response);
-        $this->_queueInfo = $queueInfo;
+        $this->_queueInfo = new QueueInfo();
+        $this->_queueInfo->parseXml($createQueueResponseBody);
     }
 
     /**
@@ -67,7 +64,7 @@ class CreateQueueResult
     }
 
     /**
-     * Gets queue description.
+     * Gets the information of the queue.
      * 
      * @return QueueInfo
      */
@@ -77,9 +74,9 @@ class CreateQueueResult
     }
 
     /**
-     * Sets the queue description. 
+     * Sets the information of the queue.
      * 
-     * @param QueueInfo $queueInfo The description of the queue. 
+     * @param QueueInfo $queueInfo The information of the queue. 
      */
     public function setQueueInfo($queueInfo)
     {

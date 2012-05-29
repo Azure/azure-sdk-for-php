@@ -37,7 +37,6 @@ use WindowsAzure\ServiceBus\Models\ListOptions;
 
 class ListQueuesOptions extends ListOptions 
 {
-    
 }
 
 ?>

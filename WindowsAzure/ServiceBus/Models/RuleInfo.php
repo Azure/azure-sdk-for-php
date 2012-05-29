@@ -23,13 +23,15 @@
  */
  
 namespace WindowsAzure\ServiceBus\Models;
+use WindowsAzure\Common\Internal\Atom\Content;
+use WindowsAzure\Common\Internal\Atom\Entry;
 use WindowsAzure\Common\Internal\Resources;
 use WindowsAzure\Common\Internal\Utilities;
 use WindowsAzure\Common\Internal\Validate;
-use WindowsAzure\Common\Internal\Atom\Entry;
+use WindowsAzure\Common\Internal\Serialization\XmlSerializer;
 
 /**
- * The information regarding the rule.
+ * The information of a rule.
  *
  * @category  Microsoft
  * @package   WindowsAzure\ServiceBus\Models
@@ -52,7 +54,7 @@ class RuleInfo extends Entry
     /**
      * Creates an RuleInfo with specified parameters.
      *
-     * @param string          $name            The name of the rule.
+     * @param string          $title           The title of the rule.
      * @param RuleDescription $ruleDescription The description of the rule.
      * 
      */
@@ -68,6 +70,11 @@ class RuleInfo extends Entry
         $this->_ruleDescription = $ruleDescription;
     }
 
+    /**
+     * Populates the properties with a specified XML string based on ATOM ENTRY schema. 
+     * 
+     * @param string $xmlString An XML string representing a rule info instance.
+     */
     public function parseXml($xmlString)
     {
         parent::parseXml($xmlString);
@@ -80,17 +87,33 @@ class RuleInfo extends Entry
         }
     }
 
+    /**
+     * Writes an XML string representing the rule info instance. 
+     * 
+     * @return string
+     */
     public function writeXml()
     {
         if (is_null($this->_ruleDescription)) {
             $this->_content = null;    
         }
         else {
-            $this->_content = $this->_ruleDescription->writeXml(); 
+            $this->_content = new Content();
+            $this->_content->setText(
+                XmlSerializer::objectSerialize(
+                    $this->_ruleDescription, 'RuleDescription'
+                )
+            );
         }
+
         return parent::writeXml();
     }
 
+    /**
+     * Gets the description of the rule. 
+     * 
+     * @return RuleDescription
+     */
     public function getRuleDescription()
     {
         return $this->_ruleDescription;

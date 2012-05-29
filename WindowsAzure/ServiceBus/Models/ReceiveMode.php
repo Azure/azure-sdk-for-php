@@ -23,7 +23,7 @@
 namespace WindowsAzure\ServiceBus\Models;
 
 /**
- * This class constructs HTTP requests and receive HTTP responses for service bus.
+ * The mode of receiving message from service bus.
  *
  * @category  Microsoft
  * @package   WindowsAzure\ServiceBus\Models
@@ -34,9 +34,6 @@ namespace WindowsAzure\ServiceBus\Models;
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
 
-/**
- * The mode of receiving message. 
- */
 class ReceiveMode
 {
     const ReceiveAndDelete = 0;

@@ -27,7 +27,7 @@ use WindowsAzure\Common\Internal\Resources;
 use WindowsAzure\Common\Internal\Utilities;
 
 /**
- * An active WRAP access Token.
+ * The description of the topic.  
  *
  * @category  Microsoft
  * @package   WindowsAzure\ServiceBus\Models
@@ -63,18 +63,17 @@ class TopicDescription
     /** 
      * Duplicate detection history time window. 
      * 
-     * @var integer
+     * @var string
      */
     private $_duplicateDetectionHistoryTimeWindow;
     
     /**
      * Enables batched operations. 
      * 
-     * @var bool
+     * @var boolean
      */
     private $_enableBatchedOperations;
    
-
     /**
      * The size in bytes. 
      * 
@@ -82,6 +81,19 @@ class TopicDescription
      */  
     private $_sizeInBytes;
 
+    /**
+     * Creates a topic description with default parameters. 
+     */
+    public function __construct()
+    {
+    }
+
+    /**
+     * Creates a topic description object with specified XML string.
+     *
+     * @param string $topicDescriptionXml A XML based string describing
+     * the topic. 
+     */
     public static function create($topicDescriptionXml)
     {
         $topicDescription = new TopicDescription();
@@ -91,52 +103,39 @@ class TopicDescription
         if (array_key_exists('DefaultMessageToLive', $topicDescriptionArray))
         {
             $topicDescription->setDefaultMessageToLive(
-                $topicDescriptionArray['DefaultMessageToLive']
+                (string)$topicDescriptionArray['DefaultMessageToLive']
             );
         }
 
         if (array_key_exists('MaxSizeInMegabytes', $topicDescriptionArray))
         {
             $topicDescription->setMaxSizeInMegabytes(
-                $topicDescriptionArray['MaxSizeInMegabytes']
+                (integer)$topicDescriptionArray['MaxSizeInMegabytes']
             );
         }
 
         if (array_key_exists('RequiresDuplicateDetection', $topicDescriptionArray))
         {
             $topicDescription->setRequiresDuplicateDetection(
-                $topicDescriptionArray['RequiresDuplicateDetection']
+                (boolean)$topicDescriptionArray['RequiresDuplicateDetection']
             );
         }
 
         if (array_key_exists('DuplicateDetectionHistoryTimeWindow', $topicDescriptionArray))
         {
             $topicDescription->setDuplicateDetectionHistoryTimeWindow(
-                $topicDescriptionArray['DuplicateDetectionHistoryTimeWindow']
+                (string)$topicDescriptionArray['DuplicateDetectionHistoryTimeWindow']
             );
         }
 
         if (array_key_exists('EnableBatchedOperations', $topicDescriptionArray))
         {
             $topicDescription->setEnableBatchedOperations(
-                $topicDescriptionArray['EnableBatchedOperations']
+                (boolean)$topicDescriptionArray['EnableBatchedOperations']
             );
         }
 
         return $topicDescription;
-    }
-
-    /**
-     * Creates a topic description with specified parameters. 
-     */
-    public function __construct()
-    {
-        $this->_defaultMessageToLive = Resources::EMPTY_STRING;
-        $this->_maxSizeInMegabytes = Resources::EMPTY_STRING;
-        $this->_requiresDuplicateDetection = Resources::EMPTY_STRING;
-        $this->_duplicateDetectionHistoryTimeWindow = Resources::EMPTY_STRING;
-        $this->_enableBatchedOperations = Resources::EMPTY_STRING;
-        $this->_sizeInBytes = Resources::EMPTY_STRING;
     }
 
     /**
@@ -204,7 +203,7 @@ class TopicDescription
     /**
      * Gets duplicate detection history time window. 
      * 
-     * @return boolean
+     * @return string
      */
     public function getDuplicateDetectionHistoryTimeWindow()
     {
@@ -214,7 +213,7 @@ class TopicDescription
     /**
      * Sets duplicate detection history time window. 
      * 
-     * @param boolean $duplicateDetectionHistoryTimeWindow
+     * @param string $duplicateDetectionHistoryTimeWindow
      */
     public function setDuplicateDetectionHistoryTimeWindow($duplicateDetectionHistoryTimeWindow)
     {

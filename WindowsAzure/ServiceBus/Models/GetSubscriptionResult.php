@@ -23,12 +23,11 @@
  */
 
 namespace WindowsAzure\ServiceBus\Models;
+use WindowsAzure\ServiceBus\Models\SubscriptionInfo;
 
-use WindowsAzure\Common\Internal\Atom\Feed;
-use WindowsAzure\Common\Internal\Atom\Content;
 
 /**
- * This class constructs HTTP requests and receive HTTP responses for service bus.
+ * The result of a get subscription request. 
  *
  * @category  Microsoft
  * @package   WindowsAzure\ServiceBus\Models
@@ -49,15 +48,14 @@ class GetSubscriptionResult
     private $_subscriptionInfo;
 
     /**
-     * Creates a subscription information instance with specified response. 
+     * Populate the properties with a specified get subscription request response body. 
      * 
-     * @param string $response The response from the server. 
+     * @param string $getSubscriptionResponse The body of the response from a get subscription request. 
      */ 
-    public function parseXml($response)
+    public function parseXml($getSubscriptionResponse)
     {
-        $subscriptionInfo = new SubscriptionInfo();
-        $subscriptionInfo->parseXml($response);
-        $this->_subscriptionInfo = $subscriptionInfo;
+        $this->_subscriptionInfo = new SubscriptionInfo();
+        $this->_subscriptionInfo->parseXml($getSubscriptionResponse);
     }
 
     /**

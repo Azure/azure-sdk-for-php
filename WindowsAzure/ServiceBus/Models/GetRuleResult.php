@@ -23,12 +23,10 @@
  */
 
 namespace WindowsAzure\ServiceBus\Models;
-
-use WindowsAzure\Common\Internal\Atom\Feed;
-use WindowsAzure\Common\Internal\Atom\Content;
+use WindowsAzure\ServiceBus\Models\RuleInfo;
 
 /**
- * This class constructs HTTP requests and receive HTTP responses for service bus.
+ * The result of a get rule request.
  *
  * @category  Microsoft
  * @package   WindowsAzure\ServiceBus\Models
@@ -42,22 +40,21 @@ use WindowsAzure\Common\Internal\Atom\Content;
 class GetRuleResult
 {
     /**
-     * The description of the rule. 
+     * The information of the rule. 
      * 
      * @var RuleInfo
      */
     private $_ruleInfo;
     
     /**
-     * Creates a get rule result with specified response. 
+     * Populate the properties with a specified get rule request response body. 
      * 
-     * @param string $response The response of the get rule request from the server. 
+     * @param string $getRuleResponse The body of the response from a get rule request. 
      */
-    public function parseXml($response)
+    public function parseXml($getRuleResponse)
     {
-        $ruleInfo = new RuleInfo();
-        $ruleInfo->parseXml($response);
-        $this->_ruleInfo = $ruleInfo;
+        $this->_ruleInfo = new RuleInfo();
+        $this->_ruleInfo->parseXml($getRuleResponse);
     }
 
     /**
@@ -68,7 +65,7 @@ class GetRuleResult
     }
 
     /**
-     * Gets the description of the rule. 
+     * Gets the information of the rule. 
      * 
      * @return RuleInfo
      */
@@ -78,9 +75,9 @@ class GetRuleResult
     }
 
     /**
-     * Sets the description of the rule. 
+     * Sets the information of the rule. 
      * 
-     * @param RuleInfo 
+     * @param RuleInfo $ruleInfo The information of the rule. 
      */
     public function setRuleInfo($ruleInfo)
     {

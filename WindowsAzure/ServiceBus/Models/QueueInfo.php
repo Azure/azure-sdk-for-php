@@ -23,8 +23,10 @@
  */
  
 namespace WindowsAzure\ServiceBus\Models;
+use WindowsAzure\Common\Internal\Atom\Content;
 use WindowsAzure\Common\Internal\Atom\Entry;
 use WindowsAzure\Common\Internal\Resources;
+use WindowsAzure\Common\Internal\Serialization\XmlSerializer;
 use WindowsAzure\Common\Internal\Utilities;
 use WindowsAzure\ServiceBus\Models\QueueDescription;
 
@@ -50,11 +52,10 @@ class QueueInfo extends Entry
     private $_queueDescription;
 
     /**
-     * Creates an QueueInfo with specified parameters.
+     * Creates a QueueInfo instance with specified parameters.
      *
      * @param string           $name             The name of the queue.
      * @param QueueDescription $queueDescription The description of the queue.
-     * 
      */
     public function __construct($title = Resources::EMPTY_STRING, $queueDescription = null)
     {
@@ -67,9 +68,14 @@ class QueueInfo extends Entry
         $this->_queueDescription = $queueDescription;
     }
 
-    public function parseXml($xmlString)
+    /**
+     * Populates the properties of the queue info instance with a ATOM ENTRY XML string. 
+     * 
+     * @param string $entryXml An ATOM entry based XML string.
+     */
+    public function parseXml($entryXml)
     {
-        parent::parseXml($xmlString);
+        parent::parseXml($entryXml);
         $content = $this->_content;
         if (is_null($content)) {
             $this->_queueDescription = null;
@@ -79,19 +85,30 @@ class QueueInfo extends Entry
         }
     }
 
+    /**
+     * Returns a XML string based on ATOM ENTRY schema. 
+     * 
+     * @return string
+     */
     public function writeXml()
     {
         if (is_null($this->_queueDescription)) {
             $this->_content = null;    
         }
         else {
-            $this->_content = $this->_queueDescription->writeXml(); 
+            $this->_content = new Content();
+            $this->_content->setText(
+                XmlSerializer::objectSerialize(
+                    $this->_queueDescription,
+                    'QueueDescription'
+                ) 
+            );
         }
         return parent::writeXml();
     }
 
     /**
-     * Get the description of the queue. 
+     * Gets the description of the queue. 
      */
     public function getQueueDescription()
     {
