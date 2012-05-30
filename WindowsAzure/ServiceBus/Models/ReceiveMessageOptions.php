@@ -50,7 +50,7 @@ class ReceiveMessageOptions
      * 
      * @var integer
      */
-    private $_receiveMode;
+    private $_receiveMode = ReceiveMode::ReceiveAndDelete;
 
     /** 
      * Creates a receive message option instance with default parameters.
