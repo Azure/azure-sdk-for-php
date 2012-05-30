@@ -29,14 +29,6 @@ namespace Tests\Functional\WindowsAzure\ServiceBus;
 use WindowsAzure\ServiceBus\ServiceBusService;
 
 use Tests\Functional\WindowsAzure\ServiceBus\IntegrationTestBase;
-use WindowsAzure\core\Builder;
-use WindowsAzure\core\Builder\Alteration;
-use WindowsAzure\core\Builder\Registry;
-use WindowsAzure\core\Configuration;
-use WindowsAzure\core\ServiceException;
-use WindowsAzure\core\ServiceFilter;
-use WindowsAzure\core\ServiceFilter\Request;
-use WindowsAzure\core\ServiceFilter\Response;
 use WindowsAzure\ServiceBus\implementation\CorrelationFilter;
 use WindowsAzure\ServiceBus\implementation\EmptyRuleAction;
 use WindowsAzure\ServiceBus\implementation\FalseFilter;
@@ -48,8 +40,8 @@ use WindowsAzure\ServiceBus\models\ListQueuesResult;
 use WindowsAzure\ServiceBus\models\ListRulesResult;
 use WindowsAzure\ServiceBus\models\ListSubscriptionsResult;
 use WindowsAzure\ServiceBus\models\ListTopicsResult;
-use WindowsAzure\ServiceBus\Models\QueueInfo;
 use WindowsAzure\ServiceBus\Models\QueueDescription;
+use WindowsAzure\ServiceBus\Models\QueueInfo;
 use WindowsAzure\ServiceBus\models\ReceiveMessageOptions;
 use WindowsAzure\ServiceBus\models\RuleInfo;
 use WindowsAzure\ServiceBus\models\SubscriptionInfo;
@@ -66,12 +58,12 @@ class ServiceBusIntegrationTest extends IntegrationTestBase
         $this->RECEIVE_AND_DELETE_5_SECONDS = new ReceiveMessageOptions();
         $this->RECEIVE_AND_DELETE_5_SECONDS->setReceiveAndDelete();
         $this->RECEIVE_AND_DELETE_5_SECONDS->setTimeout(5);
-        
+
         $this->PEEK_LOCK_5_SECONDS = new ReceiveMessageOptions();
         $this->PEEK_LOCK_5_SECONDS->setPeekLock();
         $this->PEEK_LOCK_5_SECONDS->setTimeout(5);
     }
-    
+
 //    public function testCreateService() {
 //        // reinitialize configuration from known state
 //        $config = createConfiguration();
@@ -85,7 +77,8 @@ class ServiceBusIntegrationTest extends IntegrationTestBase
     * @covers WindowsAzure\ServiceBus\ServiceBusRestProxy::getQueue
     * @covers WindowsAzure\ServiceBus\ServiceBusRestProxy::listQueues
     */
-    public function testFetchQueueAndListQueuesWorks() {
+    public function testFetchQueueAndListQueuesWorks()
+    {
         // Arrange
 
         // Act
@@ -142,7 +135,7 @@ class ServiceBusIntegrationTest extends IntegrationTestBase
         $result = $this->restProxy->deleteQueue('TestDeleteQueueWorks');
 
         // Assert
-        $this->assertNull($result);
+        $this->assertNull($result, '$result');
     }
 
     /**
@@ -357,14 +350,14 @@ class ServiceBusIntegrationTest extends IntegrationTestBase
         // Act
         $topic = new TopicInfo($topicName);
         $created = $this->restProxy->createTopic($topic);
-        
+
         // TODO
         $listed = $this->restProxy->listTopics(null);
         $fetched = $this->restProxy->getTopic($topicName);
         $this->restProxy->deleteTopic($topicName);
         // TODO
         $listed2 = $this->restProxy->listTopics(null);
-        
+
         // Assert
         $this->assertNotNull($created, '$created');
         $this->assertNotNull($listed, '$listed');
@@ -633,7 +626,7 @@ class ServiceBusIntegrationTest extends IntegrationTestBase
         $result = $this->restProxy->listRules($topicName, 'sub', null);
         $this->assertNotNull($result, '$result');
 
-// TODO        
+// TODO
 //        $this->assertEquals(1, count($result->getItems()), '$result->getItems()->size()');
 //        $items = $result->getItems();
         $this->assertEquals(1, count($result->getRuleInfo()), '$result->getItems()->size()');
