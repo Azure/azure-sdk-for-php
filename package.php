@@ -70,7 +70,7 @@ $p->setAPIVersion('1.0.0');
 $p->setReleaseStability($release_state);
 $p->setAPIStability('stable');
 $p->setPhpDep('5.3.0');
-// Uncomment when the lead entry doesn't exist at all, run once and then comment it back.
+// If this run twice the lead entry will be duplicated. Make sure that it just run once.
 //$p->addMaintainer('lead', 'AzurePHPSDK', 'Azure PHP SDK', 'azurephpsdk@microsoft.com');
 $p->setPearinstallerDep('1.8.0');
 $p->addPackageDepWithChannel('required', 'HTTP_Request2', 'pear.php.net');
