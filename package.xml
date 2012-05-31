@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <package packagerversion="1.9.4" version="2.0" xmlns="http://pear.php.net/dtd/package-2.0" xmlns:tasks="http://pear.php.net/dtd/tasks-1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://pear.php.net/dtd/tasks-1.0 http://pear.php.net/dtd/tasks-1.0.xsd http://pear.php.net/dtd/package-2.0 http://pear.php.net/dtd/package-2.0.xsd">
  <name>WindowsAzure</name>
- <channel>pear.windowsazure.com</channel>
+ <channel>pear.blob.core.windows.net</channel>
  <summary>
-Summary for Windows Azure SDK for PHP
+Official PHP SDK for Microsoft Windows Azure.
  </summary>
  <description>
-Description for Windows Azure SDK for PHP
+The Windows Azure client libraries provide easy access to all Windows Azure REST services 
+including Tables, Blobs, Queues, Service Bus, Service Management and Service Runtime.
  </description>
  <lead>
   <name>Azure PHP SDK</name>
@@ -14,20 +15,21 @@ Description for Windows Azure SDK for PHP
   <email>azurephpsdk@microsoft.com</email>
   <active>yes</active>
  </lead>
- <date>2012-05-30</date>
- <time>23:04:06</time>
+ <date>2012-05-31</date>
+ <time>11:34:25</time>
  <version>
-  <release>1.0.0</release>
-  <api>1.0.0</api>
+  <release>0.1.0</release>
+  <api>0.1.0</api>
  </version>
  <stability>
-  <release>stable</release>
-  <api>stable</api>
+  <release>beta</release>
+  <api>beta</api>
  </stability>
- <license uri="https://github.com/WindowsAzure/azure-sdk-for-php/blob/master/LICENSE.txt">Apache 2.0</license>
+ <license uri="http://www.apache.org/licenses/LICENSE-2.0">Apache 2.0</license>
  <notes>
-* Full support of Windows Azure sotrage services Queue, Blob and Table.
-* Full support of Windows Azure service bus.
+* Full support of Queue, Blob and Table services.
+* Full support of Service Bus.
+* Full support of Service Runtime.
 * Support for storage services and affinity groups management operations.
  </notes>
  <contents>
@@ -275,18 +277,19 @@ Description for Windows Azure SDK for PHP
  <changelog>
   <release>
    <version>
-    <release>1.0.0</release>
-    <api>1.0.0</api>
+    <release>0.1.0</release>
+    <api>0.1.0</api>
    </version>
    <stability>
-    <release>stable</release>
-    <api>stable</api>
+    <release>beta</release>
+    <api>beta</api>
    </stability>
-   <date>2012-05-30</date>
-   <license uri="https://github.com/WindowsAzure/azure-sdk-for-php/blob/master/LICENSE.txt">Apache 2.0</license>
+   <date>2012-05-31</date>
+   <license uri="http://www.apache.org/licenses/LICENSE-2.0">Apache 2.0</license>
    <notes>
-* Full support of Windows Azure sotrage services Queue, Blob and Table.
-* Full support of Windows Azure service bus.
+* Full support of Queue, Blob and Table services.
+* Full support of Service Bus.
+* Full support of Service Runtime.
 * Support for storage services and affinity groups management operations.
    </notes>
   </release>
