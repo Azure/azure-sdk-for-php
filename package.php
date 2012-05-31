@@ -48,7 +48,7 @@ $release_notes        = '
 ';
 $default_pear_channel = 'pear.php.net';
 $dependencies         = array(
-    array('required', 'HTTP_Request2', 	          $default_pear_channel),
+    array('required', 'HTTP_Request2',            $default_pear_channel),
     array('required', 'Mail_Mime',                $default_pear_channel),
     array('required', 'Mail_mimeDecode',          $default_pear_channel),
     array('optional', 'PEAR_PackageFileManager2', $default_pear_channel),
