@@ -115,6 +115,12 @@ class XmlSerializer implements ISerializer
         return null;
     }
 
+    /** 
+     * Serialize an object with specified root element name. 
+     * 
+     * @param object $targetObject The target object. 
+     * @param string $rootName     The name of the root element. 
+     */
     public function objectSerialize($targetObject, $rootName)
     {
         $xmlWriter = new \XmlWriter();

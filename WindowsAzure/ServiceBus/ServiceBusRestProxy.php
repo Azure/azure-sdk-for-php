@@ -29,6 +29,7 @@ use WindowsAzure\Common\Internal\Serialization\XmlSerializer;
 use WindowsAzure\Common\Internal\Atom\Content;
 use WindowsAzure\Common\Internal\Atom\Entry;
 use WindowsAzure\Common\Internal\Atom\Feed;
+use WindowsAzure\Common\ServiceException;
 use WindowsAzure\ServiceBus\Internal\IServiceBus;
 use WindowsAzure\ServiceBus\Models\BrokeredMessage;
 use WindowsAzure\ServiceBus\Models\BrokerProperties;
