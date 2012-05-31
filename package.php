@@ -25,7 +25,6 @@ PEAR::setErrorHandling(PEAR_ERROR_DIE);
 
 $package = 'WindowsAzure';
 $channel = 'pear.windowsazure.com';
-$installDir = 'AzureSDKForPHP';
 $summary = '
 Summary for Windows Azure SDK for PHP
 ';
@@ -48,7 +47,6 @@ $p = &PEAR_PackageFileManager2::importOptions(
       'filelistgenerator' => 'file',
       'packagedirectory' => dirname(__FILE__),
       'changelogoldtonew' => false,
-      'baseinstalldir' => $installDir,
       'simpleoutput' => false
       ));
 $p->addInclude(array(
