@@ -15,7 +15,7 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   WindowsAzure\Queue
+ * @package   WindowsAzure\ServiceBus
  * @author    Azure PHP SDK <azurephpsdk@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
@@ -30,7 +30,7 @@ use WindowsAzure\Common\Internal\Resources;
  * Factory for creating ServiceBusRestProxy objects
  *
  * @category  Microsoft
- * @package   WindowsAzure\Queue
+ * @package   WindowsAzure\ServiceBus
  * @author    Azure PHP SDK <azurephpsdk@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0

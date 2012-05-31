@@ -249,6 +249,11 @@ class HttpClient implements IHttpClient
         foreach ($filters as $filter) {
             $this->_request = $filter->handleRequest($this)->_request;
         }
+       $config = array();
+       $config['proxy_host']='127.0.0.1';
+       $config['proxy_port']=8888;
+       $this->_request->setConfig($config); 
+        
         
         $this->_response = $this->_request->send();
 
