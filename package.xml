@@ -15,7 +15,7 @@ Description for Windows Azure SDK for PHP
   <active>yes</active>
  </lead>
  <date>2012-05-30</date>
- <time>21:41:16</time>
+ <time>21:47:42</time>
  <version>
   <release>1.0.0</release>
   <api>1.0.0</api>
@@ -32,7 +32,7 @@ Description for Windows Azure SDK for PHP
  </notes>
  <contents>
   <dir baseinstalldir="AzureSDKForPHP" name="/">
-   <file baseinstalldir="AzureSDKForPHP" md5sum="eb88e70babb25a2648628ec0f5ed56c0" name="/WindowsAzure/WindowsAzure.php" role="php" />
+   <file baseinstalldir="AzureSDKForPHP" md5sum="41b608ded40b44e032694c8c0fb2c770" name="/WindowsAzure/WindowsAzure.php" role="php" />
    <file baseinstalldir="AzureSDKForPHP" md5sum="54d28c2d4a54a2786cfa18b1f5948c4f" name="/WindowsAzure/Blob/BlobRestProxy.php" role="php" />
    <file baseinstalldir="AzureSDKForPHP" md5sum="09ad8f2b502f4cd0cfb4592b4f2bfba1" name="/WindowsAzure/Blob/BlobService.php" role="php" />
    <file baseinstalldir="AzureSDKForPHP" md5sum="82bfd226996e8ae523a002ab5cd1c086" name="/WindowsAzure/Blob/BlobSettings.php" role="php" />
@@ -97,10 +97,10 @@ Description for Windows Azure SDK for PHP
    <file baseinstalldir="AzureSDKForPHP" md5sum="073fb130e1743f70cfe7b3440f93fe7b" name="/WindowsAzure/Common/Internal/IServiceBuilder.php" role="php" />
    <file baseinstalldir="AzureSDKForPHP" md5sum="2e7b8371295e710c89c06247d586e89e" name="/WindowsAzure/Common/Internal/IServiceFilter.php" role="php" />
    <file baseinstalldir="AzureSDKForPHP" md5sum="40e50be9bd2abb63c0e1e4369d8145b3" name="/WindowsAzure/Common/Internal/Logger.php" role="php" />
-   <file baseinstalldir="AzureSDKForPHP" md5sum="08adbb0bd666d504bde6e79acc3cc5e9" name="/WindowsAzure/Common/Internal/Resources.php" role="php" />
+   <file baseinstalldir="AzureSDKForPHP" md5sum="5d2f6bd7e3d5403f844bc7db401c348d" name="/WindowsAzure/Common/Internal/Resources.php" role="php" />
    <file baseinstalldir="AzureSDKForPHP" md5sum="2f594921fe3dcae8213a8ed8d187e43f" name="/WindowsAzure/Common/Internal/RestProxy.php" role="php" />
    <file baseinstalldir="AzureSDKForPHP" md5sum="cfe5434a8c190fd2bd5ed1baf71e455b" name="/WindowsAzure/Common/Internal/ServiceRestProxy.php" role="php" />
-   <file baseinstalldir="AzureSDKForPHP" md5sum="d4bc27b4cf5c209ba44f9b0816077845" name="/WindowsAzure/Common/Internal/ServicesBuilder.php" role="php" />
+   <file baseinstalldir="AzureSDKForPHP" md5sum="402c501ffbe41d0a3345b04c07271b9e" name="/WindowsAzure/Common/Internal/ServicesBuilder.php" role="php" />
    <file baseinstalldir="AzureSDKForPHP" md5sum="1ad40576459e642d1526c955f4c4a505" name="/WindowsAzure/Common/Internal/Utilities.php" role="php" />
    <file baseinstalldir="AzureSDKForPHP" md5sum="b23844425f0ebe753e9e98a8410aabda" name="/WindowsAzure/Common/Internal/Validate.php" role="php" />
    <file baseinstalldir="AzureSDKForPHP" md5sum="ad1a48dc2e52a2a70ee256f459c98d42" name="/WindowsAzure/Common/Internal/Authentication/SharedKeyAuthScheme.php" role="php" />
@@ -112,7 +112,7 @@ Description for Windows Azure SDK for PHP
    <file baseinstalldir="AzureSDKForPHP" md5sum="a61eca06fbc10e540c9c91fd9db5f791" name="/WindowsAzure/Common/Internal/Filters/RetryPolicy.php" role="php" />
    <file baseinstalldir="AzureSDKForPHP" md5sum="4bb657a7014ade7bf8a11ba2faec1be5" name="/WindowsAzure/Common/Internal/Filters/RetryPolicyFilter.php" role="php" />
    <file baseinstalldir="AzureSDKForPHP" md5sum="cdc10c5b028a0d0906ec6fbbedb54d57" name="/WindowsAzure/Common/Internal/Filters/SharedKeyFilter.php" role="php" />
-   <file baseinstalldir="AzureSDKForPHP" md5sum="145a5345bdd1e06f5714f88215c04592" name="/WindowsAzure/Common/Internal/Filters/WrapFilter.php" role="php" />
+   <file baseinstalldir="AzureSDKForPHP" md5sum="1dfdf2d7582756ef1228e6c7ad18cfbe" name="/WindowsAzure/Common/Internal/Filters/WrapFilter.php" role="php" />
    <file baseinstalldir="AzureSDKForPHP" md5sum="7588a29d6d516b05b99dc63f0d063910" name="/WindowsAzure/Common/Internal/Http/HttpCallContext.php" role="php" />
    <file baseinstalldir="AzureSDKForPHP" md5sum="ae4b524349fd4b68b32508a7d8ea6f86" name="/WindowsAzure/Common/Internal/Http/HttpClient.php" role="php" />
    <file baseinstalldir="AzureSDKForPHP" md5sum="b9a4b55dcff59dddc20dbd62250721df" name="/WindowsAzure/Common/Internal/Http/IHttpClient.php" role="php" />
@@ -143,16 +143,6 @@ Description for Windows Azure SDK for PHP
    <file baseinstalldir="AzureSDKForPHP" md5sum="8661b8813cc9e1882e2da1fbff6a3e20" name="/WindowsAzure/Queue/Models/QueueServiceOptions.php" role="php" />
    <file baseinstalldir="AzureSDKForPHP" md5sum="f4242543b1385a5e9a2a771678a81744" name="/WindowsAzure/Queue/Models/UpdateMessageResult.php" role="php" />
    <file baseinstalldir="AzureSDKForPHP" md5sum="e461dba3af45dcfd23a455f507356387" name="/WindowsAzure/Queue/Models/WindowsAzureQueueMessage.php" role="php" />
-   <file baseinstalldir="AzureSDKForPHP" md5sum="e46d98469019711a0bf78dd467f785b9" name="/WindowsAzure/ServiceBus/ServiceBusRestProxy.php" role="php" />
-   <file baseinstalldir="AzureSDKForPHP" md5sum="815aaa60ccc38c497344a929f839dc77" name="/WindowsAzure/ServiceBus/ServiceBusService.php" role="php" />
-   <file baseinstalldir="AzureSDKForPHP" md5sum="cf76785aaf38bf338defc6947ab1bca8" name="/WindowsAzure/ServiceBus/ServiceBusSettings.php" role="php" />
-   <file baseinstalldir="AzureSDKForPHP" md5sum="011c841c530246be62b25e4b352e0af5" name="/WindowsAzure/ServiceBus/WrapRestProxy.php" role="php" />
-   <file baseinstalldir="AzureSDKForPHP" md5sum="87073d7e951c1e83ab25cc7d9563cba0" name="/WindowsAzure/ServiceBus/WrapService.php" role="php" />
-   <file baseinstalldir="AzureSDKForPHP" md5sum="d99e1ef7312c5f80fbc0f48cbf2eb105" name="/WindowsAzure/ServiceBus/Internal/IServiceBus.php" role="php" />
-   <file baseinstalldir="AzureSDKForPHP" md5sum="c451d8102af7caea3ecb2900a342b2ec" name="/WindowsAzure/ServiceBus/Internal/IWrap.php" role="php" />
-   <file baseinstalldir="AzureSDKForPHP" md5sum="f8613c6474af2734943c603091faf1d1" name="/WindowsAzure/ServiceBus/Internal/WrapTokenManager.php" role="php" />
-   <file baseinstalldir="AzureSDKForPHP" md5sum="51f909f2d3ffdce053452dfcdc0914b3" name="/WindowsAzure/ServiceBus/Models/ActiveToken.php" role="php" />
-   <file baseinstalldir="AzureSDKForPHP" md5sum="c7e494b632dee888d5db325dafdf49f4" name="/WindowsAzure/ServiceBus/Models/WrapAccessTokenResult.php" role="php" />
    <file baseinstalldir="AzureSDKForPHP" md5sum="19f85cc2b46b5f95aafa27eb8fe037fb" name="/WindowsAzure/ServiceManagement/ServiceManagementRestProxy.php" role="php" />
    <file baseinstalldir="AzureSDKForPHP" md5sum="573e1e70f028efd13203dc046a46cc2c" name="/WindowsAzure/ServiceManagement/ServiceManagementService.php" role="php" />
    <file baseinstalldir="AzureSDKForPHP" md5sum="bb9fedc794e33751cf86043984ee0bc2" name="/WindowsAzure/ServiceManagement/ServiceManagementSettings.php" role="php" />
