@@ -33,12 +33,11 @@ $min_php_version      = '5.3.0';
 $min_pear_version     = '1.8.0';
 $license              = 'Apache 2.0';
 $license_agreement    = 'http://www.apache.org/licenses/LICENSE-2.0';
-$summary              = '
-Official PHP SDK for Microsoft Windows Azure.
-';
+$summary              = 'Windows Azure SDK for PHP.';
 $description          = '
-The Windows Azure client libraries provide easy access to all Windows Azure REST services 
-including Tables, Blobs, Queues, Service Bus, Service Management and Service Runtime.
+This package contains client libraries for accessing the Windows Azure Tables, Blobs,
+Queues, Service Runtime, Service Management and Service Bus (Queues, Topics) REST APIs.
+It is build as a thin REST call wrapper where each server call maps to a single method call within the library.
 ';
 $release_notes        = '
 * Full support of Queue, Blob and Table services.
