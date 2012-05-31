@@ -73,6 +73,28 @@ class CreateQueueResultTest extends \PHPUnit_Framework_TestCase
             $actual
         );
     }
+
+    /** 
+     * @covers WindowsAzure\ServiceBus\Models\CreateQueueResult::getQueueInfo
+     * @covers WindowsAzure\ServiceBus\Models\CreateQueueResult::setQueueInfo
+     */
+    public function testGetSetQueueInfo() {
+        // Setup
+        $expected = 'testQueueInfo';
+        $className = new CreateQueueResult();
+
+        // Test
+        $className->setQueueInfo($expected);
+        $actual = $className->getQueueInfo();
+
+        // Assert 
+        $this->assertEquals(
+            $expected,
+            $actual
+        );
+
+    }
+
     
 }
 

@@ -23,11 +23,10 @@
  */
 
 namespace Tests\Unit\WindowsAzure\ServiceBus\Models;
-use WindowsAzure\ServiceBus\Models\QueueInfo;
-use WindowsAzure\ServiceBus\Models\WrapAccessTokenResult;
+use WindowsAzure\ServiceBus\Models\EmptyRuleAction;
 
 /**
- * Unit tests for class WrapAccessTokenResult
+ * Unit tests for class EmptyRuleAction
  *
  * @category  Microsoft
  * @package   Tests\Unit\WindowsAzure\Services\Queue\Models
@@ -37,49 +36,21 @@ use WindowsAzure\ServiceBus\Models\WrapAccessTokenResult;
  * @version   Release: @package_version@
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
-class QueueInfoTest extends \PHPUnit_Framework_TestCase
+class EmptyRuleActionTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @covers WindowsAzure\ServiceBus\Models\QueueInfo::__construct
+     * @covers WindowsAzure\ServiceBus\Models\EmptyRuleAction::__construct
      */
-    public function testQueueInfoConstructor()
+    public function testEmptyRuleActionConstructor()
     {
         // Setup
-        $expected = 'testQueueName';
         
         // Test
-        $queueInfo = new QueueInfo($expected);
-        $actual = $queueInfo->getTitle();
-       
+        $getRuleResult = new EmptyRuleAction();
+        
         // Assert
-        $this->assertNotNull($queueInfo);
-        $this->assertEquals(
-            $expected,
-            $actual
-        );
+        $this->assertNotNull($getRuleResult);
     }
-
-    /** 
-     * @covers WindowsAzure\ServiceBus\Models\QueueInfo::getQueueDescription
-     * @covers WindowsAzure\ServiceBus\Models\QueueInfo::setQueueDescription
-     */
-    public function testGetSetQueueDescription() {
-        // Setup
-        $expected = 'testQueueDescription';
-        $queueInfo = new QueueInfo();
-
-        // Test
-        $queueInfo->setQueueDescription($expected);
-        $actual = $queueInfo->getQueueDescription();
-
-        // Assert 
-        $this->assertEquals(
-            $expected,
-            $actual
-        );
-
-    }
-
 
 }
 

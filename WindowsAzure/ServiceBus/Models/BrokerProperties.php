@@ -498,7 +498,7 @@ class BrokerProperties
      */
     public function setReplyToSessionId($replyToSessionId)
     {
-        $this->_replyToSession = $replyToSessionId;
+        $this->_replyToSessionId = $replyToSessionId;
     }
 
     /**

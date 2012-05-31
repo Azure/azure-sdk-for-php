@@ -145,7 +145,7 @@ class TopicDescription
      */
     public function getDefaultMessageTimeToLive()
     {
-        $this->_defaultMessageTimeToLive;
+        return $this->_defaultMessageTimeToLive;
     }
     
     /**

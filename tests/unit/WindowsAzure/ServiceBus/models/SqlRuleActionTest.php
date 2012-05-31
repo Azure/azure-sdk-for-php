@@ -53,6 +53,27 @@ class SqlRuleActionTest extends \PHPUnit_Framework_TestCase
         $this->assertNotNull($sqlRuleAction);
     }
 
+    /** 
+     * @covers WindowsAzure\ServiceBus\Models\SqlRuleAction::getSqlExpression
+     * @covers WindowsAzure\ServiceBus\Models\SqlRuleAction::setSqlExpression
+     */
+    public function testGetSetSqlExpression() {
+        // Setup
+        $expected = 'testSqlExpression';
+        $sqlRuleAction = new SqlRuleAction();
+
+        // Test
+        $sqlRuleAction->setSqlExpression($expected);
+        $actual = $sqlRuleAction->getSqlExpression();
+
+        // Assert 
+        $this->assertEquals(
+            $expected,
+            $actual
+        );
+
+    }
+
 }
 
 ?>

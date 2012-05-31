@@ -44,6 +44,13 @@ class Action
     private $_compatibilityLevel;
 
     /**
+     * Creates an Action instance with default parameter. 
+     */
+    public function __construct()
+    {
+    }
+
+    /**
      * Gets the compatibility level. 
      * 
      * @return string 

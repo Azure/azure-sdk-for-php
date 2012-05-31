@@ -23,8 +23,7 @@
  */
 
 namespace Tests\Unit\WindowsAzure\ServiceBus\Models;
-use WindowsAzure\ServiceBus\Models\QueueInfo;
-use WindowsAzure\ServiceBus\Models\WrapAccessTokenResult;
+use WindowsAzure\ServiceBus\Models\SubscriptionInfo;
 
 /**
  * Unit tests for class WrapAccessTokenResult
@@ -37,40 +36,41 @@ use WindowsAzure\ServiceBus\Models\WrapAccessTokenResult;
  * @version   Release: @package_version@
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
-class QueueInfoTest extends \PHPUnit_Framework_TestCase
+class SubscriptionInfoTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @covers WindowsAzure\ServiceBus\Models\QueueInfo::__construct
+     * @covers WindowsAzure\ServiceBus\Models\SubscriptionInfo::__construct
      */
-    public function testQueueInfoConstructor()
+    public function testSubscriptionInfoConstructor()
     {
         // Setup
-        $expected = 'testQueueName';
+        $expected = 'testSubscriptionInfoName';
         
         // Test
-        $queueInfo = new QueueInfo($expected);
-        $actual = $queueInfo->getTitle();
-       
+        $SubscriptionInfo = new SubscriptionInfo($expected);
+        $actual = $SubscriptionInfo->getTitle();
+        
         // Assert
-        $this->assertNotNull($queueInfo);
+        $this->assertNotNull($SubscriptionInfo);
         $this->assertEquals(
             $expected,
             $actual
         );
+         
     }
 
     /** 
-     * @covers WindowsAzure\ServiceBus\Models\QueueInfo::getQueueDescription
-     * @covers WindowsAzure\ServiceBus\Models\QueueInfo::setQueueDescription
+     * @covers WindowsAzure\ServiceBus\Models\SubscriptionInfo::getSubscriptionDescription
+     * @covers WindowsAzure\ServiceBus\Models\SubscriptionInfo::setSubscriptionDescription
      */
-    public function testGetSetQueueDescription() {
+    public function testGetSetSubscriptionDescription() {
         // Setup
-        $expected = 'testQueueDescription';
-        $queueInfo = new QueueInfo();
+        $expected = 'testSubscriptionDescription';
+        $SubscriptionInfo = new SubscriptionInfo();
 
         // Test
-        $queueInfo->setQueueDescription($expected);
-        $actual = $queueInfo->getQueueDescription();
+        $SubscriptionInfo->setSubscriptionDescription($expected);
+        $actual = $SubscriptionInfo->getSubscriptionDescription();
 
         // Assert 
         $this->assertEquals(
@@ -79,7 +79,6 @@ class QueueInfoTest extends \PHPUnit_Framework_TestCase
         );
 
     }
-
 
 }
 

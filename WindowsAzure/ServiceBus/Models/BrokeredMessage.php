@@ -77,13 +77,13 @@ class BrokeredMessage
      */
     public function __construct($brokerProperties = null)
     {
-        if (!empty($brokerProperties))
+        if (empty($brokerProperties))
         {
-            $this->_brokerProperties = $brokerProperties;
+            $this->_brokerProperties = new BrokerProperties();
         }
         else 
         {
-            $this->_brokerProperties = new BrokerProperties();
+            $this->_brokerProperties = $brokerProperties;
         }
 
         $this->_customProperties = array();

@@ -23,11 +23,10 @@
  */
 
 namespace Tests\Unit\WindowsAzure\ServiceBus\Models;
-use WindowsAzure\ServiceBus\Models\QueueInfo;
-use WindowsAzure\ServiceBus\Models\WrapAccessTokenResult;
+use WindowsAzure\ServiceBus\Models\CorrelationFilter;
 
 /**
- * Unit tests for class WrapAccessTokenResult
+ * Unit tests for class CorrelationFilter
  *
  * @category  Microsoft
  * @package   Tests\Unit\WindowsAzure\Services\Queue\Models
@@ -37,40 +36,34 @@ use WindowsAzure\ServiceBus\Models\WrapAccessTokenResult;
  * @version   Release: @package_version@
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
-class QueueInfoTest extends \PHPUnit_Framework_TestCase
+class CorrelationFilterTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @covers WindowsAzure\ServiceBus\Models\QueueInfo::__construct
+     * @covers WindowsAzure\ServiceBus\Models\CorrelationFilter::__construct
      */
-    public function testQueueInfoConstructor()
+    public function testCorrelationFilterConstructor()
     {
         // Setup
-        $expected = 'testQueueName';
         
         // Test
-        $queueInfo = new QueueInfo($expected);
-        $actual = $queueInfo->getTitle();
-       
+        $getRuleResult = new CorrelationFilter();
+        
         // Assert
-        $this->assertNotNull($queueInfo);
-        $this->assertEquals(
-            $expected,
-            $actual
-        );
+        $this->assertNotNull($getRuleResult);
     }
 
     /** 
-     * @covers WindowsAzure\ServiceBus\Models\QueueInfo::getQueueDescription
-     * @covers WindowsAzure\ServiceBus\Models\QueueInfo::setQueueDescription
+     * @covers WindowsAzure\ServiceBus\Models\CorrelationFilter::getCorrelationId
+     * @covers WindowsAzure\ServiceBus\Models\CorrelationFilter::setCorrelationId
      */
-    public function testGetSetQueueDescription() {
+    public function testGetSetCorrelationId() {
         // Setup
-        $expected = 'testQueueDescription';
-        $queueInfo = new QueueInfo();
+        $expected = 'testCorrelationId';
+        $className = new CorrelationFilter();
 
         // Test
-        $queueInfo->setQueueDescription($expected);
-        $actual = $queueInfo->getQueueDescription();
+        $className->setCorrelationId($expected);
+        $actual = $className->getCorrelationId();
 
         // Assert 
         $this->assertEquals(

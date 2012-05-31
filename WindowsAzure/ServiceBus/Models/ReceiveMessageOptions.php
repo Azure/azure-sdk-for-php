@@ -57,6 +57,7 @@ class ReceiveMessageOptions
      */
     public function __construct()
     {
+        $this->_receiveMode = ReceiveMode::ReceiveAndDelete;
     }
     /**
      * Gets the timeout of the receive message request. 

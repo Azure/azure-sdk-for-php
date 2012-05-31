@@ -53,6 +53,27 @@ class TopicInfoTest extends \PHPUnit_Framework_TestCase
         $this->assertNotNull($topicInfo);
     }
 
+    /** 
+     * @covers WindowsAzure\ServiceBus\Models\TopicInfo::getTopicDescription
+     * @covers WindowsAzure\ServiceBus\Models\TopicInfo::setTopicDescription
+     */
+    public function testGetSetTopicDescription() {
+        // Setup
+        $expected = 'testTopicDescription';
+        $topicInfo = new TopicInfo();
+
+        // Test
+        $topicInfo->setTopicDescription($expected);
+        $actual = $topicInfo->getTopicDescription();
+
+        // Assert 
+        $this->assertEquals(
+            $expected,
+            $actual
+        );
+
+    }
+
 }
 
 ?>

@@ -23,7 +23,7 @@
  * @link       http://pear.php.net/package/azure-sdk-for-php
  */
 
-namespace Tests\Unit\WindowsAzure\ServiceBus\Internal;
+namespace Tests\Unit\WindowsAzure\ServiceBus;
 
 use WindowsAzure\Common\Models\ServiceProperties;
 use Tests\Framework\TestResources;
@@ -291,6 +291,7 @@ class ServiceBusRestProxyTest extends ServiceBusRestProxyTestBase
 
     /**
      * @covers WindowsAzure\ServiceBus\ServiceBusRestProxy::sendMessage
+     * @covers WindowsAzure\ServiceBus\ServiceBusRestProxy::sendQueueMessage
      * @covers WindowsAzure\ServiceBus\ServiceBusRestProxy::receiveMessage
      */
     public function testContentTypePassesThrough()
@@ -550,6 +551,7 @@ class ServiceBusRestProxyTest extends ServiceBusRestProxyTestBase
     /**
      * @covers WindowsAzure\ServiceBus\ServiceBusRestProxy::sendTopicMessage
      * @covers WindowsAzure\ServiceBus\ServiceBusRestProxy::receiveMessage
+     * @covers WindowsAzure\ServiceBus\ServiceBusRestProxy::receiveSubscriptionMessage
      */
     public function testSubscriptionWillReceiveMessage()
     {
@@ -614,6 +616,7 @@ class ServiceBusRestProxyTest extends ServiceBusRestProxyTestBase
 
     /**
      * @covers WindowsAzure\ServiceBus\ServiceBusRestProxy::createRule
+     * @covers WindowsAzure\ServiceBus\ServiceBusRestProxy::listRules
      */
     public function testRulesCanBeListedAndDefaultRuleIsPrecreated()
     {
@@ -669,6 +672,7 @@ class ServiceBusRestProxyTest extends ServiceBusRestProxyTestBase
 
     /**
      * @covers WindowsAzure\ServiceBus\ServiceBusRestProxy::getRule
+     * @covers WindowsAzure\ServiceBus\ServiceBusRestProxy::deleteRule
      */
     public function testRuleMayBeDeleted()
     {
@@ -708,7 +712,7 @@ class ServiceBusRestProxyTest extends ServiceBusRestProxyTestBase
     /**
      * @covers WindowsAzure\ServiceBus\ServiceBusRestProxy::getRule
      */
-    public function DisabletestRulesMayHaveActionAndFilter()
+    public function testRulesMayHaveActionAndFilter()
     {
         // Setup
         $topicName = 'testRulesMayHaveActionAndFilter';
@@ -724,22 +728,22 @@ class ServiceBusRestProxyTest extends ServiceBusRestProxyTestBase
             $topicName,
             $subscriptionInfo
         );
-        $expectedRuleOne = new RuleInfo('One');
+        $expectedRuleOne = new RuleInfo('one');
         $expectedRuleOne->withCorrelationIdFilter('my-id');
 
-        $expectedRuleTwo = new RuleInfo('Two');
+        $expectedRuleTwo = new RuleInfo('two');
         $expectedRuleTwo->withTrueFilter();
         
-        $expectedRuleThree = new RuleInfo('Three');
+        $expectedRuleThree = new RuleInfo('three');
         $expectedRuleThree->withFalseFilter();
 
-        $expectedRuleFour = new RuleInfo('Four');
+        $expectedRuleFour = new RuleInfo('four');
         $expectedRuleFour->withEmptyRuleAction();
 
-        $expectedRuleFive = new RuleInfo('Five'); 
+        $expectedRuleFive = new RuleInfo('five'); 
         $expectedRuleFive->withSqlRuleAction('SET x = 5');
 
-        $expectedRuleSix = new RuleInfo('Six');
+        $expectedRuleSix = new RuleInfo('six');
         $expectedRuleSix->withSqlExpressionFilter('x != 5');
         
 

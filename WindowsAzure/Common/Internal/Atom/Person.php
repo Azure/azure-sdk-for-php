@@ -27,7 +27,7 @@ use WindowsAzure\Common\Internal\Utilities;
 use WindowsAzure\Common\Internal\Resources;
 
 /**
- * This class constructs HTTP requests and receive HTTP responses for service bus.
+ * The generator library of ATOM library.
  *
  * @category  Microsoft
  * @package   WindowsAzure\ServiceBus\Internal\Atom

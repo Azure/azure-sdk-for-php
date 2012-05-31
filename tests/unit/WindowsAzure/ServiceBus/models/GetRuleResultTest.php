@@ -26,7 +26,7 @@ namespace Tests\Unit\WindowsAzure\ServiceBus\Models;
 use WindowsAzure\ServiceBus\Models\GetRuleResult;
 
 /**
- * Unit tests for class WrapAccessTokenResult
+ * Unit tests for class GetRuleResult
  *
  * @category  Microsoft
  * @package   Tests\Unit\WindowsAzure\Services\Queue\Models
@@ -50,6 +50,27 @@ class GetRuleResultTest extends \PHPUnit_Framework_TestCase
         
         // Assert
         $this->assertNotNull($getRuleResult);
+    }
+
+    /** 
+     * @covers WindowsAzure\ServiceBus\Models\GetRuleResult::getRuleInfo
+     * @covers WindowsAzure\ServiceBus\Models\GetRuleResult::setRuleInfo
+     */
+    public function testGetSetRuleInfo() {
+        // Setup
+        $expected = 'testRuleInfo';
+        $getRuleResult = new GetRuleResult();
+
+        // Test
+        $getRuleResult->setRuleInfo($expected);
+        $actual = $getRuleResult->getRuleInfo();
+
+        // Assert 
+        $this->assertEquals(
+            $expected,
+            $actual
+        );
+
     }
 
 }

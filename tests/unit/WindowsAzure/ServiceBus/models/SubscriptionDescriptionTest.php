@@ -52,6 +52,204 @@ class SubscriptionDescriptionTest extends \PHPUnit_Framework_TestCase
         $this->assertNotNull($subscriptionDescription);
     }
 
+    /** 
+     * @covers WindowsAzure\ServiceBus\Models\SubscriptionDescription::getLockDuration
+     * @covers WindowsAzure\ServiceBus\Models\SubscriptionDescription::setLockDuration
+     */
+    public function testGetSetLockDuration() {
+        // Setup
+        $expected = 'testLockDuration';
+        $subscriptionDescription = new SubscriptionDescription();
+
+        // Test
+        $subscriptionDescription->setLockDuration($expected);
+        $actual = $subscriptionDescription->getLockDuration();
+
+        // Assert 
+        $this->assertEquals(
+            $expected,
+            $actual
+        );
+
+    }
+
+
+    /** 
+     * @covers WindowsAzure\ServiceBus\Models\SubscriptionDescription::getRequiresSession
+     * @covers WindowsAzure\ServiceBus\Models\SubscriptionDescription::setRequiresSession
+     */
+    public function testGetSetRequiresSession() {
+        // Setup
+        $expected = 'testRequiresSession';
+        $subscriptionDescription = new SubscriptionDescription();
+
+        // Test
+        $subscriptionDescription->setRequiresSession($expected);
+        $actual = $subscriptionDescription->getRequiresSession();
+
+        // Assert 
+        $this->assertEquals(
+            $expected,
+            $actual
+        );
+
+    }
+
+
+    /** 
+     * @covers WindowsAzure\ServiceBus\Models\SubscriptionDescription::getDefaultMessageTimeToLive
+     * @covers WindowsAzure\ServiceBus\Models\SubscriptionDescription::setDefaultMessageTimeToLive
+     */
+    public function testGetSetDefaultMessageTimeToLive() {
+        // Setup
+        $expected = 'testDefaultMessageTimeToLive';
+        $subscriptionDescription = new SubscriptionDescription();
+
+        // Test
+        $subscriptionDescription->setDefaultMessageTimeToLive($expected);
+        $actual = $subscriptionDescription->getDefaultMessageTimeToLive();
+
+        // Assert 
+        $this->assertEquals(
+            $expected,
+            $actual
+        );
+
+    }
+
+
+    /** 
+     * @covers WindowsAzure\ServiceBus\Models\SubscriptionDescription::getDeadLetteringOnMessageExpiration
+     * @covers WindowsAzure\ServiceBus\Models\SubscriptionDescription::setDeadLetteringOnMessageExpiration
+     */
+    public function testGetSetDeadLetteringOnMessageExpiration() {
+        // Setup
+        $expected = 'testDeadLetteringOnMessageExpiration';
+        $subscriptionDescription = new SubscriptionDescription();
+
+        // Test
+        $subscriptionDescription->setDeadLetteringOnMessageExpiration($expected);
+        $actual = $subscriptionDescription->getDeadLetteringOnMessageExpiration();
+
+        // Assert 
+        $this->assertEquals(
+            $expected,
+            $actual
+        );
+
+    }
+
+
+    /** 
+     * @covers WindowsAzure\ServiceBus\Models\SubscriptionDescription::getDeadLetteringOnFilterEvaluationExceptions
+     * @covers WindowsAzure\ServiceBus\Models\SubscriptionDescription::setDeadLetteringOnFilterEvaluationExceptions
+     */
+    public function testGetSetDeadLetteringOnFilterEvaluationExceptions() {
+        // Setup
+        $expected = 'testDeadLetteringOnFilterEvaluationExceptions';
+        $subscriptionDescription = new SubscriptionDescription();
+
+        // Test
+        $subscriptionDescription->setDeadLetteringOnFilterEvaluationExceptions($expected);
+        $actual = $subscriptionDescription->getDeadLetteringOnFilterEvaluationExceptions();
+
+        // Assert 
+        $this->assertEquals(
+            $expected,
+            $actual
+        );
+
+    }
+
+
+    /** 
+     * @covers WindowsAzure\ServiceBus\Models\SubscriptionDescription::getDefaultRuleDescription
+     * @covers WindowsAzure\ServiceBus\Models\SubscriptionDescription::setDefaultRuleDescription
+     */
+    public function testGetSetDefaultRuleDescription() {
+        // Setup
+        $expected = 'testDefaultRuleDescription';
+        $subscriptionDescription = new SubscriptionDescription();
+
+        // Test
+        $subscriptionDescription->setDefaultRuleDescription($expected);
+        $actual = $subscriptionDescription->getDefaultRuleDescription();
+
+        // Assert 
+        $this->assertEquals(
+            $expected,
+            $actual
+        );
+
+    }
+
+
+    /** 
+     * @covers WindowsAzure\ServiceBus\Models\SubscriptionDescription::getMessageCount
+     * @covers WindowsAzure\ServiceBus\Models\SubscriptionDescription::setMessageCount
+     */
+    public function testGetSetMessageCount() {
+        // Setup
+        $expected = 'testMessageCount';
+        $subscriptionDescription = new SubscriptionDescription();
+
+        // Test
+        $subscriptionDescription->setMessageCount($expected);
+        $actual = $subscriptionDescription->getMessageCount();
+
+        // Assert 
+        $this->assertEquals(
+            $expected,
+            $actual
+        );
+
+    }
+
+
+    /** 
+     * @covers WindowsAzure\ServiceBus\Models\SubscriptionDescription::getMaxDeliveryCount
+     * @covers WindowsAzure\ServiceBus\Models\SubscriptionDescription::setMaxDeliveryCount
+     */
+    public function testGetSetMaxDeliveryCount() {
+        // Setup
+        $expected = 'testMaxDeliveryCount';
+        $subscriptionDescription = new SubscriptionDescription();
+
+        // Test
+        $subscriptionDescription->setMaxDeliveryCount($expected);
+        $actual = $subscriptionDescription->getMaxDeliveryCount();
+
+        // Assert 
+        $this->assertEquals(
+            $expected,
+            $actual
+        );
+
+    }
+
+
+    /** 
+     * @covers WindowsAzure\ServiceBus\Models\SubscriptionDescription::getEnableBatchedOperations
+     * @covers WindowsAzure\ServiceBus\Models\SubscriptionDescription::setEnableBatchedOperations
+     */
+    public function testGetSetEnableBatchedOperations() {
+        // Setup
+        $expected = 'testEnableBatchedOperations';
+        $subscriptionDescription = new SubscriptionDescription();
+
+        // Test
+        $subscriptionDescription->setEnableBatchedOperations($expected);
+        $actual = $subscriptionDescription->getEnableBatchedOperations();
+
+        // Assert 
+        $this->assertEquals(
+            $expected,
+            $actual
+        );
+
+    }
+
+
 }
 
 ?>

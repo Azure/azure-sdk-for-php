@@ -55,7 +55,7 @@ class Filter
      * 
      * @return string 
      */
-    public function getCompatiblityLevel()
+    public function getCompatibilityLevel()
     {
         return $this->_compatibilityLevel;
     }

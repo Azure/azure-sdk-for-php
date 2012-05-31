@@ -59,6 +59,27 @@ class RuleInfoTest extends \PHPUnit_Framework_TestCase
          
     }
 
+    /** 
+     * @covers WindowsAzure\ServiceBus\Models\RuleInfo::getRuleDescription
+     * @covers WindowsAzure\ServiceBus\Models\RuleInfo::setRuleDescription
+     */
+    public function testGetSetRuleDescription() {
+        // Setup
+        $expected = 'testRuleDescription';
+        $ruleInfo = new RuleInfo();
+
+        // Test
+        $ruleInfo->setRuleDescription($expected);
+        $actual = $ruleInfo->getRuleDescription();
+
+        // Assert 
+        $this->assertEquals(
+            $expected,
+            $actual
+        );
+
+    }
+
 }
 
 ?>

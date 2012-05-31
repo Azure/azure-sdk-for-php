@@ -470,7 +470,7 @@ class ServiceBusRestProxy extends ServiceRestProxy implements IServiceBus
     /**
      * Creates a topic with specified topic info.  
      * 
-     * @param  TopicInfo $topicInfo The information of the topic. 
+     * @param TopicInfo $topicInfo The information of the topic. 
      *
      * @return CreateTopicResult 
      */
@@ -691,10 +691,9 @@ class ServiceBusRestProxy extends ServiceRestProxy implements IServiceBus
      * 
      * @param string   $topicPath        The path of the topic.
      * @param string   $subscriptionName The name of the subscription. 
-     * @param RuleInfo $ruleDescription  The description of the rule.
+     * @param RuleInfo $ruleInfo         The information of the rule.
      *
-     * @throws Exception 
-     * @return CreateRuleResult;
+     * @return CreateRuleResult
      */
     public function createRule($topicPath, $subscriptionName, $ruleInfo)
     {
@@ -730,6 +729,9 @@ class ServiceBusRestProxy extends ServiceRestProxy implements IServiceBus
             Resources::XMLNS,
             Resources::SERVICE_BUS_NAMESPACE
         );
+        //$xmlWriter = new \XMLWriter();
+        //$xmlWriter->openMemory();
+        //$ruleInfo->writeXml(&$xmlWriter);
 
         $httpCallContext->setBody($entry->toXml());
         $httpCallContext->setPath($rulePath);

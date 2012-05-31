@@ -53,6 +53,28 @@ class SqlFilterTest extends \PHPUnit_Framework_TestCase
         $this->assertNotNull($sqlFilter);
     }
 
+    /** 
+     * @covers WindowsAzure\ServiceBus\Models\SqlFilter::getSqlExpression
+     * @covers WindowsAzure\ServiceBus\Models\SqlFilter::setSqlExpression
+     */
+    public function testGetSetSqlExpression() {
+        // Setup
+        $expected = 'testSqlExpression';
+        $sqlFilter = new SqlFilter();
+
+        // Test
+        $sqlFilter->setSqlExpression($expected);
+        $actual = $sqlFilter->getSqlExpression();
+
+        // Assert 
+        $this->assertEquals(
+            $expected,
+            $actual
+        );
+
+    }
+
+
 }
 
 ?>

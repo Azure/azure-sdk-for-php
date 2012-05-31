@@ -52,6 +52,49 @@ class ReceiveMessageOptionsTest extends \PHPUnit_Framework_TestCase
         $this->assertNotNull($receiveMessageOptions);
     }
 
+    /** 
+     * @covers WindowsAzure\ServiceBus\Models\ReceiveMessageOptions::getTimeout
+     * @covers WindowsAzure\ServiceBus\Models\ReceiveMessageOptions::setTimeout
+     */
+    public function testGetSetTimeout() {
+        // Setup
+        $expected = 'testTimeout';
+        $receiveMessageOptions = new ReceiveMessageOptions();
+
+        // Test
+        $receiveMessageOptions->setTimeout($expected);
+        $actual = $receiveMessageOptions->getTimeout();
+
+        // Assert 
+        $this->assertEquals(
+            $expected,
+            $actual
+        );
+
+    }
+
+
+    /** 
+     * @covers WindowsAzure\ServiceBus\Models\ReceiveMessageOptions::getReceiveMode
+     * @covers WindowsAzure\ServiceBus\Models\ReceiveMessageOptions::setReceiveMode
+     */
+    public function testGetSetReceiveMode() {
+        // Setup
+        $expected = 'testReceiveMode';
+        $receiveMessageOptions = new ReceiveMessageOptions();
+
+        // Test
+        $receiveMessageOptions->setReceiveMode($expected);
+        $actual = $receiveMessageOptions->getReceiveMode();
+
+        // Assert 
+        $this->assertEquals(
+            $expected,
+            $actual
+        );
+
+    }
+
 }
 
 ?>

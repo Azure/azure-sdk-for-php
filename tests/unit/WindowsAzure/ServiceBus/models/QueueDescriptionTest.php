@@ -52,6 +52,247 @@ class QueueDescriptionTest extends \PHPUnit_Framework_TestCase
         $this->assertNotNull($queueDescription);
     }
 
+    /** 
+     * @covers WindowsAzure\ServiceBus\Models\QueueDescription::getLockDuration
+     * @covers WindowsAzure\ServiceBus\Models\QueueDescription::setLockDuration
+     */
+    public function testGetSetLockDuration() {
+        // Setup
+        $expected = 'testLockDuration';
+        $queueDescription = new QueueDescription();
+
+        // Test
+        $queueDescription->setLockDuration($expected);
+        $actual = $queueDescription->getLockDuration();
+
+        // Assert 
+        $this->assertEquals(
+            $expected,
+            $actual
+        );
+
+    }
+
+
+    /** 
+     * @covers WindowsAzure\ServiceBus\Models\QueueDescription::getMaxSizeInMegabytes
+     * @covers WindowsAzure\ServiceBus\Models\QueueDescription::setMaxSizeInMegabytes
+     */
+    public function testGetSetMaxSizeInMegabytes() {
+        // Setup
+        $expected = 'testMaxSizeInMegabytes';
+        $queueDescription = new QueueDescription();
+
+        // Test
+        $queueDescription->setMaxSizeInMegabytes($expected);
+        $actual = $queueDescription->getMaxSizeInMegabytes();
+
+        // Assert 
+        $this->assertEquals(
+            $expected,
+            $actual
+        );
+
+    }
+
+
+    /** 
+     * @covers WindowsAzure\ServiceBus\Models\QueueDescription::getRequiresDuplicateDetection
+     * @covers WindowsAzure\ServiceBus\Models\QueueDescription::setRequiresDuplicateDetection
+     */
+    public function testGetSetRequiresDuplicateDetection() {
+        // Setup
+        $expected = 'testRequiresDuplicateDetection';
+        $queueDescription = new QueueDescription();
+
+        // Test
+        $queueDescription->setRequiresDuplicateDetection($expected);
+        $actual = $queueDescription->getRequiresDuplicateDetection();
+
+        // Assert 
+        $this->assertEquals(
+            $expected,
+            $actual
+        );
+
+    }
+
+
+    /** 
+     * @covers WindowsAzure\ServiceBus\Models\QueueDescription::getRequiresSession
+     * @covers WindowsAzure\ServiceBus\Models\QueueDescription::setRequiresSession
+     */
+    public function testGetSetRequiresSession() {
+        // Setup
+        $expected = 'testRequiresSession';
+        $queueDescription = new QueueDescription();
+
+        // Test
+        $queueDescription->setRequiresSession($expected);
+        $actual = $queueDescription->getRequiresSession();
+
+        // Assert 
+        $this->assertEquals(
+            $expected,
+            $actual
+        );
+
+    }
+
+
+    /** 
+     * @covers WindowsAzure\ServiceBus\Models\QueueDescription::getDefaultMessageTimeToLive
+     * @covers WindowsAzure\ServiceBus\Models\QueueDescription::setDefaultMessageTimeToLive
+     */
+    public function testGetSetDefaultMessageTimeToLive() {
+        // Setup
+        $expected = 'testDefaultMessageTimeToLive';
+        $queueDescription = new QueueDescription();
+
+        // Test
+        $queueDescription->setDefaultMessageTimeToLive($expected);
+        $actual = $queueDescription->getDefaultMessageTimeToLive();
+
+        // Assert 
+        $this->assertEquals(
+            $expected,
+            $actual
+        );
+
+    }
+
+
+    /** 
+     * @covers WindowsAzure\ServiceBus\Models\QueueDescription::getDeadLetteringOnMessageExpiration
+     * @covers WindowsAzure\ServiceBus\Models\QueueDescription::setDeadLetteringOnMessageExpiration
+     */
+    public function testGetSetDeadLetteringOnMessageExpiration() {
+        // Setup
+        $expected = 'testDeadLetteringOnMessageExpiration';
+        $queueDescription = new QueueDescription();
+
+        // Test
+        $queueDescription->setDeadLetteringOnMessageExpiration($expected);
+        $actual = $queueDescription->getDeadLetteringOnMessageExpiration();
+
+        // Assert 
+        $this->assertEquals(
+            $expected,
+            $actual
+        );
+
+    }
+
+
+    /** 
+     * @covers WindowsAzure\ServiceBus\Models\QueueDescription::getDuplicateDetectionHistoryTimeWindow
+     * @covers WindowsAzure\ServiceBus\Models\QueueDescription::setDuplicateDetectionHistoryTimeWindow
+     */
+    public function testGetSetDuplicateDetectionHistoryTimeWindow() {
+        // Setup
+        $expected = 'testDuplicateDetectionHistoryTimeWindow';
+        $queueDescription = new QueueDescription();
+
+        // Test
+        $queueDescription->setDuplicateDetectionHistoryTimeWindow($expected);
+        $actual = $queueDescription->getDuplicateDetectionHistoryTimeWindow();
+
+        // Assert 
+        $this->assertEquals(
+            $expected,
+            $actual
+        );
+
+    }
+
+
+    /** 
+     * @covers WindowsAzure\ServiceBus\Models\QueueDescription::getMaxDeliveryCount
+     * @covers WindowsAzure\ServiceBus\Models\QueueDescription::setMaxDeliveryCount
+     */
+    public function testGetSetMaxDeliveryCount() {
+        // Setup
+        $expected = 'testMaxDeliveryCount';
+        $queueDescription = new QueueDescription();
+
+        // Test
+        $queueDescription->setMaxDeliveryCount($expected);
+        $actual = $queueDescription->getMaxDeliveryCount();
+
+        // Assert 
+        $this->assertEquals(
+            $expected,
+            $actual
+        );
+
+    }
+
+
+    /** 
+     * @covers WindowsAzure\ServiceBus\Models\QueueDescription::getEnableBatchedOperations
+     * @covers WindowsAzure\ServiceBus\Models\QueueDescription::setEnableBatchedOperations
+     */
+    public function testGetSetEnableBatchedOperations() {
+        // Setup
+        $expected = 'testEnableBatchedOperations';
+        $queueDescription = new QueueDescription();
+
+        // Test
+        $queueDescription->setEnableBatchedOperations($expected);
+        $actual = $queueDescription->getEnableBatchedOperations();
+
+        // Assert 
+        $this->assertEquals(
+            $expected,
+            $actual
+        );
+
+    }
+
+
+    /** 
+     * @covers WindowsAzure\ServiceBus\Models\QueueDescription::getSizeInBytes
+     * @covers WindowsAzure\ServiceBus\Models\QueueDescription::setSizeInBytes
+     */
+    public function testGetSetSizeInBytes() {
+        // Setup
+        $expected = 'testSizeInBytes';
+        $queueDescription = new QueueDescription();
+
+        // Test
+        $queueDescription->setSizeInBytes($expected);
+        $actual = $queueDescription->getSizeInBytes();
+
+        // Assert 
+        $this->assertEquals(
+            $expected,
+            $actual
+        );
+
+    }
+
+
+    /** 
+     * @covers WindowsAzure\ServiceBus\Models\QueueDescription::getMessageCount
+     * @covers WindowsAzure\ServiceBus\Models\QueueDescription::setMessageCount
+     */
+    public function testGetSetMessageCount() {
+        // Setup
+        $expected = 'testMessageCount';
+        $queueDescription = new QueueDescription();
+
+        // Test
+        $queueDescription->setMessageCount($expected);
+        $actual = $queueDescription->getMessageCount();
+
+        // Assert 
+        $this->assertEquals(
+            $expected,
+            $actual
+        );
+
+    }
+
 }
 
 ?>

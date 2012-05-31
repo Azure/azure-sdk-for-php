@@ -15,7 +15,7 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   Tests\Unit\WindowsAzure\Services\Queue\Models
+ * @package   Tests\Unit\WindowsAzure\ServiceBus\Models
  * @author    Azure PHP SDK <azurephpsdk@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
@@ -27,10 +27,10 @@ use WindowsAzure\ServiceBus\Models\BrokeredMessage;
 use WindowsAzure\ServiceBus\Models\BrokerProperties;
 
 /**
- * Unit tests for class WrapAccessTokenResult
+ * Unit tests for class brokered message. 
  *
  * @category  Microsoft
- * @package   Tests\Unit\WindowsAzure\Services\Queue\Models
+ * @package   Tests\Unit\WindowsAzure\ServiceBus\Models
  * @author    Azure PHP SDK <azurephpsdk@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
@@ -71,6 +71,118 @@ class BrokeredMessageTest extends \PHPUnit_Framework_TestCase
             $actual
         );
     }
+
+    /** 
+     * @covers WindowsAzure\ServiceBus\Models\BrokeredMessage::getBrokerProperties
+     * @covers WindowsAzure\ServiceBus\Models\BrokeredMessage::setBrokerProperties
+     */
+    public function testGetSetBrokerProperties() {
+        // Setup
+        $expected = new BrokerProperties();
+        $brokeredMessage = new BrokeredMessage();
+
+        // Test
+        $brokeredMessage->setBrokerProperties($expected);
+        $actual = $brokeredMessage->getBrokerProperties();
+
+        // Assert 
+        $this->assertEquals(
+            $expected,
+            $actual
+        );
+
+    }
+
+
+    /** 
+     * @covers WindowsAzure\ServiceBus\Models\BrokeredMessage::getBody
+     * @covers WindowsAzure\ServiceBus\Models\BrokeredMessage::setBody
+     */
+    public function testGetSetBody() {
+        // Setup
+        $expected = 'testBody';
+        $brokeredMessage = new BrokeredMessage();
+
+        // Test
+        $brokeredMessage->setBody($expected);
+        $actual = $brokeredMessage->getBody();
+
+        // Assert 
+        $this->assertEquals(
+            $expected,
+            $actual
+        );
+
+    }
+
+
+    /** 
+     * @covers WindowsAzure\ServiceBus\Models\BrokeredMessage::getContentType
+     * @covers WindowsAzure\ServiceBus\Models\BrokeredMessage::setContentType
+     */
+    public function testGetSetContentType() {
+        // Setup
+        $expected = 'testContentType';
+        $brokeredMessage = new BrokeredMessage();
+
+        // Test
+        $brokeredMessage->setContentType($expected);
+        $actual = $brokeredMessage->getContentType();
+
+        // Assert 
+        $this->assertEquals(
+            $expected,
+            $actual
+        );
+
+    }
+
+
+    /** 
+     * @covers WindowsAzure\ServiceBus\Models\BrokeredMessage::getDate
+     * @covers WindowsAzure\ServiceBus\Models\BrokeredMessage::setDate
+     */
+    public function testGetSetDate() {
+        // Setup
+        $expected = 'testDate';
+        $brokeredMessage = new BrokeredMessage();
+
+        // Test
+        $brokeredMessage->setDate($expected);
+        $actual = $brokeredMessage->getDate();
+
+        // Assert 
+        $this->assertEquals(
+            $expected,
+            $actual
+        );
+
+    }
+
+
+    /** 
+     * @covers WindowsAzure\ServiceBus\Models\BrokeredMessage::getProperties
+     * @covers WindowsAzure\ServiceBus\Models\BrokeredMessage::setProperty
+     */
+    public function testGetSetCustomProperties() {
+        // Setup
+        $expected = 'testCustomPropertyValue';
+        $testCustomPropertyKey = 'testCustomPropertyKey';
+        $brokeredMessage = new BrokeredMessage();
+
+        // Test
+        $brokeredMessage->setProperty($testCustomPropertyKey, $expected);
+        $customProperties = $brokeredMessage->getProperties();
+        $actual = $customProperties[$testCustomPropertyKey];
+
+        // Assert 
+        $this->assertEquals(
+            $expected,
+            $actual
+        );
+
+    }
+
 
 }
 

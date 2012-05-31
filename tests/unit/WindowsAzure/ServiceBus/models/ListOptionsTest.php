@@ -53,6 +53,49 @@ class ListOptionsTest extends \PHPUnit_Framework_TestCase
         $this->assertNotNull($listOptions);
     }
 
+    /** 
+     * @covers WindowsAzure\ServiceBus\Models\ListOptions::getSkip
+     * @covers WindowsAzure\ServiceBus\Models\ListOptions::setSkip
+     */
+    public function testGetSetSkip() {
+        // Setup
+        $expected = 'testSkip';
+        $listOptions = new ListOptions();
+
+        // Test
+        $listOptions->setSkip($expected);
+        $actual = $listOptions->getSkip();
+
+        // Assert 
+        $this->assertEquals(
+            $expected,
+            $actual
+        );
+
+    }
+
+
+    /** 
+     * @covers WindowsAzure\ServiceBus\Models\ListOptions::getTop
+     * @covers WindowsAzure\ServiceBus\Models\ListOptions::setTop
+     */
+    public function testGetSetTop() {
+        // Setup
+        $expected = 'testTop';
+        $listOptions = new ListOptions();
+
+        // Test
+        $listOptions->setTop($expected);
+        $actual = $listOptions->getTop();
+
+        // Assert 
+        $this->assertEquals(
+            $expected,
+            $actual
+        );
+
+    }
+
 }
 
 ?>

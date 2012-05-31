@@ -26,7 +26,7 @@ namespace WindowsAzure\Common\Internal\Atom;
 use WindowsAzure\Common\Internal\Validate;
 
 /**
- * Thfor service bus.
+ * The source class of ATOM library.
  *
  * @category  Microsoft
  * @package   WindowsAzure\ServiceBus\Internal\Atom

@@ -228,7 +228,7 @@ class QueueDescription
      * 
      * @return boolean
      */
-    public function getRequeiresDuplicateDetection()
+    public function getRequiresDuplicateDetection()
     {
         return $this->_requiresDuplicateDetection;
     }

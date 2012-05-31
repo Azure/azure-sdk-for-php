@@ -52,6 +52,27 @@ class GetQueueResultTest extends \PHPUnit_Framework_TestCase
         $this->assertNotNull($getQueueResult);
     }
 
+    /** 
+     * @covers WindowsAzure\ServiceBus\Models\GetQueueResult::getQueueInfo
+     * @covers WindowsAzure\ServiceBus\Models\GetQueueResult::setQueueInfo
+     */
+    public function testGetSetQueueInfo() {
+        // Setup
+        $expected = 'testQueueInfo';
+        $getQueueResult = new GetQueueResult();
+
+        // Test
+        $getQueueResult->setQueueInfo($expected);
+        $actual = $getQueueResult->getQueueInfo();
+
+        // Assert 
+        $this->assertEquals(
+            $expected,
+            $actual
+        );
+
+    }
+
 }
 
 ?>

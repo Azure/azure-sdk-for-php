@@ -52,6 +52,138 @@ class TopicDescriptionTest extends \PHPUnit_Framework_TestCase
         // Assert
         $this->assertNotNull($topicDescription);
     }
+
+    /** 
+     * @covers WindowsAzure\ServiceBus\Models\TopicDescription::getDefaultMessageTimeToLive
+     * @covers WindowsAzure\ServiceBus\Models\TopicDescription::setDefaultMessageTimeToLive
+     */
+    public function testGetSetDefaultMessageTimeToLive() {
+        // Setup
+        $expected = 'testDefaultMessageTimeToLive';
+        $topicDescription = new TopicDescription();
+
+        // Test
+        $topicDescription->setDefaultMessageTimeToLive($expected);
+        $actual = $topicDescription->getDefaultMessageTimeToLive();
+
+        // Assert 
+        $this->assertEquals(
+            $expected,
+            $actual
+        );
+
+    }
+
+
+    /** 
+     * @covers WindowsAzure\ServiceBus\Models\TopicDescription::getMaxSizeInMegabytes
+     * @covers WindowsAzure\ServiceBus\Models\TopicDescription::setMaxSizeInMegabytes
+     */
+    public function testGetSetMaxSizeInMegabytes() {
+        // Setup
+        $expected = 'testMaxSizeInMegabytes';
+        $topicDescription = new TopicDescription();
+
+        // Test
+        $topicDescription->setMaxSizeInMegabytes($expected);
+        $actual = $topicDescription->getMaxSizeInMegabytes();
+
+        // Assert 
+        $this->assertEquals(
+            $expected,
+            $actual
+        );
+
+    }
+
+
+    /** 
+     * @covers WindowsAzure\ServiceBus\Models\TopicDescription::getRequiresDuplicateDetection
+     * @covers WindowsAzure\ServiceBus\Models\TopicDescription::setRequiresDuplicateDetection
+     */
+    public function testGetSetRequiresDuplicateDetection() {
+        // Setup
+        $expected = 'testRequiresDuplicateDetection';
+        $topicDescription = new TopicDescription();
+
+        // Test
+        $topicDescription->setRequiresDuplicateDetection($expected);
+        $actual = $topicDescription->getRequiresDuplicateDetection();
+
+        // Assert 
+        $this->assertEquals(
+            $expected,
+            $actual
+        );
+
+    }
+
+
+    /** 
+     * @covers WindowsAzure\ServiceBus\Models\TopicDescription::getDuplicateDetectionHistoryTimeWindow
+     * @covers WindowsAzure\ServiceBus\Models\TopicDescription::setDuplicateDetectionHistoryTimeWindow
+     */
+    public function testGetSetDuplicateDetectionHistoryTimeWindow() {
+        // Setup
+        $expected = 'testDuplicateDetectionHistoryTimeWindow';
+        $topicDescription = new TopicDescription();
+
+        // Test
+        $topicDescription->setDuplicateDetectionHistoryTimeWindow($expected);
+        $actual = $topicDescription->getDuplicateDetectionHistoryTimeWindow();
+
+        // Assert 
+        $this->assertEquals(
+            $expected,
+            $actual
+        );
+
+    }
+
+
+    /** 
+     * @covers WindowsAzure\ServiceBus\Models\TopicDescription::getEnableBatchedOperations
+     * @covers WindowsAzure\ServiceBus\Models\TopicDescription::setEnableBatchedOperations
+     */
+    public function testGetSetEnableBatchedOperations() {
+        // Setup
+        $expected = 'testEnableBatchedOperations';
+        $topicDescription = new TopicDescription();
+
+        // Test
+        $topicDescription->setEnableBatchedOperations($expected);
+        $actual = $topicDescription->getEnableBatchedOperations();
+
+        // Assert 
+        $this->assertEquals(
+            $expected,
+            $actual
+        );
+
+    }
+
+
+    /** 
+     * @covers WindowsAzure\ServiceBus\Models\TopicDescription::getSizeInBytes
+     * @covers WindowsAzure\ServiceBus\Models\TopicDescription::setSizeInBytes
+     */
+    public function testGetSetSizeInBytes() {
+        // Setup
+        $expected = 'testSizeInBytes';
+        $topicDescription = new TopicDescription();
+
+        // Test
+        $topicDescription->setSizeInBytes($expected);
+        $actual = $topicDescription->getSizeInBytes();
+
+        // Assert 
+        $this->assertEquals(
+            $expected,
+            $actual
+        );
+
+    }
+
 }
 
 ?>

@@ -27,7 +27,7 @@ use WindowsAzure\Common\Internal\Utilities;
 use WindowsAzure\Common\Internal\Resources;
 
 /**
- * This class constructs HTTP requests and receive HTTP responses for service bus.
+ * This link defines a reference from an entry or feed to a Web resource.
  *
  * @category  Microsoft
  * @package   WindowsAzure\ServiceBus\Internal\Atom
@@ -54,21 +54,43 @@ class AtomLink
      */
     protected $_href;
 
+    /**
+     * The rel attribute of the link.
+     *
+     * @var string
+     */
     protected $_rel;
 
+    /**
+     * The media type of the link. 
+     *
+     * @var string 
+     */
     protected $_type;
 
+    /**
+     * The language of HREF.
+     * 
+     * @var string 
+     */
     protected $_hreflang;
 
+    /**
+     * The titile of the link. 
+     * 
+     * @var string 
+     */ 
     protected $_title;
 
+    /**
+     * The length of the link. 
+     * 
+     * @var integer 
+     */
     protected $_length;
-
      
     /** 
      * Creates a AtomLink instance with specified text.
-     *
-     * @param string $text The text of the atomLink.
      */
     public function __construct()
     {
@@ -118,7 +140,7 @@ class AtomLink
     }
 
     /** 
-     * Gets the text of the atomLink. 
+     * Gets the href of the link. 
      *
      * @return string
      */
@@ -128,9 +150,9 @@ class AtomLink
     } 
 
     /**
-     * Sets the text of the atomLink.
+     * Sets the href of the link.
      * 
-     * @param string $text The text of the atomLink.
+     * @param string $href The href of the link.
      */
     public function setHref($href)
     {
@@ -138,7 +160,7 @@ class AtomLink
     }
 
     /**
-     * Gets the type of the atomLink. 
+     * Gets the rel of the atomLink. 
      * 
      * @return string
      */
@@ -148,60 +170,110 @@ class AtomLink
     }
 
     /**
-     * Sets the type of the atomLink. 
+     * Sets the rel of the link. 
      * 
-     * @param string $type The type of the atomLink.
+     * @param string $rel The rel of the atomLink.
      */
     public function setRel($rel)
     {
         $this->_rel = $rel;
     }
 
+    /**
+     * Gets the type of the link. 
+     *
+     * @return string 
+     */
     public function getType()
     {
         return $this->_type;
     }
 
+    /**
+     * Sets the type of the link.
+     * 
+     * @param string $type The type of the link. 
+     */
     public function setType($type)
     {
         $this->_type = $type;
     }
 
+    /**
+     * Gets the language of the href. 
+     * 
+     * @return string 
+     */
     public function getHrefLang()
     {
         return $this->_hrefLang;
     }
 
+    /**
+     * Sets the language of the href. 
+     * 
+     * @param string $hrefLang The language of the href.
+     */
     public function setHrefLang($hrefLang)
     {
         $this->_hrefLang = $hrefLang;
     }
 
+    /** 
+     * Gets the title of the link. 
+     * 
+     * @return string 
+     */
     public function getTitle()
     {
         return $this->_title;
     }
 
+    /**
+     * Sets the title of the link. 
+     * 
+     * @param string $title The title of the link. 
+     */
     public function setTitle($title)
     {
         $this->_title = $title;
     }
 
+    /**
+     * Gets the length of the link. 
+     * 
+     * @return string 
+     */
     public function getLength() 
     {
         return $this->_length;
     }
 
+    /**
+     * Sets the length of the link. 
+     * 
+     * @param string $length The length of the link. 
+     */
     public function setLength($length)
     {
         $this->_length = $length;
     }
 
+    /**     
+     * Gets the undefined content. 
+     *
+     * @return string 
+     */
     public function getUndefinedContent()
     {
         return $this->_undefinedContent;
     }
 
+    /**
+     * Sets the undefined content. 
+     * 
+     * @param string $undefinedContent The undefined content. 
+     */
     public function setUndefinedContent($undefinedContent)
     {
         $this->_undefinedContent = $undefinedContent;

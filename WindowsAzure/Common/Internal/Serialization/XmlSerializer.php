@@ -146,17 +146,17 @@ class XmlSerializer implements ISerializer
                 $variableValue = $method->invoke($targetObject);
                 if (!empty($variableValue))
                 {
-                if (gettype($variableValue) === 'object') {
-                    $xmlWriter->writeRaw(
-                        XmlSerializer::objectSerialize(
-                            $variableValue, $variableName, $instanceAttributes
-                        )
-                    );
-                }
-                else 
-                {
-                    $xmlWriter->writeElement($variableName, $variableValue);
-                } 
+                    if (gettype($variableValue) === 'object') {
+                        $xmlWriter->writeRaw(
+                            XmlSerializer::objectSerialize(
+                                $variableValue, $variableName, $instanceAttributes
+                            )
+                        );
+                    }
+                    else 
+                    {
+                        $xmlWriter->writeElement($variableName, $variableValue);
+                    } 
                 }
             }
         } 

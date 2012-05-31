@@ -53,6 +53,28 @@ class CreateTopicResultTest extends \PHPUnit_Framework_TestCase
         $this->assertNotNull($createTopicResult);
     }
 
+    /** 
+     * @covers WindowsAzure\ServiceBus\Models\CreateTopicResult::getTopicInfo
+     * @covers WindowsAzure\ServiceBus\Models\CreateTopicResult::setTopicInfo
+     */
+    public function testGetSetTopicInfo() {
+        // Setup
+        $expected = 'testTopicInfo';
+        $createTopicResult = new CreateTopicResult();
+
+        // Test
+        $createTopicResult->setTopicInfo($expected);
+        $actual = $createTopicResult->getTopicInfo();
+
+        // Assert 
+        $this->assertEquals(
+            $expected,
+            $actual
+        );
+
+    }
+
+
 }
 
 ?>

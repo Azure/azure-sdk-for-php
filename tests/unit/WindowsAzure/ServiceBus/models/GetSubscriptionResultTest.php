@@ -52,6 +52,27 @@ class GetSubscriptionResultTest extends \PHPUnit_Framework_TestCase
         $this->assertNotNull($getSubscriptionResult);
     }
 
+    /** 
+     * @covers WindowsAzure\ServiceBus\Models\GetSubscriptionResult::getSubscriptionInfo
+     * @covers WindowsAzure\ServiceBus\Models\GetSubscriptionResult::setSubscriptionInfo
+     */
+    public function testGetSetSubscriptionInfo() {
+        // Setup
+        $expected = 'testSubscriptionInfo';
+        $getSubscriptionResult = new GetSubscriptionResult();
+
+        // Test
+        $getSubscriptionResult->setSubscriptionInfo($expected);
+        $actual = $getSubscriptionResult->getSubscriptionInfo();
+
+        // Assert 
+        $this->assertEquals(
+            $expected,
+            $actual
+        );
+
+    }
+
 }
 
 ?>

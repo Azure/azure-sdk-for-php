@@ -53,6 +53,72 @@ class RuleDescriptionTest extends \PHPUnit_Framework_TestCase
         $this->assertNotNull($ruleDescription);
     }
 
+    /** 
+     * @covers WindowsAzure\ServiceBus\Models\RuleDescription::getFilter
+     * @covers WindowsAzure\ServiceBus\Models\RuleDescription::setFilter
+     */
+    public function testGetSetFilter() {
+        // Setup
+        $expected = 'testFilter';
+        $ruleDescription = new RuleDescription();
+
+        // Test
+        $ruleDescription->setFilter($expected);
+        $actual = $ruleDescription->getFilter();
+
+        // Assert 
+        $this->assertEquals(
+            $expected,
+            $actual
+        );
+
+    }
+
+
+    /** 
+     * @covers WindowsAzure\ServiceBus\Models\RuleDescription::getAction
+     * @covers WindowsAzure\ServiceBus\Models\RuleDescription::setAction
+     */
+    public function testGetSetAction() {
+        // Setup
+        $expected = 'testAction';
+        $ruleDescription = new RuleDescription();
+
+        // Test
+        $ruleDescription->setAction($expected);
+        $actual = $ruleDescription->getAction();
+
+        // Assert 
+        $this->assertEquals(
+            $expected,
+            $actual
+        );
+
+    }
+
+
+    /** 
+     * @covers WindowsAzure\ServiceBus\Models\RuleDescription::getName
+     * @covers WindowsAzure\ServiceBus\Models\RuleDescription::setName
+     */
+    public function testGetSetName() {
+        // Setup
+        $expected = 'testName';
+        $ruleDescription = new RuleDescription();
+
+        // Test
+        $ruleDescription->setName($expected);
+        $actual = $ruleDescription->getName();
+
+        // Assert 
+        $this->assertEquals(
+            $expected,
+            $actual
+        );
+
+    }
+
+
 }
 
 ?>
