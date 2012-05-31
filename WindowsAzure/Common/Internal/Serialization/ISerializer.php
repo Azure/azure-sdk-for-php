@@ -38,7 +38,21 @@ namespace WindowsAzure\Common\Internal\Serialization;
 interface ISerializer
 {
 
-    public function objectSerialize($targetObject, $rootName, $properties = null);
+    /** 
+     * Serialize an object into a XML.
+     * 
+     * @param Object $targetObject The target object to be serialized. 
+     * @param string $rootName     The name of the root.
+     */
+    public function objectSerialize($targetObject, $rootName);
+
+    /**
+     * Unserialize object. 
+     * 
+     * @param string $serialized. 
+     * 
+     * @return mixed
+     */
     public function objectUnserialize($serialized);
 
     /**

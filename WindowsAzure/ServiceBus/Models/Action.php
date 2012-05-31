@@ -21,6 +21,7 @@
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
 namespace WindowsAzure\ServiceBus\Models;
+use WindowsAzure\Common\Internal\Resources;
 
 /**
  * The base class for rule action.
@@ -36,6 +37,13 @@ namespace WindowsAzure\ServiceBus\Models;
 
 class Action
 {
+    /** 
+     * The attributes of the filter. 
+     *
+     * @var array
+     */ 
+    protected $_attributes;
+
     /**
      * The compatibility level.
      * 
@@ -48,6 +56,8 @@ class Action
      */
     public function __construct()
     {
+        $this->_attributes              = array();
+        $this->_attributes['xmlns:xsi'] = Resources::XSI_XML_NAMESPACE;
     }
 
     /**
@@ -55,7 +65,7 @@ class Action
      * 
      * @return string 
      */
-    public function getCompatiblityLevel()
+    public function getCompatibilityLevel()
     {
         return $this->_compatibilityLevel;
     }
@@ -68,6 +78,27 @@ class Action
     public function setCompatibilityLevel($compatibilityLevel)
     {
         $this->_compatibilityLevel = $compatibilityLevel;
+    }
+
+    /**
+     * Gets the attributes. 
+     *
+     * @return array
+     */ 
+    public function getAttributes()
+    {
+        return $this->_attributes;
+    }
+
+    /**
+     * Sets an attribute. 
+     *
+     * @param string $key   The key of the attribute.
+     * @param string $value The value of the attribute.
+     */
+    public function setAttribute($key, $value)
+    {
+        $this->_attributes[$key] = $value;
     }
 }
 ?>

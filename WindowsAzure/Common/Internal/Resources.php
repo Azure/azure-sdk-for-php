@@ -175,6 +175,7 @@ class Resources
     const ATOM_XML_NAMESPACE = 'http://www.w3.org/2005/Atom';
     const DS_XML_NAMESPACE   = 'http://schemas.microsoft.com/ado/2007/08/dataservices';
     const DSM_XML_NAMESPACE  = 'http://schemas.microsoft.com/ado/2007/08/dataservices/metadata';
+    const XSI_XML_NAMESPACE  = 'http://www.w3.org/2001/XMLSchema-instance';
     
 
     // Header values

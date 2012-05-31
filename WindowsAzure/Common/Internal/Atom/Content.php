@@ -129,24 +129,31 @@ class Content
     }
     
     /** 
-     * Gets an XML representing the content. 
+     * Writes an XML representing the content. 
      * 
-     * return string
+     * @param \XMLWriter $xmlWriter The XML writer.
      */
-    public function toXml()
+    public function writeXml($xmlWriter)
     {
-        $xmlWriter = new \XMLWriter();
-        $xmlWriter->openMemory();
         $xmlWriter->startElement('atom:content');
+        $this->writeInnerXml($xmlWriter);
+        $xmlWriter->endElement();
+    }
+
+    /** 
+     * Writes an inner XML representing the content. 
+     * 
+     * @param \XMLWriter $xmlWriter The XML writer.
+     */
+    public function writeInnerXml($xmlWriter)
+    {
         if (!empty($this->_type))
         {
             $xmlWriter->writeAttribute('type', $this->_type);
         }
 
         $xmlWriter->writeRaw($this->_text);
-        $xmlWriter->endElement();
 
-        return $xmlWriter->outputMemory();
     }
 }
 ?>

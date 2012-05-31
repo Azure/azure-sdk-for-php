@@ -380,7 +380,11 @@ class ServiceBusRestProxy extends ServiceRestProxy implements IServiceBus
             Resources::SERVICE_BUS_NAMESPACE
         );
 
-        $httpCallContext->setBody($entry->toXml());
+        $xmlWriter = new \XMLWriter();
+        $xmlWriter->openMemory();
+        $entry->writeXml($xmlWriter); 
+        $httpCallContext->setBody($xmlWriter->outputMemory());
+
         $response = $this->sendContext($httpCallContext);
         $createQueueResult = new CreateQueueResult();
         $createQueueResult->parseXml($response->getBody());
@@ -495,9 +499,20 @@ class ServiceBusRestProxy extends ServiceRestProxy implements IServiceBus
         $content = new Content($topicDescriptionXml);
         $content->setType(Resources::XML_CONTENT_TYPE);
         $entry->setContent($content); 
-        $entry->setAttribute('xmlns:atom', 'http://www.w3.org/2005/Atom');
-        $entry->setAttribute('xmlns', 'http://schemas.microsoft.com/netservices/2010/10/servicebus/connect');
-        $httpCallContext->setBody($entry->toXml());
+        $entry->setAttribute(
+            Resources::XMLNS_ATOM, 
+            Resources::ATOM_NAMESPACE
+        );
+
+        $entry->setAttribute(
+            Resources::XMLNS,
+            Resources::SERVICE_BUS_NAMESPACE
+        );
+
+        $xmlWriter = new \XMLWriter();
+        $xmlWriter->openMemory();
+        $entry->writeXml($xmlWriter); 
+        $httpCallContext->setBody($xmlWriter->outputMemory());
 
         $response = $this->sendContext($httpCallContext);
         $createTopicResult = new CreateTopicResult();
@@ -607,7 +622,10 @@ class ServiceBusRestProxy extends ServiceRestProxy implements IServiceBus
             Resources::SERVICE_BUS_NAMESPACE
         );
 
-        $httpCallContext->setBody($entry->toXml());
+        $xmlWriter = new \XMLWriter();
+        $xmlWriter->openMemory();
+        $entry->writeXml($xmlWriter); 
+        $httpCallContext->setBody($xmlWriter->outputMemory());
 
         $response                 = $this->sendContext($httpCallContext);
         $createSubscriptionResult = new CreateSubscriptionResult();
@@ -729,11 +747,12 @@ class ServiceBusRestProxy extends ServiceRestProxy implements IServiceBus
             Resources::XMLNS,
             Resources::SERVICE_BUS_NAMESPACE
         );
-        //$xmlWriter = new \XMLWriter();
-        //$xmlWriter->openMemory();
-        //$ruleInfo->writeXml(&$xmlWriter);
 
-        $httpCallContext->setBody($entry->toXml());
+        $xmlWriter = new \XMLWriter();
+        $xmlWriter->openMemory();
+        $entry->writeXml($xmlWriter); 
+        $httpCallContext->setBody($xmlWriter->outputMemory());
+
         $httpCallContext->setPath($rulePath);
         $response         = $this->sendContext($httpCallContext);
         $createRuleResult = new CreateRuleResult();

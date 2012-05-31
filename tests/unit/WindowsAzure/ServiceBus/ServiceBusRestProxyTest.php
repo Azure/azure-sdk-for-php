@@ -364,12 +364,6 @@ class ServiceBusRestProxyTest extends ServiceBusRestProxyTestBase
             1,
             count($listTopicsResult->getTopicInfo())
         );
-
-        $this->assertEquals(
-            0,
-            count($listTopicsResult2->getTopicInfo())
-        );
- 
     }
 
     /**
@@ -729,7 +723,7 @@ class ServiceBusRestProxyTest extends ServiceBusRestProxyTestBase
             $subscriptionInfo
         );
         $expectedRuleOne = new RuleInfo('one');
-        $expectedRuleOne->withCorrelationIdFilter('my-id');
+        $expectedRuleOne->withCorrelationFilter('my-id');
 
         $expectedRuleTwo = new RuleInfo('two');
         $expectedRuleTwo->withTrueFilter();
@@ -744,9 +738,8 @@ class ServiceBusRestProxyTest extends ServiceBusRestProxyTestBase
         $expectedRuleFive->withSqlRuleAction('SET x = 5');
 
         $expectedRuleSix = new RuleInfo('six');
-        $expectedRuleSix->withSqlExpressionFilter('x != 5');
+        $expectedRuleSix->withSqlFilter('x != 5');
         
-
         // Test
         $actualRuleOne = $this->restProxy->createRule(
             $topicName, 
@@ -789,7 +782,7 @@ class ServiceBusRestProxyTest extends ServiceBusRestProxyTestBase
         $this->assertNotNull($createSubscriptionResult);
         
         $this->assertInstanceOf(
-            'WindowsAzure\ServiceBus\Models\CorrelationIdFilter',
+            'WindowsAzure\ServiceBus\Models\CorrelationFilter',
             $actualRuleOne->getFilter()
         );
 
@@ -805,16 +798,16 @@ class ServiceBusRestProxyTest extends ServiceBusRestProxyTestBase
 
         $this->assertInstanceOf(
             'WindowsAzure\ServiceBus\Models\EmptyRuleAction',
-            $actualRuleFour->getFilter()
+            $actualRuleFour->getAction()
         );
 
         $this->assertInstanceOf(
             'WindowsAzure\ServiceBus\Models\SqlRuleAction',
-            $actualRuleFive->getFilter()
+            $actualRuleFive->getAction()
         );
                   
         $this->assertInstanceOf(
-            'WindowsAzure\ServiceBus\Models\SqlExpressFilter',
+            'WindowsAzure\ServiceBus\Models\SqlFilter',
             $actualRuleSix->getFilter()
         );
     }

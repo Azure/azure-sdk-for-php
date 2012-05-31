@@ -187,15 +187,24 @@ class Category
     }
     
     /** 
-     * Gets an XML representing the category. 
+     * Writes an XML representing the category. 
      * 
-     * return string
+     * @param \XMLWriter $xmlWriter The XML writer.
      */
-    public function toXml()
+    public function writeXml($xmlWriter)
     {
-        $xmlWriter = new \XMLWriter();
-        $xmlWriter->openMemory();
         $xmlWriter->startElement('atom:category');
+        $this->writeInnerXml($xmlWriter);
+        $xmlWriter->endElement();
+    }
+
+    /** 
+     * Writes an XML representing the category. 
+     * 
+     * @param \XMLWriter $xmlWriter The XML writer.
+     */
+    public function writeInnerXml($xmlWriter)
+    {
         if (!empty($this->_term))
         {
             $xmlWriter->WriteAttribute('term', $this->_term);
@@ -216,9 +225,6 @@ class Category
             $xmlWriter->WriteRaw($this->_content);
         }
 
-        $xmlWriter->endElement();
-
-        return $xmlWriter->outputMemory();
     }
 }
 ?>

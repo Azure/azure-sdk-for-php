@@ -21,6 +21,7 @@
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
 namespace WindowsAzure\ServiceBus\Models;
+use WindowsAzure\Common\Internal\Resources;
 
 /**
  * The base class for rule filter.
@@ -36,6 +37,13 @@ namespace WindowsAzure\ServiceBus\Models;
 
 class Filter 
 {
+    /** 
+     * The attributes of the filter. 
+     *
+     * @var array
+     */ 
+    protected $_attributes;
+
     /**
      * The compatibility level of the filter. 
      * 
@@ -48,7 +56,54 @@ class Filter
      */
     public function __construct()
     {
+        $this->_attributes              = array();
+        $this->_attributes['xmlns:xsi'] = Resources::XSI_XML_NAMESPACE;
     }
+
+    public static function create($filterXmlString)
+    {
+        echo $filterXmlString;
+        echo '\n';
+        $filterXml = simplexml_load_string($filterXmlString);
+        $attributes = (array)$filterXml->attributes();
+
+        if (array_key_exists('i:type', $attributes))
+        {
+            $type = (string)$attributes['i:type'];
+            if ($type === 'TrueFilter')
+            {
+                return new TrueFilter();
+            }
+
+            if ($type === 'FalseFilter')
+            {
+                return new FalseFilter();
+            }
+
+            return new Filter();
+        }
+    }
+
+    /**
+     * Gets the attributes. 
+     *
+     * @return array
+     */ 
+    public function getAttributes()
+    {
+        return $this->_attributes;
+    }
+
+    /**
+     * Sets an attribute. 
+     *
+     * @param string $key   The key of the attribute.
+     * @param string $value The value of the attribute.
+     */
+    public function setAttribute($key, $value)
+    {
+        $this->_attributes[$key] = $value;
+    }   
 
     /**
      * Gets the compatibility level. 

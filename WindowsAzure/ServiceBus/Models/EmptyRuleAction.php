@@ -36,5 +36,14 @@ namespace WindowsAzure\ServiceBus\Models;
 
 class EmptyRuleAction extends Action
 {
+    /** 
+     * Creates an empty rule action with default parameter. 
+     */
+    public function __construct()
+    {
+        parent::__construct();
+        $this->_attributes['xsi:type'] = 'EmptyRuleAction';
+    }
+
 }
 ?>

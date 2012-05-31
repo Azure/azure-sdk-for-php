@@ -153,18 +153,25 @@ class Person
     {
         $this->_email = $email;
     }
+    /** 
+     * Writes an XML representing the person. 
+     * 
+     * @param \XMLWriter $xmlWriter The XML writer.
+     */
+    public function writeXml($xmlWriter)
+    {
+        $xmlWriter->startElement('<atom:person>');
+        $this->writeInnerXml($xmlWriter);
+        $xmlWriter->endElement();
+    }
 
     /** 
-     * Gets an XML representing the person. 
+     * Writes a inner XML representing the person. 
      * 
-     * return string
+     * @param \XMLWriter $xmlWriter The XML writer.
      */
-    public function toXml()
+    public function writeInnerXml($xmlWriter)
     {
-        $xmlWriter = new XMLWriter();
-
-        $xmlWriter->openMemory();
-        $xmlWriter->startElement('<atom:person>');
         $xmlWriter->writeElement('<atom:name>', $this->_name);
         if (!empty($this->_uri))
         {
@@ -175,10 +182,6 @@ class Person
         {
             $xmlWriter->writeElement('atom:email', $this->_email);
         }
-        
-        $xmlWriter->endElement();
-        
-        return $xmlWriter->outputMemory();
     }
 }
 ?>

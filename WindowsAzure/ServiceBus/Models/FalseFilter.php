@@ -37,5 +37,14 @@ use WindowsAzure\ServiceBus\Models\Filter;
 
 class FalseFilter extends Filter 
 {
+    /** 
+     * Creates a filter with default parameter. 
+     */
+    public function __construct()
+    {
+        parent::__construct();
+        $this->_attributes['xsi:type'] = 'FalseFilter';
+    }
+
 }
 ?>

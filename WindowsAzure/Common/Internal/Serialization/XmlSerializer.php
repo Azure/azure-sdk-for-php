@@ -102,11 +102,11 @@ class XmlSerializer implements ISerializer
         }
     }
 
-    private function _getInstanceProperty($targetObject, $methodArray)
+    private function _getInstanceAttributes($targetObject, $methodArray)
     {
         foreach ($methodArray as $method)
         {
-            if ($method->name == 'getProperties')
+            if ($method->name == 'getAttributes')
             {
                 $classProperty = $method->invoke($targetObject);
                 return $classProperty;
@@ -115,7 +115,7 @@ class XmlSerializer implements ISerializer
         return null;
     }
 
-    public function objectSerialize($targetObject, $rootName, $attributes = null)
+    public function objectSerialize($targetObject, $rootName)
     {
         $xmlWriter = new \XmlWriter();
         $xmlWriter->openMemory(); 
@@ -124,7 +124,7 @@ class XmlSerializer implements ISerializer
 
         $methodArray = $reflectionClass->getMethods();
         
-        $instanceAttributes = self::_getInstanceProperty(
+        $attributes = self::_getInstanceAttributes(
             $targetObject, 
             $methodArray
         );
@@ -140,8 +140,7 @@ class XmlSerializer implements ISerializer
 
         foreach ($methodArray as $method)
         {
-            if ((strpos($method->name, 'get') === 0) && $method->isPublic())
-            {
+            if ((strpos($method->name, 'get') === 0) && $method->isPublic() && ($method->name != 'getAttributes')) {
                 $variableName  = substr($method->name, 3);
                 $variableValue = $method->invoke($targetObject);
                 if (!empty($variableValue))
@@ -149,7 +148,7 @@ class XmlSerializer implements ISerializer
                     if (gettype($variableValue) === 'object') {
                         $xmlWriter->writeRaw(
                             XmlSerializer::objectSerialize(
-                                $variableValue, $variableName, $instanceAttributes
+                                $variableValue, $variableName
                             )
                         );
                     }

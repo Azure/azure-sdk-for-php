@@ -52,6 +52,8 @@ class SqlRuleAction extends Action
      */
     public function __construct()
     {   
+        parent::__construct();
+        $this->_attributes['xsi:type'] = 'SqlRuleAction';
     }
 
     /**

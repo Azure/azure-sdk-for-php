@@ -45,6 +45,15 @@ class CorrelationFilter extends Filter
      */
     private $_correlationId;
 
+    /** 
+     * Creates a correlation filter with default parameter. 
+     */
+    public function __construct()
+    {
+        parent::__construct();
+        $this->_attributes['xsi:type'] = 'CorrelationFilter';
+    }
+
     /**
      * Gets the ID of the correlation. 
      *

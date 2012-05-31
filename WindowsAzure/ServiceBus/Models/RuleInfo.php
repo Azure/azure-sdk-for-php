@@ -110,6 +110,46 @@ class RuleInfo extends Entry
     }
 
     /**
+     * Gets the filter. 
+     *
+     * @return Filter
+     */
+    public function getFilter()
+    {
+        return $this->_ruleDescription->getFilter();
+    }
+
+    /**
+     * Sets the filter. 
+     * 
+     * @param Filter $filter The filter. 
+     */
+    public function setFilter($filter)
+    {
+        $this->_ruleDescription->setFilter($filter);
+    }
+
+    /**
+     * Gets the action. 
+     * 
+     * @return Action
+     */
+    public function getAction()
+    {
+        return $this->_ruleDescription->getAction();
+    }
+
+    /**
+     * Sets the action. 
+     * 
+     * @param Action $action The action. 
+     */
+    public function setAction($action)
+    {
+        $this->_ruleDescription->setAction($action);
+    }
+
+    /**
      * Gets the description of the rule. 
      * 
      * @return RuleDescription
@@ -138,7 +178,7 @@ class RuleInfo extends Entry
      * 
      * @return none 
      */
-    public function withCorrelationIdFilter($correlationId)
+    public function withCorrelationFilter($correlationId)
     {
         $filter = new CorrelationFilter();
         $filter->setCorrelationId($correlationId);
@@ -152,7 +192,7 @@ class RuleInfo extends Entry
      * 
      * @return none 
      */
-    public function withSqlExpressionFilter($sqlExpression)
+    public function withSqlFilter($sqlExpression)
     {
         $filter = new SqlFilter();
         $filter->setSqlExpression($sqlExpression);
@@ -191,6 +231,7 @@ class RuleInfo extends Entry
     public function withEmptyRuleAction()
     {
         $action = new EmptyRuleAction();
+        $action->setCompatibilityLevel(20);
         $this->_ruleDescription->setAction($action);
     }
 
@@ -202,6 +243,7 @@ class RuleInfo extends Entry
     public function withSqlRuleAction($sqlExpression)
     {
         $action = new SqlRuleAction();
+        $action->setCompatibilityLevel(20);
         $action->setSqlExpression($sqlExpression);
         $this->_ruleDescription->setAction($action);
     }

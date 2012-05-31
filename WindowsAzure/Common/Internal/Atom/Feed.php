@@ -568,23 +568,28 @@ class Feed
     {
         $this->_content = $content;
     }
+    /** 
+     * Writes an XML representing the feed object.
+     * 
+     * @param \XMLWriter $xmlWriter The XML writer.
+     * 
+     */
+    public function writeXml($xmlWriter)
+    {
+        $xmlWriter->startElement('<atom:feed>');
+        $this->writeInnerXml($xmlWriter);
+        $xmlWriter->endElement();
+    }
 
     /** 
-     * Gets an XML representing the feed object.
+     * Writes an XML representing the feed object.
      * 
-     * @param boolean $writeNamespace Whether to write the XmlNamespace.
+     * @param \XMLWriter $xmlWriter The XML writer.
      * 
-     * @return string 
      */
-    public function toXml()
+    public function writeInnerXml($xmlWriter)
     {
-        $xmlWriter = new XMLWriter();
-        
-        $xmlWriter->openMemory();
-        $xmlWriter->setIndent(true);
-        $xmlWriter->startElement('<atom:feed>');
 
-        $xmlWriter->writeAttribute('xmlns:atom', 'http://www.w3.org/2005/Atom');
         if (!is_null($this->_attributes))
         {
             if (is_array($this->_attributes))
@@ -598,7 +603,9 @@ class Feed
          
         if (!is_null($this->_author))
         {
-            $xmlWriter->writeElement('author', $this->_author->toXml());
+            $xmlWriter->startElement('atom:author');
+            $this->_author->writeInnerXml($xmlWriter);
+            $xmlWriter->endElement();
         } 
 
         if (!is_null($this->_category))
@@ -607,12 +614,12 @@ class Feed
             {
                 foreach ($this->_category as $category)
                 {
-                    $xmlWriter->writeElement('category', $category->toXml());
+                    $category->writeXml($xmlWriter);
                 }
             }
             else
             {
-                $xmlWriter->writeElement('category', $this->_category->toXml());
+                $category->writeXml($xmlWriter);
             }
         }
 
@@ -622,68 +629,69 @@ class Feed
             {
                 foreach ($this->_contributor as $contributor)
                 {
-                    $xmlWriter->writeElement('contributor', $contributor->toXml());
+                    $xmlWriter->startElement('atom:contributor');
+                    $contributor->writeInnerXml($xmlWriter);
+                    $xmlWriter->endElement();
                 }
             }
             else
             {
-                $xmlWriter->writeElement('contributor', $this->_contributor->toXml());
+                $xmlWriter->startElement('atom:contributor');
+                $contributor->writeInnerXml($xmlWriter);
+                $xmlWriter->endElement();
             }
         }
 
         if (!is_null($this->_generator))
         {
-            $xmlWriter->writeElement('generator', $this->_generator->toXml());
+            $this->_generator->writeXml($xmlWriter);
         } 
 
         if (!is_null($this->_icon))
         {
-            $xmlWriter->writeElement('icon', $this->_icon);
+            $xmlWriter->writeElement('atom:icon', $this->_icon);
         }
 
         if (!is_null($this->_logo))
         {
-            $xmlWriter->writeElement('logo', $this->_logo);
+            $xmlWriter->writeElement('atom:logo', $this->_logo);
         }
 
         if (!is_null($this->_id))
         {
-            $xmlWriter->writeElement('id', $this->_id);
+            $xmlWriter->writeElement('atom:id', $this->_id);
         }
 
         if (!is_null($this->_link))
         {
-            $xmlWriter->writeElement('link', $this->_link);
+            $xmlWriter->writeElement('atom:link', $this->_link);
         }
 
         if (!is_null($this->_rights))
         {
-            $xmlWriter->writeElement('rights', $this->_rights);
+            $xmlWriter->writeElement('atom:rights', $this->_rights);
         }
 
         if (!is_null($this->_subtitle))
         {
-            $xmlWriter->writeElement('subtitle', $this->_subtitle);
+            $xmlWriter->writeElement('atom:subtitle', $this->_subtitle);
         }
         
         if (!is_null($this->_title))
         {
-            $xmlWriter->writeElement('title', $this->_title);
+            $xmlWriter->writeElement('atom:title', $this->_title);
         }
 
         if (!is_null($this->_updated))
         {
-            $xmlWriter->writeElement('updated', $this->_updated);
+            $xmlWriter->writeElement('atom:updated', $this->_updated);
         }
 
         if (!is_null($this->_content))
         {
-            $xmlWrilter->WriteRaw($this->_content->toXml());
+            $this->_content->writeXml($xmlWriter);
         }
 
-        $xmlWriter->endElement();
-
-        return $xmlWriter->outputMemory();
     }
 
 }

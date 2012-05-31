@@ -78,20 +78,75 @@ class RuleDescription
     {
         $ruleDescription = new RuleDescription();
         $root = simplexml_load_string($ruleDescriptionXml);
+        $nameSpaces = $root->getNameSpaces();
         $ruleDescriptionArray = (array)$root;
         if (array_key_exists('Filter', $ruleDescriptionArray))
         {
-            $ruleDescription->setFilter($ruleDescriptionArray['Filter']);
+            $filterItem = $ruleDescriptionArray['Filter'];
+            $filterAttributes = $filterItem->attributes('i', true);
+            $filterType = (string)$filterAttributes['type'];
+            $filter = null; 
+            switch ($filterType) {
+                case 'TrueFilter'  :
+                    $filter = new TrueFilter();
+                    break;
+
+                case 'FalseFilter' :
+                    $filter = new FalseFilter();
+                    break;
+
+                case 'CorrelationFilter' :
+                    $filter = new CorrelationFilter();
+
+                    if (array_key_exists('CorrelationId', $filterItem)) {   
+                        $filter->setCorrelationId((string)$filterItem['CorrelationId']);
+                    }
+                    break;
+
+                case 'SqlFilter' :
+                    $filter = new SqlFilter();
+
+                    if (array_key_exists('SqlExpression', $filterItem)) {   
+                        $filter->setSqlExpression((string)$filterItem['SqlExpression']);
+                    }
+                    break;
+               
+                default :
+                    $filter = new Filter();                
+            }
+
+            $ruleDescription->setFilter($filter);
         } 
 
         if (array_key_exists('Action', $ruleDescriptionArray))
         {
-            $ruleDescription->setAction($ruleDescriptionArray['Action']);
+            $actionItem = $ruleDescriptionArray['Action'];
+            $actionAttributes = $actionItem->attributes('i', true);
+            $actionType = (string)$actionAttributes['type'];
+            $action = null; 
+            switch ($actionType) {
+                case 'EmptyRuleAction'  :
+                    $action = new EmptyRuleAction();
+                    break;
+
+                case 'SqlRuleAction' :
+                    $action = new SqlRuleAction();
+
+                    if (array_key_exists('SqlExpression', $actionItem)) {   
+                        $action->setSqlExpression((string)$actionItem['SqlExpression']);
+                    }
+                    break;
+               
+                default :
+                    $action = new Action();                
+            }
+
+            $ruleDescription->setAction($action);
         } 
 
         if (array_key_exists('Name', $ruleDescriptionArray))
         {
-            $ruleDescription->setName($ruleDescriptionArray['Name']);
+            $ruleDescription->setName((string)$ruleDescriptionArray['Name']);
         } 
        
         return $ruleDescription;
@@ -125,6 +180,7 @@ class RuleDescription
     public function getAction()
     {
         return $this->_action;
+
     }
 
     /**

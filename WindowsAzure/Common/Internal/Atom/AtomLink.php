@@ -106,32 +106,32 @@ class AtomLink
         $atomLinkXml = simplexml_load_string($xmlString);
         $attributes = (array)$atomLinkXml->attributes();
 
-        if (array_key_exists('href', $attributes))
+        if (!empty($attributes['href']))
         {
             $this->_href = (string)$attributes['href'];
         }
 
-        if (array_key_exists('rel', $attributes))
+        if (!empty($attributes['rel']))
         {
             $this->_rel = (string)$attributes['rel'];
         }
 
-        if (array_key_exists('type', $attributes))
+        if (!empty($attributes['type']))
         {
             $this->_type = (string)$attributes['type'];
         }
 
-        if (array_key_exists('hreflang', $attributes))
+        if (!empty($attributes['hreflang']))
         {
             $this->_hreflang = (string)$attributes['hreflang'];
         }
 
-        if (array_key_exists('title', $attributes))
+        if (!empty($attributes['title']))
         {
             $this->_title = (string)$attributes['title'];
         }
 
-        if (array_key_exists('length', $attributes))
+        if (!empty($attributes['length']))
         {
             $this->_length = (integer)$attributes['length'];
         }
@@ -280,15 +280,24 @@ class AtomLink
     }
 
     /** 
-     * Gets an XML representing the atomLink. 
+     * Writes an XML representing the ATOM link item.
      * 
-     * return string
+     * @param \XMLWriter $xmlWriter The xml writer.
      */
-    public function toXml()
+    public function writeXml($xmlWriter)
     {
-        $xmlWriter = new \XMLWriter();
-        $xmlWriter->openMemory();
-        $xmlWriter->startElement('atom:atomLink');
+        $xmlWriter->startElement('atom:link');
+        $this->writeInnerXml($xmlWriter);
+        $xmlWriter->endElement();
+    }
+
+    /** 
+     * Writes the inner XML representing the ATOM link item.
+     * 
+     * @param \XMLWriter $xmlWriter The xml writer.
+     */
+    public function writeInnerXml($xmlWriter)
+    {
         if (!empty($this->_href))
         {
             $xmlWriter->writeAttribute('href', $this->_href);
@@ -324,9 +333,6 @@ class AtomLink
             $xmlWriter->writeRaw($this->_undefinedContent);
         }
 
-        $xmlWriter->endElement();
-
-        return $xmlWriter->outputMemory();
     }
 }
 ?>

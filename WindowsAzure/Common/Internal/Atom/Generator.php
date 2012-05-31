@@ -69,11 +69,11 @@ class Generator
         $generatorXml = new \SimpleXMLElement($xmlString);
         $generatorArray = (array)generatorXml;
         $attributes = $generatorXml->attributes();
-        if (array_key_exists('uri', $attributes)) {
+        if (!empty($attributes['uri'])) { 
             $this->_uri = (string)$attributes['uri'];
         }
 
-        if (array_key_exists('version', $attributes)) {
+        if (!empty($attributes['version'])) {
             $this->_version = (string)$attributes['version'];
         }
 
@@ -155,15 +155,12 @@ class Generator
     }
 
     /** 
-     * Gets an XML representing the generator. 
+     * Writes an XML representing the generator. 
      * 
-     * return string
+     * @param \XMLWriter $xmlWriter The XML writer.
      */
-    public function toXml()
+    public function writeXml($xmlWriter)
     {
-        $xmlWriter = new XMLWriter();
-        
-        $xmlWriter->openMemory();
         $xmlWriter->startElement('atom:category');
         if (!empty($this->_uri))
         {
@@ -178,8 +175,6 @@ class Generator
         $xmlWriter->writeRaw($this->_text);
 
         $xmlWriter->endElement();
-        
-        return $xmlWriter->outputMemory();
     }
 }
 ?>
