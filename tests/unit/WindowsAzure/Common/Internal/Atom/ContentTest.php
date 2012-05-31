@@ -102,7 +102,7 @@ class ContentTest extends \PHPUnit_Framework_TestCase
     } 
 
     /**
-     * @covers WindowsAzure\Common\Internal\Atom\Content::toXml
+     * @covers WindowsAzure\Common\Internal\Atom\Content::writeXml
      */
     public function testToXml()
     {
@@ -115,7 +115,10 @@ class ContentTest extends \PHPUnit_Framework_TestCase
         // Test
         $content->setType($expectedContentType);
         $content->setText($expectedText);
-        $actual = $content->toXml();
+        $xmlWriter = new \XMLWriter();
+        $xmlWriter->openMemory();
+        $content->writeXml($xmlWriter);
+        $actual = $xmlWriter->outputMemory();
         
         // Assert
         $this->assertEquals(

@@ -348,16 +348,20 @@ class EntryTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\Common\Internal\Atom\Entry::toXml
+     * @covers WindowsAzure\Common\Internal\Atom\Entry::writeXml
      */
     public function testEntryToXml()
     {
         // Setup 
         $entry = new Entry();   
-        $expected = "<atom:entry/>\n";
+        $expected = "<atom:entry/>";
         
         // Test
-        $actual = $entry->toXml();
+        $xmlWriter = new \XMLWriter();
+        $xmlWriter->openMemory();
+        $entry->writeXml($xmlWriter);
+        $actual = $xmlWriter->outputMemory();
+
 
         // Assert 
         $this->assertEquals(

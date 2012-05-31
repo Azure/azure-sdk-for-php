@@ -247,7 +247,7 @@ class CategoryTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @covers WindowsAzure\Common\Internal\Atom\Category::parseXml
-     * @covers WindowsAzure\Common\Internal\Atom\Category::toXml
+     * @covers WindowsAzure\Common\Internal\Atom\Category::writeXml
      */
     public function testCategoryWriteEmptyXml()
     {
@@ -256,7 +256,10 @@ class CategoryTest extends \PHPUnit_Framework_TestCase
         $expected = '<atom:category/>';
         
         // Test 
-        $actual = $category->toXml();
+        $xmlWriter = new \XMLWriter();
+        $xmlWriter->openMemory();
+        $category->writeXml($xmlWriter);
+        $actual = $xmlWriter->outputMemory();
 
         // Assert
         $this->assertEquals(
@@ -267,7 +270,7 @@ class CategoryTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @covers WindowsAzure\Common\Internal\Atom\Category::parseXml
-     * @covers WindowsAzure\Common\Internal\Atom\Category::toXml
+     * @covers WindowsAzure\Common\Internal\Atom\Category::writeXml
      */
     public function testCategoryWriteXmlSuccess()
     {
@@ -279,8 +282,10 @@ class CategoryTest extends \PHPUnit_Framework_TestCase
         $category->setLabel('testLabel');
         
         // Test 
-
-        $actual = $category->toXml();
+        $xmlWriter = new \XMLWriter();
+        $xmlWriter->openMemory();
+        $category->writeXml($xmlWriter);
+        $actual = $xmlWriter->outputMemory();
 
         // Assert
         $this->assertEquals(
