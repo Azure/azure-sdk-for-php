@@ -13,13 +13,11 @@ spl_autoload_register(
             'tests\\framework\\fiddlerfilter' => '/framework/FiddlerFilter.php',
             'tests\\framework\\queueservicerestproxytestbase' => '/framework/QueueServiceRestProxyTestBase.php',
             'tests\\framework\\restproxytestbase' => '/framework/RestProxyTestBase.php',
-            'tests\\framework\\servicebusrestproxytestbase' => '/framework/ServiceBusRestProxyTestBase.php',
             'tests\\framework\\servicemanagementrestproxytestbase' => '/framework/ServiceManagementRestProxyTestBase.php',
             'tests\\framework\\servicerestproxytestbase' => '/framework/ServiceRestProxyTestBase.php',
             'tests\\framework\\tableservicerestproxytestbase' => '/framework/TableServiceRestProxyTestBase.php',
             'tests\\framework\\testresources' => '/framework/TestResources.php',
             'tests\\framework\\virtualfilesystem' => '/framework/VirtualFileSystem.php',
-            'tests\\framework\\wraprestproxytestbase' => '/framework/WrapRestProxyTestBase.php',
             'tests\\functional\\windowsazure\\blob\\blobservicefunctionaltest' => '/functional/WindowsAzure/Blob/BlobServiceFunctionalTest.php',
             'tests\\functional\\windowsazure\\blob\\blobservicefunctionaltestdata' => '/functional/WindowsAzure/Blob/BlobServiceFunctionalTestData.php',
             'tests\\functional\\windowsazure\\blob\\blobserviceintegrationtest' => '/functional/WindowsAzure/Blob/BlobServiceIntegrationTest.php',
@@ -141,14 +139,6 @@ spl_autoload_register(
             'tests\\unit\\windowsazure\\queue\\models\\updatemessageresulttest' => '/unit/WindowsAzure/Queue/Models/UpdateMessageResultTest.php',
             'tests\\unit\\windowsazure\\queue\\models\\windowsazurequeuemessagetest' => '/unit/WindowsAzure/Queue/Models/WindowsAzureQueueMessageTest.php',
             'tests\\unit\\windowsazure\\queue\\queueservicetest' => '/unit/WindowsAzure/Queue/QueueServiceTest.php',
-            'tests\\unit\\windowsazure\\servicebus\\internal\\servicebusrestproxytest' => '/unit/WindowsAzure/ServiceBus/ServiceBusRestProxyTest.php',
-            'tests\\unit\\windowsazure\\servicebus\\internal\\wraprestproxytest' => '/unit/WindowsAzure/ServiceBus/WrapRestProxyTest.php',
-            'tests\\unit\\windowsazure\\servicebus\\internal\\wraptokenmanagertest' => '/unit/WindowsAzure/ServiceBus/Internal/WrapTokenManagerTest.php',
-            'tests\\unit\\windowsazure\\servicebus\\models\\activetokentest' => '/unit/WindowsAzure/ServiceBus/models/ActiveTokenTest.php',
-            'tests\\unit\\windowsazure\\servicebus\\models\\wrapaccesstokenresulttest' => '/unit/WindowsAzure/ServiceBus/models/WrapAccessTokenResultTest.php',
-            'tests\\unit\\windowsazure\\servicebus\\servicebusservicetest' => '/unit/WindowsAzure/ServiceBus/ServiceBusServiceTest.php',
-            'tests\\unit\\windowsazure\\servicebus\\servicebussettingstest' => '/unit/WindowsAzure/ServiceBus/ServiceBusSettingsTest.php',
-            'tests\\unit\\windowsazure\\servicebus\\wrapservicetest' => '/unit/WindowsAzure/ServiceBus/WrapServiceTest.php',
             'tests\\unit\\windowsazure\\servicemanagement\\internal\\servicemanagementrestproxytest' => '/unit/WindowsAzure/ServiceManagement/ServiceManagementRestProxyTest.php',
             'tests\\unit\\windowsazure\\servicemanagement\\models\\affinitygrouptest' => '/unit/WindowsAzure/ServiceManagement/Models/AffinityGroupTest.php',
             'tests\\unit\\windowsazure\\servicemanagement\\models\\asynchronousoperationresulttest' => '/unit/WindowsAzure/ServiceManagement/Models/AsynchronousOperationResultTest.php',
@@ -222,8 +212,7 @@ spl_autoload_register(
             'tests\\unit\\windowsazure\\table\\models\\updateentityresulttest' => '/unit/WindowsAzure/Table/Models/UpdateEntityResultTest.php',
             'tests\\unit\\windowsazure\\table\\tableservicetest' => '/unit/WindowsAzure/Table/TableServiceTest.php',
             'tests\\unit\\windowsazure\\utilitiestest' => '/unit/WindowsAzure/Common/Internal/UtilitiesTest.php',
-            'tests\\unit\\windowsazure\\validatetest' => '/unit/WindowsAzure/Common/Internal/ValidateTest.php',
-            'wrapfiltertest' => '/unit/WindowsAzure/Common/Internal/Filters/WrapFilterTest.php'
+            'tests\\unit\\windowsazure\\validatetest' => '/unit/WindowsAzure/Common/Internal/ValidateTest.php'
           );
       }
       $cn = strtolower($class);
