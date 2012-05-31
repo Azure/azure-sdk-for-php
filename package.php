@@ -23,8 +23,8 @@
 require_once 'PEAR/PackageFileManager2.php';
 PEAR::setErrorHandling(PEAR_ERROR_DIE);
 
-$package 	          = 'WindowsAzure';
-$channel 	          = 'pear.blob.core.windows.net';
+$package              = 'WindowsAzure';
+$channel              = 'pear.blob.core.windows.net';
 $release_version      = '0.1.0';
 $api_version          = '0.1.0';
 $release_state        = 'beta';
