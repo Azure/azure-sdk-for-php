@@ -162,7 +162,7 @@ class WrapTokenManagerTest_MockWrapRestProxy implements IWrap
         $wrapResponse->setAccessToken('testaccesstoken' . $id);
         return $wrapResponse;
     }
-    
+
     public function withFilter($filter)
     {
         return $this;
