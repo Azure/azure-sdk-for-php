@@ -2,7 +2,7 @@
 
 <project name="azure-sdk-for-php" default="build">
  <target name="build"
-   depends="prepare,lint,phploc,pdepend,phpmd-ci,phpcs-ci,phpcpd,phpdox,phpunit,phpcb"/>
+   depends="prepare,lint,phploc,pdepend,phpmd-ci,phpcs-ci,phpcpd,phpdox,phpunit,phpcb,pear-package"/>
 
  <target name="build-parallel"
    depends="prepare,lint,tools-parallel,phpunit,phpcb"/>
@@ -162,6 +162,13 @@
    <arg path="${basedir}/WindowsAzure" />
    <arg value="--output" />
    <arg path="${basedir}/build/code-browser" />
+  </exec>
+ </target>
+ 
+ <target name="pear-package" description="Generates PEAR package.xml">
+  <exec executable="php.exe">
+  <arg path="${basedir}/package.php" />
+  <arg value="make" />
   </exec>
  </target>
 </project>
