@@ -36,7 +36,7 @@ use WindowsAzure\Common\ServiceException;
  * @version   Release: @package_version@
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
-class ServiceExceptionTest extends PHPUnit_Framework_TestCase
+class ServiceExceptionTest extends \PHPUnit_Framework_TestCase
 {
     /**
      * @covers WindowsAzure\Common\ServiceException::__construct

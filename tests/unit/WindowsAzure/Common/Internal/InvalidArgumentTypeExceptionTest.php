@@ -36,7 +36,7 @@ use WindowsAzure\Common\Internal\InvalidArgumentTypeException;
  * @version   Release: @package_version@
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
-class InvalidArgumentTypeExceptionTest extends PHPUnit_Framework_TestCase
+class InvalidArgumentTypeExceptionTest extends \PHPUnit_Framework_TestCase
 {
     /**
      * @covers WindowsAzure\Common\Internal\InvalidArgumentTypeException::__construct
