@@ -15,7 +15,7 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   PEAR2\WindowsAzure\Blob\Models
+ * @package   WindowsAzure\Blob\Models
  * @author    Azure PHP SDK <azurephpsdk@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
@@ -29,7 +29,7 @@ use WindowsAzure\Common\Internal\Validate;
  * optional parameters for CopyBlobOptions wrapper
  *
  * @category  Microsoft
- * @package   PEAR2\WindowsAzure\Blob\Models
+ * @package   WindowsAzure\Blob\Models
  * @author    Azure PHP SDK <azurephpsdk@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
