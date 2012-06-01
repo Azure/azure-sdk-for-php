@@ -39,7 +39,7 @@ use WindowsAzure\Common\Internal\InvalidArgumentTypeException;
  * @version   Release: @package_version@
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
-class SharedKeyFilterTest extends PHPUnit_Framework_TestCase
+class SharedKeyFilterTest extends \PHPUnit_Framework_TestCase
 {
     /**
      * @covers WindowsAzure\Common\Internal\Filters\SharedKeyFilter::handleRequest
