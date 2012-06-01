@@ -22,6 +22,7 @@
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
 
+namespace Tests\Unit\WindowsAzure;
 use WindowsAzure\Common\ServiceException;
 
 /**

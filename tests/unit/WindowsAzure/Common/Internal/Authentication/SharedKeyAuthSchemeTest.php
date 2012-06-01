@@ -1,11 +1,6 @@
 <?php
 
 /**
- * Implementation of class SharedKeyAuthSchemeTest.
- *
- *
- * PHP version 5
- *
  * LICENSE: Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -17,11 +12,14 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- * @package    Tests\Unit\WindowsAzure\Common\Internal\Authentication
- * @author     Azure PHP SDK <azurephpsdk@microsoft.com>
- * @copyright  2012 Microsoft Corporation
- * @license    http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
- * @link       http://pear.php.net/package/azure-sdk-for-php
+ * PHP version 5
+ *
+ * @category  Microsoft
+ * @package   Tests\Unit\WindowsAzure\Common\Internal\Authentication
+ * @author    Azure PHP SDK <azurephpsdk@microsoft.com>
+ * @copyright 2012 Microsoft Corporation
+ * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
+ * @link      http://pear.php.net/package/azure-sdk-for-php
  */
 
 namespace Tests\Unit\WindowsAzure\Common\Internal\Authentication;
