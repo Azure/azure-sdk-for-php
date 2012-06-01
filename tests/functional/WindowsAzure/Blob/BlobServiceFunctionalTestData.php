@@ -86,7 +86,7 @@ class BlobServiceFunctionalTestData
 
     public static function getSimpleMessageText()
     {
-        return 'foo bar' . (self::$tempBlobCounter++);
+        return 'simple message text #' . (self::$tempBlobCounter++);
     }
 
     public static function getInterestingTimeoutValues()
