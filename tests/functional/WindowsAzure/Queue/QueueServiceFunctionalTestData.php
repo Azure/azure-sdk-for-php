@@ -58,7 +58,7 @@ class QueueServiceFunctionalTestData {
     }
 
     public static function getSimpleMessageText() {
-        return 'foo bar' . (self::$tempQueueCounter++);
+        return 'simple message text #' . (self::$tempQueueCounter++);
     }
 
     public static function getInterestingTimeoutValues() {
