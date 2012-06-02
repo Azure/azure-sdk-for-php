@@ -88,7 +88,7 @@ class ServiceBusRestProxy extends ServiceRestProxy implements IServiceBus
      */
     public function __construct($channel, $uri, $dataSerializer)
     {
-        parent::__construct($channel, $uri, '', $dataSerializer);
+        parent::__construct($channel, $uri, Resources::EMPTY_STRING, $dataSerializer);
     }
     
     /**
@@ -306,12 +306,12 @@ class ServiceBusRestProxy extends ServiceRestProxy implements IServiceBus
         $httpCallContext->setMethod(Resources::HTTP_PUT);
         $lockLocation = $brokeredMessage->getLockLocation();
         $lockLocationArray = parse_url($lockLocation);
-        $lockLocationPath = '';
+        $lockLocationPath = Resources::EMPTY_STRING;
 
         if (array_key_exists(Resources::PHP_URL_PATH, $lockLocationArray))
         {
             $lockLocationPath = $lockLocationArray[Resources::PHP_URL_PATH];
-            $lockLocationPath = preg_replace('@^\/@', '', $lockLocationPath);
+            $lockLocationPath = preg_replace('@^\/@', Resources::EMPTY_STRING, $lockLocationPath);
         } 
 
         $httpCallContext->setPath($lockLocationPath);
@@ -332,12 +332,12 @@ class ServiceBusRestProxy extends ServiceRestProxy implements IServiceBus
         $httpCallContext->setMethod(Resources::HTTP_DELETE);
         $lockLocation = $brokeredMessage->getLockLocation();
         $lockLocationArray = parse_url($lockLocation);
-        $lockLocationPath = '';
+        $lockLocationPath = Resources::EMPTY_STRING;
 
         if (array_key_exists(Resources::PHP_URL_PATH, $lockLocationArray))
         {
             $lockLocationPath = $lockLocationArray[Resources::PHP_URL_PATH];
-            $lockLocationPath = preg_replace('@^\/@', '', $lockLocationPath);
+            $lockLocationPath = preg_replace('@^\/@', Resources::EMPTY_STRING, $lockLocationPath);
         } 
         $httpCallContext->setPath($lockLocationPath);
         $httpCallContext->addStatusCode(Resources::STATUS_OK);
@@ -581,9 +581,9 @@ class ServiceBusRestProxy extends ServiceRestProxy implements IServiceBus
      * Creates a subscription with specified topic path and 
      * subscription info. 
      * 
-     * @param string                  $topicPath               The path of
+     * @param string           $topicPath               The path of
      * the topic.
-     * @param SubscriptionDescription $subscriptionDescription The description
+     * @param SubscriptionInfo $subscriptionDescription The description
      * of the subscription.
      *
      * @return CreateSubscriptionResult
@@ -609,7 +609,7 @@ class ServiceBusRestProxy extends ServiceRestProxy implements IServiceBus
             'SubscriptionDescription'
         );
 
-        $entry = new Entry();
+        $entry   = new Entry();
         $content = new Content($subscriptionDescriptionXml);
         $content->setType(Resources::XML_CONTENT_TYPE);
         $entry->setContent($content);
@@ -684,7 +684,7 @@ class ServiceBusRestProxy extends ServiceRestProxy implements IServiceBus
     /**
      * Lists subscription. 
      * 
-     * @param string                   $topicPath               The path of 
+     * @param string                   $topicPath                The path of 
      * the topic.
      * @param ListSubscriptionsOptions $listSubscriptionsOptions The options
      * to list the subscription. 
@@ -693,13 +693,16 @@ class ServiceBusRestProxy extends ServiceRestProxy implements IServiceBus
      */
     public function listSubscriptions(
         $topicPath, 
-        $listSubscriptionsOptions = null) 
-    {
-        $listSubscriptionsPath = sprintf(
+        $listSubscriptionsOptions = null) {
+
+        $listSubscriptionsPath   = sprintf(
             Resources::LIST_SUBSCRIPTIONS_PATH, 
             $topicPath
         );
-        $response                = $this->listOptions($listSubscriptionsOptions, $listSubscriptionsPath);
+        $response                = $this->listOptions(
+            $listSubscriptionsOptions, 
+            $listSubscriptionsPath
+        );
         $listSubscriptionsResult = new ListSubscriptionsResult();
         $listSubscriptionsResult->parseXml($response->getBody());
         return $listSubscriptionsResult; 
@@ -832,7 +835,7 @@ class ServiceBusRestProxy extends ServiceRestProxy implements IServiceBus
             $subscriptionName
         );
 
-        $response        = $this->listOptions(
+        $response = $this->listOptions(
             $listRulesOptions, 
             $listRulesPath
         );

@@ -51,6 +51,55 @@ class BrokerPropertiesTest extends \PHPUnit_Framework_TestCase
         $this->assertNotNull($brokerProperties);
     }
 
+    /**
+     * @covers WindowsAzure\ServiceBus\Models\BrokerProperties::create
+     */
+    public function testCreateBrokerPropertiesSuccess()
+    {
+        // Setup
+        $brokerPropertiesJsonString = '{"MessageId": "1","Label": "label1","ReplyTo": "1@1.com"}'; 
+
+        // Test
+        $brokerProperties = BrokerProperties::create($brokerPropertiesJsonString);
+
+        // Assert
+        $this->assertEquals(
+            1,
+            $brokerProperties->getMessageId()
+        ); 
+
+        $this->assertEquals(
+            'label1',
+            $brokerProperties->getLabel()
+        ); 
+
+        $this->assertEquals(
+            '1@1.com',
+            $brokerProperties->getReplyTo()
+        );
+    }
+
+    /**
+     * @covers WindowsAzure\ServiceBus\Models\BrokerProperties::toString
+     */
+    public function testSerializeBrokerPropertiesSuccess()
+    {
+        // Setup
+        $expected = '{"MessageId":"1","Label":"label1","ReplyTo":"1@1.com"}'; 
+
+        // Test
+        $brokerProperties = new BrokerProperties();
+        $brokerProperties->setMessageId('1');
+        $brokerProperties->setLabel('label1');
+        $brokerProperties->setReplyTo('1@1.com');
+
+        // Assert
+        $this->assertEquals(
+            $expected,
+            $brokerProperties->toString()
+        ); 
+    }
+
     /** 
      * @covers WindowsAzure\ServiceBus\Models\BrokerProperties::getCorrelationId
      * @covers WindowsAzure\ServiceBus\Models\BrokerProperties::setCorrelationId

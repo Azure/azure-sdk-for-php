@@ -224,8 +224,8 @@ class BrokeredMessage
      * 
      * @param string $messageId The ID of the message. 
      */
-    public function setMesageId($messageId) {
-        $this->_brokerProperties->setMesageId($messageId);
+    public function setMessageId($messageId) {
+        $this->_brokerProperties->setMessageId($messageId);
     }
     
     /** 
@@ -371,7 +371,7 @@ class BrokeredMessage
      * @param string $replyTo The reply to value. 
      */
     public function setReplyTo($replyTo) {
-        $this->_brokerProperties->setReplytTo($replyTo);
+        $this->_brokerProperties->setReplyTo($replyTo);
     }
 
     /**

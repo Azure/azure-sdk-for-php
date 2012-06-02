@@ -129,8 +129,8 @@ class WrapTokenManager
         $scopeUri = $this->_createScopeUri($targetUri);
         
         if (array_key_exists($scopeUri, $this->_activeTokens)) {
-            $activeToken = $this->activeTokens[$scopeUri];
-            return $activeToken->getWrapAccessTokenResult->getAccessToken();
+            $activeToken = $this->_activeTokens[$scopeUri];
+            return $activeToken->getWrapAccessTokenResult()->getAccessToken();
         }
         
         $wrapAccessTokenResult = $this->_wrapRestProxy->wrapAccessToken(
@@ -160,7 +160,7 @@ class WrapTokenManager
     private function _sweepExpiredTokens()
     {
         foreach ($this->_activeTokens as $scopeUri => $activeToken) {
-            $currentDateTime = new DateTime("now");
+            $currentDateTime = new \DateTime("now");
             if ($activeToken->getExpirationDateTime() > $currentDateTime ) {
                 unset($this->_activeTokens[$scopeUri]);
             }
