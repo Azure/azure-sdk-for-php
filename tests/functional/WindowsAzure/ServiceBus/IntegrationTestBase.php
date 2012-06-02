@@ -28,12 +28,17 @@ namespace Tests\Functional\WindowsAzure\ServiceBus;
 
 use Tests\Framework\FiddlerFilter;
 use Tests\Framework\ServiceBusRestProxyTestBase;
+use WindowsAzure\Common\ServiceException;
 use WindowsAzure\ServiceBus\ServiceBusService;
 use WindowsAzure\ServiceBus\Models\QueueInfo;
-use WindowsAzure\Common\ServiceException;
+use WindowsAzure\ServiceBus\Models\ReceiveMessageOptions;
+use WindowsAzure\Common\Internal\Utilities;
 
 class IntegrationTestBase extends ServiceBusRestProxyTestBase
 {
+    /**
+     * @covers WindowsAzure\ServiceBus\ServiceBusRestProxy::withFilter
+     */
     public function __construct()
     {
         parent::__construct();
@@ -61,86 +66,47 @@ class IntegrationTestBase extends ServiceBusRestProxyTestBase
     {
         $inst = new IntegrationTestBase();
         $restProxy = $inst->restProxy;
-//        $testAlphaExists = false;
-//        foreach($this->iterateQueues() as $queue)  {
-//            $queueName = $queue->getPath();
-//            if ($queueName->startsWith('Test') || $queueName->startsWith('test')) {
-//                if ($queueName->equalsIgnoreCase('TestAlpha')) {
-//                    $testAlphaExists = true;
-//                    $count = $queue->getMessageCount();
-//                    for ($i = 0; $i != $count; $i++) {
-//                        $opts = new ReceiveMessageOptions();
-//                        $opts->setTimeout(20);
-//                        $this->restProxy->receiveQueueMessage($queueName, $opts);
-//                    }
-//                }
-//                else {
-//                    $service->deleteQueue($queueName);
-//                }
-//            }
-//        }
-//        foreach($this->iterateTopics() as $topic)  {
-//            $topicName = $topic->getPath();
-//            if ($topicName->startsWith('Test') || $topicName->startsWith('test')) {
-//                $service->deleteQueue($topicName);
-//            }
-//        }
-//        
-        $queueList = array('TestCreateQueueWorks',
-            'TestContentTypePassesThrough',
-            'TestMessagesMayHaveCustomProperties',
-            'TestPeekLockedMessageCanBeCompleted',
-            'TestPeekLockedMessageCanBeDeleted',
-            'TestPeekLockedMessageCanBeUnlocked',
-            'TestPeekLockMessageWorks',
-            'TestReceiveMessageWorks');
-
-        foreach($queueList as $queueName) {
-            try {
-                $restProxy->deleteQueue($queueName);
-            } catch (\Exception $ex) {
-                // Ignore
+        $testAlphaExists = false;
+        $queues = $restProxy->listQueues()->getQueueInfo();
+        foreach($queues as $queue)  {
+            $queueName = $queue->getTitle();
+            if (Utilities::startsWith($queueName, 'Test') || Utilities::startsWith($queueName, 'test')) {
+                if (strtolower($queueName) == strtolower('TestAlpha')) {
+                    $testAlphaExists = true;
+                    $count = $queue->getQueueDescription()->getMessageCount();
+                    for ($i = 0; $i != $count; $i++) {
+                        $opts = new ReceiveMessageOptions();
+                        $opts->setTimeout(20);
+                        try {
+                            $restProxy->receiveQueueMessage($queueName, $opts);
+                        } catch (\Exception $ex) {
+                        }
+                    }
+                }
+                else {
+                    try {
+                        $restProxy->deleteQueue($queueName);
+                    } catch (\Exception $ex) {
+                    }
+                }
+            }
+        }
+        foreach($restProxy->listTopics()->getTopicInfo() as $topic)  {
+            $topicName = $topic->getTitle();
+            if (Utilities::startsWith($topicName, 'Test') || Utilities::startsWith($topicName, 'test')) {
+                try {
+                    $restProxy->deleteTopic($topicName);
+                } catch (\Exception $ex) {
+                }
             }
         }
 
-        $topicList = array('TestruleDetailsMayBeFetched',
-            'TestrulesCanBeCreatedOnSubscriptions',
-            'TestrulesCanBeListedAndDefaultRuleIsPrecreated',
-            'TestRulesMayBeDeleted',
-            'TestRulesMayHaveAnActionAndFilter',
-            'TestSubscriptionsCanBeCreatedOnTopics',
-            'TestSubscriptionsCanBeListed',
-            'TestSubscriptionsDetailsMayBeFetched',
-            'TestSubscriptionsMayBeDeleted',
-            'TestSubscriptionWillReceiveMessage',
-            'TestTopicCanBeCreatedListedFetchedAndDeleted');
-
-        foreach($topicList as $topicName) {
+        if (!$testAlphaExists) {
             try {
-                $restProxy->deleteTopic($topicName);
+                $restProxy->createQueue(new QueueInfo('TestAlpha'));
             } catch (\Exception $ex) {
-                // Ignore
             }
         }
-        
-//        
-//        
-//        if (!$testAlphaExists) {
-        try {
-            $restProxy->createQueue(new QueueInfo('TestAlpha'));
-        } catch (\Exception $ex) {
-           
-        }
-    }
-    
-    private static function iterateQueues($wrapper)
-    {
-        return $wrapper->listQueues()->getItems();
-    }
-
-    private static function iterateTopics($wrapper)
-    {
-        return $wrapper->listTopics()->getItems();
     }
 }
 

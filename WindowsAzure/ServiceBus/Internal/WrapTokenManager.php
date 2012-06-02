@@ -82,13 +82,18 @@ class WrapTokenManager
     /**
      * Creates a WRAP token manager with specified parameters. 
      *
-     * @param string $wrapUri      The URI of the WRAP service. 
-     * @param string $wrapName     The user name of the WRAP service. 
-     * @param string $wrapPassword The password of the WRAP service. 
+     * @param string                             $wrapUri      The URI
+     * of the WRAP service.
+     * @param string                             $wrapName     The user name
+     * of the WRAP service.
+     * @param string                             $wrapPassword The password
+     * of the WRAP service.
+     * @param WindowsAzure\Core\IServicesBuilder $builder      The builder
+     * object.
      * 
      * @return WindowsAzure\ServiceBus\Internal\WrapTokenManager
      */
-    public function __construct($wrapUri, $wrapName, $wrapPassword) 
+    public function __construct($wrapUri, $wrapName, $wrapPassword, $builder = null)
     {
         $this->_wrapUri      = $wrapUri;
         $this->_wrapName     = $wrapName;
@@ -110,7 +115,7 @@ class WrapTokenManager
             $this->_wrapPassword
         );
            
-        $this->_wrapRestProxy = WrapService::create($config);
+        $this->_wrapRestProxy = WrapService::create($config, $builder);
         
         $this->_activeTokens = array();
         
@@ -148,6 +153,7 @@ class WrapTokenManager
 
         $acquiredActiveToken = new ActiveToken($wrapAccessTokenResult);
         $acquiredActiveToken->setExpirationDateTime($expirationDateTime); 
+        $this->_activeTokens[$scopeUri] = $acquiredActiveToken;
         
         return $wrapAccessTokenResult->getAccessToken(); 
     }
@@ -161,7 +167,7 @@ class WrapTokenManager
     {
         foreach ($this->_activeTokens as $scopeUri => $activeToken) {
             $currentDateTime = new \DateTime("now");
-            if ($activeToken->getExpirationDateTime() > $currentDateTime ) {
+            if ($activeToken->getExpirationDateTime() < $currentDateTime ) {
                 unset($this->_activeTokens[$scopeUri]);
             }
         }
