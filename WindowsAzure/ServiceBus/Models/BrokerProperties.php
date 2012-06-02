@@ -551,76 +551,75 @@ class BrokerProperties
         $value = array();
         if (!empty($this->_correlationId))
         {
-            $value[] = '"CorrelationId": "'.$this->_correlationId.'"}';
+            $value['CorrelationId'] = $this->_correlationId;
         }
 
         if (!empty($this->_sessionId))
         {
-            $value[] = '"SessionId": "'.$this->_sessionId.'"}';
+            $value['SessionId'] = $this->_sessionId;
         }
 
         if (!empty($this->_deliveryCount))
         {
-            $value[] = '"DeliveryCount": "'.$this->_deliveryCount.'"}';
+            $value['DeliveryCount'] = $this->_deliveryCount;
         }
 
         if (!empty($this->_lockedUntilUtc))
         {
-            $value[] = '"LockedUntilUtc": "'.$this->_lockedUntilUtc.'"}';
+            $value['LockedUntilUtc'] = $this->_lockedUntilUtc;
         }
 
         if (!empty($this->_lockToken))
         {
-            $value[] = '"LockToken": "'.$this->_lockToken.'"}';
+            $value['LockToken'] = $this->_lockToken;
         }
 
         if (!empty($this->_messageId))
         {
-            $value[] = '"MessageId": "'.$this->_messageId.'"}';
+            $value['MessageId'] = $this->_messageId;
         }
 
         if (!empty($this->_label))
         {
-            $value[] = '"Label": "'.$this->_label.'"}';
+            $value['Label'] = $this->_label;
         }
 
         if (!empty($this->_replyTo))
         {
-            $value[] = '"ReplyTo": "'.$this->_replyTo.'"}';
+            $value['ReplyTo'] = $this->_replyTo;
         }
 
         if (!empty($this->_enqueuedTimeUtc))
         {
-            $value[] = '"EnqueuedTimeUtc": "'.$this->_enqueuedTimeUtc.'"}';
+            $value['EnqueuedTimeUtc'] = $this->_enqueuedTimeUtc;
         }
 
         if (!empty($this->_sequenceNumber))
         {
-            $value[] = '"SequenceNumber": "'.$this->_sequenceNumber.'"}';
+            $value['SequenceNumber'] = $this->_sequenceNumber;
         }
 
         if (!empty($this->_timeToLive))
         {
-            $value[] = '"TimeToLive": "'.$this->_timeToLive.'"}';
+            $value['TimeToLive'] = $this->_timeToLive;
         }
 
         if (!empty($this->_to))
         {
-            $value[] = '"To": "'.$this->_to.'"}';
+            $value['To'] = $this->_to;
         }
     
         if (!empty($this->_scheduledEnqueueTimeUtc))
         {
-            $value[] = '"ScheduledEnqueueTimeUtc": "'.$this->_scheduledEnqueueTimeUtc.'"}';
+            $value['ScheduledEnqueueTimeUtc'] = $this->_scheduledEnqueueTimeUtc;
         }
 
         if (!empty($this->_replyToSessionId))
         {
-            $value[] = '"ReplyToSessionId": "'.$this->_replyToSessionId.'"}';
+            $value['ReplyToSessionId'] = $this->_replyToSessionId;
         }
 
-        $result = implode(',', $value);
-        $result = '{'.$result.'}';
+        $result = json_encode($value);
         return $result; 
     }    
 }
