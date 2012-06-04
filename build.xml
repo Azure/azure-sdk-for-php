@@ -179,11 +179,4 @@
   <arg value="package" />
   </exec>
  </target>
- 
- <target name="new-pear-release" description="Adds new release to PEAR channel">
-  <exec executable="php.exe">
-  <arg path="${basedir}/ChannelManager.php" />
-  <arg value="release" />
-  </exec>
- </target>
 </project>
