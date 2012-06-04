@@ -6,6 +6,8 @@
 
  <target name="build-parallel"
    depends="prepare,lint,tools-parallel,phpunit,phpcb"/>
+ <target name="pear-package"
+   depends="pear-package-xml,pear-package-file"/>
 
  <target name="tools-parallel"
          description="Run tools in parallel">
@@ -165,10 +167,23 @@
   </exec>
  </target>
  
- <target name="pear-package" description="Generates PEAR package.xml">
+ <target name="pear-package-xml" description="Generates PEAR package.xml">
   <exec executable="php.exe">
   <arg path="${basedir}/package.php" />
   <arg value="make" />
+  </exec>
+ </target>
+ 
+ <target name="pear-package-file" description="Generates PEAR package file from package.xml">
+  <exec executable="pear.bat">
+  <arg value="package" />
+  </exec>
+ </target>
+ 
+ <target name="new-pear-release" description="Adds new release to PEAR channel">
+  <exec executable="php.exe">
+  <arg path="${basedir}/ChannelManager.php" />
+  <arg value="release" />
   </exec>
  </target>
 </project>
