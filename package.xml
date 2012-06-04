@@ -1,13 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <package packagerversion="1.9.4" version="2.0" xmlns="http://pear.php.net/dtd/package-2.0" xmlns:tasks="http://pear.php.net/dtd/tasks-1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://pear.php.net/dtd/tasks-1.0 http://pear.php.net/dtd/tasks-1.0.xsd http://pear.php.net/dtd/package-2.0 http://pear.php.net/dtd/package-2.0.xsd">
  <name>WindowsAzure</name>
- <channel>pear.blob.core.windows.net</channel>
- <summary>
-Official PHP SDK for Microsoft Windows Azure.
- </summary>
+ <channel>pear.windowsazure.com</channel>
+ <summary>Windows Azure SDK for PHP.</summary>
  <description>
-The Windows Azure client libraries provide easy access to all Windows Azure REST services 
-including Tables, Blobs, Queues, Service Bus, Service Management and Service Runtime.
+This package contains client libraries for accessing the Windows Azure Tables, Blobs,
+Queues, Service Runtime, Service Management and Service Bus (Queues, Topics) REST APIs.
+It is build as a thin REST call wrapper where each server call maps to a single method call within the library.
  </description>
  <lead>
   <name>Azure PHP SDK</name>
@@ -15,8 +14,8 @@ including Tables, Blobs, Queues, Service Bus, Service Management and Service Run
   <email>azurephpsdk@microsoft.com</email>
   <active>yes</active>
  </lead>
- <date>2012-05-31</date>
- <time>11:34:25</time>
+ <date>2012-06-04</date>
+ <time>16:53:08</time>
  <version>
   <release>0.1.0</release>
   <api>0.1.0</api>
@@ -271,6 +270,10 @@ including Tables, Blobs, Queues, Service Bus, Service Management and Service Run
     <name>PEAR_PackageFileManager2</name>
     <channel>pear.php.net</channel>
    </package>
+   <package>
+    <name>Pirum</name>
+    <channel>pear.pirum-project.org</channel>
+   </package>
   </optional>
  </dependencies>
  <phprelease />
@@ -284,7 +287,7 @@ including Tables, Blobs, Queues, Service Bus, Service Management and Service Run
     <release>beta</release>
     <api>beta</api>
    </stability>
-   <date>2012-05-31</date>
+   <date>2012-06-04</date>
    <license uri="http://www.apache.org/licenses/LICENSE-2.0">Apache 2.0</license>
    <notes>
 * Full support of Queue, Blob and Table services.
