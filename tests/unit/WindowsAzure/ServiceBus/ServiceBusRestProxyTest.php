@@ -113,9 +113,40 @@ class ServiceBusRestProxyTest extends ServiceBusRestProxyTestBase
 
         // Test
         $this->restProxy->deleteQueue($queueName);
+        
+        // Assert
+    }
 
+    /**
+     * @covers WindowsAzure\ServiceBus\ServiceBusRestProxy::deleteQueue
+     */
+    public function testDeleteQueueSuccess()
+    {
+        // Setup 
+        $queueName = 'testDeleteQueueSuccess';
+        $createQueueInfo = new QueueInfo($queueName);
+        $listQueuesOptions = new ListQueuesOptions();
+
+        $listQueuesResult = $this->restProxy->listQueues($listQueuesOptions);
+
+        foreach ($listQueuesResult->getQueueInfo() as $queueInfo)
+        {
+            $this->restProxy->deleteQueue($queueInfo->getTitle());
+        }
+
+        $this->restProxy->createQueue($createQueueInfo);
+
+        // Test
+        $this->restProxy->deleteQueue($queueName);
+        $listQueuesResult = $this->restProxy->listQueues($listQueuesOptions);
 
         // Assert
+
+        $this->assertEquals(
+            0,
+            count($listQueuesResult->getQueueInfo())
+        );
+        
     }
     
     /**
@@ -579,6 +610,42 @@ class ServiceBusRestProxyTest extends ServiceBusRestProxyTestBase
     }
 
     /**
+     * @covers WindowsAzure\ServiceBus\ServiceBusRestProxy::sendTopicMessage
+     * @covers WindowsAzure\ServiceBus\ServiceBusRestProxy::receiveMessage
+     * @covers WindowsAzure\ServiceBus\ServiceBusRestProxy::receiveSubscriptionMessage
+     * @covers WindowsAzure\ServiceBus\ServiceBusRestProxy::getSubscription
+     */
+    public function testReceiveMessageWillNotDeleteSubscription()
+    {
+        // Setup
+        $topicName = 'testReceiveMessageWillNotDeleteSubscription';
+        $subscriptionName = 'sub';
+        $messageBody = '<p>testReceiveMessageWillNotDeleteSubscription</p>';
+        $topicInfo = new TopicInfo($topicName);
+        $subscriptionInfo = new SubscriptionInfo($subscriptionName);
+        $brokeredMessage = new BrokeredMessage();
+        $brokeredMessage->setBody($messageBody);
+        $brokeredMessage->setContentType('text/html');
+        $createTopicResult = $this->createTopic($topicInfo);
+        $createSubscriptionResult = $this->createSubscription($topicName, $subscriptionInfo);
+        $receiveMessageOptions = new ReceiveMessageOptions();
+        $receiveMessageOptions->setTimeout(5);
+        $receiveMessageOptions->setReceiveAndDelete();
+
+        // Test
+        $this->restProxy->sendTopicMessage($topicName, $brokeredMessage);
+        $receivedMessage = $this->restProxy->receiveSubscriptionMessage($topicName, $subscriptionName, $receiveMessageOptions);
+        $getSubscriptionResult = $this->restProxy->getSubscription($topicName, $subscriptionName);
+
+        // Assert
+        $this->assertNotNull($getSubscriptionResult);
+        $this->assertEquals(
+            $subscriptionName,
+            $getSubscriptionResult->getSubscriptionInfo()->getTitle()
+        );
+    }
+
+    /**
      * @covers WindowsAzure\ServiceBus\ServiceBusRestProxy::createRule
      */
     public function testRulesCanBeCreatedOnSubscription()
@@ -702,6 +769,46 @@ class ServiceBusRestProxyTest extends ServiceBusRestProxyTestBase
         $this->assertNotNull($ruleInfo);
         $this->assertEquals(0, count($ruleInfo));
     }
+
+    /**
+     * @covers WindowsAzure\ServiceBus\ServiceBusRestProxy::listRules
+     */ 
+    public function testListRulesDeserializePropertiesOfSqlFilter()
+    {
+        // Setup
+        $topicName = 'testListRulesDeserializePropertiesOfSqlFilter';         
+        $subscriptionName = 'sub';
+        $expected = 'OrderID=123';
+
+        $topicInfo = new TopicInfo($topicName);
+        $subscriptionInfo = new SubscriptionInfo($subscriptionName);
+        $this->safeDeleteSubscription($topicName, $subscriptionName); 
+        $this->safeDeleteTopic($topicName);
+
+        $createTopicResult = $this->createTopic($topicInfo);
+        $createSubscriptionResult = $this->createSubscription(
+            $topicName,
+            $subscriptionInfo
+        );
+        $rule = new RuleInfo('one');
+        $rule->withSqlFilter('OrderID=123');
+        $this->restProxy->createRule($topicName, $subscriptionName, $rule);
+
+
+        // Test
+        $listRulesResult = $this->restProxy->listRules($topicName, $subscriptionName);
+        $ruleInfo = $listRulesResult->getRuleInfo();
+        $ruleInfoInstance = $ruleInfo[1];
+        $actualFilter = $ruleInfoInstance->getFilter();
+        $actual = $actualFilter->getSqlExpression();
+
+        // Assert
+        $this->assertEquals(
+            $expected,
+            $actual
+        );
+        
+    }
    
     /**
      * @covers WindowsAzure\ServiceBus\ServiceBusRestProxy::getRule
@@ -811,6 +918,8 @@ class ServiceBusRestProxyTest extends ServiceBusRestProxyTestBase
             $actualRuleSix->getFilter()
         );
     }
+
+    
 
     /**
      * @covers WindowsAzure\ServiceBus\ServiceBusRestProxy::receiveQueueMessage

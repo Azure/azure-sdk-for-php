@@ -84,6 +84,7 @@ class RuleDescription
         {
             $filterItem = $ruleDescriptionArray['Filter'];
             $filterAttributes = $filterItem->attributes('i', true);
+            $filterItemArray = (array)$filterItem;
             $filterType = (string)$filterAttributes['type'];
             $filter = null; 
             switch ($filterType) {
@@ -98,21 +99,24 @@ class RuleDescription
                 case 'CorrelationFilter' :
                     $filter = new CorrelationFilter();
 
-                    if (array_key_exists('CorrelationId', $filterItem)) {   
-                        $filter->setCorrelationId((string)$filterItem['CorrelationId']);
+                    if (array_key_exists('CorrelationId', $filterItemArray)) {   
+                        $filter->setCorrelationId((string)$filterItemArray['CorrelationId']);
                     }
                     break;
 
                 case 'SqlFilter' :
                     $filter = new SqlFilter();
 
-                    if (array_key_exists('SqlExpression', $filterItem)) {   
-                        $filter->setSqlExpression((string)$filterItem['SqlExpression']);
+                    if (array_key_exists('SqlExpression', $filterItemArray)) {   
+                        $filter->setSqlExpression((string)$filterItemArray['SqlExpression']);
                     }
                     break;
                
                 default :
                     $filter = new Filter();                
+            }
+            if (array_key_exists('CompatibilityLevel', $filterItemArray)) {
+                $filter->setCompatibilityLevel((integer)$filterItemArray['CompatibilityLevel']);
             }
 
             $ruleDescription->setFilter($filter);
