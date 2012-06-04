@@ -49,14 +49,14 @@ use WindowsAzure\Blob\Models\CreateBlobOptions;
 class ChannelManager
 {
     /**
-     * @var WindowsAzure\Blob\BlobRestProxy 
+     * @var BlobRestProxy 
      */
     private static $_blobRestProxy;
     
     /**
      * Creates new blob REST proxy.
      * 
-     * @return WindowsAzure\Blob\BlobRestProxy 
+     * @return BlobRestProxy 
      */
     private static function _createBlobRestProxy()
     {
@@ -93,13 +93,17 @@ class ChannelManager
     }
     
     /**
-     * Command line interaction with user to manage the channel.
+     * Command line interaction with user to manage the channel by letting user to:
+     * 1) Get the channel (either by creation of new one or download existing one).
+     * 2) Prompt user to remove old package.
+     * 3) Prompt user to add current package.
+     * 4) Upload the channel back.
+     * 5) Verify that latest package is installable.
      * 
      * @return none 
      */
     private static function _manageChannel()
     {
-        // 1. Get the channel files
         $answer = self::_promptMsg('Create new channel? [n]:', true);
         switch ($answer) {
         case 'y':
@@ -113,7 +117,6 @@ class ChannelManager
             break;
         }
 
-        // 2. Remove old package(s)
         do {
         $answer = self::_promptMsg('Want to remove exisitng package? [n]:', true);
         switch ($answer) {
@@ -123,7 +126,6 @@ class ChannelManager
         }
         } while ($answer == 'y');
 
-        // 3. Add new package
         $answer = self::_promptMsg('Want to add current package? [y]:', true);
         switch ($answer) {
         case 'y':
@@ -132,25 +134,28 @@ class ChannelManager
             break;
         }
 
-        // 4. Upload the new channel files.
         self::_uploadChannel();
 
-        // 5. Verify that package is installable
         self::_verifyInstall();
     }
     
     /**
-     *  Creates new channel and removes existing channel files.
+     * Creates new channel and removes existing channel files by:
+     * 1) Removes existing channel files on the cloud.
+     * 2) Constructs pirum.xml contents.
+     * 3) Cleans previous files if any and create new channel directory.
+     * 4) Writes pirum.xml.
+     * 5) Generates the channel files.
+     * 
+     * @return none
      */
     private static function _createNewChannel()
-    {
-        // Remove existing channel
+    { 
         echo "Removing old channel files if any...\n";
         self::_clearContainer(CHANNEL_MAIN_CONTAINER, self::$_blobRestProxy);
         self::_clearContainer(CHANNEL_GET_CONTAINER, self::$_blobRestProxy);
         self::_clearContainer(CHANNEL_REST_CONTAINER, self::$_blobRestProxy);
 
-        // Construct pirum.xml contents
         $xmlSerializer = new XmlSerializer();
         $properties    = array(XmlSerializer::ROOT_NAME => 'server');
         $fileArray     = array(
@@ -162,15 +167,12 @@ class ChannelManager
         $fileContents  = $xmlSerializer->serialize($fileArray, $properties);
         $dirName       = CHANNEL_DIR_NAME;
 
-        // Clean previous files if any and create new channel directory
         self::createDir(CHANNEL_DIR_NAME);
 
-        // Write pirum.xml
         $filePath  = dirname(__FILE__) . DIRECTORY_SEPARATOR  . $dirName;
         $filePath .= DIRECTORY_SEPARATOR . 'pirum.xml';
         file_put_contents($filePath, $fileContents);
 
-        // Generate channel files
         self::_executeCommand("pirum build $dirName/");
     }
     
@@ -189,7 +191,7 @@ class ChannelManager
     }
 
     /**
-     * Deletes all blobs in a container.
+     * Deletes all the Blobs in a specified container.
      * 
      * @param string $container The container name.
      * 
@@ -205,7 +207,7 @@ class ChannelManager
     }
 
     /**
-     * Downloads a container in a specified directoty.
+     * Downloads all the Blobs in a container to a specified directory.
      * 
      * @param string $containerName The container name.
      * @param string $dirName       The directory name.
