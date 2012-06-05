@@ -9,3 +9,4 @@ phpunit.xml
 ChannelManager.php
 cache.properties
 nbproject
+*.tgz
