@@ -15,7 +15,7 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   WindowsAzure\Blob\Models
+ * @package   Tests\Unit\WindowsAzure\Blob\Models
  * @author    Azure PHP SDK <azurephpsdk@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
@@ -30,7 +30,7 @@ use WindowsAzure\Blob\Models\AccessCondition;
  * Unit tests for class SetBlobPropertiesOptions
  *
  * @category  Microsoft
- * @package   WindowsAzure\Blob\Models
+ * @package   Tests\Unit\WindowsAzure\Blob\Models
  * @author    Azure PHP SDK <azurephpsdk@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0

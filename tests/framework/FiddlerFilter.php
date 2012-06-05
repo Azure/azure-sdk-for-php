@@ -16,7 +16,7 @@
  *
  * @category   Microsoft
  * @package    Tests\Framework
- * @author     Jason Cooke <jcooke@microsoft.com>
+ * @author     Azure PHP SDK <azurephpsdk@microsoft.com>
  * @copyright  2012 Microsoft Corporation
  * @license    http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link       http://pear.php.net/package/azure-sdk-for-php
