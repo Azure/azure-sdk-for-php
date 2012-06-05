@@ -6,9 +6,6 @@ spl_autoload_register(
       static $classes = null;
       if ($classes === null) {
          $classes = array(
-            'invalidargumenttypeexceptiontest' => '/unit/WindowsAzure/Common/Internal/InvalidArgumentTypeExceptionTest.php',
-            'serviceexceptiontest' => '/unit/WindowsAzure/Common/ServiceExceptionTest.php',
-            'sharedkeyfiltertest' => '/unit/WindowsAzure/Common/Internal/Filters/SharedKeyFilterTest.php',
             'tests\\framework\\blobservicerestproxytestbase' => '/framework/BlobServiceRestProxyTestBase.php',
             'tests\\framework\\fiddlerfilter' => '/framework/FiddlerFilter.php',
             'tests\\framework\\queueservicerestproxytestbase' => '/framework/QueueServiceRestProxyTestBase.php',
@@ -110,9 +107,11 @@ spl_autoload_register(
             'tests\\unit\\windowsazure\\common\\internal\\filters\\datefiltertest' => '/unit/WindowsAzure/Common/Internal/Filters/DateFilterTest.php',
             'tests\\unit\\windowsazure\\common\\internal\\filters\\exponentialretrypolicytest' => '/unit/WindowsAzure/Common/Internal/Filters/ExponentialRetryPolicyTest.php',
             'tests\\unit\\windowsazure\\common\\internal\\filters\\headersfiltertest' => '/unit/WindowsAzure/Common/Internal/Filters/HeadersFilterTest.php',
+            'tests\\unit\\windowsazure\\common\\internal\\filters\\sharedkeyfiltertest' => '/unit/WindowsAzure/Common/Internal/Filters/SharedKeyFilterTest.php',
             'tests\\unit\\windowsazure\\common\\internal\\http\\httpcallcontexttest' => '/unit/WindowsAzure/Common/Internal/Http/HttpCallContextTest.php',
             'tests\\unit\\windowsazure\\common\\internal\\http\\httpclienttest' => '/unit/WindowsAzure/Common/Internal/Http/HttpClientTest.php',
             'tests\\unit\\windowsazure\\common\\internal\\http\\urltest' => '/unit/WindowsAzure/Common/Internal/Http/UrlTest.php',
+            'tests\\unit\\windowsazure\\common\\internal\\invalidargumenttypeexceptiontest' => '/unit/WindowsAzure/Common/Internal/InvalidArgumentTypeExceptionTest.php',
             'tests\\unit\\windowsazure\\common\\internal\\serialization\\xmlserializertest' => '/unit/WindowsAzure/Common/Internal/Serialization/XmlSerializerTest.php',
             'tests\\unit\\windowsazure\\common\\internal\\servicerestproxytest' => '/unit/WindowsAzure/Common/Internal/ServiceRestProxyTest.php',
             'tests\\unit\\windowsazure\\common\\internal\\servicesbuildertest' => '/unit/WindowsAzure/Common/Internal/ServicesBuilderTest.php',
@@ -121,6 +120,7 @@ spl_autoload_register(
             'tests\\unit\\windowsazure\\common\\models\\metricstest' => '/unit/WindowsAzure/Common/Models/MetricsTest.php',
             'tests\\unit\\windowsazure\\common\\models\\retentionpolicytest' => '/unit/WindowsAzure/Common/Models/RetentionPolicyTest.php',
             'tests\\unit\\windowsazure\\common\\models\\servicepropertiestest' => '/unit/WindowsAzure/Common/Models/ServicePropertiesTest.php',
+            'tests\\unit\\windowsazure\\common\\serviceexceptiontest' => '/unit/WindowsAzure/Common/ServiceExceptionTest.php',
             'tests\\unit\\windowsazure\\createstorageserviceoptionsmanagement\\models\\createstorageserviceoptionstest' => '/unit/WindowsAzure/ServiceManagement/Models/CreateStorageServiceOptionsTest.php',
             'tests\\unit\\windowsazure\\loggertest' => '/unit/WindowsAzure/Common/Internal/LoggerTest.php',
             'tests\\unit\\windowsazure\\queue\\internal\\queuerestproxytest' => '/unit/WindowsAzure/Queue/QueueRestProxyTest.php',
