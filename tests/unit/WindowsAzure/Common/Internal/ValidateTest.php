@@ -22,7 +22,7 @@
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
 
-namespace Tests\Unit\WindowsAzure;
+namespace Tests\Unit\WindowsAzure\Common\Internal;
 use WindowsAzure\Common\Internal\Validate;
 use WindowsAzure\Common\Internal\InvalidArgumentTypeException;
 use WindowsAzure\Common\Internal\Resources;
