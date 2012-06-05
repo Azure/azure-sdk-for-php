@@ -22,7 +22,7 @@
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
 
-namespace Tests\Unit\WindowsAzure\Queue\Internal;
+namespace Tests\Unit\WindowsAzure\Queue;
 use WindowsAzure\Common\Internal\Utilities;
 use Tests\Framework\QueueServiceRestProxyTestBase;
 use WindowsAzure\Common\Configuration;
