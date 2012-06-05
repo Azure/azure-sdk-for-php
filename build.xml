@@ -169,7 +169,7 @@
  
  <target name="discover-channel" description="Discovers Windows Azure Channel">
   <exec executable="pear.bat">
-  <arg path="channel-discover" />
+  <arg value="channel-discover" />
   <arg value="pear.windowsazure.com" />
   </exec>
  </target>
