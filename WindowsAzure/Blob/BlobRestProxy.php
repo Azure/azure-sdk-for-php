@@ -2183,18 +2183,25 @@ class BlobRestProxy extends ServiceRestProxy implements IBlob
         if (is_null($options)) {
             $options = new CopyBlobOptions();
         }
+        
+        $this->addOptionalQueryParam(
+            $queryParams,
+            Resources::QP_TIMEOUT,
+            $options->getTimeout()
+        );
+        
         $sourceBlobPath = $this->_getCopyBlobSourceName(
             $sourceContainer, 
             $sourceBlob,
             $options
         );
         
-        $this->addOptionalAccessConditionHeader(
+        $headers = $this->addOptionalAccessConditionHeader(
             $headers, 
             $options->getAccessCondition()
         );
         
-        $this->addOptionalSourceAccessConditionHeader(
+        $headers = $this->addOptionalSourceAccessConditionHeader(
             $headers,
             $options->getSourceAccessCondition()
         );
