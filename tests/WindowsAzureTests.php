@@ -136,17 +136,18 @@ spl_autoload_register(
             'tests\\unit\\windowsazure\\common\\internal\\http\\httpcallcontexttest' => '/unit/WindowsAzure/Common/Internal/Http/HttpCallContextTest.php',
             'tests\\unit\\windowsazure\\common\\internal\\http\\httpclienttest' => '/unit/WindowsAzure/Common/Internal/Http/HttpClientTest.php',
             'tests\\unit\\windowsazure\\common\\internal\\http\\urltest' => '/unit/WindowsAzure/Common/Internal/Http/UrlTest.php',
+            'tests\\unit\\windowsazure\\common\\internal\\loggertest' => '/unit/WindowsAzure/Common/Internal/LoggerTest.php',
             'tests\\unit\\windowsazure\\common\\internal\\serialization\\xmlserializertest' => '/unit/WindowsAzure/Common/Internal/Serialization/XmlSerializerTest.php',
             'tests\\unit\\windowsazure\\common\\internal\\servicerestproxytest' => '/unit/WindowsAzure/Common/Internal/ServiceRestProxyTest.php',
             'tests\\unit\\windowsazure\\common\\internal\\servicesbuildertest' => '/unit/WindowsAzure/Common/Internal/ServicesBuilderTest.php',
+            'tests\\unit\\windowsazure\\common\\internal\\utilitiestest' => '/unit/WindowsAzure/Common/Internal/UtilitiesTest.php',
+            'tests\\unit\\windowsazure\\commom\\internal\\validatetest' => '/unit/WindowsAzure/Common/Internal/ValidateTest.php',
             'tests\\unit\\windowsazure\\common\\models\\getservicepropertiesresulttest' => '/unit/WindowsAzure/Common/Models/GetServicePropertiesResultTest.php',
             'tests\\unit\\windowsazure\\common\\models\\loggingtest' => '/unit/WindowsAzure/Common/Models/LoggingTest.php',
             'tests\\unit\\windowsazure\\common\\models\\metricstest' => '/unit/WindowsAzure/Common/Models/MetricsTest.php',
             'tests\\unit\\windowsazure\\common\\models\\retentionpolicytest' => '/unit/WindowsAzure/Common/Models/RetentionPolicyTest.php',
             'tests\\unit\\windowsazure\\common\\models\\servicepropertiestest' => '/unit/WindowsAzure/Common/Models/ServicePropertiesTest.php',
             'tests\\unit\\windowsazure\\createstorageserviceoptionsmanagement\\models\\createstorageserviceoptionstest' => '/unit/WindowsAzure/ServiceManagement/Models/CreateStorageServiceOptionsTest.php',
-            'tests\\unit\\windowsazure\\loggertest' => '/unit/WindowsAzure/Common/Internal/LoggerTest.php',
-            'tests\\unit\\windowsazure\\queue\\internal\\queuerestproxytest' => '/unit/WindowsAzure/Queue/QueueRestProxyTest.php',
             'tests\\unit\\windowsazure\\queue\\models\\createmessageoptionstest' => '/unit/WindowsAzure/Queue/Models/CreateMessageOptionsTest.php',
             'tests\\unit\\windowsazure\\queue\\models\\createqueueoptionstest' => '/unit/WindowsAzure/Queue/Models/CreateQueueOptionsTest.php',
             'tests\\unit\\windowsazure\\queue\\models\\getqueuemetadataresulttest' => '/unit/WindowsAzure/Queue/Models/GetQueueMetadataResultTest.php',
@@ -161,6 +162,7 @@ spl_autoload_register(
             'tests\\unit\\windowsazure\\queue\\models\\queuetest' => '/unit/WindowsAzure/Queue/Models/QueueTest.php',
             'tests\\unit\\windowsazure\\queue\\models\\updatemessageresulttest' => '/unit/WindowsAzure/Queue/Models/UpdateMessageResultTest.php',
             'tests\\unit\\windowsazure\\queue\\models\\windowsazurequeuemessagetest' => '/unit/WindowsAzure/Queue/Models/WindowsAzureQueueMessageTest.php',
+            'tests\\unit\\windowsazure\\queue\\queuerestproxytest' => '/unit/WindowsAzure/Queue/QueueRestProxyTest.php',
             'tests\\unit\\windowsazure\\queue\\queueservicetest' => '/unit/WindowsAzure/Queue/QueueServiceTest.php',
             'tests\\unit\\windowsazure\\servicemanagement\\internal\\servicemanagementrestproxytest' => '/unit/WindowsAzure/ServiceManagement/ServiceManagementRestProxyTest.php',
             'tests\\unit\\windowsazure\\servicemanagement\\models\\affinitygrouptest' => '/unit/WindowsAzure/ServiceManagement/Models/AffinityGroupTest.php',
@@ -234,8 +236,6 @@ spl_autoload_register(
             'tests\\unit\\windowsazure\\table\\models\\tableserviceoptionstest' => '/unit/WindowsAzure/Table/Models/TableServiceOptionsTest.php',
             'tests\\unit\\windowsazure\\table\\models\\updateentityresulttest' => '/unit/WindowsAzure/Table/Models/UpdateEntityResultTest.php',
             'tests\\unit\\windowsazure\\table\\tableservicetest' => '/unit/WindowsAzure/Table/TableServiceTest.php',
-            'tests\\unit\\windowsazure\\utilitiestest' => '/unit/WindowsAzure/Common/Internal/UtilitiesTest.php',
-            'tests\\unit\\windowsazure\\validatetest' => '/unit/WindowsAzure/Common/Internal/ValidateTest.php'
           );
       }
       $cn = strtolower($class);
