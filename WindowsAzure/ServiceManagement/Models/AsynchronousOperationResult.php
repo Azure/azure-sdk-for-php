@@ -51,7 +51,7 @@ class AsynchronousOperationResult
      * 
      * @return AsynchronousOperationResult 
      */
-    public function create($headers)
+    public static function create($headers)
     {
         $result             = new AsynchronousOperationResult();
         $result->_requestId = Utilities::tryGetValue(

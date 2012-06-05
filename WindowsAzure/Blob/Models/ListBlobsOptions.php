@@ -15,7 +15,7 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   WindowsAzure
+ * @package   WindowsAzure\Blob\Models
  * @author    Azure PHP SDK <azurephpsdk@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
@@ -26,10 +26,10 @@ namespace WindowsAzure\Blob\Models;
 use WindowsAzure\Common\Internal\Validate;
 
 /**
- * Short description
+ * Optional parameters for listBlobs API.
  *
  * @category  Microsoft
- * @package   WindowsAzure
+ * @package   WindowsAzure\Blob\Models
  * @author    Azure PHP SDK <azurephpsdk@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0

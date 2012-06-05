@@ -15,7 +15,7 @@ It is build as a thin REST call wrapper where each server call maps to a single 
   <active>yes</active>
  </lead>
  <date>2012-06-04</date>
- <time>16:53:08</time>
+ <time>18:58:09</time>
  <version>
   <release>0.1.0</release>
   <api>0.1.0</api>
@@ -54,17 +54,17 @@ It is build as a thin REST call wrapper where each server call maps to a single 
    <file baseinstalldir="/" md5sum="19ab90ecf4c457a596b8c4278d485a82" name="/WindowsAzure/Blob/Models/Container.php" role="php" />
    <file baseinstalldir="/" md5sum="a95dbe972fbe2152da8d29b501426ca1" name="/WindowsAzure/Blob/Models/ContainerACL.php" role="php" />
    <file baseinstalldir="/" md5sum="027a1640a042dbdcb0260ec08ff72436" name="/WindowsAzure/Blob/Models/ContainerProperties.php" role="php" />
-   <file baseinstalldir="/" md5sum="0747403f9dcee5d4b33da7995f121591" name="/WindowsAzure/Blob/Models/CopyBlobOptions.php" role="php" />
-   <file baseinstalldir="/" md5sum="a4684bd18da8ef8bf2871ba80d32ad6f" name="/WindowsAzure/Blob/Models/CopyBlobResult.php" role="php" />
+   <file baseinstalldir="/" md5sum="90ac9096f0d5b67e10d209d5fff68094" name="/WindowsAzure/Blob/Models/CopyBlobOptions.php" role="php" />
+   <file baseinstalldir="/" md5sum="57334f5ff12538a62ff9fe66f3239946" name="/WindowsAzure/Blob/Models/CopyBlobResult.php" role="php" />
    <file baseinstalldir="/" md5sum="ccaddbdefc2e16eaef4792d4776e50bb" name="/WindowsAzure/Blob/Models/CreateBlobBlockOptions.php" role="php" />
    <file baseinstalldir="/" md5sum="093fa9266ce9557f776db6b3fff0173a" name="/WindowsAzure/Blob/Models/CreateBlobOptions.php" role="php" />
    <file baseinstalldir="/" md5sum="dcff594d8e7f58f94111e667b11aa582" name="/WindowsAzure/Blob/Models/CreateBlobPagesOptions.php" role="php" />
    <file baseinstalldir="/" md5sum="05d7d1bcc6e34394d9f00ad3fb081c36" name="/WindowsAzure/Blob/Models/CreateBlobPagesResult.php" role="php" />
-   <file baseinstalldir="/" md5sum="dd27f42de4b0d2ecaf93eb478365f705" name="/WindowsAzure/Blob/Models/CreateBlobSnapshotOptions.php" role="php" />
-   <file baseinstalldir="/" md5sum="469d5f1f0a28622dcf9b2e5d05822f40" name="/WindowsAzure/Blob/Models/CreateBlobSnapshotResult.php" role="php" />
+   <file baseinstalldir="/" md5sum="a5eb9d90135350a070f40cbab73d5947" name="/WindowsAzure/Blob/Models/CreateBlobSnapshotOptions.php" role="php" />
+   <file baseinstalldir="/" md5sum="a3fe3c1413763cc9aa8ae59af8be1c1b" name="/WindowsAzure/Blob/Models/CreateBlobSnapshotResult.php" role="php" />
    <file baseinstalldir="/" md5sum="39283a7effda3da465f40604fdbee736" name="/WindowsAzure/Blob/Models/CreateContainerOptions.php" role="php" />
    <file baseinstalldir="/" md5sum="17adc4edfba70638c4234b9b0b9225f0" name="/WindowsAzure/Blob/Models/DeleteBlobOptions.php" role="php" />
-   <file baseinstalldir="/" md5sum="1c711c63e7a60d51417cc8ac5d4ddf58" name="/WindowsAzure/Blob/Models/DeleteContainerOptions.php" role="php" />
+   <file baseinstalldir="/" md5sum="97759acad454e9b6bb82ddc5c51f10be" name="/WindowsAzure/Blob/Models/DeleteContainerOptions.php" role="php" />
    <file baseinstalldir="/" md5sum="73c06190b40f32430d1d7a7bc4030b54" name="/WindowsAzure/Blob/Models/GetBlobMetadataOptions.php" role="php" />
    <file baseinstalldir="/" md5sum="3da59c973a51fd739afae5e54261ec0c" name="/WindowsAzure/Blob/Models/GetBlobMetadataResult.php" role="php" />
    <file baseinstalldir="/" md5sum="2ae27cb3c872c4c8cedb1acb989a5a72" name="/WindowsAzure/Blob/Models/GetBlobOptions.php" role="php" />
@@ -76,7 +76,7 @@ It is build as a thin REST call wrapper where each server call maps to a single 
    <file baseinstalldir="/" md5sum="d7e902547eca56cbba0a27a6ec67ce6f" name="/WindowsAzure/Blob/Models/LeaseMode.php" role="php" />
    <file baseinstalldir="/" md5sum="a4f427404b4d35e27a7569ed3ffb8440" name="/WindowsAzure/Blob/Models/ListBlobBlocksOptions.php" role="php" />
    <file baseinstalldir="/" md5sum="9b48fc9c80d0e517a53664069a5ebdaa" name="/WindowsAzure/Blob/Models/ListBlobBlocksResult.php" role="php" />
-   <file baseinstalldir="/" md5sum="48396d8702fff895db851320f86ab981" name="/WindowsAzure/Blob/Models/ListBlobsOptions.php" role="php" />
+   <file baseinstalldir="/" md5sum="694729111fe12c3cfd5ff88354a93d3e" name="/WindowsAzure/Blob/Models/ListBlobsOptions.php" role="php" />
    <file baseinstalldir="/" md5sum="0316eb7238b32937f7a1d1ace0c8ec2d" name="/WindowsAzure/Blob/Models/ListBlobsResult.php" role="php" />
    <file baseinstalldir="/" md5sum="8369b795839493ecf041e5f5d73b1de7" name="/WindowsAzure/Blob/Models/ListContainersOptions.php" role="php" />
    <file baseinstalldir="/" md5sum="75f131a1ac927fe939100955b8c1541a" name="/WindowsAzure/Blob/Models/ListContainersResult.php" role="php" />
@@ -102,7 +102,7 @@ It is build as a thin REST call wrapper where each server call maps to a single 
    <file baseinstalldir="/" md5sum="2f594921fe3dcae8213a8ed8d187e43f" name="/WindowsAzure/Common/Internal/RestProxy.php" role="php" />
    <file baseinstalldir="/" md5sum="cfe5434a8c190fd2bd5ed1baf71e455b" name="/WindowsAzure/Common/Internal/ServiceRestProxy.php" role="php" />
    <file baseinstalldir="/" md5sum="402c501ffbe41d0a3345b04c07271b9e" name="/WindowsAzure/Common/Internal/ServicesBuilder.php" role="php" />
-   <file baseinstalldir="/" md5sum="1ad40576459e642d1526c955f4c4a505" name="/WindowsAzure/Common/Internal/Utilities.php" role="php" />
+   <file baseinstalldir="/" md5sum="4d4411dbafe0f83fc98a9b2c1f04fafe" name="/WindowsAzure/Common/Internal/Utilities.php" role="php" />
    <file baseinstalldir="/" md5sum="b23844425f0ebe753e9e98a8410aabda" name="/WindowsAzure/Common/Internal/Validate.php" role="php" />
    <file baseinstalldir="/" md5sum="ad1a48dc2e52a2a70ee256f459c98d42" name="/WindowsAzure/Common/Internal/Authentication/SharedKeyAuthScheme.php" role="php" />
    <file baseinstalldir="/" md5sum="81480d0ec2663282dd5a6f9c93a75aef" name="/WindowsAzure/Common/Internal/Authentication/StorageAuthScheme.php" role="php" />
@@ -149,7 +149,7 @@ It is build as a thin REST call wrapper where each server call maps to a single 
    <file baseinstalldir="/" md5sum="bb9fedc794e33751cf86043984ee0bc2" name="/WindowsAzure/ServiceManagement/ServiceManagementSettings.php" role="php" />
    <file baseinstalldir="/" md5sum="08c64383c1c3d5df720136d8bbf3415a" name="/WindowsAzure/ServiceManagement/Internal/IServiceManagement.php" role="php" />
    <file baseinstalldir="/" md5sum="83a7169070b557a03cb4e08634ee9ccf" name="/WindowsAzure/ServiceManagement/Models/AffinityGroup.php" role="php" />
-   <file baseinstalldir="/" md5sum="17211b5559536c9dc50f7ebbc7aa62b1" name="/WindowsAzure/ServiceManagement/Models/AsynchronousOperationResult.php" role="php" />
+   <file baseinstalldir="/" md5sum="28a54106530269df61fbc93e6f86b467" name="/WindowsAzure/ServiceManagement/Models/AsynchronousOperationResult.php" role="php" />
    <file baseinstalldir="/" md5sum="edce17c0f4ca02bd97334cdab33145f6" name="/WindowsAzure/ServiceManagement/Models/CreateAffinityGroupOptions.php" role="php" />
    <file baseinstalldir="/" md5sum="a237e1928c4d357fd6b02557c3202e96" name="/WindowsAzure/ServiceManagement/Models/CreateStorageServiceOptions.php" role="php" />
    <file baseinstalldir="/" md5sum="4472df804153f80e5c9481276344953a" name="/WindowsAzure/ServiceManagement/Models/GetAffinityGroupPropertiesResult.php" role="php" />
@@ -213,7 +213,7 @@ It is build as a thin REST call wrapper where each server call maps to a single 
    <file baseinstalldir="/" md5sum="10b8e1f6053d86bca4f0e276e1b3e7b8" name="/WindowsAzure/Table/Internal/IAtomReaderWriter.php" role="php" />
    <file baseinstalldir="/" md5sum="3a8bec0ba2bb7eaf280e3164095c4a10" name="/WindowsAzure/Table/Internal/IMimeReaderWriter.php" role="php" />
    <file baseinstalldir="/" md5sum="22e7433321b1657170fed99fd85136b7" name="/WindowsAzure/Table/Internal/ITable.php" role="php" />
-   <file baseinstalldir="/" md5sum="a52ddec0197d38eb66cbe36e0759f35c" name="/WindowsAzure/Table/Internal/MimeReaderWriter.php" role="php" />
+   <file baseinstalldir="/" md5sum="c47aa1efeeee28f0f31ea18d746da135" name="/WindowsAzure/Table/Internal/MimeReaderWriter.php" role="php" />
    <file baseinstalldir="/" md5sum="3920ae2e46b9a807e81f6f998c5b4f92" name="/WindowsAzure/Table/Models/BatchError.php" role="php" />
    <file baseinstalldir="/" md5sum="62ddbe6fb18d4a82ab10ab881c4fddca" name="/WindowsAzure/Table/Models/BatchOperation.php" role="php" />
    <file baseinstalldir="/" md5sum="c5ff828db31d8ba43952423adef546d7" name="/WindowsAzure/Table/Models/BatchOperationParameterName.php" role="php" />
@@ -234,9 +234,9 @@ It is build as a thin REST call wrapper where each server call maps to a single 
    <file baseinstalldir="/" md5sum="5decca5c0a7b5bebfe096ec32228dea1" name="/WindowsAzure/Table/Models/QueryTablesResult.php" role="php" />
    <file baseinstalldir="/" md5sum="4ac40af2310aa326c0a949e6c94ff396" name="/WindowsAzure/Table/Models/TableServiceOptions.php" role="php" />
    <file baseinstalldir="/" md5sum="11f74752251051cd0a95eb6fa7a181f4" name="/WindowsAzure/Table/Models/UpdateEntityResult.php" role="php" />
-   <file baseinstalldir="/" md5sum="6bb3ab334e9f906308ca72294d94554c" name="/WindowsAzure/Table/Models/Filters/BinaryFilter.php" role="php" />
+   <file baseinstalldir="/" md5sum="13f1b46d631ba3e84245382d5fcdfd7f" name="/WindowsAzure/Table/Models/Filters/BinaryFilter.php" role="php" />
    <file baseinstalldir="/" md5sum="ad45a166e56390bdba39d53a099ef4eb" name="/WindowsAzure/Table/Models/Filters/ConstantFilter.php" role="php" />
-   <file baseinstalldir="/" md5sum="c16963dbbdd82a6c11749421be80d6cf" name="/WindowsAzure/Table/Models/Filters/Filter.php" role="php" />
+   <file baseinstalldir="/" md5sum="a8e98004c15edc3b4347cb86297cf195" name="/WindowsAzure/Table/Models/Filters/Filter.php" role="php" />
    <file baseinstalldir="/" md5sum="2f6dc6ab7f7fd70bb77445d394bbcbeb" name="/WindowsAzure/Table/Models/Filters/PropertyNameFilter.php" role="php" />
    <file baseinstalldir="/" md5sum="f08bfa3f01506f104c802d38503d4e07" name="/WindowsAzure/Table/Models/Filters/QueryStringFilter.php" role="php" />
    <file baseinstalldir="/" md5sum="07d2434496174790f04dd0fd0265220a" name="/WindowsAzure/Table/Models/Filters/UnaryFilter.php" role="php" />
