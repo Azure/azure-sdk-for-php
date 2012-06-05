@@ -6,6 +6,8 @@
 
  <target name="build-parallel"
    depends="prepare,lint,tools-parallel,phpunit,phpcb"/>
+ <target name="pear-package"
+   depends="discover-channel,pear-package-xml,pear-package-file"/>
 
  <target name="tools-parallel"
          description="Run tools in parallel">
@@ -165,10 +167,23 @@
   </exec>
  </target>
  
- <target name="pear-package" description="Generates PEAR package.xml">
+ <target name="discover-channel" description="Discovers Windows Azure Channel">
+  <exec executable="pear.bat">
+  <arg value="channel-discover" />
+  <arg value="pear.windowsazure.com" />
+  </exec>
+ </target>
+ 
+ <target name="pear-package-xml" description="Generates PEAR package.xml">
   <exec executable="php.exe">
   <arg path="${basedir}/package.php" />
   <arg value="make" />
+  </exec>
+ </target>
+ 
+ <target name="pear-package-file" description="Generates PEAR package file from package.xml">
+  <exec executable="pear.bat">
+  <arg value="package" />
   </exec>
  </target>
 </project>

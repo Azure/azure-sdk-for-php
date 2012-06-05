@@ -1,7 +1,7 @@
 <?php
 
 /**
- * LICENSE: Licensed under the Apache License, Version 2.0 (the "License");
+ * LICENSE: Licensed under the Apache License, Version 2.0 (the "License")
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  * http://www.apache.org/licenses/LICENSE-2.0
@@ -2183,18 +2183,25 @@ class BlobRestProxy extends ServiceRestProxy implements IBlob
         if (is_null($options)) {
             $options = new CopyBlobOptions();
         }
+        
+        $this->addOptionalQueryParam(
+            $queryParams,
+            Resources::QP_TIMEOUT,
+            $options->getTimeout()
+        );
+        
         $sourceBlobPath = $this->_getCopyBlobSourceName(
             $sourceContainer, 
             $sourceBlob,
             $options
         );
         
-        $this->addOptionalAccessConditionHeader(
+        $headers = $this->addOptionalAccessConditionHeader(
             $headers, 
             $options->getAccessCondition()
         );
         
-        $this->addOptionalSourceAccessConditionHeader(
+        $headers = $this->addOptionalSourceAccessConditionHeader(
             $headers,
             $options->getSourceAccessCondition()
         );
