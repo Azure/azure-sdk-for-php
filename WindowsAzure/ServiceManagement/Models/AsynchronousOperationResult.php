@@ -19,7 +19,7 @@
  * @author    Azure PHP SDK <azurephpsdk@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
- * @link      https://github.com/windowsazure/azure-sdk-for-php
+ * @link      http://pear.php.net/package/azure-sdk-for-php
  */
  
 namespace WindowsAzure\ServiceManagement\Models;
@@ -35,7 +35,7 @@ use WindowsAzure\Common\Internal\Utilities;
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @version   Release: @package_version@
- * @link      https://github.com/windowsazure/azure-sdk-for-php
+ * @link      http://pear.php.net/package/azure-sdk-for-php
  */
 class AsynchronousOperationResult
 {
@@ -51,7 +51,7 @@ class AsynchronousOperationResult
      * 
      * @return AsynchronousOperationResult 
      */
-    public static function create($headers)
+    public function create($headers)
     {
         $result             = new AsynchronousOperationResult();
         $result->_requestId = Utilities::tryGetValue(

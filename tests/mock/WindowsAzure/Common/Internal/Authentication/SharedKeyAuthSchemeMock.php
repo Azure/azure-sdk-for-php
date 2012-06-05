@@ -1,6 +1,10 @@
 <?php
 
 /**
+ * Implementation of class SharedKeyAuthSchemeMock.
+ *
+ * PHP version 5
+ *
  * LICENSE: Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -12,14 +16,11 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- * PHP version 5
- *
- * @category  Microsoft
- * @package   Tests\Mock\WindowsAzure\Common\Internal\Authentication
- * @author    Azure PHP SDK <azurephpsdk@microsoft.com>
- * @copyright 2012 Microsoft Corporation
- * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
- * @link      https://github.com/windowsazure/azure-sdk-for-php
+ * @package    WindowsAzure-sdk-for-php
+ * @author     Azure PHP SDK <azurephpsdk@microsoft.com>
+ * @copyright  2012 Microsoft Corporation
+ * @license    http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
+ * @link       http://pear.php.net/package/azure-sdk-for-php
  */
  
 namespace Tests\Mock\WindowsAzure\Common\Internal\Authentication;
@@ -33,7 +34,7 @@ use WindowsAzure\Common\Internal\Authentication\SharedKeyAuthScheme;
  * @copyright  2012 Microsoft Corporation
  * @license    http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @version    Release: @package_version@
- * @link       https://github.com/windowsazure/azure-sdk-for-php
+ * @link       http://pear.php.net/package/azure-sdk-for-php
  */
 class SharedKeyAuthSchemeMock extends SharedKeyAuthScheme
 {
