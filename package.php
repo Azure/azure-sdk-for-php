@@ -18,7 +18,7 @@
  * @author    Azure PHP SDK <azurephpsdk@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
- * @link      http://pear.php.net/package/azure-sdk-for-php
+ * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
 require_once 'PEAR/PackageFileManager2.php';
 require_once 'Defaults.php';
