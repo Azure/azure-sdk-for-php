@@ -6,5 +6,7 @@ build/pdepend
 build/phpdox
 channel
 phpunit.xml
+ChannelManager.php
 cache.properties
 nbproject
+*.tgz
