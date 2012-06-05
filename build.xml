@@ -2,7 +2,7 @@
 
 <project name="azure-sdk-for-php" default="build">
  <target name="build"
-   depends="prepare,lint,phploc,pdepend,phpmd-ci,phpcs-ci,phpcpd,phpdox,phpunit,phpcb,pear-package"/>
+   depends="prepare,lint,phploc,pdepend,phpmd-ci,phpcs-ci,phpcpd,phpdoc,phpunit,phpcb,pear-package"/>
 
  <target name="build-parallel"
    depends="prepare,lint,tools-parallel,phpunit,phpcb"/>
@@ -146,9 +146,11 @@
   </exec>
  </target>
 
- <target name="phpdox"
-         description="Generate API documentation using phpDox">
-  <exec executable="phpdox.bat"/>
+ <target name="phpdoc" description="Generate API documentation using phpDoc">
+  <exec executable="phpdoc.bat">
+   <arg value="-t" />
+   <arg path="${basedir}/build/api" />
+  </exec>
  </target>
 
  <target name="phpunit" description="Run unit tests with PHPUnit">

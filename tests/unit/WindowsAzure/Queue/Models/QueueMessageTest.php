@@ -19,7 +19,7 @@
  * @author    Azure PHP SDK <azurephpsdk@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
- * @link      http://pear.php.net/package/azure-sdk-for-php
+ * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
 
 namespace Tests\Unit\WindowsAzure\Queue\Models;
@@ -36,7 +36,7 @@ use WindowsAzure\Common\Internal\Serialization\XmlSerializer;
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @version   Release: @package_version@
- * @link      http://pear.php.net/package/azure-sdk-for-php
+ * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
 class QueueMessageTest extends \PHPUnit_Framework_TestCase
 {
