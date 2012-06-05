@@ -22,6 +22,7 @@
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
 
+namespace Tests\Unit\WindowsAzure;
 use WindowsAzure\Common\ServiceException;
 
 /**
@@ -35,7 +36,7 @@ use WindowsAzure\Common\ServiceException;
  * @version   Release: @package_version@
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
-class ServiceExceptionTest extends PHPUnit_Framework_TestCase
+class ServiceExceptionTest extends \PHPUnit_Framework_TestCase
 {
     /**
      * @covers WindowsAzure\Common\ServiceException::__construct

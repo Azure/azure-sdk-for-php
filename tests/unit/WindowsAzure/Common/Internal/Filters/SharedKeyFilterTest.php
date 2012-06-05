@@ -15,13 +15,14 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   Tests\Unit\WindowsAzure
+ * @package   Tests\Unit\WindowsAzure\Common\Internal\Filters
  * @author    Azure PHP SDK <azurephpsdk@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
 
+namespace Tests\Unit\WindowsAzure\Common\Internal\Filters;
 use WindowsAzure\Common\Internal\Filters\SharedKeyFilter;
 use WindowsAzure\Common\Internal\Http\HttpClient;
 use WindowsAzure\Common\Internal\Resources;
@@ -38,7 +39,7 @@ use WindowsAzure\Common\Internal\InvalidArgumentTypeException;
  * @version   Release: @package_version@
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
-class SharedKeyFilterTest extends PHPUnit_Framework_TestCase
+class SharedKeyFilterTest extends \PHPUnit_Framework_TestCase
 {
     /**
      * @covers WindowsAzure\Common\Internal\Filters\SharedKeyFilter::handleRequest

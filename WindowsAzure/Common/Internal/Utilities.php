@@ -448,7 +448,7 @@ class Utilities
      * 
      * @return array
      */
-    public function orderArray($array, $order)
+    public static function orderArray($array, $order)
     {
         $ordered = array();
         
