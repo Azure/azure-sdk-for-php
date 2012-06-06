@@ -98,15 +98,15 @@ There are four basic steps that have to be performed before you can make a call 
 To create a table call **createTable**:
 
 ```PHP
-	try	{
-		// Create table.
-		$tableRestProxy->createTable("mytable");
-	}
-	catch(ServiceException $e){
-		$code = $e->getCode();
-		$error_message = $e->getMessage();
-		echo $code.": ".$error_message."<br />";
-	}
+try	{
+	// Create table.
+	$tableRestProxy->createTable("mytable");
+}
+catch(ServiceException $e){
+	$code = $e->getCode();
+	$error_message = $e->getMessage();
+	echo $code.": ".$error_message."<br />";
+}
 ```
 
 ### Insert an entity
@@ -114,22 +114,22 @@ To create a table call **createTable**:
 To add an entity to a table, create a new **Entity** object and pass it to **TableRestProxy->insertEntity**. Note that when you create an entity you must specify a `PartitionKey` and `RowKey`. These are the unique identifiers for an entity and are values that can be queried much faster than other entity properties. The system uses `PartitionKey` to automatically distribute the table’s entities over many storage nodes.
 
 ```PHP
-	use WindowsAzure\Table\Models\Entity;
-	use WindowsAzure\Table\Models\EdmType;
-	
-	$entity = new Entity();
-	$entity->setPartitionKey("pk");
-	$entity->setRowKey("1");
-	$entity->addProperty("PropertyName", EdmType::STRING, "Sample");
-	
-	try{
-		$tableRestProxy->insertEntity("mytable", $entity);
-	}
-	catch(ServiceException $e){
-		$code = $e->getCode();
-		$error_message = $e->getMessage();
-		echo $code.": ".$error_message."<br />";
-	}
+use WindowsAzure\Table\Models\Entity;
+use WindowsAzure\Table\Models\EdmType;
+
+$entity = new Entity();
+$entity->setPartitionKey("pk");
+$entity->setRowKey("1");
+$entity->addProperty("PropertyName", EdmType::STRING, "Sample");
+
+try{
+	$tableRestProxy->insertEntity("mytable", $entity);
+}
+catch(ServiceException $e){
+	$code = $e->getCode();
+	$error_message = $e->getMessage();
+	echo $code.": ".$error_message."<br />";
+}
 ```
 
 ### Query entities
@@ -137,22 +137,22 @@ To add an entity to a table, create a new **Entity** object and pass it to **Tab
 To query for entities you can call **queryEntities**. The subset of entities you retrieve will be determined by the filter you use (for more information, see [Querying Tables and Entities](http://msdn.microsoft.com/en-us/library/windowsazure/dd894031.aspx)). You can also provide no filter at all.
 
 ```PHP
-	$filter = "RowKey eq '2'";
-	
-	try	{
-		$result = $tableRestProxy->queryEntities("mytable", $filter);
-	}
-	catch(ServiceException $e){
-		$code = $e->getCode();
-		$error_message = $e->getMessage();
-		echo $code.": ".$error_message."<br />";
-	}
-	
-	$entities = $result->getEntities();
-	
-	foreach($entities as $entity){
-		echo $entity->getPartitionKey().":".$entity->getRowKey()."<br />";
-	}
+$filter = "RowKey eq '2'";
+
+try	{
+	$result = $tableRestProxy->queryEntities("mytable", $filter);
+}
+catch(ServiceException $e){
+	$code = $e->getCode();
+	$error_message = $e->getMessage();
+	echo $code.": ".$error_message."<br />";
+}
+
+$entities = $result->getEntities();
+
+foreach($entities as $entity){
+	echo $entity->getPartitionKey().":".$entity->getRowKey()."<br />";
+}
 ```
 
 ### Updating an entity
@@ -160,22 +160,22 @@ To query for entities you can call **queryEntities**. The subset of entities you
 An existing entity can be updated by using the **Entity->setProperty** and **Entity->addProperty** methods on the entity, and then calling **TableRestProxy->updateEntity**. The following example retrieves an entity, modifies one property, removes another property, and adds a new property. Note that removing a property is done by setting its value to **null**. 
 
 ```PHP
-	$result = $tableRestProxy->getEntity("mytable", "pk", 1);
-	
-	$entity = $result->getEntity();
-	
-	$entity->setPropertyValue("OneProperty", 'New Value');
-	
-	$entity->addProperty("AnotherProperty", EdmType::STRING, 'Another Value');
+$result = $tableRestProxy->getEntity("mytable", "pk", 1);
 
-	try	{
-		$tableRestProxy->updateEntity("mytable", $entity);
-	}
-	catch(ServiceException $e){
-		$code = $e->getCode();
-		$error_message = $e->getMessage();
-		echo $code.": ".$error_message."<br />";
-	}
+$entity = $result->getEntity();
+
+$entity->setPropertyValue("OneProperty", 'New Value');
+
+$entity->addProperty("AnotherProperty", EdmType::STRING, 'Another Value');
+
+try	{
+	$tableRestProxy->updateEntity("mytable", $entity);
+}
+catch(ServiceException $e){
+	$code = $e->getCode();
+	$error_message = $e->getMessage();
+	echo $code.": ".$error_message."<br />";
+}
 ```
 
 ### Deletig an entity
@@ -183,17 +183,18 @@ An existing entity can be updated by using the **Entity->setProperty** and **Ent
 To delete an entity simply call **deleteEntity**:
 
 ```PHP
-	try	{
-		// Delete entity.
-		$tableRestProxy->deleteEntity("mytable", "pk", "rk");
-	}
-	catch(ServiceException $e){
+try	{
+	// Delete entity.
+	$tableRestProxy->deleteEntity("mytable", "pk", "rk");
+}
+catch(ServiceException $e){
 
-		$code = $e->getCode();
-		$error_message = $e->getMessage();
-		echo $code.": ".$error_message."<br />";
-	}
+	$code = $e->getCode();
+	$error_message = $e->getMessage();
+	echo $code.": ".$error_message."<br />";
+}
 ```
+
 
 
 ## Blob Storage
@@ -221,7 +222,7 @@ There are four basic steps that have to be performed before you can make a call 
 
 		use WindowsAzure\Common\ServiceException;
 
-	[Error Codes and Messages](http://msdn.microsoft.com/en-us/library/windowsazure/dd179438.aspx)
+	[Error Codes and Messages](http://msdn.microsoft.com/en-us/library/windowsazure/dd179439.aspx)
 	
 * To set-up your authentication information:
 
@@ -239,86 +240,76 @@ There are four basic steps that have to be performed before you can make a call 
 ### Create a container
 
 ```PHP
-	// OPTIONAL: Set public access policy and metadata.
-	// Create container options object.
-	$createContainerOptions = new CreateContainerOptions();	
+// OPTIONAL: Set public access policy and metadata.
+// Create container options object.
+$createContainerOptions = new CreateContainerOptions();	
 
-	// Set public access policy. Possible values are 
-	// PublicAccessType::CONTAINER_AND_BLOBS and PublicAccessType::BLOBS_ONLY.
-	// CONTAINER_AND_BLOBS: 	
-	// Specifies full public read access for container and blob data.
-    // proxys can enumerate blobs within the container via anonymous 
-	// request, but cannot enumerate containers within the storage account.
-	//
-	// BLOBS_ONLY:
-	// Specifies public read access for blobs. Blob data within this 
-    // container can be read via anonymous request, but container data is not 
-    // available. proxys cannot enumerate blobs within the container via 
-	// anonymous request.
-	// If this value is not specified in the request, container data is 
-	// private to the account owner.
-	$createContainerOptions->setPublicAccess(PublicAccessType::CONTAINER_AND_BLOBS);
-	
-	// Set container metadata
-	$createContainerOptions->addMetaData("key1", "value1");
-	$createContainerOptions->addMetaData("key2", "value2");
-	
-	try	{
-		// Create container.
-		$blobRestProxy->createContainer("mycontainer", $createContainerOptions);
-	}
-	catch(ServiceException $e){
-		$code = $e->getCode();
-		$error_message = $e->getMessage();
-		echo $code.": ".$error_message."<br />";
-	}
+// Set public access policy. Possible values are 
+// PublicAccessType::CONTAINER_AND_BLOBS and PublicAccessType::BLOBS_ONLY.
+// CONTAINER_AND_BLOBS: full public read access for container and blob data.
+// BLOBS_ONLY: public read access for blobs. Container data not available.
+// If this value is not specified, container data is private to the account owner.
+$createContainerOptions->setPublicAccess(PublicAccessType::CONTAINER_AND_BLOBS);
+
+// Set container metadata
+$createContainerOptions->addMetaData("key1", "value1");
+$createContainerOptions->addMetaData("key2", "value2");
+
+try	{
+	// Create container.
+	$blobRestProxy->createContainer("mycontainer", $createContainerOptions);
+}
+catch(ServiceException $e){
+	$code = $e->getCode();
+	$error_message = $e->getMessage();
+	echo $code.": ".$error_message."<br />";
+}
 ```
 
-Calling **setPublicAccess(PublicAccessType::CONTAINER\_AND\_BLOBS)** makes the container and blob data accessible via anonymous requests. Calling **setPublicAccess(PublicAccessType::BLOBS_ONLY)** makes only blob data accessible via anonymous requests. For more information about container ACLs, see [Set Container ACL (REST API)](http://msdn.microsoft.com/en-us/library/windowsazure/dd179391.aspx).
+For more information about container ACLs, see [Set Container ACL (REST API)](http://msdn.microsoft.com/en-us/library/windowsazure/dd179391.aspx).
 
-For more information about Blob service error codes, see [Blob Service Error Codes](http://msdn.microsoft.com/en-us/library/windowsazure/dd179439.aspx).
 
 ### Upload a blob
 
 To upload a file as a blob, use the **BlobRestProxy->createBlockBlob** method. This operation will create the blob if it doesn’t exist, or overwrite it if it does. The code example below assumes that the container has already been created and uses [fopen](http://www.php.net/fopen) to open the file as a stream.
 
 ```PHP
-	$content = fopen("c:\myfile.txt", "r");
-	$blob_name = "myblob";
-	
-	try	{
-		//Upload blob
-		$blobRestProxy->createBlockBlob("mycontainer", $blob_name, $content);
-	}
-	catch(ServiceException $e){
-		$code = $e->getCode();
-		$error_message = $e->getMessage();
-		echo $code.": ".$error_message."<br />";
-	}
+$content = fopen("c:\myfile.txt", "r");
+$blob_name = "myblob";
+
+try	{
+	//Upload blob
+	$blobRestProxy->createBlockBlob("mycontainer", $blob_name, $content);
+}
+catch(ServiceException $e){
+	$code = $e->getCode();
+	$error_message = $e->getMessage();
+	echo $code.": ".$error_message."<br />";
+}
 ```
 
-Note that the example above uploads a blob as a stream. However, a blob can also be uploaded as a string.
+While the example above uploads a blob as a stream, a blob can also be uploaded as a string.
 
 ### List blobs in a container
 
-o list the blobs in a container, use the **BlobRestProxy->listBlobs** method with a **foreach** loop to loop through the result. The following code outputs the name of each blob in a container and its URI to the browser.
+To list the blobs in a container, use the **BlobRestProxy->listBlobs** method with a **foreach** loop to loop through the result. The following code outputs the name and URI of each blob in a container.
 
 ```PHP
-	try	{
-		// List blobs.
-		$blob_list = $blobRestProxy->listBlobs("mycontainer");
-		$blobs = $blob_list->getBlobs();
-		
-		foreach($blobs as $blob)
-		{
-			echo $blob->getName().": ".$blob->getUrl()."<br />";
-		}
+try	{
+	// List blobs.
+	$blob_list = $blobRestProxy->listBlobs("mycontainer");
+	$blobs = $blob_list->getBlobs();
+	
+	foreach($blobs as $blob)
+	{
+		echo $blob->getName().": ".$blob->getUrl()."<br />";
 	}
-	catch(ServiceException $e){
-		$code = $e->getCode();
-		$error_message = $e->getMessage();
-		echo $code.": ".$error_message."<br />";
-	}
+}
+catch(ServiceException $e){
+	$code = $e->getCode();
+	$error_message = $e->getMessage();
+	echo $code.": ".$error_message."<br />";
+}
 ```
 
 ### Download a blob
@@ -326,19 +317,19 @@ o list the blobs in a container, use the **BlobRestProxy->listBlobs** method wit
 To download a blob, call the **BlobRestProxy->getBlob** method, then call the **getContentStream** method on the resulting **GetBlobResult** object.
 
 ```PHP
-	try	{
-		// Get blob.
-		$blob = $blobRestProxy->getBlob("mycontainer", "myblob");
-		fpassthru($blob->getContentStream());
-	}
-	catch(ServiceException $e){
-		// Handle exception based on error codes and messages.
-		// Error codes and messages are here: 
-		// http://msdn.microsoft.com/en-us/library/windowsazure/dd179439.aspx
-		$code = $e->getCode();
-		$error_message = $e->getMessage();
-		echo $code.": ".$error_message."<br />";
-	}
+try	{
+	// Get blob.
+	$blob = $blobRestProxy->getBlob("mycontainer", "myblob");
+	fpassthru($blob->getContentStream());
+}
+catch(ServiceException $e){
+	// Handle exception based on error codes and messages.
+	// Error codes and messages are here: 
+	// http://msdn.microsoft.com/en-us/library/windowsazure/dd179439.aspx
+	$code = $e->getCode();
+	$error_message = $e->getMessage();
+	echo $code.": ".$error_message."<br />";
+}
 ```
 
 Note that the example above gets a blob as a stream resource. However, you can use the [stream\_get\_contents](http://www.php.net/stream_get_contents) function to convert the returned stream to a string.
@@ -348,15 +339,15 @@ Note that the example above gets a blob as a stream resource. However, you can u
 To delete a blob, pass the container name and blob name to **BlobRestProxy->deleteBlob**. 
 
 ```PHP
-	try	{
-		// Delete container.
-		$blobRestProxy->deleteBlob("mycontainer", "myblob");
-	}
-	catch(ServiceException $e){
-		$code = $e->getCode();
-		$error_message = $e->getMessage();
-		echo $code.": ".$error_message."<br />";
-	}
+try	{
+	// Delete container.
+	$blobRestProxy->deleteBlob("mycontainer", "myblob");
+}
+catch(ServiceException $e){
+	$code = $e->getCode();
+	$error_message = $e->getMessage();
+	echo $code.": ".$error_message."<br />";
+}
 ```
 
 ### Delete a container
@@ -364,15 +355,15 @@ To delete a blob, pass the container name and blob name to **BlobRestProxy->dele
 Finally, to delete a blob container, pass the container name to **BlobRestProxy->deleteContainer**.
 
 ```PHP
-	try	{
-		// Delete container.
-		$blobRestProxy->deleteContainer("mycontainer");
-	}
-	catch(ServiceException $e){
-		$code = $e->getCode();
-		$error_message = $e->getMessage();
-		echo $code.": ".$error_message."<br />";
-	}
+try	{
+	// Delete container.
+	$blobRestProxy->deleteContainer("mycontainer");
+}
+catch(ServiceException $e){
+	$code = $e->getCode();
+	$error_message = $e->getMessage();
+	echo $code.": ".$error_message."<br />";
+}
 ```
 
 ## Storage Queues
@@ -400,7 +391,7 @@ There are four basic steps that have to be performed before you can make a call 
 
 		use WindowsAzure\Common\ServiceException;
 
-	[Error Codes and Messages](http://msdn.microsoft.com/en-us/library/windowsazure/dd179438.aspx)
+	[Error Codes and Messages](http://msdn.microsoft.com/en-us/library/windowsazure/dd179446.aspx)
 	
 * To set-up your authentication information:
 
@@ -420,22 +411,19 @@ There are four basic steps that have to be performed before you can make a call 
 A **QueueRestProxy** object lets you create a queue with the **createQueue** method. When creating a queue, you can set options on the queue, but doing so is not required.
 
 ```PHP
-	$createQueueOptions = new CreateQueueOptions();
-	$createQueueOptions->addMetaData("key1", "value1");
-	$createQueueOptions->addMetaData("key2", "value2");
-	
-	try	{
-		// Create queue.
-		$queueRestProxy->createQueue("myqueue", $createQueueOptions);
-	}
-	catch(ServiceException $e){
-		// Handle exception based on error codes and messages.
-		// Error codes and messages are here: 
-		// http://msdn.microsoft.com/en-us/library/windowsazure/dd179446.aspx
-		$code = $e->getCode();
-		$error_message = $e->getMessage();
-		echo $code.": ".$error_message."<br />";
-	}
+$createQueueOptions = new CreateQueueOptions();
+$createQueueOptions->addMetaData("key1", "value1");
+$createQueueOptions->addMetaData("key2", "value2");
+
+try	{
+	// Create queue.
+	$queueRestProxy->createQueue("myqueue", $createQueueOptions);
+}
+catch(ServiceException $e){
+	$code = $e->getCode();
+	$error_message = $e->getMessage();
+	echo $code.": ".$error_message."<br />";
+}
 ```
 
 ### Add a message to a queue
@@ -443,15 +431,15 @@ A **QueueRestProxy** object lets you create a queue with the **createQueue** met
 To add a message to a queue, use **QueueRestProxy->createMessage**. The method takes the queue name, the message text, and message options (which are optional).
 
 ```PHP
-	try	{
-		// Create message.
-		$queueRestProxy->createMessage("myqueue", "Hello World!");
-	}
-	catch(ServiceException $e){
-		$code = $e->getCode();
-		$error_message = $e->getMessage();
-		echo $code.": ".$error_message."<br />";
-	}
+try	{
+	// Create message.
+	$queueRestProxy->createMessage("myqueue", "Hello World!");
+}
+catch(ServiceException $e){
+	$code = $e->getCode();
+	$error_message = $e->getMessage();
+	echo $code.": ".$error_message."<br />";
+}
 ```
 
 ### Peek at the next message
@@ -459,34 +447,34 @@ To add a message to a queue, use **QueueRestProxy->createMessage**. The method t
 You can peek at a message (or messages) at the front of a queue without removing it from the queue by calling **QueueRestProxy->peekMessages**.
 
 ```PHP
-	// OPTIONAL: Set peek message options.
-	$message_options = new PeekMessagesOptions();
-	$message_options->setNumberOfMessages(1); // Default value is 1.
-	
-	try	{
-		$peekMessagesResult = $queueRestProxy->peekMessages("myqueue", $message_options);
-	}
-	catch(ServiceException $e){
-		$code = $e->getCode();
-		$error_message = $e->getMessage();
-		echo $code.": ".$error_message."<br />";
-	}
-	
-	$messages = $peekMessagesResult->getQueueMessages();
+// OPTIONAL: Set peek message options.
+$message_options = new PeekMessagesOptions();
+$message_options->setNumberOfMessages(1); // Default value is 1.
 
-	// View messages.
-	$messageCount = count($messages);
-	if($messageCount <= 0){
-		echo "There are no messages.<br />";
+try	{
+	$peekMessagesResult = $queueRestProxy->peekMessages("myqueue", $message_options);
+}
+catch(ServiceException $e){
+	$code = $e->getCode();
+	$error_message = $e->getMessage();
+	echo $code.": ".$error_message."<br />";
+}
+
+$messages = $peekMessagesResult->getQueueMessages();
+
+// View messages.
+$messageCount = count($messages);
+if($messageCount <= 0){
+	echo "There are no messages.<br />";
+}
+else{
+	foreach($messages as $message)	{
+		echo "Peeked message:<br />";
+		echo "Message Id: ".$message->getMessageId()."<br />";
+		echo "Date: ".date_format($message->getInsertionDate(), 'Y-m-d')."<br />";
+		echo "Message text: ".$message->getMessageText()."<br /><br />";
 	}
-	else{
-		foreach($messages as $message)	{
-			echo "Peeked message:<br />";
-			echo "Message Id: ".$message->getMessageId()."<br />";
-			echo "Date: ".date_format($message->getInsertionDate(), 'Y-m-d')."<br />";
-			echo "Message text: ".$message->getMessageText()."<br /><br />";
-		}
-	}
+}
 ```
 
 ### De-queue the next message
@@ -494,27 +482,26 @@ You can peek at a message (or messages) at the front of a queue without removing
 Your code removes a message from a queue in two steps. First, you call **QueueRestProxy->listMessages**, which makes the message invisible to any other code reading from the queue. By default, this message will stay invisible for 30 seconds (if the message is not deleted in this time period, it will become visible on the queue again). To finish removing the message from the queue, you must call **QueueRestProxy->deleteMessage**.
 
 ```PHP
-	// Get message.
-	$listMessagesResult = $queueRestProxy->listMessages("myqueue");
-	$messages = $listMessagesResult->getQueueMessages();
-	$message = $messages[0];
-	
-	// Process message
-	
-	// Get message Id and pop receipt.
-	$messageId = $message->getMessageId();
-	$popReceipt = $message->getPopReceipt();
-	
-	try	{
-		// Delete message.
-		$queueRestProxy->deleteMessage("myqueue", $messageId, $popReceipt);
-	}
-	catch(ServiceException $e){
-		$code = $e->getCode();
-		$error_message = $e->getMessage();
-		echo $code.": ".$error_message."<br />";
-	}
+// Get message.
+$listMessagesResult = $queueRestProxy->listMessages("myqueue");
+$messages = $listMessagesResult->getQueueMessages();
+$message = $messages[0];
 
+// Process message
+
+// Get message Id and pop receipt.
+$messageId = $message->getMessageId();
+$popReceipt = $message->getPopReceipt();
+
+try	{
+	// Delete message.
+	$queueRestProxy->deleteMessage("myqueue", $messageId, $popReceipt);
+}
+catch(ServiceException $e){
+	$code = $e->getCode();
+	$error_message = $e->getMessage();
+	echo $code.": ".$error_message."<br />";
+}
 ```
 
 ### Change the contents of a queued message
@@ -522,32 +509,32 @@ Your code removes a message from a queue in two steps. First, you call **QueueRe
 You can change the contents of a message in-place in the queue by calling **QueueRestProxy->updateMessage**.
 
 ```PHP
-	// Get message.
-	$listMessagesResult = $queueRestProxy->listMessages("myqueue");
-	$messages = $listMessagesResult->getQueueMessages();
-	$message = $messages[0];
-	
-	// Define new message properties.
-	$new_message_text = "New message text.";
-	$new_visibility_timeout = 5; // Measured in seconds. 
-	
-	// Get message Id and pop receipt.
-	$messageId = $message->getMessageId();
-	$popReceipt = $message->getPopReceipt();
-	
-	try	{
-		// Update message.
-		$queueRestProxy->updateMessage("myqueue", 
-									$messageId, 
-									$popReceipt, 
-									$new_message_text, 
-									$new_visibility_timeout);
-	}
-	catch(ServiceException $e){
-		$code = $e->getCode();
-		$error_message = $e->getMessage();
-		echo $code.": ".$error_message."<br />";
-	}
+// Get message.
+$listMessagesResult = $queueRestProxy->listMessages("myqueue");
+$messages = $listMessagesResult->getQueueMessages();
+$message = $messages[0];
+
+// Define new message properties.
+$new_message_text = "New message text.";
+$new_visibility_timeout = 5; // Measured in seconds. 
+
+// Get message Id and pop receipt.
+$messageId = $message->getMessageId();
+$popReceipt = $message->getPopReceipt();
+
+try	{
+	// Update message.
+	$queueRestProxy->updateMessage("myqueue", 
+								$messageId, 
+								$popReceipt, 
+								$new_message_text, 
+								$new_visibility_timeout);
+}
+catch(ServiceException $e){
+	$code = $e->getCode();
+	$error_message = $e->getMessage();
+	echo $code.": ".$error_message."<br />";
+}
 ```
 
 ### Get queue length
@@ -555,16 +542,16 @@ You can change the contents of a message in-place in the queue by calling **Queu
 You can get an estimate of the number of messages in a queue. The **QueueRestProxy->getQueueMetadata** method asks the queue service to return metadata about the queue. Calling the **getApproximateMessageCount** method on the returned object provides a count of how many messages are in a queue. The count is only approximate because messages can be added or removed after the queue service responds to your request.
 
 ```PHP
-	try	{
-		// Get queue metadata.
-		$queue_metadata = $queueRestProxy->getQueueMetadata("myqueue");
-		$approx_msg_count = $queue_metadata->getApproximateMessageCount();
-	}
-	catch(ServiceException $e){
-		$code = $e->getCode();
-		$error_message = $e->getMessage();
-		echo $code.": ".$error_message."<br />";
-	}
+try	{
+	// Get queue metadata.
+	$queue_metadata = $queueRestProxy->getQueueMetadata("myqueue");
+	$approx_msg_count = $queue_metadata->getApproximateMessageCount();
+}
+catch(ServiceException $e){
+	$code = $e->getCode();
+	$error_message = $e->getMessage();
+	echo $code.": ".$error_message."<br />";
+}
 ```
 
 **For more examples please see the [Windows Azure PHP Developer Center](http://www.windowsazure.com/en-us/develop/php)**
