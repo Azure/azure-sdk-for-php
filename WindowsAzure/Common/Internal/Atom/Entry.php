@@ -34,7 +34,7 @@ use WindowsAzure\Common\Internal\Resources;
  * @author    Azure PHP SDK <azurephpsdk@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
- * @version   Release: @packageversion@
+ * @version   Release: @package_version@
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
 
@@ -155,7 +155,7 @@ class Entry
      */
     public function parseXml($xmlString)
     {
-        $entryXml         = simplexmlloadstring($xmlString);
+        $entryXml         = simplexml_load_string($xmlString);
         $this->attributes = $entryXml->attributes();
         $entryArray       = (array)$entryXml;
 

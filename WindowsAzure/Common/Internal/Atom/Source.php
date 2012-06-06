@@ -33,7 +33,7 @@ use WindowsAzure\Common\Internal\Validate;
  * @author    Azure PHP SDK <azurephpsdk@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
- * @version   Release: @packageversion@
+ * @version   Release: @package_version@
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
 

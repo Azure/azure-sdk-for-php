@@ -63,7 +63,7 @@ class BrokeredMessage
     /**
      * The date of the brokered message.
      * 
-     * @var DateTime 
+     * @var \DateTime 
      */
     private $_date;
 
@@ -161,7 +161,7 @@ class BrokeredMessage
     /**
      * Gets the date of the brokered message.
      * 
-     * @return DateTime
+     * @return \DateTime
      */
     public function getDate()
     {
@@ -171,7 +171,7 @@ class BrokeredMessage
     /** 
      * Sets the date of the brokered message. 
      * 
-     * @param DateTime $date Sets the date of the brokered message. 
+     * @param \DateTime $date Sets the date of the brokered message. 
      * 
      * @return none
      */

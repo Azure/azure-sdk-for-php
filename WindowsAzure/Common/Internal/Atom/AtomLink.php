@@ -34,7 +34,7 @@ use WindowsAzure\Common\Internal\Resources;
  * @author    Azure PHP SDK <azurephpsdk@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
- * @version   Release: @packageversion@
+ * @version   Release: @package_version@
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
 
@@ -105,7 +105,7 @@ class AtomLink
      */ 
     public function parseXml($xmlString)
     {
-        $atomLinkXml = simplexmlloadstring($xmlString);
+        $atomLinkXml = simplexml_load_string($xmlString);
         $attributes  = (array)$atomLinkXml->attributes();
 
         if (!empty($attributes['href'])) {

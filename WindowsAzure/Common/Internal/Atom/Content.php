@@ -34,7 +34,7 @@ use WindowsAzure\Common\Internal\Resources;
  * @author    Azure PHP SDK <azurephpsdk@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
- * @version   Release: @packageversion@
+ * @version   Release: @package_version@
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
 
@@ -61,7 +61,7 @@ class Content
      * 
      * @return none
      */
-    public function construct($text = null)
+    public function __construct($text = null)
     {
         $this->text = $text;
     }
@@ -75,7 +75,7 @@ class Content
      */ 
     public function parseXml($xmlString)
     {
-        $contentXml = simplexmlloadstring($xmlString);
+        $contentXml = simplexml_load_string($xmlString);
         $attributes = $contentXml->attributes();
 
         if (!empty($attributes['type'])) {

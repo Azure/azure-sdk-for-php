@@ -34,7 +34,7 @@ use WindowsAzure\Common\Internal\Resources;
  * @author    Azure PHP SDK <azurephpsdk@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
- * @version   Release: @packageversion@
+ * @version   Release: @package_version@
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
 
@@ -75,7 +75,7 @@ class Category
      *
      * @return none
      */
-    public function construct($undefinedContent = Resources::EMPTYSTRING)
+    public function __construct($undefinedContent = Resources::EMPTYSTRING)
     {
         $this->undefinedContent = $undefinedContent;
     }
@@ -89,7 +89,7 @@ class Category
      */ 
     public function parseXml($xmlString)
     {
-        $categoryXml = simplexmlloadstring($xmlString);
+        $categoryXml = simplexml_load_string($xmlString);
         $attributes  = $categoryXml->attributes();
         if (!empty($attributes['term'])) {
             $this->term = (string)$attributes['term'];
