@@ -67,7 +67,7 @@ class Person
      * @param string $name The name of the person.
      *
      */
-    public function __construct($name = Resources::EMPTYSTRING)
+    public function __construct($name = Resources::EMPTY_STRING)
     {
         $this->name = $name;
     }
@@ -86,15 +86,15 @@ class Person
         $attributes  = $personXml->attributes();
         $personArray = (array)$personXml;
 
-        if (arraykeyexists('name', $personArray)) {
+        if (array_key_exists('name', $personArray)) {
             $this->name = (string)$personArray['name'];
         }
 
-        if (arraykeyexists('uri', $personArray)) {
+        if (array_key_exists('uri', $personArray)) {
             $this->uri = (string)$personArray['uri'];
         }
 
-        if (arraykeyexists('email', $personArray)) {
+        if (array_key_exists('email', $personArray)) {
             $this->email = (string)$personArray['email'];
         }
     }

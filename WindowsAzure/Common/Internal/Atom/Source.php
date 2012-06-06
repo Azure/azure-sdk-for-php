@@ -158,63 +158,63 @@ class Source
         $attributes  = $sourceXml->attributes();
         $sourceArray = (array)$sourceXml;
 
-        if (arraykeyexists('author', $sourceArray)) {
+        if (array_key_exists('author', $sourceArray)) {
             $content = new Person();
             $content->parseXml($sourceArray['person']->asXML());
             $this->content = $content;
         }
 
-        if (arraykeyexists('category', $sourceArray)) {
+        if (array_key_exists('category', $sourceArray)) {
             $category = new Category();
             $category->parseXml($sourceArray['category']->asXML());
             $this->category = $category;
         }
 
-        if (arraykeyexists('contributor', $sourceArray)) {
+        if (array_key_exists('contributor', $sourceArray)) {
             $contributor = new Person();
             $contributor->parseXml($sourceArray['contributor']->asXML());
             $this->contributor = $contributor;
         }
 
-        if (arraykeyexists('generator', $sourceArray)) {
+        if (array_key_exists('generator', $sourceArray)) {
             $generator = new Generator();
             $generator->setText((string)$sourceArray['generator']->asXML());
             $this->generator = $generator;
         } 
 
-        if (arraykeyexists('icon', $sourceArray)) {
+        if (array_key_exists('icon', $sourceArray)) {
             $icon = new Icon();
             $icon->parseXml($sourceArray['icon']->asXML());
             $this->icon = $icon;
         }
 
-        if (arraykeyexists('id', $sourceArray)) {
+        if (array_key_exists('id', $sourceArray)) {
             $this->id = (string)$sourceArray['id'];
         }
 
-        if (arraykeyexists('link', $sourceArray)) {
+        if (array_key_exists('link', $sourceArray)) {
             $link = new AtomLink();
             $link->parseXml($sourceArray['link']->asXML());
             $this->link = $link;
         }
 
-        if (arraykeyexists('logo', $sourceArray)) {
+        if (array_key_exists('logo', $sourceArray)) {
             $this->logo = (string)$sourceArray['logo'];
         }
 
-        if (arraykeyexists('rights', $sourceArray)) {
+        if (array_key_exists('rights', $sourceArray)) {
             $this->rights = (string)$sourceArray['rights'];
         }
 
-        if (arraykeyexists('subtitle', $sourceArray)) {
+        if (array_key_exists('subtitle', $sourceArray)) {
             $this->subtitle = (string)$sourceArray['subtitle'];
         }
 
-        if (arraykeyexists('title', $sourceArray)) {
+        if (array_key_exists('title', $sourceArray)) {
             $this->title = (string)$sourceArray['title'];
         }
 
-        if (arraykeyexists('updated', $sourceArray)) {
+        if (array_key_exists('updated', $sourceArray)) {
             $this->updated = (string)$sourceArray['updated'];
         }
     }
@@ -586,7 +586,7 @@ class Source
     public function writeInnerXml($xmlWriter)
     {
         if (!is_null($this->attributes)) {
-            if (isarray($this->attributes)) {
+            if (is_array($this->attributes)) {
                 foreach ($this->attributes as $attributeName => $attributeValue) {
                     $xmlWriter->writeAttribute($attributeName, $attributeValue);
                 }
@@ -600,7 +600,7 @@ class Source
         } 
 
         if (!is_null($this->category)) {
-            if (isarray($this->category)) {
+            if (is_array($this->category)) {
                 foreach ($this->category as $category) {
                     $category->writeXml($xmlWriter);
                 }
@@ -610,7 +610,7 @@ class Source
         }
 
         if (!is_null($this->contributor)) {
-            if (isarray($this->contributor)) {
+            if (is_array($this->contributor)) {
                 foreach ($this->contributor as $contributor) {
                     $xmlWriter->startElement('atom:contributor');
                     $contributor->writeInnerXml($xmlWriter);

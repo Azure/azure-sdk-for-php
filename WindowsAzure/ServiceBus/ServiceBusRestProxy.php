@@ -463,7 +463,7 @@ class ServiceBusRestProxy extends ServiceRestProxy implements IServiceBus
     private function _listOptions($listOptions, $path)
     {
         if (is_null($listOptions)) {
-            $_listOptions = new ListOptions();
+            $listOptions = new ListOptions();
         }
 
         $httpCallContext = new HttpCallContext();

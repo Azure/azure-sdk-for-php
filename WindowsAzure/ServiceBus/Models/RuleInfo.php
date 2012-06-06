@@ -68,7 +68,7 @@ class RuleInfo extends Entry
         if (is_null($ruleDescription)) {
             $ruleDescription = new RuleDescription();
         }
-        $this->_title           = $title;
+        $this->title            = $title;
         $this->_ruleDescription = $ruleDescription;
     }
 
@@ -83,7 +83,7 @@ class RuleInfo extends Entry
     public function parseXml($xmlString)
     {
         parent::parseXml($xmlString);
-        $content = $this->_content;
+        $content = $this->content;
         if (is_null($content)) {
             $this->_ruleDescription = null;
         } else {
@@ -99,10 +99,10 @@ class RuleInfo extends Entry
     public function writeXml()
     {
         if (is_null($this->_ruleDescription)) {
-            $this->_content = null;    
+            $this->content = null;    
         } else {
-            $this->_content = new Content();
-            $this->_content->setText(
+            $this->content = new Content();
+            $this->content->setText(
                 XmlSerializer::objectSerialize(
                     $this->_ruleDescription, 'RuleDescription'
                 )

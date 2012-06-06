@@ -159,59 +159,59 @@ class Entry
         $this->attributes = $entryXml->attributes();
         $entryArray       = (array)$entryXml;
 
-        if (arraykeyexists('author', $entryArray)) {
+        if (array_key_exists('author', $entryArray)) {
             $author = new Person();
             $author->parseXml($entryArray['author']->asXML());
             $this->author = $author;
         }
 
-        if (arraykeyexists('category', $entryArray)) {
+        if (array_key_exists('category', $entryArray)) {
             $category = new Category();
             $category->parseXml($entryArray['category']->asXML());
             $this->category = $category;
         }
 
-        if (arraykeyexists('content', $entryArray)) {
+        if (array_key_exists('content', $entryArray)) {
             $content = new Content();
             $content->parseXml($entryArray['content']->asXML());
             $this->content = $content;
         }
 
-        if (arraykeyexists('contributor', $entryArray)) {
+        if (array_key_exists('contributor', $entryArray)) {
             $contributor = new Person();
             $contributor->parseXml($entryArray['contributor']->asXML());
             $this->contributor = $contributor;
         }
 
-        if (arraykeyexists('id', $entryArray)) {
+        if (array_key_exists('id', $entryArray)) {
             $this->id = (string)$entryArray['id'];
         }
 
-        if (arraykeyexists('link', $entryArray)) {
+        if (array_key_exists('link', $entryArray)) {
             $link = new AtomLink();
             $link->parseXml($entryArray['link']->asXML());
             $this->link = $link;
         }
 
-        if (arraykeyexists('published', $entryArray)) {
+        if (array_key_exists('published', $entryArray)) {
             $this->published = $entryArray['published'];
         }
 
-        if (arraykeyexists('rights', $entryArray)) {
+        if (array_key_exists('rights', $entryArray)) {
             $this->rights = $entryArray['rights'];
         }
 
-        if (arraykeyexists('source', $entryArray)) {
+        if (array_key_exists('source', $entryArray)) {
             $source = new Source();
             $source->parseXml($entryArray['source']->asXML());
             $this->source = $source;
         }
 
-        if (arraykeyexists('title', $entryArray)) {
+        if (array_key_exists('title', $entryArray)) {
             $this->title = $entryArray['title'];
         }
 
-        if (arraykeyexists('updated', $entryArray)) {
+        if (array_key_exists('updated', $entryArray)) {
             $this->updated = $entryArray['updated'];
         }
          
@@ -574,7 +574,7 @@ class Entry
     public function writeInnerXml($xmlWriter)
     {
         if (!is_null($this->attributes)) {
-            if (isarray($this->attributes)) {
+            if (is_array($this->attributes)) {
                 foreach (
                     $this->attributes 
                     as $attributeName => $attributeValue
@@ -591,7 +591,7 @@ class Entry
         } 
 
         if (!is_null($this->category)) {
-            if (isarray($this->category)) {
+            if (is_array($this->category)) {
                 foreach (
                     $this->category 
                     as $category
@@ -612,7 +612,7 @@ class Entry
         }
 
         if (!is_null($this->contributor)) {
-            if (isarray($this->contributor)) {
+            if (is_array($this->contributor)) {
                 foreach ($this->contributor as $contributor) {
                     $xmlWriter->startElement('atom:contributor');
                     $contributor->writeInnerXml($xmlWriter);

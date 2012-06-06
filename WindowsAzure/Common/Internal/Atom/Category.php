@@ -75,7 +75,7 @@ class Category
      *
      * @return none
      */
-    public function __construct($undefinedContent = Resources::EMPTYSTRING)
+    public function __construct($undefinedContent = Resources::EMPTY_STRING)
     {
         $this->undefinedContent = $undefinedContent;
     }

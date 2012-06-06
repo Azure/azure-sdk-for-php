@@ -168,11 +168,11 @@ class Feed
             $this->attributes = (array)$attributes;
         }
 
-        if (arraykeyexists('entry', $feedArray)) {
+        if (array_key_exists('entry', $feedArray)) {
             $entry = array();
 
             $entryXml = $feedArray['entry'];
-            if (isarray($entryXml)) {
+            if (is_array($entryXml)) {
                 foreach ($entryXml as $entryXmlInstance) {
                     $entryInstance = new Entry();
                     $entryInstance->parseXml($entryXmlInstance->asXML());
@@ -187,63 +187,63 @@ class Feed
             $this->entry = $entry;
         }
 
-        if (arraykeyexists('content', $feedArray)) {
+        if (array_key_exists('content', $feedArray)) {
             $content = new Content();
             $content->parseXml($feedArray['content']->asXML());
             $this->content = $content;
         }
 
-        if (arraykeyexists('category', $feedArray)) {
+        if (array_key_exists('category', $feedArray)) {
             $category = new Category();
             $category->parseXml($feedArray['category']->asXML());
             $this->category = $category;
         }
 
-        if (arraykeyexists('contributor', $feedArray)) {
+        if (array_key_exists('contributor', $feedArray)) {
             $contributor = new Person();
             $contributor->parseXml($feedArray['contributor']->asXML());
             $this->contributor = $contributor;
         }
 
-        if (arraykeyexists('generator', $feedArray)) {
+        if (array_key_exists('generator', $feedArray)) {
             $generator = new Generator();
             $generator->setText((string)$feedArray['generator']->asXML());
             $this->generator = $generator;
         } 
 
-        if (arraykeyexists('icon', $feedArray)) {
+        if (array_key_exists('icon', $feedArray)) {
             $icon = new Icon();
             $icon->parseXml($feedArray['icon']->asXML());
             $this->icon = $icon;
         }
 
-        if (arraykeyexists('id', $feedArray)) {
+        if (array_key_exists('id', $feedArray)) {
             $this->id = (string)$feedArray['id'];
         }
 
-        if (arraykeyexists('link', $feedArray)) {
+        if (array_key_exists('link', $feedArray)) {
             $link = new AtomLink();
             $link->parseXml($feedArray['link']->asXML());
             $this->link = $link;
         }
 
-        if (arraykeyexists('logo', $feedArray)) {
+        if (array_key_exists('logo', $feedArray)) {
             $this->logo = (string)$feedArray['logo'];
         }
 
-        if (arraykeyexists('rights', $feedArray)) {
+        if (array_key_exists('rights', $feedArray)) {
             $this->rights = (string)$feedArray['rights'];
         }
 
-        if (arraykeyexists('subtitle', $feedArray)) {
+        if (array_key_exists('subtitle', $feedArray)) {
             $this->subtitle = (string)$feedArray['subtitle'];
         }
 
-        if (arraykeyexists('title', $feedArray)) {
+        if (array_key_exists('title', $feedArray)) {
             $this->title = (string)$feedArray['title'];
         }
 
-        if (arraykeyexists('updated', $feedArray)) {
+        if (array_key_exists('updated', $feedArray)) {
             $this->updated = (string)$feedArray['updated'];
         }
     }
@@ -615,7 +615,7 @@ class Feed
     {
 
         if (!is_null($this->attributes)) {
-            if (isarray($this->attributes)) {
+            if (is_array($this->attributes)) {
                 foreach (
                     $this->attributes 
                     as $attributeName => $attributeValue
@@ -632,7 +632,7 @@ class Feed
         } 
 
         if (!is_null($this->category)) {
-            if (isarray($this->category)) {
+            if (is_array($this->category)) {
                 foreach ($this->category as $category) {
                     $category->writeXml($xmlWriter);
                 }
@@ -642,7 +642,7 @@ class Feed
         }
 
         if (!is_null($this->contributor)) {
-            if (isarray($this->contributor)) {
+            if (is_array($this->contributor)) {
                 foreach ($this->contributor as $contributor) {
                     $xmlWriter->startElement('atom:contributor');
                     $contributor->writeInnerXml($xmlWriter);

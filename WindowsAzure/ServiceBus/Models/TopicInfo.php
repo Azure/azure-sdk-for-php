@@ -66,7 +66,7 @@ class TopicInfo extends Entry
         if (is_null($topicDescription)) {
             $topicDescription = new TopicDescription();
         }
-        $this->_title            = $title;
+        $this->title             = $title;
         $this->_topicDescription = $topicDescription;
     }
     
@@ -80,7 +80,7 @@ class TopicInfo extends Entry
     public function parseXml($xmlString)
     {
         parent::parseXml($xmlString);
-        $content = $this->_content;
+        $content = $this->content;
         if (is_null($content)) {
             $this->_topicDescription = null;
         } else {
@@ -96,10 +96,10 @@ class TopicInfo extends Entry
     public function writeXml()
     {
         if (is_null($this->_topicDescription)) {
-            $this->_content = null;    
+            $this->content = null;    
         } else {
-            $this->_content = new Content();
-            $this->_content->setText(
+            $this->content = new Content();
+            $this->content->setText(
                 XmlSerializer::objectSerialize(
                     $this->_topicDescription,
                     'TopicDescription'

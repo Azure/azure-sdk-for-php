@@ -61,11 +61,11 @@ class QueueInfo extends Entry
         $title = Resources::EMPTY_STRING, 
         $queueDescription = null
     ) {
-        $this->_title = $title;
         if (is_null($queueDescription)) {
             $queueDescription = new QueueDescription();
         }
 
+        $this->title             = $title;
         $this->_queueDescription = $queueDescription;
     }
 
@@ -79,7 +79,7 @@ class QueueInfo extends Entry
     public function parseXml($entryXml)
     {
         parent::parseXml($entryXml);
-        $content = $this->_content;
+        $content = $this->content;
         if (is_null($content)) {
             $this->_queueDescription = null;
         } else {
@@ -95,10 +95,10 @@ class QueueInfo extends Entry
     public function writeXml()
     {
         if (is_null($this->_queueDescription)) {
-            $this->_content = null;    
+            $this->content = null;    
         } else {
-            $this->_content = new Content();
-            $this->_content->setText(
+            $this->content = new Content();
+            $this->content->setText(
                 XmlSerializer::objectSerialize(
                     $this->_queueDescription,
                     'QueueDescription'

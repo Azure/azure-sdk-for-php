@@ -67,7 +67,7 @@ class SubscriptionInfo extends Entry
         if (is_null($subscriptionDescription)) {
             $subscriptionDescription = new SubscriptionDescription();
         }
-        $this->_title                   = $title;
+        $this->title                    = $title;
         $this->_subscriptionDescription = $subscriptionDescription;
     }
 
@@ -82,7 +82,7 @@ class SubscriptionInfo extends Entry
     public function parseXml($entryXml)
     {
         parent::parseXml($entryXml);
-        $content = $this->_content;
+        $content = $this->content;
         if (is_null($content)) {
             $this->_subscriptionDescription = null;
         } else {
@@ -100,10 +100,10 @@ class SubscriptionInfo extends Entry
     public function writeXml()
     {
         if (is_null($this->_subscriptionDescription)) {
-            $this->_content = null;    
+            $this->content = null;    
         } else {
-            $this->_content = new Content();
-            $this->_content->setText(
+            $this->content = new Content();
+            $this->content->setText(
                 XmlSerializer::objectSerialize(
                     $this->_subscriptionDescription,
                     'SubscriptionDescription'
