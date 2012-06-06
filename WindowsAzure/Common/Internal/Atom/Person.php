@@ -45,51 +45,57 @@ class Person
      *
      * @var string  
      */
-    protected $_name;
+    protected $name;
 
     /**
      * The Uri of the person. 
      *
      * @var string  
      */
-    protected $_uri;
+    protected $uri;
 
     /**
      * The email of the person.
      *
      * @var string 
      */
-    protected $_email;
+    protected $email;
      
     /** 
      * Creates an ATOM person instance with specified name.
      *
      * @param string $name The name of the person.
+     *
      */
     public function __construct($name = Resources::EMPTY_STRING)
     {
-        $this->_name = $name;
+        $this->name = $name;
     }
 
+    /**
+     * Populates the properties with a specified XML string. 
+     * 
+     * @param string $xmlString An XML based string representing 
+     * the Person instance. 
+     * 
+     * @return none
+     */
     public function parseXml($xmlString)
     {
-        $personXml = simplexml_load_string($xmlString);
-        $attributes = $personXml->attributes();
+        $personXml   = simplexml_load_string($xmlString);
+        $attributes  = $personXml->attributes();
         $personArray = (array)$personXml;
 
-        if (array_key_exists('name', $personArray))
-        {
-            $this->_name = (string)$personArray['name'];
+        if (array_key_exists('name', $personArray)) {
+            $this->name = (string)$personArray['name'];
         }
 
-        if (array_key_exists('uri', $personArray))
-        {
-            $this->_uri = (string)$personArray['uri'];
+        if (array_key_exists('uri', $personArray)) {
+            $this->uri = (string)$personArray['uri'];
         }
 
-        if (array_key_exists('email', $personArray))
-        {
-            $this->_email = (string)$personArray['email'];
+        if (array_key_exists('email', $personArray)) {
+            $this->email = (string)$personArray['email'];
         }
     }
 
@@ -100,17 +106,19 @@ class Person
      */
     public function getName()
     {   
-        return $this->_name;
+        return $this->name;
     } 
 
     /**
      * Sets the name of the person.
      * 
      * @param string $name The name of the person.
+     * 
+     * @return none
      */
     public function setName($name)
     {
-        $this->_name = $name; 
+        $this->name = $name; 
     }
 
     /**
@@ -120,17 +128,19 @@ class Person
      */
     public function getUri()
     {
-        return $this->_uri;
+        return $this->uri;
     }
 
     /**
      * Sets the URI of the person. 
      * 
      * @param string $uri The URI of the person.
+     * 
+     * @return none
      */
     public function setUri($uri)
     {
-        $this->_uri = $uri;
+        $this->uri = $uri;
     }
 
     
@@ -141,22 +151,27 @@ class Person
      */
     public function getEmail()
     {
-        return $this->_email;
+        return $this->email;
     }
 
     /**
      * Sets the email of the person. 
      * 
      * @param string $email The email of the person.
+     * 
+     * @return none
      */
     public function setEmail($email)
     {
-        $this->_email = $email;
+        $this->email = $email;
     }
+
     /** 
      * Writes an XML representing the person. 
      * 
      * @param \XMLWriter $xmlWriter The XML writer.
+     * 
+     * @return none
      */
     public function writeXml($xmlWriter)
     {
@@ -169,18 +184,18 @@ class Person
      * Writes a inner XML representing the person. 
      * 
      * @param \XMLWriter $xmlWriter The XML writer.
+     * 
+     * @return none
      */
     public function writeInnerXml($xmlWriter)
     {
-        $xmlWriter->writeElement('<atom:name>', $this->_name);
-        if (!empty($this->_uri))
-        {
-            $xmlWriter->writeElement('atom:uri', $this->_uri);
+        $xmlWriter->writeElement('<atom:name>', $this->name);
+        if (!empty($this->uri)) {
+            $xmlWriter->writeElement('atom:uri', $this->uri);
         }
 
-        if (!empty($this->_email))
-        {
-            $xmlWriter->writeElement('atom:email', $this->_email);
+        if (!empty($this->email)) {
+            $xmlWriter->writeElement('atom:email', $this->email);
         }
     }
 }

@@ -45,49 +45,49 @@ class AtomLink
      *
      * @var string  
      */
-    protected $_undefinedContent;
+    protected $undefinedContent;
 
     /**
      * The HREF of the link. 
      *
      * @var string  
      */
-    protected $_href;
+    protected $href;
 
     /**
      * The rel attribute of the link.
      *
      * @var string
      */
-    protected $_rel;
+    protected $rel;
 
     /**
      * The media type of the link. 
      *
      * @var string 
      */
-    protected $_type;
+    protected $type;
 
     /**
      * The language of HREF.
      * 
      * @var string 
      */
-    protected $_hreflang;
+    protected $hreflang;
 
     /**
      * The titile of the link. 
      * 
      * @var string 
      */ 
-    protected $_title;
+    protected $title;
 
     /**
      * The length of the link. 
      * 
      * @var integer 
      */
-    protected $_length;
+    protected $length;
      
     /** 
      * Creates a AtomLink instance with specified text.
@@ -100,43 +100,39 @@ class AtomLink
      * Parse an ATOM Link xml. 
      * 
      * @param string $xmlString an XML based string of ATOM Link.
+     * 
+     * @return none
      */ 
     public function parseXml($xmlString)
     {
         $atomLinkXml = simplexml_load_string($xmlString);
-        $attributes = (array)$atomLinkXml->attributes();
+        $attributes  = (array)$atomLinkXml->attributes();
 
-        if (!empty($attributes['href']))
-        {
-            $this->_href = (string)$attributes['href'];
+        if (!empty($attributes['href'])) {
+            $this->href = (string)$attributes['href'];
         }
 
-        if (!empty($attributes['rel']))
-        {
-            $this->_rel = (string)$attributes['rel'];
+        if (!empty($attributes['rel'])) {
+            $this->rel = (string)$attributes['rel'];
         }
 
-        if (!empty($attributes['type']))
-        {
-            $this->_type = (string)$attributes['type'];
+        if (!empty($attributes['type'])) {
+            $this->type = (string)$attributes['type'];
         }
 
-        if (!empty($attributes['hreflang']))
-        {
-            $this->_hreflang = (string)$attributes['hreflang'];
+        if (!empty($attributes['hreflang'])) {
+            $this->hreflang = (string)$attributes['hreflang'];
         }
 
-        if (!empty($attributes['title']))
-        {
-            $this->_title = (string)$attributes['title'];
+        if (!empty($attributes['title'])) {
+            $this->title = (string)$attributes['title'];
         }
 
-        if (!empty($attributes['length']))
-        {
-            $this->_length = (integer)$attributes['length'];
+        if (!empty($attributes['length'])) {
+            $this->length = (integer)$attributes['length'];
         }
 
-        $this->_undefinedContent = (string)$atomLinkXml;
+        $this->undefinedContent = (string)$atomLinkXml;
     }
 
     /** 
@@ -146,17 +142,19 @@ class AtomLink
      */
     public function getHref()
     {   
-        return $this->_href;
+        return $this->href;
     } 
 
     /**
      * Sets the href of the link.
      * 
      * @param string $href The href of the link.
+     *
+     * @return none
      */
     public function setHref($href)
     {
-        $this->_href = $href; 
+        $this->href = $href; 
     }
 
     /**
@@ -166,17 +164,19 @@ class AtomLink
      */
     public function getRel()
     {
-        return $this->_rel;
+        return $this->rel;
     }
 
     /**
      * Sets the rel of the link. 
      * 
      * @param string $rel The rel of the atomLink.
+     *
+     * @return none
      */
     public function setRel($rel)
     {
-        $this->_rel = $rel;
+        $this->rel = $rel;
     }
 
     /**
@@ -186,17 +186,19 @@ class AtomLink
      */
     public function getType()
     {
-        return $this->_type;
+        return $this->type;
     }
 
     /**
      * Sets the type of the link.
      * 
      * @param string $type The type of the link. 
+     *
+     * @return none
      */
     public function setType($type)
     {
-        $this->_type = $type;
+        $this->type = $type;
     }
 
     /**
@@ -206,17 +208,19 @@ class AtomLink
      */
     public function getHrefLang()
     {
-        return $this->_hrefLang;
+        return $this->hrefLang;
     }
 
     /**
      * Sets the language of the href. 
      * 
      * @param string $hrefLang The language of the href.
+     *
+     * @return none
      */
     public function setHrefLang($hrefLang)
     {
-        $this->_hrefLang = $hrefLang;
+        $this->hrefLang = $hrefLang;
     }
 
     /** 
@@ -226,17 +230,19 @@ class AtomLink
      */
     public function getTitle()
     {
-        return $this->_title;
+        return $this->title;
     }
 
     /**
      * Sets the title of the link. 
      * 
      * @param string $title The title of the link. 
+     *
+     * @return none
      */
     public function setTitle($title)
     {
-        $this->_title = $title;
+        $this->title = $title;
     }
 
     /**
@@ -246,17 +252,19 @@ class AtomLink
      */
     public function getLength() 
     {
-        return $this->_length;
+        return $this->length;
     }
 
     /**
      * Sets the length of the link. 
      * 
      * @param string $length The length of the link. 
+     *
+     * @return none
      */
     public function setLength($length)
     {
-        $this->_length = $length;
+        $this->length = $length;
     }
 
     /**     
@@ -266,23 +274,27 @@ class AtomLink
      */
     public function getUndefinedContent()
     {
-        return $this->_undefinedContent;
+        return $this->undefinedContent;
     }
 
     /**
      * Sets the undefined content. 
      * 
      * @param string $undefinedContent The undefined content. 
+     *
+     * @return none
      */
     public function setUndefinedContent($undefinedContent)
     {
-        $this->_undefinedContent = $undefinedContent;
+        $this->undefinedContent = $undefinedContent;
     }
 
     /** 
      * Writes an XML representing the ATOM link item.
      * 
      * @param \XMLWriter $xmlWriter The xml writer.
+     *
+     * @return none
      */
     public function writeXml($xmlWriter)
     {
@@ -295,42 +307,37 @@ class AtomLink
      * Writes the inner XML representing the ATOM link item.
      * 
      * @param \XMLWriter $xmlWriter The xml writer.
+     * 
+     * @return none
      */
     public function writeInnerXml($xmlWriter)
     {
-        if (!empty($this->_href))
-        {
-            $xmlWriter->writeAttribute('href', $this->_href);
+        if (!empty($this->href)) {
+            $xmlWriter->writeAttribute('href', $this->href);
         }
 
-        if (!empty($this->_rel))
-        {
-            $xmlWriter->writeAttribute('rel', $this->_rel);
+        if (!empty($this->rel)) {
+            $xmlWriter->writeAttribute('rel', $this->rel);
         }
 
-        if (!empty($this->_type))
-        {
-            $xmlWriter->writeAttribute('type', $this->_type);
+        if (!empty($this->type)) {
+            $xmlWriter->writeAttribute('type', $this->type);
         }
 
-        if (!empty($this->_hreflang))
-        {
-            $xmlWriter->writeAttribute('hreflang', $this->_hreflang);
+        if (!empty($this->hreflang)) {
+            $xmlWriter->writeAttribute('hreflang', $this->hreflang);
         }
 
-        if (!empty($this->_title))
-        {
-            $xmlWriter->writeAttribute('title', $this->_title);
+        if (!empty($this->title)) {
+            $xmlWriter->writeAttribute('title', $this->title);
         }
 
-        if (!empty($this->_length))
-        {
-            $xmlWriter->writeAttribute('length', $this->_length);
+        if (!empty($this->length)) {
+            $xmlWriter->writeAttribute('length', $this->length);
         }
 
-        if (!empty($this->_undefinedContent))
-        {
-            $xmlWriter->writeRaw($this->_undefinedContent);
+        if (!empty($this->undefinedContent)) {
+            $xmlWriter->writeRaw($this->undefinedContent);
         }
 
     }

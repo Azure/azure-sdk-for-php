@@ -46,9 +46,13 @@ class CreateRuleResult
     private $_ruleInfo;
 
     /**
-     * Populates the rule information from the response of a create rule request. 
+     * Populates the rule information from the response of a create rule
+     * request. 
      * 
-     * @var string $createRuleResponseBody The response of the create rule request.
+     * @param string $createRuleResponseBody The response of the create rule
+     * request.
+     * 
+     * @return none
      */
     public function parseXml($createRuleResponseBody)
     {
@@ -77,6 +81,8 @@ class CreateRuleResult
      * Sets the rule information. 
      * 
      * @param RuleInfo $ruleInfo The information of the rule. 
+     *
+     * @return none
      */
     public function setRuleInfo($ruleInfo)
     {

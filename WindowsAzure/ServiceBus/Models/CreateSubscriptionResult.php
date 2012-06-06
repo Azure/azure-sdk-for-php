@@ -46,9 +46,13 @@ class CreateSubscriptionResult
     private $_subscriptionInfo;
 
     /**
-     * Populates the subscription information from the response of a create subscription request. 
+     * Populates the subscription information from the response of a create 
+     * subscription request. 
      * 
-     * @var string $createSubscriptionResponseBody The response of the create rule request.
+     * @param string $createSubscriptionResponseBody The response of the create
+     * rule request.
+     * 
+     * @return none
      */
     public function parseXml($createSubscriptionResponseBody)
     {
@@ -76,7 +80,10 @@ class CreateSubscriptionResult
     /**
      * Sets the subscription information. 
      * 
-     * @param SubscriptionInfo $subscriptionInfo The information of the subscription. 
+     * @param SubscriptionInfo $subscriptionInfo The information of the 
+     * subscription. 
+     *
+     * @return none
      */
     public function setSubscriptionInfo($subscriptionInfo)
     {

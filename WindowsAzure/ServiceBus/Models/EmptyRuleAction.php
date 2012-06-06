@@ -42,7 +42,7 @@ class EmptyRuleAction extends Action
     public function __construct()
     {
         parent::__construct();
-        $this->_attributes['xsi:type'] = 'EmptyRuleAction';
+        $this->attributes['xsi:type'] = 'EmptyRuleAction';
     }
 
 }

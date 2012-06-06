@@ -53,7 +53,7 @@ class SqlRuleAction extends Action
     public function __construct()
     {   
         parent::__construct();
-        $this->_attributes['xsi:type'] = 'SqlRuleAction';
+        $this->attributes['xsi:type'] = 'SqlRuleAction';
     }
 
     /**
@@ -70,6 +70,8 @@ class SqlRuleAction extends Action
      * Sets the SQL expression. 
      * 
      * @param string $sqlExpression Sets the SQL expression. 
+     * 
+     * @return none
      */
     public function setSqlExpression($sqlExpression)
     {

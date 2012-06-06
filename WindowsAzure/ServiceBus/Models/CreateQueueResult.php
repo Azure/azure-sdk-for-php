@@ -46,9 +46,13 @@ class CreateQueueResult
     private $_queueInfo;
 
     /**
-     * Populates the queue information from the response of a create queue request. 
+     * Populates the queue information from the response of a create queue 
+     * request.
      * 
-     * @var string $createQueueResponseBody The response of the create queue request.
+     * @param string $createQueueResponseBody The response of the create queue
+     * request.
+     * 
+     * @return none
      */
     public function parseXml($createQueueResponseBody)
     {
@@ -77,6 +81,8 @@ class CreateQueueResult
      * Sets the information of the queue.
      * 
      * @param QueueInfo $queueInfo The information of the queue. 
+     * 
+     * @return none
      */
     public function setQueueInfo($queueInfo)
     {

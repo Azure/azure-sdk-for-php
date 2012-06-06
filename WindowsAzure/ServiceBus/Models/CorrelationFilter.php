@@ -35,9 +35,8 @@ use WindowsAzure\ServiceBus\Models\Filter;
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
 
-class CorrelationFilter extends Filter 
+class CorrelationFilter extends Filter
 {
-
     /**
      * The ID of the correlation.
      *
@@ -51,7 +50,7 @@ class CorrelationFilter extends Filter
     public function __construct()
     {
         parent::__construct();
-        $this->_attributes['xsi:type'] = 'CorrelationFilter';
+        $this->attributes['xsi:type'] = 'CorrelationFilter';
     }
 
     /**
@@ -68,6 +67,8 @@ class CorrelationFilter extends Filter
      * Sets the ID of the correlation.
      * 
      * @param string $correlationId The ID of the correlation.
+     * 
+     * @return none
      */
     public function setCorrelationId($correlationId)
     {

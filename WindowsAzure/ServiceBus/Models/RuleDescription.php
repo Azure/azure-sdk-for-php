@@ -73,83 +73,88 @@ class RuleDescription
      * 
      * @param string $ruleDescriptionXml A XML string representing the 
      * rule description.
+     * 
+     * @return none
      */
     public static function create($ruleDescriptionXml)
     {
-        $ruleDescription = new RuleDescription();
-        $root = simplexml_load_string($ruleDescriptionXml);
-        $nameSpaces = $root->getNameSpaces();
+        $ruleDescription      = new RuleDescription();
+        $root                 = simplexml_load_string(
+            $ruleDescriptionXml
+        );
+        $nameSpaces           = $root->getNameSpaces();
         $ruleDescriptionArray = (array)$root;
-        if (array_key_exists('Filter', $ruleDescriptionArray))
-        {
-            $filterItem = $ruleDescriptionArray['Filter'];
+        if (array_key_exists('Filter', $ruleDescriptionArray)) {
+            $filterItem       = $ruleDescriptionArray['Filter'];
             $filterAttributes = $filterItem->attributes('i', true);
-            $filterItemArray = (array)$filterItem;
-            $filterType = (string)$filterAttributes['type'];
-            $filter = null; 
+            $filterItemArray  = (array)$filterItem;
+            $filterType       = (string)$filterAttributes['type'];
+            $filter           = null; 
             switch ($filterType) {
-                case 'TrueFilter'  :
-                    $filter = new TrueFilter();
-                    break;
+            case 'TrueFilter'  :
+                $filter = new TrueFilter();
+                break;
 
-                case 'FalseFilter' :
-                    $filter = new FalseFilter();
-                    break;
+            case 'FalseFilter' :
+                $filter = new FalseFilter();
+                break;
 
-                case 'CorrelationFilter' :
-                    $filter = new CorrelationFilter();
+            case 'CorrelationFilter' :
+                $filter = new CorrelationFilter();
 
-                    if (array_key_exists('CorrelationId', $filterItemArray)) {   
-                        $filter->setCorrelationId((string)$filterItemArray['CorrelationId']);
-                    }
-                    break;
+                if (array_key_exists('CorrelationId', $filterItemArray)) {   
+                    $filter->setCorrelationId((string)$filterItemArray['CorrelationId']);
+                }
+                break;
 
-                case 'SqlFilter' :
-                    $filter = new SqlFilter();
+            case 'SqlFilter' :
+                $filter = new SqlFilter();
 
-                    if (array_key_exists('SqlExpression', $filterItemArray)) {   
-                        $filter->setSqlExpression((string)$filterItemArray['SqlExpression']);
-                    }
-                    break;
+                if (array_key_exists('SqlExpression', $filterItemArray)) {   
+                    $filter->setSqlExpression((string)$filterItemArray['SqlExpression']);
+                }
+                break;
                
-                default :
-                    $filter = new Filter();                
+            default :
+                $filter = new Filter();                
             }
+
             if (array_key_exists('CompatibilityLevel', $filterItemArray)) {
-                $filter->setCompatibilityLevel((integer)$filterItemArray['CompatibilityLevel']);
+                $filter->setCompatibilityLevel(
+                    (integer)$filterItemArray['CompatibilityLevel']
+                );
             }
 
             $ruleDescription->setFilter($filter);
         } 
 
-        if (array_key_exists('Action', $ruleDescriptionArray))
-        {
-            $actionItem = $ruleDescriptionArray['Action'];
+        if (array_key_exists('Action', $ruleDescriptionArray)) {
+            $actionItem       = $ruleDescriptionArray['Action'];
             $actionAttributes = $actionItem->attributes('i', true);
-            $actionType = (string)$actionAttributes['type'];
-            $action = null; 
+            $actionType       = (string)$actionAttributes['type'];
+            $action           = null; 
+
             switch ($actionType) {
-                case 'EmptyRuleAction'  :
-                    $action = new EmptyRuleAction();
+            case 'EmptyRuleAction'  :
+                $action = new EmptyRuleAction();
                     break;
 
-                case 'SqlRuleAction' :
-                    $action = new SqlRuleAction();
+            case 'SqlRuleAction' :
+                $action = new SqlRuleAction();
 
-                    if (array_key_exists('SqlExpression', $actionItem)) {   
-                        $action->setSqlExpression((string)$actionItem['SqlExpression']);
-                    }
-                    break;
+                if (array_key_exists('SqlExpression', $actionItem)) {   
+                    $action->setSqlExpression((string)$actionItem['SqlExpression']);
+                }
+                break;
                
-                default :
-                    $action = new Action();                
+            default :
+                $action = new Action();                
             }
 
             $ruleDescription->setAction($action);
         } 
 
-        if (array_key_exists('Name', $ruleDescriptionArray))
-        {
+        if (array_key_exists('Name', $ruleDescriptionArray)) {
             $ruleDescription->setName((string)$ruleDescriptionArray['Name']);
         } 
        
@@ -170,6 +175,8 @@ class RuleDescription
      * Sets the filter of the rule description. 
      * 
      * @param Filter $filter The filter of the rule description. 
+     * 
+     * @return none
      */
     public function setFilter($filter)
     {
@@ -191,6 +198,8 @@ class RuleDescription
      * Sets the action of the rule description. 
      * 
      * @param Action $action The action of the rule description. 
+     * 
+     * @return none
      */
     public function setAction($action)
     {
@@ -211,6 +220,8 @@ class RuleDescription
      * Sets the name of the rule description. 
      * 
      * @param string $name The name of the rule description. 
+     * 
+     * @return none
      */
     public function setName($name)
     {

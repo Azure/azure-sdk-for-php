@@ -153,7 +153,10 @@ class BrokerProperties
     /**
      * Creates a broker properties instance with specified JSON message.  
      *
-     * @param string $brokerPropertiesJson A JSON message representing a broker properties.
+     * @param string $brokerPropertiesJson A JSON message representing a 
+     * broker properties.
+     * 
+     * @return none
      */
     public static function create($brokerPropertiesJson)
     {
@@ -163,79 +166,92 @@ class BrokerProperties
 
         $brokerPropertiesArray = (array)json_decode($brokerPropertiesJson);
         
-        if (array_key_exists('CorrelationId', $brokerPropertiesArray))
-        {
-            $brokerProperties->setCorrelationId($brokerPropertiesArray['CorrelationId']);
+        if (array_key_exists('CorrelationId', $brokerPropertiesArray)) {
+            $brokerProperties->setCorrelationId(
+                $brokerPropertiesArray['CorrelationId']
+            );
         }
 
-        if (array_key_exists('SessionId', $brokerPropertiesArray))
-        {
-            $brokerProperties->setSessionId($brokerPropertiesArray['SessionId']);
+        if (array_key_exists('SessionId', $brokerPropertiesArray)) {
+            $brokerProperties->setSessionId(
+                $brokerPropertiesArray['SessionId']
+            );
         }
 
-        if (array_key_exists('DeliveryCount', $brokerPropertiesArray))
-        {
-            $brokerProperties->setDeliveryCount($brokerPropertiesArray['DeliveryCount']);
+        if (array_key_exists('DeliveryCount', $brokerPropertiesArray)) {
+            $brokerProperties->setDeliveryCount(
+                $brokerPropertiesArray['DeliveryCount']
+            );
         }
 
-        if (array_key_exists('LockedUntilUtc', $brokerPropertiesArray))
-        {
-            $brokerProperties->setLockedUntilUtc($brokerPropertiesArray['LockedUntilUtc']);
+        if (array_key_exists('LockedUntilUtc', $brokerPropertiesArray)) {
+            $brokerProperties->setLockedUntilUtc(
+                $brokerPropertiesArray['LockedUntilUtc']
+            );
         }
 
-        if (array_key_exists('LockToken', $brokerPropertiesArray))
-        {
-            $brokerProperties->setLockToken($brokerPropertiesArray['LockToken']);
+        if (array_key_exists('LockToken', $brokerPropertiesArray)) {
+            $brokerProperties->setLockToken(
+                $brokerPropertiesArray['LockToken']
+            );
         }
 
-        if (array_key_exists('MessageId', $brokerPropertiesArray))
-        {
-            $brokerProperties->setMessageId($brokerPropertiesArray['MessageId']);
+        if (array_key_exists('MessageId', $brokerPropertiesArray)) {
+            $brokerProperties->setMessageId(
+                $brokerPropertiesArray['MessageId']
+            );
         }
 
-        if (array_key_exists('Label', $brokerPropertiesArray))
-        {
+        if (array_key_exists('Label', $brokerPropertiesArray)) {
             $brokerProperties->setLabel($brokerPropertiesArray['Label']);
         }
 
-        if (array_key_exists('ReplyTo', $brokerPropertiesArray))
-        {
+        if (array_key_exists('ReplyTo', $brokerPropertiesArray)) {
             $brokerProperties->setReplyTo($brokerPropertiesArray['ReplyTo']);
         }
 
-        if (array_key_exists('SequenceNumber', $brokerPropertiesArray))
-        {
-            $brokerProperties->setSequenceNumber($brokerPropertiesArray['SequenceNumber']);
+        if (array_key_exists('SequenceNumber', $brokerPropertiesArray)) {
+            $brokerProperties->setSequenceNumber(
+                $brokerPropertiesArray['SequenceNumber']
+            );
         }
 
-        if (array_key_exists('TimeToLive', $brokerPropertiesArray))
-        {
-            $brokerProperties->setTimeToLive($brokerPropertiesArray['TimeToLive']);
+        if (array_key_exists('TimeToLive', $brokerPropertiesArray)) {
+            $brokerProperties->setTimeToLive(
+                $brokerPropertiesArray['TimeToLive']
+            );
         }
 
-        if (array_key_exists('To', $brokerPropertiesArray))
-        {
+        if (array_key_exists('To', $brokerPropertiesArray)) {
             $brokerProperties->setTo($brokerPropertiesArray['To']);
         }
 
-        if (array_key_exists('ScheduleEnqueueTimeUtc', $brokerPropertiesArray))
-        {
-            $brokerProperties->setScheduleEnqueueTimeUtc($brokerPropertiesArray['ScheduleEnqueueTimeUtc']);
+        if (array_key_exists(
+            'ScheduleEnqueueTimeUtc', 
+            $brokerPropertiesArray
+        )
+        ) {
+            $brokerProperties->setScheduleEnqueueTimeUtc(
+                $brokerPropertiesArray['ScheduleEnqueueTimeUtc']
+            );
         }
 
-        if (array_key_exists('ReplyToSessionId', $brokerPropertiesArray))
-        {
-            $brokerProperties->setReplyToSessionId($brokerPropertiesArray['ReplyToSessionId']);
+        if (array_key_exists('ReplyToSessionId', $brokerPropertiesArray)) {
+            $brokerProperties->setReplyToSessionId(
+                $brokerPropertiesArray['ReplyToSessionId']
+            );
         }
 
-        if (array_key_exists('MessageLocation', $brokerPropertiesArray))
-        {
-            $brokerProperties->setMessageLocation($brokerPropertiesArray['MessageLocation']);
+        if (array_key_exists('MessageLocation', $brokerPropertiesArray)) {
+            $brokerProperties->setMessageLocation(
+                $brokerPropertiesArray['MessageLocation']
+            );
         }
 
-        if (array_key_exists('LockLocation', $brokerPropertiesArray))
-        {
-            $brokerProperties->setLockLocation($brokerPropertiesArray['LockLocation']);
+        if (array_key_exists('LockLocation', $brokerPropertiesArray)) {
+            $brokerProperties->setLockLocation(
+                $brokerPropertiesArray['LockLocation']
+            );
         }
 
         return $brokerProperties;        
@@ -255,6 +271,8 @@ class BrokerProperties
      * Sets the correlation ID.
      * 
      * @param string $correlationId The correlation ID. 
+     * 
+     * @return none
      */ 
     public function setCorrelationId($correlationId)
     {
@@ -275,6 +293,8 @@ class BrokerProperties
      * Sets the session ID. 
      * 
      * @param string $sessionId The ID of the session. 
+     * 
+     * @return none
      */
     public function setSessionId($sessionId)
     {
@@ -295,6 +315,8 @@ class BrokerProperties
      * Sets the delivery count. 
      * 
      * @param integer $deliveryCount The count of the delivery. 
+     * 
+     * @return none
      */
     public function setDeliveryCount($deliveryCount)
     {
@@ -304,7 +326,7 @@ class BrokerProperties
     /**
      * Gets the locked until time. 
      * 
-     * @return \Date 
+     * @return string
      */
     public function getLockedUntilUtc()
     {
@@ -314,7 +336,9 @@ class BrokerProperties
     /**
      * Sets the locked until time. 
      * 
-     * @param \Date $lockedUntilUtc The locked until time. 
+     * @param string $lockedUntilUtc The locked until time. 
+     * 
+     * @return none
      */
     public function setLockedUntilUtc($lockedUntilUtc)
     {
@@ -335,6 +359,8 @@ class BrokerProperties
      * Sets the lock token. 
      * 
      * @param string $lockToken The lock token. 
+     * 
+     * @return none
      */
     public function setLockToken($lockToken)
     {
@@ -355,6 +381,8 @@ class BrokerProperties
      * Sets the message ID.
      * 
      * @param string $messageId The ID of the message. 
+     * 
+     * @return none
      */
     public function setMessageId($messageId)
     {
@@ -375,6 +403,8 @@ class BrokerProperties
      * Sets the label. 
      * 
      * @param string $label The label of the broker property. 
+     * 
+     * @return none
      */
     public function setLabel($label)
     {
@@ -395,6 +425,8 @@ class BrokerProperties
      * Sets the reply to. 
      *
      * @param string $replyTo The reply to. 
+     * 
+     * @return none
      */
     public function setReplyTo($replyTo)
     {
@@ -415,6 +447,8 @@ class BrokerProperties
      * Sets the sequence number. 
      * 
      * @param integer $sequenceNumber The sequence number. 
+     * 
+     * @return none
      */
     public function setSequenceNumber($sequenceNumber)
     {
@@ -435,6 +469,8 @@ class BrokerProperties
      * Sets time to live. 
      * 
      * @param string $timeToLive The time to live. 
+     * 
+     * @return none
      */
     public function setTimeToLive($timeToLive)
     {
@@ -455,6 +491,8 @@ class BrokerProperties
      * Sets to. 
      * 
      * @param string $to To.
+     * 
+     * @return none
      */
     public function setTo($to)
     {
@@ -475,6 +513,8 @@ class BrokerProperties
      * Sets schedule enqueue time UTC. 
      * 
      * @param string $scheduleEnqueueTimeUtc The schedule enqueue time. 
+     * 
+     * @return none
      */
     public function setScheduleEnqueuTimeUtc($scheduleEnqueueTimeUtc)
     {
@@ -495,6 +535,8 @@ class BrokerProperties
      * Sets reply to session. 
      * 
      * @param string $replyToSessionId reply to session. 
+     * 
+     * @return none
      */
     public function setReplyToSessionId($replyToSessionId)
     {
@@ -515,6 +557,8 @@ class BrokerProperties
      * Sets the location of the message. 
      * 
      * @param string $messageLocation The location of the message. 
+     * 
+     * @return none
      */
     public function setMessageLocation($messageLocation)
     {
@@ -535,6 +579,8 @@ class BrokerProperties
      * Sets the location of the lock.
      * 
      * @param string $lockLocation The location of the lock.
+     * 
+     * @return none
      */
     public function setLockLocation($lockLocation)
     {
@@ -549,73 +595,59 @@ class BrokerProperties
     public function toString()
     {
         $value = array();
-        if (!empty($this->_correlationId))
-        {
+        if (!empty($this->_correlationId)) {
             $value['CorrelationId'] = $this->_correlationId;
         }
 
-        if (!empty($this->_sessionId))
-        {
+        if (!empty($this->_sessionId)) {
             $value['SessionId'] = $this->_sessionId;
         }
 
-        if (!empty($this->_deliveryCount))
-        {
+        if (!empty($this->_deliveryCount)) {
             $value['DeliveryCount'] = $this->_deliveryCount;
         }
 
-        if (!empty($this->_lockedUntilUtc))
-        {
+        if (!empty($this->_lockedUntilUtc)) {
             $value['LockedUntilUtc'] = $this->_lockedUntilUtc;
         }
 
-        if (!empty($this->_lockToken))
-        {
+        if (!empty($this->_lockToken)) {
             $value['LockToken'] = $this->_lockToken;
         }
 
-        if (!empty($this->_messageId))
-        {
+        if (!empty($this->_messageId)) {
             $value['MessageId'] = $this->_messageId;
         }
 
-        if (!empty($this->_label))
-        {
+        if (!empty($this->_label)) {
             $value['Label'] = $this->_label;
         }
 
-        if (!empty($this->_replyTo))
-        {
+        if (!empty($this->_replyTo)) {
             $value['ReplyTo'] = $this->_replyTo;
         }
 
-        if (!empty($this->_enqueuedTimeUtc))
-        {
+        if (!empty($this->_enqueuedTimeUtc)) {
             $value['EnqueuedTimeUtc'] = $this->_enqueuedTimeUtc;
         }
 
-        if (!empty($this->_sequenceNumber))
-        {
+        if (!empty($this->_sequenceNumber)) {
             $value['SequenceNumber'] = $this->_sequenceNumber;
         }
 
-        if (!empty($this->_timeToLive))
-        {
+        if (!empty($this->_timeToLive)) {
             $value['TimeToLive'] = $this->_timeToLive;
         }
 
-        if (!empty($this->_to))
-        {
+        if (!empty($this->_to)) {
             $value['To'] = $this->_to;
         }
     
-        if (!empty($this->_scheduledEnqueueTimeUtc))
-        {
+        if (!empty($this->_scheduledEnqueueTimeUtc)) {
             $value['ScheduledEnqueueTimeUtc'] = $this->_scheduledEnqueueTimeUtc;
         }
 
-        if (!empty($this->_replyToSessionId))
-        {
+        if (!empty($this->_replyToSessionId)) {
             $value['ReplyToSessionId'] = $this->_replyToSessionId;
         }
 

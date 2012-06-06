@@ -35,7 +35,7 @@ use WindowsAzure\ServiceBus\Models\Filter;
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
 
-class FalseFilter extends Filter 
+class FalseFilter extends Filter
 {
     /** 
      * Creates a filter with default parameter. 
@@ -43,7 +43,7 @@ class FalseFilter extends Filter
     public function __construct()
     {
         parent::__construct();
-        $this->_attributes['xsi:type'] = 'FalseFilter';
+        $this->attributes['xsi:type'] = 'FalseFilter';
     }
 
 }
