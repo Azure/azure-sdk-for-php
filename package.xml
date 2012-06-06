@@ -14,8 +14,8 @@ It is build as a thin REST call wrapper where each server call maps to a single 
   <email>azurephpsdk@microsoft.com</email>
   <active>yes</active>
  </lead>
- <date>2012-06-05</date>
- <time>15:34:45</time>
+ <date>2012-06-06</date>
+ <time>16:28:24</time>
  <version>
   <release>0.1.0</release>
   <api>0.1.0</api>
@@ -33,8 +33,8 @@ It is build as a thin REST call wrapper where each server call maps to a single 
  </notes>
  <contents>
   <dir baseinstalldir="/" name="/">
-   <file baseinstalldir="/" md5sum="10a3becfbd2e0a4a587b9a4a2eaae5bf" name="/WindowsAzure/WindowsAzure.php" role="php" />
-   <file baseinstalldir="/" md5sum="b0fd91ac9bee0737e30a0e353147e50b" name="/WindowsAzure/Blob/BlobRestProxy.php" role="php" />
+   <file baseinstalldir="/" md5sum="7bf9bac2dac2d46e90728447522f1ed5" name="/WindowsAzure/WindowsAzure.php" role="php" />
+   <file baseinstalldir="/" md5sum="146a101698e28c1bf26084d1568eb463" name="/WindowsAzure/Blob/BlobRestProxy.php" role="php" />
    <file baseinstalldir="/" md5sum="c4dadcb42659dc89326409183e08d503" name="/WindowsAzure/Blob/BlobService.php" role="php" />
    <file baseinstalldir="/" md5sum="60bb3a590cc3a455d64e0ed920e8da47" name="/WindowsAzure/Blob/BlobSettings.php" role="php" />
    <file baseinstalldir="/" md5sum="42e36bc2311f1dbe367105efd6a30c06" name="/WindowsAzure/Blob/Internal/IBlob.php" role="php" />
@@ -241,7 +241,7 @@ It is build as a thin REST call wrapper where each server call maps to a single 
    <file baseinstalldir="/" md5sum="5380fe06e54ea1b142552fac322f8e1a" name="/WindowsAzure/Table/Models/Filters/QueryStringFilter.php" role="php" />
    <file baseinstalldir="/" md5sum="eae6b9d91a2f8ba2a1facb1b0bbeb7a9" name="/WindowsAzure/Table/Models/Filters/UnaryFilter.php" role="php" />
    <file baseinstalldir="/" md5sum="34f8c1142fd6208a8be89399cb521df9" name="LICENSE.txt" role="data" />
-   <file baseinstalldir="/" md5sum="d41d8cd98f00b204e9800998ecf8427e" name="README.md" role="data" />
+   <file baseinstalldir="/" md5sum="d98b580066f28922d4576c63bfe553ff" name="README.md" role="data" />
   </dir>
  </contents>
  <dependencies>
@@ -287,7 +287,7 @@ It is build as a thin REST call wrapper where each server call maps to a single 
     <release>beta</release>
     <api>beta</api>
    </stability>
-   <date>2012-06-05</date>
+   <date>2012-06-06</date>
    <license uri="http://www.apache.org/licenses/LICENSE-2.0">Apache 2.0</license>
    <notes>
 * Full support of Queue, Blob and Table services.
