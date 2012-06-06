@@ -72,6 +72,8 @@ class ListOptions
      * Sets the skip parameter.
      *
      * @param integer $skip value.
+     *
+     * @return none
      */ 
     public function setSkip($skip)
     {
@@ -92,6 +94,8 @@ class ListOptions
      * Sets the top parameter.
      * 
      * @param integer $top value.
+     * 
+     * @return none
      */
     public function setTop($top)
     {

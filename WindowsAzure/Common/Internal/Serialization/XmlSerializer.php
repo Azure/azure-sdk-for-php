@@ -102,12 +102,19 @@ class XmlSerializer implements ISerializer
         }
     }
 
+    /**
+     * Gets the attributes of a specified object if get attributes 
+     * method is exposed. 
+     *
+     * @param object $targetObject The target object. 
+     * @param array  $methodArray  The array of method of the target object.
+     * 
+     * @return mixed
+     */
     private function _getInstanceAttributes($targetObject, $methodArray)
     {
-        foreach ($methodArray as $method)
-        {
-            if ($method->name == 'getAttributes')
-            {
+        foreach ($methodArray as $method) {
+            if ($method->name == 'getAttributes') {
                 $classProperty = $method->invoke($targetObject);
                 return $classProperty;
             }
@@ -120,6 +127,8 @@ class XmlSerializer implements ISerializer
      * 
      * @param object $targetObject The target object. 
      * @param string $rootName     The name of the root element. 
+     *
+     * @return string
      */
     public function objectSerialize($targetObject, $rootName)
     {
@@ -127,39 +136,40 @@ class XmlSerializer implements ISerializer
         $xmlWriter->openMemory(); 
         $xmlWriter->setIndent(true);
         $reflectionClass = new \ReflectionClass($targetObject);
-
-        $methodArray = $reflectionClass->getMethods();
-        
-        $attributes = self::_getInstanceAttributes(
+        $methodArray     = $reflectionClass->getMethods();
+        $attributes      = self::_getInstanceAttributes(
             $targetObject, 
             $methodArray
         );
          
         $xmlWriter->startElement($rootName);
-        if (!is_null($attributes))
-        {
-            foreach(array_keys($attributes) as $attributeKey)
+        if (!is_null($attributes)) {
+            foreach(array_keys($attributes) 
+                as $attributeKey
+            ) 
             {
-               $xmlWriter->writeAttribute($attributeKey, $attributes[$attributeKey]); 
+                $xmlWriter->writeAttribute(
+                    $attributeKey, 
+                    $attributes[$attributeKey]
+                );
             }
         }
 
-        foreach ($methodArray as $method)
-        {
-            if ((strpos($method->name, 'get') === 0) && $method->isPublic() && ($method->name != 'getAttributes')) {
+        foreach ($methodArray as $method) {
+            if ((strpos($method->name, 'get') === 0) 
+                && $method->isPublic() 
+                && ($method->name != 'getAttributes')
+            ) {
                 $variableName  = substr($method->name, 3);
                 $variableValue = $method->invoke($targetObject);
-                if (!empty($variableValue))
-                {
+                if (!empty($variableValue)) {
                     if (gettype($variableValue) === 'object') {
                         $xmlWriter->writeRaw(
                             XmlSerializer::objectSerialize(
                                 $variableValue, $variableName
                             )
                         );
-                    }
-                    else 
-                    {
+                    } else {
                         $xmlWriter->writeElement($variableName, $variableValue);
                     } 
                 }
@@ -169,35 +179,36 @@ class XmlSerializer implements ISerializer
         return $xmlWriter->outputMemory(true);
     }
 
+    /**
+     * Unserialize an string into an object. 
+     * 
+     * @param string $xmlString a string representing an object. 
+     *
+     * @return mixed
+     */
     public function objectUnserialize($xmlString)
     {
         Validate::isString($xmlString, 'xmlString');
-        $result = array();
-        $counter = 0;
-        $root=new \SimpleXMLElement($xmlString);
+        $result          = array();
+        $counter         = 0;
+        $root            = new \SimpleXMLElement($xmlString);
         $reflectionClass = new \ReflectionClass($root->getName());
-        $instance = $reflectionClass->newInstance();
-        foreach ($root->children() as $child)
-        { 
+        $instance        = $reflectionClass->newInstance();
+
+        foreach ($root->children() as $child) { 
             $setter = $reflectionClass->getMethod('set'.$child->getName());
-            if (count($child->children())==0)
-            {
+            if (count($child->children())==0) {
                 $setter->invoke($instance, $child);
-            }
-            else
-            {
+            } else {
                 $setter->invoke(
                     $instance, 
                     $this->objectUnserialize($child->children())
                 );
             }
 
-            if (count($root) === 1) 
-            {
+            if (count($root) === 1) {
                 return $instance;
-            }
-            else
-            {
+            } else {
                 $result[$counter] = $instance;
                 $counter++;
             }

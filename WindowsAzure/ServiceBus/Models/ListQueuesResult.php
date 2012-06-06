@@ -48,17 +48,18 @@ class ListQueuesResult extends Feed
     private $_queueInfo;
 
     /** 
-     * Populates the properties with a the response from the list queues request.
+     * Populates the properties with the response from the list queues request.
      * 
      * @param string $response The body of the response of the list queues request. 
+     * 
+     * @return none
      */
     public function parseXml($response)
     {
         parent::parseXml($response);
         $listQueuesResultXml = new \SimpleXMLElement($response);
-        $this->_queueInfo = array();
-        foreach ($listQueuesResultXml->entry as $entry)
-        {
+        $this->_queueInfo    = array();
+        foreach ($listQueuesResultXml->entry as $entry) {
             $queueInfo = new QueueInfo();
             $queueInfo->parseXml($entry->asXml());
             $this->_queueInfo[] = $queueInfo;
@@ -86,6 +87,8 @@ class ListQueuesResult extends Feed
      * Sets the information of the queue. 
      * 
      * @param array $queueInfo The information of the queue. 
+     * 
+     * @return none
      */
     public function setQueueInfo($queueInfo)
     {

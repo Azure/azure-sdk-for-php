@@ -47,9 +47,12 @@ class GetRuleResult
     private $_ruleInfo;
     
     /**
-     * Populate the properties with a specified get rule request response body. 
+     * Populate the properties with a specified get rule request response body.
      * 
-     * @param string $getRuleResponse The body of the response from a get rule request. 
+     * @param string $getRuleResponse The body of the response from a get rule
+     * request. 
+     *
+     * @return none
      */
     public function parseXml($getRuleResponse)
     {
@@ -78,6 +81,8 @@ class GetRuleResult
      * Sets the information of the rule. 
      * 
      * @param RuleInfo $ruleInfo The information of the rule. 
+     *
+     * @return none
      */
     public function setRuleInfo($ruleInfo)
     {

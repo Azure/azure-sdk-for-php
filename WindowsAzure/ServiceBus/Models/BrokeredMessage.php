@@ -34,6 +34,8 @@ use WindowsAzure\ServiceBus\Models\BrokerProperties;
  * @package   WindowsAzure\ServiceBus\Models
  * @author    Azure PHP SDK <azurephpsdk@microsoft.com>
  * @copyright 2012 Microsoft Corporation
+ * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
+ * @link      http://pear.php.net/package/azure-sdk-for-php
  */
 class BrokeredMessage
 {
@@ -61,7 +63,7 @@ class BrokeredMessage
     /**
      * The date of the brokered message.
      * 
-     * @var \DateTime 
+     * @var DateTime 
      */
     private $_date;
 
@@ -74,15 +76,15 @@ class BrokeredMessage
 
     /**
      * Creates a brokered message with specified broker properties. 
+     *  
+     * @param BrokerProperties $brokerProperties The broker properties.
+     *
      */
     public function __construct($brokerProperties = null)
     {
-        if (empty($brokerProperties))
-        {
+        if (empty($brokerProperties)) {
             $this->_brokerProperties = new BrokerProperties();
-        }
-        else 
-        {
+        } else {
             $this->_brokerProperties = $brokerProperties;
         }
 
@@ -94,7 +96,8 @@ class BrokeredMessage
      *
      * @return BrokerProperties
      */
-    public function getBrokerProperties() {
+    public function getBrokerProperties()
+    {
         return $this->_brokerProperties;
     }
 
@@ -102,6 +105,8 @@ class BrokeredMessage
      * Sets the broker properties.
      * 
      * @param BrokerProperties $brokerProperties The properties of broker.
+     * 
+     * @return none
      */
     public function setBrokerProperties($brokerProperties)
     {
@@ -113,7 +118,8 @@ class BrokeredMessage
      * 
      * @return string
      */
-    public function getBody() {
+    public function getBody()
+    {
         return $this->_body;
     } 
     
@@ -121,8 +127,11 @@ class BrokeredMessage
      * Sets the body of the brokered message. 
      * 
      * @param string $body The body of the brokered message.
+     *
+     * @return none
      */
-    public function setBody($body) {
+    public function setBody($body)
+    {
         $this->_body = $body;
     }
 
@@ -131,7 +140,8 @@ class BrokeredMessage
      * 
      * @return string
      */
-    public function getContentType() {
+    public function getContentType()
+    {
         return $this->_contentType;
     } 
 
@@ -140,26 +150,33 @@ class BrokeredMessage
      * 
      * @param string $contentType The content type of 
      * the brokered message. 
+     * 
+     * @return none
      */ 
-    public function setContentType($contentType) {
+    public function setContentType($contentType)
+    {
         $this->_contentType = $contentType;
     } 
 
     /**
      * Gets the date of the brokered message.
      * 
-     * @return \DateTime
+     * @return DateTime
      */
-    public function getDate() {
+    public function getDate()
+    {
         return $this->_date;
     }
     
     /** 
      * Sets the date of the brokered message. 
      * 
-     * @param \DateTime $date Sets the date of the brokered message. 
+     * @param DateTime $date Sets the date of the brokered message. 
+     * 
+     * @return none
      */
-    public function setDate($date) {
+    public function setDate($date)
+    {
         $this->_date = $date;
     }
     
@@ -167,8 +184,11 @@ class BrokeredMessage
      * Gets the value of a custom property. 
      *
      * @param string $propertyName The name of the property. 
+     * 
+     * @return string
      */
-    public function getProperty($propertyName) {
+    public function getProperty($propertyName)
+    {
         return $this->_customProperties[$propertyName];
     } 
 
@@ -177,8 +197,11 @@ class BrokeredMessage
      * 
      * @param string $propertyName  The name of the property.
      * @param string $propertyValue The value of the property.
+     * 
+     * @return none
      */
-    public function setProperty($propertyName, $propertyValue) {
+    public function setProperty($propertyName, $propertyValue)
+    {
         $this->_customProperties[$propertyName] = $propertyValue;
     }
 
@@ -187,7 +210,8 @@ class BrokeredMessage
      *
      * @return array 
      */
-    public function getProperties() {
+    public function getProperties()
+    {
         return $this->_customProperties;
     }
 
@@ -196,7 +220,8 @@ class BrokeredMessage
      * 
      * @return integer
      */
-    public function getDeliveryCount() {
+    public function getDeliveryCount()
+    {
         return $this->_brokerProperties->getDeliveryCount();
     }
 
@@ -204,6 +229,8 @@ class BrokeredMessage
      * Sets the delivery count.
      * 
      * @param integer $deliveryCount The times that the message has been delivered. 
+     * 
+     * @return none
      */
     public function setDeliveryCount($deliveryCount)
     {
@@ -215,7 +242,8 @@ class BrokeredMessage
      * 
      * @return string 
      */
-    public function getMessageId() {
+    public function getMessageId()
+    {
         return $this->_brokerProperties->getMessageId();
     }
     
@@ -223,8 +251,11 @@ class BrokeredMessage
      * Sets the ID of the message. 
      * 
      * @param string $messageId The ID of the message. 
+     *
+     * @return none
      */
-    public function setMessageId($messageId) {
+    public function setMessageId($messageId)
+    {
         $this->_brokerProperties->setMessageId($messageId);
     }
     
@@ -233,7 +264,8 @@ class BrokeredMessage
      * 
      * @return integer
      */
-    public function getSequenceNumber() {
+    public function getSequenceNumber()
+    {
         $this->_brokerProperties->getSequenceNumber();
     }
 
@@ -241,8 +273,11 @@ class BrokeredMessage
      * Sets the sequence number. 
      * 
      * @param integer $sequenceNumber The sequence number. 
+     * 
+     * @return none
      */
-    public function setSequenceNumber($sequenceNumber) {
+    public function setSequenceNumber($sequenceNumber)
+    {
         $this->_brokerProperties->setSequenceNumber($sequenceNumber);
     } 
 
@@ -251,7 +286,8 @@ class BrokeredMessage
      * 
      * @return string
      */
-    public function getTimeToLive() {
+    public function getTimeToLive()
+    {
         $this->_brokerProperties->getTimeToLive();
     }
 
@@ -259,8 +295,11 @@ class BrokeredMessage
      * Sets the time to live. 
      * 
      * @param string $timeToLive The time to live. 
+     *
+     * @return none
      */ 
-    public function setTimeToLive($timeToLive) {
+    public function setTimeToLive($timeToLive)
+    {
         $this->_brokerProperties->setTimeToLive($timeToLive);
     }
 
@@ -269,7 +308,8 @@ class BrokeredMessage
      * 
      * @return string 
      */
-    public function getLockToken() {
+    public function getLockToken()
+    {
         return $this->_brokerProperties->getLockToken();
     }
 
@@ -277,6 +317,8 @@ class BrokeredMessage
      * Sets the lock token. 
      * 
      * @param string $lockToken The token of the lock. 
+     * 
+     * @return none
      */
     public function setLockToken($lockToken)
     {
@@ -288,7 +330,8 @@ class BrokeredMessage
      * 
      * @return string
      */
-    public function getLockedUntilUtc() {
+    public function getLockedUntilUtc()
+    {
         return $this->_brokerProperties->getLockedUntilUtc();
     }
 
@@ -296,6 +339,8 @@ class BrokeredMessage
      * Sets the time of locked until UTC. 
      * 
      * @param string $lockedUntilUtc The time of locked until UTC.
+     * 
+     * @return none
      */ 
     public function setLockedUntilUtc($lockedUntilUtc)
     {
@@ -307,7 +352,8 @@ class BrokeredMessage
      * 
      * @return string 
      */
-    public function getCorrelationId() {
+    public function getCorrelationId()
+    {
         return $this->_brokerProperties->getCorrelationId();
     }
     
@@ -315,8 +361,11 @@ class BrokeredMessage
      * Sets the correlation ID.
      * 
      * @param string $correlationId The ID of the correlation.
+     * 
+     * @return none
      */
-    public function setCorrelationId($correlationId) {
+    public function setCorrelationId($correlationId)
+    {
         $this->_brokerProperties->setCorrelationId($correlationId);
     }
 
@@ -325,7 +374,8 @@ class BrokeredMessage
      * 
      * @return string
      */
-    public function getSessionId() {
+    public function getSessionId()
+    {
         $this->_brokerProperties->getSessionId();
     }
     
@@ -333,8 +383,11 @@ class BrokeredMessage
      * Sets the session ID.
      * 
      * @param string $sessionId The ID of the session. 
+     * 
+     * @return none
      */
-    public function setSessionId($sessionId) {
+    public function setSessionId($sessionId)
+    {
         $this->_brokerProperities->setSessionId($sessionId);
     }
 
@@ -343,7 +396,8 @@ class BrokeredMessage
      * 
      * @return string
      */
-    public function getLabel() {
+    public function getLabel()
+    {
         return $this->_brokerProperties->getLabel();
     }
 
@@ -351,8 +405,11 @@ class BrokeredMessage
      * Sets the label. 
      * 
      * @param string $label The label of the broker properties. 
+     *
+     * @return none 
      */
-    public function setLabel($label) {
+    public function setLabel($label)
+    {
         $this->_brokerProperties->setLabel($label);
     }
 
@@ -361,7 +418,8 @@ class BrokeredMessage
      * 
      * @return string 
      */
-    public function getReplyTo() {
+    public function getReplyTo()
+    {
         return $this->_brokerProperties->getReplyTo();
     }
 
@@ -369,8 +427,11 @@ class BrokeredMessage
      * Sets the reply to. 
      * 
      * @param string $replyTo The reply to value. 
+     *
+     * @return none
      */
-    public function setReplyTo($replyTo) {
+    public function setReplyTo($replyTo)
+    {
         $this->_brokerProperties->setReplyTo($replyTo);
     }
 
@@ -379,7 +440,8 @@ class BrokeredMessage
      * 
      * @return string
      */
-    public function getTo() {
+    public function getTo()
+    {
         return $this->_brokerProperties->getTo();
     } 
 
@@ -387,8 +449,11 @@ class BrokeredMessage
      * Sets the to.
      * 
      * @param string $to to.
+     *
+     * @return none
      */
-    public function setTo($to) {
+    public function setTo($to)
+    {
         $this->_borkerProeprties->setTo($to);
     }
 
@@ -397,7 +462,8 @@ class BrokeredMessage
      * 
      * @return string
      */
-    public function getScheduledEnqueueTimeUtc() {
+    public function getScheduledEnqueueTimeUtc()
+    {
         return $this->_brokerProperties->getScheduledEnqueueTimeUtc();
     }
     
@@ -405,8 +471,11 @@ class BrokeredMessage
      * Sets the scheduled enqueue time. 
      * 
      * @param string $scheduledEnqueueTime The date/time of the message.
+     *
+     * @return none
      */
-    public function setScheduledEnqueueTimeUtc($scheduledEnqueueTime) {
+    public function setScheduledEnqueueTimeUtc($scheduledEnqueueTime)
+    {
         $this->_brokerProperties->setScheduledEnqueueTimeUtc($scheduledEnqueueTime);
     }
 
@@ -415,7 +484,8 @@ class BrokeredMessage
      * 
      * @return string 
      */
-    public function getReplyToSessionId() {
+    public function getReplyToSessionId()
+    {
         return $this->_brokerProperties->getReplyToSessionId();
     }
 
@@ -424,8 +494,10 @@ class BrokeredMessage
      * 
      * @param string $replyToSessionId The session ID of the reply to recipient. 
      * 
+     * @return none
      */
-    public function setReplyToSessionId($replyToSessionId) {
+    public function setReplyToSessionId($replyToSessionId)
+    {
         $this->_brokerProperties->setReplyToSessionId($replyToSessionId);
     }
     
@@ -434,7 +506,8 @@ class BrokeredMessage
      * 
      * @return string 
      */
-    public function getMessageLocation() {
+    public function getMessageLocation()
+    {
         return $this->_brokerProperties->getMessageLocation();
     }
 
@@ -442,8 +515,11 @@ class BrokeredMessage
      * Sets the message location.
      *
      * @param string $messageLocation The location of the message. 
+     *
+     * @return none
      */
-    public function setMessageLocation($messageLocation) {
+    public function setMessageLocation($messageLocation)
+    {
         $this->_brokerProperties->setMessageLocation($messageLocation);
     }
     
@@ -453,7 +529,8 @@ class BrokeredMessage
      * 
      * @return string
      */
-    public function getLockLocation() {
+    public function getLockLocation()
+    {
         return $this->_brokerProperties->getLockLocation();
     }
 
@@ -461,8 +538,11 @@ class BrokeredMessage
      * Sets the location of the lock.
      * 
      * @param string $lockLocation The location of the lock.
+     * 
+     * @return none
      */
-    public function setLockLocation($lockLocation) {
+    public function setLockLocation($lockLocation)
+    {
         $this->_brokerProperties->setLockLocation($lockLocation);
     }
     

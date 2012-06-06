@@ -59,32 +59,33 @@ class SubscriptionInfo extends Entry
      * of the subscription.
      * 
      */
-    public function __construct($title = Resources::EMPTY_STRING, $subscriptionDescription = null)
-    {
+    public function __construct(
+        $title = Resources::EMPTY_STRING, 
+        $subscriptionDescription = null
+    ) {
         Validate::isString($title, 'title');
-        if (is_null($subscriptionDescription))
-        {
+        if (is_null($subscriptionDescription)) {
             $subscriptionDescription = new SubscriptionDescription();
         }
-        $this->_title = $title;
+        $this->_title                   = $title;
         $this->_subscriptionDescription = $subscriptionDescription;
     }
 
     /**
      * Populates the properties of the subscription info instance with a XML string. 
      * 
-     * @param string $entryXml A XML string representing a subscription information instance.
+     * @param string $entryXml A XML string representing a subscription 
+     * information instance.
+     * 
+     * @return none
      */
     public function parseXml($entryXml)
     {
         parent::parseXml($entryXml);
         $content = $this->_content;
-        if (is_null($content))
-        {
+        if (is_null($content)) {
             $this->_subscriptionDescription = null;
-        }   
-        else
-        {
+        } else {
             $this->_subscriptionDescription = SubscriptionDescription::create(
                 $content->getText()
             );
@@ -100,8 +101,7 @@ class SubscriptionInfo extends Entry
     {
         if (is_null($this->_subscriptionDescription)) {
             $this->_content = null;    
-        }
-        else {
+        } else {
             $this->_content = new Content();
             $this->_content->setText(
                 XmlSerializer::objectSerialize(
@@ -115,6 +115,8 @@ class SubscriptionInfo extends Entry
 
     /**
      * Gets the subscription description. 
+     *
+     * @return none
      */
     public function getSubscriptionDescription()
     {
@@ -124,7 +126,10 @@ class SubscriptionInfo extends Entry
     /**
      * Sets the subscription description. 
      * 
-     * @param string $subscriptionDescription The description of the subscription. 
+     * @param string $subscriptionDescription The description of 
+     * the subscription. 
+     * 
+     * @return none
      */
     public function setSubscriptionDescription($subscriptionDescription)
     {

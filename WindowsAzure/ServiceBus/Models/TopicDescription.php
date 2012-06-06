@@ -93,43 +93,51 @@ class TopicDescription
      *
      * @param string $topicDescriptionXml A XML based string describing
      * the topic. 
+     *
+     * @return TopicDescription
      */
     public static function create($topicDescriptionXml)
     {
-        $topicDescription = new TopicDescription();
-        $root = simplexml_load_string($topicDescriptionXml);
+        $topicDescription      = new TopicDescription();
+        $root                  = simplexml_load_string($topicDescriptionXml);
         $topicDescriptionArray = (array)$root;
 
-        if (array_key_exists('DefaultMessageToLive', $topicDescriptionArray))
-        {
+        if (array_key_exists('DefaultMessageToLive', $topicDescriptionArray)) {
             $topicDescription->setDefaultMessageToLive(
                 (string)$topicDescriptionArray['DefaultMessageToLive']
             );
         }
 
-        if (array_key_exists('MaxSizeInMegabytes', $topicDescriptionArray))
-        {
+        if (array_key_exists('MaxSizeInMegabytes', $topicDescriptionArray)) {
             $topicDescription->setMaxSizeInMegabytes(
                 (integer)$topicDescriptionArray['MaxSizeInMegabytes']
             );
         }
 
-        if (array_key_exists('RequiresDuplicateDetection', $topicDescriptionArray))
-        {
+        if (array_key_exists(
+            'RequiresDuplicateDetection', 
+            $topicDescriptionArray
+        )
+        ) {
             $topicDescription->setRequiresDuplicateDetection(
                 (boolean)$topicDescriptionArray['RequiresDuplicateDetection']
             );
         }
 
-        if (array_key_exists('DuplicateDetectionHistoryTimeWindow', $topicDescriptionArray))
-        {
+        if (array_key_exists(
+            'DuplicateDetectionHistoryTimeWindow', 
+            $topicDescriptionArray
+        )
+        ) {
             $topicDescription->setDuplicateDetectionHistoryTimeWindow(
                 (string)$topicDescriptionArray['DuplicateDetectionHistoryTimeWindow']
             );
         }
 
-        if (array_key_exists('EnableBatchedOperations', $topicDescriptionArray))
-        {
+        if (array_key_exists(
+            'EnableBatchedOperations', 
+            $topicDescriptionArray
+        )) {
             $topicDescription->setEnableBatchedOperations(
                 (boolean)$topicDescriptionArray['EnableBatchedOperations']
             );
@@ -151,7 +159,7 @@ class TopicDescription
     /**
      * Sets the default message to live.
      *
-     * @param string $defaultMessageToLive The default message time to live.
+     * @param string $defaultMessageTimeToLive The default message time to live.
      * 
      * @return none
      */
@@ -174,6 +182,8 @@ class TopicDescription
      * Sets max size in mega bytes. 
      * 
      * @param integer $maxSizeInMegabytes The maximum size in mega bytes. 
+     * 
+     * @return none
      */
     public function setMaxSizeInMegabytes($maxSizeInMegabytes)
     {
@@ -193,7 +203,9 @@ class TopicDescription
     /**
      * Sets requires duplicate detection. 
      * 
-     * @param boolean $requiresDuplicateDetection Sets requires duplicate detection. 
+     * @param boolean $requiresDuplicateDetection Sets requires duplicate detection.
+     *
+     * @return none
      */
     public function setRequiresDuplicateDetection($requiresDuplicateDetection)
     {
@@ -213,11 +225,16 @@ class TopicDescription
     /**
      * Sets duplicate detection history time window. 
      * 
-     * @param string $duplicateDetectionHistoryTimeWindow
+     * @param string $duplicateDetectionHistoryTimeWindow The duplicate 
+     * detection history time window.
+     *
+     * @return none
      */
-    public function setDuplicateDetectionHistoryTimeWindow($duplicateDetectionHistoryTimeWindow)
-    {
-        $this->_duplicateDetectionHistoryTimeWindow = $duplicateDetectionHistoryTimeWindow;
+    public function setDuplicateDetectionHistoryTimeWindow(
+    $duplicateDetectionHistoryTimeWindow
+    ) {
+        $this->_duplicateDetectionHistoryTimeWindow 
+            = $duplicateDetectionHistoryTimeWindow;
     }
 
     /**
@@ -234,6 +251,8 @@ class TopicDescription
      * Sets enable batched operations.
      * 
      * @param boolean $enableBatchedOperations Enables batched operations.
+     * 
+     * @return none
      */
     public function setEnableBatchedOperations($enableBatchedOperations)
     {
@@ -254,6 +273,8 @@ class TopicDescription
      * Sets size in bytes.
      * 
      * @param integer $sizeInBytes The size in bytes. 
+     *
+     * @return none
      */
     public function setSizeInBytes($sizeInBytes)
     {

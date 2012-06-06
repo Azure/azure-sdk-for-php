@@ -48,7 +48,9 @@ class CreateTopicResult
     /**
      * Populates the topic information from the response of a create topic request. 
      * 
-     * @var string $createTopicResponseBody The response of the create topic request.
+     * @param string $response The response of the create topic request.
+     *
+     * @return none
      */
     public function parseXml($response)
     {
@@ -77,6 +79,8 @@ class CreateTopicResult
      * Sets the topic information. 
      * 
      * @param TopicInfo $topicInfo The information of the topic. 
+     *
+     * @return none
      */
     public function setTopicInfo($topicInfo)
     {

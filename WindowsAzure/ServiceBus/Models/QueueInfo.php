@@ -54,14 +54,15 @@ class QueueInfo extends Entry
     /**
      * Creates a QueueInfo instance with specified parameters.
      *
-     * @param string           $name             The name of the queue.
+     * @param string           $title            The name of the queue.
      * @param QueueDescription $queueDescription The description of the queue.
      */
-    public function __construct($title = Resources::EMPTY_STRING, $queueDescription = null)
-    {
+    public function __construct(
+        $title = Resources::EMPTY_STRING, 
+        $queueDescription = null
+    ) {
         $this->_title = $title;
-        if (is_null($queueDescription))
-        {
+        if (is_null($queueDescription)) {
             $queueDescription = new QueueDescription();
         }
 
@@ -72,6 +73,8 @@ class QueueInfo extends Entry
      * Populates the properties of the queue info instance with a ATOM ENTRY XML string. 
      * 
      * @param string $entryXml An ATOM entry based XML string.
+     * 
+     * @return none
      */
     public function parseXml($entryXml)
     {
@@ -79,8 +82,7 @@ class QueueInfo extends Entry
         $content = $this->_content;
         if (is_null($content)) {
             $this->_queueDescription = null;
-        }
-        else {
+        } else {
             $this->_queueDescription = QueueDescription::create($content->getText());
         }
     }
@@ -94,8 +96,7 @@ class QueueInfo extends Entry
     {
         if (is_null($this->_queueDescription)) {
             $this->_content = null;    
-        }
-        else {
+        } else {
             $this->_content = new Content();
             $this->_content->setText(
                 XmlSerializer::objectSerialize(
@@ -109,6 +110,8 @@ class QueueInfo extends Entry
 
     /**
      * Gets the description of the queue. 
+     * 
+     * @return none
      */
     public function getQueueDescription()
     {
@@ -119,6 +122,8 @@ class QueueInfo extends Entry
      * Sets the description of the queue. 
      *
      * @param QueueDescription $queueDescription The description of the queue.
+     * 
+     & @return none
      */
     public function setQueueDescription($queueDescription)
     {

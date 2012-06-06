@@ -56,24 +56,29 @@ class RuleInfo extends Entry
      *
      * @param string          $title           The title of the rule.
      * @param RuleDescription $ruleDescription The description of the rule.
+     *
      * 
      */
-    public function __construct($title = Resources::EMPTY_STRING, $ruleDescription = null)
-    {
+    public function __construct(
+        $title = Resources::EMPTY_STRING, 
+        $ruleDescription = null
+    ) {
         Validate::isString($title, 'title');
 
-        if (is_null($ruleDescription))
-        {
+        if (is_null($ruleDescription)) {
             $ruleDescription = new RuleDescription();
         }
-        $this->_title = $title;
+        $this->_title           = $title;
         $this->_ruleDescription = $ruleDescription;
     }
 
     /**
-     * Populates the properties with a specified XML string based on ATOM ENTRY schema. 
+     * Populates the properties with a specified XML string based on ATOM 
+     * ENTRY schema. 
      * 
      * @param string $xmlString An XML string representing a rule info instance.
+     * 
+     * @return none 
      */
     public function parseXml($xmlString)
     {
@@ -81,8 +86,7 @@ class RuleInfo extends Entry
         $content = $this->_content;
         if (is_null($content)) {
             $this->_ruleDescription = null;
-        }
-        else {
+        } else {
             $this->_ruleDescription = RuleDescription::create($content->getText());
         }
     }
@@ -96,8 +100,7 @@ class RuleInfo extends Entry
     {
         if (is_null($this->_ruleDescription)) {
             $this->_content = null;    
-        }
-        else {
+        } else {
             $this->_content = new Content();
             $this->_content->setText(
                 XmlSerializer::objectSerialize(
@@ -123,6 +126,8 @@ class RuleInfo extends Entry
      * Sets the filter. 
      * 
      * @param Filter $filter The filter. 
+     *
+     * @return none
      */
     public function setFilter($filter)
     {
@@ -143,6 +148,8 @@ class RuleInfo extends Entry
      * Sets the action. 
      * 
      * @param Action $action The action. 
+     * 
+     * @return none
      */
     public function setAction($action)
     {
@@ -162,7 +169,7 @@ class RuleInfo extends Entry
     /**
      * Sets the rule description. 
      * 
-     * @param $ruleDescription The description of the rule. 
+     * @param RuleDescription $ruleDescription The description of the rule. 
      * 
      * @return none 
      */
@@ -227,6 +234,7 @@ class RuleInfo extends Entry
     /**
      * With empty rule action. 
      * 
+     * @return none
      */
     public function withEmptyRuleAction()
     {
@@ -238,7 +246,10 @@ class RuleInfo extends Entry
     /**
      * With SQL rule action. 
      * 
-     * @param string $sqlExpression 
+     * @param string $sqlExpression The SQL expression 
+     * of the rule action.
+     *
+     * @return none
      */
     public function withSqlRuleAction($sqlExpression)
     {

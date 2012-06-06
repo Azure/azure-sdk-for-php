@@ -49,7 +49,10 @@ class GetQueueResult
     /** 
      * Populate the properties with a specified get queue request response body. 
      * 
-     * @param string $getQueueResponse The body of the response from a get queue request. 
+     * @param string $getQueueResponse The body of the response from a get queue
+     * request. 
+     *
+     * @return none
      */
     public function parseXml($getQueueResponse)
     {
@@ -66,6 +69,8 @@ class GetQueueResult
 
     /** 
      * Gets the information of the queue. 
+     *
+     * @return none
      */
     public function getQueueInfo()
     {
@@ -76,6 +81,8 @@ class GetQueueResult
      * Sets the information of the queue. 
      *
      * @param QueueInfo $queueInfo The information of the queue. 
+     * 
+     * @return none
      */
     public function setQueueInfo($queueInfo)
     {

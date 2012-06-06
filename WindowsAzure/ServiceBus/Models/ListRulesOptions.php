@@ -36,7 +36,7 @@ use WindowsAzure\ServiceBus\Models\ListOptions;
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
 
-class ListRulesOptions extends ListOptions 
+class ListRulesOptions extends ListOptions
 {
 }
 ?>

@@ -34,7 +34,7 @@ use WindowsAzure\Common\Internal\Resources;
  * @author    Azure PHP SDK <azurephpsdk@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
- * @version   Release: @package_version@
+ * @version   Release: @packageversion@
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
 
@@ -45,37 +45,39 @@ class Category
      *
      * @var string  
      */
-    protected $_term;
+    protected $term;
 
     /**
      * The scheme of the category. 
      *
      * @var string  
      */
-    protected $_scheme;
+    protected $scheme;
 
     /**
      * The label of the category. 
      * 
      * @var string 
      */ 
-    protected $_label;
+    protected $label;
 
     /**
      * The undefined content of the category. 
      *  
      * @var string 
      */
-    protected $_undefinedContent;
+    protected $undefinedContent;
      
     /** 
      * Creates a Category instance with specified text.
      *
-     * @param string $text The text of the category.
+     * @param string $undefinedContent The undefined content of the category.
+     *
+     * @return none
      */
-    public function __construct($undefinedContent = Resources::EMPTY_STRING)
+    public function construct($undefinedContent = Resources::EMPTYSTRING)
     {
-        $this->_undefinedContent = $undefinedContent;
+        $this->undefinedContent = $undefinedContent;
     }
 
     /**
@@ -83,27 +85,25 @@ class Category
      * 
      * @param string $xmlString an XML based string of ATOM CONTENT.
      * 
+     * @return none
      */ 
     public function parseXml($xmlString)
     {
-        $categoryXml = simplexml_load_string($xmlString);
-        $attributes = $categoryXml->attributes();
-        if (!empty($attributes['term']))
-        {
-            $this->_term = (string)$attributes['term'];
+        $categoryXml = simplexmlloadstring($xmlString);
+        $attributes  = $categoryXml->attributes();
+        if (!empty($attributes['term'])) {
+            $this->term = (string)$attributes['term'];
         }
 
-        if (!empty($attributes['scheme']))
-        {
-            $this->_scheme = (string)$attributes['scheme'];
+        if (!empty($attributes['scheme'])) {
+            $this->scheme = (string)$attributes['scheme'];
         }
 
-        if (!empty($attributes['label']))
-        {
-            $this->_label = (string)$attributes['label'];
+        if (!empty($attributes['label'])) {
+            $this->label = (string)$attributes['label'];
         }
 
-        $this->_undefinedContent =(string)$categoryXml;
+        $this->undefinedContent =(string)$categoryXml;
     }
 
     /** 
@@ -113,17 +113,19 @@ class Category
      */
     public function getTerm()
     {   
-        return $this->_term;
+        return $this->term;
     } 
 
     /**
      * Sets the term of the category.
      * 
-     * @param string $text The text of the category.
+     * @param string $term The term of the category.
+     * 
+     * @return none
      */
     public function setTerm($term)
     {
-        $this->_term = $term; 
+        $this->term = $term; 
     }
 
     /**
@@ -133,17 +135,19 @@ class Category
      */
     public function getScheme()
     {
-        return $this->_scheme;
+        return $this->scheme;
     }
 
     /**
      * Sets the scheme of the category. 
      * 
-     * @param string $type The scheme of the category.
+     * @param string $scheme The scheme of the category.
+     * 
+     * @return none
      */
     public function setScheme($scheme)
     {
-        $this->_scheme = $scheme;
+        $this->scheme = $scheme;
     }
 
     /**
@@ -153,17 +157,19 @@ class Category
      */
     public function getLabel()
     {
-        return $this->_label;
+        return $this->label;
     }
 
     /**
      * Sets the label of the category. 
      * 
      * @param string $label The label of the category. 
+     * 
+     * @return none
      */ 
     public function setLabel($label)
     {
-        $this->_label = $label;
+        $this->label = $label;
     }
 
     /**
@@ -173,23 +179,27 @@ class Category
      */
     public function getUndefinedContent()
     {
-        return $this->_undefinedContent;
+        return $this->undefinedContent;
     }
 
     /**
      * Sets the undefined content of the category. 
      * 
      * @param string $undefinedContent The undefined content of the category. 
+     *
+     * @return none
      */
     public function setUndefinedContent($undefinedContent)
     {
-        $this->_undefinedContent = $undefinedContent;
+        $this->undefinedContent = $undefinedContent;
     }
     
     /** 
      * Writes an XML representing the category. 
      * 
      * @param \XMLWriter $xmlWriter The XML writer.
+     * 
+     * @return none
      */
     public function writeXml($xmlWriter)
     {
@@ -202,27 +212,25 @@ class Category
      * Writes an XML representing the category. 
      * 
      * @param \XMLWriter $xmlWriter The XML writer.
+     * 
+     * @return none
      */
     public function writeInnerXml($xmlWriter)
     {
-        if (!empty($this->_term))
-        {
-            $xmlWriter->WriteAttribute('term', $this->_term);
+        if (!empty($this->term)) {
+            $xmlWriter->WriteAttribute('term', $this->term);
         }
 
-        if (!empty($this->_scheme))
-        {
-            $xmlWriter->WriteAttribute('scheme', $this->_scheme);
+        if (!empty($this->scheme)) {
+            $xmlWriter->WriteAttribute('scheme', $this->scheme);
         }
 
-        if (!empty($this->_label))
-        {
-            $xmlWriter->WriteAttribute('label', $this->_label);
+        if (!empty($this->label)) {
+            $xmlWriter->WriteAttribute('label', $this->label);
         }
 
-        if (!empty($this->_content))
-        {
-            $xmlWriter->WriteRaw($this->_content);
+        if (!empty($this->content)) {
+            $xmlWriter->WriteRaw($this->content);
         }
 
     }

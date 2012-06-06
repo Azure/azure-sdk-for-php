@@ -121,54 +121,96 @@ class QueueDescription
      *
      * @param string $queueDescriptionXml A XML based string describing
      * the queue. 
+     * 
+     * @return none
      */
     public static function create($queueDescriptionXml)
     {
-        $queueDescription = new QueueDescription();
-        $root = simplexml_load_string($queueDescriptionXml);
+        $queueDescription      = new QueueDescription();
+        $root                  = simplexml_load_string(
+            $queueDescriptionXml
+        );
         $queueDescriptionArray = (array)$root;
         if (array_key_exists('LockDuration', $queueDescriptionArray)) {
-            $queueDescription->setLockDuration((string)$queueDescriptionArray['LockDuration']);
+            $queueDescription->setLockDuration(
+                (string)$queueDescriptionArray['LockDuration']
+            );
         }
 
         if (array_key_exists('MaxSizeInMegabytes', $queueDescriptionArray)) {
-            $queueDescription->setMaxSizeInMegabytes((integer)$queueDescriptionArray['MaxSizeInMegabytes']);
+            $queueDescription->setMaxSizeInMegabytes(
+                (integer)$queueDescriptionArray['MaxSizeInMegabytes']
+            );
         }
 
-        if (array_key_exists('RequiresDuplicateDetection', $queueDescriptionArray)) {
-            $queueDescription->setRequiresDuplicateDetection((boolean)$queueDescriptionArray['RequiresDuplicateDetection']);
+        if (array_key_exists(
+            'RequiresDuplicateDetection', 
+            $queueDescriptionArray
+        )
+        ) {
+            $queueDescription->setRequiresDuplicateDetection(
+                (boolean)$queueDescriptionArray['RequiresDuplicateDetection']
+            );
         }
         
         if (array_key_exists('RequiresSession', $queueDescriptionArray)) {
-            $queueDescription->setRequiresSession((boolean)$queueDescriptionArray['RequiresSession']);
+            $queueDescription->setRequiresSession(
+                (boolean)$queueDescriptionArray['RequiresSession']
+            );
         }
 
-        if (array_key_exists('DefaultMessageTimeToLive', $queueDescriptionArray)) {
-            $queueDescription->setDefaultMessageTimeToLive((string)$queueDescriptionArray['DefaultMessageTimeToLive']);
+        if (array_key_exists(
+            'DefaultMessageTimeToLive', 
+            $queueDescriptionArray
+        )
+        ) {
+            $queueDescription->setDefaultMessageTimeToLive(
+                (string)$queueDescriptionArray['DefaultMessageTimeToLive']
+            );
         }
 
-        if (array_key_exists('DeadLetteringOnMessageExpiration', $queueDescriptionArray)) {
-            $queueDescription->setDeadLetteringOnMessageExpiration((string)$queueDescriptionArray['DeadLetteringOnMessageExpiration']);
+        if (array_key_exists(
+            'DeadLetteringOnMessageExpiration', 
+            $queueDescriptionArray
+        )
+        ) {
+            $queueDescription->setDeadLetteringOnMessageExpiration(
+                (string)$queueDescriptionArray['DeadLetteringOnMessageExpiration']
+            );
         }
 
-        if (array_key_exists('DuplicateDetectionHistoryTimeWindow', $queueDescriptionArray)) {
-            $queueDescription->setDuplicateDetectionHistoryTimeWindow((string)$queueDescriptionArray['DuplicateDetectionHistoryTimeWindow']);
+        if (array_key_exists(
+            'DuplicateDetectionHistoryTimeWindow', 
+            $queueDescriptionArray
+        )
+        ) {
+            $queueDescription->setDuplicateDetectionHistoryTimeWindow(
+                (string)$queueDescriptionArray['DuplicateDetectionHistoryTimeWindow']
+            );
         }
 
         if (array_key_exists('MaxDeliveryCount', $queueDescriptionArray)) {
-            $queueDescription->setMaxDeliveryCount((integer)$queueDescriptionArray['MaxDeliveryCount']);
+            $queueDescription->setMaxDeliveryCount(
+                (integer)$queueDescriptionArray['MaxDeliveryCount']
+            );
         }
 
         if (array_key_exists('EnableBatchedOperations', $queueDescriptionArray)) {
-            $queueDescription->setEnableBatchedOperations((boolean)$queueDescriptionArray['EnableBatchedOperations']);
+            $queueDescription->setEnableBatchedOperations(
+                (boolean)$queueDescriptionArray['EnableBatchedOperations']
+            );
         }
 
         if (array_key_exists('SizeInBytes', $queueDescriptionArray)) {
-            $queueDescription->setSizeInBytes((integer)$queueDescriptionArray['SizeInBytes']);
+            $queueDescription->setSizeInBytes(
+                (integer)$queueDescriptionArray['SizeInBytes']
+            );
         }
 
         if (array_key_exists('MessageCount', $queueDescriptionArray)) {
-            $queueDescription->setMessageCount((integer)$queueDescriptionArray['MessageCount']);
+            $queueDescription->setMessageCount(
+                (integer)$queueDescriptionArray['MessageCount']
+            );
         }
 
         return $queueDescription;
@@ -302,12 +344,14 @@ class QueueDescription
     /**
      * Sets dead lettering on message expiration.
      *
-     * @param string $deadLetteringOnMessageExpiration The dead lettering on message expiration.
+     * @param string $deadLetteringOnMessageExpiration The dead lettering on 
+     * message expiration.
      * 
      * @return none
      */
-    public function setDeadLetteringOnMessageExpiration($deadLetteringOnMessageExpiration)
-    {
+    public function setDeadLetteringOnMessageExpiration(
+        $deadLetteringOnMessageExpiration
+    ) {
         $this->_deadLetteringOnMessageExpiration = $deadLetteringOnMessageExpiration;
     }
 
@@ -322,15 +366,18 @@ class QueueDescription
     }
 
     /**
-     * Sets the lock duration.
+     * Sets the duplicate detection history time window.
      *
-     * @param string $lockDuration The lock duration.
+     * @param string $duplicateDetectionHistoryTimeWindow The duplicate
+     * detection history time window.
      * 
      * @return none
      */
-    public function setDuplicateDetectionHistoryTimeWindow($duplicateDetectionHistoryTimeWindow)
-    {
-        $this->_duplicateDetectionHistoryTimeWindow = $duplicateDetectionHistoryTimeWindow;
+    public function setDuplicateDetectionHistoryTimeWindow(
+        $duplicateDetectionHistoryTimeWindow
+    ) {
+        $this->_duplicateDetectionHistoryTimeWindow 
+            = $duplicateDetectionHistoryTimeWindow;
     }
 
     /**
@@ -344,9 +391,9 @@ class QueueDescription
     }
 
     /**
-     * Sets the lock duration.
+     * Sets the maximum delivery count.
      *
-     * @param string $lockDuration The lock duration.
+     * @param string $maxDeliveryCount The maximum delivery count.
      * 
      * @return none
      */
@@ -388,9 +435,9 @@ class QueueDescription
     }
 
     /**
-     * Sets the lock duration.
+     * Sets the size in bytes.
      *
-     * @param string $lockDuration The lock duration.
+     * @param integer $sizeInBytes The size in bytes.
      * 
      * @return none
      */
@@ -410,9 +457,9 @@ class QueueDescription
     }
 
     /**
-     * Sets the lock duration.
+     * Sets the message count.
      *
-     * @param string $lockDuration The lock duration.
+     * @param string $messageCount The count of the message.
      * 
      * @return none
      */

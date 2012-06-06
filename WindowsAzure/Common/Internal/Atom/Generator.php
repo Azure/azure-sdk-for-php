@@ -34,7 +34,7 @@ use WindowsAzure\Common\Internal\Resources;
  * @author    Azure PHP SDK <azurephpsdk@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
- * @version   Release: @package_version@
+ * @version   Release: @packageversion@
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
 
@@ -45,51 +45,57 @@ class Generator
      *
      * @var string  
      */
-    protected $_text;
+    protected $text;
 
     /**
      * The Uri of the generator. 
      *
      * @var string  
      */
-    protected $_uri;
+    protected $uri;
 
     /**
      * The version of the generator.
      *
      * @var string 
      */
-    protected $_version;
+    protected $version;
 
     /** 
      * Creates a generator instance with specified XML string. 
+     * 
+     * @param string $xmlString A string representing a generator 
+     * instance.
+     * 
+     * @return none
      */
     public static function parseXml($xmlString)
     {
-        $generatorXml = new \SimpleXMLElement($xmlString);
-        $generatorArray = (array)generatorXml;
-        $attributes = $generatorXml->attributes();
+        $generatorXml   = new \SimpleXMLElement($xmlString);
+        $generatorArray = (array)$generatorXml;
+        $attributes     = $generatorXml->attributes();
         if (!empty($attributes['uri'])) { 
-            $this->_uri = (string)$attributes['uri'];
+            $this->uri = (string)$attributes['uri'];
         }
 
         if (!empty($attributes['version'])) {
-            $this->_version = (string)$attributes['version'];
+            $this->version = (string)$attributes['version'];
         }
 
-        $this->_text = (string)$generatorXml;  
+        $this->text = (string)$generatorXml;  
     }
      
     /** 
      * Creates an ATOM generator instance with specified name.
      *
      * @param string $text The text content of the generator.
+     * 
+     * @return none
      */
-    public function __construct($text = null)
+    public function construct($text = null)
     {
-        if (!empty($text))
-        {
-            $this->_text = $text;
+        if (!empty($text)) {
+            $this->text = $text;
         }
     }
 
@@ -100,17 +106,19 @@ class Generator
      */
     public function getText()
     {   
-        return $this->_text;
+        return $this->text;
     } 
 
     /**
      * Sets the text of the generator.
      * 
      * @param string $text The text of the generator.
+     * 
+     * @return none
      */
     public function setText($text)
     {
-        $this->_text = $text; 
+        $this->text = $text; 
     }
 
     /**
@@ -120,17 +128,19 @@ class Generator
      */
     public function getUri()
     {
-        return $this->_uri;
+        return $this->uri;
     }
 
     /**
      * Sets the URI of the generator. 
      * 
      * @param string $uri The URI of the generator.
+     * 
+     * @return none
      */
     public function setUri($uri)
     {
-        $this->_uri = $uri;
+        $this->uri = $uri;
     }
 
     
@@ -141,39 +151,40 @@ class Generator
      */
     public function getVersion()
     {
-        return $this->_version;
+        return $this->version;
     }
 
     /**
      * Sets the version of the generator. 
      * 
      * @param string $version The version of the generator.
+     * 
+     * @return none
      */
     public function setVersion($version)
     {
-        $this->_version = $version;
+        $this->version = $version;
     }
 
     /** 
      * Writes an XML representing the generator. 
      * 
      * @param \XMLWriter $xmlWriter The XML writer.
+     * 
+     * @return none
      */
     public function writeXml($xmlWriter)
     {
         $xmlWriter->startElement('atom:category');
-        if (!empty($this->_uri))
-        {
-            $xmlWriter->writeAttribute('atom:uri', $this->_uri);
+        if (!empty($this->uri)) {
+            $xmlWriter->writeAttribute('atom:uri', $this->uri);
         }
 
-        if (!empty($this->_version))
-        {
-            $xmlWriter->writeAttribute('atom:version', $this->_version);
+        if (!empty($this->version)) {
+            $xmlWriter->writeAttribute('atom:version', $this->version);
         }
 
-        $xmlWriter->writeRaw($this->_text);
-
+        $xmlWriter->writeRaw($this->text);
         $xmlWriter->endElement();
     }
 }

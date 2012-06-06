@@ -54,12 +54,14 @@ class SqlFilter extends Filter
     public function __construct()
     {   
         parent::__construct();
-        $this->_attributes['xsi:type'] = 'SqlFilter';
+        $this->attributes['xsi:type'] = 'SqlFilter';
     }
     /**
      * Gets the SQL expression. 
      * 
      * @var string 
+     * 
+     * @return none
      */
     public function getSqlExpression()
     {
@@ -70,6 +72,8 @@ class SqlFilter extends Filter
      * Sets the SQL expression. 
      * 
      * @param string $sqlExpression The SQL expression of the filter. 
+     * 
+     * @return none
      */
     public function setSqlExpression($sqlExpression)
     {

@@ -48,9 +48,13 @@ class GetSubscriptionResult
     private $_subscriptionInfo;
 
     /**
-     * Populate the properties with a specified get subscription request response body. 
+     * Populate the properties with a specified get subscription request 
+     * response body. 
      * 
-     * @param string $getSubscriptionResponse The body of the response from a get subscription request. 
+     * @param string $getSubscriptionResponse The body of the response from a 
+     * get subscription request. 
+     * 
+     * @return none
      */ 
     public function parseXml($getSubscriptionResponse)
     {
@@ -79,6 +83,8 @@ class GetSubscriptionResult
      * Sets the subscription information.
      * 
      * @param SubscriptionInfo $subscriptionInfo The information of the subscription.
+     * 
+     * @return none
      */
     public function setSubscriptionInfo($subscriptionInfo)
     {

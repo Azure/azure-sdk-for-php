@@ -34,7 +34,7 @@ use WindowsAzure\Common\Internal\Resources;
  * @author    Azure PHP SDK <azurephpsdk@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
- * @version   Release: @package_version@
+ * @version   Release: @packageversion@
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
 
@@ -42,107 +42,108 @@ class Entry
 {
     /**
      * The attributes of the entry 
+     *
      * @var array
      */
-    protected $_attributes;
+    protected $attributes;
 
     /**
      * The author of the entry.
      *
      * @var Person
      */
-    protected $_author;
+    protected $author;
 
     /**
      * The category of the entry.
      *
      * @var array
      */
-    protected $_category;
+    protected $category;
 
     /**
      * The content of the entry.
      *
      * @var string
      */
-    protected $_content;
+    protected $content;
 
     /**
      * The contributor of the entry.
      *
      * @var string
      */
-    protected $_contributor;
+    protected $contributor;
 
     /**
      * An unqiue ID representing the entry.
      *
      * @var string
      */
-    protected $_id;
+    protected $id;
 
     /**
      * The link of the entry.
      *
      * @var string
      */
-    protected $_link;
+    protected $link;
 
     /**
      * Is the entry published.
      *
      * @var boolean
      */
-    protected $_published;
+    protected $published;
 
     /**
      * The copy right of the entry.
      *
      * @var string
      */
-    protected $_rights;
+    protected $rights;
 
     /**
      * The source of the entry.
      *
      * @var string
      */
-    protected $_source;
+    protected $source;
 
     /**
      * The summary of the entry.
      *
      * @var string
      */
-    protected $_summary;
+    protected $summary;
 
     /**
      * The title of the entry.
      *
      * @var string
      */
-    protected $_title;
+    protected $title;
 
     /**
      * Is the entry updated.
      *
      * @var boolean
      */
-    protected $_updated;
+    protected $updated;
 
     /**
      * The extension element of the entry.
      *
      * @var string
      */
-    protected $_extensionElement;
+    protected $extensionElement;
 
     /**
      * Creates an ATOM Entry instance with default parameters. 
      */
     public function __construct()
     {
-        $this->_attributes = array();
+        $this->attributes = array();
     }
 
     /**
@@ -150,78 +151,68 @@ class Entry
      * 
      * @param string $xmlString A string representing an ATOM entry instance. 
      * 
+     * @return none
      */
     public function parseXml($xmlString)
     {
-        $entryXml = simplexml_load_string($xmlString);
-        $this->_attributes = $entryXml->attributes();
-        $entryArray = (array)$entryXml;
+        $entryXml         = simplexmlloadstring($xmlString);
+        $this->attributes = $entryXml->attributes();
+        $entryArray       = (array)$entryXml;
 
-        if (array_key_exists('author', $entryArray))
-        {
+        if (arraykeyexists('author', $entryArray)) {
             $author = new Person();
             $author->parseXml($entryArray['author']->asXML());
-            $this->_author = $author;
+            $this->author = $author;
         }
 
-        if (array_key_exists('category', $entryArray))
-        {
+        if (arraykeyexists('category', $entryArray)) {
             $category = new Category();
             $category->parseXml($entryArray['category']->asXML());
-            $this->_category = $category;
+            $this->category = $category;
         }
 
-        if (array_key_exists('content', $entryArray))
-        {
+        if (arraykeyexists('content', $entryArray)) {
             $content = new Content();
             $content->parseXml($entryArray['content']->asXML());
-            $this->_content = $content;
+            $this->content = $content;
         }
 
-        if (array_key_exists('contributor', $entryArray))
-        {
+        if (arraykeyexists('contributor', $entryArray)) {
             $contributor = new Person();
             $contributor->parseXml($entryArray['contributor']->asXML());
-            $this->_contributor = $contributor;
+            $this->contributor = $contributor;
         }
 
-        if (array_key_exists('id', $entryArray))
-        {
-            $this->_id = (string)$entryArray['id'];
+        if (arraykeyexists('id', $entryArray)) {
+            $this->id = (string)$entryArray['id'];
         }
 
-        if (array_key_exists('link', $entryArray))
-        {
+        if (arraykeyexists('link', $entryArray)) {
             $link = new AtomLink();
             $link->parseXml($entryArray['link']->asXML());
-            $this->_link = $link;
+            $this->link = $link;
         }
 
-        if (array_key_exists('published', $entryArray))
-        {
-            $this->_published = $entryArray['published'];
+        if (arraykeyexists('published', $entryArray)) {
+            $this->published = $entryArray['published'];
         }
 
-        if (array_key_exists('rights', $entryArray))
-        {
-            $this->_rights = $entryArray['rights'];
+        if (arraykeyexists('rights', $entryArray)) {
+            $this->rights = $entryArray['rights'];
         }
 
-        if (array_key_exists('source', $entryArray))
-        {
+        if (arraykeyexists('source', $entryArray)) {
             $source = new Source();
             $source->parseXml($entryArray['source']->asXML());
-            $this->_source = $source;
+            $this->source = $source;
         }
 
-        if (array_key_exists('title', $entryArray))
-        {
-            $this->_title = $entryArray['title'];
+        if (arraykeyexists('title', $entryArray)) {
+            $this->title = $entryArray['title'];
         }
 
-        if (array_key_exists('updated', $entryArray))
-        {
-            $this->_updated = $entryArray['updated'];
+        if (arraykeyexists('updated', $entryArray)) {
+            $this->updated = $entryArray['updated'];
         }
          
     }
@@ -233,7 +224,7 @@ class Entry
      */
     public function getAttributes()
     {   
-        return $this->_attributes;
+        return $this->attributes;
     }
 
     /**
@@ -241,10 +232,11 @@ class Entry
      * 
      * @param array $attributes The attributes of the entry. 
      *
+     * @return none
      */
     public function setAttributes($attributes)
     {
-        $this->_attributes = $attributes;
+        $this->attributes = $attributes;
     }
 
     /**
@@ -257,7 +249,7 @@ class Entry
      */
     public function setAttribute($attributeKey, $attributeValue)
     {
-        $this->_attributes[$attributeKey] = $attributeValue;
+        $this->attributes[$attributeKey] = $attributeValue;
     }
 
     /**
@@ -269,7 +261,7 @@ class Entry
      */
     public function getAttribute($attributeKey)
     {
-        return $this->_attributes[$attributeKey];
+        return $this->attributes[$attributeKey];
     }
 
     /**
@@ -279,17 +271,19 @@ class Entry
      */
     public function getAuthor()
     {
-        return $this->_author;
+        return $this->author;
     }
 
     /** 
      * Sets the author of the entry.
      *
      * @param Person $author The author of the entry. 
+     * 
+     * @return none
      */
     public function setAuthor($author)
     {
-        $this->_author = $author;
+        $this->author = $author;
     }
 
     /** 
@@ -299,17 +293,19 @@ class Entry
      */
     public function getCategory()
     {
-        return $this->_category;
+        return $this->category;
     }
 
     /** 
      * Sets the category.
      * 
      * @param string $category The category of the entry.
+     * 
+     * @return none
      */
     public function setCategory($category)
     {
-        $this->_category = $category;
+        $this->category = $category;
     }
 
     /** 
@@ -319,17 +315,19 @@ class Entry
      */
     public function getContent()
     {
-        return $this->_content;
+        return $this->content;
     }
 
     /** 
      * Sets the content. 
      * 
      * @param Content $content Sets the content of the entry.
+     * 
+     * @return none
      */
     public function setContent($content)
     {
-        $this->_content = $content;
+        $this->content = $content;
     }
 
     /**
@@ -339,17 +337,19 @@ class Entry
      */
     public function getContributor()
     {
-        return $this->_contributor;
+        return $this->contributor;
     }
 
     /** 
      * Sets the contributor.
      *
      * @param string $contributor The contributor of the entry. 
+     * 
+     * @return none
      */
     public function setContributor($contributor)
     {
-        $this->_contributor = $contributor;
+        $this->contributor = $contributor;
     }
 
     /**
@@ -359,17 +359,19 @@ class Entry
      */
     public function getId()
     {
-        return $this->_id;
+        return $this->id;
     }
 
     /** 
      * Sets the ID of the entry.
      * 
      * @param string $id The id of the entry. 
+     * 
+     * @return none
      */
     public function setId($id)
     {
-        $this->_id = $id;
+        $this->id = $id;
     }
 
     /**     
@@ -379,17 +381,19 @@ class Entry
      */
     public function getLink()
     {
-        return $this->_link;
+        return $this->link;
     }
 
     /**
      * Sets the link of the entry. 
      * 
      * @param string $link The link of the entry.
+     * 
+     * @return none
      */
     public function setLink($link)
     {
-        $this->_link = $link;
+        $this->link = $link;
     }
 
     /** 
@@ -399,17 +403,19 @@ class Entry
      */
     public function getPublished()
     {
-        return $this->_published;
+        return $this->published;
     }
 
     /** 
      * Sets published of the entry. 
      * 
      * @param boolean $published Is the entry published. 
+     * 
+     * @return none
      */
     public function setPublished($published)
     {
-        $this->_published = $published;
+        $this->published = $published;
     }
 
     /** 
@@ -419,17 +425,19 @@ class Entry
      */
     public function getRights()
     {
-        return $this->_rights;
+        return $this->rights;
     }
 
     /** 
      * Sets the rights of the entry. 
      * 
      * @param string $rights The rights of the entry. 
+     * 
+     * @return none
      */
     public function setRights($rights)
     {
-        $this->_rights = $rights;
+        $this->rights = $rights;
     }
 
     /** 
@@ -439,17 +447,19 @@ class Entry
      */
     public function getSource()
     {
-        return $this->_source;
+        return $this->source;
     }
 
     /** 
      * Sets the source of the entry. 
      * 
      * @param string $source The source of the entry. 
+     * 
+     * @return none
      */
     public function setSource($source)
     {
-        $this->_source = $source;
+        $this->source = $source;
     }
 
     /** 
@@ -459,17 +469,19 @@ class Entry
      */ 
     public function getSummary()
     {
-        return $this->_summary;
+        return $this->summary;
     }
 
     /** 
      * Sets the summary of the entry. 
      * 
      * @param string $summary The summary of the entry. 
+     * 
+     * @return none
      */
     public function setSummary($summary)
     {
-        $this->_summary = $summary;
+        $this->summary = $summary;
     }
 
     /** 
@@ -479,17 +491,19 @@ class Entry
      */
     public function getTitle()
     {
-        return $this->_title;
+        return $this->title;
     }
 
     /**
      * Sets the title of the entry. 
      *
      * @param string $title The title of the entry. 
+     * 
+     * @return none
      */
     public function setTitle($title)
     {
-        $this->_title = $title;
+        $this->title = $title;
     }
     
     /**
@@ -499,17 +513,19 @@ class Entry
      */
     public function getUpdated()
     {
-        return $this->_updated;
+        return $this->updated;
     }
 
     /**  
      * Sets updated
      * 
      * @param boolean $updated updated.
+     * 
+     * @return none
      */
     public function setUpdated($updated)
     {
-        $this->_updated = $updated;
+        $this->updated = $updated;
     }
 
     /**
@@ -519,23 +535,27 @@ class Entry
      */
     public function getExtensionElement()
     {
-        return $this->_extensionElement;
+        return $this->extensionElement;
     }    
     
     /**
      * Sets extension element.
      * 
      * @param string $extensionElement The extension element of the entry. 
+     * 
+     * @return none
      */
     public function setExtensionElement($extensionElement)
     {
-        $this->_extensionElement = $extensionElement;     
+        $this->extensionElement = $extensionElement;     
     }
 
     /** 
      * Writes a inner XML string representing the entry. 
      * 
      * @param \XMLWriter $xmlWriter The XML writer.
+     * 
+     * @return none
      */
     public function writeXml($xmlWriter)
     {
@@ -548,108 +568,93 @@ class Entry
      * Writes a inner XML string representing the entry. 
      * 
      * @param \XMLWriter $xmlWriter The XML writer.
+     * 
+     * @return none
      */
     public function writeInnerXml($xmlWriter)
     {
-        if (!is_null($this->_attributes))
-        {
-            if (is_array($this->_attributes))
-            {
-                foreach ($this->_attributes as $attributeName => $attributeValue)
-                {
+        if (!is_null($this->attributes)) {
+            if (isarray($this->attributes)) {
+                foreach (
+                    $this->attributes 
+                    as $attributeName => $attributeValue
+                ) {
                     $xmlWriter->writeAttribute($attributeName, $attributeValue);
                 }
             }
         }
          
-        if (!is_null($this->_author))
-        {
+        if (!is_null($this->author)) {
             $xmlWriter->startElement('atom:author');
-            $this->_author->writeInnerXml($xmlWriter);
+            $this->author->writeInnerXml($xmlWriter);
             $xmlWriter->endElement();
         } 
 
-        if (!is_null($this->_category))
-        {
-            if (is_array($this->_category))
-            {
-                foreach ($this->_category as $category)
-                {
+        if (!is_null($this->category)) {
+            if (isarray($this->category)) {
+                foreach (
+                    $this->category 
+                    as $category
+                ) {
                     $xmlWriter->startElement('atom:category');
                     $category->writeInnerXml($xmlWriter);
                     $xmlWriter->endElement();
                 }
-            }
-            else
-            {
+            } else {
                 $xmlWriter->startElement('atom:category');
                 $category->writeInnerXml($xmlWriter);
                 $xmlWriter->endElement();
             }
         }
 
-        if (!is_null($this->_content))
-        {
-            $this->_content->writeXml($xmlWriter);
+        if (!is_null($this->content)) {
+            $this->content->writeXml($xmlWriter);
         }
 
-        if (!is_null($this->_contributor))
-        {
-            if (is_array($this->_contributor))
-            {
-                foreach ($this->_contributor as $contributor)
-                {
+        if (!is_null($this->contributor)) {
+            if (isarray($this->contributor)) {
+                foreach ($this->contributor as $contributor) {
                     $xmlWriter->startElement('atom:contributor');
                     $contributor->writeInnerXml($xmlWriter);
                     $xmlWriter->endElement();
                 }
-            }
-            else
-            {
+            } else {
                 $xmlWriter->startElement('atom:contributor');
                 $contributor->writeInnerXml($xmlWriter);
                 $xmlWriter->endElement();
-            }
+            } 
         }
 
-        if (!is_null($this->_id))
-        {
-            $xmlWriter->writeElement('atom:id', $this->_id);
+        if (!is_null($this->id)) {
+            $xmlWriter->writeElement('atom:id', $this->id);
         }
 
-        if (!is_null($this->_link))
-        {
-            $xmlWriter->writeElement('atom:link', $this->_link);
+        if (!is_null($this->link)) {
+            $xmlWriter->writeElement('atom:link', $this->link);
         }
 
-        if (!is_null($this->_published))
-        {
-            $xmlWriter->writeElement('atom:published', $this->_published);
+        if (!is_null($this->published)) {
+            $xmlWriter->writeElement('atom:published', $this->published);
         }
 
-        if (!is_null($this->_rights))
-        {
-            $xmlWriter->writeElement('atom:rights', $this->_rights);
+        if (!is_null($this->rights)) {
+            $xmlWriter->writeElement('atom:rights', $this->rights);
         }
 
-        if (!is_null($this->_source))
-        {
-            $xmlWriter->writeElement('atom:source', $this->_source);
+        if (!is_null($this->source)) {
+            $xmlWriter->writeElement('atom:source', $this->source);
         }
 
-        if (!is_null($this->_summary))
-        {
-            $xmlWriter->writeElement('atom:summary', $this->_summary);
+        if (!is_null($this->summary)) {
+            $xmlWriter->writeElement('atom:summary', $this->summary);
         }
         
-        if (!is_null($this->_title))
-        {
-            $xmlWriter->writeElement('atom:title', $this->_title);
+        if (!is_null($this->title)) {
+            $xmlWriter->writeElement('atom:title', $this->title);
         }
 
-        if (!is_null($this->_updated))
-        {
-            $xmlWriter->writeElement('atom:updated', $this->_updated);
+        if (!is_null($this->updated)) {
+            $xmlWriter->writeElement('atom:updated', $this->updated);
         }
     }
 }

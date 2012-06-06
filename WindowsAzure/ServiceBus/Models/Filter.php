@@ -35,14 +35,14 @@ use WindowsAzure\Common\Internal\Resources;
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
 
-class Filter 
+class Filter
 {
     /** 
      * The attributes of the filter. 
      *
      * @var array
      */ 
-    protected $_attributes;
+    protected $attributes;
 
     /**
      * The compatibility level of the filter. 
@@ -56,27 +56,29 @@ class Filter
      */
     public function __construct()
     {
-        $this->_attributes              = array();
-        $this->_attributes['xmlns:xsi'] = Resources::XSI_XML_NAMESPACE;
+        $this->attributes              = array();
+        $this->attributes['xmlns:xsi'] = Resources::XSI_XML_NAMESPACE;
     }
 
+    /**
+     * Creates a Filter with specifed XML based string. 
+     * 
+     * @param string $filterXmlString An XML based filter string. 
+     *
+     * @return Filter
+     */
     public static function create($filterXmlString)
     {
-        echo $filterXmlString;
-        echo '\n';
-        $filterXml = simplexml_load_string($filterXmlString);
+        $filterXml  = simplexml_load_string($filterXmlString);
         $attributes = (array)$filterXml->attributes();
 
-        if (array_key_exists('i:type', $attributes))
-        {
+        if (array_key_exists('i:type', $attributes)) {
             $type = (string)$attributes['i:type'];
-            if ($type === 'TrueFilter')
-            {
+            if ($type === 'TrueFilter') {
                 return new TrueFilter();
             }
 
-            if ($type === 'FalseFilter')
-            {
+            if ($type === 'FalseFilter') {
                 return new FalseFilter();
             }
 
@@ -91,7 +93,7 @@ class Filter
      */ 
     public function getAttributes()
     {
-        return $this->_attributes;
+        return $this->attributes;
     }
 
     /**
@@ -99,10 +101,12 @@ class Filter
      *
      * @param string $key   The key of the attribute.
      * @param string $value The value of the attribute.
+     * 
+     * @return none
      */
     public function setAttribute($key, $value)
     {
-        $this->_attributes[$key] = $value;
+        $this->attributes[$key] = $value;
     }   
 
     /**
@@ -119,6 +123,8 @@ class Filter
      * Sets the compatibility level. 
      * 
      * @param string $compatibilityLevel The compatibility level. 
+     * 
+     * @return none
      */
     public function setCompatibilityLevel($compatibilityLevel)
     {
