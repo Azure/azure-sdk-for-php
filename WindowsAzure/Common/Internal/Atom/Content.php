@@ -45,47 +45,49 @@ class Content
      *
      * @var string  
      */
-    protected $_text;
+    protected $text;
 
     /**
      * The type of the content. 
      *
      * @var string  
      */
-    protected $_type;
+    protected $type;
      
     /** 
      * Creates a Content instance with specified text.
      *
      * @param string $text The text of the content.
+     * 
+     * @return none
      */
     public function __construct($text = null)
     {
-        $this->_text = $text;
+        $this->text = $text;
     }
 
     /**
      * Creates an ATOM CONTENT instance with specified xml string. 
      * 
      * @param string $xmlString an XML based string of ATOM CONTENT.
+     * 
+     * @return none
      */ 
     public function parseXml($xmlString)
     {
         $contentXml = simplexml_load_string($xmlString);
         $attributes = $contentXml->attributes();
 
-        if (!empty($attributes['type']))
-        {
-            $this->_content = (string)$attributes['type'];
+        if (!empty($attributes['type'])) {
+            $this->content = (string)$attributes['type'];
         }
 
         $text = '';
-        foreach ($contentXml->children() as $child)
-        {
+        foreach ($contentXml->children() as $child) {
             $text .= $child->asXML();
         } 
 
-        $this->_text = $text;
+        $this->text = $text;
     }
 
     /** 
@@ -95,17 +97,19 @@ class Content
      */
     public function getText()
     {   
-        return $this->_text;
+        return $this->text;
     } 
 
     /**
      * Sets the text of the content.
      * 
      * @param string $text The text of the content.
+     * 
+     * @return none
      */
     public function setText($text)
     {
-        $this->_text = $text; 
+        $this->text = $text; 
     }
 
     /**
@@ -115,23 +119,27 @@ class Content
      */
     public function getType()
     {
-        return $this->_type;
+        return $this->type;
     }
 
     /**
      * Sets the type of the content. 
      * 
      * @param string $type The type of the content.
+     * 
+     * @return none
      */
     public function setType($type)
     {
-        $this->_type = $type;
+        $this->type = $type;
     }
     
     /** 
      * Writes an XML representing the content. 
      * 
      * @param \XMLWriter $xmlWriter The XML writer.
+     * 
+     * @return none
      */
     public function writeXml($xmlWriter)
     {
@@ -144,16 +152,15 @@ class Content
      * Writes an inner XML representing the content. 
      * 
      * @param \XMLWriter $xmlWriter The XML writer.
+     * 
+     * @return none
      */
     public function writeInnerXml($xmlWriter)
     {
-        if (!empty($this->_type))
-        {
-            $xmlWriter->writeAttribute('type', $this->_type);
+        if (!empty($this->type)) {
+            $xmlWriter->writeAttribute('type', $this->type);
         }
-
-        $xmlWriter->writeRaw($this->_text);
-
+        $xmlWriter->writeRaw($this->text);
     }
 }
 ?>

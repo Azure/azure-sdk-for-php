@@ -36,8 +36,8 @@ namespace WindowsAzure\ServiceBus\Models;
 
 class ReceiveMode
 {
-    const ReceiveAndDelete = 0;
-    const PeekLock         = 1;
+    const RECEIVEANDDELETE = 0;
+    const PEEKLOCK         = 1;
 }
 
 ?>

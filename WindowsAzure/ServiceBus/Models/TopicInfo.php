@@ -54,16 +54,19 @@ class TopicInfo extends Entry
      * Creates a TopicInfo with specified parameters.
      *
      * @param string           $title            The name of the topic.
-     * @param TopicDescription $topicDescription The description of the topic.
-     * 
+     * @param TopicDescription $topicDescription The description of the 
+     * topic.
+     *
      */
-    public function __construct($title = Resources::EMPTY_STRING, $topicDescription = null)
-    {
+    public function __construct(
+        $title = Resources::EMPTY_STRING, 
+        $topicDescription = null
+    ) {
         Validate::isString($title, 'title');
         if (is_null($topicDescription)) {
             $topicDescription = new TopicDescription();
         }
-        $this->_title = $title;
+        $this->title             = $title;
         $this->_topicDescription = $topicDescription;
     }
     
@@ -71,15 +74,16 @@ class TopicInfo extends Entry
      * Populates properties with a specified XML string. 
      * 
      * @param string $xmlString An XML string representing the topic information. 
+     * 
+     * @return none
      */
     public function parseXml($xmlString)
     {
         parent::parseXml($xmlString);
-        $content = $this->_content;
+        $content = $this->content;
         if (is_null($content)) {
             $this->_topicDescription = null;
-        }
-        else {
+        } else {
             $this->_topicDescription = TopicDescription::create($content->getText());
         }
     }
@@ -92,11 +96,10 @@ class TopicInfo extends Entry
     public function writeXml()
     {
         if (is_null($this->_topicDescription)) {
-            $this->_content = null;    
-        }
-        else {
-            $this->_content = new Content();
-            $this->_content->setText(
+            $this->content = null;    
+        } else {
+            $this->content = new Content();
+            $this->content->setText(
                 XmlSerializer::objectSerialize(
                     $this->_topicDescription,
                     'TopicDescription'
@@ -120,6 +123,8 @@ class TopicInfo extends Entry
      * Sets the descriptions of the topic. 
      * 
      * @param TopicDescription $topicDescription The description of the topic. 
+     * 
+     * @return none
      */
     public function setTopicDescription($topicDescription)
     {

@@ -114,12 +114,17 @@ class SubscriptionDescription
     /**
      * Creates a subscription description with specified XML string. 
      *
-     * @param string $subscriptionDescription An XML based subscription description.
+     * @param string $subscriptionDescriptionXml An XML based subscription
+     * description.
+     *
+     * @return none
      */
     public static function create($subscriptionDescriptionXml)
     {
-        $subscriptionDescription = new SubscriptionDescription();
-        $root = simplexml_load_string($subscriptionDescriptionXml);
+        $subscriptionDescription      = new SubscriptionDescription();
+        $root                         = simplexml_load_string(
+            $subscriptionDescriptionXml
+        );
         $subscriptionDescriptionArray = (array)$root;
         if (array_key_exists('LockDuration', $subscriptionDescriptionArray)) {
             $subscriptionDescription->setLockDuration(
@@ -133,24 +138,45 @@ class SubscriptionDescription
             );
         }
 
-        if (array_key_exists('DefaultMessageTimeToLive', $subscriptionDescriptionArray)) {
+        if (array_key_exists(
+            'DefaultMessageTimeToLive', 
+            $subscriptionDescriptionArray
+        )
+        ) {
             $subscriptionDescription->setDefaultMessageTimeToLive(
                 (string)$subscriptionDescriptionArray['DefaultMessageTimeToLive']
             );
         }
 
-        if (array_key_exists('DeadLetteringOnMessageExpiration', $subscriptionDescriptionArray)) {
+        if (array_key_exists(
+            'DeadLetteringOnMessageExpiration', 
+            $subscriptionDescriptionArray
+        )
+        ) {
             $subscriptionDescription->setDeadLetteringOnMessageExpiration(
-                (string)$subscriptionDescriptionArray['DeadLetteringOnMessageExpiration']
+                (string)$subscriptionDescriptionArray[
+                'DeadLetteringOnMessageExpiration'
+                ]
             );
         }
 
-        if (array_key_exists('DeadLetteringOnFilterEvaluationException', $subscriptionDescriptionArray)) {
+        if (array_key_exists(
+            'DeadLetteringOnFilterEvaluationException', 
+            $subscriptionDescriptionArray
+        )
+        ) {
             $subscriptionDescription->setDeadLetteringOnFilterEvaluationException(
-                (string)$subscriptionDescriptionArray['DeadLetteringOnFilterEvaluationException']);
+                (string)$subscriptionDescriptionArray[
+                'DeadLetteringOnFilterEvaluationException'
+                ]
+            );
         }
 
-        if (array_key_exists('DefaultRuleDescription', $subscriptionDescriptionArray)) {
+        if (array_key_exists(
+            'DefaultRuleDescription', 
+            $subscriptionDescriptionArray
+        )
+        ) {
             $subscriptionDescription->setDefaultRuleDescription(
                 (string)$subscriptionDescriptionArray['DefaultRuleDescription']
             );
@@ -168,7 +194,11 @@ class SubscriptionDescription
             );
         }
 
-        if (array_key_exists('EnableBatchedOperations', $subscriptionDescriptionArray)) {
+        if (array_key_exists(
+            'EnableBatchedOperations', 
+            $subscriptionDescriptionArray
+        )
+        ) {
             $subscriptionDescription->setEnableBatchedOperations(
                 (boolean)$subscriptionDescriptionArray['EnableBatchedOperations']
             );
@@ -213,6 +243,8 @@ class SubscriptionDescription
      * Sets the requires session.
      * 
      * @param boolean $requiresSession The requires session. 
+     * 
+     * @return none
      */
     public function setRequiresSession($requiresSession)
     {
@@ -232,7 +264,9 @@ class SubscriptionDescription
     /**
      * Sets default message time to live. 
      * 
-     * @param string $defaultMessagetimeToLive The default message time to live. 
+     * @param string $defaultMessageTimeToLive The default message time to live. 
+     * 
+     * @return none
      */
     public function setDefaultMessageTimeToLive($defaultMessageTimeToLive)
     {   
@@ -254,9 +288,12 @@ class SubscriptionDescription
      * 
      * @param string $deadLetteringOnMessageExpiration The dead lettering 
      * on message expiration.
+     * 
+     * @return none
      */
-    public function setDeadLetteringOnMessageExpiration($deadLetteringOnMessageExpiration)
-    {
+    public function setDeadLetteringOnMessageExpiration(
+        $deadLetteringOnMessageExpiration
+    ) {
         $this->_deadLetteringOnMessageExpiration = $deadLetteringOnMessageExpiration;
     }
 
@@ -273,12 +310,16 @@ class SubscriptionDescription
     /**
      * Sets dead lettering on filter evaluation exceptions. 
      * 
-     * @param string $deadLetteringOnFilterEvaluationException Sets dead lettering 
+     * @param string $deadLetteringOnFilterEvaluationExceptions Sets dead lettering 
      * on filter evaluation exceptions. 
+     * 
+     * @return none
      */
-    public function setDeadLetteringOnFilterEvaluationExceptions($deadLetteringOnFilterEvaluationExceptions)
-    {
-        $this->_deadLetteringOnFilterEvaluationExceptions = $deadLetteringOnFilterEvaluationExceptions;
+    public function setDeadLetteringOnFilterEvaluationExceptions(
+        $deadLetteringOnFilterEvaluationExceptions
+    ) {
+        $this->_deadLetteringOnFilterEvaluationExceptions
+            = $deadLetteringOnFilterEvaluationExceptions;
     }
 
     /**
@@ -295,6 +336,8 @@ class SubscriptionDescription
      * Sets the default rule description.
      * 
      * @param string $defaultRuleDescription The default rule description. 
+     *
+     * @return none
      */
     public function setDefaultRuleDescription($defaultRuleDescription)
     {
@@ -315,6 +358,8 @@ class SubscriptionDescription
      * Sets the count of the message.
      * 
      * @param string $messageCount The count of the message. 
+     *
+     * @return none
      */
     public function setMessageCount($messageCount)
     {
@@ -335,6 +380,8 @@ class SubscriptionDescription
      * Sets maximum delivery count. 
      * 
      * @param integer $maxDeliveryCount The maximum delivery count. 
+     *
+     * @return none
      */
     public function setMaxDeliveryCount($maxDeliveryCount)
     {
@@ -355,6 +402,8 @@ class SubscriptionDescription
      * Sets enable batched operations. 
      * 
      * @param boolean $enableBatchedOperations Enable batched operations. 
+     * 
+     * @return none
      */
     public function setEnableBatchedOperations($enableBatchedOperations)
     {

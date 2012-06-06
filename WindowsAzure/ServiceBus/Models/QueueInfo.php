@@ -54,17 +54,18 @@ class QueueInfo extends Entry
     /**
      * Creates a QueueInfo instance with specified parameters.
      *
-     * @param string           $name             The name of the queue.
+     * @param string           $title            The name of the queue.
      * @param QueueDescription $queueDescription The description of the queue.
      */
-    public function __construct($title = Resources::EMPTY_STRING, $queueDescription = null)
-    {
-        $this->_title = $title;
-        if (is_null($queueDescription))
-        {
+    public function __construct(
+        $title = Resources::EMPTY_STRING, 
+        $queueDescription = null
+    ) {
+        if (is_null($queueDescription)) {
             $queueDescription = new QueueDescription();
         }
 
+        $this->title             = $title;
         $this->_queueDescription = $queueDescription;
     }
 
@@ -72,15 +73,16 @@ class QueueInfo extends Entry
      * Populates the properties of the queue info instance with a ATOM ENTRY XML string. 
      * 
      * @param string $entryXml An ATOM entry based XML string.
+     * 
+     * @return none
      */
     public function parseXml($entryXml)
     {
         parent::parseXml($entryXml);
-        $content = $this->_content;
+        $content = $this->content;
         if (is_null($content)) {
             $this->_queueDescription = null;
-        }
-        else {
+        } else {
             $this->_queueDescription = QueueDescription::create($content->getText());
         }
     }
@@ -93,11 +95,10 @@ class QueueInfo extends Entry
     public function writeXml()
     {
         if (is_null($this->_queueDescription)) {
-            $this->_content = null;    
-        }
-        else {
-            $this->_content = new Content();
-            $this->_content->setText(
+            $this->content = null;    
+        } else {
+            $this->content = new Content();
+            $this->content->setText(
                 XmlSerializer::objectSerialize(
                     $this->_queueDescription,
                     'QueueDescription'
@@ -109,6 +110,8 @@ class QueueInfo extends Entry
 
     /**
      * Gets the description of the queue. 
+     * 
+     * @return none
      */
     public function getQueueDescription()
     {
@@ -119,6 +122,8 @@ class QueueInfo extends Entry
      * Sets the description of the queue. 
      *
      * @param QueueDescription $queueDescription The description of the queue.
+     * 
+     & @return none
      */
     public function setQueueDescription($queueDescription)
     {

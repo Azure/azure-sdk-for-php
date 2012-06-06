@@ -39,192 +39,183 @@ use WindowsAzure\Common\Internal\Validate;
 
 class Source
 {
-
     /**
      * The attributes of the source. 
      * 
      * @var array
      */
-    protected $_attributes;
+    protected $attributes;
 
     /**
      * The author the source. 
      * 
      * @var Person
      */
-    protected $_author;
+    protected $author;
 
     /**
      * The category of the source. 
      * 
-     * @var string
+     * @var Category
      */
-    protected $_category;
+    protected $category;
 
     /**
      * The contributor of the source. 
      * 
-     * @var string
+     * @var array
      */
-    protected $_contributor;
+    protected $contributor;
 
     /**
      * The generator of the source. 
      * 
-     * @var string
+     * @var Generator
      */
-    protected $_generator;
+    protected $generator;
 
     /**
      * The icon of the source. 
      * 
      * @var string
      */
-    protected $_icon;
+    protected $icon;
 
     /**
      * The ID of the source. 
      * 
      * @var string
      */
-    protected $_id;
+    protected $id;
 
     /**
      * The link of the source. 
      * 
-     * @var string
+     * @var AtomLink
      */
-    protected $_link;
+    protected $link;
 
     /**
      * The logo of the source. 
      * 
      * @var string
      */
-    protected $_logo;
+    protected $logo;
 
     /**
      * The rights of the source. 
      * 
      * @var string
      */
-    protected $_rights;
+    protected $rights;
 
     /**
      * The subtitle of the source. 
      * 
      * @var string
      */
-    protected $_subtitle;
+    protected $subtitle;
 
     /**
      * The title of the source. 
      * 
      * @var string
      */
-    protected $_title;
+    protected $title;
 
     /**
      * The update of the source. 
      * 
      * @var string
      */
-    protected $_updated;
+    protected $updated;
 
     /**
      * The extension element of the source. 
      * 
      * @var string
      */
-    protected $_extensionElement;
+    protected $extensionElement;
 
     /**
      * Creates an ATOM FEED object with default parameters. 
      */ 
     public function __construct()
     {   
-        $this->_attributes = array();
+        $this->attributes = array();
     }
 
     /**
      * Creates a source object with specified XML string. 
+     * 
+     * @param string $xmlString The XML string representing a source.
+     *
+     * @return none
      */
     public function parseXml($xmlString)
     {
-        $sourceXml = new \SimpleXMLElement($xmlString);
-        $attributes = $sourceXml->attributes();
+        $sourceXml   = new \SimpleXMLElement($xmlString);
+        $attributes  = $sourceXml->attributes();
         $sourceArray = (array)$sourceXml;
 
-        if (array_key_exists('author', $sourceArray))
-        {
+        if (array_key_exists('author', $sourceArray)) {
             $content = new Person();
             $content->parseXml($sourceArray['person']->asXML());
-            $this->_content = $content;
+            $this->content = $content;
         }
 
-        if (array_key_exists('category', $sourceArray))
-        {
+        if (array_key_exists('category', $sourceArray)) {
             $category = new Category();
             $category->parseXml($sourceArray['category']->asXML());
-            $this->_category = $category;
+            $this->category = $category;
         }
 
-        if (array_key_exists('contributor', $sourceArray))
-        {
+        if (array_key_exists('contributor', $sourceArray)) {
             $contributor = new Person();
             $contributor->parseXml($sourceArray['contributor']->asXML());
-            $this->_contributor = $contributor;
+            $this->contributor = $contributor;
         }
 
-        if (array_key_exists('generator', $sourceArray))
-        {
+        if (array_key_exists('generator', $sourceArray)) {
             $generator = new Generator();
             $generator->setText((string)$sourceArray['generator']->asXML());
-            $this->_generator = $generator;
+            $this->generator = $generator;
         } 
 
-        if (array_key_exists('icon', $sourceArray))
-        {
+        if (array_key_exists('icon', $sourceArray)) {
             $icon = new Icon();
             $icon->parseXml($sourceArray['icon']->asXML());
-            $this->_icon = $icon;
+            $this->icon = $icon;
         }
 
-        if (array_key_exists('id', $sourceArray))
-        {
-            $this->_id = (string)$sourceArray['id'];
+        if (array_key_exists('id', $sourceArray)) {
+            $this->id = (string)$sourceArray['id'];
         }
 
-        if (array_key_exists('link', $sourceArray))
-        {
+        if (array_key_exists('link', $sourceArray)) {
             $link = new AtomLink();
             $link->parseXml($sourceArray['link']->asXML());
-            $this->_link = $link;
+            $this->link = $link;
         }
 
-        if (array_key_exists('logo', $sourceArray))
-        {
-            $this->_logo = (string)$sourceArray['logo'];
+        if (array_key_exists('logo', $sourceArray)) {
+            $this->logo = (string)$sourceArray['logo'];
         }
 
-        if (array_key_exists('rights', $sourceArray))
-        {
-            $this->_rights = (string)$sourceArray['rights'];
+        if (array_key_exists('rights', $sourceArray)) {
+            $this->rights = (string)$sourceArray['rights'];
         }
 
-        if (array_key_exists('subtitle', $sourceArray))
-        {
-            $this->_subtitle = (string)$sourceArray['subtitle'];
+        if (array_key_exists('subtitle', $sourceArray)) {
+            $this->subtitle = (string)$sourceArray['subtitle'];
         }
 
-        if (array_key_exists('title', $sourceArray))
-        {
-            $this->_title = (string)$sourceArray['title'];
+        if (array_key_exists('title', $sourceArray)) {
+            $this->title = (string)$sourceArray['title'];
         }
 
-        if (array_key_exists('updated', $sourceArray))
-        {
-            $this->_updated = (string)$sourceArray['updated'];
+        if (array_key_exists('updated', $sourceArray)) {
+            $this->updated = (string)$sourceArray['updated'];
         }
     }
 
@@ -235,7 +226,7 @@ class Source
      */
     public function getAttributes()
     {
-        return $this->_attributes;
+        return $this->attributes;
     }
 
     /**
@@ -243,16 +234,25 @@ class Source
      *
      * @param array $attributes The attributes of the array. 
      *
+     * @return none
      */
     public function setAttributes($attributes)
     {
         Validate::isArray($attributes, 'attributes');
-        $this->_attributes = $attributes;
+        $this->attributes = $attributes;
     }
 
+    /**
+     * Adds an attribute to the source. 
+     * 
+     * @param string $attributeKey   The key of the attribute. 
+     * @param string $attributeValue The value of the attribute. 
+     * 
+     * @return none
+     */
     public function addAttribute($attributeKey, $attributeValue)
     {
-        $this->_attributes[$attributeKey] = $attributeValue;
+        $this->attributes[$attributeKey] = $attributeValue;
     }   
 
     /**
@@ -262,17 +262,19 @@ class Source
      */
     public function getCategory()
     {
-        return _categroy;
+        return $this->categroy;
     }
 
     /**
      * Sets the category of the source.
      *  
      * @param string $category The category of the source. 
+     *
+     * @return none
      */
     public function setCategory($category)
     {
-        $this->_category = $cateogry;
+        $this->category = $cateogry;
     }
    
     /**
@@ -282,37 +284,41 @@ class Source
      */
     public function getContributor()
     {
-        return _contributor;
+        return $this->contributor;
     }
 
     /**
      * Sets contributor.
      * 
      * @param string $contributor The contributor of the source. 
+     * 
+     * @return none
      */
     public function setContributor($contributor)
     {
-        $this->_contributor = $contributor;
+        $this->contributor = $contributor;
     }
 
     /**
      * Gets generator.
      * 
-     * @return string 
+     * @return Generator
      */
     public function getGenerator()
     {
-        return _generator;
+        return $this->generator;
     }
 
     /**
      * Sets the generator. 
      * 
-     * @param string $generator Sets the generator of the source. 
+     * @param Generator $generator Sets the generator of the source. 
+     * 
+     * @return none
      */
     public function setGenerator($generator)
     {
-        $this->_generator = $generator;
+        $this->generator = $generator;
     }
 
     /**
@@ -322,17 +328,19 @@ class Source
      */
     public function getIcon()
     {
-        return _icon;
+        return $this->icon;
     }
 
     /**
      * Sets the icon of the source. 
      * 
      * @param string $icon The icon of the source. 
+     * 
+     * @return string   
      */
     public function setIcon($icon)
     {
-        $this->_icon = $icon;
+        $this->icon = $icon;
     }
 
     /**
@@ -342,37 +350,41 @@ class Source
      */ 
     public function getId()
     {   
-        return _id;
+        return $this->id;
     }
 
     /**
      * Sets the ID of the source.
      * 
      * @param string $id The ID of the source. 
+     * 
+     * @return string   
      */
     public function setId($id)
     {
-        $this->_id = $id;
+        $this->id = $id;
     }
 
     /**
      * Gets the link of the source. 
      * 
-     * @return string 
+     * @return AtomLink
      */
     public function getLink()
     {
-        return _link;
+        return $this->link;
     }
 
     /**
      * Sets the link of the source. 
      * 
-     * @param string $link The link of the source. 
+     * @param AtomLink $link The link of the source. 
+     *
+     * @return none
      */
     public function setLink($link)
     {
-        $this->_link = $link;
+        $this->link = $link;
     }
 
     /**
@@ -382,17 +394,19 @@ class Source
      */
     public function getLogo()
     {
-        return _logo;
+        return $this->logo;
     }
 
     /**
      * Sets the logo of the source. 
      * 
      * @param string $logo The logo of the source. 
+     * 
+     * @return none
      */
     public function setLogo($logo)
     {
-        $this->_logo = $logo;
+        $this->logo = $logo;
     }
 
     /**
@@ -402,17 +416,19 @@ class Source
      */
     public function getRights()
     {   
-        return _rights;
+        return $this->rights;
     }
 
     /** 
      * Sets the rights of the source. 
      * 
      * @param string $rights The rights of the source. 
+     * 
+     * @return none 
      */
     public function setRights($rights)
     {
-        $this->_rights = $rights;
+        $this->rights = $rights;
     }
 
     /**
@@ -422,17 +438,19 @@ class Source
      */
     public function getSubtitle()
     {   
-        return _subtitle;
+        return $this->subtitle;
     }
 
     /**
      * Sets the sub title of the source. 
      *
      * @param string $subtitle Sets the sub title of the source. 
+     * 
+     * @return none
      */
     public function setSubtitle($subtitle)
     {
-        $this->_subtitle = $subtitle;
+        $this->subtitle = $subtitle;
     }
 
     /**
@@ -442,17 +460,19 @@ class Source
      */
     public function getTitle() 
     {   
-        return _title;
+        return $this->title;
     }
 
     /**
      * Sets the title of the source. 
      *
      * @param string $title The title of the source. 
+     *
+     * @return none
      */
     public function setTitle($title)
     {
-        $this->_title = $title;
+        $this->title = $title;
     }
 
     /**
@@ -462,17 +482,19 @@ class Source
      */
     public function getUpdated()
     {   
-        return _updated;
+        return $this->updated;
     }
 
     /**
      * Sets the updated. 
      * 
      * @param string $updated updated
+     * 
+     * @return none
      */
     public function setUpdated($updated)
     {
-        $this->_udpated = $updated;
+        $this->udpated = $updated;
     }
 
     /** 
@@ -482,63 +504,71 @@ class Source
      */
     public function getExtensionElement()
     {   
-        return _extensionElement;
+        return $this->extensionElement;
     }
 
     /**
      * Sets the extension element. 
      * 
      * @param string $extensionElement The extension element. 
+     * 
+     * @return none
      */
     public function setExtensionElement($extensionElement)
     {
-        $this->_extensionElement = $extensionElement;
+        $this->extensionElement = $extensionElement;
     }
 
     /**
      * Gets the entry of the source. 
      * 
-     * @var Entry
+     * @return Entry
      */
     public function getEntry()
     {
-        return $this->_entry;
+        return $this->entry;
     }
 
     /**
      * Sets the entry of the source.
      * 
      * @param Entry $entry The entry of the source. 
+     *
+     * @return none
      */
     public function setEntry($entry)
     {
-        $this->_entry = $entry;
+        $this->entry = $entry;
     }
 
     /**
      * Gets the content of the source. 
      * 
-     * @var Entry
+     * @return Content
      */
     public function getContent()
     {
-        return $this->_content;
+        return $this->content;
     }
 
     /**
      * Sets the content of the source.
      * 
      * @param Content $content The content of the source. 
+     * 
+     * @return none
      */
     public function setContent($content)
     {
-        $this->_content = $content;
+        $this->content = $content;
     }
 
     /** 
      * Writes an XML representing the source object.
      * 
      * @param \XMLWriter $xmlWriter The XML writer.
+     * 
+     * @return none
      */
     public function writeXml($xmlWriter)
     {
@@ -550,108 +580,84 @@ class Source
      * Writes a inner XML representing the source object.
      * 
      * @param \XMLWriter $xmlWriter The XML writer.
+     * 
+     * @return none
      */
     public function writeInnerXml($xmlWriter)
     {
-
-        if (!is_null($this->_attributes))
-        {
-            if (is_array($this->_attributes))
-            {
-                foreach ($this->_attributes as $attributeName => $attributeValue)
-                {
+        if (!is_null($this->attributes)) {
+            if (is_array($this->attributes)) {
+                foreach ($this->attributes as $attributeName => $attributeValue) {
                     $xmlWriter->writeAttribute($attributeName, $attributeValue);
                 }
             }
         }
          
-        if (!is_null($this->_author))
-        {
+        if (!is_null($this->author)) {
             $xmlWriter->startElement('atom:author');
-            $this->_author->writeInnerXml($xmlWriter);
+            $this->author->writeInnerXml($xmlWriter);
             $xmlWriter->endElement();
         } 
 
-        if (!is_null($this->_category))
-        {
-            if (is_array($this->_category))
-            {
-                foreach ($this->_category as $category)
-                {
+        if (!is_null($this->category)) {
+            if (is_array($this->category)) {
+                foreach ($this->category as $category) {
                     $category->writeXml($xmlWriter);
                 }
-            }
-            else
-            {
+            } else {
                 $category->writeXml($xmlWriter);
             }
         }
 
-        if (!is_null($this->_contributor))
-        {
-            if (is_array($this->_contributor))
-            {
-                foreach ($this->_contributor as $contributor)
-                {
+        if (!is_null($this->contributor)) {
+            if (is_array($this->contributor)) {
+                foreach ($this->contributor as $contributor) {
                     $xmlWriter->startElement('atom:contributor');
                     $contributor->writeInnerXml($xmlWriter);
                     $xmlWriter->endElement();
                 }
-            }
-            else
-            {
+            } else {
                 $xmlWriter->startElement('atom:contributor');
                 $contributor->writeInnerXml($xmlWriter);
                 $xmlWriter->endElement();
             }
         }
 
-        if (!is_null($this->_generator))
-        {
-            $this->_generator->writeXml($xmlWriter);
+        if (!is_null($this->generator)) {
+            $this->generator->writeXml($xmlWriter);
         } 
 
-        if (!is_null($this->_icon))
-        {
-            $xmlWriter->writeElement('atom:icon', $this->_icon);
+        if (!is_null($this->icon)) {
+            $xmlWriter->writeElement('atom:icon', $this->icon);
         }
 
-        if (!is_null($this->_logo))
-        {
-            $xmlWriter->writeElement('atom:logo', $this->_logo);
+        if (!is_null($this->logo)) {
+            $xmlWriter->writeElement('atom:logo', $this->logo);
         }
 
-        if (!is_null($this->_id))
-        {
-            $xmlWriter->writeElement('atom:id', $this->_id);
+        if (!is_null($this->id)) {
+            $xmlWriter->writeElement('atom:id', $this->id);
         }
 
-        if (!is_null($this->_link))
-        {
-            $xmlWriter->writeElement('atom:link', $this->_link);
+        if (!is_null($this->link)) {
+            $xmlWriter->writeElement('atom:link', $this->link);
         }
 
-        if (!is_null($this->_rights))
-        {
-            $xmlWriter->writeElement('atom:rights', $this->_rights);
+        if (!is_null($this->rights)) {
+            $xmlWriter->writeElement('atom:rights', $this->rights);
         }
 
-        if (!is_null($this->_subtitle))
-        {
-            $xmlWriter->writeElement('atom:subtitle', $this->_subtitle);
-        }
-        
-        if (!is_null($this->_title))
-        {
-            $xmlWriter->writeElement('atom:title', $this->_title);
+        if (!is_null($this->subtitle)) {
+            $xmlWriter->writeElement('atom:subtitle', $this->subtitle);
         }
 
-        if (!is_null($this->_updated))
-        {
-            $xmlWriter->writeElement('atom:updated', $this->_updated);
+        if (!is_null($this->title)) {
+            $xmlWriter->writeElement('atom:title', $this->title);
         }
 
+        if (!is_null($this->updated)) {
+            $xmlWriter->writeElement('atom:updated', $this->updated);
+        }
     }
-
 }
 ?>

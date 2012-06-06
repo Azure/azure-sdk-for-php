@@ -35,7 +35,7 @@ use WindowsAzure\ServiceBus\Models\ListOptions;
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
 
-class ListSubscriptionsOptions extends ListOptions 
+class ListSubscriptionsOptions extends ListOptions
 {
 }
 ?>

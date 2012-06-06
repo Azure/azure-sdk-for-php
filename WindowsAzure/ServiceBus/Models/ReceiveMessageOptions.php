@@ -50,14 +50,14 @@ class ReceiveMessageOptions
      * 
      * @var integer
      */
-    private $_receiveMode = ReceiveMode::ReceiveAndDelete;
+    private $_receiveMode = ReceiveMode::RECEIVEANDDELETE;
 
     /** 
      * Creates a receive message option instance with default parameters.
      */
     public function __construct()
     {
-        $this->_receiveMode = ReceiveMode::ReceiveAndDelete;
+        $this->_receiveMode = ReceiveMode::RECEIVEANDDELETE;
     }
     /**
      * Gets the timeout of the receive message request. 
@@ -73,6 +73,8 @@ class ReceiveMessageOptions
      * Sets the timeout of the receive message request. 
      *
      * @param integer $timeout The timeout of the receive message request. 
+     *
+     * @return none
      */
     public function setTimeout($timeout)
     {   
@@ -93,6 +95,8 @@ class ReceiveMessageOptions
      * Sets the receive mode. 
      * 
      * @param integer $receiveMode The mode of receiving the message. 
+     * 
+     * @return none
      */
     public function setReceiveMode($receiveMode)
     {   
@@ -106,7 +110,7 @@ class ReceiveMessageOptions
      */
     public function getIsReceiveAndDelete()
     {
-        return ($this->_receiveMode === ReceiveMode::ReceiveAndDelete);
+        return ($this->_receiveMode === ReceiveMode::RECEIVEANDDELETE);
     }
 
     /**
@@ -116,7 +120,7 @@ class ReceiveMessageOptions
      */
     public function setReceiveAndDelete()
     {   
-        $this->_receiveMode = ReceiveMode::ReceiveAndDelete;
+        $this->_receiveMode = ReceiveMode::RECEIVEANDDELETE;
     }
     
     /**
@@ -127,7 +131,7 @@ class ReceiveMessageOptions
      */
     public function getIsPeekLock()
     {
-        return ($this->_receiveMode === ReceiveMode::PeekLock);
+        return ($this->_receiveMode === ReceiveMode::PEEKLOCK);
     }    
 
     /**
@@ -137,7 +141,7 @@ class ReceiveMessageOptions
      */
     public function setPeekLock()
     {   
-        $this->_receiveMode = ReceiveMode::PeekLock;
+        $this->_receiveMode = ReceiveMode::PEEKLOCK;
     }
 }
 

@@ -43,13 +43,15 @@ interface ISerializer
      * 
      * @param Object $targetObject The target object to be serialized. 
      * @param string $rootName     The name of the root.
+     *
+     * @return string
      */
     public function objectSerialize($targetObject, $rootName);
 
     /**
      * Unserialize object. 
      * 
-     * @param string $serialized. 
+     * @param string $serialized An XML based string representing the object.
      * 
      * @return mixed
      */

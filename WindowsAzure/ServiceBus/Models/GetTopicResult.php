@@ -45,9 +45,13 @@ class GetTopicResult
     private $_topicInfo;
 
     /**
-     * Populate the properties with a specified get topic request response body. 
+     * Populate the properties with a specified get topic request response
+     * body. 
      * 
-     * @param string $getTopicResponse The body of the response from a get topic request. 
+     * @param string $getTopicResponse The body of the response from a get 
+     * topic request. 
+     * 
+     * @return none
      */ 
     public function parseXml($getTopicResponse)
     {
@@ -76,6 +80,8 @@ class GetTopicResult
      * Sets the information of the topic. 
      * 
      * @param TopicInfo $topicInfo The information of the topic. 
+     * 
+     * @return none
      */
     public function setTopicInfo($topicInfo)
     {
