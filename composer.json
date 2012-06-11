@@ -1,7 +1,7 @@
 {
     "name": "microsoft/windowsazure",
     "description": "This project provides a set of PHP client libraries that make it easy to access Windows Azure tables, blobs, queues, service runtime and service management APIs.",
-	"license": "Apache-2.0",
+    "license": "Apache-2.0",
     "authors": [
         {
             "name": "Azure PHP SDK",
