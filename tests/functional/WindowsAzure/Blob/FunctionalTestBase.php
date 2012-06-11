@@ -38,25 +38,19 @@ use WindowsAzure\Blob\BlobSettings;
 
 class FunctionalTestBase extends BlobServiceRestProxyTestBase
 {
-
-    /**
-     * @covers WindowsAzure\Blob\BlobRestProxy::withFilter
-     */
-    public function __construct()
-    {
-        parent::__construct();
-        $fiddlerFilter = new FiddlerFilter();
-        $this->restProxy = $this->restProxy->withFilter($fiddlerFilter);
-    }
-
     /**
      * @covers WindowsAzure\Blob\BlobRestProxy::createContainer
      * @covers WindowsAzure\Blob\BlobRestProxy::deleteContainer
      * @covers WindowsAzure\Blob\BlobRestProxy::listContainers
+     * @covers WindowsAzure\Blob\BlobRestProxy::withFilter
      */
     public function setUp()
     {
         parent::setUp();
+
+        $fiddlerFilter = new FiddlerFilter();
+        $this->restProxy = $this->restProxy->withFilter($fiddlerFilter);
+
         $accountName = $this->config->getProperty(BlobSettings::URI);
         $firstSlash = strpos($accountName, '/');
         $accountName = substr($accountName, $firstSlash + 2);

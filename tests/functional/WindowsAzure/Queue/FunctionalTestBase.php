@@ -40,30 +40,28 @@ use WindowsAzure\Queue\QueueSettings;
 class FunctionalTestBase extends QueueServiceRestProxyTestBase {
     protected $accountName;
 
-    public function __construct()
-    {
-        parent::__construct();
-        $fiddlerFilter = new FiddlerFilter();
-        $this->restProxy = $this->restProxy->withFilter($fiddlerFilter);
-    }
+    static private $queuesCreated = false;
     
     public function setUp() {
         parent::setUp();
+        $fiddlerFilter = new FiddlerFilter();
+        $this->restProxy = $this->restProxy->withFilter($fiddlerFilter);
         $this->accountName = $this->config->getProperty(QueueSettings::ACCOUNT_NAME);
-    }
 
-    public static function setUpBeforeClass() {
+        if (self::$queuesCreated) {
+            return;
+        }
+
+        self::$queuesCreated = true;
         parent::setUpBeforeClass();
-        $service = self::createService();
         QueueServiceFunctionalTestData::setupData();
         
         foreach(QueueServiceFunctionalTestData::$TEST_QUEUE_NAMES as $name)  {
-            self::staticSafeDeleteQueue($service, $name);
+            $this->staticSafeDeleteQueue($name);
         }
 
         foreach(QueueServiceFunctionalTestData::$TEST_QUEUE_NAMES as $name)  {
-            self::println('Creating queue: ' . $name);
-            $service->createQueue($name);
+            $this->restProxy->createQueue($name);
         }
     }
 
@@ -83,6 +81,7 @@ class FunctionalTestBase extends QueueServiceRestProxyTestBase {
 
     private static function createService() {
         $tmp = new FunctionalTestBase();
+        $tmp->setUp();
         return $tmp->restProxy;
     }
     

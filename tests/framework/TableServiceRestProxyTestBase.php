@@ -43,7 +43,7 @@ class TableServiceRestProxyTestBase extends ServiceRestProxyTestBase
 {
     protected $_createdTables;
     
-    public function __construct()
+    public function setUp()
     {
         $config = new Configuration();
         $tableUri = 'http://' . TestResources::accountName() . '.table.core.windows.net';
@@ -51,7 +51,7 @@ class TableServiceRestProxyTestBase extends ServiceRestProxyTestBase
         $config->setProperty(TableSettings::ACCOUNT_NAME, TestResources::accountName());        
         $config->setProperty(TableSettings::URI, $tableUri);
         $tableRestProxy = TableService::create($config);
-        parent::__construct($config, $tableRestProxy);
+        parent::setUp($config, $tableRestProxy);
         $this->_createdTables = array();
     }
 

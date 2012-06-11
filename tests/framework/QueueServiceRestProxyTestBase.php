@@ -44,7 +44,7 @@ class QueueServiceRestProxyTestBase extends ServiceRestProxyTestBase
 {
     private $_createdQueues;
     
-    public function __construct()
+    public function setUp()
     {
         $config = new Configuration();
         $queueUri = TestResources::accountName() . '.queue.core.windows.net';
@@ -52,7 +52,7 @@ class QueueServiceRestProxyTestBase extends ServiceRestProxyTestBase
         $config->setProperty(QueueSettings::ACCOUNT_NAME, TestResources::accountName());        
         $config->setProperty(QueueSettings::URI, $queueUri);
         $queueRestProxy = QueueService::create($config);
-        parent::__construct($config, $queueRestProxy);
+        parent::setUp($config, $queueRestProxy);
         $this->_createdQueues = array();
     }
     
