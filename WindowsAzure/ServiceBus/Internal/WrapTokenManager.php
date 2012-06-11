@@ -117,7 +117,7 @@ class WrapTokenManager
            
         $this->_wrapRestProxy = WrapService::create($config, $builder);
         
-        $this->_activeTokens = array();
+        WrapTokenManager::$_activeTokens = array();
         
     }    
 
@@ -133,8 +133,8 @@ class WrapTokenManager
         $this->_sweepExpiredTokens();
         $scopeUri = $this->_createScopeUri($targetUri);
         
-        if (array_key_exists($scopeUri, $this->_activeTokens)) {
-            $activeToken = $this->_activeTokens[$scopeUri];
+        if (array_key_exists($scopeUri, WrapTokenManager::$_activeTokens)) {
+            $activeToken = WrapTokenManager::$_activeTokens[$scopeUri];
             return $activeToken->getWrapAccessTokenResult()->getAccessToken();
         }
         
@@ -153,7 +153,7 @@ class WrapTokenManager
 
         $acquiredActiveToken = new ActiveToken($wrapAccessTokenResult);
         $acquiredActiveToken->setExpirationDateTime($expirationDateTime); 
-        $this->_activeTokens[$scopeUri] = $acquiredActiveToken;
+        WrapTokenManager::$_activeTokens[$scopeUri] = $acquiredActiveToken;
         
         return $wrapAccessTokenResult->getAccessToken(); 
     }
@@ -165,10 +165,10 @@ class WrapTokenManager
      */
     private function _sweepExpiredTokens()
     {
-        foreach ($this->_activeTokens as $scopeUri => $activeToken) {
+        foreach (WrapTokenManager::$_activeTokens as $scopeUri => $activeToken) {
             $currentDateTime = new \DateTime("now");
             if ($activeToken->getExpirationDateTime() < $currentDateTime ) {
-                unset($this->_activeTokens[$scopeUri]);
+                unset(WrapTokenManager::$_activeTokens[$scopeUri]);
             }
         }
     }

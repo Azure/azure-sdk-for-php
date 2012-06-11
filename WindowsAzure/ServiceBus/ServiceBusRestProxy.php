@@ -25,7 +25,6 @@
 namespace WindowsAzure\ServiceBus;
 use WindowsAzure\Common\Internal\ServiceRestProxy;
 use WindowsAzure\Common\Internal\Http\HttpCallContext;
-use WindowsAzure\Common\Internal\Serialization\XmlSerializer;
 use WindowsAzure\Common\Internal\Atom\Content;
 use WindowsAzure\Common\Internal\Atom\Entry;
 use WindowsAzure\Common\Internal\Atom\Feed;
@@ -363,7 +362,7 @@ class ServiceBusRestProxy extends ServiceRestProxy implements IServiceBus
         );
         $httpCallContext->addStatusCode(Resources::STATUS_CREATED);
         
-        $queueDescriptionXml = XmlSerializer::objectSerialize(
+        $queueDescriptionXml = $this->dataSerializer->objectSerialize(
             $queueInfo->getQueueDescription(),
             'QueueDescription'
         );
@@ -503,7 +502,7 @@ class ServiceBusRestProxy extends ServiceRestProxy implements IServiceBus
         );
         $httpCallContext->addStatusCode(Resources::STATUS_CREATED);
 
-        $topicDescriptionXml = XmlSerializer::objectSerialize(
+        $topicDescriptionXml = $this->dataSerializer->objectSerialize(
             $topicInfo->getTopicDescription(),
             'TopicDescription'
         );
@@ -616,7 +615,7 @@ class ServiceBusRestProxy extends ServiceRestProxy implements IServiceBus
         );
         $httpCallContext->addStatusCode(Resources::STATUS_CREATED);
 
-        $subscriptionDescriptionXml = XmlSerializer::objectSerialize(
+        $subscriptionDescriptionXml = $this->dataSerializer->objectSerialize(
             $subscriptionInfo->getSubscriptionDescription(),
             'SubscriptionDescription'
         );
@@ -746,7 +745,7 @@ class ServiceBusRestProxy extends ServiceRestProxy implements IServiceBus
             $ruleInfo->getTitle()
         );
 
-        $ruleDescriptionXml = XmlSerializer::objectSerialize(
+        $ruleDescriptionXml = $this->dataSerializer->objectSerialize(
             $ruleInfo->getRuleDescription(),
             'RuleDescription'
         );
