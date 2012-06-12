@@ -1,10 +1,6 @@
 <?php
 
 /**
- * Functional tests for the SDK
- *
- * PHP version 5
- *
  * LICENSE: Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -16,12 +12,14 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- * @category   Microsoft
- * @package    Tests\Functional\WindowsAzure\ServiceBus
- * @author     Jason Cooke <jcooke@microsoft.com>
- * @copyright  2012 Microsoft Corporation
- * @license    http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
- * @link       http://pear.php.net/package/azure-sdk-for-php
+ * PHP version 5
+ *
+ * @category  Microsoft
+ * @package   Tests\Functional\WindowsAzure\ServiceBus
+ * @author    Azure PHP SDK <azurephpsdk@microsoft.com>
+ * @copyright 2012 Microsoft Corporation
+ * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
+ * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
 
 namespace Tests\Functional\WindowsAzure\ServiceBus;
@@ -29,22 +27,22 @@ namespace Tests\Functional\WindowsAzure\ServiceBus;
 use Tests\Functional\WindowsAzure\ServiceBus\IntegrationTestBase;
 use WindowsAzure\Common\Internal\IServiceFilter;
 use WindowsAzure\ServiceBus\ServiceBusService;
-use WindowsAzure\ServiceBus\implementation\CorrelationFilter;
-use WindowsAzure\ServiceBus\implementation\EmptyRuleAction;
-use WindowsAzure\ServiceBus\implementation\FalseFilter;
-use WindowsAzure\ServiceBus\implementation\SqlFilter;
-use WindowsAzure\ServiceBus\implementation\SqlRuleAction;
-use WindowsAzure\ServiceBus\implementation\TrueFilter;
-use WindowsAzure\ServiceBus\models\BrokeredMessage;
-use WindowsAzure\ServiceBus\models\ListQueuesResult;
-use WindowsAzure\ServiceBus\models\ListRulesResult;
-use WindowsAzure\ServiceBus\models\ListSubscriptionsResult;
-use WindowsAzure\ServiceBus\models\ListTopicsResult;
+use WindowsAzure\ServiceBus\Implementation\CorrelationFilter;
+use WindowsAzure\ServiceBus\Implementation\EmptyRuleAction;
+use WindowsAzure\ServiceBus\Implementation\FalseFilter;
+use WindowsAzure\ServiceBus\Implementation\SqlFilter;
+use WindowsAzure\ServiceBus\Implementation\SqlRuleAction;
+use WindowsAzure\ServiceBus\Implementation\TrueFilter;
+use WindowsAzure\ServiceBus\Models\BrokeredMessage;
+use WindowsAzure\ServiceBus\Models\ListQueuesResult;
+use WindowsAzure\ServiceBus\Models\ListRulesResult;
+use WindowsAzure\ServiceBus\Models\ListSubscriptionsResult;
+use WindowsAzure\ServiceBus\Models\ListTopicsResult;
 use WindowsAzure\ServiceBus\Models\QueueDescription;
 use WindowsAzure\ServiceBus\Models\QueueInfo;
-use WindowsAzure\ServiceBus\models\ReceiveMessageOptions;
-use WindowsAzure\ServiceBus\models\RuleInfo;
-use WindowsAzure\ServiceBus\models\SubscriptionInfo;
+use WindowsAzure\ServiceBus\Models\ReceiveMessageOptions;
+use WindowsAzure\ServiceBus\Models\RuleInfo;
+use WindowsAzure\ServiceBus\Models\SubscriptionInfo;
 use WindowsAzure\ServiceBus\Models\TopicInfo;
 
 class ServiceBusIntegrationTest extends IntegrationTestBase
@@ -609,33 +607,49 @@ class ServiceBusIntegrationTest extends IntegrationTestBase
 
         // Act
         $ruleInfoOne = new RuleInfo('One');
-        $ruleInfoOne->withCorrelationIdFilter('my-id');
-     //   $ruleOne = $this->restProxy->createRule($topicName, 'sub', $ruleInfoOne);
+        $ruleInfoOne->withCorrelationFilter('my-id');
+        $ruleOne = $this->restProxy->createRule($topicName, 'sub', $ruleInfoOne);
         $ruleInfoTwo = new RuleInfo('Two');
         $ruleInfoTwo->withTrueFilter();
-     //   $ruleTwo = $this->restProxy->createRule($topicName, 'sub', $ruleInfoTwo);
+        $ruleTwo = $this->restProxy->createRule($topicName, 'sub', $ruleInfoTwo);
         $ruleInfoThree = new RuleInfo('Three');
         $ruleInfoThree->withFalseFilter();
-      //  $ruleThree = $this->restProxy->createRule($topicName, 'sub', $ruleInfoThree);
+        $ruleThree = $this->restProxy->createRule($topicName, 'sub', $ruleInfoThree);
         $ruleInfoFour = new RuleInfo('Four');
         $ruleInfoFour->withEmptyRuleAction();
-     //   $ruleFour = $this->restProxy->createRule($topicName, 'sub', $ruleInfoFour);
+        $ruleFour = $this->restProxy->createRule($topicName, 'sub', $ruleInfoFour);
         $ruleInfoFive = new RuleInfo('Five');
         $ruleInfoFive->withSqlRuleAction('SET x = 5');
-        try {
         $ruleFive = $this->restProxy->createRule($topicName, 'sub', $ruleInfoFive);
-        } catch (\Exception $ex) {}
         $ruleInfoSix = new RuleInfo('Six');
-        $ruleInfoSix->withSqlExpressionFilter('x != 5');
+        $ruleInfoSix->withSqlFilter('x != 5');
         $ruleSix = $this->restProxy->createRule($topicName, 'sub', $ruleInfoSix);
 
         // Assert
-        $this->assertEquals($ruleOne->getFilter() instanceof CorrelationFilter, '$ruleOne->getFilter()->getClass()');
-        $this->assertEquals($ruleTwo->getFilter() instanceof TrueFilter, '$ruleTwo->getFilter()->getClass()');
-        $this->assertEquals($ruleThree->getFilter() instanceof FalseFilter, '$ruleThree->getFilter()->getClass()');
-        $this->assertEquals($ruleFour->getAction() instanceof EmptyRuleAction, '$ruleFour->getAction()->getClass()');
-        $this->assertEquals($ruleFive->getAction() instanceof SqlRuleAction, '$ruleFive->getAction()->getClass()');
-        $this->assertEquals($ruleSix->getFilter() instanceof SqlFilter, '$ruleSix->getFilter()->getClass()');
+        $this->assertTrue(
+                $ruleOne->getRuleInfo()->getRuleDescription()->getFilter()
+                instanceof \WindowsAzure\ServiceBus\Models\CorrelationFilter,
+                '$ruleOne->getFilter() instanceof CorrelationFilter');
+        $this->assertTrue(
+                $ruleTwo->getRuleInfo()->getRuleDescription()->getFilter()
+                instanceof \WindowsAzure\ServiceBus\Models\TrueFilter,
+                '$ruleTwo->getFilter() instanceof TrueFilter');
+        $this->assertTrue(
+                $ruleThree->getRuleInfo()->getRuleDescription()->getFilter()
+                instanceof \WindowsAzure\ServiceBus\Models\FalseFilter,
+                '$ruleThree->getFilter() instanceof FalseFilter');
+        $this->assertTrue(
+                $ruleFour->getRuleInfo()->getRuleDescription()->getAction()
+                instanceof \WindowsAzure\ServiceBus\Models\EmptyRuleAction,
+                '$ruleFour->getAction() instanceof EmptyRuleAction');
+        $this->assertTrue(
+                $ruleFive->getRuleInfo()->getRuleDescription()->getAction()
+                instanceof \WindowsAzure\ServiceBus\Models\SqlRuleAction,
+                '$ruleFive->getAction() instanceof SqlRuleAction');
+        $this->assertTrue(
+                $ruleSix->getRuleInfo()->getRuleDescription()->getFilter()
+                instanceof \WindowsAzure\ServiceBus\Models\SqlFilter,
+                '$ruleSix->getFilter() instanceof SqlFilter');
     }
 
     /**
