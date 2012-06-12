@@ -38,27 +38,28 @@ use WindowsAzure\Table\Models\Entity;
 use WindowsAzure\Table\Models\Filters\Filter;
 
 class FunctionalTestBase extends TableServiceRestProxyTestBase {
-    public function __construct()
+    static private $tablesCreated = false;
+    public function setUp()
     {
-        parent::__construct();
+        parent::setUp();
         $fiddlerFilter = new FiddlerFilter();
         $this->restProxy = $this->restProxy->withFilter($fiddlerFilter);
-    }
-    
-    public static function setUpBeforeClass() {
-        parent::setUpBeforeClass();
-        $service = self::createService();
+
+        if (self::$tablesCreated) {
+            return;
+        }
+        self::$tablesCreated = true;
+
         TableServiceFunctionalTestData::setupData();
 
-        foreach(TableServiceFunctionalTestData::$TEST_TABLE_NAMES as $name)  {            
+        foreach(TableServiceFunctionalTestData::$TEST_TABLE_NAMES as $name) {
             self::println('Creating Table: ' . $name);
-            $service->createTable($name);
+            $this->restProxy->createTable($name);
         }
     }
 
     public static function tearDownAfterClass()
     {
-        parent::tearDownAfterClass();
         $service = self::createService();
         if (!Configuration::isEmulated()) {
             $serviceProperties = TableServiceFunctionalTestData::getDefaultServiceProperties();
@@ -80,6 +81,7 @@ class FunctionalTestBase extends TableServiceRestProxyTestBase {
 
     private static function createService() {
         $tmp = new FunctionalTestBase();
+        $tmp->setUp();
         return $tmp->restProxy;
     }
     

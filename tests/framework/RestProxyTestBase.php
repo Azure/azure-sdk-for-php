@@ -53,7 +53,7 @@ class RestProxyTestBase extends \PHPUnit_Framework_TestCase
         }
     }
     
-    public function __construct($config, $serviceRestProxy)
+    public function setUp($config, $serviceRestProxy)
     {
         $this->config = $config;
         $this->restProxy = $serviceRestProxy;
