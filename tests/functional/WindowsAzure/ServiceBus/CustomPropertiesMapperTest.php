@@ -33,7 +33,7 @@ use WindowsAzure\ServiceBus\ServiceBusSettings;
 use WindowsAzure\ServiceBus\Models\BrokerProperties;
 use Tests\Functional\WindowsAzure\Blob\BlobServiceFunctionalTestData;
 
-// TODO: The tests in this class fail because of 
+// TODO: The tests in this class fail because of
 // https://github.com/WindowsAzure/azure-sdk-for-php/issues/406
 
 class CustomPropertiesMapperTest extends ServiceBusRestProxyTestBase
