@@ -40,6 +40,7 @@ spl_autoload_register(
             'tests\\functional\\windowsazure\\servicebus\\servicebuscreationtest' => '/functional/WindowsAzure/ServiceBus/ServiceBusCreationTest.php',
             'tests\\functional\\windowsazure\\servicebus\\servicebusintegrationtest' => '/functional/WindowsAzure/ServiceBus/ServiceBusIntegrationTest.php',
             'tests\\functional\\windowsazure\\servicebus\\servicebusqueuetest' => '/functional/WindowsAzure/ServiceBus/ServiceBusQueueTest.php',
+            'tests\\functional\\windowsazure\\servicebus\\servicebustopictest' => '/functional/WindowsAzure/ServiceBus/ServiceBusTopicTest.php',
             'tests\\functional\\windowsazure\\servicebus\\wraprestproxyintegrationtest' => '/functional/WindowsAzure/ServiceBus/WrapRestProxyIntegrationTest.php',
             'tests\\functional\\windowsazure\\servicebus\\wraptokenmanagerintegrationtest' => '/functional/WindowsAzure/ServiceBus/WrapTokenManagerIntegrationTest.php',
             'tests\\functional\\windowsazure\\servicebus\\wraptokenmanagertest' => '/functional/WindowsAzure/ServiceBus/WrapTokenManagerTest.php',

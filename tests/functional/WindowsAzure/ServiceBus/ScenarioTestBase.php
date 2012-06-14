@@ -36,7 +36,7 @@ use WindowsAzure\Common\Internal\Resources;
 
 class ScenarioTestBase extends IntegrationTestBase
 {
-    private static $verbose = true;
+    private static $verbose = false;
 
     protected function compareMessages($expectedMessage, $actualMessage)
     {
@@ -65,7 +65,8 @@ class ScenarioTestBase extends IntegrationTestBase
         $actualProperties = $actualMessage->getProperties();
         // TODO: https://github.com/WindowsAzure/azure-sdk-for-php/issues/406
 //        $this->assertEquals(count($expectedProperties), count($actualProperties), 'count(getProperties)');
-        $customProperties = $this->getCustomProperties(intval($expectedProperties['i']));
+        $index = Utilities::tryGetValue($expectedProperties, 'i', 1);
+        $customProperties = $this->getCustomProperties(intval($index));
         foreach ($customProperties as $key => $value) {
             $this->assertEquals(
                     $value,
@@ -87,6 +88,7 @@ class ScenarioTestBase extends IntegrationTestBase
         $customProperties['even']  = ($i % 2 == 0);
         return $customProperties;
     }
+
     // TODO: Remove when fixed
     // https://github.com/WindowsAzure/azure-sdk-for-php/issues/406
     protected static function CustomPropertiesMapper_toString($value)
@@ -131,13 +133,28 @@ class ScenarioTestBase extends IntegrationTestBase
         }
     }
 
-    public static function assertEquals($a, $b, $c)
+    public static function assertEquals($expected, $actual, $description)
     {
-        self::write("'" .
-                ($a instanceof \DateTime ? $a->format(Resources::AZURE_DATE_FORMAT) : strval($a)) . "', '" .
-                ($b instanceof \DateTime ? $b->format(Resources::AZURE_DATE_FORMAT) : strval($b)) . "' " .
-                $c);
-      //  parent::assertEquals($a, $b, $c);
+        self::write('  assertEquals(\'' .
+                ($expected instanceof \DateTime ?
+                    $expected->format(Resources::AZURE_DATE_FORMAT) :
+                    strval($expected)) . '\', \'' .
+                ($actual instanceof \DateTime ?
+                    $actual->format(Resources::AZURE_DATE_FORMAT) :
+                    strval($actual)) . '\', \'' .
+                $description . '\')');
+
+        $effExp = $expected;
+        $effAct = $actual;
+
+        if ($effExp instanceof \DateTime) {
+            $effExp = $effExp->setTimezone(new \DateTimeZone('UTC'));
+        }
+        if ($effAct instanceof \DateTime) {
+            $effAct = $effAct->setTimezone(new \DateTimeZone('UTC'));
+        }
+
+        parent::assertEquals($expected, $actual, $description);
     }
 
     protected static function write($message)

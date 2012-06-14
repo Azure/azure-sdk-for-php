@@ -40,13 +40,12 @@ class ServiceBusQueueTest extends ScenarioTestBase
     private $queueName = 'testMyq';
     private $RECEIVE_AND_DELETE_5_SECONDS;
     private $PEEK_LOCK;
-    private static $verbose = false;
 
     /**
      * @covers WindowsAzure\ServiceBus\ServiceBusRestProxy::deleteQueue
      * @covers WindowsAzure\ServiceBus\ServiceBusRestProxy::listQueues
      */
-    private function testSendMessage()
+    public function testSendMessage()
     {
         $this->RECEIVE_AND_DELETE_5_SECONDS = new ReceiveMessageOptions();
         $this->RECEIVE_AND_DELETE_5_SECONDS->setReceiveAndDelete();
@@ -138,7 +137,7 @@ class ServiceBusQueueTest extends ScenarioTestBase
         $message->setReplyTo('1@1.com');
         $message->setMessageId($issueId);
 
-        $customProperties = $this->getCustomProperties();
+        $customProperties = $this->getCustomProperties(1);
         foreach ($customProperties as $key => $value) {
             // TODO: https://github.com/WindowsAzure/azure-sdk-for-php/issues/406
 //            $message->setProperty($key, $value);
@@ -162,25 +161,13 @@ class ServiceBusQueueTest extends ScenarioTestBase
         return $message;
     }
 
-    private function getCustomProperties()
-    {
-        $customProperties = array();
-        $customProperties['test']  = new \DateTime("Wed, 13 Jun 2012 15:20:52 GMT");
-        $customProperties['name']  = 'Test';
-        $customProperties['int']   = 54;
-        $customProperties['float'] = pi();
-        $customProperties['true']  = true;
-        $customProperties['false'] = false;
-        return $customProperties;
-    }
-
     /**
      * @covers WindowsAzure\ServiceBus\ServiceBusRestProxy::deleteMessage
      * @covers WindowsAzure\ServiceBus\ServiceBusRestProxy::getQueue
      * @covers WindowsAzure\ServiceBus\ServiceBusRestProxy::receiveQueueMessage
      * @covers WindowsAzure\ServiceBus\ServiceBusRestProxy::unlockMessage
      */
-    public function peeklocktest($expectedMessages)
+    private function peeklocktest($expectedMessages)
     {
         $expectedCount = count($expectedMessages);
         self::write('Receiving queue messages ' . $this->queueName);
