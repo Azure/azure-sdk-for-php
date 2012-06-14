@@ -24,7 +24,7 @@
 
 namespace Tests\Functional\WindowsAzure\ServiceBus;
 
-use Tests\Functional\WindowsAzure\ServiceBus\IntegrationTestBase;
+use Tests\Functional\WindowsAzure\ServiceBus\ScenarioTestBase;
 use WindowsAzure\Common\ServiceException ;
 use WindowsAzure\Common\Internal\Resources;
 use WindowsAzure\Common\Internal\Utilities;
@@ -35,18 +35,18 @@ use WindowsAzure\ServiceBus\Models\ListQueuesOptions;
 use WindowsAzure\ServiceBus\Models\ReceiveMessageOptions;
 use WindowsAzure\ServiceBus\Models\QueueInfo;
 
-class ServiceBusQueueTest extends IntegrationTestBase
+class ServiceBusQueueTest extends ScenarioTestBase
 {
-    private $queuename = 'myq';
-    private static $verbose = false;
+    private $queueName = 'testMyq';
     private $RECEIVE_AND_DELETE_5_SECONDS;
     private $PEEK_LOCK;
+    private static $verbose = false;
 
     /**
      * @covers WindowsAzure\ServiceBus\ServiceBusRestProxy::deleteQueue
      * @covers WindowsAzure\ServiceBus\ServiceBusRestProxy::listQueues
      */
-    public function testSendMessage()
+    private function testSendMessage()
     {
         $this->RECEIVE_AND_DELETE_5_SECONDS = new ReceiveMessageOptions();
         $this->RECEIVE_AND_DELETE_5_SECONDS->setReceiveAndDelete();
@@ -56,14 +56,17 @@ class ServiceBusQueueTest extends IntegrationTestBase
         $this->PEEK_LOCK->setPeekLock();
         $this->PEEK_LOCK->setTimeout(20);
 
-        $this->queuename .= time();
+        $this->queueName .= time();
+
+        $this->setupQueue();
+
         $expectedMessages = $this->sendMessages();
 
         $this->peeklocktest($expectedMessages);
 
-        self::write('Deleting queue ' . $this->queuename);
-        $this->restProxy->deleteQueue($this->queuename);
-        self::write('Deleted queue ' . $this->queuename);
+        self::write('Deleting queue ' . $this->queueName);
+        $this->restProxy->deleteQueue($this->queueName);
+        self::write('Deleted queue ' . $this->queueName);
     }
 
     /**
@@ -71,9 +74,8 @@ class ServiceBusQueueTest extends IntegrationTestBase
      * @covers WindowsAzure\ServiceBus\ServiceBusRestProxy::deleteQueue
      * @covers WindowsAzure\ServiceBus\ServiceBusRestProxy::getQueue
      * @covers WindowsAzure\ServiceBus\ServiceBusRestProxy::listQueues
-     * @covers WindowsAzure\ServiceBus\ServiceBusRestProxy::sendQueueMessage
      */
-    public function sendMessages()
+    private function setupQueue()
     {
         $options = new ListQueuesOptions();
         $options->setSkip(20);
@@ -84,35 +86,40 @@ class ServiceBusQueueTest extends IntegrationTestBase
             self::write('Queue name is ' . $queue->getTitle());
         }
 
-        self::write('checking if queue already exists ' . $this->queuename);
-        //delete if exits
+        self::write('checking if queue already exists ' . $this->queueName);
         try {
-            $this->restProxy->getQueue($this->queuename);
+            $this->restProxy->getQueue($this->queueName);
             self::write('Queue already exists deleting it');
-            $this->restProxy->deleteQueue($this->queuename);
+            $this->restProxy->deleteQueue($this->queueName);
         }
         catch (\Exception $e) {
             self::write('could not get an existing queue (' . $e->getCode() . '), proceeding...');
         }
 
-        $q = new QueueInfo($this->queuename);
+        $q = new QueueInfo($this->queueName);
         $q->getQueueDescription()->setEnableBatchedOperations(true);
         $q->getQueueDescription()->setMaxDeliveryCount(10);
         $q->getQueueDescription()->setMaxSizeInMegabytes(1024);
         $q->getQueueDescription()->setRequiresDuplicateDetection(true);
 
-        self::write('Creating queue ' . $this->queuename);
+        self::write('Creating queue ' . $this->queueName);
 
         $this->restProxy->createQueue($q);
-        $this->restProxy->getQueue($this->queuename)->getQueueInfo();
+        $this->restProxy->getQueue($this->queueName)->getQueueInfo();
+    }
 
+    /**
+     * @covers WindowsAzure\ServiceBus\ServiceBusRestProxy::sendQueueMessage
+     */
+    private function sendMessages()
+    {
         $messages = array();
         $messages[] = $this->createIssueMessage('1', 'First  message information', 'label1', 'location1');
-        $messages[] = $this->createIssueMessage('2', 'Second message information', 'label2', 'location4');
-        $messages[] = $this->createIssueMessage('3', 'Third  message information', 'label3', 'location4');
+        $messages[] = $this->createIssueMessage('2', 'Second message information', 'label2', 'location2');
+        $messages[] = $this->createIssueMessage('3', 'Third  message information', 'label3', 'location3');
         $messages[] = $this->createIssueMessage('4', 'Fourth message information', 'label4', 'location4');
         foreach($messages as $message)  {
-            $this->restProxy->sendQueueMessage($this->queuename, $message);
+            $this->restProxy->sendQueueMessage($this->queueName, $message);
             $data = $message->getBody();
             self::write('Message sent with id: ' . $message->getMessageId() . ' Body of $message ' . $data);
         }
@@ -176,52 +183,49 @@ class ServiceBusQueueTest extends IntegrationTestBase
     public function peeklocktest($expectedMessages)
     {
         $expectedCount = count($expectedMessages);
-        self::write('Receiving queue messages ' . $this->queuename);
-        $messageCount = $this->restProxy->getQueue($this->queuename)->getQueueInfo()->getQueueDescription()->getMessageCount();
+        self::write('Receiving queue messages ' . $this->queueName);
+        $messageCount = $this->restProxy->getQueue($this->queueName)->getQueueInfo()->getQueueDescription()->getMessageCount();
         self::write('Before getting any messages, Message count: ' . $messageCount);
         $this->assertEquals($expectedCount, $messageCount, 'Before getting any messages');
 
         // Get the first message
 
-        $message = $this->restProxy->receiveQueueMessage($this->queuename, $this->PEEK_LOCK);
-        $this->printMessageInfo($message, 'message1');
+        $message = $this->restProxy->receiveQueueMessage($this->queueName, $this->PEEK_LOCK);
         $this->compareMessages($expectedMessages[0], $message);
 
-        $messageCount = $this->restProxy->getQueue($this->queuename)->getQueueInfo()->getQueueDescription()->getMessageCount();
+        $messageCount = $this->restProxy->getQueue($this->queueName)->getQueueInfo()->getQueueDescription()->getMessageCount();
         self::write('Peek locked first message, Message count: ' . $messageCount);
         $this->assertEquals($expectedCount, $messageCount, 'Peek locked first message, count should not change');
 
         // Get the second message
 
-        $message2 = $this->restProxy->receiveQueueMessage($this->queuename, $this->RECEIVE_AND_DELETE_5_SECONDS);
-        $this->printMessageInfo($message2, '$message2');
+        $message2 = $this->restProxy->receiveQueueMessage($this->queueName, $this->RECEIVE_AND_DELETE_5_SECONDS);
+        $expectedCount--;
         $this->compareMessages($expectedMessages[1], $message2);
 
-        $messageCount = $this->restProxy->getQueue($this->queuename)->getQueueInfo()->getQueueDescription()->getMessageCount();
+        $messageCount = $this->restProxy->getQueue($this->queueName)->getQueueInfo()->getQueueDescription()->getMessageCount();
         self::write('RECEIVE_AND_DELETE second message, Message count: ' . $messageCount);
-        $expectedCount--;
         $this->assertEquals($expectedCount, $messageCount, 'RECEIVE_AND_DELETE second message, count decrements');
 
         // Unlock the first message
 
         $this->restProxy->unlockMessage($message);
 
-        $messageCount = $this->restProxy->getQueue($this->queuename)->getQueueInfo()->getQueueDescription()->getMessageCount();
+        $messageCount = $this->restProxy->getQueue($this->queueName)->getQueueInfo()->getQueueDescription()->getMessageCount();
         self::write('Unlocked first message, Message count: ' . $messageCount);
         $this->assertEquals($expectedCount, $messageCount, 'Unlocked first message, count stays the same');
 
         // Get the first unlocked message
 
         // TODO: https://github.com/WindowsAzure/azure-sdk-for-php/issues/429
-//        $message3 = $this->restProxy->receiveQueueMessage($this->queuename);
-        $message1again = $this->restProxy->receiveQueueMessage($this->queuename, new ReceiveMessageOptions());
-        $this->printMessageInfo($message1again, '$message1again');
+//        $message3 = $this->restProxy->receiveQueueMessage($this->queueName);
+        $message1again = $this->restProxy->receiveQueueMessage($this->queueName, new ReceiveMessageOptions());
+        $expectedCount--;
         // Should be the original, now that it is unlocked
         $this->compareMessages($expectedMessages[0], $message1again);
 
-        $messageCount = $this->restProxy->getQueue($this->queuename)->getQueueInfo()->getQueueDescription()->getMessageCount();
-        self::write('Got message one again, Message count: ' . $messageCount);
-        $expectedCount--;
+        $messageCount = $this->restProxy->getQueue($this->queueName)->getQueueInfo()->getQueueDescription()->getMessageCount();
+        self::write('got first message again, Message count: ' . $messageCount);
         $this->assertEquals($expectedCount, $messageCount, 'Got message one again (destructive), count should decrease');
 
         try {
@@ -235,129 +239,29 @@ class ServiceBusQueueTest extends IntegrationTestBase
 
         // Get the thrid
 
-        $message3 = $this->restProxy->receiveQueueMessage($this->queuename, $this->PEEK_LOCK);
-        $this->printMessageInfo($message3, '$message3');
+        $message3 = $this->restProxy->receiveQueueMessage($this->queueName, $this->PEEK_LOCK);
         $this->compareMessages($expectedMessages[2], $message3);
 
-        $messageCount = $this->restProxy->getQueue($this->queuename)->getQueueInfo()->getQueueDescription()->getMessageCount();
+        $messageCount = $this->restProxy->getQueue($this->queueName)->getQueueInfo()->getQueueDescription()->getMessageCount();
         self::write('Got thrid message, Message count: ' . $messageCount);
         $this->assertEquals($expectedCount, $messageCount, 'Peeked thrid message, count should not change');
 
         $this->restProxy->deleteMessage($message3);
-
         $expectedCount--;
-        $messageCount = $this->restProxy->getQueue($this->queuename)->getQueueInfo()->getQueueDescription()->getMessageCount();
+
+        $messageCount = $this->restProxy->getQueue($this->queueName)->getQueueInfo()->getQueueDescription()->getMessageCount();
         self::write('Deleted thrid message, Message count: ' . $messageCount);
         $this->assertEquals($expectedCount, $messageCount, 'Deleted thrid message, count decrements');
 
         // Get the fourth
 
-        $message4 = $this->restProxy->receiveQueueMessage($this->queuename, $this->RECEIVE_AND_DELETE_5_SECONDS);
-        $this->printMessageInfo($message4, '$message4');
+        $message4 = $this->restProxy->receiveQueueMessage($this->queueName, $this->RECEIVE_AND_DELETE_5_SECONDS);
+        $expectedCount--;
         $this->compareMessages($expectedMessages[3], $message4);
 
-        $messageCount = $this->restProxy->getQueue($this->queuename)->getQueueInfo()->getQueueDescription()->getMessageCount();
+        $messageCount = $this->restProxy->getQueue($this->queueName)->getQueueInfo()->getQueueDescription()->getMessageCount();
         self::write('Got fourth message, Message count: ' . $messageCount);
-        $expectedCount--;
         $this->assertEquals($expectedCount, $messageCount, 'Got fourth message, count should decrement');
-    }
-
-    private function printMessageInfo($message, $name)
-    {
-        self::write('Received ' . $name . ' Label :' . $message->getLabel());
-        self::write('Properties count:' . count($message->getProperties()));
-        foreach($message->getProperties() as $propName => $propValue)  {
-            self::write('    [' . $propName . ']:' . $propValue);
-        }
-    }
-
-    private function compareMessages(BrokeredMessage $expectedMessage, BrokeredMessage $actualMessage)
-    {
-        $this->assertEquals($expectedMessage->getBody(), $actualMessage->getBody(), 'body');
-        $this->assertEquals($expectedMessage->getContentType(), $actualMessage->getContentType(), 'getContentType');
-        $this->assertEquals($expectedMessage->getCorrelationId(), $actualMessage->getCorrelationId(), 'getCorrelationId');
-        $this->assertEquals($expectedMessage->getDate(), $actualMessage->getDate(), 'getDate');
-        // Note: The DeliveryCount property is controled by the server, so cannot compare it.
-        $this->assertEquals($expectedMessage->getLabel(), $actualMessage->getLabel(), 'getLabel');
-        // Note: The LockLocation property is controled by the server, so cannot compare it.
-        // Note: The LockToken property is controled by the server, so cannot compare it.
-        // Note: The LockedUntilUtc property is controled by the server, so cannot compare it.
-        $this->assertEquals($expectedMessage->getMessageId(), $actualMessage->getMessageId(), 'getMessageId');
-        $this->assertEquals($expectedMessage->getMessageLocation(), $actualMessage->getMessageLocation(), 'getMessageLocation');
-        $this->assertEquals($expectedMessage->getReplyTo(), $actualMessage->getReplyTo(), 'getReplyTo');
-        $this->assertEquals($expectedMessage->getReplyToSessionId(), $actualMessage->getReplyToSessionId(), 'getReplyToSessionId');
-        $this->assertEquals($expectedMessage->getScheduledEnqueueTimeUtc(), $actualMessage->getScheduledEnqueueTimeUtc(), 'getScheduledEnqueueTimeUtc');
-        $this->assertEquals($expectedMessage->getSequenceNumber(), $actualMessage->getSequenceNumber(), 'getSequenceNumber');
-        $this->assertEquals($expectedMessage->getSessionId(), $actualMessage->getSessionId(), 'getSessionId');
-        $this->assertEquals($expectedMessage->getTo(), $actualMessage->getTo(), 'getTo');
-
-        // Note: The BrokerProperties does not need to be tested, as most of
-        // the BrokerMessage properties call into it.
-
-        $expectedProperties = $expectedMessage->getProperties();
-        $actualProperties = $actualMessage->getProperties();
-        // TODO: https://github.com/WindowsAzure/azure-sdk-for-php/issues/406
-//        $this->assertEquals(count($expectedProperties), count($actualProperties), 'count(getProperties)');
-        $customProperties = $this->getCustomProperties();
-        foreach ($customProperties as $key => $value) {
-            $this->assertEquals(
-                    $value,
-                    // TODO: https://github.com/WindowsAzure/azure-sdk-for-php/issues/406
-//                    $actualProperties[$key],
-                    self::CustomPropertiesMapper_fromString($actualProperties[$key]),
-                    'getProperties[' . $key . ']');
-        }
-    }
-
-    // TODO: Remove when fixed
-    // https://github.com/WindowsAzure/azure-sdk-for-php/issues/406
-    private static function CustomPropertiesMapper_toString($value)
-    {
-        if (is_null($value)) {
-            return null;
-        } else if (is_numeric($value)) {
-            return strval($value);
-        } else if (is_bool($value)) {
-            return ($value ? 'true' : 'false');
-        } else if ($value instanceof \DateTime) {
-            $formatted = gmdate(Resources::AZURE_DATE_FORMAT, $value->getTimestamp());
-            return '"' . $formatted . '"';
-        } else if (is_string($value)) {
-            return '"' . $value . '"';
-        } else {
-            throw new \Exception();
-        }
-    }
-
-    // TODO: Remove when fixed
-    // https://github.com/WindowsAzure/azure-sdk-for-php/issues/406
-    private static function CustomPropertiesMapper_fromString($value)
-    {
-        if (is_null($value)) {
-            return null;
-        } else if ($value[0] == '"' && $value[strlen($value) - 1] == '"') {
-            $text = substr($value, 1, strlen($value) - 2);
-            $ret = Utilities::rfc1123ToDateTime($text);
-            if (!$ret) {
-                return $text;
-            }
-            return $ret;
-        } else if ('true' == $value) {
-            return true;
-        } else if ('false' == $value) {
-            return false;
-        } else if (strstr($value, '.') === false) {
-            return (int)$value;
-        } else {
-            return (float)$value;
-        }
-    }
-
-    private static function write($message)
-    {
-        if (self::$verbose) {
-            echo $message . "\n";
-        }
     }
 }
 ?>

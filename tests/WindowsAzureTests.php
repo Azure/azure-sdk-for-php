@@ -35,6 +35,7 @@ spl_autoload_register(
             'tests\\functional\\windowsazure\\servicebus\\brokerpropertiesmappertest' => '/functional/WindowsAzure/ServiceBus/BrokerPropertiesMapperTest.php',
             'tests\\functional\\windowsazure\\servicebus\\custompropertiesmappertest' => '/functional/WindowsAzure/ServiceBus/CustomPropertiesMapperTest.php',
             'tests\\functional\\windowsazure\\servicebus\\integrationtestbase' => '/functional/WindowsAzure/ServiceBus/IntegrationTestBase.php',
+            'tests\\functional\\windowsazure\\servicebus\\scenariotestbase' => '/functional/WindowsAzure/ServiceBus/ScenarioTestBase.php',
             'tests\\functional\\windowsazure\\servicebus\\servicebusconfigurationtest' => '/functional/WindowsAzure/ServiceBus/ServiceBusConfigurationTest.php',
             'tests\\functional\\windowsazure\\servicebus\\servicebuscreationtest' => '/functional/WindowsAzure/ServiceBus/ServiceBusCreationTest.php',
             'tests\\functional\\windowsazure\\servicebus\\servicebusintegrationtest' => '/functional/WindowsAzure/ServiceBus/ServiceBusIntegrationTest.php',
