@@ -47,6 +47,9 @@ class ServiceBusTopicTest extends ScenarioTestBase
     private $RECEIVE_AND_DELETE_5_SECONDS;
     private $PEEK_LOCK;
 
+    /**
+     * @covers WindowsAzure\ServiceBus\ServiceBusRestProxy::deleteTopic
+     */
     public function testSubscriptionTopic()
     {
         $this->RECEIVE_AND_DELETE_5_SECONDS = new ReceiveMessageOptions();
@@ -66,16 +69,47 @@ class ServiceBusTopicTest extends ScenarioTestBase
         $messages = $this->sendMessages();
 
         $this->getMessageCounts();
-        $this->getMessageFromSub($messages, $this->subscriptionName1);
-        $this->getMessageFromSub($messages, $this->subscriptionName2);
-        $this->getMessageFromSub($messages, $this->subscriptionName3);
-        $this->getMessageFromSub($messages, $this->subscriptionName4);
+
+        $expSub1Messages = $messages;
+        $expSub2Messages = array($messages[0], $messages[1]);
+        $expSub3Messages = array($messages[1], $messages[2], $messages[3]);
+        // The rules for subscription 4 add and remove custom properties.
+        $expCustomProps4 = array();
+        $expSub4Messages = array();
+        for ($i = 1; $i <= 4; $i++) {
+            $tmp = $this->getCustomProperties($i);
+            $tmp['trueRuleA'] = true;
+            $tmp['actionGuid'] = 'GUID';
+            $tmp['actionDouble'] = 3.5;
+            unset($tmp['int']);
+            $expCustomProps4[] = $tmp;
+            $expSub4Messages[] = $messages[$i-1];
+
+            $tmp = $this->getCustomProperties($i);
+            $tmp['trueRuleB'] = true;
+            $tmp['actionString'] = 'hello';
+            $tmp['test'] = new \DateTime('1999-12-25 00:00:00 GMT');
+            unset($tmp['float']);
+            $expCustomProps4[] = $tmp;
+            $expSub4Messages[] = $messages[$i-1];
+        }
+
+        $this->getMessageFromSub($expSub1Messages, $this->subscriptionName1);
+        $this->getMessageFromSub($expSub2Messages, $this->subscriptionName2);
+        $this->getMessageFromSub($expSub3Messages, $this->subscriptionName3);
+        $this->getMessageFromSub($expSub4Messages, $this->subscriptionName4, $expCustomProps4);
 
         self::write('Deleting topic ' . $this->topicName);
         $this->restProxy->deleteTopic($this->topicName);
         self::write('Deleted topic ' . $this->topicName);
     }
 
+    /**
+     * @covers WindowsAzure\ServiceBus\ServiceBusRestProxy::createTopic
+     * @covers WindowsAzure\ServiceBus\ServiceBusRestProxy::deleteTopic
+     * @covers WindowsAzure\ServiceBus\ServiceBusRestProxy::getTopic
+     * @covers WindowsAzure\ServiceBus\ServiceBusRestProxy::listTopics
+     */
     private function setupTopic()
     {
         $options = new ListTopicsOptions();
@@ -108,6 +142,9 @@ class ServiceBusTopicTest extends ScenarioTestBase
         $this->restProxy->getTopic($this->topicName)->getTopicInfo();
     }
 
+    /**
+     * @covers WindowsAzure\ServiceBus\ServiceBusRestProxy::createSubscription
+     */
     private function setupSubscriptions()
     {
         $s = new SubscriptionInfo($this->subscriptionName1);
@@ -123,6 +160,11 @@ class ServiceBusTopicTest extends ScenarioTestBase
         $this->restProxy->createSubscription($this->topicName, new SubscriptionInfo($this->subscriptionName4));
     }
 
+    /**
+     * @covers WindowsAzure\ServiceBus\ServiceBusRestProxy::createRule
+     * @covers WindowsAzure\ServiceBus\ServiceBusRestProxy::deleteRule
+     * @covers WindowsAzure\ServiceBus\ServiceBusRestProxy::listRules
+     */
     private function setupRules()
     {
         // See this topic for more information on what SQL filter strings are allowed:
@@ -144,14 +186,26 @@ class ServiceBusTopicTest extends ScenarioTestBase
         $rule3->withSqlFilter('name LIKE \'%3\' OR user.even = TRUE');
         $this->restProxy->createRule($this->topicName, $this->subscriptionName3, $rule3);
 
-        // subscriptionName4 gets rules to enable 3 duplicate messages
-        $rule4a = new RuleInfo('trueRuleA');
-        $rule4a->withTrueFilter();
-        $rule2->withSqlRuleAction('SET trueRuleA=TRUE; SET actionGuid=newid(); SET actionDouble=3.5;');
+        // subscriptionName4 gets two rules to enable duplicate messages
+
+        $lst = $this->restProxy->listRules($this->topicName, $this->subscriptionName4)->getRuleInfo();
+        $rule4a = $lst[0];
+        $rule4a->withSqlRuleAction(
+                'SET trueRuleA=TRUE; ' .
+                'SET actionGuid=newid(); ' .
+                'SET actionDouble=3.5; ' .
+                'REMOVE int;');
+        $this->restProxy->deleteRule($this->topicName, $this->subscriptionName4, $rule4a->getTitle());
+        $this->restProxy->createRule($this->topicName, $this->subscriptionName4, $rule4a);
+
         $rule4b = new RuleInfo('trueRuleB');
         $rule4b->withTrueFilter();
-        $rule2->withSqlRuleAction('SET trueRuleB=TRUE; SET actionString=\'hello\'; SET actionBoolean=TRUE');
-        $this->restProxy->createRule($this->topicName, $this->subscriptionName4, $rule4a);
+        $rule4b->withSqlRuleAction(
+                'SET trueRuleB=TRUE; ' .
+                'SET actionString=\'hello\'; ' .
+                'SET actionNull=null; ' .
+                'SET test=\'1999-12-25\'; ' .
+                'REMOVE float;');
         $this->restProxy->createRule($this->topicName, $this->subscriptionName4, $rule4b);
 
         $this->showRules($this->subscriptionName1);
@@ -160,6 +214,9 @@ class ServiceBusTopicTest extends ScenarioTestBase
         $this->showRules($this->subscriptionName4);
     }
 
+    /**
+     * @covers WindowsAzure\ServiceBus\ServiceBusRestProxy::listRules
+     */
     private function showRules($subName)
     {
         self::write('Subscription: ' . $subName);
@@ -174,6 +231,9 @@ class ServiceBusTopicTest extends ScenarioTestBase
         }
     }
 
+    /**
+     * @covers WindowsAzure\ServiceBus\ServiceBusRestProxy::sendTopicMessage
+     */
     private function sendMessages()
     {
         $messages = array();
@@ -214,6 +274,10 @@ class ServiceBusTopicTest extends ScenarioTestBase
         return $message;
     }
 
+    /**
+     * @covers WindowsAzure\ServiceBus\ServiceBusRestProxy::getSubscription
+     * @covers WindowsAzure\ServiceBus\ServiceBusRestProxy::getTopic
+     */
     private function getMessageCounts()
     {
         $topic = $this->restProxy->getTopic($this->topicName);
@@ -241,17 +305,31 @@ class ServiceBusTopicTest extends ScenarioTestBase
         $subscription4 = $this->restProxy->getSubscription($this->topicName, $this->subscriptionName4);
         $subscription4 = $subscription4->getSubscriptionInfo()->getSubscriptionDescription();
         self::write('Subscription 4 message count ' . $subscription4->getMessageCount());
-        $this->assertEquals(4, $subscription4->getMessageCount(), 'Subscription 4 message count');
+        $this->assertEquals(8, $subscription4->getMessageCount(), 'Subscription 4 message count');
     }
 
-    private function getMessageFromSub($expectedMessages, $subscriptionName)
+    /**
+     * @covers WindowsAzure\ServiceBus\ServiceBusRestProxy::getSubscription
+     * @covers WindowsAzure\ServiceBus\ServiceBusRestProxy::receiveSubscriptionMessage
+     * @covers WindowsAzure\ServiceBus\ServiceBusRestProxy::unlockMessage
+     */
+    private function getMessageFromSub($expectedMessages, $subscriptionName, $expCustomProps = null)
     {
         $expectedCount = count($expectedMessages);
+        if (is_null($expCustomProps)) {
+            $expCustomProps = array();
+            while (count($expCustomProps) < $expectedCount) {
+                $expCustomProps[] = null;
+            }
+        }
+        self::write('==============================================');
+        self::write('Getting messages from subscription ' . $subscriptionName .
+                ', expecting ' . $expectedCount . ' messages');
 
         // Peek the first message
 
         $message1 = $this->restProxy->receiveSubscriptionMessage($this->topicName, $subscriptionName, $this->PEEK_LOCK);
-        $this->compareMessages($expectedMessages[0], $message1);
+        $this->compareMessages($expectedMessages[0], $message1, $expCustomProps[0]);
 
         $messageCount = $this->restProxy->getSubscription($this->topicName, $subscriptionName)->getSubScriptionInfo()->getSubscriptionDescription()->getMessageCount();
         self::write('Peek locked first message, Message count: ' . $messageCount);
@@ -261,7 +339,7 @@ class ServiceBusTopicTest extends ScenarioTestBase
 
         $message2 = $this->restProxy->receiveSubscriptionMessage($this->topicName, $subscriptionName, $this->RECEIVE_AND_DELETE_5_SECONDS);
         $expectedCount--;
-        $this->compareMessages($expectedMessages[1], $message2);
+        $this->compareMessages($expectedMessages[1], $message2, $expCustomProps[1]);
 
         $messageCount = $this->restProxy->getSubscription($this->topicName, $subscriptionName)->getSubScriptionInfo()->getSubscriptionDescription()->getMessageCount();
         self::write('RECEIVE_AND_DELETE second message, Message count: ' . $messageCount);
@@ -272,7 +350,7 @@ class ServiceBusTopicTest extends ScenarioTestBase
         $this->restProxy->unlockMessage($message1);
         $message1again = $this->restProxy->receiveSubscriptionMessage($this->topicName, $subscriptionName, $this->RECEIVE_AND_DELETE_5_SECONDS);
         $expectedCount--;
-        $this->compareMessages($expectedMessages[0], $message1again);
+        $this->compareMessages($expectedMessages[0], $message1again, $expCustomProps[0]);
 
         $messageCount = $this->restProxy->getSubscription($this->topicName, $subscriptionName)->getSubscriptionInfo()->getSubscriptionDescription()->getMessageCount();
         self::write('got first message again, Message count: ' . $messageCount);
@@ -280,16 +358,13 @@ class ServiceBusTopicTest extends ScenarioTestBase
 
         // Get the third and fourth messages
 
-        if ($expectedCount > 0) {
+        $messageId = 2;
+        while ($expectedCount > 0) {
             $message3 = $this->restProxy->receiveSubscriptionMessage($this->topicName, $subscriptionName, $this->RECEIVE_AND_DELETE_5_SECONDS);
             $expectedCount--;
-            $this->compareMessages($expectedMessages[2], $message3);
-        }
-
-        if ($expectedCount > 0) {
-            $message4 = $this->restProxy->receiveSubscriptionMessage($this->topicName, $subscriptionName, $this->RECEIVE_AND_DELETE_5_SECONDS);
-            $expectedCount--;
-            $this->compareMessages($expectedMessages[3], $message4);
+            self::write('Got message #' . $messageId . ', Message count: ' . $messageCount);
+            $this->compareMessages($expectedMessages[$messageId], $message3, $expCustomProps[$messageId]);
+            $messageId++;
         }
 
         $messageCount = $this->restProxy->getSubscription($this->topicName, $subscriptionName)->getSubscriptionInfo()->getSubscriptionDescription()->getMessageCount();

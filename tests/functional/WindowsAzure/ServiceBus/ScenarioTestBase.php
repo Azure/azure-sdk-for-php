@@ -38,7 +38,7 @@ class ScenarioTestBase extends IntegrationTestBase
 {
     private static $verbose = false;
 
-    protected function compareMessages($expectedMessage, $actualMessage)
+    protected function compareMessages($expectedMessage, $actualMessage, $customProperties = null)
     {
         $this->assertEquals($expectedMessage->getBody(), $actualMessage->getBody(), 'body');
         $this->assertEquals($expectedMessage->getContentType(), $actualMessage->getContentType(), 'getContentType');
@@ -61,19 +61,26 @@ class ScenarioTestBase extends IntegrationTestBase
         // Note: The BrokerProperties does not need to be tested, as most of
         // the BrokerMessage properties call into it.
 
-        $expectedProperties = $expectedMessage->getProperties();
+        if (is_null($customProperties)) {
+            $expectedProperties = $expectedMessage->getProperties();
+            $index = Utilities::tryGetValue($expectedProperties, 'i', 1);
+            $customProperties = $this->getCustomProperties(intval($index));
+        }
+
         $actualProperties = $actualMessage->getProperties();
+
         // TODO: https://github.com/WindowsAzure/azure-sdk-for-php/issues/406
 //        $this->assertEquals(count($expectedProperties), count($actualProperties), 'count(getProperties)');
-        $index = Utilities::tryGetValue($expectedProperties, 'i', 1);
-        $customProperties = $this->getCustomProperties(intval($index));
         foreach ($customProperties as $key => $value) {
-            $this->assertEquals(
+            // Guids from the server cannot be known in advance
+            if ($value != 'GUID') {
+                $this->assertEquals(
                     $value,
                     // TODO: https://github.com/WindowsAzure/azure-sdk-for-php/issues/406
 //                    $actualProperties[$key],
-                    self::CustomPropertiesMapper_fromString($actualProperties[$key]),
+                    self::CustomPropertiesMapper_fromString($actualProperties[strtolower($key)]),
                     'getProperties[\'' . $key . '\']');
+            }
         }
     }
 
