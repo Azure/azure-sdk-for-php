@@ -1,0 +1,22 @@
+{
+    "name": "WindowsAzure/azure-sdk-for-php",
+    "type": "library",
+    "description": "Windows Azure SDK for PHP",
+    "keywords": ["sdk","windows", "azure", "cloud"],
+    "license": "Apache 2.0",
+    "authors": [
+        {
+            "name": "Abdelrahman Elogeel",
+            "email": "Abdelrahman.Elogeel@microsoft.com",
+            "homepage": "https://www.windowsazure.com/fr-fr/develop/php/"
+        }
+    ],
+    "require": {
+        "php": ">=5.3.0"
+    },
+    "autoload": {
+        "psr-0": {
+            "WindowsAzure": "/"
+        }
+    }
+}
