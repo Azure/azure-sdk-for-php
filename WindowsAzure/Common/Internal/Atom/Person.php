@@ -38,7 +38,7 @@ use WindowsAzure\Common\Internal\Resources;
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
 
-class Person
+class Person extends AtomBase
 {
     /**
      * The name of the person. 
@@ -175,7 +175,7 @@ class Person
      */
     public function writeXml($xmlWriter)
     {
-        $xmlWriter->startElement('<atom:person>');
+        $xmlWriter->startElement('atom:person');
         $this->writeInnerXml($xmlWriter);
         $xmlWriter->endElement();
     }
@@ -189,7 +189,7 @@ class Person
      */
     public function writeInnerXml($xmlWriter)
     {
-        $xmlWriter->writeElement('<atom:name>', $this->name);
+        $xmlWriter->writeElement('atom:name', $this->name);
         if (!empty($this->uri)) {
             $xmlWriter->writeElement('atom:uri', $this->uri);
         }

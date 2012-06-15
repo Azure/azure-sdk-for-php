@@ -24,6 +24,7 @@
 
 namespace WindowsAzure\Common\Internal\Atom;
 use WindowsAzure\Common\Internal\Validate;
+use WindowsAzure\Common\Internal\Resources;
 
 /**
  * The feed class of ATOM library.
@@ -37,47 +38,40 @@ use WindowsAzure\Common\Internal\Validate;
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
 
-class Feed
+class Feed extends AtomBase
 {
-    /**
-     * The attributes of the feed.
-     *
-     * @var string 
-     */
-    protected $attributes;
-
     /**
      * The entry of the feed. 
      * 
-     * @var Entry
+     * @var array
      */
     protected $entry;
 
     /**
-     * The content of the feed.
+     * the author of the feed. 
      * 
-     * @var Content
+     * @var array 
      */
-    protected $content;
+    protected $author;
 
     /**
      * The category of the feed. 
      * 
-     * @var Category
+     * @var array 
      */
     protected $category;
 
     /**
      * The contributor of the feed. 
      * 
-     * @var string
+     * @var array 
      */
     protected $contributor;
 
     /**
      * The generator of the feed. 
      * 
-     * @var string
+     * @var Generator
      */
     protected $generator;
 
@@ -98,7 +92,7 @@ class Feed
     /**
      * The link of the feed. 
      * 
-     * @var string
+     * @var array
      */
     protected $link;
 
@@ -133,7 +127,7 @@ class Feed
     /**
      * The update of the feed. 
      * 
-     * @var string
+     * @var \DateTime
      */
     protected $updated;
 
@@ -161,60 +155,44 @@ class Feed
      */
     public function parseXml($xmlString)
     {
-        $feedXml    = new \SimpleXMLElement($xmlString);
+        $feedXml    = simplexml_load_string($xmlString);
         $attributes = $feedXml->attributes();
         $feedArray  = (array)$feedXml;
         if (!empty($attributes)) {
             $this->attributes = (array)$attributes;
         }
 
-        if (array_key_exists('entry', $feedArray)) {
-            $entry = array();
-
-            $entryXml = $feedArray['entry'];
-            if (is_array($entryXml)) {
-                foreach ($entryXml as $entryXmlInstance) {
-                    $entryInstance = new Entry();
-                    $entryInstance->parseXml($entryXmlInstance->asXML());
-                    $entry[] = $entryInstance;
-                }
-            } else {
-                $entryInstance = new Entry();
-                $entryInstance->parseXml($entryXml->asXML());
-                $entry[] = $entryInstance;
-                
-            }
-            $this->entry = $entry;
+        if (array_key_exists('author', $feedArray)) {
+            $this->author = $this->processAuthorNode($feedArray);
         }
 
-        if (array_key_exists('content', $feedArray)) {
-            $content = new Content();
-            $content->parseXml($feedArray['content']->asXML());
-            $this->content = $content;
+        if (array_key_exists('entry', $feedArray)) {
+            $this->entry = $this->processEntryNode($feedArray);
         }
 
         if (array_key_exists('category', $feedArray)) {
-            $category = new Category();
-            $category->parseXml($feedArray['category']->asXML());
-            $this->category = $category;
+            $this->category = $this->processCategoryNode($feedArray);
         }
 
         if (array_key_exists('contributor', $feedArray)) {
-            $contributor = new Person();
-            $contributor->parseXml($feedArray['contributor']->asXML());
-            $this->contributor = $contributor;
+            $this->contributor = $this->processContributorNode($feedArray);
         }
 
         if (array_key_exists('generator', $feedArray)) {
             $generator = new Generator();
-            $generator->setText((string)$feedArray['generator']->asXML());
+            $generatorValue = $feedArray['generator'];
+            if (is_string($generatorValue))
+            {
+                $generator->setText($generatorValue);
+            } else {
+                $generator->parseXml($generatorValue->asXML());
+            }
+                
             $this->generator = $generator;
         } 
 
         if (array_key_exists('icon', $feedArray)) {
-            $icon = new Icon();
-            $icon->parseXml($feedArray['icon']->asXML());
-            $this->icon = $icon;
+            $this->icon = (string)$feedArray['icon'];
         }
 
         if (array_key_exists('id', $feedArray)) {
@@ -222,9 +200,7 @@ class Feed
         }
 
         if (array_key_exists('link', $feedArray)) {
-            $link = new AtomLink();
-            $link->parseXml($feedArray['link']->asXML());
-            $this->link = $link;
+            $this->link = $this->processLinkNode($feedArray);
         }
 
         if (array_key_exists('logo', $feedArray)) {
@@ -244,7 +220,10 @@ class Feed
         }
 
         if (array_key_exists('updated', $feedArray)) {
-            $this->updated = (string)$feedArray['updated'];
+            $this->updated = \DateTime::createFromFormat(
+                \DateTime::ATOM,
+                (string)$feedArray['updated']
+            );
         }
     }
 
@@ -284,6 +263,23 @@ class Feed
         $this->attributes[$attributeKey] = $attributeValue;
     }   
 
+
+    public function getAuthor()
+    {
+        return $this->author;
+    }
+
+    public function setAuthor($author)
+    {
+        Validate::isArray($author, 'author');
+        $person = new Person();
+        foreach ($author as $authorInstance)
+        {
+            Validate::isInstanceOf($authorInstance, $person, 'author'); 
+        }
+        $this->author = $author;
+    }
+
     /**
      * Gets the category of the feed.
      *  
@@ -291,7 +287,7 @@ class Feed
      */
     public function getCategory()
     {
-        return $this->categroy;
+        return $this->category;
     }
 
     /**
@@ -303,7 +299,17 @@ class Feed
      */
     public function setCategory($category)
     {
-        $this->category = $cateogry;
+        Validate::isArray($category, 'category');
+        $categoryClassInstance = new Category();
+        foreach ($category as $categoryInstance)
+        {
+            Validate::isInstanceOf(
+                $categoryInstance, 
+                $categoryClassInstance, 
+                'category'
+            );
+        }
+        $this->category = $category;
     }
    
     /**
@@ -325,6 +331,12 @@ class Feed
      */
     public function setContributor($contributor)
     {
+        Validate::isArray($contributor, 'contributor');
+        $person = new Person();
+        foreach ($contributor as $contributorInstance)
+        {
+            Validate::isInstanceOf($contributorInstance, $person, 'contributor'); 
+        }
         $this->contributor = $contributor;
     }
 
@@ -397,7 +409,7 @@ class Feed
     /**
      * Gets the link of the feed. 
      * 
-     * @return string 
+     * @return array
      */
     public function getLink()
     {
@@ -407,12 +419,13 @@ class Feed
     /**
      * Sets the link of the feed. 
      * 
-     * @param string $link The link of the feed. 
+     * @param array $link The link of the feed. 
      * 
      * @return none
      */
     public function setLink($link)
     {
+        Validate::isArray($link, 'link');
         $this->link = $link;
     }
 
@@ -505,7 +518,7 @@ class Feed
     /**
      * Gets the updated. 
      * 
-     * @return string 
+     * @return \DateTime
      */
     public function getUpdated()
     {   
@@ -515,13 +528,14 @@ class Feed
     /**
      * Sets the updated. 
      * 
-     * @param string $updated updated
+     * @param \DateTime $updated updated
      * 
      * @return none
      */
     public function setUpdated($updated)
     {
-        $this->udpated = $updated;
+        Validate::isInstanceOf($updated, new \DateTime(), 'updated');
+        $this->updated = $updated;
     }
 
     /** 
@@ -568,28 +582,6 @@ class Feed
         $this->entry = $entry;
     }
 
-    /**
-     * Gets the content of the feed. 
-     * 
-     * @return Content
-     */
-    public function getContent()
-    {
-        return $this->content;
-    }
-
-    /**
-     * Sets the content of the feed.
-     * 
-     * @param Content $content The content of the feed. 
-     *
-     * @return none
-     */
-    public function setContent($content)
-    {
-        $this->content = $content;
-    }
-
     /** 
      * Writes an XML representing the feed object.
      * 
@@ -599,7 +591,9 @@ class Feed
      */
     public function writeXml($xmlWriter)
     {
-        $xmlWriter->startElement('<atom:feed>');
+        Validate::notNull($xmlWriter, 'xmlWriter');
+
+        $xmlWriter->startElementNS('atom', 'feed', Resources::ATOM_NAMESPACE);
         $this->writeInnerXml($xmlWriter);
         $xmlWriter->endElement();
     }
@@ -613,6 +607,7 @@ class Feed
      */
     public function writeInnerXml($xmlWriter)
     {
+        Validate::notNull($xmlWriter, 'xmlWriter');
 
         if (!is_null($this->attributes)) {
             if (is_array($this->attributes)) {
@@ -626,7 +621,7 @@ class Feed
         }
          
         if (!is_null($this->author)) {
-            $xmlWriter->startElement('atom:author');
+            $xmlWriter->startElementNS('atom', 'author', Resources::ATOM_NAMESPACE);
             $this->author->writeInnerXml($xmlWriter);
             $xmlWriter->endElement();
         } 
@@ -644,12 +639,20 @@ class Feed
         if (!is_null($this->contributor)) {
             if (is_array($this->contributor)) {
                 foreach ($this->contributor as $contributor) {
-                    $xmlWriter->startElement('atom:contributor');
+                    $xmlWriter->startElementNS(
+                        'atom', 
+                        'contributor', 
+                        Resources::ATOM_NAMESPACE
+                    );
                     $contributor->writeInnerXml($xmlWriter);
                     $xmlWriter->endElement();
                 }
             } else {
-                $xmlWriter->startElement('atom:contributor');
+                $xmlWriter->startElementNS(
+                    'atom', 
+                    'contributor', 
+                    Resources::ATOM_NAMESPACE
+                );
                 $contributor->writeInnerXml($xmlWriter);
                 $xmlWriter->endElement();
             }
@@ -660,40 +663,79 @@ class Feed
         } 
 
         if (!is_null($this->icon)) {
-            $xmlWriter->writeElement('atom:icon', $this->icon);
+            $xmlWriter->writeElementNS(
+                'atom', 
+                'icon', 
+                Resources::ATOM_NAMESPACE,
+                $this->icon
+            );
         }
 
         if (!is_null($this->logo)) {
-            $xmlWriter->writeElement('atom:logo', $this->logo);
+            $xmlWriter->writeElementNS(
+                'atom',
+                'logo', 
+                Resources::ATOM_NAMESPACE,
+                $this->logo
+            );
         }
 
         if (!is_null($this->id)) {
-            $xmlWriter->writeElement('atom:id', $this->id);
+            $xmlWriter->writeElementNS(
+                'atom',
+                'id', 
+                Resources::ATOM_NAMESPACE,
+                $this->id
+            );
         }
 
         if (!is_null($this->link)) {
-            $xmlWriter->writeElement('atom:link', $this->link);
+            $xmlWriter->startElementNS(
+                'atom',
+                'link', 
+                Resources::ATOM_NAMESPACE
+            );
+
+            $this->link->writeXml($xmlWriter);
+            $xmlWriter->endElement();
         }
 
         if (!is_null($this->rights)) {
-            $xmlWriter->writeElement('atom:rights', $this->rights);
+            $xmlWriter->writeElementNS(
+                'atom',
+                'rights', 
+                Resources::ATOM_NAMESPACE,
+                $this->rights
+            );
         }
 
         if (!is_null($this->subtitle)) {
-            $xmlWriter->writeElement('atom:subtitle', $this->subtitle);
+            $xmlWriter->writeElementNS(
+                'atom',
+                'subtitle', 
+                Resources::ATOM_NAMESPACE,
+                $this->subtitle
+            );
         }
         
         if (!is_null($this->title)) {
-            $xmlWriter->writeElement('atom:title', $this->title);
+            $xmlWriter->writeElementNS(
+                'atom',
+                'title',
+                Resources::ATOM_NAMESPACE,
+                $this->title
+            );
         }
 
         if (!is_null($this->updated)) {
-            $xmlWriter->writeElement('atom:updated', $this->updated);
+            $xmlWriter->writeElementNS(
+                'atom', 
+                'updated', 
+                Resources::ATOM_NAMESPACE, 
+                $this->updated->format(DateTime::ATOM)
+            );
         }
 
-        if (!is_null($this->content)) {
-            $this->content->writeXml($xmlWriter);
-        }
     }
 }
 ?>

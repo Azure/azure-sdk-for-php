@@ -37,26 +37,19 @@ use WindowsAzure\Common\Internal\Validate;
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
 
-class Source
+class Source extends AtomBase
 {
-    /**
-     * The attributes of the source. 
-     * 
-     * @var array
-     */
-    protected $attributes;
-
     /**
      * The author the source. 
      * 
-     * @var Person
+     * @var array
      */
     protected $author;
 
     /**
      * The category of the source. 
      * 
-     * @var Category
+     * @var array
      */
     protected $category;
 
@@ -126,7 +119,7 @@ class Source
     /**
      * The update of the source. 
      * 
-     * @var string
+     * @var \DateTime
      */
     protected $updated;
 
@@ -142,7 +135,10 @@ class Source
      */ 
     public function __construct()
     {   
-        $this->attributes = array();
+        $this->attributes  = array();
+        $this->category    = array();
+        $this->contributor = array();
+        $this->author      = array();
     }
 
     /**
@@ -159,21 +155,15 @@ class Source
         $sourceArray = (array)$sourceXml;
 
         if (array_key_exists('author', $sourceArray)) {
-            $content = new Person();
-            $content->parseXml($sourceArray['person']->asXML());
-            $this->content = $content;
+            $this->content = $this->processAuthorNode($sourceArray);
         }
 
         if (array_key_exists('category', $sourceArray)) {
-            $category = new Category();
-            $category->parseXml($sourceArray['category']->asXML());
-            $this->category = $category;
+            $this->category = $this->processCategoryNode($sourceArray);
         }
 
         if (array_key_exists('contributor', $sourceArray)) {
-            $contributor = new Person();
-            $contributor->parseXml($sourceArray['contributor']->asXML());
-            $this->contributor = $contributor;
+            $this->contributor = $this->processContributorNode($sourceArray);
         }
 
         if (array_key_exists('generator', $sourceArray)) {
@@ -193,9 +183,7 @@ class Source
         }
 
         if (array_key_exists('link', $sourceArray)) {
-            $link = new AtomLink();
-            $link->parseXml($sourceArray['link']->asXML());
-            $this->link = $link;
+            $this->link = $this->processLinkNode($sourceArray);
         }
 
         if (array_key_exists('logo', $sourceArray)) {
@@ -220,61 +208,47 @@ class Source
     }
 
     /**
-     * Gets the attributes of the source. 
+     * Gets the author of the source. 
      *
      * @return array
      */
-    public function getAttributes()
+    public function getAuthor()
     {
-        return $this->attributes;
+        return $this->author;
     }
 
     /**
-     * Sets the attributes of the source. 
+     * Sets the author of the source. 
      *
-     * @param array $attributes The attributes of the array. 
-     *
+     * @param array $author An array of authors of the sources. 
+     * 
      * @return none
      */
-    public function setAttributes($attributes)
+    public function setAuthor($author) 
     {
-        Validate::isArray($attributes, 'attributes');
-        $this->attributes = $attributes;
+        $this->author = $author;
     }
-
-    /**
-     * Adds an attribute to the source. 
-     * 
-     * @param string $attributeKey   The key of the attribute. 
-     * @param string $attributeValue The value of the attribute. 
-     * 
-     * @return none
-     */
-    public function addAttribute($attributeKey, $attributeValue)
-    {
-        $this->attributes[$attributeKey] = $attributeValue;
-    }   
 
     /**
      * Gets the category of the source.
      *  
-     * @return string
+     * @return array
      */
     public function getCategory()
     {
-        return $this->categroy;
+        return $this->category;
     }
 
     /**
      * Sets the category of the source.
      *  
-     * @param string $category The category of the source. 
+     * @param array $category The category of the source. 
      *
      * @return none
      */
     public function setCategory($category)
     {
-        $this->category = $cateogry;
+        $this->category = $category;
     }
    
     /**
@@ -290,7 +264,7 @@ class Source
     /**
      * Sets contributor.
      * 
-     * @param string $contributor The contributor of the source. 
+     * @param array $contributor The contributors of the source. 
      * 
      * @return none
      */
@@ -368,7 +342,7 @@ class Source
     /**
      * Gets the link of the source. 
      * 
-     * @return AtomLink
+     * @return array
      */
     public function getLink()
     {
@@ -378,7 +352,7 @@ class Source
     /**
      * Sets the link of the source. 
      * 
-     * @param AtomLink $link The link of the source. 
+     * @param array $link The link of the source. 
      *
      * @return none
      */
@@ -478,7 +452,7 @@ class Source
     /**
      * Gets the updated. 
      * 
-     * @return string 
+     * @return \DateTime
      */
     public function getUpdated()
     {   
@@ -488,13 +462,13 @@ class Source
     /**
      * Sets the updated. 
      * 
-     * @param string $updated updated
+     * @param \DateTime $updated updated
      * 
      * @return none
      */
     public function setUpdated($updated)
     {
-        $this->udpated = $updated;
+        $this->updated = $updated;
     }
 
     /** 

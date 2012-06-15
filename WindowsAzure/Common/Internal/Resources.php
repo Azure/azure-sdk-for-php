@@ -71,6 +71,7 @@ class Resources
     const INVALID_ACH_MSG = 'The provided access condition header is invalid';
     const MISSING_CONFIG_SETTING_KEY_MSG = "Missing configuration setting %s which is required to create %sRestProxy.";
     const MISSING_CONFIG_SETTING_VALUE_MSG = "The value of configuration setting %s can't be null or empty.";
+    const INSTANCE_TYPE_VALIDATION_MSG = 'The type of %s is %s but is expected to be %s.';
 
     // HTTP Headers
     const X_MS_HEADER_PREFIX                 = 'x-ms-';

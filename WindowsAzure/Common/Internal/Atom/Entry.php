@@ -38,15 +38,8 @@ use WindowsAzure\Common\Internal\Resources;
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
 
-class Entry
+class Entry extends AtomBase
 {
-    /**
-     * The attributes of the entry 
-     *
-     * @var array
-     */
-    protected $attributes;
-
     /**
      * The author of the entry.
      *
@@ -156,19 +149,15 @@ class Entry
     public function parseXml($xmlString)
     {
         $entryXml         = simplexml_load_string($xmlString);
-        $this->attributes = $entryXml->attributes();
+        $this->attributes = (array)$entryXml->attributes();
         $entryArray       = (array)$entryXml;
 
         if (array_key_exists('author', $entryArray)) {
-            $author = new Person();
-            $author->parseXml($entryArray['author']->asXML());
-            $this->author = $author;
+            $this->author = $this->processAuthorNode($entryArray);
         }
 
         if (array_key_exists('category', $entryArray)) {
-            $category = new Category();
-            $category->parseXml($entryArray['category']->asXML());
-            $this->category = $category;
+            $this->category = $this->processCategoryNode($entryArray);
         }
 
         if (array_key_exists('content', $entryArray)) {
@@ -178,9 +167,7 @@ class Entry
         }
 
         if (array_key_exists('contributor', $entryArray)) {
-            $contributor = new Person();
-            $contributor->parseXml($entryArray['contributor']->asXML());
-            $this->contributor = $contributor;
+            $this->contributor = $this->processContributorNode($entryArray);
         }
 
         if (array_key_exists('id', $entryArray)) {
@@ -188,9 +175,7 @@ class Entry
         }
 
         if (array_key_exists('link', $entryArray)) {
-            $link = new AtomLink();
-            $link->parseXml($entryArray['link']->asXML());
-            $this->link = $link;
+            $this->link = $this->processLinkNode($entryArray);
         }
 
         if (array_key_exists('published', $entryArray)) {
@@ -212,56 +197,12 @@ class Entry
         }
 
         if (array_key_exists('updated', $entryArray)) {
-            $this->updated = $entryArray['updated'];
+            $this->updated = \DateTime::createFromFormat(
+                \DateTime::ATOM,
+                (string)$entryArray['updated']
+            );
         }
          
-    }
-
-    /**
-     * Gets the attributes. 
-     * 
-     * @return array
-     */
-    public function getAttributes()
-    {   
-        return $this->attributes;
-    }
-
-    /**
-     * Sets the attributes. 
-     * 
-     * @param array $attributes The attributes of the entry. 
-     *
-     * @return none
-     */
-    public function setAttributes($attributes)
-    {
-        $this->attributes = $attributes;
-    }
-
-    /**
-     * Sets the attribute of the entry. 
-     * 
-     * @param string $attributeKey   The key of the attribute. 
-     * @param mixed  $attributeValue The value of the attribute. 
-     *
-     * @return none 
-     */
-    public function setAttribute($attributeKey, $attributeValue)
-    {
-        $this->attributes[$attributeKey] = $attributeValue;
-    }
-
-    /**
-     * Gets the attribute of the entry. 
-     * 
-     * @param string $attributeKey The key of the attribute. 
-     * 
-     * @return mixed
-     */
-    public function getAttribute($attributeKey)
-    {
-        return $this->attributes[$attributeKey];
     }
 
     /**

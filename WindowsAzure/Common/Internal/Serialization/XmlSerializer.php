@@ -25,6 +25,7 @@
 namespace WindowsAzure\Common\Internal\Serialization;
 use WindowsAzure\Common\Internal\Utilities;
 use WindowsAzure\Common\Internal\Resources;
+use WindowsAzure\Common\Internal\Validate;
 
 /**
  * Short description
@@ -111,7 +112,7 @@ class XmlSerializer implements ISerializer
      * 
      * @return mixed
      */
-    private function _getInstanceAttributes($targetObject, $methodArray)
+    private static function _getInstanceAttributes($targetObject, $methodArray)
     {
         foreach ($methodArray as $method) {
             if ($method->name == 'getAttributes') {
@@ -127,11 +128,13 @@ class XmlSerializer implements ISerializer
      * 
      * @param object $targetObject The target object. 
      * @param string $rootName     The name of the root element. 
-     *
+     *https://github.com/WindowsAzure/azure-sdk-for-php/issues/420
      * @return string
      */
-    public function objectSerialize($targetObject, $rootName)
+    public static function objectSerialize($targetObject, $rootName)
     {
+        Validate::notNull($targetObject, 'targetObject');
+        Validate::isString($rootName, 'rootName');
         $xmlWriter = new \XmlWriter();
         $xmlWriter->openMemory(); 
         $xmlWriter->setIndent(true);
@@ -179,43 +182,6 @@ class XmlSerializer implements ISerializer
         return $xmlWriter->outputMemory(true);
     }
 
-    /**
-     * Unserialize an string into an object. 
-     * 
-     * @param string $xmlString a string representing an object. 
-     *
-     * @return mixed
-     */
-    public function objectUnserialize($xmlString)
-    {
-        Validate::isString($xmlString, 'xmlString');
-        $result          = array();
-        $counter         = 0;
-        $root            = new \SimpleXMLElement($xmlString);
-        $reflectionClass = new \ReflectionClass($root->getName());
-        $instance        = $reflectionClass->newInstance();
-
-        foreach ($root->children() as $child) { 
-            $setter = $reflectionClass->getMethod('set'.$child->getName());
-            if (count($child->children())==0) {
-                $setter->invoke($instance, $child);
-            } else {
-                $setter->invoke(
-                    $instance, 
-                    $this->objectUnserialize($child->children())
-                );
-            }
-
-            if (count($root) === 1) {
-                return $instance;
-            } else {
-                $result[$counter] = $instance;
-                $counter++;
-            }
-        }
-        return $result;
-    }
-    
     /**
      * Serializes given array. The array indices must be string to use them as
      * as element name.

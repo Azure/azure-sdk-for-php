@@ -23,8 +23,9 @@
  */
 
 namespace WindowsAzure\Common\Internal\Atom;
-use WindowsAzure\Common\Internal\Utilities;
 use WindowsAzure\Common\Internal\Resources;
+use WindowsAzure\Common\Internal\Utilities;
+use WindowsAzure\Common\Internal\Validate;
 
 /**
  * This link defines a reference from an entry or feed to a Web resource.
@@ -38,7 +39,7 @@ use WindowsAzure\Common\Internal\Resources;
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
 
-class AtomLink
+class AtomLink extends AtomBase
 {
     /**
      * The undefined content. 
@@ -105,8 +106,10 @@ class AtomLink
      */ 
     public function parseXml($xmlString)
     {
+        Validate::notNull($xmlString, 'xmlString');
+        Validate::isString($xmlString, 'xmlString');
         $atomLinkXml = simplexml_load_string($xmlString);
-        $attributes  = (array)$atomLinkXml->attributes();
+        $attributes  = $atomLinkXml->attributes();
 
         if (!empty($attributes['href'])) {
             $this->href = (string)$attributes['href'];
@@ -132,7 +135,12 @@ class AtomLink
             $this->length = (integer)$attributes['length'];
         }
 
-        $this->undefinedContent = (string)$atomLinkXml;
+        $undefinedContent = (string)$atomLinkXml;
+        if (empty($undefinedContent)) {
+            $this->undefinedContent = null;
+        } else {
+            $this->undefinedContent = (string)$atomLinkXml;
+        }
     }
 
     /** 
@@ -298,6 +306,7 @@ class AtomLink
      */
     public function writeXml($xmlWriter)
     {
+        Validate::notNull($xmlWriter, 'xmlWriter');
         $xmlWriter->startElement('atom:link');
         $this->writeInnerXml($xmlWriter);
         $xmlWriter->endElement();

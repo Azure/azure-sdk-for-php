@@ -294,6 +294,166 @@ class CategoryTest extends \PHPUnit_Framework_TestCase
         );
     } 
 
+    /** 
+     * @covers WindowsAzure\Common\Internal\Atom\Category::getTerm
+     * @covers WindowsAzure\Common\Internal\Atom\Category::setTerm
+     */
+    public function testGetSetTerm() {
+        // Setup
+        $expected = 'testTerm';
+        $category = new Category();
+
+        // Test
+        $category->setTerm($expected);
+        $actual = $category->getTerm();
+
+        // Assert 
+        $this->assertEquals(
+            $expected,
+            $actual
+        );
+
+    }
+
+    /** 
+     * @covers WindowsAzure\Common\Internal\Atom\Category::getScheme
+     * @covers WindowsAzure\Common\Internal\Atom\Category::setScheme
+     */
+    public function testGetSetScheme() {
+        // Setup
+        $expected = 'testScheme';
+        $category = new Category();
+
+        // Test
+        $category->setScheme($expected);
+        $actual = $category->getScheme();
+
+        // Assert 
+        $this->assertEquals(
+            $expected,
+            $actual
+        );
+
+    }
+
+    /** 
+     * @covers WindowsAzure\Common\Internal\Atom\Category::getLabel
+     * @covers WindowsAzure\Common\Internal\Atom\Category::setLabel
+     */
+    public function testGetSetLabel() {
+        // Setup
+        $expected = 'testLabel';
+        $category = new Category();
+
+        // Test
+        $category->setLabel($expected);
+        $actual = $category->getLabel();
+
+        // Assert 
+        $this->assertEquals(
+            $expected,
+            $actual
+        );
+
+    }
+
+    /** 
+     * @covers WindowsAzure\Common\Internal\Atom\Category::getUndefinedContent
+     * @covers WindowsAzure\Common\Internal\Atom\Category::setUndefinedContent
+     */
+    public function testGetSetUndefinedContent() {
+        // Setup
+        $expected = 'testUndefinedContent';
+        $category = new Category();
+
+        // Test
+        $category->setUndefinedContent($expected);
+        $actual = $category->getUndefinedContent();
+
+        // Assert 
+        $this->assertEquals(
+            $expected,
+            $actual
+        );
+
+    }
+
+    /**
+     * @covers WindowsAzure\Common\Internal\Atom\Category::parseXml
+     */
+    public function testCategoryParseXmlSuccess() {
+        // Setup
+        $expected = new Category();
+        $xml = '<category/>';
+        $actual = new Category();
+
+        // Test
+        $actual->parseXml($xml);
+
+        // Assert
+
+        $this->assertEquals(
+            $expected,
+            $actual
+        );
+
+    }
+
+    /**
+     * @covers WindowsAzure\Common\Internal\Atom\Category::parseXml
+     */
+    public function testCategoryParseXmlInvlalidParameter() {
+        // Setup
+        $actual = new Category();
+        $this->setExpectedException(get_class(new \InvalidArgumentException()));
+
+        // Test
+        $actual->parseXml(null);
+        
+        // Assert        
+    }
+
+    /**
+     * @covers WindowsAzure\Common\Internal\Atom\Category::writeXml
+     */
+    public function testCategoryWriteXmlSuccessAllProperties() {
+        // Setup
+        $category = new Category();
+        $category->setTerm('testTerm');
+        $category->setScheme('testScheme');
+        $category->setLabel('testLabel');
+        $category->setUndefinedContent('testUndefinedContent');
+        $actual = new Category();
+        $xmlWriter = new \XMLWriter();
+        $xmlWriter->openMemory();
+        $expected = '<atom:category term="testTerm" scheme="testScheme" label="testLabel">testUndefinedContent</atom:category>';
+
+        // Test
+        $category->writeXml($xmlWriter);
+        $actual = $xmlWriter->outputMemory();
+
+        // Assert
+        $this->assertEquals(
+            $expected,
+            $actual
+        );
+    }
+
+    /**
+     * @covers WindowsAzure\Common\Internal\Atom\Category::writeXml
+     */
+    public function testCategoryWriteXmlInvalidParameter() {
+        // Setup
+        $this->setExpectedException(get_class(new \InvalidArgumentException()));
+        $category = new Category();
+
+        // Test
+        $category->writeXml(null);
+
+        // Assert
+    }
+
+
 }
 
 ?>

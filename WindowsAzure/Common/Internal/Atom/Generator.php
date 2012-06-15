@@ -38,7 +38,7 @@ use WindowsAzure\Common\Internal\Resources;
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
 
-class Generator
+class Generator extends AtomBase
 {
     /**
      * The of the generator. 

@@ -23,8 +23,9 @@
  */
 
 namespace WindowsAzure\Common\Internal\Atom;
-use WindowsAzure\Common\Internal\Utilities;
 use WindowsAzure\Common\Internal\Resources;
+use WindowsAzure\Common\Internal\Utilities;
+use WindowsAzure\Common\Internal\Validate;
 
 /**
  * The category class of the ATOM standard.
@@ -38,7 +39,7 @@ use WindowsAzure\Common\Internal\Resources;
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
 
-class Category
+class Category extends AtomBase
 {
     /**
      * The term of the category. 
@@ -89,6 +90,8 @@ class Category
      */ 
     public function parseXml($xmlString)
     {
+        Validate::notNull($xmlString, 'xmlString');
+        Validate::isString($xmlString, 'xmlString');
         $categoryXml = simplexml_load_string($xmlString);
         $attributes  = $categoryXml->attributes();
         if (!empty($attributes['term'])) {
@@ -203,6 +206,7 @@ class Category
      */
     public function writeXml($xmlWriter)
     {
+        Validate::notNull($xmlWriter, 'xmlWriter');
         $xmlWriter->startElement('atom:category');
         $this->writeInnerXml($xmlWriter);
         $xmlWriter->endElement();
@@ -229,8 +233,8 @@ class Category
             $xmlWriter->WriteAttribute('label', $this->label);
         }
 
-        if (!empty($this->content)) {
-            $xmlWriter->WriteRaw($this->content);
+        if (!empty($this->undefinedContent)) {
+            $xmlWriter->WriteRaw($this->undefinedContent);
         }
 
     }

@@ -194,6 +194,30 @@ class Validate
             throw new \InvalidArgumentException(sprintf(Resources::NULL_MSG, $name));
         }
     }
+
+    /**
+     * Throws exception if the object is not of the specified class type.
+     *
+     * @param mixed $objectInstance An object that requires class type validation.
+     * @param mixed $class          The class the the object instance should be. 
+     *
+     * @throws \InvalidArgumentException
+     *
+     * @return none
+     */
+    public static function isInstanceOf($objectInstance, $class, $name)
+    {
+        if (!($objectInstance instanceof $class)) {
+            throw new \InvalidArgumentException(
+                sprintf(
+                    Resources::INSTANCE_TYPE_VALIDATION_MSG, 
+                    $name,
+                    gettype($objectInstance),
+                    gettype($class)
+                )
+            );
+        }
+    }
 }
 
 ?>
