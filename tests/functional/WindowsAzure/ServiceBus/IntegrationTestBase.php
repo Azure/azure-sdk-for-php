@@ -65,7 +65,7 @@ class IntegrationTestBase extends ServiceBusRestProxyTestBase
         $inst = new IntegrationTestBase();
         $restProxy = $inst->restProxy;
         $testAlphaExists = false;
-        $queues = $restProxy->listQueues()->getQueueInfo();
+        $queues = $restProxy->listQueues()->getQueueInfos();
         foreach($queues as $queue)  {
             $queueName = $queue->getTitle();
             if (Utilities::startsWith($queueName, 'Test') || Utilities::startsWith($queueName, 'test')) {
@@ -89,7 +89,7 @@ class IntegrationTestBase extends ServiceBusRestProxyTestBase
                 }
             }
         }
-        foreach($restProxy->listTopics()->getTopicInfo() as $topic)  {
+        foreach($restProxy->listTopics()->getTopicInfos() as $topic)  {
             $topicName = $topic->getTitle();
             if (Utilities::startsWith($topicName, 'Test') || Utilities::startsWith($topicName, 'test')) {
                 try {

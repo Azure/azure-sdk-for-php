@@ -116,7 +116,7 @@ class ServiceBusTopicTest extends ScenarioTestBase
         $options->setSkip(20);
         // TODO: https://github.com/WindowsAzure/azure-sdk-for-php/issues/479
 //        $options->setTop(2);
-        $topics = $this->restProxy->listTopics($options)->getTopicInfo();
+        $topics = $this->restProxy->listTopics($options)->getTopicInfos();
         foreach ($topics as $topic) {
             self::write('Topic name is ' . $topic->getTitle());
         }
@@ -188,7 +188,7 @@ class ServiceBusTopicTest extends ScenarioTestBase
 
         // subscriptionName4 gets two rules to enable duplicate messages
 
-        $lst = $this->restProxy->listRules($this->topicName, $this->subscriptionName4)->getRuleInfo();
+        $lst = $this->restProxy->listRules($this->topicName, $this->subscriptionName4)->getRuleInfos();
         $rule4a = $lst[0];
         $rule4a->withSqlRuleAction(
                 'SET trueRuleA=TRUE; ' .
@@ -220,7 +220,7 @@ class ServiceBusTopicTest extends ScenarioTestBase
     private function showRules($subName)
     {
         self::write('Subscription: ' . $subName);
-        $lst = $this->restProxy->listRules($this->topicName, $subName)->getRuleInfo();
+        $lst = $this->restProxy->listRules($this->topicName, $subName)->getRuleInfos();
         foreach ($lst as $item) {
             self::write('  Rule: ' . $item->getTitle());
             $filter = $item->getRuleDescription()->getFilter();
