@@ -77,7 +77,7 @@ class WrapTokenManager
      * 
      * @var array
      */
-    private static $_activeTokens;
+    private $_activeTokens;
 
     /**
      * Creates a WRAP token manager with specified parameters. 
