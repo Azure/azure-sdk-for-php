@@ -25,6 +25,7 @@
 namespace WindowsAzure\Common\Internal\Atom;
 use WindowsAzure\Common\Internal\Utilities;
 use WindowsAzure\Common\Internal\Resources;
+use WindowsAzure\Common\Internal\Validate;
 
 /**
  * This class constructs HTTP requests and receive HTTP responses for service bus.
@@ -148,6 +149,7 @@ class Entry extends AtomBase
      */
     public function parseXml($xmlString)
     {
+        Validate::notNull($xmlString, 'xmlString');
         $entryXml         = simplexml_load_string($xmlString);
         $this->attributes = (array)$entryXml->attributes();
         $entryArray       = (array)$entryXml;

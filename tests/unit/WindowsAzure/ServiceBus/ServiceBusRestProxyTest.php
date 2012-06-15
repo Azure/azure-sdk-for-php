@@ -129,7 +129,7 @@ class ServiceBusRestProxyTest extends ServiceBusRestProxyTestBase
 
         $listQueuesResult = $this->restProxy->listQueues($listQueuesOptions);
 
-        foreach ($listQueuesResult->getQueueInfo() as $queueInfo)
+        foreach ($listQueuesResult->getQueueInfos() as $queueInfo)
         {
             $this->restProxy->deleteQueue($queueInfo->getTitle());
         }
@@ -144,7 +144,7 @@ class ServiceBusRestProxyTest extends ServiceBusRestProxyTestBase
 
         $this->assertEquals(
             0,
-            count($listQueuesResult->getQueueInfo())
+            count($listQueuesResult->getQueueInfos())
         );
         
     }
@@ -373,7 +373,7 @@ class ServiceBusRestProxyTest extends ServiceBusRestProxyTestBase
         $listTopicsOptions = new ListTopicsOptions();
         $listTopicsResult = $this->restProxy->listTopics($listTopicsOptions);
 
-        foreach ($listTopicsResult->getTopicInfo() as $topicInfo)
+        foreach ($listTopicsResult->getTopicInfos() as $topicInfo)
         {
             $this->restProxy->deleteTopic($topicInfo->getTitle());
         }
@@ -393,7 +393,7 @@ class ServiceBusRestProxyTest extends ServiceBusRestProxyTestBase
 
         $this->assertEquals(
             1,
-            count($listTopicsResult->getTopicInfo())
+            count($listTopicsResult->getTopicInfos())
         );
     }
 
@@ -452,7 +452,7 @@ class ServiceBusRestProxyTest extends ServiceBusRestProxyTestBase
         $this->assertNotNull($listSubscriptionsResult);
         $this->assertEquals(
             1,
-            count($listSubscriptionsResult->getSubscriptionInfo())
+            count($listSubscriptionsResult->getSubscriptionInfos())
         );
     }
 
@@ -507,7 +507,7 @@ class ServiceBusRestProxyTest extends ServiceBusRestProxyTestBase
             $topicName,
             $listSubscriptionsOptions
         );
-        $subscriptionInfo = $listSubscriptionsResult->getSubscriptionInfo();
+        $subscriptionInfo = $listSubscriptionsResult->getSubscriptionInfos();
 
         // Assert
         $this->assertNotNull($listSubscriptionsResult);
@@ -546,7 +546,7 @@ class ServiceBusRestProxyTest extends ServiceBusRestProxyTestBase
             $listSubscriptionOptions
         );
 
-        $subscriptionInfo = $listSubscriptionsResult->getSubscriptionInfo();
+        $subscriptionInfo = $listSubscriptionsResult->getSubscriptionInfos();
 
         $this->restProxy->deleteSubscription($topicName, $secondSubscriptionName);
         $this->restProxy->deleteSubscription($topicName, $subscriptionName);
@@ -556,7 +556,7 @@ class ServiceBusRestProxyTest extends ServiceBusRestProxyTestBase
             $listSubscriptionOptions
         );
 
-        $emptySubscriptionInfo = $emptyListSubscriptionsResult->getSubscriptionInfo();
+        $emptySubscriptionInfo = $emptyListSubscriptionsResult->getSubscriptionInfos();
 
 
         // Assert
@@ -705,7 +705,7 @@ class ServiceBusRestProxyTest extends ServiceBusRestProxyTestBase
 
         // Assert
         $this->assertNotNull($listRulesResult);
-        $this->assertEquals(3, count($listRulesResult->getRuleInfo()));
+        $this->assertEquals(3, count($listRulesResult->getRuleInfos()));
         
     }
 
@@ -763,7 +763,7 @@ class ServiceBusRestProxyTest extends ServiceBusRestProxyTestBase
         $this->restProxy->deleteRule($topicName, $subscriptionName, Resources::DEFAULT_RULE_NAME); 
 
         $listRulesResult = $this->restProxy->listRules($topicName, $subscriptionName, $listRulesOptions);
-        $ruleInfo = $listRulesResult->getRuleInfo();
+        $ruleInfo = $listRulesResult->getRuleInfos();
 
         // Assert
         $this->assertNotNull($ruleInfo);
@@ -797,7 +797,7 @@ class ServiceBusRestProxyTest extends ServiceBusRestProxyTestBase
 
         // Test
         $listRulesResult = $this->restProxy->listRules($topicName, $subscriptionName);
-        $ruleInfo = $listRulesResult->getRuleInfo();
+        $ruleInfo = $listRulesResult->getRuleInfos();
         $ruleInfoInstance = $ruleInfo[1];
         $actualFilter = $ruleInfoInstance->getFilter();
         $actual = $actualFilter->getSqlExpression();

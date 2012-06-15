@@ -341,17 +341,17 @@ class BrokerPropertiesTest extends \PHPUnit_Framework_TestCase
 
 
     /** 
-     * @covers WindowsAzure\ServiceBus\Models\BrokerProperties::getScheduleEnqueuTimeUtc
-     * @covers WindowsAzure\ServiceBus\Models\BrokerProperties::setScheduleEnqueuTimeUtc
+     * @covers WindowsAzure\ServiceBus\Models\BrokerProperties::getScheduledEnqueueTimeUtc
+     * @covers WindowsAzure\ServiceBus\Models\BrokerProperties::setScheduledEnqueueTimeUtc
      */
-    public function testGetSetScheduleEnqueuTimeUtc() {
+    public function testGetSetScheduledEnqueueTimeUtc() {
         // Setup
-        $expected = 'testScheduleEnqueuTimeUtc';
+        $expected = 'testScheduledEnqueueTimeUtc';
         $brokerProperties = new BrokerProperties();
 
         // Test
-        $brokerProperties->setScheduleEnqueuTimeUtc($expected);
-        $actual = $brokerProperties->getScheduleEnqueuTimeUtc();
+        $brokerProperties->setScheduledEnqueueTimeUtc($expected);
+        $actual = $brokerProperties->getScheduledEnqueueTimeUtc();
 
         // Assert 
         $this->assertEquals(

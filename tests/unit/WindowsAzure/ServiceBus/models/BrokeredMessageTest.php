@@ -45,9 +45,9 @@ class BrokeredMessageTest extends \PHPUnit_Framework_TestCase
     public function testBrokeredMessageConstructor()
     {
         // Setup
-        
+        $message = 'testMessage';        
         // Test
-        $brokeredMessage = new Brokeredmessage();
+        $brokeredMessage = new Brokeredmessage($message);
         
         // Assert
         $this->assertNotNull($brokeredMessage);
@@ -56,14 +56,14 @@ class BrokeredMessageTest extends \PHPUnit_Framework_TestCase
     /**
      * @covers WindowsAzure\ServiceBus\Models\BrokeredMessage::getBrokerProperties
      */
-    public function testBrokeredMessageConstructorWithBrokerProperties()
+    public function testBrokeredMessageConstructorWithMessage()
     {
         // Setup
-        $expected = new BrokerProperties();
+        $expected = 'testMessage';
         
         // Test
         $brokeredMessage = new BrokeredMessage($expected);
-        $actual = $brokeredMessage->getBrokerProperties();
+        $actual = $brokeredMessage->getBody();
         
         // Assert
         $this->assertEquals(

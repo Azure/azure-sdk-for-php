@@ -69,6 +69,7 @@ class Resources
     const INVALID_CONFIG_MSG = 'Config object must be of type Configuration';
     const INVALID_BUILDER_MSG = 'Builder object must implement IServicesBuilder';
     const INVALID_ACH_MSG = 'The provided access condition header is invalid';
+    const INVALID_RECEIVE_MODE_MSG = 'The receive message option is in neither RECEIVE_AND_DELETE nor PEEK_LOCK mode.';
     const MISSING_CONFIG_SETTING_KEY_MSG = "Missing configuration setting %s which is required to create %sRestProxy.";
     const MISSING_CONFIG_SETTING_VALUE_MSG = "The value of configuration setting %s can't be null or empty.";
     const INSTANCE_TYPE_VALIDATION_MSG = 'The type of %s is %s but is expected to be %s.';

@@ -46,7 +46,7 @@ class ListRulesResult extends Feed
      * 
      * @var array
      */
-    private $_ruleInfo;
+    private $_ruleInfos;
 
     /** 
      * Populates the properties with the response from the list rules request.
@@ -59,12 +59,12 @@ class ListRulesResult extends Feed
     {
         parent::parseXml($response);
         $listRulesResultXml = new \SimpleXMLElement($response);
-        $this->_ruleInfo    = array();
+        $this->_ruleInfos   = array();
 
         foreach ($listRulesResultXml->entry as $entry) {
             $ruleInfo = new RuleInfo();
             $ruleInfo->parseXml($entry->asXml());
-            $this->_ruleInfo[] = $ruleInfo;
+            $this->_ruleInfos[] = $ruleInfo;
         }
     }
 
@@ -80,21 +80,21 @@ class ListRulesResult extends Feed
      * 
      * @return array
      */
-    public function getRuleInfo()
+    public function getRuleInfos()
     {
-        return $this->_ruleInfo;
+        return $this->_ruleInfos;
     }
 
     /** 
      * Sets the information of the rule. 
      * 
-     * @param array $ruleInfo The information of the rule. 
+     * @param array $ruleInfos The information of the rule. 
      * 
      * @return none
      */ 
-    public function setRuleInfo($ruleInfo)
+    public function setRuleInfos($ruleInfos)
     {
-        $this->_ruleInfo = $ruleInfo;
+        $this->_ruleInfos = $ruleInfos;
     }
 
 }

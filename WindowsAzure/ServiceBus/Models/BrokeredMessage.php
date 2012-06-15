@@ -25,6 +25,7 @@
 namespace WindowsAzure\ServiceBus\Models;
 use WindowsAzure\Common\Internal\Resources;
 use WindowsAzure\Common\Internal\Utilities;
+use WindowsAzure\Common\Internal\Validate;
 use WindowsAzure\ServiceBus\Models\BrokerProperties;
 
 /**
@@ -77,17 +78,14 @@ class BrokeredMessage
     /**
      * Creates a brokered message with specified broker properties. 
      *  
-     * @param BrokerProperties $brokerProperties The broker properties.
+     * @param string $messageBody The body of the message. 
      *
      */
-    public function __construct($brokerProperties = null)
+    public function __construct($body = Resources::EMPTY_STRING)
     {
-        if (empty($brokerProperties)) {
-            $this->_brokerProperties = new BrokerProperties();
-        } else {
-            $this->_brokerProperties = $brokerProperties;
-        }
-
+        Validate::isString($body, 'messageBody');
+        $this->_body             = $body;
+        $this->_brokerProperties = new BrokerProperties();
         $this->_customProperties = array();
     }
 
