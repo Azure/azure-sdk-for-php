@@ -15,14 +15,14 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   Tests\Unit\WindowsAzure
+ * @package   Tests\Unit\WindowsAzure\Common\Internal
  * @author    Azure PHP SDK <azurephpsdk@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
- * @link      http://pear.php.net/package/azure-sdk-for-php
+ * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
 
-namespace Tests\Unit\WindowsAzure;
+namespace Tests\Unit\WindowsAzure\Common\Internal;
 use WindowsAzure\Common\Internal\Validate;
 use WindowsAzure\Common\Internal\InvalidArgumentTypeException;
 use WindowsAzure\Common\Internal\Resources;
@@ -32,12 +32,12 @@ use WindowsAzure\Common\Internal\Utilities;
  * Unit tests for class ValidateTest
  *
  * @category  Microsoft
- * @package   Tests\Unit\WindowsAzure
+ * @package   Tests\Unit\WindowsAzure\Common\Internal
  * @author    Azure PHP SDK <azurephpsdk@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @version   Release: @package_version@
- * @link      http://pear.php.net/package/azure-sdk-for-php
+ * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
 class ValidateTest extends \PHPUnit_Framework_TestCase
 {

@@ -1,0 +1,29 @@
+{
+    "name": "microsoft/windowsazure",
+    "description": "This project provides a set of PHP client libraries that make it easy to access Windows Azure tables, blobs, queues, service runtime and service management APIs.",
+    "keywords": [ "php", "azure", "sdk" ],
+    "license": "Apache-2.0",
+    "authors": [
+        {
+            "name": "Azure PHP SDK",
+            "email": "azurephpsdk@microsoft.com"
+        }
+    ],
+    "require": {
+        "pear-pear/HTTP_Request2":   "*",
+        "pear-pear/Mail_Mime":       "*",
+        "pear-pear/Mail_mimeDecode": "*"
+    },
+    
+    "repositories": [
+        {
+            "type": "pear",
+            "url": "http://pear.php.net"
+        }
+    ],
+    
+    "autoload": {
+        "psr-0": { "WindowsAzure\\": "" }
+    }
+    
+}
