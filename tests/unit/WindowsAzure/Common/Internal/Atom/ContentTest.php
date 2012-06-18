@@ -104,10 +104,10 @@ class ContentTest extends \PHPUnit_Framework_TestCase
     /**
      * @covers WindowsAzure\Common\Internal\Atom\Content::writeXml
      */
-    public function testToXml()
+    public function testWriteXml()
     {
         // Setup
-        $expected = '<atom:content type="testType">testText</atom:content>'; 
+        $expected = '<atom:content type="testType" xmlns:atom="http://www.w3.org/2005/Atom">testText</atom:content>'; 
         $expectedContentType = 'testType';
         $expectedText = 'testText';
         $content = new Content();
@@ -126,6 +126,79 @@ class ContentTest extends \PHPUnit_Framework_TestCase
             $actual
         ); 
 
+    }
+
+    /**
+     * @covers WindowsAzure\Common\Internal\Atom\Content::parseXml
+     */
+    public function testParseXmlSuccess()
+    {
+        // Setup
+        $expected = new Content();
+        $xml = '<content key="value"/>';
+        
+        // Test
+        $actual = new Content();
+        $actual->parseXml($xml);
+
+        // Assert
+        $this->assertEquals(
+            $expected,
+            $actual
+        );
+        
+    }
+
+    /**
+     * @covers WindowsAzure\Common\Internal\Atom\Content::parseXml
+     */
+    public function testParseXmlInvalidParameter()
+    {
+        // Setup 
+        $this->setExpectedException(get_class(new \InvalidArgumentException()));
+        $content = new Content();
+
+        // Test
+        $content->parseXml(null);
+
+    }
+
+    /**
+     * @covers WindowsAzure\Common\Internal\Atom\Content::parseXml
+     */
+    public function testWriteXmlSuccess()
+    {
+        // Setup
+        $expected = '<atom:content xmlns:atom="http://www.w3.org/2005/Atom"></atom:content>';
+        $content = new Content();
+
+        // Test
+        $xmlWriter = new \XMLWriter();
+        $xmlWriter->openMemory();
+        $content->writeXml($xmlWriter); 
+        $actual = $xmlWriter->outputMemory();
+
+        // Assert
+        $this->assertEquals(
+            $expected,
+            $actual
+        );
+        
+    }
+
+    /**
+     * @covers WindowsAzure\Common\Internal\Atom\Content::writeXml
+     */
+    public function testWriteXmlFailed()
+    {
+        // Setup 
+        $this->setExpectedException(get_class(new \InvalidArgumentException()));
+        $expected = new Content(); 
+
+        // Test
+        $expected->writeXml(null);
+
+        // Assert
     }
 
 }

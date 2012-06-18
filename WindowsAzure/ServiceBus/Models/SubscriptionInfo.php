@@ -95,9 +95,11 @@ class SubscriptionInfo extends Entry
     /**
      * Writes XML based on the subscription information. 
      * 
+     * @param XMLWriter $xmlWriter The XML writer. 
+     * 
      * @return string
      */
-    public function writeXml()
+    public function writeXml($xmlWriter)
     {
         if (is_null($this->_subscriptionDescription)) {
             $this->content = null;    
@@ -110,7 +112,7 @@ class SubscriptionInfo extends Entry
                 )
             );
         }
-        return parent::writeXml();
+        return parent::writeXml($xmlWriter);
     }
 
     /**

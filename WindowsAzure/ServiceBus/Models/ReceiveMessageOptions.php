@@ -50,14 +50,14 @@ class ReceiveMessageOptions
      * 
      * @var integer
      */
-    private $_receiveMode = ReceiveMode::RECEIVEANDDELETE;
+    private $_receiveMode;
 
     /** 
      * Creates a receive message option instance with default parameters.
      */
     public function __construct()
     {
-        $this->_receiveMode = ReceiveMode::RECEIVEANDDELETE;
+        $this->_receiveMode = ReceiveMode::RECEIVE_AND_DELETE;
     }
     /**
      * Gets the timeout of the receive message request. 
@@ -110,7 +110,7 @@ class ReceiveMessageOptions
      */
     public function getIsReceiveAndDelete()
     {
-        return ($this->_receiveMode === ReceiveMode::RECEIVEANDDELETE);
+        return ($this->_receiveMode === ReceiveMode::RECEIVE_AND_DELETE);
     }
 
     /**
@@ -120,7 +120,7 @@ class ReceiveMessageOptions
      */
     public function setReceiveAndDelete()
     {   
-        $this->_receiveMode = ReceiveMode::RECEIVEANDDELETE;
+        $this->_receiveMode = ReceiveMode::RECEIVE_AND_DELETE;
     }
     
     /**
@@ -131,7 +131,7 @@ class ReceiveMessageOptions
      */
     public function getIsPeekLock()
     {
-        return ($this->_receiveMode === ReceiveMode::PEEKLOCK);
+        return ($this->_receiveMode === ReceiveMode::PEEK_LOCK);
     }    
 
     /**
@@ -141,7 +141,7 @@ class ReceiveMessageOptions
      */
     public function setPeekLock()
     {   
-        $this->_receiveMode = ReceiveMode::PEEKLOCK;
+        $this->_receiveMode = ReceiveMode::PEEK_LOCK;
     }
 }
 

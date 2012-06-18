@@ -25,6 +25,7 @@
 namespace WindowsAzure\Common\Internal\Atom;
 use WindowsAzure\Common\Internal\Utilities;
 use WindowsAzure\Common\Internal\Resources;
+use WindowsAzure\Common\Internal\Validate;
 
 /**
  * This class constructs HTTP requests and receive HTTP responses for service bus.
@@ -38,15 +39,8 @@ use WindowsAzure\Common\Internal\Resources;
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
 
-class Entry
+class Entry extends AtomBase
 {
-    /**
-     * The attributes of the entry 
-     *
-     * @var array
-     */
-    protected $attributes;
-
     /**
      * The author of the entry.
      *
@@ -127,7 +121,7 @@ class Entry
     /**
      * Is the entry updated.
      *
-     * @var boolean
+     * @var \DateTime
      */
     protected $updated;
 
@@ -155,20 +149,17 @@ class Entry
      */
     public function parseXml($xmlString)
     {
+        Validate::notNull($xmlString, 'xmlString');
         $entryXml         = simplexml_load_string($xmlString);
-        $this->attributes = $entryXml->attributes();
+        $this->attributes = (array)$entryXml->attributes();
         $entryArray       = (array)$entryXml;
 
-        if (array_key_exists('author', $entryArray)) {
-            $author = new Person();
-            $author->parseXml($entryArray['author']->asXML());
-            $this->author = $author;
+        if (array_key_exists(Resources::AUTHOR, $entryArray)) {
+            $this->author = $this->processAuthorNode($entryArray);
         }
 
-        if (array_key_exists('category', $entryArray)) {
-            $category = new Category();
-            $category->parseXml($entryArray['category']->asXML());
-            $this->category = $category;
+        if (array_key_exists(Resources::CATEGORY, $entryArray)) {
+            $this->category = $this->processCategoryNode($entryArray);
         }
 
         if (array_key_exists('content', $entryArray)) {
@@ -177,20 +168,16 @@ class Entry
             $this->content = $content;
         }
 
-        if (array_key_exists('contributor', $entryArray)) {
-            $contributor = new Person();
-            $contributor->parseXml($entryArray['contributor']->asXML());
-            $this->contributor = $contributor;
+        if (array_key_exists(Resources::CONTRIBUTOR, $entryArray)) {
+            $this->contributor = $this->processContributorNode($entryArray);
         }
 
         if (array_key_exists('id', $entryArray)) {
             $this->id = (string)$entryArray['id'];
         }
 
-        if (array_key_exists('link', $entryArray)) {
-            $link = new AtomLink();
-            $link->parseXml($entryArray['link']->asXML());
-            $this->link = $link;
+        if (array_key_exists(Resources::LINK, $entryArray)) {
+            $this->link = $this->processLinkNode($entryArray);
         }
 
         if (array_key_exists('published', $entryArray)) {
@@ -212,56 +199,12 @@ class Entry
         }
 
         if (array_key_exists('updated', $entryArray)) {
-            $this->updated = $entryArray['updated'];
+            $this->updated = \DateTime::createFromFormat(
+                \DateTime::ATOM,
+                (string)$entryArray['updated']
+            );
         }
          
-    }
-
-    /**
-     * Gets the attributes. 
-     * 
-     * @return array
-     */
-    public function getAttributes()
-    {   
-        return $this->attributes;
-    }
-
-    /**
-     * Sets the attributes. 
-     * 
-     * @param array $attributes The attributes of the entry. 
-     *
-     * @return none
-     */
-    public function setAttributes($attributes)
-    {
-        $this->attributes = $attributes;
-    }
-
-    /**
-     * Sets the attribute of the entry. 
-     * 
-     * @param string $attributeKey   The key of the attribute. 
-     * @param mixed  $attributeValue The value of the attribute. 
-     *
-     * @return none 
-     */
-    public function setAttribute($attributeKey, $attributeValue)
-    {
-        $this->attributes[$attributeKey] = $attributeValue;
-    }
-
-    /**
-     * Gets the attribute of the entry. 
-     * 
-     * @param string $attributeKey The key of the attribute. 
-     * 
-     * @return mixed
-     */
-    public function getAttribute($attributeKey)
-    {
-        return $this->attributes[$attributeKey];
     }
 
     /**
@@ -377,7 +320,7 @@ class Entry
     /**     
      * Gets the link of the entry.
      * 
-     * return string 
+     * @return string 
      */
     public function getLink()
     {
@@ -509,7 +452,7 @@ class Entry
     /**
      * Gets updated. 
      *  
-     * return boolean
+     * @return \DateTime
      */
     public function getUpdated()
     {
@@ -519,7 +462,7 @@ class Entry
     /**  
      * Sets updated
      * 
-     * @param boolean $updated updated.
+     * @param \DateTime $updated updated.
      * 
      * @return none
      */
@@ -559,7 +502,12 @@ class Entry
      */
     public function writeXml($xmlWriter)
     {
-        $xmlWriter->startElement('atom:entry');
+        Validate::notNull($xmlWriter, 'xmlWriter');
+        $xmlWriter->startElementNS(
+            'atom', 
+            Resources::ENTRY,
+            Resources::ATOM_NAMESPACE
+        );
         $this->writeInnerXml($xmlWriter);
         $xmlWriter->endElement();
     }
@@ -585,26 +533,19 @@ class Entry
         }
          
         if (!is_null($this->author)) {
-            $xmlWriter->startElement('atom:author');
-            $this->author->writeInnerXml($xmlWriter);
-            $xmlWriter->endElement();
+            $this->writeArrayItem(
+                $xmlWriter,
+                $this->author,
+                Resources::AUTHOR
+            );
         } 
 
         if (!is_null($this->category)) {
-            if (is_array($this->category)) {
-                foreach (
-                    $this->category 
-                    as $category
-                ) {
-                    $xmlWriter->startElement('atom:category');
-                    $category->writeInnerXml($xmlWriter);
-                    $xmlWriter->endElement();
-                }
-            } else {
-                $xmlWriter->startElement('atom:category');
-                $category->writeInnerXml($xmlWriter);
-                $xmlWriter->endElement();
-            }
+            $this->writeArrayItem(
+                $xmlWriter,
+                $this->category,
+                Resources::CATEGORY
+            );
         }
 
         if (!is_null($this->content)) {
@@ -612,49 +553,82 @@ class Entry
         }
 
         if (!is_null($this->contributor)) {
-            if (is_array($this->contributor)) {
-                foreach ($this->contributor as $contributor) {
-                    $xmlWriter->startElement('atom:contributor');
-                    $contributor->writeInnerXml($xmlWriter);
-                    $xmlWriter->endElement();
-                }
-            } else {
-                $xmlWriter->startElement('atom:contributor');
-                $contributor->writeInnerXml($xmlWriter);
-                $xmlWriter->endElement();
-            } 
+            $this->writeArrayItem(
+                $xmlWriter,
+                $this->contributor,
+                Resources::CONTRIBUTOR
+            );
         }
 
         if (!is_null($this->id)) {
-            $xmlWriter->writeElement('atom:id', $this->id);
+            $xmlWriter->writeElementNS(
+                'atom',
+                'id', 
+                Resources::ATOM_NAMESPACE,
+                $this->id
+            );
         }
 
         if (!is_null($this->link)) {
-            $xmlWriter->writeElement('atom:link', $this->link);
+            $this->writeArrayItem(
+                $xmlWriter,
+                $this->link,
+                Resources::LINK
+            );
         }
 
         if (!is_null($this->published)) {
-            $xmlWriter->writeElement('atom:published', $this->published);
+            $xmlWriter->writeElementNS(
+                'atom',
+                'published', 
+                Resources::ATOM_NAMESPACE,
+                $this->published
+            );
         }
 
         if (!is_null($this->rights)) {
-            $xmlWriter->writeElement('atom:rights', $this->rights);
+            $xmlWriter->writeElementNS(
+                'atom',
+                'rights', 
+                Resources::ATOM_NAMESPACE,
+                $this->rights
+            );
         }
 
         if (!is_null($this->source)) {
-            $xmlWriter->writeElement('atom:source', $this->source);
+            $xmlWriter->writeElementNS(
+                'atom',
+                'source', 
+                Resources::ATOM_NAMESPACE,
+                $this->source
+            );
         }
 
         if (!is_null($this->summary)) {
-            $xmlWriter->writeElement('atom:summary', $this->summary);
+            $xmlWriter->writeElementNS(
+                'atom',
+                'summary', 
+                Resources::ATOM_NAMESPACE,
+                $this->summary
+            );
         }
         
         if (!is_null($this->title)) {
-            $xmlWriter->writeElement('atom:title', $this->title);
+            $xmlWriter->writeElementNS(
+                'atom',
+                'title', 
+                Resources::ATOM_NAMESPACE,
+                $this->title
+            );
         }
 
         if (!is_null($this->updated)) {
-            $xmlWriter->writeElement('atom:updated', $this->updated);
+            $xmlWriter->writeElementNS(
+                'atom',
+                'updated', 
+                Resources::ATOM_NAMESPACE,
+                $this->updated->format(\DateTime::ATOM)
+            );
         }
     }
 }

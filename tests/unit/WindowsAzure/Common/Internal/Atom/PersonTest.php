@@ -52,6 +52,69 @@ class PersonTest extends \PHPUnit_Framework_TestCase
         $this->assertNotNull($feed);
     }
 
+    /** 
+     * @covers WindowsAzure\Common\Internal\Atom\Person::getName
+     * @covers WindowsAzure\Common\Internal\Atom\Person::setName
+     */
+    public function testGetSetName() {
+        // Setup
+        $expected = 'testName';
+        $person = new Person();
+
+        // Test
+        $person->setName($expected);
+        $actual = $person->getName();
+
+        // Assert 
+        $this->assertEquals(
+            $expected,
+            $actual
+        );
+
+    }
+
+    /** 
+     * @covers WindowsAzure\Common\Internal\Atom\Person::getUri
+     * @covers WindowsAzure\Common\Internal\Atom\Person::setUri
+     */
+    public function testGetSetUri() {
+        // Setup
+        $expected = 'testUri';
+        $person = new Person();
+
+        // Test
+        $person->setUri($expected);
+        $actual = $person->getUri();
+
+        // Assert 
+        $this->assertEquals(
+            $expected,
+            $actual
+        );
+
+    }
+
+    /** 
+     * @covers WindowsAzure\Common\Internal\Atom\Person::getEmail
+     * @covers WindowsAzure\Common\Internal\Atom\Person::setEmail
+     */
+    public function testGetSetEmail() {
+        // Setup
+        $expected = 'testEmail';
+        $person = new Person();
+
+        // Test
+        $person->setEmail($expected);
+        $actual = $person->getEmail();
+
+        // Assert 
+        $this->assertEquals(
+            $expected,
+            $actual
+        );
+
+    }
+
 }
 
 ?>

@@ -123,6 +123,68 @@ class GeneratorTest extends \PHPUnit_Framework_TestCase
         );
     }
 
+    /** 
+     * @covers WindowsAzure\Common\Internal\Atom\Generator::getText
+     * @covers WindowsAzure\Common\Internal\Atom\Generator::setText
+     */
+    public function testGetSetText() {
+        // Setup
+        $expected = 'testText';
+        $generator = new Generator();
+
+        // Test
+        $generator->setText($expected);
+        $actual = $generator->getText();
+
+        // Assert 
+        $this->assertEquals(
+            $expected,
+            $actual
+        );
+
+    }
+
+    /** 
+     * @covers WindowsAzure\Common\Internal\Atom\Generator::getUri
+     * @covers WindowsAzure\Common\Internal\Atom\Generator::setUri
+     */
+    public function testGetSetUri() {
+        // Setup
+        $expected = 'testUri';
+        $generator = new Generator();
+
+        // Test
+        $generator->setUri($expected);
+        $actual = $generator->getUri();
+
+        // Assert 
+        $this->assertEquals(
+            $expected,
+            $actual
+        );
+
+    }
+
+    /** 
+     * @covers WindowsAzure\Common\Internal\Atom\Generator::getVersion
+     * @covers WindowsAzure\Common\Internal\Atom\Generator::setVersion
+     */
+    public function testGetSetVersion() {
+        // Setup
+        $expected = 'testVersion';
+        $generator = new Generator();
+
+        // Test
+        $generator->setVersion($expected);
+        $actual = $generator->getVersion();
+
+        // Assert 
+        $this->assertEquals(
+            $expected,
+            $actual
+        );
+
+    }
 }
 
 ?>

@@ -45,7 +45,7 @@ class ListQueuesResult extends Feed
      *
      * @var array
      */
-    private $_queueInfo;
+    private $_queueInfos;
 
     /** 
      * Populates the properties with the response from the list queues request.
@@ -58,11 +58,11 @@ class ListQueuesResult extends Feed
     {
         parent::parseXml($response);
         $listQueuesResultXml = new \SimpleXMLElement($response);
-        $this->_queueInfo    = array();
+        $this->_queueInfos   = array();
         foreach ($listQueuesResultXml->entry as $entry) {
             $queueInfo = new QueueInfo();
             $queueInfo->parseXml($entry->asXml());
-            $this->_queueInfo[] = $queueInfo;
+            $this->_queueInfos[] = $queueInfo;
         }
     }
 
@@ -78,21 +78,21 @@ class ListQueuesResult extends Feed
      * 
      * @return array
      */
-    public function getQueueInfo()
+    public function getQueueInfos()
     {
-        return $this->_queueInfo;
+        return $this->_queueInfos;
     }
 
     /**
      * Sets the information of the queue. 
      * 
-     * @param array $queueInfo The information of the queue. 
+     * @param array $queueInfos The information of the queue. 
      * 
      * @return none
      */
-    public function setQueueInfo($queueInfo)
+    public function setQueueInfos($queueInfos)
     {
-        $this->_queueInfo = $queueInfo;
+        $this->_queueInfos = $queueInfos;
     }
 
 }

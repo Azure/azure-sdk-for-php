@@ -94,9 +94,11 @@ class RuleInfo extends Entry
     /**
      * Writes an XML string representing the rule info instance. 
      * 
+     * @param XMLWriter $xmlWriter The XML writer. 
+     * 
      * @return string
      */
-    public function writeXml()
+    public function writeXml($xmlWriter)
     {
         if (is_null($this->_ruleDescription)) {
             $this->content = null;    
@@ -109,7 +111,7 @@ class RuleInfo extends Entry
             );
         }
 
-        return parent::writeXml();
+        return parent::writeXml($xmlWriter);
     }
 
     /**
