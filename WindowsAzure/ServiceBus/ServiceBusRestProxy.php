@@ -209,39 +209,43 @@ class ServiceBusRestProxy extends ServiceRestProxy implements IServiceBus
         }
 
         $response         = $this->sendContext($httpCallContext);
-        $responseHeaders  = $response->getHeader(); 
-        $brokerProperties = new BrokerProperties();
+        if ($response->getStatus() === Resources::STATUS_NO_CONTENT) {
+            $brokeredMessage = null;
+        } else {
+            $responseHeaders  = $response->getHeader(); 
+            $brokerProperties = new BrokerProperties();
 
-        if (array_key_exists('brokerproperties', $responseHeaders)) {
-            $brokerProperties = BrokerProperties::create(
-                $responseHeaders['brokerproperties']
-            );
-        }
+            if (array_key_exists('brokerproperties', $responseHeaders)) {
+                $brokerProperties = BrokerProperties::create(
+                    $responseHeaders['brokerproperties']
+                );
+            }
 
-        if (array_key_exists('location', $responseHeaders)) {
-            $brokerProperties->setLockLocation($responseHeaders['location']);
-        }
+            if (array_key_exists('location', $responseHeaders)) {
+                $brokerProperties->setLockLocation($responseHeaders['location']);
+            }
 
-        $brokeredMessage = new BrokeredMessage();
-        $brokeredMessage->setBrokerProperties($brokerProperties);
+            $brokeredMessage = new BrokeredMessage();
+            $brokeredMessage->setBrokerProperties($brokerProperties);
         
-        if (array_key_exists(Resources::CONTENT_TYPE, $responseHeaders)) {
-            $brokeredMessage->setContentType(
-                $responseHeaders[Resources::CONTENT_TYPE]
-            );
-        }
+            if (array_key_exists(Resources::CONTENT_TYPE, $responseHeaders)) {
+                $brokeredMessage->setContentType(
+                    $responseHeaders[Resources::CONTENT_TYPE]
+                );
+            }
 
-        if (array_key_exists('Date', $responseHeaders)) {
-            $brokeredMessage->setDate($responseHeaders['Date']);
-        }
+            if (array_key_exists('Date', $responseHeaders)) {
+                $brokeredMessage->setDate($responseHeaders['Date']);
+            }
 
-        $brokeredMessage->setBody($response->getBody());
+            $brokeredMessage->setBody($response->getBody());
 
-        foreach (array_keys($responseHeaders) as $headerKey) {
-            $brokeredMessage->setProperty(
-                $headerKey, 
-                $responseHeaders[$headerKey]
-            );
+            foreach (array_keys($responseHeaders) as $headerKey) {
+                $brokeredMessage->setProperty(
+                    $headerKey, 
+                    $responseHeaders[$headerKey]
+                );
+            }
         }
 
         return $brokeredMessage; 

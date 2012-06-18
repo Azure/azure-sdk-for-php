@@ -52,18 +52,19 @@ interface IServiceBus extends FilterableService
     /**
      * Sends a queue message. 
      * 
-     * @param string           $path            The path to send message.
+     * @param string           $queueName       The name of the queue to send 
+     * message.
      * @param \BrokeredMessage $brokeredMessage The brokered message. 
      *
      * @throws Exception 
      * @return none
      */
-    public function sendQueueMessage($path, $brokeredMessage);
+    public function sendQueueMessage($queueName, $brokeredMessage);
     
     /**
      * Receives a queue message. 
      * 
-     * @param string                  $queuePath              The path to the
+     * @param string                  $queueName              The name of the
      * queue. 
      * @param \ReceivedMessageOptions $receivedMessageOptions The options to 
      * receive the message. 
@@ -71,7 +72,7 @@ interface IServiceBus extends FilterableService
      * @throws Exception 
      * @return none
      */
-    public function receiveQueueMessage($queuePath, $receivedMessageOptions);
+    public function receiveQueueMessage($queueName, $receivedMessageOptions);
 
     /**
      * Receives a message. 

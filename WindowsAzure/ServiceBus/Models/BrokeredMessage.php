@@ -83,7 +83,7 @@ class BrokeredMessage
      */
     public function __construct($body = Resources::EMPTY_STRING)
     {
-        Validate::isString($body, 'messageBody');
+        Validate::isString($body, 'body');
         $this->_body             = $body;
         $this->_brokerProperties = new BrokerProperties();
         $this->_customProperties = array();
