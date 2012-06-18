@@ -121,7 +121,7 @@ class Entry extends AtomBase
     /**
      * Is the entry updated.
      *
-     * @var boolean
+     * @var \DateTime
      */
     protected $updated;
 
@@ -154,11 +154,11 @@ class Entry extends AtomBase
         $this->attributes = (array)$entryXml->attributes();
         $entryArray       = (array)$entryXml;
 
-        if (array_key_exists('author', $entryArray)) {
+        if (array_key_exists(Resources::AUTHOR, $entryArray)) {
             $this->author = $this->processAuthorNode($entryArray);
         }
 
-        if (array_key_exists('category', $entryArray)) {
+        if (array_key_exists(Resources::CATEGORY, $entryArray)) {
             $this->category = $this->processCategoryNode($entryArray);
         }
 
@@ -168,7 +168,7 @@ class Entry extends AtomBase
             $this->content = $content;
         }
 
-        if (array_key_exists('contributor', $entryArray)) {
+        if (array_key_exists(Resources::CONTRIBUTOR, $entryArray)) {
             $this->contributor = $this->processContributorNode($entryArray);
         }
 
@@ -176,7 +176,7 @@ class Entry extends AtomBase
             $this->id = (string)$entryArray['id'];
         }
 
-        if (array_key_exists('link', $entryArray)) {
+        if (array_key_exists(Resources::LINK, $entryArray)) {
             $this->link = $this->processLinkNode($entryArray);
         }
 
@@ -320,7 +320,7 @@ class Entry extends AtomBase
     /**     
      * Gets the link of the entry.
      * 
-     * return string 
+     * @return string 
      */
     public function getLink()
     {
@@ -452,7 +452,7 @@ class Entry extends AtomBase
     /**
      * Gets updated. 
      *  
-     * return boolean
+     * @return \DateTime
      */
     public function getUpdated()
     {
@@ -462,7 +462,7 @@ class Entry extends AtomBase
     /**  
      * Sets updated
      * 
-     * @param boolean $updated updated.
+     * @param \DateTime $updated updated.
      * 
      * @return none
      */
@@ -502,7 +502,12 @@ class Entry extends AtomBase
      */
     public function writeXml($xmlWriter)
     {
-        $xmlWriter->startElement('atom:entry');
+        Validate::notNull($xmlWriter, 'xmlWriter');
+        $xmlWriter->startElementNS(
+            'atom', 
+            Resources::ENTRY,
+            Resources::ATOM_NAMESPACE
+        );
         $this->writeInnerXml($xmlWriter);
         $xmlWriter->endElement();
     }
@@ -528,26 +533,19 @@ class Entry extends AtomBase
         }
          
         if (!is_null($this->author)) {
-            $xmlWriter->startElement('atom:author');
-            $this->author->writeInnerXml($xmlWriter);
-            $xmlWriter->endElement();
+            $this->writeArrayItem(
+                $xmlWriter,
+                $this->author,
+                Resources::AUTHOR
+            );
         } 
 
         if (!is_null($this->category)) {
-            if (is_array($this->category)) {
-                foreach (
-                    $this->category 
-                    as $category
-                ) {
-                    $xmlWriter->startElement('atom:category');
-                    $category->writeInnerXml($xmlWriter);
-                    $xmlWriter->endElement();
-                }
-            } else {
-                $xmlWriter->startElement('atom:category');
-                $category->writeInnerXml($xmlWriter);
-                $xmlWriter->endElement();
-            }
+            $this->writeArrayItem(
+                $xmlWriter,
+                $this->category,
+                Resources::CATEGORY
+            );
         }
 
         if (!is_null($this->content)) {
@@ -555,49 +553,82 @@ class Entry extends AtomBase
         }
 
         if (!is_null($this->contributor)) {
-            if (is_array($this->contributor)) {
-                foreach ($this->contributor as $contributor) {
-                    $xmlWriter->startElement('atom:contributor');
-                    $contributor->writeInnerXml($xmlWriter);
-                    $xmlWriter->endElement();
-                }
-            } else {
-                $xmlWriter->startElement('atom:contributor');
-                $contributor->writeInnerXml($xmlWriter);
-                $xmlWriter->endElement();
-            } 
+            $this->writeArrayItem(
+                $xmlWriter,
+                $this->contributor,
+                Resources::CONTRIBUTOR
+            );
         }
 
         if (!is_null($this->id)) {
-            $xmlWriter->writeElement('atom:id', $this->id);
+            $xmlWriter->writeElementNS(
+                'atom',
+                'id', 
+                Resources::ATOM_NAMESPACE,
+                $this->id
+            );
         }
 
         if (!is_null($this->link)) {
-            $xmlWriter->writeElement('atom:link', $this->link);
+            $this->writeArrayItem(
+                $xmlWriter,
+                $this->link,
+                Resources::LINK
+            );
         }
 
         if (!is_null($this->published)) {
-            $xmlWriter->writeElement('atom:published', $this->published);
+            $xmlWriter->writeElementNS(
+                'atom',
+                'published', 
+                Resources::ATOM_NAMESPACE,
+                $this->published
+            );
         }
 
         if (!is_null($this->rights)) {
-            $xmlWriter->writeElement('atom:rights', $this->rights);
+            $xmlWriter->writeElementNS(
+                'atom',
+                'rights', 
+                Resources::ATOM_NAMESPACE,
+                $this->rights
+            );
         }
 
         if (!is_null($this->source)) {
-            $xmlWriter->writeElement('atom:source', $this->source);
+            $xmlWriter->writeElementNS(
+                'atom',
+                'source', 
+                Resources::ATOM_NAMESPACE,
+                $this->source
+            );
         }
 
         if (!is_null($this->summary)) {
-            $xmlWriter->writeElement('atom:summary', $this->summary);
+            $xmlWriter->writeElementNS(
+                'atom',
+                'summary', 
+                Resources::ATOM_NAMESPACE,
+                $this->summary
+            );
         }
         
         if (!is_null($this->title)) {
-            $xmlWriter->writeElement('atom:title', $this->title);
+            $xmlWriter->writeElementNS(
+                'atom',
+                'title', 
+                Resources::ATOM_NAMESPACE,
+                $this->title
+            );
         }
 
         if (!is_null($this->updated)) {
-            $xmlWriter->writeElement('atom:updated', $this->updated);
+            $xmlWriter->writeElementNS(
+                'atom',
+                'updated', 
+                Resources::ATOM_NAMESPACE,
+                $this->updated->format(\DateTime::ATOM)
+            );
         }
     }
 }

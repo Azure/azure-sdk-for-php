@@ -231,7 +231,7 @@ class TopicDescription
      * @return none
      */
     public function setDuplicateDetectionHistoryTimeWindow(
-    $duplicateDetectionHistoryTimeWindow
+        $duplicateDetectionHistoryTimeWindow
     ) {
         $this->_duplicateDetectionHistoryTimeWindow 
             = $duplicateDetectionHistoryTimeWindow;

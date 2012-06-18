@@ -70,7 +70,8 @@ class QueueInfo extends Entry
     }
 
     /**
-     * Populates the properties of the queue info instance with a ATOM ENTRY XML string. 
+     * Populates the properties of the queue info instance with a 
+     * ATOM ENTRY XML string. 
      * 
      * @param string $entryXml An ATOM entry based XML string.
      * 

@@ -25,6 +25,7 @@
 namespace WindowsAzure\Common\Internal\Atom;
 use WindowsAzure\Common\Internal\Validate;
 use WindowsAzure\Common\Internal\Resources;
+use WindowsAzure\Common\Internal\Atom\AtomLink;
 
 /**
  * The base class of ATOM library.
@@ -53,6 +54,7 @@ class AtomBase
     public function __construct()
     {   
         $this->attributes = array();
+        $atomlink         = new AtomLink();
     }
 
     /**
@@ -101,16 +103,49 @@ class AtomBase
     public function getAttribute($attributeKey)
     {
         return $this->attributes[$attributeKey];
-    }   
+    }
 
+    /**     
+     * Processes author node. 
+     * 
+     * @param array $xmlWriter   The XML writer. 
+     * @param array $itemArray   An array of item to write.
+     * @param array $elementName The name of the element. 
+     * 
+     * @return array
+     */
+    protected function writeArrayItem($xmlWriter, $itemArray, $elementName)
+    {
+        Validate::notNull($xmlWriter, 'xmlWriter');
+        Validate::isArray($itemArray, 'itemArray');
+        Validate::isString($elementName, 'elementName');
+
+        foreach ($itemArray as $itemInstance) {
+            $xmlWriter->startElementNS(
+                'atom',
+                $elementName,
+                Resources::ATOM_NAMESPACE
+            );
+            $itemInstance->writeInnerXml($xmlWriter); 
+            $xmlWriter->endElement();
+        }
+    
+    }
+
+    /**     
+     * Processes author node. 
+     * 
+     * @param array $xmlArray An array of simple xml elements. 
+     * 
+     * @return array
+     */
     protected function processAuthorNode($xmlArray)
     {
-        $author = array();
-        $authorItem = $xmlArray['author'];
+        $author     = array();
+        $authorItem = $xmlArray[Resources::AUTHOR];
 
-        if (is_array($authorItem))
-        { 
-            foreach ($xmlArray['author'] as $authorXmlInstance) {
+        if (is_array($authorItem)) { 
+            foreach ($xmlArray[Resources::AUTHOR] as $authorXmlInstance) {
                 $authorInstance = new Person();
                 $authorInstance->parseXml($authorXmlInstance->asXML());
                 $author[] = $authorInstance;
@@ -123,14 +158,20 @@ class AtomBase
         return $author;
     }
 
+    /**     
+     * Processes entry node. 
+     * 
+     * @param array $xmlArray An array of simple xml elements. 
+     * 
+     * @return array
+     */
     protected function processEntryNode($xmlArray)
     {
-        $entry = array();
-        $entryItem = $xmlArray['entry'];
+        $entry     = array();
+        $entryItem = $xmlArray[Resources::ENTRY];
 
-        if (is_array($entryItem))
-        { 
-            foreach ($xmlArray['entry'] as $entryXmlInstance) {
+        if (is_array($entryItem)) { 
+            foreach ($xmlArray[Resources::ENTRY] as $entryXmlInstance) {
                 $entryInstance = new Entry();
                 $entryInstance->parseXml($entryXmlInstance->asXML());
                 $entry[] = $entryInstance;
@@ -143,14 +184,20 @@ class AtomBase
         return $entry;
     }
 
+    /**     
+     * Processes category node. 
+     * 
+     * @param array $xmlArray An array of simple xml elements. 
+     * 
+     * @return array
+     */
     protected function processCategoryNode($xmlArray)
     {
-        $category = array();
-        $categoryItem = $xmlArray['category'];
+        $category     = array();
+        $categoryItem = $xmlArray[Resources::CATEGORY];
 
-        if (is_array($categoryItem))
-        { 
-            foreach ($xmlArray['category'] as $categoryXmlInstance) {
+        if (is_array($categoryItem)) { 
+            foreach ($xmlArray[Resources::CATEGORY] as $categoryXmlInstance) {
                 $categoryInstance = new Category();
                 $categoryInstance->parseXml($categoryXmlInstance->asXML());
                 $category[] = $categoryInstance;
@@ -163,14 +210,20 @@ class AtomBase
         return $category;
     }
 
+    /**     
+     * Processes contributor node. 
+     * 
+     * @param array $xmlArray An array of simple xml elements. 
+     * 
+     * @return array
+     */
     protected function processContributorNode($xmlArray)
     {
-        $category = array();
-        $contributorItem = $xmlArray['contributor'];
+        $category        = array();
+        $contributorItem = $xmlArray[Resources::CONTRIBUTOR];
 
-        if (is_array($contributorItem))
-        { 
-            foreach ($xmlArray['contributor'] as $contributorXmlInstance) {
+        if (is_array($contributorItem)) { 
+            foreach ($xmlArray[Resources::CONTRIBUTOR] as $contributorXmlInstance) {
                 $contributorInstance = new Person();
                 $contributorInstance->parseXml($contributorXmlInstance->asXML());
                 $contributor[] = $contributorInstance;
@@ -187,14 +240,20 @@ class AtomBase
         return $contributor;
     }
 
+    /**     
+     * Processes link node. 
+     * 
+     * @param array $xmlArray An array of simple xml elements. 
+     * 
+     * @return array
+     */
     protected function processLinkNode($xmlArray)
     {
-        $link = array();
-        $linkValue = $xmlArray['link'];
+        $link      = array();
+        $linkValue = $xmlArray[Resources::LINK];
 
-        if (is_array($linkValue))
-        {
-            foreach ($xmlArray['link'] as $linkValueInstance) {
+        if (is_array($linkValue)) {
+            foreach ($xmlArray[Resources::LINK] as $linkValueInstance) {
                 $linkInstance = new AtomLink();
                 $linkInstance->parseXml($linkValueInstance->asXML());
                 $link[] = $linkInstance;

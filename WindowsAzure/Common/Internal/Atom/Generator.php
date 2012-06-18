@@ -175,13 +175,24 @@ class Generator extends AtomBase
      */
     public function writeXml($xmlWriter)
     {
-        $xmlWriter->startElement('atom:category');
+        $xmlWriter->startElementNS(
+            'atom',
+            Resources::CATEGORY,
+            Resources::ATOM_NAMESPACE
+        );
+
         if (!empty($this->uri)) {
-            $xmlWriter->writeAttribute('atom:uri', $this->uri);
+            $xmlWriter->writeAttribute(
+                'uri', 
+                $this->uri
+            );
         }
 
         if (!empty($this->version)) {
-            $xmlWriter->writeAttribute('atom:version', $this->version);
+            $xmlWriter->writeAttribute(
+                'version', 
+                $this->version
+            );
         }
 
         $xmlWriter->writeRaw($this->text);

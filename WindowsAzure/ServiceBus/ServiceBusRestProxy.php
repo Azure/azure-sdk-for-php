@@ -184,8 +184,7 @@ class ServiceBusRestProxy extends ServiceRestProxy implements IServiceBus
      */
     public function receiveMessage($path, $receiveMessageOptions = null)
     {
-        if (is_null($receiveMessageOptions))
-        {
+        if (is_null($receiveMessageOptions)) {
             $receiveMessageOptions = new ReceiveMessageOptions();
         } 
 
@@ -278,7 +277,7 @@ class ServiceBusRestProxy extends ServiceRestProxy implements IServiceBus
     public function receiveSubscriptionMessage(
         $topicName, 
         $subscriptionName, 
-        $receiveMessageOptions
+        $receiveMessageOptions = null
     ) {
         $messagePath = sprintf(
             Resources::RECEIVE_SUBSCRIPTION_MESSAGE_PATH, 
@@ -378,10 +377,6 @@ class ServiceBusRestProxy extends ServiceRestProxy implements IServiceBus
         $content = new Content($queueDescriptionXml);
         $content->setType(Resources::XML_CONTENT_TYPE);
         $entry->setContent($content);
-        $entry->setAttribute(
-            Resources::XMLNS_ATOM, 
-            Resources::ATOM_NAMESPACE
-        );
 
         $entry->setAttribute(
             Resources::XMLNS,
@@ -518,10 +513,6 @@ class ServiceBusRestProxy extends ServiceRestProxy implements IServiceBus
         $content = new Content($topicDescriptionXml);
         $content->setType(Resources::XML_CONTENT_TYPE);
         $entry->setContent($content); 
-        $entry->setAttribute(
-            Resources::XMLNS_ATOM, 
-            Resources::ATOM_NAMESPACE
-        );
 
         $entry->setAttribute(
             Resources::XMLNS,
@@ -631,10 +622,6 @@ class ServiceBusRestProxy extends ServiceRestProxy implements IServiceBus
         $content = new Content($subscriptionDescriptionXml);
         $content->setType(Resources::XML_CONTENT_TYPE);
         $entry->setContent($content);
-        $entry->setAttribute(
-            Resources::XMLNS_ATOM,
-            Resources::ATOM_NAMESPACE
-        );
 
         $entry->setAttribute(
             Resources::XMLNS,
@@ -761,10 +748,6 @@ class ServiceBusRestProxy extends ServiceRestProxy implements IServiceBus
         $content = new Content($ruleDescriptionXml);
         $content->setType(Resources::XML_CONTENT_TYPE);
         $entry->setContent($content);
-        $entry->setAttribute(
-            Resources::XMLNS_ATOM,
-            Resources::ATOM_NAMESPACE
-        );
 
         $entry->setAttribute(
             Resources::XMLNS,

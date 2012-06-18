@@ -179,10 +179,9 @@ class Feed extends AtomBase
         }
 
         if (array_key_exists('generator', $feedArray)) {
-            $generator = new Generator();
+            $generator      = new Generator();
             $generatorValue = $feedArray['generator'];
-            if (is_string($generatorValue))
-            {
+            if (is_string($generatorValue)) {
                 $generator->setText($generatorValue);
             } else {
                 $generator->parseXml($generatorValue->asXML());
@@ -253,7 +252,7 @@ class Feed extends AtomBase
     /**
      * Adds an attribute to the feed object instance. 
      * 
-     * @param string $attributeKey The key of the attribute. 
+     * @param string $attributeKey   The key of the attribute. 
      * @param mixed  $attributeValue The value of the attribute.
      *
      * @return none
@@ -263,18 +262,28 @@ class Feed extends AtomBase
         $this->attributes[$attributeKey] = $attributeValue;
     }   
 
-
+    /**
+     * Gets the author of the feed. 
+     * 
+     * @return Person 
+     */
     public function getAuthor()
     {
         return $this->author;
     }
 
+    /**
+     * Sets the author of the feed. 
+     * 
+     * @param Person $author The author of the feed. 
+     *
+     * @return none
+     */ 
     public function setAuthor($author)
     {
         Validate::isArray($author, 'author');
         $person = new Person();
-        foreach ($author as $authorInstance)
-        {
+        foreach ($author as $authorInstance) {
             Validate::isInstanceOf($authorInstance, $person, 'author'); 
         }
         $this->author = $author;
@@ -301,8 +310,7 @@ class Feed extends AtomBase
     {
         Validate::isArray($category, 'category');
         $categoryClassInstance = new Category();
-        foreach ($category as $categoryInstance)
-        {
+        foreach ($category as $categoryInstance) {
             Validate::isInstanceOf(
                 $categoryInstance, 
                 $categoryClassInstance, 
@@ -333,8 +341,7 @@ class Feed extends AtomBase
     {
         Validate::isArray($contributor, 'contributor');
         $person = new Person();
-        foreach ($contributor as $contributorInstance)
-        {
+        foreach ($contributor as $contributorInstance) {
             Validate::isInstanceOf($contributorInstance, $person, 'contributor'); 
         }
         $this->contributor = $contributor;
@@ -509,6 +516,8 @@ class Feed extends AtomBase
      * Sets the title of the feed. 
      *
      * @param string $title The title of the feed. 
+     * 
+     * @return none
      */
     public function setTitle($title)
     {
@@ -621,41 +630,27 @@ class Feed extends AtomBase
         }
          
         if (!is_null($this->author)) {
-            $xmlWriter->startElementNS('atom', 'author', Resources::ATOM_NAMESPACE);
-            $this->author->writeInnerXml($xmlWriter);
-            $xmlWriter->endElement();
+            $this->writeArrayItem(
+                $xmlWriter,
+                $this->author,
+                Resources::AUTHOR
+            );
         } 
 
         if (!is_null($this->category)) {
-            if (is_array($this->category)) {
-                foreach ($this->category as $category) {
-                    $category->writeXml($xmlWriter);
-                }
-            } else {
-                $category->writeXml($xmlWriter);
-            }
+            $this->writeArrayItem(
+                $xmlWriter,
+                $this->category,
+                Resources::CATEGORY
+            );
         }
 
         if (!is_null($this->contributor)) {
-            if (is_array($this->contributor)) {
-                foreach ($this->contributor as $contributor) {
-                    $xmlWriter->startElementNS(
-                        'atom', 
-                        'contributor', 
-                        Resources::ATOM_NAMESPACE
-                    );
-                    $contributor->writeInnerXml($xmlWriter);
-                    $xmlWriter->endElement();
-                }
-            } else {
-                $xmlWriter->startElementNS(
-                    'atom', 
-                    'contributor', 
-                    Resources::ATOM_NAMESPACE
-                );
-                $contributor->writeInnerXml($xmlWriter);
-                $xmlWriter->endElement();
-            }
+            $this->writeArrayItem(
+                $xmlWriter,
+                $this->contributor,
+                Resources::CONTRIBUTOR
+            );
         }
 
         if (!is_null($this->generator)) {
@@ -690,14 +685,11 @@ class Feed extends AtomBase
         }
 
         if (!is_null($this->link)) {
-            $xmlWriter->startElementNS(
-                'atom',
-                'link', 
-                Resources::ATOM_NAMESPACE
+            $this->writeArrayItem(
+                $xmlWriter,
+                $this->link,
+                Resources::LINK
             );
-
-            $this->link->writeXml($xmlWriter);
-            $xmlWriter->endElement();
         }
 
         if (!is_null($this->rights)) {
@@ -732,7 +724,7 @@ class Feed extends AtomBase
                 'atom', 
                 'updated', 
                 Resources::ATOM_NAMESPACE, 
-                $this->updated->format(DateTime::ATOM)
+                $this->updated->format(\DateTime::ATOM)
             );
         }
 

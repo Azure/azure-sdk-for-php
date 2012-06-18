@@ -307,7 +307,11 @@ class AtomLink extends AtomBase
     public function writeXml($xmlWriter)
     {
         Validate::notNull($xmlWriter, 'xmlWriter');
-        $xmlWriter->startElement('atom:link');
+        $xmlWriter->startElementNS(
+            'atom', 
+            Resources::LINK, 
+            Resources::ATOM_NAMESPACE
+        );
         $this->writeInnerXml($xmlWriter);
         $xmlWriter->endElement();
     }
@@ -321,28 +325,47 @@ class AtomLink extends AtomBase
      */
     public function writeInnerXml($xmlWriter)
     {
+        Validate::notNull($xmlWriter, 'xmlWriter');
         if (!empty($this->href)) {
-            $xmlWriter->writeAttribute('href', $this->href);
+            $xmlWriter->writeAttribute(
+                'href', 
+                $this->href
+            );
         }
 
         if (!empty($this->rel)) {
-            $xmlWriter->writeAttribute('rel', $this->rel);
+            $xmlWriter->writeAttribute(
+                'rel', 
+                $this->rel
+            );
         }
 
         if (!empty($this->type)) {
-            $xmlWriter->writeAttribute('type', $this->type);
+            $xmlWriter->writeAttribute(
+                'type', 
+                $this->type
+            );
         }
 
         if (!empty($this->hreflang)) {
-            $xmlWriter->writeAttribute('hreflang', $this->hreflang);
+            $xmlWriter->writeAttribute(
+                'hreflang', 
+                $this->hreflang
+            );
         }
 
         if (!empty($this->title)) {
-            $xmlWriter->writeAttribute('title', $this->title);
+            $xmlWriter->writeAttribute(
+                'title', 
+                $this->title
+            );
         }
 
         if (!empty($this->length)) {
-            $xmlWriter->writeAttribute('length', $this->length);
+            $xmlWriter->writeAttribute(
+                'length', 
+                $this->length
+            );
         }
 
         if (!empty($this->undefinedContent)) {

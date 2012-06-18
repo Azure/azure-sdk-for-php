@@ -272,6 +272,13 @@ class Resources
     const XMLNS                   = 'xmlns';
     const ATOM_NAMESPACE          = 'http://www.w3.org/2005/Atom';
 
+    // ATOM string 
+    const AUTHOR      = 'author';
+    const CATEGORY    = 'category';
+    const CONTRIBUTOR = 'contributor';
+    const ENTRY       = 'entry';
+    const LINK        = 'link';
+
     // PHP URL Keys
     const PHP_URL_SCHEME   = 'scheme';
     const PHP_URL_HOST     = 'host';

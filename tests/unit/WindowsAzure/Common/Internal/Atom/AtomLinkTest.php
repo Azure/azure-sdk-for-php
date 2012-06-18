@@ -238,11 +238,11 @@ class AtomLinkTest extends \PHPUnit_Framework_TestCase
     }
 
     /** 
-     * @covers WindowsAzure\Common\Internal\Atom\AtomLink::parseXml
+     * @covers WindowsAzure\Common\Internal\Atom\AtomLink::writeXml
      */
     public function testWriteXmlSuccess() {
         // Setup
-        $expected = '<atom:link href="http://www.contonso.com"/>';
+        $expected = '<atom:link href="http://www.contonso.com" xmlns:atom="http://www.w3.org/2005/Atom"/>';
         $atomLink = new AtomLink();
         $atomLink->setHref('http://www.contonso.com');
 

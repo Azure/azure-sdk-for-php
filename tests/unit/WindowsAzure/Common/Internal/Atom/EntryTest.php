@@ -354,7 +354,7 @@ class EntryTest extends \PHPUnit_Framework_TestCase
     {
         // Setup 
         $entry = new Entry();   
-        $expected = "<atom:entry/>";
+        $expected = '<atom:entry xmlns:atom="http://www.w3.org/2005/Atom"/>';
         
         // Test
         $xmlWriter = new \XMLWriter();

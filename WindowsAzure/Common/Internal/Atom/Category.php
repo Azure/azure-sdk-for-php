@@ -207,7 +207,11 @@ class Category extends AtomBase
     public function writeXml($xmlWriter)
     {
         Validate::notNull($xmlWriter, 'xmlWriter');
-        $xmlWriter->startElement('atom:category');
+        $xmlWriter->startElementNS(
+            'atom', 
+            'category',
+            Resources::ATOM_NAMESPACE
+        );
         $this->writeInnerXml($xmlWriter);
         $xmlWriter->endElement();
     }
@@ -221,16 +225,32 @@ class Category extends AtomBase
      */
     public function writeInnerXml($xmlWriter)
     {
+        Validate::notNull($xmlWriter, 'xmlWriter');
         if (!empty($this->term)) {
-            $xmlWriter->WriteAttribute('term', $this->term);
+            $xmlWriter->WriteAttributeNS(
+                'atom', 
+                'term', 
+                Resources::ATOM_NAMESPACE, 
+                $this->term
+            );
         }
 
         if (!empty($this->scheme)) {
-            $xmlWriter->WriteAttribute('scheme', $this->scheme);
+            $xmlWriter->WriteAttributeNS(
+                'atom',
+                'scheme', 
+                Resources::ATOM_NAMESPACE,
+                $this->scheme
+            );
         }
 
         if (!empty($this->label)) {
-            $xmlWriter->WriteAttribute('label', $this->label);
+            $xmlWriter->WriteAttributeNS(
+                'atom',
+                'label', 
+                Resources::ATOM_NAMESPACE,
+                $this->label
+            );
         }
 
         if (!empty($this->undefinedContent)) {

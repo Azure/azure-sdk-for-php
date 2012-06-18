@@ -23,7 +23,10 @@
  */
 
 namespace Tests\Unit\WindowsAzure\Common\Internal\Atom;
+use WindowsAzure\Common\Internal\Atom\AtomLink;
 use WindowsAzure\Common\Internal\Atom\Source;
+use WindowsAzure\Common\Internal\Atom\Person;
+use WindowsAzure\Common\Internal\Atom\Generator;
 use WindowsAzure\Common\Internal\Atom\Category;
 
 /**
@@ -350,6 +353,80 @@ class SourceTest extends \PHPUnit_Framework_TestCase
         );
 
     }
+
+    /** 
+     * @covers WindowsAzure\Common\Internal\Atom\Source::writeXml
+     * @covers WindowsAzure\Common\Internal\Atom\Source::writeInnerXml
+     */
+    public function testSourceWriteXmlWorks() {
+        // Setup
+        $expected = '<atom:source xmlns:atom="http://www.w3.org/2005/Atom"/>';
+        $source = new Source();
+
+        // Test
+        $xmlWriter = new \XMLWriter();
+        $xmlWriter->openMemory();
+        $source->writeXml($xmlWriter);
+        $actual = $xmlWriter->outputMemory();
+ 
+        // Assert
+        $this->assertEquals(
+            $expected,
+            $actual
+        );
+    }
+
+    /** 
+     * @covers WindowsAzure\Common\Internal\Atom\Source::writeXml
+     * @covers WindowsAzure\Common\Internal\Atom\Source::writeInnerXml
+     */
+    public function testSourceWriteXmlAllPropertiesWorks() {
+        // Setup
+        $expected = '<atom:source xmlns:atom="http://www.w3.org/2005/Atom"><atom:author xmlns:atom="http://www.w3.org/2005/Atom"><atom:name xmlns:atom="http://www.w3.org/2005/Atom"></atom:name></atom:author><atom:category xmlns:atom="http://www.w3.org/2005/Atom"/><atom:contributor xmlns:atom="http://www.w3.org/2005/Atom"><atom:name xmlns:atom="http://www.w3.org/2005/Atom"></atom:name></atom:contributor><atom:category xmlns:atom="http://www.w3.org/2005/Atom"></atom:category><atom:icon xmlns:atom="http://www.w3.org/2005/Atom">testIcon</atom:icon><atom:logo xmlns:atom="http://www.w3.org/2005/Atom">testLogo</atom:logo><atom:id xmlns:atom="http://www.w3.org/2005/Atom">testId</atom:id><atom:link xmlns:atom="http://www.w3.org/2005/Atom"/><atom:rights xmlns:atom="http://www.w3.org/2005/Atom">testRights</atom:rights><atom:subtitle xmlns:atom="http://www.w3.org/2005/Atom">testSubtitle</atom:subtitle><atom:title xmlns:atom="http://www.w3.org/2005/Atom">testTitle</atom:title><atom:updated xmlns:atom="http://www.w3.org/2005/Atom">2012-06-17T20:53:36-07:00</atom:updated></atom:source>';
+
+        $source = new Source();
+        $author = array();
+        $authorInstance = new Person();
+        $author[] = $authorInstance;
+
+        $category = array();
+        $categoryInstance = new Category();
+        $category[] = $categoryInstance;
+
+        $contributor = array();
+        $contributorInstance = new Person();
+        $contributor[] = $contributorInstance;
+
+        $link = array();
+        $linkInstance = new AtomLink();
+        $link[] = $linkInstance;
+
+        $source->setAuthor($author);
+        $source->setCategory($category);
+        $source->setContributor($contributor);
+        $source->setGenerator(new Generator());
+        $source->setIcon('testIcon');
+        $source->setId('testId');        
+        $source->setLink($link);
+        $source->setLogo('testLogo');
+        $source->setRights('testRights');
+        $source->setSubtitle('testSubtitle');
+        $source->setTitle('testTitle');
+        $source->setUpdated(\DateTime::createFromFormat(\DateTime::ATOM, '2012-06-17T20:53:36-07:00'));
+
+        // Test
+        $xmlWriter = new \XMLWriter();
+        $xmlWriter->openMemory();
+        $source->writeXml($xmlWriter);
+        $actual = $xmlWriter->outputMemory();
+ 
+        // Assert
+        $this->assertEquals(
+            $expected,
+            $actual
+        );
+    }
+
 }
 
 ?>

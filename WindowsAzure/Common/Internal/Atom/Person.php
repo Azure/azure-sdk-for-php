@@ -25,6 +25,7 @@
 namespace WindowsAzure\Common\Internal\Atom;
 use WindowsAzure\Common\Internal\Utilities;
 use WindowsAzure\Common\Internal\Resources;
+use WindowsAzure\Common\Internal\Validate;
 
 /**
  * The generator library of ATOM library.
@@ -175,7 +176,12 @@ class Person extends AtomBase
      */
     public function writeXml($xmlWriter)
     {
-        $xmlWriter->startElement('atom:person');
+        Validate::notNull($xmlWriter, 'xmlWriter');
+        $xmlWriter->startElementNS(
+            'atom',
+            'person',
+            Resources::ATOM_NAMESPACE
+        );
         $this->writeInnerXml($xmlWriter);
         $xmlWriter->endElement();
     }
@@ -189,13 +195,30 @@ class Person extends AtomBase
      */
     public function writeInnerXml($xmlWriter)
     {
-        $xmlWriter->writeElement('atom:name', $this->name);
+        Validate::notNull($xmlWriter, 'xmlWriter');
+        $xmlWriter->writeElementNS(
+            'atom',
+            'name', 
+            Resources::ATOM_NAMESPACE,
+            $this->name
+        );
+
         if (!empty($this->uri)) {
-            $xmlWriter->writeElement('atom:uri', $this->uri);
+            $xmlWriter->writeElementNS(
+                'atom',
+                'uri', 
+                Resources::ATOM_NAMESPACE,
+                $this->uri
+            );
         }
 
         if (!empty($this->email)) {
-            $xmlWriter->writeElement('atom:email', $this->email);
+            $xmlWriter->writeElementNS(
+                'atom',
+                'email', 
+                Resources::ATOM_NAMESPACE,
+                $this->email
+            );
         }
     }
 }

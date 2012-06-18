@@ -107,7 +107,7 @@ class ContentTest extends \PHPUnit_Framework_TestCase
     public function testWriteXml()
     {
         // Setup
-        $expected = '<atom:content type="testType">testText</atom:content>'; 
+        $expected = '<atom:content type="testType" xmlns:atom="http://www.w3.org/2005/Atom">testText</atom:content>'; 
         $expectedContentType = 'testType';
         $expectedText = 'testText';
         $content = new Content();
@@ -169,7 +169,7 @@ class ContentTest extends \PHPUnit_Framework_TestCase
     public function testWriteXmlSuccess()
     {
         // Setup
-        $expected = '<atom:content></atom:content>';
+        $expected = '<atom:content xmlns:atom="http://www.w3.org/2005/Atom"></atom:content>';
         $content = new Content();
 
         // Test

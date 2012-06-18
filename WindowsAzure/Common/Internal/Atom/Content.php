@@ -149,9 +149,17 @@ class Content extends AtomBase
     public function writeXml($xmlWriter)
     {
         Validate::notNull($xmlWriter, 'xmlWriter');
-        $xmlWriter->startElement('atom:content');
+        $xmlWriter->startElementNS(
+            'atom',
+            'content',
+            Resources::ATOM_NAMESPACE
+        );
+
         if (!empty($this->type)) {
-            $xmlWriter->writeAttribute('type', $this->type);
+            $xmlWriter->writeAttribute(
+                'type', 
+                $this->type
+            );
         }
         $this->writeInnerXml($xmlWriter);
         $xmlWriter->endElement();

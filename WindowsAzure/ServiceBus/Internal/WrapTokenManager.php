@@ -103,11 +103,6 @@ class WrapTokenManager
         Validate::isString($wrapName, 'wrapName');
         Validate::isString($wrapPassword, 'wrapPassword');
 
-        if (!is_null($builder))
-        {
-            Validate::isInstanceOf($builder, IServiceBuilder);
-        }
-
         $this->_wrapUri      = $wrapUri;
         $this->_wrapName     = $wrapName;
         $this->_wrapPassword = $wrapPassword;
