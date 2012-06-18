@@ -25,7 +25,7 @@
 namespace WindowsAzure\Table;
 use WindowsAzure\Common\Internal\Validate;
 use WindowsAzure\Common\Configuration;
-use WindowsAzure\Common\Internal\IServiceBuilder;
+use WindowsAzure\Common\Internal\IServicesBuilder;
 use WindowsAzure\Common\Internal\Resources;
 
 /**
@@ -59,7 +59,7 @@ class TableService
         );
         if (!is_null($builder)) {
             Validate::isTrue(
-                $builder instanceof IServiceBuilder,
+                $builder instanceof IServicesBuilder,
                 Resources::INVALID_BUILDER_MSG
             );
         }

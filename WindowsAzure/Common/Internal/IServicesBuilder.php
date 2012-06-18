@@ -43,7 +43,7 @@ namespace WindowsAzure\Common\Internal;
  * @version   Release: @package_version@
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
-interface IServiceBuilder
+interface IServicesBuilder
 {
     /**
      * Creates an object passed $type configured with $config.

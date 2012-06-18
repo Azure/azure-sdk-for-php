@@ -27,7 +27,7 @@ use WindowsAzure\Common\Internal\Resources;
 use WindowsAzure\Common\Internal\Validate;
 use WindowsAzure\Common\Internal\Utilities;
 use WindowsAzure\Common\Internal\Http\HttpClient;
-use WindowsAzure\Common\Internal\IServiceBuilder;
+use WindowsAzure\Common\Internal\IServicesBuilder;
 use WindowsAzure\Common\Configuration;
 use WindowsAzure\Common\Internal\Filters\DateFilter;
 use WindowsAzure\Common\Internal\Filters\HeadersFilter;
@@ -57,7 +57,7 @@ use WindowsAzure\ServiceManagement\ServiceManagementRestProxy;
  * @version   Release: @package_version@
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
-class ServicesBuilder implements IServiceBuilder
+class ServicesBuilder implements IServicesBuilder
 {
     /**
      * Adds HeadersFilter with constant headers for each service wrapper.
