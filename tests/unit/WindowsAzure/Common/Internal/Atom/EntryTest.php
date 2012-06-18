@@ -354,7 +354,7 @@ class EntryTest extends \PHPUnit_Framework_TestCase
     {
         // Setup 
         $entry = new Entry();   
-        $expected = "<atom:entry/>";
+        $expected = '<atom:entry xmlns:atom="http://www.w3.org/2005/Atom"/>';
         
         // Test
         $xmlWriter = new \XMLWriter();
@@ -371,6 +371,300 @@ class EntryTest extends \PHPUnit_Framework_TestCase
         
     }
 
+    /** 
+     * @covers WindowsAzure\Common\Internal\Atom\Entry::getAttributes
+     * @covers WindowsAzure\Common\Internal\Atom\Entry::setAttributes
+     */
+    public function testGetSetAttributes() {
+        // Setup
+        $expected = array();
+        $expected['testKey'] = 'testValue';
+        $entry = new Entry();
+
+        // Test
+        $entry->setAttributes($expected);
+        $actual = $entry->getAttributes();
+
+        // Assert 
+        $this->assertEquals(
+            $expected,
+            $actual
+        );
+
+    }
+
+    /** 
+     * @covers WindowsAzure\Common\Internal\Atom\Entry::getAuthor
+     * @covers WindowsAzure\Common\Internal\Atom\Entry::setAuthor
+     */
+    public function testGetSetAuthor() {
+        // Setup
+        $expected = 'testAuthor';
+        $entry = new Entry();
+
+        // Test
+        $entry->setAuthor($expected);
+        $actual = $entry->getAuthor();
+
+        // Assert 
+        $this->assertEquals(
+            $expected,
+            $actual
+        );
+
+    }
+
+    /** 
+     * @covers WindowsAzure\Common\Internal\Atom\Entry::getCategory
+     * @covers WindowsAzure\Common\Internal\Atom\Entry::setCategory
+     */
+    public function testGetSetCategory() {
+        // Setup
+        $expected = 'testCategory';
+        $entry = new Entry();
+
+        // Test
+        $entry->setCategory($expected);
+        $actual = $entry->getCategory();
+
+        // Assert 
+        $this->assertEquals(
+            $expected,
+            $actual
+        );
+
+    }
+
+    /** 
+     * @covers WindowsAzure\Common\Internal\Atom\Entry::getContent
+     * @covers WindowsAzure\Common\Internal\Atom\Entry::setContent
+     */
+    public function testGetSetContent() {
+        // Setup
+        $expected = 'testContent';
+        $entry = new Entry();
+
+        // Test
+        $entry->setContent($expected);
+        $actual = $entry->getContent();
+
+        // Assert 
+        $this->assertEquals(
+            $expected,
+            $actual
+        );
+
+    }
+
+    /** 
+     * @covers WindowsAzure\Common\Internal\Atom\Entry::getContributor
+     * @covers WindowsAzure\Common\Internal\Atom\Entry::setContributor
+     */
+    public function testGetSetContributor() {
+        // Setup
+        $expected = 'testContributor';
+        $entry = new Entry();
+
+        // Test
+        $entry->setContributor($expected);
+        $actual = $entry->getContributor();
+
+        // Assert 
+        $this->assertEquals(
+            $expected,
+            $actual
+        );
+
+    }
+
+    /** 
+     * @covers WindowsAzure\Common\Internal\Atom\Entry::getId
+     * @covers WindowsAzure\Common\Internal\Atom\Entry::setId
+     */
+    public function testGetSetId() {
+        // Setup
+        $expected = 'testId';
+        $entry = new Entry();
+
+        // Test
+        $entry->setId($expected);
+        $actual = $entry->getId();
+
+        // Assert 
+        $this->assertEquals(
+            $expected,
+            $actual
+        );
+
+    }
+
+    /** 
+     * @covers WindowsAzure\Common\Internal\Atom\Entry::getLink
+     * @covers WindowsAzure\Common\Internal\Atom\Entry::setLink
+     */
+    public function testGetSetLink() {
+        // Setup
+        $expected = 'testLink';
+        $entry = new Entry();
+
+        // Test
+        $entry->setLink($expected);
+        $actual = $entry->getLink();
+
+        // Assert 
+        $this->assertEquals(
+            $expected,
+            $actual
+        );
+
+    }
+
+    /** 
+     * @covers WindowsAzure\Common\Internal\Atom\Entry::getPublished
+     * @covers WindowsAzure\Common\Internal\Atom\Entry::setPublished
+     */
+    public function testGetSetPublished() {
+        // Setup
+        $expected = 'testPublished';
+        $entry = new Entry();
+
+        // Test
+        $entry->setPublished($expected);
+        $actual = $entry->getPublished();
+
+        // Assert 
+        $this->assertEquals(
+            $expected,
+            $actual
+        );
+
+    }
+
+    /** 
+     * @covers WindowsAzure\Common\Internal\Atom\Entry::getRights
+     * @covers WindowsAzure\Common\Internal\Atom\Entry::setRights
+     */
+    public function testGetSetRights() {
+        // Setup
+        $expected = 'testRights';
+        $entry = new Entry();
+
+        // Test
+        $entry->setRights($expected);
+        $actual = $entry->getRights();
+
+        // Assert 
+        $this->assertEquals(
+            $expected,
+            $actual
+        );
+
+    }
+
+    /** 
+     * @covers WindowsAzure\Common\Internal\Atom\Entry::getSource
+     * @covers WindowsAzure\Common\Internal\Atom\Entry::setSource
+     */
+    public function testGetSetSource() {
+        // Setup
+        $expected = 'testSource';
+        $entry = new Entry();
+
+        // Test
+        $entry->setSource($expected);
+        $actual = $entry->getSource();
+
+        // Assert 
+        $this->assertEquals(
+            $expected,
+            $actual
+        );
+
+    }
+
+    /** 
+     * @covers WindowsAzure\Common\Internal\Atom\Entry::getSummary
+     * @covers WindowsAzure\Common\Internal\Atom\Entry::setSummary
+     */
+    public function testGetSetSummary() {
+        // Setup
+        $expected = 'testSummary';
+        $entry = new Entry();
+
+        // Test
+        $entry->setSummary($expected);
+        $actual = $entry->getSummary();
+
+        // Assert 
+        $this->assertEquals(
+            $expected,
+            $actual
+        );
+
+    }
+
+    /** 
+     * @covers WindowsAzure\Common\Internal\Atom\Entry::getTitle
+     * @covers WindowsAzure\Common\Internal\Atom\Entry::setTitle
+     */
+    public function testGetSetTitle() {
+        // Setup
+        $expected = 'testTitle';
+        $entry = new Entry();
+
+        // Test
+        $entry->setTitle($expected);
+        $actual = $entry->getTitle();
+
+        // Assert 
+        $this->assertEquals(
+            $expected,
+            $actual
+        );
+
+    }
+
+    /** 
+     * @covers WindowsAzure\Common\Internal\Atom\Entry::getUpdated
+     * @covers WindowsAzure\Common\Internal\Atom\Entry::setUpdated
+     */
+    public function testGetSetUpdated() {
+        // Setup
+        $expected = 'testUpdated';
+        $entry = new Entry();
+
+        // Test
+        $entry->setUpdated($expected);
+        $actual = $entry->getUpdated();
+
+        // Assert 
+        $this->assertEquals(
+            $expected,
+            $actual
+        );
+
+    }
+
+    /** 
+     * @covers WindowsAzure\Common\Internal\Atom\Entry::getExtensionElement
+     * @covers WindowsAzure\Common\Internal\Atom\Entry::setExtensionElement
+     */
+    public function testGetSetExtensionElement() {
+        // Setup
+        $expected = 'testExtensionElement';
+        $entry = new Entry();
+
+        // Test
+        $entry->setExtensionElement($expected);
+        $actual = $entry->getExtensionElement();
+
+        // Assert 
+        $this->assertEquals(
+            $expected,
+            $actual
+        );
+
+    }
 }
 
 ?>

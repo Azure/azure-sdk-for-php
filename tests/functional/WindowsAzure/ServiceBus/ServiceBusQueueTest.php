@@ -80,7 +80,7 @@ class ServiceBusQueueTest extends ScenarioTestBase
         $options->setSkip(20);
         // TODO: https://github.com/WindowsAzure/azure-sdk-for-php/issues/479
 //        $options->setTop(2);
-        $queues = $this->restProxy->listQueues($options)->getQueueInfo();
+        $queues = $this->restProxy->listQueues($options)->getQueueInfos();
         foreach ($queues as $queue) {
             self::write('Queue name is ' . $queue->getTitle());
         }

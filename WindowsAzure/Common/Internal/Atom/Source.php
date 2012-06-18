@@ -24,6 +24,7 @@
 
 namespace WindowsAzure\Common\Internal\Atom;
 use WindowsAzure\Common\Internal\Validate;
+use WindowsAzure\Common\Internal\Resources;
 
 /**
  * The source class of ATOM library.
@@ -37,26 +38,19 @@ use WindowsAzure\Common\Internal\Validate;
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
 
-class Source
+class Source extends AtomBase
 {
-    /**
-     * The attributes of the source. 
-     * 
-     * @var array
-     */
-    protected $attributes;
-
     /**
      * The author the source. 
      * 
-     * @var Person
+     * @var array
      */
     protected $author;
 
     /**
      * The category of the source. 
      * 
-     * @var Category
+     * @var array
      */
     protected $category;
 
@@ -126,7 +120,7 @@ class Source
     /**
      * The update of the source. 
      * 
-     * @var string
+     * @var \DateTime
      */
     protected $updated;
 
@@ -142,7 +136,10 @@ class Source
      */ 
     public function __construct()
     {   
-        $this->attributes = array();
+        $this->attributes  = array();
+        $this->category    = array();
+        $this->contributor = array();
+        $this->author      = array();
     }
 
     /**
@@ -158,22 +155,16 @@ class Source
         $attributes  = $sourceXml->attributes();
         $sourceArray = (array)$sourceXml;
 
-        if (array_key_exists('author', $sourceArray)) {
-            $content = new Person();
-            $content->parseXml($sourceArray['person']->asXML());
-            $this->content = $content;
+        if (array_key_exists(Resources::AUTHOR, $sourceArray)) {
+            $this->content = $this->processAuthorNode($sourceArray);
         }
 
-        if (array_key_exists('category', $sourceArray)) {
-            $category = new Category();
-            $category->parseXml($sourceArray['category']->asXML());
-            $this->category = $category;
+        if (array_key_exists(Resources::CATEGORY, $sourceArray)) {
+            $this->category = $this->processCategoryNode($sourceArray);
         }
 
-        if (array_key_exists('contributor', $sourceArray)) {
-            $contributor = new Person();
-            $contributor->parseXml($sourceArray['contributor']->asXML());
-            $this->contributor = $contributor;
+        if (array_key_exists(Resources::CONTRIBUTOR, $sourceArray)) {
+            $this->contributor = $this->processContributorNode($sourceArray);
         }
 
         if (array_key_exists('generator', $sourceArray)) {
@@ -192,10 +183,8 @@ class Source
             $this->id = (string)$sourceArray['id'];
         }
 
-        if (array_key_exists('link', $sourceArray)) {
-            $link = new AtomLink();
-            $link->parseXml($sourceArray['link']->asXML());
-            $this->link = $link;
+        if (array_key_exists(Resources::LINK, $sourceArray)) {
+            $this->link = $this->processLinkNode($sourceArray);
         }
 
         if (array_key_exists('logo', $sourceArray)) {
@@ -215,66 +204,55 @@ class Source
         }
 
         if (array_key_exists('updated', $sourceArray)) {
-            $this->updated = (string)$sourceArray['updated'];
+            $this->updated = \DateTime::createFromFormat(
+                \DateTime::ATOM,
+                (string)$sourceArray['updated']
+            );
         }
     }
 
     /**
-     * Gets the attributes of the source. 
+     * Gets the author of the source. 
      *
      * @return array
      */
-    public function getAttributes()
+    public function getAuthor()
     {
-        return $this->attributes;
+        return $this->author;
     }
 
     /**
-     * Sets the attributes of the source. 
+     * Sets the author of the source. 
      *
-     * @param array $attributes The attributes of the array. 
-     *
+     * @param array $author An array of authors of the sources. 
+     * 
      * @return none
      */
-    public function setAttributes($attributes)
+    public function setAuthor($author) 
     {
-        Validate::isArray($attributes, 'attributes');
-        $this->attributes = $attributes;
+        $this->author = $author;
     }
-
-    /**
-     * Adds an attribute to the source. 
-     * 
-     * @param string $attributeKey   The key of the attribute. 
-     * @param string $attributeValue The value of the attribute. 
-     * 
-     * @return none
-     */
-    public function addAttribute($attributeKey, $attributeValue)
-    {
-        $this->attributes[$attributeKey] = $attributeValue;
-    }   
 
     /**
      * Gets the category of the source.
      *  
-     * @return string
+     * @return array
      */
     public function getCategory()
     {
-        return $this->categroy;
+        return $this->category;
     }
 
     /**
      * Sets the category of the source.
      *  
-     * @param string $category The category of the source. 
+     * @param array $category The category of the source. 
      *
      * @return none
      */
     public function setCategory($category)
     {
-        $this->category = $cateogry;
+        $this->category = $category;
     }
    
     /**
@@ -290,7 +268,7 @@ class Source
     /**
      * Sets contributor.
      * 
-     * @param string $contributor The contributor of the source. 
+     * @param array $contributor The contributors of the source. 
      * 
      * @return none
      */
@@ -368,7 +346,7 @@ class Source
     /**
      * Gets the link of the source. 
      * 
-     * @return AtomLink
+     * @return array
      */
     public function getLink()
     {
@@ -378,7 +356,7 @@ class Source
     /**
      * Sets the link of the source. 
      * 
-     * @param AtomLink $link The link of the source. 
+     * @param array $link The link of the source. 
      *
      * @return none
      */
@@ -478,7 +456,7 @@ class Source
     /**
      * Gets the updated. 
      * 
-     * @return string 
+     * @return \DateTime
      */
     public function getUpdated()
     {   
@@ -488,13 +466,13 @@ class Source
     /**
      * Sets the updated. 
      * 
-     * @param string $updated updated
+     * @param \DateTime $updated updated
      * 
      * @return none
      */
     public function setUpdated($updated)
     {
-        $this->udpated = $updated;
+        $this->updated = $updated;
     }
 
     /** 
@@ -519,50 +497,6 @@ class Source
         $this->extensionElement = $extensionElement;
     }
 
-    /**
-     * Gets the entry of the source. 
-     * 
-     * @return Entry
-     */
-    public function getEntry()
-    {
-        return $this->entry;
-    }
-
-    /**
-     * Sets the entry of the source.
-     * 
-     * @param Entry $entry The entry of the source. 
-     *
-     * @return none
-     */
-    public function setEntry($entry)
-    {
-        $this->entry = $entry;
-    }
-
-    /**
-     * Gets the content of the source. 
-     * 
-     * @return Content
-     */
-    public function getContent()
-    {
-        return $this->content;
-    }
-
-    /**
-     * Sets the content of the source.
-     * 
-     * @param Content $content The content of the source. 
-     * 
-     * @return none
-     */
-    public function setContent($content)
-    {
-        $this->content = $content;
-    }
-
     /** 
      * Writes an XML representing the source object.
      * 
@@ -572,7 +506,12 @@ class Source
      */
     public function writeXml($xmlWriter)
     {
-        $xmlWriter->startElement('<atom:source>');
+        Validate::notNull($xmlWriter, 'xmlWriter');
+        $xmlWriter->startElementNS(
+            'atom', 
+            'source', 
+            Resources::ATOM_NAMESPACE
+        );
         $this->writeInnerXml($xmlWriter);
         $xmlWriter->endElement();
     }
@@ -585,6 +524,7 @@ class Source
      */
     public function writeInnerXml($xmlWriter)
     {
+        Validate::notNull($xmlWriter, 'xmlWriter');
         if (!is_null($this->attributes)) {
             if (is_array($this->attributes)) {
                 foreach ($this->attributes as $attributeName => $attributeValue) {
@@ -594,33 +534,26 @@ class Source
         }
          
         if (!is_null($this->author)) {
-            $xmlWriter->startElement('atom:author');
-            $this->author->writeInnerXml($xmlWriter);
-            $xmlWriter->endElement();
+            Validate::isArray($this->author, Resources::AUTHOR);
+            $this->writeArrayItem($xmlWriter, $this->author, Resources::AUTHOR);
         } 
 
         if (!is_null($this->category)) {
-            if (is_array($this->category)) {
-                foreach ($this->category as $category) {
-                    $category->writeXml($xmlWriter);
-                }
-            } else {
-                $category->writeXml($xmlWriter);
-            }
+            Validate::isArray($this->category, Resources::CATEGORY);
+            $this->writeArrayItem(
+                $xmlWriter, 
+                $this->category, 
+                Resources::CATEGORY
+            );
         }
 
         if (!is_null($this->contributor)) {
-            if (is_array($this->contributor)) {
-                foreach ($this->contributor as $contributor) {
-                    $xmlWriter->startElement('atom:contributor');
-                    $contributor->writeInnerXml($xmlWriter);
-                    $xmlWriter->endElement();
-                }
-            } else {
-                $xmlWriter->startElement('atom:contributor');
-                $contributor->writeInnerXml($xmlWriter);
-                $xmlWriter->endElement();
-            }
+            Validate::isArray($this->contributor, Resources::CONTRIBUTOR);
+            $this->writeArrayItem(
+                $xmlWriter, 
+                $this->contributor,
+                Resources::CONTRIBUTOR
+            );
         }
 
         if (!is_null($this->generator)) {
@@ -628,35 +561,75 @@ class Source
         } 
 
         if (!is_null($this->icon)) {
-            $xmlWriter->writeElement('atom:icon', $this->icon);
+            $xmlWriter->writeElementNS(
+                'atom',
+                'icon', 
+                Resources::ATOM_NAMESPACE,
+                $this->icon
+            );
         }
 
         if (!is_null($this->logo)) {
-            $xmlWriter->writeElement('atom:logo', $this->logo);
+            $xmlWriter->writeElementNS(
+                'atom',
+                'logo', 
+                Resources::ATOM_NAMESPACE,
+                $this->logo
+            );
         }
 
         if (!is_null($this->id)) {
-            $xmlWriter->writeElement('atom:id', $this->id);
+            $xmlWriter->writeElementNS(
+                'atom',
+                'id', 
+                Resources::ATOM_NAMESPACE,
+                $this->id
+                );
         }
 
         if (!is_null($this->link)) {
-            $xmlWriter->writeElement('atom:link', $this->link);
+            Validate::isArray($this->link, Resources::LINK);
+            $this->writeArrayItem(
+                $xmlWriter, 
+                $this->link,
+                Resources::LINK
+            );
         }
 
         if (!is_null($this->rights)) {
-            $xmlWriter->writeElement('atom:rights', $this->rights);
+            $xmlWriter->writeElementNS(
+                'atom',
+                'rights', 
+                Resources::ATOM_NAMESPACE,
+                $this->rights
+            );
         }
 
         if (!is_null($this->subtitle)) {
-            $xmlWriter->writeElement('atom:subtitle', $this->subtitle);
+            $xmlWriter->writeElementNS(
+                'atom',
+                'subtitle', 
+                Resources::ATOM_NAMESPACE,
+                $this->subtitle
+            );
         }
 
         if (!is_null($this->title)) {
-            $xmlWriter->writeElement('atom:title', $this->title);
+            $xmlWriter->writeElementNS(
+                'atom',
+                'title', 
+                Resources::ATOM_NAMESPACE,
+                $this->title
+            );
         }
 
         if (!is_null($this->updated)) {
-            $xmlWriter->writeElement('atom:updated', $this->updated);
+            $xmlWriter->writeElementNS(
+                'atom',
+                'updated', 
+                Resources::ATOM_NAMESPACE,
+                $this->updated->format(\DateTime::ATOM)
+            );
         }
     }
 }

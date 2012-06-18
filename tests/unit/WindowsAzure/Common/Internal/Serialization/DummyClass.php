@@ -15,59 +15,48 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   WindowsAzure\Common\Internal\Serialization
+ * @package   Tests\Unit\WindowsAzure\Common\Internal\Serialization
  * @author    Azure PHP SDK <azurephpsdk@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
- 
-namespace WindowsAzure\Common\Internal\Serialization;
+
+namespace Tests\Unit\WindowsAzure\Common\Internal\Serialization;
+use Tests\Framework\TestResources;
+use WindowsAzure\Common\Internal\Serialization\XmlSerializer;
+use WindowsAzure\Common\Models\ServiceProperties;
+
 
 /**
- * The serialization interface.
+ * Dummy class for Xml Serializer. 
  *
  * @category  Microsoft
- * @package   WindowsAzure\Common\Internal\Serialization
+ * @package   Tests\Unit\WindowsAzure\Common\Internal\Serialization
  * @author    Azure PHP SDK <azurephpsdk@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @version   Release: @package_version@
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
-interface ISerializer
+class DummyClass
 {
+    private $_attributes;
 
-    /** 
-     * Serialize an object into a XML.
-     * 
-     * @param Object $targetObject The target object to be serialized. 
-     * @param string $rootName     The name of the root.
-     *
-     * @return string
-     */
-    public static function objectSerialize($targetObject, $rootName);
+    public function __construct()
+    {
+        $this->_attributes = array();
+    } 
 
-    /**
-     * Serializes given array. The array indices must be string to use them as
-     * as element name.
-     * 
-     * @param array $array      The object to serialize represented in array.
-     * @param array $properties The used properties in the serialization process.
-     * 
-     * @return string
-     */
-    public function serialize($array, $properties = null);
+    public function addAttribute($attributeKey, $attributeValue)
+    {
+        $this->_attributes[$attributeKey] = $attributeValue;
+    }
 
-    
-    /**
-     * Unserializes given serialized string.
-     * 
-     * @param string $serialized The serialized object in string representation.
-     * 
-     * @return array
-     */
-    public function unserialize($serialized);
+    public function getAttributes() 
+    {
+        return $this->_attributes;
+    }
 }
 
 ?>

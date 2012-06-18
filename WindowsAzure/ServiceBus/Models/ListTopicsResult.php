@@ -45,7 +45,7 @@ class ListTopicsResult extends Feed
      * 
      * @var array
      */ 
-    private $_topicInfo;
+    private $_topicInfos;
 
     /**
      * Populates the properties with a the response from the list topics request.
@@ -58,11 +58,11 @@ class ListTopicsResult extends Feed
     {
         parent::parseXml($response);
         $listTopicsResultXml = new \SimpleXMLElement($response);
-        $this->_topicInfo    = array();
+        $this->_topicInfos   = array();
         foreach ($listTopicsResultXml->entry as $entry) {
             $topicInfo = new TopicInfo();   
             $topicInfo->parseXml($entry->asXml());
-            $this->_topicInfo[] = $topicInfo;
+            $this->_topicInfos[] = $topicInfo;
         } 
     }
 
@@ -78,21 +78,21 @@ class ListTopicsResult extends Feed
      *  
      * @return array
      */
-    public function getTopicInfo()
+    public function getTopicInfos()
     {
-        return $this->_topicInfo;
+        return $this->_topicInfos;
     }
 
     /**
      * Sets the topic information.
      *
-     * @param array $topicInfo The information of the topics. 
+     * @param array $topicInfos The information of the topics. 
      * 
      * @return none
      */
-    public function setTopicInfo($topicInfo)
+    public function setTopicInfos($topicInfos)
     {
-        $this->_topicInfo = $topicInfo;
+        $this->_topicInfos = $topicInfos;
     }
 
 }

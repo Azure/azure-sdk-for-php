@@ -23,8 +23,9 @@
  */
 
 namespace WindowsAzure\Common\Internal\Atom;
-use WindowsAzure\Common\Internal\Utilities;
 use WindowsAzure\Common\Internal\Resources;
+use WindowsAzure\Common\Internal\Utilities;
+use WindowsAzure\Common\Internal\Validate;
 
 /**
  * The category class of the ATOM standard.
@@ -38,7 +39,7 @@ use WindowsAzure\Common\Internal\Resources;
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
 
-class Category
+class Category extends AtomBase
 {
     /**
      * The term of the category. 
@@ -89,6 +90,8 @@ class Category
      */ 
     public function parseXml($xmlString)
     {
+        Validate::notNull($xmlString, 'xmlString');
+        Validate::isString($xmlString, 'xmlString');
         $categoryXml = simplexml_load_string($xmlString);
         $attributes  = $categoryXml->attributes();
         if (!empty($attributes['term'])) {
@@ -203,7 +206,12 @@ class Category
      */
     public function writeXml($xmlWriter)
     {
-        $xmlWriter->startElement('atom:category');
+        Validate::notNull($xmlWriter, 'xmlWriter');
+        $xmlWriter->startElementNS(
+            'atom', 
+            'category',
+            Resources::ATOM_NAMESPACE
+        );
         $this->writeInnerXml($xmlWriter);
         $xmlWriter->endElement();
     }
@@ -217,20 +225,36 @@ class Category
      */
     public function writeInnerXml($xmlWriter)
     {
+        Validate::notNull($xmlWriter, 'xmlWriter');
         if (!empty($this->term)) {
-            $xmlWriter->WriteAttribute('term', $this->term);
+            $xmlWriter->WriteAttributeNS(
+                'atom', 
+                'term', 
+                Resources::ATOM_NAMESPACE, 
+                $this->term
+            );
         }
 
         if (!empty($this->scheme)) {
-            $xmlWriter->WriteAttribute('scheme', $this->scheme);
+            $xmlWriter->WriteAttributeNS(
+                'atom',
+                'scheme', 
+                Resources::ATOM_NAMESPACE,
+                $this->scheme
+            );
         }
 
         if (!empty($this->label)) {
-            $xmlWriter->WriteAttribute('label', $this->label);
+            $xmlWriter->WriteAttributeNS(
+                'atom',
+                'label', 
+                Resources::ATOM_NAMESPACE,
+                $this->label
+            );
         }
 
-        if (!empty($this->content)) {
-            $xmlWriter->WriteRaw($this->content);
+        if (!empty($this->undefinedContent)) {
+            $xmlWriter->WriteRaw($this->undefinedContent);
         }
 
     }

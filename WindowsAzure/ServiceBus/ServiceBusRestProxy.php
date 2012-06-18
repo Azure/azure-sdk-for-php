@@ -163,7 +163,7 @@ class ServiceBusRestProxy extends ServiceRestProxy implements IServiceBus
      *
      * @return BrokeredMessage
      */
-    public function receiveQueueMessage($queueName, $receiveMessageOptions)
+    public function receiveQueueMessage($queueName, $receiveMessageOptions = null)
     {
         $queueMessagePath = sprintf(Resources::RECEIVE_MESSAGE_PATH, $queueName);
         return $this->receiveMessage(
@@ -182,8 +182,12 @@ class ServiceBusRestProxy extends ServiceRestProxy implements IServiceBus
      *
      * @return BrokeredMessage
      */
-    public function receiveMessage($path, $receiveMessageOptions)
+    public function receiveMessage($path, $receiveMessageOptions = null)
     {
+        if (is_null($receiveMessageOptions)) {
+            $receiveMessageOptions = new ReceiveMessageOptions();
+        } 
+
         $httpCallContext = new HttpCallContext();
         $httpCallContext->setPath($path);
         $httpCallContext->addStatusCode(Resources::STATUS_CREATED);
@@ -199,8 +203,8 @@ class ServiceBusRestProxy extends ServiceRestProxy implements IServiceBus
         } else if ($receiveMessageOptions->getIsPeekLock()) {
             $httpCallContext->setMethod(Resources::HTTP_POST);
         } else {
-            throw new ServiceException(
-                'The receive message option is in an unknown mode.'
+            throw new \InvalidArgumentException(
+                Resources::INVALID_RECEIVE_MODE_MSG
             );
         }
 
@@ -218,7 +222,8 @@ class ServiceBusRestProxy extends ServiceRestProxy implements IServiceBus
             $brokerProperties->setLockLocation($responseHeaders['location']);
         }
 
-        $brokeredMessage = new BrokeredMessage($brokerProperties);
+        $brokeredMessage = new BrokeredMessage();
+        $brokeredMessage->setBrokerProperties($brokerProperties);
         
         if (array_key_exists(Resources::CONTENT_TYPE, $responseHeaders)) {
             $brokeredMessage->setContentType(
@@ -272,7 +277,7 @@ class ServiceBusRestProxy extends ServiceRestProxy implements IServiceBus
     public function receiveSubscriptionMessage(
         $topicName, 
         $subscriptionName, 
-        $receiveMessageOptions
+        $receiveMessageOptions = null
     ) {
         $messagePath = sprintf(
             Resources::RECEIVE_SUBSCRIPTION_MESSAGE_PATH, 
@@ -372,10 +377,6 @@ class ServiceBusRestProxy extends ServiceRestProxy implements IServiceBus
         $content = new Content($queueDescriptionXml);
         $content->setType(Resources::XML_CONTENT_TYPE);
         $entry->setContent($content);
-        $entry->setAttribute(
-            Resources::XMLNS_ATOM, 
-            Resources::ATOM_NAMESPACE
-        );
 
         $entry->setAttribute(
             Resources::XMLNS,
@@ -512,10 +513,6 @@ class ServiceBusRestProxy extends ServiceRestProxy implements IServiceBus
         $content = new Content($topicDescriptionXml);
         $content->setType(Resources::XML_CONTENT_TYPE);
         $entry->setContent($content); 
-        $entry->setAttribute(
-            Resources::XMLNS_ATOM, 
-            Resources::ATOM_NAMESPACE
-        );
 
         $entry->setAttribute(
             Resources::XMLNS,
@@ -625,10 +622,6 @@ class ServiceBusRestProxy extends ServiceRestProxy implements IServiceBus
         $content = new Content($subscriptionDescriptionXml);
         $content->setType(Resources::XML_CONTENT_TYPE);
         $entry->setContent($content);
-        $entry->setAttribute(
-            Resources::XMLNS_ATOM,
-            Resources::ATOM_NAMESPACE
-        );
 
         $entry->setAttribute(
             Resources::XMLNS,
@@ -755,10 +748,6 @@ class ServiceBusRestProxy extends ServiceRestProxy implements IServiceBus
         $content = new Content($ruleDescriptionXml);
         $content->setType(Resources::XML_CONTENT_TYPE);
         $entry->setContent($content);
-        $entry->setAttribute(
-            Resources::XMLNS_ATOM,
-            Resources::ATOM_NAMESPACE
-        );
 
         $entry->setAttribute(
             Resources::XMLNS,
@@ -857,5 +846,5 @@ class ServiceBusRestProxy extends ServiceRestProxy implements IServiceBus
         $listRulesResult->parseXml($response->getBody());
         return $listRulesResult;
     }
-    
+
 }

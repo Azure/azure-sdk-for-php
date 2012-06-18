@@ -47,7 +47,7 @@ class ListSubscriptionsResult extends Feed
      * 
      * @var array
      */
-    private $_subscriptionInfo;
+    private $_subscriptionInfos;
 
     /**
      * Populates the properties with the response from the list 
@@ -62,11 +62,11 @@ class ListSubscriptionsResult extends Feed
     {
         parent::parseXml($response);
         $listSubscriptionsResultXml = new \SimpleXMLElement($response);
-        $this->_subscriptionInfo    = array();
+        $this->_subscriptionInfos   = array();
         foreach ($listSubscriptionsResultXml->entry as $entry) {
             $subscriptionInfo = new SubscriptionInfo();
             $subscriptionInfo->parseXml($entry->asXml());
-            $this->_subscriptionInfo[] = $subscriptionInfo;
+            $this->_subscriptionInfos[] = $subscriptionInfo;
         }
     }
 
@@ -82,22 +82,22 @@ class ListSubscriptionsResult extends Feed
      * 
      * @return array
      */
-    public function getSubscriptionInfo()
+    public function getSubscriptionInfos()
     {
-        return $this->_subscriptionInfo;
+        return $this->_subscriptionInfos;
     }
 
     /**
      * Sets the information of the rule. 
      * 
-     * @param array $subscriptionInfo The information of the
+     * @param array $subscriptionInfos The information of the
      * subscription.
      * 
      * @return none 
      */
-    public function setSubscriptionInfo($subscriptionInfo)
+    public function setSubscriptionInfos($subscriptionInfos)
     {
-        $this->_subscriptionInfo = $subscriptionInfo;
+        $this->_subscriptionInfos = $subscriptionInfos;
     }
 
 }

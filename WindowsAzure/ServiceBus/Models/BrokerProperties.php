@@ -119,7 +119,7 @@ class BrokerProperties
      *
      * @var string
      */
-    private $_scheduleEnqueuTimeUtc;
+    private $_scheduledEnqueueTimeUtc;
 
     /**
      * The reply to session ID.
@@ -227,12 +227,12 @@ class BrokerProperties
         }
 
         if (array_key_exists(
-            'ScheduleEnqueueTimeUtc', 
+            'ScheduledEnqueueTimeUtc', 
             $brokerPropertiesArray
         )
         ) {
-            $brokerProperties->setScheduleEnqueueTimeUtc(
-                $brokerPropertiesArray['ScheduleEnqueueTimeUtc']
+            $brokerProperties->setScheduledEnqueueTimeUtc(
+                $brokerPropertiesArray['ScheduledEnqueueTimeUtc']
             );
         }
 
@@ -504,21 +504,21 @@ class BrokerProperties
      * 
      * @return string
      */
-    public function getScheduleEnqueuTimeUtc()
+    public function getScheduledEnqueueTimeUtc()
     {
-        return $this->_scheduleEnqueueTimeUtc;
+        return $this->_scheduledEnqueueTimeUtc;
     }
 
     /**
      * Sets schedule enqueue time UTC. 
      * 
-     * @param string $scheduleEnqueueTimeUtc The schedule enqueue time. 
+     * @param string $scheduledEnqueueTimeUtc The schedule enqueue time. 
      * 
      * @return none
      */
-    public function setScheduleEnqueuTimeUtc($scheduleEnqueueTimeUtc)
+    public function setScheduledEnqueueTimeUtc($scheduledEnqueueTimeUtc)
     {
-        $this->_scheduleEnqueueTimeUtc = $scheduleEnqueueTimeUtc;
+        $this->_scheduledEnqueueTimeUtc = $scheduledEnqueueTimeUtc;
     }
 
     /** 

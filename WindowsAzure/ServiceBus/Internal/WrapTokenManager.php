@@ -24,7 +24,9 @@
  
 namespace WindowsAzure\ServiceBus\Internal;
 use WindowsAzure\Common\Configuration;
+use WindowsAzure\Common\Internal\IServiceBuilder;
 use WindowsAzure\Common\Internal\Resources;
+use WindowsAzure\Common\Internal\Validate;
 use WindowsAzure\ServiceBus\WrapRestProxy;
 use WindowsAzure\ServiceBus\Models\ActiveToken;
 use WindowsAzure\ServiceBus\ServiceBusSettings;
@@ -77,46 +79,52 @@ class WrapTokenManager
      * 
      * @var array
      */
-    private static $_activeTokens;
+    private $_activeTokens;
 
     /**
      * Creates a WRAP token manager with specified parameters. 
      *
-     * @param string                             $wrapUri      The URI
+     * @param string           $wrapUri      The URI
      * of the WRAP service.
-     * @param string                             $wrapName     The user name
+     * @param string           $wrapName     The user name
      * of the WRAP service.
-     * @param string                             $wrapPassword The password
+     * @param string           $wrapPassword The password
      * of the WRAP service.
-     * @param WindowsAzure\Core\IServicesBuilder $builder      The builder
+     * @param IServicesBuilder $builder      The builder
      * object.
+     * 
+     * @throws \InvalidArgumentException
      * 
      * @return WindowsAzure\ServiceBus\Internal\WrapTokenManager
      */
     public function __construct($wrapUri, $wrapName, $wrapPassword, $builder = null)
     {
+        Validate::isString($wrapUri, 'wrapUri');
+        Validate::isString($wrapName, 'wrapName');
+        Validate::isString($wrapPassword, 'wrapPassword');
+
         $this->_wrapUri      = $wrapUri;
         $this->_wrapName     = $wrapName;
         $this->_wrapPassword = $wrapPassword;
-        
+
         $config = new configuration();
         $config->setProperty(
             ServiceBusSettings::WRAP_URI, 
             $this->_wrapUri
         );
-            
+
         $config->setProperty(
             ServiceBusSettings::WRAP_NAME, 
             $this->_wrapName
         );
-            
+
         $config->setProperty(
             ServiceBusSettings::WRAP_PASSWORD,
             $this->_wrapPassword
         );
-           
+
         $this->_wrapRestProxy = WrapService::create($config, $builder);
-        
+
         $this->_activeTokens = array();
         
     }    
@@ -130,21 +138,23 @@ class WrapTokenManager
      */
     public function getAccessToken($targetUri) 
     {
+        Validate::isString($targetUri, '$targetUri');
+
         $this->_sweepExpiredTokens();
         $scopeUri = $this->_createScopeUri($targetUri);
-        
+
         if (array_key_exists($scopeUri, $this->_activeTokens)) {
             $activeToken = $this->_activeTokens[$scopeUri];
             return $activeToken->getWrapAccessTokenResult()->getAccessToken();
         }
-        
+
         $wrapAccessTokenResult = $this->_wrapRestProxy->wrapAccessToken(
             $this->_wrapUri, 
             $this->_wrapName,
             $this->_wrapPassword,
             $scopeUri
         );
-        
+
         $expirationDateTime = new \DateTime("now");
         $expiresIn          = intval($wrapAccessTokenResult->getExpiresIn() / 2); 
         $expirationDateTime = $expirationDateTime->add(
@@ -154,7 +164,7 @@ class WrapTokenManager
         $acquiredActiveToken = new ActiveToken($wrapAccessTokenResult);
         $acquiredActiveToken->setExpirationDateTime($expirationDateTime); 
         $this->_activeTokens[$scopeUri] = $acquiredActiveToken;
-        
+
         return $wrapAccessTokenResult->getAccessToken(); 
     }
     
@@ -189,11 +199,11 @@ class WrapTokenManager
         if ($this->_containsValidAuthority($targetUriComponents)) {
             $authority = $this->_createAuthority($targetUriComponents);
         }
-    
+
         $scopeUri = 'http://'
             .$authority
             .$targetUriComponents[Resources::PHP_URL_HOST];
-        
+
         if (array_key_exists(Resources::PHP_URL_PATH, $targetUriComponents)) {
             $scopeUri .= $targetUriComponents[Resources::PHP_URL_PATH];
         }

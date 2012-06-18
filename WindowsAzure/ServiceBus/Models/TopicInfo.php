@@ -90,10 +90,12 @@ class TopicInfo extends Entry
 
     /**
      * Writes an XML string.
+     * 
+     * @param \XMLWriter $xmlWriter The XML writer.
      *
      * @return string 
      */
-    public function writeXml()
+    public function writeXml($xmlWriter)
     {
         if (is_null($this->_topicDescription)) {
             $this->content = null;    
@@ -106,7 +108,7 @@ class TopicInfo extends Entry
                 )
             );
         }
-        return parent::writeXml();
+        return parent::writeXml($xmlWriter);
     }
 
     /**

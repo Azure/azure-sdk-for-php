@@ -103,7 +103,9 @@ class RuleDescription
                 $filter = new CorrelationFilter();
 
                 if (array_key_exists('CorrelationId', $filterItemArray)) {   
-                    $filter->setCorrelationId((string)$filterItemArray['CorrelationId']);
+                    $filter->setCorrelationId(
+                        (string)$filterItemArray['CorrelationId']
+                    );
                 }
                 break;
 
@@ -111,7 +113,9 @@ class RuleDescription
                 $filter = new SqlFilter();
 
                 if (array_key_exists('SqlExpression', $filterItemArray)) {   
-                    $filter->setSqlExpression((string)$filterItemArray['SqlExpression']);
+                    $filter->setSqlExpression(
+                        (string)$filterItemArray['SqlExpression']
+                    );
                 }
                 break;
                
@@ -137,7 +141,7 @@ class RuleDescription
             switch ($actionType) {
             case 'EmptyRuleAction'  :
                 $action = new EmptyRuleAction();
-                    break;
+                break;
 
             case 'SqlRuleAction' :
                 $action = new SqlRuleAction();

@@ -23,8 +23,9 @@
  */
 
 namespace WindowsAzure\Common\Internal\Atom;
-use WindowsAzure\Common\Internal\Utilities;
 use WindowsAzure\Common\Internal\Resources;
+use WindowsAzure\Common\Internal\Utilities;
+use WindowsAzure\Common\Internal\Validate;
 
 /**
  * This class constructs HTTP requests and receive HTTP responses for service bus.
@@ -38,7 +39,7 @@ use WindowsAzure\Common\Internal\Resources;
  * @link      http://pear.php.net/package/azure-sdk-for-php
  */
 
-class Content
+class Content extends AtomBase
 {
     /**
      * The text of the content. 
@@ -75,7 +76,11 @@ class Content
      */ 
     public function parseXml($xmlString)
     {
+        Validate::notNull($xmlString, 'xmlString');
+        Validate::isString($xmlString, 'xmlString');
         $contentXml = simplexml_load_string($xmlString);
+        Validate::notNull($contentXml, 'contentXml');
+
         $attributes = $contentXml->attributes();
 
         if (!empty($attributes['type'])) {
@@ -143,7 +148,19 @@ class Content
      */
     public function writeXml($xmlWriter)
     {
-        $xmlWriter->startElement('atom:content');
+        Validate::notNull($xmlWriter, 'xmlWriter');
+        $xmlWriter->startElementNS(
+            'atom',
+            'content',
+            Resources::ATOM_NAMESPACE
+        );
+
+        if (!empty($this->type)) {
+            $xmlWriter->writeAttribute(
+                'type', 
+                $this->type
+            );
+        }
         $this->writeInnerXml($xmlWriter);
         $xmlWriter->endElement();
     }
@@ -157,9 +174,7 @@ class Content
      */
     public function writeInnerXml($xmlWriter)
     {
-        if (!empty($this->type)) {
-            $xmlWriter->writeAttribute('type', $this->type);
-        }
+        Validate::notNull($xmlWriter, 'xmlWriter');
         $xmlWriter->writeRaw($this->text);
     }
 }
