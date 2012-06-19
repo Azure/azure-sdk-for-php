@@ -582,7 +582,7 @@ class Source extends AtomBase
                 'id', 
                 Resources::ATOM_NAMESPACE,
                 $this->id
-                );
+            );
         }
 
         if (!is_null($this->link)) {

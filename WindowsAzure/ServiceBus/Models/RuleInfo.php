@@ -56,8 +56,6 @@ class RuleInfo extends Entry
      *
      * @param string          $title           The title of the rule.
      * @param RuleDescription $ruleDescription The description of the rule.
-     *
-     * 
      */
     public function __construct(
         $title = Resources::EMPTY_STRING, 
