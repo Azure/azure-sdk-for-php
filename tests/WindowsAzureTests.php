@@ -139,6 +139,7 @@ spl_autoload_register(
             'tests\\unit\\windowsazure\\blob\\models\\setblobpropertiesresulttest' => '/unit/WindowsAzure/Blob/Models/SetBlobPropertiesResultTest.php',
             'tests\\unit\\windowsazure\\blob\\models\\setcontainermetadataoptionstest' => '/unit/WindowsAzure/Blob/Models/SetContainerMetadataOptionsTest.php',
             'tests\\unit\\windowsazure\\blob\\models\\signedidentifiertest' => '/unit/WindowsAzure/Blob/Models/SignedIdentifierTest.php',
+            'tests\\unit\\windowsazure\\common\\cloudconfigurationmanagertest' => '/unit/WindowsAzure/Common/CloudConfigurationManagerTest.php',
             'tests\\unit\\windowsazure\\common\\internal\\atom\\atomlinktest' => '/unit/WindowsAzure/Common/Internal/Atom/AtomLinkTest.php',
             'tests\\unit\\windowsazure\\common\\internal\\atom\\categorytest' => '/unit/WindowsAzure/Common/Internal/Atom/CategoryTest.php',
             'tests\\unit\\windowsazure\\common\\internal\\atom\\contenttest' => '/unit/WindowsAzure/Common/Internal/Atom/ContentTest.php',
