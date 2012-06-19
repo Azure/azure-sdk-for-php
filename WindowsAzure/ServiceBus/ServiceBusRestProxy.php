@@ -19,7 +19,7 @@
  * @author    Azure PHP SDK <azurephpsdk@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
- * @link      http://pear.php.net/package/azure-sdk-for-php
+ * @link      https://github.com/WindowsAzure/azure-sdk-for-php
  */
 
 namespace WindowsAzure\ServiceBus;
@@ -52,6 +52,7 @@ use WindowsAzure\ServiceBus\Models\ListRulesResult;
 use WindowsAzure\ServiceBus\Models\ListOptions;
 use WindowsAzure\ServiceBus\Models\QueueDescription;
 use WindowsAzure\ServiceBus\Models\QueueInfo;
+use WindowsAzure\ServiceBus\Models\ReceiveMessageOptions;
 use WindowsAzure\ServiceBus\Models\RuleDescription;
 use WindowsAzure\ServiceBus\Models\RuleInfo;
 use WindowsAzure\ServiceBus\Models\SubscriptionDescription;
@@ -72,7 +73,7 @@ use WindowsAzure\Common\Internal\Validate;
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @version   Release: @package_version@
- * @link      http://pear.php.net/package/azure-sdk-for-php
+ * @link      https://github.com/WindowsAzure/azure-sdk-for-php
  */
 
 class ServiceBusRestProxy extends ServiceRestProxy implements IServiceBus
