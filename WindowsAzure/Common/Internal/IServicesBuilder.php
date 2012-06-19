@@ -80,6 +80,24 @@ interface IServicesBuilder
      * @return WindowsAzure\ServiceManagement\ServiceManagementRestProxy
      */
     public function buildServiceManagement($config);
+    
+    /**
+     * Creates a ServiceBusRestProxy using the passed configuration.
+     *
+     * @param WindowsAzure\Common\Configuration $config The configuration object.
+     * 
+     * @return WindowsAzure\ServiceBus\ServiceBusRestProxy
+     */
+    public function buildServiceBus($config);
+    
+    /**
+     * Creates a WrapRestProxy using the passed configuration.
+     *
+     * @param WindowsAzure\Common\Configuration $config The configuration object.
+     * 
+     * @return WindowsAzure\Wrap\WrapRestProxy
+     */
+    public function buildWrap($config);
 }
 
 ?>

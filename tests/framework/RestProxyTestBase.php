@@ -55,17 +55,17 @@ class RestProxyTestBase extends \PHPUnit_Framework_TestCase
         }
     }
     
-    public function setUp($config, $serviceRestProxy)
-    {
-        $this->config = $config;
-        $this->restProxy = $serviceRestProxy;
-    }
-    
     public function __construct()
     {
         $this->xmlSerializer = new XmlSerializer();
         $this->builder = new ServicesBuilder();
         Logger::setLogFile('C:\log.txt');
+    }
+    
+    public function setUp($config, $serviceRestProxy)
+    {
+        $this->config = $config;
+        $this->restProxy = $serviceRestProxy;
     }
     
     protected function onNotSuccessfulTest(\Exception $e)
