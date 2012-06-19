@@ -24,8 +24,10 @@
 
 namespace Tests\Unit\WindowsAzure\Common\Internal\Serialization;
 use Tests\Framework\TestResources;
-use WindowsAzure\Common\Internal\Serialization\XmlSerializer;
 use WindowsAzure\Common\Models\ServiceProperties;
+use WindowsAzure\Common\Internal\InvalidArgumentTypeException;
+use WindowsAzure\Common\Internal\Serialization\XmlSerializer;
+
 
 /**
  * Unit tests for class XmlSerializer
@@ -121,6 +123,56 @@ class XmlSerializerTest extends \PHPUnit_Framework_TestCase
         
         $this->assertEquals($expected, $actual);
     }
-}
 
-?>
+    /**
+     * @covers WindowsAzure\Common\Internal\Serialization\XmlSerializer::objectSerialize
+     */
+    public function testObjectSerializeSucceess()
+    {
+        // Setup
+        $expected = "<DummyClass/>\n";
+        $target = new DummyClass();
+
+        // Test
+        $actual = XmlSerializer::objectSerialize($target, 'DummyClass');
+
+        // Assert
+        $this->assertEquals(
+            $expected,
+            $actual
+        );
+    }
+
+    /**
+     * @covers WindowsAzure\Common\Internal\Serialization\XmlSerializer::objectSerialize
+     */
+    public function testObjectSerializeSucceessWithAttributes()
+    {
+        // Setup 
+        $expected = "<DummyClass testAttribute=\"testAttributeValue\"/>\n";
+        $target = new DummyClass();
+        $target->addAttribute('testAttribute', 'testAttributeValue');
+
+        // Test
+        $actual = XmlSerializer::objectSerialize($target, 'DummyClass');
+
+        // Assert
+        $this->assertEquals(
+            $expected,
+            $actual
+        );
+    }
+
+    /**
+     * @covers WindowsAzure\Common\Internal\Serialization\XmlSerializer::objectSerialize
+     */
+    public function testObjectSerializeInvalidObject()
+    {
+        // Setup
+        $this->setExpectedException(get_class(new \InvalidArgumentException()));
+        // Test
+        $actual = XmlSerializer::objectSerialize(null, null);
+        // Assert
+    }
+
+}
