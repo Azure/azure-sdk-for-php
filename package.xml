@@ -15,7 +15,7 @@ It is build as a thin REST call wrapper where each server call maps to a single 
   <active>yes</active>
  </lead>
  <date>2012-06-18</date>
- <time>19:59:45</time>
+ <time>20:16:19</time>
  <version>
   <release>0.1.0</release>
   <api>0.1.0</api>
@@ -100,7 +100,7 @@ It is build as a thin REST call wrapper where each server call maps to a single 
    <file baseinstalldir="/" md5sum="4f07d7308f1de55c6a05c831f0c3c095" name="/WindowsAzure/Common/Internal/Resources.php" role="php" />
    <file baseinstalldir="/" md5sum="b605e55979af32b6d29615cbc000a4b7" name="/WindowsAzure/Common/Internal/RestProxy.php" role="php" />
    <file baseinstalldir="/" md5sum="167ecdb3d2a1fe061b9ae3a2232e5e9f" name="/WindowsAzure/Common/Internal/ServiceRestProxy.php" role="php" />
-   <file baseinstalldir="/" md5sum="6361f390704a723a669b65d7d15e5048" name="/WindowsAzure/Common/Internal/ServicesBuilder.php" role="php" />
+   <file baseinstalldir="/" md5sum="fb2c3f6857fbacb859df07f0f57dc0c9" name="/WindowsAzure/Common/Internal/ServicesBuilder.php" role="php" />
    <file baseinstalldir="/" md5sum="bfa4d2d6790bcae9e5269adb2af802ef" name="/WindowsAzure/Common/Internal/Utilities.php" role="php" />
    <file baseinstalldir="/" md5sum="58b26fa0d95ce877e1e30ea7ec91cfce" name="/WindowsAzure/Common/Internal/Validate.php" role="php" />
    <file baseinstalldir="/" md5sum="bb2e9b1bd46278b5bfc565513f452a99" name="/WindowsAzure/Common/Internal/Authentication/SharedKeyAuthScheme.php" role="php" />
