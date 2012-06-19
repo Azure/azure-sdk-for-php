@@ -2,10 +2,12 @@
 
 <project name="azure-sdk-for-php" default="build">
  <target name="build"
-   depends="prepare,lint,phploc,pdepend,phpmd-ci,phpcs-ci,phpcpd,phpdox,phpunit,phpcb"/>
+   depends="prepare,lint,phploc,pdepend,phpmd-ci,phpcs-ci,phpcpd,phpdoc,phpunit,phpcb,pear-package"/>
 
  <target name="build-parallel"
    depends="prepare,lint,tools-parallel,phpunit,phpcb"/>
+ <target name="pear-package"
+   depends="discover-channel,pear-package-xml,pear-package-file"/>
 
  <target name="tools-parallel"
          description="Run tools in parallel">
@@ -144,9 +146,11 @@
   </exec>
  </target>
 
- <target name="phpdox"
-         description="Generate API documentation using phpDox">
-  <exec executable="phpdox.bat"/>
+ <target name="phpdoc" description="Generate API documentation using phpDoc">
+  <exec executable="phpdoc.bat">
+   <arg value="-t" />
+   <arg path="${basedir}/build/api" />
+  </exec>
  </target>
 
  <target name="phpunit" description="Run unit tests with PHPUnit">
@@ -162,6 +166,33 @@
    <arg path="${basedir}/WindowsAzure" />
    <arg value="--output" />
    <arg path="${basedir}/build/code-browser" />
+  </exec>
+ </target>
+ 
+ <target name="discover-channel" description="Discovers Windows Azure Channel">
+  <exec executable="pear.bat">
+  <arg value="channel-discover" />
+  <arg value="pear.windowsazure.com" />
+  </exec>
+ </target>
+ 
+ <target name="pear-package-xml" description="Generates PEAR package.xml">
+  <exec executable="php.exe">
+  <arg path="${basedir}/package.php" />
+  <arg value="make" />
+  </exec>
+ </target>
+ 
+ <target name="pear-package-file" description="Generates PEAR package file from package.xml">
+  <exec executable="pear.bat">
+  <arg value="package" />
+  </exec>
+ </target>
+ 
+ <target name="new-pear-release" description="Adds new release to PEAR channel">
+  <exec executable="php.exe">
+  <arg path="${basedir}/ChannelManager.php" />
+  <arg value="release" />
   </exec>
  </target>
 </project>

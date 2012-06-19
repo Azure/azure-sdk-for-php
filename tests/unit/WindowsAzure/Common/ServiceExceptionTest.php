@@ -15,27 +15,28 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   Tests\Unit\WindowsAzure
+ * @package   Tests\Unit\WindowsAzure\Common
  * @author    Azure PHP SDK <azurephpsdk@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
- * @link      http://pear.php.net/package/azure-sdk-for-php
+ * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
 
+namespace Tests\Unit\WindowsAzure\Common;
 use WindowsAzure\Common\ServiceException;
 
 /**
  * Unit tests for class ServiceException
  *
  * @category  Microsoft
- * @package   Tests\Unit\WindowsAzure
+ * @package   Tests\Unit\WindowsAzure\Common
  * @author    Azure PHP SDK <azurephpsdk@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @version   Release: @package_version@
- * @link      http://pear.php.net/package/azure-sdk-for-php
+ * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
-class ServiceExceptionTest extends PHPUnit_Framework_TestCase
+class ServiceExceptionTest extends \PHPUnit_Framework_TestCase
 {
     /**
      * @covers WindowsAzure\Common\ServiceException::__construct

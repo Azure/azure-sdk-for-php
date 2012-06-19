@@ -1,7 +1,7 @@
 <?php
 
 /**
- * LICENSE: Licensed under the Apache License, Version 2.0 (the "License")
+ * LICENSE: Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  * http://www.apache.org/licenses/LICENSE-2.0
@@ -19,7 +19,7 @@
  * @author    Azure PHP SDK <azurephpsdk@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
- * @link      http://pear.php.net/package/azure-sdk-for-php
+ * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
 
 namespace WindowsAzure\Blob;
@@ -83,7 +83,7 @@ use WindowsAzure\Blob\Models\CopyBlobResult;
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @version   Release: @package_version@
- * @link      http://pear.php.net/package/azure-sdk-for-php
+ * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
 class BlobRestProxy extends ServiceRestProxy implements IBlob
 {
@@ -1116,7 +1116,7 @@ class BlobRestProxy extends ServiceRestProxy implements IBlob
      * boundary.
      * @param Models\CreateBlobOptions $options   The optional parameters.
      * 
-     * @return none
+     * @return CopyBlobResult
      * 
      * @see http://msdn.microsoft.com/en-us/library/windowsazure/dd179451.aspx
      */
@@ -1162,7 +1162,7 @@ class BlobRestProxy extends ServiceRestProxy implements IBlob
             $options->getTimeout()
         );
         
-        $this->send(
+        $response = $this->send(
             $method, 
             $headers, 
             $queryParams, 
@@ -1170,6 +1170,8 @@ class BlobRestProxy extends ServiceRestProxy implements IBlob
             $path, 
             $statusCode
         );
+        
+        return CopyBlobResult::create($response->getHeader());
     }
     
     /**
@@ -2117,8 +2119,13 @@ class BlobRestProxy extends ServiceRestProxy implements IBlob
         }  
         
         $queryParams[Resources::QP_COMP] = 'snapshot';
+        $this->addOptionalQueryParam(
+            $queryParams,
+            Resources::QP_TIMEOUT,
+            $options->getTimeout()
+        );
 
-        $this->addOptionalAccessConditionHeader(
+        $headers = $this->addOptionalAccessConditionHeader(
             $headers,
             $options->getAccessCondition()
         );
@@ -2176,18 +2183,25 @@ class BlobRestProxy extends ServiceRestProxy implements IBlob
         if (is_null($options)) {
             $options = new CopyBlobOptions();
         }
+        
+        $this->addOptionalQueryParam(
+            $queryParams,
+            Resources::QP_TIMEOUT,
+            $options->getTimeout()
+        );
+        
         $sourceBlobPath = $this->_getCopyBlobSourceName(
             $sourceContainer, 
             $sourceBlob,
             $options
         );
         
-        $this->addOptionalAccessConditionHeader(
+        $headers = $this->addOptionalAccessConditionHeader(
             $headers, 
             $options->getAccessCondition()
         );
         
-        $this->addOptionalSourceAccessConditionHeader(
+        $headers = $this->addOptionalSourceAccessConditionHeader(
             $headers,
             $options->getSourceAccessCondition()
         );

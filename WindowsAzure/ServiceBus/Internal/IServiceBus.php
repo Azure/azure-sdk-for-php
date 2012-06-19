@@ -19,7 +19,7 @@
  * @author    Azure PHP SDK <azurephpsdk@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
- * @link      http://pear.php.net/package/azure-sdk-for-php
+ * @link      https://github.com/WindowsAzure/azure-sdk-for-php
  */
 
 namespace WindowsAzure\ServiceBus\Internal;
@@ -34,7 +34,7 @@ use WindowsAzure\Common\Internal\FilterableService;
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @version   Release: @package_version@
- * @link      http://pear.php.net/package/azure-sdk-for-php
+ * @link      https://github.com/WindowsAzure/azure-sdk-for-php
  */
 interface IServiceBus extends FilterableService
 {
@@ -52,18 +52,19 @@ interface IServiceBus extends FilterableService
     /**
      * Sends a queue message. 
      * 
-     * @param string           $path            The path to send message.
+     * @param string           $queueName       The name of the queue to send 
+     * message.
      * @param \BrokeredMessage $brokeredMessage The brokered message. 
      *
      * @throws Exception 
      * @return none
      */
-    public function sendQueueMessage($path, $brokeredMessage);
+    public function sendQueueMessage($queueName, $brokeredMessage);
     
     /**
      * Receives a queue message. 
      * 
-     * @param string                  $queuePath              The path to the
+     * @param string                  $queueName              The name of the
      * queue. 
      * @param \ReceivedMessageOptions $receivedMessageOptions The options to 
      * receive the message. 
@@ -71,7 +72,7 @@ interface IServiceBus extends FilterableService
      * @throws Exception 
      * @return none
      */
-    public function receiveQueueMessage($queuePath, $receivedMessageOptions);
+    public function receiveQueueMessage($queueName, $receivedMessageOptions);
 
     /**
      * Receives a message. 

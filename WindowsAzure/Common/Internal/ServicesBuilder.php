@@ -19,7 +19,7 @@
  * @author    Azure PHP SDK <azurephpsdk@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
- * @link      http://pear.php.net/package/azure-sdk-for-php
+ * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
  
 namespace WindowsAzure\Common\Internal;
@@ -58,7 +58,7 @@ use WindowsAzure\ServiceManagement\ServiceManagementRestProxy;
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @version   Release: @package_version@
- * @link      http://pear.php.net/package/azure-sdk-for-php
+ * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
 class ServicesBuilder implements IServiceBuilder
 {
@@ -235,7 +235,7 @@ class ServicesBuilder implements IServiceBuilder
 
         return $tableWrapper;
     }
-
+    
     /**
      * Builds a service bus client. 
      * 
@@ -296,7 +296,7 @@ class ServicesBuilder implements IServiceBuilder
 
         return $serviceManagementWrapper;
     }
-
+    
     /**
      * Builds a WRAP client. 
      * 
@@ -314,7 +314,7 @@ class ServicesBuilder implements IServiceBuilder
 
         return $wrapWrapper;
     }
-    
+
     /**
      * Validates that the given config setting exists in the $config and it's value
      * is doesn't satisfy empty().
@@ -478,7 +478,7 @@ class ServicesBuilder implements IServiceBuilder
                 'Wrap'
             );
             break;
-        
+   
         default:
             $expected  = Resources::QUEUE_TYPE_NAME;
             $expected .= '|' . Resources::BLOB_TYPE_NAME;
