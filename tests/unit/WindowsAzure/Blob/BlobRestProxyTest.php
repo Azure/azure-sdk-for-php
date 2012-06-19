@@ -19,7 +19,7 @@
  * @author    Azure PHP SDK <azurephpsdk@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
- * @link      http://pear.php.net/package/azure-sdk-for-php
+ * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
 
 namespace Tests\Unit\WindowsAzure\Blob;
@@ -63,7 +63,7 @@ use WindowsAzure\Blob\Models\DeleteBlobOptions;
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @version   Release: @package_version@
- * @link      http://pear.php.net/package/azure-sdk-for-php
+ * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
 class BlobRestProxyTest extends BlobServiceRestProxyTestBase
 {
@@ -650,10 +650,12 @@ class BlobRestProxyTest extends BlobServiceRestProxyTestBase
         $this->createContainer($name);
         
         // Test
-        $this->restProxy->createPageBlob($name, 'myblob', 512);
+        $createResult = $this->restProxy->createPageBlob($name, 'myblob', 512);
         
         // Assert
         $result = $this->restProxy->listBlobs($name);
+        $this->assertNotNull($createResult->getEtag());
+        $this->assertInstanceOf('\DateTime', $createResult->getLastModified());
         $this->assertCount(1, $result->getBlobs());
     }
     
