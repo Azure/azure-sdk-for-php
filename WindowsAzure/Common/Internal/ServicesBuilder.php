@@ -63,6 +63,46 @@ use WindowsAzure\ServiceManagement\ServiceManagementRestProxy;
 class ServicesBuilder implements IServicesBuilder
 {
     /**
+     * Gets the HTTP client used in the REST services construction.
+     * 
+     * @return WindowsAzure\Common\Internal\Http\IHttpClient
+     */
+    protected function httpClient()
+    {
+        return new HttpClient();
+    }
+    
+    /**
+     * Gets the serializer used in the REST services construction.
+     * 
+     * @return WindowsAzure\Common\Internal\Serialization\ISerializer
+     */
+    protected function serializer()
+    {
+        return new XmlSerializer();
+    }
+    
+    /**
+     * Gets the MIME serializer used in the REST services construction.
+     * 
+     * @return \WindowsAzure\Table\Internal\IMimeReaderWriter
+     */
+    protected function mimeSerializer()
+    {
+        return new MimeReaderWriter();
+    }
+    
+    /**
+     * Gets the Atom serializer used in the REST services construction.
+     * 
+     * @return \WindowsAzure\Table\Internal\IAtomReaderWriter
+     */
+    protected function atomSerializer()
+    {
+        return new AtomReaderWriter();
+    }
+    
+    /**
      * Adds HeadersFilter with constant headers for each service wrapper.
      * 
      * @param mix    $wrapper service wrapper
@@ -115,8 +155,8 @@ class ServicesBuilder implements IServicesBuilder
     {
         $this->_validateConfig($config, Resources::QUEUE_TYPE_NAME);
         
-        $httpClient    = new HttpClient();
-        $xmlSerializer = new XmlSerializer();
+        $httpClient    = $this->httpClient();
+        $serializer    = $this->serializer();
         $uri           = Utilities::tryAddUrlScheme(
             $config->getProperty(QueueSettings::URI)
         );
@@ -125,7 +165,7 @@ class ServicesBuilder implements IServicesBuilder
             $httpClient, 
             $uri,
             Resources::EMPTY_STRING, 
-            $xmlSerializer
+            $serializer
         );
 
         // Adding headers filter
@@ -160,8 +200,8 @@ class ServicesBuilder implements IServicesBuilder
     {
         $this->_validateConfig($config, Resources::BLOB_TYPE_NAME);
         
-        $httpClient    = new HttpClient();
-        $xmlSerializer = new XmlSerializer();
+        $httpClient    = $this->httpClient();
+        $serializer    = $this->serializer();
         $uri           = Utilities::tryAddUrlScheme(
             $config->getProperty(BlobSettings::URI)
         );
@@ -170,7 +210,7 @@ class ServicesBuilder implements IServicesBuilder
             $httpClient, 
             $uri,
             $config->getProperty(BlobSettings::ACCOUNT_NAME),
-            $xmlSerializer
+            $serializer
         );
 
         // Adding headers filter
@@ -205,10 +245,10 @@ class ServicesBuilder implements IServicesBuilder
     {
         $this->_validateConfig($config, Resources::TABLE_TYPE_NAME);
         
-        $httpClient     = new HttpClient();
-        $atomSerializer = new AtomReaderWriter();
-        $mimeSerializer = new MimeReaderWriter();
-        $xmlSerializer  = new XmlSerializer();
+        $httpClient     = $this->httpClient();
+        $atomSerializer = $this->atomSerializer();
+        $mimeSerializer = $this->mimeSerializer();
+        $serializer     = $this->serializer();
         $uri            = Utilities::tryAddUrlScheme(
             $config->getProperty(TableSettings::URI)
         );
@@ -218,7 +258,7 @@ class ServicesBuilder implements IServicesBuilder
             $uri,
             $atomSerializer,
             $mimeSerializer,
-            $xmlSerializer
+            $serializer
         );
 
         // Adding headers filter
@@ -254,12 +294,12 @@ class ServicesBuilder implements IServicesBuilder
     {
         $this->_validateConfig($config, Resources::SERVICE_BUS_TYPE_NAME);
         
-        $httpClient        = new HttpClient();
-        $xmlSerializer     = new XmlSerializer();
+        $httpClient        = $this->httpClient();
+        $serializer        = $this->serializer();
         $serviceBusWrapper = new ServiceBusRestProxy(
             $httpClient,
             $config->getProperty(ServiceBusSettings::URI),
-            $xmlSerializer
+            $serializer
         );
         
         $wrapFilter = new WrapFilter(
@@ -286,7 +326,7 @@ class ServicesBuilder implements IServicesBuilder
             ServiceManagementSettings::CERTIFICATE_PATH
         );
         $httpClient      = new HttpClient($certificatePath);
-        $xmlSerializer   = new XmlSerializer();
+        $serializer      = $this->serializer();
         $uri             = Utilities::tryAddUrlScheme(
             $config->getProperty(ServiceManagementSettings::URI),
             Resources::HTTPS_SCHEME
@@ -296,7 +336,7 @@ class ServicesBuilder implements IServicesBuilder
             $httpClient,
             $config->getProperty(ServiceManagementSettings::SUBSCRIPTION_ID),
             $uri,
-            $xmlSerializer
+            $serializer
         );
 
         // Adding headers filter
@@ -318,7 +358,7 @@ class ServicesBuilder implements IServicesBuilder
     {
         $this->_validateConfig($config, Resources::WRAP_TYPE_NAME);
         
-        $httpClient  = new HttpClient();
+        $httpClient  = $this->httpClient();
         $wrapWrapper = new WrapRestProxy(
             $httpClient,
             $config->getProperty(ServiceBusSettings::WRAP_URI) 

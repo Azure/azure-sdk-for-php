@@ -48,6 +48,8 @@ class ServicesBuilderTest extends \PHPUnit_Framework_TestCase
 {
     /**
      * @covers WindowsAzure\Common\Internal\ServicesBuilder::buildQueue
+     * @covers WindowsAzure\Common\Internal\ServicesBuilder::httpClient
+     * @covers WindowsAzure\Common\Internal\ServicesBuilder::serializer
      * @covers WindowsAzure\Common\Internal\ServicesBuilder::_addHeadersFilter
      * @covers WindowsAzure\Common\Internal\ServicesBuilder::_validateConfig
      */
@@ -70,6 +72,8 @@ class ServicesBuilderTest extends \PHPUnit_Framework_TestCase
     
     /**
      * @covers WindowsAzure\Common\Internal\ServicesBuilder::buildBlob
+     * @covers WindowsAzure\Common\Internal\ServicesBuilder::httpClient
+     * @covers WindowsAzure\Common\Internal\ServicesBuilder::serializer
      * @covers WindowsAzure\Common\Internal\ServicesBuilder::_addHeadersFilter
      * @covers WindowsAzure\Common\Internal\ServicesBuilder::_validateConfig
      */
@@ -92,6 +96,10 @@ class ServicesBuilderTest extends \PHPUnit_Framework_TestCase
     
     /**
      * @covers WindowsAzure\Common\Internal\ServicesBuilder::buildTable
+     * @covers WindowsAzure\Common\Internal\ServicesBuilder::httpClient
+     * @covers WindowsAzure\Common\Internal\ServicesBuilder::serializer
+     * @covers WindowsAzure\Common\Internal\ServicesBuilder::mimeSerializer
+     * @covers WindowsAzure\Common\Internal\ServicesBuilder::atomSerializer
      * @covers WindowsAzure\Common\Internal\ServicesBuilder::_addHeadersFilter
      * @covers WindowsAzure\Common\Internal\ServicesBuilder::_validateConfig
      */
@@ -114,6 +122,8 @@ class ServicesBuilderTest extends \PHPUnit_Framework_TestCase
     
     /**
      * @covers WindowsAzure\Common\Internal\ServicesBuilder::buildServiceManagement
+     * @covers WindowsAzure\Common\Internal\ServicesBuilder::httpClient
+     * @covers WindowsAzure\Common\Internal\ServicesBuilder::serializer
      * @covers WindowsAzure\Common\Internal\ServicesBuilder::_addHeadersFilter
      * @covers WindowsAzure\Common\Internal\ServicesBuilder::_validateConfig
      */
