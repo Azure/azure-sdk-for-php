@@ -126,7 +126,7 @@ class QueueInfo extends Entry
      *
      * @param QueueDescription $queueDescription The description of the queue.
      * 
-     & @return none
+     * @return none
      */
     public function setQueueDescription($queueDescription)
     {
