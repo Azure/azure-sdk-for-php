@@ -29,7 +29,7 @@ use WindowsAzure\Common\Configuration;
 use WindowsAzure\Common\ServiceRestProxy;
 use WindowsAzure\Common\Http\IHttpClient;
 use WindowsAzure\Common\Http\Url;
-use WindowsAzure\Common\Internal\IServiceBuilder;
+use WindowsAzure\Common\Internal\IServicesBuilder;
 use WindowsAzure\Common\Internal\Resources;
 use WindowsAzure\Common\Internal\Utilities;
 use WindowsAzure\Common\Internal\Validate;
@@ -167,7 +167,7 @@ class WrapTokenManagerTest_MockWrapRestProxy implements IWrap
     }
 }
 
-class WrapTokenManagerTest_CustomBuilder implements IServiceBuilder
+class WrapTokenManagerTest_CustomBuilder implements IServicesBuilder
 {
     private $_contract;
 
@@ -176,7 +176,32 @@ class WrapTokenManagerTest_CustomBuilder implements IServiceBuilder
         $this->_contract = $contract;
     }
 
-    public function build($config, $type)
+    public function buildBlob($config)
+    {
+        return $this->_contract;
+    }
+
+    public function buildQueue($config)
+    {
+        return $this->_contract;
+    }
+
+    public function buildServiceBus($config)
+    {
+        return $this->_contract;
+    }
+
+    public function buildServiceManagement($config)
+    {
+        return $this->_contract;
+    }
+
+    public function buildTable($config)
+    {
+        return $this->_contract;
+    }
+
+    public function buildWrap($config)
     {
         return $this->_contract;
     }
