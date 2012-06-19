@@ -54,7 +54,7 @@ class CloudConfigurationManager
      * The search work in the following order:
      * 1- Environment variables
      * 2- Service Configuration
-     * 4- Use getConnectionStringCached
+     * 3- Use getConnectionStringCached
      * 
      * @param string $key The connection string key name.
      * 
