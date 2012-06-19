@@ -103,17 +103,41 @@ class ServicesBuilder implements IServicesBuilder
     {
         return new AtomReaderWriter();
     }
-    
+
+    /**
+     * Gets the Queue authentication scheme.
+     * 
+     * @param string $accountName The account name.
+     * @param string $accountKey  The account key.
+     * 
+     * @return \WindowsAzure\Common\Internal\Authentication\SharedKeyAuthScheme 
+     */
     protected function queueAuthenticationScheme($accountName, $accountKey)
     {
         return new SharedKeyAuthScheme($accountName, $accountKey);
     }
     
+    /**
+     * Gets the Blob authentication scheme.
+     * 
+     * @param string $accountName The account name.
+     * @param string $accountKey  The account key.
+     * 
+     * @return \WindowsAzure\Common\Internal\Authentication\SharedKeyAuthScheme 
+     */
     protected function blobAuthenticationScheme($accountName, $accountKey)
     {
         return new SharedKeyAuthScheme($accountName, $accountKey);
     }
     
+    /**
+     * Gets the Table authentication scheme.
+     * 
+     * @param string $accountName The account name.
+     * @param string $accountKey  The account key.
+     * 
+     * @return TableSharedKeyLiteAuthScheme
+     */
     protected function tableAuthenticationScheme($accountName, $accountKey)
     {
         return new TableSharedKeyLiteAuthScheme($accountName, $accountKey);

@@ -50,7 +50,7 @@ class AuthenticationFilter implements IServiceFilter
     /**
      * Creates AuthenticationFilter with the passed scheme.
      * 
-     * @param StorageAuthScheme $_authenticationScheme The authentication scheme.
+     * @param StorageAuthScheme $authenticationScheme The authentication scheme.
      */
     public function __construct($authenticationScheme)
     {
