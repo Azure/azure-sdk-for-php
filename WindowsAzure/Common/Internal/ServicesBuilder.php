@@ -418,6 +418,46 @@ class ServicesBuilder implements IServicesBuilder
             throw new InvalidArgumentTypeException($expected);
         }
     }
+    
+        /**
+     * Configures $config to run against the storage emulator.
+     *
+     * @param WindowsAzure\Common\Configuration $config The configuration.
+     * @param string                            $type   The type name.
+     * 
+     * @return none
+     */
+    private static function _useStorageEmulatorConfig($config, $type)
+    {
+        $name = Resources::DEV_STORE_NAME;
+        $key  = Resources::DEV_STORE_KEY;
+        $uri  = "http://%s/" . Resources::DEV_STORE_NAME . "/";
+        
+        if ($type == Resources::QUEUE_TYPE_NAME) {
+            $config->setProperty(
+                QueueSettings::URI, sprintf($uri, Resources::EMULATOR_QUEUE_URI)
+            );
+            $config->setProperty(QueueSettings::ACCOUNT_NAME, $name);
+            $config->setProperty(QueueSettings::ACCOUNT_KEY, $key);
+        } else if ($type == Resources::BLOB_TYPE_NAME) {
+            $config->setProperty(
+                BlobSettings::URI, sprintf($uri, Resources::EMULATOR_BLOB_URI)
+            );
+            $config->setProperty(BlobSettings::ACCOUNT_NAME, $name);
+            $config->setProperty(BlobSettings::ACCOUNT_KEY, $key);
+        } else if ($type == Resources::TABLE_TYPE_NAME) {
+            $config->setProperty(
+                TableSettings::URI, sprintf($uri, Resources::EMULATOR_TABLE_URI)
+            );
+            $config->setProperty(TableSettings::ACCOUNT_NAME, $name);
+            $config->setProperty(TableSettings::ACCOUNT_KEY, $key);
+        } else {
+            $expected  = Resources::QUEUE_TYPE_NAME;
+            $expected .= '|' . Resources::BLOB_TYPE_NAME;
+            $expected .= '|' . Resources::TABLE_TYPE_NAME;
+            throw new InvalidArgumentTypeException($expected);
+        }
+    }
 }
 
 ?>
