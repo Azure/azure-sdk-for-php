@@ -31,7 +31,7 @@ use WindowsAzure\Common\Internal\IServicesBuilder;
 use WindowsAzure\Common\Configuration;
 use WindowsAzure\Common\Internal\Filters\DateFilter;
 use WindowsAzure\Common\Internal\Filters\HeadersFilter;
-use WindowsAzure\Common\Internal\Filters\SharedKeyFilter;
+use WindowsAzure\Common\Internal\Filters\AuthenticationFilter;
 use WindowsAzure\Common\Internal\Filters\WrapFilter;
 use WindowsAzure\Common\Internal\InvalidArgumentTypeException;
 use WindowsAzure\Queue\QueueRestProxy;
@@ -48,6 +48,8 @@ use WindowsAzure\Table\Internal\MimeReaderWriter;
 use WindowsAzure\Common\Internal\Serialization\XmlSerializer;
 use WindowsAzure\ServiceManagement\ServiceManagementSettings;
 use WindowsAzure\ServiceManagement\ServiceManagementRestProxy;
+use WindowsAzure\Common\Internal\Authentication\SharedKeyAuthScheme;
+use WindowsAzure\Common\Internal\Authentication\TableSharedKeyLiteAuthScheme;
 
 /**
  * Builds azure service objects.
@@ -100,6 +102,21 @@ class ServicesBuilder implements IServicesBuilder
     protected function atomSerializer()
     {
         return new AtomReaderWriter();
+    }
+    
+    protected function queueAuthenticationScheme($accountName, $accountKey)
+    {
+        return new SharedKeyAuthScheme($accountName, $accountKey);
+    }
+    
+    protected function blobAuthenticationScheme($accountName, $accountKey)
+    {
+        return new SharedKeyAuthScheme($accountName, $accountKey);
+    }
+    
+    protected function tableAuthenticationScheme($accountName, $accountKey)
+    {
+        return new TableSharedKeyLiteAuthScheme($accountName, $accountKey);
     }
     
     /**
@@ -178,10 +195,11 @@ class ServicesBuilder implements IServicesBuilder
         $queueWrapper = $queueWrapper->withFilter($dateFilter);
 
         // Adding authentication filter
-        $authFilter = new SharedKeyFilter(
-            $config->getProperty(QueueSettings::ACCOUNT_NAME),
-            $config->getProperty(QueueSettings::ACCOUNT_KEY),
-            Resources::QUEUE_TYPE_NAME
+        $authFilter = new AuthenticationFilter(
+            $this->queueAuthenticationScheme(
+                $config->getProperty(QueueSettings::ACCOUNT_NAME),
+                $config->getProperty(QueueSettings::ACCOUNT_KEY)
+            )
         );
 
         $queueWrapper = $queueWrapper->withFilter($authFilter);
@@ -222,11 +240,11 @@ class ServicesBuilder implements IServicesBuilder
         $dateFilter  = new DateFilter();
         $blobWrapper = $blobWrapper->withFilter($dateFilter);
 
-        // Adding authentication filter
-        $authFilter = new SharedKeyFilter(
-            $config->getProperty(BlobSettings::ACCOUNT_NAME),
-            $config->getProperty(BlobSettings::ACCOUNT_KEY),
-            Resources::BLOB_TYPE_NAME
+        $authFilter = new AuthenticationFilter(
+            $this->blobAuthenticationScheme(
+                $config->getProperty(BlobSettings::ACCOUNT_NAME),
+                $config->getProperty(BlobSettings::ACCOUNT_KEY)
+            )
         );
 
         $blobWrapper = $blobWrapper->withFilter($authFilter);
@@ -271,10 +289,11 @@ class ServicesBuilder implements IServicesBuilder
         $tableWrapper = $tableWrapper->withFilter($dateFilter);
 
         // Adding authentication filter
-        $authFilter = new SharedKeyFilter(
-            $config->getProperty(TableSettings::ACCOUNT_NAME),
-            $config->getProperty(TableSettings::ACCOUNT_KEY),
-            Resources::TABLE_TYPE_NAME
+        $authFilter = new AuthenticationFilter(
+            $this->tableAuthenticationScheme(
+                $config->getProperty(TableSettings::ACCOUNT_NAME),
+                $config->getProperty(TableSettings::ACCOUNT_KEY)
+            )
         );
 
         $tableWrapper = $tableWrapper->withFilter($authFilter);
