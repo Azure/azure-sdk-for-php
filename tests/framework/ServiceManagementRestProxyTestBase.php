@@ -80,7 +80,7 @@ class ServiceManagementRestProxyTestBase extends RestProxyTestBase
             ServiceManagementSettings::CERTIFICATE_PATH,
             TestResources::serviceManagementCertificatePath()
         );
-        $serviceManagementRestProxy = $this->builder->buildServiceManagement($config);
+        $serviceManagementRestProxy = $this->builder->createServiceManagementService($config);
         
         parent::setUp($config, $serviceManagementRestProxy);
         

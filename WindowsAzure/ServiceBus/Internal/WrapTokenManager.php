@@ -126,7 +126,7 @@ class WrapTokenManager
             $builder = new ServicesBuilder();
         }
         
-        $this->_wrapRestProxy = $builder->buildWrap($config);
+        $this->_wrapRestProxy = $builder->createWrapService($config);
 
         $this->_activeTokens = array();
         

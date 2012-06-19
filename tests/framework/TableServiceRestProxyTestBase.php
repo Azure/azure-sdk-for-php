@@ -49,7 +49,7 @@ class TableServiceRestProxyTestBase extends ServiceRestProxyTestBase
         $config->setProperty(TableSettings::ACCOUNT_KEY, TestResources::accountKey());
         $config->setProperty(TableSettings::ACCOUNT_NAME, TestResources::accountName());        
         $config->setProperty(TableSettings::URI, $tableUri);
-        $tableRestProxy = $this->builder->buildTable($config);
+        $tableRestProxy = $this->builder->createTableService($config);
         parent::setUp($config, $tableRestProxy);
         $this->_createdTables = array();
     }

@@ -176,32 +176,32 @@ class WrapTokenManagerTest_CustomBuilder implements IServicesBuilder
         $this->_contract = $contract;
     }
 
-    public function buildBlob($config)
+    public function createBlobService($config)
     {
         return $this->_contract;
     }
 
-    public function buildQueue($config)
+    public function createQueueService($config)
     {
         return $this->_contract;
     }
 
-    public function buildServiceBus($config)
+    public function createServiceBusService($config)
     {
         return $this->_contract;
     }
 
-    public function buildServiceManagement($config)
+    public function createServiceManagementService($config)
     {
         return $this->_contract;
     }
 
-    public function buildTable($config)
+    public function createTableService($config)
     {
         return $this->_contract;
     }
 
-    public function buildWrap($config)
+    public function createWrapService($config)
     {
         return $this->_contract;
     }

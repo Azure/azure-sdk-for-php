@@ -52,7 +52,7 @@ class BlobServiceRestProxyTestBase extends ServiceRestProxyTestBase
         $config->setProperty(BlobSettings::ACCOUNT_KEY, TestResources::accountKey());
         $config->setProperty(BlobSettings::ACCOUNT_NAME, TestResources::accountName());        
         $config->setProperty(BlobSettings::URI, $blobUri);
-        $blobRestProxy = $this->builder->buildBlob($config);
+        $blobRestProxy = $this->builder->createBlobService($config);
         parent::setUp($config, $blobRestProxy);
         $this->_createdContainers = array();
     }

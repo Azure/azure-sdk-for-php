@@ -50,7 +50,7 @@ class QueueServiceRestProxyTestBase extends ServiceRestProxyTestBase
         $config->setProperty(QueueSettings::ACCOUNT_KEY, TestResources::accountKey());
         $config->setProperty(QueueSettings::ACCOUNT_NAME, TestResources::accountName());        
         $config->setProperty(QueueSettings::URI, $queueUri);
-        $queueRestProxy = $this->builder->buildQueue($config);
+        $queueRestProxy = $this->builder->createQueueService($config);
         parent::setUp($config, $queueRestProxy);
         $this->_createdQueues = array();
     }

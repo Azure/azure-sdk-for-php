@@ -52,7 +52,7 @@ interface IServicesBuilder
      * 
      * @return WindowsAzure\Blob\BlobRestProxy
      */
-    public function buildBlob($config);
+    public function createBlobService($config);
     
     /**
      * Creates a QueueRestProxy using the passed configuration.
@@ -61,7 +61,7 @@ interface IServicesBuilder
      * 
      * @return WindowsAzure\Queue\QueueRestProxy
      */
-    public function buildQueue($config);
+    public function createQueueService($config);
     
     /**
      * Creates a TableRestProxy using the passed configuration.
@@ -70,7 +70,7 @@ interface IServicesBuilder
      * 
      * @return WindowsAzure\Table\TableRestProxy
      */
-    public function buildTable($config);
+    public function createTableService($config);
     
     /**
      * Creates a ServiceManagementRestProxy using the passed configuration.
@@ -79,7 +79,7 @@ interface IServicesBuilder
      * 
      * @return WindowsAzure\ServiceManagement\ServiceManagementRestProxy
      */
-    public function buildServiceManagement($config);
+    public function createServiceManagementService($config);
     
     /**
      * Creates a ServiceBusRestProxy using the passed configuration.
@@ -88,7 +88,7 @@ interface IServicesBuilder
      * 
      * @return WindowsAzure\ServiceBus\ServiceBusRestProxy
      */
-    public function buildServiceBus($config);
+    public function createServiceBusService($config);
     
     /**
      * Creates a WrapRestProxy using the passed configuration.
@@ -97,7 +97,7 @@ interface IServicesBuilder
      * 
      * @return WindowsAzure\Wrap\WrapRestProxy
      */
-    public function buildWrap($config);
+    public function createWrapService($config);
 }
 
 ?>

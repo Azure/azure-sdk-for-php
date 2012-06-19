@@ -192,7 +192,7 @@ class ServicesBuilder implements IServicesBuilder
      * 
      * @return WindowsAzure\Queue\Internal\IQueue.
      */
-    public function buildQueue($config)
+    public function createQueueService($config)
     {
         $this->_validateConfig($config, Resources::QUEUE_TYPE_NAME);
         
@@ -238,7 +238,7 @@ class ServicesBuilder implements IServicesBuilder
      * 
      * @return WindowsAzure\Blob\Internal\IBlob.
      */
-    public function buildBlob($config)
+    public function createBlobService($config)
     {
         $this->_validateConfig($config, Resources::BLOB_TYPE_NAME);
         
@@ -283,7 +283,7 @@ class ServicesBuilder implements IServicesBuilder
      * 
      * @return WindowsAzure\Table\Internal\ITable.
      */
-    public function buildTable($config)
+    public function createTableService($config)
     {
         $this->_validateConfig($config, Resources::TABLE_TYPE_NAME);
         
@@ -333,7 +333,7 @@ class ServicesBuilder implements IServicesBuilder
      * 
      * @return WindowsAzure\ServiceBus\Internal\IServiceBus
      */
-    public function buildServiceBus($config)
+    public function createServiceBusService($config)
     {
         $this->_validateConfig($config, Resources::SERVICE_BUS_TYPE_NAME);
         
@@ -361,7 +361,7 @@ class ServicesBuilder implements IServicesBuilder
      * 
      * @return WindowsAzure\ServiceManagement\Internal\IServiceManagement
      */
-    public function buildServiceManagement($config)
+    public function createServiceManagementService($config)
     {
         $this->_validateConfig($config, Resources::SERVICE_MANAGEMENT_TYPE_NAME);
         
@@ -397,7 +397,7 @@ class ServicesBuilder implements IServicesBuilder
      *
      * @return WindowsAzure\ServiceBus\Internal\IWrap
      */
-    public function buildWrap($config)
+    public function createWrapService($config)
     {
         $this->_validateConfig($config, Resources::WRAP_TYPE_NAME);
         

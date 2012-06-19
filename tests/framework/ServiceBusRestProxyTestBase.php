@@ -82,7 +82,7 @@ class ServiceBusRestProxyTestBase extends ServiceRestProxyTestBase
             TestResources::wrapPassword()
         );
 
-        $serviceBusWrapper = $this->builder->buildServiceBus($config);
+        $serviceBusWrapper = $this->builder->createServiceBusService($config);
         $this->_createdTopics = array();
         $this->_createdSubscriptions = array();
         $this->_createdRules = array();

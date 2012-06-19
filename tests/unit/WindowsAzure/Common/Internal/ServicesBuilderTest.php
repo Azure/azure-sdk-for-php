@@ -47,7 +47,7 @@ use WindowsAzure\Common\Internal\InvalidArgumentTypeException;
 class ServicesBuilderTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @covers WindowsAzure\Common\Internal\ServicesBuilder::buildQueue
+     * @covers WindowsAzure\Common\Internal\ServicesBuilder::createQueueService
      * @covers WindowsAzure\Common\Internal\ServicesBuilder::httpClient
      * @covers WindowsAzure\Common\Internal\ServicesBuilder::serializer
      * @covers WindowsAzure\Common\Internal\ServicesBuilder::queueAuthenticationScheme
@@ -65,14 +65,14 @@ class ServicesBuilderTest extends \PHPUnit_Framework_TestCase
         $builder = new ServicesBuilder();
         
         // Test
-        $queueRestProxy = $builder->buildQueue($config);
+        $queueRestProxy = $builder->createQueueService($config);
         
         // Assert
         $this->assertInstanceOf('WindowsAzure\Queue\Internal\IQueue', $queueRestProxy);
     }
     
     /**
-     * @covers WindowsAzure\Common\Internal\ServicesBuilder::buildBlob
+     * @covers WindowsAzure\Common\Internal\ServicesBuilder::createBlobService
      * @covers WindowsAzure\Common\Internal\ServicesBuilder::httpClient
      * @covers WindowsAzure\Common\Internal\ServicesBuilder::serializer
      * @covers WindowsAzure\Common\Internal\ServicesBuilder::blobAuthenticationScheme
@@ -90,14 +90,14 @@ class ServicesBuilderTest extends \PHPUnit_Framework_TestCase
         $builder = new ServicesBuilder();
         
         // Test
-        $blobRestProxy = $builder->buildBlob($config);
+        $blobRestProxy = $builder->createBlobService($config);
         
         // Assert
         $this->assertInstanceOf('WindowsAzure\Blob\Internal\IBlob', $blobRestProxy);
     }
     
     /**
-     * @covers WindowsAzure\Common\Internal\ServicesBuilder::buildTable
+     * @covers WindowsAzure\Common\Internal\ServicesBuilder::createTableService
      * @covers WindowsAzure\Common\Internal\ServicesBuilder::httpClient
      * @covers WindowsAzure\Common\Internal\ServicesBuilder::serializer
      * @covers WindowsAzure\Common\Internal\ServicesBuilder::mimeSerializer
@@ -117,14 +117,14 @@ class ServicesBuilderTest extends \PHPUnit_Framework_TestCase
         $builder = new ServicesBuilder();
         
         // Test
-        $tableRestProxy = $builder->buildTable($config);
+        $tableRestProxy = $builder->createTableService($config);
         
         // Assert
         $this->assertInstanceOf('WindowsAzure\Table\Internal\ITable', $tableRestProxy);
     }
     
     /**
-     * @covers WindowsAzure\Common\Internal\ServicesBuilder::buildServiceManagement
+     * @covers WindowsAzure\Common\Internal\ServicesBuilder::createServiceManagementService
      * @covers WindowsAzure\Common\Internal\ServicesBuilder::httpClient
      * @covers WindowsAzure\Common\Internal\ServicesBuilder::serializer
      * @covers WindowsAzure\Common\Internal\ServicesBuilder::_addHeadersFilter
@@ -140,14 +140,14 @@ class ServicesBuilderTest extends \PHPUnit_Framework_TestCase
         $builder = new ServicesBuilder();
         
         // Test
-        $serviceManagementRestProxy = $builder->buildServiceManagement($config);
+        $serviceManagementRestProxy = $builder->createServiceManagementService($config);
         
         // Assert
         $this->assertInstanceOf('WindowsAzure\ServiceManagement\Internal\IServiceManagement', $serviceManagementRestProxy);
     }
     
     /**
-     * @covers WindowsAzure\Common\Internal\ServicesBuilder::buildQueue
+     * @covers WindowsAzure\Common\Internal\ServicesBuilder::createQueueService
      * @covers WindowsAzure\Common\Internal\ServicesBuilder::_validateConfig
      * @covers WindowsAzure\Common\Internal\ServicesBuilder::_validateConfigSetting
      */
@@ -160,11 +160,11 @@ class ServicesBuilderTest extends \PHPUnit_Framework_TestCase
         $builder = new ServicesBuilder();
         $this->setExpectedException('\InvalidArgumentException', $missingKeyMsg);
         
-        $builder->buildQueue($config);
+        $builder->createQueueService($config);
     }
     
     /**
-     * @covers WindowsAzure\Common\Internal\ServicesBuilder::buildQueue
+     * @covers WindowsAzure\Common\Internal\ServicesBuilder::createQueueService
      * @covers WindowsAzure\Common\Internal\ServicesBuilder::_validateConfig
      * @covers WindowsAzure\Common\Internal\ServicesBuilder::_validateConfigSetting
      */
@@ -178,11 +178,11 @@ class ServicesBuilderTest extends \PHPUnit_Framework_TestCase
         $builder = new ServicesBuilder();
         $this->setExpectedException('\InvalidArgumentException', $missingValueMsg);
         
-        $builder->buildQueue($config);
+        $builder->createQueueService($config);
     }
     
     /**
-     * @covers WindowsAzure\Common\Internal\ServicesBuilder::buildBlob
+     * @covers WindowsAzure\Common\Internal\ServicesBuilder::createBlobService
      * @covers WindowsAzure\Common\Internal\ServicesBuilder::_validateConfig
      * @covers WindowsAzure\Common\Internal\ServicesBuilder::_validateConfigSetting
      */
@@ -195,11 +195,11 @@ class ServicesBuilderTest extends \PHPUnit_Framework_TestCase
         $builder = new ServicesBuilder();
         $this->setExpectedException('\InvalidArgumentException', $missingKeyMsg);
         
-        $builder->buildBlob($config);
+        $builder->createBlobService($config);
     }
     
     /**
-     * @covers WindowsAzure\Common\Internal\ServicesBuilder::buildBlob
+     * @covers WindowsAzure\Common\Internal\ServicesBuilder::createBlobService
      * @covers WindowsAzure\Common\Internal\ServicesBuilder::_validateConfig
      * @covers WindowsAzure\Common\Internal\ServicesBuilder::_validateConfigSetting
      */
@@ -213,11 +213,11 @@ class ServicesBuilderTest extends \PHPUnit_Framework_TestCase
         $builder = new ServicesBuilder();
         $this->setExpectedException('\InvalidArgumentException', $missingValueMsg);
         
-        $builder->buildBlob($config);
+        $builder->createBlobService($config);
     }
     
     /**
-     * @covers WindowsAzure\Common\Internal\ServicesBuilder::buildTable
+     * @covers WindowsAzure\Common\Internal\ServicesBuilder::createTableService
      * @covers WindowsAzure\Common\Internal\ServicesBuilder::_validateConfig
      * @covers WindowsAzure\Common\Internal\ServicesBuilder::_validateConfigSetting
      */
@@ -230,11 +230,11 @@ class ServicesBuilderTest extends \PHPUnit_Framework_TestCase
         $builder = new ServicesBuilder();
         $this->setExpectedException('\InvalidArgumentException', $missingKeyMsg);
         
-        $builder->buildTable($config);
+        $builder->createTableService($config);
     }
     
     /**
-     * @covers WindowsAzure\Common\Internal\ServicesBuilder::buildTable
+     * @covers WindowsAzure\Common\Internal\ServicesBuilder::createTableService
      * @covers WindowsAzure\Common\Internal\ServicesBuilder::_validateConfig
      * @covers WindowsAzure\Common\Internal\ServicesBuilder::_validateConfigSetting
      */
@@ -248,11 +248,11 @@ class ServicesBuilderTest extends \PHPUnit_Framework_TestCase
         $builder = new ServicesBuilder();
         $this->setExpectedException('\InvalidArgumentException', $missingValueMsg);
         
-        $builder->buildTable($config);
+        $builder->createTableService($config);
     }
     
     /**
-     * @covers WindowsAzure\Common\Internal\ServicesBuilder::buildServiceManagement
+     * @covers WindowsAzure\Common\Internal\ServicesBuilder::createServiceManagementService
      * @covers WindowsAzure\Common\Internal\ServicesBuilder::_validateConfig
      * @covers WindowsAzure\Common\Internal\ServicesBuilder::_validateConfigSetting
      */
@@ -265,11 +265,11 @@ class ServicesBuilderTest extends \PHPUnit_Framework_TestCase
         $builder = new ServicesBuilder();
         $this->setExpectedException('\InvalidArgumentException', $missingKeyMsg);
         
-        $builder->buildServiceManagement($config);
+        $builder->createServiceManagementService($config);
     }
     
     /**
-     * @covers WindowsAzure\Common\Internal\ServicesBuilder::buildServiceManagement
+     * @covers WindowsAzure\Common\Internal\ServicesBuilder::createServiceManagementService
      * @covers WindowsAzure\Common\Internal\ServicesBuilder::_validateConfig
      * @covers WindowsAzure\Common\Internal\ServicesBuilder::_validateConfigSetting
      */
@@ -283,7 +283,7 @@ class ServicesBuilderTest extends \PHPUnit_Framework_TestCase
         $builder = new ServicesBuilder();
         $this->setExpectedException('\InvalidArgumentException', $missingValueMsg);
         
-        $builder->buildServiceManagement($config);
+        $builder->createServiceManagementService($config);
     }
 }
 
