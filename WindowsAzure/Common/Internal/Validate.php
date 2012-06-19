@@ -107,6 +107,15 @@ class Validate
             );
         }
     }
+
+    public static function isDouble($var, $name)
+    {
+        try {
+            (double)$var;
+        } catch (\Exception $e) {
+            throw new InvalidArgumentTypeException('double', $name);
+        } 
+    }
     
     /**
      * Throws exception if the provided variable type is not integer.

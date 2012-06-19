@@ -25,6 +25,7 @@
 namespace Tests\Unit\WindowsAzure\ServiceBus\Models;
 use WindowsAzure\ServiceBus\Models\BrokerProperties;
 use WindowsAzure\ServiceBus\Models\BrokeredMessage;
+use WindowsAzure\Common\Internal\Resources;
 
 /**
  * Unit tests for class WrapAccessTokenResult
@@ -80,6 +81,100 @@ class BrokerPropertiesTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * @covers WindowsAzure\ServiceBus\Models\BrokerProperties::create
+     */
+    public function testCreateBrokerPropertiesAllPropertiesSuccess()
+    {
+        // Setup
+        $brokerPropertiesJsonString = '{"CorrelationId":"testCorrelationId","SessionId":"testSessionId","DeliveryCount":"38","LockedUntilUtc":"Sun, 06 Nov 2011 01:00:00 GMT","LockToken":"testLockToken","MessageId":"testMessageId","Label":"testLabel","ReplyTo":"testReplyTo","SequenceNumber":88,"TimeToLive":"123.456","To":"testTo","ScheduledEnqueueTimeUtc":"Sun, 06 Nov 2011 01:00:00 GMT","ReplyToSessionId":"testReplyToSessionId"}';
+        $expectedCorrelationId = 'testCorrelationId';
+        $expectedSessionId = 'testSessionId';
+        $expectedDeliveryCount = 38;
+        $expectedLockedUntilUtc = \DateTime::createFromFormat(
+            Resources::AZURE_DATE_FORMAT, "Sun, 06 Nov 2011 01:00:00 GMT"
+        );
+        $expectedLockToken = 'testLockToken';
+        $expectedMessageId = 'testMessageId';
+        $expectedLabel = 'testLabel';
+        $expectedReplyTo = 'testReplyTo';
+        $expectedSequenceNumber = 88;
+        $expectedTimeToLive = '123.456';
+        $expectedTo = 'testTo';
+        $expectedScheduledEnqueueTimeUtc = $expectedLockedUntilUtc;
+        $expectedReplyToSessionId = 'testReplyToSessionId';
+
+        // Test
+        $brokerProperties = BrokerProperties::create($brokerPropertiesJsonString);
+
+        // Assert
+        $this->assertEquals(
+            $expectedCorrelationId,
+            $brokerProperties->getCorrelationId()    
+        );
+
+        $this->assertEquals(
+            $expectedSessionId,
+            $brokerProperties->getSessionId()    
+        );
+
+        $this->assertEquals(
+            $expectedDeliveryCount,
+            $brokerProperties->getDeliveryCount()    
+        );
+
+        $this->assertEquals(
+            $expectedLockedUntilUtc->format(Resources::AZURE_DATE_FORMAT),
+            $brokerProperties->getLockedUntilUtc()->format(Resources::AZURE_DATE_FORMAT) 
+        );
+
+        $this->assertEquals(
+            $expectedLockToken,
+            $brokerProperties->getLockToken()    
+        );
+
+        $this->assertEquals(
+            $expectedMessageId,
+            $brokerProperties->getMessageId()    
+        );
+
+        $this->assertEquals(
+            $expectedLabel,
+            $brokerProperties->getLabel()    
+        );
+
+        $this->assertEquals(
+            $expectedReplyTo,
+            $brokerProperties->getReplyTo()    
+        );
+
+        $this->assertEquals(
+            $expectedSequenceNumber,
+            $brokerProperties->getSequenceNumber()    
+        );
+
+        $this->assertEquals(
+            $expectedTimeToLive,
+            $brokerProperties->getTimeToLive()    
+        );
+
+        $this->assertEquals(
+            $expectedTo,
+            $brokerProperties->getTo()    
+        );
+
+        $this->assertEquals(
+            $expectedScheduledEnqueueTimeUtc,
+            $brokerProperties->getScheduledEnqueueTimeUtc()    
+        );
+
+        $this->assertEquals(
+            $expectedReplyToSessionId,
+            $brokerProperties->getReplyToSessionId()    
+        );
+
+    }
+
+    /**
      * @covers WindowsAzure\ServiceBus\Models\BrokerProperties::toString
      */
     public function testSerializeBrokerPropertiesSuccess()
@@ -99,6 +194,42 @@ class BrokerPropertiesTest extends \PHPUnit_Framework_TestCase
             $brokerProperties->toString()
         ); 
     }
+
+    /**
+     * @covers WindowsAzure\ServiceBus\Models\BrokerProperties::toString
+     */
+    public function testSerializeBrokerPropertiesAllPropertiesSuccess()
+    {
+        // Setup
+        $expected = '{"CorrelationId":"testCorrelationId","SessionId":"testSessionId","DeliveryCount":"38","LockedUntilUtc":"Sun, 06 Nov 2011 01:00:00 GMT","LockToken":"testLockToken","MessageId":"testMessageId","Label":"testLabel","ReplyTo":"testReplyTo","SequenceNumber":88,"TimeToLive":"123.456","To":"testTo","ScheduledEnqueueTimeUtc":"Sun, 06 Nov 2011 01:00:00 GMT","ReplyToSessionId":"testReplyToSessionId"}';
+        $lockedUntilUtc = \DateTime::createFromFormat(
+            "Y-m-d H:i:s","2011-11-06 01:00:00",new \DateTimeZone("UTC"));
+        $timeToLive = '123.456';
+        $scheduledEnqueueTimeUtc = $lockedUntilUtc;
+
+        // Test
+        $brokerProperties = new BrokerProperties();
+        $brokerProperties->setCorrelationId('testCorrelationId');
+        $brokerProperties->setSessionId('testSessionId');
+        $brokerProperties->setDeliveryCount(38);
+        $brokerProperties->setLockedUntilUtc($lockedUntilUtc);
+        $brokerProperties->setLockToken('testLockToken');
+        $brokerProperties->setMessageId('testMessageId');
+        $brokerProperties->setLabel('testLabel');
+        $brokerProperties->setReplyTo('testReplyTo');
+        $brokerProperties->setSequenceNumber(88);
+        $brokerProperties->setTimeToLive($timeToLive);
+        $brokerProperties->setTo('testTo');
+        $brokerProperties->setScheduledEnqueueTimeUtc($scheduledEnqueueTimeUtc);
+        $brokerProperties->setReplyToSessionId('testReplyToSessionId');
+
+        // Assert
+        $this->assertEquals(
+            $expected,
+            $brokerProperties->toString()
+        ); 
+    }
+
 
     /** 
      * @covers WindowsAzure\ServiceBus\Models\BrokerProperties::getCorrelationId

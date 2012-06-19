@@ -22,6 +22,7 @@
  */
 namespace WindowsAzure\ServiceBus\Models;
 use WindowsAzure\Common\Internal\Validate;
+use WindowsAzure\Common\Internal\Resources;
 
 /**
  * The properties of the broker of a brokered message. 
@@ -61,7 +62,7 @@ class BrokerProperties
     /**
      * The locked until time.
      *
-     * @var string
+     * @var \DateTime
      */
     private $_lockedUntilUtc;
 
@@ -103,7 +104,7 @@ class BrokerProperties
     /**
      * The time to live.
      *
-     * @var string
+     * @var float
      */
     private $_timeToLive;
 
@@ -115,9 +116,9 @@ class BrokerProperties
     private $_to;
 
     /**
-     * The schedule enqueu time. 
+     * The scheduled enqueu time. 
      *
-     * @var string
+     * @var \DateTime
      */
     private $_scheduledEnqueueTimeUtc;
 
@@ -186,7 +187,10 @@ class BrokerProperties
 
         if (array_key_exists('LockedUntilUtc', $brokerPropertiesArray)) {
             $brokerProperties->setLockedUntilUtc(
-                $brokerPropertiesArray['LockedUntilUtc']
+                \DateTime::createFromFormat(
+                    Resources::AZURE_DATE_FORMAT,
+                    $brokerPropertiesArray['LockedUntilUtc']
+                )
             );
         }
 
@@ -218,7 +222,7 @@ class BrokerProperties
 
         if (array_key_exists('TimeToLive', $brokerPropertiesArray)) {
             $brokerProperties->setTimeToLive(
-                $brokerPropertiesArray['TimeToLive']
+                    (double)$brokerPropertiesArray['TimeToLive']
             );
         }
 
@@ -232,7 +236,10 @@ class BrokerProperties
         )
         ) {
             $brokerProperties->setScheduledEnqueueTimeUtc(
-                $brokerPropertiesArray['ScheduledEnqueueTimeUtc']
+                \DateTime::createFromFormat(
+                    Resources::AZURE_DATE_FORMAT,
+                    $brokerPropertiesArray['ScheduledEnqueueTimeUtc']
+                )
             );
         }
 
@@ -595,64 +602,138 @@ class BrokerProperties
     public function toString()
     {
         $value = array();
-        if (!empty($this->_correlationId)) {
-            $value['CorrelationId'] = $this->_correlationId;
-        }
+        
+        $this->setValueArrayString(
+            $value, 
+            'CorrelationId',
+            $this->_correlationId
+        );
 
-        if (!empty($this->_sessionId)) {
-            $value['SessionId'] = $this->_sessionId;
-        }
+        $this->setValueArrayString(
+            $value, 
+            'SessionId',
+            $this->_sessionId
+        );
 
-        if (!empty($this->_deliveryCount)) {
-            $value['DeliveryCount'] = $this->_deliveryCount;
-        }
+        $this->setValueArrayInt(
+            $value, 
+            'DeliveryCount',
+            $this->_deliveryCount
+        );
 
-        if (!empty($this->_lockedUntilUtc)) {
-            $value['LockedUntilUtc'] = $this->_lockedUntilUtc;
-        }
+        $this->setValueArrayDateTime(
+            $value, 
+            'LockedUntilUtc',
+            $this->_lockedUntilUtc
+        );
 
-        if (!empty($this->_lockToken)) {
-            $value['LockToken'] = $this->_lockToken;
-        }
+        $this->setValueArrayString(
+            $value,
+            'LockToken',
+            $this->_lockToken
+        );
 
-        if (!empty($this->_messageId)) {
-            $value['MessageId'] = $this->_messageId;
-        }
+        $this->setValueArrayString(
+            $value,
+            'MessageId',
+            $this->_messageId
+        );
 
-        if (!empty($this->_label)) {
-            $value['Label'] = $this->_label;
-        }
+        $this->setValueArrayString(
+            $value,
+            'Label',
+            $this->_label
+        );
 
-        if (!empty($this->_replyTo)) {
-            $value['ReplyTo'] = $this->_replyTo;
-        }
+        $this->setValueArrayString(
+            $value,
+            'ReplyTo',
+            $this->_replyTo
+        );
 
-        if (!empty($this->_enqueuedTimeUtc)) {
-            $value['EnqueuedTimeUtc'] = $this->_enqueuedTimeUtc;
-        }
+        $this->setValueArrayString(
+            $value,
+            'SequenceNumber',
+            $this->_sequenceNumber
+        );
 
-        if (!empty($this->_sequenceNumber)) {
-            $value['SequenceNumber'] = $this->_sequenceNumber;
-        }
+        $this->setValueArrayFloat(
+            $value,
+            'TimeToLive',
+            $this->_timeToLive
+        );
 
-        if (!empty($this->_timeToLive)) {
-            $value['TimeToLive'] = $this->_timeToLive;
-        }
+        $this->setValueArrayString(
+            $value,
+            'To',
+            $this->_to
+        );
 
-        if (!empty($this->_to)) {
-            $value['To'] = $this->_to;
-        }
-    
-        if (!empty($this->_scheduledEnqueueTimeUtc)) {
-            $value['ScheduledEnqueueTimeUtc'] = $this->_scheduledEnqueueTimeUtc;
-        }
+        $this->setValueArrayDateTime(
+            $value,
+            'ScheduledEnqueueTimeUtc',
+            $this->_scheduledEnqueueTimeUtc
+        );
 
-        if (!empty($this->_replyToSessionId)) {
-            $value['ReplyToSessionId'] = $this->_replyToSessionId;
-        }
+        $this->setValueArrayString(
+            $value,
+            'ReplyToSessionId',
+            $this->_replyToSessionId
+        );
 
         $result = json_encode($value);
         return $result; 
     }    
+
+    public function setValueArrayString(&$valueArray, $key, $value)
+    {
+        Validate::isArray($valueArray, 'valueArray');
+        Validate::isString($key, 'key');
+
+        if (!empty($value))
+        {
+            Validate::isString($value, 'value');
+            $valueArray[$key] = $value;
+        }
+    }
+
+    public function setValueArrayInt(&$valueArray, $key, $value)
+    {
+        Validate::isArray($valueArray, 'valueArray');
+        Validate::isString($key, 'key');
+
+        if (!empty($value))
+        {
+            Validate::isInteger($value, 'value');
+            $valueArray[$key] = (string)$value;
+        }
+    }
+
+    public function setValueArrayFloat(&$valueArray, $key, $value)
+    {
+        Validate::isArray($valueArray, 'valueArray');
+        Validate::isString($key, 'key');
+
+        if (!empty($value))
+        {
+            Validate::isDouble($value, 'value');
+            $valueArray[$key] = (string)$value;
+        }
+    }
+
+    public function setValueArrayDateTime(&$valueArray, $key, $value)
+    {
+        Validate::isArray($valueArray, 'valueArray');
+        Validate::isString($key, 'key');
+
+        if (!empty($value))
+        {
+            Validate::isDate($value, 'value');
+            $valueArray[$key] = gmdate(
+                Resources::AZURE_DATE_FORMAT, 
+                $value->getTimestamp()
+            );
+        }
+    }
 }
 ?>
