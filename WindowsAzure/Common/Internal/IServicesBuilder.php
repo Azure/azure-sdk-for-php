@@ -46,14 +46,40 @@ namespace WindowsAzure\Common\Internal;
 interface IServicesBuilder
 {
     /**
-     * Creates an object passed $type configured with $config.
+     * Creates a BlobRestProxy using the passed configuration.
      *
-     * @param WindowsAzure\Common\Configuration $config The configuration.
-     * @param string                            $type   The type name.
+     * @param WindowsAzure\Common\Configuration $config The configuration object.
      * 
-     * @return mix
+     * @return WindowsAzure\Blob\BlobRestProxy
      */
-    public function build($config, $type);
+    public function buildBlob($config);
+    
+    /**
+     * Creates a QueueRestProxy using the passed configuration.
+     *
+     * @param WindowsAzure\Common\Configuration $config The configuration object.
+     * 
+     * @return WindowsAzure\Queue\QueueRestProxy
+     */
+    public function buildQueue($config);
+    
+    /**
+     * Creates a TableRestProxy using the passed configuration.
+     *
+     * @param WindowsAzure\Common\Configuration $config The configuration object.
+     * 
+     * @return WindowsAzure\Table\TableRestProxy
+     */
+    public function buildTable($config);
+    
+    /**
+     * Creates a ServiceManagementRestProxy using the passed configuration.
+     *
+     * @param WindowsAzure\Common\Configuration $config The configuration object.
+     * 
+     * @return WindowsAzure\ServiceManagement\ServiceManagementRestProxy
+     */
+    public function buildServiceManagement($config);
 }
 
 ?>

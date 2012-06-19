@@ -28,7 +28,6 @@ spl_autoload_register(
       if ($classes === null) {
          $classes = array(
             'windowsazure\\blob\\blobrestproxy' => '/Blob/BlobRestProxy.php',
-            'windowsazure\\blob\\blobservice' => '/Blob/BlobService.php',
             'windowsazure\\blob\\blobsettings' => '/Blob/BlobSettings.php',
             'windowsazure\\blob\\internal\\iblob' => '/Blob/Internal/IBlob.php',
             'windowsazure\\blob\\models\\accesscondition' => '/Blob/Models/AccessCondition.php',
@@ -135,7 +134,6 @@ spl_autoload_register(
             'windowsazure\\queue\\models\\updatemessageresult' => '/Queue/Models/UpdateMessageResult.php',
             'windowsazure\\queue\\models\\windowsazurequeuemessage' => '/Queue/Models/WindowsAzureQueueMessage.php',
             'windowsazure\\queue\\queuerestproxy' => '/Queue/QueueRestProxy.php',
-            'windowsazure\\queue\\queueservice' => '/Queue/QueueService.php',
             'windowsazure\\queue\\queuesettings' => '/Queue/QueueSettings.php',
             'windowsazure\\servicemanagement\\internal\\iservicemanagement' => '/ServiceManagement/Internal/IServiceManagement.php',
             'windowsazure\\servicemanagement\\models\\affinitygroup' => '/ServiceManagement/Models/AffinityGroup.php',
@@ -158,7 +156,6 @@ spl_autoload_register(
             'windowsazure\\servicemanagement\\models\\storageservice' => '/ServiceManagement/Models/StorageService.php',
             'windowsazure\\servicemanagement\\models\\updatestorageserviceoptions' => '/ServiceManagement/Models/UpdateStorageServiceOptions.php',
             'windowsazure\\servicemanagement\\servicemanagementrestproxy' => '/ServiceManagement/ServiceManagementRestProxy.php',
-            'windowsazure\\servicemanagement\\servicemanagementservice' => '/ServiceManagement/ServiceManagementService.php',
             'windowsazure\\servicemanagement\\servicemanagementsettings' => '/ServiceManagement/ServiceManagementSettings.php',
             'windowsazure\\serviceruntime\\internal\\acquirecurrentstate' => '/ServiceRuntime/Internal/AcquireCurrentState.php',
             'windowsazure\\serviceruntime\\internal\\channelnotavailableexception' => '/ServiceRuntime/Internal/ChannelNotAvailableException.php',
@@ -231,7 +228,6 @@ spl_autoload_register(
             'windowsazure\\table\\models\\tableserviceoptions' => '/Table/Models/TableServiceOptions.php',
             'windowsazure\\table\\models\\updateentityresult' => '/Table/Models/UpdateEntityResult.php',
             'windowsazure\\table\\tablerestproxy' => '/Table/TableRestProxy.php',
-            'windowsazure\\table\\tableservice' => '/Table/TableService.php',
             'windowsazure\\table\\tablesettings' => '/Table/TableSettings.php'
           );
       }

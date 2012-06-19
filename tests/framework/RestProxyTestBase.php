@@ -26,6 +26,7 @@ namespace Tests\Framework;
 use WindowsAzure\Common\Internal\Logger;
 use WindowsAzure\Common\Internal\Serialization\XmlSerializer;
 use WindowsAzure\Common\Configuration;
+use WindowsAzure\Common\Internal\ServicesBuilder;
 
 /**
  * Testbase for all REST proxy tests.
@@ -43,7 +44,8 @@ class RestProxyTestBase extends \PHPUnit_Framework_TestCase
     protected $config;
     protected $restProxy;
     protected $xmlSerializer;
-    
+    protected $builder;
+
     const NOT_SUPPORTED = 'The storage emulator doesn\'t support this API';
     
     protected function skipIfEmulated()
@@ -53,11 +55,16 @@ class RestProxyTestBase extends \PHPUnit_Framework_TestCase
         }
     }
     
-    public function __construct($config, $serviceRestProxy)
+    public function setUp($config, $serviceRestProxy)
     {
         $this->config = $config;
         $this->restProxy = $serviceRestProxy;
+    }
+    
+    public function __construct()
+    {
         $this->xmlSerializer = new XmlSerializer();
+        $this->builder = new ServicesBuilder();
         Logger::setLogFile('C:\log.txt');
     }
     

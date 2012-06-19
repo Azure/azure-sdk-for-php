@@ -26,7 +26,6 @@ use Tests\Framework\ServiceRestProxyTestBase;
 use Tests\Framework\TestResources;
 use WindowsAzure\Common\Configuration;
 use WindowsAzure\Table\TableSettings;
-use WindowsAzure\Table\TableService;
 
 /**
  * TestBase class for each unit test class.
@@ -43,15 +42,15 @@ class TableServiceRestProxyTestBase extends ServiceRestProxyTestBase
 {
     protected $_createdTables;
     
-    public function __construct()
+    public function setUp()
     {
         $config = new Configuration();
         $tableUri = 'http://' . TestResources::accountName() . '.table.core.windows.net';
         $config->setProperty(TableSettings::ACCOUNT_KEY, TestResources::accountKey());
         $config->setProperty(TableSettings::ACCOUNT_NAME, TestResources::accountName());        
         $config->setProperty(TableSettings::URI, $tableUri);
-        $tableRestProxy = TableService::create($config);
-        parent::__construct($config, $tableRestProxy);
+        $tableRestProxy = $this->builder->buildTable($config);
+        parent::setUp($config, $tableRestProxy);
         $this->_createdTables = array();
     }
 

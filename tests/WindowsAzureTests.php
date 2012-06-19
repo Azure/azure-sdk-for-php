@@ -70,7 +70,6 @@ spl_autoload_register(
             'tests\\mock\\windowsazure\\common\\internal\\authentication\\tablesharedkeyliteauthschememock' => '/mock/WindowsAzure/Common/Internal/Authentication/TableSharedKeyLiteAuthSchemeMock.php',
             'tests\\mock\\windowsazure\\common\\internal\\filters\\simplefiltermock' => '/mock/WindowsAzure/Common/Internal/Filters/SimpleFilterMock.php',
             'tests\\unit\\windowsazure\\blob\\blobrestproxytest' => '/unit/WindowsAzure/Blob/BlobRestProxyTest.php',
-            'tests\\unit\\windowsazure\\blob\\blobservicetest' => '/unit/WindowsAzure/Blob/BlobServiceTest.php',
             'tests\\unit\\windowsazure\\blob\\models\\accessconditiontest' => '/unit/WindowsAzure/Blob/Models/AccessConditionTest.php',
             'tests\\unit\\windowsazure\\blob\\models\\accesspolicytest' => '/unit/WindowsAzure/Blob/Models/AccessPolicyTest.php',
             'tests\\unit\\windowsazure\\blob\\models\\acquireleaseoptionstest' => '/unit/WindowsAzure/Blob/Models/AcquireLeaseOptionsTest.php',
@@ -163,7 +162,6 @@ spl_autoload_register(
             'tests\\unit\\windowsazure\\queue\\models\\updatemessageresulttest' => '/unit/WindowsAzure/Queue/Models/UpdateMessageResultTest.php',
             'tests\\unit\\windowsazure\\queue\\models\\windowsazurequeuemessagetest' => '/unit/WindowsAzure/Queue/Models/WindowsAzureQueueMessageTest.php',
             'tests\\unit\\windowsazure\\queue\\queuerestproxytest' => '/unit/WindowsAzure/Queue/QueueRestProxyTest.php',
-            'tests\\unit\\windowsazure\\queue\\queueservicetest' => '/unit/WindowsAzure/Queue/QueueServiceTest.php',
             'tests\\unit\\windowsazure\\servicemanagement\\internal\\servicemanagementrestproxytest' => '/unit/WindowsAzure/ServiceManagement/ServiceManagementRestProxyTest.php',
             'tests\\unit\\windowsazure\\servicemanagement\\models\\affinitygrouptest' => '/unit/WindowsAzure/ServiceManagement/Models/AffinityGroupTest.php',
             'tests\\unit\\windowsazure\\servicemanagement\\models\\asynchronousoperationresulttest' => '/unit/WindowsAzure/ServiceManagement/Models/AsynchronousOperationResultTest.php',
@@ -180,7 +178,6 @@ spl_autoload_register(
             'tests\\unit\\windowsazure\\servicemanagement\\models\\servicetest' => '/unit/WindowsAzure/ServiceManagement/Models/ServiceTest.php',
             'tests\\unit\\windowsazure\\servicemanagement\\models\\storageservicetest' => '/unit/WindowsAzure/ServiceManagement/Models/StorageServiceTest.php',
             'tests\\unit\\windowsazure\\servicemanagement\\models\\updatestorageserviceoptionstest' => '/unit/WindowsAzure/ServiceManagement/Models/UpdateStorageServiceOptionsTest.php',
-            'tests\\unit\\windowsazure\\servicemanagement\\servicemanagementservicetest' => '/unit/WindowsAzure/ServiceManagement/ServiceManagementServiceTest.php',
             'tests\\unit\\windowsazure\\serviceruntime\\internal\\acquirecurrentstatetest' => '/unit/WindowsAzure/ServiceRuntime/Internal/AcquireCurrentStateTest.php',
             'tests\\unit\\windowsazure\\serviceruntime\\internal\\chunkedgoalstatedeserializertest' => '/unit/WindowsAzure/ServiceRuntime/Internal/ChunkedGoalStateDeserializerTest.php',
             'tests\\unit\\windowsazure\\serviceruntime\\internal\\currentstatetest' => '/unit/WindowsAzure/ServiceRuntime/Internal/CurrentStateTest.php',
@@ -234,8 +231,7 @@ spl_autoload_register(
             'tests\\unit\\windowsazure\\table\\models\\querytablesresulttest' => '/unit/WindowsAzure/Table/Models/QueryTablesResultTest.php',
             'tests\\unit\\windowsazure\\table\\models\\querytest' => '/unit/WindowsAzure/Table/Models/QueryTest.php',
             'tests\\unit\\windowsazure\\table\\models\\tableserviceoptionstest' => '/unit/WindowsAzure/Table/Models/TableServiceOptionsTest.php',
-            'tests\\unit\\windowsazure\\table\\models\\updateentityresulttest' => '/unit/WindowsAzure/Table/Models/UpdateEntityResultTest.php',
-            'tests\\unit\\windowsazure\\table\\tableservicetest' => '/unit/WindowsAzure/Table/TableServiceTest.php'
+            'tests\\unit\\windowsazure\\table\\models\\updateentityresulttest' => '/unit/WindowsAzure/Table/Models/UpdateEntityResultTest.php'
           );
       }
       $cn = strtolower($class);

@@ -108,8 +108,10 @@ class ServicesBuilder implements IServicesBuilder
      * 
      * @return WindowsAzure\Queue\Internal\IQueue.
      */
-    private function _buildQueue($config)
+    public function buildQueue($config)
     {
+        $this->_validateConfig($config, Resources::QUEUE_TYPE_NAME);
+        
         $httpClient    = new HttpClient();
         $xmlSerializer = new XmlSerializer();
         $uri           = Utilities::tryAddUrlScheme(
@@ -151,8 +153,10 @@ class ServicesBuilder implements IServicesBuilder
      * 
      * @return WindowsAzure\Blob\Internal\IBlob.
      */
-    private function _buildBlob($config)
+    public function buildBlob($config)
     {
+        $this->_validateConfig($config, Resources::BLOB_TYPE_NAME);
+        
         $httpClient    = new HttpClient();
         $xmlSerializer = new XmlSerializer();
         $uri           = Utilities::tryAddUrlScheme(
@@ -194,8 +198,10 @@ class ServicesBuilder implements IServicesBuilder
      * 
      * @return WindowsAzure\Table\Internal\ITable.
      */
-    private function _buildTable($config)
+    public function buildTable($config)
     {
+        $this->_validateConfig($config, Resources::TABLE_TYPE_NAME);
+        
         $httpClient     = new HttpClient();
         $atomSerializer = new AtomReaderWriter();
         $mimeSerializer = new MimeReaderWriter();
@@ -240,8 +246,10 @@ class ServicesBuilder implements IServicesBuilder
      * 
      * @return WindowsAzure\ServiceManagement\Internal\IServiceManagement
      */
-    private function _buildServiceManagement($config)
+    public function buildServiceManagement($config)
     {
+        $this->_validateConfig($config, Resources::SERVICE_MANAGEMENT_TYPE_NAME);
+        
         $certificatePath = $config->getProperty(
             ServiceManagementSettings::CERTIFICATE_PATH
         );
@@ -310,6 +318,13 @@ class ServicesBuilder implements IServicesBuilder
      */
     private function _validateConfig($config, $type)
     {
+        if (Configuration::isEmulated()) {
+            self::_useStorageEmulatorConfig($this, $type);
+            
+            // Do not validate the emulated configuration values.
+            return;
+        }
+        
         switch ($type) {
         case Resources::QUEUE_TYPE_NAME:
             $this->_validateConfigSetting(
@@ -402,42 +417,6 @@ class ServicesBuilder implements IServicesBuilder
             $expected .= '|' . Resources::SERVICE_MANAGEMENT_TYPE_NAME;
             throw new InvalidArgumentTypeException($expected);
         }
-    }
-    
-    /**
-     * Creates an object passed $type configured with $config.
-     *
-     * @param WindowsAzure\Common\Configuration $config The configuration.
-     * @param string                            $type   The type name.
-     * 
-     * @return WindowsAzure\Queue\Internal\IQueue
-     *       | WindowsAzure\Blob\Internal\IBlob
-     *       | WindowsAzure\Table\Internal\ITable
-     */
-    public function build($config, $type)
-    {
-        $this->_validateConfig($config, $type);
-        $restProxy = null;
-        
-        switch ($type) {
-        case Resources::QUEUE_TYPE_NAME:
-            $restProxy = self::_buildQueue($config);
-            break;
-            
-        case Resources::BLOB_TYPE_NAME:
-            $restProxy = self::_buildBlob($config);
-            break;
-            
-        case Resources::TABLE_TYPE_NAME:
-            $restProxy = self::_buildTable($config);
-            break;
-            
-        case Resources::SERVICE_MANAGEMENT_TYPE_NAME:
-            $restProxy = self::_buildServiceManagement($config);
-            break;
-        }
-        
-        return $restProxy;
     }
 }
 
