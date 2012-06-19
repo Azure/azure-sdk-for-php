@@ -38,6 +38,9 @@ use WindowsAzure\Queue\QueueRestProxy;
 use WindowsAzure\Queue\QueueSettings;
 use WindowsAzure\Blob\BlobRestProxy;
 use WindowsAzure\Blob\BlobSettings;
+use WindowsAzure\ServiceBus\ServiceBusRestProxy;
+use WindowsAzure\ServiceBus\ServiceBusSettings;
+use WindowsAzure\ServiceBus\WrapRestProxy;
 use WindowsAzure\Table\TableRestProxy;
 use WindowsAzure\Table\TableSettings;
 use WindowsAzure\Table\Internal\AtomReaderWriter;
@@ -240,6 +243,35 @@ class ServicesBuilder implements IServicesBuilder
     }
     
     /**
+     * Builds a service bus client. 
+     * 
+     * @param WindowsAzure\Common\Configuration $config The configuration
+     * for the service bus. 
+     * 
+     * @return WindowsAzure\ServiceBus\Internal\IServiceBus
+     */
+    public function buildServiceBus($config)
+    {
+        $this->_validateConfig($config, Resources::SERVICE_BUS_TYPE_NAME);
+        
+        $httpClient        = new HttpClient();
+        $xmlSerializer     = new XmlSerializer();
+        $serviceBusWrapper = new ServiceBusRestProxy(
+            $httpClient,
+            $config->getProperty(ServiceBusSettings::URI),
+            $xmlSerializer
+        );
+        
+        $wrapFilter = new WrapFilter(
+            $config->getProperty(ServiceBusSettings::WRAP_URI),
+            $config->getProperty(ServiceBusSettings::WRAP_NAME),
+            $config->getProperty(ServiceBusSettings::WRAP_PASSWORD)
+        );
+        
+        return $serviceBusWrapper->withFilter($wrapFilter);
+    }
+    
+    /**
      * Builds a service management object.
      *
      * @param WindowsAzure\Common\Configuration $config The configuration.
@@ -275,6 +307,26 @@ class ServicesBuilder implements IServicesBuilder
         return $serviceManagementWrapper;
     }
     
+    /**
+     * Builds a WRAP client. 
+     * 
+     * @param WindowsAzure\Common\Configuration $config The configuration. 
+     *
+     * @return WindowsAzure\ServiceBus\Internal\IWrap
+     */
+    public function buildWrap($config)
+    {
+        $this->_validateConfig($config, Resources::WRAP_TYPE_NAME);
+        
+        $httpClient  = new HttpClient();
+        $wrapWrapper = new WrapRestProxy(
+            $httpClient,
+            $config->getProperty(ServiceBusSettings::WRAP_URI) 
+        );
+
+        return $wrapWrapper;
+    }
+
     /**
      * Validates that the given config setting exists in the $config and it's value
      * is doesn't satisfy empty().
@@ -409,23 +461,63 @@ class ServicesBuilder implements IServicesBuilder
                 'ServiceManagement'
             );
             break;
+            
+        case Resources::SERVICE_BUS_TYPE_NAME:
+            $this->_validateConfigSetting(
+                ServiceBusSettings::URI,
+                $config,
+                'ServiceBusSettings::URI',
+                'ServiceBus'
+            );
+            $this->_validateConfigSetting(
+                ServiceBusSettings::WRAP_URI,
+                $config,
+                'ServiceBusSettings::WRAP_URI',
+                'ServiceBus'
+            );
+            $this->_validateConfigSetting(
+                ServiceBusSettings::WRAP_NAME,
+                $config,
+                'ServiceBusSettings::WRAP_NAME',
+                'ServiceBus'
+            );
+            $this->_validateConfigSetting(
+                ServiceBusSettings::WRAP_PASSWORD,
+                $config,
+                'ServiceBusSettings::WRAP_PASSWORD',
+                'ServiceBus'
+            );
+            break;
+            
+        case Resources::WRAP_TYPE_NAME:
+            $this->_validateConfigSetting(
+                ServiceBusSettings::WRAP_URI,
+                $config,
+                'ServiceBusSettings::WRAP_URI',
+                'Wrap'
+            );
+            break;
    
         default:
             $expected  = Resources::QUEUE_TYPE_NAME;
             $expected .= '|' . Resources::BLOB_TYPE_NAME;
             $expected .= '|' . Resources::TABLE_TYPE_NAME;
             $expected .= '|' . Resources::SERVICE_MANAGEMENT_TYPE_NAME;
+            $expected .= '|' . Resources::SERVICE_BUS_TYPE_NAME;
+            $expected .= '|' . Resources::WRAP_TYPE_NAME;
             throw new InvalidArgumentTypeException($expected);
         }
     }
     
-        /**
+    /**
      * Configures $config to run against the storage emulator.
      *
      * @param WindowsAzure\Common\Configuration $config The configuration.
      * @param string                            $type   The type name.
      * 
      * @return none
+     *       | WindowsAzure\ServiceBus\Internal\IServiceBus 
+     *       | WindowsAzure\ServiceBus\Internal\IWrap 
      */
     private static function _useStorageEmulatorConfig($config, $type)
     {
