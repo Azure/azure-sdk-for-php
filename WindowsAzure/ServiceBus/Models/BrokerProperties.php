@@ -222,7 +222,7 @@ class BrokerProperties
 
         if (array_key_exists('TimeToLive', $brokerPropertiesArray)) {
             $brokerProperties->setTimeToLive(
-                    (double)$brokerPropertiesArray['TimeToLive']
+                doubleval($brokerPropertiesArray['TimeToLive'])
             );
         }
 
@@ -681,53 +681,97 @@ class BrokerProperties
             $this->_replyToSessionId
         );
 
+        $this->setValueArrayString(
+            $value,
+            'MessageLocation',
+            $this->_messageLocation
+        );
+
+        $this->setValueArrayString(
+            $value,
+            'LockLocation',
+            $this->_lockLocation
+        );
+
         $result = json_encode($value);
         return $result; 
     }    
 
+    /** 
+     * Sets a string in an array. 
+     *
+     * @param array  &$valueArray The array of a set of values. 
+     * @param string $key         The key of the key value pair. 
+     * @param string $value       The value of the key value pair. 
+     * 
+     * @return none
+     */
     public function setValueArrayString(&$valueArray, $key, $value)
     {
         Validate::isArray($valueArray, 'valueArray');
         Validate::isString($key, 'key');
 
-        if (!empty($value))
-        {
+        if (!empty($value)) {
             Validate::isString($value, 'value');
             $valueArray[$key] = $value;
         }
     }
 
+    /** 
+     * Sets an integer value in an array. 
+     *
+     * @param array  &$valueArray The array of a set of values. 
+     * @param string $key         The key of the key value pair. 
+     * @param int    $value       The value of the key value pair. 
+     * 
+     * @return none
+     */
     public function setValueArrayInt(&$valueArray, $key, $value)
     {
         Validate::isArray($valueArray, 'valueArray');
         Validate::isString($key, 'key');
 
-        if (!empty($value))
-        {
+        if (!empty($value)) {
             Validate::isInteger($value, 'value');
             $valueArray[$key] = (string)$value;
         }
     }
 
+    /**
+     * Sets a float value in an array. 
+     *
+     * @param array  &$valueArray The array of a set of values. 
+     * @param string $key         The key of the key value pair. 
+     * @param float  $value       The value of the key value pair. 
+     * 
+     * @return none
+     */
     public function setValueArrayFloat(&$valueArray, $key, $value)
     {
         Validate::isArray($valueArray, 'valueArray');
         Validate::isString($key, 'key');
 
-        if (!empty($value))
-        {
+        if (!empty($value)) {
             Validate::isDouble($value, 'value');
             $valueArray[$key] = (string)$value;
         }
     }
 
+    /**
+     * Sets a DateTime value in an array. 
+     *
+     * @param array      &$valueArray The array of a set of values. 
+     * @param string     $key         The key of the key value pair. 
+     * @param \DateTime  $value       The value of the key value pair. 
+     * 
+     * @return none
+     */
     public function setValueArrayDateTime(&$valueArray, $key, $value)
     {
         Validate::isArray($valueArray, 'valueArray');
         Validate::isString($key, 'key');
 
-        if (!empty($value))
-        {
+        if (!empty($value)) {
             Validate::isDate($value, 'value');
             $valueArray[$key] = gmdate(
                 Resources::AZURE_DATE_FORMAT, 

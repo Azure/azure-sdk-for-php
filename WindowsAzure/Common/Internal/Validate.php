@@ -108,13 +108,21 @@ class Validate
         }
     }
 
+    /**
+     * Throws exception if the provided variable is not double. 
+     *
+     * @param mix    $var  The variable to check.
+     * @param string $name The parameter name.
+     *
+     * @throws \InvalidArgumentException
+     *
+     * @return none
+     */
     public static function isDouble($var, $name)
     {
-        try {
-            (double)$var;
-        } catch (\Exception $e) {
+        if (!is_numeric($var)) {
             throw new InvalidArgumentTypeException('double', $name);
-        } 
+        }
     }
     
     /**
