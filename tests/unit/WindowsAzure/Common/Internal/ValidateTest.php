@@ -288,6 +288,34 @@ class ValidateTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($result);
     }
 
+    /**
+     * @covers WindowsAzure\Common\Internal\Validate::isDouble
+     */
+    public function testIsDoubleSuccess()
+    {
+        // Setup 
+        $value = 3.14159265;
 
+        // Test 
+        Validate::isDouble($value, 'value');
+
+        // Assert
+        $this->assertTrue(true);
+    }
+
+    /**
+     * @covers WindowsAzure\Common\Internal\Validate::isDouble
+     */
+    public function testIsDoubleFail()
+    {
+        // Setup 
+        $this->setExpectedException('\InvalidArgumentException');
+        $value = 'testInvalidDoubleValue';
+
+        // Test 
+        Validate::isDouble($value, 'value');
+
+        // Assert
+    }
 }
 

@@ -330,7 +330,7 @@ class ServiceBusRestProxy extends ServiceRestProxy implements IServiceBus
     /**
      * Deletes a brokered message. 
      * 
-     * @param BrokeredMessage $brokeredMessage The borkered message.
+     * @param BrokeredMessage $brokeredMessage The brokered message.
      *
      * @return none
      */
