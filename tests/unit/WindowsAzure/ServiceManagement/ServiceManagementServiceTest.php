@@ -15,58 +15,49 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   Tests\Framework
+ * @package   Tests\Unit\WindowsAzure\ServiceManagement
  * @author    Azure PHP SDK <azurephpsdk@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
- 
-namespace Tests\Framework;
-use WindowsAzure\Common\Internal\Logger;
-use WindowsAzure\Common\Internal\Serialization\XmlSerializer;
+
+namespace Tests\Unit\WindowsAzure\ServiceManagement;
+use Tests\Framework\TestResources;
+use WindowsAzure\Common\Internal\Resources;
 use WindowsAzure\Common\Configuration;
+use WindowsAzure\ServiceManagement\ServiceManagementSettings;
+use WindowsAzure\ServiceManagement\ServiceManagementService;
 
 /**
- * Testbase for all REST proxy tests.
+ * Unit tests for class ServiceManagementService
  *
  * @category  Microsoft
- * @package   Tests\Framework
+ * @package   Tests\Unit\WindowsAzure\ServiceManagement
  * @author    Azure PHP SDK <azurephpsdk@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @version   Release: @package_version@
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
-class RestProxyTestBase extends \PHPUnit_Framework_TestCase
+class ServiceManagementServiceTest extends \PHPUnit_Framework_TestCase
 {
-    protected $config;
-    protected $restProxy;
-    protected $xmlSerializer;
-    
-    const NOT_SUPPORTED = 'The storage emulator doesn\'t support this API';
-    
-    protected function skipIfEmulated()
+    /**
+     * @covers WindowsAzure\ServiceManagement\ServiceManagementService::create
+     */
+    public function testCreateWithConfig()
     {
-        if (Configuration::isEmulated()) {
-            $this->markTestSkipped(self::NOT_SUPPORTED);
-        }
-    }
-    
-    public function __construct($config, $serviceRestProxy)
-    {
-        $this->config = $config;
-        $this->restProxy = $serviceRestProxy;
-        $this->xmlSerializer = new XmlSerializer();
-        Logger::setLogFile('C:\log.txt');
-    }
-    
-    protected function onNotSuccessfulTest(\Exception $e)
-    {
-        parent::onNotSuccessfulTest($e);
+        // Setup
+        $config = new Configuration();
+        $config->setProperty(ServiceManagementSettings::SUBSCRIPTION_ID, '1234-45432');
+        $config->setProperty(ServiceManagementSettings::CERTIFICATE_PATH, '1234');
+        $config->setProperty(ServiceManagementSettings::URI, Resources::SERVICE_MANAGEMENT_URL);
         
-        $this->tearDown();
-        throw $e;
+        // Test
+        $servicemanagementRestProxy = ServiceManagementService::create($config);
+        
+        // Assert
+        $this->assertInstanceOf('WindowsAzure\ServiceManagement\Internal\IServiceManagement', $servicemanagementRestProxy);
     }
 }
 

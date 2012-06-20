@@ -15,78 +15,49 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   Tests\Framework
+ * @package   Tests\Unit\WindowsAzure\Queue
  * @author    Azure PHP SDK <azurephpsdk@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
-namespace Tests\Framework;
-use Tests\Framework\ServiceRestProxyTestBase;
-use Tests\Framework\TestResources;
-use WindowsAzure\Common\Configuration;
-use WindowsAzure\Common\Models\ServiceProperties;
-use WindowsAzure\Queue\QueueSettings;
+
+namespace Tests\Unit\WindowsAzure\Queue;
 use WindowsAzure\Queue\QueueService;
+use WindowsAzure\Common\Configuration;
+use Tests\Framework\TestResources;
+use WindowsAzure\Queue\QueueSettings;
 
 /**
- * TestBase class for each unit test class.
+ * Unit tests for class QueueService
  *
  * @category  Microsoft
- * @package   Tests\Framework
+ * @package   Tests\Unit\WindowsAzure\Queue
  * @author    Azure PHP SDK <azurephpsdk@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @version   Release: @package_version@
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
-class QueueServiceRestProxyTestBase extends ServiceRestProxyTestBase
+class QueueServiceTest extends \PHPUnit_Framework_TestCase
 {
-    private $_createdQueues;
-    
-    public function __construct()
+    /**
+     * @covers WindowsAzure\Queue\QueueService::create
+     */
+    public function testCreateWithConfig()
     {
+        // Setup
+        $uri = 'http://' . TestResources::accountName() . '.queue.core.windows.net';
         $config = new Configuration();
-        $queueUri = TestResources::accountName() . '.queue.core.windows.net';
         $config->setProperty(QueueSettings::ACCOUNT_KEY, TestResources::accountKey());
         $config->setProperty(QueueSettings::ACCOUNT_NAME, TestResources::accountName());        
-        $config->setProperty(QueueSettings::URI, $queueUri);
-        $queueRestProxy = QueueService::create($config);
-        parent::__construct($config, $queueRestProxy);
-        $this->_createdQueues = array();
-    }
-    
-    public function createQueue($queueName, $options = null)
-    {
-        $this->restProxy->createQueue($queueName, $options);
-        $this->_createdQueues[] = $queueName;
-    }
-    
-    public function deleteQueue($queueName, $options = null)
-    {
-        $this->restProxy->deleteQueue($queueName, $options);
-    }
-    
-    public function safeDeleteQueue($queueName)
-    {
-        try
-        {
-            $this->deleteQueue($queueName);
-        }
-        catch (\Exception $e)
-        {
-            // Ignore exception and continue, will assume that this queue doesn't exist in the sotrage account
-            error_log($e->getMessage());
-        }
-    }
-    
-    protected function tearDown()
-    {
-        parent::tearDown();
+        $config->setProperty(QueueSettings::URI, $uri);
         
-        foreach ($this->_createdQueues as $value) {
-            $this->safeDeleteQueue($value);
-        }
+        // Test
+        $queueRestProxy = QueueService::create($config);
+        
+        // Assert
+        $this->assertInstanceOf('WindowsAzure\Queue\Internal\IQueue', $queueRestProxy);
     }
 }
 

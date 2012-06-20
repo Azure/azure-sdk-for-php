@@ -198,10 +198,10 @@ class Validate
     /**
      * Throws exception if the object is not of the specified class type.
      *
-     * @param mixed  $objectInstance An object that requires class type validation.
-     * @param mixed  $classInstance  The instance of the class the the 
+     * @param mixed $objectInstance An object that requires class type validation.
+     * @param mixed $classInstance  The instance of the class the the 
      * object instance should be. 
-     * @param string $name           The name of the object.
+     * @param string $name          The name of the object.
      *
      * @throws \InvalidArgumentException
      *

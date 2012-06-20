@@ -57,12 +57,6 @@ class ServiceRestProxyTestBase extends RestProxyTestBase
         }
     }
     
-    public function setUp($config, $serviceRestProxy)
-    {
-        parent::setUp($config, $serviceRestProxy);
-        $this->_createDefaultProperties();
-    }
-    
     private function _createDefaultProperties()
     {
         $this->propertiesChanged = false;
@@ -77,6 +71,12 @@ class ServiceRestProxyTestBase extends RestProxyTestBase
         $propertiesArray['Metrics']['IncludeAPIs'] = 'false';
         $propertiesArray['Metrics']['RetentionPolicy']['Enabled'] = 'false';
         $this->defaultProperties = ServiceProperties::create($propertiesArray);
+    }
+    
+    public function __construct($config, $serviceRestProxy)
+    {
+        parent::__construct($config, $serviceRestProxy);
+        $this->_createDefaultProperties();
     }
     
     public function setServiceProperties($properties, $options = null)
