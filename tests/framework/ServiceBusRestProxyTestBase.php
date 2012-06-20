@@ -26,7 +26,6 @@ use Tests\Framework\TestResources;
 use WindowsAzure\Common\Configuration;
 use WindowsAzure\Common\Models\ServiceProperties;
 use WindowsAzure\ServiceBus\ServiceBusSettings;
-use WindowsAzure\ServiceBus\ServiceBusService;
 use WindowsAzure\ServiceBus\ServiceBusRestProxy;
 use WindowsAzure\ServiceBus\IServiceBus;
 use WindowsAzure\ServiceBus\Models\SubscriptionInfo;
@@ -73,7 +72,7 @@ class ServiceBusRestProxyTestBase extends ServiceRestProxyTestBase
 
     }
 
-    public function __construct()
+    public function setUp()
     {
         $config = new Configuration();
         $config = ServiceBusSettings::configureWithWrapAuthentication(
@@ -83,12 +82,12 @@ class ServiceBusRestProxyTestBase extends ServiceRestProxyTestBase
             TestResources::wrapPassword()
         );
 
-        $serviceBusWrapper = ServiceBusService::create($config);
+        $serviceBusWrapper = $this->builder->createServiceBusService($config);
         $this->_createdTopics = array();
         $this->_createdSubscriptions = array();
         $this->_createdRules = array();
         $this->_createdQueues = array();
-        parent::__construct($config, $serviceBusWrapper);
+        parent::setUp($config, $serviceBusWrapper);
     }
     
     public function createQueue($queueInfo)
