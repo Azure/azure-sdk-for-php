@@ -22,7 +22,7 @@
  * @link      https://github.com/WindowsAzure/azure-sdk-for-php
  */
 
-namespace Tests\Unit\WindowsAzure\ServiceBus\Models;
+namespace Tests\Unit\WindowsAzure\ServiceBus\Models\Models;
 use WindowsAzure\ServiceBus\Models\CreateTopicResult;
 use WindowsAzure\ServiceBus\Models\TopicDescription;
 
