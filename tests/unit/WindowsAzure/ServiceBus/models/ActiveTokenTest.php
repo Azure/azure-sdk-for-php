@@ -22,7 +22,7 @@
  * @link      https://github.com/WindowsAzure/azure-sdk-for-php
  */
 
-namespace Tests\Unit\WindowsAzure\ServiceBus\Models\Models;
+namespace Tests\Unit\WindowsAzure\ServiceBus\Models;
 use WindowsAzure\ServiceBus\Models\ActiveToken;
 use WindowsAzure\ServiceBus\Models\WrapAccessTokenResult;
 
