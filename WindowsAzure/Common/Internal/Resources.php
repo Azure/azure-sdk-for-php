@@ -39,6 +39,9 @@ class Resources
 {
     // @codingStandardsIgnoreStart
     
+    // Emulator connection string
+    const EMULATOR_CONNECTION_STRING = 'BlobEndpoint=127.0.0.1:10000;QueueEndpoint=127.0.0.1:10001;TableEndpoint=127.0.0.1:10002;AccountName=devstoreaccount1;AccountKey=Eby8vdM02xNOcqFlqUwJPLlmEtlCDXJ1OUzFT50uSRZ6IFsuFq2UVErCz4I6tq/K1SZFPTOtr/KBHBeksoGMGw==';
+    
     // Messages
     const INVALID_TYPE_MSG = 'The provided variable should be of type: ';
     const INVALID_META_MSG = 'Metadata cannot contain newline characters.';

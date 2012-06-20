@@ -72,46 +72,6 @@ class Configuration
     {
         $this->_properties = array();
     }
-    
-    /**
-     * Configures $config to run against the storage emulator.
-     *
-     * @param WindowsAzure\Common\Configuration $config The configuration.
-     * @param string                            $type   The type name.
-     * 
-     * @return none
-     */
-    private static function _useStorageEmulatorConfig($config, $type)
-    {
-        $name = Resources::DEV_STORE_NAME;
-        $key  = Resources::DEV_STORE_KEY;
-        $uri  = "http://%s/" . Resources::DEV_STORE_NAME . "/";
-        
-        if ($type == Resources::QUEUE_TYPE_NAME) {
-            $config->setProperty(
-                QueueSettings::URI, sprintf($uri, Resources::EMULATOR_QUEUE_URI)
-            );
-            $config->setProperty(QueueSettings::ACCOUNT_NAME, $name);
-            $config->setProperty(QueueSettings::ACCOUNT_KEY, $key);
-        } else if ($type == Resources::BLOB_TYPE_NAME) {
-            $config->setProperty(
-                BlobSettings::URI, sprintf($uri, Resources::EMULATOR_BLOB_URI)
-            );
-            $config->setProperty(BlobSettings::ACCOUNT_NAME, $name);
-            $config->setProperty(BlobSettings::ACCOUNT_KEY, $key);
-        } else if ($type == Resources::TABLE_TYPE_NAME) {
-            $config->setProperty(
-                TableSettings::URI, sprintf($uri, Resources::EMULATOR_TABLE_URI)
-            );
-            $config->setProperty(TableSettings::ACCOUNT_NAME, $name);
-            $config->setProperty(TableSettings::ACCOUNT_KEY, $key);
-        } else {
-            $expected  = Resources::QUEUE_TYPE_NAME;
-            $expected .= '|' . Resources::BLOB_TYPE_NAME;
-            $expected .= '|' . Resources::TABLE_TYPE_NAME;
-            throw new InvalidArgumentTypeException($expected);
-        }
-    }
 
     /**
      * Access point to the static _instance of the class.
@@ -163,27 +123,6 @@ class Configuration
         Validate::isString($value, 'value');
 
         $this->_properties[$key] = $value;
-    }
-
-    /**
-     * Builds and returns an object from the specified type.
-     *
-     * @param string           $type    The desired  object type.
-     * @param IServicesBuilder $builder The services builder.
-     * 
-     * @return mix
-     */
-    public function create($type, $builder = null)
-    {
-        if (self::isEmulated()) {
-            self::_useStorageEmulatorConfig($this, $type);
-        }
-        
-        if (is_null($builder)) {
-            $builder = new ServicesBuilder();
-        }
-        
-        return $builder->build($this, $type);
     }
     
     /**

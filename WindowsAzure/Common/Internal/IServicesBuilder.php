@@ -43,17 +43,61 @@ namespace WindowsAzure\Common\Internal;
  * @version   Release: @package_version@
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
-interface IServiceBuilder
+interface IServicesBuilder
 {
     /**
-     * Creates an object passed $type configured with $config.
+     * Creates a BlobRestProxy using the passed configuration.
      *
-     * @param WindowsAzure\Common\Configuration $config The configuration.
-     * @param string                            $type   The type name.
+     * @param WindowsAzure\Common\Configuration $config The configuration object.
      * 
-     * @return mix
+     * @return WindowsAzure\Blob\BlobRestProxy
      */
-    public function build($config, $type);
+    public function createBlobService($config);
+    
+    /**
+     * Creates a QueueRestProxy using the passed configuration.
+     *
+     * @param WindowsAzure\Common\Configuration $config The configuration object.
+     * 
+     * @return WindowsAzure\Queue\QueueRestProxy
+     */
+    public function createQueueService($config);
+    
+    /**
+     * Creates a TableRestProxy using the passed configuration.
+     *
+     * @param WindowsAzure\Common\Configuration $config The configuration object.
+     * 
+     * @return WindowsAzure\Table\TableRestProxy
+     */
+    public function createTableService($config);
+    
+    /**
+     * Creates a ServiceManagementRestProxy using the passed configuration.
+     *
+     * @param WindowsAzure\Common\Configuration $config The configuration object.
+     * 
+     * @return WindowsAzure\ServiceManagement\ServiceManagementRestProxy
+     */
+    public function createServiceManagementService($config);
+    
+    /**
+     * Creates a ServiceBusRestProxy using the passed configuration.
+     *
+     * @param WindowsAzure\Common\Configuration $config The configuration object.
+     * 
+     * @return WindowsAzure\ServiceBus\ServiceBusRestProxy
+     */
+    public function createServiceBusService($config);
+    
+    /**
+     * Creates a WrapRestProxy using the passed configuration.
+     *
+     * @param WindowsAzure\Common\Configuration $config The configuration object.
+     * 
+     * @return WindowsAzure\Wrap\WrapRestProxy
+     */
+    public function createWrapService($config);
 }
 
 ?>
