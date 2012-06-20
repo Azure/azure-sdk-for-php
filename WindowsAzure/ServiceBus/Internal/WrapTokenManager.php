@@ -24,12 +24,13 @@
  
 namespace WindowsAzure\ServiceBus\Internal;
 use WindowsAzure\Common\Configuration;
-use WindowsAzure\Common\Internal\ServicesBuilder;
+use WindowsAzure\Common\Internal\IServiceBuilder;
 use WindowsAzure\Common\Internal\Resources;
 use WindowsAzure\Common\Internal\Validate;
 use WindowsAzure\ServiceBus\WrapRestProxy;
 use WindowsAzure\ServiceBus\Models\ActiveToken;
 use WindowsAzure\ServiceBus\ServiceBusSettings;
+use WindowsAzure\ServiceBus\WrapService;
 
 /**
  * Manages WRAP tokens. 
@@ -122,11 +123,7 @@ class WrapTokenManager
             $this->_wrapPassword
         );
 
-        if (is_null($builder)) {
-            $builder = new ServicesBuilder();
-        }
-        
-        $this->_wrapRestProxy = $builder->createWrapService($config);
+        $this->_wrapRestProxy = WrapService::create($config, $builder);
 
         $this->_activeTokens = array();
         

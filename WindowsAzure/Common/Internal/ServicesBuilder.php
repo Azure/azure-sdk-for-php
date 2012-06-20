@@ -27,11 +27,11 @@ use WindowsAzure\Common\Internal\Resources;
 use WindowsAzure\Common\Internal\Validate;
 use WindowsAzure\Common\Internal\Utilities;
 use WindowsAzure\Common\Internal\Http\HttpClient;
-use WindowsAzure\Common\Internal\IServicesBuilder;
+use WindowsAzure\Common\Internal\IServiceBuilder;
 use WindowsAzure\Common\Configuration;
 use WindowsAzure\Common\Internal\Filters\DateFilter;
 use WindowsAzure\Common\Internal\Filters\HeadersFilter;
-use WindowsAzure\Common\Internal\Filters\AuthenticationFilter;
+use WindowsAzure\Common\Internal\Filters\SharedKeyFilter;
 use WindowsAzure\Common\Internal\Filters\WrapFilter;
 use WindowsAzure\Common\Internal\InvalidArgumentTypeException;
 use WindowsAzure\Queue\QueueRestProxy;
@@ -48,8 +48,6 @@ use WindowsAzure\Table\Internal\MimeReaderWriter;
 use WindowsAzure\Common\Internal\Serialization\XmlSerializer;
 use WindowsAzure\ServiceManagement\ServiceManagementSettings;
 use WindowsAzure\ServiceManagement\ServiceManagementRestProxy;
-use WindowsAzure\Common\Internal\Authentication\SharedKeyAuthScheme;
-use WindowsAzure\Common\Internal\Authentication\TableSharedKeyLiteAuthScheme;
 
 /**
  * Builds azure service objects.
@@ -62,87 +60,8 @@ use WindowsAzure\Common\Internal\Authentication\TableSharedKeyLiteAuthScheme;
  * @version   Release: @package_version@
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
-class ServicesBuilder implements IServicesBuilder
+class ServicesBuilder implements IServiceBuilder
 {
-    /**
-     * Gets the HTTP client used in the REST services construction.
-     * 
-     * @return WindowsAzure\Common\Internal\Http\IHttpClient
-     */
-    protected function httpClient()
-    {
-        return new HttpClient();
-    }
-    
-    /**
-     * Gets the serializer used in the REST services construction.
-     * 
-     * @return WindowsAzure\Common\Internal\Serialization\ISerializer
-     */
-    protected function serializer()
-    {
-        return new XmlSerializer();
-    }
-    
-    /**
-     * Gets the MIME serializer used in the REST services construction.
-     * 
-     * @return \WindowsAzure\Table\Internal\IMimeReaderWriter
-     */
-    protected function mimeSerializer()
-    {
-        return new MimeReaderWriter();
-    }
-    
-    /**
-     * Gets the Atom serializer used in the REST services construction.
-     * 
-     * @return \WindowsAzure\Table\Internal\IAtomReaderWriter
-     */
-    protected function atomSerializer()
-    {
-        return new AtomReaderWriter();
-    }
-
-    /**
-     * Gets the Queue authentication scheme.
-     * 
-     * @param string $accountName The account name.
-     * @param string $accountKey  The account key.
-     * 
-     * @return \WindowsAzure\Common\Internal\Authentication\SharedKeyAuthScheme 
-     */
-    protected function queueAuthenticationScheme($accountName, $accountKey)
-    {
-        return new SharedKeyAuthScheme($accountName, $accountKey);
-    }
-    
-    /**
-     * Gets the Blob authentication scheme.
-     * 
-     * @param string $accountName The account name.
-     * @param string $accountKey  The account key.
-     * 
-     * @return \WindowsAzure\Common\Internal\Authentication\SharedKeyAuthScheme 
-     */
-    protected function blobAuthenticationScheme($accountName, $accountKey)
-    {
-        return new SharedKeyAuthScheme($accountName, $accountKey);
-    }
-    
-    /**
-     * Gets the Table authentication scheme.
-     * 
-     * @param string $accountName The account name.
-     * @param string $accountKey  The account key.
-     * 
-     * @return TableSharedKeyLiteAuthScheme
-     */
-    protected function tableAuthenticationScheme($accountName, $accountKey)
-    {
-        return new TableSharedKeyLiteAuthScheme($accountName, $accountKey);
-    }
-    
     /**
      * Adds HeadersFilter with constant headers for each service wrapper.
      * 
@@ -192,12 +111,10 @@ class ServicesBuilder implements IServicesBuilder
      * 
      * @return WindowsAzure\Queue\Internal\IQueue.
      */
-    public function createQueueService($config)
+    private function _buildQueue($config)
     {
-        $this->_validateConfig($config, Resources::QUEUE_TYPE_NAME);
-        
-        $httpClient    = $this->httpClient();
-        $serializer    = $this->serializer();
+        $httpClient    = new HttpClient();
+        $xmlSerializer = new XmlSerializer();
         $uri           = Utilities::tryAddUrlScheme(
             $config->getProperty(QueueSettings::URI)
         );
@@ -206,7 +123,7 @@ class ServicesBuilder implements IServicesBuilder
             $httpClient, 
             $uri,
             Resources::EMPTY_STRING, 
-            $serializer
+            $xmlSerializer
         );
 
         // Adding headers filter
@@ -219,11 +136,10 @@ class ServicesBuilder implements IServicesBuilder
         $queueWrapper = $queueWrapper->withFilter($dateFilter);
 
         // Adding authentication filter
-        $authFilter = new AuthenticationFilter(
-            $this->queueAuthenticationScheme(
-                $config->getProperty(QueueSettings::ACCOUNT_NAME),
-                $config->getProperty(QueueSettings::ACCOUNT_KEY)
-            )
+        $authFilter = new SharedKeyFilter(
+            $config->getProperty(QueueSettings::ACCOUNT_NAME),
+            $config->getProperty(QueueSettings::ACCOUNT_KEY),
+            Resources::QUEUE_TYPE_NAME
         );
 
         $queueWrapper = $queueWrapper->withFilter($authFilter);
@@ -238,12 +154,10 @@ class ServicesBuilder implements IServicesBuilder
      * 
      * @return WindowsAzure\Blob\Internal\IBlob.
      */
-    public function createBlobService($config)
+    private function _buildBlob($config)
     {
-        $this->_validateConfig($config, Resources::BLOB_TYPE_NAME);
-        
-        $httpClient    = $this->httpClient();
-        $serializer    = $this->serializer();
+        $httpClient    = new HttpClient();
+        $xmlSerializer = new XmlSerializer();
         $uri           = Utilities::tryAddUrlScheme(
             $config->getProperty(BlobSettings::URI)
         );
@@ -252,7 +166,7 @@ class ServicesBuilder implements IServicesBuilder
             $httpClient, 
             $uri,
             $config->getProperty(BlobSettings::ACCOUNT_NAME),
-            $serializer
+            $xmlSerializer
         );
 
         // Adding headers filter
@@ -264,11 +178,11 @@ class ServicesBuilder implements IServicesBuilder
         $dateFilter  = new DateFilter();
         $blobWrapper = $blobWrapper->withFilter($dateFilter);
 
-        $authFilter = new AuthenticationFilter(
-            $this->blobAuthenticationScheme(
-                $config->getProperty(BlobSettings::ACCOUNT_NAME),
-                $config->getProperty(BlobSettings::ACCOUNT_KEY)
-            )
+        // Adding authentication filter
+        $authFilter = new SharedKeyFilter(
+            $config->getProperty(BlobSettings::ACCOUNT_NAME),
+            $config->getProperty(BlobSettings::ACCOUNT_KEY),
+            Resources::BLOB_TYPE_NAME
         );
 
         $blobWrapper = $blobWrapper->withFilter($authFilter);
@@ -283,14 +197,12 @@ class ServicesBuilder implements IServicesBuilder
      * 
      * @return WindowsAzure\Table\Internal\ITable.
      */
-    public function createTableService($config)
+    private function _buildTable($config)
     {
-        $this->_validateConfig($config, Resources::TABLE_TYPE_NAME);
-        
-        $httpClient     = $this->httpClient();
-        $atomSerializer = $this->atomSerializer();
-        $mimeSerializer = $this->mimeSerializer();
-        $serializer     = $this->serializer();
+        $httpClient     = new HttpClient();
+        $atomSerializer = new AtomReaderWriter();
+        $mimeSerializer = new MimeReaderWriter();
+        $xmlSerializer  = new XmlSerializer();
         $uri            = Utilities::tryAddUrlScheme(
             $config->getProperty(TableSettings::URI)
         );
@@ -300,7 +212,7 @@ class ServicesBuilder implements IServicesBuilder
             $uri,
             $atomSerializer,
             $mimeSerializer,
-            $serializer
+            $xmlSerializer
         );
 
         // Adding headers filter
@@ -313,11 +225,10 @@ class ServicesBuilder implements IServicesBuilder
         $tableWrapper = $tableWrapper->withFilter($dateFilter);
 
         // Adding authentication filter
-        $authFilter = new AuthenticationFilter(
-            $this->tableAuthenticationScheme(
-                $config->getProperty(TableSettings::ACCOUNT_NAME),
-                $config->getProperty(TableSettings::ACCOUNT_KEY)
-            )
+        $authFilter = new SharedKeyFilter(
+            $config->getProperty(TableSettings::ACCOUNT_NAME),
+            $config->getProperty(TableSettings::ACCOUNT_KEY),
+            Resources::TABLE_TYPE_NAME
         );
 
         $tableWrapper = $tableWrapper->withFilter($authFilter);
@@ -333,16 +244,14 @@ class ServicesBuilder implements IServicesBuilder
      * 
      * @return WindowsAzure\ServiceBus\Internal\IServiceBus
      */
-    public function createServiceBusService($config)
-    {
-        $this->_validateConfig($config, Resources::SERVICE_BUS_TYPE_NAME);
-        
-        $httpClient        = $this->httpClient();
-        $serializer        = $this->serializer();
+    private function _buildServiceBus($config)
+    { 
+        $httpClient        = new HttpClient();
+        $xmlSerializer     = new XmlSerializer();
         $serviceBusWrapper = new ServiceBusRestProxy(
             $httpClient,
             $config->getProperty(ServiceBusSettings::URI),
-            $serializer
+            $xmlSerializer
         );
         
         $wrapFilter = new WrapFilter(
@@ -361,15 +270,13 @@ class ServicesBuilder implements IServicesBuilder
      * 
      * @return WindowsAzure\ServiceManagement\Internal\IServiceManagement
      */
-    public function createServiceManagementService($config)
+    private function _buildServiceManagement($config)
     {
-        $this->_validateConfig($config, Resources::SERVICE_MANAGEMENT_TYPE_NAME);
-        
         $certificatePath = $config->getProperty(
             ServiceManagementSettings::CERTIFICATE_PATH
         );
         $httpClient      = new HttpClient($certificatePath);
-        $serializer      = $this->serializer();
+        $xmlSerializer   = new XmlSerializer();
         $uri             = Utilities::tryAddUrlScheme(
             $config->getProperty(ServiceManagementSettings::URI),
             Resources::HTTPS_SCHEME
@@ -379,7 +286,7 @@ class ServicesBuilder implements IServicesBuilder
             $httpClient,
             $config->getProperty(ServiceManagementSettings::SUBSCRIPTION_ID),
             $uri,
-            $serializer
+            $xmlSerializer
         );
 
         // Adding headers filter
@@ -397,11 +304,9 @@ class ServicesBuilder implements IServicesBuilder
      *
      * @return WindowsAzure\ServiceBus\Internal\IWrap
      */
-    public function createWrapService($config)
+    private function _buildWrap($config)
     {
-        $this->_validateConfig($config, Resources::WRAP_TYPE_NAME);
-        
-        $httpClient  = $this->httpClient();
+        $httpClient  = new HttpClient();
         $wrapWrapper = new WrapRestProxy(
             $httpClient,
             $config->getProperty(ServiceBusSettings::WRAP_URI) 
@@ -453,13 +358,6 @@ class ServicesBuilder implements IServicesBuilder
      */
     private function _validateConfig($config, $type)
     {
-        if (Configuration::isEmulated()) {
-            self::_useStorageEmulatorConfig($this, $type);
-            
-            // Do not validate the emulated configuration values.
-            return;
-        }
-        
         switch ($type) {
         case Resources::QUEUE_TYPE_NAME:
             $this->_validateConfigSetting(
@@ -593,45 +491,49 @@ class ServicesBuilder implements IServicesBuilder
     }
     
     /**
-     * Configures $config to run against the storage emulator.
+     * Creates an object passed $type configured with $config.
      *
      * @param WindowsAzure\Common\Configuration $config The configuration.
      * @param string                            $type   The type name.
      * 
-     * @return none
+     * @return WindowsAzure\Queue\Internal\IQueue
+     *       | WindowsAzure\Blob\Internal\IBlob
+     *       | WindowsAzure\Table\Internal\ITable
      *       | WindowsAzure\ServiceBus\Internal\IServiceBus 
      *       | WindowsAzure\ServiceBus\Internal\IWrap 
      */
-    private static function _useStorageEmulatorConfig($config, $type)
+    public function build($config, $type)
     {
-        $name = Resources::DEV_STORE_NAME;
-        $key  = Resources::DEV_STORE_KEY;
-        $uri  = "http://%s/" . Resources::DEV_STORE_NAME . "/";
+        $this->_validateConfig($config, $type);
+        $restProxy = null;
         
-        if ($type == Resources::QUEUE_TYPE_NAME) {
-            $config->setProperty(
-                QueueSettings::URI, sprintf($uri, Resources::EMULATOR_QUEUE_URI)
-            );
-            $config->setProperty(QueueSettings::ACCOUNT_NAME, $name);
-            $config->setProperty(QueueSettings::ACCOUNT_KEY, $key);
-        } else if ($type == Resources::BLOB_TYPE_NAME) {
-            $config->setProperty(
-                BlobSettings::URI, sprintf($uri, Resources::EMULATOR_BLOB_URI)
-            );
-            $config->setProperty(BlobSettings::ACCOUNT_NAME, $name);
-            $config->setProperty(BlobSettings::ACCOUNT_KEY, $key);
-        } else if ($type == Resources::TABLE_TYPE_NAME) {
-            $config->setProperty(
-                TableSettings::URI, sprintf($uri, Resources::EMULATOR_TABLE_URI)
-            );
-            $config->setProperty(TableSettings::ACCOUNT_NAME, $name);
-            $config->setProperty(TableSettings::ACCOUNT_KEY, $key);
-        } else {
-            $expected  = Resources::QUEUE_TYPE_NAME;
-            $expected .= '|' . Resources::BLOB_TYPE_NAME;
-            $expected .= '|' . Resources::TABLE_TYPE_NAME;
-            throw new InvalidArgumentTypeException($expected);
+        switch ($type) {
+        case Resources::QUEUE_TYPE_NAME:
+            $restProxy = self::_buildQueue($config);
+            break;
+            
+        case Resources::BLOB_TYPE_NAME:
+            $restProxy = self::_buildBlob($config);
+            break;
+            
+        case Resources::TABLE_TYPE_NAME:
+            $restProxy = self::_buildTable($config);
+            break;
+            
+        case Resources::SERVICE_MANAGEMENT_TYPE_NAME:
+            $restProxy = self::_buildServiceManagement($config);
+            break;
+
+        case Resources::SERVICE_BUS_TYPE_NAME:
+            $restProxy = self::_buildServiceBus($config);
+            break;
+            
+        case Resources::WRAP_TYPE_NAME:
+            $restProxy = self::_buildWrap($config);
+            break;
         }
+        
+        return $restProxy;
     }
 }
 

@@ -15,77 +15,49 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   Tests\Framework
+ * @package   Tests\Unit\WindowsAzure\Table
  * @author    Azure PHP SDK <azurephpsdk@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
-namespace Tests\Framework;
-use Tests\Framework\ServiceRestProxyTestBase;
-use Tests\Framework\TestResources;
-use WindowsAzure\Common\Configuration;
-use WindowsAzure\Table\TableSettings;
+
+namespace Tests\Unit\WindowsAzure\Table;
 use WindowsAzure\Table\TableService;
+use WindowsAzure\Common\Configuration;
+use Tests\Framework\TestResources;
+use WindowsAzure\Table\TableSettings;
 
 /**
- * TestBase class for each unit test class.
+ * Unit tests for class TableService
  *
  * @category  Microsoft
- * @package   Tests\Framework
+ * @package   Tests\Unit\WindowsAzure\Table
  * @author    Azure PHP SDK <azurephpsdk@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @version   Release: @package_version@
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
-class TableServiceRestProxyTestBase extends ServiceRestProxyTestBase
+class TableServiceTest extends \PHPUnit_Framework_TestCase
 {
-    protected $_createdTables;
-    
-    public function __construct()
+    /**
+     * @covers WindowsAzure\Table\TableService::create
+     */
+    public function testCreateWithConfig()
     {
+        // Setup
+        $uri = 'http://' . TestResources::accountName() . '.table.core.windows.net';
         $config = new Configuration();
-        $tableUri = 'http://' . TestResources::accountName() . '.table.core.windows.net';
         $config->setProperty(TableSettings::ACCOUNT_KEY, TestResources::accountKey());
         $config->setProperty(TableSettings::ACCOUNT_NAME, TestResources::accountName());        
-        $config->setProperty(TableSettings::URI, $tableUri);
-        $tableRestProxy = TableService::create($config);
-        parent::__construct($config, $tableRestProxy);
-        $this->_createdTables = array();
-    }
-
-    public function createTable($tableName, $options = null)
-    {
-        $this->restProxy->createTable($tableName, $options);
-        $this->_createdTables[] = $tableName;
-    }
-    
-    public function deleteTable($tableName)
-    {
-        $this->restProxy->deleteTable($tableName);
-    }
-    
-    public function safeDeleteTable($tableName)
-    {
-        try
-        {
-            $this->deleteTable($tableName);
-        }
-        catch (\Exception $e)
-        {
-            // Ignore exception and continue, will assume that this table doesn't exist in the sotrage account
-            error_log($e->getMessage());
-        }
-    }
-
-    protected function tearDown()
-    {
-        parent::tearDown();
+        $config->setProperty(TableSettings::URI, $uri);
         
-        foreach ($this->_createdTables as $value) {
-            $this->safeDeleteTable($value);
-        }
+        // Test
+        $tableRestProxy = TableService::create($config);
+        
+        // Assert
+        $this->assertInstanceOf('WindowsAzure\Table\Internal\ITable', $tableRestProxy);
     }
 }
 

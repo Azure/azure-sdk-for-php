@@ -26,6 +26,7 @@ namespace Tests\Framework;
 use WindowsAzure\Common\Internal\Resources;
 use WindowsAzure\Common\Configuration;
 use WindowsAzure\ServiceManagement\ServiceManagementSettings;
+use WindowsAzure\ServiceManagement\ServiceManagementService;
 use WindowsAzure\ServiceManagement\Models\CreateStorageServiceOptions;
 use WindowsAzure\ServiceManagement\Models\OperationStatus;
 use WindowsAzure\ServiceManagement\Models\Locations;
@@ -45,6 +46,7 @@ class ServiceManagementRestProxyTestBase extends RestProxyTestBase
 {
     protected $createdStorageServices;
     protected $createdAffinityGroups;
+    protected $storageCount;
     protected $affinityGroupCount;
     
     public static function setUpBeforeClass()
@@ -65,7 +67,7 @@ class ServiceManagementRestProxyTestBase extends RestProxyTestBase
         }
     }
     
-    public function setUp()
+    public function __construct()
     {
         $config = new Configuration();
         $config->setProperty(
@@ -80,12 +82,13 @@ class ServiceManagementRestProxyTestBase extends RestProxyTestBase
             ServiceManagementSettings::CERTIFICATE_PATH,
             TestResources::serviceManagementCertificatePath()
         );
-        $serviceManagementRestProxy = $this->builder->createServiceManagementService($config);
+        $serviceManagementRestProxy = ServiceManagementService::create($config);
         
-        parent::setUp($config, $serviceManagementRestProxy);
+        parent::__construct($config, $serviceManagementRestProxy);
         
         $this->createdStorageServices = array();
         $this->createdAffinityGroups = array();
+        $this->storageCount = count($this->restProxy->listStorageServices()->getStorageServices());
         $this->affinityGroupCount = count($this->restProxy->listAffinityGroups()->getAffinityGroups());
     }
 

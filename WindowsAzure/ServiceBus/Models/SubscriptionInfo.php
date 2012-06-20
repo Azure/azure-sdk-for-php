@@ -59,6 +59,7 @@ class SubscriptionInfo extends Entry
      * the subscription.
      * @param SubscriptionDescription $subscriptionDescription The description 
      * of the subscription.
+     * 
      */
     public function __construct(
         $title = Resources::EMPTY_STRING, 

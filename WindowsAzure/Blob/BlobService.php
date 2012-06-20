@@ -15,58 +15,56 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   Tests\Framework
+ * @package   WindowsAzure\Blob
  * @author    Azure PHP SDK <azurephpsdk@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
  
-namespace Tests\Framework;
-use WindowsAzure\Common\Internal\Logger;
-use WindowsAzure\Common\Internal\Serialization\XmlSerializer;
+namespace WindowsAzure\Blob;
+use WindowsAzure\Common\Internal\Validate;
 use WindowsAzure\Common\Configuration;
+use WindowsAzure\Common\Internal\IServiceBuilder;
+use WindowsAzure\Common\Internal\Resources;
 
 /**
- * Testbase for all REST proxy tests.
+ * Factory for creating BlobRestProxy objects.
  *
  * @category  Microsoft
- * @package   Tests\Framework
+ * @package   WindowsAzure\Blob
  * @author    Azure PHP SDK <azurephpsdk@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @version   Release: @package_version@
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
-class RestProxyTestBase extends \PHPUnit_Framework_TestCase
+class BlobService
 {
-    protected $config;
-    protected $restProxy;
-    protected $xmlSerializer;
-    
-    const NOT_SUPPORTED = 'The storage emulator doesn\'t support this API';
-    
-    protected function skipIfEmulated()
+    /**
+     * Creates new object based on the builder type in the $config.
+     *
+     * @param WindowsAzure\Common\Configuration             $config  The config
+     * object.
+     * @param WindowsAzure\Common\Internal\IServicesBuilder $builder The builder
+     * object.
+     * 
+     * @return WindowsAzure\Blob\BlobRestProxy
+     */
+    public static function create($config, $builder = null)
     {
-        if (Configuration::isEmulated()) {
-            $this->markTestSkipped(self::NOT_SUPPORTED);
+        Validate::isTrue(
+            $config instanceof Configuration,
+            Resources::INVALID_CONFIG_MSG
+        );
+        if (!is_null($builder)) {
+            Validate::isTrue(
+                $builder instanceof IServiceBuilder,
+                Resources::INVALID_BUILDER_MSG
+            );
         }
-    }
-    
-    public function __construct($config, $serviceRestProxy)
-    {
-        $this->config = $config;
-        $this->restProxy = $serviceRestProxy;
-        $this->xmlSerializer = new XmlSerializer();
-        Logger::setLogFile('C:\log.txt');
-    }
-    
-    protected function onNotSuccessfulTest(\Exception $e)
-    {
-        parent::onNotSuccessfulTest($e);
         
-        $this->tearDown();
-        throw $e;
+        return $config->create(Resources::BLOB_TYPE_NAME, $builder);
     }
 }
 

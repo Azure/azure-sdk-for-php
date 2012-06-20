@@ -23,14 +23,13 @@
  */
 
 namespace Tests\Unit\WindowsAzure\Common\Internal\Filters;
-use WindowsAzure\Common\Internal\Filters\AuthenticationFilter;
+use WindowsAzure\Common\Internal\Filters\SharedKeyFilter;
 use WindowsAzure\Common\Internal\Http\HttpClient;
 use WindowsAzure\Common\Internal\Resources;
 use WindowsAzure\Common\Internal\InvalidArgumentTypeException;
-use WindowsAzure\Common\Internal\Authentication\SharedKeyAuthScheme;
 
 /**
- * Unit tests for class AuthenticationFilterTest
+ * Unit tests for class SharedKeyFilterTest
  *
  * @category  Microsoft
  * @package   Tests\Unit\WindowsAzure\Common\Internal\Filters
@@ -40,11 +39,11 @@ use WindowsAzure\Common\Internal\Authentication\SharedKeyAuthScheme;
  * @version   Release: @package_version@
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
-class AuthenticationFilterTest extends \PHPUnit_Framework_TestCase
+class SharedKeyFilterTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @covers WindowsAzure\Common\Internal\Filters\AuthenticationFilter::handleRequest
-     * @covers WindowsAzure\Common\Internal\Filters\AuthenticationFilter::__construct
+     * @covers WindowsAzure\Common\Internal\Filters\SharedKeyFilter::handleRequest
+     * @covers WindowsAzure\Common\Internal\Filters\SharedKeyFilter::__construct
      */
     public function testHandleRequest()
     {
@@ -52,8 +51,7 @@ class AuthenticationFilterTest extends \PHPUnit_Framework_TestCase
         $channel = new HttpClient();
         $url = new \WindowsAzure\Common\Internal\Http\Url('http://microsoft.com');
         $channel->setUrl($url);
-        $scheme = new SharedKeyAuthScheme('acount', 'key');
-        $filter = new AuthenticationFilter($scheme);
+        $filter = new SharedKeyFilter('acount', 'key', Resources::QUEUE_TYPE_NAME);
         
         // Test
         $request = $filter->handleRequest($channel);
@@ -63,8 +61,8 @@ class AuthenticationFilterTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers WindowsAzure\Common\Internal\Filters\AuthenticationFilter::handleRequest
-     * @covers WindowsAzure\Common\Internal\Filters\AuthenticationFilter::__construct
+     * @covers WindowsAzure\Common\Internal\Filters\SharedKeyFilter::handleRequest
+     * @covers WindowsAzure\Common\Internal\Filters\SharedKeyFilter::__construct
      */
     public function testHandleRequestWithTable()
     {
@@ -72,8 +70,7 @@ class AuthenticationFilterTest extends \PHPUnit_Framework_TestCase
         $channel = new HttpClient();
         $url = new \WindowsAzure\Common\Internal\Http\Url('http://microsoft.com');
         $channel->setUrl($url);
-        $scheme = new SharedKeyAuthScheme('acount', 'key');
-        $filter = new AuthenticationFilter($scheme);
+        $filter = new SharedKeyFilter('acount', 'key', Resources::TABLE_TYPE_NAME);
         
         // Test
         $request = $filter->handleRequest($channel);
@@ -83,7 +80,19 @@ class AuthenticationFilterTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers WindowsAzure\Common\Internal\Filters\AuthenticationFilter::handleResponse
+     * @covers WindowsAzure\Common\Internal\Filters\SharedKeyFilter::__construct
+     */
+    public function test__constructWithInvalidTypeFail()
+    {
+        // Setup
+        $this->setExpectedException('WindowsAzure\Common\Internal\InvalidArgumentTypeException');
+        
+        // Test
+        new SharedKeyFilter('acount', 'key', 'FooType');
+    }
+    
+    /**
+     * @covers WindowsAzure\Common\Internal\Filters\SharedKeyFilter::handleResponse
      */
     public function testHandleResponse()
     {
@@ -92,8 +101,7 @@ class AuthenticationFilterTest extends \PHPUnit_Framework_TestCase
         $url = new \WindowsAzure\Common\Internal\Http\Url('http://microsoft.com');
         $channel->setUrl($url);
         $response = null;
-        $scheme = new SharedKeyAuthScheme('acount', 'key');
-        $filter = new AuthenticationFilter($scheme);
+        $filter = new SharedKeyFilter('acount', 'key', Resources::QUEUE_TYPE_NAME);
         
         // Test
         $response = $filter->handleResponse($channel, $response);
