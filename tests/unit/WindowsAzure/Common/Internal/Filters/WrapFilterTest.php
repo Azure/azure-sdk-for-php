@@ -21,7 +21,8 @@
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link      https://github.com/WindowsAzure/azure-sdk-for-php
  */
-namespace Tests\Unit\WindowsAzure\Common\Internal\Filters
+
+namespace Tests\Unit\WindowsAzure\Common\Internal\Filters;
 use Tests\Framework\TestResources;
 use WindowsAzure\Common\Internal\Filters\WrapFilter;
 use WindowsAzure\Common\Internal\Http\HttpClient;
