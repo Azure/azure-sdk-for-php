@@ -40,21 +40,44 @@ use WindowsAzure\Common\Internal\InvalidArgumentTypeException;
  * @version   Release: @package_version@
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
-class AuthenticationFilter implements IServiceFilter
+class SharedKeyFilter implements IServiceFilter
 {
-    /**
-     * @var WindowsAzure\Common\Internal\Authentication\StorageAuthScheme
-     */
-    private $_authenticationScheme;
+    private $_sharedKeyAuthentication;
 
     /**
-     * Creates AuthenticationFilter with the passed scheme.
+     * Return SharedKeyFilter based on the storage type.
+     *
+     * @param string $accountName storage account name.
+     * @param string $accountKey  storage account primary or secondary key.
+     * @param string $type        storage account type.
      * 
-     * @param StorageAuthScheme $authenticationScheme The authentication scheme.
+     * @return
+     * WindowsAzure\Common\Internal\Authentication\StorageAuthScheme
+     *         
      */
-    public function __construct($authenticationScheme)
+    public function __construct($accountName, $accountKey, $type)
     {
-        $this->_authenticationScheme = $authenticationScheme;
+        switch ($type) {
+        case Resources::QUEUE_TYPE_NAME:
+        case Resources::BLOB_TYPE_NAME:
+            $this->_sharedKeyAuthentication = new SharedKeyAuthScheme(
+                $accountName, $accountKey
+            );
+            break;
+        case Resources::TABLE_TYPE_NAME:
+            $sharedKeyLiteAuth = new TableSharedKeyLiteAuthScheme(
+                $accountName, $accountKey
+            );
+            
+            $this->_sharedKeyAuthentication = $sharedKeyLiteAuth;
+            break;
+
+        default:
+            $expected  = Resources::QUEUE_TYPE_NAME;
+            $expected .= '|' . Resources::BLOB_TYPE_NAME;
+            $expected .= '|' . Resources::TABLE_TYPE_NAME;
+            throw new InvalidArgumentTypeException($expected);
+        }
     }
 
     /**
@@ -66,7 +89,7 @@ class AuthenticationFilter implements IServiceFilter
      */
     public function handleRequest($request)
     {
-        $signedKey = $this->_authenticationScheme->getAuthorizationHeader(
+        $signedKey = $this->_sharedKeyAuthentication->getAuthorizationHeader(
             $request->getHeaders(), $request->getUrl(),
             $request->getUrl()->getQueryVariables(), $request->getMethod()
         );

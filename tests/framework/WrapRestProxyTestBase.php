@@ -27,6 +27,7 @@ use Tests\Framework\TestResources;
 use WindowsAzure\Common\Configuration;
 use WindowsAzure\Common\Models\ServiceProperties;
 use WindowsAzure\ServiceBus\ServiceBusSettings;
+use WindowsAzure\ServiceBus\WrapService;
 use WindowsAzure\ServiceBus\WrapRestProxy;
 
 /**
@@ -42,7 +43,7 @@ use WindowsAzure\ServiceBus\WrapRestProxy;
  */
 class WrapRestProxyTestBase extends ServiceRestProxyTestBase
 {
-    public function setUp()
+    public function __construct()
     {
         $config = new Configuration();
         $config->setProperty(
@@ -69,9 +70,10 @@ class WrapRestProxyTestBase extends ServiceRestProxyTestBase
             TestResources::wrapPassword()
         );
         
-        $wrapRestProxy = $this->builder->createWrapService($config);
-        parent::setUp($config, $wrapRestProxy);
+        $wrapRestProxy = WrapService::create($config);
+        parent::__construct($config, $wrapRestProxy);
     }
+    
 }
 
 ?>

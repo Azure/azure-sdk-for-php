@@ -26,6 +26,7 @@ namespace Tests\Framework;
 use Tests\Framework\ServiceRestProxyTestBase;
 use WindowsAzure\Common\Configuration;
 use WindowsAzure\Blob\BlobSettings;
+use WindowsAzure\Blob\BlobService;
 use Tests\Framework\TestResources;
 use WindowsAzure\Blob\Models\CreateContainerOptions;
 use WindowsAzure\Blob\Models\ListContainersOptions;
@@ -45,15 +46,15 @@ class BlobServiceRestProxyTestBase extends ServiceRestProxyTestBase
 {
     protected $_createdContainers;
     
-    public function setUp()
+    public function __construct()
     {
         $config = new Configuration();
         $blobUri = 'http://' . TestResources::accountName() . '.blob.core.windows.net';
         $config->setProperty(BlobSettings::ACCOUNT_KEY, TestResources::accountKey());
         $config->setProperty(BlobSettings::ACCOUNT_NAME, TestResources::accountName());        
         $config->setProperty(BlobSettings::URI, $blobUri);
-        $blobRestProxy = $this->builder->createBlobService($config);
-        parent::setUp($config, $blobRestProxy);
+        $blobRestProxy = BlobService::create($config);
+        parent::__construct($config, $blobRestProxy);
         $this->_createdContainers = array();
     }
     

@@ -15,58 +15,49 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   Tests\Framework
+ * @package   Tests\Unit\WindowsAzure\Blob
  * @author    Azure PHP SDK <azurephpsdk@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
- 
-namespace Tests\Framework;
-use WindowsAzure\Common\Internal\Logger;
-use WindowsAzure\Common\Internal\Serialization\XmlSerializer;
+
+namespace Tests\Unit\WindowsAzure\Blob;
+use WindowsAzure\Blob\BlobService;
 use WindowsAzure\Common\Configuration;
+use Tests\Framework\TestResources;
+use WindowsAzure\Blob\BlobSettings;
 
 /**
- * Testbase for all REST proxy tests.
+ * Unit tests for class BlobService
  *
  * @category  Microsoft
- * @package   Tests\Framework
+ * @package   Tests\Unit\WindowsAzure\Blob
  * @author    Azure PHP SDK <azurephpsdk@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @version   Release: @package_version@
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
-class RestProxyTestBase extends \PHPUnit_Framework_TestCase
+class BlobServiceTest extends \PHPUnit_Framework_TestCase
 {
-    protected $config;
-    protected $restProxy;
-    protected $xmlSerializer;
-    
-    const NOT_SUPPORTED = 'The storage emulator doesn\'t support this API';
-    
-    protected function skipIfEmulated()
+    /**
+     * @covers WindowsAzure\Blob\BlobService::create
+     */
+    public function testCreateWithConfig()
     {
-        if (Configuration::isEmulated()) {
-            $this->markTestSkipped(self::NOT_SUPPORTED);
-        }
-    }
-    
-    public function __construct($config, $serviceRestProxy)
-    {
-        $this->config = $config;
-        $this->restProxy = $serviceRestProxy;
-        $this->xmlSerializer = new XmlSerializer();
-        Logger::setLogFile('C:\log.txt');
-    }
-    
-    protected function onNotSuccessfulTest(\Exception $e)
-    {
-        parent::onNotSuccessfulTest($e);
+        // Setup
+        $uri = 'http://' . TestResources::accountName() . '.blob.core.windows.net';
+        $config = new Configuration();
+        $config->setProperty(BlobSettings::ACCOUNT_KEY, TestResources::accountKey());
+        $config->setProperty(BlobSettings::ACCOUNT_NAME, TestResources::accountName());        
+        $config->setProperty(BlobSettings::URI, $uri);
         
-        $this->tearDown();
-        throw $e;
+        // Test
+        $blobRestProxy = BlobService::create($config);
+        
+        // Assert
+        $this->assertInstanceOf('WindowsAzure\Blob\Internal\IBlob', $blobRestProxy);
     }
 }
 

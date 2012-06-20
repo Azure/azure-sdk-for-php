@@ -57,6 +57,7 @@ class TopicInfo extends Entry
      * @param string           $title            The name of the topic.
      * @param TopicDescription $topicDescription The description of the 
      * topic.
+     *
      */
     public function __construct(
         $title = Resources::EMPTY_STRING, 
