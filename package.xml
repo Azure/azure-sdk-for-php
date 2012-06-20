@@ -14,8 +14,8 @@ It is build as a thin REST call wrapper where each server call maps to a single 
   <email>azurephpsdk@microsoft.com</email>
   <active>yes</active>
  </lead>
- <date>2012-06-06</date>
- <time>16:28:24</time>
+ <date>2012-06-18</date>
+ <time>20:16:19</time>
  <version>
   <release>0.1.0</release>
   <api>0.1.0</api>
@@ -33,9 +33,8 @@ It is build as a thin REST call wrapper where each server call maps to a single 
  </notes>
  <contents>
   <dir baseinstalldir="/" name="/">
-   <file baseinstalldir="/" md5sum="7bf9bac2dac2d46e90728447522f1ed5" name="/WindowsAzure/WindowsAzure.php" role="php" />
+   <file baseinstalldir="/" md5sum="b6165c03c1b41cd7ece42a95dedf59cd" name="/WindowsAzure/WindowsAzure.php" role="php" />
    <file baseinstalldir="/" md5sum="146a101698e28c1bf26084d1568eb463" name="/WindowsAzure/Blob/BlobRestProxy.php" role="php" />
-   <file baseinstalldir="/" md5sum="c4dadcb42659dc89326409183e08d503" name="/WindowsAzure/Blob/BlobService.php" role="php" />
    <file baseinstalldir="/" md5sum="60bb3a590cc3a455d64e0ed920e8da47" name="/WindowsAzure/Blob/BlobSettings.php" role="php" />
    <file baseinstalldir="/" md5sum="42e36bc2311f1dbe367105efd6a30c06" name="/WindowsAzure/Blob/Internal/IBlob.php" role="php" />
    <file baseinstalldir="/" md5sum="1ee844940fafd8522eabdf13223bea13" name="/WindowsAzure/Blob/Models/AccessCondition.php" role="php" />
@@ -91,17 +90,17 @@ It is build as a thin REST call wrapper where each server call maps to a single 
    <file baseinstalldir="/" md5sum="f3d363008c03478d2470b750e9a79928" name="/WindowsAzure/Blob/Models/SetBlobPropertiesResult.php" role="php" />
    <file baseinstalldir="/" md5sum="465f2292c066a1adaf977aaa32a4651b" name="/WindowsAzure/Blob/Models/SetContainerMetadataOptions.php" role="php" />
    <file baseinstalldir="/" md5sum="073da4b78b4e2b1acb2edd2de06b2589" name="/WindowsAzure/Blob/Models/SignedIdentifier.php" role="php" />
-   <file baseinstalldir="/" md5sum="afac8672776769ad82d493356b7922e3" name="/WindowsAzure/Common/Configuration.php" role="php" />
+   <file baseinstalldir="/" md5sum="d4a7a85a622ff4657004d45f7e3c30ba" name="/WindowsAzure/Common/Configuration.php" role="php" />
    <file baseinstalldir="/" md5sum="e78d52c4154b47488084ca5cd8515531" name="/WindowsAzure/Common/ServiceException.php" role="php" />
    <file baseinstalldir="/" md5sum="eb0c69a1d3ab7a85ff1dda3e9c1bd40f" name="/WindowsAzure/Common/Internal/FilterableService.php" role="php" />
    <file baseinstalldir="/" md5sum="88284250b1e69daae9a07347973aeaad" name="/WindowsAzure/Common/Internal/InvalidArgumentTypeException.php" role="php" />
-   <file baseinstalldir="/" md5sum="41dec638e60ebcfe3587b33a41a7dd37" name="/WindowsAzure/Common/Internal/IServiceBuilder.php" role="php" />
    <file baseinstalldir="/" md5sum="6872d97153e51fb4bbed57c67b161268" name="/WindowsAzure/Common/Internal/IServiceFilter.php" role="php" />
+   <file baseinstalldir="/" md5sum="257ac381df7886640c8843791cc4e08e" name="/WindowsAzure/Common/Internal/IServicesBuilder.php" role="php" />
    <file baseinstalldir="/" md5sum="aa416ed63b0154d6881473bf982c558f" name="/WindowsAzure/Common/Internal/Logger.php" role="php" />
    <file baseinstalldir="/" md5sum="4f07d7308f1de55c6a05c831f0c3c095" name="/WindowsAzure/Common/Internal/Resources.php" role="php" />
    <file baseinstalldir="/" md5sum="b605e55979af32b6d29615cbc000a4b7" name="/WindowsAzure/Common/Internal/RestProxy.php" role="php" />
    <file baseinstalldir="/" md5sum="167ecdb3d2a1fe061b9ae3a2232e5e9f" name="/WindowsAzure/Common/Internal/ServiceRestProxy.php" role="php" />
-   <file baseinstalldir="/" md5sum="0c34db6ee56aa5aff1e3d86119e4e106" name="/WindowsAzure/Common/Internal/ServicesBuilder.php" role="php" />
+   <file baseinstalldir="/" md5sum="fb2c3f6857fbacb859df07f0f57dc0c9" name="/WindowsAzure/Common/Internal/ServicesBuilder.php" role="php" />
    <file baseinstalldir="/" md5sum="bfa4d2d6790bcae9e5269adb2af802ef" name="/WindowsAzure/Common/Internal/Utilities.php" role="php" />
    <file baseinstalldir="/" md5sum="58b26fa0d95ce877e1e30ea7ec91cfce" name="/WindowsAzure/Common/Internal/Validate.php" role="php" />
    <file baseinstalldir="/" md5sum="bb2e9b1bd46278b5bfc565513f452a99" name="/WindowsAzure/Common/Internal/Authentication/SharedKeyAuthScheme.php" role="php" />
@@ -127,7 +126,6 @@ It is build as a thin REST call wrapper where each server call maps to a single 
    <file baseinstalldir="/" md5sum="a0a7c5e69b1347f11c9ed2f297341659" name="/WindowsAzure/Common/Models/RetentionPolicy.php" role="php" />
    <file baseinstalldir="/" md5sum="c3a92df751aed2808c080d8bd794e538" name="/WindowsAzure/Common/Models/ServiceProperties.php" role="php" />
    <file baseinstalldir="/" md5sum="db4ac5164f8a3d0c1e1d1aa2398e2189" name="/WindowsAzure/Queue/QueueRestProxy.php" role="php" />
-   <file baseinstalldir="/" md5sum="2c50bfc4958439744b1dc9cda506af5f" name="/WindowsAzure/Queue/QueueService.php" role="php" />
    <file baseinstalldir="/" md5sum="d0d8934223b26c2371f6fb66921eecf3" name="/WindowsAzure/Queue/QueueSettings.php" role="php" />
    <file baseinstalldir="/" md5sum="17e6d9c93fcc9da2a081a7ca9761a072" name="/WindowsAzure/Queue/Internal/IQueue.php" role="php" />
    <file baseinstalldir="/" md5sum="27a6096c6dea4132a04082408af80345" name="/WindowsAzure/Queue/Models/CreateMessageOptions.php" role="php" />
@@ -145,7 +143,6 @@ It is build as a thin REST call wrapper where each server call maps to a single 
    <file baseinstalldir="/" md5sum="b064d926276a2d459e7f541e8e50d5f4" name="/WindowsAzure/Queue/Models/UpdateMessageResult.php" role="php" />
    <file baseinstalldir="/" md5sum="ac969a487f84e437818df2d32b46e9ad" name="/WindowsAzure/Queue/Models/WindowsAzureQueueMessage.php" role="php" />
    <file baseinstalldir="/" md5sum="5f03c241de743fb71d9d52332f4b2995" name="/WindowsAzure/ServiceManagement/ServiceManagementRestProxy.php" role="php" />
-   <file baseinstalldir="/" md5sum="7fa330bf1ddda96376e48ab9e78a2441" name="/WindowsAzure/ServiceManagement/ServiceManagementService.php" role="php" />
    <file baseinstalldir="/" md5sum="ac2e56d1cf7077343186ca088b9dc013" name="/WindowsAzure/ServiceManagement/ServiceManagementSettings.php" role="php" />
    <file baseinstalldir="/" md5sum="7e9d2f6aaca6e88e8e15e2aeb0fd4de4" name="/WindowsAzure/ServiceManagement/Internal/IServiceManagement.php" role="php" />
    <file baseinstalldir="/" md5sum="67c48c6b23950e10c1fe4a67fdaa2d4f" name="/WindowsAzure/ServiceManagement/Models/AffinityGroup.php" role="php" />
@@ -207,7 +204,6 @@ It is build as a thin REST call wrapper where each server call maps to a single 
    <file baseinstalldir="/" md5sum="39e05bc1b58fc2767b3752cbd0df0978" name="/WindowsAzure/ServiceRuntime/Internal/XmlGoalStateDeserializer.php" role="php" />
    <file baseinstalldir="/" md5sum="a0ef1149c6b92af3e24f2659431da232" name="/WindowsAzure/ServiceRuntime/Internal/XmlRoleEnvironmentDataDeserializer.php" role="php" />
    <file baseinstalldir="/" md5sum="11a23e7c18543be405b656a8bcdbbf09" name="/WindowsAzure/Table/TableRestProxy.php" role="php" />
-   <file baseinstalldir="/" md5sum="2e4d8ec79364e77e6e5f48ee5eff2d3c" name="/WindowsAzure/Table/TableService.php" role="php" />
    <file baseinstalldir="/" md5sum="3ec3c55d2821e395f538402e67e7ef83" name="/WindowsAzure/Table/TableSettings.php" role="php" />
    <file baseinstalldir="/" md5sum="9d7b0a52b1ded5f3e21729e42c21ffd1" name="/WindowsAzure/Table/Internal/AtomReaderWriter.php" role="php" />
    <file baseinstalldir="/" md5sum="dbeca8e16acdc77e7843c11741a940ba" name="/WindowsAzure/Table/Internal/IAtomReaderWriter.php" role="php" />
@@ -287,7 +283,7 @@ It is build as a thin REST call wrapper where each server call maps to a single 
     <release>beta</release>
     <api>beta</api>
    </stability>
-   <date>2012-06-06</date>
+   <date>2012-06-18</date>
    <license uri="http://www.apache.org/licenses/LICENSE-2.0">Apache 2.0</license>
    <notes>
 * Full support of Queue, Blob and Table services.
