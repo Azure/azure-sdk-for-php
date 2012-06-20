@@ -1,10 +1,6 @@
 <?php
 
 /**
- * Unit tests for the SDK
- *
- * PHP version 5
- *
  * LICENSE: Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -16,11 +12,14 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- * @package    Tests\Unit\WindowsAzure\ServiceBus\Internal
- * @author     Azure PHP SDK <azurephpsdk@microsoft.com>
- * @copyright  2012 Microsoft Corporation
- * @license    http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
- * @link       https://github.com/WindowsAzure/azure-sdk-for-php
+ * PHP version 5
+ *
+ * @category  Microsoft
+ * @package   Tests\Unit\WindowsAzure\ServiceBus
+ * @author    Azure PHP SDK <azurephpsdk@microsoft.com>
+ * @copyright 2012 Microsoft Corporation
+ * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
+ * @link      https://github.com/WindowsAzure/azure-sdk-for-php
  */
 
 namespace Tests\Unit\WindowsAzure\ServiceBus;
@@ -56,12 +55,13 @@ use WindowsAzure\ServiceBus\Models\TopicInfo;
 /**
  * Unit tests for ServiceBusRestProxy class
  *
- * @package    Tests\Unit\WindowsAzure\ServiceBus\Internal
- * @author     Azure PHP SDK <azurephpsdk@microsoft.com>
- * @copyright  2012 Microsoft Corporation
- * @license    http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
- * @version    Release: @package_version@s
- * @link       https://github.com/WindowsAzure/azure-sdk-for-php
+ * @category  Microsoft
+ * @package   Tests\Unit\WindowsAzure\ServiceBus
+ * @author    Azure PHP SDK <azurephpsdk@microsoft.com>
+ * @copyright 2012 Microsoft Corporation
+ * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
+ * @version   Release: @package_version@s
+ * @link      https://github.com/WindowsAzure/azure-sdk-for-php
  */
 class ServiceBusRestProxyTest extends ServiceBusRestProxyTestBase
 {
@@ -126,7 +126,6 @@ class ServiceBusRestProxyTest extends ServiceBusRestProxyTestBase
         $queueName = 'testDeleteQueueSuccess';
         $createQueueInfo = new QueueInfo($queueName);
         $listQueuesOptions = new ListQueuesOptions();
-
         $listQueuesResult = $this->restProxy->listQueues($listQueuesOptions);
 
         foreach ($listQueuesResult->getQueueInfos() as $queueInfo)
@@ -147,6 +146,38 @@ class ServiceBusRestProxyTest extends ServiceBusRestProxyTestBase
             count($listQueuesResult->getQueueInfos())
         );
         
+    }
+
+    /**
+     * @covers WindowsAzure\ServiceBus\ServiceBusRestProxy::listQueues
+     * @covers WindowsAzure\ServiceBus\Models\ListQueuesResult::parseXml
+     * @covers WindowsAzure\ServiceBus\Models\QueueDescription::create
+     */
+    public function testListQueueSuccess()
+    {
+        // Setup 
+        $queueName = 'testListQueueSuccess';
+        $createQueueInfo = new QueueInfo($queueName);
+        $listQueuesOptions = new ListQueuesOptions();
+        $listQueuesResult = $this->restProxy->listQueues($listQueuesOptions);
+
+        foreach ($listQueuesResult->getQueueInfos() as $queueInfo)
+        {
+            $this->restProxy->deleteQueue($queueInfo->getTitle());
+        }
+        $this->restProxy->createQueue($createQueueInfo);
+
+        // Test
+        $listQueuesResult = $this->restProxy->listQueues($listQueuesOptions);
+        $this->restProxy->deleteQueue($queueName);
+
+        // Assert
+        $this->assertEquals(
+            1,
+            count($listQueuesResult->getQueueInfos())
+        );
+
+         
     }
     
     /**
