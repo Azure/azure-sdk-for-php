@@ -117,36 +117,6 @@ class ConfigurationTest extends \PHPUnit_Framework_TestCase
         $config = $this->config = new Configuration();
         $config->setProperty($invalidKey, TestResources::VALUE1);
     }
-
-    /**
-    * @covers WindowsAzure\Common\Configuration::create
-    * @covers WindowsAzure\Common\Configuration::_useStorageEmulatorConfig
-    */
-    public function testCreate()
-    {
-        $config = new Configuration();
-        $config->setProperty(QueueSettings::ACCOUNT_KEY, TestResources::KEY1);
-        $config->setProperty(QueueSettings::ACCOUNT_NAME, TestResources::ACCOUNT_NAME);
-        $config->setProperty(QueueSettings::URI, 'http://' . TestResources::ACCOUNT_NAME . TestResources::QUEUE_URI);
-        $queueRestProxy = $config->create(Resources::QUEUE_TYPE_NAME);
-
-        $this->assertInstanceOf('WindowsAzure\Queue\Internal\IQueue', $queueRestProxy);
-    }
-
-    /**
-    * @covers WindowsAzure\Common\Configuration::create
-    * @covers WindowsAzure\Common\Configuration::_useStorageEmulatorConfig
-    */
-    public function testCreateWithInvalidTypeFail()
-    {
-        $invalidType = gettype('');
-        $this->setExpectedException(get_class(new InvalidArgumentTypeException('')));
-        $config = $this->config = new Configuration();
-        $config->setProperty(QueueSettings::ACCOUNT_KEY, TestResources::KEY1);
-        $config->setProperty(QueueSettings::ACCOUNT_NAME, TestResources::ACCOUNT_NAME);
-        $config->setProperty(QueueSettings::URI, TestResources::QUEUE_URI);
-        $config->create($invalidType);
-    }
     
     /**
      * @covers WindowsAzure\Common\Configuration::isEmulated
