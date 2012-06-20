@@ -126,7 +126,6 @@ class ServiceBusRestProxyTest extends ServiceBusRestProxyTestBase
         $queueName = 'testDeleteQueueSuccess';
         $createQueueInfo = new QueueInfo($queueName);
         $listQueuesOptions = new ListQueuesOptions();
-
         $listQueuesResult = $this->restProxy->listQueues($listQueuesOptions);
 
         foreach ($listQueuesResult->getQueueInfos() as $queueInfo)
@@ -147,6 +146,38 @@ class ServiceBusRestProxyTest extends ServiceBusRestProxyTestBase
             count($listQueuesResult->getQueueInfos())
         );
         
+    }
+
+    /**
+     * @covers WindowsAzure\ServiceBus\ServiceBusRestProxy::listQueues
+     * @covers WindowsAzure\ServiceBus\Models\ListQueuesResult::parseXml
+     * @covers WindowsAzure\ServiceBus\Models\QueueDescription::create
+     */
+    public function testListQueueSuccess()
+    {
+        // Setup 
+        $queueName = 'testListQueueSuccess';
+        $createQueueInfo = new QueueInfo($queueName);
+        $listQueuesOptions = new ListQueuesOptions();
+        $listQueuesResult = $this->restProxy->listQueues($listQueuesOptions);
+
+        foreach ($listQueuesResult->getQueueInfos() as $queueInfo)
+        {
+            $this->restProxy->deleteQueue($queueInfo->getTitle());
+        }
+        $this->restProxy->createQueue($createQueueInfo);
+
+        // Test
+        $listQueuesResult = $this->restProxy->listQueues($listQueuesOptions);
+        $this->restProxy->deleteQueue($queueName);
+
+        // Assert
+        $this->assertEquals(
+            1,
+            count($listQueuesResult->getQueueInfos())
+        );
+
+         
     }
     
     /**
