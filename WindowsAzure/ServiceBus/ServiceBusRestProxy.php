@@ -352,7 +352,7 @@ class ServiceBusRestProxy extends ServiceRestProxy implements IServiceBus
      * 
      * @param QueueInfo $queueInfo The information of the queue.
      *
-     * @return queueInfo
+     * @return QueueInfo
      */
     public function createQueue($queueInfo)
     {
