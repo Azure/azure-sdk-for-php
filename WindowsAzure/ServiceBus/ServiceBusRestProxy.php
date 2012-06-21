@@ -33,14 +33,6 @@ use WindowsAzure\Common\ServiceException;
 use WindowsAzure\ServiceBus\Internal\IServiceBus;
 use WindowsAzure\ServiceBus\Models\BrokeredMessage;
 use WindowsAzure\ServiceBus\Models\BrokerProperties;
-use WindowsAzure\ServiceBus\Models\CreateQueueResult;
-use WindowsAzure\ServiceBus\Models\CreateRuleResult;
-use WindowsAzure\ServiceBus\Models\CreateTopicResult;
-use WindowsAzure\ServiceBus\Models\CreateSubscriptionResult;
-use WindowsAzure\ServiceBus\Models\GetQueueResult;
-use WindowsAzure\ServiceBus\Models\GetRuleResult;
-use WindowsAzure\ServiceBus\Models\GetSubscriptionResult;
-use WindowsAzure\ServiceBus\Models\GetTopicResult;
 use WindowsAzure\ServiceBus\Models\ListQueuesOptions;
 use WindowsAzure\ServiceBus\Models\ListQueuesResult;
 use WindowsAzure\ServiceBus\Models\ListSubscriptionsOptions;
@@ -360,7 +352,7 @@ class ServiceBusRestProxy extends ServiceRestProxy implements IServiceBus
      * 
      * @param QueueInfo $queueInfo The information of the queue.
      *
-     * @return CreateQueueResult
+     * @return QueueInfo
      */
     public function createQueue($queueInfo)
     {
@@ -373,30 +365,16 @@ class ServiceBusRestProxy extends ServiceRestProxy implements IServiceBus
         );
         $httpCallContext->addStatusCode(Resources::STATUS_CREATED);
         
-        $queueDescriptionXml = XmlSerializer::objectSerialize(
-            $queueInfo->getQueueDescription(),
-            'QueueDescription'
-        );
-
-        $entry   = new Entry();
-        $content = new Content($queueDescriptionXml);
-        $content->setType(Resources::XML_CONTENT_TYPE);
-        $entry->setContent($content);
-
-        $entry->setAttribute(
-            Resources::XMLNS,
-            Resources::SERVICE_BUS_NAMESPACE
-        );
-
         $xmlWriter = new \XMLWriter();
         $xmlWriter->openMemory();
-        $entry->writeXml($xmlWriter); 
-        $httpCallContext->setBody($xmlWriter->outputMemory());
+        $queueInfo->writeXml($xmlWriter); 
+        $body = $xmlWriter->outputMemory();
+        $httpCallContext->setBody($body);
 
         $response          = $this->sendContext($httpCallContext);
-        $createQueueResult = new CreateQueueResult();
-        $createQueueResult->parseXml($response->getBody());
-        return $createQueueResult;
+        $queueInfo         = new QueueInfo();
+        $queueInfo->parseXml($response->getBody());
+        return $queueInfo;
     } 
 
     /**
@@ -424,7 +402,7 @@ class ServiceBusRestProxy extends ServiceRestProxy implements IServiceBus
      * 
      * @param string $queuePath The path of the queue.
      *
-     * @return none
+     * @return QueueInfo
      */
     public function getQueue($queuePath)
     {
@@ -433,9 +411,9 @@ class ServiceBusRestProxy extends ServiceRestProxy implements IServiceBus
         $httpCallContext->setMethod(Resources::HTTP_GET);
         $httpCallContext->addStatusCode(Resources::STATUS_OK);
         $response       = $this->sendContext($httpCallContext);
-        $getQueueResult = new GetQueueResult();
-        $getQueueResult->parseXml($response->getBody());
-        return $getQueueResult;
+        $queueInfo      = new QueueInfo();
+        $queueInfo->parseXml($response->getBody());
+        return $queueInfo;
     }
 
     /**
@@ -495,7 +473,7 @@ class ServiceBusRestProxy extends ServiceRestProxy implements IServiceBus
      * 
      * @param TopicInfo $topicInfo The information of the topic. 
      *
-     * @return CreateTopicResult 
+     * @return TopicInfo
      */
     public function createTopic($topicInfo)
     {
@@ -530,9 +508,9 @@ class ServiceBusRestProxy extends ServiceRestProxy implements IServiceBus
         $httpCallContext->setBody($xmlWriter->outputMemory());
 
         $response          = $this->sendContext($httpCallContext);
-        $createTopicResult = new CreateTopicResult();
-        $createTopicResult->parseXml($response->getBody());
-        return $createTopicResult;
+        $topicInfo         = new TopicInfo();
+        $topicInfo->parseXml($response->getBody());
+        return $topicInfo;
     } 
 
     /**
@@ -557,7 +535,7 @@ class ServiceBusRestProxy extends ServiceRestProxy implements IServiceBus
      * 
      * @param string $topicPath The path of the topic.
      *
-     * @return GetTopicResult;
+     * @return TopicInfo
      */
     public function getTopic($topicPath) 
     {
@@ -566,9 +544,9 @@ class ServiceBusRestProxy extends ServiceRestProxy implements IServiceBus
         $httpCallContext->setPath($topicPath);
         $httpCallContext->addStatusCode(Resources::STATUS_OK);
         $response       = $this->sendContext($httpCallContext);
-        $getTopicResult = new GetTopicResult();
-        $getTopicResult->parseXml($response->getBody());
-        return $getTopicResult; 
+        $topicInfo      = new TopicInfo();
+        $topicInfo->parseXml($response->getBody());
+        return $topicInfo; 
     }
     
     /**
@@ -600,7 +578,7 @@ class ServiceBusRestProxy extends ServiceRestProxy implements IServiceBus
      * @param SubscriptionInfo $subscriptionInfo The information
      * of the subscription.
      *
-     * @return CreateSubscriptionResult
+     * @return SubscriptionInfo
      */
     public function createSubscription($topicPath, $subscriptionInfo) 
     {
@@ -639,9 +617,9 @@ class ServiceBusRestProxy extends ServiceRestProxy implements IServiceBus
         $httpCallContext->setBody($xmlWriter->outputMemory());
 
         $response                 = $this->sendContext($httpCallContext);
-        $createSubscriptionResult = new CreateSubscriptionResult();
-        $createSubscriptionResult->parseXml($response->getBody());
-        return $createSubscriptionResult;
+        $subscriptionInfo         = new SubscriptionInfo();
+        $subscriptionInfo->parseXml($response->getBody());
+        return $subscriptionInfo;
     }
 
     /**
@@ -672,7 +650,7 @@ class ServiceBusRestProxy extends ServiceRestProxy implements IServiceBus
      * @param string $topicPath        The path of the topic.
      * @param string $subscriptionName The name of the subscription.
      *
-     * @return GetSubscriptionResult
+     * @return SubscriptionInfo
      */
     public function getSubscription($topicPath, $subscriptionName) 
     {
@@ -686,9 +664,9 @@ class ServiceBusRestProxy extends ServiceRestProxy implements IServiceBus
         );
         $httpCallContext->setPath($subscriptionPath);
         $response              = $this->sendContext($httpCallContext);
-        $getSubscriptionResult = new GetSubscriptionResult();
-        $getSubscriptionResult->parseXml($response->getBody()); 
-        return $getSubscriptionResult;
+        $subscriptionInfo      = new SubscriptionInfo();
+        $subscriptionInfo->parseXml($response->getBody()); 
+        return $subscriptionInfo;
     }
 
     /**
@@ -726,7 +704,7 @@ class ServiceBusRestProxy extends ServiceRestProxy implements IServiceBus
      * @param string   $subscriptionName The name of the subscription. 
      * @param RuleInfo $ruleInfo         The information of the rule.
      *
-     * @return CreateRuleResult
+     * @return RuleInfo
      */
     public function createRule($topicPath, $subscriptionName, $ruleInfo)
     {
@@ -766,9 +744,9 @@ class ServiceBusRestProxy extends ServiceRestProxy implements IServiceBus
 
         $httpCallContext->setPath($rulePath);
         $response         = $this->sendContext($httpCallContext);
-        $createRuleResult = new CreateRuleResult();
-        $createRuleResult->parseXml($response->getBody()); 
-        return $createRuleResult;
+        $ruleInfo         = new ruleInfo();
+        $ruleInfo->parseXml($response->getBody()); 
+        return $ruleInfo;
     }
 
     /**
@@ -802,7 +780,7 @@ class ServiceBusRestProxy extends ServiceRestProxy implements IServiceBus
      * @param string $subscriptionName The name of the subscription.
      * @param string $ruleName         The name of the rule.
      *
-     * @return GetRuleResult
+     * @return RuleInfo
      */
     public function getRule($topicPath, $subscriptionName, $ruleName) 
     {
@@ -817,9 +795,9 @@ class ServiceBusRestProxy extends ServiceRestProxy implements IServiceBus
         );
         $httpCallContext->setPath($rulePath);
         $response      = $this->sendContext($httpCallContext);
-        $getRuleResult = new GetRuleResult();
-        $getRuleResult->parseXml($response->getBody());
-        return $getRuleResult;
+        $ruleInfo      = new RuleInfo();
+        $ruleInfo->parseXml($response->getBody());
+        return $ruleInfo;
     }
 
     /**

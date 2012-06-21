@@ -42,8 +42,15 @@ use WindowsAzure\Common\Internal\Serialization\XmlSerializer;
  * @link      https://github.com/WindowsAzure/azure-sdk-for-php
  */
 
-class RuleInfo extends Entry
+class RuleInfo
 {
+    /**
+     * The entry of the rule info. 
+     * 
+     * @var Entry
+     */
+    private $_entry;
+
     /**
      * The description of the rule.
      * 
@@ -68,8 +75,14 @@ class RuleInfo extends Entry
         if (is_null($ruleDescription)) {
             $ruleDescription = new RuleDescription();
         }
-        $this->title            = $title;
         $this->_ruleDescription = $ruleDescription;
+        $this->_entry           = new Entry();
+        $this->_entry->setTitle($title);
+        $this->_entry->setAttribute(
+            Resources::XMLNS,
+            Resources::SERVICE_BUS_NAMESPACE
+        );
+        
     }
 
     /**
@@ -82,8 +95,8 @@ class RuleInfo extends Entry
      */
     public function parseXml($xmlString)
     {
-        parent::parseXml($xmlString);
-        $content = $this->content;
+        $this->_entry->parseXml($xmlString);
+        $content = $this->_entry->getContent();
         if (is_null($content)) {
             $this->_ruleDescription = null;
         } else {
@@ -96,22 +109,63 @@ class RuleInfo extends Entry
      * 
      * @param XMLWriter $xmlWriter The XML writer. 
      * 
-     * @return string
+     * @return none
      */
     public function writeXml($xmlWriter)
     {
-        if (is_null($this->_ruleDescription)) {
-            $this->content = null;    
-        } else {
-            $this->content = new Content();
-            $this->content->setText(
+        $content = null;    
+        if (!is_null($this->_ruleDescription)) {
+            $content = new Content();
+            $content->setText(
                 XmlSerializer::objectSerialize(
                     $this->_ruleDescription, 'RuleDescription'
                 )
             );
         }
+        $this->_entry->setContent($content);
+        $this->_entry->writeXml($xmlWriter);
+    }
 
-        return parent::writeXml($xmlWriter);
+    /**
+     * Gets the entry.
+     *
+     * @return Entry
+     */
+    public function getEntry()
+    {
+        return $this->_entry;
+    }
+
+    /**
+     * Sets the entry.
+     *
+     * @param Entry $entry The entry of the queue info.
+     */
+    public function setEntry($entry)
+    {
+        $this->_entry = $entry;
+    }
+
+    /**
+     * Gets the title. 
+     * 
+     * @return string 
+     */
+    public function getTitle()
+    {
+        return $this->_entry->getTitle();
+    }
+
+    /** 
+     * Sets the title. 
+     * 
+     * @param string $title The title of the rule info.
+     * 
+     * @return none
+     */
+    public function setTitle($title)
+    {
+        $this->_entry->setTitle($title);
     }
 
     /**
@@ -261,5 +315,26 @@ class RuleInfo extends Entry
         $this->_ruleDescription->setAction($action);
     }
 
-}
+    /**
+     * Gets the name of the rule description. 
+     *
+     * @return string
+     */
+    public function getName()
+    {
+        return $this->_ruleDescription->getName();
+    }
 
+    /**
+     * Sets the name of the rule description. 
+     * 
+     * @param string $name The name of the rule description. 
+     * 
+     * @return none
+     */
+    public function setName($name)
+    {
+        $this->_ruleDescription->setName($name);
+    }
+
+}
