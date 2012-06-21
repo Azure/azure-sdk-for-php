@@ -116,7 +116,7 @@ class BrokerProperties
     private $_to;
 
     /**
-     * The scheduled enqueu time. 
+     * The scheduled enqueue time. 
      *
      * @var \DateTime
      */
@@ -507,7 +507,7 @@ class BrokerProperties
     }
 
     /**
-     * Gets schedule enqueu time UTC. 
+     * Gets scheduled enqueue time UTC. 
      * 
      * @return string
      */
@@ -517,9 +517,9 @@ class BrokerProperties
     }
 
     /**
-     * Sets schedule enqueue time UTC. 
+     * Sets scheduled enqueue time UTC. 
      * 
-     * @param string $scheduledEnqueueTimeUtc The schedule enqueue time. 
+     * @param string $scheduledEnqueueTimeUtc The scheduled enqueue time. 
      * 
      * @return none
      */

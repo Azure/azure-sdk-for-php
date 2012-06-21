@@ -156,6 +156,7 @@ spl_autoload_register(
             'tests\\unit\\windowsazure\\common\\internal\\filters\\exponentialretrypolicytest' => '/unit/WindowsAzure/Common/Internal/Filters/ExponentialRetryPolicyTest.php',
             'tests\\unit\\windowsazure\\common\\internal\\filters\\headersfiltertest' => '/unit/WindowsAzure/Common/Internal/Filters/HeadersFilterTest.php',
             'tests\\unit\\windowsazure\\common\\internal\\filters\\sharedkeyfiltertest' => '/unit/WindowsAzure/Common/Internal/Filters/SharedKeyFilterTest.php',
+            'tests\\unit\\windowsazure\\common\\internal\\filters\\wrapfiltertest' => '/unit/WindowsAzure/Common/Internal/Filters/WrapFilterTest.php',
             'tests\\unit\\windowsazure\\common\\internal\\http\\httpcallcontexttest' => '/unit/WindowsAzure/Common/Internal/Http/HttpCallContextTest.php',
             'tests\\unit\\windowsazure\\common\\internal\\http\\httpclienttest' => '/unit/WindowsAzure/Common/Internal/Http/HttpClientTest.php',
             'tests\\unit\\windowsazure\\common\\internal\\http\\urltest' => '/unit/WindowsAzure/Common/Internal/Http/UrlTest.php',
@@ -196,17 +197,9 @@ spl_autoload_register(
             'tests\\unit\\windowsazure\\servicebus\\models\\brokeredmessagetest' => '/unit/WindowsAzure/ServiceBus/models/BrokeredMessageTest.php',
             'tests\\unit\\windowsazure\\servicebus\\models\\brokerpropertiestest' => '/unit/WindowsAzure/ServiceBus/models/BrokerPropertiesTest.php',
             'tests\\unit\\windowsazure\\servicebus\\models\\correlationfiltertest' => '/unit/WindowsAzure/ServiceBus/models/CorrelationFilterTest.php',
-            'tests\\unit\\windowsazure\\servicebus\\models\\createqueueresulttest' => '/unit/WindowsAzure/ServiceBus/models/CreateQueueResultTest.php',
-            'tests\\unit\\windowsazure\\servicebus\\models\\createruleresulttest' => '/unit/WindowsAzure/ServiceBus/models/CreateRuleResultTest.php',
-            'tests\\unit\\windowsazure\\servicebus\\models\\createsubscriptionresulttest' => '/unit/WindowsAzure/ServiceBus/models/CreateSubscriptionResultTest.php',
-            'tests\\unit\\windowsazure\\servicebus\\models\\createtopicresulttest' => '/unit/WindowsAzure/ServiceBus/models/CreateTopicResultTest.php',
             'tests\\unit\\windowsazure\\servicebus\\models\\emptyruleactiontest' => '/unit/WindowsAzure/ServiceBus/models/EmptyRuleActionTest.php',
             'tests\\unit\\windowsazure\\servicebus\\models\\falsefiltertest' => '/unit/WindowsAzure/ServiceBus/models/FalseFilterTest.php',
             'tests\\unit\\windowsazure\\servicebus\\models\\filtertest' => '/unit/WindowsAzure/ServiceBus/models/FilterTest.php',
-            'tests\\unit\\windowsazure\\servicebus\\models\\getqueueresulttest' => '/unit/WindowsAzure/ServiceBus/models/GetQueueResultTest.php',
-            'tests\\unit\\windowsazure\\servicebus\\models\\getruleresulttest' => '/unit/WindowsAzure/ServiceBus/models/GetRuleResultTest.php',
-            'tests\\unit\\windowsazure\\servicebus\\models\\getsubscriptionresulttest' => '/unit/WindowsAzure/ServiceBus/models/GetSubscriptionResultTest.php',
-            'tests\\unit\\windowsazure\\servicebus\\models\\gettopicresulttest' => '/unit/WindowsAzure/ServiceBus/models/GetTopicResultTest.php',
             'tests\\unit\\windowsazure\\servicebus\\models\\listoptionstest' => '/unit/WindowsAzure/ServiceBus/models/ListOptionsTest.php',
             'tests\\unit\\windowsazure\\servicebus\\models\\listqueuesoptionstest' => '/unit/WindowsAzure/ServiceBus/models/ListQueuesOptionsTest.php',
             'tests\\unit\\windowsazure\\servicebus\\models\\listqueuesresulttest' => '/unit/WindowsAzure/ServiceBus/models/ListQueuesResultTest.php',
@@ -304,8 +297,7 @@ spl_autoload_register(
             'tests\\unit\\windowsazure\\table\\models\\querytest' => '/unit/WindowsAzure/Table/Models/QueryTest.php',
             'tests\\unit\\windowsazure\\table\\models\\tableserviceoptionstest' => '/unit/WindowsAzure/Table/Models/TableServiceOptionsTest.php',
             'tests\\unit\\windowsazure\\table\\models\\updateentityresulttest' => '/unit/WindowsAzure/Table/Models/UpdateEntityResultTest.php',
-            'tests\\unit\\windowsazure\\table\\tableservicetest' => '/unit/WindowsAzure/Table/TableServiceTest.php',
-            'wrapfiltertest' => '/unit/WindowsAzure/Common/Internal/Filters/WrapFilterTest.php'
+            'tests\\unit\\windowsazure\\table\\tableservicetest' => '/unit/WindowsAzure/Table/TableServiceTest.php'
           );
       }
       $cn = strtolower($class);
