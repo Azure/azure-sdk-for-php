@@ -263,7 +263,7 @@ class BrokeredMessage
      */
     public function getSequenceNumber()
     {
-        $this->_brokerProperties->getSequenceNumber();
+        return $this->_brokerProperties->getSequenceNumber();
     }
 
     /**
@@ -285,7 +285,7 @@ class BrokeredMessage
      */
     public function getTimeToLive()
     {
-        $this->_brokerProperties->getTimeToLive();
+        return $this->_brokerProperties->getTimeToLive();
     }
 
     /**
@@ -373,7 +373,7 @@ class BrokeredMessage
      */
     public function getSessionId()
     {
-        $this->_brokerProperties->getSessionId();
+        return $this->_brokerProperties->getSessionId();
     }
     
     /**
@@ -385,7 +385,7 @@ class BrokeredMessage
      */
     public function setSessionId($sessionId)
     {
-        $this->_brokerProperities->setSessionId($sessionId);
+        $this->_brokerProperties->setSessionId($sessionId);
     }
 
     /**
@@ -451,7 +451,7 @@ class BrokeredMessage
      */
     public function setTo($to)
     {
-        $this->_borkerProeprties->setTo($to);
+        $this->_brokerProperties->setTo($to);
     }
 
     /**

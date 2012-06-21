@@ -44,6 +44,14 @@ use WindowsAzure\ServiceBus\Models\TopicDescription;
  */
 class TopicInfo extends Entry
 {
+
+    /**
+     * The entry of the topic info. 
+     * 
+     * @var Entry
+     */
+    private $_entry;
+
     /**
      * The description of the topics. 
      *
@@ -68,6 +76,12 @@ class TopicInfo extends Entry
         }
         $this->title             = $title;
         $this->_topicDescription = $topicDescription;
+        $this->_entry            = new Entry();
+        $this->_entry->setTitle($title);
+        $this->_entry->setAttribute(
+            Resources::XMLNS,
+            Resources::SERVICE_BUS_NAMESPACE
+        );
     }
     
     /**
@@ -79,8 +93,8 @@ class TopicInfo extends Entry
      */
     public function parseXml($xmlString)
     {
-        parent::parseXml($xmlString);
-        $content = $this->content;
+        $this->_entry->parseXml($xmlString);
+        $content = $this->_entry->getContent();
         if (is_null($content)) {
             $this->_topicDescription = null;
         } else {
@@ -97,18 +111,61 @@ class TopicInfo extends Entry
      */
     public function writeXml($xmlWriter)
     {
-        if (is_null($this->_topicDescription)) {
-            $this->content = null;    
-        } else {
-            $this->content = new Content();
-            $this->content->setText(
+        $content = null;
+        if (!is_null($this->_topicDescription)) {
+            $content = new Content();
+            $content->setText(
                 XmlSerializer::objectSerialize(
                     $this->_topicDescription,
                     'TopicDescription'
                 )
             );
+            $content->setType(Resources::XML_CONTENT_TYPE);
         }
-        return parent::writeXml($xmlWriter);
+        $this->_entry->setContent($content);
+        $this->_entry->writeXml($xmlWriter);
+    }
+
+    /**
+     * Gets the title.
+     *
+     * @return string
+     */
+    public function getTitle()
+    {
+        return $this->_entry->getTitle();
+    }
+
+    /**
+     * Sets the title.
+     *
+     * @param string $title The title of the queue info.
+     *
+     * @return none
+     */
+    public function setTitle($title)
+    {
+        $this->_entry->setTitle($title);
+    }
+
+    /**
+     * Gets the entry. 
+     * 
+     * @return Entry
+     */
+    public function getEntry()
+    {
+        return $this->_entry;
+    }
+
+    /**
+     * Sets the entry.
+     *
+     * @param Entry $entry The entry of the queue info.
+     */
+    public function setEntry($entry)
+    {
+        $this->_entry = $entry;
     }
 
     /**
@@ -133,5 +190,140 @@ class TopicInfo extends Entry
         $this->_topicDescription = $topicDescription;
     }
 
+    /**
+     * Gets default message time to live.
+     *
+     * @return string
+     */
+    public function getDefaultMessageTimeToLive()
+    {
+        return $this->_topicDescription->getDefaultMessageTimeToLive();
+    }
+    
+    /**
+     * Sets the default message to live.
+     *
+     * @param string $defaultMessageTimeToLive The default message time to live.
+     * 
+     * @return none
+     */
+    public function setDefaultMessageTimeToLive($defaultMessageTimeToLive)
+    {
+        $this->_topicDescription->setDefaultMessageTimeToLive($defaultMessageTimeToLive);
+    }
+
+    /**
+     * Gets the msax size in mega bytes. 
+     * 
+     * @return integer
+     */
+    public function getMaxSizeInMegabytes()
+    {
+        return $this->_topicDescription->getMaxSizeInMegabytes();
+    }
+
+    /**
+     * Sets max size in mega bytes. 
+     * 
+     * @param integer $maxSizeInMegabytes The maximum size in mega bytes. 
+     * 
+     * @return none
+     */
+    public function setMaxSizeInMegabytes($maxSizeInMegabytes)
+    {
+        $this->_topicDescription->setmaxSizeInMegabytes($maxSizeInMegabytes);
+    }
+
+    /**
+     * Gets requires duplicate detection.
+     * 
+     * @return boolean 
+     */
+    public function getRequiresDuplicateDetection()
+    {
+        return $this->_topicDescription->getRequiresDuplicateDetection();
+    }
+
+    /**
+     * Sets requires duplicate detection. 
+     * 
+     * @param boolean $requiresDuplicateDetection Sets requires duplicate detection.
+     *
+     * @return none
+     */
+    public function setRequiresDuplicateDetection($requiresDuplicateDetection)
+    {
+        $this->_topicDescription->setrequiresDuplicateDetection($requiresDuplicateDetection);
+    }
+
+    /**
+     * Gets duplicate detection history time window. 
+     * 
+     * @return string
+     */
+    public function getDuplicateDetectionHistoryTimeWindow()
+    {
+        return $this->_topicDescription->getDuplicateDetectionHistoryTimeWindow();
+    }
+
+    /**
+     * Sets duplicate detection history time window. 
+     * 
+     * @param string $duplicateDetectionHistoryTimeWindow The duplicate 
+     * detection history time window.
+     *
+     * @return none
+     */
+    public function setDuplicateDetectionHistoryTimeWindow(
+        $duplicateDetectionHistoryTimeWindow
+    ) {
+        $this->_topicDescription->setduplicateDetectionHistoryTimeWindow( 
+            $duplicateDetectionHistoryTimeWindow
+        );
+    }
+
+    /**
+     * Gets enable batched operations. 
+     * 
+     * @return boolean
+     */
+    public function getEnableBatchedOperations()
+    {
+        return $this->_topicDescription->getEnableBatchedOperations();
+    }
+
+    /**
+     * Sets enable batched operations.
+     * 
+     * @param boolean $enableBatchedOperations Enables batched operations.
+     * 
+     * @return none
+     */
+    public function setEnableBatchedOperations($enableBatchedOperations)
+    {
+        $this->_topicDescription->setenableBatchedOperations($enableBatchedOperations);
+    }
+
+    /**
+     * Gets size in bytes. 
+     * 
+     * @return integer 
+     */
+    public function getSizeInBytes()
+    {
+        return $this->_topicDescription->getSizeInBytes();
+    }
+
+    /** 
+     * Sets size in bytes.
+     * 
+     * @param integer $sizeInBytes The size in bytes. 
+     *
+     * @return none
+     */
+    public function setSizeInBytes($sizeInBytes)
+    {
+        $this->_topicDescription->setSizeInBytes($sizeInBytes);
+    }
+
 }
-?>

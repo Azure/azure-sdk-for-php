@@ -28,6 +28,7 @@ use WindowsAzure\Common\Internal\Atom\Entry;
 use WindowsAzure\Common\Internal\Resources;
 use WindowsAzure\Common\Internal\Serialization\XmlSerializer;
 use WindowsAzure\Common\Internal\Utilities;
+use WindowsAzure\Common\Internal\Validate;
 use WindowsAzure\ServiceBus\Models\QueueDescription;
 
 /**
@@ -42,8 +43,15 @@ use WindowsAzure\ServiceBus\Models\QueueDescription;
  * @link      https://github.com/WindowsAzure/azure-sdk-for-php
  */
 
-class QueueInfo extends Entry
+class QueueInfo
 {
+    /** 
+     * The entry of the queue info. 
+     * 
+     * @var Entry
+     */
+    private $_entry;
+
     /**
      * The description of the queue. 
      * 
@@ -61,12 +69,19 @@ class QueueInfo extends Entry
         $title = Resources::EMPTY_STRING, 
         $queueDescription = null
     ) {
+
+        Validate::isString($title, 'title');
         if (is_null($queueDescription)) {
             $queueDescription = new QueueDescription();
         }
 
-        $this->title             = $title;
         $this->_queueDescription = $queueDescription;
+        $this->_entry            = new Entry();
+        $this->_entry->setTitle($title);
+        $this->_entry->setAttribute(
+            Resources::XMLNS,
+            Resources::SERVICE_BUS_NAMESPACE
+        );
     }
 
     /**
@@ -79,8 +94,8 @@ class QueueInfo extends Entry
      */
     public function parseXml($entryXml)
     {
-        parent::parseXml($entryXml);
-        $content = $this->content;
+        $this->_entry->parseXml($entryXml);
+        $content = $this->_entry->getContent();
         if (is_null($content)) {
             $this->_queueDescription = null;
         } else {
@@ -93,22 +108,23 @@ class QueueInfo extends Entry
      * 
      * @param \XMLWriter $xmlWriter The XML writer.
      *
-     * @return string
+     * @return
      */
     public function writeXml($xmlWriter)
     {
-        if (is_null($this->_queueDescription)) {
-            $this->content = null;    
-        } else {
-            $this->content = new Content();
-            $this->content->setText(
+        $content = null;
+        if (!is_null($this->_queueDescription)) {
+            $content = new Content();
+            $content->setText(
                 XmlSerializer::objectSerialize(
                     $this->_queueDescription,
                     'QueueDescription'
                 ) 
             );
+            $content->setType(Resources::XML_CONTENT_TYPE);
         }
-        return parent::writeXml($xmlWriter);
+        $this->_entry->setContent($content);
+        $this->_entry->writeXml($xmlWriter);
     }
 
     /**
@@ -133,5 +149,294 @@ class QueueInfo extends Entry
         $this->_queueDescription = $queueDescription;
     }
 
+    /**     
+     * Gets the title. 
+     *
+     * @return string
+     */
+    public function getTitle()
+    {
+        return $this->_entry->getTitle();
+    }
+
+    /**
+     * Sets the title.
+     *
+     * @param string $title The title of the queue info. 
+     *
+     * @return none
+     */
+    public function setTitle($title)
+    {
+        $this->_entry->setTitle($title);
+    }
+    
+    /** 
+     * Gets the entry. 
+     * 
+     * @return Entry
+     */
+    public function getEntry()
+    {
+        return $this->_entry;
+    }
+
+    /**
+     * Sets the entry. 
+     * 
+     * @param Entry $entry The entry of the queue info. 
+     */
+    public function setEntry($entry)
+    {
+        $this->_entry = $entry;
+    }
+
+    /**
+     * Gets the lock duration.
+     *
+     * @return string  
+     */
+    public function getLockDuration()
+    {
+        return $this->_queueDescription->getLockDuration();
+    }
+    
+    /**
+     * Sets the lock duration.
+     *
+     * @param string $lockDuration The lock duration.
+     * 
+     * @return none
+     */
+    public function setLockDuration($lockDuration)
+    {
+        $this->_queueDescription->setLockDuration($lockDuration);
+    }
+    
+    /**
+     * gets the maximum size in mega bytes. 
+     * 
+     * @return integer 
+     */
+    public function getMaxSizeInMegabytes()
+    {
+        return $this->_queueDescription->getMaxSizeInMegabytes();
+    }
+
+    /**
+     * Sets the max size in mega bytes.
+     *
+     * @param integer $maxSizeInMegabytes The max size in mega bytes.
+     * 
+     * @return none
+     */
+    public function setMaxSizeInMegabytes($maxSizeInMegabytes)
+    {
+        $this->_queueDescription->setMaxSizeInMegabytes($maxSizeInMegabytes);
+    }
+
+    /**
+     * Gets requires duplicate detection.
+     * 
+     * @return boolean
+     */
+    public function getRequiresDuplicateDetection()
+    {
+        return $this->_queueDescription->getRequiresDuplicateDetection();
+    }
+
+    /**
+     * Sets requires duplicate detection.
+     *
+     * @param boolean $requiresDuplicateDetection If duplicate detection is required.
+     * 
+     * @return none
+     */
+    public function setRequiresDuplicateDetection($requiresDuplicateDetection)
+    {
+        $this->_queueDescription->setRequiresDuplicateDetection($requiresDuplicateDetection);
+    }
+
+    /**
+     * Gets the requires session. 
+     * 
+     * @return boolean
+     */ 
+    public function getRequiresSession()
+    {
+        return $this->_queueDescription->getRequiresSession();
+    }
+
+    /**
+     * Sets the requires session.
+     *
+     * @param boolean $requiresSession If session is required.
+     * 
+     * @return none
+     */
+    public function setRequiresSession($requiresSession)
+    {
+        $this->_queueDescription->setRequiresSession($requiresSession);
+    }
+
+    /**
+     * gets the default message time to live. 
+     * 
+     * @return string 
+     */
+    public function getDefaultMessageTimeToLive()
+    {
+        return $this->_queueDescription->getDefaultMessageTimeToLive();
+    }
+
+    /**
+     * Sets the default message time to live. 
+     *
+     * @param string $defaultMessageTimeToLive The default message time to live.
+     * 
+     * @return none
+     */
+    public function setDefaultMessageTimeToLive($defaultMessageTimeToLive)
+    {   
+        $this->_queueDescription->setDefaultMessageTimeToLive($defaultMessageTimeToLive);
+    }
+
+    /**
+     * Gets dead lettering on message expiration.
+     * 
+     * @return string 
+     */
+    public function getDeadLetteringOnMessageExpiration()
+    {
+        return $this->_queueDescription->getDeadLetteringOnMessageExpiration();
+    }
+
+    /**
+     * Sets dead lettering on message expiration.
+     *
+     * @param string $deadLetteringOnMessageExpiration The dead lettering on 
+     * message expiration.
+     * 
+     * @return none
+     */
+    public function setDeadLetteringOnMessageExpiration(
+        $deadLetteringOnMessageExpiration
+    ) {
+        $this->_queueDescription->setDeadLetteringOnMessageExpiration($deadLetteringOnMessageExpiration);
+    }
+
+    /**
+     * Gets duplicate detection history time window. 
+     * 
+     * @return string 
+     */
+    public function getDuplicateDetectionHistoryTimeWindow()
+    {
+        return $this->_queueDescription->getDuplicateDetectionHistoryTimeWindow();
+    }
+
+    /**
+     * Sets the duplicate detection history time window.
+     *
+     * @param string $duplicateDetectionHistoryTimeWindow The duplicate
+     * detection history time window.
+     * 
+     * @return none
+     */
+    public function setDuplicateDetectionHistoryTimeWindow(
+        $duplicateDetectionHistoryTimeWindow
+    ) {
+        $this->_queueDescription->setDuplicateDetectionHistoryTimeWindow( 
+            $duplicateDetectionHistoryTimeWindow
+        );
+    }
+
+    /**
+     * Gets maximum delivery count. 
+     * 
+     * @return string 
+     */
+    public function getMaxDeliveryCount()
+    {
+        return $this->_queueDescription->getMaxDeliveryCount();
+    }
+
+    /**
+     * Sets the maximum delivery count.
+     *
+     * @param string $maxDeliveryCount The maximum delivery count.
+     * 
+     * @return none
+     */
+    public function setMaxDeliveryCount($maxDeliveryCount)
+    {
+        $this->_queueDescription->setMaxDeliveryCount($maxDeliveryCount);
+    }
+
+    /**
+     * Gets enable batched operation.
+     * 
+     * @return boolean
+     */
+    public function getEnableBatchedOperations()
+    {
+        return $this->_queueDescription->getEnableBatchedOperations();
+    }
+
+    /**
+     * Sets enable batched operations.
+     *
+     * @param boolean $enableBatchedOperations Enable batched operations.
+     * 
+     * @return none
+     */
+    public function setEnableBatchedOperations($enableBatchedOperations)
+    {
+        $this->_queueDescription->setEnableBatchedOperations($enableBatchedOperations); 
+    }
+
+    /**
+     * Gets the size in bytes. 
+     * 
+     * @return integer
+     */
+    public function getSizeInBytes()
+    {
+        return $this->_queueDescription->getSizeInBytes();
+    }
+
+    /**
+     * Sets the size in bytes.
+     *
+     * @param integer $sizeInBytes The size in bytes.
+     * 
+     * @return none
+     */
+    public function setSizeInBytes($sizeInBytes)
+    {
+        $this->_queueDescription->setSizeInBytes($sizeInBytes);
+    }
+
+    /**
+     * Gets the message count. 
+     * 
+     * @return integer
+     */
+    public function getMessageCount()
+    {
+        return $this->_queueDescription->getMessageCount();
+    }
+
+    /**
+     * Sets the message count.
+     *
+     * @param string $messageCount The count of the message.
+     * 
+     * @return none
+     */
+    public function setMessageCount($messageCount)
+    {
+        $this->_queueDescription->setMessageCount($messageCount);
+    }
 }
 

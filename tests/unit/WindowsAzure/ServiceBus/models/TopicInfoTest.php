@@ -15,7 +15,7 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   Tests\Unit\WindowsAzure\Services\Queue\Models
+ * @package   Tests\Unit\WindowsAzure\ServiceBus\Models
  * @author    Azure PHP SDK <azurephpsdk@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
@@ -30,7 +30,7 @@ use WindowsAzure\ServiceBus\Models\WrapAccessTokenResult;
  * Unit tests for class WrapAccessTokenResult
  *
  * @category  Microsoft
- * @package   Tests\Unit\WindowsAzure\Services\Queue\Models
+ * @package   Tests\Unit\WindowsAzure\ServiceBus\Models
  * @author    Azure PHP SDK <azurephpsdk@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
@@ -74,6 +74,138 @@ class TopicInfoTest extends \PHPUnit_Framework_TestCase
 
     }
 
+    /** 
+     * @covers WindowsAzure\ServiceBus\Models\TopicInfo::getDefaultMessageTimeToLive
+     * @covers WindowsAzure\ServiceBus\Models\TopicInfo::setDefaultMessageTimeToLive
+     */
+    public function testGetSetDefaultMessageTimeToLive() {
+        // Setup
+        $expected = 'testDefaultMessageTimeToLive';
+        $topicInfo = new TopicInfo();
+
+        // Test
+        $topicInfo->setDefaultMessageTimeToLive($expected);
+        $actual = $topicInfo->getDefaultMessageTimeToLive();
+
+        // Assert 
+        $this->assertEquals(
+            $expected,
+            $actual
+        );
+
+    }
+
+
+    /** 
+     * @covers WindowsAzure\ServiceBus\Models\TopicInfo::getMaxSizeInMegabytes
+     * @covers WindowsAzure\ServiceBus\Models\TopicInfo::setMaxSizeInMegabytes
+     */
+    public function testGetSetMaxSizeInMegabytes() {
+        // Setup
+        $expected = 'testMaxSizeInMegabytes';
+        $topicInfo = new TopicInfo();
+
+        // Test
+        $topicInfo->setMaxSizeInMegabytes($expected);
+        $actual = $topicInfo->getMaxSizeInMegabytes();
+
+        // Assert 
+        $this->assertEquals(
+            $expected,
+            $actual
+        );
+
+    }
+
+
+    /** 
+     * @covers WindowsAzure\ServiceBus\Models\TopicInfo::getRequiresDuplicateDetection
+     * @covers WindowsAzure\ServiceBus\Models\TopicInfo::setRequiresDuplicateDetection
+     */
+    public function testGetSetRequiresDuplicateDetection() {
+        // Setup
+        $expected = 'testRequiresDuplicateDetection';
+        $topicInfo = new TopicInfo();
+
+        // Test
+        $topicInfo->setRequiresDuplicateDetection($expected);
+        $actual = $topicInfo->getRequiresDuplicateDetection();
+
+        // Assert 
+        $this->assertEquals(
+            $expected,
+            $actual
+        );
+
+    }
+
+
+    /** 
+     * @covers WindowsAzure\ServiceBus\Models\TopicInfo::getDuplicateDetectionHistoryTimeWindow
+     * @covers WindowsAzure\ServiceBus\Models\TopicInfo::setDuplicateDetectionHistoryTimeWindow
+     */
+    public function testGetSetDuplicateDetectionHistoryTimeWindow() {
+        // Setup
+        $expected = 'testDuplicateDetectionHistoryTimeWindow';
+        $topicInfo = new TopicInfo();
+
+        // Test
+        $topicInfo->setDuplicateDetectionHistoryTimeWindow($expected);
+        $actual = $topicInfo->getDuplicateDetectionHistoryTimeWindow();
+
+        // Assert 
+        $this->assertEquals(
+            $expected,
+            $actual
+        );
+
+    }
+
+
+    /** 
+     * @covers WindowsAzure\ServiceBus\Models\TopicInfo::getEnableBatchedOperations
+     * @covers WindowsAzure\ServiceBus\Models\TopicInfo::setEnableBatchedOperations
+     */
+    public function testGetSetEnableBatchedOperations() {
+        // Setup
+        $expected = 'testEnableBatchedOperations';
+        $topicInfo = new TopicInfo();
+
+        // Test
+        $topicInfo->setEnableBatchedOperations($expected);
+        $actual = $topicInfo->getEnableBatchedOperations();
+
+        // Assert 
+        $this->assertEquals(
+            $expected,
+            $actual
+        );
+
+    }
+
+
+    /** 
+     * @covers WindowsAzure\ServiceBus\Models\TopicInfo::getSizeInBytes
+     * @covers WindowsAzure\ServiceBus\Models\TopicInfo::setSizeInBytes
+     */
+    public function testGetSetSizeInBytes() {
+        // Setup
+        $expected = 'testSizeInBytes';
+        $topicInfo = new TopicInfo();
+
+        // Test
+        $topicInfo->setSizeInBytes($expected);
+        $actual = $topicInfo->getSizeInBytes();
+
+        // Assert 
+        $this->assertEquals(
+            $expected,
+            $actual
+        );
+
+    }
+
 }
 
 ?>
+
