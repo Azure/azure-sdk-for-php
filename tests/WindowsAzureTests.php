@@ -152,6 +152,7 @@ spl_autoload_register(
             'tests\\unit\\windowsazure\\common\\internal\\authentication\\storageauthschemetest' => '/unit/WindowsAzure/Common/Internal/Authentication/StorageAuthSchemeTest.php',
             'tests\\unit\\windowsazure\\common\\internal\\authentication\\tablesharedkeyliteauthschemetest' => '/unit/WindowsAzure/Common/Internal/Authentication/TableSharedKeyLiteAuthSchemeTest.php',
             'tests\\unit\\windowsazure\\common\\internal\\configurationtest' => '/unit/WindowsAzure/Common/ConfigurationTest.php',
+            'tests\\unit\\windowsazure\\common\\internal\\connectionstringparsertest' => '/unit/WindowsAzure/Common/Internal/ConnectionStringParserTest.php',
             'tests\\unit\\windowsazure\\common\\internal\\filters\\authenticationfiltertest' => '/unit/WindowsAzure/Common/Internal/Filters/AuthenticationFilterTest.php',
             'tests\\unit\\windowsazure\\common\\internal\\filters\\datefiltertest' => '/unit/WindowsAzure/Common/Internal/Filters/DateFilterTest.php',
             'tests\\unit\\windowsazure\\common\\internal\\filters\\exponentialretrypolicytest' => '/unit/WindowsAzure/Common/Internal/Filters/ExponentialRetryPolicyTest.php',
