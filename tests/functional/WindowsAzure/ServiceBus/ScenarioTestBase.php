@@ -24,14 +24,8 @@
 
 namespace Tests\Functional\WindowsAzure\ServiceBus;
 
-use Tests\Framework\FiddlerFilter;
-use Tests\Framework\ServiceBusRestProxyTestBase;
 use Tests\Functional\WindowsAzure\ServiceBus\IntegrationTestBase;
-use WindowsAzure\Common\ServiceException;
 use WindowsAzure\Common\Internal\Utilities;
-use WindowsAzure\ServiceBus\ServiceBusService;
-use WindowsAzure\ServiceBus\Models\QueueInfo;
-use WindowsAzure\ServiceBus\Models\ReceiveMessageOptions;
 use WindowsAzure\Common\Internal\Resources;
 
 class ScenarioTestBase extends IntegrationTestBase
@@ -140,7 +134,7 @@ class ScenarioTestBase extends IntegrationTestBase
         }
     }
 
-    public static function assertEquals($expected, $actual, $description)
+    static function assertEquals($expected, $actual, $message = '', $delta = 0, $maxDepth = 10, $canonicalize = FALSE, $ignoreCase = FALSE)
     {
         self::write('  assertEquals(\'' .
                 ($expected instanceof \DateTime ?
@@ -149,7 +143,7 @@ class ScenarioTestBase extends IntegrationTestBase
                 ($actual instanceof \DateTime ?
                     $actual->format(Resources::AZURE_DATE_FORMAT) :
                     strval($actual)) . '\', \'' .
-                $description . '\')');
+                $message . '\')');
 
         $effExp = $expected;
         $effAct = $actual;
@@ -161,7 +155,7 @@ class ScenarioTestBase extends IntegrationTestBase
             $effAct = $effAct->setTimezone(new \DateTimeZone('UTC'));
         }
 
-        parent::assertEquals($expected, $actual, $description);
+        parent::assertEquals($expected, $actual, $message, $delta, $maxDepth, $canonicalize, $ignoreCase);
     }
 
     protected static function write($message)
