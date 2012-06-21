@@ -733,7 +733,7 @@ class BrokerProperties
 
         if (!empty($value)) {
             Validate::isInteger($value, 'value');
-            $valueArray[$key] = (string)$value;
+            $valueArray[$key] = $value;
         }
     }
 
@@ -753,16 +753,16 @@ class BrokerProperties
 
         if (!empty($value)) {
             Validate::isDouble($value, 'value');
-            $valueArray[$key] = (string)$value;
+            $valueArray[$key] = (double)$value;
         }
     }
 
     /**
      * Sets a DateTime value in an array. 
      *
-     * @param array      &$valueArray The array of a set of values. 
-     * @param string     $key         The key of the key value pair. 
-     * @param \DateTime  $value       The value of the key value pair. 
+     * @param array     &$valueArray The array of a set of values. 
+     * @param string    $key         The key of the key value pair. 
+     * @param \DateTime $value       The value of the key value pair. 
      * 
      * @return none
      */
