@@ -15,7 +15,7 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   WindowsAzure\ServiceBus\Internal\Atom
+ * @package   WindowsAzure\Common\Internal\Atom
  * @author    Azure PHP SDK <azurephpsdk@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
@@ -31,7 +31,7 @@ use WindowsAzure\Common\Internal\Validate;
  * This link defines a reference from an entry or feed to a Web resource.
  *
  * @category  Microsoft
- * @package   WindowsAzure\ServiceBus\Internal\Atom
+ * @package   WindowsAzure\Common\Internal\Atom
  * @author    Azure PHP SDK <azurephpsdk@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
