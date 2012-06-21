@@ -86,7 +86,7 @@ class BrokerPropertiesTest extends \PHPUnit_Framework_TestCase
     public function testCreateBrokerPropertiesAllPropertiesSuccess()
     {
         // Setup
-        $brokerPropertiesJsonString = '{"CorrelationId":"testCorrelationId","SessionId":"testSessionId","DeliveryCount":"38","LockedUntilUtc":"Sun, 06 Nov 2011 01:00:00 GMT","LockToken":"testLockToken","MessageId":"testMessageId","Label":"testLabel","ReplyTo":"testReplyTo","SequenceNumber":88,"TimeToLive":"123.456","To":"testTo","ScheduledEnqueueTimeUtc":"Sun, 06 Nov 2011 01:00:00 GMT","ReplyToSessionId":"testReplyToSessionId","MessageLocation":"testMessageLocation","LockLocation":"testLockLocation"}';
+        $brokerPropertiesJsonString = '{"CorrelationId":"testCorrelationId","SessionId":"testSessionId","DeliveryCount":38,"LockedUntilUtc":"Sun, 06 Nov 2011 01:00:00 GMT","LockToken":"testLockToken","MessageId":"testMessageId","Label":"testLabel","ReplyTo":"testReplyTo","SequenceNumber":88,"TimeToLive":123.456,"To":"testTo","ScheduledEnqueueTimeUtc":"Sun, 06 Nov 2011 01:00:00 GMT","ReplyToSessionId":"testReplyToSessionId","MessageLocation":"testMessageLocation","LockLocation":"testLockLocation"}';
         $expectedCorrelationId = 'testCorrelationId';
         $expectedSessionId = 'testSessionId';
         $expectedDeliveryCount = 38;
@@ -213,7 +213,7 @@ class BrokerPropertiesTest extends \PHPUnit_Framework_TestCase
     public function testSerializeBrokerPropertiesAllPropertiesSuccess()
     {
         // Setup
-        $expected = '{"CorrelationId":"testCorrelationId","SessionId":"testSessionId","DeliveryCount":"38","LockedUntilUtc":"Sun, 06 Nov 2011 01:00:00 GMT","LockToken":"testLockToken","MessageId":"testMessageId","Label":"testLabel","ReplyTo":"testReplyTo","SequenceNumber":88,"TimeToLive":"123.456","To":"testTo","ScheduledEnqueueTimeUtc":"Sun, 06 Nov 2011 01:00:00 GMT","ReplyToSessionId":"testReplyToSessionId","MessageLocation":"testMessageLocation","LockLocation":"testLockLocation"}';
+        $expected = '{"CorrelationId":"testCorrelationId","SessionId":"testSessionId","DeliveryCount":38,"LockedUntilUtc":"Sun, 06 Nov 2011 01:00:00 GMT","LockToken":"testLockToken","MessageId":"testMessageId","Label":"testLabel","ReplyTo":"testReplyTo","SequenceNumber":88,"TimeToLive":123.456,"To":"testTo","ScheduledEnqueueTimeUtc":"Sun, 06 Nov 2011 01:00:00 GMT","ReplyToSessionId":"testReplyToSessionId","MessageLocation":"testMessageLocation","LockLocation":"testLockLocation"}';
         $lockedUntilUtc = \DateTime::createFromFormat(
             "Y-m-d H:i:s","2011-11-06 01:00:00",new \DateTimeZone("UTC"));
         $timeToLive = '123.456';

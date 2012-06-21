@@ -733,7 +733,7 @@ class BrokerProperties
 
         if (!empty($value)) {
             Validate::isInteger($value, 'value');
-            $valueArray[$key] = (string)$value;
+            $valueArray[$key] = $value;
         }
     }
 
@@ -753,7 +753,7 @@ class BrokerProperties
 
         if (!empty($value)) {
             Validate::isDouble($value, 'value');
-            $valueArray[$key] = (string)$value;
+            $valueArray[$key] = (double)$value;
         }
     }
 
