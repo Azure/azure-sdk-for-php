@@ -108,7 +108,7 @@ class QueueInfo
      * 
      * @param \XMLWriter $xmlWriter The XML writer.
      *
-     * @return
+     * @return none
      */
     public function writeXml($xmlWriter)
     {
@@ -185,6 +185,8 @@ class QueueInfo
      * Sets the entry. 
      * 
      * @param Entry $entry The entry of the queue info. 
+     *
+     * @return none
      */
     public function setEntry($entry)
     {
@@ -344,8 +346,7 @@ class QueueInfo
      * @return none
      */
     public function setDuplicateDetectionHistoryTimeWindow(
-        $duplicateDetectionHistoryTimeWindow
-    ) {
+        $duplicateDetectionHistoryTimeWindow) {
         $this->_queueDescription->setDuplicateDetectionHistoryTimeWindow( 
             $duplicateDetectionHistoryTimeWindow
         );

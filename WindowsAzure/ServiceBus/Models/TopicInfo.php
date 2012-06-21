@@ -162,6 +162,8 @@ class TopicInfo extends Entry
      * Sets the entry.
      *
      * @param Entry $entry The entry of the queue info.
+     *
+     * @return none
      */
     public function setEntry($entry)
     {
@@ -275,8 +277,7 @@ class TopicInfo extends Entry
      * @return none
      */
     public function setDuplicateDetectionHistoryTimeWindow(
-        $duplicateDetectionHistoryTimeWindow
-    ) {
+        $duplicateDetectionHistoryTimeWindow) {
         $this->_topicDescription->setduplicateDetectionHistoryTimeWindow( 
             $duplicateDetectionHistoryTimeWindow
         );
