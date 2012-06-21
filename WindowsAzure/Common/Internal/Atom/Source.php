@@ -1,7 +1,7 @@
 <?php
 
 /**
- * LICENSE: Licensed under the Apache License, Version 2.0 (the "License");;
+ * LICENSE: Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  * http://www.apache.org/licenses/LICENSE-2.0
@@ -15,7 +15,7 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   WindowsAzure\ServiceBus\Internal\Atom
+ * @package   WindowsAzure\Common\Internal\Atom
  * @author    Azure PHP SDK <azurephpsdk@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
@@ -30,7 +30,7 @@ use WindowsAzure\Common\Internal\Resources;
  * The source class of ATOM library.
  *
  * @category  Microsoft
- * @package   WindowsAzure\ServiceBus\Internal\Atom
+ * @package   WindowsAzure\Common\Internal\Atom
  * @author    Azure PHP SDK <azurephpsdk@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
@@ -582,7 +582,7 @@ class Source extends AtomBase
                 'id', 
                 Resources::ATOM_NAMESPACE,
                 $this->id
-                );
+            );
         }
 
         if (!is_null($this->link)) {

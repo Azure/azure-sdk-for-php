@@ -760,9 +760,9 @@ class BrokerProperties
     /**
      * Sets a DateTime value in an array. 
      *
-     * @param array      &$valueArray The array of a set of values. 
-     * @param string     $key         The key of the key value pair. 
-     * @param \DateTime  $value       The value of the key value pair. 
+     * @param array     &$valueArray The array of a set of values. 
+     * @param string    $key         The key of the key value pair. 
+     * @param \DateTime $value       The value of the key value pair. 
      * 
      * @return none
      */

@@ -158,7 +158,7 @@ class ServicePropertiesTest extends \PHPUnit_Framework_TestCase
     {
         // Setup
         $properties = ServiceProperties::create(TestResources::getServicePropertiesSample());
-        $xmlSerializer = new xmlSerializer();
+        $xmlSerializer = new XmlSerializer();
         
         // Test
         $actual = $properties->toXml($xmlSerializer);
