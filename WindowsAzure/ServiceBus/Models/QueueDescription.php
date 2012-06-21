@@ -221,6 +221,7 @@ class QueueDescription
     public function __construct()
     {
     }
+
     /**
      * Gets the lock duration.
      *
