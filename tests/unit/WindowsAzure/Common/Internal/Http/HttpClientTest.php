@@ -231,7 +231,7 @@ class HttpClientTest extends \PHPUnit_Framework_TestCase
     {
         // Setup
         $channel = new HttpClient();
-        $url = new Url('http://www.windowsazure.com/en-us/');
+        $url = new Url('http://www.microsoft.com');
         $channel->setExpectedStatusCode('200');
         
         // Test
@@ -248,7 +248,7 @@ class HttpClientTest extends \PHPUnit_Framework_TestCase
     {
         // Setup
         $channel = new HttpClient();
-        $url = new Url('http://www.windowsazure.com/en-us/');
+        $url = new Url('http://www.microsoft.com');
         $channel->setExpectedStatusCode('200');
         $channel->setBody('This is body');
         $channel->setMethod('PUT');
@@ -265,7 +265,7 @@ class HttpClientTest extends \PHPUnit_Framework_TestCase
     {
         // Setup
         $channel = new HttpClient();
-        $url = new Url('http://www.windowsazure.com/en-us/');
+        $url = new Url('http://www.microsoft.com');
         $channel->setExpectedStatusCode('200');
         $expectedHeader = TestResources::HEADER1;
         $expectedResponseSubstring = TestResources::HEADER1_VALUE;
@@ -288,7 +288,7 @@ class HttpClientTest extends \PHPUnit_Framework_TestCase
     {
         // Setup
         $channel = new HttpClient();
-        $url = new Url('http://www.windowsazure.com/en-us/');
+        $url = new Url('http://www.microsoft.com');
         $channel->setExpectedStatusCode('200');
         $expectedHeader1 = TestResources::HEADER1;
         $expectedResponseSubstring1 = TestResources::HEADER1_VALUE;
@@ -316,7 +316,7 @@ class HttpClientTest extends \PHPUnit_Framework_TestCase
     {
         // Setup
         $channel = new HttpClient();
-        $url = new Url('http://www.windowsazure.com/en-us/');
+        $url = new Url('http://www.microsoft.com');
         $channel->setExpectedStatusCode('201');
         $this->setExpectedException(get_class(new ServiceException('200')));
         
@@ -468,7 +468,7 @@ class HttpClientTest extends \PHPUnit_Framework_TestCase
     {
         // Setup
         $channel = new HttpClient();
-        $url = new Url('http://www.windowsazure.com/en-us/');
+        $url = new Url('http://www.microsoft.com');
         $channel->setExpectedStatusCode('200');
         $channel->send(array(), $url);
         
