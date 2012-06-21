@@ -47,7 +47,7 @@ class BrokeredMessageTest extends \PHPUnit_Framework_TestCase
         // Setup
         $message = 'testMessage';        
         // Test
-        $brokeredMessage = new Brokeredmessage($message);
+        $brokeredMessage = new BrokeredMessage($message);
         
         // Assert
         $this->assertNotNull($brokeredMessage);
