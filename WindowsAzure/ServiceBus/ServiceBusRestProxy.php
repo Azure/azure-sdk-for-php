@@ -123,7 +123,7 @@ class ServiceBusRestProxy extends ServiceRestProxy implements IServiceBus
 
         if (!empty($customProperties)) {
             foreach ($customProperties as $key => $value) {
-                if (is_string($value)) {
+                if (is_string($value) || is_bool($value)) {
                     $value = json_encode($value);
                 }
                 $httpCallContext->addHeader($key, $value);
@@ -244,8 +244,8 @@ class ServiceBusRestProxy extends ServiceRestProxy implements IServiceBus
                     $value = (integer)$value;
                 } else if (is_numeric($value)) {
                     $value = (double)$value;
-                } else if (is_bool($value)) {
-                    $value = (bool)$value;
+                } else if (($value === 'true') || ($value === 'false')) {
+                    $value = ($value === 'true');
                 }
 
                 $brokeredMessage->setProperty(
