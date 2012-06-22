@@ -167,6 +167,7 @@ spl_autoload_register(
             'tests\\unit\\windowsazure\\common\\internal\\serialization\\xmlserializertest' => '/unit/WindowsAzure/Common/Internal/Serialization/XmlSerializerTest.php',
             'tests\\unit\\windowsazure\\common\\internal\\servicerestproxytest' => '/unit/WindowsAzure/Common/Internal/ServiceRestProxyTest.php',
             'tests\\unit\\windowsazure\\common\\internal\\servicesbuildertest' => '/unit/WindowsAzure/Common/Internal/ServicesBuilderTest.php',
+            'tests\\unit\\windowsazure\\common\\internal\\storageservicesettingstest' => '/unit/WindowsAzure/Common/Internal/StorageServiceSettingsTest.php',
             'tests\\unit\\windowsazure\\common\\internal\\utilitiestest' => '/unit/WindowsAzure/Common/Internal/UtilitiesTest.php',
             'tests\\unit\\windowsazure\\common\\internal\\validatetest' => '/unit/WindowsAzure/Common/Internal/ValidateTest.php',
             'tests\\unit\\windowsazure\\common\\models\\getservicepropertiesresulttest' => '/unit/WindowsAzure/Common/Models/GetServicePropertiesResultTest.php',
