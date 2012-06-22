@@ -25,11 +25,6 @@
 namespace Tests\Functional\WindowsAzure\ServiceBus;
 
 use Tests\Framework\ServiceBusRestProxyTestBase;
-use WindowsAzure\Resources;
-use WindowsAzure\Core\Configuration;
-use WindowsAzure\ServiceBus\ServiceBusRestProxy;
-use WindowsAzure\ServiceBus\ServiceBusService;
-use WindowsAzure\ServiceBus\ServiceBusSettings;
 use WindowsAzure\ServiceBus\Models\BrokerProperties;
 use Tests\Functional\WindowsAzure\Blob\BlobServiceFunctionalTestData;
 
@@ -69,34 +64,36 @@ class BrokerPropertiesMapperTest extends ServiceBusRestProxyTestBase
         $lockedUntilUtc->setTimezone(new \DateTimeZone('UTC'));
 
         // Act
-        $properties = BrokerProperties::create(
+        $jsonValue =
             '{' .
-            '"CorrelationId": "corid",' .
-            '"SessionId": "sesid",' .
-            '"DeliveryCount": 5,' .
-            '"LockedUntilUtc": " Fri, 14 Oct 2011 12:34:56 GMT",' .
-            '"LockToken": "loctok",' .
-            '"MessageId": "mesid",' .
-            '"Label": "lab",' .
-            '"ReplyTo": "repto",' .
-            '"SequenceNumber": 7,' .
-            '"TimeToLive": 8.123,' .
-            '"To": "to",' .
-            '"ScheduledEnqueueTimeUtc": " Sun, 06 Nov 1994 08:49:37 GMT",' .
-            '"ReplyToSessionId": "reptosesid",' .
-            '"MessageLocation": "mesloc",' .
-            '"LockLocation": "locloc"' . '}');
+            '"CorrelationId":"corid",' .
+            '"SessionId":"sesid",' .
+            '"DeliveryCount":5,' .
+            '"LockedUntilUtc":"Fri, 14 Oct 2011 12:34:56 GMT",' .
+            '"LockToken":"loctok",' .
+            '"MessageId":"mesid",' .
+            '"Label":"lab",' .
+            '"ReplyTo":"repto",' .
+            '"SequenceNumber":7,' .
+            '"TimeToLive":8.123,' .
+            '"To":"to",' .
+            '"ScheduledEnqueueTimeUtc":"Sun, 06 Nov 1994 08:49:37 GMT",' .
+            '"ReplyToSessionId":"reptosesid",' .
+            '"MessageLocation":"mesloc",' .
+            '"LockLocation":"locloc"' . '}';
+
+        $properties = BrokerProperties::create($jsonValue);
+
+        $jsonRoundTrip = $properties->toString();
 
         // Assert
         $this->assertNotNull($properties, '$properties');
 
         $lockedUntilDelta = BlobServiceFunctionalTestData::diffInTotalSeconds(
-//                $properties->getLockedUntilUtc(),
-                new \DateTime($properties->getLockedUntilUtc()),
+                $properties->getLockedUntilUtc(),
                 $lockedUntilUtc);
         $schedTimeDelta = BlobServiceFunctionalTestData::diffInTotalSeconds(
-//                $properties->getScheduledEnqueueTimeUtc(),
-                new \DateTime($properties->getScheduledEnqueueTimeUtc()),
+                $properties->getScheduledEnqueueTimeUtc(),
                 $schedTimeUtc);
 
         $this->assertEquals('corid', $properties->getCorrelationId(), '$properties->getCorrelationId()');
@@ -114,6 +111,7 @@ class BrokerPropertiesMapperTest extends ServiceBusRestProxyTestBase
         $this->assertEquals('reptosesid', $properties->getReplyToSessionId(), '$properties->getReplyToSessionId()');
         $this->assertEquals('mesloc', $properties->getMessageLocation(), '$properties->getMessageLocation()');
         $this->assertEquals('locloc', $properties->getLockLocation(), '$properties->getLockLocation()');
+        $this->assertEquals($jsonValue, $jsonRoundTrip, 'round-tripped JSON');
     }
 
     public function testMissingDatesDeserializeAsNull()

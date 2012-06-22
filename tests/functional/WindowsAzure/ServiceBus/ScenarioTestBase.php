@@ -24,14 +24,8 @@
 
 namespace Tests\Functional\WindowsAzure\ServiceBus;
 
-use Tests\Framework\FiddlerFilter;
-use Tests\Framework\ServiceBusRestProxyTestBase;
 use Tests\Functional\WindowsAzure\ServiceBus\IntegrationTestBase;
-use WindowsAzure\Common\ServiceException;
 use WindowsAzure\Common\Internal\Utilities;
-use WindowsAzure\ServiceBus\ServiceBusService;
-use WindowsAzure\ServiceBus\Models\QueueInfo;
-use WindowsAzure\ServiceBus\Models\ReceiveMessageOptions;
 use WindowsAzure\Common\Internal\Resources;
 
 class ScenarioTestBase extends IntegrationTestBase
@@ -45,16 +39,27 @@ class ScenarioTestBase extends IntegrationTestBase
         $this->assertEquals($expectedMessage->getCorrelationId(), $actualMessage->getCorrelationId(), 'getCorrelationId');
         $this->assertEquals($expectedMessage->getDate(), $actualMessage->getDate(), 'getDate');
         // Note: The DeliveryCount property is controled by the server, so cannot compare it.
+        $this->assertTrue(is_int($actualMessage->getDeliveryCount()), 'is_int($actualMessage->getDeliveryCount)');
         $this->assertEquals($expectedMessage->getLabel(), $actualMessage->getLabel(), 'getLabel');
         // Note: The LockLocation property is controled by the server, so cannot compare it.
+        $this->assertTrue(
+                is_null($actualMessage->getLockLocation()) ||
+                is_string($actualMessage->getLockLocation()), 'is_string/numm($actualMessage->getLockLocation)');
         // Note: The LockToken property is controled by the server, so cannot compare it.
+        $this->assertTrue(
+                is_null($actualMessage->getLockToken()) ||
+                is_string($actualMessage->getLockToken()), 'is_string/null($actualMessage->getLockToken)');
         // Note: The LockedUntilUtc property is controled by the server, so cannot compare it.
+        $this->assertTrue(
+                is_null($actualMessage->getLockedUntilUtc()) ||
+                $actualMessage->getLockedUntilUtc() instanceof \DateTime, '$is_null/DateTime(actualMessage->getLockedUntilUtc)');
         $this->assertEquals($expectedMessage->getMessageId(), $actualMessage->getMessageId(), 'getMessageId');
         $this->assertEquals($expectedMessage->getMessageLocation(), $actualMessage->getMessageLocation(), 'getMessageLocation');
         $this->assertEquals($expectedMessage->getReplyTo(), $actualMessage->getReplyTo(), 'getReplyTo');
         $this->assertEquals($expectedMessage->getReplyToSessionId(), $actualMessage->getReplyToSessionId(), 'getReplyToSessionId');
         $this->assertEquals($expectedMessage->getScheduledEnqueueTimeUtc(), $actualMessage->getScheduledEnqueueTimeUtc(), 'getScheduledEnqueueTimeUtc');
-        $this->assertEquals($expectedMessage->getSequenceNumber(), $actualMessage->getSequenceNumber(), 'getSequenceNumber');
+        // Note: The SequenceNumber property is controlled by the server, so cannot compare it.
+        $this->assertTrue(is_int($actualMessage->getSequenceNumber()), 'is_int($actualMessage->getSequenceNumber)');
         $this->assertEquals($expectedMessage->getSessionId(), $actualMessage->getSessionId(), 'getSessionId');
         $this->assertEquals($expectedMessage->getTo(), $actualMessage->getTo(), 'getTo');
 
@@ -140,7 +145,7 @@ class ScenarioTestBase extends IntegrationTestBase
         }
     }
 
-    public static function assertEquals($expected, $actual, $description)
+    static function assertEquals($expected, $actual, $message = '', $delta = 0, $maxDepth = 10, $canonicalize = FALSE, $ignoreCase = FALSE)
     {
         self::write('  assertEquals(\'' .
                 ($expected instanceof \DateTime ?
@@ -149,7 +154,7 @@ class ScenarioTestBase extends IntegrationTestBase
                 ($actual instanceof \DateTime ?
                     $actual->format(Resources::AZURE_DATE_FORMAT) :
                     strval($actual)) . '\', \'' .
-                $description . '\')');
+                $message . '\')');
 
         $effExp = $expected;
         $effAct = $actual;
@@ -161,7 +166,7 @@ class ScenarioTestBase extends IntegrationTestBase
             $effAct = $effAct->setTimezone(new \DateTimeZone('UTC'));
         }
 
-        parent::assertEquals($expected, $actual, $description);
+        parent::assertEquals($expected, $actual, $message, $delta, $maxDepth, $canonicalize, $ignoreCase);
     }
 
     protected static function write($message)

@@ -15,7 +15,7 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   Tests\Unit\WindowsAzure\Services\Queue\Models
+ * @package   Tests\Unit\WindowsAzure\ServiceBus\Models
  * @author    Azure PHP SDK <azurephpsdk@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
@@ -29,7 +29,7 @@ use WindowsAzure\ServiceBus\Models\RuleInfo;
  * Unit tests for class WrapAccessTokenResult
  *
  * @category  Microsoft
- * @package   Tests\Unit\WindowsAzure\Services\Queue\Models
+ * @package   Tests\Unit\WindowsAzure\ServiceBus\Models
  * @author    Azure PHP SDK <azurephpsdk@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
@@ -80,6 +80,68 @@ class RuleInfoTest extends \PHPUnit_Framework_TestCase
 
     }
 
-}
+    /** 
+     * @covers WindowsAzure\ServiceBus\Models\RuleInfo::getFilter
+     * @covers WindowsAzure\ServiceBus\Models\RuleInfo::setFilter
+     */
+    public function testGetSetFilter() {
+        // Setup
+        $expected = 'testFilter';
+        $ruleInfo = new RuleInfo();
 
-?>
+        // Test
+        $ruleInfo->setFilter($expected);
+        $actual = $ruleInfo->getFilter();
+
+        // Assert 
+        $this->assertEquals(
+            $expected,
+            $actual
+        );
+
+    }
+
+
+    /** 
+     * @covers WindowsAzure\ServiceBus\Models\RuleInfo::getAction
+     * @covers WindowsAzure\ServiceBus\Models\RuleInfo::setAction
+     */
+    public function testGetSetAction() {
+        // Setup
+        $expected = 'testAction';
+        $ruleInfo = new RuleInfo();
+
+        // Test
+        $ruleInfo->setAction($expected);
+        $actual = $ruleInfo->getAction();
+
+        // Assert 
+        $this->assertEquals(
+            $expected,
+            $actual
+        );
+
+    }
+
+
+    /** 
+     * @covers WindowsAzure\ServiceBus\Models\RuleInfo::getName
+     * @covers WindowsAzure\ServiceBus\Models\RuleInfo::setName
+     */
+    public function testGetSetName() {
+        // Setup
+        $expected = 'testName';
+        $ruleInfo = new RuleInfo();
+
+        // Test
+        $ruleInfo->setName($expected);
+        $actual = $ruleInfo->getName();
+
+        // Assert 
+        $this->assertEquals(
+            $expected,
+            $actual
+        );
+
+    }
+}
