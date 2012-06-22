@@ -26,9 +26,6 @@ namespace Tests\Functional\WindowsAzure\ServiceBus;
 
 use Tests\Framework\ServiceBusRestProxyTestBase;
 
-// TODO: The tests in this class fail because of
-// https://github.com/WindowsAzure/azure-sdk-for-php/issues/406
-
 class CustomPropertiesMapperTest extends ServiceBusRestProxyTestBase
 {
     public function setUp()
@@ -57,28 +54,14 @@ class CustomPropertiesMapperTest extends ServiceBusRestProxyTestBase
     {
         // Arrange
         $cal = "Thu, 14 Oct 1971 12:34:56 GMT";
-//        $cal = new \DateTime("Thu, 14 Oct 1971 12:34:56 GMT");
-//        $cal->setTimezone(new \DateTimeZone('UTC'));
 
         // Assert
-        //        $this->assertEquals('78;byte', json_encode((byte) 78), 'json_encode((byte) 78)');
-        $this->assertEquals('78', json_encode(78), 'json_encode((byte) 78)');
         $this->assertEquals('"a"', json_encode("a"), 'json_encode("a")');
-        $this->assertEquals('-78', json_encode(-78), 'json_encode((short) -78)');
-        //      $this->assertEquals('78;ushort', json_encode((unsigned short)78, 'json_encode((unsigned short)78');
         $this->assertEquals('-78', json_encode(-78), 'json_encode(-78)');
-        //     $this->assertEquals('78;uint', json_encode(78), 'json_encode(78)');
-        $this->assertEquals('-78', json_encode(-78), 'json_encode((long) -78)');
-        //     $this->assertEquals('78;ulong', json_encode(78), 'json_encode(78)');
-        $this->assertEquals('78.5', json_encode(78.5), 'json_encode((float) 78.5)');
         $this->assertEquals('78.5', json_encode(78.5), 'json_encode(78.5)');
-        //assertEquals('78;decimal', json_encode(78));
         $this->assertEquals('true', json_encode(true), 'json_encode(true)');
         $this->assertEquals('false', json_encode(false), 'json_encode(false)');
- //       $this->assertEquals('"12345678-9abc-def0-9abc-def012345678"', json_encode(new UUID(0x123456789abcdef0L, 0x9abcdef012345678L)), 'json_encode(new UUID(0x123456789abcdef0L, 0x9abcdef012345678L))');
         $this->assertEquals('"Thu, 14 Oct 1971 12:34:56 GMT"', json_encode($cal), 'json_encode($cal)');
-        $this->assertEquals('"Thu, 14 Oct 1971 12:34:56 GMT"', json_encode($cal), 'json_encode($cal->getTime())');
-        //assertEquals('78;date-seconds', json_encode(78));
     }
 
     public function testValuesComeBackAsStringsWhenInQuotes()
@@ -104,33 +87,17 @@ class CustomPropertiesMapperTest extends ServiceBusRestProxyTestBase
     public function testSupportedFormatsHaveExpectedJavaTypes()
     {
         // Arrange
-//        $cal = new \DateTime("Thu, 14 Oct 1971 12:34:56 GMT");
-//        $cal->setTimezone(new \DateTimeZone('UTC'));
         $cal = "Thu, 14 Oct 1971 12:34:56 GMT";
 
         // Act
         $dt = json_decode('"Thu, 14 Oct 1971 12:34:56 GMT"');
 
         // Assert
-        //        $this->assertEquals('78;byte', json_encode((byte) 78), 'json_encode((byte) 78)');
-        // $this->assertEquals((byte) 78, json_decode('78'), 'json_decode("78")');
-        //  $this->assertEquals("a", json_decode('a;char'), 'json_decode("a;char")');
-        //  $this->assertEquals((short) -78, json_decode('-78;short'), 'json_decode("-78;short")');
-        //      $this->assertEquals('78;ushort', json_encode((unsigned short)78, 'json_encode((unsigned short)78');
         $this->assertEquals(-78, json_decode('-78'), 'json_decode("-78")');
-        //     $this->assertEquals('78;uint', json_encode(78), 'json_encode(78)');
-        //    $this->assertEquals((long) -78, json_decode('-78;long'), 'json_decode("-78;long")');
-        //     $this->assertEquals('78;ulong', json_encode(78), 'json_encode(78)');
-        //   $this->assertEquals((float) 78.5, json_decode('78.5;float'), 'json_decode("78.5;float")');
         $this->assertEquals(78.5, json_decode('78.5'), 'json_decode("78.5")');
-        //assertEquals('78;decimal', json_encode(78));
         $this->assertEquals(true, json_decode('true'), 'json_decode("true")');
         $this->assertEquals(false, json_decode('false'), 'json_decode("false")');
-        //    $this->assertEquals(new UUID(0x123456789abcdef0L, 0x9abcdef012345678L, '0x9abcdef012345678L'),
-        //          json_decode('12345678-9abc-def0-9abc-def012345678;uuid'));
-
         $this->assertEquals($cal, $dt, "date");
-        //assertEquals('78;date-seconds', json_encode(78));
     }
 }
 
