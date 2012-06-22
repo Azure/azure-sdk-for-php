@@ -967,7 +967,7 @@ class ServiceBusRestProxyTest extends ServiceBusRestProxyTestBase
         $this->safeDeleteQueue($queueName);
         $this->createQueue($queueInfo);
         $brokeredMessage = new BrokeredMessage();
-        $brokeredMessage->setProperty('hello', '"world"');
+        $brokeredMessage->setProperty('hello', 'world');
         $brokeredMessage->setProperty('foo', 42);
         $this->restProxy->sendQueueMessage($queueName, $brokeredMessage);
         $receiveMessageOptions = new ReceiveMessageOptions();
@@ -983,7 +983,7 @@ class ServiceBusRestProxyTest extends ServiceBusRestProxyTestBase
         // Assert
         $this->assertNotNull($receivedMessage);
         $this->assertEquals(
-            '"world"',
+            'world',
             $receivedMessage->getProperty('hello')
         );
 

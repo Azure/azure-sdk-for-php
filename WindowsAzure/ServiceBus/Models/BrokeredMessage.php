@@ -194,12 +194,15 @@ class BrokeredMessage
      * Sets the value of a custom property. 
      * 
      * @param string $propertyName  The name of the property.
-     * @param string $propertyValue The value of the property.
+     * @param mixed  $propertyValue The value of the property.
      * 
      * @return none
      */
     public function setProperty($propertyName, $propertyValue)
     {
+        Validate::isString($propertyName, 'propertyName');
+        Validate::notNull($propertyValue, 'propertyValue');
+
         $this->_customProperties[$propertyName] = $propertyValue;
     }
 
