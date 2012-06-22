@@ -963,12 +963,21 @@ class ServiceBusRestProxyTest extends ServiceBusRestProxyTestBase
         $queueName = 'testMessageMayHaveCustomProperties';
         $queueDescription = new QueueDescription();
         $queueInfo = new QueueInfo($queueName, $queueDescription);
+        $expectedTestStringValue = 'testStringValue';
+        $expectedTestIntValue = 38;
+        $expectedTestDoubleValue = 3.14159;
+        $expectedTestBooleanValue = true;
+        $expectedTestArrayValue = array(2,3,5,7);
 
         $this->safeDeleteQueue($queueName);
         $this->createQueue($queueInfo);
         $brokeredMessage = new BrokeredMessage();
-        $brokeredMessage->setProperty('hello', '"world"');
-        $brokeredMessage->setProperty('foo', 42);
+        
+        $brokeredMessage->setProperty('testString', $expectedTestStringValue);
+        $brokeredMessage->setProperty('testInt', $expectedTestIntValue);
+        $brokeredMessage->setProperty('testDouble', $expectedTestDoubleValue);
+        $brokeredMessage->setProperty('testBoolean', $expectedTestBooleanValue);
+
         $this->restProxy->sendQueueMessage($queueName, $brokeredMessage);
         $receiveMessageOptions = new ReceiveMessageOptions();
         $receiveMessageOptions->setTimeout(5);
@@ -983,14 +992,25 @@ class ServiceBusRestProxyTest extends ServiceBusRestProxyTestBase
         // Assert
         $this->assertNotNull($receivedMessage);
         $this->assertEquals(
-            '"world"',
-            $receivedMessage->getProperty('hello')
+            $expectedTestStringValue,
+            $receivedMessage->getProperty('testString')
         );
 
         $this->assertEquals(
-            42,
-            $receivedMessage->getProperty('foo')
+            $expectedTestIntValue,
+            $receivedMessage->getProperty('testInt')
         );
+
+        $this->assertEquals(
+            $expectedTestDoubleValue,
+            $receivedMessage->getProperty('testDouble')
+        );
+
+        $this->assertEquals(
+            $expectedTestBooleanValue,
+            $receivedMessage->getProperty('testBoolean')
+        );
+
     }
 }
 
