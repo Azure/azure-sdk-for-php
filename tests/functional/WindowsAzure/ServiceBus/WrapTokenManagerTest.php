@@ -25,19 +25,8 @@
 namespace Tests\Functional\WindowsAzure\ServiceBus;
 
 use Tests\Framework\ServiceBusRestProxyTestBase;
-use WindowsAzure\Common\Configuration;
-use WindowsAzure\Common\ServiceRestProxy;
-use WindowsAzure\Common\Http\IHttpClient;
-use WindowsAzure\Common\Http\Url;
 use WindowsAzure\Common\Internal\IServicesBuilder;
-use WindowsAzure\Common\Internal\Resources;
 use WindowsAzure\Common\Internal\Utilities;
-use WindowsAzure\Common\Internal\Validate;
-use WindowsAzure\Common\Models\GetServicePropertiesResult;
-use WindowsAzure\Common\Models\ServiceProperties;
-use WindowsAzure\ServiceBus\ServiceBusRestProxy;
-use WindowsAzure\ServiceBus\ServiceBusService;
-use WindowsAzure\ServiceBus\ServiceBusSettings;
 use WindowsAzure\ServiceBus\Internal\IWrap;
 use WindowsAzure\ServiceBus\Internal\WrapTokenManager;
 use WindowsAzure\ServiceBus\Models\WrapAccessTokenResult;

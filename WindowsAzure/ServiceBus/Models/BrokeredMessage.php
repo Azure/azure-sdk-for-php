@@ -186,20 +186,24 @@ class BrokeredMessage
      */
     public function getProperty($propertyName)
     {
-        return $this->_customProperties[$propertyName];
+        Validate::isString($propertyName, 'propertyName');
+        return $this->_customProperties[strtolower($propertyName)];
     } 
 
     /**
      * Sets the value of a custom property. 
      * 
      * @param string $propertyName  The name of the property.
-     * @param string $propertyValue The value of the property.
+     * @param mixed  $propertyValue The value of the property.
      * 
      * @return none
      */
     public function setProperty($propertyName, $propertyValue)
     {
-        $this->_customProperties[$propertyName] = $propertyValue;
+        Validate::isString($propertyName, 'propertyName');
+        Validate::notNull($propertyValue, 'propertyValue');
+
+        $this->_customProperties[strtolower($propertyName)] = $propertyValue;
     }
 
     /**
@@ -263,7 +267,7 @@ class BrokeredMessage
      */
     public function getSequenceNumber()
     {
-        $this->_brokerProperties->getSequenceNumber();
+        return $this->_brokerProperties->getSequenceNumber();
     }
 
     /**
@@ -285,7 +289,7 @@ class BrokeredMessage
      */
     public function getTimeToLive()
     {
-        $this->_brokerProperties->getTimeToLive();
+        return $this->_brokerProperties->getTimeToLive();
     }
 
     /**
@@ -373,7 +377,7 @@ class BrokeredMessage
      */
     public function getSessionId()
     {
-        $this->_brokerProperties->getSessionId();
+        return $this->_brokerProperties->getSessionId();
     }
     
     /**
@@ -385,7 +389,7 @@ class BrokeredMessage
      */
     public function setSessionId($sessionId)
     {
-        $this->_brokerProperities->setSessionId($sessionId);
+        $this->_brokerProperties->setSessionId($sessionId);
     }
 
     /**
@@ -451,7 +455,7 @@ class BrokeredMessage
      */
     public function setTo($to)
     {
-        $this->_borkerProeprties->setTo($to);
+        $this->_brokerProperties->setTo($to);
     }
 
     /**

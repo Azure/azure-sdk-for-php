@@ -1,7 +1,7 @@
 <?php
 
 /**
- * LICENSE: Licensed under the Apache License, Version 2.0 (the "License");;
+ * LICENSE: Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  * http://www.apache.org/licenses/LICENSE-2.0
@@ -15,7 +15,7 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   WindowsAzure\ServiceBus\Internal\Atom
+ * @package   WindowsAzure\Common\Internal\Atom
  * @author    Azure PHP SDK <azurephpsdk@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
@@ -31,7 +31,7 @@ use WindowsAzure\Common\Internal\Validate;
  * This class constructs HTTP requests and receive HTTP responses for service bus.
  *
  * @category  Microsoft
- * @package   WindowsAzure\ServiceBus\Internal\Atom
+ * @package   WindowsAzure\Common\Internal\Atom
  * @author    Azure PHP SDK <azurephpsdk@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
