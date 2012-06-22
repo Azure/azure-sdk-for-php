@@ -39,8 +39,22 @@ class Resources
 {
     // @codingStandardsIgnoreStart
     
-    // Emulator connection string
-    const EMULATOR_CONNECTION_STRING = 'BlobEndpoint=127.0.0.1:10000;QueueEndpoint=127.0.0.1:10001;TableEndpoint=127.0.0.1:10002;AccountName=devstoreaccount1;AccountKey=Eby8vdM02xNOcqFlqUwJPLlmEtlCDXJ1OUzFT50uSRZ6IFsuFq2UVErCz4I6tq/K1SZFPTOtr/KBHBeksoGMGw==';
+    // Connection strings
+    const USE_DEVELOPMENT_STORAGE_NAME = 'UseDevelopmentStorage';
+    const DEVELOPMENT_STORAGE_PROXY_URI_NAME = 'DevelopmentStorageProxyUri';
+    const DEFAULT_ENDPOINTS_PROTOCOL_NAME = 'DefaultEndpointsProtocol';
+    const ACCOUNT_NAME_NAME = 'AccountName';
+    const ACCOUNT_KEY_NAME = 'AccountKey';
+    const BLOB_ENDPOINT_NAME = 'BlobEndpoint';
+    const QUEUE_ENDPOINT_NAME = 'QueueEndpoint';
+    const TABLE_ENDPOINT_NAME = 'TableEndpoint';
+    const SHARED_ACCESS_SIGNATURE_NAME = 'SharedAccessSignature';
+    const DEV_STORE_NAME = 'devstoreaccount1';
+    const DEV_STORE_KEY = 'Eby8vdM02xNOcqFlqUwJPLlmEtlCDXJ1OUzFT50uSRZ6IFsuFq2UVErCz4I6tq/K1SZFPTOtr/KBHBeksoGMGw==';
+    const BLOB_BASE_DNS_NAME = 'blob.core.windows.net';
+    const QUEUE_BASE_DNS_NAME = 'queue.core.windows.net';
+    const TABLE_BASE_DNS_NAME = 'table.core.windows.net';
+    const DEV_STORE_CONNECTION_STRING = 'BlobEndpoint=127.0.0.1:10000;QueueEndpoint=127.0.0.1:10001;TableEndpoint=127.0.0.1:10002;AccountName=devstoreaccount1;AccountKey=Eby8vdM02xNOcqFlqUwJPLlmEtlCDXJ1OUzFT50uSRZ6IFsuFq2UVErCz4I6tq/K1SZFPTOtr/KBHBeksoGMGw==';
     
     // Messages
     const INVALID_TYPE_MSG = 'The provided variable should be of type: ';
@@ -82,6 +96,7 @@ class Resources
     const ERROR_CONNECTION_STRING_MISSING_KEY = 'Missing key name';
     const ERROR_CONNECTION_STRING_EMPTY_KEY = 'Empty key name';
     const ERROR_CONNECTION_STRING_MISSING_CHARACTER = "Missing %s character";
+    const ERROR_EMPTY_SETTINGS = 'No keys were found in the connection string';
 
     // HTTP Headers
     const X_MS_HEADER_PREFIX                 = 'x-ms-';
@@ -171,8 +186,6 @@ class Resources
     const AZURE_DATE_FORMAT      = 'D, d M Y H:i:s T';
     const TIMESTAMP_FORMAT       = 'Y-m-d H:i:s';
     const EMULATED               = 'EMULATED';
-    const DEV_STORE_NAME         = 'devstoreaccount1';
-    const DEV_STORE_KEY          = 'Eby8vdM02xNOcqFlqUwJPLlmEtlCDXJ1OUzFT50uSRZ6IFsuFq2UVErCz4I6tq/K1SZFPTOtr/KBHBeksoGMGw==';
     const EMULATOR_BLOB_URI      = '127.0.0.1:10000';
     const EMULATOR_QUEUE_URI     = '127.0.0.1:10001';
     const EMULATOR_TABLE_URI     = '127.0.0.1:10002';
@@ -180,6 +193,10 @@ class Resources
     const SERVICE_MANAGEMENT_URL = 'https://management.core.windows.net';
     const HTTP_SCHEME            = 'http';
     const HTTPS_SCHEME           = 'https';
+    const STORAGE_SERVIE_CONNECTION_STRING = 'storage service connection string';
+    const SETTING_NAME = 'SettingName';
+    const SETTING_CONSTRAINT = 'SettingConstraint';
+    const DEV_STORE_URI = 'http://127.0.0.1';
     
     // Xml Namespaces
     const WA_XML_NAMESPACE   = 'http://schemas.microsoft.com/windowsazure';
