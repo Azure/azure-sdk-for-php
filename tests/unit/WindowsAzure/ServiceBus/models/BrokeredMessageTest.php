@@ -173,7 +173,7 @@ class BrokeredMessageTest extends \PHPUnit_Framework_TestCase
         // Test
         $brokeredMessage->setProperty($testCustomPropertyKey, $expected);
         $customProperties = $brokeredMessage->getProperties();
-        $actual = $customProperties[$testCustomPropertyKey];
+        $actual = $customProperties[strtolower($testCustomPropertyKey)];
 
         // Assert 
         $this->assertEquals(

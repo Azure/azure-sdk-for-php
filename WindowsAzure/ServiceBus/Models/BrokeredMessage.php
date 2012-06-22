@@ -187,7 +187,8 @@ class BrokeredMessage
      */
     public function getProperty($propertyName)
     {
-        return $this->_customProperties[$propertyName];
+        Validate::isString($propertyName, 'propertyName');
+        return $this->_customProperties[strtolower($propertyName)];
     } 
 
     /**
@@ -203,7 +204,7 @@ class BrokeredMessage
         Validate::isString($propertyName, 'propertyName');
         Validate::notNull($propertyValue, 'propertyValue');
 
-        $this->_customProperties[$propertyName] = $propertyValue;
+        $this->_customProperties[strtolower($propertyName)] = $propertyValue;
     }
 
     /**
