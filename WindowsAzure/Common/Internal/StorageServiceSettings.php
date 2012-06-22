@@ -28,7 +28,8 @@ use WindowsAzure\Common\Internal\Resources;
 
 /**
  * Represents the settings used to sign and access a request against the storage 
- * service.
+ * service. For more information about storage service connection strings check this
+ * page: http://msdn.microsoft.com/en-us/library/ee758697
  *
  * @category  Microsoft
  * @package   WindowsAzure\Common\Internal
@@ -76,23 +77,66 @@ class StorageServiceSettings
     private $_tableEndpointUri;
     
     /**
-     * Devstore flag validation
+     * @var StorageServiceSettings
+     */
+    private static $_devStoreAccount;
+    
+    /**
+     * Validator for the UseDevelopmentStorage setting. Must be "true".
      * 
      * @var array
      */
     private static $_useDevelopmentStorageSetting;
     
     /**
-     * Devstore proxy uri validation.
+     * Validator for the DevelopmentStorageProxyUri setting. Must be a valid Uri.
      * 
      * @var array
      */
     private static $_developmentStorageProxyUriSetting;
     
     /**
-     * @var StorageServiceSettings
+     * Validator for the DefaultEndpointsProtocol setting. Must be either "http" 
+     * or "https".
+     * 
+     * @var array
      */
-    private static $_devStoreAccount;
+    private static $_defaultEndpointsProtocolSetting;
+    
+    /**
+     * Validator for the AccountName setting. No restrictions.
+     * 
+     * @var array
+     */
+    private static $_accountNameSetting;
+    
+    /**
+     * Validator for the AccountKey setting. Must be a valid base64 string.
+     * 
+     * @var array
+     */
+    private static $_accountKeySetting;
+    
+    /**
+     * Validator for the BlobEndpoint setting. Must be a valid Uri.
+     * 
+     * @var array
+     */
+    private static $_blobEndpointSetting;
+    
+    /**
+     * Validator for the QueueEndpoint setting. Must be a valid Uri.
+     * 
+     * @var array
+     */
+    private static $_queueEndpointSetting;
+    
+    /**
+     * Validator for the TableEndpoint setting. Must be a valid Uri.
+     * 
+     * @var array
+     */
+    private static $_tableEndpointSetting;
     
     /**
      * Initializes static members of the class.
@@ -113,6 +157,37 @@ class StorageServiceSettings
         
         self::$_developmentStorageProxyUriSetting = self::_settingWithFunc(
             Resources::DEVELOPMENT_STORAGE_PROXY_URI_NAME,
+            $isValidUri
+        );
+        
+        self::$_defaultEndpointsProtocolSetting = self::_setting(
+            Resources::DEFAULT_ENDPOINTS_PROTOCOL_NAME,
+            'http', 'https'
+        );
+        
+        self::$_accountNameSetting = self::_settingWithFunc(
+            Resources::ACCOUNT_NAME_NAME,
+            function ($name) { return true; }
+        );
+        
+        self::$_accountKeySetting = self::_settingWithFunc(
+            Resources::ACCOUNT_KEY_NAME,
+            // base64_decode will return false if the $key is not in base64 format.
+            function ($key) { return base64_decode($key, true); }
+        );
+        
+        self::$_blobEndpointSetting = self::_settingWithFunc(
+            Resources::BLOB_ENDPOINT_NAME,
+            $isValidUri
+        );
+        
+        self::$_queueEndpointSetting = self::_settingWithFunc(
+            Resources::QUEUE_ENDPOINT_NAME,
+            $isValidUri
+        );
+        
+        self::$_tableEndpointSetting = self::_settingWithFunc(
+            Resources::TABLE_ENDPOINT_NAME,
             $isValidUri
         );
     }
@@ -329,6 +404,23 @@ class StorageServiceSettings
         
         return self::$_devStoreAccount;
     }
+    
+    /**
+     * Gets the default service endpoint using the specified protocol and account 
+     * name.
+     * 
+     * @param array  $settings The service settings.
+     * @param string $dns      The service DNS.
+     * 
+     * @return string
+     */
+    private static function _getDefaultServiceEndpoint($settings, $dns)
+    {
+        $scheme      = $settings[Resources::DEFAULT_ENDPOINTS_PROTOCOL_NAME];
+        $accountName = $settings[Resources::ACCOUNT_NAME_NAME];
+        
+        return sprintf(Resources::SERVICE_URI_FORMAT, $scheme, $accountName, $dns);
+    }
 
     /**
      * Creates a StorageServiceSettings object from the given connection string.
@@ -351,12 +443,60 @@ class StorageServiceSettings
             self::_allRequired(self::$_useDevelopmentStorageSetting),
             self::_optional(self::$_developmentStorageProxyUriSetting)
         );
-        
         if ($matchedSpecs) {
             $settingName = Resources::DEVELOPMENT_STORAGE_PROXY_URI_NAME;
             $proxyUri    = Utilities::tryGetValue($tokenizedSettings, $settingName);
             
             $storageServiceSettings = self::_getDevelopmentStorageAccount($proxyUri);
+        }
+        
+        // automatic case
+        $matchedSpecs = self::_matchedSpecification(
+            $tokenizedSettings,
+            self::_allRequired(
+                self::$_defaultEndpointsProtocolSetting,
+                self::$_accountNameSetting,
+                self::$_accountKeySetting
+            ),
+            self::_optional(
+                self::$_blobEndpointSetting,
+                self::$_queueEndpointSetting,
+                self::$_tableEndpointSetting
+            )
+        );
+        if ($matchedSpecs) {
+            $blobEndpoint = Utilities::tryGetValue(
+                $tokenizedSettings,
+                Resources::BLOB_ENDPOINT_NAME,
+                self::_getDefaultServiceEndpoint(
+                    $tokenizedSettings,
+                    Resources::BLOB_BASE_DNS_NAME
+                )
+            );
+            $queueEndpoint = Utilities::tryGetValue(
+                $tokenizedSettings,
+                Resources::QUEUE_ENDPOINT_NAME,
+                self::_getDefaultServiceEndpoint(
+                    $tokenizedSettings,
+                    Resources::QUEUE_BASE_DNS_NAME
+                )
+            );
+            $tableEndpoint = Utilities::tryGetValue(
+                $tokenizedSettings,
+                Resources::TABLE_ENDPOINT_NAME,
+                self::_getDefaultServiceEndpoint(
+                    $tokenizedSettings,
+                    Resources::TABLE_BASE_DNS_NAME
+                )
+            );
+            
+            $storageServiceSettings = new StorageServiceSettings(
+                $tokenizedSettings[Resources::ACCOUNT_NAME_NAME],
+                $tokenizedSettings[Resources::ACCOUNT_KEY_NAME],
+                $blobEndpoint,
+                $queueEndpoint,
+                $tableEndpoint
+            );
         }
         
         return $storageServiceSettings;

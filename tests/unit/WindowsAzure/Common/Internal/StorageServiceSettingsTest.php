@@ -25,6 +25,7 @@
 namespace Tests\Unit\WindowsAzure\Common\Internal;
 use WindowsAzure\Common\Internal\StorageServiceSettings;
 use WindowsAzure\Common\Internal\Resources;
+use Tests\Framework\TestResources;
 
 /**
  * Unit tests for class StorageServiceSettings
@@ -39,6 +40,8 @@ use WindowsAzure\Common\Internal\Resources;
  */
 class StorageServiceSettingsTest extends \PHPUnit_Framework_TestCase
 {
+    private $_accountName = 'mytestaccount';
+    
     /**
      * @covers WindowsAzure\Common\Internal\StorageServiceSettings::createFromConnectionString
      * @covers WindowsAzure\Common\Internal\StorageServiceSettings::developmentStorageAccount
@@ -239,6 +242,253 @@ class StorageServiceSettingsTest extends \PHPUnit_Framework_TestCase
         
         // Assert
         $this->assertEquals($expected, $actual);
+    }
+    
+    /**
+     * @covers WindowsAzure\Common\Internal\StorageServiceSettings::createFromConnectionString
+     * @covers WindowsAzure\Common\Internal\StorageServiceSettings::init
+     * @covers WindowsAzure\Common\Internal\StorageServiceSettings::__construct
+     * @covers WindowsAzure\Common\Internal\StorageServiceSettings::_getDefaultServiceEndpoint
+     * @covers WindowsAzure\Common\Internal\StorageServiceSettings::_getValidator
+     * @covers WindowsAzure\Common\Internal\StorageServiceSettings::_optional
+     * @covers WindowsAzure\Common\Internal\StorageServiceSettings::_allRequired
+     * @covers WindowsAzure\Common\Internal\StorageServiceSettings::_setting
+     * @covers WindowsAzure\Common\Internal\StorageServiceSettings::_settingWithFunc
+     * @covers WindowsAzure\Common\Internal\StorageServiceSettings::_matchedSpecification
+     */
+    public function testCreateFromConnectionStringWithAutomatic()
+    {
+        // Setup
+        $protocol = 'https';
+        $expectedName = $this->_accountName;
+        $expectedKey = TestResources::KEY4;
+        $connectionString  = "DefaultEndpointsProtocol=$protocol;AccountName=$expectedName;AccountKey=$expectedKey";
+        $expectedBlobEndpoint = sprintf(Resources::SERVICE_URI_FORMAT, $protocol, $expectedName, Resources::BLOB_BASE_DNS_NAME);
+        $expectedQueueEndpoint = sprintf(Resources::SERVICE_URI_FORMAT, $protocol, $expectedName, Resources::QUEUE_BASE_DNS_NAME);
+        $expectedTableEndpoint = sprintf(Resources::SERVICE_URI_FORMAT, $protocol, $expectedName, Resources::TABLE_BASE_DNS_NAME);
+        
+        // Test
+        $actual = StorageServiceSettings::createFromConnectionString($connectionString);
+        
+        // Assert
+        $this->assertEquals($expectedName, $actual->getName());
+        $this->assertEquals($expectedKey, $actual->getKey());
+        $this->assertEquals($expectedBlobEndpoint, $actual->getBlobEndpointUri());
+        $this->assertEquals($expectedQueueEndpoint, $actual->getQueueEndpointUri());
+        $this->assertEquals($expectedTableEndpoint, $actual->getTableEndpointUri());
+    }
+    
+    /**
+     * @covers WindowsAzure\Common\Internal\StorageServiceSettings::createFromConnectionString
+     * @covers WindowsAzure\Common\Internal\StorageServiceSettings::init
+     * @covers WindowsAzure\Common\Internal\StorageServiceSettings::__construct
+     * @covers WindowsAzure\Common\Internal\StorageServiceSettings::_getDefaultServiceEndpoint
+     * @covers WindowsAzure\Common\Internal\StorageServiceSettings::_getValidator
+     * @covers WindowsAzure\Common\Internal\StorageServiceSettings::_optional
+     * @covers WindowsAzure\Common\Internal\StorageServiceSettings::_allRequired
+     * @covers WindowsAzure\Common\Internal\StorageServiceSettings::_setting
+     * @covers WindowsAzure\Common\Internal\StorageServiceSettings::_settingWithFunc
+     * @covers WindowsAzure\Common\Internal\StorageServiceSettings::_matchedSpecification
+     */
+    public function testCreateFromConnectionStringWithTableEndpointSpecified()
+    {
+        // Setup
+        $protocol = 'https';
+        $expectedName = $this->_accountName;
+        $expectedKey = TestResources::KEY4;
+        $expectedTableEndpoint = 'http://myprivatedns.com';
+        $expectedBlobEndpoint = sprintf(Resources::SERVICE_URI_FORMAT, $protocol, $expectedName, Resources::BLOB_BASE_DNS_NAME);
+        $expectedQueueEndpoint = sprintf(Resources::SERVICE_URI_FORMAT, $protocol, $expectedName, Resources::QUEUE_BASE_DNS_NAME);
+        $connectionString  = "DefaultEndpointsProtocol=$protocol;AccountName=$expectedName;AccountKey=$expectedKey;TableEndpoint=$expectedTableEndpoint";
+        
+        // Test
+        $actual = StorageServiceSettings::createFromConnectionString($connectionString);
+        
+        // Assert
+        $this->assertEquals($expectedName, $actual->getName());
+        $this->assertEquals($expectedKey, $actual->getKey());
+        $this->assertEquals($expectedBlobEndpoint, $actual->getBlobEndpointUri());
+        $this->assertEquals($expectedQueueEndpoint, $actual->getQueueEndpointUri());
+        $this->assertEquals($expectedTableEndpoint, $actual->getTableEndpointUri());
+    }
+    
+    /**
+     * @covers WindowsAzure\Common\Internal\StorageServiceSettings::createFromConnectionString
+     * @covers WindowsAzure\Common\Internal\StorageServiceSettings::init
+     * @covers WindowsAzure\Common\Internal\StorageServiceSettings::__construct
+     * @covers WindowsAzure\Common\Internal\StorageServiceSettings::_getDefaultServiceEndpoint
+     * @covers WindowsAzure\Common\Internal\StorageServiceSettings::_getValidator
+     * @covers WindowsAzure\Common\Internal\StorageServiceSettings::_optional
+     * @covers WindowsAzure\Common\Internal\StorageServiceSettings::_allRequired
+     * @covers WindowsAzure\Common\Internal\StorageServiceSettings::_setting
+     * @covers WindowsAzure\Common\Internal\StorageServiceSettings::_settingWithFunc
+     * @covers WindowsAzure\Common\Internal\StorageServiceSettings::_matchedSpecification
+     */
+    public function testCreateFromConnectionStringWithBlobEndpointSpecified()
+    {
+        // Setup
+        $protocol = 'https';
+        $expectedName = $this->_accountName;
+        $expectedKey = TestResources::KEY4;
+        $expectedTableEndpoint = sprintf(Resources::SERVICE_URI_FORMAT, $protocol, $expectedName, Resources::TABLE_BASE_DNS_NAME);
+        $expectedBlobEndpoint = 'http://myprivatedns.com';
+        $expectedQueueEndpoint = sprintf(Resources::SERVICE_URI_FORMAT, $protocol, $expectedName, Resources::QUEUE_BASE_DNS_NAME);
+        $connectionString  = "DefaultEndpointsProtocol=$protocol;BlobEndpoint=$expectedBlobEndpoint;AccountName=$expectedName;AccountKey=$expectedKey";
+        
+        // Test
+        $actual = StorageServiceSettings::createFromConnectionString($connectionString);
+        
+        // Assert
+        $this->assertEquals($expectedName, $actual->getName());
+        $this->assertEquals($expectedKey, $actual->getKey());
+        $this->assertEquals($expectedBlobEndpoint, $actual->getBlobEndpointUri());
+        $this->assertEquals($expectedQueueEndpoint, $actual->getQueueEndpointUri());
+        $this->assertEquals($expectedTableEndpoint, $actual->getTableEndpointUri());
+    }
+    
+    /**
+     * @covers WindowsAzure\Common\Internal\StorageServiceSettings::createFromConnectionString
+     * @covers WindowsAzure\Common\Internal\StorageServiceSettings::init
+     * @covers WindowsAzure\Common\Internal\StorageServiceSettings::__construct
+     * @covers WindowsAzure\Common\Internal\StorageServiceSettings::_getDefaultServiceEndpoint
+     * @covers WindowsAzure\Common\Internal\StorageServiceSettings::_getValidator
+     * @covers WindowsAzure\Common\Internal\StorageServiceSettings::_optional
+     * @covers WindowsAzure\Common\Internal\StorageServiceSettings::_allRequired
+     * @covers WindowsAzure\Common\Internal\StorageServiceSettings::_setting
+     * @covers WindowsAzure\Common\Internal\StorageServiceSettings::_settingWithFunc
+     * @covers WindowsAzure\Common\Internal\StorageServiceSettings::_matchedSpecification
+     */
+    public function testCreateFromConnectionStringWithQueueEndpointSpecified()
+    {
+        // Setup
+        $protocol = 'https';
+        $expectedName = $this->_accountName;
+        $expectedKey = TestResources::KEY4;
+        $expectedTableEndpoint = sprintf(Resources::SERVICE_URI_FORMAT, $protocol, $expectedName, Resources::TABLE_BASE_DNS_NAME);
+        $expectedBlobEndpoint = sprintf(Resources::SERVICE_URI_FORMAT, $protocol, $expectedName, Resources::BLOB_BASE_DNS_NAME);
+        $expectedQueueEndpoint = 'http://myprivatedns.com';
+        $connectionString  = "QueueEndpoint=$expectedQueueEndpoint;DefaultEndpointsProtocol=$protocol;AccountName=$expectedName;AccountKey=$expectedKey";
+        
+        // Test
+        $actual = StorageServiceSettings::createFromConnectionString($connectionString);
+        
+        // Assert
+        $this->assertEquals($expectedName, $actual->getName());
+        $this->assertEquals($expectedKey, $actual->getKey());
+        $this->assertEquals($expectedBlobEndpoint, $actual->getBlobEndpointUri());
+        $this->assertEquals($expectedQueueEndpoint, $actual->getQueueEndpointUri());
+        $this->assertEquals($expectedTableEndpoint, $actual->getTableEndpointUri());
+    }
+    
+    /**
+     * @covers WindowsAzure\Common\Internal\StorageServiceSettings::createFromConnectionString
+     * @covers WindowsAzure\Common\Internal\StorageServiceSettings::init
+     * @covers WindowsAzure\Common\Internal\StorageServiceSettings::__construct
+     * @covers WindowsAzure\Common\Internal\StorageServiceSettings::_getDefaultServiceEndpoint
+     * @covers WindowsAzure\Common\Internal\StorageServiceSettings::_getValidator
+     * @covers WindowsAzure\Common\Internal\StorageServiceSettings::_optional
+     * @covers WindowsAzure\Common\Internal\StorageServiceSettings::_allRequired
+     * @covers WindowsAzure\Common\Internal\StorageServiceSettings::_setting
+     * @covers WindowsAzure\Common\Internal\StorageServiceSettings::_settingWithFunc
+     * @covers WindowsAzure\Common\Internal\StorageServiceSettings::_matchedSpecification
+     */
+    public function testCreateFromConnectionStringWithQueueAndBlobEndpointSpecified()
+    {
+        // Setup
+        $protocol = 'https';
+        $expectedName = $this->_accountName;
+        $expectedKey = TestResources::KEY4;
+        $expectedTableEndpoint = sprintf(Resources::SERVICE_URI_FORMAT, $protocol, $expectedName, Resources::TABLE_BASE_DNS_NAME);
+        $expectedBlobEndpoint = 'http://myprivateblobdns.com';
+        $expectedQueueEndpoint = 'http://myprivatequeuedns.com';
+        $connectionString  = "QueueEndpoint=$expectedQueueEndpoint;DefaultEndpointsProtocol=$protocol;AccountName=$expectedName;AccountKey=$expectedKey;BlobEndpoint=$expectedBlobEndpoint";
+        
+        // Test
+        $actual = StorageServiceSettings::createFromConnectionString($connectionString);
+        
+        // Assert
+        $this->assertEquals($expectedName, $actual->getName());
+        $this->assertEquals($expectedKey, $actual->getKey());
+        $this->assertEquals($expectedBlobEndpoint, $actual->getBlobEndpointUri());
+        $this->assertEquals($expectedQueueEndpoint, $actual->getQueueEndpointUri());
+        $this->assertEquals($expectedTableEndpoint, $actual->getTableEndpointUri());
+    }
+    
+    /**
+     * @covers WindowsAzure\Common\Internal\StorageServiceSettings::createFromConnectionString
+     * @covers WindowsAzure\Common\Internal\StorageServiceSettings::init
+     * @covers WindowsAzure\Common\Internal\StorageServiceSettings::__construct
+     * @covers WindowsAzure\Common\Internal\StorageServiceSettings::_getDefaultServiceEndpoint
+     * @covers WindowsAzure\Common\Internal\StorageServiceSettings::_getValidator
+     * @covers WindowsAzure\Common\Internal\StorageServiceSettings::_optional
+     * @covers WindowsAzure\Common\Internal\StorageServiceSettings::_allRequired
+     * @covers WindowsAzure\Common\Internal\StorageServiceSettings::_setting
+     * @covers WindowsAzure\Common\Internal\StorageServiceSettings::_settingWithFunc
+     * @covers WindowsAzure\Common\Internal\StorageServiceSettings::_matchedSpecification
+     */
+    public function testCreateFromConnectionStringWithAutomaticMissingProtocolFail()
+    {
+        // Setup
+        $expectedName = $this->_accountName;
+        $expectedKey = TestResources::KEY4;
+        $connectionString  = "AccountName=$expectedName;AccountKey=$expectedKey";
+        
+        // Test
+        $actual = StorageServiceSettings::createFromConnectionString($connectionString);
+        
+        // Assert
+        $this->assertNull($actual);
+    }
+    
+    /**
+     * @covers WindowsAzure\Common\Internal\StorageServiceSettings::createFromConnectionString
+     * @covers WindowsAzure\Common\Internal\StorageServiceSettings::init
+     * @covers WindowsAzure\Common\Internal\StorageServiceSettings::__construct
+     * @covers WindowsAzure\Common\Internal\StorageServiceSettings::_getDefaultServiceEndpoint
+     * @covers WindowsAzure\Common\Internal\StorageServiceSettings::_getValidator
+     * @covers WindowsAzure\Common\Internal\StorageServiceSettings::_optional
+     * @covers WindowsAzure\Common\Internal\StorageServiceSettings::_allRequired
+     * @covers WindowsAzure\Common\Internal\StorageServiceSettings::_setting
+     * @covers WindowsAzure\Common\Internal\StorageServiceSettings::_settingWithFunc
+     * @covers WindowsAzure\Common\Internal\StorageServiceSettings::_matchedSpecification
+     */
+    public function testCreateFromConnectionStringWithAutomaticMissingAccountNameFail()
+    {
+        // Setup
+        $expectedKey = TestResources::KEY4;
+        $connectionString  = "DefaultEndpointsProtocol=http;AccountKey=$expectedKey";
+        
+        // Test
+        $actual = StorageServiceSettings::createFromConnectionString($connectionString);
+        
+        // Assert
+        $this->assertNull($actual);
+    }
+    
+    /**
+     * @covers WindowsAzure\Common\Internal\StorageServiceSettings::createFromConnectionString
+     * @covers WindowsAzure\Common\Internal\StorageServiceSettings::init
+     * @covers WindowsAzure\Common\Internal\StorageServiceSettings::__construct
+     * @covers WindowsAzure\Common\Internal\StorageServiceSettings::_getDefaultServiceEndpoint
+     * @covers WindowsAzure\Common\Internal\StorageServiceSettings::_getValidator
+     * @covers WindowsAzure\Common\Internal\StorageServiceSettings::_optional
+     * @covers WindowsAzure\Common\Internal\StorageServiceSettings::_allRequired
+     * @covers WindowsAzure\Common\Internal\StorageServiceSettings::_setting
+     * @covers WindowsAzure\Common\Internal\StorageServiceSettings::_settingWithFunc
+     * @covers WindowsAzure\Common\Internal\StorageServiceSettings::_matchedSpecification
+     */
+    public function testCreateFromConnectionStringWithAutomaticCorruptedAccountKeyFail()
+    {
+        // Setup
+        $expectedName = $this->_accountName;
+        $expectedKey = '__A&*INVALID-@Key';
+        $connectionString  = "DefaultEndpointsProtocol=http;AccountName=$expectedName;AccountKey=$expectedKey";
+        
+        // Test
+        $actual = StorageServiceSettings::createFromConnectionString($connectionString);
+        
+        // Assert
+        $this->assertNull($actual);
     }
 }
 
