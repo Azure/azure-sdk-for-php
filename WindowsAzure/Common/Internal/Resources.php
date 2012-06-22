@@ -76,6 +76,12 @@ class Resources
     const MISSING_CONFIG_SETTING_KEY_MSG = "Missing configuration setting %s which is required to create %sRestProxy.";
     const MISSING_CONFIG_SETTING_VALUE_MSG = "The value of configuration setting %s can't be null or empty.";
     const INSTANCE_TYPE_VALIDATION_MSG = 'The type of %s is %s but is expected to be %s.';
+    const MISSING_CONNECTION_STRING_CHAR = "Missing %s character";
+    const ERROR_PARSING_STRING = "'%s' at position %d.";
+    const INVALID_CONNECTION_STRING = "Argument '%s' is not a valid connection string: '%s'";
+    const ERROR_CONNECTION_STRING_MISSING_KEY = 'Missing key name';
+    const ERROR_CONNECTION_STRING_EMPTY_KEY = 'Empty key name';
+    const ERROR_CONNECTION_STRING_MISSING_CHARACTER = "Missing %s character";
 
     // HTTP Headers
     const X_MS_HEADER_PREFIX                 = 'x-ms-';
