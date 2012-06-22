@@ -25,6 +25,7 @@
 namespace Tests\Functional\WindowsAzure\ServiceBus;
 
 use Tests\Functional\WindowsAzure\ServiceBus\ScenarioTestBase;
+use WindowsAzure\Common\ServiceException;
 use WindowsAzure\ServiceBus\Models\BrokeredMessage;
 use WindowsAzure\ServiceBus\Models\BrokerProperties;
 use WindowsAzure\ServiceBus\Models\ListQueuesOptions;
@@ -197,9 +198,7 @@ class ServiceBusQueueTest extends ScenarioTestBase
 
         // Get the first unlocked message
 
-        // TODO: https://github.com/WindowsAzure/azure-sdk-for-php/issues/491
-//        $message1again = $this->restProxy->receiveQueueMessage($this->queueName);
-        $message1again = $this->restProxy->receiveQueueMessage($this->queueName, new ReceiveMessageOptions());
+        $message1again = $this->restProxy->receiveQueueMessage($this->queueName);
         $expectedCount--;
         // Should be the original, now that it is unlocked
         $this->compareMessages($expectedMessages[0], $message1again);

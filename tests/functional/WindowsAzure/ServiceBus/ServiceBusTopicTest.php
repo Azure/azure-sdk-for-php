@@ -348,9 +348,7 @@ class ServiceBusTopicTest extends ScenarioTestBase
 
         $messageId = 2;
         while ($expectedCount > 0) {
-            // TODO: https://github.com/WindowsAzure/azure-sdk-for-php/issues/491
-//            $message3 = $this->restProxy->receiveSubscriptionMessage($this->topicName, $subscriptionName);
-            $message3 = $this->restProxy->receiveSubscriptionMessage($this->topicName, $subscriptionName, new ReceiveMessageOptions());
+            $message3 = $this->restProxy->receiveSubscriptionMessage($this->topicName, $subscriptionName);
             $expectedCount--;
             self::write('Got message #' . $messageId . ', Message count: ' . $messageCount);
             $this->compareMessages($expectedMessages[$messageId], $message3, $expCustomProps[$messageId]);
