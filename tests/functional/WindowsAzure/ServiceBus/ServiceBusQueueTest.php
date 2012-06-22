@@ -25,10 +25,7 @@
 namespace Tests\Functional\WindowsAzure\ServiceBus;
 
 use Tests\Functional\WindowsAzure\ServiceBus\ScenarioTestBase;
-use WindowsAzure\Common\ServiceException ;
-use WindowsAzure\Common\Internal\Resources;
-use WindowsAzure\Common\Internal\Utilities;
-use WindowsAzure\ServiceBus\ServiceBusService;
+use WindowsAzure\Common\ServiceException;
 use WindowsAzure\ServiceBus\Models\BrokeredMessage;
 use WindowsAzure\ServiceBus\Models\BrokerProperties;
 use WindowsAzure\ServiceBus\Models\ListQueuesOptions;
@@ -96,15 +93,15 @@ class ServiceBusQueueTest extends ScenarioTestBase
         }
 
         $q = new QueueInfo($this->queueName);
-        $q->getQueueDescription()->setEnableBatchedOperations(true);
-        $q->getQueueDescription()->setMaxDeliveryCount(10);
-        $q->getQueueDescription()->setMaxSizeInMegabytes(1024);
-        $q->getQueueDescription()->setRequiresDuplicateDetection(true);
+        $q->setEnableBatchedOperations(true);
+        $q->setMaxDeliveryCount(10);
+        $q->setMaxSizeInMegabytes(1024);
+        $q->setRequiresDuplicateDetection(true);
 
         self::write('Creating queue ' . $this->queueName);
 
         $this->restProxy->createQueue($q);
-        $this->restProxy->getQueue($this->queueName)->getQueueInfo();
+        $this->restProxy->getQueue($this->queueName);
     }
 
     /**
@@ -128,10 +125,7 @@ class ServiceBusQueueTest extends ScenarioTestBase
 
     private function createIssueMessage($issueId, $issueBody, $label, $messageLocation)
     {
-        // TODO: https://github.com/WindowsAzure/azure-sdk-for-php/issues/394
-//        $message = new BrokeredMessage($issueBody);
-        $message = new BrokeredMessage();
-        $message->setBody($issueBody);
+        $message = new BrokeredMessage($issueBody);
         $message->setContentType('text/xml');
         $message->setLabel($label);
         $message->setReplyTo('1@1.com');
@@ -171,7 +165,7 @@ class ServiceBusQueueTest extends ScenarioTestBase
     {
         $expectedCount = count($expectedMessages);
         self::write('Receiving queue messages ' . $this->queueName);
-        $messageCount = $this->restProxy->getQueue($this->queueName)->getQueueInfo()->getQueueDescription()->getMessageCount();
+        $messageCount = $this->restProxy->getQueue($this->queueName)->getMessageCount();
         self::write('Before getting any messages, Message count: ' . $messageCount);
         $this->assertEquals($expectedCount, $messageCount, 'Before getting any messages');
 
@@ -180,7 +174,7 @@ class ServiceBusQueueTest extends ScenarioTestBase
         $message = $this->restProxy->receiveQueueMessage($this->queueName, $this->PEEK_LOCK);
         $this->compareMessages($expectedMessages[0], $message);
 
-        $messageCount = $this->restProxy->getQueue($this->queueName)->getQueueInfo()->getQueueDescription()->getMessageCount();
+        $messageCount = $this->restProxy->getQueue($this->queueName)->getMessageCount();
         self::write('Peek locked first message, Message count: ' . $messageCount);
         $this->assertEquals($expectedCount, $messageCount, 'Peek locked first message, count should not change');
 
@@ -190,7 +184,7 @@ class ServiceBusQueueTest extends ScenarioTestBase
         $expectedCount--;
         $this->compareMessages($expectedMessages[1], $message2);
 
-        $messageCount = $this->restProxy->getQueue($this->queueName)->getQueueInfo()->getQueueDescription()->getMessageCount();
+        $messageCount = $this->restProxy->getQueue($this->queueName)->getMessageCount();
         self::write('RECEIVE_AND_DELETE second message, Message count: ' . $messageCount);
         $this->assertEquals($expectedCount, $messageCount, 'RECEIVE_AND_DELETE second message, count decrements');
 
@@ -198,20 +192,18 @@ class ServiceBusQueueTest extends ScenarioTestBase
 
         $this->restProxy->unlockMessage($message);
 
-        $messageCount = $this->restProxy->getQueue($this->queueName)->getQueueInfo()->getQueueDescription()->getMessageCount();
+        $messageCount = $this->restProxy->getQueue($this->queueName)->getMessageCount();
         self::write('Unlocked first message, Message count: ' . $messageCount);
         $this->assertEquals($expectedCount, $messageCount, 'Unlocked first message, count stays the same');
 
         // Get the first unlocked message
 
-        // TODO: https://github.com/WindowsAzure/azure-sdk-for-php/issues/429
-//        $message3 = $this->restProxy->receiveQueueMessage($this->queueName);
-        $message1again = $this->restProxy->receiveQueueMessage($this->queueName, new ReceiveMessageOptions());
+        $message1again = $this->restProxy->receiveQueueMessage($this->queueName);
         $expectedCount--;
         // Should be the original, now that it is unlocked
         $this->compareMessages($expectedMessages[0], $message1again);
 
-        $messageCount = $this->restProxy->getQueue($this->queueName)->getQueueInfo()->getQueueDescription()->getMessageCount();
+        $messageCount = $this->restProxy->getQueue($this->queueName)->getMessageCount();
         self::write('got first message again, Message count: ' . $messageCount);
         $this->assertEquals($expectedCount, $messageCount, 'Got message one again (destructive), count should decrease');
 
@@ -229,14 +221,14 @@ class ServiceBusQueueTest extends ScenarioTestBase
         $message3 = $this->restProxy->receiveQueueMessage($this->queueName, $this->PEEK_LOCK);
         $this->compareMessages($expectedMessages[2], $message3);
 
-        $messageCount = $this->restProxy->getQueue($this->queueName)->getQueueInfo()->getQueueDescription()->getMessageCount();
+        $messageCount = $this->restProxy->getQueue($this->queueName)->getMessageCount();
         self::write('Got thrid message, Message count: ' . $messageCount);
         $this->assertEquals($expectedCount, $messageCount, 'Peeked thrid message, count should not change');
 
         $this->restProxy->deleteMessage($message3);
         $expectedCount--;
 
-        $messageCount = $this->restProxy->getQueue($this->queueName)->getQueueInfo()->getQueueDescription()->getMessageCount();
+        $messageCount = $this->restProxy->getQueue($this->queueName)->getMessageCount();
         self::write('Deleted thrid message, Message count: ' . $messageCount);
         $this->assertEquals($expectedCount, $messageCount, 'Deleted thrid message, count decrements');
 
@@ -246,7 +238,7 @@ class ServiceBusQueueTest extends ScenarioTestBase
         $expectedCount--;
         $this->compareMessages($expectedMessages[3], $message4);
 
-        $messageCount = $this->restProxy->getQueue($this->queueName)->getQueueInfo()->getQueueDescription()->getMessageCount();
+        $messageCount = $this->restProxy->getQueue($this->queueName)->getMessageCount();
         self::write('Got fourth message, Message count: ' . $messageCount);
         $this->assertEquals($expectedCount, $messageCount, 'Got fourth message, count should decrement');
     }

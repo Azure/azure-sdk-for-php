@@ -25,13 +25,6 @@
 namespace Tests\Functional\WindowsAzure\ServiceBus;
 
 use Tests\Framework\ServiceBusRestProxyTestBase;
-use WindowsAzure\Resources;
-use WindowsAzure\Core\Configuration;
-use WindowsAzure\ServiceBus\ServiceBusRestProxy;
-use WindowsAzure\ServiceBus\ServiceBusService;
-use WindowsAzure\ServiceBus\ServiceBusSettings;
-use WindowsAzure\ServiceBus\Models\BrokerProperties;
-use Tests\Functional\WindowsAzure\Blob\BlobServiceFunctionalTestData;
 
 // TODO: The tests in this class fail because of
 // https://github.com/WindowsAzure/azure-sdk-for-php/issues/406

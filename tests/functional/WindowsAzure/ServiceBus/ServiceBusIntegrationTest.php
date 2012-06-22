@@ -26,18 +26,7 @@ namespace Tests\Functional\WindowsAzure\ServiceBus;
 
 use Tests\Functional\WindowsAzure\ServiceBus\IntegrationTestBase;
 use WindowsAzure\Common\Internal\IServiceFilter;
-use WindowsAzure\ServiceBus\ServiceBusService;
-use WindowsAzure\ServiceBus\Implementation\CorrelationFilter;
-use WindowsAzure\ServiceBus\Implementation\EmptyRuleAction;
-use WindowsAzure\ServiceBus\Implementation\FalseFilter;
-use WindowsAzure\ServiceBus\Implementation\SqlFilter;
-use WindowsAzure\ServiceBus\Implementation\SqlRuleAction;
-use WindowsAzure\ServiceBus\Implementation\TrueFilter;
 use WindowsAzure\ServiceBus\Models\BrokeredMessage;
-use WindowsAzure\ServiceBus\Models\ListQueuesResult;
-use WindowsAzure\ServiceBus\Models\ListRulesResult;
-use WindowsAzure\ServiceBus\Models\ListSubscriptionsResult;
-use WindowsAzure\ServiceBus\Models\ListTopicsResult;
 use WindowsAzure\ServiceBus\Models\QueueDescription;
 use WindowsAzure\ServiceBus\Models\QueueInfo;
 use WindowsAzure\ServiceBus\Models\ReceiveMessageOptions;
@@ -102,7 +91,6 @@ class ServiceBusIntegrationTest extends IntegrationTestBase
 
         $queue->setQueueDescription($queueDescription);
         $saved = $this->restProxy->createQueue($queue);
-        $saved = $saved->getQueueInfo();
 
         // Assert
         $this->assertNotNull($saved, '$saved');
@@ -136,10 +124,7 @@ class ServiceBusIntegrationTest extends IntegrationTestBase
     public function testSendMessageWorks()
     {
         // Arrange
-        // TODO: https://github.com/WindowsAzure/azure-sdk-for-php/issues/394
-        // $message = new BrokeredMessage('sendMessageWorks');
-        $message = new BrokeredMessage();
-        $message->setBody('sendMessageWorks');
+        $message = new BrokeredMessage('sendMessageWorks');
 
         // Act
         $this->restProxy->sendQueueMessage('TestAlpha', $message);
@@ -158,11 +143,7 @@ class ServiceBusIntegrationTest extends IntegrationTestBase
         // Arrange
         $queueName = 'TestReceiveMessageWorks';
         $this->restProxy->createQueue(new QueueInfo($queueName));
-        // TODO: https://github.com/WindowsAzure/azure-sdk-for-php/issues/394
-//        $this->restProxy->sendQueueMessage($queueName, new BrokeredMessage('Hello World'));
-        $message = new BrokeredMessage();
-        $message->setBody('Hello World');
-        $this->restProxy->sendQueueMessage($queueName, $message);
+        $this->restProxy->sendQueueMessage($queueName, new BrokeredMessage('Hello World'));
 
         // Act
         $message = $this->restProxy->receiveQueueMessage($queueName, $this->RECEIVE_AND_DELETE_5_SECONDS);
@@ -184,11 +165,7 @@ class ServiceBusIntegrationTest extends IntegrationTestBase
         // Arrange
         $queueName = 'TestPeekLockMessageWorks';
         $this->restProxy->createQueue(new QueueInfo($queueName));
-        // TODO: https://github.com/WindowsAzure/azure-sdk-for-php/issues/394
-//        $this->restProxy->sendQueueMessage($queueName, new BrokeredMessage('Hello Again'));
-        $message = new BrokeredMessage();
-        $message->setBody('Hello Again');
-        $this->restProxy->sendQueueMessage($queueName, $message);
+        $this->restProxy->sendQueueMessage($queueName, new BrokeredMessage('Hello Again'));
 
         // Act
         $message = $this->restProxy->receiveQueueMessage($queueName, $this->PEEK_LOCK_5_SECONDS);
@@ -211,11 +188,7 @@ class ServiceBusIntegrationTest extends IntegrationTestBase
         // Arrange
         $queueName = 'TestPeekLockedMessageCanBeCompleted';
         $this->restProxy->createQueue(new QueueInfo($queueName));
-        // TODO: https://github.com/WindowsAzure/azure-sdk-for-php/issues/394
-//        $this->restProxy->sendQueueMessage($queueName, new BrokeredMessage('Hello Again'));
-        $message = new BrokeredMessage();
-        $message->setBody('Hello Again');
-        $this->restProxy->sendQueueMessage($queueName, $message);
+        $this->restProxy->sendQueueMessage($queueName, new BrokeredMessage('Hello Again'));
         $message = $this->restProxy->receiveQueueMessage($queueName, $this->PEEK_LOCK_5_SECONDS);
 
         // Act
@@ -242,11 +215,7 @@ class ServiceBusIntegrationTest extends IntegrationTestBase
         // Arrange
         $queueName = 'TestPeekLockedMessageCanBeUnlocked';
         $this->restProxy->createQueue(new QueueInfo($queueName));
-        // TODO: https://github.com/WindowsAzure/azure-sdk-for-php/issues/394
-//        $this->restProxy->sendQueueMessage($queueName, new BrokeredMessage('Hello Again'));
-        $message = new BrokeredMessage();
-        $message->setBody('Hello Again');
-        $this->restProxy->sendQueueMessage($queueName, $message);
+        $this->restProxy->sendQueueMessage($queueName, new BrokeredMessage('Hello Again'));
         $peekedMessage = $this->restProxy->receiveQueueMessage($queueName, $this->PEEK_LOCK_5_SECONDS);
 
         // Act
@@ -274,11 +243,7 @@ class ServiceBusIntegrationTest extends IntegrationTestBase
         // Arrange
         $queueName = 'TestPeekLockedMessageCanBeDeleted';
         $this->restProxy->createQueue(new QueueInfo($queueName));
-        // TODO: https://github.com/WindowsAzure/azure-sdk-for-php/issues/394
-//        $this->restProxy->sendQueueMessage($queueName, new BrokeredMessage('Hello Again'));
-        $message = new BrokeredMessage();
-        $message->setBody('Hello Again');
-        $this->restProxy->sendQueueMessage($queueName, $message);
+        $this->restProxy->sendQueueMessage($queueName, new BrokeredMessage('Hello Again'));
         $peekedMessage = $this->restProxy->receiveQueueMessage($queueName, $this->PEEK_LOCK_5_SECONDS);
 
         // Act
@@ -291,8 +256,7 @@ class ServiceBusIntegrationTest extends IntegrationTestBase
         // Assert
         $this->assertNotNull($lockToken, '$lockToken');
         $this->assertNotNull($lockedUntil, '$lockedUntil');
-        $this->assertNull($receivedMessage->getLockToken(), '$receivedMessage->getLockToken()');
-        $this->assertNull($receivedMessage->getLockedUntilUtc(), '$receivedMessage->getLockedUntilUtc()');
+        $this->assertNull($receivedMessage, '$receivedMessage');
     }
 
     /**
@@ -307,10 +271,7 @@ class ServiceBusIntegrationTest extends IntegrationTestBase
         $this->restProxy->createQueue(new QueueInfo($queueName));
 
         // Act
-        // TODO: https://github.com/WindowsAzure/azure-sdk-for-php/issues/394
-//        $message = new BrokeredMessage('<data>Hello Again</data>');
-        $message = new BrokeredMessage();
-        $message->setBody('<data>Hello Again</data>');
+        $message = new BrokeredMessage('<data>Hello Again</data>');
         $message->setContentType('text/xml');
         $this->restProxy->sendQueueMessage($queueName, $message);
 
@@ -382,7 +343,6 @@ class ServiceBusIntegrationTest extends IntegrationTestBase
 
         // Act
         $created = $this->restProxy->createSubscription($topicName, new SubscriptionInfo('MySubscription'));
-        $created = $created->getSubscriptionInfo();
 
         // Assert
         $this->assertNotNull($created, '$created');
@@ -425,7 +385,6 @@ class ServiceBusIntegrationTest extends IntegrationTestBase
 
         // Act
         $result = $this->restProxy->getSubscription($topicName, 'MySubscription3');
-        $result = $result->getSubscriptionInfo();
 
         // Assert
         $this->assertNotNull($result, '$result');
@@ -470,10 +429,7 @@ class ServiceBusIntegrationTest extends IntegrationTestBase
         $this->restProxy->createTopic(new TopicInfo($topicName));
         $this->restProxy->createSubscription($topicName, new SubscriptionInfo('sub'));
         // Act
-        // TODO: https://github.com/WindowsAzure/azure-sdk-for-php/issues/394
-//        $message = new BrokeredMessage('<p>Testing subscription</p>');
-        $message = new BrokeredMessage();
-        $message->setBody('<p>Testing subscription</p>');
+        $message = new BrokeredMessage('<p>Testing subscription</p>');
         $message->setContentType('text/html');
         $this->restProxy->sendTopicMessage($topicName, $message);
 
@@ -501,7 +457,6 @@ class ServiceBusIntegrationTest extends IntegrationTestBase
 
         // Act
         $created = $this->restProxy->createRule($topicName, 'sub', new RuleInfo('MyRule1'));
-        $created = $created->getRuleInfo();
 
         // Assert
         $this->assertNotNull($created, '$created');
@@ -557,7 +512,6 @@ class ServiceBusIntegrationTest extends IntegrationTestBase
 
         // Act
         $result = $this->restProxy->getRule($topicName, 'sub', '$Default');
-        $result = $result->getRuleInfo();
 
         // Assert
         $this->assertNotNull($result, '$result');
@@ -627,27 +581,27 @@ class ServiceBusIntegrationTest extends IntegrationTestBase
 
         // Assert
         $this->assertTrue(
-                $ruleOne->getRuleInfo()->getRuleDescription()->getFilter()
+                $ruleOne->getFilter()
                 instanceof \WindowsAzure\ServiceBus\Models\CorrelationFilter,
                 '$ruleOne->getFilter() instanceof CorrelationFilter');
         $this->assertTrue(
-                $ruleTwo->getRuleInfo()->getRuleDescription()->getFilter()
+                $ruleTwo->getFilter()
                 instanceof \WindowsAzure\ServiceBus\Models\TrueFilter,
                 '$ruleTwo->getFilter() instanceof TrueFilter');
         $this->assertTrue(
-                $ruleThree->getRuleInfo()->getRuleDescription()->getFilter()
+                $ruleThree->getFilter()
                 instanceof \WindowsAzure\ServiceBus\Models\FalseFilter,
                 '$ruleThree->getFilter() instanceof FalseFilter');
         $this->assertTrue(
-                $ruleFour->getRuleInfo()->getRuleDescription()->getAction()
+                $ruleFour->getAction()
                 instanceof \WindowsAzure\ServiceBus\Models\EmptyRuleAction,
                 '$ruleFour->getAction() instanceof EmptyRuleAction');
         $this->assertTrue(
-                $ruleFive->getRuleInfo()->getRuleDescription()->getAction()
+                $ruleFive->getAction()
                 instanceof \WindowsAzure\ServiceBus\Models\SqlRuleAction,
                 '$ruleFive->getAction() instanceof SqlRuleAction');
         $this->assertTrue(
-                $ruleSix->getRuleInfo()->getRuleDescription()->getFilter()
+                $ruleSix->getFilter()
                 instanceof \WindowsAzure\ServiceBus\Models\SqlFilter,
                 '$ruleSix->getFilter() instanceof SqlFilter');
     }
@@ -664,10 +618,7 @@ class ServiceBusIntegrationTest extends IntegrationTestBase
         $this->restProxy->createQueue(new QueueInfo($queueName));
 
         // Act
-        // TODO: https://github.com/WindowsAzure/azure-sdk-for-php/issues/394
-//        $message = new BrokeredMessage('');
-        $message = new BrokeredMessage();
-        $message->setBody('');
+        $message = new BrokeredMessage('');
         // TODO: https://github.com/WindowsAzure/azure-sdk-for-php/issues/406
 //        $message->setProperty('hello', 'world');
         $message->setProperty('hello', '"world"');
