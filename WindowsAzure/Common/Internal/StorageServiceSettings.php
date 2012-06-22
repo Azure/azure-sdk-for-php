@@ -94,9 +94,17 @@ class StorageServiceSettings
      */
     private static $_devStoreAccount;
     
+    /**
+     * Initializes static members of the class.
+     * 
+     * @return none
+     */
     public static function init()
     {
-        $isValidUri = function ($uri) { return filter_var($uri, FILTER_VALIDATE_URL); };
+        $isValidUri = function ($uri)
+        {
+            return filter_var($uri, FILTER_VALIDATE_URL);
+        };
         
         self::$_useDevelopmentStorageSetting = self::_setting(
             Resources::USE_DEVELOPMENT_STORAGE_NAME,
@@ -109,6 +117,15 @@ class StorageServiceSettings
         );
     }
     
+    /**
+     * Creates new storage service settings instance.
+     * 
+     * @param string $name             The storage service name.
+     * @param string $key              The storage service key.
+     * @param string $blobEndpointUri  The sotrage service blob endpoint.
+     * @param string $queueEndpointUri The sotrage service queue endpoint.
+     * @param string $tableEndpointUri The sotrage service table endpoint.
+     */
     public function __construct(
         $name,
         $key,
@@ -123,6 +140,15 @@ class StorageServiceSettings
         $this->_tableEndpointUri = $tableEndpointUri;
     }
     
+    /**
+     * Creates an anonymous function that acts as predicate.
+     * 
+     * @param array   $requirements The array of conditions to satisfy.
+     * @param boolean $isRequired   Either these conditions are allrequired or all 
+     * optional.
+     * 
+     * @return callable
+     */
     private static function _getValidator($requirements, $isRequired)
     {
         return function ($userSettings) use ($requirements, $isRequired) {
@@ -153,64 +179,36 @@ class StorageServiceSettings
         };
     }
     
+    /**
+     * Creates an optional predicate for passed list of requirements.
+     * 
+     * @return callable
+     */
     private static function _optional()
     {
         $optionalSettings  = func_get_args();
         return self::_getValidator($optionalSettings, false);
-//        
-//        return function ($settings) {
-//            $result = $settings;
-//            foreach ($optionalSettings as $requirement) {
-//                $settingName = $requirement[Resources::SETTING_NAME];
-//                
-//                // Check if the setting name exists in the provided user settings.
-//                if (array_key_exists($settingName, $result)) {
-//                    // Check if the provided user setting value is valid.
-//                    $validationFunc = $requirement[Resources::SETTING_CONSTRAINT];
-//                    $isValid        = $validationFunc($result[$settingName]);
-//                    
-//                    if ($isValid) {
-//                        // Remove the setting as indicator for successful validation.
-//                        unset($result[$settingName]);
-//                    }
-//                }
-//            }
-//            
-//            return $result;
-//        };
     }
     
+    /**
+     * Creates an required predicate for passed list of requirements.
+     * 
+     * @return callable
+     */
     private static function _allRequired()
     {
         $requiredSettings  = func_get_args();
         return self::_getValidator($requiredSettings, true);
-        
-//        return function ($settings) {
-//            $result = $settings;
-//            foreach ($requiredSettings as $requirement) {
-//                $settingName = $requirement[Resources::SETTING_NAME];
-//                
-//                // Check if the setting name exists in the provided user settings.
-//                if (array_key_exists($settingName, $result)) {
-//                    // Check if the provided user setting value is valid.
-//                    $validationFunc = $requirement[Resources::SETTING_CONSTRAINT];
-//                    $isValid        = $validationFunc($result[$settingName]);
-//                    
-//                    if ($isValid) {
-//                        // Remove the setting as indicator for successful validation.
-//                        unset($result[$settingName]);
-//                        continue;
-//                    }
-//                }
-//                
-//                // If this line is reached, means validation failure.
-//                return null;
-//            }
-//            
-//            return $result;
-//        };
     }
     
+    /**
+     * Creates a setting value condition using the passed predicate.
+     * 
+     * @param string   $name      The setting key name.
+     * @param callable $validator The setting value predicate.
+     * 
+     * @return array 
+     */
     private static function _settingWithFunc($name, $validator)
     {
         $requirement                                = array();
@@ -220,6 +218,14 @@ class StorageServiceSettings
         return $requirement;
     }
     
+    /**
+     * Creates a setting value condition that validates it is one of the
+     * passed valid values.
+     * 
+     * @param string $name The setting key name.
+     * 
+     * @return array 
+     */
     private static function _setting($name)
     {
         $args                                       = func_get_args();
@@ -248,6 +254,14 @@ class StorageServiceSettings
         return $requirement;
     }
     
+    /**
+     * Tests to see if a given list of settings matches a set of filters exactly.
+     * 
+     * @param array $settings The settings to check.
+     * 
+     * @return boolean If any filter returns null, false. If there are any settings 
+     * left over after all filters are processed, false. Otherwise true.
+     */
     private static function _matchedSpecification($settings)
     {
         $constraints = func_get_args();
@@ -272,6 +286,14 @@ class StorageServiceSettings
         return false;
     }
     
+    /**
+     * Returns a StorageServiceSettings with development storage credentials using 
+     * the specified proxy Uri.
+     * 
+     * @param string $proxyUri The proxy endpoint to use.
+     * 
+     * @return StorageServiceSettings
+     */
     private static function _getDevelopmentStorageAccount($proxyUri)
     {
         if (is_null($proxyUri)) {
@@ -291,6 +313,12 @@ class StorageServiceSettings
         );
     }
     
+    /**
+     * Gets a StorageServiceSettings object that references the development storage 
+     * account.
+     * 
+     * @return StorageServiceSettings 
+     */
     public static function developmentStorageAccount()
     {
         if (is_null(self::$_devStoreAccount)) {
@@ -302,6 +330,13 @@ class StorageServiceSettings
         return self::$_devStoreAccount;
     }
 
+    /**
+     * Creates a StorageServiceSettings object from the given connection string.
+     * 
+     * @param string $connectionString The storage settings connection string.
+     * 
+     * @return StorageServiceSettings 
+     */
     public static function createFromConnectionString($connectionString)
     {
         $storageServiceSettings = null;
@@ -327,34 +362,54 @@ class StorageServiceSettings
         return $storageServiceSettings;
     }
     
+    /**
+     * Gets storage service name.
+     * 
+     * @return string
+     */
     public function getName()
     {
         return $this->_name;
     }
     
+    /**
+     * Gets storage service key.
+     * 
+     * @return string
+     */
     public function getKey()
     {
         return $this->_key;
     }
     
+    /**
+     * Gets storage service blob endpoint uri.
+     * 
+     * @return string
+     */
     public function getBlobEndpointUri()
     {
         return $this->_blobEndpointUri;
     }
     
+    /**
+     * Gets storage service queue endpoint uri.
+     * 
+     * @return string
+     */
     public function getQueueEndpointUri()
     {
         return $this->_queueEndpointUri;
     }
 
+    /**
+     * Gets storage service table endpoint uri.
+     * 
+     * @return string
+     */
     public function getTableEndpointUri()
     {
         return $this->_tableEndpointUri;
-    }
-
-    public function validate()
-    {
-        
     }
 }
 
