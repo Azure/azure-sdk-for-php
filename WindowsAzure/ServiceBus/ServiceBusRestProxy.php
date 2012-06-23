@@ -238,13 +238,12 @@ class ServiceBusRestProxy extends ServiceRestProxy implements IServiceBus
                 $value        = $responseHeaders[$headerKey];
                 $decodedValue = json_decode($value);
                 if (is_scalar($decodedValue)) {
-                    $value = $decodedValue;
+                    $brokeredMessage->setProperty(
+                        $headerKey, 
+                        $decodedValue
+                    );
                 }
 
-                $brokeredMessage->setProperty(
-                    $headerKey, 
-                    $value
-                );
             }
         }
 

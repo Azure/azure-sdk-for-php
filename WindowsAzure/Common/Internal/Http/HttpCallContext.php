@@ -296,6 +296,7 @@ class HttpCallContext
     public function addHeader($name, $value)
     {
         Validate::isString($name, 'name');
+        Validate::isString($value, 'value');
         
         $this->_headers[$name] = $value;
     }
