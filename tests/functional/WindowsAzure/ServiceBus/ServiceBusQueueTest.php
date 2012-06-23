@@ -75,8 +75,7 @@ class ServiceBusQueueTest extends ScenarioTestBase
     {
         $options = new ListQueuesOptions();
         $options->setSkip(20);
-        // TODO: https://github.com/WindowsAzure/azure-sdk-for-php/issues/479
-//        $options->setTop(2);
+        $options->setTop(2);
         $queues = $this->restProxy->listQueues($options)->getQueueInfos();
         foreach ($queues as $queue) {
             self::write('Queue name is ' . $queue->getTitle());
@@ -126,6 +125,20 @@ class ServiceBusQueueTest extends ScenarioTestBase
     private function createIssueMessage($issueId, $issueBody, $label, $messageLocation)
     {
         $message = new BrokeredMessage($issueBody);
+
+        $bp = new BrokerProperties();
+        $bp->setLabel($label);
+//        $bp->setMessageLocation($messageLocation);
+        $bp->setReplyTo("test@test.com");
+        $bp->setMessageId($issueId);
+        $bp->setCorrelationId("correlationid" + $label);
+        $bp->setDeliveryCount(1);
+        $bp->setLockedUntilUtc(new \DateTime("2/4/1984"));
+        $bp->setLockLocation($label + "locallocation");
+        $bp->setLockToken($label + "locltoken");
+        $bp->setSequenceNumber(12);
+        $message->setBrokerProperties($bp);
+
         $message->setContentType('text/xml');
         $message->setLabel($label);
         $message->setReplyTo('1@1.com');
@@ -133,24 +146,8 @@ class ServiceBusQueueTest extends ScenarioTestBase
 
         $customProperties = $this->getCustomProperties(1);
         foreach ($customProperties as $key => $value) {
-            // TODO: https://github.com/WindowsAzure/azure-sdk-for-php/issues/406
-//            $message->setProperty($key, $value);
-            $message->setProperty($key,  self::CustomPropertiesMapper_toString($value));
+            $message->setProperty($key, $value);
         }
-
-        $bp = new BrokerProperties();
-        $bp->setLabel($label);
-        $bp->setMessageLocation($messageLocation);
-        $bp->setReplyTo("test@test.com");
-        $bp->setMessageId($issueId);
-        $bp->setCorrelationId("correlationid" + $label);
-        $bp->setDeliveryCount(1);
-        $bp->setLockedUntilUtc(new \DateTime("1/1/1970"));
-        $bp->setLockLocation($label + "locallocation");
-        $bp->setLockToken($label + "locltoken");
-        $bp->setSequenceNumber(12);
-        // TODO: https://github.com/WindowsAzure/azure-sdk-for-php/issues/406
-//        $message->setBrokerProperties($bp);
 
         return $message;
     }
@@ -211,9 +208,10 @@ class ServiceBusQueueTest extends ScenarioTestBase
             $this->restProxy->deleteMessage($message1again);
             $this->fail('Deleting a RECEIVEANDDELETE messasge should fail');
         } catch (ServiceException $ex) {
-            // TODO: Should be a different exception
-            // https://github.com/WindowsAzure/azure-sdk-for-php/issues/470
-            $this->assertEquals(500, $ex->getCode(), 'Expect failure error code when deleting RECEIVEANDDELETE messasge');
+            // TODO: https://github.com/WindowsAzure/azure-sdk-for-php/issues/470
+            $this->assertTrue(
+                    500 == $ex->getCode() || 404 == $ex->getCode(),
+                    'Expect failure error code 500 or 404 when deleting RECEIVEANDDELETE messasge, but got ' . $ex->getCode());
         }
 
         // Get the thrid
