@@ -619,17 +619,13 @@ class ServiceBusIntegrationTest extends IntegrationTestBase
 
         // Act
         $message = new BrokeredMessage('');
-        // TODO: https://github.com/WindowsAzure/azure-sdk-for-php/issues/406
-//        $message->setProperty('hello', 'world');
-        $message->setProperty('hello', '"world"');
+        $message->setProperty('hello', 'world');
         $message->setProperty('foo', 42);
         $this->restProxy->sendQueueMessage($queueName, $message);
         $message = $this->restProxy->receiveQueueMessage($queueName, $this->RECEIVE_AND_DELETE_5_SECONDS);
 
         // Assert
-        // TODO: https://github.com/WindowsAzure/azure-sdk-for-php/issues/406
-//        $this->assertEquals('world', $message->getProperty('hello'), '$message->getProperty(\'hello\')');
-        $this->assertEquals('"world"', $message->getProperty('hello'), '$message->getProperty(\'hello\')');
+        $this->assertEquals('world', $message->getProperty('hello'), '$message->getProperty(\'hello\')');
         $this->assertEquals(42, $message->getProperty('foo'), '$message->getProperty(\'foo\')');
     }
 }

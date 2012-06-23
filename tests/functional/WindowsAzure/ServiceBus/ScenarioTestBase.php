@@ -74,16 +74,13 @@ class ScenarioTestBase extends IntegrationTestBase
 
         $actualProperties = $actualMessage->getProperties();
 
-        // TODO: https://github.com/WindowsAzure/azure-sdk-for-php/issues/406
-//        $this->assertEquals(count($expectedProperties), count($actualProperties), 'count(getProperties)');
+        $this->assertEquals(count($customProperties), count($actualProperties), 'count(getProperties)');
         foreach ($customProperties as $key => $value) {
             // Guids from the server cannot be known in advance
             if ($value != 'GUID') {
                 $this->assertEquals(
                     $value,
-                    // TODO: https://github.com/WindowsAzure/azure-sdk-for-php/issues/406
-//                    $actualProperties[$key],
-                    self::CustomPropertiesMapper_fromString($actualProperties[strtolower($key)]),
+                    $actualProperties[strtolower($key)],
                     'getProperties[\'' . $key . '\']');
             }
         }
@@ -91,58 +88,17 @@ class ScenarioTestBase extends IntegrationTestBase
 
     protected function getCustomProperties($i)
     {
-        $customProperties = array();
-        $customProperties['i']     = $i;
-        $customProperties['test']  = new \DateTime('01/0'. $i . '/2001');
-        $customProperties['name']  = 'Test' . $i;
-        $customProperties['int']   = 50 + $i;
-        $customProperties['float'] = pi() + $i;
-        $customProperties['even']  = ($i % 2 == 0);
+        $customProperties             = array();
+        $customProperties['i']        = $i;
+        $date                         = new \DateTime('01/0'. $i . '/2001');
+        $customProperties['test']     = gmdate(Resources::AZURE_DATE_FORMAT,
+                $date->getTimestamp());
+        $customProperties['name']     = 'Test' . $i;
+        $customProperties['meanname'] = "'\"Me`\\'&*<>!@#%^*)\n" . $i;
+        $customProperties['int']      = 50 + $i;
+        $customProperties['float']    = pi() + $i;
+        $customProperties['even']     = ($i % 2 == 0);
         return $customProperties;
-    }
-
-    // TODO: Remove when fixed
-    // https://github.com/WindowsAzure/azure-sdk-for-php/issues/406
-    protected static function CustomPropertiesMapper_toString($value)
-    {
-        if (is_null($value)) {
-            return null;
-        } else if (is_numeric($value)) {
-            return strval($value);
-        } else if (is_bool($value)) {
-            return ($value ? 'true' : 'false');
-        } else if ($value instanceof \DateTime) {
-            $formatted = gmdate(Resources::AZURE_DATE_FORMAT, $value->getTimestamp());
-            return '"' . $formatted . '"';
-        } else if (is_string($value)) {
-            return '"' . $value . '"';
-        } else {
-            throw new \Exception();
-        }
-    }
-
-    // TODO: Remove when fixed
-    // https://github.com/WindowsAzure/azure-sdk-for-php/issues/406
-    protected static function CustomPropertiesMapper_fromString($value)
-    {
-        if (is_null($value)) {
-            return null;
-        } else if ($value[0] == '"' && $value[strlen($value) - 1] == '"') {
-            $text = substr($value, 1, strlen($value) - 2);
-            $ret = Utilities::rfc1123ToDateTime($text);
-            if (!$ret) {
-                return $text;
-            }
-            return $ret;
-        } else if ('true' == $value) {
-            return true;
-        } else if ('false' == $value) {
-            return false;
-        } else if (strstr($value, '.') === false) {
-            return (int)$value;
-        } else {
-            return (float)$value;
-        }
     }
 
     static function assertEquals($expected, $actual, $message = '', $delta = 0, $maxDepth = 10, $canonicalize = FALSE, $ignoreCase = FALSE)
