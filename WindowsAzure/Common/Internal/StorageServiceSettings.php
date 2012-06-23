@@ -167,13 +167,17 @@ class StorageServiceSettings
         
         self::$_accountNameSetting = self::_settingWithFunc(
             Resources::ACCOUNT_NAME_NAME,
-            function ($name) { return true; }
+            function ($name) { 
+                return true;
+            }
         );
         
         self::$_accountKeySetting = self::_settingWithFunc(
             Resources::ACCOUNT_KEY_NAME,
             // base64_decode will return false if the $key is not in base64 format.
-            function ($key) { return base64_decode($key, true); }
+            function ($key) { 
+                return base64_decode($key, true);
+            }
         );
         
         self::$_blobEndpointSetting = self::_settingWithFunc(
