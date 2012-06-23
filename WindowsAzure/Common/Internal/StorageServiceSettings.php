@@ -165,11 +165,8 @@ class StorageServiceSettings
             'http', 'https'
         );
         
-        self::$_accountNameSetting = self::_settingWithFunc(
-            Resources::ACCOUNT_NAME_NAME,
-            function ($name) { 
-                return true;
-            }
+        self::$_accountNameSetting = self::_setting(
+            Resources::ACCOUNT_NAME_NAME
         );
         
         self::$_accountKeySetting = self::_settingWithFunc(
@@ -284,15 +281,15 @@ class StorageServiceSettings
      * Creates a setting value condition using the passed predicate.
      * 
      * @param string   $name      The setting key name.
-     * @param callable $validator The setting value predicate.
+     * @param callable $predicate The setting value predicate.
      * 
      * @return array 
      */
-    private static function _settingWithFunc($name, $validator)
+    private static function _settingWithFunc($name, $predicate)
     {
         $requirement                                = array();
         $requirement[Resources::SETTING_NAME]       = $name;
-        $requirement[Resources::SETTING_CONSTRAINT] = $validator;
+        $requirement[Resources::SETTING_CONSTRAINT] = $predicate;
         
         return $requirement;
     }
@@ -307,12 +304,10 @@ class StorageServiceSettings
      */
     private static function _setting($name)
     {
-        $args                                       = func_get_args();
-        $count                                      = func_num_args();
-        $requirement                                = array();
-        $requirement[Resources::SETTING_NAME]       = $name;
-        $requirement[Resources::SETTING_CONSTRAINT] = function ($settingValue)
-        use ($count, $args){
+        $args      = func_get_args();
+        $count     = func_num_args();
+        $predicate = function ($settingValue) use ($count, $args)
+        {
             if ($count == 1) {
                 // No restrictions, succeed
                 return true;
@@ -330,7 +325,7 @@ class StorageServiceSettings
             return false;
         };
         
-        return $requirement;
+        return self::_settingWithFunc($name, $predicate);
     }
     
     /**
