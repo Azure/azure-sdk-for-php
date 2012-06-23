@@ -25,6 +25,7 @@
 namespace Tests\Functional\WindowsAzure\ServiceBus;
 
 use Tests\Functional\WindowsAzure\ServiceBus\ScenarioTestBase;
+use WindowsAzure\Common\Internal\Resources;
 use WindowsAzure\ServiceBus\Models\BrokeredMessage;
 use WindowsAzure\ServiceBus\Models\ListTopicsOptions;
 use WindowsAzure\ServiceBus\Models\ReceiveMessageOptions;
@@ -73,17 +74,26 @@ class ServiceBusTopicTest extends ScenarioTestBase
         $expSub4Messages = array();
         for ($i = 1; $i <= 4; $i++) {
             $tmp = $this->getCustomProperties($i);
-            $tmp['trueRuleA'] = true;
-            $tmp['actionGuid'] = 'GUID';
+            $tmp['trueRuleA']    = true;
+            $tmp['actionGuid']   = 'GUID';
             $tmp['actionDouble'] = 3.5;
             unset($tmp['int']);
             $expCustomProps4[] = $tmp;
             $expSub4Messages[] = $messages[$i-1];
 
             $tmp = $this->getCustomProperties($i);
-            $tmp['trueRuleB'] = true;
-            $tmp['actionString'] = 'hello';
-            $tmp['test'] = new \DateTime('1999-12-25 00:00:00 GMT');
+            $tmp['trueRuleB']                  = true;
+            $tmp['actionString']               = 'hello';
+            $tmp['actionStringSingleQuote']    = '\'';
+            $tmp['actionStringDoubleQuote']    = '"';
+            $tmp['actionStringReverseSolidus'] = '\\';
+            $tmp['actionStringSlashN']         = "\n";
+            $tmp['actionStringTab']            = "\t";
+            // Null valued properties are not returned
+            $date = new \DateTime('1999-12-25 00:00:00 GMT');
+            $date = gmdate(Resources::AZURE_DATE_FORMAT, $date->getTimestamp());
+            $tmp['test'] = $date;
+            $tmp['actionNewDate'] = '1999-12-25';
             unset($tmp['float']);
             $expCustomProps4[] = $tmp;
             $expSub4Messages[] = $messages[$i-1];
@@ -109,8 +119,7 @@ class ServiceBusTopicTest extends ScenarioTestBase
     {
         $options = new ListTopicsOptions();
         $options->setSkip(20);
-        // TODO: https://github.com/WindowsAzure/azure-sdk-for-php/issues/479
-//        $options->setTop(2);
+        $options->setTop(2);
         $topics = $this->restProxy->listTopics($options)->getTopicInfos();
         foreach ($topics as $topic) {
             self::write('Topic name is ' . $topic->getTitle());
@@ -195,12 +204,22 @@ class ServiceBusTopicTest extends ScenarioTestBase
 
         $rule4b = new RuleInfo('trueRuleB');
         $rule4b->withTrueFilter();
-        $rule4b->withSqlRuleAction(
+        $action =
                 'SET trueRuleB=TRUE; ' .
                 'SET actionString=\'hello\'; ' .
+                // SQL uses '' to represent ' in strings.
+                'SET actionStringSingleQuote=\'\'\'\'; ' .
+                'SET actionStringDoubleQuote=\'"\'; ' .
+                // ReverseSolidus is just \
+                'SET actionStringReverseSolidus=\'\\\'; ' .
+                'SET actionStringSlashN=\'' . "\n" . '\'; ' .
+                'SET actionStringTab=\'' . "\t" . '\'; ' .
                 'SET actionNull=null; ' .
                 'SET test=\'1999-12-25\'; ' .
-                'REMOVE float;');
+                'SET actionNewDate=\'1999-12-25\'; ' .
+                'REMOVE float;';
+        $rule4b->withSqlRuleAction($action);
+
         $this->restProxy->createRule($this->topicName, $this->subscriptionName4, $rule4b);
 
         $this->showRules($this->subscriptionName1);
@@ -258,9 +277,7 @@ class ServiceBusTopicTest extends ScenarioTestBase
 
         $customProperties = $this->getCustomProperties($i);
         foreach ($customProperties as $key => $value) {
-            // TODO: https://github.com/WindowsAzure/azure-sdk-for-php/issues/406
-//            $message->setProperty($key, $value);
-            $message->setProperty($key,  self::CustomPropertiesMapper_toString($value));
+            $message->setProperty($key, $value);
         }
 
         return $message;
