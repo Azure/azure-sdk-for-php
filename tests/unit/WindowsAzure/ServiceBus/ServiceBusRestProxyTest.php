@@ -967,6 +967,7 @@ class ServiceBusRestProxyTest extends ServiceBusRestProxyTestBase
         $expectedTestIntValue = 38;
         $expectedTestDoubleValue = 3.14159;
         $expectedTestBooleanValue = true;
+        $expectedTestBooleanFalseValue = false;
         $expectedTestArrayValue = array(2,3,5,7);
 
         $this->safeDeleteQueue($queueName);
@@ -977,6 +978,7 @@ class ServiceBusRestProxyTest extends ServiceBusRestProxyTestBase
         $brokeredMessage->setProperty('testInt', $expectedTestIntValue);
         $brokeredMessage->setProperty('testDouble', $expectedTestDoubleValue);
         $brokeredMessage->setProperty('testBoolean', $expectedTestBooleanValue);
+        $brokeredMessage->setProperty('testBooleanFalse', $expectedTestBooleanFalseValue);
 
         $this->restProxy->sendQueueMessage($queueName, $brokeredMessage);
         $receiveMessageOptions = new ReceiveMessageOptions();
@@ -1009,6 +1011,11 @@ class ServiceBusRestProxyTest extends ServiceBusRestProxyTestBase
         $this->assertEquals(
             $expectedTestBooleanValue,
             $receivedMessage->getProperty('testBoolean')
+        );
+
+        $this->assertEquals(
+            $expectedTestBooleanFalseValue,
+            $receivedMessage->getProperty('testBooleanFalse')
         );
 
     }
