@@ -14,11 +14,11 @@ It is build as a thin REST call wrapper where each server call maps to a single 
   <email>azurephpsdk@microsoft.com</email>
   <active>yes</active>
  </lead>
- <date>2012-06-21</date>
- <time>17:53:56</time>
+ <date>2012-06-23</date>
+ <time>10:09:01</time>
  <version>
-  <release>0.1.0</release>
-  <api>0.1.0</api>
+  <release>0.2.0</release>
+  <api>0.2.0</api>
  </version>
  <stability>
   <release>beta</release>
@@ -153,7 +153,7 @@ It is build as a thin REST call wrapper where each server call maps to a single 
    <file baseinstalldir="/" md5sum="6ce30ab8ea7c478617c5d9da77217794" name="/WindowsAzure/Queue/Models/QueueServiceOptions.php" role="php" />
    <file baseinstalldir="/" md5sum="b064d926276a2d459e7f541e8e50d5f4" name="/WindowsAzure/Queue/Models/UpdateMessageResult.php" role="php" />
    <file baseinstalldir="/" md5sum="ac969a487f84e437818df2d32b46e9ad" name="/WindowsAzure/Queue/Models/WindowsAzureQueueMessage.php" role="php" />
-   <file baseinstalldir="/" md5sum="0d30ac3e4629cbab8a6edc7419016040" name="/WindowsAzure/ServiceBus/ServiceBusRestProxy.php" role="php" />
+   <file baseinstalldir="/" md5sum="e945cc0312f649ea3f3a3ca9ed3174f4" name="/WindowsAzure/ServiceBus/ServiceBusRestProxy.php" role="php" />
    <file baseinstalldir="/" md5sum="35dac87f06c9b9156fff1314cd5f7482" name="/WindowsAzure/ServiceBus/ServiceBusService.php" role="php" />
    <file baseinstalldir="/" md5sum="843d2a4715f0d73c8d10c1ea273c7ee3" name="/WindowsAzure/ServiceBus/ServiceBusSettings.php" role="php" />
    <file baseinstalldir="/" md5sum="e8f060a368aeeb854934bf6dee64677a" name="/WindowsAzure/ServiceBus/WrapRestProxy.php" role="php" />
@@ -163,7 +163,7 @@ It is build as a thin REST call wrapper where each server call maps to a single 
    <file baseinstalldir="/" md5sum="4c2d1c5c5773150eb508d6c6f598063f" name="/WindowsAzure/ServiceBus/Internal/WrapTokenManager.php" role="php" />
    <file baseinstalldir="/" md5sum="951dd5da90fc9bf5f7f7f0ae8cbfab59" name="/WindowsAzure/ServiceBus/Models/Action.php" role="php" />
    <file baseinstalldir="/" md5sum="e75d592e6fd584f6e432f47850efe098" name="/WindowsAzure/ServiceBus/Models/ActiveToken.php" role="php" />
-   <file baseinstalldir="/" md5sum="579ebee04f57a8b7801da7c07e0fdd8f" name="/WindowsAzure/ServiceBus/Models/BrokeredMessage.php" role="php" />
+   <file baseinstalldir="/" md5sum="f9bbcd34359462b422fc2fb227d1911d" name="/WindowsAzure/ServiceBus/Models/BrokeredMessage.php" role="php" />
    <file baseinstalldir="/" md5sum="8a88bd99705e763b91aff91acc60faa1" name="/WindowsAzure/ServiceBus/Models/BrokerProperties.php" role="php" />
    <file baseinstalldir="/" md5sum="3c04bbad3dd652344cf29cb479d09b84" name="/WindowsAzure/ServiceBus/Models/CorrelationFilter.php" role="php" />
    <file baseinstalldir="/" md5sum="bb4487bcbe9fa7909d80bda6736f28e1" name="/WindowsAzure/ServiceBus/Models/EmptyRuleAction.php" role="php" />
@@ -179,7 +179,7 @@ It is build as a thin REST call wrapper where each server call maps to a single 
    <file baseinstalldir="/" md5sum="ff985d5d147e178b1c67948e84d3c3e8" name="/WindowsAzure/ServiceBus/Models/ListTopicsOptions.php" role="php" />
    <file baseinstalldir="/" md5sum="998930ed5bc72c820c4b4749915032c3" name="/WindowsAzure/ServiceBus/Models/ListTopicsResult.php" role="php" />
    <file baseinstalldir="/" md5sum="aa869545b46196f2bfc774960f17ff51" name="/WindowsAzure/ServiceBus/Models/QueueDescription.php" role="php" />
-   <file baseinstalldir="/" md5sum="92e27db6e3872c0e2e35ea645e962105" name="/WindowsAzure/ServiceBus/Models/QueueInfo.php" role="php" />
+   <file baseinstalldir="/" md5sum="f6978f7004c4d1fcf6d24dde601c6cdd" name="/WindowsAzure/ServiceBus/Models/QueueInfo.php" role="php" />
    <file baseinstalldir="/" md5sum="9e924433859b05b677d33c5592914e24" name="/WindowsAzure/ServiceBus/Models/ReceiveMessageOptions.php" role="php" />
    <file baseinstalldir="/" md5sum="fee660b8e4f1d8c01f4c23873962f04e" name="/WindowsAzure/ServiceBus/Models/ReceiveMode.php" role="php" />
    <file baseinstalldir="/" md5sum="cd16bdb6ce919122212663e041a78cb0" name="/WindowsAzure/ServiceBus/Models/RuleDescription.php" role="php" />
@@ -189,7 +189,7 @@ It is build as a thin REST call wrapper where each server call maps to a single 
    <file baseinstalldir="/" md5sum="18810f5954007286fa77e03788034503" name="/WindowsAzure/ServiceBus/Models/SubscriptionDescription.php" role="php" />
    <file baseinstalldir="/" md5sum="be527f168161d6b6121abf7d280b8314" name="/WindowsAzure/ServiceBus/Models/SubscriptionInfo.php" role="php" />
    <file baseinstalldir="/" md5sum="4c86badcd6def5cca7baa3d2497d6572" name="/WindowsAzure/ServiceBus/Models/TopicDescription.php" role="php" />
-   <file baseinstalldir="/" md5sum="194c0db25b5ca23efc0b6ad86f8a2884" name="/WindowsAzure/ServiceBus/Models/TopicInfo.php" role="php" />
+   <file baseinstalldir="/" md5sum="f458e50b861fb975a9706cee7ed0e004" name="/WindowsAzure/ServiceBus/Models/TopicInfo.php" role="php" />
    <file baseinstalldir="/" md5sum="6c88b45f63cd2644f1d660be0b56411d" name="/WindowsAzure/ServiceBus/Models/TrueFilter.php" role="php" />
    <file baseinstalldir="/" md5sum="07b8d1a35bd9b76b09e3711edaa5a77c" name="/WindowsAzure/ServiceBus/Models/WrapAccessTokenResult.php" role="php" />
    <file baseinstalldir="/" md5sum="5f03c241de743fb71d9d52332f4b2995" name="/WindowsAzure/ServiceManagement/ServiceManagementRestProxy.php" role="php" />
@@ -289,7 +289,7 @@ It is build as a thin REST call wrapper where each server call maps to a single 
    <file baseinstalldir="/" md5sum="5380fe06e54ea1b142552fac322f8e1a" name="/WindowsAzure/Table/Models/Filters/QueryStringFilter.php" role="php" />
    <file baseinstalldir="/" md5sum="eae6b9d91a2f8ba2a1facb1b0bbeb7a9" name="/WindowsAzure/Table/Models/Filters/UnaryFilter.php" role="php" />
    <file baseinstalldir="/" md5sum="34f8c1142fd6208a8be89399cb521df9" name="LICENSE.txt" role="data" />
-   <file baseinstalldir="/" md5sum="d98b580066f28922d4576c63bfe553ff" name="README.md" role="data" />
+   <file baseinstalldir="/" md5sum="befafeb908dbffa338f4d3965d9e6d80" name="README.md" role="data" />
   </dir>
  </contents>
  <dependencies>
@@ -328,6 +328,24 @@ It is build as a thin REST call wrapper where each server call maps to a single 
  <changelog>
   <release>
    <version>
+    <release>0.2.0</release>
+    <api>0.2.0</api>
+   </version>
+   <stability>
+    <release>beta</release>
+    <api>beta</api>
+   </stability>
+   <date>2012-06-23</date>
+   <license uri="http://www.apache.org/licenses/LICENSE-2.0">Apache 2.0</license>
+   <notes>
+* Full support of Queue, Blob and Table services.
+* Full support of Service Bus.
+* Full support of Service Runtime.
+* Support for storage services and affinity groups management operations.
+   </notes>
+  </release>
+  <release>
+   <version>
     <release>0.1.0</release>
     <api>0.1.0</api>
    </version>
@@ -335,11 +353,10 @@ It is build as a thin REST call wrapper where each server call maps to a single 
     <release>beta</release>
     <api>beta</api>
    </stability>
-   <date>2012-06-21</date>
+   <date>2012-06-07</date>
    <license uri="http://www.apache.org/licenses/LICENSE-2.0">Apache 2.0</license>
    <notes>
 * Full support of Queue, Blob and Table services.
-* Full support of Service Bus.
 * Full support of Service Runtime.
 * Support for storage services and affinity groups management operations.
    </notes>
