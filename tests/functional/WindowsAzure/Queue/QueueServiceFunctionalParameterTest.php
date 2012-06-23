@@ -495,8 +495,6 @@ class QueueServiceFunctionalParameterTest extends FunctionalTestBase {
         $visibilityTimeoutInSeconds = 0;
 
         try {
-            // Throws due to
-            // https://github.com/WindowsAzure/azure-sdk-for-php/issues/99
             $this->restProxy->updateMessage($queue, $messageId, $popReceipt, $messageText, $visibilityTimeoutInSeconds, $options);
             $this->fail('Expect bogus message id to throw');
         }

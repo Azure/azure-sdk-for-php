@@ -510,8 +510,6 @@ class TableServiceIntegrationTest extends IntegrationTestBase {
     * @covers WindowsAzure\Table\TableRestProxy::queryEntities
     */
     public function testDeleteEntityTroublesomeKeyWorks() {
-        // For issue https://github.com/WindowsAzure/azure-sdk-for-php/issues/180
-        
         // The service does not allow the following common characters in keys:
         // * chr(35) = '#'
         // * chr(47) = '/'
@@ -563,7 +561,6 @@ class TableServiceIntegrationTest extends IntegrationTestBase {
         }
         catch (ServiceException $e) {
             $this->assertEquals(404, $e->getCode(), 'getCode');
-
         }
 
         $qopts = new QueryEntitiesOptions();

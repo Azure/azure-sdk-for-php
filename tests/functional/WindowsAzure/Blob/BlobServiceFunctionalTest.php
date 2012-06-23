@@ -1303,16 +1303,13 @@ class BlobServiceFunctionalTest extends FunctionalTestBase
         $blob = BlobServiceFunctionalTestData::getInterestingBlobName();
 
         // Make sure there is something to test
-        $this->restProxy->createBlockBlob($container, $blob, "");
+        $createBlockBlobResult = $this->restProxy->createBlockBlob($container, $blob, "");
 
         $properties = BlobServiceFunctionalTestData::getNiceMetadata();
         $this->restProxy->setBlobMetadata($container, $blob, $properties);
 
-        // TODO: Bug https://github->com/WindowsAzure/azure-sdk-for-java/issues/74
-        // means that createBlockBlob does not return the etag. So just read it separately.
-        $blobInfo = $this->restProxy->getBlobProperties($container, $blob);
         if (!is_null($options)) {
-            BlobServiceFunctionalTestData::fixEtagAccessCondition($options->getAccessCondition(), $blobInfo->getProperties()->getEtag());
+            BlobServiceFunctionalTestData::fixEtagAccessCondition($options->getAccessCondition(), $createBlockBlobResult->getETag());
         }
 
         try {
@@ -1453,12 +1450,9 @@ class BlobServiceFunctionalTest extends FunctionalTestBase
         $blob = BlobServiceFunctionalTestData::getInterestingBlobName();
 
         // Make sure there is something to test
-        $this->restProxy->createBlockBlob($container, $blob, "");
-        // TODO: Bug https://github->com/WindowsAzure/azure-sdk-for-java/issues/74
-        // means that createBlockBlob does not return the etag. So just read it separately.
-        $blobInfo = $this->restProxy->getBlobProperties($container, $blob);
+        $createBlockBlobResult = $this->restProxy->createBlockBlob($container, $blob, "");
         if (!is_null($options)) {
-            BlobServiceFunctionalTestData::fixEtagAccessCondition($options->getAccessCondition(), $blobInfo->getProperties()->getEtag());
+            BlobServiceFunctionalTestData::fixEtagAccessCondition($options->getAccessCondition(), $createBlockBlobResult->getEtag());
         }
 
         $firstkey = '';
@@ -1592,17 +1586,14 @@ class BlobServiceFunctionalTest extends FunctionalTestBase
         $blob = BlobServiceFunctionalTestData::getInterestingBlobName();
 
         // Make sure there is something to test
-        $this->restProxy->createPageBlob($container, $blob, 512);
+        $createPageBlobResult = $this->restProxy->createPageBlob($container, $blob, 512);
 
         $metadata = BlobServiceFunctionalTestData::getNiceMetadata();
         $this->restProxy->setBlobMetadata($container, $blob, $metadata);
         // Do not set the properties, there should be default properties.
 
-        // TODO: Bug https://github->com/WindowsAzure/azure-sdk-for-java/issues/74
-        // means that createBlockBlob does not return the etag. So just read it separately.
-        $blobInfo = $this->restProxy->getBlobProperties($container, $blob);
         if (!is_null($options)) {
-            BlobServiceFunctionalTestData::fixEtagAccessCondition($options->getAccessCondition(), $blobInfo->getProperties()->getEtag());
+            BlobServiceFunctionalTestData::fixEtagAccessCondition($options->getAccessCondition(), $createPageBlobResult->getEtag());
         }
 
         try {
@@ -1712,7 +1703,6 @@ class BlobServiceFunctionalTest extends FunctionalTestBase
             $this->assertEquals($properties->getBlobContentLength(), $res->getProperties()->getContentLength(), 'blob getProperties->getContentLength');
         }
 
-        // TODO: Should be nullable: https://github->com/WindowsAzure/azure-sdk-for-java/issues/75
         if (is_null($properties) || is_null($properties->getSequenceNumber())) {
             $this->assertEquals(0, $res->getProperties()->getSequenceNumber(), 'blob getProperties->getSequenceNumber');
         }
@@ -1783,12 +1773,8 @@ class BlobServiceFunctionalTest extends FunctionalTestBase
         $blob = BlobServiceFunctionalTestData::getInterestingBlobName();
 
         // Make sure there is something to test
-        $this->restProxy->createPageBlob($container, $blob, 512);
-        // TODO: Bug https://github->com/WindowsAzure/azure-sdk-for-java/issues/74
-        // means that createBlockBlob does not return the etag. So just read it separately.
-        $blobInfo = $this->restProxy->getBlobProperties($container, $blob);
-
-        BlobServiceFunctionalTestData::fixEtagAccessCondition($properties->getAccessCondition(), $blobInfo->getProperties()->getEtag());
+        $createPageBlobResult = $this->restProxy->createPageBlob($container, $blob, 512);
+        BlobServiceFunctionalTestData::fixEtagAccessCondition($properties->getAccessCondition(), $createPageBlobResult->getEtag());
 
         try {
             // And put in some properties

@@ -125,10 +125,7 @@ class QueueServiceFunctionalOptionsTest extends \PHPUnit_Framework_TestCase  {
         $this->assertNull($options->getTimeout(), 'Default ListQueuesOptions->getTimeout');        
         $options->setIncludeMetadata(true);
         $options->setMarker('foo');
-        // TODO: Revert this change when fixed
-        // https://github.com/WindowsAzure/azure-sdk-for-php/issues/69
-        // $options->setMaxResults(-10);
-        $options->setMaxResults('-10');
+        $options->setMaxResults(-10);
         $options->setPrefix('bar');
         $options->setTimeout(self::IntegerMAX_VALUE);
         $this->assertTrue($options->getIncludeMetadata(), 'Set ListQueuesOptions->getIncludeMetadata');
@@ -142,77 +139,53 @@ class QueueServiceFunctionalOptionsTest extends \PHPUnit_Framework_TestCase  {
         $options = new CreateQueueOptions();
         $this->assertNull($options->getMetadata(), 'Default CreateQueueOptions->getMetadata');
         $this->assertEquals(0, count($options->getMetadata()), 'Default CreateQueueOptions->getMetadata->size');
-        // TODO: Uncomment when fixed.
-        // https://github.com/WindowsAzure/azure-sdk-for-php/issues/59
-        // $this->assertNull($options->getTimeout(), 'Default CreateQueueOptions->getTimeout');
+        $this->assertNull($options->getTimeout(), 'Default CreateQueueOptions->getTimeout');
         $metadata = array(
             'foo' => 'bar',
             'baz' => 'bat',
         );
         $options->setMetadata($metadata);
-        // TODO: Uncomment when fixed.
-        // https://github.com/WindowsAzure/azure-sdk-for-php/issues/59
-        //$options->setTimeout(-10);
+        $options->setTimeout(-10);
         $this->assertEquals($options->getMetadata(), $metadata, 'Set CreateQueueOptions->getMetadata');
         $this->assertEquals(2, count($options->getMetadata()), 'Set CreateQueueOptions->getMetadata->size');
-        // TODO: Uncomment when fixed.
-        // https://github.com/WindowsAzure/azure-sdk-for-php/issues/59
-        // $this->assertEquals(-10, $options->getTimeout(), 'Set CreateQueueOptions->getTimeout');
+        $this->assertEquals(-10, $options->getTimeout(), 'Set CreateQueueOptions->getTimeout');
         $options->addMetadata('aaa', 'bbb');
         $this->assertEquals(3, count($options->getMetadata()), 'Set CreateQueueOptions->getMetadata->size');
     }
 
     public function testCheckCreateMessageOptions() {
         $options = new CreateMessageOptions();
-        // TODO: Uncomment when fixed.
-        // https://github.com/WindowsAzure/azure-sdk-for-php/issues/59
-        // $this->assertNull($options->getTimeout(), 'Default CreateMessageOptions->getTimeout');
+        $this->assertNull($options->getTimeout(), 'Default CreateMessageOptions->getTimeout');
         $this->assertNull($options->getTimeToLiveInSeconds(), 'Default CreateMessageOptions->getTimeToLiveInSeconds');
         $this->assertNull($options->getVisibilityTimeoutInSeconds(), 'Default CreateMessageOptions->getVisibilityTimeoutInSeconds');
-        // TODO: Uncomment when fixed.
-        // https://github.com/WindowsAzure/azure-sdk-for-php/issues/59
-        // $options->setTimeout(self::IntegerMAX_VALUE);
+        $options->setTimeout(self::IntegerMAX_VALUE);
         $options->setTimeToLiveInSeconds(0);
         $options->setVisibilityTimeoutInSeconds(self::IntegerMIN_VALUE);
-        // TODO: Uncomment when fixed.
-        // https://github.com/WindowsAzure/azure-sdk-for-php/issues/59
-        // $this->assertEquals(self::IntegerMAX_VALUE, $options->getTimeout(), 'Set CreateMessageOptions->getTimeout');
+        $this->assertEquals(self::IntegerMAX_VALUE, $options->getTimeout(), 'Set CreateMessageOptions->getTimeout');
         $this->assertEquals(0, $options->getTimeToLiveInSeconds(), 'Set CreateMessageOptions->getTimeToLiveInSeconds');
         $this->assertEquals(self::IntegerMIN_VALUE, $options->getVisibilityTimeoutInSeconds(), 'Set CreateMessageOptions->getVisibilityTimeoutInSeconds');
     }
 
     public function testCheckListMessagesOptions() {
         $options = new ListMessagesOptions();
-        // TODO: Uncomment when fixed.
-        // https://github.com/WindowsAzure/azure-sdk-for-php/issues/59
-        // $this->assertNull($options->getTimeout(), 'Default ListMessagesOptions->getTimeout');
+        $this->assertNull($options->getTimeout(), 'Default ListMessagesOptions->getTimeout');
         $this->assertNull($options->getNumberOfMessages(), 'Default ListMessagesOptions->getNumberOfMessages');
         $this->assertNull($options->getVisibilityTimeoutInSeconds(), 'Default ListMessagesOptions->getVisibilityTimeoutInSeconds');
-        // TODO: Uncomment when fixed.
-        // https://github.com/WindowsAzure/azure-sdk-for-php/issues/59
-        // $options->setTimeout(self::IntegerMAX_VALUE);
+        $options->setTimeout(self::IntegerMAX_VALUE);
         $options->setNumberOfMessages(0);
         $options->setVisibilityTimeoutInSeconds(self::IntegerMIN_VALUE);
-        // TODO: Uncomment when fixed.
-        // https://github.com/WindowsAzure/azure-sdk-for-php/issues/59
-        // $this->assertEquals(self::IntegerMAX_VALUE, $options->getTimeout(), 'Set ListMessagesOptions->getTimeout');
+        $this->assertEquals(self::IntegerMAX_VALUE, $options->getTimeout(), 'Set ListMessagesOptions->getTimeout');
         $this->assertEquals(0, $options->getNumberOfMessages(), 'Set ListMessagesOptions->getNumberOfMessages');
         $this->assertEquals(self::IntegerMIN_VALUE, $options->getVisibilityTimeoutInSeconds(), 'Set ListMessagesOptions->getVisibilityTimeoutInSeconds');
     }
 
     public function testCheckPeekMessagesOptions() {
         $options = new PeekMessagesOptions();
-        // TODO: Uncomment when fixed.
-        // https://github.com/WindowsAzure/azure-sdk-for-php/issues/59
-        // $this->assertNull($options->getTimeout(), 'Default PeekMessagesOptions->getTimeout');
+        $this->assertNull($options->getTimeout(), 'Default PeekMessagesOptions->getTimeout');
         $this->assertNull($options->getNumberOfMessages(), 'Default PeekMessagesOptions->getNumberOfMessages');
-        // TODO: Uncomment when fixed.
-        // https://github.com/WindowsAzure/azure-sdk-for-php/issues/59
-        // $options->setTimeout(self::IntegerMAX_VALUE);
+        $options->setTimeout(self::IntegerMAX_VALUE);
         $options->setNumberOfMessages(0);
-        // TODO: Uncomment when fixed.
-        // https://github.com/WindowsAzure/azure-sdk-for-php/issues/59
-        // $this->assertEquals(self::IntegerMAX_VALUE, $options->getTimeout(), 'Set PeekMessagesOptions->getTimeout');
+        $this->assertEquals(self::IntegerMAX_VALUE, $options->getTimeout(), 'Set PeekMessagesOptions->getTimeout');
         $this->assertEquals(0, $options->getNumberOfMessages(), 'Set PeekMessagesOptions->getNumberOfMessages');
     }
 }

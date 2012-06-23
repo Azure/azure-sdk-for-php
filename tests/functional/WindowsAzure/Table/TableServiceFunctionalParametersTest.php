@@ -274,7 +274,6 @@ class TableServiceFunctionalParametersTest extends FunctionalTestBase {
     * @covers WindowsAzure\Table\TableRestProxy::insertEntity
     */
     public function testInsertEntityEmptyPartitionKey() {
-        // TODO: Fails because of https://github.com/WindowsAzure/azure-sdk-for-php/issues/176
         $table = TableServiceFunctionalTestData::$TEST_TABLE_NAMES[0];
 
         $e = new Entity();
@@ -289,7 +288,6 @@ class TableServiceFunctionalParametersTest extends FunctionalTestBase {
     * @covers WindowsAzure\Table\TableRestProxy::insertEntity
     */
     public function testInsertEntityEmptyRowKey() {
-        // TODO: Fails because of https://github.com/WindowsAzure/azure-sdk-for-php/issues/176
         $table = TableServiceFunctionalTestData::$TEST_TABLE_NAMES[0];
 
         $e = new Entity();
@@ -346,7 +344,6 @@ class TableServiceFunctionalParametersTest extends FunctionalTestBase {
     * @covers WindowsAzure\Table\TableRestProxy::getEntity
     */
     public function testGetEntityPartKeyNull() {
-        // TODO: Fails because of https://github.com/WindowsAzure/azure-sdk-for-php/issues/206
         $table = TableServiceFunctionalTestData::$TEST_TABLE_NAMES[0];
 
         try {
@@ -364,7 +361,6 @@ class TableServiceFunctionalParametersTest extends FunctionalTestBase {
     * @covers WindowsAzure\Table\TableRestProxy::getEntity
     */
     public function testGetEntityRowKeyNull() {
-        // TODO: Fails because of https://github.com/WindowsAzure/azure-sdk-for-php/issues/206
         $table = TableServiceFunctionalTestData::$TEST_TABLE_NAMES[0];
 
         try {
@@ -382,7 +378,6 @@ class TableServiceFunctionalParametersTest extends FunctionalTestBase {
     * @covers WindowsAzure\Table\TableRestProxy::getEntity
     */
     public function testGetEntityKeysNull() {
-        // TODO: Fails because of https://github.com/WindowsAzure/azure-sdk-for-php/issues/206
         $table = TableServiceFunctionalTestData::$TEST_TABLE_NAMES[0];
 
         try {
@@ -434,7 +429,6 @@ class TableServiceFunctionalParametersTest extends FunctionalTestBase {
     * @covers WindowsAzure\Table\TableRestProxy::getEntity
     */
     public function testGetEntityKeysAndOptionsNull() {
-        // TODO: Fails because of https://github.com/WindowsAzure/azure-sdk-for-php/issues/206
         $table = TableServiceFunctionalTestData::$TEST_TABLE_NAMES[0];
 
         try {
@@ -453,7 +447,6 @@ class TableServiceFunctionalParametersTest extends FunctionalTestBase {
     * @covers WindowsAzure\Table\TableRestProxy::insertEntity
     */
     public function testGetEntityKeysNullWithOptions() {
-        // TODO: Fails because of https://github.com/WindowsAzure/azure-sdk-for-php/issues/206
         $table = TableServiceFunctionalTestData::$TEST_TABLE_NAMES[0];
         $ent = TableServiceFunctionalTestData::getSimpleEntity();
 
@@ -487,7 +480,6 @@ class TableServiceFunctionalParametersTest extends FunctionalTestBase {
     * @covers WindowsAzure\Table\TableRestProxy::deleteEntity
     */
     public function testDeleteEntityPartKeyNull() {
-        // TODO: Fails because of https://github.com/WindowsAzure/azure-sdk-for-php/issues/206
         $table = TableServiceFunctionalTestData::$TEST_TABLE_NAMES[0];
 
         try {
@@ -505,7 +497,6 @@ class TableServiceFunctionalParametersTest extends FunctionalTestBase {
     * @covers WindowsAzure\Table\TableRestProxy::deleteEntity
     */
     public function testDeleteEntityRowKeyNull() {
-        // TODO: Fails because of https://github.com/WindowsAzure/azure-sdk-for-php/issues/206
         $table = TableServiceFunctionalTestData::$TEST_TABLE_NAMES[0];
 
         try {
@@ -523,7 +514,6 @@ class TableServiceFunctionalParametersTest extends FunctionalTestBase {
     * @covers WindowsAzure\Table\TableRestProxy::deleteEntity
     */
     public function testDeleteEntityKeysNull() {
-        // TODO: Fails because of https://github.com/WindowsAzure/azure-sdk-for-php/issues/206
         $table = TableServiceFunctionalTestData::$TEST_TABLE_NAMES[0];
 
         try {
@@ -575,7 +565,6 @@ class TableServiceFunctionalParametersTest extends FunctionalTestBase {
     * @covers WindowsAzure\Table\TableRestProxy::deleteEntity
     */
     public function testDeleteEntityKeysAndOptionsNull() {
-        // TODO: Fails because of https://github.com/WindowsAzure/azure-sdk-for-php/issues/206
         $table = TableServiceFunctionalTestData::$TEST_TABLE_NAMES[0];
 
         try {
@@ -594,7 +583,6 @@ class TableServiceFunctionalParametersTest extends FunctionalTestBase {
     * @covers WindowsAzure\Table\TableRestProxy::insertEntity
     */
     public function testDeleteEntityKeysNullWithOptions() {
-        // TODO: Fails because of https://github.com/WindowsAzure/azure-sdk-for-php/issues/206
         $table = TableServiceFunctionalTestData::$TEST_TABLE_NAMES[0];
         $ent = TableServiceFunctionalTestData::getSimpleEntity();
 
@@ -629,8 +617,6 @@ class TableServiceFunctionalParametersTest extends FunctionalTestBase {
     * @covers WindowsAzure\Table\TableRestProxy::insertEntity
     */
     public function testDeleteEntityTroublesomePartitionKey() {
-        // TODO: Fails because of https://github.com/WindowsAzure/azure-sdk-for-php/issues/180
-
         // The service does not allow the following common characters in keys:
         // 35 '#'
         // 47 '/'
@@ -684,8 +670,6 @@ class TableServiceFunctionalParametersTest extends FunctionalTestBase {
     * @covers WindowsAzure\Table\TableRestProxy::insertEntity
     */
     public function testDeleteEntityTroublesomeRowKey() {
-        // TODO: Fails because of https://github.com/WindowsAzure/azure-sdk-for-php/issues/180
-
         // The service does not allow the following common characters in keys:
         // 35 '#'
         // 47 '/'
@@ -823,7 +807,6 @@ class TableServiceFunctionalParametersTest extends FunctionalTestBase {
     * @covers WindowsAzure\Table\TableRestProxy::mergeEntity
     */
     public function testMergeEntityOptionsNull() {
-        // TODO: Fails because of https://github.com/WindowsAzure/azure-sdk-for-php/issues/157
         $table = TableServiceFunctionalTestData::$TEST_TABLE_NAMES[0];
 
         try {
@@ -925,7 +908,6 @@ class TableServiceFunctionalParametersTest extends FunctionalTestBase {
     * @covers WindowsAzure\Table\TableRestProxy::updateEntity
     */
     public function testUpdateEntityOptionsNull() {
-        // TODO: Fails because of https://github.com/WindowsAzure/azure-sdk-for-php/issues/157
         $table = TableServiceFunctionalTestData::$TEST_TABLE_NAMES[0];
 
         try {

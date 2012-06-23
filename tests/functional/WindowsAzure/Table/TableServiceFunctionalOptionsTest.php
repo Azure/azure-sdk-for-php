@@ -368,7 +368,6 @@ class TableServiceFunctionalOptionsTest extends \PHPUnit_Framework_TestCase {
         $this->assertNull($entity->getPartitionKey(), 'Default Entity->getPartitionKey');
         $this->assertNull($entity->getRowKey(), 'Default Entity->getRowKey');
         $this->assertNull($entity->getTimestamp(), 'Default Entity->getTimestamp');
-        // TODO: Fails because of https://github.com/WindowsAzure/azure-sdk-for-php/issues/156
         $this->assertNull($entity->getProperty('foo'), 'Default Entity->getProperty(\'foo\')');
         $this->assertNull($entity->getPropertyValue('foo'), 'Default Entity->tryGtPropertyValue(\'foo\')');
 

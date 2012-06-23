@@ -270,10 +270,7 @@ class QueueServiceIntegrationTest extends IntegrationTestBase {
 
         // Act
         $opts = new ListQueuesOptions();
-        // TODO: Revert this change when fixed:
-        // https://github.com/WindowsAzure/azure-sdk-for-php/issues/100
-        //$opts->setMaxResults(3);
-        $opts->setMaxResults('3');
+        $opts->setMaxResults(3);
         $opts->setIncludeMetadata(true);
         $opts->setPrefix(self::$testQueuesPrefix);
         $result = $this->restProxy->listQueues($opts);
@@ -296,7 +293,8 @@ class QueueServiceIntegrationTest extends IntegrationTestBase {
         $queue0 = $result->getQueues();
         $queue0 = $queue0[0];
         $this->assertNotNull($queue0, '$queue0');
-        $this->assertNotNull($queue0->getMetadata(), '$queue0->getMetadata');
+        $this->assertNotNull($queue0->getMetadata(), '$queue0->getMetadata' .
+                ' (https://github.com/WindowsAzure/azure-sdk-for-php/issues/252)');
         $this->assertNotNull($queue0->getName(), '$queue0->getName');
         $this->assertNotNull($queue0->getUrl(), '$queue0->getUrl');
 
@@ -583,16 +581,12 @@ class QueueServiceIntegrationTest extends IntegrationTestBase {
         $message0 = $listResult1->getQueueMessages();
         $message0 = $message0[0];
 
-        // TODO: Change the last parameter to 0 when the following is fixed:
-        // https://github.com/WindowsAzure/azure-sdk-for-php/issues/99
-        // Also, remove the sleep.
         $updateResult = $this->restProxy->updateMessage(
                 self::$TEST_QUEUE_FOR_MESSAGES_8,
                 $message0->getMessageId(),
                 $message0->getPopReceipt(),
                 'new text',
-                1);
-        sleep(2);
+                0);
         $listResult2 = $this->restProxy->listMessages(self::$TEST_QUEUE_FOR_MESSAGES_8);
 
         // Assert
