@@ -128,11 +128,6 @@ class StorageServiceSettingsTest extends \PHPUnit_Framework_TestCase
     {
         // Setup
         $connectionString = 'UseDevelopmentStorage=invalid_value';
-        $expectedName = Resources::DEV_STORE_NAME;
-        $expectedKey = Resources::DEV_STORE_KEY;
-        $expectedBlobEndpoint = Resources::DEV_STORE_URI . ':10000/devstoreaccount1';
-        $expectedQueueEndpoint = Resources::DEV_STORE_URI . ':10001/devstoreaccount1';
-        $expectedTableEndpoint = Resources::DEV_STORE_URI . ':10002/devstoreaccount1';
         
         // Test
         $actual = StorageServiceSettings::createFromConnectionString($connectionString);
