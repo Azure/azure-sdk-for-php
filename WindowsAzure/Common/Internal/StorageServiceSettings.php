@@ -420,6 +420,47 @@ class StorageServiceSettings
         
         return sprintf(Resources::SERVICE_URI_FORMAT, $scheme, $accountName, $dns);
     }
+    
+    /**
+     * Creates StorageServiceSettings object given endpoints uri.
+     * 
+     * @param array  $settings         The service settings.
+     * @param string $blobEndpointUri  The blob endpoint uri.
+     * @param string $queueEndpointUri The queue endpoint uri.
+     * @param string $tableEndpointUri The table endpoint uri.
+     * 
+     * @return \WindowsAzure\Common\Internal\StorageServiceSettings
+     */
+    private static function _createStorageServiceSettings(
+        $settings,
+        $blobEndpointUri = null,
+        $queueEndpointUri = null,
+        $tableEndpointUri = null
+    ) {
+        $blobEndpointUri = Utilities::tryGetValue(
+            $settings,
+            Resources::BLOB_ENDPOINT_NAME,
+            $blobEndpointUri
+        );
+        $queueEndpointUri = Utilities::tryGetValue(
+            $settings,
+            Resources::QUEUE_ENDPOINT_NAME,
+            $queueEndpointUri
+        );
+        $tableEndpointUri = Utilities::tryGetValue(
+            $settings,
+            Resources::TABLE_ENDPOINT_NAME,
+            $tableEndpointUri
+        );
+            
+        return new StorageServiceSettings(
+            $settings[Resources::ACCOUNT_NAME_NAME],
+            $settings[Resources::ACCOUNT_KEY_NAME],
+            $blobEndpointUri,
+            $queueEndpointUri,
+            $tableEndpointUri
+        );
+    }
 
     /**
      * Creates a StorageServiceSettings object from the given connection string.
@@ -464,39 +505,25 @@ class StorageServiceSettings
             )
         );
         if ($matchedSpecs) {
-            $blobEndpoint = Utilities::tryGetValue(
+            return self::_createStorageServiceSettings(
                 $tokenizedSettings,
-                Resources::BLOB_ENDPOINT_NAME,
                 self::_getDefaultServiceEndpoint(
                     $tokenizedSettings,
                     Resources::BLOB_BASE_DNS_NAME
-                )
-            );
-            $queueEndpoint = Utilities::tryGetValue(
-                $tokenizedSettings,
-                Resources::QUEUE_ENDPOINT_NAME,
+                ),
                 self::_getDefaultServiceEndpoint(
                     $tokenizedSettings,
                     Resources::QUEUE_BASE_DNS_NAME
-                )
-            );
-            $tableEndpoint = Utilities::tryGetValue(
-                $tokenizedSettings,
-                Resources::TABLE_ENDPOINT_NAME,
+                ),
                 self::_getDefaultServiceEndpoint(
                     $tokenizedSettings,
                     Resources::TABLE_BASE_DNS_NAME
                 )
             );
-            
-            $storageServiceSettings = new StorageServiceSettings(
-                $tokenizedSettings[Resources::ACCOUNT_NAME_NAME],
-                $tokenizedSettings[Resources::ACCOUNT_KEY_NAME],
-                $blobEndpoint,
-                $queueEndpoint,
-                $tableEndpoint
-            );
         }
+        
+        // explicit case
+        
         
         return $storageServiceSettings;
     }
