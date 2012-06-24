@@ -249,7 +249,7 @@ class HttpClient implements IHttpClient
         foreach ($filters as $filter) {
             $this->_request = $filter->handleRequest($this)->_request;
         }
-
+        
         $this->_response = $this->_request->send();
 
         $start = count($filters) - 1;

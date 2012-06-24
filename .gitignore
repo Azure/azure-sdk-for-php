@@ -8,6 +8,5 @@ channel
 phpunit.xml
 ChannelManager.php
 cache.properties
-vendor
 nbproject
 *.tgz

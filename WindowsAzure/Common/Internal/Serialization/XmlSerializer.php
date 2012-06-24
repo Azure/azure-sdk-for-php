@@ -25,7 +25,6 @@
 namespace WindowsAzure\Common\Internal\Serialization;
 use WindowsAzure\Common\Internal\Utilities;
 use WindowsAzure\Common\Internal\Resources;
-use WindowsAzure\Common\Internal\Validate;
 
 /**
  * Short description
@@ -102,83 +101,7 @@ class XmlSerializer implements ISerializer
             }
         }
     }
-
-    /**
-     * Gets the attributes of a specified object if get attributes 
-     * method is exposed. 
-     *
-     * @param object $targetObject The target object. 
-     * @param array  $methodArray  The array of method of the target object.
-     * 
-     * @return mixed
-     */
-    private static function _getInstanceAttributes($targetObject, $methodArray)
-    {
-        foreach ($methodArray as $method) {
-            if ($method->name == 'getAttributes') {
-                $classProperty = $method->invoke($targetObject);
-                return $classProperty;
-            }
-        }
-        return null;
-    }
-
-    /** 
-     * Serialize an object with specified root element name. 
-     * 
-     * @param object $targetObject The target object. 
-     * @param string $rootName     The name of the root element. 
-     * 
-     * @return string
-     */
-    public static function objectSerialize($targetObject, $rootName)
-    {
-        Validate::notNull($targetObject, 'targetObject');
-        Validate::isString($rootName, 'rootName');
-        $xmlWriter = new \XmlWriter();
-        $xmlWriter->openMemory(); 
-        $xmlWriter->setIndent(true);
-        $reflectionClass = new \ReflectionClass($targetObject);
-        $methodArray     = $reflectionClass->getMethods();
-        $attributes      = self::_getInstanceAttributes(
-            $targetObject, 
-            $methodArray
-        );
-         
-        $xmlWriter->startElement($rootName);
-        if (!is_null($attributes)) {
-            foreach(array_keys($attributes) as $attributeKey) {
-                $xmlWriter->writeAttribute(
-                    $attributeKey, 
-                    $attributes[$attributeKey]
-                );
-            }
-        }
-
-        foreach ($methodArray as $method) {
-            if ((strpos($method->name, 'get') === 0) 
-                && $method->isPublic() 
-                && ($method->name != 'getAttributes')
-            ) {
-                $variableName  = substr($method->name, 3);
-                $variableValue = $method->invoke($targetObject);
-                if (!empty($variableValue)) {
-                    if (gettype($variableValue) === 'object') {
-                        $xmlWriter->writeRaw(
-                            XmlSerializer::objectSerialize(
-                                $variableValue, $variableName
-                            )
-                        );
-                    } else {
-                        $xmlWriter->writeElement($variableName, $variableValue);
-                    } 
-                }
-            }
-        } 
-        $xmlWriter->endElement();
-        return $xmlWriter->outputMemory(true);
-    }
-
+    
     /**
      * Serializes given array. The array indices must be string to use them as
      * as element name.
@@ -220,7 +143,7 @@ class XmlSerializer implements ISerializer
         }
         
         unset($array[Resources::XTAG_NAMESPACE]);
-        self::_arr2xml($xmlw, $array, $defaultTag);
+        $this->_arr2xml($xmlw, $array, $defaultTag);
 
         $xmlw->endElement();
 

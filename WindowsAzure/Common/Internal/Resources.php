@@ -69,10 +69,8 @@ class Resources
     const INVALID_CONFIG_MSG = 'Config object must be of type Configuration';
     const INVALID_BUILDER_MSG = 'Builder object must implement IServicesBuilder';
     const INVALID_ACH_MSG = 'The provided access condition header is invalid';
-    const INVALID_RECEIVE_MODE_MSG = 'The receive message option is in neither RECEIVE_AND_DELETE nor PEEK_LOCK mode.';
     const MISSING_CONFIG_SETTING_KEY_MSG = "Missing configuration setting %s which is required to create %sRestProxy.";
     const MISSING_CONFIG_SETTING_VALUE_MSG = "The value of configuration setting %s can't be null or empty.";
-    const INSTANCE_TYPE_VALIDATION_MSG = 'The type of %s is %s but is expected to be %s.';
 
     // HTTP Headers
     const X_MS_HEADER_PREFIX                 = 'x-ms-';
@@ -114,7 +112,7 @@ class Resources
     const LAST_MODIFIED                      = 'last-modified';
     const DATE                               = 'date';
     const AUTHENTICATION                     = 'authorization';
-    const WRAP_AUTHORIZATION                 = 'WRAP access_token="%s"';
+    const WRAP_AUTHORIZATION                 = 'WRAP access_token={%s}';
     const CONTENT_ENCODING                   = 'content-encoding';
     const CONTENT_LANGUAGE                   = 'content-language';
     const CONTENT_LENGTH                     = 'content-length';
@@ -138,15 +136,6 @@ class Resources
     const BLOB_TYPE_NAME               = 'IBlob';
     const TABLE_TYPE_NAME              = 'ITable';
     const SERVICE_MANAGEMENT_TYPE_NAME = 'IServiceManagement';
-    const SERVICE_BUS_TYPE_NAME        = 'IServiceBus';
-    const WRAP_TYPE_NAME               = 'IWrap';
-
-    // WRAP
-    const WRAP_ACCESS_TOKEN            = 'wrap_access_token'; 
-    const WRAP_ACCESS_TOKEN_EXPIRES_IN = 'wrap_access_token_expires_in'; 
-    const WRAP_NAME                    = 'wrap_name';
-    const WRAP_PASSWORD                = 'wrap_password';
-    const WRAP_SCOPE                   = 'wrap_scope'; 
     
     // HTTP Methods
     const HTTP_GET    = 'GET';
@@ -177,7 +166,6 @@ class Resources
     const ATOM_XML_NAMESPACE = 'http://www.w3.org/2005/Atom';
     const DS_XML_NAMESPACE   = 'http://schemas.microsoft.com/ado/2007/08/dataservices';
     const DSM_XML_NAMESPACE  = 'http://schemas.microsoft.com/ado/2007/08/dataservices/metadata';
-    const XSI_XML_NAMESPACE  = 'http://www.w3.org/2001/XMLSchema-instance';
     
 
     // Header values
@@ -186,8 +174,6 @@ class Resources
     const DATA_SERVICE_VERSION_VALUE     = '1.0;NetFx';
     const MAX_DATA_SERVICE_VERSION_VALUE = '2.0;NetFx';
     const ACCEPT_HEADER_VALUE            = 'application/atom+xml,application/xml';
-    const ATOM_ENTRY_CONTENT_TYPE      
-        = 'application/atom+xml;type=entry;charset=utf-8';
     const ACCEPT_CHARSET_VALUE           = 'utf-8';
 
     // Query parameter names
@@ -211,7 +197,6 @@ class Resources
     const QP_BLOCK_LIST_TYPE    = 'blocklisttype';
     const QP_SELECT             = '$select';
     const QP_TOP                = '$top';
-    const QP_SKIP               = '$skip';
     const QP_FILTER             = '$filter';
     const QP_NEXT_TABLE_NAME    = 'NextTableName';
     const QP_NEXT_PK            = 'NextPartitionKey';
@@ -253,31 +238,6 @@ class Resources
     const XTAG_KEY_TYPE                   = 'KeyType';
     const XTAG_STORAGE_SERVICE_KEYS       = 'StorageServiceKeys';
     const XTAG_ERROR                      = 'Error';
-
-    // Service Bus
-    const LIST_TOPICS_PATH        = '$Resources/Topics';
-    const LIST_QUEUES_PATH        = '$Resources/Queues';
-    const LIST_RULES_PATH         = '%s/subscriptions/%s/rules';
-    const LIST_SUBSCRIPTIONS_PATH = '%s/subscriptions';
-    const RECEIVE_MESSAGE_PATH    = '%s/messages/head';
-    const RECEIVE_SUBSCRIPTION_MESSAGE_PATH = '%s/subscriptions/%s/messages/head';
-    const SEND_MESSAGE_PATH       = '%s/messages';
-    const RULE_PATH               = '%s/subscriptions/%s/rules/%s';
-    const SUBSCRIPTION_PATH       = '%s/subscriptions/%s';
-    const DEFAULT_RULE_NAME       = '$Default';
-    const UNIQUE_ID_PREFIX        = 'urn:uuid:';
-    const SERVICE_BUS_NAMESPACE   = 'http://schemas.microsoft.com/netservices/2010/10/servicebus/connect';
-    const BROKER_PROPERTIES       = 'BrokerProperties';
-    const XMLNS_ATOM              = 'xmlns:atom';
-    const XMLNS                   = 'xmlns';
-    const ATOM_NAMESPACE          = 'http://www.w3.org/2005/Atom';
-
-    // ATOM string 
-    const AUTHOR      = 'author';
-    const CATEGORY    = 'category';
-    const CONTRIBUTOR = 'contributor';
-    const ENTRY       = 'entry';
-    const LINK        = 'link';
 
     // PHP URL Keys
     const PHP_URL_SCHEME   = 'scheme';
