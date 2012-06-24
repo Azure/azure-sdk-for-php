@@ -41,19 +41,23 @@ use WindowsAzure\Table\Models\QueryTablesOptions;
 use WindowsAzure\Table\Models\TableServiceOptions;
 use WindowsAzure\Table\Models\Filters\Filter;
 
-class TableServiceFunctionalParametersTest extends FunctionalTestBase {
-    public static function setUpBeforeClass() {
+class TableServiceFunctionalParametersTest extends FunctionalTestBase
+{
+    public static function setUpBeforeClass()
+    {
         parent::setUpBeforeClass();
     }
 
-    public static function tearDownAfterClass() {
+    public static function tearDownAfterClass()
+    {
         parent::tearDownAfterClass();
     }
 
     /**
     * @covers WindowsAzure\Table\TableRestProxy::getServiceProperties
     */
-    public function testGetServicePropertiesNullOptions() {
+    public function testGetServicePropertiesNullOptions()
+    {
         try {
             $this->restProxy->getServiceProperties(null);
             $this->assertFalse(Configuration::isEmulated(), 'Should fail if and only if in emulator');
@@ -72,7 +76,8 @@ class TableServiceFunctionalParametersTest extends FunctionalTestBase {
     /**
     * @covers WindowsAzure\Table\TableRestProxy::setServiceProperties
     */
-    public function testSetServicePropertiesNullOptions1() {
+    public function testSetServicePropertiesNullOptions1()
+    {
         try {
             $this->restProxy->setServiceProperties(new ServiceProperties());
             $this->fail('Expect default service properties to cause service to error');
@@ -85,7 +90,8 @@ class TableServiceFunctionalParametersTest extends FunctionalTestBase {
     /**
     * @covers WindowsAzure\Table\TableRestProxy::setServiceProperties
     */
-    public function testSetServicePropertiesNullOptions2() {
+    public function testSetServicePropertiesNullOptions2()
+    {
         try {
             $this->restProxy->setServiceProperties(null);
             $this->fail('Expect null service properties to throw');
@@ -99,7 +105,8 @@ class TableServiceFunctionalParametersTest extends FunctionalTestBase {
     /**
     * @covers WindowsAzure\Table\TableRestProxy::setServiceProperties
     */
-    public function testSetServicePropertiesNullOptions3() {
+    public function testSetServicePropertiesNullOptions3()
+    {
         try {
             $this->restProxy->setServiceProperties(null, null);
             $this->fail('Expect service properties to throw');
@@ -113,7 +120,8 @@ class TableServiceFunctionalParametersTest extends FunctionalTestBase {
     /**
     * @covers WindowsAzure\Table\TableRestProxy::setServiceProperties
     */
-    public function testSetServicePropertiesNullOptions4() {
+    public function testSetServicePropertiesNullOptions4()
+    {
         try {
             $this->restProxy->setServiceProperties(new ServiceProperties(), null);
             $this->fail('Expect default service properties to cause service to error');
@@ -126,7 +134,8 @@ class TableServiceFunctionalParametersTest extends FunctionalTestBase {
     /**
     * @covers WindowsAzure\Table\TableRestProxy::queryTables
     */
-    public function testQueryTablesNullOptions() {
+    public function testQueryTablesNullOptions()
+    {
         $this->restProxy->queryTables(null);
         $this->assertTrue(true, 'Null options should be fine.');
     }
@@ -134,7 +143,8 @@ class TableServiceFunctionalParametersTest extends FunctionalTestBase {
     /**
     * @covers WindowsAzure\Table\TableRestProxy::createTable
     */
-    public function testCreateTableNullOptions() {
+    public function testCreateTableNullOptions()
+    {
         try {
             $this->restProxy->createTable(null);
             $this->fail('Expect null table to throw');
@@ -148,7 +158,8 @@ class TableServiceFunctionalParametersTest extends FunctionalTestBase {
     /**
     * @covers WindowsAzure\Table\TableRestProxy::deleteTable
     */
-    public function testDeleteTableNullOptions() {
+    public function testDeleteTableNullOptions()
+    {
         try {
             $this->restProxy->deleteTable(null);
             $this->fail('Expect null table to throw');
@@ -162,7 +173,8 @@ class TableServiceFunctionalParametersTest extends FunctionalTestBase {
     /**
     * @covers WindowsAzure\Table\TableRestProxy::getTable
     */
-    public function testGetTableNullOptions() {
+    public function testGetTableNullOptions()
+    {
         try {
             $this->restProxy->getTable(null);
             $this->fail('Expect null table to throw');
@@ -177,7 +189,8 @@ class TableServiceFunctionalParametersTest extends FunctionalTestBase {
     /**
     * @covers WindowsAzure\Table\TableRestProxy::insertEntity
     */
-    public function testInsertEntityEntityNull() {
+    public function testInsertEntityEntityNull()
+    {
         $table = TableServiceFunctionalTestData::$TEST_TABLE_NAMES[0];
 
         try {
@@ -194,7 +207,8 @@ class TableServiceFunctionalParametersTest extends FunctionalTestBase {
     /**
     * @covers WindowsAzure\Table\TableRestProxy::insertEntity
     */
-    public function testInsertEntityTableAndEntityNull() {
+    public function testInsertEntityTableAndEntityNull()
+    {
         $table = TableServiceFunctionalTestData::$TEST_TABLE_NAMES[0];
 
         try {
@@ -211,7 +225,8 @@ class TableServiceFunctionalParametersTest extends FunctionalTestBase {
     /**
     * @covers WindowsAzure\Table\TableRestProxy::insertEntity
     */
-    public function testInsertEntityTableNull() {
+    public function testInsertEntityTableNull()
+    {
         $table = TableServiceFunctionalTestData::$TEST_TABLE_NAMES[0];
 
         try {
@@ -228,7 +243,8 @@ class TableServiceFunctionalParametersTest extends FunctionalTestBase {
     /**
     * @covers WindowsAzure\Table\TableRestProxy::insertEntity
     */
-    public function testInsertEntityEntityAndOptionsNull() {
+    public function testInsertEntityEntityAndOptionsNull()
+    {
         $table = TableServiceFunctionalTestData::$TEST_TABLE_NAMES[0];
 
         try {
@@ -245,7 +261,8 @@ class TableServiceFunctionalParametersTest extends FunctionalTestBase {
     /**
     * @covers WindowsAzure\Table\TableRestProxy::insertEntity
     */
-    public function testInsertEntityEntityNullWithOptions() {
+    public function testInsertEntityEntityNullWithOptions()
+    {
         $table = TableServiceFunctionalTestData::$TEST_TABLE_NAMES[0];
 
         try {
@@ -262,7 +279,8 @@ class TableServiceFunctionalParametersTest extends FunctionalTestBase {
     /**
     * @covers WindowsAzure\Table\TableRestProxy::insertEntity
     */
-    public function testInsertEntityOptionsNull() {
+    public function testInsertEntityOptionsNull()
+    {
         $table = TableServiceFunctionalTestData::$TEST_TABLE_NAMES[0];
 
         $this->restProxy->insertEntity($table, TableServiceFunctionalTestData::getSimpleEntity(), null);
@@ -273,7 +291,8 @@ class TableServiceFunctionalParametersTest extends FunctionalTestBase {
     /**
     * @covers WindowsAzure\Table\TableRestProxy::insertEntity
     */
-    public function testInsertEntityEmptyPartitionKey() {
+    public function testInsertEntityEmptyPartitionKey()
+    {
         $table = TableServiceFunctionalTestData::$TEST_TABLE_NAMES[0];
 
         $e = new Entity();
@@ -287,7 +306,8 @@ class TableServiceFunctionalParametersTest extends FunctionalTestBase {
     /**
     * @covers WindowsAzure\Table\TableRestProxy::insertEntity
     */
-    public function testInsertEntityEmptyRowKey() {
+    public function testInsertEntityEmptyRowKey()
+    {
         $table = TableServiceFunctionalTestData::$TEST_TABLE_NAMES[0];
 
         $e = new Entity();
@@ -301,7 +321,8 @@ class TableServiceFunctionalParametersTest extends FunctionalTestBase {
     /**
     * @covers WindowsAzure\Table\TableRestProxy::insertEntity
     */
-    public function testInsertStringWithAllAsciiCharacters() {
+    public function testInsertStringWithAllAsciiCharacters()
+    {
         $table = TableServiceFunctionalTestData::$TEST_TABLE_NAMES[0];
 
         $e = new Entity();
@@ -343,7 +364,8 @@ class TableServiceFunctionalParametersTest extends FunctionalTestBase {
     /**
     * @covers WindowsAzure\Table\TableRestProxy::getEntity
     */
-    public function testGetEntityPartKeyNull() {
+    public function testGetEntityPartKeyNull()
+    {
         $table = TableServiceFunctionalTestData::$TEST_TABLE_NAMES[0];
 
         try {
@@ -360,7 +382,8 @@ class TableServiceFunctionalParametersTest extends FunctionalTestBase {
     /**
     * @covers WindowsAzure\Table\TableRestProxy::getEntity
     */
-    public function testGetEntityRowKeyNull() {
+    public function testGetEntityRowKeyNull()
+    {
         $table = TableServiceFunctionalTestData::$TEST_TABLE_NAMES[0];
 
         try {
@@ -377,7 +400,8 @@ class TableServiceFunctionalParametersTest extends FunctionalTestBase {
     /**
     * @covers WindowsAzure\Table\TableRestProxy::getEntity
     */
-    public function testGetEntityKeysNull() {
+    public function testGetEntityKeysNull()
+    {
         $table = TableServiceFunctionalTestData::$TEST_TABLE_NAMES[0];
 
         try {
@@ -394,7 +418,8 @@ class TableServiceFunctionalParametersTest extends FunctionalTestBase {
     /**
     * @covers WindowsAzure\Table\TableRestProxy::getEntity
     */
-    public function testGetEntityTableAndKeysNull() {
+    public function testGetEntityTableAndKeysNull()
+    {
         $table = TableServiceFunctionalTestData::$TEST_TABLE_NAMES[0];
 
         try {
@@ -411,7 +436,8 @@ class TableServiceFunctionalParametersTest extends FunctionalTestBase {
     /**
     * @covers WindowsAzure\Table\TableRestProxy::getEntity
     */
-    public function testGetEntityTableNull() {
+    public function testGetEntityTableNull()
+    {
         $table = TableServiceFunctionalTestData::$TEST_TABLE_NAMES[0];
 
         try {
@@ -428,7 +454,8 @@ class TableServiceFunctionalParametersTest extends FunctionalTestBase {
     /**
     * @covers WindowsAzure\Table\TableRestProxy::getEntity
     */
-    public function testGetEntityKeysAndOptionsNull() {
+    public function testGetEntityKeysAndOptionsNull()
+    {
         $table = TableServiceFunctionalTestData::$TEST_TABLE_NAMES[0];
 
         try {
@@ -446,7 +473,8 @@ class TableServiceFunctionalParametersTest extends FunctionalTestBase {
     * @covers WindowsAzure\Table\TableRestProxy::getEntity
     * @covers WindowsAzure\Table\TableRestProxy::insertEntity
     */
-    public function testGetEntityKeysNullWithOptions() {
+    public function testGetEntityKeysNullWithOptions()
+    {
         $table = TableServiceFunctionalTestData::$TEST_TABLE_NAMES[0];
         $ent = TableServiceFunctionalTestData::getSimpleEntity();
 
@@ -466,7 +494,8 @@ class TableServiceFunctionalParametersTest extends FunctionalTestBase {
     * @covers WindowsAzure\Table\TableRestProxy::getEntity
     * @covers WindowsAzure\Table\TableRestProxy::insertEntity
     */
-    public function testGetEntityOptionsNull() {
+    public function testGetEntityOptionsNull()
+    {
         $table = TableServiceFunctionalTestData::$TEST_TABLE_NAMES[0];
         $ent = TableServiceFunctionalTestData::getSimpleEntity();
 
@@ -479,7 +508,8 @@ class TableServiceFunctionalParametersTest extends FunctionalTestBase {
     /**
     * @covers WindowsAzure\Table\TableRestProxy::deleteEntity
     */
-    public function testDeleteEntityPartKeyNull() {
+    public function testDeleteEntityPartKeyNull()
+    {
         $table = TableServiceFunctionalTestData::$TEST_TABLE_NAMES[0];
 
         try {
@@ -496,7 +526,8 @@ class TableServiceFunctionalParametersTest extends FunctionalTestBase {
     /**
     * @covers WindowsAzure\Table\TableRestProxy::deleteEntity
     */
-    public function testDeleteEntityRowKeyNull() {
+    public function testDeleteEntityRowKeyNull()
+    {
         $table = TableServiceFunctionalTestData::$TEST_TABLE_NAMES[0];
 
         try {
@@ -513,7 +544,8 @@ class TableServiceFunctionalParametersTest extends FunctionalTestBase {
     /**
     * @covers WindowsAzure\Table\TableRestProxy::deleteEntity
     */
-    public function testDeleteEntityKeysNull() {
+    public function testDeleteEntityKeysNull()
+    {
         $table = TableServiceFunctionalTestData::$TEST_TABLE_NAMES[0];
 
         try {
@@ -530,7 +562,8 @@ class TableServiceFunctionalParametersTest extends FunctionalTestBase {
     /**
     * @covers WindowsAzure\Table\TableRestProxy::deleteEntity
     */
-    public function testDeleteEntityTableAndKeysNull() {
+    public function testDeleteEntityTableAndKeysNull()
+    {
         $table = TableServiceFunctionalTestData::$TEST_TABLE_NAMES[0];
 
         try {
@@ -547,7 +580,8 @@ class TableServiceFunctionalParametersTest extends FunctionalTestBase {
     /**
     * @covers WindowsAzure\Table\TableRestProxy::deleteEntity
     */
-    public function testDeleteEntityTableNull() {
+    public function testDeleteEntityTableNull()
+    {
         $table = TableServiceFunctionalTestData::$TEST_TABLE_NAMES[0];
 
         try {
@@ -564,7 +598,8 @@ class TableServiceFunctionalParametersTest extends FunctionalTestBase {
     /**
     * @covers WindowsAzure\Table\TableRestProxy::deleteEntity
     */
-    public function testDeleteEntityKeysAndOptionsNull() {
+    public function testDeleteEntityKeysAndOptionsNull()
+    {
         $table = TableServiceFunctionalTestData::$TEST_TABLE_NAMES[0];
 
         try {
@@ -582,7 +617,8 @@ class TableServiceFunctionalParametersTest extends FunctionalTestBase {
     * @covers WindowsAzure\Table\TableRestProxy::deleteEntity
     * @covers WindowsAzure\Table\TableRestProxy::insertEntity
     */
-    public function testDeleteEntityKeysNullWithOptions() {
+    public function testDeleteEntityKeysNullWithOptions()
+    {
         $table = TableServiceFunctionalTestData::$TEST_TABLE_NAMES[0];
         $ent = TableServiceFunctionalTestData::getSimpleEntity();
 
@@ -602,7 +638,8 @@ class TableServiceFunctionalParametersTest extends FunctionalTestBase {
     * @covers WindowsAzure\Table\TableRestProxy::deleteEntity
     * @covers WindowsAzure\Table\TableRestProxy::insertEntity
     */
-    public function testDeleteEntityOptionsNull() {
+    public function testDeleteEntityOptionsNull()
+    {
         $table = TableServiceFunctionalTestData::$TEST_TABLE_NAMES[0];
         $ent = TableServiceFunctionalTestData::getSimpleEntity();
 
@@ -616,7 +653,8 @@ class TableServiceFunctionalParametersTest extends FunctionalTestBase {
     * @covers WindowsAzure\Table\TableRestProxy::deleteEntity
     * @covers WindowsAzure\Table\TableRestProxy::insertEntity
     */
-    public function testDeleteEntityTroublesomePartitionKey() {
+    public function testDeleteEntityTroublesomePartitionKey()
+    {
         // The service does not allow the following common characters in keys:
         // 35 '#'
         // 47 '/'
@@ -669,7 +707,8 @@ class TableServiceFunctionalParametersTest extends FunctionalTestBase {
     * @covers WindowsAzure\Table\TableRestProxy::deleteEntity
     * @covers WindowsAzure\Table\TableRestProxy::insertEntity
     */
-    public function testDeleteEntityTroublesomeRowKey() {
+    public function testDeleteEntityTroublesomeRowKey()
+    {
         // The service does not allow the following common characters in keys:
         // 35 '#'
         // 47 '/'
@@ -721,7 +760,8 @@ class TableServiceFunctionalParametersTest extends FunctionalTestBase {
     /**
     * @covers WindowsAzure\Table\TableRestProxy::mergeEntity
     */
-    public function testMergeEntityEntityNull() {
+    public function testMergeEntityEntityNull()
+    {
         $table = TableServiceFunctionalTestData::$TEST_TABLE_NAMES[0];
 
         try {
@@ -738,7 +778,8 @@ class TableServiceFunctionalParametersTest extends FunctionalTestBase {
     /**
     * @covers WindowsAzure\Table\TableRestProxy::mergeEntity
     */
-    public function testMergeEntityTableAndEntityNull() {
+    public function testMergeEntityTableAndEntityNull()
+    {
         $table = TableServiceFunctionalTestData::$TEST_TABLE_NAMES[0];
 
         try {
@@ -755,7 +796,8 @@ class TableServiceFunctionalParametersTest extends FunctionalTestBase {
     /**
     * @covers WindowsAzure\Table\TableRestProxy::mergeEntity
     */
-    public function testMergeEntityTableNull() {
+    public function testMergeEntityTableNull()
+    {
         $table = TableServiceFunctionalTestData::$TEST_TABLE_NAMES[0];
 
         try {
@@ -772,7 +814,8 @@ class TableServiceFunctionalParametersTest extends FunctionalTestBase {
     /**
     * @covers WindowsAzure\Table\TableRestProxy::mergeEntity
     */
-    public function testMergeEntityEntityAndOptionsNull() {
+    public function testMergeEntityEntityAndOptionsNull()
+    {
         $table = TableServiceFunctionalTestData::$TEST_TABLE_NAMES[0];
 
         try {
@@ -789,7 +832,8 @@ class TableServiceFunctionalParametersTest extends FunctionalTestBase {
     /**
     * @covers WindowsAzure\Table\TableRestProxy::mergeEntity
     */
-    public function testMergeEntityEntityNullWithOptions() {
+    public function testMergeEntityEntityNullWithOptions()
+    {
         $table = TableServiceFunctionalTestData::$TEST_TABLE_NAMES[0];
 
         try {
@@ -806,7 +850,8 @@ class TableServiceFunctionalParametersTest extends FunctionalTestBase {
     /**
     * @covers WindowsAzure\Table\TableRestProxy::mergeEntity
     */
-    public function testMergeEntityOptionsNull() {
+    public function testMergeEntityOptionsNull()
+    {
         $table = TableServiceFunctionalTestData::$TEST_TABLE_NAMES[0];
 
         try {
@@ -822,7 +867,8 @@ class TableServiceFunctionalParametersTest extends FunctionalTestBase {
     /**
     * @covers WindowsAzure\Table\TableRestProxy::updateEntity
     */
-    public function testUpdateEntityEntityNull() {
+    public function testUpdateEntityEntityNull()
+    {
         $table = TableServiceFunctionalTestData::$TEST_TABLE_NAMES[0];
 
         try {
@@ -839,7 +885,8 @@ class TableServiceFunctionalParametersTest extends FunctionalTestBase {
     /**
     * @covers WindowsAzure\Table\TableRestProxy::updateEntity
     */
-    public function testUpdateEntityTableAndEntityNull() {
+    public function testUpdateEntityTableAndEntityNull()
+    {
         $table = TableServiceFunctionalTestData::$TEST_TABLE_NAMES[0];
 
         try {
@@ -856,7 +903,8 @@ class TableServiceFunctionalParametersTest extends FunctionalTestBase {
     /**
     * @covers WindowsAzure\Table\TableRestProxy::updateEntity
     */
-    public function testUpdateEntityTableNull() {
+    public function testUpdateEntityTableNull()
+    {
         $table = TableServiceFunctionalTestData::$TEST_TABLE_NAMES[0];
 
         try {
@@ -873,7 +921,8 @@ class TableServiceFunctionalParametersTest extends FunctionalTestBase {
     /**
     * @covers WindowsAzure\Table\TableRestProxy::updateEntity
     */
-    public function testUpdateEntityEntityAndOptionsNull() {
+    public function testUpdateEntityEntityAndOptionsNull()
+    {
         $table = TableServiceFunctionalTestData::$TEST_TABLE_NAMES[0];
 
         try {
@@ -890,7 +939,8 @@ class TableServiceFunctionalParametersTest extends FunctionalTestBase {
     /**
     * @covers WindowsAzure\Table\TableRestProxy::updateEntity
     */
-    public function testUpdateEntityEntityNullWithOptions() {
+    public function testUpdateEntityEntityNullWithOptions()
+    {
         $table = TableServiceFunctionalTestData::$TEST_TABLE_NAMES[0];
 
         try {
@@ -907,7 +957,8 @@ class TableServiceFunctionalParametersTest extends FunctionalTestBase {
     /**
     * @covers WindowsAzure\Table\TableRestProxy::updateEntity
     */
-    public function testUpdateEntityOptionsNull() {
+    public function testUpdateEntityOptionsNull()
+    {
         $table = TableServiceFunctionalTestData::$TEST_TABLE_NAMES[0];
 
         try {
@@ -923,7 +974,8 @@ class TableServiceFunctionalParametersTest extends FunctionalTestBase {
     /**
     * @covers WindowsAzure\Table\TableRestProxy::insertOrMergeEntity
     */
-    public function testInsertOrMergeEntityEntityNull() {
+    public function testInsertOrMergeEntityEntityNull()
+    {
         $table = TableServiceFunctionalTestData::$TEST_TABLE_NAMES[0];
 
         try {
@@ -940,7 +992,8 @@ class TableServiceFunctionalParametersTest extends FunctionalTestBase {
     /**
     * @covers WindowsAzure\Table\TableRestProxy::insertOrMergeEntity
     */
-    public function testInsertOrMergeEntityTableAndEntityNull() {
+    public function testInsertOrMergeEntityTableAndEntityNull()
+    {
         $table = TableServiceFunctionalTestData::$TEST_TABLE_NAMES[0];
 
         try {
@@ -957,7 +1010,8 @@ class TableServiceFunctionalParametersTest extends FunctionalTestBase {
     /**
     * @covers WindowsAzure\Table\TableRestProxy::insertOrMergeEntity
     */
-    public function testInsertOrMergeEntityTableNull() {
+    public function testInsertOrMergeEntityTableNull()
+    {
         $table = TableServiceFunctionalTestData::$TEST_TABLE_NAMES[0];
 
         try {
@@ -974,7 +1028,8 @@ class TableServiceFunctionalParametersTest extends FunctionalTestBase {
     /**
     * @covers WindowsAzure\Table\TableRestProxy::insertOrMergeEntity
     */
-    public function testInsertOrMergeEntityEntityAndOptionsNull() {
+    public function testInsertOrMergeEntityEntityAndOptionsNull()
+    {
         $table = TableServiceFunctionalTestData::$TEST_TABLE_NAMES[0];
 
         try {
@@ -991,7 +1046,8 @@ class TableServiceFunctionalParametersTest extends FunctionalTestBase {
     /**
     * @covers WindowsAzure\Table\TableRestProxy::insertOrMergeEntity
     */
-    public function testInsertOrMergeEntityEntityNullWithOptions() {
+    public function testInsertOrMergeEntityEntityNullWithOptions()
+    {
         $table = TableServiceFunctionalTestData::$TEST_TABLE_NAMES[0];
 
         try {
@@ -1008,7 +1064,8 @@ class TableServiceFunctionalParametersTest extends FunctionalTestBase {
     /**
     * @covers WindowsAzure\Table\TableRestProxy::insertOrMergeEntity
     */
-    public function testInsertOrMergeEntityOptionsNull() {
+    public function testInsertOrMergeEntityOptionsNull()
+    {
         $table = TableServiceFunctionalTestData::$TEST_TABLE_NAMES[0];
 
         try {
@@ -1027,7 +1084,8 @@ class TableServiceFunctionalParametersTest extends FunctionalTestBase {
     /**
     * @covers WindowsAzure\Table\TableRestProxy::insertOrReplaceEntity
     */
-    public function testInsertOrReplaceEntityEntityNull() {
+    public function testInsertOrReplaceEntityEntityNull()
+    {
         $table = TableServiceFunctionalTestData::$TEST_TABLE_NAMES[0];
 
         try {
@@ -1044,7 +1102,8 @@ class TableServiceFunctionalParametersTest extends FunctionalTestBase {
     /**
     * @covers WindowsAzure\Table\TableRestProxy::insertOrReplaceEntity
     */
-    public function testInsertOrReplaceEntityTableAndEntityNull() {
+    public function testInsertOrReplaceEntityTableAndEntityNull()
+    {
         $table = TableServiceFunctionalTestData::$TEST_TABLE_NAMES[0];
 
         try {
@@ -1061,7 +1120,8 @@ class TableServiceFunctionalParametersTest extends FunctionalTestBase {
     /**
     * @covers WindowsAzure\Table\TableRestProxy::insertOrReplaceEntity
     */
-    public function testInsertOrReplaceEntityTableNull() {
+    public function testInsertOrReplaceEntityTableNull()
+    {
         $table = TableServiceFunctionalTestData::$TEST_TABLE_NAMES[0];
 
         try {
@@ -1078,7 +1138,8 @@ class TableServiceFunctionalParametersTest extends FunctionalTestBase {
     /**
     * @covers WindowsAzure\Table\TableRestProxy::insertOrReplaceEntity
     */
-    public function testInsertOrReplaceEntityEntityAndOptionsNull() {
+    public function testInsertOrReplaceEntityEntityAndOptionsNull()
+    {
         $table = TableServiceFunctionalTestData::$TEST_TABLE_NAMES[0];
 
         try {
@@ -1095,7 +1156,8 @@ class TableServiceFunctionalParametersTest extends FunctionalTestBase {
     /**
     * @covers WindowsAzure\Table\TableRestProxy::insertOrReplaceEntity
     */
-    public function testInsertOrReplaceEntityEntityNullWithOptions() {
+    public function testInsertOrReplaceEntityEntityNullWithOptions()
+    {
         $table = TableServiceFunctionalTestData::$TEST_TABLE_NAMES[0];
 
         try {
@@ -1112,7 +1174,8 @@ class TableServiceFunctionalParametersTest extends FunctionalTestBase {
     /**
     * @covers WindowsAzure\Table\TableRestProxy::insertOrReplaceEntity
     */
-    public function testInsertOrReplaceEntityOptionsNull() {
+    public function testInsertOrReplaceEntityOptionsNull()
+    {
         $table = TableServiceFunctionalTestData::$TEST_TABLE_NAMES[0];
 
         try {
@@ -1131,7 +1194,8 @@ class TableServiceFunctionalParametersTest extends FunctionalTestBase {
     /**
     * @covers WindowsAzure\Table\TableRestProxy::queryEntities
     */
-    public function testQueryEntitiesTableNull() {
+    public function testQueryEntitiesTableNull()
+    {
         $table = TableServiceFunctionalTestData::$TEST_TABLE_NAMES[0];
 
         try {
@@ -1148,7 +1212,8 @@ class TableServiceFunctionalParametersTest extends FunctionalTestBase {
     /**
     * @covers WindowsAzure\Table\TableRestProxy::queryEntities
     */
-    public function testQueryEntitiesTableNullOptionsNull() {
+    public function testQueryEntitiesTableNullOptionsNull()
+    {
         $table = TableServiceFunctionalTestData::$TEST_TABLE_NAMES[0];
 
         try {
@@ -1165,7 +1230,8 @@ class TableServiceFunctionalParametersTest extends FunctionalTestBase {
     /**
     * @covers WindowsAzure\Table\TableRestProxy::queryEntities
     */
-    public function testQueryEntitiesTableNullWithOptions() {
+    public function testQueryEntitiesTableNullWithOptions()
+    {
         $table = TableServiceFunctionalTestData::$TEST_TABLE_NAMES[0];
 
         try {
@@ -1182,7 +1248,8 @@ class TableServiceFunctionalParametersTest extends FunctionalTestBase {
     /**
     * @covers WindowsAzure\Table\TableRestProxy::queryEntities
     */
-    public function testQueryEntitiesOptionsNull() {
+    public function testQueryEntitiesOptionsNull()
+    {
         $table = TableServiceFunctionalTestData::$TEST_TABLE_NAMES[0];
 
         $this->restProxy->queryEntities($table, null);

@@ -43,13 +43,16 @@ use WindowsAzure\Table\Models\Filters\PropertyNameFilter;
 use WindowsAzure\Table\Models\Filters\QueryStringFilter;
 use WindowsAzure\Table\Models\Filters\UnaryFilter;
 
-class TableServiceFunctionalOptionsTest extends \PHPUnit_Framework_TestCase {
-    public function testCheckTableServiceOptions() {
+class TableServiceFunctionalOptionsTest extends \PHPUnit_Framework_TestCase
+{
+    public function testCheckTableServiceOptions()
+    {
         $options = new TableServiceOptions();
         $this->assertNotNull($options, 'Default TableServiceOptions');
     }
 
-    public function testCheckRetentionPolicy() {
+    public function testCheckRetentionPolicy()
+    {
         $rp = new RetentionPolicy();
         $this->assertNull($rp->getDays(), 'Default RetentionPolicy->getDays should be null');
         $this->assertNull($rp->getEnabled(), 'Default RetentionPolicy->getEnabled should be null');
@@ -59,7 +62,8 @@ class TableServiceFunctionalOptionsTest extends \PHPUnit_Framework_TestCase {
         $this->assertTrue($rp->getEnabled(), 'Set RetentionPolicy->getEnabled should be true');
     }
 
-    public function testCheckLogging() {
+    public function testCheckLogging()
+    {
         $rp = new RetentionPolicy();
 
         $l = new Logging();
@@ -73,7 +77,7 @@ class TableServiceFunctionalOptionsTest extends \PHPUnit_Framework_TestCase {
         $l->setDelete(true);
         $l->setRead(true);
         $l->setWrite(true);
-        
+
         $this->assertEquals($rp, $l->getRetentionPolicy(), 'Set Logging->getRetentionPolicy');
         $this->assertEquals('2.0', $l->getVersion(), 'Set Logging->getVersion');
         $this->assertTrue($l->getDelete(), 'Set Logging->getDelete should be true');
@@ -81,7 +85,8 @@ class TableServiceFunctionalOptionsTest extends \PHPUnit_Framework_TestCase {
         $this->assertTrue($l->getWrite(), 'Set Logging->getWrite should be true');
     }
 
-    public function testCheckMetrics() {
+    public function testCheckMetrics()
+    {
         $rp = new RetentionPolicy();
 
         $m = new Metrics();
@@ -99,7 +104,8 @@ class TableServiceFunctionalOptionsTest extends \PHPUnit_Framework_TestCase {
         $this->assertTrue($m->getIncludeAPIs(), 'Set Metrics->getIncludeAPIs should be true');
     }
 
-    public function testCheckServiceProperties() {
+    public function testCheckServiceProperties()
+    {
         $l = new Logging();
         $m = new Metrics();
 
@@ -113,7 +119,8 @@ class TableServiceFunctionalOptionsTest extends \PHPUnit_Framework_TestCase {
         $this->assertEquals($sp->getMetrics(), $m, 'Set ServiceProperties->getMetrics');
     }
 
-    public function testCheckQueryTablesOptions() {
+    public function testCheckQueryTablesOptions()
+    {
         $options = new QueryTablesOptions();
         $nextTableName = 'foo';
         $filter = new Filter();
@@ -130,7 +137,8 @@ class TableServiceFunctionalOptionsTest extends \PHPUnit_Framework_TestCase {
         $this->assertEquals(10, $options->getQuery()->getTop(), 'Set QueryTablesOptions->getQuery->getTop');
     }
 
-    public function testCheckDeleteEntityOptions() {
+    public function testCheckDeleteEntityOptions()
+    {
         $options = new DeleteEntityOptions();
         $etag = 'foo';
 
@@ -139,7 +147,8 @@ class TableServiceFunctionalOptionsTest extends \PHPUnit_Framework_TestCase {
         $this->assertEquals($etag, $options->getEtag(), 'Set DeleteEntityOptions->getEtag');
     }
 
-    public function testCheckQueryEntitiesOptions() {
+    public function testCheckQueryEntitiesOptions()
+    {
         $options = new QueryEntitiesOptions();
         $query = new Query();
         $nextPartitionKey = 'aaa';
@@ -175,7 +184,8 @@ class TableServiceFunctionalOptionsTest extends \PHPUnit_Framework_TestCase {
         $this->assertEquals(TableServiceFunctionalTestData::IntegerMAX_VALUE, $options->getQuery()->getTop(), 'Set $options->getQuery->getTop');
     }
 
-    public function testCheckQuery() {
+    public function testCheckQuery()
+    {
         $query = new Query();
         $this->assertNull($query->getFilter(), 'Default Query->getFilter');
         $this->assertNull($query->getSelectFields(), 'Default Query->getSelectFields');
@@ -196,12 +206,14 @@ class TableServiceFunctionalOptionsTest extends \PHPUnit_Framework_TestCase {
         $this->assertEquals(TableServiceFunctionalTestData::IntegerMAX_VALUE, $query->getTop(), 'Set Query->getTop');
     }
 
-    public function testCheckFilter() {
+    public function testCheckFilter()
+    {
         $filter = new Filter();
         $this->assertNotNull($filter, 'Default $filter');
     }
 
-    public function testCheckBinaryFilter() {
+    public function testCheckBinaryFilter()
+    {
         $filter = new BinaryFilter(null, null, null);
         $this->assertNotNull($filter, 'Default $filter');
 
@@ -261,7 +273,8 @@ class TableServiceFunctionalOptionsTest extends \PHPUnit_Framework_TestCase {
         $this->assertEquals($right, $filter->getRight(), 'or factory BinaryFilter->getRight');
     }
 
-    public function testCheckConstantFilter() {
+    public function testCheckConstantFilter()
+    {
         $filter = new ConstantFilter(EdmType::STRING, null);
         $this->assertNotNull($filter, 'Default $filter');
 
@@ -278,7 +291,8 @@ class TableServiceFunctionalOptionsTest extends \PHPUnit_Framework_TestCase {
         $this->assertEquals($value, $filter->getValue(), 'constant factory ConstantFilter->getValue');
     }
 
-    public function testCheckPropertyNameFilter() {
+    public function testCheckPropertyNameFilter()
+    {
         $filter = new PropertyNameFilter(null);
         $this->assertNotNull($filter, 'Default $filter');
 
@@ -294,7 +308,8 @@ class TableServiceFunctionalOptionsTest extends \PHPUnit_Framework_TestCase {
         $this->assertEquals($propertyName, $filter->getPropertyName(), 'PropertyName factory PropertyNameFilter->getPropertyName');
     }
 
-    public function testCheckQueryStringFilter() {
+    public function testCheckQueryStringFilter()
+    {
         $filter = new QueryStringFilter(null);
         $this->assertNotNull($filter, 'Default $filter');
 
@@ -310,7 +325,8 @@ class TableServiceFunctionalOptionsTest extends \PHPUnit_Framework_TestCase {
         $this->assertEquals($queryString, $filter->getQueryString(), 'QueryString factory QueryStringFilter->getQueryString');
     }
 
-    public function testCheckUnaryFilter() {
+    public function testCheckUnaryFilter()
+    {
         $filter = new UnaryFilter(null, null);
         $this->assertNotNull($filter, 'Default $filter');
 
@@ -330,7 +346,8 @@ class TableServiceFunctionalOptionsTest extends \PHPUnit_Framework_TestCase {
         $this->assertEquals('not', $filter->getOperator(), 'Unary factory UnaryFilter->getOperator');
     }
 
-    public function testCheckProperty() {
+    public function testCheckProperty()
+    {
         $property = new Property();
         $maxv = TableServiceFunctionalTestData::IntegerMAX_VALUE;
         $edmType = EdmType::STRING;
@@ -343,7 +360,8 @@ class TableServiceFunctionalOptionsTest extends \PHPUnit_Framework_TestCase {
         $this->assertEquals($edmType, $property->getEdmType(), 'Set Property->getEdmType');
     }
 
-    public function testCheckEntity() {
+    public function testCheckEntity()
+    {
         $entity = new Entity();
         $etag = 'custom $etag';
         $partitionKey = 'custom partiton key';

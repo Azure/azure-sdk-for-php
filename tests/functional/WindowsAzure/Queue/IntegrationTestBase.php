@@ -28,7 +28,11 @@ use Tests\Framework\FiddlerFilter;
 use Tests\Framework\QueueServiceRestProxyTestBase;
 use WindowsAzure\Queue\QueueService;
 
-class IntegrationTestBase extends QueueServiceRestProxyTestBase {
+class IntegrationTestBase extends QueueServiceRestProxyTestBase
+{
+    /**
+     * @covers WindowsAzure\ServiceBus\ServiceBusRestProxy::withFilter
+     */
     public function __construct()
     {
         parent::__construct();

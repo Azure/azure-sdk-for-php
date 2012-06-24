@@ -42,36 +42,44 @@ use WindowsAzure\Table\Models\Filters\Filter;
 use WindowsAzure\Table\Models\Filters\PropertyNameFilter;
 use WindowsAzure\Table\Models\Filters\UnaryFilter;
 
-class FakeTableInfoEntry {
+class FakeTableInfoEntry
+{
     public $TableName;
 }
 
-class FakeTEntityEntry {
+class FakeTEntityEntry
+{
     private $properties = array();
 
-    public function getPartitionKey() {
+    public function getPartitionKey()
+    {
         return $this->getProperty('PartitionKey');
     }
 
-    public function setPartitionKey($partitionKey) {
+    public function setPartitionKey($partitionKey)
+    {
         $this->addProperty('PartitionKey', null, $partitionKey);
         return this;
     }
 
-    public function getRowKey() {
+    public function getRowKey()
+    {
         return getPropertyValue('RowKey');
     }
 
-    public function setRowKey($rowKey) {
+    public function setRowKey($rowKey)
+    {
         $this->addProperty('RowKey', null, $rowKey);
         return this;
     }
 
-    public function getProperties() {
+    public function getProperties()
+    {
         return $this->properties;
     }
 
-    public function getProperty($name) {
+    public function getProperty($name)
+    {
         if (array_key_exists($name, $this->properties)) {
             return $this->properties[$name];
         } else  {
@@ -79,12 +87,14 @@ class FakeTEntityEntry {
         }
     }
 
-    public function setProperty($name, $property) {
+    public function setProperty($name, $property)
+    {
         $this->properties[$name] = $property;
         return this;
     }
 
-    public function newProperty($name, $edmType, $value) {
+    public function newProperty($name, $edmType, $value)
+    {
         $property = new Property();
         $property->setEdmType($edmType);
         $property->setValue($value);
@@ -92,13 +102,15 @@ class FakeTEntityEntry {
         return this;
     }
 
-    public function getPropertyValue($name) {
+    public function getPropertyValue($name)
+    {
         $p = $this->getProperty($name);
         return is_null($p) ? null : $p->getValue();
     }
 }
 
-class TableServiceFunctionalTestData {
+class TableServiceFunctionalTestData
+{
     private static $tempTableCounter;
     private static $nonExistTablePrefix;
     public static $testUniqueId;
@@ -109,11 +121,13 @@ class TableServiceFunctionalTestData {
     const LongBigValue = 1234567890;
     const LongBigNegativeValue = -123456789032;
 
-    public function __construct(){
+    public function __construct()
+    {
         self:: $setupData;
     }
 
-    public static function setupData() {
+    public static function setupData()
+    {
         self::$IntegerMIN_VALUE = -1 - self::IntegerMAX_VALUE;
         $rint = rand(0,1000000);
         self::$testUniqueId = 'qaX' . $rint . 'X';
@@ -121,28 +135,32 @@ class TableServiceFunctionalTestData {
         self::$TEST_TABLE_NAMES = array( self::$testUniqueId . 'a1', self::$testUniqueId . 'a2', self::$testUniqueId . 'b1' );
     }
 
-    static function getInterestingTableName() {
+    static function getInterestingTableName()
+    {
         return self::$testUniqueId . 'int' . (self::$tempTableCounter++);
     }
 
-    static function getNewKey() {
+    static function getNewKey()
+    {
         return self::$testUniqueId . 'key' . (self::$tempTableCounter++);
     }
 
-    static function getUnicodeString() {
+    static function getUnicodeString()
+    {
         return  chr(0xEB) . chr(0x8B) . chr(0xA4) . // \uB2E4 in UTF-8
                 chr(0xEB) . chr(0xA5) . chr(0xB4) . // \uB974 in UTF-8
                 chr(0xEB) . chr(0x8B) . chr(0xA4) . // \uB2E4 in UTF-8
                 chr(0xEB) . chr(0x8A) . chr(0x94) . // \uB294 in UTF-8
                 chr(0xD8) . chr(0xA5) .             // \u0625 in UTF-8
-                ' ' . 
+                ' ' .
                 chr(0xD9) . chr(0x8A) .             // \u064A in UTF-8
                 chr(0xD8) . chr(0xAF) .             // \u062F in UTF-8
                 chr(0xD9) . chr(0x8A) .             // \u064A in UTF-8
                 chr(0xD9) . chr(0x88);              // \u0648 in UTF-8
     }
-    
-    public static function getDefaultServiceProperties() {
+
+    public static function getDefaultServiceProperties()
+    {
         // This is the default that comes from the server.
         $rp = new RetentionPolicy();
         $l = new Logging();
@@ -165,7 +183,8 @@ class TableServiceFunctionalTestData {
         return $sp;
     }
 
-    public static function getInterestingServiceProperties() {
+    public static function getInterestingServiceProperties()
+    {
         $ret = array();
 
         // This is the default that comes from the server.
@@ -256,7 +275,8 @@ class TableServiceFunctionalTestData {
         return $ret;
     }
 
-    static function getInterestingQueryTablesOptions() {
+    static function getInterestingQueryTablesOptions()
+    {
         $ret = array();
 
 
@@ -291,42 +311,42 @@ class TableServiceFunctionalTestData {
 
         $options = new QueryTablesOptions();
         $filter = Filter::applyAnd(
-                Filter::applyGe(Filter::applyPropertyName('TableName'), Filter::applyConstant(self::$TEST_TABLE_NAMES[1])), 
+                Filter::applyGe(Filter::applyPropertyName('TableName'), Filter::applyConstant(self::$TEST_TABLE_NAMES[1])),
                 Filter::applyLe(Filter::applyPropertyName('TableName'), Filter::applyConstant(self::$TEST_TABLE_NAMES[2])));
         $options->setFilter($filter);
         array_push($ret, $options);
 
         $options = new QueryTablesOptions();
         $filter = Filter::applyOr(
-                Filter::applyGe(Filter::applyPropertyName('TableName'), Filter::applyConstant(self::$TEST_TABLE_NAMES[1])), 
+                Filter::applyGe(Filter::applyPropertyName('TableName'), Filter::applyConstant(self::$TEST_TABLE_NAMES[1])),
                 Filter::applyGe(Filter::applyPropertyName('TableName'), Filter::applyConstant(self::$TEST_TABLE_NAMES[2])));
         $options->setFilter($filter);
         array_push($ret, $options);
 
         $options = new QueryTablesOptions();
         $filter = Filter::applyAnd(
-                Filter::applyEq(Filter::applyPropertyName('TableName'), Filter::applyConstant(self::$TEST_TABLE_NAMES[1])), 
+                Filter::applyEq(Filter::applyPropertyName('TableName'), Filter::applyConstant(self::$TEST_TABLE_NAMES[1])),
                 Filter::applyGe(Filter::applyPropertyName('TableName'), Filter::applyConstant(self::$TEST_TABLE_NAMES[0])));
         $options->setFilter($filter);
         array_push($ret, $options);
 
         $options = new QueryTablesOptions();
         $filter = Filter::applyOr(
-                Filter::applyEq(Filter::applyPropertyName('TableName'), Filter::applyConstant(self::$TEST_TABLE_NAMES[1])), 
+                Filter::applyEq(Filter::applyPropertyName('TableName'), Filter::applyConstant(self::$TEST_TABLE_NAMES[1])),
                 Filter::applyGe(Filter::applyPropertyName('TableName'), Filter::applyConstant(self::$TEST_TABLE_NAMES[2])));
         $options->setFilter($filter);
         array_push($ret, $options);
 
         $options = new QueryTablesOptions();
         $filter = Filter::applyOr(
-                Filter::applyEq(Filter::applyPropertyName('TableName'), Filter::applyConstant(self::$TEST_TABLE_NAMES[1])), 
+                Filter::applyEq(Filter::applyPropertyName('TableName'), Filter::applyConstant(self::$TEST_TABLE_NAMES[1])),
                 Filter::applyEq(Filter::applyPropertyName('TableName'), Filter::applyConstant(self::$TEST_TABLE_NAMES[2])));
         $options->setFilter($filter);
         array_push($ret, $options);
 
         $options = new QueryTablesOptions();
         $filter = Filter::applyOr(
-                Filter::applyEq(Filter::applyConstant(self::$TEST_TABLE_NAMES[1]), Filter::applyPropertyName('TableName')), 
+                Filter::applyEq(Filter::applyConstant(self::$TEST_TABLE_NAMES[1]), Filter::applyPropertyName('TableName')),
                 Filter::applyEq(Filter::applyConstant(self::$TEST_TABLE_NAMES[2]), Filter::applyPropertyName('TableName')));
         $options->setFilter($filter);
         array_push($ret, $options);
@@ -355,18 +375,21 @@ class TableServiceFunctionalTestData {
         return $ret;
     }
 
-    static function getSimpleinsertEntityOptions() {
+    static function getSimpleinsertEntityOptions()
+    {
         return new TableServiceOptions();
     }
 
-    static function getSimpleEntity() {
+    static function getSimpleEntity()
+    {
         $entity = new Entity();
         $entity->setPartitionKey(self::getNewKey());
         $entity->setRowKey(self::getNewKey());
         return $entity;
     }
 
-    static function getInterestingEntities() {
+    static function getInterestingEntities()
+    {
         $ret = array();
 
         array_push($ret, self::getSimpleEntity());
@@ -402,8 +425,8 @@ class TableServiceFunctionalTestData {
 
         $e = new Entity();
         $e->setPartitionKey(self::getNewKey());+
-        
-        
+
+
         $e->setRowKey(self::getNewKey());
         $e->addProperty('BINARY', EdmType::BINARY, null);
         $e->addProperty('BOOLEAN', EdmType::BOOLEAN, null);
@@ -418,7 +441,8 @@ class TableServiceFunctionalTestData {
         return $ret;
     }
 
-    static function getInterestingBadEntities() {
+    static function getInterestingBadEntities()
+    {
         $ret = array();
 
         $e = new Entity();
@@ -431,11 +455,12 @@ class TableServiceFunctionalTestData {
         $e = new Entity();
         $e->setPartitionKey(self::getNewKey());
         array_push($ret, $e);
-        
+
         return $ret;
     }
 
-    static function getSimpleEntities($count) {
+    static function getSimpleEntities($count)
+    {
         $ret = array();
 
         $e = new Entity();
@@ -474,14 +499,16 @@ class TableServiceFunctionalTestData {
         return $ret;
     }
 
-    static function addProperty($e, $name, $edmType, $binaries) {
+    static function addProperty($e, $name, $edmType, $binaries)
+    {
         $index = mt_rand(0, count($binaries));
         if ($index < count($binaries)) {
             $e->addProperty($name, $edmType, $binaries[$index]);
         }
     }
 
-    static function getInterestingGoodBooleans() {
+    static function getInterestingGoodBooleans()
+    {
         $ret = array();
         array_push($ret, true);
         array_push($ret, false);
@@ -490,13 +517,15 @@ class TableServiceFunctionalTestData {
         return $ret;
     }
 
-    static function getInterestingBadBooleans() {
+    static function getInterestingBadBooleans()
+    {
         $ret = array();
         array_push($ret, 'BOO!');
         return $ret;
     }
 
-    static function getInterestingGoodDates() {
+    static function getInterestingGoodDates()
+    {
         $ret = array();
 
         array_push($ret, new \DateTime());
@@ -517,14 +546,16 @@ class TableServiceFunctionalTestData {
         return $ret;
     }
 
-    static function getInterestingBadDates() {
+    static function getInterestingBadDates()
+    {
         $ret = array();
         array_push($ret, true);
         array_push($ret, 0);
         return $ret;
     }
 
-    static function getInterestingGoodDoubles() {
+    static function getInterestingGoodDoubles()
+    {
         $ret = array();
         array_push($ret, pi());
         array_push($ret, 0.0);
@@ -535,27 +566,31 @@ class TableServiceFunctionalTestData {
         return $ret;
     }
 
-    static function getInterestingBadDoubles() {
+    static function getInterestingBadDoubles()
+    {
         $ret = array();
         array_push($ret, 'ABCDEFGH-D3F8-49EC-B837-B8B5B6367B74');
         return $ret;
     }
 
-    static function getInterestingGoodGuids() {
+    static function getInterestingGoodGuids()
+    {
         $ret = array();
         array_push($ret, '90ab64d6-d3f8-49ec-b837-b8b5b6367b74');
         array_push($ret, '00000000-0000-0000-0000-000000000000');
         return $ret;
     }
 
-    static function getInterestingBadGuids() {
+    static function getInterestingBadGuids()
+    {
         $ret = array();
         array_push($ret, 'ABCDEFGH-D3F8-49EC-B837-B8B5B6367B74');
         array_push($ret, '');
         return $ret;
     }
 
-    static function getInterestingGoodInts() {
+    static function getInterestingGoodInts()
+    {
         $ret = array();
         array_push($ret, 0);
         array_push($ret, self::IntegerMAX_VALUE);
@@ -564,14 +599,16 @@ class TableServiceFunctionalTestData {
         return $ret;
     }
 
-    static function getInterestingBadInts() {
+    static function getInterestingBadInts()
+    {
         $ret = array();
         array_push($ret, false);
         array_push($ret, self::IntegerMAX_VALUE + 1);
         return $ret;
     }
-    
-    static function getInterestingGoodLongs() {
+
+    static function getInterestingGoodLongs()
+    {
         $ret = array();
         array_push($ret, '0');
         array_push($ret, strval(self::LongBigValue));
@@ -580,14 +617,16 @@ class TableServiceFunctionalTestData {
         return $ret;
     }
 
-    static function getInterestingBadLongs() {
+    static function getInterestingBadLongs()
+    {
         $ret = array();
         array_push($ret, false);
         array_push($ret, '9223372036854775808');
         return $ret;
     }
 
-    static function getInterestingGoodBinaries() {
+    static function getInterestingGoodBinaries()
+    {
         $ret = array();
         array_push($ret, '');
         array_push($ret, chr(1) . chr(2) . chr(3) . chr(4) . chr(5));
@@ -595,14 +634,16 @@ class TableServiceFunctionalTestData {
         return $ret;
     }
 
-    static function getInterestingBadBinaries() {
+    static function getInterestingBadBinaries()
+    {
         $ret = array();
         array_push($ret, 12345);
         array_push($ret, new \DateTime());
         return $ret;
     }
 
-    static function getInterestingGoodStrings() {
+    static function getInterestingGoodStrings()
+    {
         $ret = array();
         array_push($ret, 'AQIDBAU='); // Base-64 encoded byte array { 0x01, 0x02, 0x03, 0x04, 0x05 };
         array_push($ret, 'false');
@@ -615,7 +656,8 @@ class TableServiceFunctionalTestData {
         return $ret;
     }
 
-    static function getInterestingBadStrings() {
+    static function getInterestingBadStrings()
+    {
         $ret = array();
         // Are there any?
         return $ret;

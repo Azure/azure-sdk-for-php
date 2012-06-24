@@ -37,26 +37,32 @@ use WindowsAzure\Common\Configuration;
 use WindowsAzure\Queue\QueueService;
 use WindowsAzure\Queue\QueueSettings;
 
-class FunctionalTestBase extends QueueServiceRestProxyTestBase {
+class FunctionalTestBase extends QueueServiceRestProxyTestBase
+{
     protected $accountName;
 
+    /**
+     * @covers WindowsAzure\ServiceBus\ServiceBusRestProxy::withFilter
+     */
     public function __construct()
     {
         parent::__construct();
         $fiddlerFilter = new FiddlerFilter();
         $this->restProxy = $this->restProxy->withFilter($fiddlerFilter);
     }
-    
-    public function setUp() {
+
+    public function setUp()
+    {
         parent::setUp();
         $this->accountName = $this->config->getProperty(QueueSettings::ACCOUNT_NAME);
     }
 
-    public static function setUpBeforeClass() {
+    public static function setUpBeforeClass()
+    {
         parent::setUpBeforeClass();
         $service = self::createService();
         QueueServiceFunctionalTestData::setupData();
-        
+
         foreach(QueueServiceFunctionalTestData::$TEST_QUEUE_NAMES as $name)  {
             self::staticSafeDeleteQueue($service, $name);
         }
@@ -75,17 +81,18 @@ class FunctionalTestBase extends QueueServiceRestProxyTestBase {
             $serviceProperties = QueueServiceFunctionalTestData::getDefaultServiceProperties();
             $service->setServiceProperties($serviceProperties);
         }
-        
+
         foreach(QueueServiceFunctionalTestData::$TEST_QUEUE_NAMES as $name)  {
             self::staticSafeDeleteQueue($service, $name);
         }
     }
 
-    private static function createService() {
+    private static function createService()
+    {
         $tmp = new FunctionalTestBase();
         return $tmp->restProxy;
     }
-    
+
     private static function staticSafeDeleteQueue($service, $queueName)
     {
         try
@@ -98,12 +105,14 @@ class FunctionalTestBase extends QueueServiceRestProxyTestBase {
             error_log($e->getMessage());
         }
     }
-    
-    public static function println($msg) {
+
+    public static function println($msg)
+    {
         error_log($msg);
     }
-    
-    public static function tmptostring($obj) {
+
+    public static function tmptostring($obj)
+    {
         return 'todo';
     }
 }

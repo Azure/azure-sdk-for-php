@@ -46,22 +46,27 @@ use WindowsAzure\Table\Models\Filters\PropertyNameFilter;
 use WindowsAzure\Table\Models\Filters\QueryStringFilter;
 use WindowsAzure\Table\Models\Filters\UnaryFilter;
 
-class MutatePivot {
+class MutatePivot
+{
     const ChangeValues   = 'ChangeValues';
     const AddProperty    = 'AddProperty';
     const RemoveProperty = 'RemoveProperty';
     const NullProperty   = 'NullProperty';
-    public static function values() {
+    public static function values()
+    {
         return array('ChangeValues', 'AddProperty', 'RemoveProperty', 'NullProperty');
     }
-}    
-    
-class TableServiceFunctionalTestUtils {
-    static function isEqNotInTopLevel($filter) {
+}
+
+class TableServiceFunctionalTestUtils
+{
+    static function isEqNotInTopLevel($filter)
+    {
         return self::isEqNotInTopLevelWorker($filter, 0);
     }
 
-    private static function isEqNotInTopLevelWorker($filter, $depth) {
+    private static function isEqNotInTopLevelWorker($filter, $depth)
+    {
         if (is_null($filter)) {
             return false;
         }
@@ -83,11 +88,13 @@ class TableServiceFunctionalTestUtils {
         }
     }
 
-    static function cloneRemoveEqNotInTopLevel($filter) {
+    static function cloneRemoveEqNotInTopLevel($filter)
+    {
         return self::cloneRemoveEqNotInTopLevelWorker($filter, 0);
     }
 
-    private static function cloneRemoveEqNotInTopLevelWorker($filter, $depth) {
+    private static function cloneRemoveEqNotInTopLevelWorker($filter, $depth)
+    {
         if ($filter instanceof PropertyNameFilter) {
             $ret = new PropertyNameFilter($filter->getPropertyName());
             return $ret;
@@ -120,17 +127,19 @@ class TableServiceFunctionalTestUtils {
         }
     }
 
-    public static function filterList($filter, $input) {
+    public static function filterList($filter, $input)
+    {
         $output = array();
         foreach($input as $i)  {
             if (self::filterInterperter($filter, $i)) {
                 array_push($output, $i);
             }
-        }        
+        }
         return $output;
     }
 
-    public static function filterEntityList($filter, $input) {
+    public static function filterEntityList($filter, $input)
+    {
         $output = array();
         foreach($input as $i)  {
             try {
@@ -150,7 +159,8 @@ class TableServiceFunctionalTestUtils {
         return $output;
     }
 
-    static function cloneEntity($initialEnt) {
+    static function cloneEntity($initialEnt)
+    {
         $ret = new Entity();
         $initialProps = $initialEnt->getProperties();
         $retProps = array();
@@ -170,7 +180,8 @@ class TableServiceFunctionalTestUtils {
         return $ret;
     }
 
-    static function mutateEntity($ent, $pivot) {
+    static function mutateEntity($ent, $pivot)
+    {
         if ($pivot == MutatePivot::ChangeValues) {
             self::mutateEntityChangeValues($ent);
         }
@@ -208,7 +219,8 @@ class TableServiceFunctionalTestUtils {
         }
     }
 
-    private static function mutateEntityChangeValues($ent) {
+    private static function mutateEntityChangeValues($ent)
+    {
         foreach($ent->getProperties() as $propName => $initialProp)  {
             // Don't mess with the keys.
             if ($propName == ('PartitionKey') || $propName == ('RowKey') || $propName == ('Timestamp')) {
@@ -260,7 +272,8 @@ class TableServiceFunctionalTestUtils {
         }
     }
 
-    public static function filterToString($filter, $pad = '  ') {
+    public static function filterToString($filter, $pad = '  ')
+    {
         if (is_null($filter)) {
             return $pad . 'filter <null>' . "\n";
         }
@@ -290,8 +303,9 @@ class TableServiceFunctionalTestUtils {
             return $ret;
         }
     }
-    
-    private static function filterInterperter($filter, $obj) {
+
+    private static function filterInterperter($filter, $obj)
+    {
         if (is_null($filter)) {
             return true;
         }
@@ -313,7 +327,7 @@ class TableServiceFunctionalTestUtils {
                 $op = self::filterInterperter($filter->getOperand(), $obj);
                 if (is_null($op)) {
                     // http://msdn.microsoft/com/en-us/library/ms191504.aspx
-                    $ret = true; 
+                    $ret = true;
                 }
                 else {
                     $ret = !$op;
@@ -359,7 +373,8 @@ class TableServiceFunctionalTestUtils {
         throw new \Exception();
     }
 
-    private static function nullPropAnd($left, $right) {
+    private static function nullPropAnd($left, $right)
+    {
         // http://msdn.microsoft.com/en-us/library/ms191504.aspx
         if (is_null($left) && is_null($right)) {
             return null;
@@ -375,7 +390,8 @@ class TableServiceFunctionalTestUtils {
         }
     }
 
-    private static function nullPropOr($left, $right) {
+    private static function nullPropOr($left, $right)
+    {
         // http://msdn.microsoft.com/en-us/library/ms191504.aspx
         if (is_null($left) && is_null($right)) {
             return null;
@@ -391,7 +407,8 @@ class TableServiceFunctionalTestUtils {
         }
     }
 
-    private static function nullPropEq($left, $right) {
+    private static function nullPropEq($left, $right)
+    {
         if (is_null($left) || is_null($right)) {
             return null;
         } else if (is_string($left) || is_string($right)) {
@@ -400,7 +417,8 @@ class TableServiceFunctionalTestUtils {
         return $left == $right;
     }
 
-    private static function nullPropNe($left, $right) {
+    private static function nullPropNe($left, $right)
+    {
         if (is_null($left) || is_null($right)) {
             return null;
         } else if (is_string($left) || is_string($right)) {
@@ -409,7 +427,8 @@ class TableServiceFunctionalTestUtils {
         return $left != $right;
     }
 
-    private static function nullPropGt($left, $right) {
+    private static function nullPropGt($left, $right)
+    {
         if (is_null($left) || is_null($right)) {
             return null;
         } else if (is_string($left) || is_string($right)) {
@@ -418,7 +437,8 @@ class TableServiceFunctionalTestUtils {
         return $left > $right;
     }
 
-    private static function nullPropGe($left, $right) {
+    private static function nullPropGe($left, $right)
+    {
         if (is_null($left) || is_null($right)) {
             return null;
         } else if (is_string($left) || is_string($right)) {
@@ -427,7 +447,8 @@ class TableServiceFunctionalTestUtils {
         return $left >= $right;
     }
 
-    private static function nullPropLt($left, $right) {
+    private static function nullPropLt($left, $right)
+    {
         if (is_null($left) || is_null($right)) {
             return null;
         } else if (is_string($left) || is_string($right)) {
@@ -436,7 +457,8 @@ class TableServiceFunctionalTestUtils {
         return $left < $right;
     }
 
-    private static function nullPropLe($left, $right) {
+    private static function nullPropLe($left, $right)
+    {
         if (is_null($left) || is_null($right)) {
             return null;
         } else if (is_string($left) || is_string($right)) {
@@ -444,8 +466,9 @@ class TableServiceFunctionalTestUtils {
         }
         return $left <= $right;
     }
-    
-    public static function showEntityListDiff($actualData, $expectedData) {
+
+    public static function showEntityListDiff($actualData, $expectedData)
+    {
         $ret = '';
         if (count($expectedData) != count($actualData))
             {

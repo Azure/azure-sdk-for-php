@@ -53,29 +53,34 @@ use WindowsAzure\Table\Models\TableServiceOptions;
 use WindowsAzure\Table\Models\UpdateEntityResult;
 use WindowsAzure\Table\Models\Filters\Filter;
 
-class OpType {
+class OpType
+{
     const deleteEntity          = 'deleteEntity';
     const insertEntity          = 'insertEntity';
     const insertOrMergeEntity   = 'insertOrMergeEntity';
     const insertOrReplaceEntity = 'insertOrReplaceEntity';
     const mergeEntity           = 'mergeEntity';
     const updateEntity          = 'updateEntity';
-    public static function values() {
+    public static function values()
+    {
         return array('deleteEntity', 'insertEntity', 'insertOrMergeEntity', 'insertOrReplaceEntity', 'mergeEntity', 'updateEntity');
     }
 }
 
-class ConcurType {
+class ConcurType
+{
     const NoKeyMatch           = 'NoKeyMatch';
     const KeyMatchNoEtag       = 'KeyMatchNoEtag';
     const KeyMatchEtagMismatch = 'KeyMatchEtagMismatch';
     const KeyMatchEtagMatch    = 'KeyMatchEtagMatch';
-    public static function values() {
+    public static function values()
+    {
         return array('NoKeyMatch', 'KeyMatchNoEtag', 'KeyMatchEtagMismatch', 'KeyMatchEtagMatch');
     }
 }
 
-class BatchWorkerConfig {
+class BatchWorkerConfig
+{
     public $opType;
     public $concurType;
     public $mutatePivot;
@@ -83,12 +88,14 @@ class BatchWorkerConfig {
     public $options;
 }
 
-class TableServiceFunctionalTest extends FunctionalTestBase {
+class TableServiceFunctionalTest extends FunctionalTestBase
+{
     /**
     * @covers WindowsAzure\Table\TableRestProxy::getServiceProperties
     * @covers WindowsAzure\Table\TableRestProxy::setServiceProperties
     */
-    public function testGetServicePropertiesNoOptions() {
+    public function testGetServicePropertiesNoOptions()
+    {
         $serviceProperties = TableServiceFunctionalTestData::getDefaultServiceProperties();
 
         $shouldReturn = false;
@@ -115,7 +122,8 @@ class TableServiceFunctionalTest extends FunctionalTestBase {
     * @covers WindowsAzure\Table\TableRestProxy::getServiceProperties
     * @covers WindowsAzure\Table\TableRestProxy::setServiceProperties
     */
-    public function testGetServiceProperties() {
+    public function testGetServiceProperties()
+    {
         $serviceProperties = TableServiceFunctionalTestData::getDefaultServiceProperties();
 
         try {
@@ -134,7 +142,8 @@ class TableServiceFunctionalTest extends FunctionalTestBase {
     /**
     * @covers WindowsAzure\Table\TableRestProxy::getServiceProperties
     */
-    private function getServicePropertiesWorker($options) {
+    private function getServicePropertiesWorker($options)
+    {
         self::println( 'Trying $options: ' . self::tmptostring($options));
         $effOptions = (is_null($options) ? new TableServiceOptions() : $options);
         try {
@@ -152,7 +161,8 @@ class TableServiceFunctionalTest extends FunctionalTestBase {
         }
     }
 
-    private function verifyServicePropertiesWorker($ret, $serviceProperties) {
+    private function verifyServicePropertiesWorker($ret, $serviceProperties)
+    {
         if (is_null($serviceProperties)) {
             $serviceProperties = TableServiceFunctionalTestData::getDefaultServiceProperties();
         }
@@ -186,7 +196,8 @@ class TableServiceFunctionalTest extends FunctionalTestBase {
     * @covers WindowsAzure\Table\TableRestProxy::getServiceProperties
     * @covers WindowsAzure\Table\TableRestProxy::setServiceProperties
     */
-    public function testSetServicePropertiesNoOptions() {
+    public function testSetServicePropertiesNoOptions()
+    {
         $serviceProperties = TableServiceFunctionalTestData::getDefaultServiceProperties();
         $this->setServicePropertiesWorker($serviceProperties, null);
     }
@@ -195,7 +206,8 @@ class TableServiceFunctionalTest extends FunctionalTestBase {
     * @covers WindowsAzure\Table\TableRestProxy::getServiceProperties
     * @covers WindowsAzure\Table\TableRestProxy::setServiceProperties
     */
-    public function testSetServiceProperties() {
+    public function testSetServiceProperties()
+    {
         $interestingServiceProperties = TableServiceFunctionalTestData::getInterestingServiceProperties();
         foreach($interestingServiceProperties as $serviceProperties)  {
             $options = new TableServiceOptions();
@@ -212,7 +224,8 @@ class TableServiceFunctionalTest extends FunctionalTestBase {
     * @covers WindowsAzure\Table\TableRestProxy::getServiceProperties
     * @covers WindowsAzure\Table\TableRestProxy::setServiceProperties
     */
-    private function setServicePropertiesWorker($serviceProperties, $options) {
+    private function setServicePropertiesWorker($serviceProperties, $options)
+    {
         try {
             if (is_null($options)) {
                 $this->restProxy->setServiceProperties($serviceProperties);
@@ -235,14 +248,16 @@ class TableServiceFunctionalTest extends FunctionalTestBase {
     /**
     * @covers WindowsAzure\Table\TableRestProxy::queryTables
     */
-    public function testQueryTablesNoOptions() {
+    public function testQueryTablesNoOptions()
+    {
         $this->queryTablesWorker(null);
     }
 
     /**
     * @covers WindowsAzure\Table\TableRestProxy::queryTables
     */
-    public function testQueryTables() {
+    public function testQueryTables()
+    {
         $interestingqueryTablesOptions = TableServiceFunctionalTestData::getInterestingQueryTablesOptions();
         foreach($interestingqueryTablesOptions as $options)  {
             $this->queryTablesWorker($options);
@@ -252,7 +267,8 @@ class TableServiceFunctionalTest extends FunctionalTestBase {
     /**
     * @covers WindowsAzure\Table\TableRestProxy::queryTables
     */
-    private function queryTablesWorker($options) {
+    private function queryTablesWorker($options)
+    {
         try {
             $ret = (is_null($options) ? $this->restProxy->queryTables() : $this->restProxy->queryTables($options));
 
@@ -280,7 +296,8 @@ class TableServiceFunctionalTest extends FunctionalTestBase {
         }
     }
 
-    private function verifyqueryTablesWorker($ret, $options) {
+    private function verifyqueryTablesWorker($ret, $options)
+    {
         $this->assertNotNull($ret->getTables(), 'getTables');
 
         $effectivePrefix = $options->getPrefix();
@@ -351,7 +368,8 @@ class TableServiceFunctionalTest extends FunctionalTestBase {
     * @covers WindowsAzure\Table\TableRestProxy::deleteTable
     * @covers WindowsAzure\Table\TableRestProxy::queryTables
     */
-    public function testCreateTableNoOptions() {
+    public function testCreateTableNoOptions()
+    {
         $this->createTableWorker(null);
     }
 
@@ -360,7 +378,8 @@ class TableServiceFunctionalTest extends FunctionalTestBase {
     * @covers WindowsAzure\Table\TableRestProxy::deleteTable
     * @covers WindowsAzure\Table\TableRestProxy::queryTables
     */
-    public function testCreateTable() {
+    public function testCreateTable()
+    {
         $options = new TableServiceOptions();
         $this->createTableWorker($options);
     }
@@ -370,7 +389,8 @@ class TableServiceFunctionalTest extends FunctionalTestBase {
     * @covers WindowsAzure\Table\TableRestProxy::deleteTable
     * @covers WindowsAzure\Table\TableRestProxy::queryTables
     */
-    private function createTableWorker($options) {
+    private function createTableWorker($options)
+    {
         $table = TableServiceFunctionalTestData::getInterestingTableName();
         $created = false;
 
@@ -409,7 +429,8 @@ class TableServiceFunctionalTest extends FunctionalTestBase {
     * @covers WindowsAzure\Table\TableRestProxy::deleteTable
     * @covers WindowsAzure\Table\TableRestProxy::queryTables
     */
-    public function testDeleteTableNoOptions() {
+    public function testDeleteTableNoOptions()
+    {
         $this->deleteTableWorker(null);
     }
 
@@ -418,7 +439,8 @@ class TableServiceFunctionalTest extends FunctionalTestBase {
     * @covers WindowsAzure\Table\TableRestProxy::deleteTable
     * @covers WindowsAzure\Table\TableRestProxy::queryTables
     */
-    public function testDeleteTable() {
+    public function testDeleteTable()
+    {
         $options = new TableServiceOptions();
         $this->deleteTableWorker($options);
     }
@@ -428,7 +450,8 @@ class TableServiceFunctionalTest extends FunctionalTestBase {
     * @covers WindowsAzure\Table\TableRestProxy::deleteTable
     * @covers WindowsAzure\Table\TableRestProxy::queryTables
     */
-    private function deleteTableWorker($options) {
+    private function deleteTableWorker($options)
+    {
         $Table = TableServiceFunctionalTestData::getInterestingTableName();
 
         // Make sure that the list of all applicable Tables is correctly updated.
@@ -478,7 +501,8 @@ class TableServiceFunctionalTest extends FunctionalTestBase {
     * @covers WindowsAzure\Table\TableRestProxy::deleteTable
     * @covers WindowsAzure\Table\TableRestProxy::getTable
     */
-    public function testGetTableNoOptions() {
+    public function testGetTableNoOptions()
+    {
         $this->getTableWorker(null);
     }
 
@@ -487,7 +511,8 @@ class TableServiceFunctionalTest extends FunctionalTestBase {
     * @covers WindowsAzure\Table\TableRestProxy::deleteTable
     * @covers WindowsAzure\Table\TableRestProxy::getTable
     */
-    public function testGetTable() {
+    public function testGetTable()
+    {
         $options = new TableServiceOptions();
         $this->getTableWorker($options);
     }
@@ -497,7 +522,8 @@ class TableServiceFunctionalTest extends FunctionalTestBase {
     * @covers WindowsAzure\Table\TableRestProxy::deleteTable
     * @covers WindowsAzure\Table\TableRestProxy::getTable
     */
-    private function getTableWorker($options) {
+    private function getTableWorker($options)
+    {
         $table = TableServiceFunctionalTestData::getInterestingTableName();
         $created = false;
 
@@ -517,7 +543,8 @@ class TableServiceFunctionalTest extends FunctionalTestBase {
         }
     }
 
-    private function verifygetTableWorker($ret, $tableName) {
+    private function verifygetTableWorker($ret, $tableName)
+    {
         $this->assertNotNull($ret, 'getTableEntry');
         $this->assertEquals($tableName, $ret->getName(), 'getTableEntry->Name');
     }
@@ -526,7 +553,8 @@ class TableServiceFunctionalTest extends FunctionalTestBase {
     * @covers WindowsAzure\Table\TableRestProxy::getEntity
     * @covers WindowsAzure\Table\TableRestProxy::insertEntity
     */
-    public function testGetEntity() {
+    public function testGetEntity()
+    {
         $ents = TableServiceFunctionalTestData::getInterestingEntities();
         foreach($ents as $ent)  {
             $options = new TableServiceOptions();
@@ -538,7 +566,8 @@ class TableServiceFunctionalTest extends FunctionalTestBase {
     * @covers WindowsAzure\Table\TableRestProxy::getEntity
     * @covers WindowsAzure\Table\TableRestProxy::insertEntity
     */
-    private function getEntityWorker($ent, $isGood, $options) {
+    private function getEntityWorker($ent, $isGood, $options)
+    {
         $table = $this->getCleanTable();
         try {
             // Upload the entity.
@@ -566,7 +595,8 @@ class TableServiceFunctionalTest extends FunctionalTestBase {
         $this->clearTable($table);
     }
 
-    private function verifygetEntityWorker($ent, $entReturned) {
+    private function verifygetEntityWorker($ent, $entReturned)
+    {
         $expectedProps = array();
         foreach($ent->getProperties() as $pname => $actualProp)  {
             if (is_null($actualProp) || !is_null($actualProp->getValue())) {
@@ -629,7 +659,8 @@ class TableServiceFunctionalTest extends FunctionalTestBase {
     * @covers WindowsAzure\Table\TableRestProxy::getEntity
     * @covers WindowsAzure\Table\TableRestProxy::insertEntity
     */
-    public function testDeleteEntity() {
+    public function testDeleteEntity()
+    {
         $ents = TableServiceFunctionalTestData::getSimpleEntities(3);
         for ($useEtag = 0; $useEtag <= 2; $useEtag++) {
             foreach($ents as $ent)  {
@@ -644,7 +675,8 @@ class TableServiceFunctionalTest extends FunctionalTestBase {
     * @covers WindowsAzure\Table\TableRestProxy::getEntity
     * @covers WindowsAzure\Table\TableRestProxy::insertEntity
     */
-    private function deleteEntityWorker($ent, $useEtag, $options) {
+    private function deleteEntityWorker($ent, $useEtag, $options)
+    {
         $table = $this->getCleanTable();
         try {
             // Upload the entity.
@@ -688,7 +720,8 @@ class TableServiceFunctionalTest extends FunctionalTestBase {
     * @covers WindowsAzure\Table\TableRestProxy::insertEntity
     * @covers WindowsAzure\Table\TableRestProxy::queryEntities
     */
-    public function testInsertEntity() {
+    public function testInsertEntity()
+    {
         $ents = TableServiceFunctionalTestData::getInterestingEntities();
         foreach($ents as $ent)  {
             $options = new TableServiceOptions();
@@ -700,7 +733,8 @@ class TableServiceFunctionalTest extends FunctionalTestBase {
     * @covers WindowsAzure\Table\TableRestProxy::insertEntity
     * @covers WindowsAzure\Table\TableRestProxy::queryEntities
     */
-    public function testInsertBadEntity() {
+    public function testInsertBadEntity()
+    {
         $ents = TableServiceFunctionalTestData::getInterestingBadEntities();
         foreach($ents as $ent)  {
             $options = new TableServiceOptions();
@@ -718,7 +752,8 @@ class TableServiceFunctionalTest extends FunctionalTestBase {
     * @covers WindowsAzure\Table\TableRestProxy::insertEntity
     * @covers WindowsAzure\Table\TableRestProxy::queryEntities
     */
-    public function testInsertEntityBoolean() {
+    public function testInsertEntityBoolean()
+    {
         foreach(TableServiceFunctionalTestData::getInterestingGoodBooleans() as $o)  {
             $ent = new Entity();
             $ent->setPartitionKey(TableServiceFunctionalTestData::getNewKey());
@@ -732,7 +767,8 @@ class TableServiceFunctionalTest extends FunctionalTestBase {
     * @covers WindowsAzure\Table\TableRestProxy::insertEntity
     * @covers WindowsAzure\Table\TableRestProxy::queryEntities
     */
-    public function testInsertEntityBooleanNegative() {
+    public function testInsertEntityBooleanNegative()
+    {
         foreach(TableServiceFunctionalTestData::getInterestingBadBooleans() as $o)  {
             $ent = new Entity();
             $ent->setPartitionKey(TableServiceFunctionalTestData::getNewKey());
@@ -752,7 +788,8 @@ class TableServiceFunctionalTest extends FunctionalTestBase {
     * @covers WindowsAzure\Table\TableRestProxy::insertEntity
     * @covers WindowsAzure\Table\TableRestProxy::queryEntities
     */
-    public function testInsertEntityDate() {
+    public function testInsertEntityDate()
+    {
         foreach(TableServiceFunctionalTestData::getInterestingGoodDates() as $o)  {
             $ent = new Entity();
             $ent->setPartitionKey(TableServiceFunctionalTestData::getNewKey());
@@ -766,7 +803,8 @@ class TableServiceFunctionalTest extends FunctionalTestBase {
     * @covers WindowsAzure\Table\TableRestProxy::insertEntity
     * @covers WindowsAzure\Table\TableRestProxy::queryEntities
     */
-    public function testInsertEntityDateNegative() {
+    public function testInsertEntityDateNegative()
+    {
         foreach(TableServiceFunctionalTestData::getInterestingBadDates() as $o)  {
             $ent = new Entity();
             $ent->setPartitionKey(TableServiceFunctionalTestData::getNewKey());
@@ -786,7 +824,8 @@ class TableServiceFunctionalTest extends FunctionalTestBase {
     * @covers WindowsAzure\Table\TableRestProxy::insertEntity
     * @covers WindowsAzure\Table\TableRestProxy::queryEntities
     */
-    public function testInsertEntityDouble() {
+    public function testInsertEntityDouble()
+    {
         foreach(TableServiceFunctionalTestData::getInterestingGoodDoubles() as $o)  {
             $ent = new Entity();
             $ent->setPartitionKey(TableServiceFunctionalTestData::getNewKey());
@@ -800,7 +839,8 @@ class TableServiceFunctionalTest extends FunctionalTestBase {
     * @covers WindowsAzure\Table\TableRestProxy::insertEntity
     * @covers WindowsAzure\Table\TableRestProxy::queryEntities
     */
-    public function testInsertEntityDoubleNegative() {
+    public function testInsertEntityDoubleNegative()
+    {
         foreach(TableServiceFunctionalTestData::getInterestingBadDoubles() as $o)  {
             $ent = new Entity();
             $ent->setPartitionKey(TableServiceFunctionalTestData::getNewKey());
@@ -820,7 +860,8 @@ class TableServiceFunctionalTest extends FunctionalTestBase {
     * @covers WindowsAzure\Table\TableRestProxy::insertEntity
     * @covers WindowsAzure\Table\TableRestProxy::queryEntities
     */
-    public function testInsertEntityGuid() {
+    public function testInsertEntityGuid()
+    {
         foreach(TableServiceFunctionalTestData::getInterestingGoodGuids() as $o)  {
             $ent = new Entity();
             $ent->setPartitionKey(TableServiceFunctionalTestData::getNewKey());
@@ -834,7 +875,8 @@ class TableServiceFunctionalTest extends FunctionalTestBase {
     * @covers WindowsAzure\Table\TableRestProxy::insertEntity
     * @covers WindowsAzure\Table\TableRestProxy::queryEntities
     */
-    public function testInsertEntityGuidNegative() {
+    public function testInsertEntityGuidNegative()
+    {
         foreach(TableServiceFunctionalTestData::getInterestingBadGuids() as $o)  {
             $ent = new Entity();
             $ent->setPartitionKey(TableServiceFunctionalTestData::getNewKey());
@@ -854,7 +896,8 @@ class TableServiceFunctionalTest extends FunctionalTestBase {
     * @covers WindowsAzure\Table\TableRestProxy::insertEntity
     * @covers WindowsAzure\Table\TableRestProxy::queryEntities
     */
-    public function testInsertEntityInt() {
+    public function testInsertEntityInt()
+    {
         foreach(TableServiceFunctionalTestData::getInterestingGoodInts() as $o)  {
             $ent = new Entity();
             $ent->setPartitionKey(TableServiceFunctionalTestData::getNewKey());
@@ -868,7 +911,8 @@ class TableServiceFunctionalTest extends FunctionalTestBase {
     * @covers WindowsAzure\Table\TableRestProxy::insertEntity
     * @covers WindowsAzure\Table\TableRestProxy::queryEntities
     */
-    public function testInsertEntityIntNegative() {
+    public function testInsertEntityIntNegative()
+    {
         foreach(TableServiceFunctionalTestData::getInterestingBadInts() as $o)  {
             $ent = new Entity();
             $ent->setPartitionKey(TableServiceFunctionalTestData::getNewKey());
@@ -888,7 +932,8 @@ class TableServiceFunctionalTest extends FunctionalTestBase {
     * @covers WindowsAzure\Table\TableRestProxy::insertEntity
     * @covers WindowsAzure\Table\TableRestProxy::queryEntities
     */
-    public function testInsertEntityLong() {
+    public function testInsertEntityLong()
+    {
         foreach(TableServiceFunctionalTestData::getInterestingGoodLongs() as $o)  {
             $ent = new Entity();
             $ent->setPartitionKey(TableServiceFunctionalTestData::getNewKey());
@@ -902,7 +947,8 @@ class TableServiceFunctionalTest extends FunctionalTestBase {
     * @covers WindowsAzure\Table\TableRestProxy::insertEntity
     * @covers WindowsAzure\Table\TableRestProxy::queryEntities
     */
-    public function testInsertEntityLongNegative() {
+    public function testInsertEntityLongNegative()
+    {
         foreach(TableServiceFunctionalTestData::getInterestingBadLongs() as $o)  {
             $ent = new Entity();
             $ent->setPartitionKey(TableServiceFunctionalTestData::getNewKey());
@@ -922,7 +968,8 @@ class TableServiceFunctionalTest extends FunctionalTestBase {
     * @covers WindowsAzure\Table\TableRestProxy::insertEntity
     * @covers WindowsAzure\Table\TableRestProxy::queryEntities
     */
-    public function testInsertEntityBinary() {
+    public function testInsertEntityBinary()
+    {
         foreach(TableServiceFunctionalTestData::getInterestingGoodBinaries() as $o)  {
             $ent = new Entity();
             $ent->setPartitionKey(TableServiceFunctionalTestData::getNewKey());
@@ -936,7 +983,8 @@ class TableServiceFunctionalTest extends FunctionalTestBase {
     * @covers WindowsAzure\Table\TableRestProxy::insertEntity
     * @covers WindowsAzure\Table\TableRestProxy::queryEntities
     */
-    public function testInsertEntityBinaryNegative() {
+    public function testInsertEntityBinaryNegative()
+    {
         foreach(TableServiceFunctionalTestData::getInterestingBadBinaries() as $o)  {
             $ent = new Entity();
             $ent->setPartitionKey(TableServiceFunctionalTestData::getNewKey());
@@ -956,7 +1004,8 @@ class TableServiceFunctionalTest extends FunctionalTestBase {
     * @covers WindowsAzure\Table\TableRestProxy::insertEntity
     * @covers WindowsAzure\Table\TableRestProxy::queryEntities
     */
-    public function testInsertEntityString() {
+    public function testInsertEntityString()
+    {
         foreach(TableServiceFunctionalTestData::getInterestingGoodStrings() as $o)  {
             $ent = new Entity();
             $ent->setPartitionKey(TableServiceFunctionalTestData::getNewKey());
@@ -970,7 +1019,8 @@ class TableServiceFunctionalTest extends FunctionalTestBase {
     * @covers WindowsAzure\Table\TableRestProxy::insertEntity
     * @covers WindowsAzure\Table\TableRestProxy::queryEntities
     */
-    private function insertEntityWorker($ent, $isGood, $options, $specialValue = null) {
+    private function insertEntityWorker($ent, $isGood, $options, $specialValue = null)
+    {
         $table = $this->getCleanTable();
         try {
             $ret = (is_null($options) ? $this->restProxy->insertEntity($table, $ent) : $this->restProxy->insertEntity($table, $ent, $options));
@@ -1020,7 +1070,8 @@ class TableServiceFunctionalTest extends FunctionalTestBase {
     * @covers WindowsAzure\Table\TableRestProxy::queryEntities
     * @covers WindowsAzure\Table\TableRestProxy::updateEntity
     */
-    public function testUpdateEntity() {
+    public function testUpdateEntity()
+    {
         $ents = TableServiceFunctionalTestData::getSimpleEntities(2);
         foreach(MutatePivot::values() as $mutatePivot) {
             foreach($ents as $initialEnt)  {
@@ -1037,7 +1088,8 @@ class TableServiceFunctionalTest extends FunctionalTestBase {
     * @covers WindowsAzure\Table\TableRestProxy::queryEntities
     * @covers WindowsAzure\Table\TableRestProxy::updateEntity
     */
-    private function updateEntityWorker($initialEnt, $ent, $options) {
+    private function updateEntityWorker($initialEnt, $ent, $options)
+    {
         $table = $this->getCleanTable();
 
         // Upload the entity.
@@ -1070,7 +1122,8 @@ class TableServiceFunctionalTest extends FunctionalTestBase {
     * @covers WindowsAzure\Table\TableRestProxy::mergeEntity
     * @covers WindowsAzure\Table\TableRestProxy::queryEntities
     */
-    public function testMergeEntity() {
+    public function testMergeEntity()
+    {
         $ents = TableServiceFunctionalTestData::getSimpleEntities(2);
         foreach(MutatePivot::values() as $mutatePivot) {
             foreach($ents as $initialEnt)  {
@@ -1087,7 +1140,8 @@ class TableServiceFunctionalTest extends FunctionalTestBase {
     * @covers WindowsAzure\Table\TableRestProxy::mergeEntity
     * @covers WindowsAzure\Table\TableRestProxy::queryEntities
     */
-    private function mergeEntityWorker($initialEnt, $ent, $options) {
+    private function mergeEntityWorker($initialEnt, $ent, $options)
+    {
         $table = $this->getCleanTable();
 
         // Upload the entity.
@@ -1121,7 +1175,8 @@ class TableServiceFunctionalTest extends FunctionalTestBase {
     * @covers WindowsAzure\Table\TableRestProxy::insertOrReplaceEntity
     * @covers WindowsAzure\Table\TableRestProxy::queryEntities
     */
-    public function testInsertOrReplaceEntity() {
+    public function testInsertOrReplaceEntity()
+    {
         $ents = TableServiceFunctionalTestData::getSimpleEntities(2);
         foreach(MutatePivot::values() as $mutatePivot) {
             foreach($ents as $initialEnt)  {
@@ -1148,7 +1203,8 @@ class TableServiceFunctionalTest extends FunctionalTestBase {
     * @covers WindowsAzure\Table\TableRestProxy::insertOrReplaceEntity
     * @covers WindowsAzure\Table\TableRestProxy::queryEntities
     */
-    private function insertOrReplaceEntityWorker($initialEnt, $ent, $options) {
+    private function insertOrReplaceEntityWorker($initialEnt, $ent, $options)
+    {
         $table = $this->getCleanTable();
 
         // Upload the entity.
@@ -1181,7 +1237,8 @@ class TableServiceFunctionalTest extends FunctionalTestBase {
     * @covers WindowsAzure\Table\TableRestProxy::insertOrMergeEntity
     * @covers WindowsAzure\Table\TableRestProxy::queryEntities
     */
-    public function testInsertOrMergeEntity() {
+    public function testInsertOrMergeEntity()
+    {
         $ents = TableServiceFunctionalTestData::getSimpleEntities(2);
         foreach(MutatePivot::values() as $mutatePivot) {
             foreach($ents as $initialEnt)  {
@@ -1208,7 +1265,8 @@ class TableServiceFunctionalTest extends FunctionalTestBase {
     * @covers WindowsAzure\Table\TableRestProxy::insertOrMergeEntity
     * @covers WindowsAzure\Table\TableRestProxy::queryEntities
     */
-    private function insertOrMergeEntityWorker($initialEnt, $ent, $options) {
+    private function insertOrMergeEntityWorker($initialEnt, $ent, $options)
+    {
         $table = $this->getCleanTable();
 
         // Upload the entity.
@@ -1245,7 +1303,8 @@ class TableServiceFunctionalTest extends FunctionalTestBase {
     * @covers WindowsAzure\Table\TableRestProxy::mergeEntity
     * @covers WindowsAzure\Table\TableRestProxy::updateEntity
     */
-    public function testCRUDdeleteEntity() {
+    public function testCRUDdeleteEntity()
+    {
         foreach(ConcurType::values() as $concurType)  {
             foreach(MutatePivot::values() as $mutatePivot) {
                 for ($i = 0; $i <= 1; $i++) {
@@ -1266,7 +1325,8 @@ class TableServiceFunctionalTest extends FunctionalTestBase {
     * @covers WindowsAzure\Table\TableRestProxy::mergeEntity
     * @covers WindowsAzure\Table\TableRestProxy::updateEntity
     */
-    public function testCRUDinsertEntity() {
+    public function testCRUDinsertEntity()
+    {
         foreach(ConcurType::values() as $concurType)  {
             foreach(MutatePivot::values() as $mutatePivot) {
                 for ($i = 0; $i <= 1; $i++) {
@@ -1287,7 +1347,8 @@ class TableServiceFunctionalTest extends FunctionalTestBase {
     * @covers WindowsAzure\Table\TableRestProxy::mergeEntity
     * @covers WindowsAzure\Table\TableRestProxy::updateEntity
     */
-    public function testCRUDinsertOrMergeEntity() {
+    public function testCRUDinsertOrMergeEntity()
+    {
         $this->skipIfEmulated();
 
         foreach(ConcurType::values() as $concurType)  {
@@ -1310,7 +1371,8 @@ class TableServiceFunctionalTest extends FunctionalTestBase {
     * @covers WindowsAzure\Table\TableRestProxy::mergeEntity
     * @covers WindowsAzure\Table\TableRestProxy::updateEntity
     */
-    public function testCRUDinsertOrReplaceEntity() {
+    public function testCRUDinsertOrReplaceEntity()
+    {
         $this->skipIfEmulated();
 
         foreach(ConcurType::values() as $concurType)  {
@@ -1333,7 +1395,8 @@ class TableServiceFunctionalTest extends FunctionalTestBase {
     * @covers WindowsAzure\Table\TableRestProxy::mergeEntity
     * @covers WindowsAzure\Table\TableRestProxy::updateEntity
     */
-    public function testCRUDmergeEntity() {
+    public function testCRUDmergeEntity()
+    {
         foreach(ConcurType::values() as $concurType)  {
             foreach(MutatePivot::values() as $mutatePivot) {
                 for ($i = 0; $i <= 1; $i++) {
@@ -1354,7 +1417,8 @@ class TableServiceFunctionalTest extends FunctionalTestBase {
     * @covers WindowsAzure\Table\TableRestProxy::mergeEntity
     * @covers WindowsAzure\Table\TableRestProxy::updateEntity
     */
-    public function testCRUDupdateEntity() {
+    public function testCRUDupdateEntity()
+    {
         foreach(ConcurType::values() as $concurType)  {
             foreach(MutatePivot::values() as $mutatePivot) {
                 for ($i = 0; $i <= 1; $i++) {
@@ -1375,7 +1439,8 @@ class TableServiceFunctionalTest extends FunctionalTestBase {
     * @covers WindowsAzure\Table\TableRestProxy::mergeEntity
     * @covers WindowsAzure\Table\TableRestProxy::updateEntity
     */
-    private function crudWorker($opType, $concurType, $mutatePivot, $ent, $options) {
+    private function crudWorker($opType, $concurType, $mutatePivot, $ent, $options)
+    {
         $exptErr = $this->expectConcurrencyFailure($opType, $concurType);
         $table = $this->getCleanTable();
 
@@ -1407,7 +1472,8 @@ class TableServiceFunctionalTest extends FunctionalTestBase {
     * @covers WindowsAzure\Table\TableRestProxy::batch
     * @covers WindowsAzure\Table\TableRestProxy::insertEntity
     */
-    public function testBatchPositiveFirstNoKeyMatch() {
+    public function testBatchPositiveFirstNoKeyMatch()
+    {
         $this->batchPositiveOuter(ConcurType::NoKeyMatch, 123);
     }
 
@@ -1415,7 +1481,8 @@ class TableServiceFunctionalTest extends FunctionalTestBase {
     * @covers WindowsAzure\Table\TableRestProxy::batch
     * @covers WindowsAzure\Table\TableRestProxy::insertEntity
     */
-    public function testBatchPositiveFirstKeyMatchNoEtag() {
+    public function testBatchPositiveFirstKeyMatchNoEtag()
+    {
         $this->batchPositiveOuter(ConcurType::KeyMatchNoEtag, 234);
     }
 
@@ -1423,7 +1490,8 @@ class TableServiceFunctionalTest extends FunctionalTestBase {
     * @covers WindowsAzure\Table\TableRestProxy::batch
     * @covers WindowsAzure\Table\TableRestProxy::insertEntity
     */
-    public function testBatchPositiveFirstKeyMatchEtagMismatch() {
+    public function testBatchPositiveFirstKeyMatchEtagMismatch()
+    {
         $this->skipIfEmulated();
         $this->batchPositiveOuter(ConcurType::KeyMatchEtagMismatch, 345);
     }
@@ -1432,7 +1500,8 @@ class TableServiceFunctionalTest extends FunctionalTestBase {
     * @covers WindowsAzure\Table\TableRestProxy::batch
     * @covers WindowsAzure\Table\TableRestProxy::insertEntity
     */
-    public function testBatchPositiveFirstKeyMatchEtagMatch() {
+    public function testBatchPositiveFirstKeyMatchEtagMatch()
+    {
         $this->batchPositiveOuter(ConcurType::KeyMatchEtagMatch, 456);
     }
 
@@ -1440,7 +1509,8 @@ class TableServiceFunctionalTest extends FunctionalTestBase {
     * @covers WindowsAzure\Table\TableRestProxy::batch
     * @covers WindowsAzure\Table\TableRestProxy::insertEntity
     */
-    public function testBatchNegative() {
+    public function testBatchNegative()
+    {
         $this->skipIfEmulated();
 
         // The random here is not to generate random values, but to
@@ -1469,15 +1539,18 @@ class TableServiceFunctionalTest extends FunctionalTestBase {
         }
     }
 
-    private function verifyinsertEntityWorker($ent, $entReturned) {
+    private function verifyinsertEntityWorker($ent, $entReturned)
+    {
         $this->verifyinsertOrMergeEntityWorker(null, $ent, $entReturned);
     }
 
-    private function verifymergeEntityWorker($intitalEnt, $ent, $entReturned) {
+    private function verifymergeEntityWorker($intitalEnt, $ent, $entReturned)
+    {
         $this->verifyinsertOrMergeEntityWorker($intitalEnt, $ent, $entReturned);
     }
 
-    private function verifyinsertOrMergeEntityWorker($initialEnt, $ent, $entReturned) {
+    private function verifyinsertOrMergeEntityWorker($initialEnt, $ent, $entReturned)
+    {
         $expectedProps = array();
         if (!is_null($initialEnt) && $initialEnt->getPartitionKey() == $ent->getPartitionKey() && $initialEnt->getRowKey() == $ent->getRowKey()) {
             foreach($initialEnt->getProperties() as $pname => $actualProp)  {
@@ -1553,7 +1626,8 @@ class TableServiceFunctionalTest extends FunctionalTestBase {
     * @covers WindowsAzure\Table\TableRestProxy::batch
     * @covers WindowsAzure\Table\TableRestProxy::insertEntity
     */
-    private function batchPositiveOuter($firstConcurType, $seed) {
+    private function batchPositiveOuter($firstConcurType, $seed)
+    {
         // The random here is not to generate random values, but to
         // get a good mix of values in the table entities.
         mt_srand($seed);
@@ -1622,7 +1696,8 @@ class TableServiceFunctionalTest extends FunctionalTestBase {
     * @covers WindowsAzure\Table\TableRestProxy::batch
     * @covers WindowsAzure\Table\TableRestProxy::insertEntity
     */
-    private function batchWorker($configs, $options) {
+    private function batchWorker($configs, $options)
+    {
         $exptErrs = array();
         $expectedReturned = count($configs);
         $expectedError = false;
@@ -1631,7 +1706,7 @@ class TableServiceFunctionalTest extends FunctionalTestBase {
             $err = $this->expectConcurrencyFailure($configs[$i]->opType, $configs[$i]->concurType);
             if (!is_null($err)) {
                 $expectedErrorCount++;
-                $expectedError = true;                
+                $expectedError = true;
             }
             array_push($exptErrs, $err);
         }
@@ -1700,7 +1775,8 @@ class TableServiceFunctionalTest extends FunctionalTestBase {
     /**
     * @covers WindowsAzure\Table\TableRestProxy::getEntity
     */
-    private function verifyEntryData($table, $exptErr, $targetEnt, $opResult) {
+    private function verifyEntryData($table, $exptErr, $targetEnt, $opResult)
+    {
         if ($opResult instanceof InsertEntityResult) {
             $this->verifyinsertEntityWorker($targetEnt, $opResult->getEntity());
         }
@@ -1719,7 +1795,8 @@ class TableServiceFunctionalTest extends FunctionalTestBase {
         }
     }
 
-    private function verifyBatchEntryType($opType, $exptErr, $opResult) {
+    private function verifyBatchEntryType($opType, $exptErr, $opResult)
+    {
         if (is_null($exptErr)) {
             switch ($opType) {
                 case OpType::insertEntity:
@@ -1727,7 +1804,7 @@ class TableServiceFunctionalTest extends FunctionalTestBase {
                             'When opType=' . $opType . ' expect opResult instanceof InsertEntityResult');
                     break;
                 case OpType::deleteEntity:
-                    $this->assertTrue(is_string($opResult),
+                    $this->assertTrue(is_string($opResult, 'is_string($opResult'),
                             'When opType=' . $opType . ' expect opResult is a string');
                     break;
                 case OpType::updateEntity:
@@ -1744,7 +1821,8 @@ class TableServiceFunctionalTest extends FunctionalTestBase {
         }
     }
 
-    private function buildBatchOperations($table, $operations, $targetEnt, $opType, $concurType, $options) {
+    private function buildBatchOperations($table, $operations, $targetEnt, $opType, $concurType, $options)
+    {
         switch ($opType) {
             case OpType::deleteEntity:
                 if (is_null($options) && $concurType != ConcurType::KeyMatchEtagMismatch) {
@@ -1780,7 +1858,8 @@ class TableServiceFunctionalTest extends FunctionalTestBase {
     * @covers WindowsAzure\Table\TableRestProxy::mergeEntity
     * @covers WindowsAzure\Table\TableRestProxy::updateEntity
     */
-    private function executeCrudMethod($table, $targetEnt, $opType, $concurType, $options) {
+    private function executeCrudMethod($table, $targetEnt, $opType, $concurType, $options)
+    {
         switch ($opType) {
             case OpType::deleteEntity:
                 if (is_null($options) && $concurType != ConcurType::KeyMatchEtagMismatch) {
@@ -1833,7 +1912,8 @@ class TableServiceFunctionalTest extends FunctionalTestBase {
     /**
     * @covers WindowsAzure\Table\TableRestProxy::getEntity
     */
-    private function verifyCrudWorker($opType, $table, $initialEnt, $targetEnt, $expectedSuccess) {
+    private function verifyCrudWorker($opType, $table, $initialEnt, $targetEnt, $expectedSuccess)
+    {
         $entInTable = null;
         try {
             $ger = $this->restProxy->getEntity($table, $targetEnt->getPartitionKey(), $targetEnt->getRowKey());
@@ -1883,7 +1963,8 @@ class TableServiceFunctionalTest extends FunctionalTestBase {
     /**
     * @covers WindowsAzure\Table\TableRestProxy::updateEntity
     */
-    private function createTargetEntity($table, $initialEnt, $concurType, $mutatePivot) {
+    private function createTargetEntity($table, $initialEnt, $concurType, $mutatePivot)
+    {
         $targetEnt = TableServiceFunctionalTestUtils::cloneEntity($initialEnt);
 
         // Update the entity/table state to get the requested concurrency type error.
@@ -1912,7 +1993,8 @@ class TableServiceFunctionalTest extends FunctionalTestBase {
         return $targetEnt;
     }
 
-    private static function expectConcurrencyFailure($opType, $concurType) {
+    private static function expectConcurrencyFailure($opType, $concurType)
+    {
         if (is_null($concurType) || is_null($opType)) {
             return -1;
         }
@@ -1946,7 +2028,8 @@ class TableServiceFunctionalTest extends FunctionalTestBase {
         return null;
     }
 
-    function compareProperties($pname, $actualProp, $expectedProp) {
+    function compareProperties($pname, $actualProp, $expectedProp)
+    {
         $effectiveExpectedProp = (is_null($expectedProp->getEdmType()) ? EdmType::STRING : $expectedProp->getEdmType());
         $effectiveActualProp = (is_null($expectedProp->getEdmType()) ? EdmType::STRING : $expectedProp->getEdmType());
 

@@ -32,34 +32,39 @@ use WindowsAzure\Queue\Models\CreateMessageOptions;
 use WindowsAzure\Queue\Models\CreateQueueOptions;
 use WindowsAzure\Queue\Models\ListQueuesOptions;
 
-class QueueServiceFunctionalTestData {
+class QueueServiceFunctionalTestData
+{
     const INTERESTING_TTL = 4;
     public static $testUniqueId;
     public static $tempQueueCounter;
     public static $nonExistQueuePrefix;
     public static $TEST_QUEUE_NAMES;
 
-    public static function setupData() {
+    public static function setupData()
+    {
         $rint = mt_rand(0, 1000000);
         self::$testUniqueId = 'qa-' . $rint . '-';
         self::$nonExistQueuePrefix = 'qa-' . ($rint + 1) . '-';
         self::$TEST_QUEUE_NAMES = array(
-            self::$testUniqueId . 'a1', 
-            self::$testUniqueId . 'a2', 
+            self::$testUniqueId . 'a1',
+            self::$testUniqueId . 'a2',
             self::$testUniqueId . 'b1',
         );
         self::$tempQueueCounter = 0;
     }
 
-    public static function getInterestingQueueName() {
+    public static function getInterestingQueueName()
+    {
         return self::$testUniqueId . 'int-' . (self::$tempQueueCounter++);
     }
 
-    public static function getSimpleMessageText() {
+    public static function getSimpleMessageText()
+    {
         return 'simple message text #' . (self::$tempQueueCounter++);
     }
 
-    public static function getInterestingTimeoutValues() {
+    public static function getInterestingTimeoutValues()
+    {
         $ret = array();
         array_push($ret, null);
         array_push($ret, -1);
@@ -70,7 +75,8 @@ class QueueServiceFunctionalTestData {
         return $ret;
     }
 
-    public static function getDefaultServiceProperties() {
+    public static function getDefaultServiceProperties()
+    {
         // This is the default that comes from the server.
         $rp = new RetentionPolicy();
         $l = new Logging();
@@ -93,7 +99,8 @@ class QueueServiceFunctionalTestData {
         return $sp;
     }
 
-    public static function getInterestingServiceProperties() {
+    public static function getInterestingServiceProperties()
+    {
         $ret = array();
 
         {
@@ -187,7 +194,8 @@ class QueueServiceFunctionalTestData {
         return $ret;
     }
 
-    public static function getInterestingMetadata() {
+    public static function getInterestingMetadata()
+    {
         $ret = self::getNiceMetadata();
 
         // Some metadata that HTTP will not like.
@@ -197,7 +205,8 @@ class QueueServiceFunctionalTestData {
         return $ret;
     }
 
-    public static function getNiceMetadata() {
+    public static function getNiceMetadata()
+    {
         $ret = array();
 
         array_push($ret, null);
@@ -214,7 +223,8 @@ class QueueServiceFunctionalTestData {
         return $ret;
     }
 
-    public static function getInterestingCreateQueueOptions() {
+    public static function getInterestingCreateQueueOptions()
+    {
         $ret = array();
 
         $options = new CreateQueueOptions();
@@ -246,7 +256,8 @@ class QueueServiceFunctionalTestData {
         return $ret;
     }
 
-    public static function getSimpleCreateMessageOptions() {
+    public static function getSimpleCreateMessageOptions()
+    {
         $ret = new CreateMessageOptions();
         $ret->setTimeout(4);
         $ret->setTimeToLiveInSeconds(1000);
@@ -254,14 +265,15 @@ class QueueServiceFunctionalTestData {
         return $ret;
     }
 
-    public static function getInterestingListQueuesOptions() {
+    public static function getInterestingListQueuesOptions()
+    {
         $ret = array();
 
         $options = new ListQueuesOptions();
         array_push($ret, $options);
 
         $options = new ListQueuesOptions();
-        $options->setMaxResults(2);        
+        $options->setMaxResults(2);
         $options->setMaxResults('2');
         array_push($ret, $options);
 

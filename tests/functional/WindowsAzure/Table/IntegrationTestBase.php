@@ -28,7 +28,11 @@ use Tests\Framework\FiddlerFilter;
 use Tests\Framework\TableServiceRestProxyTestBase;
 use WindowsAzure\Table\TableService;
 
-class IntegrationTestBase extends TableServiceRestProxyTestBase {
+class IntegrationTestBase extends TableServiceRestProxyTestBase
+{
+    /**
+     * @covers WindowsAzure\ServiceBus\ServiceBusRestProxy::withFilter
+     */
     public function __construct()
     {
         parent::__construct();

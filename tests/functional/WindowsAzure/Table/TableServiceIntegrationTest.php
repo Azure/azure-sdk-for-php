@@ -48,7 +48,8 @@ use WindowsAzure\Table\Models\Filters\PropertyNameFilter;
 use WindowsAzure\Table\Models\Filters\QueryStringFilter;
 use WindowsAzure\Table\Models\Filters\UnaryFilter;
 
-class TableServiceIntegrationTest extends IntegrationTestBase {
+class TableServiceIntegrationTest extends IntegrationTestBase
+{
     private static $testTablesPrefix = 'sdktest';
     private static $createableTablesPrefix = 'csdktest';
     private static $TEST_TABLE_1;
@@ -64,7 +65,8 @@ class TableServiceIntegrationTest extends IntegrationTestBase {
     private static $creatableTables;
     private static $testTables;
 
-    public static function setUpBeforeClass() {
+    public static function setUpBeforeClass()
+    {
         parent::setUpBeforeClass();
         self::$testTablesPrefix .= rand(0,1000);
         // Setup container names array (list of container names used by
@@ -97,13 +99,15 @@ class TableServiceIntegrationTest extends IntegrationTestBase {
         self::createTables(self::$testTablesPrefix, self::$testTables);
     }
 
-    public static function tearDownAfterClass() {
+    public static function tearDownAfterClass()
+    {
         parent::tearDownAfterClass();
         self::deleteAllTables(self::$testTables);
         self::deleteTables(self::$createableTablesPrefix, self::$creatableTables);
     }
 
-    private static function createTables($prefix, $list) {
+    private static function createTables($prefix, $list)
+    {
         $service = self::createService();
         $containers = self::listTables($prefix);
         foreach($list as $item)  {
@@ -113,7 +117,8 @@ class TableServiceIntegrationTest extends IntegrationTestBase {
         }
     }
 
-    private static function deleteTables($prefix, $list) {
+    private static function deleteTables($prefix, $list)
+    {
         $service = self::createService();
         $containers = self::listTables($prefix);
         foreach($list as $item)  {
@@ -123,7 +128,8 @@ class TableServiceIntegrationTest extends IntegrationTestBase {
         }
     }
 
-    private static function deleteAllTables($list) {
+    private static function deleteAllTables($list)
+    {
         $service = self::createService();
         foreach($list as $item)  {
             try {
@@ -136,7 +142,8 @@ class TableServiceIntegrationTest extends IntegrationTestBase {
         }
     }
 
-    private static function listTables($prefix) {
+    private static function listTables($prefix)
+    {
         $service = self::createService();
         $result = array();
         $qto = new QueryTablesOptions();
@@ -148,15 +155,17 @@ class TableServiceIntegrationTest extends IntegrationTestBase {
         return $result;
     }
 
-    private static function createService() {
+    private static function createService()
+    {
         $tmp = new IntegrationTestBase();
         return $tmp->restProxy;
     }
-    
+
     /**
     * @covers WindowsAzure\Table\TableRestProxy::getServiceProperties
     */
-    public function testGetServicePropertiesWorks() {
+    public function testGetServicePropertiesWorks()
+    {
         // Arrange
 
         // Act
@@ -191,7 +200,8 @@ class TableServiceIntegrationTest extends IntegrationTestBase {
     * @covers WindowsAzure\Table\TableRestProxy::getServiceProperties
     * @covers WindowsAzure\Table\TableRestProxy::setServiceProperties
     */
-    public function testSetServicePropertiesWorks() {
+    public function testSetServicePropertiesWorks()
+    {
         // Arrange
 
         // Act
@@ -232,7 +242,8 @@ class TableServiceIntegrationTest extends IntegrationTestBase {
     * @covers WindowsAzure\Table\TableRestProxy::createTable
     * @covers WindowsAzure\Table\TableRestProxy::getTable
     */
-    public function testCreateTablesWorks() {
+    public function testCreateTablesWorks()
+    {
         // Act
         try {
             $this->restProxy->getTable(self::$CREATABLE_TABLE_1);
@@ -254,7 +265,8 @@ class TableServiceIntegrationTest extends IntegrationTestBase {
     * @covers WindowsAzure\Table\TableRestProxy::deleteTable
     * @covers WindowsAzure\Table\TableRestProxy::getTable
     */
-    public function testDeleteTablesWorks() {
+    public function testDeleteTablesWorks()
+    {
         // Act
         $this->restProxy->createTable(self::$CREATABLE_TABLE_2);
         $result = $this->restProxy->getTable(self::$CREATABLE_TABLE_2);
@@ -276,7 +288,8 @@ class TableServiceIntegrationTest extends IntegrationTestBase {
     /**
     * @covers WindowsAzure\Table\TableRestProxy::queryTables
     */
-    public function testQueryTablesWorks() {
+    public function testQueryTablesWorks()
+    {
         // Act
         $result = $this->restProxy->queryTables();
 
@@ -287,7 +300,8 @@ class TableServiceIntegrationTest extends IntegrationTestBase {
     /**
     * @covers WindowsAzure\Table\TableRestProxy::queryTables
     */
-    public function testQueryTablesWithPrefixWorks() {
+    public function testQueryTablesWithPrefixWorks()
+    {
         // Act
         $qto = new QueryTablesOptions();
         $qto->setPrefix(self::$testTablesPrefix);
@@ -300,7 +314,8 @@ class TableServiceIntegrationTest extends IntegrationTestBase {
     /**
     * @covers WindowsAzure\Table\TableRestProxy::getTable
     */
-    public function testGetTableWorks() {
+    public function testGetTableWorks()
+    {
         // Act
         $result = $this->restProxy->getTable(self::$TEST_TABLE_1);
 
@@ -311,7 +326,8 @@ class TableServiceIntegrationTest extends IntegrationTestBase {
     /**
     * @covers WindowsAzure\Table\TableRestProxy::insertEntity
     */
-    public function testInsertEntityWorks() {
+    public function testInsertEntityWorks()
+    {
         // Arrange
         $binaryData = chr(1) . chr(2) . chr(3) . chr(4);
         $uuid = strtolower(trim(com_create_guid(), '{}'));
@@ -367,7 +383,8 @@ class TableServiceIntegrationTest extends IntegrationTestBase {
     * @covers WindowsAzure\Table\TableRestProxy::insertEntity
     * @covers WindowsAzure\Table\TableRestProxy::updateEntity
     */
-    public function testUpdateEntityWorks() {
+    public function testUpdateEntityWorks()
+    {
         // Arrange
         $entity = new Entity();
         $entity->setPartitionKey('001');
@@ -390,7 +407,8 @@ class TableServiceIntegrationTest extends IntegrationTestBase {
     /**
     * @covers WindowsAzure\Table\TableRestProxy::insertOrReplaceEntity
     */
-    public function testInsertOrReplaceEntityWorks() {
+    public function testInsertOrReplaceEntityWorks()
+    {
         // Arrange
         $entity = new Entity();
         $entity->setPartitionKey('001');
@@ -423,7 +441,8 @@ class TableServiceIntegrationTest extends IntegrationTestBase {
     /**
     * @covers WindowsAzure\Table\TableRestProxy::insertOrMergeEntity
     */
-    public function testInsertOrMergeEntityWorks() {
+    public function testInsertOrMergeEntityWorks()
+    {
         // Arrange
         $entity = new Entity();
         $entity->setPartitionKey('001');
@@ -457,7 +476,8 @@ class TableServiceIntegrationTest extends IntegrationTestBase {
     * @covers WindowsAzure\Table\TableRestProxy::insertEntity
     * @covers WindowsAzure\Table\TableRestProxy::mergeEntity
     */
-    public function testMergeEntityWorks() {
+    public function testMergeEntityWorks()
+    {
         // Arrange
         $entity = new Entity();
         $entity->setPartitionKey('001');
@@ -483,7 +503,8 @@ class TableServiceIntegrationTest extends IntegrationTestBase {
     * @covers WindowsAzure\Table\TableRestProxy::deleteEntity
     * @covers WindowsAzure\Table\TableRestProxy::insertEntity
     */
-    public function testDeleteEntityWorks() {
+    public function testDeleteEntityWorks()
+    {
         // Arrange
         $entity = new Entity();
         $entity->setPartitionKey('001');
@@ -509,13 +530,14 @@ class TableServiceIntegrationTest extends IntegrationTestBase {
     * @covers WindowsAzure\Table\TableRestProxy::insertEntity
     * @covers WindowsAzure\Table\TableRestProxy::queryEntities
     */
-    public function testDeleteEntityTroublesomeKeyWorks() {
+    public function testDeleteEntityTroublesomeKeyWorks()
+    {
         // The service does not allow the following common characters in keys:
         // * chr(35) = '#'
         // * chr(47) = '/'
         // * chr(63) = '?'
         // * chr(92) = '\'
-        // 
+        //
         // In addition, the following values are not allowed, as they make the URL bad:
         // * 0-31, 127-159
         // That still leaves several options for making troublesome keys
@@ -540,7 +562,7 @@ class TableServiceIntegrationTest extends IntegrationTestBase {
         $entity5 = new Entity();
         $entity5->setPartitionKey('001');
         $entity5->setRowKey('Qbert_Says=.!@%^&');
- 
+
         // Act
         $result1 = $this->restProxy->insertEntity(self::$TEST_TABLE_8, $entity1);
         $result2 = $this->restProxy->insertEntity(self::$TEST_TABLE_8, $entity2);
@@ -581,7 +603,8 @@ class TableServiceIntegrationTest extends IntegrationTestBase {
     * @covers WindowsAzure\Table\TableRestProxy::deleteEntity
     * @covers WindowsAzure\Table\TableRestProxy::insertEntity
     */
-    public function testDeleteEntityWithETagWorks() {
+    public function testDeleteEntityWithETagWorks()
+    {
         // Arrange
         $entity = new Entity();
         $entity->setPartitionKey('001');
@@ -608,7 +631,8 @@ class TableServiceIntegrationTest extends IntegrationTestBase {
     * @covers WindowsAzure\Table\TableRestProxy::getEntity
     * @covers WindowsAzure\Table\TableRestProxy::insertEntity
     */
-    public function testGetEntityWorks() {
+    public function testGetEntityWorks()
+    {
         // Arrange
         $binaryData = chr(1) . chr(2) . chr(3) . chr(4);
         $uuid = strtolower(trim(com_create_guid(), '{}'));
@@ -666,7 +690,8 @@ class TableServiceIntegrationTest extends IntegrationTestBase {
     * @covers WindowsAzure\Table\TableRestProxy::insertEntity
     * @covers WindowsAzure\Table\TableRestProxy::queryEntities
     */
-    public function testQueryEntitiesWorks() {
+    public function testQueryEntitiesWorks()
+    {
         // Arrange
         $entity = new Entity();
         $entity->setPartitionKey('001');
@@ -714,7 +739,8 @@ class TableServiceIntegrationTest extends IntegrationTestBase {
     * @covers WindowsAzure\Table\TableRestProxy::insertEntity
     * @covers WindowsAzure\Table\TableRestProxy::queryEntities
     */
-    public function testQueryEntitiesWithPaginationWorks() {
+    public function testQueryEntitiesWithPaginationWorks()
+    {
         // Arrange
         $table = self::$TEST_TABLE_4;
         $numberOfEntries = 20;
@@ -757,7 +783,8 @@ class TableServiceIntegrationTest extends IntegrationTestBase {
     * @covers WindowsAzure\Table\TableRestProxy::insertEntity
     * @covers WindowsAzure\Table\TableRestProxy::queryEntities
     */
-    public function testQueryEntitiesWithFilterWorks() {
+    public function testQueryEntitiesWithFilterWorks()
+    {
         // Arrange
         $table = self::$TEST_TABLE_5;
         $numberOfEntries = 5;
@@ -828,7 +855,7 @@ class TableServiceIntegrationTest extends IntegrationTestBase {
             $qeo = new QueryEntitiesOptions();
             $qeo->setQuery($q);
             $result = $this->restProxy->queryEntities($table, $qeo);
-            
+
             // Assert
             $this->assertNotNull($result, '$result');
             $this->assertEquals(1, count($result->getEntities()), 'count($result->getEntities())');
@@ -896,13 +923,14 @@ class TableServiceIntegrationTest extends IntegrationTestBase {
             $this->assertEquals(1, count($result->getEntities()), 'count($result->getEntities())');
             $resEnts = $result->getEntities();
             $this->assertEquals('queryEntitiesWithFilterWorks-3', $resEnts[0]->getRowKey(), '$resEnts[0]->getRowKey()');
-        }              
+        }
     }
 
     /**
     * @covers WindowsAzure\Table\TableRestProxy::batch
     */
-    public function testBatchInsertWorks() {
+    public function testBatchInsertWorks()
+    {
         // Arrange
         $table = self::$TEST_TABLE_6;
         $partitionKey = '001';
@@ -932,7 +960,8 @@ class TableServiceIntegrationTest extends IntegrationTestBase {
     * @covers WindowsAzure\Table\TableRestProxy::batch
     * @covers WindowsAzure\Table\TableRestProxy::insertEntity
     */
-    public function testBatchUpdateWorks() {
+    public function testBatchUpdateWorks()
+    {
         // Arrange
         $table = self::$TEST_TABLE_6;
         $partitionKey = '001';
@@ -963,7 +992,8 @@ class TableServiceIntegrationTest extends IntegrationTestBase {
     * @covers WindowsAzure\Table\TableRestProxy::batch
     * @covers WindowsAzure\Table\TableRestProxy::insertEntity
     */
-    public function testBatchMergeWorks() {
+    public function testBatchMergeWorks()
+    {
         // Arrange
         $table = self::$TEST_TABLE_6;
         $partitionKey = '001';
@@ -992,7 +1022,8 @@ class TableServiceIntegrationTest extends IntegrationTestBase {
     /**
     * @covers WindowsAzure\Table\TableRestProxy::batch
     */
-    public function testBatchInsertOrReplaceWorks() {
+    public function testBatchInsertOrReplaceWorks()
+    {
         $this->skipIfEmulated();
 
         $table = self::$TEST_TABLE_6;
@@ -1022,7 +1053,8 @@ class TableServiceIntegrationTest extends IntegrationTestBase {
     /**
     * @covers WindowsAzure\Table\TableRestProxy::batch
     */
-    public function testBatchInsertOrMergeWorks() {
+    public function testBatchInsertOrMergeWorks()
+    {
         $this->skipIfEmulated();
 
         $table = self::$TEST_TABLE_6;
@@ -1053,7 +1085,8 @@ class TableServiceIntegrationTest extends IntegrationTestBase {
     * @covers WindowsAzure\Table\TableRestProxy::batch
     * @covers WindowsAzure\Table\TableRestProxy::insertEntity
     */
-    public function testBatchDeleteWorks() {
+    public function testBatchDeleteWorks()
+    {
         // Arrange
         $table = self::$TEST_TABLE_6;
         $partitionKey = '001';
@@ -1082,7 +1115,8 @@ class TableServiceIntegrationTest extends IntegrationTestBase {
     /**
     * @covers WindowsAzure\Table\TableRestProxy::batch
     */
-    public function testBatchLotsOfInsertsWorks() {
+    public function testBatchLotsOfInsertsWorks()
+    {
         // Arrange
         $table = self::$TEST_TABLE_7;
         $partitionKey = '001';
@@ -1138,7 +1172,8 @@ class TableServiceIntegrationTest extends IntegrationTestBase {
     * @covers WindowsAzure\Table\TableRestProxy::batch
     * @covers WindowsAzure\Table\TableRestProxy::insertEntity
     */
-    public function testBatchAllOperationsTogetherWorks() {
+    public function testBatchAllOperationsTogetherWorks()
+    {
         // Arrange
         $table = self::$TEST_TABLE_8;
         $partitionKey = '001';
@@ -1246,7 +1281,7 @@ class TableServiceIntegrationTest extends IntegrationTestBase {
             $this->assertTrue($ents[5] instanceof InsertEntityResult, '$result->getEntries()->get(5)->getClass()');
         }
         else {
-            $this->assertTrue($ents[5] instanceof UpdateEntityResult, '$result->getEntries()->get(5)->getClass()');            
+            $this->assertTrue($ents[5] instanceof UpdateEntityResult, '$result->getEntries()->get(5)->getClass()');
         }
     }
 
@@ -1255,7 +1290,8 @@ class TableServiceIntegrationTest extends IntegrationTestBase {
     * @covers WindowsAzure\Table\TableRestProxy::insertEntity
     * @covers WindowsAzure\Table\TableRestProxy::updateEntity
     */
-    public function testBatchNegativeWorks() {
+    public function testBatchNegativeWorks()
+    {
         // Arrange
         $table = self::$TEST_TABLE_8;
         $partitionKey = '001';
@@ -1282,7 +1318,7 @@ class TableServiceIntegrationTest extends IntegrationTestBase {
         // Act
         $batchOperations = new BatchOperations();
 
-        // The $entity1 still has the original etag from the first submit, 
+        // The $entity1 still has the original etag from the first submit,
         // so this update should fail, because another update was already made.
         $entity1->addProperty('test', EdmType::INT32, 3);
         $batchOperations->addDeleteEntity($table, $entity1->getPartitionKey(), $entity1->getRowKey(), $entity1->getEtag());

@@ -36,18 +36,21 @@ use WindowsAzure\Queue\Models\PeekMessagesOptions;
 use WindowsAzure\Queue\Models\QueueServiceOptions;
 use WindowsAzure\Queue\Models\CreateMessageOptions;
 
-class QueueServiceFunctionalOptionsTest extends \PHPUnit_Framework_TestCase  {
+class QueueServiceFunctionalOptionsTest extends \PHPUnit_Framework_TestCase
+{
     const IntegerMAX_VALUE = 2147483647;
     const IntegerMIN_VALUE = -2147483648;
-    
-    public function testCheckQueueServiceOptions() {
+
+    public function testCheckQueueServiceOptions()
+    {
         $options = new QueueServiceOptions();
         $this->assertNull($options->getTimeout(), 'Default QueueServiceOptions->getTimeout should be null');
         $options->setTimeout(self::IntegerMAX_VALUE);
         $this->assertEquals(self::IntegerMAX_VALUE, $options->getTimeout(), 'Set QueueServiceOptions->getTimeout');
     }
 
-    public function testCheckRetentionPolicy() {
+    public function testCheckRetentionPolicy()
+    {
         // Check that the default values of options are reasonable
 
         $rp = new RetentionPolicy();
@@ -59,7 +62,8 @@ class QueueServiceFunctionalOptionsTest extends \PHPUnit_Framework_TestCase  {
         $this->assertTrue($rp->getEnabled(), 'Set RetentionPolicy->getEnabled should be true');
     }
 
-    public function testCheckLogging() {
+    public function testCheckLogging()
+    {
         // Check that the default values of options are reasonable
         $rp = new RetentionPolicy();
 
@@ -74,7 +78,7 @@ class QueueServiceFunctionalOptionsTest extends \PHPUnit_Framework_TestCase  {
         $l->setDelete(true);
         $l->setRead(true);
         $l->setWrite(true);
-        
+
         $this->assertEquals($rp, $l->getRetentionPolicy(), 'Set Logging->getRetentionPolicy');
         $this->assertEquals('2.0', $l->getVersion(), 'Set Logging->getVersion');
         $this->assertTrue($l->getDelete(), 'Set Logging->getDelete should be true');
@@ -82,7 +86,8 @@ class QueueServiceFunctionalOptionsTest extends \PHPUnit_Framework_TestCase  {
         $this->assertTrue($l->getWrite(), 'Set Logging->getWrite should be true');
     }
 
-    public function testCheckMetrics() {
+    public function testCheckMetrics()
+    {
         // Check that the default values of options are reasonable
         $rp = new RetentionPolicy();
 
@@ -101,7 +106,8 @@ class QueueServiceFunctionalOptionsTest extends \PHPUnit_Framework_TestCase  {
         $this->assertTrue($m->getIncludeAPIs(), 'Set Metrics->getIncludeAPIs should be true');
     }
 
-    public function testCheckServiceProperties() {
+    public function testCheckServiceProperties()
+    {
         // Check that the default values of options are reasonable
         $l = new Logging();
         $m = new Metrics();
@@ -116,13 +122,14 @@ class QueueServiceFunctionalOptionsTest extends \PHPUnit_Framework_TestCase  {
         $this->assertEquals($sp->getMetrics(), $m, 'Set ServiceProperties->getMetrics');
     }
 
-    public function testCheckListQueuesOptions() {
+    public function testCheckListQueuesOptions()
+    {
         $options = new ListQueuesOptions();
         $this->assertNull($options->getIncludeMetadata(), 'Default ListQueuesOptions->getIncludeMetadata');
         $this->assertNull($options->getMarker(), 'Default ListQueuesOptions->getMarker');
         $this->assertEquals(0, $options->getMaxResults(), 'Default ListQueuesOptions->getMaxResults');
         $this->assertNull($options->getPrefix(), 'Default ListQueuesOptions->getPrefix');
-        $this->assertNull($options->getTimeout(), 'Default ListQueuesOptions->getTimeout');        
+        $this->assertNull($options->getTimeout(), 'Default ListQueuesOptions->getTimeout');
         $options->setIncludeMetadata(true);
         $options->setMarker('foo');
         $options->setMaxResults(-10);
@@ -135,7 +142,8 @@ class QueueServiceFunctionalOptionsTest extends \PHPUnit_Framework_TestCase  {
         $this->assertEquals(self::IntegerMAX_VALUE, $options->getTimeout(), 'Set ListQueuesOptions->getTimeout');
     }
 
-    public function testCheckCreateQueueOptions() {
+    public function testCheckCreateQueueOptions()
+    {
         $options = new CreateQueueOptions();
         $this->assertNull($options->getMetadata(), 'Default CreateQueueOptions->getMetadata');
         $this->assertEquals(0, count($options->getMetadata()), 'Default CreateQueueOptions->getMetadata->size');
@@ -153,7 +161,8 @@ class QueueServiceFunctionalOptionsTest extends \PHPUnit_Framework_TestCase  {
         $this->assertEquals(3, count($options->getMetadata()), 'Set CreateQueueOptions->getMetadata->size');
     }
 
-    public function testCheckCreateMessageOptions() {
+    public function testCheckCreateMessageOptions()
+    {
         $options = new CreateMessageOptions();
         $this->assertNull($options->getTimeout(), 'Default CreateMessageOptions->getTimeout');
         $this->assertNull($options->getTimeToLiveInSeconds(), 'Default CreateMessageOptions->getTimeToLiveInSeconds');
@@ -166,7 +175,8 @@ class QueueServiceFunctionalOptionsTest extends \PHPUnit_Framework_TestCase  {
         $this->assertEquals(self::IntegerMIN_VALUE, $options->getVisibilityTimeoutInSeconds(), 'Set CreateMessageOptions->getVisibilityTimeoutInSeconds');
     }
 
-    public function testCheckListMessagesOptions() {
+    public function testCheckListMessagesOptions()
+    {
         $options = new ListMessagesOptions();
         $this->assertNull($options->getTimeout(), 'Default ListMessagesOptions->getTimeout');
         $this->assertNull($options->getNumberOfMessages(), 'Default ListMessagesOptions->getNumberOfMessages');
@@ -179,7 +189,8 @@ class QueueServiceFunctionalOptionsTest extends \PHPUnit_Framework_TestCase  {
         $this->assertEquals(self::IntegerMIN_VALUE, $options->getVisibilityTimeoutInSeconds(), 'Set ListMessagesOptions->getVisibilityTimeoutInSeconds');
     }
 
-    public function testCheckPeekMessagesOptions() {
+    public function testCheckPeekMessagesOptions()
+    {
         $options = new PeekMessagesOptions();
         $this->assertNull($options->getTimeout(), 'Default PeekMessagesOptions->getTimeout');
         $this->assertNull($options->getNumberOfMessages(), 'Default PeekMessagesOptions->getNumberOfMessages');

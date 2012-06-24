@@ -33,7 +33,8 @@ use WindowsAzure\Queue\Models\CreateQueueOptions;
 use WindowsAzure\Queue\Models\ListMessagesOptions;
 use WindowsAzure\Queue\Models\PeekMessagesOptions;
 
-class QueueServiceIntegrationTest extends IntegrationTestBase {
+class QueueServiceIntegrationTest extends IntegrationTestBase
+{
     private static $testQueuesPrefix = 'sdktest-';
     private static $createableQueuesPrefix = 'csdktest-';
     private static $TEST_QUEUE_FOR_MESSAGES;
@@ -50,7 +51,8 @@ class QueueServiceIntegrationTest extends IntegrationTestBase {
     private static $creatableQueues;
     private static $testQueues;
 
-    public function setUp() {
+    public function setUp()
+    {
         parent::setUp();
         // Setup container names array (list of container names used by
         // integration tests)
@@ -82,7 +84,8 @@ class QueueServiceIntegrationTest extends IntegrationTestBase {
         self::createQueues(self::$testQueuesPrefix, self::$testQueues);
     }
 
-    public function tearDown() {
+    public function tearDown()
+    {
         parent::tearDown();
         self::deleteQueues(self::$testQueuesPrefix, self::$testQueues);
         self::deleteQueues(self::$createableQueuesPrefix, self::$creatableQueues);
@@ -91,7 +94,8 @@ class QueueServiceIntegrationTest extends IntegrationTestBase {
     /**
     * @covers WindowsAzure\Queue\QueueRestProxy::createQueue
     */
-    private function createQueues($prefix, $list) {
+    private function createQueues($prefix, $list)
+    {
         $containers = self::listQueues($prefix);
         foreach($list as $item)  {
             if (!in_array($item, $containers)) {
@@ -103,7 +107,8 @@ class QueueServiceIntegrationTest extends IntegrationTestBase {
     /**
     * @covers WindowsAzure\Queue\QueueRestProxy::deleteQueue
     */
-    private function deleteQueues($prefix, $list) {
+    private function deleteQueues($prefix, $list)
+    {
         $containers = self::listQueues($prefix);
         foreach($list as $item)  {
             if (in_array($item, $containers)) {
@@ -115,7 +120,8 @@ class QueueServiceIntegrationTest extends IntegrationTestBase {
     /**
     * @covers WindowsAzure\Queue\QueueRestProxy::listQueues
     */
-    private function listQueues($prefix) {
+    private function listQueues($prefix)
+    {
         $result = array();
         $opts = new ListQueuesOptions();
         $opts->setPrefix($prefix);
@@ -129,7 +135,8 @@ class QueueServiceIntegrationTest extends IntegrationTestBase {
     /**
     * @covers WindowsAzure\Queue\QueueRestProxy::getServiceProperties
     */
-    public function testGetServicePropertiesWorks() {
+    public function testGetServicePropertiesWorks()
+    {
         // Arrange
 
         // Act
@@ -161,7 +168,8 @@ class QueueServiceIntegrationTest extends IntegrationTestBase {
     * @covers WindowsAzure\Queue\QueueRestProxy::getServiceProperties
     * @covers WindowsAzure\Queue\QueueRestProxy::setServiceProperties
     */
-    public function testSetServicePropertiesWorks() {
+    public function testSetServicePropertiesWorks()
+    {
         // Arrange
 
         // Act
@@ -200,7 +208,8 @@ class QueueServiceIntegrationTest extends IntegrationTestBase {
     * @covers WindowsAzure\Queue\QueueRestProxy::deleteQueue
     * @covers WindowsAzure\Queue\QueueRestProxy::getQueueMetadata
     */
-    public function testCreateQueueWorks() {
+    public function testCreateQueueWorks()
+    {
         // Arrange
 
         // Act
@@ -220,7 +229,8 @@ class QueueServiceIntegrationTest extends IntegrationTestBase {
     * @covers WindowsAzure\Queue\QueueRestProxy::deleteQueue
     * @covers WindowsAzure\Queue\QueueRestProxy::getQueueMetadata
     */
-    public function testCreateQueueWithOptionsWorks() {
+    public function testCreateQueueWithOptionsWorks()
+    {
         // Arrange
 
         // Act
@@ -244,7 +254,8 @@ class QueueServiceIntegrationTest extends IntegrationTestBase {
     /**
     * @covers WindowsAzure\Queue\QueueRestProxy::listQueues
     */
-    public function testListQueuesWorks() {
+    public function testListQueuesWorks()
+    {
         // Arrange
 
         // Act
@@ -265,7 +276,8 @@ class QueueServiceIntegrationTest extends IntegrationTestBase {
     /**
     * @covers WindowsAzure\Queue\QueueRestProxy::listQueues
     */
-    public function testListQueuesWithOptionsWorks() {
+    public function testListQueuesWithOptionsWorks()
+    {
         // Arrange
 
         // Act
@@ -293,7 +305,9 @@ class QueueServiceIntegrationTest extends IntegrationTestBase {
         $queue0 = $result->getQueues();
         $queue0 = $queue0[0];
         $this->assertNotNull($queue0, '$queue0');
-        $this->assertNotNull($queue0->getMetadata(), '$queue0->getMetadata' .
+        $this->assertNotNull(
+                $queue0->getMetadata(),
+                '$queue0->getMetadata' .
                 ' (https://github.com/WindowsAzure/azure-sdk-for-php/issues/252)');
         $this->assertNotNull($queue0->getName(), '$queue0->getName');
         $this->assertNotNull($queue0->getUrl(), '$queue0->getUrl');
@@ -320,7 +334,8 @@ class QueueServiceIntegrationTest extends IntegrationTestBase {
     * @covers WindowsAzure\Queue\QueueRestProxy::getQueueMetadata
     * @covers WindowsAzure\Queue\QueueRestProxy::setQueueMetadata
     */
-    public function testSetQueueMetadataWorks() {
+    public function testSetQueueMetadataWorks()
+    {
         // Arrange
 
         // Act
@@ -349,7 +364,8 @@ class QueueServiceIntegrationTest extends IntegrationTestBase {
     /**
     * @covers WindowsAzure\Queue\QueueRestProxy::createMessage
     */
-    public function testCreateMessageWorks() {
+    public function testCreateMessageWorks()
+    {
         // Arrange
 
         // Act
@@ -366,7 +382,8 @@ class QueueServiceIntegrationTest extends IntegrationTestBase {
     * @covers WindowsAzure\Queue\QueueRestProxy::createMessage
     * @covers WindowsAzure\Queue\QueueRestProxy::listMessages
     */
-    public function testListMessagesWorks() {
+    public function testListMessagesWorks()
+    {
         // Arrange
         $year2010 = new \DateTime;
         $year2010->setDate(2010, 1, 1);
@@ -404,7 +421,8 @@ class QueueServiceIntegrationTest extends IntegrationTestBase {
     * @covers WindowsAzure\Queue\QueueRestProxy::createMessage
     * @covers WindowsAzure\Queue\QueueRestProxy::listMessages
     */
-    public function testListMessagesWithOptionsWorks() {
+    public function testListMessagesWithOptionsWorks()
+    {
         // Arrange
         $year2010 = new \DateTime;
         $year2010->setDate(2010, 1, 1);
@@ -446,7 +464,8 @@ class QueueServiceIntegrationTest extends IntegrationTestBase {
     * @covers WindowsAzure\Queue\QueueRestProxy::createMessage
     * @covers WindowsAzure\Queue\QueueRestProxy::peekMessages
     */
-    public function testPeekMessagesWorks() {
+    public function testPeekMessagesWorks()
+    {
         // Arrange
 
         $year2010 = new \DateTime;
@@ -481,7 +500,8 @@ class QueueServiceIntegrationTest extends IntegrationTestBase {
     * @covers WindowsAzure\Queue\QueueRestProxy::createMessage
     * @covers WindowsAzure\Queue\QueueRestProxy::peekMessages
     */
-    public function testPeekMessagesWithOptionsWorks() {
+    public function testPeekMessagesWithOptionsWorks()
+    {
         // Arrange
         $year2010 = new \DateTime;
         $year2010->setDate(2010, 1, 1);
@@ -519,7 +539,8 @@ class QueueServiceIntegrationTest extends IntegrationTestBase {
     * @covers WindowsAzure\Queue\QueueRestProxy::createMessage
     * @covers WindowsAzure\Queue\QueueRestProxy::peekMessages
     */
-    public function testClearMessagesWorks() {
+    public function testClearMessagesWorks()
+    {
         // Arrange
 
         // Act
@@ -541,7 +562,8 @@ class QueueServiceIntegrationTest extends IntegrationTestBase {
     * @covers WindowsAzure\Queue\QueueRestProxy::deleteMessage
     * @covers WindowsAzure\Queue\QueueRestProxy::listMessages
     */
-    public function testDeleteMessageWorks() {
+    public function testDeleteMessageWorks()
+    {
         // Arrange
 
         // Act
@@ -569,7 +591,8 @@ class QueueServiceIntegrationTest extends IntegrationTestBase {
     * @covers WindowsAzure\Queue\QueueRestProxy::listMessages
     * @covers WindowsAzure\Queue\QueueRestProxy::updateMessage
     */
-    public function testUpdateMessageWorks() {
+    public function testUpdateMessageWorks()
+    {
         // Arrange
         $year2010 = new \DateTime;
         $year2010->setDate(2010, 1, 1);
