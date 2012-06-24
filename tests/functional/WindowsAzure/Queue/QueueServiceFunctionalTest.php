@@ -127,13 +127,10 @@ class QueueServiceFunctionalTest extends FunctionalTestBase
                     // Expect failure in emulator, as v1.6 doesn't support this method
                     $this->assertEquals(400, $e->getCode(), 'getCode');
                 }
+            } else if (!is_null($effOptions->getTimeout()) $$ $effOptions->getTimeout() < 1) {
+                $this->assertEquals(500, $e->getCode(), 'getCode');
             } else {
-                if (is_null($effOptions->getTimeout()) || $effOptions->getTimeout() >= 1) {
-                    $this->assertNull($e, 'Expect positive timeouts in $options to be fine');
-                }
-                else {
-                    $this->assertEquals(500, $e->getCode(), 'getCode');
-                }
+                throw $e;
             }
         }
     }
@@ -240,7 +237,7 @@ class QueueServiceFunctionalTest extends FunctionalTestBase
                 if (!is_null($options->getTimeout()) && $options->getTimeout() < 1) {
                     $this->assertEquals(500, $e->getCode(), 'getCode');
                 } else {
-                    $this->assertNull($e, 'Expect positive timeouts in $options to be fine');
+                    throw $e;
                 }
             }
         }
@@ -295,11 +292,10 @@ class QueueServiceFunctionalTest extends FunctionalTestBase
             }
             catch (ServiceException $e) {
                 $finished = true;
-                if (is_null($options->getTimeout()) || $options->getTimeout() >= 1) {
-                    $this->assertNull($e, 'Expect positive timeouts in $options to be fine');
-                }
-                else {
+                if (!is_null($options->getTimeout()) && $options->getTimeout() < 1) {
                     $this->assertEquals(500, $e->getCode(), 'getCode');
+                } else {
+                    throw $e;
                 }
             }
         }
@@ -430,11 +426,10 @@ class QueueServiceFunctionalTest extends FunctionalTestBase
             if (is_null($options)) {
                 $options = new CreateQueueOptions();
             }
-            if (is_null($options->getTimeout()) || $options->getTimeout() >= 1) {
-                $this->assertNull($e, 'Expect positive timeouts in $options to be fine');
-            }
-            else {
+            if (!is_null($options->getTimeout()) && $options->getTimeout() <= 0) {
                 $this->assertEquals(500, $e->getCode(), 'getCode');
+            } else {
+                throw $e;
             }
         }
         if ($created) {
@@ -538,11 +533,10 @@ class QueueServiceFunctionalTest extends FunctionalTestBase
             // Nothing else interesting to check for the options.
         }
         catch (ServiceException $e) {
-            if (is_null($options->getTimeout()) || $options->getTimeout() >= 1) {
-                $this->assertNull($e, 'Expect positive timeouts in $options to be fine');
-            }
-            else {
+            if (!is_null($options->getTimeout()) && $options->getTimeout() < 1) {
                 $this->assertEquals(500, $e->getCode(), 'getCode');
+            } else {
+                throw $e;
             }
         }
         if (!$deleted) {
@@ -629,11 +623,10 @@ class QueueServiceFunctionalTest extends FunctionalTestBase
             $this->verifyGetSetQueueMetadataWorker($res, $metadata);
         }
         catch (ServiceException $e) {
-            if (is_null($options->getTimeout()) || $options->getTimeout() >= 1) {
-                $this->assertNull($e, 'Expect positive timeouts in $options to be fine');
-            }
-            else {
+            if (!is_null($options->getTimeout()) && $options->getTimeout() < 1) {
                 $this->assertEquals(500, $e->getCode(), 'getCode');
+            } else {
+                throw $e;
             }
         }
         // Clean up->
@@ -945,7 +938,7 @@ class QueueServiceFunctionalTest extends FunctionalTestBase
                 $this->assertEquals(400, $e->getCode(), 'getCode');
             }
             else {
-                $this->assertNull($e, 'Expect positive timeouts in $options to be fine');
+                throw $e;
             }
         }
         $this->restProxy->clearMessages($queue);
@@ -1071,7 +1064,7 @@ class QueueServiceFunctionalTest extends FunctionalTestBase
                 $this->assertEquals(400, $e->getCode(), 'getCode');
             }
             else {
-                $this->assertNull($e, 'Expect positive timeouts in $options to be fine');
+                throw $e;
             }
         }
         $this->restProxy->clearMessages($queue);
@@ -1154,7 +1147,7 @@ class QueueServiceFunctionalTest extends FunctionalTestBase
                 $this->assertEquals(500, $e->getCode(), 'getCode');
             }
             else  {
-                $this->assertNull($e, 'Expect positive timeouts in $options to be fine');
+                throw $e;
             }
         }
         $this->restProxy->clearMessages($queue);
@@ -1281,7 +1274,7 @@ class QueueServiceFunctionalTest extends FunctionalTestBase
                 $this->assertEquals(400, $e->getCode(), 'getCode');
             }
             else {
-                $this->assertNull($e, 'Expect positive timeouts in $options to be fine');
+                throw $e;
             }
         }
         $this->restProxy->clearMessages($queue);
@@ -1383,7 +1376,7 @@ class QueueServiceFunctionalTest extends FunctionalTestBase
                 $this->assertEquals(400, $e->getCode(), 'getCode');
             }
             else {
-                $this->assertNull($e, 'Expect positive timeouts in $options to be fine');
+                throw $e;
             }
         }
         $this->restProxy->clearMessages($queue);
@@ -1471,7 +1464,7 @@ class QueueServiceFunctionalTest extends FunctionalTestBase
                 $this->assertEquals(500, $e->getCode(), 'getCode');
             }
             else {
-                $this->assertNull($e, 'Expect positive timeouts in $options to be fine');
+                throw $e;
             }
         }
         $this->restProxy->clearMessages($queue);
