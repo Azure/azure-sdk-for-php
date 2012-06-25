@@ -1804,7 +1804,8 @@ class TableServiceFunctionalTest extends FunctionalTestBase
                             'When opType=' . $opType . ' expect opResult instanceof InsertEntityResult');
                     break;
                 case OpType::deleteEntity:
-                    $this->assertTrue(is_string($opResult, 'is_string($opResult'),
+                    $this->assertTrue(
+                            is_string($opResult),
                             'When opType=' . $opType . ' expect opResult is a string');
                     break;
                 case OpType::updateEntity:

@@ -127,7 +127,7 @@ class QueueServiceFunctionalTest extends FunctionalTestBase
                     // Expect failure in emulator, as v1.6 doesn't support this method
                     $this->assertEquals(400, $e->getCode(), 'getCode');
                 }
-            } else if (!is_null($effOptions->getTimeout()) $$ $effOptions->getTimeout() < 1) {
+            } else if (!is_null($effOptions->getTimeout()) && $effOptions->getTimeout() < 1) {
                 $this->assertEquals(500, $e->getCode(), 'getCode');
             } else {
                 throw $e;
@@ -396,6 +396,7 @@ class QueueServiceFunctionalTest extends FunctionalTestBase
                 $this->restProxy->createQueue($queue);
             }
             else {
+                // TODO: https://github.com/WindowsAzure/azure-sdk-for-php/issues/105
                 $this->restProxy->createQueue($queue, $options);
             }
             $created = true;
