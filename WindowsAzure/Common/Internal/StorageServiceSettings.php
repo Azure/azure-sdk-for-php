@@ -139,6 +139,11 @@ class StorageServiceSettings
     private static $_tableEndpointSetting;
     
     /**
+     * @var boolean
+     */
+    private static $_isInitialized = false;
+    
+    /**
      * Initializes static members of the class.
      * 
      * @return none
@@ -492,6 +497,12 @@ class StorageServiceSettings
      */
     public static function createFromConnectionString($connectionString)
     {
+        // Initialize the static values if they are not initialized yet.
+        if (!self::$_isInitialized) {
+            self::init();
+            self::$_isInitialized = true;
+        }
+        
         $tokenizedSettings      = ConnectionStringParser::parseConnectionString(
             Resources::STORAGE_SERVIE_CONNECTION_STRING,
             $connectionString
@@ -612,8 +623,5 @@ class StorageServiceSettings
         return $this->_tableEndpointUri;
     }
 }
-
-// Initialization of static members of the class
-StorageServiceSettings::init();
 
 ?>
