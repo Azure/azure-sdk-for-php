@@ -189,7 +189,7 @@ class ServicesBuilder implements IServicesBuilder
     /**
      * Builds a queue object.
      *
-     * @param WindowsAzure\Common\Configuration $config configuration.
+     * @param string $connectionString The configuration connection string.
      * 
      * @return WindowsAzure\Queue\Internal\IQueue
      */
@@ -237,7 +237,7 @@ class ServicesBuilder implements IServicesBuilder
     /**
      * Builds a blob object.
      *
-     * @param WindowsAzure\Common\Configuration $config configuration.
+     * @param string $connectionString The configuration connection string.
      * 
      * @return WindowsAzure\Blob\Internal\IBlob
      */
@@ -284,7 +284,7 @@ class ServicesBuilder implements IServicesBuilder
     /**
      * Builds a table object.
      *
-     * @param WindowsAzure\Common\Configuration $config configuration.
+     * @param string $connectionString The configuration connection string.
      * 
      * @return WindowsAzure\Table\Internal\ITable
      */
