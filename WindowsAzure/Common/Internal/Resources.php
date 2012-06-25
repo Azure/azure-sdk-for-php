@@ -198,7 +198,6 @@ class Resources
     const SERVICE_MANAGEMENT_URL = 'https://management.core.windows.net';
     const HTTP_SCHEME            = 'http';
     const HTTPS_SCHEME           = 'https';
-    const STORAGE_SERVIE_CONNECTION_STRING = 'storage service connection string';
     const SETTING_NAME = 'SettingName';
     const SETTING_CONSTRAINT = 'SettingConstraint';
     const DEV_STORE_URI = 'http://127.0.0.1';
