@@ -87,8 +87,10 @@ class Resources
     const INVALID_BUILDER_MSG = 'Builder object must implement IServicesBuilder';
     const INVALID_ACH_MSG = 'The provided access condition header is invalid';
     const INVALID_RECEIVE_MODE_MSG = 'The receive message option is in neither RECEIVE_AND_DELETE nor PEEK_LOCK mode.';
-    const MISSING_CONFIG_SETTING_KEY_MSG = "Missing configuration setting %s which is required to create %sRestProxy.";
-    const MISSING_CONFIG_SETTING_VALUE_MSG = "The value of configuration setting %s can't be null or empty.";
+    const INVALID_CONFIG_URI = "The provided URI '%s' is invalid. It has to pass the check 'filter_var(<user_uri>, FILTER_VALIDATE_URL)'.";
+    const INVALID_CONFIG_VALUE = "The provided config value '%s' does not belong to the valid values subset %s";
+    const INVALID_ACCOUNT_KEY_FORMAT = "The provided account key '%s' is not a valid base64 string. It has to pass the check 'base64_decode(<user_account_key>, true)'.";
+    const MISSING_CONNECTION_STRING_SETTINGS = "The provided connection string '%s' does not have complete configuration settings or has unrecognized settings.";
     const INSTANCE_TYPE_VALIDATION_MSG = 'The type of %s is %s but is expected to be %s.';
     const MISSING_CONNECTION_STRING_CHAR = "Missing %s character";
     const ERROR_PARSING_STRING = "'%s' at position %d.";

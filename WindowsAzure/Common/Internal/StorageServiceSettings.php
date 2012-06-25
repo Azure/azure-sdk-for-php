@@ -152,7 +152,15 @@ class StorageServiceSettings
     {
         $isValidUri = function ($uri)
         {
-            return filter_var($uri, FILTER_VALIDATE_URL);
+            $isValid = filter_var($uri, FILTER_VALIDATE_URL);
+            
+            if ($isValid) {
+                return true;
+            } else {
+                throw new \RuntimeException(
+                    sprintf(Resources::INVALID_CONFIG_URI, $uri)
+                );
+            }
         };
         
         self::$_useDevelopmentStorageSetting = self::_setting(
@@ -177,8 +185,15 @@ class StorageServiceSettings
         self::$_accountKeySetting = self::_settingWithFunc(
             Resources::ACCOUNT_KEY_NAME,
             // base64_decode will return false if the $key is not in base64 format.
-            function ($key) { 
-                return base64_decode($key, true);
+            function ($key) {
+                $isValidBase64String = base64_decode($key, true);
+                if ($isValidBase64String) {
+                    return true;
+                } else {
+                    throw new \RuntimeException(
+                        sprintf(Resources::INVALID_ACCOUNT_KEY_FORMAT, $key)
+                    );
+                }
             }
         );
         
@@ -330,24 +345,39 @@ class StorageServiceSettings
      */
     private static function _setting($name)
     {
-        $args      = func_get_args();
-        $count     = func_num_args();
-        $predicate = function ($settingValue) use ($count, $args)
+        $validValues = func_get_args();
+        
+        // Remove $name argument.
+        unset($validValues[0]);
+        
+        $validValuesCount = func_num_args();
+        
+        $predicate = function ($settingValue) use ($validValuesCount, $validValues)
         {
-            if ($count == 1) {
-                // No restrictions, succeed
+            if (empty($validValues)) {
+                // No restrictions, succeed,
                 return true;
             }
             
-            // Check to find if the $settingValue is valid or not
-            for ($index = 1; $index < $count; $index++) {
-                if ($settingValue == $args[$index]) {
-                    // $settingValue is found in valid values set, succeed
+            // Check to find if the $settingValue is valid or not. The index must
+            // start from 1 as unset deletes the value but does not update the array
+            // indecies.
+            for ($index = 1; $index < $validValuesCount; $index++) {
+                if ($settingValue == $validValues[$index]) {
+                    // $settingValue is found in valid values set, succeed.
                     return true;
                 }
             }
             
-            // $settingValue is missing in valid values set, fail
+            throw new \RuntimeException(
+                sprintf(
+                    Resources::INVALID_CONFIG_VALUE,
+                    $settingValue,
+                    implode("\n", $validValues)
+                )
+            );
+            
+            // $settingValue is missing in valid values set, fail.
             return false;
         };
         
@@ -570,7 +600,9 @@ class StorageServiceSettings
             return self::_createStorageServiceSettings($tokenizedSettings);
         }
         
-        return null;
+        throw new \RuntimeException(
+            sprintf(Resources::MISSING_CONNECTION_STRING_SETTINGS, $connectionString)
+        );
     }
     
     /**
