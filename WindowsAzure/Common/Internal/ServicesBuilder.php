@@ -50,6 +50,7 @@ use WindowsAzure\ServiceManagement\ServiceManagementSettings;
 use WindowsAzure\ServiceManagement\ServiceManagementRestProxy;
 use WindowsAzure\Common\Internal\Authentication\SharedKeyAuthScheme;
 use WindowsAzure\Common\Internal\Authentication\TableSharedKeyLiteAuthScheme;
+use WindowsAzure\Common\Internal\StorageServiceSettings;
 
 /**
  * Builds azure service objects.
@@ -190,16 +191,18 @@ class ServicesBuilder implements IServicesBuilder
      *
      * @param WindowsAzure\Common\Configuration $config configuration.
      * 
-     * @return WindowsAzure\Queue\Internal\IQueue.
+     * @return WindowsAzure\Queue\Internal\IQueue
      */
-    public function createQueueService($config)
+    public function createQueueService($connectionString)
     {
-        $this->_validateConfig($config, Resources::QUEUE_TYPE_NAME);
+        $settings = StorageServiceSettings::createFromConnectionString(
+            $connectionString
+        );
         
         $httpClient    = $this->httpClient();
         $serializer    = $this->serializer();
         $uri           = Utilities::tryAddUrlScheme(
-            $config->getProperty(QueueSettings::URI)
+            $settings->getQueueEndpointUri()
         );
         
         $queueWrapper = new QueueRestProxy(
@@ -221,8 +224,8 @@ class ServicesBuilder implements IServicesBuilder
         // Adding authentication filter
         $authFilter = new AuthenticationFilter(
             $this->queueAuthenticationScheme(
-                $config->getProperty(QueueSettings::ACCOUNT_NAME),
-                $config->getProperty(QueueSettings::ACCOUNT_KEY)
+                $settings->getName(),
+                $settings->getKey()
             )
         );
 
@@ -236,22 +239,24 @@ class ServicesBuilder implements IServicesBuilder
      *
      * @param WindowsAzure\Common\Configuration $config configuration.
      * 
-     * @return WindowsAzure\Blob\Internal\IBlob.
+     * @return WindowsAzure\Blob\Internal\IBlob
      */
-    public function createBlobService($config)
+    public function createBlobService($connectionString)
     {
-        $this->_validateConfig($config, Resources::BLOB_TYPE_NAME);
+        $settings = StorageServiceSettings::createFromConnectionString(
+            $connectionString
+        );
         
         $httpClient    = $this->httpClient();
         $serializer    = $this->serializer();
         $uri           = Utilities::tryAddUrlScheme(
-            $config->getProperty(BlobSettings::URI)
+            $settings->getBlobEndpointUri()
         );
 
         $blobWrapper = new BlobRestProxy(
             $httpClient, 
             $uri,
-            $config->getProperty(BlobSettings::ACCOUNT_NAME),
+            $settings->getName(),
             $serializer
         );
 
@@ -266,8 +271,8 @@ class ServicesBuilder implements IServicesBuilder
 
         $authFilter = new AuthenticationFilter(
             $this->blobAuthenticationScheme(
-                $config->getProperty(BlobSettings::ACCOUNT_NAME),
-                $config->getProperty(BlobSettings::ACCOUNT_KEY)
+                $settings->getName(),
+                $settings->getKey()
             )
         );
 
@@ -281,18 +286,20 @@ class ServicesBuilder implements IServicesBuilder
      *
      * @param WindowsAzure\Common\Configuration $config configuration.
      * 
-     * @return WindowsAzure\Table\Internal\ITable.
+     * @return WindowsAzure\Table\Internal\ITable
      */
-    public function createTableService($config)
+    public function createTableService($connectionString)
     {
-        $this->_validateConfig($config, Resources::TABLE_TYPE_NAME);
+        $settings = StorageServiceSettings::createFromConnectionString(
+            $connectionString
+        );
         
         $httpClient     = $this->httpClient();
         $atomSerializer = $this->atomSerializer();
         $mimeSerializer = $this->mimeSerializer();
         $serializer     = $this->serializer();
         $uri            = Utilities::tryAddUrlScheme(
-            $config->getProperty(TableSettings::URI)
+            $settings->getTableEndpointUri()
         );
 
         $tableWrapper = new TableRestProxy(
@@ -315,8 +322,8 @@ class ServicesBuilder implements IServicesBuilder
         // Adding authentication filter
         $authFilter = new AuthenticationFilter(
             $this->tableAuthenticationScheme(
-                $config->getProperty(TableSettings::ACCOUNT_NAME),
-                $config->getProperty(TableSettings::ACCOUNT_KEY)
+                $settings->getName(),
+                $settings->getKey()
             )
         );
 
@@ -452,78 +459,8 @@ class ServicesBuilder implements IServicesBuilder
      * @throws InvalidArgumentTypeException 
      */
     private function _validateConfig($config, $type)
-    {
-        if (Configuration::isEmulated()) {
-            self::_useStorageEmulatorConfig($this, $type);
-            
-            // Do not validate the emulated configuration values.
-            return;
-        }
-        
-        switch ($type) {
-        case Resources::QUEUE_TYPE_NAME:
-            $this->_validateConfigSetting(
-                QueueSettings::URI,
-                $config,
-                'QueueSettings::URI',
-                'Queue'
-            );
-            $this->_validateConfigSetting(
-                QueueSettings::ACCOUNT_NAME,
-                $config,
-                'QueueSettings::ACCOUNT_NAME',
-                'Queue'
-            );
-            $this->_validateConfigSetting(
-                QueueSettings::ACCOUNT_KEY,
-                $config,
-                'QueueSettings::ACCOUNT_KEY',
-                'Queue'
-            );
-            break;
-            
-        case Resources::BLOB_TYPE_NAME:
-            $this->_validateConfigSetting(
-                BlobSettings::URI,
-                $config,
-                'BlobSettings::URI',
-                'Blob'
-            );
-            $this->_validateConfigSetting(
-                BlobSettings::ACCOUNT_NAME,
-                $config,
-                'BlobSettings::ACCOUNT_NAME',
-                'Blob'
-            );
-            $this->_validateConfigSetting(
-                BlobSettings::ACCOUNT_KEY,
-                $config,
-                'BlobSettings::ACCOUNT_KEY',
-                'Blob'
-            );
-            break;
-            
-        case Resources::TABLE_TYPE_NAME:
-            $this->_validateConfigSetting(
-                TableSettings::URI,
-                $config,
-                'TableSettings::URI',
-                'Table'
-            );
-            $this->_validateConfigSetting(
-                TableSettings::ACCOUNT_NAME,
-                $config,
-                'TableSettings::ACCOUNT_NAME',
-                'Table'
-            );
-            $this->_validateConfigSetting(
-                TableSettings::ACCOUNT_KEY,
-                $config,
-                'TableSettings::ACCOUNT_KEY',
-                'Table'
-            );
-            break;
-            
+    {        
+        switch ($type) {       
         case Resources::SERVICE_MANAGEMENT_TYPE_NAME:
             $this->_validateConfigSetting(
                 ServiceManagementSettings::URI,
@@ -582,54 +519,9 @@ class ServicesBuilder implements IServicesBuilder
             break;
    
         default:
-            $expected  = Resources::QUEUE_TYPE_NAME;
-            $expected .= '|' . Resources::BLOB_TYPE_NAME;
-            $expected .= '|' . Resources::TABLE_TYPE_NAME;
-            $expected .= '|' . Resources::SERVICE_MANAGEMENT_TYPE_NAME;
+            $expected  = Resources::SERVICE_MANAGEMENT_TYPE_NAME;
             $expected .= '|' . Resources::SERVICE_BUS_TYPE_NAME;
             $expected .= '|' . Resources::WRAP_TYPE_NAME;
-            throw new InvalidArgumentTypeException($expected);
-        }
-    }
-    
-    /**
-     * Configures $config to run against the storage emulator.
-     *
-     * @param WindowsAzure\Common\Configuration $config The configuration.
-     * @param string                            $type   The type name.
-     * 
-     * @return none
-     *       | WindowsAzure\ServiceBus\Internal\IServiceBus 
-     *       | WindowsAzure\ServiceBus\Internal\IWrap 
-     */
-    private static function _useStorageEmulatorConfig($config, $type)
-    {
-        $name = Resources::DEV_STORE_NAME;
-        $key  = Resources::DEV_STORE_KEY;
-        $uri  = "http://%s/" . Resources::DEV_STORE_NAME . "/";
-        
-        if ($type == Resources::QUEUE_TYPE_NAME) {
-            $config->setProperty(
-                QueueSettings::URI, sprintf($uri, Resources::EMULATOR_QUEUE_URI)
-            );
-            $config->setProperty(QueueSettings::ACCOUNT_NAME, $name);
-            $config->setProperty(QueueSettings::ACCOUNT_KEY, $key);
-        } else if ($type == Resources::BLOB_TYPE_NAME) {
-            $config->setProperty(
-                BlobSettings::URI, sprintf($uri, Resources::EMULATOR_BLOB_URI)
-            );
-            $config->setProperty(BlobSettings::ACCOUNT_NAME, $name);
-            $config->setProperty(BlobSettings::ACCOUNT_KEY, $key);
-        } else if ($type == Resources::TABLE_TYPE_NAME) {
-            $config->setProperty(
-                TableSettings::URI, sprintf($uri, Resources::EMULATOR_TABLE_URI)
-            );
-            $config->setProperty(TableSettings::ACCOUNT_NAME, $name);
-            $config->setProperty(TableSettings::ACCOUNT_KEY, $key);
-        } else {
-            $expected  = Resources::QUEUE_TYPE_NAME;
-            $expected .= '|' . Resources::BLOB_TYPE_NAME;
-            $expected .= '|' . Resources::TABLE_TYPE_NAME;
             throw new InvalidArgumentTypeException($expected);
         }
     }

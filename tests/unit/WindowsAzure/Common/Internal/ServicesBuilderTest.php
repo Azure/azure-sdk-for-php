@@ -27,9 +27,6 @@ use Tests\Framework\TestResources;
 use WindowsAzure\Common\Internal\Resources;
 use WindowsAzure\Common\Internal\ServicesBuilder;
 use WindowsAzure\Common\Configuration;
-use WindowsAzure\Queue\QueueSettings;
-use WindowsAzure\Blob\BlobSettings;
-use WindowsAzure\Table\TableSettings;
 use WindowsAzure\ServiceManagement\ServiceManagementSettings;
 use WindowsAzure\Common\Internal\InvalidArgumentTypeException;
 
@@ -57,15 +54,10 @@ class ServicesBuilderTest extends \PHPUnit_Framework_TestCase
     public function testBuildForQueue()
     {
         // Setup
-        $uri = 'http://' . TestResources::accountName() . '.queue.core.windows.net';
-        $config = new Configuration();
-        $config->setProperty(QueueSettings::ACCOUNT_KEY, TestResources::accountKey());
-        $config->setProperty(QueueSettings::ACCOUNT_NAME, TestResources::accountName());        
-        $config->setProperty(QueueSettings::URI, $uri);
         $builder = new ServicesBuilder();
         
         // Test
-        $queueRestProxy = $builder->createQueueService($config);
+        $queueRestProxy = $builder->createQueueService(TestResources::getStorageServicesConnectionString());
         
         // Assert
         $this->assertInstanceOf('WindowsAzure\Queue\Internal\IQueue', $queueRestProxy);
@@ -82,15 +74,10 @@ class ServicesBuilderTest extends \PHPUnit_Framework_TestCase
     public function testBuildForBlob()
     {
         // Setup
-        $uri = 'http://' . TestResources::accountName() . '.blob.core.windows.net';
-        $config = new Configuration();
-        $config->setProperty(BlobSettings::ACCOUNT_KEY, TestResources::accountKey());
-        $config->setProperty(BlobSettings::ACCOUNT_NAME, TestResources::accountName());        
-        $config->setProperty(BlobSettings::URI, $uri);
         $builder = new ServicesBuilder();
         
         // Test
-        $blobRestProxy = $builder->createBlobService($config);
+        $blobRestProxy = $builder->createBlobService(TestResources::getStorageServicesConnectionString());
         
         // Assert
         $this->assertInstanceOf('WindowsAzure\Blob\Internal\IBlob', $blobRestProxy);
@@ -109,15 +96,10 @@ class ServicesBuilderTest extends \PHPUnit_Framework_TestCase
     public function testBuildForTable()
     {
         // Setup
-        $uri = 'http://' . TestResources::accountName() . '.table.core.windows.net';
-        $config = new Configuration();
-        $config->setProperty(TableSettings::ACCOUNT_KEY, TestResources::accountKey());
-        $config->setProperty(TableSettings::ACCOUNT_NAME, TestResources::accountName());        
-        $config->setProperty(TableSettings::URI, $uri);
         $builder = new ServicesBuilder();
         
         // Test
-        $tableRestProxy = $builder->createTableService($config);
+        $tableRestProxy = $builder->createTableService(TestResources::getStorageServicesConnectionString());
         
         // Assert
         $this->assertInstanceOf('WindowsAzure\Table\Internal\ITable', $tableRestProxy);
@@ -144,111 +126,6 @@ class ServicesBuilderTest extends \PHPUnit_Framework_TestCase
         
         // Assert
         $this->assertInstanceOf('WindowsAzure\ServiceManagement\Internal\IServiceManagement', $serviceManagementRestProxy);
-    }
-    
-    /**
-     * @covers WindowsAzure\Common\Internal\ServicesBuilder::createQueueService
-     * @covers WindowsAzure\Common\Internal\ServicesBuilder::_validateConfig
-     * @covers WindowsAzure\Common\Internal\ServicesBuilder::_validateConfigSetting
-     */
-    public function testValidateConfigWithMissingQueueSettingConfig()
-    {
-        $missingKeyMsg   = sprintf(Resources::MISSING_CONFIG_SETTING_KEY_MSG, 'QueueSettings::ACCOUNT_KEY', 'Queue');
-        $config = new Configuration();
-        $config->setProperty(QueueSettings::ACCOUNT_NAME, TestResources::accountName());        
-        $config->setProperty(QueueSettings::URI, 'url');
-        $builder = new ServicesBuilder();
-        $this->setExpectedException('\InvalidArgumentException', $missingKeyMsg);
-        
-        $builder->createQueueService($config);
-    }
-    
-    /**
-     * @covers WindowsAzure\Common\Internal\ServicesBuilder::createQueueService
-     * @covers WindowsAzure\Common\Internal\ServicesBuilder::_validateConfig
-     * @covers WindowsAzure\Common\Internal\ServicesBuilder::_validateConfigSetting
-     */
-    public function testValidateConfigWithEmptyQueueSettingConfig()
-    {
-        $missingValueMsg   = sprintf(Resources::MISSING_CONFIG_SETTING_VALUE_MSG, 'QueueSettings::ACCOUNT_KEY');
-        $config = new Configuration();
-        $config->setProperty(QueueSettings::ACCOUNT_NAME, TestResources::accountName());
-        $config->setProperty(QueueSettings::ACCOUNT_KEY, null);
-        $config->setProperty(QueueSettings::URI, 'url');
-        $builder = new ServicesBuilder();
-        $this->setExpectedException('\InvalidArgumentException', $missingValueMsg);
-        
-        $builder->createQueueService($config);
-    }
-    
-    /**
-     * @covers WindowsAzure\Common\Internal\ServicesBuilder::createBlobService
-     * @covers WindowsAzure\Common\Internal\ServicesBuilder::_validateConfig
-     * @covers WindowsAzure\Common\Internal\ServicesBuilder::_validateConfigSetting
-     */
-    public function testValidateConfigWithMissingBlobSettingConfig()
-    {
-        $missingKeyMsg   = sprintf(Resources::MISSING_CONFIG_SETTING_KEY_MSG, 'BlobSettings::ACCOUNT_KEY', 'Blob');
-        $config = new Configuration();
-        $config->setProperty(BlobSettings::ACCOUNT_NAME, TestResources::accountName());        
-        $config->setProperty(BlobSettings::URI, 'url');
-        $builder = new ServicesBuilder();
-        $this->setExpectedException('\InvalidArgumentException', $missingKeyMsg);
-        
-        $builder->createBlobService($config);
-    }
-    
-    /**
-     * @covers WindowsAzure\Common\Internal\ServicesBuilder::createBlobService
-     * @covers WindowsAzure\Common\Internal\ServicesBuilder::_validateConfig
-     * @covers WindowsAzure\Common\Internal\ServicesBuilder::_validateConfigSetting
-     */
-    public function testValidateConfigWithEmptyBlobSettingConfig()
-    {
-        $missingValueMsg   = sprintf(Resources::MISSING_CONFIG_SETTING_VALUE_MSG, 'BlobSettings::ACCOUNT_KEY');
-        $config = new Configuration();
-        $config->setProperty(BlobSettings::ACCOUNT_NAME, TestResources::accountName());
-        $config->setProperty(BlobSettings::ACCOUNT_KEY, null);
-        $config->setProperty(BlobSettings::URI, 'url');
-        $builder = new ServicesBuilder();
-        $this->setExpectedException('\InvalidArgumentException', $missingValueMsg);
-        
-        $builder->createBlobService($config);
-    }
-    
-    /**
-     * @covers WindowsAzure\Common\Internal\ServicesBuilder::createTableService
-     * @covers WindowsAzure\Common\Internal\ServicesBuilder::_validateConfig
-     * @covers WindowsAzure\Common\Internal\ServicesBuilder::_validateConfigSetting
-     */
-    public function testValidateConfigWithMissingTableSettingConfig()
-    {
-        $missingKeyMsg   = sprintf(Resources::MISSING_CONFIG_SETTING_KEY_MSG, 'TableSettings::ACCOUNT_KEY', 'Table');
-        $config = new Configuration();
-        $config->setProperty(TableSettings::ACCOUNT_NAME, TestResources::accountName());        
-        $config->setProperty(TableSettings::URI, 'url');
-        $builder = new ServicesBuilder();
-        $this->setExpectedException('\InvalidArgumentException', $missingKeyMsg);
-        
-        $builder->createTableService($config);
-    }
-    
-    /**
-     * @covers WindowsAzure\Common\Internal\ServicesBuilder::createTableService
-     * @covers WindowsAzure\Common\Internal\ServicesBuilder::_validateConfig
-     * @covers WindowsAzure\Common\Internal\ServicesBuilder::_validateConfigSetting
-     */
-    public function testValidateConfigWithEmptyTableSettingConfig()
-    {
-        $missingValueMsg   = sprintf(Resources::MISSING_CONFIG_SETTING_VALUE_MSG, 'TableSettings::ACCOUNT_KEY');
-        $config = new Configuration();
-        $config->setProperty(TableSettings::ACCOUNT_NAME, TestResources::accountName());
-        $config->setProperty(TableSettings::ACCOUNT_KEY, null);
-        $config->setProperty(TableSettings::URI, 'url');
-        $builder = new ServicesBuilder();
-        $this->setExpectedException('\InvalidArgumentException', $missingValueMsg);
-        
-        $builder->createTableService($config);
     }
     
     /**
