@@ -197,7 +197,7 @@ class Resources
     const SETTING_NAME = 'SettingName';
     const SETTING_CONSTRAINT = 'SettingConstraint';
     const DEV_STORE_URI = 'http://127.0.0.1';
-    const SERVICE_URI_FORMAT = "%s://%s.%2";
+    const SERVICE_URI_FORMAT = "%s://%s.%s";
     
     // Xml Namespaces
     const WA_XML_NAMESPACE   = 'http://schemas.microsoft.com/windowsazure';

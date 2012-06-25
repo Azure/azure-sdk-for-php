@@ -45,13 +45,8 @@ class QueueServiceRestProxyTestBase extends ServiceRestProxyTestBase
     
     public function setUp()
     {
-        $config = new Configuration();
-        $queueUri = TestResources::accountName() . '.queue.core.windows.net';
-        $config->setProperty(QueueSettings::ACCOUNT_KEY, TestResources::accountKey());
-        $config->setProperty(QueueSettings::ACCOUNT_NAME, TestResources::accountName());        
-        $config->setProperty(QueueSettings::URI, $queueUri);
-        $queueRestProxy = $this->builder->createQueueService($config);
-        parent::setUp($config, $queueRestProxy);
+        $queueRestProxy = $this->builder->createQueueService(TestResources::getStorageServicesConnectionString());
+        parent::setUp($queueRestProxy);
         $this->_createdQueues = array();
     }
     
