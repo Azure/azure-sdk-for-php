@@ -659,6 +659,46 @@ class StorageServiceSettingsTest extends \PHPUnit_Framework_TestCase
         // Test
         StorageServiceSettings::createFromConnectionString($connectionString);
     }
+    
+    /**
+     * @covers WindowsAzure\Common\Internal\StorageServiceSettings::createFromConnectionString
+     * @covers WindowsAzure\Common\Internal\StorageServiceSettings::init
+     * @covers WindowsAzure\Common\Internal\StorageServiceSettings::__construct
+     * @covers WindowsAzure\Common\Internal\StorageServiceSettings::_getDefaultServiceEndpoint
+     * @covers WindowsAzure\Common\Internal\StorageServiceSettings::_getValidator
+     * @covers WindowsAzure\Common\Internal\StorageServiceSettings::_optional
+     * @covers WindowsAzure\Common\Internal\StorageServiceSettings::_allRequired
+     * @covers WindowsAzure\Common\Internal\StorageServiceSettings::_setting
+     * @covers WindowsAzure\Common\Internal\StorageServiceSettings::_settingWithFunc
+     * @covers WindowsAzure\Common\Internal\StorageServiceSettings::_matchedSpecification
+     * @covers WindowsAzure\Common\Internal\StorageServiceSettings::_createStorageServiceSettings
+     */
+    public function testCreateFromConnectionStringWithInvalidSettingKeyFail()
+    {
+        // Setup
+        $expectedName = $this->_accountName;
+        $expectedKey = TestResources::KEY4;
+        $validKeys = array();
+        $validKeys[] = Resources::USE_DEVELOPMENT_STORAGE_NAME;
+        $validKeys[] = Resources::DEVELOPMENT_STORAGE_PROXY_URI_NAME;
+        $validKeys[] = Resources::DEFAULT_ENDPOINTS_PROTOCOL_NAME;
+        $validKeys[] = Resources::ACCOUNT_NAME_NAME;
+        $validKeys[] = Resources::ACCOUNT_KEY_NAME;
+        $validKeys[] = Resources::BLOB_ENDPOINT_NAME;
+        $validKeys[] = Resources::QUEUE_ENDPOINT_NAME;
+        $validKeys[] = Resources::TABLE_ENDPOINT_NAME;
+        $invalidKey = 'InvalidKey';
+        $connectionString  = "DefaultEndpointsProtocol=http;$invalidKey=MyValue;AccountName=$expectedName;AccountKey=$expectedKey";
+        $expectedMsg = sprintf(
+            Resources::INVALID_CONNECTION_STRING_SETTING_KEY,
+            $invalidKey,
+            implode("\n", $validKeys)
+        );
+        $this->setExpectedException('\RuntimeException', $expectedMsg);
+        
+        // Test
+        StorageServiceSettings::createFromConnectionString($connectionString);
+    }
 }
 
 ?>

@@ -144,6 +144,13 @@ class StorageServiceSettings
     private static $_isInitialized = false;
     
     /**
+     * Holds the expected setting keys.
+     * 
+     * @var array
+     */
+    private static $_validSettingKeys;
+    
+    /**
      * Initializes static members of the class.
      * 
      * @return none
@@ -211,6 +218,16 @@ class StorageServiceSettings
             Resources::TABLE_ENDPOINT_NAME,
             $isValidUri
         );
+        
+        self::$_validSettingKeys = array();
+        self::$_validSettingKeys[] = Resources::USE_DEVELOPMENT_STORAGE_NAME;
+        self::$_validSettingKeys[] = Resources::DEVELOPMENT_STORAGE_PROXY_URI_NAME;
+        self::$_validSettingKeys[] = Resources::DEFAULT_ENDPOINTS_PROTOCOL_NAME;
+        self::$_validSettingKeys[] = Resources::ACCOUNT_NAME_NAME;
+        self::$_validSettingKeys[] = Resources::ACCOUNT_KEY_NAME;
+        self::$_validSettingKeys[] = Resources::BLOB_ENDPOINT_NAME;
+        self::$_validSettingKeys[] = Resources::QUEUE_ENDPOINT_NAME;
+        self::$_validSettingKeys[] = Resources::TABLE_ENDPOINT_NAME;
     }
     
     /**
@@ -537,6 +554,19 @@ class StorageServiceSettings
             Resources::STORAGE_SERVIE_CONNECTION_STRING,
             $connectionString
         );
+        
+        // Assure that all given keys are valid.
+        foreach ($tokenizedSettings as $key => $value) {
+            if (!in_array($key, self::$_validSettingKeys)) {
+                throw new \RuntimeException(
+                    sprintf(
+                        Resources::INVALID_CONNECTION_STRING_SETTING_KEY,
+                        $key,
+                        implode("\n", self::$_validSettingKeys)
+                    )
+                );
+            }
+        }
         
         // Devstore case
         $matchedSpecs = self::_matchedSpecification(
