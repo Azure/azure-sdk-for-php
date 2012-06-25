@@ -6,7 +6,7 @@ Windows Azure SDK For PHP 0.2.0, 2012-06-25
 - Added Composer package
 
 
-Windows Azure SDK For PHP 0.1.0, 2012-06-25
+Windows Azure SDK For PHP 0.1.0, 2012-06-07
 -------------------------------------------
 First Official Release
 - Added REST Wrappers for the following Windows Azure 1.6 APIs:
