@@ -145,19 +145,6 @@ class StorageServiceSettings extends ServiceSettings
      */
     protected static function init()
     {
-        $isValidUri = function ($uri)
-        {
-            $isValid = filter_var($uri, FILTER_VALIDATE_URL);
-            
-            if ($isValid) {
-                return true;
-            } else {
-                throw new \RuntimeException(
-                    sprintf(Resources::INVALID_CONFIG_URI, $uri)
-                );
-            }
-        };
-        
         self::$_useDevelopmentStorageSetting = self::setting(
             Resources::USE_DEVELOPMENT_STORAGE_NAME,
             'true'
@@ -165,7 +152,7 @@ class StorageServiceSettings extends ServiceSettings
         
         self::$_developmentStorageProxyUriSetting = self::settingWithFunc(
             Resources::DEVELOPMENT_STORAGE_PROXY_URI_NAME,
-            $isValidUri
+            Validate::getIsValidUri()
         );
         
         self::$_defaultEndpointsProtocolSetting = self::setting(
@@ -194,17 +181,17 @@ class StorageServiceSettings extends ServiceSettings
         
         self::$_blobEndpointSetting = self::settingWithFunc(
             Resources::BLOB_ENDPOINT_NAME,
-            $isValidUri
+            Validate::getIsValidUri()
         );
         
         self::$_queueEndpointSetting = self::settingWithFunc(
             Resources::QUEUE_ENDPOINT_NAME,
-            $isValidUri
+            Validate::getIsValidUri()
         );
         
         self::$_tableEndpointSetting = self::settingWithFunc(
             Resources::TABLE_ENDPOINT_NAME,
-            $isValidUri
+            Validate::getIsValidUri()
         );
         
         self::$validSettingKeys = array();
