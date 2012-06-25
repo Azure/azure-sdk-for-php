@@ -10,13 +10,16 @@ Windows Azure tables, blobs, queues, service runtime and service management APIs
 	* create and delete tables
 	* create, query, insert, update, merge, and delete entities
 	* batch operations
+	* REST API Version: 2011-08-18
 * Blobs
 	* create, list, and delete containers, work with container metadata and permissions, list blobs in container
 	* create block and page blobs (from a stream or a string), work with blob blocks and pages, delete blobs
 	* work with blob properties, metadata, leases, snapshot a blob
+	* REST API Version: 2011-08-18 
 * Storage Queues
 	* create, list, and delete queues, and work with queue metadata and properties
 	* create, get, peek, update, delete messages
+	* REST API Version: 2011-08-18 
 * Service Bus
 	* Queues: create, list and delete queues; send, receive, unlock and delete messages
 	* Topics: create, list, and delete topics; create, list, and delete subscriptions; send, receive, unlock and delete messages; create, list, and delete rules
@@ -25,10 +28,13 @@ Windows Azure tables, blobs, queues, service runtime and service management APIs
 	* get configuration settings and access local resources
 	* get role instance information for current role and other role instances
 	* query and set the status of the current role
+	* REST API Version: 2011-03-08
 * Service Management
 	* create, update, delete, list, regenerate keys for storage accounts
 	* create, update, delete, list affinity groups
+	* REST API Version: 2011-10-01
 
+	
 # Getting Started
 ## Download Source Code
 
@@ -362,7 +368,7 @@ There are four basic steps that have to be performed before you can make a call 
 
 		$config = new Configuration();
 		ServiceBusSettings::configureWithWrapAuthentication( $config,
-														 "MySBNamespace",
+														 $namespace,
 														 $issuer,
 														 $key);
 
@@ -383,8 +389,7 @@ try	{
 	
 	// Create queue.
 	$serviceBusRestProxy->createQueue($queueInfo);
-}
-catch(ServiceException $e){
+} catch(ServiceException $e){
 	$code = $e->getCode();
 	$error_message = $e->getMessage();
 	echo $code.": ".$error_message."<br />";
@@ -406,8 +411,7 @@ try	{
 
 	// Send message.
 	$serviceBusRestProxy->sendQueueMessage("myqueue", $message);
-}
-catch(ServiceException $e){
+} catch(ServiceException $e){
 	$code = $e->getCode();
 	$error_message = $e->getMessage();
 	echo $code.": ".$error_message."<br />";
@@ -435,8 +439,7 @@ try	{
 	
 	// Delete message.
 	$serviceBusRestProxy->deleteMessage($message);
-}
-catch(ServiceException $e){
+} catch(ServiceException $e){
 	$code = $e->getCode();
 	$error_message = $e->getMessage();
 	echo $code.": ".$error_message."<br />";
@@ -452,8 +455,7 @@ try	{
 	// Create topic.
 	$topicInfo = new TopicInfo("mytopic");
 	$serviceBusRestProxy->createTopic($topicInfo);
-}
-catch(ServiceException $e){
+} catch(ServiceException $e){
 	$code = $e->getCode();
 	$error_message = $e->getMessage();
 	echo $code.": ".$error_message."<br />";
@@ -467,8 +469,7 @@ try	{
 	// Create subscription.
 	$subscriptionInfo = new SubscriptionInfo("mysubscription");
 	$serviceBusRestProxy->createSubscription("mytopic", $subscriptionInfo);
-}
-catch(ServiceException $e){
+} catch(ServiceException $e){
 	$code = $e->getCode();
 	$error_message = $e->getMessage();
 	echo $code.": ".$error_message."<br />";
@@ -487,8 +488,7 @@ try	{
 
 	// Send message.
 	$serviceBusRestProxy->sendTopicMessage("mytopic", $message);
-}
-catch(ServiceException $e){
+} catch(ServiceException $e){
 	$code = $e->getCode();
 	$error_message = $e->getMessage();
 	echo $code.": ".$error_message."<br />";
@@ -513,8 +513,7 @@ try	{
 																$options);
 	echo "Body: ".$message->getBody()."<br />";
 	echo "MessageID: ".$message->getMessageId()."<br />";
-}
-catch(ServiceException $e){
+} catch(ServiceException $e){
 	$code = $e->getCode();
 	$error_message = $e->getMessage();
 	echo $code.": ".$error_message."<br />";
