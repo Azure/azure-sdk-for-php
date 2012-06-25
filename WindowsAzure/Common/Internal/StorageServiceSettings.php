@@ -39,7 +39,7 @@ use WindowsAzure\Common\Internal\Resources;
  * @version   Release: @package_version@
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
-class StorageServiceSettings
+class StorageServiceSettings extends ServiceSettings
 {
     /**
      * The storage service name.
@@ -139,57 +139,32 @@ class StorageServiceSettings
     private static $_tableEndpointSetting;
     
     /**
-     * @var boolean
-     */
-    private static $_isInitialized = false;
-    
-    /**
-     * Holds the expected setting keys.
-     * 
-     * @var array
-     */
-    private static $_validSettingKeys;
-    
-    /**
      * Initializes static members of the class.
      * 
      * @return none
      */
-    public static function init()
+    protected static function init()
     {
-        $isValidUri = function ($uri)
-        {
-            $isValid = filter_var($uri, FILTER_VALIDATE_URL);
-            
-            if ($isValid) {
-                return true;
-            } else {
-                throw new \RuntimeException(
-                    sprintf(Resources::INVALID_CONFIG_URI, $uri)
-                );
-            }
-        };
-        
-        self::$_useDevelopmentStorageSetting = self::_setting(
+        self::$_useDevelopmentStorageSetting = self::setting(
             Resources::USE_DEVELOPMENT_STORAGE_NAME,
             'true'
         );
         
-        self::$_developmentStorageProxyUriSetting = self::_settingWithFunc(
+        self::$_developmentStorageProxyUriSetting = self::settingWithFunc(
             Resources::DEVELOPMENT_STORAGE_PROXY_URI_NAME,
-            $isValidUri
+            Validate::getIsValidUri()
         );
         
-        self::$_defaultEndpointsProtocolSetting = self::_setting(
+        self::$_defaultEndpointsProtocolSetting = self::setting(
             Resources::DEFAULT_ENDPOINTS_PROTOCOL_NAME,
             'http', 'https'
         );
         
-        self::$_accountNameSetting = self::_setting(
+        self::$_accountNameSetting = self::setting(
             Resources::ACCOUNT_NAME_NAME
         );
         
-        self::$_accountKeySetting = self::_settingWithFunc(
+        self::$_accountKeySetting = self::settingWithFunc(
             Resources::ACCOUNT_KEY_NAME,
             // base64_decode will return false if the $key is not in base64 format.
             function ($key) {
@@ -204,30 +179,30 @@ class StorageServiceSettings
             }
         );
         
-        self::$_blobEndpointSetting = self::_settingWithFunc(
+        self::$_blobEndpointSetting = self::settingWithFunc(
             Resources::BLOB_ENDPOINT_NAME,
-            $isValidUri
+            Validate::getIsValidUri()
         );
         
-        self::$_queueEndpointSetting = self::_settingWithFunc(
+        self::$_queueEndpointSetting = self::settingWithFunc(
             Resources::QUEUE_ENDPOINT_NAME,
-            $isValidUri
+            Validate::getIsValidUri()
         );
         
-        self::$_tableEndpointSetting = self::_settingWithFunc(
+        self::$_tableEndpointSetting = self::settingWithFunc(
             Resources::TABLE_ENDPOINT_NAME,
-            $isValidUri
+            Validate::getIsValidUri()
         );
         
-        self::$_validSettingKeys = array();
-        self::$_validSettingKeys[] = Resources::USE_DEVELOPMENT_STORAGE_NAME;
-        self::$_validSettingKeys[] = Resources::DEVELOPMENT_STORAGE_PROXY_URI_NAME;
-        self::$_validSettingKeys[] = Resources::DEFAULT_ENDPOINTS_PROTOCOL_NAME;
-        self::$_validSettingKeys[] = Resources::ACCOUNT_NAME_NAME;
-        self::$_validSettingKeys[] = Resources::ACCOUNT_KEY_NAME;
-        self::$_validSettingKeys[] = Resources::BLOB_ENDPOINT_NAME;
-        self::$_validSettingKeys[] = Resources::QUEUE_ENDPOINT_NAME;
-        self::$_validSettingKeys[] = Resources::TABLE_ENDPOINT_NAME;
+        self::$validSettingKeys = array();
+        self::$validSettingKeys[] = Resources::USE_DEVELOPMENT_STORAGE_NAME;
+        self::$validSettingKeys[] = Resources::DEVELOPMENT_STORAGE_PROXY_URI_NAME;
+        self::$validSettingKeys[] = Resources::DEFAULT_ENDPOINTS_PROTOCOL_NAME;
+        self::$validSettingKeys[] = Resources::ACCOUNT_NAME_NAME;
+        self::$validSettingKeys[] = Resources::ACCOUNT_KEY_NAME;
+        self::$validSettingKeys[] = Resources::BLOB_ENDPOINT_NAME;
+        self::$validSettingKeys[] = Resources::QUEUE_ENDPOINT_NAME;
+        self::$validSettingKeys[] = Resources::TABLE_ENDPOINT_NAME;
     }
     
     /**
@@ -251,186 +226,6 @@ class StorageServiceSettings
         $this->_blobEndpointUri  = $blobEndpointUri;
         $this->_queueEndpointUri = $queueEndpointUri;
         $this->_tableEndpointUri = $tableEndpointUri;
-    }
-    
-    /**
-     * Creates an anonymous function that acts as predicate.
-     * 
-     * @param array   $requirements The array of conditions to satisfy.
-     * @param boolean $isRequired   Either these conditions are all required or all 
-     * optional.
-     * @param boolean $atLeastOne   Indicates that at least one requirement must
-     * succeed.
-     * 
-     * @return callable
-     */
-    private static function _getValidator($requirements, $isRequired, $atLeastOne)
-    {
-        return function ($userSettings)
-            use ($requirements, $isRequired, $atLeastOne)
-        {
-            $oneFound = false;
-            $result   = $userSettings;
-            foreach ($requirements as $requirement) {
-                $settingName = $requirement[Resources::SETTING_NAME];
-                
-                // Check if the setting name exists in the provided user settings.
-                if (array_key_exists($settingName, $result)) {
-                    // Check if the provided user setting value is valid.
-                    $validationFunc = $requirement[Resources::SETTING_CONSTRAINT];
-                    $isValid        = $validationFunc($result[$settingName]);
-                    
-                    if ($isValid) {
-                        // Remove the setting as indicator for successful validation.
-                        unset($result[$settingName]);
-                        $oneFound = true;
-                    }
-                } else {
-                    // If required then fail because the setting does not exist
-                    if ($isRequired) {
-                        return null;
-                    }
-                }
-            }
-            
-            if ($atLeastOne) {
-                // At least one requirement must succeed, otherwise fail.
-                return $oneFound ? $result : null;
-            } else {
-                return $result;
-            }
-        };
-    }
-    
-    /**
-     * Creates at lease one succeed predicate for the provided list of requirements.
-     * 
-     * @return callable
-     */
-    private static function _atLeastOne()
-    {
-        $allSettings  = func_get_args();
-        return self::_getValidator($allSettings, false, true);
-    }
-    
-    /**
-     * Creates an optional predicate for the provided list of requirements.
-     * 
-     * @return callable
-     */
-    private static function _optional()
-    {
-        $optionalSettings  = func_get_args();
-        return self::_getValidator($optionalSettings, false, false);
-    }
-    
-    /**
-     * Creates an required predicate for the provided list of requirements.
-     * 
-     * @return callable
-     */
-    private static function _allRequired()
-    {
-        $requiredSettings  = func_get_args();
-        return self::_getValidator($requiredSettings, true, false);
-    }
-    
-    /**
-     * Creates a setting value condition using the passed predicate.
-     * 
-     * @param string   $name      The setting key name.
-     * @param callable $predicate The setting value predicate.
-     * 
-     * @return array 
-     */
-    private static function _settingWithFunc($name, $predicate)
-    {
-        $requirement                                = array();
-        $requirement[Resources::SETTING_NAME]       = $name;
-        $requirement[Resources::SETTING_CONSTRAINT] = $predicate;
-        
-        return $requirement;
-    }
-    
-    /**
-     * Creates a setting value condition that validates it is one of the
-     * passed valid values.
-     * 
-     * @param string $name The setting key name.
-     * 
-     * @return array 
-     */
-    private static function _setting($name)
-    {
-        $validValues = func_get_args();
-        
-        // Remove $name argument.
-        unset($validValues[0]);
-        
-        $validValuesCount = func_num_args();
-        
-        $predicate = function ($settingValue) use ($validValuesCount, $validValues)
-        {
-            if (empty($validValues)) {
-                // No restrictions, succeed,
-                return true;
-            }
-            
-            // Check to find if the $settingValue is valid or not. The index must
-            // start from 1 as unset deletes the value but does not update the array
-            // indecies.
-            for ($index = 1; $index < $validValuesCount; $index++) {
-                if ($settingValue == $validValues[$index]) {
-                    // $settingValue is found in valid values set, succeed.
-                    return true;
-                }
-            }
-            
-            throw new \RuntimeException(
-                sprintf(
-                    Resources::INVALID_CONFIG_VALUE,
-                    $settingValue,
-                    implode("\n", $validValues)
-                )
-            );
-            
-            // $settingValue is missing in valid values set, fail.
-            return false;
-        };
-        
-        return self::_settingWithFunc($name, $predicate);
-    }
-    
-    /**
-     * Tests to see if a given list of settings matches a set of filters exactly.
-     * 
-     * @param array $settings The settings to check.
-     * 
-     * @return boolean If any filter returns null, false. If there are any settings 
-     * left over after all filters are processed, false. Otherwise true.
-     */
-    private static function _matchedSpecification($settings)
-    {
-        $constraints = func_get_args();
-        
-        // Remove first element which corresponds to $settings
-        unset($constraints[0]);
-        
-        foreach ($constraints as $constraint) {
-            $remainingSettings = $constraint($settings);
-            
-            if (is_null($remainingSettings)) {
-                return false;
-            } else {
-                $settings = $remainingSettings;
-            }
-        }
-        
-        if (empty($settings)) {
-            return true;
-        }
-        
-        return false;
     }
     
     /**
@@ -544,35 +339,13 @@ class StorageServiceSettings
      */
     public static function createFromConnectionString($connectionString)
     {
-        // Initialize the static values if they are not initialized yet.
-        if (!self::$_isInitialized) {
-            self::init();
-            self::$_isInitialized = true;
-        }
-        
-        $tokenizedSettings      = ConnectionStringParser::parseConnectionString(
-            Resources::STORAGE_SERVIE_CONNECTION_STRING,
-            $connectionString
-        );
-        
-        // Assure that all given keys are valid.
-        foreach ($tokenizedSettings as $key => $value) {
-            if (!in_array($key, self::$_validSettingKeys)) {
-                throw new \RuntimeException(
-                    sprintf(
-                        Resources::INVALID_CONNECTION_STRING_SETTING_KEY,
-                        $key,
-                        implode("\n", self::$_validSettingKeys)
-                    )
-                );
-            }
-        }
+        $tokenizedSettings = self::parseAndValidateKeys($connectionString);
         
         // Devstore case
-        $matchedSpecs = self::_matchedSpecification(
+        $matchedSpecs = self::matchedSpecification(
             $tokenizedSettings,
-            self::_allRequired(self::$_useDevelopmentStorageSetting),
-            self::_optional(self::$_developmentStorageProxyUriSetting)
+            self::allRequired(self::$_useDevelopmentStorageSetting),
+            self::optional(self::$_developmentStorageProxyUriSetting)
         );
         if ($matchedSpecs) {
             $settingName = Resources::DEVELOPMENT_STORAGE_PROXY_URI_NAME;
@@ -582,14 +355,14 @@ class StorageServiceSettings
         }
         
         // automatic case
-        $matchedSpecs = self::_matchedSpecification(
+        $matchedSpecs = self::matchedSpecification(
             $tokenizedSettings,
-            self::_allRequired(
+            self::allRequired(
                 self::$_defaultEndpointsProtocolSetting,
                 self::$_accountNameSetting,
                 self::$_accountKeySetting
             ),
-            self::_optional(
+            self::optional(
                 self::$_blobEndpointSetting,
                 self::$_queueEndpointSetting,
                 self::$_tableEndpointSetting
@@ -614,14 +387,14 @@ class StorageServiceSettings
         }
         
         // explicit case
-        $matchedSpecs = self::_matchedSpecification(
+        $matchedSpecs = self::matchedSpecification(
             $tokenizedSettings,
-            self::_atLeastOne(
+            self::atLeastOne(
                 self::$_blobEndpointSetting,
                 self::$_queueEndpointSetting,
                 self::$_tableEndpointSetting
             ),
-            self::_allRequired(
+            self::allRequired(
                 self::$_accountNameSetting,
                 self::$_accountKeySetting
             )

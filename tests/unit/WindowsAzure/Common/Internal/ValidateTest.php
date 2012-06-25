@@ -317,5 +317,17 @@ class ValidateTest extends \PHPUnit_Framework_TestCase
 
         // Assert
     }
+    
+    /**
+     * @covers WindowsAzure\Common\Internal\Validate::isDouble
+     */
+    public function testGetValidateUri()
+    {
+        // Test
+        $function = Validate::getIsValidUri();
+        
+        // Assert
+        $this->assertInternalType('object', $function);
+    }
 }
 
