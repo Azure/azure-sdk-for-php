@@ -1,4 +1,4 @@
-# Windows Azure SDK for PHP
+﻿# Windows Azure SDK for PHP
 
 This project provides a set of PHP client libraries that make it easy to access
 Windows Azure tables, blobs, queues, service runtime and service management APIs. For documentation on how to host PHP applications on Windows Azure, please see the
@@ -18,8 +18,8 @@ Windows Azure tables, blobs, queues, service runtime and service management APIs
 	* create, list, and delete queues, and work with queue metadata and properties
 	* create, get, peek, update, delete messages
 * Service Bus
-	* Queues: create, list and delete queues; create, list, and delete subscriptions; send, receive, unlock and delete messages
-	* Topics: create, list, and delete topics; create, list, and delete rules
+	* Queues: create, list and delete queues; send, receive, unlock and delete messages
+	* Topics: create, list, and delete topics; create, list, and delete subscriptions; send, receive, unlock and delete messages; create, list, and delete rules
 * Service Runtime
 	* discover addresses and ports for the endpoints of other role instances in your service
 	* get configuration settings and access local resources
