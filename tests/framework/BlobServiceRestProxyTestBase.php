@@ -47,13 +47,8 @@ class BlobServiceRestProxyTestBase extends ServiceRestProxyTestBase
     
     public function setUp()
     {
-        $config = new Configuration();
-        $blobUri = 'http://' . TestResources::accountName() . '.blob.core.windows.net';
-        $config->setProperty(BlobSettings::ACCOUNT_KEY, TestResources::accountKey());
-        $config->setProperty(BlobSettings::ACCOUNT_NAME, TestResources::accountName());        
-        $config->setProperty(BlobSettings::URI, $blobUri);
-        $blobRestProxy = $this->builder->createBlobService($config);
-        parent::setUp($config, $blobRestProxy);
+        $blobRestProxy = $this->builder->createBlobService(TestResources::getStorageServicesConnectionString());
+        parent::setUp($blobRestProxy);
         $this->_createdContainers = array();
     }
     

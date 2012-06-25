@@ -220,15 +220,20 @@ class StorageServiceSettings
      * Creates an anonymous function that acts as predicate.
      * 
      * @param array   $requirements The array of conditions to satisfy.
-     * @param boolean $isRequired   Either these conditions are allrequired or all 
+     * @param boolean $isRequired   Either these conditions are all required or all 
      * optional.
+     * @param boolean $atLeastOne   Indicates that at least one requirement must
+     * succeed.
      * 
      * @return callable
      */
-    private static function _getValidator($requirements, $isRequired)
+    private static function _getValidator($requirements, $isRequired, $atLeastOne)
     {
-        return function ($userSettings) use ($requirements, $isRequired) {
-            $result = $userSettings;
+        return function ($userSettings)
+            use ($requirements, $isRequired, $atLeastOne)
+        {
+            $oneFound = false;
+            $result   = $userSettings;
             foreach ($requirements as $requirement) {
                 $settingName = $requirement[Resources::SETTING_NAME];
                 
@@ -241,40 +246,56 @@ class StorageServiceSettings
                     if ($isValid) {
                         // Remove the setting as indicator for successful validation.
                         unset($result[$settingName]);
-                        continue;
+                        $oneFound = true;
                     }
-                }
-                
-                if ($isRequired) {
-                    // If this line is reached, means a required validation failed.
-                    return null;
+                } else {
+                    // If required then fail because the setting does not exist
+                    if ($isRequired) {
+                        return null;
+                    }
                 }
             }
             
-            return $result;
+            if ($atLeastOne) {
+                // At least one requirement must succeed, otherwise fail.
+                return $oneFound ? $result : null;
+            } else {
+                return $result;
+            }
         };
     }
     
     /**
-     * Creates an optional predicate for passed list of requirements.
+     * Creates at lease one succeed predicate for the provided list of requirements.
+     * 
+     * @return callable
+     */
+    private static function _atLeastOne()
+    {
+        $allSettings  = func_get_args();
+        return self::_getValidator($allSettings, false, true);
+    }
+    
+    /**
+     * Creates an optional predicate for the provided list of requirements.
      * 
      * @return callable
      */
     private static function _optional()
     {
         $optionalSettings  = func_get_args();
-        return self::_getValidator($optionalSettings, false);
+        return self::_getValidator($optionalSettings, false, false);
     }
     
     /**
-     * Creates an required predicate for passed list of requirements.
+     * Creates an required predicate for the provided list of requirements.
      * 
      * @return callable
      */
     private static function _allRequired()
     {
         $requiredSettings  = func_get_args();
-        return self::_getValidator($requiredSettings, true);
+        return self::_getValidator($requiredSettings, true, false);
     }
     
     /**
@@ -420,6 +441,47 @@ class StorageServiceSettings
         
         return sprintf(Resources::SERVICE_URI_FORMAT, $scheme, $accountName, $dns);
     }
+    
+    /**
+     * Creates StorageServiceSettings object given endpoints uri.
+     * 
+     * @param array  $settings         The service settings.
+     * @param string $blobEndpointUri  The blob endpoint uri.
+     * @param string $queueEndpointUri The queue endpoint uri.
+     * @param string $tableEndpointUri The table endpoint uri.
+     * 
+     * @return \WindowsAzure\Common\Internal\StorageServiceSettings
+     */
+    private static function _createStorageServiceSettings(
+        $settings,
+        $blobEndpointUri = null,
+        $queueEndpointUri = null,
+        $tableEndpointUri = null
+    ) {
+        $blobEndpointUri = Utilities::tryGetValue(
+            $settings,
+            Resources::BLOB_ENDPOINT_NAME,
+            $blobEndpointUri
+        );
+        $queueEndpointUri = Utilities::tryGetValue(
+            $settings,
+            Resources::QUEUE_ENDPOINT_NAME,
+            $queueEndpointUri
+        );
+        $tableEndpointUri = Utilities::tryGetValue(
+            $settings,
+            Resources::TABLE_ENDPOINT_NAME,
+            $tableEndpointUri
+        );
+            
+        return new StorageServiceSettings(
+            $settings[Resources::ACCOUNT_NAME_NAME],
+            $settings[Resources::ACCOUNT_KEY_NAME],
+            $blobEndpointUri,
+            $queueEndpointUri,
+            $tableEndpointUri
+        );
+    }
 
     /**
      * Creates a StorageServiceSettings object from the given connection string.
@@ -430,7 +492,6 @@ class StorageServiceSettings
      */
     public static function createFromConnectionString($connectionString)
     {
-        $storageServiceSettings = null;
         $tokenizedSettings      = ConnectionStringParser::parseConnectionString(
             Resources::STORAGE_SERVIE_CONNECTION_STRING,
             $connectionString
@@ -446,7 +507,7 @@ class StorageServiceSettings
             $settingName = Resources::DEVELOPMENT_STORAGE_PROXY_URI_NAME;
             $proxyUri    = Utilities::tryGetValue($tokenizedSettings, $settingName);
             
-            $storageServiceSettings = self::_getDevelopmentStorageAccount($proxyUri);
+            return self::_getDevelopmentStorageAccount($proxyUri);
         }
         
         // automatic case
@@ -464,41 +525,41 @@ class StorageServiceSettings
             )
         );
         if ($matchedSpecs) {
-            $blobEndpoint = Utilities::tryGetValue(
+            return self::_createStorageServiceSettings(
                 $tokenizedSettings,
-                Resources::BLOB_ENDPOINT_NAME,
                 self::_getDefaultServiceEndpoint(
                     $tokenizedSettings,
                     Resources::BLOB_BASE_DNS_NAME
-                )
-            );
-            $queueEndpoint = Utilities::tryGetValue(
-                $tokenizedSettings,
-                Resources::QUEUE_ENDPOINT_NAME,
+                ),
                 self::_getDefaultServiceEndpoint(
                     $tokenizedSettings,
                     Resources::QUEUE_BASE_DNS_NAME
-                )
-            );
-            $tableEndpoint = Utilities::tryGetValue(
-                $tokenizedSettings,
-                Resources::TABLE_ENDPOINT_NAME,
+                ),
                 self::_getDefaultServiceEndpoint(
                     $tokenizedSettings,
                     Resources::TABLE_BASE_DNS_NAME
                 )
             );
-            
-            $storageServiceSettings = new StorageServiceSettings(
-                $tokenizedSettings[Resources::ACCOUNT_NAME_NAME],
-                $tokenizedSettings[Resources::ACCOUNT_KEY_NAME],
-                $blobEndpoint,
-                $queueEndpoint,
-                $tableEndpoint
-            );
         }
         
-        return $storageServiceSettings;
+        // explicit case
+        $matchedSpecs = self::_matchedSpecification(
+            $tokenizedSettings,
+            self::_atLeastOne(
+                self::$_blobEndpointSetting,
+                self::$_queueEndpointSetting,
+                self::$_tableEndpointSetting
+            ),
+            self::_allRequired(
+                self::$_accountNameSetting,
+                self::$_accountKeySetting
+            )
+        );
+        if ($matchedSpecs) {
+            return self::_createStorageServiceSettings($tokenizedSettings);
+        }
+        
+        return null;
     }
     
     /**

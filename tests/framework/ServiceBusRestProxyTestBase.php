@@ -87,7 +87,7 @@ class ServiceBusRestProxyTestBase extends ServiceRestProxyTestBase
         $this->_createdSubscriptions = array();
         $this->_createdRules = array();
         $this->_createdQueues = array();
-        parent::setUp($config, $serviceBusWrapper);
+        parent::setUp($serviceBusWrapper);
     }
     
     public function createQueue($queueInfo)

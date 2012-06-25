@@ -70,7 +70,7 @@ class WrapRestProxyTestBase extends ServiceRestProxyTestBase
         );
         
         $wrapRestProxy = $this->builder->createWrapService($config);
-        parent::setUp($config, $wrapRestProxy);
+        parent::setUp($wrapRestProxy);
     }
 }
 

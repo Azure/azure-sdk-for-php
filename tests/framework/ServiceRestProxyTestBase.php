@@ -57,9 +57,9 @@ class ServiceRestProxyTestBase extends RestProxyTestBase
         }
     }
     
-    public function setUp($config, $serviceRestProxy)
+    public function setUp($serviceRestProxy)
     {
-        parent::setUp($config, $serviceRestProxy);
+        parent::setUp($serviceRestProxy);
         $this->_createDefaultProperties();
     }
     

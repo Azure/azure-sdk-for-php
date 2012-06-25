@@ -41,7 +41,6 @@ use WindowsAzure\Common\Internal\ServicesBuilder;
  */
 class RestProxyTestBase extends \PHPUnit_Framework_TestCase
 {
-    protected $config;
     protected $restProxy;
     protected $xmlSerializer;
     protected $builder;
@@ -62,9 +61,8 @@ class RestProxyTestBase extends \PHPUnit_Framework_TestCase
         Logger::setLogFile('C:\log.txt');
     }
     
-    public function setUp($config, $serviceRestProxy)
+    public function setUp($serviceRestProxy)
     {
-        $this->config = $config;
         $this->restProxy = $serviceRestProxy;
     }
     

@@ -82,7 +82,7 @@ class ServiceManagementRestProxyTestBase extends RestProxyTestBase
         );
         $serviceManagementRestProxy = $this->builder->createServiceManagementService($config);
         
-        parent::setUp($config, $serviceManagementRestProxy);
+        parent::setUp($serviceManagementRestProxy);
         
         $this->createdStorageServices = array();
         $this->createdAffinityGroups = array();
