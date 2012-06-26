@@ -302,10 +302,11 @@ class ChannelManager
      */
     private static function _rscandir($dir, &$files) {
         foreach(glob($dir . '/*') as $file) {
-            if(is_dir($file))
+            if(is_dir($file)) {
                 self::_rscandir($file, $files);
-            else
+            } else {
                 $files[] = $file;
+			}
         }
     }
 
@@ -450,8 +451,6 @@ class ChannelManager
     }
 }
 
-
-// Start the script
 ChannelManager::main();
 
 ?>

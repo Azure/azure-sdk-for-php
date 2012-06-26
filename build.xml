@@ -191,7 +191,7 @@
  
  <target name="new-pear-release" description="Adds new release to PEAR channel">
   <exec executable="php.exe">
-  <arg path="${basedir}/tools/ChannelManager.php" />
+  <arg path="${basedir}/build/ChannelManager.php" />
   <arg value="release" />
   </exec>
  </target>

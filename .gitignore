@@ -4,9 +4,9 @@ build/coverage
 build/logs
 build/pdepend
 build/phpdox
-tools/channel
+build/channel
+build/*.tgz
 phpunit.xml
 cache.properties
 vendor
 nbproject
-tools/*.tgz
