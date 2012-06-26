@@ -24,8 +24,6 @@
  
 namespace Tests\Framework;
 use WindowsAzure\Common\Internal\Resources;
-use WindowsAzure\Common\Configuration;
-use WindowsAzure\ServiceManagement\ServiceManagementSettings;
 use WindowsAzure\ServiceManagement\Models\CreateStorageServiceOptions;
 use WindowsAzure\ServiceManagement\Models\OperationStatus;
 use WindowsAzure\ServiceManagement\Models\Locations;
@@ -47,41 +45,9 @@ class ServiceManagementRestProxyTestBase extends RestProxyTestBase
     protected $createdAffinityGroups;
     protected $affinityGroupCount;
     
-    public static function setUpBeforeClass()
-    {
-        if (Configuration::isEmulated()) {
-            throw new \Exception(self::NOT_SUPPORTED);
-        }
-        
-        $subscriptionId = TestResources::serviceManagementSubscriptionId();
-        $certificatePath = TestResources::serviceManagementCertificatePath();
-        
-        if (empty($subscriptionId)) {
-            throw new \Exception('SERVICE_MANAGEMENT_SUBSCRIPTION_ID envionment variable is missing');
-        }
-        
-        if (empty($certificatePath)) {
-            throw new \Exception('SERVICE_MANAGEMENT_CERTIFICATE_PATH envionment variable is missing');
-        }
-    }
-    
     public function setUp()
     {
-        $config = new Configuration();
-        $config->setProperty(
-            ServiceManagementSettings::SUBSCRIPTION_ID,
-            TestResources::serviceManagementSubscriptionId()
-        );
-        $config->setProperty(
-            ServiceManagementSettings::URI,
-            Resources::SERVICE_MANAGEMENT_URL
-        );
-        $config->setProperty(
-            ServiceManagementSettings::CERTIFICATE_PATH,
-            TestResources::serviceManagementCertificatePath()
-        );
-        $serviceManagementRestProxy = $this->builder->createServiceManagementService($config);
-        
+        $serviceManagementRestProxy = $this->builder->createServiceManagementService(TestResources::getServiceManagementConnectionString());
         parent::setUp($serviceManagementRestProxy);
         
         $this->createdStorageServices = array();

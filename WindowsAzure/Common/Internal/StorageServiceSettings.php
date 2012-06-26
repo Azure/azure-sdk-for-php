@@ -160,9 +160,7 @@ class StorageServiceSettings extends ServiceSettings
             'http', 'https'
         );
         
-        self::$_accountNameSetting = self::setting(
-            Resources::ACCOUNT_NAME_NAME
-        );
+        self::$_accountNameSetting = self::setting(Resources::ACCOUNT_NAME_NAME);
         
         self::$_accountKeySetting = self::settingWithFunc(
             Resources::ACCOUNT_KEY_NAME,
@@ -194,7 +192,6 @@ class StorageServiceSettings extends ServiceSettings
             Validate::getIsValidUri()
         );
         
-        self::$validSettingKeys = array();
         self::$validSettingKeys[] = Resources::USE_DEVELOPMENT_STORAGE_NAME;
         self::$validSettingKeys[] = Resources::DEVELOPMENT_STORAGE_PROXY_URI_NAME;
         self::$validSettingKeys[] = Resources::DEFAULT_ENDPOINTS_PROTOCOL_NAME;
@@ -354,7 +351,7 @@ class StorageServiceSettings extends ServiceSettings
             return self::_getDevelopmentStorageAccount($proxyUri);
         }
         
-        // automatic case
+        // Automatic case
         $matchedSpecs = self::matchedSpecification(
             $tokenizedSettings,
             self::allRequired(
@@ -386,7 +383,7 @@ class StorageServiceSettings extends ServiceSettings
             );
         }
         
-        // explicit case
+        // Explicit case
         $matchedSpecs = self::matchedSpecification(
             $tokenizedSettings,
             self::atLeastOne(

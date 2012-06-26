@@ -22,7 +22,6 @@
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
 namespace Tests\Framework;
-use WindowsAzure\Common\Configuration;
 use Tests\Framework\TestResources;
 use WindowsAzure\Common\Models\ServiceProperties;
 use WindowsAzure\Common\Internal\Serialization\XmlSerializer;
@@ -42,20 +41,6 @@ class ServiceRestProxyTestBase extends RestProxyTestBase
 {
     protected $propertiesChanged;
     protected $defaultProperties;
-    
-    public static function setUpBeforeClass()
-    {
-        $storageKey = TestResources::accountKey();
-        $storageName = TestResources::accountName();
-        
-        if (empty($storageKey)) {
-            throw new \Exception('AZURE_STORAGE_KEY envionment variable is missing');
-        }
-        
-        if (empty($storageName)) {
-            throw new \Exception('AZURE_STORAGE_ACCOUNT envionment variable is missing');
-        }
-    }
     
     public function setUp($serviceRestProxy)
     {
