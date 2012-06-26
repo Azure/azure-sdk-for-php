@@ -122,6 +122,7 @@ spl_autoload_register(
             'windowsazure\\common\\internal\\serialization\\xmlserializer' => '/Common/Internal/Serialization/XmlSerializer.php',
             'windowsazure\\common\\internal\\servicerestproxy' => '/Common/Internal/ServiceRestProxy.php',
             'windowsazure\\common\\internal\\servicesbuilder' => '/Common/Internal/ServicesBuilder.php',
+            'windowsazure\\common\\internal\\servicesettings' => '/Common/Internal/ServiceSettings.php',
             'windowsazure\\common\\internal\\storageservicesettings' => '/Common/Internal/StorageServiceSettings.php',
             'windowsazure\\common\\internal\\utilities' => '/Common/Internal/Utilities.php',
             'windowsazure\\common\\internal\\validate' => '/Common/Internal/Validate.php',
