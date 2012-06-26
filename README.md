@@ -1,7 +1,7 @@
 ﻿# Windows Azure SDK for PHP
 
 This project provides a set of PHP client libraries that make it easy to access
-Windows Azure tables, blobs, queues, service runtime and service management APIs. For documentation on how to host PHP applications on Windows Azure, please see the
+Windows Azure tables, blobs, queues, service bus (queues and topics), service runtime and service management APIs. For documentation on how to host PHP applications on Windows Azure, please see the
 [Windows Azure PHP Developer Center](http://www.windowsazure.com/en-us/develop/php/).
 
 # Features
