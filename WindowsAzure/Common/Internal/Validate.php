@@ -107,6 +107,23 @@ class Validate
             );
         }
     }
+
+    /**
+     * Throws exception if the provided variable is not double. 
+     *
+     * @param mix    $var  The variable to check.
+     * @param string $name The parameter name.
+     *
+     * @throws \InvalidArgumentException
+     *
+     * @return none
+     */
+    public static function isDouble($var, $name)
+    {
+        if (!is_numeric($var)) {
+            throw new InvalidArgumentTypeException('double', $name);
+        }
+    }
     
     /**
      * Throws exception if the provided variable type is not integer.
@@ -192,6 +209,42 @@ class Validate
     {
         if (is_null($var)) {
             throw new \InvalidArgumentException(sprintf(Resources::NULL_MSG, $name));
+        }
+    }
+
+    /**
+     * Throws exception if the object is not of the specified class type.
+     *
+     * @param mixed  $objectInstance An object that requires class type validation.
+     * @param mixed  $classInstance  The instance of the class the the 
+     * object instance should be. 
+     * @param string $name           The name of the object.
+     *
+     * @throws \InvalidArgumentException
+     *
+     * @return none
+     */
+    public static function isInstanceOf($objectInstance, $classInstance, $name)
+    {
+        Validate::notNull($classInstance, 'classInstance');
+        if (is_null($objectInstance)) {
+            return true;
+        }
+
+        $objectType = gettype($objectInstance);
+        $classType  = gettype($classInstance);
+
+        if ($objectType === $classType) {
+            return true;
+        } else {
+            throw new \InvalidArgumentException(
+                sprintf(
+                    Resources::INSTANCE_TYPE_VALIDATION_MSG, 
+                    $name,
+                    $objectType,
+                    $classType
+                )
+            );
         }
     }
 }
