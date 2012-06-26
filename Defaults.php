@@ -47,10 +47,10 @@ Queues, Service Runtime, Service Management and Service Bus (Queues, Topics) RES
 It is build as a thin REST call wrapper where each server call maps to a single method call within the library.
 ';
 const PACKAGE_RELEASE_NOTES = '
-* Full support of Queue, Blob and Table services.
-* Full support of Service Bus.
-* Full support of Service Runtime.
-* Support for storage services and affinity groups management operations.
+- Added Service Bus Support
+	* Queues: create, list and delete queues; send, receive, unlock and delete messages
+	* Topics: create, list, and delete topics; create, list, and delete subscriptions; send, receive, unlock and delete messages; create, list, and delete rules
+- Added Composer package
 ';
 $dependencies = array(
     array('required', 'HTTP_Request2',            'pear.php.net'),
