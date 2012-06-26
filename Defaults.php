@@ -47,8 +47,6 @@ Queues, Service Runtime, Service Management and Service Bus (Queues, Topics) RES
 It is build as a thin REST call wrapper where each server call maps to a single method call within the library.
 ';
 const PACKAGE_RELEASE_NOTES = '
-Windows Azure SDK For PHP 0.2.0, 2012-06-25
--------------------------------------------
 - Added Service Bus Support
 	* Queues: create, list and delete queues; send, receive, unlock and delete messages
 	* Topics: create, list, and delete topics; create, list, and delete subscriptions; send, receive, unlock and delete messages; create, list, and delete rules
