@@ -35,18 +35,14 @@ use WindowsAzure\Common\Internal\Filters\AuthenticationFilter;
 use WindowsAzure\Common\Internal\Filters\WrapFilter;
 use WindowsAzure\Common\Internal\InvalidArgumentTypeException;
 use WindowsAzure\Queue\QueueRestProxy;
-use WindowsAzure\Queue\QueueSettings;
 use WindowsAzure\Blob\BlobRestProxy;
-use WindowsAzure\Blob\BlobSettings;
 use WindowsAzure\ServiceBus\ServiceBusRestProxy;
 use WindowsAzure\ServiceBus\ServiceBusSettings;
 use WindowsAzure\ServiceBus\WrapRestProxy;
 use WindowsAzure\Table\TableRestProxy;
-use WindowsAzure\Table\TableSettings;
 use WindowsAzure\Table\Internal\AtomReaderWriter;
 use WindowsAzure\Table\Internal\MimeReaderWriter;
 use WindowsAzure\Common\Internal\Serialization\XmlSerializer;
-use WindowsAzure\ServiceManagement\ServiceManagementSettings;
 use WindowsAzure\ServiceManagement\ServiceManagementRestProxy;
 use WindowsAzure\Common\Internal\Authentication\SharedKeyAuthScheme;
 use WindowsAzure\Common\Internal\Authentication\TableSharedKeyLiteAuthScheme;
@@ -364,27 +360,27 @@ class ServicesBuilder implements IServicesBuilder
     /**
      * Builds a service management object.
      *
-     * @param WindowsAzure\Common\Configuration $config The configuration.
+     * @param string $connectionString The configuration connection string.
      * 
      * @return WindowsAzure\ServiceManagement\Internal\IServiceManagement
      */
-    public function createServiceManagementService($config)
+    public function createServiceManagementService($connectionString)
     {
-        $this->_validateConfig($config, Resources::SERVICE_MANAGEMENT_TYPE_NAME);
-        
-        $certificatePath = $config->getProperty(
-            ServiceManagementSettings::CERTIFICATE_PATH
+        $settings = ServiceManagementSettings::createFromConnectionString(
+            $connectionString
         );
+        
+        $certificatePath = $settings->getCertificatePath();
         $httpClient      = new HttpClient($certificatePath);
         $serializer      = $this->serializer();
         $uri             = Utilities::tryAddUrlScheme(
-            $config->getProperty(ServiceManagementSettings::URI),
+            $settings->getEndpointUri(),
             Resources::HTTPS_SCHEME
         );
         
         $serviceManagementWrapper = new ServiceManagementRestProxy(
             $httpClient,
-            $config->getProperty(ServiceManagementSettings::SUBSCRIPTION_ID),
+            $settings->getSubscriptionId(),
             $uri,
             $serializer
         );
@@ -460,28 +456,7 @@ class ServicesBuilder implements IServicesBuilder
      */
     private function _validateConfig($config, $type)
     {        
-        switch ($type) {       
-        case Resources::SERVICE_MANAGEMENT_TYPE_NAME:
-            $this->_validateConfigSetting(
-                ServiceManagementSettings::URI,
-                $config,
-                'ServiceManagementSettings::URI',
-                'ServiceManagement'
-            );
-            $this->_validateConfigSetting(
-                ServiceManagementSettings::CERTIFICATE_PATH,
-                $config,
-                'ServiceManagementSettings::CERTIFICATE_PATH',
-                'ServiceManagement'
-            );
-            $this->_validateConfigSetting(
-                ServiceManagementSettings::SUBSCRIPTION_ID,
-                $config,
-                'ServiceManagementSettings::SUBSCRIPTION_ID',
-                'ServiceManagement'
-            );
-            break;
-            
+        switch ($type) {
         case Resources::SERVICE_BUS_TYPE_NAME:
             $this->_validateConfigSetting(
                 ServiceBusSettings::URI,
@@ -519,8 +494,7 @@ class ServicesBuilder implements IServicesBuilder
             break;
    
         default:
-            $expected  = Resources::SERVICE_MANAGEMENT_TYPE_NAME;
-            $expected .= '|' . Resources::SERVICE_BUS_TYPE_NAME;
+            $expected  = Resources::SERVICE_BUS_TYPE_NAME;
             $expected .= '|' . Resources::WRAP_TYPE_NAME;
             throw new InvalidArgumentTypeException($expected);
         }

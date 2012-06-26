@@ -27,7 +27,6 @@ use Tests\Framework\TestResources;
 use WindowsAzure\Common\Internal\Resources;
 use WindowsAzure\Common\Internal\ServicesBuilder;
 use WindowsAzure\Common\Configuration;
-use WindowsAzure\ServiceManagement\ServiceManagementSettings;
 use WindowsAzure\Common\Internal\InvalidArgumentTypeException;
 
 /**
@@ -49,7 +48,6 @@ class ServicesBuilderTest extends \PHPUnit_Framework_TestCase
      * @covers WindowsAzure\Common\Internal\ServicesBuilder::serializer
      * @covers WindowsAzure\Common\Internal\ServicesBuilder::queueAuthenticationScheme
      * @covers WindowsAzure\Common\Internal\ServicesBuilder::_addHeadersFilter
-     * @covers WindowsAzure\Common\Internal\ServicesBuilder::_validateConfig
      */
     public function testBuildForQueue()
     {
@@ -91,7 +89,6 @@ class ServicesBuilderTest extends \PHPUnit_Framework_TestCase
      * @covers WindowsAzure\Common\Internal\ServicesBuilder::atomSerializer
      * @covers WindowsAzure\Common\Internal\ServicesBuilder::tableAuthenticationScheme
      * @covers WindowsAzure\Common\Internal\ServicesBuilder::_addHeadersFilter
-     * @covers WindowsAzure\Common\Internal\ServicesBuilder::_validateConfig
      */
     public function testBuildForTable()
     {
@@ -110,57 +107,17 @@ class ServicesBuilderTest extends \PHPUnit_Framework_TestCase
      * @covers WindowsAzure\Common\Internal\ServicesBuilder::httpClient
      * @covers WindowsAzure\Common\Internal\ServicesBuilder::serializer
      * @covers WindowsAzure\Common\Internal\ServicesBuilder::_addHeadersFilter
-     * @covers WindowsAzure\Common\Internal\ServicesBuilder::_validateConfig
      */
     public function testBuildForServiceManagement()
     {
         // Setup
-        $config = new Configuration();
-        $config->setProperty(ServiceManagementSettings::CERTIFICATE_PATH, 'path');
-        $config->setProperty(ServiceManagementSettings::SUBSCRIPTION_ID, 'sub id');
-        $config->setProperty(ServiceManagementSettings::URI, 'uri');
         $builder = new ServicesBuilder();
         
         // Test
-        $serviceManagementRestProxy = $builder->createServiceManagementService($config);
+        $serviceManagementRestProxy = $builder->createServiceManagementService(TestResources::getServiceManagementConnectionString());
         
         // Assert
         $this->assertInstanceOf('WindowsAzure\ServiceManagement\Internal\IServiceManagement', $serviceManagementRestProxy);
-    }
-    
-    /**
-     * @covers WindowsAzure\Common\Internal\ServicesBuilder::createServiceManagementService
-     * @covers WindowsAzure\Common\Internal\ServicesBuilder::_validateConfig
-     * @covers WindowsAzure\Common\Internal\ServicesBuilder::_validateConfigSetting
-     */
-    public function testValidateConfigWithMissingServiceManagementSettingConfig()
-    {
-        $missingKeyMsg   = sprintf(Resources::MISSING_CONFIG_SETTING_KEY_MSG, 'ServiceManagementSettings::SUBSCRIPTION_ID', 'ServiceManagement');
-        $config = new Configuration();
-        $config->setProperty(ServiceManagementSettings::CERTIFICATE_PATH, 'path');
-        $config->setProperty(ServiceManagementSettings::URI, 'url');
-        $builder = new ServicesBuilder();
-        $this->setExpectedException('\InvalidArgumentException', $missingKeyMsg);
-        
-        $builder->createServiceManagementService($config);
-    }
-    
-    /**
-     * @covers WindowsAzure\Common\Internal\ServicesBuilder::createServiceManagementService
-     * @covers WindowsAzure\Common\Internal\ServicesBuilder::_validateConfig
-     * @covers WindowsAzure\Common\Internal\ServicesBuilder::_validateConfigSetting
-     */
-    public function testValidateConfigWithEmptyServiceManagementSettingConfig()
-    {
-        $missingValueMsg   = sprintf(Resources::MISSING_CONFIG_SETTING_VALUE_MSG, 'ServiceManagementSettings::SUBSCRIPTION_ID');
-        $config = new Configuration();
-        $config->setProperty(ServiceManagementSettings::CERTIFICATE_PATH, 'path');
-        $config->setProperty(ServiceManagementSettings::SUBSCRIPTION_ID, '');
-        $config->setProperty(ServiceManagementSettings::URI, 'url');
-        $builder = new ServicesBuilder();
-        $this->setExpectedException('\InvalidArgumentException', $missingValueMsg);
-        
-        $builder->createServiceManagementService($config);
     }
 }
 

@@ -27,9 +27,6 @@ use WindowsAzure\Common\Internal\Validate;
 use WindowsAzure\Common\Internal\Resources;
 use WindowsAzure\Common\Internal\InvalidArgumentTypeException;
 use WindowsAzure\Common\Internal\ServicesBuilder;
-use WindowsAzure\Queue\QueueSettings;
-use WindowsAzure\Blob\BlobSettings;
-use WindowsAzure\Table\TableSettings;
 
 /**
  * Contains configuration used to access azure storage accounts. 
