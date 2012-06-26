@@ -36,7 +36,7 @@ use WindowsAzure\Common\Internal\Resources;
  * @version   Release: @package_version@
  * @link      https://github.com/windowsazure\common\internal/azure-sdk-for-php
  */
-class ServiceSettings
+abstract class ServiceSettings
 {
     /**
      * @var boolean
@@ -48,7 +48,7 @@ class ServiceSettings
      * 
      * @var array
      */
-    protected static $validSettingKeys;
+    protected static $validSettingKeys = array();
     
     /**
      * Parses the connection string and then validate that the parsed keys belong to
@@ -268,6 +268,15 @@ class ServiceSettings
         
         return false;
     }
+    
+    /**
+     * Creates a ServiceSettings object from the given connection string.
+     * 
+     * @param string $connectionString The storage settings connection string.
+     * 
+     * @return ServiceSettings 
+     */
+    public abstract static function createFromConnectionString($connectionString);
 }
 
 ?>

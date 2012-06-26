@@ -28,7 +28,6 @@ spl_autoload_register(
       if ($classes === null) {
          $classes = array(
             'windowsazure\\blob\\blobrestproxy' => '/Blob/BlobRestProxy.php',
-            'windowsazure\\blob\\blobsettings' => '/Blob/BlobSettings.php',
             'windowsazure\\blob\\internal\\iblob' => '/Blob/Internal/IBlob.php',
             'windowsazure\\blob\\models\\accesscondition' => '/Blob/Models/AccessCondition.php',
             'windowsazure\\blob\\models\\accesspolicy' => '/Blob/Models/AccessPolicy.php',
@@ -120,6 +119,7 @@ spl_autoload_register(
             'windowsazure\\common\\internal\\restproxy' => '/Common/Internal/RestProxy.php',
             'windowsazure\\common\\internal\\serialization\\iserializer' => '/Common/Internal/Serialization/ISerializer.php',
             'windowsazure\\common\\internal\\serialization\\xmlserializer' => '/Common/Internal/Serialization/XmlSerializer.php',
+            'windowsazure\\common\\internal\\servicemanagementsettings' => '/Common/Internal/ServiceManagementSettings.php',
             'windowsazure\\common\\internal\\servicerestproxy' => '/Common/Internal/ServiceRestProxy.php',
             'windowsazure\\common\\internal\\servicesbuilder' => '/Common/Internal/ServicesBuilder.php',
             'windowsazure\\common\\internal\\servicesettings' => '/Common/Internal/ServiceSettings.php',
@@ -148,7 +148,6 @@ spl_autoload_register(
             'windowsazure\\queue\\models\\updatemessageresult' => '/Queue/Models/UpdateMessageResult.php',
             'windowsazure\\queue\\models\\windowsazurequeuemessage' => '/Queue/Models/WindowsAzureQueueMessage.php',
             'windowsazure\\queue\\queuerestproxy' => '/Queue/QueueRestProxy.php',
-            'windowsazure\\queue\\queuesettings' => '/Queue/QueueSettings.php',
             'windowsazure\\servicebus\\internal\\iservicebus' => '/ServiceBus/Internal/IServiceBus.php',
             'windowsazure\\servicebus\\internal\\iwrap' => '/ServiceBus/Internal/IWrap.php',
             'windowsazure\\servicebus\\internal\\wraptokenmanager' => '/ServiceBus/Internal/WrapTokenManager.php',
@@ -207,7 +206,6 @@ spl_autoload_register(
             'windowsazure\\servicemanagement\\models\\storageservice' => '/ServiceManagement/Models/StorageService.php',
             'windowsazure\\servicemanagement\\models\\updatestorageserviceoptions' => '/ServiceManagement/Models/UpdateStorageServiceOptions.php',
             'windowsazure\\servicemanagement\\servicemanagementrestproxy' => '/ServiceManagement/ServiceManagementRestProxy.php',
-            'windowsazure\\servicemanagement\\servicemanagementsettings' => '/ServiceManagement/ServiceManagementSettings.php',
             'windowsazure\\serviceruntime\\internal\\acquirecurrentstate' => '/ServiceRuntime/Internal/AcquireCurrentState.php',
             'windowsazure\\serviceruntime\\internal\\channelnotavailableexception' => '/ServiceRuntime/Internal/ChannelNotAvailableException.php',
             'windowsazure\\serviceruntime\\internal\\chunkedgoalstatedeserializer' => '/ServiceRuntime/Internal/ChunkedGoalStateDeserializer.php',
@@ -278,8 +276,7 @@ spl_autoload_register(
             'windowsazure\\table\\models\\querytablesresult' => '/Table/Models/QueryTablesResult.php',
             'windowsazure\\table\\models\\tableserviceoptions' => '/Table/Models/TableServiceOptions.php',
             'windowsazure\\table\\models\\updateentityresult' => '/Table/Models/UpdateEntityResult.php',
-            'windowsazure\\table\\tablerestproxy' => '/Table/TableRestProxy.php',
-            'windowsazure\\table\\tablesettings' => '/Table/TableSettings.php'
+            'windowsazure\\table\\tablerestproxy' => '/Table/TableRestProxy.php'
           );
       }
       $cn = strtolower($class);

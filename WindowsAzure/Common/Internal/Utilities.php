@@ -460,7 +460,6 @@ class Utilities
         
         return $ordered;
     }
-
 }
 
 ?>

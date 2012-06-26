@@ -72,24 +72,57 @@ class TestResources
         return $azureServiceConnectionString;
     }
     
+    public function getServiceManagementConnectionString()
+    {
+        $subscriptionId = self::serviceManagementSubscriptionId();
+        $certPath = self::serviceManagementCertificatePath();
+        $connectionString = "SubscriptionID=$subscriptionId;CertificatePath=$certPath";
+        
+        return $connectionString;
+    }
+    
     public static function accountName()
     {
-        return getenv('AZURE_STORAGE_ACCOUNT');
+        $name = getenv('AZURE_STORAGE_ACCOUNT');
+        
+        if (empty($name)) {
+            throw new \Exception('AZURE_STORAGE_ACCOUNT envionment variable is missing');
+        }
+        
+        return $name;
     }
     
     public static function accountKey()
     {
-        return getenv('AZURE_STORAGE_KEY');
+        $key = getenv('AZURE_STORAGE_KEY');
+        
+        if (empty($key)) {
+            throw new \Exception('AZURE_STORAGE_KEY envionment variable is missing');
+        }
+        
+        return $key;
     }
 
     public static function serviceManagementSubscriptionId()
     {
-        return getenv('SERVICE_MANAGEMENT_SUBSCRIPTION_ID');
+        $subscriptionId = getenv('SERVICE_MANAGEMENT_SUBSCRIPTION_ID');
+        
+        if (empty($subscriptionId)) {
+            throw new \Exception('SERVICE_MANAGEMENT_SUBSCRIPTION_ID envionment variable is missing');
+        }
+        
+        return $subscriptionId;
     }
     
     public static function serviceManagementCertificatePath()
     {
-        return getenv('SERVICE_MANAGEMENT_CERTIFICATE_PATH');
+        $path = getenv('SERVICE_MANAGEMENT_CERTIFICATE_PATH');
+        
+        if (empty($path)) {
+            throw new \Exception('SERVICE_MANAGEMENT_CERTIFICATE_PATH envionment variable is missing');
+        }
+        
+        return $path;
     }
 
     public static function serviceBusNamespace()

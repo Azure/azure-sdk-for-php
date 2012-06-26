@@ -24,8 +24,6 @@
 
 namespace Tests\Framework;
 use Tests\Framework\ServiceRestProxyTestBase;
-use WindowsAzure\Common\Configuration;
-use WindowsAzure\Blob\BlobSettings;
 use Tests\Framework\TestResources;
 use WindowsAzure\Blob\Models\CreateContainerOptions;
 use WindowsAzure\Blob\Models\ListContainersOptions;
