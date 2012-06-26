@@ -27,7 +27,6 @@ use WindowsAzure\Common\Configuration;
 use Tests\Framework\TestResources;
 use WindowsAzure\Common\Internal\Resources;
 use WindowsAzure\Common\Internal\InvalidArgumentTypeException;
-use WindowsAzure\Queue\QueueSettings;
 
 /**
  * Unit tests for Configuration class
