@@ -76,9 +76,11 @@ class BlobServiceIntegrationTest extends IntegrationTestBase
     private static $_creatableContainers;
     private static $_testContainers;
 
-    public static function setUpBeforeClass()
+    public function setUpContainers()
     {
-        parent::setUpBeforeClass();
+        if (self::$_testContainers !== null) {
+            return;
+        }
         // Setup container names array (list of container names used by
         // integration tests)
         self::$_testContainers = array();
@@ -101,22 +103,22 @@ class BlobServiceIntegrationTest extends IntegrationTestBase
         self::$_test_container_for_listing = self::$_testContainers[2];
 
         // Create all test containers and their content
-        $inst = new IntegrationTestBase();
-        $inst->createContainers(self::$_testContainers, self::$_testContainersPrefix);
+        $this->createContainers(self::$_testContainers, self::$_testContainersPrefix);
+    }
+
+    public function setUp()
+    {
+        parent::setUp();
+        $this->setUpContainers();
     }
 
     public static function tearDownAfterClass()
     {
         parent::tearDownAfterClass();
         $inst = new IntegrationTestBase();
+        $inst->setUp();
         $inst->deleteContainers(self::$_testContainers, self::$_testContainersPrefix);
         $inst->deleteContainers(self::$_creatableContainers,self::$_createableContainersPrefix);
-    }
-
-    private static function createService()
-    {
-        $tmp = new IntegrationTestBase();
-        return $tmp->restProxy;
     }
 
     /**

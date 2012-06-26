@@ -6,6 +6,7 @@ build/pdepend
 build/phpdox
 channel
 phpunit.xml
+phpunit.functional.xml
 ChannelManager.php
 cache.properties
 vendor
