@@ -316,7 +316,7 @@ class QueueServiceFunctionalTest extends FunctionalTestBase
             if (!is_null($options->getPrefix()) && $options->getPrefix() == QueueServiceFunctionalTestData::$nonExistQueuePrefix) {
                 $this->assertEquals(0, count($ret->getQueues()), 'when MaxResults=0 and Prefix=(\'' . $options->getPrefix() . '\'), then Queues->length');
             } else if (!is_null($options->getPrefix()) && $options->getPrefix() == QueueServiceFunctionalTestData::$testUniqueId) {
-                $this->assertEquals(count(QueueServiceFunctionalTestData::$TEST_QUEUE_NAMES), count($ret->getQueues()), 'when MaxResults=0 and Prefix=(\'' . $options->getPrefix() . '\'), then count Queues');
+                $this->assertEquals(count(QueueServiceFunctionalTestData::$testQueueNames), count($ret->getQueues()), 'when MaxResults=0 and Prefix=(\'' . $options->getPrefix() . '\'), then count Queues');
             } else {
                 // Don't know how many there should be
             }
@@ -327,7 +327,7 @@ class QueueServiceFunctionalTest extends FunctionalTestBase
                 $this->assertEquals(0, count($ret->getQueues()), 'when no next marker and Prefix=(\'' . $options->getPrefix() . '\'), then Queues->length');
             } else if (!is_null($options->getPrefix()) && $options->getPrefix() == QueueServiceFunctionalTestData::$testUniqueId) {
                 // Need to futz with the mod because you are allowed to get MaxResults items returned.
-                $this->assertEquals(count(QueueServiceFunctionalTestData::$TEST_QUEUE_NAMES) % $options->getMaxResults(), count($ret ->getQueues()) % $options->getMaxResults(), 'when no next marker and Prefix=(\'' . $options->getPrefix() . '\'), then Queues->length');
+                $this->assertEquals(count(QueueServiceFunctionalTestData::$testQueueNames) % $options->getMaxResults(), count($ret ->getQueues()) % $options->getMaxResults(), 'when no next marker and Prefix=(\'' . $options->getPrefix() . '\'), then Queues->length');
             } else {
                 // Don't know how many there should be
             }
@@ -405,7 +405,7 @@ class QueueServiceFunctionalTest extends FunctionalTestBase
             $opts = new ListQueuesOptions();
             $opts->setPrefix(QueueServiceFunctionalTestData::$testUniqueId);
             $qs = $this->restProxy->listQueues($opts);
-            $this->assertEquals(count($qs->getQueues()), (count(QueueServiceFunctionalTestData::$TEST_QUEUE_NAMES) + 1), 'After adding one, with Prefix=(\'' . QueueServiceFunctionalTestData::$testUniqueId . '\'), then Queues->length');
+            $this->assertEquals(count($qs->getQueues()), (count(QueueServiceFunctionalTestData::$testQueueNames) + 1), 'After adding one, with Prefix=(\'' . QueueServiceFunctionalTestData::$testUniqueId . '\'), then Queues->length');
 
             // Check the metadata on the queue
             $ret = $this->restProxy->getQueueMetadata($queue);
@@ -492,7 +492,7 @@ class QueueServiceFunctionalTest extends FunctionalTestBase
         $opts = new ListQueuesOptions();
         $opts->setPrefix(QueueServiceFunctionalTestData::$testUniqueId);
         $qs = $this->restProxy->listQueues($opts);
-        $this->assertEquals(count($qs->getQueues()), (count(QueueServiceFunctionalTestData::$TEST_QUEUE_NAMES) + 1), 'After adding one, with Prefix=(\'' . QueueServiceFunctionalTestData::$testUniqueId . '\'), then Queues->length');
+        $this->assertEquals(count($qs->getQueues()), (count(QueueServiceFunctionalTestData::$testQueueNames) + 1), 'After adding one, with Prefix=(\'' . QueueServiceFunctionalTestData::$testUniqueId . '\'), then Queues->length');
 
         $deleted = false;
         try {
@@ -516,7 +516,7 @@ class QueueServiceFunctionalTest extends FunctionalTestBase
             $opts = new ListQueuesOptions();
             $opts->setPrefix(QueueServiceFunctionalTestData::$testUniqueId);
             $qs = $this->restProxy->listQueues($opts);
-            $this->assertEquals(count($qs->getQueues()), count(QueueServiceFunctionalTestData::$TEST_QUEUE_NAMES), 'After adding then deleting one, with Prefix=(\'' . QueueServiceFunctionalTestData::$testUniqueId . '\'), then Queues->length');
+            $this->assertEquals(count($qs->getQueues()), count(QueueServiceFunctionalTestData::$testQueueNames), 'After adding then deleting one, with Prefix=(\'' . QueueServiceFunctionalTestData::$testUniqueId . '\'), then Queues->length');
 
             // Nothing else interesting to check for the options.
         } catch (ServiceException $e) {
@@ -783,7 +783,7 @@ class QueueServiceFunctionalTest extends FunctionalTestBase
     */
     public function testCreateMessageWithSmallTTL()
     {
-        $queue = QueueServiceFunctionalTestData::$TEST_QUEUE_NAMES;
+        $queue = QueueServiceFunctionalTestData::$testQueueNames;
         $queue = $queue[0];
         $this->restProxy->clearMessages($queue);
         $messageText = QueueServiceFunctionalTestData::getSimpleMessageText();
@@ -847,7 +847,7 @@ class QueueServiceFunctionalTest extends FunctionalTestBase
     private function createMessageWorker($messageText, $options)
     {
         self::println( 'Trying $options: ' . self::tmptostring($options));
-        $queue = QueueServiceFunctionalTestData::$TEST_QUEUE_NAMES;
+        $queue = QueueServiceFunctionalTestData::$testQueueNames;
         $queue = $queue[0];
         $this->restProxy->clearMessages($queue);
 
@@ -968,7 +968,7 @@ class QueueServiceFunctionalTest extends FunctionalTestBase
     {
         self::println( 'Trying $options: ' . self::tmptostring($options) .
                 ' and $visibilityTimeoutInSeconds: ' . self::tmptostring($visibilityTimeoutInSeconds));
-        $queue = QueueServiceFunctionalTestData::$TEST_QUEUE_NAMES;
+        $queue = QueueServiceFunctionalTestData::$testQueueNames;
         $queue = $queue[0];
         $this->restProxy->clearMessages($queue);
 
@@ -1069,7 +1069,7 @@ class QueueServiceFunctionalTest extends FunctionalTestBase
     private function deleteMessageWorker($options)
     {
         self::println( 'Trying $options: ' . self::tmptostring($options));
-        $queue = QueueServiceFunctionalTestData::$TEST_QUEUE_NAMES;
+        $queue = QueueServiceFunctionalTestData::$testQueueNames;
         $queue = $queue[0];
         $this->restProxy->clearMessages($queue);
 
@@ -1160,7 +1160,7 @@ class QueueServiceFunctionalTest extends FunctionalTestBase
     private function listMessagesWorker($options)
     {
         self::println( 'Trying $options: ' . self::tmptostring($options));
-        $queue = QueueServiceFunctionalTestData::$TEST_QUEUE_NAMES;
+        $queue = QueueServiceFunctionalTestData::$testQueueNames;
         $queue = $queue[0];
         $this->restProxy->clearMessages($queue);
 
@@ -1277,7 +1277,7 @@ class QueueServiceFunctionalTest extends FunctionalTestBase
     private function peekMessagesWorker($options)
     {
         self::println( 'Trying $options: ' . self::tmptostring($options));
-        $queue = QueueServiceFunctionalTestData::$TEST_QUEUE_NAMES;
+        $queue = QueueServiceFunctionalTestData::$testQueueNames;
         $queue = $queue[0];
         $this->restProxy->clearMessages($queue);
 
@@ -1365,7 +1365,7 @@ class QueueServiceFunctionalTest extends FunctionalTestBase
     {
         self::println( 'Trying $options: ' .
                 self::tmptostring($options));
-        $queue = QueueServiceFunctionalTestData::$TEST_QUEUE_NAMES;
+        $queue = QueueServiceFunctionalTestData::$testQueueNames;
         $queue = $queue[0];
         $this->restProxy->clearMessages($queue);
 

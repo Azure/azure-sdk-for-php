@@ -44,7 +44,7 @@ class FunctionalTestBase extends IntegrationTestBase
         $service = self::createService();
         TableServiceFunctionalTestData::setupData();
 
-        foreach(TableServiceFunctionalTestData::$TEST_TABLE_NAMES as $name)  {
+        foreach(TableServiceFunctionalTestData::$testTableNames as $name)  {
             self::println('Creating Table: ' . $name);
             $service->createTable($name);
         }
@@ -53,7 +53,7 @@ class FunctionalTestBase extends IntegrationTestBase
     public static function tearDownAfterClass()
     {
         $service = self::createService();
-        foreach(TableServiceFunctionalTestData::$TEST_TABLE_NAMES as $name)  {
+        foreach(TableServiceFunctionalTestData::$testTableNames as $name)  {
             try
             {
                 $service->deleteTable($name);
@@ -78,11 +78,11 @@ class FunctionalTestBase extends IntegrationTestBase
      */
     protected function clearTable($table)
     {
-        $index = array_search($table, TableServiceFunctionalTestData::$TEST_TABLE_NAMES);
+        $index = array_search($table, TableServiceFunctionalTestData::$testTableNames);
         if ($index !== false) {
             // This is a well-known table, so need to create a new one to replace it.
-            TableServiceFunctionalTestData::$TEST_TABLE_NAMES[$index] = TableServiceFunctionalTestData::getInterestingTableName();
-            $this->restProxy->createTable(TableServiceFunctionalTestData::$TEST_TABLE_NAMES[$index]);
+            TableServiceFunctionalTestData::$testTableNames[$index] = TableServiceFunctionalTestData::getInterestingTableName();
+            $this->restProxy->createTable(TableServiceFunctionalTestData::$testTableNames[$index]);
         }
 
         $this->restProxy->deleteTable($table);
@@ -90,8 +90,8 @@ class FunctionalTestBase extends IntegrationTestBase
 
     protected function getCleanTable()
     {
-        $this->clearTable(TableServiceFunctionalTestData::$TEST_TABLE_NAMES[0]);
-        return TableServiceFunctionalTestData::$TEST_TABLE_NAMES[0];
+        $this->clearTable(TableServiceFunctionalTestData::$testTableNames[0]);
+        return TableServiceFunctionalTestData::$testTableNames[0];
      }
 
     public static function println($msg)

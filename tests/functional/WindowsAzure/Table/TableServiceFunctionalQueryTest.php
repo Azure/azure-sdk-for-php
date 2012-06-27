@@ -43,7 +43,7 @@ class TableServiceFunctionalQueryTest extends FunctionalTestBase
     {
         parent::setUpBeforeClass();
 
-        $table = TableServiceFunctionalTestData::$TEST_TABLE_NAMES[0];
+        $table = TableServiceFunctionalTestData::$testTableNames[0];
         self::$entitiesInTable = self::getEntitiesToQueryOver();
         $baseWithRestProxy = new FunctionalTestBase();
         $parts = array();
@@ -128,7 +128,7 @@ class TableServiceFunctionalQueryTest extends FunctionalTestBase
         array_push($ret, $entity);
 
         $entity = self::getNewEntity();
-        $entity->addProperty('INT64', EdmType::INT64, strval(TableServiceFunctionalTestData::LongBigValue));
+        $entity->addProperty('INT64', EdmType::INT64, strval(TableServiceFunctionalTestData::LONG_BIG_VALUE));
         array_push($ret, $entity);
 
         $entity = self::getNewEntity();
@@ -534,7 +534,7 @@ class TableServiceFunctionalQueryTest extends FunctionalTestBase
     */
     private function queryEntitiesWorker($options)
     {
-        $table = TableServiceFunctionalTestData::$TEST_TABLE_NAMES[0];
+        $table = TableServiceFunctionalTestData::$testTableNames[0];
 
         try {
             $ret = (is_null($options) ? $this->restProxy->queryEntities($table) : $this->restProxy->queryEntities($table, $options));

@@ -55,12 +55,12 @@ use WindowsAzure\Table\Models\Filters\Filter;
 
 class OpType
 {
-    const deleteEntity          = 'deleteEntity';
-    const insertEntity          = 'insertEntity';
-    const insertOrMergeEntity   = 'insertOrMergeEntity';
-    const insertOrReplaceEntity = 'insertOrReplaceEntity';
-    const mergeEntity           = 'mergeEntity';
-    const updateEntity          = 'updateEntity';
+    const DELETE_ENTITY            = 'deleteEntity';
+    const INSERT_ENTITY            = 'insertEntity';
+    const INSERT_OR_MERGE_ENTITY   = 'insertOrMergeEntity';
+    const INSERT_OR_REPLACE_ENTITY = 'insertOrReplaceEntity';
+    const MERGE_ENTITY             = 'mergeEntity';
+    const UPDATE_ENTITY            = 'updateEntity';
     public static function values()
     {
         return array('deleteEntity', 'insertEntity', 'insertOrMergeEntity', 'insertOrReplaceEntity', 'mergeEntity', 'updateEntity');
@@ -69,10 +69,10 @@ class OpType
 
 class ConcurType
 {
-    const NoKeyMatch           = 'NoKeyMatch';
-    const KeyMatchNoEtag       = 'KeyMatchNoEtag';
-    const KeyMatchEtagMismatch = 'KeyMatchEtagMismatch';
-    const KeyMatchEtagMatch    = 'KeyMatchEtagMatch';
+    const NO_KEY_MATCH            = 'NoKeyMatch';
+    const KEY_MATCH_NO_ETAG       = 'KeyMatchNoEtag';
+    const KEY_MATCH_ETAG_MISMATCH = 'KeyMatchEtagMismatch';
+    const KEY_MATCH_ETAG_MATCH    = 'KeyMatchEtagMatch';
     public static function values()
     {
         return array('NoKeyMatch', 'KeyMatchNoEtag', 'KeyMatchEtagMismatch', 'KeyMatchEtagMatch');
@@ -310,7 +310,7 @@ class TableServiceFunctionalTest extends FunctionalTestBase
         }
 
         $expectedData = array();
-        foreach(TableServiceFunctionalTestData::$TEST_TABLE_NAMES as $s)  {
+        foreach(TableServiceFunctionalTestData::$testTableNames as $s)  {
             if (substr($s, 0, strlen($effectivePrefix)) == $effectivePrefix) {
                 $fte = new FakeTableInfoEntry();
                 $fte->TableName = $s;
@@ -1290,7 +1290,7 @@ class TableServiceFunctionalTest extends FunctionalTestBase
                 for ($i = 0; $i <= 1; $i++) {
                     foreach(TableServiceFunctionalTestData::getSimpleEntities(2) as $ent)  {
                         $options = ($i == 0 ? null : new TableServiceOptions());
-                        $this->crudWorker(OpType::deleteEntity, $concurType, $mutatePivot, $ent, $options);
+                        $this->crudWorker(OpType::DELETE_ENTITY, $concurType, $mutatePivot, $ent, $options);
                     }
                 }
             }
@@ -1312,7 +1312,7 @@ class TableServiceFunctionalTest extends FunctionalTestBase
                 for ($i = 0; $i <= 1; $i++) {
                     foreach(TableServiceFunctionalTestData::getSimpleEntities(2) as $ent)  {
                         $options = ($i == 0 ? null : new TableServiceOptions());
-                        $this->crudWorker(OpType::insertEntity, $concurType, $mutatePivot, $ent, $options);
+                        $this->crudWorker(OpType::INSERT_ENTITY, $concurType, $mutatePivot, $ent, $options);
                     }
                 }
             }
@@ -1336,7 +1336,7 @@ class TableServiceFunctionalTest extends FunctionalTestBase
                 for ($i = 0; $i <= 1; $i++) {
                     foreach(TableServiceFunctionalTestData::getSimpleEntities(2) as $ent)  {
                         $options = ($i == 0 ? null : new TableServiceOptions());
-                        $this->crudWorker(OpType::insertOrMergeEntity, $concurType, $mutatePivot, $ent, $options);
+                        $this->crudWorker(OpType::INSERT_OR_MERGE_ENTITY, $concurType, $mutatePivot, $ent, $options);
                     }
                 }
             }
@@ -1360,7 +1360,7 @@ class TableServiceFunctionalTest extends FunctionalTestBase
                 for ($i = 0; $i <= 1; $i++) {
                     foreach(TableServiceFunctionalTestData::getSimpleEntities(2) as $ent)  {
                         $options = ($i == 0 ? null : new TableServiceOptions());
-                        $this->crudWorker(OpType::insertOrReplaceEntity, $concurType, $mutatePivot, $ent, $options);
+                        $this->crudWorker(OpType::INSERT_OR_REPLACE_ENTITY, $concurType, $mutatePivot, $ent, $options);
                     }
                 }
             }
@@ -1382,7 +1382,7 @@ class TableServiceFunctionalTest extends FunctionalTestBase
                 for ($i = 0; $i <= 1; $i++) {
                     foreach(TableServiceFunctionalTestData::getSimpleEntities(2) as $ent)  {
                         $options = ($i == 0 ? null : new TableServiceOptions());
-                        $this->crudWorker(OpType::mergeEntity, $concurType, $mutatePivot, $ent, $options);
+                        $this->crudWorker(OpType::MERGE_ENTITY, $concurType, $mutatePivot, $ent, $options);
                     }
                 }
             }
@@ -1404,7 +1404,7 @@ class TableServiceFunctionalTest extends FunctionalTestBase
                 for ($i = 0; $i <= 1; $i++) {
                     foreach(TableServiceFunctionalTestData::getSimpleEntities(2) as $ent)  {
                         $options = ($i == 0 ? null : new TableServiceOptions());
-                        $this->crudWorker(OpType::updateEntity, $concurType, $mutatePivot, $ent, $options);
+                        $this->crudWorker(OpType::UPDATE_ENTITY, $concurType, $mutatePivot, $ent, $options);
                     }
                 }
             }
@@ -1452,7 +1452,7 @@ class TableServiceFunctionalTest extends FunctionalTestBase
     */
     public function testBatchPositiveFirstNoKeyMatch()
     {
-        $this->batchPositiveOuter(ConcurType::NoKeyMatch, 123);
+        $this->batchPositiveOuter(ConcurType::NO_KEY_MATCH, 123);
     }
 
     /**
@@ -1461,7 +1461,7 @@ class TableServiceFunctionalTest extends FunctionalTestBase
     */
     public function testBatchPositiveFirstKeyMatchNoEtag()
     {
-        $this->batchPositiveOuter(ConcurType::KeyMatchNoEtag, 234);
+        $this->batchPositiveOuter(ConcurType::KEY_MATCH_NO_ETAG, 234);
     }
 
     /**
@@ -1471,7 +1471,7 @@ class TableServiceFunctionalTest extends FunctionalTestBase
     public function testBatchPositiveFirstKeyMatchEtagMismatch()
     {
         $this->skipIfEmulated();
-        $this->batchPositiveOuter(ConcurType::KeyMatchEtagMismatch, 345);
+        $this->batchPositiveOuter(ConcurType::KEY_MATCH_ETAG_MISMATCH, 345);
     }
 
     /**
@@ -1480,7 +1480,7 @@ class TableServiceFunctionalTest extends FunctionalTestBase
     */
     public function testBatchPositiveFirstKeyMatchEtagMatch()
     {
-        $this->batchPositiveOuter(ConcurType::KeyMatchEtagMatch, 456);
+        $this->batchPositiveOuter(ConcurType::KEY_MATCH_ETAG_MATCH, 456);
     }
 
     /**
@@ -1619,8 +1619,8 @@ class TableServiceFunctionalTest extends FunctionalTestBase
                 continue;
             }
             if (Configuration::isEmulated() && (
-                    ($firstOpType == OpType::insertOrMergeEntity) ||
-                    ($firstOpType == OpType::insertOrReplaceEntity))) {
+                    ($firstOpType == OpType::INSERT_OR_MERGE_ENTITY) ||
+                    ($firstOpType == OpType::INSERT_OR_REPLACE_ENTITY))) {
                 // Emulator does not support these operations.
                 continue;
             }
@@ -1640,11 +1640,11 @@ class TableServiceFunctionalTest extends FunctionalTestBase
                     $config->concurType = $concurTypes[mt_rand(0, count($concurTypes))];
                     $config->opType = $opTypes[mt_rand(0, count($opTypes))];
                     if (Configuration::isEmulated()) {
-                        if ($config->opType == OpType::insertOrMergeEntity) {
-                            $config->opType = OpType::mergeEntity;
+                        if ($config->opType == OpType::INSERT_OR_MERGE_ENTITY) {
+                            $config->opType = OpType::MERGE_ENTITY;
                         }
-                        if ($config->opType == OpType::insertOrReplaceEntity) {
-                            $config->opType = OpType::updateEntity;
+                        if ($config->opType == OpType::INSERT_OR_REPLACE_ENTITY) {
+                            $config->opType = OpType::UPDATE_ENTITY;
                         }
                     }
                 }
@@ -1769,19 +1769,19 @@ class TableServiceFunctionalTest extends FunctionalTestBase
     {
         if (is_null($exptErr)) {
             switch ($opType) {
-                case OpType::insertEntity:
+                case OpType::INSERT_ENTITY:
                     $this->assertTrue($opResult instanceof InsertEntityResult,
                             'When opType=' . $opType . ' expect opResult instanceof InsertEntityResult');
                     break;
-                case OpType::deleteEntity:
+                case OpType::DELETE_ENTITY:
                     $this->assertTrue(
                             is_string($opResult),
                             'When opType=' . $opType . ' expect opResult is a string');
                     break;
-                case OpType::updateEntity:
-                case OpType::insertOrReplaceEntity:
-                case OpType::mergeEntity:
-                case OpType::insertOrMergeEntity:
+                case OpType::UPDATE_ENTITY:
+                case OpType::INSERT_OR_REPLACE_ENTITY:
+                case OpType::MERGE_ENTITY:
+                case OpType::INSERT_OR_MERGE_ENTITY:
                     $this->assertTrue($opResult instanceof UpdateEntityResult,
                             'When opType=' . $opType . ' expect opResult instanceof UpdateEntityResult');
                     break;
@@ -1794,26 +1794,26 @@ class TableServiceFunctionalTest extends FunctionalTestBase
     private function buildBatchOperations($table, $operations, $targetEnt, $opType, $concurType, $options)
     {
         switch ($opType) {
-            case OpType::deleteEntity:
-                if (is_null($options) && $concurType != ConcurType::KeyMatchEtagMismatch) {
+            case OpType::DELETE_ENTITY:
+                if (is_null($options) && $concurType != ConcurType::KEY_MATCH_ETAG_MISMATCH) {
                     $operations->addDeleteEntity($table, $targetEnt->getPartitionKey(), $targetEnt->getRowKey(), null);
                 } else {
                     $operations->addDeleteEntity($table, $targetEnt->getPartitionKey(), $targetEnt->getRowKey(), $targetEnt->getEtag());
                 }
                 break;
-            case OpType::insertEntity:
+            case OpType::INSERT_ENTITY:
                 $operations->addInsertEntity($table, $targetEnt);
                 break;
-            case OpType::insertOrMergeEntity:
+            case OpType::INSERT_OR_MERGE_ENTITY:
                 $operations->addInsertOrMergeEntity($table, $targetEnt);
                 break;
-            case OpType::insertOrReplaceEntity:
+            case OpType::INSERT_OR_REPLACE_ENTITY:
                 $operations->addInsertOrReplaceEntity($table, $targetEnt);
                 break;
-            case OpType::mergeEntity:
+            case OpType::MERGE_ENTITY:
                 $operations->addMergeEntity($table, $targetEnt);
                 break;
-            case OpType::updateEntity:
+            case OpType::UPDATE_ENTITY:
                 $operations->addUpdateEntity($table, $targetEnt);
                 break;
         }
@@ -1830,8 +1830,8 @@ class TableServiceFunctionalTest extends FunctionalTestBase
     private function executeCrudMethod($table, $targetEnt, $opType, $concurType, $options)
     {
         switch ($opType) {
-            case OpType::deleteEntity:
-                if (is_null($options) && $concurType != ConcurType::KeyMatchEtagMismatch) {
+            case OpType::DELETE_ENTITY:
+                if (is_null($options) && $concurType != ConcurType::KEY_MATCH_ETAG_MISMATCH) {
                     $this->restProxy->deleteEntity($table, $targetEnt->getPartitionKey(), $targetEnt->getRowKey());
                 } else {
                     $delOptions = new DeleteEntityOptions();
@@ -1839,35 +1839,35 @@ class TableServiceFunctionalTest extends FunctionalTestBase
                     $this->restProxy->deleteEntity($table, $targetEnt->getPartitionKey(), $targetEnt->getRowKey(), $delOptions);
                 }
                 break;
-            case OpType::insertEntity:
+            case OpType::INSERT_ENTITY:
                 if (is_null($options)) {
                     $this->restProxy->insertEntity($table, $targetEnt);
                 } else {
                     $this->restProxy->insertEntity($table, $targetEnt, $options);
                 }
                 break;
-            case OpType::insertOrMergeEntity:
+            case OpType::INSERT_OR_MERGE_ENTITY:
                 if (is_null($options)) {
                     $this->restProxy->insertOrMergeEntity($table, $targetEnt);
                 } else {
                     $this->restProxy->insertOrMergeEntity($table, $targetEnt, $options);
                 }
                 break;
-            case OpType::insertOrReplaceEntity:
+            case OpType::INSERT_OR_REPLACE_ENTITY:
                 if (is_null($options)) {
                     $this->restProxy->insertOrReplaceEntity($table, $targetEnt);
                 } else {
                     $this->restProxy->insertOrReplaceEntity($table, $targetEnt, $options);
                 }
                 break;
-            case OpType::mergeEntity:
+            case OpType::MERGE_ENTITY:
                 if (is_null($options)) {
                     $this->restProxy->mergeEntity($table, $targetEnt);
                 } else {
                     $this->restProxy->mergeEntity($table, $targetEnt, $options);
                 }
                 break;
-            case OpType::updateEntity:
+            case OpType::UPDATE_ENTITY:
                 if (is_null($options)) {
                     $this->restProxy->updateEntity($table, $targetEnt);
                 } else {
@@ -1887,11 +1887,11 @@ class TableServiceFunctionalTest extends FunctionalTestBase
             $ger = $this->restProxy->getEntity($table, $targetEnt->getPartitionKey(), $targetEnt->getRowKey());
             $entInTable = $ger->getEntity();
         } catch (ServiceException $e) {
-            $this->assertTrue(($opType == OpType::deleteEntity) && (404 == $e->getCode()), '404 is expected for deletes');
+            $this->assertTrue(($opType == OpType::DELETE_ENTITY) && (404 == $e->getCode()), '404 is expected for deletes');
         }
 
         switch ($opType) {
-            case OpType::deleteEntity:
+            case OpType::DELETE_ENTITY:
                 // Check that the entity really is gone
                 if ($expectedSuccess) {
                     $this->assertNull($entInTable, 'Entity from table');
@@ -1901,25 +1901,25 @@ class TableServiceFunctionalTest extends FunctionalTestBase
                     $this->verifyinsertEntityWorker($targetEnt, $entInTable);
                 }
                 break;
-            case OpType::insertEntity:
+            case OpType::INSERT_ENTITY:
                 // Check that the message matches
                 $this->assertNotNull($entInTable, 'Entity from table');
                 $this->verifyinsertEntityWorker($targetEnt, $entInTable);
                 break;
-            case OpType::insertOrMergeEntity:
+            case OpType::INSERT_OR_MERGE_ENTITY:
                 $this->assertNotNull($entInTable, 'Entity from table');
                 $this->verifymergeEntityWorker($initialEnt, $targetEnt, $entInTable);
                 break;
-            case OpType::insertOrReplaceEntity:
+            case OpType::INSERT_OR_REPLACE_ENTITY:
                 // Check that the message matches
                 $this->assertNotNull($entInTable, 'Entity from table');
                 $this->verifyinsertEntityWorker($targetEnt, $entInTable);
                 break;
-            case OpType::mergeEntity:
+            case OpType::MERGE_ENTITY:
                 $this->assertNotNull($entInTable, 'Entity from table');
                 $this->verifymergeEntityWorker($initialEnt, $targetEnt, $entInTable);
                 break;
-            case OpType::updateEntity:
+            case OpType::UPDATE_ENTITY:
                 // Check that the message matches
                 $this->assertNotNull($entInTable, 'Entity from table');
                 $this->verifyinsertEntityWorker($targetEnt, $entInTable);
@@ -1936,21 +1936,21 @@ class TableServiceFunctionalTest extends FunctionalTestBase
 
         // Update the entity/table state to get the requested concurrency type error.
         switch ($concurType) {
-            case ConcurType::NoKeyMatch:
+            case ConcurType::NO_KEY_MATCH:
                 // Mutate the keys to not match.
                 $targetEnt->setRowKey(TableServiceFunctionalTestData::getNewKey());
                 break;
-            case ConcurType::KeyMatchNoEtag:
+            case ConcurType::KEY_MATCH_NO_ETAG:
                 $targetEnt->setEtag(null);
                 break;
-            case ConcurType::KeyMatchEtagMismatch:
+            case ConcurType::KEY_MATCH_ETAG_MISMATCH:
                 $newEtag =  $this->restProxy->updateEntity($table, $initialEnt)->getEtag();
                 $initialEnt->setEtag($newEtag);
                 // Now the $targetEnt Etag will not match.
                 $this->assertTrue($targetEnt->getEtag() != $initialEnt->getEtag(), 'targetEnt->Etag(\'' . $targetEnt->getEtag() . '\') !=  updated->Etag(\'' . $initialEnt->getEtag() . '\')');
 
                 break;
-            case ConcurType::KeyMatchEtagMatch:
+            case ConcurType::KEY_MATCH_ETAG_MATCH:
                 // Don't worry here.
                 break;
         }
@@ -1967,25 +1967,25 @@ class TableServiceFunctionalTest extends FunctionalTestBase
         }
 
         switch ($concurType) {
-            case ConcurType::NoKeyMatch:
-                if (($opType == OpType::deleteEntity) || ($opType == OpType::mergeEntity) || ($opType == OpType::updateEntity)) {
+            case ConcurType::NO_KEY_MATCH:
+                if (($opType == OpType::DELETE_ENTITY) || ($opType == OpType::MERGE_ENTITY) || ($opType == OpType::UPDATE_ENTITY)) {
                     return 404;
                 }
                 break;
-            case ConcurType::KeyMatchNoEtag:
-                if ($opType == OpType::insertEntity) {
+            case ConcurType::KEY_MATCH_NO_ETAG:
+                if ($opType == OpType::INSERT_ENTITY) {
                     return 409;
                 }
                 break;
-            case ConcurType::KeyMatchEtagMatch:
-                if ($opType == OpType::insertEntity) {
+            case ConcurType::KEY_MATCH_ETAG_MATCH:
+                if ($opType == OpType::INSERT_ENTITY) {
                     return 409;
                 }
                 break;
-            case ConcurType::KeyMatchEtagMismatch:
-                if ($opType == OpType::insertEntity) {
+            case ConcurType::KEY_MATCH_ETAG_MISMATCH:
+                if ($opType == OpType::INSERT_ENTITY) {
                     return 409;
-                } else if ($opType == OpType::insertOrReplaceEntity || $opType == OpType::insertOrMergeEntity) {
+                } else if ($opType == OpType::INSERT_OR_REPLACE_ENTITY || $opType == OpType::INSERT_OR_MERGE_ENTITY) {
                     // If exists, just clobber.
                     return null;
                 }

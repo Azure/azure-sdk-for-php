@@ -63,7 +63,7 @@ class FunctionalTestBase extends IntegrationTestBase
             }
         }
 
-        foreach(BlobServiceFunctionalTestData::$TEST_CONTAINER_NAMES as $name)  {
+        foreach(BlobServiceFunctionalTestData::$testContainerNames as $name)  {
             $this->safeCreateContainer($name);
         }
 
@@ -74,7 +74,7 @@ class FunctionalTestBase extends IntegrationTestBase
 
     public function tearDown()
     {
-        foreach(BlobServiceFunctionalTestData::$TEST_CONTAINER_NAMES as $name)  {
+        foreach(BlobServiceFunctionalTestData::$testContainerNames as $name)  {
             $this->safeDeleteContainer($name);
         }
         parent::tearDown();

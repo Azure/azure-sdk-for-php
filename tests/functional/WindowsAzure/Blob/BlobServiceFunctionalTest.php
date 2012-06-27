@@ -324,7 +324,7 @@ class BlobServiceFunctionalTest extends FunctionalTestBase
             if (!is_null($options->getPrefix()) && $options->getPrefix() == (BlobServiceFunctionalTestData::$nonExistBlobPrefix)) {
                 $this->assertEquals(0, count($ret->getContainers()), 'when MaxResults=0 and Prefix=(\'' . $options->getPrefix() . '\'), then Blobs length');
             } else if (!is_null($options->getPrefix()) && $options->getPrefix() == (BlobServiceFunctionalTestData::$testUniqueId)) {
-                $this->assertEquals(count(BlobServiceFunctionalTestData::$TEST_CONTAINER_NAMES), count($ret->getContainers()), 'when MaxResults=0 and Prefix=(\'' . $options->getPrefix() . '\'), then Blobs length');
+                $this->assertEquals(count(BlobServiceFunctionalTestData::$testContainerNames), count($ret->getContainers()), 'when MaxResults=0 and Prefix=(\'' . $options->getPrefix() . '\'), then Blobs length');
             } else {
                 // Do not know how many there should be
             }
@@ -335,7 +335,7 @@ class BlobServiceFunctionalTest extends FunctionalTestBase
                 $this->assertEquals(0, count($ret->getContainers()), 'when no next marker and Prefix=(\'' . $options->getPrefix() . '\'), then Blobs length');
             } else if (BlobServiceFunctionalTestData::$testUniqueId ==$options->getPrefix()) {
                 // Need to futz with the mod because you are allowed to get MaxResults items returned.
-                $expectedCount = count(BlobServiceFunctionalTestData::$TEST_CONTAINER_NAMES) % $options->getMaxResults();
+                $expectedCount = count(BlobServiceFunctionalTestData::$testContainerNames) % $options->getMaxResults();
                 if (!Configuration::isEmulated()) {
                     $expectedCount += 1;
                 }
@@ -417,7 +417,7 @@ class BlobServiceFunctionalTest extends FunctionalTestBase
             $opts = new ListContainersOptions();
             $opts->setPrefix(BlobServiceFunctionalTestData::$testUniqueId);
             $qs = $this->restProxy->listContainers($opts);
-            $this->assertEquals(count($qs->getContainers()), count(BlobServiceFunctionalTestData::$TEST_CONTAINER_NAMES) + 1, 'After adding one, with Prefix=(\'' . BlobServiceFunctionalTestData::$testUniqueId . '\'), then Containers length');
+            $this->assertEquals(count($qs->getContainers()), count(BlobServiceFunctionalTestData::$testContainerNames) + 1, 'After adding one, with Prefix=(\'' . BlobServiceFunctionalTestData::$testUniqueId . '\'), then Containers length');
 
             // Check the metadata on the container
             $ret = $this->restProxy->getContainerMetadata($container);
@@ -500,7 +500,7 @@ class BlobServiceFunctionalTest extends FunctionalTestBase
         $qs = $this->restProxy->listContainers($opts);
         $this->assertEquals(
                 count($qs->getContainers()),
-                count(BlobServiceFunctionalTestData::$TEST_CONTAINER_NAMES) + 1,
+                count(BlobServiceFunctionalTestData::$testContainerNames) + 1,
                 'After adding one, with Prefix=(\'' . BlobServiceFunctionalTestData::$testUniqueId . '\'), then Containers length');
 
         $deleted = false;
@@ -531,7 +531,7 @@ class BlobServiceFunctionalTest extends FunctionalTestBase
             $qs = $this->restProxy->listContainers($opts);
             $this->assertEquals(
                     count($qs->getContainers()),
-                    count(BlobServiceFunctionalTestData::$TEST_CONTAINER_NAMES),
+                    count(BlobServiceFunctionalTestData::$testContainerNames),
                     'After adding then deleting one, with Prefix=(\'' . BlobServiceFunctionalTestData::$testUniqueId . '\'), then Containers length');
 
             // Nothing else interesting to check for the $options.

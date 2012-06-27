@@ -216,7 +216,7 @@ class QueueServiceFunctionalParameterTest extends FunctionalTestBase
     */
     public function testSetQueueMetadataNullMetadata()
     {
-        $queue = QueueServiceFunctionalTestData::$TEST_QUEUE_NAMES[0];
+        $queue = QueueServiceFunctionalTestData::$testQueueNames[0];
         $this->restProxy->setQueueMetadata($queue, null);
         $this->assertTrue(true, 'Should just work');
     }
@@ -226,7 +226,7 @@ class QueueServiceFunctionalParameterTest extends FunctionalTestBase
     */
     public function testSetQueueMetadataEmptyMetadata()
     {
-        $queue = QueueServiceFunctionalTestData::$TEST_QUEUE_NAMES[0];
+        $queue = QueueServiceFunctionalTestData::$testQueueNames[0];
         $this->restProxy->setQueueMetadata($queue, array());
         $this->assertTrue(true, 'Should just work');
     }
@@ -236,7 +236,7 @@ class QueueServiceFunctionalParameterTest extends FunctionalTestBase
     */
     public function testSetQueueMetadataNullOptions()
     {
-        $queue = QueueServiceFunctionalTestData::$TEST_QUEUE_NAMES[0];
+        $queue = QueueServiceFunctionalTestData::$testQueueNames[0];
         $this->restProxy->setQueueMetadata($queue, array(), null);
         $this->assertTrue(true, 'Should just work');
     }
@@ -247,7 +247,7 @@ class QueueServiceFunctionalParameterTest extends FunctionalTestBase
     */
     public function testCreateMessageQueueNull()
     {
-        $queue = QueueServiceFunctionalTestData::$TEST_QUEUE_NAMES[0];
+        $queue = QueueServiceFunctionalTestData::$testQueueNames[0];
         try {
             $this->restProxy->createMessage(null, null);
             $this->fail('Expect null name to throw');
@@ -265,7 +265,7 @@ class QueueServiceFunctionalParameterTest extends FunctionalTestBase
     */
     public function testCreateMessageNull()
     {
-        $queue = QueueServiceFunctionalTestData::$TEST_QUEUE_NAMES[0];
+        $queue = QueueServiceFunctionalTestData::$testQueueNames[0];
         $this->restProxy->createMessage($queue, null);
         $this->restProxy->clearMessages($queue);
         $this->assertTrue(true, 'Should just work');
@@ -277,7 +277,7 @@ class QueueServiceFunctionalParameterTest extends FunctionalTestBase
     */
     public function testCreateMessageBothMessageAndOptionsNull()
     {
-        $queue = QueueServiceFunctionalTestData::$TEST_QUEUE_NAMES[0];
+        $queue = QueueServiceFunctionalTestData::$testQueueNames[0];
         $this->restProxy->createMessage($queue, null, null);
         $this->restProxy->clearMessages($queue);
         $this->assertTrue(true, 'Should just work');
@@ -289,7 +289,7 @@ class QueueServiceFunctionalParameterTest extends FunctionalTestBase
     */
     public function testCreateMessageMessageNull()
     {
-        $queue = QueueServiceFunctionalTestData::$TEST_QUEUE_NAMES[0];
+        $queue = QueueServiceFunctionalTestData::$testQueueNames[0];
         $this->restProxy->createMessage($queue, null, QueueServiceFunctionalTestData::getSimpleCreateMessageOptions());
         $this->restProxy->clearMessages($queue);
         $this->assertTrue(true, 'Should just work');
@@ -301,7 +301,7 @@ class QueueServiceFunctionalParameterTest extends FunctionalTestBase
     */
     public function testCreateMessageOptionsNull()
     {
-        $queue = QueueServiceFunctionalTestData::$TEST_QUEUE_NAMES[0];
+        $queue = QueueServiceFunctionalTestData::$testQueueNames[0];
         $this->restProxy->createMessage($queue, QueueServiceFunctionalTestData::getSimpleMessageText(), null);
         $this->restProxy->clearMessages($queue);
         $this->assertTrue(true, 'Should just work');
@@ -352,7 +352,7 @@ class QueueServiceFunctionalParameterTest extends FunctionalTestBase
     */
     public function testUpdateMessageMessageIdNull()
     {
-        $queue = QueueServiceFunctionalTestData::$TEST_QUEUE_NAMES[0];
+        $queue = QueueServiceFunctionalTestData::$testQueueNames[0];
         $messageId = null;
         $popReceipt = 'abc';
         $messageText = 'abc';
@@ -372,7 +372,7 @@ class QueueServiceFunctionalParameterTest extends FunctionalTestBase
     */
     public function testUpdateMessageMessageIdEmpty()
     {
-        $queue = QueueServiceFunctionalTestData::$TEST_QUEUE_NAMES[0];
+        $queue = QueueServiceFunctionalTestData::$testQueueNames[0];
         $messageId = '';
         $popReceipt = 'abc';
         $messageText = 'abc';
@@ -392,7 +392,7 @@ class QueueServiceFunctionalParameterTest extends FunctionalTestBase
     */
     public function testUpdateMessagePopReceiptNull()
     {
-        $queue = QueueServiceFunctionalTestData::$TEST_QUEUE_NAMES[0];
+        $queue = QueueServiceFunctionalTestData::$testQueueNames[0];
         $messageId = 'abc';
         $popReceipt = null;
         $messageText = 'abc';
@@ -412,7 +412,7 @@ class QueueServiceFunctionalParameterTest extends FunctionalTestBase
     */
     public function testUpdateMessagePopReceiptEmpty()
     {
-        $queue = QueueServiceFunctionalTestData::$TEST_QUEUE_NAMES[0];
+        $queue = QueueServiceFunctionalTestData::$testQueueNames[0];
         $messageId = 'abc';
         $popReceipt = '';
         $messageText = 'abc';
@@ -432,7 +432,7 @@ class QueueServiceFunctionalParameterTest extends FunctionalTestBase
     */
     public function testUpdateMessageMessageTextNull()
     {
-        $queue = QueueServiceFunctionalTestData::$TEST_QUEUE_NAMES[0];
+        $queue = QueueServiceFunctionalTestData::$testQueueNames[0];
         $messageId = 'abc';
         $popReceipt = 'abc';
         $messageText = null;
@@ -452,7 +452,7 @@ class QueueServiceFunctionalParameterTest extends FunctionalTestBase
     */
     public function testUpdateMessageMessageTextEmpty()
     {
-        $queue = QueueServiceFunctionalTestData::$TEST_QUEUE_NAMES[0];
+        $queue = QueueServiceFunctionalTestData::$testQueueNames[0];
         $messageId = 'abc';
         $popReceipt = 'abc';
         $messageText = '';
@@ -472,7 +472,7 @@ class QueueServiceFunctionalParameterTest extends FunctionalTestBase
     */
     public function testUpdateMessageOptionsNull()
     {
-        $queue = QueueServiceFunctionalTestData::$TEST_QUEUE_NAMES[0];
+        $queue = QueueServiceFunctionalTestData::$testQueueNames[0];
         $messageId = 'abc';
         $popReceipt = 'abc';
         $messageText = 'abc';
@@ -492,7 +492,7 @@ class QueueServiceFunctionalParameterTest extends FunctionalTestBase
     */
     public function testUpdateMessageVisibilityTimeout0()
     {
-        $queue = QueueServiceFunctionalTestData::$TEST_QUEUE_NAMES[0];
+        $queue = QueueServiceFunctionalTestData::$testQueueNames[0];
         $messageId = 'abc';
         $popReceipt = 'abc';
         $messageText = 'abc';
@@ -514,7 +514,7 @@ class QueueServiceFunctionalParameterTest extends FunctionalTestBase
     */
     public function testUpdateMessageVisibilityTimeoutNull()
     {
-        $queue = QueueServiceFunctionalTestData::$TEST_QUEUE_NAMES[0];
+        $queue = QueueServiceFunctionalTestData::$testQueueNames[0];
         $messageId = 'abc';
         $popReceipt = 'abc';
         $messageText = 'abc';

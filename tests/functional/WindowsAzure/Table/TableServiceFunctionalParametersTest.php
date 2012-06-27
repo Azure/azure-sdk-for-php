@@ -183,7 +183,7 @@ class TableServiceFunctionalParametersTest extends FunctionalTestBase
     */
     public function testInsertEntityEntityNull()
     {
-        $table = TableServiceFunctionalTestData::$TEST_TABLE_NAMES[0];
+        $table = TableServiceFunctionalTestData::$testTableNames[0];
 
         try {
             $this->restProxy->insertEntity($table, null);
@@ -200,7 +200,7 @@ class TableServiceFunctionalParametersTest extends FunctionalTestBase
     */
     public function testInsertEntityTableAndEntityNull()
     {
-        $table = TableServiceFunctionalTestData::$TEST_TABLE_NAMES[0];
+        $table = TableServiceFunctionalTestData::$testTableNames[0];
 
         try {
             $this->restProxy->insertEntity(null, null);
@@ -217,7 +217,7 @@ class TableServiceFunctionalParametersTest extends FunctionalTestBase
     */
     public function testInsertEntityTableNull()
     {
-        $table = TableServiceFunctionalTestData::$TEST_TABLE_NAMES[0];
+        $table = TableServiceFunctionalTestData::$testTableNames[0];
 
         try {
             $this->restProxy->insertEntity(null, new Entity());
@@ -234,7 +234,7 @@ class TableServiceFunctionalParametersTest extends FunctionalTestBase
     */
     public function testInsertEntityEntityAndOptionsNull()
     {
-        $table = TableServiceFunctionalTestData::$TEST_TABLE_NAMES[0];
+        $table = TableServiceFunctionalTestData::$testTableNames[0];
 
         try {
             $this->restProxy->insertEntity($table, null, null);
@@ -251,7 +251,7 @@ class TableServiceFunctionalParametersTest extends FunctionalTestBase
     */
     public function testInsertEntityEntityNullWithOptions()
     {
-        $table = TableServiceFunctionalTestData::$TEST_TABLE_NAMES[0];
+        $table = TableServiceFunctionalTestData::$testTableNames[0];
 
         try {
             $this->restProxy->insertEntity($table, null, TableServiceFunctionalTestData::getSimpleinsertEntityOptions());
@@ -268,7 +268,7 @@ class TableServiceFunctionalParametersTest extends FunctionalTestBase
     */
     public function testInsertEntityOptionsNull()
     {
-        $table = TableServiceFunctionalTestData::$TEST_TABLE_NAMES[0];
+        $table = TableServiceFunctionalTestData::$testTableNames[0];
 
         $this->restProxy->insertEntity($table, TableServiceFunctionalTestData::getSimpleEntity(), null);
         $this->clearTable($table);
@@ -280,7 +280,7 @@ class TableServiceFunctionalParametersTest extends FunctionalTestBase
     */
     public function testInsertEntityEmptyPartitionKey()
     {
-        $table = TableServiceFunctionalTestData::$TEST_TABLE_NAMES[0];
+        $table = TableServiceFunctionalTestData::$testTableNames[0];
 
         $e = new Entity();
         $e->setPartitionKey('normalRowKey');
@@ -295,7 +295,7 @@ class TableServiceFunctionalParametersTest extends FunctionalTestBase
     */
     public function testInsertEntityEmptyRowKey()
     {
-        $table = TableServiceFunctionalTestData::$TEST_TABLE_NAMES[0];
+        $table = TableServiceFunctionalTestData::$testTableNames[0];
 
         $e = new Entity();
         $e->setPartitionKey('normalPartitionKey');
@@ -310,7 +310,7 @@ class TableServiceFunctionalParametersTest extends FunctionalTestBase
     */
     public function testInsertStringWithAllAsciiCharacters()
     {
-        $table = TableServiceFunctionalTestData::$TEST_TABLE_NAMES[0];
+        $table = TableServiceFunctionalTestData::$testTableNames[0];
 
         $e = new Entity();
         $e->setPartitionKey('foo');
@@ -353,7 +353,7 @@ class TableServiceFunctionalParametersTest extends FunctionalTestBase
     */
     public function testGetEntityPartKeyNull()
     {
-        $table = TableServiceFunctionalTestData::$TEST_TABLE_NAMES[0];
+        $table = TableServiceFunctionalTestData::$testTableNames[0];
 
         try {
             $this->restProxy->getEntity($table, null, TableServiceFunctionalTestData::getNewKey());
@@ -370,7 +370,7 @@ class TableServiceFunctionalParametersTest extends FunctionalTestBase
     */
     public function testGetEntityRowKeyNull()
     {
-        $table = TableServiceFunctionalTestData::$TEST_TABLE_NAMES[0];
+        $table = TableServiceFunctionalTestData::$testTableNames[0];
 
         try {
             $this->restProxy->getEntity($table, TableServiceFunctionalTestData::getNewKey(), null);
@@ -387,7 +387,7 @@ class TableServiceFunctionalParametersTest extends FunctionalTestBase
     */
     public function testGetEntityKeysNull()
     {
-        $table = TableServiceFunctionalTestData::$TEST_TABLE_NAMES[0];
+        $table = TableServiceFunctionalTestData::$testTableNames[0];
 
         try {
             $this->restProxy->getEntity($table, null, null);
@@ -404,7 +404,7 @@ class TableServiceFunctionalParametersTest extends FunctionalTestBase
     */
     public function testGetEntityTableAndKeysNull()
     {
-        $table = TableServiceFunctionalTestData::$TEST_TABLE_NAMES[0];
+        $table = TableServiceFunctionalTestData::$testTableNames[0];
 
         try {
             $this->restProxy->getEntity(null, null, null);
@@ -421,7 +421,7 @@ class TableServiceFunctionalParametersTest extends FunctionalTestBase
     */
     public function testGetEntityTableNull()
     {
-        $table = TableServiceFunctionalTestData::$TEST_TABLE_NAMES[0];
+        $table = TableServiceFunctionalTestData::$testTableNames[0];
 
         try {
             $this->restProxy->getEntity(null, TableServiceFunctionalTestData::getNewKey(), TableServiceFunctionalTestData::getNewKey());
@@ -438,7 +438,7 @@ class TableServiceFunctionalParametersTest extends FunctionalTestBase
     */
     public function testGetEntityKeysAndOptionsNull()
     {
-        $table = TableServiceFunctionalTestData::$TEST_TABLE_NAMES[0];
+        $table = TableServiceFunctionalTestData::$testTableNames[0];
 
         try {
             $this->restProxy->getEntity($table, null, null, null);
@@ -456,7 +456,7 @@ class TableServiceFunctionalParametersTest extends FunctionalTestBase
     */
     public function testGetEntityKeysNullWithOptions()
     {
-        $table = TableServiceFunctionalTestData::$TEST_TABLE_NAMES[0];
+        $table = TableServiceFunctionalTestData::$testTableNames[0];
         $ent = TableServiceFunctionalTestData::getSimpleEntity();
 
         try {
@@ -476,7 +476,7 @@ class TableServiceFunctionalParametersTest extends FunctionalTestBase
     */
     public function testGetEntityOptionsNull()
     {
-        $table = TableServiceFunctionalTestData::$TEST_TABLE_NAMES[0];
+        $table = TableServiceFunctionalTestData::$testTableNames[0];
         $ent = TableServiceFunctionalTestData::getSimpleEntity();
 
         $this->restProxy->insertEntity($table, $ent);
@@ -490,7 +490,7 @@ class TableServiceFunctionalParametersTest extends FunctionalTestBase
     */
     public function testDeleteEntityPartKeyNull()
     {
-        $table = TableServiceFunctionalTestData::$TEST_TABLE_NAMES[0];
+        $table = TableServiceFunctionalTestData::$testTableNames[0];
 
         try {
             $this->restProxy->deleteEntity($table, null, TableServiceFunctionalTestData::getNewKey());
@@ -507,7 +507,7 @@ class TableServiceFunctionalParametersTest extends FunctionalTestBase
     */
     public function testDeleteEntityRowKeyNull()
     {
-        $table = TableServiceFunctionalTestData::$TEST_TABLE_NAMES[0];
+        $table = TableServiceFunctionalTestData::$testTableNames[0];
 
         try {
             $this->restProxy->deleteEntity($table, TableServiceFunctionalTestData::getNewKey(), null);
@@ -524,7 +524,7 @@ class TableServiceFunctionalParametersTest extends FunctionalTestBase
     */
     public function testDeleteEntityKeysNull()
     {
-        $table = TableServiceFunctionalTestData::$TEST_TABLE_NAMES[0];
+        $table = TableServiceFunctionalTestData::$testTableNames[0];
 
         try {
             $this->restProxy->deleteEntity($table, null, null);
@@ -541,7 +541,7 @@ class TableServiceFunctionalParametersTest extends FunctionalTestBase
     */
     public function testDeleteEntityTableAndKeysNull()
     {
-        $table = TableServiceFunctionalTestData::$TEST_TABLE_NAMES[0];
+        $table = TableServiceFunctionalTestData::$testTableNames[0];
 
         try {
             $this->restProxy->deleteEntity(null, null, null);
@@ -558,7 +558,7 @@ class TableServiceFunctionalParametersTest extends FunctionalTestBase
     */
     public function testDeleteEntityTableNull()
     {
-        $table = TableServiceFunctionalTestData::$TEST_TABLE_NAMES[0];
+        $table = TableServiceFunctionalTestData::$testTableNames[0];
 
         try {
             $this->restProxy->deleteEntity(null, TableServiceFunctionalTestData::getNewKey(), TableServiceFunctionalTestData::getNewKey());
@@ -575,7 +575,7 @@ class TableServiceFunctionalParametersTest extends FunctionalTestBase
     */
     public function testDeleteEntityKeysAndOptionsNull()
     {
-        $table = TableServiceFunctionalTestData::$TEST_TABLE_NAMES[0];
+        $table = TableServiceFunctionalTestData::$testTableNames[0];
 
         try {
             $this->restProxy->deleteEntity($table, null, null, null);
@@ -593,7 +593,7 @@ class TableServiceFunctionalParametersTest extends FunctionalTestBase
     */
     public function testDeleteEntityKeysNullWithOptions()
     {
-        $table = TableServiceFunctionalTestData::$TEST_TABLE_NAMES[0];
+        $table = TableServiceFunctionalTestData::$testTableNames[0];
         $ent = TableServiceFunctionalTestData::getSimpleEntity();
 
         try {
@@ -613,7 +613,7 @@ class TableServiceFunctionalParametersTest extends FunctionalTestBase
     */
     public function testDeleteEntityOptionsNull()
     {
-        $table = TableServiceFunctionalTestData::$TEST_TABLE_NAMES[0];
+        $table = TableServiceFunctionalTestData::$testTableNames[0];
         $ent = TableServiceFunctionalTestData::getSimpleEntity();
 
         $this->restProxy->insertEntity($table, $ent);
@@ -641,7 +641,7 @@ class TableServiceFunctionalParametersTest extends FunctionalTestBase
         // * Unicode
         // These need to be properly encoded when passed on the URL, else there will be trouble
 
-        $table = TableServiceFunctionalTestData::$TEST_TABLE_NAMES[0];
+        $table = TableServiceFunctionalTestData::$testTableNames[0];
 
         $e = new Entity();
         $e->setPartitionKey('partition\'Key\'');
@@ -695,7 +695,7 @@ class TableServiceFunctionalParametersTest extends FunctionalTestBase
         // Unicode
         // These need to be properly encoded when passed on the URL, else there will be trouble
 
-        $table = TableServiceFunctionalTestData::$TEST_TABLE_NAMES[0];
+        $table = TableServiceFunctionalTestData::$testTableNames[0];
 
         $e = new Entity();
         $e->setRowKey('row\'Key\'');
@@ -735,7 +735,7 @@ class TableServiceFunctionalParametersTest extends FunctionalTestBase
     */
     public function testMergeEntityEntityNull()
     {
-        $table = TableServiceFunctionalTestData::$TEST_TABLE_NAMES[0];
+        $table = TableServiceFunctionalTestData::$testTableNames[0];
 
         try {
             $this->restProxy->mergeEntity($table, null);
@@ -752,7 +752,7 @@ class TableServiceFunctionalParametersTest extends FunctionalTestBase
     */
     public function testMergeEntityTableAndEntityNull()
     {
-        $table = TableServiceFunctionalTestData::$TEST_TABLE_NAMES[0];
+        $table = TableServiceFunctionalTestData::$testTableNames[0];
 
         try {
             $this->restProxy->mergeEntity(null, null);
@@ -769,7 +769,7 @@ class TableServiceFunctionalParametersTest extends FunctionalTestBase
     */
     public function testMergeEntityTableNull()
     {
-        $table = TableServiceFunctionalTestData::$TEST_TABLE_NAMES[0];
+        $table = TableServiceFunctionalTestData::$testTableNames[0];
 
         try {
             $this->restProxy->mergeEntity(null, TableServiceFunctionalTestData::getSimpleEntity());
@@ -786,7 +786,7 @@ class TableServiceFunctionalParametersTest extends FunctionalTestBase
     */
     public function testMergeEntityEntityAndOptionsNull()
     {
-        $table = TableServiceFunctionalTestData::$TEST_TABLE_NAMES[0];
+        $table = TableServiceFunctionalTestData::$testTableNames[0];
 
         try {
             $this->restProxy->mergeEntity($table, null, null);
@@ -803,7 +803,7 @@ class TableServiceFunctionalParametersTest extends FunctionalTestBase
     */
     public function testMergeEntityEntityNullWithOptions()
     {
-        $table = TableServiceFunctionalTestData::$TEST_TABLE_NAMES[0];
+        $table = TableServiceFunctionalTestData::$testTableNames[0];
 
         try {
             $this->restProxy->mergeEntity($table, null, TableServiceFunctionalTestData::getSimpleinsertEntityOptions());
@@ -820,7 +820,7 @@ class TableServiceFunctionalParametersTest extends FunctionalTestBase
     */
     public function testMergeEntityOptionsNull()
     {
-        $table = TableServiceFunctionalTestData::$TEST_TABLE_NAMES[0];
+        $table = TableServiceFunctionalTestData::$testTableNames[0];
 
         try {
             $this->restProxy->mergeEntity($table, TableServiceFunctionalTestData::getSimpleEntity(), null);
@@ -836,7 +836,7 @@ class TableServiceFunctionalParametersTest extends FunctionalTestBase
     */
     public function testUpdateEntityEntityNull()
     {
-        $table = TableServiceFunctionalTestData::$TEST_TABLE_NAMES[0];
+        $table = TableServiceFunctionalTestData::$testTableNames[0];
 
         try {
             $this->restProxy->updateEntity($table, null);
@@ -853,7 +853,7 @@ class TableServiceFunctionalParametersTest extends FunctionalTestBase
     */
     public function testUpdateEntityTableAndEntityNull()
     {
-        $table = TableServiceFunctionalTestData::$TEST_TABLE_NAMES[0];
+        $table = TableServiceFunctionalTestData::$testTableNames[0];
 
         try {
             $this->restProxy->updateEntity(null, null);
@@ -870,7 +870,7 @@ class TableServiceFunctionalParametersTest extends FunctionalTestBase
     */
     public function testUpdateEntityTableNull()
     {
-        $table = TableServiceFunctionalTestData::$TEST_TABLE_NAMES[0];
+        $table = TableServiceFunctionalTestData::$testTableNames[0];
 
         try {
             $this->restProxy->updateEntity(null, TableServiceFunctionalTestData::getSimpleEntity());
@@ -887,7 +887,7 @@ class TableServiceFunctionalParametersTest extends FunctionalTestBase
     */
     public function testUpdateEntityEntityAndOptionsNull()
     {
-        $table = TableServiceFunctionalTestData::$TEST_TABLE_NAMES[0];
+        $table = TableServiceFunctionalTestData::$testTableNames[0];
 
         try {
             $this->restProxy->updateEntity($table, null, null);
@@ -904,7 +904,7 @@ class TableServiceFunctionalParametersTest extends FunctionalTestBase
     */
     public function testUpdateEntityEntityNullWithOptions()
     {
-        $table = TableServiceFunctionalTestData::$TEST_TABLE_NAMES[0];
+        $table = TableServiceFunctionalTestData::$testTableNames[0];
 
         try {
             $this->restProxy->updateEntity($table, null, TableServiceFunctionalTestData::getSimpleinsertEntityOptions());
@@ -921,7 +921,7 @@ class TableServiceFunctionalParametersTest extends FunctionalTestBase
     */
     public function testUpdateEntityOptionsNull()
     {
-        $table = TableServiceFunctionalTestData::$TEST_TABLE_NAMES[0];
+        $table = TableServiceFunctionalTestData::$testTableNames[0];
 
         try {
             $this->restProxy->updateEntity($table, TableServiceFunctionalTestData::getSimpleEntity(), null);
@@ -937,7 +937,7 @@ class TableServiceFunctionalParametersTest extends FunctionalTestBase
     */
     public function testInsertOrMergeEntityEntityNull()
     {
-        $table = TableServiceFunctionalTestData::$TEST_TABLE_NAMES[0];
+        $table = TableServiceFunctionalTestData::$testTableNames[0];
 
         try {
             $this->restProxy->insertOrMergeEntity($table, null);
@@ -954,7 +954,7 @@ class TableServiceFunctionalParametersTest extends FunctionalTestBase
     */
     public function testInsertOrMergeEntityTableAndEntityNull()
     {
-        $table = TableServiceFunctionalTestData::$TEST_TABLE_NAMES[0];
+        $table = TableServiceFunctionalTestData::$testTableNames[0];
 
         try {
             $this->restProxy->insertOrMergeEntity(null, null);
@@ -971,7 +971,7 @@ class TableServiceFunctionalParametersTest extends FunctionalTestBase
     */
     public function testInsertOrMergeEntityTableNull()
     {
-        $table = TableServiceFunctionalTestData::$TEST_TABLE_NAMES[0];
+        $table = TableServiceFunctionalTestData::$testTableNames[0];
 
         try {
             $this->restProxy->insertOrMergeEntity(null, new Entity());
@@ -988,7 +988,7 @@ class TableServiceFunctionalParametersTest extends FunctionalTestBase
     */
     public function testInsertOrMergeEntityEntityAndOptionsNull()
     {
-        $table = TableServiceFunctionalTestData::$TEST_TABLE_NAMES[0];
+        $table = TableServiceFunctionalTestData::$testTableNames[0];
 
         try {
             $this->restProxy->insertOrMergeEntity($table, null, null);
@@ -1005,7 +1005,7 @@ class TableServiceFunctionalParametersTest extends FunctionalTestBase
     */
     public function testInsertOrMergeEntityEntityNullWithOptions()
     {
-        $table = TableServiceFunctionalTestData::$TEST_TABLE_NAMES[0];
+        $table = TableServiceFunctionalTestData::$testTableNames[0];
 
         try {
             $this->restProxy->insertOrMergeEntity($table, null, TableServiceFunctionalTestData::getSimpleinsertEntityOptions());
@@ -1022,7 +1022,7 @@ class TableServiceFunctionalParametersTest extends FunctionalTestBase
     */
     public function testInsertOrMergeEntityOptionsNull()
     {
-        $table = TableServiceFunctionalTestData::$TEST_TABLE_NAMES[0];
+        $table = TableServiceFunctionalTestData::$testTableNames[0];
 
         try {
             $this->restProxy->insertOrMergeEntity($table, TableServiceFunctionalTestData::getSimpleEntity(), null);
@@ -1041,7 +1041,7 @@ class TableServiceFunctionalParametersTest extends FunctionalTestBase
     */
     public function testInsertOrReplaceEntityEntityNull()
     {
-        $table = TableServiceFunctionalTestData::$TEST_TABLE_NAMES[0];
+        $table = TableServiceFunctionalTestData::$testTableNames[0];
 
         try {
             $this->restProxy->insertOrReplaceEntity($table, null);
@@ -1058,7 +1058,7 @@ class TableServiceFunctionalParametersTest extends FunctionalTestBase
     */
     public function testInsertOrReplaceEntityTableAndEntityNull()
     {
-        $table = TableServiceFunctionalTestData::$TEST_TABLE_NAMES[0];
+        $table = TableServiceFunctionalTestData::$testTableNames[0];
 
         try {
             $this->restProxy->insertOrReplaceEntity(null, null);
@@ -1075,7 +1075,7 @@ class TableServiceFunctionalParametersTest extends FunctionalTestBase
     */
     public function testInsertOrReplaceEntityTableNull()
     {
-        $table = TableServiceFunctionalTestData::$TEST_TABLE_NAMES[0];
+        $table = TableServiceFunctionalTestData::$testTableNames[0];
 
         try {
             $this->restProxy->insertOrReplaceEntity(null, new Entity());
@@ -1092,7 +1092,7 @@ class TableServiceFunctionalParametersTest extends FunctionalTestBase
     */
     public function testInsertOrReplaceEntityEntityAndOptionsNull()
     {
-        $table = TableServiceFunctionalTestData::$TEST_TABLE_NAMES[0];
+        $table = TableServiceFunctionalTestData::$testTableNames[0];
 
         try {
             $this->restProxy->insertOrReplaceEntity($table, null, null);
@@ -1109,7 +1109,7 @@ class TableServiceFunctionalParametersTest extends FunctionalTestBase
     */
     public function testInsertOrReplaceEntityEntityNullWithOptions()
     {
-        $table = TableServiceFunctionalTestData::$TEST_TABLE_NAMES[0];
+        $table = TableServiceFunctionalTestData::$testTableNames[0];
 
         try {
             $this->restProxy->insertOrReplaceEntity($table, null, TableServiceFunctionalTestData::getSimpleinsertEntityOptions());
@@ -1126,7 +1126,7 @@ class TableServiceFunctionalParametersTest extends FunctionalTestBase
     */
     public function testInsertOrReplaceEntityOptionsNull()
     {
-        $table = TableServiceFunctionalTestData::$TEST_TABLE_NAMES[0];
+        $table = TableServiceFunctionalTestData::$testTableNames[0];
 
         try {
             $this->restProxy->insertOrReplaceEntity($table, TableServiceFunctionalTestData::getSimpleEntity(), null);
@@ -1145,7 +1145,7 @@ class TableServiceFunctionalParametersTest extends FunctionalTestBase
     */
     public function testQueryEntitiesTableNull()
     {
-        $table = TableServiceFunctionalTestData::$TEST_TABLE_NAMES[0];
+        $table = TableServiceFunctionalTestData::$testTableNames[0];
 
         try {
             $this->restProxy->queryEntities(null);
@@ -1162,7 +1162,7 @@ class TableServiceFunctionalParametersTest extends FunctionalTestBase
     */
     public function testQueryEntitiesTableNullOptionsNull()
     {
-        $table = TableServiceFunctionalTestData::$TEST_TABLE_NAMES[0];
+        $table = TableServiceFunctionalTestData::$testTableNames[0];
 
         try {
             $this->restProxy->queryEntities(null, null);
@@ -1179,7 +1179,7 @@ class TableServiceFunctionalParametersTest extends FunctionalTestBase
     */
     public function testQueryEntitiesTableNullWithOptions()
     {
-        $table = TableServiceFunctionalTestData::$TEST_TABLE_NAMES[0];
+        $table = TableServiceFunctionalTestData::$testTableNames[0];
 
         try {
             $this->restProxy->queryEntities(null, new QueryEntitiesOptions());
@@ -1196,7 +1196,7 @@ class TableServiceFunctionalParametersTest extends FunctionalTestBase
     */
     public function testQueryEntitiesOptionsNull()
     {
-        $table = TableServiceFunctionalTestData::$TEST_TABLE_NAMES[0];
+        $table = TableServiceFunctionalTestData::$testTableNames[0];
 
         $this->restProxy->queryEntities($table, null);
         $this->clearTable($table);

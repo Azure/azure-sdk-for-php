@@ -174,14 +174,14 @@ class TableServiceFunctionalOptionsTest extends \PHPUnit_Framework_TestCase
         $filter = Filter::applyConstant('foo', EdmType::STRING);
         $options->setFilter($filter);
         $options->setSelectFields(null);
-        $options->setTop(TableServiceFunctionalTestData::IntegerMAX_VALUE);
+        $options->setTop(TableServiceFunctionalTestData::INT_MAX_VALUE);
 
         $this->assertEquals($filter, $options->getFilter(), 'Set $options->getFilter');
         $this->assertEquals($filter, $options->getQuery()->getFilter(), 'Set $options->getQuery->getFilter');
         $this->assertNull($options->getSelectFields(), 'Set $options->getSelectFields');
         $this->assertNull($options->getQuery()->getSelectFields(), 'Set $options->getQuery->getSelectFields');
-        $this->assertEquals(TableServiceFunctionalTestData::IntegerMAX_VALUE, $options->getTop(), 'Set $options->getTop');
-        $this->assertEquals(TableServiceFunctionalTestData::IntegerMAX_VALUE, $options->getQuery()->getTop(), 'Set $options->getQuery->getTop');
+        $this->assertEquals(TableServiceFunctionalTestData::INT_MAX_VALUE, $options->getTop(), 'Set $options->getTop');
+        $this->assertEquals(TableServiceFunctionalTestData::INT_MAX_VALUE, $options->getQuery()->getTop(), 'Set $options->getQuery->getTop');
     }
 
     public function testCheckQuery()
@@ -199,11 +199,11 @@ class TableServiceFunctionalOptionsTest extends \PHPUnit_Framework_TestCase
         $filter = Filter::applyConstant('foo', EdmType::STRING);
         $query->setFilter($filter);
         $query->setSelectFields(null);
-        $query->setTop(TableServiceFunctionalTestData::IntegerMAX_VALUE);
+        $query->setTop(TableServiceFunctionalTestData::INT_MAX_VALUE);
 
         $this->assertEquals($filter, $query->getFilter(), 'Set Query->getFilter');
         $this->assertNull($query->getSelectFields(), 'Set Query->getSelectFields');
-        $this->assertEquals(TableServiceFunctionalTestData::IntegerMAX_VALUE, $query->getTop(), 'Set Query->getTop');
+        $this->assertEquals(TableServiceFunctionalTestData::INT_MAX_VALUE, $query->getTop(), 'Set Query->getTop');
     }
 
     public function testCheckFilter()
@@ -349,7 +349,7 @@ class TableServiceFunctionalOptionsTest extends \PHPUnit_Framework_TestCase
     public function testCheckProperty()
     {
         $property = new Property();
-        $maxv = TableServiceFunctionalTestData::IntegerMAX_VALUE;
+        $maxv = TableServiceFunctionalTestData::INT_MAX_VALUE;
         $edmType = EdmType::STRING;
         $this->assertNotNull($property, 'Default Property');
         $this->assertNull($property->getValue(), 'Default Property->getValue');

@@ -114,12 +114,13 @@ class TableServiceFunctionalTestData
     private static $tempTableCounter;
     private static $nonExistTablePrefix;
     public static $testUniqueId;
-    public static $TEST_TABLE_NAMES;
+    public static $testTableNames;
 
-    const IntegerMAX_VALUE = 2147483647;
-    public static $IntegerMIN_VALUE;
-    const LongBigValue = 1234567890;
-    const LongBigNegativeValue = -123456789032;
+    const INT_MAX_VALUE = 2147483647;
+    // Intent is to be a constant, but cannot represent in code.
+    public static $INT_MIN_VALUE;
+    const LONG_BIG_VALUE = 1234567890;
+    const LONG_BIG_VALUE_NEGATIVE = -123456789032;
 
     public function __construct()
     {
@@ -128,11 +129,11 @@ class TableServiceFunctionalTestData
 
     public static function setupData()
     {
-        self::$IntegerMIN_VALUE = -1 - self::IntegerMAX_VALUE;
+        self::$INT_MIN_VALUE = -1 - self::INT_MAX_VALUE;
         $rint = rand(0,1000000);
         self::$testUniqueId = 'qaX' . $rint . 'X';
         self::$nonExistTablePrefix = 'qaX' . ($rint + 1) . 'X';
-        self::$TEST_TABLE_NAMES = array( self::$testUniqueId . 'a1', self::$testUniqueId . 'a2', self::$testUniqueId . 'b1' );
+        self::$testTableNames = array( self::$testUniqueId . 'a1', self::$testUniqueId . 'a2', self::$testUniqueId . 'b1' );
     }
 
     static function getInterestingTableName()
@@ -293,61 +294,61 @@ class TableServiceFunctionalTestData
         array_push($ret, $options);
 
         $options = new QueryTablesOptions();
-        $filter = Filter::applyEq(Filter::applyConstant(self::$TEST_TABLE_NAMES[1]), Filter::applyPropertyName('TableName'));
+        $filter = Filter::applyEq(Filter::applyConstant(self::$testTableNames[1]), Filter::applyPropertyName('TableName'));
         $options->setFilter($filter);
         array_push($ret, $options);
 
         $options = new QueryTablesOptions();
-        $filter = Filter::applyEq(Filter::applyConstant(self::$TEST_TABLE_NAMES[2]), Filter::applyPropertyName('TableName'));
-        $options->setFilter($filter);
-        array_push($ret, $options);
-
-        $options = new QueryTablesOptions();
-        $filter = Filter::applyAnd(
-                Filter::applyEq(Filter::applyConstant(self::$TEST_TABLE_NAMES[1]), Filter::applyPropertyName('TableName')),
-                Filter::applyEq(Filter::applyConstant(self::$TEST_TABLE_NAMES[2]), Filter::applyPropertyName('TableName')));
+        $filter = Filter::applyEq(Filter::applyConstant(self::$testTableNames[2]), Filter::applyPropertyName('TableName'));
         $options->setFilter($filter);
         array_push($ret, $options);
 
         $options = new QueryTablesOptions();
         $filter = Filter::applyAnd(
-                Filter::applyGe(Filter::applyPropertyName('TableName'), Filter::applyConstant(self::$TEST_TABLE_NAMES[1])),
-                Filter::applyLe(Filter::applyPropertyName('TableName'), Filter::applyConstant(self::$TEST_TABLE_NAMES[2])));
-        $options->setFilter($filter);
-        array_push($ret, $options);
-
-        $options = new QueryTablesOptions();
-        $filter = Filter::applyOr(
-                Filter::applyGe(Filter::applyPropertyName('TableName'), Filter::applyConstant(self::$TEST_TABLE_NAMES[1])),
-                Filter::applyGe(Filter::applyPropertyName('TableName'), Filter::applyConstant(self::$TEST_TABLE_NAMES[2])));
+                Filter::applyEq(Filter::applyConstant(self::$testTableNames[1]), Filter::applyPropertyName('TableName')),
+                Filter::applyEq(Filter::applyConstant(self::$testTableNames[2]), Filter::applyPropertyName('TableName')));
         $options->setFilter($filter);
         array_push($ret, $options);
 
         $options = new QueryTablesOptions();
         $filter = Filter::applyAnd(
-                Filter::applyEq(Filter::applyPropertyName('TableName'), Filter::applyConstant(self::$TEST_TABLE_NAMES[1])),
-                Filter::applyGe(Filter::applyPropertyName('TableName'), Filter::applyConstant(self::$TEST_TABLE_NAMES[0])));
+                Filter::applyGe(Filter::applyPropertyName('TableName'), Filter::applyConstant(self::$testTableNames[1])),
+                Filter::applyLe(Filter::applyPropertyName('TableName'), Filter::applyConstant(self::$testTableNames[2])));
         $options->setFilter($filter);
         array_push($ret, $options);
 
         $options = new QueryTablesOptions();
         $filter = Filter::applyOr(
-                Filter::applyEq(Filter::applyPropertyName('TableName'), Filter::applyConstant(self::$TEST_TABLE_NAMES[1])),
-                Filter::applyGe(Filter::applyPropertyName('TableName'), Filter::applyConstant(self::$TEST_TABLE_NAMES[2])));
+                Filter::applyGe(Filter::applyPropertyName('TableName'), Filter::applyConstant(self::$testTableNames[1])),
+                Filter::applyGe(Filter::applyPropertyName('TableName'), Filter::applyConstant(self::$testTableNames[2])));
+        $options->setFilter($filter);
+        array_push($ret, $options);
+
+        $options = new QueryTablesOptions();
+        $filter = Filter::applyAnd(
+                Filter::applyEq(Filter::applyPropertyName('TableName'), Filter::applyConstant(self::$testTableNames[1])),
+                Filter::applyGe(Filter::applyPropertyName('TableName'), Filter::applyConstant(self::$testTableNames[0])));
         $options->setFilter($filter);
         array_push($ret, $options);
 
         $options = new QueryTablesOptions();
         $filter = Filter::applyOr(
-                Filter::applyEq(Filter::applyPropertyName('TableName'), Filter::applyConstant(self::$TEST_TABLE_NAMES[1])),
-                Filter::applyEq(Filter::applyPropertyName('TableName'), Filter::applyConstant(self::$TEST_TABLE_NAMES[2])));
+                Filter::applyEq(Filter::applyPropertyName('TableName'), Filter::applyConstant(self::$testTableNames[1])),
+                Filter::applyGe(Filter::applyPropertyName('TableName'), Filter::applyConstant(self::$testTableNames[2])));
         $options->setFilter($filter);
         array_push($ret, $options);
 
         $options = new QueryTablesOptions();
         $filter = Filter::applyOr(
-                Filter::applyEq(Filter::applyConstant(self::$TEST_TABLE_NAMES[1]), Filter::applyPropertyName('TableName')),
-                Filter::applyEq(Filter::applyConstant(self::$TEST_TABLE_NAMES[2]), Filter::applyPropertyName('TableName')));
+                Filter::applyEq(Filter::applyPropertyName('TableName'), Filter::applyConstant(self::$testTableNames[1])),
+                Filter::applyEq(Filter::applyPropertyName('TableName'), Filter::applyConstant(self::$testTableNames[2])));
+        $options->setFilter($filter);
+        array_push($ret, $options);
+
+        $options = new QueryTablesOptions();
+        $filter = Filter::applyOr(
+                Filter::applyEq(Filter::applyConstant(self::$testTableNames[1]), Filter::applyPropertyName('TableName')),
+                Filter::applyEq(Filter::applyConstant(self::$testTableNames[2]), Filter::applyPropertyName('TableName')));
         $options->setFilter($filter);
         array_push($ret, $options);
 
@@ -362,7 +363,7 @@ class TableServiceFunctionalTestData
         }
 
         $options = new QueryTablesOptions();
-        $nextTableName = self::$TEST_TABLE_NAMES[1];
+        $nextTableName = self::$testTableNames[1];
         $options->setNextTableName($nextTableName);
         array_push($ret, $options);
 
@@ -559,8 +560,8 @@ class TableServiceFunctionalTestData
         $ret = array();
         array_push($ret, pi());
         array_push($ret, 0.0);
-        array_push($ret, floatval(self::IntegerMAX_VALUE));
-        array_push($ret, floatval(self::LongBigValue));
+        array_push($ret, floatval(self::INT_MAX_VALUE));
+        array_push($ret, floatval(self::LONG_BIG_VALUE));
         array_push($ret, 2.3456);
         array_push($ret, 1.0e-10);
         return $ret;
@@ -593,8 +594,8 @@ class TableServiceFunctionalTestData
     {
         $ret = array();
         array_push($ret, 0);
-        array_push($ret, self::IntegerMAX_VALUE);
-        array_push($ret, self::$IntegerMIN_VALUE);
+        array_push($ret, self::INT_MAX_VALUE);
+        array_push($ret, self::$INT_MIN_VALUE);
         array_push($ret, 35536);
         return $ret;
     }
@@ -603,7 +604,7 @@ class TableServiceFunctionalTestData
     {
         $ret = array();
         array_push($ret, false);
-        array_push($ret, self::IntegerMAX_VALUE + 1);
+        array_push($ret, self::INT_MAX_VALUE + 1);
         return $ret;
     }
 
@@ -611,8 +612,8 @@ class TableServiceFunctionalTestData
     {
         $ret = array();
         array_push($ret, '0');
-        array_push($ret, strval(self::LongBigValue));
-        array_push($ret, strval(self::LongBigNegativeValue));
+        array_push($ret, strval(self::LONG_BIG_VALUE));
+        array_push($ret, strval(self::LONG_BIG_VALUE_NEGATIVE));
         array_push($ret, '35536');
         return $ret;
     }
@@ -651,7 +652,7 @@ class TableServiceFunctionalTestData
         array_push($ret, '\\' . '\\' . '\'' . '(?++\\.&==/&?\'\'$@://   .ne');
         array_push($ret, '12345');
         array_push($ret, 'Some unicode: ' . self::getUnicodeString());
-        array_push($ret, strval(self::IntegerMAX_VALUE));
+        array_push($ret, strval(self::INT_MAX_VALUE));
         array_push($ret, '<some><XML></stuff>');
         return $ret;
     }

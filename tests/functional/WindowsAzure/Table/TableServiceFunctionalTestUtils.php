@@ -48,10 +48,10 @@ use WindowsAzure\Table\Models\Filters\UnaryFilter;
 
 class MutatePivot
 {
-    const ChangeValues   = 'ChangeValues';
-    const AddProperty    = 'AddProperty';
-    const RemoveProperty = 'RemoveProperty';
-    const NullProperty   = 'NullProperty';
+    const CHANGE_VALUES   = 'ChangeValues';
+    const ADD_PROPERTY    = 'AddProperty';
+    const REMOVE_PROPERTY = 'RemoveProperty';
+    const NULL_PROPERTY   = 'NullProperty';
     public static function values()
     {
         return array('ChangeValues', 'AddProperty', 'RemoveProperty', 'NullProperty');
@@ -172,9 +172,9 @@ class TableServiceFunctionalTestUtils
 
     static function mutateEntity($ent, $pivot)
     {
-        if ($pivot == MutatePivot::ChangeValues) {
+        if ($pivot == MutatePivot::CHANGE_VALUES) {
             self::mutateEntityChangeValues($ent);
-        } else if ($pivot == MutatePivot::AddProperty) {
+        } else if ($pivot == MutatePivot::ADD_PROPERTY) {
             $ent->addProperty('BOOLEAN' . TableServiceFunctionalTestData::getNewKey(), EdmType::BOOLEAN, true);
             $ent->addProperty('DATETIME' . TableServiceFunctionalTestData::getNewKey(), EdmType::DATETIME, Utilities::convertToDateTime('2012-01-26T18:26:19.0000473Z'));
             $ent->addProperty('DOUBLE' . TableServiceFunctionalTestData::getNewKey(), EdmType::DOUBLE, 12345678901);
@@ -182,7 +182,7 @@ class TableServiceFunctionalTestUtils
             $ent->addProperty('INT32' . TableServiceFunctionalTestData::getNewKey(), EdmType::INT32, 23);
             $ent->addProperty('INT64' . TableServiceFunctionalTestData::getNewKey(), EdmType::INT64, '-1');
             $ent->addProperty('STRING' . TableServiceFunctionalTestData::getNewKey(), EdmType::STRING, 'this is a test!');
-        } else if ($pivot == MutatePivot::RemoveProperty) {
+        } else if ($pivot == MutatePivot::REMOVE_PROPERTY) {
             $propToRemove = null;
             foreach($ent->getProperties() as $propName => $propValue)  {
                 // Don't mess with the keys.
@@ -195,7 +195,7 @@ class TableServiceFunctionalTestUtils
 
             $props = $ent->getProperties();
             unset($props[$propToRemove]);
-        } else if ($pivot == MutatePivot::NullProperty) {
+        } else if ($pivot == MutatePivot::NULL_PROPERTY) {
             foreach($ent->getProperties() as $propName => $propValue)  {
                 // Don't mess with the keys.
                 if ($propName == ('PartitionKey') || $propName == ('RowKey') || $propName == ('Timestamp')) {

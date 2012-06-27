@@ -38,14 +38,14 @@ class QueueServiceFunctionalTestData
     public static $testUniqueId;
     public static $tempQueueCounter;
     public static $nonExistQueuePrefix;
-    public static $TEST_QUEUE_NAMES;
+    public static $testQueueNames;
 
     public static function setupData()
     {
         $rint = mt_rand(0, 1000000);
         self::$testUniqueId = 'qa-' . $rint . '-';
         self::$nonExistQueuePrefix = 'qa-' . ($rint + 1) . '-';
-        self::$TEST_QUEUE_NAMES = array(
+        self::$testQueueNames = array(
             self::$testUniqueId . 'a1',
             self::$testUniqueId . 'a2',
             self::$testUniqueId . 'b1',
