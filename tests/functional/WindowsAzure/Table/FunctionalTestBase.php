@@ -41,35 +41,22 @@ class FunctionalTestBase extends IntegrationTestBase
     public static function setUpBeforeClass()
     {
         parent::setUpBeforeClass();
-        $service = self::createService();
+        $testBase = new FunctionalTestBase();
         TableServiceFunctionalTestData::setupData();
 
         foreach(TableServiceFunctionalTestData::$testTableNames as $name)  {
             self::println('Creating Table: ' . $name);
-            $service->createTable($name);
+            $testBase->restProxy->createTable($name);
         }
     }
 
     public static function tearDownAfterClass()
     {
-        $service = self::createService();
+        $testBase = new FunctionalTestBase();
         foreach(TableServiceFunctionalTestData::$testTableNames as $name)  {
-            try
-            {
-                $service->deleteTable($name);
-            } catch (\Exception $e)
-            {
-                // Ignore exception and continue.
-                error_log($e->getMessage());
-            }
+            $testBase->safeDeleteTable($name);
         }
         parent::tearDownAfterClass();
-    }
-
-    private static function createService()
-    {
-        $tmp = new FunctionalTestBase();
-        return $tmp->restProxy;
     }
 
     /**
