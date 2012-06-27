@@ -82,7 +82,8 @@ class FunctionalTestBase extends IntegrationTestBase
 
     public static function tearDownAfterClass()
     {
-        $this->safeDeleteContainer('$root');
+        $tmp = new FunctionalTestBase();
+        $tmp->safeDeleteContainer('$root');
         parent::tearDownAfterClass();
     }
 
