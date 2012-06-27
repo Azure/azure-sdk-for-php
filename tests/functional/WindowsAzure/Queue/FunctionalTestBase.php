@@ -76,9 +76,7 @@ class FunctionalTestBase extends IntegrationTestBase
         try
         {
             $service->deleteQueue($queueName);
-        }
-        catch (\Exception $e)
-        {
+        } catch (\Exception $e) {
             // Ignore exception and continue, will assume that this queue doesn't exist in the sotrage account
             error_log($e->getMessage());
         }

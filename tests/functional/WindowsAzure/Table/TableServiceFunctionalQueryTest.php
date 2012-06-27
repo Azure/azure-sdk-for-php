@@ -67,8 +67,7 @@ class TableServiceFunctionalQueryTest extends FunctionalTestBase
         if (is_null(self::$curPartition) || self::$curPartition == count(self::$Partitions) - 1) {
             self::$curPartition = 0;
             self::$curRowKey = TableServiceFunctionalTestData::getNewKey();
-        }
-        else {
+        } else {
             self::$curPartition++;
         }
 
@@ -301,16 +300,14 @@ class TableServiceFunctionalQueryTest extends FunctionalTestBase
                     }
                     if (count($boolPropNames) == 0) {
                         return Filter::applyConstant(mt_rand(0,1) == 1, EdmType::BOOLEAN);
-                    }
-                    else {
+                    } else {
                         $key = $boolPropNames[mt_rand(0, count($boolPropNames) - 1)];
                         return Filter::applyPropertyName($key);
                     }
                 default:
                     return null;
             }
-        }
-        else {
+        } else {
             switch (mt_rand(0,8)) {
                 case 0:
                 case 1:
@@ -556,12 +553,10 @@ class TableServiceFunctionalQueryTest extends FunctionalTestBase
             // However, the user cannot easily control when this happens, so I'm
             // not sure how useful it is.
             // To test that scenario, set NextTable in the $options.
-        }
-        catch (ServiceException $e) {
+        } catch (ServiceException $e) {
             if (!is_null($options->getQuery()) && !is_null($options->getQuery()->getTop()) && $options->getQuery()->getTop() <= 0) {
                 $this->assertEquals(400, $e->getCode(), 'getCode');
-            }
-            else {
+            } else {
                 $this->assertEquals(500, $e->getCode(), 'getCode');
             }
         }

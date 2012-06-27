@@ -97,8 +97,7 @@ class FunctionalTestBase extends IntegrationTestBase
         foreach($blobListResult->getBlobs() as $blob)  {
             try {
                 $this->restProxy->deleteBlob($name, $blob->getName());
-            }
-            catch (ServiceException $e) {
+            } catch (ServiceException $e) {
                 error_log($e->getMessage());
             }
         }
@@ -111,8 +110,7 @@ class FunctionalTestBase extends IntegrationTestBase
     {
         try {
             $this->restProxy->deleteContainer($name);
-        }
-        catch (ServiceException $e) {
+        } catch (ServiceException $e) {
             error_log($e->getMessage());
         }
     }
@@ -124,8 +122,7 @@ class FunctionalTestBase extends IntegrationTestBase
     {
         try {
             $this->restProxy->createContainer($name);
-        }
-        catch (ServiceException $e) {
+        } catch (ServiceException $e) {
             error_log($e->getMessage());
         }
     }

@@ -69,11 +69,9 @@ class TableServiceFunctionalTestUtils
     {
         if (is_null($filter)) {
             return false;
-        }
-        else if ($filter instanceof UnaryFilter) {
+        } else if ($filter instanceof UnaryFilter) {
             return self::isEqNotInTopLevelWorker($filter->getOperand(), $depth + 1);
-        }
-        else if ($filter instanceof BinaryFilter) {
+        } else if ($filter instanceof BinaryFilter) {
             $binaryFilter = $filter;
             if ($binaryFilter->getOperator() == ('eq') && $depth != 0) {
                 return true;
@@ -82,8 +80,7 @@ class TableServiceFunctionalTestUtils
             $left = self::isEqNotInTopLevelWorker($binaryFilter->getLeft(), $depth + 1);
             $right = self::isEqNotInTopLevelWorker($binaryFilter->getRight(), $depth + 1);
             return $left || $right;
-        }
-        else {
+        } else {
             return false;
         }
     }
@@ -98,17 +95,14 @@ class TableServiceFunctionalTestUtils
         if ($filter instanceof PropertyNameFilter) {
             $ret = new PropertyNameFilter($filter->getPropertyName());
             return $ret;
-        }
-        else if ($filter instanceof ConstantFilter) {
+        } else if ($filter instanceof ConstantFilter) {
             $ret = new ConstantFilter($filter->getEdmType(), $filter->getValue());
             return $ret;
-        }
-        else if ($filter instanceof UnaryFilter) {
+        } else if ($filter instanceof UnaryFilter) {
             $operand = self::cloneRemoveEqNotInTopLevelWorker($filter->getOperand(), $depth + 1);
             $ret = new UnaryFilter($filter->getOperator(), $operand);
             return $ret;
-        }
-        else if ($filter instanceof BinaryFilter) {
+        } else if ($filter instanceof BinaryFilter) {
             if ($filter->getOperator() == ('eq') && $depth != 0) {
                 return Filter::applyConstant(false);
             }
@@ -116,12 +110,10 @@ class TableServiceFunctionalTestUtils
             $right = self::cloneRemoveEqNotInTopLevelWorker($filter->getRight(), $depth + 1);
             $ret = new BinaryFilter($left, $filter->getOperator(), $right);
             return $ret;
-        }
-        else if ($filter instanceof QueryStringFilter) {
+        } else if ($filter instanceof QueryStringFilter) {
             $ret = new QueryStringFilter($filter->getQueryString());
             return $ret;
-        }
-        else {
+        } else {
             var_dump($filter);
             throw new \Exception();
         }
@@ -147,12 +139,10 @@ class TableServiceFunctionalTestUtils
                 if (!is_null($result) && $result) {
                     array_push($output, $i);
                 }
-            }
-            catch (NoSuchFieldException $e) {
+            } catch (NoSuchFieldException $e) {
                 $e->printStackTrace();
                 // That is OK, bacuse the types are just bags.
-            }
-            catch (Exception $e) {
+            } catch (Exception $e) {
                 $e->printStackTrace();
             }
         }
@@ -184,8 +174,7 @@ class TableServiceFunctionalTestUtils
     {
         if ($pivot == MutatePivot::ChangeValues) {
             self::mutateEntityChangeValues($ent);
-        }
-        else if ($pivot == MutatePivot::AddProperty) {
+        } else if ($pivot == MutatePivot::AddProperty) {
             $ent->addProperty('BOOLEAN' . TableServiceFunctionalTestData::getNewKey(), EdmType::BOOLEAN, true);
             $ent->addProperty('DATETIME' . TableServiceFunctionalTestData::getNewKey(), EdmType::DATETIME, Utilities::convertToDateTime('2012-01-26T18:26:19.0000473Z'));
             $ent->addProperty('DOUBLE' . TableServiceFunctionalTestData::getNewKey(), EdmType::DOUBLE, 12345678901);
@@ -193,8 +182,7 @@ class TableServiceFunctionalTestUtils
             $ent->addProperty('INT32' . TableServiceFunctionalTestData::getNewKey(), EdmType::INT32, 23);
             $ent->addProperty('INT64' . TableServiceFunctionalTestData::getNewKey(), EdmType::INT64, '-1');
             $ent->addProperty('STRING' . TableServiceFunctionalTestData::getNewKey(), EdmType::STRING, 'this is a test!');
-        }
-        else if ($pivot == MutatePivot::RemoveProperty) {
+        } else if ($pivot == MutatePivot::RemoveProperty) {
             $propToRemove = null;
             foreach($ent->getProperties() as $propName => $propValue)  {
                 // Don't mess with the keys.
@@ -207,8 +195,7 @@ class TableServiceFunctionalTestUtils
 
             $props = $ent->getProperties();
             unset($props[$propToRemove]);
-        }
-        else if ($pivot == MutatePivot::NullProperty) {
+        } else if ($pivot == MutatePivot::NullProperty) {
             foreach($ent->getProperties() as $propName => $propValue)  {
                 // Don't mess with the keys.
                 if ($propName == ('PartitionKey') || $propName == ('RowKey') || $propName == ('Timestamp')) {
@@ -231,41 +218,33 @@ class TableServiceFunctionalTestUtils
             if (is_null($ptype)) {
                 $eff = $initialProp->getValue();
                 $initialProp->setValue($eff . 'AndMore');
-            }
-            else if ($ptype == (EdmType::DATETIME)) {
+            } else if ($ptype == (EdmType::DATETIME)) {
                 $value = $initialProp->getValue();
                 if (is_null($value)) {
                     $value = new \DateTime("1/26/1692");
                 }
                 $value->modify('+1 day');
                 $initialProp->setValue($value);
-            }
-            else if ($ptype == (EdmType::BINARY)) {
+            } else if ($ptype == (EdmType::BINARY)) {
                 $eff = $initialProp->getValue();
                 $initialProp->setValue($eff . 'x');
-            }
-            else if ($ptype == (EdmType::BOOLEAN)) {
+            } else if ($ptype == (EdmType::BOOLEAN)) {
                 $eff = $initialProp->getValue();
                 $initialProp->setValue(!$eff);
-            }
-            else if ($ptype == (EdmType::DOUBLE)) {
+            } else if ($ptype == (EdmType::DOUBLE)) {
                 $eff = $initialProp->getValue();
                 $initialProp->setValue($eff + 1);
-            }
-            else if ($ptype == (EdmType::GUID)) {
+            } else if ($ptype == (EdmType::GUID)) {
                 $initialProp->setValue(com_create_guid());
-            }
-            else if ($ptype == (EdmType::INT32)) {
+            } else if ($ptype == (EdmType::INT32)) {
                 $eff = $initialProp->getValue();
                 $eff = ($eff > 10 ? 0 : $eff + 1);
                 $initialProp->setValue($eff);
-            }
-            else if ($ptype == (EdmType::INT64)) {
+            } else if ($ptype == (EdmType::INT64)) {
                 $eff = $initialProp->getValue();
                 $eff = ($eff > 10 ? 0 : $eff + 1);
                 $initialProp->setValue(strval($eff));
-            }
-            else if ($ptype == (EdmType::STRING)) {
+            } else if ($ptype == (EdmType::STRING)) {
                 $eff = $initialProp->getValue();
                 $initialProp->setValue($eff . 'AndMore');
             }
@@ -276,11 +255,9 @@ class TableServiceFunctionalTestUtils
     {
         if (is_null($filter)) {
             return $pad . 'filter <null>' . "\n";
-        }
-        else if ($filter instanceof PropertyNameFilter) {
+        } else if ($filter instanceof PropertyNameFilter) {
             return $pad . 'entity.' . $filter->getPropertyName() . "\n";
-        }
-        else if ($filter instanceof ConstantFilter) {
+        } else if ($filter instanceof ConstantFilter) {
            $ret = $pad;
            if (is_null($filter->getValue())) {
                $ret .= 'constant <null>';
@@ -290,13 +267,11 @@ class TableServiceFunctionalTestUtils
                $ret .=  '\'' . FunctionalTestBase::tmptostring($filter->getValue()) . '\'';
            }
            return $ret . "\n";
-        }
-        else if ($filter instanceof UnaryFilter) {
+        } else if ($filter instanceof UnaryFilter) {
             $ret = $pad . $filter->getOperator() . "\n";
             $ret .= self::filterToString($filter->getOperand(), $pad . '  ');
             return $ret;
-        }
-        else if ($filter instanceof BinaryFilter) {
+        } else if ($filter instanceof BinaryFilter) {
             $ret = self::filterToString($filter->getLeft(), $pad . '  ');
             $ret .= $pad . $filter->getOperator() . "\n";
             $ret .= self::filterToString($filter->getRight(), $pad . '  ');
@@ -308,61 +283,48 @@ class TableServiceFunctionalTestUtils
     {
         if (is_null($filter)) {
             return true;
-        }
-        else if (is_null($obj)) {
+        } else if (is_null($obj)) {
             return false;
-        }
-        else if ($filter instanceof PropertyNameFilter) {
+        } else if ($filter instanceof PropertyNameFilter) {
             $name = $filter->getPropertyName();
             $value = ($obj instanceof Entity ? $obj->getPropertyValue($name) : $obj->{$name});
             return $value;
-        }
-        else if ($filter instanceof ConstantFilter) {
+        } else if ($filter instanceof ConstantFilter) {
             $value = $filter->getValue();
             return $value;
-        }
-        else if ($filter instanceof UnaryFilter) {
+        } else if ($filter instanceof UnaryFilter) {
             $ret = null;
             if ($filter->getOperator() == ('not')) {
                 $op = self::filterInterperter($filter->getOperand(), $obj);
                 if (is_null($op)) {
                     // http://msdn.microsoft/com/en-us/library/ms191504.aspx
                     $ret = true;
-                }
-                else {
+                } else {
                     $ret = !$op;
                 }
 
                 return $ret;
             }
-        }
-        else if ($filter instanceof BinaryFilter) {
+        } else if ($filter instanceof BinaryFilter) {
             $left = self::filterInterperter($filter->getLeft(), $obj);
             $right = self::filterInterperter($filter->getRight(), $obj);
 
             $ret = null;
             if ($filter->getOperator() == ('and')) {
                 $ret = self::nullPropAnd($left, $right);
-            }
-            else if ($filter->getOperator() == ('or')) {
+            } else if ($filter->getOperator() == ('or')) {
                 $ret = self::nullPropOr($left, $right);
-            }
-            else if ($filter->getOperator() == ('eq')) {
+            } else if ($filter->getOperator() == ('eq')) {
                 $ret = self::nullPropEq($left, $right);
-            }
-            else if ($filter->getOperator() == ('ne')) {
+            } else if ($filter->getOperator() == ('ne')) {
                 $ret = self::nullPropNe($left, $right);
-            }
-            else if ($filter->getOperator() == ('ge')) {
+            } else if ($filter->getOperator() == ('ge')) {
                 $ret = self::nullPropGe($left, $right);
-            }
-            else if ($filter->getOperator() == ('gt')) {
+            } else if ($filter->getOperator() == ('gt')) {
                 $ret = self::nullPropGt($left, $right);
-            }
-            else if ($filter->getOperator() == ('lt')) {
+            } else if ($filter->getOperator() == ('lt')) {
                 $ret = self::nullPropLt($left, $right);
-            }
-            else if ($filter->getOperator() == ('le')) {
+            } else if ($filter->getOperator() == ('le')) {
                 $ret = self::nullPropLe($left, $right);
             }
 
@@ -378,14 +340,11 @@ class TableServiceFunctionalTestUtils
         // http://msdn.microsoft.com/en-us/library/ms191504.aspx
         if (is_null($left) && is_null($right)) {
             return null;
-        }
-        else if (is_null($left)) {
+        } else if (is_null($left)) {
             return ($right ? null : false);
-        }
-        else if (is_null($right)) {
+        } else if (is_null($right)) {
             return ($left ? null : false);
-        }
-        else {
+        } else {
             return $left && $right;
         }
     }
@@ -395,14 +354,11 @@ class TableServiceFunctionalTestUtils
         // http://msdn.microsoft.com/en-us/library/ms191504.aspx
         if (is_null($left) && is_null($right)) {
             return null;
-        }
-        else if (is_null($left)) {
+        } else if (is_null($left)) {
             return ($right ? true : null);
-        }
-        else if (is_null($right)) {
+        } else if (is_null($right)) {
             return ($left ? true : null);
-        }
-        else {
+        } else {
             return $left || $right;
         }
     }

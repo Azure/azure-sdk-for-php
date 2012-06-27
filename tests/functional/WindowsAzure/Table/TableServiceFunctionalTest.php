@@ -150,8 +150,7 @@ class TableServiceFunctionalTest extends FunctionalTestBase
             $ret = (is_null($options) ? $this->restProxy->getServiceProperties() : $this->restProxy->getServiceProperties($effOptions));
             $this->assertFalse(Configuration::isEmulated(), 'Should succeed when not running in emulator');
             $this->verifyServicePropertiesWorker($ret, null);
-        }
-        catch (ServiceException $e) {
+        } catch (ServiceException $e) {
             if (Configuration::isEmulated()) {
                 // Expect failure in emulator, as v1.6 doesn't support this method
                 $this->assertEquals(400, $e->getCode(), 'getCode');
@@ -285,12 +284,10 @@ class TableServiceFunctionalTest extends FunctionalTestBase
             }
 
             $this->verifyqueryTablesWorker($ret, $options);
-        }
-        catch (ServiceException $e) {
+        } catch (ServiceException $e) {
             if ((!is_null($options->getTop()) && $options->getTop() <= 0) && !Configuration::isEmulated()) {
                 $this->assertEquals(400, $e->getCode(), 'getCode');
-            }
-            else {
+            } else {
                 throw $e;
             }
         }
@@ -405,8 +402,7 @@ class TableServiceFunctionalTest extends FunctionalTestBase
 
         if (is_null($options)) {
             $this->restProxy->createTable($table);
-        }
-        else {
+        } else {
             $this->restProxy->createTable($table, $options);
         }
         $created = true;
@@ -473,8 +469,7 @@ class TableServiceFunctionalTest extends FunctionalTestBase
         $deleted = false;
         if (is_null($options)) {
             $this->restProxy->deleteTable($Table);
-        }
-        else {
+        } else {
             $this->restProxy->deleteTable($Table, $options);
         }
 
@@ -580,15 +575,12 @@ class TableServiceFunctionalTest extends FunctionalTestBase
 
             $this->assertNotNull($qer->getEntity(), 'getEntity()');
             $this->verifygetEntityWorker($ent, $qer->getEntity());
-        }
-        catch (ServiceException $e) {
+        } catch (ServiceException $e) {
             if (!$isGood) {
                 $this->assertEquals(400, $e->getCode(), 'getCode');
-            }
-            else if (is_null($ent->getPartitionKey()) || is_null($ent->getRowKey())) {
+            } else if (is_null($ent->getPartitionKey()) || is_null($ent->getRowKey())) {
                 $this->assertEquals(400, $e->getCode(), 'getCode');
-            }
-            else {
+            } else {
                 throw $e;
             }
         }
@@ -621,8 +613,7 @@ class TableServiceFunctionalTest extends FunctionalTestBase
         if (is_null($ent->getTimestamp())) {
             // This property will come back, so need to account for it.
             $expectedProps['Timestamp'] = null;
-        }
-        else {
+        } else {
             $this->assertEquals($ent->getTimestamp(), $entReturned->getTimestamp(), 'getTimestamp');
         }
         $this->assertNotNull($ent->getProperties(), 'getProperties');
@@ -683,8 +674,7 @@ class TableServiceFunctionalTest extends FunctionalTestBase
             $ier = $this->restProxy->insertEntity($table, $ent);
             if ($useEtag == 1) {
                 $options->setEtag($ier->getEntity()->getEtag());
-            }
-            else if ($useEtag == 2) {
+            } else if ($useEtag == 2) {
                 $options->setEtag('W/"datetime\'2012-03-05T21%3A46%3A25->5385467Z\'"');
             }
 
@@ -699,17 +689,14 @@ class TableServiceFunctionalTest extends FunctionalTestBase
             $gotError = false;
             try {
                 $this->restProxy->getEntity($table, $ent->getPartitionKey(), $ent->getRowKey());
-            }
-            catch (ServiceException $e2) {
+            } catch (ServiceException $e2) {
                 $gotError = ($e2->getCode() == 404);
             }
             $this->assertTrue($gotError, 'Expect error when entity is deleted');
-        }
-        catch (ServiceException $e) {
+        } catch (ServiceException $e) {
             if ($useEtag == 2) {
                 $this->assertEquals(412, $e->getCode(), 'getCode');
-            }
-            else {
+            } else {
                 throw $e;
             }
         }
@@ -1050,15 +1037,12 @@ class TableServiceFunctionalTest extends FunctionalTestBase
             $this->assertNotNull($entReturned, 'getEntities()[0]');
 
             $this->verifyinsertEntityWorker($ent, $entReturned);
-        }
-        catch (ServiceException $e) {
+        } catch (ServiceException $e) {
             if (!$isGood) {
                 $this->assertEquals(400, $e->getCode(), 'getCode');
-            }
-            else if (is_null($ent->getPartitionKey()) || is_null($ent->getRowKey())) {
+            } else if (is_null($ent->getPartitionKey()) || is_null($ent->getRowKey())) {
                 $this->assertEquals(400, $e->getCode(), 'getCode');
-            }
-            else {
+            } else {
                 throw $e;
             }
         }
@@ -1097,8 +1081,7 @@ class TableServiceFunctionalTest extends FunctionalTestBase
 
         if (is_null($options)) {
             $this->restProxy->updateEntity($table, $ent);
-        }
-        else {
+        } else {
             $this->restProxy->updateEntity($table, $ent, $options);
         }
 
@@ -1149,8 +1132,7 @@ class TableServiceFunctionalTest extends FunctionalTestBase
 
         if (is_null($options)) {
             $this->restProxy->mergeEntity($table, $ent);
-        }
-        else {
+        } else {
             $this->restProxy->mergeEntity($table, $ent, $options);
         }
 
@@ -1211,8 +1193,7 @@ class TableServiceFunctionalTest extends FunctionalTestBase
         $this->restProxy->insertEntity($table, $initialEnt);
         if (is_null($options)) {
             $this->restProxy->insertOrReplaceEntity($table, $ent);
-        }
-        else {
+        } else {
             $this->restProxy->insertOrReplaceEntity($table, $ent, $options);
         }
 
@@ -1274,8 +1255,7 @@ class TableServiceFunctionalTest extends FunctionalTestBase
 
         if (is_null($options)) {
             $this->restProxy->insertOrMergeEntity($table, $ent);
-        }
-        else {
+        } else {
             $this->restProxy->insertOrMergeEntity($table, $ent, $options);
         }
 
@@ -1456,12 +1436,10 @@ class TableServiceFunctionalTest extends FunctionalTestBase
             }
 
             $this->verifyCrudWorker($opType, $table, $ent, $targetEnt, true);
-        }
-        catch (ServiceException $e) {
+        } catch (ServiceException $e) {
             if (!is_null($exptErr)) {
                 $this->assertEquals($exptErr, $e->getCode(), 'getCode');
-            }
-            else {
+            } else {
                 throw $e;
             }
         }
@@ -1599,8 +1577,7 @@ class TableServiceFunctionalTest extends FunctionalTestBase
         if (is_null($ent->getTimestamp())) {
             // This property will come back, so need to account for it.
             $expectedProps['Timestamp'] = null;
-        }
-        else {
+        } else {
             $this->assertEquals($ent->getTimestamp(), $entReturned->getTimestamp(), 'getTimestamp');
         }
         $this->assertNotNull($ent->getProperties(), 'getProperties');
@@ -1747,8 +1724,7 @@ class TableServiceFunctionalTest extends FunctionalTestBase
                 for ($i = 0; $i < count($configs); $i++) {
                     $this->verifyCrudWorker($configs[$i]->opType, $table, $configs[$i]->ent, $configs[$i]->ent, false);
                 }
-            }
-            else {
+            } else {
                 $this->assertEquals($expectedReturned, count($ret->getEntries()), 'count $ret->getEntries()');
                 for ($i = 0; $i < count($ret->getEntries()); $i++) {
                     $opResult = $ret->getEntries();
@@ -1759,12 +1735,10 @@ class TableServiceFunctionalTest extends FunctionalTestBase
                     $this->verifyCrudWorker($configs[$i]->opType, $table, $configs[$i]->ent, $targetEnts[$i], true);
                 }
             }
-        }
-        catch (ServiceException $e) {
+        } catch (ServiceException $e) {
             if ($expectedError) {
                 $this->assertEquals(400, $e->getCode(), 'getCode');
-            }
-            else {
+            } else {
                 throw $e;
             }
         }
@@ -1779,18 +1753,14 @@ class TableServiceFunctionalTest extends FunctionalTestBase
     {
         if ($opResult instanceof InsertEntityResult) {
             $this->verifyinsertEntityWorker($targetEnt, $opResult->getEntity());
-        }
-        else if ($opResult instanceof UpdateEntityResult) {
+        } else if ($opResult instanceof UpdateEntityResult) {
             $ger = $this->restProxy->getEntity($table, $targetEnt->getPartitionKey(), $targetEnt->getRowKey());
             $this->assertEquals($opResult->getEtag(), $ger->getEntity()->getEtag(), 'op->getEtag');
-        }
-        else if (is_string($opResult)) {
+        } else if (is_string($opResult)) {
             // Nothing special to do.
-        }
-        else if ($opResult instanceof BatchError) {
+        } else if ($opResult instanceof BatchError) {
             $this->assertEquals($exptErr, $opResult->getError()->getCode(), 'getError()->getCode');
-        }
-        else {
+        } else {
             $this->fail('opResult is of an unknown type');
         }
     }
@@ -1816,8 +1786,7 @@ class TableServiceFunctionalTest extends FunctionalTestBase
                             'When opType=' . $opType . ' expect opResult instanceof UpdateEntityResult');
                     break;
             }
-        }
-        else {
+        } else {
             $this->assertTrue($opResult instanceof BatchError, 'When expect an error, expect opResult instanceof Error');
         }
     }
@@ -1828,8 +1797,7 @@ class TableServiceFunctionalTest extends FunctionalTestBase
             case OpType::deleteEntity:
                 if (is_null($options) && $concurType != ConcurType::KeyMatchEtagMismatch) {
                     $operations->addDeleteEntity($table, $targetEnt->getPartitionKey(), $targetEnt->getRowKey(), null);
-                }
-                else {
+                } else {
                     $operations->addDeleteEntity($table, $targetEnt->getPartitionKey(), $targetEnt->getRowKey(), $targetEnt->getEtag());
                 }
                 break;
@@ -1902,8 +1870,7 @@ class TableServiceFunctionalTest extends FunctionalTestBase
             case OpType::updateEntity:
                 if (is_null($options)) {
                     $this->restProxy->updateEntity($table, $targetEnt);
-                }
-                else {
+                } else {
                     $this->restProxy->updateEntity($table, $targetEnt, $options);
                 }
                 break;
@@ -1919,8 +1886,7 @@ class TableServiceFunctionalTest extends FunctionalTestBase
         try {
             $ger = $this->restProxy->getEntity($table, $targetEnt->getPartitionKey(), $targetEnt->getRowKey());
             $entInTable = $ger->getEntity();
-        }
-        catch (ServiceException $e) {
+        } catch (ServiceException $e) {
             $this->assertTrue(($opType == OpType::deleteEntity) && (404 == $e->getCode()), '404 is expected for deletes');
         }
 
@@ -2019,8 +1985,7 @@ class TableServiceFunctionalTest extends FunctionalTestBase
             case ConcurType::KeyMatchEtagMismatch:
                 if ($opType == OpType::insertEntity) {
                     return 409;
-                }
-                else if ($opType == OpType::insertOrReplaceEntity || $opType == OpType::insertOrMergeEntity) {
+                } else if ($opType == OpType::insertOrReplaceEntity || $opType == OpType::insertOrMergeEntity) {
                     // If exists, just clobber.
                     return null;
                 }

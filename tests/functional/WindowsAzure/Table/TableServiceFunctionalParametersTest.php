@@ -61,8 +61,7 @@ class TableServiceFunctionalParametersTest extends FunctionalTestBase
         try {
             $this->restProxy->getServiceProperties(null);
             $this->assertFalse(Configuration::isEmulated(), 'Should fail if and only if in emulator');
-        }
-        catch (ServiceException $e) {
+        } catch (ServiceException $e) {
             // Expect failure when run this test with emulator, as v1.6 doesn't support this method
             if (Configuration::isEmulated()) {
                 // Properties are not supported in emulator
@@ -81,8 +80,7 @@ class TableServiceFunctionalParametersTest extends FunctionalTestBase
         try {
             $this->restProxy->setServiceProperties(new ServiceProperties());
             $this->fail('Expect default service properties to cause service to error');
-        }
-        catch (ServiceException $e) {
+        } catch (ServiceException $e) {
             $this->assertEquals(400, $e->getCode(), 'Expect 400 when sending default service properties to server');
         }
     }
@@ -95,8 +93,7 @@ class TableServiceFunctionalParametersTest extends FunctionalTestBase
         try {
             $this->restProxy->setServiceProperties(null);
             $this->fail('Expect null service properties to throw');
-        }
-        catch (\InvalidArgumentException $e) {
+        } catch (\InvalidArgumentException $e) {
             $this->assertEquals(Resources::INVALID_SVC_PROP_MSG, $e->getMessage(), 'Expect error message');
             $this->assertEquals(0, $e->getCode(), 'Expected error code');
         }
@@ -110,8 +107,7 @@ class TableServiceFunctionalParametersTest extends FunctionalTestBase
         try {
             $this->restProxy->setServiceProperties(null, null);
             $this->fail('Expect service properties to throw');
-        }
-        catch (\InvalidArgumentException $e) {
+        } catch (\InvalidArgumentException $e) {
             $this->assertEquals(Resources::INVALID_SVC_PROP_MSG, $e->getMessage(), 'Expect error message');
             $this->assertEquals(0, $e->getCode(), 'Expected error code');
         }
@@ -125,8 +121,7 @@ class TableServiceFunctionalParametersTest extends FunctionalTestBase
         try {
             $this->restProxy->setServiceProperties(new ServiceProperties(), null);
             $this->fail('Expect default service properties to cause service to error');
-        }
-        catch (ServiceException $e) {
+        } catch (ServiceException $e) {
             $this->assertEquals(400, $e->getCode(), 'Expect 400 when sending default service properties to server');
         }
     }
@@ -148,8 +143,7 @@ class TableServiceFunctionalParametersTest extends FunctionalTestBase
         try {
             $this->restProxy->createTable(null);
             $this->fail('Expect null table to throw');
-        }
-        catch (\InvalidArgumentException $e) {
+        } catch (\InvalidArgumentException $e) {
             $this->assertEquals(sprintf(Resources::NULL_OR_EMPTY_MSG, 'table'), $e->getMessage(), 'Expect error message');
             $this->assertEquals(0, $e->getCode(), 'Expected error code');
         }
@@ -163,8 +157,7 @@ class TableServiceFunctionalParametersTest extends FunctionalTestBase
         try {
             $this->restProxy->deleteTable(null);
             $this->fail('Expect null table to throw');
-        }
-        catch (\InvalidArgumentException $e) {
+        } catch (\InvalidArgumentException $e) {
             $this->assertEquals(sprintf(Resources::NULL_OR_EMPTY_MSG, 'table'), $e->getMessage(), 'Expect error message');
             $this->assertEquals(0, $e->getCode(), 'Expected error code');
         }
@@ -178,8 +171,7 @@ class TableServiceFunctionalParametersTest extends FunctionalTestBase
         try {
             $this->restProxy->getTable(null);
             $this->fail('Expect null table to throw');
-        }
-        catch (\InvalidArgumentException $e) {
+        } catch (\InvalidArgumentException $e) {
             $this->assertEquals(sprintf(Resources::NULL_OR_EMPTY_MSG, 'table'), $e->getMessage(), 'Expect error message');
             $this->assertEquals(0, $e->getCode(), 'Expected error code');
         }
@@ -196,8 +188,7 @@ class TableServiceFunctionalParametersTest extends FunctionalTestBase
         try {
             $this->restProxy->insertEntity($table, null);
             $this->fail('Expect null entity to throw');
-        }
-        catch (\InvalidArgumentException $e) {
+        } catch (\InvalidArgumentException $e) {
             $this->assertEquals(sprintf(Resources::NULL_OR_EMPTY_MSG, 'entity'), $e->getMessage(), 'Expect error message');
             $this->assertEquals(0, $e->getCode(), 'Expected error code');
         }
@@ -214,8 +205,7 @@ class TableServiceFunctionalParametersTest extends FunctionalTestBase
         try {
             $this->restProxy->insertEntity(null, null);
             $this->fail('Expect null table and entity to throw');
-        }
-        catch (\InvalidArgumentException $e) {
+        } catch (\InvalidArgumentException $e) {
             $this->assertEquals(sprintf(Resources::NULL_OR_EMPTY_MSG, 'table'), $e->getMessage(), 'Expect error message');
             $this->assertEquals(0, $e->getCode(), 'Expected error code');
         }
@@ -232,8 +222,7 @@ class TableServiceFunctionalParametersTest extends FunctionalTestBase
         try {
             $this->restProxy->insertEntity(null, new Entity());
             $this->fail('Expect null table to throw');
-        }
-        catch (\InvalidArgumentException $e) {
+        } catch (\InvalidArgumentException $e) {
             $this->assertEquals(sprintf(Resources::NULL_OR_EMPTY_MSG, 'table'), $e->getMessage(), 'Expect error message');
             $this->assertEquals(0, $e->getCode(), 'Expected error code');
         }
@@ -250,8 +239,7 @@ class TableServiceFunctionalParametersTest extends FunctionalTestBase
         try {
             $this->restProxy->insertEntity($table, null, null);
             $this->fail('Expect null entity to throw');
-        }
-        catch (\InvalidArgumentException $e) {
+        } catch (\InvalidArgumentException $e) {
             $this->assertEquals(sprintf(Resources::NULL_OR_EMPTY_MSG, 'entity'), $e->getMessage(), 'Expect error message');
             $this->assertEquals(0, $e->getCode(), 'Expected error code');
         }
@@ -268,8 +256,7 @@ class TableServiceFunctionalParametersTest extends FunctionalTestBase
         try {
             $this->restProxy->insertEntity($table, null, TableServiceFunctionalTestData::getSimpleinsertEntityOptions());
             $this->fail('Expect null entity to throw');
-        }
-        catch (\InvalidArgumentException $e) {
+        } catch (\InvalidArgumentException $e) {
             $this->assertEquals(sprintf(Resources::NULL_OR_EMPTY_MSG, 'entity'), $e->getMessage(), 'Expect error message');
             $this->assertEquals(0, $e->getCode(), 'Expected error code');
         }
@@ -371,8 +358,7 @@ class TableServiceFunctionalParametersTest extends FunctionalTestBase
         try {
             $this->restProxy->getEntity($table, null, TableServiceFunctionalTestData::getNewKey());
             $this->fail('Expect null options to throw');
-        }
-        catch (\InvalidArgumentException $e) {
+        } catch (\InvalidArgumentException $e) {
             $this->assertEquals(Resources::NULL_TABLE_KEY_MSG, $e->getMessage(), 'Expect error message');
             $this->assertEquals(0, $e->getCode(), 'Expected error code');
         }
@@ -389,8 +375,7 @@ class TableServiceFunctionalParametersTest extends FunctionalTestBase
         try {
             $this->restProxy->getEntity($table, TableServiceFunctionalTestData::getNewKey(), null);
             $this->assertTrue(true, 'Expect null row key to throw');
-        }
-        catch (\InvalidArgumentException $e) {
+        } catch (\InvalidArgumentException $e) {
             $this->assertEquals(Resources::NULL_TABLE_KEY_MSG, $e->getMessage(), 'Expect error message');
             $this->assertEquals(0, $e->getCode(), 'Expected error code');
         }
@@ -407,8 +392,7 @@ class TableServiceFunctionalParametersTest extends FunctionalTestBase
         try {
             $this->restProxy->getEntity($table, null, null);
             $this->fail('Expect null partition and row keys to throw');
-        }
-        catch (\InvalidArgumentException $e) {
+        } catch (\InvalidArgumentException $e) {
             $this->assertEquals(Resources::NULL_TABLE_KEY_MSG, $e->getMessage(), 'Expect error message');
             $this->assertEquals(0, $e->getCode(), 'Expected error code');
         }
@@ -425,8 +409,7 @@ class TableServiceFunctionalParametersTest extends FunctionalTestBase
         try {
             $this->restProxy->getEntity(null, null, null);
             $this->fail('Expect null table name to throw');
-        }
-        catch (\InvalidArgumentException $e) {
+        } catch (\InvalidArgumentException $e) {
             $this->assertEquals(sprintf(Resources::NULL_OR_EMPTY_MSG, 'table'), $e->getMessage(), 'Expect error message');
             $this->assertEquals(0, $e->getCode(), 'Expected error code');
         }
@@ -443,8 +426,7 @@ class TableServiceFunctionalParametersTest extends FunctionalTestBase
         try {
             $this->restProxy->getEntity(null, TableServiceFunctionalTestData::getNewKey(), TableServiceFunctionalTestData::getNewKey());
             $this->fail('Expect null table name to throw');
-        }
-        catch (\InvalidArgumentException $e) {
+        } catch (\InvalidArgumentException $e) {
             $this->assertEquals(sprintf(Resources::NULL_OR_EMPTY_MSG, 'table'), $e->getMessage(), 'Expect error message');
             $this->assertEquals(0, $e->getCode(), 'Expected error code');
         }
@@ -461,8 +443,7 @@ class TableServiceFunctionalParametersTest extends FunctionalTestBase
         try {
             $this->restProxy->getEntity($table, null, null, null);
             $this->fail('Expect keys to throw');
-        }
-        catch (\InvalidArgumentException $e) {
+        } catch (\InvalidArgumentException $e) {
             $this->assertEquals(Resources::NULL_TABLE_KEY_MSG, $e->getMessage(), 'Expect error message');
             $this->assertEquals(0, $e->getCode(), 'Expected error code');
         }
@@ -482,8 +463,7 @@ class TableServiceFunctionalParametersTest extends FunctionalTestBase
             $this->restProxy->insertEntity($table, $ent);
             $this->restProxy->getEntity($table, null, null, new TableServiceOptions());
             $this->fail('Expect null keys to throw');
-        }
-        catch (\InvalidArgumentException $e) {
+        } catch (\InvalidArgumentException $e) {
             $this->assertEquals(Resources::NULL_TABLE_KEY_MSG, $e->getMessage(), 'Expect error message');
             $this->assertEquals(0, $e->getCode(), 'Expected error code');
         }
@@ -515,8 +495,7 @@ class TableServiceFunctionalParametersTest extends FunctionalTestBase
         try {
             $this->restProxy->deleteEntity($table, null, TableServiceFunctionalTestData::getNewKey());
             $this->fail('Expect null partition key to throw');
-        }
-        catch (\InvalidArgumentException $e) {
+        } catch (\InvalidArgumentException $e) {
             $this->assertEquals(Resources::NULL_TABLE_KEY_MSG, $e->getMessage(), 'Expect error message');
             $this->assertEquals(0, $e->getCode(), 'Expected error code');
         }
@@ -533,8 +512,7 @@ class TableServiceFunctionalParametersTest extends FunctionalTestBase
         try {
             $this->restProxy->deleteEntity($table, TableServiceFunctionalTestData::getNewKey(), null);
             $this->fail('Expect null row key to throw');
-        }
-        catch (\InvalidArgumentException $e) {
+        } catch (\InvalidArgumentException $e) {
             $this->assertEquals(Resources::NULL_TABLE_KEY_MSG, $e->getMessage(), 'Expect error message');
             $this->assertEquals(0, $e->getCode(), 'Expected error code');
         }
@@ -551,8 +529,7 @@ class TableServiceFunctionalParametersTest extends FunctionalTestBase
         try {
             $this->restProxy->deleteEntity($table, null, null);
             $this->fail('Expect null keys to throw');
-        }
-        catch (\InvalidArgumentException $e) {
+        } catch (\InvalidArgumentException $e) {
             $this->assertEquals(Resources::NULL_TABLE_KEY_MSG, $e->getMessage(), 'Expect error message');
             $this->assertEquals(0, $e->getCode(), 'Expected error code');
         }
@@ -569,8 +546,7 @@ class TableServiceFunctionalParametersTest extends FunctionalTestBase
         try {
             $this->restProxy->deleteEntity(null, null, null);
             $this->fail('Expect null table name to throw');
-        }
-        catch (\InvalidArgumentException $e) {
+        } catch (\InvalidArgumentException $e) {
             $this->assertEquals(sprintf(Resources::NULL_OR_EMPTY_MSG, 'table'), $e->getMessage(), 'Expect error message');
             $this->assertEquals(0, $e->getCode(), 'Expected error code');
         }
@@ -587,8 +563,7 @@ class TableServiceFunctionalParametersTest extends FunctionalTestBase
         try {
             $this->restProxy->deleteEntity(null, TableServiceFunctionalTestData::getNewKey(), TableServiceFunctionalTestData::getNewKey());
             $this->fail('Expect null table name to throw');
-        }
-        catch (\InvalidArgumentException $e) {
+        } catch (\InvalidArgumentException $e) {
             $this->assertEquals(sprintf(Resources::NULL_OR_EMPTY_MSG, 'table'), $e->getMessage(), 'Expect error message');
             $this->assertEquals(0, $e->getCode(), 'Expected error code');
         }
@@ -605,8 +580,7 @@ class TableServiceFunctionalParametersTest extends FunctionalTestBase
         try {
             $this->restProxy->deleteEntity($table, null, null, null);
             $this->fail('Expect null keys to throw');
-        }
-        catch (\InvalidArgumentException $e) {
+        } catch (\InvalidArgumentException $e) {
             $this->assertEquals(Resources::NULL_TABLE_KEY_MSG, $e->getMessage(), 'Expect error message');
             $this->assertEquals(0, $e->getCode(), 'Expected error code');
         }
@@ -626,8 +600,7 @@ class TableServiceFunctionalParametersTest extends FunctionalTestBase
             $this->restProxy->insertEntity($table, $ent);
             $this->restProxy->deleteEntity($table, null, null, new DeleteEntityOptions());
             $this->fail('Expect null keys to throw');
-        }
-        catch (\InvalidArgumentException $e) {
+        } catch (\InvalidArgumentException $e) {
             $this->assertEquals(Resources::NULL_TABLE_KEY_MSG, $e->getMessage(), 'Expect error message');
             $this->assertEquals(0, $e->getCode(), 'Expected error code');
         }
@@ -767,8 +740,7 @@ class TableServiceFunctionalParametersTest extends FunctionalTestBase
         try {
             $this->restProxy->mergeEntity($table, null);
             $this->assertTrue('Expect null entity to throw');
-        }
-        catch (\InvalidArgumentException $e) {
+        } catch (\InvalidArgumentException $e) {
             $this->assertEquals(sprintf(Resources::NULL_OR_EMPTY_MSG, 'entity'), $e->getMessage(), 'Expect error message');
             $this->assertEquals(0, $e->getCode(), 'Expected error code');
         }
@@ -785,8 +757,7 @@ class TableServiceFunctionalParametersTest extends FunctionalTestBase
         try {
             $this->restProxy->mergeEntity(null, null);
             $this->fail('Expect null table name and entity to throw');
-        }
-        catch (\InvalidArgumentException $e) {
+        } catch (\InvalidArgumentException $e) {
             $this->assertEquals(sprintf(Resources::NULL_OR_EMPTY_MSG, 'table'), $e->getMessage(), 'Expect error message');
             $this->assertEquals(0, $e->getCode(), 'Expected error code');
         }
@@ -803,8 +774,7 @@ class TableServiceFunctionalParametersTest extends FunctionalTestBase
         try {
             $this->restProxy->mergeEntity(null, TableServiceFunctionalTestData::getSimpleEntity());
             $this->fail('Expect null table name to throw');
-        }
-        catch (\InvalidArgumentException $e) {
+        } catch (\InvalidArgumentException $e) {
             $this->assertEquals(sprintf(Resources::NULL_OR_EMPTY_MSG, 'table'), $e->getMessage(), 'Expect error message');
             $this->assertEquals(0, $e->getCode(), 'Expected error code');
         }
@@ -821,8 +791,7 @@ class TableServiceFunctionalParametersTest extends FunctionalTestBase
         try {
             $this->restProxy->mergeEntity($table, null, null);
             $this->fail('Expect null entity to throw');
-        }
-        catch (\InvalidArgumentException $e) {
+        } catch (\InvalidArgumentException $e) {
             $this->assertEquals(sprintf(Resources::NULL_OR_EMPTY_MSG, 'entity'), $e->getMessage(), 'Expect error message');
             $this->assertEquals(0, $e->getCode(), 'Expected error code');
         }
@@ -839,8 +808,7 @@ class TableServiceFunctionalParametersTest extends FunctionalTestBase
         try {
             $this->restProxy->mergeEntity($table, null, TableServiceFunctionalTestData::getSimpleinsertEntityOptions());
             $this->fail('Expect null entity to throw');
-        }
-        catch (\InvalidArgumentException $e) {
+        } catch (\InvalidArgumentException $e) {
             $this->assertEquals(sprintf(Resources::NULL_OR_EMPTY_MSG, 'entity'), $e->getMessage(), 'Expect error message');
             $this->assertEquals(0, $e->getCode(), 'Expected error code');
         }
@@ -857,8 +825,7 @@ class TableServiceFunctionalParametersTest extends FunctionalTestBase
         try {
             $this->restProxy->mergeEntity($table, TableServiceFunctionalTestData::getSimpleEntity(), null);
             $this->fail('Expect 404 when merging with non-existant entity');
-        }
-        catch (ServiceException $e) {
+        } catch (ServiceException $e) {
             $this->assertEquals(404, $e->getCode(), 'Expect 404 when merging with non-existant entity');
         }
         $this->clearTable($table);
@@ -874,8 +841,7 @@ class TableServiceFunctionalParametersTest extends FunctionalTestBase
         try {
             $this->restProxy->updateEntity($table, null);
             $this->fail('Expect null entity to throw');
-        }
-        catch (\InvalidArgumentException $e) {
+        } catch (\InvalidArgumentException $e) {
             $this->assertEquals(sprintf(Resources::NULL_OR_EMPTY_MSG, 'entity'), $e->getMessage(), 'Expect error message');
             $this->assertEquals(0, $e->getCode(), 'Expected error code');
         }
@@ -892,8 +858,7 @@ class TableServiceFunctionalParametersTest extends FunctionalTestBase
         try {
             $this->restProxy->updateEntity(null, null);
             $this->fail('Expect null table name and entity to throw');
-        }
-        catch (\InvalidArgumentException $e) {
+        } catch (\InvalidArgumentException $e) {
             $this->assertEquals(sprintf(Resources::NULL_OR_EMPTY_MSG, 'table'), $e->getMessage(), 'Expect error message');
             $this->assertEquals(0, $e->getCode(), 'Expected error code');
         }
@@ -910,8 +875,7 @@ class TableServiceFunctionalParametersTest extends FunctionalTestBase
         try {
             $this->restProxy->updateEntity(null, TableServiceFunctionalTestData::getSimpleEntity());
             $this->fail('Expect null options to throw');
-        }
-        catch (\InvalidArgumentException $e) {
+        } catch (\InvalidArgumentException $e) {
             $this->assertEquals(sprintf(Resources::NULL_OR_EMPTY_MSG, 'table'), $e->getMessage(), 'Expect error message');
             $this->assertEquals(0, $e->getCode(), 'Expected error code');
         }
@@ -928,8 +892,7 @@ class TableServiceFunctionalParametersTest extends FunctionalTestBase
         try {
             $this->restProxy->updateEntity($table, null, null);
             $this->fail('Expect null entity to throw');
-        }
-        catch (\InvalidArgumentException $e) {
+        } catch (\InvalidArgumentException $e) {
             $this->assertEquals(sprintf(Resources::NULL_OR_EMPTY_MSG, 'entity'), $e->getMessage(), 'Expect error message');
             $this->assertEquals(0, $e->getCode(), 'Expected error code');
         }
@@ -946,8 +909,7 @@ class TableServiceFunctionalParametersTest extends FunctionalTestBase
         try {
             $this->restProxy->updateEntity($table, null, TableServiceFunctionalTestData::getSimpleinsertEntityOptions());
             $this->fail('Expect null entity to throw');
-        }
-        catch (\InvalidArgumentException $e) {
+        } catch (\InvalidArgumentException $e) {
             $this->assertEquals(sprintf(Resources::NULL_OR_EMPTY_MSG, 'entity'), $e->getMessage(), 'Expect error message');
             $this->assertEquals(0, $e->getCode(), 'Expected error code');
         }
@@ -964,8 +926,7 @@ class TableServiceFunctionalParametersTest extends FunctionalTestBase
         try {
             $this->restProxy->updateEntity($table, TableServiceFunctionalTestData::getSimpleEntity(), null);
             $this->fail('Expect 404 when updating non-existant entity');
-        }
-        catch (ServiceException $e) {
+        } catch (ServiceException $e) {
             $this->assertEquals(404, $e->getCode(), 'Should be 404 for update nonexistant entity');
         }
         $this->clearTable($table);
@@ -981,8 +942,7 @@ class TableServiceFunctionalParametersTest extends FunctionalTestBase
         try {
             $this->restProxy->insertOrMergeEntity($table, null);
             $this->fail('Expect to throw for null entity');
-        }
-        catch (\InvalidArgumentException $e) {
+        } catch (\InvalidArgumentException $e) {
             $this->assertEquals(sprintf(Resources::NULL_OR_EMPTY_MSG, 'entity'), $e->getMessage(), 'Expect error message');
             $this->assertEquals(0, $e->getCode(), 'Expected error code');
         }
@@ -999,8 +959,7 @@ class TableServiceFunctionalParametersTest extends FunctionalTestBase
         try {
             $this->restProxy->insertOrMergeEntity(null, null);
             $this->fail('Expect to throw for null table name and entity');
-        }
-        catch (\InvalidArgumentException $e) {
+        } catch (\InvalidArgumentException $e) {
             $this->assertEquals(sprintf(Resources::NULL_OR_EMPTY_MSG, 'table'), $e->getMessage(), 'Expect error message');
             $this->assertEquals(0, $e->getCode(), 'Expected error code');
         }
@@ -1017,8 +976,7 @@ class TableServiceFunctionalParametersTest extends FunctionalTestBase
         try {
             $this->restProxy->insertOrMergeEntity(null, new Entity());
             $this->fail('Expect to throw for null table name');
-        }
-        catch (\InvalidArgumentException $e) {
+        } catch (\InvalidArgumentException $e) {
             $this->assertEquals(sprintf(Resources::NULL_OR_EMPTY_MSG, 'table'), $e->getMessage(), 'Expect error message');
             $this->assertEquals(0, $e->getCode(), 'Expected error code');
         }
@@ -1035,8 +993,7 @@ class TableServiceFunctionalParametersTest extends FunctionalTestBase
         try {
             $this->restProxy->insertOrMergeEntity($table, null, null);
             $this->fail('Expect to throw for null entity');
-        }
-        catch (\InvalidArgumentException $e) {
+        } catch (\InvalidArgumentException $e) {
             $this->assertEquals(sprintf(Resources::NULL_OR_EMPTY_MSG, 'entity'), $e->getMessage(), 'Expect error message');
             $this->assertEquals(0, $e->getCode(), 'Expected error code');
         }
@@ -1053,8 +1010,7 @@ class TableServiceFunctionalParametersTest extends FunctionalTestBase
         try {
             $this->restProxy->insertOrMergeEntity($table, null, TableServiceFunctionalTestData::getSimpleinsertEntityOptions());
             $this->fail('Expect to throw for null entity');
-        }
-        catch (\InvalidArgumentException $e) {
+        } catch (\InvalidArgumentException $e) {
             $this->assertEquals(sprintf(Resources::NULL_OR_EMPTY_MSG, 'entity'), $e->getMessage(), 'Expect error message');
             $this->assertEquals(0, $e->getCode(), 'Expected error code');
         }
@@ -1071,8 +1027,7 @@ class TableServiceFunctionalParametersTest extends FunctionalTestBase
         try {
             $this->restProxy->insertOrMergeEntity($table, TableServiceFunctionalTestData::getSimpleEntity(), null);
             $this->assertFalse(Configuration::isEmulated(), 'Should fail if and only if in emulator');
-        }
-        catch (ServiceException $e) {
+        } catch (ServiceException $e) {
             // Expect failure when run this test with emulator, as v1.6 doesn't support this method
             if (Configuration::isEmulated()) {
                 $this->assertEquals(404, $e->getCode(), 'getCode');
@@ -1091,8 +1046,7 @@ class TableServiceFunctionalParametersTest extends FunctionalTestBase
         try {
             $this->restProxy->insertOrReplaceEntity($table, null);
             $this->fail('Expect to throw for null entity');
-        }
-        catch (\InvalidArgumentException $e) {
+        } catch (\InvalidArgumentException $e) {
             $this->assertEquals(sprintf(Resources::NULL_OR_EMPTY_MSG, 'entity'), $e->getMessage(), 'Expect error message');
             $this->assertEquals(0, $e->getCode(), 'Expected error code');
         }
@@ -1109,8 +1063,7 @@ class TableServiceFunctionalParametersTest extends FunctionalTestBase
         try {
             $this->restProxy->insertOrReplaceEntity(null, null);
             $this->fail('Expect to throw for null table name and entity');
-        }
-        catch (\InvalidArgumentException $e) {
+        } catch (\InvalidArgumentException $e) {
             $this->assertEquals(sprintf(Resources::NULL_OR_EMPTY_MSG, 'table'), $e->getMessage(), 'Expect error message');
             $this->assertEquals(0, $e->getCode(), 'Expected error code');
         }
@@ -1127,8 +1080,7 @@ class TableServiceFunctionalParametersTest extends FunctionalTestBase
         try {
             $this->restProxy->insertOrReplaceEntity(null, new Entity());
             $this->fail('Expect to throw for null table name');
-        }
-        catch (\InvalidArgumentException $e) {
+        } catch (\InvalidArgumentException $e) {
             $this->assertEquals(sprintf(Resources::NULL_OR_EMPTY_MSG, 'table'), $e->getMessage(), 'Expect error message');
             $this->assertEquals(0, $e->getCode(), 'Expected error code');
         }
@@ -1145,8 +1097,7 @@ class TableServiceFunctionalParametersTest extends FunctionalTestBase
         try {
             $this->restProxy->insertOrReplaceEntity($table, null, null);
             $this->fail('Expect to throw for null entity');
-        }
-        catch (\InvalidArgumentException $e) {
+        } catch (\InvalidArgumentException $e) {
             $this->assertEquals(sprintf(Resources::NULL_OR_EMPTY_MSG, 'entity'), $e->getMessage(), 'Expect error message');
             $this->assertEquals(0, $e->getCode(), 'Expected error code');
         }
@@ -1163,8 +1114,7 @@ class TableServiceFunctionalParametersTest extends FunctionalTestBase
         try {
             $this->restProxy->insertOrReplaceEntity($table, null, TableServiceFunctionalTestData::getSimpleinsertEntityOptions());
             $this->fail('Expect to throw for null entity');
-        }
-        catch (\InvalidArgumentException $e) {
+        } catch (\InvalidArgumentException $e) {
             $this->assertEquals(sprintf(Resources::NULL_OR_EMPTY_MSG, 'entity'), $e->getMessage(), 'Expect error message');
             $this->assertEquals(0, $e->getCode(), 'Expected error code');
         }
@@ -1181,8 +1131,7 @@ class TableServiceFunctionalParametersTest extends FunctionalTestBase
         try {
             $this->restProxy->insertOrReplaceEntity($table, TableServiceFunctionalTestData::getSimpleEntity(), null);
             $this->assertFalse(Configuration::isEmulated(), 'Should fail if and only if in emulator');
-        }
-        catch (ServiceException $e) {
+        } catch (ServiceException $e) {
             // Expect failure when run this test with emulator, as v1.6 doesn't support this method
             if (Configuration::isEmulated()) {
                 $this->assertEquals(404, $e->getCode(), 'getCode');
@@ -1201,8 +1150,7 @@ class TableServiceFunctionalParametersTest extends FunctionalTestBase
         try {
             $this->restProxy->queryEntities(null);
             $this->fail('Expect to throw for null table name');
-        }
-        catch (\InvalidArgumentException $e) {
+        } catch (\InvalidArgumentException $e) {
             $this->assertEquals(sprintf(Resources::NULL_OR_EMPTY_MSG, 'table'), $e->getMessage(), 'Expect error message');
             $this->assertEquals(0, $e->getCode(), 'Expected error code');
         }
@@ -1219,8 +1167,7 @@ class TableServiceFunctionalParametersTest extends FunctionalTestBase
         try {
             $this->restProxy->queryEntities(null, null);
             $this->fail('Expect to throw for null table name');
-        }
-        catch (\InvalidArgumentException $e) {
+        } catch (\InvalidArgumentException $e) {
             $this->assertEquals(sprintf(Resources::NULL_OR_EMPTY_MSG, 'table'), $e->getMessage(), 'Expect error message');
             $this->assertEquals(0, $e->getCode(), 'Expected error code');
         }
@@ -1237,8 +1184,7 @@ class TableServiceFunctionalParametersTest extends FunctionalTestBase
         try {
             $this->restProxy->queryEntities(null, new QueryEntitiesOptions());
             $this->fail('Expect to throw for null table name');
-        }
-        catch (\InvalidArgumentException $e) {
+        } catch (\InvalidArgumentException $e) {
             $this->assertEquals(sprintf(Resources::NULL_OR_EMPTY_MSG, 'table'), $e->getMessage(), 'Expect error message');
             $this->assertEquals(0, $e->getCode(), 'Expected error code');
         }

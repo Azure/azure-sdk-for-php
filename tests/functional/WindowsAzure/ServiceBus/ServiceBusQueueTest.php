@@ -86,8 +86,7 @@ class ServiceBusQueueTest extends ScenarioTestBase
             $this->restProxy->getQueue($this->queueName);
             self::write('Queue already exists deleting it');
             $this->restProxy->deleteQueue($this->queueName);
-        }
-        catch (\Exception $e) {
+        } catch (\Exception $e) {
             self::write('could not get an existing queue (' . $e->getCode() . '), proceeding...');
         }
 

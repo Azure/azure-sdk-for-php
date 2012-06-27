@@ -57,8 +57,7 @@ class FunctionalTestBase extends IntegrationTestBase
             try
             {
                 $service->deleteTable($name);
-            }
-            catch (\Exception $e)
+            } catch (\Exception $e)
             {
                 // Ignore exception and continue.
                 error_log($e->getMessage());

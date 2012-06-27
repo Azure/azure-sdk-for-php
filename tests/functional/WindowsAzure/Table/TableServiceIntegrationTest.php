@@ -134,8 +134,7 @@ class TableServiceIntegrationTest extends IntegrationTestBase
         foreach($list as $item)  {
             try {
                 $service->deleteTable($item);
-            }
-            catch (ServiceException $e) {
+            } catch (ServiceException $e) {
                 // Ignore
                 error_log($e->getMessage());
             }
@@ -178,8 +177,7 @@ class TableServiceIntegrationTest extends IntegrationTestBase
             if (Configuration::isEmulated()) {
                 $this->assertEquals(400, $e->getCode(), 'getCode');
                 $shouldReturn = true;
-            }
-            else {
+            } else {
                 throw $e;
             }
         }
@@ -214,8 +212,7 @@ class TableServiceIntegrationTest extends IntegrationTestBase
             if (Configuration::isEmulated()) {
                 $this->assertEquals(400, $e->getCode(), 'getCode');
                 $shouldReturn = true;
-            }
-            else {
+            } else {
                 throw $e;
             }
         }
@@ -248,8 +245,7 @@ class TableServiceIntegrationTest extends IntegrationTestBase
         try {
             $this->restProxy->getTable(self::$CREATABLE_TABLE_1);
             $error = null;
-        }
-        catch (ServiceException $e) {
+        } catch (ServiceException $e) {
             $error = $e;
         }
         $this->restProxy->createTable(self::$CREATABLE_TABLE_1);
@@ -275,8 +271,7 @@ class TableServiceIntegrationTest extends IntegrationTestBase
         try {
             $this->restProxy->getTable(self::$CREATABLE_TABLE_2);
             $error = null;
-        }
-        catch (ServiceException $e) {
+        } catch (ServiceException $e) {
             $error = $e;
         }
 
@@ -580,8 +575,7 @@ class TableServiceIntegrationTest extends IntegrationTestBase
         try {
             $this->restProxy->getEntity(self::$TEST_TABLE_8, $result1->getEntity()->getPartitionKey(), $result1->getEntity()->getRowKey());
             $this->fail('Expect an exception when getting an entity that does not exist');
-        }
-        catch (ServiceException $e) {
+        } catch (ServiceException $e) {
             $this->assertEquals(404, $e->getCode(), 'getCode');
         }
 
@@ -1244,8 +1238,7 @@ class TableServiceIntegrationTest extends IntegrationTestBase
         // Use different behavior in the emulator, as v1.6 does not support this method
         if (!Configuration::isEmulated()) {
             $batchOperations->addInsertOrReplaceEntity($table, $entity4);
-        }
-        else {
+        } else {
             $batchOperations->addUpdateEntity($table, $entity4);
         }
 
@@ -1260,8 +1253,7 @@ class TableServiceIntegrationTest extends IntegrationTestBase
         // Use different behavior in the emulator, as v1.6 does not support this method
         if (Configuration::isEmulated()) {
             $batchOperations->addInsertEntity($table, $entity5);
-        }
-        else {
+        } else {
             $batchOperations->addInsertOrMergeEntity($table, $entity5);
         }
 
@@ -1279,8 +1271,7 @@ class TableServiceIntegrationTest extends IntegrationTestBase
         $this->assertTrue($ents[4] instanceof UpdateEntityResult, '$result->getEntries()->get(4)->getClass()');
         if (Configuration::isEmulated()) {
             $this->assertTrue($ents[5] instanceof InsertEntityResult, '$result->getEntries()->get(5)->getClass()');
-        }
-        else {
+        } else {
             $this->assertTrue($ents[5] instanceof UpdateEntityResult, '$result->getEntries()->get(5)->getClass()');
         }
     }
