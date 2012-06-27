@@ -24,32 +24,16 @@
 
 namespace Tests\Functional\WindowsAzure\Queue;
 
-use DateTime;
-use ReflectionClass;
-use ReflectionMethod;
-use Tests\Framework\FiddlerFilter;
-use Tests\Framework\QueueServiceRestProxyTestBase;
 use Tests\Framework\TestResources;
-use Tests\Functional\WindowsAzure\Queue\QueueServiceFunctionalTestData;
 use WindowsAzure\Common\ServiceException;
 use WindowsAzure\Common\Internal\Resources;
 use WindowsAzure\Common\Configuration;
 use WindowsAzure\Queue\QueueService;
 use WindowsAzure\Queue\QueueSettings;
 
-class FunctionalTestBase extends QueueServiceRestProxyTestBase
+class FunctionalTestBase extends IntegrationTestBase
 {
     protected $accountName;
-
-    /**
-     * @covers WindowsAzure\ServiceBus\ServiceBusRestProxy::withFilter
-     */
-    public function __construct()
-    {
-        parent::__construct();
-        $fiddlerFilter = new FiddlerFilter();
-        $this->restProxy = $this->restProxy->withFilter($fiddlerFilter);
-    }
 
     public function setUp()
     {
@@ -75,16 +59,10 @@ class FunctionalTestBase extends QueueServiceRestProxyTestBase
 
     public static function tearDownAfterClass()
     {
-        parent::tearDownAfterClass();
-        $service = self::createService();
-        if (!Configuration::isEmulated()) {
-            $serviceProperties = QueueServiceFunctionalTestData::getDefaultServiceProperties();
-            $service->setServiceProperties($serviceProperties);
-        }
-
         foreach(QueueServiceFunctionalTestData::$TEST_QUEUE_NAMES as $name)  {
             self::staticSafeDeleteQueue($service, $name);
         }
+        parent::tearDownAfterClass();
     }
 
     private static function createService()

@@ -83,7 +83,7 @@ class QueueServiceFunctionalTestData
         $l->setRetentionPolicy($rp);
         $l->setVersion('1.0');
         $l->setDelete(false);
-        $l->setRead(true);
+        $l->setRead(false);
         $l->setWrite(false);
 
         $m = new Metrics();

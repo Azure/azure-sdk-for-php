@@ -27,7 +27,6 @@ namespace Tests\Functional\WindowsAzure\Table;
 use Tests\Framework\FiddlerFilter;
 use Tests\Framework\TableServiceRestProxyTestBase;
 use Tests\Framework\TestResources;
-use Tests\Functional\WindowsAzure\Table\TableServiceFunctionalTestData;
 use WindowsAzure\Common\Internal\Resources;
 use WindowsAzure\Common\Internal\Utilities;
 use WindowsAzure\Common\ServiceException;
@@ -37,18 +36,8 @@ use WindowsAzure\Table\TableSettings;
 use WindowsAzure\Table\Models\Entity;
 use WindowsAzure\Table\Models\Filters\Filter;
 
-class FunctionalTestBase extends TableServiceRestProxyTestBase
+class FunctionalTestBase extends IntegrationTestBase
 {
-    /**
-     * @covers WindowsAzure\ServiceBus\ServiceBusRestProxy::withFilter
-     */
-    public function __construct()
-    {
-        parent::__construct();
-        $fiddlerFilter = new FiddlerFilter();
-        $this->restProxy = $this->restProxy->withFilter($fiddlerFilter);
-    }
-
     public static function setUpBeforeClass()
     {
         parent::setUpBeforeClass();
@@ -63,13 +52,7 @@ class FunctionalTestBase extends TableServiceRestProxyTestBase
 
     public static function tearDownAfterClass()
     {
-        parent::tearDownAfterClass();
         $service = self::createService();
-        if (!Configuration::isEmulated()) {
-            $serviceProperties = TableServiceFunctionalTestData::getDefaultServiceProperties();
-            $service->setServiceProperties($serviceProperties);
-        }
-
         foreach(TableServiceFunctionalTestData::$TEST_TABLE_NAMES as $name)  {
             try
             {
@@ -81,6 +64,7 @@ class FunctionalTestBase extends TableServiceRestProxyTestBase
                 error_log($e->getMessage());
             }
         }
+        parent::tearDownAfterClass();
     }
 
     private static function createService()

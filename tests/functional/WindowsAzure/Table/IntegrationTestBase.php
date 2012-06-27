@@ -39,6 +39,16 @@ class IntegrationTestBase extends TableServiceRestProxyTestBase
         $fiddlerFilter = new FiddlerFilter();
         $this->restProxy = $this->restProxy->withFilter($fiddlerFilter);
     }
+
+    public static function tearDownAfterClass()
+    {
+        if (!\WindowsAzure\Common\Configuration::isEmulated()) {
+            $tmp = new IntegrationTestBase();
+            $serviceProperties = TableServiceFunctionalTestData::getDefaultServiceProperties();
+            $tmp->restProxy->setServiceProperties($serviceProperties);
+        }
+        parent::tearDownAfterClass();
+    }
 }
 
 ?>

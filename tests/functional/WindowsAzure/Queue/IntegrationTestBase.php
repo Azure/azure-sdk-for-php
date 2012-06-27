@@ -39,6 +39,16 @@ class IntegrationTestBase extends QueueServiceRestProxyTestBase
         $fiddlerFilter = new FiddlerFilter();
         $this->restProxy = $this->restProxy->withFilter($fiddlerFilter);
     }
+
+    public static function tearDownAfterClass()
+    {
+        if (!\WindowsAzure\Common\Configuration::isEmulated()) {
+            $tmp = new IntegrationTestBase();
+            $serviceProperties = QueueServiceFunctionalTestData::getDefaultServiceProperties();
+            $tmp->restProxy->setServiceProperties($serviceProperties);
+        }
+        parent::tearDownAfterClass();
+    }
 }
 
 ?>
