@@ -24,35 +24,24 @@
 
 namespace Tests\Functional\WindowsAzure\Blob;
 
-use WindowsAzure\Common\Internal\Utilities;
-use WindowsAzure\Common\ServiceException;
-use WindowsAzure\Common\Internal\Resources;
-use WindowsAzure\Common\Configuration;
-use WindowsAzure\Common\Models\Logging;
-use WindowsAzure\Common\Models\Metrics;
-use WindowsAzure\Common\Models\RetentionPolicy;
-use WindowsAzure\Common\Models\ServiceProperties;
-
 use WindowsAzure\Blob\BlobSettings;
-use WindowsAzure\Blob\Models\AccessCondition;
 use WindowsAzure\Blob\Models\BlobServiceOptions;
-use WindowsAzure\Blob\Models\ContainerAcl;
-use WindowsAzure\Blob\Models\CreateContainerOptions;
 use WindowsAzure\Blob\Models\CreateBlobSnapshotOptions;
+use WindowsAzure\Blob\Models\CreateContainerOptions;
 use WindowsAzure\Blob\Models\DeleteBlobOptions;
 use WindowsAzure\Blob\Models\DeleteContainerOptions;
 use WindowsAzure\Blob\Models\GetBlobMetadataOptions;
 use WindowsAzure\Blob\Models\GetBlobOptions;
 use WindowsAzure\Blob\Models\GetBlobPropertiesOptions;
-use WindowsAzure\Blob\Models\GetServicePropertiesResult;
 use WindowsAzure\Blob\Models\ListBlobsOptions;
-use WindowsAzure\Blob\Models\ListBlobsResult;
 use WindowsAzure\Blob\Models\ListContainersOptions;
-use WindowsAzure\Blob\Models\ListContainersResult;
 use WindowsAzure\Blob\Models\PublicAccessType;
 use WindowsAzure\Blob\Models\SetBlobMetadataOptions;
-use WindowsAzure\Blob\Models\SetBlobPropertiesOptions;
 use WindowsAzure\Blob\Models\SetContainerMetadataOptions;
+use WindowsAzure\Common\Configuration;
+use WindowsAzure\Common\ServiceException;
+use WindowsAzure\Common\Internal\Resources;
+use WindowsAzure\Common\Internal\Utilities;
 
 class BlobServiceFunctionalTest extends FunctionalTestBase
 {
@@ -943,12 +932,7 @@ class BlobServiceFunctionalTest extends FunctionalTestBase
         // Make sure there is something to test
         $this->restProxy->createContainer($container);
         $blobContent = uniqid();
-        try {
-            $this->restProxy->createBlockBlob($container, 'test', $blobContent);
-        } catch (UnsupportedEncodingException $e1) {
-            // UTF-8 should be fine.
-            error_log($e1->getMessage());
-        }
+        $this->restProxy->createBlockBlob($container, 'test', $blobContent);
 
         try {
             if (is_null($options)) {
@@ -2183,17 +2167,13 @@ class BlobServiceFunctionalTest extends FunctionalTestBase
 
         $this->assertNotNull($res->getEtag(), 'result etag');
 
-        try {
-            $snapshotDate = new \DateTime($res->getSnapshot());
+        $snapshotDate = new \DateTime($res->getSnapshot());
 
-            // Make sure the last modified date is within 10 seconds
-            $this->assertTrue(
-                    BlobServiceFunctionalTestData::diffInTotalSeconds($snapshotDate, $now) < 10,
-                    'Last modified date (' . $snapshotDate->format(\DateTime::RFC1123) . ')'.
-                    ' should be within 10 seconds of $now (' . $now->format(\DateTime::RFC1123) . ')');
-        } catch (ParseException $e) {
-            $this->assertTrue(false, 'Expected to be able to parse ' . $res->getSnapshot() . ' but got an error: ' . $e->getMessage());
-        }
+        // Make sure the last modified date is within 10 seconds
+        $this->assertTrue(
+                BlobServiceFunctionalTestData::diffInTotalSeconds($snapshotDate, $now) < 10,
+                'Last modified date (' . $snapshotDate->format(\DateTime::RFC1123) . ')'.
+                ' should be within 10 seconds of $now (' . $now->format(\DateTime::RFC1123) . ')');
 
         // Make sure the last modified date is within 10 seconds
         $this->assertTrue(

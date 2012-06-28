@@ -24,42 +24,25 @@
 
 namespace Tests\Functional\WindowsAzure\Blob;
 
-use WindowsAzure\Common\Internal\Utilities;
-use WindowsAzure\Common\ServiceException;
-use WindowsAzure\Common\Internal\Resources;
-use WindowsAzure\Common\Configuration;
-use WindowsAzure\Blob\BlobService;
 use WindowsAzure\Blob\Models\AccessCondition;
 use WindowsAzure\Blob\Models\BlobBlockType;
-use WindowsAzure\Blob\Models\BlobProperties;
 use WindowsAzure\Blob\Models\Block;
 use WindowsAzure\Blob\Models\BlockList;
 use WindowsAzure\Blob\Models\ContainerACL;
 use WindowsAzure\Blob\Models\CreateBlobOptions;
-use WindowsAzure\Blob\Models\CreateBlobPagesResult;
 use WindowsAzure\Blob\Models\CreateBlobSnapshotOptions;
-use WindowsAzure\Blob\Models\CreateBlobSnapshotResult;
 use WindowsAzure\Blob\Models\CreateContainerOptions;
-use WindowsAzure\Blob\Models\GetBlobMetadataResult;
 use WindowsAzure\Blob\Models\GetBlobOptions;
 use WindowsAzure\Blob\Models\GetBlobPropertiesOptions;
-use WindowsAzure\Blob\Models\GetBlobPropertiesResult;
-use WindowsAzure\Blob\Models\GetBlobResult;
-use WindowsAzure\Blob\Models\GetContainerPropertiesResult;
 use WindowsAzure\Blob\Models\ListBlobBlocksOptions;
-use WindowsAzure\Blob\Models\ListBlobBlocksResult;
-use WindowsAzure\Blob\Models\ListBlobRegionsResult;
 use WindowsAzure\Blob\Models\ListBlobsOptions;
-use WindowsAzure\Blob\Models\ListBlobsResult;
 use WindowsAzure\Blob\Models\ListContainersOptions;
-use WindowsAzure\Blob\Models\ListContainersResult;
-use WindowsAzure\Blob\Models\ListContainersResult\Container;
 use WindowsAzure\Blob\Models\PageRange;
 use WindowsAzure\Blob\Models\PublicAccessType;
-use WindowsAzure\Blob\Models\ServiceProperties;
-use WindowsAzure\Blob\Models\SetBlobMetadataResult;
 use WindowsAzure\Blob\Models\SetBlobPropertiesOptions;
-use WindowsAzure\Blob\Models\SetBlobPropertiesResult;
+use WindowsAzure\Common\Configuration;
+use WindowsAzure\Common\ServiceException;
+use WindowsAzure\Common\Internal\Utilities;
 
 class BlobServiceIntegrationTest extends IntegrationTestBase
 {

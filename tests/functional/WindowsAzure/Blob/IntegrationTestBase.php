@@ -26,7 +26,6 @@ namespace Tests\Functional\WindowsAzure\Blob;
 
 use Tests\Framework\FiddlerFilter;
 use Tests\Framework\BlobServiceRestProxyTestBase;
-use WindowsAzure\Blob\BlobService;
 use WindowsAzure\Common\Configuration;
 
 class IntegrationTestBase extends BlobServiceRestProxyTestBase
