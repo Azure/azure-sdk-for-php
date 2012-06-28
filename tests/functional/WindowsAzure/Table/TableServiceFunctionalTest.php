@@ -32,29 +32,14 @@ use Tests\Functional\WindowsAzure\Table\Models\FakeTableInfoEntry;
 use WindowsAzure\Common\Internal\Utilities;
 use WindowsAzure\Common\ServiceException;
 use WindowsAzure\Common\Configuration;
-use WindowsAzure\Common\Models\Logging;
-use WindowsAzure\Common\Models\Metrics;
-use WindowsAzure\Common\Models\RetentionPolicy;
-use WindowsAzure\Common\Models\ServiceProperties;
-use WindowsAzure\Table\Models\BatchError;
 use WindowsAzure\Table\Models\BatchOperations;
-use WindowsAzure\Table\Models\BatchResult;
 use WindowsAzure\Table\Models\DeleteEntityOptions;
 use WindowsAzure\Table\Models\EdmType;
 use WindowsAzure\Table\Models\Entity;
-use WindowsAzure\Table\Models\GetEntityResult;
-use WindowsAzure\Table\Models\GetServicePropertiesResult;
-use WindowsAzure\Table\Models\GetTableResult;
-use WindowsAzure\Table\Models\InsertEntityResult;
 use WindowsAzure\Table\Models\Property;
-use WindowsAzure\Table\Models\Query;
 use WindowsAzure\Table\Models\QueryEntitiesOptions;
-use WindowsAzure\Table\Models\QueryEntitiesResult;
 use WindowsAzure\Table\Models\QueryTablesOptions;
-use WindowsAzure\Table\Models\QueryTablesResult;
 use WindowsAzure\Table\Models\TableServiceOptions;
-use WindowsAzure\Table\Models\UpdateEntityResult;
-use WindowsAzure\Table\Models\Filters\Filter;
 
 class TableServiceFunctionalTest extends FunctionalTestBase
 {

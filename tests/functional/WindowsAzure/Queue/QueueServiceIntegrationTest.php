@@ -24,13 +24,11 @@
 
 namespace Tests\Functional\WindowsAzure\Queue;
 
-use WindowsAzure\Common\ServiceException;
 use WindowsAzure\Common\Configuration;
-use WindowsAzure\Queue\QueueService;
-use WindowsAzure\Queue\Models\ListQueuesOptions;
-use WindowsAzure\Queue\Models\ListQueuesResult;
+use WindowsAzure\Common\ServiceException;
 use WindowsAzure\Queue\Models\CreateQueueOptions;
 use WindowsAzure\Queue\Models\ListMessagesOptions;
+use WindowsAzure\Queue\Models\ListQueuesOptions;
 use WindowsAzure\Queue\Models\PeekMessagesOptions;
 
 class QueueServiceIntegrationTest extends IntegrationTestBase

@@ -24,23 +24,17 @@
 
 namespace Tests\Functional\WindowsAzure\Table;
 
-use WindowsAzure\Common\Internal\Utilities;
 use WindowsAzure\Common\Configuration;
+use WindowsAzure\Common\Internal\Utilities;
 use WindowsAzure\Common\Models\Logging;
 use WindowsAzure\Common\Models\Metrics;
 use WindowsAzure\Common\Models\RetentionPolicy;
 use WindowsAzure\Common\Models\ServiceProperties;
 use WindowsAzure\Table\Models\EdmType;
 use WindowsAzure\Table\Models\Entity;
-use WindowsAzure\Table\Models\Property;
-use WindowsAzure\Table\Models\Query;
 use WindowsAzure\Table\Models\QueryTablesOptions;
 use WindowsAzure\Table\Models\TableServiceOptions;
-use WindowsAzure\Table\Models\Filters\BinaryFilter;
-use WindowsAzure\Table\Models\Filters\ConstantFilter;
 use WindowsAzure\Table\Models\Filters\Filter;
-use WindowsAzure\Table\Models\Filters\PropertyNameFilter;
-use WindowsAzure\Table\Models\Filters\UnaryFilter;
 
 class TableServiceFunctionalTestData
 {

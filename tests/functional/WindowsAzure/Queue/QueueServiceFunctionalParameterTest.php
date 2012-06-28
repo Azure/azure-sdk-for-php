@@ -24,17 +24,10 @@
 
 namespace Tests\Functional\WindowsAzure\Queue;
 
-use WindowsAzure\Common\Internal\Resources;
-use WindowsAzure\Common\ServiceException;
 use WindowsAzure\Common\Configuration;
-use WindowsAzure\Common\Models\Logging;
-use WindowsAzure\Common\Models\Metrics;
-use WindowsAzure\Common\Models\RetentionPolicy;
-use WindowsAzure\Common\Models\ServiceProperties;
-use WindowsAzure\Queue\Models\CreateMessageOptions;
-use WindowsAzure\Queue\Models\CreateQueueOptions;
+use WindowsAzure\Common\ServiceException;
+use WindowsAzure\Common\Internal\Resources;
 use WindowsAzure\Queue\Models\ListMessagesOptions;
-use WindowsAzure\Queue\Models\ListQueuesOptions;
 use WindowsAzure\Queue\Models\PeekMessagesOptions;
 use WindowsAzure\Queue\Models\QueueServiceOptions;
 

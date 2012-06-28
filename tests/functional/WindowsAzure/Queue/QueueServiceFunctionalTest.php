@@ -24,13 +24,8 @@
 
 namespace Tests\Functional\WindowsAzure\Queue;
 
-use \HTTP_Request2_LogicException;
 use WindowsAzure\Common\ServiceException;
 use WindowsAzure\Common\Configuration;
-use WindowsAzure\Common\Models\Logging;
-use WindowsAzure\Common\Models\Metrics;
-use WindowsAzure\Common\Models\RetentionPolicy;
-use WindowsAzure\Common\Models\ServiceProperties;
 use WindowsAzure\Queue\Models\CreateMessageOptions;
 use WindowsAzure\Queue\Models\CreateQueueOptions;
 use WindowsAzure\Queue\Models\ListMessagesOptions;
@@ -715,7 +710,7 @@ class QueueServiceFunctionalTest extends FunctionalTestBase
 
             $res = $this->restProxy->getQueueMetadata($queue);
             $this->verifyGetSetQueueMetadataWorker($res, $metadata);
-          } catch (HTTP_Request2_LogicException $le) {
+          } catch (\HTTP_Request2_LogicException $le) {
             $keypart = array_keys($metadata);
             $keypart = $keypart[0];
             if (!is_null($metadata) && count($metadata) > 0 && (substr($keypart, 0, 1) == '<')) {

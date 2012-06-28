@@ -25,6 +25,7 @@
 namespace Tests\Functional\WindowsAzure\ServiceBus;
 
 use Tests\Functional\WindowsAzure\ServiceBus\IntegrationTestBase;
+use WindowsAzure\Common\ServiceException;
 use WindowsAzure\Common\Internal\IServiceFilter;
 use WindowsAzure\ServiceBus\Models\BrokeredMessage;
 use WindowsAzure\ServiceBus\Models\QueueDescription;
@@ -109,6 +110,7 @@ class ServiceBusIntegrationTest extends IntegrationTestBase
             $this->restProxy->createQueue(new QueueInfo('TestDeleteQueueWorks'));
         } catch (ServiceException $e) {
             // Ignore
+            error_log($e->getMessage());
         }
 
         // Act

@@ -27,7 +27,6 @@ namespace Tests\Functional\WindowsAzure\ServiceBus;
 use Tests\Framework\FiddlerFilter;
 use Tests\Framework\ServiceBusRestProxyTestBase;
 use WindowsAzure\Common\Internal\Utilities;
-use WindowsAzure\ServiceBus\Models\QueueInfo;
 use WindowsAzure\ServiceBus\Models\ReceiveMessageOptions;
 
 class IntegrationTestBase extends ServiceBusRestProxyTestBase
