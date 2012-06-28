@@ -1222,7 +1222,15 @@ class BlobServiceIntegrationTest extends IntegrationTestBase
             $this->restProxy->getBlob(self::$_test_container_for_blobs, 'test', $opts);
             $this->fail('getBlob should throw an exception');
         } catch (ServiceException $e) {
-            $this->assertEquals(304, $e->getCode(), 'got the expected exception');
+            if (!$this->hasSecureEndpoint() && $e->getCode() == 403) {
+                // Proxies can eat the access condition headers of
+                // unsecured (http) requests, which causes the authentication
+                // to fail, with a 403. There is nothing much that can be done
+                // about this, other than ignore it.
+                $this->markTestSkipped('Appears that a proxy ate your access condition');
+            } else {
+                $this->assertEquals(304, $e->getCode(), 'got the expected exception');
+            }
         }
     }
 
@@ -1243,7 +1251,15 @@ class BlobServiceIntegrationTest extends IntegrationTestBase
             $this->restProxy->getBlob(self::$_test_container_for_blobs, 'test', $opts);
             $this->fail('getBlob should throw an exception');
         } catch (ServiceException $e) {
-            $this->assertEquals(304, $e->getCode(), 'got the expected exception');
+            if (!$this->hasSecureEndpoint() && $e->getCode() == 403) {
+                // Proxies can eat the access condition headers of
+                // unsecured (http) requests, which causes the authentication
+                // to fail, with a 403. There is nothing much that can be done
+                // about this, other than ignore it.
+                $this->markTestSkipped('Appears that a proxy ate your access condition');
+            } else {
+                $this->assertEquals(304, $e->getCode(), 'got the expected exception');
+            }
         }
     }
 

@@ -1547,7 +1547,14 @@ class BlobServiceFunctionalTest extends FunctionalTestBase
 
             $this->verifyGetBlobPropertiesWorker($res, $metadata, null);
         } catch (ServiceException $e) {
-            if (!is_null($options->getTimeout()) && $options->getTimeout() < 1) {
+            if (!is_null($options->getAccessCondition()) &&
+                    !$this->hasSecureEndpoint() &&
+                    $e->getCode() == 403) {
+                // Proxies can eat the access condition headers of
+                // unsecured (http) requests, which causes the authentication
+                // to fail, with a 403. There is nothing much that can be done
+                // about this, other than ignore it.
+            } else if (!is_null($options->getTimeout()) && $options->getTimeout() < 1) {
                 $this->assertEquals(500, $e->getCode(), 'bad timeout: getCode');
             } else if (!BlobServiceFunctionalTestData::passTemporalAccessCondition($options->getAccessCondition())) {
                 if ($options->getAccessCondition()->getHeader() == Resources::IF_MODIFIED_SINCE) {
@@ -1849,7 +1856,14 @@ class BlobServiceFunctionalTest extends FunctionalTestBase
 
             $this->verifyGetBlobWorker($res, $options, $dataSize, $metadata);
         } catch (ServiceException $e) {
-            if (!is_null($options->getTimeout()) && $options->getTimeout() < 1) {
+            if (!is_null($options->getAccessCondition()) &&
+                    !$this->hasSecureEndpoint() &&
+                    $e->getCode() == 403) {
+                // Proxies can eat the access condition headers of
+                // unsecured (http) requests, which causes the authentication
+                // to fail, with a 403. There is nothing much that can be done
+                // about this, other than ignore it.
+            } else if (!is_null($options->getTimeout()) && $options->getTimeout() < 1) {
                 $this->assertEquals(500, $e->getCode(), 'bad timeout: getCode');
             } else if (!BlobServiceFunctionalTestData::passTemporalAccessCondition($options->getAccessCondition())) {
                 if ($options->getAccessCondition()->getHeader() == Resources::IF_MODIFIED_SINCE) {
