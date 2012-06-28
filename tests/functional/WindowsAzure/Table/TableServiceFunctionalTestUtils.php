@@ -24,6 +24,7 @@
 
 namespace Tests\Functional\WindowsAzure\Table;
 
+use Tests\Functional\WindowsAzure\Table\Enums\MutatePivot;
 use WindowsAzure\Common\Internal\Utilities;
 use WindowsAzure\Common\ServiceException;
 use WindowsAzure\Table\TableService;
@@ -45,18 +46,6 @@ use WindowsAzure\Table\Models\Filters\Filter;
 use WindowsAzure\Table\Models\Filters\PropertyNameFilter;
 use WindowsAzure\Table\Models\Filters\QueryStringFilter;
 use WindowsAzure\Table\Models\Filters\UnaryFilter;
-
-class MutatePivot
-{
-    const CHANGE_VALUES   = 'ChangeValues';
-    const ADD_PROPERTY    = 'AddProperty';
-    const REMOVE_PROPERTY = 'RemoveProperty';
-    const NULL_PROPERTY   = 'NullProperty';
-    public static function values()
-    {
-        return array('ChangeValues', 'AddProperty', 'RemoveProperty', 'NullProperty');
-    }
-}
 
 class TableServiceFunctionalTestUtils
 {
@@ -426,8 +415,7 @@ class TableServiceFunctionalTestUtils
     public static function showEntityListDiff($actualData, $expectedData)
     {
         $ret = '';
-        if (count($expectedData) != count($actualData))
-            {
+        if (count($expectedData) != count($actualData)) {
             $ret .= 'VVV actual VVV' . "\n";
             for ($i = 0; $i < count($actualData); $i++) {
                 $e = $actualData[$i];

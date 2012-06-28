@@ -68,8 +68,7 @@ class FunctionalTestBase extends IntegrationTestBase
 
     private static function staticSafeDeleteQueue($service, $queueName)
     {
-        try
-        {
+        try {
             $service->deleteQueue($queueName);
         } catch (\Exception $e) {
             // Ignore exception and continue, will assume that this queue doesn't exist in the sotrage account

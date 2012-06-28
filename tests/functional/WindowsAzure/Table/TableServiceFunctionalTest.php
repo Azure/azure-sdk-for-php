@@ -24,8 +24,11 @@
 
 namespace Tests\Functional\WindowsAzure\Table;
 
-use Tests\Functional\WindowsAzure\Table\FakeTableInfoEntry;
-use Tests\Functional\WindowsAzure\Table\MutatePivot;
+use Tests\Functional\WindowsAzure\Table\Enums\ConcurType;
+use Tests\Functional\WindowsAzure\Table\Enums\MutatePivot;
+use Tests\Functional\WindowsAzure\Table\Enums\OpType;
+use Tests\Functional\WindowsAzure\Table\Models\BatchWorkerConfig;
+use Tests\Functional\WindowsAzure\Table\Models\FakeTableInfoEntry;
 use WindowsAzure\Common\Internal\Utilities;
 use WindowsAzure\Common\ServiceException;
 use WindowsAzure\Common\Configuration;
@@ -52,41 +55,6 @@ use WindowsAzure\Table\Models\QueryTablesResult;
 use WindowsAzure\Table\Models\TableServiceOptions;
 use WindowsAzure\Table\Models\UpdateEntityResult;
 use WindowsAzure\Table\Models\Filters\Filter;
-
-class OpType
-{
-    const DELETE_ENTITY            = 'deleteEntity';
-    const INSERT_ENTITY            = 'insertEntity';
-    const INSERT_OR_MERGE_ENTITY   = 'insertOrMergeEntity';
-    const INSERT_OR_REPLACE_ENTITY = 'insertOrReplaceEntity';
-    const MERGE_ENTITY             = 'mergeEntity';
-    const UPDATE_ENTITY            = 'updateEntity';
-    public static function values()
-    {
-        return array('deleteEntity', 'insertEntity', 'insertOrMergeEntity', 'insertOrReplaceEntity', 'mergeEntity', 'updateEntity');
-    }
-}
-
-class ConcurType
-{
-    const NO_KEY_MATCH            = 'NoKeyMatch';
-    const KEY_MATCH_NO_ETAG       = 'KeyMatchNoEtag';
-    const KEY_MATCH_ETAG_MISMATCH = 'KeyMatchEtagMismatch';
-    const KEY_MATCH_ETAG_MATCH    = 'KeyMatchEtagMatch';
-    public static function values()
-    {
-        return array('NoKeyMatch', 'KeyMatchNoEtag', 'KeyMatchEtagMismatch', 'KeyMatchEtagMatch');
-    }
-}
-
-class BatchWorkerConfig
-{
-    public $opType;
-    public $concurType;
-    public $mutatePivot;
-    public $ent;
-    public $options;
-}
 
 class TableServiceFunctionalTest extends FunctionalTestBase
 {
