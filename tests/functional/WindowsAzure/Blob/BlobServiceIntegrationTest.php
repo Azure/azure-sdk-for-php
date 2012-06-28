@@ -64,14 +64,15 @@ class BlobServiceIntegrationTest extends IntegrationTestBase
         parent::setUpBeforeClass();
         // Setup container names array (list of container names used by
         // integration tests)
+        $rint = mt_rand(0, 1000000);
         self::$_testContainers = array();
         for ($i = 0; $i < 10; $i++) {
-            self::$_testContainers[$i] = self::$_testContainersPrefix . ($i + 1);
+            self::$_testContainers[$i] = self::$_testContainersPrefix . ($rint + $i);
         }
 
         self::$_creatableContainers = array();
         for ($i = 0; $i < 10; $i++) {
-            self::$_creatableContainers[$i] = self::$_createableContainersPrefix . ($i + 1);
+            self::$_creatableContainers[$i] = self::$_createableContainersPrefix . ($rint + $i);
         }
 
         self::$_creatable_container_1 = self::$_creatableContainers[0];
@@ -428,15 +429,22 @@ class BlobServiceIntegrationTest extends IntegrationTestBase
     public function testWorkingWithRootContainersWorks()
     {
         // Ensure root container exists
-        $error = null;
-        try {
-            $this->restProxy->createContainer('$root');
-        } catch (ServiceException $e) {
-            $error = $e;
-        }
-
-        // Assert
-        $this->assertTrue(is_null($error) || $error->getCode() == 409, '$error is null || $error->getCode() == 409');
+        $ok = false;
+        $counter = 0;
+        do {
+            // If the root conainter was deleted recently, it cannot
+            // be recreated immediately. Need to wait a bit if get the 409.
+            try {
+                $this->restProxy->createContainer('$root');
+                $ok = true;
+            } catch (ServiceException $e) {
+                if ($e->getCode() != 409 || $counter > 6) {
+                    throw $e;
+                }
+                sleep(10);
+                $counter++;
+            }
+        } while (!$ok);
 
         // Work with root container explicitly ('$root')
         {
@@ -475,10 +483,8 @@ class BlobServiceIntegrationTest extends IntegrationTestBase
             $this->restProxy->deleteBlob('', self::$_blob_for_root_container);
         }
 
-        // If container was created, delete it
-        if (is_null($error)) {
-            $this->restProxy->deleteContainer('$root');
-        }
+        // Cleanup.
+        $this->restProxy->deleteContainer('$root');
     }
 
     /**

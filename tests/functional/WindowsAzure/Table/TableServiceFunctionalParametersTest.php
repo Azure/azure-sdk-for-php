@@ -24,9 +24,10 @@
 
 namespace Tests\Functional\WindowsAzure\Table;
 
-use WindowsAzure\Common\Internal\Resources;
-use WindowsAzure\Common\ServiceException;
 use WindowsAzure\Common\Configuration;
+use WindowsAzure\Common\ServiceException;
+use WindowsAzure\Common\Internal\Resources;
+use WindowsAzure\Common\Models\ServiceProperties;
 use WindowsAzure\Table\Models\DeleteEntityOptions;
 use WindowsAzure\Table\Models\EdmType;
 use WindowsAzure\Table\Models\Entity;
