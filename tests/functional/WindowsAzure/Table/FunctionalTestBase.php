@@ -25,6 +25,8 @@
 namespace Tests\Functional\WindowsAzure\Table;
 
 use WindowsAzure\Common\Internal\Utilities;
+use WindowsAzure\Table\Models\Entity;
+use WindowsAzure\Table\Models\Filters\Filter;
 
 class FunctionalTestBase extends IntegrationTestBase
 {

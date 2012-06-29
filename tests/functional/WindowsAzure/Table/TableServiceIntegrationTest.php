@@ -26,13 +26,16 @@ namespace Tests\Functional\WindowsAzure\Table;
 
 use WindowsAzure\Common\ServiceException;
 use WindowsAzure\Common\Configuration;
+use WindowsAzure\Table\Models\BatchError;
 use WindowsAzure\Table\Models\BatchOperations;
 use WindowsAzure\Table\Models\DeleteEntityOptions;
 use WindowsAzure\Table\Models\EdmType;
 use WindowsAzure\Table\Models\Entity;
+use WindowsAzure\Table\Models\InsertEntityResult;
 use WindowsAzure\Table\Models\Query;
 use WindowsAzure\Table\Models\QueryEntitiesOptions;
 use WindowsAzure\Table\Models\QueryTablesOptions;
+use WindowsAzure\Table\Models\UpdateEntityResult;
 use WindowsAzure\Table\Models\Filters\Filter;
 
 class TableServiceIntegrationTest extends IntegrationTestBase
