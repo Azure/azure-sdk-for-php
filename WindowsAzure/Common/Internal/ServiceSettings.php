@@ -51,6 +51,23 @@ abstract class ServiceSettings
     protected static $validSettingKeys = array();
     
     /**
+     * Throws an exception if the connection string format does not match any of the
+     * available formats.
+     * 
+     * @param type $connectionString The invalid formatted connection string.
+     * 
+     * @return none
+     * 
+     * @throws \RuntimeException
+     */
+    protected static function noMatch($connectionString)
+    {
+        throw new \RuntimeException(
+            sprintf(Resources::MISSING_CONNECTION_STRING_SETTINGS, $connectionString)
+        );
+    }
+    
+    /**
      * Parses the connection string and then validate that the parsed keys belong to
      * the $validSettingKeys
      * 
@@ -63,9 +80,9 @@ abstract class ServiceSettings
     protected static function parseAndValidateKeys($connectionString)
     {
         // Initialize the static values if they are not initialized yet.
-        if (!self::$isInitialized) {
+        if (!static::$isInitialized) {
             static::init();
-            self::$isInitialized = true;
+            static::$isInitialized = true;
         }
         
         $tokenizedSettings = ConnectionStringParser::parseConnectionString(
@@ -75,12 +92,12 @@ abstract class ServiceSettings
         
         // Assure that all given keys are valid.
         foreach ($tokenizedSettings as $key => $value) {
-            if (!in_array($key, self::$validSettingKeys)) {
+            if (!in_array($key, static::$validSettingKeys)) {
                 throw new \RuntimeException(
                     sprintf(
                         Resources::INVALID_CONNECTION_STRING_SETTING_KEY,
                         $key,
-                        implode("\n", self::$validSettingKeys)
+                        implode("\n", static::$validSettingKeys)
                     )
                 );
             }

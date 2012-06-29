@@ -55,7 +55,7 @@ class ServicesBuilderTest extends \PHPUnit_Framework_TestCase
         $builder = new ServicesBuilder();
         
         // Test
-        $queueRestProxy = $builder->createQueueService(TestResources::getStorageServicesConnectionString());
+        $queueRestProxy = $builder->createQueueService(TestResources::getWindowsAzureStorageServicesConnectionString());
         
         // Assert
         $this->assertInstanceOf('WindowsAzure\Queue\Internal\IQueue', $queueRestProxy);
@@ -67,7 +67,6 @@ class ServicesBuilderTest extends \PHPUnit_Framework_TestCase
      * @covers WindowsAzure\Common\Internal\ServicesBuilder::serializer
      * @covers WindowsAzure\Common\Internal\ServicesBuilder::blobAuthenticationScheme
      * @covers WindowsAzure\Common\Internal\ServicesBuilder::_addHeadersFilter
-     * @covers WindowsAzure\Common\Internal\ServicesBuilder::_validateConfig
      */
     public function testBuildForBlob()
     {
@@ -75,7 +74,7 @@ class ServicesBuilderTest extends \PHPUnit_Framework_TestCase
         $builder = new ServicesBuilder();
         
         // Test
-        $blobRestProxy = $builder->createBlobService(TestResources::getStorageServicesConnectionString());
+        $blobRestProxy = $builder->createBlobService(TestResources::getWindowsAzureStorageServicesConnectionString());
         
         // Assert
         $this->assertInstanceOf('WindowsAzure\Blob\Internal\IBlob', $blobRestProxy);
@@ -96,7 +95,7 @@ class ServicesBuilderTest extends \PHPUnit_Framework_TestCase
         $builder = new ServicesBuilder();
         
         // Test
-        $tableRestProxy = $builder->createTableService(TestResources::getStorageServicesConnectionString());
+        $tableRestProxy = $builder->createTableService(TestResources::getWindowsAzureStorageServicesConnectionString());
         
         // Assert
         $this->assertInstanceOf('WindowsAzure\Table\Internal\ITable', $tableRestProxy);
