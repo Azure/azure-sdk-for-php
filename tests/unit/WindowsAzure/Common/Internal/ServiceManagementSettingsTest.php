@@ -57,6 +57,7 @@ class ServiceManagementSettingsTest extends \PHPUnit_Framework_TestCase
      * @covers WindowsAzure\Common\Internal\ServiceSettings::settingWithFunc
      * @covers WindowsAzure\Common\Internal\ServiceSettings::matchedSpecification
      * @covers WindowsAzure\Common\Internal\ServiceSettings::parseAndValidateKeys
+     * @covers WindowsAzure\Common\Internal\ServiceSettings::noMatch
      */
     public function testCreateFromConnectionStringWithAutomaticCase()
     {
@@ -86,6 +87,7 @@ class ServiceManagementSettingsTest extends \PHPUnit_Framework_TestCase
      * @covers WindowsAzure\Common\Internal\ServiceSettings::settingWithFunc
      * @covers WindowsAzure\Common\Internal\ServiceSettings::matchedSpecification
      * @covers WindowsAzure\Common\Internal\ServiceSettings::parseAndValidateKeys
+     * @covers WindowsAzure\Common\Internal\ServiceSettings::noMatch
      */
     public function testCreateFromConnectionStringWithExplicitCase()
     {
@@ -115,6 +117,7 @@ class ServiceManagementSettingsTest extends \PHPUnit_Framework_TestCase
      * @covers WindowsAzure\Common\Internal\ServiceSettings::settingWithFunc
      * @covers WindowsAzure\Common\Internal\ServiceSettings::matchedSpecification
      * @covers WindowsAzure\Common\Internal\ServiceSettings::parseAndValidateKeys
+     * @covers WindowsAzure\Common\Internal\ServiceSettings::noMatch
      */
     public function testCreateFromConnectionStringWithMissingKeyFail()
     {
@@ -173,6 +176,35 @@ class ServiceManagementSettingsTest extends \PHPUnit_Framework_TestCase
         
         // Assert
         $this->assertEquals($expected, $actual);
+    }
+    
+    /**
+     * @covers WindowsAzure\Common\Internal\ServiceManagementSettings::createFromConnectionString
+     * @covers WindowsAzure\Common\Internal\ServiceManagementSettings::init
+     * @covers WindowsAzure\Common\Internal\ServiceManagementSettings::__construct
+     * @covers WindowsAzure\Common\Internal\ServiceSettings::getValidator
+     * @covers WindowsAzure\Common\Internal\ServiceSettings::optional
+     * @covers WindowsAzure\Common\Internal\ServiceSettings::allRequired
+     * @covers WindowsAzure\Common\Internal\ServiceSettings::setting
+     * @covers WindowsAzure\Common\Internal\ServiceSettings::settingWithFunc
+     * @covers WindowsAzure\Common\Internal\ServiceSettings::matchedSpecification
+     * @covers WindowsAzure\Common\Internal\ServiceSettings::parseAndValidateKeys
+     * @covers WindowsAzure\Common\Internal\ServiceSettings::noMatch
+     */
+    public function testCreateFromConnectionStringWithInvalidServiceManagementKeyFail()
+    {
+        // Setup
+        $invalidKey = 'InvalidKey';
+        $connectionString = "$invalidKey=value;SubscriptionID=12345;CertificatePath=C:\path_to_cert;ServiceManagementEndpoint=http://endpoint.com";
+        $expectedMsg = sprintf(
+            Resources::INVALID_CONNECTION_STRING_SETTING_KEY,
+            $invalidKey,
+            implode("\n", array('SubscriptionID', 'CertificatePath', 'ServiceManagementEndpoint'))
+        );
+        $this->setExpectedException('\RuntimeException', $expectedMsg);
+        
+        // Test
+        ServiceManagementSettings::createFromConnectionString($connectionString);
     }
 }
 

@@ -72,11 +72,22 @@ class TestResources
         return $azureServiceConnectionString;
     }
     
-    public function getServiceManagementConnectionString()
+    public static function getServiceManagementConnectionString()
     {
         $subscriptionId = self::serviceManagementSubscriptionId();
         $certPath = self::serviceManagementCertificatePath();
         $connectionString = "SubscriptionID=$subscriptionId;CertificatePath=$certPath";
+        
+        return $connectionString;
+    }
+    
+    public static function getServiceBusConnectionString()
+    {
+        $namespace = self::serviceBusNamespace();
+        $endpoint = "https://$namespace.servicebus.windows.net";
+        $wrapName = self::wrapAuthenticationName();
+        $wrapPassword = self::wrapPassword();
+        $connectionString = "Endpoint=$endpoint;SharedSecretIssuer=$wrapName;SharedSecretValue=$wrapPassword";
         
         return $connectionString;
     }
@@ -127,17 +138,35 @@ class TestResources
 
     public static function serviceBusNamespace()
     {
-        return getenv('SERVICE_BUS_NAMESPACE');
+        $namespace = getenv('SERVICE_BUS_NAMESPACE');
+        
+        if (empty($namespace)) {
+            throw new \Exception('SERVICE_BUS_NAMESPACE enviroment variable is missing.');
+        }
+        
+        return $namespace;
     }
 
     public static function wrapAuthenticationName()
     {
-        return getenv('WRAP_AUTHENTICATION_NAME');
+        $wrapAuthenticationName = getenv('WRAP_AUTHENTICATION_NAME');
+        
+        if (empty($wrapAuthenticationName)) {
+            throw new \Exception('WRAP_AUTHENTICATION_NAME enviroment variable is missing.');
+        }
+        
+        return $wrapAuthenticationName;
     }
 
     public static function wrapPassword()
     {
-        return getenv('WRAP_PASSWORD');
+        $wrapPassword = getenv('WRAP_PASSWORD');
+        
+        if (empty($wrapPassword)) {
+            throw new \Exception('WRAP_PASSWORD enviroment variable is missing.');
+        }
+        
+        return $wrapPassword;
     }
     
 

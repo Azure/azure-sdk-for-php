@@ -67,7 +67,6 @@ class ServicesBuilderTest extends \PHPUnit_Framework_TestCase
      * @covers WindowsAzure\Common\Internal\ServicesBuilder::serializer
      * @covers WindowsAzure\Common\Internal\ServicesBuilder::blobAuthenticationScheme
      * @covers WindowsAzure\Common\Internal\ServicesBuilder::_addHeadersFilter
-     * @covers WindowsAzure\Common\Internal\ServicesBuilder::_validateConfig
      */
     public function testBuildForBlob()
     {

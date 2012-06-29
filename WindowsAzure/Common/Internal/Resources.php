@@ -58,6 +58,9 @@ class Resources
     const SUBSCRIPTION_ID_NAME = 'SubscriptionID';
     const CERTIFICATE_PATH_NAME = 'CertificatePath';
     const SERVICE_MANAGEMENT_ENDPOINT_NAME = 'ServiceManagementEndpoint';
+    const SERVICE_BUS_ENDPOINT_NAME = 'Endpoint';
+    const SHARED_SECRET_ISSUER_NAME = 'SharedSecretIssuer';
+    const SHARED_SECRET_VALUE_NAME = 'SharedSecretValue';
     
     // Messages
     const INVALID_TYPE_MSG = 'The provided variable should be of type: ';
@@ -90,8 +93,6 @@ class Resources
     const INVALID_BUILDER_MSG = 'Builder object must implement IServicesBuilder';
     const INVALID_ACH_MSG = 'The provided access condition header is invalid';
     const INVALID_RECEIVE_MODE_MSG = 'The receive message option is in neither RECEIVE_AND_DELETE nor PEEK_LOCK mode.';
-    const MISSING_CONFIG_SETTING_KEY_MSG = "Missing configuration setting %s which is required to create %sRestProxy.";
-    const MISSING_CONFIG_SETTING_VALUE_MSG = "The value of configuration setting %s can't be null or empty.";
     const INVALID_CONFIG_URI = "The provided URI '%s' is invalid. It has to pass the check 'filter_var(<user_uri>, FILTER_VALIDATE_URL)'.";
     const INVALID_CONFIG_VALUE = "The provided config value '%s' does not belong to the valid values subset:\n%s";
     const INVALID_ACCOUNT_KEY_FORMAT = "The provided account key '%s' is not a valid base64 string. It has to pass the check 'base64_decode(<user_account_key>, true)'.";
@@ -206,6 +207,7 @@ class Resources
     const SETTING_CONSTRAINT = 'SettingConstraint';
     const DEV_STORE_URI = 'http://127.0.0.1';
     const SERVICE_URI_FORMAT = "%s://%s.%s";
+    const WRAP_ENDPOINT_URI_FORMAT = "https://%s-sb.accesscontrol.windows.net/WRAPv0.9";
     
     // Xml Namespaces
     const WA_XML_NAMESPACE   = 'http://schemas.microsoft.com/windowsazure';
