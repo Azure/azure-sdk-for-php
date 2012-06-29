@@ -31,9 +31,9 @@ use WindowsAzure\Common\Configuration;
 
 class IntegrationTestBase extends BlobServiceRestProxyTestBase
 {
-    public function __construct()
+    public function setUp()
     {
-        parent::__construct();
+        parent::setUp();
         $fiddlerFilter = new FiddlerFilter();
         $this->restProxy = $this->restProxy->withFilter($fiddlerFilter);
     }

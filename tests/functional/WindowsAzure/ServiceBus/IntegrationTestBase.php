@@ -32,19 +32,11 @@ use WindowsAzure\ServiceBus\Models\ReceiveMessageOptions;
 
 class IntegrationTestBase extends ServiceBusRestProxyTestBase
 {
-    /**
-     * @covers WindowsAzure\ServiceBus\ServiceBusRestProxy::withFilter
-     */
-    public function __construct()
-    {
-        parent::__construct();
-        $fiddlerFilter = new FiddlerFilter();
-        $this->restProxy = $this->restProxy->withFilter($fiddlerFilter);
-    }
-
     public function setUp()
     {
         parent::setUp();
+        $fiddlerFilter = new FiddlerFilter();
+        $this->restProxy = $this->restProxy->withFilter($fiddlerFilter);
     }
 
     public static function setUpBeforeClass()

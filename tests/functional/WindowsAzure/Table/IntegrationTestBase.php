@@ -31,9 +31,9 @@ use WindowsAzure\Table\TableService;
 
 class IntegrationTestBase extends TableServiceRestProxyTestBase
 {
-    public function __construct()
+    public function setUp()
     {
-        parent::__construct();
+        parent::setUp();
         $fiddlerFilter = new FiddlerFilter();
         $this->restProxy = $this->restProxy->withFilter($fiddlerFilter);
     }

@@ -31,9 +31,9 @@ use WindowsAzure\Queue\QueueService;
 
 class IntegrationTestBase extends QueueServiceRestProxyTestBase
 {
-    public function __construct()
+    public function setUp()
     {
-        parent::__construct();
+        parent::setUp();
         $fiddlerFilter = new FiddlerFilter();
         $this->restProxy = $this->restProxy->withFilter($fiddlerFilter);
     }
