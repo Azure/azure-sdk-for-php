@@ -70,9 +70,9 @@ class StorageServiceSettingsTest extends \PHPUnit_Framework_TestCase
         $connectionString = 'UseDevelopmentStorage=true';
         $expectedName = Resources::DEV_STORE_NAME;
         $expectedKey = Resources::DEV_STORE_KEY;
-        $expectedBlobEndpoint = Resources::DEV_STORE_URI . ':10000/devstoreaccount1';
-        $expectedQueueEndpoint = Resources::DEV_STORE_URI . ':10001/devstoreaccount1';
-        $expectedTableEndpoint = Resources::DEV_STORE_URI . ':10002/devstoreaccount1';
+        $expectedBlobEndpoint = Resources::DEV_STORE_URI . ':10000/devstoreaccount1/';
+        $expectedQueueEndpoint = Resources::DEV_STORE_URI . ':10001/devstoreaccount1/';
+        $expectedTableEndpoint = Resources::DEV_STORE_URI . ':10002/devstoreaccount1/';
         
         // Test
         $actual = StorageServiceSettings::createFromConnectionString($connectionString);
@@ -107,9 +107,9 @@ class StorageServiceSettingsTest extends \PHPUnit_Framework_TestCase
         $connectionString = "DevelopmentStorageProxyUri=$myProxyUri;UseDevelopmentStorage=true";
         $expectedName = Resources::DEV_STORE_NAME;
         $expectedKey = Resources::DEV_STORE_KEY;
-        $expectedBlobEndpoint = $myProxyUri . ':10000/devstoreaccount1';
-        $expectedQueueEndpoint = $myProxyUri . ':10001/devstoreaccount1';
-        $expectedTableEndpoint = $myProxyUri . ':10002/devstoreaccount1';
+        $expectedBlobEndpoint = $myProxyUri . ':10000/devstoreaccount1/';
+        $expectedQueueEndpoint = $myProxyUri . ':10001/devstoreaccount1/';
+        $expectedTableEndpoint = $myProxyUri . ':10002/devstoreaccount1/';
         
         // Test
         $actual = StorageServiceSettings::createFromConnectionString($connectionString);

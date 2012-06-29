@@ -61,15 +61,20 @@ class TestResources
     const HEADER1_VALUE = 'HeaderValue1';
     const HEADER2_VALUE = 'HeaderValue2';
 
-    public static function getStorageServicesConnectionString()
+    public static function getWindowsAzureStorageServicesConnectionString()
     {
         $accountName = self::accountName();
         $accountKey = self::accountKey();
         $azureServiceConnectionString = "DefaultEndpointsProtocol=http;AccountName=$accountName;AccountKey=$accountKey";
+        
+        return $azureServiceConnectionString;
+    }
+    
+    public static function getEmulatorStorageServicesConnectionString()
+    {
         $developmentStorageConnectionString = 'UseDevelopmentStorage=true';
         
-        // To run against devstore return $developmentStorageConnectionString instead of $azureServiceConnectionString
-        return $azureServiceConnectionString;
+        return $developmentStorageConnectionString;
     }
     
     public static function getServiceManagementConnectionString()

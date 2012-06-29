@@ -25,7 +25,6 @@
 namespace Tests\Framework;
 use WindowsAzure\Common\Internal\Logger;
 use WindowsAzure\Common\Internal\Serialization\XmlSerializer;
-use WindowsAzure\Common\Configuration;
 use WindowsAzure\Common\Internal\ServicesBuilder;
 
 /**
@@ -44,15 +43,6 @@ class RestProxyTestBase extends \PHPUnit_Framework_TestCase
     protected $restProxy;
     protected $xmlSerializer;
     protected $builder;
-
-    const NOT_SUPPORTED = 'The storage emulator doesn\'t support this API';
-    
-    protected function skipIfEmulated()
-    {
-        if (Configuration::isEmulated()) {
-            $this->markTestSkipped(self::NOT_SUPPORTED);
-        }
-    }
     
     public function __construct()
     {

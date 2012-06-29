@@ -83,7 +83,6 @@ spl_autoload_register(
             'windowsazure\\blob\\models\\setcontainermetadataoptions' => '/Blob/Models/SetContainerMetadataOptions.php',
             'windowsazure\\blob\\models\\signedidentifier' => '/Blob/Models/SignedIdentifier.php',
             'windowsazure\\common\\cloudconfigurationmanager' => '/Common/CloudConfigurationManager.php',
-            'windowsazure\\common\\configuration' => '/Common/Configuration.php',
             'windowsazure\\common\\internal\\atom\\atombase' => '/Common/Internal/Atom/AtomBase.php',
             'windowsazure\\common\\internal\\atom\\atomlink' => '/Common/Internal/Atom/AtomLink.php',
             'windowsazure\\common\\internal\\atom\\category' => '/Common/Internal/Atom/Category.php',
