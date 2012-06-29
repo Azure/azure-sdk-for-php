@@ -130,8 +130,7 @@ class ServiceBusTopicTest extends ScenarioTestBase
             $this->restProxy->getTopic($this->topicName);
             self::write('Topic already exists deleting it');
             $this->restProxy->deleteTopic($this->topicName);
-        }
-        catch (\Exception $e) {
+        } catch (\Exception $e) {
             self::write('could not get an existing topic (' . $e->getCode() . '), proceeding...');
         }
 
