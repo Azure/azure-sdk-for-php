@@ -139,6 +139,18 @@ class StorageServiceSettings extends ServiceSettings
     private static $_tableEndpointSetting;
     
     /**
+     * @var boolean
+     */
+    protected static $isInitialized = false;
+    
+    /**
+     * Holds the expected setting keys.
+     * 
+     * @var array
+     */
+    protected static $validSettingKeys = array();
+    
+    /**
      * Initializes static members of the class.
      * 
      * @return none
@@ -400,9 +412,7 @@ class StorageServiceSettings extends ServiceSettings
             return self::_createStorageServiceSettings($tokenizedSettings);
         }
         
-        throw new \RuntimeException(
-            sprintf(Resources::MISSING_CONNECTION_STRING_SETTINGS, $connectionString)
-        );
+        self::noMatch($connectionString);
     }
     
     /**

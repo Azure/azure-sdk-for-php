@@ -37,7 +37,6 @@ use WindowsAzure\Common\Internal\InvalidArgumentTypeException;
 use WindowsAzure\Queue\QueueRestProxy;
 use WindowsAzure\Blob\BlobRestProxy;
 use WindowsAzure\ServiceBus\ServiceBusRestProxy;
-use WindowsAzure\ServiceBus\ServiceBusSettings;
 use WindowsAzure\ServiceBus\WrapRestProxy;
 use WindowsAzure\Table\TableRestProxy;
 use WindowsAzure\Table\Internal\AtomReaderWriter;
@@ -331,27 +330,29 @@ class ServicesBuilder implements IServicesBuilder
     /**
      * Builds a service bus client. 
      * 
-     * @param WindowsAzure\Common\Configuration $config The configuration
-     * for the service bus. 
+     * @param string $connectionString The configuration connection string.
      * 
      * @return WindowsAzure\ServiceBus\Internal\IServiceBus
      */
-    public function createServiceBusService($config)
+    public function createServiceBusService($connectionString)
     {
-        $this->_validateConfig($config, Resources::SERVICE_BUS_TYPE_NAME);
+        $settings = ServiceBusSettings::createFromConnectionString(
+            $connectionString
+        );
         
         $httpClient        = $this->httpClient();
         $serializer        = $this->serializer();
         $serviceBusWrapper = new ServiceBusRestProxy(
             $httpClient,
-            $config->getProperty(ServiceBusSettings::URI),
+            $settings->getServiceBusEndpointUri(),
             $serializer
         );
         
         $wrapFilter = new WrapFilter(
-            $config->getProperty(ServiceBusSettings::WRAP_URI),
-            $config->getProperty(ServiceBusSettings::WRAP_NAME),
-            $config->getProperty(ServiceBusSettings::WRAP_PASSWORD)
+            $settings->getWrapEndpointUri(),
+            $settings->getWrapName(),
+            $settings->getWrapPassword(),
+            $this->createWrapService($settings->getWrapEndpointUri())
         );
         
         return $serviceBusWrapper->withFilter($wrapFilter);
@@ -394,110 +395,18 @@ class ServicesBuilder implements IServicesBuilder
     }
     
     /**
-     * Builds a WRAP client. 
+     * Builds a WRAP client.
      * 
-     * @param WindowsAzure\Common\Configuration $config The configuration. 
+     * @param string $wrapEndpointUri The WRAP endpoint uri.
      *
      * @return WindowsAzure\ServiceBus\Internal\IWrap
      */
-    public function createWrapService($config)
-    {
-        $this->_validateConfig($config, Resources::WRAP_TYPE_NAME);
-        
+    protected function createWrapService($wrapEndpointUri)
+    {   
         $httpClient  = $this->httpClient();
-        $wrapWrapper = new WrapRestProxy(
-            $httpClient,
-            $config->getProperty(ServiceBusSettings::WRAP_URI) 
-        );
+        $wrapWrapper = new WrapRestProxy($httpClient, $wrapEndpointUri);
 
         return $wrapWrapper;
-    }
-
-    /**
-     * Validates that the given config setting exists in the $config and it's value
-     * is doesn't satisfy empty().
-     * 
-     * @param string                            $setting  The config setting name.
-     * @param WindowsAzure\Common\Configuration $config   The configuration object. 
-     * @param string                            $name     The setting code name.
-     * @param string                            $restType The REST type name.
-     * 
-     * @return none
-     */
-    private function _validateConfigSetting($setting, $config, $name, $restType)
-    {
-        $missingKeyMsg   = sprintf(
-            Resources::MISSING_CONFIG_SETTING_KEY_MSG,
-            $name,
-            $restType
-        );
-        $missingValueMsg = sprintf(
-            Resources::MISSING_CONFIG_SETTING_VALUE_MSG,
-            $name
-        );
-        $properties      = $config->getProperties();
-        
-        Validate::isTrue(array_key_exists($setting, $properties), $missingKeyMsg);
-        
-        $value       = $config->getProperty($setting);
-        $isNullEmpty = empty($value);
-        Validate::isTrue(!$isNullEmpty, $missingValueMsg);
-    }
-    
-    /**
-     * Validates that given config has required settings for creating the REST proxy.
-     * 
-     * @param WindowsAzure\Common\Configuration $config The configuration object.
-     * @param string                            $type   The REST proxy type.
-     * 
-     * @return none
-     * 
-     * @throws InvalidArgumentTypeException 
-     */
-    private function _validateConfig($config, $type)
-    {        
-        switch ($type) {
-        case Resources::SERVICE_BUS_TYPE_NAME:
-            $this->_validateConfigSetting(
-                ServiceBusSettings::URI,
-                $config,
-                'ServiceBusSettings::URI',
-                'ServiceBus'
-            );
-            $this->_validateConfigSetting(
-                ServiceBusSettings::WRAP_URI,
-                $config,
-                'ServiceBusSettings::WRAP_URI',
-                'ServiceBus'
-            );
-            $this->_validateConfigSetting(
-                ServiceBusSettings::WRAP_NAME,
-                $config,
-                'ServiceBusSettings::WRAP_NAME',
-                'ServiceBus'
-            );
-            $this->_validateConfigSetting(
-                ServiceBusSettings::WRAP_PASSWORD,
-                $config,
-                'ServiceBusSettings::WRAP_PASSWORD',
-                'ServiceBus'
-            );
-            break;
-            
-        case Resources::WRAP_TYPE_NAME:
-            $this->_validateConfigSetting(
-                ServiceBusSettings::WRAP_URI,
-                $config,
-                'ServiceBusSettings::WRAP_URI',
-                'Wrap'
-            );
-            break;
-   
-        default:
-            $expected  = Resources::SERVICE_BUS_TYPE_NAME;
-            $expected .= '|' . Resources::WRAP_TYPE_NAME;
-            throw new InvalidArgumentTypeException($expected);
-        }
     }
 }
 
