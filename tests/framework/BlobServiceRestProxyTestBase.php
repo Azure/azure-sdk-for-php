@@ -44,8 +44,9 @@ class BlobServiceRestProxyTestBase extends ServiceRestProxyTestBase
     
     public function setUp()
     {
+        parent::setUp();
         $blobRestProxy = $this->builder->createBlobService($this->connectionString);
-        parent::setUp($blobRestProxy);
+        parent::setUpProxy($blobRestProxy);
         $this->_createdContainers = array();
     }
     

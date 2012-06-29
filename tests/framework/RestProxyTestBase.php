@@ -51,7 +51,7 @@ class RestProxyTestBase extends \PHPUnit_Framework_TestCase
         Logger::setLogFile('C:\log.txt');
     }
     
-    public function setUp($serviceRestProxy)
+    public function setUpProxy($serviceRestProxy)
     {
         $this->restProxy = $serviceRestProxy;
     }

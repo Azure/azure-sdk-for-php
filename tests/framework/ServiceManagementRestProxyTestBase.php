@@ -48,7 +48,7 @@ class ServiceManagementRestProxyTestBase extends RestProxyTestBase
     public function setUp()
     {
         $serviceManagementRestProxy = $this->builder->createServiceManagementService(TestResources::getServiceManagementConnectionString());
-        parent::setUp($serviceManagementRestProxy);
+        parent::setUpProxy($serviceManagementRestProxy);
         
         $this->createdStorageServices = array();
         $this->createdAffinityGroups = array();
