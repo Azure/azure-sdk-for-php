@@ -258,9 +258,9 @@ class StorageServiceSettings extends ServiceSettings
         return new StorageServiceSettings(
             Resources::DEV_STORE_NAME,
             Resources::DEV_STORE_KEY,
-            $prefix . ':10000/devstoreaccount1',
-            $prefix . ':10001/devstoreaccount1',
-            $prefix . ':10002/devstoreaccount1'
+            $prefix . ':10000/devstoreaccount1/',
+            $prefix . ':10001/devstoreaccount1/',
+            $prefix . ':10002/devstoreaccount1/'
         );
     }
     
