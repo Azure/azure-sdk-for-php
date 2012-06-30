@@ -24,86 +24,66 @@
 
 namespace Tests\Functional\WindowsAzure\Queue;
 
-use DateTime;
-use ReflectionClass;
-use ReflectionMethod;
-use Tests\Framework\FiddlerFilter;
-use Tests\Framework\QueueServiceRestProxyTestBase;
 use Tests\Framework\TestResources;
-use Tests\Functional\WindowsAzure\Queue\QueueServiceFunctionalTestData;
 use WindowsAzure\Common\ServiceException;
 use WindowsAzure\Common\Internal\Resources;
 use WindowsAzure\Common\Configuration;
 use WindowsAzure\Queue\QueueService;
 use WindowsAzure\Queue\QueueSettings;
 
-class FunctionalTestBase extends QueueServiceRestProxyTestBase {
+class FunctionalTestBase extends IntegrationTestBase
+{
     protected $accountName;
 
-    public function __construct()
+    public function setUp()
     {
-        parent::__construct();
-        $fiddlerFilter = new FiddlerFilter();
-        $this->restProxy = $this->restProxy->withFilter($fiddlerFilter);
-    }
-    
-    public function setUp() {
         parent::setUp();
         $this->accountName = $this->config->getProperty(QueueSettings::ACCOUNT_NAME);
     }
 
-    public static function setUpBeforeClass() {
+    public static function setUpBeforeClass()
+    {
         parent::setUpBeforeClass();
-        $service = self::createService();
+        $testBase = new FunctionalTestBase();
         QueueServiceFunctionalTestData::setupData();
-        
-        foreach(QueueServiceFunctionalTestData::$TEST_QUEUE_NAMES as $name)  {
-            self::staticSafeDeleteQueue($service, $name);
+
+        foreach(QueueServiceFunctionalTestData::$testQueueNames as $name)  {
+            $testBase->safeDeleteQueue($name);
         }
 
-        foreach(QueueServiceFunctionalTestData::$TEST_QUEUE_NAMES as $name)  {
+        foreach(QueueServiceFunctionalTestData::$testQueueNames as $name)  {
             self::println('Creating queue: ' . $name);
-            $service->createQueue($name);
+            $testBase->restProxy->createQueue($name);
         }
     }
 
     public static function tearDownAfterClass()
     {
+        $testBase = new FunctionalTestBase();
+        foreach(QueueServiceFunctionalTestData::$testQueueNames as $name)  {
+            $testBase->safeDeleteQueue($name);
+        }
         parent::tearDownAfterClass();
-        $service = self::createService();
-        if (!Configuration::isEmulated()) {
-            $serviceProperties = QueueServiceFunctionalTestData::getDefaultServiceProperties();
-            $service->setServiceProperties($serviceProperties);
-        }
-        
-        foreach(QueueServiceFunctionalTestData::$TEST_QUEUE_NAMES as $name)  {
-            self::staticSafeDeleteQueue($service, $name);
-        }
     }
 
-    private static function createService() {
-        $tmp = new FunctionalTestBase();
-        return $tmp->restProxy;
-    }
-    
     private static function staticSafeDeleteQueue($service, $queueName)
     {
         try
         {
             $service->deleteQueue($queueName);
-        }
-        catch (\Exception $e)
-        {
+        } catch (\Exception $e) {
             // Ignore exception and continue, will assume that this queue doesn't exist in the sotrage account
             error_log($e->getMessage());
         }
     }
-    
-    public static function println($msg) {
+
+    public static function println($msg)
+    {
         error_log($msg);
     }
-    
-    public static function tmptostring($obj) {
+
+    public static function tmptostring($obj)
+    {
         return 'todo';
     }
 }

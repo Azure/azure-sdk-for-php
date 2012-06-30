@@ -51,13 +51,12 @@ use WindowsAzure\Blob\Models\SetBlobPropertiesOptions;
 
 class BlobServiceFunctionalTestData
 {
-    public static $INTERESTING_TTL = 4;
     public static $testUniqueId;
     public static $tempBlobCounter = 1;
     public static $nonExistContainerPrefix;
     public static $nonExistBlobPrefix;
-    public static $TEST_CONTAINER_NAMES;
-    public static $TEST_BLOB_NAMES;
+    public static $testContainerNames;
+    public static $testBlobNames;
     private static $_accountName;
     private static $badEtag = '0x123456789ABCDEF';
 
@@ -68,8 +67,8 @@ class BlobServiceFunctionalTestData
         self::$testUniqueId = 'qa-' . $rint . '-';
         self::$nonExistContainerPrefix = 'qa-' . ($rint . 1) . '-';
         self::$nonExistBlobPrefix = 'qa-' . ($rint . 2) . '-';
-        self::$TEST_CONTAINER_NAMES = array( self::$testUniqueId . 'a1', self::$testUniqueId . 'a2', self::$testUniqueId . 'b1' );
-        self::$TEST_BLOB_NAMES = array( 'b' . self::$testUniqueId . 'a1', 'b' . self::$testUniqueId . 'a2', 'b' . self::$testUniqueId . 'b1' );
+        self::$testContainerNames = array( self::$testUniqueId . 'a1', self::$testUniqueId . 'a2', self::$testUniqueId . 'b1' );
+        self::$testBlobNames = array( 'b' . self::$testUniqueId . 'a1', 'b' . self::$testUniqueId . 'a2', 'b' . self::$testUniqueId . 'b1' );
     }
 
     public static function getInterestingContainerName()
@@ -187,7 +186,7 @@ class BlobServiceFunctionalTestData
         $l->setRetentionPolicy($rp);
         $l->setVersion('1.0');
         $l->setDelete(false);
-        $l->setRead(true);
+        $l->setRead(false);
         $l->setWrite(false);
 
         $m = new Metrics();
@@ -205,7 +204,7 @@ class BlobServiceFunctionalTestData
 
     public static function getContainerName()
     {
-        return self::$TEST_CONTAINER_NAMES[0];
+        return self::$testContainerNames[0];
     }
 
     public static function getInterestingServiceProperties()
@@ -312,7 +311,7 @@ class BlobServiceFunctionalTestData
         array_push($ret, $options);
 
         $options = new ListContainersOptions();
-        $marker = '/' . self::$_accountName . '/' . self::$TEST_CONTAINER_NAMES[1];
+        $marker = '/' . self::$_accountName . '/' . self::$testContainerNames[1];
         $options->setMarker($marker);
         array_push($ret, $options);
 
@@ -337,7 +336,7 @@ class BlobServiceFunctionalTestData
         array_push($ret, $options);
 
         $options = new ListContainersOptions();
-        $prefix = self::$TEST_CONTAINER_NAMES[1];
+        $prefix = self::$testContainerNames[1];
         $options->setPrefix($prefix);
         array_push($ret, $options);
 
@@ -357,7 +356,7 @@ class BlobServiceFunctionalTestData
         array_push($ret, $options);
 
         $options = new ListContainersOptions();
-        $marker = '/' . self::$_accountName . '/' . self::$TEST_CONTAINER_NAMES[1];
+        $marker = '/' . self::$_accountName . '/' . self::$testContainerNames[1];
         $maxResults = 2;
         $prefix = self::$testUniqueId;
         $timeout = 60;

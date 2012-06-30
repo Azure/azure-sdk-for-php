@@ -134,8 +134,7 @@ class BlobServiceIntegrationTest extends IntegrationTestBase
             if (Configuration::isEmulated()) {
                 $this->assertEquals(400, $e->getCode(), 'getCode');
                 $shouldReturn = true;
-            }
-            else {
+            } else {
                 throw $e;
             }
         }
@@ -168,8 +167,7 @@ class BlobServiceIntegrationTest extends IntegrationTestBase
             if (Configuration::isEmulated()) {
                 $this->assertEquals(400, $e->getCode(), 'getCode');
                 $shouldReturn = true;
-            }
-            else {
+            } else {
                 throw $e;
             }
         }
@@ -450,8 +448,7 @@ class BlobServiceIntegrationTest extends IntegrationTestBase
         $error = null;
         try {
             $this->restProxy->createContainer('$root');
-        }
-        catch (ServiceException $e) {
+        } catch (ServiceException $e) {
             $error = $e;
         }
 
@@ -1215,8 +1212,7 @@ class BlobServiceIntegrationTest extends IntegrationTestBase
             $opts->setAccessCondition(AccessCondition::ifMatch('123'));
             $this->restProxy->getBlob(self::$_test_container_for_blobs, 'test', $opts);
             $this->fail('getBlob should throw an exception');
-        }
-        catch (ServiceException $e) {
+        } catch (ServiceException $e) {
             $this->assertEquals(412, $e->getCode(), 'got the expected exception');
         }
     }
@@ -1236,8 +1232,7 @@ class BlobServiceIntegrationTest extends IntegrationTestBase
             $opts->setAccessCondition(AccessCondition::ifNoneMatch($props->getProperties()->getEtag()));
             $this->restProxy->getBlob(self::$_test_container_for_blobs, 'test', $opts);
             $this->fail('getBlob should throw an exception');
-        }
-        catch (ServiceException $e) {
+        } catch (ServiceException $e) {
             $this->assertEquals(304, $e->getCode(), 'got the expected exception');
         }
     }
@@ -1258,8 +1253,7 @@ class BlobServiceIntegrationTest extends IntegrationTestBase
             $opts->setAccessCondition(AccessCondition::ifModifiedSince($lastMod));
             $this->restProxy->getBlob(self::$_test_container_for_blobs, 'test', $opts);
             $this->fail('getBlob should throw an exception');
-        }
-        catch (ServiceException $e) {
+        } catch (ServiceException $e) {
             $this->assertEquals(304, $e->getCode(), 'got the expected exception');
         }
     }
@@ -1296,8 +1290,7 @@ class BlobServiceIntegrationTest extends IntegrationTestBase
             $opts->setAccessCondition(AccessCondition::ifNotModifiedSince($lastModifiedBase));
             $this->restProxy->getBlob($container, $blob, $opts);
             $this->fail('getBlob should throw an exception');
-        }
-        catch (ServiceException $e) {
+        } catch (ServiceException $e) {
             $this->assertEquals(412, $e->getCode(), 'got the expected exception');
         }
     }
