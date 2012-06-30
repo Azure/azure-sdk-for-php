@@ -139,6 +139,18 @@ class StorageServiceSettings extends ServiceSettings
     private static $_tableEndpointSetting;
     
     /**
+     * @var boolean
+     */
+    protected static $isInitialized = false;
+    
+    /**
+     * Holds the expected setting keys.
+     * 
+     * @var array
+     */
+    protected static $validSettingKeys = array();
+    
+    /**
      * Initializes static members of the class.
      * 
      * @return none
@@ -246,9 +258,9 @@ class StorageServiceSettings extends ServiceSettings
         return new StorageServiceSettings(
             Resources::DEV_STORE_NAME,
             Resources::DEV_STORE_KEY,
-            $prefix . ':10000/devstoreaccount1',
-            $prefix . ':10001/devstoreaccount1',
-            $prefix . ':10002/devstoreaccount1'
+            $prefix . ':10000/devstoreaccount1/',
+            $prefix . ':10001/devstoreaccount1/',
+            $prefix . ':10002/devstoreaccount1/'
         );
     }
     
@@ -400,9 +412,7 @@ class StorageServiceSettings extends ServiceSettings
             return self::_createStorageServiceSettings($tokenizedSettings);
         }
         
-        throw new \RuntimeException(
-            sprintf(Resources::MISSING_CONNECTION_STRING_SETTINGS, $connectionString)
-        );
+        self::noMatch($connectionString);
     }
     
     /**

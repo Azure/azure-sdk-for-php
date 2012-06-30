@@ -23,7 +23,6 @@
  */
  
 namespace WindowsAzure\Common\Internal;
-use WindowsAzure\Common\Internal\ConnectionStringParser;
 use WindowsAzure\Common\Internal\Resources;
 
 /**
@@ -76,6 +75,18 @@ class ServiceManagementSettings extends ServiceSettings
      * @var array
      */
     private static $_subscriptionIdSetting;
+    
+    /**
+     * @var boolean
+     */
+    protected static $isInitialized = false;
+    
+    /**
+     * Holds the expected setting keys.
+     * 
+     * @var array
+     */
+    protected static $validSettingKeys = array();
     
     /**
      * Initializes static members of the class.
@@ -153,9 +164,7 @@ class ServiceManagementSettings extends ServiceSettings
             );
         }
         
-        throw new \RuntimeException(
-            sprintf(Resources::MISSING_CONNECTION_STRING_SETTINGS, $connectionString)
-        );
+        self::noMatch($connectionString);
     }
     
     /**

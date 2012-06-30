@@ -61,6 +61,7 @@ class StorageServiceSettingsTest extends \PHPUnit_Framework_TestCase
      * @covers WindowsAzure\Common\Internal\ServiceSettings::settingWithFunc
      * @covers WindowsAzure\Common\Internal\ServiceSettings::matchedSpecification
      * @covers WindowsAzure\Common\Internal\ServiceSettings::parseAndValidateKeys
+     * @covers WindowsAzure\Common\Internal\ServiceSettings::noMatch
      * @covers WindowsAzure\Common\Internal\StorageServiceSettings::_getDevelopmentStorageAccount
      */
     public function testCreateFromConnectionStringWithUseDevStore()
@@ -69,9 +70,9 @@ class StorageServiceSettingsTest extends \PHPUnit_Framework_TestCase
         $connectionString = 'UseDevelopmentStorage=true';
         $expectedName = Resources::DEV_STORE_NAME;
         $expectedKey = Resources::DEV_STORE_KEY;
-        $expectedBlobEndpoint = Resources::DEV_STORE_URI . ':10000/devstoreaccount1';
-        $expectedQueueEndpoint = Resources::DEV_STORE_URI . ':10001/devstoreaccount1';
-        $expectedTableEndpoint = Resources::DEV_STORE_URI . ':10002/devstoreaccount1';
+        $expectedBlobEndpoint = Resources::DEV_STORE_URI . ':10000/devstoreaccount1/';
+        $expectedQueueEndpoint = Resources::DEV_STORE_URI . ':10001/devstoreaccount1/';
+        $expectedTableEndpoint = Resources::DEV_STORE_URI . ':10002/devstoreaccount1/';
         
         // Test
         $actual = StorageServiceSettings::createFromConnectionString($connectionString);
@@ -96,6 +97,7 @@ class StorageServiceSettingsTest extends \PHPUnit_Framework_TestCase
      * @covers WindowsAzure\Common\Internal\ServiceSettings::settingWithFunc
      * @covers WindowsAzure\Common\Internal\ServiceSettings::matchedSpecification
      * @covers WindowsAzure\Common\Internal\ServiceSettings::parseAndValidateKeys
+     * @covers WindowsAzure\Common\Internal\ServiceSettings::noMatch
      * @covers WindowsAzure\Common\Internal\StorageServiceSettings::_getDevelopmentStorageAccount
      */
     public function testCreateFromConnectionStringWithUseDevStoreUri()
@@ -105,9 +107,9 @@ class StorageServiceSettingsTest extends \PHPUnit_Framework_TestCase
         $connectionString = "DevelopmentStorageProxyUri=$myProxyUri;UseDevelopmentStorage=true";
         $expectedName = Resources::DEV_STORE_NAME;
         $expectedKey = Resources::DEV_STORE_KEY;
-        $expectedBlobEndpoint = $myProxyUri . ':10000/devstoreaccount1';
-        $expectedQueueEndpoint = $myProxyUri . ':10001/devstoreaccount1';
-        $expectedTableEndpoint = $myProxyUri . ':10002/devstoreaccount1';
+        $expectedBlobEndpoint = $myProxyUri . ':10000/devstoreaccount1/';
+        $expectedQueueEndpoint = $myProxyUri . ':10001/devstoreaccount1/';
+        $expectedTableEndpoint = $myProxyUri . ':10002/devstoreaccount1/';
         
         // Test
         $actual = StorageServiceSettings::createFromConnectionString($connectionString);
@@ -132,6 +134,7 @@ class StorageServiceSettingsTest extends \PHPUnit_Framework_TestCase
      * @covers WindowsAzure\Common\Internal\ServiceSettings::settingWithFunc
      * @covers WindowsAzure\Common\Internal\ServiceSettings::matchedSpecification
      * @covers WindowsAzure\Common\Internal\ServiceSettings::parseAndValidateKeys
+     * @covers WindowsAzure\Common\Internal\ServiceSettings::noMatch
      * @covers WindowsAzure\Common\Internal\StorageServiceSettings::_getDevelopmentStorageAccount
      */
     public function testCreateFromConnectionStringWithInvalidUseDevStoreFail()
@@ -162,6 +165,7 @@ class StorageServiceSettingsTest extends \PHPUnit_Framework_TestCase
      * @covers WindowsAzure\Common\Internal\ServiceSettings::settingWithFunc
      * @covers WindowsAzure\Common\Internal\ServiceSettings::matchedSpecification
      * @covers WindowsAzure\Common\Internal\ServiceSettings::parseAndValidateKeys
+     * @covers WindowsAzure\Common\Internal\ServiceSettings::noMatch
      * @covers WindowsAzure\Common\Internal\StorageServiceSettings::_getDevelopmentStorageAccount
      */
     public function testCreateFromConnectionStringWithEmptyConnectionStringFail()
@@ -266,6 +270,7 @@ class StorageServiceSettingsTest extends \PHPUnit_Framework_TestCase
      * @covers WindowsAzure\Common\Internal\ServiceSettings::settingWithFunc
      * @covers WindowsAzure\Common\Internal\ServiceSettings::matchedSpecification
      * @covers WindowsAzure\Common\Internal\ServiceSettings::parseAndValidateKeys
+     * @covers WindowsAzure\Common\Internal\ServiceSettings::noMatch
      * @covers WindowsAzure\Common\Internal\StorageServiceSettings::_createStorageServiceSettings
      */
     public function testCreateFromConnectionStringWithAutomatic()
@@ -302,6 +307,7 @@ class StorageServiceSettingsTest extends \PHPUnit_Framework_TestCase
      * @covers WindowsAzure\Common\Internal\ServiceSettings::settingWithFunc
      * @covers WindowsAzure\Common\Internal\ServiceSettings::matchedSpecification
      * @covers WindowsAzure\Common\Internal\ServiceSettings::parseAndValidateKeys
+     * @covers WindowsAzure\Common\Internal\ServiceSettings::noMatch
      * @covers WindowsAzure\Common\Internal\StorageServiceSettings::_createStorageServiceSettings
      */
     public function testCreateFromConnectionStringWithTableEndpointSpecified()
@@ -338,6 +344,7 @@ class StorageServiceSettingsTest extends \PHPUnit_Framework_TestCase
      * @covers WindowsAzure\Common\Internal\ServiceSettings::settingWithFunc
      * @covers WindowsAzure\Common\Internal\ServiceSettings::matchedSpecification
      * @covers WindowsAzure\Common\Internal\ServiceSettings::parseAndValidateKeys
+     * @covers WindowsAzure\Common\Internal\ServiceSettings::noMatch
      * @covers WindowsAzure\Common\Internal\StorageServiceSettings::_createStorageServiceSettings
      */
     public function testCreateFromConnectionStringWithBlobEndpointSpecified()
@@ -374,6 +381,7 @@ class StorageServiceSettingsTest extends \PHPUnit_Framework_TestCase
      * @covers WindowsAzure\Common\Internal\ServiceSettings::settingWithFunc
      * @covers WindowsAzure\Common\Internal\ServiceSettings::matchedSpecification
      * @covers WindowsAzure\Common\Internal\ServiceSettings::parseAndValidateKeys
+     * @covers WindowsAzure\Common\Internal\ServiceSettings::noMatch
      * @covers WindowsAzure\Common\Internal\StorageServiceSettings::_createStorageServiceSettings
      */
     public function testCreateFromConnectionStringWithQueueEndpointSpecified()
@@ -410,6 +418,7 @@ class StorageServiceSettingsTest extends \PHPUnit_Framework_TestCase
      * @covers WindowsAzure\Common\Internal\ServiceSettings::settingWithFunc
      * @covers WindowsAzure\Common\Internal\ServiceSettings::matchedSpecification
      * @covers WindowsAzure\Common\Internal\ServiceSettings::parseAndValidateKeys
+     * @covers WindowsAzure\Common\Internal\ServiceSettings::noMatch
      * @covers WindowsAzure\Common\Internal\StorageServiceSettings::_createStorageServiceSettings
      */
     public function testCreateFromConnectionStringWithQueueAndBlobEndpointSpecified()
@@ -446,6 +455,7 @@ class StorageServiceSettingsTest extends \PHPUnit_Framework_TestCase
      * @covers WindowsAzure\Common\Internal\ServiceSettings::settingWithFunc
      * @covers WindowsAzure\Common\Internal\ServiceSettings::matchedSpecification
      * @covers WindowsAzure\Common\Internal\ServiceSettings::parseAndValidateKeys
+     * @covers WindowsAzure\Common\Internal\ServiceSettings::noMatch
      * @covers WindowsAzure\Common\Internal\StorageServiceSettings::_createStorageServiceSettings
      */
     public function testCreateFromConnectionStringWithAutomaticMissingProtocolFail()
@@ -473,6 +483,7 @@ class StorageServiceSettingsTest extends \PHPUnit_Framework_TestCase
      * @covers WindowsAzure\Common\Internal\ServiceSettings::settingWithFunc
      * @covers WindowsAzure\Common\Internal\ServiceSettings::matchedSpecification
      * @covers WindowsAzure\Common\Internal\ServiceSettings::parseAndValidateKeys
+     * @covers WindowsAzure\Common\Internal\ServiceSettings::noMatch
      * @covers WindowsAzure\Common\Internal\StorageServiceSettings::_createStorageServiceSettings
      */
     public function testCreateFromConnectionStringWithAutomaticMissingAccountNameFail()
@@ -499,6 +510,7 @@ class StorageServiceSettingsTest extends \PHPUnit_Framework_TestCase
      * @covers WindowsAzure\Common\Internal\ServiceSettings::settingWithFunc
      * @covers WindowsAzure\Common\Internal\ServiceSettings::matchedSpecification
      * @covers WindowsAzure\Common\Internal\ServiceSettings::parseAndValidateKeys
+     * @covers WindowsAzure\Common\Internal\ServiceSettings::noMatch
      * @covers WindowsAzure\Common\Internal\StorageServiceSettings::_createStorageServiceSettings
      */
     public function testCreateFromConnectionStringWithAutomaticCorruptedAccountKeyFail()
@@ -526,6 +538,7 @@ class StorageServiceSettingsTest extends \PHPUnit_Framework_TestCase
      * @covers WindowsAzure\Common\Internal\ServiceSettings::settingWithFunc
      * @covers WindowsAzure\Common\Internal\ServiceSettings::matchedSpecification
      * @covers WindowsAzure\Common\Internal\ServiceSettings::parseAndValidateKeys
+     * @covers WindowsAzure\Common\Internal\ServiceSettings::noMatch
      * @covers WindowsAzure\Common\Internal\StorageServiceSettings::_createStorageServiceSettings
      */
     public function testCreateFromConnectionStringWithQueueEndpointSpecfied()
@@ -561,6 +574,7 @@ class StorageServiceSettingsTest extends \PHPUnit_Framework_TestCase
      * @covers WindowsAzure\Common\Internal\ServiceSettings::settingWithFunc
      * @covers WindowsAzure\Common\Internal\ServiceSettings::matchedSpecification
      * @covers WindowsAzure\Common\Internal\ServiceSettings::parseAndValidateKeys
+     * @covers WindowsAzure\Common\Internal\ServiceSettings::noMatch
      * @covers WindowsAzure\Common\Internal\StorageServiceSettings::_createStorageServiceSettings
      */
     public function testCreateFromConnectionStringWithQueueAndBlobEndpointSpecfied()
@@ -596,6 +610,7 @@ class StorageServiceSettingsTest extends \PHPUnit_Framework_TestCase
      * @covers WindowsAzure\Common\Internal\ServiceSettings::settingWithFunc
      * @covers WindowsAzure\Common\Internal\ServiceSettings::matchedSpecification
      * @covers WindowsAzure\Common\Internal\ServiceSettings::parseAndValidateKeys
+     * @covers WindowsAzure\Common\Internal\ServiceSettings::noMatch
      * @covers WindowsAzure\Common\Internal\StorageServiceSettings::_createStorageServiceSettings
      */
     public function testCreateFromConnectionStringWithQueueAndBlobAndTableEndpointSpecfied()
@@ -631,6 +646,7 @@ class StorageServiceSettingsTest extends \PHPUnit_Framework_TestCase
      * @covers WindowsAzure\Common\Internal\ServiceSettings::settingWithFunc
      * @covers WindowsAzure\Common\Internal\ServiceSettings::matchedSpecification
      * @covers WindowsAzure\Common\Internal\ServiceSettings::parseAndValidateKeys
+     * @covers WindowsAzure\Common\Internal\ServiceSettings::noMatch
      * @covers WindowsAzure\Common\Internal\StorageServiceSettings::_createStorageServiceSettings
      */
     public function testCreateFromConnectionStringMissingServicesEndpointsFail()
@@ -661,6 +677,7 @@ class StorageServiceSettingsTest extends \PHPUnit_Framework_TestCase
      * @covers WindowsAzure\Common\Internal\ServiceSettings::settingWithFunc
      * @covers WindowsAzure\Common\Internal\ServiceSettings::matchedSpecification
      * @covers WindowsAzure\Common\Internal\ServiceSettings::parseAndValidateKeys
+     * @covers WindowsAzure\Common\Internal\ServiceSettings::noMatch
      * @covers WindowsAzure\Common\Internal\StorageServiceSettings::_createStorageServiceSettings
      */
     public function testCreateFromConnectionStringWithInvalidBlobEndpointUriFail()
@@ -689,6 +706,7 @@ class StorageServiceSettingsTest extends \PHPUnit_Framework_TestCase
      * @covers WindowsAzure\Common\Internal\ServiceSettings::settingWithFunc
      * @covers WindowsAzure\Common\Internal\ServiceSettings::matchedSpecification
      * @covers WindowsAzure\Common\Internal\ServiceSettings::parseAndValidateKeys
+     * @covers WindowsAzure\Common\Internal\ServiceSettings::noMatch
      * @covers WindowsAzure\Common\Internal\StorageServiceSettings::_createStorageServiceSettings
      */
     public function testCreateFromConnectionStringWithInvalidSettingKeyFail()

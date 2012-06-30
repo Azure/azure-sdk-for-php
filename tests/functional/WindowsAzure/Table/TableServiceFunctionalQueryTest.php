@@ -32,22 +32,24 @@ use WindowsAzure\Table\Models\Query;
 use WindowsAzure\Table\Models\QueryEntitiesOptions;
 use WindowsAzure\Table\Models\Filters\Filter;
 
-class TableServiceFunctionalQueryTest extends FunctionalTestBase {
+class TableServiceFunctionalQueryTest extends FunctionalTestBase
+{
     private static $entitiesInTable;
     private static $Partitions = array('Alpha', 'Bravo', 'Charlie', 'Delta', 'Echo');
     private static $curPartition;
     private static $curRowKey;
 
-    public static function setUpBeforeClass() {
+    public static function setUpBeforeClass()
+    {
         parent::setUpBeforeClass();
-        
-        $table = TableServiceFunctionalTestData::$TEST_TABLE_NAMES[0];
-        self::$entitiesInTable = self::getEntitiesToQueryOver();  
+
+        $table = TableServiceFunctionalTestData::$testTableNames[0];
+        self::$entitiesInTable = self::getEntitiesToQueryOver();
         $baseWithRestProxy = new FunctionalTestBase();
         $parts = array();
         foreach(self::$entitiesInTable as $entity)  {
             if (array_key_exists($entity->getPartitionKey(), $parts) === false) {
-                $parts[$entity->getPartitionKey()] = array();                
+                $parts[$entity->getPartitionKey()] = array();
             }
             array_push($parts[$entity->getPartitionKey()], $entity);
         }
@@ -59,13 +61,13 @@ class TableServiceFunctionalQueryTest extends FunctionalTestBase {
             $baseWithRestProxy->restProxy->batch($batch);
         }
     }
-    
-    private static function getNewEntity() {
+
+    private static function getNewEntity()
+    {
         if (is_null(self::$curPartition) || self::$curPartition == count(self::$Partitions) - 1) {
             self::$curPartition = 0;
             self::$curRowKey = TableServiceFunctionalTestData::getNewKey();
-        }
-        else {
+        } else {
             self::$curPartition++;
         }
 
@@ -75,15 +77,16 @@ class TableServiceFunctionalQueryTest extends FunctionalTestBase {
         return $entity;
     }
 
-    private static function getEntitiesToQueryOver() {
+    private static function getEntitiesToQueryOver()
+    {
         $ret = array();
 
         array_push($ret, self::getNewEntity());
-        
+
         $entity = self::getNewEntity();
         $entity->addProperty('BOOLEAN', EdmType::BOOLEAN, true);
         array_push($ret, $entity);
-        
+
         $entity = self::getNewEntity();
         $entity->addProperty('BOOLEAN', EdmType::BOOLEAN, false);
         array_push($ret, $entity);
@@ -125,7 +128,7 @@ class TableServiceFunctionalQueryTest extends FunctionalTestBase {
         array_push($ret, $entity);
 
         $entity = self::getNewEntity();
-        $entity->addProperty('INT64', EdmType::INT64, strval(TableServiceFunctionalTestData::LongBigValue));
+        $entity->addProperty('INT64', EdmType::INT64, strval(TableServiceFunctionalTestData::LONG_BIG_VALUE));
         array_push($ret, $entity);
 
         $entity = self::getNewEntity();
@@ -175,7 +178,8 @@ class TableServiceFunctionalQueryTest extends FunctionalTestBase {
         return $ret;
     }
 
-    public static function getInterestingQueryEntitiesOptions() {
+    public static function getInterestingQueryEntitiesOptions()
+    {
         $ret = array();
         $e = self::$entitiesInTable[count(self::$entitiesInTable) - 3];
 
@@ -254,7 +258,8 @@ class TableServiceFunctionalQueryTest extends FunctionalTestBase {
         return $ret;
     }
 
-    public static function getInterestingQueryEntitiesOptionsOfDepth($depth) {
+    public static function getInterestingQueryEntitiesOptionsOfDepth($depth)
+    {
         $ret = array();
 
         // The random here is not to generate random values, but to
@@ -272,7 +277,8 @@ class TableServiceFunctionalQueryTest extends FunctionalTestBase {
         return $ret;
     }
 
-    private static function generateFilterWithBooleanParameters($targetDepth, $depth) {
+    private static function generateFilterWithBooleanParameters($targetDepth, $depth)
+    {
         // Use the filter grammar to construct a tree.
         // The random here is not to generate random values, but to
         // get a good mix of values in the table entities.
@@ -294,32 +300,30 @@ class TableServiceFunctionalQueryTest extends FunctionalTestBase {
                     }
                     if (count($boolPropNames) == 0) {
                         return Filter::applyConstant(mt_rand(0,1) == 1, EdmType::BOOLEAN);
-                    }
-                    else {
+                    } else {
                         $key = $boolPropNames[mt_rand(0, count($boolPropNames) - 1)];
                         return Filter::applyPropertyName($key);
                     }
                 default:
                     return null;
             }
-        }
-        else {
+        } else {
             switch (mt_rand(0,8)) {
-                case 0: 
-                case 1: 
-                case 2: 
-                case 3: 
+                case 0:
+                case 1:
+                case 2:
+                case 3:
                     return Filter::applyAnd(
-                            self::generateFilterWithBooleanParameters($targetDepth, $depth + 1), 
+                            self::generateFilterWithBooleanParameters($targetDepth, $depth + 1),
                             self::generateFilterWithBooleanParameters($targetDepth, $depth + 1));
                 case 4:
                 case 5:
                 case 6:
-                case 7: 
+                case 7:
                     return Filter::applyOr(
-                            self::generateFilterWithBooleanParameters($targetDepth, $depth + 1), 
+                            self::generateFilterWithBooleanParameters($targetDepth, $depth + 1),
                             self::generateFilterWithBooleanParameters($targetDepth, $depth + 1));
-                case 8: 
+                case 8:
                     return Filter::applyNot(self::generateFilterWithBooleanParameters($targetDepth, $depth + 1));
                 default:
                     return null;
@@ -327,7 +331,8 @@ class TableServiceFunctionalQueryTest extends FunctionalTestBase {
         }
     }
 
-    private static function generateBinaryFilterWithAnyParameters() {
+    private static function generateBinaryFilterWithAnyParameters()
+    {
         // get a good mix of values in the table entities.
 
         // Pull out one of the constants.
@@ -350,13 +355,15 @@ class TableServiceFunctionalQueryTest extends FunctionalTestBase {
         return self::getBinaryFilterFromIndex(mt_rand(0, 5), $f1, $f2);
     }
 
-    private static function getEntityFromTable() {
+    private static function getEntityFromTable()
+    {
         $entId = mt_rand(0, count(self::$entitiesInTable) - 1);
         $e = self::$entitiesInTable[$entId];
         return $e;
     }
 
-    private static function getBinaryFilterFromIndex($index, $f1, $f2) {
+    private static function getBinaryFilterFromIndex($index, $f1, $f2)
+    {
         switch ($index) {
             case 0: return Filter::applyEq($f1, $f2);
             case 1: return Filter::applyGe($f1, $f2);
@@ -371,7 +378,8 @@ class TableServiceFunctionalQueryTest extends FunctionalTestBase {
     /**
     * @covers WindowsAzure\Table\TableRestProxy::queryEntities
     */
-    public function testQueryEntities() {
+    public function testQueryEntities()
+    {
         // The emulator has problems with non-standard queries tested here.
         $this->skipIfEmulated();
 
@@ -384,7 +392,8 @@ class TableServiceFunctionalQueryTest extends FunctionalTestBase {
     /**
     * @covers WindowsAzure\Table\TableRestProxy::queryEntities
     */
-    public function testQueryEntitiesBooleanLevel1() {
+    public function testQueryEntitiesBooleanLevel1()
+    {
         // The emulator has problems with non-standard queries tested here.
         $this->skipIfEmulated();
 
@@ -397,7 +406,8 @@ class TableServiceFunctionalQueryTest extends FunctionalTestBase {
     /**
     * @covers WindowsAzure\Table\TableRestProxy::queryEntities
     */
-    public function testQueryEntitiesDateTimeLevel1() {
+    public function testQueryEntitiesDateTimeLevel1()
+    {
         // The emulator has problems with non-standard queries tested here.
         $this->skipIfEmulated();
 
@@ -410,7 +420,8 @@ class TableServiceFunctionalQueryTest extends FunctionalTestBase {
     /**
     * @covers WindowsAzure\Table\TableRestProxy::queryEntities
     */
-    public function testQueryEntitiesDoubleLevel1() {
+    public function testQueryEntitiesDoubleLevel1()
+    {
         // The emulator has problems with non-standard queries tested here.
         $this->skipIfEmulated();
 
@@ -423,7 +434,8 @@ class TableServiceFunctionalQueryTest extends FunctionalTestBase {
     /**
     * @covers WindowsAzure\Table\TableRestProxy::queryEntities
     */
-    public function testQueryEntitiesGuidLevel1() {
+    public function testQueryEntitiesGuidLevel1()
+    {
         // The emulator has problems with non-standard queries tested here.
         $this->skipIfEmulated();
 
@@ -436,7 +448,8 @@ class TableServiceFunctionalQueryTest extends FunctionalTestBase {
     /**
     * @covers WindowsAzure\Table\TableRestProxy::queryEntities
     */
-    public function testQueryEntitiesIntLevel1() {
+    public function testQueryEntitiesIntLevel1()
+    {
         // The emulator has problems with non-standard queries tested here.
         $this->skipIfEmulated();
 
@@ -449,7 +462,8 @@ class TableServiceFunctionalQueryTest extends FunctionalTestBase {
     /**
     * @covers WindowsAzure\Table\TableRestProxy::queryEntities
     */
-    public function testQueryEntitiesLongLevel1() {
+    public function testQueryEntitiesLongLevel1()
+    {
         // The emulator has problems with non-standard queries tested here.
         $this->skipIfEmulated();
 
@@ -462,7 +476,8 @@ class TableServiceFunctionalQueryTest extends FunctionalTestBase {
     /**
     * @covers WindowsAzure\Table\TableRestProxy::queryEntities
     */
-    public function testQueryEntitiesStringLevel1() {
+    public function testQueryEntitiesStringLevel1()
+    {
         // The emulator has problems with non-standard queries tested here.
         $this->skipIfEmulated();
 
@@ -475,7 +490,8 @@ class TableServiceFunctionalQueryTest extends FunctionalTestBase {
     /**
     * @covers WindowsAzure\Table\TableRestProxy::queryEntities
     */
-    public function testQueryEntitiesBinaryLevel1() {
+    public function testQueryEntitiesBinaryLevel1()
+    {
         // The emulator has problems with non-standard queries tested here.
         $this->skipIfEmulated();
 
@@ -488,7 +504,8 @@ class TableServiceFunctionalQueryTest extends FunctionalTestBase {
     /**
     * @covers WindowsAzure\Table\TableRestProxy::queryEntities
     */
-    public function testQueryEntitiesLevel2() {
+    public function testQueryEntitiesLevel2()
+    {
         // The emulator has problems with non-standard queries tested here.
         $this->skipIfEmulated();
 
@@ -501,7 +518,8 @@ class TableServiceFunctionalQueryTest extends FunctionalTestBase {
     /**
     * @covers WindowsAzure\Table\TableRestProxy::queryEntities
     */
-    public function testQueryEntitiesLevel3() {
+    public function testQueryEntitiesLevel3()
+    {
         // The emulator has problems with non-standard queries tested here.
         $this->skipIfEmulated();
 
@@ -514,8 +532,9 @@ class TableServiceFunctionalQueryTest extends FunctionalTestBase {
     /**
     * @covers WindowsAzure\Table\TableRestProxy::queryEntities
     */
-    private function queryEntitiesWorker($options) {
-        $table = TableServiceFunctionalTestData::$TEST_TABLE_NAMES[0];
+    private function queryEntitiesWorker($options)
+    {
+        $table = TableServiceFunctionalTestData::$testTableNames[0];
 
         try {
             $ret = (is_null($options) ? $this->restProxy->queryEntities($table) : $this->restProxy->queryEntities($table, $options));
@@ -534,25 +553,24 @@ class TableServiceFunctionalQueryTest extends FunctionalTestBase {
             // However, the user cannot easily control when this happens, so I'm
             // not sure how useful it is.
             // To test that scenario, set NextTable in the $options.
-        }
-        catch (ServiceException $e) {
+        } catch (ServiceException $e) {
             if (!is_null($options->getQuery()) && !is_null($options->getQuery()->getTop()) && $options->getQuery()->getTop() <= 0) {
                 $this->assertEquals(400, $e->getCode(), 'getCode');
-            }
-            else {
+            } else {
                 $this->assertEquals(500, $e->getCode(), 'getCode');
             }
         }
     }
 
-    private function verifyqueryEntitiesWorker($ret, $options) {
+    private function verifyqueryEntitiesWorker($ret, $options)
+    {
         $this->assertNotNull($ret->getEntities(), 'getTables');
 
         $expectedData = array();
         foreach(self::$entitiesInTable as $e)  {
             array_push($expectedData, $e);
         }
-        
+
         sort($expectedData);
 
         $projected = false;
@@ -586,7 +604,8 @@ class TableServiceFunctionalQueryTest extends FunctionalTestBase {
         $this->compareEntityLists($ret->getEntities(), $expectedData, $projected);
     }
 
-    private function compareEntityLists($actualData, $expectedData, $projected) {
+    private function compareEntityLists($actualData, $expectedData, $projected)
+    {
         // Need to sort the lists.
         $actualData = self::sortEntitiesByCompositeKey($actualData);
         $expectedData = self::sortEntitiesByCompositeKey($expectedData);
@@ -597,14 +616,15 @@ class TableServiceFunctionalQueryTest extends FunctionalTestBase {
             $e2 = $actualData[$i];
             if (!$projected) {
                 $this->assertTrue(
-                    ($e1->getPartitionKey() == $e2->getPartitionKey()) && ($e1->getRowKey() == $e2->getRowKey()), 
+                    ($e1->getPartitionKey() == $e2->getPartitionKey()) && ($e1->getRowKey() == $e2->getRowKey()),
                     '(' . $e1->getPartitionKey() . ',' . $e1->getRowKey() . ') == (' . $e2->getPartitionKey() . ',' . $e2->getRowKey() . ')');
             }
             // Don't need to verify the whole entities, done elsewhere
         }
     }
-    
-    private static function addBinaryFilter($name, $edmType, $values) {
+
+    private static function addBinaryFilter($name, $edmType, $values)
+    {
         $counter = 0;
         $ret = array();
         foreach($values as $o)  {
@@ -619,7 +639,8 @@ class TableServiceFunctionalQueryTest extends FunctionalTestBase {
         return $ret;
     }
 
-    public static function sortEntitiesByCompositeKey($originalArray) {
+    public static function sortEntitiesByCompositeKey($originalArray)
+    {
         $tmpArray = array();
         $isordered = true;
         $prevIndex = '/';
@@ -631,18 +652,18 @@ class TableServiceFunctionalQueryTest extends FunctionalTestBase {
             }
             $prevIndex = $index;
         }
-        
+
         if ($isordered) {
             return $originalArray;
         }
-           
+
         ksort($tmpArray);
         $ret = array();
         foreach($tmpArray as $e) {
             array_push($ret, $e);
         }
         return $ret;
-    }    
+    }
 }
 
 ?>

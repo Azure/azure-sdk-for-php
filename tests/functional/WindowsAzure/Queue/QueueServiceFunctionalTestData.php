@@ -32,34 +32,39 @@ use WindowsAzure\Queue\Models\CreateMessageOptions;
 use WindowsAzure\Queue\Models\CreateQueueOptions;
 use WindowsAzure\Queue\Models\ListQueuesOptions;
 
-class QueueServiceFunctionalTestData {
+class QueueServiceFunctionalTestData
+{
     const INTERESTING_TTL = 4;
     public static $testUniqueId;
     public static $tempQueueCounter;
     public static $nonExistQueuePrefix;
-    public static $TEST_QUEUE_NAMES;
+    public static $testQueueNames;
 
-    public static function setupData() {
+    public static function setupData()
+    {
         $rint = mt_rand(0, 1000000);
         self::$testUniqueId = 'qa-' . $rint . '-';
         self::$nonExistQueuePrefix = 'qa-' . ($rint + 1) . '-';
-        self::$TEST_QUEUE_NAMES = array(
-            self::$testUniqueId . 'a1', 
-            self::$testUniqueId . 'a2', 
+        self::$testQueueNames = array(
+            self::$testUniqueId . 'a1',
+            self::$testUniqueId . 'a2',
             self::$testUniqueId . 'b1',
         );
         self::$tempQueueCounter = 0;
     }
 
-    public static function getInterestingQueueName() {
+    public static function getInterestingQueueName()
+    {
         return self::$testUniqueId . 'int-' . (self::$tempQueueCounter++);
     }
 
-    public static function getSimpleMessageText() {
+    public static function getSimpleMessageText()
+    {
         return 'simple message text #' . (self::$tempQueueCounter++);
     }
 
-    public static function getInterestingTimeoutValues() {
+    public static function getInterestingTimeoutValues()
+    {
         $ret = array();
         array_push($ret, null);
         array_push($ret, -1);
@@ -70,14 +75,15 @@ class QueueServiceFunctionalTestData {
         return $ret;
     }
 
-    public static function getDefaultServiceProperties() {
+    public static function getDefaultServiceProperties()
+    {
         // This is the default that comes from the server.
         $rp = new RetentionPolicy();
         $l = new Logging();
         $l->setRetentionPolicy($rp);
         $l->setVersion('1.0');
         $l->setDelete(false);
-        $l->setRead(true);
+        $l->setRead(false);
         $l->setWrite(false);
 
         $m = new Metrics();
@@ -93,7 +99,8 @@ class QueueServiceFunctionalTestData {
         return $sp;
     }
 
-    public static function getInterestingServiceProperties() {
+    public static function getInterestingServiceProperties()
+    {
         $ret = array();
 
         {
@@ -187,7 +194,8 @@ class QueueServiceFunctionalTestData {
         return $ret;
     }
 
-    public static function getInterestingMetadata() {
+    public static function getInterestingMetadata()
+    {
         $ret = self::getNiceMetadata();
 
         // Some metadata that HTTP will not like.
@@ -197,7 +205,8 @@ class QueueServiceFunctionalTestData {
         return $ret;
     }
 
-    public static function getNiceMetadata() {
+    public static function getNiceMetadata()
+    {
         $ret = array();
 
         array_push($ret, null);
@@ -214,86 +223,66 @@ class QueueServiceFunctionalTestData {
         return $ret;
     }
 
-    public static function getInterestingCreateQueueOptions() {
+    public static function getInterestingCreateQueueOptions()
+    {
         $ret = array();
 
         $options = new CreateQueueOptions();
         array_push($ret, $options);
 
-            // Uncomment when fixed
-            // https://github.com/WindowsAzure/azure-sdk-for-php/issues/59
-//        $options = new CreateQueueOptions();
-//        $options->setTimeout(10);
-//        array_push($ret, $options);
-//
-//        $options = new CreateQueueOptions();
-//        $options->setTimeout(-10);
-//        array_push($ret, $options);
+        $options = new CreateQueueOptions();
+        $options->setTimeout(10);
+        array_push($ret, $options);
+
+        $options = new CreateQueueOptions();
+        $options->setTimeout(-10);
+        array_push($ret, $options);
 
         $options = new CreateQueueOptions();
         $metadata = array();
-        // TODO: Uncomment when fixed:
-        // https://github.com/WindowsAzure/azure-sdk-for-php/issues/105
-//        $metadata['foo'] =  'bar';
+        $metadata['foo'] =  'bar';
         $metadata['foo2'] = 'bar2';
         $metadata['foo3'] = 'bar3';
         $options->setMetadata($metadata);
-            // Uncomment when fixed
-            // https://github.com/WindowsAzure/azure-sdk-for-php/issues/59
-//        $options->setTimeout(10);
+        $options->setTimeout(10);
         array_push($ret, $options);
 
         $options = new CreateQueueOptions();
         $metadata = array('foo' => 'bar');
         $options->setMetadata($metadata);
-            // Uncomment when fixed
-            // https://github.com/WindowsAzure/azure-sdk-for-php/issues/59
-//        $options->setTimeout(-10);
+        $options->setTimeout(-10);
         array_push($ret, $options);
 
         return $ret;
     }
 
-    public static function getSimpleCreateMessageOptions() {
+    public static function getSimpleCreateMessageOptions()
+    {
         $ret = new CreateMessageOptions();
-        // Uncomment when fixed
-        // https://github.com/WindowsAzure/azure-sdk-for-php/issues/59
-//        $ret->setTimeout(4);
-
-        // Revert when fixed
-        // https://github.com/WindowsAzure/azure-sdk-for-php/issues/69
-//        $ret->setTimeToLiveInSeconds(1000);
-//        $ret->setVisibilityTimeoutInSeconds(self::INTERESTING_TTL);
-        $ret->setTimeToLiveInSeconds('1000');
-        $ret->setVisibilityTimeoutInSeconds(self::INTERESTING_TTL . '');
+        $ret->setTimeout(4);
+        $ret->setTimeToLiveInSeconds(1000);
+        $ret->setVisibilityTimeoutInSeconds(self::INTERESTING_TTL);
         return $ret;
     }
 
-    public static function getInterestingListQueuesOptions() {
+    public static function getInterestingListQueuesOptions()
+    {
         $ret = array();
 
         $options = new ListQueuesOptions();
         array_push($ret, $options);
 
         $options = new ListQueuesOptions();
-        // TODO: Revert when fixed
-        // https://github.com/WindowsAzure/azure-sdk-for-php/issues/69
-        // $options->setMaxResults(2);        
+        $options->setMaxResults(2);
         $options->setMaxResults('2');
         array_push($ret, $options);
 
         $options = new ListQueuesOptions();
-        // TODO: Revert when fixed
-        // https://github.com/WindowsAzure/azure-sdk-for-php/issues/69
-//        $options->setTimeout(10);
-        $options->setTimeout('10');
+        $options->setTimeout(10);
         array_push($ret, $options);
 
         $options = new ListQueuesOptions();
-        // TODO: Revert when fixed
-        // https://github.com/WindowsAzure/azure-sdk-for-php/issues/69
-//        $options->setTimeout(-10);
-        $options->setTimeout('-10');
+        $options->setTimeout(-10);
         array_push($ret, $options);
 
         $options = new ListQueuesOptions();
@@ -308,39 +297,21 @@ class QueueServiceFunctionalTestData {
         // Cannot set Marker to arbitrary values. Must only use if the previous request returns a NextMarker.
         //            $options->setMarker('abc');
         // So, add logic in listQueuesWorker to loop and setMarker if there is a NextMarker.
-        // TODO: Revert when fixed
-        // https://github.com/WindowsAzure/azure-sdk-for-php/issues/69
-//        $options->setMaxResults(2);
-        $options->setMaxResults('2');
+        $options->setMaxResults(2);
         $options->setPrefix(self::$testUniqueId);
-        // TODO: Revert when fixed
-        // https://github.com/WindowsAzure/azure-sdk-for-php/issues/69
-//        $options->setTimeout(10);
-        $options->setTimeout('10');
+        $options->setTimeout(10);
         array_push($ret, $options);
 
         $options = new ListQueuesOptions();
-        // TODO: Revert when fixed
-        // https://github.com/WindowsAzure/azure-sdk-for-php/issues/69
-//        $options->setMaxResults(3);
-        $options->setMaxResults('3');
+        $options->setMaxResults(3);
         $options->setPrefix(self::$testUniqueId);
-        // TODO: Revert when fixed
-        // https://github.com/WindowsAzure/azure-sdk-for-php/issues/69
-//        $options->setTimeout(10);
-        $options->setTimeout('10');
+        $options->setTimeout(10);
         array_push($ret, $options);
 
         $options = new ListQueuesOptions();
-        // TODO: Revert when fixed
-        // https://github.com/WindowsAzure/azure-sdk-for-php/issues/69
-//        $options->setMaxResults(4);
-        $options->setMaxResults('4');
+        $options->setMaxResults(4);
         $options->setPrefix(self::$testUniqueId);
-        // TODO: Revert when fixed
-        // https://github.com/WindowsAzure/azure-sdk-for-php/issues/69
-//        $options->setTimeout(10);
-        $options->setTimeout('10');
+        $options->setTimeout(10);
         array_push($ret, $options);
 
         return $ret;

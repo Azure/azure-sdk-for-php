@@ -22,7 +22,7 @@
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
 namespace Tests\Framework;
-use Tests\Framework\TestResources;
+use WindowsAzure\Common\Internal\Resources;
 use WindowsAzure\Common\Models\ServiceProperties;
 use WindowsAzure\Common\Internal\Serialization\XmlSerializer;
 
@@ -41,6 +41,24 @@ class ServiceRestProxyTestBase extends RestProxyTestBase
 {
     protected $propertiesChanged;
     protected $defaultProperties;
+    protected $connectionString;
+    
+    const NOT_SUPPORTED = 'The storage emulator doesn\'t support this API';
+    
+    protected function skipIfEmulated()
+    {
+        $isEmulated = strpos($this->connectionString, Resources::USE_DEVELOPMENT_STORAGE_NAME);
+        
+        if ($isEmulated !== false) {
+            $this->markTestSkipped(self::NOT_SUPPORTED);
+        }
+    }
+    
+    public function __construct()
+    {
+        parent::__construct();
+        $this->connectionString = TestResources::getWindowsAzureStorageServicesConnectionString();
+    }
     
     public function setUp($serviceRestProxy)
     {
