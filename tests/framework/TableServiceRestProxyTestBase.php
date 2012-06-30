@@ -23,7 +23,6 @@
  */
 namespace Tests\Framework;
 use Tests\Framework\ServiceRestProxyTestBase;
-use Tests\Framework\TestResources;
 
 /**
  * TestBase class for each unit test class.
@@ -42,7 +41,7 @@ class TableServiceRestProxyTestBase extends ServiceRestProxyTestBase
     
     public function setUp()
     {
-        $tableRestProxy = $this->builder->createTableService(TestResources::getStorageServicesConnectionString());
+        $tableRestProxy = $this->builder->createTableService($this->connectionString);
         parent::setUp($tableRestProxy);
         $this->_createdTables = array();
     }

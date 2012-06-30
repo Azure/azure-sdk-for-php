@@ -25,7 +25,6 @@ namespace Tests\Framework;
 use Tests\Framework\TestResources;
 use WindowsAzure\Common\Configuration;
 use WindowsAzure\Common\Models\ServiceProperties;
-use WindowsAzure\ServiceBus\ServiceBusSettings;
 use WindowsAzure\ServiceBus\ServiceBusRestProxy;
 use WindowsAzure\ServiceBus\IServiceBus;
 use WindowsAzure\ServiceBus\Models\SubscriptionInfo;
@@ -48,41 +47,9 @@ class ServiceBusRestProxyTestBase extends ServiceRestProxyTestBase
     private $_createdRules;
     private $_createdQueues;
 
-    public static function setUpBeforeClass()
-    {
-        if (Configuration::isEmulated()) {
-            throw new \Exception(self::NOT_SUPPORTED);
-        }
-
-        $serviceBusNameSpace = TestResources::serviceBusNameSpace();
-        $wrapAuthenticationName = TestResources::wrapAuthenticationName();
-        $wrapPassword = TestResources::wrapPassword();
-
-        if (empty($serviceBusNameSpace)) {
-            throw new \Exception('SERVICE_BUS_NAMESPACE enviroment variable is missing.');
-        }
-
-        if (empty($wrapAuthenticationName)) {
-            throw new \Exception('WRAP_AUTHENTICATION_NAME enviroment variable is missing.');
-        }
-
-        if (empty($wrapPassword)) {
-            throw new \Exception('WRAP_PASSWORD enviroment variable is missing.');
-        }
-
-    }
-
     public function setUp()
     {
-        $config = new Configuration();
-        $config = ServiceBusSettings::configureWithWrapAuthentication(
-            $config,
-            TestResources::serviceBusNameSpace(),
-            TestResources::wrapAuthenticationName(),
-            TestResources::wrapPassword()
-        );
-
-        $serviceBusWrapper = $this->builder->createServiceBusService($config);
+        $serviceBusWrapper = $this->builder->createServiceBusService(TestResources::getServiceBusConnectionString());
         $this->_createdTopics = array();
         $this->_createdSubscriptions = array();
         $this->_createdRules = array();

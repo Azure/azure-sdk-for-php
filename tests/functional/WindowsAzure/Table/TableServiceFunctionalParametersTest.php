@@ -41,24 +41,27 @@ use WindowsAzure\Table\Models\QueryTablesOptions;
 use WindowsAzure\Table\Models\TableServiceOptions;
 use WindowsAzure\Table\Models\Filters\Filter;
 
-class TableServiceFunctionalParametersTest extends FunctionalTestBase {
-    public static function setUpBeforeClass() {
+class TableServiceFunctionalParametersTest extends FunctionalTestBase
+{
+    public static function setUpBeforeClass()
+    {
         parent::setUpBeforeClass();
     }
 
-    public static function tearDownAfterClass() {
+    public static function tearDownAfterClass()
+    {
         parent::tearDownAfterClass();
     }
 
     /**
     * @covers WindowsAzure\Table\TableRestProxy::getServiceProperties
     */
-    public function testGetServicePropertiesNullOptions() {
+    public function testGetServicePropertiesNullOptions()
+    {
         try {
             $this->restProxy->getServiceProperties(null);
             $this->assertFalse(Configuration::isEmulated(), 'Should fail if and only if in emulator');
-        }
-        catch (ServiceException $e) {
+        } catch (ServiceException $e) {
             // Expect failure when run this test with emulator, as v1.6 doesn't support this method
             if (Configuration::isEmulated()) {
                 // Properties are not supported in emulator
@@ -72,12 +75,12 @@ class TableServiceFunctionalParametersTest extends FunctionalTestBase {
     /**
     * @covers WindowsAzure\Table\TableRestProxy::setServiceProperties
     */
-    public function testSetServicePropertiesNullOptions1() {
+    public function testSetServicePropertiesNullOptions1()
+    {
         try {
             $this->restProxy->setServiceProperties(new ServiceProperties());
             $this->fail('Expect default service properties to cause service to error');
-        }
-        catch (ServiceException $e) {
+        } catch (ServiceException $e) {
             $this->assertEquals(400, $e->getCode(), 'Expect 400 when sending default service properties to server');
         }
     }
@@ -85,12 +88,12 @@ class TableServiceFunctionalParametersTest extends FunctionalTestBase {
     /**
     * @covers WindowsAzure\Table\TableRestProxy::setServiceProperties
     */
-    public function testSetServicePropertiesNullOptions2() {
+    public function testSetServicePropertiesNullOptions2()
+    {
         try {
             $this->restProxy->setServiceProperties(null);
             $this->fail('Expect null service properties to throw');
-        }
-        catch (\InvalidArgumentException $e) {
+        } catch (\InvalidArgumentException $e) {
             $this->assertEquals(Resources::INVALID_SVC_PROP_MSG, $e->getMessage(), 'Expect error message');
             $this->assertEquals(0, $e->getCode(), 'Expected error code');
         }
@@ -99,12 +102,12 @@ class TableServiceFunctionalParametersTest extends FunctionalTestBase {
     /**
     * @covers WindowsAzure\Table\TableRestProxy::setServiceProperties
     */
-    public function testSetServicePropertiesNullOptions3() {
+    public function testSetServicePropertiesNullOptions3()
+    {
         try {
             $this->restProxy->setServiceProperties(null, null);
             $this->fail('Expect service properties to throw');
-        }
-        catch (\InvalidArgumentException $e) {
+        } catch (\InvalidArgumentException $e) {
             $this->assertEquals(Resources::INVALID_SVC_PROP_MSG, $e->getMessage(), 'Expect error message');
             $this->assertEquals(0, $e->getCode(), 'Expected error code');
         }
@@ -113,12 +116,12 @@ class TableServiceFunctionalParametersTest extends FunctionalTestBase {
     /**
     * @covers WindowsAzure\Table\TableRestProxy::setServiceProperties
     */
-    public function testSetServicePropertiesNullOptions4() {
+    public function testSetServicePropertiesNullOptions4()
+    {
         try {
             $this->restProxy->setServiceProperties(new ServiceProperties(), null);
             $this->fail('Expect default service properties to cause service to error');
-        }
-        catch (ServiceException $e) {
+        } catch (ServiceException $e) {
             $this->assertEquals(400, $e->getCode(), 'Expect 400 when sending default service properties to server');
         }
     }
@@ -126,7 +129,8 @@ class TableServiceFunctionalParametersTest extends FunctionalTestBase {
     /**
     * @covers WindowsAzure\Table\TableRestProxy::queryTables
     */
-    public function testQueryTablesNullOptions() {
+    public function testQueryTablesNullOptions()
+    {
         $this->restProxy->queryTables(null);
         $this->assertTrue(true, 'Null options should be fine.');
     }
@@ -134,12 +138,12 @@ class TableServiceFunctionalParametersTest extends FunctionalTestBase {
     /**
     * @covers WindowsAzure\Table\TableRestProxy::createTable
     */
-    public function testCreateTableNullOptions() {
+    public function testCreateTableNullOptions()
+    {
         try {
             $this->restProxy->createTable(null);
             $this->fail('Expect null table to throw');
-        }
-        catch (\InvalidArgumentException $e) {
+        } catch (\InvalidArgumentException $e) {
             $this->assertEquals(sprintf(Resources::NULL_OR_EMPTY_MSG, 'table'), $e->getMessage(), 'Expect error message');
             $this->assertEquals(0, $e->getCode(), 'Expected error code');
         }
@@ -148,12 +152,12 @@ class TableServiceFunctionalParametersTest extends FunctionalTestBase {
     /**
     * @covers WindowsAzure\Table\TableRestProxy::deleteTable
     */
-    public function testDeleteTableNullOptions() {
+    public function testDeleteTableNullOptions()
+    {
         try {
             $this->restProxy->deleteTable(null);
             $this->fail('Expect null table to throw');
-        }
-        catch (\InvalidArgumentException $e) {
+        } catch (\InvalidArgumentException $e) {
             $this->assertEquals(sprintf(Resources::NULL_OR_EMPTY_MSG, 'table'), $e->getMessage(), 'Expect error message');
             $this->assertEquals(0, $e->getCode(), 'Expected error code');
         }
@@ -162,12 +166,12 @@ class TableServiceFunctionalParametersTest extends FunctionalTestBase {
     /**
     * @covers WindowsAzure\Table\TableRestProxy::getTable
     */
-    public function testGetTableNullOptions() {
+    public function testGetTableNullOptions()
+    {
         try {
             $this->restProxy->getTable(null);
             $this->fail('Expect null table to throw');
-        }
-        catch (\InvalidArgumentException $e) {
+        } catch (\InvalidArgumentException $e) {
             $this->assertEquals(sprintf(Resources::NULL_OR_EMPTY_MSG, 'table'), $e->getMessage(), 'Expect error message');
             $this->assertEquals(0, $e->getCode(), 'Expected error code');
         }
@@ -177,14 +181,14 @@ class TableServiceFunctionalParametersTest extends FunctionalTestBase {
     /**
     * @covers WindowsAzure\Table\TableRestProxy::insertEntity
     */
-    public function testInsertEntityEntityNull() {
-        $table = TableServiceFunctionalTestData::$TEST_TABLE_NAMES[0];
+    public function testInsertEntityEntityNull()
+    {
+        $table = TableServiceFunctionalTestData::$testTableNames[0];
 
         try {
             $this->restProxy->insertEntity($table, null);
             $this->fail('Expect null entity to throw');
-        }
-        catch (\InvalidArgumentException $e) {
+        } catch (\InvalidArgumentException $e) {
             $this->assertEquals(sprintf(Resources::NULL_OR_EMPTY_MSG, 'entity'), $e->getMessage(), 'Expect error message');
             $this->assertEquals(0, $e->getCode(), 'Expected error code');
         }
@@ -194,14 +198,14 @@ class TableServiceFunctionalParametersTest extends FunctionalTestBase {
     /**
     * @covers WindowsAzure\Table\TableRestProxy::insertEntity
     */
-    public function testInsertEntityTableAndEntityNull() {
-        $table = TableServiceFunctionalTestData::$TEST_TABLE_NAMES[0];
+    public function testInsertEntityTableAndEntityNull()
+    {
+        $table = TableServiceFunctionalTestData::$testTableNames[0];
 
         try {
             $this->restProxy->insertEntity(null, null);
             $this->fail('Expect null table and entity to throw');
-        }
-        catch (\InvalidArgumentException $e) {
+        } catch (\InvalidArgumentException $e) {
             $this->assertEquals(sprintf(Resources::NULL_OR_EMPTY_MSG, 'table'), $e->getMessage(), 'Expect error message');
             $this->assertEquals(0, $e->getCode(), 'Expected error code');
         }
@@ -211,14 +215,14 @@ class TableServiceFunctionalParametersTest extends FunctionalTestBase {
     /**
     * @covers WindowsAzure\Table\TableRestProxy::insertEntity
     */
-    public function testInsertEntityTableNull() {
-        $table = TableServiceFunctionalTestData::$TEST_TABLE_NAMES[0];
+    public function testInsertEntityTableNull()
+    {
+        $table = TableServiceFunctionalTestData::$testTableNames[0];
 
         try {
             $this->restProxy->insertEntity(null, new Entity());
             $this->fail('Expect null table to throw');
-        }
-        catch (\InvalidArgumentException $e) {
+        } catch (\InvalidArgumentException $e) {
             $this->assertEquals(sprintf(Resources::NULL_OR_EMPTY_MSG, 'table'), $e->getMessage(), 'Expect error message');
             $this->assertEquals(0, $e->getCode(), 'Expected error code');
         }
@@ -228,14 +232,14 @@ class TableServiceFunctionalParametersTest extends FunctionalTestBase {
     /**
     * @covers WindowsAzure\Table\TableRestProxy::insertEntity
     */
-    public function testInsertEntityEntityAndOptionsNull() {
-        $table = TableServiceFunctionalTestData::$TEST_TABLE_NAMES[0];
+    public function testInsertEntityEntityAndOptionsNull()
+    {
+        $table = TableServiceFunctionalTestData::$testTableNames[0];
 
         try {
             $this->restProxy->insertEntity($table, null, null);
             $this->fail('Expect null entity to throw');
-        }
-        catch (\InvalidArgumentException $e) {
+        } catch (\InvalidArgumentException $e) {
             $this->assertEquals(sprintf(Resources::NULL_OR_EMPTY_MSG, 'entity'), $e->getMessage(), 'Expect error message');
             $this->assertEquals(0, $e->getCode(), 'Expected error code');
         }
@@ -245,14 +249,14 @@ class TableServiceFunctionalParametersTest extends FunctionalTestBase {
     /**
     * @covers WindowsAzure\Table\TableRestProxy::insertEntity
     */
-    public function testInsertEntityEntityNullWithOptions() {
-        $table = TableServiceFunctionalTestData::$TEST_TABLE_NAMES[0];
+    public function testInsertEntityEntityNullWithOptions()
+    {
+        $table = TableServiceFunctionalTestData::$testTableNames[0];
 
         try {
             $this->restProxy->insertEntity($table, null, TableServiceFunctionalTestData::getSimpleinsertEntityOptions());
             $this->fail('Expect null entity to throw');
-        }
-        catch (\InvalidArgumentException $e) {
+        } catch (\InvalidArgumentException $e) {
             $this->assertEquals(sprintf(Resources::NULL_OR_EMPTY_MSG, 'entity'), $e->getMessage(), 'Expect error message');
             $this->assertEquals(0, $e->getCode(), 'Expected error code');
         }
@@ -262,8 +266,9 @@ class TableServiceFunctionalParametersTest extends FunctionalTestBase {
     /**
     * @covers WindowsAzure\Table\TableRestProxy::insertEntity
     */
-    public function testInsertEntityOptionsNull() {
-        $table = TableServiceFunctionalTestData::$TEST_TABLE_NAMES[0];
+    public function testInsertEntityOptionsNull()
+    {
+        $table = TableServiceFunctionalTestData::$testTableNames[0];
 
         $this->restProxy->insertEntity($table, TableServiceFunctionalTestData::getSimpleEntity(), null);
         $this->clearTable($table);
@@ -273,9 +278,9 @@ class TableServiceFunctionalParametersTest extends FunctionalTestBase {
     /**
     * @covers WindowsAzure\Table\TableRestProxy::insertEntity
     */
-    public function testInsertEntityEmptyPartitionKey() {
-        // TODO: Fails because of https://github.com/WindowsAzure/azure-sdk-for-php/issues/176
-        $table = TableServiceFunctionalTestData::$TEST_TABLE_NAMES[0];
+    public function testInsertEntityEmptyPartitionKey()
+    {
+        $table = TableServiceFunctionalTestData::$testTableNames[0];
 
         $e = new Entity();
         $e->setPartitionKey('normalRowKey');
@@ -288,9 +293,9 @@ class TableServiceFunctionalParametersTest extends FunctionalTestBase {
     /**
     * @covers WindowsAzure\Table\TableRestProxy::insertEntity
     */
-    public function testInsertEntityEmptyRowKey() {
-        // TODO: Fails because of https://github.com/WindowsAzure/azure-sdk-for-php/issues/176
-        $table = TableServiceFunctionalTestData::$TEST_TABLE_NAMES[0];
+    public function testInsertEntityEmptyRowKey()
+    {
+        $table = TableServiceFunctionalTestData::$testTableNames[0];
 
         $e = new Entity();
         $e->setPartitionKey('normalPartitionKey');
@@ -303,8 +308,9 @@ class TableServiceFunctionalParametersTest extends FunctionalTestBase {
     /**
     * @covers WindowsAzure\Table\TableRestProxy::insertEntity
     */
-    public function testInsertStringWithAllAsciiCharacters() {
-        $table = TableServiceFunctionalTestData::$TEST_TABLE_NAMES[0];
+    public function testInsertStringWithAllAsciiCharacters()
+    {
+        $table = TableServiceFunctionalTestData::$testTableNames[0];
 
         $e = new Entity();
         $e->setPartitionKey('foo');
@@ -345,15 +351,14 @@ class TableServiceFunctionalParametersTest extends FunctionalTestBase {
     /**
     * @covers WindowsAzure\Table\TableRestProxy::getEntity
     */
-    public function testGetEntityPartKeyNull() {
-        // TODO: Fails because of https://github.com/WindowsAzure/azure-sdk-for-php/issues/206
-        $table = TableServiceFunctionalTestData::$TEST_TABLE_NAMES[0];
+    public function testGetEntityPartKeyNull()
+    {
+        $table = TableServiceFunctionalTestData::$testTableNames[0];
 
         try {
             $this->restProxy->getEntity($table, null, TableServiceFunctionalTestData::getNewKey());
             $this->fail('Expect null options to throw');
-        }
-        catch (\InvalidArgumentException $e) {
+        } catch (\InvalidArgumentException $e) {
             $this->assertEquals(Resources::NULL_TABLE_KEY_MSG, $e->getMessage(), 'Expect error message');
             $this->assertEquals(0, $e->getCode(), 'Expected error code');
         }
@@ -363,15 +368,14 @@ class TableServiceFunctionalParametersTest extends FunctionalTestBase {
     /**
     * @covers WindowsAzure\Table\TableRestProxy::getEntity
     */
-    public function testGetEntityRowKeyNull() {
-        // TODO: Fails because of https://github.com/WindowsAzure/azure-sdk-for-php/issues/206
-        $table = TableServiceFunctionalTestData::$TEST_TABLE_NAMES[0];
+    public function testGetEntityRowKeyNull()
+    {
+        $table = TableServiceFunctionalTestData::$testTableNames[0];
 
         try {
             $this->restProxy->getEntity($table, TableServiceFunctionalTestData::getNewKey(), null);
             $this->assertTrue(true, 'Expect null row key to throw');
-        }
-        catch (\InvalidArgumentException $e) {
+        } catch (\InvalidArgumentException $e) {
             $this->assertEquals(Resources::NULL_TABLE_KEY_MSG, $e->getMessage(), 'Expect error message');
             $this->assertEquals(0, $e->getCode(), 'Expected error code');
         }
@@ -381,15 +385,14 @@ class TableServiceFunctionalParametersTest extends FunctionalTestBase {
     /**
     * @covers WindowsAzure\Table\TableRestProxy::getEntity
     */
-    public function testGetEntityKeysNull() {
-        // TODO: Fails because of https://github.com/WindowsAzure/azure-sdk-for-php/issues/206
-        $table = TableServiceFunctionalTestData::$TEST_TABLE_NAMES[0];
+    public function testGetEntityKeysNull()
+    {
+        $table = TableServiceFunctionalTestData::$testTableNames[0];
 
         try {
             $this->restProxy->getEntity($table, null, null);
             $this->fail('Expect null partition and row keys to throw');
-        }
-        catch (\InvalidArgumentException $e) {
+        } catch (\InvalidArgumentException $e) {
             $this->assertEquals(Resources::NULL_TABLE_KEY_MSG, $e->getMessage(), 'Expect error message');
             $this->assertEquals(0, $e->getCode(), 'Expected error code');
         }
@@ -399,14 +402,14 @@ class TableServiceFunctionalParametersTest extends FunctionalTestBase {
     /**
     * @covers WindowsAzure\Table\TableRestProxy::getEntity
     */
-    public function testGetEntityTableAndKeysNull() {
-        $table = TableServiceFunctionalTestData::$TEST_TABLE_NAMES[0];
+    public function testGetEntityTableAndKeysNull()
+    {
+        $table = TableServiceFunctionalTestData::$testTableNames[0];
 
         try {
             $this->restProxy->getEntity(null, null, null);
             $this->fail('Expect null table name to throw');
-        }
-        catch (\InvalidArgumentException $e) {
+        } catch (\InvalidArgumentException $e) {
             $this->assertEquals(sprintf(Resources::NULL_OR_EMPTY_MSG, 'table'), $e->getMessage(), 'Expect error message');
             $this->assertEquals(0, $e->getCode(), 'Expected error code');
         }
@@ -416,14 +419,14 @@ class TableServiceFunctionalParametersTest extends FunctionalTestBase {
     /**
     * @covers WindowsAzure\Table\TableRestProxy::getEntity
     */
-    public function testGetEntityTableNull() {
-        $table = TableServiceFunctionalTestData::$TEST_TABLE_NAMES[0];
+    public function testGetEntityTableNull()
+    {
+        $table = TableServiceFunctionalTestData::$testTableNames[0];
 
         try {
             $this->restProxy->getEntity(null, TableServiceFunctionalTestData::getNewKey(), TableServiceFunctionalTestData::getNewKey());
             $this->fail('Expect null table name to throw');
-        }
-        catch (\InvalidArgumentException $e) {
+        } catch (\InvalidArgumentException $e) {
             $this->assertEquals(sprintf(Resources::NULL_OR_EMPTY_MSG, 'table'), $e->getMessage(), 'Expect error message');
             $this->assertEquals(0, $e->getCode(), 'Expected error code');
         }
@@ -433,15 +436,14 @@ class TableServiceFunctionalParametersTest extends FunctionalTestBase {
     /**
     * @covers WindowsAzure\Table\TableRestProxy::getEntity
     */
-    public function testGetEntityKeysAndOptionsNull() {
-        // TODO: Fails because of https://github.com/WindowsAzure/azure-sdk-for-php/issues/206
-        $table = TableServiceFunctionalTestData::$TEST_TABLE_NAMES[0];
+    public function testGetEntityKeysAndOptionsNull()
+    {
+        $table = TableServiceFunctionalTestData::$testTableNames[0];
 
         try {
             $this->restProxy->getEntity($table, null, null, null);
             $this->fail('Expect keys to throw');
-        }
-        catch (\InvalidArgumentException $e) {
+        } catch (\InvalidArgumentException $e) {
             $this->assertEquals(Resources::NULL_TABLE_KEY_MSG, $e->getMessage(), 'Expect error message');
             $this->assertEquals(0, $e->getCode(), 'Expected error code');
         }
@@ -452,17 +454,16 @@ class TableServiceFunctionalParametersTest extends FunctionalTestBase {
     * @covers WindowsAzure\Table\TableRestProxy::getEntity
     * @covers WindowsAzure\Table\TableRestProxy::insertEntity
     */
-    public function testGetEntityKeysNullWithOptions() {
-        // TODO: Fails because of https://github.com/WindowsAzure/azure-sdk-for-php/issues/206
-        $table = TableServiceFunctionalTestData::$TEST_TABLE_NAMES[0];
+    public function testGetEntityKeysNullWithOptions()
+    {
+        $table = TableServiceFunctionalTestData::$testTableNames[0];
         $ent = TableServiceFunctionalTestData::getSimpleEntity();
 
         try {
             $this->restProxy->insertEntity($table, $ent);
             $this->restProxy->getEntity($table, null, null, new TableServiceOptions());
             $this->fail('Expect null keys to throw');
-        }
-        catch (\InvalidArgumentException $e) {
+        } catch (\InvalidArgumentException $e) {
             $this->assertEquals(Resources::NULL_TABLE_KEY_MSG, $e->getMessage(), 'Expect error message');
             $this->assertEquals(0, $e->getCode(), 'Expected error code');
         }
@@ -473,8 +474,9 @@ class TableServiceFunctionalParametersTest extends FunctionalTestBase {
     * @covers WindowsAzure\Table\TableRestProxy::getEntity
     * @covers WindowsAzure\Table\TableRestProxy::insertEntity
     */
-    public function testGetEntityOptionsNull() {
-        $table = TableServiceFunctionalTestData::$TEST_TABLE_NAMES[0];
+    public function testGetEntityOptionsNull()
+    {
+        $table = TableServiceFunctionalTestData::$testTableNames[0];
         $ent = TableServiceFunctionalTestData::getSimpleEntity();
 
         $this->restProxy->insertEntity($table, $ent);
@@ -486,15 +488,14 @@ class TableServiceFunctionalParametersTest extends FunctionalTestBase {
     /**
     * @covers WindowsAzure\Table\TableRestProxy::deleteEntity
     */
-    public function testDeleteEntityPartKeyNull() {
-        // TODO: Fails because of https://github.com/WindowsAzure/azure-sdk-for-php/issues/206
-        $table = TableServiceFunctionalTestData::$TEST_TABLE_NAMES[0];
+    public function testDeleteEntityPartKeyNull()
+    {
+        $table = TableServiceFunctionalTestData::$testTableNames[0];
 
         try {
             $this->restProxy->deleteEntity($table, null, TableServiceFunctionalTestData::getNewKey());
             $this->fail('Expect null partition key to throw');
-        }
-        catch (\InvalidArgumentException $e) {
+        } catch (\InvalidArgumentException $e) {
             $this->assertEquals(Resources::NULL_TABLE_KEY_MSG, $e->getMessage(), 'Expect error message');
             $this->assertEquals(0, $e->getCode(), 'Expected error code');
         }
@@ -504,15 +505,14 @@ class TableServiceFunctionalParametersTest extends FunctionalTestBase {
     /**
     * @covers WindowsAzure\Table\TableRestProxy::deleteEntity
     */
-    public function testDeleteEntityRowKeyNull() {
-        // TODO: Fails because of https://github.com/WindowsAzure/azure-sdk-for-php/issues/206
-        $table = TableServiceFunctionalTestData::$TEST_TABLE_NAMES[0];
+    public function testDeleteEntityRowKeyNull()
+    {
+        $table = TableServiceFunctionalTestData::$testTableNames[0];
 
         try {
             $this->restProxy->deleteEntity($table, TableServiceFunctionalTestData::getNewKey(), null);
             $this->fail('Expect null row key to throw');
-        }
-        catch (\InvalidArgumentException $e) {
+        } catch (\InvalidArgumentException $e) {
             $this->assertEquals(Resources::NULL_TABLE_KEY_MSG, $e->getMessage(), 'Expect error message');
             $this->assertEquals(0, $e->getCode(), 'Expected error code');
         }
@@ -522,15 +522,14 @@ class TableServiceFunctionalParametersTest extends FunctionalTestBase {
     /**
     * @covers WindowsAzure\Table\TableRestProxy::deleteEntity
     */
-    public function testDeleteEntityKeysNull() {
-        // TODO: Fails because of https://github.com/WindowsAzure/azure-sdk-for-php/issues/206
-        $table = TableServiceFunctionalTestData::$TEST_TABLE_NAMES[0];
+    public function testDeleteEntityKeysNull()
+    {
+        $table = TableServiceFunctionalTestData::$testTableNames[0];
 
         try {
             $this->restProxy->deleteEntity($table, null, null);
             $this->fail('Expect null keys to throw');
-        }
-        catch (\InvalidArgumentException $e) {
+        } catch (\InvalidArgumentException $e) {
             $this->assertEquals(Resources::NULL_TABLE_KEY_MSG, $e->getMessage(), 'Expect error message');
             $this->assertEquals(0, $e->getCode(), 'Expected error code');
         }
@@ -540,14 +539,14 @@ class TableServiceFunctionalParametersTest extends FunctionalTestBase {
     /**
     * @covers WindowsAzure\Table\TableRestProxy::deleteEntity
     */
-    public function testDeleteEntityTableAndKeysNull() {
-        $table = TableServiceFunctionalTestData::$TEST_TABLE_NAMES[0];
+    public function testDeleteEntityTableAndKeysNull()
+    {
+        $table = TableServiceFunctionalTestData::$testTableNames[0];
 
         try {
             $this->restProxy->deleteEntity(null, null, null);
             $this->fail('Expect null table name to throw');
-        }
-        catch (\InvalidArgumentException $e) {
+        } catch (\InvalidArgumentException $e) {
             $this->assertEquals(sprintf(Resources::NULL_OR_EMPTY_MSG, 'table'), $e->getMessage(), 'Expect error message');
             $this->assertEquals(0, $e->getCode(), 'Expected error code');
         }
@@ -557,14 +556,14 @@ class TableServiceFunctionalParametersTest extends FunctionalTestBase {
     /**
     * @covers WindowsAzure\Table\TableRestProxy::deleteEntity
     */
-    public function testDeleteEntityTableNull() {
-        $table = TableServiceFunctionalTestData::$TEST_TABLE_NAMES[0];
+    public function testDeleteEntityTableNull()
+    {
+        $table = TableServiceFunctionalTestData::$testTableNames[0];
 
         try {
             $this->restProxy->deleteEntity(null, TableServiceFunctionalTestData::getNewKey(), TableServiceFunctionalTestData::getNewKey());
             $this->fail('Expect null table name to throw');
-        }
-        catch (\InvalidArgumentException $e) {
+        } catch (\InvalidArgumentException $e) {
             $this->assertEquals(sprintf(Resources::NULL_OR_EMPTY_MSG, 'table'), $e->getMessage(), 'Expect error message');
             $this->assertEquals(0, $e->getCode(), 'Expected error code');
         }
@@ -574,15 +573,14 @@ class TableServiceFunctionalParametersTest extends FunctionalTestBase {
     /**
     * @covers WindowsAzure\Table\TableRestProxy::deleteEntity
     */
-    public function testDeleteEntityKeysAndOptionsNull() {
-        // TODO: Fails because of https://github.com/WindowsAzure/azure-sdk-for-php/issues/206
-        $table = TableServiceFunctionalTestData::$TEST_TABLE_NAMES[0];
+    public function testDeleteEntityKeysAndOptionsNull()
+    {
+        $table = TableServiceFunctionalTestData::$testTableNames[0];
 
         try {
             $this->restProxy->deleteEntity($table, null, null, null);
             $this->fail('Expect null keys to throw');
-        }
-        catch (\InvalidArgumentException $e) {
+        } catch (\InvalidArgumentException $e) {
             $this->assertEquals(Resources::NULL_TABLE_KEY_MSG, $e->getMessage(), 'Expect error message');
             $this->assertEquals(0, $e->getCode(), 'Expected error code');
         }
@@ -593,17 +591,16 @@ class TableServiceFunctionalParametersTest extends FunctionalTestBase {
     * @covers WindowsAzure\Table\TableRestProxy::deleteEntity
     * @covers WindowsAzure\Table\TableRestProxy::insertEntity
     */
-    public function testDeleteEntityKeysNullWithOptions() {
-        // TODO: Fails because of https://github.com/WindowsAzure/azure-sdk-for-php/issues/206
-        $table = TableServiceFunctionalTestData::$TEST_TABLE_NAMES[0];
+    public function testDeleteEntityKeysNullWithOptions()
+    {
+        $table = TableServiceFunctionalTestData::$testTableNames[0];
         $ent = TableServiceFunctionalTestData::getSimpleEntity();
 
         try {
             $this->restProxy->insertEntity($table, $ent);
             $this->restProxy->deleteEntity($table, null, null, new DeleteEntityOptions());
             $this->fail('Expect null keys to throw');
-        }
-        catch (\InvalidArgumentException $e) {
+        } catch (\InvalidArgumentException $e) {
             $this->assertEquals(Resources::NULL_TABLE_KEY_MSG, $e->getMessage(), 'Expect error message');
             $this->assertEquals(0, $e->getCode(), 'Expected error code');
         }
@@ -614,8 +611,9 @@ class TableServiceFunctionalParametersTest extends FunctionalTestBase {
     * @covers WindowsAzure\Table\TableRestProxy::deleteEntity
     * @covers WindowsAzure\Table\TableRestProxy::insertEntity
     */
-    public function testDeleteEntityOptionsNull() {
-        $table = TableServiceFunctionalTestData::$TEST_TABLE_NAMES[0];
+    public function testDeleteEntityOptionsNull()
+    {
+        $table = TableServiceFunctionalTestData::$testTableNames[0];
         $ent = TableServiceFunctionalTestData::getSimpleEntity();
 
         $this->restProxy->insertEntity($table, $ent);
@@ -628,9 +626,8 @@ class TableServiceFunctionalParametersTest extends FunctionalTestBase {
     * @covers WindowsAzure\Table\TableRestProxy::deleteEntity
     * @covers WindowsAzure\Table\TableRestProxy::insertEntity
     */
-    public function testDeleteEntityTroublesomePartitionKey() {
-        // TODO: Fails because of https://github.com/WindowsAzure/azure-sdk-for-php/issues/180
-
+    public function testDeleteEntityTroublesomePartitionKey()
+    {
         // The service does not allow the following common characters in keys:
         // 35 '#'
         // 47 '/'
@@ -644,7 +641,7 @@ class TableServiceFunctionalParametersTest extends FunctionalTestBase {
         // * Unicode
         // These need to be properly encoded when passed on the URL, else there will be trouble
 
-        $table = TableServiceFunctionalTestData::$TEST_TABLE_NAMES[0];
+        $table = TableServiceFunctionalTestData::$testTableNames[0];
 
         $e = new Entity();
         $e->setPartitionKey('partition\'Key\'');
@@ -683,9 +680,8 @@ class TableServiceFunctionalParametersTest extends FunctionalTestBase {
     * @covers WindowsAzure\Table\TableRestProxy::deleteEntity
     * @covers WindowsAzure\Table\TableRestProxy::insertEntity
     */
-    public function testDeleteEntityTroublesomeRowKey() {
-        // TODO: Fails because of https://github.com/WindowsAzure/azure-sdk-for-php/issues/180
-
+    public function testDeleteEntityTroublesomeRowKey()
+    {
         // The service does not allow the following common characters in keys:
         // 35 '#'
         // 47 '/'
@@ -699,7 +695,7 @@ class TableServiceFunctionalParametersTest extends FunctionalTestBase {
         // Unicode
         // These need to be properly encoded when passed on the URL, else there will be trouble
 
-        $table = TableServiceFunctionalTestData::$TEST_TABLE_NAMES[0];
+        $table = TableServiceFunctionalTestData::$testTableNames[0];
 
         $e = new Entity();
         $e->setRowKey('row\'Key\'');
@@ -737,14 +733,14 @@ class TableServiceFunctionalParametersTest extends FunctionalTestBase {
     /**
     * @covers WindowsAzure\Table\TableRestProxy::mergeEntity
     */
-    public function testMergeEntityEntityNull() {
-        $table = TableServiceFunctionalTestData::$TEST_TABLE_NAMES[0];
+    public function testMergeEntityEntityNull()
+    {
+        $table = TableServiceFunctionalTestData::$testTableNames[0];
 
         try {
             $this->restProxy->mergeEntity($table, null);
             $this->assertTrue('Expect null entity to throw');
-        }
-        catch (\InvalidArgumentException $e) {
+        } catch (\InvalidArgumentException $e) {
             $this->assertEquals(sprintf(Resources::NULL_OR_EMPTY_MSG, 'entity'), $e->getMessage(), 'Expect error message');
             $this->assertEquals(0, $e->getCode(), 'Expected error code');
         }
@@ -754,14 +750,14 @@ class TableServiceFunctionalParametersTest extends FunctionalTestBase {
     /**
     * @covers WindowsAzure\Table\TableRestProxy::mergeEntity
     */
-    public function testMergeEntityTableAndEntityNull() {
-        $table = TableServiceFunctionalTestData::$TEST_TABLE_NAMES[0];
+    public function testMergeEntityTableAndEntityNull()
+    {
+        $table = TableServiceFunctionalTestData::$testTableNames[0];
 
         try {
             $this->restProxy->mergeEntity(null, null);
             $this->fail('Expect null table name and entity to throw');
-        }
-        catch (\InvalidArgumentException $e) {
+        } catch (\InvalidArgumentException $e) {
             $this->assertEquals(sprintf(Resources::NULL_OR_EMPTY_MSG, 'table'), $e->getMessage(), 'Expect error message');
             $this->assertEquals(0, $e->getCode(), 'Expected error code');
         }
@@ -771,14 +767,14 @@ class TableServiceFunctionalParametersTest extends FunctionalTestBase {
     /**
     * @covers WindowsAzure\Table\TableRestProxy::mergeEntity
     */
-    public function testMergeEntityTableNull() {
-        $table = TableServiceFunctionalTestData::$TEST_TABLE_NAMES[0];
+    public function testMergeEntityTableNull()
+    {
+        $table = TableServiceFunctionalTestData::$testTableNames[0];
 
         try {
             $this->restProxy->mergeEntity(null, TableServiceFunctionalTestData::getSimpleEntity());
             $this->fail('Expect null table name to throw');
-        }
-        catch (\InvalidArgumentException $e) {
+        } catch (\InvalidArgumentException $e) {
             $this->assertEquals(sprintf(Resources::NULL_OR_EMPTY_MSG, 'table'), $e->getMessage(), 'Expect error message');
             $this->assertEquals(0, $e->getCode(), 'Expected error code');
         }
@@ -788,14 +784,14 @@ class TableServiceFunctionalParametersTest extends FunctionalTestBase {
     /**
     * @covers WindowsAzure\Table\TableRestProxy::mergeEntity
     */
-    public function testMergeEntityEntityAndOptionsNull() {
-        $table = TableServiceFunctionalTestData::$TEST_TABLE_NAMES[0];
+    public function testMergeEntityEntityAndOptionsNull()
+    {
+        $table = TableServiceFunctionalTestData::$testTableNames[0];
 
         try {
             $this->restProxy->mergeEntity($table, null, null);
             $this->fail('Expect null entity to throw');
-        }
-        catch (\InvalidArgumentException $e) {
+        } catch (\InvalidArgumentException $e) {
             $this->assertEquals(sprintf(Resources::NULL_OR_EMPTY_MSG, 'entity'), $e->getMessage(), 'Expect error message');
             $this->assertEquals(0, $e->getCode(), 'Expected error code');
         }
@@ -805,14 +801,14 @@ class TableServiceFunctionalParametersTest extends FunctionalTestBase {
     /**
     * @covers WindowsAzure\Table\TableRestProxy::mergeEntity
     */
-    public function testMergeEntityEntityNullWithOptions() {
-        $table = TableServiceFunctionalTestData::$TEST_TABLE_NAMES[0];
+    public function testMergeEntityEntityNullWithOptions()
+    {
+        $table = TableServiceFunctionalTestData::$testTableNames[0];
 
         try {
             $this->restProxy->mergeEntity($table, null, TableServiceFunctionalTestData::getSimpleinsertEntityOptions());
             $this->fail('Expect null entity to throw');
-        }
-        catch (\InvalidArgumentException $e) {
+        } catch (\InvalidArgumentException $e) {
             $this->assertEquals(sprintf(Resources::NULL_OR_EMPTY_MSG, 'entity'), $e->getMessage(), 'Expect error message');
             $this->assertEquals(0, $e->getCode(), 'Expected error code');
         }
@@ -822,15 +818,14 @@ class TableServiceFunctionalParametersTest extends FunctionalTestBase {
     /**
     * @covers WindowsAzure\Table\TableRestProxy::mergeEntity
     */
-    public function testMergeEntityOptionsNull() {
-        // TODO: Fails because of https://github.com/WindowsAzure/azure-sdk-for-php/issues/157
-        $table = TableServiceFunctionalTestData::$TEST_TABLE_NAMES[0];
+    public function testMergeEntityOptionsNull()
+    {
+        $table = TableServiceFunctionalTestData::$testTableNames[0];
 
         try {
             $this->restProxy->mergeEntity($table, TableServiceFunctionalTestData::getSimpleEntity(), null);
             $this->fail('Expect 404 when merging with non-existant entity');
-        }
-        catch (ServiceException $e) {
+        } catch (ServiceException $e) {
             $this->assertEquals(404, $e->getCode(), 'Expect 404 when merging with non-existant entity');
         }
         $this->clearTable($table);
@@ -839,14 +834,14 @@ class TableServiceFunctionalParametersTest extends FunctionalTestBase {
     /**
     * @covers WindowsAzure\Table\TableRestProxy::updateEntity
     */
-    public function testUpdateEntityEntityNull() {
-        $table = TableServiceFunctionalTestData::$TEST_TABLE_NAMES[0];
+    public function testUpdateEntityEntityNull()
+    {
+        $table = TableServiceFunctionalTestData::$testTableNames[0];
 
         try {
             $this->restProxy->updateEntity($table, null);
             $this->fail('Expect null entity to throw');
-        }
-        catch (\InvalidArgumentException $e) {
+        } catch (\InvalidArgumentException $e) {
             $this->assertEquals(sprintf(Resources::NULL_OR_EMPTY_MSG, 'entity'), $e->getMessage(), 'Expect error message');
             $this->assertEquals(0, $e->getCode(), 'Expected error code');
         }
@@ -856,14 +851,14 @@ class TableServiceFunctionalParametersTest extends FunctionalTestBase {
     /**
     * @covers WindowsAzure\Table\TableRestProxy::updateEntity
     */
-    public function testUpdateEntityTableAndEntityNull() {
-        $table = TableServiceFunctionalTestData::$TEST_TABLE_NAMES[0];
+    public function testUpdateEntityTableAndEntityNull()
+    {
+        $table = TableServiceFunctionalTestData::$testTableNames[0];
 
         try {
             $this->restProxy->updateEntity(null, null);
             $this->fail('Expect null table name and entity to throw');
-        }
-        catch (\InvalidArgumentException $e) {
+        } catch (\InvalidArgumentException $e) {
             $this->assertEquals(sprintf(Resources::NULL_OR_EMPTY_MSG, 'table'), $e->getMessage(), 'Expect error message');
             $this->assertEquals(0, $e->getCode(), 'Expected error code');
         }
@@ -873,14 +868,14 @@ class TableServiceFunctionalParametersTest extends FunctionalTestBase {
     /**
     * @covers WindowsAzure\Table\TableRestProxy::updateEntity
     */
-    public function testUpdateEntityTableNull() {
-        $table = TableServiceFunctionalTestData::$TEST_TABLE_NAMES[0];
+    public function testUpdateEntityTableNull()
+    {
+        $table = TableServiceFunctionalTestData::$testTableNames[0];
 
         try {
             $this->restProxy->updateEntity(null, TableServiceFunctionalTestData::getSimpleEntity());
             $this->fail('Expect null options to throw');
-        }
-        catch (\InvalidArgumentException $e) {
+        } catch (\InvalidArgumentException $e) {
             $this->assertEquals(sprintf(Resources::NULL_OR_EMPTY_MSG, 'table'), $e->getMessage(), 'Expect error message');
             $this->assertEquals(0, $e->getCode(), 'Expected error code');
         }
@@ -890,14 +885,14 @@ class TableServiceFunctionalParametersTest extends FunctionalTestBase {
     /**
     * @covers WindowsAzure\Table\TableRestProxy::updateEntity
     */
-    public function testUpdateEntityEntityAndOptionsNull() {
-        $table = TableServiceFunctionalTestData::$TEST_TABLE_NAMES[0];
+    public function testUpdateEntityEntityAndOptionsNull()
+    {
+        $table = TableServiceFunctionalTestData::$testTableNames[0];
 
         try {
             $this->restProxy->updateEntity($table, null, null);
             $this->fail('Expect null entity to throw');
-        }
-        catch (\InvalidArgumentException $e) {
+        } catch (\InvalidArgumentException $e) {
             $this->assertEquals(sprintf(Resources::NULL_OR_EMPTY_MSG, 'entity'), $e->getMessage(), 'Expect error message');
             $this->assertEquals(0, $e->getCode(), 'Expected error code');
         }
@@ -907,14 +902,14 @@ class TableServiceFunctionalParametersTest extends FunctionalTestBase {
     /**
     * @covers WindowsAzure\Table\TableRestProxy::updateEntity
     */
-    public function testUpdateEntityEntityNullWithOptions() {
-        $table = TableServiceFunctionalTestData::$TEST_TABLE_NAMES[0];
+    public function testUpdateEntityEntityNullWithOptions()
+    {
+        $table = TableServiceFunctionalTestData::$testTableNames[0];
 
         try {
             $this->restProxy->updateEntity($table, null, TableServiceFunctionalTestData::getSimpleinsertEntityOptions());
             $this->fail('Expect null entity to throw');
-        }
-        catch (\InvalidArgumentException $e) {
+        } catch (\InvalidArgumentException $e) {
             $this->assertEquals(sprintf(Resources::NULL_OR_EMPTY_MSG, 'entity'), $e->getMessage(), 'Expect error message');
             $this->assertEquals(0, $e->getCode(), 'Expected error code');
         }
@@ -924,15 +919,14 @@ class TableServiceFunctionalParametersTest extends FunctionalTestBase {
     /**
     * @covers WindowsAzure\Table\TableRestProxy::updateEntity
     */
-    public function testUpdateEntityOptionsNull() {
-        // TODO: Fails because of https://github.com/WindowsAzure/azure-sdk-for-php/issues/157
-        $table = TableServiceFunctionalTestData::$TEST_TABLE_NAMES[0];
+    public function testUpdateEntityOptionsNull()
+    {
+        $table = TableServiceFunctionalTestData::$testTableNames[0];
 
         try {
             $this->restProxy->updateEntity($table, TableServiceFunctionalTestData::getSimpleEntity(), null);
             $this->fail('Expect 404 when updating non-existant entity');
-        }
-        catch (ServiceException $e) {
+        } catch (ServiceException $e) {
             $this->assertEquals(404, $e->getCode(), 'Should be 404 for update nonexistant entity');
         }
         $this->clearTable($table);
@@ -941,14 +935,14 @@ class TableServiceFunctionalParametersTest extends FunctionalTestBase {
     /**
     * @covers WindowsAzure\Table\TableRestProxy::insertOrMergeEntity
     */
-    public function testInsertOrMergeEntityEntityNull() {
-        $table = TableServiceFunctionalTestData::$TEST_TABLE_NAMES[0];
+    public function testInsertOrMergeEntityEntityNull()
+    {
+        $table = TableServiceFunctionalTestData::$testTableNames[0];
 
         try {
             $this->restProxy->insertOrMergeEntity($table, null);
             $this->fail('Expect to throw for null entity');
-        }
-        catch (\InvalidArgumentException $e) {
+        } catch (\InvalidArgumentException $e) {
             $this->assertEquals(sprintf(Resources::NULL_OR_EMPTY_MSG, 'entity'), $e->getMessage(), 'Expect error message');
             $this->assertEquals(0, $e->getCode(), 'Expected error code');
         }
@@ -958,14 +952,14 @@ class TableServiceFunctionalParametersTest extends FunctionalTestBase {
     /**
     * @covers WindowsAzure\Table\TableRestProxy::insertOrMergeEntity
     */
-    public function testInsertOrMergeEntityTableAndEntityNull() {
-        $table = TableServiceFunctionalTestData::$TEST_TABLE_NAMES[0];
+    public function testInsertOrMergeEntityTableAndEntityNull()
+    {
+        $table = TableServiceFunctionalTestData::$testTableNames[0];
 
         try {
             $this->restProxy->insertOrMergeEntity(null, null);
             $this->fail('Expect to throw for null table name and entity');
-        }
-        catch (\InvalidArgumentException $e) {
+        } catch (\InvalidArgumentException $e) {
             $this->assertEquals(sprintf(Resources::NULL_OR_EMPTY_MSG, 'table'), $e->getMessage(), 'Expect error message');
             $this->assertEquals(0, $e->getCode(), 'Expected error code');
         }
@@ -975,14 +969,14 @@ class TableServiceFunctionalParametersTest extends FunctionalTestBase {
     /**
     * @covers WindowsAzure\Table\TableRestProxy::insertOrMergeEntity
     */
-    public function testInsertOrMergeEntityTableNull() {
-        $table = TableServiceFunctionalTestData::$TEST_TABLE_NAMES[0];
+    public function testInsertOrMergeEntityTableNull()
+    {
+        $table = TableServiceFunctionalTestData::$testTableNames[0];
 
         try {
             $this->restProxy->insertOrMergeEntity(null, new Entity());
             $this->fail('Expect to throw for null table name');
-        }
-        catch (\InvalidArgumentException $e) {
+        } catch (\InvalidArgumentException $e) {
             $this->assertEquals(sprintf(Resources::NULL_OR_EMPTY_MSG, 'table'), $e->getMessage(), 'Expect error message');
             $this->assertEquals(0, $e->getCode(), 'Expected error code');
         }
@@ -992,14 +986,14 @@ class TableServiceFunctionalParametersTest extends FunctionalTestBase {
     /**
     * @covers WindowsAzure\Table\TableRestProxy::insertOrMergeEntity
     */
-    public function testInsertOrMergeEntityEntityAndOptionsNull() {
-        $table = TableServiceFunctionalTestData::$TEST_TABLE_NAMES[0];
+    public function testInsertOrMergeEntityEntityAndOptionsNull()
+    {
+        $table = TableServiceFunctionalTestData::$testTableNames[0];
 
         try {
             $this->restProxy->insertOrMergeEntity($table, null, null);
             $this->fail('Expect to throw for null entity');
-        }
-        catch (\InvalidArgumentException $e) {
+        } catch (\InvalidArgumentException $e) {
             $this->assertEquals(sprintf(Resources::NULL_OR_EMPTY_MSG, 'entity'), $e->getMessage(), 'Expect error message');
             $this->assertEquals(0, $e->getCode(), 'Expected error code');
         }
@@ -1009,14 +1003,14 @@ class TableServiceFunctionalParametersTest extends FunctionalTestBase {
     /**
     * @covers WindowsAzure\Table\TableRestProxy::insertOrMergeEntity
     */
-    public function testInsertOrMergeEntityEntityNullWithOptions() {
-        $table = TableServiceFunctionalTestData::$TEST_TABLE_NAMES[0];
+    public function testInsertOrMergeEntityEntityNullWithOptions()
+    {
+        $table = TableServiceFunctionalTestData::$testTableNames[0];
 
         try {
             $this->restProxy->insertOrMergeEntity($table, null, TableServiceFunctionalTestData::getSimpleinsertEntityOptions());
             $this->fail('Expect to throw for null entity');
-        }
-        catch (\InvalidArgumentException $e) {
+        } catch (\InvalidArgumentException $e) {
             $this->assertEquals(sprintf(Resources::NULL_OR_EMPTY_MSG, 'entity'), $e->getMessage(), 'Expect error message');
             $this->assertEquals(0, $e->getCode(), 'Expected error code');
         }
@@ -1026,14 +1020,14 @@ class TableServiceFunctionalParametersTest extends FunctionalTestBase {
     /**
     * @covers WindowsAzure\Table\TableRestProxy::insertOrMergeEntity
     */
-    public function testInsertOrMergeEntityOptionsNull() {
-        $table = TableServiceFunctionalTestData::$TEST_TABLE_NAMES[0];
+    public function testInsertOrMergeEntityOptionsNull()
+    {
+        $table = TableServiceFunctionalTestData::$testTableNames[0];
 
         try {
             $this->restProxy->insertOrMergeEntity($table, TableServiceFunctionalTestData::getSimpleEntity(), null);
             $this->assertFalse(Configuration::isEmulated(), 'Should fail if and only if in emulator');
-        }
-        catch (ServiceException $e) {
+        } catch (ServiceException $e) {
             // Expect failure when run this test with emulator, as v1.6 doesn't support this method
             if (Configuration::isEmulated()) {
                 $this->assertEquals(404, $e->getCode(), 'getCode');
@@ -1045,14 +1039,14 @@ class TableServiceFunctionalParametersTest extends FunctionalTestBase {
     /**
     * @covers WindowsAzure\Table\TableRestProxy::insertOrReplaceEntity
     */
-    public function testInsertOrReplaceEntityEntityNull() {
-        $table = TableServiceFunctionalTestData::$TEST_TABLE_NAMES[0];
+    public function testInsertOrReplaceEntityEntityNull()
+    {
+        $table = TableServiceFunctionalTestData::$testTableNames[0];
 
         try {
             $this->restProxy->insertOrReplaceEntity($table, null);
             $this->fail('Expect to throw for null entity');
-        }
-        catch (\InvalidArgumentException $e) {
+        } catch (\InvalidArgumentException $e) {
             $this->assertEquals(sprintf(Resources::NULL_OR_EMPTY_MSG, 'entity'), $e->getMessage(), 'Expect error message');
             $this->assertEquals(0, $e->getCode(), 'Expected error code');
         }
@@ -1062,14 +1056,14 @@ class TableServiceFunctionalParametersTest extends FunctionalTestBase {
     /**
     * @covers WindowsAzure\Table\TableRestProxy::insertOrReplaceEntity
     */
-    public function testInsertOrReplaceEntityTableAndEntityNull() {
-        $table = TableServiceFunctionalTestData::$TEST_TABLE_NAMES[0];
+    public function testInsertOrReplaceEntityTableAndEntityNull()
+    {
+        $table = TableServiceFunctionalTestData::$testTableNames[0];
 
         try {
             $this->restProxy->insertOrReplaceEntity(null, null);
             $this->fail('Expect to throw for null table name and entity');
-        }
-        catch (\InvalidArgumentException $e) {
+        } catch (\InvalidArgumentException $e) {
             $this->assertEquals(sprintf(Resources::NULL_OR_EMPTY_MSG, 'table'), $e->getMessage(), 'Expect error message');
             $this->assertEquals(0, $e->getCode(), 'Expected error code');
         }
@@ -1079,14 +1073,14 @@ class TableServiceFunctionalParametersTest extends FunctionalTestBase {
     /**
     * @covers WindowsAzure\Table\TableRestProxy::insertOrReplaceEntity
     */
-    public function testInsertOrReplaceEntityTableNull() {
-        $table = TableServiceFunctionalTestData::$TEST_TABLE_NAMES[0];
+    public function testInsertOrReplaceEntityTableNull()
+    {
+        $table = TableServiceFunctionalTestData::$testTableNames[0];
 
         try {
             $this->restProxy->insertOrReplaceEntity(null, new Entity());
             $this->fail('Expect to throw for null table name');
-        }
-        catch (\InvalidArgumentException $e) {
+        } catch (\InvalidArgumentException $e) {
             $this->assertEquals(sprintf(Resources::NULL_OR_EMPTY_MSG, 'table'), $e->getMessage(), 'Expect error message');
             $this->assertEquals(0, $e->getCode(), 'Expected error code');
         }
@@ -1096,14 +1090,14 @@ class TableServiceFunctionalParametersTest extends FunctionalTestBase {
     /**
     * @covers WindowsAzure\Table\TableRestProxy::insertOrReplaceEntity
     */
-    public function testInsertOrReplaceEntityEntityAndOptionsNull() {
-        $table = TableServiceFunctionalTestData::$TEST_TABLE_NAMES[0];
+    public function testInsertOrReplaceEntityEntityAndOptionsNull()
+    {
+        $table = TableServiceFunctionalTestData::$testTableNames[0];
 
         try {
             $this->restProxy->insertOrReplaceEntity($table, null, null);
             $this->fail('Expect to throw for null entity');
-        }
-        catch (\InvalidArgumentException $e) {
+        } catch (\InvalidArgumentException $e) {
             $this->assertEquals(sprintf(Resources::NULL_OR_EMPTY_MSG, 'entity'), $e->getMessage(), 'Expect error message');
             $this->assertEquals(0, $e->getCode(), 'Expected error code');
         }
@@ -1113,14 +1107,14 @@ class TableServiceFunctionalParametersTest extends FunctionalTestBase {
     /**
     * @covers WindowsAzure\Table\TableRestProxy::insertOrReplaceEntity
     */
-    public function testInsertOrReplaceEntityEntityNullWithOptions() {
-        $table = TableServiceFunctionalTestData::$TEST_TABLE_NAMES[0];
+    public function testInsertOrReplaceEntityEntityNullWithOptions()
+    {
+        $table = TableServiceFunctionalTestData::$testTableNames[0];
 
         try {
             $this->restProxy->insertOrReplaceEntity($table, null, TableServiceFunctionalTestData::getSimpleinsertEntityOptions());
             $this->fail('Expect to throw for null entity');
-        }
-        catch (\InvalidArgumentException $e) {
+        } catch (\InvalidArgumentException $e) {
             $this->assertEquals(sprintf(Resources::NULL_OR_EMPTY_MSG, 'entity'), $e->getMessage(), 'Expect error message');
             $this->assertEquals(0, $e->getCode(), 'Expected error code');
         }
@@ -1130,14 +1124,14 @@ class TableServiceFunctionalParametersTest extends FunctionalTestBase {
     /**
     * @covers WindowsAzure\Table\TableRestProxy::insertOrReplaceEntity
     */
-    public function testInsertOrReplaceEntityOptionsNull() {
-        $table = TableServiceFunctionalTestData::$TEST_TABLE_NAMES[0];
+    public function testInsertOrReplaceEntityOptionsNull()
+    {
+        $table = TableServiceFunctionalTestData::$testTableNames[0];
 
         try {
             $this->restProxy->insertOrReplaceEntity($table, TableServiceFunctionalTestData::getSimpleEntity(), null);
             $this->assertFalse(Configuration::isEmulated(), 'Should fail if and only if in emulator');
-        }
-        catch (ServiceException $e) {
+        } catch (ServiceException $e) {
             // Expect failure when run this test with emulator, as v1.6 doesn't support this method
             if (Configuration::isEmulated()) {
                 $this->assertEquals(404, $e->getCode(), 'getCode');
@@ -1149,14 +1143,14 @@ class TableServiceFunctionalParametersTest extends FunctionalTestBase {
     /**
     * @covers WindowsAzure\Table\TableRestProxy::queryEntities
     */
-    public function testQueryEntitiesTableNull() {
-        $table = TableServiceFunctionalTestData::$TEST_TABLE_NAMES[0];
+    public function testQueryEntitiesTableNull()
+    {
+        $table = TableServiceFunctionalTestData::$testTableNames[0];
 
         try {
             $this->restProxy->queryEntities(null);
             $this->fail('Expect to throw for null table name');
-        }
-        catch (\InvalidArgumentException $e) {
+        } catch (\InvalidArgumentException $e) {
             $this->assertEquals(sprintf(Resources::NULL_OR_EMPTY_MSG, 'table'), $e->getMessage(), 'Expect error message');
             $this->assertEquals(0, $e->getCode(), 'Expected error code');
         }
@@ -1166,14 +1160,14 @@ class TableServiceFunctionalParametersTest extends FunctionalTestBase {
     /**
     * @covers WindowsAzure\Table\TableRestProxy::queryEntities
     */
-    public function testQueryEntitiesTableNullOptionsNull() {
-        $table = TableServiceFunctionalTestData::$TEST_TABLE_NAMES[0];
+    public function testQueryEntitiesTableNullOptionsNull()
+    {
+        $table = TableServiceFunctionalTestData::$testTableNames[0];
 
         try {
             $this->restProxy->queryEntities(null, null);
             $this->fail('Expect to throw for null table name');
-        }
-        catch (\InvalidArgumentException $e) {
+        } catch (\InvalidArgumentException $e) {
             $this->assertEquals(sprintf(Resources::NULL_OR_EMPTY_MSG, 'table'), $e->getMessage(), 'Expect error message');
             $this->assertEquals(0, $e->getCode(), 'Expected error code');
         }
@@ -1183,14 +1177,14 @@ class TableServiceFunctionalParametersTest extends FunctionalTestBase {
     /**
     * @covers WindowsAzure\Table\TableRestProxy::queryEntities
     */
-    public function testQueryEntitiesTableNullWithOptions() {
-        $table = TableServiceFunctionalTestData::$TEST_TABLE_NAMES[0];
+    public function testQueryEntitiesTableNullWithOptions()
+    {
+        $table = TableServiceFunctionalTestData::$testTableNames[0];
 
         try {
             $this->restProxy->queryEntities(null, new QueryEntitiesOptions());
             $this->fail('Expect to throw for null table name');
-        }
-        catch (\InvalidArgumentException $e) {
+        } catch (\InvalidArgumentException $e) {
             $this->assertEquals(sprintf(Resources::NULL_OR_EMPTY_MSG, 'table'), $e->getMessage(), 'Expect error message');
             $this->assertEquals(0, $e->getCode(), 'Expected error code');
         }
@@ -1200,8 +1194,9 @@ class TableServiceFunctionalParametersTest extends FunctionalTestBase {
     /**
     * @covers WindowsAzure\Table\TableRestProxy::queryEntities
     */
-    public function testQueryEntitiesOptionsNull() {
-        $table = TableServiceFunctionalTestData::$TEST_TABLE_NAMES[0];
+    public function testQueryEntitiesOptionsNull()
+    {
+        $table = TableServiceFunctionalTestData::$testTableNames[0];
 
         $this->restProxy->queryEntities($table, null);
         $this->clearTable($table);

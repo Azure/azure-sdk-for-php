@@ -89,15 +89,6 @@ interface IServicesBuilder
      * @return WindowsAzure\ServiceBus\ServiceBusRestProxy
      */
     public function createServiceBusService($config);
-    
-    /**
-     * Creates a WrapRestProxy using the passed configuration.
-     *
-     * @param WindowsAzure\Common\Configuration $config The configuration object.
-     * 
-     * @return WindowsAzure\Wrap\WrapRestProxy
-     */
-    public function createWrapService($config);
 }
 
 ?>
