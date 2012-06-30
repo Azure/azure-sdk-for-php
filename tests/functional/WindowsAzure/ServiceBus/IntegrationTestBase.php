@@ -76,13 +76,14 @@ class IntegrationTestBase extends ServiceBusRestProxyTestBase
                         try {
                             $restProxy->receiveQueueMessage($queueName, $opts);
                         } catch (\Exception $ex) {
+                            error_log($ex->getMessage());
                         }
                     }
-                }
-                else {
+                } else {
                     try {
                         $restProxy->deleteQueue($queueName);
                     } catch (\Exception $ex) {
+                        error_log($ex->getMessage());
                     }
                 }
             }
@@ -93,6 +94,7 @@ class IntegrationTestBase extends ServiceBusRestProxyTestBase
                 try {
                     $restProxy->deleteTopic($topicName);
                 } catch (\Exception $ex) {
+                    error_log($ex->getMessage());
                 }
             }
         }
@@ -101,6 +103,7 @@ class IntegrationTestBase extends ServiceBusRestProxyTestBase
             try {
                 $restProxy->createQueue(new QueueInfo('TestAlpha'));
             } catch (\Exception $ex) {
+                error_log($ex->getMessage());
             }
         }
     }

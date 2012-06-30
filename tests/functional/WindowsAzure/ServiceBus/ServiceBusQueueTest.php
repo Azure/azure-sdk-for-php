@@ -86,8 +86,7 @@ class ServiceBusQueueTest extends ScenarioTestBase
             $this->restProxy->getQueue($this->queueName);
             self::write('Queue already exists deleting it');
             $this->restProxy->deleteQueue($this->queueName);
-        }
-        catch (\Exception $e) {
+        } catch (\Exception $e) {
             self::write('could not get an existing queue (' . $e->getCode() . '), proceeding...');
         }
 
@@ -211,7 +210,9 @@ class ServiceBusQueueTest extends ScenarioTestBase
             // TODO: https://github.com/WindowsAzure/azure-sdk-for-php/issues/470
             $this->assertTrue(
                     500 == $ex->getCode() || 404 == $ex->getCode(),
-                    'Expect failure error code 500 or 404 when deleting RECEIVEANDDELETE messasge, but got ' . $ex->getCode());
+                    'Expect failure error code 500 or 404 when deleting RECEIVEANDDELETE messasge, but got ' .
+                    $ex->getCode() .
+                    ' https://github.com/WindowsAzure/azure-sdk-for-php/issues/470');
         }
 
         // Get the thrid
