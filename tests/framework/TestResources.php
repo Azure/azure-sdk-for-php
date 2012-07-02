@@ -61,6 +61,16 @@ class TestResources
     const HEADER1_VALUE = 'HeaderValue1';
     const HEADER2_VALUE = 'HeaderValue2';
 
+    // See https://tools.ietf.org/html/rfc2616
+    const STATUS_NOT_MODIFIED          = 304;
+    const STATUS_BAD_REQUEST           = 400;
+    const STATUS_UNAUTHORIZED          = 401;
+    const STATUS_FORBIDDEN             = 403;
+    const STATUS_NOT_FOUND             = 404;
+    const STATUS_CONFLICT              = 409;
+    const STATUS_PRECONDITION_FAILED   = 412;
+    const STATUS_INTERNAL_SERVER_ERROR = 500;
+
     public static function accountName()
     {
         return getenv('AZURE_STORAGE_ACCOUNT');
