@@ -430,22 +430,7 @@ class BlobServiceIntegrationTest extends IntegrationTestBase
     public function testWorkingWithRootContainersWorks()
     {
         // Ensure root container exists
-        $ok = false;
-        $counter = 0;
-        do {
-            // If the root conainter was deleted recently, it cannot
-            // be recreated immediately. Need to wait a bit if get the 409:Conflict.
-            try {
-                $this->restProxy->createContainer('$root');
-                $ok = true;
-            } catch (ServiceException $e) {
-                if ($e->getCode() != TestResources::STATUS_CONFLICT || $counter > 6) {
-                    throw $e;
-                }
-                sleep(10);
-                $counter++;
-            }
-        } while (!$ok);
+        $this->createContainerWithRetry('$root', new CreateContainerOptions());
 
         // Work with root container explicitly ('$root')
         {
