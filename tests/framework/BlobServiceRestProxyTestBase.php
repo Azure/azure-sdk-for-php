@@ -25,6 +25,7 @@
 namespace Tests\Framework;
 use Tests\Framework\ServiceRestProxyTestBase;
 use WindowsAzure\Common\Configuration;
+use WindowsAzure\Common\ServiceException;
 use WindowsAzure\Blob\BlobSettings;
 use WindowsAzure\Blob\BlobService;
 use Tests\Framework\TestResources;
@@ -45,31 +46,55 @@ use WindowsAzure\Blob\Models\ListContainersOptions;
 class BlobServiceRestProxyTestBase extends ServiceRestProxyTestBase
 {
     protected $_createdContainers;
-    
+
     public function __construct()
     {
         $config = new Configuration();
         $blobUri = 'http://' . TestResources::accountName() . '.blob.core.windows.net';
         $config->setProperty(BlobSettings::ACCOUNT_KEY, TestResources::accountKey());
-        $config->setProperty(BlobSettings::ACCOUNT_NAME, TestResources::accountName());        
+        $config->setProperty(BlobSettings::ACCOUNT_NAME, TestResources::accountName());
         $config->setProperty(BlobSettings::URI, $blobUri);
         $blobRestProxy = BlobService::create($config);
         parent::__construct($config, $blobRestProxy);
         $this->_createdContainers = array();
     }
-    
+
     public function createContainer($containerName, $options = null)
     {
         if (is_null($options)) {
             $options = new CreateContainerOptions();
             $options->setPublicAccess('container');
         }
-        
+
         $this->restProxy->createContainer($containerName, $options);
         $this->_createdContainers[] = $containerName;
     }
 
-    public function createContainers($containerList, $containerPrefix = null) {
+    public function createContainerWithRetry($containerName, $options = null, $retryCount = 6)
+    {
+        // Containers cannot be recreated within a minute of them being
+        // deleted; the service will give response of 409:Conflict.
+        // So, if get that error, wait a bit then retry.
+
+        $ok = false;
+        $counter = 0;
+        do {
+            try {
+                $this->createContainer($containerName, $options);
+                $ok = true;
+            } catch (ServiceException $e) {
+                if ($e->getCode() != TestResources::STATUS_CONFLICT ||
+                        $counter > $retryCount) {
+                    throw $e;
+                }
+                sleep(10);
+                $counter++;
+            }
+        } while (!$ok);
+    }
+
+    public function createContainers($containerList, $containerPrefix = null)
+    {
         $containers = $this->listContainers($containerPrefix);
         foreach($containerList as $container) {
             if (array_search($container, $containers) === FALSE) {
@@ -78,12 +103,9 @@ class BlobServiceRestProxyTestBase extends ServiceRestProxyTestBase
                 $listResults = $this->restProxy->listBlobs($container);
                 $blobs = $listResults->getBlobs();
                 foreach($blobs as $blob)  {
-                    try
-                    {
+                    try {
                         $this->restProxy->deleteBlob($container, $blob->getName());
-                    }
-                    catch (\Exception $e)
-                    {
+                    } catch (\Exception $e) {
                         // Ignore exception and continue.
                         error_log($e->getMessage());
                     }
@@ -97,7 +119,8 @@ class BlobServiceRestProxyTestBase extends ServiceRestProxyTestBase
         $this->restProxy->deleteContainer($containerName);
     }
 
-    public function deleteContainers($containerList, $containerPrefix = null) {
+    public function deleteContainers($containerList, $containerPrefix = null)
+    {
         $containers = $this->listContainers($containerPrefix);
         foreach($containerList as $container)  {
             if (!(array_search($container, $containers) === FALSE)) {
@@ -106,7 +129,8 @@ class BlobServiceRestProxyTestBase extends ServiceRestProxyTestBase
         }
     }
 
-    public function listContainers($containerPrefix = null) {
+    public function listContainers($containerPrefix = null)
+    {
         $result = array();
         $opts = new ListContainersOptions();
         if (!is_null($containerPrefix)) {
@@ -124,14 +148,11 @@ class BlobServiceRestProxyTestBase extends ServiceRestProxyTestBase
     protected function tearDown()
     {
         parent::tearDown();
-        
+
         foreach ($this->_createdContainers as $value) {
-            try
-            {
+            try {
                 $this->deleteContainer($value);
-            }
-            catch (\Exception $e)
-            {
+            } catch (\Exception $e) {
                 // Ignore exception and continue, will assume that this container doesn't exist in the sotrage account
                 error_log($e->getMessage());
             }

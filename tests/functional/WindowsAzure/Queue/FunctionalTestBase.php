@@ -24,11 +24,6 @@
 
 namespace Tests\Functional\WindowsAzure\Queue;
 
-use Tests\Framework\TestResources;
-use WindowsAzure\Common\ServiceException;
-use WindowsAzure\Common\Internal\Resources;
-use WindowsAzure\Common\Configuration;
-use WindowsAzure\Queue\QueueService;
 use WindowsAzure\Queue\QueueSettings;
 
 class FunctionalTestBase extends IntegrationTestBase
@@ -64,17 +59,6 @@ class FunctionalTestBase extends IntegrationTestBase
             $testBase->safeDeleteQueue($name);
         }
         parent::tearDownAfterClass();
-    }
-
-    private static function staticSafeDeleteQueue($service, $queueName)
-    {
-        try
-        {
-            $service->deleteQueue($queueName);
-        } catch (\Exception $e) {
-            // Ignore exception and continue, will assume that this queue doesn't exist in the sotrage account
-            error_log($e->getMessage());
-        }
     }
 
     public static function println($msg)

@@ -26,8 +26,9 @@ namespace Tests\Functional\WindowsAzure\Blob;
 
 use Tests\Framework\FiddlerFilter;
 use Tests\Framework\BlobServiceRestProxyTestBase;
-use WindowsAzure\Blob\BlobService;
+use WindowsAzure\Blob\BlobSettings;
 use WindowsAzure\Common\Configuration;
+use WindowsAzure\Common\Internal\Utilities;
 
 class IntegrationTestBase extends BlobServiceRestProxyTestBase
 {
@@ -46,5 +47,11 @@ class IntegrationTestBase extends BlobServiceRestProxyTestBase
             $tmp->restProxy->setServiceProperties($serviceProperties);
         }
         parent::tearDownAfterClass();
+    }
+
+    protected function hasSecureEndpoint()
+    {
+        $uri = $this->config->getProperty(BlobSettings::URI);
+        return Utilities::startsWith($uri, 'https://');
     }
 }
