@@ -44,7 +44,7 @@ class QueueServiceRestProxyTestBase extends ServiceRestProxyTestBase
     {
         parent::setUp();
         $queueRestProxy = $this->builder->createQueueService($this->connectionString);
-        parent::setUpProxy($queueRestProxy);
+        parent::setProxy($queueRestProxy);
         $this->_createdQueues = array();
     }
     
