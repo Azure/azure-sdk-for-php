@@ -24,29 +24,20 @@
 
 namespace Tests\Functional\WindowsAzure\Table;
 
+use Tests\Framework\TestResources;
 use WindowsAzure\Common\ServiceException;
 use WindowsAzure\Common\Configuration;
-use WindowsAzure\Table\TableService;
 use WindowsAzure\Table\Models\BatchError;
 use WindowsAzure\Table\Models\BatchOperations;
 use WindowsAzure\Table\Models\DeleteEntityOptions;
 use WindowsAzure\Table\Models\EdmType;
 use WindowsAzure\Table\Models\Entity;
 use WindowsAzure\Table\Models\InsertEntityResult;
-use WindowsAzure\Table\Models\Property;
 use WindowsAzure\Table\Models\Query;
 use WindowsAzure\Table\Models\QueryEntitiesOptions;
-use WindowsAzure\Table\Models\QueryEntitiesResult;
-use WindowsAzure\Table\Models\QueryTableResults;
 use WindowsAzure\Table\Models\QueryTablesOptions;
-use WindowsAzure\Table\Models\TableServiceOptions;
 use WindowsAzure\Table\Models\UpdateEntityResult;
-use WindowsAzure\Table\Models\Filters\BinaryFilter;
-use WindowsAzure\Table\Models\Filters\ConstantFilter;
 use WindowsAzure\Table\Models\Filters\Filter;
-use WindowsAzure\Table\Models\Filters\PropertyNameFilter;
-use WindowsAzure\Table\Models\Filters\QueryStringFilter;
-use WindowsAzure\Table\Models\Filters\UnaryFilter;
 
 class TableServiceIntegrationTest extends IntegrationTestBase
 {
@@ -175,7 +166,7 @@ class TableServiceIntegrationTest extends IntegrationTestBase
         } catch (ServiceException $e) {
             // Expect failure in emulator, as v1.6 doesn't support this method
             if (Configuration::isEmulated()) {
-                $this->assertEquals(400, $e->getCode(), 'getCode');
+                $this->assertEquals(TestResources::STATUS_BAD_REQUEST, $e->getCode(), 'getCode');
                 $shouldReturn = true;
             } else {
                 throw $e;
@@ -210,7 +201,7 @@ class TableServiceIntegrationTest extends IntegrationTestBase
         } catch (ServiceException $e) {
             // Expect failure in emulator, as v1.6 doesn't support this method
             if (Configuration::isEmulated()) {
-                $this->assertEquals(400, $e->getCode(), 'getCode');
+                $this->assertEquals(TestResources::STATUS_BAD_REQUEST, $e->getCode(), 'getCode');
                 $shouldReturn = true;
             } else {
                 throw $e;
@@ -420,7 +411,7 @@ class TableServiceIntegrationTest extends IntegrationTestBase
                 $this->restProxy->insertOrReplaceEntity(self::$testTable2, $entity);
                 $this->assertFalse(Configuration::isEmulated(), 'Expect failure when in emulator');
             } catch (ServiceException $e) {
-                $this->assertEquals(404, $e->getCode(), 'e->getCode');
+                $this->assertEquals(TestResources::STATUS_NOT_FOUND, $e->getCode(), 'e->getCode');
             }
         } else {
             $this->restProxy->insertOrReplaceEntity(self::$testTable2, $entity);
@@ -454,7 +445,7 @@ class TableServiceIntegrationTest extends IntegrationTestBase
                 $this->restProxy->insertOrMergeEntity(self::$testTable2, $entity);
                 $this->assertFalse(Configuration::isEmulated(), 'Expect failure when in emulator');
             } catch (ServiceException $e) {
-                $this->assertEquals(404, $e->getCode(), 'e->getCode');
+                $this->assertEquals(TestResources::STATUS_NOT_FOUND, $e->getCode(), 'e->getCode');
             }
         } else {
             $this->restProxy->insertOrMergeEntity(self::$testTable2, $entity);
@@ -576,7 +567,7 @@ class TableServiceIntegrationTest extends IntegrationTestBase
             $this->restProxy->getEntity(self::$testTable8, $result1->getEntity()->getPartitionKey(), $result1->getEntity()->getRowKey());
             $this->fail('Expect an exception when getting an entity that does not exist');
         } catch (ServiceException $e) {
-            $this->assertEquals(404, $e->getCode(), 'getCode');
+            $this->assertEquals(TestResources::STATUS_NOT_FOUND, $e->getCode(), 'getCode');
         }
 
         $qopts = new QueryEntitiesOptions();

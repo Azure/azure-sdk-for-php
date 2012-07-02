@@ -24,20 +24,15 @@
 
 namespace Tests\Functional\WindowsAzure\Table;
 
-use WindowsAzure\Common\Internal\Resources;
-use WindowsAzure\Common\ServiceException;
+use Tests\Framework\TestResources;
 use WindowsAzure\Common\Configuration;
-use WindowsAzure\Common\Models\Logging;
-use WindowsAzure\Common\Models\Metrics;
-use WindowsAzure\Common\Models\RetentionPolicy;
+use WindowsAzure\Common\ServiceException;
+use WindowsAzure\Common\Internal\Resources;
 use WindowsAzure\Common\Models\ServiceProperties;
 use WindowsAzure\Table\Models\DeleteEntityOptions;
 use WindowsAzure\Table\Models\EdmType;
 use WindowsAzure\Table\Models\Entity;
-use WindowsAzure\Table\Models\Property;
-use WindowsAzure\Table\Models\Query;
 use WindowsAzure\Table\Models\QueryEntitiesOptions;
-use WindowsAzure\Table\Models\QueryTablesOptions;
 use WindowsAzure\Table\Models\TableServiceOptions;
 use WindowsAzure\Table\Models\Filters\Filter;
 
@@ -65,7 +60,7 @@ class TableServiceFunctionalParametersTest extends FunctionalTestBase
             // Expect failure when run this test with emulator, as v1.6 doesn't support this method
             if (Configuration::isEmulated()) {
                 // Properties are not supported in emulator
-                $this->assertEquals(400, $e->getCode(), 'getCode');
+                $this->assertEquals(TestResources::STATUS_BAD_REQUEST, $e->getCode(), 'getCode');
             } else {
                 throw $e;
             }
@@ -81,7 +76,7 @@ class TableServiceFunctionalParametersTest extends FunctionalTestBase
             $this->restProxy->setServiceProperties(new ServiceProperties());
             $this->fail('Expect default service properties to cause service to error');
         } catch (ServiceException $e) {
-            $this->assertEquals(400, $e->getCode(), 'Expect 400 when sending default service properties to server');
+            $this->assertEquals(TestResources::STATUS_BAD_REQUEST, $e->getCode(), 'Expect 400:BadRequest when sending default service properties to server');
         }
     }
 
@@ -122,7 +117,7 @@ class TableServiceFunctionalParametersTest extends FunctionalTestBase
             $this->restProxy->setServiceProperties(new ServiceProperties(), null);
             $this->fail('Expect default service properties to cause service to error');
         } catch (ServiceException $e) {
-            $this->assertEquals(400, $e->getCode(), 'Expect 400 when sending default service properties to server');
+            $this->assertEquals(TestResources::STATUS_BAD_REQUEST, $e->getCode(), 'Expect 400:BadRequest when sending default service properties to server');
         }
     }
 
@@ -824,9 +819,9 @@ class TableServiceFunctionalParametersTest extends FunctionalTestBase
 
         try {
             $this->restProxy->mergeEntity($table, TableServiceFunctionalTestData::getSimpleEntity(), null);
-            $this->fail('Expect 404 when merging with non-existant entity');
+            $this->fail('Expect 404:NotFound when merging with non-existant entity');
         } catch (ServiceException $e) {
-            $this->assertEquals(404, $e->getCode(), 'Expect 404 when merging with non-existant entity');
+            $this->assertEquals(TestResources::STATUS_NOT_FOUND, $e->getCode(), 'Expect 404:NotFound when merging with non-existant entity');
         }
         $this->clearTable($table);
     }
@@ -925,9 +920,9 @@ class TableServiceFunctionalParametersTest extends FunctionalTestBase
 
         try {
             $this->restProxy->updateEntity($table, TableServiceFunctionalTestData::getSimpleEntity(), null);
-            $this->fail('Expect 404 when updating non-existant entity');
+            $this->fail('Expect 404:NotFound when updating non-existant entity');
         } catch (ServiceException $e) {
-            $this->assertEquals(404, $e->getCode(), 'Should be 404 for update nonexistant entity');
+            $this->assertEquals(TestResources::STATUS_NOT_FOUND, $e->getCode(), 'Should be 404:NotFound for update nonexistant entity');
         }
         $this->clearTable($table);
     }
@@ -1030,7 +1025,7 @@ class TableServiceFunctionalParametersTest extends FunctionalTestBase
         } catch (ServiceException $e) {
             // Expect failure when run this test with emulator, as v1.6 doesn't support this method
             if (Configuration::isEmulated()) {
-                $this->assertEquals(404, $e->getCode(), 'getCode');
+                $this->assertEquals(TestResources::STATUS_NOT_FOUND, $e->getCode(), 'getCode');
             }
         }
         $this->clearTable($table);
@@ -1134,7 +1129,7 @@ class TableServiceFunctionalParametersTest extends FunctionalTestBase
         } catch (ServiceException $e) {
             // Expect failure when run this test with emulator, as v1.6 doesn't support this method
             if (Configuration::isEmulated()) {
-                $this->assertEquals(404, $e->getCode(), 'getCode');
+                $this->assertEquals(TestResources::STATUS_NOT_FOUND, $e->getCode(), 'getCode');
             }
         }
         $this->clearTable($table);

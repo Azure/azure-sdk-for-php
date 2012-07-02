@@ -24,15 +24,7 @@
 
 namespace Tests\Functional\WindowsAzure\Table;
 
-use Tests\Framework\FiddlerFilter;
-use Tests\Framework\TableServiceRestProxyTestBase;
-use Tests\Framework\TestResources;
-use WindowsAzure\Common\Internal\Resources;
 use WindowsAzure\Common\Internal\Utilities;
-use WindowsAzure\Common\ServiceException;
-use WindowsAzure\Common\Configuration;
-use WindowsAzure\Table\TableService;
-use WindowsAzure\Table\TableSettings;
 use WindowsAzure\Table\Models\Entity;
 use WindowsAzure\Table\Models\Filters\Filter;
 

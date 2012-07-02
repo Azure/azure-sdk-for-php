@@ -27,7 +27,6 @@ namespace Tests\Functional\WindowsAzure\Queue;
 use Tests\Framework\FiddlerFilter;
 use Tests\Framework\QueueServiceRestProxyTestBase;
 use WindowsAzure\Common\Configuration;
-use WindowsAzure\Queue\QueueService;
 
 class IntegrationTestBase extends QueueServiceRestProxyTestBase
 {
