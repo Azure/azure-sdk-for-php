@@ -24,6 +24,7 @@
 
 namespace Tests\Functional\WindowsAzure\Blob;
 
+use Tests\Framework\TestResources;
 use WindowsAzure\Blob\Models\AccessCondition;
 use WindowsAzure\Blob\Models\BlobBlockType;
 use WindowsAzure\Blob\Models\Block;
@@ -116,7 +117,7 @@ class BlobServiceIntegrationTest extends IntegrationTestBase
         } catch (ServiceException $e) {
             // Expect failure in emulator, as v1.6 doesn't support this method
             if (Configuration::isEmulated()) {
-                $this->assertEquals(400, $e->getCode(), 'getCode');
+                $this->assertEquals(TestResources::STATUS_BAD_REQUEST, $e->getCode(), 'getCode');
                 $shouldReturn = true;
             } else {
                 throw $e;
@@ -149,7 +150,7 @@ class BlobServiceIntegrationTest extends IntegrationTestBase
         } catch (ServiceException $e) {
             // Expect failure in emulator, as v1.6 doesn't support this method
             if (Configuration::isEmulated()) {
-                $this->assertEquals(400, $e->getCode(), 'getCode');
+                $this->assertEquals(TestResources::STATUS_BAD_REQUEST, $e->getCode(), 'getCode');
                 $shouldReturn = true;
             } else {
                 throw $e;
@@ -433,12 +434,12 @@ class BlobServiceIntegrationTest extends IntegrationTestBase
         $counter = 0;
         do {
             // If the root conainter was deleted recently, it cannot
-            // be recreated immediately. Need to wait a bit if get the 409.
+            // be recreated immediately. Need to wait a bit if get the 409:Conflict.
             try {
                 $this->restProxy->createContainer('$root');
                 $ok = true;
             } catch (ServiceException $e) {
-                if ($e->getCode() != 409 || $counter > 6) {
+                if ($e->getCode() != TestResources::STATUS_CONFLICT || $counter > 6) {
                     throw $e;
                 }
                 sleep(10);
@@ -1202,7 +1203,7 @@ class BlobServiceIntegrationTest extends IntegrationTestBase
             $this->restProxy->getBlob(self::$_test_container_for_blobs, 'test', $opts);
             $this->fail('getBlob should throw an exception');
         } catch (ServiceException $e) {
-            $this->assertEquals(412, $e->getCode(), 'got the expected exception');
+            $this->assertEquals(TestResources::STATUS_PRECONDITION_FAILED, $e->getCode(), 'got the expected exception');
         }
     }
 
@@ -1222,14 +1223,14 @@ class BlobServiceIntegrationTest extends IntegrationTestBase
             $this->restProxy->getBlob(self::$_test_container_for_blobs, 'test', $opts);
             $this->fail('getBlob should throw an exception');
         } catch (ServiceException $e) {
-            if (!$this->hasSecureEndpoint() && $e->getCode() == 403) {
+            if (!$this->hasSecureEndpoint() && $e->getCode() == TestResources::STATUS_FORBIDDEN) {
                 // Proxies can eat the access condition headers of
                 // unsecured (http) requests, which causes the authentication
-                // to fail, with a 403. There is nothing much that can be done
-                // about this, other than ignore it.
+                // to fail, with a 403:Forbidden. There is nothing much that
+                // can be done about this, other than ignore it.
                 $this->markTestSkipped('Appears that a proxy ate your access condition');
             } else {
-                $this->assertEquals(304, $e->getCode(), 'got the expected exception');
+                $this->assertEquals(TestResources::STATUS_NOT_MODIFIED, $e->getCode(), 'got the expected exception');
             }
         }
     }
@@ -1251,14 +1252,14 @@ class BlobServiceIntegrationTest extends IntegrationTestBase
             $this->restProxy->getBlob(self::$_test_container_for_blobs, 'test', $opts);
             $this->fail('getBlob should throw an exception');
         } catch (ServiceException $e) {
-            if (!$this->hasSecureEndpoint() && $e->getCode() == 403) {
+            if (!$this->hasSecureEndpoint() && $e->getCode() == STATUS_FORBIDDEN) {
                 // Proxies can eat the access condition headers of
                 // unsecured (http) requests, which causes the authentication
-                // to fail, with a 403. There is nothing much that can be done
-                // about this, other than ignore it.
+                // to fail, with a 403:Forbidden. There is nothing much that
+                // can be done about this, other than ignore it.
                 $this->markTestSkipped('Appears that a proxy ate your access condition');
             } else {
-                $this->assertEquals(304, $e->getCode(), 'got the expected exception');
+                $this->assertEquals(TestResources::STATUS_NOT_MODIFIED, $e->getCode(), 'got the expected exception');
             }
         }
     }
@@ -1296,7 +1297,7 @@ class BlobServiceIntegrationTest extends IntegrationTestBase
             $this->restProxy->getBlob($container, $blob, $opts);
             $this->fail('getBlob should throw an exception');
         } catch (ServiceException $e) {
-            $this->assertEquals(412, $e->getCode(), 'got the expected exception');
+            $this->assertEquals(TestResources::STATUS_PRECONDITION_FAILED, $e->getCode(), 'got the expected exception');
         }
     }
 

@@ -49,7 +49,8 @@ class IntegrationTestBase extends BlobServiceRestProxyTestBase
         parent::tearDownAfterClass();
     }
 
-    protected function hasSecureEndpoint() {
+    protected function hasSecureEndpoint()
+    {
         $uri = $this->config->getProperty(BlobSettings::URI);
         return Utilities::startsWith($uri, 'https://');
     }

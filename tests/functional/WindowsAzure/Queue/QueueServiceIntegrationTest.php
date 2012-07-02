@@ -24,6 +24,7 @@
 
 namespace Tests\Functional\WindowsAzure\Queue;
 
+use Tests\Framework\TestResources;
 use WindowsAzure\Common\Configuration;
 use WindowsAzure\Common\ServiceException;
 use WindowsAzure\Queue\Models\CreateQueueOptions;
@@ -145,7 +146,7 @@ class QueueServiceIntegrationTest extends IntegrationTestBase
         } catch (ServiceException $e) {
             // Expect failure in emulator, as v1.6 doesn't support this method
             if (Configuration::isEmulated()) {
-                $this->assertEquals(400, $e->getCode(), 'getCode');
+                $this->assertEquals(TestResources::STATUS_BAD_REQUEST, $e->getCode(), 'getCode');
                 $shouldReturn = true;
             }
         }
@@ -178,7 +179,7 @@ class QueueServiceIntegrationTest extends IntegrationTestBase
         } catch (ServiceException $e) {
             // Expect failure in emulator, as v1.6 doesn't support this method
             if (Configuration::isEmulated()) {
-                $this->assertEquals(400, $e->getCode(), 'getCode');
+                $this->assertEquals(TestResources::STATUS_BAD_REQUEST, $e->getCode(), 'getCode');
                 $shouldReturn = true;
             }
         }
