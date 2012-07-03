@@ -28,7 +28,6 @@ use Tests\Functional\WindowsAzure\Table\FakeTableInfoEntry;
 use Tests\Functional\WindowsAzure\Table\MutatePivot;
 use WindowsAzure\Common\Internal\Utilities;
 use WindowsAzure\Common\ServiceException;
-use WindowsAzure\Common\Configuration;
 use WindowsAzure\Common\Models\Logging;
 use WindowsAzure\Common\Models\Metrics;
 use WindowsAzure\Common\Models\RetentionPolicy;
@@ -101,10 +100,10 @@ class TableServiceFunctionalTest extends FunctionalTestBase
         $shouldReturn = false;
         try {
             $this->restProxy->setServiceProperties($serviceProperties);
-            $this->assertFalse(Configuration::isEmulated(), 'Should succeed when not running in emulator');
+            $this->assertFalse($this->isEmulated(), 'Should succeed when not running in emulator');
         } catch (ServiceException $e) {
             // Expect failure in emulator, as v1.6 doesn't support this method
-            if (Configuration::isEmulated()) {
+            if ($this->isEmulated()) {
                 $this->assertEquals(400, $e->getCode(), 'getCode');
                 $shouldReturn = true;
             } else {
@@ -128,10 +127,10 @@ class TableServiceFunctionalTest extends FunctionalTestBase
 
         try {
             $this->restProxy->setServiceProperties($serviceProperties);
-            $this->assertFalse(Configuration::isEmulated(), 'Should succeed when not running in emulator');
+            $this->assertFalse($this->isEmulated(), 'Should succeed when not running in emulator');
         } catch (ServiceException $e) {
             // Expect failure in emulator, as v1.6 doesn't support this method
-            if (Configuration::isEmulated()) {
+            if ($this->isEmulated()) {
                 $this->assertEquals(400, $e->getCode(), 'getCode');
             } else {
                 throw $e;
@@ -148,10 +147,10 @@ class TableServiceFunctionalTest extends FunctionalTestBase
         $effOptions = (is_null($options) ? new TableServiceOptions() : $options);
         try {
             $ret = (is_null($options) ? $this->restProxy->getServiceProperties() : $this->restProxy->getServiceProperties($effOptions));
-            $this->assertFalse(Configuration::isEmulated(), 'Should succeed when not running in emulator');
+            $this->assertFalse($this->isEmulated(), 'Should succeed when not running in emulator');
             $this->verifyServicePropertiesWorker($ret, null);
         } catch (ServiceException $e) {
-            if (Configuration::isEmulated()) {
+            if ($this->isEmulated()) {
                 // Expect failure in emulator, as v1.6 doesn't support this method
                 $this->assertEquals(400, $e->getCode(), 'getCode');
             } else {
@@ -213,7 +212,7 @@ class TableServiceFunctionalTest extends FunctionalTestBase
             $this->setServicePropertiesWorker($serviceProperties, $options);
         }
 
-        if (!Configuration::isEmulated()) {
+        if (!$this->isEmulated()) {
             $serviceProperties = TableServiceFunctionalTestData::getDefaultServiceProperties();
             $this->restProxy->setServiceProperties($serviceProperties);
         }
@@ -232,11 +231,11 @@ class TableServiceFunctionalTest extends FunctionalTestBase
                 $this->restProxy->setServiceProperties($serviceProperties, $options);
             }
 
-            $this->assertFalse(Configuration::isEmulated(), 'Should succeed when not running in emulator');
+            $this->assertFalse($this->isEmulated(), 'Should succeed when not running in emulator');
             $ret = (is_null($options) ? $this->restProxy->getServiceProperties() : $this->restProxy->getServiceProperties($options));
             $this->verifyServicePropertiesWorker($ret, $serviceProperties);
         } catch (ServiceException $e) {
-            if (Configuration::isEmulated()) {
+            if ($this->isEmulated()) {
                 $this->assertEquals(400, $e->getCode(), 'getCode');
             } else {
                 throw $e;
@@ -257,7 +256,7 @@ class TableServiceFunctionalTest extends FunctionalTestBase
     */
     public function testQueryTables()
     {
-        $interestingqueryTablesOptions = TableServiceFunctionalTestData::getInterestingQueryTablesOptions();
+        $interestingqueryTablesOptions = TableServiceFunctionalTestData::getInterestingQueryTablesOptions($this->isEmulated());
         foreach($interestingqueryTablesOptions as $options)  {
             $this->queryTablesWorker($options);
         }
@@ -276,7 +275,7 @@ class TableServiceFunctionalTest extends FunctionalTestBase
             }
 
             if ((!is_null($options->getTop()) && $options->getTop() <= 0)) {
-                if (Configuration::isEmulated()) {
+                if ($this->isEmulated()) {
                     $this->assertEquals(0, count($ret->getTables()), "should be no tables");
                 } else {
                     $this->fail('Expect non-positive Top in $options to throw');
@@ -285,7 +284,7 @@ class TableServiceFunctionalTest extends FunctionalTestBase
 
             $this->verifyqueryTablesWorker($ret, $options);
         } catch (ServiceException $e) {
-            if ((!is_null($options->getTop()) && $options->getTop() <= 0) && !Configuration::isEmulated()) {
+            if ((!is_null($options->getTop()) && $options->getTop() <= 0) && !$this->isEmulated()) {
                 $this->assertEquals(400, $e->getCode(), 'getCode');
             } else {
                 throw $e;
@@ -393,7 +392,7 @@ class TableServiceFunctionalTest extends FunctionalTestBase
 
         // Make sure that the list of all applicable Tables is correctly updated.
         $qto = new QueryTablesOptions();
-        if (!Configuration::isEmulated()) {
+        if (!$this->isEmulated()) {
             // The emulator has problems with some queries,
             // but full Azure allow this to be more efficient:
             $qto->setPrefix(TableServiceFunctionalTestData::$testUniqueId);
@@ -452,7 +451,7 @@ class TableServiceFunctionalTest extends FunctionalTestBase
 
         // Make sure that the list of all applicable Tables is correctly updated.
         $qto = new QueryTablesOptions();
-        if (!Configuration::isEmulated()) {
+        if (!$this->isEmulated()) {
             // The emulator has problems with some queries,
             // but full Azure allow this to be more efficient:
             $qto->setPrefix(TableServiceFunctionalTestData::$testUniqueId);
@@ -1167,10 +1166,10 @@ class TableServiceFunctionalTest extends FunctionalTestBase
                 TableServiceFunctionalTestUtils::mutateEntity($ent, $mutatePivot);
                 try {
                     $this->insertOrReplaceEntityWorker($initialEnt, $ent, $options);
-                    $this->assertFalse(Configuration::isEmulated(), 'Should succeed when not running in emulator');
+                    $this->assertFalse($this->isEmulated(), 'Should succeed when not running in emulator');
                 } catch (ServiceException $e) {
                     // Expect failure in emulator, as v1.6 doesn't support this method
-                    if (Configuration::isEmulated()) {
+                    if ($this->isEmulated()) {
                         $this->assertEquals(400, $e->getCode(), 'getCode');
                     } else {
                         throw $e;
@@ -1228,10 +1227,10 @@ class TableServiceFunctionalTest extends FunctionalTestBase
                 TableServiceFunctionalTestUtils::mutateEntity($ent, $mutatePivot);
                 try {
                     $this->insertOrMergeEntityWorker($initialEnt, $ent, $options);
-                    $this->assertFalse(Configuration::isEmulated(), 'Should succeed when not running in emulator');
+                    $this->assertFalse($this->isEmulated(), 'Should succeed when not running in emulator');
                 } catch (ServiceException $e) {
                     // Expect failure in emulator, as v1.6 doesn't support this method
-                    if (Configuration::isEmulated()) {
+                    if ($this->isEmulated()) {
                         $this->assertEquals(400, $e->getCode(), 'getCode');
                     } else {
                         throw $e;
@@ -1618,7 +1617,7 @@ class TableServiceFunctionalTest extends FunctionalTestBase
                 // Want to know there is at least one part that does not fail.
                 continue;
             }
-            if (Configuration::isEmulated() && (
+            if ($this->isEmulated() && (
                     ($firstOpType == OpType::INSERT_OR_MERGE_ENTITY) ||
                     ($firstOpType == OpType::INSERT_OR_REPLACE_ENTITY))) {
                 // Emulator does not support these operations.
@@ -1639,7 +1638,7 @@ class TableServiceFunctionalTest extends FunctionalTestBase
                 while (!is_null($this->expectConcurrencyFailure($config->opType, $config->concurType))) {
                     $config->concurType = $concurTypes[mt_rand(0, count($concurTypes))];
                     $config->opType = $opTypes[mt_rand(0, count($opTypes))];
-                    if (Configuration::isEmulated()) {
+                    if ($this->isEmulated()) {
                         if ($config->opType == OpType::INSERT_OR_MERGE_ENTITY) {
                             $config->opType = OpType::MERGE_ENTITY;
                         }
@@ -1655,7 +1654,7 @@ class TableServiceFunctionalTest extends FunctionalTestBase
 
             for ($i = 0; $i <= 1; $i++) {
                 $options = ($i == 0 ? null : new TableServiceOptions());
-                if (Configuration::isEmulated()) {
+                if ($this->isEmulated()) {
                     // The emulator has trouble with some batches.
                     for ($j = 0; $j < count($configs); $j++) {
                         $tmpconfigs = array();

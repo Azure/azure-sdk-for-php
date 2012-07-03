@@ -30,7 +30,6 @@ use Tests\Framework\TestResources;
 use WindowsAzure\Common\Internal\Resources;
 use WindowsAzure\Common\Internal\Utilities;
 use WindowsAzure\Common\ServiceException;
-use WindowsAzure\Common\Configuration;
 use WindowsAzure\Table\TableService;
 use WindowsAzure\Table\TableSettings;
 use WindowsAzure\Table\Models\Entity;
@@ -42,6 +41,7 @@ class FunctionalTestBase extends IntegrationTestBase
     {
         parent::setUpBeforeClass();
         $testBase = new FunctionalTestBase();
+        $testBase->setUp();
         TableServiceFunctionalTestData::setupData();
 
         foreach(TableServiceFunctionalTestData::$testTableNames as $name)  {
@@ -53,6 +53,7 @@ class FunctionalTestBase extends IntegrationTestBase
     public static function tearDownAfterClass()
     {
         $testBase = new FunctionalTestBase();
+        $testBase->setUp();
         foreach(TableServiceFunctionalTestData::$testTableNames as $name)  {
             $testBase->safeDeleteTable($name);
         }

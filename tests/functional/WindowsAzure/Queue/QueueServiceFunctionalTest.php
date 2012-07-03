@@ -26,7 +26,6 @@ namespace Tests\Functional\WindowsAzure\Queue;
 
 use \HTTP_Request2_LogicException;
 use WindowsAzure\Common\ServiceException;
-use WindowsAzure\Common\Configuration;
 use WindowsAzure\Common\Models\Logging;
 use WindowsAzure\Common\Models\Metrics;
 use WindowsAzure\Common\Models\RetentionPolicy;
@@ -51,10 +50,10 @@ class QueueServiceFunctionalTest extends FunctionalTestBase
         $shouldReturn = false;
         try {
             $this->restProxy->setServiceProperties($serviceProperties);
-            $this->assertFalse(Configuration::isEmulated(), 'Should succeed when not running in emulator');
+            $this->assertFalse($this->isEmulated(), 'Should succeed when not running in emulator');
         } catch (ServiceException $e) {
             // Expect failure in emulator, as v1.6 doesn't support this method
-            if (Configuration::isEmulated()) {
+            if ($this->isEmulated()) {
                 $this->assertEquals(400, $e->getCode(), 'getCode');
                 $shouldReturn = true;
             } else {
@@ -79,10 +78,10 @@ class QueueServiceFunctionalTest extends FunctionalTestBase
         $shouldReturn = false;
         try {
             $this->restProxy->setServiceProperties($serviceProperties);
-            $this->assertFalse(Configuration::isEmulated(), 'Should succeed when not running in emulator');
+            $this->assertFalse($this->isEmulated(), 'Should succeed when not running in emulator');
         } catch (ServiceException $e) {
             // Expect failure in emulator, as v1.6 doesn't support this method
-            if (Configuration::isEmulated()) {
+            if ($this->isEmulated()) {
                 $this->assertEquals(400, $e->getCode(), 'getCode');
                 $shouldReturn = true;
             } else {
@@ -115,11 +114,11 @@ class QueueServiceFunctionalTest extends FunctionalTestBase
             if (!is_null($effOptions->getTimeout()) && $effOptions->getTimeout() < 1) {
                 $this->True('Expect negative timeouts in $options to throw', false);
             } else {
-                $this->assertFalse(Configuration::isEmulated(), 'Should succeed when not running in emulator');
+                $this->assertFalse($this->isEmulated(), 'Should succeed when not running in emulator');
             }
             $this->verifyServicePropertiesWorker($ret, null);
         } catch (ServiceException $e) {
-            if (Configuration::isEmulated()) {
+            if ($this->isEmulated()) {
                 if (!is_null($options->getTimeout()) && $options->getTimeout() < 0) {
                     $this->assertEquals(500, $e->getCode(), 'getCode');
                 } else {
@@ -191,7 +190,7 @@ class QueueServiceFunctionalTest extends FunctionalTestBase
             }
         }
 
-        if (!Configuration::isEmulated()) {
+        if (!$this->isEmulated()) {
             $this->restProxy->setServiceProperties($interestingServiceProperties[0]);
         }
     }
@@ -216,7 +215,7 @@ class QueueServiceFunctionalTest extends FunctionalTestBase
             if (!is_null($options->getTimeout()) && $options->getTimeout() < 1) {
                 $this->assertTrue(false, 'Expect negative timeouts in $options to throw');
             } else {
-                $this->assertFalse(Configuration::isEmulated(), 'Should succeed when not running in emulator');
+                $this->assertFalse($this->isEmulated(), 'Should succeed when not running in emulator');
             }
 
             $ret = (is_null($options) ? $this->restProxy->getServiceProperties() : $this->restProxy->getServiceProperties($options));
@@ -226,7 +225,7 @@ class QueueServiceFunctionalTest extends FunctionalTestBase
                 $options = new QueueServiceOptions();
             }
 
-            if (Configuration::isEmulated()) {
+            if ($this->isEmulated()) {
                 if (!is_null($options->getTimeout()) && $options->getTimeout() < 1) {
                     $this->assertEquals(500, $e->getCode(), 'getCode');
                 } else {

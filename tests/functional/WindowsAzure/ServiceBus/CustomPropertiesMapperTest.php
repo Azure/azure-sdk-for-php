@@ -28,10 +28,6 @@ use Tests\Framework\ServiceBusRestProxyTestBase;
 
 class CustomPropertiesMapperTest extends ServiceBusRestProxyTestBase
 {
-    public function setUp()
-    {
-    }
-
     public function testStringValuesShouldComeThroughInQuotes()
     {
         // Act

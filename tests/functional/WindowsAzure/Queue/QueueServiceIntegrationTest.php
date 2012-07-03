@@ -25,7 +25,6 @@
 namespace Tests\Functional\WindowsAzure\Queue;
 
 use WindowsAzure\Common\ServiceException;
-use WindowsAzure\Common\Configuration;
 use WindowsAzure\Queue\QueueService;
 use WindowsAzure\Queue\Models\ListQueuesOptions;
 use WindowsAzure\Queue\Models\ListQueuesResult;
@@ -143,10 +142,10 @@ class QueueServiceIntegrationTest extends IntegrationTestBase
         $shouldReturn = false;
         try {
             $props = $this->restProxy->getServiceProperties()->getValue();
-            $this->assertFalse(Configuration::isEmulated(), 'Should succeed when not running in emulator');
+            $this->assertFalse($this->isEmulated(), 'Should succeed when not running in emulator');
         } catch (ServiceException $e) {
             // Expect failure in emulator, as v1.6 doesn't support this method
-            if (Configuration::isEmulated()) {
+            if ($this->isEmulated()) {
                 $this->assertEquals(400, $e->getCode(), 'getCode');
                 $shouldReturn = true;
             }
@@ -176,10 +175,10 @@ class QueueServiceIntegrationTest extends IntegrationTestBase
         $shouldReturn = false;
         try {
             $props = $this->restProxy->getServiceProperties()->getValue();
-            $this->assertFalse(Configuration::isEmulated(), 'Should succeed when not running in emulator');
+            $this->assertFalse($this->isEmulated(), 'Should succeed when not running in emulator');
         } catch (ServiceException $e) {
             // Expect failure in emulator, as v1.6 doesn't support this method
-            if (Configuration::isEmulated()) {
+            if ($this->isEmulated()) {
                 $this->assertEquals(400, $e->getCode(), 'getCode');
                 $shouldReturn = true;
             }

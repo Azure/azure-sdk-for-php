@@ -47,22 +47,25 @@ class ServiceRestProxyTestBase extends RestProxyTestBase
     
     protected function skipIfEmulated()
     {
-        $isEmulated = strpos($this->connectionString, Resources::USE_DEVELOPMENT_STORAGE_NAME);
-        
-        if ($isEmulated !== false) {
+        if ($this->isEmulated()) {
             $this->markTestSkipped(self::NOT_SUPPORTED);
         }
     }
     
+    protected function isEmulated()
+    {
+        return (strpos($this->connectionString, Resources::USE_DEVELOPMENT_STORAGE_NAME) !== false);
+    }
+
     public function __construct()
     {
         parent::__construct();
         $this->connectionString = TestResources::getWindowsAzureStorageServicesConnectionString();
     }
     
-    public function setUp($serviceRestProxy)
+    public function setUp()
     {
-        parent::setUp($serviceRestProxy);
+        parent::setUp();
         $this->_createDefaultProperties();
     }
     

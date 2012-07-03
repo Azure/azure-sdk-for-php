@@ -25,7 +25,6 @@
 namespace Tests\Functional\WindowsAzure\Table;
 
 use WindowsAzure\Common\ServiceException;
-use WindowsAzure\Common\Configuration;
 use WindowsAzure\Table\TableService;
 use WindowsAzure\Table\Models\BatchError;
 use WindowsAzure\Table\Models\BatchOperations;
@@ -157,6 +156,7 @@ class TableServiceIntegrationTest extends IntegrationTestBase
     private static function createService()
     {
         $tmp = new IntegrationTestBase();
+        $tmp->setUp();
         return $tmp->restProxy;
     }
 
@@ -171,10 +171,10 @@ class TableServiceIntegrationTest extends IntegrationTestBase
         $shouldReturn = false;
         try {
             $props = $this->restProxy->getServiceProperties()->getValue();
-            $this->assertTrue(!Configuration::isEmulated(), 'Should succeed if and only if not running in emulator');
+            $this->assertTrue(!$this->isEmulated(), 'Should succeed if and only if not running in emulator');
         } catch (ServiceException $e) {
             // Expect failure in emulator, as v1.6 doesn't support this method
-            if (Configuration::isEmulated()) {
+            if ($this->isEmulated()) {
                 $this->assertEquals(400, $e->getCode(), 'getCode');
                 $shouldReturn = true;
             } else {
@@ -206,10 +206,10 @@ class TableServiceIntegrationTest extends IntegrationTestBase
         $shouldReturn = false;
         try {
             $props = $this->restProxy->getServiceProperties()->getValue();
-            $this->assertTrue(!Configuration::isEmulated(), 'Should succeed if and only if not running in emulator');
+            $this->assertTrue(!$this->isEmulated(), 'Should succeed if and only if not running in emulator');
         } catch (ServiceException $e) {
             // Expect failure in emulator, as v1.6 doesn't support this method
-            if (Configuration::isEmulated()) {
+            if ($this->isEmulated()) {
                 $this->assertEquals(400, $e->getCode(), 'getCode');
                 $shouldReturn = true;
             } else {
@@ -415,10 +415,10 @@ class TableServiceIntegrationTest extends IntegrationTestBase
         $entity->addProperty('test5', EdmType::DATETIME, new \DateTime());
 
         // Act
-        if(Configuration::isEmulated()) {
+        if($this->isEmulated()) {
             try {
                 $this->restProxy->insertOrReplaceEntity(self::$testTable2, $entity);
-                $this->assertFalse(Configuration::isEmulated(), 'Expect failure when in emulator');
+                $this->assertFalse($this->isEmulated(), 'Expect failure when in emulator');
             } catch (ServiceException $e) {
                 $this->assertEquals(404, $e->getCode(), 'e->getCode');
             }
@@ -449,10 +449,10 @@ class TableServiceIntegrationTest extends IntegrationTestBase
         $entity->addProperty('test5', EdmType::DATETIME, new \DateTime());
 
         // Act
-        if(Configuration::isEmulated()) {
+        if($this->isEmulated()) {
             try {
                 $this->restProxy->insertOrMergeEntity(self::$testTable2, $entity);
-                $this->assertFalse(Configuration::isEmulated(), 'Expect failure when in emulator');
+                $this->assertFalse($this->isEmulated(), 'Expect failure when in emulator');
             } catch (ServiceException $e) {
                 $this->assertEquals(404, $e->getCode(), 'e->getCode');
             }
@@ -1236,7 +1236,7 @@ class TableServiceIntegrationTest extends IntegrationTestBase
         $batchOperations->addMergeEntity($table, $entity3);
         $entity4->addProperty('test3', EdmType::INT32, 5);
         // Use different behavior in the emulator, as v1.6 does not support this method
-        if (!Configuration::isEmulated()) {
+        if (!$this->isEmulated()) {
             $batchOperations->addInsertOrReplaceEntity($table, $entity4);
         } else {
             $batchOperations->addUpdateEntity($table, $entity4);
@@ -1251,7 +1251,7 @@ class TableServiceIntegrationTest extends IntegrationTestBase
         $entity5->addProperty('test4', EdmType::INT64, '12345678901');
         $entity5->addProperty('test5', EdmType::DATETIME, new \DateTime());
         // Use different behavior in the emulator, as v1.6 does not support this method
-        if (Configuration::isEmulated()) {
+        if ($this->isEmulated()) {
             $batchOperations->addInsertEntity($table, $entity5);
         } else {
             $batchOperations->addInsertOrMergeEntity($table, $entity5);
@@ -1269,7 +1269,7 @@ class TableServiceIntegrationTest extends IntegrationTestBase
         $this->assertTrue($ents[2] instanceof UpdateEntityResult, '$result->getEntries()->get(2)->getClass()');
         $this->assertTrue($ents[3] instanceof UpdateEntityResult, '$result->getEntries()->get(3)->getClass()');
         $this->assertTrue($ents[4] instanceof UpdateEntityResult, '$result->getEntries()->get(4)->getClass()');
-        if (Configuration::isEmulated()) {
+        if ($this->isEmulated()) {
             $this->assertTrue($ents[5] instanceof InsertEntityResult, '$result->getEntries()->get(5)->getClass()');
         } else {
             $this->assertTrue($ents[5] instanceof UpdateEntityResult, '$result->getEntries()->get(5)->getClass()');
