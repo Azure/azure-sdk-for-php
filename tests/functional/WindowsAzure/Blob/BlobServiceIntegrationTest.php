@@ -1232,7 +1232,7 @@ class BlobServiceIntegrationTest extends IntegrationTestBase
             $this->restProxy->getBlob(self::$_test_container_for_blobs, 'test', $opts);
             $this->fail('getBlob should throw an exception');
         } catch (ServiceException $e) {
-            if (!$this->hasSecureEndpoint() && $e->getCode() == STATUS_FORBIDDEN) {
+            if (!$this->hasSecureEndpoint() && $e->getCode() == TestResources::STATUS_FORBIDDEN) {
                 // Proxies can eat the access condition headers of
                 // unsecured (http) requests, which causes the authentication
                 // to fail, with a 403:Forbidden. There is nothing much that
