@@ -24,16 +24,10 @@
 
 namespace Tests\Functional\WindowsAzure\Queue;
 
-use WindowsAzure\Common\Internal\Resources;
+use Tests\Framework\TestResources;
 use WindowsAzure\Common\ServiceException;
-use WindowsAzure\Common\Models\Logging;
-use WindowsAzure\Common\Models\Metrics;
-use WindowsAzure\Common\Models\RetentionPolicy;
-use WindowsAzure\Common\Models\ServiceProperties;
-use WindowsAzure\Queue\Models\CreateMessageOptions;
-use WindowsAzure\Queue\Models\CreateQueueOptions;
+use WindowsAzure\Common\Internal\Resources;
 use WindowsAzure\Queue\Models\ListMessagesOptions;
-use WindowsAzure\Queue\Models\ListQueuesOptions;
 use WindowsAzure\Queue\Models\PeekMessagesOptions;
 use WindowsAzure\Queue\Models\QueueServiceOptions;
 
@@ -51,7 +45,7 @@ class QueueServiceFunctionalParameterTest extends FunctionalTestBase
             // Expect failure when run this test with emulator, as v1.6 doesn't support this method
             if ($this->isEmulated()) {
                 // Properties are not supported in emulator
-                $this->assertEquals(400, $e->getCode(), 'getCode');
+                $this->assertEquals(TestResources::STATUS_BAD_REQUEST, $e->getCode(), 'getCode');
             } else {
                 throw $e;
             }
@@ -71,7 +65,7 @@ class QueueServiceFunctionalParameterTest extends FunctionalTestBase
         } catch (ServiceException $e) {
             if ($this->isEmulated()) {
                 // Properties are not supported in emulator
-                $this->assertEquals(400, $e->getCode(), 'getCode');
+                $this->assertEquals(TestResources::STATUS_BAD_REQUEST, $e->getCode(), 'getCode');
             } else {
                 throw $e;
             }
@@ -119,7 +113,7 @@ class QueueServiceFunctionalParameterTest extends FunctionalTestBase
         } catch (ServiceException $e) {
             if ($this->isEmulated()) {
                 // Setting is not supported in emulator
-                $this->assertEquals(400, $e->getCode(), 'getCode');
+                $this->assertEquals(TestResources::STATUS_BAD_REQUEST, $e->getCode(), 'getCode');
             } else {
                 throw $e;
             }
@@ -442,7 +436,7 @@ class QueueServiceFunctionalParameterTest extends FunctionalTestBase
             $this->restProxy->updateMessage($queue, $messageId, $popReceipt, $messageText, $visibilityTimeoutInSeconds, $options);
             $this->fail('Expect bogus message id to throw');
         } catch (ServiceException $e) {
-            $this->assertEquals(400, $e->getCode(), 'getCode');
+            $this->assertEquals(TestResources::STATUS_BAD_REQUEST, $e->getCode(), 'getCode');
         }
     }
 
@@ -462,7 +456,7 @@ class QueueServiceFunctionalParameterTest extends FunctionalTestBase
             $this->restProxy->updateMessage($queue, $messageId, $popReceipt, $messageText, $visibilityTimeoutInSeconds, $options);
             $this->fail('Expect bogus message id to throw');
         } catch (ServiceException $e) {
-            $this->assertEquals(400, $e->getCode(), 'getCode');
+            $this->assertEquals(TestResources::STATUS_BAD_REQUEST, $e->getCode(), 'getCode');
         }
     }
 
@@ -482,7 +476,7 @@ class QueueServiceFunctionalParameterTest extends FunctionalTestBase
             $this->restProxy->updateMessage($queue, $messageId, $popReceipt, $messageText, $visibilityTimeoutInSeconds, $options);
             $this->fail('Expect bogus message id to throw');
         } catch (ServiceException $e) {
-            $this->assertEquals(400, $e->getCode(), 'getCode');
+            $this->assertEquals(TestResources::STATUS_BAD_REQUEST, $e->getCode(), 'getCode');
         }
     }
 
@@ -504,7 +498,7 @@ class QueueServiceFunctionalParameterTest extends FunctionalTestBase
         } catch (\InvalidArgumentException $e) {
             $this->fail('Should not get an InvalidArgumentException exception');
         } catch (ServiceException $e) {
-            $this->assertEquals(400, $e->getCode(), 'getCode');
+            $this->assertEquals(TestResources::STATUS_BAD_REQUEST, $e->getCode(), 'getCode');
         }
     }
 
@@ -666,7 +660,7 @@ class QueueServiceFunctionalParameterTest extends FunctionalTestBase
             $this->restProxy->deleteMessage($queue, $messageId, $popReceipt, $options);
             $this->fail('Expect bogus message id to throw');
         } catch (ServiceException $e) {
-            $this->assertEquals(400, $e->getCode(), 'getCode');
+            $this->assertEquals(TestResources::STATUS_BAD_REQUEST, $e->getCode(), 'getCode');
         }
     }
 
@@ -709,7 +703,7 @@ class QueueServiceFunctionalParameterTest extends FunctionalTestBase
             $this->restProxy->listMessages('abc', null);
             $this->fail('Expect bogus queue name to throw');
         } catch (ServiceException $e) {
-            $this->assertEquals(404, $e->getCode(), 'getCode');
+            $this->assertEquals(TestResources::STATUS_NOT_FOUND, $e->getCode(), 'getCode');
         }
     }
 
@@ -782,7 +776,7 @@ class QueueServiceFunctionalParameterTest extends FunctionalTestBase
             $this->restProxy->peekMessages('abc', null);
             $this->fail('Expect bogus queue name to throw');
         } catch (ServiceException $e) {
-            $this->assertEquals(404, $e->getCode(), 'getCode');
+            $this->assertEquals(TestResources::STATUS_NOT_FOUND, $e->getCode(), 'getCode');
         }
     }
 
@@ -840,7 +834,7 @@ class QueueServiceFunctionalParameterTest extends FunctionalTestBase
             $this->restProxy->clearMessages('abc', null);
             $this->fail('Expect bogus queue name to throw');
         } catch (ServiceException $e) {
-            $this->assertEquals(404, $e->getCode(), 'getCode');
+            $this->assertEquals(TestResources::STATUS_NOT_FOUND, $e->getCode(), 'getCode');
         }
     }
 

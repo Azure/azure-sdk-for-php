@@ -24,39 +24,17 @@
 
 namespace Tests\Functional\WindowsAzure\Table;
 
+use Tests\Functional\WindowsAzure\Table\Enums\MutatePivot;
 use WindowsAzure\Common\Internal\Utilities;
-use WindowsAzure\Common\ServiceException;
-use WindowsAzure\Table\TableService;
-use WindowsAzure\Table\Models\DeleteEntityOptions;
 use WindowsAzure\Table\Models\EdmType;
 use WindowsAzure\Table\Models\Entity;
-use WindowsAzure\Table\Models\InsertEntityResult;
 use WindowsAzure\Table\Models\Property;
-use WindowsAzure\Table\Models\Query;
-use WindowsAzure\Table\Models\QueryEntitiesOptions;
-use WindowsAzure\Table\Models\QueryEntitiesResult;
-use WindowsAzure\Table\Models\QueryTableResults;
-use WindowsAzure\Table\Models\QueryTablesOptions;
-use WindowsAzure\Table\Models\TableServiceOptions;
-use WindowsAzure\Table\Models\UpdateEntityResult;
 use WindowsAzure\Table\Models\Filters\BinaryFilter;
 use WindowsAzure\Table\Models\Filters\ConstantFilter;
 use WindowsAzure\Table\Models\Filters\Filter;
 use WindowsAzure\Table\Models\Filters\PropertyNameFilter;
 use WindowsAzure\Table\Models\Filters\QueryStringFilter;
 use WindowsAzure\Table\Models\Filters\UnaryFilter;
-
-class MutatePivot
-{
-    const CHANGE_VALUES   = 'ChangeValues';
-    const ADD_PROPERTY    = 'AddProperty';
-    const REMOVE_PROPERTY = 'RemoveProperty';
-    const NULL_PROPERTY   = 'NullProperty';
-    public static function values()
-    {
-        return array('ChangeValues', 'AddProperty', 'RemoveProperty', 'NullProperty');
-    }
-}
 
 class TableServiceFunctionalTestUtils
 {
@@ -134,16 +112,9 @@ class TableServiceFunctionalTestUtils
     {
         $output = array();
         foreach($input as $i)  {
-            try {
-                $result = self::filterInterperter($filter, $i);
-                if (!is_null($result) && $result) {
-                    array_push($output, $i);
-                }
-            } catch (NoSuchFieldException $e) {
-                $e->printStackTrace();
-                // That is OK, bacuse the types are just bags.
-            } catch (Exception $e) {
-                $e->printStackTrace();
+            $result = self::filterInterperter($filter, $i);
+            if (!is_null($result) && $result) {
+                array_push($output, $i);
             }
         }
         return $output;

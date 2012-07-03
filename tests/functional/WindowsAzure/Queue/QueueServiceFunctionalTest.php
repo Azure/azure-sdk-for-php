@@ -24,12 +24,8 @@
 
 namespace Tests\Functional\WindowsAzure\Queue;
 
-use \HTTP_Request2_LogicException;
+use Tests\Framework\TestResources;
 use WindowsAzure\Common\ServiceException;
-use WindowsAzure\Common\Models\Logging;
-use WindowsAzure\Common\Models\Metrics;
-use WindowsAzure\Common\Models\RetentionPolicy;
-use WindowsAzure\Common\Models\ServiceProperties;
 use WindowsAzure\Queue\Models\CreateMessageOptions;
 use WindowsAzure\Queue\Models\CreateQueueOptions;
 use WindowsAzure\Queue\Models\ListMessagesOptions;
@@ -54,7 +50,7 @@ class QueueServiceFunctionalTest extends FunctionalTestBase
         } catch (ServiceException $e) {
             // Expect failure in emulator, as v1.6 doesn't support this method
             if ($this->isEmulated()) {
-                $this->assertEquals(400, $e->getCode(), 'getCode');
+                $this->assertEquals(TestResources::STATUS_BAD_REQUEST, $e->getCode(), 'getCode');
                 $shouldReturn = true;
             } else {
                 throw $e;
@@ -82,7 +78,7 @@ class QueueServiceFunctionalTest extends FunctionalTestBase
         } catch (ServiceException $e) {
             // Expect failure in emulator, as v1.6 doesn't support this method
             if ($this->isEmulated()) {
-                $this->assertEquals(400, $e->getCode(), 'getCode');
+                $this->assertEquals(TestResources::STATUS_BAD_REQUEST, $e->getCode(), 'getCode');
                 $shouldReturn = true;
             } else {
                 throw $e;
@@ -120,13 +116,13 @@ class QueueServiceFunctionalTest extends FunctionalTestBase
         } catch (ServiceException $e) {
             if ($this->isEmulated()) {
                 if (!is_null($options->getTimeout()) && $options->getTimeout() < 0) {
-                    $this->assertEquals(500, $e->getCode(), 'getCode');
+                    $this->assertEquals(TestResources::STATUS_INTERNAL_SERVER_ERROR, $e->getCode(), 'getCode');
                 } else {
                     // Expect failure in emulator, as v1.6 doesn't support this method
-                    $this->assertEquals(400, $e->getCode(), 'getCode');
+                    $this->assertEquals(TestResources::STATUS_BAD_REQUEST, $e->getCode(), 'getCode');
                 }
             } else if (!is_null($effOptions->getTimeout()) && $effOptions->getTimeout() < 1) {
-                $this->assertEquals(500, $e->getCode(), 'getCode');
+                $this->assertEquals(TestResources::STATUS_INTERNAL_SERVER_ERROR, $e->getCode(), 'getCode');
             } else {
                 throw $e;
             }
@@ -227,13 +223,13 @@ class QueueServiceFunctionalTest extends FunctionalTestBase
 
             if ($this->isEmulated()) {
                 if (!is_null($options->getTimeout()) && $options->getTimeout() < 1) {
-                    $this->assertEquals(500, $e->getCode(), 'getCode');
+                    $this->assertEquals(TestResources::STATUS_INTERNAL_SERVER_ERROR, $e->getCode(), 'getCode');
                 } else {
-                    $this->assertEquals(400, $e->getCode(), 'getCode');
+                    $this->assertEquals(TestResources::STATUS_BAD_REQUEST, $e->getCode(), 'getCode');
                 }
             } else {
                 if (!is_null($options->getTimeout()) && $options->getTimeout() < 1) {
-                    $this->assertEquals(500, $e->getCode(), 'getCode');
+                    $this->assertEquals(TestResources::STATUS_INTERNAL_SERVER_ERROR, $e->getCode(), 'getCode');
                 } else {
                     throw $e;
                 }
@@ -289,7 +285,7 @@ class QueueServiceFunctionalTest extends FunctionalTestBase
             } catch (ServiceException $e) {
                 $finished = true;
                 if (!is_null($options->getTimeout()) && $options->getTimeout() < 1) {
-                    $this->assertEquals(500, $e->getCode(), 'getCode');
+                    $this->assertEquals(TestResources::STATUS_INTERNAL_SERVER_ERROR, $e->getCode(), 'getCode');
                 } else {
                     throw $e;
                 }
@@ -416,7 +412,7 @@ class QueueServiceFunctionalTest extends FunctionalTestBase
                 $options = new CreateQueueOptions();
             }
             if (!is_null($options->getTimeout()) && $options->getTimeout() <= 0) {
-                $this->assertEquals(500, $e->getCode(), 'getCode');
+                $this->assertEquals(TestResources::STATUS_INTERNAL_SERVER_ERROR, $e->getCode(), 'getCode');
             } else {
                 throw $e;
             }
@@ -520,7 +516,7 @@ class QueueServiceFunctionalTest extends FunctionalTestBase
             // Nothing else interesting to check for the options.
         } catch (ServiceException $e) {
             if (!is_null($options->getTimeout()) && $options->getTimeout() < 1) {
-                $this->assertEquals(500, $e->getCode(), 'getCode');
+                $this->assertEquals(TestResources::STATUS_INTERNAL_SERVER_ERROR, $e->getCode(), 'getCode');
             } else {
                 throw $e;
             }
@@ -609,7 +605,7 @@ class QueueServiceFunctionalTest extends FunctionalTestBase
             $this->verifyGetSetQueueMetadataWorker($res, $metadata);
         } catch (ServiceException $e) {
             if (!is_null($options->getTimeout()) && $options->getTimeout() < 1) {
-                $this->assertEquals(500, $e->getCode(), 'getCode');
+                $this->assertEquals(TestResources::STATUS_INTERNAL_SERVER_ERROR, $e->getCode(), 'getCode');
             } else {
                 throw $e;
             }
@@ -714,7 +710,7 @@ class QueueServiceFunctionalTest extends FunctionalTestBase
 
             $res = $this->restProxy->getQueueMetadata($queue);
             $this->verifyGetSetQueueMetadataWorker($res, $metadata);
-          } catch (HTTP_Request2_LogicException $le) {
+          } catch (\HTTP_Request2_LogicException $le) {
             $keypart = array_keys($metadata);
             $keypart = $keypart[0];
             if (!is_null($metadata) && count($metadata) > 0 && (substr($keypart, 0, 1) == '<')) {
@@ -725,7 +721,7 @@ class QueueServiceFunctionalTest extends FunctionalTestBase
          }
         } catch (ServiceException $e) {
             if (!is_null($options->getTimeout()) && $options->getTimeout() < 1) {
-                $this->assertEquals(500, $e->getCode(), 'getCode');
+                $this->assertEquals(TestResources::STATUS_INTERNAL_SERVER_ERROR, $e->getCode(), 'getCode');
             } else {
                 throw $e;
             }
@@ -898,14 +894,14 @@ class QueueServiceFunctionalTest extends FunctionalTestBase
 
         } catch (ServiceException $e) {
             if (!is_null($options->getTimeout()) && $options->getTimeout() < 1) {
-                $this->assertEquals(500, $e->getCode(), 'getCode');
+                $this->assertEquals(TestResources::STATUS_INTERNAL_SERVER_ERROR, $e->getCode(), 'getCode');
             } else if (!is_null($options->getVisibilityTimeoutInSeconds()) && $options->getVisibilityTimeoutInSeconds() < 0) {
                 // Trying to pass bad metadata
-                $this->assertEquals(400, $e->getCode(), 'getCode');
+                $this->assertEquals(TestResources::STATUS_BAD_REQUEST, $e->getCode(), 'getCode');
             } else if (!is_null($options->getTimeToLiveInSeconds()) && $options->getTimeToLiveInSeconds() <= 0) {
-                $this->assertEquals(400, $e->getCode(), 'getCode');
+                $this->assertEquals(TestResources::STATUS_BAD_REQUEST, $e->getCode(), 'getCode');
             } else if (!is_null($options->getVisibilityTimeoutInSeconds()) && !is_null($options->getTimeToLiveInSeconds()) && $options->getVisibilityTimeoutInSeconds() > 0 && $options->getTimeToLiveInSeconds() <= $options->getVisibilityTimeoutInSeconds()) {
-                $this->assertEquals(400, $e->getCode(), 'getCode');
+                $this->assertEquals(TestResources::STATUS_BAD_REQUEST, $e->getCode(), 'getCode');
             } else {
                 throw $e;
             }
@@ -1021,10 +1017,10 @@ class QueueServiceFunctionalTest extends FunctionalTestBase
             }
 
             if (!is_null($options->getTimeout()) && $options->getTimeout() < 1) {
-                $this->assertEquals(500, $e->getCode(), 'getCode');
+                $this->assertEquals(TestResources::STATUS_INTERNAL_SERVER_ERROR, $e->getCode(), 'getCode');
             } else if ($visibilityTimeoutInSeconds < 0) {
                 // Trying to pass bad metadata
-                $this->assertEquals(400, $e->getCode(), 'getCode');
+                $this->assertEquals(TestResources::STATUS_BAD_REQUEST, $e->getCode(), 'getCode');
             } else {
                 throw $e;
             }
@@ -1103,7 +1099,7 @@ class QueueServiceFunctionalTest extends FunctionalTestBase
             $this->assertEquals(0, count($lmr->getQueueMessages()), 'getQueueMessages() count');
         } catch (ServiceException $e) {
             if (!is_null($options->getTimeout()) && $options->getTimeout() < 1) {
-                $this->assertEquals(500, $e->getCode(), 'getCode');
+                $this->assertEquals(TestResources::STATUS_INTERNAL_SERVER_ERROR, $e->getCode(), 'getCode');
             } else  {
                 throw $e;
             }
@@ -1220,11 +1216,11 @@ class QueueServiceFunctionalTest extends FunctionalTestBase
             }
 
             if (!is_null($options->getTimeout()) && $options->getTimeout() < 1) {
-                $this->assertEquals(500, $e->getCode(), 'getCode');
+                $this->assertEquals(TestResources::STATUS_INTERNAL_SERVER_ERROR, $e->getCode(), 'getCode');
             } else if (!is_null($options->getVisibilityTimeoutInSeconds()) && $options->getVisibilityTimeoutInSeconds() < 1) {
-                $this->assertEquals(400, $e->getCode(), 'getCode');
+                $this->assertEquals(TestResources::STATUS_BAD_REQUEST, $e->getCode(), 'getCode');
             } else if (!is_null($options->getNumberOfMessages()) && ($options->getNumberOfMessages() < 1 || $options->getNumberOfMessages() > 32)) {
-                $this->assertEquals(400, $e->getCode(), 'getCode');
+                $this->assertEquals(TestResources::STATUS_BAD_REQUEST, $e->getCode(), 'getCode');
             } else {
                 throw $e;
             }
@@ -1320,9 +1316,9 @@ class QueueServiceFunctionalTest extends FunctionalTestBase
             }
 
             if (!is_null($options->getTimeout()) && $options->getTimeout() < 1) {
-                $this->assertEquals(500, $e->getCode(), 'getCode');
+                $this->assertEquals(TestResources::STATUS_INTERNAL_SERVER_ERROR, $e->getCode(), 'getCode');
             } else if (!is_null($options->getNumberOfMessages()) && ($options->getNumberOfMessages() < 1 || $options->getNumberOfMessages() > 32)) {
-                $this->assertEquals(400, $e->getCode(), 'getCode');
+                $this->assertEquals(TestResources::STATUS_BAD_REQUEST, $e->getCode(), 'getCode');
             } else {
                 throw $e;
             }
@@ -1406,7 +1402,7 @@ class QueueServiceFunctionalTest extends FunctionalTestBase
             }
 
             if (!is_null($options->getTimeout()) && $options->getTimeout() < 1) {
-                $this->assertEquals(500, $e->getCode(), 'getCode');
+                $this->assertEquals(TestResources::STATUS_INTERNAL_SERVER_ERROR, $e->getCode(), 'getCode');
             } else {
                 throw $e;
             }
