@@ -53,6 +53,7 @@ class IntegrationTestBase extends ServiceBusRestProxyTestBase
     public static function initialize()
     {
         $inst = new IntegrationTestBase();
+        $inst->setUp();
         $restProxy = $inst->restProxy;
         $testAlphaExists = false;
         $queues = $restProxy->listQueues()->getQueueInfos();

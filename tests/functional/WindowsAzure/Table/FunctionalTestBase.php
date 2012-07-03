@@ -42,6 +42,7 @@ class FunctionalTestBase extends IntegrationTestBase
     {
         parent::setUpBeforeClass();
         $testBase = new FunctionalTestBase();
+        $testBase->setUp();
         TableServiceFunctionalTestData::setupData();
 
         foreach(TableServiceFunctionalTestData::$testTableNames as $name)  {
@@ -53,6 +54,7 @@ class FunctionalTestBase extends IntegrationTestBase
     public static function tearDownAfterClass()
     {
         $testBase = new FunctionalTestBase();
+        $testBase->setUp();
         foreach(TableServiceFunctionalTestData::$testTableNames as $name)  {
             $testBase->safeDeleteTable($name);
         }

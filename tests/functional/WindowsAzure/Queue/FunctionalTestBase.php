@@ -27,6 +27,7 @@ namespace Tests\Functional\WindowsAzure\Queue;
 use Tests\Framework\TestResources;
 use WindowsAzure\Common\ServiceException;
 use WindowsAzure\Common\Internal\Resources;
+use WindowsAzure\Common\Internal\StorageServiceSettings;
 use WindowsAzure\Common\Configuration;
 use WindowsAzure\Queue\QueueService;
 use WindowsAzure\Queue\QueueSettings;
@@ -38,13 +39,15 @@ class FunctionalTestBase extends IntegrationTestBase
     public function setUp()
     {
         parent::setUp();
-        $this->accountName = $this->config->getProperty(QueueSettings::ACCOUNT_NAME);
+        $settings = StorageServiceSettings::createFromConnectionString($this->connectionString);
+        $this->accountName = $settings->getName();
     }
 
     public static function setUpBeforeClass()
     {
         parent::setUpBeforeClass();
         $testBase = new FunctionalTestBase();
+        $testBase->setUp();
         QueueServiceFunctionalTestData::setupData();
 
         foreach(QueueServiceFunctionalTestData::$testQueueNames as $name)  {
@@ -60,21 +63,11 @@ class FunctionalTestBase extends IntegrationTestBase
     public static function tearDownAfterClass()
     {
         $testBase = new FunctionalTestBase();
+        $testBase->setUp();
         foreach(QueueServiceFunctionalTestData::$testQueueNames as $name)  {
             $testBase->safeDeleteQueue($name);
         }
         parent::tearDownAfterClass();
-    }
-
-    private static function staticSafeDeleteQueue($service, $queueName)
-    {
-        try
-        {
-            $service->deleteQueue($queueName);
-        } catch (\Exception $e) {
-            // Ignore exception and continue, will assume that this queue doesn't exist in the sotrage account
-            error_log($e->getMessage());
-        }
     }
 
     public static function println($msg)

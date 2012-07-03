@@ -40,8 +40,9 @@ class IntegrationTestBase extends QueueServiceRestProxyTestBase
 
     public static function tearDownAfterClass()
     {
-        if (!Configuration::isEmulated()) {
-            $tmp = new IntegrationTestBase();
+        $tmp = new IntegrationTestBase();
+        $tmp->setUp();
+        if (!$tmp->isEmulated()) {
             $serviceProperties = QueueServiceFunctionalTestData::getDefaultServiceProperties();
             $tmp->restProxy->setServiceProperties($serviceProperties);
         }

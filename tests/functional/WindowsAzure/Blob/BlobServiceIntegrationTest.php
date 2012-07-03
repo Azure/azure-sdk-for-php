@@ -102,6 +102,7 @@ class BlobServiceIntegrationTest extends IntegrationTestBase
 
         // Create all test containers and their content
         $inst = new IntegrationTestBase();
+        $inst->setUp();
         $inst->createContainers(self::$_testContainers, self::$_testContainersPrefix);
     }
 
@@ -109,14 +110,9 @@ class BlobServiceIntegrationTest extends IntegrationTestBase
     {
         parent::tearDownAfterClass();
         $inst = new IntegrationTestBase();
+        $inst->setUp();
         $inst->deleteContainers(self::$_testContainers, self::$_testContainersPrefix);
         $inst->deleteContainers(self::$_creatableContainers,self::$_createableContainersPrefix);
-    }
-
-    private static function createService()
-    {
-        $tmp = new IntegrationTestBase();
-        return $tmp->restProxy;
     }
 
     /**
@@ -128,10 +124,10 @@ class BlobServiceIntegrationTest extends IntegrationTestBase
         $shouldReturn = false;
         try {
             $props = $this->restProxy->getServiceProperties()->getValue();
-            $this->assertTrue(!Configuration::isEmulated(), 'Should succeed if and only if not running in emulator');
+            $this->assertTrue(!$this->isEmulated(), 'Should succeed if and only if not running in emulator');
         } catch (ServiceException $e) {
             // Expect failure in emulator, as v1.6 doesn't support this method
-            if (Configuration::isEmulated()) {
+            if ($this->isEmulated()) {
                 $this->assertEquals(400, $e->getCode(), 'getCode');
                 $shouldReturn = true;
             } else {
@@ -161,10 +157,10 @@ class BlobServiceIntegrationTest extends IntegrationTestBase
         $shouldReturn = false;
         try {
             $props = $this->restProxy->getServiceProperties()->getValue();
-            $this->assertTrue(!Configuration::isEmulated(), 'Should succeed if and only if not running in emulator');
+            $this->assertTrue(!$this->isEmulated(), 'Should succeed if and only if not running in emulator');
         } catch (ServiceException $e) {
             // Expect failure in emulator, as v1.6 doesn't support this method
-            if (Configuration::isEmulated()) {
+            if ($this->isEmulated()) {
                 $this->assertEquals(400, $e->getCode(), 'getCode');
                 $shouldReturn = true;
             } else {

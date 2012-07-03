@@ -40,10 +40,11 @@ class IntegrationTestBase extends BlobServiceRestProxyTestBase
 
     public static function tearDownAfterClass()
     {
-        if (!Configuration::isEmulated()) {
-            $tmp = new IntegrationTestBase();
+        $integrationTestBase = new IntegrationTestBase();
+        $integrationTestBase->setUp();
+        if ($integrationTestBase->isEmulated()) {
             $serviceProperties = BlobServiceFunctionalTestData::getDefaultServiceProperties();
-            $tmp->restProxy->setServiceProperties($serviceProperties);
+            $integrationTestBase->restProxy->setServiceProperties($serviceProperties);
         }
         parent::tearDownAfterClass();
     }

@@ -24,10 +24,11 @@
 
 namespace Tests\Functional\WindowsAzure\Blob;
 
-use WindowsAzure\Common\Internal\Utilities;
 use WindowsAzure\Common\ServiceException;
-use WindowsAzure\Common\Internal\Resources;
 use WindowsAzure\Common\Configuration;
+use WindowsAzure\Common\Internal\Resources;
+use WindowsAzure\Common\Internal\StorageServiceSettings;
+use WindowsAzure\Common\Internal\Utilities;
 use WindowsAzure\Common\Models\Logging;
 use WindowsAzure\Common\Models\Metrics;
 use WindowsAzure\Common\Models\RetentionPolicy;
@@ -65,10 +66,10 @@ class BlobServiceFunctionalTest extends FunctionalTestBase
         $shouldReturn = false;
         try {
             $this->restProxy->setServiceProperties($serviceProperties);
-            $this->assertFalse(Configuration::isEmulated(), 'Should succeed when not running in emulator');
+            $this->assertFalse($this->isEmulated(), 'Should succeed when not running in emulator');
         } catch (ServiceException $e) {
             // Expect failure in emulator, as v1.6 doesn't support this method
-            if (Configuration::isEmulated()) {
+            if ($this->isEmulated()) {
                 $this->assertEquals(400, $e->getCode(), 'getCode');
                 $shouldReturn = true;
             } else {
@@ -92,10 +93,10 @@ class BlobServiceFunctionalTest extends FunctionalTestBase
         $shouldReturn = false;
         try {
             $this->restProxy->setServiceProperties($serviceProperties);
-            $this->assertFalse(Configuration::isEmulated(), 'Should succeed when not running in emulator');
+            $this->assertFalse($this->isEmulated(), 'Should succeed when not running in emulator');
         } catch (ServiceException $e) {
             // Expect failure in emulator, as v1.6 doesn't support this method
-            if (Configuration::isEmulated()) {
+            if ($this->isEmulated()) {
                 $this->assertEquals(400, $e->getCode(), 'getCode');
                 $shouldReturn = true;
             } else {
@@ -127,11 +128,11 @@ class BlobServiceFunctionalTest extends FunctionalTestBase
             if (!is_null($effOptions->getTimeout()) && $effOptions->getTimeout() < 1) {
                 $this->True('Expect negative timeouts in $options to throw', false);
             } else {
-                $this->assertFalse(Configuration::isEmulated(), 'Should succeed when not running in emulator');
+                $this->assertFalse($this->isEmulated(), 'Should succeed when not running in emulator');
             }
             $this->verifyServicePropertiesWorker($ret, null);
         } catch (ServiceException $e) {
-            if (Configuration::isEmulated()) {
+            if ($this->isEmulated()) {
                 if (!is_null($options->getTimeout()) && $options->getTimeout() < 1) {
                     $this->assertEquals(500, $e->getCode(), 'getCode');
                 } else {
@@ -205,7 +206,7 @@ class BlobServiceFunctionalTest extends FunctionalTestBase
             }
         }
 
-        if (!Configuration::isEmulated()) {
+        if (!$this->isEmulated()) {
             $this->restProxy->setServiceProperties($interestingServiceProperties[0]);
         }
     }
@@ -230,7 +231,7 @@ class BlobServiceFunctionalTest extends FunctionalTestBase
             if (!is_null($options->getTimeout()) && $options->getTimeout() < 1) {
                 $this->assertTrue(false, 'Expect negative timeouts in $options to throw');
             } else {
-                $this->assertFalse(Configuration::isEmulated(), 'Should succeed when not running in emulator');
+                $this->assertFalse($this->isEmulated(), 'Should succeed when not running in emulator');
             }
 
             $ret = (is_null($options) ? $this->restProxy->getServiceProperties() : $this->restProxy->getServiceProperties($options));
@@ -240,7 +241,7 @@ class BlobServiceFunctionalTest extends FunctionalTestBase
                 $options = new BlobServiceOptions();
             }
 
-            if (Configuration::isEmulated()) {
+            if ($this->isEmulated()) {
                 if (!is_null($options->getTimeout()) && $options->getTimeout() < 1) {
                     $this->assertEquals(500, $e->getCode(), 'getCode');
                 } else {
@@ -336,7 +337,7 @@ class BlobServiceFunctionalTest extends FunctionalTestBase
             } else if (BlobServiceFunctionalTestData::$testUniqueId ==$options->getPrefix()) {
                 // Need to futz with the mod because you are allowed to get MaxResults items returned.
                 $expectedCount = count(BlobServiceFunctionalTestData::$testContainerNames) % $options->getMaxResults();
-                if (!Configuration::isEmulated()) {
+                if (!$this->isEmulated()) {
                     $expectedCount += 1;
                 }
                 $this->assertEquals(
@@ -520,7 +521,7 @@ class BlobServiceFunctionalTest extends FunctionalTestBase
             if (!is_null($options->getTimeout()) && $options->getTimeout() < 1) {
                 $this->assertTrue(false, 'Expect negative timeouts in $options to throw');
             }
-            if (!Configuration::isEmulated() &&
+            if (!$this->isEmulated() &&
                     !BlobServiceFunctionalTestData::passTemporalAccessCondition($options->getAccessCondition())) {
                 $this->assertTrue(false, 'Failing access condition should throw');
             }
@@ -542,7 +543,7 @@ class BlobServiceFunctionalTest extends FunctionalTestBase
 
             if (!is_null($options->getTimeout()) && $options->getTimeout() < 1) {
                 $this->assertEquals(500, $e->getCode(), 'getCode');
-            } else if (!Configuration::isEmulated() && !BlobServiceFunctionalTestData::passTemporalAccessCondition($options->getAccessCondition())) {
+            } else if (!$this->isEmulated() && !BlobServiceFunctionalTestData::passTemporalAccessCondition($options->getAccessCondition())) {
                 $this->assertEquals(412, $e->getCode(), 'getCode');
             } else {
                 throw $e;
@@ -715,7 +716,7 @@ class BlobServiceFunctionalTest extends FunctionalTestBase
                 }
 
                 // setMetadata only honors If-Modified-Since
-                if (!Configuration::isEmulated() &&
+                if (!$this->isEmulated() &&
                         !BlobServiceFunctionalTestData::passTemporalAccessCondition($options->getAccessCondition())
                         && (!is_null($options->getAccessCondition())
                         && $options->getAccessCondition()->getHeader() != Resources::IF_UNMODIFIED_SINCE)) {
@@ -730,7 +731,7 @@ class BlobServiceFunctionalTest extends FunctionalTestBase
                         'Should get HTTP request error only if the metadata is invalid');
             }
         } catch (ServiceException $e) {
-            if (!Configuration::isEmulated() &&
+            if (!$this->isEmulated() &&
                     !BlobServiceFunctionalTestData::passTemporalAccessCondition($options->getAccessCondition()) &&
                     (!is_null($options->getAccessCondition()) &&
                     $options->getAccessCondition()->getHeader() != Resources::IF_UNMODIFIED_SINCE)) {
@@ -1021,8 +1022,9 @@ class BlobServiceFunctionalTest extends FunctionalTestBase
                     'act=' . $actId->getAccessPolicy()->getExpiry()->format(\DateTime::RFC1123));
         }
 
-        if (!Configuration::isEmulated()) {
-            $containerAddress = $this->config->getProperty(BlobSettings::URI) . '/' . $container;
+        if (!$this->isEmulated()) {
+            $settings = StorageServiceSettings::createFromConnectionString($this->connectionString);
+            $containerAddress = $settings->getBlobEndpointUri() . '/' . $container;
             $blobListAddress = $containerAddress . '?restype=container&comp=list';
             $blobAddress = $containerAddress . '/test';
 
