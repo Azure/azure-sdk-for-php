@@ -41,8 +41,9 @@ class TableServiceRestProxyTestBase extends ServiceRestProxyTestBase
     
     public function setUp()
     {
+        parent::setUp();
         $tableRestProxy = $this->builder->createTableService($this->connectionString);
-        parent::setUp($tableRestProxy);
+        parent::setProxy($tableRestProxy);
         $this->_createdTables = array();
     }
 

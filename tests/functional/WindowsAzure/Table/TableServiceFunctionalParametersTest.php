@@ -26,7 +26,6 @@ namespace Tests\Functional\WindowsAzure\Table;
 
 use WindowsAzure\Common\Internal\Resources;
 use WindowsAzure\Common\ServiceException;
-use WindowsAzure\Common\Configuration;
 use WindowsAzure\Common\Models\Logging;
 use WindowsAzure\Common\Models\Metrics;
 use WindowsAzure\Common\Models\RetentionPolicy;
@@ -60,10 +59,10 @@ class TableServiceFunctionalParametersTest extends FunctionalTestBase
     {
         try {
             $this->restProxy->getServiceProperties(null);
-            $this->assertFalse(Configuration::isEmulated(), 'Should fail if and only if in emulator');
+            $this->assertFalse($this->isEmulated(), 'Should fail if and only if in emulator');
         } catch (ServiceException $e) {
             // Expect failure when run this test with emulator, as v1.6 doesn't support this method
-            if (Configuration::isEmulated()) {
+            if ($this->isEmulated()) {
                 // Properties are not supported in emulator
                 $this->assertEquals(400, $e->getCode(), 'getCode');
             } else {
@@ -1026,10 +1025,10 @@ class TableServiceFunctionalParametersTest extends FunctionalTestBase
 
         try {
             $this->restProxy->insertOrMergeEntity($table, TableServiceFunctionalTestData::getSimpleEntity(), null);
-            $this->assertFalse(Configuration::isEmulated(), 'Should fail if and only if in emulator');
+            $this->assertFalse($this->isEmulated(), 'Should fail if and only if in emulator');
         } catch (ServiceException $e) {
             // Expect failure when run this test with emulator, as v1.6 doesn't support this method
-            if (Configuration::isEmulated()) {
+            if ($this->isEmulated()) {
                 $this->assertEquals(404, $e->getCode(), 'getCode');
             }
         }
@@ -1130,10 +1129,10 @@ class TableServiceFunctionalParametersTest extends FunctionalTestBase
 
         try {
             $this->restProxy->insertOrReplaceEntity($table, TableServiceFunctionalTestData::getSimpleEntity(), null);
-            $this->assertFalse(Configuration::isEmulated(), 'Should fail if and only if in emulator');
+            $this->assertFalse($this->isEmulated(), 'Should fail if and only if in emulator');
         } catch (ServiceException $e) {
             // Expect failure when run this test with emulator, as v1.6 doesn't support this method
-            if (Configuration::isEmulated()) {
+            if ($this->isEmulated()) {
                 $this->assertEquals(404, $e->getCode(), 'getCode');
             }
         }

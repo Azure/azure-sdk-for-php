@@ -426,8 +426,7 @@ class TableServiceFunctionalTestUtils
     public static function showEntityListDiff($actualData, $expectedData)
     {
         $ret = '';
-        if (count($expectedData) != count($actualData))
-            {
+        if (count($expectedData) != count($actualData)) {
             $ret .= 'VVV actual VVV' . "\n";
             for ($i = 0; $i < count($actualData); $i++) {
                 $e = $actualData[$i];

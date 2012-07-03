@@ -27,23 +27,23 @@ namespace Tests\Functional\WindowsAzure\Blob;
 use Tests\Framework\FiddlerFilter;
 use Tests\Framework\BlobServiceRestProxyTestBase;
 use WindowsAzure\Blob\BlobService;
-use WindowsAzure\Common\Configuration;
 
 class IntegrationTestBase extends BlobServiceRestProxyTestBase
 {
-    public function __construct()
+    public function setUp()
     {
-        parent::__construct();
+        parent::setUp();
         $fiddlerFilter = new FiddlerFilter();
         $this->restProxy = $this->restProxy->withFilter($fiddlerFilter);
     }
 
     public static function tearDownAfterClass()
     {
-        if (!Configuration::isEmulated()) {
-            $tmp = new IntegrationTestBase();
+        $integrationTestBase = new IntegrationTestBase();
+        $integrationTestBase->setUp();
+        if ($integrationTestBase->isEmulated()) {
             $serviceProperties = BlobServiceFunctionalTestData::getDefaultServiceProperties();
-            $tmp->restProxy->setServiceProperties($serviceProperties);
+            $integrationTestBase->restProxy->setServiceProperties($serviceProperties);
         }
         parent::tearDownAfterClass();
     }

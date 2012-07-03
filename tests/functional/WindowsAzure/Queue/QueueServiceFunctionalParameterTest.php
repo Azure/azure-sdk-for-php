@@ -26,7 +26,6 @@ namespace Tests\Functional\WindowsAzure\Queue;
 
 use WindowsAzure\Common\Internal\Resources;
 use WindowsAzure\Common\ServiceException;
-use WindowsAzure\Common\Configuration;
 use WindowsAzure\Common\Models\Logging;
 use WindowsAzure\Common\Models\Metrics;
 use WindowsAzure\Common\Models\RetentionPolicy;
@@ -47,10 +46,10 @@ class QueueServiceFunctionalParameterTest extends FunctionalTestBase
     {
         try {
             $this->restProxy->getServiceProperties(null);
-            $this->assertFalse(Configuration::isEmulated(), 'Should fail if and only if in emulator');
+            $this->assertFalse($this->isEmulated(), 'Should fail if and only if in emulator');
         } catch (ServiceException $e) {
             // Expect failure when run this test with emulator, as v1.6 doesn't support this method
-            if (Configuration::isEmulated()) {
+            if ($this->isEmulated()) {
                 // Properties are not supported in emulator
                 $this->assertEquals(400, $e->getCode(), 'getCode');
             } else {
@@ -68,9 +67,9 @@ class QueueServiceFunctionalParameterTest extends FunctionalTestBase
         $serviceProperties = QueueServiceFunctionalTestData::getDefaultServiceProperties();
         try {
             $this->restProxy->setServiceProperties($serviceProperties);
-            $this->assertFalse(Configuration::isEmulated(), 'service properties should throw in emulator');
+            $this->assertFalse($this->isEmulated(), 'service properties should throw in emulator');
         } catch (ServiceException $e) {
-            if (Configuration::isEmulated()) {
+            if ($this->isEmulated()) {
                 // Properties are not supported in emulator
                 $this->assertEquals(400, $e->getCode(), 'getCode');
             } else {
@@ -116,9 +115,9 @@ class QueueServiceFunctionalParameterTest extends FunctionalTestBase
 
         try {
             $this->restProxy->setServiceProperties($serviceProperties, null);
-            $this->assertFalse(Configuration::isEmulated(), 'service properties should throw in emulator');
+            $this->assertFalse($this->isEmulated(), 'service properties should throw in emulator');
         } catch (ServiceException $e) {
-            if (Configuration::isEmulated()) {
+            if ($this->isEmulated()) {
                 // Setting is not supported in emulator
                 $this->assertEquals(400, $e->getCode(), 'getCode');
             } else {
