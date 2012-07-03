@@ -26,7 +26,6 @@ namespace Tests\Functional\WindowsAzure\Table;
 
 use Tests\Framework\FiddlerFilter;
 use Tests\Framework\TableServiceRestProxyTestBase;
-use WindowsAzure\Common\Configuration;
 use WindowsAzure\Table\TableService;
 
 class IntegrationTestBase extends TableServiceRestProxyTestBase

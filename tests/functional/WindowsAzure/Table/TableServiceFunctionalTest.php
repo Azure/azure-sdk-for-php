@@ -28,7 +28,6 @@ use Tests\Functional\WindowsAzure\Table\FakeTableInfoEntry;
 use Tests\Functional\WindowsAzure\Table\MutatePivot;
 use WindowsAzure\Common\Internal\Utilities;
 use WindowsAzure\Common\ServiceException;
-use WindowsAzure\Common\Configuration;
 use WindowsAzure\Common\Models\Logging;
 use WindowsAzure\Common\Models\Metrics;
 use WindowsAzure\Common\Models\RetentionPolicy;

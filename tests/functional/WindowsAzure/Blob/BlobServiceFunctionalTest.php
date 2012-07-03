@@ -25,7 +25,6 @@
 namespace Tests\Functional\WindowsAzure\Blob;
 
 use WindowsAzure\Common\ServiceException;
-use WindowsAzure\Common\Configuration;
 use WindowsAzure\Common\Internal\Resources;
 use WindowsAzure\Common\Internal\StorageServiceSettings;
 use WindowsAzure\Common\Internal\Utilities;

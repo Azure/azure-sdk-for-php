@@ -27,7 +27,6 @@ namespace Tests\Functional\WindowsAzure\Blob;
 use WindowsAzure\Common\Internal\Utilities;
 use WindowsAzure\Common\ServiceException;
 use WindowsAzure\Common\Internal\Resources;
-use WindowsAzure\Common\Configuration;
 use WindowsAzure\Blob\BlobService;
 use WindowsAzure\Blob\Models\AccessCondition;
 use WindowsAzure\Blob\Models\BlobBlockType;
