@@ -24,14 +24,8 @@
 
 namespace Tests\Functional\WindowsAzure\Blob;
 
-use Tests\Framework\FiddlerFilter;
-use Tests\Framework\BlobServiceRestProxyTestBase;
-use Tests\Framework\TestResources;
 use WindowsAzure\Common\ServiceException;
-use WindowsAzure\Common\Internal\Resources;
 use WindowsAzure\Common\Internal\StorageServiceSettings;
-use WindowsAzure\Blob\BlobService;
-use WindowsAzure\Blob\BlobSettings;
 
 class FunctionalTestBase extends IntegrationTestBase
 {

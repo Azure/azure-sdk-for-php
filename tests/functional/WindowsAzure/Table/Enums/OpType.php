@@ -15,36 +15,26 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   Tests\Functional\WindowsAzure\Queue
+ * @package   Tests\Functional\WindowsAzure\Table\Enums
  * @author    Azure PHP SDK <azurephpsdk@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
 
-namespace Tests\Functional\WindowsAzure\Queue;
+namespace Tests\Functional\WindowsAzure\Table\Enums;
 
-use Tests\Framework\FiddlerFilter;
-use Tests\Framework\QueueServiceRestProxyTestBase;
-
-class IntegrationTestBase extends QueueServiceRestProxyTestBase
+class OpType
 {
-    public function setUp()
+    const DELETE_ENTITY            = 'deleteEntity';
+    const INSERT_ENTITY            = 'insertEntity';
+    const INSERT_OR_MERGE_ENTITY   = 'insertOrMergeEntity';
+    const INSERT_OR_REPLACE_ENTITY = 'insertOrReplaceEntity';
+    const MERGE_ENTITY             = 'mergeEntity';
+    const UPDATE_ENTITY            = 'updateEntity';
+    public static function values()
     {
-        parent::setUp();
-        $fiddlerFilter = new FiddlerFilter();
-        $this->restProxy = $this->restProxy->withFilter($fiddlerFilter);
-    }
-
-    public static function tearDownAfterClass()
-    {
-        $integrationTestBase = new IntegrationTestBase();
-        $integrationTestBase->setUp();
-        if (!$integrationTestBase->isEmulated()) {
-            $serviceProperties = QueueServiceFunctionalTestData::getDefaultServiceProperties();
-            $integrationTestBase->restProxy->setServiceProperties($serviceProperties);
-        }
-        parent::tearDownAfterClass();
+        return array('deleteEntity', 'insertEntity', 'insertOrMergeEntity', 'insertOrReplaceEntity', 'mergeEntity', 'updateEntity');
     }
 }
 

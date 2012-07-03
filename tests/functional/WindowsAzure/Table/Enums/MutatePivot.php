@@ -15,37 +15,24 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   Tests\Functional\WindowsAzure\Queue
+ * @package   Tests\Functional\WindowsAzure\Table\Enums
  * @author    Azure PHP SDK <azurephpsdk@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
 
-namespace Tests\Functional\WindowsAzure\Queue;
+namespace Tests\Functional\WindowsAzure\Table\Enums;
 
-use Tests\Framework\FiddlerFilter;
-use Tests\Framework\QueueServiceRestProxyTestBase;
-
-class IntegrationTestBase extends QueueServiceRestProxyTestBase
+class MutatePivot
 {
-    public function setUp()
+    const CHANGE_VALUES   = 'ChangeValues';
+    const ADD_PROPERTY    = 'AddProperty';
+    const REMOVE_PROPERTY = 'RemoveProperty';
+    const NULL_PROPERTY   = 'NullProperty';
+    public static function values()
     {
-        parent::setUp();
-        $fiddlerFilter = new FiddlerFilter();
-        $this->restProxy = $this->restProxy->withFilter($fiddlerFilter);
-    }
-
-    public static function tearDownAfterClass()
-    {
-        $integrationTestBase = new IntegrationTestBase();
-        $integrationTestBase->setUp();
-        if (!$integrationTestBase->isEmulated()) {
-            $serviceProperties = QueueServiceFunctionalTestData::getDefaultServiceProperties();
-            $integrationTestBase->restProxy->setServiceProperties($serviceProperties);
-        }
-        parent::tearDownAfterClass();
+        return array('ChangeValues', 'AddProperty', 'RemoveProperty', 'NullProperty');
     }
 }
-
 ?>
