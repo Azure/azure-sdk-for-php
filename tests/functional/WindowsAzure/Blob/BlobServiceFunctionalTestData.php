@@ -28,23 +28,19 @@ use WindowsAzure\Common\Models\Logging;
 use WindowsAzure\Common\Models\Metrics;
 use WindowsAzure\Common\Models\RetentionPolicy;
 use WindowsAzure\Common\Models\ServiceProperties;
-use WindowsAzure\Blob\Models\BlobServiceOptions;
+use WindowsAzure\Blob\Models\ContainerAcl;
 use WindowsAzure\Blob\Models\CreateBlobSnapshotOptions;
 use WindowsAzure\Blob\Models\GetBlobOptions;
-use WindowsAzure\Blob\Models\GetServicePropertiesResult;
 use WindowsAzure\Blob\Models\ListBlobsOptions;
-use WindowsAzure\Blob\Models\ListBlobsResult;
 use WindowsAzure\Blob\Models\ListContainersOptions;
-use WindowsAzure\Blob\Models\ListContainersResult;
 use WindowsAzure\Blob\Models\CreateContainerOptions;
 use WindowsAzure\Blob\Models\DeleteBlobOptions;
 use WindowsAzure\Blob\Models\DeleteContainerOptions;
 use WindowsAzure\Blob\Models\AccessCondition;
 use WindowsAzure\Blob\Models\SetContainerMetadataOptions;
 use WindowsAzure\Common\Internal\Resources;
-use WindowsAzure\Blob\Models\ContainerAcl;
 use WindowsAzure\Blob\Models\PublicAccessType;
-use WindowsAzure\Blob\Models\GetBlobMetadataOptions;
+use WindowsAzure\Blob\Models\CreateBlobOptions;
 use WindowsAzure\Blob\Models\SetBlobMetadataOptions;
 use WindowsAzure\Blob\Models\GetBlobPropertiesOptions;
 use WindowsAzure\Blob\Models\SetBlobPropertiesOptions;
@@ -698,22 +694,22 @@ class BlobServiceFunctionalTestData
         $past = new \DateTime("01/01/2010");
         $future = new \DateTime("01/01/2020");
 
-        $acl = new ContainerACL();
+        $acl = new ContainerAcl();
         array_push($ret, $acl);
 
-        $acl = new ContainerACL();
+        $acl = new ContainerAcl();
         $acl->setPublicAccess(PublicAccessType::NONE);
         array_push($ret, $acl);
 
-        $acl = new ContainerACL();
+        $acl = new ContainerAcl();
         $acl->setPublicAccess(PublicAccessType::BLOBS_ONLY);
         array_push($ret, $acl);
 
-        $acl = new ContainerACL();
+        $acl = new ContainerAcl();
         $acl->setPublicAccess(PublicAccessType::CONTAINER_AND_BLOBS);
         array_push($ret, $acl);
 
-        $acl = new ContainerACL();
+        $acl = new ContainerAcl();
         $acl->addSignedIdentifier('123', $past, $future, 'rw');
         array_push($ret, $acl);
 

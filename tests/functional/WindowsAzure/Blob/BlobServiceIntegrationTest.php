@@ -24,41 +24,25 @@
 
 namespace Tests\Functional\WindowsAzure\Blob;
 
-use WindowsAzure\Common\Internal\Utilities;
-use WindowsAzure\Common\ServiceException;
-use WindowsAzure\Common\Internal\Resources;
-use WindowsAzure\Blob\BlobService;
+use Tests\Framework\TestResources;
 use WindowsAzure\Blob\Models\AccessCondition;
 use WindowsAzure\Blob\Models\BlobBlockType;
-use WindowsAzure\Blob\Models\BlobProperties;
 use WindowsAzure\Blob\Models\Block;
 use WindowsAzure\Blob\Models\BlockList;
 use WindowsAzure\Blob\Models\ContainerACL;
 use WindowsAzure\Blob\Models\CreateBlobOptions;
-use WindowsAzure\Blob\Models\CreateBlobPagesResult;
 use WindowsAzure\Blob\Models\CreateBlobSnapshotOptions;
-use WindowsAzure\Blob\Models\CreateBlobSnapshotResult;
 use WindowsAzure\Blob\Models\CreateContainerOptions;
-use WindowsAzure\Blob\Models\GetBlobMetadataResult;
 use WindowsAzure\Blob\Models\GetBlobOptions;
 use WindowsAzure\Blob\Models\GetBlobPropertiesOptions;
-use WindowsAzure\Blob\Models\GetBlobPropertiesResult;
-use WindowsAzure\Blob\Models\GetBlobResult;
-use WindowsAzure\Blob\Models\GetContainerPropertiesResult;
 use WindowsAzure\Blob\Models\ListBlobBlocksOptions;
-use WindowsAzure\Blob\Models\ListBlobBlocksResult;
-use WindowsAzure\Blob\Models\ListBlobRegionsResult;
 use WindowsAzure\Blob\Models\ListBlobsOptions;
-use WindowsAzure\Blob\Models\ListBlobsResult;
 use WindowsAzure\Blob\Models\ListContainersOptions;
-use WindowsAzure\Blob\Models\ListContainersResult;
-use WindowsAzure\Blob\Models\ListContainersResult\Container;
 use WindowsAzure\Blob\Models\PageRange;
 use WindowsAzure\Blob\Models\PublicAccessType;
-use WindowsAzure\Blob\Models\ServiceProperties;
-use WindowsAzure\Blob\Models\SetBlobMetadataResult;
 use WindowsAzure\Blob\Models\SetBlobPropertiesOptions;
-use WindowsAzure\Blob\Models\SetBlobPropertiesResult;
+use WindowsAzure\Common\ServiceException;
+use WindowsAzure\Common\Internal\Utilities;
 
 class BlobServiceIntegrationTest extends IntegrationTestBase
 {
@@ -80,14 +64,15 @@ class BlobServiceIntegrationTest extends IntegrationTestBase
         parent::setUpBeforeClass();
         // Setup container names array (list of container names used by
         // integration tests)
+        $rint = mt_rand(0, 1000000);
         self::$_testContainers = array();
         for ($i = 0; $i < 10; $i++) {
-            self::$_testContainers[$i] = self::$_testContainersPrefix . ($i + 1);
+            self::$_testContainers[$i] = self::$_testContainersPrefix . ($rint + $i);
         }
 
         self::$_creatableContainers = array();
         for ($i = 0; $i < 10; $i++) {
-            self::$_creatableContainers[$i] = self::$_createableContainersPrefix . ($i + 1);
+            self::$_creatableContainers[$i] = self::$_createableContainersPrefix . ($rint + $i);
         }
 
         self::$_creatable_container_1 = self::$_creatableContainers[0];
@@ -127,7 +112,7 @@ class BlobServiceIntegrationTest extends IntegrationTestBase
         } catch (ServiceException $e) {
             // Expect failure in emulator, as v1.6 doesn't support this method
             if ($this->isEmulated()) {
-                $this->assertEquals(400, $e->getCode(), 'getCode');
+                $this->assertEquals(TestResources::STATUS_BAD_REQUEST, $e->getCode(), 'getCode');
                 $shouldReturn = true;
             } else {
                 throw $e;
@@ -160,7 +145,7 @@ class BlobServiceIntegrationTest extends IntegrationTestBase
         } catch (ServiceException $e) {
             // Expect failure in emulator, as v1.6 doesn't support this method
             if ($this->isEmulated()) {
-                $this->assertEquals(400, $e->getCode(), 'getCode');
+                $this->assertEquals(TestResources::STATUS_BAD_REQUEST, $e->getCode(), 'getCode');
                 $shouldReturn = true;
             } else {
                 throw $e;
@@ -440,15 +425,7 @@ class BlobServiceIntegrationTest extends IntegrationTestBase
     public function testWorkingWithRootContainersWorks()
     {
         // Ensure root container exists
-        $error = null;
-        try {
-            $this->restProxy->createContainer('$root');
-        } catch (ServiceException $e) {
-            $error = $e;
-        }
-
-        // Assert
-        $this->assertTrue(is_null($error) || $error->getCode() == 409, '$error is null || $error->getCode() == 409');
+        $this->createContainerWithRetry('$root', new CreateContainerOptions());
 
         // Work with root container explicitly ('$root')
         {
@@ -487,10 +464,8 @@ class BlobServiceIntegrationTest extends IntegrationTestBase
             $this->restProxy->deleteBlob('', self::$_blob_for_root_container);
         }
 
-        // If container was created, delete it
-        if (is_null($error)) {
-            $this->restProxy->deleteContainer('$root');
-        }
+        // Cleanup.
+        $this->restProxy->deleteContainer('$root');
     }
 
     /**
@@ -1208,7 +1183,7 @@ class BlobServiceIntegrationTest extends IntegrationTestBase
             $this->restProxy->getBlob(self::$_test_container_for_blobs, 'test', $opts);
             $this->fail('getBlob should throw an exception');
         } catch (ServiceException $e) {
-            $this->assertEquals(412, $e->getCode(), 'got the expected exception');
+            $this->assertEquals(TestResources::STATUS_PRECONDITION_FAILED, $e->getCode(), 'got the expected exception');
         }
     }
 
@@ -1228,7 +1203,15 @@ class BlobServiceIntegrationTest extends IntegrationTestBase
             $this->restProxy->getBlob(self::$_test_container_for_blobs, 'test', $opts);
             $this->fail('getBlob should throw an exception');
         } catch (ServiceException $e) {
-            $this->assertEquals(304, $e->getCode(), 'got the expected exception');
+            if (!$this->hasSecureEndpoint() && $e->getCode() == TestResources::STATUS_FORBIDDEN) {
+                // Proxies can eat the access condition headers of
+                // unsecured (http) requests, which causes the authentication
+                // to fail, with a 403:Forbidden. There is nothing much that
+                // can be done about this, other than ignore it.
+                $this->markTestSkipped('Appears that a proxy ate your access condition');
+            } else {
+                $this->assertEquals(TestResources::STATUS_NOT_MODIFIED, $e->getCode(), 'got the expected exception');
+            }
         }
     }
 
@@ -1249,7 +1232,15 @@ class BlobServiceIntegrationTest extends IntegrationTestBase
             $this->restProxy->getBlob(self::$_test_container_for_blobs, 'test', $opts);
             $this->fail('getBlob should throw an exception');
         } catch (ServiceException $e) {
-            $this->assertEquals(304, $e->getCode(), 'got the expected exception');
+            if (!$this->hasSecureEndpoint() && $e->getCode() == TestResources::STATUS_FORBIDDEN) {
+                // Proxies can eat the access condition headers of
+                // unsecured (http) requests, which causes the authentication
+                // to fail, with a 403:Forbidden. There is nothing much that
+                // can be done about this, other than ignore it.
+                $this->markTestSkipped('Appears that a proxy ate your access condition');
+            } else {
+                $this->assertEquals(TestResources::STATUS_NOT_MODIFIED, $e->getCode(), 'got the expected exception');
+            }
         }
     }
 
@@ -1286,7 +1277,7 @@ class BlobServiceIntegrationTest extends IntegrationTestBase
             $this->restProxy->getBlob($container, $blob, $opts);
             $this->fail('getBlob should throw an exception');
         } catch (ServiceException $e) {
-            $this->assertEquals(412, $e->getCode(), 'got the expected exception');
+            $this->assertEquals(TestResources::STATUS_PRECONDITION_FAILED, $e->getCode(), 'got the expected exception');
         }
     }
 

@@ -24,68 +24,25 @@
 
 namespace Tests\Functional\WindowsAzure\Table;
 
-use Tests\Functional\WindowsAzure\Table\FakeTableInfoEntry;
-use Tests\Functional\WindowsAzure\Table\MutatePivot;
+use Tests\Framework\TestResources;
+use Tests\Functional\WindowsAzure\Table\Enums\ConcurType;
+use Tests\Functional\WindowsAzure\Table\Enums\MutatePivot;
+use Tests\Functional\WindowsAzure\Table\Enums\OpType;
+use Tests\Functional\WindowsAzure\Table\Models\BatchWorkerConfig;
+use Tests\Functional\WindowsAzure\Table\Models\FakeTableInfoEntry;
 use WindowsAzure\Common\Internal\Utilities;
 use WindowsAzure\Common\ServiceException;
-use WindowsAzure\Common\Models\Logging;
-use WindowsAzure\Common\Models\Metrics;
-use WindowsAzure\Common\Models\RetentionPolicy;
-use WindowsAzure\Common\Models\ServiceProperties;
 use WindowsAzure\Table\Models\BatchError;
 use WindowsAzure\Table\Models\BatchOperations;
-use WindowsAzure\Table\Models\BatchResult;
 use WindowsAzure\Table\Models\DeleteEntityOptions;
 use WindowsAzure\Table\Models\EdmType;
 use WindowsAzure\Table\Models\Entity;
-use WindowsAzure\Table\Models\GetEntityResult;
-use WindowsAzure\Table\Models\GetServicePropertiesResult;
-use WindowsAzure\Table\Models\GetTableResult;
 use WindowsAzure\Table\Models\InsertEntityResult;
 use WindowsAzure\Table\Models\Property;
-use WindowsAzure\Table\Models\Query;
 use WindowsAzure\Table\Models\QueryEntitiesOptions;
-use WindowsAzure\Table\Models\QueryEntitiesResult;
 use WindowsAzure\Table\Models\QueryTablesOptions;
-use WindowsAzure\Table\Models\QueryTablesResult;
 use WindowsAzure\Table\Models\TableServiceOptions;
 use WindowsAzure\Table\Models\UpdateEntityResult;
-use WindowsAzure\Table\Models\Filters\Filter;
-
-class OpType
-{
-    const DELETE_ENTITY            = 'deleteEntity';
-    const INSERT_ENTITY            = 'insertEntity';
-    const INSERT_OR_MERGE_ENTITY   = 'insertOrMergeEntity';
-    const INSERT_OR_REPLACE_ENTITY = 'insertOrReplaceEntity';
-    const MERGE_ENTITY             = 'mergeEntity';
-    const UPDATE_ENTITY            = 'updateEntity';
-    public static function values()
-    {
-        return array('deleteEntity', 'insertEntity', 'insertOrMergeEntity', 'insertOrReplaceEntity', 'mergeEntity', 'updateEntity');
-    }
-}
-
-class ConcurType
-{
-    const NO_KEY_MATCH            = 'NoKeyMatch';
-    const KEY_MATCH_NO_ETAG       = 'KeyMatchNoEtag';
-    const KEY_MATCH_ETAG_MISMATCH = 'KeyMatchEtagMismatch';
-    const KEY_MATCH_ETAG_MATCH    = 'KeyMatchEtagMatch';
-    public static function values()
-    {
-        return array('NoKeyMatch', 'KeyMatchNoEtag', 'KeyMatchEtagMismatch', 'KeyMatchEtagMatch');
-    }
-}
-
-class BatchWorkerConfig
-{
-    public $opType;
-    public $concurType;
-    public $mutatePivot;
-    public $ent;
-    public $options;
-}
 
 class TableServiceFunctionalTest extends FunctionalTestBase
 {
@@ -104,7 +61,7 @@ class TableServiceFunctionalTest extends FunctionalTestBase
         } catch (ServiceException $e) {
             // Expect failure in emulator, as v1.6 doesn't support this method
             if ($this->isEmulated()) {
-                $this->assertEquals(400, $e->getCode(), 'getCode');
+                $this->assertEquals(TestResources::STATUS_BAD_REQUEST, $e->getCode(), 'getCode');
                 $shouldReturn = true;
             } else {
                 throw $e;
@@ -131,7 +88,7 @@ class TableServiceFunctionalTest extends FunctionalTestBase
         } catch (ServiceException $e) {
             // Expect failure in emulator, as v1.6 doesn't support this method
             if ($this->isEmulated()) {
-                $this->assertEquals(400, $e->getCode(), 'getCode');
+                $this->assertEquals(TestResources::STATUS_BAD_REQUEST, $e->getCode(), 'getCode');
             } else {
                 throw $e;
             }
@@ -152,9 +109,9 @@ class TableServiceFunctionalTest extends FunctionalTestBase
         } catch (ServiceException $e) {
             if ($this->isEmulated()) {
                 // Expect failure in emulator, as v1.6 doesn't support this method
-                $this->assertEquals(400, $e->getCode(), 'getCode');
+                $this->assertEquals(TestResources::STATUS_BAD_REQUEST, $e->getCode(), 'getCode');
             } else {
-                $this->assertEquals(500, $e->getCode(), 'getCode');
+                $this->assertEquals(TestResources::STATUS_INTERNAL_SERVER_ERROR, $e->getCode(), 'getCode');
             }
         }
     }
@@ -236,7 +193,7 @@ class TableServiceFunctionalTest extends FunctionalTestBase
             $this->verifyServicePropertiesWorker($ret, $serviceProperties);
         } catch (ServiceException $e) {
             if ($this->isEmulated()) {
-                $this->assertEquals(400, $e->getCode(), 'getCode');
+                $this->assertEquals(TestResources::STATUS_BAD_REQUEST, $e->getCode(), 'getCode');
             } else {
                 throw $e;
             }
@@ -285,7 +242,7 @@ class TableServiceFunctionalTest extends FunctionalTestBase
             $this->verifyqueryTablesWorker($ret, $options);
         } catch (ServiceException $e) {
             if ((!is_null($options->getTop()) && $options->getTop() <= 0) && !$this->isEmulated()) {
-                $this->assertEquals(400, $e->getCode(), 'getCode');
+                $this->assertEquals(TestResources::STATUS_BAD_REQUEST, $e->getCode(), 'getCode');
             } else {
                 throw $e;
             }
@@ -576,9 +533,9 @@ class TableServiceFunctionalTest extends FunctionalTestBase
             $this->verifygetEntityWorker($ent, $qer->getEntity());
         } catch (ServiceException $e) {
             if (!$isGood) {
-                $this->assertEquals(400, $e->getCode(), 'getCode');
+                $this->assertEquals(TestResources::STATUS_BAD_REQUEST, $e->getCode(), 'getCode');
             } else if (is_null($ent->getPartitionKey()) || is_null($ent->getRowKey())) {
-                $this->assertEquals(400, $e->getCode(), 'getCode');
+                $this->assertEquals(TestResources::STATUS_BAD_REQUEST, $e->getCode(), 'getCode');
             } else {
                 throw $e;
             }
@@ -689,12 +646,12 @@ class TableServiceFunctionalTest extends FunctionalTestBase
             try {
                 $this->restProxy->getEntity($table, $ent->getPartitionKey(), $ent->getRowKey());
             } catch (ServiceException $e2) {
-                $gotError = ($e2->getCode() == 404);
+                $gotError = ($e2->getCode() == TestResources::STATUS_NOT_FOUND);
             }
             $this->assertTrue($gotError, 'Expect error when entity is deleted');
         } catch (ServiceException $e) {
             if ($useEtag == 2) {
-                $this->assertEquals(412, $e->getCode(), 'getCode');
+                $this->assertEquals(TestResources::STATUS_PRECONDITION_FAILED, $e->getCode(), 'getCode');
             } else {
                 throw $e;
             }
@@ -1038,9 +995,9 @@ class TableServiceFunctionalTest extends FunctionalTestBase
             $this->verifyinsertEntityWorker($ent, $entReturned);
         } catch (ServiceException $e) {
             if (!$isGood) {
-                $this->assertEquals(400, $e->getCode(), 'getCode');
+                $this->assertEquals(TestResources::STATUS_BAD_REQUEST, $e->getCode(), 'getCode');
             } else if (is_null($ent->getPartitionKey()) || is_null($ent->getRowKey())) {
-                $this->assertEquals(400, $e->getCode(), 'getCode');
+                $this->assertEquals(TestResources::STATUS_BAD_REQUEST, $e->getCode(), 'getCode');
             } else {
                 throw $e;
             }
@@ -1170,7 +1127,7 @@ class TableServiceFunctionalTest extends FunctionalTestBase
                 } catch (ServiceException $e) {
                     // Expect failure in emulator, as v1.6 doesn't support this method
                     if ($this->isEmulated()) {
-                        $this->assertEquals(400, $e->getCode(), 'getCode');
+                        $this->assertEquals(TestResources::STATUS_BAD_REQUEST, $e->getCode(), 'getCode');
                     } else {
                         throw $e;
                     }
@@ -1231,7 +1188,7 @@ class TableServiceFunctionalTest extends FunctionalTestBase
                 } catch (ServiceException $e) {
                     // Expect failure in emulator, as v1.6 doesn't support this method
                     if ($this->isEmulated()) {
-                        $this->assertEquals(400, $e->getCode(), 'getCode');
+                        $this->assertEquals(TestResources::STATUS_BAD_REQUEST, $e->getCode(), 'getCode');
                     } else {
                         throw $e;
                     }
@@ -1736,7 +1693,7 @@ class TableServiceFunctionalTest extends FunctionalTestBase
             }
         } catch (ServiceException $e) {
             if ($expectedError) {
-                $this->assertEquals(400, $e->getCode(), 'getCode');
+                $this->assertEquals(TestResources::STATUS_BAD_REQUEST, $e->getCode(), 'getCode');
             } else {
                 throw $e;
             }
@@ -1786,7 +1743,7 @@ class TableServiceFunctionalTest extends FunctionalTestBase
                     break;
             }
         } else {
-            $this->assertTrue($opResult instanceof BatchError, 'When expect an error, expect opResult instanceof Error');
+            $this->assertTrue($opResult instanceof BatchError, 'When expect an error, expect opResult instanceof BatchError');
         }
     }
 
@@ -1886,7 +1843,7 @@ class TableServiceFunctionalTest extends FunctionalTestBase
             $ger = $this->restProxy->getEntity($table, $targetEnt->getPartitionKey(), $targetEnt->getRowKey());
             $entInTable = $ger->getEntity();
         } catch (ServiceException $e) {
-            $this->assertTrue(($opType == OpType::DELETE_ENTITY) && (404 == $e->getCode()), '404 is expected for deletes');
+            $this->assertTrue(($opType == OpType::DELETE_ENTITY) && (TestResources::STATUS_NOT_FOUND == $e->getCode()), '404:NotFound is expected for deletes');
         }
 
         switch ($opType) {
@@ -1968,27 +1925,27 @@ class TableServiceFunctionalTest extends FunctionalTestBase
         switch ($concurType) {
             case ConcurType::NO_KEY_MATCH:
                 if (($opType == OpType::DELETE_ENTITY) || ($opType == OpType::MERGE_ENTITY) || ($opType == OpType::UPDATE_ENTITY)) {
-                    return 404;
+                    return TestResources::STATUS_NOT_FOUND;
                 }
                 break;
             case ConcurType::KEY_MATCH_NO_ETAG:
                 if ($opType == OpType::INSERT_ENTITY) {
-                    return 409;
+                    return TestResources::STATUS_CONFLICT;
                 }
                 break;
             case ConcurType::KEY_MATCH_ETAG_MATCH:
                 if ($opType == OpType::INSERT_ENTITY) {
-                    return 409;
+                    return TestResources::STATUS_CONFLICT;
                 }
                 break;
             case ConcurType::KEY_MATCH_ETAG_MISMATCH:
                 if ($opType == OpType::INSERT_ENTITY) {
-                    return 409;
+                    return TestResources::STATUS_CONFLICT;
                 } else if ($opType == OpType::INSERT_OR_REPLACE_ENTITY || $opType == OpType::INSERT_OR_MERGE_ENTITY) {
                     // If exists, just clobber.
                     return null;
                 }
-                return 412;
+                return TestResources::STATUS_PRECONDITION_FAILED;
         }
         return null;
     }
