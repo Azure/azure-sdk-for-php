@@ -29,6 +29,7 @@ use WindowsAzure\Common\Models\Metrics;
 use WindowsAzure\Common\Models\RetentionPolicy;
 use WindowsAzure\Common\Models\ServiceProperties;
 use WindowsAzure\Blob\Models\ContainerAcl;
+use WindowsAzure\Blob\Models\CopyBlobOptions;
 use WindowsAzure\Blob\Models\CreateBlobSnapshotOptions;
 use WindowsAzure\Blob\Models\GetBlobOptions;
 use WindowsAzure\Blob\Models\ListBlobsOptions;
@@ -847,6 +848,57 @@ class BlobServiceFunctionalTestData
         // TODO: Handle Lease ID
         //        $options = new CreateBlobSnapshotOptions();
         //        $options->setLeaseId('setLeaseId');
+        //        array_push($ret, $options);
+
+        return $ret;
+    }
+
+    public static function getCopyBlobOptions()
+    {
+        $ret = array();
+
+        $options = new CopyBlobOptions();
+        array_push($ret, $options);
+
+        $options = new CopyBlobOptions();
+        $options->setTimeout(10);
+        array_push($ret, $options);
+
+        $options = new CopyBlobOptions();
+        $options->setTimeout(-10);
+        array_push($ret, $options);
+
+        foreach(self::getAllAccessConditions() as $ac)  {
+            $options = new CopyBlobOptions();
+            $options->setSourceAccessCondition($ac);
+            array_push($ret, $options);
+        }
+
+        foreach(self::getAllAccessConditions() as $ac)  {
+            $options = new CopyBlobOptions();
+            $options->setAccessCondition($ac);
+            array_push($ret, $options);
+        }
+
+        $options = new CopyBlobOptions();
+        $metadata = array(
+            'Xkey' => 'Avalue',
+            'Yfoo' => 'Bbar',
+            'Zbaz' => 'Cboo');
+        $options->setMetadata($metadata);
+        array_push($ret, $options);
+
+        $options = new CopyBlobOptions();
+        $options->setSourceSnapshot('placeholder');
+        array_push($ret, $options);
+
+        // TODO: Handle Lease ID
+        //        $options = new CopyBlobOptions();
+        //        $options->setLeaseId('setLeaseId');
+        //        array_push($ret, $options);
+        //
+        //        $options = new CopyBlobOptions();
+        //        $options->setSourceLeaseId('setSourceLeaseId');
         //        array_push($ret, $options);
 
         return $ret;
