@@ -137,7 +137,7 @@ class EdmType
         case null:
             // NULL also is treated as EdmType::STRING
             // Convert special characters to HTML entities.
-            return htmlspecialchars($value);
+            return $value;
             
         case EdmType::BINARY:
             return base64_encode($value);
