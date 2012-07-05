@@ -116,7 +116,7 @@ class FunctionalTestBase extends IntegrationTestBase
 
     public static function entityToString($ent)
     {
-        $ret = 'Etag=' . self::tmptostring($ent->getEtag()) . "\n";
+        $ret = 'ETag=' . self::tmptostring($ent->getETag()) . "\n";
         $ret .= 'Props=' . self::entityPropsToString($ent->getProperties());
         return $ret;
     }

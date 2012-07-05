@@ -55,7 +55,7 @@ class BlobServiceFunctionalTestData
     public static $testContainerNames;
     public static $testBlobNames;
     private static $_accountName;
-    private static $badEtag = '0x123456789ABCDEF';
+    private static $badETag = '0x123456789ABCDEF';
 
     public static function setupData($accountName)
     {
@@ -124,24 +124,24 @@ class BlobServiceFunctionalTestData
         }
     }
 
-    public static function passEtagAccessCondition($ac)
+    public static function passETagAccessCondition($ac)
     {
         if (is_null($ac)) {
             return true;
         } else if ($ac->getHeader() == Resources::IF_MATCH) {
-            return self::$badEtag != $ac->getValue();
+            return self::$badETag != $ac->getValue();
         } else if ($ac->getHeader() == Resources::IF_NONE_MATCH) {
-            return self::$badEtag == $ac->getValue();
+            return self::$badETag == $ac->getValue();
         } else {
             return true;
         }
     }
 
-    public static function fixEtagAccessCondition($ac, $etag)
+    public static function fixETagAccessCondition($ac, $etag)
     {
         if (!is_null($ac)) {
             if ($ac->getHeader() == Resources::IF_MATCH || $ac->getHeader() == Resources::IF_NONE_MATCH) {
-                if (is_null($ac->getValue()) || self::$badEtag != $ac->getValue()) {
+                if (is_null($ac->getValue()) || self::$badETag != $ac->getValue()) {
                     $ac->setValue($etag);
                 }
             }
@@ -168,9 +168,9 @@ class BlobServiceFunctionalTestData
         $ret = self::getTemporalAccessConditions();
 
         array_push($ret, AccessCondition::ifMatch(null));
-        array_push($ret, AccessCondition::ifMatch(self::$badEtag));
+        array_push($ret, AccessCondition::ifMatch(self::$badETag));
         array_push($ret, AccessCondition::ifNoneMatch(null));
-        array_push($ret, AccessCondition::ifNoneMatch(self::$badEtag));
+        array_push($ret, AccessCondition::ifNoneMatch(self::$badETag));
 
         return $ret;
     }

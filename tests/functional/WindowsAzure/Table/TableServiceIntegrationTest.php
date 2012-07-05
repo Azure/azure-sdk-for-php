@@ -338,7 +338,7 @@ class TableServiceIntegrationTest extends IntegrationTestBase
         $this->assertEquals('001', $result->getEntity()->getPartitionKey(), '$result->getEntity()->getPartitionKey()');
         $this->assertEquals('insertEntityWorks', $result->getEntity()->getRowKey(), '$result->getEntity()->getRowKey()');
         $this->assertNotNull($result->getEntity()->getTimestamp(), '$result->getEntity()->getTimestamp()');
-        $this->assertNotNull($result->getEntity()->getEtag(), '$result->getEntity()->getEtag()');
+        $this->assertNotNull($result->getEntity()->getETag(), '$result->getEntity()->getETag()');
 
         $this->assertNotNull($result->getEntity()->getProperty('test'), '$result->getEntity()->getProperty(\'test\')');
         $this->assertEquals(true, $result->getEntity()->getProperty('test')->getValue(), '$result->getEntity()->getProperty(\'test\')->getValue()');
@@ -604,7 +604,7 @@ class TableServiceIntegrationTest extends IntegrationTestBase
         $result = $this->restProxy->insertEntity(self::$testTable2, $entity);
 
         $deo = new DeleteEntityOptions();
-        $deo->setEtag($result->getEntity()->getEtag());
+        $deo->setETag($result->getEntity()->getETag());
         $this->restProxy->deleteEntity(self::$testTable2, $result->getEntity()->getPartitionKey(), $result->getEntity()->getRowKey(),
                 $deo);
 
@@ -643,7 +643,7 @@ class TableServiceIntegrationTest extends IntegrationTestBase
         $this->assertEquals('001', $result->getEntity()->getPartitionKey(), '$result->getEntity()->getPartitionKey()');
         $this->assertEquals('getEntityWorks', $result->getEntity()->getRowKey(), '$result->getEntity()->getRowKey()');
         $this->assertNotNull($result->getEntity()->getTimestamp(), '$result->getEntity()->getTimestamp()');
-        $this->assertNotNull($result->getEntity()->getEtag(), '$result->getEntity()->getEtag()');
+        $this->assertNotNull($result->getEntity()->getETag(), '$result->getEntity()->getETag()');
 
         $this->assertNotNull($result->getEntity()->getProperty('test'), '$result->getEntity()->getProperty(\'test\')');
         $this->assertEquals(true, $result->getEntity()->getProperty('test')->getValue(), '$result->getEntity()->getProperty(\'test\')->getValue()');
@@ -702,7 +702,7 @@ class TableServiceIntegrationTest extends IntegrationTestBase
         $this->assertEquals('001', $entities[0]->getPartitionKey(), '$entities[0]->getPartitionKey()');
         $this->assertEquals('queryEntitiesWorks', $entities[0]->getRowKey(), '$entities[0]->getRowKey()');
         $this->assertNotNull($entities[0]->getTimestamp(), '$entities[0]->getTimestamp()');
-        $this->assertNotNull($entities[0]->getEtag(), '$entities[0]->getEtag()');
+        $this->assertNotNull($entities[0]->getETag(), '$entities[0]->getETag()');
 
         $this->assertNotNull($entities[0]->getProperty('test'), '$entities[0]->getProperty(\'test\')');
         $this->assertEquals(true, $entities[0]->getProperty('test')->getValue(), '$entities[0]->getProperty(\'test\')->getValue()');
@@ -1087,7 +1087,7 @@ class TableServiceIntegrationTest extends IntegrationTestBase
 
         // Act
         $bo = new BatchOperations();
-        $bo->addDeleteEntity($table, $entity->getPartitionKey(), $entity->getRowKey(), $entity->getEtag());
+        $bo->addDeleteEntity($table, $entity->getPartitionKey(), $entity->getRowKey(), $entity->getETag());
         $result = $this->restProxy->batch($bo);
 
         // Assert
@@ -1134,7 +1134,7 @@ class TableServiceIntegrationTest extends IntegrationTestBase
             $this->assertEquals('001', $entity->getPartitionKey(), '$entity->getPartitionKey()');
             $this->assertEquals('batchWorks-' . $i, $entity->getRowKey(), '$entity->getRowKey()');
             $this->assertNotNull($entity->getTimestamp(), '$entity->getTimestamp()');
-            $this->assertNotNull($entity->getEtag(), '$entity->getEtag()');
+            $this->assertNotNull($entity->getETag(), '$entity->getETag()');
 
             $this->assertNotNull($entity->getProperty('test'), '$entity->getProperty(\'test\')');
             $this->assertEquals(true, $entity->getProperty('test')->getValue(), '$entity->getProperty(\'test\')->getValue()');
@@ -1220,7 +1220,7 @@ class TableServiceIntegrationTest extends IntegrationTestBase
         $entity->addProperty('test4', EdmType::INT64, '12345678901');
         $entity->addProperty('test5', EdmType::DATETIME, new \DateTime());
         $batchOperations->addInsertEntity($table, $entity);
-        $batchOperations->addDeleteEntity($table, $entity1->getPartitionKey(), $entity1->getRowKey(), $entity1->getEtag());
+        $batchOperations->addDeleteEntity($table, $entity1->getPartitionKey(), $entity1->getRowKey(), $entity1->getETag());
         $entity2->addProperty('test3', EdmType::INT32, 5);
         $batchOperations->addUpdateEntity($table, $entity2);
         $entity3->addProperty('test3', EdmType::INT32, 5);
@@ -1303,7 +1303,7 @@ class TableServiceIntegrationTest extends IntegrationTestBase
         // The $entity1 still has the original etag from the first submit,
         // so this update should fail, because another update was already made.
         $entity1->addProperty('test', EdmType::INT32, 3);
-        $batchOperations->addDeleteEntity($table, $entity1->getPartitionKey(), $entity1->getRowKey(), $entity1->getEtag());
+        $batchOperations->addDeleteEntity($table, $entity1->getPartitionKey(), $entity1->getRowKey(), $entity1->getETag());
         $batchOperations->addUpdateEntity($table, $entity2);
         $batchOperations->addInsertEntity($table, $entity3);
 

@@ -221,7 +221,7 @@ class BlobServiceIntegrationTest extends IntegrationTestBase
 
         // Assert
         $this->assertNotNull($prop, '$prop');
-        $this->assertNotNull($prop->getEtag(), '$prop->getEtag()');
+        $this->assertNotNull($prop->getETag(), '$prop->getETag()');
         $this->assertNotNull($prop->getLastModified(), '$prop->getLastModified()');
         $this->assertNotNull($prop->getMetadata(), '$prop->getMetadata()');
         $this->assertEquals(2, count($prop->getMetadata()), 'count($prop->getMetadata())');
@@ -231,7 +231,7 @@ class BlobServiceIntegrationTest extends IntegrationTestBase
         $this->assertTrue(!(array_search('bleah', $prop->getMetadata()) === FALSE), '!(array_search(\'bleah\', $prop->getMetadata()) === FALSE)');
 
         $this->assertNotNull($prop2, '$prop2');
-        $this->assertNotNull($prop2->getEtag(), '$prop2->getEtag()');
+        $this->assertNotNull($prop2->getETag(), '$prop2->getETag()');
         $this->assertNotNull($prop2->getLastModified(), '$prop2->getLastModified()');
         $this->assertNotNull($prop2->getMetadata(), '$prop2->getMetadata()');
         $this->assertEquals(2, count($prop2->getMetadata()), 'count($prop2->getMetadata())');
@@ -271,7 +271,7 @@ class BlobServiceIntegrationTest extends IntegrationTestBase
 
         // Assert
         $this->assertNotNull($prop, '$prop');
-        $this->assertNotNull($prop->getEtag(), '$prop->getEtag()');
+        $this->assertNotNull($prop->getETag(), '$prop->getETag()');
         $this->assertNotNull($prop->getLastModified(), '$prop->getLastModified()');
         $this->assertNotNull($prop->getMetadata(), '$prop->getMetadata()');
         $this->assertEquals(2, count($prop->getMetadata()), 'count($prop->getMetadata())');
@@ -311,7 +311,7 @@ class BlobServiceIntegrationTest extends IntegrationTestBase
 
         // Assert
         $this->assertNotNull($acl2, '$acl2');
-        $this->assertNotNull($res->getEtag(), '$res->getEtag()');
+        $this->assertNotNull($res->getETag(), '$res->getETag()');
         $this->assertNotNull($res->getLastModified(), '$res->getLastModified()');
         $this->assertNotNull($acl2->getPublicAccess(), '$acl2->getPublicAccess()');
         $this->assertEquals(PublicAccessType::BLOBS_ONLY, $acl2->getPublicAccess(), '$acl2->getPublicAccess()');
@@ -347,7 +347,7 @@ class BlobServiceIntegrationTest extends IntegrationTestBase
         $this->assertNotNull($container0->getName(), '$container0->getName()');
         $this->assertNotNull($container0->getMetadata(), '$container0->getMetadata()');
         $this->assertNotNull($container0->getProperties(), '$container0->getProperties()');
-        $this->assertNotNull($container0->getProperties()->getEtag(), '$container0->getProperties()->getEtag()');
+        $this->assertNotNull($container0->getProperties()->getETag(), '$container0->getProperties()->getETag()');
         $this->assertNotNull($container0->getProperties()->getLastModified(), '$container0->getProperties()->getLastModified()');
         $this->assertNotNull($container0->getUrl(), '$container0->getUrl()');
     }
@@ -659,7 +659,7 @@ class BlobServiceIntegrationTest extends IntegrationTestBase
         $this->assertEquals('en-us', $props->getContentLanguage(), '$props->getContentLanguage()');
         $this->assertEquals('text/plain', $props->getContentType(), '$props->getContentType()');
         $this->assertEquals(512, $props->getContentLength(), '$props->getContentLength()');
-        $this->assertNotNull($props->getEtag(), '$props->getEtag()');
+        $this->assertNotNull($props->getETag(), '$props->getETag()');
         $this->assertNull($props->getContentMD5(), '$props->getContentMD5()');
         $this->assertNotNull($props->getLastModified(), '$props->getLastModified()');
         $this->assertEquals('PageBlob', $props->getBlobType(), '$props->getBlobType()');
@@ -684,7 +684,7 @@ class BlobServiceIntegrationTest extends IntegrationTestBase
         $this->assertNotNull($result, '$result');
         $this->assertNull($result->getContentMD5(), '$result->getContentMD5()');
         $this->assertNotNull($result->getLastModified(), '$result->getLastModified()');
-        $this->assertNotNull($result->getEtag(), '$result->getEtag()');
+        $this->assertNotNull($result->getETag(), '$result->getETag()');
         $this->assertEquals(0, $result->getSequenceNumber(), '$result->getSequenceNumber()');
     }
 
@@ -706,7 +706,7 @@ class BlobServiceIntegrationTest extends IntegrationTestBase
         $this->assertNotNull($result, '$result');
         $this->assertNotNull($result->getContentMD5(), '$result->getContentMD5()');
         $this->assertNotNull($result->getLastModified(), '$result->getLastModified()');
-        $this->assertNotNull($result->getEtag(), '$result->getEtag()');
+        $this->assertNotNull($result->getETag(), '$result->getETag()');
         $this->assertEquals(0, $result->getSequenceNumber(), '$result->getSequenceNumber()');
     }
 
@@ -734,7 +734,7 @@ class BlobServiceIntegrationTest extends IntegrationTestBase
         // Assert
         $this->assertNotNull($result, '$result');
         $this->assertNotNull($result->getLastModified(), '$result->getLastModified()');
-        $this->assertNotNull($result->getEtag(), '$result->getEtag()');
+        $this->assertNotNull($result->getETag(), '$result->getETag()');
         $this->assertEquals(16384 + 512, $result->getContentLength(), '$result->getContentLength()');
         $this->assertNotNull($result->getPageRanges(), '$result->getPageRanges()');
         $this->assertEquals(4, count($result->getPageRanges()), 'count($result->getPageRanges())');
@@ -766,7 +766,7 @@ class BlobServiceIntegrationTest extends IntegrationTestBase
         // Assert
         $this->assertNotNull($result, '$result');
         $this->assertNotNull($result->getLastModified(), '$result->getLastModified()');
-        $this->assertNotNull($result->getEtag(), '$result->getEtag()');
+        $this->assertNotNull($result->getETag(), '$result->getETag()');
         $this->assertEquals(512, $result->getContentLength(), '$result->getContentLength()');
         $this->assertNotNull($result->getCommittedBlocks(), '$result->getCommittedBlocks()');
         $this->assertEquals(0, count($result->getCommittedBlocks()), 'count($result->getCommittedBlocks())');
@@ -797,7 +797,7 @@ class BlobServiceIntegrationTest extends IntegrationTestBase
         // Assert
         $this->assertNotNull($result, '$result');
         $this->assertNotNull($result->getLastModified(), '$result->getLastModified()');
-        $this->assertNotNull($result->getEtag(), '$result->getEtag()');
+        $this->assertNotNull($result->getETag(), '$result->getETag()');
         $this->assertEquals(0, $result->getContentLength(), '$result->getContentLength()');
         $this->assertNotNull($result->getCommittedBlocks(), '$result->getCommittedBlocks()');
         $this->assertEquals(0, count($result->getCommittedBlocks()), 'count($result->getCommittedBlocks())');
@@ -889,7 +889,7 @@ class BlobServiceIntegrationTest extends IntegrationTestBase
         // Assert
         $this->assertNotNull($result, '$result');
         $this->assertNotNull($result->getLastModified(), '$result->getLastModified()');
-        $this->assertNotNull($result->getEtag(), '$result->getEtag()');
+        $this->assertNotNull($result->getETag(), '$result->getETag()');
         $this->assertEquals(256 + 195, $result->getContentLength(), '$result->getContentLength()');
 
         $this->assertNotNull($result->getCommittedBlocks(), '$result->getCommittedBlocks()');
@@ -942,7 +942,7 @@ class BlobServiceIntegrationTest extends IntegrationTestBase
         // Assert
         $this->assertNotNull($result, '$result');
         $this->assertNotNull($result->getLastModified(), '$result->getLastModified()');
-        $this->assertNotNull($result->getEtag(), '$result->getEtag()');
+        $this->assertNotNull($result->getETag(), '$result->getETag()');
         $this->assertEquals(256 + 195, $result->getContentLength(), '$result->getContentLength()');
 
         $this->assertNotNull($result->getCommittedBlocks(), '$result->getCommittedBlocks()');
@@ -1023,7 +1023,7 @@ class BlobServiceIntegrationTest extends IntegrationTestBase
         $this->assertEquals('en-us', $props->getContentLanguage(), '$props->getContentLanguage()');
         $this->assertEquals('text/plain', $props->getContentType(), '$props->getContentType()');
         $this->assertEquals(strlen($content), $props->getContentLength(), '$props->getContentLength()');
-        $this->assertNotNull($props->getEtag(), '$props->getEtag()');
+        $this->assertNotNull($props->getETag(), '$props->getETag()');
         $this->assertNull($props->getContentMD5(), '$props->getContentMD5()');
         $this->assertNotNull($props->getLastModified(), '$props->getLastModified()');
         $this->assertEquals('BlockBlob', $props->getBlobType(), '$props->getBlobType()');
@@ -1045,7 +1045,7 @@ class BlobServiceIntegrationTest extends IntegrationTestBase
 
         // Assert
         $this->assertNotNull($snapshot, '$snapshot');
-        $this->assertNotNull($snapshot->getEtag(), '$snapshot->getEtag()');
+        $this->assertNotNull($snapshot->getETag(), '$snapshot->getETag()');
         $this->assertNotNull($snapshot->getLastModified(), '$snapshot->getLastModified()');
         $this->assertNotNull($snapshot->getSnapshot(), '$snapshot->getSnapshot()');
     }
@@ -1074,7 +1074,7 @@ class BlobServiceIntegrationTest extends IntegrationTestBase
 
         // Assert
         $this->assertNotNull($result, '$result');
-        $this->assertEquals($snapshot->getEtag(), $result->getProperties()->getEtag(), '$result->getProperties()->getEtag()');
+        $this->assertEquals($snapshot->getETag(), $result->getProperties()->getETag(), '$result->getProperties()->getETag()');
         $this->assertEquals($snapshot->getLastModified(), $result->getProperties()->getLastModified(), '$result->getProperties()->getLastModified()');
         // The capitalizaion gets changed.
         $this->assertTrue(Utilities::arrayKeyExistsIgnoreCase('test', $result->getMetadata()), 'Utilities::arrayKeyExistsIgnoreCase(\'test\', $result->getMetadata())');
@@ -1118,7 +1118,7 @@ class BlobServiceIntegrationTest extends IntegrationTestBase
         $this->assertEquals('en-us', $props->getContentLanguage(), '$props->getContentLanguage()');
         $this->assertEquals('text/plain', $props->getContentType(), '$props->getContentType()');
         $this->assertEquals(strlen($content), $props->getContentLength(), '$props->getContentLength()');
-        $this->assertNotNull($props->getEtag(), '$props->getEtag()');
+        $this->assertNotNull($props->getETag(), '$props->getETag()');
         $this->assertNull($props->getContentMD5(), '$props->getContentMD5()');
         $this->assertNotNull($props->getLastModified(), '$props->getLastModified()');
         $this->assertEquals('BlockBlob', $props->getBlobType(), '$props->getBlobType()');
@@ -1160,7 +1160,7 @@ class BlobServiceIntegrationTest extends IntegrationTestBase
         $this->assertEquals('en-us', $props->getContentLanguage(), '$props->getContentLanguage()');
         $this->assertEquals('text/plain', $props->getContentType(), '$props->getContentType()');
         $this->assertEquals(4096, $props->getContentLength(), '$props->getContentLength()');
-        $this->assertNotNull($props->getEtag(), '$props->getEtag()');
+        $this->assertNotNull($props->getETag(), '$props->getETag()');
         $this->assertNull($props->getContentMD5(), '$props->getContentMD5()');
         $this->assertNotNull($props->getLastModified(), '$props->getLastModified()');
         $this->assertEquals('PageBlob', $props->getBlobType(), '$props->getBlobType()');
@@ -1199,7 +1199,7 @@ class BlobServiceIntegrationTest extends IntegrationTestBase
         $props = $this->restProxy->getBlobProperties(self::$_test_container_for_blobs, 'test');
         try {
             $opts = new GetBlobOptions();
-            $opts->setAccessCondition(AccessCondition::ifNoneMatch($props->getProperties()->getEtag()));
+            $opts->setAccessCondition(AccessCondition::ifNoneMatch($props->getProperties()->getETag()));
             $this->restProxy->getBlob(self::$_test_container_for_blobs, 'test', $opts);
             $this->fail('getBlob should throw an exception');
         } catch (ServiceException $e) {
@@ -1306,7 +1306,7 @@ class BlobServiceIntegrationTest extends IntegrationTestBase
         $this->assertNull($props->getContentLanguage(), '$props->getContentLanguage()');
         $this->assertEquals('application/octet-stream', $props->getContentType(), '$props->getContentType()');
         $this->assertEquals(4096, $props->getContentLength(), '$props->getContentLength()');
-        $this->assertNotNull($props->getEtag(), '$props->getEtag()');
+        $this->assertNotNull($props->getETag(), '$props->getETag()');
         $this->assertNull($props->getContentMD5(), '$props->getContentMD5()');
         $this->assertNotNull($props->getLastModified(), '$props->getLastModified()');
         $this->assertEquals('PageBlob', $props->getBlobType(), '$props->getBlobType()');
@@ -1333,7 +1333,7 @@ class BlobServiceIntegrationTest extends IntegrationTestBase
 
         // Assert
         $this->assertNotNull($props, '$props');
-        $this->assertNotNull($props->getEtag(), '$props->getEtag()');
+        $this->assertNotNull($props->getETag(), '$props->getETag()');
         $this->assertNotNull($props->getMetadata(), '$props->getMetadata()');
         $this->assertEquals(2, count($props->getMetadata()), 'count($props->getMetadata())');
         $this->assertTrue(Utilities::arrayKeyExistsIgnoreCase('test', $props->getMetadata()), 'Utilities::arrayKeyExistsIgnoreCase(\'test\', $props->getMetadata())');
@@ -1368,7 +1368,7 @@ class BlobServiceIntegrationTest extends IntegrationTestBase
 
         // Assert
         $this->assertNotNull($result, '$result');
-        $this->assertNotNull($result->getEtag(), '$result->getEtag()');
+        $this->assertNotNull($result->getETag(), '$result->getETag()');
         $this->assertNotNull($result->getLastModified(), '$result->getLastModified()');
         $this->assertNotNull($result->getSequenceNumber(), '$result->getSequenceNumber()');
         $this->assertEquals(1, $result->getSequenceNumber(), '$result->getSequenceNumber()');
@@ -1412,7 +1412,7 @@ class BlobServiceIntegrationTest extends IntegrationTestBase
 
         // Assert
         $this->assertNotNull($result, '$result');
-        $this->assertNotNull($result->getEtag(), '$result->getEtag()');
+        $this->assertNotNull($result->getETag(), '$result->getETag()');
         $this->assertNotNull($result->getLastModified(), '$result->getLastModified()');
 
         $this->assertNotNull($props, '$props');
@@ -1463,7 +1463,7 @@ class BlobServiceIntegrationTest extends IntegrationTestBase
         $props = $result->getProperties();
         $this->assertNotNull($props, '$props');
         $this->assertEquals(strlen($content), $props->getContentLength(), '$props->getContentLength()');
-        $this->assertNotNull($props->getEtag(), '$props->getEtag()');
+        $this->assertNotNull($props->getETag(), '$props->getETag()');
         $this->assertNull($props->getContentMD5(), '$props->getContentMD5()');
         $this->assertNotNull($props->getLastModified(), '$props->getLastModified()');
         $this->assertEquals('BlockBlob', $props->getBlobType(), '$props->getBlobType()');
