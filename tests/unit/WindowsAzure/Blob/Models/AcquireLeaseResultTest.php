@@ -72,4 +72,4 @@ class AcquireLeaseResultTest extends \PHPUnit_Framework_TestCase
     }
 }
 
-?>
+

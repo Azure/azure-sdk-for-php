@@ -92,4 +92,4 @@ interface IAtomReaderWriter
     public function parseEntities($body);
 }
 
-?>
+

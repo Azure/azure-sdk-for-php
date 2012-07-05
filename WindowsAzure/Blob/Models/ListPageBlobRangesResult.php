@@ -92,7 +92,7 @@ class ListPageBlobRangesResult
         }
         
         $result->setContentLength($blobLength);
-        $result->setEtag($headers[Resources::ETAG]);
+        $result->setETag($headers[Resources::ETAG]);
         $result->setLastModified($date);
         
         return $result;
@@ -126,7 +126,7 @@ class ListPageBlobRangesResult
      *
      * @return string.
      */
-    public function getEtag()
+    public function getETag()
     {
         return $this->_etag;
     }
@@ -138,7 +138,7 @@ class ListPageBlobRangesResult
      *
      * @return none.
      */
-    public function setEtag($etag)
+    public function setETag($etag)
     {
         Validate::isString($etag, 'etag');
         $this->_etag = $etag;
@@ -193,4 +193,4 @@ class ListPageBlobRangesResult
     }
 }
 
-?>
+

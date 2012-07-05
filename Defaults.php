@@ -70,4 +70,3 @@ $include = array(
 	'WindowsAzure/'
 );
 
-?>

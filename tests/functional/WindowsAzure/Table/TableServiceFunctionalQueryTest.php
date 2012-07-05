@@ -668,4 +668,4 @@ class TableServiceFunctionalQueryTest extends FunctionalTestBase
     }
 }
 
-?>
+

@@ -65,4 +65,4 @@ class RestProxyTestBase extends \PHPUnit_Framework_TestCase
     }
 }
 
-?>
+

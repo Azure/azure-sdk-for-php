@@ -41,4 +41,4 @@ class BlobType
     const PAGE_BLOB  = 'PageBlob';
 }
 
-?>
+

@@ -91,4 +91,4 @@ class SetBlobMetadataOptionsTest extends \PHPUnit_Framework_TestCase
     }
 }
 
-?>
+

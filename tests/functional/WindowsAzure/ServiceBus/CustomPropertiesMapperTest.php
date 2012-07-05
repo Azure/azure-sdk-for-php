@@ -97,4 +97,4 @@ class CustomPropertiesMapperTest extends ServiceBusRestProxyTestBase
     }
 }
 
-?>
+

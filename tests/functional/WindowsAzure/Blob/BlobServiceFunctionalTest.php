@@ -615,7 +615,7 @@ class BlobServiceFunctionalTest extends FunctionalTestBase
     private function verifyGetContainerMetadataWorker($ret, $metadata)
     {
         $this->assertNotNull($ret->getMetadata(), 'container Metadata');
-        $this->assertNotNull($ret->getEtag(), 'container getEtag');
+        $this->assertNotNull($ret->getETag(), 'container getETag');
         $this->assertNotNull($ret->getLastModified(), 'container getLastModified');
 
         $this->assertEquals(count($metadata), count($ret->getMetadata()), 'Metadata');
@@ -870,7 +870,7 @@ class BlobServiceFunctionalTest extends FunctionalTestBase
     private function verifyGetContainerACLWorker($ret)
     {
         $this->assertNotNull($ret->getContainerACL(), '$ret->getContainerACL');
-        $this->assertNotNull($ret->getEtag(), '$ret->getEtag');
+        $this->assertNotNull($ret->getETag(), '$ret->getETag');
         $this->assertNotNull($ret->getLastModified(), '$ret->getLastModified');
         $this->assertNull($ret->getContainerACL()->getPublicAccess(), '$ret->getContainerACL->getPublicAccess');
         $this->assertNotNull($ret->getContainerACL()->getSignedIdentifiers(), '$ret->getContainerACL->getSignedIdentifiers');
@@ -969,7 +969,7 @@ class BlobServiceFunctionalTest extends FunctionalTestBase
     private function verifySetContainerACLWorker($ret, $container, $acl, $blobContent)
     {
         $this->assertNotNull($ret->getContainerACL(), '$ret->getContainerACL');
-        $this->assertNotNull($ret->getEtag(), '$ret->getContainerACL->getEtag');
+        $this->assertNotNull($ret->getETag(), '$ret->getContainerACL->getETag');
         $now = new \DateTime();
         $this->assertTrue(BlobServiceFunctionalTestData::diffInTotalSeconds(
                 $ret->getLastModified(),
@@ -1251,7 +1251,7 @@ class BlobServiceFunctionalTest extends FunctionalTestBase
         $this->restProxy->setBlobMetadata($container, $blob, $properties);
 
         if (!is_null($options)) {
-            BlobServiceFunctionalTestData::fixEtagAccessCondition($options->getAccessCondition(), $createBlockBlobResult->getETag());
+            BlobServiceFunctionalTestData::fixETagAccessCondition($options->getAccessCondition(), $createBlockBlobResult->getETag());
         }
 
         try {
@@ -1267,7 +1267,7 @@ class BlobServiceFunctionalTest extends FunctionalTestBase
             if (!BlobServiceFunctionalTestData::passTemporalAccessCondition($options->getAccessCondition())) {
                 $this->assertTrue(false, 'Failing temporal access condition should throw');
             }
-            if (!BlobServiceFunctionalTestData::passEtagAccessCondition($options->getAccessCondition())) {
+            if (!BlobServiceFunctionalTestData::passETagAccessCondition($options->getAccessCondition())) {
                 $this->assertTrue(false, 'Failing etag access condition should throw');
             }
 
@@ -1277,7 +1277,7 @@ class BlobServiceFunctionalTest extends FunctionalTestBase
                 $this->assertEquals(TestResources::STATUS_INTERNAL_SERVER_ERROR, $e->getCode(), 'bad timeout: getCode');
             } else if (!BlobServiceFunctionalTestData::passTemporalAccessCondition($options->getAccessCondition())) {
                 $this->assertEquals(TestResources::STATUS_PRECONDITION_FAILED, $e->getCode(), 'bad temporal access condition: getCode');
-            } else if (!BlobServiceFunctionalTestData::passEtagAccessCondition($options->getAccessCondition())) {
+            } else if (!BlobServiceFunctionalTestData::passETagAccessCondition($options->getAccessCondition())) {
                 $this->assertEquals(TestResources::STATUS_PRECONDITION_FAILED, $e->getCode(), 'bad etag access condition: getCode');
             } else {
                 throw $e;
@@ -1291,7 +1291,7 @@ class BlobServiceFunctionalTest extends FunctionalTestBase
     private function verifyGetBlobMetadataWorker($res, $metadata)
     {
         $this->assertNotNull($res->getMetadata(), 'blob Metadata');
-        $this->assertNotNull($res->getEtag(), 'blob getEtag');
+        $this->assertNotNull($res->getETag(), 'blob getETag');
         $this->assertNotNull($res->getLastModified(), 'blob getLastModified');
 
         $this->assertEquals(count($metadata), count($res->getMetadata()), 'Metadata');
@@ -1391,7 +1391,7 @@ class BlobServiceFunctionalTest extends FunctionalTestBase
         // Make sure there is something to test
         $createBlockBlobResult = $this->restProxy->createBlockBlob($container, $blob, "");
         if (!is_null($options)) {
-            BlobServiceFunctionalTestData::fixEtagAccessCondition($options->getAccessCondition(), $createBlockBlobResult->getEtag());
+            BlobServiceFunctionalTestData::fixETagAccessCondition($options->getAccessCondition(), $createBlockBlobResult->getETag());
         }
 
         $firstkey = '';
@@ -1435,7 +1435,7 @@ class BlobServiceFunctionalTest extends FunctionalTestBase
                 $this->assertEquals(TestResources::STATUS_INTERNAL_SERVER_ERROR, $e->getCode(), 'bad timeout: getCode');
             } else if (!BlobServiceFunctionalTestData::passTemporalAccessCondition($options->getAccessCondition())) {
                 $this->assertEquals(TestResources::STATUS_PRECONDITION_FAILED, $e->getCode(), 'bad temporal access condition: getCode');
-            } else if (!BlobServiceFunctionalTestData::passEtagAccessCondition($options->getAccessCondition())) {
+            } else if (!BlobServiceFunctionalTestData::passETagAccessCondition($options->getAccessCondition())) {
                 $this->assertEquals(TestResources::STATUS_PRECONDITION_FAILED, $e->getCode(), 'bad etag access condition: getCode');
             } else {
                 throw $e;
@@ -1448,7 +1448,7 @@ class BlobServiceFunctionalTest extends FunctionalTestBase
 
     private function verifySetBlobMetadataWorker($res)
     {
-        $this->assertNotNull($res->getEtag(), 'blob getEtag');
+        $this->assertNotNull($res->getETag(), 'blob getETag');
         $this->assertNotNull($res->getLastModified(), 'blob getLastModified');
 
         // Make sure the last modified date is within 10 seconds
@@ -1530,7 +1530,7 @@ class BlobServiceFunctionalTest extends FunctionalTestBase
         // Do not set the properties, there should be default properties.
 
         if (!is_null($options)) {
-            BlobServiceFunctionalTestData::fixEtagAccessCondition($options->getAccessCondition(), $createPageBlobResult->getEtag());
+            BlobServiceFunctionalTestData::fixETagAccessCondition($options->getAccessCondition(), $createPageBlobResult->getETag());
         }
 
         try {
@@ -1615,7 +1615,7 @@ class BlobServiceFunctionalTest extends FunctionalTestBase
         }
 
         $this->assertNotNull($res->getProperties(), 'blob Properties');
-        $this->assertNotNull($res->getProperties()->getEtag(), 'blob getProperties->getEtag');
+        $this->assertNotNull($res->getProperties()->getETag(), 'blob getProperties->getETag');
         $this->assertNotNull($res->getProperties()->getLastModified(), 'blob getProperties->getLastModified');
         $this->assertEquals('PageBlob', $res->getProperties()->getBlobType(), 'blob getProperties->getBlobType');
         $this->assertEquals('unlocked', $res->getProperties()->getLeaseStatus(), 'blob getProperties->getLeaseStatus');
@@ -1710,7 +1710,7 @@ class BlobServiceFunctionalTest extends FunctionalTestBase
 
         // Make sure there is something to test
         $createPageBlobResult = $this->restProxy->createPageBlob($container, $blob, 512);
-        BlobServiceFunctionalTestData::fixEtagAccessCondition($properties->getAccessCondition(), $createPageBlobResult->getEtag());
+        BlobServiceFunctionalTestData::fixETagAccessCondition($properties->getAccessCondition(), $createPageBlobResult->getETag());
 
         try {
             // And put in some properties
@@ -1735,7 +1735,7 @@ class BlobServiceFunctionalTest extends FunctionalTestBase
                 $this->assertEquals(TestResources::STATUS_INTERNAL_SERVER_ERROR, $e->getCode(), 'bad timeout: getCode');
             } else if (!BlobServiceFunctionalTestData::passTemporalAccessCondition($properties->getAccessCondition())) {
                 $this->assertEquals(TestResources::STATUS_PRECONDITION_FAILED, $e->getCode(), 'bad temporal access condition: getCode');
-            } else if (!BlobServiceFunctionalTestData::passEtagAccessCondition($properties->getAccessCondition())) {
+            } else if (!BlobServiceFunctionalTestData::passETagAccessCondition($properties->getAccessCondition())) {
                 $this->assertEquals(TestResources::STATUS_PRECONDITION_FAILED, $e->getCode(), 'bad etag access condition: getCode');
             } else {
             }
@@ -1747,7 +1747,7 @@ class BlobServiceFunctionalTest extends FunctionalTestBase
 
     private function verifySetBlobPropertiesWorker($res)
     {
-        $this->assertNotNull($res->getEtag(), 'blob getEtag');
+        $this->assertNotNull($res->getETag(), 'blob getETag');
         $this->assertNotNull($res->getLastModified(), 'blob getLastModified');
         $this->assertNotNull($res->getSequenceNumber(), 'blob getSequenceNumber');
         $this->assertEquals(0, $res->getSequenceNumber(), 'blob getSequenceNumber');
@@ -1832,7 +1832,7 @@ class BlobServiceFunctionalTest extends FunctionalTestBase
         $this->restProxy->createBlobSnapshot($container, $blob);
 
         if (!is_null($options)) {
-            BlobServiceFunctionalTestData::fixEtagAccessCondition($options->getAccessCondition(), $sbmd->getEtag());
+            BlobServiceFunctionalTestData::fixETagAccessCondition($options->getAccessCondition(), $sbmd->getETag());
             $options->setSnapshot(is_null($options->getSnapshot()) ? null : $snapshot->getSnapshot());
         }
 
@@ -1873,7 +1873,7 @@ class BlobServiceFunctionalTest extends FunctionalTestBase
                 } else {
                     $this->assertEquals(TestResources::STATUS_PRECONDITION_FAILED, $e->getCode(), 'bad temporal access condition IF_UNMODIFIED_SINCE: getCode');
                 }
-            } else if (!BlobServiceFunctionalTestData::passEtagAccessCondition($options->getAccessCondition())) {
+            } else if (!BlobServiceFunctionalTestData::passETagAccessCondition($options->getAccessCondition())) {
                 $this->assertEquals(TestResources::STATUS_PRECONDITION_FAILED, $e->getCode(), 'bad etag access condition: getCode');
             } else if ($options->getComputeRangeMD5() && is_null($options->getRangeStart())) {
                 $this->assertEquals(TestResources::STATUS_BAD_REQUEST, $e->getCode(), 'Expect compute range MD5 to fail when range not set: getCode');
@@ -1997,7 +1997,7 @@ class BlobServiceFunctionalTest extends FunctionalTestBase
 
         $blobinfo = $this->restProxy->getBlob($container, $blob);
         if (!is_null($options)) {
-            BlobServiceFunctionalTestData::fixEtagAccessCondition($options->getAccessCondition(), $blobinfo->getProperties()->getEtag());
+            BlobServiceFunctionalTestData::fixETagAccessCondition($options->getAccessCondition(), $blobinfo->getProperties()->getETag());
             $options->setSnapshot(is_null($options->getSnapshot()) ? null : $snapshot->getSnapshot());
         }
 
@@ -2036,7 +2036,7 @@ class BlobServiceFunctionalTest extends FunctionalTestBase
                 $this->assertEquals(TestResources::STATUS_INTERNAL_SERVER_ERROR, $e->getCode(), 'bad timeout: deleteHttpStatusCode');
             } else if (!BlobServiceFunctionalTestData::passTemporalAccessCondition($options->getAccessCondition())) {
                 $this->assertEquals(TestResources::STATUS_PRECONDITION_FAILED, $e->getCode(), 'bad temporal access condition IF_UNMODIFIED_SINCE: deleteHttpStatusCode');
-            } else if (!BlobServiceFunctionalTestData::passEtagAccessCondition($options->getAccessCondition())) {
+            } else if (!BlobServiceFunctionalTestData::passETagAccessCondition($options->getAccessCondition())) {
                 $this->assertEquals(TestResources::STATUS_PRECONDITION_FAILED, $e->getCode(), 'bad etag access condition: deleteHttpStatusCode');
             } else {
                 throw $e;
@@ -2130,7 +2130,7 @@ class BlobServiceFunctionalTest extends FunctionalTestBase
         $this->restProxy->createPageBlob($container, $blob, $dataSize);
         $snapshot1 = $this->restProxy->createBlobSnapshot($container, $blob);
         if (!is_null($options)) {
-            BlobServiceFunctionalTestData::fixEtagAccessCondition($options->getAccessCondition(), $snapshot1->getEtag());
+            BlobServiceFunctionalTestData::fixETagAccessCondition($options->getAccessCondition(), $snapshot1->getETag());
         }
 
         try {
@@ -2166,7 +2166,7 @@ class BlobServiceFunctionalTest extends FunctionalTestBase
                 $this->assertEquals(TestResources::STATUS_INTERNAL_SERVER_ERROR, $e->getCode(), 'bad timeout: deleteHttpStatusCode');
             } else if (!BlobServiceFunctionalTestData::passTemporalAccessCondition($options->getAccessCondition())) {
                 $this->assertEquals(TestResources::STATUS_PRECONDITION_FAILED, $e->getCode(), 'bad temporal access condition IF_UNMODIFIED_SINCE: deleteHttpStatusCode');
-            } else if (!BlobServiceFunctionalTestData::passEtagAccessCondition($options->getAccessCondition())) {
+            } else if (!BlobServiceFunctionalTestData::passETagAccessCondition($options->getAccessCondition())) {
                 $this->assertEquals(TestResources::STATUS_PRECONDITION_FAILED, $e->getCode(), 'bad etag access condition: deleteHttpStatusCode');
             } else {
                 throw $e;
@@ -2181,7 +2181,7 @@ class BlobServiceFunctionalTest extends FunctionalTestBase
     {
         $now = new \DateTime();
 
-        $this->assertNotNull($res->getEtag(), 'result etag');
+        $this->assertNotNull($res->getETag(), 'result etag');
 
         $snapshotDate = new \DateTime($res->getSnapshot());
 
@@ -2287,8 +2287,8 @@ class BlobServiceFunctionalTest extends FunctionalTestBase
         $this->restProxy->setBlobMetadata($sourceContainer, $sourceBlob, $metadata);
         $snapshot = $this->restProxy->createBlobSnapshot($sourceContainer, $sourceBlob);
         if (!is_null($options)) {
-            BlobServiceFunctionalTestData::fixEtagAccessCondition($options->getSourceAccessCondition(), $snapshot->getEtag());
-            BlobServiceFunctionalTestData::fixEtagAccessCondition($options->getAccessCondition(), $destBlobInfo->getProperties()->getEtag());
+            BlobServiceFunctionalTestData::fixETagAccessCondition($options->getSourceAccessCondition(), $snapshot->getETag());
+            BlobServiceFunctionalTestData::fixETagAccessCondition($options->getAccessCondition(), $destBlobInfo->getProperties()->getETag());
             $options->setSourceSnapshot(is_null($options->getSourceSnapshot()) ? null : $snapshot->getSnapshot());
         }
 
@@ -2337,11 +2337,11 @@ class BlobServiceFunctionalTest extends FunctionalTestBase
                 $this->assertEquals(500, $e->getCode(), 'bad timeout: deleteHttpStatusCode');
             } else if (!BlobServiceFunctionalTestData::passTemporalAccessCondition($options->getSourceAccessCondition())) {
                 $this->assertEquals(412, $e->getCode(), 'bad source temporal access condition IF_UNMODIFIED_SINCE: deleteHttpStatusCode');
-            } else if (!BlobServiceFunctionalTestData::passEtagAccessCondition($options->getSourceAccessCondition())) {
+            } else if (!BlobServiceFunctionalTestData::passETagAccessCondition($options->getSourceAccessCondition())) {
                 $this->assertEquals(412, $e->getCode(), 'bad source etag access condition: deleteHttpStatusCode');
             } else if (!BlobServiceFunctionalTestData::passTemporalAccessCondition($options->getAccessCondition())) {
                 $this->assertEquals(412, $e->getCode(), 'bad dest temporal access condition IF_UNMODIFIED_SINCE: deleteHttpStatusCode');
-            } else if (!BlobServiceFunctionalTestData::passEtagAccessCondition($options->getAccessCondition())) {
+            } else if (!BlobServiceFunctionalTestData::passETagAccessCondition($options->getAccessCondition())) {
                 $this->assertEquals(412, $e->getCode(), 'bad dest etag access condition: deleteHttpStatusCode');
             } else {
                 throw $e;
@@ -2390,4 +2390,4 @@ class BlobServiceFunctionalTest extends FunctionalTestBase
     //    breakLease
 
 }
-?>
+

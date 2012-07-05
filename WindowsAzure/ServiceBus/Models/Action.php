@@ -105,4 +105,4 @@ class Action
         $this->attributes[$key] = $value;
     }
 }
-?>
+

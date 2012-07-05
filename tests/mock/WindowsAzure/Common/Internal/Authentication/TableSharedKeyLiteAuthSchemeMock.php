@@ -48,4 +48,4 @@ class TableSharedKeyLiteAuthSchemeMock extends TableSharedKeyLiteAuthScheme
   }
 }
 
-?>
+

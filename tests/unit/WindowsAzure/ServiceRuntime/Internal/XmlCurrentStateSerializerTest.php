@@ -140,4 +140,3 @@ class XmlCurrentStateSerializerTest extends \PHPUnit_Framework_TestCase
     }
 }
 
-?>

@@ -321,4 +321,4 @@ class WindowsAzureQueueMessageTest extends \PHPUnit_Framework_TestCase
     }
 }
 
-?>
+

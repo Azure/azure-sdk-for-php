@@ -124,4 +124,4 @@ class BrokerPropertiesMapperTest extends ServiceBusRestProxyTestBase
         $this->assertNull($properties->getScheduledEnqueueTimeUtc(), '$properties->getScheduledEnqueueTimeUtc()');
     }
 }
-?>
+

@@ -264,4 +264,4 @@ class LoggingTest extends \PHPUnit_Framework_TestCase
     }
 }
 
-?>
+

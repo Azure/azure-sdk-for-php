@@ -108,4 +108,4 @@ class GetStorageServicePropertiesResultTest extends \PHPUnit_Framework_TestCase
     }
 }
 
-?>
+

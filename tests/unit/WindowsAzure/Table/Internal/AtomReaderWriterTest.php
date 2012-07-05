@@ -222,9 +222,9 @@ class AtomReaderWriterTest extends \PHPUnit_Framework_TestCase
         $e1 = TestResources::getTestEntity($pk1, '1');
         $e2 = TestResources::getTestEntity($pk2, '2');
         $e3 = TestResources::getTestEntity($pk3, '3');
-        $e1->setEtag('W/"datetime\'2012-05-17T00%3A59%3A32.1131734Z\'"');
-        $e2->setEtag('W/"datetime\'2012-05-17T00%3A59%3A32.4252358Z\'"');
-        $e3->setEtag('W/"datetime\'2012-05-17T00%3A59%3A32.7533014Z\'"');
+        $e1->setETag('W/"datetime\'2012-05-17T00%3A59%3A32.1131734Z\'"');
+        $e2->setETag('W/"datetime\'2012-05-17T00%3A59%3A32.4252358Z\'"');
+        $e3->setETag('W/"datetime\'2012-05-17T00%3A59%3A32.7533014Z\'"');
         $e1->setTimestamp(Utilities::convertToDateTime('2012-05-17T00:59:32.0000473Z'));
         $e2->setTimestamp(Utilities::convertToDateTime('2012-05-17T00:59:32.0000473Z'));
         $e3->setTimestamp(Utilities::convertToDateTime('2012-05-17T00:59:32.0000473Z'));
@@ -309,4 +309,4 @@ class AtomReaderWriterTest extends \PHPUnit_Framework_TestCase
     }
 }
 
-?>
+

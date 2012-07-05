@@ -48,4 +48,3 @@ class ReleaseCurrentState extends CurrentState
     }
 }
 
-?>

@@ -130,4 +130,4 @@ class GetOperationStatusResultTest extends \PHPUnit_Framework_TestCase
     }
 }
 
-?>
+
