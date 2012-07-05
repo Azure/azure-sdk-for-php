@@ -26,6 +26,7 @@ namespace Tests\Functional\WindowsAzure\Blob;
 
 use Tests\Framework\TestResources;
 use WindowsAzure\Blob\Models\BlobServiceOptions;
+use WindowsAzure\Blob\Models\CopyBlobOptions;
 use WindowsAzure\Blob\Models\CreateBlobSnapshotOptions;
 use WindowsAzure\Blob\Models\CreateContainerOptions;
 use WindowsAzure\Blob\Models\DeleteBlobOptions;
@@ -2208,7 +2209,170 @@ class BlobServiceFunctionalTest extends FunctionalTestBase
         }
     }
 
-    //    copyBlob
+
+    /**
+     * @covers WindowsAzure\Blob\BlobRestProxy::copyBlob
+     * @covers WindowsAzure\Blob\BlobRestProxy::createBlobSnapshot
+     * @covers WindowsAzure\Blob\BlobRestProxy::createPageBlob
+     * @covers WindowsAzure\Blob\BlobRestProxy::deleteBlob
+     * @covers WindowsAzure\Blob\BlobRestProxy::getBlob
+     * @covers WindowsAzure\Blob\BlobRestProxy::listBlobs
+     * @covers WindowsAzure\Blob\BlobRestProxy::setBlobMetadata
+     */
+    public function testCopyBlobNoOptions()
+    {
+
+        $sourceContainers = array(
+            BlobServiceFunctionalTestData::$testContainerNames[0],
+            '$root',
+            '');
+
+        $destContainers = array(
+            BlobServiceFunctionalTestData::$testContainerNames[1],
+            '$root',
+            '');
+
+        foreach($sourceContainers as $sourceContainer)  {
+            foreach($destContainers as $destContainer)  {
+                $this->copyBlobWorker(null, $sourceContainer, $destContainer);
+            }
+        }
+    }
+
+    /**
+     * @covers WindowsAzure\Blob\BlobRestProxy::copyBlob
+     * @covers WindowsAzure\Blob\BlobRestProxy::createBlobSnapshot
+     * @covers WindowsAzure\Blob\BlobRestProxy::createPageBlob
+     * @covers WindowsAzure\Blob\BlobRestProxy::deleteBlob
+     * @covers WindowsAzure\Blob\BlobRestProxy::getBlob
+     * @covers WindowsAzure\Blob\BlobRestProxy::listBlobs
+     * @covers WindowsAzure\Blob\BlobRestProxy::setBlobMetadata
+     */
+    public function testCopyBlobAllOptions()
+    {
+        $sourceContainer = BlobServiceFunctionalTestData::$testContainerNames[0];
+        $destContainer = BlobServiceFunctionalTestData::$testContainerNames[1];
+
+        $interestingCopyBlobOptions = BlobServiceFunctionalTestData::getCopyBlobOptions();
+        foreach($interestingCopyBlobOptions as $options)  {
+            $this->copyBlobWorker($options, $sourceContainer, $destContainer);
+        }
+    }
+
+    /**
+     * @covers WindowsAzure\Blob\BlobRestProxy::copyBlob
+     * @covers WindowsAzure\Blob\BlobRestProxy::createBlobSnapshot
+     * @covers WindowsAzure\Blob\BlobRestProxy::createPageBlob
+     * @covers WindowsAzure\Blob\BlobRestProxy::deleteBlob
+     * @covers WindowsAzure\Blob\BlobRestProxy::getBlob
+     * @covers WindowsAzure\Blob\BlobRestProxy::listBlobs
+     * @covers WindowsAzure\Blob\BlobRestProxy::setBlobMetadata
+     */
+    private function copyBlobWorker($options, $sourceContainer, $destContainer)
+    {
+        $sourceBlob = BlobServiceFunctionalTestData::getInterestingBlobName();
+        $destBlob = BlobServiceFunctionalTestData::getInterestingBlobName();
+
+        // Make sure there is something to test
+        $sourceDataSize = 512;
+        $this->restProxy->createPageBlob($sourceContainer, $sourceBlob, $sourceDataSize);
+
+        // TODO: Just get etag from createBlockBlob https://github->com/WindowsAzure/azure-sdk-for-java/issues/74
+        $destDataSize = 2048;
+        $this->restProxy->createPageBlob($destContainer, $destBlob, $destDataSize);
+        $destBlobInfo = $this->restProxy->getBlob($destContainer, $destBlob);
+        $this->restProxy->createBlobSnapshot($destContainer, $destBlob);
+
+        $metadata = BlobServiceFunctionalTestData::getNiceMetadata();
+        $this->restProxy->setBlobMetadata($sourceContainer, $sourceBlob, $metadata);
+        $snapshot = $this->restProxy->createBlobSnapshot($sourceContainer, $sourceBlob);
+        if (!is_null($options)) {
+            BlobServiceFunctionalTestData::fixEtagAccessCondition($options->getSourceAccessCondition(), $snapshot->getEtag());
+            BlobServiceFunctionalTestData::fixEtagAccessCondition($options->getAccessCondition(), $destBlobInfo->getProperties()->getEtag());
+            $options->setSourceSnapshot(is_null($options->getSourceSnapshot()) ? null : $snapshot->getSnapshot());
+        }
+
+        try {
+            if (is_null($options)) {
+                $this->restProxy->copyBlob($destContainer, $destBlob, $sourceContainer, $sourceBlob);
+            } else {
+                $this->restProxy->copyBlob($destContainer, $destBlob, $sourceContainer, $sourceBlob, $options);
+            }
+
+            if (is_null($options)) {
+                $options = new CopyBlobOptions();
+            }
+
+            if (!is_null($options->getTimeout()) && $options->getTimeout() < 1) {
+                $this->assertTrue(false, 'Expect negative timeouts in $options to throw');
+            }
+            if (!BlobServiceFunctionalTestData::passTemporalAccessCondition($options->getSourceAccessCondition())) {
+                $this->assertTrue(false, 'Expect failing source temporal access condition should throw');
+            }
+            if (!BlobServiceFunctionalTestData::passTemporalAccessCondition($options->getSourceAccessCondition())) {
+                $this->assertTrue(false, 'Expect failing source etag access condition to throw');
+            }
+            if (!BlobServiceFunctionalTestData::passTemporalAccessCondition($options->getAccessCondition())) {
+                $this->assertTrue(false, 'Expect failing dest temporal access condition should throw');
+            }
+            if (!BlobServiceFunctionalTestData::passTemporalAccessCondition($options->getAccessCondition())) {
+                $this->assertTrue(false, 'Expect failing dest etag access condition to throw');
+            }
+
+            $listOptions = new ListBlobsOptions();
+            $listOptions->setIncludeSnapshots(true);
+            $listOptions->setPrefix($destBlob);
+            $listBlobsResult = $this->restProxy->listBlobs($destContainer == '' ? '$root' : $destContainer, $listOptions);
+            $blobs = $listBlobsResult->getBlobs();
+
+            $getBlobResult = $this->restProxy->getBlob($destContainer, $destBlob);
+
+            $this->verifyCopyBlobWorker($options, $blobs, $getBlobResult, $sourceDataSize, $metadata);
+        } catch (ServiceException $e) {
+            if (is_null($options)) {
+                $options = new CopyBlobOptions();
+            }
+
+            if (!is_null($options->getTimeout()) && $options->getTimeout() < 1) {
+                $this->assertEquals(500, $e->getCode(), 'bad timeout: deleteHttpStatusCode');
+            } else if (!BlobServiceFunctionalTestData::passTemporalAccessCondition($options->getSourceAccessCondition())) {
+                $this->assertEquals(412, $e->getCode(), 'bad source temporal access condition IF_UNMODIFIED_SINCE: deleteHttpStatusCode');
+            } else if (!BlobServiceFunctionalTestData::passEtagAccessCondition($options->getSourceAccessCondition())) {
+                $this->assertEquals(412, $e->getCode(), 'bad source etag access condition: deleteHttpStatusCode');
+            } else if (!BlobServiceFunctionalTestData::passTemporalAccessCondition($options->getAccessCondition())) {
+                $this->assertEquals(412, $e->getCode(), 'bad dest temporal access condition IF_UNMODIFIED_SINCE: deleteHttpStatusCode');
+            } else if (!BlobServiceFunctionalTestData::passEtagAccessCondition($options->getAccessCondition())) {
+                $this->assertEquals(412, $e->getCode(), 'bad dest etag access condition: deleteHttpStatusCode');
+            } else {
+                throw $e;
+            }
+        }
+
+        // Clean up.
+        $this->restProxy->deleteBlob($sourceContainer, $sourceBlob);
+        $this->restProxy->deleteBlob($destContainer, $destBlob);
+    }
+
+    private function verifyCopyBlobWorker($options, $blobs, $getBlobResult, $sourceDataSize, $metadata)
+    {
+        $this->assertEquals(2, count($blobs), 'Should end up with 2 blob with same name as dest blob, snapshot and copied blob');
+        $this->assertEquals($sourceDataSize, $getBlobResult->getProperties()->getContentLength(), 'Dest length should be the same as the source length');
+
+        $this->assertNotNull($getBlobResult->getMetadata(), 'blob Metadata');
+        $expectedMetadata = (count($options->getMetadata()) == 0 ? $metadata : $options->getMetadata());
+        $resMetadata = $getBlobResult->getMetadata();
+        $this->assertEquals(count($expectedMetadata), count($resMetadata), 'Metadata');
+        foreach($expectedMetadata as $key => $value)  {
+            $this->assertEquals($value, $resMetadata[strtolower($key)], 'Metadata(' . $key . ')');
+        }
+
+        // Make sure the last modified date is within 10 seconds
+        $now = new \DateTime();
+        $this->assertTrue(
+                BlobServiceFunctionalTestData::diffInTotalSeconds($getBlobResult->getProperties()->getLastModified(), $now) < 10,
+                'Last modified date (' . $getBlobResult->getProperties()->getLastModified()->format(\DateTime::RFC1123) . ')'.
+                ' should be within 10 seconds of $now (' . $now->format(\DateTime::RFC1123) . ')');
+    }
 
     //    createBlockBlob
     //    createBlobBlock
