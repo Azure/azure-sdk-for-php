@@ -54,4 +54,4 @@ class ListSubscriptionsResultTest extends \PHPUnit_Framework_TestCase
 
 }
 
-?>
+

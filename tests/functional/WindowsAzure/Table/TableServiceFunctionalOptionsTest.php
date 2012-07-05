@@ -142,9 +142,9 @@ class TableServiceFunctionalOptionsTest extends \PHPUnit_Framework_TestCase
         $options = new DeleteEntityOptions();
         $etag = 'foo';
 
-        $this->assertNull($options->getEtag(), 'Default DeleteEntityOptions->getEtag');
-        $options->setEtag($etag);
-        $this->assertEquals($etag, $options->getEtag(), 'Set DeleteEntityOptions->getEtag');
+        $this->assertNull($options->getETag(), 'Default DeleteEntityOptions->getETag');
+        $options->setETag($etag);
+        $this->assertEquals($etag, $options->getETag(), 'Set DeleteEntityOptions->getETag');
     }
 
     public function testCheckQueryEntitiesOptions()
@@ -382,7 +382,7 @@ class TableServiceFunctionalOptionsTest extends \PHPUnit_Framework_TestCase
 
         $this->assertNotNull($entity, 'Default Entity');
         $this->assertNull($entity->getProperties(), 'Default Entity->getProperties');
-        $this->assertNull($entity->getEtag(), 'Default Entity->getEtag');
+        $this->assertNull($entity->getETag(), 'Default Entity->getETag');
         $this->assertNull($entity->getPartitionKey(), 'Default Entity->getPartitionKey');
         $this->assertNull($entity->getRowKey(), 'Default Entity->getRowKey');
         $this->assertNull($entity->getTimestamp(), 'Default Entity->getTimestamp');
@@ -390,12 +390,12 @@ class TableServiceFunctionalOptionsTest extends \PHPUnit_Framework_TestCase
         $this->assertNull($entity->getPropertyValue('foo'), 'Default Entity->tryGtPropertyValue(\'foo\')');
 
         // Now set some things.
-        $entity->setEtag($etag);
+        $entity->setETag($etag);
         $entity->setPartitionKey($partitionKey);
         $entity->setRowKey($rowKey);
         $entity->setTimestamp($timestamp);
 
-        $this->assertEquals($etag, $entity->getEtag(), 'Default Entity->getEtag');
+        $this->assertEquals($etag, $entity->getETag(), 'Default Entity->getETag');
         $this->assertEquals($partitionKey, $entity->getPartitionKey(), 'Default Entity->getPartitionKey');
         $this->assertEquals($rowKey, $entity->getRowKey(), 'Default Entity->getRowKey');
         $this->assertEquals($timestamp, $entity->getTimestamp(), 'Default Entity->getTimestamp');
@@ -415,4 +415,4 @@ class TableServiceFunctionalOptionsTest extends \PHPUnit_Framework_TestCase
     }
 }
 
-?>
+

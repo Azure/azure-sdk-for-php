@@ -199,4 +199,4 @@ class Generator extends AtomBase
         $xmlWriter->endElement();
     }
 }
-?>
+

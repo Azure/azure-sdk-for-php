@@ -39,36 +39,36 @@ use WindowsAzure\Blob\Models\GetContainerPropertiesResult;
 class GetContainerPropertiesResultTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @covers WindowsAzure\Blob\Models\GetContainerPropertiesResult::getEtag
+     * @covers WindowsAzure\Blob\Models\GetContainerPropertiesResult::getETag
      */
-    public function testGetEtag()
+    public function testGetETag()
     {
         // Setup
         $properties = new GetContainerPropertiesResult();
         $expected = '0x8CACB9BD7C6B1B2';
-        $properties->setEtag($expected);
+        $properties->setETag($expected);
         
         // Test
-        $actual = $properties->getEtag();
+        $actual = $properties->getETag();
         
         // Assert
         $this->assertEquals($expected, $actual);
     }
     
     /**
-     * @covers WindowsAzure\Blob\Models\GetContainerPropertiesResult::setEtag
+     * @covers WindowsAzure\Blob\Models\GetContainerPropertiesResult::setETag
      */
-    public function testSetEtag()
+    public function testSetETag()
     {
         // Setup
         $properties = new GetContainerPropertiesResult();
         $expected = '0x8CACB9BD7C6B1B2';
         
         // Test
-        $properties->setEtag($expected);
+        $properties->setETag($expected);
         
         // Assert
-        $actual = $properties->getEtag();
+        $actual = $properties->getETag();
         $this->assertEquals($expected, $actual);
     }
     
@@ -140,4 +140,4 @@ class GetContainerPropertiesResultTest extends \PHPUnit_Framework_TestCase
     }
 }
 
-?>
+

@@ -56,4 +56,4 @@ class CreateAffinityGroupOptionsTest extends \PHPUnit_Framework_TestCase
     }
 }
 
-?>
+

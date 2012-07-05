@@ -131,4 +131,4 @@ class Filter
         $this->_compatibilityLevel = $compatibilityLevel;
     }
 }
-?>
+

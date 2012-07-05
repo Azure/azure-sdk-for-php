@@ -44,23 +44,48 @@ class BlobServiceRestProxyTestBase extends ServiceRestProxyTestBase
     
     public function setUp()
     {
+        parent::setUp();
         $blobRestProxy = $this->builder->createBlobService($this->connectionString);
-        parent::setUp($blobRestProxy);
+        parent::setProxy($blobRestProxy);
         $this->_createdContainers = array();
     }
-    
+
     public function createContainer($containerName, $options = null)
     {
         if (is_null($options)) {
             $options = new CreateContainerOptions();
             $options->setPublicAccess('container');
         }
-        
+
         $this->restProxy->createContainer($containerName, $options);
         $this->_createdContainers[] = $containerName;
     }
 
-    public function createContainers($containerList, $containerPrefix = null) {
+    public function createContainerWithRetry($containerName, $options = null, $retryCount = 6)
+    {
+        // Containers cannot be recreated within a minute of them being
+        // deleted; the service will give response of 409:Conflict.
+        // So, if get that error, wait a bit then retry.
+
+        $ok = false;
+        $counter = 0;
+        do {
+            try {
+                $this->createContainer($containerName, $options);
+                $ok = true;
+            } catch (ServiceException $e) {
+                if ($e->getCode() != TestResources::STATUS_CONFLICT ||
+                        $counter > $retryCount) {
+                    throw $e;
+                }
+                sleep(10);
+                $counter++;
+            }
+        } while (!$ok);
+    }
+
+    public function createContainers($containerList, $containerPrefix = null)
+    {
         $containers = $this->listContainers($containerPrefix);
         foreach($containerList as $container) {
             if (array_search($container, $containers) === FALSE) {
@@ -69,12 +94,9 @@ class BlobServiceRestProxyTestBase extends ServiceRestProxyTestBase
                 $listResults = $this->restProxy->listBlobs($container);
                 $blobs = $listResults->getBlobs();
                 foreach($blobs as $blob)  {
-                    try
-                    {
+                    try {
                         $this->restProxy->deleteBlob($container, $blob->getName());
-                    }
-                    catch (\Exception $e)
-                    {
+                    } catch (\Exception $e) {
                         // Ignore exception and continue.
                         error_log($e->getMessage());
                     }
@@ -88,7 +110,8 @@ class BlobServiceRestProxyTestBase extends ServiceRestProxyTestBase
         $this->restProxy->deleteContainer($containerName);
     }
 
-    public function deleteContainers($containerList, $containerPrefix = null) {
+    public function deleteContainers($containerList, $containerPrefix = null)
+    {
         $containers = $this->listContainers($containerPrefix);
         foreach($containerList as $container)  {
             if (!(array_search($container, $containers) === FALSE)) {
@@ -97,7 +120,8 @@ class BlobServiceRestProxyTestBase extends ServiceRestProxyTestBase
         }
     }
 
-    public function listContainers($containerPrefix = null) {
+    public function listContainers($containerPrefix = null)
+    {
         $result = array();
         $opts = new ListContainersOptions();
         if (!is_null($containerPrefix)) {
@@ -115,14 +139,11 @@ class BlobServiceRestProxyTestBase extends ServiceRestProxyTestBase
     protected function tearDown()
     {
         parent::tearDown();
-        
+
         foreach ($this->_createdContainers as $value) {
-            try
-            {
+            try {
                 $this->deleteContainer($value);
-            }
-            catch (\Exception $e)
-            {
+            } catch (\Exception $e) {
                 // Ignore exception and continue, will assume that this container doesn't exist in the sotrage account
                 error_log($e->getMessage());
             }
@@ -130,4 +151,4 @@ class BlobServiceRestProxyTestBase extends ServiceRestProxyTestBase
     }
 }
 
-?>
+

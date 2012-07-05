@@ -25,14 +25,21 @@
 namespace Tests\Functional\WindowsAzure\ServiceBus;
 
 use Tests\Functional\WindowsAzure\ServiceBus\IntegrationTestBase;
+use WindowsAzure\Common\ServiceException;
 use WindowsAzure\Common\Internal\IServiceFilter;
 use WindowsAzure\ServiceBus\Models\BrokeredMessage;
+use WindowsAzure\ServiceBus\Models\CorrelationFilter;
+use WindowsAzure\ServiceBus\Models\EmptyRuleAction;
+use WindowsAzure\ServiceBus\Models\FalseFilter;
 use WindowsAzure\ServiceBus\Models\QueueDescription;
 use WindowsAzure\ServiceBus\Models\QueueInfo;
 use WindowsAzure\ServiceBus\Models\ReceiveMessageOptions;
 use WindowsAzure\ServiceBus\Models\RuleInfo;
+use WindowsAzure\ServiceBus\Models\SqlFilter;
+use WindowsAzure\ServiceBus\Models\SqlRuleAction;
 use WindowsAzure\ServiceBus\Models\SubscriptionInfo;
 use WindowsAzure\ServiceBus\Models\TopicInfo;
+use WindowsAzure\ServiceBus\Models\TrueFilter;
 
 class ServiceBusIntegrationTest extends IntegrationTestBase
 {
@@ -109,6 +116,7 @@ class ServiceBusIntegrationTest extends IntegrationTestBase
             $this->restProxy->createQueue(new QueueInfo('TestDeleteQueueWorks'));
         } catch (ServiceException $e) {
             // Ignore
+            error_log($e->getMessage());
         }
 
         // Act
@@ -648,4 +656,4 @@ class CustomServiceFilter implements IServiceFilter
     }
 }
 
-?>
+

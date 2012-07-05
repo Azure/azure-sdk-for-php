@@ -115,7 +115,7 @@ class Entity
      *
      * @return string
      */
-    public function getEtag()
+    public function getETag()
     {
         return $this->_etag;
     }
@@ -123,11 +123,11 @@ class Entity
     /**
      * Sets entity etag.
      *
-     * @param string $etag The entity Etag value.
+     * @param string $etag The entity ETag value.
      *
      * @return none
      */
-    public function setEtag($etag)
+    public function setETag($etag)
     {
         $this->_etag = $etag;
     }
@@ -293,4 +293,4 @@ class Entity
     }
 }
 
-?>
+

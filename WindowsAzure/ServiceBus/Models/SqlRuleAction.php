@@ -79,4 +79,4 @@ class SqlRuleAction extends Action
     }
 
 }
-?>
+

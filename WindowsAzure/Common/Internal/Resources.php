@@ -343,4 +343,4 @@ class Resources
     // @codingStandardsIgnoreEnd
 }
 
-?>
+

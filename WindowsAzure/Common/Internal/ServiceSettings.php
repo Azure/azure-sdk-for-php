@@ -296,4 +296,4 @@ abstract class ServiceSettings
     public abstract static function createFromConnectionString($connectionString);
 }
 
-?>
+

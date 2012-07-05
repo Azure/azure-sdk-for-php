@@ -47,4 +47,3 @@ interface IRuntimeCurrentStateClient
     public function setCurrentState($state);
 }
 
-?>

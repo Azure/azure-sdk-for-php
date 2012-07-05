@@ -74,7 +74,7 @@ class ContainerProperties
      *
      * @return string.
      */
-    public function getEtag()
+    public function getETag()
     {
         return $this->_etag;
     }
@@ -86,10 +86,10 @@ class ContainerProperties
      * 
      * @return none.
      */
-    public function setEtag($etag)
+    public function setETag($etag)
     {
         $this->_etag = $etag;
     }
 }
 
-?>
+

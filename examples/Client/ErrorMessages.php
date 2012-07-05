@@ -40,4 +40,4 @@ class ErrorMessages
     const INVALID_ENDPOINT = 'The provided endpoint is invalid.';
 }
 
-?>
+

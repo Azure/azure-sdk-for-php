@@ -63,4 +63,3 @@ class RoleEnvironmentTopologyChange implements IRoleEnvironmentChange
     }
 }
 
-?>

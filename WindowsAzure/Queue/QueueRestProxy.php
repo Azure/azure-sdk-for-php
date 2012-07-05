@@ -775,4 +775,4 @@ class QueueRestProxy extends ServiceRestProxy implements IQueue
         return $result;
     }
 }
-?>
+

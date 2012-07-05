@@ -683,4 +683,4 @@ class QueueRestProxyTest extends QueueServiceRestProxyTestBase
     }
 }
 
-?>
+

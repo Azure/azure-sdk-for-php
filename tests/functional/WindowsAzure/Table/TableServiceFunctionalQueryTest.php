@@ -24,6 +24,7 @@
 
 namespace Tests\Functional\WindowsAzure\Table;
 
+use Tests\Framework\TestResources;
 use WindowsAzure\Common\ServiceException;
 use WindowsAzure\Table\Models\BatchOperations;
 use WindowsAzure\Table\Models\EdmType;
@@ -46,6 +47,7 @@ class TableServiceFunctionalQueryTest extends FunctionalTestBase
         $table = TableServiceFunctionalTestData::$testTableNames[0];
         self::$entitiesInTable = self::getEntitiesToQueryOver();
         $baseWithRestProxy = new FunctionalTestBase();
+        $baseWithRestProxy->setUp();
         $parts = array();
         foreach(self::$entitiesInTable as $entity)  {
             if (array_key_exists($entity->getPartitionKey(), $parts) === false) {
@@ -555,9 +557,9 @@ class TableServiceFunctionalQueryTest extends FunctionalTestBase
             // To test that scenario, set NextTable in the $options.
         } catch (ServiceException $e) {
             if (!is_null($options->getQuery()) && !is_null($options->getQuery()->getTop()) && $options->getQuery()->getTop() <= 0) {
-                $this->assertEquals(400, $e->getCode(), 'getCode');
+                $this->assertEquals(TestResources::STATUS_BAD_REQUEST, $e->getCode(), 'getCode');
             } else {
-                $this->assertEquals(500, $e->getCode(), 'getCode');
+                $this->assertEquals(TestResources::STATUS_INTERNAL_SERVER_ERROR, $e->getCode(), 'getCode');
             }
         }
     }
@@ -666,4 +668,4 @@ class TableServiceFunctionalQueryTest extends FunctionalTestBase
     }
 }
 
-?>
+

@@ -93,4 +93,3 @@ class Protocol1RuntimeCurrentStateClient implements IRuntimeCurrentStateClient
     }
 }
 
-?>

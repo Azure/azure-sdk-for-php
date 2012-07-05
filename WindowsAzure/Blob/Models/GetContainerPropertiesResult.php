@@ -82,7 +82,7 @@ class GetContainerPropertiesResult
      *
      * @return string.
      */
-    public function getEtag()
+    public function getETag()
     {
         return $this->_etag;
     }
@@ -94,7 +94,7 @@ class GetContainerPropertiesResult
      * 
      * @return none.
      */
-    public function setEtag($etag)
+    public function setETag($etag)
     {
         $this->_etag = $etag;
     }
@@ -123,4 +123,4 @@ class GetContainerPropertiesResult
     }
 }
 
-?>
+

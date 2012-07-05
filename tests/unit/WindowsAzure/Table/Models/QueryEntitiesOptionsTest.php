@@ -162,4 +162,4 @@ class QueryEntitiesOptionsTest extends \PHPUnit_Framework_TestCase
     }
 }
 
-?>
+

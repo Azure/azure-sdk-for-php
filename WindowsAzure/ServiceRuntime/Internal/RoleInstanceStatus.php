@@ -52,4 +52,3 @@ class RoleInstanceStatus
     const READY = 1;
 }
 
-?>
