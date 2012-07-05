@@ -144,4 +144,4 @@ class GetBlobMetadataResult
     }
 }
 
-?>
+

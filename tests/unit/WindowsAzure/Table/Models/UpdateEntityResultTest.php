@@ -56,4 +56,4 @@ class UpdateEntityResultTest extends \PHPUnit_Framework_TestCase
     }
 }
 
-?>
+

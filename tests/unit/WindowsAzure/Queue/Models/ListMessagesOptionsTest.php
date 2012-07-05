@@ -107,4 +107,4 @@ class ListMessagesOptionsTest extends \PHPUnit_Framework_TestCase
     }
 }
 
-?>
+

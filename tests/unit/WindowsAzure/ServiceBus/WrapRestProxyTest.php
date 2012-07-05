@@ -85,4 +85,4 @@ class WrapRestProxyTest extends \PHPUnit_Framework_TestCase
     
 }
 
-?>
+

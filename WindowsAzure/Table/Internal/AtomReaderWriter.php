@@ -372,4 +372,4 @@ class AtomReaderWriter implements IAtomReaderWriter
     }
 }
 
-?>
+

@@ -54,4 +54,4 @@ class InvalidArgumentTypeException extends \InvalidArgumentException
     }
 }
 
-?>
+

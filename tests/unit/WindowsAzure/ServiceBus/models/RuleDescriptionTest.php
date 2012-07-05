@@ -121,4 +121,4 @@ class RuleDescriptionTest extends \PHPUnit_Framework_TestCase
 
 }
 
-?>
+

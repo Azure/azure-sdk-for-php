@@ -111,4 +111,4 @@ class ListPageBlobRangesResultTest extends \PHPUnit_Framework_TestCase
     }
 }
 
-?>
+

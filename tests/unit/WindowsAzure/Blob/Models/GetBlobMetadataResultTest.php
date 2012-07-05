@@ -140,4 +140,4 @@ class GetBlobMetadataResultTest extends \PHPUnit_Framework_TestCase
     }
 }
 
-?>
+

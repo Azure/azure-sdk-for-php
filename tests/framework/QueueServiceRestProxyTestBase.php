@@ -82,4 +82,4 @@ class QueueServiceRestProxyTestBase extends ServiceRestProxyTestBase
     }
 }
 
-?>
+

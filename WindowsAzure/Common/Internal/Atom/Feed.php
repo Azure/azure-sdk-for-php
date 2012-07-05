@@ -730,4 +730,4 @@ class Feed extends AtomBase
 
     }
 }
-?>
+

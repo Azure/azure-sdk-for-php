@@ -43,4 +43,4 @@ class ParserState
     const EXPECT_SEPARATOR  = 'ExpectSeparator';
 }
 
-?>
+

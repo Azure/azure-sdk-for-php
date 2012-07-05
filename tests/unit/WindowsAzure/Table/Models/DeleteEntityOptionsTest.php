@@ -57,4 +57,4 @@ class DeleteEntityOptionsTest extends \PHPUnit_Framework_TestCase
     }
 }
 
-?>
+

@@ -47,4 +47,3 @@ interface IInputChannel
     public function getInputStream($name);
 }
 
-?>

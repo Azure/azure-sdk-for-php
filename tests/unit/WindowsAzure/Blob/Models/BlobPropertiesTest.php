@@ -283,4 +283,4 @@ class BlobPropertiesTest extends \PHPUnit_Framework_TestCase
     }
 }
 
-?>
+

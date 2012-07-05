@@ -215,4 +215,4 @@ class ServiceBusSettingsTest extends \PHPUnit_Framework_TestCase
     }
 }
 
-?>
+

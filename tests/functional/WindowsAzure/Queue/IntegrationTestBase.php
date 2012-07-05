@@ -48,4 +48,4 @@ class IntegrationTestBase extends QueueServiceRestProxyTestBase
     }
 }
 
-?>
+

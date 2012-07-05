@@ -273,4 +273,4 @@ class EdmType
     // @codingStandardsIgnoreEnd
 }
 
-?>
+

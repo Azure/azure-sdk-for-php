@@ -1320,4 +1320,4 @@ class TableServiceIntegrationTest extends IntegrationTestBase
     }
 }
 
-?>
+

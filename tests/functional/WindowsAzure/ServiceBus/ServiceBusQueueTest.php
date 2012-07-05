@@ -243,4 +243,4 @@ class ServiceBusQueueTest extends ScenarioTestBase
         $this->assertEquals($expectedCount, $messageCount, 'Got fourth message, count should decrement');
     }
 }
-?>
+

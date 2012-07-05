@@ -67,4 +67,4 @@ class DeleteEntityOptions extends TableServiceOptions
     }
 }
 
-?>
+

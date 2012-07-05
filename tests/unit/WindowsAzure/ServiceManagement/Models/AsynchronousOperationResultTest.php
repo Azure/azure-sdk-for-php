@@ -72,4 +72,4 @@ class AsynchronousOperationResultTest extends \PHPUnit_Framework_TestCase
     }
 }
 
-?>
+

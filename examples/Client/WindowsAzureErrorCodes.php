@@ -40,4 +40,4 @@ class WindowsAzureErrorCodes
     const TABLE_ALREADY_EXISTS = '409';
 }
 
-?>
+

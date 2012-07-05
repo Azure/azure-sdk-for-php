@@ -137,4 +137,3 @@ class RuntimeVersionManagerTest extends \PHPUnit_Framework_TestCase
     }
 }
 
-?>

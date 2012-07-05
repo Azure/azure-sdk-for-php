@@ -58,4 +58,3 @@ class CurrentStatus
     const STOPPED = 'Stopped';
 }
 
-?>

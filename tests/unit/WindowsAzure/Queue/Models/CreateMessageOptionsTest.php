@@ -107,4 +107,4 @@ class CreateMessageOptionsTest extends \PHPUnit_Framework_TestCase
     }
 }
 
-?>
+

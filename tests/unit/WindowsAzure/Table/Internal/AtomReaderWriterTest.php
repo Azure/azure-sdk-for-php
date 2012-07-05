@@ -309,4 +309,4 @@ class AtomReaderWriterTest extends \PHPUnit_Framework_TestCase
     }
 }
 
-?>
+

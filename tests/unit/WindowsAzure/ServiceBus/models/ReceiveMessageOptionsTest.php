@@ -97,4 +97,4 @@ class ReceiveMessageOptionsTest extends \PHPUnit_Framework_TestCase
 
 }
 
-?>
+

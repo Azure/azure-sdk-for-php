@@ -57,4 +57,4 @@ class ListAffinityGroupsResultTest extends \PHPUnit_Framework_TestCase
     }
 }
 
-?>
+

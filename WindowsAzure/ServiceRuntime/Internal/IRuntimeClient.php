@@ -39,4 +39,3 @@ interface IRuntimeClient extends IRuntimeCurrentStateClient, IRuntimeGoalStateCl
 {
 }
 
-?>

@@ -222,4 +222,4 @@ class Protocol1RuntimeGoalStateClient implements IRuntimeGoalStateClient
     }
 }
 
-?>
+
