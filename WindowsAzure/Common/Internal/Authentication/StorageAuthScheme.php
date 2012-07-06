@@ -69,35 +69,40 @@ abstract class StorageAuthScheme
      */
     protected function computeCanonicalizedHeaders($headers)
     {
-        $canonicalizedHeaders     = array();
-        $canonicalizedHeaderParts = $headers;
+        $canonicalizedHeaders = array();
+        $normalizedHeaders    = array();
+        $validPrefix          =  Resources::X_MS_HEADER_PREFIX;
 
-        if (is_null($canonicalizedHeaderParts)) {
+        if (is_null($normalizedHeaders)) {
             return $canonicalizedHeaders;
         }
         
-        // Sort the headers lexicographically by header name, in ascending order.
-        // Note that each header may appear only once in the string.
-        ksort($canonicalizedHeaderParts);
-        
-        foreach ($canonicalizedHeaderParts as $header => $value) {
-            // Retrieve all headers for the resource that begin with x-ms-, including
-            // the x-ms-date header.
-            if (Utilities::startsWith($header, Resources::X_MS_HEADER_PREFIX)) {
-                // Convert each HTTP header name to lowercase.
-                $header = strtolower($header);
-                
+        foreach ($headers as $header => $value) {            
+            // Convert header to lower case.
+            $header = strtolower($header);
+            
+            // Retrieve all headers for the resource that begin with x-ms-,
+            // including the x-ms-date header.
+            if (Utilities::startsWith($header, $validPrefix)) {
                 // Unfold the string by replacing any breaking white space 
                 // (meaning what splits the headers, which is \r\n) with a single 
                 // space.
                 $value = str_replace("\r\n", ' ', $value);
                 
                 // Trim any white space around the colon in the header.
-                $header = rtrim($header);
                 $value  = ltrim($value);
+                $header = rtrim($header);
                 
-                $canonicalizedHeaders[] = $header . ':' . $value;
+                $normalizedHeaders[$header] = $value;
             }
+        }
+        
+        // Sort the headers lexicographically by header name, in ascending order.
+        // Note that each header may appear only once in the string.
+        ksort($normalizedHeaders);
+        
+        foreach ($normalizedHeaders as $key => $value) {
+            $canonicalizedHeaders[] = $key . ':' . $value;
         }
 
         return $canonicalizedHeaders;
