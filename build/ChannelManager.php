@@ -453,4 +453,3 @@ class ChannelManager
 
 ChannelManager::main();
 
-?>

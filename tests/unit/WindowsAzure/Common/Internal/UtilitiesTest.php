@@ -450,6 +450,22 @@ class UtilitiesTest extends \PHPUnit_Framework_TestCase
         // Assert
         $this->assertEquals($expected, $actual);
     }
+    
+    /**
+     * @covers WindowsAzure\Common\Internal\Utilities::startsWith
+     */
+    public function testStartsWithIgnoreCase()
+    {
+        // Setup
+        $string = 'MYString';
+        $prefix = 'mY';
+        
+        // Test
+        $actual = Utilities::startsWith($string, $prefix, true);
+        
+        // Assert
+        $this->assertTrue($actual);
+    }
 }
 
-?>
+

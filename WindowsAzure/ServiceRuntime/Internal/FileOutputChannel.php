@@ -59,4 +59,3 @@ class FileOutputChannel implements IOutputChannel
     // @codingStandardsIgnoreEnd
 }
 
-?>

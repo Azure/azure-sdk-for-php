@@ -962,4 +962,3 @@ class RoleEnvironment
 // Initialize static fields
 RoleEnvironment::init();
 
-?>

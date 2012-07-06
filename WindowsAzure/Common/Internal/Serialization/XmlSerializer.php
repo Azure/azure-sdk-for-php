@@ -242,4 +242,4 @@ class XmlSerializer implements ISerializer
     }
 }
 
-?>
+

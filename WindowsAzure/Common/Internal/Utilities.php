@@ -151,15 +151,21 @@ class Utilities
     /**
      * Checks if the passed $string starts with $prefix
      *
-     * @param string $string word to seaech in
-     * @param string $prefix prefix to be matched
+     * @param string  $string     word to seaech in
+     * @param string  $prefix     prefix to be matched
+     * @param boolean $ignoreCase true to ignore case during the comparison; 
+     * otherwise, false
      * 
      * @static
      * 
-     * @return bool
+     * @return boolean
      */
-    public static function startsWith($string, $prefix)
+    public static function startsWith($string, $prefix, $ignoreCase = false)
     {
+        if ($ignoreCase) {
+            $string = strtolower($string);
+            $prefix = strtolower($prefix);
+        }
         return ($prefix == substr($string, 0, strlen($prefix)));
     }
     
@@ -462,4 +468,4 @@ class Utilities
     }
 }
 
-?>
+

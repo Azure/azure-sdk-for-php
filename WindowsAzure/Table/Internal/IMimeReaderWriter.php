@@ -59,4 +59,4 @@ interface IMimeReaderWriter
     public function decodeMimeMultipart($mimeBody);
 }
 
-?>
+

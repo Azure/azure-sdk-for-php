@@ -52,4 +52,3 @@ interface IRuntimeGoalStateClient
     public function getRoleEnvironmentData();
 }
 
-?>

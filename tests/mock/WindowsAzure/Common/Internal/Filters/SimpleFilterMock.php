@@ -61,4 +61,4 @@ class SimpleFilterMock implements \WindowsAzure\Common\Internal\IServiceFilter
     }
 }
 
-?>
+

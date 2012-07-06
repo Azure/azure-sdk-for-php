@@ -24,16 +24,8 @@
 
 namespace Tests\Functional\WindowsAzure\Blob;
 
-use Tests\Framework\FiddlerFilter;
-use Tests\Framework\BlobServiceRestProxyTestBase;
-use Tests\Framework\TestResources;
 use WindowsAzure\Common\ServiceException;
-
-
-use WindowsAzure\Common\Internal\Resources;
-use WindowsAzure\Common\Configuration;
-use WindowsAzure\Blob\BlobService;
-use WindowsAzure\Blob\BlobSettings;
+use WindowsAzure\Common\Internal\StorageServiceSettings;
 
 class FunctionalTestBase extends IntegrationTestBase
 {
@@ -45,7 +37,8 @@ class FunctionalTestBase extends IntegrationTestBase
     public function setUp()
     {
         parent::setUp();
-        $accountName = $this->config->getProperty(BlobSettings::URI);
+        $settings = StorageServiceSettings::createFromConnectionString($this->connectionString);
+        $accountName = $settings->getBlobEndpointUri();
         $firstSlash = strpos($accountName, '/');
         $accountName = substr($accountName, $firstSlash + 2);
         $firstDot = strpos($accountName, '.');
@@ -83,6 +76,7 @@ class FunctionalTestBase extends IntegrationTestBase
     public static function tearDownAfterClass()
     {
         $tmp = new FunctionalTestBase();
+        $tmp->setUp();
         $tmp->safeDeleteContainer('$root');
         parent::tearDownAfterClass();
     }
@@ -128,4 +122,4 @@ class FunctionalTestBase extends IntegrationTestBase
     }
 }
 
-?>
+

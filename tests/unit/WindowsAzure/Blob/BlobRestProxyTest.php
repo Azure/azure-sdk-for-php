@@ -377,7 +377,7 @@ class BlobRestProxyTest extends BlobServiceRestProxyTestBase
         $result = $this->restProxy->getContainerProperties($name);
         
         // Assert
-        $this->assertNotNull($result->getEtag());
+        $this->assertNotNull($result->getETag());
         $this->assertNotNull($result->getLastModified());
         $this->assertCount(0, $result->getMetadata());
     }
@@ -395,14 +395,14 @@ class BlobRestProxyTest extends BlobServiceRestProxyTestBase
         $options->setMetadata($expected);
         $this->createContainer($name, $options);
         $result = $this->restProxy->getContainerProperties($name);
-        $expectedEtag = $result->getEtag();
+        $expectedETag = $result->getETag();
         $expectedLastModified = $result->getLastModified();
         
         // Test
         $result = $this->restProxy->getContainerMetadata($name);
         
         // Assert
-        $this->assertEquals($expectedEtag, $result->getEtag());
+        $this->assertEquals($expectedETag, $result->getETag());
         $this->assertEquals($expectedLastModified, $result->getLastModified());
         $this->assertEquals($expected, $result->getMetadata());
     }
@@ -433,10 +433,10 @@ class BlobRestProxyTest extends BlobServiceRestProxyTestBase
         $name = 'setcontaineracl';
         $this->createContainer($name);
         $sample = TestResources::getContainerAclMultipleEntriesSample();
-        $expectedEtag = '0x8CAFB82EFF70C46';
+        $expectedETag = '0x8CAFB82EFF70C46';
         $expectedLastModified = new \DateTime('Sun, 25 Sep 2011 19:42:18 GMT');
         $expectedPublicAccess = 'container';
-        $acl = ContainerAcl::create($expectedPublicAccess, $expectedEtag, 
+        $acl = ContainerAcl::create($expectedPublicAccess, $expectedETag, 
             $expectedLastModified, $sample['SignedIdentifiers']);
         
         // Test
@@ -463,9 +463,9 @@ class BlobRestProxyTest extends BlobServiceRestProxyTestBase
         
         // Assert
         $result = $this->restProxy->getContainerProperties($name);
-        $expectedEtag = $result->getEtag();
+        $expectedETag = $result->getETag();
         $expectedLastModified = $result->getLastModified();
-        $this->assertEquals($expectedEtag, $result->getEtag());
+        $this->assertEquals($expectedETag, $result->getETag());
         $this->assertEquals($expectedLastModified, $result->getLastModified());
         $this->assertEquals($expected, $result->getMetadata());
     }
@@ -654,7 +654,7 @@ class BlobRestProxyTest extends BlobServiceRestProxyTestBase
         
         // Assert
         $result = $this->restProxy->listBlobs($name);
-        $this->assertNotNull($createResult->getEtag());
+        $this->assertNotNull($createResult->getETag());
         $this->assertInstanceOf('\DateTime', $createResult->getLastModified());
         $this->assertCount(1, $result->getBlobs());
     }
@@ -699,7 +699,7 @@ class BlobRestProxyTest extends BlobServiceRestProxyTestBase
         $result = $this->restProxy->listBlobs($name);
         $blobs = $result->getBlobs();
         $blob = $blobs[0];
-        $this->assertNotNull($createResult->getEtag());
+        $this->assertNotNull($createResult->getETag());
         $this->assertInstanceOf('\DateTime', $createResult->getLastModified());
         $this->assertCount(1, $result->getBlobs());
         $this->assertEquals(Resources::BINARY_FILE_TYPE, $blob->getProperties()->getContentType());
@@ -818,7 +818,7 @@ class BlobRestProxyTest extends BlobServiceRestProxyTestBase
         
         // Assert
         $this->assertInstanceOf('\DateTime', $result->getLastModified());
-        $this->assertTrue(!is_null($result->getEtag()));
+        $this->assertTrue(!is_null($result->getETag()));
     }
     
     /**
@@ -1181,7 +1181,7 @@ class BlobRestProxyTest extends BlobServiceRestProxyTestBase
         $actual = $this->restProxy->createBlobPages($name, $blob, $range, $content);
         
         // Assert
-        $this->assertNotNull($actual->getEtag());
+        $this->assertNotNull($actual->getETag());
     }
     
     /**
@@ -1208,7 +1208,7 @@ class BlobRestProxyTest extends BlobServiceRestProxyTestBase
         $actual = $this->restProxy->clearBlobPages($name, $blob, $range);
         
         // Assert
-        $this->assertNotNull($actual->getEtag());
+        $this->assertNotNull($actual->getETag());
     }
     
     /**
@@ -1234,7 +1234,7 @@ class BlobRestProxyTest extends BlobServiceRestProxyTestBase
         $result = $this->restProxy->listPageBlobRanges($name, $blob);
         
         // Assert
-        $this->assertNotNull($result->getEtag());
+        $this->assertNotNull($result->getETag());
         $this->assertCount(1, $result->getPageRanges());
     }
     
@@ -1255,7 +1255,7 @@ class BlobRestProxyTest extends BlobServiceRestProxyTestBase
         $result = $this->restProxy->listPageBlobRanges($name, $blob);
         
         // Assert
-        $this->assertNotNull($result->getEtag());
+        $this->assertNotNull($result->getETag());
         $this->assertCount(0, $result->getPageRanges());
     }
     
@@ -1357,7 +1357,7 @@ class BlobRestProxyTest extends BlobServiceRestProxyTestBase
        $result = $this->restProxy->listBlobBlocks($name, $blob);
 
        // Assert
-       $this->assertNull($result->getEtag());
+       $this->assertNull($result->getETag());
        $this->assertEquals(0, $result->getContentLength());
        $this->assertCount(2, $result->getUncommittedBlocks());
        $this->assertCount(0, $result->getCommittedBlocks());
@@ -1381,7 +1381,7 @@ class BlobRestProxyTest extends BlobServiceRestProxyTestBase
         $result = $this->restProxy->listBlobBlocks($name, $blob);
         
         // Assert
-        $this->assertNotNull($result->getEtag());
+        $this->assertNotNull($result->getETag());
         $this->assertEquals(strlen($content), $result->getContentLength());
         $this->assertCount(0, $result->getUncommittedBlocks());
         $this->assertCount(0, $result->getCommittedBlocks());
@@ -1419,7 +1419,7 @@ class BlobRestProxyTest extends BlobServiceRestProxyTestBase
         $destinationBlobContent = stream_get_contents($destinationBlob->getContentStream());
         
         $this->assertEquals($sourceBlobContent, $destinationBlobContent);
-        $this->assertNotNull($result->getEtag());
+        $this->assertNotNull($result->getETag());
         $this->assertInstanceOf('\DateTime', $result->getlastModified());
     }
     
@@ -1545,7 +1545,7 @@ class BlobRestProxyTest extends BlobServiceRestProxyTestBase
         $blobsResult = $this->restProxy->listBlobs($containerName, $listOptions);
         $blobs = $blobsResult->getBlobs();
         $actualBlob = $blobs[0];
-        $this->assertNotNull($snapshotResult->getEtag());
+        $this->assertNotNull($snapshotResult->getETag());
         $this->assertNotNull($snapshotResult->getLastModified());
         $this->assertNotNull($snapshotResult->getSnapshot());
         $this->assertEquals($snapshotResult->getSnapshot(), $actualBlob->getSnapshot());

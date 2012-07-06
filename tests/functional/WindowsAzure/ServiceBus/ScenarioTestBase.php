@@ -132,4 +132,3 @@ class ScenarioTestBase extends IntegrationTestBase
         }
     }
 }
-?>

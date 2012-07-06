@@ -51,4 +51,4 @@ class Locations
     const COUNT            = 11;
 }
 
-?>
+

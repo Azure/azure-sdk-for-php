@@ -56,4 +56,3 @@ class ReleaseCurrentStateTest extends \PHPUnit_Framework_TestCase
     }
 }
 
-?>

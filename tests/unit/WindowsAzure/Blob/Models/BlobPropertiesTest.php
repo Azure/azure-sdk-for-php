@@ -54,7 +54,7 @@ class BlobPropertiesTest extends \PHPUnit_Framework_TestCase
         
         // Assert
         $this->assertEquals($expectedDate, $actual->getLastModified());
-        $this->assertEquals($expected['Etag'], $actual->getEtag());
+        $this->assertEquals($expected['Etag'], $actual->getETag());
         $this->assertEquals(intval($expected['Content-Length']), $actual->getContentLength());
         $this->assertEquals($expected['Content-Type'], $actual->getContentType());
         $this->assertEquals($expected['Content-Encoding'], $actual->getContentEncoding());
@@ -85,21 +85,21 @@ class BlobPropertiesTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers WindowsAzure\Blob\Models\BlobProperties::setEtag
-     * @covers WindowsAzure\Blob\Models\BlobProperties::getEtag
+     * @covers WindowsAzure\Blob\Models\BlobProperties::setETag
+     * @covers WindowsAzure\Blob\Models\BlobProperties::getETag
      */
-    public function testSetEtag()
+    public function testSetETag()
     {
         // Setup
         $expected = '0x8CAFB82EFF70C46';
         $properties = new BlobProperties();
-        $properties->setEtag($expected);
+        $properties->setETag($expected);
         
         // Test
-        $properties->setEtag($expected);
+        $properties->setETag($expected);
         
         // Assert
-        $this->assertEquals($expected, $properties->getEtag());
+        $this->assertEquals($expected, $properties->getETag());
     }
     
     /**
@@ -283,4 +283,4 @@ class BlobPropertiesTest extends \PHPUnit_Framework_TestCase
     }
 }
 
-?>
+

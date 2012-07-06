@@ -73,4 +73,4 @@ class UpdateStorageServiceOptionsTest extends \PHPUnit_Framework_TestCase
     }
 }
 
-?>
+

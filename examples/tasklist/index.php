@@ -96,7 +96,7 @@ function listEntries($cloudTable)
     }
 }
 
-?>
+
 
     </table>
     <hr>

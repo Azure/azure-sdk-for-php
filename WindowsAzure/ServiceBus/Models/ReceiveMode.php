@@ -40,4 +40,4 @@ class ReceiveMode
     const PEEK_LOCK          = 1;
 }
 
-?>
+

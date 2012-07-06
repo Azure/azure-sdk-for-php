@@ -103,4 +103,4 @@ class AuthenticationFilterTest extends \PHPUnit_Framework_TestCase
     }
 }
 
-?>
+

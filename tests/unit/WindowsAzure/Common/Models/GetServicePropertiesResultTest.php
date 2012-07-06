@@ -88,4 +88,4 @@ class GetServicePropertiesResultTest extends \PHPUnit_Framework_TestCase
     }
 }
 
-?>
+

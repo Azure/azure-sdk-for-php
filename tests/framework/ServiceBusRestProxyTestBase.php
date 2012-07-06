@@ -49,12 +49,13 @@ class ServiceBusRestProxyTestBase extends ServiceRestProxyTestBase
 
     public function setUp()
     {
+        parent::setUp();
         $serviceBusWrapper = $this->builder->createServiceBusService(TestResources::getServiceBusConnectionString());
         $this->_createdTopics = array();
         $this->_createdSubscriptions = array();
         $this->_createdRules = array();
         $this->_createdQueues = array();
-        parent::setUp($serviceBusWrapper);
+        parent::setProxy($serviceBusWrapper);
     }
     
     public function createQueue($queueInfo)
@@ -160,4 +161,4 @@ class ServiceBusRestProxyTestBase extends ServiceRestProxyTestBase
     }
 }
 
-?>
+

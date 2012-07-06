@@ -76,4 +76,4 @@ class CorrelationFilterTest extends \PHPUnit_Framework_TestCase
 
 }
 
-?>
+

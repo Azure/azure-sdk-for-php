@@ -48,4 +48,4 @@ class SharedKeyAuthSchemeMock extends SharedKeyAuthScheme
   }
 }
 
-?>
+

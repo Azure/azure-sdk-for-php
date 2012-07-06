@@ -39,36 +39,36 @@ use WindowsAzure\Blob\Models\GetBlobMetadataResult;
 class GetBlobMetadataResultTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @covers WindowsAzure\Blob\Models\GetBlobMetadataResult::getEtag
+     * @covers WindowsAzure\Blob\Models\GetBlobMetadataResult::getETag
      */
-    public function testGetEtag()
+    public function testGetETag()
     {
         // Setup
         $getBlobMetadataResult = new GetBlobMetadataResult();
         $expected = '0x8CACB9BD7C6B1B2';
-        $getBlobMetadataResult->setEtag($expected);
+        $getBlobMetadataResult->setETag($expected);
         
         // Test
-        $actual = $getBlobMetadataResult->getEtag();
+        $actual = $getBlobMetadataResult->getETag();
         
         // Assert
         $this->assertEquals($expected, $actual);
     }
     
     /**
-     * @covers WindowsAzure\Blob\Models\GetBlobMetadataResult::setEtag
+     * @covers WindowsAzure\Blob\Models\GetBlobMetadataResult::setETag
      */
-    public function testSetEtag()
+    public function testSetETag()
     {
         // Setup
         $getBlobMetadataResult = new GetBlobMetadataResult();
         $expected = '0x8CACB9BD7C6B1B2';
         
         // Test
-        $getBlobMetadataResult->setEtag($expected);
+        $getBlobMetadataResult->setETag($expected);
         
         // Assert
-        $actual = $getBlobMetadataResult->getEtag();
+        $actual = $getBlobMetadataResult->getETag();
         $this->assertEquals($expected, $actual);
     }
     
@@ -140,4 +140,4 @@ class GetBlobMetadataResultTest extends \PHPUnit_Framework_TestCase
     }
 }
 
-?>
+
