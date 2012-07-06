@@ -136,7 +136,6 @@ class EdmType
         case EdmType::STRING:
         case null:
             // NULL also is treated as EdmType::STRING
-            // Convert special characters to HTML entities.
             return $value;
             
         case EdmType::BINARY:

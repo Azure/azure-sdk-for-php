@@ -69,35 +69,33 @@ abstract class StorageAuthScheme
      */
     protected function computeCanonicalizedHeaders($headers)
     {
-        $canonicalizedHeaderParts = array();
-
-        if (!is_null($headers)) {
-            foreach ($headers as $header => $value) {
-                // 1. Retrieve all headers for the resource that begin with x-ms-,
-                //    including the x-ms-date header.
-                if (Utilities::startsWith($header, Resources::X_MS_HEADER_PREFIX)) {
-                    // 2. Convert each HTTP header name to lowercase.
-                    $canonicalizedHeaderParts[strtolower($header)] = $value;
-                }
-            }
-        }
-        
-        // 3. Sort the headers lexicographically by header name, in
-        //    ascending order. Note that each header may appear only once
-        //    in the string.
-        ksort($canonicalizedHeaderParts);
-        
-        $unfoldedHeaders = array();
-        foreach ($canonicalizedHeaderParts as $headerName => $value) {
-            // 4. Unfold the string by replacing any breaking white space with a
-            //    single space.
-            $unfoldedHeaders[$headerName] = str_replace("\r\n", '', $value);
-        }
-        
         $canonicalizedHeaders = array();
-        foreach ($canonicalizedHeaderParts as $headerName => $value) {
-            // 5. Trim any white space around the colon in the header.
-            $canonicalizedHeaders[] = trim($headerName) . ':' . trim($value);
+
+        if (is_null($headers)) {
+            return $canonicalizedHeaders;
+        }
+        
+        // Sort the headers lexicographically by header name, in ascending order.
+        // Note that each header may appear only once in the string.
+        ksort($headers);
+        
+        foreach ($headers as $header => $value) {
+            // Retrieve all headers for the resource that begin with x-ms-, including
+            // the x-ms-date header.
+            if (Utilities::startsWith($header, Resources::X_MS_HEADER_PREFIX)) {
+                // Convert each HTTP header name to lowercase.
+                $header = strtolower($header);
+                
+                // Unfold the string by replacing any breaking white space with a
+                // single space.
+                $value = str_replace("\r\n", '', $value);
+                
+                // Trim any white space around the colon in the header.
+                $header = trim($header);
+                $value = trim($value);
+                
+                $canonicalizedHeaders[] = $header . ':' . $value;
+            }
         }
 
         return $canonicalizedHeaders;
