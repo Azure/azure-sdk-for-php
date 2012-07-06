@@ -86,13 +86,14 @@ abstract class StorageAuthScheme
                 // Convert each HTTP header name to lowercase.
                 $header = strtolower($header);
                 
-                // Unfold the string by replacing any breaking white space with a
-                // single space.
-                $value = str_replace("\r\n", '', $value);
+                // Unfold the string by replacing any breaking white space 
+                // (meaning what splits the headers, which is \r\n) with a single 
+                // space.
+                $value = str_replace("\r\n", Resources::EMPTY_STRING, $value);
                 
                 // Trim any white space around the colon in the header.
-                $header = trim($header);
-                $value = trim($value);
+                $header = rtrim($header);
+                $value  = ltrim($value);
                 
                 $canonicalizedHeaders[] = $header . ':' . $value;
             }
