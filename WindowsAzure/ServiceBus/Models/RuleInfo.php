@@ -138,6 +138,8 @@ class RuleInfo
      * Sets the entry.
      *
      * @param Entry $entry The entry of the queue info.
+     * 
+     * @return none
      */
     public function setEntry($entry)
     {
