@@ -59,7 +59,7 @@ class InsertEntityResult
     {
         $result = new InsertEntityResult();
         $entity = $atomSerializer->parseEntity($body);
-        $entity->setEtag(Utilities::tryGetValue($headers, Resources::ETAG));
+        $entity->setETag(Utilities::tryGetValue($headers, Resources::ETAG));
         $result->setEntity($entity);
         
         return $result;
@@ -88,4 +88,4 @@ class InsertEntityResult
     }
 }
 
-?>
+

@@ -105,4 +105,4 @@ class GetBlobPropertiesResultTest extends \PHPUnit_Framework_TestCase
     }
 }
 
-?>
+

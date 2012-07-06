@@ -981,7 +981,7 @@ class TableRestProxyTest extends TableServiceRestProxyTestBase
         
         // Assert
         $entries = $result->getEntries();
-        $this->assertNotNull($entries[0]->getEtag());
+        $this->assertNotNull($entries[0]->getETag());
         $result = $this->restProxy->queryEntities($name);
         $entities = $result->getEntities();
         $actual = $entities[0];
@@ -1024,7 +1024,7 @@ class TableRestProxyTest extends TableServiceRestProxyTestBase
         
         // Assert
         $entries = $result->getEntries();
-        $this->assertNotNull($entries[0]->getEtag());
+        $this->assertNotNull($entries[0]->getETag());
         $result = $this->restProxy->queryEntities($name);
         $entities = $result->getEntities();
         $actual = $entities[0];
@@ -1069,7 +1069,7 @@ class TableRestProxyTest extends TableServiceRestProxyTestBase
         
         // Assert
         $entries = $result->getEntries();
-        $this->assertNotNull($entries[0]->getEtag());
+        $this->assertNotNull($entries[0]->getETag());
         $result = $this->restProxy->queryEntities($name);
         $entities = $result->getEntities();
         $actual = $entities[0];
@@ -1114,7 +1114,7 @@ class TableRestProxyTest extends TableServiceRestProxyTestBase
         
         // Assert
         $entries = $result->getEntries();
-        $this->assertNotNull($entries[0]->getEtag());
+        $this->assertNotNull($entries[0]->getETag());
         $result = $this->restProxy->queryEntities($name);
         $entities = $result->getEntities();
         $actual = $entities[0];
@@ -1158,7 +1158,7 @@ class TableRestProxyTest extends TableServiceRestProxyTestBase
         $operations = new BatchOperations();
         $operations->addInsertEntity($name, $insert);
         $operations->addUpdateEntity($name, $update);
-        $operations->addDeleteEntity($name, $delete->getPartitionKey(), $delete->getRowKey(), $delete->getEtag());
+        $operations->addDeleteEntity($name, $delete->getPartitionKey(), $delete->getRowKey(), $delete->getETag());
         
         // Test
         $result = $this->restProxy->batch($operations);
@@ -1199,7 +1199,7 @@ class TableRestProxyTest extends TableServiceRestProxyTestBase
         $update->addProperty('CustomerPlace', EdmType::STRING, 'Redmond');
         $operations = new BatchOperations();
         $operations->addUpdateEntity($name, $update);
-        $operations->addDeleteEntity($name, '125', $delete->getRowKey(), $delete->getEtag());
+        $operations->addDeleteEntity($name, '125', $delete->getRowKey(), $delete->getETag());
         
         // Test
         $result = $this->restProxy->batch($operations);
@@ -1209,4 +1209,4 @@ class TableRestProxyTest extends TableServiceRestProxyTestBase
     }
 }
 
-?>
+

@@ -63,21 +63,21 @@ class EntityTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers WindowsAzure\Table\Models\Entity::setEtag
-     * @covers WindowsAzure\Table\Models\Entity::getEtag
+     * @covers WindowsAzure\Table\Models\Entity::setETag
+     * @covers WindowsAzure\Table\Models\Entity::getETag
      */
-    public function testSetEtag()
+    public function testSetETag()
     {
         // Setup
         $expected = '0x8CAFB82EFF70C46';
         $entity = new Entity();
-        $entity->setEtag($expected);
+        $entity->setETag($expected);
         
         // Test
-        $entity->setEtag($expected);
+        $entity->setETag($expected);
         
         // Assert
-        $this->assertEquals($expected, $entity->getEtag());
+        $this->assertEquals($expected, $entity->getETag());
     }
     
     /**
@@ -237,4 +237,4 @@ class EntityTest extends \PHPUnit_Framework_TestCase
     }
 }
 
-?>
+

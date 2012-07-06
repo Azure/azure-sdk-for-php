@@ -28,23 +28,20 @@ use WindowsAzure\Common\Models\Logging;
 use WindowsAzure\Common\Models\Metrics;
 use WindowsAzure\Common\Models\RetentionPolicy;
 use WindowsAzure\Common\Models\ServiceProperties;
-use WindowsAzure\Blob\Models\BlobServiceOptions;
+use WindowsAzure\Blob\Models\ContainerAcl;
+use WindowsAzure\Blob\Models\CopyBlobOptions;
 use WindowsAzure\Blob\Models\CreateBlobSnapshotOptions;
 use WindowsAzure\Blob\Models\GetBlobOptions;
-use WindowsAzure\Blob\Models\GetServicePropertiesResult;
 use WindowsAzure\Blob\Models\ListBlobsOptions;
-use WindowsAzure\Blob\Models\ListBlobsResult;
 use WindowsAzure\Blob\Models\ListContainersOptions;
-use WindowsAzure\Blob\Models\ListContainersResult;
 use WindowsAzure\Blob\Models\CreateContainerOptions;
 use WindowsAzure\Blob\Models\DeleteBlobOptions;
 use WindowsAzure\Blob\Models\DeleteContainerOptions;
 use WindowsAzure\Blob\Models\AccessCondition;
 use WindowsAzure\Blob\Models\SetContainerMetadataOptions;
 use WindowsAzure\Common\Internal\Resources;
-use WindowsAzure\Blob\Models\ContainerAcl;
 use WindowsAzure\Blob\Models\PublicAccessType;
-use WindowsAzure\Blob\Models\GetBlobMetadataOptions;
+use WindowsAzure\Blob\Models\CreateBlobOptions;
 use WindowsAzure\Blob\Models\SetBlobMetadataOptions;
 use WindowsAzure\Blob\Models\GetBlobPropertiesOptions;
 use WindowsAzure\Blob\Models\SetBlobPropertiesOptions;
@@ -58,7 +55,7 @@ class BlobServiceFunctionalTestData
     public static $testContainerNames;
     public static $testBlobNames;
     private static $_accountName;
-    private static $badEtag = '0x123456789ABCDEF';
+    private static $badETag = '0x123456789ABCDEF';
 
     public static function setupData($accountName)
     {
@@ -127,24 +124,24 @@ class BlobServiceFunctionalTestData
         }
     }
 
-    public static function passEtagAccessCondition($ac)
+    public static function passETagAccessCondition($ac)
     {
         if (is_null($ac)) {
             return true;
         } else if ($ac->getHeader() == Resources::IF_MATCH) {
-            return self::$badEtag != $ac->getValue();
+            return self::$badETag != $ac->getValue();
         } else if ($ac->getHeader() == Resources::IF_NONE_MATCH) {
-            return self::$badEtag == $ac->getValue();
+            return self::$badETag == $ac->getValue();
         } else {
             return true;
         }
     }
 
-    public static function fixEtagAccessCondition($ac, $etag)
+    public static function fixETagAccessCondition($ac, $etag)
     {
         if (!is_null($ac)) {
             if ($ac->getHeader() == Resources::IF_MATCH || $ac->getHeader() == Resources::IF_NONE_MATCH) {
-                if (is_null($ac->getValue()) || self::$badEtag != $ac->getValue()) {
+                if (is_null($ac->getValue()) || self::$badETag != $ac->getValue()) {
                     $ac->setValue($etag);
                 }
             }
@@ -171,9 +168,9 @@ class BlobServiceFunctionalTestData
         $ret = self::getTemporalAccessConditions();
 
         array_push($ret, AccessCondition::ifMatch(null));
-        array_push($ret, AccessCondition::ifMatch(self::$badEtag));
+        array_push($ret, AccessCondition::ifMatch(self::$badETag));
         array_push($ret, AccessCondition::ifNoneMatch(null));
-        array_push($ret, AccessCondition::ifNoneMatch(self::$badEtag));
+        array_push($ret, AccessCondition::ifNoneMatch(self::$badETag));
 
         return $ret;
     }
@@ -698,22 +695,22 @@ class BlobServiceFunctionalTestData
         $past = new \DateTime("01/01/2010");
         $future = new \DateTime("01/01/2020");
 
-        $acl = new ContainerACL();
+        $acl = new ContainerAcl();
         array_push($ret, $acl);
 
-        $acl = new ContainerACL();
+        $acl = new ContainerAcl();
         $acl->setPublicAccess(PublicAccessType::NONE);
         array_push($ret, $acl);
 
-        $acl = new ContainerACL();
+        $acl = new ContainerAcl();
         $acl->setPublicAccess(PublicAccessType::BLOBS_ONLY);
         array_push($ret, $acl);
 
-        $acl = new ContainerACL();
+        $acl = new ContainerAcl();
         $acl->setPublicAccess(PublicAccessType::CONTAINER_AND_BLOBS);
         array_push($ret, $acl);
 
-        $acl = new ContainerACL();
+        $acl = new ContainerAcl();
         $acl->addSignedIdentifier('123', $past, $future, 'rw');
         array_push($ret, $acl);
 
@@ -855,5 +852,56 @@ class BlobServiceFunctionalTestData
 
         return $ret;
     }
+
+    public static function getCopyBlobOptions()
+    {
+        $ret = array();
+
+        $options = new CopyBlobOptions();
+        array_push($ret, $options);
+
+        $options = new CopyBlobOptions();
+        $options->setTimeout(10);
+        array_push($ret, $options);
+
+        $options = new CopyBlobOptions();
+        $options->setTimeout(-10);
+        array_push($ret, $options);
+
+        foreach(self::getAllAccessConditions() as $ac)  {
+            $options = new CopyBlobOptions();
+            $options->setSourceAccessCondition($ac);
+            array_push($ret, $options);
+        }
+
+        foreach(self::getAllAccessConditions() as $ac)  {
+            $options = new CopyBlobOptions();
+            $options->setAccessCondition($ac);
+            array_push($ret, $options);
+        }
+
+        $options = new CopyBlobOptions();
+        $metadata = array(
+            'Xkey' => 'Avalue',
+            'Yfoo' => 'Bbar',
+            'Zbaz' => 'Cboo');
+        $options->setMetadata($metadata);
+        array_push($ret, $options);
+
+        $options = new CopyBlobOptions();
+        $options->setSourceSnapshot('placeholder');
+        array_push($ret, $options);
+
+        // TODO: Handle Lease ID
+        //        $options = new CopyBlobOptions();
+        //        $options->setLeaseId('setLeaseId');
+        //        array_push($ret, $options);
+        //
+        //        $options = new CopyBlobOptions();
+        //        $options->setSourceLeaseId('setSourceLeaseId');
+        //        array_push($ret, $options);
+
+        return $ret;
+    }
 }
-?>
+

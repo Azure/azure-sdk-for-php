@@ -280,4 +280,4 @@ class SubscriptionInfoTest extends \PHPUnit_Framework_TestCase
 
 }
 
-?>
+

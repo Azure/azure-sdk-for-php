@@ -131,4 +131,4 @@ class SignedIdentifierTest extends \PHPUnit_Framework_TestCase
     }
 }
 
-?>
+

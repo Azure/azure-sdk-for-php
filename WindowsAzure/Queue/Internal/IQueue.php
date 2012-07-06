@@ -194,4 +194,4 @@ interface IQueue extends FilterableService
      */
     public function clearMessages($queueName, $options = null);
 }
-?>
+

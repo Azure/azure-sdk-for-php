@@ -24,13 +24,11 @@
 
 namespace Tests\Functional\WindowsAzure\Queue;
 
+use Tests\Framework\TestResources;
 use WindowsAzure\Common\ServiceException;
-use WindowsAzure\Common\Configuration;
-use WindowsAzure\Queue\QueueService;
-use WindowsAzure\Queue\Models\ListQueuesOptions;
-use WindowsAzure\Queue\Models\ListQueuesResult;
 use WindowsAzure\Queue\Models\CreateQueueOptions;
 use WindowsAzure\Queue\Models\ListMessagesOptions;
+use WindowsAzure\Queue\Models\ListQueuesOptions;
 use WindowsAzure\Queue\Models\PeekMessagesOptions;
 
 class QueueServiceIntegrationTest extends IntegrationTestBase
@@ -143,11 +141,11 @@ class QueueServiceIntegrationTest extends IntegrationTestBase
         $shouldReturn = false;
         try {
             $props = $this->restProxy->getServiceProperties()->getValue();
-            $this->assertFalse(Configuration::isEmulated(), 'Should succeed when not running in emulator');
+            $this->assertFalse($this->isEmulated(), 'Should succeed when not running in emulator');
         } catch (ServiceException $e) {
             // Expect failure in emulator, as v1.6 doesn't support this method
-            if (Configuration::isEmulated()) {
-                $this->assertEquals(400, $e->getCode(), 'getCode');
+            if ($this->isEmulated()) {
+                $this->assertEquals(TestResources::STATUS_BAD_REQUEST, $e->getCode(), 'getCode');
                 $shouldReturn = true;
             }
         }
@@ -176,11 +174,11 @@ class QueueServiceIntegrationTest extends IntegrationTestBase
         $shouldReturn = false;
         try {
             $props = $this->restProxy->getServiceProperties()->getValue();
-            $this->assertFalse(Configuration::isEmulated(), 'Should succeed when not running in emulator');
+            $this->assertFalse($this->isEmulated(), 'Should succeed when not running in emulator');
         } catch (ServiceException $e) {
             // Expect failure in emulator, as v1.6 doesn't support this method
-            if (Configuration::isEmulated()) {
-                $this->assertEquals(400, $e->getCode(), 'getCode');
+            if ($this->isEmulated()) {
+                $this->assertEquals(TestResources::STATUS_BAD_REQUEST, $e->getCode(), 'getCode');
                 $shouldReturn = true;
             }
         }

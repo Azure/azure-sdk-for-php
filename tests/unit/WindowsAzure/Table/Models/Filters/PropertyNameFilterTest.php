@@ -53,4 +53,4 @@ class PropertyNameFilterTest extends \PHPUnit_Framework_TestCase
     }
 }
 
-?>
+

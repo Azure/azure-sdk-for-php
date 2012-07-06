@@ -25,89 +25,15 @@
 namespace Tests\Functional\WindowsAzure\Table;
 
 use WindowsAzure\Common\Internal\Utilities;
-use WindowsAzure\Common\Configuration;
 use WindowsAzure\Common\Models\Logging;
 use WindowsAzure\Common\Models\Metrics;
 use WindowsAzure\Common\Models\RetentionPolicy;
 use WindowsAzure\Common\Models\ServiceProperties;
 use WindowsAzure\Table\Models\EdmType;
 use WindowsAzure\Table\Models\Entity;
-use WindowsAzure\Table\Models\Property;
-use WindowsAzure\Table\Models\Query;
 use WindowsAzure\Table\Models\QueryTablesOptions;
 use WindowsAzure\Table\Models\TableServiceOptions;
-use WindowsAzure\Table\Models\Filters\BinaryFilter;
-use WindowsAzure\Table\Models\Filters\ConstantFilter;
 use WindowsAzure\Table\Models\Filters\Filter;
-use WindowsAzure\Table\Models\Filters\PropertyNameFilter;
-use WindowsAzure\Table\Models\Filters\UnaryFilter;
-
-class FakeTableInfoEntry
-{
-    public $TableName;
-}
-
-class FakeTEntityEntry
-{
-    private $properties = array();
-
-    public function getPartitionKey()
-    {
-        return $this->getProperty('PartitionKey');
-    }
-
-    public function setPartitionKey($partitionKey)
-    {
-        $this->addProperty('PartitionKey', null, $partitionKey);
-        return this;
-    }
-
-    public function getRowKey()
-    {
-        return getPropertyValue('RowKey');
-    }
-
-    public function setRowKey($rowKey)
-    {
-        $this->addProperty('RowKey', null, $rowKey);
-        return this;
-    }
-
-    public function getProperties()
-    {
-        return $this->properties;
-    }
-
-    public function getProperty($name)
-    {
-        if (array_key_exists($name, $this->properties)) {
-            return $this->properties[$name];
-        } else  {
-            return null;
-        }
-    }
-
-    public function setProperty($name, $property)
-    {
-        $this->properties[$name] = $property;
-        return this;
-    }
-
-    public function newProperty($name, $edmType, $value)
-    {
-        $property = new Property();
-        $property->setEdmType($edmType);
-        $property->setValue($value);
-        $this->addProperty($name, $property);
-        return this;
-    }
-
-    public function getPropertyValue($name)
-    {
-        $p = $this->getProperty($name);
-        return is_null($p) ? null : $p->getValue();
-    }
-}
 
 class TableServiceFunctionalTestData
 {
@@ -276,7 +202,7 @@ class TableServiceFunctionalTestData
         return $ret;
     }
 
-    static function getInterestingQueryTablesOptions()
+    static function getInterestingQueryTablesOptions($isEmulated)
     {
         $ret = array();
 
@@ -356,7 +282,7 @@ class TableServiceFunctionalTestData
         $options->setPrefix(self::$nonExistTablePrefix);
         array_push($ret, $options);
 
-        if (!Configuration::isEmulated()) {
+        if (!$isEmulated) {
             $options = new QueryTablesOptions();
             $options->setPrefix(self::$testUniqueId);
             array_push($ret, $options);
@@ -665,4 +591,4 @@ class TableServiceFunctionalTestData
     }
 }
 
-?>
+

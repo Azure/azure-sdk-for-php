@@ -48,12 +48,12 @@ class GetContainerAclResultTest extends \PHPUnit_Framework_TestCase
     {
         // Setup
         $sample = Resources::EMPTY_STRING;
-        $expectedEtag = '0x8CAFB82EFF70C46';
+        $expectedETag = '0x8CAFB82EFF70C46';
         $expectedDate = new \DateTime('Sun, 25 Sep 2011 19:42:18 GMT');
         $expectedPublicAccess = 'container';
         
         // Test
-        $result = GetContainerAclResult::create($expectedPublicAccess, $expectedEtag, 
+        $result = GetContainerAclResult::create($expectedPublicAccess, $expectedETag, 
             $expectedDate, $sample);
         
         // Assert
@@ -114,22 +114,22 @@ class GetContainerAclResultTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers WindowsAzure\Blob\Models\GetContainerAclResult::setEtag
-     * @covers WindowsAzure\Blob\Models\GetContainerAclResult::getEtag
+     * @covers WindowsAzure\Blob\Models\GetContainerAclResult::setETag
+     * @covers WindowsAzure\Blob\Models\GetContainerAclResult::getETag
      */
-    public function testSetEtag()
+    public function testSetETag()
     {
         // Setup
         $expected = '0x8CAFB82EFF70C46';
         $obj = new GetContainerAclResult();
-        $obj->setEtag($expected);
+        $obj->setETag($expected);
         
         // Test
-        $obj->setEtag($expected);
+        $obj->setETag($expected);
         
         // Assert
-        $this->assertEquals($expected, $obj->getEtag());
+        $this->assertEquals($expected, $obj->getETag());
     }
 }
 
-?>
+

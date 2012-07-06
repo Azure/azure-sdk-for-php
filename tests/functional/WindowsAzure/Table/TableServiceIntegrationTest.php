@@ -24,29 +24,19 @@
 
 namespace Tests\Functional\WindowsAzure\Table;
 
+use Tests\Framework\TestResources;
 use WindowsAzure\Common\ServiceException;
-use WindowsAzure\Common\Configuration;
-use WindowsAzure\Table\TableService;
 use WindowsAzure\Table\Models\BatchError;
 use WindowsAzure\Table\Models\BatchOperations;
 use WindowsAzure\Table\Models\DeleteEntityOptions;
 use WindowsAzure\Table\Models\EdmType;
 use WindowsAzure\Table\Models\Entity;
 use WindowsAzure\Table\Models\InsertEntityResult;
-use WindowsAzure\Table\Models\Property;
 use WindowsAzure\Table\Models\Query;
 use WindowsAzure\Table\Models\QueryEntitiesOptions;
-use WindowsAzure\Table\Models\QueryEntitiesResult;
-use WindowsAzure\Table\Models\QueryTableResults;
 use WindowsAzure\Table\Models\QueryTablesOptions;
-use WindowsAzure\Table\Models\TableServiceOptions;
 use WindowsAzure\Table\Models\UpdateEntityResult;
-use WindowsAzure\Table\Models\Filters\BinaryFilter;
-use WindowsAzure\Table\Models\Filters\ConstantFilter;
 use WindowsAzure\Table\Models\Filters\Filter;
-use WindowsAzure\Table\Models\Filters\PropertyNameFilter;
-use WindowsAzure\Table\Models\Filters\QueryStringFilter;
-use WindowsAzure\Table\Models\Filters\UnaryFilter;
 
 class TableServiceIntegrationTest extends IntegrationTestBase
 {
@@ -157,6 +147,7 @@ class TableServiceIntegrationTest extends IntegrationTestBase
     private static function createService()
     {
         $tmp = new IntegrationTestBase();
+        $tmp->setUp();
         return $tmp->restProxy;
     }
 
@@ -171,11 +162,11 @@ class TableServiceIntegrationTest extends IntegrationTestBase
         $shouldReturn = false;
         try {
             $props = $this->restProxy->getServiceProperties()->getValue();
-            $this->assertTrue(!Configuration::isEmulated(), 'Should succeed if and only if not running in emulator');
+            $this->assertTrue(!$this->isEmulated(), 'Should succeed if and only if not running in emulator');
         } catch (ServiceException $e) {
             // Expect failure in emulator, as v1.6 doesn't support this method
-            if (Configuration::isEmulated()) {
-                $this->assertEquals(400, $e->getCode(), 'getCode');
+            if ($this->isEmulated()) {
+                $this->assertEquals(TestResources::STATUS_BAD_REQUEST, $e->getCode(), 'getCode');
                 $shouldReturn = true;
             } else {
                 throw $e;
@@ -206,11 +197,11 @@ class TableServiceIntegrationTest extends IntegrationTestBase
         $shouldReturn = false;
         try {
             $props = $this->restProxy->getServiceProperties()->getValue();
-            $this->assertTrue(!Configuration::isEmulated(), 'Should succeed if and only if not running in emulator');
+            $this->assertTrue(!$this->isEmulated(), 'Should succeed if and only if not running in emulator');
         } catch (ServiceException $e) {
             // Expect failure in emulator, as v1.6 doesn't support this method
-            if (Configuration::isEmulated()) {
-                $this->assertEquals(400, $e->getCode(), 'getCode');
+            if ($this->isEmulated()) {
+                $this->assertEquals(TestResources::STATUS_BAD_REQUEST, $e->getCode(), 'getCode');
                 $shouldReturn = true;
             } else {
                 throw $e;
@@ -347,7 +338,7 @@ class TableServiceIntegrationTest extends IntegrationTestBase
         $this->assertEquals('001', $result->getEntity()->getPartitionKey(), '$result->getEntity()->getPartitionKey()');
         $this->assertEquals('insertEntityWorks', $result->getEntity()->getRowKey(), '$result->getEntity()->getRowKey()');
         $this->assertNotNull($result->getEntity()->getTimestamp(), '$result->getEntity()->getTimestamp()');
-        $this->assertNotNull($result->getEntity()->getEtag(), '$result->getEntity()->getEtag()');
+        $this->assertNotNull($result->getEntity()->getETag(), '$result->getEntity()->getETag()');
 
         $this->assertNotNull($result->getEntity()->getProperty('test'), '$result->getEntity()->getProperty(\'test\')');
         $this->assertEquals(true, $result->getEntity()->getProperty('test')->getValue(), '$result->getEntity()->getProperty(\'test\')->getValue()');
@@ -415,12 +406,12 @@ class TableServiceIntegrationTest extends IntegrationTestBase
         $entity->addProperty('test5', EdmType::DATETIME, new \DateTime());
 
         // Act
-        if(Configuration::isEmulated()) {
+        if($this->isEmulated()) {
             try {
                 $this->restProxy->insertOrReplaceEntity(self::$testTable2, $entity);
-                $this->assertFalse(Configuration::isEmulated(), 'Expect failure when in emulator');
+                $this->assertFalse($this->isEmulated(), 'Expect failure when in emulator');
             } catch (ServiceException $e) {
-                $this->assertEquals(404, $e->getCode(), 'e->getCode');
+                $this->assertEquals(TestResources::STATUS_NOT_FOUND, $e->getCode(), 'e->getCode');
             }
         } else {
             $this->restProxy->insertOrReplaceEntity(self::$testTable2, $entity);
@@ -449,12 +440,12 @@ class TableServiceIntegrationTest extends IntegrationTestBase
         $entity->addProperty('test5', EdmType::DATETIME, new \DateTime());
 
         // Act
-        if(Configuration::isEmulated()) {
+        if($this->isEmulated()) {
             try {
                 $this->restProxy->insertOrMergeEntity(self::$testTable2, $entity);
-                $this->assertFalse(Configuration::isEmulated(), 'Expect failure when in emulator');
+                $this->assertFalse($this->isEmulated(), 'Expect failure when in emulator');
             } catch (ServiceException $e) {
-                $this->assertEquals(404, $e->getCode(), 'e->getCode');
+                $this->assertEquals(TestResources::STATUS_NOT_FOUND, $e->getCode(), 'e->getCode');
             }
         } else {
             $this->restProxy->insertOrMergeEntity(self::$testTable2, $entity);
@@ -576,7 +567,7 @@ class TableServiceIntegrationTest extends IntegrationTestBase
             $this->restProxy->getEntity(self::$testTable8, $result1->getEntity()->getPartitionKey(), $result1->getEntity()->getRowKey());
             $this->fail('Expect an exception when getting an entity that does not exist');
         } catch (ServiceException $e) {
-            $this->assertEquals(404, $e->getCode(), 'getCode');
+            $this->assertEquals(TestResources::STATUS_NOT_FOUND, $e->getCode(), 'getCode');
         }
 
         $qopts = new QueryEntitiesOptions();
@@ -613,7 +604,7 @@ class TableServiceIntegrationTest extends IntegrationTestBase
         $result = $this->restProxy->insertEntity(self::$testTable2, $entity);
 
         $deo = new DeleteEntityOptions();
-        $deo->setEtag($result->getEntity()->getEtag());
+        $deo->setETag($result->getEntity()->getETag());
         $this->restProxy->deleteEntity(self::$testTable2, $result->getEntity()->getPartitionKey(), $result->getEntity()->getRowKey(),
                 $deo);
 
@@ -652,7 +643,7 @@ class TableServiceIntegrationTest extends IntegrationTestBase
         $this->assertEquals('001', $result->getEntity()->getPartitionKey(), '$result->getEntity()->getPartitionKey()');
         $this->assertEquals('getEntityWorks', $result->getEntity()->getRowKey(), '$result->getEntity()->getRowKey()');
         $this->assertNotNull($result->getEntity()->getTimestamp(), '$result->getEntity()->getTimestamp()');
-        $this->assertNotNull($result->getEntity()->getEtag(), '$result->getEntity()->getEtag()');
+        $this->assertNotNull($result->getEntity()->getETag(), '$result->getEntity()->getETag()');
 
         $this->assertNotNull($result->getEntity()->getProperty('test'), '$result->getEntity()->getProperty(\'test\')');
         $this->assertEquals(true, $result->getEntity()->getProperty('test')->getValue(), '$result->getEntity()->getProperty(\'test\')->getValue()');
@@ -711,7 +702,7 @@ class TableServiceIntegrationTest extends IntegrationTestBase
         $this->assertEquals('001', $entities[0]->getPartitionKey(), '$entities[0]->getPartitionKey()');
         $this->assertEquals('queryEntitiesWorks', $entities[0]->getRowKey(), '$entities[0]->getRowKey()');
         $this->assertNotNull($entities[0]->getTimestamp(), '$entities[0]->getTimestamp()');
-        $this->assertNotNull($entities[0]->getEtag(), '$entities[0]->getEtag()');
+        $this->assertNotNull($entities[0]->getETag(), '$entities[0]->getETag()');
 
         $this->assertNotNull($entities[0]->getProperty('test'), '$entities[0]->getProperty(\'test\')');
         $this->assertEquals(true, $entities[0]->getProperty('test')->getValue(), '$entities[0]->getProperty(\'test\')->getValue()');
@@ -1096,7 +1087,7 @@ class TableServiceIntegrationTest extends IntegrationTestBase
 
         // Act
         $bo = new BatchOperations();
-        $bo->addDeleteEntity($table, $entity->getPartitionKey(), $entity->getRowKey(), $entity->getEtag());
+        $bo->addDeleteEntity($table, $entity->getPartitionKey(), $entity->getRowKey(), $entity->getETag());
         $result = $this->restProxy->batch($bo);
 
         // Assert
@@ -1143,7 +1134,7 @@ class TableServiceIntegrationTest extends IntegrationTestBase
             $this->assertEquals('001', $entity->getPartitionKey(), '$entity->getPartitionKey()');
             $this->assertEquals('batchWorks-' . $i, $entity->getRowKey(), '$entity->getRowKey()');
             $this->assertNotNull($entity->getTimestamp(), '$entity->getTimestamp()');
-            $this->assertNotNull($entity->getEtag(), '$entity->getEtag()');
+            $this->assertNotNull($entity->getETag(), '$entity->getETag()');
 
             $this->assertNotNull($entity->getProperty('test'), '$entity->getProperty(\'test\')');
             $this->assertEquals(true, $entity->getProperty('test')->getValue(), '$entity->getProperty(\'test\')->getValue()');
@@ -1229,14 +1220,14 @@ class TableServiceIntegrationTest extends IntegrationTestBase
         $entity->addProperty('test4', EdmType::INT64, '12345678901');
         $entity->addProperty('test5', EdmType::DATETIME, new \DateTime());
         $batchOperations->addInsertEntity($table, $entity);
-        $batchOperations->addDeleteEntity($table, $entity1->getPartitionKey(), $entity1->getRowKey(), $entity1->getEtag());
+        $batchOperations->addDeleteEntity($table, $entity1->getPartitionKey(), $entity1->getRowKey(), $entity1->getETag());
         $entity2->addProperty('test3', EdmType::INT32, 5);
         $batchOperations->addUpdateEntity($table, $entity2);
         $entity3->addProperty('test3', EdmType::INT32, 5);
         $batchOperations->addMergeEntity($table, $entity3);
         $entity4->addProperty('test3', EdmType::INT32, 5);
         // Use different behavior in the emulator, as v1.6 does not support this method
-        if (!Configuration::isEmulated()) {
+        if (!$this->isEmulated()) {
             $batchOperations->addInsertOrReplaceEntity($table, $entity4);
         } else {
             $batchOperations->addUpdateEntity($table, $entity4);
@@ -1251,7 +1242,7 @@ class TableServiceIntegrationTest extends IntegrationTestBase
         $entity5->addProperty('test4', EdmType::INT64, '12345678901');
         $entity5->addProperty('test5', EdmType::DATETIME, new \DateTime());
         // Use different behavior in the emulator, as v1.6 does not support this method
-        if (Configuration::isEmulated()) {
+        if ($this->isEmulated()) {
             $batchOperations->addInsertEntity($table, $entity5);
         } else {
             $batchOperations->addInsertOrMergeEntity($table, $entity5);
@@ -1269,7 +1260,7 @@ class TableServiceIntegrationTest extends IntegrationTestBase
         $this->assertTrue($ents[2] instanceof UpdateEntityResult, '$result->getEntries()->get(2)->getClass()');
         $this->assertTrue($ents[3] instanceof UpdateEntityResult, '$result->getEntries()->get(3)->getClass()');
         $this->assertTrue($ents[4] instanceof UpdateEntityResult, '$result->getEntries()->get(4)->getClass()');
-        if (Configuration::isEmulated()) {
+        if ($this->isEmulated()) {
             $this->assertTrue($ents[5] instanceof InsertEntityResult, '$result->getEntries()->get(5)->getClass()');
         } else {
             $this->assertTrue($ents[5] instanceof UpdateEntityResult, '$result->getEntries()->get(5)->getClass()');
@@ -1312,7 +1303,7 @@ class TableServiceIntegrationTest extends IntegrationTestBase
         // The $entity1 still has the original etag from the first submit,
         // so this update should fail, because another update was already made.
         $entity1->addProperty('test', EdmType::INT32, 3);
-        $batchOperations->addDeleteEntity($table, $entity1->getPartitionKey(), $entity1->getRowKey(), $entity1->getEtag());
+        $batchOperations->addDeleteEntity($table, $entity1->getPartitionKey(), $entity1->getRowKey(), $entity1->getETag());
         $batchOperations->addUpdateEntity($table, $entity2);
         $batchOperations->addInsertEntity($table, $entity3);
 
@@ -1329,4 +1320,4 @@ class TableServiceIntegrationTest extends IntegrationTestBase
     }
 }
 
-?>
+

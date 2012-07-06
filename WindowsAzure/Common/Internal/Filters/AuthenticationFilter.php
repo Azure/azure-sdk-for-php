@@ -90,4 +90,4 @@ class AuthenticationFilter implements IServiceFilter
     }
 }
 
-?>
+

@@ -73,4 +73,4 @@ class AffinityGroupTest extends \PHPUnit_Framework_TestCase
     }
 }
 
-?>
+

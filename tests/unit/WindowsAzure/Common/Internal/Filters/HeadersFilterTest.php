@@ -120,4 +120,4 @@ class HeadersFilterTest extends \PHPUnit_Framework_TestCase
     }
 }
 
-?>
+

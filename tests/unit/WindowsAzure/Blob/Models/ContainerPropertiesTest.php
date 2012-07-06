@@ -39,36 +39,36 @@ use WindowsAzure\Blob\Models\ContainerProperties;
 class ContainerPropertiesTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @covers WindowsAzure\Blob\Models\ContainerProperties::getEtag
+     * @covers WindowsAzure\Blob\Models\ContainerProperties::getETag
      */
-    public function testGetEtag()
+    public function testGetETag()
     {
         // Setup
         $properties = new ContainerProperties();
         $expected = '0x8CACB9BD7C6B1B2';
-        $properties->setEtag($expected);
+        $properties->setETag($expected);
         
         // Test
-        $actual = $properties->getEtag();
+        $actual = $properties->getETag();
         
         // Assert
         $this->assertEquals($expected, $actual);
     }
     
     /**
-     * @covers WindowsAzure\Blob\Models\ContainerProperties::setEtag
+     * @covers WindowsAzure\Blob\Models\ContainerProperties::setETag
      */
-    public function testSetEtag()
+    public function testSetETag()
     {
         // Setup
         $properties = new ContainerProperties();
         $expected = '0x8CACB9BD7C6B1B2';
         
         // Test
-        $properties->setEtag($expected);
+        $properties->setETag($expected);
         
         // Assert
-        $actual = $properties->getEtag();
+        $actual = $properties->getETag();
         $this->assertEquals($expected, $actual);
     }
     
@@ -107,4 +107,4 @@ class ContainerPropertiesTest extends \PHPUnit_Framework_TestCase
     }
 }
 
-?>
+

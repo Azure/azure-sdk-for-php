@@ -73,4 +73,4 @@ class QueryTablesResultTest extends \PHPUnit_Framework_TestCase
     }
 }
 
-?>
+

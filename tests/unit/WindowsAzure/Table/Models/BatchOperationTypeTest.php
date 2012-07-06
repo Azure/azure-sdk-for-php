@@ -69,4 +69,4 @@ class BatchOperationTypeTest extends \PHPUnit_Framework_TestCase
     }
 }
 
-?>
+

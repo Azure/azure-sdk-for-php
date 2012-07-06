@@ -75,4 +75,4 @@ class SetContainerMetadataOptions extends BlobServiceOptions
     }
 }
 
-?>
+
