@@ -277,9 +277,9 @@ class TopicInfo extends Entry
      * @return none
      */
     public function setDuplicateDetectionHistoryTimeWindow(
-    $duplicateDetectionHistoryTimeWindow
+        $duplicateDetectionHistoryTimeWindow
     ) {
-        $this->_topicDescription->setduplicateDetectionHistoryTimeWindow( 
+        $this->_topicDescription->setduplicateDetectionHistoryTimeWindow(
             $duplicateDetectionHistoryTimeWindow
         );
     }
