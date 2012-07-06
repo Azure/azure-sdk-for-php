@@ -69,17 +69,18 @@ abstract class StorageAuthScheme
      */
     protected function computeCanonicalizedHeaders($headers)
     {
-        $canonicalizedHeaders = array();
+        $canonicalizedHeaders     = array();
+        $canonicalizedHeaderParts = $headers;
 
-        if (is_null($headers)) {
+        if (is_null($canonicalizedHeaderParts)) {
             return $canonicalizedHeaders;
         }
         
         // Sort the headers lexicographically by header name, in ascending order.
         // Note that each header may appear only once in the string.
-        ksort($headers);
+        ksort($canonicalizedHeaderParts);
         
-        foreach ($headers as $header => $value) {
+        foreach ($canonicalizedHeaderParts as $header => $value) {
             // Retrieve all headers for the resource that begin with x-ms-, including
             // the x-ms-date header.
             if (Utilities::startsWith($header, Resources::X_MS_HEADER_PREFIX)) {
