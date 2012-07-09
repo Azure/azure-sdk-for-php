@@ -52,6 +52,7 @@ class ServiceManagementServiceTest extends \PHPUnit_Framework_TestCase
         $config->setProperty(ServiceManagementSettings::SUBSCRIPTION_ID, '1234-45432');
         $config->setProperty(ServiceManagementSettings::CERTIFICATE_PATH, '1234');
         $config->setProperty(ServiceManagementSettings::URI, Resources::SERVICE_MANAGEMENT_URL);
+        $config->setProperty(ServiceManagementSettings::CERTIFICATE_AUTHORITY_PATH, '');
         
         // Test
         $servicemanagementRestProxy = ServiceManagementService::create($config);
