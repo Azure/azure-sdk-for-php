@@ -28,7 +28,6 @@ use WindowsAzure\Common\Internal\Validate;
 use WindowsAzure\Common\Internal\Utilities;
 use WindowsAzure\Common\Internal\Http\HttpClient;
 use WindowsAzure\Common\Internal\IServicesBuilder;
-use WindowsAzure\Common\Configuration;
 use WindowsAzure\Common\Internal\Filters\DateFilter;
 use WindowsAzure\Common\Internal\Filters\HeadersFilter;
 use WindowsAzure\Common\Internal\Filters\AuthenticationFilter;
@@ -328,7 +327,7 @@ class ServicesBuilder implements IServicesBuilder
     }
     
     /**
-     * Builds a service bus client. 
+     * Builds a service bus object. 
      * 
      * @param string $connectionString The configuration connection string.
      * 

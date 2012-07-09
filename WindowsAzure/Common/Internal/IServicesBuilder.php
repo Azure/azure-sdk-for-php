@@ -46,49 +46,49 @@ namespace WindowsAzure\Common\Internal;
 interface IServicesBuilder
 {
     /**
-     * Creates a BlobRestProxy using the passed configuration.
+     * Builds a blob object.
      *
-     * @param WindowsAzure\Common\Configuration $config The configuration object.
+     * @param string $connectionString The configuration connection string.
      * 
-     * @return WindowsAzure\Blob\BlobRestProxy
+     * @return WindowsAzure\Blob\Internal\IBlob
      */
-    public function createBlobService($config);
+    public function createBlobService($connectionString);
     
     /**
-     * Creates a QueueRestProxy using the passed configuration.
+     * Builds a queue object.
      *
-     * @param WindowsAzure\Common\Configuration $config The configuration object.
+     * @param string $connectionString The configuration connection string.
      * 
-     * @return WindowsAzure\Queue\QueueRestProxy
+     * @return WindowsAzure\Queue\Internal\IQueue
      */
-    public function createQueueService($config);
+    public function createQueueService($connectionString);
     
     /**
-     * Creates a TableRestProxy using the passed configuration.
+     * Builds a table object.
      *
-     * @param WindowsAzure\Common\Configuration $config The configuration object.
+     * @param string $connectionString The configuration connection string.
      * 
-     * @return WindowsAzure\Table\TableRestProxy
+     * @return WindowsAzure\Table\Internal\ITable
      */
-    public function createTableService($config);
+    public function createTableService($connectionString);
     
     /**
-     * Creates a ServiceManagementRestProxy using the passed configuration.
+     * Builds a service management object.
      *
-     * @param WindowsAzure\Common\Configuration $config The configuration object.
+     * @param string $connectionString The configuration connection string.
      * 
-     * @return WindowsAzure\ServiceManagement\ServiceManagementRestProxy
+     * @return WindowsAzure\ServiceManagement\Internal\IServiceManagement
      */
-    public function createServiceManagementService($config);
+    public function createServiceManagementService($connectionString);
     
     /**
-     * Creates a ServiceBusRestProxy using the passed configuration.
-     *
-     * @param WindowsAzure\Common\Configuration $config The configuration object.
+     * Builds a service bus object.
      * 
-     * @return WindowsAzure\ServiceBus\ServiceBusRestProxy
+     * @param string $connectionString The configuration connection string.
+     * 
+     * @return WindowsAzure\ServiceBus\Internal\IServiceBus
      */
-    public function createServiceBusService($config);
+    public function createServiceBusService($connectionString);
 }
 
 
