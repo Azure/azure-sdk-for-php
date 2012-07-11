@@ -105,7 +105,7 @@ class ServicesBuilder implements IServicesBuilder
      * @param string $accountName The account name.
      * @param string $accountKey  The account key.
      * 
-     * @return \WindowsAzure\Common\Internal\Authentication\SharedKeyAuthScheme 
+     * @return \WindowsAzure\Common\Internal\Authentication\StorageAuthScheme
      */
     protected function queueAuthenticationScheme($accountName, $accountKey)
     {
@@ -118,7 +118,7 @@ class ServicesBuilder implements IServicesBuilder
      * @param string $accountName The account name.
      * @param string $accountKey  The account key.
      * 
-     * @return \WindowsAzure\Common\Internal\Authentication\SharedKeyAuthScheme 
+     * @return \WindowsAzure\Common\Internal\Authentication\StorageAuthScheme
      */
     protected function blobAuthenticationScheme($accountName, $accountKey)
     {
