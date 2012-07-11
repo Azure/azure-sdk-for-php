@@ -47,7 +47,6 @@ class ServicesBuilderTest extends \PHPUnit_Framework_TestCase
      * @covers WindowsAzure\Common\Internal\ServicesBuilder::httpClient
      * @covers WindowsAzure\Common\Internal\ServicesBuilder::serializer
      * @covers WindowsAzure\Common\Internal\ServicesBuilder::queueAuthenticationScheme
-     * @covers WindowsAzure\Common\Internal\ServicesBuilder::_addHeadersFilter
      */
     public function testBuildForQueue()
     {
@@ -66,7 +65,6 @@ class ServicesBuilderTest extends \PHPUnit_Framework_TestCase
      * @covers WindowsAzure\Common\Internal\ServicesBuilder::httpClient
      * @covers WindowsAzure\Common\Internal\ServicesBuilder::serializer
      * @covers WindowsAzure\Common\Internal\ServicesBuilder::blobAuthenticationScheme
-     * @covers WindowsAzure\Common\Internal\ServicesBuilder::_addHeadersFilter
      */
     public function testBuildForBlob()
     {
@@ -87,7 +85,6 @@ class ServicesBuilderTest extends \PHPUnit_Framework_TestCase
      * @covers WindowsAzure\Common\Internal\ServicesBuilder::mimeSerializer
      * @covers WindowsAzure\Common\Internal\ServicesBuilder::atomSerializer
      * @covers WindowsAzure\Common\Internal\ServicesBuilder::tableAuthenticationScheme
-     * @covers WindowsAzure\Common\Internal\ServicesBuilder::_addHeadersFilter
      */
     public function testBuildForTable()
     {
@@ -105,7 +102,6 @@ class ServicesBuilderTest extends \PHPUnit_Framework_TestCase
      * @covers WindowsAzure\Common\Internal\ServicesBuilder::createServiceManagementService
      * @covers WindowsAzure\Common\Internal\ServicesBuilder::httpClient
      * @covers WindowsAzure\Common\Internal\ServicesBuilder::serializer
-     * @covers WindowsAzure\Common\Internal\ServicesBuilder::_addHeadersFilter
      */
     public function testBuildForServiceManagement()
     {
@@ -117,6 +113,24 @@ class ServicesBuilderTest extends \PHPUnit_Framework_TestCase
         
         // Assert
         $this->assertInstanceOf('WindowsAzure\ServiceManagement\Internal\IServiceManagement', $serviceManagementRestProxy);
+    }
+    
+    /**
+     * @covers WindowsAzure\Common\Internal\ServicesBuilder::createServiceBusService
+     * @covers WindowsAzure\Common\Internal\ServicesBuilder::createWrapService
+     * @covers WindowsAzure\Common\Internal\ServicesBuilder::httpClient
+     * @covers WindowsAzure\Common\Internal\ServicesBuilder::serializer
+     */
+    public function testBuildForServiceBus()
+    {
+        // Setup
+        $builder = new ServicesBuilder();
+        
+        // Test
+        $serviceBusRestProxy = $builder->createServiceBusService(TestResources::getServiceBusConnectionString());
+        
+        // Assert
+        $this->assertInstanceOf('WindowsAzure\ServiceBus\Internal\IServiceBus', $serviceBusRestProxy);
     }
 }
 

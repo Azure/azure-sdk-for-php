@@ -63,8 +63,13 @@ class CloudConfigurationManager
      */
     const ENVIORNMENT_SOURCE = 'environment_source';
     
-    // Restrict users from creating instances from this class
-    private function __construct() { }
+    /**
+     * Restrict users from creating instances from this class
+     */
+    private function __construct()
+    {
+        
+    }
     
     /**
      * Gets a connection string value from the system environment.
