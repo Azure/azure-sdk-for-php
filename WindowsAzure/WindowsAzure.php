@@ -113,7 +113,7 @@ spl_autoload_register(
             'windowsazure\\common\\internal\\iservicefilter' => '/Common/Internal/IServiceFilter.php',
             'windowsazure\\common\\internal\\iservicesbuilder' => '/Common/Internal/IServicesBuilder.php',
             'windowsazure\\common\\internal\\logger' => '/Common/Internal/Logger.php',
-            'windowsazure\\common\\internal\\parserstate' => '/Common/Internal/ParserState.php',
+            'windowsazure\\common\\internal\\parserstate' => '/Common/Internal/ConnectionStringParser.php',
             'windowsazure\\common\\internal\\resources' => '/Common/Internal/Resources.php',
             'windowsazure\\common\\internal\\restproxy' => '/Common/Internal/RestProxy.php',
             'windowsazure\\common\\internal\\serialization\\iserializer' => '/Common/Internal/Serialization/ISerializer.php',
