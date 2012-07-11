@@ -149,13 +149,19 @@ class ServiceManagementSettings extends ServiceSettings
             )
         );
         if ($matchedSpecs) {
-            $endpointUri    = Utilities::tryGetValue(
-                $tokenizedSettings,
+            $endpointUri     = Utilities::tryGetValueInsensitive(
                 Resources::SERVICE_MANAGEMENT_ENDPOINT_NAME,
+                $tokenizedSettings,
                 Resources::SERVICE_MANAGEMENT_URL
             );
-            $subscriptionId  = $tokenizedSettings[Resources::SUBSCRIPTION_ID_NAME];
-            $certificatePath = $tokenizedSettings[Resources::CERTIFICATE_PATH_NAME];
+            $subscriptionId  = Utilities::tryGetValueInsensitive(
+                Resources::SUBSCRIPTION_ID_NAME,
+                $tokenizedSettings
+            );
+            $certificatePath = Utilities::tryGetValueInsensitive(
+                Resources::CERTIFICATE_PATH_NAME,
+                $tokenizedSettings
+            );
             
             return new ServiceManagementSettings(
                 $subscriptionId,

@@ -87,7 +87,7 @@ abstract class ServiceSettings
         
         // Assure that all given keys are valid.
         foreach ($tokenizedSettings as $key => $value) {
-            if (!in_array($key, static::$validSettingKeys)) {
+            if (!Utilities::inArrayInsensitive($key, static::$validSettingKeys) ) {
                 throw new \RuntimeException(
                     sprintf(
                         Resources::INVALID_CONNECTION_STRING_SETTING_KEY,
@@ -118,9 +118,9 @@ abstract class ServiceSettings
             use ($requirements, $isRequired, $atLeastOne)
         {
             $oneFound = false;
-            $result   = $userSettings;
+            $result   = array_change_key_case($userSettings);
             foreach ($requirements as $requirement) {
-                $settingName = $requirement[Resources::SETTING_NAME];
+                $settingName = strtolower($requirement[Resources::SETTING_NAME]);
                 
                 // Check if the setting name exists in the provided user settings.
                 if (array_key_exists($settingName, $result)) {
@@ -290,5 +290,3 @@ abstract class ServiceSettings
      */
     public abstract static function createFromConnectionString($connectionString);
 }
-
-

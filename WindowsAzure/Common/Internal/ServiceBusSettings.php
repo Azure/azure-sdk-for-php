@@ -165,21 +165,30 @@ class ServiceBusSettings extends ServiceSettings
                 self::$_wrapPasswordSetting
             )
         );
+        
         if ($matchedSpecs) {
-            // Parse the namespace part from the URI
-            $namespace = explode(
-                '.',
-                parse_url(
-                    $tokenizedSettings[Resources::SERVICE_BUS_ENDPOINT_NAME],
-                    PHP_URL_HOST
-                )
+            $endpoint = Utilities::tryGetValueInsensitive(
+                Resources::SERVICE_BUS_ENDPOINT_NAME,
+                $tokenizedSettings
             );
-            $namespace = $namespace[0];
+            
+            // Parse the namespace part from the URI
+            $namespace   = explode('.', parse_url($endpoint, PHP_URL_HOST));
+            $namespace   = $namespace[0];
+            $issuerName  = Utilities::tryGetValueInsensitive(
+                Resources::SHARED_SECRET_ISSUER_NAME,
+                $tokenizedSettings
+            );
+            $issuerValue = Utilities::tryGetValueInsensitive(
+                Resources::SHARED_SECRET_VALUE_NAME,
+                $tokenizedSettings
+            );
+            
             return new ServiceBusSettings(
-                $tokenizedSettings[Resources::SERVICE_BUS_ENDPOINT_NAME],
+                $endpoint,
                 $namespace,
-                $tokenizedSettings[Resources::SHARED_SECRET_ISSUER_NAME],
-                $tokenizedSettings[Resources::SHARED_SECRET_VALUE_NAME]
+                $issuerName,
+                $issuerValue
             );
         }
         

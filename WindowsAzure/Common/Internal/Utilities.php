@@ -62,6 +62,8 @@ class Utilities
      * @param string $url    The URL.
      * @param string $scheme The scheme. By default HTTP
      * 
+     * @static
+     * 
      * @return string
      */
     public static function tryAddUrlScheme($url, $scheme = 'http')
@@ -247,6 +249,8 @@ class Utilities
      * @param string $defaultTag default tag for non-tagged elements.
      * @param string $standalone adds 'standalone' header tag, values 'yes'/'no'
      * 
+     * @static
+     * 
      * @return string
      */
     public static function serialize($array, $rootName, $defaultTag = null,
@@ -317,6 +321,8 @@ class Utilities
      * 
      * @param string $obj boolean value in string format.
      * 
+     * @static
+     * 
      * @return bool
      */
     public static function toBoolean($obj)
@@ -329,6 +335,8 @@ class Utilities
      * 
      * @param bool $obj boolean value to convert.
      * 
+     * @static
+     * 
      * @return string
      */
     public static function booleanToString($obj)
@@ -340,6 +348,8 @@ class Utilities
      * Converts a given date string into \DateTime object
      * 
      * @param string $date windows azure date ins string represntation.
+     * 
+     * @static
      * 
      * @return \DateTime
      */
@@ -370,6 +380,8 @@ class Utilities
      * 
      * @param int $timestamp The unix timestamp to convert 
      *     (for DateTime check date_timestamp_get).
+     * 
+     * @static
      *
      * @return string
      */
@@ -395,6 +407,8 @@ class Utilities
      * 
      * @param \DateTime $value The datetime value.
      * 
+     * @static
+     * 
      * @return string
      */
     public static function convertToEdmDateTime($value) 
@@ -419,6 +433,8 @@ class Utilities
      * 
      * @param string $value The string value to parse.
      * 
+     * @static
+     * 
      * @return \DateTime
      */
     public static function convertToDateTime($value)
@@ -438,6 +454,8 @@ class Utilities
      * Converts string to stream handle.
      * 
      * @param type $string The string contents.
+     * 
+     * @static
      * 
      * @return resource
      */
@@ -465,6 +483,57 @@ class Utilities
         }
         
         return $ordered;
+    }
+    
+    /**
+     * Checks if a value exists in an array. The comparison is done in a case
+     * insensitive manner.
+     * 
+     * @param string $needle   The searched value.
+     * @param array  $haystack The array.
+     * 
+     * @static
+     * 
+     * @return boolean 
+     */
+    public static function inArrayInsensitive($needle, $haystack)
+    {
+        return in_array(strtolower($needle), array_map('strtolower', $haystack));
+    }
+    
+    /**
+     * Checks if the given key exists in the array. The comparison is done in a case
+     * insensitive manner.
+     * 
+     * @param string $key    The value to check.
+     * @param array  $search The array with keys to check.
+     * 
+     * @static
+     * 
+     * @return boolean 
+     */
+    public static function arrayKeyExistsInsensitive($key, $search)
+    {
+        return array_key_exists(strtolower($key), array_change_key_case($search));
+    }
+    
+    /**
+     * Returns the specified value of the $key passed from $array and in case that
+     * this $key doesn't exist, the default value is returned. The key matching is
+     * done in a case insensitive manner.
+     *
+     * @param string $key      The array key.
+     * @param array  $haystack The array to be used.
+     * @param mix    $default  The value to return if $key is not found in $array.
+     * 
+     * @static
+     * 
+     * @return mix
+     */
+    public static function tryGetValueInsensitive($key, $haystack, $default = null)
+    {
+        $array = array_change_key_case($haystack);
+        return Utilities::tryGetValue($array, strtolower($key), $default);
     }
 }
 

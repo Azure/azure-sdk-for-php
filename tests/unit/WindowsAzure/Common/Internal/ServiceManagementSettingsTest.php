@@ -206,6 +206,36 @@ class ServiceManagementSettingsTest extends \PHPUnit_Framework_TestCase
         // Test
         ServiceManagementSettings::createFromConnectionString($connectionString);
     }
+    
+    /**
+     * @covers WindowsAzure\Common\Internal\ServiceManagementSettings::createFromConnectionString
+     * @covers WindowsAzure\Common\Internal\ServiceManagementSettings::init
+     * @covers WindowsAzure\Common\Internal\ServiceManagementSettings::__construct
+     * @covers WindowsAzure\Common\Internal\ServiceSettings::getValidator
+     * @covers WindowsAzure\Common\Internal\ServiceSettings::optional
+     * @covers WindowsAzure\Common\Internal\ServiceSettings::allRequired
+     * @covers WindowsAzure\Common\Internal\ServiceSettings::setting
+     * @covers WindowsAzure\Common\Internal\ServiceSettings::settingWithFunc
+     * @covers WindowsAzure\Common\Internal\ServiceSettings::matchedSpecification
+     * @covers WindowsAzure\Common\Internal\ServiceSettings::parseAndValidateKeys
+     * @covers WindowsAzure\Common\Internal\ServiceSettings::noMatch
+     */
+    public function testCreateFromConnectionStringWithCaseInsensitive()
+    {
+        // Setup
+        $expectedSubscriptionId = 'mySubscriptionId';
+        $expectedCertificatePath = 'C:\path_to_my_cert.pem';
+        $expectedEndpointUri = 'http://myprivatedns.com';
+        $connectionString = "suBscriptIonId=$expectedSubscriptionId;ceRtiFicAtepAth=$expectedCertificatePath;ServiCemAnagemenTendPoinT=$expectedEndpointUri";
+        
+        // Test
+        $actual = ServiceManagementSettings::createFromConnectionString($connectionString);
+        
+        // Assert
+        $this->assertEquals($expectedEndpointUri, $actual->getEndpointUri());
+        $this->assertEquals($expectedCertificatePath, $actual->getCertificatePath());
+        $this->assertEquals($expectedEndpointUri, $actual->getEndpointUri());
+    }
 }
 
 
