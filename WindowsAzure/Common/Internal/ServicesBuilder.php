@@ -246,14 +246,23 @@ class ServicesBuilder implements IServiceBuilder
      */
     private function _buildServiceBus($config)
     { 
+        $certificatePath          = Resources::EMPTY_STRING;
+        $certificateAuthorityPath = Resources::EMPTY_STRING;
+        $properties               = $config->getProperties();
 
-        $certificatePath   = $config->getProperty(
-            ServiceBusSettings::CERTIFICATE_PATH
-        );
+        if (!empty($properties[ServiceBusSettings::CERTIFICATE_PATH]))
+        {
+            $certificatePath   = $config->getProperty(
+                ServiceBusSettings::CERTIFICATE_PATH
+            );
+        }
 
-        $certificateAuthorityPath = $config->getProperty(
-            ServiceBusSettings::CERTIFICATE_AUTHORITY_PATH
-        );
+        if (!empty($properties[ServiceBusSettings::CERTIFICATE_AUTHORITY_PATH]))
+        {
+            $certificateAuthorityPath = $config->getProperty(
+                ServiceBusSettings::CERTIFICATE_AUTHORITY_PATH
+            );
+        }
 
         $httpClient        = new HttpClient(
             $certificatePath,

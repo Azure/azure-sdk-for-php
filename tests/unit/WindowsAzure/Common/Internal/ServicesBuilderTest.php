@@ -128,6 +128,7 @@ class ServicesBuilderTest extends \PHPUnit_Framework_TestCase
         $config->setProperty(ServiceManagementSettings::CERTIFICATE_PATH, 'path');
         $config->setProperty(ServiceManagementSettings::SUBSCRIPTION_ID, 'sub id');
         $config->setProperty(ServiceManagementSettings::URI, 'uri');
+        $config->setProperty(ServiceManagementSettings::CERTIFICATE_AUTHORITY_PATH, 'certificate authority');
         $builder = new ServicesBuilder();
         
         // Test
