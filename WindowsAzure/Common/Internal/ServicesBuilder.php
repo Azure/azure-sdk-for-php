@@ -246,7 +246,29 @@ class ServicesBuilder implements IServiceBuilder
      */
     private function _buildServiceBus($config)
     { 
-        $httpClient        = new HttpClient();
+        $certificatePath          = Resources::EMPTY_STRING;
+        $certificateAuthorityPath = Resources::EMPTY_STRING;
+        $properties               = $config->getProperties();
+
+        if (!empty($properties[ServiceBusSettings::CERTIFICATE_PATH]))
+        {
+            $certificatePath   = $config->getProperty(
+                ServiceBusSettings::CERTIFICATE_PATH
+            );
+        }
+
+        if (!empty($properties[ServiceBusSettings::CERTIFICATE_AUTHORITY_PATH]))
+        {
+            $certificateAuthorityPath = $config->getProperty(
+                ServiceBusSettings::CERTIFICATE_AUTHORITY_PATH
+            );
+        }
+
+        $httpClient        = new HttpClient(
+            $certificatePath,
+            $certificateAuthorityPath
+        );
+
         $xmlSerializer     = new XmlSerializer();
         $serviceBusWrapper = new ServiceBusRestProxy(
             $httpClient,
@@ -272,12 +294,21 @@ class ServicesBuilder implements IServiceBuilder
      */
     private function _buildServiceManagement($config)
     {
-        $certificatePath = $config->getProperty(
+        $certificatePath          = $config->getProperty(
             ServiceManagementSettings::CERTIFICATE_PATH
         );
-        $httpClient      = new HttpClient($certificatePath);
-        $xmlSerializer   = new XmlSerializer();
-        $uri             = Utilities::tryAddUrlScheme(
+
+        $certificateAuthorityPath = $config->getProperty(
+            ServiceManagementSettings::CERTIFICATE_AUTHORITY_PATH
+        );
+
+        $httpClient               = new HttpClient(
+            $certificatePath,
+            $certificateAuthorityPath
+        );
+
+        $xmlSerializer            = new XmlSerializer();
+        $uri                      = Utilities::tryAddUrlScheme(
             $config->getProperty(ServiceManagementSettings::URI),
             Resources::HTTPS_SCHEME
         );
