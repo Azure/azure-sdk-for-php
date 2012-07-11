@@ -83,6 +83,16 @@ class ServiceBusRestProxyTestBase extends ServiceRestProxyTestBase
             TestResources::wrapPassword()
         );
 
+        $config->setProperty(
+            ServiceBusSettings::CERTIFICATE_PATH,
+            TestResources::serviceBusCertificatePath()
+        );
+
+        $config->setProperty(
+            ServiceBusSettings::CERTIFICATE_AUTHORITY_PATH,
+            TestResources::sslCertificateAuthorityPath()
+        );
+
         $serviceBusWrapper = ServiceBusService::create($config);
         $this->_createdTopics = array();
         $this->_createdSubscriptions = array();

@@ -37,10 +37,12 @@ namespace WindowsAzure\ServiceBus;
  */
 class ServiceBusSettings
 {
-    const URI           = 'serviceBus.uri';
-    const WRAP_URI      = 'serviceBus.wrap.uri';
-    const WRAP_NAME     = 'serviceBus.wrap.name';
-    const WRAP_PASSWORD = 'serviceBus.wrap.password';
+    const URI                        = 'serviceBus.uri';
+    const WRAP_URI                   = 'serviceBus.wrap.uri';
+    const WRAP_NAME                  = 'serviceBus.wrap.name';
+    const WRAP_PASSWORD              = 'serviceBus.wrap.password';
+    const CERTIFICATE_PATH           = 'serviceBus.CertificatePath';
+    const CERTIFICATE_AUTHORITY_PATH = 'serviceBus.CertificateAuthorityPath';
     
     /**
      * Sets a configuration with specified WRAP authentication parameters. 

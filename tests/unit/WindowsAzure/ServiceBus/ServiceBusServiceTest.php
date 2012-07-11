@@ -64,12 +64,16 @@ class ServiceBusServiceTest extends WrapRestProxyTestBase
 
         $wrapName = TestResources::wrapAuthenticationName();
         $wrapPassword = TestResources::wrapPassword();
+        $certificatePath = TestResources::serviceBusCertificatePath();
+        $sslCertificateAuthorityPath = TestResources::sslCertificateAuthorityPath();
 
         $config = new Configuration();
         $config->setProperty(ServiceBusSettings::URI, $serviceBusUri);
         $config->setProperty(ServiceBusSettings::WRAP_URI, $wrapUri);
         $config->setProperty(ServiceBusSettings::WRAP_NAME, $wrapName);
         $config->setProperty(ServiceBusSettings::WRAP_PASSWORD, $wrapPassword);
+        $config->setProperty(ServiceBusSettings::CERTIFICATE_PATH, $certificatePath);
+        $config->setProperty(ServiceBusSettings::CERTIFICATE_AUTHORITY_PATH, $sslCertificateAuthorityPath);
 
         $serviceBusRestProxy = ServiceBusService::create($config);
 

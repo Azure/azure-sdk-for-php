@@ -37,9 +37,10 @@ namespace WindowsAzure\ServiceManagement;
  */
 class ServiceManagementSettings
 {
-    const SUBSCRIPTION_ID  = 'serviceManagement.SubscriptionId';
-    const CERTIFICATE_PATH = 'serviceManagement.CertificatePath';
-    const URI              = 'serviceManagement.uri';
+    const SUBSCRIPTION_ID            = 'serviceManagement.SubscriptionId';
+    const CERTIFICATE_PATH           = 'serviceManagement.CertificatePath';
+    const URI                        = 'serviceManagement.uri';
+    const CERTIFICATE_AUTHORITY_PATH = 'serviceManagement.CertificateAuthorityPath';
 }
 
 ?>
