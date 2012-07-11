@@ -27,6 +27,13 @@ use WindowsAzure\Common\Internal\Resources;
 
 /**
  * Base class for all REST services settings.
+ * 
+ * To extend this class you've to define these members:
+ * 1- Static variable called $isInitialized, which indicates wheather the class's
+ *    static members have been initialized or not.
+ * 2- Static method called init(), which initializes class static members.
+ * 3- Static variable called $validSettingKeys, which contains the valid setting keys
+ *    for this service.
  *
  * @category  Microsoft
  * @package   WindowsAzure\Common\Internal
@@ -38,18 +45,6 @@ use WindowsAzure\Common\Internal\Resources;
  */
 abstract class ServiceSettings
 {
-    /**
-     * @var boolean
-     */
-    protected static $isInitialized = false;
-    
-    /**
-     * Holds the expected setting keys.
-     * 
-     * @var array
-     */
-    protected static $validSettingKeys = array();
-    
     /**
      * Throws an exception if the connection string format does not match any of the
      * available formats.

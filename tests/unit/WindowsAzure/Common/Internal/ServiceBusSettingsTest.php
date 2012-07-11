@@ -41,7 +41,7 @@ class ServiceBusSettingsTest extends \PHPUnit_Framework_TestCase
 {
     public function setUp()
     {
-        $property = new \ReflectionProperty('WindowsAzure\Common\Internal\ServiceSettings', 'isInitialized');
+        $property = new \ReflectionProperty('WindowsAzure\Common\Internal\ServiceBusSettings', 'isInitialized');
         $property->setAccessible(true);
         $property->setValue(false);
     }
