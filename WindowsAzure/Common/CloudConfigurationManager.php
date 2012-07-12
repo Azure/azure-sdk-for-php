@@ -25,6 +25,8 @@
 namespace WindowsAzure\Common;
 use WindowsAzure\Common\Internal\Utilities;
 use WindowsAzure\Common\Internal\Validate;
+use WindowsAzure\Common\Internal\Resources;
+use WindowsAzure\Common\Internal\ConnectionStringSource;
 
 /**
  * Configuration manager for accessing Windows Azure settings.
@@ -40,21 +42,47 @@ use WindowsAzure\Common\Internal\Validate;
 class CloudConfigurationManager
 {
     /**
-     * @var array
+     * @var boolean
      */
-    private static $_appSettings;
+    private static $_isInitialized = false;
     
     /**
-     * Gets a connection string.
+     * The list of connection string sources.
      * 
-     * This method will attempt to read the connection string from all available 
-     * sources, which may result in slower application performance. To avoid this, 
-     * you should use getConnectionString to read the connection string initially,
-     * then use getConnectionStringCached in subsequent calls.
-     * The search work in the following order:
-     * 1- Environment variables
-     * 2- Service Configuration
-     * 3- Use getConnectionStringCached
+     * @var array
+     */
+    private static $_sources;
+    
+    /**
+     * Restrict users from creating instances from this class
+     */
+    private function __construct()
+    {
+        
+    }
+    
+    /**
+     * Initializes the connection string source providers.
+     * 
+     * @return none 
+     */
+    private static function _init()
+    {
+        if (!self::$_isInitialized) {
+            self::$_sources = array();
+            
+            // Get list of default connection string sources.
+            $default = ConnectionStringSource::getDefaultSources();
+            foreach ($default as $name => $provider) {
+                self::$_sources[$name] = $provider;
+            }
+            
+            self::$_isInitialized = true;
+        }
+    }
+    
+    /**
+     * Gets a connection string from all available sources.
      * 
      * @param string $key The connection string key name.
      * 
@@ -64,58 +92,76 @@ class CloudConfigurationManager
     {
         Validate::isString($key, 'key');
         
+        self::_init();
         $value = null;
         
-        // Try to read from environment variables
-        $env   = getenv($key);
-        $value = !$env ? null : $env;
-        
-        // Reading from cscfg is not supported because the ServiceRuntime does not
-        // read settings from web role.
-        //$value = is_null($value) ? self::_getServiceRuntimeSetting($key) : $value;
-        
-        // Use getConnectionStringCached
-        $value = is_null($value) ? self::getConnectionStringCached($key) : $value;
-        
-        // Cache the connection string value
-        if (!is_null($value)) {
-            self::$_appSettings[$key] = $value;
+        foreach (self::$_sources as $source) {
+            $value = call_user_func_array($source, array($key));
+            
+            if (!empty($value)) {
+                break;
+            }
         }
         
         return $value;
     }
     
     /**
-     * Gets a cached connection string.
+     * Registers a new connection string source provider. If the source to get 
+     * registered is a default source, only the name of the source is required.
      * 
-     * When a new connection string has been added, use getConnectionString instead.
-     * 
-     * @param string $key The connection string key name.
-     * 
-     * @return string If the key does not exist return null.
-     */
-    public static function getConnectionStringCached($key)
-    {
-        Validate::isString($key, 'key');
-        
-        return Utilities::tryGetValue(self::$_appSettings, $key);
-    }
-    
-    /**
-     * Caches a connection string.
-     * 
-     * @param string $key   The connection string key.
-     * @param string $value The connection string value.
+     * @param string   $name     The source name.
+     * @param callable $provider The source callback.
+     * @param boolean  $prepend  When true, the $provider is processed first when 
+     * calling getConnectionString. When false (the default) the $provider is 
+     * processed after the existing callbacks.
      * 
      * @return none
      */
-    public static function setConnectionString($key, $value)
+    public static function registerSource($name, $provider = null, $prepend = false)
     {
-        Validate::isString($key, 'key');
-        Validate::isString($value, 'value');
+        Validate::isString($name, 'name');
+        Validate::notNullOrEmpty($name, 'name');
         
-        self::$_appSettings[$key] = $value;
+        self::_init();
+        $default = ConnectionStringSource::getDefaultSources();
+        
+        // Try to get callback if the user is trying to register a default source.
+        $provider = Utilities::tryGetValue($default, $name, $provider);
+        
+        Validate::notNullOrEmpty($provider, 'callback');
+        
+        if ($prepend) {
+            self::$_sources = array_merge(
+                array($name => $provider),
+                self::$_sources
+            );
+            
+        } else {
+            self::$_sources[$name] = $provider;
+        }
+    }
+    
+    /**
+     * Unregisters a connection string source.
+     * 
+     * @param string $name The source name.
+     * 
+     * @return callable
+     */
+    public static function unregisterSource($name)
+    {
+        Validate::isString($name, 'name');
+        Validate::notNullOrEmpty($name, 'name');
+        
+        self::_init();
+        
+        $sourceCallback = Utilities::tryGetValue(self::$_sources, $name);
+        
+        if (!is_null($sourceCallback)) {
+            unset(self::$_sources[$name]);
+        }
+        
+        return $sourceCallback;
     }
 }
-
-

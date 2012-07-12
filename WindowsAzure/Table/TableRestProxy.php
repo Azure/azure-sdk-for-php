@@ -35,6 +35,11 @@ use WindowsAzure\Table\Models\TableServiceOptions;
 use WindowsAzure\Table\Models\EdmType;
 use WindowsAzure\Table\Models\Filters;
 use WindowsAzure\Table\Models\Filters\Filter;
+use WindowsAzure\Table\Models\Filters\PropertyNameFilter;
+use WindowsAzure\Table\Models\Filters\ConstantFilter;
+use WindowsAzure\Table\Models\Filters\UnaryFilter;
+use WindowsAzure\Table\Models\Filters\BinaryFilter;
+use WindowsAzure\Table\Models\Filters\QueryStringFilter;
 use WindowsAzure\Table\Models\GetTableResult;
 use WindowsAzure\Table\Models\QueryTablesOptions;
 use WindowsAzure\Table\Models\QueryTablesResult;
@@ -491,9 +496,9 @@ class TableRestProxy extends ServiceRestProxy implements ITable
             return;
         }
         
-        if ($filter instanceof Filters\PropertyNameFilter) {
+        if ($filter instanceof PropertyNameFilter) {
             $e .= $filter->getPropertyName();
-        } else if ($filter instanceof Filters\ConstantFilter) {
+        } else if ($filter instanceof ConstantFilter) {
             $value = $filter->getValue();
             // If the value is null we just append null regardless of the edmType.
             if (is_null($value)) {
@@ -502,7 +507,7 @@ class TableRestProxy extends ServiceRestProxy implements ITable
                 $type = $filter->getEdmType();
                 $e   .= EdmType::serializeQueryValue($type, $value);
             }
-        } else if ($filter instanceof Filters\UnaryFilter) {
+        } else if ($filter instanceof UnaryFilter) {
             $e .= $filter->getOperator();
             $e .= '(';
             $this->_buildFilterExpressionRec($filter->getOperand(), $e);
@@ -515,7 +520,7 @@ class TableRestProxy extends ServiceRestProxy implements ITable
             $e .= ' ';
             $this->_buildFilterExpressionRec($filter->getRight(), $e);
             $e .= ')';
-        } else if ($filter instanceof Filters\QueryStringFilter) {
+        } else if ($filter instanceof QueryStringFilter) {
             $e .= $filter->getQueryString();
         }
         

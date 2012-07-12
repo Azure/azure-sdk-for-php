@@ -123,9 +123,9 @@ class ServiceBusSettings extends ServiceSettings
     }
     
     /**
-     * Creates new service bus settings instance.
+     * Creates new Service Bus settings instance.
      * 
-     * @param string $serviceBusEndpoint The service bus endpoint uri.
+     * @param string $serviceBusEndpoint The Service Bus endpoint uri.
      * @param string $namespace          The service namespace.
      * @param string $wrapName           The wrap name.
      * @param string $wrapPassword       The wrap password.
@@ -165,21 +165,30 @@ class ServiceBusSettings extends ServiceSettings
                 self::$_wrapPasswordSetting
             )
         );
+        
         if ($matchedSpecs) {
-            // Parse the namespace part from the URI
-            $namespace = explode(
-                '.',
-                parse_url(
-                    $tokenizedSettings[Resources::SERVICE_BUS_ENDPOINT_NAME],
-                    PHP_URL_HOST
-                )
+            $endpoint = Utilities::tryGetValueInsensitive(
+                Resources::SERVICE_BUS_ENDPOINT_NAME,
+                $tokenizedSettings
             );
-            $namespace = $namespace[0];
+            
+            // Parse the namespace part from the URI
+            $namespace   = explode('.', parse_url($endpoint, PHP_URL_HOST));
+            $namespace   = $namespace[0];
+            $issuerName  = Utilities::tryGetValueInsensitive(
+                Resources::SHARED_SECRET_ISSUER_NAME,
+                $tokenizedSettings
+            );
+            $issuerValue = Utilities::tryGetValueInsensitive(
+                Resources::SHARED_SECRET_VALUE_NAME,
+                $tokenizedSettings
+            );
+            
             return new ServiceBusSettings(
-                $tokenizedSettings[Resources::SERVICE_BUS_ENDPOINT_NAME],
+                $endpoint,
                 $namespace,
-                $tokenizedSettings[Resources::SHARED_SECRET_ISSUER_NAME],
-                $tokenizedSettings[Resources::SHARED_SECRET_VALUE_NAME]
+                $issuerName,
+                $issuerValue
             );
         }
         
@@ -187,7 +196,7 @@ class ServiceBusSettings extends ServiceSettings
     }
     
     /**
-     * Gets the service bus endpoint uri.
+     * Gets the Service Bus endpoint URI.
      * 
      * @return string
      */
@@ -197,7 +206,7 @@ class ServiceBusSettings extends ServiceSettings
     }
     
     /**
-     * Gets the wrap endpoint uri.
+     * Gets the wrap endpoint URI.
      * 
      * @return string
      */

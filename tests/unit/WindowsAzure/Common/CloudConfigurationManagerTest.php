@@ -24,6 +24,7 @@
 
 namespace Tests\Unit\WindowsAzure\Common;
 use WindowsAzure\Common\CloudConfigurationManager;
+use WindowsAzure\Common\Internal\ConnectionStringSource;
 
 /**
  * Unit tests for class CloudConfigurationManager
@@ -41,8 +42,20 @@ class CloudConfigurationManagerTest extends \PHPUnit_Framework_TestCase
     private $_key = 'my_connection_string';
     private $_value = 'connection string value';
     
+    public function setUp()
+    {
+        $isInitialized = new \ReflectionProperty('WindowsAzure\Common\CloudConfigurationManager', '_isInitialized');
+        $isInitialized->setAccessible(true);
+        $isInitialized->setValue(false);
+        
+        $sources = new \ReflectionProperty('WindowsAzure\Common\CloudConfigurationManager', '_sources');
+        $sources->setAccessible(true);
+        $sources->setValue(array());
+    }
+    
     /**
      * @covers WindowsAzure\Common\CloudConfigurationManager::getConnectionString
+     * @covers WindowsAzure\Common\CloudConfigurationManager::_init
      */
     public function testGetConnectionStringFromEnvironmentVariable()
     {
@@ -54,61 +67,159 @@ class CloudConfigurationManagerTest extends \PHPUnit_Framework_TestCase
         
         // Assert
         $this->assertEquals($this->_value, $actual);
+        
+        // Clean
+        putenv($this->_key);
     }
     
     /**
      * @covers WindowsAzure\Common\CloudConfigurationManager::getConnectionString
      */
-    public function testGetConnectionStringFromCached()
-    {
-        // Setup
-        CloudConfigurationManager::setConnectionString($this->_key, $this->_value);
-        
-        // Test
-        $actual = CloudConfigurationManager::getConnectionString($this->_key);
-        
-        // Assert
-        $this->assertEquals($this->_value, $actual);
-    }
-    
-    /**
-     * @covers WindowsAzure\Common\CloudConfigurationManager::getConnectionString
-     */
-    public function testGetConnectionStringDoesNotExit()
+    public function testGetConnectionStringDoesNotExist()
     {        
         // Test
         $actual = CloudConfigurationManager::getConnectionString('does not exist');
         
         // Assert
-        $this->assertNull($actual);
+        $this->assertEmpty($actual);
     }
     
     /**
-     * @covers WindowsAzure\Common\CloudConfigurationManager::getConnectionStringCached
+     * @covers WindowsAzure\Common\CloudConfigurationManager::registerSource
+     * @covers WindowsAzure\Common\CloudConfigurationManager::_init
      */
-    public function testGetConnectionStringCached()
+    public function testRegisterSource()
     {
         // Setup
-        CloudConfigurationManager::setConnectionString($this->_key, $this->_value);
+        $expectedKey = $this->_key;
+        $expectedValue = $this->_value . "extravalue";
         
         // Test
-        $actual = CloudConfigurationManager::getConnectionStringCached($this->_key);
+        CloudConfigurationManager::registerSource(
+            'my_source',
+            function ($key) use ($expectedKey, $expectedValue)
+            {
+                if ($key == $expectedKey) {
+                    return $expectedValue;
+                }
+            }
+        );
         
         // Assert
-        $this->assertEquals($this->_value, $actual);
+        $actual = CloudConfigurationManager::getConnectionString($expectedKey);
+        $this->assertEquals($expectedValue, $actual);
     }
     
     /**
-     * @covers WindowsAzure\Common\CloudConfigurationManager::setConnectionString
+     * @covers WindowsAzure\Common\CloudConfigurationManager::registerSource
+     * @covers WindowsAzure\Common\CloudConfigurationManager::_init
      */
-    public function testSetConnectionString()
+    public function testRegisterSourceWithPrepend()
     {
+        // Setup
+        $expectedKey = $this->_key;
+        $expectedValue = $this->_value . "extravalue2";
+        putenv("$this->_key=wrongvalue");
+
         // Test
-        CloudConfigurationManager::setConnectionString($this->_key, $this->_value);
+        CloudConfigurationManager::registerSource(
+            'my_source',
+            function ($key) use ($expectedKey, $expectedValue)
+            {
+                if ($key == $expectedKey) {
+                    return $expectedValue;
+                }
+            },
+            true
+        );
         
         // Assert
-        $actual = CloudConfigurationManager::getConnectionStringCached($this->_key);
-        $this->assertEquals($this->_value, $actual);
+        $actual = CloudConfigurationManager::getConnectionString($expectedKey);
+        $this->assertEquals($expectedValue, $actual);
+        
+        // Clean
+        putenv($this->_key);
+    }
+    
+    /**
+     * @covers WindowsAzure\Common\CloudConfigurationManager::unregisterSource
+     * @covers WindowsAzure\Common\CloudConfigurationManager::_init
+     */
+    public function testUnRegisterSource()
+    {
+        // Setup
+        $expectedKey = $this->_key;
+        $expectedValue = $this->_value . "extravalue3";
+        $name = 'my_source';
+        CloudConfigurationManager::registerSource(
+            $name,
+            function ($key) use ($expectedKey, $expectedValue)
+            {
+                if ($key == $expectedKey) {
+                    return $expectedValue;
+                }
+            }
+        );
+        
+        // Test
+        $callback = CloudConfigurationManager::unregisterSource($name);
+        
+        // Assert
+        $actual = CloudConfigurationManager::getConnectionString($expectedKey);
+        $this->assertEmpty($actual);
+        $this->assertNotNull($callback);
+    }
+    
+    /**
+     * @covers WindowsAzure\Common\CloudConfigurationManager::registerSource
+     * @covers WindowsAzure\Common\CloudConfigurationManager::_init
+     */
+    public function testRegisterSourceWithDefaultSource()
+    {
+        // Setup
+        $expectedKey = $this->_key;
+        $expectedValue = $this->_value . "extravalue5";
+        CloudConfigurationManager::unregisterSource(ConnectionStringSource::ENVIRONMENT_SOURCE);
+        putenv("$expectedKey=$expectedValue");
+        
+        // Test
+        CloudConfigurationManager::registerSource(ConnectionStringSource::ENVIRONMENT_SOURCE);
+        
+        // Assert
+        $actual = CloudConfigurationManager::getConnectionString($expectedKey);
+        $this->assertEquals($expectedValue, $actual);
+        
+        // Clean
+        putenv($expectedKey);
+    }
+    
+    /**
+     * @covers WindowsAzure\Common\CloudConfigurationManager::unregisterSource
+     * @covers WindowsAzure\Common\CloudConfigurationManager::_init
+     */
+    public function testUnRegisterSourceWithDefaultSource()
+    {
+        // Setup
+        $expectedKey = $this->_key;
+        $expectedValue = $this->_value . "extravalue4";
+        $name = 'my_source';
+        CloudConfigurationManager::registerSource(
+            $name,
+            function ($key) use ($expectedKey, $expectedValue)
+            {
+                if ($key == $expectedKey) {
+                    return $expectedValue;
+                }
+            }
+        );
+        
+        // Test
+        $callback = CloudConfigurationManager::unregisterSource(ConnectionStringSource::ENVIRONMENT_SOURCE);
+        
+        // Assert
+        $actual = CloudConfigurationManager::getConnectionString($expectedKey);
+        $this->assertEquals($expectedValue, $actual);
+        $this->assertNotNull($callback);
     }
 }
 

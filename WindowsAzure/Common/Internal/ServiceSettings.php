@@ -19,7 +19,7 @@
  * @author    Azure PHP SDK <azurephpsdk@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
- * @link      https://github.com/windowsazure\common\internal/azure-sdk-for-php
+ * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
  
 namespace WindowsAzure\Common\Internal;
@@ -27,6 +27,13 @@ use WindowsAzure\Common\Internal\Resources;
 
 /**
  * Base class for all REST services settings.
+ * 
+ * Derived classes must implement the following members:
+ * 1- $isInitialized: A static property that indicates whether the class's static
+ *    members have been initialized.
+ * 2- init(): A static method that initializes static members.
+ * 3- $validSettingKeys: A static property that contains valid setting keys for this 
+ *    service.
  *
  * @category  Microsoft
  * @package   WindowsAzure\Common\Internal
@@ -34,22 +41,10 @@ use WindowsAzure\Common\Internal\Resources;
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @version   Release: @package_version@
- * @link      https://github.com/windowsazure\common\internal/azure-sdk-for-php
+ * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
 abstract class ServiceSettings
 {
-    /**
-     * @var boolean
-     */
-    protected static $isInitialized = false;
-    
-    /**
-     * Holds the expected setting keys.
-     * 
-     * @var array
-     */
-    protected static $validSettingKeys = array();
-    
     /**
      * Throws an exception if the connection string format does not match any of the
      * available formats.
@@ -92,7 +87,7 @@ abstract class ServiceSettings
         
         // Assure that all given keys are valid.
         foreach ($tokenizedSettings as $key => $value) {
-            if (!in_array($key, static::$validSettingKeys)) {
+            if (!Utilities::inArrayInsensitive($key, static::$validSettingKeys) ) {
                 throw new \RuntimeException(
                     sprintf(
                         Resources::INVALID_CONNECTION_STRING_SETTING_KEY,
@@ -123,9 +118,9 @@ abstract class ServiceSettings
             use ($requirements, $isRequired, $atLeastOne)
         {
             $oneFound = false;
-            $result   = $userSettings;
+            $result   = array_change_key_case($userSettings);
             foreach ($requirements as $requirement) {
-                $settingName = $requirement[Resources::SETTING_NAME];
+                $settingName = strtolower($requirement[Resources::SETTING_NAME]);
                 
                 // Check if the setting name exists in the provided user settings.
                 if (array_key_exists($settingName, $result)) {
@@ -295,5 +290,3 @@ abstract class ServiceSettings
      */
     public abstract static function createFromConnectionString($connectionString);
 }
-
-

@@ -209,6 +209,45 @@ class ConnectionStringParser
     }
     
     /**
+     * Extracts the key's value.
+     * 
+     * @return string 
+     */
+    private function _extractValue()
+    {
+        $value = Resources::EMPTY_STRING;
+        
+        if ($this->_pos < strlen($this->_value)) {
+            $ch = $this->_value[$this->_pos];
+            
+            if ($ch == '"' || $ch == '\'') {
+                // Value is contained between double quotes or skipped single quotes.
+                $this->_pos++;
+                $value = $this->_extractString($ch);
+            } else {
+                $firstPos = $this->_pos;
+                $isFound  = false;
+                
+                while ($this->_pos < strlen($this->_value) && !$isFound) {
+                    $ch = $this->_value[$this->_pos];
+                    
+                    if ($ch == ';') {
+                        $isFound = true;
+                    } else {
+                        $this->_pos++;
+                    }
+                }
+                
+                $value = rtrim(
+                    substr($this->_value, $firstPos, $this->_pos - $firstPos)
+                );
+            }
+        }
+        
+        return $value;
+    }
+    
+    /**
      * Extracts key at the current position.
      * 
      * @return string 
@@ -217,9 +256,10 @@ class ConnectionStringParser
     {
         $key      = null;
         $firstPos = $this->_pos;
-        $ch       = $this->_value[$this->_pos++];
+        $ch       = $this->_value[$this->_pos];
         
         if ($ch == '"' || $ch == '\'') {
+            $this->_pos++;
             $key = $this->_extractString($ch);
         } else if ($ch == ';' || $ch == '=') {
             // Key name was expected.
@@ -303,49 +343,23 @@ class ConnectionStringParser
         
         $this->_pos++;
     }
-    
-    /**
-     * Extracts the key's value.
-     * 
-     * @return string 
-     */
-    private function _extractValue()
-    {
-        $value = Resources::EMPTY_STRING;
-        
-        if ($this->_pos < strlen($this->_value)) {
-            $ch = $this->_value[$this->_pos];
-            
-            if ($ch == '\'' || $ch == '"') {
-                // Value is contained between double quotes or skipped single quotes.
-                $this->_pos++;
-                $value = $this->_extractString($ch);
-            } else {
-                $firstPos = $this->_pos;
-                $isFound  = false;
-                
-                while ($this->_pos < strlen($this->_value) && !$isFound) {
-                    $ch = $this->_value[$this->_pos];
-                    
-                    switch ($ch) {
-                    case ';':
-                        $isFound = true;
-                        break;
-                    
-                    default:
-                        $this->_pos++;
-                        break;
-                    }
-                }
-                
-                $value = rtrim(
-                    substr($this->_value, $firstPos, $this->_pos - $firstPos)
-                );
-            }
-        }
-        
-        return $value;
-    }
 }
 
-
+/**
+ * State of the connection string parser.
+ *
+ * @category  Microsoft
+ * @package   WindowsAzure\Common\Internal
+ * @author    Azure PHP SDK <azurephpsdk@microsoft.com>
+ * @copyright 2012 Microsoft Corporation
+ * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
+ * @version   Release: @package_version@
+ * @link      https://github.com/windowsazure/azure-sdk-for-php
+ */
+class ParserState
+{
+    const EXPECT_KEY        = 'ExpectKey';
+    const EXPECT_ASSIGNMENT = 'ExpectAssignment';
+    const EXPECT_VALUE      = 'ExpectValue';
+    const EXPECT_SEPARATOR  = 'ExpectSeparator';
+}

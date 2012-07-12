@@ -151,6 +151,16 @@ class TestResources
         return $path;
     }
 
+    public static function serviceBusCertificatePath()
+    {
+        return getenv('SERVICE_BUS_CERTIFICATE_PATH');
+    }
+
+    public static function sslCertificateAuthorityPath()
+    {
+        return getenv('SSL_CERTIFICATE_AUTHORITY_PATH');
+    }
+
     public static function serviceBusNamespace()
     {
         $namespace = getenv('SERVICE_BUS_NAMESPACE');
@@ -183,7 +193,6 @@ class TestResources
         
         return $wrapPassword;
     }
-    
 
     public static function getServicePropertiesSample()
     {

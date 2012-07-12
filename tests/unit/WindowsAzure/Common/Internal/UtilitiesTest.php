@@ -433,23 +433,6 @@ class UtilitiesTest extends \PHPUnit_Framework_TestCase
         // Assert
         $this->assertEquals($expected, $actual);
     }
-
-    /**
-     * @covers WindowsAzure\Common\Internal\Utilities::arrayKeyExistsIgnoreCase
-     */
-    public function testArrayKeyExistsIgnoreCase()
-    {
-        // Setup
-        $expected = true;
-        $testKey = 'VaLuE';
-        $testArray = array('NamE' => 1, 'VALUe' => 20, '12M3' => 0);
-        
-        // Test
-        $actual = Utilities::arrayKeyExistsIgnoreCase($testKey, $testArray);
-        
-        // Assert
-        $this->assertEquals($expected, $actual);
-    }
     
     /**
      * @covers WindowsAzure\Common\Internal\Utilities::startsWith
@@ -465,6 +448,52 @@ class UtilitiesTest extends \PHPUnit_Framework_TestCase
         
         // Assert
         $this->assertTrue($actual);
+    }
+    
+    /**
+     * @covers WindowsAzure\Common\Internal\Utilities::inArrayInsensitive
+     */
+    public function testInArrayInsensitive()
+    {
+        // Setup
+        $value = 'CaseInsensitiVe';
+        $array = array('caSeinSenSitivE');
+        
+        // Test
+        $actual = Utilities::inArrayInsensitive($value, $array);
+        
+        // Assert
+        $this->assertTrue($actual);
+    }
+    
+    /**
+     * @covers WindowsAzure\Common\Internal\Utilities::inArrayInsensitive
+     */
+    public function testArrayKeyExistsInsensitive()
+    {
+        // Setup
+        $key = 'CaseInsensitiVe';
+        $array = array('caSeinSenSitivE' => '123');
+        
+        // Test
+        $actual = Utilities::arrayKeyExistsInsensitive($key, $array);
+        
+        // Assert
+        $this->assertTrue($actual);
+    }
+    
+    public function testTryGetValueInsensitive()
+    {
+        // Setup
+        $key = 'KEy';
+        $value = 1;
+        $array = array($key => $value);
+        
+        // Test
+        $actual = Utilities::tryGetValueInsensitive('keY', $array);
+        
+        // Assert
+        $this->assertEquals($value, $actual);
     }
 }
 

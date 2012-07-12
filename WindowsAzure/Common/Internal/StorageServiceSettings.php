@@ -292,8 +292,14 @@ class StorageServiceSettings extends ServiceSettings
      */
     private static function _getDefaultServiceEndpoint($settings, $dns)
     {
-        $scheme      = $settings[Resources::DEFAULT_ENDPOINTS_PROTOCOL_NAME];
-        $accountName = $settings[Resources::ACCOUNT_NAME_NAME];
+        $scheme      = Utilities::tryGetValueInsensitive(
+            Resources::DEFAULT_ENDPOINTS_PROTOCOL_NAME,
+            $settings
+        );
+        $accountName = Utilities::tryGetValueInsensitive(
+            Resources::ACCOUNT_NAME_NAME,
+            $settings
+        );
         
         return sprintf(Resources::SERVICE_URI_FORMAT, $scheme, $accountName, $dns);
     }
@@ -314,25 +320,33 @@ class StorageServiceSettings extends ServiceSettings
         $queueEndpointUri = null,
         $tableEndpointUri = null
     ) {
-        $blobEndpointUri = Utilities::tryGetValue(
-            $settings,
+        $blobEndpointUri = Utilities::tryGetValueInsensitive(
             Resources::BLOB_ENDPOINT_NAME,
+            $settings,
             $blobEndpointUri
         );
-        $queueEndpointUri = Utilities::tryGetValue(
-            $settings,
+        $queueEndpointUri = Utilities::tryGetValueInsensitive(
             Resources::QUEUE_ENDPOINT_NAME,
+            $settings,
             $queueEndpointUri
         );
-        $tableEndpointUri = Utilities::tryGetValue(
-            $settings,
+        $tableEndpointUri = Utilities::tryGetValueInsensitive(
             Resources::TABLE_ENDPOINT_NAME,
+            $settings,
             $tableEndpointUri
+        );
+        $accountName      = Utilities::tryGetValueInsensitive(
+            Resources::ACCOUNT_NAME_NAME,
+            $settings
+        );
+        $accountKey       = Utilities::tryGetValueInsensitive(
+            Resources::ACCOUNT_KEY_NAME,
+            $settings
         );
             
         return new StorageServiceSettings(
-            $settings[Resources::ACCOUNT_NAME_NAME],
-            $settings[Resources::ACCOUNT_KEY_NAME],
+            $accountName,
+            $accountKey,
             $blobEndpointUri,
             $queueEndpointUri,
             $tableEndpointUri
@@ -357,8 +371,10 @@ class StorageServiceSettings extends ServiceSettings
             self::optional(self::$_developmentStorageProxyUriSetting)
         );
         if ($matchedSpecs) {
-            $settingName = Resources::DEVELOPMENT_STORAGE_PROXY_URI_NAME;
-            $proxyUri    = Utilities::tryGetValue($tokenizedSettings, $settingName);
+            $proxyUri    = Utilities::tryGetValueInsensitive(
+                Resources::DEVELOPMENT_STORAGE_PROXY_URI_NAME,
+                $tokenizedSettings
+            );
             
             return self::_getDevelopmentStorageAccount($proxyUri);
         }

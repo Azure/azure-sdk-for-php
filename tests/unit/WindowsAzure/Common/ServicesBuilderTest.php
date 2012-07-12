@@ -15,17 +15,17 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   Tests\Unit\WindowsAzure\Common\Internal
+ * @package   Tests\Unit\WindowsAzure\Common
  * @author    Azure PHP SDK <azurephpsdk@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
 
-namespace Tests\Unit\WindowsAzure\Common\Internal;
+namespace Tests\Unit\WindowsAzure\Common;
 use Tests\Framework\TestResources;
 use WindowsAzure\Common\Internal\Resources;
-use WindowsAzure\Common\Internal\ServicesBuilder;
+use WindowsAzure\Common\ServicesBuilder;
 use WindowsAzure\Common\Configuration;
 use WindowsAzure\Common\Internal\InvalidArgumentTypeException;
 
@@ -33,7 +33,7 @@ use WindowsAzure\Common\Internal\InvalidArgumentTypeException;
  * Unit tests for class ServicesBuilder
  *
  * @category  Microsoft
- * @package   Tests\Unit\WindowsAzure\Common\Internal
+ * @package   Tests\Unit\WindowsAzure\Common
  * @author    Azure PHP SDK <azurephpsdk@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
@@ -43,11 +43,10 @@ use WindowsAzure\Common\Internal\InvalidArgumentTypeException;
 class ServicesBuilderTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @covers WindowsAzure\Common\Internal\ServicesBuilder::createQueueService
-     * @covers WindowsAzure\Common\Internal\ServicesBuilder::httpClient
-     * @covers WindowsAzure\Common\Internal\ServicesBuilder::serializer
-     * @covers WindowsAzure\Common\Internal\ServicesBuilder::queueAuthenticationScheme
-     * @covers WindowsAzure\Common\Internal\ServicesBuilder::_addHeadersFilter
+     * @covers WindowsAzure\Common\ServicesBuilder::createQueueService
+     * @covers WindowsAzure\Common\ServicesBuilder::httpClient
+     * @covers WindowsAzure\Common\ServicesBuilder::serializer
+     * @covers WindowsAzure\Common\ServicesBuilder::queueAuthenticationScheme
      */
     public function testBuildForQueue()
     {
@@ -62,11 +61,10 @@ class ServicesBuilderTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers WindowsAzure\Common\Internal\ServicesBuilder::createBlobService
-     * @covers WindowsAzure\Common\Internal\ServicesBuilder::httpClient
-     * @covers WindowsAzure\Common\Internal\ServicesBuilder::serializer
-     * @covers WindowsAzure\Common\Internal\ServicesBuilder::blobAuthenticationScheme
-     * @covers WindowsAzure\Common\Internal\ServicesBuilder::_addHeadersFilter
+     * @covers WindowsAzure\Common\ServicesBuilder::createBlobService
+     * @covers WindowsAzure\Common\ServicesBuilder::httpClient
+     * @covers WindowsAzure\Common\ServicesBuilder::serializer
+     * @covers WindowsAzure\Common\ServicesBuilder::blobAuthenticationScheme
      */
     public function testBuildForBlob()
     {
@@ -81,13 +79,12 @@ class ServicesBuilderTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers WindowsAzure\Common\Internal\ServicesBuilder::createTableService
-     * @covers WindowsAzure\Common\Internal\ServicesBuilder::httpClient
-     * @covers WindowsAzure\Common\Internal\ServicesBuilder::serializer
-     * @covers WindowsAzure\Common\Internal\ServicesBuilder::mimeSerializer
-     * @covers WindowsAzure\Common\Internal\ServicesBuilder::atomSerializer
-     * @covers WindowsAzure\Common\Internal\ServicesBuilder::tableAuthenticationScheme
-     * @covers WindowsAzure\Common\Internal\ServicesBuilder::_addHeadersFilter
+     * @covers WindowsAzure\Common\ServicesBuilder::createTableService
+     * @covers WindowsAzure\Common\ServicesBuilder::httpClient
+     * @covers WindowsAzure\Common\ServicesBuilder::serializer
+     * @covers WindowsAzure\Common\ServicesBuilder::mimeSerializer
+     * @covers WindowsAzure\Common\ServicesBuilder::atomSerializer
+     * @covers WindowsAzure\Common\ServicesBuilder::tableAuthenticationScheme
      */
     public function testBuildForTable()
     {
@@ -102,10 +99,9 @@ class ServicesBuilderTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers WindowsAzure\Common\Internal\ServicesBuilder::createServiceManagementService
-     * @covers WindowsAzure\Common\Internal\ServicesBuilder::httpClient
-     * @covers WindowsAzure\Common\Internal\ServicesBuilder::serializer
-     * @covers WindowsAzure\Common\Internal\ServicesBuilder::_addHeadersFilter
+     * @covers WindowsAzure\Common\ServicesBuilder::createServiceManagementService
+     * @covers WindowsAzure\Common\ServicesBuilder::httpClient
+     * @covers WindowsAzure\Common\ServicesBuilder::serializer
      */
     public function testBuildForServiceManagement()
     {
@@ -117,6 +113,24 @@ class ServicesBuilderTest extends \PHPUnit_Framework_TestCase
         
         // Assert
         $this->assertInstanceOf('WindowsAzure\ServiceManagement\Internal\IServiceManagement', $serviceManagementRestProxy);
+    }
+    
+    /**
+     * @covers WindowsAzure\Common\ServicesBuilder::createServiceBusService
+     * @covers WindowsAzure\Common\ServicesBuilder::createWrapService
+     * @covers WindowsAzure\Common\ServicesBuilder::httpClient
+     * @covers WindowsAzure\Common\ServicesBuilder::serializer
+     */
+    public function testBuildForServiceBus()
+    {
+        // Setup
+        $builder = new ServicesBuilder();
+        
+        // Test
+        $serviceBusRestProxy = $builder->createServiceBusService(TestResources::getServiceBusConnectionString());
+        
+        // Assert
+        $this->assertInstanceOf('WindowsAzure\ServiceBus\Internal\IServiceBus', $serviceBusRestProxy);
     }
 }
 
