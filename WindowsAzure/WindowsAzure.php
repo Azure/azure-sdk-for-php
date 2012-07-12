@@ -112,7 +112,6 @@ spl_autoload_register(
             'windowsazure\\common\\internal\\http\\url' => '/Common/Internal/Http/Url.php',
             'windowsazure\\common\\internal\\invalidargumenttypeexception' => '/Common/Internal/InvalidArgumentTypeException.php',
             'windowsazure\\common\\internal\\iservicefilter' => '/Common/Internal/IServiceFilter.php',
-            'windowsazure\\common\\internal\\iservicesbuilder' => '/Common/Internal/IServicesBuilder.php',
             'windowsazure\\common\\internal\\logger' => '/Common/Internal/Logger.php',
             'windowsazure\\common\\internal\\parserstate' => '/Common/Internal/ConnectionStringParser.php',
             'windowsazure\\common\\internal\\resources' => '/Common/Internal/Resources.php',
