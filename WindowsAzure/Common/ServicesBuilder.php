@@ -15,43 +15,45 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   WindowsAzure\Common\Internal
+ * @package   WindowsAzure\Common
  * @author    Azure PHP SDK <azurephpsdk@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
  
-namespace WindowsAzure\Common\Internal;
+namespace WindowsAzure\Common;
+use WindowsAzure\Blob\BlobRestProxy;
 use WindowsAzure\Common\Internal\Resources;
 use WindowsAzure\Common\Internal\Validate;
 use WindowsAzure\Common\Internal\Utilities;
 use WindowsAzure\Common\Internal\Http\HttpClient;
 use WindowsAzure\Common\Internal\IServicesBuilder;
-use WindowsAzure\Common\Configuration;
 use WindowsAzure\Common\Internal\Filters\DateFilter;
 use WindowsAzure\Common\Internal\Filters\HeadersFilter;
 use WindowsAzure\Common\Internal\Filters\AuthenticationFilter;
 use WindowsAzure\Common\Internal\Filters\WrapFilter;
 use WindowsAzure\Common\Internal\InvalidArgumentTypeException;
-use WindowsAzure\Queue\QueueRestProxy;
-use WindowsAzure\Blob\BlobRestProxy;
-use WindowsAzure\ServiceBus\ServiceBusRestProxy;
-use WindowsAzure\ServiceBus\WrapRestProxy;
-use WindowsAzure\Table\TableRestProxy;
-use WindowsAzure\Table\Internal\AtomReaderWriter;
-use WindowsAzure\Table\Internal\MimeReaderWriter;
 use WindowsAzure\Common\Internal\Serialization\XmlSerializer;
-use WindowsAzure\ServiceManagement\ServiceManagementRestProxy;
 use WindowsAzure\Common\Internal\Authentication\SharedKeyAuthScheme;
 use WindowsAzure\Common\Internal\Authentication\TableSharedKeyLiteAuthScheme;
 use WindowsAzure\Common\Internal\StorageServiceSettings;
+use WindowsAzure\Common\Internal\ServiceManagementSettings;
+use WindowsAzure\Common\Internal\ServiceBusSettings;
+use WindowsAzure\Queue\QueueRestProxy;
+use WindowsAzure\ServiceBus\ServiceBusRestProxy;
+use WindowsAzure\ServiceBus\WrapRestProxy;
+use WindowsAzure\ServiceManagement\ServiceManagementRestProxy;
+use WindowsAzure\Table\TableRestProxy;
+use WindowsAzure\Table\Internal\AtomReaderWriter;
+use WindowsAzure\Table\Internal\MimeReaderWriter;
+
 
 /**
  * Builds azure service objects.
  *
  * @category  Microsoft
- * @package   WindowsAzure\Common\Internal
+ * @package   WindowsAzure\Common
  * @author    Azure PHP SDK <azurephpsdk@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
@@ -106,7 +108,7 @@ class ServicesBuilder implements IServicesBuilder
      * @param string $accountName The account name.
      * @param string $accountKey  The account key.
      * 
-     * @return \WindowsAzure\Common\Internal\Authentication\SharedKeyAuthScheme 
+     * @return \WindowsAzure\Common\Internal\Authentication\StorageAuthScheme
      */
     protected function queueAuthenticationScheme($accountName, $accountKey)
     {
@@ -119,7 +121,7 @@ class ServicesBuilder implements IServicesBuilder
      * @param string $accountName The account name.
      * @param string $accountKey  The account key.
      * 
-     * @return \WindowsAzure\Common\Internal\Authentication\SharedKeyAuthScheme 
+     * @return \WindowsAzure\Common\Internal\Authentication\StorageAuthScheme
      */
     protected function blobAuthenticationScheme($accountName, $accountKey)
     {
@@ -137,48 +139,6 @@ class ServicesBuilder implements IServicesBuilder
     protected function tableAuthenticationScheme($accountName, $accountKey)
     {
         return new TableSharedKeyLiteAuthScheme($accountName, $accountKey);
-    }
-    
-    /**
-     * Adds HeadersFilter with constant headers for each service wrapper.
-     * 
-     * @param mix    $wrapper service wrapper
-     * @param string $type    type of passed wrapper
-     * 
-     * @return mix
-     */
-    private function _addHeadersFilter($wrapper, $type)
-    {
-        $headers               = array();
-        $latestServicesVersion = Resources::STORAGE_API_LATEST_VERSION;
-        switch ($type) {
-        case Resources::QUEUE_TYPE_NAME:
-        case Resources::BLOB_TYPE_NAME:
-            $headers[Resources::X_MS_VERSION] = $latestServicesVersion;
-            break;
-        
-        case Resources::TABLE_TYPE_NAME:
-            $currentVersion = Resources::DATA_SERVICE_VERSION_VALUE;
-            $maxVersion     = Resources::MAX_DATA_SERVICE_VERSION_VALUE;
-            $accept         = Resources::ACCEPT_HEADER_VALUE;
-            $acceptCharset  = Resources::ACCEPT_CHARSET_VALUE;
-            
-            $headers[Resources::X_MS_VERSION]             = $latestServicesVersion;
-            $headers[Resources::DATA_SERVICE_VERSION]     = $currentVersion;
-            $headers[Resources::MAX_DATA_SERVICE_VERSION] = $maxVersion;
-            $headers[Resources::MAX_DATA_SERVICE_VERSION] = $maxVersion;
-            $headers[Resources::ACCEPT_HEADER]            = $accept;
-            $headers[Resources::ACCEPT_CHARSET]           = $acceptCharset;
-            break;
-        
-        case Resources::SERVICE_MANAGEMENT_TYPE_NAME:
-            $headers[Resources::X_MS_VERSION] = Resources::SM_API_LATEST_VERSION;
-            break;
-        }
-        
-        $headersFilter = new HeadersFilter($headers);
-        
-        return $wrapper->withFilter($headersFilter);
     }
     
     /**
@@ -208,9 +168,12 @@ class ServicesBuilder implements IServicesBuilder
         );
 
         // Adding headers filter
-        $queueWrapper = self::_addHeadersFilter(
-            $queueWrapper, Resources::QUEUE_TYPE_NAME
-        );
+        $headers = array();
+        
+        $headers[Resources::X_MS_VERSION] = Resources::STORAGE_API_LATEST_VERSION;
+        
+        $headersFilter = new HeadersFilter($headers);
+        $queueWrapper  = $queueWrapper->withFilter($headersFilter);
         
         // Adding date filter
         $dateFilter   = new DateFilter();
@@ -256,9 +219,12 @@ class ServicesBuilder implements IServicesBuilder
         );
 
         // Adding headers filter
-        $blobWrapper = self::_addHeadersFilter(
-            $blobWrapper, Resources::BLOB_TYPE_NAME
-        );
+        $headers = array();
+        
+        $headers[Resources::X_MS_VERSION] = Resources::STORAGE_API_LATEST_VERSION;
+        
+        $headersFilter = new HeadersFilter($headers);
+        $blobWrapper   = $blobWrapper->withFilter($headersFilter);
         
         // Adding date filter
         $dateFilter  = new DateFilter();
@@ -306,9 +272,22 @@ class ServicesBuilder implements IServicesBuilder
         );
 
         // Adding headers filter
-        $tableWrapper = self::_addHeadersFilter(
-            $tableWrapper, Resources::TABLE_TYPE_NAME
-        );
+        $headers        = array();
+        $latestServicesVersion = Resources::STORAGE_API_LATEST_VERSION;
+        $currentVersion        = Resources::DATA_SERVICE_VERSION_VALUE;
+        $maxVersion            = Resources::MAX_DATA_SERVICE_VERSION_VALUE;
+        $accept                = Resources::ACCEPT_HEADER_VALUE;
+        $acceptCharset         = Resources::ACCEPT_CHARSET_VALUE;
+        
+        $headers[Resources::X_MS_VERSION]             = $latestServicesVersion;
+        $headers[Resources::DATA_SERVICE_VERSION]     = $currentVersion;
+        $headers[Resources::MAX_DATA_SERVICE_VERSION] = $maxVersion;
+        $headers[Resources::MAX_DATA_SERVICE_VERSION] = $maxVersion;
+        $headers[Resources::ACCEPT_HEADER]            = $accept;
+        $headers[Resources::ACCEPT_CHARSET]           = $acceptCharset;
+        
+        $headersFilter = new HeadersFilter($headers);
+        $tableWrapper  = $tableWrapper->withFilter($headersFilter);
         
         // Adding date filter
         $dateFilter   = new DateFilter();
@@ -328,7 +307,7 @@ class ServicesBuilder implements IServicesBuilder
     }
     
     /**
-     * Builds a service bus client. 
+     * Builds a Service Bus object. 
      * 
      * @param string $connectionString The configuration connection string.
      * 
@@ -387,8 +366,13 @@ class ServicesBuilder implements IServicesBuilder
         );
 
         // Adding headers filter
-        $serviceManagementWrapper = self::_addHeadersFilter(
-            $serviceManagementWrapper, Resources::SERVICE_MANAGEMENT_TYPE_NAME
+        $headers = array();
+        
+        $headers[Resources::X_MS_VERSION] = Resources::SM_API_LATEST_VERSION;
+        
+        $headersFilter            = new HeadersFilter($headers);
+        $serviceManagementWrapper = $serviceManagementWrapper->withFilter(
+            $headersFilter
         );
 
         return $serviceManagementWrapper;

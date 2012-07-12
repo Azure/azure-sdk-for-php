@@ -23,7 +23,7 @@
  */
 
 namespace Tests\Unit\WindowsAzure\ServiceBus\Internal;
-use WindowsAzure\Common\Internal\ServicesBuilder;
+use WindowsAzure\Common\ServicesBuilder;
 use WindowsAzure\Common\Models\ServiceProperties;
 use Tests\Framework\TestResources;
 use WindowsAzure\Common\Configuration;

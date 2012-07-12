@@ -225,9 +225,9 @@ class BlobServiceIntegrationTest extends IntegrationTestBase
         $this->assertNotNull($prop->getLastModified(), '$prop->getLastModified()');
         $this->assertNotNull($prop->getMetadata(), '$prop->getMetadata()');
         $this->assertEquals(2, count($prop->getMetadata()), 'count($prop->getMetadata())');
-        $this->assertTrue(Utilities::arrayKeyExistsIgnoreCase('test', $prop->getMetadata()), 'Utilities::arrayKeyExistsIgnoreCase(\'test\', $prop->getMetadata())');
+        $this->assertTrue(Utilities::arrayKeyExistsInsensitive('test', $prop->getMetadata()), 'Utilities::arrayKeyExistsInsensitive(\'test\', $prop->getMetadata())');
         $this->assertTrue(!(array_search('bar', $prop->getMetadata()) === FALSE), '!(array_search(\'bar\', $prop->getMetadata()) === FALSE)');
-        $this->assertTrue(Utilities::arrayKeyExistsIgnoreCase('blah', $prop->getMetadata()), 'Utilities::arrayKeyExistsIgnoreCase(\'blah\', $prop->getMetadata())');
+        $this->assertTrue(Utilities::arrayKeyExistsInsensitive('blah', $prop->getMetadata()), 'Utilities::arrayKeyExistsInsensitive(\'blah\', $prop->getMetadata())');
         $this->assertTrue(!(array_search('bleah', $prop->getMetadata()) === FALSE), '!(array_search(\'bleah\', $prop->getMetadata()) === FALSE)');
 
         $this->assertNotNull($prop2, '$prop2');
@@ -235,9 +235,9 @@ class BlobServiceIntegrationTest extends IntegrationTestBase
         $this->assertNotNull($prop2->getLastModified(), '$prop2->getLastModified()');
         $this->assertNotNull($prop2->getMetadata(), '$prop2->getMetadata()');
         $this->assertEquals(2, count($prop2->getMetadata()), 'count($prop2->getMetadata())');
-        $this->assertTrue(Utilities::arrayKeyExistsIgnoreCase('test', $prop2->getMetadata()), 'Utilities::arrayKeyExistsIgnoreCase(\'test\', $prop2->getMetadata())');
+        $this->assertTrue(Utilities::arrayKeyExistsInsensitive('test', $prop2->getMetadata()), 'Utilities::arrayKeyExistsInsensitive(\'test\', $prop2->getMetadata())');
         $this->assertTrue(!(array_search('bar', $prop2->getMetadata()) === FALSE), '!(array_search(\'bar\', $prop2->getMetadata()) === FALSE)');
-        $this->assertTrue(Utilities::arrayKeyExistsIgnoreCase('blah', $prop2->getMetadata()), 'Utilities::arrayKeyExistsIgnoreCase(\'blah\', $prop2->getMetadata())');
+        $this->assertTrue(Utilities::arrayKeyExistsInsensitive('blah', $prop2->getMetadata()), 'Utilities::arrayKeyExistsInsensitive(\'blah\', $prop2->getMetadata())');
         $this->assertTrue(!(array_search('bleah', $prop2->getMetadata()) === FALSE), '!(array_search(\'bleah\', $prop2->getMetadata()) === FALSE)');
 
         $this->assertNotNull($results2, '$results2');
@@ -245,9 +245,9 @@ class BlobServiceIntegrationTest extends IntegrationTestBase
         $container0 = $results2->getContainers();
         $container0 = $container0[0];
         // The capitalizaion gets changed.
-        $this->assertTrue(Utilities::arrayKeyExistsIgnoreCase('test', $container0->getMetadata()), 'Utilities::arrayKeyExistsIgnoreCase(\'test\', $container0->getMetadata())');
+        $this->assertTrue(Utilities::arrayKeyExistsInsensitive('test', $container0->getMetadata()), 'Utilities::arrayKeyExistsInsensitive(\'test\', $container0->getMetadata())');
         $this->assertTrue(!(array_search('bar', $container0->getMetadata()) === FALSE), '!(array_search(\'bar\', $container0->getMetadata()) === FALSE)');
-        $this->assertTrue(Utilities::arrayKeyExistsIgnoreCase('blah', $container0->getMetadata()), 'Utilities::arrayKeyExistsIgnoreCase(\'blah\', $container0->getMetadata())');
+        $this->assertTrue(Utilities::arrayKeyExistsInsensitive('blah', $container0->getMetadata()), 'Utilities::arrayKeyExistsInsensitive(\'blah\', $container0->getMetadata())');
         $this->assertTrue(!(array_search('bleah', $container0->getMetadata()) === FALSE), '!(array_search(\'bleah\', $container0->getMetadata()) === FALSE)');
 
         $this->assertNotNull($acl, '$acl');
@@ -275,9 +275,9 @@ class BlobServiceIntegrationTest extends IntegrationTestBase
         $this->assertNotNull($prop->getLastModified(), '$prop->getLastModified()');
         $this->assertNotNull($prop->getMetadata(), '$prop->getMetadata()');
         $this->assertEquals(2, count($prop->getMetadata()), 'count($prop->getMetadata())');
-        $this->assertTrue(Utilities::arrayKeyExistsIgnoreCase('test', $prop->getMetadata()), 'Utilities::arrayKeyExistsIgnoreCase(\'test\', $prop->getMetadata())');
+        $this->assertTrue(Utilities::arrayKeyExistsInsensitive('test', $prop->getMetadata()), 'Utilities::arrayKeyExistsInsensitive(\'test\', $prop->getMetadata())');
         $this->assertTrue(!(array_search('bar', $prop->getMetadata()) === FALSE), '!(array_search(\'bar\', $prop->getMetadata()) === FALSE)');
-        $this->assertTrue(Utilities::arrayKeyExistsIgnoreCase('blah', $prop->getMetadata()), 'Utilities::arrayKeyExistsIgnoreCase(\'blah\', $prop->getMetadata())');
+        $this->assertTrue(Utilities::arrayKeyExistsInsensitive('blah', $prop->getMetadata()), 'Utilities::arrayKeyExistsInsensitive(\'blah\', $prop->getMetadata())');
         $this->assertTrue(!(array_search('bleah', $prop->getMetadata()) === FALSE), '!(array_search(\'bleah\', $prop->getMetadata()) === FALSE)');
     }
 
@@ -1077,9 +1077,9 @@ class BlobServiceIntegrationTest extends IntegrationTestBase
         $this->assertEquals($snapshot->getETag(), $result->getProperties()->getETag(), '$result->getProperties()->getETag()');
         $this->assertEquals($snapshot->getLastModified(), $result->getProperties()->getLastModified(), '$result->getProperties()->getLastModified()');
         // The capitalizaion gets changed.
-        $this->assertTrue(Utilities::arrayKeyExistsIgnoreCase('test', $result->getMetadata()), 'Utilities::arrayKeyExistsIgnoreCase(\'test\', $result->getMetadata())');
+        $this->assertTrue(Utilities::arrayKeyExistsInsensitive('test', $result->getMetadata()), 'Utilities::arrayKeyExistsInsensitive(\'test\', $result->getMetadata())');
         $this->assertTrue(!(array_search('bar', $result->getMetadata()) === FALSE), '!(array_search(\'bar\', $result->getMetadata()) === FALSE)');
-        $this->assertTrue(Utilities::arrayKeyExistsIgnoreCase('blah', $result->getMetadata()), 'Utilities::arrayKeyExistsIgnoreCase(\'blah\', $result->getMetadata())');
+        $this->assertTrue(Utilities::arrayKeyExistsInsensitive('blah', $result->getMetadata()), 'Utilities::arrayKeyExistsInsensitive(\'blah\', $result->getMetadata())');
         $this->assertTrue(!(array_search('bleah', $result->getMetadata()) === FALSE), '!(array_search(\'bleah\', $result->getMetadata()) === FALSE)');
         }
 
@@ -1336,9 +1336,9 @@ class BlobServiceIntegrationTest extends IntegrationTestBase
         $this->assertNotNull($props->getETag(), '$props->getETag()');
         $this->assertNotNull($props->getMetadata(), '$props->getMetadata()');
         $this->assertEquals(2, count($props->getMetadata()), 'count($props->getMetadata())');
-        $this->assertTrue(Utilities::arrayKeyExistsIgnoreCase('test', $props->getMetadata()), 'Utilities::arrayKeyExistsIgnoreCase(\'test\', $props->getMetadata())');
+        $this->assertTrue(Utilities::arrayKeyExistsInsensitive('test', $props->getMetadata()), 'Utilities::arrayKeyExistsInsensitive(\'test\', $props->getMetadata())');
         $this->assertTrue(!(array_search('bar', $props->getMetadata()) === FALSE), '!(array_search(\'bar\', $props->getMetadata()) === FALSE)');
-        $this->assertTrue(Utilities::arrayKeyExistsIgnoreCase('blah', $props->getMetadata()), 'Utilities::arrayKeyExistsIgnoreCase(\'blah\', $props->getMetadata())');
+        $this->assertTrue(Utilities::arrayKeyExistsInsensitive('blah', $props->getMetadata()), 'Utilities::arrayKeyExistsInsensitive(\'blah\', $props->getMetadata())');
         $this->assertTrue(!(array_search('bleah', $props->getMetadata()) === FALSE), '!(array_search(\'bleah\', $props->getMetadata()) === FALSE)');
         $this->assertNotNull($props->getLastModified(), '$props->getLastModified()');
     }
@@ -1418,9 +1418,9 @@ class BlobServiceIntegrationTest extends IntegrationTestBase
         $this->assertNotNull($props, '$props');
         $this->assertNotNull($props->getMetadata(), '$props->getMetadata()');
         $this->assertEquals(2, count($props->getMetadata()), 'count($props->getMetadata())');
-        $this->assertTrue(Utilities::arrayKeyExistsIgnoreCase('test', $props->getMetadata()), 'Utilities::arrayKeyExistsIgnoreCase(\'test\', $props->getMetadata())');
+        $this->assertTrue(Utilities::arrayKeyExistsInsensitive('test', $props->getMetadata()), 'Utilities::arrayKeyExistsInsensitive(\'test\', $props->getMetadata())');
         $this->assertTrue(!(array_search('bar', $props->getMetadata()) === FALSE), '!(array_search(\'bar\', $props->getMetadata()) === FALSE)');
-        $this->assertTrue(Utilities::arrayKeyExistsIgnoreCase('blah', $props->getMetadata()), 'Utilities::arrayKeyExistsIgnoreCase(\'blah\', $props->getMetadata())');
+        $this->assertTrue(Utilities::arrayKeyExistsInsensitive('blah', $props->getMetadata()), 'Utilities::arrayKeyExistsInsensitive(\'blah\', $props->getMetadata())');
         $this->assertTrue(!(array_search('bleah', $props->getMetadata()) === FALSE), '!(array_search(\'bleah\', $props->getMetadata()) === FALSE)');
     }
 

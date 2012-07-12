@@ -44,7 +44,7 @@ class StorageServiceSettingsTest extends \PHPUnit_Framework_TestCase
     
     public function setUp()
     {
-        $property = new \ReflectionProperty('WindowsAzure\Common\Internal\ServiceSettings', 'isInitialized');
+        $property = new \ReflectionProperty('WindowsAzure\Common\Internal\StorageServiceSettings', 'isInitialized');
         $property->setAccessible(true);
         $property->setValue(false);
     }
@@ -735,6 +735,41 @@ class StorageServiceSettingsTest extends \PHPUnit_Framework_TestCase
         // Test
         StorageServiceSettings::createFromConnectionString($connectionString);
     }
+    
+    /**
+     * @covers WindowsAzure\Common\Internal\StorageServiceSettings::createFromConnectionString
+     * @covers WindowsAzure\Common\Internal\StorageServiceSettings::init
+     * @covers WindowsAzure\Common\Internal\StorageServiceSettings::__construct
+     * @covers WindowsAzure\Common\Internal\StorageServiceSettings::_getDefaultServiceEndpoint
+     * @covers WindowsAzure\Common\Internal\ServiceSettings::getValidator
+     * @covers WindowsAzure\Common\Internal\ServiceSettings::optional
+     * @covers WindowsAzure\Common\Internal\ServiceSettings::allRequired
+     * @covers WindowsAzure\Common\Internal\ServiceSettings::setting
+     * @covers WindowsAzure\Common\Internal\ServiceSettings::settingWithFunc
+     * @covers WindowsAzure\Common\Internal\ServiceSettings::matchedSpecification
+     * @covers WindowsAzure\Common\Internal\ServiceSettings::parseAndValidateKeys
+     * @covers WindowsAzure\Common\Internal\ServiceSettings::noMatch
+     * @covers WindowsAzure\Common\Internal\StorageServiceSettings::_createStorageServiceSettings
+     */
+    public function testCreateFromConnectionStringWithCaseInsensitive()
+    {
+        // Setup
+        $protocol = 'https';
+        $expectedName = $this->_accountName;
+        $expectedKey = TestResources::KEY4;
+        $connectionString  = "defaultendpointsprotocol=$protocol;accountname=$expectedName;accountkey=$expectedKey";
+        $expectedBlobEndpoint = sprintf(Resources::SERVICE_URI_FORMAT, $protocol, $expectedName, Resources::BLOB_BASE_DNS_NAME);
+        $expectedQueueEndpoint = sprintf(Resources::SERVICE_URI_FORMAT, $protocol, $expectedName, Resources::QUEUE_BASE_DNS_NAME);
+        $expectedTableEndpoint = sprintf(Resources::SERVICE_URI_FORMAT, $protocol, $expectedName, Resources::TABLE_BASE_DNS_NAME);
+        
+        // Test
+        $actual = StorageServiceSettings::createFromConnectionString($connectionString);
+        
+        // Assert
+        $this->assertEquals($expectedName, $actual->getName());
+        $this->assertEquals($expectedKey, $actual->getKey());
+        $this->assertEquals($expectedBlobEndpoint, $actual->getBlobEndpointUri());
+        $this->assertEquals($expectedQueueEndpoint, $actual->getQueueEndpointUri());
+        $this->assertEquals($expectedTableEndpoint, $actual->getTableEndpointUri());
+    }
 }
-
-

@@ -29,7 +29,7 @@ use WindowsAzure\Common\Internal\Http\HttpClient;
 use WindowsAzure\Common\Internal\Http\Url;
 use WindowsAzure\Common\Internal\Resources;
 use WindowsAzure\Common\Internal\InvalidArgumentTypeException;
-use WindowsAzure\Common\Internal\ServicesBuilder;
+use WindowsAzure\Common\ServicesBuilder;
 
 /**
  * Unit tests for class WrapFilterTest
