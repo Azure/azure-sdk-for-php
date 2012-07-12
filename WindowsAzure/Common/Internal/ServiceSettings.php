@@ -32,7 +32,7 @@ use WindowsAzure\Common\Internal\Resources;
  * 1- $isInitialized: A static property that indicates whether the class's static
  *    members have been initialized.
  * 2- init(): A static method that initializes static members.
- * 3- $validSettingKeys: A static member that contains valid setting keys for this 
+ * 3- $validSettingKeys: A static property that contains valid setting keys for this 
  *    service.
  *
  * @category  Microsoft

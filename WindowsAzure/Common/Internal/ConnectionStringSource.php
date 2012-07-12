@@ -42,12 +42,12 @@ class ConnectionStringSource
      * 
      * @var type 
      */
-    private $_defaultSources;
+    private static $_defaultSources;
     
     /**
-     * @var ConnectionStringSource 
+     * @var boolean
      */
-    private static $_instance;
+    private static $_isInitialized;
     
     /**
      * Environment variable source name.
@@ -55,13 +55,18 @@ class ConnectionStringSource
     const ENVIRONMENT_SOURCE = 'environment_source';
     
     /**
-     * Constructs new ConnectionStringSource instance. 
+     * Initializes the default sources.
+     * 
+     * @return none
      */
-    private function __construct()
+    private static function _init()
     {
-        $this->_defaultSources = array(
+        if (!self::$_isInitialized) {
+            self::$_defaultSources = array(
                 self::ENVIRONMENT_SOURCE => array(__CLASS__, 'environmentSource')
-        );
+            );
+            self::$_isInitialized  = true;
+        }        
     }
     
     /**
@@ -83,24 +88,10 @@ class ConnectionStringSource
      * 
      * @return array
      */
-    public function getDefaultSources()
+    public static function getDefaultSources()
     {
-        return $this->_defaultSources;
-    }
-    
-    /**
-     * Gets the single instance of this class.
-     * 
-     * @return ConnectionStringSource
-     */
-    public static function getInstance()
-    {
-        if (!isset(self::$_instance)) {
-            $className = __CLASS__;
-            self::$_instance = new $className;
-        }
-        
-        return self::$_instance;
+        self::_init();
+        return self::$_defaultSources;
     }
 }
 

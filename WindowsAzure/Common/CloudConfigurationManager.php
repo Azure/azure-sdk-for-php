@@ -72,7 +72,7 @@ class CloudConfigurationManager
             self::$_sources = array();
             
             // Get list of default connection string sources.
-            $default = ConnectionStringSource::getInstance()->getDefaultSources();
+            $default = ConnectionStringSource::getDefaultSources();
             foreach ($default as $name => $provider) {
                 self::$_sources[$name] = $provider;
             }
@@ -124,7 +124,7 @@ class CloudConfigurationManager
         Validate::notNullOrEmpty($name, 'name');
         
         self::_init();
-        $default = ConnectionStringSource::getInstance()->getDefaultSources();
+        $default = ConnectionStringSource::getDefaultSources();
         
         // Try to get callback if the user is trying to register a default source.
         $provider = Utilities::tryGetValue($default, $name, $provider);

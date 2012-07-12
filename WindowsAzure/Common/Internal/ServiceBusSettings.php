@@ -196,7 +196,7 @@ class ServiceBusSettings extends ServiceSettings
     }
     
     /**
-     * Gets the Service Bus endpoint uri.
+     * Gets the Service Bus endpoint URI.
      * 
      * @return string
      */
@@ -206,7 +206,7 @@ class ServiceBusSettings extends ServiceSettings
     }
     
     /**
-     * Gets the wrap endpoint uri.
+     * Gets the wrap endpoint URI.
      * 
      * @return string
      */

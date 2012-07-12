@@ -40,22 +40,9 @@ class ConnectionStringSourceTest extends \PHPUnit_Framework_TestCase
 {
     public function setUp()
     {
-        $property = new \ReflectionProperty('WindowsAzure\Common\Internal\ConnectionStringSource', '_instance');
+        $property = new \ReflectionProperty('WindowsAzure\Common\Internal\ConnectionStringSource', '_isInitialized');
         $property->setAccessible(true);
         $property->setValue(null);
-    }
-    
-    /**
-     * @covers WindowsAzure\Common\Internal\ConnectionStringSource::getInstance
-     * @covers WindowsAzure\Common\Internal\ConnectionStringSource::__construct
-     */
-    public function testGetInstance()
-    {
-        // Test
-        $actual = ConnectionStringSource::getInstance();
-        
-        // Assert
-        $this->assertInstanceOf('WindowsAzure\Common\Internal\ConnectionStringSource', $actual);
     }
     
     /**
@@ -69,7 +56,7 @@ class ConnectionStringSourceTest extends \PHPUnit_Framework_TestCase
         putenv("$key=$value");
         
         // Test
-        $actual = ConnectionStringSource::getInstance()->environmentSource($key);
+        $actual = ConnectionStringSource::environmentSource($key);
         
         // Assert
         $this->assertEquals($value, $actual);
@@ -80,6 +67,7 @@ class ConnectionStringSourceTest extends \PHPUnit_Framework_TestCase
     
     /**
      * @covers WindowsAzure\Common\Internal\ConnectionStringSource::getDefaultSources
+     * @covers WindowsAzure\Common\Internal\ConnectionStringSource::_init
      */
     public function testGetDefaultSources()
     {
@@ -87,7 +75,7 @@ class ConnectionStringSourceTest extends \PHPUnit_Framework_TestCase
         $expectedKeys = array(ConnectionStringSource::ENVIRONMENT_SOURCE);
         
         // Test
-        $actual = ConnectionStringSource::getInstance()->getDefaultSources();
+        $actual = ConnectionStringSource::getDefaultSources();
         
         // Assert
         $keys = array_keys($actual);
