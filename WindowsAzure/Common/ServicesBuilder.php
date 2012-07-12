@@ -28,7 +28,6 @@ use WindowsAzure\Common\Internal\Resources;
 use WindowsAzure\Common\Internal\Validate;
 use WindowsAzure\Common\Internal\Utilities;
 use WindowsAzure\Common\Internal\Http\HttpClient;
-use WindowsAzure\Common\Internal\IServicesBuilder;
 use WindowsAzure\Common\Internal\Filters\DateFilter;
 use WindowsAzure\Common\Internal\Filters\HeadersFilter;
 use WindowsAzure\Common\Internal\Filters\AuthenticationFilter;
@@ -60,8 +59,13 @@ use WindowsAzure\Table\Internal\MimeReaderWriter;
  * @version   Release: @package_version@
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
-class ServicesBuilder implements IServicesBuilder
+class ServicesBuilder
 {
+    /**
+     * @var ServicesBuilder
+     */
+    private static $_instance = null;
+    
     /**
      * Gets the HTTP client used in the REST services construction.
      * 
@@ -272,7 +276,7 @@ class ServicesBuilder implements IServicesBuilder
         );
 
         // Adding headers filter
-        $headers        = array();
+        $headers               = array();
         $latestServicesVersion = Resources::STORAGE_API_LATEST_VERSION;
         $currentVersion        = Resources::DATA_SERVICE_VERSION_VALUE;
         $maxVersion            = Resources::MAX_DATA_SERVICE_VERSION_VALUE;
@@ -392,6 +396,18 @@ class ServicesBuilder implements IServicesBuilder
 
         return $wrapWrapper;
     }
+    
+    /**
+     * Gets the static instance of this class.
+     * 
+     * @return ServicesBuilder 
+     */
+    public static function getInstance()
+    {
+        if (!isset(self::$instance)) {
+            self::$_instance = new ServicesBuilder();
+        }
+        
+        return self::$_instance;
+    }
 }
-
-

@@ -132,6 +132,16 @@ class ServicesBuilderTest extends \PHPUnit_Framework_TestCase
         // Assert
         $this->assertInstanceOf('WindowsAzure\ServiceBus\Internal\IServiceBus', $serviceBusRestProxy);
     }
+    
+    /**
+     * @covers WindowsAzure\Common\ServicesBuilder::getInstance
+     */
+    public function testGetInstance()
+    {
+        // Test
+        $actual = ServicesBuilder::getInstance();
+        
+        // Assert
+        $this->assertInstanceOf('WindowsAzure\Common\ServicesBuilder', $actual);
+    }
 }
-
-
