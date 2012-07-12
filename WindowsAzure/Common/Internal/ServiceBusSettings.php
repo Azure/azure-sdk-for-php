@@ -123,9 +123,9 @@ class ServiceBusSettings extends ServiceSettings
     }
     
     /**
-     * Creates new servicebus settings instance.
+     * Creates new Service Bus settings instance.
      * 
-     * @param string $serviceBusEndpoint The servicebus endpoint uri.
+     * @param string $serviceBusEndpoint The Service Bus endpoint uri.
      * @param string $namespace          The service namespace.
      * @param string $wrapName           The wrap name.
      * @param string $wrapPassword       The wrap password.
@@ -196,7 +196,7 @@ class ServiceBusSettings extends ServiceSettings
     }
     
     /**
-     * Gets the servicebus endpoint uri.
+     * Gets the Service Bus endpoint uri.
      * 
      * @return string
      */

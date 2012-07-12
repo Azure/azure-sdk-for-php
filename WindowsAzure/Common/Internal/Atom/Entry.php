@@ -28,7 +28,7 @@ use WindowsAzure\Common\Internal\Resources;
 use WindowsAzure\Common\Internal\Validate;
 
 /**
- * This class constructs HTTP requests and receive HTTP responses for servicebus.
+ * This class constructs HTTP requests and receive HTTP responses for Service Bus.
  *
  * @category  Microsoft
  * @package   WindowsAzure\Common\Internal\Atom
