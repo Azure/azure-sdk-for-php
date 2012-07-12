@@ -23,7 +23,7 @@
 namespace WindowsAzure\ServiceBus\Models;
 
 /**
- * The mode of receiving message from service bus.
+ * The mode of receiving message from Service Bus.
  *
  * @category  Microsoft
  * @package   WindowsAzure\ServiceBus\Models

@@ -24,7 +24,7 @@
  
 namespace WindowsAzure\ServiceBus\Internal;
 use WindowsAzure\Common\Configuration;
-use WindowsAzure\Common\Internal\ServicesBuilder;
+use WindowsAzure\Common\ServicesBuilder;
 use WindowsAzure\Common\Internal\Resources;
 use WindowsAzure\Common\Internal\Validate;
 use WindowsAzure\ServiceBus\WrapRestProxy;
