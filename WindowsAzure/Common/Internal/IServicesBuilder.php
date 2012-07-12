@@ -82,7 +82,7 @@ interface IServicesBuilder
     public function createServiceManagementService($connectionString);
     
     /**
-     * Builds a service bus object.
+     * Builds a servicebus object.
      * 
      * @param string $connectionString The configuration connection string.
      * 

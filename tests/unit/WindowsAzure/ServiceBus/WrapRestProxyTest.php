@@ -31,7 +31,7 @@ use WindowsAzure\Common\ServiceException;
 use WindowsAzure\Common\Internal\Utilities;
 use WindowsAzure\ServiceBus\WrapRestProxy;
 use WindowsAzure\Common\Internal\Resources;
-use WindowsAzure\Common\Internal\ServicesBuilder;
+use WindowsAzure\Common\ServicesBuilder;
 
 /**
  * Unit tests for WrapRestProxy class

@@ -24,6 +24,7 @@
 
 namespace Tests\Unit\WindowsAzure\Common;
 use WindowsAzure\Common\CloudConfigurationManager;
+use WindowsAzure\Common\Internal\ConnectionStringSource;
 
 /**
  * Unit tests for class CloudConfigurationManager
@@ -43,14 +44,17 @@ class CloudConfigurationManagerTest extends \PHPUnit_Framework_TestCase
     
     public function setUp()
     {
-        $property = new \ReflectionProperty('WindowsAzure\Common\CloudConfigurationManager', '_isInitialized');
-        $property->setAccessible(true);
-        $property->setValue(false);
+        $isInitialized = new \ReflectionProperty('WindowsAzure\Common\CloudConfigurationManager', '_isInitialized');
+        $isInitialized->setAccessible(true);
+        $isInitialized->setValue(false);
+        
+        $sources = new \ReflectionProperty('WindowsAzure\Common\CloudConfigurationManager', '_sources');
+        $sources->setAccessible(true);
+        $sources->setValue(array());
     }
     
     /**
      * @covers WindowsAzure\Common\CloudConfigurationManager::getConnectionString
-     * @covers WindowsAzure\Common\CloudConfigurationManager::environmentSource
      * @covers WindowsAzure\Common\CloudConfigurationManager::_init
      */
     public function testGetConnectionStringFromEnvironmentVariable()
@@ -175,11 +179,11 @@ class CloudConfigurationManagerTest extends \PHPUnit_Framework_TestCase
         // Setup
         $expectedKey = $this->_key;
         $expectedValue = $this->_value . "extravalue5";
-        CloudConfigurationManager::unregisterSource(CloudConfigurationManager::ENVIORNMENT_SOURCE);
+        CloudConfigurationManager::unregisterSource(ConnectionStringSource::ENVIRONMENT_SOURCE);
         putenv("$expectedKey=$expectedValue");
         
         // Test
-        CloudConfigurationManager::registerSource(CloudConfigurationManager::ENVIORNMENT_SOURCE);
+        CloudConfigurationManager::registerSource(ConnectionStringSource::ENVIRONMENT_SOURCE);
         
         // Assert
         $actual = CloudConfigurationManager::getConnectionString($expectedKey);
@@ -210,7 +214,7 @@ class CloudConfigurationManagerTest extends \PHPUnit_Framework_TestCase
         );
         
         // Test
-        $callback = CloudConfigurationManager::unregisterSource(CloudConfigurationManager::ENVIORNMENT_SOURCE);
+        $callback = CloudConfigurationManager::unregisterSource(ConnectionStringSource::ENVIRONMENT_SOURCE);
         
         // Assert
         $actual = CloudConfigurationManager::getConnectionString($expectedKey);

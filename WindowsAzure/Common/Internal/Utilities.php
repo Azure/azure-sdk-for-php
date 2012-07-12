@@ -362,20 +362,6 @@ class Utilities
     }
 
     /**
-     * Checks if the given key exists in the array, with any
-     * capitaliation.
-     *
-     * @param string $key    Value to check.
-     * @param array  $search An array with keys to check.
-     *
-     * @return boolean
-     */
-    public static function arrayKeyExistsIgnoreCase($key, array $search)
-    {
-        return array_key_exists(strtolower($key), array_change_key_case($search));
-    }
-
-    /**
      * Generate ISO 8601 compliant date string in UTC time zone
      * 
      * @param int $timestamp The unix timestamp to convert 

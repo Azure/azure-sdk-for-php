@@ -15,14 +15,15 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   WindowsAzure\Common\Internal
+ * @package   WindowsAzure\Common
  * @author    Azure PHP SDK <azurephpsdk@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
  
-namespace WindowsAzure\Common\Internal;
+namespace WindowsAzure\Common;
+use WindowsAzure\Blob\BlobRestProxy;
 use WindowsAzure\Common\Internal\Resources;
 use WindowsAzure\Common\Internal\Validate;
 use WindowsAzure\Common\Internal\Utilities;
@@ -33,24 +34,26 @@ use WindowsAzure\Common\Internal\Filters\HeadersFilter;
 use WindowsAzure\Common\Internal\Filters\AuthenticationFilter;
 use WindowsAzure\Common\Internal\Filters\WrapFilter;
 use WindowsAzure\Common\Internal\InvalidArgumentTypeException;
-use WindowsAzure\Queue\QueueRestProxy;
-use WindowsAzure\Blob\BlobRestProxy;
-use WindowsAzure\ServiceBus\ServiceBusRestProxy;
-use WindowsAzure\ServiceBus\WrapRestProxy;
-use WindowsAzure\Table\TableRestProxy;
-use WindowsAzure\Table\Internal\AtomReaderWriter;
-use WindowsAzure\Table\Internal\MimeReaderWriter;
 use WindowsAzure\Common\Internal\Serialization\XmlSerializer;
-use WindowsAzure\ServiceManagement\ServiceManagementRestProxy;
 use WindowsAzure\Common\Internal\Authentication\SharedKeyAuthScheme;
 use WindowsAzure\Common\Internal\Authentication\TableSharedKeyLiteAuthScheme;
 use WindowsAzure\Common\Internal\StorageServiceSettings;
+use WindowsAzure\Common\Internal\ServiceManagementSettings;
+use WindowsAzure\Common\Internal\ServiceBusSettings;
+use WindowsAzure\Queue\QueueRestProxy;
+use WindowsAzure\ServiceBus\ServiceBusRestProxy;
+use WindowsAzure\ServiceBus\WrapRestProxy;
+use WindowsAzure\ServiceManagement\ServiceManagementRestProxy;
+use WindowsAzure\Table\TableRestProxy;
+use WindowsAzure\Table\Internal\AtomReaderWriter;
+use WindowsAzure\Table\Internal\MimeReaderWriter;
+
 
 /**
  * Builds azure service objects.
  *
  * @category  Microsoft
- * @package   WindowsAzure\Common\Internal
+ * @package   WindowsAzure\Common
  * @author    Azure PHP SDK <azurephpsdk@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
@@ -304,7 +307,7 @@ class ServicesBuilder implements IServicesBuilder
     }
     
     /**
-     * Builds a service bus object. 
+     * Builds a servicebus object. 
      * 
      * @param string $connectionString The configuration connection string.
      * 

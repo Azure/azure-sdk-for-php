@@ -19,7 +19,7 @@
  * @author    Azure PHP SDK <azurephpsdk@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
- * @link      https://github.com/windowsazure\common\internal/azure-sdk-for-php
+ * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
  
 namespace WindowsAzure\Common\Internal;
@@ -28,12 +28,12 @@ use WindowsAzure\Common\Internal\Resources;
 /**
  * Base class for all REST services settings.
  * 
- * To extend this class you've to define these members:
- * 1- Static variable called $isInitialized, which indicates wheather the class's
- *    static members have been initialized or not.
- * 2- Static method called init(), which initializes class static members.
- * 3- Static variable called $validSettingKeys, which contains the valid setting keys
- *    for this service.
+ * Derived classes must implement the following members:
+ * 1- $isInitialized: A static property that indicates whether the class's static
+ *    members have been initialized.
+ * 2- init(): A static method that initializes static members.
+ * 3- $validSettingKeys: A static member that contains valid setting keys for this 
+ *    service.
  *
  * @category  Microsoft
  * @package   WindowsAzure\Common\Internal
@@ -41,7 +41,7 @@ use WindowsAzure\Common\Internal\Resources;
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @version   Release: @package_version@
- * @link      https://github.com/windowsazure\common\internal/azure-sdk-for-php
+ * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
 abstract class ServiceSettings
 {

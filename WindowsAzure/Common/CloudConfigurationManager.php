@@ -26,6 +26,7 @@ namespace WindowsAzure\Common;
 use WindowsAzure\Common\Internal\Utilities;
 use WindowsAzure\Common\Internal\Validate;
 use WindowsAzure\Common\Internal\Resources;
+use WindowsAzure\Common\Internal\ConnectionStringSource;
 
 /**
  * Configuration manager for accessing Windows Azure settings.
@@ -53,36 +54,11 @@ class CloudConfigurationManager
     private static $_sources;
     
     /**
-     * The list of all sources which comes as default.
-     * @var type 
-     */
-    private static $_defaultSources;
-    
-    /**
-     * Environment variable source name.
-     */
-    const ENVIORNMENT_SOURCE = 'environment_source';
-    
-    /**
      * Restrict users from creating instances from this class
      */
     private function __construct()
     {
         
-    }
-    
-    /**
-     * Gets a connection string value from the system environment.
-     * 
-     * @param string $key The connection string name.
-     * 
-     * @return string
-     */
-    public static function environmentSource($key)
-    {
-        Validate::isString($key, 'key');
-        
-        return getenv($key);
     }
     
     /**
@@ -93,72 +69,16 @@ class CloudConfigurationManager
     private static function _init()
     {
         if (!self::$_isInitialized) {
-            self::$_isInitialized  = true;
-            self::$_sources        = array();
-            self::$_defaultSources = array(
-                self::ENVIORNMENT_SOURCE => array(__CLASS__, 'environmentSource')
-            );
+            self::$_sources = array();
             
-            foreach (self::$_defaultSources as $name => $sourceCallback) {
-                self::registerSource($name);
+            // Get list of default connection string sources.
+            $default = ConnectionStringSource::getInstance()->getDefaultSources();
+            foreach ($default as $name => $provider) {
+                self::$_sources[$name] = $provider;
             }
-        }
-    }
-    
-    /**
-     * Registers a new connection string source provider. If the source to be 
-     * registered is default source it's required to provide the source name only.
-     * 
-     * @param string   $name     The source name.
-     * @param callable $callback The source callback.
-     * @param boolean  $prepend  The prepend flag.
-     * 
-     * @return none
-     */
-    public static function registerSource($name, $callback = null, $prepend = false)
-    {
-        Validate::isString($name, 'name');
-        Validate::notNullOrEmpty($name, 'name');
-        
-        self::_init();
-        
-        // Try to get callback if the user is trying to register a default source.
-        $callback = Utilities::tryGetValue(self::$_defaultSources, $name, $callback);
-        
-        Validate::notNullOrEmpty($callback, 'callback');
-        
-        if ($prepend) {
-            self::$_sources = array_merge(
-                array($name => $callback),
-                self::$_sources
-            );
             
-        } else {
-            self::$_sources[$name] = $callback;
+            self::$_isInitialized = true;
         }
-    }
-    
-    /**
-     * Unregisters a connection string source.
-     * 
-     * @param string $name The source name.
-     * 
-     * @return callable
-     */
-    public static function unregisterSource($name)
-    {
-        Validate::isString($name, 'name');
-        Validate::notNullOrEmpty($name, 'name');
-        
-        self::_init();
-        
-        $sourceCallback = Utilities::tryGetValue(self::$_sources, $name);
-        
-        if (!is_null($sourceCallback)) {
-            unset(self::$_sources[$name]);
-        }
-        
-        return $sourceCallback;
     }
     
     /**
@@ -185,6 +105,63 @@ class CloudConfigurationManager
         
         return $value;
     }
+    
+    /**
+     * Registers a new connection string source provider. If the source to get 
+     * registered is a default source, only the name of the source is required.
+     * 
+     * @param string   $name     The source name.
+     * @param callable $provider The source callback.
+     * @param boolean  $prepend  When true, the $provider is processed first when 
+     * calling getConnectionString. When false (the default) the $provider is 
+     * processed after the existing callbacks.
+     * 
+     * @return none
+     */
+    public static function registerSource($name, $provider = null, $prepend = false)
+    {
+        Validate::isString($name, 'name');
+        Validate::notNullOrEmpty($name, 'name');
+        
+        self::_init();
+        $default = ConnectionStringSource::getInstance()->getDefaultSources();
+        
+        // Try to get callback if the user is trying to register a default source.
+        $provider = Utilities::tryGetValue($default, $name, $provider);
+        
+        Validate::notNullOrEmpty($provider, 'callback');
+        
+        if ($prepend) {
+            self::$_sources = array_merge(
+                array($name => $provider),
+                self::$_sources
+            );
+            
+        } else {
+            self::$_sources[$name] = $provider;
+        }
+    }
+    
+    /**
+     * Unregisters a connection string source.
+     * 
+     * @param string $name The source name.
+     * 
+     * @return callable
+     */
+    public static function unregisterSource($name)
+    {
+        Validate::isString($name, 'name');
+        Validate::notNullOrEmpty($name, 'name');
+        
+        self::_init();
+        
+        $sourceCallback = Utilities::tryGetValue(self::$_sources, $name);
+        
+        if (!is_null($sourceCallback)) {
+            unset(self::$_sources[$name]);
+        }
+        
+        return $sourceCallback;
+    }
 }
-
-
