@@ -267,5 +267,49 @@ class AtomBase
         return $link;
     }
 
+    /**
+     * Writes an optional attribute for ATOM. 
+     * 
+     * @param \XMLWriter $xmlWriter      The XML writer. 
+     * @param string     $attributeName  The name of the attribute.
+     * @param mixed      $attributeValue The value of the attribute. 
+     * 
+     * @return none
+     */
+    protected function writeOptionalAttribute($xmlWriter, $attributeName, $attributeValue)
+    {
+        Validate::notNull($xmlWriter, 'xmlWriter');
+        Validate::isString($attributeName, 'attributeName');
+        
+        if (!empty($attributeValue))
+        {
+            $xmlWriter->writeAttribute(
+                $attributeName,
+                $attributeValue
+            );
+        }
+    }
+
+    protected function writeOptionalElementNS(
+        $xmlWriter, 
+        $prefix, 
+        $elementName, 
+        $namespace, 
+        $elementValue
+    ) {
+        Validate::notNull($xmlWriter, 'xmlWriter');
+        Validate::isString($elementName, 'elementName');
+
+        if (!empty($elementValue))
+        {
+            $xmlWriter->writeElementNS(
+                $prefix, 
+                $elementName, 
+                $namespace, 
+                $elementValue
+            );
+        }
+    }
+
 }
 ?>
