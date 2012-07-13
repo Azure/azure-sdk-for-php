@@ -72,7 +72,8 @@ class HttpClient implements IHttpClient
     /**
      * Initializes new HttpClient object.
      * 
-     * @param string $certificatePath The certificate path.
+     * @param string $certificatePath          The certificate path.
+     * @param string $certificateAuthorityPath The path of the certificate authority.
      * 
      * @return WindowsAzure\Common\Internal\Http\HttpClient
      */

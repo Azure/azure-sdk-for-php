@@ -567,23 +567,21 @@ class Source extends AtomBase
             );
         }
 
-        if (!is_null($this->logo)) {
-            $xmlWriter->writeElementNS(
-                'atom',
-                'logo', 
-                Resources::ATOM_NAMESPACE,
-                $this->logo
-            );
-        }
+        $this->writeOptionalElementNS(
+            $xmlWriter,
+            'atom',
+            'logo', 
+            Resources::ATOM_NAMESPACE,
+            $this->logo
+        );
 
-        if (!is_null($this->id)) {
-            $xmlWriter->writeElementNS(
-                'atom',
-                'id', 
-                Resources::ATOM_NAMESPACE,
-                $this->id
-            );
-        }
+        $this->writeOptionalElementNS(
+            $xmlWriter,
+            'atom',
+            'id', 
+            Resources::ATOM_NAMESPACE,
+            $this->id
+        );
 
         if (!is_null($this->link)) {
             Validate::isArray($this->link, Resources::LINK);
@@ -594,32 +592,29 @@ class Source extends AtomBase
             );
         }
 
-        if (!is_null($this->rights)) {
-            $xmlWriter->writeElementNS(
-                'atom',
-                'rights', 
-                Resources::ATOM_NAMESPACE,
-                $this->rights
-            );
-        }
+        $this->writeOptionalElementNS(
+            $xmlWriter,
+            'atom',
+            'rights', 
+            Resources::ATOM_NAMESPACE,
+            $this->rights
+        );
 
-        if (!is_null($this->subtitle)) {
-            $xmlWriter->writeElementNS(
-                'atom',
-                'subtitle', 
-                Resources::ATOM_NAMESPACE,
-                $this->subtitle
-            );
-        }
+        $this->writeOptionalElementNS(
+            $xmlWriter,
+            'atom',
+            'subtitle', 
+            Resources::ATOM_NAMESPACE,
+            $this->subtitle
+        );
 
-        if (!is_null($this->title)) {
-            $xmlWriter->writeElementNS(
-                'atom',
-                'title', 
-                Resources::ATOM_NAMESPACE,
-                $this->title
-            );
-        }
+        $this->writeOptionalElementNS(
+            $xmlWriter,
+            'atom',
+            'title', 
+            Resources::ATOM_NAMESPACE,
+            $this->title
+        );
 
         if (!is_null($this->updated)) {
             $xmlWriter->writeElementNS(
