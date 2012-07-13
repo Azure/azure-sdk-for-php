@@ -73,6 +73,7 @@ class Resources
     const MISSING_CONFIG_SETTING_KEY_MSG = "Missing configuration setting %s which is required to create %sRestProxy.";
     const MISSING_CONFIG_SETTING_VALUE_MSG = "The value of configuration setting %s can't be null or empty.";
     const INSTANCE_TYPE_VALIDATION_MSG = 'The type of %s is %s but is expected to be %s.';
+    const MISSING_LOCK_LOCATION_MSG = 'The location of the lock is missed in the brokered message.';
 
     // HTTP Headers
     const X_MS_HEADER_PREFIX                 = 'x-ms-';
