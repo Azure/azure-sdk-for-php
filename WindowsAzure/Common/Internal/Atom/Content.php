@@ -28,7 +28,7 @@ use WindowsAzure\Common\Internal\Utilities;
 use WindowsAzure\Common\Internal\Validate;
 
 /**
- * This class constructs HTTP requests and receive HTTP responses for Service Bus.
+ * The content class of ATOM standard.
  *
  * @category  Microsoft
  * @package   WindowsAzure\Common\Internal\Atom
@@ -155,12 +155,12 @@ class Content extends AtomBase
             Resources::ATOM_NAMESPACE
         );
 
-        if (!empty($this->type)) {
-            $xmlWriter->writeAttribute(
-                'type', 
-                $this->type
-            );
-        }
+        $this->writeOptionalAttribute(
+            $xmlWriter,
+            'type', 
+            $this->type
+        );
+
         $this->writeInnerXml($xmlWriter);
         $xmlWriter->endElement();
     }
@@ -178,4 +178,4 @@ class Content extends AtomBase
         $xmlWriter->writeRaw($this->text);
     }
 }
-
+?>

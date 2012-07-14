@@ -347,7 +347,13 @@ class ServiceBusRestProxy extends ServiceRestProxy implements IServiceBus
                 Resources::EMPTY_STRING, 
                 $lockLocationPath
             );
-        } 
+        }
+        
+        if (empty($lockLocationPath)) {
+            throw new \InvalidArgumentException(
+                Resources::MISSING_LOCK_LOCATION_MSG
+            );
+        }
         $httpCallContext->setPath($lockLocationPath);
         $httpCallContext->addStatusCode(Resources::STATUS_OK);
         $this->sendContext($httpCallContext);
