@@ -32,7 +32,6 @@ use WindowsAzure\Common\Internal\Validate;
 use WindowsAzure\Common\Models\GetServicePropertiesResult;
 use WindowsAzure\Common\Models\ServiceProperties;
 use WindowsAzure\ServiceBus\Internal\IWrap;
-use WindowsAzure\ServiceBus\ServiceBusSettings;
 use WindowsAzure\ServiceBus\Models\WrapAccessTokenResult;
 
 /**
@@ -113,4 +112,4 @@ class WrapRestProxy extends ServiceRestProxy implements IWrap
 
 }
 
-?>
+

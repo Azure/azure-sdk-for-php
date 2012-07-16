@@ -67,7 +67,7 @@ class GetContainerAclResult
     public static function create($publicAccess, $etag, $lastModified, $parsed)
     {
         $result = new GetContainerAclResult();
-        $result->setEtag($etag);
+        $result->setETag($etag);
         $result->setLastModified($lastModified);
         $acl = ContainerAcl::create($publicAccess, $parsed);
         $result->setContainerAcl($acl);
@@ -124,7 +124,7 @@ class GetContainerAclResult
      *
      * @return string.
      */
-    public function getEtag()
+    public function getETag()
     {
         return $this->_etag;
     }
@@ -136,10 +136,10 @@ class GetContainerAclResult
      *
      * @return none.
      */
-    public function setEtag($etag)
+    public function setETag($etag)
     {
         $this->_etag = $etag;
     }
 }
 
-?>
+

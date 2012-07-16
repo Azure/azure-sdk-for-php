@@ -23,11 +23,7 @@
  */
 namespace Tests\Framework;
 use Tests\Framework\ServiceRestProxyTestBase;
-use Tests\Framework\TestResources;
-use WindowsAzure\Common\Configuration;
 use WindowsAzure\Common\Models\ServiceProperties;
-use WindowsAzure\Queue\QueueSettings;
-use WindowsAzure\Queue\QueueService;
 
 /**
  * TestBase class for each unit test class.
@@ -44,15 +40,11 @@ class QueueServiceRestProxyTestBase extends ServiceRestProxyTestBase
 {
     private $_createdQueues;
     
-    public function __construct()
+    public function setUp()
     {
-        $config = new Configuration();
-        $queueUri = TestResources::accountName() . '.queue.core.windows.net';
-        $config->setProperty(QueueSettings::ACCOUNT_KEY, TestResources::accountKey());
-        $config->setProperty(QueueSettings::ACCOUNT_NAME, TestResources::accountName());        
-        $config->setProperty(QueueSettings::URI, $queueUri);
-        $queueRestProxy = QueueService::create($config);
-        parent::__construct($config, $queueRestProxy);
+        parent::setUp();
+        $queueRestProxy = $this->builder->createQueueService($this->connectionString);
+        parent::setProxy($queueRestProxy);
         $this->_createdQueues = array();
     }
     
@@ -90,4 +82,4 @@ class QueueServiceRestProxyTestBase extends ServiceRestProxyTestBase
     }
 }
 
-?>
+

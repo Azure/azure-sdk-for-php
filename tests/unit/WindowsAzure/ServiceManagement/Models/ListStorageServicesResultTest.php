@@ -56,4 +56,4 @@ class ListStorageServicesResultTest extends \PHPUnit_Framework_TestCase
     }
 }
 
-?>
+

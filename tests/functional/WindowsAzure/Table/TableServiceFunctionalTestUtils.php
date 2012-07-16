@@ -137,7 +137,7 @@ class TableServiceFunctionalTestUtils
             $retProps[$propName] = $retProp;
         }
         $ret->setProperties($retProps);
-        $ret->setEtag($initialEnt->getEtag());
+        $ret->setETag($initialEnt->getETag());
         return $ret;
     }
 
@@ -443,4 +443,4 @@ class TableServiceFunctionalTestUtils
     }
 }
 
-?>
+

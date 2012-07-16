@@ -247,6 +247,27 @@ class Validate
             );
         }
     }
+    
+    /**
+     * Creates a anonymous function that check if the given uri is valid or not.
+     * 
+     * @return callable
+     */
+    public static function getIsValidUri()
+    {
+        return function ($uri)
+        {
+            $isValid = filter_var($uri, FILTER_VALIDATE_URL);
+            
+            if ($isValid) {
+                return true;
+            } else {
+                throw new \RuntimeException(
+                    sprintf(Resources::INVALID_CONFIG_URI, $uri)
+                );
+            }
+        };
+    }
 }
 
-?>
+

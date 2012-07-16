@@ -54,4 +54,3 @@ interface IGoalStateDeserializer
     public function deserialize();
 }
 
-?>

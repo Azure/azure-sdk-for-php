@@ -66,7 +66,6 @@ class Person extends AtomBase
      * Creates an ATOM person instance with specified name.
      *
      * @param string $name The name of the person.
-     *
      */
     public function __construct($name = Resources::EMPTY_STRING)
     {
@@ -220,4 +219,4 @@ class Person extends AtomBase
         );
     }
 }
-?>
+

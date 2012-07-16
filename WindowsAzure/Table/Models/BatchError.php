@@ -122,4 +122,4 @@ class BatchError
     }
 }
 
-?>
+

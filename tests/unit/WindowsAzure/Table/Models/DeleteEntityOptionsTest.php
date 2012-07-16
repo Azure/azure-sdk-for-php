@@ -23,7 +23,7 @@
  */
 namespace Tests\Unit\WindowsAzure\Table\Models;
 use WindowsAzure\Table\Models\DeleteEntityOptions;
-use WindowsAzure\Table\Models\Etag;
+use WindowsAzure\Table\Models\ETag;
 
 /**
  * Unit tests for class DeleteEntityOptions
@@ -39,22 +39,22 @@ use WindowsAzure\Table\Models\Etag;
 class DeleteEntityOptionsTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @covers WindowsAzure\Table\Models\DeleteEntityOptions::setEtag
-     * @covers WindowsAzure\Table\Models\DeleteEntityOptions::getEtag
+     * @covers WindowsAzure\Table\Models\DeleteEntityOptions::setETag
+     * @covers WindowsAzure\Table\Models\DeleteEntityOptions::getETag
      */
-    public function testSetEtag()
+    public function testSetETag()
     {
         // Setup
         $options = new DeleteEntityOptions();
-        $Etag = 'etag value';
+        $ETag = 'etag value';
         
         // Test
-        $options->setEtag($Etag);
+        $options->setETag($ETag);
         
         // Assert
-        $this->assertEquals($Etag, $options->getEtag());
+        $this->assertEquals($ETag, $options->getETag());
         
     }
 }
 
-?>
+

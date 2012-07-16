@@ -573,4 +573,4 @@ class BrokerPropertiesTest extends \PHPUnit_Framework_TestCase
 
 }
 
-?>
+

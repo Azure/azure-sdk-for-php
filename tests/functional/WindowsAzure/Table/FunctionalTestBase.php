@@ -34,6 +34,7 @@ class FunctionalTestBase extends IntegrationTestBase
     {
         parent::setUpBeforeClass();
         $testBase = new FunctionalTestBase();
+        $testBase->setUp();
         TableServiceFunctionalTestData::setupData();
 
         foreach(TableServiceFunctionalTestData::$testTableNames as $name)  {
@@ -45,6 +46,7 @@ class FunctionalTestBase extends IntegrationTestBase
     public static function tearDownAfterClass()
     {
         $testBase = new FunctionalTestBase();
+        $testBase->setUp();
         foreach(TableServiceFunctionalTestData::$testTableNames as $name)  {
             $testBase->safeDeleteTable($name);
         }
@@ -114,10 +116,10 @@ class FunctionalTestBase extends IntegrationTestBase
 
     public static function entityToString($ent)
     {
-        $ret = 'Etag=' . self::tmptostring($ent->getEtag()) . "\n";
+        $ret = 'ETag=' . self::tmptostring($ent->getETag()) . "\n";
         $ret .= 'Props=' . self::entityPropsToString($ent->getProperties());
         return $ret;
     }
 }
 
-?>
+

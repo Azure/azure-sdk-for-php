@@ -59,4 +59,4 @@ class DummyClass
     }
 }
 
-?>
+

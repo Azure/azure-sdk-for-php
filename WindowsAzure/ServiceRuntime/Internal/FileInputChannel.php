@@ -77,4 +77,3 @@ class FileInputChannel implements IInputChannel
     // @codingStandardsIgnoreEnd
 }
 
-?>

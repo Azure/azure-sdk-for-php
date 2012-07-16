@@ -25,12 +25,7 @@
 namespace Tests\Unit\WindowsAzure\Queue;
 use WindowsAzure\Common\Internal\Utilities;
 use Tests\Framework\QueueServiceRestProxyTestBase;
-use WindowsAzure\Common\Configuration;
 use WindowsAzure\Common\Models\ServiceProperties;
-use WindowsAzure\Queue\QueueRestProxy;
-use WindowsAzure\Queue\Internal\IQueue;
-use WindowsAzure\Queue\QueueService;
-use WindowsAzure\Queue\QueueSettings;
 use WindowsAzure\Queue\Models\ListQueuesOptions;
 use WindowsAzure\Queue\Models\ListQueuesResult;
 use WindowsAzure\Queue\Models\CreateQueueOptions;
@@ -688,4 +683,4 @@ class QueueRestProxyTest extends QueueServiceRestProxyTestBase
     }
 }
 
-?>
+

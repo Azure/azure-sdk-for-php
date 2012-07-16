@@ -25,7 +25,6 @@
 namespace Tests\Functional\WindowsAzure\ServiceBus;
 
 use Tests\Framework\ServiceBusRestProxyTestBase;
-use WindowsAzure\Common\Internal\IServiceBuilder;
 use WindowsAzure\Common\Internal\Utilities;
 use WindowsAzure\ServiceBus\Internal\IWrap;
 use WindowsAzure\ServiceBus\Internal\WrapTokenManager;
@@ -37,18 +36,15 @@ class WrapTokenManagerTest extends ServiceBusRestProxyTestBase
     private $_client;
     const EXPIRES_IN_SEC = 9;
 
-    public function init()
+    public function setUp()
     {
-        $this->_contract = new WrapTokenManagerTest_MockWrapRestProxy(self::EXPIRES_IN_SEC);
-        $builder = new WrapTokenManagerTest_CustomBuilder($this->_contract);
-        $this->_client = new WrapTokenManager('testurl', 'testname', 'testpassword', $builder);
+        parent::setUp();
+        $this->_contract = new WrapTokenManagerTest_MockWrapRestProxy();
+        $this->_client = new WrapTokenManager('testurl', 'testname', 'testpassword', $this->_contract);
     }
 
     public function testClientUsesContractToGetToken()
     {
-        // Arrange
-        $this->init();
-
         // Act
         $accessToken = $this->_client->getAccessToken('https://test/scope');
 
@@ -60,7 +56,6 @@ class WrapTokenManagerTest extends ServiceBusRestProxyTestBase
     public function testClientWillNotCallMultipleTimesWhileAccessTokenIsValid()
     {
         // Arrange
-        $this->init();
         $expectedTokens = array('testaccesstoken1-1', 'testaccesstoken1-1', 'testaccesstoken1-1');
 
         // Act
@@ -80,7 +75,6 @@ class WrapTokenManagerTest extends ServiceBusRestProxyTestBase
     public function testCallsToDifferentPathsWillResultInDifferentAccessTokens()
     {
         // Arrange
-        $this->init();
         $expectedTokens = array('testaccesstoken1-1', 'testaccesstoken2-1', 'testaccesstoken1-1');
 
         // Act
@@ -103,7 +97,6 @@ class WrapTokenManagerTest extends ServiceBusRestProxyTestBase
     public function testClientWillBeCalledWhenTokenIsHalfwayToExpiring()
     {
         // Arrange
-        $this->init();
         $expectedTokens = array('testaccesstoken1-1', 'testaccesstoken1-1', 'testaccesstoken1-2');
 
         // Act
@@ -127,12 +120,6 @@ class WrapTokenManagerTest_MockWrapRestProxy implements IWrap
 {
     public $count1;
     public $count2;
-    private $_expiresInSec;
-
-    public function __construct($expiresInSec)
-    {
-        $this->_expiresInSec = $expiresInSec;
-    }
 
     public function wrapAccessToken($uri, $name, $password, $scope)
     {
@@ -143,9 +130,8 @@ class WrapTokenManagerTest_MockWrapRestProxy implements IWrap
             $this->count2++;
             $id = '2-' . $this->count2;
         }
-
         $wrapResponse = new WrapAccessTokenResult();
-        $wrapResponse->setExpiresIn($this->_expiresInSec);
+        $wrapResponse->setExpiresIn(WrapTokenManagerTest::EXPIRES_IN_SEC);
         $wrapResponse->setAccessToken('testaccesstoken' . $id);
         return $wrapResponse;
     }
@@ -156,19 +142,4 @@ class WrapTokenManagerTest_MockWrapRestProxy implements IWrap
     }
 }
 
-class WrapTokenManagerTest_CustomBuilder implements IServiceBuilder
-{
-    private $_contract;
 
-    public function __construct($contract)
-    {
-        $this->_contract = $contract;
-    }
-
-    public function build($config, $type)
-    {
-        return $this->_contract;
-    }
-}
-
-?>

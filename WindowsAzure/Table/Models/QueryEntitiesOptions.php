@@ -220,4 +220,4 @@ class QueryEntitiesOptions extends TableServiceOptions
     }
 }
 
-?>
+

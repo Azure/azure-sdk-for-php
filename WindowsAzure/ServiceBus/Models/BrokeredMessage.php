@@ -79,7 +79,6 @@ class BrokeredMessage
      * Creates a brokered message with specified broker properties. 
      *  
      * @param string $body The body of the message. 
-     *
      */
     public function __construct($body = Resources::EMPTY_STRING)
     {
@@ -550,4 +549,4 @@ class BrokeredMessage
     
 }
 
-?>
+

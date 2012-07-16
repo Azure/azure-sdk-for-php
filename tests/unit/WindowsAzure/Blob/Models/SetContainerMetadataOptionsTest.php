@@ -84,4 +84,4 @@ class SetContainerMetadataOptionsTest extends \PHPUnit_Framework_TestCase
     }
 }
 
-?>
+

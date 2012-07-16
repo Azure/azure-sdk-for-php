@@ -47,4 +47,4 @@ class TrueFilter extends Filter
     }
 
 }
-?>
+

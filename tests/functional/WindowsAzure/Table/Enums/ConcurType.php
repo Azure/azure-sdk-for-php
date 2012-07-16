@@ -27,13 +27,13 @@ namespace Tests\Functional\WindowsAzure\Table\Enums;
 class ConcurType
 {
     const NO_KEY_MATCH            = 'NoKeyMatch';
-    const KEY_MATCH_NO_ETAG       = 'KeyMatchNoEtag';
-    const KEY_MATCH_ETAG_MISMATCH = 'KeyMatchEtagMismatch';
-    const KEY_MATCH_ETAG_MATCH    = 'KeyMatchEtagMatch';
+    const KEY_MATCH_NO_ETAG       = 'KeyMatchNoETag';
+    const KEY_MATCH_ETAG_MISMATCH = 'KeyMatchETagMismatch';
+    const KEY_MATCH_ETAG_MATCH    = 'KeyMatchETagMatch';
     public static function values()
     {
-        return array('NoKeyMatch', 'KeyMatchNoEtag', 'KeyMatchEtagMismatch', 'KeyMatchEtagMatch');
+        return array('NoKeyMatch', 'KeyMatchNoETag', 'KeyMatchETagMismatch', 'KeyMatchETagMatch');
     }
 }
 
-?>
+
