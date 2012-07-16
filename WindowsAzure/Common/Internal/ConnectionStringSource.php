@@ -76,7 +76,7 @@ class ConnectionStringSource
      * 
      * @return string
      */
-    public function environmentSource($key)
+    public static function environmentSource($key)
     {
         Validate::isString($key, 'key');
         

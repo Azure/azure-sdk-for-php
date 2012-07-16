@@ -136,7 +136,7 @@ class EdmType
         case EdmType::STRING:
         case null:
             // NULL also is treated as EdmType::STRING
-            return $value;
+            return strval($value);
             
         case EdmType::BINARY:
             return base64_encode($value);

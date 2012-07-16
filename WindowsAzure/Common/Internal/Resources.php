@@ -106,6 +106,7 @@ class Resources
     const ERROR_CONNECTION_STRING_EMPTY_KEY = 'Empty key name';
     const ERROR_CONNECTION_STRING_MISSING_CHARACTER = "Missing %s character";
     const ERROR_EMPTY_SETTINGS = 'No keys were found in the connection string';
+    const MISSING_LOCK_LOCATION_MSG = 'The lock location of the brokered message is missing.';
 
     // HTTP Headers
     const X_MS_HEADER_PREFIX                 = 'x-ms-';
