@@ -75,7 +75,7 @@ class CreateBlobPagesResult
         
         $date = $clean[Resources::LAST_MODIFIED];
         $date = Utilities::rfc1123ToDateTime($date);
-        $result->setEtag($clean[Resources::ETAG]);
+        $result->setETag($clean[Resources::ETAG]);
         $result->setLastModified($date);
         $result->setContentMD5(
             Utilities::tryGetValue($clean, Resources::CONTENT_MD5)
@@ -117,7 +117,7 @@ class CreateBlobPagesResult
      *
      * @return string.
      */
-    public function getEtag()
+    public function getETag()
     {
         return $this->_etag;
     }
@@ -129,7 +129,7 @@ class CreateBlobPagesResult
      *
      * @return none.
      */
-    public function setEtag($etag)
+    public function setETag($etag)
     {
         Validate::isString($etag, 'etag');
         $this->_etag = $etag;
@@ -181,4 +181,4 @@ class CreateBlobPagesResult
     }
 }
 
-?>
+

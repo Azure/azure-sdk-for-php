@@ -32,19 +32,11 @@ use WindowsAzure\ServiceBus\Models\QueueInfo;
 
 class IntegrationTestBase extends ServiceBusRestProxyTestBase
 {
-    /**
-     * @covers WindowsAzure\ServiceBus\ServiceBusRestProxy::withFilter
-     */
-    public function __construct()
-    {
-        parent::__construct();
-        $fiddlerFilter = new FiddlerFilter();
-        $this->restProxy = $this->restProxy->withFilter($fiddlerFilter);
-    }
-
     public function setUp()
     {
         parent::setUp();
+        $fiddlerFilter = new FiddlerFilter();
+        $this->restProxy = $this->restProxy->withFilter($fiddlerFilter);
     }
 
     public static function setUpBeforeClass()
@@ -61,6 +53,7 @@ class IntegrationTestBase extends ServiceBusRestProxyTestBase
     public static function initialize()
     {
         $inst = new IntegrationTestBase();
+        $inst->setUp();
         $restProxy = $inst->restProxy;
         $testAlphaExists = false;
         $queues = $restProxy->listQueues()->getQueueInfos();
@@ -109,4 +102,4 @@ class IntegrationTestBase extends ServiceBusRestProxyTestBase
     }
 }
 
-?>
+

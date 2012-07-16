@@ -489,4 +489,4 @@ interface IBlob extends FilterableService
     public function breakLease($container, $blob, $leaseId, $options = null);
 }
 
-?>
+

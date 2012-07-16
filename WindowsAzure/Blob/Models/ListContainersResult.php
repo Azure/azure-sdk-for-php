@@ -87,7 +87,7 @@ class ListContainersResult
             $date       = $value['Properties']['Last-Modified'];
             $date       = Utilities::rfc1123ToDateTime($date);
             $properties->setLastModified($date);
-            $properties->setEtag($value['Properties']['Etag']);
+            $properties->setETag($value['Properties']['Etag']);
             $container->setProperties($properties);
             $result->_containers[] = $container;
         }
@@ -209,4 +209,4 @@ class ListContainersResult
     }
 }
 
-?>
+

@@ -90,4 +90,4 @@ class CreateStorageServiceOptionsTest extends \PHPUnit_Framework_TestCase
     }
 }
 
-?>
+

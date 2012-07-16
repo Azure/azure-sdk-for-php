@@ -54,4 +54,4 @@ class EmptyRuleActionTest extends \PHPUnit_Framework_TestCase
 
 }
 
-?>
+

@@ -48,4 +48,3 @@ interface ICurrentStateSerializer
     public function serialize($state, $stream);
 }
 
-?>

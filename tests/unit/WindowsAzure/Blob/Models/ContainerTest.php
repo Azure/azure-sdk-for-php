@@ -149,7 +149,7 @@ class ContainerTest extends \PHPUnit_Framework_TestCase
         $date = Utilities::rfc1123ToDateTime('Wed, 12 Aug 2009 20:39:39 GMT');
         $container = new Container();
         $expected = new ContainerProperties();
-        $expected->setEtag('0x8CACB9BD7C1EEEC');
+        $expected->setETag('0x8CACB9BD7C1EEEC');
         $expected->setLastModified($date);
         
         // Test
@@ -168,7 +168,7 @@ class ContainerTest extends \PHPUnit_Framework_TestCase
         $date = Utilities::rfc1123ToDateTime('Wed, 12 Aug 2009 20:39:39 GMT');
         $container = new Container();
         $expected = new ContainerProperties();
-        $expected->setEtag('0x8CACB9BD7C1EEEC');
+        $expected->setETag('0x8CACB9BD7C1EEEC');
         $expected->setLastModified($date);
         $container->setProperties($expected);
         
@@ -180,4 +180,4 @@ class ContainerTest extends \PHPUnit_Framework_TestCase
     }
 }
 
-?>
+

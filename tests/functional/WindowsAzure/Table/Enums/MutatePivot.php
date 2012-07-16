@@ -35,4 +35,4 @@ class MutatePivot
         return array('ChangeValues', 'AddProperty', 'RemoveProperty', 'NullProperty');
     }
 }
-?>
+

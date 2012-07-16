@@ -302,4 +302,3 @@ class Protocol1RuntimeClientTest extends \PHPUnit_Framework_TestCase
     }
 }
 
-?>

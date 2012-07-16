@@ -25,15 +25,7 @@
 namespace WindowsAzure\Common\Internal;
 
 /**
- * By implementing this interface you can control how 
- * WindowsAzure\Common\Configuration creates your object when create
- * function is called. This can be useful if you want to add any processing layer
- * to the REST API wrapper (like handeling exceptions). So you can have a builder
- * with this build function:
- * <code>
- * $queueRestWrapper   = new QueueRestProxy(...)
- * $exceptionProcessor = new ExceptionProcessor($queueRestWrapper);
- * </code>
+ * Holder for default connection string sources used in CloudConfigurationManager.
  *
  * @category  Microsoft
  * @package   WindowsAzure\Common\Internal
@@ -43,17 +35,64 @@ namespace WindowsAzure\Common\Internal;
  * @version   Release: @package_version@
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
-interface IServiceBuilder
+class ConnectionStringSource
 {
     /**
-     * Creates an object passed $type configured with $config.
-     *
-     * @param WindowsAzure\Common\Configuration $config The configuration.
-     * @param string                            $type   The type name.
+     * The list of all sources which comes as default.
      * 
-     * @return mix
+     * @var type 
      */
-    public function build($config, $type);
+    private static $_defaultSources;
+    
+    /**
+     * @var boolean
+     */
+    private static $_isInitialized;
+    
+    /**
+     * Environment variable source name.
+     */
+    const ENVIRONMENT_SOURCE = 'environment_source';
+    
+    /**
+     * Initializes the default sources.
+     * 
+     * @return none
+     */
+    private static function _init()
+    {
+        if (!self::$_isInitialized) {
+            self::$_defaultSources = array(
+                self::ENVIRONMENT_SOURCE => array(__CLASS__, 'environmentSource')
+            );
+            self::$_isInitialized  = true;
+        }        
+    }
+    
+    /**
+     * Gets a connection string value from the system environment.
+     * 
+     * @param string $key The connection string name.
+     * 
+     * @return string
+     */
+    public static function environmentSource($key)
+    {
+        Validate::isString($key, 'key');
+        
+        return getenv($key);
+    }
+    
+    /**
+     * Gets list of default sources.
+     * 
+     * @return array
+     */
+    public static function getDefaultSources()
+    {
+        self::_init();
+        return self::$_defaultSources;
+    }
 }
 
 ?>

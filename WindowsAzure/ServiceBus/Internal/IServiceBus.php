@@ -26,7 +26,7 @@ namespace WindowsAzure\ServiceBus\Internal;
 use WindowsAzure\Common\Internal\FilterableService;
 
 /**
- * This class constructs HTTP requests and receive HTTP responses for service bus.
+ * This class constructs HTTP requests and receive HTTP responses for Service Bus.
  *
  * @category  Microsoft
  * @package   WindowsAzure\ServiceBus\Internal

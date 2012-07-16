@@ -125,4 +125,4 @@ class PageRangeTest extends \PHPUnit_Framework_TestCase
     }
 }
 
-?>
+

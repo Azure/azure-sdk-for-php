@@ -213,4 +213,3 @@ class Protocol1RuntimeGoalStateClientTest extends \PHPUnit_Framework_TestCase
     }
 }
 
-?>

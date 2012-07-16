@@ -24,7 +24,6 @@
 
 namespace Tests\Functional\WindowsAzure\Table;
 
-use WindowsAzure\Common\Configuration;
 use WindowsAzure\Common\Internal\Utilities;
 use WindowsAzure\Common\Models\Logging;
 use WindowsAzure\Common\Models\Metrics;
@@ -203,7 +202,7 @@ class TableServiceFunctionalTestData
         return $ret;
     }
 
-    static function getInterestingQueryTablesOptions()
+    static function getInterestingQueryTablesOptions($isEmulated)
     {
         $ret = array();
 
@@ -283,7 +282,7 @@ class TableServiceFunctionalTestData
         $options->setPrefix(self::$nonExistTablePrefix);
         array_push($ret, $options);
 
-        if (!Configuration::isEmulated()) {
+        if (!$isEmulated) {
             $options = new QueryTablesOptions();
             $options->setPrefix(self::$testUniqueId);
             array_push($ret, $options);
@@ -592,4 +591,4 @@ class TableServiceFunctionalTestData
     }
 }
 
-?>
+

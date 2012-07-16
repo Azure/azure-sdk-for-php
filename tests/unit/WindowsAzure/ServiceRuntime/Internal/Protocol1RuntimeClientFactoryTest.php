@@ -72,4 +72,3 @@ class Protocol1RuntimeClientFactoryTest extends \PHPUnit_Framework_TestCase
     }
 }
 
-?>

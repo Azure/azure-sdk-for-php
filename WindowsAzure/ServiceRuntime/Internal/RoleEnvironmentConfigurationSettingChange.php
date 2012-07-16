@@ -63,4 +63,3 @@ class RoleEnvironmentConfigurationSettingChange implements IRoleEnvironmentChang
     }
 }
 
-?>

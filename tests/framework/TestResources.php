@@ -71,24 +71,84 @@ class TestResources
     const STATUS_PRECONDITION_FAILED   = 412;
     const STATUS_INTERNAL_SERVER_ERROR = 500;
 
+    public static function getWindowsAzureStorageServicesConnectionString()
+    {
+        $accountName = self::accountName();
+        $accountKey = self::accountKey();
+        $azureServiceConnectionString = "DefaultEndpointsProtocol=http;AccountName=$accountName;AccountKey=$accountKey";
+        
+        return $azureServiceConnectionString;
+    }
+    
+    public static function getEmulatorStorageServicesConnectionString()
+    {
+        $developmentStorageConnectionString = 'UseDevelopmentStorage=true';
+        
+        return $developmentStorageConnectionString;
+    }
+    
+    public static function getServiceManagementConnectionString()
+    {
+        $subscriptionId = self::serviceManagementSubscriptionId();
+        $certPath = self::serviceManagementCertificatePath();
+        $connectionString = "SubscriptionID=$subscriptionId;CertificatePath=$certPath";
+        
+        return $connectionString;
+    }
+    
+    public static function getServiceBusConnectionString()
+    {
+        $namespace = self::serviceBusNamespace();
+        $endpoint = "https://$namespace.servicebus.windows.net";
+        $wrapName = self::wrapAuthenticationName();
+        $wrapPassword = self::wrapPassword();
+        $connectionString = "Endpoint=$endpoint;SharedSecretIssuer=$wrapName;SharedSecretValue=$wrapPassword";
+        
+        return $connectionString;
+    }
+    
     public static function accountName()
     {
-        return getenv('AZURE_STORAGE_ACCOUNT');
+        $name = getenv('AZURE_STORAGE_ACCOUNT');
+        
+        if (empty($name)) {
+            throw new \Exception('AZURE_STORAGE_ACCOUNT envionment variable is missing');
+        }
+        
+        return $name;
     }
     
     public static function accountKey()
     {
-        return getenv('AZURE_STORAGE_KEY');
+        $key = getenv('AZURE_STORAGE_KEY');
+        
+        if (empty($key)) {
+            throw new \Exception('AZURE_STORAGE_KEY envionment variable is missing');
+        }
+        
+        return $key;
     }
 
     public static function serviceManagementSubscriptionId()
     {
-        return getenv('SERVICE_MANAGEMENT_SUBSCRIPTION_ID');
+        $subscriptionId = getenv('SERVICE_MANAGEMENT_SUBSCRIPTION_ID');
+        
+        if (empty($subscriptionId)) {
+            throw new \Exception('SERVICE_MANAGEMENT_SUBSCRIPTION_ID envionment variable is missing');
+        }
+        
+        return $subscriptionId;
     }
     
     public static function serviceManagementCertificatePath()
     {
-        return getenv('SERVICE_MANAGEMENT_CERTIFICATE_PATH');
+        $path = getenv('SERVICE_MANAGEMENT_CERTIFICATE_PATH');
+        
+        if (empty($path)) {
+            throw new \Exception('SERVICE_MANAGEMENT_CERTIFICATE_PATH envionment variable is missing');
+        }
+        
+        return $path;
     }
 
     public static function serviceBusCertificatePath()
@@ -103,17 +163,35 @@ class TestResources
 
     public static function serviceBusNamespace()
     {
-        return getenv('SERVICE_BUS_NAMESPACE');
+        $namespace = getenv('SERVICE_BUS_NAMESPACE');
+        
+        if (empty($namespace)) {
+            throw new \Exception('SERVICE_BUS_NAMESPACE enviroment variable is missing.');
+        }
+        
+        return $namespace;
     }
 
     public static function wrapAuthenticationName()
     {
-        return getenv('WRAP_AUTHENTICATION_NAME');
+        $wrapAuthenticationName = getenv('WRAP_AUTHENTICATION_NAME');
+        
+        if (empty($wrapAuthenticationName)) {
+            throw new \Exception('WRAP_AUTHENTICATION_NAME enviroment variable is missing.');
+        }
+        
+        return $wrapAuthenticationName;
     }
 
     public static function wrapPassword()
     {
-        return getenv('WRAP_PASSWORD');
+        $wrapPassword = getenv('WRAP_PASSWORD');
+        
+        if (empty($wrapPassword)) {
+            throw new \Exception('WRAP_PASSWORD enviroment variable is missing.');
+        }
+        
+        return $wrapPassword;
     }
 
     public static function getServicePropertiesSample()
@@ -420,4 +498,4 @@ class TestResources
     }
 }
 
-?>
+

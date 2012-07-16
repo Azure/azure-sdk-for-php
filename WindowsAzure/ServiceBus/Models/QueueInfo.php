@@ -346,9 +346,9 @@ class QueueInfo
      * @return none
      */
     public function setDuplicateDetectionHistoryTimeWindow(
-    $duplicateDetectionHistoryTimeWindow
+        $duplicateDetectionHistoryTimeWindow
     ) {
-        $this->_queueDescription->setDuplicateDetectionHistoryTimeWindow( 
+        $this->_queueDescription->setDuplicateDetectionHistoryTimeWindow(
             $duplicateDetectionHistoryTimeWindow
         );
     }

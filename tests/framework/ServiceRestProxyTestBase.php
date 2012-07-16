@@ -22,8 +22,7 @@
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
 namespace Tests\Framework;
-use WindowsAzure\Common\Configuration;
-use Tests\Framework\TestResources;
+use WindowsAzure\Common\Internal\Resources;
 use WindowsAzure\Common\Models\ServiceProperties;
 use WindowsAzure\Common\Internal\Serialization\XmlSerializer;
 
@@ -42,19 +41,32 @@ class ServiceRestProxyTestBase extends RestProxyTestBase
 {
     protected $propertiesChanged;
     protected $defaultProperties;
+    protected $connectionString;
     
-    public static function setUpBeforeClass()
+    const NOT_SUPPORTED = 'The storage emulator doesn\'t support this API';
+    
+    protected function skipIfEmulated()
     {
-        $storageKey = TestResources::accountKey();
-        $storageName = TestResources::accountName();
-        
-        if (empty($storageKey)) {
-            throw new \Exception('AZURE_STORAGE_KEY envionment variable is missing');
+        if ($this->isEmulated()) {
+            $this->markTestSkipped(self::NOT_SUPPORTED);
         }
-        
-        if (empty($storageName)) {
-            throw new \Exception('AZURE_STORAGE_ACCOUNT envionment variable is missing');
-        }
+    }
+    
+    protected function isEmulated()
+    {
+        return (strpos($this->connectionString, Resources::USE_DEVELOPMENT_STORAGE_NAME) !== false);
+    }
+
+    public function __construct()
+    {
+        parent::__construct();
+        $this->connectionString = TestResources::getWindowsAzureStorageServicesConnectionString();
+    }
+    
+    public function setUp()
+    {
+        parent::setUp();
+        $this->_createDefaultProperties();
     }
     
     private function _createDefaultProperties()
@@ -73,12 +85,6 @@ class ServiceRestProxyTestBase extends RestProxyTestBase
         $this->defaultProperties = ServiceProperties::create($propertiesArray);
     }
     
-    public function __construct($config, $serviceRestProxy)
-    {
-        parent::__construct($config, $serviceRestProxy);
-        $this->_createDefaultProperties();
-    }
-    
     public function setServiceProperties($properties, $options = null)
     {
         $this->restProxy->setServiceProperties($properties, $options);
@@ -95,4 +101,4 @@ class ServiceRestProxyTestBase extends RestProxyTestBase
     }
 }
 
-?>
+

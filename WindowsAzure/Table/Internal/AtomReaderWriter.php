@@ -226,10 +226,10 @@ class AtomReaderWriter implements IAtomReaderWriter
         $prop   = $prop[0]->children($this->_dataServicesNamespaceName);
         $entity = new Entity();
         
-        // Set Etag
+        // Set ETag
         $etag = $result->attributes($this->_dataServicesMetadataNamespaceName);
         $etag = $etag[Resources::ETAG];
-        $entity->setEtag((string)$etag);
+        $entity->setETag((string)$etag);
         
         foreach ($prop as $key => $value) {
             $attributes = $value->attributes(
@@ -372,4 +372,4 @@ class AtomReaderWriter implements IAtomReaderWriter
     }
 }
 
-?>
+

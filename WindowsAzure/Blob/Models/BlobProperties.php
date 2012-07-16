@@ -115,7 +115,7 @@ class BlobProperties
         $date = Utilities::tryGetValue($clean, Resources::LAST_MODIFIED);
         $result->setBlobType(Utilities::tryGetValue($clean, 'blobtype'));
         $result->setContentLength(intval($clean[Resources::CONTENT_LENGTH]));
-        $result->setEtag(Utilities::tryGetValue($clean, Resources::ETAG));
+        $result->setETag(Utilities::tryGetValue($clean, Resources::ETAG));
         
         if (!is_null($date)) {
             $date = Utilities::rfc1123ToDateTime($date);
@@ -188,7 +188,7 @@ class BlobProperties
      *
      * @return string.
      */
-    public function getEtag()
+    public function getETag()
     {
         return $this->_etag;
     }
@@ -200,7 +200,7 @@ class BlobProperties
      *
      * @return none.
      */
-    public function setEtag($etag)
+    public function setETag($etag)
     {
         $this->_etag = $etag;
     }
@@ -428,4 +428,4 @@ class BlobProperties
     }
 }
 
-?>
+

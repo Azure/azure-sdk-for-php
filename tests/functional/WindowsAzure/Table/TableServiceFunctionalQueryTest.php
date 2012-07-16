@@ -47,6 +47,7 @@ class TableServiceFunctionalQueryTest extends FunctionalTestBase
         $table = TableServiceFunctionalTestData::$testTableNames[0];
         self::$entitiesInTable = self::getEntitiesToQueryOver();
         $baseWithRestProxy = new FunctionalTestBase();
+        $baseWithRestProxy->setUp();
         $parts = array();
         foreach(self::$entitiesInTable as $entity)  {
             if (array_key_exists($entity->getPartitionKey(), $parts) === false) {
@@ -667,4 +668,4 @@ class TableServiceFunctionalQueryTest extends FunctionalTestBase
     }
 }
 
-?>
+

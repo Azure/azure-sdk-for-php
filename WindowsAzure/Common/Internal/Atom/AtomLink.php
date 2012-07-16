@@ -340,4 +340,4 @@ class AtomLink extends AtomBase
 
     }
 }
-?>
+

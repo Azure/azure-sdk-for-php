@@ -26,6 +26,7 @@ namespace Tests\Unit\WindowsAzure\Table\internal;
 use Tests\Framework\TestResources;
 use WindowsAzure\Common\Internal\Utilities;
 use WindowsAzure\Table\Internal\AtomReaderWriter;
+use WindowsAzure\Table\Models\EdmType;
 
 /**
  * Unit tests for class AtomReaderWriter
@@ -85,6 +86,7 @@ class AtomReaderWriterTest extends \PHPUnit_Framework_TestCase
         // Setup
         $atomSerializer = new AtomReaderWriter();
         $entity = TestResources::getTestEntity('123', '456');
+        $entity->addProperty('Cost', EdmType::DOUBLE, 12.45);
         $expected = '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>' . "\n" .
                     '<entry xmlns:d="http://schemas.microsoft.com/ado/2007/08/dataservices" xmlns:m="http://schemas.microsoft.com/ado/2007/08/dataservices/metadata" xmlns="http://www.w3.org/2005/Atom">' . "\n" .
                     ' <title/>' . "\n" .
@@ -101,6 +103,7 @@ class AtomReaderWriterTest extends \PHPUnit_Framework_TestCase
                     '   <d:CustomerName>John</d:CustomerName>' . "\n" .
                     '   <d:IsNew m:type="Edm.Boolean">1</d:IsNew>' . "\n" .
                     '   <d:JoinDate m:type="Edm.DateTime">2012-01-26T18:26:19Z</d:JoinDate>' . "\n" .
+                    '   <d:Cost m:type="Edm.Double">12.45</d:Cost>' . "\n" .
                     '  </m:properties>' . "\n" .
                     ' </content>' . "\n" .
                     '</entry>' . "\n";
@@ -204,6 +207,7 @@ class AtomReaderWriterTest extends \PHPUnit_Framework_TestCase
         // Setup
         $atomSerializer = new AtomReaderWriter();
         $expected = TestResources::getTestEntity('123', '456');
+        $expected->addProperty('Cost', EdmType::DOUBLE, 12.45);
         
         // Test
         $actual = $atomSerializer->parseEntity($entityAtom);
@@ -222,9 +226,9 @@ class AtomReaderWriterTest extends \PHPUnit_Framework_TestCase
         $e1 = TestResources::getTestEntity($pk1, '1');
         $e2 = TestResources::getTestEntity($pk2, '2');
         $e3 = TestResources::getTestEntity($pk3, '3');
-        $e1->setEtag('W/"datetime\'2012-05-17T00%3A59%3A32.1131734Z\'"');
-        $e2->setEtag('W/"datetime\'2012-05-17T00%3A59%3A32.4252358Z\'"');
-        $e3->setEtag('W/"datetime\'2012-05-17T00%3A59%3A32.7533014Z\'"');
+        $e1->setETag('W/"datetime\'2012-05-17T00%3A59%3A32.1131734Z\'"');
+        $e2->setETag('W/"datetime\'2012-05-17T00%3A59%3A32.4252358Z\'"');
+        $e3->setETag('W/"datetime\'2012-05-17T00%3A59%3A32.7533014Z\'"');
         $e1->setTimestamp(Utilities::convertToDateTime('2012-05-17T00:59:32.0000473Z'));
         $e2->setTimestamp(Utilities::convertToDateTime('2012-05-17T00:59:32.0000473Z'));
         $e3->setTimestamp(Utilities::convertToDateTime('2012-05-17T00:59:32.0000473Z'));
@@ -309,4 +313,4 @@ class AtomReaderWriterTest extends \PHPUnit_Framework_TestCase
     }
 }
 
-?>
+

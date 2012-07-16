@@ -1072,4 +1072,4 @@ class ServiceBusRestProxyTest extends ServiceBusRestProxyTestBase
     }
 }
 
-?>
+

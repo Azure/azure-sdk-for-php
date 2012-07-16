@@ -97,4 +97,4 @@ class BinaryFilter extends Filter
     }
 }
 
-?>
+

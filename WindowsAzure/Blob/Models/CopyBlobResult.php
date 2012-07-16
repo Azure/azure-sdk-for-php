@@ -61,7 +61,7 @@ class CopyBlobResult
         $result                 = new CopyBlobResult();
         $headerWithLowerCaseKey = array_change_key_case($headers);
 
-        $result->setEtag($headerWithLowerCaseKey[Resources::ETAG]);
+        $result->setETag($headerWithLowerCaseKey[Resources::ETAG]);
         $result->setLastModified(
             Utilities::rfc1123ToDateTime(
                 $headerWithLowerCaseKey[Resources::LAST_MODIFIED]
@@ -116,4 +116,4 @@ class CopyBlobResult
     }
 }
 
-?>
+

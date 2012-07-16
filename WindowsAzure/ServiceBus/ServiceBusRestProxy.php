@@ -57,7 +57,7 @@ use WindowsAzure\Common\Internal\Validate;
 
 /**
  * This class constructs HTTP requests and receive HTTP responses 
- * for service bus.
+ * for Service Bus.
  *
  * @category  Microsoft
  * @package   WindowsAzure\ServiceBus
@@ -74,8 +74,8 @@ class ServiceBusRestProxy extends ServiceRestProxy implements IServiceBus
      * Creates a ServiceBusRestProxy with specified parameter. 
      * 
      * @param IHttpClient $channel        The channel to communicate. 
-     * @param string      $uri            The URI of service bus service.
-     * @param ISerializer $dataSerializer The serializer of the service bus.
+     * @param string      $uri            The URI of Service Bus service.
+     * @param ISerializer $dataSerializer The serializer of the Service Bus.
      *
      * @return none
      */
@@ -349,8 +349,7 @@ class ServiceBusRestProxy extends ServiceRestProxy implements IServiceBus
             );
         }
         
-        if (empty($lockLocationPath))
-        {
+        if (empty($lockLocationPath)) {
             throw new \InvalidArgumentException(
                 Resources::MISSING_LOCK_LOCATION_MSG
             );

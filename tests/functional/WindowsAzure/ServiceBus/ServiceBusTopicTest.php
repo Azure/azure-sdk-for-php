@@ -377,4 +377,4 @@ class ServiceBusTopicTest extends ScenarioTestBase
         $this->assertEquals($expectedCount, $messageCount, 'got all messages');
     }
 }
-?>
+
