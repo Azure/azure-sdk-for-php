@@ -28,7 +28,7 @@ use WindowsAzure\Common\Internal\Resources;
 use WindowsAzure\Common\Internal\Validate;
 
 /**
- * This class constructs HTTP requests and receive HTTP responses for Service Bus.
+ * The Entry class of ATOM standard.
  *
  * @category  Microsoft
  * @package   WindowsAzure\Common\Internal\Atom
@@ -560,14 +560,13 @@ class Entry extends AtomBase
             );
         }
 
-        if (!is_null($this->id)) {
-            $xmlWriter->writeElementNS(
-                'atom',
-                'id', 
-                Resources::ATOM_NAMESPACE,
-                $this->id
-            );
-        }
+        $this->writeOptionalElementNS(
+            $xmlWriter,
+            'atom',
+            'id', 
+            Resources::ATOM_NAMESPACE,
+            $this->id
+        );
 
         if (!is_null($this->link)) {
             $this->writeArrayItem(
@@ -577,50 +576,45 @@ class Entry extends AtomBase
             );
         }
 
-        if (!is_null($this->published)) {
-            $xmlWriter->writeElementNS(
-                'atom',
-                'published', 
-                Resources::ATOM_NAMESPACE,
-                $this->published
-            );
-        }
+        $this->writeOptionalElementNS(
+            $xmlWriter,
+            'atom',
+            'published', 
+            Resources::ATOM_NAMESPACE,
+            $this->published
+        );
 
-        if (!is_null($this->rights)) {
-            $xmlWriter->writeElementNS(
-                'atom',
-                'rights', 
-                Resources::ATOM_NAMESPACE,
-                $this->rights
-            );
-        }
+        $this->writeOptionalElementNS(
+            $xmlWriter,
+            'atom',
+            'rights', 
+            Resources::ATOM_NAMESPACE,
+            $this->rights
+        );
 
-        if (!is_null($this->source)) {
-            $xmlWriter->writeElementNS(
-                'atom',
-                'source', 
-                Resources::ATOM_NAMESPACE,
-                $this->source
-            );
-        }
+        $this->writeOptionalElementNS(
+            $xmlWriter,
+            'atom',
+            'source', 
+            Resources::ATOM_NAMESPACE,
+            $this->source
+        );
 
-        if (!is_null($this->summary)) {
-            $xmlWriter->writeElementNS(
-                'atom',
-                'summary', 
-                Resources::ATOM_NAMESPACE,
-                $this->summary
-            );
-        }
+        $this->writeOptionalElementNS(
+            $xmlWriter,
+            'atom',
+            'summary', 
+            Resources::ATOM_NAMESPACE,
+            $this->summary
+        );
         
-        if (!is_null($this->title)) {
-            $xmlWriter->writeElementNS(
-                'atom',
-                'title', 
-                Resources::ATOM_NAMESPACE,
-                $this->title
-            );
-        }
+        $this->writeOptionalElementNS(
+            $xmlWriter,
+            'atom',
+            'title', 
+            Resources::ATOM_NAMESPACE,
+            $this->title
+        );
 
         if (!is_null($this->updated)) {
             $xmlWriter->writeElementNS(
@@ -633,4 +627,4 @@ class Entry extends AtomBase
     }
 }
 
-
+?>
