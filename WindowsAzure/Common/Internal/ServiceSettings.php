@@ -31,9 +31,11 @@ use WindowsAzure\Common\Internal\Resources;
  * Derived classes must implement the following members:
  * 1- $isInitialized: A static property that indicates whether the class's static
  *    members have been initialized.
- * 2- init(): A static method that initializes static members.
+ * 2- init(): A protected static method that initializes static members.
  * 3- $validSettingKeys: A static property that contains valid setting keys for this 
  *    service.
+ * 4- createFromConnectionString($connectionString): A public static function that
+ *    takes a connection string and returns the created settings object.
  *
  * @category  Microsoft
  * @package   WindowsAzure\Common\Internal
@@ -280,13 +282,4 @@ abstract class ServiceSettings
         
         return false;
     }
-    
-    /**
-     * Creates a ServiceSettings object from the given connection string.
-     * 
-     * @param string $connectionString The storage settings connection string.
-     * 
-     * @return ServiceSettings 
-     */
-    public abstract static function createFromConnectionString($connectionString);
 }
