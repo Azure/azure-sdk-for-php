@@ -1,4 +1,4 @@
-﻿# Windows Azure SDK for PHP
+# Windows Azure SDK for PHP
 
 This project provides a set of PHP client libraries that make it easy to access
 Windows Azure tables, blobs, queues, service bus (queues and topics), service runtime and service management APIs. For documentation on how to host PHP applications on Windows Azure, please see the
@@ -48,56 +48,110 @@ To get the source code from GitHub, type
 The PHP Client Libraries for Windows Azure have a dependency on the [HTTP_Request2](http://pear.php.net/package/HTTP_Request2), [Mail_mime](http://pear.php.net/package/Mail_mime), and [Mail_mimeDecode](http://pear.php.net/package/Mail_mimeDecode) PEAR packages. The recommended way to resolve these dependencies is to install them using the [PEAR package manager](http://pear.php.net/manual/en/installation.php).
 
 
-## Download Package
+##Install via Composer
 
-Alternatively, you can download the client libraries and all dependencies using the PHP package manager PEAR:
+1. Create a file named **composer.json** in the root of your project and add the following code to it:
 
-1. [Install PEAR](http://pear.php.net/manual/en/installation.php).
-2. Install the PEAR package:
+		{
+			"require": {
+				"microsoft/windowsazure": "*"
+			},			
+			"repositories": [
+				{
+					"type": "pear",
+					"url": "http://pear.php.net"
+				}
+			]
+		}
 
-		pear install pear.windowsazure.com/WindowsAzure
+2. Download **[composer.phar](http://getcomposer.org/composer.phar)** in your project root.
+
+3. Open a command prompt and execute this in your project root
+
+		php composer.phar install
+
+	<div class="dev-callout"> 
+	<b>Note</b> 
+	<p>On Windows, you will also need to add the Git executable to your PATH environment variable.</p>
+	</div>
+
+
+##Install as a PEAR package
+
+To install the PHP Client Libraries for Windows Azure as a PEAR package, follow these steps:
+
+1. [Install PEAR](http://pear.php.net/manual/en/installation.getting.php).
+2. Set-up the Windows Azure PEAR channel:
+
+		pear channel-discover pear.windowsazure.com
+3. Install the PEAR package:
+
+		pear install pear.windowsazure.com/WindowsAzure-0.3.0
+
 
 # Usage
 
-## Storage Services: Getting Started
+## Getting Started
 
-There are four basic steps that have to be performed before you can make a call to any Windows Azure Storage API when using the libraries. 
+There are four basic steps that have to be performed before you can make a call to any Windows Azure API when using the libraries. 
 
 * First, include the autoloader script:
 
+	If installed via PEAR or Git:
+
 		require_once "WindowsAzure/WindowsAzure.php"; 
+
+	If installed via Composer:
+		
+		require_once "vendor/autoload.php"; 
 	
 * Include the namespaces you are going to use.
 
-	Before you can access any of the services you must set your authentication credentials up in an instance of the `Configuration` class:
+	To create any Windows Azure service client you need to use the **ServicesBuilder** class:
 
-		use WindowsAzure\Common\Configuration;
-
-	To access a service you need to include at least two namespaces - one for the factory instantiating REST wrapper objects, and another for the configuration settings object. For example, for tables you need:
-
-		use WindowsAzure\Table\TableService;
-		use WindowsAzure\Table\TableSettings;
+		use WindowsAzure\Common\ServicesBuilder;
 
 	To process exceptions you need:
 
 		use WindowsAzure\Common\ServiceException;
 
 	
-* Set your authentication credentials within the Configuration object. Use the settings object to determine the right key names:
+* To instantiate the service client you will also need a valid connection string. The format is: 
 
-		$config = new Configuration();
-		$config->setProperty(TableSettings::ACCOUNT_NAME, 
-			'[YOUR_STORAGE_ACCOUNT_NAME]');
-		$config->setProperty(TableSettings::ACCOUNT_KEY,
-			'[YOUR_STORAGE_ACCOUNT_KEY]');
-		$config->setProperty(TableSettings::URI, 
-			'[YOUR_STORAGE_ACCOUNT_NAME]' . '.table.core.windows.net');
+	* For accessing a live storage service (tables, blobs, queues):
+	
+			DefaultEndpointsProtocol=[http|https];AccountName=[yourAccount];AccountKey=[yourKey]
+	
+	* For accessing the emulator storage:
+	
+			UseDevelopmentStorage=true
 
-* Instantiate a "REST Proxy" - a wrapper around the available calls for the given service. For example, for Tables use the TableService factory passing in the Configuration object:
+	* For accessing the Service Bus:
 
-		$tableRestProxy = TableService::create($config);
+			Endpoint=[yourEndpoint];SharedSecretIssuer=[yourWrapAuthenticationName];SharedSecretValue=[yourWrapPassword]
+
+		Where the Endpoint is typically of the format `https://[yourNamespace].servicebus.windows.net`.
+
+	* For accessing Service Management APIs:
+
+			SubscriptionID=[yourSubscriptionId];CertificatePath=[filePathToYourCertificate]
 
 
+* Instantiate a "REST Proxy" - a wrapper around the available calls for the given service.
+
+	* For the Storage services:
+
+			$tableRestProxy = ServicesBuilder->getInstance()->createTableService($connectionString);
+			$blobRestProxy = ServicesBuilder->getInstance()->createBlobService($connectionString);
+			$queueRestProxy = ServicesBuilder->getInstance()->createQueueService($connectionString);
+
+	* For Service Bus:
+
+			$serviceBusRestProxy = ServicesBuilder->getInstance()->createServiceBusService($connectionString);
+
+	* For Service Management:
+
+			$serviceManagementRestProxy = ServicesBuilder->getInstance()->createServiceManagementService($connectionString);
 
 ## Table Storage
 
@@ -349,36 +403,6 @@ try	{
 }
 ```
 
-## Service Bus
-
-### Getting Started
-
-There are four basic steps that have to be performed before you can make a call to any Windows Azure Storage API when using the libraries. 
-
-* First, include the autoloader script:
-
-		require_once "WindowsAzure/WindowsAzure.php"; 
-	
-* Include the namespaces you are going to use.
-
-		use WindowsAzure\Table\ServiceBusService;
-		use WindowsAzure\Common\ServiceException;
-
-* Set your authentication credentials within the Configuration object. Use the settings object to determine the right key names:
-
-		$config = new Configuration();
-		ServiceBusSettings::configureWithWrapAuthentication( $config,
-														 $namespace,
-														 $issuer,
-														 $key);
-
-* Instantiate a "REST Proxy" - a wrapper around the available calls:
-
-		$serviceBusRestProxy->createQueue($queueInfo);
-
-The following are examples of common operations performed with Service Bus Queues service. For more please read [How-to use Service Bus Queues](http://www.windowsazure.com/en-us/develop/php/how-to-guides/service-bus-queues/).
-
-
 ## Service Bus Queues
 
 ### Create a Queue
@@ -520,6 +544,38 @@ try	{
 }
 ```
 
+## Service Management
+
+### Set-up certificates
+
+You  need to create two certificates, one for the server (a .cer file) and one for the client (a .pem file). To create the .pem file using [OpenSSL](http://www.openssl.org), execute this: 
+
+	openssl req -x509 -nodes -days 365 -newkey rsa:1024 -keyout mycert.pem -out mycert.pem
+
+To create the .cer certificate, execute this: 
+
+	openssl x509 -inform pem -in mycert.pem -outform der -out mycert.cer
+
+### List Available Locations
+	
+	$serviceManagementRestProxy->listLocations();
+	$locations = $result->getLocations();
+	foreach($locations as $location){
+	      echo $location->getName()."<br />";
+	}
+
+
+### Create a Storage Service
+
+To create a storage service, you need a name for the service (between 3 and 24 lowercase characters and unique within Windows Azure), a label (a base-64 encoded name for the service, up to 100 characters), and either a location or an affinity group. Providing a description for the service is optional.
+
+	$name = "mystorageservice";
+	$label = base64_encode($name);
+	$options = new CreateStorageServiceOptions();
+	$options->setLocation('West US');
+	$result = $serviceManagementRestProxy->createStorageService($name, $label, $options);
+	
+	
 
 **For more examples please see the [Windows Azure PHP Developer Center](http://www.windowsazure.com/en-us/develop/php)**
 
