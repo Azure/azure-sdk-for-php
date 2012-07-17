@@ -1,4 +1,4 @@
-﻿# Windows Azure SDK for PHP
+# Windows Azure SDK for PHP
 
 This project provides a set of PHP client libraries that make it easy to access
 Windows Azure tables, blobs, queues, service bus (queues and topics), service runtime and service management APIs. For documentation on how to host PHP applications on Windows Azure, please see the
@@ -548,7 +548,7 @@ try	{
 
 ### Set-up certificates
 
-You  need to create two certificates, one for the server (a .cer file) and one for the client (a .pem file). To create the .pem file using OpenSSL, execute this: 
+You  need to create two certificates, one for the server (a .cer file) and one for the client (a .pem file). To create the .pem file using [OpenSSL](http://www.openssl.org), execute this: 
 
 	openssl req -x509 -nodes -days 365 -newkey rsa:1024 -keyout mycert.pem -out mycert.pem
 
