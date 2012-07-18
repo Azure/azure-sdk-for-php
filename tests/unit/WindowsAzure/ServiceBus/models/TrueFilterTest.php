@@ -54,4 +54,4 @@ class TrueFilterTest extends \PHPUnit_Framework_TestCase
 
 }
 
-?>
+

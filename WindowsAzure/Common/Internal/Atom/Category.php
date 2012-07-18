@@ -226,37 +226,28 @@ class Category extends AtomBase
     public function writeInnerXml($xmlWriter)
     {
         Validate::notNull($xmlWriter, 'xmlWriter');
-        if (!empty($this->term)) {
-            $xmlWriter->WriteAttributeNS(
-                'atom', 
-                'term', 
-                Resources::ATOM_NAMESPACE, 
-                $this->term
-            );
-        }
+        $this->writeOptionalAttribute(
+            $xmlWriter,
+            'term', 
+            $this->term
+        );
 
-        if (!empty($this->scheme)) {
-            $xmlWriter->WriteAttributeNS(
-                'atom',
-                'scheme', 
-                Resources::ATOM_NAMESPACE,
-                $this->scheme
-            );
-        }
+        $this->writeOptionalAttribute(
+            $xmlWriter,
+            'scheme', 
+            $this->scheme
+        );
 
-        if (!empty($this->label)) {
-            $xmlWriter->WriteAttributeNS(
-                'atom',
-                'label', 
-                Resources::ATOM_NAMESPACE,
-                $this->label
-            );
-        }
-
+        $this->writeOptionalAttribute(
+            $xmlWriter,
+            'label', 
+            $this->label
+        );
+             
         if (!empty($this->undefinedContent)) {
             $xmlWriter->WriteRaw($this->undefinedContent);
         }
 
     }
 }
-?>
+

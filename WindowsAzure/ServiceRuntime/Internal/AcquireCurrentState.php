@@ -99,4 +99,3 @@ class AcquireCurrentState extends CurrentState
     }
 }
 
-?>

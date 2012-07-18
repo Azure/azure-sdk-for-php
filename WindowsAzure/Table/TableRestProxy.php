@@ -35,6 +35,11 @@ use WindowsAzure\Table\Models\TableServiceOptions;
 use WindowsAzure\Table\Models\EdmType;
 use WindowsAzure\Table\Models\Filters;
 use WindowsAzure\Table\Models\Filters\Filter;
+use WindowsAzure\Table\Models\Filters\PropertyNameFilter;
+use WindowsAzure\Table\Models\Filters\ConstantFilter;
+use WindowsAzure\Table\Models\Filters\UnaryFilter;
+use WindowsAzure\Table\Models\Filters\BinaryFilter;
+use WindowsAzure\Table\Models\Filters\QueryStringFilter;
 use WindowsAzure\Table\Models\GetTableResult;
 use WindowsAzure\Table\Models\QueryTablesOptions;
 use WindowsAzure\Table\Models\QueryTablesResult;
@@ -119,7 +124,7 @@ class TableRestProxy extends ServiceRestProxy implements ITable
                     BatchOperationParameterName::BP_ETAG
                 );
                 $options      = new DeleteEntityOptions();
-                $options->setEtag($etag);
+                $options->setETag($etag);
                 $context = $this->_constructDeleteEntityContext(
                     $table, $partitionKey, $rowKey, $options
                 );
@@ -280,8 +285,8 @@ class TableRestProxy extends ServiceRestProxy implements ITable
             $options = new DeleteEntityOptions();
         }
         
-        $etagObj = $options->getEtag();
-        $Etag    = !is_null($etagObj);
+        $etagObj = $options->getETag();
+        $ETag    = !is_null($etagObj);
         $this->addOptionalQueryParam(
             $queryParams,
             Resources::QP_TIMEOUT,
@@ -290,7 +295,7 @@ class TableRestProxy extends ServiceRestProxy implements ITable
         $this->addOptionalHeader(
             $headers,
             Resources::IF_MATCH,
-            $Etag ? $etagObj : Resources::ASTERISK
+            $ETag ? $etagObj : Resources::ASTERISK
         );
         
         $context = new HttpCallContext();
@@ -312,13 +317,13 @@ class TableRestProxy extends ServiceRestProxy implements ITable
      * @param string                     $table   The table name.
      * @param Models\Entity              $entity  The entity instance to use.
      * @param string                     $verb    The HTTP method.
-     * @param boolean                    $useEtag The flag to include etag or not.
+     * @param boolean                    $useETag The flag to include etag or not.
      * @param Models\TableServiceOptions $options The optional parameters.
      * 
      * @return HttpCallContext
      */
     private function _constructPutOrMergeEntityContext($table, $entity, $verb,
-        $useEtag, $options
+        $useETag, $options
     ) {
         Validate::isString($table, 'table');
         Validate::notNullOrEmpty($table, 'table');
@@ -338,8 +343,8 @@ class TableRestProxy extends ServiceRestProxy implements ITable
             $options = new TableServiceOptions();
         }
         
-        if ($useEtag) {
-            $etag         = $entity->getEtag();
+        if ($useETag) {
+            $etag         = $entity->getETag();
             $ifMatchValue = is_null($etag) ? Resources::ASTERISK : $etag;
             
             $this->addOptionalHeader($headers, Resources::IF_MATCH, $ifMatchValue);
@@ -441,19 +446,19 @@ class TableRestProxy extends ServiceRestProxy implements ITable
      * @param string                     $table   The table name.
      * @param Models\Entity              $entity  The entity instance to use.
      * @param string                     $verb    The HTTP method.
-     * @param boolean                    $useEtag The flag to include etag or not.
+     * @param boolean                    $useETag The flag to include etag or not.
      * @param Models\TableServiceOptions $options The optional parameters.
      * 
      * @return Models\UpdateEntityResult
      */
-    private function _putOrMergeEntityImpl($table, $entity, $verb, $useEtag,
+    private function _putOrMergeEntityImpl($table, $entity, $verb, $useETag,
         $options
     ) {
         $context = $this->_constructPutOrMergeEntityContext(
             $table,
             $entity,
             $verb,
-            $useEtag,
+            $useETag,
             $options
         );
         
@@ -491,9 +496,9 @@ class TableRestProxy extends ServiceRestProxy implements ITable
             return;
         }
         
-        if ($filter instanceof Filters\PropertyNameFilter) {
+        if ($filter instanceof PropertyNameFilter) {
             $e .= $filter->getPropertyName();
-        } else if ($filter instanceof Filters\ConstantFilter) {
+        } else if ($filter instanceof ConstantFilter) {
             $value = $filter->getValue();
             // If the value is null we just append null regardless of the edmType.
             if (is_null($value)) {
@@ -502,7 +507,7 @@ class TableRestProxy extends ServiceRestProxy implements ITable
                 $type = $filter->getEdmType();
                 $e   .= EdmType::serializeQueryValue($type, $value);
             }
-        } else if ($filter instanceof Filters\UnaryFilter) {
+        } else if ($filter instanceof UnaryFilter) {
             $e .= $filter->getOperator();
             $e .= '(';
             $this->_buildFilterExpressionRec($filter->getOperand(), $e);
@@ -515,7 +520,7 @@ class TableRestProxy extends ServiceRestProxy implements ITable
             $e .= ' ';
             $this->_buildFilterExpressionRec($filter->getRight(), $e);
             $e .= ')';
-        } else if ($filter instanceof Filters\QueryStringFilter) {
+        } else if ($filter instanceof QueryStringFilter) {
             $e .= $filter->getQueryString();
         }
         
@@ -1295,4 +1300,4 @@ class TableRestProxy extends ServiceRestProxy implements ITable
     }
 }
 
-?>
+

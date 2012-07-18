@@ -15,31 +15,24 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   WindowsAzure\ServiceManagement
+ * @package   Tests\Functional\WindowsAzure\Table\Enums
  * @author    Azure PHP SDK <azurephpsdk@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
- 
-namespace WindowsAzure\ServiceManagement;
 
-/**
- * Basic ServiceManagement configuration elements.
- *
- * @category  Microsoft
- * @package   WindowsAzure\ServiceManagement
- * @author    Azure PHP SDK <azurephpsdk@microsoft.com>
- * @copyright 2012 Microsoft Corporation
- * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
- * @version   Release: @package_version@
- * @link      https://github.com/windowsazure/azure-sdk-for-php
- */
-class ServiceManagementSettings
+namespace Tests\Functional\WindowsAzure\Table\Enums;
+
+class MutatePivot
 {
-    const SUBSCRIPTION_ID  = 'serviceManagement.SubscriptionId';
-    const CERTIFICATE_PATH = 'serviceManagement.CertificatePath';
-    const URI              = 'serviceManagement.uri';
+    const CHANGE_VALUES   = 'ChangeValues';
+    const ADD_PROPERTY    = 'AddProperty';
+    const REMOVE_PROPERTY = 'RemoveProperty';
+    const NULL_PROPERTY   = 'NullProperty';
+    public static function values()
+    {
+        return array('ChangeValues', 'AddProperty', 'RemoveProperty', 'NullProperty');
+    }
 }
 
-?>

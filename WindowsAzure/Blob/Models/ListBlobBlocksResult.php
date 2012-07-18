@@ -113,7 +113,7 @@ class ListBlobBlocksResult
         $result = new ListBlobBlocksResult();
         $clean  = array_change_key_case($headers);
         
-        $result->setEtag(Utilities::tryGetValue($clean, Resources::ETAG));
+        $result->setETag(Utilities::tryGetValue($clean, Resources::ETAG));
         $date = Utilities::tryGetValue($clean, Resources::LAST_MODIFIED);
         if (!is_null($date)) {
             $date = Utilities::rfc1123ToDateTime($date);
@@ -164,7 +164,7 @@ class ListBlobBlocksResult
      *
      * @return string.
      */
-    public function getEtag()
+    public function getETag()
     {
         return $this->_etag;
     }
@@ -176,7 +176,7 @@ class ListBlobBlocksResult
      *
      * @return none.
      */
-    public function setEtag($etag)
+    public function setETag($etag)
     {
         $this->_etag = $etag;
     }
@@ -271,4 +271,4 @@ class ListBlobBlocksResult
     }
 }
 
-?>
+

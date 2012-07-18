@@ -27,7 +27,7 @@ use WindowsAzure\Common\Internal\Utilities;
 use WindowsAzure\Common\Internal\Resources;
 
 /**
- * The category class of ATOM library. 
+ * The generator class of ATOM library. 
  *
  * @category  Microsoft
  * @package   WindowsAzure\Common\Internal\Atom
@@ -181,22 +181,20 @@ class Generator extends AtomBase
             Resources::ATOM_NAMESPACE
         );
 
-        if (!empty($this->uri)) {
-            $xmlWriter->writeAttribute(
-                'uri', 
-                $this->uri
-            );
-        }
+        $this->writeOptionalAttribute(
+            $xmlWriter,
+            'uri', 
+            $this->uri
+        );
 
-        if (!empty($this->version)) {
-            $xmlWriter->writeAttribute(
-                'version', 
-                $this->version
-            );
-        }
+        $this->writeOptionalAttribute(
+            $xmlWriter,
+            'version', 
+            $this->version
+        );
 
         $xmlWriter->writeRaw($this->text);
         $xmlWriter->endElement();
     }
 }
-?>
+

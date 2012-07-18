@@ -53,4 +53,4 @@ interface IWrap extends FilterableService
     public function wrapAccessToken($uri, $name, $password, $scope);
 
 }
-?>
+

@@ -55,7 +55,7 @@ class UpdateEntityResult
     {
         $result = new UpdateEntityResult();
         $clean  = array_change_key_case($headers);
-        $result->setEtag($clean[Resources::ETAG]);
+        $result->setETag($clean[Resources::ETAG]);
         
         return $result;
     }
@@ -65,7 +65,7 @@ class UpdateEntityResult
      *
      * @return string
      */
-    public function getEtag()
+    public function getETag()
     {
         return $this->_etag;
     }
@@ -73,14 +73,14 @@ class UpdateEntityResult
     /**
      * Sets entity etag.
      *
-     * @param string $etag The entity Etag.
+     * @param string $etag The entity ETag.
      *
      * @return none
      */
-    public function setEtag($etag)
+    public function setETag($etag)
     {
         $this->_etag = $etag;
     }
 }
 
-?>
+

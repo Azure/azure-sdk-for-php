@@ -244,4 +244,4 @@ class AccessCondition
     }
 }
 
-?>
+

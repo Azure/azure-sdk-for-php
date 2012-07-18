@@ -57,21 +57,21 @@ class SetBlobPropertiesResultTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers WindowsAzure\Blob\Models\SetBlobPropertiesResult::setEtag
-     * @covers WindowsAzure\Blob\Models\SetBlobPropertiesResult::getEtag
+     * @covers WindowsAzure\Blob\Models\SetBlobPropertiesResult::setETag
+     * @covers WindowsAzure\Blob\Models\SetBlobPropertiesResult::getETag
      */
-    public function testSetEtag()
+    public function testSetETag()
     {
         // Setup
         $expected = '0x8CAFB82EFF70C46';
         $prooperties = new SetBlobPropertiesResult();
-        $prooperties->setEtag($expected);
+        $prooperties->setETag($expected);
         
         // Test
-        $prooperties->setEtag($expected);
+        $prooperties->setETag($expected);
         
         // Assert
-        $this->assertEquals($expected, $prooperties->getEtag());
+        $this->assertEquals($expected, $prooperties->getETag());
     }
     
     /**
@@ -93,4 +93,4 @@ class SetBlobPropertiesResultTest extends \PHPUnit_Framework_TestCase
     }
 }
 
-?>
+

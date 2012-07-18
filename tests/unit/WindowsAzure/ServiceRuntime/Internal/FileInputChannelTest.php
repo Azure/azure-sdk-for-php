@@ -76,4 +76,3 @@ class FileInputChannelTest extends \PHPUnit_Framework_TestCase
     }
 }
 
-?>

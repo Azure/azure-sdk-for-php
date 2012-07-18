@@ -24,6 +24,7 @@
 
 namespace Tests\Functional\WindowsAzure\ServiceBus;
 
+use Tests\Framework\TestResources;
 use Tests\Functional\WindowsAzure\ServiceBus\ScenarioTestBase;
 use WindowsAzure\Common\ServiceException;
 use WindowsAzure\ServiceBus\Models\BrokeredMessage;
@@ -86,8 +87,7 @@ class ServiceBusQueueTest extends ScenarioTestBase
             $this->restProxy->getQueue($this->queueName);
             self::write('Queue already exists deleting it');
             $this->restProxy->deleteQueue($this->queueName);
-        }
-        catch (\Exception $e) {
+        } catch (\Exception $e) {
             self::write('could not get an existing queue (' . $e->getCode() . '), proceeding...');
         }
 
@@ -210,8 +210,10 @@ class ServiceBusQueueTest extends ScenarioTestBase
         } catch (ServiceException $ex) {
             // TODO: https://github.com/WindowsAzure/azure-sdk-for-php/issues/470
             $this->assertTrue(
-                    500 == $ex->getCode() || 404 == $ex->getCode(),
-                    'Expect failure error code 500 or 404 when deleting RECEIVEANDDELETE messasge, but got ' . $ex->getCode());
+                    TestResources::STATUS_INTERNAL_SERVER_ERROR == $ex->getCode() || TestResources::STATUS_NOT_FOUND == $ex->getCode(),
+                    'Expect failure error code 500:InternalServerError or 404:NotFound when deleting RECEIVEANDDELETE messasge, but got ' .
+                    $ex->getCode() .
+                    ' https://github.com/WindowsAzure/azure-sdk-for-php/issues/470');
         }
 
         // Get the thrid
@@ -241,4 +243,4 @@ class ServiceBusQueueTest extends ScenarioTestBase
         $this->assertEquals($expectedCount, $messageCount, 'Got fourth message, count should decrement');
     }
 }
-?>
+

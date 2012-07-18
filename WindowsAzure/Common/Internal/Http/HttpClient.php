@@ -72,20 +72,29 @@ class HttpClient implements IHttpClient
     /**
      * Initializes new HttpClient object.
      * 
-     * @param string $certificatePath The certificate path.
+     * @param string $certificatePath          The certificate path.
+     * @param string $certificateAuthorityPath The path of the certificate authority.
      * 
      * @return WindowsAzure\Common\Internal\Http\HttpClient
      */
-    function __construct($certificatePath = Resources::EMPTY_STRING)
-    {
+    function __construct(
+        $certificatePath = Resources::EMPTY_STRING,
+        $certificateAuthorityPath = Resources::EMPTY_STRING
+    ) {
         $config = array(
             Resources::USE_BRACKETS    => true,
             Resources::SSL_VERIFY_PEER => false,
-            Resources::SSL_VERIFY_HOST => false 
+            Resources::SSL_VERIFY_HOST => false
         );
 
         if (!empty($certificatePath)) {
-            $config[Resources::SSL_LOCAL_CERT] = $certificatePath;
+            $config[Resources::SSL_LOCAL_CERT]  = $certificatePath;
+            $config[Resources::SSL_VERIFY_HOST] = true;
+        }
+
+        if (!empty($certificateAuthorityPath)) {
+            $config[Resources::SSL_CAFILE]      = $certificateAuthorityPath;
+            $config[Resources::SSL_VERIFY_PEER] = true;
         }
 
         $this->_request = new \HTTP_Request2(

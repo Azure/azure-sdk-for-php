@@ -270,6 +270,57 @@ class ServiceBusRestProxyTest extends ServiceBusRestProxyTestBase
     }
 
     /**
+     * @covers WindowsAzure\ServiceBus\ServiceBusRestProxy::deleteMessage
+     */
+    public function testDeleteMessageInvalidMessage()
+    {
+        // Setup 
+        $queueDescription = new QueueDescription();
+        $queueName = 'testDeleteMessageInvalidMessage';
+        $queueInfo = new QueueInfo($queueName, $queueDescription);
+        $this->safeDeleteQueue($queueInfo);
+        $this->createQueue($queueInfo);
+        $brokeredMessage = new BrokeredMessage();
+        $this->setExpectedException(get_class(new \InvalidArgumentException()));
+
+        // Test
+        $this->restProxy->deleteMessage($brokeredMessage);
+
+        // Assert
+        $this->assertTrue(false);
+    }
+
+    /**
+     * @covers WindowsAzure\ServiceBus\ServiceBusRestProxy::deleteMessage
+     */
+    public function testDeleteMessageSuccess()
+    {
+        // Setup 
+        $queueDescription = new QueueDescription();
+        $queueName = 'testDeleteMessageSuccess';
+        $expectedMessage = 'testDeleteMessageSuccess';
+        $queueInfo = new QueueInfo($queueName, $queueDescription);
+        $this->safeDeleteQueue($queueInfo);
+        $this->createQueue($queueInfo);
+        $brokeredMessage = new BrokeredMessage();
+        $brokeredMessage->setBody($expectedMessage);
+
+        // Test
+        $this->restProxy->sendQueueMessage($queueName, $brokeredMessage);
+        $receiveMessageOptions = new ReceiveMessageOptions();
+        $receiveMessageOptions->setTimeout(5);
+        $receiveMessageOptions->setPeekLock(); 
+        $receivedMessage = $this->restProxy->receiveQueueMessage(
+            $queueName,
+            $receiveMessageOptions
+        );
+        $this->restProxy->deleteMessage($receivedMessage);
+
+        // Assert
+        $this->assertTrue(true);
+    }
+
+    /**
      * @covers WindowsAzure\ServiceBus\ServiceBusRestProxy::receiveQueueMessage
      */
     public function testPeekLockedMessageCanBeCompleted() 
@@ -1021,4 +1072,4 @@ class ServiceBusRestProxyTest extends ServiceBusRestProxyTestBase
     }
 }
 
-?>
+

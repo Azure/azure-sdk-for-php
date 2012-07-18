@@ -326,47 +326,13 @@ class AtomLink extends AtomBase
     public function writeInnerXml($xmlWriter)
     {
         Validate::notNull($xmlWriter, 'xmlWriter');
-        if (!empty($this->href)) {
-            $xmlWriter->writeAttribute(
-                'href', 
-                $this->href
-            );
-        }
-
-        if (!empty($this->rel)) {
-            $xmlWriter->writeAttribute(
-                'rel', 
-                $this->rel
-            );
-        }
-
-        if (!empty($this->type)) {
-            $xmlWriter->writeAttribute(
-                'type', 
-                $this->type
-            );
-        }
-
-        if (!empty($this->hreflang)) {
-            $xmlWriter->writeAttribute(
-                'hreflang', 
-                $this->hreflang
-            );
-        }
-
-        if (!empty($this->title)) {
-            $xmlWriter->writeAttribute(
-                'title', 
-                $this->title
-            );
-        }
-
-        if (!empty($this->length)) {
-            $xmlWriter->writeAttribute(
-                'length', 
-                $this->length
-            );
-        }
+        
+        $this->writeOptionalAttribute($xmlWriter, 'href', $this->href);
+        $this->writeOptionalAttribute($xmlWriter, 'rel', $this->rel);
+        $this->writeOptionalAttribute($xmlWriter, 'type', $this->type);
+        $this->writeOptionalAttribute($xmlWriter, 'hreflang', $this->hreflang);
+        $this->writeOptionalAttribute($xmlWriter, 'title', $this->title);
+        $this->writeOptionalAttribute($xmlWriter, 'length', $this->length);
 
         if (!empty($this->undefinedContent)) {
             $xmlWriter->writeRaw($this->undefinedContent);
@@ -374,4 +340,4 @@ class AtomLink extends AtomBase
 
     }
 }
-?>
+

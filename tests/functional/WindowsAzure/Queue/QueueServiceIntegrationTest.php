@@ -24,33 +24,33 @@
 
 namespace Tests\Functional\WindowsAzure\Queue;
 
+use Tests\Framework\TestResources;
 use WindowsAzure\Common\ServiceException;
-use WindowsAzure\Common\Configuration;
-use WindowsAzure\Queue\QueueService;
-use WindowsAzure\Queue\Models\ListQueuesOptions;
-use WindowsAzure\Queue\Models\ListQueuesResult;
 use WindowsAzure\Queue\Models\CreateQueueOptions;
 use WindowsAzure\Queue\Models\ListMessagesOptions;
+use WindowsAzure\Queue\Models\ListQueuesOptions;
 use WindowsAzure\Queue\Models\PeekMessagesOptions;
 
-class QueueServiceIntegrationTest extends IntegrationTestBase {
+class QueueServiceIntegrationTest extends IntegrationTestBase
+{
     private static $testQueuesPrefix = 'sdktest-';
     private static $createableQueuesPrefix = 'csdktest-';
-    private static $TEST_QUEUE_FOR_MESSAGES;
-    private static $TEST_QUEUE_FOR_MESSAGES_2;
-    private static $TEST_QUEUE_FOR_MESSAGES_3;
-    private static $TEST_QUEUE_FOR_MESSAGES_4;
-    private static $TEST_QUEUE_FOR_MESSAGES_5;
-    private static $TEST_QUEUE_FOR_MESSAGES_6;
-    private static $TEST_QUEUE_FOR_MESSAGES_7;
-    private static $TEST_QUEUE_FOR_MESSAGES_8;
-    private static $CREATABLE_QUEUE_1;
-    private static $CREATABLE_QUEUE_2;
-    private static $CREATABLE_QUEUE_3;
+    private static $testQueueForMessages;
+    private static $testQueueForMessages2;
+    private static $testQueueForMessages3;
+    private static $testQueueForMessages4;
+    private static $testQueueForMessages5;
+    private static $testQueueForMessages6;
+    private static $testQueueForMessages7;
+    private static $testQueueForMessages8;
+    private static $creatableQueue1;
+    private static $creatableQueue2;
+    private static $creatableQueue3;
     private static $creatableQueues;
     private static $testQueues;
 
-    public function setUp() {
+    public function setUp()
+    {
         parent::setUp();
         // Setup container names array (list of container names used by
         // integration tests)
@@ -64,25 +64,26 @@ class QueueServiceIntegrationTest extends IntegrationTestBase {
             self::$creatableQueues[$i] = self::$createableQueuesPrefix . ($i + 1);
         }
 
-        self::$TEST_QUEUE_FOR_MESSAGES = self::$testQueues[0];
-        self::$TEST_QUEUE_FOR_MESSAGES_2 = self::$testQueues[1];
-        self::$TEST_QUEUE_FOR_MESSAGES_3 = self::$testQueues[2];
-        self::$TEST_QUEUE_FOR_MESSAGES_4 = self::$testQueues[3];
-        self::$TEST_QUEUE_FOR_MESSAGES_5 = self::$testQueues[4];
-        self::$TEST_QUEUE_FOR_MESSAGES_6 = self::$testQueues[5];
-        self::$TEST_QUEUE_FOR_MESSAGES_7 = self::$testQueues[6];
-        self::$TEST_QUEUE_FOR_MESSAGES_8 = self::$testQueues[7];
+        self::$testQueueForMessages = self::$testQueues[0];
+        self::$testQueueForMessages2 = self::$testQueues[1];
+        self::$testQueueForMessages3 = self::$testQueues[2];
+        self::$testQueueForMessages4 = self::$testQueues[3];
+        self::$testQueueForMessages5 = self::$testQueues[4];
+        self::$testQueueForMessages6 = self::$testQueues[5];
+        self::$testQueueForMessages7 = self::$testQueues[6];
+        self::$testQueueForMessages8 = self::$testQueues[7];
 
-        self::$CREATABLE_QUEUE_1 = self::$creatableQueues[0];
-        self::$CREATABLE_QUEUE_2 = self::$creatableQueues[1];
-        self::$CREATABLE_QUEUE_3 = self::$creatableQueues[2];
+        self::$creatableQueue1 = self::$creatableQueues[0];
+        self::$creatableQueue2 = self::$creatableQueues[1];
+        self::$creatableQueue3 = self::$creatableQueues[2];
 
         // Create all test containers and their content
 
         self::createQueues(self::$testQueuesPrefix, self::$testQueues);
     }
 
-    public function tearDown() {
+    public function tearDown()
+    {
         parent::tearDown();
         self::deleteQueues(self::$testQueuesPrefix, self::$testQueues);
         self::deleteQueues(self::$createableQueuesPrefix, self::$creatableQueues);
@@ -91,7 +92,8 @@ class QueueServiceIntegrationTest extends IntegrationTestBase {
     /**
     * @covers WindowsAzure\Queue\QueueRestProxy::createQueue
     */
-    private function createQueues($prefix, $list) {
+    private function createQueues($prefix, $list)
+    {
         $containers = self::listQueues($prefix);
         foreach($list as $item)  {
             if (!in_array($item, $containers)) {
@@ -103,7 +105,8 @@ class QueueServiceIntegrationTest extends IntegrationTestBase {
     /**
     * @covers WindowsAzure\Queue\QueueRestProxy::deleteQueue
     */
-    private function deleteQueues($prefix, $list) {
+    private function deleteQueues($prefix, $list)
+    {
         $containers = self::listQueues($prefix);
         foreach($list as $item)  {
             if (in_array($item, $containers)) {
@@ -115,7 +118,8 @@ class QueueServiceIntegrationTest extends IntegrationTestBase {
     /**
     * @covers WindowsAzure\Queue\QueueRestProxy::listQueues
     */
-    private function listQueues($prefix) {
+    private function listQueues($prefix)
+    {
         $result = array();
         $opts = new ListQueuesOptions();
         $opts->setPrefix($prefix);
@@ -129,18 +133,19 @@ class QueueServiceIntegrationTest extends IntegrationTestBase {
     /**
     * @covers WindowsAzure\Queue\QueueRestProxy::getServiceProperties
     */
-    public function testGetServicePropertiesWorks() {
+    public function testGetServicePropertiesWorks()
+    {
         // Arrange
 
         // Act
         $shouldReturn = false;
         try {
             $props = $this->restProxy->getServiceProperties()->getValue();
-            $this->assertFalse(Configuration::isEmulated(), 'Should succeed when not running in emulator');
+            $this->assertFalse($this->isEmulated(), 'Should succeed when not running in emulator');
         } catch (ServiceException $e) {
             // Expect failure in emulator, as v1.6 doesn't support this method
-            if (Configuration::isEmulated()) {
-                $this->assertEquals(400, $e->getCode(), 'getCode');
+            if ($this->isEmulated()) {
+                $this->assertEquals(TestResources::STATUS_BAD_REQUEST, $e->getCode(), 'getCode');
                 $shouldReturn = true;
             }
         }
@@ -161,18 +166,19 @@ class QueueServiceIntegrationTest extends IntegrationTestBase {
     * @covers WindowsAzure\Queue\QueueRestProxy::getServiceProperties
     * @covers WindowsAzure\Queue\QueueRestProxy::setServiceProperties
     */
-    public function testSetServicePropertiesWorks() {
+    public function testSetServicePropertiesWorks()
+    {
         // Arrange
 
         // Act
         $shouldReturn = false;
         try {
             $props = $this->restProxy->getServiceProperties()->getValue();
-            $this->assertFalse(Configuration::isEmulated(), 'Should succeed when not running in emulator');
+            $this->assertFalse($this->isEmulated(), 'Should succeed when not running in emulator');
         } catch (ServiceException $e) {
             // Expect failure in emulator, as v1.6 doesn't support this method
-            if (Configuration::isEmulated()) {
-                $this->assertEquals(400, $e->getCode(), 'getCode');
+            if ($this->isEmulated()) {
+                $this->assertEquals(TestResources::STATUS_BAD_REQUEST, $e->getCode(), 'getCode');
                 $shouldReturn = true;
             }
         }
@@ -200,13 +206,14 @@ class QueueServiceIntegrationTest extends IntegrationTestBase {
     * @covers WindowsAzure\Queue\QueueRestProxy::deleteQueue
     * @covers WindowsAzure\Queue\QueueRestProxy::getQueueMetadata
     */
-    public function testCreateQueueWorks() {
+    public function testCreateQueueWorks()
+    {
         // Arrange
 
         // Act
-        $this->restProxy->createQueue(self::$CREATABLE_QUEUE_1);
-        $result = $this->restProxy->getQueueMetadata(self::$CREATABLE_QUEUE_1);
-        $this->restProxy->deleteQueue(self::$CREATABLE_QUEUE_1);
+        $this->restProxy->createQueue(self::$creatableQueue1);
+        $result = $this->restProxy->getQueueMetadata(self::$creatableQueue1);
+        $this->restProxy->deleteQueue(self::$creatableQueue1);
 
         // Assert
         $this->assertNotNull($result, 'result');
@@ -220,16 +227,17 @@ class QueueServiceIntegrationTest extends IntegrationTestBase {
     * @covers WindowsAzure\Queue\QueueRestProxy::deleteQueue
     * @covers WindowsAzure\Queue\QueueRestProxy::getQueueMetadata
     */
-    public function testCreateQueueWithOptionsWorks() {
+    public function testCreateQueueWithOptionsWorks()
+    {
         // Arrange
 
         // Act
         $opts = new CreateQueueOptions();
         $opts->addMetadata('foo', 'bar');
         $opts->addMetadata('test', 'blah');
-        $this->restProxy->createQueue(self::$CREATABLE_QUEUE_2, $opts);
-        $result = $this->restProxy->getQueueMetadata(self::$CREATABLE_QUEUE_2);
-        $this->restProxy->deleteQueue(self::$CREATABLE_QUEUE_2);
+        $this->restProxy->createQueue(self::$creatableQueue2, $opts);
+        $result = $this->restProxy->getQueueMetadata(self::$creatableQueue2);
+        $this->restProxy->deleteQueue(self::$creatableQueue2);
 
         // Assert
         $this->assertNotNull($result, '$result');
@@ -244,7 +252,8 @@ class QueueServiceIntegrationTest extends IntegrationTestBase {
     /**
     * @covers WindowsAzure\Queue\QueueRestProxy::listQueues
     */
-    public function testListQueuesWorks() {
+    public function testListQueuesWorks()
+    {
         // Arrange
 
         // Act
@@ -265,15 +274,13 @@ class QueueServiceIntegrationTest extends IntegrationTestBase {
     /**
     * @covers WindowsAzure\Queue\QueueRestProxy::listQueues
     */
-    public function testListQueuesWithOptionsWorks() {
+    public function testListQueuesWithOptionsWorks()
+    {
         // Arrange
 
         // Act
         $opts = new ListQueuesOptions();
-        // TODO: Revert this change when fixed:
-        // https://github.com/WindowsAzure/azure-sdk-for-php/issues/100
-        //$opts->setMaxResults(3);
-        $opts->setMaxResults('3');
+        $opts->setMaxResults(3);
         $opts->setIncludeMetadata(true);
         $opts->setPrefix(self::$testQueuesPrefix);
         $result = $this->restProxy->listQueues($opts);
@@ -296,7 +303,10 @@ class QueueServiceIntegrationTest extends IntegrationTestBase {
         $queue0 = $result->getQueues();
         $queue0 = $queue0[0];
         $this->assertNotNull($queue0, '$queue0');
-        $this->assertNotNull($queue0->getMetadata(), '$queue0->getMetadata');
+        $this->assertNotNull(
+                $queue0->getMetadata(),
+                '$queue0->getMetadata' .
+                ' (https://github.com/WindowsAzure/azure-sdk-for-php/issues/252)');
         $this->assertNotNull($queue0->getName(), '$queue0->getName');
         $this->assertNotNull($queue0->getUrl(), '$queue0->getUrl');
 
@@ -322,21 +332,22 @@ class QueueServiceIntegrationTest extends IntegrationTestBase {
     * @covers WindowsAzure\Queue\QueueRestProxy::getQueueMetadata
     * @covers WindowsAzure\Queue\QueueRestProxy::setQueueMetadata
     */
-    public function testSetQueueMetadataWorks() {
+    public function testSetQueueMetadataWorks()
+    {
         // Arrange
 
         // Act
-        $this->restProxy->createQueue(self::$CREATABLE_QUEUE_3);
+        $this->restProxy->createQueue(self::$creatableQueue3);
 
         $metadata = array(
             'foo' => 'bar',
             'test' => 'blah',
             );
-        $this->restProxy->setQueueMetadata(self::$CREATABLE_QUEUE_3, $metadata);
+        $this->restProxy->setQueueMetadata(self::$creatableQueue3, $metadata);
 
-        $result = $this->restProxy->getQueueMetadata(self::$CREATABLE_QUEUE_3);
+        $result = $this->restProxy->getQueueMetadata(self::$creatableQueue3);
 
-        $this->restProxy->deleteQueue(self::$CREATABLE_QUEUE_3);
+        $this->restProxy->deleteQueue(self::$creatableQueue3);
 
         // Assert
         $this->assertNotNull($result, '$result');
@@ -351,14 +362,15 @@ class QueueServiceIntegrationTest extends IntegrationTestBase {
     /**
     * @covers WindowsAzure\Queue\QueueRestProxy::createMessage
     */
-    public function testCreateMessageWorks() {
+    public function testCreateMessageWorks()
+    {
         // Arrange
 
         // Act
-        $this->restProxy->createMessage(self::$TEST_QUEUE_FOR_MESSAGES, 'message1');
-        $this->restProxy->createMessage(self::$TEST_QUEUE_FOR_MESSAGES, 'message2');
-        $this->restProxy->createMessage(self::$TEST_QUEUE_FOR_MESSAGES, 'message3');
-        $this->restProxy->createMessage(self::$TEST_QUEUE_FOR_MESSAGES, 'message4');
+        $this->restProxy->createMessage(self::$testQueueForMessages, 'message1');
+        $this->restProxy->createMessage(self::$testQueueForMessages, 'message2');
+        $this->restProxy->createMessage(self::$testQueueForMessages, 'message3');
+        $this->restProxy->createMessage(self::$testQueueForMessages, 'message4');
 
         // Assert
         $this->assertTrue(true, 'if get there, it is working');
@@ -368,17 +380,18 @@ class QueueServiceIntegrationTest extends IntegrationTestBase {
     * @covers WindowsAzure\Queue\QueueRestProxy::createMessage
     * @covers WindowsAzure\Queue\QueueRestProxy::listMessages
     */
-    public function testListMessagesWorks() {
+    public function testListMessagesWorks()
+    {
         // Arrange
         $year2010 = new \DateTime;
         $year2010->setDate(2010, 1, 1);
 
         // Act
-        $this->restProxy->createMessage(self::$TEST_QUEUE_FOR_MESSAGES_2, 'message1');
-        $this->restProxy->createMessage(self::$TEST_QUEUE_FOR_MESSAGES_2, 'message2');
-        $this->restProxy->createMessage(self::$TEST_QUEUE_FOR_MESSAGES_2, 'message3');
-        $this->restProxy->createMessage(self::$TEST_QUEUE_FOR_MESSAGES_2, 'message4');
-        $result = $this->restProxy->listMessages(self::$TEST_QUEUE_FOR_MESSAGES_2);
+        $this->restProxy->createMessage(self::$testQueueForMessages2, 'message1');
+        $this->restProxy->createMessage(self::$testQueueForMessages2, 'message2');
+        $this->restProxy->createMessage(self::$testQueueForMessages2, 'message3');
+        $this->restProxy->createMessage(self::$testQueueForMessages2, 'message4');
+        $result = $this->restProxy->listMessages(self::$testQueueForMessages2);
 
         // Assert
         $this->assertNotNull($result, '$result');
@@ -406,20 +419,21 @@ class QueueServiceIntegrationTest extends IntegrationTestBase {
     * @covers WindowsAzure\Queue\QueueRestProxy::createMessage
     * @covers WindowsAzure\Queue\QueueRestProxy::listMessages
     */
-    public function testListMessagesWithOptionsWorks() {
+    public function testListMessagesWithOptionsWorks()
+    {
         // Arrange
         $year2010 = new \DateTime;
         $year2010->setDate(2010, 1, 1);
 
         // Act
-        $this->restProxy->createMessage(self::$TEST_QUEUE_FOR_MESSAGES_3, 'message1');
-        $this->restProxy->createMessage(self::$TEST_QUEUE_FOR_MESSAGES_3, 'message2');
-        $this->restProxy->createMessage(self::$TEST_QUEUE_FOR_MESSAGES_3, 'message3');
-        $this->restProxy->createMessage(self::$TEST_QUEUE_FOR_MESSAGES_3, 'message4');
+        $this->restProxy->createMessage(self::$testQueueForMessages3, 'message1');
+        $this->restProxy->createMessage(self::$testQueueForMessages3, 'message2');
+        $this->restProxy->createMessage(self::$testQueueForMessages3, 'message3');
+        $this->restProxy->createMessage(self::$testQueueForMessages3, 'message4');
         $opts = new ListMessagesOptions();
         $opts->setNumberOfMessages(4);
         $opts->setVisibilityTimeoutInSeconds(20);
-        $result = $this->restProxy->listMessages(self::$TEST_QUEUE_FOR_MESSAGES_3, $opts);
+        $result = $this->restProxy->listMessages(self::$testQueueForMessages3, $opts);
 
         // Assert
         $this->assertNotNull($result, '$result');
@@ -448,18 +462,19 @@ class QueueServiceIntegrationTest extends IntegrationTestBase {
     * @covers WindowsAzure\Queue\QueueRestProxy::createMessage
     * @covers WindowsAzure\Queue\QueueRestProxy::peekMessages
     */
-    public function testPeekMessagesWorks() {
+    public function testPeekMessagesWorks()
+    {
         // Arrange
 
         $year2010 = new \DateTime;
         $year2010->setDate(2010, 1, 1);
 
         // Act
-        $this->restProxy->createMessage(self::$TEST_QUEUE_FOR_MESSAGES_4, 'message1');
-        $this->restProxy->createMessage(self::$TEST_QUEUE_FOR_MESSAGES_4, 'message2');
-        $this->restProxy->createMessage(self::$TEST_QUEUE_FOR_MESSAGES_4, 'message3');
-        $this->restProxy->createMessage(self::$TEST_QUEUE_FOR_MESSAGES_4, 'message4');
-        $result = $this->restProxy->peekMessages(self::$TEST_QUEUE_FOR_MESSAGES_4);
+        $this->restProxy->createMessage(self::$testQueueForMessages4, 'message1');
+        $this->restProxy->createMessage(self::$testQueueForMessages4, 'message2');
+        $this->restProxy->createMessage(self::$testQueueForMessages4, 'message3');
+        $this->restProxy->createMessage(self::$testQueueForMessages4, 'message4');
+        $result = $this->restProxy->peekMessages(self::$testQueueForMessages4);
 
         // Assert
         $this->assertNotNull($result, '$result');
@@ -483,19 +498,20 @@ class QueueServiceIntegrationTest extends IntegrationTestBase {
     * @covers WindowsAzure\Queue\QueueRestProxy::createMessage
     * @covers WindowsAzure\Queue\QueueRestProxy::peekMessages
     */
-    public function testPeekMessagesWithOptionsWorks() {
+    public function testPeekMessagesWithOptionsWorks()
+    {
         // Arrange
         $year2010 = new \DateTime;
         $year2010->setDate(2010, 1, 1);
 
         // Act
-        $this->restProxy->createMessage(self::$TEST_QUEUE_FOR_MESSAGES_5, 'message1');
-        $this->restProxy->createMessage(self::$TEST_QUEUE_FOR_MESSAGES_5, 'message2');
-        $this->restProxy->createMessage(self::$TEST_QUEUE_FOR_MESSAGES_5, 'message3');
-        $this->restProxy->createMessage(self::$TEST_QUEUE_FOR_MESSAGES_5, 'message4');
+        $this->restProxy->createMessage(self::$testQueueForMessages5, 'message1');
+        $this->restProxy->createMessage(self::$testQueueForMessages5, 'message2');
+        $this->restProxy->createMessage(self::$testQueueForMessages5, 'message3');
+        $this->restProxy->createMessage(self::$testQueueForMessages5, 'message4');
         $opts = new PeekMessagesOptions();
         $opts->setNumberOfMessages(4);
-        $result = $this->restProxy->peekMessages(self::$TEST_QUEUE_FOR_MESSAGES_5, $opts);
+        $result = $this->restProxy->peekMessages(self::$testQueueForMessages5, $opts);
 
         // Assert
         $this->assertNotNull($result, '$result');
@@ -521,17 +537,18 @@ class QueueServiceIntegrationTest extends IntegrationTestBase {
     * @covers WindowsAzure\Queue\QueueRestProxy::createMessage
     * @covers WindowsAzure\Queue\QueueRestProxy::peekMessages
     */
-    public function testClearMessagesWorks() {
+    public function testClearMessagesWorks()
+    {
         // Arrange
 
         // Act
-        $this->restProxy->createMessage(self::$TEST_QUEUE_FOR_MESSAGES_6, 'message1');
-        $this->restProxy->createMessage(self::$TEST_QUEUE_FOR_MESSAGES_6, 'message2');
-        $this->restProxy->createMessage(self::$TEST_QUEUE_FOR_MESSAGES_6, 'message3');
-        $this->restProxy->createMessage(self::$TEST_QUEUE_FOR_MESSAGES_6, 'message4');
-        $this->restProxy->clearMessages(self::$TEST_QUEUE_FOR_MESSAGES_6);
+        $this->restProxy->createMessage(self::$testQueueForMessages6, 'message1');
+        $this->restProxy->createMessage(self::$testQueueForMessages6, 'message2');
+        $this->restProxy->createMessage(self::$testQueueForMessages6, 'message3');
+        $this->restProxy->createMessage(self::$testQueueForMessages6, 'message4');
+        $this->restProxy->clearMessages(self::$testQueueForMessages6);
 
-        $result = $this->restProxy->peekMessages(self::$TEST_QUEUE_FOR_MESSAGES_6);
+        $result = $this->restProxy->peekMessages(self::$testQueueForMessages6);
 
         // Assert
         $this->assertNotNull($result, '$result');
@@ -543,23 +560,24 @@ class QueueServiceIntegrationTest extends IntegrationTestBase {
     * @covers WindowsAzure\Queue\QueueRestProxy::deleteMessage
     * @covers WindowsAzure\Queue\QueueRestProxy::listMessages
     */
-    public function testDeleteMessageWorks() {
+    public function testDeleteMessageWorks()
+    {
         // Arrange
 
         // Act
-        $this->restProxy->createMessage(self::$TEST_QUEUE_FOR_MESSAGES_7, 'message1');
-        $this->restProxy->createMessage(self::$TEST_QUEUE_FOR_MESSAGES_7, 'message2');
-        $this->restProxy->createMessage(self::$TEST_QUEUE_FOR_MESSAGES_7, 'message3');
-        $this->restProxy->createMessage(self::$TEST_QUEUE_FOR_MESSAGES_7, 'message4');
+        $this->restProxy->createMessage(self::$testQueueForMessages7, 'message1');
+        $this->restProxy->createMessage(self::$testQueueForMessages7, 'message2');
+        $this->restProxy->createMessage(self::$testQueueForMessages7, 'message3');
+        $this->restProxy->createMessage(self::$testQueueForMessages7, 'message4');
 
-        $result = $this->restProxy->listMessages(self::$TEST_QUEUE_FOR_MESSAGES_7);
+        $result = $this->restProxy->listMessages(self::$testQueueForMessages7);
         $message0 = $result->getQueueMessages();
         $message0 = $message0[0];
 
-        $this->restProxy->deleteMessage(self::$TEST_QUEUE_FOR_MESSAGES_7, $message0->getMessageId(), $message0->getPopReceipt());
+        $this->restProxy->deleteMessage(self::$testQueueForMessages7, $message0->getMessageId(), $message0->getPopReceipt());
         $opts = new ListMessagesOptions();
         $opts->setNumberOfMessages(32);
-        $result2 = $this->restProxy->listMessages(self::$TEST_QUEUE_FOR_MESSAGES_7, $opts);
+        $result2 = $this->restProxy->listMessages(self::$testQueueForMessages7, $opts);
 
         // Assert
         $this->assertNotNull($result2, '$result2');
@@ -571,29 +589,26 @@ class QueueServiceIntegrationTest extends IntegrationTestBase {
     * @covers WindowsAzure\Queue\QueueRestProxy::listMessages
     * @covers WindowsAzure\Queue\QueueRestProxy::updateMessage
     */
-    public function testUpdateMessageWorks() {
+    public function testUpdateMessageWorks()
+    {
         // Arrange
         $year2010 = new \DateTime;
         $year2010->setDate(2010, 1, 1);
 
         // Act
-        $this->restProxy->createMessage(self::$TEST_QUEUE_FOR_MESSAGES_8, 'message1');
+        $this->restProxy->createMessage(self::$testQueueForMessages8, 'message1');
 
-        $listResult1 = $this->restProxy->listMessages(self::$TEST_QUEUE_FOR_MESSAGES_8);
+        $listResult1 = $this->restProxy->listMessages(self::$testQueueForMessages8);
         $message0 = $listResult1->getQueueMessages();
         $message0 = $message0[0];
 
-        // TODO: Change the last parameter to 0 when the following is fixed:
-        // https://github.com/WindowsAzure/azure-sdk-for-php/issues/99
-        // Also, remove the sleep.
         $updateResult = $this->restProxy->updateMessage(
-                self::$TEST_QUEUE_FOR_MESSAGES_8,
+                self::$testQueueForMessages8,
                 $message0->getMessageId(),
                 $message0->getPopReceipt(),
                 'new text',
-                1);
-        sleep(2);
-        $listResult2 = $this->restProxy->listMessages(self::$TEST_QUEUE_FOR_MESSAGES_8);
+                0);
+        $listResult2 = $this->restProxy->listMessages(self::$testQueueForMessages8);
 
         // Assert
         $this->assertNotNull($updateResult, '$updateResult');

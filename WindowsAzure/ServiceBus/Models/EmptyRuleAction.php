@@ -46,4 +46,4 @@ class EmptyRuleAction extends Action
     }
 
 }
-?>
+

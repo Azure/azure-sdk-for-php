@@ -73,4 +73,4 @@ class PeekMessagesOptionsTest extends \PHPUnit_Framework_TestCase
     }
 }
 
-?>
+

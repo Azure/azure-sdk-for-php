@@ -24,31 +24,11 @@
 
 namespace Tests\Functional\WindowsAzure\Blob;
 
-use Tests\Framework\FiddlerFilter;
-use Tests\Framework\BlobServiceRestProxyTestBase;
-use Tests\Framework\TestResources;
-use Tests\Functional\WindowsAzure\Blob\BlobServiceFunctionalTestData;
 use WindowsAzure\Common\ServiceException;
+use WindowsAzure\Common\Internal\StorageServiceSettings;
 
-
-use WindowsAzure\Common\Internal\Resources;
-use WindowsAzure\Common\Configuration;
-use WindowsAzure\Blob\BlobService;
-use WindowsAzure\Blob\BlobSettings;
-
-class FunctionalTestBase extends BlobServiceRestProxyTestBase
+class FunctionalTestBase extends IntegrationTestBase
 {
-
-    /**
-     * @covers WindowsAzure\Blob\BlobRestProxy::withFilter
-     */
-    public function __construct()
-    {
-        parent::__construct();
-        $fiddlerFilter = new FiddlerFilter();
-        $this->restProxy = $this->restProxy->withFilter($fiddlerFilter);
-    }
-
     /**
      * @covers WindowsAzure\Blob\BlobRestProxy::createContainer
      * @covers WindowsAzure\Blob\BlobRestProxy::deleteContainer
@@ -57,7 +37,8 @@ class FunctionalTestBase extends BlobServiceRestProxyTestBase
     public function setUp()
     {
         parent::setUp();
-        $accountName = $this->config->getProperty(BlobSettings::URI);
+        $settings = StorageServiceSettings::createFromConnectionString($this->connectionString);
+        $accountName = $settings->getBlobEndpointUri();
         $firstSlash = strpos($accountName, '/');
         $accountName = substr($accountName, $firstSlash + 2);
         $firstDot = strpos($accountName, '.');
@@ -75,7 +56,7 @@ class FunctionalTestBase extends BlobServiceRestProxyTestBase
             }
         }
 
-        foreach(BlobServiceFunctionalTestData::$TEST_CONTAINER_NAMES as $name)  {
+        foreach(BlobServiceFunctionalTestData::$testContainerNames as $name)  {
             $this->safeCreateContainer($name);
         }
 
@@ -84,14 +65,20 @@ class FunctionalTestBase extends BlobServiceRestProxyTestBase
         }
     }
 
-    /**
-     * @covers WindowsAzure\Blob\BlobRestProxy::deleteContainer
-     */
     public function tearDown()
     {
-        foreach(BlobServiceFunctionalTestData::$TEST_CONTAINER_NAMES as $name)  {
-            $this->restProxy->deleteContainer($name);
+        foreach(BlobServiceFunctionalTestData::$testContainerNames as $name)  {
+            $this->safeDeleteContainer($name);
         }
+        parent::tearDown();
+    }
+
+    public static function tearDownAfterClass()
+    {
+        $tmp = new FunctionalTestBase();
+        $tmp->setUp();
+        $tmp->safeDeleteContainer('$root');
+        parent::tearDownAfterClass();
     }
 
     /**
@@ -104,8 +91,7 @@ class FunctionalTestBase extends BlobServiceRestProxyTestBase
         foreach($blobListResult->getBlobs() as $blob)  {
             try {
                 $this->restProxy->deleteBlob($name, $blob->getName());
-            }
-            catch (ServiceException $e) {
+            } catch (ServiceException $e) {
                 error_log($e->getMessage());
             }
         }
@@ -118,8 +104,7 @@ class FunctionalTestBase extends BlobServiceRestProxyTestBase
     {
         try {
             $this->restProxy->deleteContainer($name);
-        }
-        catch (ServiceException $e) {
+        } catch (ServiceException $e) {
             error_log($e->getMessage());
         }
     }
@@ -131,11 +116,10 @@ class FunctionalTestBase extends BlobServiceRestProxyTestBase
     {
         try {
             $this->restProxy->createContainer($name);
-        }
-        catch (ServiceException $e) {
+        } catch (ServiceException $e) {
             error_log($e->getMessage());
         }
     }
 }
 
-?>
+

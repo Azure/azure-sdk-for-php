@@ -276,7 +276,7 @@ class CategoryTest extends \PHPUnit_Framework_TestCase
     {
         // Setup
         $category = new Category();
-        $expected = '<atom:category atom:term="testTerm" atom:scheme="testScheme" atom:label="testLabel" xmlns:atom="http://www.w3.org/2005/Atom"/>';
+        $expected = '<atom:category term="testTerm" scheme="testScheme" label="testLabel" xmlns:atom="http://www.w3.org/2005/Atom"/>';
         $category->setTerm('testTerm');
         $category->setScheme('testScheme');
         $category->setLabel('testLabel');
@@ -426,7 +426,7 @@ class CategoryTest extends \PHPUnit_Framework_TestCase
         $actual = new Category();
         $xmlWriter = new \XMLWriter();
         $xmlWriter->openMemory();
-        $expected = '<atom:category atom:term="testTerm" atom:scheme="testScheme" atom:label="testLabel" xmlns:atom="http://www.w3.org/2005/Atom">testUndefinedContent</atom:category>';
+        $expected = '<atom:category term="testTerm" scheme="testScheme" label="testLabel" xmlns:atom="http://www.w3.org/2005/Atom">testUndefinedContent</atom:category>';
 
         // Test
         $category->writeXml($xmlWriter);
@@ -456,4 +456,4 @@ class CategoryTest extends \PHPUnit_Framework_TestCase
 
 }
 
-?>
+

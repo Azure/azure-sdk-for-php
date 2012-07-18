@@ -56,4 +56,4 @@ class GetTableResultTest extends \PHPUnit_Framework_TestCase
     }
 }
 
-?>
+

@@ -57,21 +57,21 @@ class ListBlobBlocksResultTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers WindowsAzure\Blob\Models\ListBlobBlocksResult::setEtag
-     * @covers WindowsAzure\Blob\Models\ListBlobBlocksResult::getEtag
+     * @covers WindowsAzure\Blob\Models\ListBlobBlocksResult::setETag
+     * @covers WindowsAzure\Blob\Models\ListBlobBlocksResult::getETag
      */
-    public function testSetEtag()
+    public function testSetETag()
     {
         // Setup
         $expected = '0x8CAFB82EFF70C46';
         $result = new ListBlobBlocksResult();
-        $result->setEtag($expected);
+        $result->setETag($expected);
         
         // Test
-        $result->setEtag($expected);
+        $result->setETag($expected);
         
         // Assert
-        $this->assertEquals($expected, $result->getEtag());
+        $this->assertEquals($expected, $result->getETag());
     }
     
     /**
@@ -145,4 +145,4 @@ class ListBlobBlocksResultTest extends \PHPUnit_Framework_TestCase
     }
 }
 
-?>
+

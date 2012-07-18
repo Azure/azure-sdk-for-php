@@ -24,86 +24,64 @@
 
 namespace Tests\Functional\WindowsAzure\Table;
 
-use Tests\Framework\FiddlerFilter;
-use Tests\Framework\TableServiceRestProxyTestBase;
-use Tests\Framework\TestResources;
-use Tests\Functional\WindowsAzure\Table\TableServiceFunctionalTestData;
-use WindowsAzure\Common\Internal\Resources;
 use WindowsAzure\Common\Internal\Utilities;
-use WindowsAzure\Common\ServiceException;
-use WindowsAzure\Common\Configuration;
-use WindowsAzure\Table\TableService;
-use WindowsAzure\Table\TableSettings;
 use WindowsAzure\Table\Models\Entity;
 use WindowsAzure\Table\Models\Filters\Filter;
 
-class FunctionalTestBase extends TableServiceRestProxyTestBase {
-    public function __construct()
+class FunctionalTestBase extends IntegrationTestBase
+{
+    public static function setUpBeforeClass()
     {
-        parent::__construct();
-        $fiddlerFilter = new FiddlerFilter();
-        $this->restProxy = $this->restProxy->withFilter($fiddlerFilter);
-    }
-    
-    public static function setUpBeforeClass() {
         parent::setUpBeforeClass();
-        $service = self::createService();
+        $testBase = new FunctionalTestBase();
+        $testBase->setUp();
         TableServiceFunctionalTestData::setupData();
 
-        foreach(TableServiceFunctionalTestData::$TEST_TABLE_NAMES as $name)  {            
+        foreach(TableServiceFunctionalTestData::$testTableNames as $name)  {
             self::println('Creating Table: ' . $name);
-            $service->createTable($name);
+            $testBase->restProxy->createTable($name);
         }
     }
 
     public static function tearDownAfterClass()
     {
+        $testBase = new FunctionalTestBase();
+        $testBase->setUp();
+        foreach(TableServiceFunctionalTestData::$testTableNames as $name)  {
+            $testBase->safeDeleteTable($name);
+        }
         parent::tearDownAfterClass();
-        $service = self::createService();
-        if (!Configuration::isEmulated()) {
-            $serviceProperties = TableServiceFunctionalTestData::getDefaultServiceProperties();
-            $service->setServiceProperties($serviceProperties);
-        }
-
-        foreach(TableServiceFunctionalTestData::$TEST_TABLE_NAMES as $name)  {
-            try
-            {
-                $service->deleteTable($name);
-            }
-            catch (\Exception $e)
-            {
-                // Ignore exception and continue.
-                error_log($e->getMessage());
-            }
-        }
     }
 
-    private static function createService() {
-        $tmp = new FunctionalTestBase();
-        return $tmp->restProxy;
-    }
-    
-    protected function clearTable($table) {
-        $index = array_search($table, TableServiceFunctionalTestData::$TEST_TABLE_NAMES);
+    /**
+     * @covers WindowsAzure\ServiceBus\ServiceBusRestProxy::createTable
+     * @covers WindowsAzure\ServiceBus\ServiceBusRestProxy::deleteTable
+     */
+    protected function clearTable($table)
+    {
+        $index = array_search($table, TableServiceFunctionalTestData::$testTableNames);
         if ($index !== false) {
             // This is a well-known table, so need to create a new one to replace it.
-            TableServiceFunctionalTestData::$TEST_TABLE_NAMES[$index] = TableServiceFunctionalTestData::getInterestingTableName();
-            $this->restProxy->createTable(TableServiceFunctionalTestData::$TEST_TABLE_NAMES[$index]);
+            TableServiceFunctionalTestData::$testTableNames[$index] = TableServiceFunctionalTestData::getInterestingTableName();
+            $this->restProxy->createTable(TableServiceFunctionalTestData::$testTableNames[$index]);
         }
-            
+
         $this->restProxy->deleteTable($table);
     }
 
-    protected function getCleanTable() {
-        $this->clearTable(TableServiceFunctionalTestData::$TEST_TABLE_NAMES[0]);
-        return TableServiceFunctionalTestData::$TEST_TABLE_NAMES[0];
+    protected function getCleanTable()
+    {
+        $this->clearTable(TableServiceFunctionalTestData::$testTableNames[0]);
+        return TableServiceFunctionalTestData::$testTableNames[0];
      }
 
-    public static function println($msg) {
+    public static function println($msg)
+    {
         error_log($msg);
     }
-    
-    public static function tmptostring($value) {
+
+    public static function tmptostring($value)
+    {
         if (is_null($value)) {
             return 'null';
         } else if (is_bool($value)) {
@@ -120,8 +98,9 @@ class FunctionalTestBase extends TableServiceRestProxyTestBase {
             return $value;
         }
     }
-   
-    public static function entityPropsToString($props) {
+
+    public static function entityPropsToString($props)
+    {
         $ret = '';
         foreach($props as $k => $value) {
             $ret .= $k . ':';
@@ -135,11 +114,12 @@ class FunctionalTestBase extends TableServiceRestProxyTestBase {
         return $ret;
     }
 
-    public static function entityToString($ent) {        
-        $ret = 'Etag=' . self::tmptostring($ent->getEtag()) . "\n";
+    public static function entityToString($ent)
+    {
+        $ret = 'ETag=' . self::tmptostring($ent->getETag()) . "\n";
         $ret .= 'Props=' . self::entityPropsToString($ent->getProperties());
         return $ret;
     }
 }
 
-?>
+
