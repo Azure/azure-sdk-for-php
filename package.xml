@@ -14,11 +14,11 @@ It is build as a thin REST call wrapper where each server call maps to a single 
   <email>azurephpsdk@microsoft.com</email>
   <active>yes</active>
  </lead>
- <date>2012-06-25</date>
- <time>17:35:10</time>
+ <date>2012-07-17</date>
+ <time>17:39:22</time>
  <version>
-  <release>0.2.0</release>
-  <api>0.2.0</api>
+  <release>0.3.0</release>
+  <api>0.3.0</api>
  </version>
  <stability>
   <release>beta</release>
@@ -26,270 +26,261 @@ It is build as a thin REST call wrapper where each server call maps to a single 
  </stability>
  <license uri="http://www.apache.org/licenses/LICENSE-2.0">Apache 2.0</license>
  <notes>
-- Added Service Bus Support
-	* Queues: create, list and delete queues; send, receive, unlock and delete messages
-	* Topics: create, list, and delete topics; create, list, and delete subscriptions; send, receive, unlock and delete messages; create, list, and delete rules
-- Added Composer package
+- Added Cloud Configuration Manager.
  </notes>
  <contents>
   <dir baseinstalldir="/" name="/">
-   <file baseinstalldir="/" md5sum="ca86aa0d075babe72c5044a87ecd9c6b" name="/WindowsAzure/WindowsAzure.php" role="php" />
-   <file baseinstalldir="/" md5sum="146a101698e28c1bf26084d1568eb463" name="/WindowsAzure/Blob/BlobRestProxy.php" role="php" />
-   <file baseinstalldir="/" md5sum="c4dadcb42659dc89326409183e08d503" name="/WindowsAzure/Blob/BlobService.php" role="php" />
-   <file baseinstalldir="/" md5sum="60bb3a590cc3a455d64e0ed920e8da47" name="/WindowsAzure/Blob/BlobSettings.php" role="php" />
-   <file baseinstalldir="/" md5sum="42e36bc2311f1dbe367105efd6a30c06" name="/WindowsAzure/Blob/Internal/IBlob.php" role="php" />
-   <file baseinstalldir="/" md5sum="1ee844940fafd8522eabdf13223bea13" name="/WindowsAzure/Blob/Models/AccessCondition.php" role="php" />
-   <file baseinstalldir="/" md5sum="e382e080fe40ecb38d9cf8f21dd08710" name="/WindowsAzure/Blob/Models/AccessPolicy.php" role="php" />
-   <file baseinstalldir="/" md5sum="f5f61bf5b9e671a67426b667fb2705f5" name="/WindowsAzure/Blob/Models/AcquireLeaseOptions.php" role="php" />
-   <file baseinstalldir="/" md5sum="6c5e1686c9514c92ef99a0de81d7979d" name="/WindowsAzure/Blob/Models/AcquireLeaseResult.php" role="php" />
-   <file baseinstalldir="/" md5sum="a0beeef9c4c6d806522aaf6153a39040" name="/WindowsAzure/Blob/Models/Blob.php" role="php" />
-   <file baseinstalldir="/" md5sum="c479e280d4d28b146ceaa05f2e61bdc8" name="/WindowsAzure/Blob/Models/BlobBlockType.php" role="php" />
-   <file baseinstalldir="/" md5sum="696e7227df237791df58bce07921e685" name="/WindowsAzure/Blob/Models/BlobPrefix.php" role="php" />
-   <file baseinstalldir="/" md5sum="9ae3e718710fbdef65d83df03aacc91b" name="/WindowsAzure/Blob/Models/BlobProperties.php" role="php" />
-   <file baseinstalldir="/" md5sum="fad772b1c9dfb43df6de8a3f573c0195" name="/WindowsAzure/Blob/Models/BlobServiceOptions.php" role="php" />
-   <file baseinstalldir="/" md5sum="adf2b6d4da84c8e3f5e64eb2dac71f10" name="/WindowsAzure/Blob/Models/BlobType.php" role="php" />
-   <file baseinstalldir="/" md5sum="ec205519a6a30a754b8480ac5c525c2d" name="/WindowsAzure/Blob/Models/Block.php" role="php" />
-   <file baseinstalldir="/" md5sum="1bf6c38e1a59d9155367edec4ae1ed58" name="/WindowsAzure/Blob/Models/BlockList.php" role="php" />
-   <file baseinstalldir="/" md5sum="df17cba7a517c6429603a78e0bbfbbb3" name="/WindowsAzure/Blob/Models/CommitBlobBlocksOptions.php" role="php" />
-   <file baseinstalldir="/" md5sum="35c353e84604d8760b5f5d811013869f" name="/WindowsAzure/Blob/Models/Container.php" role="php" />
-   <file baseinstalldir="/" md5sum="565d5b24927875a6f4c3720d9ee1a77c" name="/WindowsAzure/Blob/Models/ContainerACL.php" role="php" />
-   <file baseinstalldir="/" md5sum="aa8a0d315733e22a93dfff22db33879d" name="/WindowsAzure/Blob/Models/ContainerProperties.php" role="php" />
-   <file baseinstalldir="/" md5sum="9b90d66b11c5ec4f9f72b09fe957f5c4" name="/WindowsAzure/Blob/Models/CopyBlobOptions.php" role="php" />
-   <file baseinstalldir="/" md5sum="96d72268e9fefce04f254f301299f0d2" name="/WindowsAzure/Blob/Models/CopyBlobResult.php" role="php" />
-   <file baseinstalldir="/" md5sum="7b58e265b880893ebb72905bd28ca642" name="/WindowsAzure/Blob/Models/CreateBlobBlockOptions.php" role="php" />
-   <file baseinstalldir="/" md5sum="38e74173f927424cd8474ac875b26168" name="/WindowsAzure/Blob/Models/CreateBlobOptions.php" role="php" />
-   <file baseinstalldir="/" md5sum="e10e61c0588be878981617880c9e5e35" name="/WindowsAzure/Blob/Models/CreateBlobPagesOptions.php" role="php" />
-   <file baseinstalldir="/" md5sum="d73034e530b346f00283e95fb8ce24bc" name="/WindowsAzure/Blob/Models/CreateBlobPagesResult.php" role="php" />
-   <file baseinstalldir="/" md5sum="cc0251d84615c39e8f324e8715f24c03" name="/WindowsAzure/Blob/Models/CreateBlobSnapshotOptions.php" role="php" />
-   <file baseinstalldir="/" md5sum="95e11552785ecfe0758d4459f042c7b2" name="/WindowsAzure/Blob/Models/CreateBlobSnapshotResult.php" role="php" />
-   <file baseinstalldir="/" md5sum="f67b3b77ddb299cb5956b439f2666a78" name="/WindowsAzure/Blob/Models/CreateContainerOptions.php" role="php" />
-   <file baseinstalldir="/" md5sum="bf4e133cd80308025f84a4db122782db" name="/WindowsAzure/Blob/Models/DeleteBlobOptions.php" role="php" />
-   <file baseinstalldir="/" md5sum="c4bb293303e6b734be10c46777ea3870" name="/WindowsAzure/Blob/Models/DeleteContainerOptions.php" role="php" />
-   <file baseinstalldir="/" md5sum="39aa5c8e9491f3eea0dd72b498125b34" name="/WindowsAzure/Blob/Models/GetBlobMetadataOptions.php" role="php" />
-   <file baseinstalldir="/" md5sum="41266fd318370e10c4350773aa1392e1" name="/WindowsAzure/Blob/Models/GetBlobMetadataResult.php" role="php" />
-   <file baseinstalldir="/" md5sum="f49125bcb5c7ab7cd26ee04a6f3b073b" name="/WindowsAzure/Blob/Models/GetBlobOptions.php" role="php" />
-   <file baseinstalldir="/" md5sum="235b20448e6e2bad5de4a01607fc950c" name="/WindowsAzure/Blob/Models/GetBlobPropertiesOptions.php" role="php" />
-   <file baseinstalldir="/" md5sum="8c90ee049df74072331036438df0c488" name="/WindowsAzure/Blob/Models/GetBlobPropertiesResult.php" role="php" />
-   <file baseinstalldir="/" md5sum="46a29261a17cc2e8ccaf03d986bb3eb6" name="/WindowsAzure/Blob/Models/GetBlobResult.php" role="php" />
-   <file baseinstalldir="/" md5sum="d8a3de8d47cba5e22e9d53f68c2ce032" name="/WindowsAzure/Blob/Models/GetContainerACLResult.php" role="php" />
-   <file baseinstalldir="/" md5sum="b14c748385f15308cdf1a62963d9c264" name="/WindowsAzure/Blob/Models/GetContainerPropertiesResult.php" role="php" />
-   <file baseinstalldir="/" md5sum="477d36052c4e20c566c09f9eedf1d1c5" name="/WindowsAzure/Blob/Models/LeaseMode.php" role="php" />
-   <file baseinstalldir="/" md5sum="4952950b754805749596109d16749a55" name="/WindowsAzure/Blob/Models/ListBlobBlocksOptions.php" role="php" />
-   <file baseinstalldir="/" md5sum="071c37d4f25d2839cae5b27b6cc5f45a" name="/WindowsAzure/Blob/Models/ListBlobBlocksResult.php" role="php" />
-   <file baseinstalldir="/" md5sum="50daf56d634b899e0075cb1960a06e78" name="/WindowsAzure/Blob/Models/ListBlobsOptions.php" role="php" />
-   <file baseinstalldir="/" md5sum="e8598d042b27bce1b5a71320b41b6871" name="/WindowsAzure/Blob/Models/ListBlobsResult.php" role="php" />
-   <file baseinstalldir="/" md5sum="77e3de76ca3ab4af0f1d39d4e54ad833" name="/WindowsAzure/Blob/Models/ListContainersOptions.php" role="php" />
-   <file baseinstalldir="/" md5sum="4b727dc24b0d5ee79ffab7b2c4316e4c" name="/WindowsAzure/Blob/Models/ListContainersResult.php" role="php" />
-   <file baseinstalldir="/" md5sum="b61bbf39ce57ca1bf5b0a6312250ef71" name="/WindowsAzure/Blob/Models/ListPageBlobRangesOptions.php" role="php" />
-   <file baseinstalldir="/" md5sum="9f50905316c604fb52cdec6736890b3c" name="/WindowsAzure/Blob/Models/ListPageBlobRangesResult.php" role="php" />
-   <file baseinstalldir="/" md5sum="92162b730fd41356ea9caa502b99d244" name="/WindowsAzure/Blob/Models/PageRange.php" role="php" />
-   <file baseinstalldir="/" md5sum="28d6dafe2074345f04b7fd0f0845030f" name="/WindowsAzure/Blob/Models/PageWriteOption.php" role="php" />
-   <file baseinstalldir="/" md5sum="9524be9631685c78d45c83c590d89782" name="/WindowsAzure/Blob/Models/PublicAccessType.php" role="php" />
-   <file baseinstalldir="/" md5sum="e7b71c3316c952c976f533d6b776e02d" name="/WindowsAzure/Blob/Models/SetBlobMetadataOptions.php" role="php" />
-   <file baseinstalldir="/" md5sum="e6bc7cda652e2d1c74528bbafc65c7a5" name="/WindowsAzure/Blob/Models/SetBlobMetadataResult.php" role="php" />
-   <file baseinstalldir="/" md5sum="55ba422b7395b04a4429bedb0dae78e9" name="/WindowsAzure/Blob/Models/SetBlobPropertiesOptions.php" role="php" />
-   <file baseinstalldir="/" md5sum="f3d363008c03478d2470b750e9a79928" name="/WindowsAzure/Blob/Models/SetBlobPropertiesResult.php" role="php" />
-   <file baseinstalldir="/" md5sum="465f2292c066a1adaf977aaa32a4651b" name="/WindowsAzure/Blob/Models/SetContainerMetadataOptions.php" role="php" />
-   <file baseinstalldir="/" md5sum="073da4b78b4e2b1acb2edd2de06b2589" name="/WindowsAzure/Blob/Models/SignedIdentifier.php" role="php" />
-   <file baseinstalldir="/" md5sum="afac8672776769ad82d493356b7922e3" name="/WindowsAzure/Common/Configuration.php" role="php" />
-   <file baseinstalldir="/" md5sum="e78d52c4154b47488084ca5cd8515531" name="/WindowsAzure/Common/ServiceException.php" role="php" />
-   <file baseinstalldir="/" md5sum="eb0c69a1d3ab7a85ff1dda3e9c1bd40f" name="/WindowsAzure/Common/Internal/FilterableService.php" role="php" />
-   <file baseinstalldir="/" md5sum="88284250b1e69daae9a07347973aeaad" name="/WindowsAzure/Common/Internal/InvalidArgumentTypeException.php" role="php" />
-   <file baseinstalldir="/" md5sum="41dec638e60ebcfe3587b33a41a7dd37" name="/WindowsAzure/Common/Internal/IServiceBuilder.php" role="php" />
-   <file baseinstalldir="/" md5sum="6872d97153e51fb4bbed57c67b161268" name="/WindowsAzure/Common/Internal/IServiceFilter.php" role="php" />
-   <file baseinstalldir="/" md5sum="aa416ed63b0154d6881473bf982c558f" name="/WindowsAzure/Common/Internal/Logger.php" role="php" />
-   <file baseinstalldir="/" md5sum="351b5a6429846d9a84d5b4cb99b4203a" name="/WindowsAzure/Common/Internal/Resources.php" role="php" />
-   <file baseinstalldir="/" md5sum="b605e55979af32b6d29615cbc000a4b7" name="/WindowsAzure/Common/Internal/RestProxy.php" role="php" />
-   <file baseinstalldir="/" md5sum="167ecdb3d2a1fe061b9ae3a2232e5e9f" name="/WindowsAzure/Common/Internal/ServiceRestProxy.php" role="php" />
-   <file baseinstalldir="/" md5sum="a5d3a409c46668861f7469eaf1eb5970" name="/WindowsAzure/Common/Internal/ServicesBuilder.php" role="php" />
-   <file baseinstalldir="/" md5sum="760ffca95b5e67aebecd77e095315793" name="/WindowsAzure/Common/Internal/Utilities.php" role="php" />
-   <file baseinstalldir="/" md5sum="be6ee5c28b2c3e3202afbaaaa5d27430" name="/WindowsAzure/Common/Internal/Validate.php" role="php" />
-   <file baseinstalldir="/" md5sum="12531fc6069d05715005dc28d67c11d5" name="/WindowsAzure/Common/Internal/Atom/AtomBase.php" role="php" />
-   <file baseinstalldir="/" md5sum="de774e8d7a79f8bafaa5c2fede11be2a" name="/WindowsAzure/Common/Internal/Atom/AtomLink.php" role="php" />
-   <file baseinstalldir="/" md5sum="cdb50c4320fcb18f91c388462ba302c9" name="/WindowsAzure/Common/Internal/Atom/Category.php" role="php" />
-   <file baseinstalldir="/" md5sum="9d61b8eb512c91de664bdd37dd0494f0" name="/WindowsAzure/Common/Internal/Atom/Content.php" role="php" />
-   <file baseinstalldir="/" md5sum="e3f1294181a74c25c051076c76d63061" name="/WindowsAzure/Common/Internal/Atom/Entry.php" role="php" />
-   <file baseinstalldir="/" md5sum="55689064ec52338434ec8210537f7b85" name="/WindowsAzure/Common/Internal/Atom/Feed.php" role="php" />
-   <file baseinstalldir="/" md5sum="528c037819a850ffcd2142ef8b50758a" name="/WindowsAzure/Common/Internal/Atom/Generator.php" role="php" />
-   <file baseinstalldir="/" md5sum="7d43674a0a0fdac70cdd32d7e34b33da" name="/WindowsAzure/Common/Internal/Atom/Person.php" role="php" />
-   <file baseinstalldir="/" md5sum="15f5380efc415182c1d8a3c1982b99fd" name="/WindowsAzure/Common/Internal/Atom/Source.php" role="php" />
-   <file baseinstalldir="/" md5sum="bb2e9b1bd46278b5bfc565513f452a99" name="/WindowsAzure/Common/Internal/Authentication/SharedKeyAuthScheme.php" role="php" />
-   <file baseinstalldir="/" md5sum="90d0ac3f5db38d3fb765956035f86674" name="/WindowsAzure/Common/Internal/Authentication/StorageAuthScheme.php" role="php" />
-   <file baseinstalldir="/" md5sum="47a541eb8ec37b4e07bd5cafb84bca51" name="/WindowsAzure/Common/Internal/Authentication/TableSharedKeyLiteAuthScheme.php" role="php" />
-   <file baseinstalldir="/" md5sum="e31a6a8349128c79175e9063a954bc86" name="/WindowsAzure/Common/Internal/Filters/DateFilter.php" role="php" />
-   <file baseinstalldir="/" md5sum="5d2a9e917a70f6650b41ff88057a7005" name="/WindowsAzure/Common/Internal/Filters/ExponentialRetryPolicy.php" role="php" />
-   <file baseinstalldir="/" md5sum="41b73a0ca9e58a36577dea7e169d1483" name="/WindowsAzure/Common/Internal/Filters/HeadersFilter.php" role="php" />
-   <file baseinstalldir="/" md5sum="19ab30840644a902de55a658dd354b01" name="/WindowsAzure/Common/Internal/Filters/RetryPolicy.php" role="php" />
-   <file baseinstalldir="/" md5sum="b958300692b3f3065818be36cbb4eb0e" name="/WindowsAzure/Common/Internal/Filters/RetryPolicyFilter.php" role="php" />
-   <file baseinstalldir="/" md5sum="38dae1a5ecb13f28f03343e33938ed06" name="/WindowsAzure/Common/Internal/Filters/SharedKeyFilter.php" role="php" />
-   <file baseinstalldir="/" md5sum="9cca4447a2f49b377b963fc79ca38c9b" name="/WindowsAzure/Common/Internal/Filters/WrapFilter.php" role="php" />
-   <file baseinstalldir="/" md5sum="ee2edcebc1cd208a6d4f939db0d89b63" name="/WindowsAzure/Common/Internal/Http/HttpCallContext.php" role="php" />
-   <file baseinstalldir="/" md5sum="7c16129c2afc2aae999097cd937efd4a" name="/WindowsAzure/Common/Internal/Http/HttpClient.php" role="php" />
-   <file baseinstalldir="/" md5sum="52cd4b2da389aed5ce2c83d478bb0686" name="/WindowsAzure/Common/Internal/Http/IHttpClient.php" role="php" />
-   <file baseinstalldir="/" md5sum="4ca12c7fd936a0eab8236031472eeacf" name="/WindowsAzure/Common/Internal/Http/IUrl.php" role="php" />
-   <file baseinstalldir="/" md5sum="53d845afe8c61741accbf07c97cb4583" name="/WindowsAzure/Common/Internal/Http/Url.php" role="php" />
-   <file baseinstalldir="/" md5sum="c8f364aaa79ddc0270ffe0a2f857a415" name="/WindowsAzure/Common/Internal/Serialization/ISerializer.php" role="php" />
-   <file baseinstalldir="/" md5sum="898d00b5af21efcd751b4ff512a1c7b3" name="/WindowsAzure/Common/Internal/Serialization/XmlSerializer.php" role="php" />
-   <file baseinstalldir="/" md5sum="3995ac205774953144fed4634c32fc33" name="/WindowsAzure/Common/Models/GetServicePropertiesResult.php" role="php" />
-   <file baseinstalldir="/" md5sum="76f6379a5c377395dc8efb7f5040e056" name="/WindowsAzure/Common/Models/Logging.php" role="php" />
-   <file baseinstalldir="/" md5sum="4364196a057f46bffc394dfa014749fc" name="/WindowsAzure/Common/Models/Metrics.php" role="php" />
-   <file baseinstalldir="/" md5sum="a0a7c5e69b1347f11c9ed2f297341659" name="/WindowsAzure/Common/Models/RetentionPolicy.php" role="php" />
-   <file baseinstalldir="/" md5sum="c3a92df751aed2808c080d8bd794e538" name="/WindowsAzure/Common/Models/ServiceProperties.php" role="php" />
-   <file baseinstalldir="/" md5sum="db4ac5164f8a3d0c1e1d1aa2398e2189" name="/WindowsAzure/Queue/QueueRestProxy.php" role="php" />
-   <file baseinstalldir="/" md5sum="2c50bfc4958439744b1dc9cda506af5f" name="/WindowsAzure/Queue/QueueService.php" role="php" />
-   <file baseinstalldir="/" md5sum="d0d8934223b26c2371f6fb66921eecf3" name="/WindowsAzure/Queue/QueueSettings.php" role="php" />
-   <file baseinstalldir="/" md5sum="17e6d9c93fcc9da2a081a7ca9761a072" name="/WindowsAzure/Queue/Internal/IQueue.php" role="php" />
-   <file baseinstalldir="/" md5sum="27a6096c6dea4132a04082408af80345" name="/WindowsAzure/Queue/Models/CreateMessageOptions.php" role="php" />
-   <file baseinstalldir="/" md5sum="0ec654e322d0de902778fa684eeb6d7d" name="/WindowsAzure/Queue/Models/CreateQueueOptions.php" role="php" />
-   <file baseinstalldir="/" md5sum="6209271356045e098cb19e19dac4d0be" name="/WindowsAzure/Queue/Models/GetQueueMetadataResult.php" role="php" />
-   <file baseinstalldir="/" md5sum="46679abad4f7bcf2d2cd7c3eacffcb52" name="/WindowsAzure/Queue/Models/ListMessagesOptions.php" role="php" />
-   <file baseinstalldir="/" md5sum="deddd61f02466de6fd5fd30ada333a13" name="/WindowsAzure/Queue/Models/ListMessagesResult.php" role="php" />
-   <file baseinstalldir="/" md5sum="8a1a3631242195a255c9b9eff5481dae" name="/WindowsAzure/Queue/Models/ListQueuesOptions.php" role="php" />
-   <file baseinstalldir="/" md5sum="d1c9dd724aa4202075900edb9d712d8a" name="/WindowsAzure/Queue/Models/ListQueuesResult.php" role="php" />
-   <file baseinstalldir="/" md5sum="8129b2934cbce8c1ffd2ac92e7aef120" name="/WindowsAzure/Queue/Models/PeekMessagesOptions.php" role="php" />
-   <file baseinstalldir="/" md5sum="fd530ed350375d70a8b663824027300e" name="/WindowsAzure/Queue/Models/PeekMessagesResult.php" role="php" />
-   <file baseinstalldir="/" md5sum="77b39208ac970b758053e8b508ba7bbf" name="/WindowsAzure/Queue/Models/Queue.php" role="php" />
-   <file baseinstalldir="/" md5sum="a890f3ddb73554811228bd98e523b249" name="/WindowsAzure/Queue/Models/QueueMessage.php" role="php" />
-   <file baseinstalldir="/" md5sum="6ce30ab8ea7c478617c5d9da77217794" name="/WindowsAzure/Queue/Models/QueueServiceOptions.php" role="php" />
-   <file baseinstalldir="/" md5sum="b064d926276a2d459e7f541e8e50d5f4" name="/WindowsAzure/Queue/Models/UpdateMessageResult.php" role="php" />
-   <file baseinstalldir="/" md5sum="ac969a487f84e437818df2d32b46e9ad" name="/WindowsAzure/Queue/Models/WindowsAzureQueueMessage.php" role="php" />
-   <file baseinstalldir="/" md5sum="e945cc0312f649ea3f3a3ca9ed3174f4" name="/WindowsAzure/ServiceBus/ServiceBusRestProxy.php" role="php" />
-   <file baseinstalldir="/" md5sum="35dac87f06c9b9156fff1314cd5f7482" name="/WindowsAzure/ServiceBus/ServiceBusService.php" role="php" />
-   <file baseinstalldir="/" md5sum="843d2a4715f0d73c8d10c1ea273c7ee3" name="/WindowsAzure/ServiceBus/ServiceBusSettings.php" role="php" />
-   <file baseinstalldir="/" md5sum="e8f060a368aeeb854934bf6dee64677a" name="/WindowsAzure/ServiceBus/WrapRestProxy.php" role="php" />
-   <file baseinstalldir="/" md5sum="3e87cd422a3950ba406ad06fe3aac96b" name="/WindowsAzure/ServiceBus/WrapService.php" role="php" />
-   <file baseinstalldir="/" md5sum="aafdc5a1e40169455ba920793c9094ef" name="/WindowsAzure/ServiceBus/Internal/IServiceBus.php" role="php" />
-   <file baseinstalldir="/" md5sum="0b561faa65abce699e7f6b3ac63f766b" name="/WindowsAzure/ServiceBus/Internal/IWrap.php" role="php" />
-   <file baseinstalldir="/" md5sum="4c2d1c5c5773150eb508d6c6f598063f" name="/WindowsAzure/ServiceBus/Internal/WrapTokenManager.php" role="php" />
-   <file baseinstalldir="/" md5sum="951dd5da90fc9bf5f7f7f0ae8cbfab59" name="/WindowsAzure/ServiceBus/Models/Action.php" role="php" />
+   <file baseinstalldir="/" md5sum="16732b59c985ad51ca6a3f9f8e27ed1f" name="/WindowsAzure/WindowsAzure.php" role="php" />
+   <file baseinstalldir="/" md5sum="c00c7ff59fdda5de2ae3f1ec9b0d1ce8" name="/WindowsAzure/Blob/BlobRestProxy.php" role="php" />
+   <file baseinstalldir="/" md5sum="5524937e6d20fb4d1c13a62caa38f636" name="/WindowsAzure/Blob/Internal/IBlob.php" role="php" />
+   <file baseinstalldir="/" md5sum="319942f7e0477496085f81162ac7f56c" name="/WindowsAzure/Blob/Models/AccessCondition.php" role="php" />
+   <file baseinstalldir="/" md5sum="c49c8e665f4ed9fe2bab3a345983aec4" name="/WindowsAzure/Blob/Models/AccessPolicy.php" role="php" />
+   <file baseinstalldir="/" md5sum="073ef707a16ad4a3ed49a2db43e9f52c" name="/WindowsAzure/Blob/Models/AcquireLeaseOptions.php" role="php" />
+   <file baseinstalldir="/" md5sum="4fe094b52e55584df4307a6d82cdc580" name="/WindowsAzure/Blob/Models/AcquireLeaseResult.php" role="php" />
+   <file baseinstalldir="/" md5sum="0175a88ac5a41ceb02893965ba72f034" name="/WindowsAzure/Blob/Models/Blob.php" role="php" />
+   <file baseinstalldir="/" md5sum="8c43514ef77733d2b14cda8f223f80bb" name="/WindowsAzure/Blob/Models/BlobBlockType.php" role="php" />
+   <file baseinstalldir="/" md5sum="28da84507d60e723271c5ee80419c0a3" name="/WindowsAzure/Blob/Models/BlobPrefix.php" role="php" />
+   <file baseinstalldir="/" md5sum="5ac230a563ad83e337b060b4708db4fa" name="/WindowsAzure/Blob/Models/BlobProperties.php" role="php" />
+   <file baseinstalldir="/" md5sum="ccef5a4e633ffe6b272a02eb6daedf5b" name="/WindowsAzure/Blob/Models/BlobServiceOptions.php" role="php" />
+   <file baseinstalldir="/" md5sum="8bb9aaa7299a94e50f40ccbc3b63d262" name="/WindowsAzure/Blob/Models/BlobType.php" role="php" />
+   <file baseinstalldir="/" md5sum="c1eb32fac4d2364fb23a131a9e8d3790" name="/WindowsAzure/Blob/Models/Block.php" role="php" />
+   <file baseinstalldir="/" md5sum="036ded816127a896a4a35310d5d41668" name="/WindowsAzure/Blob/Models/BlockList.php" role="php" />
+   <file baseinstalldir="/" md5sum="bcd51320c6b05fff807e9eb4e217cf44" name="/WindowsAzure/Blob/Models/CommitBlobBlocksOptions.php" role="php" />
+   <file baseinstalldir="/" md5sum="7b5d84195be86178a941f6ab4af23d3f" name="/WindowsAzure/Blob/Models/Container.php" role="php" />
+   <file baseinstalldir="/" md5sum="9e00fce3475e10170229b1988493344f" name="/WindowsAzure/Blob/Models/ContainerACL.php" role="php" />
+   <file baseinstalldir="/" md5sum="d91d1794bc394b3db58838d36ca7f7ca" name="/WindowsAzure/Blob/Models/ContainerProperties.php" role="php" />
+   <file baseinstalldir="/" md5sum="638c7ba39468c6d7637463c64edb434b" name="/WindowsAzure/Blob/Models/CopyBlobOptions.php" role="php" />
+   <file baseinstalldir="/" md5sum="87550e7c5db8c0f0fdf69c28a16e434c" name="/WindowsAzure/Blob/Models/CopyBlobResult.php" role="php" />
+   <file baseinstalldir="/" md5sum="f1bd2261e219b1a2f173e770def655af" name="/WindowsAzure/Blob/Models/CreateBlobBlockOptions.php" role="php" />
+   <file baseinstalldir="/" md5sum="d775e4642d465dcd1827446ba2a1899d" name="/WindowsAzure/Blob/Models/CreateBlobOptions.php" role="php" />
+   <file baseinstalldir="/" md5sum="3017a0e2d0cf54823a74fc52f4adcc5c" name="/WindowsAzure/Blob/Models/CreateBlobPagesOptions.php" role="php" />
+   <file baseinstalldir="/" md5sum="622c97b37678d5060d0e29b0a5b738bf" name="/WindowsAzure/Blob/Models/CreateBlobPagesResult.php" role="php" />
+   <file baseinstalldir="/" md5sum="55e6c52b0566bc6164b22e5acc4f926a" name="/WindowsAzure/Blob/Models/CreateBlobSnapshotOptions.php" role="php" />
+   <file baseinstalldir="/" md5sum="8c014852b723115ba0c3da52fab558fb" name="/WindowsAzure/Blob/Models/CreateBlobSnapshotResult.php" role="php" />
+   <file baseinstalldir="/" md5sum="2fc14e2dfcb51206de81f3cdbf02b476" name="/WindowsAzure/Blob/Models/CreateContainerOptions.php" role="php" />
+   <file baseinstalldir="/" md5sum="16cd3667dec7a9120b2a21985d1bc6cd" name="/WindowsAzure/Blob/Models/DeleteBlobOptions.php" role="php" />
+   <file baseinstalldir="/" md5sum="13734163ce37fe48abebf62c165d6c11" name="/WindowsAzure/Blob/Models/DeleteContainerOptions.php" role="php" />
+   <file baseinstalldir="/" md5sum="38c81011a1a818e3348732d2fa965d0f" name="/WindowsAzure/Blob/Models/GetBlobMetadataOptions.php" role="php" />
+   <file baseinstalldir="/" md5sum="192a6c3047cf1553f76ecf5151a08f8d" name="/WindowsAzure/Blob/Models/GetBlobMetadataResult.php" role="php" />
+   <file baseinstalldir="/" md5sum="e9785d3563a70acef5e259c0ec75a605" name="/WindowsAzure/Blob/Models/GetBlobOptions.php" role="php" />
+   <file baseinstalldir="/" md5sum="18cb7539d06004feee2b645fc26bdfa7" name="/WindowsAzure/Blob/Models/GetBlobPropertiesOptions.php" role="php" />
+   <file baseinstalldir="/" md5sum="e805e4a7edc8fb863476319b58ad79ac" name="/WindowsAzure/Blob/Models/GetBlobPropertiesResult.php" role="php" />
+   <file baseinstalldir="/" md5sum="0ff65dc42347c66df789a495d916f233" name="/WindowsAzure/Blob/Models/GetBlobResult.php" role="php" />
+   <file baseinstalldir="/" md5sum="f072ce861649d87973e8b4438f4df645" name="/WindowsAzure/Blob/Models/GetContainerACLResult.php" role="php" />
+   <file baseinstalldir="/" md5sum="d7c139c4f5ff75e68c3cd9dc8052a2f9" name="/WindowsAzure/Blob/Models/GetContainerPropertiesResult.php" role="php" />
+   <file baseinstalldir="/" md5sum="0478d770cf0522b0dc19bc8a66cad93a" name="/WindowsAzure/Blob/Models/LeaseMode.php" role="php" />
+   <file baseinstalldir="/" md5sum="e9d47ee58ea4c17fb450c613e0ff2708" name="/WindowsAzure/Blob/Models/ListBlobBlocksOptions.php" role="php" />
+   <file baseinstalldir="/" md5sum="e6d4383bdf136ea9da186ee414de797b" name="/WindowsAzure/Blob/Models/ListBlobBlocksResult.php" role="php" />
+   <file baseinstalldir="/" md5sum="a24cf290dff174e9bcec635595827e2e" name="/WindowsAzure/Blob/Models/ListBlobsOptions.php" role="php" />
+   <file baseinstalldir="/" md5sum="1c47c1254e45de1d97b74c2574617af6" name="/WindowsAzure/Blob/Models/ListBlobsResult.php" role="php" />
+   <file baseinstalldir="/" md5sum="6cd41ab419422b497a7b947257068c07" name="/WindowsAzure/Blob/Models/ListContainersOptions.php" role="php" />
+   <file baseinstalldir="/" md5sum="564bb6e758d1d34a1e91777a923f8830" name="/WindowsAzure/Blob/Models/ListContainersResult.php" role="php" />
+   <file baseinstalldir="/" md5sum="cf9d551208f284f2415c100fd232d394" name="/WindowsAzure/Blob/Models/ListPageBlobRangesOptions.php" role="php" />
+   <file baseinstalldir="/" md5sum="97e91f0293ec6b3001cd8d231237f713" name="/WindowsAzure/Blob/Models/ListPageBlobRangesResult.php" role="php" />
+   <file baseinstalldir="/" md5sum="26111d1bb07ae2ad9f0a40d8a0fbcbf8" name="/WindowsAzure/Blob/Models/PageRange.php" role="php" />
+   <file baseinstalldir="/" md5sum="b76363b3d5be2832030da1bf143d0531" name="/WindowsAzure/Blob/Models/PageWriteOption.php" role="php" />
+   <file baseinstalldir="/" md5sum="6c1f918ade15329a742fe2ab9cfa36b7" name="/WindowsAzure/Blob/Models/PublicAccessType.php" role="php" />
+   <file baseinstalldir="/" md5sum="c1d4be4d3b0e5584ab5c3bd7ff9826f6" name="/WindowsAzure/Blob/Models/SetBlobMetadataOptions.php" role="php" />
+   <file baseinstalldir="/" md5sum="dd4ad0b141d16bc0768e89843c385fff" name="/WindowsAzure/Blob/Models/SetBlobMetadataResult.php" role="php" />
+   <file baseinstalldir="/" md5sum="dbfe9a5607c3cc2cbb7e30aaab672354" name="/WindowsAzure/Blob/Models/SetBlobPropertiesOptions.php" role="php" />
+   <file baseinstalldir="/" md5sum="164a5157d1046ba673f94e095d6ebc58" name="/WindowsAzure/Blob/Models/SetBlobPropertiesResult.php" role="php" />
+   <file baseinstalldir="/" md5sum="a93910a8330aea8962abc48ddcb39bfb" name="/WindowsAzure/Blob/Models/SetContainerMetadataOptions.php" role="php" />
+   <file baseinstalldir="/" md5sum="dc7fe9008265b3c0f748f0ecae293bd6" name="/WindowsAzure/Blob/Models/SignedIdentifier.php" role="php" />
+   <file baseinstalldir="/" md5sum="ddd5ee531cf1943efabf12867252e24e" name="/WindowsAzure/Common/CloudConfigurationManager.php" role="php" />
+   <file baseinstalldir="/" md5sum="68c1c1b8598a69fd47706e54fd966d6d" name="/WindowsAzure/Common/ServiceException.php" role="php" />
+   <file baseinstalldir="/" md5sum="bdc0dee7fa1f314027cf9986942f1077" name="/WindowsAzure/Common/ServicesBuilder.php" role="php" />
+   <file baseinstalldir="/" md5sum="f0c09d52b8aec11f46917e2b5ac5b42f" name="/WindowsAzure/Common/Internal/ConnectionStringParser.php" role="php" />
+   <file baseinstalldir="/" md5sum="2ea2ff68fced3709cff8d349f8749e97" name="/WindowsAzure/Common/Internal/ConnectionStringSource.php" role="php" />
+   <file baseinstalldir="/" md5sum="70a31cce749bebb9640a576d1a6fa9ff" name="/WindowsAzure/Common/Internal/FilterableService.php" role="php" />
+   <file baseinstalldir="/" md5sum="06d5c41f0973220955bc0709e1ebd8d1" name="/WindowsAzure/Common/Internal/InvalidArgumentTypeException.php" role="php" />
+   <file baseinstalldir="/" md5sum="db0461e3791f9645028709db5b54fc28" name="/WindowsAzure/Common/Internal/IServiceFilter.php" role="php" />
+   <file baseinstalldir="/" md5sum="4213d20983cf0369082acc8298a4023b" name="/WindowsAzure/Common/Internal/Logger.php" role="php" />
+   <file baseinstalldir="/" md5sum="a5905c6e0c5335e3b3f157bacdbb1c46" name="/WindowsAzure/Common/Internal/Resources.php" role="php" />
+   <file baseinstalldir="/" md5sum="41a373936d614bd41a550a1533fb444b" name="/WindowsAzure/Common/Internal/RestProxy.php" role="php" />
+   <file baseinstalldir="/" md5sum="b588fddd0a6a36847262a4e9718684fc" name="/WindowsAzure/Common/Internal/ServiceBusSettings.php" role="php" />
+   <file baseinstalldir="/" md5sum="52d1b427d50ba9a826dadde0dfc6d87e" name="/WindowsAzure/Common/Internal/ServiceManagementSettings.php" role="php" />
+   <file baseinstalldir="/" md5sum="09852a0268cc0431a2927a675e884c13" name="/WindowsAzure/Common/Internal/ServiceRestProxy.php" role="php" />
+   <file baseinstalldir="/" md5sum="40f2453faff93cdb6a3102b11a79aab8" name="/WindowsAzure/Common/Internal/ServiceSettings.php" role="php" />
+   <file baseinstalldir="/" md5sum="12b6c3d915837724eb070b169831b3e2" name="/WindowsAzure/Common/Internal/StorageServiceSettings.php" role="php" />
+   <file baseinstalldir="/" md5sum="6a4a77b3262afad47b07f777d7ae8e38" name="/WindowsAzure/Common/Internal/Utilities.php" role="php" />
+   <file baseinstalldir="/" md5sum="a79f715d08678f861bd03e6045111b96" name="/WindowsAzure/Common/Internal/Validate.php" role="php" />
+   <file baseinstalldir="/" md5sum="8a988749710d85fac328abb525dd5736" name="/WindowsAzure/Common/Internal/Atom/AtomBase.php" role="php" />
+   <file baseinstalldir="/" md5sum="ed86b31ffa846e5c4add35d802ac15d9" name="/WindowsAzure/Common/Internal/Atom/AtomLink.php" role="php" />
+   <file baseinstalldir="/" md5sum="42b86253d0525a72a75e298665a2f77a" name="/WindowsAzure/Common/Internal/Atom/Category.php" role="php" />
+   <file baseinstalldir="/" md5sum="106ab38b7f24453f04264b5c47306ea3" name="/WindowsAzure/Common/Internal/Atom/Content.php" role="php" />
+   <file baseinstalldir="/" md5sum="1df21dd0444c68392fbf0cc573040d0f" name="/WindowsAzure/Common/Internal/Atom/Entry.php" role="php" />
+   <file baseinstalldir="/" md5sum="3b0e25ff6a20218109e3226dd861055b" name="/WindowsAzure/Common/Internal/Atom/Feed.php" role="php" />
+   <file baseinstalldir="/" md5sum="55402225a6afa667fbebd1754d72de32" name="/WindowsAzure/Common/Internal/Atom/Generator.php" role="php" />
+   <file baseinstalldir="/" md5sum="c04b09c5d467627329ef830792ed0a96" name="/WindowsAzure/Common/Internal/Atom/Person.php" role="php" />
+   <file baseinstalldir="/" md5sum="7d2eb2cadb121aa7ef4b219490d362c7" name="/WindowsAzure/Common/Internal/Atom/Source.php" role="php" />
+   <file baseinstalldir="/" md5sum="e0dac17d9b1e88b9bade535199ce4052" name="/WindowsAzure/Common/Internal/Authentication/SharedKeyAuthScheme.php" role="php" />
+   <file baseinstalldir="/" md5sum="427674705811b67a32bd8f36fd6b6c60" name="/WindowsAzure/Common/Internal/Authentication/StorageAuthScheme.php" role="php" />
+   <file baseinstalldir="/" md5sum="f40a9d829923afc833b6de08048cb04e" name="/WindowsAzure/Common/Internal/Authentication/TableSharedKeyLiteAuthScheme.php" role="php" />
+   <file baseinstalldir="/" md5sum="027d8176cdf7fab017bf7981498aedcb" name="/WindowsAzure/Common/Internal/Filters/AuthenticationFilter.php" role="php" />
+   <file baseinstalldir="/" md5sum="117d35ad1705da44d06257c9fbf783d5" name="/WindowsAzure/Common/Internal/Filters/DateFilter.php" role="php" />
+   <file baseinstalldir="/" md5sum="79c11a284766386c557e1b7f67d52f10" name="/WindowsAzure/Common/Internal/Filters/ExponentialRetryPolicy.php" role="php" />
+   <file baseinstalldir="/" md5sum="39a9b250ee097b599f3475b037907a67" name="/WindowsAzure/Common/Internal/Filters/HeadersFilter.php" role="php" />
+   <file baseinstalldir="/" md5sum="c9f3431307fb823eb417284844198358" name="/WindowsAzure/Common/Internal/Filters/RetryPolicy.php" role="php" />
+   <file baseinstalldir="/" md5sum="46690f368ef320de783579d327c1118f" name="/WindowsAzure/Common/Internal/Filters/RetryPolicyFilter.php" role="php" />
+   <file baseinstalldir="/" md5sum="18f05605509b516d1a4d6616e2923935" name="/WindowsAzure/Common/Internal/Filters/WrapFilter.php" role="php" />
+   <file baseinstalldir="/" md5sum="640da0830ca9c37d67ef1ea536cf1719" name="/WindowsAzure/Common/Internal/Http/HttpCallContext.php" role="php" />
+   <file baseinstalldir="/" md5sum="e72d7d8aa539a82504aef595073b4101" name="/WindowsAzure/Common/Internal/Http/HttpClient.php" role="php" />
+   <file baseinstalldir="/" md5sum="f9cc1211f428ed6ea367a4bca3a50338" name="/WindowsAzure/Common/Internal/Http/IHttpClient.php" role="php" />
+   <file baseinstalldir="/" md5sum="59059fcf0db6fa283930f39d87ae7c44" name="/WindowsAzure/Common/Internal/Http/IUrl.php" role="php" />
+   <file baseinstalldir="/" md5sum="cf958e420d403fc645c69f0532c36f35" name="/WindowsAzure/Common/Internal/Http/Url.php" role="php" />
+   <file baseinstalldir="/" md5sum="e5fb5f30ab570dc52060b8aa306fd38b" name="/WindowsAzure/Common/Internal/Serialization/ISerializer.php" role="php" />
+   <file baseinstalldir="/" md5sum="304282e1ed155d54915bcf8818ffa70a" name="/WindowsAzure/Common/Internal/Serialization/XmlSerializer.php" role="php" />
+   <file baseinstalldir="/" md5sum="cd1a4ad3b99d7585c5765fd220efe319" name="/WindowsAzure/Common/Models/GetServicePropertiesResult.php" role="php" />
+   <file baseinstalldir="/" md5sum="50a7c4f29ed93fa8757bc60ebdf5fde1" name="/WindowsAzure/Common/Models/Logging.php" role="php" />
+   <file baseinstalldir="/" md5sum="e55f794c25ca4501579af3f3715c76c8" name="/WindowsAzure/Common/Models/Metrics.php" role="php" />
+   <file baseinstalldir="/" md5sum="25077dfb17673dc57746460698d9e86d" name="/WindowsAzure/Common/Models/RetentionPolicy.php" role="php" />
+   <file baseinstalldir="/" md5sum="976fc542718a597b53abe2d4ccc30e6e" name="/WindowsAzure/Common/Models/ServiceProperties.php" role="php" />
+   <file baseinstalldir="/" md5sum="5ddfdcbd904eb270e56a6cece50d349a" name="/WindowsAzure/Queue/QueueRestProxy.php" role="php" />
+   <file baseinstalldir="/" md5sum="dc808277ca7f5c670ea41deb046b57f4" name="/WindowsAzure/Queue/Internal/IQueue.php" role="php" />
+   <file baseinstalldir="/" md5sum="f8f2a4384f21719915c2977cee5ee0b5" name="/WindowsAzure/Queue/Models/CreateMessageOptions.php" role="php" />
+   <file baseinstalldir="/" md5sum="ef03a2f100ec8838a4ec1e71a456d71e" name="/WindowsAzure/Queue/Models/CreateQueueOptions.php" role="php" />
+   <file baseinstalldir="/" md5sum="44efca6b18e80f4922baab63ab537e22" name="/WindowsAzure/Queue/Models/GetQueueMetadataResult.php" role="php" />
+   <file baseinstalldir="/" md5sum="dfb6e4cf704d90a3c26241a5622ef227" name="/WindowsAzure/Queue/Models/ListMessagesOptions.php" role="php" />
+   <file baseinstalldir="/" md5sum="c2e345af920ab6c19ee5b5d352ddf98b" name="/WindowsAzure/Queue/Models/ListMessagesResult.php" role="php" />
+   <file baseinstalldir="/" md5sum="5b6bb789753bd103def7f9301c9d5979" name="/WindowsAzure/Queue/Models/ListQueuesOptions.php" role="php" />
+   <file baseinstalldir="/" md5sum="55344ce90ee5b7cf570aca1c8287913c" name="/WindowsAzure/Queue/Models/ListQueuesResult.php" role="php" />
+   <file baseinstalldir="/" md5sum="89239eb50d87f1c77eff368a5c655f1f" name="/WindowsAzure/Queue/Models/PeekMessagesOptions.php" role="php" />
+   <file baseinstalldir="/" md5sum="0cee95e2c735a872d6dbd1da29f6db6b" name="/WindowsAzure/Queue/Models/PeekMessagesResult.php" role="php" />
+   <file baseinstalldir="/" md5sum="fd175f8f8efc5f7721f61a2498403d4a" name="/WindowsAzure/Queue/Models/Queue.php" role="php" />
+   <file baseinstalldir="/" md5sum="ce8d688e30d8c6bfe356b939379da538" name="/WindowsAzure/Queue/Models/QueueMessage.php" role="php" />
+   <file baseinstalldir="/" md5sum="52d1569320c2927f245da089c73fb3fd" name="/WindowsAzure/Queue/Models/QueueServiceOptions.php" role="php" />
+   <file baseinstalldir="/" md5sum="595cae4e09514f4e3f4250188b3f9c34" name="/WindowsAzure/Queue/Models/UpdateMessageResult.php" role="php" />
+   <file baseinstalldir="/" md5sum="10603560b3f79f2ef65bb22079dcd5fc" name="/WindowsAzure/Queue/Models/WindowsAzureQueueMessage.php" role="php" />
+   <file baseinstalldir="/" md5sum="88979ae59e94be823bb8bb26c4b06bd5" name="/WindowsAzure/ServiceBus/ServiceBusRestProxy.php" role="php" />
+   <file baseinstalldir="/" md5sum="f289d078f7509a17b796c5a6af13d29d" name="/WindowsAzure/ServiceBus/WrapRestProxy.php" role="php" />
+   <file baseinstalldir="/" md5sum="7b6dc817ef8b43f767c398afd4156f6f" name="/WindowsAzure/ServiceBus/Internal/IServiceBus.php" role="php" />
+   <file baseinstalldir="/" md5sum="b9c0cada3c55990f183fc3a5f89e089f" name="/WindowsAzure/ServiceBus/Internal/IWrap.php" role="php" />
+   <file baseinstalldir="/" md5sum="64a801afd944f8b5fbc9ace39f4d4cf4" name="/WindowsAzure/ServiceBus/Internal/WrapTokenManager.php" role="php" />
+   <file baseinstalldir="/" md5sum="608f2b2288275a066c67acaa08e61a28" name="/WindowsAzure/ServiceBus/Models/Action.php" role="php" />
    <file baseinstalldir="/" md5sum="e75d592e6fd584f6e432f47850efe098" name="/WindowsAzure/ServiceBus/Models/ActiveToken.php" role="php" />
-   <file baseinstalldir="/" md5sum="f9bbcd34359462b422fc2fb227d1911d" name="/WindowsAzure/ServiceBus/Models/BrokeredMessage.php" role="php" />
-   <file baseinstalldir="/" md5sum="8a88bd99705e763b91aff91acc60faa1" name="/WindowsAzure/ServiceBus/Models/BrokerProperties.php" role="php" />
-   <file baseinstalldir="/" md5sum="3c04bbad3dd652344cf29cb479d09b84" name="/WindowsAzure/ServiceBus/Models/CorrelationFilter.php" role="php" />
-   <file baseinstalldir="/" md5sum="bb4487bcbe9fa7909d80bda6736f28e1" name="/WindowsAzure/ServiceBus/Models/EmptyRuleAction.php" role="php" />
-   <file baseinstalldir="/" md5sum="703a1186957b9801b753dd8038b98de8" name="/WindowsAzure/ServiceBus/Models/FalseFilter.php" role="php" />
-   <file baseinstalldir="/" md5sum="c0393d302d7af0e19ecfe1bde3c66a60" name="/WindowsAzure/ServiceBus/Models/Filter.php" role="php" />
-   <file baseinstalldir="/" md5sum="fa20e905bc1202d98971bfd0d4d3f86d" name="/WindowsAzure/ServiceBus/Models/ListOptions.php" role="php" />
-   <file baseinstalldir="/" md5sum="c1542bf3cf15360b5bbb7c3ddf379363" name="/WindowsAzure/ServiceBus/Models/ListQueuesOptions.php" role="php" />
-   <file baseinstalldir="/" md5sum="98d2f2ac9bab1aaa20ba9aebdfc3cc04" name="/WindowsAzure/ServiceBus/Models/ListQueuesResult.php" role="php" />
-   <file baseinstalldir="/" md5sum="655ecec5659c9f4bf57f32e40f7e30a9" name="/WindowsAzure/ServiceBus/Models/ListRulesOptions.php" role="php" />
-   <file baseinstalldir="/" md5sum="37d7e80545e13c97c7fcf0f8d7ffd0c7" name="/WindowsAzure/ServiceBus/Models/ListRulesResult.php" role="php" />
-   <file baseinstalldir="/" md5sum="82519a8da1c3c7f8aa2f20c0b5bb9106" name="/WindowsAzure/ServiceBus/Models/ListSubscriptionsOptions.php" role="php" />
-   <file baseinstalldir="/" md5sum="139818e60fdc9c66f7df44cab9a22706" name="/WindowsAzure/ServiceBus/Models/ListSubscriptionsResult.php" role="php" />
-   <file baseinstalldir="/" md5sum="ff985d5d147e178b1c67948e84d3c3e8" name="/WindowsAzure/ServiceBus/Models/ListTopicsOptions.php" role="php" />
-   <file baseinstalldir="/" md5sum="998930ed5bc72c820c4b4749915032c3" name="/WindowsAzure/ServiceBus/Models/ListTopicsResult.php" role="php" />
+   <file baseinstalldir="/" md5sum="08efcf0f9e025add07915b2f5903b9e6" name="/WindowsAzure/ServiceBus/Models/BrokeredMessage.php" role="php" />
+   <file baseinstalldir="/" md5sum="dcffc51cdcc57ff55e90539ff6e65473" name="/WindowsAzure/ServiceBus/Models/BrokerProperties.php" role="php" />
+   <file baseinstalldir="/" md5sum="c9362660b3307cd7daa72a05d7273615" name="/WindowsAzure/ServiceBus/Models/CorrelationFilter.php" role="php" />
+   <file baseinstalldir="/" md5sum="b8a6e2c59064d4a00bbb8847d892d56b" name="/WindowsAzure/ServiceBus/Models/EmptyRuleAction.php" role="php" />
+   <file baseinstalldir="/" md5sum="f2991fde60fa06217b2f108a52e5b54b" name="/WindowsAzure/ServiceBus/Models/FalseFilter.php" role="php" />
+   <file baseinstalldir="/" md5sum="89e717e3648da149847acd892e187401" name="/WindowsAzure/ServiceBus/Models/Filter.php" role="php" />
+   <file baseinstalldir="/" md5sum="f8e306aff98e0e799036969b05bda1f5" name="/WindowsAzure/ServiceBus/Models/ListOptions.php" role="php" />
+   <file baseinstalldir="/" md5sum="491002b152a93235efba045d345ebe96" name="/WindowsAzure/ServiceBus/Models/ListQueuesOptions.php" role="php" />
+   <file baseinstalldir="/" md5sum="168b2885cd424437686f9e9050a2349d" name="/WindowsAzure/ServiceBus/Models/ListQueuesResult.php" role="php" />
+   <file baseinstalldir="/" md5sum="2902fca2e5505218955526c8441fbe7c" name="/WindowsAzure/ServiceBus/Models/ListRulesOptions.php" role="php" />
+   <file baseinstalldir="/" md5sum="3e9dc17c306e3ae3683fba8f2993fb6a" name="/WindowsAzure/ServiceBus/Models/ListRulesResult.php" role="php" />
+   <file baseinstalldir="/" md5sum="fcde8fbcb3cc85b6360fac88732dee35" name="/WindowsAzure/ServiceBus/Models/ListSubscriptionsOptions.php" role="php" />
+   <file baseinstalldir="/" md5sum="41fe01f72fe8fd9a59ff3be10a88120c" name="/WindowsAzure/ServiceBus/Models/ListSubscriptionsResult.php" role="php" />
+   <file baseinstalldir="/" md5sum="6dadf7b52cbc2cf60ff3319e7ce09ee9" name="/WindowsAzure/ServiceBus/Models/ListTopicsOptions.php" role="php" />
+   <file baseinstalldir="/" md5sum="9736a604a89d907991a1496227154826" name="/WindowsAzure/ServiceBus/Models/ListTopicsResult.php" role="php" />
    <file baseinstalldir="/" md5sum="aa869545b46196f2bfc774960f17ff51" name="/WindowsAzure/ServiceBus/Models/QueueDescription.php" role="php" />
-   <file baseinstalldir="/" md5sum="f6978f7004c4d1fcf6d24dde601c6cdd" name="/WindowsAzure/ServiceBus/Models/QueueInfo.php" role="php" />
-   <file baseinstalldir="/" md5sum="9e924433859b05b677d33c5592914e24" name="/WindowsAzure/ServiceBus/Models/ReceiveMessageOptions.php" role="php" />
-   <file baseinstalldir="/" md5sum="fee660b8e4f1d8c01f4c23873962f04e" name="/WindowsAzure/ServiceBus/Models/ReceiveMode.php" role="php" />
-   <file baseinstalldir="/" md5sum="cd16bdb6ce919122212663e041a78cb0" name="/WindowsAzure/ServiceBus/Models/RuleDescription.php" role="php" />
-   <file baseinstalldir="/" md5sum="cc3ec2773220ad8b95da1a55ee368f99" name="/WindowsAzure/ServiceBus/Models/RuleInfo.php" role="php" />
-   <file baseinstalldir="/" md5sum="306838070e5b5de55d01a021c0193ee5" name="/WindowsAzure/ServiceBus/Models/SqlFilter.php" role="php" />
-   <file baseinstalldir="/" md5sum="5e9f1b2a61f120403f024fc9d141a9b4" name="/WindowsAzure/ServiceBus/Models/SqlRuleAction.php" role="php" />
+   <file baseinstalldir="/" md5sum="a622dc5e086c7ed82c4be8712d3945fd" name="/WindowsAzure/ServiceBus/Models/QueueInfo.php" role="php" />
+   <file baseinstalldir="/" md5sum="e531d70ad8cc6467589d30be3920ebbb" name="/WindowsAzure/ServiceBus/Models/ReceiveMessageOptions.php" role="php" />
+   <file baseinstalldir="/" md5sum="c4f2a1ab55ac6487e1916aa4d0fb617e" name="/WindowsAzure/ServiceBus/Models/ReceiveMode.php" role="php" />
+   <file baseinstalldir="/" md5sum="369728b6c050d0c09e9ffa96a80e9f93" name="/WindowsAzure/ServiceBus/Models/RuleDescription.php" role="php" />
+   <file baseinstalldir="/" md5sum="db884e74fb5dfa37063cb7f3835f096d" name="/WindowsAzure/ServiceBus/Models/RuleInfo.php" role="php" />
+   <file baseinstalldir="/" md5sum="da03c380f306fc472533cd8471fbca5e" name="/WindowsAzure/ServiceBus/Models/SqlFilter.php" role="php" />
+   <file baseinstalldir="/" md5sum="922aa6c5a8386e95f7fdda972227dbdf" name="/WindowsAzure/ServiceBus/Models/SqlRuleAction.php" role="php" />
    <file baseinstalldir="/" md5sum="18810f5954007286fa77e03788034503" name="/WindowsAzure/ServiceBus/Models/SubscriptionDescription.php" role="php" />
-   <file baseinstalldir="/" md5sum="be527f168161d6b6121abf7d280b8314" name="/WindowsAzure/ServiceBus/Models/SubscriptionInfo.php" role="php" />
+   <file baseinstalldir="/" md5sum="0da5faa76c92b9fd3a2246389abfca1a" name="/WindowsAzure/ServiceBus/Models/SubscriptionInfo.php" role="php" />
    <file baseinstalldir="/" md5sum="4c86badcd6def5cca7baa3d2497d6572" name="/WindowsAzure/ServiceBus/Models/TopicDescription.php" role="php" />
-   <file baseinstalldir="/" md5sum="f458e50b861fb975a9706cee7ed0e004" name="/WindowsAzure/ServiceBus/Models/TopicInfo.php" role="php" />
-   <file baseinstalldir="/" md5sum="6c88b45f63cd2644f1d660be0b56411d" name="/WindowsAzure/ServiceBus/Models/TrueFilter.php" role="php" />
+   <file baseinstalldir="/" md5sum="0810a4370458d737b7218897949278d8" name="/WindowsAzure/ServiceBus/Models/TopicInfo.php" role="php" />
+   <file baseinstalldir="/" md5sum="165754a7e12996a87c4ec72db1368173" name="/WindowsAzure/ServiceBus/Models/TrueFilter.php" role="php" />
    <file baseinstalldir="/" md5sum="07b8d1a35bd9b76b09e3711edaa5a77c" name="/WindowsAzure/ServiceBus/Models/WrapAccessTokenResult.php" role="php" />
-   <file baseinstalldir="/" md5sum="5f03c241de743fb71d9d52332f4b2995" name="/WindowsAzure/ServiceManagement/ServiceManagementRestProxy.php" role="php" />
-   <file baseinstalldir="/" md5sum="7fa330bf1ddda96376e48ab9e78a2441" name="/WindowsAzure/ServiceManagement/ServiceManagementService.php" role="php" />
-   <file baseinstalldir="/" md5sum="ac2e56d1cf7077343186ca088b9dc013" name="/WindowsAzure/ServiceManagement/ServiceManagementSettings.php" role="php" />
-   <file baseinstalldir="/" md5sum="7e9d2f6aaca6e88e8e15e2aeb0fd4de4" name="/WindowsAzure/ServiceManagement/Internal/IServiceManagement.php" role="php" />
-   <file baseinstalldir="/" md5sum="67c48c6b23950e10c1fe4a67fdaa2d4f" name="/WindowsAzure/ServiceManagement/Models/AffinityGroup.php" role="php" />
-   <file baseinstalldir="/" md5sum="e02e0b384d9e7eb382339a4c6b47f23d" name="/WindowsAzure/ServiceManagement/Models/AsynchronousOperationResult.php" role="php" />
-   <file baseinstalldir="/" md5sum="394f71c214aecf29b9b9fee730512752" name="/WindowsAzure/ServiceManagement/Models/CreateAffinityGroupOptions.php" role="php" />
-   <file baseinstalldir="/" md5sum="7f32048a1c43c2b4dea9fdf4d3a0b84c" name="/WindowsAzure/ServiceManagement/Models/CreateStorageServiceOptions.php" role="php" />
-   <file baseinstalldir="/" md5sum="f3efdf1dc1dc45784e1724b67b11a6a4" name="/WindowsAzure/ServiceManagement/Models/GetAffinityGroupPropertiesResult.php" role="php" />
-   <file baseinstalldir="/" md5sum="7f347e82bca743e465bff83be8f36367" name="/WindowsAzure/ServiceManagement/Models/GetOperationStatusResult.php" role="php" />
-   <file baseinstalldir="/" md5sum="54dcdc4cab447bff1f197cac5d1825cb" name="/WindowsAzure/ServiceManagement/Models/GetStorageServiceKeysResult.php" role="php" />
-   <file baseinstalldir="/" md5sum="334ae87560967a8feffae3656e298cc7" name="/WindowsAzure/ServiceManagement/Models/GetStorageServicePropertiesResult.php" role="php" />
-   <file baseinstalldir="/" md5sum="6575ecd9252bbfeee44a76fb83739f9b" name="/WindowsAzure/ServiceManagement/Models/KeyType.php" role="php" />
-   <file baseinstalldir="/" md5sum="87ce6db7b696f4c411ee48bf65169ae5" name="/WindowsAzure/ServiceManagement/Models/ListAffinityGroupsResult.php" role="php" />
-   <file baseinstalldir="/" md5sum="227626ccfcb91258078ab5578b7d823c" name="/WindowsAzure/ServiceManagement/Models/ListLocationsResult.php" role="php" />
-   <file baseinstalldir="/" md5sum="baba45187efc9bc3ecb282ead0ac3723" name="/WindowsAzure/ServiceManagement/Models/ListStorageServicesResult.php" role="php" />
-   <file baseinstalldir="/" md5sum="8cecdfdc32f50880bec308f462fe06fd" name="/WindowsAzure/ServiceManagement/Models/Location.php" role="php" />
-   <file baseinstalldir="/" md5sum="aef42a9ec7c7e275bfd31f5e63e9ec5a" name="/WindowsAzure/ServiceManagement/Models/Locations.php" role="php" />
-   <file baseinstalldir="/" md5sum="025117cadb088dbc15f7ca045e7937dc" name="/WindowsAzure/ServiceManagement/Models/OperationStatus.php" role="php" />
-   <file baseinstalldir="/" md5sum="9beca581aa276b8f7cb07fc872a3c143" name="/WindowsAzure/ServiceManagement/Models/Service.php" role="php" />
-   <file baseinstalldir="/" md5sum="c6d90a554acdcafe0c44a66477d04420" name="/WindowsAzure/ServiceManagement/Models/ServiceProperties.php" role="php" />
-   <file baseinstalldir="/" md5sum="40bb6e63a3019de422f8bed4e380f4c0" name="/WindowsAzure/ServiceManagement/Models/StorageService.php" role="php" />
-   <file baseinstalldir="/" md5sum="dfbf40cb59c2b7996c04eae675f96766" name="/WindowsAzure/ServiceManagement/Models/UpdateStorageServiceOptions.php" role="php" />
-   <file baseinstalldir="/" md5sum="c51ef0668e4a79354e0d6c8707630361" name="/WindowsAzure/ServiceRuntime/RoleEnvironment.php" role="php" />
-   <file baseinstalldir="/" md5sum="e09e2eaa95f97283d396cd476035ee4f" name="/WindowsAzure/ServiceRuntime/Internal/AcquireCurrentState.php" role="php" />
-   <file baseinstalldir="/" md5sum="9c2f621e72d7dc6d5e9e41edbffc5e2b" name="/WindowsAzure/ServiceRuntime/Internal/ChannelNotAvailableException.php" role="php" />
-   <file baseinstalldir="/" md5sum="3795c0bf3a83344da79adfe722268068" name="/WindowsAzure/ServiceRuntime/Internal/ChunkedGoalStateDeserializer.php" role="php" />
-   <file baseinstalldir="/" md5sum="3268d76450bfa888185e77cd21de9f4c" name="/WindowsAzure/ServiceRuntime/Internal/CurrentState.php" role="php" />
-   <file baseinstalldir="/" md5sum="2a6e71c613dfab80cc5c579d70f85911" name="/WindowsAzure/ServiceRuntime/Internal/CurrentStatus.php" role="php" />
-   <file baseinstalldir="/" md5sum="8bbc35265618eaf2d75cfd6244c9b238" name="/WindowsAzure/ServiceRuntime/Internal/FileInputChannel.php" role="php" />
-   <file baseinstalldir="/" md5sum="1fb96be8de8ebd1ac48fb09a5e097176" name="/WindowsAzure/ServiceRuntime/Internal/FileOutputChannel.php" role="php" />
-   <file baseinstalldir="/" md5sum="7f8145d6410ef3a84c13578c4ccce185" name="/WindowsAzure/ServiceRuntime/Internal/GoalState.php" role="php" />
-   <file baseinstalldir="/" md5sum="f53b41acd7d4b07cdff5cde4b6daeb44" name="/WindowsAzure/ServiceRuntime/Internal/ICurrentStateSerializer.php" role="php" />
-   <file baseinstalldir="/" md5sum="1e237804e035b3e12ccc11ba275279d7" name="/WindowsAzure/ServiceRuntime/Internal/IGoalStateDeserializer.php" role="php" />
-   <file baseinstalldir="/" md5sum="9c377e0501f3c3c78b486ccfc14ba79c" name="/WindowsAzure/ServiceRuntime/Internal/IInputChannel.php" role="php" />
-   <file baseinstalldir="/" md5sum="b5ac9ba8fe008ed20a49dae7a4508b91" name="/WindowsAzure/ServiceRuntime/Internal/IOutputChannel.php" role="php" />
-   <file baseinstalldir="/" md5sum="48432421dba7237320f4b38ed7633254" name="/WindowsAzure/ServiceRuntime/Internal/IRoleEnvironmentChange.php" role="php" />
-   <file baseinstalldir="/" md5sum="12faa3171802f7e145f63e1dca3c0beb" name="/WindowsAzure/ServiceRuntime/Internal/IRoleEnvironmentDataDeserializer.php" role="php" />
-   <file baseinstalldir="/" md5sum="93ea49c86b36791f3eed0f2194cbd68d" name="/WindowsAzure/ServiceRuntime/Internal/IRuntimeClient.php" role="php" />
-   <file baseinstalldir="/" md5sum="7451906f77baa638141888b75fd0fb24" name="/WindowsAzure/ServiceRuntime/Internal/IRuntimeClientFactory.php" role="php" />
-   <file baseinstalldir="/" md5sum="156277ebce6412cbe2112e8120be9976" name="/WindowsAzure/ServiceRuntime/Internal/IRuntimeCurrentStateClient.php" role="php" />
-   <file baseinstalldir="/" md5sum="df32cd92fa231db89556cb72ff742063" name="/WindowsAzure/ServiceRuntime/Internal/IRuntimeGoalStateClient.php" role="php" />
-   <file baseinstalldir="/" md5sum="7dc5281768bc6c0c994dde5d2d200f3c" name="/WindowsAzure/ServiceRuntime/Internal/LocalResource.php" role="php" />
-   <file baseinstalldir="/" md5sum="ce4b75f4cbde63c2fe6c0aec717b438e" name="/WindowsAzure/ServiceRuntime/Internal/Protocol1RuntimeClient.php" role="php" />
-   <file baseinstalldir="/" md5sum="1d94ceecf2bc0e3a87b5d65974a44411" name="/WindowsAzure/ServiceRuntime/Internal/Protocol1RuntimeClientFactory.php" role="php" />
-   <file baseinstalldir="/" md5sum="90ed13a092abf018e1578bce57543c8d" name="/WindowsAzure/ServiceRuntime/Internal/Protocol1RuntimeCurrentStateClient.php" role="php" />
-   <file baseinstalldir="/" md5sum="2f5bfb217d3af93913b7112d0743a2c1" name="/WindowsAzure/ServiceRuntime/Internal/Protocol1RuntimeGoalStateClient.php" role="php" />
-   <file baseinstalldir="/" md5sum="a1e47eff26a2d90c5ba3e981e11293c5" name="/WindowsAzure/ServiceRuntime/Internal/ReleaseCurrentState.php" role="php" />
-   <file baseinstalldir="/" md5sum="bad78834690303a7d56d31d68d240344" name="/WindowsAzure/ServiceRuntime/Internal/Role.php" role="php" />
-   <file baseinstalldir="/" md5sum="2c817df942b03dec221e528685434c96" name="/WindowsAzure/ServiceRuntime/Internal/RoleEnvironmentConfigurationSettingChange.php" role="php" />
-   <file baseinstalldir="/" md5sum="53a9fa6c276daac24a2dd029e90bd45e" name="/WindowsAzure/ServiceRuntime/Internal/RoleEnvironmentData.php" role="php" />
-   <file baseinstalldir="/" md5sum="8404f5d82463e2af2c6abbfc832d0cdf" name="/WindowsAzure/ServiceRuntime/Internal/RoleEnvironmentNotAvailableException.php" role="php" />
-   <file baseinstalldir="/" md5sum="5475098e7bcbea6bc3787d97922e910f" name="/WindowsAzure/ServiceRuntime/Internal/RoleEnvironmentTopologyChange.php" role="php" />
-   <file baseinstalldir="/" md5sum="b386c3c4e36cfcfe669979bed0845c63" name="/WindowsAzure/ServiceRuntime/Internal/RoleInstance.php" role="php" />
-   <file baseinstalldir="/" md5sum="d9842ca5d17629de517fcecf6a2e8e1c" name="/WindowsAzure/ServiceRuntime/Internal/RoleInstanceEndpoint.php" role="php" />
-   <file baseinstalldir="/" md5sum="52bee4d718b24494b57a9114ab61ab19" name="/WindowsAzure/ServiceRuntime/Internal/RoleInstanceStatus.php" role="php" />
-   <file baseinstalldir="/" md5sum="d505d343778f0e8a926f712e54488a8c" name="/WindowsAzure/ServiceRuntime/Internal/RuntimeKernel.php" role="php" />
-   <file baseinstalldir="/" md5sum="2672b72eb89070d4df8defb4f3c93c85" name="/WindowsAzure/ServiceRuntime/Internal/RuntimeVersionManager.php" role="php" />
-   <file baseinstalldir="/" md5sum="176d281b305e674f3d92773d0203230c" name="/WindowsAzure/ServiceRuntime/Internal/RuntimeVersionProtocolClient.php" role="php" />
-   <file baseinstalldir="/" md5sum="01e8ca7402b975269fe8d03c3d73f2f2" name="/WindowsAzure/ServiceRuntime/Internal/XmlCurrentStateSerializer.php" role="php" />
-   <file baseinstalldir="/" md5sum="39e05bc1b58fc2767b3752cbd0df0978" name="/WindowsAzure/ServiceRuntime/Internal/XmlGoalStateDeserializer.php" role="php" />
-   <file baseinstalldir="/" md5sum="a0ef1149c6b92af3e24f2659431da232" name="/WindowsAzure/ServiceRuntime/Internal/XmlRoleEnvironmentDataDeserializer.php" role="php" />
-   <file baseinstalldir="/" md5sum="11a23e7c18543be405b656a8bcdbbf09" name="/WindowsAzure/Table/TableRestProxy.php" role="php" />
-   <file baseinstalldir="/" md5sum="2e4d8ec79364e77e6e5f48ee5eff2d3c" name="/WindowsAzure/Table/TableService.php" role="php" />
-   <file baseinstalldir="/" md5sum="3ec3c55d2821e395f538402e67e7ef83" name="/WindowsAzure/Table/TableSettings.php" role="php" />
-   <file baseinstalldir="/" md5sum="9d7b0a52b1ded5f3e21729e42c21ffd1" name="/WindowsAzure/Table/Internal/AtomReaderWriter.php" role="php" />
-   <file baseinstalldir="/" md5sum="dbeca8e16acdc77e7843c11741a940ba" name="/WindowsAzure/Table/Internal/IAtomReaderWriter.php" role="php" />
-   <file baseinstalldir="/" md5sum="17209b06ca0829ca638c8f4f37f13d7f" name="/WindowsAzure/Table/Internal/IMimeReaderWriter.php" role="php" />
-   <file baseinstalldir="/" md5sum="32ff7c616ebc01c535e5e02898152a35" name="/WindowsAzure/Table/Internal/ITable.php" role="php" />
-   <file baseinstalldir="/" md5sum="2d331195b82ea57229cc6d92aa4d2e79" name="/WindowsAzure/Table/Internal/MimeReaderWriter.php" role="php" />
-   <file baseinstalldir="/" md5sum="54b0e01f8a11350ec2b2280bf87693a9" name="/WindowsAzure/Table/Models/BatchError.php" role="php" />
-   <file baseinstalldir="/" md5sum="06aeaf4df454dedf86369aab74a48a66" name="/WindowsAzure/Table/Models/BatchOperation.php" role="php" />
-   <file baseinstalldir="/" md5sum="1afd0310751d4f05d96121396c40d69a" name="/WindowsAzure/Table/Models/BatchOperationParameterName.php" role="php" />
-   <file baseinstalldir="/" md5sum="95d0a176d867d6c9d4724384b2722aa1" name="/WindowsAzure/Table/Models/BatchOperations.php" role="php" />
-   <file baseinstalldir="/" md5sum="604722bf229b17e890778249b1e5efec" name="/WindowsAzure/Table/Models/BatchOperationType.php" role="php" />
-   <file baseinstalldir="/" md5sum="8168258d00a118fb002c8b01244e3f69" name="/WindowsAzure/Table/Models/BatchResult.php" role="php" />
-   <file baseinstalldir="/" md5sum="5a48704fd303de179f1dfce5dadefb50" name="/WindowsAzure/Table/Models/DeleteEntityOptions.php" role="php" />
-   <file baseinstalldir="/" md5sum="7e94c5fcc3f1c6ee25e031b02d0d7956" name="/WindowsAzure/Table/Models/EdmType.php" role="php" />
-   <file baseinstalldir="/" md5sum="c591dc391e3136d92083b92fe16bb84d" name="/WindowsAzure/Table/Models/Entity.php" role="php" />
-   <file baseinstalldir="/" md5sum="4be69acc192c61fc39589595592b9b23" name="/WindowsAzure/Table/Models/GetEntityResult.php" role="php" />
-   <file baseinstalldir="/" md5sum="50aea55f6fab281a0b89940e2340f7f6" name="/WindowsAzure/Table/Models/GetTableResult.php" role="php" />
-   <file baseinstalldir="/" md5sum="dc59f59e93a87c70d2892a37d0432398" name="/WindowsAzure/Table/Models/InsertEntityResult.php" role="php" />
-   <file baseinstalldir="/" md5sum="267969ede0471edd22c83d18ff6b42ce" name="/WindowsAzure/Table/Models/Property.php" role="php" />
-   <file baseinstalldir="/" md5sum="76455366b91e4e7142fd399b9d916617" name="/WindowsAzure/Table/Models/Query.php" role="php" />
-   <file baseinstalldir="/" md5sum="6445245d73c37c223416f88a9e90c1b8" name="/WindowsAzure/Table/Models/QueryEntitiesOptions.php" role="php" />
-   <file baseinstalldir="/" md5sum="d4f2104be43db5f85ebe7af776c8af4e" name="/WindowsAzure/Table/Models/QueryEntitiesResult.php" role="php" />
-   <file baseinstalldir="/" md5sum="0b2760d6c9f92f0c6856fa3cf24785c3" name="/WindowsAzure/Table/Models/QueryTablesOptions.php" role="php" />
-   <file baseinstalldir="/" md5sum="851985e229fa76fafc00e7ddef68884d" name="/WindowsAzure/Table/Models/QueryTablesResult.php" role="php" />
-   <file baseinstalldir="/" md5sum="4c18b7cea84d089aaa380fd20b84233f" name="/WindowsAzure/Table/Models/TableServiceOptions.php" role="php" />
-   <file baseinstalldir="/" md5sum="6799a5918d3cf34c8221b2383dc69999" name="/WindowsAzure/Table/Models/UpdateEntityResult.php" role="php" />
-   <file baseinstalldir="/" md5sum="171c73a327932ad464eba79d7bea8756" name="/WindowsAzure/Table/Models/Filters/BinaryFilter.php" role="php" />
-   <file baseinstalldir="/" md5sum="d56f0622a40a0c760028b171fa5dcb53" name="/WindowsAzure/Table/Models/Filters/ConstantFilter.php" role="php" />
-   <file baseinstalldir="/" md5sum="c8be1be5db3110d7e6f649ebb769530a" name="/WindowsAzure/Table/Models/Filters/Filter.php" role="php" />
-   <file baseinstalldir="/" md5sum="f27c4c10cf59b1150dd97f7d31603060" name="/WindowsAzure/Table/Models/Filters/PropertyNameFilter.php" role="php" />
-   <file baseinstalldir="/" md5sum="5380fe06e54ea1b142552fac322f8e1a" name="/WindowsAzure/Table/Models/Filters/QueryStringFilter.php" role="php" />
-   <file baseinstalldir="/" md5sum="eae6b9d91a2f8ba2a1facb1b0bbeb7a9" name="/WindowsAzure/Table/Models/Filters/UnaryFilter.php" role="php" />
+   <file baseinstalldir="/" md5sum="4c06d0dd8b08b4741cbe4070e41e497b" name="/WindowsAzure/ServiceManagement/ServiceManagementRestProxy.php" role="php" />
+   <file baseinstalldir="/" md5sum="58f4dc7c2ea77b72aec28686e4646ac3" name="/WindowsAzure/ServiceManagement/Internal/IServiceManagement.php" role="php" />
+   <file baseinstalldir="/" md5sum="5d832bbf023e4e7a53bbd890a7b30f9a" name="/WindowsAzure/ServiceManagement/Models/AffinityGroup.php" role="php" />
+   <file baseinstalldir="/" md5sum="c5212f47b2f6189c3cc61a9b3eb9721f" name="/WindowsAzure/ServiceManagement/Models/AsynchronousOperationResult.php" role="php" />
+   <file baseinstalldir="/" md5sum="b52e38757a88523e3b50e84c03482979" name="/WindowsAzure/ServiceManagement/Models/CreateAffinityGroupOptions.php" role="php" />
+   <file baseinstalldir="/" md5sum="13ba7c50fcbbf76aab7795416a671ba2" name="/WindowsAzure/ServiceManagement/Models/CreateStorageServiceOptions.php" role="php" />
+   <file baseinstalldir="/" md5sum="3aac6d7394aafdab1d900e14974c1285" name="/WindowsAzure/ServiceManagement/Models/GetAffinityGroupPropertiesResult.php" role="php" />
+   <file baseinstalldir="/" md5sum="eeaf38631a1adc90ef4813c980c97444" name="/WindowsAzure/ServiceManagement/Models/GetOperationStatusResult.php" role="php" />
+   <file baseinstalldir="/" md5sum="dd0345c908d8d80799868f2ccf43f42b" name="/WindowsAzure/ServiceManagement/Models/GetStorageServiceKeysResult.php" role="php" />
+   <file baseinstalldir="/" md5sum="9fe195f457840f9d31d2ad63444fbd0b" name="/WindowsAzure/ServiceManagement/Models/GetStorageServicePropertiesResult.php" role="php" />
+   <file baseinstalldir="/" md5sum="9ff425654d200522ab473fab8396a487" name="/WindowsAzure/ServiceManagement/Models/KeyType.php" role="php" />
+   <file baseinstalldir="/" md5sum="a7defdef1ccbeca82e645b5b054353c5" name="/WindowsAzure/ServiceManagement/Models/ListAffinityGroupsResult.php" role="php" />
+   <file baseinstalldir="/" md5sum="3c643cd3ecd6f9e0be624d4ae8fa0482" name="/WindowsAzure/ServiceManagement/Models/ListLocationsResult.php" role="php" />
+   <file baseinstalldir="/" md5sum="fb43dfb2c4a81711985f5dff7587297d" name="/WindowsAzure/ServiceManagement/Models/ListStorageServicesResult.php" role="php" />
+   <file baseinstalldir="/" md5sum="0125dd1b1cebf04b13fac87549f7fed1" name="/WindowsAzure/ServiceManagement/Models/Location.php" role="php" />
+   <file baseinstalldir="/" md5sum="90f36be8674999457e1ef50b65d361f5" name="/WindowsAzure/ServiceManagement/Models/Locations.php" role="php" />
+   <file baseinstalldir="/" md5sum="c3243a745c823a455e88315754680a9b" name="/WindowsAzure/ServiceManagement/Models/OperationStatus.php" role="php" />
+   <file baseinstalldir="/" md5sum="d5b6c4810fff38db85aade425b9ca739" name="/WindowsAzure/ServiceManagement/Models/Service.php" role="php" />
+   <file baseinstalldir="/" md5sum="eb3866d4a40b1536244c444e9bd825fa" name="/WindowsAzure/ServiceManagement/Models/ServiceProperties.php" role="php" />
+   <file baseinstalldir="/" md5sum="c93556f0eeda7d40f4d6dc289c0418ba" name="/WindowsAzure/ServiceManagement/Models/StorageService.php" role="php" />
+   <file baseinstalldir="/" md5sum="db87f4a23239d5298ed177f53cdc1ca3" name="/WindowsAzure/ServiceManagement/Models/UpdateStorageServiceOptions.php" role="php" />
+   <file baseinstalldir="/" md5sum="eebbb66f483e724f7775ee5c1875699a" name="/WindowsAzure/ServiceRuntime/RoleEnvironment.php" role="php" />
+   <file baseinstalldir="/" md5sum="163ecde160b3c1608e35c65935657aaf" name="/WindowsAzure/ServiceRuntime/Internal/AcquireCurrentState.php" role="php" />
+   <file baseinstalldir="/" md5sum="80ea3e165b5326d3b3a6c9ff73b77ea9" name="/WindowsAzure/ServiceRuntime/Internal/ChannelNotAvailableException.php" role="php" />
+   <file baseinstalldir="/" md5sum="b46428515f480064ed02caf76b40d954" name="/WindowsAzure/ServiceRuntime/Internal/ChunkedGoalStateDeserializer.php" role="php" />
+   <file baseinstalldir="/" md5sum="a2a1527cb86424caa5c419edb08034a8" name="/WindowsAzure/ServiceRuntime/Internal/CurrentState.php" role="php" />
+   <file baseinstalldir="/" md5sum="5368b056c794537848e6f6433597b454" name="/WindowsAzure/ServiceRuntime/Internal/CurrentStatus.php" role="php" />
+   <file baseinstalldir="/" md5sum="79540dda821a81c0a2cbd74c0bb3da9f" name="/WindowsAzure/ServiceRuntime/Internal/FileInputChannel.php" role="php" />
+   <file baseinstalldir="/" md5sum="676fb96bfa57fa18a508b4f1c41c52af" name="/WindowsAzure/ServiceRuntime/Internal/FileOutputChannel.php" role="php" />
+   <file baseinstalldir="/" md5sum="38e4d5b2075d2327ca906f4bd6ab323d" name="/WindowsAzure/ServiceRuntime/Internal/GoalState.php" role="php" />
+   <file baseinstalldir="/" md5sum="a6ae238eb4591dbedde1c1dc4f94d9fe" name="/WindowsAzure/ServiceRuntime/Internal/ICurrentStateSerializer.php" role="php" />
+   <file baseinstalldir="/" md5sum="3163d71c1d1953fe288bd7e112e5cd87" name="/WindowsAzure/ServiceRuntime/Internal/IGoalStateDeserializer.php" role="php" />
+   <file baseinstalldir="/" md5sum="36b821e8343f9c9383098e379572820a" name="/WindowsAzure/ServiceRuntime/Internal/IInputChannel.php" role="php" />
+   <file baseinstalldir="/" md5sum="4fec4ff667a4b4f4fd58e6006b15c2d6" name="/WindowsAzure/ServiceRuntime/Internal/IOutputChannel.php" role="php" />
+   <file baseinstalldir="/" md5sum="9b7787e2ed629c705d55c7ec38cd1c82" name="/WindowsAzure/ServiceRuntime/Internal/IRoleEnvironmentChange.php" role="php" />
+   <file baseinstalldir="/" md5sum="08cc1a338adebc1687a1384a97d885b2" name="/WindowsAzure/ServiceRuntime/Internal/IRoleEnvironmentDataDeserializer.php" role="php" />
+   <file baseinstalldir="/" md5sum="81d94b5c87a59549579d7f0e4584a1ff" name="/WindowsAzure/ServiceRuntime/Internal/IRuntimeClient.php" role="php" />
+   <file baseinstalldir="/" md5sum="0931739eca6c6f05d245b3aad174356b" name="/WindowsAzure/ServiceRuntime/Internal/IRuntimeClientFactory.php" role="php" />
+   <file baseinstalldir="/" md5sum="9c91994c8e8f6edf9e2be17c694e0845" name="/WindowsAzure/ServiceRuntime/Internal/IRuntimeCurrentStateClient.php" role="php" />
+   <file baseinstalldir="/" md5sum="4bd1379664f9efc9aba301bd51c3473e" name="/WindowsAzure/ServiceRuntime/Internal/IRuntimeGoalStateClient.php" role="php" />
+   <file baseinstalldir="/" md5sum="b7458c1c642acad2b8d765c92d9b74f7" name="/WindowsAzure/ServiceRuntime/Internal/LocalResource.php" role="php" />
+   <file baseinstalldir="/" md5sum="7fc1cda6f1521b3a2b815d528d02cc98" name="/WindowsAzure/ServiceRuntime/Internal/Protocol1RuntimeClient.php" role="php" />
+   <file baseinstalldir="/" md5sum="56d7df67be9d1d814e4300f4764d8ae4" name="/WindowsAzure/ServiceRuntime/Internal/Protocol1RuntimeClientFactory.php" role="php" />
+   <file baseinstalldir="/" md5sum="ad4e2818f9496c3cd1661379c3afdac5" name="/WindowsAzure/ServiceRuntime/Internal/Protocol1RuntimeCurrentStateClient.php" role="php" />
+   <file baseinstalldir="/" md5sum="742232633be34d8194f94b6c86b3fab6" name="/WindowsAzure/ServiceRuntime/Internal/Protocol1RuntimeGoalStateClient.php" role="php" />
+   <file baseinstalldir="/" md5sum="38712f65cd4a8674495918655911ada6" name="/WindowsAzure/ServiceRuntime/Internal/ReleaseCurrentState.php" role="php" />
+   <file baseinstalldir="/" md5sum="ad6adb27c9485877719da119f9f210a5" name="/WindowsAzure/ServiceRuntime/Internal/Role.php" role="php" />
+   <file baseinstalldir="/" md5sum="259a4b284af560d202bc5213cfee61a4" name="/WindowsAzure/ServiceRuntime/Internal/RoleEnvironmentConfigurationSettingChange.php" role="php" />
+   <file baseinstalldir="/" md5sum="31be10906a12f836b2de4023d5c3aea4" name="/WindowsAzure/ServiceRuntime/Internal/RoleEnvironmentData.php" role="php" />
+   <file baseinstalldir="/" md5sum="e7753ec9c4063dd07dc8ceffbd27fcc1" name="/WindowsAzure/ServiceRuntime/Internal/RoleEnvironmentNotAvailableException.php" role="php" />
+   <file baseinstalldir="/" md5sum="46ec5acd05308fb6b04a040ab923cd60" name="/WindowsAzure/ServiceRuntime/Internal/RoleEnvironmentTopologyChange.php" role="php" />
+   <file baseinstalldir="/" md5sum="2f88aaf02d315a7fb5eed2d5a9ef2c89" name="/WindowsAzure/ServiceRuntime/Internal/RoleInstance.php" role="php" />
+   <file baseinstalldir="/" md5sum="3eb57ef9024f11ff9fa00174989dc9c1" name="/WindowsAzure/ServiceRuntime/Internal/RoleInstanceEndpoint.php" role="php" />
+   <file baseinstalldir="/" md5sum="78b7e1341eb67b827f8a68b4b7a93e42" name="/WindowsAzure/ServiceRuntime/Internal/RoleInstanceStatus.php" role="php" />
+   <file baseinstalldir="/" md5sum="af65e2e4569786148a88fab6fdbc5300" name="/WindowsAzure/ServiceRuntime/Internal/RuntimeKernel.php" role="php" />
+   <file baseinstalldir="/" md5sum="58aae0479ee683664df0bfe0c904886a" name="/WindowsAzure/ServiceRuntime/Internal/RuntimeVersionManager.php" role="php" />
+   <file baseinstalldir="/" md5sum="7e4811fff16e17f5d87c649d1dd80c50" name="/WindowsAzure/ServiceRuntime/Internal/RuntimeVersionProtocolClient.php" role="php" />
+   <file baseinstalldir="/" md5sum="30a68bab9f058d1ad0352798228ca928" name="/WindowsAzure/ServiceRuntime/Internal/XmlCurrentStateSerializer.php" role="php" />
+   <file baseinstalldir="/" md5sum="4fadbbf61d1686b7bbf6b2541cda4217" name="/WindowsAzure/ServiceRuntime/Internal/XmlGoalStateDeserializer.php" role="php" />
+   <file baseinstalldir="/" md5sum="e4d951018cd0de1525e4df65d36b23e8" name="/WindowsAzure/ServiceRuntime/Internal/XmlRoleEnvironmentDataDeserializer.php" role="php" />
+   <file baseinstalldir="/" md5sum="c5a038219fb741ef28ba8c8bc194779f" name="/WindowsAzure/Table/TableRestProxy.php" role="php" />
+   <file baseinstalldir="/" md5sum="a3ddee7c50f154456eab583b0e35e506" name="/WindowsAzure/Table/Internal/AtomReaderWriter.php" role="php" />
+   <file baseinstalldir="/" md5sum="2d9bac2aa03c6a00d5276351dc6efe48" name="/WindowsAzure/Table/Internal/IAtomReaderWriter.php" role="php" />
+   <file baseinstalldir="/" md5sum="4320b4b242ce0ae31300ce3006049bf6" name="/WindowsAzure/Table/Internal/IMimeReaderWriter.php" role="php" />
+   <file baseinstalldir="/" md5sum="f486b38b6db7d8b5f0a4d93b6b10f552" name="/WindowsAzure/Table/Internal/ITable.php" role="php" />
+   <file baseinstalldir="/" md5sum="d519dc3f118f5a1f454a55b88615a233" name="/WindowsAzure/Table/Internal/MimeReaderWriter.php" role="php" />
+   <file baseinstalldir="/" md5sum="2f485a15a9295cb903956a7828ac5c07" name="/WindowsAzure/Table/Models/BatchError.php" role="php" />
+   <file baseinstalldir="/" md5sum="7c84adf3e080bbc0dfaad6a866701c99" name="/WindowsAzure/Table/Models/BatchOperation.php" role="php" />
+   <file baseinstalldir="/" md5sum="636ae888e229deaf808dbf02a9d4ab61" name="/WindowsAzure/Table/Models/BatchOperationParameterName.php" role="php" />
+   <file baseinstalldir="/" md5sum="d8bba3aa2d06409e5f240ee16392c9fc" name="/WindowsAzure/Table/Models/BatchOperations.php" role="php" />
+   <file baseinstalldir="/" md5sum="6e5ff4dfcf08cfc357b487068cc79919" name="/WindowsAzure/Table/Models/BatchOperationType.php" role="php" />
+   <file baseinstalldir="/" md5sum="72fd17369d9fe7ef80c6543e74edcfda" name="/WindowsAzure/Table/Models/BatchResult.php" role="php" />
+   <file baseinstalldir="/" md5sum="60c2d80c9fee12d3a2b585c135b76e30" name="/WindowsAzure/Table/Models/DeleteEntityOptions.php" role="php" />
+   <file baseinstalldir="/" md5sum="db046ca411e22b006f0778b4b2c846c2" name="/WindowsAzure/Table/Models/EdmType.php" role="php" />
+   <file baseinstalldir="/" md5sum="d6aef40cf38f26f2d6028e154dd77553" name="/WindowsAzure/Table/Models/Entity.php" role="php" />
+   <file baseinstalldir="/" md5sum="1eb52eafacecb8676e1dc4447037ab75" name="/WindowsAzure/Table/Models/GetEntityResult.php" role="php" />
+   <file baseinstalldir="/" md5sum="880480c759f0f2d9c24f94858bfdb5eb" name="/WindowsAzure/Table/Models/GetTableResult.php" role="php" />
+   <file baseinstalldir="/" md5sum="dad1962c7037c5f62f42b5d154c35df3" name="/WindowsAzure/Table/Models/InsertEntityResult.php" role="php" />
+   <file baseinstalldir="/" md5sum="6400eed79e7b017c5210c36999f1bff0" name="/WindowsAzure/Table/Models/Property.php" role="php" />
+   <file baseinstalldir="/" md5sum="bff43d61f654a4f22553ada4dc236160" name="/WindowsAzure/Table/Models/Query.php" role="php" />
+   <file baseinstalldir="/" md5sum="0e7057b5dec6d818564049feb62b228b" name="/WindowsAzure/Table/Models/QueryEntitiesOptions.php" role="php" />
+   <file baseinstalldir="/" md5sum="0918cce2285c227440c1b514ba82cea5" name="/WindowsAzure/Table/Models/QueryEntitiesResult.php" role="php" />
+   <file baseinstalldir="/" md5sum="046f652a3e419ad39f938e90bd1cbd6b" name="/WindowsAzure/Table/Models/QueryTablesOptions.php" role="php" />
+   <file baseinstalldir="/" md5sum="bb6dbcbb5abb292890a226b509f388bb" name="/WindowsAzure/Table/Models/QueryTablesResult.php" role="php" />
+   <file baseinstalldir="/" md5sum="26bef992936d4d744e96abb2d9297f74" name="/WindowsAzure/Table/Models/TableServiceOptions.php" role="php" />
+   <file baseinstalldir="/" md5sum="ba469282d3e4780a674f0475b8e80e65" name="/WindowsAzure/Table/Models/UpdateEntityResult.php" role="php" />
+   <file baseinstalldir="/" md5sum="f66f0a30bde1fc3d4e1f0f8593c69efd" name="/WindowsAzure/Table/Models/Filters/BinaryFilter.php" role="php" />
+   <file baseinstalldir="/" md5sum="d3154790fee759beea90d39ff2e9484e" name="/WindowsAzure/Table/Models/Filters/ConstantFilter.php" role="php" />
+   <file baseinstalldir="/" md5sum="c3c6ab7c05f9f23882a0f7ee0717474a" name="/WindowsAzure/Table/Models/Filters/Filter.php" role="php" />
+   <file baseinstalldir="/" md5sum="9155264bacccb2a40e792e183987b7e6" name="/WindowsAzure/Table/Models/Filters/PropertyNameFilter.php" role="php" />
+   <file baseinstalldir="/" md5sum="2a4a50f4b3027030210793230d53b036" name="/WindowsAzure/Table/Models/Filters/QueryStringFilter.php" role="php" />
+   <file baseinstalldir="/" md5sum="97a5c08fa89e9013d12673eaa6801361" name="/WindowsAzure/Table/Models/Filters/UnaryFilter.php" role="php" />
    <file baseinstalldir="/" md5sum="34f8c1142fd6208a8be89399cb521df9" name="LICENSE.txt" role="data" />
-   <file baseinstalldir="/" md5sum="e344910f0eef9859743e9b13cdd88345" name="README.md" role="data" />
+   <file baseinstalldir="/" md5sum="78b6b26ec8d53a13de89c1b62cf78ece" name="README.md" role="data" />
   </dir>
  </contents>
  <dependencies>
@@ -326,6 +317,21 @@ It is build as a thin REST call wrapper where each server call maps to a single 
  </dependencies>
  <phprelease />
  <changelog>
+  <release>
+   <version>
+    <release>0.3.0</release>
+    <api>0.3.0</api>
+   </version>
+   <stability>
+    <release>beta</release>
+    <api>beta</api>
+   </stability>
+   <date>2012-07-17</date>
+   <license uri="http://www.apache.org/licenses/LICENSE-2.0">Apache 2.0</license>
+   <notes>
+- Added Cloud Configuration Manager.
+   </notes>
+  </release>
   <release>
    <version>
     <release>0.2.0</release>
