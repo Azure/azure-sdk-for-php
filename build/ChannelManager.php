@@ -27,13 +27,11 @@ require_once '../WindowsAzure/WindowsAzure.php';
 require_once '../defaults.php';
 use WindowsAzure\Common\Internal\Utilities;
 use WindowsAzure\Common\Internal\Serialization\XmlSerializer;
-use WindowsAzure\Common\Configuration;
-use WindowsAzure\Blob\BlobSettings;
-use WindowsAzure\Blob\BlobService;
 use WindowsAzure\Blob\Models\CreateContainerOptions;
 use WindowsAzure\Blob\Models\PublicAccessType;
 use WindowsAzure\Common\ServiceException;
 use WindowsAzure\Blob\Models\CreateBlobOptions;
+use WindowsAzure\Common\ServicesBuilder;
 
 /**
  * Manages a PEAR channel.
@@ -60,12 +58,12 @@ class ChannelManager
      */
     private static function _createBlobRestProxy()
     {
-        $config = new Configuration();
-        $config->setProperty(BlobSettings::ACCOUNT_KEY, getenv('CHANNEL_STORAGE_SERVICE_KEY'));
-        $config->setProperty(BlobSettings::ACCOUNT_NAME, CHANNEL_STORAGE_SERVICE_NAME);
-        $config->setProperty(BlobSettings::URI, CHANNEL_URL);
+		$accountKey       = getenv('CHANNEL_STORAGE_SERVICE_KEY');
+		$accountName      = CHANNEL_STORAGE_SERVICE_NAME;
+		$blobEndpointUri  = CHANNEL_URL;
+		$connectionString = "BlobEndpoint=$blobEndpointUri;AccountName=$accountName;AccountKey=$accountKey";        
         
-        return BlobService::create($config);
+        return ServicesBuilder::getInstance()->createBlobService($connectionString);
     }
     
     /**
