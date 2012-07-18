@@ -55,7 +55,7 @@ class CreateBlobPagesResultTest extends \PHPUnit_Framework_TestCase
         
         // Assert
         $this->assertEquals($expectedDate, $actual->getLastModified());
-        $this->assertEquals($expected['Etag'], $actual->getEtag());
+        $this->assertEquals($expected['Etag'], $actual->getETag());
         $this->assertEquals($expected['Content-MD5'], $actual->getContentMD5());
         $this->assertEquals(intval($expected['x-ms-blob-sequence-number']), $actual->getSequenceNumber());
     }
@@ -79,21 +79,21 @@ class CreateBlobPagesResultTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers WindowsAzure\Blob\Models\CreateBlobPagesResult::setEtag
-     * @covers WindowsAzure\Blob\Models\CreateBlobPagesResult::getEtag
+     * @covers WindowsAzure\Blob\Models\CreateBlobPagesResult::setETag
+     * @covers WindowsAzure\Blob\Models\CreateBlobPagesResult::getETag
      */
-    public function testSetEtag()
+    public function testSetETag()
     {
         // Setup
         $expected = '0x8CAFB82EFF70C46';
         $options = new CreateBlobPagesResult();
-        $options->setEtag($expected);
+        $options->setETag($expected);
         
         // Test
-        $options->setEtag($expected);
+        $options->setETag($expected);
         
         // Assert
-        $this->assertEquals($expected, $options->getEtag());
+        $this->assertEquals($expected, $options->getETag());
     }
     
     /**
@@ -133,4 +133,4 @@ class CreateBlobPagesResultTest extends \PHPUnit_Framework_TestCase
     }
 }
 
-?>
+

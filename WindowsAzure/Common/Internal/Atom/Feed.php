@@ -657,32 +657,29 @@ class Feed extends AtomBase
             $this->generator->writeXml($xmlWriter);
         } 
 
-        if (!is_null($this->icon)) {
-            $xmlWriter->writeElementNS(
-                'atom', 
-                'icon', 
-                Resources::ATOM_NAMESPACE,
-                $this->icon
-            );
-        }
+        $this->writeOptionalElementNS(
+            $xmlWriter,
+            'atom', 
+            'icon', 
+            Resources::ATOM_NAMESPACE,
+            $this->icon
+        );
 
-        if (!is_null($this->logo)) {
-            $xmlWriter->writeElementNS(
-                'atom',
-                'logo', 
-                Resources::ATOM_NAMESPACE,
-                $this->logo
-            );
-        }
-
-        if (!is_null($this->id)) {
-            $xmlWriter->writeElementNS(
-                'atom',
-                'id', 
-                Resources::ATOM_NAMESPACE,
-                $this->id
-            );
-        }
+        $this->writeOptionalElementNS(
+            $xmlWriter,
+            'atom',
+            'logo', 
+            Resources::ATOM_NAMESPACE,
+            $this->logo
+        );
+        
+        $this->writeOptionalElementNS(
+            $xmlWriter,
+            'atom',
+            'id', 
+            Resources::ATOM_NAMESPACE,
+            $this->id
+        );
 
         if (!is_null($this->link)) {
             $this->writeArrayItem(
@@ -692,42 +689,39 @@ class Feed extends AtomBase
             );
         }
 
-        if (!is_null($this->rights)) {
-            $xmlWriter->writeElementNS(
-                'atom',
-                'rights', 
-                Resources::ATOM_NAMESPACE,
-                $this->rights
-            );
-        }
+        $this->writeOptionalElementNS(
+            $xmlWriter,
+            'atom',
+            'rights', 
+            Resources::ATOM_NAMESPACE,
+            $this->rights
+        );
 
-        if (!is_null($this->subtitle)) {
-            $xmlWriter->writeElementNS(
-                'atom',
-                'subtitle', 
-                Resources::ATOM_NAMESPACE,
-                $this->subtitle
-            );
-        }
+        $this->writeOptionalElementNS(
+            $xmlWriter,
+            'atom',
+            'subtitle', 
+            Resources::ATOM_NAMESPACE,
+            $this->subtitle
+        );
+
+        $this->writeOptionalElementNS(
+            $xmlWriter,
+            'atom',
+            'title', 
+            Resources::ATOM_NAMESPACE,
+            $this->title
+        );
         
-        if (!is_null($this->title)) {
-            $xmlWriter->writeElementNS(
-                'atom',
-                'title',
-                Resources::ATOM_NAMESPACE,
-                $this->title
-            );
-        }
-
         if (!is_null($this->updated)) {
             $xmlWriter->writeElementNS(
-                'atom', 
+                'atom',
                 'updated', 
-                Resources::ATOM_NAMESPACE, 
+                Resources::ATOM_NAMESPACE,
                 $this->updated->format(\DateTime::ATOM)
             );
         }
 
     }
 }
-?>
+

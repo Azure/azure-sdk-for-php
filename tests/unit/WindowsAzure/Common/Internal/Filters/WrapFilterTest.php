@@ -29,6 +29,7 @@ use WindowsAzure\Common\Internal\Http\HttpClient;
 use WindowsAzure\Common\Internal\Http\Url;
 use WindowsAzure\Common\Internal\Resources;
 use WindowsAzure\Common\Internal\InvalidArgumentTypeException;
+use WindowsAzure\Common\ServicesBuilder;
 
 /**
  * Unit tests for class WrapFilterTest
@@ -43,6 +44,17 @@ use WindowsAzure\Common\Internal\InvalidArgumentTypeException;
  */
 class WrapFilterTest extends \PHPUnit_Framework_TestCase
 {
+    private $_wrapRestProxy;
+    
+    public function setUp()
+    {
+        $builder = new ServicesBuilder();
+        $wrapUri = 'https://' . TestResources::serviceBusNamespace() .'-sb.accesscontrol.windows.net/WRAPv0.9';
+        $wrapBuilder = new \ReflectionMethod($builder, 'createWrapService');
+        $wrapBuilder->setAccessible(true);
+        $this->_wrapRestProxy = $wrapBuilder->invoke($builder, $wrapUri);
+    }
+    
     /**
      * @covers WindowsAzure\Common\Internal\Filters\WrapFilter::handleRequest
      * @covers WindowsAzure\Common\Internal\Filters\WrapFilter::__construct
@@ -67,7 +79,8 @@ class WrapFilterTest extends \PHPUnit_Framework_TestCase
         $wrapFilter = new WrapFilter(
             $wrapUri,
             TestResources::wrapAuthenticationName(),
-            TestResources::wrapPassword()
+            TestResources::wrapPassword(),
+            $this->_wrapRestProxy
         );
         
         // Test
@@ -99,7 +112,8 @@ class WrapFilterTest extends \PHPUnit_Framework_TestCase
         $wrapFilter = new WrapFilter(
             $wrapUri,
             TestResources::wrapAuthenticationName(),
-            TestResources::wrapPassword()
+            TestResources::wrapPassword(),
+            $this->_wrapRestProxy
         );
         // Test
         $response = $wrapFilter->handleResponse($channel, $response);
@@ -109,4 +123,4 @@ class WrapFilterTest extends \PHPUnit_Framework_TestCase
     }
 }
 
-?>
+

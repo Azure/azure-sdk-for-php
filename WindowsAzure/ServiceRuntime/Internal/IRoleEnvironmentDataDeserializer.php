@@ -47,4 +47,3 @@ interface IRoleEnvironmentDataDeserializer
     public function deserialize($document);
 }
 
-?>

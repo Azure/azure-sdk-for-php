@@ -38,22 +38,22 @@ use WindowsAzure\Table\Models\UpdateEntityResult;
 class UpdateEntityResultTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @covers WindowsAzure\Table\Models\UpdateEntityResult::setEtag
-     * @covers WindowsAzure\Table\Models\UpdateEntityResult::getEtag
+     * @covers WindowsAzure\Table\Models\UpdateEntityResult::setETag
+     * @covers WindowsAzure\Table\Models\UpdateEntityResult::getETag
      */
-    public function testSetEtag()
+    public function testSetETag()
     {
         // Setup
         $expected = '0x8CAFB82EFF70C46';
         $entity = new UpdateEntityResult();
-        $entity->setEtag($expected);
+        $entity->setETag($expected);
         
         // Test
-        $entity->setEtag($expected);
+        $entity->setETag($expected);
         
         // Assert
-        $this->assertEquals($expected, $entity->getEtag());
+        $this->assertEquals($expected, $entity->getETag());
     }
 }
 
-?>
+

@@ -54,4 +54,3 @@ interface IRuntimeClientFactory
     public function createRuntimeClient($path);
 }
 
-?>

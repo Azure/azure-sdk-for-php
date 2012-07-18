@@ -24,13 +24,11 @@
  
 namespace WindowsAzure\ServiceBus\Internal;
 use WindowsAzure\Common\Configuration;
-use WindowsAzure\Common\Internal\IServiceBuilder;
+use WindowsAzure\Common\ServicesBuilder;
 use WindowsAzure\Common\Internal\Resources;
 use WindowsAzure\Common\Internal\Validate;
 use WindowsAzure\ServiceBus\WrapRestProxy;
 use WindowsAzure\ServiceBus\Models\ActiveToken;
-use WindowsAzure\ServiceBus\ServiceBusSettings;
-use WindowsAzure\ServiceBus\WrapService;
 
 /**
  * Manages WRAP tokens. 
@@ -84,48 +82,23 @@ class WrapTokenManager
     /**
      * Creates a WRAP token manager with specified parameters. 
      *
-     * @param string           $wrapUri      The URI
-     * of the WRAP service.
-     * @param string           $wrapName     The user name
-     * of the WRAP service.
-     * @param string           $wrapPassword The password
-     * of the WRAP service.
-     * @param IServicesBuilder $builder      The builder
-     * object.
-     * 
-     * @throws \InvalidArgumentException
-     * 
-     * @return WindowsAzure\ServiceBus\Internal\WrapTokenManager
+     * @param string $wrapUri       The URI of the WRAP service.
+     * @param string $wrapName      The user name of the WRAP service.
+     * @param string $wrapPassword  The password of the WRAP service.
+     * @param IWrap  $wrapRestProxy The WRAP service REST proxy.
      */
-    public function __construct($wrapUri, $wrapName, $wrapPassword, $builder = null)
+    public function __construct($wrapUri, $wrapName, $wrapPassword, $wrapRestProxy)
     {
         Validate::isString($wrapUri, 'wrapUri');
         Validate::isString($wrapName, 'wrapName');
         Validate::isString($wrapPassword, 'wrapPassword');
+        Validate::notNullOrEmpty($wrapRestProxy, 'wrapRestProxy');
 
-        $this->_wrapUri      = $wrapUri;
-        $this->_wrapName     = $wrapName;
-        $this->_wrapPassword = $wrapPassword;
-
-        $config = new Configuration();
-        $config->setProperty(
-            ServiceBusSettings::WRAP_URI, 
-            $this->_wrapUri
-        );
-
-        $config->setProperty(
-            ServiceBusSettings::WRAP_NAME, 
-            $this->_wrapName
-        );
-
-        $config->setProperty(
-            ServiceBusSettings::WRAP_PASSWORD,
-            $this->_wrapPassword
-        );
-
-        $this->_wrapRestProxy = WrapService::create($config, $builder);
-
-        $this->_activeTokens = array();
+        $this->_wrapUri       = $wrapUri;
+        $this->_wrapName      = $wrapName;
+        $this->_wrapPassword  = $wrapPassword;
+        $this->_wrapRestProxy = $wrapRestProxy;
+        $this->_activeTokens  = array();
         
     }    
 
@@ -258,4 +231,4 @@ class WrapTokenManager
     }
 }
 
-?>
+

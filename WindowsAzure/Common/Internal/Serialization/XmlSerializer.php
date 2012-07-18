@@ -147,7 +147,7 @@ class XmlSerializer implements ISerializer
          
         $xmlWriter->startElement($rootName);
         if (!is_null($attributes)) {
-            foreach(array_keys($attributes) as $attributeKey) {
+            foreach (array_keys($attributes) as $attributeKey) {
                 $xmlWriter->writeAttribute(
                     $attributeKey, 
                     $attributes[$attributeKey]
@@ -242,4 +242,4 @@ class XmlSerializer implements ISerializer
     }
 }
 
-?>
+

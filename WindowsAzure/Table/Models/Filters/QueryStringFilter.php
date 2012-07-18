@@ -64,4 +64,4 @@ class QueryStringFilter extends Filter
     }
 }
 
-?>
+

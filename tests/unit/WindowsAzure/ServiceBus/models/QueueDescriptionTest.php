@@ -295,4 +295,4 @@ class QueueDescriptionTest extends \PHPUnit_Framework_TestCase
 
 }
 
-?>
+

@@ -27,24 +27,16 @@ namespace Tests\Functional\WindowsAzure\ServiceBus;
 use Tests\Framework\FiddlerFilter;
 use Tests\Framework\ServiceBusRestProxyTestBase;
 use WindowsAzure\Common\Internal\Utilities;
-use WindowsAzure\ServiceBus\Models\QueueInfo;
 use WindowsAzure\ServiceBus\Models\ReceiveMessageOptions;
+use WindowsAzure\ServiceBus\Models\QueueInfo;
 
 class IntegrationTestBase extends ServiceBusRestProxyTestBase
 {
-    /**
-     * @covers WindowsAzure\ServiceBus\ServiceBusRestProxy::withFilter
-     */
-    public function __construct()
-    {
-        parent::__construct();
-        $fiddlerFilter = new FiddlerFilter();
-        $this->restProxy = $this->restProxy->withFilter($fiddlerFilter);
-    }
-
     public function setUp()
     {
         parent::setUp();
+        $fiddlerFilter = new FiddlerFilter();
+        $this->restProxy = $this->restProxy->withFilter($fiddlerFilter);
     }
 
     public static function setUpBeforeClass()
@@ -61,6 +53,7 @@ class IntegrationTestBase extends ServiceBusRestProxyTestBase
     public static function initialize()
     {
         $inst = new IntegrationTestBase();
+        $inst->setUp();
         $restProxy = $inst->restProxy;
         $testAlphaExists = false;
         $queues = $restProxy->listQueues()->getQueueInfos();
@@ -76,13 +69,14 @@ class IntegrationTestBase extends ServiceBusRestProxyTestBase
                         try {
                             $restProxy->receiveQueueMessage($queueName, $opts);
                         } catch (\Exception $ex) {
+                            error_log($ex->getMessage());
                         }
                     }
-                }
-                else {
+                } else {
                     try {
                         $restProxy->deleteQueue($queueName);
                     } catch (\Exception $ex) {
+                        error_log($ex->getMessage());
                     }
                 }
             }
@@ -93,6 +87,7 @@ class IntegrationTestBase extends ServiceBusRestProxyTestBase
                 try {
                     $restProxy->deleteTopic($topicName);
                 } catch (\Exception $ex) {
+                    error_log($ex->getMessage());
                 }
             }
         }
@@ -101,9 +96,10 @@ class IntegrationTestBase extends ServiceBusRestProxyTestBase
             try {
                 $restProxy->createQueue(new QueueInfo('TestAlpha'));
             } catch (\Exception $ex) {
+                error_log($ex->getMessage());
             }
         }
     }
 }
 
-?>
+

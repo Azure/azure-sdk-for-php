@@ -15,31 +15,22 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   WindowsAzure\Queue
+ * @package   Tests\Functional\WindowsAzure\Table\Models
  * @author    Azure PHP SDK <azurephpsdk@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
- 
-namespace WindowsAzure\Queue;
 
-/**
- * Basic Queue configuration elements.
- *
- * @category  Microsoft
- * @package   WindowsAzure\Queue
- * @author    Azure PHP SDK <azurephpsdk@microsoft.com>
- * @copyright 2012 Microsoft Corporation
- * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
- * @version   Release: @package_version@
- * @link      https://github.com/windowsazure/azure-sdk-for-php
- */
-class QueueSettings
+namespace Tests\Functional\WindowsAzure\Table\Models;
+
+class BatchWorkerConfig
 {
-    const ACCOUNT_NAME = 'queue.accountName';
-    const ACCOUNT_KEY  = 'queue.accountKey';
-    const URI          = 'queue.uri';
+    public $opType;
+    public $concurType;
+    public $mutatePivot;
+    public $ent;
+    public $options;
 }
 
-?>
+

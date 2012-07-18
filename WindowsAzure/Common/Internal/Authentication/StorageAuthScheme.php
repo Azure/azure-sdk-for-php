@@ -70,16 +70,40 @@ abstract class StorageAuthScheme
     protected function computeCanonicalizedHeaders($headers)
     {
         $canonicalizedHeaders = array();
+        $normalizedHeaders    = array();
+        $validPrefix          =  Resources::X_MS_HEADER_PREFIX;
 
-        if (!is_null($headers)) {
-            foreach ($headers as $header => $value) {
-                if (Utilities::startsWith($header, Resources::X_MS_HEADER_PREFIX)) {
-                    $canonicalizedHeaders[] = strtolower($header) . ':' . 
-                        trim($value);
-                }
+        if (is_null($normalizedHeaders)) {
+            return $canonicalizedHeaders;
+        }
+        
+        foreach ($headers as $header => $value) {            
+            // Convert header to lower case.
+            $header = strtolower($header);
+            
+            // Retrieve all headers for the resource that begin with x-ms-,
+            // including the x-ms-date header.
+            if (Utilities::startsWith($header, $validPrefix)) {
+                // Unfold the string by replacing any breaking white space 
+                // (meaning what splits the headers, which is \r\n) with a single 
+                // space.
+                $value = str_replace("\r\n", ' ', $value);
+                
+                // Trim any white space around the colon in the header.
+                $value  = ltrim($value);
+                $header = rtrim($header);
+                
+                $normalizedHeaders[$header] = $value;
             }
         }
-        sort($canonicalizedHeaders);
+        
+        // Sort the headers lexicographically by header name, in ascending order.
+        // Note that each header may appear only once in the string.
+        ksort($normalizedHeaders);
+        
+        foreach ($normalizedHeaders as $key => $value) {
+            $canonicalizedHeaders[] = $key . ':' . $value;
+        }
 
         return $canonicalizedHeaders;
     }
@@ -206,4 +230,4 @@ abstract class StorageAuthScheme
     );
 }
 
-?>
+

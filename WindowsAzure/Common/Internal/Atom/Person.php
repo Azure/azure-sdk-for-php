@@ -28,7 +28,7 @@ use WindowsAzure\Common\Internal\Resources;
 use WindowsAzure\Common\Internal\Validate;
 
 /**
- * The generator library of ATOM library.
+ * The person class of ATOM library.
  *
  * @category  Microsoft
  * @package   WindowsAzure\Common\Internal\Atom
@@ -66,7 +66,6 @@ class Person extends AtomBase
      * Creates an ATOM person instance with specified name.
      *
      * @param string $name The name of the person.
-     *
      */
     public function __construct($name = Resources::EMPTY_STRING)
     {
@@ -203,23 +202,21 @@ class Person extends AtomBase
             $this->name
         );
 
-        if (!empty($this->uri)) {
-            $xmlWriter->writeElementNS(
-                'atom',
-                'uri', 
-                Resources::ATOM_NAMESPACE,
-                $this->uri
-            );
-        }
+        $this->writeOptionalElementNS(
+            $xmlWriter,
+            'atom',
+            'uri', 
+            Resources::ATOM_NAMESPACE,
+            $this->uri
+        );
 
-        if (!empty($this->email)) {
-            $xmlWriter->writeElementNS(
-                'atom',
-                'email', 
-                Resources::ATOM_NAMESPACE,
-                $this->email
-            );
-        }
+        $this->writeOptionalElementNS(
+            $xmlWriter,
+            'atom',
+            'email', 
+            Resources::ATOM_NAMESPACE,
+            $this->email
+        );
     }
 }
-?>
+

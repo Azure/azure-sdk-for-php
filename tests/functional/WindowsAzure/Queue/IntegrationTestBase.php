@@ -26,15 +26,26 @@ namespace Tests\Functional\WindowsAzure\Queue;
 
 use Tests\Framework\FiddlerFilter;
 use Tests\Framework\QueueServiceRestProxyTestBase;
-use WindowsAzure\Queue\QueueService;
 
-class IntegrationTestBase extends QueueServiceRestProxyTestBase {
-    public function __construct()
+class IntegrationTestBase extends QueueServiceRestProxyTestBase
+{
+    public function setUp()
     {
-        parent::__construct();
+        parent::setUp();
         $fiddlerFilter = new FiddlerFilter();
         $this->restProxy = $this->restProxy->withFilter($fiddlerFilter);
     }
+
+    public static function tearDownAfterClass()
+    {
+        $integrationTestBase = new IntegrationTestBase();
+        $integrationTestBase->setUp();
+        if (!$integrationTestBase->isEmulated()) {
+            $serviceProperties = QueueServiceFunctionalTestData::getDefaultServiceProperties();
+            $integrationTestBase->restProxy->setServiceProperties($serviceProperties);
+        }
+        parent::tearDownAfterClass();
+    }
 }
 
-?>
+

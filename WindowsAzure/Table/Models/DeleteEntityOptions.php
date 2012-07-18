@@ -49,7 +49,7 @@ class DeleteEntityOptions extends TableServiceOptions
      *
      * @return string
      */
-    public function getEtag()
+    public function getETag()
     {
         return $this->_etag;
     }
@@ -57,14 +57,14 @@ class DeleteEntityOptions extends TableServiceOptions
     /**
      * Sets entity etag.
      *
-     * @param string $etag The entity Etag.
+     * @param string $etag The entity ETag.
      *
      * @return none
      */
-    public function setEtag($etag)
+    public function setETag($etag)
     {
         $this->_etag = $etag;
     }
 }
 
-?>
+

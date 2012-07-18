@@ -26,13 +26,12 @@ namespace Tests\Unit\WindowsAzure\ServiceBus\Internal;
 
 use WindowsAzure\Common\Models\ServiceProperties;
 use Tests\Framework\TestResources;
-use Tests\Framework\WrapRestProxyTestBase;
 use WindowsAzure\Common\Configuration;
 use WindowsAzure\Common\ServiceException;
 use WindowsAzure\Common\Internal\Utilities;
 use WindowsAzure\ServiceBus\WrapRestProxy;
-use WindowsAzure\ServiceBus\ServiceBusSettings;
 use WindowsAzure\Common\Internal\Resources;
+use WindowsAzure\Common\ServicesBuilder;
 
 /**
  * Unit tests for WrapRestProxy class
@@ -45,13 +44,24 @@ use WindowsAzure\Common\Internal\Resources;
  * @version   Release: @package_version@
  * @link      https://github.com/WindowsAzure/azure-sdk-for-php
  */
-class WrapRestProxyTest extends WrapRestProxyTestBase
+class WrapRestProxyTest extends \PHPUnit_Framework_TestCase
 {
+    private $_wrapRestProxy;
+    
+    public function setUp()
+    {
+        $builder = new ServicesBuilder();
+        $wrapUri = 'https://' . TestResources::serviceBusNamespace() .'-sb.accesscontrol.windows.net/WRAPv0.9';
+        $wrapBuilder = new \ReflectionMethod($builder, 'createWrapService');
+        $wrapBuilder->setAccessible(true);
+        $this->_wrapRestProxy = $wrapBuilder->invoke($builder, $wrapUri);
+    }
+    
     /**
      * @covers WindowsAzure\ServiceBus\WrapRestProxy::__construct
      * @covers WindowsAzure\ServiceBus\WrapRestProxy::wrapAccessToken
      */
-    public function testWrapAccessToken() 
+    public function testWrapAccessToken()
     {
         $wrapUri = 'https://'
             .TestResources::serviceBusNamespace()
@@ -62,7 +72,7 @@ class WrapRestProxyTest extends WrapRestProxyTestBase
             .TestResources::serviceBusNameSpace()
             .'.servicebus.windows.net';
         
-        $wrapAccessTokenResult = $this->restProxy->wrapAccessToken(
+        $wrapAccessTokenResult = $this->_wrapRestProxy->wrapAccessToken(
             $wrapUri, 
             $wrapUserName, 
             $wrapPassword, 
@@ -75,4 +85,4 @@ class WrapRestProxyTest extends WrapRestProxyTestBase
     
 }
 
-?>
+

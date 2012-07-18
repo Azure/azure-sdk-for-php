@@ -55,4 +55,3 @@ class RoleEnvironmentTopologyChangeTest extends \PHPUnit_Framework_TestCase
     }
 }
 
-?>

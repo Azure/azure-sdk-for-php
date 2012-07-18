@@ -75,4 +75,4 @@ class CorrelationFilter extends Filter
         $this->_correlationId = $correlationId;
     }
 }
-?>
+

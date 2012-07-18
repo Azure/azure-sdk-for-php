@@ -23,14 +23,12 @@
  */
 
 namespace Tests\Unit\WindowsAzure\ServiceBus\Internal;
-
+use WindowsAzure\Common\ServicesBuilder;
 use WindowsAzure\Common\Models\ServiceProperties;
 use Tests\Framework\TestResources;
-use Tests\Framework\WrapRestProxyTestBase;
 use WindowsAzure\Common\Configuration;
 use WindowsAzure\Common\ServiceException;
 use WindowsAzure\Common\Internal\WindowsAzureUtilities;
-use WindowsAzure\ServiceBus\ServiceBusSettings;
 use WindowsAzure\ServiceBus\WrapRestProxy;
 use WindowsAzure\ServiceBus\Internal\WrapTokenManager;
 use WindowsAzure\Common\Internal\Resources;
@@ -48,6 +46,17 @@ use WindowsAzure\Common\Internal\Resources;
  */
 class WrapTokenManagerTest extends \PHPUnit_Framework_TestCase
 {
+    private $_wrapRestProxy;
+    
+    public function setUp()
+    {
+        $builder = new ServicesBuilder();
+        $wrapUri = 'https://' . TestResources::serviceBusNamespace() .'-sb.accesscontrol.windows.net/WRAPv0.9';
+        $wrapBuilder = new \ReflectionMethod($builder, 'createWrapService');
+        $wrapBuilder->setAccessible(true);
+        $this->_wrapRestProxy = $wrapBuilder->invoke($builder, $wrapUri);
+    }
+    
     /**
      * @covers WindowsAzure\ServiceBus\Internal\WrapTokenManager::__construct
      * @covers WindowsAzure\ServiceBus\Internal\WrapTokenManager::getAccessToken
@@ -69,10 +78,11 @@ class WrapTokenManagerTest extends \PHPUnit_Framework_TestCase
         $wrapTokenManager = new WrapTokenManager(
             $wrapUri,
             $wrapUserName,
-            $wrapPassword
+            $wrapPassword,
+            $this->_wrapRestProxy
         );
         
-        // Asserts
+        // Assert
         $accessToken = $wrapTokenManager->getAccessToken($scope);
         parse_str($accessToken, $parsedAccessToken);
         $this->assertNotNull($accessToken);
@@ -82,6 +92,7 @@ class WrapTokenManagerTest extends \PHPUnit_Framework_TestCase
     
     /**
      * @covers WindowsAzure\ServiceBus\Internal\WrapTokenManager::__construct
+     * @covers WindowsAzure\ServiceBus\Internal\WrapTokenManager::getAccessToken
      */
     public function testGetAccessTokenFailedWithInvalidWrapUri()
     {
@@ -99,14 +110,17 @@ class WrapTokenManagerTest extends \PHPUnit_Framework_TestCase
         $wrapTokenManager = new WrapTokenManager(
             $wrapUri,
             $wrapUserName,
-            $wrapPassword
+            $wrapPassword,
+            $this->_wrapRestProxy
         );
         
-        $accessToken = $wrapTokenManager->getAccessToken($scope);
+        // Test
+        $wrapTokenManager->getAccessToken($scope);
     }
     
     /**
      * @covers WindowsAzure\ServiceBus\Internal\WrapTokenManager::__construct
+     * @covers WindowsAzure\ServiceBus\Internal\WrapTokenManager::getAccessToken
      */
     public function testGetAccessTokenFailedWithInvalidUserName()
     {
@@ -126,15 +140,18 @@ class WrapTokenManagerTest extends \PHPUnit_Framework_TestCase
         $wrapTokenManager = new WrapTokenManager(
             $wrapUri,
             $wrapUserName,
-            $wrapPassword
+            $wrapPassword,
+            $this->_wrapRestProxy
         );
 
-        $accessToken = $wrapTokenManager->getAccessToken($scope);
+        // Test
+        $wrapTokenManager->getAccessToken($scope);
         
     }
     
     /**
      * @covers WindowsAzure\ServiceBus\Internal\WrapTokenManager::__construct
+     * @covers WindowsAzure\ServiceBus\Internal\WrapTokenManager::getAccessToken
      */
     public function testGetAccesTokenFailedWithInvalidPassword()
     {
@@ -154,12 +171,14 @@ class WrapTokenManagerTest extends \PHPUnit_Framework_TestCase
         $wrapTokenManager = new WrapTokenManager(
             $wrapUri,
             $wrapUserName,
-            $wrapPassword
+            $wrapPassword,
+            $this->_wrapRestProxy
         );
         
-        $accessToken = $wrapTokenManager->getAccessToken($scope);
+        // Test
+        $wrapTokenManager->getAccessToken($scope);
         
     }
 }
 
-?>
+

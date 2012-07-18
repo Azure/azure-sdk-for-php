@@ -161,7 +161,7 @@ class BlobRestProxy extends ServiceRestProxy implements IBlob
         $properties->setContentLength($cLength);
         $properties->setContentMD5($cMD5);
         $properties->setContentType($cType);
-        $properties->setEtag($etag);
+        $properties->setETag($etag);
         $properties->setLastModified(Utilities::rfc1123ToDateTime($d));
         $properties->setLeaseStatus($lStatus);
         
@@ -226,7 +226,7 @@ class BlobRestProxy extends ServiceRestProxy implements IBlob
         $metadata = $this->getMetadataArray($response->getHeader());
         $date     = $response->getHeader(Resources::LAST_MODIFIED);
         $date     = Utilities::rfc1123ToDateTime($date);
-        $result->setEtag($response->getHeader(Resources::ETAG));
+        $result->setETag($response->getHeader(Resources::ETAG));
         $result->setMetadata($metadata);
         $result->setLastModified($date);
         
@@ -2334,4 +2334,4 @@ class BlobRestProxy extends ServiceRestProxy implements IBlob
     }
 }
 
-?>
+

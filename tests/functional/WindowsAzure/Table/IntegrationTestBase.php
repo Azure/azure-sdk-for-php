@@ -26,15 +26,26 @@ namespace Tests\Functional\WindowsAzure\Table;
 
 use Tests\Framework\FiddlerFilter;
 use Tests\Framework\TableServiceRestProxyTestBase;
-use WindowsAzure\Table\TableService;
 
-class IntegrationTestBase extends TableServiceRestProxyTestBase {
-    public function __construct()
+class IntegrationTestBase extends TableServiceRestProxyTestBase
+{
+    public function setUp()
     {
-        parent::__construct();
+        parent::setUp();
         $fiddlerFilter = new FiddlerFilter();
         $this->restProxy = $this->restProxy->withFilter($fiddlerFilter);
     }
+
+    public static function tearDownAfterClass()
+    {
+        $integrationTestBase = new IntegrationTestBase();
+        $integrationTestBase->setUp();
+        if (!$integrationTestBase->isEmulated()) {
+            $serviceProperties = TableServiceFunctionalTestData::getDefaultServiceProperties();
+            $integrationTestBase->restProxy->setServiceProperties($serviceProperties);
+        }
+        parent::tearDownAfterClass();
+    }
 }
 
-?>
+

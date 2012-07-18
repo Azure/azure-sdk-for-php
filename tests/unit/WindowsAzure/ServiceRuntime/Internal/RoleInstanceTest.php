@@ -114,4 +114,3 @@ class RoleInstanceTest extends \PHPUnit_Framework_TestCase
     }
 }
 
-?>

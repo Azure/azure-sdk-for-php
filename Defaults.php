@@ -32,8 +32,8 @@ const CHANNEL_MAIN_CONTAINER = '$root';
 const CHANNEL_GET_CONTAINER = 'get';
 const CHANNEL_REST_CONTAINER = 'rest';
 const PACKAGE_NAME = 'WindowsAzure';
-const PACKAGE_RELEASE_VERSION = '0.2.0';
-const PACKAGE_API_VERSION = '0.2.0';
+const PACKAGE_RELEASE_VERSION = '0.3.0';
+const PACKAGE_API_VERSION = '0.3.0';
 const PACKAGE_RELEASE_STATE = 'beta';
 const PACKAGE_API_STATE = 'beta';
 const PACKAGE_MIN_PHP_VERSION = '5.3.0';
@@ -47,10 +47,7 @@ Queues, Service Runtime, Service Management and Service Bus (Queues, Topics) RES
 It is build as a thin REST call wrapper where each server call maps to a single method call within the library.
 ';
 const PACKAGE_RELEASE_NOTES = '
-- Added Service Bus Support
-	* Queues: create, list and delete queues; send, receive, unlock and delete messages
-	* Topics: create, list, and delete topics; create, list, and delete subscriptions; send, receive, unlock and delete messages; create, list, and delete rules
-- Added Composer package
+- Added Cloud Configuration Manager.
 ';
 $dependencies = array(
     array('required', 'HTTP_Request2',            'pear.php.net'),
@@ -70,4 +67,3 @@ $include = array(
 	'WindowsAzure/'
 );
 
-?>

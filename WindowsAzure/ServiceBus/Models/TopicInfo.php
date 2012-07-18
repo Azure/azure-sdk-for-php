@@ -65,7 +65,6 @@ class TopicInfo extends Entry
      * @param string           $title            The name of the topic.
      * @param TopicDescription $topicDescription The description of the 
      * topic.
-     *
      */
     public function __construct(
         $title = Resources::EMPTY_STRING, 
@@ -278,9 +277,9 @@ class TopicInfo extends Entry
      * @return none
      */
     public function setDuplicateDetectionHistoryTimeWindow(
-    $duplicateDetectionHistoryTimeWindow
+        $duplicateDetectionHistoryTimeWindow
     ) {
-        $this->_topicDescription->setduplicateDetectionHistoryTimeWindow( 
+        $this->_topicDescription->setduplicateDetectionHistoryTimeWindow(
             $duplicateDetectionHistoryTimeWindow
         );
     }

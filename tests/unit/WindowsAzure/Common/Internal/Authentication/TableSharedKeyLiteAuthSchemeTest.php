@@ -95,4 +95,4 @@ class TableSharedKeyLiteAuthSchemeTest extends \PHPUnit_Framework_TestCase
     }
 }
 
-?>
+

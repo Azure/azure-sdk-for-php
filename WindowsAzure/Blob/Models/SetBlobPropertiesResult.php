@@ -67,7 +67,7 @@ class SetBlobPropertiesResult
         $result = new SetBlobPropertiesResult();
         $date   = $headers[Resources::LAST_MODIFIED];
         $result->setLastModified(Utilities::rfc1123ToDateTime($date));
-        $result->setEtag($headers[Resources::ETAG]);
+        $result->setETag($headers[Resources::ETAG]);
         if (array_key_exists(Resources::X_MS_BLOB_SEQUENCE_NUMBER, $headers)) {
             $sNumber = $headers[Resources::X_MS_BLOB_SEQUENCE_NUMBER];
             $result->setSequenceNumber(intval($sNumber));
@@ -104,7 +104,7 @@ class SetBlobPropertiesResult
      *
      * @return string.
      */
-    public function getEtag()
+    public function getETag()
     {
         return $this->_etag;
     }
@@ -116,7 +116,7 @@ class SetBlobPropertiesResult
      *
      * @return none.
      */
-    public function setEtag($etag)
+    public function setETag($etag)
     {
         Validate::isString($etag, 'etag');
         $this->_etag = $etag;
@@ -146,4 +146,4 @@ class SetBlobPropertiesResult
     }
 }
 
-?>
+

@@ -111,4 +111,4 @@ interface IUrl
     public function setQueryVariables($array);
 }
 
-?>
+
