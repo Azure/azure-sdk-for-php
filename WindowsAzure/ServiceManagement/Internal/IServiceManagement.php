@@ -232,9 +232,11 @@ interface IServiceManagement extends FilterableService
      * Creates a new hosted service in Windows Azure.
      * 
      * @param string                     $name    The name for the hosted service
-     * that is unique within Windows Azure.
+     * that is unique within Windows Azure. This name is the DNS prefix name and can
+     * be used to access the hosted service.
      * @param string                     $label   The name for the hosted service
-     * that is base-64 encoded.
+     * that is base-64 encoded. The name can be used identify the storage account for
+     * your tracking purposes.
      * @param CreateHostedServiceOptions $options The optional parameters.
      * 
      * @return none
@@ -297,18 +299,21 @@ interface IServiceManagement extends FilterableService
      * the management service has finished processing the request, call 
      * getOperationStatus API.
      * 
-     * @param string                  $name          The name for the deployment. The 
-     * deployment name must be unique among other deployments for the hosted service.
-     * @param string                  $packageUrl    The URL that refers to the
-     * location of the service package in the Blob service. The service package can be 
-     * located in a storage account beneath the same subscription.
-     * @param string                  $configuration The base-64 encoded service 
+     * @param string                  $name           The name for the hosted service
+     * that is unique within Windows Azure.
+     * @param string                  $deploymentName The name for the deployment. 
+     * The deployment name must be unique among other deployments for the hosted
+     * service.
+     * @param string                  $packageUrl     The URL that refers to the
+     * location of the service package in the Blob service. The service package can
+     * be located in a storage account beneath the same subscription.
+     * @param string                  $configuration  The base-64 encoded service 
      * configuration file for the deployment.
-     * @param string                  $label         The name for the hosted service 
+     * @param string                  $label          The name for the hosted service 
      * that is base-64 encoded. The name can be up to 100 characters in length. It is
      * recommended that the label be unique within the subscription. The name can be
      * used identify the hosted service for your tracking purposes.
-     * @param CreateDeploymentOptions $options       The optional parameters.
+     * @param CreateDeploymentOptions $options        The optional parameters.
      * 
      * @return AsynchronousOperationResult
      * 
@@ -316,6 +321,7 @@ interface IServiceManagement extends FilterableService
      */
     public function createDeployment(
         $name,
+        $deploymentName,
         $packageUrl,
         $configuration,
         $label,
