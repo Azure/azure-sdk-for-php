@@ -70,6 +70,7 @@ To get the source code from GitHub, type
 		php composer.phar install
 
 	> **Note**
+	>
 	> On Windows, you will also need to add the Git executable to your PATH environment variable.
 
 ##Install as a PEAR package
