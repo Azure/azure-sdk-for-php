@@ -42,6 +42,7 @@ use WindowsAzure\ServiceManagement\Models\Locations;
 class ServiceManagementRestProxyTestBase extends RestProxyTestBase
 {
     protected $createdStorageServices;
+    protected $createdHostedServices;
     protected $createdAffinityGroups;
     protected $affinityGroupCount;
     
@@ -53,6 +54,7 @@ class ServiceManagementRestProxyTestBase extends RestProxyTestBase
         
         $this->createdStorageServices = array();
         $this->createdAffinityGroups = array();
+        $this->createdHostedServices = array();
         $this->affinityGroupCount = count($this->restProxy->listAffinityGroups()->getAffinityGroups());
     }
 
@@ -154,6 +156,49 @@ class ServiceManagementRestProxyTestBase extends RestProxyTestBase
         catch (\Exception $e)
         {
             // Ignore exception and continue, will assume that this storage account doesn't exist 
+            error_log($e->getMessage());
+        }
+    }
+    
+    public function createHostedService($name, $options = null)
+    {
+        $label = base64_encode($name);
+        $options = new CreateHostedServiceOptions();
+        $options->setLocation('West US');
+        
+        $result = $this->restProxy->createHostedService($name, $label, $options);
+        $this->blockUntilAsyncSucceed($result->getRequestId());
+        $this->createdHostedServices[] = $name;
+    }
+    
+    public function hostedServiceExists($name)
+    {
+        $result = $this->restProxy->listHostedServices();
+        $hostedServices = $result->getHostedServices();
+        
+        foreach ($hostedServices as $hostedService) {
+            if ($hostedService->getServiceName() == $name) {
+                return true;
+            }
+        }
+        
+        return false;
+    }
+    
+    public function deleteHostedService($name)
+    {
+        $this->restProxy->deleteHostedService($name);
+    }
+    
+    public function safeDeleteHostedService($name)
+    {
+        try
+        {
+            $this->deleteHostedService($name);
+        }
+        catch (\Exception $e)
+        {
+            // Ignore exception and continue, will assume that this hosted account doesn't exist 
             error_log($e->getMessage());
         }
     }

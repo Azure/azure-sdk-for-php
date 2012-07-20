@@ -433,5 +433,3 @@ class ServiceManagementRestProxyTest extends ServiceManagementRestProxyTestBase
         $this->assertFalse($this->storageServiceExists($name));
     }
 }
-
-
