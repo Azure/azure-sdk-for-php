@@ -24,6 +24,7 @@
     
     "autoload": {
         "psr-0": { "WindowsAzure\\": "" }
-    }
+    },
     
+    "minimum-stability": "dev"    
 }
