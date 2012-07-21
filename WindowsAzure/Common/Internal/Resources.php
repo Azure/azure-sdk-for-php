@@ -290,6 +290,8 @@ class Resources
     const XTAG_KEY_TYPE                   = 'KeyType';
     const XTAG_STORAGE_SERVICE_KEYS       = 'StorageServiceKeys';
     const XTAG_ERROR                      = 'Error';
+    const XTAG_HOSTED_SERVICE             = 'HostedService';
+    const XTAG_HOSTED_SERVICE_PROPERTIES  = 'HostedServiceProperties';
 
     // Service Bus
     const LIST_TOPICS_PATH        = '$Resources/Topics';

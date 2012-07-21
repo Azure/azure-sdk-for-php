@@ -23,12 +23,10 @@
  */
  
 namespace WindowsAzure\ServiceManagement\Models;
-use WindowsAzure\Common\Internal\Utilities;
-use WindowsAzure\Common\Internal\Resources;
-use WindowsAzure\ServiceManagement\Internal\ServicePropertiesResult;
+use WindowsAzure\Common\Internal\Validate;
 
 /**
- * The result of calling listStorageServices API.
+ * The hosted service properties.
  *
  * @category  Microsoft
  * @package   WindowsAzure\ServiceManagement\Models
@@ -38,53 +36,88 @@ use WindowsAzure\ServiceManagement\Internal\ServicePropertiesResult;
  * @version   Release: @package_version@
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
-class ListStorageServicesResult extends ServicePropertiesResult
+class HostedServiceProperties extends ServiceProperties
 {
     /**
-     * @var array
+     * @var string
      */
-    private $_storageServices;
+    private $_description;
     
     /**
-     * Creates new ListStorageServicesResult from parsed response body.
-     * 
-     * @param array $parsed The parsed response body.
-     * 
-     * @return ListStorageServicesResult
+     * @var string
      */
-    public static function create($parsed)
+    private $_location;
+    
+    /**
+     * @var string
+     */
+    private $_label;
+    
+    /**
+     * Gets the description.
+     * 
+     * @return string
+     */
+    public function getDescription()
     {
-        $result = new ListStorageServicesResult(
-            $parsed,
-            Resources::XTAG_STORAGE_SERVICE
-        );
-        
-        $result->_storageServices = $result->services;
-        
-        return $result;
+        return $this->_description;
     }
     
     /**
-     * Gets storage accounts.
+     * Sets the description.
      * 
-     * @return array
-     */
-    public function getStorageServices()
-    {
-        return $this->_storageServices;
-    }
-    
-    /**
-     * Sets storage accounts.
-     * 
-     * @param array $storageServices The storage accounts.
+     * @param string $description The description.
      * 
      * @return none
      */
-    public function setStorageServices($storageServices)
+    public function setDescription($description)
     {
-        $this->_storageServices = $storageServices;
+        Validate::isString($description, 'description');
+        
+        $this->_description = $description;
+    }
+    
+    /**
+     * Gets the label.
+     * 
+     * @return string
+     */
+    public function getLabel()
+    {
+        return $this->_label;
+    }
+    
+    /**
+     * Sets the label.
+     * 
+     * @param string $label The label.
+     * 
+     * @return none
+     */
+    public function setLabel($label)
+    {
+        $this->_label = $label;
+    }
+    
+    /**
+     * Gets the location.
+     * 
+     * @return string
+     */
+    public function getLocation()
+    {
+        return $this->_location;
+    }
+    
+    /**
+     * Sets the location.
+     * 
+     * @param string $location The location.
+     * 
+     * @return none
+     */
+    public function setLocation($location)
+    {
+        $this->_location = $location;
     }
 }
-
-

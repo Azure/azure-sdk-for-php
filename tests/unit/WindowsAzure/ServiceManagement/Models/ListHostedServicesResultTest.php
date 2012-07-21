@@ -23,10 +23,10 @@
  */
 
 namespace Tests\Unit\WindowsAzure\ServiceManagement\Models;
-use WindowsAzure\ServiceManagement\Models\ListStorageServicesResult;
+use WindowsAzure\ServiceManagement\Models\ListHostedServicesResult;
 
 /**
- * Unit tests for class ListStorageServicesResult
+ * Unit tests for class ListHostedServicesResult
  *
  * @category  Microsoft
  * @package   Tests\Unit\WindowsAzure\ServiceManagement\Models
@@ -36,22 +36,22 @@ use WindowsAzure\ServiceManagement\Models\ListStorageServicesResult;
  * @version   Release: @package_version@
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
-class ListStorageServicesResultTest extends \PHPUnit_Framework_TestCase
+class ListHostedServicesResultTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @covers WindowsAzure\ServiceManagement\Models\ListStorageServicesResult::setStorageServices
-     * @covers WindowsAzure\ServiceManagement\Models\ListStorageServicesResult::getStorageServices
+     * @covers WindowsAzure\ServiceManagement\Models\ListHostedServicesResult::setHostedServices
+     * @covers WindowsAzure\ServiceManagement\Models\ListHostedServicesResult::getHostedServices
      */
-    public function testSetStorageServices()
+    public function testSetHostedServices()
     {
         // Setup
         $expected = array();
-        $result = new ListStorageServicesResult();
+        $result = new ListHostedServicesResult();
         
         // Test
-        $result->setStorageServices($expected);
+        $result->setHostedServices($expected);
         
         // Assert
-        $this->assertEquals($expected, $result->getStorageServices());
+        $this->assertEquals($expected, $result->getHostedServices());
     }
 }

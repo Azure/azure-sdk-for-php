@@ -309,6 +309,7 @@ class ServiceManagementRestProxyTest extends ServiceManagementRestProxyTestBase
     /**
      * @covers WindowsAzure\ServiceManagement\ServiceManagementRestProxy::listStorageServices
      * @covers WindowsAzure\ServiceManagement\Models\ListStorageServicesResult::create
+     * @covers WindowsAzure\ServiceManagement\Internal\ServicePropertiesResult::__construct
      * @covers WindowsAzure\ServiceManagement\ServiceManagementRestProxy::_getStorageServicePath
      * @covers WindowsAzure\ServiceManagement\ServiceManagementRestProxy::_getPath
      * @depends testCreateStorageService
@@ -431,5 +432,69 @@ class ServiceManagementRestProxyTest extends ServiceManagementRestProxyTestBase
         
         // Assert
         $this->assertFalse($this->storageServiceExists($name));
+    }
+    
+    /**
+     * @covers WindowsAzure\ServiceManagement\ServiceManagementRestProxy::listHostedServices
+     * @covers WindowsAzure\ServiceManagement\ServiceManagementRestProxy::_getHostedServicePath
+     * @covers WindowsAzure\ServiceManagement\ServiceManagementRestProxy::_getPath
+     * @covers WindowsAzure\ServiceManagement\Models\ListHostedServicesResult::create
+     * @covers WindowsAzure\ServiceManagement\Internal\ServicePropertiesResult::__construct
+     */
+    public function testListHostedServicesEmpty()
+    {
+        // Setup
+        $currentCount = count($this->restProxy->listHostedServices()->getHostedServices());
+        $expectedCount = $currentCount;
+        
+         // Test
+        $result = $this->restProxy->listHostedServices();
+        
+        // Assert
+        $this->assertCount($expectedCount, $result->getHostedServices());
+    }
+    
+    /**
+     * @covers WindowsAzure\ServiceManagement\ServiceManagementRestProxy::listHostedServices
+     * @covers WindowsAzure\ServiceManagement\ServiceManagementRestProxy::_getHostedServicePath
+     * @covers WindowsAzure\ServiceManagement\ServiceManagementRestProxy::_getPath
+     * @covers WindowsAzure\ServiceManagement\Models\ListHostedServicesResult::create
+     * @covers WindowsAzure\ServiceManagement\Internal\ServicePropertiesResult::__construct
+     */
+    public function testListHostedServicesOne()
+    {
+        // Setup
+        $currentCount = count($this->restProxy->listHostedServices()->getHostedServices());
+        $this->createHostedServcie('testlisthostedservicesone');
+        $expectedCount = $currentCount + 1;
+        
+         // Test
+        $result = $this->restProxy->listHostedServices();
+        
+        // Assert
+        $this->assertCount($expectedCount, $result->getHostedServices());
+    }
+    
+    /**
+     * @covers WindowsAzure\ServiceManagement\ServiceManagementRestProxy::listHostedServices
+     * @covers WindowsAzure\ServiceManagement\ServiceManagementRestProxy::_getHostedServicePath
+     * @covers WindowsAzure\ServiceManagement\ServiceManagementRestProxy::_getPath
+     * @covers WindowsAzure\ServiceManagement\Models\ListHostedServicesResult::create
+     * @covers WindowsAzure\ServiceManagement\Internal\ServicePropertiesResult::__construct
+     */
+    public function testListHostedServicesOneMultiple()
+    {
+        // Setup
+        $currentCount = count($this->restProxy->listHostedServices()->getHostedServices());
+        $this->createHostedServcie('testlisthostedservicesmultiple1');
+        $this->createHostedServcie('testlisthostedservicesmultiple2');
+        $this->createHostedServcie('testlisthostedservicesmultiple3');
+        $expectedCount = $currentCount + 3;
+        
+         // Test
+        $result = $this->restProxy->listHostedServices();
+        
+        // Assert
+        $this->assertCount($expectedCount, $result->getHostedServices());
     }
 }

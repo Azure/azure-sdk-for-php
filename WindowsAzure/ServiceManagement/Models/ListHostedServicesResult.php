@@ -28,7 +28,7 @@ use WindowsAzure\Common\Internal\Resources;
 use WindowsAzure\ServiceManagement\Internal\ServicePropertiesResult;
 
 /**
- * The result of calling listStorageServices API.
+ * The result of calling listHostedServices API.
  *
  * @category  Microsoft
  * @package   WindowsAzure\ServiceManagement\Models
@@ -38,53 +38,74 @@ use WindowsAzure\ServiceManagement\Internal\ServicePropertiesResult;
  * @version   Release: @package_version@
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
-class ListStorageServicesResult extends ServicePropertiesResult
+class ListHostedServicesResult extends ServicePropertiesResult
 {
     /**
      * @var array
      */
-    private $_storageServices;
+    private $_hostedServices;
     
     /**
-     * Creates new ListStorageServicesResult from parsed response body.
+     * Creates new ListHostedServicesResult from parsed response body.
      * 
      * @param array $parsed The parsed response body.
      * 
-     * @return ListStorageServicesResult
+     * @return ListHostedServicesResult
      */
     public static function create($parsed)
     {
-        $result = new ListStorageServicesResult(
+        $result                  = new ListHostedServicesResult(
             $parsed,
-            Resources::XTAG_STORAGE_SERVICE
+            Resources::XTAG_HOSTED_SERVICE
         );
+        $generalProperties       = $result->services;
+        $result->_hostedServices = array();
         
-        $result->_storageServices = $result->services;
+        assert(count($result->entries) == count($generalProperties));
+        
+        for ($i = 0; $i < count($result->entries); $i++) {
+            $hService = new HostedServiceProperties();
+            $prop     = Utilities::tryGetArray(
+                Resources::XTAG_HOSTED_SERVICE_PROPERTIES,
+                $result->entries
+            );
+            $name     = $generalProperties[$i]->getServiceName();
+            $url      = $generalProperties[$i]->getUrl();
+            $desc     = Utilities::tryGetValue($prop, Resources::XTAG_DESCRIPTION);
+            $location = Utilities::tryGetValue($prop, Resources::XTAG_LOCATION);
+            $label    = Utilities::tryGetValue($prop, Resources::XTAG_LABEL);
+            
+            $hService->setServiceName($name);
+            $hService->setUrl($url);
+            $hService->setDescription($desc);
+            $hService->setLabel($label);
+            $hService->setLocation($location);
+            
+            $result->_hostedServices[] = $prop;
+        }
         
         return $result;
     }
     
     /**
-     * Gets storage accounts.
+     * Gets hosted accounts.
      * 
      * @return array
      */
-    public function getStorageServices()
+    public function getHostedServices()
     {
-        return $this->_storageServices;
+        return $this->_hostedServices;
     }
     
     /**
-     * Sets storage accounts.
+     * Sets hosted accounts.
      * 
-     * @param array $storageServices The storage accounts.
+     * @param array $hostedServices The hosted accounts.
      * 
      * @return none
      */
-    public function setStorageServices($storageServices)
+    public function setHostedServices($hostedServices)
     {
-        $this->_storageServices = $storageServices;
+        $this->_hostedServices = $hostedServices;
     }
 }
-
-

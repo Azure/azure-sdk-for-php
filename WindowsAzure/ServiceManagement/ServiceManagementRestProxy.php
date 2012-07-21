@@ -41,6 +41,7 @@ use WindowsAzure\ServiceManagement\Models\AsynchronousOperationResult;
 use WindowsAzure\ServiceManagement\Models\UpdateStorageServiceOptions;
 use WindowsAzure\ServiceManagement\Models\GetStorageServicePropertiesResult;
 use WindowsAzure\ServiceManagement\Models\GetStorageServiceKeysResult;
+use WindowsAzure\ServiceManagement\Models\ListHostedServicesResult;
 
 /**
  * This class constructs HTTP requests and receive HTTP responses for service 
@@ -104,7 +105,7 @@ class ServiceManagementRestProxy extends RestProxy
     }
     
     /**
-     * Constructs URI path for storage services.
+     * Constructs URI path for storage service.
      * 
      * @param string $name The storage service name.
      * 
@@ -113,6 +114,18 @@ class ServiceManagementRestProxy extends RestProxy
     private function _getStorageServicePath($name = null)
     {
         return $this->_getPath('services/storageservices', $name);
+    }
+    
+    /**
+     * Constructs URI path for hosted service.
+     * 
+     * @param string $name The hosted service name.
+     * 
+     * @return string
+     */
+    private function _getHostedServicePath($name = null)
+    {
+        return $this->_getPath('services/hostedservices', $name);
     }
     
     /**
@@ -614,7 +627,15 @@ class ServiceManagementRestProxy extends RestProxy
      */
     public function listHostedServices()
     {
-        throw new \Exception(Resources::NOT_IMPLEMENTED_MSG);
+        $context = new HttpCallContext();
+        $context->setMethod(Resources::HTTP_GET);
+        $context->setPath($this->_getHostedServicePath());
+        $context->addStatusCode(Resources::STATUS_OK);
+        
+        $response   = $this->sendContext($context);
+        $serialized = $this->dataSerializer->unserialize($response->getBody());
+        
+        return ListHostedServicesResult::create($serialized);
     }
     
     /**

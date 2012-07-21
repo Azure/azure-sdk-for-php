@@ -15,76 +15,61 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   WindowsAzure\ServiceManagement\Models
+ * @package   WindowsAzure\ServiceManagement\Internal
  * @author    Azure PHP SDK <azurephpsdk@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
  
-namespace WindowsAzure\ServiceManagement\Models;
+namespace WindowsAzure\ServiceManagement\Internal;
 use WindowsAzure\Common\Internal\Utilities;
 use WindowsAzure\Common\Internal\Resources;
-use WindowsAzure\ServiceManagement\Internal\ServicePropertiesResult;
+use WindowsAzure\ServiceManagement\Models\ServiceProperties;
 
 /**
- * The result of calling listStorageServices API.
+ * General service properties.
  *
  * @category  Microsoft
- * @package   WindowsAzure\ServiceManagement\Models
+ * @package   WindowsAzure\ServiceManagement\Internal
  * @author    Azure PHP SDK <azurephpsdk@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @version   Release: @package_version@
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
-class ListStorageServicesResult extends ServicePropertiesResult
+class ServicePropertiesResult
 {
     /**
      * @var array
      */
-    private $_storageServices;
+    protected $services;
     
     /**
-     * Creates new ListStorageServicesResult from parsed response body.
-     * 
-     * @param array $parsed The parsed response body.
-     * 
-     * @return ListStorageServicesResult
+     * @var array 
      */
-    public static function create($parsed)
+    protected $entries;
+    
+    /**
+     * Creates new ServicePropertiesResult from parsed response body.
+     * 
+     * @param array  $parsed The parsed response body.
+     * @param string $tag    The service properties root tag name.
+     */
+    public function __construct($parsed, $tag)
     {
-        $result = new ListStorageServicesResult(
-            $parsed,
-            Resources::XTAG_STORAGE_SERVICE
-        );
+        $this->services = array();
+        $this->entries  = Utilities::tryGetArray($tag, $parsed);
         
-        $result->_storageServices = $result->services;
-        
-        return $result;
-    }
-    
-    /**
-     * Gets storage accounts.
-     * 
-     * @return array
-     */
-    public function getStorageServices()
-    {
-        return $this->_storageServices;
-    }
-    
-    /**
-     * Sets storage accounts.
-     * 
-     * @param array $storageServices The storage accounts.
-     * 
-     * @return none
-     */
-    public function setStorageServices($storageServices)
-    {
-        $this->_storageServices = $storageServices;
+        foreach ($this->entries as $value) {
+            $properties = new ServiceProperties();
+            $properties->setServiceName(
+                Utilities::tryGetValue($value, Resources::XTAG_SERVICE_NAME)
+            );
+            $properties->setUrl(
+                Utilities::tryGetValue($value, Resources::XTAG_URL)
+            );
+            $this->services[] = $properties;
+        }
     }
 }
-
-
