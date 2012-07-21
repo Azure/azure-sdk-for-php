@@ -497,4 +497,21 @@ class ServiceManagementRestProxyTest extends ServiceManagementRestProxyTestBase
         // Assert
         $this->assertCount($expectedCount, $result->getHostedServices());
     }
+    
+    /**
+     * @covers WindowsAzure\ServiceManagement\ServiceManagementRestProxy::deleteHostedService
+     * @covers WindowsAzure\ServiceManagement\ServiceManagementRestProxy::_getHostedServicePath
+     * @covers WindowsAzure\ServiceManagement\ServiceManagementRestProxy::_getPath
+     */
+    public function testDeleteHostedService()
+    {
+        // Setup
+        $name = 'testdeletehostedservice';
+        
+         // Test
+        $this->restProxy->deleteHostedService($name);
+        
+        // Assert
+        $this->assertFalse($this->hostedServiceExists($name));
+    }
 }

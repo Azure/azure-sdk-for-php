@@ -691,7 +691,15 @@ class ServiceManagementRestProxy extends RestProxy
      */
     public function deleteHostedService($name)
     {
-        throw new \Exception(Resources::NOT_IMPLEMENTED_MSG);
+        Validate::isString($name, 'name');
+        Validate::notNullOrEmpty($name, 'name');
+        
+        $context = new HttpCallContext();
+        $context->setMethod(Resources::HTTP_DELETE);
+        $context->setPath($this->_getHostedServicePath($name));
+        $context->addStatusCode(Resources::STATUS_OK);
+        
+        $this->sendContext($context);
     }
     
     /**
