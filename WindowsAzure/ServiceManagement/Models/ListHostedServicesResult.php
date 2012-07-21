@@ -67,7 +67,7 @@ class ListHostedServicesResult extends ServicePropertiesResult
             $hService = new HostedServiceProperties();
             $prop     = Utilities::tryGetArray(
                 Resources::XTAG_HOSTED_SERVICE_PROPERTIES,
-                $result->entries
+                $result->entries[$i]
             );
             $name     = $generalProperties[$i]->getServiceName();
             $url      = $generalProperties[$i]->getUrl();
@@ -81,7 +81,7 @@ class ListHostedServicesResult extends ServicePropertiesResult
             $hService->setLabel($label);
             $hService->setLocation($location);
             
-            $result->_hostedServices[] = $prop;
+            $result->_hostedServices[] = $hService;
         }
         
         return $result;
