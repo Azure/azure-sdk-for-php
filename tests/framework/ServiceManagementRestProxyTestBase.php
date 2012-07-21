@@ -24,7 +24,7 @@
  
 namespace Tests\Framework;
 use WindowsAzure\Common\Internal\Resources;
-use WindowsAzure\ServiceManagement\Models\CreateStorageServiceOptions;
+use WindowsAzure\ServiceManagement\Models\CreateServiceOptions;
 use WindowsAzure\ServiceManagement\Models\OperationStatus;
 use WindowsAzure\ServiceManagement\Models\Locations;
 
@@ -107,7 +107,7 @@ class ServiceManagementRestProxyTestBase extends RestProxyTestBase
     public function createStorageService($name, $options = null)
     {
         $label = base64_encode($name);
-        $options = new CreateStorageServiceOptions();
+        $options = new CreateServiceOptions();
         $options->setLocation('West US');
         
         $result = $this->restProxy->createStorageService($name, $label, $options);
@@ -163,11 +163,10 @@ class ServiceManagementRestProxyTestBase extends RestProxyTestBase
     public function createHostedService($name, $options = null)
     {
         $label = base64_encode($name);
-        $options = new CreateHostedServiceOptions();
+        $options = new CreateServiceOptions();
         $options->setLocation('West US');
         
-        $result = $this->restProxy->createHostedService($name, $label, $options);
-        $this->blockUntilAsyncSucceed($result->getRequestId());
+        $this->restProxy->createHostedService($name, $label, $options);
         $this->createdHostedServices[] = $name;
     }
     
@@ -213,6 +212,10 @@ class ServiceManagementRestProxyTestBase extends RestProxyTestBase
         
         foreach ($this->createdAffinityGroups as $value) {
             $this->safeDeleteAffinityGroup($value);
+        }
+        
+        foreach ($this->createdHostedServices as $value) {
+            $this->safeDeleteHostedService($value);
         }
     }
 }

@@ -15,21 +15,21 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   Tests\Unit\WindowsAzure\ServiceManagement\Internal
+ * @package   Tests\Unit\WindowsAzure\ServiceManagement
  * @author    Azure PHP SDK <azurephpsdk@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
 
-namespace Tests\Unit\WindowsAzure\ServiceManagement\Internal;
+namespace Tests\Unit\WindowsAzure\ServiceManagement;
 use Tests\Framework\ServiceManagementRestProxyTestBase;
 use WindowsAzure\Common\Internal\Resources;
 use WindowsAzure\Common\Internal\Http\HttpClient;
 use WindowsAzure\Common\Internal\Serialization\XmlSerializer;
 use WindowsAzure\ServiceManagement\ServiceManagementRestProxy;
 use WindowsAzure\ServiceManagement\Models\Locations;
-use WindowsAzure\ServiceManagement\Models\CreateStorageServiceOptions;
+use WindowsAzure\ServiceManagement\Models\CreateServiceOptions;
 use WindowsAzure\ServiceManagement\Models\UpdateStorageServiceOptions;
 use WindowsAzure\ServiceManagement\Models\KeyType;
 
@@ -37,7 +37,7 @@ use WindowsAzure\ServiceManagement\Models\KeyType;
  * Unit tests for class ServiceManagementRestProxy
  *
  * @category  Microsoft
- * @package   Tests\Unit\WindowsAzure\ServiceManagement\Internal
+ * @package   Tests\Unit\WindowsAzure\ServiceManagement
  * @author    Azure PHP SDK <azurephpsdk@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
@@ -284,13 +284,14 @@ class ServiceManagementRestProxyTest extends ServiceManagementRestProxyTestBase
      * @covers WindowsAzure\ServiceManagement\ServiceManagementRestProxy::_getPath
      * @covers WindowsAzure\ServiceManagement\Models\GetOperationStatusResult::create
      * @covers WindowsAzure\ServiceManagement\Models\StorageService::toArray
+     * @covers WindowsAzure\ServiceManagement\Internal\WindowsAzureService::toArray
      */
     public function testCreateStorageService()
     {
         // Setup
         $name = $this->_storageServiceName;
         $label = base64_encode($name);
-        $options = new CreateStorageServiceOptions();
+        $options = new CreateServiceOptions();
         $options->setLocation('West US');
         
         // Count the storage services before creating new one.
@@ -465,7 +466,7 @@ class ServiceManagementRestProxyTest extends ServiceManagementRestProxyTestBase
     {
         // Setup
         $currentCount = count($this->restProxy->listHostedServices()->getHostedServices());
-        $this->createHostedServcie('testlisthostedservicesone');
+        $this->createHostedService('testlisthostedservicesone');
         $expectedCount = $currentCount + 1;
         
          // Test
@@ -482,13 +483,13 @@ class ServiceManagementRestProxyTest extends ServiceManagementRestProxyTestBase
      * @covers WindowsAzure\ServiceManagement\Models\ListHostedServicesResult::create
      * @covers WindowsAzure\ServiceManagement\Internal\ServicePropertiesResult::__construct
      */
-    public function testListHostedServicesOneMultiple()
+    public function testListHostedServicesMultiple()
     {
         // Setup
         $currentCount = count($this->restProxy->listHostedServices()->getHostedServices());
-        $this->createHostedServcie('testlisthostedservicesmultiple1');
-        $this->createHostedServcie('testlisthostedservicesmultiple2');
-        $this->createHostedServcie('testlisthostedservicesmultiple3');
+        $this->createHostedService('testlisthostedservicesmultiple1');
+        $this->createHostedService('testlisthostedservicesmultiple2');
+        $this->createHostedService('testlisthostedservicesmultiple3');
         $expectedCount = $currentCount + 3;
         
          // Test
@@ -507,11 +508,39 @@ class ServiceManagementRestProxyTest extends ServiceManagementRestProxyTestBase
     {
         // Setup
         $name = 'testdeletehostedservice';
+        $this->createHostedService($name);
         
          // Test
         $this->restProxy->deleteHostedService($name);
         
         // Assert
         $this->assertFalse($this->hostedServiceExists($name));
+    }
+    
+    /**
+     * @covers WindowsAzure\ServiceManagement\ServiceManagementRestProxy::createHostedService
+     * @covers WindowsAzure\ServiceManagement\ServiceManagementRestProxy::getOperationStatus
+     * @covers WindowsAzure\ServiceManagement\ServiceManagementRestProxy::_getOperationPath
+     * @covers WindowsAzure\ServiceManagement\ServiceManagementRestProxy::_getHostedServicePath
+     * @covers WindowsAzure\ServiceManagement\ServiceManagementRestProxy::_getPath
+     * @covers WindowsAzure\ServiceManagement\Models\GetOperationStatusResult::create
+     * @covers WindowsAzure\ServiceManagement\Models\HostedService::toArray
+     * @covers WindowsAzure\ServiceManagement\Internal\WindowsAzureService::toArray
+     */
+    public function testCreateHostedService()
+    {
+        // Setup
+        $name = 'testcreatehostedservice';
+        $label = base64_encode($name);
+        $options = new CreateServiceOptions();
+        $options->setLocation('West US');
+        $options->setDescription('I am description');
+        
+        // Test
+        $this->restProxy->createHostedService($name, $label, $options);
+        $this->createdHostedServices[] = $name;
+        
+        // Assert
+        $this->assertTrue($this->hostedServiceExists($name));
     }
 }

@@ -29,7 +29,7 @@ use WindowsAzure\ServiceManagement\ServiceManagementService;
 use WindowsAzure\ServiceManagement\ServiceManagementSettings;
 use WindowsAzure\ServiceManagement\Models\Locations;
 use WindowsAzure\ServiceManagement\Models\OperationStatus;
-use WindowsAzure\ServiceManagement\Models\CreateStorageServiceOptions;
+use WindowsAzure\ServiceManagement\Models\CreateServiceOptions;
 
 /**
  * Encapsulates Windows Azure subscription basic operations.
@@ -115,7 +115,7 @@ class CloudSubscription
         $cloudStorageService = null;
         
         if (!$this->storageServiceExists($name)) {
-            $options = new CreateStorageServiceOptions();
+            $options = new CreateServiceOptions();
             $options->setLocation($location);
             $result = $this->_proxy->createStorageService(
                 $name,

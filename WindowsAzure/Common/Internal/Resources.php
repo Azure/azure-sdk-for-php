@@ -87,7 +87,7 @@ class Resources
     const INVALID_BLOB_PAT_MSG = 'The provided access type is invalid.';
     const INVALID_SVC_PROP_MSG = 'The provided service properties is invalid.';
     const UNKNOWN_SRILZER_MSG = 'The provided serializer type is unknown';
-    const INVALID_CSA_OPT_MSG = 'Must provide valid location or affinity group.';
+    const INVALID_CREATE_SERVICE_OPTIONS_MSG = 'Must provide valid location or affinity group.';
     const INVALID_USA_OPT_MSG = 'Must provide either description or label.';
     const INVALID_CONFIG_MSG = 'Config object must be of type Configuration';
     const INVALID_ACH_MSG = 'The provided access condition header is invalid';
@@ -292,6 +292,11 @@ class Resources
     const XTAG_ERROR                      = 'Error';
     const XTAG_HOSTED_SERVICE             = 'HostedService';
     const XTAG_HOSTED_SERVICE_PROPERTIES  = 'HostedServiceProperties';
+    const XTAG_CREATE_HOSTED_SERVICE      = 'CreateHostedService';
+    const XTAG_CREATE_STORAGE_SERVICE_INPUT = 'CreateStorageServiceInput';
+    const XTAG_UPDATE_STORAGE_SERVICE_INPUT = 'UpdateStorageServiceInput';
+    const XTAG_CREATE_AFFINITY_GROUP = 'CreateAffinityGroup';
+    const XTAG_UPDATE_AFFINITY_GROUP = 'UpdateAffinityGroup';
 
     // Service Bus
     const LIST_TOPICS_PATH        = '$Resources/Topics';
@@ -345,5 +350,3 @@ class Resources
     
     // @codingStandardsIgnoreEnd
 }
-
-

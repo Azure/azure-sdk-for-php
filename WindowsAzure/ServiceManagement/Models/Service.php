@@ -245,5 +245,3 @@ class Service
         return $serialized;
     }
 }
-
-
