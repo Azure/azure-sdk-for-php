@@ -41,6 +41,8 @@ use WindowsAzure\ServiceManagement\Models\AsynchronousOperationResult;
 use WindowsAzure\ServiceManagement\Models\UpdateStorageServiceOptions;
 use WindowsAzure\ServiceManagement\Models\GetStorageServicePropertiesResult;
 use WindowsAzure\ServiceManagement\Models\GetStorageServiceKeysResult;
+use WindowsAzure\ServiceManagement\Models\ListHostedServicesResult;
+use WindowsAzure\ServiceManagement\Models\HostedService;
 
 /**
  * This class constructs HTTP requests and receive HTTP responses for service 
@@ -104,7 +106,7 @@ class ServiceManagementRestProxy extends RestProxy
     }
     
     /**
-     * Constructs URI path for storage services.
+     * Constructs URI path for storage service.
      * 
      * @param string $name The storage service name.
      * 
@@ -113,6 +115,18 @@ class ServiceManagementRestProxy extends RestProxy
     private function _getStorageServicePath($name = null)
     {
         return $this->_getPath('services/storageservices', $name);
+    }
+    
+    /**
+     * Constructs URI path for hosted service.
+     * 
+     * @param string $name The hosted service name.
+     * 
+     * @return string
+     */
+    private function _getHostedServicePath($name = null)
+    {
+        return $this->_getPath('services/hostedservices', $name);
     }
     
     /**
@@ -284,12 +298,12 @@ class ServiceManagementRestProxy extends RestProxy
      * in the response for this operation; if successful, it will be 
      * status code 200 (OK).
      * 
-     * @param string                      $name    The storage account name.
-     * @param string                      $label   The name for the storage account
+     * @param string               $name    The storage account name.
+     * @param string               $label   The name for the storage account
      * specified as a base64-encoded string. The name may be up to 100 characters
      * in length. The name can be used identify the storage account for your tracking
      * purposes.
-     * @param CreateStorageServiceOptions $options The optional parameters.
+     * @param CreateServiceOptions $options The optional parameters.
      * 
      * @return AsynchronousOperationResult
      * 
@@ -306,7 +320,7 @@ class ServiceManagementRestProxy extends RestProxy
         $location      = $options->getLocation();
         Validate::isTrue(
             !empty($location) || !empty($affinityGroup),
-            Resources::INVALID_CSA_OPT_MSG
+            Resources::INVALID_CREATE_SERVICE_OPTIONS_MSG
         );
         
         $storageService = new StorageService();
@@ -317,7 +331,7 @@ class ServiceManagementRestProxy extends RestProxy
         $storageService->setDescription($options->getDescription());
         $storageService->addSerializationProperty(
             XmlSerializer::ROOT_NAME,
-            'CreateStorageServiceInput'
+            Resources::XTAG_CREATE_STORAGE_SERVICE_INPUT
         );
         
         $context = new HttpCallContext();
@@ -384,7 +398,7 @@ class ServiceManagementRestProxy extends RestProxy
         $storageService->setDescription($options->getDescription());
         $storageService->addSerializationProperty(
             XmlSerializer::ROOT_NAME,
-            'UpdateStorageServiceInput'
+            Resources::XTAG_UPDATE_STORAGE_SERVICE_INPUT
         );
         
         $context = new HttpCallContext();
@@ -454,7 +468,7 @@ class ServiceManagementRestProxy extends RestProxy
         $affinityGroup->setDescription($options->getDescription());
         $affinityGroup->addSerializationProperty(
             XmlSerializer::ROOT_NAME,
-            'CreateAffinityGroup'
+            Resources::XTAG_CREATE_AFFINITY_GROUP
         );
         
         $context = new HttpCallContext();
@@ -520,7 +534,7 @@ class ServiceManagementRestProxy extends RestProxy
         $affinityGroup->setDescription($options->getDescription());
         $affinityGroup->addSerializationProperty(
             XmlSerializer::ROOT_NAME,
-            'UpdateAffinityGroup'
+            Resources::XTAG_UPDATE_AFFINITY_GROUP
         );
         
         $context = new HttpCallContext();
@@ -614,19 +628,27 @@ class ServiceManagementRestProxy extends RestProxy
      */
     public function listHostedServices()
     {
-        throw new \Exception(Resources::NOT_IMPLEMENTED_MSG);
+        $context = new HttpCallContext();
+        $context->setMethod(Resources::HTTP_GET);
+        $context->setPath($this->_getHostedServicePath());
+        $context->addStatusCode(Resources::STATUS_OK);
+        
+        $response   = $this->sendContext($context);
+        $serialized = $this->dataSerializer->unserialize($response->getBody());
+        
+        return ListHostedServicesResult::create($serialized);
     }
     
     /**
      * Creates a new hosted service in Windows Azure.
      * 
-     * @param string                     $name    The name for the hosted service
+     * @param string               $name    The name for the hosted service
      * that is unique within Windows Azure. This name is the DNS prefix name and can
      * be used to access the hosted service.
-     * @param string                     $label   The name for the hosted service
+     * @param string               $label   The name for the hosted service
      * that is base-64 encoded. The name can be used identify the storage account for
      * your tracking purposes.
-     * @param CreateHostedServiceOptions $options The optional parameters.
+     * @param CreateServiceOptions $options The optional parameters.
      * 
      * @return none
      * 
@@ -634,7 +656,42 @@ class ServiceManagementRestProxy extends RestProxy
      */
     public function createHostedService($name, $label, $options)
     {
-        throw new \Exception(Resources::NOT_IMPLEMENTED_MSG);
+        Validate::isString($name, 'name');
+        Validate::notNullOrEmpty($name, 'name');
+        Validate::isString($label, 'label');
+        Validate::notNullOrEmpty($label, 'label');
+        Validate::notNullOrEmpty($options, 'options');
+        
+        // User have to set affinity group or location.
+        $affinityGroup = $options->getAffinityGroup();
+        $location      = $options->getLocation();
+        Validate::isTrue(
+            !empty($location) || !empty($affinityGroup),
+            Resources::INVALID_CREATE_SERVICE_OPTIONS_MSG
+        );
+        
+        $hostedService = new HostedService();
+        $hostedService->setName($name);
+        $hostedService->setLabel($label);
+        $hostedService->setLocation($options->getLocation());
+        $hostedService->setAffinityGroup($options->getAffinityGroup());
+        $hostedService->setDescription($options->getDescription());
+        $hostedService->addSerializationProperty(
+            XmlSerializer::ROOT_NAME,
+            Resources::XTAG_CREATE_HOSTED_SERVICE
+        );
+        
+        $context = new HttpCallContext();
+        $context->setMethod(Resources::HTTP_POST);
+        $context->setPath($this->_getHostedServicePath());
+        $context->addStatusCode(Resources::STATUS_CREATED);
+        $context->setBody($hostedService->serialize($this->dataSerializer));
+        $context->addHeader(
+            Resources::CONTENT_TYPE,
+            Resources::XML_ATOM_CONTENT_TYPE
+        );
+        
+        $this->sendContext($context);
     }
     
     /**
@@ -670,7 +727,15 @@ class ServiceManagementRestProxy extends RestProxy
      */
     public function deleteHostedService($name)
     {
-        throw new \Exception(Resources::NOT_IMPLEMENTED_MSG);
+        Validate::isString($name, 'name');
+        Validate::notNullOrEmpty($name, 'name');
+        
+        $context = new HttpCallContext();
+        $context->setMethod(Resources::HTTP_DELETE);
+        $context->setPath($this->_getHostedServicePath($name));
+        $context->addStatusCode(Resources::STATUS_OK);
+        
+        $this->sendContext($context);
     }
     
     /**

@@ -24,7 +24,7 @@
  
 namespace Tests\Framework;
 use WindowsAzure\Common\Internal\Resources;
-use WindowsAzure\ServiceManagement\Models\CreateStorageServiceOptions;
+use WindowsAzure\ServiceManagement\Models\CreateServiceOptions;
 use WindowsAzure\ServiceManagement\Models\OperationStatus;
 use WindowsAzure\ServiceManagement\Models\Locations;
 
@@ -42,6 +42,7 @@ use WindowsAzure\ServiceManagement\Models\Locations;
 class ServiceManagementRestProxyTestBase extends RestProxyTestBase
 {
     protected $createdStorageServices;
+    protected $createdHostedServices;
     protected $createdAffinityGroups;
     protected $affinityGroupCount;
     
@@ -53,6 +54,7 @@ class ServiceManagementRestProxyTestBase extends RestProxyTestBase
         
         $this->createdStorageServices = array();
         $this->createdAffinityGroups = array();
+        $this->createdHostedServices = array();
         $this->affinityGroupCount = count($this->restProxy->listAffinityGroups()->getAffinityGroups());
     }
 
@@ -105,7 +107,7 @@ class ServiceManagementRestProxyTestBase extends RestProxyTestBase
     public function createStorageService($name, $options = null)
     {
         $label = base64_encode($name);
-        $options = new CreateStorageServiceOptions();
+        $options = new CreateServiceOptions();
         $options->setLocation('West US');
         
         $result = $this->restProxy->createStorageService($name, $label, $options);
@@ -157,6 +159,48 @@ class ServiceManagementRestProxyTestBase extends RestProxyTestBase
             error_log($e->getMessage());
         }
     }
+    
+    public function createHostedService($name, $options = null)
+    {
+        $label = base64_encode($name);
+        $options = new CreateServiceOptions();
+        $options->setLocation('West US');
+        
+        $this->restProxy->createHostedService($name, $label, $options);
+        $this->createdHostedServices[] = $name;
+    }
+    
+    public function hostedServiceExists($name)
+    {
+        $result = $this->restProxy->listHostedServices();
+        $hostedServices = $result->getHostedServices();
+        
+        foreach ($hostedServices as $hostedService) {
+            if ($hostedService->getServiceName() == $name) {
+                return true;
+            }
+        }
+        
+        return false;
+    }
+    
+    public function deleteHostedService($name)
+    {
+        $this->restProxy->deleteHostedService($name);
+    }
+    
+    public function safeDeleteHostedService($name)
+    {
+        try
+        {
+            $this->deleteHostedService($name);
+        }
+        catch (\Exception $e)
+        {
+            // Ignore exception and continue, will assume that this hosted account doesn't exist 
+            error_log($e->getMessage());
+        }
+    }
 
     protected function tearDown()
     {
@@ -168,6 +212,10 @@ class ServiceManagementRestProxyTestBase extends RestProxyTestBase
         
         foreach ($this->createdAffinityGroups as $value) {
             $this->safeDeleteAffinityGroup($value);
+        }
+        
+        foreach ($this->createdHostedServices as $value) {
+            $this->safeDeleteHostedService($value);
         }
     }
 }

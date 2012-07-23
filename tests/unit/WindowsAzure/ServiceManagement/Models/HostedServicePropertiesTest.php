@@ -1,0 +1,91 @@
+<?php
+
+/**
+ * LICENSE: Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ * 
+ * PHP version 5
+ *
+ * @category  Microsoft
+ * @package   Tests\Unit\WindowsAzure\ServiceManagement\Models
+ * @author    Azure PHP SDK <azurephpsdk@microsoft.com>
+ * @copyright 2012 Microsoft Corporation
+ * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
+ * @link      https://github.com/windowsazure/azure-sdk-for-php
+ */
+
+namespace Tests\Unit\WindowsAzure\ServiceManagement\Models;
+use WindowsAzure\ServiceManagement\Models\HostedServiceProperties;
+
+/**
+ * Unit tests for class HostedServiceProperties
+ *
+ * @category  Microsoft
+ * @package   Tests\Unit\WindowsAzure\ServiceManagement\Models
+ * @author    Azure PHP SDK <azurephpsdk@microsoft.com>
+ * @copyright 2012 Microsoft Corporation
+ * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
+ * @version   Release: @package_version@
+ * @link      https://github.com/windowsazure/azure-sdk-for-php
+ */
+class HostedServicePropertiesTest extends \PHPUnit_Framework_TestCase
+{
+    /**
+     * @covers WindowsAzure\ServiceManagement\Models\HostedServiceProperties::setLabel
+     * @covers WindowsAzure\ServiceManagement\Models\HostedServiceProperties::getLabel
+     */
+    public function testSetLabel()
+    {
+        // Setup
+        $service = new HostedServiceProperties();
+        $expected = 'Label';
+        
+        // Test
+        $service->setLabel($expected);
+        
+        // Assert
+        $this->assertEquals($expected, $service->getLabel());
+    }
+    
+    /**
+     * @covers WindowsAzure\ServiceManagement\Models\HostedServiceProperties::setDescription
+     * @covers WindowsAzure\ServiceManagement\Models\HostedServiceProperties::getDescription
+     */
+    public function testSetDescription()
+    {
+        // Setup
+        $service = new HostedServiceProperties();
+        $expected = 'Description';
+        
+        // Test
+        $service->setDescription($expected);
+        
+        // Assert
+        $this->assertEquals($expected, $service->getDescription());
+    }
+    
+    /**
+     * @covers WindowsAzure\ServiceManagement\Models\HostedServiceProperties::setLocation
+     * @covers WindowsAzure\ServiceManagement\Models\HostedServiceProperties::getLocation
+     */
+    public function testSetLocation()
+    {
+        // Setup
+        $service = new HostedServiceProperties();
+        $expected = 'Location';
+        
+        // Test
+        $service->setLocation($expected);
+        
+        // Assert
+        $this->assertEquals($expected, $service->getLocation());
+    }
+}

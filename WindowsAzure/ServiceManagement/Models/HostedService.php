@@ -15,43 +15,49 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   Tests\Unit\WindowsAzure\ServiceManagement\Models
+ * @package   WindowsAzure\ServiceManagement\Models
  * @author    Azure PHP SDK <azurephpsdk@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
-
-namespace Tests\Unit\WindowsAzure\ServiceManagement\Models;
-use WindowsAzure\ServiceManagement\Models\ListStorageServicesResult;
+ 
+namespace WindowsAzure\ServiceManagement\Models;
+use WindowsAzure\Common\Internal\Resources;
+use WindowsAzure\Common\Internal\Utilities;
+use WindowsAzure\ServiceManagement\Internal\WindowsAzureService;
 
 /**
- * Unit tests for class ListStorageServicesResult
+ * The hosted service class.
  *
  * @category  Microsoft
- * @package   Tests\Unit\WindowsAzure\ServiceManagement\Models
+ * @package   WindowsAzure\ServiceManagement\Models
  * @author    Azure PHP SDK <azurephpsdk@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @version   Release: @package_version@
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
-class ListStorageServicesResultTest extends \PHPUnit_Framework_TestCase
+class HostedService extends WindowsAzureService
 {
     /**
-     * @covers WindowsAzure\ServiceManagement\Models\ListStorageServicesResult::setStorageServices
-     * @covers WindowsAzure\ServiceManagement\Models\ListStorageServicesResult::getStorageServices
+     * Converts the current object into ordered array representation.
+     * 
+     * @return array
      */
-    public function testSetStorageServices()
+    protected function toArray()
     {
-        // Setup
-        $expected = array();
-        $result = new ListStorageServicesResult(array(), 'tag');
+        $arr   = parent::toArray();
+        $order = array(
+            Resources::XTAG_NAMESPACE,
+            Resources::XTAG_SERVICE_NAME,
+            Resources::XTAG_LABEL,
+            Resources::XTAG_DESCRIPTION,
+            Resources::XTAG_LOCATION,
+            Resources::XTAG_AFFINITY_GROUP
+        );
+        $ordered = Utilities::orderArray($arr, $order);
         
-        // Test
-        $result->setStorageServices($expected);
-        
-        // Assert
-        $this->assertEquals($expected, $result->getStorageServices());
+        return $ordered;
     }
 }

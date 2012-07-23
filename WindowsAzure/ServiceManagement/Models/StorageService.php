@@ -25,6 +25,7 @@
 namespace WindowsAzure\ServiceManagement\Models;
 use WindowsAzure\Common\Internal\Resources;
 use WindowsAzure\Common\Internal\Utilities;
+use WindowsAzure\ServiceManagement\Internal\WindowsAzureService;
 
 /**
  * The storage service class.
@@ -37,29 +38,8 @@ use WindowsAzure\Common\Internal\Utilities;
  * @version   Release: @package_version@
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
-class StorageService extends Service
+class StorageService extends WindowsAzureService
 {
-    /**
-     * @var string
-     */
-    private $_affinityGroup;
-    
-    /**
-     * Constructs new storage service object.
-     * 
-     * @param array $raw The array representation for storage service.
-     */
-    public function __construct($raw = null)
-    {
-        parent::__construct($raw);
-        $this->setAffinityGroup(
-            Utilities::tryGetValue($raw, Resources::XTAG_AFFINITY_GROUP)
-        );
-        $this->setName(
-            Utilities::tryGetValue($raw, Resources::XTAG_SERVICE_NAME)
-        );
-    }
-    
     /**
      * Converts the current object into ordered array representation.
      * 
@@ -76,40 +56,8 @@ class StorageService extends Service
             Resources::XTAG_AFFINITY_GROUP,
             Resources::XTAG_LOCATION
         );
-        Utilities::addIfNotEmpty(
-            Resources::XTAG_SERVICE_NAME, $this->getName(),
-            $arr
-        );
-        Utilities::addIfNotEmpty(
-            Resources::XTAG_AFFINITY_GROUP, $this->_affinityGroup,
-            $arr
-        );
         $ordered = Utilities::orderArray($arr, $order);
         
         return $ordered;
     }
-    
-    /**
-     * Gets the affinityGroup name.
-     * 
-     * @return string 
-     */
-    public function getAffinityGroup()
-    {
-        return $this->_affinityGroup;
-    }
-    
-    /**
-     * Sets the affinityGroup name.
-     * 
-     * @param string $affinityGroup The affinityGroup name.
-     * 
-     * @return none
-     */
-    public function setAffinityGroup($affinityGroup)
-    {
-        $this->_affinityGroup = $affinityGroup;
-    }
 }
-
-

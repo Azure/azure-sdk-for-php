@@ -98,12 +98,12 @@ interface IServiceManagement extends FilterableService
      * in the response for this operation; if successful, it will be 
      * status code 200 (OK).
      * 
-     * @param string                      $name    The storage account name.
-     * @param string                      $label   Name for the storage
+     * @param string               $name    The storage account name.
+     * @param string               $label   Name for the storage
      * account specified as a base64-encoded string. The name may be up to 100
      * characters in length. The name can be used identify the storage account for
      * your tracking purposes.
-     * @param CreateStorageServiceOptions $options The optional parameters.
+     * @param CreateServiceOptions $options The optional parameters.
      * 
      * @return AsynchronousOperationResult
      * 
@@ -231,13 +231,13 @@ interface IServiceManagement extends FilterableService
     /**
      * Creates a new hosted service in Windows Azure.
      * 
-     * @param string                     $name    The name for the hosted service
+     * @param string               $name    The name for the hosted service
      * that is unique within Windows Azure. This name is the DNS prefix name and can
      * be used to access the hosted service.
-     * @param string                     $label   The name for the hosted service
+     * @param string               $label   The name for the hosted service
      * that is base-64 encoded. The name can be used identify the storage account for
      * your tracking purposes.
-     * @param CreateHostedServiceOptions $options The optional parameters.
+     * @param CreateServiceOptions $options The optional parameters.
      * 
      * @return none
      * 
