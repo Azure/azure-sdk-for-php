@@ -24,6 +24,7 @@
  
 namespace WindowsAzure\ServiceManagement\Internal;
 use WindowsAzure\Common\Internal\Utilities;
+use WindowsAzure\Common\Internal\Validate;
 use WindowsAzure\Common\Internal\Resources;
 use WindowsAzure\ServiceManagement\Models\ServiceProperties;
 
@@ -58,6 +59,9 @@ class ServicePropertiesResult
      */
     public function __construct($parsed, $tag)
     {
+        Validate::notNullOrEmpty($tag, 'tag');
+        Validate::isString($tag, 'tag');
+        
         $this->services = array();
         $this->entries  = Utilities::tryGetArray($tag, $parsed);
         

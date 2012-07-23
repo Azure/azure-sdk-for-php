@@ -26,7 +26,7 @@ namespace WindowsAzure\ServiceManagement\Models;
 use WindowsAzure\Common\Internal\Validate;
 
 /**
- * The hosted service properties.
+ * The properties of the hosted service.
  *
  * @category  Microsoft
  * @package   WindowsAzure\ServiceManagement\Models

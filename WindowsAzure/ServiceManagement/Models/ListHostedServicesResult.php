@@ -88,7 +88,7 @@ class ListHostedServicesResult extends ServicePropertiesResult
     }
     
     /**
-     * Gets hosted accounts.
+     * Gets hosted services.
      * 
      * @return array
      */
@@ -98,9 +98,9 @@ class ListHostedServicesResult extends ServicePropertiesResult
     }
     
     /**
-     * Sets hosted accounts.
+     * Sets hosted services.
      * 
-     * @param array $hostedServices The hosted accounts.
+     * @param array $hostedServices The hosted services.
      * 
      * @return none
      */
