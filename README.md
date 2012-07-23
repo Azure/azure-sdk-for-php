@@ -61,7 +61,8 @@ The PHP Client Libraries for Windows Azure have a dependency on the [HTTP_Reques
 					"type": "pear",
 					"url": "http://pear.php.net"
 				}
-			]
+			],
+			"minimum-stability": "dev"
 		}
 
 2. Download **[composer.phar](http://getcomposer.org/composer.phar)** in your project root.
