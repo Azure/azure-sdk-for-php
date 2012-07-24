@@ -25,6 +25,7 @@
 namespace WindowsAzure\ServiceManagement\Internal;
 use WindowsAzure\Common\Internal\Resources;
 use WindowsAzure\Common\Internal\Utilities;
+use WindowsAzure\ServiceManagement\Models\Service;
 
 /**
  * Base class for all windows azure provided services.
