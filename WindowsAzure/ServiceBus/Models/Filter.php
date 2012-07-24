@@ -45,13 +45,6 @@ class Filter
     protected $attributes;
 
     /**
-     * The compatibility level of the filter. 
-     * 
-     * @var string 
-     */
-    private $_compatibilityLevel;
-
-    /**
      * Creates a filter with default parameters. 
      */
     public function __construct()
@@ -109,26 +102,5 @@ class Filter
         $this->attributes[$key] = $value;
     }   
 
-    /**
-     * Gets the compatibility level. 
-     * 
-     * @return string 
-     */
-    public function getCompatibilityLevel()
-    {
-        return $this->_compatibilityLevel;
-    }
-
-    /**
-     * Sets the compatibility level. 
-     * 
-     * @param string $compatibilityLevel The compatibility level. 
-     * 
-     * @return none
-     */
-    public function setCompatibilityLevel($compatibilityLevel)
-    {
-        $this->_compatibilityLevel = $compatibilityLevel;
-    }
 }
 
