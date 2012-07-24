@@ -126,8 +126,8 @@ interface IServiceManagement extends FilterableService
      * Updates the label and/or the description for a storage account in Windows 
      * Azure.
      * 
-     * @param string                      $name    The storage account name.
-     * @param UpdateStorageServiceOptions $options The optional parameters.
+     * @param string               $name    The storage account name.
+     * @param UpdateServiceOptions $options The optional parameters.
      * 
      * @return none
      * 
@@ -249,9 +249,9 @@ interface IServiceManagement extends FilterableService
      * updates the label and/or the description for a hosted service in Windows 
      * Azure.
      * 
-     * @param string                     $name    The name for the hosted
-     * service that is unique within Windows Azure.
-     * @param UpdateHostedServiceOptions $options The optional parameters.
+     * @param string               $name    The name for the hosted service that is
+     * unique within Windows Azure.
+     * @param UpdateServiceOptions $options The optional parameters.
      * 
      * @return none
      * 

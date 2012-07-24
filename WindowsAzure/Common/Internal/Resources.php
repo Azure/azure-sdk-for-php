@@ -88,7 +88,7 @@ class Resources
     const INVALID_SVC_PROP_MSG = 'The provided service properties is invalid.';
     const UNKNOWN_SRILZER_MSG = 'The provided serializer type is unknown';
     const INVALID_CREATE_SERVICE_OPTIONS_MSG = 'Must provide valid location or affinity group.';
-    const INVALID_USA_OPT_MSG = 'Must provide either description or label.';
+    const INVALID_UPDATE_SERVICE_OPTIONS_MSG = 'Must provide either description or label.';
     const INVALID_CONFIG_MSG = 'Config object must be of type Configuration';
     const INVALID_ACH_MSG = 'The provided access condition header is invalid';
     const INVALID_RECEIVE_MODE_MSG = 'The receive message option is in neither RECEIVE_AND_DELETE nor PEEK_LOCK mode.';
@@ -297,6 +297,7 @@ class Resources
     const XTAG_UPDATE_STORAGE_SERVICE_INPUT = 'UpdateStorageServiceInput';
     const XTAG_CREATE_AFFINITY_GROUP = 'CreateAffinityGroup';
     const XTAG_UPDATE_AFFINITY_GROUP = 'UpdateAffinityGroup';
+    const XTAG_UPDATE_HOSTED_SERVICE = 'UpdateHostedService';
 
     // Service Bus
     const LIST_TOPICS_PATH        = '$Resources/Topics';

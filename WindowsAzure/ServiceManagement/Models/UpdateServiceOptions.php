@@ -36,7 +36,7 @@ use WindowsAzure\Common\Internal\Validate;
  * @version   Release: @package_version@
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
-class UpdateStorageServiceOptions
+class UpdateServiceOptions
 {
     /**
      * @var string

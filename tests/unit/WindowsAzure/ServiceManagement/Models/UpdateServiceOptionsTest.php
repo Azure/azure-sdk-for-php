@@ -23,10 +23,10 @@
  */
 
 namespace Tests\Unit\WindowsAzure\ServiceManagement\Models;
-use WindowsAzure\ServiceManagement\Models\UpdateStorageServiceOptions;
+use WindowsAzure\ServiceManagement\Models\UpdateServiceOptions;
 
 /**
- * Unit tests for class UpdateStorageServiceOptions
+ * Unit tests for class UpdateServiceOptions
  *
  * @category  Microsoft
  * @package   Tests\Unit\WindowsAzure\ServiceManagement\Models
@@ -36,16 +36,16 @@ use WindowsAzure\ServiceManagement\Models\UpdateStorageServiceOptions;
  * @version   Release: @package_version@
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
-class UpdateStorageServiceOptionsTest extends \PHPUnit_Framework_TestCase
+class UpdateServiceOptionsTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @covers WindowsAzure\ServiceManagement\Models\UpdateStorageServiceOptions::setDescription
-     * @covers WindowsAzure\ServiceManagement\Models\UpdateStorageServiceOptions::getDescription
+     * @covers WindowsAzure\ServiceManagement\Models\UpdateServiceOptions::setDescription
+     * @covers WindowsAzure\ServiceManagement\Models\UpdateServiceOptions::getDescription
      */
     public function testSetDescription()
     {
         // Setup
-        $options = new UpdateStorageServiceOptions();
+        $options = new UpdateServiceOptions();
         $expected = 'Description';
         
         // Test
@@ -56,13 +56,13 @@ class UpdateStorageServiceOptionsTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers WindowsAzure\ServiceManagement\Models\UpdateStorageServiceOptions::setLabel
-     * @covers WindowsAzure\ServiceManagement\Models\UpdateStorageServiceOptions::getLabel
+     * @covers WindowsAzure\ServiceManagement\Models\UpdateServiceOptions::setLabel
+     * @covers WindowsAzure\ServiceManagement\Models\UpdateServiceOptions::getLabel
      */
     public function testSetLabel()
     {
         // Setup
-        $options = new UpdateStorageServiceOptions();
+        $options = new UpdateServiceOptions();
         $expected = 'Label';
         
         // Test

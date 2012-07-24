@@ -235,7 +235,7 @@ spl_autoload_register(
             'tests\\unit\\windowsazure\\servicemanagement\\models\\servicepropertiestest' => '/unit/WindowsAzure/ServiceManagement/Models/ServicePropertiesTest.php',
             'tests\\unit\\windowsazure\\servicemanagement\\models\\servicetest' => '/unit/WindowsAzure/ServiceManagement/Models/ServiceTest.php',
             'tests\\unit\\windowsazure\\servicemanagement\\models\\storageservicetest' => '/unit/WindowsAzure/ServiceManagement/Models/StorageServiceTest.php',
-            'tests\\unit\\windowsazure\\servicemanagement\\models\\updatestorageserviceoptionstest' => '/unit/WindowsAzure/ServiceManagement/Models/UpdateStorageServiceOptionsTest.php',
+            'tests\\unit\\windowsazure\\servicemanagement\\models\\updateserviceoptionstest' => '/unit/WindowsAzure/ServiceManagement/Models/UpdateServiceOptionsTest.php',
             'tests\\unit\\windowsazure\\servicemanagement\\servicemanagementrestproxytest' => '/unit/WindowsAzure/ServiceManagement/ServiceManagementRestProxyTest.php',
             'tests\\unit\\windowsazure\\serviceruntime\\internal\\acquirecurrentstatetest' => '/unit/WindowsAzure/ServiceRuntime/Internal/AcquireCurrentStateTest.php',
             'tests\\unit\\windowsazure\\serviceruntime\\internal\\chunkedgoalstatedeserializertest' => '/unit/WindowsAzure/ServiceRuntime/Internal/ChunkedGoalStateDeserializerTest.php',

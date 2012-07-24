@@ -208,7 +208,7 @@ spl_autoload_register(
             'windowsazure\\servicemanagement\\models\\service' => '/ServiceManagement/Models/Service.php',
             'windowsazure\\servicemanagement\\models\\serviceproperties' => '/ServiceManagement/Models/ServiceProperties.php',
             'windowsazure\\servicemanagement\\models\\storageservice' => '/ServiceManagement/Models/StorageService.php',
-            'windowsazure\\servicemanagement\\models\\updatestorageserviceoptions' => '/ServiceManagement/Models/UpdateStorageServiceOptions.php',
+            'windowsazure\\servicemanagement\\models\\updateserviceoptions' => '/ServiceManagement/Models/UpdateServiceOptions.php',
             'windowsazure\\servicemanagement\\servicemanagementrestproxy' => '/ServiceManagement/ServiceManagementRestProxy.php',
             'windowsazure\\serviceruntime\\internal\\acquirecurrentstate' => '/ServiceRuntime/Internal/AcquireCurrentState.php',
             'windowsazure\\serviceruntime\\internal\\channelnotavailableexception' => '/ServiceRuntime/Internal/ChannelNotAvailableException.php',
