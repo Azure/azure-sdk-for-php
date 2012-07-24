@@ -271,7 +271,6 @@ class RuleInfo
     public function withTrueFilter()
     {
         $filter = new TrueFilter();
-        $filter->setCompatibilityLevel(20);
         $this->_ruleDescription->setFilter($filter);
     }
 
@@ -283,7 +282,6 @@ class RuleInfo
     public function withFalseFilter() 
     {
         $filter = new FalseFilter();
-        $filter->setCompatibilityLevel(20);
         $this->_ruleDescription->setFilter($filter);
     }
 
@@ -295,7 +293,6 @@ class RuleInfo
     public function withEmptyRuleAction()
     {
         $action = new EmptyRuleAction();
-        $action->setCompatibilityLevel(20);
         $this->_ruleDescription->setAction($action);
     }
 

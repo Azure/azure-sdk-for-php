@@ -189,6 +189,7 @@ spl_autoload_register(
             'tests\\unit\\windowsazure\\queue\\queuerestproxytest' => '/unit/WindowsAzure/Queue/QueueRestProxyTest.php',
             'tests\\unit\\windowsazure\\servicebus\\internal\\wraprestproxytest' => '/unit/WindowsAzure/ServiceBus/WrapRestProxyTest.php',
             'tests\\unit\\windowsazure\\servicebus\\internal\\wraptokenmanagertest' => '/unit/WindowsAzure/ServiceBus/Internal/WrapTokenManagerTest.php',
+            'tests\\unit\\windowsazure\\servicebus\\models\\actiontest' => '/unit/WindowsAzure/ServiceBus/models/ActionTest.php',
             'tests\\unit\\windowsazure\\servicebus\\models\\activetokentest' => '/unit/WindowsAzure/ServiceBus/models/ActiveTokenTest.php',
             'tests\\unit\\windowsazure\\servicebus\\models\\brokeredmessagetest' => '/unit/WindowsAzure/ServiceBus/models/BrokeredMessageTest.php',
             'tests\\unit\\windowsazure\\servicebus\\models\\brokerpropertiestest' => '/unit/WindowsAzure/ServiceBus/models/BrokerPropertiesTest.php',
