@@ -38,15 +38,14 @@ Windows Azure tables, blobs, queues, service bus (queues and topics), service ru
 # Getting Started
 ## Download Source Code
 
+> **Note**
+>
+> The PHP Client Libraries for Windows Azure have a dependency on the [HTTP_Request2](http://pear.php.net/package/HTTP_Request2), [Mail_mime](http://pear.php.net/package/Mail_mime), and [Mail_mimeDecode](http://pear.php.net/package/Mail_mimeDecode) PEAR packages. The recommended way to resolve these dependencies is to install them using the [PEAR package manager](http://pear.php.net/manual/en/installation.php).
+
 To get the source code from GitHub, type
 
     git clone https://github.com/WindowsAzure/azure-sdk-for-php.git
     cd ./azure-sdk-for-php
-
-**Note**
-
-The PHP Client Libraries for Windows Azure have a dependency on the [HTTP_Request2](http://pear.php.net/package/HTTP_Request2), [Mail_mime](http://pear.php.net/package/Mail_mime), and [Mail_mimeDecode](http://pear.php.net/package/Mail_mimeDecode) PEAR packages. The recommended way to resolve these dependencies is to install them using the [PEAR package manager](http://pear.php.net/manual/en/installation.php).
-
 
 ##Install via Composer
 
@@ -70,11 +69,9 @@ The PHP Client Libraries for Windows Azure have a dependency on the [HTTP_Reques
 
 		php composer.phar install
 
-	<div class="dev-callout"> 
-	<b>Note</b> 
-	<p>On Windows, you will also need to add the Git executable to your PATH environment variable.</p>
-	</div>
-
+	> **Note**
+	>
+	> On Windows, you will also need to add the Git executable to your PATH environment variable.
 
 ##Install as a PEAR package
 
