@@ -106,4 +106,4 @@ class SharedKeyAuthSchemeTest extends \PHPUnit_Framework_TestCase
     }
 }
 
-?>
+

@@ -122,4 +122,3 @@ class Protocol1RuntimeCurrentStateClientTest extends \PHPUnit_Framework_TestCase
     }
 }
 
-?>

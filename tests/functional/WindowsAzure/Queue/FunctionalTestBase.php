@@ -24,7 +24,7 @@
 
 namespace Tests\Functional\WindowsAzure\Queue;
 
-use WindowsAzure\Queue\QueueSettings;
+use WindowsAzure\Common\Internal\StorageServiceSettings;
 
 class FunctionalTestBase extends IntegrationTestBase
 {
@@ -33,13 +33,15 @@ class FunctionalTestBase extends IntegrationTestBase
     public function setUp()
     {
         parent::setUp();
-        $this->accountName = $this->config->getProperty(QueueSettings::ACCOUNT_NAME);
+        $settings = StorageServiceSettings::createFromConnectionString($this->connectionString);
+        $this->accountName = $settings->getName();
     }
 
     public static function setUpBeforeClass()
     {
         parent::setUpBeforeClass();
         $testBase = new FunctionalTestBase();
+        $testBase->setUp();
         QueueServiceFunctionalTestData::setupData();
 
         foreach(QueueServiceFunctionalTestData::$testQueueNames as $name)  {
@@ -55,6 +57,7 @@ class FunctionalTestBase extends IntegrationTestBase
     public static function tearDownAfterClass()
     {
         $testBase = new FunctionalTestBase();
+        $testBase->setUp();
         foreach(QueueServiceFunctionalTestData::$testQueueNames as $name)  {
             $testBase->safeDeleteQueue($name);
         }
@@ -72,4 +75,4 @@ class FunctionalTestBase extends IntegrationTestBase
     }
 }
 
-?>
+

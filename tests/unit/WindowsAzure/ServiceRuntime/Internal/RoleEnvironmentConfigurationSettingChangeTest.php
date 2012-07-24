@@ -55,4 +55,3 @@ class RoleEnvironmentConfigurationSettingChangeTest extends \PHPUnit_Framework_T
     }
 }
 
-?>

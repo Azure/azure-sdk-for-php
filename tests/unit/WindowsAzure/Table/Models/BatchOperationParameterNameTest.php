@@ -69,4 +69,4 @@ class BatchOperationParameterNameTest extends \PHPUnit_Framework_TestCase
     }
 }
 
-?>
+

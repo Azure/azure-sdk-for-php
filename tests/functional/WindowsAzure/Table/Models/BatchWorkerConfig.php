@@ -33,4 +33,4 @@ class BatchWorkerConfig
     public $options;
 }
 
-?>
+

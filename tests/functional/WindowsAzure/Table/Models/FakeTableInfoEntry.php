@@ -28,4 +28,4 @@ class FakeTableInfoEntry
 {
     public $TableName;
 }
-?>
+

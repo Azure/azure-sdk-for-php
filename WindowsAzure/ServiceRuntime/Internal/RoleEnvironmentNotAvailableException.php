@@ -39,4 +39,3 @@ class RoleEnvironmentNotAvailableException extends \Exception
 {
 }
 
-?>

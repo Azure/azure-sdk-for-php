@@ -25,8 +25,8 @@
 namespace Tests\Functional\WindowsAzure\ServiceBus;
 
 use Tests\Framework\ServiceBusRestProxyTestBase;
-use WindowsAzure\ServiceBus\Models\BrokerProperties;
 use Tests\Functional\WindowsAzure\Blob\BlobServiceFunctionalTestData;
+use WindowsAzure\ServiceBus\Models\BrokerProperties;
 
 class BrokerPropertiesMapperTest extends ServiceBusRestProxyTestBase
 {
@@ -124,4 +124,4 @@ class BrokerPropertiesMapperTest extends ServiceBusRestProxyTestBase
         $this->assertNull($properties->getScheduledEnqueueTimeUtc(), '$properties->getScheduledEnqueueTimeUtc()');
     }
 }
-?>
+

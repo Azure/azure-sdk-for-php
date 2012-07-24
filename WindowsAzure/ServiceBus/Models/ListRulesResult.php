@@ -98,4 +98,4 @@ class ListRulesResult extends Feed
     }
 
 }
-?>
+

@@ -47,4 +47,3 @@ interface IOutputChannel
     public function getOutputStream($name);
 }
 
-?>

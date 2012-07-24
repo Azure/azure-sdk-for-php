@@ -32,7 +32,6 @@ use Tests\Functional\WindowsAzure\Table\Models\BatchWorkerConfig;
 use Tests\Functional\WindowsAzure\Table\Models\FakeTableInfoEntry;
 use WindowsAzure\Common\Internal\Utilities;
 use WindowsAzure\Common\ServiceException;
-use WindowsAzure\Common\Configuration;
 use WindowsAzure\Table\Models\BatchError;
 use WindowsAzure\Table\Models\BatchOperations;
 use WindowsAzure\Table\Models\DeleteEntityOptions;
@@ -58,10 +57,10 @@ class TableServiceFunctionalTest extends FunctionalTestBase
         $shouldReturn = false;
         try {
             $this->restProxy->setServiceProperties($serviceProperties);
-            $this->assertFalse(Configuration::isEmulated(), 'Should succeed when not running in emulator');
+            $this->assertFalse($this->isEmulated(), 'Should succeed when not running in emulator');
         } catch (ServiceException $e) {
             // Expect failure in emulator, as v1.6 doesn't support this method
-            if (Configuration::isEmulated()) {
+            if ($this->isEmulated()) {
                 $this->assertEquals(TestResources::STATUS_BAD_REQUEST, $e->getCode(), 'getCode');
                 $shouldReturn = true;
             } else {
@@ -85,10 +84,10 @@ class TableServiceFunctionalTest extends FunctionalTestBase
 
         try {
             $this->restProxy->setServiceProperties($serviceProperties);
-            $this->assertFalse(Configuration::isEmulated(), 'Should succeed when not running in emulator');
+            $this->assertFalse($this->isEmulated(), 'Should succeed when not running in emulator');
         } catch (ServiceException $e) {
             // Expect failure in emulator, as v1.6 doesn't support this method
-            if (Configuration::isEmulated()) {
+            if ($this->isEmulated()) {
                 $this->assertEquals(TestResources::STATUS_BAD_REQUEST, $e->getCode(), 'getCode');
             } else {
                 throw $e;
@@ -105,10 +104,10 @@ class TableServiceFunctionalTest extends FunctionalTestBase
         $effOptions = (is_null($options) ? new TableServiceOptions() : $options);
         try {
             $ret = (is_null($options) ? $this->restProxy->getServiceProperties() : $this->restProxy->getServiceProperties($effOptions));
-            $this->assertFalse(Configuration::isEmulated(), 'Should succeed when not running in emulator');
+            $this->assertFalse($this->isEmulated(), 'Should succeed when not running in emulator');
             $this->verifyServicePropertiesWorker($ret, null);
         } catch (ServiceException $e) {
-            if (Configuration::isEmulated()) {
+            if ($this->isEmulated()) {
                 // Expect failure in emulator, as v1.6 doesn't support this method
                 $this->assertEquals(TestResources::STATUS_BAD_REQUEST, $e->getCode(), 'getCode');
             } else {
@@ -170,7 +169,7 @@ class TableServiceFunctionalTest extends FunctionalTestBase
             $this->setServicePropertiesWorker($serviceProperties, $options);
         }
 
-        if (!Configuration::isEmulated()) {
+        if (!$this->isEmulated()) {
             $serviceProperties = TableServiceFunctionalTestData::getDefaultServiceProperties();
             $this->restProxy->setServiceProperties($serviceProperties);
         }
@@ -189,11 +188,11 @@ class TableServiceFunctionalTest extends FunctionalTestBase
                 $this->restProxy->setServiceProperties($serviceProperties, $options);
             }
 
-            $this->assertFalse(Configuration::isEmulated(), 'Should succeed when not running in emulator');
+            $this->assertFalse($this->isEmulated(), 'Should succeed when not running in emulator');
             $ret = (is_null($options) ? $this->restProxy->getServiceProperties() : $this->restProxy->getServiceProperties($options));
             $this->verifyServicePropertiesWorker($ret, $serviceProperties);
         } catch (ServiceException $e) {
-            if (Configuration::isEmulated()) {
+            if ($this->isEmulated()) {
                 $this->assertEquals(TestResources::STATUS_BAD_REQUEST, $e->getCode(), 'getCode');
             } else {
                 throw $e;
@@ -214,7 +213,7 @@ class TableServiceFunctionalTest extends FunctionalTestBase
     */
     public function testQueryTables()
     {
-        $interestingqueryTablesOptions = TableServiceFunctionalTestData::getInterestingQueryTablesOptions();
+        $interestingqueryTablesOptions = TableServiceFunctionalTestData::getInterestingQueryTablesOptions($this->isEmulated());
         foreach($interestingqueryTablesOptions as $options)  {
             $this->queryTablesWorker($options);
         }
@@ -233,7 +232,7 @@ class TableServiceFunctionalTest extends FunctionalTestBase
             }
 
             if ((!is_null($options->getTop()) && $options->getTop() <= 0)) {
-                if (Configuration::isEmulated()) {
+                if ($this->isEmulated()) {
                     $this->assertEquals(0, count($ret->getTables()), "should be no tables");
                 } else {
                     $this->fail('Expect non-positive Top in $options to throw');
@@ -242,7 +241,7 @@ class TableServiceFunctionalTest extends FunctionalTestBase
 
             $this->verifyqueryTablesWorker($ret, $options);
         } catch (ServiceException $e) {
-            if ((!is_null($options->getTop()) && $options->getTop() <= 0) && !Configuration::isEmulated()) {
+            if ((!is_null($options->getTop()) && $options->getTop() <= 0) && !$this->isEmulated()) {
                 $this->assertEquals(TestResources::STATUS_BAD_REQUEST, $e->getCode(), 'getCode');
             } else {
                 throw $e;
@@ -350,7 +349,7 @@ class TableServiceFunctionalTest extends FunctionalTestBase
 
         // Make sure that the list of all applicable Tables is correctly updated.
         $qto = new QueryTablesOptions();
-        if (!Configuration::isEmulated()) {
+        if (!$this->isEmulated()) {
             // The emulator has problems with some queries,
             // but full Azure allow this to be more efficient:
             $qto->setPrefix(TableServiceFunctionalTestData::$testUniqueId);
@@ -409,7 +408,7 @@ class TableServiceFunctionalTest extends FunctionalTestBase
 
         // Make sure that the list of all applicable Tables is correctly updated.
         $qto = new QueryTablesOptions();
-        if (!Configuration::isEmulated()) {
+        if (!$this->isEmulated()) {
             // The emulator has problems with some queries,
             // but full Azure allow this to be more efficient:
             $qto->setPrefix(TableServiceFunctionalTestData::$testUniqueId);
@@ -562,9 +561,9 @@ class TableServiceFunctionalTest extends FunctionalTestBase
         // Compare the entities to make sure they match.
         $this->assertEquals($ent->getPartitionKey(), $entReturned->getPartitionKey(), 'getPartitionKey');
         $this->assertEquals($ent->getRowKey(), $entReturned->getRowKey(), 'getRowKey');
-        $this->assertNotNull($entReturned->getEtag(), 'getEtag');
-        if (!is_null($ent->getEtag())) {
-            $this->assertEquals($ent->getEtag(), $entReturned->getEtag(), 'getEtag');
+        $this->assertNotNull($entReturned->getETag(), 'getETag');
+        if (!is_null($ent->getETag())) {
+            $this->assertEquals($ent->getETag(), $entReturned->getETag(), 'getETag');
         }
         $this->assertNotNull($entReturned->getTimestamp(), 'getTimestamp');
         if (is_null($ent->getTimestamp())) {
@@ -610,10 +609,10 @@ class TableServiceFunctionalTest extends FunctionalTestBase
     public function testDeleteEntity()
     {
         $ents = TableServiceFunctionalTestData::getSimpleEntities(3);
-        for ($useEtag = 0; $useEtag <= 2; $useEtag++) {
+        for ($useETag = 0; $useETag <= 2; $useETag++) {
             foreach($ents as $ent)  {
                 $options = new DeleteEntityOptions();
-                $this->deleteEntityWorker($ent, $useEtag, $options);
+                $this->deleteEntityWorker($ent, $useETag, $options);
             }
         }
     }
@@ -623,21 +622,21 @@ class TableServiceFunctionalTest extends FunctionalTestBase
     * @covers WindowsAzure\Table\TableRestProxy::getEntity
     * @covers WindowsAzure\Table\TableRestProxy::insertEntity
     */
-    private function deleteEntityWorker($ent, $useEtag, $options)
+    private function deleteEntityWorker($ent, $useETag, $options)
     {
         $table = $this->getCleanTable();
         try {
             // Upload the entity.
             $ier = $this->restProxy->insertEntity($table, $ent);
-            if ($useEtag == 1) {
-                $options->setEtag($ier->getEntity()->getEtag());
-            } else if ($useEtag == 2) {
-                $options->setEtag('W/"datetime\'2012-03-05T21%3A46%3A25->5385467Z\'"');
+            if ($useETag == 1) {
+                $options->setETag($ier->getEntity()->getETag());
+            } else if ($useETag == 2) {
+                $options->setETag('W/"datetime\'2012-03-05T21%3A46%3A25->5385467Z\'"');
             }
 
             $this->restProxy->deleteEntity($table, $ent->getPartitionKey(), $ent->getRowKey(), $options);
 
-            if ($useEtag == 2) {
+            if ($useETag == 2) {
                 $this->fail('Expect bad etag throws');
             }
 
@@ -651,7 +650,7 @@ class TableServiceFunctionalTest extends FunctionalTestBase
             }
             $this->assertTrue($gotError, 'Expect error when entity is deleted');
         } catch (ServiceException $e) {
-            if ($useEtag == 2) {
+            if ($useETag == 2) {
                 $this->assertEquals(TestResources::STATUS_PRECONDITION_FAILED, $e->getCode(), 'getCode');
             } else {
                 throw $e;
@@ -1124,10 +1123,10 @@ class TableServiceFunctionalTest extends FunctionalTestBase
                 TableServiceFunctionalTestUtils::mutateEntity($ent, $mutatePivot);
                 try {
                     $this->insertOrReplaceEntityWorker($initialEnt, $ent, $options);
-                    $this->assertFalse(Configuration::isEmulated(), 'Should succeed when not running in emulator');
+                    $this->assertFalse($this->isEmulated(), 'Should succeed when not running in emulator');
                 } catch (ServiceException $e) {
                     // Expect failure in emulator, as v1.6 doesn't support this method
-                    if (Configuration::isEmulated()) {
+                    if ($this->isEmulated()) {
                         $this->assertEquals(TestResources::STATUS_BAD_REQUEST, $e->getCode(), 'getCode');
                     } else {
                         throw $e;
@@ -1185,10 +1184,10 @@ class TableServiceFunctionalTest extends FunctionalTestBase
                 TableServiceFunctionalTestUtils::mutateEntity($ent, $mutatePivot);
                 try {
                     $this->insertOrMergeEntityWorker($initialEnt, $ent, $options);
-                    $this->assertFalse(Configuration::isEmulated(), 'Should succeed when not running in emulator');
+                    $this->assertFalse($this->isEmulated(), 'Should succeed when not running in emulator');
                 } catch (ServiceException $e) {
                     // Expect failure in emulator, as v1.6 doesn't support this method
-                    if (Configuration::isEmulated()) {
+                    if ($this->isEmulated()) {
                         $this->assertEquals(TestResources::STATUS_BAD_REQUEST, $e->getCode(), 'getCode');
                     } else {
                         throw $e;
@@ -1416,7 +1415,7 @@ class TableServiceFunctionalTest extends FunctionalTestBase
     * @covers WindowsAzure\Table\TableRestProxy::batch
     * @covers WindowsAzure\Table\TableRestProxy::insertEntity
     */
-    public function testBatchPositiveFirstKeyMatchNoEtag()
+    public function testBatchPositiveFirstKeyMatchNoETag()
     {
         $this->batchPositiveOuter(ConcurType::KEY_MATCH_NO_ETAG, 234);
     }
@@ -1425,7 +1424,7 @@ class TableServiceFunctionalTest extends FunctionalTestBase
     * @covers WindowsAzure\Table\TableRestProxy::batch
     * @covers WindowsAzure\Table\TableRestProxy::insertEntity
     */
-    public function testBatchPositiveFirstKeyMatchEtagMismatch()
+    public function testBatchPositiveFirstKeyMatchETagMismatch()
     {
         $this->skipIfEmulated();
         $this->batchPositiveOuter(ConcurType::KEY_MATCH_ETAG_MISMATCH, 345);
@@ -1435,7 +1434,7 @@ class TableServiceFunctionalTest extends FunctionalTestBase
     * @covers WindowsAzure\Table\TableRestProxy::batch
     * @covers WindowsAzure\Table\TableRestProxy::insertEntity
     */
-    public function testBatchPositiveFirstKeyMatchEtagMatch()
+    public function testBatchPositiveFirstKeyMatchETagMatch()
     {
         $this->batchPositiveOuter(ConcurType::KEY_MATCH_ETAG_MATCH, 456);
     }
@@ -1526,9 +1525,9 @@ class TableServiceFunctionalTest extends FunctionalTestBase
         // Compare the entities to make sure they match.
         $this->assertEquals($ent->getPartitionKey(), $entReturned->getPartitionKey(), 'getPartitionKey');
         $this->assertEquals($ent->getRowKey(), $entReturned->getRowKey(), 'getRowKey');
-        $this->assertNotNull($entReturned->getEtag(), 'getEtag');
-        if (!is_null($ent->getEtag())) {
-            $this->assertTrue($ent->getEtag() != $entReturned->getEtag(), 'getEtag should change after submit: initial \'' . $ent->getEtag() . '\', returned \'' . $entReturned->getEtag() . '\'');
+        $this->assertNotNull($entReturned->getETag(), 'getETag');
+        if (!is_null($ent->getETag())) {
+            $this->assertTrue($ent->getETag() != $entReturned->getETag(), 'getETag should change after submit: initial \'' . $ent->getETag() . '\', returned \'' . $entReturned->getETag() . '\'');
         }
         $this->assertNotNull($entReturned->getTimestamp(), 'getTimestamp');
         if (is_null($ent->getTimestamp())) {
@@ -1575,7 +1574,7 @@ class TableServiceFunctionalTest extends FunctionalTestBase
                 // Want to know there is at least one part that does not fail.
                 continue;
             }
-            if (Configuration::isEmulated() && (
+            if ($this->isEmulated() && (
                     ($firstOpType == OpType::INSERT_OR_MERGE_ENTITY) ||
                     ($firstOpType == OpType::INSERT_OR_REPLACE_ENTITY))) {
                 // Emulator does not support these operations.
@@ -1596,7 +1595,7 @@ class TableServiceFunctionalTest extends FunctionalTestBase
                 while (!is_null($this->expectConcurrencyFailure($config->opType, $config->concurType))) {
                     $config->concurType = $concurTypes[mt_rand(0, count($concurTypes))];
                     $config->opType = $opTypes[mt_rand(0, count($opTypes))];
-                    if (Configuration::isEmulated()) {
+                    if ($this->isEmulated()) {
                         if ($config->opType == OpType::INSERT_OR_MERGE_ENTITY) {
                             $config->opType = OpType::MERGE_ENTITY;
                         }
@@ -1612,7 +1611,7 @@ class TableServiceFunctionalTest extends FunctionalTestBase
 
             for ($i = 0; $i <= 1; $i++) {
                 $options = ($i == 0 ? null : new TableServiceOptions());
-                if (Configuration::isEmulated()) {
+                if ($this->isEmulated()) {
                     // The emulator has trouble with some batches.
                     for ($j = 0; $j < count($configs); $j++) {
                         $tmpconfigs = array();
@@ -1712,7 +1711,7 @@ class TableServiceFunctionalTest extends FunctionalTestBase
             $this->verifyinsertEntityWorker($targetEnt, $opResult->getEntity());
         } else if ($opResult instanceof UpdateEntityResult) {
             $ger = $this->restProxy->getEntity($table, $targetEnt->getPartitionKey(), $targetEnt->getRowKey());
-            $this->assertEquals($opResult->getEtag(), $ger->getEntity()->getEtag(), 'op->getEtag');
+            $this->assertEquals($opResult->getETag(), $ger->getEntity()->getETag(), 'op->getETag');
         } else if (is_string($opResult)) {
             // Nothing special to do.
         } else if ($opResult instanceof BatchError) {
@@ -1755,7 +1754,7 @@ class TableServiceFunctionalTest extends FunctionalTestBase
                 if (is_null($options) && $concurType != ConcurType::KEY_MATCH_ETAG_MISMATCH) {
                     $operations->addDeleteEntity($table, $targetEnt->getPartitionKey(), $targetEnt->getRowKey(), null);
                 } else {
-                    $operations->addDeleteEntity($table, $targetEnt->getPartitionKey(), $targetEnt->getRowKey(), $targetEnt->getEtag());
+                    $operations->addDeleteEntity($table, $targetEnt->getPartitionKey(), $targetEnt->getRowKey(), $targetEnt->getETag());
                 }
                 break;
             case OpType::INSERT_ENTITY:
@@ -1792,7 +1791,7 @@ class TableServiceFunctionalTest extends FunctionalTestBase
                     $this->restProxy->deleteEntity($table, $targetEnt->getPartitionKey(), $targetEnt->getRowKey());
                 } else {
                     $delOptions = new DeleteEntityOptions();
-                    $delOptions->setEtag($targetEnt->getEtag());
+                    $delOptions->setETag($targetEnt->getETag());
                     $this->restProxy->deleteEntity($table, $targetEnt->getPartitionKey(), $targetEnt->getRowKey(), $delOptions);
                 }
                 break;
@@ -1898,13 +1897,13 @@ class TableServiceFunctionalTest extends FunctionalTestBase
                 $targetEnt->setRowKey(TableServiceFunctionalTestData::getNewKey());
                 break;
             case ConcurType::KEY_MATCH_NO_ETAG:
-                $targetEnt->setEtag(null);
+                $targetEnt->setETag(null);
                 break;
             case ConcurType::KEY_MATCH_ETAG_MISMATCH:
-                $newEtag =  $this->restProxy->updateEntity($table, $initialEnt)->getEtag();
-                $initialEnt->setEtag($newEtag);
-                // Now the $targetEnt Etag will not match.
-                $this->assertTrue($targetEnt->getEtag() != $initialEnt->getEtag(), 'targetEnt->Etag(\'' . $targetEnt->getEtag() . '\') !=  updated->Etag(\'' . $initialEnt->getEtag() . '\')');
+                $newETag =  $this->restProxy->updateEntity($table, $initialEnt)->getETag();
+                $initialEnt->setETag($newETag);
+                // Now the $targetEnt ETag will not match.
+                $this->assertTrue($targetEnt->getETag() != $initialEnt->getETag(), 'targetEnt->ETag(\'' . $targetEnt->getETag() . '\') !=  updated->ETag(\'' . $initialEnt->getETag() . '\')');
 
                 break;
             case ConcurType::KEY_MATCH_ETAG_MATCH:
@@ -1974,4 +1973,3 @@ class TableServiceFunctionalTest extends FunctionalTestBase
 
 }
 
-?>

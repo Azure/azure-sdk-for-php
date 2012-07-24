@@ -63,8 +63,6 @@ class RuleInfo
      *
      * @param string          $title           The title of the rule.
      * @param RuleDescription $ruleDescription The description of the rule.
-     *
-     * 
      */
     public function __construct(
         $title = Resources::EMPTY_STRING, 
@@ -140,6 +138,8 @@ class RuleInfo
      * Sets the entry.
      *
      * @param Entry $entry The entry of the queue info.
+     * 
+     * @return none
      */
     public function setEntry($entry)
     {

@@ -293,12 +293,17 @@ class ServiceManagementRestProxyTest extends ServiceManagementRestProxyTestBase
         $options = new CreateStorageServiceOptions();
         $options->setLocation('West US');
         
+        // Count the storage services before creating new one.
+        $storageCount = count($this->restProxy->listStorageServices()->getStorageServices());
+        
         // Test
         $result = $this->restProxy->createStorageService($name, $label, $options);
         $this->blockUntilAsyncSucceed($result->getRequestId());
         
         // Assert
         $this->assertTrue($this->storageServiceExists($name));
+        
+        return $storageCount;
     }
     
     /**
@@ -308,7 +313,7 @@ class ServiceManagementRestProxyTest extends ServiceManagementRestProxyTestBase
      * @covers WindowsAzure\ServiceManagement\ServiceManagementRestProxy::_getPath
      * @depends testCreateStorageService
      */
-    public function testListStorageServices()
+    public function testListStorageServices($storageCount)
     {
         // Setup
         $expected = 1;
@@ -317,7 +322,7 @@ class ServiceManagementRestProxyTest extends ServiceManagementRestProxyTestBase
         $result = $this->restProxy->listStorageServices();
         
         // Assert
-        $this->assertCount($expected + $this->storageCount, $result->getStorageServices());
+        $this->assertCount($expected + $storageCount, $result->getStorageServices());
     }
     
     /**
@@ -429,4 +434,4 @@ class ServiceManagementRestProxyTest extends ServiceManagementRestProxyTestBase
     }
 }
 
-?>
+

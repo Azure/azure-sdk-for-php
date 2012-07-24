@@ -72,4 +72,4 @@ class AffinityGroup extends Service
     }
 }
 
-?>
+

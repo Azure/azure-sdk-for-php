@@ -77,7 +77,7 @@ class ListContainersResultTest extends \PHPUnit_Framework_TestCase
         $containers[0]->getProperties()->getLastModified());
         $this->assertEquals(
             $sample['Containers']['Container']['Properties']['Etag'],
-            $containers[0]->getProperties()->getEtag());
+            $containers[0]->getProperties()->getETag());
         $this->assertEquals($sample['Marker'], $actual->getMarker());
         $this->assertEquals($sample['MaxResults'], $actual->getMaxResults());
         $this->assertEquals($sample['NextMarker'], $actual->getNextMarker());
@@ -104,7 +104,7 @@ class ListContainersResultTest extends \PHPUnit_Framework_TestCase
             $containers[0]->getProperties()->getLastModified());
         $this->assertEquals(
             $sample['Containers']['Container'][0]['Properties']['Etag'],
-            $containers[0]->getProperties()->getEtag());
+            $containers[0]->getProperties()->getETag());
         $this->assertEquals($sample['Containers']['Container'][1]['Name'], $containers[1]->getName());
         $this->assertEquals($sample['Containers']['Container'][1]['Url'], $containers[1]->getUrl());
         $this->assertEquals(
@@ -112,7 +112,7 @@ class ListContainersResultTest extends \PHPUnit_Framework_TestCase
             $containers[1]->getProperties()->getLastModified());
         $this->assertEquals(
             $sample['Containers']['Container'][1]['Properties']['Etag'],
-            $containers[1]->getProperties()->getEtag());
+            $containers[1]->getProperties()->getETag());
         $this->assertEquals($sample['MaxResults'], $actual->getMaxResults());
         $this->assertEquals($sample['NextMarker'], $actual->getNextMarker());
         
@@ -284,4 +284,4 @@ class ListContainersResultTest extends \PHPUnit_Framework_TestCase
     }
 }
 
-?>
+

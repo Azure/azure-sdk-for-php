@@ -26,32 +26,33 @@ namespace Tests\Functional\WindowsAzure\Blob;
 
 use Tests\Framework\FiddlerFilter;
 use Tests\Framework\BlobServiceRestProxyTestBase;
-use WindowsAzure\Blob\BlobSettings;
-use WindowsAzure\Common\Configuration;
+use WindowsAzure\Common\Internal\StorageServiceSettings;
 use WindowsAzure\Common\Internal\Utilities;
 
 class IntegrationTestBase extends BlobServiceRestProxyTestBase
 {
-    public function __construct()
+    public function setUp()
     {
-        parent::__construct();
+        parent::setUp();
         $fiddlerFilter = new FiddlerFilter();
         $this->restProxy = $this->restProxy->withFilter($fiddlerFilter);
     }
 
     public static function tearDownAfterClass()
     {
-        if (!Configuration::isEmulated()) {
-            $tmp = new IntegrationTestBase();
+        $integrationTestBase = new IntegrationTestBase();
+        $integrationTestBase->setUp();
+        if ($integrationTestBase->isEmulated()) {
             $serviceProperties = BlobServiceFunctionalTestData::getDefaultServiceProperties();
-            $tmp->restProxy->setServiceProperties($serviceProperties);
+            $integrationTestBase->restProxy->setServiceProperties($serviceProperties);
         }
         parent::tearDownAfterClass();
     }
 
     protected function hasSecureEndpoint()
     {
-        $uri = $this->config->getProperty(BlobSettings::URI);
+        $settings = StorageServiceSettings::createFromConnectionString($this->connectionString);
+        $uri = $settings->getBlobEndpointUri();
         return Utilities::startsWith($uri, 'https://');
     }
 }

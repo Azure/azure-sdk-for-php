@@ -281,8 +281,7 @@ class AtomBase
         Validate::notNull($xmlWriter, 'xmlWriter');
         Validate::isString($attributeName, 'attributeName');
         
-        if (!empty($attributeValue))
-        {
+        if (!empty($attributeValue)) {
             $xmlWriter->writeAttribute(
                 $attributeName,
                 $attributeValue
@@ -290,6 +289,17 @@ class AtomBase
         }
     }
 
+    /**
+     * Writes the optional elements namespaces.
+     * 
+     * @param \XmlWriter $xmlWriter    The XML writer.
+     * @param string     $prefix       The prefix.
+     * @param string     $elementName  The element name.
+     * @param string     $namespace    The namespace name.
+     * @param string     $elementValue The element value.
+     * 
+     * @return none
+     */
     protected function writeOptionalElementNS(
         $xmlWriter, 
         $prefix, 
@@ -300,8 +310,7 @@ class AtomBase
         Validate::notNull($xmlWriter, 'xmlWriter');
         Validate::isString($elementName, 'elementName');
 
-        if (!empty($elementValue))
-        {
+        if (!empty($elementValue)) {
             $xmlWriter->writeElementNS(
                 $prefix, 
                 $elementName, 
@@ -310,6 +319,5 @@ class AtomBase
             );
         }
     }
-
 }
-?>
+

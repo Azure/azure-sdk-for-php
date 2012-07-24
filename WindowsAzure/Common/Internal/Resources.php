@@ -39,6 +39,29 @@ class Resources
 {
     // @codingStandardsIgnoreStart
     
+    // Connection strings
+    const USE_DEVELOPMENT_STORAGE_NAME = 'UseDevelopmentStorage';
+    const DEVELOPMENT_STORAGE_PROXY_URI_NAME = 'DevelopmentStorageProxyUri';
+    const DEFAULT_ENDPOINTS_PROTOCOL_NAME = 'DefaultEndpointsProtocol';
+    const ACCOUNT_NAME_NAME = 'AccountName';
+    const ACCOUNT_KEY_NAME = 'AccountKey';
+    const BLOB_ENDPOINT_NAME = 'BlobEndpoint';
+    const QUEUE_ENDPOINT_NAME = 'QueueEndpoint';
+    const TABLE_ENDPOINT_NAME = 'TableEndpoint';
+    const SHARED_ACCESS_SIGNATURE_NAME = 'SharedAccessSignature';
+    const DEV_STORE_NAME = 'devstoreaccount1';
+    const DEV_STORE_KEY = 'Eby8vdM02xNOcqFlqUwJPLlmEtlCDXJ1OUzFT50uSRZ6IFsuFq2UVErCz4I6tq/K1SZFPTOtr/KBHBeksoGMGw==';
+    const BLOB_BASE_DNS_NAME = 'blob.core.windows.net';
+    const QUEUE_BASE_DNS_NAME = 'queue.core.windows.net';
+    const TABLE_BASE_DNS_NAME = 'table.core.windows.net';
+    const DEV_STORE_CONNECTION_STRING = 'BlobEndpoint=127.0.0.1:10000;QueueEndpoint=127.0.0.1:10001;TableEndpoint=127.0.0.1:10002;AccountName=devstoreaccount1;AccountKey=Eby8vdM02xNOcqFlqUwJPLlmEtlCDXJ1OUzFT50uSRZ6IFsuFq2UVErCz4I6tq/K1SZFPTOtr/KBHBeksoGMGw==';
+    const SUBSCRIPTION_ID_NAME = 'SubscriptionID';
+    const CERTIFICATE_PATH_NAME = 'CertificatePath';
+    const SERVICE_MANAGEMENT_ENDPOINT_NAME = 'ServiceManagementEndpoint';
+    const SERVICE_BUS_ENDPOINT_NAME = 'Endpoint';
+    const SHARED_SECRET_ISSUER_NAME = 'SharedSecretIssuer';
+    const SHARED_SECRET_VALUE_NAME = 'SharedSecretValue';
+    
     // Messages
     const INVALID_TYPE_MSG = 'The provided variable should be of type: ';
     const INVALID_META_MSG = 'Metadata cannot contain newline characters.';
@@ -67,12 +90,22 @@ class Resources
     const INVALID_CSA_OPT_MSG = 'Must provide valid location or affinity group.';
     const INVALID_USA_OPT_MSG = 'Must provide either description or label.';
     const INVALID_CONFIG_MSG = 'Config object must be of type Configuration';
-    const INVALID_BUILDER_MSG = 'Builder object must implement IServicesBuilder';
     const INVALID_ACH_MSG = 'The provided access condition header is invalid';
     const INVALID_RECEIVE_MODE_MSG = 'The receive message option is in neither RECEIVE_AND_DELETE nor PEEK_LOCK mode.';
-    const MISSING_CONFIG_SETTING_KEY_MSG = "Missing configuration setting %s which is required to create %sRestProxy.";
-    const MISSING_CONFIG_SETTING_VALUE_MSG = "The value of configuration setting %s can't be null or empty.";
+    const INVALID_CONFIG_URI = "The provided URI '%s' is invalid. It has to pass the check 'filter_var(<user_uri>, FILTER_VALIDATE_URL)'.";
+    const INVALID_CONFIG_VALUE = "The provided config value '%s' does not belong to the valid values subset:\n%s";
+    const INVALID_ACCOUNT_KEY_FORMAT = "The provided account key '%s' is not a valid base64 string. It has to pass the check 'base64_decode(<user_account_key>, true)'.";
+    const MISSING_CONNECTION_STRING_SETTINGS = "The provided connection string '%s' does not have complete configuration settings.";
+    const INVALID_CONNECTION_STRING_SETTING_KEY = "The setting key '%s' is not found in the expected configuration setting keys:\n%s";
+    const INVALID_CERTIFICATE_PATH = "The provided certificate path '%s' is invalid.";
     const INSTANCE_TYPE_VALIDATION_MSG = 'The type of %s is %s but is expected to be %s.';
+    const MISSING_CONNECTION_STRING_CHAR = "Missing %s character";
+    const ERROR_PARSING_STRING = "'%s' at position %d.";
+    const INVALID_CONNECTION_STRING = "Argument '%s' is not a valid connection string: '%s'";
+    const ERROR_CONNECTION_STRING_MISSING_KEY = 'Missing key name';
+    const ERROR_CONNECTION_STRING_EMPTY_KEY = 'Empty key name';
+    const ERROR_CONNECTION_STRING_MISSING_CHARACTER = "Missing %s character";
+    const ERROR_EMPTY_SETTINGS = 'No keys were found in the connection string';
     const MISSING_LOCK_LOCATION_MSG = 'The lock location of the brokered message is missing.';
 
     // HTTP Headers
@@ -163,8 +196,6 @@ class Resources
     const AZURE_DATE_FORMAT      = 'D, d M Y H:i:s T';
     const TIMESTAMP_FORMAT       = 'Y-m-d H:i:s';
     const EMULATED               = 'EMULATED';
-    const DEV_STORE_NAME         = 'devstoreaccount1';
-    const DEV_STORE_KEY          = 'Eby8vdM02xNOcqFlqUwJPLlmEtlCDXJ1OUzFT50uSRZ6IFsuFq2UVErCz4I6tq/K1SZFPTOtr/KBHBeksoGMGw==';
     const EMULATOR_BLOB_URI      = '127.0.0.1:10000';
     const EMULATOR_QUEUE_URI     = '127.0.0.1:10001';
     const EMULATOR_TABLE_URI     = '127.0.0.1:10002';
@@ -172,6 +203,11 @@ class Resources
     const SERVICE_MANAGEMENT_URL = 'https://management.core.windows.net';
     const HTTP_SCHEME            = 'http';
     const HTTPS_SCHEME           = 'https';
+    const SETTING_NAME = 'SettingName';
+    const SETTING_CONSTRAINT = 'SettingConstraint';
+    const DEV_STORE_URI = 'http://127.0.0.1';
+    const SERVICE_URI_FORMAT = "%s://%s.%s";
+    const WRAP_ENDPOINT_URI_FORMAT = "https://%s-sb.accesscontrol.windows.net/WRAPv0.9";
     
     // Xml Namespaces
     const WA_XML_NAMESPACE   = 'http://schemas.microsoft.com/windowsazure';
@@ -308,4 +344,4 @@ class Resources
     // @codingStandardsIgnoreEnd
 }
 
-?>
+
