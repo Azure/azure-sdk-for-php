@@ -49,6 +49,14 @@ class SqlFilter extends Filter
     private $_sqlExpression;
 
     /**
+     * The compatibility level of the filter. 
+     * 
+     * @var string 
+     */
+    private $_compatibilityLevel;
+
+
+    /**
      * Creates a SQL filter with default parameters.
      */
     public function __construct()
@@ -78,6 +86,28 @@ class SqlFilter extends Filter
     public function setSqlExpression($sqlExpression)
     {
         $this->_sqlExpression = $sqlExpression;
+    }
+
+    /**
+     * Gets the compatibility level. 
+     * 
+     * @return string 
+     */
+    public function getCompatibilityLevel()
+    {
+        return $this->_compatibilityLevel;
+    }
+
+    /**
+     * Sets the compatibility level. 
+     * 
+     * @param string $compatibilityLevel The compatibility level. 
+     * 
+     * @return none
+     */
+    public function setCompatibilityLevel($compatibilityLevel)
+    {
+        $this->_compatibilityLevel = $compatibilityLevel;
     }
 
 }
