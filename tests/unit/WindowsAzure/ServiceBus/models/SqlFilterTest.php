@@ -81,7 +81,7 @@ class SqlFilterTest extends \PHPUnit_Framework_TestCase
     public function testGetSetCompatibilityLevel() {
         // Setup
         $expected = 'testCompatibilityLevel';
-        $filter = new Filter();
+        $filter = new SqlFilter();
 
         // Test
         $filter->setCompatibilityLevel($expected);
