@@ -52,28 +52,6 @@ class FilterTest extends \PHPUnit_Framework_TestCase
         $this->assertNotNull($filter);
     }
 
-    /** 
-     * @covers WindowsAzure\ServiceBus\Models\Filter::getCompatibilityLevel
-     * @covers WindowsAzure\ServiceBus\Models\Filter::setCompatibilityLevel
-     */
-    public function testGetSetCompatibilityLevel() {
-        // Setup
-        $expected = 'testCompatibilityLevel';
-        $filter = new Filter();
-
-        // Test
-        $filter->setCompatibilityLevel($expected);
-        $actual = $filter->getCompatibilityLevel();
-
-        // Assert 
-        $this->assertEquals(
-            $expected,
-            $actual
-        );
-
-    }
-
-
 }
 
 
