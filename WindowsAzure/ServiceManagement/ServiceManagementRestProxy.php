@@ -713,6 +713,7 @@ class ServiceManagementRestProxy extends RestProxy
     {
         Validate::isString($name, 'name');
         Validate::notNullOrEmpty($name, 'name');
+        Validate::notNullOrEmpty($options, 'options');
         $label       = $options->getLabel();
         $description = $options->getDescription();
         Validate::isTrue(

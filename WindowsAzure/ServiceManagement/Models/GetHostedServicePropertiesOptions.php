@@ -54,7 +54,7 @@ class GetHostedServicePropertiesOptions
     /**
      * Sets the embed detail flag.
      * 
-     * @param boolean $embedDetail The embed detail value.
+     * @param boolean $embedDetail The embed detail flag.
      * 
      * @return none
      */
