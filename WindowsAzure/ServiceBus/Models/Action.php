@@ -100,7 +100,7 @@ class Action
      * 
      * @return none
      */
-    public function setAttribute($key, $value)
+    protected function setAttribute($key, $value)
     {
         $this->attributes[$key] = $value;
     }

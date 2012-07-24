@@ -23,10 +23,10 @@
  */
 
 namespace Tests\Unit\WindowsAzure\ServiceBus\Models;
-use WindowsAzure\ServiceBus\Models\Filter;
+use WindowsAzure\ServiceBus\Models\Action;
 
 /**
- * Unit tests for class Filter
+ * Unit tests for class Action
  *
  * @category  Microsoft
  * @package   Tests\Unit\WindowsAzure\ServiceBus\Models
@@ -36,43 +36,21 @@ use WindowsAzure\ServiceBus\Models\Filter;
  * @version   Release: @package_version@
  * @link      https://github.com/WindowsAzure/azure-sdk-for-php
  */
-class FilterTest extends \PHPUnit_Framework_TestCase
+class ActionTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @covers WindowsAzure\ServiceBus\Models\Filter::__construct
+     * @covers WindowsAzure\ServiceBus\Models\Action::__construct
      */
-    public function testFilterConstructor()
+    public function testActionConstructor()
     {
         // Setup
         
         // Test
-        $filter = new Filter();
+        $action = new Action();
         
         // Assert
-        $this->assertNotNull($filter);
+        $this->assertNotNull($action);
     }
-
-    /** 
-     * @covers WindowsAzure\ServiceBus\Models\Filter::getCompatibilityLevel
-     * @covers WindowsAzure\ServiceBus\Models\Filter::setCompatibilityLevel
-     */
-    public function testGetSetCompatibilityLevel() {
-        // Setup
-        $expected = 'testCompatibilityLevel';
-        $filter = new Filter();
-
-        // Test
-        $filter->setCompatibilityLevel($expected);
-        $actual = $filter->getCompatibilityLevel();
-
-        // Assert 
-        $this->assertEquals(
-            $expected,
-            $actual
-        );
-
-    }
-
 
 }
 
