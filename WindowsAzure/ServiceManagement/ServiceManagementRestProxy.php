@@ -25,6 +25,7 @@
 namespace WindowsAzure\ServiceManagement;
 use WindowsAzure\Common\Internal\Resources;
 use WindowsAzure\Common\Internal\Validate;
+use WindowsAzure\Common\Internal\Utilities;
 use WindowsAzure\Common\Internal\RestProxy;
 use WindowsAzure\Common\Internal\Http\HttpCallContext;
 use WindowsAzure\Common\Internal\Serialization\XmlSerializer;
@@ -38,11 +39,13 @@ use WindowsAzure\ServiceManagement\Models\StorageService;
 use WindowsAzure\ServiceManagement\Models\ListStorageServicesResult;
 use WindowsAzure\ServiceManagement\Models\GetOperationStatusResult;
 use WindowsAzure\ServiceManagement\Models\AsynchronousOperationResult;
-use WindowsAzure\ServiceManagement\Models\UpdateStorageServiceOptions;
+use WindowsAzure\ServiceManagement\Models\UpdateServiceOptions;
 use WindowsAzure\ServiceManagement\Models\GetStorageServicePropertiesResult;
 use WindowsAzure\ServiceManagement\Models\GetStorageServiceKeysResult;
 use WindowsAzure\ServiceManagement\Models\ListHostedServicesResult;
 use WindowsAzure\ServiceManagement\Models\HostedService;
+use WindowsAzure\ServiceManagement\Models\GetHostedServicePropertiesOptions;
+use WindowsAzure\ServiceManagement\Models\GetHostedServicePropertiesResult;
 
 /**
  * This class constructs HTTP requests and receive HTTP responses for service 
@@ -375,8 +378,8 @@ class ServiceManagementRestProxy extends RestProxy
      * Updates the label and/or the description for a storage account in Windows 
      * Azure.
      * 
-     * @param string                      $name    The storage account name.
-     * @param UpdateStorageServiceOptions $options The optional parameters.
+     * @param string               $name    The storage account name.
+     * @param UpdateServiceOptions $options The optional parameters.
      * 
      * @return none
      * 
@@ -390,7 +393,7 @@ class ServiceManagementRestProxy extends RestProxy
         $description = $options->getDescription();
         Validate::isTrue(
             !empty($label) || !empty($description),
-            Resources::INVALID_USA_OPT_MSG
+            Resources::INVALID_UPDATE_SERVICE_OPTIONS_MSG
         );
         
         $storageService = new StorageService();
@@ -698,9 +701,9 @@ class ServiceManagementRestProxy extends RestProxy
      * updates the label and/or the description for a hosted service in Windows 
      * Azure.
      * 
-     * @param string                     $name    The name for the hosted
-     * service that is unique within Windows Azure.
-     * @param UpdateHostedServiceOptions $options The optional parameters.
+     * @param string               $name    The name for the hosted service that is 
+     * unique within Windows Azure.
+     * @param UpdateServiceOptions $options The optional parameters.
      * 
      * @return none
      * 
@@ -708,7 +711,34 @@ class ServiceManagementRestProxy extends RestProxy
      */
     public function updateHostedService($name, $options)
     {
-        throw new \Exception(Resources::NOT_IMPLEMENTED_MSG);
+        Validate::isString($name, 'name');
+        Validate::notNullOrEmpty($name, 'name');
+        Validate::notNullOrEmpty($options, 'options');
+        $label       = $options->getLabel();
+        $description = $options->getDescription();
+        Validate::isTrue(
+            !empty($label) || !empty($description),
+            Resources::INVALID_UPDATE_SERVICE_OPTIONS_MSG
+        );
+        
+        $hostedService = new HostedService();
+        $hostedService->setLabel($options->getLabel());
+        $hostedService->setDescription($options->getDescription());
+        $hostedService->addSerializationProperty(
+            XmlSerializer::ROOT_NAME,
+            Resources::XTAG_UPDATE_HOSTED_SERVICE
+        );
+        
+        $context = new HttpCallContext();
+        $context->setMethod(Resources::HTTP_PUT);
+        $context->setPath($this->_getHostedServicePath($name));
+        $context->addStatusCode(Resources::STATUS_OK);
+        $context->setBody($hostedService->serialize($this->dataSerializer));
+        $context->addHeader(
+            Resources::CONTENT_TYPE,
+            Resources::XML_ATOM_CONTENT_TYPE
+        );
+        $this->sendContext($context);
     }
     
     /**
@@ -754,7 +784,26 @@ class ServiceManagementRestProxy extends RestProxy
      */
     public function getHostedServiceProperties($name, $options = null)
     {
-        throw new \Exception(Resources::NOT_IMPLEMENTED_MSG);
+        Validate::isString($name, 'name');
+        Validate::notNullOrEmpty($name, 'name');
+        
+        if (is_null($options)) {
+            $options = new GetHostedServicePropertiesOptions();
+        }
+        
+        $context = new HttpCallContext();
+        $context->setMethod(Resources::HTTP_GET);
+        $context->setPath($this->_getHostedServicePath($name));
+        $context->addStatusCode(Resources::STATUS_OK);
+        $context->addQueryParameter(
+            Resources::QP_EMBED_DETAIL,
+            Utilities::booleanToString($options->getEmbedDetail())
+        );
+        
+        $response = $this->sendContext($context);
+        $parsed   = $this->dataSerializer->unserialize($response->getBody());
+        
+        return GetHostedServicePropertiesResult::create($parsed);
     }
     
     /**

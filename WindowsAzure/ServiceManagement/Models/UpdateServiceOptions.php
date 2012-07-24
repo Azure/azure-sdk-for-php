@@ -26,7 +26,7 @@ namespace WindowsAzure\ServiceManagement\Models;
 use WindowsAzure\Common\Internal\Validate;
 
 /**
- * The properties of the hosted service.
+ * The optional parameters for updateStorageService API.
  *
  * @category  Microsoft
  * @package   WindowsAzure\ServiceManagement\Models
@@ -36,22 +36,41 @@ use WindowsAzure\Common\Internal\Validate;
  * @version   Release: @package_version@
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
-class HostedServiceProperties extends ServiceProperties
+class UpdateServiceOptions
 {
+    /**
+     * @var string
+     */
+    private $_label;
+    
     /**
      * @var string
      */
     private $_description;
     
     /**
-     * @var string
+     * Gets the label.
+     * 
+     * @return string
      */
-    private $_location;
+    public function getLabel()
+    {
+        return $this->_label;
+    }
     
     /**
-     * @var string
+     * Sets the label.
+     * 
+     * @param string $label The label.
+     * 
+     * @return none
      */
-    private $_label;
+    public function setLabel($label)
+    {
+        Validate::isString($label, 'label');
+        
+        $this->_label = $label;
+    }
     
     /**
      * Gets the description.
@@ -76,70 +95,6 @@ class HostedServiceProperties extends ServiceProperties
         
         $this->_description = $description;
     }
-    
-    /**
-     * Gets the label.
-     * 
-     * @return string
-     */
-    public function getLabel()
-    {
-        return $this->_label;
-    }
-    
-    /**
-     * Sets the label.
-     * 
-     * @param string $label The label.
-     * 
-     * @return none
-     */
-    public function setLabel($label)
-    {
-        $this->_label = $label;
-    }
-    
-    /**
-     * Gets the location.
-     * 
-     * @return string
-     */
-    public function getLocation()
-    {
-        return $this->_location;
-    }
-    
-    /**
-     * Sets the location.
-     * 
-     * @param string $location The location.
-     * 
-     * @return none
-     */
-    public function setLocation($location)
-    {
-        $this->_location = $location;
-    }
-    
-    /**
-     * Gets the affinity group.
-     * 
-     * @return string
-     */
-    public function getAffinityGroup()
-    {
-        return $this->_affinitygroup;
-    }
-    
-    /**
-     * Sets the affinity group.
-     * 
-     * @param string $affinityGroup The affinity group.
-     * 
-     * @return none
-     */
-    public function setAffinityGroup($affinityGroup)
-    {
-        $this->_affinitygroup = $affinityGroup;
-    }
 }
+
+

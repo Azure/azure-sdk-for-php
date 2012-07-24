@@ -180,5 +180,3 @@ class GetStorageServicePropertiesResult
         $this->_status = $status;
     }
 }
-
-

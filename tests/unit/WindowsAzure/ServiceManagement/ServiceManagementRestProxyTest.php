@@ -30,7 +30,7 @@ use WindowsAzure\Common\Internal\Serialization\XmlSerializer;
 use WindowsAzure\ServiceManagement\ServiceManagementRestProxy;
 use WindowsAzure\ServiceManagement\Models\Locations;
 use WindowsAzure\ServiceManagement\Models\CreateServiceOptions;
-use WindowsAzure\ServiceManagement\Models\UpdateStorageServiceOptions;
+use WindowsAzure\ServiceManagement\Models\UpdateServiceOptions;
 use WindowsAzure\ServiceManagement\Models\KeyType;
 
 /**
@@ -337,7 +337,7 @@ class ServiceManagementRestProxyTest extends ServiceManagementRestProxyTestBase
     {
         // Setup
         $name = $this->_storageServiceName;
-        $options = new UpdateStorageServiceOptions();
+        $options = new UpdateServiceOptions();
         $expectedDesc = 'My description';
         $expectedLabel = base64_encode('new label');
         $options->setDescription($expectedDesc);
@@ -542,5 +542,51 @@ class ServiceManagementRestProxyTest extends ServiceManagementRestProxyTestBase
         
         // Assert
         $this->assertTrue($this->hostedServiceExists($name));
+    }
+    
+    /**
+     * @covers WindowsAzure\ServiceManagement\ServiceManagementRestProxy::updateHostedService
+     * @covers WindowsAzure\ServiceManagement\ServiceManagementRestProxy::_getHostedServicePath
+     * @covers WindowsAzure\ServiceManagement\ServiceManagementRestProxy::_getPath
+     */
+    public function testUpdateHostedService()
+    {
+        // Setup
+        $name = 'testupdatehostedservice';
+        $this->createHostedService($name);
+        $options = new UpdateServiceOptions();
+        $expectedDesc = 'My description';
+        $expectedLabel = base64_encode('new label');
+        $options->setDescription($expectedDesc);
+        $options->setLabel($expectedLabel);
+        
+        // Test
+        $this->restProxy->updateHostedService($name, $options);
+        
+        // Assert
+        $result = $this->restProxy->getHostedServiceProperties($name);
+        $this->assertEquals($expectedDesc, $result->getHostedService()->getDescription());
+        $this->assertEquals($expectedLabel, $result->getHostedService()->getLabel());
+    }
+    
+    /**
+     * @covers WindowsAzure\ServiceManagement\ServiceManagementRestProxy::getHostedServiceProperties
+     * @covers WindowsAzure\ServiceManagement\ServiceManagementRestProxy::_getHostedServicePath
+     * @covers WindowsAzure\ServiceManagement\ServiceManagementRestProxy::_getPath
+     * @covers WindowsAzure\ServiceManagement\Models\GetHostedServicePropertiesResult::create
+     */
+    public function testGetHostedServiceProperties()
+    {
+        // Setup
+        $name = 'testGetHostedServiceProperties';
+        $this->createHostedService($name);
+        
+        // Test
+        $result = $this->restProxy->getHostedServiceProperties($name);
+        
+        // Assert
+        $this->assertEquals($name, $result->getHostedService()->getServiceName());
+        $this->assertEquals($this->defaultLocation, $result->getHostedService()->getLocation());
+        $this->assertEquals(base64_encode($name), $result->getHostedService()->getLabel());
     }
 }
