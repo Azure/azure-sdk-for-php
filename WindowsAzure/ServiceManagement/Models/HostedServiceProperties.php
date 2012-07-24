@@ -120,4 +120,26 @@ class HostedServiceProperties extends ServiceProperties
     {
         $this->_location = $location;
     }
+    
+    /**
+     * Gets the affinity group.
+     * 
+     * @return string
+     */
+    public function getAffinityGroup()
+    {
+        return $this->_affinitygroup;
+    }
+    
+    /**
+     * Sets the affinity group.
+     * 
+     * @param string $affinityGroup The affinity group.
+     * 
+     * @return none
+     */
+    public function setAffinityGroup($affinityGroup)
+    {
+        $this->_affinitygroup = $affinityGroup;
+    }
 }

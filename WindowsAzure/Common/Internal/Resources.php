@@ -254,6 +254,7 @@ class Resources
     const QP_NEXT_PK            = 'NextPartitionKey';
     const QP_NEXT_RK            = 'NextRowKey';
     const QP_ACTION             = 'action';
+    const QP_EMBED_DETAIL       = 'embed-detail';
     
     // Request body content types
     const URL_ENCODED_CONTENT_TYPE = 'application/x-www-form-urlencoded';

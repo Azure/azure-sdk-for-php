@@ -223,6 +223,8 @@ spl_autoload_register(
             'tests\\unit\\windowsazure\\servicemanagement\\models\\asynchronousoperationresulttest' => '/unit/WindowsAzure/ServiceManagement/Models/AsynchronousOperationResultTest.php',
             'tests\\unit\\windowsazure\\servicemanagement\\models\\createaffinitygroupoptionstest' => '/unit/WindowsAzure/ServiceManagement/Models/CreateAffinityGroupOptionsTest.php',
             'tests\\unit\\windowsazure\\servicemanagement\\models\\getaffinitygrouppropertiesresulttest' => '/unit/WindowsAzure/ServiceManagement/Models/GetAffinityGroupPropertiesResultTest.php',
+            'tests\\unit\\windowsazure\\servicemanagement\\models\\gethostedservicepropertiesoptionstest' => '/unit/WindowsAzure/ServiceManagement/Models/GetHostedServicePropertiesOptionsTest.php',
+            'tests\\unit\\windowsazure\\servicemanagement\\models\\gethostedservicepropertiesresulttest' => '/unit/WindowsAzure/ServiceManagement/Models/GetHostedServicePropertiesResultTest.php',
             'tests\\unit\\windowsazure\\servicemanagement\\models\\getoperationstatusresulttest' => '/unit/WindowsAzure/ServiceManagement/Models/GetOperationStatusResultTest.php',
             'tests\\unit\\windowsazure\\servicemanagement\\models\\getstorageservicekeysresulttest' => '/unit/WindowsAzure/ServiceManagement/Models/GetStorageServiceKeysResultTest.php',
             'tests\\unit\\windowsazure\\servicemanagement\\models\\getstorageservicepropertiesresulttest' => '/unit/WindowsAzure/ServiceManagement/Models/GetStorageServicePropertiesResultTest.php',

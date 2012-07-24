@@ -88,4 +88,21 @@ class HostedServicePropertiesTest extends \PHPUnit_Framework_TestCase
         // Assert
         $this->assertEquals($expected, $service->getLocation());
     }
+    
+    /**
+     * @covers WindowsAzure\ServiceManagement\Models\HostedServiceProperties::setAffinityGroup
+     * @covers WindowsAzure\ServiceManagement\Models\HostedServiceProperties::getAffinityGroup
+     */
+    public function testSetAffinityGroup()
+    {
+        // Setup
+        $service = new HostedServiceProperties();
+        $expected = 'AffinityGroup';
+        
+        // Test
+        $service->setAffinityGroup($expected);
+        
+        // Assert
+        $this->assertEquals($expected, $service->getAffinityGroup());
+    }
 }
