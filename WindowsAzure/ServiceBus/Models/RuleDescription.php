@@ -117,16 +117,16 @@ class RuleDescription
                         (string)$filterItemArray['SqlExpression']
                     );
                 }
+                if (array_key_exists('CompatibilityLevel', $filterItemArray)) {
+                    $filter->setCompatibilityLevel(
+                        (integer)$filterItemArray['CompatibilityLevel']
+                    );
+                }
+
                 break;
                
             default :
                 $filter = new Filter();                
-            }
-
-            if (array_key_exists('CompatibilityLevel', $filterItemArray)) {
-                $filter->setCompatibilityLevel(
-                    (integer)$filterItemArray['CompatibilityLevel']
-                );
             }
 
             $ruleDescription->setFilter($filter);
