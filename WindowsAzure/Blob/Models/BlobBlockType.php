@@ -54,10 +54,10 @@ class BlobBlockType
         case self::COMMITTED_TYPE:
         case self::LATEST_TYPE:
         case self::UNCOMMITTED_TYPE:
-            return true;
+        return true;
         
         default:
-            return false;
+        return false;
         }
     }
 }
