@@ -62,8 +62,9 @@ class ListHostedServicesResult extends ServicePropertiesResult
         $result->_hostedServices = array();
         
         assert(count($result->entries) == count($generalProperties));
+        $count = count($result->entries);
         
-        for ($i = 0; $i < count($result->entries); $i++) {
+        for ($i = 0; $i < $count; $i++) {
             $hService = new HostedServiceProperties();
             $prop     = Utilities::tryGetArray(
                 Resources::XTAG_HOSTED_SERVICE_PROPERTIES,

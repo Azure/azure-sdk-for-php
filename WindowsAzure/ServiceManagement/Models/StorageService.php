@@ -47,8 +47,8 @@ class StorageService extends WindowsAzureService
      */
     protected function toArray()
     {
-        $arr   = parent::toArray();
-        $order = array(
+        $arr     = parent::toArray();
+        $order   = array(
             Resources::XTAG_NAMESPACE,
             Resources::XTAG_SERVICE_NAME,
             Resources::XTAG_DESCRIPTION,

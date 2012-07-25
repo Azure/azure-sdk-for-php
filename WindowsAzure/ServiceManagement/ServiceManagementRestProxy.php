@@ -824,7 +824,7 @@ class ServiceManagementRestProxy extends RestProxy
      * be located in a storage account beneath the same subscription.
      * @param string                  $configuration  The base-64 encoded service 
      * configuration file for the deployment.
-     * @param string                  $label          The name for the hosted service 
+     * @param string                  $label          The name for the hosted service
      * that is base-64 encoded. The name can be up to 100 characters in length. It is
      * recommended that the label be unique within the subscription. The name can be
      * used identify the hosted service for your tracking purposes.
@@ -952,7 +952,7 @@ class ServiceManagementRestProxy extends RestProxy
      * 
      * @see http://msdn.microsoft.com/en-us/library/windowsazure/ee460808.aspx
      */
-    public function  updateDeploymentStatus($name, $status, $options)
+    public function updateDeploymentStatus($name, $status, $options)
     {
         throw new \Exception(Resources::NOT_IMPLEMENTED_MSG);
     }
@@ -1074,8 +1074,8 @@ class ServiceManagementRestProxy extends RestProxy
      * 
      * @param string                         $name    The hosted service name.
      * @param string                         $mode    Specifies whether the rollback
-     * should proceed automatically or not. Auto – The rollback proceeds without
-     * further user input. Manual – You must call the walkUpgradeDomain API to apply 
+     * should proceed automatically or not. Auto, The rollback proceeds without
+     * further user input. Manual, You must call the walkUpgradeDomain API to apply
      * the rollback to each upgrade domain.
      * @param boolean                        $force   Specifies whether the rollback 
      * should proceed even when it will cause local data to be lost from some role 
@@ -1087,7 +1087,7 @@ class ServiceManagementRestProxy extends RestProxy
      * 
      * @see http://msdn.microsoft.com/en-us/library/windowsazure/hh403977.aspx
      */
-    public function  rollbackUpdateOrUpgrade($name, $mode, $force, $options)
+    public function rollbackUpdateOrUpgrade($name, $mode, $force, $options)
     {
         throw new \Exception(Resources::NOT_IMPLEMENTED_MSG);
     }
