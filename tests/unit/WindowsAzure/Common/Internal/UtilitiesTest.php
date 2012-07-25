@@ -482,6 +482,9 @@ class UtilitiesTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($actual);
     }
     
+    /**
+     * @covers WindowsAzure\Common\Internal\Utilities::tryGetValueInsensitive
+     */
     public function testTryGetValueInsensitive()
     {
         // Setup
@@ -495,6 +498,21 @@ class UtilitiesTest extends \PHPUnit_Framework_TestCase
         // Assert
         $this->assertEquals($value, $actual);
     }
+    
+    /**
+     * @covers WindowsAzure\Common\Internal\Utilities::getGuid
+     */
+    public function testGetGuid()
+    {
+        // Test
+        $actual1 = Utilities::getGuid();
+        $actual2 = Utilities::getGuid();
+        
+        // Assert
+        $this->assertNotNull($actual1);
+        $this->assertNotNull($actual2);
+        $this->assertInternalType('string', $actual1);
+        $this->assertInternalType('string', $actual2);
+        $this->assertNotEquals($actual1, $actual2);
+    }
 }
-
-
