@@ -64,6 +64,13 @@ class WindowsAzureService extends Service
         $this->setName(
             Utilities::tryGetValue($raw, Resources::XTAG_SERVICE_NAME)
         );
+        $this->setName(
+            Utilities::tryGetValue(
+                $raw,
+                Resources::XTAG_SERVICE_NAME,
+                $this->getName()
+            )
+        );
         $this->setUrl(
             Utilities::tryGetValue($raw, Resources::XTAG_URL)
         );

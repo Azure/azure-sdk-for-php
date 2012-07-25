@@ -24,7 +24,7 @@
 
 namespace Tests\Unit\WindowsAzure\ServiceManagement\Models;
 use WindowsAzure\ServiceManagement\Models\GetHostedServicePropertiesResult;
-use WindowsAzure\ServiceManagement\Models\HostedServiceProperties;
+use WindowsAzure\ServiceManagement\Models\HostedService;
 
 /**
  * Unit tests for class GetHostedServicePropertiesResult
@@ -46,7 +46,7 @@ class GetHostedServicePropertiesResultTest extends \PHPUnit_Framework_TestCase
     public function testGetHostedService()
     {
         // Setup
-        $hostedService = new HostedServiceProperties();
+        $hostedService = new HostedService();
         $result = new GetHostedServicePropertiesResult();
         
         // Test

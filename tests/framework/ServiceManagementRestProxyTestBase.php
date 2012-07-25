@@ -44,7 +44,6 @@ class ServiceManagementRestProxyTestBase extends RestProxyTestBase
     protected $createdStorageServices;
     protected $createdHostedServices;
     protected $createdAffinityGroups;
-    protected $affinityGroupCount;
     protected $defaultLocation;
     
     public function setUp()
@@ -57,7 +56,6 @@ class ServiceManagementRestProxyTestBase extends RestProxyTestBase
         $this->createdAffinityGroups = array();
         $this->createdHostedServices = array();
         $this->defaultLocation = 'West US';
-        $this->affinityGroupCount = count($this->restProxy->listAffinityGroups()->getAffinityGroups());
     }
 
     public function createAffinityGroup($name)
@@ -136,7 +134,7 @@ class ServiceManagementRestProxyTestBase extends RestProxyTestBase
         $storageServices = $result->getStorageServices();
         
         foreach ($storageServices as $storageService) {
-            if ($storageService->getServiceName() == $name) {
+            if ($storageService->getName() == $name) {
                 return true;
             }
         }

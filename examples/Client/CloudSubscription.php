@@ -89,7 +89,7 @@ class CloudSubscription
         $storageServices = $result->getStorageServices();
         
         foreach ($storageServices as $storageService) {
-            if ($storageService->getServiceName() == $name) {
+            if ($storageService->getName() == $name) {
                 return true;
             }
         }

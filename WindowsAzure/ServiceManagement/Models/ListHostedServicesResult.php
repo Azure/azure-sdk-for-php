@@ -25,7 +25,6 @@
 namespace WindowsAzure\ServiceManagement\Models;
 use WindowsAzure\Common\Internal\Utilities;
 use WindowsAzure\Common\Internal\Resources;
-use WindowsAzure\ServiceManagement\Internal\ServicePropertiesResult;
 
 /**
  * The result of calling listHostedServices API.
@@ -38,7 +37,7 @@ use WindowsAzure\ServiceManagement\Internal\ServicePropertiesResult;
  * @version   Release: @package_version@
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
-class ListHostedServicesResult extends ServicePropertiesResult
+class ListHostedServicesResult
 {
     /**
      * @var array
@@ -54,29 +53,33 @@ class ListHostedServicesResult extends ServicePropertiesResult
      */
     public static function create($parsed)
     {
-        $result                  = new ListHostedServicesResult(
-            $parsed,
-            Resources::XTAG_HOSTED_SERVICE
-        );
-        $generalProperties       = $result->services;
+        $result                  = new ListHostedServicesResult();
         $result->_hostedServices = array();
+        $rowHostedServices       = Utilities::tryGetArray(
+            Resources::XTAG_HOSTED_SERVICE,
+            $parsed
+        );
         
-        assert(count($result->entries) == count($generalProperties));
-        $count = count($result->entries);
-        
-        for ($i = 0; $i < $count; $i++) {
-            $prop     = Utilities::tryGetArray(
+        foreach ($rowHostedServices as $rowHostedService) {
+            $properties    = Utilities::tryGetArray(
                 Resources::XTAG_HOSTED_SERVICE_PROPERTIES,
-                $result->entries[$i]
+                $rowHostedService
             );
-            $hService = new HostedService($prop);
-            $name     = $generalProperties[$i]->getServiceName();
-            $url      = $generalProperties[$i]->getUrl();
+            $hostedService = new HostedService($properties);
+            $hostedService->setName(
+                Utilities::tryGetValue(
+                    $rowHostedService,
+                    Resources::XTAG_SERVICE_NAME
+                )
+            );
+            $hostedService->setUrl(
+                Utilities::tryGetValue(
+                    $rowHostedService,
+                    Resources::XTAG_URL
+                )
+            );
             
-            $hService->setName($name);
-            $hService->setUrl($url);
-            
-            $result->_hostedServices[] = $hService;
+            $result->_hostedServices[] = $hostedService;
         }
         
         return $result;
