@@ -178,7 +178,7 @@ class ServiceManagementRestProxyTestBase extends RestProxyTestBase
         $hostedServices = $result->getHostedServices();
         
         foreach ($hostedServices as $hostedService) {
-            if ($hostedService->getServiceName() == $name) {
+            if ($hostedService->getName() == $name) {
                 return true;
             }
         }

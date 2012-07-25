@@ -46,6 +46,11 @@ class WindowsAzureService extends Service
     private $_affinityGroup;
     
     /**
+     * @var string
+     */
+    private $_url;
+    
+    /**
      * Constructs new storage service object.
      * 
      * @param array $raw The array representation for storage service.
@@ -58,6 +63,9 @@ class WindowsAzureService extends Service
         );
         $this->setName(
             Utilities::tryGetValue($raw, Resources::XTAG_SERVICE_NAME)
+        );
+        $this->setUrl(
+            Utilities::tryGetValue($raw, Resources::XTAG_URL)
         );
     }
         
@@ -81,6 +89,28 @@ class WindowsAzureService extends Service
     public function setAffinityGroup($affinityGroup)
     {
         $this->_affinityGroup = $affinityGroup;
+    }
+    
+    /**
+     * Gets the url name.
+     * 
+     * @return string 
+     */
+    public function getUrl()
+    {
+        return $this->_url;
+    }
+    
+    /**
+     * Sets the url name.
+     * 
+     * @param string $url The url name.
+     * 
+     * @return none
+     */
+    public function setUrl($url)
+    {
+        $this->_url = $url;
     }
     
     /**

@@ -441,6 +441,7 @@ class ServiceManagementRestProxyTest extends ServiceManagementRestProxyTestBase
      * @covers WindowsAzure\ServiceManagement\ServiceManagementRestProxy::_getPath
      * @covers WindowsAzure\ServiceManagement\Models\ListHostedServicesResult::create
      * @covers WindowsAzure\ServiceManagement\Internal\ServicePropertiesResult::__construct
+     * @group HostedService
      */
     public function testListHostedServicesEmpty()
     {
@@ -461,6 +462,7 @@ class ServiceManagementRestProxyTest extends ServiceManagementRestProxyTestBase
      * @covers WindowsAzure\ServiceManagement\ServiceManagementRestProxy::_getPath
      * @covers WindowsAzure\ServiceManagement\Models\ListHostedServicesResult::create
      * @covers WindowsAzure\ServiceManagement\Internal\ServicePropertiesResult::__construct
+     * @group HostedService
      */
     public function testListHostedServicesOne()
     {
@@ -482,6 +484,7 @@ class ServiceManagementRestProxyTest extends ServiceManagementRestProxyTestBase
      * @covers WindowsAzure\ServiceManagement\ServiceManagementRestProxy::_getPath
      * @covers WindowsAzure\ServiceManagement\Models\ListHostedServicesResult::create
      * @covers WindowsAzure\ServiceManagement\Internal\ServicePropertiesResult::__construct
+     * @group HostedService
      */
     public function testListHostedServicesMultiple()
     {
@@ -503,6 +506,7 @@ class ServiceManagementRestProxyTest extends ServiceManagementRestProxyTestBase
      * @covers WindowsAzure\ServiceManagement\ServiceManagementRestProxy::deleteHostedService
      * @covers WindowsAzure\ServiceManagement\ServiceManagementRestProxy::_getHostedServicePath
      * @covers WindowsAzure\ServiceManagement\ServiceManagementRestProxy::_getPath
+     * @group HostedService
      */
     public function testDeleteHostedService()
     {
@@ -526,6 +530,7 @@ class ServiceManagementRestProxyTest extends ServiceManagementRestProxyTestBase
      * @covers WindowsAzure\ServiceManagement\Models\GetOperationStatusResult::create
      * @covers WindowsAzure\ServiceManagement\Models\HostedService::toArray
      * @covers WindowsAzure\ServiceManagement\Internal\WindowsAzureService::toArray
+     * @group HostedService
      */
     public function testCreateHostedService()
     {
@@ -548,6 +553,7 @@ class ServiceManagementRestProxyTest extends ServiceManagementRestProxyTestBase
      * @covers WindowsAzure\ServiceManagement\ServiceManagementRestProxy::updateHostedService
      * @covers WindowsAzure\ServiceManagement\ServiceManagementRestProxy::_getHostedServicePath
      * @covers WindowsAzure\ServiceManagement\ServiceManagementRestProxy::_getPath
+     * @group HostedService
      */
     public function testUpdateHostedService()
     {
@@ -574,6 +580,7 @@ class ServiceManagementRestProxyTest extends ServiceManagementRestProxyTestBase
      * @covers WindowsAzure\ServiceManagement\ServiceManagementRestProxy::_getHostedServicePath
      * @covers WindowsAzure\ServiceManagement\ServiceManagementRestProxy::_getPath
      * @covers WindowsAzure\ServiceManagement\Models\GetHostedServicePropertiesResult::create
+     * @group HostedService
      */
     public function testGetHostedServiceProperties()
     {
@@ -585,7 +592,7 @@ class ServiceManagementRestProxyTest extends ServiceManagementRestProxyTestBase
         $result = $this->restProxy->getHostedServiceProperties($name);
         
         // Assert
-        $this->assertEquals($name, $result->getHostedService()->getServiceName());
+        $this->assertEquals($name, $result->getHostedService()->getName());
         $this->assertEquals($this->defaultLocation, $result->getHostedService()->getLocation());
         $this->assertEquals(base64_encode($name), $result->getHostedService()->getLabel());
     }
