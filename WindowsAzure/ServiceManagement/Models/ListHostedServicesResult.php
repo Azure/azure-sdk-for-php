@@ -61,24 +61,14 @@ class ListHostedServicesResult
         );
         
         foreach ($rowHostedServices as $rowHostedService) {
-            $properties    = Utilities::tryGetArray(
+            $properties                = Utilities::tryGetArray(
                 Resources::XTAG_HOSTED_SERVICE_PROPERTIES,
                 $rowHostedService
             );
-            $hostedService = new HostedService($properties);
-            $hostedService->setName(
-                Utilities::tryGetValue(
-                    $rowHostedService,
-                    Resources::XTAG_SERVICE_NAME
-                )
+            $hostedService             = new HostedService(
+                $rowHostedService,
+                $properties
             );
-            $hostedService->setUrl(
-                Utilities::tryGetValue(
-                    $rowHostedService,
-                    Resources::XTAG_URL
-                )
-            );
-            
             $result->_hostedServices[] = $hostedService;
         }
         

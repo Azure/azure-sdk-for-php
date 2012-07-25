@@ -41,6 +41,15 @@ use WindowsAzure\ServiceManagement\Internal\WindowsAzureService;
 class HostedService extends WindowsAzureService
 {
     /**
+     * Constructs new hosted service object.
+     */
+    public function __construct()
+    {
+        $sources = func_get_args();
+        parent::__construct($sources);
+    }
+    
+    /**
      * Converts the current object into ordered array representation.
      * 
      * @return array

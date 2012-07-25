@@ -388,6 +388,8 @@ class ServiceManagementRestProxyTest extends ServiceManagementRestProxyTestBase
         
         // Assert
         $this->assertEquals($name, $result->getStorageService()->getName());
+        $this->assertNotNull($result->getStorageService()->getUrl());
+        $this->assertNotNull($result->getStorageService()->getLabel());
     }
     
     /**

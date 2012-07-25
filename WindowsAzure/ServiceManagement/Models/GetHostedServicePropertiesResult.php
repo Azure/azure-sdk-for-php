@@ -54,15 +54,11 @@ class GetHostedServicePropertiesResult
     public static function create($parsed)
     {
         $result                 = new GetHostedServicePropertiesResult();
-        $prop                   = Utilities::tryGetValue(
+        $properties             = Utilities::tryGetValue(
             $parsed,
             Resources::XTAG_HOSTED_SERVICE_PROPERTIES
         );
-        $result->_hostedService = new HostedService($prop);
-        
-        $result->_hostedService->setName(
-            Utilities::tryGetValue($parsed, Resources::XTAG_SERVICE_NAME)
-        );
+        $result->_hostedService = new HostedService($parsed, $properties);
         
         return $result;
     }

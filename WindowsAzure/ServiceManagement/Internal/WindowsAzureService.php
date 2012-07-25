@@ -53,27 +53,37 @@ class WindowsAzureService extends Service
     /**
      * Constructs new storage service object.
      * 
-     * @param array $raw The array representation for storage service.
+     * @param array $sources The list of sources that has the row XML.
      */
-    public function __construct($raw = null)
+    public function __construct($sources = array())
     {
-        parent::__construct($raw);
-        $this->setAffinityGroup(
-            Utilities::tryGetValue($raw, Resources::XTAG_AFFINITY_GROUP)
-        );
-        $this->setName(
-            Utilities::tryGetValue($raw, Resources::XTAG_SERVICE_NAME)
-        );
-        $this->setName(
-            Utilities::tryGetValue(
-                $raw,
-                Resources::XTAG_SERVICE_NAME,
-                $this->getName()
-            )
-        );
-        $this->setUrl(
-            Utilities::tryGetValue($raw, Resources::XTAG_URL)
-        );
+        parent::__construct($sources);
+        
+        foreach ($sources as $source) {
+            $this->setName(
+                Utilities::tryGetValue(
+                    $source,
+                    Resources::XTAG_SERVICE_NAME,
+                    $this->getName()
+                )
+            );
+            
+            $this->setAffinityGroup(
+                Utilities::tryGetValue(
+                    $source,
+                    Resources::XTAG_AFFINITY_GROUP,
+                    $this->getAffinityGroup()
+                )
+            );
+            
+            $this->setUrl(
+                Utilities::tryGetValue(
+                    $source,
+                    Resources::XTAG_URL,
+                    $this->getUrl()
+                )
+            );
+        }
     }
         
     /**

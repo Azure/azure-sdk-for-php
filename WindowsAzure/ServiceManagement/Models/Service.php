@@ -68,15 +68,35 @@ class Service
     /**
      * Creates Service object from the given raw array.
      * 
-     * @param array $raw The service members in array representation.
+     * @param array $sources The list of sources that has the row XML.
      */
-    public function __construct($raw = null)
+    public function __construct($sources = array())
     {
-        $this->setLabel(Utilities::tryGetValue($raw, Resources::XTAG_LABEL));
-        $this->setLocation(Utilities::tryGetValue($raw, Resources::XTAG_LOCATION));
-        $this->setDescription(
-            Utilities::tryGetValue($raw, Resources::XTAG_DESCRIPTION)
-        );
+        foreach ($sources as $source) {
+            $this->setLabel(
+                Utilities::tryGetValue(
+                    $source,
+                    Resources::XTAG_LABEL,
+                    $this->getLabel()
+                )
+            );
+            
+            $this->setLocation(
+                Utilities::tryGetValue(
+                    $source,
+                    Resources::XTAG_LOCATION,
+                    $this->getLocation()
+                )
+            );
+            
+            $this->setDescription(
+                Utilities::tryGetValue(
+                    $source,
+                    Resources::XTAG_DESCRIPTION,
+                    $this->getDescription()
+                )
+            );
+        }
     }
     
     /**
