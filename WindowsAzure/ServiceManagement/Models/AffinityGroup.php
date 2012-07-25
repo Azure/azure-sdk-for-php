@@ -25,6 +25,7 @@
 namespace WindowsAzure\ServiceManagement\Models;
 use WindowsAzure\Common\Internal\Resources;
 use WindowsAzure\Common\Internal\Utilities;
+use WindowsAzure\ServiceManagement\Internal\Service;
 
 /**
  * The affinity group class.

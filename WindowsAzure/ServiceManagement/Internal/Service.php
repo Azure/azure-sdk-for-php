@@ -15,14 +15,14 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   WindowsAzure\ServiceManagement\Models
+ * @package   WindowsAzure\ServiceManagement\Internal
  * @author    Azure PHP SDK <azurephpsdk@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
  
-namespace WindowsAzure\ServiceManagement\Models;
+namespace WindowsAzure\ServiceManagement\Internal;
 use WindowsAzure\Common\Internal\Resources;
 use WindowsAzure\Common\Internal\Utilities;
 use WindowsAzure\Common\Internal\Serialization\XmlSerializer;
@@ -31,7 +31,7 @@ use WindowsAzure\Common\Internal\Serialization\XmlSerializer;
  * Windows Azure service basic elements.
  *
  * @category  Microsoft
- * @package   WindowsAzure\ServiceManagement\Models
+ * @package   WindowsAzure\ServiceManagement\Internal
  * @author    Azure PHP SDK <azurephpsdk@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
