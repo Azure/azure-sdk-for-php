@@ -15,47 +15,50 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   WindowsAzure\ServiceManagement\Models
+ * @package   Tests\Unit\WindowsAzure\ServiceManagement\Models
  * @author    Azure PHP SDK <azurephpsdk@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
- 
-namespace WindowsAzure\ServiceManagement\Models;
+
+namespace Tests\Unit\WindowsAzure\ServiceManagement\Models;
+use WindowsAzure\ServiceManagement\Models\DeploymentSlot;
 
 /**
- * Valid deployment slots that can be used on Windows Azure.
+ * Unit tests for class DeploymentSlot
  *
  * @category  Microsoft
- * @package   WindowsAzure\ServiceManagement\Models
+ * @package   Tests\Unit\WindowsAzure\ServiceManagement\Models
  * @author    Azure PHP SDK <azurephpsdk@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @version   Release: @package_version@
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
-class DeploymentSlot
+class DeploymentSlotTest extends \PHPUnit_Framework_TestCase
 {
-    const STAGING    = 'staging';
-    const PRODUCTION = 'production';
+    /**
+     * @covers WindowsAzure\ServiceManagement\Models\DeploymentSlot::isValid
+     */
+    public function testIsValidWithValid()
+    {
+        // Test
+        $actual = DeploymentSlot::isValid(DeploymentSlot::STAGING);
+        
+        // Assert
+        $this->assertTrue($actual);
+    }
     
     /**
-     * Validates the provided slot name.
-     * 
-     * @param string $slot The deployment slot name.
-     * 
-     * @return boolean
+     * @covers WindowsAzure\ServiceManagement\Models\DeploymentSlot::isValid
      */
-    public static function isValid($slot)
+    public function testIsValidWithInvalid()
     {
-        switch (strtolower($slot)) {
-        case self::STAGING:
-        case self::PRODUCTION:
-        return true;
+        // Test
+        $actual = DeploymentSlot::isValid('invalid');
         
-        default:
-        return false;
-        }
+        // Assert
+        $this->assertFalse($actual);
     }
 }
