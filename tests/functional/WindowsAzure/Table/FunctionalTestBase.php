@@ -30,9 +30,19 @@ use WindowsAzure\Table\Models\Filters\Filter;
 
 class FunctionalTestBase extends IntegrationTestBase
 {
-    public static function setUpBeforeClass()
+    private static $isOneTimeSetup = false;
+
+    public function setUp()
     {
-        parent::setUpBeforeClass();
+        parent::setUp();
+        if (!self::$isOneTimeSetup) {
+            self::doOneTimeSetup();
+            self::$isOneTimeSetup = true;
+        }
+    }
+
+    private static function doOneTimeSetup()
+    {
         $testBase = new FunctionalTestBase();
         $testBase->setUp();
         TableServiceFunctionalTestData::setupData();
@@ -45,10 +55,13 @@ class FunctionalTestBase extends IntegrationTestBase
 
     public static function tearDownAfterClass()
     {
-        $testBase = new FunctionalTestBase();
-        $testBase->setUp();
-        foreach(TableServiceFunctionalTestData::$testTableNames as $name)  {
-            $testBase->safeDeleteTable($name);
+        if (self::$isOneTimeSetup) {
+            $testBase = new FunctionalTestBase();
+            $testBase->setUp();
+            foreach(TableServiceFunctionalTestData::$testTableNames as $name)  {
+                $testBase->safeDeleteTable($name);
+            }
+            self::$isOneTimeSetup = false;
         }
         parent::tearDownAfterClass();
     }

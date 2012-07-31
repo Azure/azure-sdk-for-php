@@ -59,9 +59,19 @@ class BlobServiceIntegrationTest extends IntegrationTestBase
     private static $_creatableContainers;
     private static $_testContainers;
 
-    public static function setUpBeforeClass()
+    private static $isOneTimeSetup = false;
+
+    public function setUp()
     {
-        parent::setUpBeforeClass();
+        parent::setUp();
+        if (!self::$isOneTimeSetup) {
+            self::doOneTimeSetup();
+            self::$isOneTimeSetup = true;
+        }
+    }
+
+    private static function doOneTimeSetup()
+    {
         // Setup container names array (list of container names used by
         // integration tests)
         $rint = mt_rand(0, 1000000);
@@ -92,11 +102,14 @@ class BlobServiceIntegrationTest extends IntegrationTestBase
 
     public static function tearDownAfterClass()
     {
+        if (self::$isOneTimeSetup) {
+            $inst = new IntegrationTestBase();
+            $inst->setUp();
+            $inst->deleteContainers(self::$_testContainers, self::$_testContainersPrefix);
+            $inst->deleteContainers(self::$_creatableContainers,self::$_createableContainersPrefix);
+            self::$isOneTimeSetup = false;
+        }
         parent::tearDownAfterClass();
-        $inst = new IntegrationTestBase();
-        $inst->setUp();
-        $inst->deleteContainers(self::$_testContainers, self::$_testContainersPrefix);
-        $inst->deleteContainers(self::$_creatableContainers,self::$_createableContainersPrefix);
     }
 
     /**

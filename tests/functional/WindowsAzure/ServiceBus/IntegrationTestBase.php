@@ -32,17 +32,30 @@ use WindowsAzure\ServiceBus\Models\QueueInfo;
 
 class IntegrationTestBase extends ServiceBusRestProxyTestBase
 {
+    private static $isOneTimeSetup = false;
+
     public function setUp()
     {
         parent::setUp();
         $fiddlerFilter = new FiddlerFilter();
         $this->restProxy = $this->restProxy->withFilter($fiddlerFilter);
+        if (!self::$isOneTimeSetup) {
+            self::doOneTimeSetup();
+            self::$isOneTimeSetup = true;
+        }
     }
 
-    public static function setUpBeforeClass()
+    private static function doOneTimeSetup()
     {
-        parent::setUpBeforeClass();
         self::initialize();
+    }
+
+    public static function tearDownAfterClass()
+    {
+        if (self::$isOneTimeSetup) {
+            self::$isOneTimeSetup = false;
+        }
+        parent::tearDownAfterClass();
     }
 
     /**

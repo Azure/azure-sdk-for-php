@@ -40,10 +40,19 @@ class TableServiceFunctionalQueryTest extends FunctionalTestBase
     private static $curPartition;
     private static $curRowKey;
 
-    public static function setUpBeforeClass()
-    {
-        parent::setUpBeforeClass();
+    private static $isOneTimeSetup = false;
 
+    public function setUp()
+    {
+        parent::setUp();
+        if (!self::$isOneTimeSetup) {
+            self::doOneTimeSetup();
+            self::$isOneTimeSetup = true;
+        }
+    }
+
+    private static function doOneTimeSetup()
+    {
         $table = TableServiceFunctionalTestData::$testTableNames[0];
         self::$entitiesInTable = self::getEntitiesToQueryOver();
         $baseWithRestProxy = new FunctionalTestBase();
@@ -62,6 +71,14 @@ class TableServiceFunctionalQueryTest extends FunctionalTestBase
             }
             $baseWithRestProxy->restProxy->batch($batch);
         }
+    }
+
+    public static function tearDownAfterClass()
+    {
+        if (self::$isOneTimeSetup) {
+            self::$isOneTimeSetup = false;
+        }
+        parent::tearDownAfterClass();
     }
 
     private static function getNewEntity()

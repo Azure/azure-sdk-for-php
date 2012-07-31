@@ -55,9 +55,19 @@ class TableServiceIntegrationTest extends IntegrationTestBase
     private static $creatableTables;
     private static $testTables;
 
-    public static function setUpBeforeClass()
+    private static $isOneTimeSetup = false;
+
+    public function setUp()
     {
-        parent::setUpBeforeClass();
+        parent::setUp();
+        if (!self::$isOneTimeSetup) {
+            self::doOneTimeSetup();
+            self::$isOneTimeSetup = true;
+        }
+    }
+
+    private static function doOneTimeSetup()
+    {
         self::$testTablesPrefix .= rand(0,1000);
         // Setup container names array (list of container names used by
         // integration tests)
@@ -91,9 +101,12 @@ class TableServiceIntegrationTest extends IntegrationTestBase
 
     public static function tearDownAfterClass()
     {
+        if (self::$isOneTimeSetup) {
+            self::deleteAllTables(self::$testTables);
+            self::deleteTables(self::$createableTablesPrefix, self::$creatableTables);
+            self::$isOneTimeSetup = false;
+        }
         parent::tearDownAfterClass();
-        self::deleteAllTables(self::$testTables);
-        self::deleteTables(self::$createableTablesPrefix, self::$creatableTables);
     }
 
     private static function createTables($prefix, $list)

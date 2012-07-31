@@ -28,6 +28,8 @@ use WindowsAzure\Common\Internal\StorageServiceSettings;
 
 class FunctionalTestBase extends IntegrationTestBase
 {
+    private static $isOneTimeSetup = false;
+
     protected $accountName;
 
     public function setUp()
@@ -35,11 +37,14 @@ class FunctionalTestBase extends IntegrationTestBase
         parent::setUp();
         $settings = StorageServiceSettings::createFromConnectionString($this->connectionString);
         $this->accountName = $settings->getName();
+        if (!self::$isOneTimeSetup) {
+            self::doOneTimeSetup();
+            self::$isOneTimeSetup = true;
+        }
     }
 
-    public static function setUpBeforeClass()
+    private static function doOneTimeSetup()
     {
-        parent::setUpBeforeClass();
         $testBase = new FunctionalTestBase();
         $testBase->setUp();
         QueueServiceFunctionalTestData::setupData();
@@ -56,10 +61,13 @@ class FunctionalTestBase extends IntegrationTestBase
 
     public static function tearDownAfterClass()
     {
-        $testBase = new FunctionalTestBase();
-        $testBase->setUp();
-        foreach(QueueServiceFunctionalTestData::$testQueueNames as $name)  {
-            $testBase->safeDeleteQueue($name);
+        if (self::$isOneTimeSetup) {
+            $testBase = new FunctionalTestBase();
+            $testBase->setUp();
+            foreach(QueueServiceFunctionalTestData::$testQueueNames as $name)  {
+                $testBase->safeDeleteQueue($name);
+            }
+            self::$isOneTimeSetup = false;
         }
         parent::tearDownAfterClass();
     }
