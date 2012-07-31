@@ -122,6 +122,7 @@ class ServiceManagementRestProxyTest extends ServiceManagementRestProxyTestBase
      * @covers WindowsAzure\ServiceManagement\ServiceManagementRestProxy::createAffinityGroup
      * @covers WindowsAzure\ServiceManagement\ServiceManagementRestProxy::_getAffinityGroupPath
      * @covers WindowsAzure\ServiceManagement\ServiceManagementRestProxy::_getPath
+     * @group AffinityGroup
      */
     public function testCreateAffinityGroup()
     {
@@ -142,6 +143,7 @@ class ServiceManagementRestProxyTest extends ServiceManagementRestProxyTestBase
      * @covers WindowsAzure\ServiceManagement\ServiceManagementRestProxy::deleteAffinityGroup
      * @covers WindowsAzure\ServiceManagement\ServiceManagementRestProxy::_getAffinityGroupPath
      * @covers WindowsAzure\ServiceManagement\ServiceManagementRestProxy::_getPath
+     * @group AffinityGroup
      */
     public function testDeleteAffinityGroup()
     {
@@ -163,15 +165,20 @@ class ServiceManagementRestProxyTest extends ServiceManagementRestProxyTestBase
      * @covers WindowsAzure\ServiceManagement\Models\ListAffinityGroupsResult::create
      * @covers WindowsAzure\ServiceManagement\ServiceManagementRestProxy::_getAffinityGroupPath
      * @covers WindowsAzure\ServiceManagement\ServiceManagementRestProxy::_getPath
+     * @group AffinityGroup
      */
     public function testListAffinityGroupsWithEmpty()
     {
+        // Setup
+        $currentCount = count($this->restProxy->listAffinityGroups()->getAffinityGroups());
+        $expectedCount = 0 + $currentCount;
+        
         // Test
         $result = $this->restProxy->listAffinityGroups();
         
         // Assert
         $affinityGroups = $result->getAffinityGroups();
-        $this->assertCount(0 + $this->affinityGroupCount, $affinityGroups);
+        $this->assertCount($expectedCount, $affinityGroups);
     }
     
     /**
@@ -179,11 +186,14 @@ class ServiceManagementRestProxyTest extends ServiceManagementRestProxyTestBase
      * @covers WindowsAzure\ServiceManagement\Models\ListAffinityGroupsResult::create
      * @covers WindowsAzure\ServiceManagement\ServiceManagementRestProxy::_getAffinityGroupPath
      * @covers WindowsAzure\ServiceManagement\ServiceManagementRestProxy::_getPath
+     * @group AffinityGroup
      */
     public function testListAffinityGroupsWithOneEntry()
     {
         // Setup
         $name = 'listaffinitygroupwithoneentry';
+        $currentCount = count($this->restProxy->listAffinityGroups()->getAffinityGroups());
+        $expectedCount = 1 + $currentCount;
         $this->createAffinityGroup($name);
         
         // Test
@@ -191,7 +201,7 @@ class ServiceManagementRestProxyTest extends ServiceManagementRestProxyTestBase
         
         // Assert
         $affinityGroups = $result->getAffinityGroups();
-        $this->assertCount(1 + $this->affinityGroupCount, $affinityGroups);
+        $this->assertCount($expectedCount, $affinityGroups);
     }
     
     /**
@@ -199,12 +209,15 @@ class ServiceManagementRestProxyTest extends ServiceManagementRestProxyTestBase
      * @covers WindowsAzure\ServiceManagement\Models\ListAffinityGroupsResult::create
      * @covers WindowsAzure\ServiceManagement\ServiceManagementRestProxy::_getAffinityGroupPath
      * @covers WindowsAzure\ServiceManagement\ServiceManagementRestProxy::_getPath
+     * @group AffinityGroup
      */
     public function testListAffinityGroupsWithMultipleEntries()
     {
         // Setup
         $name1 = 'listaffinitygroupwithmultipleentries1';
         $name2 = 'listaffinitygroupwithmultipleentries2';
+        $currentCount = count($this->restProxy->listAffinityGroups()->getAffinityGroups());
+        $expectedCount = 2 + $currentCount;
         $this->createAffinityGroup($name1);
         $this->createAffinityGroup($name2);
         
@@ -213,13 +226,14 @@ class ServiceManagementRestProxyTest extends ServiceManagementRestProxyTestBase
         
         // Assert
         $affinityGroups = $result->getAffinityGroups();
-        $this->assertCount(2 + $this->affinityGroupCount, $affinityGroups);
+        $this->assertCount($expectedCount, $affinityGroups);
     }
     
     /**
      * @covers WindowsAzure\ServiceManagement\ServiceManagementRestProxy::updateAffinityGroup
      * @covers WindowsAzure\ServiceManagement\ServiceManagementRestProxy::_getAffinityGroupPath
      * @covers WindowsAzure\ServiceManagement\ServiceManagementRestProxy::_getPath
+     * @group AffinityGroup
      */
     public function testUpdateAffinityGroup()
     {
@@ -243,6 +257,7 @@ class ServiceManagementRestProxyTest extends ServiceManagementRestProxyTestBase
      * @covers WindowsAzure\ServiceManagement\Models\GetAffinityGroupPropertiesResult::create
      * @covers WindowsAzure\ServiceManagement\ServiceManagementRestProxy::_getAffinityGroupPath
      * @covers WindowsAzure\ServiceManagement\ServiceManagementRestProxy::_getPath
+     * @group AffinityGroup
      */
     public function testGetAffinityGroupProperties()
     {
@@ -265,6 +280,7 @@ class ServiceManagementRestProxyTest extends ServiceManagementRestProxyTestBase
      * @covers WindowsAzure\ServiceManagement\Models\ListLocationsResult::create
      * @covers WindowsAzure\ServiceManagement\ServiceManagementRestProxy::_getLocationPath
      * @covers WindowsAzure\ServiceManagement\ServiceManagementRestProxy::_getPath
+     * @group AffinityGroup
      */
     public function testListLocations()
     {
@@ -285,6 +301,7 @@ class ServiceManagementRestProxyTest extends ServiceManagementRestProxyTestBase
      * @covers WindowsAzure\ServiceManagement\Models\GetOperationStatusResult::create
      * @covers WindowsAzure\ServiceManagement\Models\StorageService::toArray
      * @covers WindowsAzure\ServiceManagement\Internal\WindowsAzureService::toArray
+     * @group StorageService
      */
     public function testCreateStorageService()
     {
@@ -310,10 +327,10 @@ class ServiceManagementRestProxyTest extends ServiceManagementRestProxyTestBase
     /**
      * @covers WindowsAzure\ServiceManagement\ServiceManagementRestProxy::listStorageServices
      * @covers WindowsAzure\ServiceManagement\Models\ListStorageServicesResult::create
-     * @covers WindowsAzure\ServiceManagement\Internal\ServicePropertiesResult::__construct
      * @covers WindowsAzure\ServiceManagement\ServiceManagementRestProxy::_getStorageServicePath
      * @covers WindowsAzure\ServiceManagement\ServiceManagementRestProxy::_getPath
      * @depends testCreateStorageService
+     * @group StorageService
      */
     public function testListStorageServices($storageCount)
     {
@@ -332,6 +349,7 @@ class ServiceManagementRestProxyTest extends ServiceManagementRestProxyTestBase
      * @covers WindowsAzure\ServiceManagement\ServiceManagementRestProxy::_getStorageServicePath
      * @covers WindowsAzure\ServiceManagement\ServiceManagementRestProxy::_getPath
      * @depends testListStorageServices
+     * @group StorageService
      */
     public function testUpdateStorageService()
     {
@@ -358,6 +376,7 @@ class ServiceManagementRestProxyTest extends ServiceManagementRestProxyTestBase
      * @covers WindowsAzure\ServiceManagement\ServiceManagementRestProxy::_getPath
      * @covers WindowsAzure\ServiceManagement\Models\GetStorageServicePropertiesResult::create
      * @depends testUpdateStorageService
+     * @group StorageService
      */
     public function testGetStorageServiceProperties()
     {
@@ -369,6 +388,8 @@ class ServiceManagementRestProxyTest extends ServiceManagementRestProxyTestBase
         
         // Assert
         $this->assertEquals($name, $result->getStorageService()->getName());
+        $this->assertNotNull($result->getStorageService()->getUrl());
+        $this->assertNotNull($result->getStorageService()->getLabel());
     }
     
     /**
@@ -377,6 +398,8 @@ class ServiceManagementRestProxyTest extends ServiceManagementRestProxyTestBase
      * @covers WindowsAzure\ServiceManagement\ServiceManagementRestProxy::_getStorageServiceKeysPath
      * @covers WindowsAzure\ServiceManagement\Models\GetStorageServiceKeysResult::create
      * @depends testGetStorageServiceProperties
+     * @group StorageService
+     * @group StorageService
      */
     public function testGetStorageServiceKeys()
     {
@@ -398,6 +421,7 @@ class ServiceManagementRestProxyTest extends ServiceManagementRestProxyTestBase
      * @covers WindowsAzure\ServiceManagement\ServiceManagementRestProxy::_getStorageServiceKeysPath
      * @covers WindowsAzure\ServiceManagement\Models\GetStorageServiceKeysResult::create
      * @depends testGetStorageServiceKeys
+     * @group StorageService
      */
     public function testRegenerateStorageServiceKeys()
     {
@@ -440,7 +464,7 @@ class ServiceManagementRestProxyTest extends ServiceManagementRestProxyTestBase
      * @covers WindowsAzure\ServiceManagement\ServiceManagementRestProxy::_getHostedServicePath
      * @covers WindowsAzure\ServiceManagement\ServiceManagementRestProxy::_getPath
      * @covers WindowsAzure\ServiceManagement\Models\ListHostedServicesResult::create
-     * @covers WindowsAzure\ServiceManagement\Internal\ServicePropertiesResult::__construct
+     * @group HostedService
      */
     public function testListHostedServicesEmpty()
     {
@@ -460,20 +484,23 @@ class ServiceManagementRestProxyTest extends ServiceManagementRestProxyTestBase
      * @covers WindowsAzure\ServiceManagement\ServiceManagementRestProxy::_getHostedServicePath
      * @covers WindowsAzure\ServiceManagement\ServiceManagementRestProxy::_getPath
      * @covers WindowsAzure\ServiceManagement\Models\ListHostedServicesResult::create
-     * @covers WindowsAzure\ServiceManagement\Internal\ServicePropertiesResult::__construct
+     * @group HostedService
      */
     public function testListHostedServicesOne()
     {
         // Setup
         $currentCount = count($this->restProxy->listHostedServices()->getHostedServices());
-        $this->createHostedService('testlisthostedservicesone');
+        $name = 'testlisthostedservicesone';
+        $this->createHostedService($name);
         $expectedCount = $currentCount + 1;
         
          // Test
         $result = $this->restProxy->listHostedServices();
         
         // Assert
-        $this->assertCount($expectedCount, $result->getHostedServices());
+        $actual = $result->getHostedServices();
+        $this->assertCount($expectedCount, $actual);
+        $this->assertEquals($name, $actual[0]->getName());
     }
     
     /**
@@ -481,28 +508,36 @@ class ServiceManagementRestProxyTest extends ServiceManagementRestProxyTestBase
      * @covers WindowsAzure\ServiceManagement\ServiceManagementRestProxy::_getHostedServicePath
      * @covers WindowsAzure\ServiceManagement\ServiceManagementRestProxy::_getPath
      * @covers WindowsAzure\ServiceManagement\Models\ListHostedServicesResult::create
-     * @covers WindowsAzure\ServiceManagement\Internal\ServicePropertiesResult::__construct
+     * @group HostedService
      */
     public function testListHostedServicesMultiple()
     {
         // Setup
         $currentCount = count($this->restProxy->listHostedServices()->getHostedServices());
-        $this->createHostedService('testlisthostedservicesmultiple1');
-        $this->createHostedService('testlisthostedservicesmultiple2');
-        $this->createHostedService('testlisthostedservicesmultiple3');
+        $name1 = 'testlisthostedservicesmultiple1';
+        $name2 = 'testlisthostedservicesmultiple2';
+        $name3 = 'testlisthostedservicesmultiple3';
+        $this->createHostedService($name1);
+        $this->createHostedService($name2);
+        $this->createHostedService($name3);
         $expectedCount = $currentCount + 3;
         
          // Test
         $result = $this->restProxy->listHostedServices();
         
         // Assert
-        $this->assertCount($expectedCount, $result->getHostedServices());
+        $actual = $result->getHostedServices();
+        $this->assertCount($expectedCount, $actual);
+        $this->assertEquals($name1, $actual[0]->getName());
+        $this->assertEquals($name2, $actual[1]->getName());
+        $this->assertEquals($name3, $actual[2]->getName());
     }
     
     /**
      * @covers WindowsAzure\ServiceManagement\ServiceManagementRestProxy::deleteHostedService
      * @covers WindowsAzure\ServiceManagement\ServiceManagementRestProxy::_getHostedServicePath
      * @covers WindowsAzure\ServiceManagement\ServiceManagementRestProxy::_getPath
+     * @group HostedService
      */
     public function testDeleteHostedService()
     {
@@ -526,6 +561,7 @@ class ServiceManagementRestProxyTest extends ServiceManagementRestProxyTestBase
      * @covers WindowsAzure\ServiceManagement\Models\GetOperationStatusResult::create
      * @covers WindowsAzure\ServiceManagement\Models\HostedService::toArray
      * @covers WindowsAzure\ServiceManagement\Internal\WindowsAzureService::toArray
+     * @group HostedService
      */
     public function testCreateHostedService()
     {
@@ -548,6 +584,7 @@ class ServiceManagementRestProxyTest extends ServiceManagementRestProxyTestBase
      * @covers WindowsAzure\ServiceManagement\ServiceManagementRestProxy::updateHostedService
      * @covers WindowsAzure\ServiceManagement\ServiceManagementRestProxy::_getHostedServicePath
      * @covers WindowsAzure\ServiceManagement\ServiceManagementRestProxy::_getPath
+     * @group HostedService
      */
     public function testUpdateHostedService()
     {
@@ -574,6 +611,7 @@ class ServiceManagementRestProxyTest extends ServiceManagementRestProxyTestBase
      * @covers WindowsAzure\ServiceManagement\ServiceManagementRestProxy::_getHostedServicePath
      * @covers WindowsAzure\ServiceManagement\ServiceManagementRestProxy::_getPath
      * @covers WindowsAzure\ServiceManagement\Models\GetHostedServicePropertiesResult::create
+     * @group HostedService
      */
     public function testGetHostedServiceProperties()
     {
@@ -585,8 +623,26 @@ class ServiceManagementRestProxyTest extends ServiceManagementRestProxyTestBase
         $result = $this->restProxy->getHostedServiceProperties($name);
         
         // Assert
-        $this->assertEquals($name, $result->getHostedService()->getServiceName());
+        $this->assertEquals($name, $result->getHostedService()->getName());
         $this->assertEquals($this->defaultLocation, $result->getHostedService()->getLocation());
         $this->assertEquals(base64_encode($name), $result->getHostedService()->getLabel());
+    }
+    
+    /**
+     * @covers WindowsAzure\ServiceManagement\ServiceManagementRestProxy::createDeployment
+     * @covers WindowsAzure\ServiceManagement\ServiceManagementRestProxy::_getDeploymentPathUsingSlot
+     * @covers WindowsAzure\ServiceManagement\ServiceManagementRestProxy::_getPath
+     * @group Deployment
+     */
+    public function testCreateDeployment()
+    {
+        // Setup
+        $name = 'testcreatedeployment';
+        
+        // Test
+        $this->createDeployment($name);
+        
+        // Assert
+        $this->assertTrue($this->deploymentExists($name));
     }
 }

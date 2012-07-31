@@ -26,7 +26,7 @@ namespace WindowsAzure\ServiceManagement\Models;
 use WindowsAzure\Common\Internal\Validate;
 
 /**
- * The properties of the hosted service.
+ * The optional parameters for createDeployment API.
  *
  * @category  Microsoft
  * @package   WindowsAzure\ServiceManagement\Models
@@ -36,110 +36,78 @@ use WindowsAzure\Common\Internal\Validate;
  * @version   Release: @package_version@
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
-class HostedServiceProperties extends ServiceProperties
+class CreateDeploymentOptions
 {
     /**
-     * @var string
-     */
-    private $_description;
-    
-    /**
-     * @var string
-     */
-    private $_location;
-    
-    /**
-     * @var string
-     */
-    private $_label;
-    
-    /**
-     * Gets the description.
+     * Indicates whether to start the deployment immediately after it is created.
      * 
-     * @return string
+     * @var boolean
      */
-    public function getDescription()
+    private $_startDeployment;
+    
+    /**
+     * Indicates whether to treat package validation warnings as errors.
+     * 
+     * @var boolean
+     */
+    private $_treatWarningsAsErrors;
+    
+    /**
+     * Constructs new CreateDeploymentOptions instance.
+     */
+    public function __construct()
     {
-        return $this->_description;
+        $this->_startDeployment       = false;
+        $this->_treatWarningsAsErrors = false;
     }
     
     /**
-     * Sets the description.
+     * Gets start deployment flag.
      * 
-     * @param string $description The description.
+     * @return boolean
+     */
+    public function getStartDeployment()
+    {
+        return $this->_startDeployment;
+    }
+    
+    /**
+     * Sets start deployment flag.
+     * 
+     * @param type $startDeployment Indicates whether to start the deployment 
+     * immediately after it is created.
      * 
      * @return none
      */
-    public function setDescription($description)
+    public function setStartDeployment($startDeployment)
     {
-        Validate::isString($description, 'description');
+        Validate::isBoolean($startDeployment, 'startDeployment');
         
-        $this->_description = $description;
+        $this->_startDeployment = $startDeployment;
     }
     
     /**
-     * Gets the label.
+     * Gets treat warnings as errors flag.
      * 
-     * @return string
+     * @return boolean
      */
-    public function getLabel()
+    public function getTreatWarningsAsErrors()
     {
-        return $this->_label;
+        return $this->_treatWarningsAsErrors;
     }
     
     /**
-     * Sets the label.
+     * Sets treat warnings as errors flag.
      * 
-     * @param string $label The label.
+     * @param type $treatWarningsAsErrors Indicates whether to treat package 
+     * validation warnings as errors.
      * 
      * @return none
      */
-    public function setLabel($label)
+    public function setTreatWarningsAsErrors($treatWarningsAsErrors)
     {
-        $this->_label = $label;
-    }
-    
-    /**
-     * Gets the location.
-     * 
-     * @return string
-     */
-    public function getLocation()
-    {
-        return $this->_location;
-    }
-    
-    /**
-     * Sets the location.
-     * 
-     * @param string $location The location.
-     * 
-     * @return none
-     */
-    public function setLocation($location)
-    {
-        $this->_location = $location;
-    }
-    
-    /**
-     * Gets the affinity group.
-     * 
-     * @return string
-     */
-    public function getAffinityGroup()
-    {
-        return $this->_affinitygroup;
-    }
-    
-    /**
-     * Sets the affinity group.
-     * 
-     * @param string $affinityGroup The affinity group.
-     * 
-     * @return none
-     */
-    public function setAffinityGroup($affinityGroup)
-    {
-        $this->_affinitygroup = $affinityGroup;
+        Validate::isBoolean($treatWarningsAsErrors, 'treatWarningsAsErrors');
+        
+        $this->_treatWarningsAsErrors = $treatWarningsAsErrors;
     }
 }

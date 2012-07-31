@@ -25,7 +25,6 @@
 namespace WindowsAzure\ServiceManagement\Internal;
 use WindowsAzure\Common\Internal\Resources;
 use WindowsAzure\Common\Internal\Utilities;
-use WindowsAzure\ServiceManagement\Models\Service;
 
 /**
  * Base class for all windows azure provided services.
@@ -46,19 +45,44 @@ class WindowsAzureService extends Service
     private $_affinityGroup;
     
     /**
+     * @var string
+     */
+    private $_url;
+    
+    /**
      * Constructs new storage service object.
      * 
-     * @param array $raw The array representation for storage service.
+     * @param array $sources The list of sources that has the row XML.
      */
-    public function __construct($raw = null)
+    public function __construct($sources = array())
     {
-        parent::__construct($raw);
-        $this->setAffinityGroup(
-            Utilities::tryGetValue($raw, Resources::XTAG_AFFINITY_GROUP)
-        );
-        $this->setName(
-            Utilities::tryGetValue($raw, Resources::XTAG_SERVICE_NAME)
-        );
+        parent::__construct($sources);
+        
+        foreach ($sources as $source) {
+            $this->setName(
+                Utilities::tryGetValue(
+                    $source,
+                    Resources::XTAG_SERVICE_NAME,
+                    $this->getName()
+                )
+            );
+            
+            $this->setAffinityGroup(
+                Utilities::tryGetValue(
+                    $source,
+                    Resources::XTAG_AFFINITY_GROUP,
+                    $this->getAffinityGroup()
+                )
+            );
+            
+            $this->setUrl(
+                Utilities::tryGetValue(
+                    $source,
+                    Resources::XTAG_URL,
+                    $this->getUrl()
+                )
+            );
+        }
     }
         
     /**
@@ -81,6 +105,28 @@ class WindowsAzureService extends Service
     public function setAffinityGroup($affinityGroup)
     {
         $this->_affinityGroup = $affinityGroup;
+    }
+    
+    /**
+     * Gets the url name.
+     * 
+     * @return string 
+     */
+    public function getUrl()
+    {
+        return $this->_url;
+    }
+    
+    /**
+     * Sets the url name.
+     * 
+     * @param string $url The url name.
+     * 
+     * @return none
+     */
+    public function setUrl($url)
+    {
+        $this->_url = $url;
     }
     
     /**

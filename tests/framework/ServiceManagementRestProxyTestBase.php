@@ -23,10 +23,12 @@
  */
  
 namespace Tests\Framework;
+use Tests\Framework\TestResources;
 use WindowsAzure\Common\Internal\Resources;
 use WindowsAzure\ServiceManagement\Models\CreateServiceOptions;
 use WindowsAzure\ServiceManagement\Models\OperationStatus;
 use WindowsAzure\ServiceManagement\Models\Locations;
+use WindowsAzure\ServiceManagement\Models\DeploymentSlot;
 
 /**
  * Test base for ServiceManagementTest class.
@@ -44,8 +46,9 @@ class ServiceManagementRestProxyTestBase extends RestProxyTestBase
     protected $createdStorageServices;
     protected $createdHostedServices;
     protected $createdAffinityGroups;
-    protected $affinityGroupCount;
+    protected $createdDeployments;
     protected $defaultLocation;
+    protected $defaultSlot;
     
     public function setUp()
     {
@@ -56,8 +59,9 @@ class ServiceManagementRestProxyTestBase extends RestProxyTestBase
         $this->createdStorageServices = array();
         $this->createdAffinityGroups = array();
         $this->createdHostedServices = array();
+        $this->createdDeployments = array();
         $this->defaultLocation = 'West US';
-        $this->affinityGroupCount = count($this->restProxy->listAffinityGroups()->getAffinityGroups());
+        $this->defaultSlot = DeploymentSlot::PRODUCTION;
     }
 
     public function createAffinityGroup($name)
@@ -136,7 +140,7 @@ class ServiceManagementRestProxyTestBase extends RestProxyTestBase
         $storageServices = $result->getStorageServices();
         
         foreach ($storageServices as $storageService) {
-            if ($storageService->getServiceName() == $name) {
+            if ($storageService->getName() == $name) {
                 return true;
             }
         }
@@ -178,7 +182,7 @@ class ServiceManagementRestProxyTestBase extends RestProxyTestBase
         $hostedServices = $result->getHostedServices();
         
         foreach ($hostedServices as $hostedService) {
-            if ($hostedService->getServiceName() == $name) {
+            if ($hostedService->getName() == $name) {
                 return true;
             }
         }
@@ -203,6 +207,63 @@ class ServiceManagementRestProxyTestBase extends RestProxyTestBase
             error_log($e->getMessage());
         }
     }
+    
+    public function createDeployment($name, $options = null)
+    {
+        $label = base64_encode($name);
+        $deploymentName = $name;
+        $slot = $this->defaultSlot;
+        $packageUrl = TestResources::packageUrl();
+        $configuration = base64_encode(file_get_contents(TestResources::packageConfiguration()));
+        $label = base64_encode($name);
+        
+        $this->createHostedService($name);
+        $result = $this->restProxy->createDeployment(
+            $name,
+            $deploymentName,
+            $slot,
+            $packageUrl,
+            $configuration,
+            $label,
+            $options
+        );
+        $this->blockUntilAsyncSucceed($result->getRequestId());
+        
+        $this->createdDeployments[] = $name;
+    }
+    
+    public function deploymentExists($name)
+    {
+        try {
+            $options = new GetDeploymentOptions();
+            $options->setSlot($this->defaultSlot);
+            $this->restProxy->getDeployment($name, $options);
+            
+            return true;
+        } catch (\Exception $e) {
+            return false;
+        }
+    }
+    
+    public function deleteDeployment($name)
+    {
+        $options = new GetDeploymentOptions();
+        $options->setSlot($this->defaultSlot);
+        $this->restProxy->deleteDeployment($name, $options);
+    }
+    
+    public function safeDeleteDeployment($name)
+    {
+        try
+        {
+            $this->deleteDeployment($name);
+        }
+        catch (\Exception $e)
+        {
+            // Ignore exception and continue, will assume that this hosted account doesn't exist 
+            error_log($e->getMessage());
+        }
+    }
 
     protected function tearDown()
     {
@@ -216,10 +277,13 @@ class ServiceManagementRestProxyTestBase extends RestProxyTestBase
             $this->safeDeleteAffinityGroup($value);
         }
         
+        foreach ($this->createdDeployments as $value) {
+            $this->safeDeleteDeployment($value, $this->defaultSlot);
+            $this->safeDeleteHostedService($value);
+        }
+        
         foreach ($this->createdHostedServices as $value) {
             $this->safeDeleteHostedService($value);
         }
     }
 }
-
-

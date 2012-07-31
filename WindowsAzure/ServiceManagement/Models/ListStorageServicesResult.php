@@ -25,7 +25,6 @@
 namespace WindowsAzure\ServiceManagement\Models;
 use WindowsAzure\Common\Internal\Utilities;
 use WindowsAzure\Common\Internal\Resources;
-use WindowsAzure\ServiceManagement\Internal\ServicePropertiesResult;
 
 /**
  * The result of calling listStorageServices API.
@@ -38,7 +37,7 @@ use WindowsAzure\ServiceManagement\Internal\ServicePropertiesResult;
  * @version   Release: @package_version@
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
-class ListStorageServicesResult extends ServicePropertiesResult
+class ListStorageServicesResult
 {
     /**
      * @var array
@@ -54,12 +53,15 @@ class ListStorageServicesResult extends ServicePropertiesResult
      */
     public static function create($parsed)
     {
-        $result = new ListStorageServicesResult(
-            $parsed,
-            Resources::XTAG_STORAGE_SERVICE
+        $result             = new ListStorageServicesResult();
+        $rowStorageServices = Utilities::tryGetArray(
+            Resources::XTAG_STORAGE_SERVICE,
+            $parsed
         );
         
-        $result->_storageServices = $result->services;
+        foreach ($rowStorageServices as $rowStorageService) {
+            $result->_storageServices[] = new StorageService($rowStorageService);
+        }
         
         return $result;
     }
@@ -86,5 +88,3 @@ class ListStorageServicesResult extends ServicePropertiesResult
         $this->_storageServices = $storageServices;
     }
 }
-
-

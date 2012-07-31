@@ -23,10 +23,10 @@
  */
 
 namespace Tests\Unit\WindowsAzure\ServiceManagement\Models;
-use WindowsAzure\ServiceManagement\Models\ServiceProperties;
+use WindowsAzure\ServiceManagement\Models\CreateDeploymentOptions;
 
 /**
- * Unit tests for class ServiceProperties
+ * Unit tests for class CreateDeploymentOptions
  *
  * @category  Microsoft
  * @package   Tests\Unit\WindowsAzure\ServiceManagement\Models
@@ -36,41 +36,39 @@ use WindowsAzure\ServiceManagement\Models\ServiceProperties;
  * @version   Release: @package_version@
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
-class ServicePropertiesTest extends \PHPUnit_Framework_TestCase
+class CreateDeploymentOptionsTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @covers WindowsAzure\ServiceManagement\Models\ServiceProperties::setUrl
-     * @covers WindowsAzure\ServiceManagement\Models\ServiceProperties::getUrl
+     * @covers WindowsAzure\ServiceManagement\Models\CreateDeploymentOptions::setStartDeployment
+     * @covers WindowsAzure\ServiceManagement\Models\CreateDeploymentOptions::getStartDeployment
      */
-    public function testSetUrl()
+    public function testSetStartDeployment()
     {
         // Setup
-        $service = new ServiceProperties();
-        $expected = 'Url';
+        $expected = true;
+        $options = new CreateDeploymentOptions();
         
         // Test
-        $service->setUrl($expected);
+        $options->setStartDeployment($expected);
         
         // Assert
-        $this->assertEquals($expected, $service->getUrl());
+        $this->assertEquals($expected, $options->getStartDeployment());
     }
     
     /**
-     * @covers WindowsAzure\ServiceManagement\Models\ServiceProperties::setServiceName
-     * @covers WindowsAzure\ServiceManagement\Models\ServiceProperties::getServiceName
+     * @covers WindowsAzure\ServiceManagement\Models\CreateDeploymentOptions::setTreatWarningsAsErrors
+     * @covers WindowsAzure\ServiceManagement\Models\CreateDeploymentOptions::getTreatWarningsAsErrors
      */
-    public function testSetServiceName()
+    public function testSetTreatWarningsAsErrors()
     {
         // Setup
-        $service = new ServiceProperties();
-        $expected = 'ServiceName';
+        $expected = true;
+        $options = new CreateDeploymentOptions();
         
         // Test
-        $service->setServiceName($expected);
+        $options->setTreatWarningsAsErrors($expected);
         
         // Assert
-        $this->assertEquals($expected, $service->getServiceName());
+        $this->assertEquals($expected, $options->getTreatWarningsAsErrors());
     }
 }
-
-

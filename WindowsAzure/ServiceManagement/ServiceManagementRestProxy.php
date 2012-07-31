@@ -46,6 +46,8 @@ use WindowsAzure\ServiceManagement\Models\ListHostedServicesResult;
 use WindowsAzure\ServiceManagement\Models\HostedService;
 use WindowsAzure\ServiceManagement\Models\GetHostedServicePropertiesOptions;
 use WindowsAzure\ServiceManagement\Models\GetHostedServicePropertiesResult;
+use WindowsAzure\ServiceManagement\Models\DeploymentSlot;
+use WindowsAzure\ServiceManagement\Models\CreateDeploymentOptions;
 
 /**
  * This class constructs HTTP requests and receive HTTP responses for service 
@@ -130,6 +132,34 @@ class ServiceManagementRestProxy extends RestProxy
     private function _getHostedServicePath($name = null)
     {
         return $this->_getPath('services/hostedservices', $name);
+    }
+    
+    /**
+     * Constructs URI path for deployment slot.
+     * 
+     * @param string $name The hosted service name.
+     * @param string $slot The deployment slot name.
+     * 
+     * @return string
+     */
+    private function _getDeploymentPathUsingSlot($name, $slot)
+    {
+        $path = "services/hostedservices/$name/deploymentslots";
+        return $this->_getPath($path, $slot);
+    }
+    
+    /**
+     * Constructs URI path for deployment slot.
+     * 
+     * @param string $name           The hosted service name.
+     * @param string $deploymentName The deployment slot name.
+     * 
+     * @return string
+     */
+    private function _getDeploymentPathUsingName($name, $deploymentName)
+    {
+        $path = "services/hostedservices/$name/deployments";
+        return $this->_getPath($path, $deploymentName);
     }
     
     /**
@@ -819,12 +849,14 @@ class ServiceManagementRestProxy extends RestProxy
      * @param string                  $deploymentName The name for the deployment. 
      * The deployment name must be unique among other deployments for the hosted
      * service.
+     * @param string                  $slot           The name of the deployment slot
+     * This can be "production" or "staging".
      * @param string                  $packageUrl     The URL that refers to the
      * location of the service package in the Blob service. The service package can
      * be located in a storage account beneath the same subscription.
      * @param string                  $configuration  The base-64 encoded service 
      * configuration file for the deployment.
-     * @param string                  $label          The name for the hosted service 
+     * @param string                  $label          The name for the hosted service
      * that is base-64 encoded. The name can be up to 100 characters in length. It is
      * recommended that the label be unique within the subscription. The name can be
      * used identify the hosted service for your tracking purposes.
@@ -837,12 +869,70 @@ class ServiceManagementRestProxy extends RestProxy
     public function createDeployment(
         $name,
         $deploymentName,
+        $slot,
         $packageUrl,
         $configuration,
         $label,
         $options = null
     ) {
-        throw new \Exception(Resources::NOT_IMPLEMENTED_MSG);
+        Validate::isString($name, 'name');
+        Validate::notNullOrEmpty($name, 'name');
+        Validate::isString($deploymentName, 'deploymentName');
+        Validate::notNullOrEmpty($deploymentName, 'deploymentName');
+        Validate::isString($slot, 'slot');
+        Validate::notNullOrEmpty($slot, 'slot');
+        Validate::isTrue(
+            DeploymentSlot::isValid($slot),
+            sprintf(Resources::INVALID_SLOT, $slot)
+        );
+        Validate::isString($packageUrl, 'packageUrl');
+        Validate::notNullOrEmpty($packageUrl, 'packageUrl');
+        Validate::isString($configuration, 'configuration');
+        Validate::notNullOrEmpty($configuration, 'configuration');
+        Validate::isString($label, 'label');
+        Validate::notNullOrEmpty($label, 'label');
+        
+        if (is_null($options)) {
+            $options = new CreateDeploymentOptions();
+        }
+        
+        $startDeployment         = Utilities::booleanToString(
+            $options->getStartDeployment()
+        );
+        $treatWarningsAsErrors   = Utilities::booleanToString(
+            $options->getTreatWarningsAsErrors()
+        );
+        $requestArray            = array(
+            Resources::XTAG_NAMESPACE               => array(
+                Resources::WA_XML_NAMESPACE => null
+            ),
+            Resources::XTAG_NAME                    => $deploymentName,
+            Resources::XTAG_PACKAGE_URL             => $packageUrl,
+            Resources::XTAG_LABEL                   => $label,
+            Resources::XTAG_CONFIGURATION           => $configuration,
+            Resources::XTAG_START_DEPLOYMENT        => $startDeployment,
+            Resources::XTAG_TREAT_WARNINGS_AS_ERROR => $treatWarningsAsErrors
+        );
+        
+        // Construct the request body XML
+        $properties = array(
+            XmlSerializer::ROOT_NAME => Resources::XTAG_CREATE_DEPLOYMENT
+        );
+        $requestXml = $this->dataSerializer->serialize($requestArray, $properties);
+        
+        $context = new HttpCallContext();
+        $context->setMethod(Resources::HTTP_POST);
+        $context->setPath($this->_getDeploymentPathUsingSlot($name, $slot));
+        $context->addStatusCode(Resources::STATUS_ACCEPTED);
+        $context->setBody($requestXml);
+        $context->addHeader(
+            Resources::CONTENT_TYPE,
+            Resources::XML_ATOM_CONTENT_TYPE
+        );
+        
+        $response = $this->sendContext($context);
+        
+        return AsynchronousOperationResult::create($response->getHeader());
     }
     
     /**
@@ -952,7 +1042,7 @@ class ServiceManagementRestProxy extends RestProxy
      * 
      * @see http://msdn.microsoft.com/en-us/library/windowsazure/ee460808.aspx
      */
-    public function  updateDeploymentStatus($name, $status, $options)
+    public function updateDeploymentStatus($name, $status, $options)
     {
         throw new \Exception(Resources::NOT_IMPLEMENTED_MSG);
     }
@@ -1074,8 +1164,8 @@ class ServiceManagementRestProxy extends RestProxy
      * 
      * @param string                         $name    The hosted service name.
      * @param string                         $mode    Specifies whether the rollback
-     * should proceed automatically or not. Auto – The rollback proceeds without
-     * further user input. Manual – You must call the walkUpgradeDomain API to apply 
+     * should proceed automatically or not. Auto, The rollback proceeds without
+     * further user input. Manual, You must call the walkUpgradeDomain API to apply
      * the rollback to each upgrade domain.
      * @param boolean                        $force   Specifies whether the rollback 
      * should proceed even when it will cause local data to be lost from some role 
@@ -1087,7 +1177,7 @@ class ServiceManagementRestProxy extends RestProxy
      * 
      * @see http://msdn.microsoft.com/en-us/library/windowsazure/hh403977.aspx
      */
-    public function  rollbackUpdateOrUpgrade($name, $mode, $force, $options)
+    public function rollbackUpdateOrUpgrade($name, $mode, $force, $options)
     {
         throw new \Exception(Resources::NOT_IMPLEMENTED_MSG);
     }

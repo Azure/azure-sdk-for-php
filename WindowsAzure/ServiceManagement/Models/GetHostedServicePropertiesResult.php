@@ -40,7 +40,7 @@ use WindowsAzure\Common\Internal\Resources;
 class GetHostedServicePropertiesResult
 {
     /**
-     * @var HostedServiceProperties
+     * @var HostedService
      */
     private $_hostedService;
     
@@ -54,30 +54,11 @@ class GetHostedServicePropertiesResult
     public static function create($parsed)
     {
         $result                 = new GetHostedServicePropertiesResult();
-        $result->_hostedService = new HostedServiceProperties();
-        $prop                   = Utilities::tryGetValue(
+        $properties             = Utilities::tryGetValue(
             $parsed,
             Resources::XTAG_HOSTED_SERVICE_PROPERTIES
         );
-        
-        $result->_hostedService->setServiceName(
-            Utilities::tryGetValue($parsed, Resources::XTAG_SERVICE_NAME)
-        );
-        $result->_hostedService->setUrl(
-            Utilities::tryGetValue($parsed, Resources::XTAG_URL)
-        );
-        $result->_hostedService->setDescription(
-            Utilities::tryGetValue($prop, Resources::XTAG_DESCRIPTION)
-        );
-        $result->_hostedService->setLocation(
-            Utilities::tryGetValue($prop, Resources::XTAG_LOCATION)
-        );
-        $result->_hostedService->setAffinityGroup(
-            Utilities::tryGetValue($prop, Resources::XTAG_AFFINITY_GROUP)
-        );
-        $result->_hostedService->setLabel(
-            Utilities::tryGetValue($prop, Resources::XTAG_LABEL)
-        );
+        $result->_hostedService = new HostedService($parsed, $properties);
         
         return $result;
     }

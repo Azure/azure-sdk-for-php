@@ -41,14 +41,55 @@ use WindowsAzure\ServiceManagement\Internal\WindowsAzureService;
 class StorageService extends WindowsAzureService
 {
     /**
+     * @var array
+     */
+    private $_endpoints;
+    
+    /**
+     * @var string
+     */
+    private $_status;
+    
+    /**
+     * Constructs new storage service object.
+     */
+    public function __construct()
+    {
+        $sources = func_get_args();
+        parent::__construct($sources);
+        
+        foreach ($sources as $source) {
+            $this->setStatus(
+                Utilities::tryGetValue(
+                    $source,
+                    Resources::XTAG_STATUS,
+                    $this->getStatus()
+                )
+            );
+            
+            $endpoints = Utilities::tryGetValue(
+                $source,
+                Resources::XTAG_ENDPOINTS
+            );
+            $this->setEndpoints(
+                Utilities::tryGetValue(
+                    $endpoints,
+                    Resources::XTAG_ENDPOINT,
+                    $this->getEndpoints()
+                )
+            );
+        }
+    }
+    
+    /**
      * Converts the current object into ordered array representation.
      * 
      * @return array
      */
     protected function toArray()
     {
-        $arr   = parent::toArray();
-        $order = array(
+        $arr     = parent::toArray();
+        $order   = array(
             Resources::XTAG_NAMESPACE,
             Resources::XTAG_SERVICE_NAME,
             Resources::XTAG_DESCRIPTION,
@@ -59,5 +100,49 @@ class StorageService extends WindowsAzureService
         $ordered = Utilities::orderArray($arr, $order);
         
         return $ordered;
+    }
+    
+    /**
+     * Gets the endpoints.
+     * 
+     * @return array
+     */
+    public function getEndpoints()
+    {
+        return $this->_endpoints;
+    }
+    
+    /**
+     * Sets the endpoints.
+     * 
+     * @param array $endpoints The endpoints.
+     * 
+     * @return none
+     */
+    public function setEndpoints($endpoints)
+    {
+        $this->_endpoints = $endpoints;
+    }
+    
+    /**
+     * Gets the status.
+     * 
+     * @return string
+     */
+    public function getStatus()
+    {
+        return $this->_status;
+    }
+    
+    /**
+     * Sets the status.
+     * 
+     * @param string $status The status.
+     * 
+     * @return none
+     */
+    public function setStatus($status)
+    {
+        $this->_status = $status;
     }
 }

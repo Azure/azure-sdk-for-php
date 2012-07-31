@@ -304,12 +304,14 @@ interface IServiceManagement extends FilterableService
      * @param string                  $deploymentName The name for the deployment. 
      * The deployment name must be unique among other deployments for the hosted
      * service.
+     * @param string                  $slot           The name of the deployment slot
+     * This can be "production" or "staging".
      * @param string                  $packageUrl     The URL that refers to the
      * location of the service package in the Blob service. The service package can
      * be located in a storage account beneath the same subscription.
      * @param string                  $configuration  The base-64 encoded service 
      * configuration file for the deployment.
-     * @param string                  $label          The name for the hosted service 
+     * @param string                  $label          The name for the hosted service
      * that is base-64 encoded. The name can be up to 100 characters in length. It is
      * recommended that the label be unique within the subscription. The name can be
      * used identify the hosted service for your tracking purposes.
@@ -322,6 +324,7 @@ interface IServiceManagement extends FilterableService
     public function createDeployment(
         $name,
         $deploymentName,
+        $slot,
         $packageUrl,
         $configuration,
         $label,
@@ -423,7 +426,7 @@ interface IServiceManagement extends FilterableService
      * 
      * @see http://msdn.microsoft.com/en-us/library/windowsazure/ee460808.aspx
      */
-    public function  updateDeploymentStatus($name, $status, $options);
+    public function updateDeploymentStatus($name, $status, $options);
     
     /**
      * Initiates an upgrade to a deployment.
@@ -531,8 +534,8 @@ interface IServiceManagement extends FilterableService
      * 
      * @param string                         $name    The hosted service name.
      * @param string                         $mode    Specifies whether the rollback
-     * should proceed automatically or not. Auto – The rollback proceeds without
-     * further user input. Manual – You must call the walkUpgradeDomain API to apply 
+     * should proceed automatically or not. Auto, The rollback proceeds without
+     * further user input. Manual, You must call the walkUpgradeDomain API to apply
      * the rollback to each upgrade domain.
      * @param boolean                        $force   Specifies whether the rollback 
      * should proceed even when it will cause local data to be lost from some role 
@@ -544,5 +547,5 @@ interface IServiceManagement extends FilterableService
      * 
      * @see http://msdn.microsoft.com/en-us/library/windowsazure/hh403977.aspx
      */
-    public function  rollbackUpdateOrUpgrade($name, $mode, $force, $options);
+    public function rollbackUpdateOrUpgrade($name, $mode, $force, $options);
 }
