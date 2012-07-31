@@ -86,7 +86,7 @@ class GetDeploymentOptions
     /**
      * Sets the deployment name.
      * 
-     * @param string $deploymentName The deployment name name.
+     * @param string $deploymentName The deployment name.
      * 
      * @return none
      */
