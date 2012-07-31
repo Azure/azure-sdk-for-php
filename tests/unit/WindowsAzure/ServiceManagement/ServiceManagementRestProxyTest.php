@@ -627,4 +627,22 @@ class ServiceManagementRestProxyTest extends ServiceManagementRestProxyTestBase
         $this->assertEquals($this->defaultLocation, $result->getHostedService()->getLocation());
         $this->assertEquals(base64_encode($name), $result->getHostedService()->getLabel());
     }
+    
+    /**
+     * @covers WindowsAzure\ServiceManagement\ServiceManagementRestProxy::createDeployment
+     * @covers WindowsAzure\ServiceManagement\ServiceManagementRestProxy::_getDeploymentPathUsingSlot
+     * @covers WindowsAzure\ServiceManagement\ServiceManagementRestProxy::_getPath
+     * @group Deployment
+     */
+    public function testCreateDeployment()
+    {
+        // Setup
+        $name = 'testcreatedeployment';
+        
+        // Test
+        $this->createDeployment($name);
+        
+        // Assert
+        $this->assertTrue($this->deploymentExists($name));
+    }
 }

@@ -107,6 +107,28 @@ class TestResources
         return $connectionString;
     }
     
+    public static function packageUrl()
+    {
+        $name = getenv('AZURE_PACKAGE_URL');
+        
+        if (empty($name)) {
+            throw new \Exception('AZURE_PACKAGE_URL envionment variable is missing');
+        }
+        
+        return $name;
+    }
+    
+    public static function packageConfiguration()
+    {
+        $name = getenv('AZURE_PACKAGE_CONFIGURATION');
+        
+        if (empty($name)) {
+            throw new \Exception('AZURE_PACKAGE_CONFIGURATION envionment variable is missing');
+        }
+        
+        return $name;
+    }
+    
     public static function accountName()
     {
         $name = getenv('AZURE_STORAGE_ACCOUNT');

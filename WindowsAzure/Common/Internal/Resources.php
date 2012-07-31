@@ -107,6 +107,7 @@ class Resources
     const ERROR_CONNECTION_STRING_MISSING_CHARACTER = "Missing %s character";
     const ERROR_EMPTY_SETTINGS = 'No keys were found in the connection string';
     const MISSING_LOCK_LOCATION_MSG = 'The lock location of the brokered message is missing.';
+    const INVALID_SLOT = "The provided deployment slot '%s' is not valid. Only 'staging' and 'production' are accepted.";
 
     // HTTP Headers
     const X_MS_HEADER_PREFIX                 = 'x-ms-';
@@ -299,6 +300,11 @@ class Resources
     const XTAG_CREATE_AFFINITY_GROUP = 'CreateAffinityGroup';
     const XTAG_UPDATE_AFFINITY_GROUP = 'UpdateAffinityGroup';
     const XTAG_UPDATE_HOSTED_SERVICE = 'UpdateHostedService';
+    const XTAG_PACKAGE_URL = 'PackageUrl';
+    const XTAG_CONFIGURATION = 'Configuration';
+    const XTAG_START_DEPLOYMENT = 'StartDeployment';
+    const XTAG_TREAT_WARNINGS_AS_ERROR = 'TreatWarningsAsError';
+    const XTAG_CREATE_DEPLOYMENT = 'CreateDeployment';
 
     // Service Bus
     const LIST_TOPICS_PATH        = '$Resources/Topics';

@@ -304,6 +304,8 @@ interface IServiceManagement extends FilterableService
      * @param string                  $deploymentName The name for the deployment. 
      * The deployment name must be unique among other deployments for the hosted
      * service.
+     * @param string                  $slot           The name of the deployment slot
+     * This can be "production" or "staging".
      * @param string                  $packageUrl     The URL that refers to the
      * location of the service package in the Blob service. The service package can
      * be located in a storage account beneath the same subscription.
@@ -322,6 +324,7 @@ interface IServiceManagement extends FilterableService
     public function createDeployment(
         $name,
         $deploymentName,
+        $slot,
         $packageUrl,
         $configuration,
         $label,
