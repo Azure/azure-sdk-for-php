@@ -61,12 +61,12 @@ class TableServiceIntegrationTest extends IntegrationTestBase
     {
         parent::setUp();
         if (!self::$isOneTimeSetup) {
-            self::doOneTimeSetup();
+            $this->doOneTimeSetup();
             self::$isOneTimeSetup = true;
         }
     }
 
-    private static function doOneTimeSetup()
+    private function doOneTimeSetup()
     {
         self::$testTablesPrefix .= rand(0,1000);
         // Setup container names array (list of container names used by
@@ -94,74 +94,60 @@ class TableServiceIntegrationTest extends IntegrationTestBase
         self::$createTable2 = self::$creatableTables[1];
 
         // Create all test containers and their content
-        self::deleteAllTables(self::$testTables);
-        self::deleteAllTables(self::$creatableTables);
-        self::createTables(self::$testTablesPrefix, self::$testTables);
+        $this->deleteAllTables(self::$testTables);
+        $this->deleteAllTables(self::$creatableTables);
+        $this->createTables(self::$testTablesPrefix, self::$testTables);
     }
 
     public static function tearDownAfterClass()
     {
         if (self::$isOneTimeSetup) {
-            self::deleteAllTables(self::$testTables);
-            self::deleteTables(self::$createableTablesPrefix, self::$creatableTables);
+            $tmp = new TableServiceIntegrationTest();
+            $tmp->setUp();
+            $tmp->deleteAllTables(self::$testTables);
+            $tmp->deleteTables(self::$createableTablesPrefix, self::$creatableTables);
             self::$isOneTimeSetup = false;
         }
         parent::tearDownAfterClass();
     }
 
-    private static function createTables($prefix, $list)
+    private function createTables($prefix, $list)
     {
-        $service = self::createService();
-        $containers = self::listTables($prefix);
+        $containers = $this->listTables($prefix);
         foreach($list as $item)  {
             if (!in_array($item, $containers)) {
-                $service->createTable($item);
+                $this->createTable($item);
             }
         }
     }
 
-    private static function deleteTables($prefix, $list)
+    private function deleteTables($prefix, $list)
     {
-        $service = self::createService();
-        $containers = self::listTables($prefix);
+        $containers = $this->listTables($prefix);
         foreach($list as $item)  {
             if (in_array($item, $containers)) {
-                $service->deleteTable($item);
+                $this->safeDeleteTable($item);
             }
         }
     }
 
-    private static function deleteAllTables($list)
+    private function deleteAllTables($list)
     {
-        $service = self::createService();
         foreach($list as $item)  {
-            try {
-                $service->deleteTable($item);
-            } catch (ServiceException $e) {
-                // Ignore
-                error_log($e->getMessage());
-            }
+            $this->safeDeleteTable($item);
         }
     }
 
-    private static function listTables($prefix)
+    private function listTables($prefix)
     {
-        $service = self::createService();
         $result = array();
         $qto = new QueryTablesOptions();
         $qto->setPrefix($prefix);
-        $list = $service->queryTables($qto);
+        $list = $this->restProxy->queryTables($qto);
         foreach($list->getTables() as $item)  {
             array_push($result, $item);
         }
         return $result;
-    }
-
-    private static function createService()
-    {
-        $tmp = new IntegrationTestBase();
-        $tmp->setUp();
-        return $tmp->restProxy;
     }
 
     /**

@@ -38,24 +38,22 @@ class FunctionalTestBase extends IntegrationTestBase
         $settings = StorageServiceSettings::createFromConnectionString($this->connectionString);
         $this->accountName = $settings->getName();
         if (!self::$isOneTimeSetup) {
-            self::doOneTimeSetup();
+            $this->doOneTimeSetup();
             self::$isOneTimeSetup = true;
         }
     }
 
-    private static function doOneTimeSetup()
+    private function doOneTimeSetup()
     {
-        $testBase = new FunctionalTestBase();
-        $testBase->setUp();
         QueueServiceFunctionalTestData::setupData();
 
         foreach(QueueServiceFunctionalTestData::$testQueueNames as $name)  {
-            $testBase->safeDeleteQueue($name);
+            $this->safeDeleteQueue($name);
         }
 
         foreach(QueueServiceFunctionalTestData::$testQueueNames as $name)  {
             self::println('Creating queue: ' . $name);
-            $testBase->restProxy->createQueue($name);
+            $this->restProxy->createQueue($name);
         }
     }
 

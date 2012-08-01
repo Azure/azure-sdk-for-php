@@ -65,12 +65,12 @@ class BlobServiceIntegrationTest extends IntegrationTestBase
     {
         parent::setUp();
         if (!self::$isOneTimeSetup) {
-            self::doOneTimeSetup();
+            $this->doOneTimeSetup();
             self::$isOneTimeSetup = true;
         }
     }
 
-    private static function doOneTimeSetup()
+    private function doOneTimeSetup()
     {
         // Setup container names array (list of container names used by
         // integration tests)
@@ -95,9 +95,7 @@ class BlobServiceIntegrationTest extends IntegrationTestBase
         self::$_test_container_for_listing = self::$_testContainers[2];
 
         // Create all test containers and their content
-        $inst = new IntegrationTestBase();
-        $inst->setUp();
-        $inst->createContainers(self::$_testContainers, self::$_testContainersPrefix);
+        $this->createContainers(self::$_testContainers, self::$_testContainersPrefix);
     }
 
     public static function tearDownAfterClass()

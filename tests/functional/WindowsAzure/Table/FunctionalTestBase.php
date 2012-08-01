@@ -36,20 +36,18 @@ class FunctionalTestBase extends IntegrationTestBase
     {
         parent::setUp();
         if (!self::$isOneTimeSetup) {
-            self::doOneTimeSetup();
+            $this->doOneTimeSetup();
             self::$isOneTimeSetup = true;
         }
     }
 
-    private static function doOneTimeSetup()
+    private function doOneTimeSetup()
     {
-        $testBase = new FunctionalTestBase();
-        $testBase->setUp();
         TableServiceFunctionalTestData::setupData();
 
         foreach(TableServiceFunctionalTestData::$testTableNames as $name)  {
             self::println('Creating Table: ' . $name);
-            $testBase->restProxy->createTable($name);
+            $this->restProxy->createTable($name);
         }
     }
 

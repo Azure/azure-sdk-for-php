@@ -40,22 +40,9 @@ class IntegrationTestBase extends ServiceBusRestProxyTestBase
         $fiddlerFilter = new FiddlerFilter();
         $this->restProxy = $this->restProxy->withFilter($fiddlerFilter);
         if (!self::$isOneTimeSetup) {
-            self::doOneTimeSetup();
+            $this->doOneTimeSetup();
             self::$isOneTimeSetup = true;
         }
-    }
-
-    private static function doOneTimeSetup()
-    {
-        self::initialize();
-    }
-
-    public static function tearDownAfterClass()
-    {
-        if (self::$isOneTimeSetup) {
-            self::$isOneTimeSetup = false;
-        }
-        parent::tearDownAfterClass();
     }
 
     /**
@@ -63,13 +50,10 @@ class IntegrationTestBase extends ServiceBusRestProxyTestBase
      * @covers WindowsAzure\ServiceBus\ServiceBusRestProxy::deleteQueue
      * @covers WindowsAzure\ServiceBus\ServiceBusRestProxy::receiveQueueMessage
      */
-    public static function initialize()
+    private function doOneTimeSetup()
     {
-        $inst = new IntegrationTestBase();
-        $inst->setUp();
-        $restProxy = $inst->restProxy;
         $testAlphaExists = false;
-        $queues = $restProxy->listQueues()->getQueueInfos();
+        $queues = $this->restProxy->listQueues()->getQueueInfos();
         foreach($queues as $queue)  {
             $queueName = $queue->getTitle();
             if (Utilities::startsWith($queueName, 'Test') || Utilities::startsWith($queueName, 'test')) {
@@ -80,25 +64,25 @@ class IntegrationTestBase extends ServiceBusRestProxyTestBase
                         $opts = new ReceiveMessageOptions();
                         $opts->setTimeout(20);
                         try {
-                            $restProxy->receiveQueueMessage($queueName, $opts);
+                            $this->restProxy->receiveQueueMessage($queueName, $opts);
                         } catch (\Exception $ex) {
                             error_log($ex->getMessage());
                         }
                     }
                 } else {
                     try {
-                        $restProxy->deleteQueue($queueName);
+                        $this->restProxy->deleteQueue($queueName);
                     } catch (\Exception $ex) {
                         error_log($ex->getMessage());
                     }
                 }
             }
         }
-        foreach($restProxy->listTopics()->getTopicInfos() as $topic)  {
+        foreach($this->restProxy->listTopics()->getTopicInfos() as $topic)  {
             $topicName = $topic->getTitle();
             if (Utilities::startsWith($topicName, 'Test') || Utilities::startsWith($topicName, 'test')) {
                 try {
-                    $restProxy->deleteTopic($topicName);
+                    $this->restProxy->deleteTopic($topicName);
                 } catch (\Exception $ex) {
                     error_log($ex->getMessage());
                 }
@@ -107,11 +91,19 @@ class IntegrationTestBase extends ServiceBusRestProxyTestBase
 
         if (!$testAlphaExists) {
             try {
-                $restProxy->createQueue(new QueueInfo('TestAlpha'));
+                $this->restProxy->createQueue(new QueueInfo('TestAlpha'));
             } catch (\Exception $ex) {
                 error_log($ex->getMessage());
             }
         }
+    }
+
+    public static function tearDownAfterClass()
+    {
+        if (self::$isOneTimeSetup) {
+            self::$isOneTimeSetup = false;
+        }
+        parent::tearDownAfterClass();
     }
 }
 
