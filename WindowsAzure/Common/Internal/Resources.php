@@ -108,6 +108,7 @@ class Resources
     const ERROR_EMPTY_SETTINGS = 'No keys were found in the connection string';
     const MISSING_LOCK_LOCATION_MSG = 'The lock location of the brokered message is missing.';
     const INVALID_SLOT = "The provided deployment slot '%s' is not valid. Only 'staging' and 'production' are accepted.";
+    const INVALID_DEPLOYMENT_LOCATOR_MSG = 'A slot or deployment name must be provided.';
 
     // HTTP Headers
     const X_MS_HEADER_PREFIX                 = 'x-ms-';

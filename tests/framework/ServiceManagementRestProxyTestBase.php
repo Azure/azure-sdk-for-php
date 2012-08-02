@@ -29,6 +29,7 @@ use WindowsAzure\ServiceManagement\Models\CreateServiceOptions;
 use WindowsAzure\ServiceManagement\Models\OperationStatus;
 use WindowsAzure\ServiceManagement\Models\Locations;
 use WindowsAzure\ServiceManagement\Models\DeploymentSlot;
+use WindowsAzure\ServiceManagement\Models\GetDeploymentOptions;
 
 /**
  * Test base for ServiceManagementTest class.
@@ -129,7 +130,7 @@ class ServiceManagementRestProxyTestBase extends RestProxyTestBase
             sleep(5);
             $result = $this->restProxy->getOperationStatus($requestId);
             $status = $result->getStatus();
-        }while(OperationStatus::IN_PROGRESS == $status);
+        } while(OperationStatus::IN_PROGRESS == $status);
         
         $this->assertEquals(OperationStatus::SUCCEEDED, $status);
     }
@@ -215,7 +216,6 @@ class ServiceManagementRestProxyTestBase extends RestProxyTestBase
         $slot = $this->defaultSlot;
         $packageUrl = TestResources::packageUrl();
         $configuration = base64_encode(file_get_contents(TestResources::packageConfiguration()));
-        $label = base64_encode($name);
         
         $this->createHostedService($name);
         $result = $this->restProxy->createDeployment(
@@ -249,7 +249,8 @@ class ServiceManagementRestProxyTestBase extends RestProxyTestBase
     {
         $options = new GetDeploymentOptions();
         $options->setSlot($this->defaultSlot);
-        $this->restProxy->deleteDeployment($name, $options);
+        $result = $this->restProxy->deleteDeployment($name, $options);
+        $this->blockUntilAsyncSucceed($result->getRequestId());
     }
     
     public function safeDeleteDeployment($name)

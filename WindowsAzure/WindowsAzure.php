@@ -194,6 +194,7 @@ spl_autoload_register(
             'windowsazure\\servicemanagement\\models\\createserviceoptions' => '/ServiceManagement/Models/CreateServiceOptions.php',
             'windowsazure\\servicemanagement\\models\\deploymentslot' => '/ServiceManagement/Models/DeploymentSlot.php',
             'windowsazure\\servicemanagement\\models\\getaffinitygrouppropertiesresult' => '/ServiceManagement/Models/GetAffinityGroupPropertiesResult.php',
+            'windowsazure\\servicemanagement\\models\\getdeploymentoptions' => '/ServiceManagement/Models/GetDeploymentOptions.php',
             'windowsazure\\servicemanagement\\models\\gethostedservicepropertiesoptions' => '/ServiceManagement/Models/GetHostedServicePropertiesOptions.php',
             'windowsazure\\servicemanagement\\models\\gethostedservicepropertiesresult' => '/ServiceManagement/Models/GetHostedServicePropertiesResult.php',
             'windowsazure\\servicemanagement\\models\\getoperationstatusresult' => '/ServiceManagement/Models/GetOperationStatusResult.php',

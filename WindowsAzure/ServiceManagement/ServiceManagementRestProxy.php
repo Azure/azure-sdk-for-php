@@ -990,8 +990,8 @@ class ServiceManagementRestProxy extends RestProxy
      * environment (staging or production), or by specifying the deployment's unique
      * name.
      * 
-     * @param string                  $name    The hosted service name.
-     * @param DeleteDeploymentOptions $options The optional parameters.
+     * @param string               $name    The hosted service name.
+     * @param GetDeploymentOptions $options The optional parameters.
      * 
      * @return AsynchronousOperationResult
      * 
@@ -999,7 +999,30 @@ class ServiceManagementRestProxy extends RestProxy
      */
     public function deleteDeployment($name, $options)
     {
-        throw new \Exception(Resources::NOT_IMPLEMENTED_MSG);
+        Validate::isString($name, 'name');
+        Validate::notNullOrEmpty($name, 'name');
+        Validate::notNullOrEmpty($options, 'options');
+        $slot           = $options->getSlot();
+        $deploymentName = $options->getDeploymentName();
+        Validate::isTrue(
+            !empty($slot) || !empty($deploymentName),
+            Resources::INVALID_DEPLOYMENT_LOCATOR_MSG
+        );
+        
+        $context = new HttpCallContext();
+        $path    = null;
+        $context->setMethod(Resources::HTTP_DELETE);
+        if (!empty($slot)) {
+            $path = $this->_getDeploymentPathUsingSlot($name, $slot);
+        } else {
+            $path = $this->_getDeploymentPathUsingName($name, $deploymentName);
+        }
+        $context->setPath($path);
+        $context->addStatusCode(Resources::STATUS_ACCEPTED);
+        
+        $response = $this->sendContext($context);
+        
+        return AsynchronousOperationResult::create($response->getHeader());
     }
     
     /**

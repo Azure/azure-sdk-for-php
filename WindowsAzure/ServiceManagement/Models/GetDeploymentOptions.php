@@ -23,9 +23,11 @@
  */
  
 namespace WindowsAzure\ServiceManagement\Models;
+use WindowsAzure\Common\Internal\Validate;
+use WindowsAzure\Common\Internal\Resources;
 
 /**
- * Valid deployment slots that can be used on Windows Azure.
+ * The parameters to get a deployment.
  *
  * @category  Microsoft
  * @package   WindowsAzure\ServiceManagement\Models
@@ -35,27 +37,64 @@ namespace WindowsAzure\ServiceManagement\Models;
  * @version   Release: @package_version@
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
-class DeploymentSlot
+class GetDeploymentOptions
 {
-    const STAGING    = 'staging';
-    const PRODUCTION = 'production';
+    private $_slot;
+    
+    private $_deploymentName;
+    
     
     /**
-     * Validates the provided slot name.
+     * Gets the deployment slot.
+     * 
+     * @return string
+     */
+    public function getSlot()
+    {
+        return $this->_slot;
+    }
+    
+    /**
+     * Sets the deployment slot.
      * 
      * @param string $slot The deployment slot name.
      * 
-     * @return boolean
+     * @return none
      */
-    public static function isValid($slot)
+    public function setSlot($slot)
     {
-        switch (strtolower($slot)) {
-        case self::STAGING:
-        case self::PRODUCTION:
-        return true;
-        
-        default:
-        return false;
-        }
+        Validate::isString($slot, 'slot');
+        Validate::notNullOrEmpty($slot, 'slot');
+        Validate::isTrue(
+            DeploymentSlot::isValid($slot),
+            sprintf(Resources::INVALID_SLOT, $slot)
+        );
+                
+        $this->_slot = $slot;
+    }
+    
+    /**
+     * Gets the deployment name.
+     * 
+     * @return string
+     */
+    public function getDeploymentName()
+    {
+        return $this->_deploymentName;
+    }
+    
+    /**
+     * Sets the deployment name.
+     * 
+     * @param string $deploymentName The deployment name.
+     * 
+     * @return none
+     */
+    public function setDeploymentName($deploymentName)
+    {
+        Validate::isString($deploymentName, 'deploymentName');
+        Validate::notNullOrEmpty($deploymentName, 'deploymentName');
+                
+        $this->_deploymentName = $deploymentName;
     }
 }

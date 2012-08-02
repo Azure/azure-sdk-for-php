@@ -24,6 +24,7 @@
 
 namespace Tests\Unit\WindowsAzure\ServiceManagement;
 use Tests\Framework\ServiceManagementRestProxyTestBase;
+use Tests\Framework\TestResources;
 use WindowsAzure\Common\Internal\Resources;
 use WindowsAzure\Common\Internal\Http\HttpClient;
 use WindowsAzure\Common\Internal\Serialization\XmlSerializer;
@@ -32,6 +33,7 @@ use WindowsAzure\ServiceManagement\Models\Locations;
 use WindowsAzure\ServiceManagement\Models\CreateServiceOptions;
 use WindowsAzure\ServiceManagement\Models\UpdateServiceOptions;
 use WindowsAzure\ServiceManagement\Models\KeyType;
+use WindowsAzure\ServiceManagement\Models\GetDeploymentOptions;
 
 /**
  * Unit tests for class ServiceManagementRestProxy
@@ -644,5 +646,85 @@ class ServiceManagementRestProxyTest extends ServiceManagementRestProxyTestBase
         
         // Assert
         $this->assertTrue($this->deploymentExists($name));
+    }
+    
+    /**
+     * @covers WindowsAzure\ServiceManagement\ServiceManagementRestProxy::deleteDeployment
+     * @covers WindowsAzure\ServiceManagement\ServiceManagementRestProxy::_getDeploymentPathUsingSlot
+     * @covers WindowsAzure\ServiceManagement\ServiceManagementRestProxy::_getPath
+     * @group Deployment
+     */
+    public function testDeleteDeploymentWithSlot()
+    {
+        // Setup
+        $name = 'testdeletedeploymentwithslot';
+        $label = base64_encode($name);
+        $deploymentName = $name;
+        $slot = $this->defaultSlot;
+        $packageUrl = TestResources::packageUrl();
+        $configuration = base64_encode(file_get_contents(TestResources::packageConfiguration()));
+        $this->createHostedService($name);
+        $this->createdHostedServices[] = $name;
+        $result = $this->restProxy->createDeployment(
+            $name,
+            $deploymentName,
+            $slot,
+            $packageUrl,
+            $configuration,
+            $label
+        );
+        $this->blockUntilAsyncSucceed($result->getRequestId());
+        $options = new GetDeploymentOptions();
+        $options->setSlot($slot);
+        
+        // Test
+        $result = $this->restProxy->deleteDeployment($name, $options);
+        
+        // Assert
+        $this->assertFalse($this->deploymentExists($name));
+        $this->assertNotNull($result);
+        
+        // Block until the deployment is deleted so the hosted service can be deleted safely
+        $this->blockUntilAsyncSucceed($result->getRequestId());
+    }
+    
+    /**
+     * @covers WindowsAzure\ServiceManagement\ServiceManagementRestProxy::deleteDeployment
+     * @covers WindowsAzure\ServiceManagement\ServiceManagementRestProxy::_getDeploymentPathUsingName
+     * @covers WindowsAzure\ServiceManagement\ServiceManagementRestProxy::_getPath
+     * @group Deployment
+     */
+    public function testDeleteDeploymentWithName()
+    {
+        // Setup
+        $name = 'testdeletedeploymentwithname';
+        $label = base64_encode($name);
+        $deploymentName = $name;
+        $slot = $this->defaultSlot;
+        $packageUrl = TestResources::packageUrl();
+        $configuration = base64_encode(file_get_contents(TestResources::packageConfiguration()));
+        $this->createHostedService($name);
+        $this->createdHostedServices[] = $name;
+        $result = $this->restProxy->createDeployment(
+            $name,
+            $deploymentName,
+            $slot,
+            $packageUrl,
+            $configuration,
+            $label
+        );
+        $this->blockUntilAsyncSucceed($result->getRequestId());
+        $options = new GetDeploymentOptions();
+        $options->setDeploymentName($name);
+        
+        // Test
+        $result = $this->restProxy->deleteDeployment($name, $options);
+        
+        // Assert
+        $this->assertFalse($this->deploymentExists($name));
+        $this->assertNotNull($result);
+        
+        // Block until the deployment is deleted so the hosted service can be deleted safely
+        $this->blockUntilAsyncSucceed($result->getRequestId());
     }
 }

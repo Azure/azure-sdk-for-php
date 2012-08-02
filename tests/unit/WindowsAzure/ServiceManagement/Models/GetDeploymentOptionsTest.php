@@ -15,62 +15,60 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   Tests\Unit\WindowsAzure\ServiceManagement\Internal
+ * @package   Tests\Unit\WindowsAzure\ServiceManagement\Models
  * @author    Azure PHP SDK <azurephpsdk@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
 
-namespace Tests\Unit\WindowsAzure\ServiceManagement\Internal;
-use WindowsAzure\ServiceManagement\Internal\WindowsAzureService;
+namespace Tests\Unit\WindowsAzure\ServiceManagement\Models;
+use WindowsAzure\ServiceManagement\Models\GetDeploymentOptions;
 
 /**
- * Unit tests for class WindowsAzureService
+ * Unit tests for class GetDeploymentOptions
  *
  * @category  Microsoft
- * @package   Tests\Unit\WindowsAzure\ServiceManagement\Internal
+ * @package   Tests\Unit\WindowsAzure\ServiceManagement\Models
  * @author    Azure PHP SDK <azurephpsdk@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @version   Release: @package_version@
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
-class WindowsAzureServiceTest extends \PHPUnit_Framework_TestCase
+class GetDeploymentOptionsTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @covers WindowsAzure\ServiceManagement\Internal\WindowsAzureService::setAffinityGroup
-     * @covers WindowsAzure\ServiceManagement\Internal\WindowsAzureService::getAffinityGroup
-     * @covers WindowsAzure\ServiceManagement\Internal\WindowsAzureService::__construct
+     * @covers WindowsAzure\ServiceManagement\Models\GetDeploymentOptions::setSlot
+     * @covers WindowsAzure\ServiceManagement\Models\GetDeploymentOptions::getSlot
      */
-    public function testSetAffinityGroup()
+    public function testSetSlot()
     {
         // Setup
-        $service = new WindowsAzureService();
-        $expected = 'AffinityGroup';
+        $expected = 'production';
+        $options = new GetDeploymentOptions();
         
         // Test
-        $service->setAffinityGroup($expected);
+        $options->setSlot($expected);
         
         // Assert
-        $this->assertEquals($expected, $service->getAffinityGroup());
+        $this->assertEquals($expected, $options->getSlot());
     }
     
     /**
-     * @covers WindowsAzure\ServiceManagement\Internal\WindowsAzureService::setUrl
-     * @covers WindowsAzure\ServiceManagement\Internal\WindowsAzureService::getUrl
-     * @covers WindowsAzure\ServiceManagement\Internal\WindowsAzureService::__construct
+     * @covers WindowsAzure\ServiceManagement\Models\GetDeploymentOptions::setDeploymentName
+     * @covers WindowsAzure\ServiceManagement\Models\GetDeploymentOptions::getDeploymentName
      */
-    public function testSetUrl()
+    public function testSetDeploymentName()
     {
         // Setup
-        $service = new WindowsAzureService();
-        $expected = 'Url';
+        $expected = 'my deployment';
+        $options = new GetDeploymentOptions();
         
         // Test
-        $service->setUrl($expected);
+        $options->setDeploymentName($expected);
         
         // Assert
-        $this->assertEquals($expected, $service->getUrl());
+        $this->assertEquals($expected, $options->getDeploymentName());
     }
 }
