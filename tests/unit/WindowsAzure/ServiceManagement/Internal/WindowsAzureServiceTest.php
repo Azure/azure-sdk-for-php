@@ -22,7 +22,7 @@
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
 
-namespace Tests\Unit\WindowsAzure\ServiceManagement\Internal\WindowsAzureService;
+namespace Tests\Unit\WindowsAzure\ServiceManagement\Internal;
 use WindowsAzure\ServiceManagement\Internal\WindowsAzureService;
 
 /**

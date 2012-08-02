@@ -15,14 +15,14 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   Tests\Unit\WindowsAzure\ServiceManagement\Models
+ * @package   Tests\Unit\WindowsAzure\ServiceManagement\Internal
  * @author    Azure PHP SDK <azurephpsdk@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
 
-namespace Tests\Unit\WindowsAzure\ServiceManagement\Models;
+namespace Tests\Unit\WindowsAzure\ServiceManagement\Internal;
 use WindowsAzure\ServiceManagement\Internal\Service;
 use WindowsAzure\Common\Internal\Serialization\XmlSerializer;
 use WindowsAzure\Common\Internal\Resources;
@@ -31,7 +31,7 @@ use WindowsAzure\Common\Internal\Resources;
  * Unit tests for class Service
  *
  * @category  Microsoft
- * @package   Tests\Unit\WindowsAzure\ServiceManagement\Models
+ * @package   Tests\Unit\WindowsAzure\ServiceManagement\Internal
  * @author    Azure PHP SDK <azurephpsdk@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
