@@ -48,6 +48,7 @@ use WindowsAzure\ServiceManagement\Models\GetHostedServicePropertiesOptions;
 use WindowsAzure\ServiceManagement\Models\GetHostedServicePropertiesResult;
 use WindowsAzure\ServiceManagement\Models\DeploymentSlot;
 use WindowsAzure\ServiceManagement\Models\CreateDeploymentOptions;
+use WindowsAzure\ServiceManagement\Models\GetDeploymentResult;
 
 /**
  * This class constructs HTTP requests and receive HTTP responses for service 
@@ -896,13 +897,13 @@ class ServiceManagementRestProxy extends RestProxy
             $options = new CreateDeploymentOptions();
         }
         
-        $startDeployment         = Utilities::booleanToString(
+        $startDeployment       = Utilities::booleanToString(
             $options->getStartDeployment()
         );
-        $treatWarningsAsErrors   = Utilities::booleanToString(
+        $treatWarningsAsErrors = Utilities::booleanToString(
             $options->getTreatWarningsAsErrors()
         );
-        $requestArray            = array(
+        $requestArray          = array(
             Resources::XTAG_NAMESPACE               => array(
                 Resources::WA_XML_NAMESPACE => null
             ),
@@ -954,7 +955,31 @@ class ServiceManagementRestProxy extends RestProxy
      */
     public function getDeployment($name, $options)
     {
-        throw new \Exception(Resources::NOT_IMPLEMENTED_MSG);
+        Validate::isString($name, 'name');
+        Validate::notNullOrEmpty($name, 'name');
+        Validate::notNullOrEmpty($options, 'options');
+        $slot           = $options->getSlot();
+        $deploymentName = $options->getDeploymentName();
+        Validate::isTrue(
+            !empty($slot) || !empty($deploymentName),
+            Resources::INVALID_DEPLOYMENT_LOCATOR_MSG
+        );
+        
+        $context = new HttpCallContext();
+        $path    = null;
+        $context->setMethod(Resources::HTTP_GET);
+        if (!empty($slot)) {
+            $path = $this->_getDeploymentPathUsingSlot($name, $slot);
+        } else {
+            $path = $this->_getDeploymentPathUsingName($name, $deploymentName);
+        }
+        $context->setPath($path);
+        $context->addStatusCode(Resources::STATUS_OK);
+        
+        $response = $this->sendContext($context);
+        $parsed   = $this->dataSerializer->unserialize($response->getBody());
+        
+        return GetDeploymentResult::create($parsed);
     }
     
     /**

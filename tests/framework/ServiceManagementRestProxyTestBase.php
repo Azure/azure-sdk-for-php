@@ -50,7 +50,10 @@ class ServiceManagementRestProxyTestBase extends RestProxyTestBase
     protected $createdDeployments;
     protected $defaultLocation;
     protected $defaultSlot;
-    
+    protected $defaultDeploymentEncodedConfiguration;
+    protected $encodedComplexConfiguration;
+
+
     public function setUp()
     {
         parent::setUp();
@@ -63,6 +66,8 @@ class ServiceManagementRestProxyTestBase extends RestProxyTestBase
         $this->createdDeployments = array();
         $this->defaultLocation = 'West US';
         $this->defaultSlot = DeploymentSlot::PRODUCTION;
+        $this->defaultDeploymentEncodedConfiguration = base64_encode(file_get_contents(TestResources::simplePackageConfiguration()));
+        $this->encodedComplexConfiguration = base64_encode(file_get_contents(TestResources::complexPackageConfiguration()));
     }
 
     public function createAffinityGroup($name)
@@ -132,7 +137,7 @@ class ServiceManagementRestProxyTestBase extends RestProxyTestBase
             $status = $result->getStatus();
         } while(OperationStatus::IN_PROGRESS == $status);
         
-        $this->assertEquals(OperationStatus::SUCCEEDED, $status);
+        $this->assertEquals(OperationStatus::SUCCEEDED, $status, $result->getError());
     }
     
     public function storageServiceExists($name)
@@ -214,8 +219,8 @@ class ServiceManagementRestProxyTestBase extends RestProxyTestBase
         $label = base64_encode($name);
         $deploymentName = $name;
         $slot = $this->defaultSlot;
-        $packageUrl = TestResources::packageUrl();
-        $configuration = base64_encode(file_get_contents(TestResources::packageConfiguration()));
+        $packageUrl = TestResources::simplePackageUrl();
+        $configuration = $this->defaultDeploymentEncodedConfiguration;
         
         $this->createHostedService($name);
         $result = $this->restProxy->createDeployment(
@@ -237,9 +242,14 @@ class ServiceManagementRestProxyTestBase extends RestProxyTestBase
         try {
             $options = new GetDeploymentOptions();
             $options->setSlot($this->defaultSlot);
-            $this->restProxy->getDeployment($name, $options);
+            $result = $this->restProxy->getDeployment($name, $options);
             
-            return true;
+            if ($result->getDeployment()->getName() === $name) {
+                return true;
+            }
+            
+            return false;
+            
         } catch (\Exception $e) {
             return false;
         }
