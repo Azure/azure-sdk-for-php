@@ -679,13 +679,11 @@ class ServiceManagementRestProxyTest extends ServiceManagementRestProxyTestBase
         
         // Test
         $result = $this->restProxy->deleteDeployment($name, $options);
+        $this->blockUntilAsyncSucceed($result->getRequestId());
         
         // Assert
         $this->assertFalse($this->deploymentExists($name));
         $this->assertNotNull($result);
-        
-        // Block until the deployment is deleted so the hosted service can be deleted safely
-        $this->blockUntilAsyncSucceed($result->getRequestId());
     }
     
     /**
@@ -719,13 +717,11 @@ class ServiceManagementRestProxyTest extends ServiceManagementRestProxyTestBase
         
         // Test
         $result = $this->restProxy->deleteDeployment($name, $options);
+        $this->blockUntilAsyncSucceed($result->getRequestId());
         
         // Assert
         $this->assertFalse($this->deploymentExists($name));
         $this->assertNotNull($result);
-        
-        // Block until the deployment is deleted so the hosted service can be deleted safely
-        $this->blockUntilAsyncSucceed($result->getRequestId());
     }
     
     /**
