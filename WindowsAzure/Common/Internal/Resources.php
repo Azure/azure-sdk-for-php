@@ -333,6 +333,8 @@ class Resources
     const XTAG_INPUT_ENDPOINT = 'InputEndpoint';
     const XTAG_VIP = 'Vip';
     const XTAG_PORT = 'Port';
+    const XTAG_DEPLOYMENT = 'Deployment';
+    const XTAG_DEPLOYMENTS = 'Deployments';
 
     // Service Bus
     const LIST_TOPICS_PATH        = '$Resources/Topics';

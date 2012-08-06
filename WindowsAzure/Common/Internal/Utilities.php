@@ -555,4 +555,26 @@ class Utilities
             mt_rand(0, 65535)         // 16 bits for "node 4" and "node 5"
         );
     }
+    
+    /**
+     * Creates a list of objects of type $class from the provided array using static
+     * create method.
+     * 
+     * @param array  $parsed The object in array representation
+     * @param string $class  The class name. Must have static method create.
+     * 
+     * @static
+     * 
+     * @return array
+     */
+    public static function createList($parsed, $class)
+    {
+        $list = array();
+        
+        foreach ($parsed as $value) {
+            $list[] = $class::create($value);
+        }
+        
+        return $list;
+    }
 }

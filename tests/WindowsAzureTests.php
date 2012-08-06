@@ -235,6 +235,7 @@ spl_autoload_register(
             'tests\\unit\\windowsazure\\servicemanagement\\models\\getoperationstatusresulttest' => '/unit/WindowsAzure/ServiceManagement/Models/GetOperationStatusResultTest.php',
             'tests\\unit\\windowsazure\\servicemanagement\\models\\getstorageservicekeysresulttest' => '/unit/WindowsAzure/ServiceManagement/Models/GetStorageServiceKeysResultTest.php',
             'tests\\unit\\windowsazure\\servicemanagement\\models\\getstorageservicepropertiesresulttest' => '/unit/WindowsAzure/ServiceManagement/Models/GetStorageServicePropertiesResultTest.php',
+            'tests\\unit\\windowsazure\\servicemanagement\\models\\hostedservicetest' => '/unit/WindowsAzure/ServiceManagement/Models/HostedServiceTest.php',
             'tests\\unit\\windowsazure\\servicemanagement\\models\\inputendpointtest' => '/unit/WindowsAzure/ServiceManagement/Models/InputEndpointTest.php',
             'tests\\unit\\windowsazure\\servicemanagement\\models\\listaffinitygroupsresulttest' => '/unit/WindowsAzure/ServiceManagement/Models/ListAffinityGroupsResultTest.php',
             'tests\\unit\\windowsazure\\servicemanagement\\models\\listhostedservicesresulttest' => '/unit/WindowsAzure/ServiceManagement/Models/ListHostedServicesResultTest.php',

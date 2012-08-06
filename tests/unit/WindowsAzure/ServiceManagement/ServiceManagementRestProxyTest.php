@@ -34,6 +34,8 @@ use WindowsAzure\ServiceManagement\Models\CreateServiceOptions;
 use WindowsAzure\ServiceManagement\Models\UpdateServiceOptions;
 use WindowsAzure\ServiceManagement\Models\KeyType;
 use WindowsAzure\ServiceManagement\Models\GetDeploymentOptions;
+use WindowsAzure\ServiceManagement\Models\GetHostedServicePropertiesOptions;
+use WindowsAzure\ServiceManagement\Models\DeploymentSlot;
 
 /**
  * Unit tests for class ServiceManagementRestProxy
@@ -502,7 +504,14 @@ class ServiceManagementRestProxyTest extends ServiceManagementRestProxyTestBase
         // Assert
         $actual = $result->getHostedServices();
         $this->assertCount($expectedCount, $actual);
-        $this->assertEquals($name, $actual[0]->getName());
+        
+        $serviceExists = false;
+        foreach ($actual as $hostedService) {
+            if ($hostedService->getName() === $name) {
+                $serviceExists = true;
+            }
+        }
+        $this->assertTrue($serviceExists);
     }
     
     /**
@@ -530,9 +539,22 @@ class ServiceManagementRestProxyTest extends ServiceManagementRestProxyTestBase
         // Assert
         $actual = $result->getHostedServices();
         $this->assertCount($expectedCount, $actual);
-        $this->assertEquals($name1, $actual[0]->getName());
-        $this->assertEquals($name2, $actual[1]->getName());
-        $this->assertEquals($name3, $actual[2]->getName());
+        
+        $service1Exists = false;
+        $service2Exists = false;
+        $service3Exists = false;
+        foreach ($actual as $hostedService) {
+            if ($hostedService->getName() === $name1) {
+                $service1Exists = true;
+            } else if ($hostedService->getName() === $name2) {
+                $service2Exists = true;
+            } else if ($hostedService->getName() === $name3) {
+                $service3Exists = true;
+            }
+        }
+        $this->assertTrue($service1Exists);
+        $this->assertTrue($service2Exists);
+        $this->assertTrue($service3Exists);
     }
     
     /**
@@ -631,6 +653,57 @@ class ServiceManagementRestProxyTest extends ServiceManagementRestProxyTestBase
     }
     
     /**
+     * @covers WindowsAzure\ServiceManagement\ServiceManagementRestProxy::getHostedServiceProperties
+     * @covers WindowsAzure\ServiceManagement\ServiceManagementRestProxy::_getHostedServicePath
+     * @covers WindowsAzure\ServiceManagement\ServiceManagementRestProxy::_getPath
+     * @covers WindowsAzure\ServiceManagement\Models\GetHostedServicePropertiesResult::create
+     * @group HostedService
+     */
+    public function testGetHostedServicePropertiesWithEmbed()
+    {
+        // Setup
+        $name = 'testgethostedservicepropertieswithembed';
+        $stagingName = $name . 'staging';
+        $options = new GetHostedServicePropertiesOptions();
+        $options->setEmbedDetail(true);
+        $this->createDeployment($name);
+        $this->createDeployment($name, DeploymentSlot::STAGING, $stagingName);
+        
+        // Test
+        $result = $this->restProxy->getHostedServiceProperties($name, $options);
+        
+        // Need to delete the staging deployment manually
+        $this->deleteDeployment($name, DeploymentSlot::STAGING);
+        
+        // Assert
+        $this->assertEquals($name, $result->getHostedService()->getName());
+        $this->assertEquals($this->defaultLocation, $result->getHostedService()->getLocation());
+        $this->assertEquals(base64_encode($name), $result->getHostedService()->getLabel());
+        $this->assertCount(2, $result->getHostedService()->getDeployments());
+        $deployments = $result->getHostedService()->getDeployments();
+        $deployment1 = $deployments[0];
+        $deployment2 = $deployments[1];
+        
+        // First deployment
+        $this->assertSuspendedDeploymentWithOneRole(
+            $deployment1,
+            $name,
+            DeploymentSlot::PRODUCTION,
+            'WebRole1',
+            'WebRole1_IN_0'
+        );
+        
+        // Second deployment
+        $this->assertSuspendedDeploymentWithOneRole(
+            $deployment2,
+            $stagingName,
+            DeploymentSlot::STAGING,
+            'WebRole1',
+            'WebRole1_IN_0'
+        );
+    }
+    
+    /**
      * @covers WindowsAzure\ServiceManagement\ServiceManagementRestProxy::createDeployment
      * @covers WindowsAzure\ServiceManagement\ServiceManagementRestProxy::_getDeploymentPathUsingSlot
      * @covers WindowsAzure\ServiceManagement\ServiceManagementRestProxy::_getPath
@@ -726,11 +799,11 @@ class ServiceManagementRestProxyTest extends ServiceManagementRestProxyTestBase
     
     /**
      * @covers WindowsAzure\ServiceManagement\ServiceManagementRestProxy::getDeployment
-     * @covers WindowsAzure\ServiceManagement\ServiceManagementRestProxy::_getDeploymentPathUsingSlot
+     * @covers WindowsAzure\ServiceManagement\ServiceManagementRestProxy::_getDeploymentPathUsingName
      * @covers WindowsAzure\ServiceManagement\ServiceManagementRestProxy::_getPath
      * @covers WindowsAzure\ServiceManagement\Models\GetDeploymentResult::create
      * @covers WindowsAzure\ServiceManagement\Models\Deployment::create
-     * @covers WindowsAzure\ServiceManagement\Models\Deployment::_createList
+     * @covers WindowsAzure\Common\Internal\Utilities::createList
      * @covers WindowsAzure\ServiceManagement\Models\UpgradeStatus::create
      * @covers WindowsAzure\ServiceManagement\Models\RoleInstance::create
      * @covers WindowsAzure\ServiceManagement\Models\Role::create
@@ -749,73 +822,14 @@ class ServiceManagementRestProxyTest extends ServiceManagementRestProxyTestBase
         $result = $this->restProxy->getDeployment($name, $options);
         
         // Assert
-        // Assert the whole deployment
         $this->assertNotNull($result);
-        $deployment = $result->getDeployment();
-        $this->assertNotNull($deployment);
-        
-        // Assert the general deployment information
-        $this->assertNotNull($deployment->getPrivateId());
-        $this->assertNotNull($deployment->getConfiguration());
-        $this->assertEquals($name, $deployment->getName());
-        $this->assertEquals($this->defaultSlot, strtolower($deployment->getSlot()));
-        $this->assertEquals('Suspended', $deployment->getStatus());
-        $this->assertEquals(base64_encode($name), $deployment->getLabel());
-        $this->assertEquals("http://$name.cloudapp.net/", $deployment->getUrl());
-        $this->assertEquals(1, $deployment->getUpgradeDomainCount());
-        $this->assertEquals('1.6.21103.1459', $deployment->getSdkVersion());
-        $this->assertEquals(false, $deployment->getLocked());
-        $this->assertEquals(false, $deployment->getRollbackAllowed());
-        $this->assertInstanceOf('WindowsAzure\ServiceManagement\Models\UpgradeStatus', $deployment->getUpgradeStatus());
-        $this->assertInternalType('array', $deployment->getRoleInstanceList());
-        $this->assertInternalType('array', $deployment->getRoleList());
-        $this->assertInternalType('array', $deployment->getInputEndpointList());
-        
-        // Assert the deployment upgrade status
-        $this->assertEquals(0, $deployment->getUpgradeStatus()->getCurrentUpgradeDomain());
-        $this->assertNull($deployment->getUpgradeStatus()->getUpgradeType());
-        $this->assertNull($deployment->getUpgradeStatus()->getCurrentUpgradeDomainState());
-        
-        // Assert the deployment role instance list
-        $roleInstanceList = $deployment->getRoleInstanceList();
-        $this->assertCount(1, $roleInstanceList);
-        $webRole1 = $roleInstanceList[0];
-        $this->_assertRoleInstance($webRole1, 'WebRole1', 'WebRole1_IN_0');
-        
-        // Assert the deployment role list
-        $roleList = $deployment->getRoleList();
-        $this->assertCount(1, $roleList);
-        $webRole1 = $roleList[0];
-        $this->_assertRole($webRole1, 'WebRole1');
-        
-        // Assert the deployment input endpoint list
-        $inputEndpointList = $deployment->getInputEndpointList();
-        $this->assertCount(1, $inputEndpointList);
-        $inputEndpoint1 = $inputEndpointList[0];
-        $this->assertInstanceOf('WindowsAzure\ServiceManagement\Models\InputEndpoint', $inputEndpoint1);
-        $this->assertEquals('WebRole1', $inputEndpoint1->getRoleName());
-        $this->assertEquals('80', $inputEndpoint1->getPort());
-        $this->assertNotNull($inputEndpoint1->getVip());
-    }
-    
-    private function _assertRoleInstance($instance, $roleName, $instanceName)
-    {
-        $this->assertInstanceOf('WindowsAzure\ServiceManagement\Models\RoleInstance', $instance);
-        $this->assertEquals($roleName, $instance->getRoleName());
-        $this->assertEquals($instanceName, $instance->getInstanceName());
-        $this->assertEquals('StoppedVM', $instance->getInstanceStatus());
-        $this->assertEquals(0, $instance->getInstanceUpgradeDomain());
-        $this->assertEquals(0, $instance->getInstanceFaultDomain());
-        $this->assertEquals('Small', $instance->getInstanceSize());
-        $this->assertEmpty($instance->getInstanceStateDetails());
-        $this->assertNull($instance->getInstanceErrorCode());
-    }
-    
-    private function _assertRole($role, $name)
-    {
-        $this->assertInstanceOf('WindowsAzure\ServiceManagement\Models\Role', $role);
-        $this->assertEquals($name, $role->getRoleName());
-        $this->assertNotNull($role->getOsVersion());
+        $this->assertSuspendedDeploymentWithOneRole(
+            $result->getDeployment(),
+            $name,
+            $this->defaultSlot,
+            'WebRole1',
+            'WebRole1_IN_0'
+        );
     }
     
     /**
@@ -824,7 +838,7 @@ class ServiceManagementRestProxyTest extends ServiceManagementRestProxyTestBase
      * @covers WindowsAzure\ServiceManagement\ServiceManagementRestProxy::_getPath
      * @covers WindowsAzure\ServiceManagement\Models\GetDeploymentResult::create
      * @covers WindowsAzure\ServiceManagement\Models\Deployment::create
-     * @covers WindowsAzure\ServiceManagement\Models\Deployment::_createList
+     * @covers WindowsAzure\Common\Internal\Utilities::createList
      * @covers WindowsAzure\ServiceManagement\Models\UpgradeStatus::create
      * @covers WindowsAzure\ServiceManagement\Models\RoleInstance::create
      * @covers WindowsAzure\ServiceManagement\Models\Role::create
@@ -833,8 +847,6 @@ class ServiceManagementRestProxyTest extends ServiceManagementRestProxyTestBase
      */
     public function testGetDeploymentWithMultipleRoles()
     {
-        $this->markTestSkipped('The Azure CI Server does not support multiple roles.');
-        
         // Setup
         $name = 'testgetdeploymentwithmultipleroles';
         $label = base64_encode($name);
@@ -844,6 +856,7 @@ class ServiceManagementRestProxyTest extends ServiceManagementRestProxyTestBase
         $configuration = $this->encodedComplexConfiguration;
         $this->createHostedService($name);
         $this->createdHostedServices[] = $name;
+        $this->createdDeployments[] = $name;
         $result = $this->restProxy->createDeployment(
             $name,
             $deploymentName,
@@ -855,65 +868,24 @@ class ServiceManagementRestProxyTest extends ServiceManagementRestProxyTestBase
         $this->blockUntilAsyncSucceed($result->getRequestId());
         $options = new GetDeploymentOptions();
         $options->setSlot($slot);
+        $webCount = 1;
+        $workerCount = 1;
+        $instancesCount = 4;
+        $inputEndpointCount = 1;
         
         // Test
         $result = $this->restProxy->getDeployment($name, $options);
         
         // Assert
-        // Assert the whole deployment
         $this->assertNotNull($result);
-        $deployment = $result->getDeployment();
-        $this->assertNotNull($deployment);
-        
-        // Assert the general deployment information
-        $this->assertNotNull($deployment->getPrivateId());
-        $this->assertNotNull($deployment->getConfiguration());
-        $this->assertEquals($name, $deployment->getName());
-        $this->assertEquals($this->defaultSlot, strtolower($deployment->getSlot()));
-        $this->assertEquals('Suspended', $deployment->getStatus());
-        $this->assertEquals(base64_encode($name), $deployment->getLabel());
-        $this->assertEquals("http://$name.cloudapp.net/", $deployment->getUrl());
-        $this->assertEquals(1, $deployment->getUpgradeDomainCount());
-        $this->assertEquals('1.6.21103.1459', $deployment->getSdkVersion());
-        $this->assertEquals(false, $deployment->getLocked());
-        $this->assertEquals(false, $deployment->getRollbackAllowed());
-        $this->assertInstanceOf('WindowsAzure\ServiceManagement\Models\UpgradeStatus', $deployment->getUpgradeStatus());
-        $this->assertInternalType('array', $deployment->getRoleInstanceList());
-        $this->assertInternalType('array', $deployment->getRoleList());
-        $this->assertInternalType('array', $deployment->getInputEndpointList());
-        
-        // Assert the deployment upgrade status
-        $this->assertEquals(0, $deployment->getUpgradeStatus()->getCurrentUpgradeDomain());
-        $this->assertNull($deployment->getUpgradeStatus()->getUpgradeType());
-        $this->assertNull($deployment->getUpgradeStatus()->getCurrentUpgradeDomainState());
-        
-        // Assert the deployment role instance list
-        $roleInstanceList = $deployment->getRoleInstanceList();
-        $this->assertCount(4, $roleInstanceList);
-        $instance1 = $roleInstanceList[0];
-        $instance2 = $roleInstanceList[1];
-        $instance3 = $roleInstanceList[2];
-        $instance4 = $roleInstanceList[3];
-        $this->_assertRoleInstance($instance1, 'WebRole1', 'WebRole1_IN_0');
-        $this->_assertRoleInstance($instance2, 'WebRole1', 'WebRole1_IN_1');
-        $this->_assertRoleInstance($instance3, 'WorkerRole1', 'WebRole1_IN_0');
-        $this->_assertRoleInstance($instance4, 'WorkerRole1', 'WebRole1_IN_1');
-        
-        // Assert the deployment role list
-        $roleList = $deployment->getRoleList();
-        $this->assertCount(2, $roleList);
-        $webRole1 = $roleList[0];
-        $workerRole1 = $roleList[1];
-        $this->_assertRole($webRole1, 'WebRole1');
-        $this->_assertRole($workerRole1, 'WorkerRole1');
-        
-        // Assert the deployment input endpoint list
-        $inputEndpointList = $deployment->getInputEndpointList();
-        $this->assertCount(1, $inputEndpointList);
-        $inputEndpoint1 = $inputEndpointList[0];
-        $this->assertInstanceOf('WindowsAzure\ServiceManagement\Models\InputEndpoint', $inputEndpoint1);
-        $this->assertEquals('WebRole1', $inputEndpoint1->getRoleName());
-        $this->assertEquals('80', $inputEndpoint1->getPort());
-        $this->assertNotNull($inputEndpoint1->getVip());
+        $this->assertSuspendedDeploymentWithMultipleRoles(
+            $result->getDeployment(),
+            $name,
+            $slot,
+            $webCount,
+            $workerCount,
+            $instancesCount,
+            $inputEndpointCount
+        );
     }
 }

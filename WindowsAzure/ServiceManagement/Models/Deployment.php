@@ -110,26 +110,6 @@ class Deployment
     private $_upgradeStatus;
     
     /**
-     * Creates a list of objects of type $class from the provided array using static
-     * create method.
-     * 
-     * @param array  $parsed The object in array representation
-     * @param string $class  The class name. Must have static method create.
-     * 
-     * @return array
-     */
-    private static function _createList($parsed, $class)
-    {
-        $list = array();
-        
-        foreach ($parsed as $value) {
-            $list[] = $class::create($value);
-        }
-        
-        return $list;
-    }
-    
-    /**
      * Creates a new Deployment from parsed response body.
      * 
      * @param array $parsed The parsed response body in array representation.
@@ -154,17 +134,20 @@ class Deployment
             $parsed,
             Resources::XTAG_SDK_VERSION
         );
-        $inputEndpointList  = Utilities::tryGetArray(
+        $inputEndpointList  = Utilities::tryGetKeysChainValue(
+            $parsed,
             Resources::XTAG_INPUT_ENDPOINT_LIST,
-            $parsed
+            Resources::XTAG_INPUT_ENDPOINT
         );
-        $roleList           = Utilities::tryGetArray(
+        $roleList           = Utilities::tryGetKeysChainValue(
+            $parsed,
             Resources::XTAG_ROLE_LIST,
-            $parsed
+            Resources::XTAG_ROLE
         );
-        $roleInstanceList   = Utilities::tryGetArray(
+        $roleInstanceList   = Utilities::tryGetKeysChainValue(
+            $parsed,
             Resources::XTAG_ROLE_INSTANCE_LIST,
-            $parsed
+            Resources::XTAG_ROLE_INSTANCE
         );
         $status             = Utilities::tryGetValue(
             $parsed,
@@ -204,20 +187,20 @@ class Deployment
         $result->setUpgradeStatus(UpgradeStatus::create($upgradeStatus));
         $result->setUrl($url);
         $result->setRoleInstanceList(
-            self::_createList(
-                $roleInstanceList,
+            Utilities::createList(
+                Utilities::getArray($roleInstanceList),
                 'WindowsAzure\ServiceManagement\Models\RoleInstance'
             )
         );
         $result->setRoleList(
-            self::_createList(
-                $roleList,
+            Utilities::createList(
+                Utilities::getArray($roleList),
                 'WindowsAzure\ServiceManagement\Models\Role'
             )
         );
         $result->setInputEndpointList(
-            self::_createList(
-                $inputEndpointList,
+            Utilities::createList(
+                Utilities::getArray($inputEndpointList),
                 'WindowsAzure\ServiceManagement\Models\InputEndpoint'
             )
         );
