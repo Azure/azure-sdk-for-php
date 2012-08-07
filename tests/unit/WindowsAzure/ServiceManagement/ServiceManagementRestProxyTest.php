@@ -889,4 +889,36 @@ class ServiceManagementRestProxyTest extends ServiceManagementRestProxyTestBase
             $inputEndpointCount
         );
     }
+    
+    /**
+     * @covers WindowsAzure\ServiceManagement\ServiceManagementRestProxy::swapDeployment
+     * @covers WindowsAzure\ServiceManagement\ServiceManagementRestProxy::_getHostedServicePath
+     * @covers WindowsAzure\ServiceManagement\ServiceManagementRestProxy::_getPath
+     * @covers WindowsAzure\ServiceManagement\ServiceManagementRestProxy::_createRequestXml
+     * @covers WindowsAzure\ServiceManagement\Models\AsynchronousOperationResult::create
+     * @group Deployment
+     */
+    public function testSwapDeployment()
+    {
+        // Setup
+        $name = 'testswapdeployment';
+        $staging = 'stagingdeployment';
+        $production = 'productiondeployment';
+        $expectedInstanceCount = 4;
+        $this->createComplexDeployment($name, DeploymentSlot::STAGING, $staging);
+        $this->createDeployment($name, DeploymentSlot::PRODUCTION, $production);
+        
+        // Test
+        $result = $this->restProxy->swapDeployment($name, $staging, $production);
+        
+        // Block until the swap is done
+        $this->blockUntilAsyncSucceed($result);
+        
+        // Assert
+        $options = new GetDeploymentOptions();
+        $options->setSlot(DeploymentSlot::PRODUCTION);
+        $result = $this->restProxy->getDeployment($name, $options);
+        $deployment = $result->getDeployment();
+        $this->assertCount($expectedInstanceCount, $deployment->getRoleInstanceList());
+    }
 }

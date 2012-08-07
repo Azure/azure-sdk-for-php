@@ -337,6 +337,9 @@ class Resources
     const XTAG_DEPLOYMENT = 'Deployment';
     const XTAG_DEPLOYMENTS = 'Deployments';
     const XTAG_REGENERATE_KEYS = 'RegenerateKeys';
+    const XTAG_SWAP = 'Swap';
+    const XTAG_PRODUCTION = 'Production';
+    const XTAG_SOURCE_DEPLOYMENT = 'SourceDeployment';
 
     // Service Bus
     const LIST_TOPICS_PATH        = '$Resources/Topics';

@@ -214,6 +214,36 @@ class ServiceManagementRestProxyTestBase extends RestProxyTestBase
         }
     }
     
+    public function createComplexDeployment($name, $slot = null, $deploymentName = null, $options = null)
+    {
+        $deploymentName = is_null($deploymentName) ? $name : $deploymentName;
+        $label = base64_encode($deploymentName);
+        $slot = is_null($slot) ? $this->defaultSlot : $slot;
+        $packageUrl = TestResources::complexPackageUrl();
+        $configuration = $this->encodedComplexConfiguration;
+        
+        if (!$this->hostedServiceExists($name)) {
+            $this->createHostedService($name);
+        } else {
+            if (!in_array($name, $this->createdHostedServices)) {
+                $this->createdHostedServices[] = $name;
+            }
+        }
+        
+        $result = $this->restProxy->createDeployment(
+            $name,
+            $deploymentName,
+            $slot,
+            $packageUrl,
+            $configuration,
+            $label,
+            $options
+        );
+        $this->blockUntilAsyncSucceed($result);
+        
+        $this->createdDeployments[] = $name;
+    }
+    
     public function createDeployment($name, $slot = null, $deploymentName = null, $options = null)
     {
         $deploymentName = is_null($deploymentName) ? $name : $deploymentName;

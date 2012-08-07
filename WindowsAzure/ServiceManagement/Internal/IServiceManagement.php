@@ -364,15 +364,15 @@ interface IServiceManagement extends FilterableService
      * deployment and redeploy instead. You can obtain information about endpoints
      * that are used by using the Get Deployment operation.
      * 
-     * @param string $name             The hosted service name.
-     * @param string $production       The name of the production deployment.
-     * @param string $sourceDeployment The name of the source deployment.
+     * @param string $name        The hosted service name.
+     * @param string $source      The name of the source deployment.
+     * @param string $destination The name of the destination deployment.
      * 
      * @return AsynchronousOperationResult
      * 
      * @see http://msdn.microsoft.com/en-us/library/windowsazure/ee460814.aspx
      */
-    public function swapDeployment($name, $production, $sourceDeployment);
+    public function swapDeployment($name, $source, $destination);
     
     /**
      * Deletes the specified deployment.

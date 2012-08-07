@@ -1016,17 +1016,41 @@ class ServiceManagementRestProxy extends RestProxy
      * deployment and redeploy instead. You can obtain information about endpoints
      * that are used by using the Get Deployment operation.
      * 
-     * @param string $name             The hosted service name.
-     * @param string $production       The name of the production deployment.
-     * @param string $sourceDeployment The name of the source deployment.
+     * @param string $name        The hosted service name.
+     * @param string $source      The name of the source deployment.
+     * @param string $destination The name of the destination deployment.
      * 
      * @return AsynchronousOperationResult
      * 
      * @see http://msdn.microsoft.com/en-us/library/windowsazure/ee460814.aspx
      */
-    public function swapDeployment($name, $production, $sourceDeployment)
+    public function swapDeployment($name, $source, $destination)
     {
-        throw new \Exception(Resources::NOT_IMPLEMENTED_MSG);
+        Validate::isString($name, 'name');
+        Validate::notNullOrEmpty($name, 'name');
+        Validate::isString($destination, 'destination');
+        Validate::notNullOrEmpty($destination, 'destination');
+        Validate::isString($source, 'source');
+        Validate::notNullOrEmpty($source, 'source');
+        
+        $xmlElements = array(
+            Resources::XTAG_PRODUCTION        => $destination,
+            Resources::XTAG_SOURCE_DEPLOYMENT => $source
+        );
+        $body        = $this->_createRequestXml($xmlElements, Resources::XTAG_SWAP);
+        $context     = new HttpCallContext();
+        $context->setMethod(Resources::HTTP_POST);
+        $context->setPath($this->_getHostedServicePath($name));
+        $context->addStatusCode(Resources::STATUS_ACCEPTED);
+        $context->setBody($body);
+        $context->addHeader(
+            Resources::CONTENT_TYPE,
+            Resources::XML_ATOM_CONTENT_TYPE
+        );
+        
+        $response = $this->sendContext($context);
+        
+        return AsynchronousOperationResult::create($response->getHeader());
     }
     
     /**
