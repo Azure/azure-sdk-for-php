@@ -257,6 +257,7 @@ class Resources
     const QP_NEXT_RK            = 'NextRowKey';
     const QP_ACTION             = 'action';
     const QP_EMBED_DETAIL       = 'embed-detail';
+    const QP_REGENERATE         = 'regenerate';
     
     // Request body content types
     const URL_ENCODED_CONTENT_TYPE = 'application/x-www-form-urlencoded';
@@ -335,6 +336,7 @@ class Resources
     const XTAG_PORT = 'Port';
     const XTAG_DEPLOYMENT = 'Deployment';
     const XTAG_DEPLOYMENTS = 'Deployments';
+    const XTAG_REGENERATE_KEYS = 'RegenerateKeys';
 
     // Service Bus
     const LIST_TOPICS_PATH        = '$Resources/Topics';

@@ -188,6 +188,29 @@ class ServiceManagementRestProxy extends RestProxy
     }
     
     /**
+     * Constructs request XML including windows azure XML namesoace.
+     * 
+     * @param array  $xmlElements The XML elements associated with their values.
+     * @param string $root        The XML root name.
+     * 
+     * @return string
+     */
+    private function _createRequestXml($xmlElements, $root)
+    {
+        $requestArray = array(
+            Resources::XTAG_NAMESPACE => array(Resources::WA_XML_NAMESPACE => null)
+        );
+        
+        foreach ($xmlElements as $tagName => $value) {
+            $requestArray[$tagName] = $value;
+        }
+        
+        $properties = array(XmlSerializer::ROOT_NAME => $root);
+        
+        return $this->dataSerializer->serialize($requestArray, $properties);
+    }
+    
+    /**
      * Initializes new ServiceManagementRestProxy object.
      * 
      * @param IHttpClient $channel        The HTTP channel.
@@ -295,21 +318,19 @@ class ServiceManagementRestProxy extends RestProxy
     {
         Validate::isString($name, 'name');
         Validate::notNullOrEmpty($name, 'name');
-        Validate::isString($keyType, '$keyType');
-        Validate::notNullOrEmpty($keyType, '$keyType');
+        Validate::isString($keyType, 'keyType');
+        Validate::notNullOrEmpty($keyType, 'keyType');
 
-        $properties = array(XmlSerializer::ROOT_NAME => 'RegenerateKeys');
-        $reqArray   = array(
-            Resources::XTAG_NAMESPACE => array(Resources::WA_XML_NAMESPACE => null),
-            Resources::XTAG_KEY_TYPE  => $keyType
+        $body = $this->_createRequestXml(
+            array(Resources::XTAG_KEY_TYPE => $keyType),
+            Resources::XTAG_REGENERATE_KEYS
         );
-        $body       = $this->dataSerializer->serialize($reqArray, $properties);
         
         $context = new HttpCallContext();
         $context->setMethod(Resources::HTTP_POST);
         $context->setPath($this->_getStorageServiceKeysPath($name));
         $context->addStatusCode(Resources::STATUS_OK);
-        $context->addQueryParameter(Resources::QP_ACTION, 'regenerate');
+        $context->addQueryParameter(Resources::QP_ACTION, Resources::QP_REGENERATE);
         $context->setBody($body);
         $context->addHeader(
             Resources::CONTENT_TYPE,
@@ -903,10 +924,7 @@ class ServiceManagementRestProxy extends RestProxy
         $treatWarningsAsErrors = Utilities::booleanToString(
             $options->getTreatWarningsAsErrors()
         );
-        $requestArray          = array(
-            Resources::XTAG_NAMESPACE               => array(
-                Resources::WA_XML_NAMESPACE => null
-            ),
+        $xmlElements           = array(
             Resources::XTAG_NAME                    => $deploymentName,
             Resources::XTAG_PACKAGE_URL             => $packageUrl,
             Resources::XTAG_LABEL                   => $label,
@@ -914,12 +932,10 @@ class ServiceManagementRestProxy extends RestProxy
             Resources::XTAG_START_DEPLOYMENT        => $startDeployment,
             Resources::XTAG_TREAT_WARNINGS_AS_ERROR => $treatWarningsAsErrors
         );
-        
-        // Construct the request body XML
-        $properties = array(
-            XmlSerializer::ROOT_NAME => Resources::XTAG_CREATE_DEPLOYMENT
+        $requestXml            = $this->_createRequestXml(
+            $xmlElements,
+            Resources::XTAG_CREATE_DEPLOYMENT
         );
-        $requestXml = $this->dataSerializer->serialize($requestArray, $properties);
         
         $context = new HttpCallContext();
         $context->setMethod(Resources::HTTP_POST);
