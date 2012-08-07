@@ -655,17 +655,22 @@ class ServiceManagementRestProxy extends RestProxy
      * operation, you can call Get Operation Status to determine whether the 
      * operation has succeeded, failed, or is still in progress.
      * 
-     * @param string $requestId The request ID for the request you wish to track.
+     * @param AsynchronousOperationResult $requestInfo The request information for 
+     * the REST call you want to track.
      * 
      * @return GetOperationStatusResult
      * 
      * @see http://msdn.microsoft.com/en-us/library/windowsazure/ee460783.aspx
      */
-    public function getOperationStatus($requestId)
+    public function getOperationStatus($requestInfo)
     {
+        Validate::notNullOrEmpty($requestInfo, 'requestInfo');
+        Validate::notNullOrEmpty($requestInfo->getrequestId(), 'requestId');
+        
+        
         $context = new HttpCallContext();
         $context->setMethod(Resources::HTTP_GET);
-        $context->setPath($this->_getOperationPath($requestId));
+        $context->setPath($this->_getOperationPath($requestInfo->getrequestId()));
         $context->addStatusCode(Resources::STATUS_OK);
         
         $response   = $this->sendContext($context);

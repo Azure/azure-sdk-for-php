@@ -320,7 +320,7 @@ class ServiceManagementRestProxyTest extends ServiceManagementRestProxyTestBase
         
         // Test
         $result = $this->restProxy->createStorageService($name, $label, $options);
-        $this->blockUntilAsyncSucceed($result->getRequestId());
+        $this->blockUntilAsyncSucceed($result);
         
         // Assert
         $this->assertTrue($this->storageServiceExists($name));
@@ -747,13 +747,13 @@ class ServiceManagementRestProxyTest extends ServiceManagementRestProxyTestBase
             $configuration,
             $label
         );
-        $this->blockUntilAsyncSucceed($result->getRequestId());
+        $this->blockUntilAsyncSucceed($result);
         $options = new GetDeploymentOptions();
         $options->setSlot($slot);
         
         // Test
         $result = $this->restProxy->deleteDeployment($name, $options);
-        $this->blockUntilAsyncSucceed($result->getRequestId());
+        $this->blockUntilAsyncSucceed($result);
         
         // Assert
         $this->assertFalse($this->deploymentExists($name));
@@ -785,13 +785,13 @@ class ServiceManagementRestProxyTest extends ServiceManagementRestProxyTestBase
             $configuration,
             $label
         );
-        $this->blockUntilAsyncSucceed($result->getRequestId());
+        $this->blockUntilAsyncSucceed($result);
         $options = new GetDeploymentOptions();
         $options->setDeploymentName($name);
         
         // Test
         $result = $this->restProxy->deleteDeployment($name, $options);
-        $this->blockUntilAsyncSucceed($result->getRequestId());
+        $this->blockUntilAsyncSucceed($result);
         
         // Assert
         $this->assertFalse($this->deploymentExists($name));
@@ -866,7 +866,7 @@ class ServiceManagementRestProxyTest extends ServiceManagementRestProxyTestBase
             $configuration,
             $label
         );
-        $this->blockUntilAsyncSucceed($result->getRequestId());
+        $this->blockUntilAsyncSucceed($result);
         $options = new GetDeploymentOptions();
         $options->setSlot($slot);
         $webCount = 1;
