@@ -41,12 +41,33 @@ use WindowsAzure\ServiceManagement\Internal\WindowsAzureService;
 class HostedService extends WindowsAzureService
 {
     /**
+     * @var array 
+     */
+    private $_deployments;
+    
+    /**
      * Constructs new hosted service object.
      */
     public function __construct()
     {
         $sources = func_get_args();
         parent::__construct($sources);
+        
+        $this->_deployments = array();
+        foreach ($sources as $source) {
+            $deployments = Utilities::tryGetKeysChainValue(
+                $source,
+                Resources::XTAG_DEPLOYMENTS,
+                Resources::XTAG_DEPLOYMENT
+            );
+            
+            if (!empty($deployments)) {
+                $this->_deployments = Utilities::createList(
+                    Utilities::getArray($deployments),
+                    'WindowsAzure\ServiceManagement\Models\Deployment'
+                );
+            }
+        }
     }
     
     /**
@@ -68,5 +89,27 @@ class HostedService extends WindowsAzureService
         $ordered = Utilities::orderArray($arr, $order);
         
         return $ordered;
+    }
+    
+    /**
+     * Gets the deployments array.
+     * 
+     * @return array
+     */
+    public function getDeployments()
+    {
+        return $this->_deployments;
+    }
+    
+    /**
+     * Sets the deployments array.
+     * 
+     * @param array $deployments The deployments array.
+     * 
+     * @return none
+     */
+    public function setDeployments($deployments)
+    {
+        $this->_deployments = $deployments;
     }
 }

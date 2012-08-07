@@ -306,6 +306,35 @@ class Resources
     const XTAG_START_DEPLOYMENT = 'StartDeployment';
     const XTAG_TREAT_WARNINGS_AS_ERROR = 'TreatWarningsAsError';
     const XTAG_CREATE_DEPLOYMENT = 'CreateDeployment';
+    const XTAG_DEPLOYMENT_SLOT = 'DeploymentSlot';
+    const XTAG_PRIVATE_ID = 'PrivateID';
+    const XTAG_ROLE_INSTANCE_LIST = 'RoleInstanceList';
+    const XTAG_UPGRADE_DOMAIN_COUNT = 'UpgradeDomainCount';
+    const XTAG_ROLE_LIST = 'RoleList';
+    const XTAG_SDK_VERSION = 'SdkVersion';
+    const XTAG_INPUT_ENDPOINT_LIST = 'InputEndpointList';
+    const XTAG_LOCKED = 'Locked';
+    const XTAG_ROLLBACK_ALLOWED = 'RollbackAllowed';
+    const XTAG_UPGRADE_STATUS = 'UpgradeStatus';
+    const XTAG_UPGRADE_TYPE = 'UpgradeType';
+    const XTAG_CURRENT_UPGRADE_DOMAIN_STATE = 'CurrentUpgradeDomainState';
+    const XTAG_CURRENT_UPGRADE_DOMAIN = 'CurrentUpgradeDomain';
+    const XTAG_ROLE_NAME = 'RoleName';
+    const XTAG_INSTANCE_NAME = 'InstanceName';
+    const XTAG_INSTANCE_STATUS = 'InstanceStatus';
+    const XTAG_INSTANCE_UPGRADE_DOMAIN = 'InstanceUpgradeDomain';
+    const XTAG_INSTANCE_FAULT_DOMAIN = 'InstanceFaultDomain';
+    const XTAG_INSTANCE_SIZE = 'InstanceSize';
+    const XTAG_INSTANCE_STATE_DETAILS = 'InstanceStateDetails';
+    const XTAG_INSTANCE_ERROR_CODE = 'InstanceErrorCode';
+    const XTAG_OS_VERSION = 'OsVersion';
+    const XTAG_ROLE_INSTANCE = 'RoleInstance';
+    const XTAG_ROLE = 'Role';
+    const XTAG_INPUT_ENDPOINT = 'InputEndpoint';
+    const XTAG_VIP = 'Vip';
+    const XTAG_PORT = 'Port';
+    const XTAG_DEPLOYMENT = 'Deployment';
+    const XTAG_DEPLOYMENTS = 'Deployments';
 
     // Service Bus
     const LIST_TOPICS_PATH        = '$Resources/Topics';

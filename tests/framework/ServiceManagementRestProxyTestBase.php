@@ -50,7 +50,10 @@ class ServiceManagementRestProxyTestBase extends RestProxyTestBase
     protected $createdDeployments;
     protected $defaultLocation;
     protected $defaultSlot;
-    
+    protected $defaultDeploymentEncodedConfiguration;
+    protected $encodedComplexConfiguration;
+
+
     public function setUp()
     {
         parent::setUp();
@@ -63,6 +66,8 @@ class ServiceManagementRestProxyTestBase extends RestProxyTestBase
         $this->createdDeployments = array();
         $this->defaultLocation = 'West US';
         $this->defaultSlot = DeploymentSlot::PRODUCTION;
+        $this->defaultDeploymentEncodedConfiguration = base64_encode(file_get_contents(TestResources::simplePackageConfiguration()));
+        $this->encodedComplexConfiguration = base64_encode(file_get_contents(TestResources::complexPackageConfiguration()));
     }
 
     public function createAffinityGroup($name)
@@ -132,7 +137,7 @@ class ServiceManagementRestProxyTestBase extends RestProxyTestBase
             $status = $result->getStatus();
         } while(OperationStatus::IN_PROGRESS == $status);
         
-        $this->assertEquals(OperationStatus::SUCCEEDED, $status);
+        $this->assertEquals(OperationStatus::SUCCEEDED, $status, $result->getError());
     }
     
     public function storageServiceExists($name)
@@ -209,15 +214,22 @@ class ServiceManagementRestProxyTestBase extends RestProxyTestBase
         }
     }
     
-    public function createDeployment($name, $options = null)
+    public function createDeployment($name, $slot = null, $deploymentName = null, $options = null)
     {
-        $label = base64_encode($name);
-        $deploymentName = $name;
-        $slot = $this->defaultSlot;
-        $packageUrl = TestResources::packageUrl();
-        $configuration = base64_encode(file_get_contents(TestResources::packageConfiguration()));
+        $deploymentName = is_null($deploymentName) ? $name : $deploymentName;
+        $label = base64_encode($deploymentName);
+        $slot = is_null($slot) ? $this->defaultSlot : $slot;
+        $packageUrl = TestResources::simplePackageUrl();
+        $configuration = $this->defaultDeploymentEncodedConfiguration;
         
-        $this->createHostedService($name);
+        if (!$this->hostedServiceExists($name)) {
+            $this->createHostedService($name);
+        } else {
+            if (!in_array($name, $this->createdHostedServices)) {
+                $this->createdHostedServices[] = $name;
+            }
+        }
+        
         $result = $this->restProxy->createDeployment(
             $name,
             $deploymentName,
@@ -237,18 +249,23 @@ class ServiceManagementRestProxyTestBase extends RestProxyTestBase
         try {
             $options = new GetDeploymentOptions();
             $options->setSlot($this->defaultSlot);
-            $this->restProxy->getDeployment($name, $options);
+            $result = $this->restProxy->getDeployment($name, $options);
             
-            return true;
+            if ($result->getDeployment()->getName() === $name) {
+                return true;
+            }
+            
+            return false;
+            
         } catch (\Exception $e) {
             return false;
         }
     }
     
-    public function deleteDeployment($name)
+    public function deleteDeployment($name, $slot = null)
     {
         $options = new GetDeploymentOptions();
-        $options->setSlot($this->defaultSlot);
+        $options->setSlot(is_null($slot) ? $this->defaultSlot : $slot);
         $result = $this->restProxy->deleteDeployment($name, $options);
         $this->blockUntilAsyncSucceed($result->getRequestId());
     }
@@ -286,5 +303,95 @@ class ServiceManagementRestProxyTestBase extends RestProxyTestBase
         foreach ($this->createdHostedServices as $value) {
             $this->safeDeleteHostedService($value);
         }
+    }
+    
+    protected function assertGeneralDeploymentInformation($deployment, $name, $slot, $roleCount)
+    {
+        $this->assertNotNull($deployment);
+        $this->assertNotNull($deployment->getPrivateId());
+        $this->assertNotNull($deployment->getConfiguration());
+        $this->assertNotNull($deployment->getUrl());
+        $this->assertEquals($name, $deployment->getName());
+        $this->assertEquals($slot, strtolower($deployment->getSlot()));
+        $this->assertEquals('Suspended', $deployment->getStatus());
+        $this->assertEquals(base64_encode($name), $deployment->getLabel());
+        $this->assertEquals($roleCount, $deployment->getUpgradeDomainCount());
+        $this->assertEquals('1.6.21103.1459', $deployment->getSdkVersion());
+        $this->assertEquals(false, $deployment->getLocked());
+        $this->assertEquals(false, $deployment->getRollbackAllowed());
+        $this->assertInstanceOf('WindowsAzure\ServiceManagement\Models\UpgradeStatus', $deployment->getUpgradeStatus());
+        $this->assertInternalType('array', $deployment->getRoleInstanceList());
+        $this->assertInternalType('array', $deployment->getRoleList());
+        $this->assertInternalType('array', $deployment->getInputEndpointList());
+        
+        // Assert the deployment upgrade status
+        $this->assertEquals(0, $deployment->getUpgradeStatus()->getCurrentUpgradeDomain());
+        $this->assertNull($deployment->getUpgradeStatus()->getUpgradeType());
+        $this->assertNull($deployment->getUpgradeStatus()->getCurrentUpgradeDomainState());
+    }
+    
+    protected function assertSuspendedDeploymentWithMultipleRoles(
+        $deployment,
+        $name,
+        $slot,
+        $webCount,
+        $workerCount,
+        $instancesCount,
+        $inputEndpointCount
+    ) {
+        $this->assertGeneralDeploymentInformation($deployment, $name, $slot, $webCount + $workerCount);
+        
+        // Assert the deployment role instance list
+        $roleInstanceList = $deployment->getRoleInstanceList();
+        $this->assertCount($instancesCount, $roleInstanceList);
+        
+        // Assert the deployment role list
+        $roleList = $deployment->getRoleList();
+        $this->assertCount($webCount + $workerCount, $roleList);
+        
+        // Assert the deployment input endpoint list
+        $inputEndpointList = $deployment->getInputEndpointList();
+        $this->assertCount($inputEndpointCount, $inputEndpointList);
+    }
+
+    protected function assertSuspendedDeploymentWithOneRole(
+        $deployment,
+        $name,
+        $slot,
+        $roleName,
+        $roleInstanceName
+    ) {
+        $this->assertGeneralDeploymentInformation($deployment, $name, $slot, 1);
+        
+        // Assert the deployment role instance list
+        $roleInstanceList = $deployment->getRoleInstanceList();
+        $this->assertCount(1, $roleInstanceList);
+        $roleInstance = $roleInstanceList[0];
+        $this->assertInstanceOf('WindowsAzure\ServiceManagement\Models\RoleInstance', $roleInstance);
+        $this->assertEquals($roleName, $roleInstance->getRoleName());
+        $this->assertEquals($roleInstanceName, $roleInstance->getInstanceName());
+        $this->assertEquals('StoppedVM', $roleInstance->getInstanceStatus());
+        $this->assertEquals('Small', $roleInstance->getInstanceSize());
+        $this->assertEmpty($roleInstance->getInstanceStateDetails());
+        $this->assertNull($roleInstance->getInstanceErrorCode());
+        $this->assertEquals(0, $roleInstance->getInstanceUpgradeDomain());
+        $this->assertEquals(0, $roleInstance->getInstanceFaultDomain());
+        
+        // Assert the deployment role list
+        $roleList = $deployment->getRoleList();
+        $this->assertCount(1, $roleList);
+        $role = $roleList[0];
+        $this->assertInstanceOf('WindowsAzure\ServiceManagement\Models\Role', $role);
+        $this->assertEquals($roleName, $role->getRoleName());
+        $this->assertNotNull($role->getOsVersion());
+        
+        // Assert the deployment input endpoint list
+        $inputEndpointList = $deployment->getInputEndpointList();
+        $this->assertCount(1, $inputEndpointList);
+        $inputEndpoint1 = $inputEndpointList[0];
+        $this->assertInstanceOf('WindowsAzure\ServiceManagement\Models\InputEndpoint', $inputEndpoint1);
+        $this->assertEquals($roleName, $inputEndpoint1->getRoleName());
+        $this->assertEquals('80', $inputEndpoint1->getPort());
+        $this->assertNotNull($inputEndpoint1->getVip());
     }
 }
