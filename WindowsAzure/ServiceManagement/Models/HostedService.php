@@ -62,7 +62,7 @@ class HostedService extends WindowsAzureService
             );
             
             if (!empty($deployments)) {
-                $this->_deployments = Utilities::createList(
+                $this->_deployments = Utilities::createInstanceList(
                     Utilities::getArray($deployments),
                     'WindowsAzure\ServiceManagement\Models\Deployment'
                 );
