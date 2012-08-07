@@ -804,7 +804,7 @@ class ServiceManagementRestProxyTest extends ServiceManagementRestProxyTestBase
      * @covers WindowsAzure\ServiceManagement\ServiceManagementRestProxy::_getPath
      * @covers WindowsAzure\ServiceManagement\Models\GetDeploymentResult::create
      * @covers WindowsAzure\ServiceManagement\Models\Deployment::create
-     * @covers WindowsAzure\Common\Internal\Utilities::createList
+     * @covers WindowsAzure\Common\Internal\Utilities::createInstanceList
      * @covers WindowsAzure\ServiceManagement\Models\UpgradeStatus::create
      * @covers WindowsAzure\ServiceManagement\Models\RoleInstance::create
      * @covers WindowsAzure\ServiceManagement\Models\Role::create
@@ -839,7 +839,7 @@ class ServiceManagementRestProxyTest extends ServiceManagementRestProxyTestBase
      * @covers WindowsAzure\ServiceManagement\ServiceManagementRestProxy::_getPath
      * @covers WindowsAzure\ServiceManagement\Models\GetDeploymentResult::create
      * @covers WindowsAzure\ServiceManagement\Models\Deployment::create
-     * @covers WindowsAzure\Common\Internal\Utilities::createList
+     * @covers WindowsAzure\Common\Internal\Utilities::createInstanceList
      * @covers WindowsAzure\ServiceManagement\Models\UpgradeStatus::create
      * @covers WindowsAzure\ServiceManagement\Models\RoleInstance::create
      * @covers WindowsAzure\ServiceManagement\Models\Role::create

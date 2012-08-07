@@ -567,7 +567,7 @@ class Utilities
      * 
      * @return array
      */
-    public static function createList($parsed, $class)
+    public static function createInstanceList($parsed, $class)
     {
         $list = array();
         

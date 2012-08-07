@@ -187,19 +187,19 @@ class Deployment
         $result->setUpgradeStatus(UpgradeStatus::create($upgradeStatus));
         $result->setUrl($url);
         $result->setRoleInstanceList(
-            Utilities::createList(
+            Utilities::createInstanceList(
                 Utilities::getArray($roleInstanceList),
                 'WindowsAzure\ServiceManagement\Models\RoleInstance'
             )
         );
         $result->setRoleList(
-            Utilities::createList(
+            Utilities::createInstanceList(
                 Utilities::getArray($roleList),
                 'WindowsAzure\ServiceManagement\Models\Role'
             )
         );
         $result->setInputEndpointList(
-            Utilities::createList(
+            Utilities::createInstanceList(
                 Utilities::getArray($inputEndpointList),
                 'WindowsAzure\ServiceManagement\Models\InputEndpoint'
             )
