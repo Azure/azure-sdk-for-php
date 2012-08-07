@@ -726,6 +726,7 @@ class ServiceManagementRestProxyTest extends ServiceManagementRestProxyTestBase
      * @covers WindowsAzure\ServiceManagement\ServiceManagementRestProxy::deleteDeployment
      * @covers WindowsAzure\ServiceManagement\ServiceManagementRestProxy::_getDeploymentPathUsingSlot
      * @covers WindowsAzure\ServiceManagement\ServiceManagementRestProxy::_getPath
+     * @covers WindowsAzure\ServiceManagement\ServiceManagementRestProxy::_getDeploymentPath
      * @group Deployment
      */
     public function testDeleteDeploymentWithSlot()
@@ -764,6 +765,7 @@ class ServiceManagementRestProxyTest extends ServiceManagementRestProxyTestBase
      * @covers WindowsAzure\ServiceManagement\ServiceManagementRestProxy::deleteDeployment
      * @covers WindowsAzure\ServiceManagement\ServiceManagementRestProxy::_getDeploymentPathUsingName
      * @covers WindowsAzure\ServiceManagement\ServiceManagementRestProxy::_getPath
+     * @covers WindowsAzure\ServiceManagement\ServiceManagementRestProxy::_getDeploymentPath
      * @group Deployment
      */
     public function testDeleteDeploymentWithName()
@@ -802,6 +804,7 @@ class ServiceManagementRestProxyTest extends ServiceManagementRestProxyTestBase
      * @covers WindowsAzure\ServiceManagement\ServiceManagementRestProxy::getDeployment
      * @covers WindowsAzure\ServiceManagement\ServiceManagementRestProxy::_getDeploymentPathUsingName
      * @covers WindowsAzure\ServiceManagement\ServiceManagementRestProxy::_getPath
+     * @covers WindowsAzure\ServiceManagement\ServiceManagementRestProxy::_getDeploymentPath
      * @covers WindowsAzure\ServiceManagement\Models\GetDeploymentResult::create
      * @covers WindowsAzure\ServiceManagement\Models\Deployment::create
      * @covers WindowsAzure\Common\Internal\Utilities::createInstanceList
@@ -837,6 +840,7 @@ class ServiceManagementRestProxyTest extends ServiceManagementRestProxyTestBase
      * @covers WindowsAzure\ServiceManagement\ServiceManagementRestProxy::getDeployment
      * @covers WindowsAzure\ServiceManagement\ServiceManagementRestProxy::_getDeploymentPathUsingSlot
      * @covers WindowsAzure\ServiceManagement\ServiceManagementRestProxy::_getPath
+     * @covers WindowsAzure\ServiceManagement\ServiceManagementRestProxy::_getDeploymentPath
      * @covers WindowsAzure\ServiceManagement\Models\GetDeploymentResult::create
      * @covers WindowsAzure\ServiceManagement\Models\Deployment::create
      * @covers WindowsAzure\Common\Internal\Utilities::createInstanceList
@@ -920,5 +924,8 @@ class ServiceManagementRestProxyTest extends ServiceManagementRestProxyTestBase
         $result = $this->restProxy->getDeployment($name, $options);
         $deployment = $result->getDeployment();
         $this->assertCount($expectedInstanceCount, $deployment->getRoleInstanceList());
+        
+        // Clean
+        $this->deleteDeployment($name, DeploymentSlot::STAGING);
     }
 }

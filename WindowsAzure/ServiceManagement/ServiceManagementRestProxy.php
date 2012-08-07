@@ -958,6 +958,34 @@ class ServiceManagementRestProxy extends RestProxy
     }
     
     /**
+     * Gets the deployment URI path using the slot or name.
+     * 
+     * @param string               $name    The hosted service name.
+     * @param GetDeploymentOptions $options The optional parameters.
+     * 
+     * @return string
+     */
+    private function _getDeploymentPath($name, $options)
+    {
+        $slot           = $options->getSlot();
+        $deploymentName = $options->getDeploymentName();
+        $path           = null;
+        
+        Validate::isTrue(
+            !empty($slot) || !empty($deploymentName),
+            Resources::INVALID_DEPLOYMENT_LOCATOR_MSG
+        );
+        
+        if (!empty($slot)) {
+            $path = $this->_getDeploymentPathUsingSlot($name, $slot);
+        } else {
+            $path = $this->_getDeploymentPathUsingName($name, $deploymentName);
+        }
+        
+        return $path;
+    }
+    
+    /**
      * Returns configuration information, status, and system properties for a 
      * deployment.
      * 
@@ -979,21 +1007,10 @@ class ServiceManagementRestProxy extends RestProxy
         Validate::isString($name, 'name');
         Validate::notNullOrEmpty($name, 'name');
         Validate::notNullOrEmpty($options, 'options');
-        $slot           = $options->getSlot();
-        $deploymentName = $options->getDeploymentName();
-        Validate::isTrue(
-            !empty($slot) || !empty($deploymentName),
-            Resources::INVALID_DEPLOYMENT_LOCATOR_MSG
-        );
         
         $context = new HttpCallContext();
-        $path    = null;
+        $path    = $this->_getDeploymentPath($name, $options);
         $context->setMethod(Resources::HTTP_GET);
-        if (!empty($slot)) {
-            $path = $this->_getDeploymentPathUsingSlot($name, $slot);
-        } else {
-            $path = $this->_getDeploymentPathUsingName($name, $deploymentName);
-        }
         $context->setPath($path);
         $context->addStatusCode(Resources::STATUS_OK);
         
@@ -1072,21 +1089,10 @@ class ServiceManagementRestProxy extends RestProxy
         Validate::isString($name, 'name');
         Validate::notNullOrEmpty($name, 'name');
         Validate::notNullOrEmpty($options, 'options');
-        $slot           = $options->getSlot();
-        $deploymentName = $options->getDeploymentName();
-        Validate::isTrue(
-            !empty($slot) || !empty($deploymentName),
-            Resources::INVALID_DEPLOYMENT_LOCATOR_MSG
-        );
         
         $context = new HttpCallContext();
-        $path    = null;
+        $path    = $this->_getDeploymentPath($name, $options);
         $context->setMethod(Resources::HTTP_DELETE);
-        if (!empty($slot)) {
-            $path = $this->_getDeploymentPathUsingSlot($name, $slot);
-        } else {
-            $path = $this->_getDeploymentPathUsingName($name, $deploymentName);
-        }
         $context->setPath($path);
         $context->addStatusCode(Resources::STATUS_ACCEPTED);
         
