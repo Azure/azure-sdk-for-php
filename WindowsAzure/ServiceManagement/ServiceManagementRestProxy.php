@@ -1028,7 +1028,7 @@ class ServiceManagementRestProxy extends RestProxy
     {
         Validate::isString($name, 'name');
         Validate::notNullOrEmpty($name, 'name');
-        Validate::isString($destination, 'destination');
+        Validate::isString($destination, '$destination');
         Validate::notNullOrEmpty($destination, 'destination');
         Validate::isString($source, 'source');
         Validate::notNullOrEmpty($source, 'source');
