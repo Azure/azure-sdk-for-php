@@ -202,7 +202,9 @@ class ServiceManagementRestProxy extends RestProxy
         );
         
         foreach ($xmlElements as $tagName => $value) {
-            $requestArray[$tagName] = $value;
+            if (!empty($value)) {
+                $requestArray[$tagName] = $value;
+            }
         }
         
         $properties = array(XmlSerializer::ROOT_NAME => $root);
@@ -330,11 +332,11 @@ class ServiceManagementRestProxy extends RestProxy
         $context->setMethod(Resources::HTTP_POST);
         $context->setPath($this->_getStorageServiceKeysPath($name));
         $context->addStatusCode(Resources::STATUS_OK);
-        $context->addQueryParameter(Resources::QP_ACTION, Resources::QP_REGENERATE);
+        $context->addQueryParameter(Resources::QP_ACTION, Resources::QPV_REGENERATE);
         $context->setBody($body);
         $context->addHeader(
             Resources::CONTENT_TYPE,
-            Resources::XML_ATOM_CONTENT_TYPE
+            Resources::XML_CONTENT_TYPE
         );
         
         $response = $this->sendContext($context);
@@ -396,7 +398,7 @@ class ServiceManagementRestProxy extends RestProxy
         $context->setBody($storageService->serialize($this->dataSerializer));
         $context->addHeader(
             Resources::CONTENT_TYPE,
-            Resources::XML_ATOM_CONTENT_TYPE
+            Resources::XML_CONTENT_TYPE
         );
         
         $response = $this->sendContext($context);
@@ -463,7 +465,7 @@ class ServiceManagementRestProxy extends RestProxy
         $context->setBody($storageService->serialize($this->dataSerializer));
         $context->addHeader(
             Resources::CONTENT_TYPE,
-            Resources::XML_ATOM_CONTENT_TYPE
+            Resources::XML_CONTENT_TYPE
         );
         $this->sendContext($context);
     }
@@ -533,7 +535,7 @@ class ServiceManagementRestProxy extends RestProxy
         $context->setBody($affinityGroup->serialize($this->dataSerializer));
         $context->addHeader(
             Resources::CONTENT_TYPE,
-            Resources::XML_ATOM_CONTENT_TYPE
+            Resources::XML_CONTENT_TYPE
         );
         
         $this->sendContext($context);
@@ -599,7 +601,7 @@ class ServiceManagementRestProxy extends RestProxy
         $context->setBody($affinityGroup->serialize($this->dataSerializer));
         $context->addHeader(
             Resources::CONTENT_TYPE,
-            Resources::XML_ATOM_CONTENT_TYPE
+            Resources::XML_CONTENT_TYPE
         );
         
         $this->sendContext($context);
@@ -748,7 +750,7 @@ class ServiceManagementRestProxy extends RestProxy
         $context->setBody($hostedService->serialize($this->dataSerializer));
         $context->addHeader(
             Resources::CONTENT_TYPE,
-            Resources::XML_ATOM_CONTENT_TYPE
+            Resources::XML_CONTENT_TYPE
         );
         
         $this->sendContext($context);
@@ -793,7 +795,7 @@ class ServiceManagementRestProxy extends RestProxy
         $context->setBody($hostedService->serialize($this->dataSerializer));
         $context->addHeader(
             Resources::CONTENT_TYPE,
-            Resources::XML_ATOM_CONTENT_TYPE
+            Resources::XML_CONTENT_TYPE
         );
         $this->sendContext($context);
     }
@@ -949,7 +951,7 @@ class ServiceManagementRestProxy extends RestProxy
         $context->setBody($requestXml);
         $context->addHeader(
             Resources::CONTENT_TYPE,
-            Resources::XML_ATOM_CONTENT_TYPE
+            Resources::XML_CONTENT_TYPE
         );
         
         $response = $this->sendContext($context);
@@ -1045,7 +1047,7 @@ class ServiceManagementRestProxy extends RestProxy
     {
         Validate::isString($name, 'name');
         Validate::notNullOrEmpty($name, 'name');
-        Validate::isString($destination, '$destination');
+        Validate::isString($destination, 'destination');
         Validate::notNullOrEmpty($destination, 'destination');
         Validate::isString($source, 'source');
         Validate::notNullOrEmpty($source, 'source');
@@ -1062,7 +1064,7 @@ class ServiceManagementRestProxy extends RestProxy
         $context->setBody($body);
         $context->addHeader(
             Resources::CONTENT_TYPE,
-            Resources::XML_ATOM_CONTENT_TYPE
+            Resources::XML_CONTENT_TYPE
         );
         
         $response = $this->sendContext($context);
@@ -1121,7 +1123,45 @@ class ServiceManagementRestProxy extends RestProxy
      */
     public function changeDeploymentConfiguration($name, $configuration, $options)
     {
-        throw new \Exception(Resources::NOT_IMPLEMENTED_MSG);
+        Validate::isString($name, 'name');
+        Validate::notNullOrEmpty($name, 'name');
+        Validate::isString($configuration, 'configuration');
+        Validate::notNullOrEmpty($configuration, 'configuration');
+        Validate::notNullOrEmpty($options, 'options');
+        
+        $configuration     = is_resource($configuration)
+                             ? stream_get_contents($configuration) : $configuration;
+        $configuration     = base64_encode($configuration);
+        $warningsTreatment = Utilities::booleanToString(
+            $options->getTreatWarningsAsErrors()
+        );
+        $xmlElements       = array(
+            Resources::XTAG_CONFIGURATION           => $configuration,
+            Resources::XTAG_TREAT_WARNINGS_AS_ERROR => $warningsTreatment,
+            Resources::XTAG_MODE                    => $options->getMode()
+        );
+        $body              = $this->_createRequestXml(
+            $xmlElements,
+            Resources::XTAG_CHANGE_CONFIGURATION
+        );
+        $context           = new HttpCallContext();
+        $context->setMethod(Resources::HTTP_POST);
+        $context->setPath($this->_getDeploymentPath($name, $options) . '/');
+        $context->addStatusCode(Resources::STATUS_ACCEPTED);
+        $context->addQueryParameter(
+            Resources::QP_COMP,
+            Resources::QPV_CONFIG
+        );
+        $context->setBody($body);
+        $context->addHeader(
+            Resources::CONTENT_TYPE,
+            Resources::XML_CONTENT_TYPE
+        );
+
+        assert(Utilities::endsWith($context->getPath(), '/'));
+        $response = $this->sendContext($context);
+        
+        return AsynchronousOperationResult::create($response->getHeader());
     }
     
     /**

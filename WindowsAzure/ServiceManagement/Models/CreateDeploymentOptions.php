@@ -74,7 +74,7 @@ class CreateDeploymentOptions
     /**
      * Sets start deployment flag.
      * 
-     * @param type $startDeployment Indicates whether to start the deployment 
+     * @param boolean $startDeployment Indicates whether to start the deployment 
      * immediately after it is created.
      * 
      * @return none
@@ -99,7 +99,7 @@ class CreateDeploymentOptions
     /**
      * Sets treat warnings as errors flag.
      * 
-     * @param type $treatWarningsAsErrors Indicates whether to treat package 
+     * @param boolean $treatWarningsAsErrors Indicates whether to treat package 
      * validation warnings as errors.
      * 
      * @return none
