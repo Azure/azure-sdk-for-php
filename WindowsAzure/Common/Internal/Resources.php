@@ -110,6 +110,7 @@ class Resources
     const INVALID_SLOT = "The provided deployment slot '%s' is not valid. Only 'staging' and 'production' are accepted.";
     const INVALID_DEPLOYMENT_LOCATOR_MSG = 'A slot or deployment name must be provided.';
     const INVALID_CHANGE_MODE_MSG = "The change mode must be 'Auto' or 'Manual'. Use Mode class constants for that purpose.";
+    const INVALID_DEPLOYMENT_STATUS_MSG = "The change mode must be 'Running' or 'Suspended'. Use DeploymentStatus class constants for that purpose.";
 
     // HTTP Headers
     const X_MS_HEADER_PREFIX                 = 'x-ms-';
@@ -262,6 +263,7 @@ class Resources
     // Query parameter values
     const QPV_REGENERATE = 'regenerate';
     const QPV_CONFIG     = 'config';
+    const QPV_STATUS     = 'status';
     
     // Request body content types
     const URL_ENCODED_CONTENT_TYPE = 'application/x-www-form-urlencoded';
@@ -346,6 +348,7 @@ class Resources
     const XTAG_SOURCE_DEPLOYMENT = 'SourceDeployment';
     const XTAG_CHANGE_CONFIGURATION = 'ChangeConfiguration';
     const XTAG_MODE = 'Mode';
+    const XTAG_UPDATE_DEPLOYMENT_STATUS = 'UpdateDeploymentStatus';
 
     // Service Bus
     const LIST_TOPICS_PATH        = '$Resources/Topics';

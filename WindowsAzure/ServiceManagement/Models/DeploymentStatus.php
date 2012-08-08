@@ -15,56 +15,47 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   Tests\Unit\WindowsAzure\ServiceManagement\Models
+ * @package   WindowsAzure\ServiceManagement\Models
  * @author    Azure PHP SDK <azurephpsdk@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
-
-namespace Tests\Unit\WindowsAzure\ServiceManagement\Models;
-use WindowsAzure\ServiceManagement\Models\Mode;
+ 
+namespace WindowsAzure\ServiceManagement\Models;
 
 /**
- * Unit tests for class Mode
+ * The possible values for deployment status.
  *
  * @category  Microsoft
- * @package   Tests\Unit\WindowsAzure\ServiceManagement\Models
+ * @package   WindowsAzure\ServiceManagement\Models
  * @author    Azure PHP SDK <azurephpsdk@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @version   Release: @package_version@
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
-class ModeTest extends \PHPUnit_Framework_TestCase
+class DeploymentStatus
 {
-    /**
-     * @covers WindowsAzure\ServiceManagement\Models\Mode::isValid
-     */
-    public function testIsValidWithValid()
-    {
-        // Setup
-        $expected = true;
-        
-        // Test
-        $actual = Mode::isValid('Manual');
-        
-        // Assert
-        $this->assertEquals($expected, $actual);
-    }
+    const SUSPENDED = 'Suspended';
+    const RUNNING   = 'Running';
     
     /**
-     * @covers WindowsAzure\ServiceManagement\Models\Mode::isValid
+     * Validates the provided status.
+     * 
+     * @param string $status The deployment status.
+     * 
+     * @return boolean
      */
-    public function testIsValidWithInvalid()
+    public static function isValid($status)
     {
-        // Setup
-        $expected = false;
+        switch (strtolower($status)) {
+        case strtolower(self::SUSPENDED):
+        case strtolower(self::RUNNING):
+        return true;
         
-        // Test
-        $actual = Mode::isValid('Wrong value');
-        
-        // Assert
-        $this->assertEquals($expected, $actual);
+        default:
+        return false;
+        }
     }
 }

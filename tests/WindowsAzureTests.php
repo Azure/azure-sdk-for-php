@@ -227,6 +227,7 @@ spl_autoload_register(
             'tests\\unit\\windowsazure\\servicemanagement\\models\\createaffinitygroupoptionstest' => '/unit/WindowsAzure/ServiceManagement/Models/CreateAffinityGroupOptionsTest.php',
             'tests\\unit\\windowsazure\\servicemanagement\\models\\createdeploymentoptionstest' => '/unit/WindowsAzure/ServiceManagement/Models/CreateDeploymentOptionsTest.php',
             'tests\\unit\\windowsazure\\servicemanagement\\models\\deploymentslottest' => '/unit/WindowsAzure/ServiceManagement/Models/DeploymentSlotTest.php',
+            'tests\\unit\\windowsazure\\servicemanagement\\models\\deploymentstatustest' => '/unit/WindowsAzure/ServiceManagement/Models/DeploymentStatusTest.php',
             'tests\\unit\\windowsazure\\servicemanagement\\models\\deploymenttest' => '/unit/WindowsAzure/ServiceManagement/Models/DeploymentTest.php',
             'tests\\unit\\windowsazure\\servicemanagement\\models\\getaffinitygrouppropertiesresulttest' => '/unit/WindowsAzure/ServiceManagement/Models/GetAffinityGroupPropertiesResultTest.php',
             'tests\\unit\\windowsazure\\servicemanagement\\models\\getdeploymentoptionstest' => '/unit/WindowsAzure/ServiceManagement/Models/GetDeploymentOptionsTest.php',
