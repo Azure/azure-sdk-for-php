@@ -24,10 +24,9 @@
  
 namespace WindowsAzure\ServiceManagement\Models;
 use WindowsAzure\Common\Internal\Validate;
-use WindowsAzure\Common\Internal\Resources;
 
 /**
- * The parameters to get a deployment.
+ * The optional parameters for upgradeDeployment API.
  *
  * @category  Microsoft
  * @package   WindowsAzure\ServiceManagement\Models
@@ -37,70 +36,37 @@ use WindowsAzure\Common\Internal\Resources;
  * @version   Release: @package_version@
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
-class GetDeploymentOptions
+class UpgradeDeploymentOptions extends GetDeploymentOptions
 {
     /**
      * @var string
      */
-    private $_slot;
+    private $_roleToUpgrade;
     
     /**
-     * @var string
-     */
-    private $_deploymentName;
-    
-    
-    /**
-     * Gets the deployment slot.
+     * Gets the role to upgrade name.
+     * 
+     * The name of the specific role to upgrade.
      * 
      * @return string
      */
-    public function getSlot()
+    public function getRoleToUpgrade()
     {
-        return $this->_slot;
+        return $this->_roleToUpgrade;
     }
     
     /**
-     * Sets the deployment slot.
+     * Sets the role to upgrade name.
      * 
-     * @param string $slot The deployment slot name.
+     * @param string $roleToUpgrade The role to upgrade name.
      * 
      * @return none
      */
-    public function setSlot($slot)
+    public function setRoleToUpgrade($roleToUpgrade)
     {
-        Validate::isString($slot, 'slot');
-        Validate::notNullOrEmpty($slot, 'slot');
-        Validate::isTrue(
-            DeploymentSlot::isValid($slot),
-            sprintf(Resources::INVALID_SLOT, $slot)
-        );
+        Validate::isString($roleToUpgrade, 'roleToUpgrade');
+        Validate::notNullOrEmpty($roleToUpgrade, 'roleToUpgrade');
                 
-        $this->_slot = $slot;
-    }
-    
-    /**
-     * Gets the deployment name.
-     * 
-     * @return string
-     */
-    public function getDeploymentName()
-    {
-        return $this->_deploymentName;
-    }
-    
-    /**
-     * Sets the deployment name.
-     * 
-     * @param string $deploymentName The deployment name.
-     * 
-     * @return none
-     */
-    public function setDeploymentName($deploymentName)
-    {
-        Validate::isString($deploymentName, 'deploymentName');
-        Validate::notNullOrEmpty($deploymentName, 'deploymentName');
-                
-        $this->_deploymentName = $deploymentName;
+        $this->_roleToUpgrade = $roleToUpgrade;
     }
 }

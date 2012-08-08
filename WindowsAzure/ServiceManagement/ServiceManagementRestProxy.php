@@ -50,6 +50,7 @@ use WindowsAzure\ServiceManagement\Models\DeploymentSlot;
 use WindowsAzure\ServiceManagement\Models\CreateDeploymentOptions;
 use WindowsAzure\ServiceManagement\Models\GetDeploymentResult;
 use WindowsAzure\ServiceManagement\Models\DeploymentStatus;
+use WindowsAzure\ServiceManagement\Models\Mode;
 
 /**
  * This class constructs HTTP requests and receive HTTP responses for service 
@@ -1192,11 +1193,11 @@ class ServiceManagementRestProxy extends RestProxy
         );
         Validate::notNullOrEmpty($options, 'options');
         
-        $body = $this->_createRequestXml(
+        $body    = $this->_createRequestXml(
             array(Resources::XTAG_STATUS => $status),
             Resources::XTAG_UPDATE_DEPLOYMENT_STATUS
         );
-        $context           = new HttpCallContext();
+        $context = new HttpCallContext();
         $context->setMethod(Resources::HTTP_POST);
         $context->setPath($this->_getDeploymentPath($name, $options) . '/');
         $context->addStatusCode(Resources::STATUS_ACCEPTED);
@@ -1255,7 +1256,50 @@ class ServiceManagementRestProxy extends RestProxy
         $force,
         $options
     ) {
-        throw new \Exception(Resources::NOT_IMPLEMENTED_MSG);
+        Validate::isString($name, 'name');
+        Validate::notNullOrEmpty($name, 'name');
+        Validate::isString($mode, 'mode');
+        Validate::isTrue(Mode::isValid($mode), Resources::INVALID_CHANGE_MODE_MSG);
+        Validate::isString($packageUrl, 'packageUrl');
+        Validate::notNullOrEmpty($packageUrl, 'packageUrl');
+        Validate::isString($configuration, 'configuration');
+        Validate::notNullOrEmpty($configuration, 'configuration');
+        Validate::isString($label, 'label');
+        Validate::notNullOrEmpty($label, 'label');
+        Validate::isBoolean($force, 'force');
+        Validate::notNullOrEmpty($force, 'force');
+        Validate::notNullOrEmpty($options, 'options');
+        
+        $xmlElements = array(
+            Resources::XTAG_MODE            => $mode,
+            Resources::XTAG_PACKAGE_URL     => $packageUrl,
+            Resources::XTAG_CONFIGURATION   => $configuration,
+            Resources::XTAG_LABEL           => $label,
+            Resources::XTAG_ROLE_TO_UPGRADE => $options->getRoleToUpgrade(),
+            Resources::XTAG_FORCE           => Utilities::booleanToString($force),
+        );
+        $body        = $this->_createRequestXml(
+            $xmlElements,
+            Resources::XTAG_UPGRADE_DEPLOYMENT
+        );
+        $context     = new HttpCallContext();
+        $context->setMethod(Resources::HTTP_POST);
+        $context->setPath($this->_getDeploymentPath($name, $options) . '/');
+        $context->addStatusCode(Resources::STATUS_ACCEPTED);
+        $context->addQueryParameter(
+            Resources::QP_COMP,
+            Resources::QPV_UPGRADE
+        );
+        $context->setBody($body);
+        $context->addHeader(
+            Resources::CONTENT_TYPE,
+            Resources::XML_CONTENT_TYPE
+        );
+
+        assert(Utilities::endsWith($context->getPath(), '/'));
+        $response = $this->sendContext($context);
+        
+        return AsynchronousOperationResult::create($response->getHeader());
     }
     
     /**

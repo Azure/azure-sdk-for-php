@@ -249,6 +249,7 @@ spl_autoload_register(
             'tests\\unit\\windowsazure\\servicemanagement\\models\\roletest' => '/unit/WindowsAzure/ServiceManagement/Models/RoleTest.php',
             'tests\\unit\\windowsazure\\servicemanagement\\models\\storageservicetest' => '/unit/WindowsAzure/ServiceManagement/Models/StorageServiceTest.php',
             'tests\\unit\\windowsazure\\servicemanagement\\models\\updateserviceoptionstest' => '/unit/WindowsAzure/ServiceManagement/Models/UpdateServiceOptionsTest.php',
+            'tests\\unit\\windowsazure\\servicemanagement\\models\\upgradedeploymentoptionstest' => '/unit/WindowsAzure/ServiceManagement/Models/UpgradeDeploymentOptionsTest.php',
             'tests\\unit\\windowsazure\\servicemanagement\\models\\upgradestatustest' => '/unit/WindowsAzure/ServiceManagement/Models/UpgradeStatusTest.php',
             'tests\\unit\\windowsazure\\servicemanagement\\servicemanagementrestproxytest' => '/unit/WindowsAzure/ServiceManagement/ServiceManagementRestProxyTest.php',
             'tests\\unit\\windowsazure\\serviceruntime\\internal\\acquirecurrentstatetest' => '/unit/WindowsAzure/ServiceRuntime/Internal/AcquireCurrentStateTest.php',

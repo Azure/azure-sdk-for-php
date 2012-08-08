@@ -219,6 +219,7 @@ spl_autoload_register(
             'windowsazure\\servicemanagement\\models\\roleinstance' => '/ServiceManagement/Models/RoleInstance.php',
             'windowsazure\\servicemanagement\\models\\storageservice' => '/ServiceManagement/Models/StorageService.php',
             'windowsazure\\servicemanagement\\models\\updateserviceoptions' => '/ServiceManagement/Models/UpdateServiceOptions.php',
+            'windowsazure\\servicemanagement\\models\\upgradedeploymentoptions' => '/ServiceManagement/Models/UpgradeDeploymentOptions.php',
             'windowsazure\\servicemanagement\\models\\upgradestatus' => '/ServiceManagement/Models/UpgradeStatus.php',
             'windowsazure\\servicemanagement\\servicemanagementrestproxy' => '/ServiceManagement/ServiceManagementRestProxy.php',
             'windowsazure\\serviceruntime\\internal\\acquirecurrentstate' => '/ServiceRuntime/Internal/AcquireCurrentState.php',
