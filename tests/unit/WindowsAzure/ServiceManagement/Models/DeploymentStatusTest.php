@@ -23,10 +23,10 @@
  */
 
 namespace Tests\Unit\WindowsAzure\ServiceManagement\Models;
-use WindowsAzure\ServiceManagement\Models\Mode;
+use WindowsAzure\ServiceManagement\Models\DeploymentStatus;
 
 /**
- * Unit tests for class Mode
+ * Unit tests for class DeploymentStatus
  *
  * @category  Microsoft
  * @package   Tests\Unit\WindowsAzure\ServiceManagement\Models
@@ -36,10 +36,10 @@ use WindowsAzure\ServiceManagement\Models\Mode;
  * @version   Release: @package_version@
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
-class ModeTest extends \PHPUnit_Framework_TestCase
+class DeploymentStatusTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @covers WindowsAzure\ServiceManagement\Models\Mode::isValid
+     * @covers WindowsAzure\ServiceManagement\Models\DeploymentStatus::isValid
      */
     public function testIsValidWithValid()
     {
@@ -47,14 +47,14 @@ class ModeTest extends \PHPUnit_Framework_TestCase
         $expected = true;
         
         // Test
-        $actual = Mode::isValid('Manual');
+        $actual = DeploymentStatus::isValid('RUNNING');
         
         // Assert
         $this->assertEquals($expected, $actual);
     }
     
     /**
-     * @covers WindowsAzure\ServiceManagement\Models\Mode::isValid
+     * @covers WindowsAzure\ServiceManagement\Models\DeploymentStatus::isValid
      */
     public function testIsValidWithInvalid()
     {
@@ -62,7 +62,7 @@ class ModeTest extends \PHPUnit_Framework_TestCase
         $expected = false;
         
         // Test
-        $actual = Mode::isValid('Wrong value');
+        $actual = DeploymentStatus::isValid('Wrong value');
         
         // Assert
         $this->assertEquals($expected, $actual);

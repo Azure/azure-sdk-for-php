@@ -49,6 +49,7 @@ use WindowsAzure\ServiceManagement\Models\GetHostedServicePropertiesResult;
 use WindowsAzure\ServiceManagement\Models\DeploymentSlot;
 use WindowsAzure\ServiceManagement\Models\CreateDeploymentOptions;
 use WindowsAzure\ServiceManagement\Models\GetDeploymentResult;
+use WindowsAzure\ServiceManagement\Models\DeploymentStatus;
 
 /**
  * This class constructs HTTP requests and receive HTTP responses for service 
@@ -1112,8 +1113,8 @@ class ServiceManagementRestProxy extends RestProxy
      * 
      * @param string                               $name          The hosted service
      * name.
-     * @param string                               $configuration The base-64 encoded
-     * service configuration file for the deployment.
+     * @param string|resource                      $configuration The configuration
+     * file contents or file stream,
      * @param ChangeDeploymentConfigurationOptions $options       The optional 
      * parameters.
      * 
@@ -1171,11 +1172,11 @@ class ServiceManagementRestProxy extends RestProxy
      * environment (staging or production), or by specifying the deployment's unique
      * name.
      * 
-     * @param string                        $name    The hosted service name.
-     * @param string                        $status  The change to initiate to the 
-     * deployment status. 
+     * @param string               $name    The hosted service name.
+     * @param string               $status  The change to initiate to the 
+     * deployment status.
      * Possible values include Running or Suspended.
-     * @param UpdateDeploymentStatusOptions $options The optional parameters.
+     * @param GetDeploymentOptions $options The optional parameters.
      * 
      * @return AsynchronousOperationResult
      * 
@@ -1183,7 +1184,36 @@ class ServiceManagementRestProxy extends RestProxy
      */
     public function updateDeploymentStatus($name, $status, $options)
     {
-        throw new \Exception(Resources::NOT_IMPLEMENTED_MSG);
+        Validate::isString($name, 'name');
+        Validate::notNullOrEmpty($name, 'name');
+        Validate::isTrue(
+            DeploymentStatus::isValid($status),
+            Resources::INVALID_DEPLOYMENT_STATUS_MSG
+        );
+        Validate::notNullOrEmpty($options, 'options');
+        
+        $body = $this->_createRequestXml(
+            array(Resources::XTAG_STATUS => $status),
+            Resources::XTAG_UPDATE_DEPLOYMENT_STATUS
+        );
+        $context           = new HttpCallContext();
+        $context->setMethod(Resources::HTTP_POST);
+        $context->setPath($this->_getDeploymentPath($name, $options) . '/');
+        $context->addStatusCode(Resources::STATUS_ACCEPTED);
+        $context->addQueryParameter(
+            Resources::QP_COMP,
+            Resources::QPV_STATUS
+        );
+        $context->setBody($body);
+        $context->addHeader(
+            Resources::CONTENT_TYPE,
+            Resources::XML_CONTENT_TYPE
+        );
+
+        assert(Utilities::endsWith($context->getPath(), '/'));
+        $response = $this->sendContext($context);
+        
+        return AsynchronousOperationResult::create($response->getHeader());
     }
     
     /**

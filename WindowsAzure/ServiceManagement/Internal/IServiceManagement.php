@@ -399,8 +399,8 @@ interface IServiceManagement extends FilterableService
      * 
      * @param string                               $name          The hosted service
      * name.
-     * @param string                               $configuration The base-64 encoded
-     * service configuration file for the deployment.
+     * @param string|resource                      $configuration The configuration
+     * file contents or file stream,
      * @param ChangeDeploymentConfigurationOptions $options       The optional 
      * parameters.
      * 
@@ -417,11 +417,11 @@ interface IServiceManagement extends FilterableService
      * environment (staging or production), or by specifying the deployment's unique
      * name.
      * 
-     * @param string                        $name    The hosted service name.
-     * @param string                        $status  The change to initiate to the 
+     * @param string               $name    The hosted service name.
+     * @param string               $status  The change to initiate to the 
      * deployment status. 
      * Possible values include Running or Suspended.
-     * @param UpdateDeploymentStatusOptions $options The optional parameters.
+     * @param GetDeploymentOptions $options The optional parameters.
      * 
      * @return AsynchronousOperationResult
      * 

@@ -37,6 +37,7 @@ use WindowsAzure\ServiceManagement\Models\GetDeploymentOptions;
 use WindowsAzure\ServiceManagement\Models\GetHostedServicePropertiesOptions;
 use WindowsAzure\ServiceManagement\Models\DeploymentSlot;
 use WindowsAzure\ServiceManagement\Models\ChangeDeploymentConfigurationOptions;
+use WindowsAzure\ServiceManagement\Models\DeploymentStatus;
 
 /**
  * Unit tests for class ServiceManagementRestProxy
@@ -968,5 +969,35 @@ class ServiceManagementRestProxyTest extends ServiceManagementRestProxyTestBase
         $result = $this->restProxy->getDeployment($name, $options);
         $deployment = $result->getDeployment(); 
         $this->assertEquals($expected, $deployment->getConfiguration());
+    }
+    
+    /**
+     * @covers WindowsAzure\ServiceManagement\ServiceManagementRestProxy::updateDeploymentStatus
+     * @covers WindowsAzure\ServiceManagement\ServiceManagementRestProxy::_getDeploymentPath
+     * @covers WindowsAzure\ServiceManagement\ServiceManagementRestProxy::_getPath
+     * @covers WindowsAzure\ServiceManagement\ServiceManagementRestProxy::_createRequestXml
+     * @covers WindowsAzure\ServiceManagement\Models\AsynchronousOperationResult::create
+     * @group Deployment
+     */
+    public function testUpdateDeploymentStatus()
+    {
+        // Setup
+        $name = 'testUpdateDeploymentStatus';
+        $this->createDeployment($name);
+        $options = new GetDeploymentOptions();
+        $options->setDeploymentName($name);
+        
+        // Test
+        $result = $this->restProxy->updateDeploymentStatus($name, DeploymentStatus::SUSPENDED, $options);
+        
+        // Block until the status update is done.
+        $this->blockUntilAsyncSucceed($result);
+        
+        // Assert
+        $options = new GetDeploymentOptions();
+        $options->setDeploymentName($name);
+        $result = $this->restProxy->getDeployment($name, $options);
+        $deployment = $result->getDeployment(); 
+        $this->assertEquals(DeploymentStatus::SUSPENDED, $deployment->getStatus());
     }
 }
