@@ -515,4 +515,21 @@ class UtilitiesTest extends \PHPUnit_Framework_TestCase
         $this->assertInternalType('string', $actual2);
         $this->assertNotEquals($actual1, $actual2);
     }
+    
+    /**
+     * @covers WindowsAzure\Common\Internal\Utilities::endsWith
+     */
+    public function testEndsWith()
+    {
+        // Setup
+        $haystack = 'tesT';
+        $needle = 't';
+        $expected = true;
+        
+        // Test
+        $actual = Utilities::endsWith($haystack, $needle, true);
+        
+        // Assert
+        $this->assertEquals($expected, $actual);
+    }
 }

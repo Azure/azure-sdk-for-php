@@ -109,6 +109,7 @@ class Resources
     const MISSING_LOCK_LOCATION_MSG = 'The lock location of the brokered message is missing.';
     const INVALID_SLOT = "The provided deployment slot '%s' is not valid. Only 'staging' and 'production' are accepted.";
     const INVALID_DEPLOYMENT_LOCATOR_MSG = 'A slot or deployment name must be provided.';
+    const INVALID_CHANGE_MODE_MSG = "The change mode must be 'Auto' or 'Manual'. Use Mode class constants for that purpose.";
 
     // HTTP Headers
     const X_MS_HEADER_PREFIX                 = 'x-ms-';
@@ -257,7 +258,10 @@ class Resources
     const QP_NEXT_RK            = 'NextRowKey';
     const QP_ACTION             = 'action';
     const QP_EMBED_DETAIL       = 'embed-detail';
-    const QP_REGENERATE         = 'regenerate';
+    
+    // Query parameter values
+    const QPV_REGENERATE = 'regenerate';
+    const QPV_CONFIG     = 'config';
     
     // Request body content types
     const URL_ENCODED_CONTENT_TYPE = 'application/x-www-form-urlencoded';
@@ -340,6 +344,8 @@ class Resources
     const XTAG_SWAP = 'Swap';
     const XTAG_PRODUCTION = 'Production';
     const XTAG_SOURCE_DEPLOYMENT = 'SourceDeployment';
+    const XTAG_CHANGE_CONFIGURATION = 'ChangeConfiguration';
+    const XTAG_MODE = 'Mode';
 
     // Service Bus
     const LIST_TOPICS_PATH        = '$Resources/Topics';

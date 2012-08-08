@@ -36,6 +36,7 @@ use WindowsAzure\ServiceManagement\Models\KeyType;
 use WindowsAzure\ServiceManagement\Models\GetDeploymentOptions;
 use WindowsAzure\ServiceManagement\Models\GetHostedServicePropertiesOptions;
 use WindowsAzure\ServiceManagement\Models\DeploymentSlot;
+use WindowsAzure\ServiceManagement\Models\ChangeDeploymentConfigurationOptions;
 
 /**
  * Unit tests for class ServiceManagementRestProxy
@@ -927,5 +928,45 @@ class ServiceManagementRestProxyTest extends ServiceManagementRestProxyTestBase
         
         // Clean
         $this->deleteDeployment($name, DeploymentSlot::STAGING);
+    }
+    
+    /**
+     * @covers WindowsAzure\ServiceManagement\ServiceManagementRestProxy::changeDeploymentConfiguration
+     * @covers WindowsAzure\ServiceManagement\ServiceManagementRestProxy::_getDeploymentPath
+     * @covers WindowsAzure\ServiceManagement\ServiceManagementRestProxy::_getPath
+     * @covers WindowsAzure\ServiceManagement\ServiceManagementRestProxy::_createRequestXml
+     * @covers WindowsAzure\ServiceManagement\Models\AsynchronousOperationResult::create
+     * @group Deployment
+     */
+    public function testChangeDeploymentConfiguration()
+    {
+        // Setup
+        $name = 'testchangedeploymentconfiguration';
+        $newConfig = '<?xml version="1.0" encoding="utf-8"?>
+                        <ServiceConfiguration serviceName="WindowsAzure1" xmlns="http://schemas.microsoft.com/ServiceHosting/2008/10/ServiceConfiguration" osFamily="1" osVersion="*" schemaVersion="2012-05.1.7">
+                            <Role name="WebRole1">
+                                <Instances count="2" />
+                                <ConfigurationSettings>
+                                    <Setting name="Microsoft.WindowsAzure.Plugins.Diagnostics.ConnectionString" value="UseDevelopmentStorage=true" />
+                                </ConfigurationSettings>
+                            </Role>
+                        </ServiceConfiguration>';
+        $expected = 'PFNlcnZpY2VDb25maWd1cmF0aW9uIHhtbG5zOnhzaT0iaHR0cDovL3d3dy53My5vcmcvMjAwMS9YTUxTY2hlbWEtaW5zdGFuY2UiIHhtbG5zOnhzZD0iaHR0cDovL3d3dy53My5vcmcvMjAwMS9YTUxTY2hlbWEiIHNlcnZpY2VOYW1lPSIiIG9zRmFtaWx5PSIxIiBvc1ZlcnNpb249IioiIHhtbG5zPSJodHRwOi8vc2NoZW1hcy5taWNyb3NvZnQuY29tL1NlcnZpY2VIb3N0aW5nLzIwMDgvMTAvU2VydmljZUNvbmZpZ3VyYXRpb24iPg0KICA8Um9sZSBuYW1lPSJXZWJSb2xlMSI+DQogICAgPENvbmZpZ3VyYXRpb25TZXR0aW5ncz4NCiAgICAgIDxTZXR0aW5nIG5hbWU9Ik1pY3Jvc29mdC5XaW5kb3dzQXp1cmUuUGx1Z2lucy5EaWFnbm9zdGljcy5Db25uZWN0aW9uU3RyaW5nIiB2YWx1ZT0iVXNlRGV2ZWxvcG1lbnRTdG9yYWdlPXRydWUiIC8+DQogICAgPC9Db25maWd1cmF0aW9uU2V0dGluZ3M+DQogICAgPEluc3RhbmNlcyBjb3VudD0iMiIgLz4NCiAgICA8Q2VydGlmaWNhdGVzIC8+DQogIDwvUm9sZT4NCjwvU2VydmljZUNvbmZpZ3VyYXRpb24+';
+        $this->createDeployment($name);
+        $options = new ChangeDeploymentConfigurationOptions();
+        $options->setDeploymentName($name);
+        
+        // Test
+        $result = $this->restProxy->changeDeploymentConfiguration($name, $newConfig, $options);
+        
+        // Block until the change is done.
+        $this->blockUntilAsyncSucceed($result);
+        
+        // Assert
+        $options = new GetDeploymentOptions();
+        $options->setSlot(DeploymentSlot::PRODUCTION);
+        $result = $this->restProxy->getDeployment($name, $options);
+        $deployment = $result->getDeployment(); 
+        $this->assertEquals($expected, $deployment->getConfiguration());
     }
 }

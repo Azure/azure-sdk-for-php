@@ -577,4 +577,31 @@ class Utilities
         
         return $list;
     }
+    
+    /**
+     * Takes a string and return if it ends with the specified character/string.
+     * 
+     * @param string  $haystack   The string to search in.
+     * @param string  $needle     postfix to match.
+     * @param boolean $ignoreCase Set true to ignore case during the comparison; 
+     * otherwise, false
+     * 
+     * @static
+     * 
+     * @return boolean 
+     */
+    public static function endsWith($haystack, $needle, $ignoreCase = false)
+    {
+        if ($ignoreCase) {
+            $haystack = strtolower($haystack);
+            $needle   = strtolower($needle);
+        }
+        $length = strlen($needle);
+        if ($length == 0) {
+            return true;
+        }
+
+        return (substr($haystack, -$length) === $needle);
+    }
+
 }
