@@ -123,17 +123,17 @@ class ServiceManagementRestProxyTestBase extends RestProxyTestBase
         $options->setLocation($this->defaultLocation);
         
         $result = $this->restProxy->createStorageService($name, $label, $options);
-        $this->blockUntilAsyncSucceed($result->getRequestId());
+        $this->blockUntilAsyncSucceed($result);
         $this->createdStorageServices[] = $name;
     }
     
-    protected function blockUntilAsyncSucceed($requestId)
+    protected function blockUntilAsyncSucceed($requestInfo)
     {
         $status = null;
         
         do {
             sleep(5);
-            $result = $this->restProxy->getOperationStatus($requestId);
+            $result = $this->restProxy->getOperationStatus($requestInfo);
             $status = $result->getStatus();
         } while(OperationStatus::IN_PROGRESS == $status);
         
@@ -214,6 +214,36 @@ class ServiceManagementRestProxyTestBase extends RestProxyTestBase
         }
     }
     
+    public function createComplexDeployment($name, $slot = null, $deploymentName = null, $options = null)
+    {
+        $deploymentName = is_null($deploymentName) ? $name : $deploymentName;
+        $label = base64_encode($deploymentName);
+        $slot = is_null($slot) ? $this->defaultSlot : $slot;
+        $packageUrl = TestResources::complexPackageUrl();
+        $configuration = $this->encodedComplexConfiguration;
+        
+        if (!$this->hostedServiceExists($name)) {
+            $this->createHostedService($name);
+        } else {
+            if (!in_array($name, $this->createdHostedServices)) {
+                $this->createdHostedServices[] = $name;
+            }
+        }
+        
+        $result = $this->restProxy->createDeployment(
+            $name,
+            $deploymentName,
+            $slot,
+            $packageUrl,
+            $configuration,
+            $label,
+            $options
+        );
+        $this->blockUntilAsyncSucceed($result);
+        
+        $this->createdDeployments[] = $name;
+    }
+    
     public function createDeployment($name, $slot = null, $deploymentName = null, $options = null)
     {
         $deploymentName = is_null($deploymentName) ? $name : $deploymentName;
@@ -239,7 +269,7 @@ class ServiceManagementRestProxyTestBase extends RestProxyTestBase
             $label,
             $options
         );
-        $this->blockUntilAsyncSucceed($result->getRequestId());
+        $this->blockUntilAsyncSucceed($result);
         
         $this->createdDeployments[] = $name;
     }
@@ -267,7 +297,7 @@ class ServiceManagementRestProxyTestBase extends RestProxyTestBase
         $options = new GetDeploymentOptions();
         $options->setSlot(is_null($slot) ? $this->defaultSlot : $slot);
         $result = $this->restProxy->deleteDeployment($name, $options);
-        $this->blockUntilAsyncSucceed($result->getRequestId());
+        $this->blockUntilAsyncSucceed($result);
     }
     
     public function safeDeleteDeployment($name)
