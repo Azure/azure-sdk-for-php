@@ -1310,12 +1310,12 @@ class ServiceManagementRestProxy extends RestProxy
      * environment (staging or production), or by specifying the deployment's unique
      * name.
      * 
-     * @param string                   $name          The hosted service name.
-     * @param string                   $upgradeDomain The integer value that 
+     * @param string               $name          The hosted service name.
+     * @param integer              $upgradeDomain The integer value that 
      * identifies the upgrade domain to walk. Upgrade domains are identified with a
      * zero-based index: the first upgrade domain has an ID of 0, the second has an
      * ID of 1, and so on.
-     * @param WalkUpgradeDomainOptions $options       The optional parameters.
+     * @param GetDeploymentOptions $options       The optional parameters.
      * 
      * @return AsynchronousOperationResult
      * 
@@ -1323,7 +1323,33 @@ class ServiceManagementRestProxy extends RestProxy
      */
     public function walkUpgradeDomain($name, $upgradeDomain, $options)
     {
-        throw new \Exception(Resources::NOT_IMPLEMENTED_MSG);
+        Validate::isString($name, 'name');
+        Validate::notNullOrEmpty($name, 'name');
+        Validate::isInteger($upgradeDomain, 'upgradeDomain');
+        Validate::notNullOrEmpty($options, 'options');
+        
+        $body    = $this->_createRequestXml(
+            array(Resources::XTAG_UPGRADE_DOMAIN => $upgradeDomain),
+            Resources::XTAG_WALK_UPGRADE_DOMAIN
+        );
+        $context = new HttpCallContext();
+        $context->setMethod(Resources::HTTP_POST);
+        $context->setPath($this->_getDeploymentPath($name, $options) . '/');
+        $context->addStatusCode(Resources::STATUS_ACCEPTED);
+        $context->addQueryParameter(
+            Resources::QP_COMP,
+            Resources::QPV_WALK_UPGRADE_DOMAIN
+        );
+        $context->setBody($body);
+        $context->addHeader(
+            Resources::CONTENT_TYPE,
+            Resources::XML_CONTENT_TYPE
+        );
+
+        assert(Utilities::endsWith($context->getPath(), '/'));
+        $response = $this->sendContext($context);
+        
+        return AsynchronousOperationResult::create($response->getHeader());
     }
     
     /**
