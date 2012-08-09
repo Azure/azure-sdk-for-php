@@ -264,6 +264,7 @@ class Resources
     const QPV_REGENERATE = 'regenerate';
     const QPV_CONFIG     = 'config';
     const QPV_STATUS     = 'status';
+    const QPV_UPGRADE    = 'upgrade';
     
     // Request body content types
     const URL_ENCODED_CONTENT_TYPE = 'application/x-www-form-urlencoded';
@@ -349,6 +350,9 @@ class Resources
     const XTAG_CHANGE_CONFIGURATION = 'ChangeConfiguration';
     const XTAG_MODE = 'Mode';
     const XTAG_UPDATE_DEPLOYMENT_STATUS = 'UpdateDeploymentStatus';
+    const XTAG_ROLE_TO_UPGRADE = 'RoleToUpgrade';
+    const XTAG_FORCE = 'Force';
+    const XTAG_UPGRADE_DEPLOYMENT = 'UpgradeDeployment';
 
     // Service Bus
     const LIST_TOPICS_PATH        = '$Resources/Topics';

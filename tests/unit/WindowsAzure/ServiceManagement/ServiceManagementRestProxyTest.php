@@ -38,6 +38,8 @@ use WindowsAzure\ServiceManagement\Models\GetHostedServicePropertiesOptions;
 use WindowsAzure\ServiceManagement\Models\DeploymentSlot;
 use WindowsAzure\ServiceManagement\Models\ChangeDeploymentConfigurationOptions;
 use WindowsAzure\ServiceManagement\Models\DeploymentStatus;
+use WindowsAzure\ServiceManagement\Models\Mode;
+use WindowsAzure\ServiceManagement\Models\UpgradeDeploymentOptions;
 
 /**
  * Unit tests for class ServiceManagementRestProxy
@@ -999,5 +1001,49 @@ class ServiceManagementRestProxyTest extends ServiceManagementRestProxyTestBase
         $result = $this->restProxy->getDeployment($name, $options);
         $deployment = $result->getDeployment(); 
         $this->assertEquals(DeploymentStatus::SUSPENDED, $deployment->getStatus());
+    }
+    
+    /**
+     * @covers WindowsAzure\ServiceManagement\ServiceManagementRestProxy::upgradeDeployment
+     * @covers WindowsAzure\ServiceManagement\ServiceManagementRestProxy::_getDeploymentPath
+     * @covers WindowsAzure\ServiceManagement\ServiceManagementRestProxy::_getPath
+     * @covers WindowsAzure\ServiceManagement\ServiceManagementRestProxy::_createRequestXml
+     * @covers WindowsAzure\ServiceManagement\Models\AsynchronousOperationResult::create
+     * @group Deployment
+     */
+    public function testUpgradeDeployment()
+    {
+        // Setup
+        $name = 'testUpgradeDeployment';
+        $this->createDeployment($name);
+        $mode = Mode::AUTO;
+        $configuration = $this->encodedComplexConfiguration;
+        $packageUrl = TestResources::complexPackageUrl();
+        $label = base64_encode($name . 'upgraded');
+        $force = true;
+        $options = new UpgradeDeploymentOptions();
+        $options->setDeploymentName($name);
+        $expectedInstancesCount = 4;
+        
+        // Test
+        $result = $this->restProxy->upgradeDeployment(
+            $name,
+            $mode,
+            $packageUrl,
+            $configuration,
+            $label,
+            $force,
+            $options
+        );
+        
+        // Block until the status update is done.
+        $this->blockUntilAsyncSucceed($result);
+        
+        // Assert
+        $options = new GetDeploymentOptions();
+        $options->setSlot(DeploymentSlot::PRODUCTION);
+        $result = $this->restProxy->getDeployment($name, $options);
+        $deployment = $result->getDeployment(); 
+        $this->assertCount($expectedInstancesCount, $deployment->getRoleInstanceList());
     }
 }
