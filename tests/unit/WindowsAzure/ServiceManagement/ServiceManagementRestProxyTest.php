@@ -1130,11 +1130,8 @@ class ServiceManagementRestProxyTest extends ServiceManagementRestProxyTestBase
         // Test
         $result = $this->restProxy->rebootRoleInstance($name, $roleName, $options);
         
-        // Block until reboot complete
+        // Block until reboot request is completed
         $this->blockUntilAsyncSucceed($result);
-        
-        // Wait a bit until the instance status is discovered
-        sleep(5);
         
         // Assert
         $result = $this->restProxy->getDeployment($name, $options);

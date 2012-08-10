@@ -156,7 +156,7 @@ class Resources
     const CONTENT_ENCODING                   = 'content-encoding';
     const CONTENT_LANGUAGE                   = 'content-language';
     const CONTENT_LENGTH                     = 'content-length';
-    const CONTENTLENGTH                      = 'contentlength';
+    const CONTENT_LENGTH_NO_SPACE            = 'contentlength';
     const CONTENT_MD5                        = 'content-md5';
     const CONTENT_TYPE                       = 'content-type';
     const CONTENT_ID                         = 'content-id';

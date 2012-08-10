@@ -1387,7 +1387,7 @@ class ServiceManagementRestProxy extends RestProxy
         $context->addStatusCode(Resources::STATUS_ACCEPTED);
         $context->addQueryParameter(Resources::QP_COMP, Resources::QPV_REBOOT);
         $context->addHeader(Resources::CONTENT_TYPE, Resources::XML_CONTENT_TYPE);
-        $context->addHeader(Resources::CONTENTLENGTH, 0);
+        $context->addHeader(Resources::CONTENT_LENGTH_NO_SPACE, 0);
 
         $response = $this->sendContext($context);
         
