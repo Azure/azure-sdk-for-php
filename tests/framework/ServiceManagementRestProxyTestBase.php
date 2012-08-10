@@ -244,6 +244,19 @@ class ServiceManagementRestProxyTestBase extends RestProxyTestBase
         $this->createdDeployments[] = $name;
     }
     
+    public function waitUntilDeploymentReachStatus($name, $status)
+    {
+        $options = new GetDeploymentOptions();
+        $options->setSlot($this->defaultSlot);
+        $currentStatus = null;
+        
+        do {
+            $result = $this->restProxy->getDeployment($name, $options);
+            $deployment = $result->getDeployment(); 
+            $currentStatus = $deployment->getStatus();
+        } while($currentStatus != $status);
+    }
+    
     public function createDeployment($name, $slot = null, $deploymentName = null, $options = null)
     {
         $deploymentName = is_null($deploymentName) ? $name : $deploymentName;

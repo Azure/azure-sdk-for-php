@@ -156,6 +156,7 @@ class Resources
     const CONTENT_ENCODING                   = 'content-encoding';
     const CONTENT_LANGUAGE                   = 'content-language';
     const CONTENT_LENGTH                     = 'content-length';
+    const CONTENTLENGTH                      = 'contentlength';
     const CONTENT_MD5                        = 'content-md5';
     const CONTENT_TYPE                       = 'content-type';
     const CONTENT_ID                         = 'content-id';
@@ -266,6 +267,7 @@ class Resources
     const QPV_STATUS     = 'status';
     const QPV_UPGRADE    = 'upgrade';
     const QPV_WALK_UPGRADE_DOMAIN = 'walkupgradedomain';
+    const QPV_REBOOT = 'reboot';
     
     // Request body content types
     const URL_ENCODED_CONTENT_TYPE = 'application/x-www-form-urlencoded';
