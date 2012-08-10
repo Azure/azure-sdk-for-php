@@ -257,6 +257,26 @@ class ServiceManagementRestProxyTestBase extends RestProxyTestBase
         } while($currentStatus != $status);
     }
     
+    public function waitUntilRoleInstanceReachStatus($name, $state, $roleInstanceName)
+    {
+        $options = new GetDeploymentOptions();
+        $options->setSlot($this->defaultSlot);
+        $currentStatus = null;
+        
+        do {
+            $result = $this->restProxy->getDeployment($name, $options);
+            $deployment = $result->getDeployment(); 
+            $roleInstanceList = $deployment->getRoleInstanceList();
+            
+            foreach ($roleInstanceList as $roleInstance) {
+                if  ($roleInstance->getInstanceName() == $roleInstanceName) {
+                    $currentStatus = $roleInstance->getInstanceStatus();
+                    break;
+                }
+            }
+        } while($currentStatus != $state);
+    }
+    
     public function createDeployment($name, $slot = null, $deploymentName = null, $options = null)
     {
         $deploymentName = is_null($deploymentName) ? $name : $deploymentName;
