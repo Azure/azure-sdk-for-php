@@ -40,6 +40,7 @@ use WindowsAzure\ServiceManagement\Models\ChangeDeploymentConfigurationOptions;
 use WindowsAzure\ServiceManagement\Models\DeploymentStatus;
 use WindowsAzure\ServiceManagement\Models\Mode;
 use WindowsAzure\ServiceManagement\Models\UpgradeDeploymentOptions;
+use WindowsAzure\ServiceManagement\Models\CreateDeploymentOptions;
 
 /**
  * Unit tests for class ServiceManagementRestProxy
@@ -1068,7 +1069,7 @@ class ServiceManagementRestProxyTest extends ServiceManagementRestProxyTestBase
         $packageUrl = TestResources::complexPackageUrl();
         $label = base64_encode($name . 'upgraded');
         $force = true;
-        $options = new UpgradeDeploymentOptions();
+        $options = new GetDeploymentOptions();
         $options->setDeploymentName($name);
         $expectedInstancesCount = 4;
         
@@ -1097,5 +1098,46 @@ class ServiceManagementRestProxyTest extends ServiceManagementRestProxyTestBase
         $result = $this->restProxy->getDeployment($name, $options);
         $deployment = $result->getDeployment(); 
         $this->assertCount($expectedInstancesCount, $deployment->getRoleInstanceList());
+    }
+ 
+    /**
+     * @covers WindowsAzure\ServiceManagement\ServiceManagementRestProxy::rebootRoleInstance
+     * @covers WindowsAzure\ServiceManagement\ServiceManagementRestProxy::_getRoleInstancePath
+     * @covers WindowsAzure\ServiceManagement\ServiceManagementRestProxy::_getDeploymentPath
+     * @covers WindowsAzure\ServiceManagement\ServiceManagementRestProxy::_getPath
+     * @covers WindowsAzure\ServiceManagement\ServiceManagementRestProxy::_createRequestXml
+     * @covers WindowsAzure\ServiceManagement\Models\AsynchronousOperationResult::create
+     * @group Deployment
+     */
+    public function testRebootRoleInstance()
+    {
+        // Setup
+        $name = 'testRebootRoleInstance';
+        $roleName = 'WebRole1_IN_0';
+        $options = new CreateDeploymentOptions();
+        $options->setStartDeployment(true);
+        $this->createDeployment(
+            $name,
+            $this->defaultSlot,
+            $name,
+            $options
+        );
+        $options = new GetDeploymentOptions();
+        $options->setDeploymentName($name);
+        
+        $this->waitUntilDeploymentReachStatus($name, DeploymentStatus::RUNNING);
+        
+        // Test
+        $result = $this->restProxy->rebootRoleInstance($name, $roleName, $options);
+        
+        // Block until reboot request is completed
+        $this->blockUntilAsyncSucceed($result);
+        
+        // Assert
+        $result = $this->restProxy->getDeployment($name, $options);
+        $deployment = $result->getDeployment(); 
+        $roleInstanceList = $deployment->getRoleInstanceList();
+        $webRoleInstance = $roleInstanceList[0];
+        $this->assertEquals('StartingVM', $webRoleInstance->getInstanceStatus());
     }
 }

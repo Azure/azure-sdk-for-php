@@ -165,6 +165,40 @@ class ServiceManagementRestProxy extends RestProxy
         return $this->_getPath($path, $deploymentName);
     }
     
+    private function _getRoleInstancePath($name, $options, $roleName)
+    {
+        $path = $this->_getDeploymentPath($name, $options) . '/roleinstances';
+        return "$path/$roleName";
+    }
+    
+    /**
+     * Gets the deployment URI path using the slot or name.
+     * 
+     * @param string               $name    The hosted service name.
+     * @param GetDeploymentOptions $options The optional parameters.
+     * 
+     * @return string
+     */
+    private function _getDeploymentPath($name, $options)
+    {
+        $slot           = $options->getSlot();
+        $deploymentName = $options->getDeploymentName();
+        $path           = null;
+        
+        Validate::isTrue(
+            !empty($slot) || !empty($deploymentName),
+            Resources::INVALID_DEPLOYMENT_LOCATOR_MSG
+        );
+        
+        if (!empty($slot)) {
+            $path = $this->_getDeploymentPathUsingSlot($name, $slot);
+        } else {
+            $path = $this->_getDeploymentPathUsingName($name, $deploymentName);
+        }
+        
+        return $path;
+    }
+    
     /**
      * Constructs URI path for storage service key.
      * 
@@ -962,34 +996,6 @@ class ServiceManagementRestProxy extends RestProxy
     }
     
     /**
-     * Gets the deployment URI path using the slot or name.
-     * 
-     * @param string               $name    The hosted service name.
-     * @param GetDeploymentOptions $options The optional parameters.
-     * 
-     * @return string
-     */
-    private function _getDeploymentPath($name, $options)
-    {
-        $slot           = $options->getSlot();
-        $deploymentName = $options->getDeploymentName();
-        $path           = null;
-        
-        Validate::isTrue(
-            !empty($slot) || !empty($deploymentName),
-            Resources::INVALID_DEPLOYMENT_LOCATOR_MSG
-        );
-        
-        if (!empty($slot)) {
-            $path = $this->_getDeploymentPathUsingSlot($name, $slot);
-        } else {
-            $path = $this->_getDeploymentPathUsingName($name, $deploymentName);
-        }
-        
-        return $path;
-    }
-    
-    /**
      * Returns configuration information, status, and system properties for a 
      * deployment.
      * 
@@ -1359,9 +1365,9 @@ class ServiceManagementRestProxy extends RestProxy
      * environment (staging or production), or by specifying the deployment's unique
      * name.
      * 
-     * @param string                    $name     The hosted service name.
-     * @param string                    $roleName The role instance name.
-     * @param RebootRoleInstanceOptions $options  The optional parameters.
+     * @param string               $name     The hosted service name.
+     * @param string               $roleName The role instance name.
+     * @param GetDeploymentOptions $options  The optional parameters.
      * 
      * @return AsynchronousOperationResult
      * 
@@ -1369,7 +1375,23 @@ class ServiceManagementRestProxy extends RestProxy
      */
     public function rebootRoleInstance($name, $roleName, $options)
     {
-        throw new \Exception(Resources::NOT_IMPLEMENTED_MSG);
+        Validate::isString($name, 'name');
+        Validate::notNullOrEmpty($name, 'name');
+        Validate::isString($roleName, 'roleName');
+        Validate::notNullOrEmpty($roleName, 'roleName');
+        Validate::notNullOrEmpty($options, 'options');
+        
+        $context = new HttpCallContext();
+        $context->setMethod(Resources::HTTP_POST);
+        $context->setPath($this->_getRoleInstancePath($name, $options, $roleName));
+        $context->addStatusCode(Resources::STATUS_ACCEPTED);
+        $context->addQueryParameter(Resources::QP_COMP, Resources::QPV_REBOOT);
+        $context->addHeader(Resources::CONTENT_TYPE, Resources::XML_CONTENT_TYPE);
+        $context->addHeader(Resources::CONTENT_LENGTH_NO_SPACE, 0);
+
+        $response = $this->sendContext($context);
+        
+        return AsynchronousOperationResult::create($response->getHeader());
     }
     
     /**
