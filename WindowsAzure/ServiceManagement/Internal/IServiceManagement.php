@@ -477,12 +477,12 @@ interface IServiceManagement extends FilterableService
      * environment (staging or production), or by specifying the deployment's unique
      * name.
      * 
-     * @param string                   $name          The hosted service name.
-     * @param string                   $upgradeDomain The integer value that 
+     * @param string               $name          The hosted service name.
+     * @param integer              $upgradeDomain The integer value that 
      * identifies the upgrade domain to walk. Upgrade domains are identified with a
      * zero-based index: the first upgrade domain has an ID of 0, the second has an
      * ID of 1, and so on.
-     * @param WalkUpgradeDomainOptions $options       The optional parameters.
+     * @param GetDeploymentOptions $options       The optional parameters.
      * 
      * @return AsynchronousOperationResult
      * 

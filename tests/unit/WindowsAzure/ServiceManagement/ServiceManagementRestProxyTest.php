@@ -1046,4 +1046,56 @@ class ServiceManagementRestProxyTest extends ServiceManagementRestProxyTestBase
         $deployment = $result->getDeployment(); 
         $this->assertCount($expectedInstancesCount, $deployment->getRoleInstanceList());
     }
+    
+    /**
+     * @covers WindowsAzure\ServiceManagement\ServiceManagementRestProxy::walkUpgradeDomain
+     * @covers WindowsAzure\ServiceManagement\ServiceManagementRestProxy::_getDeploymentPath
+     * @covers WindowsAzure\ServiceManagement\ServiceManagementRestProxy::_getPath
+     * @covers WindowsAzure\ServiceManagement\ServiceManagementRestProxy::_createRequestXml
+     * @covers WindowsAzure\ServiceManagement\Models\AsynchronousOperationResult::create
+     * @group Deployment
+     */
+    public function testWalkUpgradeDomain()
+    {
+        // Setup
+        $name = 'testupgradedomain';
+        $this->createDeployment($name);
+        $options = new UpgradeDeploymentOptions();
+        $options->setDeploymentName($name);
+        
+        $mode = Mode::MANUAL;
+        $configuration = $this->encodedComplexConfiguration;
+        $packageUrl = TestResources::complexPackageUrl();
+        $label = base64_encode($name . 'upgraded');
+        $force = true;
+        $options = new UpgradeDeploymentOptions();
+        $options->setDeploymentName($name);
+        $expectedInstancesCount = 4;
+        
+        $result = $this->restProxy->upgradeDeployment(
+            $name,
+            $mode,
+            $packageUrl,
+            $configuration,
+            $label,
+            $force,
+            $options
+        );
+        
+        // Block until the upgrade is done.
+        $this->blockUntilAsyncSucceed($result);
+        
+        // Test
+        $result = $this->restProxy->walkUpgradeDomain($name, 0, $options);
+        
+        // Block until the walk upgrade is done.
+        $this->blockUntilAsyncSucceed($result);
+        
+        // Assert
+        $options = new GetDeploymentOptions();
+        $options->setSlot(DeploymentSlot::PRODUCTION);
+        $result = $this->restProxy->getDeployment($name, $options);
+        $deployment = $result->getDeployment(); 
+        $this->assertCount($expectedInstancesCount, $deployment->getRoleInstanceList());
+    }
 }

@@ -265,6 +265,7 @@ class Resources
     const QPV_CONFIG     = 'config';
     const QPV_STATUS     = 'status';
     const QPV_UPGRADE    = 'upgrade';
+    const QPV_WALK_UPGRADE_DOMAIN = 'walkupgradedomain';
     
     // Request body content types
     const URL_ENCODED_CONTENT_TYPE = 'application/x-www-form-urlencoded';
@@ -353,6 +354,8 @@ class Resources
     const XTAG_ROLE_TO_UPGRADE = 'RoleToUpgrade';
     const XTAG_FORCE = 'Force';
     const XTAG_UPGRADE_DEPLOYMENT = 'UpgradeDeployment';
+    const XTAG_UPGRADE_DOMAIN = 'UpgradeDomain';
+    const XTAG_WALK_UPGRADE_DOMAIN = 'WalkUpgradeDomain';
 
     // Service Bus
     const LIST_TOPICS_PATH        = '$Resources/Topics';
