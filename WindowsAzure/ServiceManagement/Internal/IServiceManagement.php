@@ -533,16 +533,16 @@ interface IServiceManagement extends FilterableService
      * deployment environment (staging or production), or by specifying the 
      * deployment's unique name.
      * 
-     * @param string                         $name    The hosted service name.
-     * @param string                         $mode    Specifies whether the rollback
+     * @param string               $name    The hosted service name.
+     * @param string               $mode    Specifies whether the rollback
      * should proceed automatically or not. Auto, The rollback proceeds without
      * further user input. Manual, You must call the walkUpgradeDomain API to apply
      * the rollback to each upgrade domain.
-     * @param boolean                        $force   Specifies whether the rollback 
+     * @param boolean              $force   Specifies whether the rollback 
      * should proceed even when it will cause local data to be lost from some role 
      * instances. True if the rollback should proceed; otherwise false if the 
      * rollback should fail.
-     * @param RollbackUpdateOrUpgradeOptions $options The optional parameters.
+     * @param GetDeploymentOptions $options The optional parameters.
      * 
      * @return none
      * 

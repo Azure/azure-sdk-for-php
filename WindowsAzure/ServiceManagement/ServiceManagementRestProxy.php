@@ -1449,16 +1449,16 @@ class ServiceManagementRestProxy extends RestProxy
      * deployment environment (staging or production), or by specifying the 
      * deployment's unique name.
      * 
-     * @param string                         $name    The hosted service name.
-     * @param string                         $mode    Specifies whether the rollback
+     * @param string               $name    The hosted service name.
+     * @param string               $mode    Specifies whether the rollback
      * should proceed automatically or not. Auto, The rollback proceeds without
      * further user input. Manual, You must call the walkUpgradeDomain API to apply
      * the rollback to each upgrade domain.
-     * @param boolean                        $force   Specifies whether the rollback 
+     * @param boolean              $force   Specifies whether the rollback 
      * should proceed even when it will cause local data to be lost from some role 
      * instances. True if the rollback should proceed; otherwise false if the 
      * rollback should fail.
-     * @param RollbackUpdateOrUpgradeOptions $options The optional parameters.
+     * @param GetDeploymentOptions $options The optional parameters.
      * 
      * @return none
      * 
@@ -1466,6 +1466,39 @@ class ServiceManagementRestProxy extends RestProxy
      */
     public function rollbackUpdateOrUpgrade($name, $mode, $force, $options)
     {
-        throw new \Exception(Resources::NOT_IMPLEMENTED_MSG);
+        Validate::isString($name, 'name');
+        Validate::notNullOrEmpty($name, 'name');
+        Validate::isString($mode, 'mode');
+        Validate::isTrue(Mode::isValid($mode), Resources::INVALID_CHANGE_MODE_MSG);
+        Validate::isBoolean($force, 'force');
+        Validate::notNullOrEmpty($force, 'force');
+        Validate::notNullOrEmpty($options, 'options');
+        
+        $xmlElements = array(
+            Resources::XTAG_MODE  => $mode,
+            Resources::XTAG_FORCE => Utilities::booleanToString($force),
+        );
+        $body        = $this->_createRequestXml(
+            $xmlElements,
+            Resources::XTAG_ROLLBACK_UPDATE_OR_UPGRADE
+        );
+        $context     = new HttpCallContext();
+        $context->setMethod(Resources::HTTP_POST);
+        $context->setPath($this->_getDeploymentPath($name, $options) . '/');
+        $context->addStatusCode(Resources::STATUS_ACCEPTED);
+        $context->addQueryParameter(
+            Resources::QP_COMP,
+            Resources::QPV_ROLLBACK
+        );
+        $context->setBody($body);
+        $context->addHeader(
+            Resources::CONTENT_TYPE,
+            Resources::XML_CONTENT_TYPE
+        );
+
+        assert(Utilities::endsWith($context->getPath(), '/'));
+        $response = $this->sendContext($context);
+        
+        return AsynchronousOperationResult::create($response->getHeader());
     }
 }
