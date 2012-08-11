@@ -73,6 +73,38 @@ class ServiceManagementRestProxy extends RestProxy
     private $_subscriptionId;
     
     /**
+     * Sends an order request for the specified role instance.
+     * 
+     * @param string               $name     The hosted service name.
+     * @param string               $roleName The role instance name.
+     * @param GetDeploymentOptions $options  The optional parameters.
+     * @param string               $order    The order name which is used as value 
+     * for query parameter 'comp'.
+     * 
+     * @return AsynchronousOperationResult
+     */
+    private function _sendRoleInstanceOrder($name, $roleName, $options, $order)
+    {
+        Validate::isString($name, 'name');
+        Validate::notNullOrEmpty($name, 'name');
+        Validate::isString($roleName, 'roleName');
+        Validate::notNullOrEmpty($roleName, 'roleName');
+        Validate::notNullOrEmpty($options, 'options');
+        
+        $context = new HttpCallContext();
+        $context->setMethod(Resources::HTTP_POST);
+        $context->setPath($this->_getRoleInstancePath($name, $options, $roleName));
+        $context->addStatusCode(Resources::STATUS_ACCEPTED);
+        $context->addQueryParameter(Resources::QP_COMP, $order);
+        $context->addHeader(Resources::CONTENT_TYPE, Resources::XML_CONTENT_TYPE);
+        $context->addHeader(Resources::CONTENT_LENGTH_NO_SPACE, 0);
+
+        $response = $this->sendContext($context);
+        
+        return AsynchronousOperationResult::create($response->getHeader());
+    }
+    
+    /**
      * Constructs URI path for given service management resource.
      * 
      * @param string $serviceManagementResource The resource name.
@@ -1375,23 +1407,12 @@ class ServiceManagementRestProxy extends RestProxy
      */
     public function rebootRoleInstance($name, $roleName, $options)
     {
-        Validate::isString($name, 'name');
-        Validate::notNullOrEmpty($name, 'name');
-        Validate::isString($roleName, 'roleName');
-        Validate::notNullOrEmpty($roleName, 'roleName');
-        Validate::notNullOrEmpty($options, 'options');
-        
-        $context = new HttpCallContext();
-        $context->setMethod(Resources::HTTP_POST);
-        $context->setPath($this->_getRoleInstancePath($name, $options, $roleName));
-        $context->addStatusCode(Resources::STATUS_ACCEPTED);
-        $context->addQueryParameter(Resources::QP_COMP, Resources::QPV_REBOOT);
-        $context->addHeader(Resources::CONTENT_TYPE, Resources::XML_CONTENT_TYPE);
-        $context->addHeader(Resources::CONTENT_LENGTH_NO_SPACE, 0);
-
-        $response = $this->sendContext($context);
-        
-        return AsynchronousOperationResult::create($response->getHeader());
+        return $this->_sendRoleInstanceOrder(
+            $name,
+            $roleName,
+            $options,
+            Resources::QPV_REBOOT
+        );
     }
     
     /**
@@ -1401,9 +1422,9 @@ class ServiceManagementRestProxy extends RestProxy
      * environment (staging or production), or by specifying the deployment's unique
      * name.
      * 
-     * @param string                     $name     The hosted service name.
-     * @param string                     $roleName The role instance name.
-     * @param ReimageRoleInstanceOptions $options  The optional parameters.
+     * @param string               $name     The hosted service name.
+     * @param string               $roleName The role instance name.
+     * @param GetDeploymentOptions $options  The optional parameters.
      * 
      * @return AsynchronousOperationResult
      * 
@@ -1411,7 +1432,12 @@ class ServiceManagementRestProxy extends RestProxy
      */
     public function reimageRoleInstance($name, $roleName, $options)
     {
-        throw new \Exception(Resources::NOT_IMPLEMENTED_MSG);
+        return $this->_sendRoleInstanceOrder(
+            $name,
+            $roleName,
+            $options,
+            Resources::QPV_REIMAGE
+        );
     }
     
     /**

@@ -514,9 +514,9 @@ interface IServiceManagement extends FilterableService
      * environment (staging or production), or by specifying the deployment's unique
      * name.
      * 
-     * @param string                     $name     The hosted service name.
-     * @param string                     $roleName The role instance name.
-     * @param ReimageRoleInstanceOptions $options  The optional parameters.
+     * @param string               $name     The hosted service name.
+     * @param string               $roleName The role instance name.
+     * @param GetDeploymentOptions $options  The optional parameters.
      * 
      * @return AsynchronousOperationResult
      * 

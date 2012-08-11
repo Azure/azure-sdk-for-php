@@ -268,6 +268,7 @@ class Resources
     const QPV_UPGRADE    = 'upgrade';
     const QPV_WALK_UPGRADE_DOMAIN = 'walkupgradedomain';
     const QPV_REBOOT = 'reboot';
+    const QPV_REIMAGE = 'reimage';
     
     // Request body content types
     const URL_ENCODED_CONTENT_TYPE = 'application/x-www-form-urlencoded';
