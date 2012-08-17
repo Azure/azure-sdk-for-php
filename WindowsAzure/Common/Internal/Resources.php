@@ -269,6 +269,7 @@ class Resources
     const QPV_WALK_UPGRADE_DOMAIN = 'walkupgradedomain';
     const QPV_REBOOT = 'reboot';
     const QPV_REIMAGE = 'reimage';
+    const QPV_ROLLBACK = 'rollback';
     
     // Request body content types
     const URL_ENCODED_CONTENT_TYPE = 'application/x-www-form-urlencoded';
@@ -359,6 +360,7 @@ class Resources
     const XTAG_UPGRADE_DEPLOYMENT = 'UpgradeDeployment';
     const XTAG_UPGRADE_DOMAIN = 'UpgradeDomain';
     const XTAG_WALK_UPGRADE_DOMAIN = 'WalkUpgradeDomain';
+    const XTAG_ROLLBACK_UPDATE_OR_UPGRADE = 'RollbackUpdateOrUpgrade';
 
     // Service Bus
     const LIST_TOPICS_PATH        = '$Resources/Topics';

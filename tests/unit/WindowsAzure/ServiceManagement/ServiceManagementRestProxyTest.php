@@ -1185,4 +1185,52 @@ class ServiceManagementRestProxyTest extends ServiceManagementRestProxyTestBase
         $webRoleInstance = $roleInstanceList[0];
         $this->assertEquals('StoppedVM', $webRoleInstance->getInstanceStatus());
     }
+    
+    /**
+     * @covers WindowsAzure\ServiceManagement\ServiceManagementRestProxy::rollbackUpdateOrUpgrade
+     * @covers WindowsAzure\ServiceManagement\ServiceManagementRestProxy::_getDeploymentPath
+     * @covers WindowsAzure\ServiceManagement\ServiceManagementRestProxy::_getPath
+     * @covers WindowsAzure\ServiceManagement\ServiceManagementRestProxy::_createRequestXml
+     * @covers WindowsAzure\ServiceManagement\Models\AsynchronousOperationResult::create
+     * @group Deployment
+     */
+    public function testRollbackUpgradeOrUpdate()
+    {
+        $name = 'testRollbackUpgradeOrUpdate';
+        $newConfig = '<?xml version="1.0" encoding="utf-8"?>
+                        <ServiceConfiguration serviceName="WindowsAzureProject2" xmlns="http://schemas.microsoft.com/ServiceHosting/2008/10/ServiceConfiguration" osFamily="1" osVersion="*">
+                        <Role name="WebRole1">
+                            <Instances count="2" />
+                            <ConfigurationSettings>
+                                <Setting name="Microsoft.WindowsAzure.Plugins.Diagnostics.ConnectionString" value="UseDevelopmentStorage=false" />
+                            </ConfigurationSettings>
+                        </Role>
+                        <Role name="WorkerRole1">
+                            <Instances count="2" />
+                            <ConfigurationSettings>
+                                <Setting name="Microsoft.WindowsAzure.Plugins.Diagnostics.ConnectionString" value="UseDevelopmentStorage=false" />
+                            </ConfigurationSettings>
+                        </Role>
+                        </ServiceConfiguration>';
+        $this->createComplexDeployment($name);
+        $options = new ChangeDeploymentConfigurationOptions();
+        $options->setSlot($this->defaultSlot);
+        $this->restProxy->changeDeploymentConfiguration($name, $newConfig, $options);
+        $mode = Mode::AUTO;
+        $force = true;
+        $expectedInstanceCount = 4;
+        
+        $this->waitUntilRollbackIsAllowed($name);
+        
+        // Test
+        $result = $this->restProxy->rollbackUpdateOrUpgrade($name, $mode, $force, $options);
+        
+        // Block until reboot request is completed
+        $this->blockUntilAsyncSucceed($result);
+        
+        // Assert
+        $result = $this->restProxy->getDeployment($name, $options);
+        $deployment = $result->getDeployment(); 
+        $this->assertCount($expectedInstanceCount, $deployment->getRoleInstanceList());
+    }
 }

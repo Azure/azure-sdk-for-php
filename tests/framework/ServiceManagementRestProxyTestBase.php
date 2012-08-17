@@ -257,6 +257,18 @@ class ServiceManagementRestProxyTestBase extends RestProxyTestBase
         } while($currentStatus != $status);
     }
     
+    public function waitUntilRollbackIsAllowed($name)
+    {
+        $options = new GetDeploymentOptions();
+        $options->setSlot($this->defaultSlot);
+        
+        do {
+            $result = $this->restProxy->getDeployment($name, $options);
+            $deployment = $result->getDeployment(); 
+            $rollbackAllowed = $deployment->getRollbackAllowed();
+        } while(!$rollbackAllowed);
+    }
+    
     public function waitUntilRoleInstanceReachStatus($name, $state, $roleInstanceName)
     {
         $options = new GetDeploymentOptions();
