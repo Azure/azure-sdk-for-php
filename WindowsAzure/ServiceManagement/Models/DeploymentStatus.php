@@ -25,7 +25,7 @@
 namespace WindowsAzure\ServiceManagement\Models;
 
 /**
- * Basic Windows Azure service properties.
+ * The possible values for deployment status.
  *
  * @category  Microsoft
  * @package   WindowsAzure\ServiceManagement\Models
@@ -35,61 +35,27 @@ namespace WindowsAzure\ServiceManagement\Models;
  * @version   Release: @package_version@
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
-class ServiceProperties
+class DeploymentStatus
 {
-    /**
-     * @var string
-     */
-    private $_url;
+    const SUSPENDED = 'Suspended';
+    const RUNNING   = 'Running';
     
     /**
-     * @var string
-     */
-    private $_serviceName;
-    
-    /**
-     * Gets the url.
+     * Validates the provided status.
      * 
-     * @return string
+     * @param string $status The deployment status.
+     * 
+     * @return boolean
      */
-    public function getUrl()
+    public static function isValid($status)
     {
-        return $this->_url;
-    }
-    
-    /**
-     * Sets the url.
-     * 
-     * @param string $url The url.
-     * 
-     * @return none
-     */
-    public function setUrl($url)
-    {
-        $this->_url = $url;
-    }
-    
-    /**
-     * Gets the serviceName.
-     * 
-     * @return string
-     */
-    public function getServiceName()
-    {
-        return $this->_serviceName;
-    }
-    
-    /**
-     * Sets the serviceName.
-     * 
-     * @param string $serviceName The serviceName.
-     * 
-     * @return none
-     */
-    public function setServiceName($serviceName)
-    {
-        $this->_serviceName = $serviceName;
+        switch (strtolower($status)) {
+        case strtolower(self::SUSPENDED):
+        case strtolower(self::RUNNING):
+        return true;
+        
+        default:
+        return false;
+        }
     }
 }
-
-

@@ -23,10 +23,10 @@
  */
 
 namespace Tests\Unit\WindowsAzure\ServiceManagement\Models;
-use WindowsAzure\ServiceManagement\Models\ListStorageServicesResult;
+use WindowsAzure\ServiceManagement\Models\GetDeploymentOptions;
 
 /**
- * Unit tests for class ListStorageServicesResult
+ * Unit tests for class GetDeploymentOptions
  *
  * @category  Microsoft
  * @package   Tests\Unit\WindowsAzure\ServiceManagement\Models
@@ -36,22 +36,39 @@ use WindowsAzure\ServiceManagement\Models\ListStorageServicesResult;
  * @version   Release: @package_version@
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
-class ListStorageServicesResultTest extends \PHPUnit_Framework_TestCase
+class GetDeploymentOptionsTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @covers WindowsAzure\ServiceManagement\Models\ListStorageServicesResult::setStorageServices
-     * @covers WindowsAzure\ServiceManagement\Models\ListStorageServicesResult::getStorageServices
+     * @covers WindowsAzure\ServiceManagement\Models\GetDeploymentOptions::setSlot
+     * @covers WindowsAzure\ServiceManagement\Models\GetDeploymentOptions::getSlot
      */
-    public function testSetStorageServices()
+    public function testSetSlot()
     {
         // Setup
-        $expected = array();
-        $result = new ListStorageServicesResult(array(), 'tag');
+        $expected = 'production';
+        $options = new GetDeploymentOptions();
         
         // Test
-        $result->setStorageServices($expected);
+        $options->setSlot($expected);
         
         // Assert
-        $this->assertEquals($expected, $result->getStorageServices());
+        $this->assertEquals($expected, $options->getSlot());
+    }
+    
+    /**
+     * @covers WindowsAzure\ServiceManagement\Models\GetDeploymentOptions::setDeploymentName
+     * @covers WindowsAzure\ServiceManagement\Models\GetDeploymentOptions::getDeploymentName
+     */
+    public function testSetDeploymentName()
+    {
+        // Setup
+        $expected = 'my deployment';
+        $options = new GetDeploymentOptions();
+        
+        // Test
+        $options->setDeploymentName($expected);
+        
+        // Assert
+        $this->assertEquals($expected, $options->getDeploymentName());
     }
 }

@@ -23,10 +23,10 @@
  */
 
 namespace Tests\Unit\WindowsAzure\ServiceManagement\Models;
-use WindowsAzure\ServiceManagement\Models\ListStorageServicesResult;
+use WindowsAzure\ServiceManagement\Models\CreateDeploymentOptions;
 
 /**
- * Unit tests for class ListStorageServicesResult
+ * Unit tests for class CreateDeploymentOptions
  *
  * @category  Microsoft
  * @package   Tests\Unit\WindowsAzure\ServiceManagement\Models
@@ -36,22 +36,39 @@ use WindowsAzure\ServiceManagement\Models\ListStorageServicesResult;
  * @version   Release: @package_version@
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
-class ListStorageServicesResultTest extends \PHPUnit_Framework_TestCase
+class CreateDeploymentOptionsTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @covers WindowsAzure\ServiceManagement\Models\ListStorageServicesResult::setStorageServices
-     * @covers WindowsAzure\ServiceManagement\Models\ListStorageServicesResult::getStorageServices
+     * @covers WindowsAzure\ServiceManagement\Models\CreateDeploymentOptions::setStartDeployment
+     * @covers WindowsAzure\ServiceManagement\Models\CreateDeploymentOptions::getStartDeployment
      */
-    public function testSetStorageServices()
+    public function testSetStartDeployment()
     {
         // Setup
-        $expected = array();
-        $result = new ListStorageServicesResult(array(), 'tag');
+        $expected = true;
+        $options = new CreateDeploymentOptions();
         
         // Test
-        $result->setStorageServices($expected);
+        $options->setStartDeployment($expected);
         
         // Assert
-        $this->assertEquals($expected, $result->getStorageServices());
+        $this->assertEquals($expected, $options->getStartDeployment());
+    }
+    
+    /**
+     * @covers WindowsAzure\ServiceManagement\Models\CreateDeploymentOptions::setTreatWarningsAsErrors
+     * @covers WindowsAzure\ServiceManagement\Models\CreateDeploymentOptions::getTreatWarningsAsErrors
+     */
+    public function testSetTreatWarningsAsErrors()
+    {
+        // Setup
+        $expected = true;
+        $options = new CreateDeploymentOptions();
+        
+        // Test
+        $options->setTreatWarningsAsErrors($expected);
+        
+        // Assert
+        $this->assertEquals($expected, $options->getTreatWarningsAsErrors());
     }
 }

@@ -27,7 +27,7 @@ use WindowsAzure\Common\Internal\Utilities;
 use WindowsAzure\Common\Internal\Resources;
 
 /**
- * The result of calling getStorageServiceProperties API.
+ * The result of calling getHostedServiceProperties API.
  *
  * @category  Microsoft
  * @package   WindowsAzure\ServiceManagement\Models
@@ -37,51 +37,51 @@ use WindowsAzure\Common\Internal\Resources;
  * @version   Release: @package_version@
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
-class GetStorageServicePropertiesResult
+class GetHostedServicePropertiesResult
 {
     /**
-     * @var StorageService
+     * @var HostedService
      */
-    private $_storageService;
+    private $_hostedService;
     
     /**
-     * Creates GetStorageServicePropertiesResult from parsed response.
+     * Creates GetHostedServicePropertiesResult from parsed response.
      * 
      * @param array $parsed The parsed response in array representation.
      * 
-     * @return GetStorageServicePropertiesResult 
+     * @return GetHostedServicePropertiesResult 
      */
     public static function create($parsed)
     {
-        $result                  = new GetStorageServicePropertiesResult();
-        $properties              = Utilities::tryGetValue(
+        $result                 = new GetHostedServicePropertiesResult();
+        $properties             = Utilities::tryGetValue(
             $parsed,
-            Resources::XTAG_STORAGE_SERVICE_PROPERTIES
+            Resources::XTAG_HOSTED_SERVICE_PROPERTIES
         );
-        $result->_storageService = new StorageService($parsed, $properties);
+        $result->_hostedService = new HostedService($parsed, $properties);
         
         return $result;
     }
     
     /**
-     * Gets the storageService.
+     * Gets the hostedService.
      * 
-     * @return StorageService
+     * @return HostedService
      */
-    public function getStorageService()
+    public function getHostedService()
     {
-        return $this->_storageService;
+        return $this->_hostedService;
     }
     
     /**
-     * Sets the storageService.
+     * Sets the hostedService.
      * 
-     * @param StorageService $storageService The storageService.
+     * @param HostedService $hostedService The hostedService.
      * 
      * @return none
      */
-    public function setStorageService($storageService)
+    public function setHostedService($hostedService)
     {
-        $this->_storageService = $storageService;
+        $this->_hostedService = $hostedService;
     }
 }

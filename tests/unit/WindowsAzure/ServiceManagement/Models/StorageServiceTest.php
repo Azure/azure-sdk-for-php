@@ -78,6 +78,40 @@ class StorageServiceTest extends \PHPUnit_Framework_TestCase
         // Assert
         $this->assertEquals($expected, $storageService->getAffinityGroup());
     }
+    
+    /**
+     * @covers WindowsAzure\ServiceManagement\Models\StorageService::setEndpoints
+     * @covers WindowsAzure\ServiceManagement\Models\StorageService::getEndpoints
+     */
+    public function testSetEndpoints()
+    {
+        // Setup
+        $expected = array();
+        $result = new StorageService();
+        
+        // Test
+        $result->setEndpoints($expected);
+        
+        // Assert
+        $this->assertEquals($expected, $result->getEndpoints());
+    }
+    
+    /**
+     * @covers WindowsAzure\ServiceManagement\Models\StorageService::setStatus
+     * @covers WindowsAzure\ServiceManagement\Models\StorageService::getStatus
+     */
+    public function testSetStatus()
+    {
+        // Setup
+        $expected = 'status';
+        $result = new StorageService();
+        
+        // Test
+        $result->setStatus($expected);
+        
+        // Assert
+        $this->assertEquals($expected, $result->getStatus());
+    }
 }
 
 

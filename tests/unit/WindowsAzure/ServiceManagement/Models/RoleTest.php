@@ -15,51 +15,60 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   WindowsAzure\Blob\Models
+ * @package   Tests\Unit\WindowsAzure\ServiceManagement\Models
  * @author    Azure PHP SDK <azurephpsdk@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
- 
-namespace WindowsAzure\Blob\Models;
+
+namespace Tests\Unit\WindowsAzure\ServiceManagement\Models;
+use WindowsAzure\ServiceManagement\Models\Role;
 
 /**
- * Holds available blob block types
+ * Unit tests for class Role
  *
  * @category  Microsoft
- * @package   WindowsAzure\Blob\Models
+ * @package   Tests\Unit\WindowsAzure\ServiceManagement\Models
  * @author    Azure PHP SDK <azurephpsdk@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @version   Release: @package_version@
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
-class BlobBlockType
+class RoleTest extends \PHPUnit_Framework_TestCase
 {
-    const COMMITTED_TYPE   = 'Committed';
-    const UNCOMMITTED_TYPE = 'Uncommitted';
-    const LATEST_TYPE      = 'Latest';
+    /**
+     * @covers WindowsAzure\ServiceManagement\Models\Role::setRoleName
+     * @covers WindowsAzure\ServiceManagement\Models\Role::getRoleName
+     */
+    public function testSetRoleName()
+    {
+        // Setup
+        $expected = 'rolename';
+        $role = new Role();
+        
+        // Test
+        $role->setRoleName($expected);
+        
+        // Assert
+        $this->assertEquals($expected, $role->getRoleName());
+    }
     
     /**
-     * Validates the provided type.
-     * 
-     * @param string $type The entry type.
-     * 
-     * @return boolean
+     * @covers WindowsAzure\ServiceManagement\Models\Role::setOsVersion
+     * @covers WindowsAzure\ServiceManagement\Models\Role::getOsVersion
      */
-    public static function isValid($type)
+    public function testSetOsVersion()
     {
-        switch ($type) {
-        case self::COMMITTED_TYPE:
-        case self::LATEST_TYPE:
-        case self::UNCOMMITTED_TYPE:
-        return true;
+        // Setup
+        $expected = 'osversion';
+        $role = new Role();
         
-        default:
-        return false;
-        }
+        // Test
+        $role->setOsVersion($expected);
+        
+        // Assert
+        $this->assertEquals($expected, $role->getOsVersion());
     }
 }
-
-

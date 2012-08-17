@@ -15,51 +15,50 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   WindowsAzure\Blob\Models
+ * @package   Tests\Unit\WindowsAzure\ServiceManagement\Models
  * @author    Azure PHP SDK <azurephpsdk@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
- 
-namespace WindowsAzure\Blob\Models;
+
+namespace Tests\Unit\WindowsAzure\ServiceManagement\Models;
+use WindowsAzure\ServiceManagement\Models\DeploymentSlot;
 
 /**
- * Holds available blob block types
+ * Unit tests for class DeploymentSlot
  *
  * @category  Microsoft
- * @package   WindowsAzure\Blob\Models
+ * @package   Tests\Unit\WindowsAzure\ServiceManagement\Models
  * @author    Azure PHP SDK <azurephpsdk@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @version   Release: @package_version@
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
-class BlobBlockType
+class DeploymentSlotTest extends \PHPUnit_Framework_TestCase
 {
-    const COMMITTED_TYPE   = 'Committed';
-    const UNCOMMITTED_TYPE = 'Uncommitted';
-    const LATEST_TYPE      = 'Latest';
+    /**
+     * @covers WindowsAzure\ServiceManagement\Models\DeploymentSlot::isValid
+     */
+    public function testIsValidWithValid()
+    {
+        // Test
+        $actual = DeploymentSlot::isValid(DeploymentSlot::STAGING);
+        
+        // Assert
+        $this->assertTrue($actual);
+    }
     
     /**
-     * Validates the provided type.
-     * 
-     * @param string $type The entry type.
-     * 
-     * @return boolean
+     * @covers WindowsAzure\ServiceManagement\Models\DeploymentSlot::isValid
      */
-    public static function isValid($type)
+    public function testIsValidWithInvalid()
     {
-        switch ($type) {
-        case self::COMMITTED_TYPE:
-        case self::LATEST_TYPE:
-        case self::UNCOMMITTED_TYPE:
-        return true;
+        // Test
+        $actual = DeploymentSlot::isValid('invalid');
         
-        default:
-        return false;
-        }
+        // Assert
+        $this->assertFalse($actual);
     }
 }
-
-

@@ -23,11 +23,10 @@
  */
  
 namespace WindowsAzure\ServiceManagement\Models;
-use WindowsAzure\Common\Internal\Utilities;
-use WindowsAzure\Common\Internal\Resources;
+use WindowsAzure\Common\Internal\Validate;
 
 /**
- * The result of calling getStorageServiceProperties API.
+ * The optional parameters for updateStorageService API.
  *
  * @category  Microsoft
  * @package   WindowsAzure\ServiceManagement\Models
@@ -37,51 +36,65 @@ use WindowsAzure\Common\Internal\Resources;
  * @version   Release: @package_version@
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
-class GetStorageServicePropertiesResult
+class UpdateServiceOptions
 {
     /**
-     * @var StorageService
+     * @var string
      */
-    private $_storageService;
+    private $_label;
     
     /**
-     * Creates GetStorageServicePropertiesResult from parsed response.
-     * 
-     * @param array $parsed The parsed response in array representation.
-     * 
-     * @return GetStorageServicePropertiesResult 
+     * @var string
      */
-    public static function create($parsed)
+    private $_description;
+    
+    /**
+     * Gets the label.
+     * 
+     * @return string
+     */
+    public function getLabel()
     {
-        $result                  = new GetStorageServicePropertiesResult();
-        $properties              = Utilities::tryGetValue(
-            $parsed,
-            Resources::XTAG_STORAGE_SERVICE_PROPERTIES
-        );
-        $result->_storageService = new StorageService($parsed, $properties);
-        
-        return $result;
+        return $this->_label;
     }
     
     /**
-     * Gets the storageService.
+     * Sets the label.
      * 
-     * @return StorageService
-     */
-    public function getStorageService()
-    {
-        return $this->_storageService;
-    }
-    
-    /**
-     * Sets the storageService.
-     * 
-     * @param StorageService $storageService The storageService.
+     * @param string $label The label.
      * 
      * @return none
      */
-    public function setStorageService($storageService)
+    public function setLabel($label)
     {
-        $this->_storageService = $storageService;
+        Validate::isString($label, 'label');
+        
+        $this->_label = $label;
+    }
+    
+    /**
+     * Gets the description.
+     * 
+     * @return string
+     */
+    public function getDescription()
+    {
+        return $this->_description;
+    }
+    
+    /**
+     * Sets the description.
+     * 
+     * @param string $description The description.
+     * 
+     * @return none
+     */
+    public function setDescription($description)
+    {
+        Validate::isString($description, 'description');
+        
+        $this->_description = $description;
     }
 }
+
+
