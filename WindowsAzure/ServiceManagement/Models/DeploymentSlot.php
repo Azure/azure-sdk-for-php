@@ -23,11 +23,9 @@
  */
  
 namespace WindowsAzure\ServiceManagement\Models;
-use WindowsAzure\Common\Internal\Utilities;
-use WindowsAzure\Common\Internal\Resources;
 
 /**
- * The result of calling getStorageServiceProperties API.
+ * Valid deployment slots that can be used on Windows Azure.
  *
  * @category  Microsoft
  * @package   WindowsAzure\ServiceManagement\Models
@@ -37,51 +35,27 @@ use WindowsAzure\Common\Internal\Resources;
  * @version   Release: @package_version@
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
-class GetStorageServicePropertiesResult
+class DeploymentSlot
 {
-    /**
-     * @var StorageService
-     */
-    private $_storageService;
+    const STAGING    = 'staging';
+    const PRODUCTION = 'production';
     
     /**
-     * Creates GetStorageServicePropertiesResult from parsed response.
+     * Validates the provided slot name.
      * 
-     * @param array $parsed The parsed response in array representation.
+     * @param string $slot The deployment slot name.
      * 
-     * @return GetStorageServicePropertiesResult 
+     * @return boolean
      */
-    public static function create($parsed)
+    public static function isValid($slot)
     {
-        $result                  = new GetStorageServicePropertiesResult();
-        $properties              = Utilities::tryGetValue(
-            $parsed,
-            Resources::XTAG_STORAGE_SERVICE_PROPERTIES
-        );
-        $result->_storageService = new StorageService($parsed, $properties);
+        switch (strtolower($slot)) {
+        case self::STAGING:
+        case self::PRODUCTION:
+        return true;
         
-        return $result;
-    }
-    
-    /**
-     * Gets the storageService.
-     * 
-     * @return StorageService
-     */
-    public function getStorageService()
-    {
-        return $this->_storageService;
-    }
-    
-    /**
-     * Sets the storageService.
-     * 
-     * @param StorageService $storageService The storageService.
-     * 
-     * @return none
-     */
-    public function setStorageService($storageService)
-    {
-        $this->_storageService = $storageService;
+        default:
+        return false;
+        }
     }
 }

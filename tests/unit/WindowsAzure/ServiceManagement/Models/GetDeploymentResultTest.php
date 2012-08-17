@@ -15,51 +15,44 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   WindowsAzure\Blob\Models
+ * @package   Tests\Unit\WindowsAzure\ServiceManagement\Models
  * @author    Azure PHP SDK <azurephpsdk@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
- 
-namespace WindowsAzure\Blob\Models;
+
+namespace Tests\Unit\WindowsAzure\ServiceManagement\Models;
+use WindowsAzure\ServiceManagement\Models\GetDeploymentResult;
+use WindowsAzure\ServiceManagement\Models\Deployment;
 
 /**
- * Holds available blob block types
+ * Unit tests for class GetDeploymentResult
  *
  * @category  Microsoft
- * @package   WindowsAzure\Blob\Models
+ * @package   Tests\Unit\WindowsAzure\ServiceManagement\Models
  * @author    Azure PHP SDK <azurephpsdk@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @version   Release: @package_version@
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
-class BlobBlockType
+class GetDeploymentResultTest extends \PHPUnit_Framework_TestCase
 {
-    const COMMITTED_TYPE   = 'Committed';
-    const UNCOMMITTED_TYPE = 'Uncommitted';
-    const LATEST_TYPE      = 'Latest';
-    
     /**
-     * Validates the provided type.
-     * 
-     * @param string $type The entry type.
-     * 
-     * @return boolean
+     * @covers WindowsAzure\ServiceManagement\Models\GetDeploymentResult::setDeployment
+     * @covers WindowsAzure\ServiceManagement\Models\GetDeploymentResult::getDeployment
      */
-    public static function isValid($type)
+    public function testSetDeployment()
     {
-        switch ($type) {
-        case self::COMMITTED_TYPE:
-        case self::LATEST_TYPE:
-        case self::UNCOMMITTED_TYPE:
-        return true;
+        // Setup
+        $expected = new Deployment();
+        $result = new GetDeploymentResult();
         
-        default:
-        return false;
-        }
+        // Test
+        $result->setDeployment($expected);
+        
+        // Assert
+        $this->assertEquals($expected, $result->getDeployment());
     }
 }
-
-

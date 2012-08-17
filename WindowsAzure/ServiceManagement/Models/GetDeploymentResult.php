@@ -23,11 +23,9 @@
  */
  
 namespace WindowsAzure\ServiceManagement\Models;
-use WindowsAzure\Common\Internal\Utilities;
-use WindowsAzure\Common\Internal\Resources;
 
 /**
- * The result of calling getStorageServiceProperties API.
+ * The result of calling getDeployment API.
  *
  * @category  Microsoft
  * @package   WindowsAzure\ServiceManagement\Models
@@ -37,51 +35,50 @@ use WindowsAzure\Common\Internal\Resources;
  * @version   Release: @package_version@
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
-class GetStorageServicePropertiesResult
+class GetDeploymentResult
 {
     /**
-     * @var StorageService
+     * @var Deployment
      */
-    private $_storageService;
+    private $_deployment;
     
     /**
-     * Creates GetStorageServicePropertiesResult from parsed response.
+     * Creates a new GetDeploymentResult from parsed response body.
      * 
-     * @param array $parsed The parsed response in array representation.
+     * @param array $parsed The parsed response body in array representation.
      * 
-     * @return GetStorageServicePropertiesResult 
+     * @return GetDeploymentResult
+     * 
+     * @static
      */
     public static function create($parsed)
     {
-        $result                  = new GetStorageServicePropertiesResult();
-        $properties              = Utilities::tryGetValue(
-            $parsed,
-            Resources::XTAG_STORAGE_SERVICE_PROPERTIES
-        );
-        $result->_storageService = new StorageService($parsed, $properties);
+        $result = new GetDeploymentResult();
+        
+        $result->setDeployment(Deployment::create($parsed));
         
         return $result;
     }
     
     /**
-     * Gets the storageService.
+     * Gets the deployment instance.
      * 
-     * @return StorageService
+     * @return Deployment
      */
-    public function getStorageService()
+    public function getDeployment()
     {
-        return $this->_storageService;
+        return $this->_deployment;
     }
     
     /**
-     * Sets the storageService.
+     * Sets the deployment.
      * 
-     * @param StorageService $storageService The storageService.
+     * @param Deployment $deployment The deployment instance.
      * 
      * @return none
      */
-    public function setStorageService($storageService)
+    public function setDeployment($deployment)
     {
-        $this->_storageService = $storageService;
+        $this->_deployment = $deployment;
     }
 }

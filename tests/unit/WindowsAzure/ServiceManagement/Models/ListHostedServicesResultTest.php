@@ -15,51 +15,43 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   WindowsAzure\Blob\Models
+ * @package   Tests\Unit\WindowsAzure\ServiceManagement\Models
  * @author    Azure PHP SDK <azurephpsdk@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
- 
-namespace WindowsAzure\Blob\Models;
+
+namespace Tests\Unit\WindowsAzure\ServiceManagement\Models;
+use WindowsAzure\ServiceManagement\Models\ListHostedServicesResult;
 
 /**
- * Holds available blob block types
+ * Unit tests for class ListHostedServicesResult
  *
  * @category  Microsoft
- * @package   WindowsAzure\Blob\Models
+ * @package   Tests\Unit\WindowsAzure\ServiceManagement\Models
  * @author    Azure PHP SDK <azurephpsdk@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @version   Release: @package_version@
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
-class BlobBlockType
+class ListHostedServicesResultTest extends \PHPUnit_Framework_TestCase
 {
-    const COMMITTED_TYPE   = 'Committed';
-    const UNCOMMITTED_TYPE = 'Uncommitted';
-    const LATEST_TYPE      = 'Latest';
-    
     /**
-     * Validates the provided type.
-     * 
-     * @param string $type The entry type.
-     * 
-     * @return boolean
+     * @covers WindowsAzure\ServiceManagement\Models\ListHostedServicesResult::setHostedServices
+     * @covers WindowsAzure\ServiceManagement\Models\ListHostedServicesResult::getHostedServices
      */
-    public static function isValid($type)
+    public function testSetHostedServices()
     {
-        switch ($type) {
-        case self::COMMITTED_TYPE:
-        case self::LATEST_TYPE:
-        case self::UNCOMMITTED_TYPE:
-        return true;
+        // Setup
+        $expected = array();
+        $result = new ListHostedServicesResult(array(), 'tag');
         
-        default:
-        return false;
-        }
+        // Test
+        $result->setHostedServices($expected);
+        
+        // Assert
+        $this->assertEquals($expected, $result->getHostedServices());
     }
 }
-
-

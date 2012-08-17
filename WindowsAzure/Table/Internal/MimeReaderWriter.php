@@ -27,6 +27,7 @@ require_once 'PEAR.php';
 require_once 'Mail/mimePart.php';
 require_once 'Mail/mimeDecode.php';
 use WindowsAzure\Common\Internal\Resources;
+use WindowsAzure\Common\Internal\Utilities;
 
 /**
  * Reads and writes MIME for batch API.
@@ -54,10 +55,10 @@ class MimeReaderWriter implements IMimeReaderWriter
     {
         $count         = count($bodyPartContents);
         $mimeType      = Resources::MULTIPART_MIXED_TYPE;
-        $batchGuid     = strtolower(trim(com_create_guid(), '{}'));
+        $batchGuid     = Utilities::getGuid();
         $batchId       = sprintf('batch_%s', $batchGuid);
         $contentType1  = array('content_type' => "$mimeType");
-        $changeSetGuid = strtolower(trim(com_create_guid(), '{}'));
+        $changeSetGuid = Utilities::getGuid();
         $changeSetId   = sprintf('changeset_%s', $changeSetGuid);
         $contentType2  = array('content_type' => "$mimeType; boundary=$changeSetId");
         $options       = array(

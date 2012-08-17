@@ -23,11 +23,10 @@
  */
  
 namespace WindowsAzure\ServiceManagement\Models;
-use WindowsAzure\Common\Internal\Utilities;
-use WindowsAzure\Common\Internal\Resources;
+use WindowsAzure\Common\Internal\Validate;
 
 /**
- * The result of calling getStorageServiceProperties API.
+ * The optional parameters for upgradeDeployment API.
  *
  * @category  Microsoft
  * @package   WindowsAzure\ServiceManagement\Models
@@ -37,51 +36,37 @@ use WindowsAzure\Common\Internal\Resources;
  * @version   Release: @package_version@
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
-class GetStorageServicePropertiesResult
+class UpgradeDeploymentOptions extends GetDeploymentOptions
 {
     /**
-     * @var StorageService
+     * @var string
      */
-    private $_storageService;
+    private $_roleToUpgrade;
     
     /**
-     * Creates GetStorageServicePropertiesResult from parsed response.
+     * Gets the role to upgrade name.
      * 
-     * @param array $parsed The parsed response in array representation.
+     * The name of the specific role to upgrade.
      * 
-     * @return GetStorageServicePropertiesResult 
+     * @return string
      */
-    public static function create($parsed)
+    public function getRoleToUpgrade()
     {
-        $result                  = new GetStorageServicePropertiesResult();
-        $properties              = Utilities::tryGetValue(
-            $parsed,
-            Resources::XTAG_STORAGE_SERVICE_PROPERTIES
-        );
-        $result->_storageService = new StorageService($parsed, $properties);
-        
-        return $result;
+        return $this->_roleToUpgrade;
     }
     
     /**
-     * Gets the storageService.
+     * Sets the role to upgrade name.
      * 
-     * @return StorageService
-     */
-    public function getStorageService()
-    {
-        return $this->_storageService;
-    }
-    
-    /**
-     * Sets the storageService.
-     * 
-     * @param StorageService $storageService The storageService.
+     * @param string $roleToUpgrade The role to upgrade name.
      * 
      * @return none
      */
-    public function setStorageService($storageService)
+    public function setRoleToUpgrade($roleToUpgrade)
     {
-        $this->_storageService = $storageService;
+        Validate::isString($roleToUpgrade, 'roleToUpgrade');
+        Validate::notNullOrEmpty($roleToUpgrade, 'roleToUpgrade');
+                
+        $this->_roleToUpgrade = $roleToUpgrade;
     }
 }

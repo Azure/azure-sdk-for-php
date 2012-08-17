@@ -23,11 +23,11 @@
  */
  
 namespace WindowsAzure\ServiceManagement\Models;
-use WindowsAzure\Common\Internal\Utilities;
 use WindowsAzure\Common\Internal\Resources;
+use WindowsAzure\Common\Internal\Utilities;
 
 /**
- * The result of calling getStorageServiceProperties API.
+ * Represents a Windows Azure deployment role.
  *
  * @category  Microsoft
  * @package   WindowsAzure\ServiceManagement\Models
@@ -37,51 +37,89 @@ use WindowsAzure\Common\Internal\Resources;
  * @version   Release: @package_version@
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
-class GetStorageServicePropertiesResult
+class Role
 {
     /**
-     * @var StorageService
+     * @var string
      */
-    private $_storageService;
+    private $_roleName;
     
     /**
-     * Creates GetStorageServicePropertiesResult from parsed response.
+     * @var string
+     */
+    private $_osVersion;
+    
+    /**
+     * Creates a new Role from parsed response body.
      * 
-     * @param array $parsed The parsed response in array representation.
+     * @param array $parsed The parsed response body in array representation.
      * 
-     * @return GetStorageServicePropertiesResult 
+     * @return Role
      */
     public static function create($parsed)
     {
-        $result                  = new GetStorageServicePropertiesResult();
-        $properties              = Utilities::tryGetValue(
+        $role      = new Role();
+        $roleName  = Utilities::tryGetValue(
             $parsed,
-            Resources::XTAG_STORAGE_SERVICE_PROPERTIES
+            Resources::XTAG_ROLE_NAME
         );
-        $result->_storageService = new StorageService($parsed, $properties);
+        $osVersion = Utilities::tryGetValue(
+            $parsed,
+            Resources::XTAG_OS_VERSION
+        );
         
-        return $result;
+        $role->setOsVersion($osVersion);
+        $role->setRoleName($roleName);
+        
+        return $role;
     }
     
     /**
-     * Gets the storageService.
+     * Gets the role name.
      * 
-     * @return StorageService
+     * The name of the role.
+     * 
+     * @return string
      */
-    public function getStorageService()
+    public function getRoleName()
     {
-        return $this->_storageService;
+        return $this->_roleName;
     }
     
     /**
-     * Sets the storageService.
+     * Sets the role name.
      * 
-     * @param StorageService $storageService The storageService.
+     * @param string $roleName The role name.
      * 
      * @return none
      */
-    public function setStorageService($storageService)
+    public function setRoleName($roleName)
     {
-        $this->_storageService = $storageService;
+        $this->_roleName = $roleName;
+    }
+    
+    /**
+     * Gets the role OS version.
+     * 
+     * The version of the Windows Azure Guest Operating System on which this role's
+     * instances are running.
+     * 
+     * @return string
+     */
+    public function getOsVersion()
+    {
+        return $this->_osVersion;
+    }
+    
+    /**
+     * Sets the role OS version.
+     * 
+     * @param string $osVersion The role OS version.
+     * 
+     * @return none
+     */
+    public function setOsVersion($osVersion)
+    {
+        $this->_osVersion = $osVersion;
     }
 }

@@ -25,10 +25,10 @@
 namespace WindowsAzure\ServiceManagement\Models;
 use WindowsAzure\Common\Internal\Resources;
 use WindowsAzure\Common\Internal\Utilities;
-use WindowsAzure\ServiceManagement\Internal\Service;
+use WindowsAzure\ServiceManagement\Internal\WindowsAzureService;
 
 /**
- * The affinity group class.
+ * The hosted service class.
  *
  * @category  Microsoft
  * @package   WindowsAzure\ServiceManagement\Models
@@ -38,24 +38,35 @@ use WindowsAzure\ServiceManagement\Internal\Service;
  * @version   Release: @package_version@
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
-class AffinityGroup extends Service
+class HostedService extends WindowsAzureService
 {
     /**
-     * Constructs new affinity group object.
+     * @var array 
+     */
+    private $_deployments;
+    
+    /**
+     * Constructs new hosted service object.
      */
     public function __construct()
     {
         $sources = func_get_args();
         parent::__construct($sources);
         
+        $this->_deployments = array();
         foreach ($sources as $source) {
-            $this->setName(
-                Utilities::tryGetValue(
-                    $source,
-                    Resources::XTAG_NAME,
-                    $this->getName()
-                )
+            $deployments = Utilities::tryGetKeysChainValue(
+                $source,
+                Resources::XTAG_DEPLOYMENTS,
+                Resources::XTAG_DEPLOYMENT
             );
+            
+            if (!empty($deployments)) {
+                $this->_deployments = Utilities::createInstanceList(
+                    Utilities::getArray($deployments),
+                    'WindowsAzure\ServiceManagement\Models\Deployment'
+                );
+            }
         }
     }
     
@@ -66,19 +77,39 @@ class AffinityGroup extends Service
      */
     protected function toArray()
     {
-        $arr   = parent::toArray();
-        $order = array(
+        $arr     = parent::toArray();
+        $order   = array(
             Resources::XTAG_NAMESPACE,
-            Resources::XTAG_NAME,
+            Resources::XTAG_SERVICE_NAME,
             Resources::XTAG_LABEL,
             Resources::XTAG_DESCRIPTION,
-            Resources::XTAG_LOCATION
+            Resources::XTAG_LOCATION,
+            Resources::XTAG_AFFINITY_GROUP
         );
-        Utilities::addIfNotEmpty(Resources::XTAG_NAME, $this->getName(), $arr);
         $ordered = Utilities::orderArray($arr, $order);
         
         return $ordered;
     }
+    
+    /**
+     * Gets the deployments array.
+     * 
+     * @return array
+     */
+    public function getDeployments()
+    {
+        return $this->_deployments;
+    }
+    
+    /**
+     * Sets the deployments array.
+     * 
+     * @param array $deployments The deployments array.
+     * 
+     * @return none
+     */
+    public function setDeployments($deployments)
+    {
+        $this->_deployments = $deployments;
+    }
 }
-
-

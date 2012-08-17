@@ -27,7 +27,7 @@ use WindowsAzure\Common\Internal\Utilities;
 use WindowsAzure\Common\Internal\Resources;
 
 /**
- * The result of calling getStorageServiceProperties API.
+ * The result of calling listHostedServices API.
  *
  * @category  Microsoft
  * @package   WindowsAzure\ServiceManagement\Models
@@ -37,51 +37,63 @@ use WindowsAzure\Common\Internal\Resources;
  * @version   Release: @package_version@
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
-class GetStorageServicePropertiesResult
+class ListHostedServicesResult
 {
     /**
-     * @var StorageService
+     * @var array
      */
-    private $_storageService;
+    private $_hostedServices;
     
     /**
-     * Creates GetStorageServicePropertiesResult from parsed response.
+     * Creates new ListHostedServicesResult from parsed response body.
      * 
-     * @param array $parsed The parsed response in array representation.
+     * @param array $parsed The parsed response body.
      * 
-     * @return GetStorageServicePropertiesResult 
+     * @return ListHostedServicesResult
      */
     public static function create($parsed)
     {
-        $result                  = new GetStorageServicePropertiesResult();
-        $properties              = Utilities::tryGetValue(
-            $parsed,
-            Resources::XTAG_STORAGE_SERVICE_PROPERTIES
+        $result                  = new ListHostedServicesResult();
+        $result->_hostedServices = array();
+        $rowHostedServices       = Utilities::tryGetArray(
+            Resources::XTAG_HOSTED_SERVICE,
+            $parsed
         );
-        $result->_storageService = new StorageService($parsed, $properties);
+        
+        foreach ($rowHostedServices as $rowHostedService) {
+            $properties                = Utilities::tryGetArray(
+                Resources::XTAG_HOSTED_SERVICE_PROPERTIES,
+                $rowHostedService
+            );
+            $hostedService             = new HostedService(
+                $rowHostedService,
+                $properties
+            );
+            $result->_hostedServices[] = $hostedService;
+        }
         
         return $result;
     }
     
     /**
-     * Gets the storageService.
+     * Gets hosted services.
      * 
-     * @return StorageService
+     * @return array
      */
-    public function getStorageService()
+    public function getHostedServices()
     {
-        return $this->_storageService;
+        return $this->_hostedServices;
     }
     
     /**
-     * Sets the storageService.
+     * Sets hosted services.
      * 
-     * @param StorageService $storageService The storageService.
+     * @param array $hostedServices The hosted services.
      * 
      * @return none
      */
-    public function setStorageService($storageService)
+    public function setHostedServices($hostedServices)
     {
-        $this->_storageService = $storageService;
+        $this->_hostedServices = $hostedServices;
     }
 }

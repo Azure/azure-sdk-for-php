@@ -23,10 +23,10 @@
  */
 
 namespace Tests\Unit\WindowsAzure\ServiceManagement\Models;
-use WindowsAzure\ServiceManagement\Models\ListStorageServicesResult;
+use WindowsAzure\ServiceManagement\Models\ChangeDeploymentConfigurationOptions;
 
 /**
- * Unit tests for class ListStorageServicesResult
+ * Unit tests for class ChangeDeploymentConfigurationOptions
  *
  * @category  Microsoft
  * @package   Tests\Unit\WindowsAzure\ServiceManagement\Models
@@ -36,22 +36,41 @@ use WindowsAzure\ServiceManagement\Models\ListStorageServicesResult;
  * @version   Release: @package_version@
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
-class ListStorageServicesResultTest extends \PHPUnit_Framework_TestCase
+class ChangeDeploymentConfigurationOptionsTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @covers WindowsAzure\ServiceManagement\Models\ListStorageServicesResult::setStorageServices
-     * @covers WindowsAzure\ServiceManagement\Models\ListStorageServicesResult::getStorageServices
+     * @covers WindowsAzure\ServiceManagement\Models\ChangeDeploymentConfigurationOptions::setTreatWarningsAsErrors
+     * @covers WindowsAzure\ServiceManagement\Models\ChangeDeploymentConfigurationOptions::getTreatWarningsAsErrors
+     * @covers WindowsAzure\ServiceManagement\Models\ChangeDeploymentConfigurationOptions::__construct
      */
-    public function testSetStorageServices()
+    public function testSetTreatWarningsAsErrors()
     {
         // Setup
-        $expected = array();
-        $result = new ListStorageServicesResult(array(), 'tag');
+        $expected = true;
+        $options = new ChangeDeploymentConfigurationOptions();
         
         // Test
-        $result->setStorageServices($expected);
+        $options->setTreatWarningsAsErrors($expected);
         
         // Assert
-        $this->assertEquals($expected, $result->getStorageServices());
+        $this->assertEquals($expected, $options->getTreatWarningsAsErrors());
+    }
+    
+    /**
+     * @covers WindowsAzure\ServiceManagement\Models\ChangeDeploymentConfigurationOptions::setMode
+     * @covers WindowsAzure\ServiceManagement\Models\ChangeDeploymentConfigurationOptions::getMode
+     * @covers WindowsAzure\ServiceManagement\Models\ChangeDeploymentConfigurationOptions::__construct
+     */
+    public function testSetMode()
+    {
+        // Setup
+        $expected = 'Auto';
+        $options = new ChangeDeploymentConfigurationOptions();
+        
+        // Test
+        $options->setMode($expected);
+        
+        // Assert
+        $this->assertEquals($expected, $options->getMode());
     }
 }
