@@ -1061,15 +1061,13 @@ class ServiceManagementRestProxyTest extends ServiceManagementRestProxyTestBase
         // Setup
         $name = 'testupgradedomain';
         $this->createDeployment($name);
-        $options = new UpgradeDeploymentOptions();
-        $options->setDeploymentName($name);
         
         $mode = Mode::MANUAL;
         $configuration = $this->encodedComplexConfiguration;
         $packageUrl = TestResources::complexPackageUrl();
         $label = base64_encode($name . 'upgraded');
         $force = true;
-        $options = new GetDeploymentOptions();
+        $options = new UpgradeDeploymentOptions();
         $options->setDeploymentName($name);
         $expectedInstancesCount = 4;
         
