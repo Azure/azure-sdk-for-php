@@ -107,6 +107,50 @@ class TestResources
         return $connectionString;
     }
     
+    public static function simplePackageUrl()
+    {
+        $name = getenv('SERVICE_MANAGEMENT_SIMPLE_PACKAGE_URL');
+        
+        if (empty($name)) {
+            throw new \Exception('SERVICE_MANAGEMENT_SIMPLE_PACKAGE_URL envionment variable is missing');
+        }
+        
+        return $name;
+    }
+    
+    public static function simplePackageConfiguration()
+    {
+        $name = getenv('SERVICE_MANAGEMENT_SIMPLE_PACKAGE_CONFIGURATION');
+        
+        if (empty($name)) {
+            throw new \Exception('SERVICE_MANAGEMENT_SIMPLE_PACKAGE_CONFIGURATION envionment variable is missing');
+        }
+        
+        return $name;
+    }
+    
+    public static function complexPackageUrl()
+    {
+        $name = getenv('SERVICE_MANAGEMENT_COMPLEX_PACKAGE_URL');
+        
+        if (empty($name)) {
+            throw new \Exception('SERVICE_MANAGEMENT_COMPLEX_PACKAGE_URL envionment variable is missing');
+        }
+        
+        return $name;
+    }
+    
+    public static function complexPackageConfiguration()
+    {
+        $name = getenv('SERVICE_MANAGEMENT_COMPLEX_PACKAGE_CONFIGURATION');
+        
+        if (empty($name)) {
+            throw new \Exception('SERVICE_MANAGEMENT_COMPLEX_PACKAGE_CONFIGURATION envionment variable is missing');
+        }
+        
+        return $name;
+    }
+    
     public static function accountName()
     {
         $name = getenv('AZURE_STORAGE_ACCOUNT');

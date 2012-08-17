@@ -44,11 +44,25 @@ class RestProxyTestBase extends \PHPUnit_Framework_TestCase
     protected $xmlSerializer;
     protected $builder;
     
+    public static function assertHandler($file, $line, $code)
+    {
+        echo "Assertion Failed:\n
+            File '$file'\n
+            Line '$line'\n
+            Code '$code'\n";
+    }
+    
     public function __construct()
     {
         $this->xmlSerializer = new XmlSerializer();
         $this->builder = new ServicesBuilder();
         Logger::setLogFile('C:\log.txt');
+        
+        // Enable PHP asserts
+        assert_options(ASSERT_ACTIVE, 1);
+        assert_options(ASSERT_WARNING, 0);
+        assert_options(ASSERT_QUIET_EVAL, 1);
+        assert_options(ASSERT_CALLBACK, 'Tests\Framework\RestProxyTestBase::assertHandler');
     }
     
     public function setProxy($serviceRestProxy)

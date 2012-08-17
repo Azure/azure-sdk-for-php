@@ -23,10 +23,10 @@
  */
 
 namespace Tests\Unit\WindowsAzure\ServiceManagement\Models;
-use WindowsAzure\ServiceManagement\Models\ServiceProperties;
+use WindowsAzure\ServiceManagement\Models\UpdateServiceOptions;
 
 /**
- * Unit tests for class ServiceProperties
+ * Unit tests for class UpdateServiceOptions
  *
  * @category  Microsoft
  * @package   Tests\Unit\WindowsAzure\ServiceManagement\Models
@@ -36,40 +36,40 @@ use WindowsAzure\ServiceManagement\Models\ServiceProperties;
  * @version   Release: @package_version@
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
-class ServicePropertiesTest extends \PHPUnit_Framework_TestCase
+class UpdateServiceOptionsTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @covers WindowsAzure\ServiceManagement\Models\ServiceProperties::setUrl
-     * @covers WindowsAzure\ServiceManagement\Models\ServiceProperties::getUrl
+     * @covers WindowsAzure\ServiceManagement\Models\UpdateServiceOptions::setDescription
+     * @covers WindowsAzure\ServiceManagement\Models\UpdateServiceOptions::getDescription
      */
-    public function testSetUrl()
+    public function testSetDescription()
     {
         // Setup
-        $service = new ServiceProperties();
-        $expected = 'Url';
+        $options = new UpdateServiceOptions();
+        $expected = 'Description';
         
         // Test
-        $service->setUrl($expected);
+        $options->setDescription($expected);
         
         // Assert
-        $this->assertEquals($expected, $service->getUrl());
+        $this->assertEquals($expected, $options->getDescription());
     }
     
     /**
-     * @covers WindowsAzure\ServiceManagement\Models\ServiceProperties::setServiceName
-     * @covers WindowsAzure\ServiceManagement\Models\ServiceProperties::getServiceName
+     * @covers WindowsAzure\ServiceManagement\Models\UpdateServiceOptions::setLabel
+     * @covers WindowsAzure\ServiceManagement\Models\UpdateServiceOptions::getLabel
      */
-    public function testSetServiceName()
+    public function testSetLabel()
     {
         // Setup
-        $service = new ServiceProperties();
-        $expected = 'ServiceName';
+        $options = new UpdateServiceOptions();
+        $expected = 'Label';
         
         // Test
-        $service->setServiceName($expected);
+        $options->setLabel($expected);
         
         // Assert
-        $this->assertEquals($expected, $service->getServiceName());
+        $this->assertEquals($expected, $options->getLabel());
     }
 }
 

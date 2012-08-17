@@ -15,14 +15,14 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   WindowsAzure\ServiceManagement\Models
+ * @package   WindowsAzure\ServiceManagement\Internal
  * @author    Azure PHP SDK <azurephpsdk@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
  
-namespace WindowsAzure\ServiceManagement\Models;
+namespace WindowsAzure\ServiceManagement\Internal;
 use WindowsAzure\Common\Internal\Resources;
 use WindowsAzure\Common\Internal\Utilities;
 use WindowsAzure\Common\Internal\Serialization\XmlSerializer;
@@ -31,7 +31,7 @@ use WindowsAzure\Common\Internal\Serialization\XmlSerializer;
  * Windows Azure service basic elements.
  *
  * @category  Microsoft
- * @package   WindowsAzure\ServiceManagement\Models
+ * @package   WindowsAzure\ServiceManagement\Internal
  * @author    Azure PHP SDK <azurephpsdk@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
@@ -68,15 +68,35 @@ class Service
     /**
      * Creates Service object from the given raw array.
      * 
-     * @param array $raw The service members in array representation.
+     * @param array $sources The list of sources that has the row XML.
      */
-    public function __construct($raw = null)
+    public function __construct($sources = array())
     {
-        $this->setLabel(Utilities::tryGetValue($raw, Resources::XTAG_LABEL));
-        $this->setLocation(Utilities::tryGetValue($raw, Resources::XTAG_LOCATION));
-        $this->setDescription(
-            Utilities::tryGetValue($raw, Resources::XTAG_DESCRIPTION)
-        );
+        foreach ($sources as $source) {
+            $this->setLabel(
+                Utilities::tryGetValue(
+                    $source,
+                    Resources::XTAG_LABEL,
+                    $this->getLabel()
+                )
+            );
+            
+            $this->setLocation(
+                Utilities::tryGetValue(
+                    $source,
+                    Resources::XTAG_LOCATION,
+                    $this->getLocation()
+                )
+            );
+            
+            $this->setDescription(
+                Utilities::tryGetValue(
+                    $source,
+                    Resources::XTAG_DESCRIPTION,
+                    $this->getDescription()
+                )
+            );
+        }
     }
     
     /**
@@ -245,5 +265,3 @@ class Service
         return $serialized;
     }
 }
-
-

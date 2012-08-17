@@ -47,6 +47,13 @@ class SqlRuleAction extends Action
      */
     private $_sqlExpression;
 
+    /**
+     * The compatibility level.
+     * 
+     * @var string
+     */
+    private $_compatibilityLevel;
+
     /** 
      * Creates a SQL Rule Action instance with default parameters. 
      */
@@ -76,6 +83,28 @@ class SqlRuleAction extends Action
     public function setSqlExpression($sqlExpression)
     {
         $this->_sqlExpression = $sqlExpression;
+    }
+
+    /**
+     * Gets the compatibility level. 
+     * 
+     * @return string 
+     */
+    public function getCompatibilityLevel()
+    {
+        return $this->_compatibilityLevel;
+    }
+
+    /**
+     * Sets the compatibility level.
+     * 
+     * @param string $compatibilityLevel The level of compatibility.
+     *
+     * @return none
+     */
+    public function setCompatibilityLevel($compatibilityLevel)
+    {
+        $this->_compatibilityLevel = $compatibilityLevel;
     }
 
 }

@@ -26,7 +26,7 @@ namespace WindowsAzure\ServiceManagement\Models;
 use WindowsAzure\Common\Internal\Validate;
 
 /**
- * The optional parameters for updateStorageService API.
+ * The optional parameter for getHostedServiceProperties API.
  *
  * @category  Microsoft
  * @package   WindowsAzure\ServiceManagement\Models
@@ -36,65 +36,42 @@ use WindowsAzure\Common\Internal\Validate;
  * @version   Release: @package_version@
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
-class UpdateStorageServiceOptions
+class GetHostedServicePropertiesOptions
 {
     /**
-     * @var string
+     * @var boolean
      */
-    private $_label;
+    private $_embedDetail;
     
     /**
-     * @var string
+     * Constructs new GetHostedServicePropertiesOptions instance.
      */
-    private $_description;
-    
-    /**
-     * Gets the label.
-     * 
-     * @return string
-     */
-    public function getLabel()
+    public function __construct()
     {
-        return $this->_label;
+        $this->_embedDetail = false;
     }
     
     /**
-     * Sets the label.
+     * Sets the embed detail flag.
      * 
-     * @param string $label The label.
+     * @param boolean $embedDetail The embed detail flag.
      * 
      * @return none
      */
-    public function setLabel($label)
+    public function setEmbedDetail($embedDetail)
     {
-        Validate::isString($label, 'label');
+        Validate::isBoolean($embedDetail);
         
-        $this->_label = $label;
+        $this->_embedDetail = $embedDetail;
     }
     
     /**
-     * Gets the description.
+     * Gets the embed detail flag.
      * 
-     * @return string
+     * @return boolean 
      */
-    public function getDescription()
+    public function getEmbedDetail()
     {
-        return $this->_description;
-    }
-    
-    /**
-     * Sets the description.
-     * 
-     * @param string $description The description.
-     * 
-     * @return none
-     */
-    public function setDescription($description)
-    {
-        Validate::isString($description, 'description');
-        
-        $this->_description = $description;
+        return $this->_embedDetail;
     }
 }
-
-

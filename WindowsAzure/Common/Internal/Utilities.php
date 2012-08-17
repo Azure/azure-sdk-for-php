@@ -521,6 +521,87 @@ class Utilities
         $array = array_change_key_case($haystack);
         return Utilities::tryGetValue($array, strtolower($key), $default);
     }
+    
+    /**
+     * Returns a string representation of a version 4 GUID, which uses random
+     * numbers.There are 6 reserved bits, and the GUIDs have this format:
+     *     xxxxxxxx-xxxx-4xxx-[8|9|a|b]xxx-xxxxxxxxxxxx
+     * where 'x' is a hexadecimal digit, 0-9a-f.
+     *
+     * See http://tools.ietf.org/html/rfc4122 for more information.
+     *
+     * Note: This function is available on all platforms, while the
+     * com_create_guid() is only available for Windows.
+     *
+     * @static
+     * 
+     * @return string A new GUID.
+     */
+    public static function getGuid()
+    {
+        return sprintf('%04x%04x-%04x-%04x-%02x%02x-%04x%04x%04x',
+            mt_rand(0, 65535),
+            mt_rand(0, 65535),        // 32 bits for "time_low"
+            mt_rand(0, 65535),        // 16 bits for "time_mid"
+            mt_rand(0, 4096) + 16384, // 16 bits for "time_hi_and_version", with
+                                      // the most significant 4 bits being 0100
+                                      // to indicate randomly generated version
+            mt_rand(0, 64) + 128,     // 8 bits  for "clock_seq_hi", with
+                                      // the most significant 2 bits being 10,
+                                      // required by version 4 GUIDs.
+            mt_rand(0, 256),          // 8 bits  for "clock_seq_low"
+            mt_rand(0, 65535),        // 16 bits for "node 0" and "node 1"
+            mt_rand(0, 65535),        // 16 bits for "node 2" and "node 3"
+            mt_rand(0, 65535)         // 16 bits for "node 4" and "node 5"
+        );
+    }
+    
+    /**
+     * Creates a list of objects of type $class from the provided array using static
+     * create method.
+     * 
+     * @param array  $parsed The object in array representation
+     * @param string $class  The class name. Must have static method create.
+     * 
+     * @static
+     * 
+     * @return array
+     */
+    public static function createInstanceList($parsed, $class)
+    {
+        $list = array();
+        
+        foreach ($parsed as $value) {
+            $list[] = $class::create($value);
+        }
+        
+        return $list;
+    }
+    
+    /**
+     * Takes a string and return if it ends with the specified character/string.
+     * 
+     * @param string  $haystack   The string to search in.
+     * @param string  $needle     postfix to match.
+     * @param boolean $ignoreCase Set true to ignore case during the comparison; 
+     * otherwise, false
+     * 
+     * @static
+     * 
+     * @return boolean 
+     */
+    public static function endsWith($haystack, $needle, $ignoreCase = false)
+    {
+        if ($ignoreCase) {
+            $haystack = strtolower($haystack);
+            $needle   = strtolower($needle);
+        }
+        $length = strlen($needle);
+        if ($length == 0) {
+            return true;
+        }
+
+        return (substr($haystack, -$length) === $needle);
+    }
+
 }
-
-
