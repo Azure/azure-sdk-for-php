@@ -53,23 +53,14 @@ class ListStorageServicesResult
      */
     public static function create($parsed)
     {
-        $result = new ListStorageServicesResult();
-        
-        $result->_storageServices = array();
-        $entries                  = Utilities::tryGetArray(
+        $result             = new ListStorageServicesResult();
+        $rowStorageServices = Utilities::tryGetArray(
             Resources::XTAG_STORAGE_SERVICE,
             $parsed
         );
         
-        foreach ($entries as $value) {
-            $properties = new ServiceProperties();
-            $properties->setServiceName(
-                Utilities::tryGetValue($value, Resources::XTAG_SERVICE_NAME)
-            );
-            $properties->setUrl(
-                Utilities::tryGetValue($value, Resources::XTAG_URL)
-            );
-            $result->_storageServices[] = $properties;
+        foreach ($rowStorageServices as $rowStorageService) {
+            $result->_storageServices[] = new StorageService($rowStorageService);
         }
         
         return $result;
@@ -97,5 +88,3 @@ class ListStorageServicesResult
         $this->_storageServices = $storageServices;
     }
 }
-
-

@@ -74,6 +74,28 @@ class SqlFilterTest extends \PHPUnit_Framework_TestCase
 
     }
 
+    /** 
+     * @covers WindowsAzure\ServiceBus\Models\SqlFilter::getCompatibilityLevel
+     * @covers WindowsAzure\ServiceBus\Models\SqlFilter::setCompatibilityLevel
+     */
+    public function testGetSetCompatibilityLevel() {
+        // Setup
+        $expected = 'testCompatibilityLevel';
+        $filter = new SqlFilter();
+
+        // Test
+        $filter->setCompatibilityLevel($expected);
+        $actual = $filter->getCompatibilityLevel();
+
+        // Assert 
+        $this->assertEquals(
+            $expected,
+            $actual
+        );
+
+    }
+
+
 
 }
 
