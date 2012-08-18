@@ -25,6 +25,7 @@
 namespace WindowsAzure\ServiceManagement\Models;
 use WindowsAzure\Common\Internal\Resources;
 use WindowsAzure\Common\Internal\Utilities;
+use WindowsAzure\ServiceManagement\Internal\WindowsAzureService;
 
 /**
  * The storage service class.
@@ -37,27 +38,47 @@ use WindowsAzure\Common\Internal\Utilities;
  * @version   Release: @package_version@
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
-class StorageService extends Service
+class StorageService extends WindowsAzureService
 {
+    /**
+     * @var array
+     */
+    private $_endpoints;
+    
     /**
      * @var string
      */
-    private $_affinityGroup;
+    private $_status;
     
     /**
      * Constructs new storage service object.
-     * 
-     * @param array $raw The array representation for storage service.
      */
-    public function __construct($raw = null)
+    public function __construct()
     {
-        parent::__construct($raw);
-        $this->setAffinityGroup(
-            Utilities::tryGetValue($raw, Resources::XTAG_AFFINITY_GROUP)
-        );
-        $this->setName(
-            Utilities::tryGetValue($raw, Resources::XTAG_SERVICE_NAME)
-        );
+        $sources = func_get_args();
+        parent::__construct($sources);
+        
+        foreach ($sources as $source) {
+            $this->setStatus(
+                Utilities::tryGetValue(
+                    $source,
+                    Resources::XTAG_STATUS,
+                    $this->getStatus()
+                )
+            );
+            
+            $endpoints = Utilities::tryGetValue(
+                $source,
+                Resources::XTAG_ENDPOINTS
+            );
+            $this->setEndpoints(
+                Utilities::tryGetValue(
+                    $endpoints,
+                    Resources::XTAG_ENDPOINT,
+                    $this->getEndpoints()
+                )
+            );
+        }
     }
     
     /**
@@ -67,8 +88,8 @@ class StorageService extends Service
      */
     protected function toArray()
     {
-        $arr   = parent::toArray();
-        $order = array(
+        $arr     = parent::toArray();
+        $order   = array(
             Resources::XTAG_NAMESPACE,
             Resources::XTAG_SERVICE_NAME,
             Resources::XTAG_DESCRIPTION,
@@ -76,40 +97,52 @@ class StorageService extends Service
             Resources::XTAG_AFFINITY_GROUP,
             Resources::XTAG_LOCATION
         );
-        Utilities::addIfNotEmpty(
-            Resources::XTAG_SERVICE_NAME, $this->getName(),
-            $arr
-        );
-        Utilities::addIfNotEmpty(
-            Resources::XTAG_AFFINITY_GROUP, $this->_affinityGroup,
-            $arr
-        );
         $ordered = Utilities::orderArray($arr, $order);
         
         return $ordered;
     }
     
     /**
-     * Gets the affinityGroup name.
+     * Gets the endpoints.
      * 
-     * @return string 
+     * @return array
      */
-    public function getAffinityGroup()
+    public function getEndpoints()
     {
-        return $this->_affinityGroup;
+        return $this->_endpoints;
     }
     
     /**
-     * Sets the affinityGroup name.
+     * Sets the endpoints.
      * 
-     * @param string $affinityGroup The affinityGroup name.
+     * @param array $endpoints The endpoints.
      * 
      * @return none
      */
-    public function setAffinityGroup($affinityGroup)
+    public function setEndpoints($endpoints)
     {
-        $this->_affinityGroup = $affinityGroup;
+        $this->_endpoints = $endpoints;
+    }
+    
+    /**
+     * Gets the status.
+     * 
+     * @return string
+     */
+    public function getStatus()
+    {
+        return $this->_status;
+    }
+    
+    /**
+     * Sets the status.
+     * 
+     * @param string $status The status.
+     * 
+     * @return none
+     */
+    public function setStatus($status)
+    {
+        $this->_status = $status;
     }
 }
-
-

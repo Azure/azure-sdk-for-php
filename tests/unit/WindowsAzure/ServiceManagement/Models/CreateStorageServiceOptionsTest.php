@@ -15,37 +15,37 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   Tests\Unit\WindowsAzure\CreateStorageServiceOptionsManagement\Models
+ * @package   Tests\Unit\WindowsAzure\CreateServiceOptionsManagement\Models
  * @author    Azure PHP SDK <azurephpsdk@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
 
-namespace Tests\Unit\WindowsAzure\CreateStorageServiceOptionsManagement\Models;
-use WindowsAzure\ServiceManagement\Models\CreateStorageServiceOptions;
+namespace Tests\Unit\WindowsAzure\CreateServiceOptionsManagement\Models;
+use WindowsAzure\ServiceManagement\Models\CreateServiceOptions;
 
 /**
- * Unit tests for class CreateStorageServiceOptions
+ * Unit tests for class CreateServiceOptions
  *
  * @category  Microsoft
- * @package   Tests\Unit\WindowsAzure\CreateStorageServiceOptionsManagement\Models
+ * @package   Tests\Unit\WindowsAzure\CreateServiceOptionsManagement\Models
  * @author    Azure PHP SDK <azurephpsdk@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @version   Release: @package_version@
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
-class CreateStorageServiceOptionsTest extends \PHPUnit_Framework_TestCase
+class CreateServiceOptionsTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @covers WindowsAzure\ServiceManagement\Models\CreateStorageServiceOptions::setDescription
-     * @covers WindowsAzure\ServiceManagement\Models\CreateStorageServiceOptions::getDescription
+     * @covers WindowsAzure\ServiceManagement\Models\CreateServiceOptions::setDescription
+     * @covers WindowsAzure\ServiceManagement\Models\CreateServiceOptions::getDescription
      */
     public function testSetDescription()
     {
         // Setup
-        $options = new CreateStorageServiceOptions();
+        $options = new CreateServiceOptions();
         $expected = 'Description';
         
         // Test
@@ -56,13 +56,13 @@ class CreateStorageServiceOptionsTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers WindowsAzure\ServiceManagement\Models\CreateStorageServiceOptions::setLocation
-     * @covers WindowsAzure\ServiceManagement\Models\CreateStorageServiceOptions::getLocation
+     * @covers WindowsAzure\ServiceManagement\Models\CreateServiceOptions::setLocation
+     * @covers WindowsAzure\ServiceManagement\Models\CreateServiceOptions::getLocation
      */
     public function testSetLocation()
     {
         // Setup
-        $options = new CreateStorageServiceOptions();
+        $options = new CreateServiceOptions();
         $expected = 'Location';
         
         // Test
@@ -73,13 +73,13 @@ class CreateStorageServiceOptionsTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers WindowsAzure\ServiceManagement\Models\CreateStorageServiceOptions::setAffinityGroup
-     * @covers WindowsAzure\ServiceManagement\Models\CreateStorageServiceOptions::getAffinityGroup
+     * @covers WindowsAzure\ServiceManagement\Models\CreateServiceOptions::setAffinityGroup
+     * @covers WindowsAzure\ServiceManagement\Models\CreateServiceOptions::getAffinityGroup
      */
     public function testSetAffinityGroup()
     {
         // Setup
-        $options = new CreateStorageServiceOptions();
+        $options = new CreateServiceOptions();
         $expected = 'MyGroup';
         
         // Test

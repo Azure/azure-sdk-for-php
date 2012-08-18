@@ -23,10 +23,11 @@
  */
 
 namespace Tests\Unit\WindowsAzure\ServiceManagement\Models;
-use WindowsAzure\ServiceManagement\Models\UpdateStorageServiceOptions;
+use WindowsAzure\ServiceManagement\Models\GetHostedServicePropertiesResult;
+use WindowsAzure\ServiceManagement\Models\HostedService;
 
 /**
- * Unit tests for class UpdateStorageServiceOptions
+ * Unit tests for class GetHostedServicePropertiesResult
  *
  * @category  Microsoft
  * @package   Tests\Unit\WindowsAzure\ServiceManagement\Models
@@ -36,41 +37,22 @@ use WindowsAzure\ServiceManagement\Models\UpdateStorageServiceOptions;
  * @version   Release: @package_version@
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
-class UpdateStorageServiceOptionsTest extends \PHPUnit_Framework_TestCase
+class GetHostedServicePropertiesResultTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @covers WindowsAzure\ServiceManagement\Models\UpdateStorageServiceOptions::setDescription
-     * @covers WindowsAzure\ServiceManagement\Models\UpdateStorageServiceOptions::getDescription
+     * @covers WindowsAzure\ServiceManagement\Models\GetHostedServicePropertiesResult::getHostedService 
+     * @covers WindowsAzure\ServiceManagement\Models\GetHostedServicePropertiesResult::setHostedService 
      */
-    public function testSetDescription()
+    public function testGetHostedService()
     {
         // Setup
-        $options = new UpdateStorageServiceOptions();
-        $expected = 'Description';
+        $hostedService = new HostedService();
+        $result = new GetHostedServicePropertiesResult();
         
         // Test
-        $options->setDescription($expected);
+        $result->setHostedService($hostedService);
         
         // Assert
-        $this->assertEquals($expected, $options->getDescription());
-    }
-    
-    /**
-     * @covers WindowsAzure\ServiceManagement\Models\UpdateStorageServiceOptions::setLabel
-     * @covers WindowsAzure\ServiceManagement\Models\UpdateStorageServiceOptions::getLabel
-     */
-    public function testSetLabel()
-    {
-        // Setup
-        $options = new UpdateStorageServiceOptions();
-        $expected = 'Label';
-        
-        // Test
-        $options->setLabel($expected);
-        
-        // Assert
-        $this->assertEquals($expected, $options->getLabel());
+        $this->assertEquals($hostedService, $result->getHostedService());
     }
 }
-
-

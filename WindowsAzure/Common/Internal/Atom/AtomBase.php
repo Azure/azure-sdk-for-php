@@ -276,8 +276,11 @@ class AtomBase
      * 
      * @return none
      */
-    protected function writeOptionalAttribute($xmlWriter, $attributeName, $attributeValue)
-    {
+    protected function writeOptionalAttribute(
+        $xmlWriter,
+        $attributeName,
+        $attributeValue
+    ) {
         Validate::notNull($xmlWriter, 'xmlWriter');
         Validate::isString($attributeName, 'attributeName');
         
