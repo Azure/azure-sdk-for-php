@@ -45,41 +45,12 @@ class Action
     protected $attributes;
 
     /**
-     * The compatibility level.
-     * 
-     * @var string
-     */
-    private $_compatibilityLevel;
-
-    /**
      * Creates an Action instance with default parameter. 
      */
     public function __construct()
     {
         $this->attributes              = array();
         $this->attributes['xmlns:xsi'] = Resources::XSI_XML_NAMESPACE;
-    }
-
-    /**
-     * Gets the compatibility level. 
-     * 
-     * @return string 
-     */
-    public function getCompatibilityLevel()
-    {
-        return $this->_compatibilityLevel;
-    }
-
-    /**
-     * Sets the compatibility level.
-     * 
-     * @param string $compatibilityLevel The level of compatibility.
-     *
-     * @return none
-     */
-    public function setCompatibilityLevel($compatibilityLevel)
-    {
-        $this->_compatibilityLevel = $compatibilityLevel;
     }
 
     /**
@@ -100,7 +71,7 @@ class Action
      * 
      * @return none
      */
-    public function setAttribute($key, $value)
+    protected function setAttribute($key, $value)
     {
         $this->attributes[$key] = $value;
     }

@@ -46,7 +46,7 @@ class ListStorageServicesResultTest extends \PHPUnit_Framework_TestCase
     {
         // Setup
         $expected = array();
-        $result = new ListStorageServicesResult();
+        $result = new ListStorageServicesResult(array(), 'tag');
         
         // Test
         $result->setStorageServices($expected);
@@ -55,5 +55,3 @@ class ListStorageServicesResultTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($expected, $result->getStorageServices());
     }
 }
-
-
