@@ -65,7 +65,8 @@ To get the source code from GitHub, type
 					"type": "pear",
 					"url": "http://pear.php.net"
 				}
-			]
+			],
+			"minimum-stability": "dev"
 		}
 
 2. Download **[composer.phar](http://getcomposer.org/composer.phar)** in your project root.
