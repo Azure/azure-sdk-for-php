@@ -24,9 +24,10 @@
  
 namespace WindowsAzure\ServiceManagement\Models;
 use WindowsAzure\Common\Internal\Validate;
+use WindowsAzure\Common\Internal\Resources;
 
 /**
- * Optional parameters for createStorageService API.
+ * The parameters to get a deployment.
  *
  * @category  Microsoft
  * @package   WindowsAzure\ServiceManagement\Models
@@ -36,96 +37,70 @@ use WindowsAzure\Common\Internal\Validate;
  * @version   Release: @package_version@
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
-class CreateStorageServiceOptions
+class GetDeploymentOptions
 {
     /**
      * @var string
      */
-    private $_location;
+    private $_slot;
     
     /**
      * @var string
      */
-    private $_affinityGroup;
+    private $_deploymentName;
+    
     
     /**
-     * @var string
-     */
-    private $_description;
-    
-    /**
-     * Gets the location.
+     * Gets the deployment slot.
      * 
      * @return string
      */
-    public function getLocation()
+    public function getSlot()
     {
-        return $this->_location;
+        return $this->_slot;
     }
     
     /**
-     * Sets the location.
+     * Sets the deployment slot.
      * 
-     * @param string $location The location.
+     * @param string $slot The deployment slot name.
      * 
      * @return none
      */
-    public function setLocation($location)
+    public function setSlot($slot)
     {
-        Validate::isString($location, 'location');
-        Validate::notNullOrEmpty($location, 'location');
-        
-        $this->_location = $location;
+        Validate::isString($slot, 'slot');
+        Validate::notNullOrEmpty($slot, 'slot');
+        Validate::isTrue(
+            DeploymentSlot::isValid($slot),
+            sprintf(Resources::INVALID_SLOT, $slot)
+        );
+                
+        $this->_slot = $slot;
     }
     
     /**
-     * Gets the affinityGroup.
+     * Gets the deployment name.
      * 
      * @return string
      */
-    public function getAffinityGroup()
+    public function getDeploymentName()
     {
-        return $this->_affinityGroup;
+        return $this->_deploymentName;
     }
     
     /**
-     * Sets the affinityGroup.
+     * Sets the deployment name.
      * 
-     * @param string $affinityGroup The affinityGroup.
+     * @param string $deploymentName The deployment name.
      * 
      * @return none
      */
-    public function setAffinityGroup($affinityGroup)
+    public function setDeploymentName($deploymentName)
     {
-        Validate::isString($affinityGroup, 'affinityGroup');
-        Validate::notNullOrEmpty($affinityGroup, 'affinityGroup');
-        
-        $this->_affinityGroup = $affinityGroup;
-    }
-    
-    /**
-     * Gets the description.
-     * 
-     * @return string
-     */
-    public function getDescription()
-    {
-        return $this->_description;
-    }
-    
-    /**
-     * Sets the description.
-     * 
-     * @param string $description The description.
-     * 
-     * @return none
-     */
-    public function setDescription($description)
-    {
-        Validate::isString($description, 'description');
-        
-        $this->_description = $description;
+        Validate::isString($deploymentName, 'deploymentName');
+        Validate::notNullOrEmpty($deploymentName, 'deploymentName');
+                
+        $this->_deploymentName = $deploymentName;
     }
 }
-
-
