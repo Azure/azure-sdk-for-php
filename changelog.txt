@@ -1,4 +1,4 @@
-Windows Azure SDK For PHP 0.4.0, 2012-08-17
+Windows Azure SDK For PHP 0.3.1, 2012-08-17
 -------------------------------------------
 - Added additional API support for Service Management:
 	* Operations on Hosted Services

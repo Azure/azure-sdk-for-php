@@ -47,9 +47,9 @@ To get the source code from GitHub, type
     git clone https://github.com/WindowsAzure/azure-sdk-for-php.git
     cd ./azure-sdk-for-php
 
-**Note**
-
-The PHP Client Libraries for Windows Azure have a dependency on the [HTTP_Request2](http://pear.php.net/package/HTTP_Request2), [Mail_mime](http://pear.php.net/package/Mail_mime), and [Mail_mimeDecode](http://pear.php.net/package/Mail_mimeDecode) PEAR packages. The recommended way to resolve these dependencies is to install them using the [PEAR package manager](http://pear.php.net/manual/en/installation.php).
+> **Note**
+> 
+> The PHP Client Libraries for Windows Azure have a dependency on the [HTTP_Request2](http://pear.php.net/package/HTTP_Request2), [Mail_mime](http://pear.php.net/package/Mail_mime), and [Mail_mimeDecode](http://pear.php.net/package/Mail_mimeDecode) PEAR packages. The recommended way to resolve these dependencies is to install them using the [PEAR package manager](http://pear.php.net/manual/en/installation.php).
 
 
 ##Install via Composer
@@ -74,10 +74,9 @@ The PHP Client Libraries for Windows Azure have a dependency on the [HTTP_Reques
 
 		php composer.phar install
 
-	<div class="dev-callout"> 
-	<b>Note</b> 
-	<p>On Windows, you will also need to add the Git executable to your PATH environment variable.</p>
-	</div>
+	> **Note**
+	>
+	> On Windows, you will also need to add the Git executable to your PATH environment variable.
 
 
 ##Install as a PEAR package
@@ -90,7 +89,7 @@ To install the PHP Client Libraries for Windows Azure as a PEAR package, follow 
 		pear channel-discover pear.windowsazure.com
 3. Install the PEAR package:
 
-		pear install pear.windowsazure.com/WindowsAzure-0.4.0
+		pear install pear.windowsazure.com/WindowsAzure-0.3.1
 
 
 # Usage
@@ -561,59 +560,65 @@ To create the .cer certificate, execute this:
 	openssl x509 -inform pem -in mycert.pem -outform der -out mycert.cer
 
 ### List Available Locations
-	
-	$serviceManagementRestProxy->listLocations();
-	$locations = $result->getLocations();
-	foreach($locations as $location){
-	      echo $location->getName()."<br />";
-	}
 
+```PHP	
+$serviceManagementRestProxy->listLocations();
+$locations = $result->getLocations();
+foreach($locations as $location){
+      echo $location->getName()."<br />";
+}
+```
 
 ### Create a Storage Service
 
 To create a storage service, you need a name for the service (between 3 and 24 lowercase characters and unique within Windows Azure), a label (a base-64 encoded name for the service, up to 100 characters), and either a location or an affinity group. Providing a description for the service is optional.
 
-	$name = "mystorageservice";
-	$label = base64_encode($name);
-	$options = new CreateStorageServiceOptions();
-	$options->setLocation('West US');
-	$result = $serviceManagementRestProxy->createStorageService($name, $label, $options);
+```PHP
+$name = "mystorageservice";
+$label = base64_encode($name);
+$options = new CreateStorageServiceOptions();
+$options->setLocation('West US');
+
+$result = $serviceManagementRestProxy->createStorageService($name, $label, $options);
+```
 	
 	
 ### Create a Cloud Service
 
 A cloud service is also known as a hosted service (from earlier versions of Windows Azure).  The **createHostedServices** method allows you to create a new hosted service by providing a hosted service name (which must be unique in Windows Azure), a label (the base 64-endcoded hosted service name), and a **CreateServiceOptions** object which allows you to set the location *or* the affinity group for your service. 
 
-        $name = "myhostedservice";
-        $label = base64_encode($name);
-        $options = new CreateServiceOptions();
-        $options->setLocation('West US');
-		// Instead of setLocation, you can use setAffinityGroup to set an affinity group.
+```PHP
+$name = "myhostedservice";
+$label = base64_encode($name);
+$options = new CreateServiceOptions();
+$options->setLocation('West US');
+// Instead of setLocation, you can use setAffinityGroup to set an affinity group.
 
-        $result = $serviceManagementRestProxy->createHostedService($name, $label, $options);
-
+$result = $serviceManagementRestProxy->createHostedService($name, $label, $options);
+```
 
 ### Create a Deployment
 
 To make a new deployment to Azure you must store the package file in a Windows Azure Blob Storage account under the same subscription as the hosted service to which the package is being uploaded. You can create a deployment package with the [Windows Azure PowerShell cmdlets](https://www.windowsazure.com/en-us/develop/php/how-to-guides/powershell-cmdlets/), or with the [cspack commandline tool](http://msdn.microsoft.com/en-us/library/windowsazure/gg432988.aspx).
 
-        $hostedServiceName = "myhostedservice";
-		$deploymentName = "v1";
-        $slot = DeploymentSlot::PRODUCTION;
-		$packageUrl = "URL_for_.cspkg_file";
-		$configuration = file_get_contents('path_to_.cscfg_file');
-		$label = base64_encode($hostedServiceName);
+```PHP
+$hostedServiceName = "myhostedservice";
+$deploymentName = "v1";
+$slot = DeploymentSlot::PRODUCTION;
+$packageUrl = "URL_for_.cspkg_file";
+$configuration = file_get_contents('path_to_.cscfg_file');
+$label = base64_encode($hostedServiceName);
 
-        $result = $serviceManagementRestProxy->createDeployment($hostedServiceName,
-														 $deploymentName,
-														 $slot,
-														 $packageUrl,
-														 $configuration,
-														 $label);
-		
-		$status = $serviceManagementRestProxy->getOperationStatus($result);
-		echo "Operation status: ".$status->getStatus()."<br />";
+$result = $serviceManagementRestProxy->createDeployment($hostedServiceName,
+												 $deploymentName,
+												 $slot,
+												 $packageUrl,
+												 $configuration,
+												 $label);
 
+$status = $serviceManagementRestProxy->getOperationStatus($result);
+echo "Operation status: ".$status->getStatus()."<br />";
+```
 
 **For more examples please see the [Windows Azure PHP Developer Center](http://www.windowsazure.com/en-us/develop/php)**
 
