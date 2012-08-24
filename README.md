@@ -145,17 +145,17 @@ There are four basic steps that have to be performed before you can make a call 
 
 	* For the Storage services:
 
-			$tableRestProxy = ServicesBuilder->getInstance()->createTableService($connectionString);
-			$blobRestProxy = ServicesBuilder->getInstance()->createBlobService($connectionString);
-			$queueRestProxy = ServicesBuilder->getInstance()->createQueueService($connectionString);
+			$tableRestProxy = ServicesBuilder::getInstance()->createTableService($connectionString);
+			$blobRestProxy = ServicesBuilder::getInstance()->createBlobService($connectionString);
+			$queueRestProxy = ServicesBuilder::getInstance()->createQueueService($connectionString);
 
 	* For Service Bus:
 
-			$serviceBusRestProxy = ServicesBuilder->getInstance()->createServiceBusService($connectionString);
+			$serviceBusRestProxy = ServicesBuilder::getInstance()->createServiceBusService($connectionString);
 
 	* For Service Management:
 
-			$serviceManagementRestProxy = ServicesBuilder->getInstance()->createServiceManagementService($connectionString);
+			$serviceManagementRestProxy = ServicesBuilder::getInstance()->createServiceManagementService($connectionString);
 
 ## Table Storage
 
