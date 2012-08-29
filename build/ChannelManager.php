@@ -23,8 +23,8 @@
  
 namespace WindowsAzure;
 
-require_once '../WindowsAzure/WindowsAzure.php';
-require_once '../defaults.php';
+require_once 'WindowsAzure/WindowsAzure.php';
+require_once 'defaults.php';
 use WindowsAzure\Common\Internal\Utilities;
 use WindowsAzure\Common\Internal\Serialization\XmlSerializer;
 use WindowsAzure\Blob\Models\CreateContainerOptions;
