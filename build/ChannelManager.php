@@ -336,8 +336,8 @@ class ChannelManager
      */
     private static function _addPackage()
     {
-        self::_executeCommand('php ..\package.php make');
-		self::_executeCommand('pear package ..\package.xml');
+        self::_executeCommand('php package.php make');
+		self::_executeCommand('pear package package.xml');
         $files = glob('*.tgz');
         $name  = $files[count($files) - 1];
         self::_executeCommand("pirum add channel $name");
