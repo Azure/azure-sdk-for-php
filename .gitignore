@@ -4,8 +4,8 @@ build/coverage
 build/logs
 build/pdepend
 build/phpdox
-build/channel
-build/*.tgz
+channel/
+*.tgz
 phpunit.xml
 cache.properties
 vendor

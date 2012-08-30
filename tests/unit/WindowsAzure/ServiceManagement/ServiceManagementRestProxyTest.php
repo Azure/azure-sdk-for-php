@@ -23,6 +23,7 @@
  */
 
 namespace Tests\Unit\WindowsAzure\ServiceManagement;
+use Tests\Framework\ServiceRestProxyTestBase;
 use Tests\Framework\ServiceManagementRestProxyTestBase;
 use Tests\Framework\TestResources;
 use WindowsAzure\Common\Internal\Resources;
@@ -1110,6 +1111,8 @@ class ServiceManagementRestProxyTest extends ServiceManagementRestProxyTestBase
      */
     public function testRebootRoleInstance()
     {
+        $this->markTestSkipped(ServiceRestProxyTestBase::TAKE_TOO_LONG);
+        
         // Setup
         $name = 'testRebootRoleInstance';
         $roleName = 'WebRole1_IN_0';
@@ -1153,6 +1156,8 @@ class ServiceManagementRestProxyTest extends ServiceManagementRestProxyTestBase
      */
     public function testReimageRoleInstance()
     {
+        $this->markTestSkipped(ServiceRestProxyTestBase::TAKE_TOO_LONG);
+        
         // Setup
         $name = 'testReimageRoleInstance';
         $roleName = 'WebRole1_IN_0';
