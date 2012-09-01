@@ -35,7 +35,7 @@ use WindowsAzure\Common\Internal\Utilities;
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @version   Release: @package_version@
- * @link      https://github.com/WindowsAzure/azure-sdk-for-php
+ * @link      http://msdn.microsoft.com/en-us/library/windowsazure/hh780763
  */
 
 class SubscriptionDescription
