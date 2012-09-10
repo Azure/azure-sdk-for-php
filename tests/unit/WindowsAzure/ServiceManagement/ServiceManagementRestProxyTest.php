@@ -901,6 +901,58 @@ class ServiceManagementRestProxyTest extends ServiceManagementRestProxyTestBase
     }
     
     /**
+     * @covers WindowsAzure\ServiceManagement\ServiceManagementRestProxy::getDeployment
+     * @covers WindowsAzure\ServiceManagement\ServiceManagementRestProxy::_getDeploymentPathUsingSlot
+     * @covers WindowsAzure\ServiceManagement\ServiceManagementRestProxy::_getPath
+     * @covers WindowsAzure\ServiceManagement\ServiceManagementRestProxy::_getDeploymentPath
+     * @covers WindowsAzure\ServiceManagement\Models\GetDeploymentResult::create
+     * @covers WindowsAzure\ServiceManagement\Models\Deployment::create
+     * @covers WindowsAzure\Common\Internal\Utilities::createInstanceList
+     * @covers WindowsAzure\ServiceManagement\Models\UpgradeStatus::create
+     * @covers WindowsAzure\ServiceManagement\Models\RoleInstance::create
+     * @covers WindowsAzure\ServiceManagement\Models\Role::create
+     * @covers WindowsAzure\ServiceManagement\Models\InputEndpoint::create
+     * @group Deployment
+     */
+    public function testGetDeploymentWhileUpgrading()
+    {
+        // Setup
+        $name = 'testgetdeploymentwhileupgrading';
+        $this->createDeployment($name);
+        
+        $mode = Mode::AUTO;
+        $configuration = $this->complexConfiguration;
+        $packageUrl = TestResources::complexPackageUrl();
+        $label = base64_encode($name . 'upgraded');
+        $force = true;
+        $options = new UpgradeDeploymentOptions();
+        $options->setDeploymentName($name);
+        
+        $upgradeResult = $this->restProxy->upgradeDeployment(
+            $name,
+            $mode,
+            $packageUrl,
+            $configuration,
+            $label,
+            $force,
+            $options
+        );
+        
+        // Test
+        $result = $this->restProxy->getDeployment($name, $options);
+        
+        // Block until the upgrade is done.
+        $this->blockUntilAsyncSucceed($upgradeResult);
+        
+        // Assert
+        $options = new GetDeploymentOptions();
+        $options->setSlot(DeploymentSlot::PRODUCTION);
+        $this->assertEquals($mode, strtolower($result->getDeployment()->getUpgradeStatus()->getUpgradeType()));
+        $this->assertEquals('Before', $result->getDeployment()->getUpgradeStatus()->getCurrentUpgradeDomainState());
+        $this->assertEquals(0, $result->getDeployment()->getUpgradeStatus()->getCurrentUpgradeDomain());
+    }
+    
+    /**
      * @covers WindowsAzure\ServiceManagement\ServiceManagementRestProxy::swapDeployment
      * @covers WindowsAzure\ServiceManagement\ServiceManagementRestProxy::_getHostedServicePath
      * @covers WindowsAzure\ServiceManagement\ServiceManagementRestProxy::_getPath
