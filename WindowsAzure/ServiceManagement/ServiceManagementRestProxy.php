@@ -951,8 +951,8 @@ class ServiceManagementRestProxy extends RestProxy
      * @param string                  $packageUrl     The URL that refers to the
      * location of the service package in the Blob service. The service package can
      * be located in a storage account beneath the same subscription.
-     * @param string                  $configuration  The base-64 encoded service 
-     * configuration file for the deployment.
+     * @param string|resource         $configuration The configuration file contents
+     * or file stream.
      * @param string                  $label          The name for the hosted service
      * that is base-64 encoded. The name can be up to 100 characters in length. It is
      * recommended that the label be unique within the subscription. The name can be
@@ -992,6 +992,10 @@ class ServiceManagementRestProxy extends RestProxy
         if (is_null($options)) {
             $options = new CreateDeploymentOptions();
         }
+        
+        $configuration = is_resource($configuration)
+                         ? stream_get_contents($configuration) : $configuration;
+        $configuration = base64_encode($configuration);
         
         $startDeployment       = Utilities::booleanToString(
             $options->getStartDeployment()
@@ -1153,7 +1157,7 @@ class ServiceManagementRestProxy extends RestProxy
      * @param string                               $name          The hosted service
      * name.
      * @param string|resource                      $configuration The configuration
-     * file contents or file stream,
+     * file contents or file stream.
      * @param ChangeDeploymentConfigurationOptions $options       The optional 
      * parameters.
      * 
@@ -1271,8 +1275,8 @@ class ServiceManagementRestProxy extends RestProxy
      * @param string                   $packageUrl    The URL that refers to the
      * location of the service package in the Blob service. The service package can
      * be located in a storage account beneath the same subscription.
-     * @param string                   $configuration The base-64 encoded service
-     * configuration file for the deployment.
+     * @param string|resource          $configuration The configuration file contents 
+     * or file stream.
      * @param string                   $label         The name for the hosted service
      * that is base-64 encoded. The name may be up to 100 characters in length.
      * @param boolean                  $force         Specifies whether the rollback
@@ -1307,6 +1311,10 @@ class ServiceManagementRestProxy extends RestProxy
         Validate::isBoolean($force, 'force');
         Validate::notNullOrEmpty($force, 'force');
         Validate::notNullOrEmpty($options, 'options');
+        
+        $configuration = is_resource($configuration)
+                         ? stream_get_contents($configuration) : $configuration;
+        $configuration = base64_encode($configuration);
         
         $xmlElements = array(
             Resources::XTAG_MODE            => $mode,

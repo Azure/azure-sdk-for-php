@@ -743,7 +743,7 @@ class ServiceManagementRestProxyTest extends ServiceManagementRestProxyTestBase
         $deploymentName = $name;
         $slot = $this->defaultSlot;
         $packageUrl = TestResources::simplePackageUrl();
-        $configuration = $this->defaultDeploymentEncodedConfiguration;
+        $configuration = $this->defaultDeploymentConfiguration;
         $this->createHostedService($name);
         $this->createdHostedServices[] = $name;
         $result = $this->restProxy->createDeployment(
@@ -782,7 +782,7 @@ class ServiceManagementRestProxyTest extends ServiceManagementRestProxyTestBase
         $deploymentName = $name;
         $slot = $this->defaultSlot;
         $packageUrl = TestResources::simplePackageUrl();
-        $configuration = $this->defaultDeploymentEncodedConfiguration;
+        $configuration = $this->defaultDeploymentConfiguration;
         $this->createHostedService($name);
         $this->createdHostedServices[] = $name;
         $result = $this->restProxy->createDeployment(
@@ -864,7 +864,7 @@ class ServiceManagementRestProxyTest extends ServiceManagementRestProxyTestBase
         $deploymentName = $name;
         $slot = $this->defaultSlot;
         $packageUrl = TestResources::complexPackageUrl();
-        $configuration = $this->encodedComplexConfiguration;
+        $configuration = $this->complexConfiguration;
         $this->createHostedService($name);
         $this->createdHostedServices[] = $name;
         $this->createdDeployments[] = $name;
@@ -1019,7 +1019,7 @@ class ServiceManagementRestProxyTest extends ServiceManagementRestProxyTestBase
         $name = 'testUpgradeDeployment';
         $this->createDeployment($name);
         $mode = Mode::AUTO;
-        $configuration = $this->encodedComplexConfiguration;
+        $configuration = $this->complexConfiguration;
         $packageUrl = TestResources::complexPackageUrl();
         $label = base64_encode($name . 'upgraded');
         $force = true;
@@ -1064,7 +1064,7 @@ class ServiceManagementRestProxyTest extends ServiceManagementRestProxyTestBase
         $this->createDeployment($name);
         
         $mode = Mode::MANUAL;
-        $configuration = $this->encodedComplexConfiguration;
+        $configuration = $this->complexConfiguration;
         $packageUrl = TestResources::complexPackageUrl();
         $label = base64_encode($name . 'upgraded');
         $force = true;
