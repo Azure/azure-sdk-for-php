@@ -393,7 +393,7 @@ class TableRestProxyTest extends TableServiceRestProxyTestBase
      * @covers WindowsAzure\Table\Internal\AtomReaderWriter::getEntity
      * @covers WindowsAzure\Table\Internal\AtomReaderWriter::parseEntity
      * @covers WindowsAzure\Table\Internal\AtomReaderWriter::_parseOneEntity
-     * WindowsAzure\Table\Models\InsertEntityResult::create
+     * @covers WindowsAzure\Table\Models\InsertEntityResult::create
      * @covers WindowsAzure\Common\Internal\ServiceRestProxy::sendContext
      */
     public function testInsertEntity()
@@ -663,7 +663,7 @@ class TableRestProxyTest extends TableServiceRestProxyTestBase
      * @covers WindowsAzure\Table\Internal\AtomReaderWriter::getEntity
      * @covers WindowsAzure\Table\Internal\AtomReaderWriter::parseEntity
      * @covers WindowsAzure\Table\Internal\AtomReaderWriter::_parseOneEntity
-     * WindowsAzure\Table\Models\InsertEntityResult::create
+     * @covers WindowsAzure\Table\Models\InsertEntityResult::create
      * @covers WindowsAzure\Common\Internal\ServiceRestProxy::sendContext
      */
     public function testUpdateEntityWithDeleteProperty()
