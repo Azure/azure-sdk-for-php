@@ -56,7 +56,7 @@ use WindowsAzure\ServiceBus\Models\TopicInfo;
  * @author    Azure PHP SDK <azurephpsdk@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
- * @version   Release: @package_version@s
+ * @version   Release: 0.3.1_2011-08s
  * @link      https://github.com/WindowsAzure/azure-sdk-for-php
  */
 class ServiceBusRestProxyTest extends ServiceBusRestProxyTestBase
