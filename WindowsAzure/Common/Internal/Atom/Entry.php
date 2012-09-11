@@ -41,6 +41,8 @@ use WindowsAzure\Common\Internal\Validate;
 
 class Entry extends AtomBase
 {
+    // @codingStandardsIgnoreStart
+    
     /**
      * The author of the entry.
      *
@@ -204,7 +206,6 @@ class Entry extends AtomBase
                 (string)$entryArray['updated']
             );
         }
-         
     }
 
     /**
@@ -627,4 +628,4 @@ class Entry extends AtomBase
     }
 }
 
-?>
+// @codingStandardsIgnoreEnd

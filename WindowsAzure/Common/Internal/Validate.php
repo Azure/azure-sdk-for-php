@@ -255,8 +255,7 @@ class Validate
      */
     public static function getIsValidUri()
     {
-        return function ($uri)
-        {
+        return function ($uri) {
             $isValid = filter_var($uri, FILTER_VALIDATE_URL);
             
             if ($isValid) {

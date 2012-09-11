@@ -155,43 +155,44 @@ class TableRestProxy extends ServiceRestProxy implements ITable
     {
         switch ($type) {
         case BatchOperationType::INSERT_ENTITY_OPERATION:
-            return $this->_constructInsertEntityContext($table, $entity, null);
+        return $this->_constructInsertEntityContext($table, $entity, null);
             
         case BatchOperationType::UPDATE_ENTITY_OPERATION:
-            return $this->_constructPutOrMergeEntityContext(
-                $table,
-                $entity,
-                Resources::HTTP_PUT,
-                true,
-                null
-            );
+        return $this->_constructPutOrMergeEntityContext(
+            $table,
+            $entity,
+            Resources::HTTP_PUT,
+            true,
+            null
+        );
             
         case BatchOperationType::MERGE_ENTITY_OPERATION:
-            return $this->_constructPutOrMergeEntityContext(
-                $table,
-                $entity,
-                Resources::HTTP_MERGE,
-                true,
-                null
-            );
+        return $this->_constructPutOrMergeEntityContext(
+            $table,
+            $entity,
+            Resources::HTTP_MERGE,
+            true,
+            null
+        );
             
         case BatchOperationType::INSERT_REPLACE_ENTITY_OPERATION:
-            return $this->_constructPutOrMergeEntityContext(
-                $table,
-                $entity,
-                Resources::HTTP_PUT,
-                false,
-                null
-            );
+        return $this->_constructPutOrMergeEntityContext(
+            $table,
+            $entity,
+            Resources::HTTP_PUT,
+            false,
+            null
+        );
             
         case BatchOperationType::INSERT_MERGE_ENTITY_OPERATION:
-            return $this->_constructPutOrMergeEntityContext(
-                $table,
-                $entity,
-                Resources::HTTP_MERGE,
-                false,
-                null
-            );
+        return $this->_constructPutOrMergeEntityContext(
+            $table,
+            $entity,
+            Resources::HTTP_MERGE,
+            false,
+            null
+        );
+            
         default:
             throw new \InvalidArgumentException();
         }

@@ -158,9 +158,9 @@ class ServicesBuilder
             $connectionString
         );
         
-        $httpClient    = $this->httpClient();
-        $serializer    = $this->serializer();
-        $uri           = Utilities::tryAddUrlScheme(
+        $httpClient = $this->httpClient();
+        $serializer = $this->serializer();
+        $uri        = Utilities::tryAddUrlScheme(
             $settings->getQueueEndpointUri()
         );
         
@@ -209,9 +209,9 @@ class ServicesBuilder
             $connectionString
         );
         
-        $httpClient    = $this->httpClient();
-        $serializer    = $this->serializer();
-        $uri           = Utilities::tryAddUrlScheme(
+        $httpClient = $this->httpClient();
+        $serializer = $this->serializer();
+        $uri        = Utilities::tryAddUrlScheme(
             $settings->getBlobEndpointUri()
         );
 

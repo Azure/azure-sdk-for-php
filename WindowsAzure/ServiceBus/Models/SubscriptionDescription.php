@@ -318,8 +318,9 @@ class SubscriptionDescription
     public function setDeadLetteringOnFilterEvaluationExceptions(
         $deadLetteringOnFilterEvaluationExceptions
     ) {
-        $this->_deadLetteringOnFilterEvaluationExceptions
-            = $deadLetteringOnFilterEvaluationExceptions;
+        $value = $deadLetteringOnFilterEvaluationExceptions;
+        
+        $this->_deadLetteringOnFilterEvaluationExceptions = $value;
     }
 
     /**

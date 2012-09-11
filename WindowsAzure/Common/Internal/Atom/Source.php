@@ -40,6 +40,8 @@ use WindowsAzure\Common\Internal\Resources;
 
 class Source extends AtomBase
 {
+    // @codingStandardsIgnoreStart
+    
     /**
      * The author the source. 
      * 
@@ -627,3 +629,4 @@ class Source extends AtomBase
     }
 }
 
+// @codingStandardsIgnoreEnd

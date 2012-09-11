@@ -178,4 +178,4 @@ class Content extends AtomBase
         $xmlWriter->writeRaw($this->text);
     }
 }
-?>
+

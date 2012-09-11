@@ -233,8 +233,9 @@ class TopicDescription
     public function setDuplicateDetectionHistoryTimeWindow(
         $duplicateDetectionHistoryTimeWindow
     ) {
-        $this->_duplicateDetectionHistoryTimeWindow 
-            = $duplicateDetectionHistoryTimeWindow;
+        $value = $duplicateDetectionHistoryTimeWindow;
+        
+        $this->_duplicateDetectionHistoryTimeWindow = $value;
     }
 
     /**

@@ -86,4 +86,4 @@ class ConnectionStringSourceTest extends \PHPUnit_Framework_TestCase
     }
 }
 
-?>
+

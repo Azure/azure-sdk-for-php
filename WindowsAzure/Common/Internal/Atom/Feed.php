@@ -40,6 +40,8 @@ use WindowsAzure\Common\Internal\Resources;
 
 class Feed extends AtomBase
 {
+    // @codingStandardsIgnoreStart
+    
     /**
      * The entry of the feed. 
      * 
@@ -725,3 +727,4 @@ class Feed extends AtomBase
     }
 }
 
+// @codingStandardsIgnoreEnd

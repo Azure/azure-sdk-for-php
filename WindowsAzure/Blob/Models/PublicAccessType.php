@@ -55,10 +55,10 @@ class PublicAccessType
         case self::NONE:
         case self::BLOBS_ONLY:
         case self::CONTAINER_AND_BLOBS:
-            return true;
+        return true;
 
         default:
-            return false;
+        return false;
         }
     }
 }

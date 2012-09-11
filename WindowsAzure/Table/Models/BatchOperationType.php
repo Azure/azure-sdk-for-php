@@ -60,10 +60,10 @@ class BatchOperationType
         case self::MERGE_ENTITY_OPERATION:
         case self::INSERT_REPLACE_ENTITY_OPERATION:
         case self::INSERT_MERGE_ENTITY_OPERATION:
-            return true;
+        return true;
                 
         default:
-            return false;
+        return false;
         }
     }
 }
