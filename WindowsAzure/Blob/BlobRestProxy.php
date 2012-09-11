@@ -118,11 +118,19 @@ class BlobRestProxy extends ServiceRestProxy implements IBlob
      */
     private function _createPath($container, $blob)
     {
+        $encodedBlob = urlencode($blob);
+        // Unencode the forward slashes to match what the server expects.
+        $encodedBlob = str_replace('%2F', '/', $encodedBlob);
+        // Unencode the backward slashes to match what the server expects.
+        $encodedBlob = str_replace('%5C', '/', $encodedBlob);
+        // Re-encode the spaces (encoded as space) to the % encoding.
+        $encodedBlob = str_replace('+', '%20', $encodedBlob);
+        
         // Empty container means accessing default container
         if (empty($container)) {
-            return $blob;
+            return $encodedBlob;
         } else {
-            return $container . '/' . $blob;
+            return $container . '/' . $encodedBlob;
         }
     }
     
