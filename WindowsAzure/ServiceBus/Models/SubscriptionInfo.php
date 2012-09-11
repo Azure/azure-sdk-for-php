@@ -258,7 +258,9 @@ class SubscriptionInfo extends Entry
      */
     public function setDefaultMessageTimeToLive($defaultMessageTimeToLive)
     {   
-        $this->_subscriptionDescription->setDefaultMessageTimeToLive($defaultMessageTimeToLive);
+        $this->_subscriptionDescription->setDefaultMessageTimeToLive(
+            $defaultMessageTimeToLive
+        );
     }
 
     /**
@@ -268,7 +270,8 @@ class SubscriptionInfo extends Entry
      */
     public function getDeadLetteringOnMessageExpiration()
     {
-        return $this->_subscriptionDescription->getDeadLetteringOnMessageExpiration();
+        $subscriptionDesc = $this->_subscriptionDescription;
+        return $subscriptionDesc->getDeadLetteringOnMessageExpiration();
     }
 
     /** 
@@ -282,7 +285,9 @@ class SubscriptionInfo extends Entry
     public function setDeadLetteringOnMessageExpiration(
         $deadLetteringOnMessageExpiration
     ) {
-        $this->_subscriptionDescription->setDeadLetteringOnMessageExpiration($deadLetteringOnMessageExpiration);
+        $this->_subscriptionDescription->setDeadLetteringOnMessageExpiration(
+            $deadLetteringOnMessageExpiration
+        );
     }
 
     /**
@@ -292,7 +297,8 @@ class SubscriptionInfo extends Entry
      */
     public function getDeadLetteringOnFilterEvaluationExceptions()
     {
-        return $this->_subscriptionDescription->getDeadLetteringOnFilterEvaluationExceptions();
+        $subscriptionDesc = $this->_subscriptionDescription;
+        return $subscriptionDesc->getDeadLetteringOnFilterEvaluationExceptions();
     }
 
     /**
@@ -306,7 +312,8 @@ class SubscriptionInfo extends Entry
     public function setDeadLetteringOnFilterEvaluationExceptions(
         $deadLetteringOnFilterEvaluationExceptions
     ) {
-        $this->_subscriptionDescription->setdeadLetteringOnFilterEvaluationExceptions(
+        $subscriptionDesc = $this->_subscriptionDescription;
+        $subscriptionDesc->setdeadLetteringOnFilterEvaluationExceptions(
             $deadLetteringOnFilterEvaluationExceptions
         );
     }
@@ -330,7 +337,9 @@ class SubscriptionInfo extends Entry
      */
     public function setDefaultRuleDescription($defaultRuleDescription)
     {
-        $this->_subscriptionDescription->setDefaultRuleDescription($defaultRuleDescription);
+        $this->_subscriptionDescription->setDefaultRuleDescription(
+            $defaultRuleDescription
+        );
     }
 
     /**
@@ -396,6 +405,8 @@ class SubscriptionInfo extends Entry
      */
     public function setEnableBatchedOperations($enableBatchedOperations)
     {
-        $this->_subscriptionDescription->setEnableBatchedOperations($enableBatchedOperations); 
+        $this->_subscriptionDescription->setEnableBatchedOperations(
+            $enableBatchedOperations
+        );
     }
 }

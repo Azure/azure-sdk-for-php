@@ -68,6 +68,8 @@ class RuleDescription
     {   
     }
 
+    // @codingStandardsIgnoreStart
+    
     /**
      * Creates a rule description instance with specified XML string. 
      * 
@@ -165,6 +167,8 @@ class RuleDescription
         return $ruleDescription;
     }
     
+    // @codingStandardsIgnoreEnd
+    
     /**
      * Gets the filter. 
      *
@@ -233,4 +237,3 @@ class RuleDescription
     }
 
 }
-

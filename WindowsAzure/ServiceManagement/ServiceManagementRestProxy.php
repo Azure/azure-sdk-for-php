@@ -197,6 +197,15 @@ class ServiceManagementRestProxy extends RestProxy
         return $this->_getPath($path, $deploymentName);
     }
     
+    /**
+     * Gets role instance path.
+     * 
+     * @param string               $name     The hosted service name.
+     * @param GetDeploymentOptions $options  The get deployment options.
+     * @param string               $roleName The role instance name.
+     * 
+     * @return string
+     */
     private function _getRoleInstancePath($name, $options, $roleName)
     {
         $path = $this->_getDeploymentPath($name, $options) . '/roleinstances';
@@ -951,7 +960,7 @@ class ServiceManagementRestProxy extends RestProxy
      * @param string                  $packageUrl     The URL that refers to the
      * location of the service package in the Blob service. The service package can
      * be located in a storage account beneath the same subscription.
-     * @param string|resource         $configuration The configuration file contents
+     * @param string|resource         $configuration  The configuration file contents
      * or file stream.
      * @param string                  $label          The name for the hosted service
      * that is base-64 encoded. The name can be up to 100 characters in length. It is
@@ -1275,7 +1284,7 @@ class ServiceManagementRestProxy extends RestProxy
      * @param string                   $packageUrl    The URL that refers to the
      * location of the service package in the Blob service. The service package can
      * be located in a storage account beneath the same subscription.
-     * @param string|resource          $configuration The configuration file contents 
+     * @param string|resource          $configuration The configuration file contents
      * or file stream.
      * @param string                   $label         The name for the hosted service
      * that is base-64 encoded. The name may be up to 100 characters in length.

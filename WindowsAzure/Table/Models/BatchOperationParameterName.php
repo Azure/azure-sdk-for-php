@@ -58,10 +58,10 @@ class BatchOperationParameterName
         case self::BP_PARTITION_KEY:
         case self::BP_ROW_KEY:
         case self::BP_ETAG:
-            return true;
+        return true;
 
         default:
-            return false;
+        return false;
         }
     }
 }

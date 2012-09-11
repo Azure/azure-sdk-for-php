@@ -151,6 +151,8 @@ class BrokerProperties
     {
     }
 
+    // @codingStandardsIgnoreStart
+    
     /**
      * Creates a broker properties instance with specified JSON message.  
      *
@@ -160,7 +162,7 @@ class BrokerProperties
      * @return none
      */
     public static function create($brokerPropertiesJson)
-    {
+    {        
         Validate::isString($brokerPropertiesJson, 'brokerPropertiesJson');
 
         $brokerProperties = new BrokerProperties();
@@ -261,8 +263,10 @@ class BrokerProperties
             );
         }
 
-        return $brokerProperties;        
+        return $brokerProperties;
     }
+    
+    // @codingStandardsIgnoreEnd
 
     /**
      * Gets the correlation ID. 
@@ -780,4 +784,3 @@ class BrokerProperties
         }
     }
 }
-

@@ -256,7 +256,9 @@ class QueueInfo
      */
     public function setRequiresDuplicateDetection($requiresDuplicateDetection)
     {
-        $this->_queueDescription->setRequiresDuplicateDetection($requiresDuplicateDetection);
+        $this->_queueDescription->setRequiresDuplicateDetection(
+            $requiresDuplicateDetection
+        );
     }
 
     /**
@@ -300,7 +302,9 @@ class QueueInfo
      */
     public function setDefaultMessageTimeToLive($defaultMessageTimeToLive)
     {   
-        $this->_queueDescription->setDefaultMessageTimeToLive($defaultMessageTimeToLive);
+        $this->_queueDescription->setDefaultMessageTimeToLive(
+            $defaultMessageTimeToLive
+        );
     }
 
     /**
@@ -324,7 +328,9 @@ class QueueInfo
     public function setDeadLetteringOnMessageExpiration(
         $deadLetteringOnMessageExpiration
     ) {
-        $this->_queueDescription->setDeadLetteringOnMessageExpiration($deadLetteringOnMessageExpiration);
+        $this->_queueDescription->setDeadLetteringOnMessageExpiration(
+            $deadLetteringOnMessageExpiration
+        );
     }
 
     /**
@@ -394,7 +400,9 @@ class QueueInfo
      */
     public function setEnableBatchedOperations($enableBatchedOperations)
     {
-        $this->_queueDescription->setEnableBatchedOperations($enableBatchedOperations); 
+        $this->_queueDescription->setEnableBatchedOperations(
+            $enableBatchedOperations
+        );
     }
 
     /**

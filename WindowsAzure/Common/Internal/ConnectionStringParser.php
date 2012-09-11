@@ -132,11 +132,11 @@ class ConnectionStringParser
                 break;
             
             case ParserState::EXPECT_VALUE:
-                $value           = $this->_extractValue();
-                $this->_state    = ParserState::EXPECT_SEPARATOR;
+                $value                        = $this->_extractValue();
+                $this->_state                 = ParserState::EXPECT_SEPARATOR;
                 $connectionStringValues[$key] = $value;
-                $key             = null;
-                $value           = null;
+                $key                          = null;
+                $value                        = null;
                 break;
             
             default:

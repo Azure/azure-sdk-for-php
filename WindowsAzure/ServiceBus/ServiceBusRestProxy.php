@@ -166,6 +166,8 @@ class ServiceBusRestProxy extends ServiceRestProxy implements IServiceBus
         );
     }
 
+    // @codingStandardsIgnoreStart
+    
     /**
      * Receives a message. 
      * 
@@ -202,7 +204,7 @@ class ServiceBusRestProxy extends ServiceRestProxy implements IServiceBus
             );
         }
 
-        $response         = $this->sendContext($httpCallContext);
+        $response = $this->sendContext($httpCallContext);
         if ($response->getStatus() === Resources::STATUS_NO_CONTENT) {
             $brokeredMessage = null;
         } else {
@@ -246,9 +248,11 @@ class ServiceBusRestProxy extends ServiceRestProxy implements IServiceBus
 
             }
         }
-
+        
         return $brokeredMessage; 
     }
+    
+    // @codingStandardsIgnoreEnd
 
     /**
      * Sends a brokered message to a specified topic. 
@@ -260,8 +264,7 @@ class ServiceBusRestProxy extends ServiceRestProxy implements IServiceBus
      */
     public function sendTopicMessage($topicName, $brokeredMessage)
     {
-        $topicMessagePath 
-            = sprintf(Resources::SEND_MESSAGE_PATH, $topicName);
+        $topicMessagePath = sprintf(Resources::SEND_MESSAGE_PATH, $topicName);
         $this->sendMessage($topicMessagePath, $brokeredMessage);
     } 
 
@@ -383,8 +386,8 @@ class ServiceBusRestProxy extends ServiceRestProxy implements IServiceBus
         $body = $xmlWriter->outputMemory();
         $httpCallContext->setBody($body);
 
-        $response          = $this->sendContext($httpCallContext);
-        $queueInfo         = new QueueInfo();
+        $response  = $this->sendContext($httpCallContext);
+        $queueInfo = new QueueInfo();
         $queueInfo->parseXml($response->getBody());
         return $queueInfo;
     } 
@@ -422,8 +425,8 @@ class ServiceBusRestProxy extends ServiceRestProxy implements IServiceBus
         $httpCallContext->setPath($queuePath);
         $httpCallContext->setMethod(Resources::HTTP_GET);
         $httpCallContext->addStatusCode(Resources::STATUS_OK);
-        $response       = $this->sendContext($httpCallContext);
-        $queueInfo      = new QueueInfo();
+        $response  = $this->sendContext($httpCallContext);
+        $queueInfo = new QueueInfo();
         $queueInfo->parseXml($response->getBody());
         return $queueInfo;
     }
@@ -519,8 +522,8 @@ class ServiceBusRestProxy extends ServiceRestProxy implements IServiceBus
         $entry->writeXml($xmlWriter); 
         $httpCallContext->setBody($xmlWriter->outputMemory());
 
-        $response          = $this->sendContext($httpCallContext);
-        $topicInfo         = new TopicInfo();
+        $response  = $this->sendContext($httpCallContext);
+        $topicInfo = new TopicInfo();
         $topicInfo->parseXml($response->getBody());
         return $topicInfo;
     } 
@@ -555,8 +558,8 @@ class ServiceBusRestProxy extends ServiceRestProxy implements IServiceBus
         $httpCallContext->setMethod(Resources::HTTP_GET);
         $httpCallContext->setPath($topicPath);
         $httpCallContext->addStatusCode(Resources::STATUS_OK);
-        $response       = $this->sendContext($httpCallContext);
-        $topicInfo      = new TopicInfo();
+        $response  = $this->sendContext($httpCallContext);
+        $topicInfo = new TopicInfo();
         $topicInfo->parseXml($response->getBody());
         return $topicInfo; 
     }
@@ -628,8 +631,8 @@ class ServiceBusRestProxy extends ServiceRestProxy implements IServiceBus
         $entry->writeXml($xmlWriter); 
         $httpCallContext->setBody($xmlWriter->outputMemory());
 
-        $response                 = $this->sendContext($httpCallContext);
-        $subscriptionInfo         = new SubscriptionInfo();
+        $response         = $this->sendContext($httpCallContext);
+        $subscriptionInfo = new SubscriptionInfo();
         $subscriptionInfo->parseXml($response->getBody());
         return $subscriptionInfo;
     }
@@ -675,8 +678,8 @@ class ServiceBusRestProxy extends ServiceRestProxy implements IServiceBus
             $subscriptionName
         );
         $httpCallContext->setPath($subscriptionPath);
-        $response              = $this->sendContext($httpCallContext);
-        $subscriptionInfo      = new SubscriptionInfo();
+        $response         = $this->sendContext($httpCallContext);
+        $subscriptionInfo = new SubscriptionInfo();
         $subscriptionInfo->parseXml($response->getBody()); 
         return $subscriptionInfo;
     }
@@ -755,8 +758,8 @@ class ServiceBusRestProxy extends ServiceRestProxy implements IServiceBus
         $httpCallContext->setBody($xmlWriter->outputMemory());
 
         $httpCallContext->setPath($rulePath);
-        $response         = $this->sendContext($httpCallContext);
-        $ruleInfo         = new ruleInfo();
+        $response = $this->sendContext($httpCallContext);
+        $ruleInfo = new ruleInfo();
         $ruleInfo->parseXml($response->getBody()); 
         return $ruleInfo;
     }
@@ -806,8 +809,8 @@ class ServiceBusRestProxy extends ServiceRestProxy implements IServiceBus
             $ruleName
         );
         $httpCallContext->setPath($rulePath);
-        $response      = $this->sendContext($httpCallContext);
-        $ruleInfo      = new RuleInfo();
+        $response = $this->sendContext($httpCallContext);
+        $ruleInfo = new RuleInfo();
         $ruleInfo->parseXml($response->getBody());
         return $ruleInfo;
     }

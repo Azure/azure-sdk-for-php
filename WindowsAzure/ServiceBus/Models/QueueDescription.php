@@ -116,6 +116,8 @@ class QueueDescription
      */ 
     private $_messageCount;    
 
+    // @codingStandardsIgnoreStart
+    
     /**
      * Creates a queue description object with specified XML string.
      *
@@ -215,6 +217,9 @@ class QueueDescription
 
         return $queueDescription;
     }
+    
+    // @codingStandardsIgnoreEnd
+    
     /** 
      * Creates a queue description instance with default parameters. 
      */
@@ -377,8 +382,9 @@ class QueueDescription
     public function setDuplicateDetectionHistoryTimeWindow(
         $duplicateDetectionHistoryTimeWindow
     ) {
-        $this->_duplicateDetectionHistoryTimeWindow 
-            = $duplicateDetectionHistoryTimeWindow;
+        $value = $duplicateDetectionHistoryTimeWindow;
+        
+        $this->_duplicateDetectionHistoryTimeWindow = $value;
     }
 
     /**
@@ -469,4 +475,3 @@ class QueueDescription
         $this->_messageCount = $messageCount;
     }
 }
-

@@ -320,7 +320,7 @@ class StorageServiceSettings extends ServiceSettings
         $queueEndpointUri = null,
         $tableEndpointUri = null
     ) {
-        $blobEndpointUri = Utilities::tryGetValueInsensitive(
+        $blobEndpointUri  = Utilities::tryGetValueInsensitive(
             Resources::BLOB_ENDPOINT_NAME,
             $settings,
             $blobEndpointUri
@@ -371,7 +371,7 @@ class StorageServiceSettings extends ServiceSettings
             self::optional(self::$_developmentStorageProxyUriSetting)
         );
         if ($matchedSpecs) {
-            $proxyUri    = Utilities::tryGetValueInsensitive(
+            $proxyUri = Utilities::tryGetValueInsensitive(
                 Resources::DEVELOPMENT_STORAGE_PROXY_URI_NAME,
                 $tokenizedSettings
             );

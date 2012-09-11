@@ -169,9 +169,9 @@ class Deployment
             $parsed,
             Resources::XTAG_UPGRADE_DOMAIN_COUNT
         );
-        $upgradeStatus      = Utilities::tryGetArray(
-            Resources::XTAG_UPGRADE_STATUS,
-            $parsed
+        $upgradeStatus      = Utilities::tryGetValue(
+            $parsed,
+            Resources::XTAG_UPGRADE_STATUS
         );
         
         $result->setConfiguration($configuration);
