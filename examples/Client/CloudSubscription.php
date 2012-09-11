@@ -23,10 +23,8 @@
  */
  
 namespace Client;
-use WindowsAzure\Common\Configuration;
+use WindowsAzure\Common\ServicesBuilder;
 use WindowsAzure\Common\Internal\Resources;
-use WindowsAzure\ServiceManagement\ServiceManagementService;
-use WindowsAzure\ServiceManagement\ServiceManagementSettings;
 use WindowsAzure\ServiceManagement\Models\Locations;
 use WindowsAzure\ServiceManagement\Models\OperationStatus;
 use WindowsAzure\ServiceManagement\Models\CreateServiceOptions;
@@ -60,20 +58,8 @@ class CloudSubscription
      */
     public function __construct($subscriptionId, $certificatePath)
     {
-        $config = new Configuration();
-        $config->setProperty(
-            ServiceManagementSettings::SUBSCRIPTION_ID,
-            $subscriptionId
-        );
-        $config->setProperty(
-            ServiceManagementSettings::CERTIFICATE_PATH,
-            $certificatePath
-        );
-        $config->setProperty(
-            ServiceManagementSettings::URI,
-            Resources::SERVICE_MANAGEMENT_URL
-        );
-        $this->_proxy = ServiceManagementService::create($config);
+        $connectionString = "SubscriptionID=$subscriptionId;CertificatePath=$certificatePath";
+        $this->_proxy     = ServicesBuilder::getInstance()->createServiceManagementService($connectionString);
     }
     
     /**
@@ -85,7 +71,7 @@ class CloudSubscription
      */
     public function storageServiceExists($name)
     {
-        $result = $this->_proxy->listStorageServices();
+        $result          = $this->_proxy->listStorageServices();
         $storageServices = $result->getStorageServices();
         
         foreach ($storageServices as $storageService) {
