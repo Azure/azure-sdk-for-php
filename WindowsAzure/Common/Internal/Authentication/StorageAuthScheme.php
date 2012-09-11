@@ -184,8 +184,7 @@ abstract class StorageAuthScheme
             sort($values);
             $separated = implode(Resources::SEPARATOR, $values);
             
-            $canonicalizedResource .= "\n" . $key . ':' . 
-                rawurldecode($separated);
+            $canonicalizedResource .= "\n" . $key . ':' . $separated;
         }
 
         return $canonicalizedResource;
