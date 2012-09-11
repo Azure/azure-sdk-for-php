@@ -2177,7 +2177,10 @@ class BlobRestProxy extends ServiceRestProxy implements IBlob
         $headers             = array();
         $postParams          = array();
         $queryParams         = array();
-        $destinationBlobPath = $destinationContainer . '/' . $destinationBlob;
+        $destinationBlobPath = $this->_createPath(
+            $destinationContainer,
+            $destinationBlob
+        );
         $statusCode          = Resources::STATUS_CREATED;
         
         if (is_null($options)) {
