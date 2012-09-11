@@ -238,7 +238,7 @@ class ServiceBusTopicTest extends ScenarioTestBase
         foreach ($lst as $item) {
             self::write('  Rule: ' . $item->getTitle());
             $filter = $item->getFilter();
-            self::write('    Filter: ' . get_class($filter) . ':' . $filter->getCompatibilityLevel());
+            self::write('    Filter: ' . get_class($filter));
             if ($filter instanceof SqlFilter) {
                 self::write('      ' . $filter->getSqlExpression());
             }

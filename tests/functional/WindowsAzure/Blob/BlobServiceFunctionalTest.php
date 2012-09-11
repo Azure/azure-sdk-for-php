@@ -2221,6 +2221,7 @@ class BlobServiceFunctionalTest extends FunctionalTestBase
      */
     public function testCopyBlobNoOptions()
     {
+        // TODO: https://github.com/WindowsAzure/azure-sdk-for-php/issues/551
 
         $sourceContainers = array(
             BlobServiceFunctionalTestData::$testContainerNames[0],
