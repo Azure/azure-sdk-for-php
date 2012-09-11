@@ -167,7 +167,7 @@ class ServicesBuilder
         $queueWrapper = new QueueRestProxy(
             $httpClient, 
             $uri,
-            Resources::EMPTY_STRING, 
+            $settings->getName(), 
             $serializer
         );
 
