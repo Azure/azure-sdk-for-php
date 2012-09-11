@@ -119,6 +119,7 @@ class BlobRestProxyTest extends BlobServiceRestProxyTestBase
 
         // Assert
         $containers = $result->getContainers();
+        $this->assertNotNull($result->getAccountName());
         $this->assertEquals($container1, $containers[0]->getName());
         $this->assertEquals($container2, $containers[1]->getName());
         $this->assertEquals($container3, $containers[2]->getName());
@@ -493,6 +494,7 @@ class BlobRestProxyTest extends BlobServiceRestProxyTestBase
 
         // Assert
         $blobs = $result->getBlobs();
+        $this->assertNotNull($result->getContainerName());
         $this->assertEquals($blob1, $blobs[0]->getName());
         $this->assertEquals($blob2, $blobs[1]->getName());
         $this->assertEquals($blob3, $blobs[2]->getName());

@@ -72,6 +72,7 @@ class QueueRestProxyTest extends QueueServiceRestProxyTestBase
 
         // Assert
         $queues = $result->getQueues();
+        $this->assertNotNull($result->getAccountName());
         $this->assertEquals($queue1, $queues[0]->getName());
         $this->assertEquals($queue2, $queues[1]->getName());
         $this->assertEquals($queue3, $queues[2]->getName());
