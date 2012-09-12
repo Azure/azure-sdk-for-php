@@ -47,7 +47,7 @@ use WindowsAzure\Common\ServiceException;
  * @author     Azure PHP SDK <azurephpsdk@microsoft.com>
  * @copyright  2012 Microsoft Corporation
  * @license    http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
- * @version    Release: @package_version@
+ * @version    Release: 0.3.1_2011-08
  * @link       https://github.com/windowsazure/azure-sdk-for-php
  */
 class QueueRestProxyTest extends QueueServiceRestProxyTestBase
@@ -72,6 +72,7 @@ class QueueRestProxyTest extends QueueServiceRestProxyTestBase
 
         // Assert
         $queues = $result->getQueues();
+        $this->assertNotNull($result->getAccountName());
         $this->assertEquals($queue1, $queues[0]->getName());
         $this->assertEquals($queue2, $queues[1]->getName());
         $this->assertEquals($queue3, $queues[2]->getName());

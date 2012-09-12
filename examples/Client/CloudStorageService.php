@@ -23,13 +23,7 @@
  */
  
 namespace Client;
-use WindowsAzure\Common\Configuration;
-use WindowsAzure\Table\TableService;
-use WindowsAzure\Table\TableSettings;
-use WindowsAzure\Blob\BlobService;
-use WindowsAzure\Blob\BlobSettings;
-use WindowsAzure\Queue\QueueService;
-use WindowsAzure\Queue\QueueSettings;
+use WindowsAzure\Common\ServicesBuilder;
 use WindowsAzure\Table\Models\QueryTablesOptions;
 
 /**
@@ -40,7 +34,7 @@ use WindowsAzure\Table\Models\QueryTablesOptions;
  * @author    Azure PHP SDK <azurephpsdk@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
- * @version   Release: @package_version@
+ * @version   Release: 0.3.1_2011-08
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
 class CloudStorageService
@@ -86,20 +80,10 @@ class CloudStorageService
             }
         }
         
-        $config = new Configuration();
-        $config->setProperty(TableSettings::ACCOUNT_NAME, $name);
-        $config->setProperty(TableSettings::ACCOUNT_KEY, $key);
-        $config->setProperty(TableSettings::URI, $tableUri);
-        $config->setProperty(BlobSettings::ACCOUNT_NAME, $name);
-        $config->setProperty(BlobSettings::ACCOUNT_KEY, $key);
-        $config->setProperty(BlobSettings::URI, $tableUri);
-        $config->setProperty(QueueSettings::ACCOUNT_NAME, $name);
-        $config->setProperty(QueueSettings::ACCOUNT_KEY, $key);
-        $config->setProperty(QueueSettings::URI, $tableUri);
-        
-        $this->_tableProxy = TableService::create($config);
-        $this->_blobProxy  = BlobService::create($config);
-        $this->_queueProxy = QueueService::create($config);
+        $connectionString  = "DefaultEndpointsProtocol=http;AccountName=$name;AccountKey=$key";        
+        $this->_tableProxy = ServicesBuilder::getInstance()->createTableService($connectionString);;
+        $this->_blobProxy  = ServicesBuilder::getInstance()->createBlobService($connectionString);;
+        $this->_queueProxy = ServicesBuilder::getInstance()->createQueueService($connectionString);;
     }
     
     /**

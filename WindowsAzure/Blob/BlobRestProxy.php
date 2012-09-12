@@ -82,7 +82,7 @@ use WindowsAzure\Blob\Models\CopyBlobResult;
  * @author    Azure PHP SDK <azurephpsdk@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
- * @version   Release: @package_version@
+ * @version   Release: 0.3.1_2011-08
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
 class BlobRestProxy extends ServiceRestProxy implements IBlob
@@ -118,11 +118,19 @@ class BlobRestProxy extends ServiceRestProxy implements IBlob
      */
     private function _createPath($container, $blob)
     {
+        $encodedBlob = urlencode($blob);
+        // Unencode the forward slashes to match what the server expects.
+        $encodedBlob = str_replace('%2F', '/', $encodedBlob);
+        // Unencode the backward slashes to match what the server expects.
+        $encodedBlob = str_replace('%5C', '/', $encodedBlob);
+        // Re-encode the spaces (encoded as space) to the % encoding.
+        $encodedBlob = str_replace('+', '%20', $encodedBlob);
+        
         // Empty container means accessing default container
         if (empty($container)) {
-            return $blob;
+            return $encodedBlob;
         } else {
-            return $container . '/' . $blob;
+            return $container . '/' . $encodedBlob;
         }
     }
     
@@ -1054,7 +1062,7 @@ class BlobRestProxy extends ServiceRestProxy implements IBlob
         $this->addOptionalQueryParam(
             $queryParams,
             Resources::QP_PREFIX,
-            $options->getPrefix()
+            str_replace('\\', '/', $options->getPrefix())
         );
         $this->addOptionalQueryParam(
             $queryParams,
@@ -2177,7 +2185,10 @@ class BlobRestProxy extends ServiceRestProxy implements IBlob
         $headers             = array();
         $postParams          = array();
         $queryParams         = array();
-        $destinationBlobPath = $destinationContainer . '/' . $destinationBlob;
+        $destinationBlobPath = $this->_createPath(
+            $destinationContainer,
+            $destinationBlob
+        );
         $statusCode          = Resources::STATUS_CREATED;
         
         if (is_null($options)) {

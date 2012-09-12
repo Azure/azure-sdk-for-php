@@ -32,7 +32,7 @@ namespace WindowsAzure\Common\Internal;
  * @author    Azure PHP SDK <azurephpsdk@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
- * @version   Release: @package_version@
+ * @version   Release: 0.3.1_2011-08
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
 class Resources
@@ -361,6 +361,8 @@ class Resources
     const XTAG_UPGRADE_DOMAIN = 'UpgradeDomain';
     const XTAG_WALK_UPGRADE_DOMAIN = 'WalkUpgradeDomain';
     const XTAG_ROLLBACK_UPDATE_OR_UPGRADE = 'RollbackUpdateOrUpgrade';
+    const XTAG_CONTAINER_NAME = 'ContainerName';
+    const XTAG_ACCOUNT_NAME = 'AccountName';
 
     // Service Bus
     const LIST_TOPICS_PATH        = '$Resources/Topics';

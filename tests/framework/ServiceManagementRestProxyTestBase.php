@@ -39,7 +39,7 @@ use WindowsAzure\ServiceManagement\Models\GetDeploymentOptions;
  * @author    Azure PHP SDK <azurephpsdk@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
- * @version   Release: @package_version@
+ * @version   Release: 0.3.1_2011-08
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
 class ServiceManagementRestProxyTestBase extends RestProxyTestBase
@@ -50,8 +50,8 @@ class ServiceManagementRestProxyTestBase extends RestProxyTestBase
     protected $createdDeployments;
     protected $defaultLocation;
     protected $defaultSlot;
-    protected $defaultDeploymentEncodedConfiguration;
-    protected $encodedComplexConfiguration;
+    protected $defaultDeploymentConfiguration;
+    protected $complexConfiguration;
 
 
     public function setUp()
@@ -66,8 +66,8 @@ class ServiceManagementRestProxyTestBase extends RestProxyTestBase
         $this->createdDeployments = array();
         $this->defaultLocation = 'West US';
         $this->defaultSlot = DeploymentSlot::PRODUCTION;
-        $this->defaultDeploymentEncodedConfiguration = base64_encode(file_get_contents(TestResources::simplePackageConfiguration()));
-        $this->encodedComplexConfiguration = base64_encode(file_get_contents(TestResources::complexPackageConfiguration()));
+        $this->defaultDeploymentConfiguration = file_get_contents(TestResources::simplePackageConfiguration());
+        $this->complexConfiguration = file_get_contents(TestResources::complexPackageConfiguration());
     }
 
     public function createAffinityGroup($name)
@@ -220,7 +220,7 @@ class ServiceManagementRestProxyTestBase extends RestProxyTestBase
         $label = base64_encode($deploymentName);
         $slot = is_null($slot) ? $this->defaultSlot : $slot;
         $packageUrl = TestResources::complexPackageUrl();
-        $configuration = $this->encodedComplexConfiguration;
+        $configuration = $this->complexConfiguration;
         
         if (!$this->hostedServiceExists($name)) {
             $this->createHostedService($name);
@@ -295,7 +295,7 @@ class ServiceManagementRestProxyTestBase extends RestProxyTestBase
         $label = base64_encode($deploymentName);
         $slot = is_null($slot) ? $this->defaultSlot : $slot;
         $packageUrl = TestResources::simplePackageUrl();
-        $configuration = $this->defaultDeploymentEncodedConfiguration;
+        $configuration = $this->defaultDeploymentConfiguration;
         
         if (!$this->hostedServiceExists($name)) {
             $this->createHostedService($name);

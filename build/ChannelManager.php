@@ -23,8 +23,8 @@
  
 namespace WindowsAzure;
 
-require_once '../WindowsAzure/WindowsAzure.php';
-require_once '../defaults.php';
+require_once 'WindowsAzure/WindowsAzure.php';
+require_once 'defaults.php';
 use WindowsAzure\Common\Internal\Utilities;
 use WindowsAzure\Common\Internal\Serialization\XmlSerializer;
 use WindowsAzure\Blob\Models\CreateContainerOptions;
@@ -41,7 +41,7 @@ use WindowsAzure\Common\ServicesBuilder;
  * @author    Azure PHP SDK <azurephpsdk@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
- * @version   Release: @package_version@
+ * @version   Release: 0.3.1_2011-08
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
 class ChannelManager
@@ -336,8 +336,8 @@ class ChannelManager
      */
     private static function _addPackage()
     {
-        self::_executeCommand('php ..\package.php make');
-		self::_executeCommand('pear package ..\package.xml');
+        self::_executeCommand('php package.php make');
+        self::_executeCommand('pear package package.xml');
         $files = glob('*.tgz');
         $name  = $files[count($files) - 1];
         self::_executeCommand("pirum add channel $name");
