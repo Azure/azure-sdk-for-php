@@ -80,7 +80,7 @@ class CloudStorageService
             }
         }
         
-		$connectionString  = "DefaultEndpointsProtocol=http;AccountName=$name;AccountKey=$key";        
+        $connectionString  = "DefaultEndpointsProtocol=http;AccountName=$name;AccountKey=$key";        
         $this->_tableProxy = ServicesBuilder::getInstance()->createTableService($connectionString);;
         $this->_blobProxy  = ServicesBuilder::getInstance()->createBlobService($connectionString);;
         $this->_queueProxy = ServicesBuilder::getInstance()->createQueueService($connectionString);;
