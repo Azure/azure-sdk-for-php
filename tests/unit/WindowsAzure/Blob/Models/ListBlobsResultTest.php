@@ -33,7 +33,7 @@ use Tests\Framework\TestResources;
  * @author    Azure PHP SDK <azurephpsdk@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
- * @version   Release: @package_version@
+ * @version   Release: 0.3.1_2011-08
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
 class ListBlobsResultTest extends \PHPUnit_Framework_TestCase
@@ -167,14 +167,14 @@ class ListBlobsResultTest extends \PHPUnit_Framework_TestCase
     public function testSetPrefix()
     {
         // Setup
-        $options = new ListBlobsResult();
+        $result = new ListBlobsResult();
         $expected = 'myprefix';
         
         // Test
-        $options->setPrefix($expected);
+        $result->setPrefix($expected);
         
         // Assert
-        $this->assertEquals($expected, $options->getPrefix());
+        $this->assertEquals($expected, $result->getPrefix());
     }
     
     /**
@@ -183,12 +183,12 @@ class ListBlobsResultTest extends \PHPUnit_Framework_TestCase
     public function testGetPrefix()
     {
         // Setup
-        $options = new ListBlobsResult();
+        $result = new ListBlobsResult();
         $expected = 'myprefix';
-        $options->setPrefix($expected);
+        $result->setPrefix($expected);
         
         // Test
-        $actual = $options->getPrefix();
+        $actual = $result->getPrefix();
         
         // Assert
         $this->assertEquals($expected, $actual);
@@ -200,14 +200,14 @@ class ListBlobsResultTest extends \PHPUnit_Framework_TestCase
     public function testSetNextMarker()
     {
         // Setup
-        $options = new ListBlobsResult();
+        $result = new ListBlobsResult();
         $expected = 'mymarker';
         
         // Test
-        $options->setNextMarker($expected);
+        $result->setNextMarker($expected);
         
         // Assert
-        $this->assertEquals($expected, $options->getNextMarker());
+        $this->assertEquals($expected, $result->getNextMarker());
     }
     
     /**
@@ -216,12 +216,12 @@ class ListBlobsResultTest extends \PHPUnit_Framework_TestCase
     public function testGetNextMarker()
     {
         // Setup
-        $options = new ListBlobsResult();
+        $result = new ListBlobsResult();
         $expected = 'mymarker';
-        $options->setNextMarker($expected);
+        $result->setNextMarker($expected);
         
         // Test
-        $actual = $options->getNextMarker();
+        $actual = $result->getNextMarker();
         
         // Assert
         $this->assertEquals($expected, $actual);
@@ -233,14 +233,14 @@ class ListBlobsResultTest extends \PHPUnit_Framework_TestCase
     public function testSetMarker()
     {
         // Setup
-        $options = new ListBlobsResult();
+        $result = new ListBlobsResult();
         $expected = 'mymarker';
         
         // Test
-        $options->setMarker($expected);
+        $result->setMarker($expected);
         
         // Assert
-        $this->assertEquals($expected, $options->getMarker());
+        $this->assertEquals($expected, $result->getMarker());
     }
     
     /**
@@ -249,12 +249,12 @@ class ListBlobsResultTest extends \PHPUnit_Framework_TestCase
     public function testGetMarker()
     {
         // Setup
-        $options = new ListBlobsResult();
+        $result = new ListBlobsResult();
         $expected = 'mymarker';
-        $options->setMarker($expected);
+        $result->setMarker($expected);
         
         // Test
-        $actual = $options->getMarker();
+        $actual = $result->getMarker();
         
         // Assert
         $this->assertEquals($expected, $actual);
@@ -266,14 +266,14 @@ class ListBlobsResultTest extends \PHPUnit_Framework_TestCase
     public function testSetMaxResults()
     {
         // Setup
-        $options = new ListBlobsResult();
+        $result = new ListBlobsResult();
         $expected = 3;
         
         // Test
-        $options->setMaxResults($expected);
+        $result->setMaxResults($expected);
         
         // Assert
-        $this->assertEquals($expected, $options->getMaxResults());
+        $this->assertEquals($expected, $result->getMaxResults());
     }
     
     /**
@@ -282,12 +282,45 @@ class ListBlobsResultTest extends \PHPUnit_Framework_TestCase
     public function testGetMaxResults()
     {
         // Setup
-        $options = new ListBlobsResult();
+        $result = new ListBlobsResult();
         $expected = 3;
-        $options->setMaxResults($expected);
+        $result->setMaxResults($expected);
         
         // Test
-        $actual = $options->getMaxResults();
+        $actual = $result->getMaxResults();
+        
+        // Assert
+        $this->assertEquals($expected, $actual);
+    }
+    
+    /**
+     * @covers WindowsAzure\Blob\Models\ListBlobsResult::setContainerName
+     */
+    public function testSetContainerName()
+    {
+        // Setup
+        $result = new ListBlobsResult();
+        $expected = 'name';
+        
+        // Test
+        $result->setContainerName($expected);
+        
+        // Assert
+        $this->assertEquals($expected, $result->getContainerName());
+    }
+    
+    /**
+     * @covers WindowsAzure\Blob\Models\ListBlobsResult::getContainerName
+     */
+    public function testGetContainerName()
+    {
+        // Setup
+        $result = new ListBlobsResult();
+        $expected = 'name';
+        $result->setContainerName($expected);
+        
+        // Test
+        $actual = $result->getContainerName();
         
         // Assert
         $this->assertEquals($expected, $actual);
@@ -299,14 +332,14 @@ class ListBlobsResultTest extends \PHPUnit_Framework_TestCase
     public function testSetDelimiter()
     {
         // Setup
-        $options = new ListBlobsResult();
+        $result = new ListBlobsResult();
         $expected = 'mydelimiter';
         
         // Test
-        $options->setDelimiter($expected);
+        $result->setDelimiter($expected);
         
         // Assert
-        $this->assertEquals($expected, $options->getDelimiter());
+        $this->assertEquals($expected, $result->getDelimiter());
     }
     
     /**
@@ -315,12 +348,12 @@ class ListBlobsResultTest extends \PHPUnit_Framework_TestCase
     public function testGetDelimiter()
     {
         // Setup
-        $options = new ListBlobsResult();
+        $result = new ListBlobsResult();
         $expected = 'mydelimiter';
-        $options->setDelimiter($expected);
+        $result->setDelimiter($expected);
         
         // Test
-        $actual = $options->getDelimiter();
+        $actual = $result->getDelimiter();
         
         // Assert
         $this->assertEquals($expected, $actual);

@@ -62,7 +62,7 @@ use WindowsAzure\Blob\Models\DeleteBlobOptions;
  * @author    Azure PHP SDK <azurephpsdk@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
- * @version   Release: @package_version@
+ * @version   Release: 0.3.1_2011-08
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
 class BlobRestProxyTest extends BlobServiceRestProxyTestBase
@@ -119,6 +119,7 @@ class BlobRestProxyTest extends BlobServiceRestProxyTestBase
 
         // Assert
         $containers = $result->getContainers();
+        $this->assertNotNull($result->getAccountName());
         $this->assertEquals($container1, $containers[0]->getName());
         $this->assertEquals($container2, $containers[1]->getName());
         $this->assertEquals($container3, $containers[2]->getName());
@@ -493,6 +494,7 @@ class BlobRestProxyTest extends BlobServiceRestProxyTestBase
 
         // Assert
         $blobs = $result->getBlobs();
+        $this->assertNotNull($result->getContainerName());
         $this->assertEquals($blob1, $blobs[0]->getName());
         $this->assertEquals($blob2, $blobs[1]->getName());
         $this->assertEquals($blob3, $blobs[2]->getName());

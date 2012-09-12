@@ -34,7 +34,7 @@ use Tests\Framework\TestResources;
  * @author    Azure PHP SDK <azurephpsdk@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
- * @version   Release: @package_version@
+ * @version   Release: 0.3.1_2011-08
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
 class ListQueuesResultTest extends \PHPUnit_Framework_TestCase
@@ -138,14 +138,14 @@ class ListQueuesResultTest extends \PHPUnit_Framework_TestCase
     public function testSetPrefix()
     {
         // Setup
-        $options = new ListQueuesResult();
+        $result = new ListQueuesResult();
         $expected = 'myprefix';
         
         // Test
-        $options->setPrefix($expected);
+        $result->setPrefix($expected);
         
         // Assert
-        $this->assertEquals($expected, $options->getPrefix());
+        $this->assertEquals($expected, $result->getPrefix());
     }
     
     /**
@@ -154,12 +154,12 @@ class ListQueuesResultTest extends \PHPUnit_Framework_TestCase
     public function testGetPrefix()
     {
         // Setup
-        $options = new ListQueuesResult();
+        $result = new ListQueuesResult();
         $expected = 'myprefix';
-        $options->setPrefix($expected);
+        $result->setPrefix($expected);
         
         // Test
-        $actual = $options->getPrefix();
+        $actual = $result->getPrefix();
         
         // Assert
         $this->assertEquals($expected, $actual);
@@ -171,14 +171,14 @@ class ListQueuesResultTest extends \PHPUnit_Framework_TestCase
     public function testSetNextMarker()
     {
         // Setup
-        $options = new ListQueuesResult();
+        $result = new ListQueuesResult();
         $expected = 'mymarker';
         
         // Test
-        $options->setNextMarker($expected);
+        $result->setNextMarker($expected);
         
         // Assert
-        $this->assertEquals($expected, $options->getNextMarker());
+        $this->assertEquals($expected, $result->getNextMarker());
     }
     
     /**
@@ -187,12 +187,12 @@ class ListQueuesResultTest extends \PHPUnit_Framework_TestCase
     public function testGetNextMarker()
     {
         // Setup
-        $options = new ListQueuesResult();
+        $result = new ListQueuesResult();
         $expected = 'mymarker';
-        $options->setNextMarker($expected);
+        $result->setNextMarker($expected);
         
         // Test
-        $actual = $options->getNextMarker();
+        $actual = $result->getNextMarker();
         
         // Assert
         $this->assertEquals($expected, $actual);
@@ -204,14 +204,14 @@ class ListQueuesResultTest extends \PHPUnit_Framework_TestCase
     public function testSetMarker()
     {
         // Setup
-        $options = new ListQueuesResult();
+        $result = new ListQueuesResult();
         $expected = 'mymarker';
         
         // Test
-        $options->setMarker($expected);
+        $result->setMarker($expected);
         
         // Assert
-        $this->assertEquals($expected, $options->getMarker());
+        $this->assertEquals($expected, $result->getMarker());
     }
     
     /**
@@ -220,12 +220,12 @@ class ListQueuesResultTest extends \PHPUnit_Framework_TestCase
     public function testGetMarker()
     {
         // Setup
-        $options = new ListQueuesResult();
+        $result = new ListQueuesResult();
         $expected = 'mymarker';
-        $options->setMarker($expected);
+        $result->setMarker($expected);
         
         // Test
-        $actual = $options->getMarker();
+        $actual = $result->getMarker();
         
         // Assert
         $this->assertEquals($expected, $actual);
@@ -237,14 +237,14 @@ class ListQueuesResultTest extends \PHPUnit_Framework_TestCase
     public function testSetMaxResults()
     {
         // Setup
-        $options = new ListQueuesResult();
+        $result = new ListQueuesResult();
         $expected = '3';
         
         // Test
-        $options->setMaxResults($expected);
+        $result->setMaxResults($expected);
         
         // Assert
-        $this->assertEquals($expected, $options->getMaxResults());
+        $this->assertEquals($expected, $result->getMaxResults());
     }
     
     /**
@@ -253,16 +253,47 @@ class ListQueuesResultTest extends \PHPUnit_Framework_TestCase
     public function testGetMaxResults()
     {
         // Setup
-        $options = new ListQueuesResult();
+        $result = new ListQueuesResult();
         $expected = '3';
-        $options->setMaxResults($expected);
+        $result->setMaxResults($expected);
         
         // Test
-        $actual = $options->getMaxResults();
+        $actual = $result->getMaxResults();
+        
+        // Assert
+        $this->assertEquals($expected, $actual);
+    }
+    
+    /**
+     * @covers WindowsAzure\Queue\Models\ListQueuesResult::setAccountName
+     */
+    public function testSetAccountName()
+    {
+        // Setup
+        $result = new ListQueuesResult();
+        $expected = 'name';
+        
+        // Test
+        $result->setAccountName($expected);
+        
+        // Assert
+        $this->assertEquals($expected, $result->getAccountName());
+    }
+    
+    /**
+     * @covers WindowsAzure\Queue\Models\ListQueuesResult::getAccountName
+     */
+    public function testGetAccountName()
+    {
+        // Setup
+        $result = new ListQueuesResult();
+        $expected = 'name';
+        $result->setAccountName($expected);
+        
+        // Test
+        $actual = $result->getAccountName();
         
         // Assert
         $this->assertEquals($expected, $actual);
     }
 }
-
-
