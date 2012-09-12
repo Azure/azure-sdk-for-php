@@ -33,7 +33,7 @@ use WindowsAzure\ServiceBus\Models\SubscriptionInfo;
  * @author    Azure PHP SDK <azurephpsdk@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
- * @version   Release: @package_version@
+ * @version   Release: 0.3.1_2011-08
  * @link      https://github.com/WindowsAzure/azure-sdk-for-php
  */
 class SubscriptionInfoTest extends \PHPUnit_Framework_TestCase

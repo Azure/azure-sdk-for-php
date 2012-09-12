@@ -32,7 +32,7 @@ namespace WindowsAzure\Common\Internal;
  * @author    Azure PHP SDK <azurephpsdk@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
- * @version   Release: @package_version@
+ * @version   Release: 0.3.1_2011-08
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
 class Utilities
@@ -539,21 +539,26 @@ class Utilities
      */
     public static function getGuid()
     {
-        return sprintf('%04x%04x-%04x-%04x-%02x%02x-%04x%04x%04x',
+        // @codingStandardsIgnoreStart
+        
+        return sprintf(
+            '%04x%04x-%04x-%04x-%02x%02x-%04x%04x%04x',
             mt_rand(0, 65535),
-            mt_rand(0, 65535),        // 32 bits for "time_low"
-            mt_rand(0, 65535),        // 16 bits for "time_mid"
-            mt_rand(0, 4096) + 16384, // 16 bits for "time_hi_and_version", with
-                                      // the most significant 4 bits being 0100
-                                      // to indicate randomly generated version
-            mt_rand(0, 64) + 128,     // 8 bits  for "clock_seq_hi", with
-                                      // the most significant 2 bits being 10,
-                                      // required by version 4 GUIDs.
-            mt_rand(0, 256),          // 8 bits  for "clock_seq_low"
-            mt_rand(0, 65535),        // 16 bits for "node 0" and "node 1"
-            mt_rand(0, 65535),        // 16 bits for "node 2" and "node 3"
-            mt_rand(0, 65535)         // 16 bits for "node 4" and "node 5"
+            mt_rand(0, 65535),          // 32 bits for "time_low"
+            mt_rand(0, 65535),          // 16 bits for "time_mid"
+            mt_rand(0, 4096) + 16384,   // 16 bits for "time_hi_and_version", with
+                                        // the most significant 4 bits being 0100
+                                        // to indicate randomly generated version
+            mt_rand(0, 64) + 128,       // 8 bits  for "clock_seq_hi", with
+                                        // the most significant 2 bits being 10,
+                                        // required by version 4 GUIDs.
+            mt_rand(0, 256),            // 8 bits  for "clock_seq_low"
+            mt_rand(0, 65535),          // 16 bits for "node 0" and "node 1"
+            mt_rand(0, 65535),          // 16 bits for "node 2" and "node 3"
+            mt_rand(0, 65535)           // 16 bits for "node 4" and "node 5"
         );
+        
+        // @codingStandardsIgnoreEnd
     }
     
     /**

@@ -44,7 +44,6 @@ use WindowsAzure\ServiceBus\Models\TopicDescription;
  */
 class TopicInfo extends Entry
 {
-
     /**
      * The entry of the topic info. 
      * 
@@ -211,7 +210,9 @@ class TopicInfo extends Entry
      */
     public function setDefaultMessageTimeToLive($defaultMessageTimeToLive)
     {
-        $this->_topicDescription->setDefaultMessageTimeToLive($defaultMessageTimeToLive);
+        $this->_topicDescription->setDefaultMessageTimeToLive(
+            $defaultMessageTimeToLive
+        );
     }
 
     /**
@@ -255,7 +256,9 @@ class TopicInfo extends Entry
      */
     public function setRequiresDuplicateDetection($requiresDuplicateDetection)
     {
-        $this->_topicDescription->setrequiresDuplicateDetection($requiresDuplicateDetection);
+        $this->_topicDescription->setrequiresDuplicateDetection(
+            $requiresDuplicateDetection
+        );
     }
 
     /**
@@ -303,7 +306,9 @@ class TopicInfo extends Entry
      */
     public function setEnableBatchedOperations($enableBatchedOperations)
     {
-        $this->_topicDescription->setenableBatchedOperations($enableBatchedOperations);
+        $this->_topicDescription->setenableBatchedOperations(
+            $enableBatchedOperations
+        );
     }
 
     /**
