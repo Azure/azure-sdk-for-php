@@ -25,6 +25,7 @@
 namespace Tests\Unit\WindowsAzure\Blob\Models;
 use WindowsAzure\Blob\Models\SetBlobPropertiesOptions;
 use WindowsAzure\Blob\Models\AccessCondition;
+use WindowsAzure\Blob\Models\BlobProperties;
 
 /**
  * Unit tests for class SetBlobPropertiesOptions
@@ -39,6 +40,24 @@ use WindowsAzure\Blob\Models\AccessCondition;
  */
 class SetBlobPropertiesOptionsTest extends \PHPUnit_Framework_TestCase
 {
+    /**
+     * @covers WindowsAzure\Blob\Models\SetBlobPropertiesOptions::__construct
+     */
+    public function test__construct()
+    {
+        // Setup
+        $expectedLength = 10;
+        $blobProperties = new BlobProperties();
+        $blobProperties->setContentLength($expectedLength);
+        
+        // Test
+        $options = new SetBlobPropertiesOptions($blobProperties);
+        
+        // Assert
+        $this->assertNotNull($options);
+        $this->assertEquals($expectedLength, $options->getBlobContentLength());
+    }
+    
     /**
      * @covers WindowsAzure\Blob\Models\SetBlobPropertiesOptions::setBlobContentType
      * @covers WindowsAzure\Blob\Models\SetBlobPropertiesOptions::getBlobContentType
