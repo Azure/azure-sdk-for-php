@@ -26,6 +26,7 @@ namespace WindowsAzure\ServiceBus\Models;
 use WindowsAzure\Common\Internal\Resources;
 use WindowsAzure\Common\Internal\Utilities;
 use WindowsAzure\Common\Internal\Validate;
+use WindowsAzure\ServiceBus\Internal\Filter;
 
 /**
  * The SQL filter.

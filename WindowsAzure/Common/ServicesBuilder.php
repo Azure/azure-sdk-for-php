@@ -41,7 +41,7 @@ use WindowsAzure\Common\Internal\ServiceManagementSettings;
 use WindowsAzure\Common\Internal\ServiceBusSettings;
 use WindowsAzure\Queue\QueueRestProxy;
 use WindowsAzure\ServiceBus\ServiceBusRestProxy;
-use WindowsAzure\ServiceBus\WrapRestProxy;
+use WindowsAzure\ServiceBus\Internal\WrapRestProxy;
 use WindowsAzure\ServiceManagement\ServiceManagementRestProxy;
 use WindowsAzure\Table\TableRestProxy;
 use WindowsAzure\Table\Internal\AtomReaderWriter;

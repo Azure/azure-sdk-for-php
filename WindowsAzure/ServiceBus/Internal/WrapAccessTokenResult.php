@@ -15,14 +15,14 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   WindowsAzure\ServiceBus\Models
+ * @package   WindowsAzure\ServiceBus\Internal
  * @author    Azure PHP SDK <azurephpsdk@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link      https://github.com/WindowsAzure/azure-sdk-for-php
  */
  
-namespace WindowsAzure\ServiceBus\Models;
+namespace WindowsAzure\ServiceBus\Internal;
 use WindowsAzure\Common\Internal\Resources;
 use WindowsAzure\ServiceBus\Models;
 use WindowsAzure\Common\Internal\Utilities;
@@ -31,7 +31,7 @@ use WindowsAzure\Common\Internal\Utilities;
  * Container to hold wrap accesss token response object.
  *
  * @category  Microsoft
- * @package   WindowsAzure\ServiceBus\Models
+ * @package   WindowsAzure\ServiceBus\Internal
  * @author    Azure PHP SDK <azurephpsdk@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
@@ -55,7 +55,7 @@ class WrapAccessTokenResult
      *
      * @param array $response The get WRAP access token response.
      * 
-     * @return WindowsAzure\ServiceBus\Models\WrapAccessTokenResult.
+     * @return WindowsAzure\ServiceBus\Internal\WrapAccessTokenResult.
      */
     public static function create($response)
     {

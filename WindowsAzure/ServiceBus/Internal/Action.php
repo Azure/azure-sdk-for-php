@@ -1,5 +1,4 @@
 <?php
-
 /**
  * LICENSE: Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,43 +14,66 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   Tests\Unit\WindowsAzure\ServiceBus\Models
+ * @package   WindowsAzure\ServiceBus\Internal
  * @author    Azure PHP SDK <azurephpsdk@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link      https://github.com/WindowsAzure/azure-sdk-for-php
  */
-
-namespace Tests\Unit\WindowsAzure\ServiceBus\Models;
-use WindowsAzure\ServiceBus\Models\Action;
+namespace WindowsAzure\ServiceBus\Internal;
+use WindowsAzure\Common\Internal\Resources;
 
 /**
- * Unit tests for class Action
+ * The base class for rule action.
  *
  * @category  Microsoft
- * @package   Tests\Unit\WindowsAzure\ServiceBus\Models
+ * @package   WindowsAzure\ServiceBus\Internal
  * @author    Azure PHP SDK <azurephpsdk@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @version   Release: 0.3.1_2011-08
  * @link      https://github.com/WindowsAzure/azure-sdk-for-php
  */
-class ActionTest extends \PHPUnit_Framework_TestCase
+
+class Action
 {
+    /** 
+     * The attributes of the filter. 
+     *
+     * @var array
+     */ 
+    protected $attributes;
+
     /**
-     * @covers WindowsAzure\ServiceBus\Models\Action::__construct
+     * Creates an Action instance with default parameter. 
      */
-    public function testActionConstructor()
+    public function __construct()
     {
-        // Setup
-        
-        // Test
-        $action = new Action();
-        
-        // Assert
-        $this->assertNotNull($action);
+        $this->attributes              = array();
+        $this->attributes['xmlns:xsi'] = Resources::XSI_XML_NAMESPACE;
     }
 
-}
+    /**
+     * Gets the attributes. 
+     *
+     * @return array
+     */ 
+    public function getAttributes()
+    {
+        return $this->attributes;
+    }
 
+    /**
+     * Sets an attribute. 
+     *
+     * @param string $key   The key of the attribute.
+     * @param string $value The value of the attribute.
+     * 
+     * @return none
+     */
+    protected function setAttribute($key, $value)
+    {
+        $this->attributes[$key] = $value;
+    }
+}
 
