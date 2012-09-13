@@ -146,6 +146,21 @@ class ServicesBuilder
     }
     
     /**
+     * Builds a WRAP client.
+     * 
+     * @param string $wrapEndpointUri The WRAP endpoint uri.
+     *
+     * @return WindowsAzure\ServiceBus\Internal\IWrap
+     */
+    protected function createWrapService($wrapEndpointUri)
+    {   
+        $httpClient  = $this->httpClient();
+        $wrapWrapper = new WrapRestProxy($httpClient, $wrapEndpointUri);
+
+        return $wrapWrapper;
+    }
+    
+    /**
      * Builds a queue object.
      *
      * @param string $connectionString The configuration connection string.
@@ -380,21 +395,6 @@ class ServicesBuilder
         );
 
         return $serviceManagementWrapper;
-    }
-    
-    /**
-     * Builds a WRAP client.
-     * 
-     * @param string $wrapEndpointUri The WRAP endpoint uri.
-     *
-     * @return WindowsAzure\ServiceBus\Internal\IWrap
-     */
-    protected function createWrapService($wrapEndpointUri)
-    {   
-        $httpClient  = $this->httpClient();
-        $wrapWrapper = new WrapRestProxy($httpClient, $wrapEndpointUri);
-
-        return $wrapWrapper;
     }
     
     /**
