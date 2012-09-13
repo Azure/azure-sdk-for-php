@@ -130,7 +130,7 @@ class RoleEnvironment
 
         // 2038-01-19 04:14:07 
         self::$_maxDateTime = new \DateTime(
-            date(Resources::TIMESTAMP_FORMAT, PHP_INT_MAX)
+            date(Resources::TIMESTAMP_FORMAT, Resources::INT32_MAX)
         );
         
         self::$_tracking = true;

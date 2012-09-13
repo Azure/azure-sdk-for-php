@@ -229,9 +229,9 @@ class Resources
     const DATA_SERVICE_VERSION_VALUE     = '1.0;NetFx';
     const MAX_DATA_SERVICE_VERSION_VALUE = '2.0;NetFx';
     const ACCEPT_HEADER_VALUE            = 'application/atom+xml,application/xml';
-    const ATOM_ENTRY_CONTENT_TYPE      
-        = 'application/atom+xml;type=entry;charset=utf-8';
+    const ATOM_ENTRY_CONTENT_TYPE        = 'application/atom+xml;type=entry;charset=utf-8';
     const ACCEPT_CHARSET_VALUE           = 'utf-8';
+    const INT32_MAX                      = 2147483647;
 
     // Query parameter names
     const QP_PREFIX             = 'Prefix';
