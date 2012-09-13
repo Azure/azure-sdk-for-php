@@ -486,7 +486,7 @@ interface IBlob extends FilterableService
     * 
     * @see http://msdn.microsoft.com/en-us/library/windowsazure/ee691972.aspx
     */
-    public function breakLease($container, $blob, $leaseId, $options = null);
+    public function breakLease($container, $blob, $options = null);
 }
 
 

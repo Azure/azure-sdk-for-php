@@ -92,6 +92,7 @@ spl_autoload_register(
             'tests\\unit\\windowsazure\\blob\\models\\blobtypetest' => '/unit/WindowsAzure/Blob/Models/BlobTypeTest.php',
             'tests\\unit\\windowsazure\\blob\\models\\blocklisttest' => '/unit/WindowsAzure/Blob/Models/BlockListTest.php',
             'tests\\unit\\windowsazure\\blob\\models\\blocktest' => '/unit/WindowsAzure/Blob/Models/BlockTest.php',
+            'tests\\unit\\windowsazure\\blob\\models\\breakleaseresulttest' => '/unit/WindowsAzure/Blob/Models/BreakLeaseResultTest.php',
             'tests\\unit\\windowsazure\\blob\\models\\commitblobblocksoptionstest' => '/unit/WindowsAzure/Blob/Models/CommitBlobBlocksOptionsTest.php',
             'tests\\unit\\windowsazure\\blob\\models\\containeracltest' => '/unit/WindowsAzure/Blob/Models/ContainerACLTest.php',
             'tests\\unit\\windowsazure\\blob\\models\\containerpropertiestest' => '/unit/WindowsAzure/Blob/Models/ContainerPropertiesTest.php',

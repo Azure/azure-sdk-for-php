@@ -41,6 +41,7 @@ spl_autoload_register(
             'windowsazure\\blob\\models\\blobtype' => '/Blob/Models/BlobType.php',
             'windowsazure\\blob\\models\\block' => '/Blob/Models/Block.php',
             'windowsazure\\blob\\models\\blocklist' => '/Blob/Models/BlockList.php',
+            'windowsazure\\blob\\models\\breakleaseresult' => '/Blob/Models/BreakLeaseResult.php',
             'windowsazure\\blob\\models\\commitblobblocksoptions' => '/Blob/Models/CommitBlobBlocksOptions.php',
             'windowsazure\\blob\\models\\container' => '/Blob/Models/Container.php',
             'windowsazure\\blob\\models\\containeracl' => '/Blob/Models/ContainerACL.php',
