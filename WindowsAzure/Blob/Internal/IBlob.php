@@ -479,7 +479,6 @@ interface IBlob extends FilterableService
     * 
     * @param string                    $container name of the container
     * @param string                    $blob      name of the blob
-    * @param string                    $leaseId   lease id when acquiring
     * @param Models\BlobServiceOptions $options   optional parameters
     * 
     * @return none
