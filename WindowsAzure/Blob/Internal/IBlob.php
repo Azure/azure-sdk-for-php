@@ -479,14 +479,13 @@ interface IBlob extends FilterableService
     * 
     * @param string                    $container name of the container
     * @param string                    $blob      name of the blob
-    * @param string                    $leaseId   lease id when acquiring
     * @param Models\BlobServiceOptions $options   optional parameters
     * 
     * @return none
     * 
     * @see http://msdn.microsoft.com/en-us/library/windowsazure/ee691972.aspx
     */
-    public function breakLease($container, $blob, $leaseId, $options = null);
+    public function breakLease($container, $blob, $options = null);
 }
 
 

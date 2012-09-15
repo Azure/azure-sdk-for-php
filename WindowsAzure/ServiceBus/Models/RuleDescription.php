@@ -24,7 +24,8 @@
 namespace WindowsAzure\ServiceBus\Models;
 use WindowsAzure\Common\Internal\Resources;
 use WindowsAzure\Common\Internal\Utilities;
-
+use WindowsAzure\ServiceBus\Internal\Action;
+use WindowsAzure\ServiceBus\Internal\Filter;
 /**
  *  The description of the rule.
  *

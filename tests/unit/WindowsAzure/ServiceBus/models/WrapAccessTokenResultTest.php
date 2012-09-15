@@ -23,7 +23,7 @@
  */
 
 namespace Tests\Unit\WindowsAzure\ServiceBus\Models;
-use WindowsAzure\ServiceBus\Models\WrapAccessTokenResult;
+use WindowsAzure\ServiceBus\Internal\WrapAccessTokenResult;
 
 /**
  * Unit tests for class WrapAccessTokenResult
@@ -40,7 +40,7 @@ class WrapAccessTokenResultTest extends \PHPUnit_Framework_TestCase
 {
 
     /**
-     * @covers WindowsAzure\ServiceBus\Models\WrapAccessTokenResult::create
+     * @covers WindowsAzure\ServiceBus\Internal\WrapAccessTokenResult::create
      */
     public function testCreateWrapAccessTokenSuccess()
     {
@@ -74,8 +74,8 @@ class WrapAccessTokenResultTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\ServiceBus\Models\WrapAccessTokenResult::getAccessToken
-     * @covers WindowsAzure\ServiceBus\Models\WrapAccessTokenResult::setAccessToken
+     * @covers WindowsAzure\ServiceBus\Internal\WrapAccessTokenResult::getAccessToken
+     * @covers WindowsAzure\ServiceBus\Internal\WrapAccessTokenResult::setAccessToken
      */
     public function testGetAccessToken()
     {
@@ -92,8 +92,8 @@ class WrapAccessTokenResultTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers WindowsAzure\ServiceBus\Models\WrapAccessTokenResult::getExpiresIn
-     * @covers WindowsAzure\ServiceBus\Models\WrapAccessTokenResult::setExpiresIn
+     * @covers WindowsAzure\ServiceBus\Internal\WrapAccessTokenResult::getExpiresIn
+     * @covers WindowsAzure\ServiceBus\Internal\WrapAccessTokenResult::setExpiresIn
      */
     public function testGetExpiresIn()
     {

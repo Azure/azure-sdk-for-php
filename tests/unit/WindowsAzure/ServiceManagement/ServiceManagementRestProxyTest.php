@@ -398,6 +398,9 @@ class ServiceManagementRestProxyTest extends ServiceManagementRestProxyTestBase
         
         // Assert
         $this->assertEquals($name, $result->getStorageService()->getName());
+        $this->assertEquals("http://$name.blob.core.windows.net/", $result->getStorageService()->getBlobEndpointUri());
+        $this->assertEquals("http://$name.queue.core.windows.net/", $result->getStorageService()->getQueueEndpointUri());
+        $this->assertEquals("http://$name.table.core.windows.net/", $result->getStorageService()->getTableEndpointUri());
         $this->assertNotNull($result->getStorageService()->getUrl());
         $this->assertNotNull($result->getStorageService()->getLabel());
     }
