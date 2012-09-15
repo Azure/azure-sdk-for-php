@@ -41,9 +41,19 @@ use WindowsAzure\ServiceManagement\Internal\WindowsAzureService;
 class StorageService extends WindowsAzureService
 {
     /**
-     * @var array
+     * @var string
      */
-    private $_endpoints;
+    private $_blobEndpointUri;
+    
+    /**
+     * @var string
+     */
+    private $_queueEndpointUri;
+    
+    /**
+     * @var string
+     */
+    private $_tableEndpointUri;
     
     /**
      * @var string
@@ -67,17 +77,14 @@ class StorageService extends WindowsAzureService
                 )
             );
             
-            $endpoints = Utilities::tryGetValue(
+            $endpoints = Utilities::tryGetKeysChainValue(
                 $source,
-                Resources::XTAG_ENDPOINTS
+                Resources::XTAG_ENDPOINTS,
+                Resources::XTAG_ENDPOINT
             );
-            $this->setEndpoints(
-                Utilities::tryGetValue(
-                    $endpoints,
-                    Resources::XTAG_ENDPOINT,
-                    $this->getEndpoints()
-                )
-            );
+            $this->setBlobEndpointUri(Utilities::tryGetValue($endpoints, 0));
+            $this->setQueueEndpointUri(Utilities::tryGetValue($endpoints, 1));
+            $this->setTableEndpointUri(Utilities::tryGetValue($endpoints, 2));
         }
     }
     
@@ -103,28 +110,6 @@ class StorageService extends WindowsAzureService
     }
     
     /**
-     * Gets the endpoints.
-     * 
-     * @return array
-     */
-    public function getEndpoints()
-    {
-        return $this->_endpoints;
-    }
-    
-    /**
-     * Sets the endpoints.
-     * 
-     * @param array $endpoints The endpoints.
-     * 
-     * @return none
-     */
-    public function setEndpoints($endpoints)
-    {
-        $this->_endpoints = $endpoints;
-    }
-    
-    /**
      * Gets the status.
      * 
      * @return string
@@ -144,5 +129,71 @@ class StorageService extends WindowsAzureService
     public function setStatus($status)
     {
         $this->_status = $status;
+    }
+    
+    /**
+     * Gets storage service blob endpoint uri.
+     * 
+     * @return string
+     */
+    public function getBlobEndpointUri()
+    {
+        return $this->_blobEndpointUri;
+    }
+    
+    /**
+     * Gets storage service queue endpoint uri.
+     * 
+     * @return string
+     */
+    public function getQueueEndpointUri()
+    {
+        return $this->_queueEndpointUri;
+    }
+
+    /**
+     * Gets storage service table endpoint uri.
+     * 
+     * @return string
+     */
+    public function getTableEndpointUri()
+    {
+        return $this->_tableEndpointUri;
+    }
+    
+    /**
+     * Gets storage service blob endpoint uri.
+     * 
+     * @param string $blobEndpointUri The endpoint URI.
+     * 
+     * @return string
+     */
+    public function setBlobEndpointUri($blobEndpointUri)
+    {
+        $this->_blobEndpointUri = $blobEndpointUri;
+    }
+    
+    /**
+     * Gets storage service queue endpoint uri.
+     * 
+     * @param string $queueEndpointUri The endpoint URI.
+     * 
+     * @return string
+     */
+    public function setQueueEndpointUri($queueEndpointUri)
+    {
+        $this->_queueEndpointUri = $queueEndpointUri;
+    }
+
+    /**
+     * Gets storage service table endpoint uri.
+     * 
+     * @param string $tableEndpointUri The endpoint URI.
+     * 
+     * @return string
+     */
+    public function setTableEndpointUri($tableEndpointUri)
+    {
+        $this->_tableEndpointUri = $tableEndpointUri;
     }
 }

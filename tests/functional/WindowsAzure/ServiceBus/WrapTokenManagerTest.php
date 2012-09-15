@@ -28,7 +28,7 @@ use Tests\Framework\ServiceBusRestProxyTestBase;
 use WindowsAzure\Common\Internal\Utilities;
 use WindowsAzure\ServiceBus\Internal\IWrap;
 use WindowsAzure\ServiceBus\Internal\WrapTokenManager;
-use WindowsAzure\ServiceBus\Models\WrapAccessTokenResult;
+use WindowsAzure\ServiceBus\Internal\WrapAccessTokenResult;
 
 class WrapTokenManagerTest extends ServiceBusRestProxyTestBase
 {

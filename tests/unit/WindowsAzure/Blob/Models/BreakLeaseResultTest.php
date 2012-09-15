@@ -15,74 +15,59 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   WindowsAzure\Blob\Models
+ * @package   Tests\Unit\WindowsAzure\Blob\Models
  * @author    Azure PHP SDK <azurephpsdk@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
- 
-namespace WindowsAzure\Blob\Models;
-use WindowsAzure\Common\Internal\Resources;
-use WindowsAzure\Common\Internal\Utilities;
+namespace Tests\Unit\WindowsAzure\Blob\Models;
+use WindowsAzure\Blob\Models\BreakLeaseResult;
 
 /**
- * The result of calling acquireLease API.
+ * Unit tests for class BreakLeaseResult
  *
  * @category  Microsoft
- * @package   WindowsAzure\Blob\Models
+ * @package   Tests\Unit\WindowsAzure\Blob\Models
  * @author    Azure PHP SDK <azurephpsdk@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @version   Release: 0.3.1_2011-08
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
-class AcquireLeaseResult
+class BreakLeaseResultTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @var string
+     * @covers WindowsAzure\Blob\Models\BreakLeaseResult::create
      */
-    private $_leaseId;
-    
-    /**
-     * Creates AcquireLeaseResult from response headers
-     * 
-     * @param array $headers response headers
-     * 
-     * @return AcquireLeaseResult
-     */
-    public static function create($headers)
+    public function testCreate()
     {
-        $result = new AcquireLeaseResult();
+        // Setup
+        $expected = '10';
+        $headers = array('x-ms-lease-time' => $expected);
         
-        $result->setLeaseId(
-            Utilities::tryGetValue($headers, Resources::X_MS_LEASE_ID)
-        );
+        // Test
+        $result = BreakLeaseResult::create($headers);
         
-        return $result;
+        // Assert
+        $this->assertEquals($expected, $result->getLeaseTime());
     }
     
     /**
-     * Gets lease Id for the blob
-     * 
-     * @return string
+     * @covers WindowsAzure\Blob\Models\BreakLeaseResult::setLeaseTime
+     * @covers WindowsAzure\Blob\Models\BreakLeaseResult::getLeaseTime
      */
-    public function getLeaseId()
+    public function testSetLeaseTime()
     {
-        return $this->_leaseId;
-    }
-    
-    /**
-     * Sets lease Id for the blob
-     * 
-     * @param string $leaseId the blob lease id.
-     * 
-     * @return none
-     */
-    public function setLeaseId($leaseId)
-    {
-        $this->_leaseId = $leaseId;
+        // Setup
+        $expected = '0x8CAFB82EFF70C46';
+        $result = new BreakLeaseResult();
+        $result->setLeaseTime($expected);
+        
+        // Test
+        $result->setLeaseTime($expected);
+        
+        // Assert
+        $this->assertEquals($expected, $result->getLeaseTime());
     }
 }
-
-

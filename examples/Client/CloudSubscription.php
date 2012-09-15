@@ -121,7 +121,9 @@ class CloudSubscription
             $cloudStorageService = new CloudStorageService(
                 $name,
                 $keys->getPrimary(),
-                $properties->getEndpoints()
+                $properties->getBlobEndpointUri(),
+                $properties->getQueueEndpointUri(),
+                $properties->getTableEndpointUri()
             );
         }
         

@@ -134,6 +134,7 @@ class Resources
     const X_MS_RANGE                         = 'x-ms-range';
     const X_MS_RANGE_GET_CONTENT_MD5         = 'x-ms-range-get-content-md5';
     const X_MS_LEASE_ID                      = 'x-ms-lease-id';
+    const X_MS_LEASE_TIME                    = 'x-ms-lease-time';
     const X_MS_LEASE_STATUS                  = 'x-ms-lease-status';
     const X_MS_LEASE_ACTION                  = 'x-ms-lease-action';
     const X_MS_DELETE_SNAPSHOTS              = 'x-ms-delete-snapshots';
@@ -228,9 +229,9 @@ class Resources
     const DATA_SERVICE_VERSION_VALUE     = '1.0;NetFx';
     const MAX_DATA_SERVICE_VERSION_VALUE = '2.0;NetFx';
     const ACCEPT_HEADER_VALUE            = 'application/atom+xml,application/xml';
-    const ATOM_ENTRY_CONTENT_TYPE      
-        = 'application/atom+xml;type=entry;charset=utf-8';
+    const ATOM_ENTRY_CONTENT_TYPE        = 'application/atom+xml;type=entry;charset=utf-8';
     const ACCEPT_CHARSET_VALUE           = 'utf-8';
+    const INT32_MAX                      = 2147483647;
 
     // Query parameter names
     const QP_PREFIX             = 'Prefix';

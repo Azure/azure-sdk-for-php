@@ -27,7 +27,7 @@ use WindowsAzure\Common\Internal\Resources;
 use WindowsAzure\Common\Internal\Utilities;
 
 /**
- * The result of calling acquireLease API.
+ * The result of calling breakLease API.
  *
  * @category  Microsoft
  * @package   WindowsAzure\Blob\Models
@@ -37,52 +37,50 @@ use WindowsAzure\Common\Internal\Utilities;
  * @version   Release: 0.3.1_2011-08
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
-class AcquireLeaseResult
+class BreakLeaseResult
 {
     /**
      * @var string
      */
-    private $_leaseId;
+    private $_leaseTime;
     
     /**
-     * Creates AcquireLeaseResult from response headers
+     * Creates BreakLeaseResult from response headers
      * 
      * @param array $headers response headers
      * 
-     * @return AcquireLeaseResult
+     * @return BreakLeaseResult
      */
     public static function create($headers)
     {
-        $result = new AcquireLeaseResult();
+        $result = new BreakLeaseResult();
         
-        $result->setLeaseId(
-            Utilities::tryGetValue($headers, Resources::X_MS_LEASE_ID)
+        $result->setLeaseTime(
+            Utilities::tryGetValue($headers, Resources::X_MS_LEASE_TIME)
         );
         
         return $result;
     }
     
     /**
-     * Gets lease Id for the blob
+     * Gets lease time.
      * 
      * @return string
      */
-    public function getLeaseId()
+    public function getLeaseTime()
     {
-        return $this->_leaseId;
+        return $this->_leaseTime;
     }
     
     /**
-     * Sets lease Id for the blob
+     * Sets lease time.
      * 
-     * @param string $leaseId the blob lease id.
+     * @param string $leaseTime the blob lease time.
      * 
      * @return none
      */
-    public function setLeaseId($leaseId)
+    public function setLeaseTime($leaseTime)
     {
-        $this->_leaseId = $leaseId;
+        $this->_leaseTime = $leaseTime;
     }
 }
-
-
