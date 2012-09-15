@@ -1374,7 +1374,7 @@ class BlobRestProxy extends ServiceRestProxy implements IBlob
             base64_encode($blockId)
         );
         
-        $this->send(
+        $response = $this->send(
             $method, 
             $headers, 
             $queryParams, 
@@ -1383,6 +1383,8 @@ class BlobRestProxy extends ServiceRestProxy implements IBlob
             $statusCode,
             $body
         );
+        
+        return CopyBlobResult::create($response->getHeader());
     }
     
     /**
