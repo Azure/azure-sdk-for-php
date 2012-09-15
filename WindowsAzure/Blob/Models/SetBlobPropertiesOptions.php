@@ -59,14 +59,15 @@ class SetBlobPropertiesOptions extends BlobServiceOptions
     private $_accessCondition;
     
     /**
-     * Constructs new SetBlobPropertiesOptions using BlobProperties instance.
+     * Creates a new SetBlobPropertiesOptions with a specified BlobProperties 
+     * instance.
      * 
      * @param BlobProperties $blobProperties The blob properties instance.
      */
     public function __construct($blobProperties = null)
     {
         $this->_blobProperties = is_null($blobProperties) 
-                                 ? new BlobProperties() : $blobProperties;
+                                 ? new BlobProperties() : clone $blobProperties;
     }
     
     /**
