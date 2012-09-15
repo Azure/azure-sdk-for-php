@@ -1150,14 +1150,16 @@ class BlobRestProxyTest extends BlobServiceRestProxyTestBase
         $options = new CreateBlobOptions();
         $options->setContentType($contentType);
         $this->restProxy->createBlockBlob($name, $blob, 'Hello world', $options);
-        $result = $this->restProxy->acquireLease($name, $blob);
+        $this->restProxy->acquireLease($name, $blob);
         
         // Test
-        $this->restProxy->breakLease($name, $blob, $result->getLeaseId());
+        $result = $this->restProxy->breakLease($name, $blob);
         
         // Assert
+        $this->assertInstanceOf('WindowsAzure\Blob\Models\BreakLeaseResult', $result);
+        $this->assertNotNull($result->getLeaseTime());
         $this->setExpectedException(get_class(new ServiceException('')));
-        $result = $this->restProxy->acquireLease($name, $blob);
+        $this->restProxy->acquireLease($name, $blob);
     }
     
     /**
@@ -1553,4 +1555,3 @@ class BlobRestProxyTest extends BlobServiceRestProxyTestBase
         $this->assertEquals($snapshotResult->getSnapshot(), $actualBlob->getSnapshot());
     }    
 }
-

@@ -29,7 +29,7 @@ use Tests\Framework\TestResources;
 use WindowsAzure\Common\Configuration;
 use WindowsAzure\Common\ServiceException;
 use WindowsAzure\Common\Internal\Utilities;
-use WindowsAzure\ServiceBus\WrapRestProxy;
+use WindowsAzure\ServiceBus\Internal\WrapRestProxy;
 use WindowsAzure\Common\Internal\Resources;
 use WindowsAzure\Common\ServicesBuilder;
 
@@ -58,8 +58,8 @@ class WrapRestProxyTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers WindowsAzure\ServiceBus\WrapRestProxy::__construct
-     * @covers WindowsAzure\ServiceBus\WrapRestProxy::wrapAccessToken
+     * @covers WindowsAzure\ServiceBus\Internal\WrapRestProxy::__construct
+     * @covers WindowsAzure\ServiceBus\Internal\WrapRestProxy::wrapAccessToken
      */
     public function testWrapAccessToken()
     {

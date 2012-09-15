@@ -41,7 +41,7 @@ use WindowsAzure\Common\Internal\ServiceManagementSettings;
 use WindowsAzure\Common\Internal\ServiceBusSettings;
 use WindowsAzure\Queue\QueueRestProxy;
 use WindowsAzure\ServiceBus\ServiceBusRestProxy;
-use WindowsAzure\ServiceBus\WrapRestProxy;
+use WindowsAzure\ServiceBus\Internal\WrapRestProxy;
 use WindowsAzure\ServiceManagement\ServiceManagementRestProxy;
 use WindowsAzure\Table\TableRestProxy;
 use WindowsAzure\Table\Internal\AtomReaderWriter;
@@ -143,6 +143,21 @@ class ServicesBuilder
     protected function tableAuthenticationScheme($accountName, $accountKey)
     {
         return new TableSharedKeyLiteAuthScheme($accountName, $accountKey);
+    }
+    
+    /**
+     * Builds a WRAP client.
+     * 
+     * @param string $wrapEndpointUri The WRAP endpoint uri.
+     *
+     * @return WindowsAzure\ServiceBus\Internal\IWrap
+     */
+    protected function createWrapService($wrapEndpointUri)
+    {   
+        $httpClient  = $this->httpClient();
+        $wrapWrapper = new WrapRestProxy($httpClient, $wrapEndpointUri);
+
+        return $wrapWrapper;
     }
     
     /**
@@ -380,21 +395,6 @@ class ServicesBuilder
         );
 
         return $serviceManagementWrapper;
-    }
-    
-    /**
-     * Builds a WRAP client.
-     * 
-     * @param string $wrapEndpointUri The WRAP endpoint uri.
-     *
-     * @return WindowsAzure\ServiceBus\Internal\IWrap
-     */
-    protected function createWrapService($wrapEndpointUri)
-    {   
-        $httpClient  = $this->httpClient();
-        $wrapWrapper = new WrapRestProxy($httpClient, $wrapEndpointUri);
-
-        return $wrapWrapper;
     }
     
     /**

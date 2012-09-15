@@ -27,8 +27,8 @@ use WindowsAzure\Common\Configuration;
 use WindowsAzure\Common\ServicesBuilder;
 use WindowsAzure\Common\Internal\Resources;
 use WindowsAzure\Common\Internal\Validate;
-use WindowsAzure\ServiceBus\WrapRestProxy;
-use WindowsAzure\ServiceBus\Models\ActiveToken;
+use WindowsAzure\ServiceBus\Internal\WrapRestProxy;
+use WindowsAzure\ServiceBus\Internal\ActiveToken;
 
 /**
  * Manages WRAP tokens. 

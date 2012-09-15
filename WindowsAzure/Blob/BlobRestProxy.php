@@ -72,6 +72,7 @@ use WindowsAzure\Blob\Models\CreateBlobSnapshotOptions;
 use WindowsAzure\Blob\Models\CreateBlobSnapshotResult;
 use WindowsAzure\Blob\Models\PageRange;
 use WindowsAzure\Blob\Models\CopyBlobResult;
+use WindowsAzure\Blob\Models\BreakLeaseResult;
 
 /**
  * This class constructs HTTP requests and receive HTTP responses for blob
@@ -363,7 +364,7 @@ class BlobRestProxy extends ServiceRestProxy implements IBlob
      * @param BlobServiceOptions $options         The optional parameters.
      * @param AccessCondition    $accessCondition The access conditions.
      * 
-     * @return AcquireLeaseResult
+     * @return array
      */
     private function _putLeaseImpl($leaseAction, $container, $blob, $leaseId, 
         $options, $accessCondition = null
@@ -426,7 +427,7 @@ class BlobRestProxy extends ServiceRestProxy implements IBlob
             $statusCode
         );
         
-        return AcquireLeaseResult::create($response->getHeader());
+        return $response->getHeader();
     }
     
     /**
@@ -2263,7 +2264,7 @@ class BlobRestProxy extends ServiceRestProxy implements IBlob
      */
     public function acquireLease($container, $blob, $options = null)
     {
-        return $this->_putLeaseImpl(
+        $headers = $this->_putLeaseImpl(
             LeaseMode::ACQUIRE_ACTION,
             $container,
             $blob,
@@ -2271,6 +2272,8 @@ class BlobRestProxy extends ServiceRestProxy implements IBlob
             is_null($options) ? new AcquireLeaseOptions() : $options,
             is_null($options) ? null : $options->getAccessCondition()
         );
+        
+        return AcquireLeaseResult::create($headers);
     }
     
     /**
@@ -2287,13 +2290,15 @@ class BlobRestProxy extends ServiceRestProxy implements IBlob
      */
     public function renewLease($container, $blob, $leaseId, $options = null)
     {
-        return $this->_putLeaseImpl(
+        $headers = $this->_putLeaseImpl(
             LeaseMode::RENEW_ACTION,
             $container,
             $blob,
             $leaseId,
             is_null($options) ? new BlobServiceOptions() : $options
         );
+        
+        return AcquireLeaseResult::create($headers);
     }
     
     /**
@@ -2326,23 +2331,22 @@ class BlobRestProxy extends ServiceRestProxy implements IBlob
      * 
      * @param string                    $container name of the container
      * @param string                    $blob      name of the blob
-     * @param string                    $leaseId   lease id when acquiring
      * @param Models\BlobServiceOptions $options   optional parameters
      * 
-     * @return none
+     * @return BreakLeaseResult
      * 
      * @see http://msdn.microsoft.com/en-us/library/windowsazure/ee691972.aspx
      */
-    public function breakLease($container, $blob, $leaseId, $options = null)
+    public function breakLease($container, $blob, $options = null)
     {
-        $this->_putLeaseImpl(
+        $headers = $this->_putLeaseImpl(
             LeaseMode::BREAK_ACTION,
             $container,
             $blob,
-            $leaseId,
+            null,
             is_null($options) ? new BlobServiceOptions() : $options
         );
+        
+        return BreakLeaseResult::create($headers);
     }
 }
-
-
