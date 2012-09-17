@@ -289,7 +289,7 @@ class HttpCallContext
      * Adds or sets header pair.
      * 
      * @param string $name  The HTTP header name.
-     * @param mix    $value The HTTP header value.
+     * @param string    $value The HTTP header value.
      * 
      * @return none
      */
@@ -307,7 +307,7 @@ class HttpCallContext
      * Ignores header if it's value satisfies empty().
      * 
      * @param string $name  The HTTP header name.
-     * @param mix    $value The HTTP header value.
+     * @param string    $value The HTTP header value.
      * 
      * @return none
      */
@@ -340,7 +340,7 @@ class HttpCallContext
      * Adds or sets query parameter pair.
      * 
      * @param string $name  The URI query parameter name.
-     * @param mix    $value The URI query parameter value.
+     * @param string    $value The URI query parameter value.
      * 
      * @return none
      */
@@ -381,7 +381,7 @@ class HttpCallContext
      * Ignores query parameter if it's value satisfies empty().
      * 
      * @param string $name  The URI query parameter name.
-     * @param mix    $value The URI query parameter value.
+     * @param string    $value The URI query parameter value.
      * 
      * @return none
      */
