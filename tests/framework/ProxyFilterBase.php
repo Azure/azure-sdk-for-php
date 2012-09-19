@@ -36,6 +36,7 @@ abstract class ProxyFilterBase implements IServiceFilter {
                 return true;
             }
         } catch(\Exception $e) {
+            error_log($e->getMessage());
         }
 
         restore_error_handler();
@@ -56,5 +57,3 @@ abstract class ProxyFilterBase implements IServiceFilter {
         return ($errno == E_WARNING ? true : false);
     }
 }
-
-

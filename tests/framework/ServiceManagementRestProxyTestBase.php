@@ -128,13 +128,10 @@ class ServiceManagementRestProxyTestBase extends RestProxyTestBase
     
     protected function blockUntilAsyncSucceed($requestInfo)
     {
-        $mockServerMode = TestResources::mockServerMode();
         $status = null;
         
         do {
-            if ($mockServerMode != 'playback') {
-                sleep(5);
-            }
+            $this->wait();
             $result = $this->restProxy->getOperationStatus($requestInfo);
             $status = $result->getStatus();
         } while(OperationStatus::IN_PROGRESS == $status);
@@ -248,15 +245,12 @@ class ServiceManagementRestProxyTestBase extends RestProxyTestBase
     
     public function waitUntilDeploymentReachStatus($name, $status)
     {
-        $mockServerMode = TestResources::mockServerMode();
         $options = new GetDeploymentOptions();
         $options->setSlot($this->defaultSlot);
         $currentStatus = null;
         
         do {
-            if ($mockServerMode != 'playback') {
-                sleep(5);
-            }
+            $this->wait();
             $result = $this->restProxy->getDeployment($name, $options);
             $deployment = $result->getDeployment(); 
             $currentStatus = $deployment->getStatus();
@@ -265,14 +259,11 @@ class ServiceManagementRestProxyTestBase extends RestProxyTestBase
     
     public function waitUntilRollbackIsAllowed($name)
     {
-        $mockServerMode = TestResources::mockServerMode();
         $options = new GetDeploymentOptions();
         $options->setSlot($this->defaultSlot);
         
         do {
-            if ($mockServerMode != 'playback') {
-                sleep(5);
-            }
+            $this->wait();
             $result = $this->restProxy->getDeployment($name, $options);
             $deployment = $result->getDeployment(); 
             $rollbackAllowed = $deployment->getRollbackAllowed();
@@ -281,15 +272,12 @@ class ServiceManagementRestProxyTestBase extends RestProxyTestBase
     
     public function waitUntilRoleInstanceReachStatus($name, $state, $roleInstanceName)
     {
-        $mockServerMode = TestResources::mockServerMode();
         $options = new GetDeploymentOptions();
         $options->setSlot($this->defaultSlot);
         $currentStatus = null;
         
         do {
-            if ($mockServerMode != 'playback') {
-                sleep(5);
-            }
+            $this->wait();
             $result = $this->restProxy->getDeployment($name, $options);
             $deployment = $result->getDeployment(); 
             $roleInstanceList = $deployment->getRoleInstanceList();
@@ -482,5 +470,12 @@ class ServiceManagementRestProxyTestBase extends RestProxyTestBase
         $this->assertEquals($roleName, $inputEndpoint1->getRoleName());
         $this->assertEquals('80', $inputEndpoint1->getPort());
         $this->assertNotNull($inputEndpoint1->getVip());
+    }
+
+    private function wait()
+    {
+        if (TestResources::mockServerMode() != 'playback') {
+            sleep(5);
+        }
     }
 }
