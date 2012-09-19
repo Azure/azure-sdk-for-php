@@ -24,7 +24,6 @@
  
 namespace Tests\Framework;
 use Tests\Framework\TestResources;
-use WindowsAzure\Common\Internal\Resources;
 use WindowsAzure\ServiceManagement\Models\CreateServiceOptions;
 use WindowsAzure\ServiceManagement\Models\OperationStatus;
 use WindowsAzure\ServiceManagement\Models\Locations;
@@ -129,10 +128,13 @@ class ServiceManagementRestProxyTestBase extends RestProxyTestBase
     
     protected function blockUntilAsyncSucceed($requestInfo)
     {
+        $mockServerMode = TestResources::mockServerMode();
         $status = null;
         
         do {
-            sleep(5);
+            if ($mockServerMode != 'playback') {
+                sleep(5);
+            }
             $result = $this->restProxy->getOperationStatus($requestInfo);
             $status = $result->getStatus();
         } while(OperationStatus::IN_PROGRESS == $status);
@@ -246,11 +248,15 @@ class ServiceManagementRestProxyTestBase extends RestProxyTestBase
     
     public function waitUntilDeploymentReachStatus($name, $status)
     {
+        $mockServerMode = TestResources::mockServerMode();
         $options = new GetDeploymentOptions();
         $options->setSlot($this->defaultSlot);
         $currentStatus = null;
         
         do {
+            if ($mockServerMode != 'playback') {
+                sleep(5);
+            }
             $result = $this->restProxy->getDeployment($name, $options);
             $deployment = $result->getDeployment(); 
             $currentStatus = $deployment->getStatus();
@@ -259,10 +265,14 @@ class ServiceManagementRestProxyTestBase extends RestProxyTestBase
     
     public function waitUntilRollbackIsAllowed($name)
     {
+        $mockServerMode = TestResources::mockServerMode();
         $options = new GetDeploymentOptions();
         $options->setSlot($this->defaultSlot);
         
         do {
+            if ($mockServerMode != 'playback') {
+                sleep(5);
+            }
             $result = $this->restProxy->getDeployment($name, $options);
             $deployment = $result->getDeployment(); 
             $rollbackAllowed = $deployment->getRollbackAllowed();
@@ -271,11 +281,15 @@ class ServiceManagementRestProxyTestBase extends RestProxyTestBase
     
     public function waitUntilRoleInstanceReachStatus($name, $state, $roleInstanceName)
     {
+        $mockServerMode = TestResources::mockServerMode();
         $options = new GetDeploymentOptions();
         $options->setSlot($this->defaultSlot);
         $currentStatus = null;
         
         do {
+            if ($mockServerMode != 'playback') {
+                sleep(5);
+            }
             $result = $this->restProxy->getDeployment($name, $options);
             $deployment = $result->getDeployment(); 
             $roleInstanceList = $deployment->getRoleInstanceList();
