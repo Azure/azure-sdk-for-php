@@ -59,12 +59,6 @@ class ServiceManagementRestProxyTest extends ServiceManagementRestProxyTestBase
 {
     private $_storageServiceName = 'createstorageservice';
 
-    protected function tearDown()
-    {
-        parent::tearDown();
-        MockServerFilter::stopRecording();
-    }
-    
     public function setUp()
     {
         parent::setUp();
@@ -77,11 +71,12 @@ class ServiceManagementRestProxyTest extends ServiceManagementRestProxyTestBase
         MockServerFilter::startRecording($recordingName);
     }
 
-    public static function tearDownAfterClass()
+    protected function tearDown()
     {
-        parent::tearDownAfterClass();
+        parent::tearDown();
+        MockServerFilter::stopRecording();
     }
-
+    
     /**
      * @covers WindowsAzure\ServiceManagement\ServiceManagementRestProxy::__construct
      */

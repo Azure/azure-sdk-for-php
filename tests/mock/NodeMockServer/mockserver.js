@@ -306,16 +306,10 @@ function driverToServer(record) {
         // strip request authorization header
         delete records[i].requestHeaders['authorization'];
 
-        // Strip request id header
-//        delete records[i].requestHeaders['x-ms-request-id'];
-
         // Strip request host header
         delete records[i].requestHeaders['host'];
 
         if (records[i].responseHeaders) {
-          // Strip response request id header
-//          delete records[i].responseHeaders['x-ms-request-id'];
-
           // Strip response location header
           delete records[i].responseHeaders['location'];
         }
