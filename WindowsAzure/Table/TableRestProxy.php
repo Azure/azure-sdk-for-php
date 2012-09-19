@@ -1005,8 +1005,6 @@ class TableRestProxy extends ServiceRestProxy implements ITable
             $options->setFilter($filter);
         }
         
-        $encodedPK   = $this->_encodeODataUriValue($options->getNextPartitionKey());
-        $encodedRK   = $this->_encodeODataUriValue($options->getNextRowKey());
         $queryParams = $this->_addOptionalQuery($queryParams, $options->getQuery());
         
         $this->addOptionalQueryParam(
@@ -1017,12 +1015,12 @@ class TableRestProxy extends ServiceRestProxy implements ITable
         $this->addOptionalQueryParam(
             $queryParams,
             Resources::QP_NEXT_PK,
-            $encodedPK
+            $options->getNextPartitionKey()
         );
         $this->addOptionalQueryParam(
             $queryParams,
             Resources::QP_NEXT_RK,
-            $encodedRK
+            $options->getNextRowKey()
         );
         
         $this->addOptionalHeader(
