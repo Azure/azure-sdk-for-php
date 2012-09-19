@@ -19,10 +19,8 @@ var fs = require('fs');
 var url = require('url');
 var net = require('net');
 
-var sessionsRootPath = 'test/recordings';
+var sessionsRootPath = 'recordings';
 var httpsPort = 7778;
-var clientKey = fs.readFileSync(process.env.CLIENT_KEY);
-var clientCert = fs.readFileSync(process.env.CLIENT_CRT)
 
 exports.log = true;
 
@@ -30,6 +28,14 @@ if (!fs.existsSync) {
   fs.existsSync = require('path').existsSync;
 }
 
+if (!fs.existsSync(process.env.CLIENT_KEY)) {
+  throw "CLIENT_KEY environment variable must point to a KEY file";
+}
+if (!fs.existsSync(process.env.CLIENT_CRT)) {
+  throw "CLIENT_CRT environment variable must point to a CRT file";
+}
+var clientKey = fs.readFileSync(process.env.CLIENT_KEY);
+var clientCert = fs.readFileSync(process.env.CLIENT_CRT);
 
 function writeLog(msg) {
   if (exports.log) {
@@ -59,8 +65,9 @@ utils.buildRequestOptions = function (request, requestUrl, proxy) {
   };
 
   if (!proxy.host) {
-    var u = url.parse(request.url);
+    var u = url.parse(requestUrl);
     options.host = u.hostname;
+    options.path = u.path;
     options.port = u.port;
     if (!u.port) {
       options.port = (u.protocol == 'https:') ? '443' : '80';

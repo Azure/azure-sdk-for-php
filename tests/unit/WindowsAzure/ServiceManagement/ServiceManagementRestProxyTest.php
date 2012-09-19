@@ -23,7 +23,7 @@
  */
 
 namespace Tests\Unit\WindowsAzure\ServiceManagement;
-use Tests\Framework\FiddlerFilter;
+use Tests\Framework\MockServerFilter;
 use Tests\Framework\ServiceRestProxyTestBase;
 use Tests\Framework\ServiceManagementRestProxyTestBase;
 use Tests\Framework\TestResources;
@@ -59,24 +59,22 @@ class ServiceManagementRestProxyTest extends ServiceManagementRestProxyTestBase
 {
     private $_storageServiceName = 'createstorageservice';
 
-    private function startMocker($function)
-    {
-        $namespaceParts =  explode("\\" , __CLASS__);
-        $className = $namespaceParts[count($namespaceParts)-1];
-        FiddlerFilter::startRecording( $className . "_" . $function);
-    }
-
     protected function tearDown()
     {
         parent::tearDown();
-        FiddlerFilter::stopRecording();
+        MockServerFilter::stopRecording();
     }
     
     public function setUp()
     {
         parent::setUp();
-        $fiddlerFilter = new FiddlerFilter();
-        $this->restProxy = $this->restProxy->withFilter($fiddlerFilter);
+        $this->restProxy = $this->restProxy->withFilter(new \Tests\Framework\FiddlerFilter());
+        $mockServerFilter = new MockServerFilter();
+        $this->restProxy = $this->restProxy->withFilter($mockServerFilter);
+        $namespaceParts =  explode("\\" , __CLASS__);
+        $className = $namespaceParts[count($namespaceParts)-1];
+        $recordingName = $className . "_" . $this->getName();
+        MockServerFilter::startRecording($recordingName);
     }
 
     public static function tearDownAfterClass()
@@ -89,7 +87,6 @@ class ServiceManagementRestProxyTest extends ServiceManagementRestProxyTestBase
      */
     public function test__construct()
     {
-        $this->startMocker( __FUNCTION__);
         // Setup
         $channel = new HttpClient();
         $subscriptionId = '1234567-4323232';
@@ -116,7 +113,6 @@ class ServiceManagementRestProxyTest extends ServiceManagementRestProxyTestBase
      */
     public function testLocations()
     {
-        $this->startMocker( __FUNCTION__);
         // Setup
         $locations = array(
             Locations::ANYWHERE_ASIA,
@@ -164,7 +160,6 @@ class ServiceManagementRestProxyTest extends ServiceManagementRestProxyTestBase
      */
     public function testCreateAffinityGroup()
     {
-        $this->startMocker( __FUNCTION__);
         // Setup
         $name  = 'createaffinitygroup';
         $label = base64_encode($name);
@@ -186,7 +181,6 @@ class ServiceManagementRestProxyTest extends ServiceManagementRestProxyTestBase
      */
     public function testDeleteAffinityGroup()
     {
-        $this->startMocker( __FUNCTION__);
         // Setup
         $name = 'deleteaffinitygroup';
         $label = base64_encode($name);
@@ -209,7 +203,6 @@ class ServiceManagementRestProxyTest extends ServiceManagementRestProxyTestBase
      */
     public function testListAffinityGroupsWithEmpty()
     {
-        $this->startMocker( __FUNCTION__);
         // Setup
         $currentCount = count($this->restProxy->listAffinityGroups()->getAffinityGroups());
         $expectedCount = 0 + $currentCount;
@@ -231,7 +224,6 @@ class ServiceManagementRestProxyTest extends ServiceManagementRestProxyTestBase
      */
     public function testListAffinityGroupsWithOneEntry()
     {
-        $this->startMocker( __FUNCTION__);
         // Setup
         $name = 'listaffinitygroupwithoneentry';
         $currentCount = count($this->restProxy->listAffinityGroups()->getAffinityGroups());
@@ -255,7 +247,6 @@ class ServiceManagementRestProxyTest extends ServiceManagementRestProxyTestBase
      */
     public function testListAffinityGroupsWithMultipleEntries()
     {
-        $this->startMocker( __FUNCTION__);
         // Setup
         $name1 = 'listaffinitygroupwithmultipleentries1';
         $name2 = 'listaffinitygroupwithmultipleentries2';
@@ -280,7 +271,6 @@ class ServiceManagementRestProxyTest extends ServiceManagementRestProxyTestBase
      */
     public function testUpdateAffinityGroup()
     {
-        $this->startMocker( __FUNCTION__);
         // Setup
         $name  = 'updateaffinitygroup';
         $label = base64_encode($name);
@@ -305,7 +295,6 @@ class ServiceManagementRestProxyTest extends ServiceManagementRestProxyTestBase
      */
     public function testGetAffinityGroupProperties()
     {
-        $this->startMocker( __FUNCTION__);
         // Setup
         $name = 'getaffinitygroupproperties';
         $this->createAffinityGroup($name);
@@ -329,7 +318,6 @@ class ServiceManagementRestProxyTest extends ServiceManagementRestProxyTestBase
      */
     public function testListLocations()
     {
-        $this->startMocker( __FUNCTION__);
         // Test
         $result = $this->restProxy->listLocations();
         
@@ -351,7 +339,6 @@ class ServiceManagementRestProxyTest extends ServiceManagementRestProxyTestBase
      */
     public function testCreateStorageService()
     {
-        $this->startMocker( __FUNCTION__);
         // Setup
         $name = $this->_storageServiceName;
         $label = base64_encode($name);
@@ -381,7 +368,6 @@ class ServiceManagementRestProxyTest extends ServiceManagementRestProxyTestBase
      */
     public function testListStorageServices($storageCount)
     {
-        $this->startMocker( __FUNCTION__);
         // Setup
         $expected = 1;
         
@@ -401,7 +387,6 @@ class ServiceManagementRestProxyTest extends ServiceManagementRestProxyTestBase
      */
     public function testUpdateStorageService()
     {
-        $this->startMocker( __FUNCTION__);
         // Setup
         $name = $this->_storageServiceName;
         $options = new UpdateServiceOptions();
@@ -429,7 +414,6 @@ class ServiceManagementRestProxyTest extends ServiceManagementRestProxyTestBase
      */
     public function testGetStorageServiceProperties()
     {
-        $this->startMocker( __FUNCTION__);
         // Setup
         $name = $this->_storageServiceName;
         
@@ -456,7 +440,6 @@ class ServiceManagementRestProxyTest extends ServiceManagementRestProxyTestBase
      */
     public function testGetStorageServiceKeys()
     {
-        $this->startMocker( __FUNCTION__);
         // Setup
         $name = $this->_storageServiceName;
         
@@ -479,7 +462,6 @@ class ServiceManagementRestProxyTest extends ServiceManagementRestProxyTestBase
      */
     public function testRegenerateStorageServiceKeys()
     {
-        $this->startMocker( __FUNCTION__);
         // Setup
         $name = $this->_storageServiceName;
         $old = $this->restProxy->getStorageServiceKeys($name);
@@ -500,7 +482,6 @@ class ServiceManagementRestProxyTest extends ServiceManagementRestProxyTestBase
      */
     public function testDeleteStorageService()
     {
-        $this->startMocker( __FUNCTION__);
         // From build time perspective, this method must be called as the last unit
         // test (by specifying @depends) because all other unit tests use the storage 
         // account this method deletes.
@@ -524,7 +505,6 @@ class ServiceManagementRestProxyTest extends ServiceManagementRestProxyTestBase
      */
     public function testListHostedServicesEmpty()
     {
-        $this->startMocker( __FUNCTION__);
         // Setup
         $currentCount = count($this->restProxy->listHostedServices()->getHostedServices());
         $expectedCount = $currentCount;
@@ -545,7 +525,6 @@ class ServiceManagementRestProxyTest extends ServiceManagementRestProxyTestBase
      */
     public function testListHostedServicesOne()
     {
-        $this->startMocker( __FUNCTION__);
         // Setup
         $currentCount = count($this->restProxy->listHostedServices()->getHostedServices());
         $name = 'testlisthostedservicesone';
@@ -577,7 +556,6 @@ class ServiceManagementRestProxyTest extends ServiceManagementRestProxyTestBase
      */
     public function testListHostedServicesMultiple()
     {
-        $this->startMocker( __FUNCTION__);
         // Setup
         $currentCount = count($this->restProxy->listHostedServices()->getHostedServices());
         $name1 = 'testlisthostedservicesmultiple1';
@@ -620,7 +598,6 @@ class ServiceManagementRestProxyTest extends ServiceManagementRestProxyTestBase
      */
     public function testDeleteHostedService()
     {
-        $this->startMocker( __FUNCTION__);
         // Setup
         $name = 'testdeletehostedservice';
         $this->createHostedService($name);
@@ -645,7 +622,6 @@ class ServiceManagementRestProxyTest extends ServiceManagementRestProxyTestBase
      */
     public function testCreateHostedService()
     {
-        $this->startMocker( __FUNCTION__);
         // Setup
         $name = 'testcreatehostedservice';
         $label = base64_encode($name);
@@ -669,7 +645,6 @@ class ServiceManagementRestProxyTest extends ServiceManagementRestProxyTestBase
      */
     public function testUpdateHostedService()
     {
-        $this->startMocker( __FUNCTION__);
         // Setup
         $name = 'testupdatehostedservice';
         $this->createHostedService($name);
@@ -697,7 +672,6 @@ class ServiceManagementRestProxyTest extends ServiceManagementRestProxyTestBase
      */
     public function testGetHostedServiceProperties()
     {
-        $this->startMocker( __FUNCTION__);
         // Setup
         $name = 'testGetHostedServiceProperties';
         $this->createHostedService($name);
@@ -720,7 +694,6 @@ class ServiceManagementRestProxyTest extends ServiceManagementRestProxyTestBase
      */
     public function testGetHostedServicePropertiesWithEmbed()
     {
-        $this->startMocker( __FUNCTION__);
         // Setup
         $name = 'testgethostedservicepropertieswithembed';
         $stagingName = $name . 'staging';
@@ -772,7 +745,6 @@ class ServiceManagementRestProxyTest extends ServiceManagementRestProxyTestBase
      */
     public function testCreateDeployment()
     {
-        $this->startMocker( __FUNCTION__);
         // Setup
         $name = 'testcreatedeployment';
         
@@ -792,7 +764,6 @@ class ServiceManagementRestProxyTest extends ServiceManagementRestProxyTestBase
      */
     public function testDeleteDeploymentWithSlot()
     {
-        $this->startMocker( __FUNCTION__);
         // Setup
         $name = 'testdeletedeploymentwithslot';
         $label = base64_encode($name);
@@ -832,7 +803,6 @@ class ServiceManagementRestProxyTest extends ServiceManagementRestProxyTestBase
      */
     public function testDeleteDeploymentWithName()
     {
-        $this->startMocker( __FUNCTION__);
         // Setup
         $name = 'testdeletedeploymentwithname';
         $label = base64_encode($name);
@@ -879,7 +849,6 @@ class ServiceManagementRestProxyTest extends ServiceManagementRestProxyTestBase
      */
     public function testGetDeploymentWithOneRole()
     {
-        $this->startMocker( __FUNCTION__);
         // Setup
         $name = 'testgetdeployment';
         $this->createDeployment($name);
@@ -916,7 +885,6 @@ class ServiceManagementRestProxyTest extends ServiceManagementRestProxyTestBase
      */
     public function testGetDeploymentWithMultipleRoles()
     {
-        $this->startMocker( __FUNCTION__);
         // Setup
         $name = 'testgetdeploymentwithmultipleroles';
         $label = base64_encode($name);
@@ -975,7 +943,6 @@ class ServiceManagementRestProxyTest extends ServiceManagementRestProxyTestBase
      */
     public function testGetDeploymentWhileUpgrading()
     {
-        $this->startMocker( __FUNCTION__);
         // Setup
         $name = 'testgetdeploymentwhileupgrading';
         $this->createDeployment($name);
@@ -1022,7 +989,6 @@ class ServiceManagementRestProxyTest extends ServiceManagementRestProxyTestBase
      */
     public function testSwapDeployment()
     {
-        $this->startMocker( __FUNCTION__);
         // Setup
         $name = 'testswapdeployment';
         $staging = 'stagingdeployment';
@@ -1058,7 +1024,6 @@ class ServiceManagementRestProxyTest extends ServiceManagementRestProxyTestBase
      */
     public function testChangeDeploymentConfiguration()
     {
-        $this->startMocker( __FUNCTION__);
         // Setup
         $name = 'testchangedeploymentconfiguration';
         $newConfig = '<?xml version="1.0" encoding="utf-8"?>
@@ -1099,7 +1064,6 @@ class ServiceManagementRestProxyTest extends ServiceManagementRestProxyTestBase
      */
     public function testUpdateDeploymentStatus()
     {
-        $this->startMocker( __FUNCTION__);
         // Setup
         $name = 'testUpdateDeploymentStatus';
         $this->createDeployment($name);
@@ -1130,7 +1094,6 @@ class ServiceManagementRestProxyTest extends ServiceManagementRestProxyTestBase
      */
     public function testUpgradeDeployment()
     {
-        $this->startMocker( __FUNCTION__);
         // Setup
         $name = 'testUpgradeDeployment';
         $this->createDeployment($name);
@@ -1175,7 +1138,6 @@ class ServiceManagementRestProxyTest extends ServiceManagementRestProxyTestBase
      */
     public function testWalkUpgradeDomain()
     {
-        $this->startMocker( __FUNCTION__);
         // Setup
         $name = 'testupgradedomain';
         $this->createDeployment($name);
@@ -1228,7 +1190,6 @@ class ServiceManagementRestProxyTest extends ServiceManagementRestProxyTestBase
      */
     public function testRebootRoleInstance()
     {
-        $this->startMocker( __FUNCTION__);
         $this->markTestSkipped(ServiceRestProxyTestBase::TAKE_TOO_LONG);
         
         // Setup
@@ -1274,7 +1235,6 @@ class ServiceManagementRestProxyTest extends ServiceManagementRestProxyTestBase
      */
     public function testReimageRoleInstance()
     {
-        $this->startMocker( __FUNCTION__);
         $this->markTestSkipped(ServiceRestProxyTestBase::TAKE_TOO_LONG);
         
         // Setup
@@ -1318,7 +1278,6 @@ class ServiceManagementRestProxyTest extends ServiceManagementRestProxyTestBase
      */
     public function testRollbackUpgradeOrUpdate()
     {
-        $this->startMocker( __FUNCTION__);
         $name = 'testRollbackUpgradeOrUpdate';
         $newConfig = '<?xml version="1.0" encoding="utf-8"?>
                         <ServiceConfiguration serviceName="WindowsAzureProject2" xmlns="http://schemas.microsoft.com/ServiceHosting/2008/10/ServiceConfiguration" osFamily="1" osVersion="*">

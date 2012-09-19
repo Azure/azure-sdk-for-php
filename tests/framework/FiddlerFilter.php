@@ -27,8 +27,8 @@ namespace Tests\Framework;
 class FiddlerFilter extends ProxyFilterBase {
     protected $site = '127.0.0.1';
     protected $port = 8888;
-    protected static $isChecked = false;
-    protected static $isFiddlerOn = false;
+    protected static $isChecked;
+    protected static $isFiddlerOn;
     
     public function __construct() {
         if (!self::$isChecked) {
@@ -38,7 +38,7 @@ class FiddlerFilter extends ProxyFilterBase {
     }
 
     public function handleRequest($request) {
-        if (self::isFiddlerOn) {
+        if (self::$isFiddlerOn) {
             $request->setConfig('proxy_host', $this->site);
             $request->setConfig('proxy_port', $this->port);
         }
