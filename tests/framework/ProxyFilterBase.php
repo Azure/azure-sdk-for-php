@@ -24,24 +24,37 @@
  
 namespace Tests\Framework;
 
-class FiddlerFilter extends ProxyFilterBase {
-    protected static $site = '127.0.0.1';
-    protected static $port = 8888;
-    protected static $isChecked = false;
-    protected static $isFiddlerOn = false;
-    
-    public function __construct() {
-        if (!self::$isChecked) {
-            self::$isChecked = true;
-            self::$isFiddlerOn = self::isLocalProxyPortAvailable(self::$site, self::$port);
+use WindowsAzure\Common\Internal\IServiceFilter;
+
+abstract class ProxyFilterBase implements IServiceFilter {
+    protected static function isLocalProxyPortAvailable($site, $port) {
+        set_error_handler(array('Tests\Framework\ProxyFilterBase', 'errorHandler'));
+        try {
+            $fp = fsockopen($site, $port);
+            if ($fp) {
+                fclose($fp);
+                return true;
+            }
+        } catch(\Exception $e) {
         }
+
+        restore_error_handler();
+        return false;
     }
 
     public function handleRequest($request) {
-        if (self::$isFiddlerOn) {
-            $request->setConfig('proxy_host', self::$site);
-            $request->setConfig('proxy_port', self::$port);
-        }
+        // Expect derived classes to override this.
         return $request;
     }
+
+    public function handleResponse($request, $response) {
+        return $response;
+    }
+
+    public static function errorHandler($errno, $errorMessage, $errorFile, $errorLine)
+    {
+        return ($errno == E_WARNING ? true : false);
+    }
 }
+
+
