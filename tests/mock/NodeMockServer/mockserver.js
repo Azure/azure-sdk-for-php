@@ -121,46 +121,6 @@ utils.startsWithCapLetters = function (data, count) {
   return true;
 }
 
-function makeTcpRequestHandler(server) {
-  var requestHandlers = server.listeners("request");
-  return function (socket) {
-    var dataListeners = socket.listeners('data');
-    socket.removeAllListeners('data');
-    socket.addListener("data", function (data) {
-      // This is an HTTPS port, so everything should be encrypted
-      // except for HTTP requests.
-      if (utils.startsWithCapLetters(data, 3)) {
-        // Appears to be an unemcrypted stream. Most likely HTTP request.
-        var verb = data.toString().split(" ")[0];
-        var host = data.toString().split(" ")[1].split(":")[0];
-        var restOfMessage = data.toString().split("\r\n").slice(1).join("\r\n");
-        writeLog("Got HTTP " + verb + " message for " + host);
-        if (verb == 'CONNECT') {
-          utils.setHostForSocket(socket, host);
-          var srvUrl = url.parse('http://' + host + ":443");
-          // connect to an origin server
-          var srvSocket = net.connect(srvUrl.port, srvUrl.hostname);
-          srvSocket.write(data);
-          srvSocket.pipe(socket);
-          socket.write('HTTP/1.1 200 Connection Established\r\n' +
-                        'Proxy-agent: mockserver\r\n' +
-                        '\r\n');
-          socket.pipe(srvSocket);
-        } else {
-          // Plain HTTP verb
-          var srvUrl = url.parse('http://' + host);
-          // TODO: Figure out how to pipe this request into the Request pipeline.
-        }
-      } else {
-        // Reuse the original listeners
-        for (i in dataListeners) {
-          dataListeners[i](data);
-        }
-      }
-    });
-  }
-}
-
 function driverToServer(record) {
   return function (proxy, session) {
     var sessionPath = sessionsRootPath + '/' + session.name;
@@ -409,7 +369,7 @@ driverFactory.modes.playback = function (proxy, session) {
   else {
     var driver = {};
     driver.call = function (request, response) {
-      writeLog('  REQUEST: ' + request.method + ' ' + requestUrl);
+      writeLog('  REQUEST: ' + request.method + ' ' + request.Url);
 
       writeLog('    STATUS: 500 Unexpected Request');
       response.statusCode = 500;
@@ -423,7 +383,7 @@ driverFactory.modes.playback = function (proxy, session) {
 };
 
 // factory method for the service context
-function mockProxy(host, port) {
+function mockProxy(server, host, port) {
   // this state is GET or PUT on the https://localhost:httpsPort/proxy url
   // a test framework is expected to PUT this value to correct proxy if needed
   var proxy = { host: host, port: port };
@@ -436,7 +396,8 @@ function mockProxy(host, port) {
   // this is the current driver, it's updated when the /session state is altered
   var driver = driverFactory.create(proxy, session);
 
-  return function (request, response) {
+  var mockCallbacks = {};
+  mockCallbacks.requestHandler = function (request, response) {
     var u = url.parse(request.url, true);
     var isLocal = 
         (request.headers.host == 'localhost:' + httpsPort) || 
@@ -536,13 +497,58 @@ function mockProxy(host, port) {
       response.end();
     }
   };
+
+  var requestHandlers = server.listeners("request");
+  mockCallbacks.tcpRequestHandler = function (socket) {
+    var dataListeners = socket.listeners('data');
+    socket.removeAllListeners('data');
+    socket.addListener("data", function (data) {
+      // This is an HTTPS port, so everything should be encrypted
+      // except for HTTP requests.
+      if (utils.startsWithCapLetters(data, 3)) {
+        // Appears to be an unemcrypted stream. Most likely HTTP request.
+        var verb = data.toString().split(" ")[0];
+        var host = data.toString().split(" ")[1].split(":")[0];
+        var restOfMessage = data.toString().split("\r\n").slice(1).join("\r\n");
+        writeLog("Got HTTP " + verb + " message for " + host);
+        if (verb == 'CONNECT') {
+          utils.setHostForSocket(socket, host);
+          var srvUrl = url.parse('http://' + host + ":443");
+          if (session.mode != "playback") {
+            // Need to CONNECT to real server for info
+            // connect to an origin server
+            var srvSocket = net.connect(srvUrl.port, srvUrl.hostname);
+            srvSocket.write(data);
+            srvSocket.pipe(socket);
+          }
+          socket.write('HTTP/1.1 200 Connection Established\r\n' +
+                        'Proxy-agent: mockserver\r\n' +
+                        '\r\n');
+          //  socket.pipe(srvSocket);
+        } else {
+          // Plain HTTP verb
+          var srvUrl = url.parse('http://' + host);
+          // TODO: Figure out how to pipe this request into the Request pipeline.
+        }
+      } else {
+        // Reuse the original listeners
+        for (i in dataListeners) {
+          dataListeners[i](data);
+        }
+      }
+    });
+  };
+
+  return mockCallbacks;
 };
 
 var options = {
   key : clientKey, 
   cert: clientCert
 };
-var server = https.createServer(options, mockProxy(null, null));
-server.on('connection', makeTcpRequestHandler(server));
+var server = https.createServer(options);
+var mockCallbacks = mockProxy(server, null, null);
+server.on('request', mockCallbacks.requestHandler);
+server.on('connection', mockCallbacks.tcpRequestHandler);
 server.listen(httpsPort);
 writeLog('Proxy server started on [http|https]://localhost:' + httpsPort);
