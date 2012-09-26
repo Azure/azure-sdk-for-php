@@ -183,6 +183,21 @@ class TestResources
         
         return $subscriptionId;
     }
+
+    public static function mockServerMode()
+    {
+        $mode = getenv('MOCK_SERVER_MODE');
+
+        // No MOCK_SERVER_MODE envionment variable means ignore the mock server.
+        if (!empty($mode) &&
+                !($mode == 'recording' || $mode == 'playback' || $mode == 'neutral')) {
+            throw new \Exception(
+                    'MOCK_SERVER_MODE envionment variable is ' . $mode .
+                    ' but must be "recording", "playback", or "neutral"');
+        }
+
+        return $mode;
+    }
     
     public static function serviceManagementCertificatePath()
     {
