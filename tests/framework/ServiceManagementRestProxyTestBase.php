@@ -24,7 +24,6 @@
  
 namespace Tests\Framework;
 use Tests\Framework\TestResources;
-use WindowsAzure\Common\Internal\Resources;
 use WindowsAzure\ServiceManagement\Models\CreateServiceOptions;
 use WindowsAzure\ServiceManagement\Models\OperationStatus;
 use WindowsAzure\ServiceManagement\Models\Locations;
@@ -132,7 +131,7 @@ class ServiceManagementRestProxyTestBase extends RestProxyTestBase
         $status = null;
         
         do {
-            sleep(5);
+            $this->wait();
             $result = $this->restProxy->getOperationStatus($requestInfo);
             $status = $result->getStatus();
         } while(OperationStatus::IN_PROGRESS == $status);
@@ -251,6 +250,7 @@ class ServiceManagementRestProxyTestBase extends RestProxyTestBase
         $currentStatus = null;
         
         do {
+            $this->wait();
             $result = $this->restProxy->getDeployment($name, $options);
             $deployment = $result->getDeployment(); 
             $currentStatus = $deployment->getStatus();
@@ -263,6 +263,7 @@ class ServiceManagementRestProxyTestBase extends RestProxyTestBase
         $options->setSlot($this->defaultSlot);
         
         do {
+            $this->wait();
             $result = $this->restProxy->getDeployment($name, $options);
             $deployment = $result->getDeployment(); 
             $rollbackAllowed = $deployment->getRollbackAllowed();
@@ -276,6 +277,7 @@ class ServiceManagementRestProxyTestBase extends RestProxyTestBase
         $currentStatus = null;
         
         do {
+            $this->wait();
             $result = $this->restProxy->getDeployment($name, $options);
             $deployment = $result->getDeployment(); 
             $roleInstanceList = $deployment->getRoleInstanceList();
@@ -468,5 +470,12 @@ class ServiceManagementRestProxyTestBase extends RestProxyTestBase
         $this->assertEquals($roleName, $inputEndpoint1->getRoleName());
         $this->assertEquals('80', $inputEndpoint1->getPort());
         $this->assertNotNull($inputEndpoint1->getVip());
+    }
+
+    private function wait()
+    {
+        if (TestResources::mockServerMode() != 'playback') {
+            sleep(5);
+        }
     }
 }

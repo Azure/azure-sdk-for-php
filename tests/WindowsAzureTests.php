@@ -31,6 +31,8 @@ spl_autoload_register(
          $classes = array(
             'tests\\framework\\blobservicerestproxytestbase' => '/framework/BlobServiceRestProxyTestBase.php',
             'tests\\framework\\fiddlerfilter' => '/framework/FiddlerFilter.php',
+            'tests\\framework\\mockserverfilter' => '/framework/MockServerFilter.php',
+            'tests\\framework\\proxyfilterbase' => '/framework/ProxyFilterBase.php',
             'tests\\framework\\queueservicerestproxytestbase' => '/framework/QueueServiceRestProxyTestBase.php',
             'tests\\framework\\restproxytestbase' => '/framework/RestProxyTestBase.php',
             'tests\\framework\\servicebusrestproxytestbase' => '/framework/ServiceBusRestProxyTestBase.php',

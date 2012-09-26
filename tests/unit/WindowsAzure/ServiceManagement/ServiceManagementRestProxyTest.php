@@ -23,6 +23,7 @@
  */
 
 namespace Tests\Unit\WindowsAzure\ServiceManagement;
+use Tests\Framework\MockServerFilter;
 use Tests\Framework\ServiceRestProxyTestBase;
 use Tests\Framework\ServiceManagementRestProxyTestBase;
 use Tests\Framework\TestResources;
@@ -57,6 +58,24 @@ use WindowsAzure\ServiceManagement\Models\CreateDeploymentOptions;
 class ServiceManagementRestProxyTest extends ServiceManagementRestProxyTestBase
 {
     private $_storageServiceName = 'createstorageservice';
+
+    public function setUp()
+    {
+        parent::setUp();
+        $this->restProxy = $this->restProxy->withFilter(new \Tests\Framework\FiddlerFilter());
+        $mockServerFilter = new MockServerFilter();
+        $this->restProxy = $this->restProxy->withFilter($mockServerFilter);
+        $namespaceParts =  explode("\\" , __CLASS__);
+        $className = $namespaceParts[count($namespaceParts)-1];
+        $recordingName = $className . "_" . $this->getName();
+        MockServerFilter::startRecording($recordingName);
+    }
+
+    protected function tearDown()
+    {
+        parent::tearDown();
+        MockServerFilter::stopRecording();
+    }
     
     /**
      * @covers WindowsAzure\ServiceManagement\ServiceManagementRestProxy::__construct
