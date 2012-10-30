@@ -55,13 +55,14 @@ class QueueServiceIntegrationTest extends IntegrationTestBase
         // Setup container names array (list of container names used by
         // integration tests)
         self::$testQueues = array();
+        $rint = mt_rand(0, 1000000);
         for ($i = 0; $i < 10; $i++) {
-            self::$testQueues[$i] = self::$testQueuesPrefix . round( gettimeofday(true)) . ($i + 1);
+            self::$testQueues[$i] = self::$testQueuesPrefix . $rint . ($i + 1);
         }
 
         self::$creatableQueues = array();
         for ($i = 0; $i < 3; $i++) {
-            self::$creatableQueues[$i] = self::$createableQueuesPrefix . ($i + 1);
+            self::$creatableQueues[$i] = self::$createableQueuesPrefix . $rint . ($i + 1);
         }
 
         self::$testQueueForMessages = self::$testQueues[0];
@@ -321,7 +322,8 @@ class QueueServiceIntegrationTest extends IntegrationTestBase
         $queue20 = $result2->getQueues();
         $queue20 = $queue20[0];
         $this->assertNotNull($queue20, '$queue20');
-        $this->assertNull($queue20->getMetadata(), '$queue20->getMetadata');
+        $this->assertNotNull($queue20->getMetadata(), '$queue20->getMetadata');
+        $this->assertEquals(0, count($queue20->getMetadata()), 'count($queue20->getMetadata)');
         $this->assertNotNull($queue20->getName(), '$queue20->getName');
         $this->assertNotNull($queue20->getUrl(), '$queue20->getUrl');
     }
