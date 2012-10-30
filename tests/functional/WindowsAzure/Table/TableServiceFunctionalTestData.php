@@ -580,6 +580,7 @@ class TableServiceFunctionalTestData
         array_push($ret, 'Some unicode: ' . self::getUnicodeString());
         array_push($ret, strval(self::INT_MAX_VALUE));
         array_push($ret, '<some><XML></stuff>');
+        array_push($ret, "\t\tSomething you entered\n\n\ttranscended parameters\r\n\r\n\t\tSo much is unknown\r\r");
         return $ret;
     }
 

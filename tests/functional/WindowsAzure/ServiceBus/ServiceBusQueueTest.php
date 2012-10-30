@@ -27,6 +27,7 @@ namespace Tests\Functional\WindowsAzure\ServiceBus;
 use Tests\Framework\TestResources;
 use Tests\Functional\WindowsAzure\ServiceBus\ScenarioTestBase;
 use WindowsAzure\Common\ServiceException;
+use WindowsAzure\Common\Internal\Resources;
 use WindowsAzure\ServiceBus\Models\BrokeredMessage;
 use WindowsAzure\ServiceBus\Models\BrokerProperties;
 use WindowsAzure\ServiceBus\Models\ListQueuesOptions;
@@ -207,13 +208,10 @@ class ServiceBusQueueTest extends ScenarioTestBase
         try {
             $this->restProxy->deleteMessage($message1again);
             $this->fail('Deleting a RECEIVEANDDELETE messasge should fail');
-        } catch (ServiceException $ex) {
-            // TODO: https://github.com/WindowsAzure/azure-sdk-for-php/issues/470
-            $this->assertTrue(
-                    TestResources::STATUS_INTERNAL_SERVER_ERROR == $ex->getCode() || TestResources::STATUS_NOT_FOUND == $ex->getCode(),
-                    'Expect failure error code 500:InternalServerError or 404:NotFound when deleting RECEIVEANDDELETE messasge, but got ' .
-                    $ex->getCode() .
-                    ' https://github.com/WindowsAzure/azure-sdk-for-php/issues/470');
+        } catch (\InvalidArgumentException $ex) {
+            $this->assertEquals(
+                    Resources::MISSING_LOCK_LOCATION_MSG, $ex->getMessage(),
+                    'exception message for deleting a RECEIVEANDDELETE message');
         }
 
         // Get the thrid
