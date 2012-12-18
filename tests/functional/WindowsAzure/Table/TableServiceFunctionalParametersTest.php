@@ -37,16 +37,6 @@ use WindowsAzure\Table\Models\Filters\Filter;
 
 class TableServiceFunctionalParametersTest extends FunctionalTestBase
 {
-    public static function setUpBeforeClass()
-    {
-        parent::setUpBeforeClass();
-    }
-
-    public static function tearDownAfterClass()
-    {
-        parent::tearDownAfterClass();
-    }
-
     /**
     * @covers WindowsAzure\Table\TableRestProxy::getServiceProperties
     */
