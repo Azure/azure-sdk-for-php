@@ -92,6 +92,12 @@ class ServiceBusRestProxy extends ServiceRestProxy implements IServiceBus
     /**
      * Sends a brokered message. 
      * 
+     * Queues:
+     * @link http://msdn.microsoft.com/en-us/library/windowsazure/hh780775
+     *
+     * Topic Subscriptions:
+     * @link http://msdn.microsoft.com/en-us/library/windowsazure/hh780786
+     * 
      * @param type $path            The path to send message. 
      * @param type $brokeredMessage The brokered message. 
      *
@@ -136,6 +142,8 @@ class ServiceBusRestProxy extends ServiceRestProxy implements IServiceBus
     /**
      * Sends a queue message. 
      * 
+     * @link http://msdn.microsoft.com/en-us/library/windowsazure/hh780775
+     *
      * @param string          $queueName       The name of the queue.
      * @param BrokeredMessage $brokeredMessage The brokered message. 
      *
@@ -149,11 +157,14 @@ class ServiceBusRestProxy extends ServiceRestProxy implements IServiceBus
     
     /**
      * Receives a queue message. 
+     *
+     * @link http://msdn.microsoft.com/en-us/library/windowsazure/hh780735
+     * @link http://msdn.microsoft.com/en-us/library/windowsazure/hh780756 
      * 
      * @param string                $queueName             The name of the
      * queue. 
      * @param ReceiveMessageOptions $receiveMessageOptions The options to 
-     * receive the message. 
+     * receive the message.
      *
      * @return BrokeredMessage
      */
@@ -171,11 +182,19 @@ class ServiceBusRestProxy extends ServiceRestProxy implements IServiceBus
     /**
      * Receives a message. 
      * 
+     * Queues:
+     * @link http://msdn.microsoft.com/en-us/library/windowsazure/hh780735
+     * @link http://msdn.microsoft.com/en-us/library/windowsazure/hh780756 
+     *
+     * Topic Subscriptions:
+     * @link http://msdn.microsoft.com/en-us/library/windowsazure/hh780722
+     * @link http://msdn.microsoft.com/en-us/library/windowsazure/hh780770
+     *
      * @param string                 $path                  The path of the 
      * message. 
      * @param ReceivedMessageOptions $receiveMessageOptions The options to 
      * receive the message. 
-     *
+     * 
      * @return BrokeredMessage
      */
     public function receiveMessage($path, $receiveMessageOptions = null)
@@ -256,6 +275,8 @@ class ServiceBusRestProxy extends ServiceRestProxy implements IServiceBus
 
     /**
      * Sends a brokered message to a specified topic. 
+     *
+     * @link http://msdn.microsoft.com/en-us/library/windowsazure/hh780786
      * 
      * @param string          $topicName       The name of the topic. 
      * @param BrokeredMessage $brokeredMessage The brokered message. 
@@ -270,6 +291,9 @@ class ServiceBusRestProxy extends ServiceRestProxy implements IServiceBus
 
     /**
      * Receives a subscription message. 
+     *
+     * @link http://msdn.microsoft.com/en-us/library/windowsazure/hh780722
+     * @link http://msdn.microsoft.com/en-us/library/windowsazure/hh780770
      * 
      * @param string                $topicName             The name of the 
      * topic.
@@ -301,6 +325,12 @@ class ServiceBusRestProxy extends ServiceRestProxy implements IServiceBus
 
     /**
      * Unlocks a brokered message. 
+     *
+     * Queues:
+     * @link http://msdn.microsoft.com/en-us/library/windowsazure/hh780723
+     * 
+     * Topic Subscriptions:
+     * @link http://msdn.microsoft.com/en-us/library/windowsazure/hh780737
      * 
      * @param BrokeredMessage $brokeredMessage The brokered message. 
      *
@@ -330,6 +360,12 @@ class ServiceBusRestProxy extends ServiceRestProxy implements IServiceBus
     
     /**
      * Deletes a brokered message. 
+     *
+     * Queues:
+     * @link http://msdn.microsoft.com/en-us/library/windowsazure/hh780767
+     * 
+     * Topic Subscriptions:
+     * @link http://msdn.microsoft.com/en-us/library/windowsazure/hh780768
      * 
      * @param BrokeredMessage $brokeredMessage The brokered message.
      *
@@ -365,6 +401,8 @@ class ServiceBusRestProxy extends ServiceRestProxy implements IServiceBus
     /**
      * Creates a queue with a specified queue information. 
      * 
+     * @link http://msdn.microsoft.com/en-us/library/windowsazure/hh780716
+     *
      * @param QueueInfo $queueInfo The information of the queue.
      *
      * @return QueueInfo
@@ -394,6 +432,8 @@ class ServiceBusRestProxy extends ServiceRestProxy implements IServiceBus
 
     /**
      * Deletes a queue. 
+     *
+     * @link http://msdn.microsoft.com/en-us/library/windowsazure/hh780747
      * 
      * @param string $queuePath The path of the queue.
      *
@@ -414,6 +454,8 @@ class ServiceBusRestProxy extends ServiceRestProxy implements IServiceBus
 
     /**
      * Gets a queue with specified path. 
+     *
+     * @link http://msdn.microsoft.com/en-us/library/windowsazure/hh780764
      * 
      * @param string $queuePath The path of the queue.
      *
@@ -433,6 +475,8 @@ class ServiceBusRestProxy extends ServiceRestProxy implements IServiceBus
 
     /**
      * Lists a queue. 
+     *
+     * @link http://msdn.microsoft.com/en-us/library/windowsazure/hh780759
      * 
      * @param ListQueuesOptions $listQueuesOptions The options to list the 
      * queues.
@@ -485,6 +529,8 @@ class ServiceBusRestProxy extends ServiceRestProxy implements IServiceBus
 
     /**
      * Creates a topic with specified topic info.  
+     *
+     * @link http://msdn.microsoft.com/en-us/library/windowsazure/hh780728
      * 
      * @param TopicInfo $topicInfo The information of the topic. 
      *
@@ -529,7 +575,9 @@ class ServiceBusRestProxy extends ServiceRestProxy implements IServiceBus
     } 
 
     /**
-     * Deletes a topic with specified topic path. 
+     * Deletes a topic with specified topic path.
+     *
+     * @link http://msdn.microsoft.com/en-us/library/windowsazure/hh780721
      * 
      * @param string $topicPath The path of the topic.
      *
@@ -546,7 +594,9 @@ class ServiceBusRestProxy extends ServiceRestProxy implements IServiceBus
     }
     
     /**
-     * Gets a topic. 
+     * Gets a topic.
+     *
+     * @link http://msdn.microsoft.com/en-us/library/windowsazure/hh780769 
      * 
      * @param string $topicPath The path of the topic.
      *
@@ -566,6 +616,8 @@ class ServiceBusRestProxy extends ServiceRestProxy implements IServiceBus
     
     /**
      * Lists topics. 
+     *
+     * @link http://msdn.microsoft.com/en-us/library/windowsazure/hh780744
      * 
      * @param ListTopicsOptions $listTopicsOptions The options to list 
      * the topics. 
@@ -587,6 +639,8 @@ class ServiceBusRestProxy extends ServiceRestProxy implements IServiceBus
     /**
      * Creates a subscription with specified topic path and 
      * subscription info. 
+     *
+     * @link http://msdn.microsoft.com/en-us/library/windowsazure/hh780748
      * 
      * @param string           $topicPath        The path of
      * the topic.
@@ -639,6 +693,8 @@ class ServiceBusRestProxy extends ServiceRestProxy implements IServiceBus
 
     /**
      * Deletes a subscription. 
+     *
+     * @link http://msdn.microsoft.com/en-us/library/windowsazure/hh780740
      * 
      * @param string $topicPath        The path of the topic.
      * @param string $subscriptionName The name of the subscription.
@@ -661,6 +717,8 @@ class ServiceBusRestProxy extends ServiceRestProxy implements IServiceBus
     
     /**
      * Gets a subscription. 
+     *
+     * @link http://msdn.microsoft.com/en-us/library/windowsazure/hh780741
      * 
      * @param string $topicPath        The path of the topic.
      * @param string $subscriptionName The name of the subscription.
@@ -686,6 +744,8 @@ class ServiceBusRestProxy extends ServiceRestProxy implements IServiceBus
 
     /**
      * Lists subscription. 
+     *
+     * @link http://msdn.microsoft.com/en-us/library/windowsazure/hh780766
      * 
      * @param string                   $topicPath                The path of 
      * the topic.
@@ -714,6 +774,8 @@ class ServiceBusRestProxy extends ServiceRestProxy implements IServiceBus
 
     /**
      * Creates a rule. 
+     *
+     * @link http://msdn.microsoft.com/en-us/library/windowsazure/hh780774
      * 
      * @param string   $topicPath        The path of the topic.
      * @param string   $subscriptionName The name of the subscription. 
@@ -766,6 +828,8 @@ class ServiceBusRestProxy extends ServiceRestProxy implements IServiceBus
 
     /**
      * Deletes a rule. 
+     *
+     * @link http://msdn.microsoft.com/en-us/library/windowsazure/hh780751
      * 
      * @param string $topicPath        The path of the topic.
      * @param string $subscriptionName The name of the subscription.
@@ -790,6 +854,8 @@ class ServiceBusRestProxy extends ServiceRestProxy implements IServiceBus
 
     /**
      * Gets a rule. 
+     *
+     * @link http://msdn.microsoft.com/en-us/library/windowsazure/hh780772
      * 
      * @param string $topicPath        The path of the topic.
      * @param string $subscriptionName The name of the subscription.
@@ -817,6 +883,8 @@ class ServiceBusRestProxy extends ServiceRestProxy implements IServiceBus
 
     /**
      * Lists rules. 
+     *
+     * @link http://msdn.microsoft.com/en-us/library/windowsazure/hh780732
      * 
      * @param string           $topicPath        The path of the topic.
      * @param string           $subscriptionName The name of the subscription.
