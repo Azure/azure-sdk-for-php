@@ -35,7 +35,7 @@ use WindowsAzure\ServiceBus\Internal\Filter;
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @version   Release: 0.3.1_2011-08
- * @link      https://github.com/WindowsAzure/azure-sdk-for-php
+ * @link      http://msdn.microsoft.com/en-us/library/windowsazure/hh780753
  */
 
 class RuleDescription
