@@ -29,6 +29,8 @@ use WindowsAzure\Common\Internal\StorageServiceSettings;
 
 class FunctionalTestBase extends IntegrationTestBase
 {
+    private static $isOneTimeSetup = false;
+
     /**
      * @covers WindowsAzure\Blob\BlobRestProxy::createContainer
      * @covers WindowsAzure\Blob\BlobRestProxy::deleteContainer
@@ -63,6 +65,10 @@ class FunctionalTestBase extends IntegrationTestBase
         if (!$hasRoot) {
             $this->safeCreateContainer('$root');
         }
+
+        if (!self::$isOneTimeSetup) {
+            self::$isOneTimeSetup = true;
+        }
     }
 
     public function tearDown()
@@ -75,9 +81,12 @@ class FunctionalTestBase extends IntegrationTestBase
 
     public static function tearDownAfterClass()
     {
-        $tmp = new FunctionalTestBase();
-        $tmp->setUp();
-        $tmp->safeDeleteContainer('$root');
+        if (self::$isOneTimeSetup) {
+            $tmp = new FunctionalTestBase();
+            $tmp->setUp();
+            $tmp->safeDeleteContainer('$root');
+            self::$isOneTimeSetup = false;
+        }
         parent::tearDownAfterClass();
     }
 
