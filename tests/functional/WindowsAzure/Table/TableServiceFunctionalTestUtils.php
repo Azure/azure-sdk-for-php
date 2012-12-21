@@ -206,7 +206,7 @@ class TableServiceFunctionalTestUtils
                 $eff = $initialProp->getValue();
                 $initialProp->setValue($eff + 1);
             } else if ($ptype == (EdmType::GUID)) {
-                $initialProp->setValue(com_create_guid());
+                $initialProp->setValue(Utilities::getGuid());
             } else if ($ptype == (EdmType::INT32)) {
                 $eff = $initialProp->getValue();
                 $eff = ($eff > 10 ? 0 : $eff + 1);

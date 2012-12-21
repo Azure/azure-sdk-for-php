@@ -58,15 +58,16 @@ class CopyBlobResult
      */
     public static function create($headers)
     {
-        $result                 = new CopyBlobResult();
-        $headerWithLowerCaseKey = array_change_key_case($headers);
-
-        $result->setETag($headerWithLowerCaseKey[Resources::ETAG]);
-        $result->setLastModified(
-            Utilities::rfc1123ToDateTime(
-                $headerWithLowerCaseKey[Resources::LAST_MODIFIED]
-            )
-        );
+        $result = new CopyBlobResult();
+        $result->setETag(Utilities::tryGetValueInsensitive(
+                Resources::ETAG,
+                $headers));
+        if (Utilities::arrayKeyExistsInsensitive(Resources::LAST_MODIFIED, $headers)) {
+            $lastModified = Utilities::tryGetValueInsensitive(
+                Resources::LAST_MODIFIED,
+                $headers);
+            $result->setLastModified(Utilities::rfc1123ToDateTime($lastModified));
+        }
         
         return $result;
     }
