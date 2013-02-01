@@ -366,6 +366,20 @@ catch(ServiceException $e){
 }
 ```
 
+### Using a Stream Wrapper
+
+You can use the PHP Stream Wrapper API to interact with Windows Azure Blob Storage:
+
+```PHP
+use WindowsAzure\Blob\Stream;
+
+Stream::register($blobRestProxy, 'azure');
+
+$fp = fopen('azure://container_name/file.txt');
+fwrite($fp, 'Hello Windows Azure!');
+fclose($fp);
+```
+
 ## Storage Queues
 
 ### Getting Started
