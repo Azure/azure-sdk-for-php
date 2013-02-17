@@ -123,7 +123,7 @@ class Stream
     static public function getClient($name)
     {
         if ( ! isset(self::$clients[$name])) {
-            throw new BlobException("There is no client registered for stream type '" . $name . "://");
+            throw new ServiceException("There is no client registered for stream type '" . $name . "://");
         }
 
         return self::$clients[$name];
@@ -141,13 +141,13 @@ class Stream
             $url = explode(':', $path);
 
             if (!$url) {
-                throw new BlobException('Could not parse path "' . $path . '".');
+                throw new ServiceException('Could not parse path "' . $path . '".');
             }
 
             $this->storageClient = self::getClient($url[0]);
 
             if (!$this->storageClient) {
-                throw new BlobException('No storage client registered for stream type "' . $url[0] . '://".');
+                throw new ServiceException('No storage client registered for stream type "' . $url[0] . '://".');
             }
         }
 
@@ -169,7 +169,7 @@ class Stream
         $blobName       = $this->getFileName($this->fileName);
 
         if (empty($blobName)) {
-            throw new BlobException("Empty blob path name given. Has to be a full filename.");
+            throw new ServiceException("Empty blob path name given. Has to be a full filename.");
         }
 
         // Write mode?
@@ -399,7 +399,7 @@ class Stream
     public function rename($path_from, $path_to)
     {
         if ($this->getContainerName($path_from) != $this->getContainerName($path_to)) {
-            throw new BlobException('Container name can not be changed.');
+            throw new ServiceException('Container name can not be changed.');
         }
 
         if ($this->getFileName($path_from) == $this->getFileName($path_to)) {
@@ -481,7 +481,7 @@ class Stream
     public function mkdir($path, $mode, $options)
     {
         if ($this->getContainerName($path) != $this->getFileName($path)) {
-            throw new BlobException('mkdir() with multiple levels is not supported on Windows Azure Blob Storage.');
+            throw new ServiceException('mkdir() with multiple levels is not supported on Windows Azure Blob Storage.');
         }
 
         // Create container
@@ -505,7 +505,7 @@ class Stream
     public function rmdir($path, $options)
     {
         if ($this->getContainerName($path) != $this->getFileName($path)) {
-            throw new BlobException('rmdir() with multiple levels is not supported on Windows Azure Blob Storage.');
+            throw new ServiceException('rmdir() with multiple levels is not supported on Windows Azure Blob Storage.');
         }
 
         // Delete container

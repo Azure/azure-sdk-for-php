@@ -27,7 +27,13 @@ namespace Tests\Functional\WindowsAzure\Blob;
 use Tests\Framework\TestResources;
 use WindowsAzure\Common\ServicesBuilder;
 use WindowsAzure\Blob\Models\ListContainersOptions;
-use WindowsAzure\DistributionBundle\Blob\Stream;
+use WindowsAzure\Blob\Stream;
+
+use WindowsAzure\Common\Configuration;
+use WindowsAzure\Blob\BlobService;
+use WindowsAzure\Blob\BlobSettings;
+use WindowsAzure\Common\ServiceException;
+
 
 class BlobTest extends \PHPUnit_Framework_TestCase
 {
@@ -63,12 +69,16 @@ class BlobTest extends \PHPUnit_Framework_TestCase
         $account = TestResources::accountName();
         $key = TestResources::accountKey();
 
+        $config = new Configuration();
+        $config->setProperty(BlobSettings::ACCOUNT_NAME, 	$account);
+        $config->setProperty(BlobSettings::ACCOUNT_KEY, 	$key);
+        $config->setProperty(BlobSettings::URI, 'http://' . $account .  '.blob.core.windows.net');
+
         if (empty($account) || empty($key)) {
             $this->markTestSkipped("Configure <php><env name=\"AZURE_STORAGE_ACCOUNT\" value=\"\"><env name=\"AZURE_STORAGE_KEY\" value=\"\"></php> to run the blob  tests.");
         }
 
-        $conn = sprintf('DefaultEndpointsProtocol=http;AccountName=%s;AccountKey=%s', $account, $key);
-        $proxy = ServicesBuilder::getInstance()->createBlobService($conn);
+        $proxy = BlobService::create($config);
 
         if (in_array('azure', stream_get_wrappers())) {
             stream_wrapper_unregister('azure');
@@ -90,7 +100,7 @@ class BlobTest extends \PHPUnit_Framework_TestCase
 
     public function testGetUnknownClient()
     {
-        $this->setExpectedException('WindowsAzure\DistributionBundle\Blob\BlobException');
+        $this->setExpectedException('WindowsAzure\Common\ServiceException');
         Stream::getClient('unknown');
     }
 
@@ -135,7 +145,7 @@ class BlobTest extends \PHPUnit_Framework_TestCase
 
         $blobClient = $this->createBlobClient();
 
-        $this->setExpectedException('WindowsAzure\DistributionBundle\Blob\BlobException', 'Empty blob path name given. Has to be a full filename.');
+        $this->setExpectedException('WindowsAzure\Common\ServiceException', 'Empty blob path name given. Has to be a full filename.');
         $fh = fopen($fileName, 'w');
     }
 
@@ -208,7 +218,7 @@ class BlobTest extends \PHPUnit_Framework_TestCase
 
         $blobClient = $this->createBlobClient();
 
-        $this->setExpectedException('WindowsAzure\DistributionBundle\Blob\BlobException', 'Container name can not be changed.');
+        $this->setExpectedException('WindowsAzure\Common\ServiceException', 'Container name can not be changed.');
         rename($sourceFileName, $destinationFileName);
     }
 
@@ -280,7 +290,7 @@ class BlobTest extends \PHPUnit_Framework_TestCase
 
         $current = count($blobClient->listContainers()->getContainers());
 
-        $this->setExpectedException('WindowsAzure\DistributionBundle\Blob\BlobException', 'mkdir() with multiple levels is not supported on Windows Azure Blob Storage.');
+        $this->setExpectedException('WindowsAzure\Common\ServiceException', 'mkdir() with multiple levels is not supported on Windows Azure Blob Storage.');
         mkdir('azure://' . $containerName. '/foo');
     }
 
@@ -309,7 +319,7 @@ class BlobTest extends \PHPUnit_Framework_TestCase
 
         $blobClient = $this->createBlobClient();
 
-        $this->setExpectedException('WindowsAzure\DistributionBundle\Blob\BlobException', 'rmdir() with multiple levels is not supported on Windows Azure Blob Storage.');
+        $this->setExpectedException('WindowsAzure\Common\ServiceException', 'rmdir() with multiple levels is not supported on Windows Azure Blob Storage.');
         rmdir('azure://' . $containerName . '/foo');
     }
 

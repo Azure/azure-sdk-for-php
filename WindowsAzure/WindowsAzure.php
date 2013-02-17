@@ -29,6 +29,7 @@ spl_autoload_register(
          $classes = array(
             'windowsazure\\blob\\blobrestproxy' => '/Blob/BlobRestProxy.php',
             'windowsazure\\blob\\blobservice' => '/Blob/BlobService.php',
+            'windowsazure\\blob\\stream' => '/Blob/Stream.php',
             'windowsazure\\blob\\blobsettings' => '/Blob/BlobSettings.php',
             'windowsazure\\blob\\internal\\iblob' => '/Blob/Internal/IBlob.php',
             'windowsazure\\blob\\models\\accesscondition' => '/Blob/Models/AccessCondition.php',
