@@ -51,6 +51,10 @@ use WindowsAzure\ServiceManagement\Models\CreateDeploymentOptions;
 use WindowsAzure\ServiceManagement\Models\GetDeploymentResult;
 use WindowsAzure\ServiceManagement\Models\DeploymentStatus;
 use WindowsAzure\ServiceManagement\Models\Mode;
+use WindowsAzure\ServiceManagement\Models\ChangeDeploymentConfigurationOptions;
+use WindowsAzure\ServiceManagement\Models\CreateServiceOptions;
+use WindowsAzure\ServiceManagement\Models\GetDeploymentOptions;
+use WindowsAzure\ServiceManagement\Models\ListOperatingSystemsResult;
 
 /**
  * This class constructs HTTP requests and receive HTTP responses for service 
@@ -131,6 +135,16 @@ class ServiceManagementRestProxy extends RestProxy
     private function _getLocationPath()
     {
         return $this->_getPath('locations', null);
+    }
+
+    /**
+     * Constructs URI path for operating systems.
+     *
+     * @return string
+     */
+    private function _getOperatingSystemPath()
+    {
+        return $this->_getPath('operatingsystems', null);
     }
     
     /**
@@ -265,7 +279,7 @@ class ServiceManagementRestProxy extends RestProxy
     }
     
     /**
-     * Constructs request XML including windows azure XML namesoace.
+     * Constructs request XML including Windows Azure XML namespace.
      * 
      * @param array  $xmlElements The XML elements associated with their values.
      * @param string $root        The XML root name.
@@ -1517,5 +1531,26 @@ class ServiceManagementRestProxy extends RestProxy
         $response = $this->sendContext($context);
         
         return AsynchronousOperationResult::create($response->getHeader());
+    }
+
+    /**
+     * Lists the versions of the guest operating system that are currently
+     * available in Windows Azure.
+     *
+     * @return ListOperatingSystemsResult
+     *
+     * @see http://msdn.microsoft.com/en-us/library/windowsazure/ff684168.aspx
+     */
+    public function listOperatingSystems()
+    {
+        $context = new HttpCallContext();
+        $context->setMethod(Resources::HTTP_GET);
+        $context->setPath($this->_getOperatingSystemPath());
+        $context->addStatusCode(Resources::STATUS_OK);
+
+        $response   = $this->sendContext($context);
+        $serialised = $this->dataSerializer->unserialize($response->getBody());
+
+        return ListOperatingSystemsResult::create($serialised);
     }
 }
