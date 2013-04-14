@@ -549,4 +549,14 @@ interface IServiceManagement extends FilterableService
      * @see http://msdn.microsoft.com/en-us/library/windowsazure/hh403977.aspx
      */
     public function rollbackUpdateOrUpgrade($name, $mode, $force, $options);
+
+    /**
+     * Returns account and resource allocation information on the specified
+     * subscription.
+     *
+     * @return GetSubscriptionResult
+     *
+     * @see http://msdn.microsoft.com/en-us/library/windowsazure/hh403995.aspx
+     */
+    public function getSubscription();
 }
