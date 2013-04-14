@@ -364,6 +364,12 @@ class Resources
     const XTAG_ROLLBACK_UPDATE_OR_UPGRADE = 'RollbackUpdateOrUpgrade';
     const XTAG_CONTAINER_NAME = 'ContainerName';
     const XTAG_ACCOUNT_NAME = 'AccountName';
+    const XTAG_OPERATING_SYSTEM = 'OperatingSystem';
+    const XTAG_VERSION = 'Version';
+    const XTAG_IS_DEFAULT = 'IsDefault';
+    const XTAG_IS_ACTIVE = 'IsActive';
+    const XTAG_FAMILY = 'Family';
+    const XTAG_FAMILY_LABEL = 'FamilyLabel';
 
     // Service Bus
     const LIST_TOPICS_PATH        = '$Resources/Topics';

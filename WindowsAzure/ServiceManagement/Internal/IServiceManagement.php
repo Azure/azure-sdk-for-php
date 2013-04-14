@@ -549,4 +549,14 @@ interface IServiceManagement extends FilterableService
      * @see http://msdn.microsoft.com/en-us/library/windowsazure/hh403977.aspx
      */
     public function rollbackUpdateOrUpgrade($name, $mode, $force, $options);
+
+    /**
+     * Lists the versions of the guest operating system that are currently
+     * available in Windows Azure.
+     *
+     * @return ListOperatingSystemsResult
+     *
+     * @see http://msdn.microsoft.com/en-us/library/windowsazure/ff684168.aspx
+     */
+    public function listOperatingSystems();
 }
