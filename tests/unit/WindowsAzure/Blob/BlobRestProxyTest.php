@@ -67,6 +67,11 @@ use WindowsAzure\Blob\Models\DeleteBlobOptions;
  */
 class BlobRestProxyTest extends BlobServiceRestProxyTestBase
 {
+    private function createSuffix()
+    {
+        return sprintf('-%04x', mt_rand(0, 65535));
+    }
+
     /**
     * @covers WindowsAzure\Blob\BlobRestProxy::getServiceProperties
     */
@@ -106,9 +111,9 @@ class BlobRestProxyTest extends BlobServiceRestProxyTestBase
     public function testListContainersSimple()
     {
         // Setup
-        $container1 = 'listcontainersimple1';
-        $container2 = 'listcontainersimple2';
-        $container3 = 'listcontainersimple3';
+        $container1 = 'listcontainersimple1' . $this->createSuffix();
+        $container2 = 'listcontainersimple2' . $this->createSuffix();
+        $container3 = 'listcontainersimple3' . $this->createSuffix();
 
         parent::createContainer($container1);
         parent::createContainer($container2);
@@ -131,9 +136,9 @@ class BlobRestProxyTest extends BlobServiceRestProxyTestBase
     public function testListContainersWithOptions()
     {
         // Setup
-        $container1    = 'listcontainerwithoptions1';
-        $container2    = 'listcontainerwithoptions2';
-        $container3    = 'mlistcontainerwithoptions3';
+        $container1    = 'listcontainerwithoptions1' . $this->createSuffix();
+        $container2    = 'listcontainerwithoptions2' . $this->createSuffix();
+        $container3    = 'mlistcontainerwithoptions3' . $this->createSuffix();
         $metadataName  = 'Mymetadataname';
         $metadataValue = 'MetadataValue';
         $options = new CreateContainerOptions();
@@ -163,9 +168,9 @@ class BlobRestProxyTest extends BlobServiceRestProxyTestBase
     public function testListContainersWithNextMarker()
     {
         // Setup
-        $container1 = 'listcontainerswithnextmarker1';
-        $container2 = 'listcontainerswithnextmarker2';
-        $container3 = 'listcontainerswithnextmarker3';
+        $container1 = 'listcontainerswithnextmarker1' . $this->createSuffix();
+        $container2 = 'listcontainerswithnextmarker2' . $this->createSuffix();
+        $container3 = 'listcontainerswithnextmarker3' . $this->createSuffix();
         parent::createContainer($container1);
         parent::createContainer($container2);
         parent::createContainer($container3);
@@ -199,9 +204,9 @@ class BlobRestProxyTest extends BlobServiceRestProxyTestBase
         $this->skipIfEmulated();
         
         // Setup
-        $container1 = 'listcontainerswithinvalidnextmarker1';
-        $container2 = 'listcontainerswithinvalidnextmarker2';
-        $container3 = 'listcontainerswithinvalidnextmarker3';
+        $container1 = 'listcontainerswithinvalidnextmarker1' . $this->createSuffix();
+        $container2 = 'listcontainerswithinvalidnextmarker2' . $this->createSuffix();
+        $container3 = 'listcontainerswithinvalidnextmarker3' . $this->createSuffix();
         parent::createContainer($container1);
         parent::createContainer($container2);
         parent::createContainer($container3);
@@ -234,7 +239,7 @@ class BlobRestProxyTest extends BlobServiceRestProxyTestBase
     public function testListContainersWithOneResult()
     {
         // Setup
-        $containerName = 'listcontainerswithoneresult';
+        $containerName = 'listcontainerswithoneresult' . $this->createSuffix();
         parent::createContainer($containerName);
         
         // Test
@@ -251,7 +256,7 @@ class BlobRestProxyTest extends BlobServiceRestProxyTestBase
     public function testCreateContainerSimple()
     {
         // Setup
-        $containerName = 'createcontainersimple';
+        $containerName = 'createcontainersimple' . $this->createSuffix();
         
         // Test
         $this->createContainer($containerName);
@@ -269,7 +274,7 @@ class BlobRestProxyTest extends BlobServiceRestProxyTestBase
     public function testCreateContainerWithoutOptions()
     {
         // Setup
-        $containerName = 'createcontainerwithoutoptions';
+        $containerName = 'createcontainerwithoutoptions' . $this->createSuffix();
         
         // Test
         $this->restProxy->createContainer($containerName);
@@ -287,7 +292,7 @@ class BlobRestProxyTest extends BlobServiceRestProxyTestBase
     */
     public function testCreateContainerWithMetadata()
     {
-        $containerName = 'createcontainerwithmetadata';
+        $containerName = 'createcontainerwithmetadata' . $this->createSuffix();
         $metadataName  = 'Name';
         $metadataValue = 'MyName';
         $options = new CreateContainerOptions();
@@ -312,7 +317,7 @@ class BlobRestProxyTest extends BlobServiceRestProxyTestBase
     public function testCreateContainerInvalidNameFail()
     {
         // Setup
-        $containerName = 'CreateContainerInvalidNameFail';
+        $containerName = 'CreateContainerInvalidNameFail' . $this->createSuffix();
         $this->setExpectedException(get_class(new ServiceException('400')));
         
         // Test
@@ -325,7 +330,7 @@ class BlobRestProxyTest extends BlobServiceRestProxyTestBase
     public function testCreateContainerAlreadyExitsFail()
     {
         // Setup
-        $containerName = 'createcontaineralreadyexitsfail';
+        $containerName = 'createcontaineralreadyexitsfail' . $this->createSuffix();
         $this->setExpectedException(get_class(new ServiceException('204')));
         $this->createContainer($containerName);
 
@@ -339,7 +344,7 @@ class BlobRestProxyTest extends BlobServiceRestProxyTestBase
     public function testDeleteContainer()
     {
         // Setup
-        $containerName = 'deletecontainer';
+        $containerName = 'deletecontainer' . $this->createSuffix();
         $this->restProxy->createContainer($containerName);
         
         // Test
@@ -357,7 +362,7 @@ class BlobRestProxyTest extends BlobServiceRestProxyTestBase
     public function testDeleteContainerFail()
     {
         // Setup
-        $containerName = 'deletecontainerfail';
+        $containerName = 'deletecontainerfail' . $this->createSuffix();
         $this->setExpectedException(get_class(new ServiceException('404')));
         
         // Test
@@ -371,7 +376,7 @@ class BlobRestProxyTest extends BlobServiceRestProxyTestBase
     public function testGetContainerProperties()
     {
         // Setup
-        $name = 'getcontainerproperties';
+        $name = 'getcontainerproperties' . $this->createSuffix();
         $this->createContainer($name);
         
         // Test
@@ -390,7 +395,7 @@ class BlobRestProxyTest extends BlobServiceRestProxyTestBase
     public function testGetContainerMetadata()
     {
         // Setup
-        $name     = 'getcontainermetadata';
+        $name     = 'getcontainermetadata' . $this->createSuffix();
         $options  = new CreateContainerOptions();
         $expected = array ('name1' => 'MyName1', 'mymetaname' => '12345', 'values' => 'Microsoft_');
         $options->setMetadata($expected);
@@ -414,7 +419,7 @@ class BlobRestProxyTest extends BlobServiceRestProxyTestBase
     public function testGetContainerAcl()
     {
         // Setup
-        $name = 'getcontaineracl';
+        $name = 'getcontaineracl' . $this->createSuffix();
         $expectedAccess = 'container';
         $this->createContainer($name);
         
@@ -431,15 +436,14 @@ class BlobRestProxyTest extends BlobServiceRestProxyTestBase
     public function testSetContainerAcl()
     {
         // Setup
-        $name = 'setcontaineracl';
+        $name = 'setcontaineracl' . $this->createSuffix();
         $this->createContainer($name);
         $sample = TestResources::getContainerAclMultipleEntriesSample();
         $expectedETag = '0x8CAFB82EFF70C46';
         $expectedLastModified = new \DateTime('Sun, 25 Sep 2011 19:42:18 GMT');
         $expectedPublicAccess = 'container';
-        $acl = ContainerAcl::create($expectedPublicAccess, $expectedETag, 
-            $expectedLastModified, $sample['SignedIdentifiers']);
-        
+        $acl = ContainerAcl::create($expectedPublicAccess, $sample['SignedIdentifiers']);
+
         // Test
         $this->restProxy->setContainerAcl($name, $acl);
         
@@ -455,7 +459,7 @@ class BlobRestProxyTest extends BlobServiceRestProxyTestBase
     public function testSetContainerMetadata()
     {
         // Setup
-        $name     = 'setcontainermetadata';
+        $name     = 'setcontainermetadata' . $this->createSuffix();
         $expected = array ('name1' => 'MyName1', 'mymetaname' => '12345', 'values' => 'Microsoft_');
         $this->createContainer($name);
         
@@ -478,7 +482,7 @@ class BlobRestProxyTest extends BlobServiceRestProxyTestBase
     public function testListBlobsSimple()
     {
         // Setup
-        $name  = 'listblobssimple';
+        $name  = 'listblobssimple' . $this->createSuffix();
         $blob1 = 'blob1';
         $blob2 = 'blob2';
         $blob3 = 'blob3';
@@ -510,7 +514,7 @@ class BlobRestProxyTest extends BlobServiceRestProxyTestBase
     public function testListBlobsWithOptions()
     {
         // Setup
-        $name  = 'listblobswithoptions';
+        $name  = 'listblobswithoptions' . $this->createSuffix();
         $blob1 = 'blob1';
         $blob2 = 'blob2';
         $blob3 = 'blob3';
@@ -549,7 +553,7 @@ class BlobRestProxyTest extends BlobServiceRestProxyTestBase
         $this->skipIfEmulated();
         
         // Setup
-        $name  = 'listblobswithoptionswithdelimiter';
+        $name  = 'listblobswithoptionswithdelimiter' . $this->createSuffix();
         $blob1 = 'blob1';
         $blob2 = 'blob2';
         $blob3 = 'blob3';
@@ -584,7 +588,7 @@ class BlobRestProxyTest extends BlobServiceRestProxyTestBase
     public function testListBlobsWithNextMarker()
     {
         // Setup
-        $name  = 'listblobswithnextmarker';
+        $name  = 'listblobswithnextmarker' . $this->createSuffix();
         $blob1 = 'blob1';
         $blob2 = 'blob2';
         $blob3 = 'blob3';
@@ -618,7 +622,7 @@ class BlobRestProxyTest extends BlobServiceRestProxyTestBase
     public function testListBlobsWithNoBlobs()
     {
         // Test
-        $name = 'listblobswithnoblobs';
+        $name = 'listblobswithnoblobs' . $this->createSuffix();
         $this->createContainer($name);
         $result = $this->restProxy->listBlobs($name);
         
@@ -632,7 +636,7 @@ class BlobRestProxyTest extends BlobServiceRestProxyTestBase
     public function testListBlobsWithOneResult()
     {
         // Test
-        $name = 'listblobswithoneresult';
+        $name = 'listblobswithoneresult' . $this->createSuffix();
         $this->createContainer($name);
         $this->restProxy->createPageBlob($name, 'myblob', 512);
         $result = $this->restProxy->listBlobs($name);
@@ -648,7 +652,7 @@ class BlobRestProxyTest extends BlobServiceRestProxyTestBase
     public function testCreatePageBlob()
     {
         // Setup
-        $name = 'createpageblob';
+        $name = 'createpageblob' . $this->createSuffix();
         $this->createContainer($name);
         
         // Test
@@ -668,7 +672,7 @@ class BlobRestProxyTest extends BlobServiceRestProxyTestBase
     public function testCreatePageBlobWithExtraOptions()
     {
         // Setup
-        $name = 'createpageblobwithextraoptions';
+        $name = 'createpageblobwithextraoptions' . $this->createSuffix();
         $this->createContainer($name);
         $metadata = array('Name1' => 'Value1', 'Name2' => 'Value2');
         $contentType = Resources::BINARY_FILE_TYPE;
@@ -691,7 +695,7 @@ class BlobRestProxyTest extends BlobServiceRestProxyTestBase
     public function testCreateBlockBlobWithBinary()
     {
         // Setup
-        $name = 'createblockblobwithbinary';
+        $name = 'createblockblobwithbinary' . $this->createSuffix();
         $this->createContainer($name);
         
         // Test
@@ -714,7 +718,7 @@ class BlobRestProxyTest extends BlobServiceRestProxyTestBase
     public function testCreateBlockBlobWithPlainText()
     {
         // Setup
-        $name = 'createblockblobwithplaintext';
+        $name = 'createblockblobwithplaintext' . $this->createSuffix();
         $contentType = 'text/plain; charset=UTF-8';
         $this->createContainer($name);
         $options = new CreateBlobOptions();
@@ -738,7 +742,7 @@ class BlobRestProxyTest extends BlobServiceRestProxyTestBase
     public function testCreateBlockBlobWithStream()
     {
         // Setup
-        $name = 'createblockblobwithstream';
+        $name = 'createblockblobwithstream' . $this->createSuffix();
         $contentType = 'text/plain; charset=UTF-8';
         $this->createContainer($name);
         $options = new CreateBlobOptions();
@@ -765,7 +769,7 @@ class BlobRestProxyTest extends BlobServiceRestProxyTestBase
     public function testGetBlobProperties()
     {
         // Setup
-        $name = 'getblobproperties';
+        $name = 'getblobproperties' . $this->createSuffix();
         $contentLength = 512;
         $this->createContainer($name);
         $this->restProxy->createPageBlob($name, 'myblob', $contentLength);
@@ -786,7 +790,7 @@ class BlobRestProxyTest extends BlobServiceRestProxyTestBase
     public function testSetBlobProperties()
     {
         // Setup
-        $name = 'setblobproperties';
+        $name = 'setblobproperties' . $this->createSuffix();
         $contentLength = 1024;
         $blob = 'myblob';
         $this->createContainer($name);
@@ -810,7 +814,7 @@ class BlobRestProxyTest extends BlobServiceRestProxyTestBase
     public function testSetBlobPropertiesWithNoOptions()
     {
         // Setup
-        $name = 'setblobpropertieswithnooptions';
+        $name = 'setblobpropertieswithnooptions' . $this->createSuffix();
         $blob = 'myblob';
         $this->createContainer($name);
         $this->restProxy->createPageBlob($name, $blob, 512);
@@ -830,7 +834,7 @@ class BlobRestProxyTest extends BlobServiceRestProxyTestBase
     public function testGetBlobMetadata()
     {
         // Setup
-        $name = 'getblobmetadata';
+        $name = 'getblobmetadata' . $this->createSuffix();
         $metadata = array('m1' => 'v1', 'm2' => 'v2');
         $blob = 'myblob';
         $this->createContainer($name);
@@ -853,7 +857,7 @@ class BlobRestProxyTest extends BlobServiceRestProxyTestBase
     public function testSetBlobMetadata()
     {
         // Setup
-        $name = 'setblobmetadata';
+        $name = 'setblobmetadata' . $this->createSuffix();
         $metadata = array('m1' => 'v1', 'm2' => 'v2');
         $blob = 'myblob';
         $this->createContainer($name);
@@ -875,7 +879,7 @@ class BlobRestProxyTest extends BlobServiceRestProxyTestBase
     public function testGetBlob()
     {
         // Setup
-        $name = 'getblob';
+        $name = 'getblob' . $this->createSuffix();
         $blob = 'myblob';
         $metadata = array('m1' => 'v1', 'm2' => 'v2');
         $contentType = 'text/plain; charset=UTF-8';
@@ -935,7 +939,7 @@ class BlobRestProxyTest extends BlobServiceRestProxyTestBase
     public function testGetBlobWithEndRange()
     {
         // Setup
-        $name = 'getblobwithendrange';
+        $name = 'getblobwithendrange' . $this->createSuffix();
         $blob = 'myblob';
         $this->createContainer($name);
         $length = 512;
@@ -966,7 +970,7 @@ class BlobRestProxyTest extends BlobServiceRestProxyTestBase
     public function testGetBlobGarbage()
     {
         // Setup
-        $name = 'getblobwithgarbage';
+        $name = 'getblobwithgarbage' . $this->createSuffix();
         $blob = 'myblob';
         $metadata = array('m1' => 'v1', 'm2' => 'v2');
         $contentType = 'text/plain; charset=UTF-8';
@@ -992,7 +996,7 @@ class BlobRestProxyTest extends BlobServiceRestProxyTestBase
     public function testDeleteBlob()
     {
         // Setup
-        $name = 'deleteblob';
+        $name = 'deleteblob' . $this->createSuffix();
         $blob = 'myblob';
         $contentType = 'text/plain; charset=UTF-8';
         $this->createContainer($name);
@@ -1014,7 +1018,7 @@ class BlobRestProxyTest extends BlobServiceRestProxyTestBase
     public function testDeleteBlobSnapshot()
     {
         // Setup
-        $name = 'deleteblobsnapshot';
+        $name = 'deleteblobsnapshot' . $this->createSuffix();
         $blob = 'myblob';
         $contentType = 'text/plain; charset=UTF-8';
         $this->createContainer($name);
@@ -1043,7 +1047,7 @@ class BlobRestProxyTest extends BlobServiceRestProxyTestBase
     public function testDeleteBlobSnapshotsOnly()
     {
         // Setup
-        $name = 'deleteblobsnapshotsonly';
+        $name = 'deleteblobsnapshotsonly' . $this->createSuffix();
         $blob = 'myblob';
         $contentType = 'text/plain; charset=UTF-8';
         $this->createContainer($name);
@@ -1074,7 +1078,7 @@ class BlobRestProxyTest extends BlobServiceRestProxyTestBase
     public function testAcquireLease()
     {
         // Setup
-        $name = 'acquirelease';
+        $name = 'acquirelease' . $this->createSuffix();
         $blob = 'myblob';
         $contentType = 'text/plain; charset=UTF-8';
         $this->createContainer($name);
@@ -1096,7 +1100,7 @@ class BlobRestProxyTest extends BlobServiceRestProxyTestBase
     public function testRenewLease()
     {
         // Setup
-        $name = 'renewlease';
+        $name = 'renewlease' . $this->createSuffix();
         $blob = 'myblob';
         $contentType = 'text/plain; charset=UTF-8';
         $this->createContainer($name);
@@ -1119,7 +1123,7 @@ class BlobRestProxyTest extends BlobServiceRestProxyTestBase
     public function testReleaseLease()
     {
         // Setup
-        $name = 'releaselease';
+        $name = 'releaselease' . $this->createSuffix();
         $blob = 'myblob';
         $contentType = 'text/plain; charset=UTF-8';
         $this->createContainer($name);
@@ -1143,7 +1147,7 @@ class BlobRestProxyTest extends BlobServiceRestProxyTestBase
     public function testBreakLease()
     {
         // Setup
-        $name = 'breaklease';
+        $name = 'breaklease' . $this->createSuffix();
         $blob = 'myblob';
         $contentType = 'text/plain; charset=UTF-8';
         $this->createContainer($name);
@@ -1170,7 +1174,7 @@ class BlobRestProxyTest extends BlobServiceRestProxyTestBase
     public function testCreateBlobPages()
     {
         // Setup
-        $name = 'createblobpages';
+        $name = 'createblobpages' . $this->createSuffix();
         $blob = 'myblob';
         $length = 512;
         $range = new PageRange(0, 511);
@@ -1196,7 +1200,7 @@ class BlobRestProxyTest extends BlobServiceRestProxyTestBase
     public function testClearBlobPages()
     {
         // Setup
-        $name = 'clearblobpages';
+        $name = 'clearblobpages' . $this->createSuffix();
         $blob = 'myblob';
         $length = 512;
         $range = new PageRange(0, 511);
@@ -1222,7 +1226,7 @@ class BlobRestProxyTest extends BlobServiceRestProxyTestBase
     public function testListPageBlobRanges()
     {
         // Setup
-        $name = 'listpageblobranges';
+        $name = 'listpageblobranges' . $this->createSuffix();
         $blob = 'myblob';
         $length = 512;
         $range = new PageRange(0, 511);
@@ -1249,7 +1253,7 @@ class BlobRestProxyTest extends BlobServiceRestProxyTestBase
     public function testListPageBlobRangesEmpty()
     {
         // Setup
-        $name = 'listpageblobrangesempty';
+        $name = 'listpageblobrangesempty' . $this->createSuffix();
         $blob = 'myblob';
         $length = 512;
         $this->createContainer($name);
@@ -1269,7 +1273,7 @@ class BlobRestProxyTest extends BlobServiceRestProxyTestBase
     public function testCreateBlobBlock()
     {
         // Setup
-        $name = 'createblobblock';
+        $name = 'createblobblock' . $this->createSuffix();
         $this->createContainer($name);
         $options = new ListBlobsOptions();
         $options->setIncludeUncommittedBlobs(true);
@@ -1289,7 +1293,7 @@ class BlobRestProxyTest extends BlobServiceRestProxyTestBase
     public function testCommitBlobBlocks()
     {
         // Setup
-        $name = 'commitblobblocks';
+        $name = 'commitblobblocks' . $this->createSuffix();
         $blob = 'myblob';
         $id1 = 'AAAAAA==';
         $id2 = 'ANAAAA==';
@@ -1316,7 +1320,7 @@ class BlobRestProxyTest extends BlobServiceRestProxyTestBase
     public function testCommitBlobBlocksWithArray()
     {
         // Setup
-        $name = 'commitblobblockswitharray';
+        $name = 'commitblobblockswitharray' . $this->createSuffix();
         $blob = 'myblob';
         $id1 = 'AAAAAA==';
         $id2 = 'ANAAAA==';
@@ -1349,7 +1353,7 @@ class BlobRestProxyTest extends BlobServiceRestProxyTestBase
    public function testListBlobBlocks()
    {
        // Setup
-       $name = 'listblobblocks';
+       $name = 'listblobblocks' . $this->createSuffix();
        $blob = 'myblob';
        $id1 = 'AAAAAA==';
        $id2 = 'ANAAAA==';
@@ -1375,7 +1379,7 @@ class BlobRestProxyTest extends BlobServiceRestProxyTestBase
     public function testListBlobBlocksEmpty()
     {
         // Setup
-        $name = 'listblobblocksempty';
+        $name = 'listblobblocksempty' . $this->createSuffix();
         $blob = 'myblob';
         $content = 'Hello world';
         $this->createContainer($name);
@@ -1399,10 +1403,10 @@ class BlobRestProxyTest extends BlobServiceRestProxyTestBase
     public function testCopyBlobDifferentContainer()
     {
         // Setup
-        $sourceContainerName = 'copyblobdiffcontainerssource';
+        $sourceContainerName = 'copyblobdiffcontainerssource' . $this->createSuffix();
         $sourceBlobName = 'sourceblob';
         $blobValue = 'testBlobValue'; 
-        $destinationContainerName = 'copyblobdiffcontainersdestination'; 
+        $destinationContainerName = 'copyblobdiffcontainersdestination' . $this->createSuffix();
         $destinationBlobName = 'destinationblob';
         $this->createContainer($sourceContainerName);
         $this->createContainer($destinationContainerName); 
@@ -1434,7 +1438,7 @@ class BlobRestProxyTest extends BlobServiceRestProxyTestBase
     public function testCopyBlobSameContainer()
     {
         // Setup
-        $containerName = 'copyblobsamecontainer';
+        $containerName = 'copyblobsamecontainer' . $this->createSuffix();
         $sourceBlobName = 'sourceblob';
         $blobValue = 'testBlobValue'; 
         $destinationBlobName = 'destinationblob';
@@ -1465,7 +1469,7 @@ class BlobRestProxyTest extends BlobServiceRestProxyTestBase
     public function testCopyBlobExistingBlob()
     {
         // Setup
-        $containerName = 'copyblobexistingblob';
+        $containerName = 'copyblobexistingblob' . $this->createSuffix();
         $sourceBlobName = 'sourceblob';
         $blobValue = 'testBlobValue'; 
         $oldBlobValue = 'oldBlobValue';
@@ -1499,7 +1503,7 @@ class BlobRestProxyTest extends BlobServiceRestProxyTestBase
     public function testCopyBlobSnapshot()
     {
         // Setup
-        $containerName = 'copyblobsnapshot';
+        $containerName = 'copyblobsnapshot' . $this->createSuffix();
         $sourceBlobName = 'sourceblob';
         $blobValue = 'testBlobValue'; 
         $destinationBlobName = 'destinationblob';
@@ -1534,7 +1538,7 @@ class BlobRestProxyTest extends BlobServiceRestProxyTestBase
     public function testCreateBlobSnapshot()
     { 
         // Setup
-        $containerName = 'createblobsnapshot'; 
+        $containerName = 'createblobsnapshot' . $this->createSuffix();
         $blobName = 'testBlob'; 
         $blobValue = 'TestBlobValue'; 
         $this->createContainer($containerName);

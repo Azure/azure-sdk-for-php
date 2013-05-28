@@ -26,6 +26,7 @@ namespace Tests\Functional\WindowsAzure\Table;
 
 use Tests\Framework\TestResources;
 use WindowsAzure\Common\ServiceException;
+use WindowsAzure\Common\Internal\Utilities;
 use WindowsAzure\Table\Models\BatchError;
 use WindowsAzure\Table\Models\BatchOperations;
 use WindowsAzure\Table\Models\DeleteEntityOptions;
@@ -315,7 +316,7 @@ class TableServiceIntegrationTest extends IntegrationTestBase
     {
         // Arrange
         $binaryData = chr(1) . chr(2) . chr(3) . chr(4);
-        $uuid = strtolower(trim(com_create_guid(), '{}'));
+        $uuid = Utilities::getGuid();
         $entity = new Entity();
         $entity->setPartitionKey('001');
         $entity->setRowKey('insertEntityWorks');
@@ -619,7 +620,7 @@ class TableServiceIntegrationTest extends IntegrationTestBase
     {
         // Arrange
         $binaryData = chr(1) . chr(2) . chr(3) . chr(4);
-        $uuid = strtolower(trim(com_create_guid(), '{}'));
+        $uuid = Utilities::getGuid();
         $entity = new Entity();
         $entity->setPartitionKey('001');
         $entity->setRowKey('getEntityWorks');
@@ -783,7 +784,7 @@ class TableServiceIntegrationTest extends IntegrationTestBase
             $entity->addProperty('test4', EdmType::INT64, strval('12345678901' + $i));
             $entity->addProperty('test5', EdmType::DATETIME, new \DateTime('2012-01-0' . $i));
             $entity->addProperty('test6', EdmType::BINARY, chr($i));
-            $entity->addProperty('test7', EdmType::GUID, strtolower(trim(com_create_guid(), '{}')));
+            $entity->addProperty('test7', EdmType::GUID, Utilities::getGuid());
             $entities[$i] = $entity;
             $this->restProxy->insertEntity($table, $entity);
         }
