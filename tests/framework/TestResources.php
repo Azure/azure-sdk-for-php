@@ -85,11 +85,7 @@ class TestResources
     
     public static function getServiceManagementConnectionString()
     {
-        $subscriptionId = self::serviceManagementSubscriptionId();
-        $certPath = self::serviceManagementCertificatePath();
-        $connectionString = "SubscriptionID=$subscriptionId;CertificatePath=$certPath";
-        
-        return $connectionString;
+        return self::serviceManagementConnectionString();
     }
     
     public static function getServiceBusConnectionString()
@@ -149,35 +145,24 @@ class TestResources
     
     public static function storageConnectionString()
     {
-        $name = getenv('AZURE_STORAGE_CONNECTION_STRING');
+        $connectionString = getenv('AZURE_STORAGE_CONNECTION_STRING');
         
-        if (empty($name)) {
+        if (empty($connectionString)) {
             throw new \Exception('AZURE_STORAGE_CONNECTION_STRING envionment variable is missing');
         }
         
-        return $name;
+        return $connectionString;
     }
 
-    public static function serviceManagementSubscriptionId()
+    public static function serviceManagementConnectionString()
     {
-        $subscriptionId = getenv('SERVICE_MANAGEMENT_SUBSCRIPTION_ID');
+        $connectionString = getenv('AZURE_SERVICE_MANAGEMENT_CONNECTION_STRING');
         
-        if (empty($subscriptionId)) {
-            throw new \Exception('SERVICE_MANAGEMENT_SUBSCRIPTION_ID envionment variable is missing');
+        if (empty($connectionString)) {
+            throw new \Exception('AZURE_SERVICE_MANAGEMENT_CONNECTION_STRING envionment variable is missing');
         }
         
-        return $subscriptionId;
-    }
-    
-    public static function serviceManagementCertificatePath()
-    {
-        $path = getenv('SERVICE_MANAGEMENT_CERTIFICATE_PATH');
-        
-        if (empty($path)) {
-            throw new \Exception('SERVICE_MANAGEMENT_CERTIFICATE_PATH envionment variable is missing');
-        }
-        
-        return $path;
+        return $connectionString;
     }
 
     public static function serviceBusCertificatePath()

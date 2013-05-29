@@ -27,7 +27,6 @@ use Tests\Framework\TestResources;
 use WindowsAzure\Common\Internal\Resources;
 use WindowsAzure\ServiceManagement\Models\CreateServiceOptions;
 use WindowsAzure\ServiceManagement\Models\OperationStatus;
-use WindowsAzure\ServiceManagement\Models\Locations;
 use WindowsAzure\ServiceManagement\Models\DeploymentSlot;
 use WindowsAzure\ServiceManagement\Models\GetDeploymentOptions;
 
@@ -60,11 +59,14 @@ class ServiceManagementRestProxyTestBase extends RestProxyTestBase
         $serviceManagementRestProxy = $this->builder->createServiceManagementService(TestResources::getServiceManagementConnectionString());
         parent::setProxy($serviceManagementRestProxy);
         
+        $result = $serviceManagementRestProxy->listLocations();
+        $locations = $result->getLocations();
+        $firstLocation = $locations[0];
         $this->createdStorageServices = array();
         $this->createdAffinityGroups = array();
         $this->createdHostedServices = array();
         $this->createdDeployments = array();
-        $this->defaultLocation = 'West US';
+        $this->defaultLocation = $firstLocation->getName();
         $this->defaultSlot = DeploymentSlot::PRODUCTION;
         $this->defaultDeploymentConfiguration = file_get_contents(TestResources::simplePackageConfiguration());
         $this->complexConfiguration = file_get_contents(TestResources::complexPackageConfiguration());
@@ -72,7 +74,7 @@ class ServiceManagementRestProxyTestBase extends RestProxyTestBase
 
     public function createAffinityGroup($name)
     {
-        $location = Locations::WEST_US;
+        $location = $this->defaultLocation;
         $label = base64_encode($name);
         
         $this->restProxy->createAffinityGroup($name, $label, $location);

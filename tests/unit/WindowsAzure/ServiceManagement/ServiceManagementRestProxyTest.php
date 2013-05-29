@@ -30,7 +30,6 @@ use WindowsAzure\Common\Internal\Resources;
 use WindowsAzure\Common\Internal\Http\HttpClient;
 use WindowsAzure\Common\Internal\Serialization\XmlSerializer;
 use WindowsAzure\ServiceManagement\ServiceManagementRestProxy;
-use WindowsAzure\ServiceManagement\Models\Locations;
 use WindowsAzure\ServiceManagement\Models\CreateServiceOptions;
 use WindowsAzure\ServiceManagement\Models\UpdateServiceOptions;
 use WindowsAzure\ServiceManagement\Models\KeyType;
@@ -82,55 +81,6 @@ class ServiceManagementRestProxyTest extends ServiceManagementRestProxyTestBase
     }
     
     /**
-     * This test makes sure that the list of location constants in the SDK are 
-     * consistant with what is used by Windows Azure.
-     * 
-     * @covers WindowsAzure\ServiceManagement\Models\Locations
-     */
-    public function testLocations()
-    {
-        // Setup
-        $locations = array(
-            Locations::ANYWHERE_ASIA,
-            Locations::ANYWHERE_EUROPE,
-            Locations::ANYWHERE_US,
-            Locations::EAST_ASIA,
-            Locations::WEST_US,
-            Locations::EAST_US,
-            Locations::NORTH_CENTRAL_US,
-            Locations::NORTH_EUROPE,
-            Locations::SOUTHEAST_ASIA,
-            Locations::SOUTH_CENTRAL_US,
-            Locations::WEST_EUROPE
-        );
-        
-        // Test
-        try {
-            $actual = $this->restProxy->listLocations();
-        } catch (\HTTP_Request2_MessageException $e) {
-            $msg  = 'The test is skipped because Windows Azure replied with corrupted response.';
-            $msg .= 'This doesn\'t happen frequently but when it does happen the test is skipped';
-            $this->markTestSkipped($msg);
-        }
-        
-        // Assert
-        $windowsAzureLocations = $actual->getLocations();
-        // Note: Some accounts return a subset of locations, so just
-        // verify that the locations obtained are in the expected set.
-        foreach ($windowsAzureLocations as $location) {
-            $exists = false;
-            $actualValue = $location->getName();
-            foreach ($locations as $value) {
-                if ($actualValue == $value) {
-                    $exists = true;
-                    break;
-                }
-            }
-            $this->assertTrue($exists);
-        }
-    }
-    
-    /**
      * @covers WindowsAzure\ServiceManagement\ServiceManagementRestProxy::createAffinityGroup
      * @covers WindowsAzure\ServiceManagement\ServiceManagementRestProxy::_getAffinityGroupPath
      * @covers WindowsAzure\ServiceManagement\ServiceManagementRestProxy::_getPath
@@ -141,7 +91,7 @@ class ServiceManagementRestProxyTest extends ServiceManagementRestProxyTestBase
         // Setup
         $name  = 'createaffinitygroup';
         $label = base64_encode($name);
-        $location = Locations::WEST_US;
+        $location = $this->defaultLocation;
         
         // Test
         $this->restProxy->createAffinityGroup($name, $label, $location);
@@ -162,7 +112,7 @@ class ServiceManagementRestProxyTest extends ServiceManagementRestProxyTestBase
         // Setup
         $name = 'deleteaffinitygroup';
         $label = base64_encode($name);
-        $location = Locations::WEST_US;
+        $location = $this->defaultLocation;
         $this->restProxy->createAffinityGroup($name, $label, $location);
         
         // Test
@@ -252,7 +202,7 @@ class ServiceManagementRestProxyTest extends ServiceManagementRestProxyTestBase
         // Setup
         $name  = 'updateaffinitygroup';
         $label = base64_encode($name);
-        $location = Locations::WEST_US;
+        $location = $this->defaultLocation;
         $expectedLabel = base64_encode('newlabel');
         $this->createAffinityGroup($name, $label, $location);
         
@@ -304,7 +254,7 @@ class ServiceManagementRestProxyTest extends ServiceManagementRestProxyTestBase
         $name = $this->_storageServiceName;
         $label = base64_encode($name);
         $options = new CreateServiceOptions();
-        $options->setLocation('West US');
+        $options->setLocation($this->defaultLocation);
         
         // Count the storage services before creating new one.
         $storageCount = count($this->restProxy->listStorageServices()->getStorageServices());
@@ -383,9 +333,6 @@ class ServiceManagementRestProxyTest extends ServiceManagementRestProxyTestBase
         
         // Assert
         $this->assertEquals($name, $result->getStorageService()->getName());
-        $this->assertEquals("http://$name.blob.core.windows.net/", $result->getStorageService()->getBlobEndpointUri());
-        $this->assertEquals("http://$name.queue.core.windows.net/", $result->getStorageService()->getQueueEndpointUri());
-        $this->assertEquals("http://$name.table.core.windows.net/", $result->getStorageService()->getTableEndpointUri());
         $this->assertNotNull($result->getStorageService()->getUrl());
         $this->assertNotNull($result->getStorageService()->getLabel());
     }
@@ -587,7 +534,7 @@ class ServiceManagementRestProxyTest extends ServiceManagementRestProxyTestBase
         $name = 'testcreatehostedservice';
         $label = base64_encode($name);
         $options = new CreateServiceOptions();
-        $options->setLocation('West US');
+        $options->setLocation($this->defaultLocation);
         $options->setDescription('I am description');
         
         // Test
