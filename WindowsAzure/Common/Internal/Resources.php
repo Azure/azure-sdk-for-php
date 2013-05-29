@@ -61,6 +61,7 @@ class Resources
     const SERVICE_BUS_ENDPOINT_NAME = 'Endpoint';
     const SHARED_SECRET_ISSUER_NAME = 'SharedSecretIssuer';
     const SHARED_SECRET_VALUE_NAME = 'SharedSecretValue';
+    const STS_ENDPOINT_NAME = 'StsEndpoint';
     
     // Messages
     const INVALID_TYPE_MSG = 'The provided variable should be of type: ';

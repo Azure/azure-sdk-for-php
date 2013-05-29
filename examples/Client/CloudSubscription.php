@@ -25,7 +25,6 @@
 namespace Client;
 use WindowsAzure\Common\ServicesBuilder;
 use WindowsAzure\Common\Internal\Resources;
-use WindowsAzure\ServiceManagement\Models\Locations;
 use WindowsAzure\ServiceManagement\Models\OperationStatus;
 use WindowsAzure\ServiceManagement\Models\CreateServiceOptions;
 
@@ -95,7 +94,7 @@ class CloudSubscription
     public function createStorageService(
         $name,
         $execType = self:: SYNCHRONOUS,
-        $location = Locations::SOUTH_CENTRAL_US
+        $location = 'West US'
     ) {
         $newStorageService   = false;
         $cloudStorageService = null;
