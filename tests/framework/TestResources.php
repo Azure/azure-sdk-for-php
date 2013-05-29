@@ -72,12 +72,8 @@ class TestResources
     const STATUS_INTERNAL_SERVER_ERROR = 500;
 
     public static function getWindowsAzureStorageServicesConnectionString()
-    {
-        $accountName = self::accountName();
-        $accountKey = self::accountKey();
-        $azureServiceConnectionString = "DefaultEndpointsProtocol=http;AccountName=$accountName;AccountKey=$accountKey";
-        
-        return $azureServiceConnectionString;
+    {        
+        return self::storageConnectionString();
     }
     
     public static function getEmulatorStorageServicesConnectionString()
@@ -151,26 +147,15 @@ class TestResources
         return $name;
     }
     
-    public static function accountName()
+    public static function storageConnectionString()
     {
-        $name = getenv('AZURE_STORAGE_ACCOUNT');
+        $name = getenv('AZURE_STORAGE_CONNECTION_STRING');
         
         if (empty($name)) {
-            throw new \Exception('AZURE_STORAGE_ACCOUNT envionment variable is missing');
+            throw new \Exception('AZURE_STORAGE_CONNECTION_STRING envionment variable is missing');
         }
         
         return $name;
-    }
-    
-    public static function accountKey()
-    {
-        $key = getenv('AZURE_STORAGE_KEY');
-        
-        if (empty($key)) {
-            throw new \Exception('AZURE_STORAGE_KEY envionment variable is missing');
-        }
-        
-        return $key;
     }
 
     public static function serviceManagementSubscriptionId()
