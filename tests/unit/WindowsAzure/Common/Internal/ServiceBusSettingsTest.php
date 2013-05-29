@@ -140,7 +140,7 @@ class ServiceBusSettingsTest extends \PHPUnit_Framework_TestCase
     {
         // Setup
         $expected = 'serviceBusEndpointUri';
-        $setting = new ServiceBusSettings($expected, null, null, null);
+        $setting = new ServiceBusSettings($expected, null, null, null, null);
         
         // Test
         $actual = $setting->getServiceBusEndpointUri();
@@ -156,7 +156,7 @@ class ServiceBusSettingsTest extends \PHPUnit_Framework_TestCase
     {
         // Setup
         $expected = 'namespace';
-        $setting = new ServiceBusSettings(null, $expected, null, null);
+        $setting = new ServiceBusSettings(null, $expected, null, null, null);
         
         // Test
         $actual = $setting->getNamespace();
@@ -172,7 +172,7 @@ class ServiceBusSettingsTest extends \PHPUnit_Framework_TestCase
     {
         // Setup
         $expected = 'wrapname';
-        $setting = new ServiceBusSettings(null, null, $expected, null);
+        $setting = new ServiceBusSettings(null, null, null, $expected, null);
         
         // Test
         $actual = $setting->getWrapName();
@@ -188,7 +188,7 @@ class ServiceBusSettingsTest extends \PHPUnit_Framework_TestCase
     {
         // Setup
         $expected = 'wrappassword';
-        $setting = new ServiceBusSettings(null, null, null, $expected);
+        $setting = new ServiceBusSettings(null, null, null, null, $expected);
         
         // Test
         $actual = $setting->getWrapPassword();
@@ -205,7 +205,7 @@ class ServiceBusSettingsTest extends \PHPUnit_Framework_TestCase
         // Setup
         $namespace = 'wrapendpoint';
         $expected = "https://$namespace-sb.accesscontrol.windows.net/WRAPv0.9";
-        $setting = new ServiceBusSettings(null, $namespace, null, null);
+        $setting = new ServiceBusSettings(null, null, $expected, null, null);
         
         // Test
         $actual = $setting->getWrapEndpointUri();
