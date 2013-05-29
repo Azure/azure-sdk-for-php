@@ -247,4 +247,38 @@ class ServiceBusSettingsTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($expectedWrapPassword, $actual->getWrapPassword());
         $this->assertEquals($expectedWrapEndpointUri, $actual->getWrapEndpointUri());
     }
+    
+    /**
+     * @covers WindowsAzure\Common\Internal\ServiceBusSettings::createFromConnectionString
+     * @covers WindowsAzure\Common\Internal\ServiceBusSettings::init
+     * @covers WindowsAzure\Common\Internal\ServiceBusSettings::__construct
+     * @covers WindowsAzure\Common\Internal\ServiceSettings::getValidator
+     * @covers WindowsAzure\Common\Internal\ServiceSettings::optional
+     * @covers WindowsAzure\Common\Internal\ServiceSettings::allRequired
+     * @covers WindowsAzure\Common\Internal\ServiceSettings::setting
+     * @covers WindowsAzure\Common\Internal\ServiceSettings::settingWithFunc
+     * @covers WindowsAzure\Common\Internal\ServiceSettings::matchedSpecification
+     * @covers WindowsAzure\Common\Internal\ServiceSettings::parseAndValidateKeys
+     * @covers WindowsAzure\Common\Internal\ServiceSettings::noMatch
+     */
+    public function testCreateFromConnectionStringWithWrapEndpoint()
+    {
+        // Setup
+        $expectedNamespace = 'mynamespace';
+        $expectedServiceBusEndpoint = "https://$expectedNamespace.servicebus.windows.net";
+        $expectedWrapName = 'myname';
+        $expectedWrapPassword = 'mypassword';
+        $expectedWrapEndpointUri = "https://mysb-sb.accesscontrol.chinacloudapi.cn/";
+        $connectionString = "Endpoint=$expectedServiceBusEndpoint;StsEndpoint=$expectedWrapEndpointUri;SharedSecretIssuer=$expectedWrapName;SharedSecretValue=$expectedWrapPassword";
+        
+        // Test
+        $actual = ServiceBusSettings::createFromConnectionString($connectionString);
+        
+        // Assert
+        $this->assertEquals($expectedNamespace, $actual->getNamespace());
+        $this->assertEquals($expectedServiceBusEndpoint, $actual->getServiceBusEndpointUri());
+        $this->assertEquals($expectedWrapName, $actual->getWrapName());
+        $this->assertEquals($expectedWrapPassword, $actual->getWrapPassword());
+        $this->assertEquals($expectedWrapEndpointUri, $actual->getWrapEndpointUri());
+    }
 }

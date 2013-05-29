@@ -73,7 +73,13 @@ class TestResources
 
     public static function getWindowsAzureStorageServicesConnectionString()
     {        
-        return self::storageConnectionString();
+        $connectionString = getenv('AZURE_STORAGE_CONNECTION_STRING');
+        
+        if (empty($connectionString)) {
+            throw new \Exception('AZURE_STORAGE_CONNECTION_STRING envionment variable is missing');
+        }
+        
+        return $connectionString;
     }
     
     public static function getEmulatorStorageServicesConnectionString()
@@ -85,16 +91,22 @@ class TestResources
     
     public static function getServiceManagementConnectionString()
     {
-        return self::serviceManagementConnectionString();
+        $connectionString = getenv('AZURE_SERVICE_MANAGEMENT_CONNECTION_STRING');
+        
+        if (empty($connectionString)) {
+            throw new \Exception('AZURE_SERVICE_MANAGEMENT_CONNECTION_STRING envionment variable is missing');
+        }
+        
+        return $connectionString;
     }
     
     public static function getServiceBusConnectionString()
     {
-        $namespace = self::serviceBusNamespace();
-        $endpoint = "https://$namespace.servicebus.windows.net";
-        $wrapName = self::wrapAuthenticationName();
-        $wrapPassword = self::wrapPassword();
-        $connectionString = "Endpoint=$endpoint;SharedSecretIssuer=$wrapName;SharedSecretValue=$wrapPassword";
+        $connectionString = getenv('AZURE_SERVICE_BUS_CONNECTION_STRING');
+        
+        if (empty($connectionString)) {
+            throw new \Exception('AZURE_SERVICE_BUS_CONNECTION_STRING enviroment variable is missing.');
+        }
         
         return $connectionString;
     }
@@ -141,71 +153,6 @@ class TestResources
         }
         
         return $name;
-    }
-    
-    public static function storageConnectionString()
-    {
-        $connectionString = getenv('AZURE_STORAGE_CONNECTION_STRING');
-        
-        if (empty($connectionString)) {
-            throw new \Exception('AZURE_STORAGE_CONNECTION_STRING envionment variable is missing');
-        }
-        
-        return $connectionString;
-    }
-
-    public static function serviceManagementConnectionString()
-    {
-        $connectionString = getenv('AZURE_SERVICE_MANAGEMENT_CONNECTION_STRING');
-        
-        if (empty($connectionString)) {
-            throw new \Exception('AZURE_SERVICE_MANAGEMENT_CONNECTION_STRING envionment variable is missing');
-        }
-        
-        return $connectionString;
-    }
-
-    public static function serviceBusCertificatePath()
-    {
-        return getenv('SERVICE_BUS_CERTIFICATE_PATH');
-    }
-
-    public static function sslCertificateAuthorityPath()
-    {
-        return getenv('SSL_CERTIFICATE_AUTHORITY_PATH');
-    }
-
-    public static function serviceBusNamespace()
-    {
-        $namespace = getenv('SERVICE_BUS_NAMESPACE');
-        
-        if (empty($namespace)) {
-            throw new \Exception('SERVICE_BUS_NAMESPACE enviroment variable is missing.');
-        }
-        
-        return $namespace;
-    }
-
-    public static function wrapAuthenticationName()
-    {
-        $wrapAuthenticationName = getenv('WRAP_AUTHENTICATION_NAME');
-        
-        if (empty($wrapAuthenticationName)) {
-            throw new \Exception('WRAP_AUTHENTICATION_NAME enviroment variable is missing.');
-        }
-        
-        return $wrapAuthenticationName;
-    }
-
-    public static function wrapPassword()
-    {
-        $wrapPassword = getenv('WRAP_PASSWORD');
-        
-        if (empty($wrapPassword)) {
-            throw new \Exception('WRAP_PASSWORD enviroment variable is missing.');
-        }
-        
-        return $wrapPassword;
     }
 
     public static function getServicePropertiesSample()
