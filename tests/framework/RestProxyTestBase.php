@@ -44,6 +44,11 @@ class RestProxyTestBase extends \PHPUnit_Framework_TestCase
     protected $xmlSerializer;
     protected $builder;
     
+    protected function getTestName()
+    {
+        return sprintf('onesdkphp%04x', mt_rand(0, 65535));
+    }
+    
     public static function assertHandler($file, $line, $code)
     {
         echo "Assertion Failed:\n
