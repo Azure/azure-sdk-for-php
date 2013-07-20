@@ -55,8 +55,6 @@ use WindowsAzure\ServiceManagement\Models\CreateDeploymentOptions;
  */
 class ServiceManagementRestProxyTest extends ServiceManagementRestProxyTestBase
 {
-    private $_storageServiceName = 'createstorageservice';
-    
     /**
      * @covers WindowsAzure\ServiceManagement\ServiceManagementRestProxy::__construct
      */
@@ -89,7 +87,7 @@ class ServiceManagementRestProxyTest extends ServiceManagementRestProxyTestBase
     public function testCreateAffinityGroup()
     {
         // Setup
-        $name  = 'createaffinitygroup';
+        $name = $this->getTestName();
         $label = base64_encode($name);
         $location = $this->defaultLocation;
         
@@ -110,7 +108,7 @@ class ServiceManagementRestProxyTest extends ServiceManagementRestProxyTestBase
     public function testDeleteAffinityGroup()
     {
         // Setup
-        $name = 'deleteaffinitygroup';
+        $name = $this->getTestName();
         $label = base64_encode($name);
         $location = $this->defaultLocation;
         $this->restProxy->createAffinityGroup($name, $label, $location);
@@ -153,7 +151,7 @@ class ServiceManagementRestProxyTest extends ServiceManagementRestProxyTestBase
     public function testListAffinityGroupsWithOneEntry()
     {
         // Setup
-        $name = 'listaffinitygroupwithoneentry';
+        $name = $this->getTestName();
         $currentCount = count($this->restProxy->listAffinityGroups()->getAffinityGroups());
         $expectedCount = 1 + $currentCount;
         $this->createAffinityGroup($name);
@@ -176,8 +174,8 @@ class ServiceManagementRestProxyTest extends ServiceManagementRestProxyTestBase
     public function testListAffinityGroupsWithMultipleEntries()
     {
         // Setup
-        $name1 = 'listaffinitygroupwithmultipleentries1';
-        $name2 = 'listaffinitygroupwithmultipleentries2';
+        $name1 = $this->getTestName();
+        $name2 = $this->getTestName();
         $currentCount = count($this->restProxy->listAffinityGroups()->getAffinityGroups());
         $expectedCount = 2 + $currentCount;
         $this->createAffinityGroup($name1);
@@ -200,7 +198,7 @@ class ServiceManagementRestProxyTest extends ServiceManagementRestProxyTestBase
     public function testUpdateAffinityGroup()
     {
         // Setup
-        $name  = 'updateaffinitygroup';
+        $name = $this->getTestName();
         $label = base64_encode($name);
         $location = $this->defaultLocation;
         $expectedLabel = base64_encode('newlabel');
@@ -224,7 +222,7 @@ class ServiceManagementRestProxyTest extends ServiceManagementRestProxyTestBase
     public function testGetAffinityGroupProperties()
     {
         // Setup
-        $name = 'getaffinitygroupproperties';
+        $name = $this->getTestName();
         $this->createAffinityGroup($name);
         
         // Test
@@ -251,7 +249,7 @@ class ServiceManagementRestProxyTest extends ServiceManagementRestProxyTestBase
     public function testCreateStorageService()
     {
         // Setup
-        $name = $this->_storageServiceName;
+        $name = $this->storageServiceName;
         $label = base64_encode($name);
         $options = new CreateServiceOptions();
         $options->setLocation($this->defaultLocation);
@@ -299,7 +297,7 @@ class ServiceManagementRestProxyTest extends ServiceManagementRestProxyTestBase
     public function testUpdateStorageService()
     {
         // Setup
-        $name = $this->_storageServiceName;
+        $name = $this->storageServiceName;
         $options = new UpdateServiceOptions();
         $expectedDesc = 'My description';
         $expectedLabel = base64_encode('new label');
@@ -326,7 +324,7 @@ class ServiceManagementRestProxyTest extends ServiceManagementRestProxyTestBase
     public function testGetStorageServiceProperties()
     {
         // Setup
-        $name = $this->_storageServiceName;
+        $name = $this->storageServiceName;
         
         // Test
         $result = $this->restProxy->getStorageServiceProperties($name);
@@ -349,7 +347,7 @@ class ServiceManagementRestProxyTest extends ServiceManagementRestProxyTestBase
     public function testGetStorageServiceKeys()
     {
         // Setup
-        $name = $this->_storageServiceName;
+        $name = $this->storageServiceName;
         
         // Test
         $result = $this->restProxy->getStorageServiceKeys($name);
@@ -371,7 +369,7 @@ class ServiceManagementRestProxyTest extends ServiceManagementRestProxyTestBase
     public function testRegenerateStorageServiceKeys()
     {
         // Setup
-        $name = $this->_storageServiceName;
+        $name = $this->storageServiceName;
         $old = $this->restProxy->getStorageServiceKeys($name);
         
         // Test
@@ -395,7 +393,7 @@ class ServiceManagementRestProxyTest extends ServiceManagementRestProxyTestBase
         // account this method deletes.
         
         // Setup
-        $name = $this->_storageServiceName;
+        $name = $this->storageServiceName;
         
          // Test
         $this->restProxy->deleteStorageService($name);
@@ -435,7 +433,7 @@ class ServiceManagementRestProxyTest extends ServiceManagementRestProxyTestBase
     {
         // Setup
         $currentCount = count($this->restProxy->listHostedServices()->getHostedServices());
-        $name = 'testlisthostedservicesone';
+        $name = $this->getTestName();
         $this->createHostedService($name);
         $expectedCount = $currentCount + 1;
         
@@ -466,9 +464,9 @@ class ServiceManagementRestProxyTest extends ServiceManagementRestProxyTestBase
     {
         // Setup
         $currentCount = count($this->restProxy->listHostedServices()->getHostedServices());
-        $name1 = 'testlisthostedservicesmultiple1';
-        $name2 = 'testlisthostedservicesmultiple2';
-        $name3 = 'testlisthostedservicesmultiple3';
+        $name1 = $this->getTestName();
+        $name2 = $this->getTestName();
+        $name3 = $this->getTestName();
         $this->createHostedService($name1);
         $this->createHostedService($name2);
         $this->createHostedService($name3);
@@ -507,7 +505,7 @@ class ServiceManagementRestProxyTest extends ServiceManagementRestProxyTestBase
     public function testDeleteHostedService()
     {
         // Setup
-        $name = 'testdeletehostedservice';
+        $name = $this->getTestName();
         $this->createHostedService($name);
         
          // Test
@@ -531,7 +529,7 @@ class ServiceManagementRestProxyTest extends ServiceManagementRestProxyTestBase
     public function testCreateHostedService()
     {
         // Setup
-        $name = 'testcreatehostedservice';
+        $name = $this->getTestName();
         $label = base64_encode($name);
         $options = new CreateServiceOptions();
         $options->setLocation($this->defaultLocation);
@@ -554,7 +552,7 @@ class ServiceManagementRestProxyTest extends ServiceManagementRestProxyTestBase
     public function testUpdateHostedService()
     {
         // Setup
-        $name = 'testupdatehostedservice';
+        $name = $this->getTestName();
         $this->createHostedService($name);
         $options = new UpdateServiceOptions();
         $expectedDesc = 'My description';
@@ -581,7 +579,7 @@ class ServiceManagementRestProxyTest extends ServiceManagementRestProxyTestBase
     public function testGetHostedServiceProperties()
     {
         // Setup
-        $name = 'testGetHostedServiceProperties';
+        $name = $this->getTestName();
         $this->createHostedService($name);
         
         // Test
@@ -603,7 +601,7 @@ class ServiceManagementRestProxyTest extends ServiceManagementRestProxyTestBase
     public function testGetHostedServicePropertiesWithEmbed()
     {
         // Setup
-        $name = 'testgethostedservicepropertieswithembed';
+        $name = $this->getTestName();
         $stagingName = $name . 'staging';
         $options = new GetHostedServicePropertiesOptions();
         $options->setEmbedDetail(true);
@@ -673,7 +671,7 @@ class ServiceManagementRestProxyTest extends ServiceManagementRestProxyTestBase
     public function testDeleteDeploymentWithSlot()
     {
         // Setup
-        $name = 'testdeletedeploymentwithslot';
+        $name = $this->getTestName();
         $label = base64_encode($name);
         $deploymentName = $name;
         $slot = $this->defaultSlot;
@@ -712,7 +710,7 @@ class ServiceManagementRestProxyTest extends ServiceManagementRestProxyTestBase
     public function testDeleteDeploymentWithName()
     {
         // Setup
-        $name = 'testdeletedeploymentwithname';
+        $name = $this->getTestName();
         $label = base64_encode($name);
         $deploymentName = $name;
         $slot = $this->defaultSlot;
@@ -758,7 +756,7 @@ class ServiceManagementRestProxyTest extends ServiceManagementRestProxyTestBase
     public function testGetDeploymentWithOneRole()
     {
         // Setup
-        $name = 'testgetdeployment';
+        $name = $this->getTestName();
         $this->createDeployment($name);
         $options = new GetDeploymentOptions();
         $options->setDeploymentName($name);
@@ -794,7 +792,7 @@ class ServiceManagementRestProxyTest extends ServiceManagementRestProxyTestBase
     public function testGetDeploymentWithMultipleRoles()
     {
         // Setup
-        $name = 'testgetdeploymentwithmultipleroles';
+        $name = $this->getTestName();
         $label = base64_encode($name);
         $deploymentName = $name;
         $slot = $this->defaultSlot;
@@ -852,7 +850,7 @@ class ServiceManagementRestProxyTest extends ServiceManagementRestProxyTestBase
     public function testGetDeploymentWhileUpgrading()
     {
         // Setup
-        $name = 'testgetdeploymentwhileupgrading';
+        $name = $this->getTestName();
         $this->createDeployment($name);
         
         $mode = Mode::AUTO;
@@ -898,7 +896,7 @@ class ServiceManagementRestProxyTest extends ServiceManagementRestProxyTestBase
     public function testSwapDeployment()
     {
         // Setup
-        $name = 'testswapdeployment';
+        $name = $this->getTestName();
         $staging = 'stagingdeployment';
         $production = 'productiondeployment';
         $expectedInstanceCount = 4;
@@ -933,7 +931,7 @@ class ServiceManagementRestProxyTest extends ServiceManagementRestProxyTestBase
     public function testChangeDeploymentConfiguration()
     {
         // Setup
-        $name = 'testchangedeploymentconfiguration';
+        $name = $this->getTestName();
         $newConfig = '<?xml version="1.0" encoding="utf-8"?>
                         <ServiceConfiguration serviceName="WindowsAzure1" xmlns="http://schemas.microsoft.com/ServiceHosting/2008/10/ServiceConfiguration" osFamily="1" osVersion="*" schemaVersion="2012-05.1.7">
                             <Role name="WebRole1">
@@ -973,7 +971,7 @@ class ServiceManagementRestProxyTest extends ServiceManagementRestProxyTestBase
     public function testUpdateDeploymentStatus()
     {
         // Setup
-        $name = 'testUpdateDeploymentStatus';
+        $name = $this->getTestName();
         $this->createDeployment($name);
         $options = new GetDeploymentOptions();
         $options->setDeploymentName($name);
@@ -1003,7 +1001,7 @@ class ServiceManagementRestProxyTest extends ServiceManagementRestProxyTestBase
     public function testUpgradeDeployment()
     {
         // Setup
-        $name = 'testUpgradeDeployment';
+        $name = $this->getTestName();
         $this->createDeployment($name);
         $mode = Mode::AUTO;
         $configuration = $this->complexConfiguration;
@@ -1047,7 +1045,7 @@ class ServiceManagementRestProxyTest extends ServiceManagementRestProxyTestBase
     public function testWalkUpgradeDomain()
     {
         // Setup
-        $name = 'testupgradedomain';
+        $name = $this->getTestName();
         $this->createDeployment($name);
         
         $mode = Mode::MANUAL;
@@ -1101,7 +1099,7 @@ class ServiceManagementRestProxyTest extends ServiceManagementRestProxyTestBase
         $this->markTestSkipped(ServiceRestProxyTestBase::TAKE_TOO_LONG);
         
         // Setup
-        $name = 'testRebootRoleInstance';
+        $name = $this->getTestName();
         $roleName = 'WebRole1_IN_0';
         $options = new CreateDeploymentOptions();
         $options->setStartDeployment(true);
@@ -1146,7 +1144,7 @@ class ServiceManagementRestProxyTest extends ServiceManagementRestProxyTestBase
         $this->markTestSkipped(ServiceRestProxyTestBase::TAKE_TOO_LONG);
         
         // Setup
-        $name = 'testReimageRoleInstance';
+        $name = $this->getTestName();
         $roleName = 'WebRole1_IN_0';
         $options = new CreateDeploymentOptions();
         $options->setStartDeployment(true);
@@ -1186,7 +1184,7 @@ class ServiceManagementRestProxyTest extends ServiceManagementRestProxyTestBase
      */
     public function testRollbackUpgradeOrUpdate()
     {
-        $name = 'testRollbackUpgradeOrUpdate';
+        $name = $this->getTestName();
         $newConfig = '<?xml version="1.0" encoding="utf-8"?>
                         <ServiceConfiguration serviceName="WindowsAzureProject2" xmlns="http://schemas.microsoft.com/ServiceHosting/2008/10/ServiceConfiguration" osFamily="1" osVersion="*">
                         <Role name="WebRole1">
