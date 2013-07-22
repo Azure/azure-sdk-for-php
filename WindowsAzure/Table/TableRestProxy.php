@@ -238,7 +238,7 @@ class TableRestProxy extends ServiceRestProxy implements ITable
                 // in bytes instead of the length in chars.
                 $context->addOptionalHeader(
                     Resources::CONTENT_LENGTH,
-                    mb_strlen($body)
+                    strlen($body)
                 );
                 break;
         
