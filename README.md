@@ -563,7 +563,7 @@ To create the .cer certificate, execute this:
 ### List Available Locations
 
 ```PHP	
-$serviceManagementRestProxy->listLocations();
+$result = $serviceManagementRestProxy->listLocations();
 $locations = $result->getLocations();
 foreach($locations as $location){
       echo $location->getName()."<br />";
