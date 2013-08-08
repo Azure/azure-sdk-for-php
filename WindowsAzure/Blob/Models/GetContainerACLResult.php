@@ -23,7 +23,7 @@
  */
  
 namespace WindowsAzure\Blob\Models;
-use WindowsAzure\Blob\Models\ContainerAcl;
+use WindowsAzure\Blob\Models\ContainerACL;
 
 /**
  * Holds container ACL
