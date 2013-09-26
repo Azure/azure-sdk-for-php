@@ -1322,7 +1322,7 @@ class BlobRestProxy extends ServiceRestProxy implements IBlob
                 array_push($blockIds, $block);
                 $this->createBlobBlock($container, $blob, $block->getBlockId(), $body);
             }
-            $response = $this->_commitBlobBlocks($container, $blob, $blockIds, $options);
+            $response = $this->commitBlobBlocks($container, $blob, $blockIds, $options);
         }
         return CopyBlobResult::create($response->getHeader());
     }
