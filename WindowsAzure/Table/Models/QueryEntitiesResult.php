@@ -89,6 +89,38 @@ class QueryEntitiesResult
     {
         return $this->_entities;
     }
+
+    /**
+     * Returns an array representation of the entity
+     * 
+     * @return array
+     */
+    public function getEntitiesArray()
+    {
+        $entities = $this->getEntities();
+        $jsonArray = array();
+        for ($i = 0; $i < count($entities); $i++) {
+            $arr = $entities[$i]->getProperties();
+            $tempArr = array();
+            foreach ($arr as $key => $value) {
+                if(gettype($entities[$i]->getPropertyValue($key)) != 'object'){
+                    $tempArr[$key] = $entities[$i]->getPropertyValue($key);
+                }
+                else
+                {
+                    if(get_class($entities[$i]->getPropertyValue($key)) == 'DateTime'){
+                        $tempArr[$key] = date_format($entities[$i]->getPropertyValue($key), 'r');
+                    }
+                    else
+                    {
+                        $tempArr[$key] = serialize($entities[$i]->getPropertyValue($key));
+                    }
+                }
+            }
+            array_push($jsonArray, $tempArr);
+        }
+        return $jsonArray;
+    }
     
     /**
      * Sets entities.
