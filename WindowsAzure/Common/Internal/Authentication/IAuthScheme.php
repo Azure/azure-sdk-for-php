@@ -32,7 +32,7 @@ namespace WindowsAzure\Common\Internal\Authentication;
  * @author    Azure PHP SDK <azurephpsdk@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
- * @version   Release: 0.3.1_2011-08
+ * @version   Release: @package_version@
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
 interface IAuthScheme
