@@ -26,6 +26,7 @@ namespace Tests\Framework;
 use WindowsAzure\Table\Models\EdmType;
 use WindowsAzure\Table\Models\Entity;
 use WindowsAzure\Common\Internal\Utilities;
+use WindowsAzure\Common\Internal\Resources;
 
 /**
  * Resources for testing framework.
@@ -154,11 +155,11 @@ class TestResources
     public static function accountName()
     {
         $name = getenv('AZURE_STORAGE_ACCOUNT');
-        
+    
         if (empty($name)) {
             throw new \Exception('AZURE_STORAGE_ACCOUNT envionment variable is missing');
-        }
-        
+    	}
+    
         return $name;
     }
     
@@ -233,11 +234,22 @@ class TestResources
         
         if (empty($wrapPassword)) {
             throw new \Exception('WRAP_PASSWORD enviroment variable is missing.');
-        }
-        
+    }
+    
         return $wrapPassword;
     }
 
+    public static function getMediaServicesConnectionString()
+    {
+    	$connectionString = getenv('AZURE_MEDIA_SERVICES_CONNECTION_STRING');
+    
+    	if (empty($connectionString)) {
+    		throw new \Exception('AZURE_MEDIA_SERVICES_CONNECTION_STRING enviroment variable is missing.');
+    	}
+    
+    	return $connectionString;
+    }
+    
     public static function getServicePropertiesSample()
     {
         $sample = array();
@@ -539,6 +551,27 @@ class TestResources
         $entity->addProperty('JoinDate', EdmType::DATETIME, Utilities::convertToDateTime('2012-01-26T18:26:19.0000473Z'));
         
         return $entity;
+    }
+    
+    public static function getTestOAuthAccessToken()
+    {
+    	$token = array(
+    		Resources::OAUTH_ACCESS_TOKEN => 'http%3a%2f%2fschemas.xmlsoap.org%2fws%2f2005%2f05%2fidentity%2fclaims%2fnameidentifier=client_id&http%3a%2f%2fschemas.microsoft.com%2f' 
+    			. 'accesscontrolservice%2f2010%2f07%2fclaims%2fidentityprovider=https%3a%2f%2fwamsprodglobal001acs.accesscontrol.windows.net%2f&Audience=urn%3aWindows' 
+    			. 'AzureMediaServices&ExpiresOn=1326498007&Issuer=https%3a%2f%2f wamsprodglobal001acs.accesscontrol.windows.net%2f&HMACSHA256=hV1WF7sTe%2ffoHqzK%2ftm' 
+    			. 'nwQY22NRPaDytcOOpC9Nv4DA%3d","token_type":"http://schemas.xmlsoap.org/ws/2009/11/swt-token-profile-1.0',
+    		Resources::OAUTH_EXPIRES_IN => '3599',
+    		Resources::OAUTH_SCOPE => 'urn:WindowsAzureMediaServices'
+    	);
+    	
+    	return $token;
+    } 
+
+    public static function getSimpleJson() 
+    {
+    	$data['data'] = array('k1' => 'test1', 'k2' => 'test2', 'k3' => 'test3');
+    	$data['jsonArray'] = '["k1" : "test1", "k2" : "test2", "k3" : "test3"]';    	
+    	$data['jsonObject'] = '{"k1" : "test1", "k2" : "test2", "k3" : "test3"}';    	
     }
 }
 

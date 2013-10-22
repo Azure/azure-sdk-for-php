@@ -25,6 +25,7 @@
 namespace WindowsAzure\Common\Internal\Filters;
 use WindowsAzure\Common\Internal\Resources;
 use WindowsAzure\Common\Internal\IServiceFilter;
+use WindowsAzure\Common\Internal\Authentication\IAuthScheme;
 use WindowsAzure\Common\Internal\Authentication\SharedKeyAuthScheme;
 use WindowsAzure\Common\Internal\Authentication\TableSharedKeyLiteAuthScheme;
 use WindowsAzure\Common\Internal\InvalidArgumentTypeException;
@@ -43,7 +44,7 @@ use WindowsAzure\Common\Internal\InvalidArgumentTypeException;
 class AuthenticationFilter implements IServiceFilter
 {
     /**
-     * @var WindowsAzure\Common\Internal\Authentication\StorageAuthScheme
+     * @var WindowsAzure\Common\Internal\Authentication\IAuthScheme
      */
     private $_authenticationScheme;
 
