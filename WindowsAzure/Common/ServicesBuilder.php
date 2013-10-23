@@ -410,43 +410,43 @@ class ServicesBuilder
      */
     public function createMediaServicesService($connectionString)
     {
-    	$settings = MediaServicesSettings::createFromConnectionString(
-    			$connectionString
-    	);
+        $settings = MediaServicesSettings::createFromConnectionString(
+                $connectionString
+        );
     
-    	$httpClient      = new HttpClient();
-    	$serializer      = $this->serializer();
-    	$uri             = Utilities::tryAddUrlScheme(
-    			$settings->getEndpointUri(),
-    			Resources::HTTPS_SCHEME
-    	);
+        $httpClient      = new HttpClient();
+        $serializer      = $this->serializer();
+        $uri             = Utilities::tryAddUrlScheme(
+                $settings->getEndpointUri(),
+                Resources::HTTPS_SCHEME
+        );
     
-    	$mediaServicesWrapper = new MediaServicesRestProxy(
-    			$httpClient,
-    			$uri,
-    			$settings->getAccountName(),
-    			$serializer
-    	);
+        $mediaServicesWrapper = new MediaServicesRestProxy(
+                $httpClient,
+                $uri,
+                $settings->getAccountName(),
+                $serializer
+        );
     
-    	// Adding headers filter
-    	$headers = array();
-    	$headers[Resources::X_MS_VERSION] = Resources::MEDIA_SERVICES_API_LATEST_VERSION;
-    	$headersFilter        = new HeadersFilter($headers);
-    	$mediaServicesWrapper = $mediaServicesWrapper->withFilter($headersFilter);
+        // Adding headers filter
+        $headers = array();
+        $headers[Resources::X_MS_VERSION] = Resources::MEDIA_SERVICES_API_LATEST_VERSION;
+        $headersFilter = new HeadersFilter($headers);
+        $mediaServicesWrapper = $mediaServicesWrapper->withFilter($headersFilter);
     
-    	// Adding OAuth filter
-    	$oauthService 			= new OAuthRestProxy(new HttpClient(), $settings->getOAuthEndpointUri());
-    	$authentification 		= new OAuthScheme(
-    			$settings->getAccountName(),
-    			$settings->getAccessKey(),
-    			Resources::OAUTH_GT_CLIENT_CREDENTIALS,
-    			Resources::MEDIA_SERVICES_OAUTH_SCOPE,
-    			$oauthService
-    	);
-    	$authentificationFilter	= new AuthenticationFilter($authentification);
-    	$mediaServicesWrapper 	= $mediaServicesWrapper->withFilter($authentificationFilter);
+        // Adding OAuth filter
+        $oauthService = new OAuthRestProxy(new HttpClient(), $settings->getOAuthEndpointUri());
+        $authentification = new OAuthScheme(
+            $settings->getAccountName(),
+            $settings->getAccessKey(),
+            Resources::OAUTH_GT_CLIENT_CREDENTIALS,
+            Resources::MEDIA_SERVICES_OAUTH_SCOPE,
+            $oauthService
+        );
+        $authentificationFilter = new AuthenticationFilter($authentification);
+        $mediaServicesWrapper = $mediaServicesWrapper->withFilter($authentificationFilter);
     
-    	return $mediaServicesWrapper;
+        return $mediaServicesWrapper;
     }
     
     /**

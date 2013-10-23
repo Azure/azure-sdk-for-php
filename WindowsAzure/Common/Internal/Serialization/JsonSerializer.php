@@ -81,10 +81,10 @@ class JsonSerializer implements ISerializer
     {
         $json = json_decode($serialized);
         if (get_class($json) == 'stdClass') {
-        	return get_object_vars($json);  
+            return get_object_vars($json);  
         }
         else {
-        	return $json;
+            return $json;
         }
     }
 }

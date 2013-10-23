@@ -11,7 +11,7 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- * 
+ *
  * PHP version 5
  *
  * @category  Microsoft
@@ -48,65 +48,65 @@ class OAuthAccessTokenTest extends \PHPUnit_Framework_TestCase
         // Setup
         $sample = TestResources::getTestOAuthAccessToken();
         $currentTime = time();
-        
+
         // Test
         $actual = OAuthAccessToken::create($sample);
-        
+
         // Assert
         $this->assertEquals($sample[Resources::OAUTH_ACCESS_TOKEN], $actual->getAccessToken());
         $this->assertEquals($sample[Resources::OAUTH_EXPIRES_IN], $actual->getExpiresIn() - $currentTime);
         $this->assertEquals($sample[Resources::OAUTH_SCOPE], $actual->getScope());
     }
-    
+
     /**
      * @covers WindowsAzure\Common\Models\OAuthAccessToken::getAccessToken
      * @covers WindowsAzure\Common\Models\OAuthAccessToken::setAccessToken
      */
-    public function testGetSetAccessToken() 
+    public function testGetSetAccessToken()
     {
-    	// Setup
-    	$sample = TestResources::getTestOAuthAccessToken();
-    	
-    	// Test
-    	$actual = new OAuthAccessToken();
-    	$actual->setAccessToken($sample[Resources::OAUTH_ACCESS_TOKEN]);
-    	
-    	// Assert
-    	$this->assertEquals($sample[Resources::OAUTH_ACCESS_TOKEN], $actual->getAccessToken());
+        // Setup
+        $sample = TestResources::getTestOAuthAccessToken();
+
+        // Test
+        $actual = new OAuthAccessToken();
+        $actual->setAccessToken($sample[Resources::OAUTH_ACCESS_TOKEN]);
+
+        // Assert
+        $this->assertEquals($sample[Resources::OAUTH_ACCESS_TOKEN], $actual->getAccessToken());
     }
-    
+
     /**
      * @covers WindowsAzure\Common\Models\OAuthAccessToken::getExpiresIn
      * @covers WindowsAzure\Common\Models\OAuthAccessToken::setExpiresIn
      */
     public function testGetSetExpiresIn()
     {
-    	// Setup
-    	$sample = TestResources::getTestOAuthAccessToken();
-    	 
-    	// Test
-    	$actual = new OAuthAccessToken();
-    	$actual->setExpiresIn($sample[Resources::OAUTH_EXPIRES_IN]);
-    	 
-    	// Assert
-    	$this->assertEquals($sample[Resources::OAUTH_EXPIRES_IN], $actual->getExpiresIn());
+        // Setup
+        $sample = TestResources::getTestOAuthAccessToken();
+
+        // Test
+        $actual = new OAuthAccessToken();
+        $actual->setExpiresIn($sample[Resources::OAUTH_EXPIRES_IN]);
+
+        // Assert
+        $this->assertEquals($sample[Resources::OAUTH_EXPIRES_IN], $actual->getExpiresIn());
     }
-    
+
     /**
      * @covers WindowsAzure\Common\Models\OAuthAccessToken::getScope
      * @covers WindowsAzure\Common\Models\OAuthAccessToken::setScope
      */
     public function testGetSetScope()
     {
-    	// Setup
-    	$sample = TestResources::getTestOAuthAccessToken();
-    	 
-    	// Test
-    	$actual = new OAuthAccessToken();
-    	$actual->setScope($sample[Resources::OAUTH_SCOPE]);
-    	 
-    	// Assert
-    	$this->assertEquals($sample[Resources::OAUTH_SCOPE], $actual->getScope());
+        // Setup
+        $sample = TestResources::getTestOAuthAccessToken();
+
+        // Test
+        $actual = new OAuthAccessToken();
+        $actual->setScope($sample[Resources::OAUTH_SCOPE]);
+
+        // Assert
+        $this->assertEquals($sample[Resources::OAUTH_SCOPE], $actual->getScope());
     }
 }
 

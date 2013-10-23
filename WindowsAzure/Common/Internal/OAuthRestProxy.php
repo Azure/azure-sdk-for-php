@@ -56,54 +56,54 @@ class OAuthRestProxy extends ServiceRestProxy
     /**
      * Get OAuth access token.
      *
-     * @param string	$grantType		OAuth request grant_type field value.
-     * @param string    $clientId		OAuth request clent_id field value.
-     * @param string    $clientSecret	OAuth request clent_secret field value.
-     * @param string    $scope			OAuth request scope field value.
+     * @param string    $grantType      OAuth request grant_type field value.
+     * @param string    $clientId       OAuth request clent_id field value.
+     * @param string    $clientSecret   OAuth request clent_secret field value.
+     * @param string    $scope          OAuth request scope field value.
      */
     public function getAccessToken($grantType, $clientId, $clientSecret, $scope) 
-  	{
-  		$method         = Resources::HTTP_POST;
-  		$headers        = array();
-  		$queryParams    = array();
-  		$postParameters = array();
-  		$statusCode     = Resources::STATUS_OK;
-  		
-  		$postParameters = $this->addPostParameter(
-  				$postParameters,
-  				Resources::OAUTH_GRANT_TYPE,
-  				$grantType
-  		);
-  		
-  		$postParameters = $this->addPostParameter(
-  				$postParameters,
-  				Resources::OAUTH_CLIENT_ID,
-  				$clientId
-  		);
-  		
-  		$postParameters = $this->addPostParameter(
-  				$postParameters,
-  				Resources::OAUTH_CLIENT_SECRET,
-  				$clientSecret
-  		);
-  		
-  		$postParameters = $this->addPostParameter(
-  				$postParameters,
-  				Resources::OAUTH_SCOPE,
-  				$scope
-  		);
-  		
-  		$response = $this->send(
-  				$method,
-  				$headers,
-  				$queryParams,
-  				$postParameters,
-  				Resources::EMPTY_STRING,
-  				$statusCode
-  		);
-  		
-  		return OAuthAccessToken::create($this->dataSerializer->unserialize($response->getBody()));
-  	}
+    {
+        $method         = Resources::HTTP_POST;
+        $headers        = array();
+        $queryParams    = array();
+        $postParameters = array();
+        $statusCode     = Resources::STATUS_OK;
+        
+        $postParameters = $this->addPostParameter(
+                $postParameters,
+                Resources::OAUTH_GRANT_TYPE,
+                $grantType
+        );
+        
+        $postParameters = $this->addPostParameter(
+                $postParameters,
+                Resources::OAUTH_CLIENT_ID,
+                $clientId
+        );
+        
+        $postParameters = $this->addPostParameter(
+                $postParameters,
+                Resources::OAUTH_CLIENT_SECRET,
+                $clientSecret
+        );
+        
+        $postParameters = $this->addPostParameter(
+                $postParameters,
+                Resources::OAUTH_SCOPE,
+                $scope
+        );
+        
+        $response = $this->send(
+                $method,
+                $headers,
+                $queryParams,
+                $postParameters,
+                Resources::EMPTY_STRING,
+                $statusCode
+        );
+        
+        return OAuthAccessToken::create($this->dataSerializer->unserialize($response->getBody()));
+    }
 }
 
 

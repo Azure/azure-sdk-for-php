@@ -11,7 +11,7 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- * 
+ *
  * PHP version 5
  *
  * @category  Microsoft
@@ -48,23 +48,23 @@ class OAuthSchemeTest extends \PHPUnit_Framework_TestCase
     */
     public function test__construct()
     {
-    	// Setup
-    	$accountName = TestResources::ACCOUNT_NAME;
-    	$accountKey = TestResources::KEY1;
-    	$grantType = Resources::OAUTH_GT_CLIENT_CREDENTIALS;
-    	$scope = Resources::MEDIA_SERVICES_OAUTH_SCOPE;
-    	$oauthService = null;
-    	 
-    	// Test
-    	$actual = new OAuthSchemeMock($accountName, $accountKey, $grantType, $scope, $oauthService);
+        // Setup
+        $accountName = TestResources::ACCOUNT_NAME;
+        $accountKey = TestResources::KEY1;
+        $grantType = Resources::OAUTH_GT_CLIENT_CREDENTIALS;
+        $scope = Resources::MEDIA_SERVICES_OAUTH_SCOPE;
+        $oauthService = null;
+
+        // Test
+        $actual = new OAuthSchemeMock($accountName, $accountKey, $grantType, $scope, $oauthService);
 
         // Assert
-    	$this->assertEquals($accountName, $actual->getAccountName());
-    	$this->assertEquals($accountKey, $actual->getAccountKey());
-       	$this->assertEquals($grantType, $actual->getGrantType());
-       	$this->assertEquals($scope, $actual->getScope());
-       	$this->assertEquals($oauthService, $actual->getOAuthService());
-       	
+        $this->assertEquals($accountName, $actual->getAccountName());
+        $this->assertEquals($accountKey, $actual->getAccountKey());
+        $this->assertEquals($grantType, $actual->getGrantType());
+        $this->assertEquals($scope, $actual->getScope());
+        $this->assertEquals($oauthService, $actual->getOAuthService());
+
     }
 
     /**
@@ -74,24 +74,24 @@ class OAuthSchemeTest extends \PHPUnit_Framework_TestCase
     {
         // Setup
         // OAuth REST setup
-        $channel 			= new HttpClient();
-        $uri     			= Resources::MEDIA_SERVICES_OAUTH_URL;
-        $connectionString 	= TestResources::getMediaServicesConnectionString();
-        $settings 			= MediaServicesSettings::createFromConnectionString($connectionString);
-        $scope				= Resources::MEDIA_SERVICES_OAUTH_SCOPE;
-        $grantType			= Resources::OAUTH_GT_CLIENT_CREDENTIALS;
-        $rest 				= new OAuthRestProxy($channel, $uri);
-        
+        $channel            = new HttpClient();
+        $uri                = Resources::MEDIA_SERVICES_OAUTH_URL;
+        $connectionString   = TestResources::getMediaServicesConnectionString();
+        $settings           = MediaServicesSettings::createFromConnectionString($connectionString);
+        $scope              = Resources::MEDIA_SERVICES_OAUTH_SCOPE;
+        $grantType          = Resources::OAUTH_GT_CLIENT_CREDENTIALS;
+        $rest               = new OAuthRestProxy($channel, $uri);
+
         // Scheme setup
-        $headers			= array();
-        $url				= Resources::MEDIA_SERVICES_URL; 
-        $queryParams		= array();
-        $httpMethod			= Resources::HTTP_GET;
-        
+        $headers        = array();
+        $url            = Resources::MEDIA_SERVICES_URL;
+        $queryParams    = array();
+        $httpMethod     = Resources::HTTP_GET;
+
         // Test
         $scheme = new OAuthScheme($settings->getAccountName(), $settings->getAccessKey(), $grantType, $scope, $rest);
         $actual = $scheme->getAuthorizationHeader($headers, $url, $queryParams, $httpMethod);
-        
+
         // Assert
         $this->assertNotNull($actual);
         $this->assertStringStartsWith(Resources::OAUTH_ACCESS_TOKEN_PREFIX, $actual);
@@ -102,31 +102,31 @@ class OAuthSchemeTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetAuthorizationHeaderMultiple()
     {
-    	// Setup
+        // Setup
         // OAuth REST setup
-    	$channel 			= new HttpClient();
-    	$uri     			= Resources::MEDIA_SERVICES_OAUTH_URL;
-    	$connectionString 	= TestResources::getMediaServicesConnectionString();
-    	$settings 			= MediaServicesSettings::createFromConnectionString($connectionString);
-    	$scope				= Resources::MEDIA_SERVICES_OAUTH_SCOPE;
-    	$grantType			= Resources::OAUTH_GT_CLIENT_CREDENTIALS;
-    	$rest 				= new OAuthRestProxy($channel, $uri);
-    
-        // Scheme setup
-    	$headers			= array();
-    	$url				= Resources::MEDIA_SERVICES_URL;
-    	$queryParams		= array();
-    	$httpMethod			= Resources::HTTP_GET;
-    
-    	// Get access token
-    	$scheme 			= new OAuthScheme($settings->getAccountName(), $settings->getAccessKey(), $grantType, $scope, $rest);
-    	$token 				= $scheme->getAuthorizationHeader($headers, $url, $queryParams, $httpMethod);
+        $channel            = new HttpClient();
+        $uri                = Resources::MEDIA_SERVICES_OAUTH_URL;
+        $connectionString   = TestResources::getMediaServicesConnectionString();
+        $settings           = MediaServicesSettings::createFromConnectionString($connectionString);
+        $scope              = Resources::MEDIA_SERVICES_OAUTH_SCOPE;
+        $grantType          = Resources::OAUTH_GT_CLIENT_CREDENTIALS;
+        $rest               = new OAuthRestProxy($channel, $uri);
 
-    	// Test
-    	$actual = $scheme->getAuthorizationHeader($headers, $url, $queryParams, $httpMethod);
-    	 
-    	// Assert
-    	$this->assertEquals($token, $actual);
+        // Scheme setup
+        $headers        = array();
+        $url            = Resources::MEDIA_SERVICES_URL;
+        $queryParams    = array();
+        $httpMethod     = Resources::HTTP_GET;
+
+        // Get access token
+        $scheme = new OAuthScheme($settings->getAccountName(), $settings->getAccessKey(), $grantType, $scope, $rest);
+        $token  = $scheme->getAuthorizationHeader($headers, $url, $queryParams, $httpMethod);
+
+        // Test
+        $actual = $scheme->getAuthorizationHeader($headers, $url, $queryParams, $httpMethod);
+
+        // Assert
+        $this->assertEquals($token, $actual);
     }
 }
 

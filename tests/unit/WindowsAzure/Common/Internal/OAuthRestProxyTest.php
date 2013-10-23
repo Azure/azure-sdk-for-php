@@ -11,7 +11,7 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- * 
+ *
  * PHP version 5
  *
  * @category  Microsoft
@@ -48,16 +48,16 @@ class OAuthRestProxyTest extends \PHPUnit_Framework_TestCase
     public function testGetAccessToken()
     {
         // Setup
-        $channel 			= new HttpClient();
-        $uri     			= Resources::MEDIA_SERVICES_OAUTH_URL;
-        $connectionString 	= TestResources::getMediaServicesConnectionString();
-        $settings 			= MediaServicesSettings::createFromConnectionString($connectionString);
-        $scope				= Resources::MEDIA_SERVICES_OAUTH_SCOPE;
-        
+        $channel            = new HttpClient();
+        $uri                = Resources::MEDIA_SERVICES_OAUTH_URL;
+        $connectionString   = TestResources::getMediaServicesConnectionString();
+        $settings           = MediaServicesSettings::createFromConnectionString($connectionString);
+        $scope              = Resources::MEDIA_SERVICES_OAUTH_SCOPE;
+
         // Test
         $proxy = new OAuthRestProxy($channel, $uri);
         $actual = $proxy->getAccessToken(Resources::OAUTH_GT_CLIENT_CREDENTIALS, $settings->getAccountName(), $settings->getAccessKey(), $scope);
-        
+
         // Assert
         $this->assertNotNull($proxy);
         $this->assertNotNull($actual->getAccessToken());

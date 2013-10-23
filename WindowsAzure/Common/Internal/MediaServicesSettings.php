@@ -167,7 +167,7 @@ class MediaServicesSettings extends ServiceSettings
             self::optional(
                 self::$_endpointUriSetting,
                 self::$_oauthEndpointUriSetting
-    		)
+            )
         );
         if ($matchedSpecs) {
             $endpointUri = Utilities::tryGetValueInsensitive(
@@ -191,8 +191,8 @@ class MediaServicesSettings extends ServiceSettings
             return new MediaServicesSettings(
                 $accountName,
                 $accessKey,
-            	$endpointUri,
-            	$oauthEndpointUri
+                $endpointUri,
+                $oauthEndpointUri
             );
         }
         

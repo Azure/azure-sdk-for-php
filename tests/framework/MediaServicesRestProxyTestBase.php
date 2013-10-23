@@ -37,20 +37,20 @@ use WindowsAzure\Common\ServiceException;
  * @version   Release: 0.3.1_2011-08
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
-class MediaServicesRestProxyTestBase extends ServiceRestProxyTestBase 
+class MediaServicesRestProxyTestBase extends ServiceRestProxyTestBase
 {
-	public function setUp()
-	{
-		parent::setUp();
-		$mediaServicesWrapper = $this->builder->createMediaServicesService(TestResources::getMediaServicesConnectionString());
-		parent::setProxy($mediaServicesWrapper);
-	}
+    public function setUp()
+    {
+        parent::setUp();
+        $mediaServicesWrapper = $this->builder->createMediaServicesService(TestResources::getMediaServicesConnectionString());
+        parent::setProxy($mediaServicesWrapper);
+    }
 
-	protected function tearDown()
-	{
-		parent::tearDown();
-		
-		//@TODO Cleanup resources
-	}
-	
+    protected function tearDown()
+    {
+        parent::tearDown();
+
+        //@TODO Cleanup resources
+    }
+
 }

@@ -11,7 +11,7 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- * 
+ *
  * PHP version 5
  *
  * @category  Microsoft
@@ -51,14 +51,14 @@ class JsonSerializerTest extends \PHPUnit_Framework_TestCase
         $jsonSerializer = new JsonSerializer();
         $testData = TestResources::getSimpleJson();
         $expected = $testData['data'];
-        
+
         // Test
         $actual = $jsonSerializer->unserialize($testData['jsonArray']);
-        
+
         // Assert
         $this->assertEquals($expected, $actual);
     }
-    
+
     /**
      * @covers WindowsAzure\Common\Internal\Serialization\JsonSerializer::unserialize
      */
@@ -68,29 +68,29 @@ class JsonSerializerTest extends \PHPUnit_Framework_TestCase
         $jsonSerializer = new JsonSerializer();
         $testData = TestResources::getSimpleJson();
         $expected = $testData['data'];
-        
+
         // Test
         $actual = $jsonSerializer->unserialize($testData['jsonObject']);
-        
+
         // Assert
         $this->assertEquals($expected, $actual);
     }
-    
+
     /**
      * @covers WindowsAzure\Common\Internal\Serialization\JsonSerializer::serialize
      */
     public function testSerialize()
     {
-    	// Setup
-    	$jsonSerializer = new JsonSerializer();
-    	$testData = TestResources::getSimpleJson();
-    	$expected = $testData['jsonArray'];
-    
-    	// Test
-    	$actual = $jsonSerializer->serialize($testData['data']);
-    
-    	// Assert
-    	$this->assertEquals($expected, $actual);
+        // Setup
+        $jsonSerializer = new JsonSerializer();
+        $testData = TestResources::getSimpleJson();
+        $expected = $testData['jsonArray'];
+
+        // Test
+        $actual = $jsonSerializer->serialize($testData['data']);
+
+        // Assert
+        $this->assertEquals($expected, $actual);
     }
-    
+
 }
