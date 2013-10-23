@@ -77,6 +77,40 @@ class JsonSerializerTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * @covers WindowsAzure\Common\Internal\Serialization\JsonSerializer::unserialize
+     */
+    public function testUnserializeEmptyString()
+    {
+        // Setup
+        $jsonSerializer = new JsonSerializer();
+        $testData = "";
+        $expected = null;
+
+        // Test
+        $actual = $jsonSerializer->unserialize($testData);
+
+        // Assert
+        $this->assertEquals($expected, $actual);
+    }
+
+    /**
+     * @covers WindowsAzure\Common\Internal\Serialization\JsonSerializer::unserialize
+     */
+    public function testUnserializeInvalidString()
+    {
+        // Setup
+        $jsonSerializer = new JsonSerializer();
+        $testData = "{]{{test]";
+        $expected = null;
+
+        // Test
+        $actual = $jsonSerializer->unserialize($testData);
+
+        // Assert
+        $this->assertEquals($expected, $actual);
+    }
+
+    /**
      * @covers WindowsAzure\Common\Internal\Serialization\JsonSerializer::serialize
      */
     public function testSerialize()
@@ -93,4 +127,20 @@ class JsonSerializerTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($expected, $actual);
     }
 
+    /**
+     * @covers WindowsAzure\Common\Internal\Serialization\JsonSerializer::serialize
+     */
+    public function testSerializeNull()
+    {
+        // Setup
+        $jsonSerializer = new JsonSerializer();
+        $testData = null;
+        $expected = "";
+
+        // Test
+        $actual = $jsonSerializer->serialize($testData);
+
+        // Assert
+        $this->assertEquals($expected, $actual);
+    }
 }
