@@ -68,7 +68,7 @@ class OAuthAccessToken
      */
     public static function create($parsedResponse)
     {
-    	$result = new OAuthAccessToken();
+        $result = new OAuthAccessToken();
         $result->setAccessToken($parsedResponse[Resources::OAUTH_ACCESS_TOKEN]);
         $result->setExpiresIn($parsedResponse[Resources::OAUTH_EXPIRES_IN] + time());
         $result->setScope($parsedResponse[Resources::OAUTH_SCOPE]);
@@ -91,7 +91,7 @@ class OAuthAccessToken
     /**
      * Sets access token
      * 
-     * @param 	string	accessToken	OAuth access token 
+     * @param string    accessToken    OAuth access token 
      */
     public function setAccessToken($accessToken)
     {
@@ -114,7 +114,7 @@ class OAuthAccessToken
     /**
      * Sets access token expires date
      * 
-     * @param 	int	expiresIn	OAuth access token expire date 
+     * @param int    expiresIn    OAuth access token expire date 
      */
     public function setExpiresIn($expiresIn)
     {
@@ -136,7 +136,7 @@ class OAuthAccessToken
     /**
      * Sets access token scope
      * 
-     * @param 	string	scope	OAuth access token scope 
+     * @param string    scope    OAuth access token scope 
      */
     public function setScope($scope)
     {

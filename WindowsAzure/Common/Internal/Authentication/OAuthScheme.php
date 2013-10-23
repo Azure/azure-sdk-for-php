@@ -41,34 +41,34 @@ use WindowsAzure\Common\Internal\Utilities;
 class OAuthScheme implements IAuthScheme
 {
     /**
-	 * @var string
-	 */
-	protected $accountName;
-	
-	/**
-	 * @var string
-	 */
+     * @var string
+     */
+    protected $accountName;
+    
+    /**
+     * @var string
+     */
     protected $accountKey;
-	
-	/**
+    
+    /**
      * @var WindowsAzure\Common\Models\OAuthAccessToken
      */
-	protected $accessToken;
-	
-	/**
-	 * @var WindowsAzure\Common\Internal\OAuthRestProxy
-	 */
-	protected $oauthService;
-	
-	/**
-	 * @var string
-	 */
-	protected $grantType;
-	
-	/**
-	 * @var string
-	 */
-	protected $scope;
+    protected $accessToken;
+    
+    /**
+     * @var WindowsAzure\Common\Internal\OAuthRestProxy
+     */
+    protected $oauthService;
+    
+    /**
+     * @var string
+     */
+    protected $grantType;
+    
+    /**
+     * @var string
+     */
+    protected $scope;
 
     /**
      * Constructor.
@@ -80,11 +80,11 @@ class OAuthScheme implements IAuthScheme
      */
     public function __construct($accountName, $accountKey, $grantType, $scope, $oauthService)
     {
-        $this->accountName 	= $accountName;
-        $this->accountKey 	= $accountKey;
-        $this->grantType 	= $grantType;
-        $this->scope 		= $scope;
-        $this->oauthService	= $oauthService;
+        $this->accountName  = $accountName;
+        $this->accountKey   = $accountKey;
+        $this->grantType    = $grantType;
+        $this->scope        = $scope;
+        $this->oauthService = $oauthService;
     }
 
     /**
@@ -102,26 +102,26 @@ class OAuthScheme implements IAuthScheme
      */
     public function getAuthorizationHeader($headers, $url, $queryParams, $httpMethod)
     {
-    	if (($this->accessToken == null) || ($this->accessToken->getExpiresIn() < time()))  
+        if (($this->accessToken == null) || ($this->accessToken->getExpiresIn() < time()))  
         {
-        	if ($this->oauthService) 
-        	{
-        		$this->accessToken = $this->oauthService->getAccessToken($this->grantType, $this->accountName, $this->accountKey, $this->scope);
-        	}
-        	else 
-        	{
-        		throw new Exception(sprintf(Resources::ERROR_OAUTH_SERVICE_MISSING, $this->accountName));
-        	}
+            if ($this->oauthService) 
+            {
+                $this->accessToken = $this->oauthService->getAccessToken($this->grantType, $this->accountName, $this->accountKey, $this->scope);
+            }
+            else 
+            {
+                throw new Exception(sprintf(Resources::ERROR_OAUTH_SERVICE_MISSING, $this->accountName));
+            }
         }
         
         if ($this->accessToken) 
         {
-        	return Resources::OAUTH_ACCESS_TOKEN_PREFIX . $this->accessToken->getAccessToken();
+            return Resources::OAUTH_ACCESS_TOKEN_PREFIX . $this->accessToken->getAccessToken();
         }
-    	else 
-    	{
-    		throw new Exception(sprintf(Resources::ERROR_OAUTH_GET_ACCESS_TOKEN, $this->oauthService->getEndpoint(), $this->accountName));
-    	}
+        else 
+        {
+            throw new Exception(sprintf(Resources::ERROR_OAUTH_GET_ACCESS_TOKEN, $this->oauthService->getEndpoint(), $this->accountName));
+        }
     }
 }
 

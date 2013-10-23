@@ -194,14 +194,14 @@ class Resources
     const WRAP_SCOPE                   = 'wrap_scope';
 
     // OAuth
-    const OAUTH_GRANT_TYPE				= 'grant_type';
-    const OAUTH_CLIENT_ID				= 'client_id';
-    const OAUTH_CLIENT_SECRET			= 'client_secret';
-    const OAUTH_SCOPE					= 'scope';
-    const OAUTH_GT_CLIENT_CREDENTIALS	= 'client_credentials';
-    const OAUTH_ACCESS_TOKEN			= 'access_token';
-    const OAUTH_EXPIRES_IN				= 'expires_in';
-    const OAUTH_ACCESS_TOKEN_PREFIX		= 'Bearer ';
+    const OAUTH_GRANT_TYPE              = 'grant_type';
+    const OAUTH_CLIENT_ID               = 'client_id';
+    const OAUTH_CLIENT_SECRET           = 'client_secret';
+    const OAUTH_SCOPE                   = 'scope';
+    const OAUTH_GT_CLIENT_CREDENTIALS   = 'client_credentials';
+    const OAUTH_ACCESS_TOKEN            = 'access_token';
+    const OAUTH_EXPIRES_IN              = 'expires_in';
+    const OAUTH_ACCESS_TOKEN_PREFIX     = 'Bearer ';
     
     // HTTP Methods
     const HTTP_GET    = 'GET';
@@ -415,12 +415,12 @@ class Resources
     const PHP_URL_FRAGMENT = 'fragment';
     
     // Status Codes
-    const STATUS_OK              	= 200;
-    const STATUS_CREATED         	= 201;
-    const STATUS_ACCEPTED        	= 202;
-    const STATUS_NO_CONTENT      	= 204;
-    const STATUS_PARTIAL_CONTENT 	= 206;
-    const STATUS_MOVED_PERMANENTLY	= 301;
+    const STATUS_OK                = 200;
+    const STATUS_CREATED           = 201;
+    const STATUS_ACCEPTED          = 202;
+    const STATUS_NO_CONTENT        = 204;
+    const STATUS_PARTIAL_CONTENT   = 206;
+    const STATUS_MOVED_PERMANENTLY = 301;
     
     // HTTP_Request2 config parameter names
     const USE_BRACKETS    = 'use_brackets';
