@@ -53,7 +53,7 @@ class OAuthSchemeTest extends \PHPUnit_Framework_TestCase
         $accountKey = TestResources::KEY1;
         $grantType = Resources::OAUTH_GT_CLIENT_CREDENTIALS;
         $scope = Resources::MEDIA_SERVICES_OAUTH_SCOPE;
-        $oauthService = null;
+        $oauthService = new \stdClass;
 
         // Test
         $actual = new OAuthSchemeMock($accountName, $accountKey, $grantType, $scope, $oauthService);
@@ -129,5 +129,4 @@ class OAuthSchemeTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($token, $actual);
     }
 }
-
 

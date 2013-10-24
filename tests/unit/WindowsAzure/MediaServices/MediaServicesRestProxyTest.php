@@ -38,10 +38,12 @@ use Tests\Framework\TestResources;
  * @version   Release: @package_version@
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
-class MediaServicesProxyTest extends MediaServicesRestProxyTestBase
+class MediaServicesRestProxyTest extends MediaServicesRestProxyTestBase
 {
     /**
-    * @covers WindowsAzure\MediaServces\MediaServcesRestProxy::fooConnaction
+    * @covers WindowsAzure\MediaServices\MediaServicesRestProxy::fooConnection
+    * @covers WindowsAzure\MediaServices\MediaServicesRestProxy::__construct
+    * @covers WindowsAzure\MediaServices\MediaServicesRestProxy::send
     * @todo delete after scenario 1 checked
     */
     public function testFooConnection()

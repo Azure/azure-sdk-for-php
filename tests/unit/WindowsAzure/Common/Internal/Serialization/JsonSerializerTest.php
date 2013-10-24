@@ -27,6 +27,7 @@ use Tests\Framework\TestResources;
 use WindowsAzure\Common\Models\ServiceProperties;
 use WindowsAzure\Common\Internal\InvalidArgumentTypeException;
 use WindowsAzure\Common\Internal\Serialization\JsonSerializer;
+use WindowsAzure\Common\Internal\Resources;
 
 
 /**
@@ -43,6 +44,23 @@ use WindowsAzure\Common\Internal\Serialization\JsonSerializer;
 class JsonSerializerTest extends \PHPUnit_Framework_TestCase
 {
     /**
+     * @covers WindowsAzure\Common\Internal\Serialization\JsonSerializer::objectSerialize
+     */
+    public function testObjectSerialize()
+    {
+        // Setup
+        $testData = TestResources::getSimpleJson();
+        $rootName = 'testRoot';
+        $expected = "{\"{$rootName}\":{$testData['jsonObject']}}";
+
+        // Test
+        $actual = JsonSerializer::objectSerialize($testData['dataObject'], $rootName);
+
+        // Assert
+        $this->assertEquals($expected, $actual);
+    }
+
+    /**
      * @covers WindowsAzure\Common\Internal\Serialization\JsonSerializer::unserialize
      */
     public function testUnserializeArray()
@@ -50,7 +68,7 @@ class JsonSerializerTest extends \PHPUnit_Framework_TestCase
         // Setup
         $jsonSerializer = new JsonSerializer();
         $testData = TestResources::getSimpleJson();
-        $expected = $testData['data'];
+        $expected = $testData['dataArray'];
 
         // Test
         $actual = $jsonSerializer->unserialize($testData['jsonArray']);
@@ -67,7 +85,7 @@ class JsonSerializerTest extends \PHPUnit_Framework_TestCase
         // Setup
         $jsonSerializer = new JsonSerializer();
         $testData = TestResources::getSimpleJson();
-        $expected = $testData['data'];
+        $expected = $testData['dataObject'];
 
         // Test
         $actual = $jsonSerializer->unserialize($testData['jsonObject']);
@@ -121,7 +139,7 @@ class JsonSerializerTest extends \PHPUnit_Framework_TestCase
         $expected = $testData['jsonArray'];
 
         // Test
-        $actual = $jsonSerializer->serialize($testData['data']);
+        $actual = $jsonSerializer->serialize($testData['dataArray']);
 
         // Assert
         $this->assertEquals($expected, $actual);
@@ -136,11 +154,9 @@ class JsonSerializerTest extends \PHPUnit_Framework_TestCase
         $jsonSerializer = new JsonSerializer();
         $testData = null;
         $expected = "";
+        $this->setExpectedException('WindowsAzure\Common\Internal\InvalidArgumentTypeException', sprintf(Resources::INVALID_PARAM_MSG, 'array', 'array'));
 
         // Test
         $actual = $jsonSerializer->serialize($testData);
-
-        // Assert
-        $this->assertEquals($expected, $actual);
     }
 }

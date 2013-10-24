@@ -11,7 +11,7 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- * 
+ *
  * PHP version 5
  *
  * @category  Microsoft
@@ -21,11 +21,14 @@
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link      http://github.com/windowsazure/azure-sdk-for-php
  */
- 
+
 namespace WindowsAzure\Common\Internal\Authentication;
 use WindowsAzure\Common\Internal\Authentication\IAuthScheme;
 use WindowsAzure\Common\Internal\Resources;
 use WindowsAzure\Common\Internal\Utilities;
+use WindowsAzure\Common\Internal\Validate;
+use WindowsAzure\Common\Internal\OAuthRestProxy;
+use WindowsAzure\Common\Models\OAuthAccessToken;
 
 /**
  * Provides shared key authentication scheme for OAuth.
@@ -44,27 +47,27 @@ class OAuthScheme implements IAuthScheme
      * @var string
      */
     protected $accountName;
-    
+
     /**
      * @var string
      */
     protected $accountKey;
-    
+
     /**
      * @var WindowsAzure\Common\Models\OAuthAccessToken
      */
     protected $accessToken;
-    
+
     /**
      * @var WindowsAzure\Common\Internal\OAuthRestProxy
      */
     protected $oauthService;
-    
+
     /**
      * @var string
      */
     protected $grantType;
-    
+
     /**
      * @var string
      */
@@ -73,13 +76,22 @@ class OAuthScheme implements IAuthScheme
     /**
      * Constructor.
      *
-     * @param string $accountName account name.
-     * @param string $accountKey  account primary or secondary key.
-     * 
+     * @param string                                        $accountName    account name.
+     * @param string                                        $accountKey     account primary or secondary key.
+     * @param string                                        $grantType      grant type for OAuth request.
+     * @param string                                        $scope          scope for OAurh request.
+     * @param WindowsAzure\Common\Internal\OAuthRestProxy   $oauthService   account primary or secondary key.
+     *
      * @return OAuthScheme
      */
     public function __construct($accountName, $accountKey, $grantType, $scope, $oauthService)
     {
+        Validate::isString($accountName, 'accountName');
+        Validate::isString($accountKey, 'accountKey');
+        Validate::isString($grantType, 'grantType');
+        Validate::isString($scope, 'scope');
+        Validate::notNull($oauthService, 'oauthService');
+
         $this->accountName  = $accountName;
         $this->accountKey   = $accountKey;
         $this->grantType    = $grantType;
@@ -94,35 +106,20 @@ class OAuthScheme implements IAuthScheme
      * @param string $url         reuqest url.
      * @param array  $queryParams query variables.
      * @param string $httpMethod  request http method.
-     * 
-     * @see Specifying the Authorization Header section at 
+     *
+     * @see Specifying the Authorization Header section at
      *      http://msdn.microsoft.com/en-us/library/windowsazure/dd179428.aspx
-     * 
+     *
      * @return string
      */
     public function getAuthorizationHeader($headers, $url, $queryParams, $httpMethod)
     {
-        if (($this->accessToken == null) || ($this->accessToken->getExpiresIn() < time()))  
+        if (($this->accessToken == null) || ($this->accessToken->getExpiresIn() < time()))
         {
-            if ($this->oauthService) 
-            {
-                $this->accessToken = $this->oauthService->getAccessToken($this->grantType, $this->accountName, $this->accountKey, $this->scope);
-            }
-            else 
-            {
-                throw new Exception(sprintf(Resources::ERROR_OAUTH_SERVICE_MISSING, $this->accountName));
-            }
+            $this->accessToken = $this->oauthService->getAccessToken($this->grantType, $this->accountName, $this->accountKey, $this->scope);
         }
-        
-        if ($this->accessToken) 
-        {
-            return Resources::OAUTH_ACCESS_TOKEN_PREFIX . $this->accessToken->getAccessToken();
-        }
-        else 
-        {
-            throw new Exception(sprintf(Resources::ERROR_OAUTH_GET_ACCESS_TOKEN, $this->oauthService->getEndpoint(), $this->accountName));
-        }
+
+        return Resources::OAUTH_ACCESS_TOKEN_PREFIX . $this->accessToken->getAccessToken();
     }
 }
-
 

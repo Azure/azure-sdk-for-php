@@ -11,7 +11,7 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- * 
+ *
  * PHP version 5
  *
  * @category  Microsoft
@@ -21,9 +21,9 @@
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
- 
-namespace WindowsAzure\Common\Internal\Serialization;
 
+namespace WindowsAzure\Common\Internal\Serialization;
+use WindowsAzure\Common\Internal\Validate;
 /**
  * Perform JSON serialization / deserialization
  *
@@ -37,53 +37,59 @@ namespace WindowsAzure\Common\Internal\Serialization;
  */
 class JsonSerializer implements ISerializer
 {
-    /** 
-     * Serialize an object with specified root element name. 
-     * 
-     * @param object $targetObject The target object. 
-     * @param string $rootName     The name of the root element. 
-     * 
+    /**
+     * Serialize an object with specified root element name.
+     *
+     * @param object $targetObject The target object.
+     * @param string $rootName     The name of the root element.
+     *
      * @return string
      */
     public static function objectSerialize($targetObject, $rootName)
     {
         Validate::notNull($targetObject, 'targetObject');
         Validate::isString($rootName, 'rootName');
-        
-        return json_encode($targetObject);
+
+        $contianer = new \stdClass();
+        $contianer->$rootName = $targetObject;
+
+        return json_encode($contianer);
     }
 
     /**
      * Serializes given array. The array indices must be string to use them as
      * as element name.
-     * 
+     *
      * @param array $array      The object to serialize represented in array.
      * @param array $properties The used properties in the serialization process.
-     * 
+     *
      * @return string
      */
     public function serialize($array, $properties = null)
     {
-        if (!is_array($array)) {
-            return false;
-        }
+        Validate::isArray($array, 'array');
+
         return json_encode($array);
     }
-    
+
     /**
      * Unserializes given serialized string to array.
-     * 
+     *
      * @param string $serialized The serialized object in string representation.
-     * 
+     *
      * @return array
      */
     public function unserialize($serialized)
     {
+        Validate::isString($serialized, 'serialized');
+
         $json = json_decode($serialized);
-        if (get_class($json) == 'stdClass') {
-            return get_object_vars($json);  
+        if ($json && !is_array($json))
+        {
+            return get_object_vars($json);
         }
-        else {
+        else
+        {
             return $json;
         }
     }

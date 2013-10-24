@@ -43,14 +43,6 @@ class MediaServicesSettingsTest extends \PHPUnit_Framework_TestCase
      * @covers WindowsAzure\Common\Internal\MediaServicesSettings::createFromConnectionString
      * @covers WindowsAzure\Common\Internal\MediaServicesSettings::init
      * @covers WindowsAzure\Common\Internal\MediaServicesSettings::__construct
-     * @covers WindowsAzure\Common\Internal\ServiceSettings::getValidator
-     * @covers WindowsAzure\Common\Internal\ServiceSettings::optional
-     * @covers WindowsAzure\Common\Internal\ServiceSettings::allRequired
-     * @covers WindowsAzure\Common\Internal\ServiceSettings::setting
-     * @covers WindowsAzure\Common\Internal\ServiceSettings::settingWithFunc
-     * @covers WindowsAzure\Common\Internal\ServiceSettings::matchedSpecification
-     * @covers WindowsAzure\Common\Internal\ServiceSettings::parseAndValidateKeys
-     * @covers WindowsAzure\Common\Internal\ServiceSettings::noMatch
      */
     public function testCreateFromConnectionStringWithAutomaticCase()
     {
@@ -75,14 +67,6 @@ class MediaServicesSettingsTest extends \PHPUnit_Framework_TestCase
      * @covers WindowsAzure\Common\Internal\MediaServicesSettings::createFromConnectionString
      * @covers WindowsAzure\Common\Internal\MediaServicesSettings::init
      * @covers WindowsAzure\Common\Internal\MediaServicesSettings::__construct
-     * @covers WindowsAzure\Common\Internal\ServiceSettings::getValidator
-     * @covers WindowsAzure\Common\Internal\ServiceSettings::optional
-     * @covers WindowsAzure\Common\Internal\ServiceSettings::allRequired
-     * @covers WindowsAzure\Common\Internal\ServiceSettings::setting
-     * @covers WindowsAzure\Common\Internal\ServiceSettings::settingWithFunc
-     * @covers WindowsAzure\Common\Internal\ServiceSettings::matchedSpecification
-     * @covers WindowsAzure\Common\Internal\ServiceSettings::parseAndValidateKeys
-     * @covers WindowsAzure\Common\Internal\ServiceSettings::noMatch
      */
     public function testCreateFromConnectionStringWithExplicitCase()
     {
@@ -109,14 +93,6 @@ class MediaServicesSettingsTest extends \PHPUnit_Framework_TestCase
      * @covers WindowsAzure\Common\Internal\MediaServicesSettings::createFromConnectionString
      * @covers WindowsAzure\Common\Internal\MediaServicesSettings::init
      * @covers WindowsAzure\Common\Internal\MediaServicesSettings::__construct
-     * @covers WindowsAzure\Common\Internal\ServiceSettings::getValidator
-     * @covers WindowsAzure\Common\Internal\ServiceSettings::optional
-     * @covers WindowsAzure\Common\Internal\ServiceSettings::allRequired
-     * @covers WindowsAzure\Common\Internal\ServiceSettings::setting
-     * @covers WindowsAzure\Common\Internal\ServiceSettings::settingWithFunc
-     * @covers WindowsAzure\Common\Internal\ServiceSettings::matchedSpecification
-     * @covers WindowsAzure\Common\Internal\ServiceSettings::parseAndValidateKeys
-     * @covers WindowsAzure\Common\Internal\ServiceSettings::noMatch
      */
     public function testCreateFromConnectionStringWithMissingKeyFail()
     {
@@ -133,14 +109,6 @@ class MediaServicesSettingsTest extends \PHPUnit_Framework_TestCase
      * @covers WindowsAzure\Common\Internal\MediaServicesSettings::createFromConnectionString
      * @covers WindowsAzure\Common\Internal\MediaServicesSettings::init
      * @covers WindowsAzure\Common\Internal\MediaServicesSettings::__construct
-     * @covers WindowsAzure\Common\Internal\ServiceSettings::getValidator
-     * @covers WindowsAzure\Common\Internal\ServiceSettings::optional
-     * @covers WindowsAzure\Common\Internal\ServiceSettings::allRequired
-     * @covers WindowsAzure\Common\Internal\ServiceSettings::setting
-     * @covers WindowsAzure\Common\Internal\ServiceSettings::settingWithFunc
-     * @covers WindowsAzure\Common\Internal\ServiceSettings::matchedSpecification
-     * @covers WindowsAzure\Common\Internal\ServiceSettings::parseAndValidateKeys
-     * @covers WindowsAzure\Common\Internal\ServiceSettings::noMatch
      */
     public function testCreateFromConnectionStringWithInvalidServiceManagementKeyFail()
     {
@@ -173,14 +141,6 @@ class MediaServicesSettingsTest extends \PHPUnit_Framework_TestCase
      * @covers WindowsAzure\Common\Internal\MediaServicesSettings::createFromConnectionString
      * @covers WindowsAzure\Common\Internal\MediaServicesSettings::init
      * @covers WindowsAzure\Common\Internal\MediaServicesSettings::__construct
-     * @covers WindowsAzure\Common\Internal\ServiceSettings::getValidator
-     * @covers WindowsAzure\Common\Internal\ServiceSettings::optional
-     * @covers WindowsAzure\Common\Internal\ServiceSettings::allRequired
-     * @covers WindowsAzure\Common\Internal\ServiceSettings::setting
-     * @covers WindowsAzure\Common\Internal\ServiceSettings::settingWithFunc
-     * @covers WindowsAzure\Common\Internal\ServiceSettings::matchedSpecification
-     * @covers WindowsAzure\Common\Internal\ServiceSettings::parseAndValidateKeys
-     * @covers WindowsAzure\Common\Internal\ServiceSettings::noMatch
      */
     public function testCreateFromConnectionStringWithCaseInsensitive()
     {

@@ -11,7 +11,7 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- * 
+ *
  * PHP version 5
  *
  * @category  Microsoft
@@ -21,12 +21,12 @@
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
- 
+
 namespace WindowsAzure\Common\Internal;
 use WindowsAzure\Common\Internal\Resources;
 
 /**
- * Represents the settings used to sign and access a request against the service 
+ * Represents the settings used to sign and access a request against the service
  * management. For more information about service management connection strings check
  * this page: http://msdn.microsoft.com/en-us/library/windowsazure/gg466228.aspx
  *
@@ -44,12 +44,12 @@ class MediaServicesSettings extends ServiceSettings
      * @var string
      */
     private $_accountName;
-    
+
     /**
      * @var string
      */
     private $_accessKey;
-    
+
     /**
      * @var string
      */
@@ -59,50 +59,50 @@ class MediaServicesSettings extends ServiceSettings
      * @var string
      */
     private $_oauthEndpointUri;
-    
+
     /**
      * Validator for the MediaServicesAccountName setting. It has to be provided.
-     * 
+     *
      * @var array
      */
     private static $_accountNameSetting;
-    
+
     /**
      * Validator for the MediaServicesAccessKey setting. It has to be provided.
-     * 
+     *
      * @var array
      */
     private static $_accessKeySetting;
-    
+
     /**
      * Validator for the MediaServicesEndpoint setting. Must be a valid Uri.
-     * 
+     *
      * @var array
      */
     private static $_endpointUriSetting;
-    
+
     /**
      * Validator for the MediaServicesOAuthEndpoint setting. Must be a valid Uri.
-     * 
+     *
      * @var array
      */
     private static $_oauthEndpointUriSetting;
-    
+
     /**
      * @var boolean
      */
     protected static $isInitialized = false;
-    
+
     /**
      * Holds the expected setting keys.
-     * 
+     *
      * @var array
      */
     protected static $validSettingKeys = array();
-    
+
     /**
      * Initializes static members of the class.
-     * 
+     *
      * @return none
      */
     protected static function init()
@@ -111,32 +111,32 @@ class MediaServicesSettings extends ServiceSettings
             Resources::MEDIA_SERVICES_ENDPOINT_URI_NAME,
             Validate::getIsValidUri()
         );
-        
+
         self::$_oauthEndpointUriSetting = self::settingWithFunc(
             Resources::MEDIA_SERVICES_OAUTH_ENDPOINT_URI_NAME,
             Validate::getIsValidUri()
         );
-        
+
         self::$_accountNameSetting = self::setting(
             Resources::MEDIA_SERVICES_ACCOUNT_NAME
         );
-        
+
         self::$_accessKeySetting = self::setting(
             Resources::MEDIA_SERVICES_ACCESS_KEY
         );
-        
+
         self::$validSettingKeys[] = Resources::MEDIA_SERVICES_ENDPOINT_URI_NAME;
         self::$validSettingKeys[] = Resources::MEDIA_SERVICES_OAUTH_ENDPOINT_URI_NAME;
         self::$validSettingKeys[] = Resources::MEDIA_SERVICES_ACCOUNT_NAME;
         self::$validSettingKeys[] = Resources::MEDIA_SERVICES_ACCESS_KEY;
     }
-    
+
     /**
      * Creates new media services settings instance.
-     * 
+     *
      * @param string $accountName         The user provided account name.
      * @param string $primaryAccessKey    The user provided primary access key
-     * @param string $secondaryAccessKey  The user provided secondary access key 
+     * @param string $secondaryAccessKey  The user provided secondary access key
      * @param string $endpointUri         The service management endpoint uri.
      */
     public function __construct($accountName, $accessKey, $endpointUri, $oauthEndpointUri)
@@ -146,18 +146,18 @@ class MediaServicesSettings extends ServiceSettings
         $this->_endpointUri  = $endpointUri;
         $this->_oauthEndpointUri  = $oauthEndpointUri;
     }
-    
+
     /**
      * Creates a MediaServicesSettings object from the given connection string.
-     * 
+     *
      * @param string $connectionString The media services settings connection string.
-     * 
+     *
      * @return MediaServicesSettings
      */
     public static function createFromConnectionString($connectionString)
     {
         $tokenizedSettings = self::parseAndValidateKeys($connectionString);
-        
+
         $matchedSpecs = self::matchedSpecification(
             $tokenizedSettings,
             self::allRequired(
@@ -195,34 +195,34 @@ class MediaServicesSettings extends ServiceSettings
                 $oauthEndpointUri
             );
         }
-        
+
         self::noMatch($connectionString);
     }
-    
+
     /**
      * Gets media services account name.
-     * 
+     *
      * @return string
      */
     public function getAccountName()
     {
         return $this->_accountName;
     }
-    
+
     /**
      * Gets media services access key.
-     * 
+     *
      * @return string
      */
     public function getAccessKey()
     {
         return $this->_accessKey;
     }
-    
+
     /**
      * Gets media services endpoint uri.
-     * 
-     * @return string 
+     *
+     * @return string
      */
     public function getEndpointUri()
     {
@@ -231,8 +231,8 @@ class MediaServicesSettings extends ServiceSettings
 
     /**
      * Gets media services OAuth endpoint uri.
-     * 
-     * @return string 
+     *
+     * @return string
      */
     public function getOAuthEndpointUri()
     {

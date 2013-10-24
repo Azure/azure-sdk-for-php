@@ -44,6 +44,7 @@ class OAuthRestProxyTest extends \PHPUnit_Framework_TestCase
 {
     /**
      * @covers WindowsAzure\Common\Internal\OAuthRestProxy::getAccessToken
+     * @covers WindowsAzure\Common\Internal\OAuthRestProxy::__construct
      */
     public function testGetAccessToken()
     {

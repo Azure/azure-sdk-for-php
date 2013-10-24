@@ -569,9 +569,13 @@ class TestResources
 
     public static function getSimpleJson()
     {
-        $data['data'] = array('k1' => 'test1', 'k2' => 'test2', 'k3' => 'test3');
-        $data['jsonArray'] = '["k1" : "test1", "k2" : "test2", "k3" : "test3"]';
-        $data['jsonObject'] = '{"k1" : "test1", "k2" : "test2", "k3" : "test3"}';
+        $data['dataArray'] = array('test1','test2','test3');
+        $data['jsonArray'] = '["test1","test2","test3"]';
+
+        $data['dataObject'] = array('k1' => 'test1', 'k2' => 'test2', 'k3' => 'test3');
+        $data['jsonObject'] = '{"k1":"test1","k2":"test2","k3":"test3"}';
+
+        return $data;
     }
 }
 
