@@ -39,6 +39,7 @@ use WindowsAzure\Common\Internal\Authentication\TableSharedKeyLiteAuthScheme;
 use WindowsAzure\Common\Internal\StorageServiceSettings;
 use WindowsAzure\Common\Internal\ServiceManagementSettings;
 use WindowsAzure\Common\Internal\ServiceBusSettings;
+use WindowsAzure\Common\Internal\MediaServicesSettings;
 use WindowsAzure\Queue\QueueRestProxy;
 use WindowsAzure\ServiceBus\ServiceBusRestProxy;
 use WindowsAzure\ServiceBus\WrapRestProxy;
@@ -46,6 +47,9 @@ use WindowsAzure\ServiceManagement\ServiceManagementRestProxy;
 use WindowsAzure\Table\TableRestProxy;
 use WindowsAzure\Table\Internal\AtomReaderWriter;
 use WindowsAzure\Table\Internal\MimeReaderWriter;
+use WindowsAzure\MediaServices\MediaServicesRestProxy;
+use WindowsAzure\Common\Internal\OAuthRestProxy;
+use WindowsAzure\Common\Internal\Authentication\OAuthScheme;
 
 
 /**
@@ -158,9 +162,9 @@ class ServicesBuilder
             $connectionString
         );
         
-        $httpClient    = $this->httpClient();
-        $serializer    = $this->serializer();
-        $uri           = Utilities::tryAddUrlScheme(
+        $httpClient = $this->httpClient();
+        $serializer = $this->serializer();
+        $uri        = Utilities::tryAddUrlScheme(
             $settings->getQueueEndpointUri()
         );
         
@@ -209,9 +213,9 @@ class ServicesBuilder
             $connectionString
         );
         
-        $httpClient    = $this->httpClient();
-        $serializer    = $this->serializer();
-        $uri           = Utilities::tryAddUrlScheme(
+        $httpClient = $this->httpClient();
+        $serializer = $this->serializer();
+        $uri        = Utilities::tryAddUrlScheme(
             $settings->getBlobEndpointUri()
         );
 
@@ -384,17 +388,65 @@ class ServicesBuilder
     
     /**
      * Builds a WRAP client.
-     * 
-     * @param string $wrapEndpointUri The WRAP endpoint uri.
      *
+     * @param string $wrapEndpointUri The WRAP endpoint uri.
+     * 
      * @return WindowsAzure\ServiceBus\Internal\IWrap
      */
     protected function createWrapService($wrapEndpointUri)
-    {   
+    {
         $httpClient  = $this->httpClient();
         $wrapWrapper = new WrapRestProxy($httpClient, $wrapEndpointUri);
-
+        
         return $wrapWrapper;
+    }
+    
+    /**
+     * Builds a media services object.
+     *
+     * @param string $connectionString The configuration connection string.
+     *
+     * @return WindowsAzure\MediaServices\Internal\IMediaServices
+     */
+    public function createMediaServicesService($connectionString)
+    {
+        $settings = MediaServicesSettings::createFromConnectionString(
+                $connectionString
+        );
+    
+        $httpClient      = new HttpClient();
+        $serializer      = $this->serializer();
+        $uri             = Utilities::tryAddUrlScheme(
+                $settings->getEndpointUri(),
+                Resources::HTTPS_SCHEME
+        );
+    
+        $mediaServicesWrapper = new MediaServicesRestProxy(
+                $httpClient,
+                $uri,
+                $settings->getAccountName(),
+                $serializer
+        );
+    
+        // Adding headers filter
+        $headers = array();
+        $headers[Resources::X_MS_VERSION] = Resources::MEDIA_SERVICES_API_LATEST_VERSION;
+        $headersFilter = new HeadersFilter($headers);
+        $mediaServicesWrapper = $mediaServicesWrapper->withFilter($headersFilter);
+    
+        // Adding OAuth filter
+        $oauthService = new OAuthRestProxy(new HttpClient(), $settings->getOAuthEndpointUri());
+        $authentification = new OAuthScheme(
+            $settings->getAccountName(),
+            $settings->getAccessKey(),
+            Resources::OAUTH_GT_CLIENT_CREDENTIALS,
+            Resources::MEDIA_SERVICES_OAUTH_SCOPE,
+            $oauthService
+        );
+        $authentificationFilter = new AuthenticationFilter($authentification);
+        $mediaServicesWrapper = $mediaServicesWrapper->withFilter($authentificationFilter);
+    
+        return $mediaServicesWrapper;
     }
     
     /**
