@@ -25,6 +25,8 @@
 namespace WindowsAzure\Common\Internal\Authentication;
 use WindowsAzure\Common\Internal\Resources;
 use WindowsAzure\Common\Internal\Utilities;
+use WindowsAzure\Common\Internal\Authentication\IAuthScheme;
+
 
 /**
  * Base class for azure authentication schemes.
@@ -37,7 +39,7 @@ use WindowsAzure\Common\Internal\Utilities;
  * @version   Release: 0.3.1_2011-08
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
-abstract class StorageAuthScheme
+abstract class StorageAuthScheme implements IAuthScheme
 {
     protected $accountName;
     protected $accountKey;
