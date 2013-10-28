@@ -11,17 +11,17 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- * 
+ *
  * PHP version 5
  *
  * @category  Microsoft
  * @package   WindowsAzure\Common\Internal
  * @author    Azure PHP SDK <azurephpsdk@microsoft.com>
- * @copyright 2012 Microsoft Corporation
+ * @copyright Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
- 
+
 namespace WindowsAzure\Common\Internal;
 use WindowsAzure\Common\Internal\Resources;
 use WindowsAzure\Common\Internal\ServiceRestProxy;
@@ -34,7 +34,7 @@ use WindowsAzure\Common\Internal\Serialization\JsonSerializer;
  * @category  Microsoft
  * @package   WindowsAzure\Common\Internal
  * @author    Azure PHP SDK <azurephpsdk@microsoft.com>
- * @copyright 2012 Microsoft Corporation
+ * @copyright Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @version   Release: @package_version@
  * @link      https://github.com/windowsazure/azure-sdk-for-php
@@ -52,7 +52,7 @@ class OAuthRestProxy extends ServiceRestProxy
         parent::__construct($channel, $uri, Resources::EMPTY_STRING, new JsonSerializer());
     }
 
-    
+
     /**
      * Get OAuth access token.
      *
@@ -61,38 +61,38 @@ class OAuthRestProxy extends ServiceRestProxy
      * @param string    $clientSecret   OAuth request clent_secret field value.
      * @param string    $scope          OAuth request scope field value.
      */
-    public function getAccessToken($grantType, $clientId, $clientSecret, $scope) 
+    public function getAccessToken($grantType, $clientId, $clientSecret, $scope)
     {
         $method         = Resources::HTTP_POST;
         $headers        = array();
         $queryParams    = array();
         $postParameters = array();
         $statusCode     = Resources::STATUS_OK;
-        
+
         $postParameters = $this->addPostParameter(
                 $postParameters,
                 Resources::OAUTH_GRANT_TYPE,
                 $grantType
         );
-        
+
         $postParameters = $this->addPostParameter(
                 $postParameters,
                 Resources::OAUTH_CLIENT_ID,
                 $clientId
         );
-        
+
         $postParameters = $this->addPostParameter(
                 $postParameters,
                 Resources::OAUTH_CLIENT_SECRET,
                 $clientSecret
         );
-        
+
         $postParameters = $this->addPostParameter(
                 $postParameters,
                 Resources::OAUTH_SCOPE,
                 $scope
         );
-        
+
         $response = $this->send(
                 $method,
                 $headers,
@@ -101,7 +101,7 @@ class OAuthRestProxy extends ServiceRestProxy
                 Resources::EMPTY_STRING,
                 $statusCode
         );
-        
+
         return OAuthAccessToken::create($this->dataSerializer->unserialize($response->getBody()));
     }
 }

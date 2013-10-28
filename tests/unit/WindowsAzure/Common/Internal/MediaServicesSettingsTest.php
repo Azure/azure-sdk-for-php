@@ -17,7 +17,7 @@
  * @category  Microsoft
  * @package   Tests\Unit\WindowsAzure\Common\Internal
  * @author    Azure PHP SDK <azurephpsdk@microsoft.com>
- * @copyright 2012 Microsoft Corporation
+ * @copyright Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
@@ -27,12 +27,12 @@ use WindowsAzure\Common\Internal\MediaServicesSettings;
 use WindowsAzure\Common\Internal\Resources;
 
 /**
- * Unit tests for class ServiceManagementSettings
+ * Unit tests for class MediaServicesSettings
  *
  * @category  Microsoft
  * @package   Tests\Unit\WindowsAzure\Common\Internal
  * @author    Azure PHP SDK <azurephpsdk@microsoft.com>
- * @copyright 2012 Microsoft Corporation
+ * @copyright Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @version   Release: @package_version@
  * @link      https://github.com/windowsazure/azure-sdk-for-php

@@ -17,7 +17,7 @@
  * @category  Microsoft
  * @package   WindowsAzure\Blob
  * @author    Azure PHP SDK <azurephpsdk@microsoft.com>
- * @copyright 2012 Microsoft Corporation
+ * @copyright Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
@@ -37,27 +37,13 @@ use WindowsAzure\MediaServices\Internal\IMediaServices;
  * @category  Microsoft
  * @package   WindowsAzure\MediaServices
  * @author    Azure PHP SDK <azurephpsdk@microsoft.com>
- * @copyright 2012 Microsoft Corporation
+ * @copyright Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @version   Release: @package_version@
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
 class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
 {
-    /**
-     * Initializes new MediaServicesProxy object.
-     *
-     * @param IHttpClient $channel        The HTTP client used to send HTTP requests.
-     * @param string      $uri            The storage account uri.
-     * @param string      $accountName    The name of the account.
-     * @param ISerializer $dataSerializer The data serializer.
-     */
-    public function __construct($channel, $uri, $accountName, $dataSerializer)
-    {
-        parent::__construct($channel, $uri, $accountName, $dataSerializer);
-    }
-
-
     /**
      * Sends HTTP request with the specified parameters.
      *
@@ -118,30 +104,4 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
 
         return $response;
     }
-
-    /**
-     * Initializes conncetion to media services
-     * @todo delete after scenario 1 checked
-     */
-    public function fooConnection()
-    {
-        $method      = Resources::HTTP_GET;
-        $headers     = array();
-        $queryParams = array();
-        $postParams  = array();
-        $path        = 'Assets';
-        $statusCodes = array(Resources::STATUS_OK, Resources::STATUS_MOVED_PERMANENTLY);
-
-        $response = $this->send(
-                $method,
-                $headers,
-                $queryParams,
-                $postParams,
-                $path,
-                $statusCodes
-        );
-
-        return $response;
-    }
-
 }
