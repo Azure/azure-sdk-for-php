@@ -62,7 +62,11 @@ class Resources
     const SHARED_SECRET_ISSUER_NAME = 'SharedSecretIssuer';
     const SHARED_SECRET_VALUE_NAME = 'SharedSecretValue';
     const STS_ENDPOINT_NAME = 'StsEndpoint';
-    
+    const MEDIA_SERVICES_ENDPOINT_URI_NAME = 'MediaServicesEndpoint';
+    const MEDIA_SERVICES_ACCOUNT_NAME = 'AccountName';
+    const MEDIA_SERVICES_ACCESS_KEY = 'AccessKey';
+    const MEDIA_SERVICES_OAUTH_ENDPOINT_URI_NAME = 'OAuthEndpoint';
+        
     // Messages
     const INVALID_TYPE_MSG = 'The provided variable should be of type: ';
     const INVALID_META_MSG = 'Metadata cannot contain newline characters.';
@@ -112,7 +116,9 @@ class Resources
     const INVALID_DEPLOYMENT_LOCATOR_MSG = 'A slot or deployment name must be provided.';
     const INVALID_CHANGE_MODE_MSG = "The change mode must be 'Auto' or 'Manual'. Use Mode class constants for that purpose.";
     const INVALID_DEPLOYMENT_STATUS_MSG = "The change mode must be 'Running' or 'Suspended'. Use DeploymentStatus class constants for that purpose.";
-
+    const ERROR_OAUTH_GET_ACCESS_TOKEN = 'Unable to get oauth access token for endpoint \'%s\', account name \'%s\'';
+    const ERROR_OAUTH_SERVICE_MISSING = 'OAuth service missing for account name \'%s\'';
+    
     // HTTP Headers
     const X_MS_HEADER_PREFIX                 = 'x-ms-';
     const X_MS_META_HEADER_PREFIX            = 'x-ms-meta-';
@@ -187,7 +193,17 @@ class Resources
     const WRAP_ACCESS_TOKEN_EXPIRES_IN = 'wrap_access_token_expires_in'; 
     const WRAP_NAME                    = 'wrap_name';
     const WRAP_PASSWORD                = 'wrap_password';
-    const WRAP_SCOPE                   = 'wrap_scope'; 
+    const WRAP_SCOPE                   = 'wrap_scope';
+
+    // OAuth
+    const OAUTH_GRANT_TYPE              = 'grant_type';
+    const OAUTH_CLIENT_ID               = 'client_id';
+    const OAUTH_CLIENT_SECRET           = 'client_secret';
+    const OAUTH_SCOPE                   = 'scope';
+    const OAUTH_GT_CLIENT_CREDENTIALS   = 'client_credentials';
+    const OAUTH_ACCESS_TOKEN            = 'access_token';
+    const OAUTH_EXPIRES_IN              = 'expires_in';
+    const OAUTH_ACCESS_TOKEN_PREFIX     = 'Bearer ';
     
     // HTTP Methods
     const HTTP_GET    = 'GET';
@@ -225,15 +241,16 @@ class Resources
     
 
     // Header values
-    const STORAGE_API_LATEST_VERSION     = '2011-08-18';
-    const SM_API_LATEST_VERSION          = '2011-10-01';
-    const DATA_SERVICE_VERSION_VALUE     = '1.0;NetFx';
-    const MAX_DATA_SERVICE_VERSION_VALUE = '2.0;NetFx';
-    const ACCEPT_HEADER_VALUE            = 'application/atom+xml,application/xml';
-    const ATOM_ENTRY_CONTENT_TYPE        = 'application/atom+xml;type=entry;charset=utf-8';
-    const ACCEPT_CHARSET_VALUE           = 'utf-8';
-    const INT32_MAX                      = 2147483647;
-
+    const STORAGE_API_LATEST_VERSION        = '2011-08-18';
+    const SM_API_LATEST_VERSION             = '2011-10-01';
+    const DATA_SERVICE_VERSION_VALUE        = '1.0;NetFx';
+    const MAX_DATA_SERVICE_VERSION_VALUE    = '2.0;NetFx';
+    const ACCEPT_HEADER_VALUE               = 'application/atom+xml,application/xml';
+    const ATOM_ENTRY_CONTENT_TYPE           = 'application/atom+xml;type=entry;charset=utf-8';
+    const ACCEPT_CHARSET_VALUE              = 'utf-8';
+    const INT32_MAX                         = 2147483647;
+    const MEDIA_SERVICES_API_LATEST_VERSION = '2.2';
+    
     // Query parameter names
     const QP_PREFIX             = 'Prefix';
     const QP_MAX_RESULTS        = 'MaxResults';
@@ -402,11 +419,12 @@ class Resources
     const PHP_URL_FRAGMENT = 'fragment';
     
     // Status Codes
-    const STATUS_OK              = 200;
-    const STATUS_CREATED         = 201;
-    const STATUS_ACCEPTED        = 202;
-    const STATUS_NO_CONTENT      = 204;
-    const STATUS_PARTIAL_CONTENT = 206;
+    const STATUS_OK                = 200;
+    const STATUS_CREATED           = 201;
+    const STATUS_ACCEPTED          = 202;
+    const STATUS_NO_CONTENT        = 204;
+    const STATUS_PARTIAL_CONTENT   = 206;
+    const STATUS_MOVED_PERMANENTLY = 301;
     
     // HTTP_Request2 config parameter names
     const USE_BRACKETS    = 'use_brackets';
@@ -415,6 +433,11 @@ class Resources
     const SSL_LOCAL_CERT  = 'ssl_local_cert';
     const SSL_CAFILE      = 'ssl_cafile';
     const CONNECT_TIMEOUT = 'connect_timeout';
+    
+    // Media services
+    const MEDIA_SERVICES_URL = 'https://media.windows.net/API';
+    const MEDIA_SERVICES_OAUTH_URL = 'https://wamsprodglobal001acs.accesscontrol.windows.net/v2/OAuth2-13';
+    const MEDIA_SERVICES_OAUTH_SCOPE = 'urn:WindowsAzureMediaServices';
     
     // @codingStandardsIgnoreEnd
 }

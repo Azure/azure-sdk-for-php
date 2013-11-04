@@ -11,7 +11,7 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- * 
+ *
  * PHP version 5
  *
  * @category  Microsoft
@@ -21,11 +21,12 @@
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
- 
+
 namespace Tests\Framework;
 use WindowsAzure\Table\Models\EdmType;
 use WindowsAzure\Table\Models\Entity;
 use WindowsAzure\Common\Internal\Utilities;
+use WindowsAzure\Common\Internal\Resources;
 
 /**
  * Resources for testing framework.
@@ -85,10 +86,10 @@ class TestResources
     public static function getEmulatorStorageServicesConnectionString()
     {
         $developmentStorageConnectionString = 'UseDevelopmentStorage=true';
-        
+
         return $developmentStorageConnectionString;
     }
-    
+
     public static function getServiceManagementConnectionString()
     {
         $connectionString = getenv('AZURE_SERVICE_MANAGEMENT_CONNECTION_STRING');
@@ -96,10 +97,10 @@ class TestResources
         if (empty($connectionString)) {
             throw new \Exception('AZURE_SERVICE_MANAGEMENT_CONNECTION_STRING envionment variable is missing');
         }
-        
+
         return $connectionString;
     }
-    
+
     public static function getServiceBusConnectionString()
     {
         $connectionString = getenv('AZURE_SERVICE_BUS_CONNECTION_STRING');
@@ -107,52 +108,63 @@ class TestResources
         if (empty($connectionString)) {
             throw new \Exception('AZURE_SERVICE_BUS_CONNECTION_STRING enviroment variable is missing.');
         }
-        
+
         return $connectionString;
     }
-    
+
     public static function simplePackageUrl()
     {
         $name = getenv('SERVICE_MANAGEMENT_SIMPLE_PACKAGE_URL');
-        
+
         if (empty($name)) {
             throw new \Exception('SERVICE_MANAGEMENT_SIMPLE_PACKAGE_URL envionment variable is missing');
         }
-        
+
         return $name;
     }
-    
+
     public static function simplePackageConfiguration()
     {
         $name = getenv('SERVICE_MANAGEMENT_SIMPLE_PACKAGE_CONFIGURATION');
-        
+
         if (empty($name)) {
             throw new \Exception('SERVICE_MANAGEMENT_SIMPLE_PACKAGE_CONFIGURATION envionment variable is missing');
         }
-        
+
         return $name;
     }
-    
+
     public static function complexPackageUrl()
     {
         $name = getenv('SERVICE_MANAGEMENT_COMPLEX_PACKAGE_URL');
-        
+
         if (empty($name)) {
             throw new \Exception('SERVICE_MANAGEMENT_COMPLEX_PACKAGE_URL envionment variable is missing');
         }
-        
+
         return $name;
     }
-    
+
     public static function complexPackageConfiguration()
     {
         $name = getenv('SERVICE_MANAGEMENT_COMPLEX_PACKAGE_CONFIGURATION');
-        
+
         if (empty($name)) {
             throw new \Exception('SERVICE_MANAGEMENT_COMPLEX_PACKAGE_CONFIGURATION envionment variable is missing');
         }
-        
+
         return $name;
+    }
+
+    public static function getMediaServicesConnectionString()
+    {
+        $connectionString = getenv('AZURE_MEDIA_SERVICES_CONNECTION_STRING');
+
+        if (empty($connectionString)) {
+            throw new \Exception('AZURE_MEDIA_SERVICES_CONNECTION_STRING enviroment variable is missing.');
+        }
+
+        return $connectionString;
     }
 
     public static function getServicePropertiesSample()
@@ -169,10 +181,10 @@ class TestResources
         $sample['Metrics']['IncludeAPIs'] = 'false';
         $sample['Metrics']['RetentionPolicy']['Enabled'] = 'true';
         $sample['Metrics']['RetentionPolicy']['Days'] = '20';
-        
+
         return $sample;
     }
-    
+
     public static function setServicePropertiesSample()
     {
         $sample = array();
@@ -187,10 +199,10 @@ class TestResources
         $sample['Metrics']['IncludeAPIs'] = 'false';
         $sample['Metrics']['RetentionPolicy']['Enabled'] = 'true';
         $sample['Metrics']['RetentionPolicy']['Days'] = '10';
-        
+
         return $sample;
     }
-    
+
     public static function listMessagesSample()
     {
         $sample = array();
@@ -201,10 +213,10 @@ class TestResources
         $sample['QueueMessage']['TimeNextVisible'] = 'Fri, 09 Oct 2009 23:29:20 GMT';
         $sample['QueueMessage']['DequeueCount']    = '1';
         $sample['QueueMessage']['MessageText']     = 'PHRlc3Q+dGhpcyBpcyBhIHRlc3QgbWVzc2FnZTwvdGVzdD4=';
-        
+
         return $sample;
     }
-    
+
     public static function listMessagesMultipleMessagesSample()
     {
         $sample = array();
@@ -215,7 +227,7 @@ class TestResources
         $sample['QueueMessage'][0]['TimeNextVisible'] = 'Fri, 09 Oct 2009 23:29:20 GMT';
         $sample['QueueMessage'][0]['DequeueCount']    = '1';
         $sample['QueueMessage'][0]['MessageText']     = 'PHRlc3Q+dGhpcyBpcyBhIHRlc3QgbWVzc2FnZTwvdGVzdD4=';
-        
+
         $sample['QueueMessage'][1]['MessageId']       = '1234c20-0df3-4e2d-ad0c-18e3892bfca2';
         $sample['QueueMessage'][1]['InsertionTime']   = 'Sat, 10 Feb 2010 21:04:30 GMT';
         $sample['QueueMessage'][1]['ExpirationTime']  = 'Sat, 05 Jun 2010 21:04:30 GMT';
@@ -223,19 +235,19 @@ class TestResources
         $sample['QueueMessage'][1]['TimeNextVisible'] = 'Sun, 09 Oct 2009 23:29:20 GMT';
         $sample['QueueMessage'][1]['DequeueCount']    = '4';
         $sample['QueueMessage'][1]['MessageText']     = 'QWEFGlsc3Q+dGhpcyBpcyBhIHRlc3QgbWVzc2FnZTwvdGVzdD4=';
-        
+
         return $sample;
     }
-    
+
     public static function listQueuesEmpty()
     {
         $sample = array();
         $sample['Queues'] = '';
         $sample['NextMarker'] = '';
-        
+
         return $sample;
     }
-    
+
     public static function listQueuesOneEntry()
     {
         $sample = array();
@@ -243,10 +255,10 @@ class TestResources
         $sample['MaxResults'] = '2';
         $sample['Queues'] = array('Queue' => array('Name' => 'myqueue', 'Url' => 'http://account.queue.core.windows.net/myqueue'));
         $sample['NextMarker'] = '';
-        
+
         return $sample;
     }
-    
+
     public static function listQueuesMultipleEntries()
     {
         $sample = array();
@@ -256,19 +268,19 @@ class TestResources
           1 => array('Name' => 'myqueue2', 'Url' => 'http://account.queue.core.windows.net/myqueue2')
         ));
         $sample['NextMarker'] = '/account/myqueue3';
-        
+
         return $sample;
     }
-    
+
     public static function listContainersEmpty()
     {
         $sample = array();
         $sample['Containers'] = '';
         $sample['NextMarker'] = '';
-        
+
         return $sample;
     }
-    
+
     public static function listContainersOneEntry()
     {
         $sample = array();
@@ -283,10 +295,10 @@ class TestResources
             )
             ));
         $sample['NextMarker'] = '';
-        
+
         return $sample;
     }
-    
+
     public static function listContainersMultipleEntries()
     {
         $sample = array();
@@ -310,10 +322,10 @@ class TestResources
             )
         ));
         $sample['NextMarker'] = 'video';
-        
+
         return $sample;
     }
-    
+
     public static function getContainerAclOneEntrySample()
     {
         $sample = array();
@@ -324,10 +336,10 @@ class TestResources
                 'Expiry' => '2009-09-29T08%3A49%3A37.0000000Z',
                 'Permission' => 'rwd')
             ));
-        
+
         return $sample;
     }
-    
+
     public static function getContainerAclMultipleEntriesSample()
     {
         $sample = array();
@@ -343,19 +355,19 @@ class TestResources
                 'Expiry' => '2009-09-29T08%3A49%3A37.0000000Z',
                 'Permission' => 'rwd'))
             ));
-        
+
         return $sample;
     }
-    
+
     public static function listBlobsEmpty()
     {
         $sample = array();
         $sample['Blobs'] = '';
         $sample['NextMarker'] = '';
-        
+
         return $sample;
     }
-    
+
     public static function listBlobsOneEntry()
     {
         $sample = array();
@@ -366,7 +378,7 @@ class TestResources
         $sample['Blobs'] = array(
             'BlobPrefix' => array('Name' => 'myblobprefix'),
             'Blob' => array(
-                'Name' => 'myblob', 
+                'Name' => 'myblob',
                 'Url' => 'http://account.blob.core.windows.net/myblob',
                 'Snapshot' => '10-12-2011',
                 'Metadata' => array('Name1' => 'Value1', 'Name2' => 'Value2'),
@@ -385,12 +397,12 @@ class TestResources
                 )
             )
         );
-        
+
         $sample['NextMarker'] = '';
-        
+
         return $sample;
     }
-    
+
     public static function listBlobsMultipleEntries()
     {
         $sample = array();
@@ -401,7 +413,7 @@ class TestResources
                 0 => array('Name' => 'myblobprefix'),
                 1 => array('Name' => 'myblobprefix2')),
             'Blob' => array( 0 => array(
-                'Name' => 'myblob', 
+                'Name' => 'myblob',
                 'Url' => 'http://account.blob.core.windows.net/myblob',
                 'Snapshot' => '10-12-2011',
                 'Metadata' => array('Name1' => 'Value1', 'Name2' => 'Value2'),
@@ -419,9 +431,9 @@ class TestResources
                     'LeaseStatus' => 'locked'
                 )
             ),
-            
+
             1 => array(
-                'Name' => 'myblob2', 
+                'Name' => 'myblob2',
                 'Url' => 'http://account.blob.core.windows.net/myblob2',
                 'Snapshot' => '10-12-2011',
                 'Metadata' => array('Name1' => 'Value1', 'Name2' => 'Value2'),
@@ -439,12 +451,12 @@ class TestResources
                     'LeaseStatus' => 'unlocked'
                 )
             )));
-        
+
         $sample['NextMarker'] = 'value';
-        
+
         return $sample;
     }
-    
+
     public static function getTestEntity($partitionKey, $rowKey)
     {
         $entity = new Entity();
@@ -454,8 +466,33 @@ class TestResources
         $entity->addProperty('CustomerName', null, 'John');
         $entity->addProperty('IsNew', EdmType::BOOLEAN, true);
         $entity->addProperty('JoinDate', EdmType::DATETIME, Utilities::convertToDateTime('2012-01-26T18:26:19.0000473Z'));
-        
+
         return $entity;
+    }
+
+    public static function getTestOAuthAccessToken()
+    {
+        $token = array(
+            Resources::OAUTH_ACCESS_TOKEN => 'http%3a%2f%2fschemas.xmlsoap.org%2fws%2f2005%2f05%2fidentity%2fclaims%2fnameidentifier=client_id&http%3a%2f%2fschemas.microsoft.com%2f'
+                . 'accesscontrolservice%2f2010%2f07%2fclaims%2fidentityprovider=https%3a%2f%2fwamsprodglobal001acs.accesscontrol.windows.net%2f&Audience=urn%3aWindows'
+                . 'AzureMediaServices&ExpiresOn=1326498007&Issuer=https%3a%2f%2f wamsprodglobal001acs.accesscontrol.windows.net%2f&HMACSHA256=hV1WF7sTe%2ffoHqzK%2ftm'
+                . 'nwQY22NRPaDytcOOpC9Nv4DA%3d","token_type":"http://schemas.xmlsoap.org/ws/2009/11/swt-token-profile-1.0',
+            Resources::OAUTH_EXPIRES_IN => '3599',
+            Resources::OAUTH_SCOPE => 'urn:WindowsAzureMediaServices'
+        );
+
+        return $token;
+    }
+
+    public static function getSimpleJson()
+    {
+        $data['dataArray'] = array('test1','test2','test3');
+        $data['jsonArray'] = '["test1","test2","test3"]';
+
+        $data['dataObject'] = array('k1' => 'test1', 'k2' => 'test2', 'k3' => 'test3');
+        $data['jsonObject'] = '{"k1":"test1","k2":"test2","k3":"test3"}';
+
+        return $data;
     }
 }
 
