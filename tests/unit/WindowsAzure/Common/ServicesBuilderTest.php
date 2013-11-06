@@ -11,7 +11,7 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- * 
+ *
  * PHP version 5
  *
  * @category  Microsoft
@@ -25,6 +25,7 @@
 namespace Tests\Unit\WindowsAzure\Common;
 use Tests\Framework\TestResources;
 use WindowsAzure\Common\Internal\Resources;
+use WindowsAzure\Common\Internal\MediaServicesSettings;
 use WindowsAzure\Common\ServicesBuilder;
 use WindowsAzure\Common\Configuration;
 use WindowsAzure\Common\Internal\InvalidArgumentTypeException;
@@ -52,14 +53,14 @@ class ServicesBuilderTest extends \PHPUnit_Framework_TestCase
     {
         // Setup
         $builder = new ServicesBuilder();
-        
+
         // Test
         $queueRestProxy = $builder->createQueueService(TestResources::getWindowsAzureStorageServicesConnectionString());
-        
+
         // Assert
         $this->assertInstanceOf('WindowsAzure\Queue\Internal\IQueue', $queueRestProxy);
     }
-    
+
     /**
      * @covers WindowsAzure\Common\ServicesBuilder::createBlobService
      * @covers WindowsAzure\Common\ServicesBuilder::httpClient
@@ -70,14 +71,14 @@ class ServicesBuilderTest extends \PHPUnit_Framework_TestCase
     {
         // Setup
         $builder = new ServicesBuilder();
-        
+
         // Test
         $blobRestProxy = $builder->createBlobService(TestResources::getWindowsAzureStorageServicesConnectionString());
-        
+
         // Assert
         $this->assertInstanceOf('WindowsAzure\Blob\Internal\IBlob', $blobRestProxy);
     }
-    
+
     /**
      * @covers WindowsAzure\Common\ServicesBuilder::createTableService
      * @covers WindowsAzure\Common\ServicesBuilder::httpClient
@@ -90,14 +91,14 @@ class ServicesBuilderTest extends \PHPUnit_Framework_TestCase
     {
         // Setup
         $builder = new ServicesBuilder();
-        
+
         // Test
         $tableRestProxy = $builder->createTableService(TestResources::getWindowsAzureStorageServicesConnectionString());
-        
+
         // Assert
         $this->assertInstanceOf('WindowsAzure\Table\Internal\ITable', $tableRestProxy);
     }
-    
+
     /**
      * @covers WindowsAzure\Common\ServicesBuilder::createServiceManagementService
      * @covers WindowsAzure\Common\ServicesBuilder::httpClient
@@ -107,14 +108,14 @@ class ServicesBuilderTest extends \PHPUnit_Framework_TestCase
     {
         // Setup
         $builder = new ServicesBuilder();
-        
+
         // Test
         $serviceManagementRestProxy = $builder->createServiceManagementService(TestResources::getServiceManagementConnectionString());
-        
+
         // Assert
         $this->assertInstanceOf('WindowsAzure\ServiceManagement\Internal\IServiceManagement', $serviceManagementRestProxy);
     }
-    
+
     /**
      * @covers WindowsAzure\Common\ServicesBuilder::createServiceBusService
      * @covers WindowsAzure\Common\ServicesBuilder::createWrapService
@@ -125,14 +126,31 @@ class ServicesBuilderTest extends \PHPUnit_Framework_TestCase
     {
         // Setup
         $builder = new ServicesBuilder();
-        
+
         // Test
         $serviceBusRestProxy = $builder->createServiceBusService(TestResources::getServiceBusConnectionString());
-        
+
         // Assert
         $this->assertInstanceOf('WindowsAzure\ServiceBus\Internal\IServiceBus', $serviceBusRestProxy);
     }
-    
+
+    /**
+     * @covers WindowsAzure\Common\ServicesBuilder::createMediaServicesService
+     */
+    public function testBuildForMediaServices()
+    {
+        // Setup
+        $builder            = new ServicesBuilder();
+        $connection         = TestResources::getMediaServicesConnectionParameters();
+        $settings           = new MediaServicesSettings($connection['accountName'], $connection['accessKey']);
+
+        // Test
+        $mediaServicesRestProxy = $builder->createMediaServicesService($settings);
+
+        // Assert
+        $this->assertInstanceOf('WindowsAzure\MediaServices\Internal\IMediaServices', $mediaServicesRestProxy);
+    }
+
     /**
      * @covers WindowsAzure\Common\ServicesBuilder::getInstance
      */
@@ -140,7 +158,7 @@ class ServicesBuilderTest extends \PHPUnit_Framework_TestCase
     {
         // Test
         $actual = ServicesBuilder::getInstance();
-        
+
         // Assert
         $this->assertInstanceOf('WindowsAzure\Common\ServicesBuilder', $actual);
     }

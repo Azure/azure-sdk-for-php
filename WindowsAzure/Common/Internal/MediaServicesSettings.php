@@ -139,8 +139,31 @@ class MediaServicesSettings extends ServiceSettings
      * @param string $secondaryAccessKey  The user provided secondary access key
      * @param string $endpointUri         The service management endpoint uri.
      */
-    public function __construct($accountName, $accessKey, $endpointUri, $oauthEndpointUri)
+    public function __construct($accountName, $accessKey, $endpointUri = null, $oauthEndpointUri = null)
     {
+        Validate::notNullOrEmpty($accountName, 'accountName');
+        Validate::notNullOrEmpty($accessKey, 'accountKey');
+        Validate::isString($accountName, 'accountName');
+        Validate::isString($accessKey, 'accountKey');
+
+        if ($endpointUri != null)
+        {
+            Validate::isValidUri($endpointUri);
+        }
+        else
+        {
+            $endpointUri = Resources::MEDIA_SERVICES_URL;
+        }
+
+        if ($oauthEndpointUri != null)
+        {
+            Validate::isValidUri($oauthEndpointUri);
+        }
+        else
+        {
+            $oauthEndpointUri = Resources::MEDIA_SERVICES_OAUTH_URL;
+        }
+
         $this->_accountName = $accountName;
         $this->_accessKey = $accessKey;
         $this->_endpointUri  = $endpointUri;

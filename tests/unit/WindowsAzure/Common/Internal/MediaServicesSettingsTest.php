@@ -166,6 +166,48 @@ class MediaServicesSettingsTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * @covers WindowsAzure\Common\Internal\MediaServicesSettings::__construct
+     */
+    public function testCreateDefaults()
+    {
+        // Setup
+        $accountName = 'testAccount';
+        $accessKey = 'testKey';
+        $endpointUri = Resources::MEDIA_SERVICES_URL;
+        $oauthEndpointUri = Resources::MEDIA_SERVICES_OAUTH_URL;
+
+        // Test
+        $settings = new MediaServicesSettings($accountName,  $accessKey);
+
+        // Assert
+        $this->assertEquals($accountName, $settings->getAccountName());
+        $this->assertEquals($accessKey, $settings->getAccessKey());
+        $this->assertEquals($endpointUri, $settings->getEndpointUri());
+        $this->assertEquals($oauthEndpointUri, $settings->getOauthEndpointUri());
+    }
+
+    /**
+     * @covers WindowsAzure\Common\Internal\MediaServicesSettings::__construct
+     */
+    public function testCreateCustom()
+    {
+        // Setup
+        $accountName = 'testAccount';
+        $accessKey = 'testKey';
+        $endpointUri = 'http://test.com';
+        $oauthEndpointUri = 'http://test.com';
+
+        // Test
+        $settings = new MediaServicesSettings($accountName, $accessKey, $endpointUri, $oauthEndpointUri);
+
+        // Assert
+        $this->assertEquals($accountName, $settings->getAccountName());
+        $this->assertEquals($accessKey, $settings->getAccessKey());
+        $this->assertEquals($endpointUri, $settings->getEndpointUri());
+        $this->assertEquals($oauthEndpointUri, $settings->getOauthEndpointUri());
+    }
+
+    /**
      * @covers WindowsAzure\Common\Internal\MediaServicesSettings::getAccountName
      */
     public function testGetAccountName()
@@ -174,7 +216,7 @@ class MediaServicesSettingsTest extends \PHPUnit_Framework_TestCase
         $data = 'test';
 
         // Test
-        $settings = new MediaServicesSettings($data, null, null, null, null);
+        $settings = new MediaServicesSettings($data, 'test');
 
         // Assert
         $this->assertEquals($data, $settings->getAccountName());
@@ -189,7 +231,7 @@ class MediaServicesSettingsTest extends \PHPUnit_Framework_TestCase
         $data = 'test';
 
         // Test
-        $settings = new MediaServicesSettings(null, $data, null, null, null);
+        $settings = new MediaServicesSettings('test', $data);
 
         // Assert
         $this->assertEquals($data, $settings->getAccessKey());
@@ -200,10 +242,10 @@ class MediaServicesSettingsTest extends \PHPUnit_Framework_TestCase
     public function testGetEndpointUri()
     {
         // Setup
-        $data = 'test';
+        $data = 'http://test.com';
 
         // Test
-        $settings = new MediaServicesSettings(null, null, $data, null);
+        $settings = new MediaServicesSettings('test', 'test', $data);
 
         // Assert
         $this->assertEquals($data, $settings->getEndpointUri());
@@ -214,10 +256,10 @@ class MediaServicesSettingsTest extends \PHPUnit_Framework_TestCase
     public function testGetOAuthEndpointUri()
     {
         // Setup
-        $data = 'test';
+        $data = 'http://test.com';
 
         // Test
-        $settings = new MediaServicesSettings(null, null, null, $data);
+        $settings = new MediaServicesSettings('test', 'test', null, $data);
 
         // Assert
         $this->assertEquals($data, $settings->getOAuthEndpointUri());

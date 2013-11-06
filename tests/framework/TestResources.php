@@ -73,16 +73,16 @@ class TestResources
     const STATUS_INTERNAL_SERVER_ERROR = 500;
 
     public static function getWindowsAzureStorageServicesConnectionString()
-    {        
+    {
         $connectionString = getenv('AZURE_STORAGE_CONNECTION_STRING');
-        
+
         if (empty($connectionString)) {
             throw new \Exception('AZURE_STORAGE_CONNECTION_STRING envionment variable is missing');
         }
-        
+
         return $connectionString;
     }
-    
+
     public static function getEmulatorStorageServicesConnectionString()
     {
         $developmentStorageConnectionString = 'UseDevelopmentStorage=true';
@@ -93,7 +93,7 @@ class TestResources
     public static function getServiceManagementConnectionString()
     {
         $connectionString = getenv('AZURE_SERVICE_MANAGEMENT_CONNECTION_STRING');
-        
+
         if (empty($connectionString)) {
             throw new \Exception('AZURE_SERVICE_MANAGEMENT_CONNECTION_STRING envionment variable is missing');
         }
@@ -104,7 +104,7 @@ class TestResources
     public static function getServiceBusConnectionString()
     {
         $connectionString = getenv('AZURE_SERVICE_BUS_CONNECTION_STRING');
-        
+
         if (empty($connectionString)) {
             throw new \Exception('AZURE_SERVICE_BUS_CONNECTION_STRING enviroment variable is missing.');
         }
@@ -156,15 +156,25 @@ class TestResources
         return $name;
     }
 
-    public static function getMediaServicesConnectionString()
+    public static function getMediaServicesConnectionParameters()
     {
-        $connectionString = getenv('AZURE_MEDIA_SERVICES_CONNECTION_STRING');
+        return array(
+            'accountName'       => self::getEnvironmentVariable('AZURE_MEDIA_SERVICES_ACCOUNT_NAME'),
+            'accessKey'         => self::getEnvironmentVariable('AZURE_MEDIA_SERVICES_ACCESS_KEY'),
+            'endpointUri'       => self::getEnvironmentVariable('AZURE_MEDIA_SERVICES_ENDPOINT_URI', false),
+            'oauthEndopointUri' => self::getEnvironmentVariable('AZURE_MEDIA_SERVICES_OAUTH_ENDPOINT_URI', false),
+        );
+    }
 
-        if (empty($connectionString)) {
-            throw new \Exception('AZURE_MEDIA_SERVICES_CONNECTION_STRING enviroment variable is missing.');
+    private static function getEnvironmentVariable($name, $required = true)
+    {
+        $value = getenv($name);
+
+        if (empty($value) && $required) {
+            throw new \Exception("{$name} enviroment variable is missing.");
         }
 
-        return $connectionString;
+        return $value;
     }
 
     public static function getServicePropertiesSample()

@@ -51,8 +51,8 @@ class OAuthRestProxyTest extends \PHPUnit_Framework_TestCase
         // Setup
         $channel            = new HttpClient();
         $uri                = Resources::MEDIA_SERVICES_OAUTH_URL;
-        $connectionString   = TestResources::getMediaServicesConnectionString();
-        $settings           = MediaServicesSettings::createFromConnectionString($connectionString);
+        $connection         = TestResources::getMediaServicesConnectionParameters();
+        $settings           = new MediaServicesSettings($connection['accountName'], $connection['accessKey']);
         $scope              = Resources::MEDIA_SERVICES_OAUTH_SCOPE;
 
         // Test

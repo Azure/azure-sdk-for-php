@@ -76,8 +76,8 @@ class OAuthSchemeTest extends \PHPUnit_Framework_TestCase
         // OAuth REST setup
         $channel            = new HttpClient();
         $uri                = Resources::MEDIA_SERVICES_OAUTH_URL;
-        $connectionString   = TestResources::getMediaServicesConnectionString();
-        $settings           = MediaServicesSettings::createFromConnectionString($connectionString);
+        $connection         = TestResources::getMediaServicesConnectionParameters();
+        $settings           = new MediaServicesSettings($connection['accountName'], $connection['accessKey']);
         $scope              = Resources::MEDIA_SERVICES_OAUTH_SCOPE;
         $grantType          = Resources::OAUTH_GT_CLIENT_CREDENTIALS;
         $rest               = new OAuthRestProxy($channel, $uri);
@@ -106,8 +106,8 @@ class OAuthSchemeTest extends \PHPUnit_Framework_TestCase
         // OAuth REST setup
         $channel            = new HttpClient();
         $uri                = Resources::MEDIA_SERVICES_OAUTH_URL;
-        $connectionString   = TestResources::getMediaServicesConnectionString();
-        $settings           = MediaServicesSettings::createFromConnectionString($connectionString);
+        $connection         = TestResources::getMediaServicesConnectionParameters();
+        $settings           = new MediaServicesSettings($connection['accountName'], $connection['accessKey']);
         $scope              = Resources::MEDIA_SERVICES_OAUTH_SCOPE;
         $grantType          = Resources::OAUTH_GT_CLIENT_CREDENTIALS;
         $rest               = new OAuthRestProxy($channel, $uri);

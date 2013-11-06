@@ -11,7 +11,7 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- * 
+ *
  * PHP version 5
  *
  * @category  Microsoft
@@ -21,7 +21,7 @@
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
- 
+
 namespace WindowsAzure\Common;
 use WindowsAzure\Blob\BlobRestProxy;
 use WindowsAzure\Common\Internal\Resources;
@@ -69,40 +69,40 @@ class ServicesBuilder
      * @var ServicesBuilder
      */
     private static $_instance = null;
-    
+
     /**
      * Gets the HTTP client used in the REST services construction.
-     * 
+     *
      * @return WindowsAzure\Common\Internal\Http\IHttpClient
      */
     protected function httpClient()
     {
         return new HttpClient();
     }
-    
+
     /**
      * Gets the serializer used in the REST services construction.
-     * 
+     *
      * @return WindowsAzure\Common\Internal\Serialization\ISerializer
      */
     protected function serializer()
     {
         return new XmlSerializer();
     }
-    
+
     /**
      * Gets the MIME serializer used in the REST services construction.
-     * 
+     *
      * @return \WindowsAzure\Table\Internal\IMimeReaderWriter
      */
     protected function mimeSerializer()
     {
         return new MimeReaderWriter();
     }
-    
+
     /**
      * Gets the Atom serializer used in the REST services construction.
-     * 
+     *
      * @return \WindowsAzure\Table\Internal\IAtomReaderWriter
      */
     protected function atomSerializer()
@@ -112,63 +112,63 @@ class ServicesBuilder
 
     /**
      * Gets the Queue authentication scheme.
-     * 
+     *
      * @param string $accountName The account name.
      * @param string $accountKey  The account key.
-     * 
+     *
      * @return \WindowsAzure\Common\Internal\Authentication\StorageAuthScheme
      */
     protected function queueAuthenticationScheme($accountName, $accountKey)
     {
         return new SharedKeyAuthScheme($accountName, $accountKey);
     }
-    
+
     /**
      * Gets the Blob authentication scheme.
-     * 
+     *
      * @param string $accountName The account name.
      * @param string $accountKey  The account key.
-     * 
+     *
      * @return \WindowsAzure\Common\Internal\Authentication\StorageAuthScheme
      */
     protected function blobAuthenticationScheme($accountName, $accountKey)
     {
         return new SharedKeyAuthScheme($accountName, $accountKey);
     }
-    
+
     /**
      * Gets the Table authentication scheme.
-     * 
+     *
      * @param string $accountName The account name.
      * @param string $accountKey  The account key.
-     * 
+     *
      * @return TableSharedKeyLiteAuthScheme
      */
     protected function tableAuthenticationScheme($accountName, $accountKey)
     {
         return new TableSharedKeyLiteAuthScheme($accountName, $accountKey);
     }
-    
+
     /**
      * Builds a WRAP client.
-     * 
+     *
      * @param string $wrapEndpointUri The WRAP endpoint uri.
      *
      * @return WindowsAzure\ServiceBus\Internal\IWrap
      */
     protected function createWrapService($wrapEndpointUri)
-    {   
+    {
         $httpClient  = $this->httpClient();
         $wrapWrapper = new WrapRestProxy($httpClient, $wrapEndpointUri);
 
         return $wrapWrapper;
     }
-    
+
     /**
      * Builds a queue object.
      *
      * @param string $connectionString The configuration connection string.
-     * 
+     *
      * @return WindowsAzure\Queue\Internal\IQueue
      */
     public function createQueueService($connectionString)
@@ -176,28 +176,28 @@ class ServicesBuilder
         $settings = StorageServiceSettings::createFromConnectionString(
             $connectionString
         );
-        
+
         $httpClient = $this->httpClient();
         $serializer = $this->serializer();
         $uri        = Utilities::tryAddUrlScheme(
             $settings->getQueueEndpointUri()
         );
-        
+
         $queueWrapper = new QueueRestProxy(
-            $httpClient, 
+            $httpClient,
             $uri,
-            $settings->getName(), 
+            $settings->getName(),
             $serializer
         );
 
         // Adding headers filter
         $headers = array();
-        
+
         $headers[Resources::X_MS_VERSION] = Resources::STORAGE_API_LATEST_VERSION;
-        
+
         $headersFilter = new HeadersFilter($headers);
         $queueWrapper  = $queueWrapper->withFilter($headersFilter);
-        
+
         // Adding date filter
         $dateFilter   = new DateFilter();
         $queueWrapper = $queueWrapper->withFilter($dateFilter);
@@ -214,12 +214,12 @@ class ServicesBuilder
 
         return $queueWrapper;
     }
-    
+
     /**
      * Builds a blob object.
      *
      * @param string $connectionString The configuration connection string.
-     * 
+     *
      * @return WindowsAzure\Blob\Internal\IBlob
      */
     public function createBlobService($connectionString)
@@ -227,7 +227,7 @@ class ServicesBuilder
         $settings = StorageServiceSettings::createFromConnectionString(
             $connectionString
         );
-        
+
         $httpClient = $this->httpClient();
         $serializer = $this->serializer();
         $uri        = Utilities::tryAddUrlScheme(
@@ -235,7 +235,7 @@ class ServicesBuilder
         );
 
         $blobWrapper = new BlobRestProxy(
-            $httpClient, 
+            $httpClient,
             $uri,
             $settings->getName(),
             $serializer
@@ -243,12 +243,12 @@ class ServicesBuilder
 
         // Adding headers filter
         $headers = array();
-        
+
         $headers[Resources::X_MS_VERSION] = Resources::STORAGE_API_LATEST_VERSION;
-        
+
         $headersFilter = new HeadersFilter($headers);
         $blobWrapper   = $blobWrapper->withFilter($headersFilter);
-        
+
         // Adding date filter
         $dateFilter  = new DateFilter();
         $blobWrapper = $blobWrapper->withFilter($dateFilter);
@@ -269,7 +269,7 @@ class ServicesBuilder
      * Builds a table object.
      *
      * @param string $connectionString The configuration connection string.
-     * 
+     *
      * @return WindowsAzure\Table\Internal\ITable
      */
     public function createTableService($connectionString)
@@ -277,7 +277,7 @@ class ServicesBuilder
         $settings = StorageServiceSettings::createFromConnectionString(
             $connectionString
         );
-        
+
         $httpClient     = $this->httpClient();
         $atomSerializer = $this->atomSerializer();
         $mimeSerializer = $this->mimeSerializer();
@@ -301,17 +301,17 @@ class ServicesBuilder
         $maxVersion            = Resources::MAX_DATA_SERVICE_VERSION_VALUE;
         $accept                = Resources::ACCEPT_HEADER_VALUE;
         $acceptCharset         = Resources::ACCEPT_CHARSET_VALUE;
-        
+
         $headers[Resources::X_MS_VERSION]             = $latestServicesVersion;
         $headers[Resources::DATA_SERVICE_VERSION]     = $currentVersion;
         $headers[Resources::MAX_DATA_SERVICE_VERSION] = $maxVersion;
         $headers[Resources::MAX_DATA_SERVICE_VERSION] = $maxVersion;
         $headers[Resources::ACCEPT_HEADER]            = $accept;
         $headers[Resources::ACCEPT_CHARSET]           = $acceptCharset;
-        
+
         $headersFilter = new HeadersFilter($headers);
         $tableWrapper  = $tableWrapper->withFilter($headersFilter);
-        
+
         // Adding date filter
         $dateFilter   = new DateFilter();
         $tableWrapper = $tableWrapper->withFilter($dateFilter);
@@ -328,12 +328,12 @@ class ServicesBuilder
 
         return $tableWrapper;
     }
-    
+
     /**
-     * Builds a Service Bus object. 
-     * 
+     * Builds a Service Bus object.
+     *
      * @param string $connectionString The configuration connection string.
-     * 
+     *
      * @return WindowsAzure\ServiceBus\Internal\IServiceBus
      */
     public function createServiceBusService($connectionString)
@@ -341,7 +341,7 @@ class ServicesBuilder
         $settings = ServiceBusSettings::createFromConnectionString(
             $connectionString
         );
-        
+
         $httpClient        = $this->httpClient();
         $serializer        = $this->serializer();
         $serviceBusWrapper = new ServiceBusRestProxy(
@@ -349,22 +349,22 @@ class ServicesBuilder
             $settings->getServiceBusEndpointUri(),
             $serializer
         );
-        
+
         $wrapFilter = new WrapFilter(
             $settings->getWrapEndpointUri(),
             $settings->getWrapName(),
             $settings->getWrapPassword(),
             $this->createWrapService($settings->getWrapEndpointUri())
         );
-        
+
         return $serviceBusWrapper->withFilter($wrapFilter);
     }
-    
+
     /**
      * Builds a service management object.
      *
      * @param string $connectionString The configuration connection string.
-     * 
+     *
      * @return WindowsAzure\ServiceManagement\Internal\IServiceManagement
      */
     public function createServiceManagementService($connectionString)
@@ -372,7 +372,7 @@ class ServicesBuilder
         $settings = ServiceManagementSettings::createFromConnectionString(
             $connectionString
         );
-        
+
         $certificatePath = $settings->getCertificatePath();
         $httpClient      = new HttpClient($certificatePath);
         $serializer      = $this->serializer();
@@ -380,7 +380,7 @@ class ServicesBuilder
             $settings->getEndpointUri(),
             Resources::HTTPS_SCHEME
         );
-        
+
         $serviceManagementWrapper = new ServiceManagementRestProxy(
             $httpClient,
             $settings->getSubscriptionId(),
@@ -390,9 +390,9 @@ class ServicesBuilder
 
         // Adding headers filter
         $headers = array();
-        
+
         $headers[Resources::X_MS_VERSION] = Resources::SM_API_LATEST_VERSION;
-        
+
         $headersFilter            = new HeadersFilter($headers);
         $serviceManagementWrapper = $serviceManagementWrapper->withFilter(
             $headersFilter
@@ -400,40 +400,38 @@ class ServicesBuilder
 
         return $serviceManagementWrapper;
     }
-    
+
     /**
      * Builds a media services object.
      *
-     * @param string $connectionString The configuration connection string.
+     * @param WindowsAzure\Common\Internal\MediaServicesSettings    $settings   The media services configuration settings.
      *
      * @return WindowsAzure\MediaServices\Internal\IMediaServices
      */
-    public function createMediaServicesService($connectionString)
+    public function createMediaServicesService($settings)
     {
-        $settings = MediaServicesSettings::createFromConnectionString(
-                $connectionString
-        );
-    
+        Validate::isA($settings, 'WindowsAzure\Common\Internal\MediaServicesSettings', 'settings');
+
         $httpClient      = new HttpClient();
         $serializer      = $this->serializer();
         $uri             = Utilities::tryAddUrlScheme(
                 $settings->getEndpointUri(),
                 Resources::HTTPS_SCHEME
         );
-    
+
         $mediaServicesWrapper = new MediaServicesRestProxy(
                 $httpClient,
                 $uri,
                 $settings->getAccountName(),
                 $serializer
         );
-    
+
         // Adding headers filter
         $headers = array();
         $headers[Resources::X_MS_VERSION] = Resources::MEDIA_SERVICES_API_LATEST_VERSION;
         $headersFilter = new HeadersFilter($headers);
         $mediaServicesWrapper = $mediaServicesWrapper->withFilter($headersFilter);
-    
+
         // Adding OAuth filter
         $oauthService = new OAuthRestProxy(new HttpClient(), $settings->getOAuthEndpointUri());
         $authentification = new OAuthScheme(
@@ -445,21 +443,21 @@ class ServicesBuilder
         );
         $authentificationFilter = new AuthenticationFilter($authentification);
         $mediaServicesWrapper = $mediaServicesWrapper->withFilter($authentificationFilter);
-    
+
         return $mediaServicesWrapper;
     }
-    
+
     /**
      * Gets the static instance of this class.
-     * 
-     * @return ServicesBuilder 
+     *
+     * @return ServicesBuilder
      */
     public static function getInstance()
     {
         if (!isset(self::$instance)) {
             self::$_instance = new ServicesBuilder();
         }
-        
+
         return self::$_instance;
     }
 }
