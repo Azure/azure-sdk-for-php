@@ -99,7 +99,8 @@ class BlobRestProxy extends ServiceRestProxy implements IBlob
      *
      * @return int
      */
-    public function getSingleBlobUploadThresholdInBytes(){
+    public function getSingleBlobUploadThresholdInBytes()
+    {
         return $this->_SingleBlobUploadThresholdInBytes;
     }
 
@@ -110,11 +111,12 @@ class BlobRestProxy extends ServiceRestProxy implements IBlob
      *
      * @return none
      */
-    public function setSingleBlobUploadThresholdInBytes($val){
-        if($val > 67108864){
+    public function setSingleBlobUploadThresholdInBytes($val)
+    {
+        if ($val > 67108864) {
             // What should the proper action here be?
             $val = 67108864;
-        }elseif($val < 1){
+        } elseif ($val < 1) {
             // another spot that could use looking at
             $val = 33554432;
         }
@@ -1257,18 +1259,18 @@ class BlobRestProxy extends ServiceRestProxy implements IBlob
             $options = new CreateBlobOptions();
         }
         
-        if(is_resource($content)){
+        if (is_resource($content)) {
             $cStat = fstat($content);
             // if the resource is a remote file, $cStat will be false
-            if($cStat){
+            if ($cStat) {
                 $bodySize = $cStat['size'];
             }
-        }else{
+        } else {
             $bodySize = strlen($content);
         }
 
         // if we have a size we can try to one shot this, else failsafe on block upload
-        if($bodySize && $bodySize <= $this->_SingleBlobUploadThresholdInBytes){
+        if ($bodySize && $bodySize <= $this->_SingleBlobUploadThresholdInBytes) {
             $headers = $this->_addCreateBlobOptionalHeaders($options, $headers);
             
             $this->addOptionalHeader(
@@ -1294,24 +1296,24 @@ class BlobRestProxy extends ServiceRestProxy implements IBlob
                 $statusCode,
                 $body
             );
-        }else{
+        } else {
             // This is for large or failsafe upload
             $end       = 0;
             $counter   = 0;
             $body      = '';
             $blockIds  = array();
             $blockSize = 4194304; // 4mb
-            while(!$end){
-                if(is_resource($content)){
+            while(!$end) {
+                if (is_resource($content)) {
                     $body = fread($content, $blockSize);
-                    if(feof($content)){
+                    if (feof($content)) {
                         $end = 1;
                     }
-                }else{
-                    if(strlen($content) <= $blockSize){
+                } else {
+                    if (strlen($content) <= $blockSize) {
                         $body = $content;
                         $end = 1;
-                    }else{
+                    } else {
                         $body = substr($content, 0, $blockSize);
                         $content = substr_replace($content, '', 0, $blockSize);
                     }
