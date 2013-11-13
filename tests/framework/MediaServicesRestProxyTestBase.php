@@ -25,6 +25,7 @@
 namespace Tests\Framework;
 use Tests\Framework\ServiceRestProxyTestBase;
 use WindowsAzure\Common\ServiceException;
+use WindowsAzure\Common\Internal\MediaServicesSettings;
 
 /**
  * TestBase class for each unit test class.
@@ -42,7 +43,9 @@ class MediaServicesRestProxyTestBase extends ServiceRestProxyTestBase
     public function setUp()
     {
         parent::setUp();
-        $mediaServicesWrapper = $this->builder->createMediaServicesService(TestResources::getMediaServicesConnectionString());
+        $connection         = TestResources::getMediaServicesConnectionParameters();
+        $settings           = new MediaServicesSettings($connection['accountName'], $connection['accessKey'], $connection['endpointUri'], $connection['oauthEndopointUri']);
+        $mediaServicesWrapper = $this->builder->createMediaServicesService($settings);
         parent::setProxy($mediaServicesWrapper);
     }
 
