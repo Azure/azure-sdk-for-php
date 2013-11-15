@@ -29,6 +29,9 @@ use WindowsAzure\Common\Internal\Validate;
 use WindowsAzure\Common\Models\ServiceProperties;
 use WindowsAzure\Common\Internal\ServiceRestProxy;
 use WindowsAzure\MediaServices\Internal\IMediaServices;
+use WindowsAzure\Common\Internal\Atom\Entry;
+use WindowsAzure\Common\Internal\Atom\Content;
+use WindowsAzure\Common\Internal\Atom\AtomProperties;
 
 /**
  * This class constructs HTTP requests and receive HTTP responses for blob
@@ -103,5 +106,119 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
 
 
         return $response;
+    }
+
+    /**
+     * Wraps media services entity with Atom entry
+     *
+     * @param object    $entity Media services entity
+     *
+     * @return XML string representing Atom Entry
+     */
+    protected function wrapAtomEntry($entity) {
+        Validate::notNull($entity, 'entity');
+
+        $properties = new AtomProperties();
+        $properties->setPropertiesFromObject($entity);
+
+        $content = new Content();
+        $content->setType(Resources::XML_CONTENT_TYPE);
+        $content->addChild($properties);
+
+        $atomEntry = new Entry();
+        $atomEntry->setContent($content);
+
+        $xmlWriter = new \XMLWriter();
+        $xmlWriter->openMemory();
+        $atomEntry->writeXml($xmlWriter);
+
+        return $xmlWriter->outputMemory();
+    }
+
+    /**
+     * Extract media service entity from Atom Entry object
+     * @param WindowsAzure\Common\Internal\Atom\Entry   $entry  Atom Entry containing properties of media services object
+     * @param object                                    $entity Media services entity
+     */
+    protected function unwrapAtomEntry($entry, &$entity) {
+        Validate::notNull($entry, 'entry');
+        Validate::isA($entry, 'WindowsAzure\Common\Internal\Atom\Entry', 'entry');
+        Validate::notNull($entity, 'entity');
+
+        $content = $entry->getContent();
+        if (!empty($content)) {
+            foreach($content->getChildren() as $child){
+                if (is_a($child, 'WindowsAzure\Common\Internal\Atom\AtomProperties')) {
+                    $entity->fromArray($child->getProperties());
+                    return;
+                }
+            }
+        }
+    }
+
+    /**
+     * Create new asset
+     *
+     * @param WindowsAzure\MediaServices\Models\Asset   $asset  Asset data
+     *
+     * @return WindowsAzure\MediaServices\Models\Asset  Created asset
+     */
+    public function createAsset($asset) {
+        Validate::isA($asset, 'WindowsAzure\Mediaservices\Models\Asset', 'asset');
+
+        $method      = Resources::HTTP_POST;
+        $headers     = array();
+        $postParams  = array();
+        $queryParams = array();
+        $path        = 'Assets';
+        $statusCode  = Resources::STATUS_CREATED;
+        $body = $this->wrapAtomEntry($asset);
+
+        $response = $this->send(
+            $method,
+            $headers,
+            $postParams,
+            $queryParams,
+            $path,
+            $statusCode,
+            $body
+        );
+
+        $entry = new Entry();
+        $entry->parseXml($response->getBody());
+        $this->unwrapAtomEntry($entry, $asset);
+
+        return $asset;
+    }
+
+    /**
+     * Delete asset
+     *
+     * @param WindowsAzure\MediaServices\Models\Asset|string   $asset  Asset data or asset Id
+     */
+    public function deleteAsset($asset) {
+        if (is_string($asset)) {
+            $assetId = $asset;
+        }
+        else {
+            Validate::isA($asset, 'WindowsAzure\Mediaservices\Models\Asset', 'asset');
+            $assetId = $asset->getId();
+        }
+
+        $method      = Resources::HTTP_DELETE;
+        $headers     = array();
+        $postParams  = array();
+        $queryParams = array();
+        $path        = "Assets('{$assetId}')";
+        $statusCode  = Resources::STATUS_NO_CONTENT;
+
+        $this->send(
+            $method,
+            $headers,
+            $postParams,
+            $queryParams,
+            $path,
+            $statusCode
+        );
     }
 }

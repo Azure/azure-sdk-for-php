@@ -427,8 +427,14 @@ class ServicesBuilder
         );
 
         // Adding headers filter
-        $headers = array();
-        $headers[Resources::X_MS_VERSION] = Resources::MEDIA_SERVICES_API_LATEST_VERSION;
+        $headers = array(
+            Resources::X_MS_VERSION             => Resources::MEDIA_SERVICES_API_LATEST_VERSION,
+            Resources::DATA_SERVICE_VERSION     => Resources::MEDIA_SERVICES_DATA_SERVICE_VERSION_VALUE,
+            Resources::MAX_DATA_SERVICE_VERSION => Resources::MEDIA_SERVICES_MAX_DATA_SERVICE_VERSION_VALUE,
+            Resources::ACCEPT_HEADER            => Resources::ACCEPT_HEADER_VALUE,
+            Resources::CONTENT_TYPE             => Resources::ATOM_ENTRY_CONTENT_TYPE,
+        );
+
         $headersFilter = new HeadersFilter($headers);
         $mediaServicesWrapper = $mediaServicesWrapper->withFilter($headersFilter);
 

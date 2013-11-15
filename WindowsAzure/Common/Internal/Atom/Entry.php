@@ -11,7 +11,7 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- * 
+ *
  * PHP version 5
  *
  * @category  Microsoft
@@ -42,7 +42,7 @@ use WindowsAzure\Common\Internal\Validate;
 class Entry extends AtomBase
 {
     // @codingStandardsIgnoreStart
-    
+
     /**
      * The author of the entry.
      *
@@ -135,7 +135,7 @@ class Entry extends AtomBase
     protected $extensionElement;
 
     /**
-     * Creates an ATOM Entry instance with default parameters. 
+     * Creates an ATOM Entry instance with default parameters.
      */
     public function __construct()
     {
@@ -143,10 +143,10 @@ class Entry extends AtomBase
     }
 
     /**
-     * Populate the properties of an ATOM Entry instance with specified XML.. 
-     * 
-     * @param string $xmlString A string representing an ATOM entry instance. 
-     * 
+     * Populate the properties of an ATOM Entry instance with specified XML..
+     *
+     * @param string $xmlString A string representing an ATOM entry instance.
+     *
      * @return none
      */
     public function parseXml($xmlString)
@@ -166,7 +166,7 @@ class Entry extends AtomBase
 
         if (array_key_exists('content', $entryArray)) {
             $content = new Content();
-            $content->parseXml($entryArray['content']->asXML());
+            $content->fromXml($entryArray['content']);
             $this->content = $content;
         }
 
@@ -209,8 +209,8 @@ class Entry extends AtomBase
     }
 
     /**
-     * Gets the author of the entry. 
-     * 
+     * Gets the author of the entry.
+     *
      * @return Person
      */
     public function getAuthor()
@@ -218,11 +218,11 @@ class Entry extends AtomBase
         return $this->author;
     }
 
-    /** 
+    /**
      * Sets the author of the entry.
      *
-     * @param Person $author The author of the entry. 
-     * 
+     * @param Person $author The author of the entry.
+     *
      * @return none
      */
     public function setAuthor($author)
@@ -230,9 +230,9 @@ class Entry extends AtomBase
         $this->author = $author;
     }
 
-    /** 
-     * Gets the category. 
-     * 
+    /**
+     * Gets the category.
+     *
      * @return array
      */
     public function getCategory()
@@ -240,11 +240,11 @@ class Entry extends AtomBase
         return $this->category;
     }
 
-    /** 
+    /**
      * Sets the category.
-     * 
+     *
      * @param string $category The category of the entry.
-     * 
+     *
      * @return none
      */
     public function setCategory($category)
@@ -252,9 +252,9 @@ class Entry extends AtomBase
         $this->category = $category;
     }
 
-    /** 
+    /**
      * Gets the content.
-     * 
+     *
      * @return Content.
      */
     public function getContent()
@@ -262,11 +262,11 @@ class Entry extends AtomBase
         return $this->content;
     }
 
-    /** 
-     * Sets the content. 
-     * 
+    /**
+     * Sets the content.
+     *
      * @param Content $content Sets the content of the entry.
-     * 
+     *
      * @return none
      */
     public function setContent($content)
@@ -275,8 +275,8 @@ class Entry extends AtomBase
     }
 
     /**
-     * Gets the contributor. 
-     * 
+     * Gets the contributor.
+     *
      * @return string
      */
     public function getContributor()
@@ -284,11 +284,11 @@ class Entry extends AtomBase
         return $this->contributor;
     }
 
-    /** 
+    /**
      * Sets the contributor.
      *
-     * @param string $contributor The contributor of the entry. 
-     * 
+     * @param string $contributor The contributor of the entry.
+     *
      * @return none
      */
     public function setContributor($contributor)
@@ -297,20 +297,20 @@ class Entry extends AtomBase
     }
 
     /**
-     * Gets the ID of the entry. 
-     * 
-     * @return string 
+     * Gets the ID of the entry.
+     *
+     * @return string
      */
     public function getId()
     {
         return $this->id;
     }
 
-    /** 
+    /**
      * Sets the ID of the entry.
-     * 
-     * @param string $id The id of the entry. 
-     * 
+     *
+     * @param string $id The id of the entry.
+     *
      * @return none
      */
     public function setId($id)
@@ -318,10 +318,10 @@ class Entry extends AtomBase
         $this->id = $id;
     }
 
-    /**     
+    /**
      * Gets the link of the entry.
-     * 
-     * @return string 
+     *
+     * @return string
      */
     public function getLink()
     {
@@ -329,10 +329,10 @@ class Entry extends AtomBase
     }
 
     /**
-     * Sets the link of the entry. 
-     * 
+     * Sets the link of the entry.
+     *
      * @param string $link The link of the entry.
-     * 
+     *
      * @return none
      */
     public function setLink($link)
@@ -340,7 +340,7 @@ class Entry extends AtomBase
         $this->link = $link;
     }
 
-    /** 
+    /**
      * Gets published of the entry.
      *
      * @return boolean
@@ -350,11 +350,11 @@ class Entry extends AtomBase
         return $this->published;
     }
 
-    /** 
-     * Sets published of the entry. 
-     * 
-     * @param boolean $published Is the entry published. 
-     * 
+    /**
+     * Sets published of the entry.
+     *
+     * @param boolean $published Is the entry published.
+     *
      * @return none
      */
     public function setPublished($published)
@@ -362,8 +362,8 @@ class Entry extends AtomBase
         $this->published = $published;
     }
 
-    /** 
-     * Gets the rights of the entry. 
+    /**
+     * Gets the rights of the entry.
      *
      * @return string
      */
@@ -372,11 +372,11 @@ class Entry extends AtomBase
         return $this->rights;
     }
 
-    /** 
-     * Sets the rights of the entry. 
-     * 
-     * @param string $rights The rights of the entry. 
-     * 
+    /**
+     * Sets the rights of the entry.
+     *
+     * @param string $rights The rights of the entry.
+     *
      * @return none
      */
     public function setRights($rights)
@@ -384,21 +384,21 @@ class Entry extends AtomBase
         $this->rights = $rights;
     }
 
-    /** 
-     * Gets the source of the entry. 
-     * 
-     * @return string 
+    /**
+     * Gets the source of the entry.
+     *
+     * @return string
      */
     public function getSource()
     {
         return $this->source;
     }
 
-    /** 
-     * Sets the source of the entry. 
-     * 
-     * @param string $source The source of the entry. 
-     * 
+    /**
+     * Sets the source of the entry.
+     *
+     * @param string $source The source of the entry.
+     *
      * @return none
      */
     public function setSource($source)
@@ -406,21 +406,21 @@ class Entry extends AtomBase
         $this->source = $source;
     }
 
-    /** 
-     * Gets the summary of the entry. 
-     * 
+    /**
+     * Gets the summary of the entry.
+     *
      * @return string
-     */ 
+     */
     public function getSummary()
     {
         return $this->summary;
     }
 
-    /** 
-     * Sets the summary of the entry. 
-     * 
-     * @param string $summary The summary of the entry. 
-     * 
+    /**
+     * Sets the summary of the entry.
+     *
+     * @param string $summary The summary of the entry.
+     *
      * @return none
      */
     public function setSummary($summary)
@@ -428,9 +428,9 @@ class Entry extends AtomBase
         $this->summary = $summary;
     }
 
-    /** 
+    /**
      * Gets the title of the entry.
-     * 
+     *
      * @return string
      */
     public function getTitle()
@@ -439,20 +439,20 @@ class Entry extends AtomBase
     }
 
     /**
-     * Sets the title of the entry. 
+     * Sets the title of the entry.
      *
-     * @param string $title The title of the entry. 
-     * 
+     * @param string $title The title of the entry.
+     *
      * @return none
      */
     public function setTitle($title)
     {
         $this->title = $title;
     }
-    
+
     /**
-     * Gets updated. 
-     *  
+     * Gets updated.
+     *
      * @return \DateTime
      */
     public function getUpdated()
@@ -460,11 +460,11 @@ class Entry extends AtomBase
         return $this->updated;
     }
 
-    /**  
+    /**
      * Sets updated
-     * 
+     *
      * @param \DateTime $updated updated.
-     * 
+     *
      * @return none
      */
     public function setUpdated($updated)
@@ -473,39 +473,39 @@ class Entry extends AtomBase
     }
 
     /**
-     * Gets extension element. 
-     * 
-     * @return string 
+     * Gets extension element.
+     *
+     * @return string
      */
     public function getExtensionElement()
     {
         return $this->extensionElement;
-    }    
-    
+    }
+
     /**
      * Sets extension element.
-     * 
-     * @param string $extensionElement The extension element of the entry. 
-     * 
+     *
+     * @param string $extensionElement The extension element of the entry.
+     *
      * @return none
      */
     public function setExtensionElement($extensionElement)
     {
-        $this->extensionElement = $extensionElement;     
+        $this->extensionElement = $extensionElement;
     }
 
-    /** 
-     * Writes a inner XML string representing the entry. 
-     * 
+    /**
+     * Writes a inner XML string representing the entry.
+     *
      * @param \XMLWriter $xmlWriter The XML writer.
-     * 
+     *
      * @return none
      */
     public function writeXml($xmlWriter)
     {
         Validate::notNull($xmlWriter, 'xmlWriter');
         $xmlWriter->startElementNS(
-            'atom', 
+            'atom',
             Resources::ENTRY,
             Resources::ATOM_NAMESPACE
         );
@@ -513,11 +513,11 @@ class Entry extends AtomBase
         $xmlWriter->endElement();
     }
 
-    /** 
-     * Writes a inner XML string representing the entry. 
-     * 
+    /**
+     * Writes a inner XML string representing the entry.
+     *
      * @param \XMLWriter $xmlWriter The XML writer.
-     * 
+     *
      * @return none
      */
     public function writeInnerXml($xmlWriter)
@@ -525,21 +525,21 @@ class Entry extends AtomBase
         if (!is_null($this->attributes)) {
             if (is_array($this->attributes)) {
                 foreach (
-                    $this->attributes 
+                    $this->attributes
                     as $attributeName => $attributeValue
                 ) {
                     $xmlWriter->writeAttribute($attributeName, $attributeValue);
                 }
             }
         }
-         
+
         if (!is_null($this->author)) {
             $this->writeArrayItem(
                 $xmlWriter,
                 $this->author,
                 Resources::AUTHOR
             );
-        } 
+        }
 
         if (!is_null($this->category)) {
             $this->writeArrayItem(
@@ -564,7 +564,7 @@ class Entry extends AtomBase
         $this->writeOptionalElementNS(
             $xmlWriter,
             'atom',
-            'id', 
+            'id',
             Resources::ATOM_NAMESPACE,
             $this->id
         );
@@ -580,7 +580,7 @@ class Entry extends AtomBase
         $this->writeOptionalElementNS(
             $xmlWriter,
             'atom',
-            'published', 
+            'published',
             Resources::ATOM_NAMESPACE,
             $this->published
         );
@@ -588,7 +588,7 @@ class Entry extends AtomBase
         $this->writeOptionalElementNS(
             $xmlWriter,
             'atom',
-            'rights', 
+            'rights',
             Resources::ATOM_NAMESPACE,
             $this->rights
         );
@@ -596,7 +596,7 @@ class Entry extends AtomBase
         $this->writeOptionalElementNS(
             $xmlWriter,
             'atom',
-            'source', 
+            'source',
             Resources::ATOM_NAMESPACE,
             $this->source
         );
@@ -604,15 +604,15 @@ class Entry extends AtomBase
         $this->writeOptionalElementNS(
             $xmlWriter,
             'atom',
-            'summary', 
+            'summary',
             Resources::ATOM_NAMESPACE,
             $this->summary
         );
-        
+
         $this->writeOptionalElementNS(
             $xmlWriter,
             'atom',
-            'title', 
+            'title',
             Resources::ATOM_NAMESPACE,
             $this->title
         );
@@ -620,7 +620,7 @@ class Entry extends AtomBase
         if (!is_null($this->updated)) {
             $xmlWriter->writeElementNS(
                 'atom',
-                'updated', 
+                'updated',
                 Resources::ATOM_NAMESPACE,
                 $this->updated->format(\DateTime::ATOM)
             );

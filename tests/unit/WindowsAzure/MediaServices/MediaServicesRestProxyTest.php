@@ -56,12 +56,12 @@ class MediaServicesRestProxyTest extends MediaServicesRestProxyTestBase
     {
         // Setup
         $asset = new Asset(0);
-        $asset->setName('testAsset');
+        $asset->setName('testAsset' . $this->createSuffix());
 
         // Test
-        $result = $this->restProxy->createAsset($asset);
+        $result = $this->createAsset($asset);
 
         // Assert
-        //$this->assertEquals($this->defaultProperties->toArray(), $result->getValue()->toArray());
+        $this->assertEquals($asset->getName(), $result->getName());
     }
 }

@@ -23,6 +23,7 @@
  */
 
 namespace WindowsAzure\MediaServices\Models;
+use WindowsAzure\Common\Internal\Validate;
 
 
 /**
@@ -140,6 +141,74 @@ class Asset
      */
     public function __construct($options) {
         $this->options = $options;
+    }
+
+    /**
+     * Fill asset from array
+     * @param array $options    Array containing values for object properties
+     */
+    public function fromArray($options) {
+        if (isset($options['Id'])) {
+            Validate::isString($options['Id'], 'options[Id]');
+            $this->_id = $options['Id'];
+        }
+
+        if (isset($options['State'])) {
+            Validate::isInteger($options['State'], 'options[State]');
+            $this->_state = $options['State'];
+        }
+
+        if (isset($options['Created'])) {
+            $created = new \DateTime($options['Created']);
+            Validate::isDate($created, 'options[Created]');
+            $this->_created = $created;
+        }
+
+        if (isset($options['LastModified'])) {
+            $lastModified = new \DateTime($options['LastModified']);
+            Validate::isDate($lastModified, 'options[LastModified]');
+            $this->_lastModified = $lastModified;
+        }
+
+        if (isset($options['AlternateId'])) {
+            Validate::isString($options['AlternateId'], 'options[AlternateId]');
+            $this->_alternateId = $options['AlternateId'];
+        }
+
+        if (isset($options['Options'])) {
+            Validate::isInteger($options['Options'], 'options[Options]');
+            $this->_options = $options['Options'];
+        }
+
+        if (isset($options['Uri'])) {
+            Validate::isValidUri($options['Uri'], 'options[Uri]');
+            $this->_uri = $options['Uri'];
+        }
+
+        if (isset($options['Locators'])) {
+            Validate::isString($options['Locators'], 'options[Locators]');
+            $this->_locators = $options['Locators'];
+        }
+
+        if (isset($options['Files'])) {
+            Validate::isString($options['Files'], 'options[Files]');
+            $this->_files = $options['Files'];
+        }
+
+        if (isset($options['ParentAssets'])) {
+            Validate::isString($options['ParentAssets'], 'options[ParentAssets]');
+            $this->_parentAssets = $options['ParentAssets'];
+        }
+
+        if (isset($options['StorageAccountName'])) {
+            Validate::isString($options['StorageAccountName'], 'options[StorageAccountName]');
+            $this->_storageAccountName = $options['StorageAccountName'];
+        }
+
+        if (isset($options['StorageAccount'])) {
+            Validate::isString($options['StorageAccount'], 'options[StorageAccount]');
+            $this->_storageAccount = $options['StorageAccount'];
+        }
     }
 
     /**
