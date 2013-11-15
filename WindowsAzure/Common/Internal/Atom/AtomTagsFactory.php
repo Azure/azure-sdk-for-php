@@ -15,53 +15,55 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   Tests\Unit\WindowsAzure\Blob
+ * @package   WindowsAzure\Common\Internal\Atom
  * @author    Azure PHP SDK <azurephpsdk@microsoft.com>
  * @copyright Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
- * @link      https://github.com/windowsazure/azure-sdk-for-php
+ * @link      https://github.com/WindowsAzure/azure-sdk-for-php
  */
 
-namespace Tests\Unit\WindowsAzure\MediaServices;
-use Tests\Framework\MediaServicesRestProxyTestBase;
-use Tests\Framework\TestResources;
+namespace WindowsAzure\Common\Internal\Atom;
 use WindowsAzure\Common\Internal\Resources;
 use WindowsAzure\Common\Internal\Utilities;
-use WindowsAzure\Common\ServiceException;
-use WindowsAzure\Common\Models\ServiceProperties;
-use WindowsAzure\MediaServices\Models\Asset;
+use WindowsAzure\Common\Internal\Validate;
+use WindowsAzure\Common\Internal\Atom\AtomProperties;
 
 /**
- * Unit tests for class MediaServicesRestProxy
+ * Atom tags factory.
  *
  * @category  Microsoft
- * @package   Tests\Unit\WindowsAzure\Blob
+ * @package   WindowsAzure\Common\Internal\Atom
  * @author    Azure PHP SDK <azurephpsdk@microsoft.com>
  * @copyright Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @version   Release: 0.3.1_2011-08
- * @link      https://github.com/windowsazure/azure-sdk-for-php
+ * @link      https://github.com/WindowsAzure/azure-sdk-for-php
  */
-class MediaServicesRestProxyTest extends MediaServicesRestProxyTestBase
+
+class AtomTagsFactory
 {
-    private function createSuffix()
-    {
-        return sprintf('-%04x', mt_rand(0, 65535));
-    }
-
     /**
-    * @covers WindowsAzure\Blob\BlobRestProxy::getServiceProperties
-    */
-    public function testCreateAsset()
-    {
-        // Setup
-        $asset = new Asset(0);
-        $asset->setName('testAsset' . $this->createSuffix());
+     * Create tag wrapping object based in its name and namespace
+     *
+     * @param string    $name       tag name
+     * @param string    $namespace  tag namespace URI
+     */
+    static public function create($name, $namespace) {
+        Validate::notNull($name, 'name');
+        Validate::isString($name, 'name');
+        Validate::notNull($namespace, 'namespace');
+        Validate::isString($namespace, 'namespace');
 
-        // Test
-        $result = $this->createAsset($asset);
+        switch($namespace) {
+            case Resources::DSM_XML_NAMESPACE:
+                switch($name) {
+                    case Resources::PROPERTIES:
+                        return new AtomProperties();
+                }
+                break;
+        }
 
-        // Assert
-        $this->assertEquals($asset->getName(), $result->getName());
+        return null;
     }
 }
+

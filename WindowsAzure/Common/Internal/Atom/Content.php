@@ -11,7 +11,7 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- * 
+ *
  * PHP version 5
  *
  * @category  Microsoft
@@ -42,24 +42,31 @@ use WindowsAzure\Common\Internal\Validate;
 class Content extends AtomBase
 {
     /**
-     * The text of the content. 
+     * The text of the content.
      *
-     * @var string  
+     * @var string
      */
     protected $text;
 
     /**
-     * The type of the content. 
+     * The type of the content.
      *
-     * @var string  
+     * @var string
      */
     protected $type;
-     
-    /** 
+
+    /**
+     * Xml content
+     *
+     * @var array
+     */
+    protected $children;
+
+    /**
      * Creates a Content instance with specified text.
      *
      * @param string $text The text of the content.
-     * 
+     *
      * @return none
      */
     public function __construct($text = null)
@@ -68,18 +75,28 @@ class Content extends AtomBase
     }
 
     /**
-     * Creates an ATOM CONTENT instance with specified xml string. 
-     * 
+     * Creates an ATOM CONTENT instance with specified xml string.
+     *
      * @param string $xmlString an XML based string of ATOM CONTENT.
-     * 
+     *
      * @return none
-     */ 
+     */
     public function parseXml($xmlString)
     {
         Validate::notNull($xmlString, 'xmlString');
         Validate::isString($xmlString, 'xmlString');
-        $contentXml = simplexml_load_string($xmlString);
+
+        $this->fromXml(simplexml_load_string($xmlString));
+    }
+
+    /**
+     * Creates an ATOM CONTENT instance with specified simpleXML object
+     *
+     * @param \SimpleXMLElement $contentXml xml element of ATOM CONTENT
+     */
+    public function fromXml($contentXml) {
         Validate::notNull($contentXml, 'contentXml');
+        Validate::isA($contentXml, '\SimpleXMLElement', 'contentXml');
 
         $attributes = $contentXml->attributes();
 
@@ -90,36 +107,50 @@ class Content extends AtomBase
         $text = '';
         foreach ($contentXml->children() as $child) {
             $text .= $child->asXML();
-        } 
+        }
 
         $this->text = $text;
+
+        $namespaces = $contentXml->getDocNamespaces();
+        foreach($namespaces as $name => $uri) {
+            if (!empty($name)) {
+                foreach ($contentXml->children($uri) as $child) {
+                    $tag = AtomTagsFactory::create($child->getName(), $uri);
+                    if ($tag != null) {
+                        $tag->fromXml($child);
+                        $this->addChild($tag);
+                    }
+                }
+            }
+        }
+
     }
 
-    /** 
-     * Gets the text of the content. 
+    /**
+     * Gets the text of the content.
      *
      * @return string
      */
     public function getText()
-    {   
+    {
         return $this->text;
-    } 
+    }
 
     /**
      * Sets the text of the content.
-     * 
+     *
      * @param string $text The text of the content.
-     * 
+     *
      * @return none
      */
     public function setText($text)
     {
-        $this->text = $text; 
+        $this->text = $text;
     }
 
     /**
-     * Gets the type of the content. 
-     * 
+     * Gets the type of the content.
+     *
      * @return string
      */
     public function getType()
@@ -128,22 +159,48 @@ class Content extends AtomBase
     }
 
     /**
-     * Sets the type of the content. 
-     * 
+     * Sets the type of the content.
+     *
      * @param string $type The type of the content.
-     * 
+     *
      * @return none
      */
     public function setType($type)
     {
         $this->type = $type;
     }
-    
-    /** 
-     * Writes an XML representing the content. 
-     * 
+
+    /**
+     * Get "Xml content"
+     *
+     * @return array
+     */
+    public function getChildren() {
+        return $this->children;
+    }
+
+    /**
+     * Add new Xml child
+     *
+     * @param WindowsAzure\Common\Internal\Atom\AtomBase    $value Xml child
+     *
+     * @return none
+     */
+    public function addChild($value) {
+        Validate::isA($value, 'WindowsAzure\Common\Internal\Atom\AtomBase', 'value');
+
+        if (empty($this->children)) {
+            $this->children = array();
+        }
+
+        $this->children[] = $value;
+    }
+
+    /**
+     * Writes an XML representing the content.
+     *
      * @param \XMLWriter $xmlWriter The XML writer.
-     * 
+     *
      * @return none
      */
     public function writeXml($xmlWriter)
@@ -157,7 +214,7 @@ class Content extends AtomBase
 
         $this->writeOptionalAttribute(
             $xmlWriter,
-            'type', 
+            'type',
             $this->type
         );
 
@@ -165,17 +222,23 @@ class Content extends AtomBase
         $xmlWriter->endElement();
     }
 
-    /** 
-     * Writes an inner XML representing the content. 
-     * 
+    /**
+     * Writes an inner XML representing the content.
+     *
      * @param \XMLWriter $xmlWriter The XML writer.
-     * 
+     *
      * @return none
      */
     public function writeInnerXml($xmlWriter)
     {
         Validate::notNull($xmlWriter, 'xmlWriter');
         $xmlWriter->writeRaw($this->text);
+
+        if (!empty($this->children)) {
+            foreach($this->children as $xml) {
+                $xml->writeXml($xmlWriter);
+            }
+        }
     }
 }
 

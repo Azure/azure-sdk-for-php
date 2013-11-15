@@ -40,6 +40,8 @@ use WindowsAzure\Common\Internal\MediaServicesSettings;
  */
 class MediaServicesRestProxyTestBase extends ServiceRestProxyTestBase
 {
+    protected $assets = array();
+
     public function setUp()
     {
         parent::setUp();
@@ -49,11 +51,21 @@ class MediaServicesRestProxyTestBase extends ServiceRestProxyTestBase
         parent::setProxy($mediaServicesWrapper);
     }
 
+    public function createAsset($asset) {
+        $result = $this->restProxy->createAsset($asset);
+
+        $this->assets[$result->getId()] = $result;
+
+        return $result;
+    }
+
     protected function tearDown()
     {
         parent::tearDown();
 
-        //@TODO Cleanup resources
+        foreach($this->assets as $asset) {
+            $this->restProxy->deleteAsset($asset);
+        }
     }
 
 }
