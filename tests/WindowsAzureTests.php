@@ -181,6 +181,7 @@ spl_autoload_register(
             'tests\\unit\\windowsazure\\common\\servicesbuildertest' => '/unit/WindowsAzure/Common/ServicesBuilderTest.php',
             'tests\\unit\\windowsazure\\createserviceoptionsmanagement\\models\\createserviceoptionstest' => '/unit/WindowsAzure/ServiceManagement/Models/CreateStorageServiceOptionsTest.php',
             'tests\\unit\\windowsazure\\mediaservices\\mediaservicesrestproxytest' => '/unit/WindowsAzure/MediaServices/MediaServicesRestProxyTest.php',
+            'tests\\unit\\windowsazure\\mediaservices\\models\\accesspolicytest' => '/unit/WindowsAzure/MediaServices/Models/AccessPolicyTest.php',
             'tests\\unit\\windowsazure\\queue\\models\\createmessageoptionstest' => '/unit/WindowsAzure/Queue/Models/CreateMessageOptionsTest.php',
             'tests\\unit\\windowsazure\\queue\\models\\createqueueoptionstest' => '/unit/WindowsAzure/Queue/Models/CreateQueueOptionsTest.php',
             'tests\\unit\\windowsazure\\queue\\models\\getqueuemetadataresulttest' => '/unit/WindowsAzure/Queue/Models/GetQueueMetadataResultTest.php',
