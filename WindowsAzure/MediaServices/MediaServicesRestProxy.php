@@ -221,4 +221,136 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
             $statusCode
         );
     }
+
+    /**
+     * Create new access policy
+     *
+     * @param WindowsAzure\MediaServices\Models\AccessPolicy   $accessPolicy  Access policy data
+     *
+     * @return WindowsAzure\MediaServices\Models\AccessPolicy  Created access policy
+     */
+    public function createAccessPolicy($accessPolicy) {
+        Validate::isA($accessPolicy, 'WindowsAzure\Mediaservices\Models\AccessPolicy', 'accessPolicy');
+
+        $method      = Resources::HTTP_POST;
+        $headers     = array();
+        $postParams  = array();
+        $queryParams = array();
+        $path        = 'AccessPolicies';
+        $statusCode  = Resources::STATUS_CREATED;
+        $body = $this->wrapAtomEntry($accessPolicy);
+
+        $response = $this->send(
+            $method,
+            $headers,
+            $postParams,
+            $queryParams,
+            $path,
+            $statusCode,
+            $body
+        );
+
+        $entry = new Entry();
+        $entry->parseXml($response->getBody());
+        $this->unwrapAtomEntry($entry, $accessPolicy);
+
+        return $accessPolicy;
+    }
+
+    /**
+     * Delete access policy
+     *
+     * @param WindowsAzure\MediaServices\Models\AccessPolicy|string   $accessPolicy  Access policy data or access policy Id
+     */
+    public function deleteAccessPolicy($accessPolicy) {
+        if (is_string($accessPolicy)) {
+            $accessPolicyId = $accessPolicy;
+        }
+        else {
+            Validate::isA($accessPolicy, 'WindowsAzure\Mediaservices\Models\AccessPolicy', 'accessPolicy');
+            $accessPolicyId = $accessPolicy->getId();
+        }
+
+        $method      = Resources::HTTP_DELETE;
+        $headers     = array();
+        $postParams  = array();
+        $queryParams = array();
+        $path        = "AccessPolicies('{$accessPolicyId}')";
+        $statusCode  = Resources::STATUS_NO_CONTENT;
+
+        $this->send(
+            $method,
+            $headers,
+            $postParams,
+            $queryParams,
+            $path,
+            $statusCode
+        );
+    }
+
+    /**
+     * Create new locator
+     *
+     * @param WindowsAzure\MediaServices\Models\Locator   $locator  Locator data
+     *
+     * @return WindowsAzure\MediaServices\Models\Locator  Created locator
+     */
+    public function createLocator($locator) {
+        Validate::isA($locator, 'WindowsAzure\Mediaservices\Models\Locator', 'locator');
+
+        $method      = Resources::HTTP_POST;
+        $headers     = array();
+        $postParams  = array();
+        $queryParams = array();
+        $path        = 'Locators';
+        $statusCode  = Resources::STATUS_CREATED;
+        $body = $this->wrapAtomEntry($locator);
+
+        $response = $this->send(
+            $method,
+            $headers,
+            $postParams,
+            $queryParams,
+            $path,
+            $statusCode,
+            $body
+        );
+
+        $entry = new Entry();
+        $entry->parseXml($response->getBody());
+        $this->unwrapAtomEntry($entry, $locator);
+
+        return $locator;
+    }
+
+    /**
+     * Delete locator
+     *
+     * @param WindowsAzure\MediaServices\Models\Locator|string   $asset  Asset data or asset Id
+     */
+    public function deleteLocator($locator) {
+        if (is_string($locator)) {
+            $locatorId = $locator;
+        }
+        else {
+            Validate::isA($locator, 'WindowsAzure\Mediaservices\Models\Locator', 'locator');
+            $locatorId = $locator->getId();
+        }
+
+        $method      = Resources::HTTP_DELETE;
+        $headers     = array();
+        $postParams  = array();
+        $queryParams = array();
+        $path        = "Locators('{$locatorId}')";
+        $statusCode  = Resources::STATUS_NO_CONTENT;
+
+        $this->send(
+            $method,
+            $headers,
+            $postParams,
+            $queryParams,
+            $path,
+            $statusCode
+        );
+    }
 }
