@@ -30,12 +30,14 @@ use WindowsAzure\Common\Internal\Utilities;
 use WindowsAzure\Common\ServiceException;
 use WindowsAzure\Common\Models\ServiceProperties;
 use WindowsAzure\MediaServices\Models\Asset;
+use WindowsAzure\MediaServices\Models\AccessPolicy;
+use WindowsAzure\MediaServices\Models\Locator;
 
 /**
  * Unit tests for class MediaServicesRestProxy
  *
  * @category  Microsoft
- * @package   Tests\Unit\WindowsAzure\Blob
+ * @package   Tests\Unit\WindowsAzure\MediaServices
  * @author    Azure PHP SDK <azurephpsdk@microsoft.com>
  * @copyright Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
@@ -45,7 +47,7 @@ use WindowsAzure\MediaServices\Models\Asset;
 class MediaServicesRestProxyTest extends MediaServicesRestProxyTestBase
 {
     /**
-    * @covers WindowsAzure\Blob\BlobRestProxy::getServiceProperties
+    * @covers WindowsAzure\MediaServices\MediaServicesRestProxy:: createAsset
     */
     public function testCreateAsset()
     {
@@ -58,5 +60,49 @@ class MediaServicesRestProxyTest extends MediaServicesRestProxyTestBase
 
         // Assert
         $this->assertEquals($asset->getName(), $result->getName());
+    }
+
+    /**
+     * @covers WindowsAzure\MediaServices\MediaServicesRestProxy:: createAccessPolicy
+     */
+    public function testCreateAccessPolicy()
+    {
+        // Setup
+        $name = 'Name';
+        $sample = new AccessPolicy($name);
+        $sample->setName('testAccess' . $this->createSuffix());
+        $sample->setDurationsInMinutes(1);
+
+        // Test
+        $result = $this->createAccessPolicy($sample);
+
+        // Assert
+        $this->assertEquals($sample->getName(), $result->getName());
+    }
+
+    /**
+     * @covers WindowsAzure\MediaServices\MediaServicesRestProxy:: createLocator
+     */
+    public function testCreateLocator()
+    {
+        // Setup
+        $locat = new Locator(1);
+        $locat->setId('0');
+        $locat->setName('testLocator' . $this->createSuffix());
+
+        $asset = new Asset(0);
+        $asset->setName('AssetForLocator' . $this->createSuffix());
+        $resultAsset = $this->createAsset($asset);
+
+        $access = new AccessPolicy('Name');
+        $access->setName('AccessForLocator' . $this->createSuffix());
+        $resultAccess = $this->createAccessPolicy($access);
+
+        // Test
+        $result = $this->createLocator($locat);
+
+        // Assert
+        $this->assertEquals($locat->getName(), $result->getName());
+
     }
 }
