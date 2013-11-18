@@ -123,7 +123,7 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
 
         $content = new Content();
         $content->setType(Resources::XML_CONTENT_TYPE);
-        $content->addChild($properties);
+        $content->setProperties($properties);
 
         $atomEntry = new Entry();
         $atomEntry->setContent($content);
@@ -147,11 +147,9 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
 
         $content = $entry->getContent();
         if (!empty($content)) {
-            foreach($content->getChildren() as $child){
-                if (is_a($child, 'WindowsAzure\Common\Internal\Atom\AtomProperties')) {
-                    $entity->fromArray($child->getProperties());
-                    return;
-                }
+            $properties = $content->getProperties();
+            if (!empty($properties)) {
+                $entity->fromArray($properties->getProperties());
             }
         }
     }

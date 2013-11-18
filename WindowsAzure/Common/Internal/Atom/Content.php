@@ -26,7 +26,7 @@ namespace WindowsAzure\Common\Internal\Atom;
 use WindowsAzure\Common\Internal\Resources;
 use WindowsAzure\Common\Internal\Utilities;
 use WindowsAzure\Common\Internal\Validate;
-
+use WindowsAzure\Common\Internal\Atom\AtomProperties;
 /**
  * The content class of ATOM standard.
  *
@@ -56,11 +56,11 @@ class Content extends AtomBase
     protected $type;
 
     /**
-     * Xml content
+     * Entry properties
      *
-     * @var array
+     * @var WindowsAzure\Common\Internal\Atom\AtomProperties
      */
-    protected $children;
+    protected $properties;
 
     /**
      * Creates a Content instance with specified text.
@@ -111,17 +111,9 @@ class Content extends AtomBase
 
         $this->text = $text;
 
-        $namespaces = $contentXml->getDocNamespaces();
-        foreach($namespaces as $name => $uri) {
-            if (!empty($name)) {
-                foreach ($contentXml->children($uri) as $child) {
-                    $tag = AtomTagsFactory::create($child->getName(), $uri);
-                    if ($tag != null) {
-                        $tag->fromXml($child);
-                        $this->addChild($tag);
-                    }
-                }
-            }
+        foreach ($contentXml->children(Resources::DSM_XML_NAMESPACE) as $child) {
+            $this->properties = new AtomProperties();
+            $this->properties->fromXml($child);
         }
 
     }
@@ -171,29 +163,25 @@ class Content extends AtomBase
     }
 
     /**
-     * Get "Xml content"
+     * Get Properties
      *
-     * @return array
+     * @return WindowsAzure\Common\Internal\Atom\AtomProperties
      */
-    public function getChildren() {
-        return $this->children;
+    public function getProperties() {
+        return $this->properties;
     }
 
     /**
-     * Add new Xml child
+     * Set Properties
      *
-     * @param WindowsAzure\Common\Internal\Atom\AtomBase    $value Xml child
+     * @param WindowsAzure\Common\Internal\Atom\AtomProperties    $value Properties object
      *
      * @return none
      */
-    public function addChild($value) {
-        Validate::isA($value, 'WindowsAzure\Common\Internal\Atom\AtomBase', 'value');
+    public function setProperties($value) {
+        Validate::isA($value, 'WindowsAzure\Common\Internal\Atom\AtomProperties', 'value');
 
-        if (empty($this->children)) {
-            $this->children = array();
-        }
-
-        $this->children[] = $value;
+        $this->properties = $value;
     }
 
     /**
@@ -234,10 +222,8 @@ class Content extends AtomBase
         Validate::notNull($xmlWriter, 'xmlWriter');
         $xmlWriter->writeRaw($this->text);
 
-        if (!empty($this->children)) {
-            foreach($this->children as $xml) {
-                $xml->writeXml($xmlWriter);
-            }
+        if (!empty($this->properties)) {
+            $this->properties->writeXml($xmlWriter);
         }
     }
 }
