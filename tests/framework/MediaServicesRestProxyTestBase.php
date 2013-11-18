@@ -68,4 +68,7 @@ class MediaServicesRestProxyTestBase extends ServiceRestProxyTestBase
         }
     }
 
+    protected function createSuffix() {
+        return sprintf('-%04x', mt_rand(0, 65535));
+    }
 }

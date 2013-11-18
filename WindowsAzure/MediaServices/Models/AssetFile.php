@@ -137,6 +137,21 @@ class AssetFile
     private $_contentCheckSum;
 
     /**
+     * Create asset file from array
+     *
+     * @param array $options    Array containing values for object properties
+     */
+    public static function createFromOptions($options) {
+        Validate::notNull($options['Name'], 'options[Name]');
+        Validate::notNull($options['ParentAssetId'], 'options[ParentAssetId]');
+
+        $assetFile = new AssetFile($options['Name'], $options['ParentAssetId']);
+        $assetFile->fromArray($options);
+
+        return $assetFile;
+    }
+
+    /**
      * Create asset file
      *
      * @param string $name          Friendly name for asset file.
@@ -145,6 +160,78 @@ class AssetFile
     public function __construct($name, $parentAssetId) {
         $this->_name = $name;
         $this->_parentAssetId = $parentAssetId;
+    }
+
+    /**
+     * Fill asset file from array
+     * @param array $options    Array containing values for object properties
+     */
+    public function fromArray($options) {
+        if (isset($options['Id'])) {
+            Validate::isString($options['Id'], 'options[Id]');
+            $this->_id = $options['Id'];
+        }
+
+        if (isset($options['Name'])) {
+            Validate::isString($options['Name'], 'options[Name]');
+            $this->_name = $options['Name'];
+        }
+
+        if (isset($options['ContentFileSize'])) {
+            Validate::isString($options['ContentFileSize'], 'options[ContentFileSize]');
+            $this->_contentFileSize = $options['ContentFileSize'];
+        }
+
+        if (isset($options['ParentAssetId'])) {
+            Validate::isString($options['ParentAssetId'], 'options[ParentAssetId]');
+            $this->_parentAssetId = $options['ParentAssetId'];
+        }
+
+        if (isset($options['EncryptionVersion'])) {
+            Validate::isString($options['EncryptionVersion'], 'options[EncryptionVersion]');
+            $this->_encryptionVersion = $options['EncryptionVersion'];
+        }
+
+        if (isset($options['EncryptionScheme'])) {
+            Validate::isString($options['EncryptionScheme'], 'options[EncryptionScheme]');
+            $this->_encryptionScheme = $options['EncryptionScheme'];
+        }
+
+        if (isset($options['IsEncrypted'])) {
+            Validate::isBoolean($options['IsEncrypted'], 'options[IsEncrypted]');
+            $this->_isEncrypted = $options['IsEncrypted'];
+        }
+
+        if (isset($options['EncryptionKeyId'])) {
+            Validate::isString($options['EncryptionKeyId'], 'options[EncryptionKeyId]');
+            $this->_encryptionKeyId = $options['EncryptionKeyId'];
+        }
+
+        if (isset($options['InitializationVector'])) {
+            Validate::isString($options['InitializationVector'], 'options[InitializationVector]');
+            $this->_initializationVector = $options['InitializationVector'];
+        }
+
+        if (isset($options['IsPrimary'])) {
+            Validate::isBoolean($options['IsPrimary'], 'options[IsPrimary]');
+            $this->_isPrimary = $options['IsPrimary'];
+        }
+
+        if (isset($options['Created'])) {
+            $created = new \DateTime($options['Created']);
+            Validate::isDate($created, 'options[Created]');
+            $this->_created = $created;
+        }
+
+        if (isset($options['MimeType'])) {
+            Validate::isString($options['MimeType'], 'options[MimeType]');
+            $this->_mimeType = $options['MimeType'];
+        }
+
+        if (isset($options['ContentChecksum'])) {
+            Validate::isString($options['ContentChecksum'], 'options[ContentChecksum]');
+            $this->_contentChecksum = $options['ContentChecksum'];
+        }
     }
 
     /**

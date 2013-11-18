@@ -123,6 +123,20 @@ class Locator
     private $_asset;
 
     /**
+     * Create locator from array
+     *
+     * @param array $options    Array containing values for object properties
+     */
+    public static function createFromOptions($options) {
+        Validate::notNull($options['Type'], 'options[Type]');
+
+        $locator = new Locator($options['Type']);
+        $locator->fromArray($options);
+
+        return $locator;
+    }
+
+    /**
      * Create locator
      *
      * @param int   $type   Enumeration value that describes the type of Locator.
@@ -132,6 +146,74 @@ class Locator
      */
     public function __construct($type) {
         $this->_type = $type;
+    }
+
+    /**
+     * Fill locator from array
+     * @param array $options    Array containing values for object properties
+     */
+    public function fromArray($options) {
+        if (isset($options['Id'])) {
+            Validate::isString($options['Id'], 'options[Id]');
+            $this->_id = $options['Id'];
+        }
+
+        if (isset($options['Name'])) {
+            Validate::isString($options['Name'], 'options[Name]');
+            $this->_name = $options['Name'];
+        }
+
+        if (isset($options['ExpirationDateTime'])) {
+            $created = new \DateTime($options['ExpirationDateTime']);
+            Validate::isDate($expirationDateTime, 'options[ExpirationDateTime]');
+            $this->_expirationDateTime = $expirationDateTime;
+        }
+
+        if (isset($options['Type'])) {
+            Validate::isInteger($options['Type'], 'options[Type]');
+            $this->_type = $options['Type'];
+        }
+
+        if (isset($options['Path'])) {
+            Validate::isValidUri($options['Path'], 'options[Path]');
+            $this->_path = $options['Path'];
+        }
+
+        if (isset($options['BaseUri'])) {
+            Validate::isValidUri($options['BaseUri'], 'options[BaseUri]');
+            $this->_baseUri = $options['BaseUri'];
+        }
+
+        if (isset($options['ContentAccessComponent'])) {
+            Validate::isValidUri($options['ContentAccessComponent'], 'options[ContentAccessComponent]');
+            $this->_contentAccessComponent = $options['ContentAccessComponent'];
+        }
+
+        if (isset($options['AccessPolicyId'])) {
+            Validate::isString($options['AccessPolicyId'], 'options[AccessPolicyId]');
+            $this->_accessPolicyId = $options['AccessPolicyId'];
+        }
+
+        if (isset($options['AssetId'])) {
+            Validate::isString($options['AssetId'], 'options[AssetId]');
+            $this->_assetId = $options['AssetId'];
+        }
+
+        if (isset($options['StartTime'])) {
+            $startTime = new \DateTime($options['StartTime']);
+            Validate::isDate($startTime, 'options[StartTime]');
+            $this->_startTime = $startTime;
+        }
+
+        if (isset($options['AssetPolicy'])) {
+            Validate::isValidUri($options['AssetPolicy'], 'options[AssetPolicy]');
+            $this->_assetPolicy = $options['AssetPolicy'];
+        }
+
+        if (isset($options['Asset'])) {
+            Validate::isValidUri($options['Asset'], 'options[Asset]');
+            $this->_asset = $options['Asset'];
+        }
     }
 
     /**

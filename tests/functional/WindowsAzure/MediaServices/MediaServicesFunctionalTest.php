@@ -42,12 +42,12 @@ use WindowsAzure\MediaServices\Models\Asset;
  * @version   Release: 0.3.1_2011-08
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
-class MediaServicesRestProxyTest extends MediaServicesRestProxyTestBase
+class MediaServicesFunctionalTest extends MediaServicesRestProxyTestBase
 {
     /**
-    * @covers WindowsAzure\Blob\BlobRestProxy::getServiceProperties
+    * @covers WindowsAzure\MediaServices\MediaServicesRestProxy::createAsset
     */
-    public function testCreateAsset()
+    public function testCreatEmptyAsset()
     {
         // Setup
         $asset = new Asset(0);
