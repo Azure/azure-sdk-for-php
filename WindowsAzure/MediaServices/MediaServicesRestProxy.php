@@ -29,6 +29,10 @@ use WindowsAzure\Common\Internal\Validate;
 use WindowsAzure\Common\Models\ServiceProperties;
 use WindowsAzure\Common\Internal\ServiceRestProxy;
 use WindowsAzure\MediaServices\Internal\IMediaServices;
+use WindowsAzure\MediaServices\Models\Asset;
+use WindowsAzure\MediaServices\Models\AccessPolicy;
+use WindowsAzure\MediaServices\Models\Locator;
+use WindowsAzure\MediaServices\Models\AssetFile;
 use WindowsAzure\Common\Internal\Atom\Entry;
 use WindowsAzure\Common\Internal\Atom\Content;
 use WindowsAzure\Common\Internal\Atom\AtomProperties;
@@ -123,7 +127,7 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
 
         $content = new Content();
         $content->setType(Resources::XML_CONTENT_TYPE);
-        $content->addChild($properties);
+        $content->setProperties($properties);
 
         $atomEntry = new Entry();
         $atomEntry->setContent($content);
@@ -140,20 +144,37 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
      * @param WindowsAzure\Common\Internal\Atom\Entry   $entry  Atom Entry containing properties of media services object
      * @param object                                    $entity Media services entity
      */
-    protected function unwrapAtomEntry($entry, &$entity) {
+    protected function getPropertiesFromAtomEntry($entry) {
         Validate::notNull($entry, 'entry');
         Validate::isA($entry, 'WindowsAzure\Common\Internal\Atom\Entry', 'entry');
-        Validate::notNull($entity, 'entity');
 
         $content = $entry->getContent();
         if (!empty($content)) {
-            foreach($content->getChildren() as $child){
-                if (is_a($child, 'WindowsAzure\Common\Internal\Atom\AtomProperties')) {
-                    $entity->fromArray($child->getProperties());
-                    return;
-                }
+            $properties = $content->getProperties();
+            if (!empty($properties)) {
+                return $properties->getProperties();
             }
         }
+
+        return array();
+    }
+
+    /**
+     * Get asset id from object or string
+     *
+     * @param WindowsAzure\MediaServices\Models\Asset|string   $asset  Asset data or asset Id
+     * @return string
+     */
+    private function getAssetId($asset) {
+        if (is_string($asset)) {
+            $assetId = $asset;
+        }
+        else {
+            Validate::isA($asset, 'WindowsAzure\Mediaservices\Models\Asset', 'asset');
+            $assetId = $asset->getId();
+        }
+
+        return $assetId;
     }
 
     /**
@@ -186,9 +207,12 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
 
         $entry = new Entry();
         $entry->parseXml($response->getBody());
-        $this->unwrapAtomEntry($entry, $asset);
+        $properties = $this->getPropertiesFromAtomEntry($entry);
+        if (!empty($properties)) {
+            return Asset::createFromOptions($properties);
+        }
 
-        return $asset;
+        return null;
     }
 
     /**
@@ -197,13 +221,8 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
      * @param WindowsAzure\MediaServices\Models\Asset|string   $asset  Asset data or asset Id
      */
     public function deleteAsset($asset) {
-        if (is_string($asset)) {
-            $assetId = $asset;
-        }
-        else {
-            Validate::isA($asset, 'WindowsAzure\Mediaservices\Models\Asset', 'asset');
-            $assetId = $asset->getId();
-        }
+
+        $assetId = $this->getAssetId($asset);
 
         $method      = Resources::HTTP_DELETE;
         $headers     = array();
@@ -252,9 +271,12 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
 
         $entry = new Entry();
         $entry->parseXml($response->getBody());
-        $this->unwrapAtomEntry($entry, $accessPolicy);
+        $properties = $this->getPropertiesFromAtomEntry($entry);
+        if (!empty($properties)) {
+            return AccessPolicy::createFromOptions($properties);
+        }
 
-        return $accessPolicy;
+        return null;
     }
 
     /**
@@ -318,9 +340,12 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
 
         $entry = new Entry();
         $entry->parseXml($response->getBody());
-        $this->unwrapAtomEntry($entry, $locator);
+        $properties = $this->getPropertiesFromAtomEntry($entry);
+        if (!empty($properties)) {
+            return Locator::createFromOptions($properties);
+        }
 
-        return $locator;
+        return null;
     }
 
     /**
@@ -353,4 +378,94 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
             $statusCode
         );
     }
+
+    /**
+     * Generate file info for all files in asset
+     *
+     * @param WindowsAzure\MediaServices\Models\Asset|string   $asset  Asset data or asset Id
+     */
+    public function CreateFileInfos($asset) {
+
+        $assetId        = $this->getAssetId($asset);
+        $assetIdEncoded = urlencode($assetId);
+
+        $method      = Resources::HTTP_GET;
+        $headers     = array();
+        $postParams  = array();
+        $queryParams = array();
+        $path        = "CreateFileInfos?assetid='{$assetIdEncoded}'";
+        $statusCode  = Resources::STATUS_NO_CONTENT;
+
+        $this->send(
+            $method,
+            $headers,
+            $postParams,
+            $queryParams,
+            $path,
+            $statusCode
+        );
+    }
+
+    /**
+     * Get list of asset files. If asset and assetFile both not null filter is equal to assetFile.
+     *
+     * @param WindowsAzure\MediaServices\Models\AssetFile|string    $assetFile  AssetFile data or assetFile Id to filter file list
+     * @param WindowsAzure\MediaServices\Models\Asset|string        $asset      Asset data or asset Id to filter file list
+     *
+     * @return array
+     */
+    public function getAssetFiles($assetFile = null, $asset = null) {
+
+        if (($assetFile == null) && ($asset == null)) {
+            $path = 'Files';
+        }
+
+        if ($asset != null) {
+            $assetId = $this->getAssetId($asset);
+            $path = "Assets('{$assetId}')/Files";
+        }
+
+        if ($assetFile != null) {
+            if (is_string($assetFile)) {
+                $assetFileId = $assetFile;
+            }
+            else {
+                Validate::isA($locator, 'WindowsAzure\Mediaservices\Models\AssetFile', 'assetFile');
+                $assetFileId = $assetFile->getId();
+            }
+
+            $path = "Files('{$assetFileId}')";
+        }
+
+        $method      = Resources::HTTP_GET;
+        $headers     = array();
+        $postParams  = array();
+        $queryParams = array();
+        $statusCode  = Resources::STATUS_OK;
+
+        $response = $this->send(
+            $method,
+            $headers,
+            $postParams,
+            $queryParams,
+            $path,
+            $statusCode
+        );
+
+        $feed = new Feed();
+        $feed->parseXml($response->getBody());
+        $entries = $feed->getEntry();
+        $result = array();
+        if (is_array($entries)) {
+            foreach($entries as $entry) {
+                $properties = $this->getPropertiesFromAtomEntry($entry);
+                if (!empty($properties)) {
+                    $result[] = AssetFile::createFromOptions($properties);
+                }
+            }
+        }
+
+        return $result;
+    }
+
 }

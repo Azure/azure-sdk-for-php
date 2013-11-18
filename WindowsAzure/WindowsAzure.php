@@ -87,7 +87,6 @@ spl_autoload_register(
             'windowsazure\\common\\internal\\atom\\atombase' => '/Common/Internal/Atom/AtomBase.php',
             'windowsazure\\common\\internal\\atom\\atomlink' => '/Common/Internal/Atom/AtomLink.php',
             'windowsazure\\common\\internal\\atom\\atomproperties' => '/Common/Internal/Atom/AtomProperties.php',
-            'windowsazure\\common\\internal\\atom\\atomtagsfactory' => '/Common/Internal/Atom/AtomTagsFactory.php',
             'windowsazure\\common\\internal\\atom\\category' => '/Common/Internal/Atom/Category.php',
             'windowsazure\\common\\internal\\atom\\content' => '/Common/Internal/Atom/Content.php',
             'windowsazure\\common\\internal\\atom\\entry' => '/Common/Internal/Atom/Entry.php',

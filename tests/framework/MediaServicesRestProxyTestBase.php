@@ -41,6 +41,8 @@ use WindowsAzure\Common\Internal\MediaServicesSettings;
 class MediaServicesRestProxyTestBase extends ServiceRestProxyTestBase
 {
     protected $assets = array();
+    protected $accessPolicy = array();
+    protected $locator = array();
 
     public function setUp()
     {
@@ -59,6 +61,23 @@ class MediaServicesRestProxyTestBase extends ServiceRestProxyTestBase
         return $result;
     }
 
+    public function createAccessPolicy($accessPolicy) {
+        $result = $this->restProxy->createAccessPolicy($accessPolicy);
+
+        $this->accessPolicy[$result->getId()] = $result;
+
+        return $result;
+    }
+
+    public function createLocator($loc) {
+
+        $result = $this->restProxy->createLocator($loc);
+
+        $this->locator[$result->getId()] = $result;
+
+        return $result;
+    }
+
     protected function tearDown()
     {
         parent::tearDown();
@@ -66,6 +85,15 @@ class MediaServicesRestProxyTestBase extends ServiceRestProxyTestBase
         foreach($this->assets as $asset) {
             $this->restProxy->deleteAsset($asset);
         }
+        foreach($this->accessPolicy as $access) {
+            $this->restProxy->deleteAccessPolicy($access);
+        }
+        foreach($this->locator as $loc) {
+            $this->restProxy->deleteLocator($loc);
+        }
     }
 
+    protected function createSuffix() {
+        return sprintf('-%04x', mt_rand(0, 65535));
+    }
 }

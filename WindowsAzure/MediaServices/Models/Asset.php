@@ -131,6 +131,21 @@ class Asset
     private $_storageAccount;
 
     /**
+     * Create asset from array
+     *
+     * @param array $options    Array containing values for object properties
+     */
+    public static function createFromOptions($options) {
+        Validate::notNull($options['Options'], 'options[Options]');
+
+        $encryptionOptions = $options['Options'];
+        $asset = new Asset($encryptionOptions);
+        $asset->fromArray($options);
+
+        return $asset;
+    }
+
+    /**
      * Create asset
      *
      * @param int   $options    Asset encrytion options.
@@ -173,6 +188,11 @@ class Asset
         if (isset($options['AlternateId'])) {
             Validate::isString($options['AlternateId'], 'options[AlternateId]');
             $this->_alternateId = $options['AlternateId'];
+        }
+
+        if (isset($options['Name'])) {
+            Validate::isString($options['Name'], 'options[Name]');
+            $this->_name = $options['Name'];
         }
 
         if (isset($options['Options'])) {

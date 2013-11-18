@@ -81,12 +81,64 @@ class AccessPolicy
     private $_permissions;
 
     /**
+     * Create access policy from array
+     *
+     * @param array $options    Array containing values for object properties
+     */
+    public static function createFromOptions($options) {
+        Validate::notNull($options['Name'], 'options[Name]');
+
+        $accessPolicy = new AccessPolicy($options['Name']);
+        $accessPolicy->fromArray($options);
+
+        return $accessPolicy;
+    }
+
+    /**
      * Create access policy
      *
      * @param string    $name   Entity name
      */
     public function __construct($name) {
         $this->_name = $name;
+    }
+
+    /**
+     * Fill access policy from array
+     * @param array $options    Array containing values for object properties
+     */
+    public function fromArray($options) {
+        if (isset($options['Id'])) {
+            Validate::isString($options['Id'], 'options[Id]');
+            $this->_id = $options['Id'];
+        }
+
+        if (isset($options['Created'])) {
+            $created = new \DateTime($options['Created']);
+            Validate::isDate($created, 'options[Created]');
+            $this->_created = $created;
+        }
+
+        if (isset($options['LastModified'])) {
+            $lastModified = new \DateTime($options['LastModified']);
+            Validate::isDate($lastModified, 'options[LastModified]');
+            $this->_lastModified = $lastModified;
+        }
+
+        if (isset($options['Name'])) {
+            Validate::isString($options['Name'], 'options[Name]');
+            $this->_name = $options['Name'];
+        }
+
+        if (isset($options['DurationInMinutes'])) {
+            Validate::isDouble($options['DurationInMinutes'], 'options[DurationInMinutes]');
+            $this->_durationInMinutes = $options['DurationInMinutes'];
+        }
+
+        if (isset($options['Permissions'])) {
+            Validate::isInteger($options['Permissions'], 'options[Permissions]');
+            $this->_permissions = $options['Permissions'];
+        }
     }
 
     /**
