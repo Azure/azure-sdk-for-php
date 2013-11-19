@@ -1302,7 +1302,8 @@ class BlobRestProxy extends ServiceRestProxy implements IBlob
             $counter   = 0;
             $body      = '';
             $blockIds  = array();
-            $blockSize = 4194304; // 4mb
+            // if threshold is lower than 4mb, honor threshold, else use 4mb
+            $blockSize = ($this->_SingleBlobUploadThresholdInBytes < 4194304) ? $this->_SingleBlobUploadThresholdInBytes : 4194304;
             while(!$end) {
                 if (is_resource($content)) {
                     $body = fread($content, $blockSize);
