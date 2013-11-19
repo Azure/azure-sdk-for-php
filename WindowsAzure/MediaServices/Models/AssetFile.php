@@ -218,9 +218,8 @@ class AssetFile
         }
 
         if (isset($options['Created'])) {
-            $created = new \DateTime($options['Created']);
-            Validate::isDate($created, 'options[Created]');
-            $this->_created = $created;
+            Validate::isDateString($options['Created'], 'options[Created]');
+            $this->_created = new \DateTime($options['Created']);
         }
 
         if (isset($options['MimeType'])) {

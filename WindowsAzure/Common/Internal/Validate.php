@@ -333,6 +333,58 @@ class Validate
         }
     }
 
+    /**
+     * Validate if method exists in object
+     *
+     * @param object $objectInstance    An object that requires method existing validation
+     * @param string $method            Method name
+     * @param string $name              The parameter name
+     *
+     * @return boolean
+     */
+    public static function methodExists($objectInstance, $method, $name) {
+        Validate::isString($method, 'method');
+        Validate::notNull($objectInstance, 'objectInstance');
+        Validate::isObject($objectInstance, 'objectInstance');
+
+        if (method_exists($objectInstance, $method)) {
+            return true;
+        }
+        else {
+            throw new \InvalidArgumentException(
+                sprintf(
+                    Resources::ERROR_METHOD_NOT_FOUND,
+                    $method,
+                    $name
+                )
+            );
+        }
+    }
+
+    /**
+     * Validate if string is date formatted
+     *
+     * @param string $value
+     * @param string $name
+     * @throws \InvalidArgumentException
+     */
+    public static function isDateString($value, $name) {
+        Validate::isString($value, 'value');
+
+        try {
+            new \DateTime($value);
+        }
+        catch (\Exception $e) {
+            throw new \InvalidArgumentException(
+                sprintf(
+                    Resources::ERROR_INVALID_DATE_STRING,
+                    $name,
+                    $value
+                )
+            );
+        }
+    }
+
 }
 
 

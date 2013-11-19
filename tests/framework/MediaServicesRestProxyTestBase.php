@@ -82,14 +82,16 @@ class MediaServicesRestProxyTestBase extends ServiceRestProxyTestBase
     {
         parent::tearDown();
 
+        foreach($this->locator as $loc) {
+            $this->restProxy->deleteLocator($loc);
+        }
+
         foreach($this->assets as $asset) {
             $this->restProxy->deleteAsset($asset);
         }
+
         foreach($this->accessPolicy as $access) {
             $this->restProxy->deleteAccessPolicy($access);
-        }
-        foreach($this->locator as $loc) {
-            $this->restProxy->deleteLocator($loc);
         }
     }
 

@@ -47,12 +47,12 @@ use WindowsAzure\MediaServices\Models\Locator;
 class MediaServicesRestProxyTest extends MediaServicesRestProxyTestBase
 {
     /**
-    * @covers WindowsAzure\MediaServices\MediaServicesRestProxy:: createAsset
+    * @covers WindowsAzure\MediaServices\MediaServicesRestProxy::createAsset
     */
     public function testCreateAsset()
     {
         // Setup
-        $asset = new Asset(0);
+        $asset = new Asset(Asset::OPTIONS_NONE);
         $asset->setName('testAsset' . $this->createSuffix());
 
         // Test
@@ -63,7 +63,7 @@ class MediaServicesRestProxyTest extends MediaServicesRestProxyTestBase
     }
 
     /**
-     * @covers WindowsAzure\MediaServices\MediaServicesRestProxy:: createAccessPolicy
+     * @covers WindowsAzure\MediaServices\MediaServicesRestProxy::createAccessPolicy
      */
     public function testCreateAccessPolicy()
     {
@@ -71,7 +71,7 @@ class MediaServicesRestProxyTest extends MediaServicesRestProxyTestBase
         $name = 'Name';
         $sample = new AccessPolicy($name);
         $sample->setName('testAccess' . $this->createSuffix());
-        $sample->setDurationsInMinutes(1);
+        $sample->setDurationInMinutes(30);
 
         // Test
         $result = $this->createAccessPolicy($sample);
@@ -81,22 +81,23 @@ class MediaServicesRestProxyTest extends MediaServicesRestProxyTestBase
     }
 
     /**
-     * @covers WindowsAzure\MediaServices\MediaServicesRestProxy:: createLocator
+     * @covers WindowsAzure\MediaServices\MediaServicesRestProxy::createLocator
      */
     public function testCreateLocator()
     {
         // Setup
-        $locat = new Locator(1);
-        $locat->setId('0');
-        $locat->setName('testLocator' . $this->createSuffix());
-
-        $asset = new Asset(0);
+        $asset = new Asset(Asset::OPTIONS_NONE);
         $asset->setName('AssetForLocator' . $this->createSuffix());
-        $resultAsset = $this->createAsset($asset);
+        $asset = $this->createAsset($asset);
 
         $access = new AccessPolicy('Name');
         $access->setName('AccessForLocator' . $this->createSuffix());
-        $resultAccess = $this->createAccessPolicy($access);
+        $access->setDurationInMinutes(30);
+        $access->setPermissions(AccessPolicy::PERMISSIONS_READ + AccessPolicy::PERMISSIONS_WRITE + AccessPolicy::PERMISSIONS_DELETE + AccessPolicy::PERMISSIONS_LIST);
+        $access = $this->createAccessPolicy($access);
+
+        $locat = new Locator($asset,  $access, 1);
+        $locat->setName('testLocator' . $this->createSuffix());
 
         // Test
         $result = $this->createLocator($locat);

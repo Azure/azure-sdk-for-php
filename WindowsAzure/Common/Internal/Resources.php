@@ -118,6 +118,8 @@ class Resources
     const INVALID_DEPLOYMENT_STATUS_MSG = "The change mode must be 'Running' or 'Suspended'. Use DeploymentStatus class constants for that purpose.";
     const ERROR_OAUTH_GET_ACCESS_TOKEN = 'Unable to get oauth access token for endpoint \'%s\', account name \'%s\'';
     const ERROR_OAUTH_SERVICE_MISSING = 'OAuth service missing for account name \'%s\'';
+    const ERROR_METHOD_NOT_FOUND = 'Method \'%s\' not found in object class \'%s\'';
+    const ERROR_INVALID_DATE_STRING = 'Parameter \'%s\' is not a date formatted string \'%s\'';
 
     // HTTP Headers
     const X_MS_HEADER_PREFIX                 = 'x-ms-';

@@ -90,6 +90,9 @@ class AtomProperties extends AtomBase
                 $variableName  = substr($method->name, 3);
                 $variableValue = $method->invoke($object);
                 if (!empty($variableValue)) {
+                    if (is_a($variableValue, '\DateTime')) {
+                        $variableValue = $variableValue->format(\DateTime::ATOM);
+                    }
                     $this->properties[$variableName] = (string)$variableValue;
                 }
             }

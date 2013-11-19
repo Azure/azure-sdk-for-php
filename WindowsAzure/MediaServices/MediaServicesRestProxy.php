@@ -160,24 +160,6 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
     }
 
     /**
-     * Get asset id from object or string
-     *
-     * @param WindowsAzure\MediaServices\Models\Asset|string   $asset  Asset data or asset Id
-     * @return string
-     */
-    private function getAssetId($asset) {
-        if (is_string($asset)) {
-            $assetId = $asset;
-        }
-        else {
-            Validate::isA($asset, 'WindowsAzure\Mediaservices\Models\Asset', 'asset');
-            $assetId = $asset->getId();
-        }
-
-        return $assetId;
-    }
-
-    /**
      * Create new asset
      *
      * @param WindowsAzure\MediaServices\Models\Asset   $asset  Asset data
@@ -222,7 +204,7 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
      */
     public function deleteAsset($asset) {
 
-        $assetId = $this->getAssetId($asset);
+        $assetId = Utilities::getEntityId($asset, 'WindowsAzure\MediaServices\Models\Asset');
 
         $method      = Resources::HTTP_DELETE;
         $headers     = array();
@@ -285,13 +267,7 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
      * @param WindowsAzure\MediaServices\Models\AccessPolicy|string   $accessPolicy  Access policy data or access policy Id
      */
     public function deleteAccessPolicy($accessPolicy) {
-        if (is_string($accessPolicy)) {
-            $accessPolicyId = $accessPolicy;
-        }
-        else {
-            Validate::isA($accessPolicy, 'WindowsAzure\Mediaservices\Models\AccessPolicy', 'accessPolicy');
-            $accessPolicyId = $accessPolicy->getId();
-        }
+        $accessPolicyId = Utilities::getEntityId($accessPolicy, 'WindowsAzure\Mediaservices\Models\AccessPolicy');
 
         $method      = Resources::HTTP_DELETE;
         $headers     = array();
@@ -354,13 +330,7 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
      * @param WindowsAzure\MediaServices\Models\Locator|string   $asset  Asset data or asset Id
      */
     public function deleteLocator($locator) {
-        if (is_string($locator)) {
-            $locatorId = $locator;
-        }
-        else {
-            Validate::isA($locator, 'WindowsAzure\Mediaservices\Models\Locator', 'locator');
-            $locatorId = $locator->getId();
-        }
+        $locatorId = Utilities::getEntityId($locator, 'WindowsAzure\Mediaservices\Models\Locator');
 
         $method      = Resources::HTTP_DELETE;
         $headers     = array();
@@ -386,7 +356,7 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
      */
     public function CreateFileInfos($asset) {
 
-        $assetId        = $this->getAssetId($asset);
+        $assetId        = Utilities::getEntityId($asset, 'WindowsAzure\MediaServices\Models\Asset');
         $assetIdEncoded = urlencode($assetId);
 
         $method      = Resources::HTTP_GET;
@@ -421,7 +391,7 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
         }
 
         if ($asset != null) {
-            $assetId = $this->getAssetId($asset);
+            $assetId = Utilities::getEntityId($asset, 'WindowsAzure\MediaServices\Models\Asset');
             $path = "Assets('{$assetId}')/Files";
         }
 

@@ -23,7 +23,7 @@
  */
 
 namespace WindowsAzure\MediaServices\Models;
-
+use WindowsAzure\Common\Internal\Validate;
 
 /**
  * Represents access policy object used in media services
@@ -38,6 +38,41 @@ namespace WindowsAzure\MediaServices\Models;
  */
 class AccessPolicy
 {
+    /**
+     * The access rights the client has when interacting with the Asset. (None)
+     *
+     * @var int
+     */
+    const PERMISSIONS_NONE = 0;
+
+    /**
+     * The access rights the client has when interacting with the Asset. (Read)
+     *
+     * @var int
+     */
+    const PERMISSIONS_READ = 1;
+
+    /**
+     * The access rights the client has when interacting with the Asset. (Write)
+     *
+     * @var int
+     */
+    const PERMISSIONS_WRITE = 2;
+
+    /**
+     * The access rights the client has when interacting with the Asset. (Delete)
+     *
+     * @var int
+     */
+    const PERMISSIONS_DELETE = 4;
+
+    /**
+     * The access rights the client has when interacting with the Asset. (List)
+     *
+     * @var int
+     */
+    const PERMISSIONS_LIST = 8;
+
     /**
      * Access policy id
      *
@@ -114,15 +149,13 @@ class AccessPolicy
         }
 
         if (isset($options['Created'])) {
-            $created = new \DateTime($options['Created']);
-            Validate::isDate($created, 'options[Created]');
-            $this->_created = $created;
+            Validate::isDateString($options['Created'], 'options[Created]');
+            $this->_created = new \DateTime($options['Created']);
         }
 
         if (isset($options['LastModified'])) {
-            $lastModified = new \DateTime($options['LastModified']);
-            Validate::isDate($lastModified, 'options[LastModified]');
-            $this->_lastModified = $lastModified;
+            Validate::isDateString($options['LastModified'], 'options[LastModified]');
+            $this->_lastModified = new \DateTime($options['LastModified']);
         }
 
         if (isset($options['Name'])) {
@@ -166,7 +199,7 @@ class AccessPolicy
      *
      * @return double
      */
-    public function getDurationsInMinutes() {
+    public function getDurationInMinutes() {
        return $this->_durationInMinutes;
     }
 
@@ -177,7 +210,7 @@ class AccessPolicy
      *
      * @return none
      */
-    public function setDurationsInMinutes($value) {
+    public function setDurationInMinutes($value) {
         $this->_durationInMinutes = $value;
     }
 

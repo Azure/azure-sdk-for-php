@@ -75,19 +75,19 @@ class AccessPolicyTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\MediaServices\Models\AccessPolicy::getDurationsInMinutes
-     * @covers WindowsAzure\MediaServices\Models\AccessPolicy::setDurationsInMinutes
+     * @covers WindowsAzure\MediaServices\Models\AccessPolicy::getDurationInMinutes
+     * @covers WindowsAzure\MediaServices\Models\AccessPolicy::setDurationInMinutes
      */
-       public function testGetDurationsInMinutes(){
+       public function testGetDurationInMinutes(){
 
         // Setup
         $name = 'newName';
         $value = new AccessPolicy($name);
         $expected = 25.21;
-        $value->setDurationsInMinutes($expected);
+        $value->setDurationInMinutes($expected);
 
         // Test
-        $actual = $value->getDurationsInMinutes();
+        $actual = $value->getDurationInMinutes();
 
         // Assert
         $this->assertEquals($expected, $actual);

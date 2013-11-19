@@ -23,7 +23,8 @@
  */
 
 namespace WindowsAzure\MediaServices\Models;
-
+use WindowsAzure\Common\Internal\Utilities;
+use WindowsAzure\Common\Internal\Validate;
 
 /**
  * Represents locator object used in media services
@@ -38,6 +39,27 @@ namespace WindowsAzure\MediaServices\Models;
  */
 class Locator
 {
+    /**
+     * Type of Locator - none - The default enumeration value
+     *
+     * @var int
+     */
+    const TYPE_NONE = 0;
+
+    /**
+     * Type of Locator - SAS - Specifies Shared Access Signature (Sas)
+     *
+     * @var int
+     */
+    const TYPE_SAS = 1;
+
+    /**
+     * Type of Locator - OnDemandOrigin - Specifies a locator type which refers to an Azure Media Service On Demand Origin streaming endpoint
+     *
+     * @var int
+     */
+    const TYPE_ON_DEMAND_ORIGIN = 2;
+
     /**
      * Locator id
      *
@@ -109,28 +131,16 @@ class Locator
     private $_startTime;
 
     /**
-     * Asset policy entity set
-     *
-     * @var array
-     */
-    private $_assetPolicy;
-
-    /**
-     * Asset
-     *
-     * @var array
-     */
-    private $_asset;
-
-    /**
      * Create locator from array
      *
      * @param array $options    Array containing values for object properties
      */
     public static function createFromOptions($options) {
+        Validate::notNull($options['AssetId'], 'options[AssetId]');
+        Validate::notNull($options['AccessPolicyId'], 'options[AccessPolicyId]');
         Validate::notNull($options['Type'], 'options[Type]');
 
-        $locator = new Locator($options['Type']);
+        $locator = new Locator($options['AssetId'], $options['AccessPolicyId'], $options['Type']);
         $locator->fromArray($options);
 
         return $locator;
@@ -139,13 +149,16 @@ class Locator
     /**
      * Create locator
      *
-     * @param int   $type   Enumeration value that describes the type of Locator.
-     *                      None = 0,
-     *                      SAS = 1,
-     *                      OnDemandOrigin = 2
+     * @param string    asset
+     * @param int       $type   Enumeration value that describes the type of Locator.
+     *                          None = 0,
+     *                          SAS = 1,
+     *                          OnDemandOrigin = 2
      */
-    public function __construct($type) {
-        $this->_type = $type;
+    public function __construct($asset, $accessPolicy, $type) {
+        $this->_assetId         = Utilities::getEntityId($asset, 'WindowsAzure\MediaServices\Models\Asset');
+        $this->_accessPolicyId  = Utilities::getEntityId($accessPolicy, 'WindowsAzure\MediaServices\Models\AccessPolicy');
+        $this->_type            = $type;
     }
 
     /**
@@ -164,9 +177,8 @@ class Locator
         }
 
         if (isset($options['ExpirationDateTime'])) {
-            $created = new \DateTime($options['ExpirationDateTime']);
-            Validate::isDate($expirationDateTime, 'options[ExpirationDateTime]');
-            $this->_expirationDateTime = $expirationDateTime;
+            Validate::isDateString($options['ExpirationDateTime'], 'options[ExpirationDateTime]');
+            $this->_expirationDateTime = new \DateTime($options['ExpirationDateTime']);
         }
 
         if (isset($options['Type'])) {
@@ -185,7 +197,7 @@ class Locator
         }
 
         if (isset($options['ContentAccessComponent'])) {
-            Validate::isValidUri($options['ContentAccessComponent'], 'options[ContentAccessComponent]');
+            Validate::isString($options['ContentAccessComponent'], 'options[ContentAccessComponent]');
             $this->_contentAccessComponent = $options['ContentAccessComponent'];
         }
 
@@ -200,9 +212,8 @@ class Locator
         }
 
         if (isset($options['StartTime'])) {
-            $startTime = new \DateTime($options['StartTime']);
-            Validate::isDate($startTime, 'options[StartTime]');
-            $this->_startTime = $startTime;
+            Validate::isDateString($options['StartTime'], 'options[StartTime]');
+            $this->_startTime = new \DateTime($options['StartTime']);
         }
 
         if (isset($options['AssetPolicy'])) {
@@ -214,24 +225,6 @@ class Locator
             Validate::isValidUri($options['Asset'], 'options[Asset]');
             $this->_asset = $options['Asset'];
         }
-    }
-
-    /**
-     * Get "Asset"
-     *
-     * @return array
-     */
-    public function getAsset() {
-       return $this->_asset;
-    }
-
-    /**
-     * Get "Asset policy entity set"
-     *
-     * @return array
-     */
-    public function getAssetPolicy() {
-       return $this->_assetPolicy;
     }
 
     /**

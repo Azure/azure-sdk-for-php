@@ -40,6 +40,55 @@ use WindowsAzure\Common\Internal\Validate;
 class Asset
 {
     /**
+     * The state of the asset "initialized"
+     *
+     * @var int
+     */
+    const STATE_INITIALIZED = 0;
+
+    /**
+     * The state of the asset "published"
+     *
+     * @var int
+     */
+    const STATE_PUBLISHED = 1;
+
+    /**
+     * The state of the asset "deleted"
+     *
+     * @var int
+     */
+    const STATE_DELETED = 2;
+
+    /**
+     * The encryption options "none"
+     *
+     * @var int
+     */
+    const OPTIONS_NONE = 0;
+
+    /**
+     * The encryption options "storage encrypted"
+     *
+     * @var int
+     */
+    const OPTIONS_STORAGE_ENCRYPTED = 1;
+
+    /**
+     * The encryption options "common encryption protected"
+     *
+     * @var int
+     */
+    const OPTIONS_COMMON_ENCRYPTION_PROTECTED = 2;
+
+    /**
+     * The encryption options "envelope encryption protected"
+     *
+     * @var int
+     */
+    const OPTIONS_ENVELOPE_ENCRYPTION_PROTECTED = 4;
+
+    /**
      * Asset id
      *
      * @var string
@@ -96,39 +145,11 @@ class Asset
     private $_uri;
 
     /**
-     * Locators entity set
-     *
-     * @var array
-     */
-    private $_locators;
-
-    /**
-     * Files entity set
-     *
-     * @var array
-     */
-    private $_files;
-
-    /**
-     * Parent assets entity set
-     *
-     * @var array
-     */
-    private $_parentAssets;
-
-    /**
      * Storage account name
      *
      * @var string
      */
     private $_storageAccountName;
-
-    /**
-     * Storage account entity set
-     *
-     * @var array
-     */
-    private $_storageAccount;
 
     /**
      * Create asset from array
@@ -174,15 +195,13 @@ class Asset
         }
 
         if (isset($options['Created'])) {
-            $created = new \DateTime($options['Created']);
-            Validate::isDate($created, 'options[Created]');
-            $this->_created = $created;
+            Validate::isDateString($options['Created'], 'options[Created]');
+            $this->_created = new \DateTime($options['Created']);
         }
 
         if (isset($options['LastModified'])) {
-            $lastModified = new \DateTime($options['LastModified']);
-            Validate::isDate($lastModified, 'options[LastModified]');
-            $this->_lastModified = $lastModified;
+            Validate::isDateString($options['LastModified'], 'options[LastModified]');
+            $this->_lastModified = new \DateTime($options['LastModified']);
         }
 
         if (isset($options['AlternateId'])) {
@@ -232,70 +251,12 @@ class Asset
     }
 
     /**
-     * Get "Storage account entity set"
-     *
-     * @return array
-     */
-    public function getStorageAccount() {
-       return $this->_storageAccount;
-    }
-
-    /**
      * Get "Storage account name"
      *
      * @return string
      */
     public function getStorageAccountName() {
        return $this->_storageAccountName;
-    }
-
-    /**
-     * Set "Storage account name"
-     *
-     * @param string    $value Storage account name
-     *
-     * @return none
-     */
-    public function setStorageAccountName($value) {
-        $this->_storageAccountName = $value;
-    }
-
-    /**
-     * Get "Parent assets entity set"
-     *
-     * @return array
-     */
-    public function getParentAssets() {
-       return $this->_parentAssets;
-    }
-
-    /**
-     * Set "Parent assets entity set"
-     *
-     * @param array    $value Parent assets entity set
-     *
-     * @return none
-     */
-    public function setParentAssets($value) {
-        $this->_parentAssets = $value;
-    }
-
-    /**
-     * Get "Files entity set"
-     *
-     * @return array
-     */
-    public function getFiles() {
-       return $this->_files;
-    }
-
-    /**
-     * Get "Locators entity set"
-     *
-     * @return array
-     */
-    public function getLocators() {
-       return $this->_locators;
     }
 
     /**
