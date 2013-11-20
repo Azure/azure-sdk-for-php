@@ -106,4 +106,40 @@ class MediaServicesRestProxyTest extends MediaServicesRestProxyTestBase
         $this->assertEquals($locat->getName(), $result->getName());
 
     }
+
+    /**
+     * @covers WindowsAzure\MediaServices\MediaServicesRestProxy::createFileInfos
+     * @covers WindowsAzure\MediaServices\MediaServicesRestProxy::getAssetFiles
+     */
+    public function testCreateFileInfos()
+    {
+        // Setup
+        $asset = new Asset(Asset::OPTIONS_NONE);
+        $asset->setName('TestAsset' . $this->createSuffix());
+        $asset = $this->createAsset($asset);
+
+        $access = new AccessPolicy('Name');
+        $access->setName('TestAccessPolicy' . $this->createSuffix());
+        $access->setDurationInMinutes(30);
+        $access->setPermissions(AccessPolicy::PERMISSIONS_WRITE);
+        $access = $this->createAccessPolicy($access);
+
+        $locator = new Locator($asset,  $access, Locator::TYPE_SAS);
+        $locator->setName('TestLocator' . $this->createSuffix());
+        $locator->setStartTime(new \DateTime('now -5 minutes'));
+        $locator = $this->createLocator($locator);
+
+        $fileName = 'simple.avi';
+        $this->restProxy->uploadAssetFile($locator, $fileName, 'test file content');
+
+        // Test
+        $this->restProxy->createFileInfos($asset);
+
+        // Assert
+        $assetFiles = $this->restProxy->getAssetFiles(null, $asset);
+        $this->assertEquals(1, count($assetFiles));
+        $this->assertEquals($fileName, $assetFiles[0]->getName());
+        $this->assertEquals($asset->getId(), $assetFiles[0]->getParentAssetId());
+    }
+
 }

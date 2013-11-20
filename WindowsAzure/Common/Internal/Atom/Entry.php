@@ -152,7 +152,21 @@ class Entry extends AtomBase
     public function parseXml($xmlString)
     {
         Validate::notNull($xmlString, 'xmlString');
-        $entryXml         = simplexml_load_string($xmlString);
+
+        $this->fromXml(simplexml_load_string($xmlString));
+    }
+
+    /**
+     * Creates an ATOM ENTRY instance with specified simpleXML object
+     *
+     * @param \SimpleXMLElement $entryXml xml element of ATOM ENTRY
+     *
+     * @return none
+     */
+    public function fromXml($entryXml) {
+        Validate::notNull($entryXml, 'entryXml');
+        Validate::isA($entryXml, '\SimpleXMLElement', 'entryXml');
+
         $this->attributes = (array)$entryXml->attributes();
         $entryArray       = (array)$entryXml;
 

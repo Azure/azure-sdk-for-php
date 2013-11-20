@@ -33,12 +33,16 @@ use WindowsAzure\MediaServices\Models\Asset;
 use WindowsAzure\MediaServices\Models\AccessPolicy;
 use WindowsAzure\MediaServices\Models\Locator;
 use WindowsAzure\MediaServices\Models\AssetFile;
+use WindowsAzure\Common\Internal\Atom\Feed;
 use WindowsAzure\Common\Internal\Atom\Entry;
 use WindowsAzure\Common\Internal\Atom\Content;
 use WindowsAzure\Common\Internal\Atom\AtomProperties;
+use WindowsAzure\Blob\Models\BlobType;
+use WindowsAzure\Common\Internal\Http\HttpClient;
+use WindowsAzure\Common\Internal\Http\Url;
 
 /**
- * This class constructs HTTP requests and receive HTTP responses for blob
+ * This class constructs HTTP requests and receive HTTP responses for media services
  * service layer.
  *
  * @category  Microsoft
@@ -354,7 +358,7 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
      *
      * @param WindowsAzure\MediaServices\Models\Asset|string   $asset  Asset data or asset Id
      */
-    public function CreateFileInfos($asset) {
+    public function createFileInfos($asset) {
 
         $assetId        = Utilities::getEntityId($asset, 'WindowsAzure\MediaServices\Models\Asset');
         $assetIdEncoded = urlencode($assetId);
@@ -396,14 +400,7 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
         }
 
         if ($assetFile != null) {
-            if (is_string($assetFile)) {
-                $assetFileId = $assetFile;
-            }
-            else {
-                Validate::isA($locator, 'WindowsAzure\Mediaservices\Models\AssetFile', 'assetFile');
-                $assetFileId = $assetFile->getId();
-            }
-
+            $assetFileId = Utilities::getEntityId($assetFile, 'WindowsAzure\Mediaservices\Models\AssetFile');
             $path = "Files('{$assetFileId}')";
         }
 
@@ -438,4 +435,37 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
         return $result;
     }
 
+    /**
+     * Upload asset file to storage.
+     *
+     * @param WindowsAzure\MediaServices\Models\Locator $locator    Write locator for file upload
+     * @param string                                    $name       Uploading file filename
+     * @param string                                    $body       Uploading file content
+     *
+     * @return null
+     */
+    public function uploadAssetFile($locator, $name, $body) {
+
+        Validate::isA($locator, 'WindowsAzure\Mediaservices\Models\Locator', 'locator');
+        Validate::isString($name, 'name');
+        Validate::notNull($body, 'body');
+
+        $method      = Resources::HTTP_PUT;
+        $url         = new Url($locator->getBaseUri() . '/' . $name . $locator->getContentAccessComponent());
+        $filters     = array();
+        $postParams  = array();
+        $queryParams = array();
+        $statusCode  = Resources::STATUS_CREATED;
+        $headers     = array(
+            Resources::CONTENT_TYPE     => Resources::BINARY_FILE_TYPE,
+            Resources::X_MS_VERSION     => Resources::STORAGE_API_LATEST_VERSION,
+            Resources::X_MS_BLOB_TYPE   => BlobType::BLOCK_BLOB,
+        );
+
+        $httpClient = new HttpClient();
+        $httpClient->setMethod($method);
+        $httpClient->setHeaders($headers);
+        $httpClient->setExpectedStatusCode($statusCode);
+        $httpClient->send($filters, $url);
+    }
 }
