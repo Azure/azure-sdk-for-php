@@ -23,10 +23,7 @@
  */
 
 namespace WindowsAzure\MediaServices\Models;
-<<<<<<< HEAD
 use WindowsAzure\Common\Internal\Utilities;
-=======
->>>>>>> refs/remotes/origin/ms-ingest-assets
 use WindowsAzure\Common\Internal\Validate;
 
 /**
