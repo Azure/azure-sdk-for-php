@@ -622,7 +622,7 @@ class Utilities
      */
     public static function getEntityId($entity, $type, $method = 'getId') {
         if (is_string($entity)) {
-            $result = $entity;
+            return $entity;
         }
         else {
             Validate::isA($entity, $type, 'entity');

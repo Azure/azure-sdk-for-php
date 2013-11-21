@@ -38,49 +38,25 @@ use WindowsAzure\MediaServices\Models\Locator;
 
 class LocatorTest extends \PHPUnit_Framework_TestCase
 {
+
     /**
      * @covers WindowsAzure\MediaServices\Models\Locator::__construct
      */
     public function test__construct(){
 
         // Setup
-        $sample = 1;
+        $assetId = 'uifygid75';
+        $accessId = 'ljhsdfl45';
+        $type = Locator::TYPE_NONE;
+
 
         // Test
-        $result = new Locator($sample);
+        $result = new Locator($assetId, $accessId, $type);
 
         // Assert
-        $this->assertEquals($sample, $result->getType());
-    }
-
-    /**
-     * @covers WindowsAzure\MediaServices\Models\Locator::getAsset
-     */
-    public function testGetAsset(){
-
-        // Setup
-        $sample = new Locator(1);
-
-        // Test
-        $actual = $sample->getAsset();
-
-        // Assert
-        $this->assertNull($actual);
-    }
-
-    /**
-     * @covers WindowsAzure\MediaServices\Models\Locator::getAssetPolicy
-     */
-    public function testAssetPolicy(){
-
-        // Setup
-        $sample = new Locator(1);
-
-        // Test
-        $actual = $sample->getAssetPolicy();
-
-        // Assert
-        $this->assertNull($actual);
+        $this->assertEquals($assetId, $result->getAssetId());
+        $this->assertEquals($accessId, $result->getAccessPolicyId());
+        $this->assertEquals($type, $result->getType());
     }
 
     /**
@@ -90,15 +66,18 @@ class LocatorTest extends \PHPUnit_Framework_TestCase
     public function testGetStartTime(){
 
         // Setup
-        $sample = new Locator(1);
+        $assetId = 'uifygid75';
+        $accessId = 'ljhsdfl45';
+        $type = Locator::TYPE_NONE;
+        $locator = new Locator($assetId, $accessId, $type);
         $start = new \Datetime('2013-11-14');
-        $sample->setStartTime($start);
+        $locator->setStartTime($start);
 
         // Test
-        $actual = $sample->getStartTime();
+        $actual = $locator->getStartTime();
 
         // Assert
-        $this->assertEquals($start, $actual);
+        $this->assertEquals($start->getTimestamp(), $actual->getTimestamp());
     }
 
     /**
@@ -107,13 +86,16 @@ class LocatorTest extends \PHPUnit_Framework_TestCase
     public function testGetAssetId(){
 
         // Setup
-        $sample = new Locator(1);
+        $assetId = 'uifygid75';
+        $accessId = 'ljhsdfl45';
+        $type = Locator::TYPE_NONE;
+        $locator = new Locator($assetId, $accessId, $type);
 
         // Test
-        $actual = $sample->getAssetId();
+        $actual = $locator->getAssetId();
 
         // Assert
-        $this->assertNull($actual);
+        $this->assertEquals($assetId, $actual);
     }
 
     /**
@@ -122,13 +104,16 @@ class LocatorTest extends \PHPUnit_Framework_TestCase
     public function testGetAccessPolicyId(){
 
         // Setup
-        $sample = new Locator(1);
+        $assetId = 'uifygid75';
+        $accessId = 'ljhsdfl45';
+        $type = Locator::TYPE_NONE;
+        $locator = new Locator($assetId, $accessId, $type);
 
         // Test
-        $actual = $sample->getAccessPolicyId();
+        $actual = $locator->getAccessPolicyId();
 
         // Assert
-        $this->assertNull($actual);
+        $this->assertEquals($accessId, $actual);
     }
 
     /**
@@ -137,13 +122,19 @@ class LocatorTest extends \PHPUnit_Framework_TestCase
     public function testGetContentAccessComponent(){
 
         // Setup
-        $sample = new Locator(1);
+        $locatorArray = array(
+            'Type'                        => Locator::TYPE_NONE,
+            'ContentAccessComponent'      => 'AccessComponent',
+            'AccessPolicyId'              => 'ljhsdfl45',
+            'AssetId'                     => 'uifygid75'
+        );
+        $result = Locator::createFromOptions($locatorArray);
 
         // Test
-        $actual = $sample->getContentAccessComponent();
+        $result = $result->getContentAccessComponent();
 
         // Assert
-        $this->assertNull($actual);
+        $this->assertEquals($locatorArray['ContentAccessComponent'], $result);
     }
 
     /**
@@ -151,14 +142,20 @@ class LocatorTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetBaseUri(){
 
-        // Setup
-        $sample = new Locator(1);
+       // Setup
+        $locatorArray = array(
+            'Type'                => Locator::TYPE_NONE,
+            'BaseUri'             => 'http://someurl.com/uysfdu56y',
+            'AccessPolicyId'      => 'ljhsdfl45',
+            'AssetId'             => 'uifygid75'
+        );
+        $result = Locator::createFromOptions($locatorArray);
 
         // Test
-        $actual = $sample->getBaseUri();
+        $result = $result->getBaseUri();
 
         // Assert
-        $this->assertNull($actual);
+        $this->assertEquals($locatorArray['BaseUri'], $result);
     }
 
     /**
@@ -167,13 +164,19 @@ class LocatorTest extends \PHPUnit_Framework_TestCase
     public function testGetPath(){
 
         // Setup
-        $sample = new Locator(1);
+        $locatorArray = array(
+            'Type'                => Locator::TYPE_NONE,
+            'Path'                => 'http://someurl.com/uysfdu56y',
+            'AccessPolicyId'      => 'ljhsdfl45',
+            'AssetId'             => 'uifygid75'
+        );
+        $result = Locator::createFromOptions($locatorArray);
 
         // Test
-        $actual = $sample->getPath();
+        $result = $result->getPath();
 
         // Assert
-        $this->assertNull($actual);
+        $this->assertEquals($locatorArray['Path'], $result);
     }
 
     /**
@@ -183,12 +186,15 @@ class LocatorTest extends \PHPUnit_Framework_TestCase
     public function testGetType(){
 
         // Setup
-        $sample = new Locator(1);
-        $type = 12;
-        $sample->setType($type);
+        $assetId = 'uifygid75';
+        $accessId = 'ljhsdfl45';
+        $type = Locator::TYPE_NONE;
+        $locator = new Locator($assetId, $accessId, Locator::TYPE_NONE);
+        $type = Locator::TYPE_SAS;
+        $locator->setType($type);
 
         // Test
-        $actual = $sample->getType();
+        $actual = $locator->getType();
 
         // Assert
         $this->assertEquals($type, $actual);
@@ -201,15 +207,18 @@ class LocatorTest extends \PHPUnit_Framework_TestCase
     public function testGetExpirationDateTime(){
 
         // Setup
-        $sample = new Locator(1);
+        $assetId = 'uifygid75';
+        $accessId = 'ljhsdfl45';
+        $type = Locator::TYPE_NONE;
+        $locator = new Locator($assetId, $accessId, Locator::TYPE_NONE);
         $date = new \Datetime('2013-12-30');
-        $sample->setExpirationDateTime($date);
+        $locator->setExpirationDateTime($date);
 
         // Test
-        $actual = $sample->getExpirationDateTime();
+        $actual = $locator->getExpirationDateTime();
 
         // Assert
-        $this->assertEquals($date, $actual);
+        $this->assertEquals($date->getTimestamp(), $actual->getTimestamp());
     }
 
     /**
@@ -219,12 +228,15 @@ class LocatorTest extends \PHPUnit_Framework_TestCase
     public function testGetName(){
 
         // Setup
-        $sample = new Locator(1);
+        $assetId = 'uifygid75';
+        $accessId = 'ljhsdfl45';
+        $type = Locator::TYPE_NONE;
+        $locator = new Locator($assetId, $accessId, $type);
         $name = 'nameName';
-        $sample->setName($name);
+        $locator->setName($name);
 
         // Test
-        $actual = $sample->getName();
+        $actual = $locator->getName();
 
         // Assert
         $this->assertEquals($name, $actual);
@@ -237,15 +249,56 @@ class LocatorTest extends \PHPUnit_Framework_TestCase
     public function testGetId(){
 
         // Setup
-        $sample = new Locator(1);
+        $assetId = 'uifygid75';
+        $accessId = 'ljhsdfl45';
+        $type = Locator::TYPE_NONE;
+        $locator = new Locator($assetId, $accessId, $type);
         $id = 'NameID';
-        $sample->setId($id);
+        $locator->setId($id);
 
         // Test
-        $actual = $sample->getId();
+        $actual = $locator->getId();
 
         // Assert
         $this->assertEquals($id, $actual);
+    }
+
+    /**
+     * @covers WindowsAzure\MediaServices\Models\Locator::createFromOptions
+     * @covers WindowsAzure\MediaServices\Models\Locator::fromArray
+     */
+    public function testLocatorFromOptions(){
+
+        // Setup
+        $locatorArray = array(
+            'Id'                           => 'kjshfs89',
+            'Name'                         => 'newLocator',
+            'ExpirationDateTime'           => '2013-11-30',
+            'Type'                         => Locator::TYPE_NONE,
+            'Path'                         => 'http://someurl.com/gdkf76r',
+            'BaseUri'                      => 'http://someurl.com/uysfdu56y',
+            'ContentAccessComponent'       => 'AccessComponent',
+            'AccessPolicyId'               => 'uifygid75',
+            'AssetId'                      => 'ljhsdfl45',
+            'StartTime'                    => '2013-11-19',
+        );
+        $expiration = new \Datetime($locatorArray['ExpirationDateTime']);
+        $start = new \Datetime($locatorArray['StartTime']);
+
+        // Test
+        $resultLocator = Locator::createFromOptions($locatorArray);
+
+        // Assert
+        $this->assertEquals($locatorArray['Id'], $resultLocator->getId());
+        $this->assertEquals($locatorArray['Name'], $resultLocator->getName());
+        $this->assertEquals($expiration->getTimestamp(), $resultLocator->getExpirationDateTime()->getTimestamp());
+        $this->assertEquals($locatorArray['Type'], $resultLocator->getType());
+        $this->assertEquals($locatorArray['Path'], $resultLocator->getPath());
+        $this->assertEquals($locatorArray['BaseUri'], $resultLocator->getBaseUri());
+        $this->assertEquals($locatorArray['ContentAccessComponent'], $resultLocator->getContentAccessComponent());
+        $this->assertEquals($locatorArray['AccessPolicyId'], $resultLocator->getAccessPolicyId());
+        $this->assertEquals($locatorArray['AssetId'], $resultLocator->getAssetId());
+        $this->assertEquals($start->getTimestamp(), $resultLocator->getStartTime()->getTimestamp());
     }
 
 }

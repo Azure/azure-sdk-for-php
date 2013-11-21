@@ -23,7 +23,8 @@
  */
 
 namespace WindowsAzure\MediaServices\Models;
-
+use WindowsAzure\Common\Internal\Utilities;
+use WindowsAzure\Common\Internal\Validate;
 
 /**
  * Represents asset file object used in media services
@@ -217,6 +218,11 @@ class AssetFile
             $this->_isPrimary = $options['IsPrimary'];
         }
 
+        if (isset($options['LastModified'])) {
+            Validate::isDateString($options['LastModified'], 'options[LastModified]');
+            $this->_lastModified = new \DateTime($options['LastModified']);
+        }
+
         if (isset($options['Created'])) {
             Validate::isDateString($options['Created'], 'options[Created]');
             $this->_created = new \DateTime($options['Created']);
@@ -229,7 +235,7 @@ class AssetFile
 
         if (isset($options['ContentChecksum'])) {
             Validate::isString($options['ContentChecksum'], 'options[ContentChecksum]');
-            $this->_contentChecksum = $options['ContentChecksum'];
+            $this->_contentCheckSum = $options['ContentChecksum'];
         }
     }
 
