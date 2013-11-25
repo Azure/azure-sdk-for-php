@@ -466,6 +466,7 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
         $httpClient->setMethod($method);
         $httpClient->setHeaders($headers);
         $httpClient->setExpectedStatusCode($statusCode);
+        $httpClient->setBody($body);
         $httpClient->send($filters, $url);
     }
 }
