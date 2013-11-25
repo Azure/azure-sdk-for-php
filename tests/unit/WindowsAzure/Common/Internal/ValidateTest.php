@@ -517,5 +517,34 @@ class ValidateTest extends \PHPUnit_Framework_TestCase
         // Assert
     }
 
+    /**
+     * @covers WindowsAzure\Common\Internal\Validate::isDateString
+     */
+    public function testIsDateStringValid(){
+
+        // Setup
+        $value = '2013-11-25';
+
+        // Test
+        Validate::isDateString($value, 'name');
+
+        // Assert
+        $this->assertTrue($result);
+    }
+
+    /**
+     * @covers WindowsAzure\Common\Internal\Validate::isDateString
+     */
+    public function testIsDateStringNotValid(){
+
+        // Setup
+        $this->setExpectedException('\InvalidArgumentException');
+        $value = 'not a date';
+
+        // Test
+        $result = Validate::isDateString($value, 'name');
+
+        // Assert
+    }
 }
 

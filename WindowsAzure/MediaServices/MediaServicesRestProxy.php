@@ -152,15 +152,16 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
         Validate::notNull($entry, 'entry');
         Validate::isA($entry, 'WindowsAzure\Common\Internal\Atom\Entry', 'entry');
 
+        $result = array();
         $content = $entry->getContent();
         if (!empty($content)) {
             $properties = $content->getProperties();
             if (!empty($properties)) {
-                return $properties->getProperties();
+                $result = $properties->getProperties();
             }
         }
 
-        return array();
+        return $result;
     }
 
     /**
@@ -194,11 +195,8 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
         $entry = new Entry();
         $entry->parseXml($response->getBody());
         $properties = $this->getPropertiesFromAtomEntry($entry);
-        if (!empty($properties)) {
-            return Asset::createFromOptions($properties);
-        }
 
-        return null;
+        return Asset::createFromOptions($properties);
     }
 
     /**
@@ -258,11 +256,8 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
         $entry = new Entry();
         $entry->parseXml($response->getBody());
         $properties = $this->getPropertiesFromAtomEntry($entry);
-        if (!empty($properties)) {
-            return AccessPolicy::createFromOptions($properties);
-        }
 
-        return null;
+        return AccessPolicy::createFromOptions($properties);
     }
 
     /**
@@ -321,11 +316,8 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
         $entry = new Entry();
         $entry->parseXml($response->getBody());
         $properties = $this->getPropertiesFromAtomEntry($entry);
-        if (!empty($properties)) {
-            return Locator::createFromOptions($properties);
-        }
 
-        return null;
+        return Locator::createFromOptions($properties);
     }
 
     /**
@@ -399,9 +391,11 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
             $path = "Assets('{$assetId}')/Files";
         }
 
+        $isSingleFile = false;
         if ($assetFile != null) {
             $assetFileId = Utilities::getEntityId($assetFile, 'WindowsAzure\Mediaservices\Models\AssetFile');
             $path = "Files('{$assetFileId}')";
+            $isSingleFile = true;
         }
 
         $method      = Resources::HTTP_GET;
@@ -419,9 +413,17 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
             $statusCode
         );
 
-        $feed = new Feed();
-        $feed->parseXml($response->getBody());
-        $entries = $feed->getEntry();
+        if (!$isSingleFile) {
+            $feed = new Feed();
+            $feed->parseXml($response->getBody());
+            $entries = $feed->getEntry();
+        }
+        else {
+            $entry = new Entry();
+            $entry->parseXml($response->getBody());
+            $entries = array($entry);
+        }
+
         $result = array();
         if (is_array($entries)) {
             foreach($entries as $entry) {

@@ -215,16 +215,6 @@ class Locator
             Validate::isDateString($options['StartTime'], 'options[StartTime]');
             $this->_startTime = new \DateTime($options['StartTime']);
         }
-
-        if (isset($options['AssetPolicy'])) {
-            Validate::isValidUri($options['AssetPolicy'], 'options[AssetPolicy]');
-            $this->_assetPolicy = $options['AssetPolicy'];
-        }
-
-        if (isset($options['Asset'])) {
-            Validate::isValidUri($options['Asset'], 'options[Asset]');
-            $this->_asset = $options['Asset'];
-        }
     }
 
     /**
