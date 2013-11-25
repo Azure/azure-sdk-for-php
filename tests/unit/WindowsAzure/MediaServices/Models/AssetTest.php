@@ -80,12 +80,12 @@ class AssetTest extends \PHPUnit_Framework_TestCase
     public function testGetOptions(){
 
         // Setup
-        $sample = new Asset(Asset::OPTIONS_NONE);
+        $asset = new Asset(Asset::OPTIONS_NONE);
         $option = Asset::OPTIONS_ENVELOPE_ENCRYPTION_PROTECTED;
-        $sample->setOptions($option);
+        $asset->setOptions($option);
 
         // Test
-        $actual = $sample->getOptions();
+        $actual = $asset->getOptions();
 
         // Assert
         $this->assertEquals($option, $actual);
@@ -98,12 +98,12 @@ class AssetTest extends \PHPUnit_Framework_TestCase
     public function testGetName(){
 
         // Setup
-        $sample = new Asset(Asset::OPTIONS_NONE);
+        $asset = new Asset(Asset::OPTIONS_NONE);
         $name = 'NewName';
-        $sample->setName($name);
+        $asset->setName($name);
 
         // Test
-        $actual = $sample->getName();
+        $actual = $asset->getName();
 
         // Assert
         $this->assertEquals($name, $actual);
@@ -116,12 +116,12 @@ class AssetTest extends \PHPUnit_Framework_TestCase
     public function testGetAlternateId(){
 
         // Setup
-        $sample = new Asset(Asset::OPTIONS_NONE);
+        $asset = new Asset(Asset::OPTIONS_NONE);
         $id = 'AlterID';
-        $sample->setAlternateId($id);
+        $asset->setAlternateId($id);
 
         // Test
-        $actual = $sample->getAlternateId();
+        $actual = $asset->getAlternateId();
 
         // Assert
         $this->assertEquals($id, $actual);

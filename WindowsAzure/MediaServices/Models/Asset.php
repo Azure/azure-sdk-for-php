@@ -26,6 +26,7 @@ namespace WindowsAzure\MediaServices\Models;
 use WindowsAzure\Common\Internal\Validate;
 
 
+
 /**
  * Represents asset object used in media services
  *
