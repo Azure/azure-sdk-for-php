@@ -11,7 +11,7 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- * 
+ *
  * PHP version 5
  *
  * @category  Microsoft
@@ -42,17 +42,18 @@ class ServiceRestProxyTestBase extends RestProxyTestBase
     protected $propertiesChanged;
     protected $defaultProperties;
     protected $connectionString;
-    
-    const NOT_SUPPORTED = 'The storage emulator doesn\'t support this API';
-    const TAKE_TOO_LONG = 'This test takes long time, skip.';
-    
+
+    const NOT_SUPPORTED                     = 'The storage emulator doesn\'t support this API';
+    const TAKE_TOO_LONG                     = 'This test takes long time, skip.';
+    const SKIPPED_AFTER_SEVERAL_ATTEMPTS    = 'Test skipped after several fails.';
+
     protected function skipIfEmulated()
     {
         if ($this->isEmulated()) {
             $this->markTestSkipped(self::NOT_SUPPORTED);
         }
     }
-    
+
     protected function isEmulated()
     {
         return (strpos($this->connectionString, Resources::USE_DEVELOPMENT_STORAGE_NAME) !== false);
@@ -63,13 +64,13 @@ class ServiceRestProxyTestBase extends RestProxyTestBase
         parent::__construct();
         $this->connectionString = TestResources::getWindowsAzureStorageServicesConnectionString();
     }
-    
+
     public function setUp()
     {
         parent::setUp();
         $this->_createDefaultProperties();
     }
-    
+
     private function _createDefaultProperties()
     {
         $this->propertiesChanged = false;
@@ -85,7 +86,7 @@ class ServiceRestProxyTestBase extends RestProxyTestBase
         $propertiesArray['Metrics']['RetentionPolicy']['Enabled'] = 'false';
         $this->defaultProperties = ServiceProperties::create($propertiesArray);
     }
-    
+
     public function setServiceProperties($properties, $options = null)
     {
         $this->restProxy->setServiceProperties($properties, $options);
@@ -95,7 +96,7 @@ class ServiceRestProxyTestBase extends RestProxyTestBase
     protected function tearDown()
     {
         parent::tearDown();
-        
+
         if ($this->propertiesChanged) {
             $this->restProxy->setServiceProperties($this->defaultProperties);
         }
