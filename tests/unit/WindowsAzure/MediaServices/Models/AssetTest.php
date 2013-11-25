@@ -44,95 +44,14 @@ class AssetTest extends \PHPUnit_Framework_TestCase
     public function test__construct(){
 
         // Setup
-        $option = 0;
+        $option = Asset::OPTIONS_NONE;
 
 
         // Test
-        $result = new Asset(0);
+        $result = new Asset(Asset::OPTIONS_NONE);
 
         // Assert
         $this->assertEquals($option, $result->getOptions());
-    }
-
-      /**
-     * @covers WindowsAzure\MediaServices\Models\Asset::getStorageAccountName
-     * @covers WindowsAzure\MediaServices\Models\Asset::setStorageAccountName
-     */
-    public function testGetStorageAccountName(){
-
-        // Setup
-        $sample = new Asset(0);
-        $name = 'StorageName';
-        $sample->setStorageAccountName($name);
-
-        // Test
-        $actual = $sample->getStorageAccountName();
-
-        // Assert
-        $this-> assertEquals($name, $actual);
-    }
-
-    /**
-     * @covers WindowsAzure\MediaServices\Models\Asset::getStorageAccount
-     */
-    public function testGetStorageAccount(){
-
-        // Setup
-        $sample = new Asset(0);
-
-        // Test
-        $actual = $sample->getStorageAccount();
-
-        // Assert
-        $this-> assertNull($actual);
-    }
-
-    /**
-     * @covers WindowsAzure\MediaServices\Models\Asset::getParentAssets
-     * @covers WindowsAzure\MediaServices\Models\Asset::setParentAssets
-     */
-    public function testGetParentAssets(){
-
-        // Setup
-        $sample = new Asset(0);
-        $value = array(1,2.3,'name');
-        $sample->setParentAssets($value);
-
-        // Test
-        $actual = $sample->getParentAssets();
-
-        // Assert
-        $this->assertEquals($value, $actual);
-    }
-
-    /**
-     * @covers WindowsAzure\MediaServices\Models\Asset::getFiles
-     */
-    public function testGetFiles(){
-
-        // Setup
-        $sample = new Asset(0);
-
-        // Test
-        $actual = $sample->getFiles();
-
-        // Assert
-        $this-> assertNull($actual);
-    }
-
-    /**
-     * @covers WindowsAzure\MediaServices\Models\Asset::getLocators
-     */
-    public function testGetLocators(){
-
-        // Setup
-        $sample = new Asset(0);
-
-        // Test
-        $actual = $sample->getLocators();
-
-        // Assert
-        $this-> assertNull($actual);
     }
 
     /**
@@ -140,14 +59,18 @@ class AssetTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetUri(){
 
-        // Setup
-        $sample = new Asset(0);
+       // Setup
+        $assetArray= array(
+            'Options'          => Asset::OPTIONS_NONE,
+            'Uri'              => 'http://someurl.com/asset'
+        );
+        $value = Asset::createFromOptions($assetArray);
 
         // Test
-        $actual = $sample->getUri();
+        $actual = $value->getUri();
 
         // Assert
-        $this-> assertNull($actual);
+        $this->assertEquals($assetArray['Uri'], $actual);
     }
 
     /**
@@ -157,8 +80,8 @@ class AssetTest extends \PHPUnit_Framework_TestCase
     public function testGetOptions(){
 
         // Setup
-        $sample = new Asset(1);
-        $option = 4;
+        $sample = new Asset(Asset::OPTIONS_NONE);
+        $option = Asset::OPTIONS_ENVELOPE_ENCRYPTION_PROTECTED;
         $sample->setOptions($option);
 
         // Test
@@ -175,7 +98,7 @@ class AssetTest extends \PHPUnit_Framework_TestCase
     public function testGetName(){
 
         // Setup
-        $sample = new Asset(0);
+        $sample = new Asset(Asset::OPTIONS_NONE);
         $name = 'NewName';
         $sample->setName($name);
 
@@ -193,7 +116,7 @@ class AssetTest extends \PHPUnit_Framework_TestCase
     public function testGetAlternateId(){
 
         // Setup
-        $sample = new Asset(0);
+        $sample = new Asset(Asset::OPTIONS_NONE);
         $id = 'AlterID';
         $sample->setAlternateId($id);
 
@@ -209,14 +132,19 @@ class AssetTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetLastModified() {
 
-        // Setup
-        $value = new Asset(0);
+         // Setup
+        $assetArray= array(
+            'Options'          => Asset::OPTIONS_NONE,
+            'LastModified'     => '2013-11-21'
+        );
+        $modified = new \Datetime($assetArray['LastModified']);
+        $value = Asset::createFromOptions($assetArray);
 
         // Test
         $actual = $value->getLastModified();
 
         // Assert
-        $this->assertNull($actual);
+        $this->assertEquals($modified->getTimestamp(), $actual->getTimestamp());
     }
 
     /**
@@ -224,14 +152,19 @@ class AssetTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetCreated() {
 
-        // Setup
-        $value = new Asset(0);
+         // Setup
+        $assetArray= array(
+            'Options'          => Asset::OPTIONS_NONE,
+            'Created'          => '2013-11-21'
+        );
+        $created = new \Datetime($assetArray['Created']);
+        $value = Asset::createFromOptions($assetArray);
 
         // Test
         $actual = $value->getCreated();
 
         // Assert
-        $this->assertNull($actual);
+        $this->assertEquals($created->getTimestamp(), $actual->getTimestamp());
     }
 
     /**
@@ -240,13 +173,36 @@ class AssetTest extends \PHPUnit_Framework_TestCase
     public function testGetState() {
 
         // Setup
-        $value = new Asset(0);
+        $assetArray= array(
+            'Options'          => Asset::OPTIONS_NONE,
+            'State'            => Asset::STATE_PUBLISHED
+        );
+        $value = Asset::createFromOptions($assetArray);
 
         // Test
         $actual = $value->getState();
 
         // Assert
-        $this->assertNull($actual);
+        $this->assertEquals($assetArray['State'], $actual);
+    }
+
+    /**
+     * @covers WindowsAzure\MediaServices\Models\Asset::getStorageAccountName
+     */
+    public function testGetStorageAccountName() {
+
+       // Setup
+        $assetArray= array(
+            'Options'             => Asset::OPTIONS_NONE,
+            'StorageAccountName'  => 'StorageAccountName'
+        );
+        $value = Asset::createFromOptions($assetArray);
+
+        // Test
+        $actual = $value->getStorageAccountName();
+
+        // Assert
+        $this->assertEquals($assetArray['StorageAccountName'], $actual);
     }
 
     /**
@@ -255,13 +211,54 @@ class AssetTest extends \PHPUnit_Framework_TestCase
     public function testGetId() {
 
         // Setup
-        $value = new Asset(0);
+        $assetArray= array(
+            'Id'                  => 'kjgdfg57',
+            'Options'             => Asset::OPTIONS_NONE,
+        );
+        $value = Asset::createFromOptions($assetArray);
 
         // Test
         $actual = $value->getId();
 
         // Assert
-        $this->assertNull($actual);
+        $this->assertEquals($assetArray['Id'], $actual);
+    }
+
+    /**
+     * @covers WindowsAzure\MediaServices\Models\Asset::createFromOptions
+     * @covers WindowsAzure\MediaServices\Models\Asset::fromArray
+     */
+    public function testAssetFromOptions(){
+
+        // Setup
+        $assetArray = array(
+            'Id'                    => '1',
+            'State'                 => Asset::STATE_PUBLISHED,
+            'Created'               => '2013-11-19',
+            'LastModified'          => '2013-11-19',
+            'AlternateId'           => '2',
+            'Name'                  => 'newName',
+            'Options'               => Asset::OPTIONS_NONE,
+            'Uri'                   => 'http://en.wikipedia.org/wiki/Uniform_resource_locator',
+            'StorageAccountName'    => 'StorageName',
+        );
+        $created = new \Datetime($assetArray['Created']);
+        $modified = new \Datetime($assetArray['LastModified']);
+
+        // Test
+        $resultAsset = Asset::createFromOptions($assetArray);
+
+        // Assert
+        $this->assertEquals($assetArray['Id'], $resultAsset->getId());
+        $this->assertEquals($assetArray['State'], $resultAsset->getState());
+        $this->assertEquals($created, $resultAsset->getCreated());
+        $this->assertEquals($modified, $resultAsset->getLastModified());
+        $this->assertEquals($assetArray['AlternateId'], $resultAsset->getAlternateId());
+        $this->assertEquals($assetArray['Name'], $resultAsset->getName());
+        $this->assertEquals($assetArray['Options'], $resultAsset->getOptions());
+        $this->assertEquals($assetArray['Uri'], $resultAsset->getUri());
+        $this->assertEquals($assetArray['StorageAccountName'], $resultAsset->getStorageAccountName());
+
     }
 
 }
