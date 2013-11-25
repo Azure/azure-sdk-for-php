@@ -39,6 +39,81 @@ use WindowsAzure\Common\Internal\FilterableService;
  */
 interface IMediaServices extends FilterableService
 {
+    /**
+     * Create new asset
+     *
+     * @param WindowsAzure\MediaServices\Models\Asset   $asset  Asset data
+     *
+     * @return WindowsAzure\MediaServices\Models\Asset  Created asset
+     */
+    public function createAsset($asset);
+
+    /**
+     * Delete asset
+     *
+     * @param WindowsAzure\MediaServices\Models\Asset|string   $asset  Asset data or asset Id
+     */
+    public function deleteAsset($asset);
+
+    /**
+     * Create new access policy
+     *
+     * @param WindowsAzure\MediaServices\Models\AccessPolicy   $accessPolicy  Access policy data
+     *
+     * @return WindowsAzure\MediaServices\Models\AccessPolicy  Created access policy
+     */
+    public function createAccessPolicy($accessPolicy);
+
+    /**
+     * Delete access policy
+     *
+     * @param WindowsAzure\MediaServices\Models\AccessPolicy|string   $accessPolicy  Access policy data or access policy Id
+     */
+    public function deleteAccessPolicy($accessPolicy);
+
+    /**
+     * Create new locator
+     *
+     * @param WindowsAzure\MediaServices\Models\Locator   $locator  Locator data
+     *
+     * @return WindowsAzure\MediaServices\Models\Locator  Created locator
+     */
+    public function createLocator($locator);
+
+    /**
+     * Delete locator
+     *
+     * @param WindowsAzure\MediaServices\Models\Locator|string   $asset  Asset data or asset Id
+     */
+    public function deleteLocator($locator);
+
+    /**
+     * Generate file info for all files in asset
+     *
+     * @param WindowsAzure\MediaServices\Models\Asset|string   $asset  Asset data or asset Id
+     */
+    public function createFileInfos($asset);
+
+    /**
+     * Get list of asset files. If asset and assetFile both not null filter is equal to assetFile.
+     *
+     * @param WindowsAzure\MediaServices\Models\AssetFile|string    $assetFile  AssetFile data or assetFile Id to filter file list
+     * @param WindowsAzure\MediaServices\Models\Asset|string        $asset      Asset data or asset Id to filter file list
+     *
+     * @return array
+     */
+    public function getAssetFiles($assetFile = null, $asset = null);
+
+    /**
+     * Upload asset file to storage.
+     *
+     * @param WindowsAzure\MediaServices\Models\Locator $locator    Write locator for file upload
+     * @param string                                    $name       Uploading file filename
+     * @param string                                    $body       Uploading file content
+     *
+     * @return null
+     */
+    public function uploadAssetFile($locator, $name, $body);
 }
 
 

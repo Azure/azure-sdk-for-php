@@ -48,6 +48,7 @@ class MediaServicesRestProxyTest extends MediaServicesRestProxyTestBase
 {
     /**
     * @covers WindowsAzure\MediaServices\MediaServicesRestProxy::createAsset
+    * @covers WindowsAzure\MediaServices\MediaServicesRestProxy::deleteAsset
     */
     public function testCreateAsset()
     {
@@ -64,6 +65,7 @@ class MediaServicesRestProxyTest extends MediaServicesRestProxyTestBase
 
     /**
      * @covers WindowsAzure\MediaServices\MediaServicesRestProxy::createAccessPolicy
+     * @covers WindowsAzure\MediaServices\MediaServicesRestProxy::deleteAccessPolicy
      */
     public function testCreateAccessPolicy()
     {
@@ -82,6 +84,7 @@ class MediaServicesRestProxyTest extends MediaServicesRestProxyTestBase
 
     /**
      * @covers WindowsAzure\MediaServices\MediaServicesRestProxy::createLocator
+     * @covers WindowsAzure\MediaServices\MediaServicesRestProxy::deleteLocator
      */
     public function testCreateLocator()
     {
