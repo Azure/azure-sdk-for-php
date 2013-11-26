@@ -163,8 +163,8 @@ class Job
      *
      * @param array $options    Array containing values for object properties
      */
-    public static function createFromOptions() {
-        $job = new Job($inputMediaAssets);
+    public static function createFromOptions($options) {
+        $job = new Job();
         $job->fromArray($options);
 
         return $job;

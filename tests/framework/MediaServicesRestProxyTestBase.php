@@ -26,6 +26,10 @@ namespace Tests\Framework;
 use Tests\Framework\ServiceRestProxyTestBase;
 use WindowsAzure\Common\ServiceException;
 use WindowsAzure\Common\Internal\MediaServicesSettings;
+use WindowsAzure\MediaServices\Models\Asset;
+use WindowsAzure\MediaServices\Models\AccessPolicy;
+use WindowsAzure\MediaServices\Models\Locator;
+use WindowsAzure\MediaServices\Models\AssetFile;
 
 /**
  * TestBase class for each unit test class.
@@ -76,6 +80,29 @@ class MediaServicesRestProxyTestBase extends ServiceRestProxyTestBase
         $this->locator[$result->getId()] = $result;
 
         return $result;
+    }
+
+    public function createAssetWithFile() {
+        $asset = new Asset(Asset::OPTIONS_NONE);
+        $asset->setName('TestAsset' . $this->createSuffix());
+        $asset = $this->createAsset($asset);
+
+        $access = new AccessPolicy('Name');
+        $access->setName('TestAccessPolicy' . $this->createSuffix());
+        $access->setDurationInMinutes(30);
+        $access->setPermissions(AccessPolicy::PERMISSIONS_WRITE);
+        $access = $this->createAccessPolicy($access);
+
+        $locator = new Locator($asset, $access, Locator::TYPE_SAS);
+        $locator->setName('TestLocator' . $this->createSuffix());
+        $locator->setStartTime(new \DateTime('now -5 minutes'));
+        $locator = $this->createLocator($locator);
+
+        $fileName = 'simple.avi';
+        $this->restProxy->uploadAssetFile($locator, $fileName, 'test file content');
+        $this->restProxy->createFileInfos($asset);
+
+        return $asset;
     }
 
     protected function tearDown()

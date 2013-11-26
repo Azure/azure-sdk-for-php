@@ -32,6 +32,9 @@ use WindowsAzure\Common\Models\ServiceProperties;
 use WindowsAzure\MediaServices\Models\Asset;
 use WindowsAzure\MediaServices\Models\AccessPolicy;
 use WindowsAzure\MediaServices\Models\Locator;
+use WindowsAzure\MediaServices\Models\Job;
+use WindowsAzure\MediaServices\Models\Task;
+use WindowsAzure\MediaServices\Models\TaskOptions;
 
 /**
  * Unit tests for class MediaServicesRestProxy
@@ -229,5 +232,42 @@ class MediaServicesRestProxyTest extends MediaServicesRestProxyTestBase
         $this->assertEquals(1, count($result));
         $this->assertEquals($fileName, $result[0]->getName());
         $this->assertEquals($asset->getId(), $result[0]->getParentAssetId());
+    }
+
+    /**
+     * @covers WindowsAzure\MediaServices\MediaServicesRestProxy::createJob
+     * @covers WindowsAzure\MediaServices\MediaServicesRestProxy::send
+     */
+    public function testCreateJobWithTasks()
+    {
+        // Setup
+        $asset = $this->createAssetWithFile();
+
+        $taskBody = '<?xml version="1.0" encoding="utf-8"?><taskBody><inputAsset>JobInputAsset(0)</inputAsset><outputAsset assetCreationOptions="0" assetName="Output asset">JobOutputAsset(0)</outputAsset></taskBody>';
+        $mediaProcessorId = 'nb:mpid:UUID:2e7aa8f3-4961-4e0c-b4db-0e0439e524f5';
+        $task = new Task($taskBody, $mediaProcessorId, TaskOptions::NONE);
+        $task->setConfiguration('H.264 HD 720p VBR');
+
+        $job = new Job();
+        $job->setName('TestJob' . $this->createSuffix());
+
+        // Test
+        $result = $this->restProxy->createJob($job, array($asset), array($task));
+
+        // Assert
+        $this->assertEquals($job->getName(), $result->getName());
+    }
+
+    /**
+     * @covers WindowsAzure\MediaServices\MediaServicesRestProxy::getMediaProcessors
+     * @covers WindowsAzure\MediaServices\MediaServicesRestProxy::send
+     */
+    public function testGetMediaProcessors()
+    {
+        // Test
+        $result = $this->restProxy->getMediaProcessors();
+
+        // Assert
+        $this->assertNotEmpty($result);
     }
 }

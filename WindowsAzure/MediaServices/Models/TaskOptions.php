@@ -44,13 +44,13 @@ class TaskOptions
      *
      * @var int
      */
-    const OPTIONS_NONE = 0;
+    const NONE = 0;
 
     /**
      * The options of the task "protected configuration"
      *
      * @var int
      */
-    const OPTIONS_PROTECTED_CONFIGURATION = 1;
+    const PROTECTED_CONFIGURATION = 1;
 }
 

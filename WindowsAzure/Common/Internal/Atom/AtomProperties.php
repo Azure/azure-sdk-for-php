@@ -73,16 +73,20 @@ class AtomProperties extends AtomBase
     }
 
     /**
-     * Set properties from object.
+     * Get object properties as array
      *
+     * @param   unknown $object Source object
+     *
+     * @return  array
      */
-    public function setPropertiesFromObject($object)
+    private function getObjectProperties($object)
     {
         Validate::notNull($object, 'object');
 
         $reflectionClass = new \ReflectionClass($object);
         $methodArray     = $reflectionClass->getMethods();
 
+        $result = array();
         foreach ($methodArray as $method) {
             if ((strpos($method->name, 'get') === 0)
             && $method->isPublic()
@@ -93,10 +97,31 @@ class AtomProperties extends AtomBase
                     if (is_a($variableValue, '\DateTime')) {
                         $variableValue = $variableValue->format(\DateTime::ATOM);
                     }
-                    $this->properties[$variableName] = (string)$variableValue;
+                    if (gettype($variableValue) == 'array') {
+                        foreach($variableValue as $item) {
+                            $result[$variableName][] = $this->getObjectProperties($item);
+                        }
+                    }
+                    else {
+                        $result[$variableName] = (string)$variableValue;
+                    }
                 }
             }
         }
+
+        return $result;
+    }
+
+
+    /**
+     * Set properties from object.
+     *
+     */
+    public function setPropertiesFromObject($object)
+    {
+        Validate::notNull($object, 'object');
+
+        $this->properties = $this->getObjectProperties($object);
     }
 
 
@@ -119,6 +144,7 @@ class AtomProperties extends AtomBase
     public function writeXml($xmlWriter)
     {
         Validate::notNull($xmlWriter, 'xmlWriter');
+
         $xmlWriter->startElementNS(
             'meta',
             Resources::PROPERTIES,
@@ -139,14 +165,52 @@ class AtomProperties extends AtomBase
     {
         Validate::notNull($xmlWriter, 'xmlWriter');
 
-        foreach($this->properties as $key => $value) {
-            $xmlWriter->writeElementNS(
-                'data',
-                $key,
-                Resources::DS_XML_NAMESPACE,
-                $value
-            );
+        $this->writeInnerXmlRecursively($this->properties, $xmlWriter);
+    }
+
+    /**
+     * Writes the inner XML representing the ATOM properties item.
+     *
+     * @param \XMLWriter $xmlWriter The xml writer.
+     * @param array      $data      Data tobe serialized.
+     *
+     * @return \SimpleXml
+     */
+    private function writeInnerXmlRecursively($data, $xmlWriter)
+    {
+        Validate::isArray($data, 'xmlWriter');
+        Validate::notNull($xmlWriter, 'xmlWriter');
+
+        foreach($data as $key => $value) {
+            if (is_array($value)) {
+                $xmlWriter->startElementNS(
+                    'data',
+                    $key,
+                    Resources::DS_XML_NAMESPACE
+                );
+
+                foreach($value as $item) {
+                    $xmlWriter->startElementNS(
+                        'data',
+                        Resources::ELEMENT,
+                        Resources::DSM_XML_NAMESPACE
+                    );
+
+                    $this->writeInnerXmlRecursively($item, $xmlWriter);
+
+                    $xmlWriter->endElement();
+                }
+                $xmlWriter->endElement();
+            }
+            else {
+                $xmlWriter->writeElementNS(
+                    'data',
+                    $key,
+                    Resources::DS_XML_NAMESPACE,
+                    $value
+                );
+            }
         }
     }
-}
+    }
 
