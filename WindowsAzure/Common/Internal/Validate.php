@@ -373,6 +373,7 @@ class Validate
 
         try {
             new \DateTime($value);
+            return true;
         }
         catch (\Exception $e) {
             throw new \InvalidArgumentException(

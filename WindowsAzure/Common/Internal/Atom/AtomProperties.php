@@ -27,6 +27,7 @@ use WindowsAzure\Common\Internal\Resources;
 use WindowsAzure\Common\Internal\Utilities;
 use WindowsAzure\Common\Internal\Validate;
 
+
 /**
  * Atom object properties.
  *
@@ -74,7 +75,6 @@ class AtomProperties extends AtomBase
     /**
      * Set properties from object.
      *
-     * @return object
      */
     public function setPropertiesFromObject($object)
     {
