@@ -526,7 +526,7 @@ class ValidateTest extends \PHPUnit_Framework_TestCase
         $value = '2013-11-25';
 
         // Test
-        Validate::isDateString($value, 'name');
+        $result = Validate::isDateString($value, 'name');
 
         // Assert
         $this->assertTrue($result);
