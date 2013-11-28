@@ -40,34 +40,12 @@ class JobTest extends \PHPUnit_Framework_TestCase
 {
 
     /**
-     * @covers WindowsAzure\MediaServices\Models\Job::__construct
-     */
-    public function test__construct(){
-
-        // Setup
-        $inputMediaAssets = array(
-        	'mediaAsset1',
-            'mediaAsset2'
-        );
-
-        // Test
-        $job= new Job($inputMediaAssets);
-
-        // Assert
-        $this->assertEquals($inputMediaAssets, $job->getInputMediaAssets());
-    }
-
-    /**
      * @covers WindowsAzure\MediaServices\Models\Job::createFromOptions
      * @covers WindowsAzure\MediaServices\Models\Job::fromArray
      */
     public function testCreateFromOptions(){
 
         // Setup
-        $inputMediaAssets = array(
-                'mediaAsset1',
-                'mediaAsset2'
-        );
         $options = array(
             'Id'                  => 'sfgsfg34',
             'Name'                => 'SomeName',
@@ -79,7 +57,6 @@ class JobTest extends \PHPUnit_Framework_TestCase
             'StartTime'           => '2013-11-26',
             'State'               => Job::STATE_QUEUED,
             'TemplateId'          => 'yudgf78',
-            'InputMediaAssets'    => $inputMediaAssets
         );
         $created = new \Datetime($options['Created']);
         $modified = new \Datetime($options['LastModified']);
@@ -100,21 +77,17 @@ class JobTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($startTime->getTimestamp(), $job->getStartTime()->getTimestamp());
         $this->assertEquals($options['State'], $job->getState());
         $this->assertEquals($options['TemplateId'], $job->getTemplateId());
-        $this->assertEquals($options['InputMediaAssets'], $job->getInputMediaAssets());
     }
 
     /**
      * @covers WindowsAzure\MediaServices\Models\Job::getName
      * @covers WindowsAzure\MediaServices\Models\Job::setName
+     * @covers WindowsAzure\MediaServices\Models\Job::__construct
      */
     public function testGetSetName(){
 
         // Setup
-        $inputMediaAssets = array(
-                'mediaAsset1',
-                'mediaAsset2'
-        );
-        $job= new Job($inputMediaAssets);
+        $job= new Job();
         $name = 'New Name';
 
         // Test
@@ -132,11 +105,7 @@ class JobTest extends \PHPUnit_Framework_TestCase
     public function testGetSetPriority(){
 
         // Setup
-        $inputMediaAssets = array(
-                'mediaAsset1',
-                'mediaAsset2'
-        );
-        $job= new Job($inputMediaAssets);
+        $job= new Job();
         $priority = 2;
 
         // Test
@@ -154,11 +123,7 @@ class JobTest extends \PHPUnit_Framework_TestCase
     public function testGetSetTemplateId(){
 
         // Setup
-        $inputMediaAssets = array(
-                'mediaAsset1',
-                'mediaAsset2'
-        );
-        $job= new Job($inputMediaAssets);
+        $job= new Job();
         $templateId = 'sfgfg567';
 
         // Test
@@ -170,45 +135,14 @@ class JobTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\MediaServices\Models\Job::getInputMediaAssets
-     * @covers WindowsAzure\MediaServices\Models\Job::setInputMediaAssets
-     */
-    public function testGetSetInputMediaAssets(){
-
-        // Setup
-        $inputMediaAssets = array(
-                'mediaAsset1',
-                'mediaAsset2'
-        );
-        $inputMediaAssets_2 = array(
-                'new_MediaAsset1',
-                'new_MediaAsset2'
-        );
-        $job= new Job($inputMediaAssets);
-
-        // Test
-        $job->setInputMediaAssets($inputMediaAssets_2);
-        $result = $job->getInputMediaAssets();
-
-        // Assert
-        $this->assertEquals($inputMediaAssets_2, $result);
-    }
-
-    /**
      * @covers WindowsAzure\MediaServices\Models\Job::getId
      */
     public function testGetId(){
 
         // Setup
-        $inputMediaAssets = array(
-                'mediaAsset1',
-                'mediaAsset2'
-        );
         $options = array(
-                'Id'                  => 'sfgsfg34',
-                'InputMediaAssets'    => $inputMediaAssets
-                );
-
+                'Id'                  => 'sfgsfg34'
+        );
         $job= Job::createFromOptions($options);
 
         // Test
@@ -224,13 +158,8 @@ class JobTest extends \PHPUnit_Framework_TestCase
     public function testGetCreated(){
 
         // Setup
-        $inputMediaAssets = array(
-                'mediaAsset1',
-                'mediaAsset2'
-        );
         $options = array(
-                'Created'             => '2013-11-25',
-                'InputMediaAssets'    => $inputMediaAssets
+                'Created'             => '2013-11-25'
         );
         $created = new \Datetime($options['Created']);
         $job= Job::createFromOptions($options);
@@ -248,13 +177,8 @@ class JobTest extends \PHPUnit_Framework_TestCase
     public function testGetLastModified(){
 
         // Setup
-        $inputMediaAssets = array(
-                'mediaAsset1',
-                'mediaAsset2'
-        );
         $options = array(
-                'LastModified'        => '2013-11-25',
-                'InputMediaAssets'    => $inputMediaAssets
+                'LastModified'        => '2013-11-25'
         );
         $modified = new \Datetime($options['LastModified']);
         $job= Job::createFromOptions($options);
@@ -272,13 +196,8 @@ class JobTest extends \PHPUnit_Framework_TestCase
     public function testGetEndTime(){
 
         // Setup
-        $inputMediaAssets = array(
-                'mediaAsset1',
-                'mediaAsset2'
-        );
         $options = array(
-                'EndTime'             => '2013-12-25',
-                'InputMediaAssets'    => $inputMediaAssets
+                'EndTime'             => '2013-12-25'
         );
         $endTime = new \Datetime($options['EndTime']);
         $job= Job::createFromOptions($options);
@@ -296,13 +215,8 @@ class JobTest extends \PHPUnit_Framework_TestCase
     public function testGetStartTime(){
 
         // Setup
-        $inputMediaAssets = array(
-                'mediaAsset1',
-                'mediaAsset2'
-        );
         $options = array(
-                'StartTime'           => '2013-11-25',
-                'InputMediaAssets'    => $inputMediaAssets
+                'StartTime'           => '2013-11-25'
         );
         $startTime = new \Datetime($options['StartTime']);
         $job= Job::createFromOptions($options);
@@ -320,14 +234,9 @@ class JobTest extends \PHPUnit_Framework_TestCase
     public function testGetRunningDuration(){
 
         // Setup
-        $inputMediaAssets = array(
-                'mediaAsset1',
-                'mediaAsset2'
-        );
-        $job= new Job($inputMediaAssets);
+        $job= new Job();
         $options = array(
-                'RunningDuration'     => 25.30,
-                'InputMediaAssets'    => $inputMediaAssets
+                'RunningDuration'     => 25.30
         );
         $job= Job::createFromOptions($options);
 
@@ -344,14 +253,9 @@ class JobTest extends \PHPUnit_Framework_TestCase
     public function testGetState(){
 
         // Setup
-        $inputMediaAssets = array(
-                'mediaAsset1',
-                'mediaAsset2'
-        );
-        $job= new Job($inputMediaAssets);
+        $job= new Job();
         $options = array(
-                'State'     => Job::STATE_QUEUED,
-                'InputMediaAssets'    => $inputMediaAssets
+                'State'     => Job::STATE_QUEUED
         );
         $job= Job::createFromOptions($options);
 
@@ -360,30 +264,5 @@ class JobTest extends \PHPUnit_Framework_TestCase
 
         // Assert
         $this->assertEquals($options['State'], $result);
-    }
-
-    /**
-     * @covers WindowsAzure\MediaServices\Models\Job::getTasks
-     * @covers WindowsAzure\MediaServices\Models\Job::setTasks
-     */
-    public function testGetSetTasks(){
-
-        // Setup
-        $inputMediaAssets = array(
-                'mediaAsset1',
-                'mediaAsset2'
-        );
-        $job= new Job($inputMediaAssets);
-        $tasks = array(
-                'task1',
-                'task2'
-        );
-
-        // Test
-        $job->setTasks($tasks);
-        $result = $job->getTasks();
-
-        // Assert
-        $this->assertEquals($tasks, $result);
     }
 }

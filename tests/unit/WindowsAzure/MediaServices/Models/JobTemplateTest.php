@@ -46,14 +46,9 @@ class JobTemplateTest extends \PHPUnit_Framework_TestCase
 
         // Setup
         $jobTemplateBody = 'JobTemplateBody';
-        $taskTemplates =  array(
-             'template1',
-             'template2',
-             'template3'
-        );
 
         // Test
-        $jobTempl = new JobTemplate($jobTemplateBody, $taskTemplates);
+        $jobTempl = new JobTemplate($jobTemplateBody);
 
         //Assert
         $this->assertEquals($jobTemplateBody, $jobTempl->getJobTemplateBody());
@@ -68,11 +63,6 @@ class JobTemplateTest extends \PHPUnit_Framework_TestCase
 
         // Setup
         $jobTemplateBody = 'JobTemplateBody';
-        $taskTemplates = array(
-             'template1',
-             'template2',
-             'template3'
-        );
         $templateType = JobTemplate::TYPE_ACCOUNT_LEVEL;
         $options = array(
                 'Id'                  => 'sfgsfg34',
@@ -81,8 +71,7 @@ class JobTemplateTest extends \PHPUnit_Framework_TestCase
                 'LastModified'        => '2013-11-25',
                 'JobTemplateBody'     => 'Some Body Of Job Template',
                 'NumberofInputAssets' => 6,
-                'TemplateType'        => JobTemplate::TYPE_SYSTEM_LEVEL,
-                'TaskTemplates'       => $taskTemplates
+                'TemplateType'        => JobTemplate::TYPE_SYSTEM_LEVEL
         );
         $created = new \Datetime($options['Created']);
         $modified = new \Datetime($options['LastModified']);
@@ -98,7 +87,6 @@ class JobTemplateTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($options['JobTemplateBody'], $jobTempl->getJobTemplateBody());
         $this->assertEquals($options['NumberofInputAssets'], $jobTempl->getNumberOfInputAssets());
         $this->assertEquals($options['TemplateType'], $jobTempl->getTemplateType());
-        //$this->assertEquals($options['TaskTemplates'], $jobTempl->getTaskTemplates());
     }
 
     /**
@@ -109,12 +97,7 @@ class JobTemplateTest extends \PHPUnit_Framework_TestCase
 
         // Setup
         $jobTemplateBody = 'JobTemplateBody';
-        $taskTemplates = array(
-             'template1',
-             'template2',
-             'template3'
-        );
-        $jobTempl = new JobTemplate($jobTemplateBody, $taskTemplates);
+        $jobTempl = new JobTemplate($jobTemplateBody);
         $name = 'New Name';
 
         // Test
@@ -132,17 +115,11 @@ class JobTemplateTest extends \PHPUnit_Framework_TestCase
 
         // Setup
         $jobTemplateBody = 'JobTemplateBody';
-        $taskTemplates = array(
-                'template1',
-                'template2',
-                'template3'
-        );
         $templateType = JobTemplate::TYPE_ACCOUNT_LEVEL;
         $options = array(
                 'LastModified'        => '2013-11-25',
                 'JobTemplateBody'     => $jobTemplateBody,
-                'TemplateType'        => $templateType,
-                'TaskTemplates'       => $taskTemplates
+                'TemplateType'        => $templateType
         );
         $modified = new \Datetime($options['LastModified']);
         $jobTempl = JobTemplate::createFromOptions($options);
@@ -161,17 +138,11 @@ class JobTemplateTest extends \PHPUnit_Framework_TestCase
 
         // Setup
         $jobTemplateBody = 'JobTemplateBody';
-        $taskTemplates = array(
-                'template1',
-                'template2',
-                'template3'
-        );
         $templateType = JobTemplate::TYPE_ACCOUNT_LEVEL;
         $options = array(
                 'Created'        => '2013-11-25',
                 'JobTemplateBody'     => $jobTemplateBody,
-                'TemplateType'        => $templateType,
-                'TaskTemplates'       => $taskTemplates
+                'TemplateType'        => $templateType
         );
         $created = new \Datetime($options['Created']);
         $jobTempl = JobTemplate::createFromOptions($options);
@@ -190,17 +161,11 @@ class JobTemplateTest extends \PHPUnit_Framework_TestCase
 
         // Setup
         $jobTemplateBody = 'JobTemplateBody';
-        $taskTemplates = array(
-                'template1',
-                'template2',
-                'template3'
-        );
         $templateType = JobTemplate::TYPE_ACCOUNT_LEVEL;
         $options = array(
                 'Id'                  => 'sfdk567',
                 'JobTemplateBody'     => $jobTemplateBody,
-                'TemplateType'        => $templateType,
-                'TaskTemplates'       => $taskTemplates
+                'TemplateType'        => $templateType
         );
         $jobTempl = JobTemplate::createFromOptions($options);
 
@@ -219,12 +184,7 @@ class JobTemplateTest extends \PHPUnit_Framework_TestCase
 
         // Setup
         $jobTemplateBody = 'JobTemplateBody';
-        $taskTemplates = array(
-             'template1',
-             'template2',
-             'template3'
-        );
-        $jobTempl = new JobTemplate($jobTemplateBody, $taskTemplates);
+        $jobTempl = new JobTemplate($jobTemplateBody);
         $templateType = JobTemplate::TYPE_SYSTEM_LEVEL;
 
         // Test
@@ -243,12 +203,7 @@ class JobTemplateTest extends \PHPUnit_Framework_TestCase
 
         // Setup
         $jobTemplateBody = 'JobTemplateBody';
-        $taskTemplates = array(
-                'template1',
-                'template2',
-                'template3'
-        );
-        $jobTempl = new JobTemplate($jobTemplateBody, $taskTemplates);
+        $jobTempl = new JobTemplate($jobTemplateBody);
         $numberofInputAssets = 5;
 
         // Test
@@ -267,12 +222,7 @@ class JobTemplateTest extends \PHPUnit_Framework_TestCase
 
         // Setup
         $jobTemplateBody = 'JobTemplateBody';
-        $taskTemplates = array(
-                'template1',
-                'template2',
-                'template3'
-        );
-        $jobTempl = new JobTemplate($jobTemplateBody, $taskTemplates);
+        $jobTempl = new JobTemplate($jobTemplateBody);
         $jobTemplateBody = 'New job Template Body';
 
         // Test
