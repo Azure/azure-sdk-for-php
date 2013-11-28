@@ -159,36 +159,12 @@ class Job
     private $_templateId;
 
     /**
-     * Input media assets
-     *
-     * @var array
-     */
-    private $_inputMediaAssets;
-
-    /**
-     * Output media assets
-     *
-     * @var array
-     */
-    private $_outputMediaAssets;
-
-    /**
-     * Tasks
-     *
-     * @var array
-     */
-    private $_tasks;
-
-
-    /**
      * Create asset from array
      *
      * @param array $options    Array containing values for object properties
      */
-    public static function createFromOptions($inputMediaAssets) {
-        Validate::notNull($options['InputMediaAssets'], 'options[InputMediaAssets]');
-
-        $job = new Job($inputMediaAssets);
+    public static function createFromOptions($options) {
+        $job = new Job();
         $job->fromArray($options);
 
         return $job;
@@ -199,8 +175,7 @@ class Job
      *
      * @param array $inputMediaAssets   Assets to process.
      */
-    public function __construct($inputMediaAssets) {
-        $this->_inputMediaAssets = $inputMediaAssets;
+    public function __construct() {
     }
 
     /**
@@ -313,55 +288,6 @@ class Job
      */
     public function getId() {
        return $this->_id;
-    }
-
-    /**
-     * Get "Tasks"
-     *
-     * @return array
-     */
-    public function getTasks() {
-        return $this->_tasks;
-    }
-
-    /**
-     * Set "Tasks"
-     *
-     * @param array    $value Tasks
-     *
-     * @return none
-     */
-    public function setTasks($value) {
-        $this->_tasks = $value;
-    }
-
-    /**
-     * Get "Output media assets"
-     *
-     * @return array
-     */
-    public function getOutputMediaAssets() {
-        return $this->_outputMediaAssets;
-    }
-
-    /**
-     * Get "Input media assets"
-     *
-     * @return array
-     */
-    public function getInputMediaAssets() {
-        return $this->_inputMediaAssets;
-    }
-
-    /**
-     * Set "Input media assets"
-     *
-     * @param array    $value Input media assets
-     *
-     * @return none
-     */
-    public function setInputMediaAssets($value) {
-        $this->_inputMediaAssets = $value;
     }
 
     /**

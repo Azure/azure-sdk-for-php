@@ -109,23 +109,21 @@ class JobTemplate
      */
     public static function createFromOptions($options) {
         Validate::notNull($options['JobTemplateBody'], 'options[JobTemplateBody]');
-        Validate::notNull($options['TaskTemplates'], 'options[TaskTemplates]');
         Validate::notNull($options['TemplateType'], 'options[TemplateType]');
 
-        $jobTemplate = new JobTemplate($options['JobTemplateBody'], $options['TaskTemplates'], $options['TemplateType']);
+        $jobTemplate = new JobTemplate($options['JobTemplateBody'], $options['TemplateType']);
         $jobTemplate->fromArray($options);
 
-        return $asset;
+        return $jobTemplate;
     }
 
     /**
      * Create job template
      *
      * @param string $jobTemplateBody   Job template XML body.
-     * @param string $taskTemplates     Task templates links.
      * @param string $templateType      Template type default to AccountLevel.
      */
-    public function __construct($jobTemplateBody, $taskTemplates, $templateType = JobTemplate::TYPE_ACCOUNT_LEVEL) {
+    public function __construct($jobTemplateBody, $templateType = JobTemplate::TYPE_ACCOUNT_LEVEL) {
         $this->_jobTemplateBody = $jobTemplateBody;
         $this->_taskTemplates = $taskTemplates;
         $this->_templateType = $templateType;
@@ -162,18 +160,13 @@ class JobTemplate
         }
 
         if (isset($options['NumberofInputAssets'])) {
-            Validate::isInt($options['NumberofInputAssets'], 'options[NumberofInputAssets]');
+            Validate::isInteger($options['NumberofInputAssets'], 'options[NumberofInputAssets]');
             $this->_numberofInputAssets = $options['NumberofInputAssets'];
         }
 
         if (isset($options['TemplateType'])) {
-            Validate::isInt($options['TemplateType'], 'options[TemplateType]');
+            Validate::isInteger($options['TemplateType'], 'options[TemplateType]');
             $this->_templateType = $options['TemplateType'];
-        }
-
-        if (isset($options['TaskTemplates'])) {
-            Validate::isArray($options['TaskTemplates'], 'options[TaskTemplates]');
-            $this->_taskTemplates = $options['TaskTemplates'];
         }
     }
 
