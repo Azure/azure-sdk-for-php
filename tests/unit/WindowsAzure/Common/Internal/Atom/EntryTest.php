@@ -11,7 +11,7 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- * 
+ *
  * PHP version 5
  *
  * @category  Microsoft
@@ -29,6 +29,7 @@ use WindowsAzure\Common\Internal\Atom\Entry;
 use WindowsAzure\Common\Internal\Atom\Category;
 use WindowsAzure\Common\Internal\Atom\Person;
 use WindowsAzure\Common\Internal\Atom\Source;
+use WindowsAzure\Common\Internal\Resources;
 
 /**
  * Unit tests for class WrapAccessTokenResult
@@ -49,10 +50,10 @@ class EntryTest extends \PHPUnit_Framework_TestCase
     public function testEntryConstructor()
     {
         // Setup
-        
+
         // Test
         $entry = new Entry();
-        
+
         // Assert
         $this->assertNotNull($entry);
     }
@@ -63,44 +64,44 @@ class EntryTest extends \PHPUnit_Framework_TestCase
      */
     public function testEntryGetSetAuthor()
     {
-        // Setup 
+        // Setup
         $expected = new Person();
         $expected->setName('testPerson');
-        $entry = new Entry();   
-        
+        $entry = new Entry();
+
         // Test
         $entry->setAuthor($expected);
         $actual = $entry->getAuthor();
 
-        // Assert 
+        // Assert
         $this->assertEquals(
             $expected->getName(),
             $actual->getName()
         );
-        
+
     }
-    
+
     /**
      * @covers WindowsAzure\Common\Internal\Atom\Entry::getCategory
      * @covers WindowsAzure\Common\Internal\Atom\Entry::setCategory
      */
     public function testEntryGetSetCategory()
     {
-        // Setup 
+        // Setup
         $expected = new Category();
         $expected->setTerm('testTerm');
-        $entry = new Entry();   
-        
+        $entry = new Entry();
+
         // Test
         $entry->setCategory($expected);
         $actual = $entry->getCategory();
 
-        // Assert 
+        // Assert
         $this->assertEquals(
             $expected->getTerm(),
             $actual->getTerm()
         );
-        
+
     }
 
     /**
@@ -109,21 +110,21 @@ class EntryTest extends \PHPUnit_Framework_TestCase
      */
     public function testEntryGetSetContent()
     {
-        // Setup 
+        // Setup
         $expected = new Content();
         $expected->setText('testText');
-        $entry = new Entry();   
-        
+        $entry = new Entry();
+
         // Test
         $entry->setContent($expected);
         $actual = $entry->getContent();
 
-        // Assert 
+        // Assert
         $this->assertEquals(
             $expected->getText(),
             $actual->getText()
         );
-        
+
     }
 
     /**
@@ -132,21 +133,21 @@ class EntryTest extends \PHPUnit_Framework_TestCase
      */
     public function testEntryGetSetContributor()
     {
-        // Setup 
+        // Setup
         $expected = new Person();
         $expected->setName('testContributor');
-        $entry = new Entry();   
-        
+        $entry = new Entry();
+
         // Test
         $entry->setContributor($expected);
         $actual = $entry->getContributor();
 
-        // Assert 
+        // Assert
         $this->assertEquals(
             $expected->getName(),
             $actual->getName()
         );
-        
+
     }
 
     /**
@@ -155,20 +156,20 @@ class EntryTest extends \PHPUnit_Framework_TestCase
      */
     public function testEntryGetSetId()
     {
-        // Setup 
+        // Setup
         $expected = 'testId';
-        $entry = new Entry();   
-        
+        $entry = new Entry();
+
         // Test
         $entry->setId($expected);
         $actual = $entry->getId();
 
-        // Assert 
+        // Assert
         $this->assertEquals(
             $expected,
             $actual
         );
-        
+
     }
 
     /**
@@ -177,20 +178,20 @@ class EntryTest extends \PHPUnit_Framework_TestCase
      */
     public function testEntryGetSetLink()
     {
-        // Setup 
+        // Setup
         $expected = new AtomLink('testLink');
-        $entry = new Entry();   
-        
+        $entry = new Entry();
+
         // Test
         $entry->setLink($expected);
         $actual = $entry->getLink();
 
-        // Assert 
+        // Assert
         $this->assertEquals(
             $expected,
             $actual
         );
-        
+
     }
 
     /**
@@ -199,20 +200,20 @@ class EntryTest extends \PHPUnit_Framework_TestCase
      */
     public function testEntryGetSetPublished()
     {
-        // Setup 
+        // Setup
         $expected = true;
-        $entry = new Entry();   
-        
+        $entry = new Entry();
+
         // Test
         $entry->setPublished($expected);
         $actual = $entry->getPublished();
 
-        // Assert 
+        // Assert
         $this->assertEquals(
             $expected,
             $actual
         );
-        
+
     }
 
     /**
@@ -221,20 +222,20 @@ class EntryTest extends \PHPUnit_Framework_TestCase
      */
     public function testEntryGetSetRights()
     {
-        // Setup 
+        // Setup
         $expected = 'rights';
-        $entry = new Entry();   
-        
+        $entry = new Entry();
+
         // Test
         $entry->setRights($expected);
         $actual = $entry->getRights();
 
-        // Assert 
+        // Assert
         $this->assertEquals(
             $expected,
             $actual
         );
-        
+
     }
 
     /**
@@ -243,20 +244,20 @@ class EntryTest extends \PHPUnit_Framework_TestCase
      */
     public function testEntryGetSetSource()
     {
-        // Setup 
+        // Setup
         $expected = new Source();
-        $entry = new Entry();   
-        
+        $entry = new Entry();
+
         // Test
         $entry->setSource($expected);
         $actual = $entry->getSource();
 
-        // Assert 
+        // Assert
         $this->assertEquals(
             $expected,
             $actual
         );
-        
+
     }
 
     /**
@@ -265,20 +266,20 @@ class EntryTest extends \PHPUnit_Framework_TestCase
      */
     public function testEntryGetSetSummary()
     {
-        // Setup 
+        // Setup
         $expected = 'testSummary';
-        $entry = new Entry();   
-        
+        $entry = new Entry();
+
         // Test
         $entry->setSummary($expected);
         $actual = $entry->getSummary();
 
-        // Assert 
+        // Assert
         $this->assertEquals(
             $expected,
             $actual
         );
-        
+
     }
 
     /**
@@ -287,20 +288,20 @@ class EntryTest extends \PHPUnit_Framework_TestCase
      */
     public function testEntryGetSetTitle()
     {
-        // Setup 
+        // Setup
         $expected = 'testTitle';
-        $entry = new Entry();   
-        
+        $entry = new Entry();
+
         // Test
         $entry->setTitle($expected);
         $actual = $entry->getTitle();
 
-        // Assert 
+        // Assert
         $this->assertEquals(
             $expected,
             $actual
         );
-        
+
     }
 
     /**
@@ -309,20 +310,20 @@ class EntryTest extends \PHPUnit_Framework_TestCase
      */
     public function testEntryGetSetUpdated()
     {
-        // Setup 
+        // Setup
         $expected = true;
-        $entry = new Entry();   
-        
+        $entry = new Entry();
+
         // Test
         $entry->setUpdated($expected);
         $actual = $entry->getUpdated();
 
-        // Assert 
+        // Assert
         $this->assertEquals(
             $expected,
             $actual
         );
-        
+
     }
 
     /**
@@ -330,21 +331,21 @@ class EntryTest extends \PHPUnit_Framework_TestCase
      * @covers WindowsAzure\Common\Internal\Atom\Entry::setExtensionElement
      */
     public function testEntryGetSetExtensionElement()
-    {   
-        // Setup 
+    {
+        // Setup
         $expected = 'testExtensionElement';
-        $entry = new Entry();   
-        
+        $entry = new Entry();
+
         // Test
         $entry->setExtensionElement($expected);
         $actual = $entry->getExtensionElement();
 
-        // Assert 
+        // Assert
         $this->assertEquals(
             $expected,
             $actual
         );
-        
+
     }
 
     /**
@@ -352,10 +353,10 @@ class EntryTest extends \PHPUnit_Framework_TestCase
      */
     public function testEntryToXml()
     {
-        // Setup 
-        $entry = new Entry();   
+        // Setup
+        $entry = new Entry();
         $expected = '<atom:entry xmlns:atom="http://www.w3.org/2005/Atom"/>';
-        
+
         // Test
         $xmlWriter = new \XMLWriter();
         $xmlWriter->openMemory();
@@ -363,15 +364,15 @@ class EntryTest extends \PHPUnit_Framework_TestCase
         $actual = $xmlWriter->outputMemory();
 
 
-        // Assert 
+        // Assert
         $this->assertEquals(
             $expected,
             $actual
         );
-        
+
     }
 
-    /** 
+    /**
      * @covers WindowsAzure\Common\Internal\Atom\Entry::getAttributes
      * @covers WindowsAzure\Common\Internal\Atom\Entry::setAttributes
      */
@@ -385,7 +386,7 @@ class EntryTest extends \PHPUnit_Framework_TestCase
         $entry->setAttributes($expected);
         $actual = $entry->getAttributes();
 
-        // Assert 
+        // Assert
         $this->assertEquals(
             $expected,
             $actual
@@ -393,7 +394,7 @@ class EntryTest extends \PHPUnit_Framework_TestCase
 
     }
 
-    /** 
+    /**
      * @covers WindowsAzure\Common\Internal\Atom\Entry::getAuthor
      * @covers WindowsAzure\Common\Internal\Atom\Entry::setAuthor
      */
@@ -406,7 +407,7 @@ class EntryTest extends \PHPUnit_Framework_TestCase
         $entry->setAuthor($expected);
         $actual = $entry->getAuthor();
 
-        // Assert 
+        // Assert
         $this->assertEquals(
             $expected,
             $actual
@@ -414,7 +415,7 @@ class EntryTest extends \PHPUnit_Framework_TestCase
 
     }
 
-    /** 
+    /**
      * @covers WindowsAzure\Common\Internal\Atom\Entry::getCategory
      * @covers WindowsAzure\Common\Internal\Atom\Entry::setCategory
      */
@@ -427,7 +428,7 @@ class EntryTest extends \PHPUnit_Framework_TestCase
         $entry->setCategory($expected);
         $actual = $entry->getCategory();
 
-        // Assert 
+        // Assert
         $this->assertEquals(
             $expected,
             $actual
@@ -435,7 +436,7 @@ class EntryTest extends \PHPUnit_Framework_TestCase
 
     }
 
-    /** 
+    /**
      * @covers WindowsAzure\Common\Internal\Atom\Entry::getContent
      * @covers WindowsAzure\Common\Internal\Atom\Entry::setContent
      */
@@ -448,7 +449,7 @@ class EntryTest extends \PHPUnit_Framework_TestCase
         $entry->setContent($expected);
         $actual = $entry->getContent();
 
-        // Assert 
+        // Assert
         $this->assertEquals(
             $expected,
             $actual
@@ -456,7 +457,7 @@ class EntryTest extends \PHPUnit_Framework_TestCase
 
     }
 
-    /** 
+    /**
      * @covers WindowsAzure\Common\Internal\Atom\Entry::getContributor
      * @covers WindowsAzure\Common\Internal\Atom\Entry::setContributor
      */
@@ -469,7 +470,7 @@ class EntryTest extends \PHPUnit_Framework_TestCase
         $entry->setContributor($expected);
         $actual = $entry->getContributor();
 
-        // Assert 
+        // Assert
         $this->assertEquals(
             $expected,
             $actual
@@ -477,7 +478,7 @@ class EntryTest extends \PHPUnit_Framework_TestCase
 
     }
 
-    /** 
+    /**
      * @covers WindowsAzure\Common\Internal\Atom\Entry::getId
      * @covers WindowsAzure\Common\Internal\Atom\Entry::setId
      */
@@ -490,7 +491,7 @@ class EntryTest extends \PHPUnit_Framework_TestCase
         $entry->setId($expected);
         $actual = $entry->getId();
 
-        // Assert 
+        // Assert
         $this->assertEquals(
             $expected,
             $actual
@@ -498,7 +499,7 @@ class EntryTest extends \PHPUnit_Framework_TestCase
 
     }
 
-    /** 
+    /**
      * @covers WindowsAzure\Common\Internal\Atom\Entry::getLink
      * @covers WindowsAzure\Common\Internal\Atom\Entry::setLink
      */
@@ -511,7 +512,7 @@ class EntryTest extends \PHPUnit_Framework_TestCase
         $entry->setLink($expected);
         $actual = $entry->getLink();
 
-        // Assert 
+        // Assert
         $this->assertEquals(
             $expected,
             $actual
@@ -519,7 +520,7 @@ class EntryTest extends \PHPUnit_Framework_TestCase
 
     }
 
-    /** 
+    /**
      * @covers WindowsAzure\Common\Internal\Atom\Entry::getPublished
      * @covers WindowsAzure\Common\Internal\Atom\Entry::setPublished
      */
@@ -532,7 +533,7 @@ class EntryTest extends \PHPUnit_Framework_TestCase
         $entry->setPublished($expected);
         $actual = $entry->getPublished();
 
-        // Assert 
+        // Assert
         $this->assertEquals(
             $expected,
             $actual
@@ -540,7 +541,7 @@ class EntryTest extends \PHPUnit_Framework_TestCase
 
     }
 
-    /** 
+    /**
      * @covers WindowsAzure\Common\Internal\Atom\Entry::getRights
      * @covers WindowsAzure\Common\Internal\Atom\Entry::setRights
      */
@@ -553,7 +554,7 @@ class EntryTest extends \PHPUnit_Framework_TestCase
         $entry->setRights($expected);
         $actual = $entry->getRights();
 
-        // Assert 
+        // Assert
         $this->assertEquals(
             $expected,
             $actual
@@ -561,7 +562,7 @@ class EntryTest extends \PHPUnit_Framework_TestCase
 
     }
 
-    /** 
+    /**
      * @covers WindowsAzure\Common\Internal\Atom\Entry::getSource
      * @covers WindowsAzure\Common\Internal\Atom\Entry::setSource
      */
@@ -574,7 +575,7 @@ class EntryTest extends \PHPUnit_Framework_TestCase
         $entry->setSource($expected);
         $actual = $entry->getSource();
 
-        // Assert 
+        // Assert
         $this->assertEquals(
             $expected,
             $actual
@@ -582,7 +583,7 @@ class EntryTest extends \PHPUnit_Framework_TestCase
 
     }
 
-    /** 
+    /**
      * @covers WindowsAzure\Common\Internal\Atom\Entry::getSummary
      * @covers WindowsAzure\Common\Internal\Atom\Entry::setSummary
      */
@@ -595,7 +596,7 @@ class EntryTest extends \PHPUnit_Framework_TestCase
         $entry->setSummary($expected);
         $actual = $entry->getSummary();
 
-        // Assert 
+        // Assert
         $this->assertEquals(
             $expected,
             $actual
@@ -603,7 +604,7 @@ class EntryTest extends \PHPUnit_Framework_TestCase
 
     }
 
-    /** 
+    /**
      * @covers WindowsAzure\Common\Internal\Atom\Entry::getTitle
      * @covers WindowsAzure\Common\Internal\Atom\Entry::setTitle
      */
@@ -616,7 +617,7 @@ class EntryTest extends \PHPUnit_Framework_TestCase
         $entry->setTitle($expected);
         $actual = $entry->getTitle();
 
-        // Assert 
+        // Assert
         $this->assertEquals(
             $expected,
             $actual
@@ -624,7 +625,7 @@ class EntryTest extends \PHPUnit_Framework_TestCase
 
     }
 
-    /** 
+    /**
      * @covers WindowsAzure\Common\Internal\Atom\Entry::getUpdated
      * @covers WindowsAzure\Common\Internal\Atom\Entry::setUpdated
      */
@@ -637,7 +638,7 @@ class EntryTest extends \PHPUnit_Framework_TestCase
         $entry->setUpdated($expected);
         $actual = $entry->getUpdated();
 
-        // Assert 
+        // Assert
         $this->assertEquals(
             $expected,
             $actual
@@ -645,7 +646,7 @@ class EntryTest extends \PHPUnit_Framework_TestCase
 
     }
 
-    /** 
+    /**
      * @covers WindowsAzure\Common\Internal\Atom\Entry::getExtensionElement
      * @covers WindowsAzure\Common\Internal\Atom\Entry::setExtensionElement
      */
@@ -658,12 +659,48 @@ class EntryTest extends \PHPUnit_Framework_TestCase
         $entry->setExtensionElement($expected);
         $actual = $entry->getExtensionElement();
 
-        // Assert 
+        // Assert
         $this->assertEquals(
             $expected,
             $actual
         );
 
+    }
+
+    /**
+     * @covers WindowsAzure\Common\Internal\Atom\Entry::fromXml
+     */
+    public function testFromXml(){
+
+        // Setup
+        $author = 'Some author';
+        $authorKey = 'author';
+        $categoryKey = 'category';
+        $idKey = 'id';
+        $category = 'For Children';
+        $id = 'jdsfg879';
+        $xmlString = '<entry>
+                       <content>
+                         <properties xmlns="' . Resources::DSM_XML_NAMESPACE . '" xmlns:d="' . Resources::DS_XML_NAMESPACE . '">
+                            <d:' . $authorKey . '>' . $author . '</d:' . $authorKey . '>
+                            <d:' . $categoryKey . '>' . $category . '</d:' . $categoryKey . '>
+                            <d:' . $idKey . '>' . $id . '</d:' . $idKey . '>
+                         </properties>
+                       </content>
+                      </entry>';
+        $entry = new Entry();
+        $xml = simplexml_load_string($xmlString);
+
+        // Test
+        $entry->fromXml($xml);
+
+        // Assert
+        $content = $entry->getContent();
+        $properties = $content->getProperties();
+        $propArray = $properties->getProperties();
+        $this->assertEquals($author, $propArray[$authorKey]);
+        $this->assertEquals($category, $propArray[$categoryKey]);
+        $this->assertEquals($id, $propArray[$idKey]);
     }
 }
 

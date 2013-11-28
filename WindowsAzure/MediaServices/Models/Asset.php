@@ -26,6 +26,7 @@ namespace WindowsAzure\MediaServices\Models;
 use WindowsAzure\Common\Internal\Validate;
 
 
+
 /**
  * Represents asset object used in media services
  *
@@ -224,29 +225,9 @@ class Asset
             $this->_uri = $options['Uri'];
         }
 
-        if (isset($options['Locators'])) {
-            Validate::isString($options['Locators'], 'options[Locators]');
-            $this->_locators = $options['Locators'];
-        }
-
-        if (isset($options['Files'])) {
-            Validate::isString($options['Files'], 'options[Files]');
-            $this->_files = $options['Files'];
-        }
-
-        if (isset($options['ParentAssets'])) {
-            Validate::isString($options['ParentAssets'], 'options[ParentAssets]');
-            $this->_parentAssets = $options['ParentAssets'];
-        }
-
         if (isset($options['StorageAccountName'])) {
             Validate::isString($options['StorageAccountName'], 'options[StorageAccountName]');
             $this->_storageAccountName = $options['StorageAccountName'];
-        }
-
-        if (isset($options['StorageAccount'])) {
-            Validate::isString($options['StorageAccount'], 'options[StorageAccount]');
-            $this->_storageAccount = $options['StorageAccount'];
         }
     }
 

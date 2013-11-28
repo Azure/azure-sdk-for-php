@@ -44,15 +44,15 @@ class AssetFileTest extends \PHPUnit_Framework_TestCase
     public function test__construct(){
 
         // Setup
-        $sample1 = 'Name';
-        $sample2 = 'AssetId';
+        $name = 'Name';
+        $assetId = 'AssetId';
 
         // Test
-        $result = new AssetFile('Name', 'AssetId');
+        $result = new AssetFile($name, $assetId);
 
         // Assert
-        $this->assertEquals($sample1, $result->getName());
-        $this->assertEquals($sample2, $result->getParentAssetId());
+        $this->assertEquals($name, $result->getName());
+        $this->assertEquals($assetId, $result->getParentAssetId());
     }
 
     /**
@@ -62,12 +62,12 @@ class AssetFileTest extends \PHPUnit_Framework_TestCase
      public function testGetContentCheckSum(){
 
       // Setup
-      $sample = new AssetFile('Name', 'AssetId');
+      $assetFile = new AssetFile('Name', 'AssetId');
       $expected = 'CheckSum';
-      $sample->setContentCheckSum($expected);
+      $assetFile->setContentCheckSum($expected);
 
       // Test
-      $actual = $sample->getContentCheckSum();
+      $actual = $assetFile->getContentCheckSum();
 
       // Assert
       $this->assertEquals($expected,$actual);
@@ -80,12 +80,12 @@ class AssetFileTest extends \PHPUnit_Framework_TestCase
   public function testGetMimeType(){
 
       // Setup
-      $sample = new AssetFile('Name', 'AssetId');
+      $assetFile = new AssetFile('Name', 'AssetId');
       $expected = 'Type';
-      $sample->setMimeType($expected);
+      $assetFile->setMimeType($expected);
 
       // Test
-      $actual = $sample->getMimeType();
+      $actual = $assetFile->getMimeType();
 
       // Assert
       $this->assertEquals($expected,$actual);
@@ -97,13 +97,19 @@ class AssetFileTest extends \PHPUnit_Framework_TestCase
   public function testGetLastModified() {
 
       // Setup
-      $sample = new AssetFile('Name', 'AssetId');
+      $assetFileArray = array(
+          'Name'              => 'NameName',
+          'ParentAssetId'     => 'ksfg78',
+          'LastModified'           => '2013-11-21'
+      );
+      $modified = new \Datetime($assetFileArray['LastModified']);
+      $result = AssetFile::createFromOptions($assetFileArray);
 
       // Test
-      $actual = $sample->getLastModified();
+      $actual = $result->getLastModified();
 
       // Assert
-      $this->assertNull($actual);
+      $this->assertEquals($modified->getTimestamp(), $actual->getTimestamp());
   }
 
   /**
@@ -112,13 +118,19 @@ class AssetFileTest extends \PHPUnit_Framework_TestCase
   public function testGetCreated() {
 
       // Setup
-      $sample = new AssetFile('Name', 'AssetId');
+      $assetFileArray = array(
+          'Name'              => 'NameName',
+          'ParentAssetId'     => 'ksfg78',
+          'Created'           => '2013-11-21'
+      );
+      $created = new \Datetime($assetFileArray['Created']);
+      $result = AssetFile::createFromOptions($assetFileArray);
 
       // Test
-      $actual = $sample->getCreated();
+      $actual = $result->getCreated();
 
       // Assert
-      $this->assertNull($actual);
+      $this->assertEquals($created->getTimestamp(), $actual->getTimestamp());
   }
 
   /**
@@ -128,12 +140,12 @@ class AssetFileTest extends \PHPUnit_Framework_TestCase
   public function testGetIsPrimary() {
 
       // Setup
-      $sample = new AssetFile('Name', 'AssetId');
+      $assetFile = new AssetFile('Name', 'AssetId');
       $IsPrimary = true;
-      $sample->setIsPrimary($IsPrimary);
+      $assetFile ->setIsPrimary($IsPrimary);
 
       // Test
-      $actual = $sample->getIsPrimary();
+      $actual = $assetFile->getIsPrimary();
 
       // Assert
       $this->assertEquals($IsPrimary, $actual);
@@ -146,12 +158,12 @@ class AssetFileTest extends \PHPUnit_Framework_TestCase
   public function testGetInitializationVector(){
 
       // Setup
-      $sample = new AssetFile('Name', 'AssetId');
+      $assetFile  = new AssetFile('Name', 'AssetId');
       $vector = 'vector';
-      $sample->setInitializationVector($vector);
+      $assetFile ->setInitializationVector($vector);
 
       // Test
-      $actual = $sample->getInitializationVector();
+      $actual = $assetFile ->getInitializationVector();
 
       // Assert
       $this->assertEquals($vector, $actual);
@@ -164,12 +176,12 @@ class AssetFileTest extends \PHPUnit_Framework_TestCase
   public function testGetEncryptionKeyId(){
 
       // Setup
-      $sample = new AssetFile('Name', 'AssetId');
+      $assetFile  = new AssetFile('Name', 'AssetId');
       $id = 'encrypted';
-      $sample->setEncryptionKeyId($id);
+      $assetFile ->setEncryptionKeyId($id);
 
       // Test
-      $actual = $sample->getEncryptionKeyId();
+      $actual = $assetFile ->getEncryptionKeyId();
 
       // Assert
       $this->assertEquals($id, $actual);
@@ -182,12 +194,12 @@ class AssetFileTest extends \PHPUnit_Framework_TestCase
   public function testGetIsEncrypted() {
 
       // Setup
-      $sample = new AssetFile('Name', 'AssetId');
+      $assetFile  = new AssetFile('Name', 'AssetId');
       $IsEncr = true;
-      $sample->setIsEncrypted($IsEncr);
+      $assetFile ->setIsEncrypted($IsEncr);
 
       // Test
-      $actual = $sample->getIsEncrypted();
+      $actual = $assetFile ->getIsEncrypted();
 
       // Assert
       $this->assertEquals($IsEncr, $actual);
@@ -200,12 +212,12 @@ class AssetFileTest extends \PHPUnit_Framework_TestCase
   public function testGetEncryptionScheme() {
 
       // Setup
-      $sample = new AssetFile('Name', 'AssetId');
+      $assetFile  = new AssetFile('Name', 'AssetId');
       $scheme = 'scheme';
-      $sample->setEncryptionScheme($scheme);
+      $assetFile ->setEncryptionScheme($scheme);
 
       // Test
-      $actual = $sample->getEncryptionScheme();
+      $actual = $assetFile ->getEncryptionScheme();
 
       // Assert
       $this->assertEquals($scheme, $actual);
@@ -218,12 +230,12 @@ class AssetFileTest extends \PHPUnit_Framework_TestCase
   public function testGetEncryptionVersion() {
 
       // Setup
-      $sample = new AssetFile('Name', 'AssetId');
+      $assetFile  = new AssetFile('Name', 'AssetId');
       $ver = '2.3.0';
-      $sample->setEncryptionVersion($ver);
+      $assetFile ->setEncryptionVersion($ver);
 
       // Test
-      $actual = $sample->getEncryptionVersion();
+      $actual = $assetFile ->getEncryptionVersion();
 
       // Assert
       $this->assertEquals($ver, $actual);
@@ -236,12 +248,12 @@ class AssetFileTest extends \PHPUnit_Framework_TestCase
   public function testGetParentAssetId() {
 
        // Setup
-      $sample = new AssetFile('Name', 'AssetId');
+      $assetFile  = new AssetFile('Name', 'AssetId');
       $id = '256';
-      $sample->setParentAssetId($id);
+      $assetFile ->setParentAssetId($id);
 
       // Test
-      $actual = $sample->getParentAssetId();
+      $actual = $assetFile ->getParentAssetId();
 
       // Assert
       $this->assertEquals($id, $actual);
@@ -254,12 +266,12 @@ class AssetFileTest extends \PHPUnit_Framework_TestCase
   public function testGetContentFileSize() {
 
       // Setup
-      $sample = new AssetFile('Name', 'AssetId');
+      $assetFile  = new AssetFile('Name', 'AssetId');
       $size = 256;
-      $sample->setContentFileSize($size);
+      $assetFile ->setContentFileSize($size);
 
       // Test
-      $actual = $sample->getContentFileSize();
+      $actual = $assetFile ->getContentFileSize();
 
       // Assert
       $this->assertEquals($size, $actual);
@@ -272,12 +284,12 @@ class AssetFileTest extends \PHPUnit_Framework_TestCase
   public function testGetName() {
 
       // Setup
-      $sample = new AssetFile('Name', 'AssetId');
+      $assetFile  = new AssetFile('Name', 'AssetId');
       $name = 'NewName';
-      $sample->setName($name);
+      $assetFile ->setName($name);
 
       // Test
-      $actual = $sample->getName();
+      $actual = $assetFile ->getName();
 
       // Assert
       $this->assertEquals($name, $actual);
@@ -288,13 +300,64 @@ class AssetFileTest extends \PHPUnit_Framework_TestCase
    */
   public function testGetId() {
 
-      // Setup
-      $sample = new AssetFile('Name', 'AssetId');
+     // Setup
+      $assetFileArray = array(
+          'Id'                => 'kjdfgh56',
+          'Name'              => 'NameName',
+          'ParentAssetId'     => 'ksfg78'
+      );
+      $result = AssetFile::createFromOptions($assetFileArray);
 
       // Test
-      $actual = $sample->getId();
+      $actual = $result->getId();
 
       // Assert
-      $this->assertNull($actual);
+      $this->assertEquals($assetFileArray['Id'], $actual);
+  }
+
+  /**
+   * @covers WindowsAzure\MediaServices\Models\AssetFile::createFromOptions
+   * @covers WindowsAzure\MediaServices\Models\AssetFile::fromArray
+   */
+  public function testAssetFileFromOptions(){
+
+      // Setup
+      $assetFileArray = array(
+          'Id'                           => 'dfhdgh56',
+          'Name'                         => 'newAssetFile',
+          'ContentFileSize'              => '20 mb',
+          'ParentAssetId'                => 'kdjfg67',
+          'EncryptionVersion'            => 'EncryptionVersion',
+          'EncryptionScheme'             => 'EnryptionScheme',
+          'IsEncrypted'                  => true,
+          'EncryptionKeyId'              => 'keyId896',
+          'InitializationVector'         => 'InitVector',
+          'IsPrimary'                    => true,
+          'LastModified'                 => '2013-11-19',
+          'Created'                      => '2013-11-19',
+          'MimeType'                     => 'type of mime',
+          'ContentChecksum'              => 'ContentChecksum'
+      );
+      $created = new \Datetime($assetFileArray['Created']);
+      $modified = new \Datetime($assetFileArray['LastModified']);
+
+      // Test
+      $resultAssetFile = AssetFile::createFromOptions($assetFileArray);
+
+      // Assert
+      $this->assertEquals($assetFileArray['Id'], $resultAssetFile->getId());
+      $this->assertEquals($assetFileArray['Name'], $resultAssetFile->getName());
+      $this->assertEquals($assetFileArray['ContentFileSize'], $resultAssetFile->getContentFileSize());
+      $this->assertEquals($assetFileArray['ParentAssetId'], $resultAssetFile->getParentAssetId());
+      $this->assertEquals($assetFileArray['EncryptionVersion'], $resultAssetFile->getEncryptionVersion());
+      $this->assertEquals($assetFileArray['EncryptionScheme'], $resultAssetFile->getEncryptionScheme());
+      $this->assertEquals($assetFileArray['IsEncrypted'], $resultAssetFile->getIsEncrypted());
+      $this->assertEquals($assetFileArray['EncryptionKeyId'], $resultAssetFile->getEncryptionKeyId());
+      $this->assertEquals($assetFileArray['InitializationVector'], $resultAssetFile->getInitializationVector());
+      $this->assertEquals($assetFileArray['IsPrimary'], $resultAssetFile->getIsPrimary());
+      $this->assertEquals($modified->getTimestamp(), $resultAssetFile->getLastModified()->getTimestamp());
+      $this->assertEquals($created->getTimestamp(), $resultAssetFile->getCreated()->getTimestamp());
+      $this->assertEquals($assetFileArray['MimeType'], $resultAssetFile->getMimeType());
+      $this->assertEquals($assetFileArray['ContentChecksum'], $resultAssetFile->getContentCheckSum());
   }
 }

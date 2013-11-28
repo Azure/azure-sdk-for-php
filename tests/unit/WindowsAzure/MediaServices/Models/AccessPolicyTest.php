@@ -49,10 +49,10 @@ class AccessPolicyTest extends \PHPUnit_Framework_TestCase
         $name = 'Name';
 
         // Test
-        $result = new AccessPolicy('Name');
+        $result = new AccessPolicy($name);
 
         // Assert
-        $this->assertNotNull($name, $result->getName());
+        $this->assertEquals($name, $result->getName());
     }
 
     /**
@@ -64,7 +64,7 @@ class AccessPolicyTest extends \PHPUnit_Framework_TestCase
         // Setup
         $name = 'newName';
         $value = new AccessPolicy($name);
-        $expected = 1;
+        $expected = AccessPolicy::PERMISSIONS_READ;
         $value->setPermissions($expected);
 
         // Test
@@ -118,14 +118,18 @@ class AccessPolicyTest extends \PHPUnit_Framework_TestCase
     public function testGetLastModified() {
 
         // Setup
-        $name = 'newName';
-        $value = new AccessPolicy($name);
+        $accesPolicyArray = array(
+            'Name'                     => 'newName',
+            'LastModified'             => '2013-11-21',
+        );
+        $modified = new \Datetime($accesPolicyArray['LastModified']);
+        $value = AccessPolicy::createFromOptions($accesPolicyArray);
 
         // Test
         $actual = $value->getLastModified();
 
         // Assert
-        $this->assertNull($actual);
+        $this->assertEquals($modified->getTimestamp(), $actual->getTimestamp());
 
     }
 
@@ -135,14 +139,18 @@ class AccessPolicyTest extends \PHPUnit_Framework_TestCase
     public function testGetCreated() {
 
         // Setup
-        $name = 'newName';
-        $value = new AccessPolicy($name);
+        $accesPolicyArray = array(
+            'Name'                     => 'newName',
+            'Created'                  => '2013-11-21',
+        );
+        $created = new \Datetime($accesPolicyArray['Created']);
+        $value = AccessPolicy::createFromOptions($accesPolicyArray);
 
         // Test
         $actual = $value->getCreated();
 
         // Assert
-        $this->assertNull($actual);
+        $this->assertEquals($created->getTimestamp(), $actual->getTimestamp());
     }
 
     /**
@@ -151,13 +159,47 @@ class AccessPolicyTest extends \PHPUnit_Framework_TestCase
     public function testGetId() {
 
         // Setup
-        $name = 'newName';
-        $value = new AccessPolicy($name);
+        $accesPolicyArray = array(
+            'Id'                       => 'hjgd67',
+            'Name'                     => 'newName',
+        );
+        $value = AccessPolicy::createFromOptions($accesPolicyArray);
 
         // Test
         $actual = $value->getId();
 
         // Assert
-        $this->assertNull($actual);
+        $this->assertEquals($accesPolicyArray['Id'], $actual);
+    }
+
+    /**
+     * @covers WindowsAzure\MediaServices\Models\AccessPolicy::createFromOptions
+     * @covers WindowsAzure\MediaServices\Models\AccessPolicy::fromArray
+     */
+    public function testAccessPolicyFromOptions(){
+
+        // Setup
+        $accessArray = array(
+            'Id'                  => '1',
+            'Created'             => '2013-11-19',
+            'LastModified'        => '2013-11-19',
+            'Name'                => 'newName',
+            'DurationInMinutes'   => 25,
+            'Permissions'         => AccessPolicy::PERMISSIONS_READ + AccessPolicy::PERMISSIONS_WRITE
+                + AccessPolicy::PERMISSIONS_DELETE + AccessPolicy::PERMISSIONS_LIST
+        );
+        $created = new \Datetime($accessArray['Created']);
+        $modified = new \Datetime($accessArray['LastModified']);
+
+        // Test
+        $resultAccess = AccessPolicy::createFromOptions($accessArray);
+
+        // Assert
+        $this->assertEquals($accessArray['Id'], $resultAccess->getId());
+        $this->assertEquals($created->getTimestamp(), $resultAccess->getCreated()->getTimestamp());
+        $this->assertEquals($modified->getTimestamp(), $resultAccess->getLastModified()->getTimestamp());
+        $this->assertEquals($accessArray['Name'], $resultAccess->getName());
+        $this->assertEquals($accessArray['DurationInMinutes'], $resultAccess->getDurationInMinutes());
+        $this->assertEquals($accessArray['Permissions'], $resultAccess->getPermissions());
     }
 }
