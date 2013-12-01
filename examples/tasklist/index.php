@@ -95,7 +95,7 @@ function listEntries($cloudTable)
             </tr>";
     }
 }
-
+?>
 
 
     </table>
