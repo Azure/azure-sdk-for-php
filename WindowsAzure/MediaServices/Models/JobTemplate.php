@@ -114,7 +114,7 @@ class JobTemplate
         $jobTemplate = new JobTemplate($options['JobTemplateBody'], $options['TemplateType']);
         $jobTemplate->fromArray($options);
 
-        return $asset;
+        return $jobTemplate;
     }
 
     /**
@@ -125,7 +125,6 @@ class JobTemplate
      */
     public function __construct($jobTemplateBody, $templateType = JobTemplate::TYPE_ACCOUNT_LEVEL) {
         $this->_jobTemplateBody = $jobTemplateBody;
-        $this->_taskTemplates = $taskTemplates;
         $this->_templateType = $templateType;
     }
 
@@ -160,12 +159,12 @@ class JobTemplate
         }
 
         if (isset($options['NumberofInputAssets'])) {
-            Validate::isInt($options['NumberofInputAssets'], 'options[NumberofInputAssets]');
+            Validate::isInteger($options['NumberofInputAssets'], 'options[NumberofInputAssets]');
             $this->_numberofInputAssets = $options['NumberofInputAssets'];
         }
 
         if (isset($options['TemplateType'])) {
-            Validate::isInt($options['TemplateType'], 'options[TemplateType]');
+            Validate::isInteger($options['TemplateType'], 'options[TemplateType]');
             $this->_templateType = $options['TemplateType'];
         }
     }
