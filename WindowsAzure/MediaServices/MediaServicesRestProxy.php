@@ -37,6 +37,8 @@ use WindowsAzure\MediaServices\Models\AssetFile;
 use WindowsAzure\MediaServices\Models\Job;
 use WindowsAzure\MediaServices\Models\Task;
 use WindowsAzure\MediaServices\Models\MediaProcessor;
+use WindowsAzure\MediaServices\Models\JobTemplate;
+use WindowsAzure\MediaServices\Models\TaskTemplate;
 use WindowsAzure\Common\Internal\Atom\Feed;
 use WindowsAzure\Common\Internal\Atom\Entry;
 use WindowsAzure\Common\Internal\Atom\Content;
@@ -179,6 +181,39 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
     }
 
     /**
+     * Get array of properties of atom entites passed via feed or single entry
+     *
+     * @param   string $xmlString Atom xml
+     * @return  array
+     */
+    protected function getEntryList($xmlString) {
+        $xml = simplexml_load_string($xmlString);
+
+        if ($xml->getName() == Resources::ENTRY) {
+            $entry = new Entry();
+            $entry->fromXml($xml);
+            $entries = array($entry);
+        }
+        else {
+            $feed = new Feed();
+            $feed->parseXml($xmlString);
+            $entries = $feed->getEntry();
+        }
+
+        $result = array();
+        if (is_array($entries)) {
+            foreach($entries as $entry) {
+                $properties = $this->getPropertiesFromAtomEntry($entry);
+                if (!empty($properties)) {
+                    $result[] = $properties;
+                }
+            }
+        }
+
+        return $result;
+    }
+
+    /**
      * Create new asset
      *
      * @param WindowsAzure\MediaServices\Models\Asset   $asset  Asset data
@@ -211,6 +246,68 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
         $properties = $this->getPropertiesFromAtomEntry($entry);
 
         return Asset::createFromOptions($properties);
+    }
+
+    /**
+     * Get asset
+     *
+     * @param WindowsAzure\MediaServices\Models\Asset|string   $asset  Asset data or asset Id
+     */
+    public function getAsset($asset) {
+
+        $assetId = Utilities::getEntityId($asset, 'WindowsAzure\MediaServices\Models\Asset');
+
+        $method      = Resources::HTTP_GET;
+        $headers     = array();
+        $postParams  = array();
+        $queryParams = array();
+        $path        = "Assets('{$assetId}')";
+        $statusCode  = Resources::STATUS_OK;
+
+        $response = $this->send(
+            $method,
+            $headers,
+            $postParams,
+            $queryParams,
+            $path,
+            $statusCode
+        );
+
+        $entry = new Entry();
+        $entry->parseXml($response->getBody());
+        $properties = $this->getPropertiesFromAtomEntry($entry);
+
+        return Asset::createFromOptions($properties);
+    }
+
+    /**
+     * Get asset list
+     *
+     */
+    public function getAssetList() {
+        $method      = Resources::HTTP_GET;
+        $headers     = array();
+        $postParams  = array();
+        $queryParams = array();
+        $path        = "Assets";
+        $statusCode  = Resources::STATUS_OK;
+
+        $response = $this->send(
+            $method,
+            $headers,
+            $postParams,
+            $queryParams,
+            $path,
+            $statusCode
+        );
+
+        $propertyList = $this->getEntryList($response->getBody());
+        $result = array();
+        foreach($propertyList as $properties) {
+            $result[] = Asset::createFromOptions($properties);
+        }
+
+        return $result;
     }
 
     /**
@@ -523,7 +620,7 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
         $result->setMethod(Resources::HTTP_POST);
         $result->setHeaders($headers);
         $result->setUri($this->getUri());
-        $result->setPath('Jobs');
+        $result->setPath('/Jobs');
         $result->setBody($this->wrapAtomEntry($job, $atomLinks));
 
         return $result;
@@ -551,7 +648,7 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
         $result->setMethod(Resources::HTTP_POST);
         $result->setHeaders($headers);
         $result->setUri($this->getUri());
-        $result->setPath('$1/Tasks');
+        $result->setPath('/$1/Tasks');
         $result->setBody($this->wrapAtomEntry($task));
 
         return $result;
@@ -611,6 +708,62 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
     }
 
     /**
+     * Get status of a job
+     *
+     * @param WindowsAzure\MediaServices\Models\Job|string   $job  Job data or job Id
+     */
+    public function getJobStatus($job) {
+
+        $jobId        = Utilities::getEntityId($job, 'WindowsAzure\MediaServices\Models\Job');
+        $jobIdEncoded = urlencode($jobId);
+
+        $method      = Resources::HTTP_GET;
+        $headers     = array();
+        $postParams  = array();
+        $queryParams = array();
+        $path        = "Jobs('{$jobIdEncoded}')/State";
+        $statusCode  = Resources::STATUS_OK;
+
+        $response = $this->send(
+            $method,
+            $headers,
+            $postParams,
+            $queryParams,
+            $path,
+            $statusCode
+        );
+
+        return strip_tags($response->getBody());
+    }
+
+    /**
+     * Cancel a job
+     *
+     * @param WindowsAzure\MediaServices\Models\Job|string   $job  Job data or job Id
+     */
+    public function cancelJob($job) {
+
+        $jobId        = Utilities::getEntityId($job, 'WindowsAzure\MediaServices\Models\Job');
+        $jobIdEncoded = urlencode($jobId);
+
+        $method      = Resources::HTTP_GET;
+        $headers     = array();
+        $postParams  = array();
+        $queryParams = array();
+        $path        = "CancelJob?jobid='{$jobIdEncoded}'";
+        $statusCode  = Resources::STATUS_NO_CONTENT;
+
+        $this->send(
+            $method,
+            $headers,
+            $postParams,
+            $queryParams,
+            $path,
+            $statusCode
+        );
+    }
+
+    /**
      * Delete job
      *
      * @param WindowsAzure\MediaServices\Models\Job|string   $job  Job data or job Id
@@ -623,6 +776,139 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
         $postParams  = array();
         $queryParams = array();
         $path        = "Jobs('{$jobId}')";
+        $statusCode  = Resources::STATUS_NO_CONTENT;
+
+        $this->send(
+            $method,
+            $headers,
+            $postParams,
+            $queryParams,
+            $path,
+            $statusCode
+        );
+    }
+
+    /**
+     * Create a job HTTP call context.
+     *
+     * @param WindowsAzure\MediaServices\Models\Job $jobTemplate    JobTemplate data
+     * @param array                                 $inputAssets    Input assets list
+     *
+     * @return WindowsAzure\Common\Internal\Http\HttpCallContext
+     */
+    private function _getCreateEmptyJobTemplateContext($jobTemplate) {
+        Validate::isA($jobTemplate, 'WindowsAzure\MediaServices\Models\JobTemplate', 'jobTemplate');
+
+        $headers = array(
+            Resources::DATA_SERVICE_VERSION     => Resources::MEDIA_SERVICES_DATA_SERVICE_VERSION_VALUE,
+            Resources::MAX_DATA_SERVICE_VERSION => Resources::MEDIA_SERVICES_MAX_DATA_SERVICE_VERSION_VALUE,
+            Resources::ACCEPT_HEADER            => Resources::ACCEPT_HEADER_VALUE,
+            Resources::CONTENT_TYPE             => Resources::XML_ATOM_CONTENT_TYPE
+        );
+
+        $result = new HttpCallContext();
+        $result->setMethod(Resources::HTTP_POST);
+        $result->setHeaders($headers);
+        $result->setUri($this->getUri());
+        $result->setPath('/JobTemplates');
+        $result->setBody($this->wrapAtomEntry($jobTemplate));
+
+        return $result;
+    }
+
+
+    /**
+     * Create task template HTTP call context
+     *
+     * @param WindowsAzure\MediaServices\Models\TaskTemplate $taskTemplate Task template object to be created
+     *
+     * @return WindowsAzure\Common\Internal\Http\HttpCallContext
+     */
+    private function _getCreateTaskTemplateContext($taskTemplate) {
+        Validate::isA($taskTemplate, 'WindowsAzure\MediaServices\Models\TaskTemplate', 'taskTemplate');
+
+        $headers = array(
+            Resources::DATA_SERVICE_VERSION     => Resources::MEDIA_SERVICES_DATA_SERVICE_VERSION_VALUE,
+            Resources::MAX_DATA_SERVICE_VERSION => Resources::MEDIA_SERVICES_MAX_DATA_SERVICE_VERSION_VALUE,
+            Resources::ACCEPT_HEADER            => Resources::ACCEPT_HEADER_VALUE,
+            Resources::CONTENT_TYPE             => Resources::XML_ATOM_CONTENT_TYPE
+        );
+
+        $result = new HttpCallContext();
+        $result->setMethod(Resources::HTTP_POST);
+        $result->setHeaders($headers);
+        $result->setUri($this->getUri());
+        $result->setPath('/$1/TaskTemplates');
+        $result->setBody($this->wrapAtomEntry($taskTemplate));
+
+        return $result;
+    }
+
+    /**
+     * Create a job.
+     *
+     * @param WindowsAzure\MediaServices\Models\JobTemplate $jobTemplate    Job template data
+     * @param array                                         $taskTemplates  Performed tasks template array
+     *
+     * @return array
+     */
+    public function createJobTemplate($jobTemplate, $taskTemplates) {
+        Validate::isA($jobTemplate, 'WindowsAzure\MediaServices\Models\JobTemplate', 'jobTemplate');
+        Validate::isArray($taskTemplates, 'taskTemplates');
+
+        $batch = new BatchRequest();
+        $batch->appendContext($this->_getCreateEmptyJobTemplateContext($jobTemplate));
+
+        if ($taskTemplates != null) {
+            foreach($taskTemplates as $taskTemplate) {
+                $batch->appendContext($this->_getCreateTaskTemplateContext($taskTemplate));
+            }
+        }
+
+        $batch->encode();
+
+        $method      = Resources::HTTP_POST;
+        $headers     = $batch->getHeaders();
+        $postParams  = array();
+        $queryParams = array();
+        $path        = '$batch';
+        $statusCode  = Resources::STATUS_ACCEPTED;
+        $body        = $batch->getBody();
+
+        $response = $this->send(
+            $method,
+            $headers,
+            $postParams,
+            $queryParams,
+            $path,
+            $statusCode,
+            $body
+        );
+
+        $batchResponse = new BatchResponse($response->getBody());
+        $responses = $batchResponse->getContexts();
+        $jobTemplateResponse = $responses[0];
+
+        $entry = new Entry();
+        $entry->parseXml($jobTemplateResponse->getBody());
+        $properties = $this->getPropertiesFromAtomEntry($entry);
+
+        return JobTemplate::createFromOptions($properties);
+    }
+
+    /**
+     * Delete job template
+     *
+     * @param WindowsAzure\MediaServices\Models\JobTemplate|string   $jobTemplate  Job template data or job template Id
+     */
+    public function deleteJobTemplate($jobTemplate) {
+        $jobTemplateId = Utilities::getEntityId($jobTemplate, 'WindowsAzure\Mediaservices\Models\JobTemplate');
+
+        $method      = Resources::HTTP_DELETE;
+        $headers     = array();
+        $postParams  = array();
+        $queryParams = array();
+        $path        = "JobTemplates('{$jobTemplateId}')";
         $statusCode  = Resources::STATUS_NO_CONTENT;
 
         $this->send(

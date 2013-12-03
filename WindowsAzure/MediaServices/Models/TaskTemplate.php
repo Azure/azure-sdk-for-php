@@ -24,6 +24,7 @@
 
 namespace WindowsAzure\MediaServices\Models;
 use WindowsAzure\Common\Internal\Validate;
+use WindowsAzure\Common\Internal\Utilities;
 
 
 /**
@@ -159,6 +160,7 @@ class TaskTemplate
      * @param int $numberOfOutputAssets Number of output Assets the TaskTemplate must process.
      */
     public function __construct($numberOfInputAssets, $numberOfOutputAssets) {
+        $this->_id = 'nb:ttid:UUID:' . Utilities::getGuid();
         $this->_numberofInputAssets     = $numberOfInputAssets;
         $this->_numberofOutputAssets    = $numberOfOutputAssets;
     }

@@ -109,7 +109,6 @@ class JobTemplate
      */
     public static function createFromOptions($options) {
         Validate::notNull($options['JobTemplateBody'], 'options[JobTemplateBody]');
-        Validate::notNull($options['TemplateType'], 'options[TemplateType]');
 
         $jobTemplate = new JobTemplate($options['JobTemplateBody'], $options['TemplateType']);
         $jobTemplate->fromArray($options);

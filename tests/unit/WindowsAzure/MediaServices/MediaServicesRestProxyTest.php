@@ -35,6 +35,8 @@ use WindowsAzure\MediaServices\Models\Locator;
 use WindowsAzure\MediaServices\Models\Job;
 use WindowsAzure\MediaServices\Models\Task;
 use WindowsAzure\MediaServices\Models\TaskOptions;
+use WindowsAzure\MediaServices\Models\JobTemplate;
+use WindowsAzure\MediaServices\Models\TaskTemplate;
 
 /**
  * Unit tests for class MediaServicesRestProxy
@@ -68,6 +70,47 @@ class MediaServicesRestProxyTest extends MediaServicesRestProxyTestBase
 
         // Assert
         $this->assertEquals($asset->getName(), $result->getName());
+    }
+
+    /**
+     * @covers WindowsAzure\MediaServices\MediaServicesRestProxy::getAsset
+     * @covers WindowsAzure\MediaServices\MediaServicesRestProxy::send
+     * @covers WindowsAzure\MediaServices\MediaServicesRestProxy::wrapAtomEntry
+     * @covers WindowsAzure\MediaServices\MediaServicesRestProxy::getPropertiesFromAtomEntry
+     */
+    public function testGetAsset()
+    {
+        // Setup
+        $asset = new Asset(Asset::OPTIONS_NONE);
+        $asset->setName('testAsset' . $this->createSuffix());
+        $asset = $this->createAsset($asset);
+
+        // Test
+        $result = $this->restProxy->getAsset($asset);
+
+        // Assert
+        $this->assertEquals($asset->getId(), $result->getId());
+    }
+
+    /**
+     * @covers WindowsAzure\MediaServices\MediaServicesRestProxy::getAssetList
+     * @covers WindowsAzure\MediaServices\MediaServicesRestProxy::send
+     * @covers WindowsAzure\MediaServices\MediaServicesRestProxy::wrapAtomEntry
+     * @covers WindowsAzure\MediaServices\MediaServicesRestProxy::getPropertiesFromAtomEntry
+     */
+    public function testGetAssetList()
+    {
+        // Setup
+        $asset = new Asset(Asset::OPTIONS_NONE);
+        $asset->setName('testAsset' . $this->createSuffix());
+        $asset = $this->createAsset($asset);
+
+        // Test
+        $result = $this->restProxy->getAssetList();
+
+        // Assert
+        $this->assertCount(1, $result);
+        $this->assertEquals($asset->getName(), $result[0]->getName());
     }
 
     /**
@@ -256,6 +299,81 @@ class MediaServicesRestProxyTest extends MediaServicesRestProxyTestBase
 
         // Assert
         $this->assertEquals($job->getName(), $result->getName());
+    }
+
+    /**
+     * @covers WindowsAzure\MediaServices\MediaServicesRestProxy::getJobStatus
+     * @covers WindowsAzure\MediaServices\MediaServicesRestProxy::send
+     */
+    public function testGetJobStatus()
+    {
+        // Setup
+        $asset = $this->createAssetWithFile();
+
+        $taskBody = '<?xml version="1.0" encoding="utf-8"?><taskBody><inputAsset>JobInputAsset(0)</inputAsset><outputAsset assetCreationOptions="0" assetName="Output asset">JobOutputAsset(0)</outputAsset></taskBody>';
+        $mediaProcessorId = 'nb:mpid:UUID:2e7aa8f3-4961-4e0c-b4db-0e0439e524f5';
+        $task = new Task($taskBody, $mediaProcessorId, TaskOptions::NONE);
+        $task->setConfiguration('H.264 HD 720p VBR');
+
+        $job = new Job();
+        $job->setName('TestJob' . $this->createSuffix());
+        $job = $this->restProxy->createJob($job, array($asset), array($task));
+
+        // Test
+        $result = $this->restProxy->getJobStatus($job);
+
+        // Assert
+        $this->assertGreaterThanOrEqual(0, $result);
+        $this->assertLessThanOrEqual(6, $result);
+    }
+
+    /**
+     * @covers WindowsAzure\MediaServices\MediaServicesRestProxy::cancelJob
+     * @covers WindowsAzure\MediaServices\MediaServicesRestProxy::send
+     */
+    public function testCancelJob()
+    {
+        // Setup
+        $asset = $this->createAssetWithFile();
+
+        $taskBody = '<?xml version="1.0" encoding="utf-8"?><taskBody><inputAsset>JobInputAsset(0)</inputAsset><outputAsset assetCreationOptions="0" assetName="Output asset">JobOutputAsset(0)</outputAsset></taskBody>';
+        $mediaProcessorId = 'nb:mpid:UUID:2e7aa8f3-4961-4e0c-b4db-0e0439e524f5';
+        $task = new Task($taskBody, $mediaProcessorId, TaskOptions::NONE);
+        $task->setConfiguration('H.264 HD 720p VBR');
+
+        $job = new Job();
+        $job->setName('TestJob' . $this->createSuffix());
+        $job = $this->restProxy->createJob($job, array($asset), array($task));
+
+        // Test
+        $result = $this->restProxy->cancelJob($job);
+
+        // Assert
+        $this->assertNull($result);
+    }
+
+    /**
+     * @covers WindowsAzure\MediaServices\MediaServicesRestProxy::createJobTemplate
+     * @covers WindowsAzure\MediaServices\MediaServicesRestProxy::send
+     */
+    public function testCreateJobTemplate()
+    {
+        // Setup
+        $mediaProcessorId = 'nb:mpid:UUID:2e7aa8f3-4961-4e0c-b4db-0e0439e524f5';
+
+        $taskTemplate = new TaskTemplate(1, 1);
+        $taskTemplate->setMediaProcessorId($mediaProcessorId);
+        $taskTemplate->setConfiguration('H.264 HD 720p VBR');
+
+        $jobTemplateBody = '<?xml version="1.0" encoding="utf-8"?><jobTemplate><taskBody taskTemplateId="' . $taskTemplate->getId() . '"><inputAsset>JobInputAsset(0)</inputAsset><outputAsset assetCreationOptions="0" assetName="Output asset">JobOutputAsset(0)</outputAsset></taskBody></jobTemplate>';
+        $jobTemplate = new JobTemplate($jobTemplateBody);
+        $jobTemplate->setName('TestJobTemplate' . $this->createSuffix());
+
+        // Test
+        $result = $this->restProxy->createJobTemplate($jobTemplate, array($taskTemplate));
+
+        // Assert
+        $this->assertEquals($jobTemplate->getName(), $result->getName());
     }
 
     /**
