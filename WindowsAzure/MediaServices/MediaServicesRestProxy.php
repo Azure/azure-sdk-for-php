@@ -229,7 +229,7 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
         $queryParams = array();
         $path        = 'Assets';
         $statusCode  = Resources::STATUS_CREATED;
-        $body = $this->wrapAtomEntry($asset);
+        $body        = $this->wrapAtomEntry($asset);
 
         $response = $this->send(
             $method,
@@ -311,6 +311,101 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
     }
 
     /**
+     * Get asset
+     *
+     * @param WindowsAzure\MediaServices\Models\Asset|string   $asset  Asset data or asset Id
+     */
+    public function getAssetLocators($asset) {
+
+        $assetId = Utilities::getEntityId($asset, 'WindowsAzure\MediaServices\Models\Asset');
+
+        $method      = Resources::HTTP_GET;
+        $headers     = array();
+        $postParams  = array();
+        $queryParams = array();
+        $path        = "Assets('{$assetId}')/Locators";
+        $statusCode  = Resources::STATUS_OK;
+
+        $response = $this->send(
+            $method,
+            $headers,
+            $postParams,
+            $queryParams,
+            $path,
+            $statusCode
+        );
+
+        $propertyList = $this->getEntryList($response->getBody());
+        $result = array();
+        foreach($propertyList as $properties) {
+            $result[] = Locator::createFromOptions($properties);
+        }
+
+        return $result;
+    }
+
+    /**
+     * Get parent assets of asset
+     *
+     * @param WindowsAzure\MediaServices\Models\Asset|string   $asset  Asset data or asset Id
+     */
+    public function getAssetParentAssets($asset) {
+
+        $assetId = Utilities::getEntityId($asset, 'WindowsAzure\MediaServices\Models\Asset');
+
+        $method      = Resources::HTTP_GET;
+        $headers     = array();
+        $postParams  = array();
+        $queryParams = array();
+        $path        = "Assets('{$assetId}')/ParentAssets";
+        $statusCode  = Resources::STATUS_OK;
+
+        $response = $this->send(
+            $method,
+            $headers,
+            $postParams,
+            $queryParams,
+            $path,
+            $statusCode
+        );
+
+        $propertyList = $this->getEntryList($response->getBody());
+        $result = array();
+        foreach($propertyList as $properties) {
+            $result[] = Locator::createFromOptions($properties);
+        }
+
+        return $result;
+    }
+
+    /**
+     * Get asset
+     *
+     * @param WindowsAzure\MediaServices\Models\Asset   $asset  New asset data with valid id
+     */
+    public function updateAsset($asset) {
+        Validate::isA($asset, 'WindowsAzure\MediaServices\Models\Asset', 'asset');
+
+        $method      = Resources::HTTP_MERGE;
+        $headers     = array();
+        $postParams  = array();
+        $queryParams = array();
+        $path        = "Assets('{$asset->getId()}')";
+        $statusCode  = Resources::STATUS_NO_CONTENT;
+        $body        = $this->wrapAtomEntry($asset);
+
+        $response = $this->send(
+            $method,
+            $headers,
+            $postParams,
+            $queryParams,
+            $path,
+            $statusCode,
+            $body
+        );
+    }
+
+    /**
      * Delete asset
      *
      * @param WindowsAzure\MediaServices\Models\Asset|string   $asset  Asset data or asset Id
@@ -372,6 +467,72 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
     }
 
     /**
+     * Get AccessPolicy.
+     *
+     * @param WindowsAzure\MediaServices\Models\AccessPolicy|string   $accessPolicy   AccessPolicy data or AccessPolicy Id
+     *
+     * @return WindowsAzure\MediaServices\Models\AccessPolicy
+     */
+    public function getAccessPolicy($accessPolicy) {
+
+        $accessPolicyId = Utilities::getEntityId($accessPolicy, 'WindowsAzure\Mediaservices\Models\AccessPolicy');
+
+        $method      = Resources::HTTP_GET;
+        $headers     = array();
+        $postParams  = array();
+        $queryParams = array();
+        $path = "AccessPolicies('{$accessPolicyId}')";
+        $statusCode  = Resources::STATUS_OK;
+
+        $response = $this->send(
+            $method,
+            $headers,
+            $postParams,
+            $queryParams,
+            $path,
+            $statusCode
+        );
+
+        $entry = new Entry();
+        $entry->parseXml($response->getBody());
+        $properties = $this->getPropertiesFromAtomEntry($entry);
+
+        return AccessPolicy::createFromOptions($properties);
+    }
+
+    /**
+     * Get list of AccessPolicies.
+     *
+     * @return array
+     */
+    public function getAccessPolicyList() {
+
+        $method      = Resources::HTTP_GET;
+        $headers     = array();
+        $postParams  = array();
+        $queryParams = array();
+        $path = 'AccessPolicies';
+        $statusCode  = Resources::STATUS_OK;
+
+        $response = $this->send(
+            $method,
+            $headers,
+            $postParams,
+            $queryParams,
+            $path,
+            $statusCode
+        );
+
+        $propertyList = $this->getEntryList($response->getBody());
+        $result = array();
+        foreach($propertyList as $properties) {
+            $result[] = AccessPolicy::createFromOptions($properties);
+        }
+
+        return $result;
+    }
+
+    /**
      * Delete access policy
      *
      * @param WindowsAzure\MediaServices\Models\AccessPolicy|string   $accessPolicy  Access policy data or access policy Id
@@ -429,6 +590,99 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
         $properties = $this->getPropertiesFromAtomEntry($entry);
 
         return Locator::createFromOptions($properties);
+    }
+
+    /**
+     * Get Locator.
+     *
+     * @param WindowsAzure\MediaServices\Models\Locator|string   $locator   Locator data or locator Id
+     *
+     * @return WindowsAzure\MediaServices\Models\Locator
+     */
+    public function getLocator($locator) {
+
+        $locatorId = Utilities::getEntityId($locator, 'WindowsAzure\Mediaservices\Models\Locator');
+
+        $method      = Resources::HTTP_GET;
+        $headers     = array();
+        $postParams  = array();
+        $queryParams = array();
+        $path = "Locators('{$locatorId}')";
+        $statusCode  = Resources::STATUS_OK;
+
+        $response = $this->send(
+            $method,
+            $headers,
+            $postParams,
+            $queryParams,
+            $path,
+            $statusCode
+        );
+
+        $entry = new Entry();
+        $entry->parseXml($response->getBody());
+        $properties = $this->getPropertiesFromAtomEntry($entry);
+
+        return Locator::createFromOptions($properties);
+    }
+
+    /**
+     * Get list of Locators.
+     *
+     * @return array
+     */
+    public function getLocatorList() {
+
+        $method      = Resources::HTTP_GET;
+        $headers     = array();
+        $postParams  = array();
+        $queryParams = array();
+        $path = 'Locators';
+        $statusCode  = Resources::STATUS_OK;
+
+        $response = $this->send(
+            $method,
+            $headers,
+            $postParams,
+            $queryParams,
+            $path,
+            $statusCode
+        );
+
+        $propertyList = $this->getEntryList($response->getBody());
+        $result = array();
+        foreach($propertyList as $properties) {
+            $result[] = Locator::createFromOptions($properties);
+        }
+
+        return $result;
+    }
+
+    /**
+     * Update locator
+     *
+     * @param WindowsAzure\MediaServices\Models\Locator $locator    New locator data with valid id
+     */
+    public function updateLocator($locator) {
+        Validate::isA($locator, 'WindowsAzure\MediaServices\Models\Locator', 'locator');
+
+        $method      = Resources::HTTP_MERGE;
+        $headers     = array();
+        $postParams  = array();
+        $queryParams = array();
+        $path        = "Locators('{$locator->getId()}')";
+        $statusCode  = Resources::STATUS_NO_CONTENT;
+        $body        = $this->wrapAtomEntry($locator);
+
+        $response = $this->send(
+            $method,
+            $headers,
+            $postParams,
+            $queryParams,
+            $path,
+            $statusCode,
+            $body
+        );
     }
 
     /**

@@ -114,6 +114,29 @@ class MediaServicesRestProxyTest extends MediaServicesRestProxyTestBase
     }
 
     /**
+     * @covers WindowsAzure\MediaServices\MediaServicesRestProxy::updateAsset
+     * @covers WindowsAzure\MediaServices\MediaServicesRestProxy::send
+     * @covers WindowsAzure\MediaServices\MediaServicesRestProxy::wrapAtomEntry
+     * @covers WindowsAzure\MediaServices\MediaServicesRestProxy::getPropertiesFromAtomEntry
+     */
+    public function testUpdateAsset()
+    {
+        // Setup
+        $asset = new Asset(Asset::OPTIONS_NONE);
+        $asset = $this->createAsset($asset);
+        $name = 'testAsset' . $this->createSuffix();
+
+        // Test
+        $asset->setName($name);
+        $this->restProxy->updateAsset($asset);
+        $result = $this->restProxy->getAsset($asset);
+
+        // Assert
+        $this->assertEquals($asset->getId(), $result->getId());
+        $this->assertEquals($asset->getName(), $result->getName());
+    }
+
+    /**
      * @covers WindowsAzure\MediaServices\MediaServicesRestProxy::createAccessPolicy
      * @covers WindowsAzure\MediaServices\MediaServicesRestProxy::deleteAccessPolicy
      * @covers WindowsAzure\MediaServices\MediaServicesRestProxy::send
@@ -133,6 +156,49 @@ class MediaServicesRestProxyTest extends MediaServicesRestProxyTestBase
 
         // Assert
         $this->assertEquals($sample->getName(), $result->getName());
+    }
+
+    /**
+     * @covers WindowsAzure\MediaServices\MediaServicesRestProxy::getAccessPolicyList
+     * @covers WindowsAzure\MediaServices\MediaServicesRestProxy::send
+     */
+    public function testGetAccessPolicyList()
+    {
+        // Setup
+        $accessName = 'TestAccessPolicy' . $this->createSuffix();
+
+        $access = new AccessPolicy($accessName);
+        $access->setDurationInMinutes(30);
+        $access->setPermissions(AccessPolicy::PERMISSIONS_WRITE);
+        $access = $this->createAccessPolicy($access);
+
+        // Test
+        $accessPolicies = $this->restProxy->getAccessPolicyList();
+
+        // Assert
+        $this->assertEquals(1, count($accessPolicies));
+        $this->assertEquals($accessName, $accessPolicies[0]->getName());
+    }
+
+    /**
+     * @covers WindowsAzure\MediaServices\MediaServicesRestProxy::getAccessPolicy
+     * @covers WindowsAzure\MediaServices\MediaServicesRestProxy::send
+     */
+    public function testGetAccessPolicy()
+    {
+        // Setup
+        $accessName = 'TestAccessPolicy' . $this->createSuffix();
+
+        $access = new AccessPolicy($accessName);
+        $access->setDurationInMinutes(30);
+        $access->setPermissions(AccessPolicy::PERMISSIONS_WRITE);
+        $access = $this->createAccessPolicy($access);
+
+        // Test
+        $result = $this->restProxy->getAccessPolicy($access);
+
+        // Assert
+        $this->assertEquals($access->getId(), $result->getId());
     }
 
     /**
