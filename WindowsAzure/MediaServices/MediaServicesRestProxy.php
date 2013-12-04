@@ -283,6 +283,7 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
     /**
      * Get asset list
      *
+     * @return array
      */
     public function getAssetList() {
         $method      = Resources::HTTP_GET;
@@ -311,9 +312,11 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
     }
 
     /**
-     * Get asset
+     * Get asset locators
      *
      * @param WindowsAzure\MediaServices\Models\Asset|string   $asset  Asset data or asset Id
+     *
+     * @return array
      */
     public function getAssetLocators($asset) {
 
@@ -348,6 +351,8 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
      * Get parent assets of asset
      *
      * @param WindowsAzure\MediaServices\Models\Asset|string   $asset  Asset data or asset Id
+     *
+     * @return array
      */
     public function getAssetParentAssets($asset) {
 
@@ -372,6 +377,40 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
         $propertyList = $this->getEntryList($response->getBody());
         $result = array();
         foreach($propertyList as $properties) {
+            $result[] = Asset::createFromOptions($properties);
+        }
+
+        return $result;
+    }
+
+    /**
+     * Get assetFiles of asset
+     *
+     * @param WindowsAzure\MediaServices\Models\Asset|string   $asset  Asset data or asset Id
+     */
+    public function getAssetAssetFileList($asset) {
+
+        $assetId = Utilities::getEntityId($asset, 'WindowsAzure\MediaServices\Models\Asset');
+
+        $method      = Resources::HTTP_GET;
+        $headers     = array();
+        $postParams  = array();
+        $queryParams = array();
+        $path        = "Assets('{$assetId}')/Files";
+        $statusCode  = Resources::STATUS_OK;
+
+        $response = $this->send(
+            $method,
+            $headers,
+            $postParams,
+            $queryParams,
+            $path,
+            $statusCode
+        );
+
+        $propertyList = $this->getEntryList($response->getBody());
+        $result = array();
+        foreach($propertyList as $properties) {
             $result[] = Locator::createFromOptions($properties);
         }
 
@@ -379,7 +418,41 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
     }
 
     /**
-     * Get asset
+     * Get storage account of asset
+     *
+     * @param WindowsAzure\MediaServices\Models\Asset|string   $asset  Asset data or asset Id
+     *
+     * @return WindowsAzure\MediaServices\Models\StorageAccount
+     */
+    public function getAssetStorageAccount($asset) {
+
+        $assetId = Utilities::getEntityId($asset, 'WindowsAzure\MediaServices\Models\Asset');
+
+        $method      = Resources::HTTP_GET;
+        $headers     = array();
+        $postParams  = array();
+        $queryParams = array();
+        $path        = "Assets('{$assetId}')/StorageAccount";
+        $statusCode  = Resources::STATUS_OK;
+
+        $response = $this->send(
+            $method,
+            $headers,
+            $postParams,
+            $queryParams,
+            $path,
+            $statusCode
+        );
+
+        $entry = new Entry();
+        $entry->parseXml($response->getBody());
+        $properties = $this->getPropertiesFromAtomEntry($entry);
+
+        return StorageAccount::createFromOptions($properties);
+    }
+
+    /**
+     * Update asset
      *
      * @param WindowsAzure\MediaServices\Models\Asset   $asset  New asset data with valid id
      */
@@ -627,6 +700,74 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
     }
 
     /**
+     * Get Locator access policy.
+     *
+     * @param WindowsAzure\MediaServices\Models\Locator|string   $locator   Locator data or locator Id
+     *
+     * @return WindowsAzure\MediaServices\Models\Locator
+     */
+    public function getLocatorAccessPolicy($locator) {
+
+        $locatorId = Utilities::getEntityId($locator, 'WindowsAzure\Mediaservices\Models\Locator');
+
+        $method      = Resources::HTTP_GET;
+        $headers     = array();
+        $postParams  = array();
+        $queryParams = array();
+        $path = "Locators('{$locatorId}')/AccessPolicy";
+        $statusCode  = Resources::STATUS_OK;
+
+        $response = $this->send(
+            $method,
+            $headers,
+            $postParams,
+            $queryParams,
+            $path,
+            $statusCode
+        );
+
+        $entry = new Entry();
+        $entry->parseXml($response->getBody());
+        $properties = $this->getPropertiesFromAtomEntry($entry);
+
+        return AccessPolicy::createFromOptions($properties);
+    }
+
+    /**
+     * Get Locator asset.
+     *
+     * @param WindowsAzure\MediaServices\Models\Locator|string   $locator   Locator data or locator Id
+     *
+     * @return WindowsAzure\MediaServices\Models\Locator
+     */
+    public function getLocatorAsset($locator) {
+
+        $locatorId = Utilities::getEntityId($locator, 'WindowsAzure\Mediaservices\Models\Locator');
+
+        $method      = Resources::HTTP_GET;
+        $headers     = array();
+        $postParams  = array();
+        $queryParams = array();
+        $path = "Locators('{$locatorId}')/Asset";
+        $statusCode  = Resources::STATUS_OK;
+
+        $response = $this->send(
+            $method,
+            $headers,
+            $postParams,
+            $queryParams,
+            $path,
+            $statusCode
+        );
+
+        $entry = new Entry();
+        $entry->parseXml($response->getBody());
+        $properties = $this->getPropertiesFromAtomEntry($entry);
+
+        return Asset::createFromOptions($properties);
+    }
+
+    /**
      * Get list of Locators.
      *
      * @return array
@@ -738,30 +879,16 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
     }
 
     /**
-     * Get list of asset files. If asset and assetFile both not null filter is equal to assetFile.
+     * Get asset file.
      *
-     * @param WindowsAzure\MediaServices\Models\AssetFile|string    $assetFile  AssetFile data or assetFile Id to filter file list
-     * @param WindowsAzure\MediaServices\Models\Asset|string        $asset      Asset data or asset Id to filter file list
+     * @param WindowsAzure\MediaServices\Models\AssetFile|string    $assetFile  AssetFile data or assetFile Id
      *
-     * @return array
+     * @return WindowsAzure\MediaServices\Models\AssetFile
      */
-    public function getAssetFiles($assetFile = null, $asset = null) {
+    public function getAssetFile($assetFile) {
 
-        if (($assetFile == null) && ($asset == null)) {
-            $path = 'Files';
-        }
-
-        if ($asset != null) {
-            $assetId = Utilities::getEntityId($asset, 'WindowsAzure\MediaServices\Models\Asset');
-            $path = "Assets('{$assetId}')/Files";
-        }
-
-        $isSingleFile = false;
-        if ($assetFile != null) {
-            $assetFileId = Utilities::getEntityId($assetFile, 'WindowsAzure\Mediaservices\Models\AssetFile');
-            $path = "Files('{$assetFileId}')";
-            $isSingleFile = true;
-        }
+        $assetFileId = Utilities::getEntityId($assetFile, 'WindowsAzure\Mediaservices\Models\AssetFile');
+        $path = "Files('{$assetFileId}')";
 
         $method      = Resources::HTTP_GET;
         $headers     = array();
@@ -778,28 +905,69 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
             $statusCode
         );
 
-        if (!$isSingleFile) {
-            $feed = new Feed();
-            $feed->parseXml($response->getBody());
-            $entries = $feed->getEntry();
-        }
-        else {
-            $entry = new Entry();
-            $entry->parseXml($response->getBody());
-            $entries = array($entry);
-        }
+        $entry = new Entry();
+        $entry->parseXml($response->getBody());
+        $properties = $this->getPropertiesFromAtomEntry($entry);
+        return AssetFile::createFromOptions($properties);
+    }
 
+
+    /**
+     * Get list of all asset files.
+     *
+     * @return array
+     */
+    public function getAssetFileList() {
+        $method      = Resources::HTTP_GET;
+        $headers     = array();
+        $postParams  = array();
+        $path        = 'Files';
+        $queryParams = array();
+        $statusCode  = Resources::STATUS_OK;
+
+        $response = $this->send(
+            $method,
+            $headers,
+            $postParams,
+            $queryParams,
+            $path,
+            $statusCode
+        );
+
+        $propertyList = $this->getEntryList($response->getBody());
         $result = array();
-        if (is_array($entries)) {
-            foreach($entries as $entry) {
-                $properties = $this->getPropertiesFromAtomEntry($entry);
-                if (!empty($properties)) {
-                    $result[] = AssetFile::createFromOptions($properties);
-                }
-            }
+        foreach($propertyList as $properties) {
+            $result[] = AssetFile::createFromOptions($properties);
         }
 
         return $result;
+    }
+
+    /**
+     * Update asset file
+     *
+     * @param WindowsAzure\MediaServices\Models\AssetFile    $assetFile  New AssetFile data
+     */
+    public function updateAssetFile($assetFile) {
+        Validate::isA($assetFile, 'WindowsAzure\MediaServices\Models\AssetFile', 'assetFile');
+
+        $method      = Resources::HTTP_MERGE;
+        $headers     = array();
+        $postParams  = array();
+        $queryParams = array();
+        $path        = "Files('{$assetFile->getId()}')";
+        $statusCode  = Resources::STATUS_NO_CONTENT;
+        $body        = $this->wrapAtomEntry($assetFile);
+
+        $response = $this->send(
+            $method,
+            $headers,
+            $postParams,
+            $queryParams,
+            $path,
+            $statusCode,
+            $body
+        );
     }
 
     /**
@@ -962,6 +1130,72 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
     }
 
     /**
+     * Get Job.
+     *
+     * @param WindowsAzure\MediaServices\Models\Job|string   $job   Job data or job Id
+     *
+     * @return WindowsAzure\MediaServices\Models\Job
+     */
+    public function getJob($job) {
+
+        $jobId = Utilities::getEntityId($job, 'WindowsAzure\Mediaservices\Models\Job');
+
+        $method      = Resources::HTTP_GET;
+        $headers     = array();
+        $postParams  = array();
+        $queryParams = array();
+        $path = "Jobs('{$jobId}')";
+        $statusCode  = Resources::STATUS_OK;
+
+        $response = $this->send(
+            $method,
+            $headers,
+            $postParams,
+            $queryParams,
+            $path,
+            $statusCode
+        );
+
+        $entry = new Entry();
+        $entry->parseXml($response->getBody());
+        $properties = $this->getPropertiesFromAtomEntry($entry);
+
+        return Job::createFromOptions($properties);
+    }
+
+    /**
+     * Get list of Jobs.
+     *
+     * @return array
+     */
+    public function getJobList() {
+
+        $method      = Resources::HTTP_GET;
+        $headers     = array();
+        $postParams  = array();
+        $queryParams = array();
+        $path = 'Jobs';
+        $statusCode  = Resources::STATUS_OK;
+
+        $response = $this->send(
+            $method,
+            $headers,
+            $postParams,
+            $queryParams,
+            $path,
+            $statusCode
+        );
+
+        $propertyList = $this->getEntryList($response->getBody());
+        $result = array();
+        foreach($propertyList as $properties) {
+            $result[] = Job::createFromOptions($properties);
+        }
+
+        return $result;
+    }
+
+    /**
      * Get status of a job
      *
      * @param WindowsAzure\MediaServices\Models\Job|string   $job  Job data or job Id
@@ -988,6 +1222,115 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
         );
 
         return strip_tags($response->getBody());
+    }
+
+    /**
+     * Get job tasks.
+     *
+     * @param WindowsAzure\MediaServices\Models\Job|string   $job   Job data or job Id
+     *
+     * @return array
+     */
+    public function getJobTasks($job) {
+
+        $jobId = Utilities::getEntityId($job, 'WindowsAzure\Mediaservices\Models\Job');
+
+        $method      = Resources::HTTP_GET;
+        $headers     = array();
+        $postParams  = array();
+        $queryParams = array();
+        $path = "Jobs('{$jobId}')/Tasks";
+        $statusCode  = Resources::STATUS_OK;
+
+        $response = $this->send(
+            $method,
+            $headers,
+            $postParams,
+            $queryParams,
+            $path,
+            $statusCode
+        );
+
+        $propertyList = $this->getEntryList($response->getBody());
+        $result = array();
+        foreach($propertyList as $properties) {
+            $result[] = Task::createFromOptions($properties);
+        }
+
+        return $result;
+    }
+
+
+    /**
+     * Get job input assets.
+     *
+     * @param WindowsAzure\MediaServices\Models\Job|string   $job   Job data or job Id
+     *
+     * @return array
+     */
+    public function getJobInputMediaAssets($job) {
+
+        $jobId = Utilities::getEntityId($job, 'WindowsAzure\Mediaservices\Models\Job');
+
+        $method      = Resources::HTTP_GET;
+        $headers     = array();
+        $postParams  = array();
+        $queryParams = array();
+        $path = "Jobs('{$jobId}')/InputMediaAssets";
+        $statusCode  = Resources::STATUS_OK;
+
+        $response = $this->send(
+            $method,
+            $headers,
+            $postParams,
+            $queryParams,
+            $path,
+            $statusCode
+        );
+
+        $propertyList = $this->getEntryList($response->getBody());
+        $result = array();
+        foreach($propertyList as $properties) {
+            $result[] = Asset::createFromOptions($properties);
+        }
+
+        return $result;
+    }
+
+    /**
+     * Get job output assets.
+     *
+     * @param WindowsAzure\MediaServices\Models\Job|string   $job   Job data or job Id
+     *
+     * @return array
+     */
+    public function getJobOutputMediaAssets($job) {
+
+        $jobId = Utilities::getEntityId($job, 'WindowsAzure\Mediaservices\Models\Job');
+
+        $method      = Resources::HTTP_GET;
+        $headers     = array();
+        $postParams  = array();
+        $queryParams = array();
+        $path = "Jobs('{$jobId}')/OutputMediaAssets";
+        $statusCode  = Resources::STATUS_OK;
+
+        $response = $this->send(
+            $method,
+            $headers,
+            $postParams,
+            $queryParams,
+            $path,
+            $statusCode
+        );
+
+        $propertyList = $this->getEntryList($response->getBody());
+        $result = array();
+        foreach($propertyList as $properties) {
+            $result[] = Asset::createFromOptions($properties);
+        }
+
+        return $result;
     }
 
     /**
@@ -1040,6 +1383,38 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
             $path,
             $statusCode
         );
+    }
+
+    /**
+     * Get list of tasks.
+     *
+     * @return array
+     */
+    public function getTaskList() {
+
+        $method      = Resources::HTTP_GET;
+        $headers     = array();
+        $postParams  = array();
+        $queryParams = array();
+        $path = 'Tasks';
+        $statusCode  = Resources::STATUS_OK;
+
+        $response = $this->send(
+            $method,
+            $headers,
+            $postParams,
+            $queryParams,
+            $path,
+            $statusCode
+        );
+
+        $propertyList = $this->getEntryList($response->getBody());
+        $result = array();
+        foreach($propertyList as $properties) {
+            $result[] = Task::createFromOptions($properties);
+        }
+
+        return $result;
     }
 
     /**
@@ -1151,6 +1526,109 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
     }
 
     /**
+     * Get job template.
+     *
+     * @param WindowsAzure\MediaServices\Models\JobTemplate|string   $jobTemplate   JobTemplate data or jobTemplate Id
+     *
+     * @return WindowsAzure\MediaServices\Models\JobTemplate
+     */
+    public function getJobTemplate($jobTemplate) {
+
+        $jobTemplateId = Utilities::getEntityId($jobTemplate, 'WindowsAzure\Mediaservices\Models\JobTemplate');
+
+        $method      = Resources::HTTP_GET;
+        $headers     = array();
+        $postParams  = array();
+        $queryParams = array();
+        $path = "JobTemplates('{$jobTemplateId}')";
+        $statusCode  = Resources::STATUS_OK;
+
+        $response = $this->send(
+            $method,
+            $headers,
+            $postParams,
+            $queryParams,
+            $path,
+            $statusCode
+        );
+
+        $entry = new Entry();
+        $entry->parseXml($response->getBody());
+        $properties = $this->getPropertiesFromAtomEntry($entry);
+
+        return JobTemplate::createFromOptions($properties);
+    }
+
+    /**
+     * Get list of Job Templates.
+     *
+     * @return array
+     */
+    public function getJobTemplateList() {
+
+        $method      = Resources::HTTP_GET;
+        $headers     = array();
+        $postParams  = array();
+        $queryParams = array();
+        $path = 'JobTemplates';
+        $statusCode  = Resources::STATUS_OK;
+
+        $response = $this->send(
+            $method,
+            $headers,
+            $postParams,
+            $queryParams,
+            $path,
+            $statusCode
+        );
+
+        $propertyList = $this->getEntryList($response->getBody());
+        $result = array();
+        foreach($propertyList as $properties) {
+            $result[] = JobTemplate::createFromOptions($properties);
+        }
+
+        return $result;
+    }
+
+    /**
+     * Get task templates for job template.
+     *
+     * @param WindowsAzure\MediaServices\Models\JobTemplate|string   $jobTemplate   JobTemplate data or jobTemplate Id
+     *
+     * @return array
+     */
+    public function getJobTemplateTaskTemplateList($jobTemplate) {
+
+        $jobTemplateId = Utilities::getEntityId($jobTemplate, 'WindowsAzure\Mediaservices\Models\JobTemplate');
+
+        $method      = Resources::HTTP_GET;
+        $headers     = array();
+        $postParams  = array();
+        $queryParams = array();
+        $path = "JobTemplates('{$jobTemplateId}')/TaskTemplates";
+        $statusCode  = Resources::STATUS_OK;
+
+        $response = $this->send(
+            $method,
+            $headers,
+            $postParams,
+            $queryParams,
+            $path,
+            $statusCode
+        );
+
+        $propertyList = $this->getEntryList($response->getBody());
+        $result = array();
+        foreach($propertyList as $properties) {
+            $result[] = TaskTemplate::createFromOptions($properties);
+        }
+
+        return $result;
+    }
+
+
+    /**
      * Delete job template
      *
      * @param WindowsAzure\MediaServices\Models\JobTemplate|string   $jobTemplate  Job template data or job template Id
@@ -1173,6 +1651,38 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
             $path,
             $statusCode
         );
+    }
+
+    /**
+     * Get list of task templates.
+     *
+     * @return array
+     */
+    public function getTaskTemplateList() {
+
+        $method      = Resources::HTTP_GET;
+        $headers     = array();
+        $postParams  = array();
+        $queryParams = array();
+        $path = 'TaskTemplates';
+        $statusCode  = Resources::STATUS_OK;
+
+        $response = $this->send(
+            $method,
+            $headers,
+            $postParams,
+            $queryParams,
+            $path,
+            $statusCode
+        );
+
+        $propertyList = $this->getEntryList($response->getBody());
+        $result = array();
+        foreach($propertyList as $properties) {
+            $result[] = TaskTemplate::createFromOptions($properties);
+        }
+
+        return $result;
     }
 
     /**
