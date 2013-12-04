@@ -22,14 +22,14 @@
  * @link      https://github.com/WindowsAzure/azure-sdk-for-php
  */
 
-namespace WindowsAzure\Common\Internal\Atom;
+namespace WindowsAzure\MediaServices\Models;
 use WindowsAzure\Common\Internal\Resources;
 use WindowsAzure\Common\Internal\Utilities;
 use WindowsAzure\Common\Internal\Validate;
 
 
 /**
- * Atom object properties.
+ * Entry object properties.
  *
  * @category  Microsoft
  * @package   WindowsAzure\Common\Internal\Atom
@@ -40,7 +40,7 @@ use WindowsAzure\Common\Internal\Validate;
  * @link      https://github.com/WindowsAzure/azure-sdk-for-php
  */
 
-class AtomProperties extends AtomBase
+class EntryProperties
 {
     /**
      * The undefined content.
@@ -57,17 +57,19 @@ class AtomProperties extends AtomBase
     }
 
     /**
-     * Parse an ATOM Properties xml.
+     * Parse an Entry Properties xml.
      *
-     * @param string $xmlString an XML based string of ATOM Link.
+     * @param \SimpleXMLElement $xml An XML object of entry properties.
      *
      * @return none
      */
-    public function fromXml($xmlContent)
+    public function fromXml($xml)
     {
-        Validate::notNull($xmlContent, 'xmlContent');
+        Validate::isA($xml, '\SimpleXMLElement', 'xml');
 
-        foreach ($xmlContent->children(Resources::DS_XML_NAMESPACE) as $child) {
+        $wrapperXml = $xml->children(Resources::DSM_XML_NAMESPACE);
+
+        foreach ($xml->children(Resources::DS_XML_NAMESPACE) as $child) {
             $this->properties[$child->getName()] = (string)$child;
         }
     }

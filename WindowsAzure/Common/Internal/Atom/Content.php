@@ -56,11 +56,11 @@ class Content extends AtomBase
     protected $type;
 
     /**
-     * Entry properties
+     * Source XML object
      *
-     * @var WindowsAzure\Common\Internal\Atom\AtomProperties
+     * @var \SimpleXMLElement
      */
-    protected $properties;
+    protected $xml;
 
     /**
      * Creates a Content instance with specified text.
@@ -111,11 +111,7 @@ class Content extends AtomBase
 
         $this->text = $text;
 
-        foreach ($contentXml->children(Resources::DSM_XML_NAMESPACE) as $child) {
-            $this->properties = new AtomProperties();
-            $this->properties->fromXml($child);
-        }
-
+        $this->xml = $contentXml;
     }
 
     /**
@@ -141,6 +137,16 @@ class Content extends AtomBase
     }
 
     /**
+     * Gets the xml object of the content.
+     *
+     * @return \SimpleXMLElement
+     */
+    public function getXml()
+    {
+        return $this->xml;
+    }
+
+    /**
      * Gets the type of the content.
      *
      * @return string
@@ -160,28 +166,6 @@ class Content extends AtomBase
     public function setType($type)
     {
         $this->type = $type;
-    }
-
-    /**
-     * Get Properties
-     *
-     * @return WindowsAzure\Common\Internal\Atom\AtomProperties
-     */
-    public function getProperties() {
-        return $this->properties;
-    }
-
-    /**
-     * Set Properties
-     *
-     * @param WindowsAzure\Common\Internal\Atom\AtomProperties    $value Properties object
-     *
-     * @return none
-     */
-    public function setProperties($value) {
-        Validate::isA($value, 'WindowsAzure\Common\Internal\Atom\AtomProperties', 'value');
-
-        $this->properties = $value;
     }
 
     /**
@@ -221,10 +205,6 @@ class Content extends AtomBase
     {
         Validate::notNull($xmlWriter, 'xmlWriter');
         $xmlWriter->writeRaw($this->text);
-
-        if (!empty($this->properties)) {
-            $this->properties->writeXml($xmlWriter);
-        }
     }
 }
 

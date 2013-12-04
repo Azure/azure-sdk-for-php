@@ -15,7 +15,7 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   WindowsAzure\Blob
+ * @package   WindowsAzure\MediaServices
  * @author    Azure PHP SDK <azurephpsdk@microsoft.com>
  * @copyright Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
@@ -33,10 +33,10 @@ use WindowsAzure\MediaServices\Models\Asset;
 use WindowsAzure\MediaServices\Models\AccessPolicy;
 use WindowsAzure\MediaServices\Models\Locator;
 use WindowsAzure\MediaServices\Models\AssetFile;
+use WindowsAzure\MediaServices\Models\EntryProperties;
 use WindowsAzure\Common\Internal\Atom\Feed;
 use WindowsAzure\Common\Internal\Atom\Entry;
 use WindowsAzure\Common\Internal\Atom\Content;
-use WindowsAzure\Common\Internal\Atom\AtomProperties;
 use WindowsAzure\Blob\Models\BlobType;
 use WindowsAzure\Common\Internal\Http\HttpClient;
 use WindowsAzure\Common\Internal\Http\Url;
@@ -126,12 +126,16 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
     protected function wrapAtomEntry($entity) {
         Validate::notNull($entity, 'entity');
 
-        $properties = new AtomProperties();
+        $properties = new EntryProperties();
         $properties->setPropertiesFromObject($entity);
+
+        $propertyWriter = new \XMLWriter();
+        $propertyWriter->openMemory();
+        $properties->writeXml($propertyWriter);
 
         $content = new Content();
         $content->setType(Resources::XML_CONTENT_TYPE);
-        $content->setProperties($properties);
+        $content->setText($propertyWriter->outputMemory());
 
         $atomEntry = new Entry();
         $atomEntry->setContent($content);
@@ -155,10 +159,10 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
         $result = array();
         $content = $entry->getContent();
         if (!empty($content)) {
-            $properties = $content->getProperties();
-            if (!empty($properties)) {
-                $result = $properties->getProperties();
-            }
+            $propertiesXml = $content->getXml()->children(Resources::DSM_XML_NAMESPACE);
+            $properties = new EntryProperties();
+            $properties->fromXml($propertiesXml);
+            $result = $properties->getProperties();
         }
 
         return $result;

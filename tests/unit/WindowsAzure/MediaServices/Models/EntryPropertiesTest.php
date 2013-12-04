@@ -14,48 +14,48 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   Tests\Unit\WindowsAzure\Common\Internal\Atom
+ * @package   Tests\Unit\WindowsAzure\MediaServices\Models
  * @author    Azure PHP SDK <azurephpsdk@microsoft.com>
- * @copyright 2012 Microsoft Corporation
+ * @copyright Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link      https://github.com/WindowsAzure/azure-sdk-for-php
  */
 
-namespace Tests\Unit\WindowsAzure\Common\Internal\Atom;
-use WindowsAzure\Common\Internal\Atom\AtomProperties;
+namespace Tests\Unit\WindowsAzure\MediaServices\Models;
+use WindowsAzure\MediaServices\Models\EntryProperties;
 use WindowsAzure\Common\Internal\Resources;
 use WindowsAzure\MediaServices\Models\Asset;
 /**
- * Unit tests for class AtomLink
+ * Unit tests for class EntryProperties
  *
  * @category  Microsoft
  * @package   Tests\Unit\WindowsAzure\Common\Internal\Atom
  * @author    Azure PHP SDK <azurephpsdk@microsoft.com>
- * @copyright 2012 Microsoft Corporation
+ * @copyright Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @version   Release: 0.3.1_2011-08
  * @link      https://github.com/WindowsAzure/azure-sdk-for-php
  */
 
-class AtomPropertiesTest extends \PHPUnit_Framework_TestCase
+class EntryPropertiesTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @covers WindowsAzure\Common\Internal\Atom\AtomProperties::__construct
+     * @covers WindowsAzure\MediaServices\Models\EntryProperties::__construct
      */
     public function test__construct(){
 
         // Setup
 
         // Test
-        $atomProp = new AtomProperties();
+        $prop = new EntryProperties();
 
         // Assert
-        $this-> assertNotNull($atomProp);
+        $this->assertNotNull($prop);
     }
 
     /**
-     * @covers WindowsAzure\Common\Internal\Atom\AtomProperties::fromXml
-     * @covers WindowsAzure\Common\Internal\Atom\AtomProperties::getProperties
+     * @covers WindowsAzure\MediaServices\Models\EntryProperties::fromXml
+     * @covers WindowsAzure\MediaServices\Models\EntryProperties::getProperties
      */
     public function testFromXml(){
 
@@ -66,11 +66,11 @@ class AtomPropertiesTest extends \PHPUnit_Framework_TestCase
                        <d:' . $nameKey . '>' . $testString . '</d:' . $nameKey . '>
                       </properties>';
         $xml = simplexml_load_string($xmlString);
-        $atomProp = new AtomProperties();
+        $prop = new EntryProperties();
 
         // Test
-        $atomProp->fromXml($xml);
-        $result = $atomProp->getProperties();
+        $prop->fromXml($xml);
+        $result = $prop->getProperties();
 
         // Assert
         $this->assertEquals(1, count($result));
@@ -78,7 +78,7 @@ class AtomPropertiesTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\Common\Internal\Atom\AtomProperties::setPropertiesFromObject
+     * @covers WindowsAzure\MediaServices\Models\EntryProperties::setPropertiesFromObject
      */
     public function testSetPropertiesFromObject(){
 
@@ -95,11 +95,11 @@ class AtomPropertiesTest extends \PHPUnit_Framework_TestCase
         );
         $created = new \Datetime($assetArray[$createdKey]);
         $asset = Asset::createFromOptions($assetArray);
-        $atomProp = new AtomProperties();
+        $prop = new EntryProperties();
 
         // Test
-        $atomProp->setPropertiesFromObject($asset);
-        $result = $atomProp->getProperties();
+        $prop->setPropertiesFromObject($asset);
+        $result = $prop->getProperties();
         $createdFromResult = new \Datetime($result[$createdKey]);
 
         // Assert
@@ -110,7 +110,7 @@ class AtomPropertiesTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\Common\Internal\Atom\AtomProperties::writeXml
+     * @covers WindowsAzure\MediaServices\Models\EntryProperties::writeXml
      */
     public function testWriteXml(){
 
@@ -120,14 +120,14 @@ class AtomPropertiesTest extends \PHPUnit_Framework_TestCase
         $asset = new Asset($option);
         $asset->setName($name);
         $asset->setOptions(Asset::OPTIONS_STORAGE_ENCRYPTED);
-        $atomProp = new AtomProperties();
-        $atomProp->setPropertiesFromObject($asset);
-        $properties = $atomProp->getProperties();
+        $prop = new EntryProperties();
+        $prop->setPropertiesFromObject($asset);
+        $properties = $prop->getProperties();
 
         // Test
         $xmlWriter = new \XMLWriter();
         $xmlWriter->openMemory();
-        $atomProp->writeXml($xmlWriter);
+        $prop->writeXml($xmlWriter);
         $actual = $xmlWriter->outputMemory();
         $xml = simplexml_load_string($actual);
         $childrenCount = 0;
@@ -143,7 +143,7 @@ class AtomPropertiesTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\Common\Internal\Atom\AtomProperties::writeInnerXml
+     * @covers WindowsAzure\MediaServices\Models\EntryProperties::writeInnerXml
      */
     public function testWriteInnerXml(){
         // Setup
@@ -152,18 +152,18 @@ class AtomPropertiesTest extends \PHPUnit_Framework_TestCase
         $asset = new Asset($option);
         $asset->setName($name);
         $asset->setOptions(Asset::OPTIONS_STORAGE_ENCRYPTED);
-        $atomProp = new AtomProperties();
-        $atomProp->setPropertiesFromObject($asset);
+        $prop = new EntryProperties();
+        $prop->setPropertiesFromObject($asset);
 
         // Test
         $xmlWriter = new \XMLWriter();
         $xmlWriter->openMemory();
-        $atomProp->writeInnerXml($xmlWriter);
+        $prop->writeInnerXml($xmlWriter);
         $result = $xmlWriter->outputMemory();
 
         // Assert
-        $this->assertContains('data:Options', $result);
-        $this->assertContains('data:Name', $result);
+        $this->assertContains(':Options', $result);
+        $this->assertContains(':Name', $result);
 
 
     }
