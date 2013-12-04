@@ -284,18 +284,19 @@ class MediaServicesRestProxyTest extends MediaServicesRestProxyTestBase
     public function testCreateJobWithTasks()
     {
         // Setup
-        $asset = $this->createAssetWithFile();
+        $mediaProcessor = $this->restProxy->getLatestMediaProcessor('Windows Azure Media Encoder');
+        $inputAsset = $this->createAssetWithFile();
+        $outputAssetName = 'TestOutputAsset' . $this->createSuffix();
 
-        $taskBody = '<?xml version="1.0" encoding="utf-8"?><taskBody><inputAsset>JobInputAsset(0)</inputAsset><outputAsset assetCreationOptions="0" assetName="Output asset">JobOutputAsset(0)</outputAsset></taskBody>';
-        $mediaProcessorId = 'nb:mpid:UUID:2e7aa8f3-4961-4e0c-b4db-0e0439e524f5';
-        $task = new Task($taskBody, $mediaProcessorId, TaskOptions::NONE);
+        $taskBody = '<?xml version="1.0" encoding="utf-8"?><taskBody><inputAsset>JobInputAsset(0)</inputAsset><outputAsset assetCreationOptions="0" assetName="' . $outputAssetName . '">JobOutputAsset(0)</outputAsset></taskBody>';
+        $task = new Task($taskBody, $mediaProcessor->getId(), TaskOptions::NONE);
         $task->setConfiguration('H.264 HD 720p VBR');
 
         $job = new Job();
         $job->setName('TestJob' . $this->createSuffix());
 
         // Test
-        $result = $this->restProxy->createJob($job, array($asset), array($task));
+        $result = $this->restProxy->createJob($job, array($inputAsset), array($task));
 
         // Assert
         $this->assertEquals($job->getName(), $result->getName());
@@ -308,16 +309,17 @@ class MediaServicesRestProxyTest extends MediaServicesRestProxyTestBase
     public function testGetJobStatus()
     {
         // Setup
-        $asset = $this->createAssetWithFile();
+        $mediaProcessor = $this->restProxy->getLatestMediaProcessor('Windows Azure Media Encoder');
+        $inputAsset = $this->createAssetWithFile();
+        $outputAssetName = 'TestOutputAsset' . $this->createSuffix();
 
-        $taskBody = '<?xml version="1.0" encoding="utf-8"?><taskBody><inputAsset>JobInputAsset(0)</inputAsset><outputAsset assetCreationOptions="0" assetName="Output asset">JobOutputAsset(0)</outputAsset></taskBody>';
-        $mediaProcessorId = 'nb:mpid:UUID:2e7aa8f3-4961-4e0c-b4db-0e0439e524f5';
-        $task = new Task($taskBody, $mediaProcessorId, TaskOptions::NONE);
+        $taskBody = '<?xml version="1.0" encoding="utf-8"?><taskBody><inputAsset>JobInputAsset(0)</inputAsset><outputAsset assetCreationOptions="0" assetName="' . $outputAssetName . '">JobOutputAsset(0)</outputAsset></taskBody>';
+        $task = new Task($taskBody, $mediaProcessor->getId(), TaskOptions::NONE);
         $task->setConfiguration('H.264 HD 720p VBR');
 
         $job = new Job();
         $job->setName('TestJob' . $this->createSuffix());
-        $job = $this->restProxy->createJob($job, array($asset), array($task));
+        $job = $this->restProxy->createJob($job, array($inputAsset), array($task));
 
         // Test
         $result = $this->restProxy->getJobStatus($job);
@@ -334,16 +336,17 @@ class MediaServicesRestProxyTest extends MediaServicesRestProxyTestBase
     public function testCancelJob()
     {
         // Setup
-        $asset = $this->createAssetWithFile();
+        $mediaProcessor = $this->restProxy->getLatestMediaProcessor('Windows Azure Media Encoder');
+        $inputAsset = $this->createAssetWithFile();
+        $outputAssetName = 'TestOutputAsset' . $this->createSuffix();
 
-        $taskBody = '<?xml version="1.0" encoding="utf-8"?><taskBody><inputAsset>JobInputAsset(0)</inputAsset><outputAsset assetCreationOptions="0" assetName="Output asset">JobOutputAsset(0)</outputAsset></taskBody>';
-        $mediaProcessorId = 'nb:mpid:UUID:2e7aa8f3-4961-4e0c-b4db-0e0439e524f5';
-        $task = new Task($taskBody, $mediaProcessorId, TaskOptions::NONE);
+        $taskBody = '<?xml version="1.0" encoding="utf-8"?><taskBody><inputAsset>JobInputAsset(0)</inputAsset><outputAsset assetCreationOptions="0" assetName="' . $outputAssetName . '">JobOutputAsset(0)</outputAsset></taskBody>';
+        $task = new Task($taskBody, $mediaProcessor->getId(), TaskOptions::NONE);
         $task->setConfiguration('H.264 HD 720p VBR');
 
         $job = new Job();
         $job->setName('TestJob' . $this->createSuffix());
-        $job = $this->restProxy->createJob($job, array($asset), array($task));
+        $job = $this->restProxy->createJob($job, array($inputAsset), array($task));
 
         // Test
         $result = $this->restProxy->cancelJob($job);
@@ -359,13 +362,14 @@ class MediaServicesRestProxyTest extends MediaServicesRestProxyTestBase
     public function testCreateJobTemplate()
     {
         // Setup
-        $mediaProcessorId = 'nb:mpid:UUID:2e7aa8f3-4961-4e0c-b4db-0e0439e524f5';
+        $mediaProcessor = $this->restProxy->getLatestMediaProcessor('Windows Azure Media Encoder');
+        $outputAssetName = 'TestOutputAsset' . $this->createSuffix();
 
         $taskTemplate = new TaskTemplate(1, 1);
-        $taskTemplate->setMediaProcessorId($mediaProcessorId);
+        $taskTemplate->setMediaProcessorId($mediaProcessor->getId());
         $taskTemplate->setConfiguration('H.264 HD 720p VBR');
 
-        $jobTemplateBody = '<?xml version="1.0" encoding="utf-8"?><jobTemplate><taskBody taskTemplateId="' . $taskTemplate->getId() . '"><inputAsset>JobInputAsset(0)</inputAsset><outputAsset assetCreationOptions="0" assetName="Output asset">JobOutputAsset(0)</outputAsset></taskBody></jobTemplate>';
+        $jobTemplateBody = '<?xml version="1.0" encoding="utf-8"?><jobTemplate><taskBody taskTemplateId="' . $taskTemplate->getId() . '"><inputAsset>JobInputAsset(0)</inputAsset><outputAsset assetCreationOptions="0" assetName="' . $outputAssetName . '">JobOutputAsset(0)</outputAsset></taskBody></jobTemplate>';
         $jobTemplate = new JobTemplate($jobTemplateBody);
         $jobTemplate->setName('TestJobTemplate' . $this->createSuffix());
 
@@ -387,5 +391,21 @@ class MediaServicesRestProxyTest extends MediaServicesRestProxyTestBase
 
         // Assert
         $this->assertNotEmpty($result);
+    }
+
+    /**
+     * @covers WindowsAzure\MediaServices\MediaServicesRestProxy::getLatestMediaProcessor
+     */
+    public function testGetLatestMediaProcessor()
+    {
+        // Setup
+        $name = 'Windows Azure Media Encoder';
+
+        // Test
+        $result = $this->restProxy->getLatestMediaProcessor($name);
+
+        // Assert
+        $this->assertNotNull($result);
+        $this->assertEquals($name, $result->getName());
     }
 }
