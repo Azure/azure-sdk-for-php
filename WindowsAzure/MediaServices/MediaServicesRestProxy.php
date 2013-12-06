@@ -33,7 +33,7 @@ use WindowsAzure\MediaServices\Models\Asset;
 use WindowsAzure\MediaServices\Models\AccessPolicy;
 use WindowsAzure\MediaServices\Models\Locator;
 use WindowsAzure\MediaServices\Models\AssetFile;
-use WindowsAzure\MediaServices\Models\EntryProperties;
+use WindowsAzure\MediaServices\Models\ContentProperties;
 use WindowsAzure\Common\Internal\Atom\Feed;
 use WindowsAzure\Common\Internal\Atom\Entry;
 use WindowsAzure\Common\Internal\Atom\Content;
@@ -126,7 +126,7 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
     protected function wrapAtomEntry($entity) {
         Validate::notNull($entity, 'entity');
 
-        $properties = new EntryProperties();
+        $properties = new ContentProperties();
         $properties->setPropertiesFromObject($entity);
 
         $propertyWriter = new \XMLWriter();
@@ -160,7 +160,7 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
         $content = $entry->getContent();
         if (!empty($content)) {
             $propertiesXml = $content->getXml()->children(Resources::DSM_XML_NAMESPACE);
-            $properties = new EntryProperties();
+            $properties = new ContentProperties();
             $properties->fromXml($propertiesXml);
             $result = $properties->getProperties();
         }

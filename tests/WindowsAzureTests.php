@@ -185,7 +185,7 @@ spl_autoload_register(
             'tests\\unit\\windowsazure\\mediaservices\\models\\accesspolicytest' => '/unit/WindowsAzure/MediaServices/Models/AccessPolicyTest.php',
             'tests\\unit\\windowsazure\\mediaservices\\models\\assetfiletest' => '/unit/WindowsAzure/MediaServices/Models/AssetFileTest.php',
             'tests\\unit\\windowsazure\\mediaservices\\models\\assettest' => '/unit/WindowsAzure/MediaServices/Models/AssetTest.php',
-            'tests\\unit\\windowsazure\\mediaservices\\models\\entrypropertiestest' => '/unit/WindowsAzure/MediaServices/Models/EntryPropertiesTest.php',
+            'tests\\unit\\windowsazure\\mediaservices\\models\\contentpropertiestest' => '/unit/WindowsAzure/MediaServices/Models/ContentPropertiesTest.php',
             'tests\\unit\\windowsazure\\mediaservices\\models\\locatortest' => '/unit/WindowsAzure/MediaServices/Models/LocatorTest.php',
             'tests\\unit\\windowsazure\\queue\\models\\createmessageoptionstest' => '/unit/WindowsAzure/Queue/Models/CreateMessageOptionsTest.php',
             'tests\\unit\\windowsazure\\queue\\models\\createqueueoptionstest' => '/unit/WindowsAzure/Queue/Models/CreateQueueOptionsTest.php',

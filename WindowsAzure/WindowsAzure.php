@@ -144,7 +144,7 @@ spl_autoload_register(
             'windowsazure\\mediaservices\\models\\accesspolicy' => '/MediaServices/Models/AccessPolicy.php',
             'windowsazure\\mediaservices\\models\\asset' => '/MediaServices/Models/Asset.php',
             'windowsazure\\mediaservices\\models\\assetfile' => '/MediaServices/Models/AssetFile.php',
-            'windowsazure\\mediaservices\\models\\entryproperties' => '/MediaServices/Models/EntryProperties.php',
+            'windowsazure\\mediaservices\\models\\contentproperties' => '/MediaServices/Models/ContentProperties.php',
             'windowsazure\\mediaservices\\models\\locator' => '/MediaServices/Models/Locator.php',
             'windowsazure\\queue\\internal\\iqueue' => '/Queue/Internal/IQueue.php',
             'windowsazure\\queue\\models\\createmessageoptions' => '/Queue/Models/CreateMessageOptions.php',

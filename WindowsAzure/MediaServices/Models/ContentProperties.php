@@ -29,7 +29,7 @@ use WindowsAzure\Common\Internal\Validate;
 
 
 /**
- * Entry object properties.
+ * Entity object properties.
  *
  * @category  Microsoft
  * @package   WindowsAzure\Common\Internal\Atom
@@ -40,7 +40,7 @@ use WindowsAzure\Common\Internal\Validate;
  * @link      https://github.com/WindowsAzure/azure-sdk-for-php
  */
 
-class EntryProperties
+class ContentProperties
 {
     /**
      * The undefined content.

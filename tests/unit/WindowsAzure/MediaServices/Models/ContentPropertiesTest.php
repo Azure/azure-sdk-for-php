@@ -22,11 +22,11 @@
  */
 
 namespace Tests\Unit\WindowsAzure\MediaServices\Models;
-use WindowsAzure\MediaServices\Models\EntryProperties;
+use WindowsAzure\MediaServices\Models\ContentProperties;
 use WindowsAzure\Common\Internal\Resources;
 use WindowsAzure\MediaServices\Models\Asset;
 /**
- * Unit tests for class EntryProperties
+ * Unit tests for class ContentProperties
  *
  * @category  Microsoft
  * @package   Tests\Unit\WindowsAzure\Common\Internal\Atom
@@ -37,25 +37,25 @@ use WindowsAzure\MediaServices\Models\Asset;
  * @link      https://github.com/WindowsAzure/azure-sdk-for-php
  */
 
-class EntryPropertiesTest extends \PHPUnit_Framework_TestCase
+class ContentPropertiesTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @covers WindowsAzure\MediaServices\Models\EntryProperties::__construct
+     * @covers WindowsAzure\MediaServices\Models\ContentProperties::__construct
      */
     public function test__construct(){
 
         // Setup
 
         // Test
-        $prop = new EntryProperties();
+        $prop = new ContentProperties();
 
         // Assert
         $this->assertNotNull($prop);
     }
 
     /**
-     * @covers WindowsAzure\MediaServices\Models\EntryProperties::fromXml
-     * @covers WindowsAzure\MediaServices\Models\EntryProperties::getProperties
+     * @covers WindowsAzure\MediaServices\Models\ContentProperties::fromXml
+     * @covers WindowsAzure\MediaServices\Models\ContentProperties::getProperties
      */
     public function testFromXml(){
 
@@ -66,7 +66,7 @@ class EntryPropertiesTest extends \PHPUnit_Framework_TestCase
                        <d:' . $nameKey . '>' . $testString . '</d:' . $nameKey . '>
                       </properties>';
         $xml = simplexml_load_string($xmlString);
-        $prop = new EntryProperties();
+        $prop = new ContentProperties();
 
         // Test
         $prop->fromXml($xml);
@@ -78,7 +78,7 @@ class EntryPropertiesTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\MediaServices\Models\EntryProperties::setPropertiesFromObject
+     * @covers WindowsAzure\MediaServices\Models\ContentProperties::setPropertiesFromObject
      */
     public function testSetPropertiesFromObject(){
 
@@ -95,7 +95,7 @@ class EntryPropertiesTest extends \PHPUnit_Framework_TestCase
         );
         $created = new \Datetime($assetArray[$createdKey]);
         $asset = Asset::createFromOptions($assetArray);
-        $prop = new EntryProperties();
+        $prop = new ContentProperties();
 
         // Test
         $prop->setPropertiesFromObject($asset);
@@ -110,7 +110,7 @@ class EntryPropertiesTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\MediaServices\Models\EntryProperties::writeXml
+     * @covers WindowsAzure\MediaServices\Models\ContentProperties::writeXml
      */
     public function testWriteXml(){
 
@@ -120,7 +120,7 @@ class EntryPropertiesTest extends \PHPUnit_Framework_TestCase
         $asset = new Asset($option);
         $asset->setName($name);
         $asset->setOptions(Asset::OPTIONS_STORAGE_ENCRYPTED);
-        $prop = new EntryProperties();
+        $prop = new ContentProperties();
         $prop->setPropertiesFromObject($asset);
         $properties = $prop->getProperties();
 
@@ -143,7 +143,7 @@ class EntryPropertiesTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\MediaServices\Models\EntryProperties::writeInnerXml
+     * @covers WindowsAzure\MediaServices\Models\ContentProperties::writeInnerXml
      */
     public function testWriteInnerXml(){
         // Setup
@@ -152,7 +152,7 @@ class EntryPropertiesTest extends \PHPUnit_Framework_TestCase
         $asset = new Asset($option);
         $asset->setName($name);
         $asset->setOptions(Asset::OPTIONS_STORAGE_ENCRYPTED);
-        $prop = new EntryProperties();
+        $prop = new ContentProperties();
         $prop->setPropertiesFromObject($asset);
 
         // Test
