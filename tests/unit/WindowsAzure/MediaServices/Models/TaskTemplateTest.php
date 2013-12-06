@@ -53,6 +53,7 @@ class TaskTemplateTest extends \PHPUnit_Framework_TestCase
         // Assert
         $this->assertEquals($numberofInputAssets, $taskTempl->getNumberofInputAssets());
         $this->assertEquals($numberofOutputAssets, $taskTempl->getNumberofOutputAssets());
+        $this->assertContains('nb:ttid:UUID:', $taskTempl->getId());
 
     }
 

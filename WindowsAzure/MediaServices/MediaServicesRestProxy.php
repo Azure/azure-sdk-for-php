@@ -1723,4 +1723,27 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
 
         return $result;
     }
+
+    /**
+     * Get media processor by name with latest version
+     *
+     * @param string    $name   Media processor name
+     *
+     * @return WindowsAzure\MediaServices\Models\JobTemplate\MediaProcessor
+     */
+    public function getLatestMediaProcessor($name) {
+        $mediaProcessors = $this->getMediaProcessors();
+
+        $maxVersion = 0.0;
+        $result = null;
+        foreach($mediaProcessors as $mediaProcessor) {
+            if (($mediaProcessor->getName() == $name) && ($mediaProcessor->getVersion() > $maxVersion)) {
+                $result = $mediaProcessor;
+                $maxVersion = $mediaProcessor->getVersion();
+            }
+        }
+
+        return $result;
+    }
+
 }
