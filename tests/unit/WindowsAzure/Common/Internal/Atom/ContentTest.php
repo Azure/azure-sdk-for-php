@@ -11,7 +11,7 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- * 
+ *
  * PHP version 5
  *
  * @category  Microsoft
@@ -24,6 +24,8 @@
 
 namespace Tests\Unit\WindowsAzure\Common\Internal\Atom;
 use WindowsAzure\Common\Internal\Atom\Content;
+use WindowsAzure\Common\Internal\Resources;
+use WindowsAzure\Common\Internal\Atom\AtomProperties;
 
 /**
  * Unit tests for class WrapAccessTokenResult
@@ -44,12 +46,12 @@ class ContentTest extends \PHPUnit_Framework_TestCase
     public function testContentConstructor()
     {
         // Setup
-        $expected = 'testText'; 
+        $expected = 'testText';
 
         // Test
         $content = new Content($expected);
-        $actual = $content->getText(); 
-        
+        $actual = $content->getText();
+
         // Assert
         $this->assertNotNull($content);
         $this->assertEquals(
@@ -67,7 +69,7 @@ class ContentTest extends \PHPUnit_Framework_TestCase
         // Setup
         $expected = 'testText';
         $content = new Content();
-        
+
         // Test
         $content->setText($expected);
         $actual = $content->getText();
@@ -77,12 +79,12 @@ class ContentTest extends \PHPUnit_Framework_TestCase
             $expected,
             $actual
         );
-    
+
     }
 
     /**
      * @covers WindowsAzure\Common\Internal\Atom\Content::getType
-     * @covers WindowsAzure\Common\Internal\Atom\Content::setType 
+     * @covers WindowsAzure\Common\Internal\Atom\Content::setType
      */
     public function testGetSetType()
     {
@@ -93,13 +95,13 @@ class ContentTest extends \PHPUnit_Framework_TestCase
         // Test
         $content->setType($expected);
         $actual = $content->getType();
-        
+
         // Assert
         $this->assertEquals(
             $expected,
             $actual
         );
-    } 
+    }
 
     /**
      * @covers WindowsAzure\Common\Internal\Atom\Content::writeXml
@@ -107,11 +109,11 @@ class ContentTest extends \PHPUnit_Framework_TestCase
     public function testWriteXml()
     {
         // Setup
-        $expected = '<atom:content type="testType" xmlns:atom="http://www.w3.org/2005/Atom">testText</atom:content>'; 
+        $expected = '<atom:content type="testType" xmlns:atom="http://www.w3.org/2005/Atom">testText</atom:content>';
         $expectedContentType = 'testType';
         $expectedText = 'testText';
         $content = new Content();
-        
+
         // Test
         $content->setType($expectedContentType);
         $content->setText($expectedText);
@@ -119,12 +121,12 @@ class ContentTest extends \PHPUnit_Framework_TestCase
         $xmlWriter->openMemory();
         $content->writeXml($xmlWriter);
         $actual = $xmlWriter->outputMemory();
-        
+
         // Assert
         $this->assertEquals(
             $expected,
             $actual
-        ); 
+        );
 
     }
 
@@ -136,17 +138,17 @@ class ContentTest extends \PHPUnit_Framework_TestCase
         // Setup
         $expected = new Content();
         $xml = '<content key="value"/>';
-        
+
         // Test
         $actual = new Content();
         $actual->parseXml($xml);
 
         // Assert
         $this->assertEquals(
-            $expected,
-            $actual
+            $expected->getText(),
+            $actual->getText()
         );
-        
+
     }
 
     /**
@@ -154,7 +156,7 @@ class ContentTest extends \PHPUnit_Framework_TestCase
      */
     public function testParseXmlInvalidParameter()
     {
-        // Setup 
+        // Setup
         $this->setExpectedException(get_class(new \InvalidArgumentException()));
         $content = new Content();
 
@@ -175,7 +177,7 @@ class ContentTest extends \PHPUnit_Framework_TestCase
         // Test
         $xmlWriter = new \XMLWriter();
         $xmlWriter->openMemory();
-        $content->writeXml($xmlWriter); 
+        $content->writeXml($xmlWriter);
         $actual = $xmlWriter->outputMemory();
 
         // Assert
@@ -183,7 +185,7 @@ class ContentTest extends \PHPUnit_Framework_TestCase
             $expected,
             $actual
         );
-        
+
     }
 
     /**
@@ -191,14 +193,54 @@ class ContentTest extends \PHPUnit_Framework_TestCase
      */
     public function testWriteXmlFailed()
     {
-        // Setup 
+        // Setup
         $this->setExpectedException(get_class(new \InvalidArgumentException()));
-        $expected = new Content(); 
+        $expected = new Content();
 
         // Test
         $expected->writeXml(null);
 
         // Assert
+    }
+
+    /**
+     * @covers WindowsAzure\Common\Internal\Atom\Content::getXml
+     */
+    public function testGetXml(){
+
+        // Setup
+        $xml = '<atom:content xmlns:atom="http://www.w3.org/2005/Atom"></atom:content>';
+        $content = new Content();
+        $content->parseXml($xml);
+
+        // Test
+        $result = $content->getXml();
+
+        // Assert
+        $this->assertNotNull($result);
+        $this->assertInstanceOf('\SimpleXMLElement', $result);
+
+    }
+
+    /**
+     * @covers WindowsAzure\Common\Internal\Atom\Content::fromXml
+     */
+    public function testFromXml(){
+
+        // Setup
+        $testText = 'SomeName';
+        $testKey = 'name';
+        $innerText = '<test>test string</test>';
+        $xmlString = "<content>{$innerText}</content>";
+        $atomContent = new Content();
+        $xml = simplexml_load_string($xmlString);
+
+        // Test
+        $atomContent->fromXml($xml);
+
+        // Assert
+        $this->assertEquals($innerText, $atomContent->getText());
+        $this->assertEquals($xml, $atomContent->getXml());
     }
 
 }

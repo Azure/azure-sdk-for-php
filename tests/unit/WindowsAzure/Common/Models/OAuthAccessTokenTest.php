@@ -110,4 +110,3 @@ class OAuthAccessTokenTest extends \PHPUnit_Framework_TestCase
     }
 }
 
-

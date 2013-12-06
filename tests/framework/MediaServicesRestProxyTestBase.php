@@ -25,6 +25,7 @@
 namespace Tests\Framework;
 use Tests\Framework\ServiceRestProxyTestBase;
 use WindowsAzure\Common\ServiceException;
+use WindowsAzure\Common\Internal\MediaServicesSettings;
 
 /**
  * TestBase class for each unit test class.
@@ -39,18 +40,62 @@ use WindowsAzure\Common\ServiceException;
  */
 class MediaServicesRestProxyTestBase extends ServiceRestProxyTestBase
 {
+    protected $assets = array();
+    protected $accessPolicy = array();
+    protected $locator = array();
+
     public function setUp()
     {
         parent::setUp();
-        $mediaServicesWrapper = $this->builder->createMediaServicesService(TestResources::getMediaServicesConnectionString());
+        $connection         = TestResources::getMediaServicesConnectionParameters();
+        $settings           = new MediaServicesSettings($connection['accountName'], $connection['accessKey'], $connection['endpointUri'], $connection['oauthEndopointUri']);
+        $mediaServicesWrapper = $this->builder->createMediaServicesService($settings);
         parent::setProxy($mediaServicesWrapper);
+    }
+
+    public function createAsset($asset) {
+        $result = $this->restProxy->createAsset($asset);
+
+        $this->assets[$result->getId()] = $result;
+
+        return $result;
+    }
+
+    public function createAccessPolicy($accessPolicy) {
+        $result = $this->restProxy->createAccessPolicy($accessPolicy);
+
+        $this->accessPolicy[$result->getId()] = $result;
+
+        return $result;
+    }
+
+    public function createLocator($loc) {
+
+        $result = $this->restProxy->createLocator($loc);
+
+        $this->locator[$result->getId()] = $result;
+
+        return $result;
     }
 
     protected function tearDown()
     {
         parent::tearDown();
 
-        //@TODO Cleanup resources
+        foreach($this->locator as $loc) {
+            $this->restProxy->deleteLocator($loc);
+        }
+
+        foreach($this->assets as $asset) {
+            $this->restProxy->deleteAsset($asset);
+        }
+
+        foreach($this->accessPolicy as $access) {
+            $this->restProxy->deleteAccessPolicy($access);
+        }
     }
 
+    protected function createSuffix() {
+        return sprintf('-%04x', mt_rand(0, 65535));
+    }
 }

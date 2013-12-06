@@ -27,6 +27,7 @@ use WindowsAzure\Common\Internal\Validate;
 use WindowsAzure\Common\Internal\InvalidArgumentTypeException;
 use WindowsAzure\Common\Internal\Resources;
 use WindowsAzure\Common\Internal\Utilities;
+use WindowsAzure\MediaServices\Models\Asset;
 
 /**
  * Unit tests for class ValidateTest
@@ -484,5 +485,66 @@ class ValidateTest extends \PHPUnit_Framework_TestCase
         // Assert
     }
 
+    /**
+     * @covers WindowsAzure\Common\Internal\Validate::methodExists
+     */
+    public function testMethodExistsIfExists(){
+
+        // Setup
+        $asset = new Asset(Asset::OPTIONS_NONE);
+        $method = 'getState';
+
+        // Test
+        $result = Validate::methodExists($asset, $method, 'WindowsAzure\MediaServices\Models\Asset');
+
+        // Assert
+        $this->assertTrue($result);
+    }
+
+    /**
+     * @covers WindowsAzure\Common\Internal\Validate::methodExists
+     */
+    public function testMethodExistsIfNotExists(){
+
+        // Setup
+        $this->setExpectedException('\InvalidArgumentException');
+        $asset = new Asset(Asset::OPTIONS_NONE);
+        $method = 'setCreated';
+
+        // Test
+        $result = Validate::methodExists($asset, $method, 'WindowsAzure\MediaServices\Models\Asset');
+
+        // Assert
+    }
+
+    /**
+     * @covers WindowsAzure\Common\Internal\Validate::isDateString
+     */
+    public function testIsDateStringValid(){
+
+        // Setup
+        $value = '2013-11-25';
+
+        // Test
+        $result = Validate::isDateString($value, 'name');
+
+        // Assert
+        $this->assertTrue($result);
+    }
+
+    /**
+     * @covers WindowsAzure\Common\Internal\Validate::isDateString
+     */
+    public function testIsDateStringNotValid(){
+
+        // Setup
+        $this->setExpectedException('\InvalidArgumentException');
+        $value = 'not a date';
+
+        // Test
+        $result = Validate::isDateString($value, 'name');
+
+        // Assert
+    }
 }
 
