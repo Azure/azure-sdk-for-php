@@ -95,16 +95,6 @@ interface IMediaServices extends FilterableService
     public function createFileInfos($asset);
 
     /**
-     * Get list of asset files. If asset and assetFile both not null filter is equal to assetFile.
-     *
-     * @param WindowsAzure\MediaServices\Models\AssetFile|string    $assetFile  AssetFile data or assetFile Id to filter file list
-     * @param WindowsAzure\MediaServices\Models\Asset|string        $asset      Asset data or asset Id to filter file list
-     *
-     * @return array
-     */
-    public function getAssetFiles($assetFile = null, $asset = null);
-
-    /**
      * Upload asset file to storage.
      *
      * @param WindowsAzure\MediaServices\Models\Locator $locator    Write locator for file upload
