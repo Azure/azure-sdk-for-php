@@ -30,6 +30,11 @@ use WindowsAzure\MediaServices\Models\Asset;
 use WindowsAzure\MediaServices\Models\AccessPolicy;
 use WindowsAzure\MediaServices\Models\Locator;
 use WindowsAzure\MediaServices\Models\AssetFile;
+use WindowsAzure\MediaServices\Models\Job;
+use WindowsAzure\MediaServices\Models\Task;
+use WindowsAzure\MediaServices\Models\TaskOptions;
+use WindowsAzure\MediaServices\Models\JobTemplate;
+use WindowsAzure\MediaServices\Models\TaskTemplate;
 
 /**
  * TestBase class for each unit test class.
@@ -47,6 +52,9 @@ class MediaServicesRestProxyTestBase extends ServiceRestProxyTestBase
     protected $assets = array();
     protected $accessPolicy = array();
     protected $locator = array();
+    protected $jobTemplate = array();
+    protected $job = array();
+    protected $outputAssets = array();
 
     public function setUp()
     {
@@ -82,6 +90,15 @@ class MediaServicesRestProxyTestBase extends ServiceRestProxyTestBase
         return $result;
     }
 
+    public function createJob($job, $inputAssets, $tasks = null) {
+
+        $result = $this->restProxy->createJob($job, $inputAssets, $tasks);
+
+        $this->job[$result->getId()] = $result;
+
+        return $result;
+    }
+
     public function createAssetWithFile() {
         $asset = new Asset(Asset::OPTIONS_NONE);
         $asset->setName('TestAsset' . $this->createSuffix());
@@ -105,6 +122,51 @@ class MediaServicesRestProxyTestBase extends ServiceRestProxyTestBase
         return $asset;
     }
 
+    public function getOutputAssetName(){
+
+        $outputAssetName = 'TestOutputAsset' . $this->createSuffix();
+        $this->outputAssets[] = $outputAssetName;
+
+        return $outputAssetName;
+    }
+
+    public function createJobWithTasks($name) {
+
+        $mediaProcessor = $this->restProxy->getLatestMediaProcessor('Windows Azure Media Encoder');
+        $inputAsset = $this->createAssetWithFile();
+
+        $taskBody = '<?xml version="1.0" encoding="utf-8"?><taskBody><inputAsset>JobInputAsset(0)</inputAsset><outputAsset assetCreationOptions="0" assetName="' . $this->getOutputAssetName() . '">JobOutputAsset(0)</outputAsset></taskBody>';
+        $task = new Task($taskBody, $mediaProcessor->getId(), TaskOptions::NONE);
+        $task->setConfiguration('H.264 HD 720p VBR');
+
+        $job = new Job();
+        $job->setName($name);
+
+        $jobResult = $this->createJob($job, array($inputAsset), array($task));
+        $this->job[$jobResult->getId()] = $jobResult;
+
+        return $jobResult;
+    }
+
+    public function createJobTemplate($name) {
+
+        $mediaProcessor = $this->restProxy->getLatestMediaProcessor('Windows Azure Media Encoder');
+
+        $taskTemplate = new TaskTemplate(1, 1);
+        $taskTemplate->setMediaProcessorId($mediaProcessor->getId());
+        $taskTemplate->setConfiguration('H.264 HD 720p VBR');
+
+        $jobTemplateBody = '<?xml version="1.0" encoding="utf-8"?><jobTemplate><taskBody taskTemplateId="' . $taskTemplate->getId() . '"><inputAsset>JobInputAsset(0)</inputAsset><outputAsset assetCreationOptions="0" assetName="' . $this->getOutputAssetName() . '">JobOutputAsset(0)</outputAsset></taskBody></jobTemplate>';
+        $jobTemplate = new JobTemplate($jobTemplateBody);
+        $jobTemplate->setName($name);
+
+        $jobTempl = $this->restProxy->createJobTemplate($jobTemplate, array($taskTemplate));
+        $this->jobTemplate[$jobTempl->getId()] = $jobTempl;
+
+        return $jobTempl;
+    }
+
+
     protected function tearDown()
     {
         parent::tearDown();
@@ -119,6 +181,26 @@ class MediaServicesRestProxyTestBase extends ServiceRestProxyTestBase
 
         foreach($this->accessPolicy as $access) {
             $this->restProxy->deleteAccessPolicy($access);
+        }
+
+        foreach($this->jobTemplate as $jobTemplate) {
+            $this->restProxy->deleteJobTemplate($jobTemplate);
+        }
+
+        foreach($this->job as $job) {
+            $status = $this->restProxy->getJobStatus($job);
+            while ($status != Job::STATE_FINISHED && $status != Job::STATE_ERROR && $status != Job::STATE_CANCELED) {
+                sleep(1);
+                $status = $this->restProxy->getJobStatus($job);
+            }
+            $this->restProxy->deleteJob($job);
+        }
+
+        $assets = $this->restProxy->getAssetList();
+        foreach($assets as $asset){
+            if (in_array($asset->getName(), $this->outputAssets)) {
+                $this->restProxy->deleteAsset($asset);
+            }
         }
     }
 

@@ -66,6 +66,9 @@ class BatchRequestTest extends \PHPUnit_Framework_TestCase
         $this->assertContains($body, $resultBody);
     }
 
+    /**
+     * @covers WindowsAzure\Common\Internal\Http\BatchRequest::getHeaders
+     */
     public function testGetHeaders(){
 
         //  Setup
@@ -80,10 +83,9 @@ class BatchRequestTest extends \PHPUnit_Framework_TestCase
         $batchReq->appendContext($context);
         $batchReq->encode();
         $resultHeader = $batchReq->getHeaders();
-        //print_r($resultHeader);
 
         // Assert
-        $this->assertEquals(2, count($resultHeader));
+        $this->assertEquals(1, count($resultHeader));
         $this->assertContains('multipart/mixed', $resultHeader['Content-Type']);
     }
 

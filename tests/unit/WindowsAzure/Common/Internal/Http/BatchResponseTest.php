@@ -43,11 +43,13 @@ class BatchResponseTest extends \PHPUnit_Framework_TestCase
 {
     /**
      * @covers WindowsAzure\Common\Internal\Http\BatchResponse::__construct
+     * @covers WindowsAzure\Common\Internal\Http\BatchResponse::getContexts
     */
     public function test__construct(){
 
         // Setup
         $batchReq = new BatchRequest();
+        $body = 'test response body';
         $encodedBody =
                 "--batch_956c339e-1ef0-4443-9276-68c12888a3f7\r\n" .
                 "Content-Type: multipart/mixed; boundary=changeset_4a3f1712-c034-416e-9772-905d28c0b122\r\n" .
