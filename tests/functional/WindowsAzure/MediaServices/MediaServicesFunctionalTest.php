@@ -134,9 +134,15 @@ class MediaServicesFunctionalTest extends MediaServicesRestProxyTestBase
         $this->assertEquals($access->getId(), $locator->getAccessPolicyId());
 
         $this->assertEquals(2, count($assetFiles));
-        $this->assertEquals($otherFileName, $assetFiles[1]->getName());
+
+        // Files order is not static, so we don't know the index of each file and need to serve them as a set
+        $resultFileNames = array(
+            $assetFiles[0]->getName(),
+            $assetFiles[1]->getName(),
+        );
+        $this->assertContains($otherFileName, $resultFileNames);        
         $this->assertEquals($asset->getId(), $assetFiles[0]->getParentAssetId());
-        $this->assertEquals($fileName, $assetFiles[0]->getName());
+        $this->assertContains($fileName, $resultFileNames);
         $this->assertEquals($asset->getId(), $assetFiles[1]->getParentAssetId());
     }
 
