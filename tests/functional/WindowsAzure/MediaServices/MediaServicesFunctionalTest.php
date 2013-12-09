@@ -58,7 +58,7 @@ class MediaServicesFunctionalTest extends MediaServicesRestProxyTestBase
     public function testCreatEmptyAsset()
     {
         // Setup
-        $assetName      = 'TestAsset' . $this->createSuffix();
+        $assetName      = TestResources::MEDIA_SERVICES_ASSET_NAME . $this->createSuffix();
         $assetOptions   = Asset::OPTIONS_NONE;
 
         // Test
@@ -83,18 +83,18 @@ class MediaServicesFunctionalTest extends MediaServicesRestProxyTestBase
     public function testCreateAssetWithFiles()
     {
         // Setup
-        $assetName              = 'TestAsset' . $this->createSuffix();
+        $assetName              = TestResources::MEDIA_SERVICES_ASSET_NAME . $this->createSuffix();
         $assetOptions           = Asset::OPTIONS_NONE;
 
-        $accessPolicyName       = 'AccessPolicyTest' . $this->createSuffix();
+        $accessPolicyName       = TestResources::MEDIA_SERVICES_ACCESS_POLICY_NAME . $this->createSuffix();
         $accessPolicyDiration   = 30;
         $accessPolicyPermission = AccessPolicy::PERMISSIONS_WRITE;
 
         $locatorStartTime       = new \DateTime('now -5 minutes');
         $locatorType            = Locator::TYPE_SAS;
 
-        $fileName               = 'simple.avi';
-        $otherFileName          = 'other.avi';
+        $fileName               = TestResources::MEDIA_SERVICES_DUMMY_FILE_NAME;
+        $otherFileName          = TestResources::MEDIA_SERVICES_DUMMY_FILE_NAME_1;
 
         // Test
         $asset = new Asset($assetOptions);
@@ -110,8 +110,8 @@ class MediaServicesFunctionalTest extends MediaServicesRestProxyTestBase
         $locator->setStartTime($locatorStartTime);
         $locator = $this->createLocator($locator);
 
-        $this->restProxy->uploadAssetFile($locator, $fileName, 'test file content');
-        $this->restProxy->uploadAssetFile($locator, $otherFileName, 'other file content');
+        $this->restProxy->uploadAssetFile($locator, $fileName, TestResources::MEDIA_SERVICES_DUMMY_FILE_CONTENT);
+        $this->restProxy->uploadAssetFile($locator, $otherFileName, TestResources::MEDIA_SERVICES_DUMMY_FILE_CONTENT_1);
 
         $this->restProxy->createFileInfos($asset);
         $assetFiles = $this->restProxy->getAssetFiles(null, $asset);
@@ -140,7 +140,7 @@ class MediaServicesFunctionalTest extends MediaServicesRestProxyTestBase
             $assetFiles[0]->getName(),
             $assetFiles[1]->getName(),
         );
-        $this->assertContains($otherFileName, $resultFileNames);        
+        $this->assertContains($otherFileName, $resultFileNames);
         $this->assertEquals($asset->getId(), $assetFiles[0]->getParentAssetId());
         $this->assertContains($fileName, $resultFileNames);
         $this->assertEquals($asset->getId(), $assetFiles[1]->getParentAssetId());
@@ -153,14 +153,13 @@ class MediaServicesFunctionalTest extends MediaServicesRestProxyTestBase
     public function testCreateJobWithTasks() {
 
         // Setup
-        $mediaProcessor = $this->restProxy->getLatestMediaProcessor('Windows Azure Media Encoder');
+        $mediaProcessor = $this->restProxy->getLatestMediaProcessor(TestResources::MEDIA_SERVICES_PROCESSOR_NAME);
         $inputAsset = $this->createAssetWithFile();
-        $outputAssetName = $this->getOutputAssetName();
 
-        $taskBody = '<?xml version="1.0" encoding="utf-8"?><taskBody><inputAsset>JobInputAsset(0)</inputAsset><outputAsset assetCreationOptions="0" assetName="' . $outputAssetName . '">JobOutputAsset(0)</outputAsset></taskBody>';
-        $configuration = 'H.264 HD 720p VBR';
+        $taskBody = TestResources::getMediaServicesTask($this->getOutputAssetName());
+        $configuration = TestResources::MEDIA_SERVICES_TASK_COFIGURATION;
 
-        $name = 'TestJob' . $this->createSuffix();
+        $name = TestResources::MEDIA_SERVICES_JOB_NAME . $this->createSuffix();
 
         // Test
         $task = new Task($taskBody, $mediaProcessor->getId(), TaskOptions::NONE);
@@ -174,12 +173,12 @@ class MediaServicesFunctionalTest extends MediaServicesRestProxyTestBase
         // Assert
         $this->assertEquals($taskBody, $task->getTaskBody());
         $this->assertEquals($configuration, $task->getConfiguration());
-        $this->assertContains('nb:mpid:UUID:', $task->getMediaProcessorId());
+        $this->assertContains(TestResources::MEDIA_SERVICES_PROCESSOR_ID_PREFIX, $task->getMediaProcessorId());
 
         $this->assertEquals($name, $job->getName());
 
         $this->assertEquals($name, $jobWithTasks->getName());
-        $this->assertContains('nb:jid:UUID:', $jobWithTasks->getId());
+        $this->assertContains(TestResources::MEDIA_SERVICES_JOB_ID_PREFIX, $jobWithTasks->getId());
         $this->assertNotNull($jobWithTasks->getCreated());
     }
 
@@ -190,15 +189,14 @@ class MediaServicesFunctionalTest extends MediaServicesRestProxyTestBase
     public function testCreateJobTemplateWithTasks(){
 
         // Setup
-        $mediaProcessor = $this->restProxy->getLatestMediaProcessor('Windows Azure Media Encoder');
+        $mediaProcessor = $this->restProxy->getLatestMediaProcessor(TestResources::MEDIA_SERVICES_PROCESSOR_NAME);
         $inputAsset = $this->createAssetWithFile();
-        $outputAssetName = $this->getOutputAssetName();
 
-        $configuration = 'H.264 HD 720p VBR';
-        $name = 'TestJobTemplate' . $this->createSuffix();
+        $configuration = TestResources::MEDIA_SERVICES_TASK_COFIGURATION;
+        $name = TestResources::MEDIA_SERVICES_JOB_TEMPLATE_NAME . $this->createSuffix();
 
         $taskTemplate = new TaskTemplate(1, 1);
-        $jobTemplateBody = '<?xml version="1.0" encoding="utf-8"?><jobTemplate><taskBody taskTemplateId="' . $taskTemplate->getId() . '"><inputAsset>JobInputAsset(0)</inputAsset><outputAsset assetCreationOptions="0" assetName="' . $outputAssetName . '">JobOutputAsset(0)</outputAsset></taskBody></jobTemplate>';
+        $jobTemplateBody = TestResources::getMediaServicesJobTemplate($taskTemplate->getId(), $this->getOutputAssetName());
 
         // Test
         $taskTemplate->setMediaProcessorId($mediaProcessor->getId());
@@ -207,7 +205,7 @@ class MediaServicesFunctionalTest extends MediaServicesRestProxyTestBase
         $jobTemplate = new JobTemplate($jobTemplateBody);
         $jobTemplate->setName($name);
 
-        $jobTemplateWithTasks = $this->restProxy->createJobTemplate($jobTemplate, array($taskTemplate));
+        $jobTemplateWithTasks = $this->createJobTemplate($jobTemplate, array($taskTemplate));
 
         // Assert
         $this->assertEquals($configuration, $taskTemplate->getConfiguration());
@@ -217,7 +215,7 @@ class MediaServicesFunctionalTest extends MediaServicesRestProxyTestBase
         $this->assertEquals($name, $jobTemplate->getName());
 
         $this->assertEquals($name, $jobTemplateWithTasks->getName());
-        $this->assertContains('nb:jtid:UUID:', $jobTemplateWithTasks->getId());
+        $this->assertContains(TestResources::MEDIA_SERVICES_JOB_TEMPLATE_ID_PREFIX, $jobTemplateWithTasks->getId());
         $this->assertNotNull($jobTemplateWithTasks->getCreated());
     }
 
@@ -229,53 +227,38 @@ class MediaServicesFunctionalTest extends MediaServicesRestProxyTestBase
     public function testCreateJobUsingTemplate(){
 
         // Setup
-        $mediaProcessor = $this->restProxy->getLatestMediaProcessor('Windows Azure Media Encoder');
+        $mediaProcessor = $this->restProxy->getLatestMediaProcessor(TestResources::MEDIA_SERVICES_PROCESSOR_NAME);
         $inputAsset = $this->createAssetWithFile();
-        $outputAssetName = $this->getOutputAssetName();
 
-        $configuration = 'H.264 HD 720p VBR';
-        $name = 'TestJob' . $this->createSuffix();
-        $nameTempl = 'TestJobTemplate' . $this->createSuffix();
+        $configuration = TestResources::MEDIA_SERVICES_TASK_COFIGURATION;
+        $name = TestResources::MEDIA_SERVICES_JOB_NAME . $this->createSuffix();
+        $nameTempl = TestResources::MEDIA_SERVICES_JOB_TEMPLATE_NAME . $this->createSuffix();
 
         $taskTemplate = new TaskTemplate(1, 1);
-        $jobTemplateBody = '<?xml version="1.0" encoding="utf-8"?><jobTemplate><taskBody taskTemplateId="' . $taskTemplate->getId() . '"><inputAsset>JobInputAsset(0)</inputAsset><outputAsset assetCreationOptions="0" assetName="' . $outputAssetName . '">JobOutputAsset(0)</outputAsset></taskBody></jobTemplate>';
-
-        $taskBody = '<?xml version="1.0" encoding="utf-8"?><taskBody><inputAsset>JobInputAsset(0)</inputAsset><outputAsset assetCreationOptions="0" assetName="' . $outputAssetName . '">JobOutputAsset(0)</outputAsset></taskBody>';
+        $jobTemplateBody = TestResources::getMediaServicesJobTemplate($taskTemplate->getId(), $this->getOutputAssetName());
 
         // Test
         $taskTemplate->setMediaProcessorId($mediaProcessor->getId());
         $taskTemplate->setConfiguration($configuration);
 
-        $task = new Task($taskBody, $mediaProcessor->getId(), TaskOptions::NONE);
-        $task->setConfiguration($configuration);
-
-        $job = new Job();
-        $job->setName($name);
-
         $jobTemplate = new JobTemplate($jobTemplateBody);
         $jobTemplate->setName($nameTempl);
+        $jobTemplate = $this->createJobTemplate($jobTemplate, array($taskTemplate));
 
-        $jobTempl = $this->restProxy->createJobTemplate($jobTemplate, array($taskTemplate));
-
-        $jobTemplateWithTasks = $this->createJob($job, array($inputAsset), array($task));
-        $jobTemplateWithTasks->setTemplateId($jobTempl->getId());
+        $jobTemplateWithTasks = new Job();
+        $jobTemplateWithTasks->setName($name);
+        $jobTemplateWithTasks->setTemplateId($jobTemplate->getId());
+        $jobTemplateWithTasks = $this->createJob($jobTemplateWithTasks, array($inputAsset));
 
         // Assert
-        $this->assertEquals($configuration, $taskTemplate->getConfiguration());
-        $this->assertEquals($mediaProcessor->getId(), $taskTemplate->getMediaProcessorId());
-
         $this->assertEquals($jobTemplateBody, $jobTemplate->getJobTemplateBody());
         $this->assertEquals($nameTempl, $jobTemplate->getName());
 
-        $this->assertEquals($taskBody, $task->getTaskBody());
-        $this->assertEquals($configuration, $task->getConfiguration());
-        $this->assertContains('nb:mpid:UUID:', $task->getMediaProcessorId());
-
-        $this->assertEquals($name, $job->getName());
+        $this->assertEquals($name, $jobTemplateWithTasks->getName());
 
         $this->assertEquals($name, $jobTemplateWithTasks->getName());
-        $this->assertEquals($jobTempl->getId(), $jobTemplateWithTasks->getTemplateId());
-        $this->assertContains('nb:jid:UUID:', $jobTemplateWithTasks->getId());
+        $this->assertEquals($jobTemplate->getId(), $jobTemplateWithTasks->getTemplateId());
+        $this->assertContains(TestResources::MEDIA_SERVICES_JOB_ID_PREFIX, $jobTemplateWithTasks->getId());
         $this->assertNotNull($jobTemplateWithTasks->getCreated());
     }
 
@@ -288,18 +271,17 @@ class MediaServicesFunctionalTest extends MediaServicesRestProxyTestBase
     public function testCancelJob(){
 
         // Setup
-        $mediaProcessor = $this->restProxy->getLatestMediaProcessor('Windows Azure Media Encoder');
+        $mediaProcessor = $this->restProxy->getLatestMediaProcessor(TestResources::MEDIA_SERVICES_PROCESSOR_NAME);
         $inputAsset = $this->createAssetWithFile();
-        $outputAssetName = $this->getOutputAssetName();
         $expected = array(
                 Job::STATE_CANCELING,
                 Job::STATE_CANCELED
         );
 
-        $taskBody = '<?xml version="1.0" encoding="utf-8"?><taskBody><inputAsset>JobInputAsset(0)</inputAsset><outputAsset assetCreationOptions="0" assetName="' . $outputAssetName . '">JobOutputAsset(0)</outputAsset></taskBody>';
-        $configuration = 'H.264 HD 720p VBR';
+        $taskBody = TestResources::getMediaServicesTask($this->getOutputAssetName());
+        $configuration = TestResources::MEDIA_SERVICES_TASK_COFIGURATION;
 
-        $name = 'TestJob' . $this->createSuffix();
+        $name = TestResources::MEDIA_SERVICES_JOB_NAME . $this->createSuffix();
 
         $task = new Task($taskBody, $mediaProcessor->getId(), TaskOptions::NONE);
         $task->setConfiguration($configuration);
@@ -316,7 +298,7 @@ class MediaServicesFunctionalTest extends MediaServicesRestProxyTestBase
         // Assert
         $this->assertEquals($taskBody, $task->getTaskBody());
         $this->assertEquals($configuration, $task->getConfiguration());
-        $this->assertContains('nb:mpid:UUID:', $task->getMediaProcessorId());
+        $this->assertContains(TestResources::MEDIA_SERVICES_PROCESSOR_ID_PREFIX, $task->getMediaProcessorId());
 
         $this->assertEquals($name, $job->getName());
 
@@ -332,14 +314,13 @@ class MediaServicesFunctionalTest extends MediaServicesRestProxyTestBase
     public function testMonitorProcessing(){
 
         // Setup
-        $mediaProcessor = $this->restProxy->getLatestMediaProcessor('Windows Azure Media Encoder');
+        $mediaProcessor = $this->restProxy->getLatestMediaProcessor(TestResources::MEDIA_SERVICES_PROCESSOR_NAME);
         $inputAsset = $this->createAssetWithFile();
-        $outputAssetName = $this->getOutputAssetName();
 
-        $taskBody = '<?xml version="1.0" encoding="utf-8"?><taskBody><inputAsset>JobInputAsset(0)</inputAsset><outputAsset assetCreationOptions="0" assetName="' . $outputAssetName . '">JobOutputAsset(0)</outputAsset></taskBody>';
-        $configuration = 'H.264 HD 720p VBR';
+        $taskBody = TestResources::getMediaServicesTask($this->getOutputAssetName());
+        $configuration = TestResources::MEDIA_SERVICES_TASK_COFIGURATION;
 
-        $name = 'TestJob' . $this->createSuffix();
+        $name = TestResources::MEDIA_SERVICES_JOB_NAME . $this->createSuffix();
 
         $task = new Task($taskBody, $mediaProcessor->getId(), TaskOptions::NONE);
         $task->setConfiguration($configuration);
@@ -355,7 +336,7 @@ class MediaServicesFunctionalTest extends MediaServicesRestProxyTestBase
         // Assert
         $this->assertEquals($taskBody, $task->getTaskBody());
         $this->assertEquals($configuration, $task->getConfiguration());
-        $this->assertContains('nb:mpid:UUID:', $task->getMediaProcessorId());
+        $this->assertContains(TestResources::MEDIA_SERVICES_PROCESSOR_ID_PREFIX, $task->getMediaProcessorId());
 
         $this->assertEquals($name, $job->getName());
 
