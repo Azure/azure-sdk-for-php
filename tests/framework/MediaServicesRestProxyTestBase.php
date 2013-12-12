@@ -101,22 +101,21 @@ class MediaServicesRestProxyTestBase extends ServiceRestProxyTestBase
 
     public function createAssetWithFile() {
         $asset = new Asset(Asset::OPTIONS_NONE);
-        $asset->setName('TestAsset' . $this->createSuffix());
+        $asset->setName(TestResources::MEDIA_SERVICES_ASSET_NAME . $this->createSuffix());
         $asset = $this->createAsset($asset);
 
-        $access = new AccessPolicy('Name');
-        $access->setName('TestAccessPolicy' . $this->createSuffix());
+        $access = new AccessPolicy(TestResources::MEDIA_SERVICES_ACCESS_POLICY_NAME . $this->createSuffix());
         $access->setDurationInMinutes(30);
         $access->setPermissions(AccessPolicy::PERMISSIONS_WRITE);
         $access = $this->createAccessPolicy($access);
 
         $locator = new Locator($asset, $access, Locator::TYPE_SAS);
-        $locator->setName('TestLocator' . $this->createSuffix());
+        $locator->setName(TestResources::MEDIA_SERVICES_LOCATOR_NAME . $this->createSuffix());
         $locator->setStartTime(new \DateTime('now -5 minutes'));
         $locator = $this->createLocator($locator);
 
-        $fileName = 'simple.avi';
-        $this->restProxy->uploadAssetFile($locator, $fileName, 'test file content');
+        $fileName = TestResources::MEDIA_SERVICES_DUMMY_FILE_NAME;
+        $this->restProxy->uploadAssetFile($locator, $fileName, TestResources::MEDIA_SERVICES_DUMMY_FILE_CONTENT);
         $this->restProxy->createFileInfos($asset);
 
         return $asset;
@@ -124,7 +123,7 @@ class MediaServicesRestProxyTestBase extends ServiceRestProxyTestBase
 
     public function getOutputAssetName(){
 
-        $outputAssetName = 'TestOutputAsset' . $this->createSuffix();
+        $outputAssetName = TestResources::MEDIA_SERVICES_OUTPUT_ASSET_NAME . $this->createSuffix();
         $this->outputAssets[] = $outputAssetName;
 
         return $outputAssetName;
@@ -132,12 +131,12 @@ class MediaServicesRestProxyTestBase extends ServiceRestProxyTestBase
 
     public function createJobWithTasks($name) {
 
-        $mediaProcessor = $this->restProxy->getLatestMediaProcessor('Windows Azure Media Encoder');
+        $mediaProcessor = $this->restProxy->getLatestMediaProcessor(TestResources::MEDIA_SERVICES_PROCESSOR_NAME);
         $inputAsset = $this->createAssetWithFile();
 
-        $taskBody = '<?xml version="1.0" encoding="utf-8"?><taskBody><inputAsset>JobInputAsset(0)</inputAsset><outputAsset assetCreationOptions="0" assetName="' . $this->getOutputAssetName() . '">JobOutputAsset(0)</outputAsset></taskBody>';
+        $taskBody = TestResources::getMediaServicesTask($this->getOutputAssetName());
         $task = new Task($taskBody, $mediaProcessor->getId(), TaskOptions::NONE);
-        $task->setConfiguration('H.264 HD 720p VBR');
+        $task->setConfiguration(TestResources::MEDIA_SERVICES_TASK_COFIGURATION);
 
         $job = new Job();
         $job->setName($name);
@@ -148,20 +147,27 @@ class MediaServicesRestProxyTestBase extends ServiceRestProxyTestBase
         return $jobResult;
     }
 
-    public function createJobTemplate($name) {
+    public function createJobTemplate($jobTemplate, $taskTemplates) {
 
-        $mediaProcessor = $this->restProxy->getLatestMediaProcessor('Windows Azure Media Encoder');
+        $jobTempl = $this->restProxy->createJobTemplate($jobTemplate, $taskTemplates);
+        $this->jobTemplate[$jobTempl->getId()] = $jobTempl;
+
+        return $jobTempl;
+    }
+
+    public function createJobTemplateWithTasks($name) {
+
+        $mediaProcessor = $this->restProxy->getLatestMediaProcessor(TestResources::MEDIA_SERVICES_PROCESSOR_NAME);
 
         $taskTemplate = new TaskTemplate(1, 1);
         $taskTemplate->setMediaProcessorId($mediaProcessor->getId());
-        $taskTemplate->setConfiguration('H.264 HD 720p VBR');
+        $taskTemplate->setConfiguration(TestResources::MEDIA_SERVICES_TASK_COFIGURATION);
 
-        $jobTemplateBody = '<?xml version="1.0" encoding="utf-8"?><jobTemplate><taskBody taskTemplateId="' . $taskTemplate->getId() . '"><inputAsset>JobInputAsset(0)</inputAsset><outputAsset assetCreationOptions="0" assetName="' . $this->getOutputAssetName() . '">JobOutputAsset(0)</outputAsset></taskBody></jobTemplate>';
+        $jobTemplateBody = TestResources::getMediaServicesJobTemplate($taskTemplate->getId(), $this->getOutputAssetName());
         $jobTemplate = new JobTemplate($jobTemplateBody);
         $jobTemplate->setName($name);
 
-        $jobTempl = $this->restProxy->createJobTemplate($jobTemplate, array($taskTemplate));
-        $this->jobTemplate[$jobTempl->getId()] = $jobTempl;
+        $jobTempl = $this->createJobTemplate($jobTemplate, array($taskTemplate));
 
         return $jobTempl;
     }

@@ -64,7 +64,7 @@ class MediaServicesRestProxyTest extends MediaServicesRestProxyTestBase
     {
         // Setup
         $asset = new Asset(Asset::OPTIONS_NONE);
-        $asset->setName('testAsset' . $this->createSuffix());
+        $asset->setName(TestResources::MEDIA_SERVICES_ASSET_NAME . $this->createSuffix());
 
         // Test
         $result = $this->createAsset($asset);
@@ -83,7 +83,7 @@ class MediaServicesRestProxyTest extends MediaServicesRestProxyTestBase
     {
         // Setup
         $asset = new Asset(Asset::OPTIONS_NONE);
-        $name = 'TestAsset' . $this->createSuffix();
+        $name = TestResources::MEDIA_SERVICES_ASSET_NAME . $this->createSuffix();
         $asset->setName($name);
         $asset = $this->createAsset($asset);
 
@@ -105,7 +105,7 @@ class MediaServicesRestProxyTest extends MediaServicesRestProxyTestBase
     {
         // Setup
         $asset = new Asset(Asset::OPTIONS_NONE);
-        $asset->setName('testAsset' . $this->createSuffix());
+        $asset->setName(TestResources::MEDIA_SERVICES_ASSET_NAME . $this->createSuffix());
         $asset = $this->createAsset($asset);
 
         // Test
@@ -149,7 +149,7 @@ class MediaServicesRestProxyTest extends MediaServicesRestProxyTestBase
     public function testCreateAccessPolicy()
     {
         // Setup
-        $name = 'Name';
+        $name = TestResources::MEDIA_SERVICES_ACCESS_POLICY_NAME . $this->createSuffix();
         $access = new AccessPolicy($name);
         $access->setName('testAccess' . $this->createSuffix());
         $access->setDurationInMinutes(30);
@@ -215,17 +215,16 @@ class MediaServicesRestProxyTest extends MediaServicesRestProxyTestBase
     {
         // Setup
         $asset = new Asset(Asset::OPTIONS_NONE);
-        $asset->setName('AssetForLocator' . $this->createSuffix());
+        $asset->setName(TestResources::MEDIA_SERVICES_ASSET_NAME . $this->createSuffix());
         $asset = $this->createAsset($asset);
 
-        $access = new AccessPolicy('Name');
-        $access->setName('AccessForLocator' . $this->createSuffix());
+        $access = new AccessPolicy(TestResources::MEDIA_SERVICES_ACCESS_POLICY_NAME . $this->createSuffix());
         $access->setDurationInMinutes(30);
         $access->setPermissions(AccessPolicy::PERMISSIONS_READ + AccessPolicy::PERMISSIONS_WRITE + AccessPolicy::PERMISSIONS_DELETE + AccessPolicy::PERMISSIONS_LIST);
         $access = $this->createAccessPolicy($access);
 
         $locat = new Locator($asset, $access, 1);
-        $locat->setName('testLocator' . $this->createSuffix());
+        $locat->setName(TestResources::MEDIA_SERVICES_LOCATOR_NAME . $this->createSuffix());
 
         // Test
         $result = $this->createLocator($locat);
@@ -244,22 +243,21 @@ class MediaServicesRestProxyTest extends MediaServicesRestProxyTestBase
     {
         // Setup
         $asset = new Asset(Asset::OPTIONS_NONE);
-        $asset->setName('TestAsset' . $this->createSuffix());
+        $asset->setName(TestResources::MEDIA_SERVICES_ASSET_NAME . $this->createSuffix());
         $asset = $this->createAsset($asset);
 
-        $access = new AccessPolicy('Name');
-        $access->setName('TestAccessPolicy' . $this->createSuffix());
+        $access = new AccessPolicy(TestResources::MEDIA_SERVICES_ACCESS_POLICY_NAME . $this->createSuffix());
         $access->setDurationInMinutes(30);
         $access->setPermissions(AccessPolicy::PERMISSIONS_WRITE);
         $access = $this->createAccessPolicy($access);
 
         $locator = new Locator($asset, $access, Locator::TYPE_SAS);
-        $locator->setName('TestLocator' . $this->createSuffix());
+        $locator->setName(TestResources::MEDIA_SERVICES_LOCATOR_NAME . $this->createSuffix());
         $locator->setStartTime(new \DateTime('now -5 minutes'));
         $locator = $this->createLocator($locator);
 
-        $fileName = 'simple.avi';
-        $this->restProxy->uploadAssetFile($locator, $fileName, 'test file content');
+        $fileName = TestResources::MEDIA_SERVICES_DUMMY_FILE_NAME;
+        $this->restProxy->uploadAssetFile($locator, $fileName, TestResources::MEDIA_SERVICES_DUMMY_FILE_CONTENT);
 
         // Test
         $this->restProxy->createFileInfos($asset);
@@ -284,7 +282,7 @@ class MediaServicesRestProxyTest extends MediaServicesRestProxyTestBase
     public function testCreateJobWithTasks()
     {
         // Setup
-        $name = 'TestJob' . $this->createSuffix();
+        $name = TestResources::MEDIA_SERVICES_JOB_NAME . $this->createSuffix();
 
         // Test
         $result = $this->createJobWithTasks($name);
@@ -300,7 +298,7 @@ class MediaServicesRestProxyTest extends MediaServicesRestProxyTestBase
     public function testGetJobStatus()
     {
         // Setup
-        $name = 'TestJob' . $this->createSuffix();
+        $name = TestResources::MEDIA_SERVICES_JOB_NAME . $this->createSuffix();
         $job = $this->createJobWithTasks($name);
 
         // Test
@@ -318,7 +316,7 @@ class MediaServicesRestProxyTest extends MediaServicesRestProxyTestBase
     public function testCancelJob()
     {
         // Setup
-        $name = 'TestJob' . $this->createSuffix();
+        $name = TestResources::MEDIA_SERVICES_JOB_NAME . $this->createSuffix();
         $job = $this->createJobWithTasks($name);
 
         // Test
@@ -339,10 +337,10 @@ class MediaServicesRestProxyTest extends MediaServicesRestProxyTestBase
     public function testCreateJobTemplate()
     {
         // Setup
-        $name = 'TestJobTemplate' . $this->createSuffix();
+        $name = TestResources::MEDIA_SERVICES_JOB_TEMPLATE_NAME . $this->createSuffix();
 
         // Test
-        $result = $this->createJobTemplate($name);
+        $result = $this->createJobTemplateWithTasks($name);
 
         // Assert
         $this->assertEquals($name, $result->getName());
@@ -666,7 +664,7 @@ class MediaServicesRestProxyTest extends MediaServicesRestProxyTestBase
     public function testGetLatestMediaProcessor()
     {
         // Setup
-        $name = 'Windows Azure Media Encoder';
+        $name = TestResources::MEDIA_SERVICES_PROCESSOR_NAME;
 
         // Test
         $result = $this->restProxy->getLatestMediaProcessor($name);

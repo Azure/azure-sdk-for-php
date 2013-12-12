@@ -145,8 +145,8 @@ class ContentTest extends \PHPUnit_Framework_TestCase
 
         // Assert
         $this->assertEquals(
-            $expected,
-            $actual
+            $expected->getText(),
+            $actual->getText()
         );
 
     }
@@ -204,21 +204,21 @@ class ContentTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\Common\Internal\Atom\Content::setProperties
-     * @covers WindowsAzure\Common\Internal\Atom\Content::getProperties
+     * @covers WindowsAzure\Common\Internal\Atom\Content::getXml
      */
-    public function testGetSetProperties(){
+    public function testGetXml(){
 
         // Setup
-        $property = new AtomProperties();
+        $xml = '<atom:content xmlns:atom="http://www.w3.org/2005/Atom"></atom:content>';
         $content = new Content();
+        $content->parseXml($xml);
 
         // Test
-        $content->setProperties($property);
-        $result = $content->getProperties();
+        $result = $content->getXml();
 
         // Assert
-        $this->assertEquals($property, $result);
+        $this->assertNotNull($result);
+        $this->assertInstanceOf('\SimpleXMLElement', $result);
 
     }
 
@@ -230,11 +230,8 @@ class ContentTest extends \PHPUnit_Framework_TestCase
         // Setup
         $testText = 'SomeName';
         $testKey = 'name';
-        $xmlString = '<content>
-                       <properties xmlns="' . Resources::DSM_XML_NAMESPACE . '" xmlns:d="' . Resources::DS_XML_NAMESPACE . '">
-                         <d:' . $testKey . '>' . $testText . '</d:' . $testKey . '>
-                       </properties>
-                      </content>';
+        $innerText = '<test>test string</test>';
+        $xmlString = "<content>{$innerText}</content>";
         $atomContent = new Content();
         $xml = simplexml_load_string($xmlString);
 
@@ -242,9 +239,8 @@ class ContentTest extends \PHPUnit_Framework_TestCase
         $atomContent->fromXml($xml);
 
         // Assert
-        $properties = $atomContent->getProperties();
-        $propArray = $properties->getProperties();
-        $this->assertEquals($testText, $propArray[$testKey]);
+        $this->assertEquals($innerText, $atomContent->getText());
+        $this->assertEquals($xml, $atomContent->getXml());
     }
 
 }

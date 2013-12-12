@@ -150,6 +150,7 @@ spl_autoload_register(
             'windowsazure\\mediaservices\\models\\errordetail' => '/MediaServices/Models/ErrorDetail.php',
             'windowsazure\\mediaservices\\models\\job' => '/MediaServices/Models/Job.php',
             'windowsazure\\mediaservices\\models\\jobtemplate' => '/MediaServices/Models/JobTemplate.php',
+            'windowsazure\\mediaservices\\models\\contentproperties' => '/MediaServices/Models/ContentProperties.php',
             'windowsazure\\mediaservices\\models\\locator' => '/MediaServices/Models/Locator.php',
             'windowsazure\\mediaservices\\models\\mediaprocessor' => '/MediaServices/Models/MediaProcessor.php',
             'windowsazure\\mediaservices\\models\\storageaccount' => '/MediaServices/Models/StorageAccount.php',

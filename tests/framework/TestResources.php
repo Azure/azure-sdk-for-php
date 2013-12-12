@@ -62,6 +62,23 @@ class TestResources
     const HEADER1_VALUE = 'HeaderValue1';
     const HEADER2_VALUE = 'HeaderValue2';
 
+    // Media services
+    const MEDIA_SERVICES_ASSET_NAME             = 'TestAsset';
+    const MEDIA_SERVICES_OUTPUT_ASSET_NAME      = 'TestOutputAsset';
+    const MEDIA_SERVICES_ACCESS_POLICY_NAME     = 'TestAccessPolicy';
+    const MEDIA_SERVICES_LOCATOR_NAME           = 'TestLocator';
+    const MEDIA_SERVICES_JOB_NAME               = 'TestJob';
+    const MEDIA_SERVICES_JOB_ID_PREFIX          = 'nb:jid:UUID:';
+    const MEDIA_SERVICES_JOB_TEMPLATE_NAME      = 'TestJobTemplate';
+    const MEDIA_SERVICES_JOB_TEMPLATE_ID_PREFIX = 'nb:jtid:UUID:';
+    const MEDIA_SERVICES_TASK_COFIGURATION      = 'H.264 HD 720p VBR';
+    const MEDIA_SERVICES_PROCESSOR_NAME         = 'Windows Azure Media Encoder';
+    const MEDIA_SERVICES_PROCESSOR_ID_PREFIX    = 'nb:mpid:UUID:';
+    const MEDIA_SERVICES_DUMMY_FILE_NAME        = 'simple.avi';
+    const MEDIA_SERVICES_DUMMY_FILE_CONTENT     = 'test file content';
+    const MEDIA_SERVICES_DUMMY_FILE_NAME_1      = 'other.avi';
+    const MEDIA_SERVICES_DUMMY_FILE_CONTENT_1   = 'other file content';
+
     // See https://tools.ietf.org/html/rfc2616
     const STATUS_NOT_MODIFIED          = 304;
     const STATUS_BAD_REQUEST           = 400;
@@ -503,6 +520,14 @@ class TestResources
         $data['jsonObject'] = '{"k1":"test1","k2":"test2","k3":"test3"}';
 
         return $data;
+    }
+
+    public static function getMediaServicesTask($outputAssetName) {
+        return '<?xml version="1.0" encoding="utf-8"?><taskBody><inputAsset>JobInputAsset(0)</inputAsset><outputAsset assetCreationOptions="0" assetName="' . $outputAssetName . '">JobOutputAsset(0)</outputAsset></taskBody>';
+    }
+
+    public static function getMediaServicesJobTemplate($taskTemplateId, $outputAssetName) {
+        return '<?xml version="1.0" encoding="utf-8"?><jobTemplate><taskBody taskTemplateId="' . $taskTemplateId . '"><inputAsset>JobInputAsset(0)</inputAsset><outputAsset assetCreationOptions="0" assetName="' . $outputAssetName . '">JobOutputAsset(0)</outputAsset></taskBody></jobTemplate>';
     }
 }
 
