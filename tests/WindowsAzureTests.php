@@ -193,6 +193,7 @@ spl_autoload_register(
             'tests\\unit\\windowsazure\\mediaservices\\models\\jobtest' => '/unit/WindowsAzure/MediaServices/Models/JobTest.php',
             'tests\\unit\\windowsazure\\mediaservices\\models\\locatortest' => '/unit/WindowsAzure/MediaServices/Models/LocatorTest.php',
             'tests\\unit\\windowsazure\\mediaservices\\models\\mediaprocessortest' => '/unit/WindowsAzure/MediaServices/Models/MediaProcessorTest.php',
+            'tests\\unit\\windowsazure\\mediaservices\\models\\storageaccounttest' => '/unit/WindowsAzure/MediaServices/Models/StorageAccountTest.php',
             'tests\\unit\\windowsazure\\mediaservices\\models\\taskhistoricaleventtest' => '/unit/WindowsAzure/MediaServices/Models/TaskHistoricalEventTest.php',
             'tests\\unit\\windowsazure\\mediaservices\\models\\tasktemplatetest' => '/unit/WindowsAzure/MediaServices/Models/TaskTemplateTest.php',
             'tests\\unit\\windowsazure\\mediaservices\\models\\tasktest' => '/unit/WindowsAzure/MediaServices/Models/TaskTest.php',

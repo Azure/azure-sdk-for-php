@@ -356,4 +356,347 @@ class MediaServicesFunctionalTest extends MediaServicesRestProxyTestBase
         $this->assertLessThanOrEqual(6, $jobStatus);
         $this->assertGreaterThanOrEqual(0, $jobStatus);
     }
+
+    /**
+     * @covers WindowsAzure\MediaServices\MediaServicesRestProxy::createAsset
+     * @covers WindowsAzure\MediaServices\MediaServicesRestProxy::getAssetList
+     */
+    public function testGetAnAssetReference(){
+
+        // Setup
+        $assetName = 'testAsset' . $this->createSuffix();
+        $asset = new Asset(Asset::OPTIONS_NONE);
+        $asset->setName($assetName);
+        $asset = $this->createAsset($asset);
+
+        // Test
+        $result = $this->restProxy->getAsset($asset);
+
+        // Assert
+        $this->assertEquals($asset->getId(), $result->getId());
+        $this->assertEquals($asset->getName(), $result->getName());
+    }
+
+    /**
+     * @covers WindowsAzure\MediaServices\MediaServicesRestProxy::createJob
+     * @covers WindowsAzure\MediaServices\MediaServicesRestProxy::getJobList
+     */
+    public function testGetJobReference(){
+        // Setup
+        $name = 'TestJob' . $this->createSuffix();
+
+        // Test
+        $job = $this->createJobWithTasks($name);
+        $result = $this->restProxy->getJob($job);
+
+        $inputAssets = $this->restProxy->getJobInputMediaAssets($job);
+        $outputAssets = $this->restProxy->getJobOutputMediaAssets($job);
+
+        $tasks = $this->restProxy->getJobTasks($job);
+
+        // Assert
+        $this->assertCount(1, $inputAssets);
+        $this->assertCount(1, $outputAssets);
+        $this->assertCount(1, $tasks);
+        $this->assertEquals($name, $result->getName());
+        $this->assertContains($job->getId(), $result->getId());
+    }
+
+    /**
+     * @covers WindowsAzure\MediaServices\MediaServicesRestProxy::createAsset
+     * @covers WindowsAzure\MediaServices\MediaServicesRestProxy::getAssetList
+     */
+    public function testListAllAssets(){
+
+        // Setup
+        $asset1 = new Asset(Asset::OPTIONS_NONE);
+        $asset1->setName('testAsset' . $this->createSuffix());
+
+        $asset2 = new Asset(Asset::OPTIONS_NONE);
+        $asset2->setName('testAsset' . $this->createSuffix());
+
+        // Test
+        $asset1 = $this->createAsset($asset1);
+        $asset2 = $this->createAsset($asset2);
+        $result = $this->restProxy->getAssetList();
+
+        // Assert
+        $this->assertCount(2, $result);
+        $names = array(
+            $result[0]->getName(),
+            $result[1]->getName()
+        );
+        $id = array(
+                $result[0]->getId(),
+                $result[1]->getId()
+        );
+        $this->assertContains($asset1->getName(), $names);
+        $this->assertContains($asset2->getName(), $names);
+
+        $this->assertContains($asset1->getId(), $id);
+        $this->assertContains($asset2->getId(), $id);
+    }
+
+    /**
+     * @covers WindowsAzure\MediaServices\MediaServicesRestProxy::createAsset
+     * @covers WindowsAzure\MediaServices\MediaServicesRestProxy::createJob
+     * @covers WindowsAzure\MediaServices\MediaServicesRestProxy::getJobList
+     * @covers WindowsAzure\MediaServices\MediaServicesRestProxy::getJobInputMediaAssets
+     * @covers WindowsAzure\MediaServices\MediaServicesRestProxy::getJobOutputMediaAssets
+     */
+    public function testListAllJobsAndAssets(){
+
+        $asset1 = $this->createAssetWithFile();
+        $outputAssetName1 = $this->getOutputAssetName();
+
+        $asset2 = $this->createAssetWithFile();
+        $outputAssetName2 = $this->getOutputAssetName();
+
+        $taskBody1 = '<?xml version="1.0" encoding="utf-8"?><taskBody><inputAsset>JobInputAsset(0)</inputAsset><outputAsset assetCreationOptions="0" assetName="' . $outputAssetName1 . '">JobOutputAsset(0)</outputAsset></taskBody>';
+        $mediaProcessorId = 'nb:mpid:UUID:2e7aa8f3-4961-4e0c-b4db-0e0439e524f5';
+        $task1 = new Task($taskBody1, $mediaProcessorId, TaskOptions::NONE);
+        $task1->setConfiguration('H.264 HD 720p VBR');
+
+        $taskBody2 = '<?xml version="1.0" encoding="utf-8"?><taskBody><inputAsset>JobInputAsset(0)</inputAsset><outputAsset assetCreationOptions="0" assetName="' . $outputAssetName2 . '">JobOutputAsset(0)</outputAsset></taskBody>';
+        $task2 = new Task($taskBody2, $mediaProcessorId, TaskOptions::NONE);
+        $task2->setConfiguration('H.264 HD 720p VBR');
+
+        $job1 = new Job();
+        $job1->setName('TestJob' . $this->createSuffix());
+        $jobResult1 = $this->createJob($job1, array($asset1), array($task1));
+
+        $job2 = new Job();
+        $job2->setName('TestJob' . $this->createSuffix());
+        $jobResult2 = $this->createJob($job2, array($asset2), array($task2));
+
+        // Test
+        $jobList = $this->restProxy->getJobList();
+
+        $resultInput1 = $this->restProxy->getJobInputMediaAssets($jobList[0]);
+        $resultOutput1 = $this->restProxy->getJobOutputMediaAssets($jobList[0]);
+
+        $resultInput2 = $this->restProxy->getJobInputMediaAssets($jobList[1]);
+        $resultOutput2 = $this->restProxy->getJobOutputMediaAssets($jobList[1]);
+
+        // Assert
+        $this->assertEquals(2, count($resultInput1) + count($resultInput2));
+        $this->assertEquals(2, count($resultOutput1) + count($resultOutput2));
+        $this->assertEquals(2, count($jobList));
+
+        $this->assertEquals($asset1->getId(), $resultInput2[0]->getId());
+        $this->assertEquals($asset1->getName(), $resultInput2[0]->getName());
+
+        $this->assertNotEquals($asset1->getId(), $resultOutput2[0]->getId());
+        $this->assertEquals($outputAssetName1, $resultOutput2[0]->getName());
+
+        $this->assertEquals($asset2->getId(), $resultInput1[0]->getId());
+        $this->assertEquals($asset2->getName(), $resultInput1[0]->getName());
+
+        $this->assertNotEquals($asset2->getId(), $resultOutput1[0]->getId());
+        $this->assertEquals($outputAssetName2, $resultOutput1[0]->getName());
+    }
+
+    /**
+     * @covers WindowsAzure\MediaServices\MediaServicesRestProxy::createAccessPolicy
+     * @covers WindowsAzure\MediaServices\MediaServicesRestProxy::getAccessPolicyList
+     */
+    public function testListAllAccessPolicy(){
+
+        // Setup
+        $accessName1 = 'TestAccessPolicy' . $this->createSuffix();
+
+        $access1 = new AccessPolicy($accessName1);
+        $access1->setDurationInMinutes(30);
+        $access1->setPermissions(AccessPolicy::PERMISSIONS_WRITE);
+
+        $accessName2 = 'TestAccessPolicy' . $this->createSuffix();
+
+        $access2 = new AccessPolicy($accessName2);
+        $access2->setDurationInMinutes(30);
+        $access2->setPermissions(AccessPolicy::PERMISSIONS_WRITE);
+
+        // Test
+        $access1 = $this->createAccessPolicy($access1);
+        $access2 = $this->createAccessPolicy($access2);
+        $result = $this->restProxy->getAccessPolicyList();
+
+        // Assert
+        $this->assertEquals(2, count($result));
+        $names = array(
+                $result[0]->getName(),
+                $result[1]->getName()
+        );
+        $id = array(
+                $result[0]->getId(),
+                $result[1]->getId()
+        );
+        $this->assertContains($accessName1, $names);
+        $this->assertContains($accessName2, $names);
+
+        $this->assertContains($access1->getId(), $id);
+        $this->assertContains($access2->getId(), $id);
+    }
+
+    /**
+     * @covers WindowsAzure\MediaServices\MediaServicesRestProxy::createAccessPolicy
+     * @covers WindowsAzure\MediaServices\MediaServicesRestProxy::createAsset
+     * @covers WindowsAzure\MediaServices\MediaServicesRestProxy::createLocator
+     * @covers WindowsAzure\MediaServices\MediaServicesRestProxy::getLocatorList
+     */
+    public function testListAllLocators(){
+
+        // Setup
+        $asset1 = new Asset(Asset::OPTIONS_NONE);
+        $asset1->setName('AssetForLocator' . $this->createSuffix());
+        $asset1 = $this->createAsset($asset1);
+
+        $access1 = new AccessPolicy('Name');
+        $access1->setName('AccessForLocator' . $this->createSuffix());
+        $access1->setDurationInMinutes(30);
+        $access1->setPermissions(AccessPolicy::PERMISSIONS_READ + AccessPolicy::PERMISSIONS_WRITE + AccessPolicy::PERMISSIONS_DELETE + AccessPolicy::PERMISSIONS_LIST);
+        $access1 = $this->createAccessPolicy($access1);
+
+        $locator1 = new Locator($asset1, $access1, Locator::TYPE_SAS);
+        $locator1->setName('testLocator' . $this->createSuffix());
+
+        $asset2 = new Asset(Asset::OPTIONS_NONE);
+        $asset2->setName('AssetForLocator' . $this->createSuffix());
+        $asset2 = $this->createAsset($asset2);
+
+        $access2 = new AccessPolicy('Name');
+        $access2->setName('AccessForLocator' . $this->createSuffix());
+        $access2->setDurationInMinutes(30);
+        $access2->setPermissions(AccessPolicy::PERMISSIONS_READ + AccessPolicy::PERMISSIONS_WRITE + AccessPolicy::PERMISSIONS_DELETE + AccessPolicy::PERMISSIONS_LIST);
+        $access2 = $this->createAccessPolicy($access2);
+
+        $locator2 = new Locator($asset2, $access2, Locator::TYPE_SAS);
+        $locator2->setName('testLocator' . $this->createSuffix());
+
+        // Test
+        $locator1 = $this->createLocator($locator1);
+        $locator2 = $this->createLocator($locator2);
+        $result = $this->restProxy->getLocatorList();
+
+        // Assert
+        $assetId = array(
+                $result[0]->getAssetId(),
+                $result[1]->getAssetId()
+        );
+        $accessId = array(
+                $result[0]->getAccessPolicyId(),
+                $result[1]->getAccessPolicyId()
+        );
+        $locatorId = array(
+                $result[0]->getId(),
+                $result[1]->getId()
+        );
+        $locatorNames = array(
+                $result[0]->getName(),
+                $result[1]->getName()
+        );
+        $this->assertContains($asset1->getId(), $assetId);
+        $this->assertContains($access1->getId(), $accessId);
+        $this->assertContains($locator1->getId(), $locatorId);
+
+        $this->assertContains($asset2->getId(), $assetId);
+        $this->assertContains($access2->getId(), $accessId);
+        $this->assertContains($locator2->getId(), $locatorId);
+
+        $this->assertCount(2, $result);
+        $this->assertContains($locator1->getName(), $locatorNames);
+        $this->assertContains($locator2->getName(), $locatorNames);
+    }
+
+    /**
+     * @covers WindowsAzure\MediaServices\MediaServicesRestProxy::createAsset
+     * @covers WindowsAzure\MediaServices\MediaServicesRestProxy::getAssetList
+     * @covers WindowsAzure\MediaServices\MediaServicesRestProxy::deleteAsset
+     */
+    public function testDeleteAsset(){
+
+        // Setup
+        $asset1 = new Asset(Asset::OPTIONS_NONE);
+        $asset1->setName('testAsset' . $this->createSuffix());
+
+        $asset2 = new Asset(Asset::OPTIONS_NONE);
+        $asset2->setName('testAsset' . $this->createSuffix());
+
+        // Test
+        $asset1 = $this->restProxy->createAsset($asset1);
+        $asset2 = $this->restProxy->createAsset($asset2);
+
+        $result = $this->restProxy->getAssetList();
+
+        $before = count($result);
+        foreach ($result as $res){
+            $this->restProxy->deleteAsset($res);
+        }
+
+        $after = count($this->restProxy->getAssetList());
+
+        // Assert
+        $this->assertEquals(2, $before);
+        $this->assertEquals(0, $after);
+    }
+
+    /**
+     * @covers WindowsAzure\MediaServices\MediaServicesRestProxy::createJob
+     * @covers WindowsAzure\MediaServices\MediaServicesRestProxy::getJobList
+     */
+    public function testDeleteJob(){
+
+        // Setup
+        $name1 = 'testJob' . $this->createSuffix();
+        $name2 = 'testJob' . $this->createSuffix();
+        $job1 = $this->createJobWithTasks($name1);
+        $job2 = $this->createJobWithTasks($name2);
+
+        // Test
+        $result = $this->restProxy->getJobList();
+
+        $before = count($result);
+        foreach($result as $job) {
+            $this->deleteJob($job);
+        }
+        $after = count($this->restProxy->getJobList());
+
+        // Assert
+        $this->assertEquals(2, $before);
+        $this->assertEquals(0, $after);
+    }
+
+    /**
+     * @covers WindowsAzure\MediaServices\MediaServicesRestProxy::createAccessPolicy
+     * @covers WindowsAzure\MediaServices\MediaServicesRestProxy::getAccessPolicyList
+     *  @covers WindowsAzure\MediaServices\MediaServicesRestProxy::deleteAccessPolicy
+     */
+    public function testDeleteAccessPolicy(){
+
+        // Setup
+        $name = 'testAsset' . $this->createSuffix();
+        $access1 = new AccessPolicy($name);
+        $access1->setName('testAccess' . $this->createSuffix());
+        $access1->setDurationInMinutes(30);
+
+        $name = 'testAsset' . $this->createSuffix();
+        $access2 = new AccessPolicy($name);
+        $access2->setName('testAccess' . $this->createSuffix());
+        $access2->setDurationInMinutes(30);
+
+        // Test
+       $access1 = $this->restProxy->createAccessPolicy($access1);
+       $access2 = $this->restProxy->createAccessPolicy($access2);
+
+        $result = $this->restProxy->getAccessPolicyList();
+
+        $before = count($result);
+        foreach ($result as $res){
+            $this->restProxy->deleteAccessPolicy($res);
+        }
+        $after = count($this->restProxy->getAccessPolicyList());
+
+        // Assert
+        $this->assertEquals(2, $before);
+        $this->assertEquals(0, $after);
+    }
 }

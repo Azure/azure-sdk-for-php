@@ -49,6 +49,7 @@ use WindowsAzure\Common\Internal\Http\HttpClient;
 use WindowsAzure\Common\Internal\Http\Url;
 use WindowsAzure\Common\Internal\Http\BatchRequest;
 use WindowsAzure\Common\Internal\Http\BatchResponse;
+use WindowsAzure\MediaServices\Models\StorageAccount;
 
 /**
  * This class constructs HTTP requests and receive HTTP responses for media services
@@ -411,7 +412,7 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
         $propertyList = $this->getEntryList($response->getBody());
         $result = array();
         foreach($propertyList as $properties) {
-            $result[] = Locator::createFromOptions($properties);
+            $result[] = AssetFile::createFromOptions($properties);
         }
 
         return $result;
