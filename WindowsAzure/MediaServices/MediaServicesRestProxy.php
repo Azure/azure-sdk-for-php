@@ -912,12 +912,10 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
         $jobId = Utilities::getEntityId($job, 'WindowsAzure\Mediaservices\Models\Job');
 
         $propertyList = $this->_getEntityList("Jobs('{$jobId}')/Tasks");
-        print_r($propertyList);
         $result = array();
         foreach($propertyList as $properties) {
             $result[] = Task::createFromOptions($properties);
         }
-        print_r($result);
 
         return $result;
     }
