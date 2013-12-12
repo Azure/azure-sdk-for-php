@@ -435,7 +435,7 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
         $propertyList = $this->_getEntityList("Assets('{$assetId}')/Files");
         $result = array();
         foreach($propertyList as $properties) {
-            $result[] = Locator::createFromOptions($properties);
+            $result[] = AssetFile::createFromOptions($properties);
         }
 
         return $result;
