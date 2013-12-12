@@ -187,6 +187,20 @@ class Task
     private $_startTime;
 
     /**
+     * HistoricalEvents
+     *
+     * @var array
+     */
+    private $_historicalEvents;
+
+    /**
+     * ErrorDetails
+     *
+     * @var array
+     */
+    private $_errorDetails;
+
+    /**
      * Create task from array
      *
      * @param array $options    Array containing values for object properties
@@ -304,6 +318,25 @@ class Task
             Validate::isString($options['InitializationVector'], 'options[InitializationVector]');
             $this->_initializationVector = $options['InitializationVector'];
         }
+
+        if (isset($options['ErrorDetails'])) {
+            $this->_errorDetails = array();
+            if (is_array($options['ErrorDetails'])) {
+                foreach($options['ErrorDetails'] as $errorDetail) {
+                    $this->_errorDetails[] = ErrorDetails::createFromOptions($errorDetail);
+                }
+            }
+        }
+
+        if (isset($options['HistoricalEvents'])) {
+            $this->_historicalEvents = array();
+            if (is_array($options['HistoricalEvents'])) {
+                foreach($options['HistoricalEvents'] as $historicalEvent) {
+                    $this->_historicalEvents[] = TaskHistoricalEvent::createFromOptions($historicalEvent);
+                }
+            }
+        }
+
     }
 
     /**
@@ -556,6 +589,24 @@ class Task
      */
     public function setConfiguration($value) {
         $this->_configuration = $value;
+    }
+
+    /**
+     * Get "ErrorDetails"
+     *
+     * @return array
+     */
+    public function getErrorDetails() {
+        return $this->_errorDetails;
+    }
+
+    /**
+     * Get "HistoricalEvents"
+     *
+     * @return array
+     */
+    public function getHistoricalEvents() {
+        return $this->_historicalEvents;
     }
 }
 

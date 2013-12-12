@@ -152,6 +152,7 @@ spl_autoload_register(
             'windowsazure\\mediaservices\\models\\jobtemplate' => '/MediaServices/Models/JobTemplate.php',
             'windowsazure\\mediaservices\\models\\locator' => '/MediaServices/Models/Locator.php',
             'windowsazure\\mediaservices\\models\\mediaprocessor' => '/MediaServices/Models/MediaProcessor.php',
+            'windowsazure\\mediaservices\\models\\storageaccount' => '/MediaServices/Models/StorageAccount.php',
             'windowsazure\\mediaservices\\models\\task' => '/MediaServices/Models/Task.php',
             'windowsazure\\mediaservices\\models\\taskhistoricalevent' => '/MediaServices/Models/TaskHistoricalEvent.php',
             'windowsazure\\mediaservices\\models\\taskoptions' => '/MediaServices/Models/TaskOptions.php',

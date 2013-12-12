@@ -67,9 +67,36 @@ class AtomProperties extends AtomBase
     {
         Validate::notNull($xmlContent, 'xmlContent');
 
-        foreach ($xmlContent->children(Resources::DS_XML_NAMESPACE) as $child) {
-            $this->properties[$child->getName()] = (string)$child;
+        $this->properties = $this->_fromXmlToArray($xmlContent);
+
+    }
+
+    /**
+     * Parse properties recursively
+     *
+     * @param \SimpleXML $xml   XML object to parse
+     *
+     * @return array
+     */
+    private function _fromXmlToArray($xml) {
+        $result = array();
+        foreach ($xml->children(Resources::DS_XML_NAMESPACE) as $child) {
+            if (count($child->children(Resources::DS_XML_NAMESPACE)) > 0) {
+                $value = array();
+                foreach($child->children(Resources::DS_XML_NAMESPACE) as $subChild) {
+                    if ($subChild->getName() == 'element') {
+                        $value[] = $this->_fromXmlToArray($subChild);
+                    }
+                }
+            }
+            else {
+                $value = (string)$child;
+            }
+
+            $result[$child->getName()] = $value;
         }
+
+        return $result;
     }
 
     /**
