@@ -64,6 +64,15 @@ class TaskTest extends \PHPUnit_Framework_TestCase
     public function testCreateFromOptions(){
 
         // Setup
+        $errorDetail = array(
+             'Code'            => 404,
+             'Message'         => 'Required task not found'
+        );
+        $historicalEvent = array(
+             'Code'            => 404,
+             'Message'         => 'Required task not found',
+             'TimeStamp'       => '2013-11-27'
+        );
         $options = array(
                 'Id'                    => 'jdfghrf78',
                 'Configuration'         => 'some configuration',
@@ -81,15 +90,21 @@ class TaskTest extends \PHPUnit_Framework_TestCase
                 'EncryptionKeyId'       => '90key80',
                 'EncryptionScheme'      => 'encryption scheme',
                 'EncryptionVersion'     => 'version 2.1.1',
-                'InitializationVector'  => 'Initialization Vector'
+                'InitializationVector'  => 'Initialization Vector',
+                'ErrorDetails'           => array($errorDetail),
+                'HistoricalEvents'      => array($historicalEvent)
         );
         $endTime = new \Datetime($options['EndTime']);
         $startTime = new \Datetime($options['StartTime']);
+        $timeStamp = new \DateTime($historicalEvent['TimeStamp']);
 
         // Test
         $task = Task::createFromOptions($options);
 
         // Assert
+        $taskErrorDetail = $task->getErrorDetails();
+        $taskHistoricalEvent = $task->getHistoricalEvents();
+
         $this->assertEquals($options['Id'], $task->getId());
         $this->assertEquals($options['Configuration'], $task->getConfiguration());
         $this->assertEquals($endTime->getTimestamp(), $task->getEndTime()->getTimestamp());
@@ -107,6 +122,11 @@ class TaskTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($options['EncryptionScheme'], $task->getEncryptionScheme());
         $this->assertEquals($options['EncryptionVersion'], $task->getEncryptionVersion());
         $this->assertEquals($options['InitializationVector'], $task->getInitializationVector());
+        $this->assertEquals($errorDetail['Code'], $taskErrorDetail[0]->getCode());
+        $this->assertEquals($errorDetail['Message'], $taskErrorDetail[0]->getMessage());
+        $this->assertEquals($historicalEvent['Code'], $taskHistoricalEvent[0]->getCode());
+        $this->assertEquals($historicalEvent['Message'], $taskHistoricalEvent[0]->getMessage());
+        $this->assertEquals($timeStamp->getTimestamp(), $taskHistoricalEvent[0]->getTimeStamp()->getTimestamp());
     }
 
     /**
@@ -485,5 +505,60 @@ class TaskTest extends \PHPUnit_Framework_TestCase
 
         // Assert
         $this->assertEquals($initVector, $result);
+    }
+
+    /**
+     * @covers WindowsAzure\MediaServices\Models\Task::getErrorDetails
+     */
+    public function testGetErrorDetail(){
+
+        // Setup
+        $errorDetail = array(
+                'Code'            => 404,
+                'Message'         => 'Required task not found'
+        );
+        $options = array(
+                'MediaProcessorId'      => 'uy47ytu',
+                'TaskBody'              => 'body of the task',
+                'Options'               => 42,
+                'ErrorDetails'          => array($errorDetail)
+        );
+        $task = Task::createFromOptions($options);
+
+        // Test
+        $result = $task->getErrorDetails();
+
+        // Assert
+        $this->assertEquals($errorDetail['Code'], $result[0]->getCode());
+        $this->assertEquals($errorDetail['Message'], $result[0]->getMessage());
+    }
+
+    /**
+     * @covers WindowsAzure\MediaServices\Models\Task::getHistoricalEvents
+     */
+    public function testGetHistoricalEvents(){
+
+        // Setup
+         $historicalEvent = array(
+             'Code'            => 404,
+             'Message'         => 'Required task not found',
+             'TimeStamp'       => '2013-12-10'
+        );
+        $options = array(
+                'MediaProcessorId'      => 'uy47ytu',
+                'TaskBody'              => 'body of the task',
+                'Options'               => 42,
+                'HistoricalEvents'      => array($historicalEvent)
+        );
+        $task = Task::createFromOptions($options);
+        $date = new \Datetime ($historicalEvent['TimeStamp']);
+
+        // Test
+        $result = $task->getHistoricalEvents();
+
+        // Assert
+        $this->assertEquals($historicalEvent['Code'], $result[0]->getCode());
+        $this->assertEquals($historicalEvent['Message'], $result[0]->getMessage());
+        $this->assertEquals($date->getTimestamp(), $result[0]->getTimeStamp()->getTimestamp());
     }
 }

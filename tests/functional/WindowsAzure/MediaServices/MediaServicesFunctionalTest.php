@@ -78,7 +78,7 @@ class MediaServicesFunctionalTest extends MediaServicesRestProxyTestBase
      * @covers WindowsAzure\MediaServices\MediaServicesRestProxy::createAccessPolicy
      * @covers WindowsAzure\MediaServices\MediaServicesRestProxy::createLocator
      * @covers WindowsAzure\MediaServices\MediaServicesRestProxy::createFileInfos
-     * @covers WindowsAzure\MediaServices\MediaServicesRestProxy::getAssetFiles
+     * @covers WindowsAzure\MediaServices\MediaServicesRestProxy::getAssetFileList
      */
     public function testCreateAssetWithFiles()
     {
@@ -114,7 +114,7 @@ class MediaServicesFunctionalTest extends MediaServicesRestProxyTestBase
         $this->restProxy->uploadAssetFile($locator, $otherFileName, TestResources::MEDIA_SERVICES_DUMMY_FILE_CONTENT_1);
 
         $this->restProxy->createFileInfos($asset);
-        $assetFiles = $this->restProxy->getAssetFiles(null, $asset);
+        $assetFiles = $this->restProxy->getAssetFileList();
 
         // Assert
         $this->assertEquals($assetName, $asset->getName());
@@ -351,7 +351,7 @@ class MediaServicesFunctionalTest extends MediaServicesRestProxyTestBase
     public function testGetAnAssetReference(){
 
         // Setup
-        $assetName = 'testAsset' . $this->createSuffix();
+        $assetName = TestResources::MEDIA_SERVICES_ASSET_NAME . $this->createSuffix();
         $asset = new Asset(Asset::OPTIONS_NONE);
         $asset->setName($assetName);
         $asset = $this->createAsset($asset);
@@ -370,7 +370,7 @@ class MediaServicesFunctionalTest extends MediaServicesRestProxyTestBase
      */
     public function testGetJobReference(){
         // Setup
-        $name = 'TestJob' . $this->createSuffix();
+        $name = TestResources::MEDIA_SERVICES_JOB_NAME . $this->createSuffix();
 
         // Test
         $job = $this->createJobWithTasks($name);
@@ -397,10 +397,10 @@ class MediaServicesFunctionalTest extends MediaServicesRestProxyTestBase
 
         // Setup
         $asset1 = new Asset(Asset::OPTIONS_NONE);
-        $asset1->setName('testAsset' . $this->createSuffix());
+        $asset1->setName(TestResources::MEDIA_SERVICES_ASSET_NAME . $this->createSuffix());
 
         $asset2 = new Asset(Asset::OPTIONS_NONE);
-        $asset2->setName('testAsset' . $this->createSuffix());
+        $asset2->setName(TestResources::MEDIA_SERVICES_ASSET_NAME . $this->createSuffix());
 
         // Test
         $asset1 = $this->createAsset($asset1);
@@ -449,11 +449,11 @@ class MediaServicesFunctionalTest extends MediaServicesRestProxyTestBase
         $task2->setConfiguration('H.264 HD 720p VBR');
 
         $job1 = new Job();
-        $job1->setName('TestJob' . $this->createSuffix());
+        $job1->setName(TestResources::MEDIA_SERVICES_JOB_NAME . $this->createSuffix());
         $jobResult1 = $this->createJob($job1, array($asset1), array($task1));
 
         $job2 = new Job();
-        $job2->setName('TestJob' . $this->createSuffix());
+        $job2->setName(TestResources::MEDIA_SERVICES_JOB_NAME . $this->createSuffix());
         $jobResult2 = $this->createJob($job2, array($asset2), array($task2));
 
         // Test
@@ -490,13 +490,13 @@ class MediaServicesFunctionalTest extends MediaServicesRestProxyTestBase
     public function testListAllAccessPolicy(){
 
         // Setup
-        $accessName1 = 'TestAccessPolicy' . $this->createSuffix();
+        $accessName1 = TestResources::MEDIA_SERVICES_ACCESS_POLICY_NAME . $this->createSuffix();
 
         $access1 = new AccessPolicy($accessName1);
         $access1->setDurationInMinutes(30);
         $access1->setPermissions(AccessPolicy::PERMISSIONS_WRITE);
 
-        $accessName2 = 'TestAccessPolicy' . $this->createSuffix();
+        $accessName2 = TestResources::MEDIA_SERVICES_ACCESS_POLICY_NAME . $this->createSuffix();
 
         $access2 = new AccessPolicy($accessName2);
         $access2->setDurationInMinutes(30);
@@ -534,30 +534,30 @@ class MediaServicesFunctionalTest extends MediaServicesRestProxyTestBase
 
         // Setup
         $asset1 = new Asset(Asset::OPTIONS_NONE);
-        $asset1->setName('AssetForLocator' . $this->createSuffix());
+        $asset1->setName(TestResources::MEDIA_SERVICES_ASSET_NAME . $this->createSuffix());
         $asset1 = $this->createAsset($asset1);
 
         $access1 = new AccessPolicy('Name');
-        $access1->setName('AccessForLocator' . $this->createSuffix());
+        $access1->setName(TestResources::MEDIA_SERVICES_ACCESS_POLICY_NAME . $this->createSuffix());
         $access1->setDurationInMinutes(30);
         $access1->setPermissions(AccessPolicy::PERMISSIONS_READ + AccessPolicy::PERMISSIONS_WRITE + AccessPolicy::PERMISSIONS_DELETE + AccessPolicy::PERMISSIONS_LIST);
         $access1 = $this->createAccessPolicy($access1);
 
         $locator1 = new Locator($asset1, $access1, Locator::TYPE_SAS);
-        $locator1->setName('testLocator' . $this->createSuffix());
+        $locator1->setName(TestResources::MEDIA_SERVICES_LOCATOR_NAME . $this->createSuffix());
 
         $asset2 = new Asset(Asset::OPTIONS_NONE);
-        $asset2->setName('AssetForLocator' . $this->createSuffix());
+        $asset2->setName(TestResources::MEDIA_SERVICES_ASSET_NAME . $this->createSuffix());
         $asset2 = $this->createAsset($asset2);
 
         $access2 = new AccessPolicy('Name');
-        $access2->setName('AccessForLocator' . $this->createSuffix());
+        $access2->setName(TestResources::MEDIA_SERVICES_ACCESS_POLICY_NAME . $this->createSuffix());
         $access2->setDurationInMinutes(30);
         $access2->setPermissions(AccessPolicy::PERMISSIONS_READ + AccessPolicy::PERMISSIONS_WRITE + AccessPolicy::PERMISSIONS_DELETE + AccessPolicy::PERMISSIONS_LIST);
         $access2 = $this->createAccessPolicy($access2);
 
         $locator2 = new Locator($asset2, $access2, Locator::TYPE_SAS);
-        $locator2->setName('testLocator' . $this->createSuffix());
+        $locator2->setName(TestResources::MEDIA_SERVICES_LOCATOR_NAME . $this->createSuffix());
 
         // Test
         $locator1 = $this->createLocator($locator1);
@@ -603,10 +603,10 @@ class MediaServicesFunctionalTest extends MediaServicesRestProxyTestBase
 
         // Setup
         $asset1 = new Asset(Asset::OPTIONS_NONE);
-        $asset1->setName('testAsset' . $this->createSuffix());
+        $asset1->setName(TestResources::MEDIA_SERVICES_ASSET_NAME . $this->createSuffix());
 
         $asset2 = new Asset(Asset::OPTIONS_NONE);
-        $asset2->setName('testAsset' . $this->createSuffix());
+        $asset2->setName(TestResources::MEDIA_SERVICES_ASSET_NAME . $this->createSuffix());
 
         // Test
         $asset1 = $this->restProxy->createAsset($asset1);
@@ -633,8 +633,8 @@ class MediaServicesFunctionalTest extends MediaServicesRestProxyTestBase
     public function testDeleteJob(){
 
         // Setup
-        $name1 = 'testJob' . $this->createSuffix();
-        $name2 = 'testJob' . $this->createSuffix();
+        $name1 = TestResources::MEDIA_SERVICES_JOB_NAME . $this->createSuffix();
+        $name2 = TestResources::MEDIA_SERVICES_JOB_NAME . $this->createSuffix();
         $job1 = $this->createJobWithTasks($name1);
         $job2 = $this->createJobWithTasks($name2);
 
@@ -660,14 +660,14 @@ class MediaServicesFunctionalTest extends MediaServicesRestProxyTestBase
     public function testDeleteAccessPolicy(){
 
         // Setup
-        $name = 'testAsset' . $this->createSuffix();
+        $name = TestResources::MEDIA_SERVICES_ASSET_NAME . $this->createSuffix();
         $access1 = new AccessPolicy($name);
-        $access1->setName('testAccess' . $this->createSuffix());
+        $access1->setName(TestResources::MEDIA_SERVICES_ACCESS_POLICY_NAME . $this->createSuffix());
         $access1->setDurationInMinutes(30);
 
-        $name = 'testAsset' . $this->createSuffix();
+        $name = TestResources::MEDIA_SERVICES_ASSET_NAME . $this->createSuffix();
         $access2 = new AccessPolicy($name);
-        $access2->setName('testAccess' . $this->createSuffix());
+        $access2->setName(TestResources::MEDIA_SERVICES_ACCESS_POLICY_NAME . $this->createSuffix());
         $access2->setDurationInMinutes(30);
 
         // Test

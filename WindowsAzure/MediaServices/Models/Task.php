@@ -24,6 +24,8 @@
 
 namespace WindowsAzure\MediaServices\Models;
 use WindowsAzure\Common\Internal\Validate;
+use WindowsAzure\MediaServices\Models\TaskHistoricalEvent;
+use WindowsAzure\MediaServices\Models\ErrorDetail;
 
 
 /**
@@ -323,7 +325,7 @@ class Task
             $this->_errorDetails = array();
             if (is_array($options['ErrorDetails'])) {
                 foreach($options['ErrorDetails'] as $errorDetail) {
-                    $this->_errorDetails[] = ErrorDetails::createFromOptions($errorDetail);
+                    $this->_errorDetails[] = ErrorDetail::createFromOptions($errorDetail);
                 }
             }
         }
