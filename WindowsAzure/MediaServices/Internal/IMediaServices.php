@@ -58,8 +58,50 @@ interface IMediaServices extends FilterableService
     /**
      * Get asset list
      *
+     * @return array
      */
     public function getAssetList();
+
+    /**
+     * Get asset locators
+     *
+     * @param WindowsAzure\MediaServices\Models\Asset|string   $asset  Asset data or asset Id
+     *
+     * @return array
+     */
+    public function getAssetLocators($asset);
+
+    /**
+     * Get parent assets of asset
+     *
+     * @param WindowsAzure\MediaServices\Models\Asset|string   $asset  Asset data or asset Id
+     *
+     * @return array
+     */
+    public function getAssetParentAssets($asset);
+
+    /**
+     * Get assetFiles of asset
+     *
+     * @param WindowsAzure\MediaServices\Models\Asset|string   $asset  Asset data or asset Id
+     */
+    public function getAssetAssetFileList($asset);
+
+    /**
+     * Get storage account of asset
+     *
+     * @param WindowsAzure\MediaServices\Models\Asset|string   $asset  Asset data or asset Id
+     *
+     * @return WindowsAzure\MediaServices\Models\StorageAccount
+     */
+    public function getAssetStorageAccount($asset);
+
+    /**
+     * Update asset
+     *
+     * @param WindowsAzure\MediaServices\Models\Asset   $asset  New asset data with valid id
+     */
+    public function updateAsset($asset);
 
     /**
      * Delete asset
@@ -78,6 +120,22 @@ interface IMediaServices extends FilterableService
     public function createAccessPolicy($accessPolicy);
 
     /**
+     * Get AccessPolicy.
+     *
+     * @param WindowsAzure\MediaServices\Models\AccessPolicy|string   $accessPolicy   AccessPolicy data or AccessPolicy Id
+     *
+     * @return WindowsAzure\MediaServices\Models\AccessPolicy
+     */
+    public function getAccessPolicy($accessPolicy);
+
+    /**
+     * Get list of AccessPolicies.
+     *
+     * @return array
+     */
+    public function getAccessPolicyList();
+
+    /**
      * Delete access policy
      *
      * @param WindowsAzure\MediaServices\Models\AccessPolicy|string   $accessPolicy  Access policy data or access policy Id
@@ -94,6 +152,47 @@ interface IMediaServices extends FilterableService
     public function createLocator($locator);
 
     /**
+     * Get Locator.
+     *
+     * @param WindowsAzure\MediaServices\Models\Locator|string   $locator   Locator data or locator Id
+     *
+     * @return WindowsAzure\MediaServices\Models\Locator
+     */
+    public function getLocator($locator);
+
+    /**
+     * Get Locator access policy.
+     *
+     * @param WindowsAzure\MediaServices\Models\Locator|string   $locator   Locator data or locator Id
+     *
+     * @return WindowsAzure\MediaServices\Models\Locator
+     */
+    public function getLocatorAccessPolicy($locator);
+
+    /**
+     * Get Locator asset.
+     *
+     * @param WindowsAzure\MediaServices\Models\Locator|string   $locator   Locator data or locator Id
+     *
+     * @return WindowsAzure\MediaServices\Models\Locator
+     */
+    public function getLocatorAsset($locator);
+
+    /**
+     * Get list of Locators.
+     *
+     * @return array
+     */
+    public function getLocatorList();
+
+    /**
+     * Update locator
+     *
+     * @param WindowsAzure\MediaServices\Models\Locator $locator    New locator data with valid id
+     */
+    public function updateLocator($locator);
+
+    /**
      * Delete locator
      *
      * @param WindowsAzure\MediaServices\Models\Locator|string   $asset  Asset data or asset Id
@@ -106,6 +205,30 @@ interface IMediaServices extends FilterableService
      * @param WindowsAzure\MediaServices\Models\Asset|string   $asset  Asset data or asset Id
      */
     public function createFileInfos($asset);
+
+    /**
+     * Get asset file.
+     *
+     * @param WindowsAzure\MediaServices\Models\AssetFile|string    $assetFile  AssetFile data or assetFile Id
+     *
+     * @return WindowsAzure\MediaServices\Models\AssetFile
+     */
+    public function getAssetFile($assetFile);
+
+
+    /**
+     * Get list of all asset files.
+     *
+     * @return array
+     */
+    public function getAssetFileList();
+
+    /**
+     * Update asset file
+     *
+     * @param WindowsAzure\MediaServices\Models\AssetFile    $assetFile  New AssetFile data
+     */
+    public function updateAssetFile($assetFile);
 
     /**
      * Upload asset file to storage.
@@ -130,11 +253,55 @@ interface IMediaServices extends FilterableService
     public function createJob($job, $inputAssets, $tasks = null);
 
     /**
+     * Get Job.
+     *
+     * @param WindowsAzure\MediaServices\Models\Job|string   $job   Job data or job Id
+     *
+     * @return WindowsAzure\MediaServices\Models\Job
+     */
+    public function getJob($job);
+
+    /**
+     * Get list of Jobs.
+     *
+     * @return array
+     */
+    public function getJobList();
+
+    /**
      * Get status of a job
      *
      * @param WindowsAzure\MediaServices\Models\Job|string   $job  Job data or job Id
      */
     public function getJobStatus($job);
+
+    /**
+     * Get job tasks.
+     *
+     * @param WindowsAzure\MediaServices\Models\Job|string   $job   Job data or job Id
+     *
+     * @return array
+     */
+    public function getJobTasks($job);
+
+
+    /**
+     * Get job input assets.
+     *
+     * @param WindowsAzure\MediaServices\Models\Job|string   $job   Job data or job Id
+     *
+     * @return array
+     */
+    public function getJobInputMediaAssets($job);
+
+    /**
+     * Get job output assets.
+     *
+     * @param WindowsAzure\MediaServices\Models\Job|string   $job   Job data or job Id
+     *
+     * @return array
+     */
+    public function getJobOutputMediaAssets($job);
 
     /**
      * Cancel a job
@@ -151,6 +318,13 @@ interface IMediaServices extends FilterableService
     public function deleteJob($job);
 
     /**
+     * Get list of tasks.
+     *
+     * @return array
+     */
+    public function getTaskList();
+
+    /**
      * Create a job.
      *
      * @param WindowsAzure\MediaServices\Models\JobTemplate $jobTemplate    Job template data
@@ -161,11 +335,43 @@ interface IMediaServices extends FilterableService
     public function createJobTemplate($jobTemplate, $taskTemplates);
 
     /**
+     * Get job template.
+     *
+     * @param WindowsAzure\MediaServices\Models\JobTemplate|string   $jobTemplate   JobTemplate data or jobTemplate Id
+     *
+     * @return WindowsAzure\MediaServices\Models\JobTemplate
+     */
+    public function getJobTemplate($jobTemplate);
+
+    /**
+     * Get list of Job Templates.
+     *
+     * @return array
+     */
+    public function getJobTemplateList();
+
+    /**
+     * Get task templates for job template.
+     *
+     * @param WindowsAzure\MediaServices\Models\JobTemplate|string   $jobTemplate   JobTemplate data or jobTemplate Id
+     *
+     * @return array
+     */
+    public function getJobTemplateTaskTemplateList($jobTemplate);
+
+    /**
      * Delete job template
      *
      * @param WindowsAzure\MediaServices\Models\JobTemplate|string   $jobTemplate  Job template data or job template Id
      */
     public function deleteJobTemplate($jobTemplate);
+
+    /**
+     * Get list of task templates.
+     *
+     * @return array
+     */
+    public function getTaskTemplateList();
 
     /**
      * Get list of all media processors asset files
