@@ -249,6 +249,7 @@ class Resources
     const MAX_DATA_SERVICE_VERSION_VALUE                    = '2.0;NetFx';
     const ACCEPT_HEADER_VALUE                               = 'application/atom+xml,application/xml';
     const ATOM_ENTRY_CONTENT_TYPE                           = 'application/atom+xml;type=entry;charset=utf-8';
+    const ATOM_FEED_CONTENT_TYPE                            = 'application/atom+xml;type=feed;charset=utf-8';
     const ACCEPT_CHARSET_VALUE                              = 'utf-8';
     const INT32_MAX                                         = 2147483647;
     const MEDIA_SERVICES_API_LATEST_VERSION                 = '2.2';
@@ -412,6 +413,7 @@ class Resources
     const ENTRY       = 'entry';
     const LINK        = 'link';
     const PROPERTIES  = 'properties';
+    const ELEMENT     = 'element';
 
     // PHP URL Keys
     const PHP_URL_SCHEME   = 'scheme';
@@ -443,6 +445,8 @@ class Resources
     const MEDIA_SERVICES_URL = 'https://media.windows.net/API';
     const MEDIA_SERVICES_OAUTH_URL = 'https://wamsprodglobal001acs.accesscontrol.windows.net/v2/OAuth2-13';
     const MEDIA_SERVICES_OAUTH_SCOPE = 'urn:WindowsAzureMediaServices';
+    const MEDIA_SERVICES_INPUT_ASSETS_REL  = 'http://schemas.microsoft.com/ado/2007/08/dataservices/related/InputMediaAssets';
+
 
     // @codingStandardsIgnoreEnd
 }

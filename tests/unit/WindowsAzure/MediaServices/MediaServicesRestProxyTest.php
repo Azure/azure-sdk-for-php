@@ -32,6 +32,11 @@ use WindowsAzure\Common\Models\ServiceProperties;
 use WindowsAzure\MediaServices\Models\Asset;
 use WindowsAzure\MediaServices\Models\AccessPolicy;
 use WindowsAzure\MediaServices\Models\Locator;
+use WindowsAzure\MediaServices\Models\Job;
+use WindowsAzure\MediaServices\Models\Task;
+use WindowsAzure\MediaServices\Models\TaskOptions;
+use WindowsAzure\MediaServices\Models\JobTemplate;
+use WindowsAzure\MediaServices\Models\TaskTemplate;
 
 /**
  * Unit tests for class MediaServicesRestProxy
@@ -58,13 +63,56 @@ class MediaServicesRestProxyTest extends MediaServicesRestProxyTestBase
     {
         // Setup
         $asset = new Asset(Asset::OPTIONS_NONE);
-        $asset->setName('testAsset' . $this->createSuffix());
+        $asset->setName(TestResources::MEDIA_SERVICES_ASSET_NAME . $this->createSuffix());
 
         // Test
         $result = $this->createAsset($asset);
 
         // Assert
         $this->assertEquals($asset->getName(), $result->getName());
+    }
+
+    /**
+     * @covers WindowsAzure\MediaServices\MediaServicesRestProxy::getAsset
+     * @covers WindowsAzure\MediaServices\MediaServicesRestProxy::send
+     * @covers WindowsAzure\MediaServices\MediaServicesRestProxy::wrapAtomEntry
+     * @covers WindowsAzure\MediaServices\MediaServicesRestProxy::getPropertiesFromAtomEntry
+     */
+    public function testGetAsset()
+    {
+        // Setup
+        $asset = new Asset(Asset::OPTIONS_NONE);
+        $name = TestResources::MEDIA_SERVICES_ASSET_NAME . $this->createSuffix();
+        $asset->setName($name);
+        $asset = $this->createAsset($asset);
+
+        // Test
+        $result = $this->restProxy->getAsset($asset);
+
+        // Assert
+        $this->assertEquals($asset->getId(), $result->getId());
+    }
+
+    /**
+     * @covers WindowsAzure\MediaServices\MediaServicesRestProxy::getAssetList
+     * @covers WindowsAzure\MediaServices\MediaServicesRestProxy::send
+     * @covers WindowsAzure\MediaServices\MediaServicesRestProxy::wrapAtomEntry
+     * @covers WindowsAzure\MediaServices\MediaServicesRestProxy::getPropertiesFromAtomEntry
+     * @covers WindowsAzure\MediaServices\MediaServicesRestProxy::getEntryList
+     */
+    public function testGetAssetList()
+    {
+        // Setup
+        $asset = new Asset(Asset::OPTIONS_NONE);
+        $asset->setName(TestResources::MEDIA_SERVICES_ASSET_NAME . $this->createSuffix());
+        $asset = $this->createAsset($asset);
+
+        // Test
+        $result = $this->restProxy->getAssetList();
+
+        // Assert
+        $this->assertCount(1, $result);
+        $this->assertEquals($asset->getName(), $result[0]->getName());
     }
 
     /**
@@ -77,9 +125,8 @@ class MediaServicesRestProxyTest extends MediaServicesRestProxyTestBase
     public function testCreateAccessPolicy()
     {
         // Setup
-        $name = 'Name';
+        $name = TestResources::MEDIA_SERVICES_ACCESS_POLICY_NAME . $this->createSuffix();
         $sample = new AccessPolicy($name);
-        $sample->setName('testAccess' . $this->createSuffix());
         $sample->setDurationInMinutes(30);
 
         // Test
@@ -100,17 +147,16 @@ class MediaServicesRestProxyTest extends MediaServicesRestProxyTestBase
     {
         // Setup
         $asset = new Asset(Asset::OPTIONS_NONE);
-        $asset->setName('AssetForLocator' . $this->createSuffix());
+        $asset->setName(TestResources::MEDIA_SERVICES_ASSET_NAME . $this->createSuffix());
         $asset = $this->createAsset($asset);
 
-        $access = new AccessPolicy('Name');
-        $access->setName('AccessForLocator' . $this->createSuffix());
+        $access = new AccessPolicy(TestResources::MEDIA_SERVICES_ACCESS_POLICY_NAME . $this->createSuffix());
         $access->setDurationInMinutes(30);
         $access->setPermissions(AccessPolicy::PERMISSIONS_READ + AccessPolicy::PERMISSIONS_WRITE + AccessPolicy::PERMISSIONS_DELETE + AccessPolicy::PERMISSIONS_LIST);
         $access = $this->createAccessPolicy($access);
 
         $locat = new Locator($asset, $access, 1);
-        $locat->setName('testLocator' . $this->createSuffix());
+        $locat->setName(TestResources::MEDIA_SERVICES_LOCATOR_NAME . $this->createSuffix());
 
         // Test
         $result = $this->createLocator($locat);
@@ -124,27 +170,27 @@ class MediaServicesRestProxyTest extends MediaServicesRestProxyTestBase
      * @covers WindowsAzure\MediaServices\MediaServicesRestProxy::getAssetFiles
      * @covers WindowsAzure\MediaServices\MediaServicesRestProxy::uploadAssetFile
      * @covers WindowsAzure\MediaServices\MediaServicesRestProxy::send
+     * @covers WindowsAzure\MediaServices\MediaServicesRestProxy::wrapAtomEntry
      */
     public function testCreateFileInfos()
     {
         // Setup
         $asset = new Asset(Asset::OPTIONS_NONE);
-        $asset->setName('TestAsset' . $this->createSuffix());
+        $asset->setName(TestResources::MEDIA_SERVICES_ASSET_NAME . $this->createSuffix());
         $asset = $this->createAsset($asset);
 
-        $access = new AccessPolicy('Name');
-        $access->setName('TestAccessPolicy' . $this->createSuffix());
+        $access = new AccessPolicy(TestResources::MEDIA_SERVICES_ACCESS_POLICY_NAME . $this->createSuffix());
         $access->setDurationInMinutes(30);
         $access->setPermissions(AccessPolicy::PERMISSIONS_WRITE);
         $access = $this->createAccessPolicy($access);
 
         $locator = new Locator($asset, $access, Locator::TYPE_SAS);
-        $locator->setName('TestLocator' . $this->createSuffix());
+        $locator->setName(TestResources::MEDIA_SERVICES_LOCATOR_NAME . $this->createSuffix());
         $locator->setStartTime(new \DateTime('now -5 minutes'));
         $locator = $this->createLocator($locator);
 
-        $fileName = 'simple.avi';
-        $this->restProxy->uploadAssetFile($locator, $fileName, 'test file content');
+        $fileName = TestResources::MEDIA_SERVICES_DUMMY_FILE_NAME;
+        $this->restProxy->uploadAssetFile($locator, $fileName, TestResources::MEDIA_SERVICES_DUMMY_FILE_CONTENT);
 
         // Test
         $this->restProxy->createFileInfos($asset);
@@ -165,31 +211,13 @@ class MediaServicesRestProxyTest extends MediaServicesRestProxyTestBase
     public function testGetAssetFilesAll()
     {
         // Setup
-        $asset = new Asset(Asset::OPTIONS_NONE);
-        $asset->setName('TestAsset' . $this->createSuffix());
-        $asset = $this->createAsset($asset);
-
-        $access = new AccessPolicy('Name');
-        $access->setName('TestAccessPolicy' . $this->createSuffix());
-        $access->setDurationInMinutes(30);
-        $access->setPermissions(AccessPolicy::PERMISSIONS_WRITE);
-        $access = $this->createAccessPolicy($access);
-
-        $locator = new Locator($asset, $access, Locator::TYPE_SAS);
-        $locator->setName('TestLocator' . $this->createSuffix());
-        $locator->setStartTime(new \DateTime('now -5 minutes'));
-        $locator = $this->createLocator($locator);
-
-        $fileName = 'simple.avi';
-        $this->restProxy->uploadAssetFile($locator, $fileName, 'test file content');
-        $this->restProxy->createFileInfos($asset);
+        $asset = $this->createAssetWithFile();
 
         // Test
         $assetFiles = $this->restProxy->getAssetFiles();
 
         // Assert
         $this->assertEquals(1, count($assetFiles));
-        $this->assertEquals($fileName, $assetFiles[0]->getName());
         $this->assertEquals($asset->getId(), $assetFiles[0]->getParentAssetId());
     }
 
@@ -202,24 +230,7 @@ class MediaServicesRestProxyTest extends MediaServicesRestProxyTestBase
     public function testGetAssetFilesById()
     {
         // Setup
-        $asset = new Asset(Asset::OPTIONS_NONE);
-        $asset->setName('TestAsset' . $this->createSuffix());
-        $asset = $this->createAsset($asset);
-
-        $access = new AccessPolicy('Name');
-        $access->setName('TestAccessPolicy' . $this->createSuffix());
-        $access->setDurationInMinutes(30);
-        $access->setPermissions(AccessPolicy::PERMISSIONS_WRITE);
-        $access = $this->createAccessPolicy($access);
-
-        $locator = new Locator($asset, $access, Locator::TYPE_SAS);
-        $locator->setName('TestLocator' . $this->createSuffix());
-        $locator->setStartTime(new \DateTime('now -5 minutes'));
-        $locator = $this->createLocator($locator);
-
-        $fileName = 'simple.avi';
-        $this->restProxy->uploadAssetFile($locator, $fileName, 'test file content');
-        $this->restProxy->createFileInfos($asset);
+        $asset = $this->createAssetWithFile();
         $assetFiles = $this->restProxy->getAssetFiles(null, $asset);
 
         // Test
@@ -227,7 +238,110 @@ class MediaServicesRestProxyTest extends MediaServicesRestProxyTestBase
 
         // Assert
         $this->assertEquals(1, count($result));
-        $this->assertEquals($fileName, $result[0]->getName());
         $this->assertEquals($asset->getId(), $result[0]->getParentAssetId());
+    }
+
+    /**
+     * @covers WindowsAzure\MediaServices\MediaServicesRestProxy::createJob
+     * @covers WindowsAzure\MediaServices\MediaServicesRestProxy::send
+     * @covers WindowsAzure\MediaServices\MediaServicesRestProxy::deleteJob
+     * @covers WindowsAzure\MediaServices\MediaServicesRestProxy::_getCreateEmptyJobContext
+     * @covers WindowsAzure\MediaServices\MediaServicesRestProxy::_getCreateTaskContext
+     * @covers WindowsAzure\MediaServices\MediaServicesRestProxy::wrapAtomEntry
+     */
+    public function testCreateJobWithTasks()
+    {
+        // Setup
+        $name = TestResources::MEDIA_SERVICES_JOB_NAME . $this->createSuffix();
+
+        // Test
+        $result = $this->createJobWithTasks($name);
+
+        // Assert
+        $this->assertEquals($name, $result->getName());
+    }
+
+    /**
+     * @covers WindowsAzure\MediaServices\MediaServicesRestProxy::getJobStatus
+     * @covers WindowsAzure\MediaServices\MediaServicesRestProxy::send
+     */
+    public function testGetJobStatus()
+    {
+        // Setup
+        $name = TestResources::MEDIA_SERVICES_JOB_NAME . $this->createSuffix();
+        $job = $this->createJobWithTasks($name);
+
+        // Test
+        $result = $this->restProxy->getJobStatus($job);
+
+        // Assert
+        $this->assertGreaterThanOrEqual(0, $result);
+        $this->assertLessThanOrEqual(6, $result);
+    }
+
+    /**
+     * @covers WindowsAzure\MediaServices\MediaServicesRestProxy::cancelJob
+     * @covers WindowsAzure\MediaServices\MediaServicesRestProxy::send
+     */
+    public function testCancelJob()
+    {
+        // Setup
+        $name = TestResources::MEDIA_SERVICES_JOB_NAME . $this->createSuffix();
+        $job = $this->createJobWithTasks($name);
+
+        // Test
+        $job = $this->restProxy->cancelJob($job);
+
+        // Assert
+        $this->assertNull($job);
+    }
+
+    /**
+     * @covers WindowsAzure\MediaServices\MediaServicesRestProxy::createJobTemplate
+     * @covers WindowsAzure\MediaServices\MediaServicesRestProxy::send
+     * @covers WindowsAzure\MediaServices\MediaServicesRestProxy::deleteJobTemplate
+     * @covers WindowsAzure\MediaServices\MediaServicesRestProxy::_getCreateEmptyJobTemplateContext
+     * @covers WindowsAzure\MediaServices\MediaServicesRestProxy::_getCreateTaskTemplateContext
+     * @covers WindowsAzure\MediaServices\MediaServicesRestProxy::wrapAtomEntry
+     */
+    public function testCreateJobTemplate()
+    {
+        // Setup
+        $name = TestResources::MEDIA_SERVICES_JOB_TEMPLATE_NAME . $this->createSuffix();
+
+        // Test
+        $result = $this->createJobTemplateWithTasks($name);
+
+        // Assert
+        $this->assertEquals($name, $result->getName());
+    }
+
+    /**
+     * @covers WindowsAzure\MediaServices\MediaServicesRestProxy::getMediaProcessors
+     * @covers WindowsAzure\MediaServices\MediaServicesRestProxy::send
+     */
+    public function testGetMediaProcessors()
+    {
+        // Test
+        $result = $this->restProxy->getMediaProcessors();
+
+        // Assert
+        $this->assertNotEmpty($result);
+    }
+
+    /**
+     * @covers WindowsAzure\MediaServices\MediaServicesRestProxy::getLatestMediaProcessor
+     */
+    public function testGetLatestMediaProcessor()
+    {
+        // Setup
+        $name = TestResources::MEDIA_SERVICES_PROCESSOR_NAME;
+
+        // Test
+        $result = $this->restProxy->getLatestMediaProcessor($name);
+
+        // Assert
+        $this->assertNotNull($result);
+        $this->assertEquals($name, $result->getName());
     }
 }

@@ -49,6 +49,19 @@ interface IMediaServices extends FilterableService
     public function createAsset($asset);
 
     /**
+     * Get asset
+     *
+     * @param WindowsAzure\MediaServices\Models\Asset|string   $asset  Asset data or asset Id
+     */
+    public function getAsset($asset);
+
+    /**
+     * Get asset list
+     *
+     */
+    public function getAssetList();
+
+    /**
      * Delete asset
      *
      * @param WindowsAzure\MediaServices\Models\Asset|string   $asset  Asset data or asset Id
@@ -114,6 +127,71 @@ interface IMediaServices extends FilterableService
      * @return null
      */
     public function uploadAssetFile($locator, $name, $body);
+
+    /**
+     * Create a job.
+     *
+     * @param WindowsAzure\MediaServices\Models\Job $job            Job data
+     * @param array                                 $inputAssets    Input assets list
+     * @param array                                 $tasks          Performed tasks array (optional)
+     *
+     * @return array
+     */
+    public function createJob($job, $inputAssets, $tasks = null);
+
+    /**
+     * Get status of a job
+     *
+     * @param WindowsAzure\MediaServices\Models\Job|string   $job  Job data or job Id
+     */
+    public function getJobStatus($job);
+
+    /**
+     * Cancel a job
+     *
+     * @param WindowsAzure\MediaServices\Models\Job|string   $job  Job data or job Id
+     */
+    public function cancelJob($job);
+
+    /**
+     * Delete job
+     *
+     * @param WindowsAzure\MediaServices\Models\Job|string   $job  Job data or job Id
+     */
+    public function deleteJob($job);
+
+    /**
+     * Create a job.
+     *
+     * @param WindowsAzure\MediaServices\Models\JobTemplate $jobTemplate    Job template data
+     * @param array                                         $taskTemplates  Performed tasks template array
+     *
+     * @return array
+     */
+    public function createJobTemplate($jobTemplate, $taskTemplates);
+
+    /**
+     * Delete job template
+     *
+     * @param WindowsAzure\MediaServices\Models\JobTemplate|string   $jobTemplate  Job template data or job template Id
+     */
+    public function deleteJobTemplate($jobTemplate);
+
+    /**
+     * Get list of all media processors asset files
+     *
+     * @return array
+     */
+    public function getMediaProcessors();
+
+    /**
+     * Get media processor by name with latest version
+     *
+     * @param string    $name   Media processor name
+     *
+     * @return WindowsAzure\MediaServices\Models\JobTemplate\MediaProcessor
+     */
+    public function getLatestMediaProcessor($name);
 }
 
 

@@ -33,6 +33,11 @@ use WindowsAzure\MediaServices\Models\Asset;
 use WindowsAzure\MediaServices\Models\AccessPolicy;
 use WindowsAzure\MediaServices\Models\AssetFile;
 use WindowsAzure\MediaServices\Models\Locator;
+use WindowsAzure\MediaServices\Models\Job;
+use WindowsAzure\MediaServices\Models\Task;
+use WindowsAzure\MediaServices\Models\TaskOptions;
+use WindowsAzure\MediaServices\Models\JobTemplate;
+use WindowsAzure\MediaServices\Models\TaskTemplate;
 
 /**
  * Unit tests for class MediaServicesRestProxy
@@ -53,7 +58,7 @@ class MediaServicesFunctionalTest extends MediaServicesRestProxyTestBase
     public function testCreatEmptyAsset()
     {
         // Setup
-        $assetName      = 'TestAsset' . $this->createSuffix();
+        $assetName      = TestResources::MEDIA_SERVICES_ASSET_NAME . $this->createSuffix();
         $assetOptions   = Asset::OPTIONS_NONE;
 
         // Test
@@ -78,18 +83,18 @@ class MediaServicesFunctionalTest extends MediaServicesRestProxyTestBase
     public function testCreateAssetWithFiles()
     {
         // Setup
-        $assetName              = 'TestAsset' . $this->createSuffix();
+        $assetName              = TestResources::MEDIA_SERVICES_ASSET_NAME . $this->createSuffix();
         $assetOptions           = Asset::OPTIONS_NONE;
 
-        $accessPolicyName       = 'AccessPolicyTest' . $this->createSuffix();
+        $accessPolicyName       = TestResources::MEDIA_SERVICES_ACCESS_POLICY_NAME . $this->createSuffix();
         $accessPolicyDiration   = 30;
         $accessPolicyPermission = AccessPolicy::PERMISSIONS_WRITE;
 
         $locatorStartTime       = new \DateTime('now -5 minutes');
         $locatorType            = Locator::TYPE_SAS;
 
-        $fileName               = 'simple.avi';
-        $otherFileName          = 'other.avi';
+        $fileName               = TestResources::MEDIA_SERVICES_DUMMY_FILE_NAME;
+        $otherFileName          = TestResources::MEDIA_SERVICES_DUMMY_FILE_NAME_1;
 
         // Test
         $asset = new Asset($assetOptions);
@@ -105,8 +110,8 @@ class MediaServicesFunctionalTest extends MediaServicesRestProxyTestBase
         $locator->setStartTime($locatorStartTime);
         $locator = $this->createLocator($locator);
 
-        $this->restProxy->uploadAssetFile($locator, $fileName, 'test file content');
-        $this->restProxy->uploadAssetFile($locator, $otherFileName, 'other file content');
+        $this->restProxy->uploadAssetFile($locator, $fileName, TestResources::MEDIA_SERVICES_DUMMY_FILE_CONTENT);
+        $this->restProxy->uploadAssetFile($locator, $otherFileName, TestResources::MEDIA_SERVICES_DUMMY_FILE_CONTENT_1);
 
         $this->restProxy->createFileInfos($asset);
         $assetFiles = $this->restProxy->getAssetFiles(null, $asset);
@@ -141,4 +146,201 @@ class MediaServicesFunctionalTest extends MediaServicesRestProxyTestBase
         $this->assertEquals($asset->getId(), $assetFiles[1]->getParentAssetId());
     }
 
+    /**
+     * @covers WindowsAzure\MediaServices\MediaServicesRestProxy::createJob
+     * @covers WindowsAzure\MediaServices\MediaServicesRestProxy::getLatestMediaProcessor
+     */
+    public function testCreateJobWithTasks() {
+
+        // Setup
+        $mediaProcessor = $this->restProxy->getLatestMediaProcessor(TestResources::MEDIA_SERVICES_PROCESSOR_NAME);
+        $inputAsset = $this->createAssetWithFile();
+
+        $taskBody = TestResources::getMediaServicesTask($this->getOutputAssetName());
+        $configuration = TestResources::MEDIA_SERVICES_TASK_COFIGURATION;
+
+        $name = TestResources::MEDIA_SERVICES_JOB_NAME . $this->createSuffix();
+
+        // Test
+        $task = new Task($taskBody, $mediaProcessor->getId(), TaskOptions::NONE);
+        $task->setConfiguration($configuration);
+
+        $job = new Job();
+        $job->setName($name);
+
+        $jobWithTasks = $this->createJob($job, array($inputAsset), array($task));
+
+        // Assert
+        $this->assertEquals($taskBody, $task->getTaskBody());
+        $this->assertEquals($configuration, $task->getConfiguration());
+        $this->assertContains(TestResources::MEDIA_SERVICES_PROCESSOR_ID_PREFIX, $task->getMediaProcessorId());
+
+        $this->assertEquals($name, $job->getName());
+
+        $this->assertEquals($name, $jobWithTasks->getName());
+        $this->assertContains(TestResources::MEDIA_SERVICES_JOB_ID_PREFIX, $jobWithTasks->getId());
+        $this->assertNotNull($jobWithTasks->getCreated());
+    }
+
+    /**
+     * @covers WindowsAzure\MediaServices\MediaServicesRestProxy::getLatestMediaProcessor
+     * @covers WindowsAzure\MediaServices\MediaServicesRestProxy::createJobTemplate
+     */
+    public function testCreateJobTemplateWithTasks(){
+
+        // Setup
+        $mediaProcessor = $this->restProxy->getLatestMediaProcessor(TestResources::MEDIA_SERVICES_PROCESSOR_NAME);
+        $inputAsset = $this->createAssetWithFile();
+
+        $configuration = TestResources::MEDIA_SERVICES_TASK_COFIGURATION;
+        $name = TestResources::MEDIA_SERVICES_JOB_TEMPLATE_NAME . $this->createSuffix();
+
+        $taskTemplate = new TaskTemplate(1, 1);
+        $jobTemplateBody = TestResources::getMediaServicesJobTemplate($taskTemplate->getId(), $this->getOutputAssetName());
+
+        // Test
+        $taskTemplate->setMediaProcessorId($mediaProcessor->getId());
+        $taskTemplate->setConfiguration($configuration);
+
+        $jobTemplate = new JobTemplate($jobTemplateBody);
+        $jobTemplate->setName($name);
+
+        $jobTemplateWithTasks = $this->createJobTemplate($jobTemplate, array($taskTemplate));
+
+        // Assert
+        $this->assertEquals($configuration, $taskTemplate->getConfiguration());
+        $this->assertEquals($mediaProcessor->getId(), $taskTemplate->getMediaProcessorId());
+
+        $this->assertEquals($jobTemplateBody, $jobTemplate->getJobTemplateBody());
+        $this->assertEquals($name, $jobTemplate->getName());
+
+        $this->assertEquals($name, $jobTemplateWithTasks->getName());
+        $this->assertContains(TestResources::MEDIA_SERVICES_JOB_TEMPLATE_ID_PREFIX, $jobTemplateWithTasks->getId());
+        $this->assertNotNull($jobTemplateWithTasks->getCreated());
+    }
+
+    /**
+     * @covers WindowsAzure\MediaServices\MediaServicesRestProxy::createJob
+     * @covers WindowsAzure\MediaServices\MediaServicesRestProxy::getLatestMediaProcessor
+     * @covers WindowsAzure\MediaServices\MediaServicesRestProxy::createJobTemplate
+     */
+    public function testCreateJobUsingTemplate(){
+
+        // Setup
+        $mediaProcessor = $this->restProxy->getLatestMediaProcessor(TestResources::MEDIA_SERVICES_PROCESSOR_NAME);
+        $inputAsset = $this->createAssetWithFile();
+
+        $configuration = TestResources::MEDIA_SERVICES_TASK_COFIGURATION;
+        $name = TestResources::MEDIA_SERVICES_JOB_NAME . $this->createSuffix();
+        $nameTempl = TestResources::MEDIA_SERVICES_JOB_TEMPLATE_NAME . $this->createSuffix();
+
+        $taskTemplate = new TaskTemplate(1, 1);
+        $jobTemplateBody = TestResources::getMediaServicesJobTemplate($taskTemplate->getId(), $this->getOutputAssetName());
+
+        // Test
+        $taskTemplate->setMediaProcessorId($mediaProcessor->getId());
+        $taskTemplate->setConfiguration($configuration);
+
+        $jobTemplate = new JobTemplate($jobTemplateBody);
+        $jobTemplate->setName($nameTempl);
+        $jobTemplate = $this->createJobTemplate($jobTemplate, array($taskTemplate));
+
+        $jobTemplateWithTasks = new Job();
+        $jobTemplateWithTasks->setName($name);
+        $jobTemplateWithTasks->setTemplateId($jobTemplate->getId());
+        $jobTemplateWithTasks = $this->createJob($jobTemplateWithTasks, array($inputAsset));
+
+        // Assert
+        $this->assertEquals($jobTemplateBody, $jobTemplate->getJobTemplateBody());
+        $this->assertEquals($nameTempl, $jobTemplate->getName());
+
+        $this->assertEquals($name, $jobTemplateWithTasks->getName());
+
+        $this->assertEquals($name, $jobTemplateWithTasks->getName());
+        $this->assertEquals($jobTemplate->getId(), $jobTemplateWithTasks->getTemplateId());
+        $this->assertContains(TestResources::MEDIA_SERVICES_JOB_ID_PREFIX, $jobTemplateWithTasks->getId());
+        $this->assertNotNull($jobTemplateWithTasks->getCreated());
+    }
+
+    /**
+     * @covers WindowsAzure\MediaServices\MediaServicesRestProxy::createJob
+     * @covers WindowsAzure\MediaServices\MediaServicesRestProxy::getLatestMediaProcessor
+     * @covers WindowsAzure\MediaServices\MediaServicesRestProxy::cancelJob
+     * @covers WindowsAzure\MediaServices\MediaServicesRestProxy::getJobStatus
+     */
+    public function testCancelJob(){
+
+        // Setup
+        $mediaProcessor = $this->restProxy->getLatestMediaProcessor(TestResources::MEDIA_SERVICES_PROCESSOR_NAME);
+        $inputAsset = $this->createAssetWithFile();
+        $expected = array(
+                Job::STATE_CANCELING,
+                Job::STATE_CANCELED
+        );
+
+        $taskBody = TestResources::getMediaServicesTask($this->getOutputAssetName());
+        $configuration = TestResources::MEDIA_SERVICES_TASK_COFIGURATION;
+
+        $name = TestResources::MEDIA_SERVICES_JOB_NAME . $this->createSuffix();
+
+        $task = new Task($taskBody, $mediaProcessor->getId(), TaskOptions::NONE);
+        $task->setConfiguration($configuration);
+
+        $job = new Job();
+        $job->setName($name);
+
+        $jobWithTasks = $this->createJob($job, array($inputAsset), array($task));
+
+        // Test
+        $canceledJobWithTasks = $this->restProxy->cancelJob($jobWithTasks);
+        $status = $this->restProxy->getJobStatus($jobWithTasks);
+
+        // Assert
+        $this->assertEquals($taskBody, $task->getTaskBody());
+        $this->assertEquals($configuration, $task->getConfiguration());
+        $this->assertContains(TestResources::MEDIA_SERVICES_PROCESSOR_ID_PREFIX, $task->getMediaProcessorId());
+
+        $this->assertEquals($name, $job->getName());
+
+        $this->assertNull(null, $jobWithTasks);
+        $this->assertContains($status, $expected);
+    }
+
+    /**
+     * @covers WindowsAzure\MediaServices\MediaServicesRestProxy::createJob
+     * @covers WindowsAzure\MediaServices\MediaServicesRestProxy::getLatestMediaProcessor
+     * @covers WindowsAzure\MediaServices\MediaServicesRestProxy::getJobStatus
+     */
+    public function testMonitorProcessing(){
+
+        // Setup
+        $mediaProcessor = $this->restProxy->getLatestMediaProcessor(TestResources::MEDIA_SERVICES_PROCESSOR_NAME);
+        $inputAsset = $this->createAssetWithFile();
+
+        $taskBody = TestResources::getMediaServicesTask($this->getOutputAssetName());
+        $configuration = TestResources::MEDIA_SERVICES_TASK_COFIGURATION;
+
+        $name = TestResources::MEDIA_SERVICES_JOB_NAME . $this->createSuffix();
+
+        $task = new Task($taskBody, $mediaProcessor->getId(), TaskOptions::NONE);
+        $task->setConfiguration($configuration);
+
+        $job = new Job();
+        $job->setName($name);
+
+        $jobWithTasks = $this->createJob($job, array($inputAsset), array($task));
+
+        // Test
+        $jobStatus = $this->restProxy->getJobStatus($jobWithTasks);
+
+        // Assert
+        $this->assertEquals($taskBody, $task->getTaskBody());
+        $this->assertEquals($configuration, $task->getConfiguration());
+        $this->assertContains(TestResources::MEDIA_SERVICES_PROCESSOR_ID_PREFIX, $task->getMediaProcessorId());
+
+        $this->assertEquals($name, $job->getName());
+
+        $this->assertLessThanOrEqual(6, $jobStatus);
+        $this->assertGreaterThanOrEqual(0, $jobStatus);
+    }
 }
