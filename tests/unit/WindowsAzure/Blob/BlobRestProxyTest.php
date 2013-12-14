@@ -37,6 +37,7 @@ use WindowsAzure\Blob\Models\GetContainerPropertiesResult;
 use WindowsAzure\Blob\Models\ContainerAcl;
 use WindowsAzure\Blob\Models\ListBlobsResult;
 use WindowsAzure\Blob\Models\ListBlobsOptions;
+use WindowsAzure\Blob\Models\ListBlobBlocksOptions;
 use WindowsAzure\Blob\Models\CreateBlobOptions;
 use WindowsAzure\Blob\Models\SetBlobPropertiesOptions;
 use WindowsAzure\Blob\Models\GetBlobMetadataResult;
@@ -1557,5 +1558,91 @@ class BlobRestProxyTest extends BlobServiceRestProxyTestBase
         $this->assertNotNull($snapshotResult->getLastModified());
         $this->assertNotNull($snapshotResult->getSnapshot());
         $this->assertEquals($snapshotResult->getSnapshot(), $actualBlob->getSnapshot());
-    }    
+    }
+
+   /**
+    * @covers WindowsAzure\Blob\BlobRestProxy::getSingleBlobUploadThresholdInBytes
+    * @covers WindowsAzure\Blob\BlobRestProxy::setSingleBlobUploadThresholdInBytes
+    */
+    public function testSingleBlobUploadThresholdInBytes()
+    {
+        // Values based on http://msdn.microsoft.com/en-us/library/microsoft.windowsazure.storageclient.cloudblobclient.singleblobuploadthresholdinbytes.aspx
+        // Read initial value
+        $this->assertEquals($this->restProxy->getSingleBlobUploadThresholdInBytes(), 33554432);
+
+        // Change value
+        $this->restProxy->setSingleBlobUploadThresholdInBytes(50);
+        $this->assertEquals($this->restProxy->getSingleBlobUploadThresholdInBytes(), 50);
+
+        // Test over limit
+        $this->restProxy->setSingleBlobUploadThresholdInBytes(65*1024*1024);
+        // Should be truncated to 64M
+        $this->assertEquals($this->restProxy->getSingleBlobUploadThresholdInBytes(), 67108864);
+
+        // Under limit
+        $this->restProxy->setSingleBlobUploadThresholdInBytes( -50);
+        // value can not be less than 1, so reset to default value
+        $this->assertEquals($this->restProxy->getSingleBlobUploadThresholdInBytes(), 33554432);
+
+        $this->restProxy->setSingleBlobUploadThresholdInBytes( 0);
+        // value can not be less than 1, so reset to default value
+        $this->assertEquals($this->restProxy->getSingleBlobUploadThresholdInBytes(), 33554432);
+    }
+
+   /**
+    * @covers WindowsAzure\Blob\BlobRestProxy::createBlockBlob
+    **/
+    public function testCreateBlobLargerThanSingleBlock()
+    {
+        // First step, lets set the value for automagic splitting to somethign very small
+	$max_size = 50;
+        $this->restProxy->setSingleBlobUploadThresholdInBytes( $max_size );
+        $this->assertEquals($this->restProxy->getSingleBlobUploadThresholdInBytes(), $max_size);
+        $name = 'createbloblargerthansingleblock' . $this->createSuffix();
+        $this->createContainer($name);
+        $contentType = 'text/plain; charset=UTF-8';
+	$content = "This is a really long section of text needed for this test.";
+	// Note this grows fast, each loop doubles the last run. Do not make too big
+        // This results in a 1888 byte string, divided by 50 results in 38 blocks
+	for($i = 0; $i < 5; $i++){
+		$content .= $content;
+	}
+        $options = new CreateBlobOptions();
+        $options->setContentType($contentType);
+        $this->restProxy->createBlockBlob($name, 'little_split', $content, $options);
+
+	// Block specific
+	$boptions = new ListBlobBlocksOptions();
+	$boptions->setIncludeUncommittedBlobs(true);
+	$boptions->setIncludeCommittedBlobs(true);
+        $result = $this->restProxy->listBlobBlocks($name, 'little_split', $boptions);
+	$blocks = $result->getUnCommittedBlocks();
+        $this->assertEquals(count($blocks), 0);
+	$blocks = $result->getCommittedBlocks();
+	$this->assertEquals(count($blocks), ceil(strlen($content) / $max_size));
+
+        // Setting back to default value for one shot test
+        $this->restProxy->setSingleBlobUploadThresholdInBytes( 0 );
+        $this->restProxy->createBlockBlob($name, 'oneshot', $content, $options);
+        $result = $this->restProxy->listBlobBlocks($name, 'oneshot', $boptions);
+	$blocks = $result->getUnCommittedBlocks();
+        $this->assertEquals(count($blocks), 0);
+	$blocks = $result->getCommittedBlocks();
+        // this one doesn't make sense. On emulator, there is no block created, 
+        // so relying on content size to be final approval
+	$this->assertEquals(count($blocks), 0);
+        $this->assertEquals($result->getContentLength(), strlen($content));
+
+        // make string even larger for automagic splitting
+        // This should result in a string longer than 32M, and force the blob into 2 blocks
+	for($i = 0; $i < 15; $i++){
+		$content .= $content;
+	}
+        $this->restProxy->createBlockBlob($name, 'bigsplit', $content, $options);
+        $result = $this->restProxy->listBlobBlocks($name, 'bigsplit', $boptions);
+	$blocks = $result->getUnCommittedBlocks();
+        $this->assertEquals(count($blocks), 0);
+	$blocks = $result->getCommittedBlocks();
+	$this->assertEquals(count($blocks), ceil(strlen($content)/(4*1024*1024)));
+    }
 }

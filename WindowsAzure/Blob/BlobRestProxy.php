@@ -41,6 +41,7 @@ use WindowsAzure\Blob\Models\DeleteContainerOptions;
 use WindowsAzure\Blob\Models\ListBlobsOptions;
 use WindowsAzure\Blob\Models\ListBlobsResult;
 use WindowsAzure\Blob\Models\BlobType;
+use WindowsAzure\Blob\Models\Block;
 use WindowsAzure\Blob\Models\CreateBlobOptions;
 use WindowsAzure\Blob\Models\BlobProperties;
 use WindowsAzure\Blob\Models\GetBlobPropertiesOptions;
@@ -88,6 +89,40 @@ use WindowsAzure\Blob\Models\BreakLeaseResult;
  */
 class BlobRestProxy extends ServiceRestProxy implements IBlob
 {
+    /**
+     * @var int Defaults to 32MB
+     */
+    private $_SingleBlobUploadThresholdInBytes = 33554432 ;
+
+    /**
+     * Get the value for SingleBlobUploadThresholdInBytes
+     *
+     * @return int
+     */
+    public function getSingleBlobUploadThresholdInBytes()
+    {
+        return $this->_SingleBlobUploadThresholdInBytes;
+    }
+
+    /**
+     * Set the value for SingleBlobUploadThresholdInBytes, Max 64MB
+     *
+     * @param int $val The max size to send as a single blob block
+     *
+     * @return none
+     */
+    public function setSingleBlobUploadThresholdInBytes($val)
+    {
+        if ($val > 67108864) {
+            // What should the proper action here be?
+            $val = 67108864;
+        } elseif ($val < 1) {
+            // another spot that could use looking at
+            $val = 33554432;
+        }
+        $this->_SingleBlobUploadThresholdInBytes = $val;
+    }
+
     /**
      * Gets the copy blob source name with specified parameters. 
      * 
@@ -1216,38 +1251,82 @@ class BlobRestProxy extends ServiceRestProxy implements IBlob
         $headers     = array();
         $postParams  = array();
         $queryParams = array();
+        $bodySize    = 0;
         $path        = $this->_createPath($container, $blob);
         $statusCode  = Resources::STATUS_CREATED;
-        // If read file failed for any reason it will throw an exception.
-        $body = is_resource($content) ? stream_get_contents($content) : $content;
         
         if (is_null($options)) {
             $options = new CreateBlobOptions();
         }
         
-        $headers = $this->_addCreateBlobOptionalHeaders($options, $headers);
-        
-        $this->addOptionalHeader(
-            $headers,
-            Resources::X_MS_BLOB_TYPE,
-            BlobType::BLOCK_BLOB
-        );
-        $this->addOptionalQueryParam(
-            $queryParams,
-            Resources::QP_TIMEOUT,
-            $options->getTimeout()
-        );
-        
-        $response = $this->send(
-            $method, 
-            $headers, 
-            $queryParams, 
-            $postParams,
-            $path, 
-            $statusCode,
-            $body
-        );
-        
+        if (is_resource($content)) {
+            $cStat = fstat($content);
+            // if the resource is a remote file, $cStat will be false
+            if ($cStat) {
+                $bodySize = $cStat['size'];
+            }
+        } else {
+            $bodySize = strlen($content);
+        }
+
+        // if we have a size we can try to one shot this, else failsafe on block upload
+        if ($bodySize && $bodySize <= $this->_SingleBlobUploadThresholdInBytes) {
+            $headers = $this->_addCreateBlobOptionalHeaders($options, $headers);
+            
+            $this->addOptionalHeader(
+                $headers,
+                Resources::X_MS_BLOB_TYPE,
+                BlobType::BLOCK_BLOB
+            );
+            $this->addOptionalQueryParam(
+                $queryParams,
+                Resources::QP_TIMEOUT,
+                $options->getTimeout()
+            );
+
+            // If read file failed for any reason it will throw an exception.
+            $body = is_resource($content) ? stream_get_contents($content) : $content;
+
+            $response = $this->send(
+                $method, 
+                $headers, 
+                $queryParams, 
+                $postParams,
+                $path, 
+                $statusCode,
+                $body
+            );
+        } else {
+            // This is for large or failsafe upload
+            $end       = 0;
+            $counter   = 0;
+            $body      = '';
+            $blockIds  = array();
+            // if threshold is lower than 4mb, honor threshold, else use 4mb
+            $blockSize = ($this->_SingleBlobUploadThresholdInBytes < 4194304) ? $this->_SingleBlobUploadThresholdInBytes : 4194304;
+            while(!$end) {
+                if (is_resource($content)) {
+                    $body = fread($content, $blockSize);
+                    if (feof($content)) {
+                        $end = 1;
+                    }
+                } else {
+                    if (strlen($content) <= $blockSize) {
+                        $body = $content;
+                        $end = 1;
+                    } else {
+                        $body = substr($content, 0, $blockSize);
+                        $content = substr_replace($content, '', 0, $blockSize);
+                    }
+                }
+                $block = new Block();
+                $block->setBlockId(base64_encode(str_pad($counter++, '0', 6)));
+                $block->setType('Uncommitted');
+                array_push($blockIds, $block);
+                $this->createBlobBlock($container, $blob, $block->getBlockId(), $body);
+            }
+            $response = $this->commitBlobBlocks($container, $blob, $blockIds, $options);
+        }
         return CopyBlobResult::create($response->getHeader());
     }
     
@@ -1403,7 +1482,7 @@ class BlobRestProxy extends ServiceRestProxy implements IBlob
      * @param Models\BlockList|array         $blockList The block entries.
      * @param Models\CommitBlobBlocksOptions $options   The optional parameters.
      * 
-     * @return none
+     * @return CopyBlobResult
      * 
      * @see http://msdn.microsoft.com/en-us/library/windowsazure/dd179467.aspx 
      */
@@ -1496,7 +1575,7 @@ class BlobRestProxy extends ServiceRestProxy implements IBlob
             'blocklist'
         );
         
-        $this->send(
+        return $this->send(
             $method, 
             $headers, 
             $queryParams, 
