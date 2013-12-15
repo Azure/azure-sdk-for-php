@@ -687,3 +687,4 @@ class MediaServicesFunctionalTest extends MediaServicesRestProxyTestBase
         $this->assertEquals(0, $after);
     }
 }
+
