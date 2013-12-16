@@ -38,6 +38,8 @@ use WindowsAzure\MediaServices\Models\Task;
 use WindowsAzure\MediaServices\Models\TaskOptions;
 use WindowsAzure\MediaServices\Models\JobTemplate;
 use WindowsAzure\MediaServices\Models\TaskTemplate;
+use WindowsAzure\Common\Internal\Http\Url;
+use WindowsAzure\Common\Internal\Http\HttpClient;
 
 /**
  * Unit tests for class MediaServicesRestProxy
@@ -685,5 +687,78 @@ class MediaServicesFunctionalTest extends MediaServicesRestProxyTestBase
         // Assert
         $this->assertEquals(2, $before);
         $this->assertEquals(0, $after);
+    }
+
+    /**
+     * @covers WindowsAzure\MediaServices\MediaServicesRestProxy::createAccessPolicy
+     * @covers WindowsAzure\MediaServices\MediaServicesRestProxy::createLocator
+     */
+    public function testCreatingSASUrlForDownloadingContent(){
+
+        // Setup
+        $asset = $this->createAssetWithFile();
+
+        $accessPolicy = new AccessPolicy(TestResources::MEDIA_SERVICES_ACCESS_POLICY_NAME . $this->createSuffix());
+        $accessPolicy->setDurationInMinutes(300);
+        $accessPolicy->setPermissions(AccessPolicy::PERMISSIONS_READ);
+        $accessPolicy = $this->createAccessPolicy($accessPolicy);
+
+        $locator = new Locator($asset, $accessPolicy, Locator::TYPE_SAS);
+        $locator->setName(TestResources::MEDIA_SERVICES_LOCATOR_NAME . $this->createSuffix());
+        $locator->setStartTime(new \DateTime('now -5 minutes'));
+        $locator = $this->createLocator($locator);
+
+        // without sleep() Locator hasn't enough time to create URL, so that's why we have to use at least sleep(30)
+        sleep(40);
+
+        // Test
+        $method      = Resources::HTTP_GET;
+        $url         = new Url($locator->getBaseUri() . '/' . TestResources::MEDIA_SERVICES_DUMMY_FILE_NAME . $locator->getContentAccessComponent());
+        $filters     = array();
+        $statusCode  = Resources::STATUS_OK;
+
+        $httpClient = new HttpClient();
+        $httpClient->setMethod($method);
+        $httpClient->setExpectedStatusCode($statusCode);
+        $result = $httpClient->send($filters, $url);
+
+        // Assert
+        $this->assertEquals(TestResources::MEDIA_SERVICES_DUMMY_FILE_CONTENT, $result);
+    }
+
+    public function testCreatingOriginUrlForStreamingContent(){
+
+        // Setup
+        $asset = $this->createAssetWithFilesForStream();
+
+        $accessPolicy = new AccessPolicy(TestResources::MEDIA_SERVICES_ACCESS_POLICY_NAME . $this->createSuffix());
+        $accessPolicy->setDurationInMinutes(300);
+        $accessPolicy->setPermissions(AccessPolicy::PERMISSIONS_READ);
+        $accessPolicy = $this->createAccessPolicy($accessPolicy);
+
+        $locator = new Locator($asset, $accessPolicy, Locator::TYPE_ON_DEMAND_ORIGIN);
+        $locator->setName(TestResources::MEDIA_SERVICES_LOCATOR_NAME . $this->createSuffix());
+        $locator->setStartTime(new \DateTime('now -5 minutes'));
+        $locator = $this->createLocator($locator);
+
+        $expectedFileContent = TestResources::getSmallIsmc();
+
+        // without sleep() Locator hasn't enough time to create URL, so that's why we have to use at least sleep(30)
+        sleep(40);
+
+        // Test
+        $method      = Resources::HTTP_GET;
+        $url         = new Url($locator->getPath() . '/' . TestResources::MEDIA_SERVICES_ISM_FILE_NAME . '/' . TestResources::MEDIA_SERVICES_STREAM_APPEND);
+        $filters     = array();
+        $statusCode  = Resources::STATUS_OK;
+
+        $httpClient = new HttpClient();
+        $httpClient->setMethod($method);
+        $httpClient->setExpectedStatusCode($statusCode);
+        $result = $httpClient->send($filters, $url);
+
+        // Assert
+        $this->assertEquals($expectedFileContent, $result);
+
     }
 }

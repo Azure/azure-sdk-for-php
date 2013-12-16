@@ -121,6 +121,32 @@ class MediaServicesRestProxyTestBase extends ServiceRestProxyTestBase
         return $asset;
     }
 
+    public function createAssetWithFilesForStream() {
+
+        $asset = new Asset(Asset::OPTIONS_NONE);
+        $asset->setName(TestResources::MEDIA_SERVICES_ASSET_NAME . $this->createSuffix());
+        $asset = $this->createAsset($asset);
+
+        $access = new AccessPolicy(TestResources::MEDIA_SERVICES_ACCESS_POLICY_NAME . $this->createSuffix());
+        $access->setDurationInMinutes(30);
+        $access->setPermissions(AccessPolicy::PERMISSIONS_WRITE);
+        $access = $this->createAccessPolicy($access);
+
+        $locator = new Locator($asset, $access, Locator::TYPE_SAS);
+        $locator->setName(TestResources::MEDIA_SERVICES_LOCATOR_NAME . $this->createSuffix());
+        $locator->setStartTime(new \DateTime('now -5 minutes'));
+        $locator = $this->createLocator($locator);
+
+
+        $firstFile = TestResources::getSmallIsm();
+        $secondFile = TestResources::getSmallIsmc();
+        $this->restProxy->uploadAssetFile($locator, TestResources::MEDIA_SERVICES_ISM_FILE_NAME, $firstFile);
+        $this->restProxy->uploadAssetFile($locator, TestResources::MEDIA_SERVICES_ISMC_FILE_NAME, $secondFile);
+        $this->restProxy->createFileInfos($asset);
+
+        return $asset;
+    }
+
     public function getOutputAssetName(){
 
         $outputAssetName = TestResources::MEDIA_SERVICES_OUTPUT_ASSET_NAME . $this->createSuffix();
