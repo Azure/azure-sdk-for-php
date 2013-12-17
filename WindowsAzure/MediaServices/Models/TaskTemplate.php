@@ -141,9 +141,12 @@ class TaskTemplate
     /**
      * Create task template from array
      *
-     * @param array $options    Array containing values for object properties
+     * @param array $options Array containing values for object properties
+     *
+     * @return WindowsAzure\MediaServices\Models\TaskTemplate
      */
-    public static function createFromOptions($options) {
+    public static function createFromOptions($options)
+    {
         Validate::notNull($options['NumberofInputAssets'], 'options[NumberofInputAssets]');
         Validate::notNull($options['NumberofOutputAssets'], 'options[NumberofOutputAssets]');
 
@@ -159,17 +162,22 @@ class TaskTemplate
      * @param int $numberOfInputAssets  Number of input Assets the TaskTemplate must process.
      * @param int $numberOfOutputAssets Number of output Assets the TaskTemplate must process.
      */
-    public function __construct($numberOfInputAssets, $numberOfOutputAssets) {
-        $this->_id = 'nb:ttid:UUID:' . Utilities::getGuid();
-        $this->_numberofInputAssets     = $numberOfInputAssets;
-        $this->_numberofOutputAssets    = $numberOfOutputAssets;
+    public function __construct($numberOfInputAssets, $numberOfOutputAssets)
+    {
+        $this->_id                   = 'nb:ttid:UUID:' . Utilities::getGuid();
+        $this->_numberofInputAssets  = $numberOfInputAssets;
+        $this->_numberofOutputAssets = $numberOfOutputAssets;
     }
 
     /**
      * Fill task template from array
+     *
      * @param array $options    Array containing values for object properties
+     *
+     * @return none
      */
-    public function fromArray($options) {
+    public function fromArray($options)
+    {
         if (isset($options['Id'])) {
             Validate::isString($options['Id'], 'options[Id]');
             $this->_id = $options['Id'];
@@ -246,18 +254,20 @@ class TaskTemplate
      *
      * @return string
      */
-    public function getName() {
-       return $this->_name;
+    public function getName()
+    {
+        return $this->_name;
     }
 
     /**
      * Set "Name"
      *
-     * @param string    $value Name
+     * @param string $value Name
      *
      * @return none
      */
-    public function setName($value) {
+    public function setName($value)
+    {
         $this->_name = $value;
     }
 
@@ -266,8 +276,9 @@ class TaskTemplate
      *
      * @return string
      */
-    public function getId() {
-       return $this->_id;
+    public function getId()
+    {
+        return $this->_id;
     }
 
     /**
@@ -275,18 +286,20 @@ class TaskTemplate
      *
      * @return string
      */
-    public function getInitializationVector() {
+    public function getInitializationVector()
+    {
         return $this->_initializationVector;
     }
 
     /**
      * Set "Initialization vector"
      *
-     * @param string    $value Initialization vector
+     * @param string $value Initialization vector
      *
      * @return none
      */
-    public function setInitializationVector($value) {
+    public function setInitializationVector($value)
+    {
         $this->_initializationVector = $value;
     }
 
@@ -295,18 +308,20 @@ class TaskTemplate
      *
      * @return string
      */
-    public function getEncryptionVersion() {
+    public function getEncryptionVersion()
+    {
         return $this->_encryptionVersion;
     }
 
     /**
      * Set "Encryption version"
      *
-     * @param string    $value Encryption version
+     * @param string $value Encryption version
      *
      * @return none
      */
-    public function setEncryptionVersion($value) {
+    public function setEncryptionVersion($value)
+    {
         $this->_encryptionVersion = $value;
     }
 
@@ -315,18 +330,20 @@ class TaskTemplate
      *
      * @return string
      */
-    public function getEncryptionScheme() {
+    public function getEncryptionScheme()
+    {
         return $this->_encryptionScheme;
     }
 
     /**
      * Set "Encryption scheme"
      *
-     * @param string    $value Encryption scheme
+     * @param string $value Encryption scheme
      *
      * @return none
      */
-    public function setEncryptionScheme($value) {
+    public function setEncryptionScheme($value)
+    {
         $this->_encryptionScheme = $value;
     }
 
@@ -335,18 +352,20 @@ class TaskTemplate
      *
      * @return string
      */
-    public function getEncryptionKeyId() {
+    public function getEncryptionKeyId()
+    {
         return $this->_encryptionKeyId;
     }
 
     /**
      * Set "Encription key id"
      *
-     * @param string    $value Encription key id
+     * @param string $value Encription key id
      *
      * @return none
      */
-    public function setEncryptionKeyId($value) {
+    public function setEncryptionKeyId($value)
+    {
         $this->_encryptionKeyId = $value;
     }
 
@@ -355,7 +374,8 @@ class TaskTemplate
      *
      * @return int
      */
-    public function getOptions() {
+    public function getOptions()
+    {
         return $this->_options;
     }
 
@@ -364,18 +384,20 @@ class TaskTemplate
      *
      * @return string
      */
-    public function getMediaProcessorId() {
+    public function getMediaProcessorId()
+    {
         return $this->_mediaProcessorId;
     }
 
     /**
      * Set "Media processor id"
      *
-     * @param string    $value Media procesot id
+     * @param string $value Media procesot id
      *
      * @return none
      */
-    public function setMediaProcessorId($value) {
+    public function setMediaProcessorId($value)
+    {
         $this->_mediaProcessorId = $value;
     }
 
@@ -384,18 +406,20 @@ class TaskTemplate
      *
      * @return string
      */
-    public function getConfiguration() {
+    public function getConfiguration()
+    {
         return $this->_configuration;
     }
 
     /**
      * Set "Configuration"
      *
-     * @param string    $value Configuration
+     * @param string $value Configuration
      *
      * @return none
      */
-    public function setConfiguration($value) {
+    public function setConfiguration($value)
+    {
         $this->_configuration = $value;
     }
 
@@ -404,7 +428,8 @@ class TaskTemplate
      *
      * @return \DateTime
      */
-    public function getCreated() {
+    public function getCreated()
+    {
         return $this->_created;
     }
 
@@ -413,7 +438,8 @@ class TaskTemplate
      *
      * @return \DateTime
      */
-    public function getLastModified() {
+    public function getLastModified()
+    {
         return $this->_lastModified;
     }
 
@@ -422,18 +448,20 @@ class TaskTemplate
      *
      * @return string
      */
-    public function getDescription() {
+    public function getDescription()
+    {
         return $this->_description;
     }
 
     /**
      * Set "Description"
      *
-     * @param string    $value Description
+     * @param string $value Description
      *
      * @return none
      */
-    public function setDescription($value) {
+    public function setDescription($value)
+    {
         $this->_description = $value;
     }
 
@@ -442,18 +470,20 @@ class TaskTemplate
      *
      * @return int
      */
-    public function getNumberofOutputAssets() {
+    public function getNumberofOutputAssets()
+    {
         return $this->_numberofOutputAssets;
     }
 
     /**
      * Set "Number of output assets"
      *
-     * @param int    $value Number of output assets
+     * @param int $value Number of output assets
      *
      * @return none
      */
-    public function setNumberofOutputAssets($value) {
+    public function setNumberofOutputAssets($value)
+    {
         $this->_numberofOutputAssets = $value;
     }
 
@@ -462,18 +492,20 @@ class TaskTemplate
      *
      * @return int
      */
-    public function getNumberofInputAssets() {
+    public function getNumberofInputAssets()
+    {
         return $this->_numberofInputAssets;
     }
 
     /**
      * Set "Number of input assets"
      *
-     * @param int    $value Number of input assets
+     * @param int $value Number of input assets
      *
      * @return none
      */
-    public function setNumberofInputAssets($value) {
+    public function setNumberofInputAssets($value)
+    {
         $this->_numberofInputAssets = $value;
     }
 }

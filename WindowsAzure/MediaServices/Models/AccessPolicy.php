@@ -118,9 +118,12 @@ class AccessPolicy
     /**
      * Create access policy from array
      *
-     * @param array $options    Array containing values for object properties
+     * @param array $options Array containing values for object properties
+     *
+     * @return WindowsAzure\MediaServices\Models\AccessPolicy
      */
-    public static function createFromOptions($options) {
+    public static function createFromOptions($options)
+    {
         Validate::notNull($options['Name'], 'options[Name]');
 
         $accessPolicy = new AccessPolicy($options['Name']);
@@ -132,17 +135,22 @@ class AccessPolicy
     /**
      * Create access policy
      *
-     * @param string    $name   Entity name
+     * @param string $name Entity name
      */
-    public function __construct($name) {
+    public function __construct($name)
+    {
         $this->_name = $name;
     }
 
     /**
      * Fill access policy from array
-     * @param array $options    Array containing values for object properties
+     *
+     * @param array $options Array containing values for object properties
+     *
+     * @return none
      */
-    public function fromArray($options) {
+    public function fromArray($options)
+    {
         if (isset($options['Id'])) {
             Validate::isString($options['Id'], 'options[Id]');
             $this->_id = $options['Id'];
@@ -179,18 +187,20 @@ class AccessPolicy
      *
      * @return int
      */
-    public function getPermissions() {
-       return $this->_permissions;
+    public function getPermissions()
+    {
+        return $this->_permissions;
     }
 
     /**
      * Set "Permissions"
      *
-     * @param int    $value Permissions
+     * @param int $value Permissions
      *
      * @return none
      */
-    public function setPermissions($value) {
+    public function setPermissions($value)
+    {
         $this->_permissions = $value;
     }
 
@@ -199,18 +209,20 @@ class AccessPolicy
      *
      * @return double
      */
-    public function getDurationInMinutes() {
-       return $this->_durationInMinutes;
+    public function getDurationInMinutes()
+    {
+        return $this->_durationInMinutes;
     }
 
     /**
      * Set "Duration in minutes"
      *
-     * @param double    $value Duration in minutes
+     * @param double $value Duration in minutes
      *
      * @return none
      */
-    public function setDurationInMinutes($value) {
+    public function setDurationInMinutes($value)
+    {
         $this->_durationInMinutes = $value;
     }
 
@@ -219,18 +231,20 @@ class AccessPolicy
      *
      * @return string
      */
-    public function getName() {
-       return $this->_name;
+    public function getName()
+    {
+        return $this->_name;
     }
 
     /**
      * Set "Name"
      *
-     * @param string    $value Name
+     * @param string $value Name
      *
      * @return none
      */
-    public function setName($value) {
+    public function setName($value)
+    {
         $this->_name = $value;
     }
 
@@ -239,8 +253,9 @@ class AccessPolicy
      *
      * @return \DateTime
      */
-    public function getLastModified() {
-       return $this->_lastModified;
+    public function getLastModified()
+    {
+        return $this->_lastModified;
     }
 
     /**
@@ -248,8 +263,9 @@ class AccessPolicy
      *
      * @return \DateTime
      */
-    public function getCreated() {
-       return $this->_created;
+    public function getCreated()
+    {
+        return $this->_created;
     }
 
     /**
@@ -257,8 +273,9 @@ class AccessPolicy
      *
      * @return string
      */
-    public function getId() {
-       return $this->_id;
+    public function getId()
+    {
+        return $this->_id;
     }
 }
 

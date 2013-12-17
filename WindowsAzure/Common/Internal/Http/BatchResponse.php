@@ -27,6 +27,8 @@ require_once 'PEAR.php';
 require_once 'Mail/mimeDecode.php';
 require_once 'HTTP/Request2/Response.php';
 use WindowsAzure\Common\Internal\Resources;
+use WindowsAzure\Common\Internal\Validate;
+use WindowsAzure\Common\ServiceException;
 
 /**
  * Batch response parser
@@ -51,36 +53,64 @@ class BatchResponse
     /**
      * Constructor
      *
-     * @param string $content   Http response as string
+     * @param string                                         $content Http response as string
+     * @param WindowsAzure\Common\Internal\Http\BatchRequest $request Source batch request object
      */
-    public function __construct($content) {
+    public function __construct($content, $request = null)
+    {
         $params['include_bodies'] = true;
         $params['input']          = $content;
         $mimeDecoder              = new \Mail_mimeDecode($content);
         $structure                = $mimeDecoder->decode($params);
         $parts                    = $structure->parts;
         $this->_contexts          = array();
+        $requestContexts          = null;
 
+        if ($request != null) {
+            Validate::isA($request, 'WindowsAzure\Common\Internal\Http\BatchRequest', 'request');
+            $requestContexts = $request->getContexts();
+        }
+
+        $i = 0;
         foreach ($parts as $part) {
             if (!empty($part->body)) {
                 $headerEndPos = strpos($part->body, "\r\n\r\n");
 
-                $header = substr($part->body, 0, $headerEndPos);
-                $body = substr($part->body, $headerEndPos + 4);
-                $headerStrings  = explode("\r\n", $header);
+                $header        = substr($part->body, 0, $headerEndPos);
+                $body          = substr($part->body, $headerEndPos + 4);
+                $headerStrings = explode("\r\n", $header);
 
                 $response = new \HTTP_Request2_Response(array_shift($headerStrings));
-                foreach($headerStrings as $headerString) {
+                foreach ($headerStrings as $headerString) {
                     $response->parseHeaderLine($headerString);
                 }
                 $response->appendBody($body);
 
                 $this->_contexts[] = $response;
+
+                if (is_array($requestContexts)) {
+                    $expectedCodes = $requestContexts[$i]->getStatusCodes();
+                    $statusCode    = $response->getStatus();
+
+                    if (!in_array($statusCode, $expectedCodes)) {
+                        $reason = $response->getReasonPhrase();
+
+                        throw new ServiceException($statusCode, $reason, $body);
+                    }
+                }
+
+                $i++;
             }
         }
     }
 
-    public function getContexts() {
+    /**
+     * Get parsed contexts as array
+     *
+     * @return array
+     */
+    public function getContexts()
+    {
         return $this->_contexts;
     }
 

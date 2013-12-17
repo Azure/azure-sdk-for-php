@@ -84,9 +84,12 @@ class MediaProcessor
     /**
      * Create media processor from array
      *
-     * @param array $options    Array containing values for object properties
+     * @param array $options Array containing values for object properties
+     *
+     * @return WindowsAzure\MediaServices\Models\MediaProcessor
      */
-    public static function createFromOptions($options) {
+    public static function createFromOptions($options)
+    {
         $mediaProcessor = new MediaProcessor();
         $mediaProcessor->fromArray($options);
 
@@ -95,16 +98,20 @@ class MediaProcessor
 
     /**
      * Create media processor
-     *
      */
-    public function __construct() {
+    public function __construct()
+    {
     }
 
     /**
      * Fill media processor from array
-     * @param array $options    Array containing values for object properties
+     *
+     * @param array $options Array containing values for object properties
+     *
+     * @return none
      */
-    public function fromArray($options) {
+    public function fromArray($options)
+    {
         if (isset($options['Id'])) {
             Validate::isString($options['Id'], 'options[Id]');
             $this->_id = $options['Id'];
@@ -142,8 +149,9 @@ class MediaProcessor
      *
      * @return string
      */
-    public function getVersion() {
-       return $this->_version;
+    public function getVersion()
+    {
+        return $this->_version;
     }
 
     /**
@@ -151,8 +159,9 @@ class MediaProcessor
      *
      * @return string
      */
-    public function getVendor() {
-       return $this->_vendor;
+    public function getVendor()
+    {
+        return $this->_vendor;
     }
 
     /**
@@ -160,8 +169,9 @@ class MediaProcessor
      *
      * @return string
      */
-    public function getSku() {
-       return $this->_sku;
+    public function getSku()
+    {
+        return $this->_sku;
     }
 
     /**
@@ -169,8 +179,9 @@ class MediaProcessor
      *
      * @return string
      */
-    public function getDescription() {
-       return $this->_description;
+    public function getDescription()
+    {
+        return $this->_description;
     }
 
     /**
@@ -178,8 +189,9 @@ class MediaProcessor
      *
      * @return string
      */
-    public function getName() {
-       return $this->_name;
+    public function getName()
+    {
+        return $this->_name;
     }
 
     /**
@@ -187,8 +199,9 @@ class MediaProcessor
      *
      * @return string
      */
-    public function getId() {
-       return $this->_id;
+    public function getId()
+    {
+        return $this->_id;
     }
 }
 

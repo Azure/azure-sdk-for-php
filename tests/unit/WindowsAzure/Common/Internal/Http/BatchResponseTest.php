@@ -45,10 +45,9 @@ class BatchResponseTest extends \PHPUnit_Framework_TestCase
      * @covers WindowsAzure\Common\Internal\Http\BatchResponse::__construct
      * @covers WindowsAzure\Common\Internal\Http\BatchResponse::getContexts
     */
-    public function test__construct(){
-
+    public function test__construct()
+    {
         // Setup
-        $batchReq = new BatchRequest();
         $body = 'test response body';
         $encodedBody =
                 "--batch_956c339e-1ef0-4443-9276-68c12888a3f7\r\n" .
@@ -61,7 +60,7 @@ class BatchResponseTest extends \PHPUnit_Framework_TestCase
                 "HTTP/1.1 200 OK\r\n" .
                 "content-id: 1\r\n" .
                 "\r\n" .
-                "test response body" .
+                $body .
                 "--changeset_4a3f1712-c034-416e-9772-905d28c0b122--\r\n" .
                 "--batch_956c339e-1ef0-4443-9276-68c12888a3f7--";
 
@@ -73,4 +72,84 @@ class BatchResponseTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(1, count($result));
         $this->assertEquals($body, $result[0]->getBody());
     }
+
+    /**
+     * @covers WindowsAzure\Common\Internal\Http\BatchResponse::__construct
+     * @covers WindowsAzure\Common\Internal\Http\BatchResponse::getContexts
+     */
+    public function test__constructWithRequestSuccess()
+    {
+        // Setup
+        $statusCode = '200';
+        $body       = 'test response body';
+
+        $httpCallContext = new HttpCallContext();
+        $httpCallContext->addStatusCode($statusCode);
+
+        $batchReq = new BatchRequest();
+        $batchReq->appendContext($httpCallContext);
+
+        $encodedBody =
+        "--batch_956c339e-1ef0-4443-9276-68c12888a3f7\r\n" .
+        "Content-Type: multipart/mixed; boundary=changeset_4a3f1712-c034-416e-9772-905d28c0b122\r\n" .
+        "\r\n" .
+        "--changeset_4a3f1712-c034-416e-9772-905d28c0b122\r\n" .
+        "Content-Transfer-Encoding: binary\r\n" .
+        "Content-Type: application/http\r\n" .
+        "\r\n" .
+        "HTTP/1.1 {$statusCode} OK\r\n" .
+        "content-id: 1\r\n" .
+        "\r\n" .
+        $body .
+        "--changeset_4a3f1712-c034-416e-9772-905d28c0b122--\r\n" .
+        "--batch_956c339e-1ef0-4443-9276-68c12888a3f7--";
+
+        // Test
+        $batchResp = new BatchResponse($encodedBody, $batchReq);
+        $result = $batchResp->getContexts();
+
+        // Assert
+        $this->assertEquals(1, count($result));
+        $this->assertEquals($body, $result[0]->getBody());
+    }
+
+    /**
+     * @covers WindowsAzure\Common\Internal\Http\BatchResponse::__construct
+     * @covers WindowsAzure\Common\Internal\Http\BatchResponse::getContexts
+     */
+    public function test__constructWithRequestException()
+    {
+        // Setup
+        $statusCode   = '200';
+        $expectedCode = '201';
+        $body         = 'test response body';
+
+        $httpCallContext = new HttpCallContext();
+        $httpCallContext->addStatusCode($expectedCode);
+
+        $batchReq = new BatchRequest();
+        $batchReq->appendContext($httpCallContext);
+
+        $encodedBody =
+        "--batch_956c339e-1ef0-4443-9276-68c12888a3f7\r\n" .
+        "Content-Type: multipart/mixed; boundary=changeset_4a3f1712-c034-416e-9772-905d28c0b122\r\n" .
+        "\r\n" .
+        "--changeset_4a3f1712-c034-416e-9772-905d28c0b122\r\n" .
+        "Content-Transfer-Encoding: binary\r\n" .
+        "Content-Type: application/http\r\n" .
+        "\r\n" .
+        "HTTP/1.1 {$statusCode} OK\r\n" .
+        "content-id: 1\r\n" .
+        "\r\n" .
+        $body .
+        "--changeset_4a3f1712-c034-416e-9772-905d28c0b122--\r\n" .
+        "--batch_956c339e-1ef0-4443-9276-68c12888a3f7--";
+
+        $this->setExpectedException('WindowsAzure\Common\ServiceException');
+
+        // Test
+        $batchResp = new BatchResponse($encodedBody, $batchReq);
+        $result = $batchResp->getContexts();
+    }
+
 }

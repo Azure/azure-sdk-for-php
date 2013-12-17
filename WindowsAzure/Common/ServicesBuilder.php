@@ -404,7 +404,7 @@ class ServicesBuilder
     /**
      * Builds a media services object.
      *
-     * @param WindowsAzure\Common\Internal\MediaServicesSettings    $settings   The media services configuration settings.
+     * @param WindowsAzure\Common\Internal\MediaServicesSettings $settings The media services configuration settings.
      *
      * @return WindowsAzure\MediaServices\Internal\IMediaServices
      */
@@ -412,18 +412,18 @@ class ServicesBuilder
     {
         Validate::isA($settings, 'WindowsAzure\Common\Internal\MediaServicesSettings', 'settings');
 
-        $httpClient      = new HttpClient();
-        $serializer      = $this->serializer();
-        $uri             = Utilities::tryAddUrlScheme(
-                $settings->getEndpointUri(),
-                Resources::HTTPS_SCHEME
+        $httpClient = new HttpClient();
+        $serializer = $this->serializer();
+        $uri        = Utilities::tryAddUrlScheme(
+            $settings->getEndpointUri(),
+            Resources::HTTPS_SCHEME
         );
 
         $mediaServicesWrapper = new MediaServicesRestProxy(
-                $httpClient,
-                $uri,
-                $settings->getAccountName(),
-                $serializer
+            $httpClient,
+            $uri,
+            $settings->getAccountName(),
+            $serializer
         );
 
         // Adding headers filter
@@ -435,11 +435,11 @@ class ServicesBuilder
             Resources::CONTENT_TYPE             => Resources::ATOM_ENTRY_CONTENT_TYPE,
         );
 
-        $headersFilter = new HeadersFilter($headers);
+        $headersFilter        = new HeadersFilter($headers);
         $mediaServicesWrapper = $mediaServicesWrapper->withFilter($headersFilter);
 
         // Adding OAuth filter
-        $oauthService = new OAuthRestProxy(new HttpClient(), $settings->getOAuthEndpointUri());
+        $oauthService     = new OAuthRestProxy(new HttpClient(), $settings->getOAuthEndpointUri());
         $authentification = new OAuthScheme(
             $settings->getAccountName(),
             $settings->getAccessKey(),
@@ -448,7 +448,7 @@ class ServicesBuilder
             $oauthService
         );
         $authentificationFilter = new AuthenticationFilter($authentification);
-        $mediaServicesWrapper = $mediaServicesWrapper->withFilter($authentificationFilter);
+        $mediaServicesWrapper   = $mediaServicesWrapper->withFilter($authentificationFilter);
 
         return $mediaServicesWrapper;
     }

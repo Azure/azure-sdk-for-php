@@ -57,26 +57,53 @@ class ContentProperties
     }
 
     /**
-     * Parse an Entry Properties xml.
+     * Parse an ATOM Properties xml.
      *
-     * @param \SimpleXMLElement $xml An XML object of entry properties.
+     * @param string $xmlContent An XML based string of ATOM Link.
      *
      * @return none
      */
-    public function fromXml($xml)
+    public function fromXml($xmlContent)
     {
-        Validate::isA($xml, '\SimpleXMLElement', 'xml');
+        Validate::notNull($xmlContent, 'xmlContent');
 
-        $wrapperXml = $xml->children(Resources::DSM_XML_NAMESPACE);
+        $this->properties = $this->_fromXmlToArray($xmlContent);
 
+    }
+
+    /**
+     * Parse properties recursively
+     *
+     * @param \SimpleXML $xml XML object to parse
+     *
+     * @return array
+     */
+    private function _fromXmlToArray($xml) {
+        $result = array();
         foreach ($xml->children(Resources::DS_XML_NAMESPACE) as $child) {
-            $this->properties[$child->getName()] = (string)$child;
+            if (count($child->children(Resources::DS_XML_NAMESPACE)) > 0) {
+                $value = array();
+                foreach ($child->children(Resources::DS_XML_NAMESPACE) as $subChild) {
+                    if ($subChild->getName() == 'element') {
+                        $value[] = $this->_fromXmlToArray($subChild);
+                    }
+                }
+            } else {
+                $value = (string)$child;
+            }
+
+            $result[$child->getName()] = $value;
         }
+
+        return $result;
     }
 
     /**
      * Set properties from object.
      *
+     * @param object $object Object to serialize
+     *
+     * @return none
      */
     public function setPropertiesFromObject($object)
     {
@@ -85,6 +112,7 @@ class ContentProperties
         $reflectionClass = new \ReflectionClass($object);
         $methodArray     = $reflectionClass->getMethods();
 
+        $this->properties = array();
         foreach ($methodArray as $method) {
             if ((strpos($method->name, 'get') === 0)
             && $method->isPublic()
@@ -141,13 +169,15 @@ class ContentProperties
     {
         Validate::notNull($xmlWriter, 'xmlWriter');
 
-        foreach($this->properties as $key => $value) {
-            $xmlWriter->writeElementNS(
-                'data',
-                $key,
-                Resources::DS_XML_NAMESPACE,
-                $value
-            );
+        if (is_array($this->properties)) {
+            foreach ($this->properties as $key => $value) {
+                $xmlWriter->writeElementNS(
+                    'data',
+                    $key,
+                    Resources::DS_XML_NAMESPACE,
+                    $value
+                );
+            }
         }
     }
 }

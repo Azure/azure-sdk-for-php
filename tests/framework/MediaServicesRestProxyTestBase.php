@@ -194,12 +194,7 @@ class MediaServicesRestProxyTestBase extends ServiceRestProxyTestBase
         }
 
         foreach($this->job as $job) {
-            $status = $this->restProxy->getJobStatus($job);
-            while ($status != Job::STATE_FINISHED && $status != Job::STATE_ERROR && $status != Job::STATE_CANCELED) {
-                sleep(1);
-                $status = $this->restProxy->getJobStatus($job);
-            }
-            $this->restProxy->deleteJob($job);
+            $this->deleteJob($job);
         }
 
         $assets = $this->restProxy->getAssetList();
@@ -212,5 +207,15 @@ class MediaServicesRestProxyTestBase extends ServiceRestProxyTestBase
 
     protected function createSuffix() {
         return sprintf('-%04x', mt_rand(0, 65535));
+    }
+
+    public function deleteJob($job){
+        $status = $this->restProxy->getJobStatus($job);
+        while ($status != Job::STATE_FINISHED && $status != Job::STATE_ERROR && $status != Job::STATE_CANCELED) {
+            sleep(1);
+            $status = $this->restProxy->getJobStatus($job);
+        }
+        $this->restProxy->deleteJob($job->getId());
+        unset($this->job[$job->getId()]);
     }
 }

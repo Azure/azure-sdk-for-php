@@ -25,9 +25,8 @@
 namespace WindowsAzure\MediaServices\Models;
 use WindowsAzure\Common\Internal\Validate;
 
-
 /**
- * Represents task historical event object used in media services
+ * Represents storage account object used in media services
  *
  * @category  Microsoft
  * @package   WindowsAzure\MediaServices\Models
@@ -37,53 +36,47 @@ use WindowsAzure\Common\Internal\Validate;
  * @version   Release: 0.3.1_2011-08
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
-class TaskHistoricalEvent
+class StorageAccount
 {
     /**
-     * Code
-     *
-     * @var int
-     */
-    private $_code;
-
-    /**
-     * Message
+     * Name
      *
      * @var string
      */
-    private $_message;
+    private $_name;
 
     /**
-     * Time stamp
+     * Is default
      *
-     * @var \DateTime
+     * @var boolean
      */
-    private $_timeStamp;
+    private $_isDefault;
 
     /**
-     * Create task historical event from array
+     * Create storage account from array
      *
      * @param array $options Array containing values for object properties
      *
-     * @return WindowsAzure\MediaServices\Models\TaskHistoricalEvent
+     * @return WindowsAzure\MediaServices\Models\StorageAccount
      */
     public static function createFromOptions($options)
     {
-        $taskHistoricalEvent = new TaskHistoricalEvent();
-        $taskHistoricalEvent->fromArray($options);
+        $storageAccount = new StorageAccount();
+        $storageAccount->fromArray($options);
 
-        return $taskHistoricalEvent;
+        return $storageAccount;
     }
 
     /**
-     * Create task historical event
+     * Create storage account
+     *
      */
     public function __construct()
     {
     }
 
     /**
-     * Fill task historical event from array
+     * Fill storage account from array
      *
      * @param array $options Array containing values for object properties
      *
@@ -91,50 +84,35 @@ class TaskHistoricalEvent
      */
     public function fromArray($options)
     {
-        if (isset($options['Code'])) {
-            Validate::isInteger($options['Code'], 'options[Code]');
-            $this->_code = $options['Code'];
+        if (isset($options['Name'])) {
+            Validate::isString($options['Name'], 'options[Name]');
+            $this->_name = $options['Name'];
         }
 
-        if (isset($options['Message'])) {
-            Validate::isString($options['Message'], 'options[Message]');
-            $this->_message = $options['Message'];
-        }
-
-        if (isset($options['TimeStamp'])) {
-            Validate::isDateString($options['TimeStamp'], 'options[TimeStamp]');
-            $this->_timeStamp = new \DateTime($options['TimeStamp']);
+        if (isset($options['IsDefault'])) {
+            Validate::isBoolean($options['IsDefault'], 'options[IsDefault]');
+            $this->_isDefault = $options['IsDefault'];
         }
     }
 
     /**
-     * Get "Time stamp"
-     *
-     * @return \DateTime
-     */
-    public function getTimeStamp()
-    {
-        return $this->_timeStamp;
-    }
-
-    /**
-     * Get "Message"
+     * Get "Name"
      *
      * @return string
      */
-    public function getMessage()
+    public function getName()
     {
-        return $this->_message;
+        return $this->_name;
     }
 
     /**
-     * Get "Code"
+     * Get "Is default"
      *
-     * @return int
+     * @return boolean
      */
-    public function getCode()
+    public function getIsDefault()
     {
-        return $this->_code;
+        return $this->_isDefault;
     }
 }
 
