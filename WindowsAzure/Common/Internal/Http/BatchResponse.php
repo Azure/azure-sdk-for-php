@@ -51,9 +51,10 @@ class BatchResponse
     /**
      * Constructor
      *
-     * @param string $content   Http response as string
+     * @param string $content Http response as string
      */
-    public function __construct($content) {
+    public function __construct($content)
+    {
         $params['include_bodies'] = true;
         $params['input']          = $content;
         $mimeDecoder              = new \Mail_mimeDecode($content);
@@ -65,12 +66,12 @@ class BatchResponse
             if (!empty($part->body)) {
                 $headerEndPos = strpos($part->body, "\r\n\r\n");
 
-                $header = substr($part->body, 0, $headerEndPos);
-                $body = substr($part->body, $headerEndPos + 4);
-                $headerStrings  = explode("\r\n", $header);
+                $header        = substr($part->body, 0, $headerEndPos);
+                $body          = substr($part->body, $headerEndPos + 4);
+                $headerStrings = explode("\r\n", $header);
 
                 $response = new \HTTP_Request2_Response(array_shift($headerStrings));
-                foreach($headerStrings as $headerString) {
+                foreach ($headerStrings as $headerString) {
                     $response->parseHeaderLine($headerString);
                 }
                 $response->appendBody($body);
@@ -80,7 +81,13 @@ class BatchResponse
         }
     }
 
-    public function getContexts() {
+    /**
+     * Get parsed contexts as array
+     *
+     * @return array
+     */
+    public function getContexts()
+    {
         return $this->_contexts;
     }
 

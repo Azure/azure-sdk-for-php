@@ -59,7 +59,7 @@ class ContentProperties
     /**
      * Parse an ATOM Properties xml.
      *
-     * @param string $xmlString an XML based string of ATOM Link.
+     * @param string $xmlContent An XML based string of ATOM Link.
      *
      * @return none
      */
@@ -74,7 +74,7 @@ class ContentProperties
     /**
      * Parse properties recursively
      *
-     * @param \SimpleXML $xml   XML object to parse
+     * @param \SimpleXML $xml XML object to parse
      *
      * @return array
      */
@@ -83,13 +83,12 @@ class ContentProperties
         foreach ($xml->children(Resources::DS_XML_NAMESPACE) as $child) {
             if (count($child->children(Resources::DS_XML_NAMESPACE)) > 0) {
                 $value = array();
-                foreach($child->children(Resources::DS_XML_NAMESPACE) as $subChild) {
+                foreach ($child->children(Resources::DS_XML_NAMESPACE) as $subChild) {
                     if ($subChild->getName() == 'element') {
                         $value[] = $this->_fromXmlToArray($subChild);
                     }
                 }
-            }
-            else {
+            } else {
                 $value = (string)$child;
             }
 
@@ -102,6 +101,9 @@ class ContentProperties
     /**
      * Set properties from object.
      *
+     * @param object $object Object to serialize
+     *
+     * @return none
      */
     public function setPropertiesFromObject($object)
     {
@@ -168,7 +170,7 @@ class ContentProperties
         Validate::notNull($xmlWriter, 'xmlWriter');
 
         if (is_array($this->properties)) {
-            foreach($this->properties as $key => $value) {
+            foreach ($this->properties as $key => $value) {
                 $xmlWriter->writeElementNS(
                     'data',
                     $key,

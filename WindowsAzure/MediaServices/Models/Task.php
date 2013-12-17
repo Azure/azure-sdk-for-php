@@ -205,9 +205,12 @@ class Task
     /**
      * Create task from array
      *
-     * @param array $options    Array containing values for object properties
+     * @param array $options Array containing values for object properties
+     *
+     * @return WindowsAzure\MediaServices\Models\Task
      */
-    public static function createFromOptions($options) {
+    public static function createFromOptions($options)
+    {
         Validate::notNull($options['TaskBody'], 'options[TaskBody]');
         Validate::notNull($options['Options'], 'options[Options]');
         Validate::notNull($options['MediaProcessorId'], 'options[MediaProcessorId]');
@@ -221,21 +224,26 @@ class Task
     /**
      * Create task
      *
-     * @param string    $taskBody           Task body.
-     * @param string    $mediaProcessorId   Media processor identifier.
-     * @param int       $options            Task encryption options.
+     * @param string $taskBody         Task body.
+     * @param string $mediaProcessorId Media processor identifier.
+     * @param int    $options          Task encryption options.
      */
-    public function __construct($taskBody, $mediaProcessorId, $options) {
-        $this->_taskBody            = $taskBody;
-        $this->_options             = $options;
-        $this->_mediaProcessorId    = $mediaProcessorId;
+    public function __construct($taskBody, $mediaProcessorId, $options)
+    {
+        $this->_taskBody         = $taskBody;
+        $this->_options          = $options;
+        $this->_mediaProcessorId = $mediaProcessorId;
     }
 
     /**
      * Fill task from array
-     * @param array $options    Array containing values for object properties
+     *
+     * @param array $options Array containing values for object properties
+     *
+     * @return none
      */
-    public function fromArray($options) {
+    public function fromArray($options)
+    {
         if (isset($options['Id'])) {
             Validate::isString($options['Id'], 'options[Id]');
             $this->_id = $options['Id'];
@@ -324,7 +332,7 @@ class Task
         if (isset($options['ErrorDetails'])) {
             $this->_errorDetails = array();
             if (is_array($options['ErrorDetails'])) {
-                foreach($options['ErrorDetails'] as $errorDetail) {
+                foreach ($options['ErrorDetails'] as $errorDetail) {
                     $this->_errorDetails[] = ErrorDetail::createFromOptions($errorDetail);
                 }
             }
@@ -333,7 +341,7 @@ class Task
         if (isset($options['HistoricalEvents'])) {
             $this->_historicalEvents = array();
             if (is_array($options['HistoricalEvents'])) {
-                foreach($options['HistoricalEvents'] as $historicalEvent) {
+                foreach ($options['HistoricalEvents'] as $historicalEvent) {
                     $this->_historicalEvents[] = TaskHistoricalEvent::createFromOptions($historicalEvent);
                 }
             }
@@ -346,18 +354,20 @@ class Task
      *
      * @return string
      */
-    public function getName() {
-       return $this->_name;
+    public function getName()
+    {
+        return $this->_name;
     }
 
     /**
      * Set "Name"
      *
-     * @param string    $value Name
+     * @param string $value Name
      *
      * @return none
      */
-    public function setName($value) {
+    public function setName($value)
+    {
         $this->_name = $value;
     }
 
@@ -366,8 +376,9 @@ class Task
      *
      * @return int
      */
-    public function getState() {
-       return $this->_state;
+    public function getState()
+    {
+        return $this->_state;
     }
 
     /**
@@ -375,8 +386,9 @@ class Task
      *
      * @return string
      */
-    public function getId() {
-       return $this->_id;
+    public function getId()
+    {
+        return $this->_id;
     }
 
     /**
@@ -384,7 +396,8 @@ class Task
      *
      * @return \DateTime
      */
-    public function getStartTime() {
+    public function getStartTime()
+    {
         return $this->_startTime;
     }
 
@@ -393,7 +406,8 @@ class Task
      *
      * @return double
      */
-    public function getRunningDuration() {
+    public function getRunningDuration()
+    {
         return $this->_runningDuration;
     }
 
@@ -402,18 +416,20 @@ class Task
      *
      * @return int
      */
-    public function getPriority() {
+    public function getPriority()
+    {
         return $this->_priority;
     }
 
     /**
      * Set "Priority"
      *
-     * @param int    $value Priority
+     * @param int $value Priority
      *
      * @return none
      */
-    public function setPriority($value) {
+    public function setPriority($value)
+    {
         $this->_priority = $value;
     }
 
@@ -422,7 +438,8 @@ class Task
      *
      * @return \DateTime
      */
-    public function getEndTime() {
+    public function getEndTime()
+    {
         return $this->_endTime;
     }
 
@@ -431,18 +448,20 @@ class Task
      *
      * @return string
      */
-    public function getInitializationVector() {
+    public function getInitializationVector()
+    {
         return $this->_initializationVector;
     }
 
     /**
      * Set "Initialization vector"
      *
-     * @param string    $value Initialization vector
+     * @param string $value Initialization vector
      *
      * @return none
      */
-    public function setInitializationVector($value) {
+    public function setInitializationVector($value)
+    {
         $this->_initializationVector = $value;
     }
 
@@ -451,18 +470,20 @@ class Task
      *
      * @return string
      */
-    public function getEncryptionVersion() {
+    public function getEncryptionVersion()
+    {
         return $this->_encryptionVersion;
     }
 
     /**
      * Set "Encryption version"
      *
-     * @param string    $value Encryption version
+     * @param string $value Encryption version
      *
      * @return none
      */
-    public function setEncryptionVersion($value) {
+    public function setEncryptionVersion($value)
+    {
         $this->_encryptionVersion = $value;
     }
 
@@ -471,18 +492,20 @@ class Task
      *
      * @return string
      */
-    public function getEncryptionScheme() {
+    public function getEncryptionScheme()
+    {
         return $this->_encryptionScheme;
     }
 
     /**
      * Set "Encryption scheme"
      *
-     * @param string    $value Encryption scheme
+     * @param string $value Encryption scheme
      *
      * @return none
      */
-    public function setEncryptionScheme($value) {
+    public function setEncryptionScheme($value)
+    {
         $this->_encryptionScheme = $value;
     }
 
@@ -491,18 +514,20 @@ class Task
      *
      * @return string
      */
-    public function getEncryptionKeyId() {
+    public function getEncryptionKeyId()
+    {
         return $this->_encryptionKeyId;
     }
 
     /**
      * Set "Encription key id"
      *
-     * @param string    $value Encription key id
+     * @param string $value Encription key id
      *
      * @return none
      */
-    public function setEncryptionKeyId($value) {
+    public function setEncryptionKeyId($value)
+    {
         $this->_encryptionKeyId = $value;
     }
 
@@ -511,7 +536,8 @@ class Task
      *
      * @return int
      */
-    public function getOptions() {
+    public function getOptions()
+    {
         return $this->_options;
     }
 
@@ -520,18 +546,20 @@ class Task
      *
      * @return string
      */
-    public function getTaskBody() {
+    public function getTaskBody()
+    {
         return $this->_taskBody;
     }
 
     /**
      * Set "Task body"
      *
-     * @param string    $value Task body
+     * @param string $value Task body
      *
      * @return none
      */
-    public function setTaskBody($value) {
+    public function setTaskBody($value)
+    {
         $this->_taskBody = $value;
     }
 
@@ -540,7 +568,8 @@ class Task
      *
      * @return double
      */
-    public function getProgress() {
+    public function getProgress()
+    {
         return $this->_progress;
     }
 
@@ -549,7 +578,8 @@ class Task
      *
      * @return string
      */
-    public function getPerfMessage() {
+    public function getPerfMessage()
+    {
         return $this->_perfMessage;
     }
 
@@ -558,18 +588,20 @@ class Task
      *
      * @return string
      */
-    public function getMediaProcessorId() {
+    public function getMediaProcessorId()
+    {
         return $this->_mediaProcessorId;
     }
 
     /**
      * Set "Media procesot id"
      *
-     * @param string    $value Media procesot id
+     * @param string $value Media procesot id
      *
      * @return none
      */
-    public function setMediaProcessorId($value) {
+    public function setMediaProcessorId($value)
+    {
         $this->_mediaProcessorId = $value;
     }
 
@@ -578,18 +610,20 @@ class Task
      *
      * @return string
      */
-    public function getConfiguration() {
+    public function getConfiguration()
+    {
         return $this->_configuration;
     }
 
     /**
      * Set "Configuration"
      *
-     * @param string    $value Configuration
+     * @param string $value Configuration
      *
      * @return none
      */
-    public function setConfiguration($value) {
+    public function setConfiguration($value)
+    {
         $this->_configuration = $value;
     }
 
@@ -598,7 +632,8 @@ class Task
      *
      * @return array
      */
-    public function getErrorDetails() {
+    public function getErrorDetails()
+    {
         return $this->_errorDetails;
     }
 
@@ -607,7 +642,8 @@ class Task
      *
      * @return array
      */
-    public function getHistoricalEvents() {
+    public function getHistoricalEvents()
+    {
         return $this->_historicalEvents;
     }
 }

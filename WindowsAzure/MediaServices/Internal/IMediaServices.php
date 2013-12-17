@@ -42,16 +42,18 @@ interface IMediaServices extends FilterableService
     /**
      * Create new asset
      *
-     * @param WindowsAzure\MediaServices\Models\Asset   $asset  Asset data
+     * @param WindowsAzure\MediaServices\Models\Asset $asset Asset data
      *
-     * @return WindowsAzure\MediaServices\Models\Asset  Created asset
+     * @return WindowsAzure\MediaServices\Models\Asset Created asset
      */
     public function createAsset($asset);
 
     /**
      * Get asset
      *
-     * @param WindowsAzure\MediaServices\Models\Asset|string   $asset  Asset data or asset Id
+     * @param WindowsAzure\MediaServices\Models\Asset|string $asset Asset data or asset Id
+     *
+     * @return WindowsAzure\MediaServices\Models\Asset
      */
     public function getAsset($asset);
 
@@ -65,7 +67,7 @@ interface IMediaServices extends FilterableService
     /**
      * Get asset locators
      *
-     * @param WindowsAzure\MediaServices\Models\Asset|string   $asset  Asset data or asset Id
+     * @param WindowsAzure\MediaServices\Models\Asset|string $asset Asset data or asset Id
      *
      * @return array
      */
@@ -74,7 +76,7 @@ interface IMediaServices extends FilterableService
     /**
      * Get parent assets of asset
      *
-     * @param WindowsAzure\MediaServices\Models\Asset|string   $asset  Asset data or asset Id
+     * @param WindowsAzure\MediaServices\Models\Asset|string $asset Asset data or asset Id
      *
      * @return array
      */
@@ -83,14 +85,16 @@ interface IMediaServices extends FilterableService
     /**
      * Get assetFiles of asset
      *
-     * @param WindowsAzure\MediaServices\Models\Asset|string   $asset  Asset data or asset Id
+     * @param WindowsAzure\MediaServices\Models\Asset|string $asset Asset data or asset Id
+     *
+     * @return array
      */
     public function getAssetAssetFileList($asset);
 
     /**
      * Get storage account of asset
      *
-     * @param WindowsAzure\MediaServices\Models\Asset|string   $asset  Asset data or asset Id
+     * @param WindowsAzure\MediaServices\Models\Asset|string $asset Asset data or asset Id
      *
      * @return WindowsAzure\MediaServices\Models\StorageAccount
      */
@@ -99,30 +103,34 @@ interface IMediaServices extends FilterableService
     /**
      * Update asset
      *
-     * @param WindowsAzure\MediaServices\Models\Asset   $asset  New asset data with valid id
+     * @param WindowsAzure\MediaServices\Models\Asset $asset New asset data with valid id
+     *
+     * @return none
      */
     public function updateAsset($asset);
 
     /**
      * Delete asset
      *
-     * @param WindowsAzure\MediaServices\Models\Asset|string   $asset  Asset data or asset Id
+     * @param WindowsAzure\MediaServices\Models\Asset|string $asset Asset data or asset Id
+     *
+     * @return none
      */
     public function deleteAsset($asset);
 
     /**
      * Create new access policy
      *
-     * @param WindowsAzure\MediaServices\Models\AccessPolicy   $accessPolicy  Access policy data
+     * @param WindowsAzure\MediaServices\Models\AccessPolicy $accessPolicy Access policy data
      *
-     * @return WindowsAzure\MediaServices\Models\AccessPolicy  Created access policy
+     * @return WindowsAzure\MediaServices\Models\AccessPolicy
      */
     public function createAccessPolicy($accessPolicy);
 
     /**
      * Get AccessPolicy.
      *
-     * @param WindowsAzure\MediaServices\Models\AccessPolicy|string   $accessPolicy   AccessPolicy data or AccessPolicy Id
+     * @param WindowsAzure\MediaServices\Models\AccessPolicy|string $accessPolicy AccessPolicy data or AccessPolicy Id
      *
      * @return WindowsAzure\MediaServices\Models\AccessPolicy
      */
@@ -138,23 +146,25 @@ interface IMediaServices extends FilterableService
     /**
      * Delete access policy
      *
-     * @param WindowsAzure\MediaServices\Models\AccessPolicy|string   $accessPolicy  Access policy data or access policy Id
+     * @param WindowsAzure\MediaServices\Models\AccessPolicy|string $accessPolicy Access policy data or access policy Id
+     *
+     * @return none
      */
     public function deleteAccessPolicy($accessPolicy);
 
     /**
      * Create new locator
      *
-     * @param WindowsAzure\MediaServices\Models\Locator   $locator  Locator data
+     * @param WindowsAzure\MediaServices\Models\Locator $locator Locator data
      *
-     * @return WindowsAzure\MediaServices\Models\Locator  Created locator
+     * @return WindowsAzure\MediaServices\Models\Locator
      */
     public function createLocator($locator);
 
     /**
      * Get Locator.
      *
-     * @param WindowsAzure\MediaServices\Models\Locator|string   $locator   Locator data or locator Id
+     * @param WindowsAzure\MediaServices\Models\Locator|string $locator Locator data or locator Id
      *
      * @return WindowsAzure\MediaServices\Models\Locator
      */
@@ -163,7 +173,7 @@ interface IMediaServices extends FilterableService
     /**
      * Get Locator access policy.
      *
-     * @param WindowsAzure\MediaServices\Models\Locator|string   $locator   Locator data or locator Id
+     * @param WindowsAzure\MediaServices\Models\Locator|string $locator Locator data or locator Id
      *
      * @return WindowsAzure\MediaServices\Models\Locator
      */
@@ -172,7 +182,7 @@ interface IMediaServices extends FilterableService
     /**
      * Get Locator asset.
      *
-     * @param WindowsAzure\MediaServices\Models\Locator|string   $locator   Locator data or locator Id
+     * @param WindowsAzure\MediaServices\Models\Locator|string $locator Locator data or locator Id
      *
      * @return WindowsAzure\MediaServices\Models\Locator
      */
@@ -188,28 +198,34 @@ interface IMediaServices extends FilterableService
     /**
      * Update locator
      *
-     * @param WindowsAzure\MediaServices\Models\Locator $locator    New locator data with valid id
+     * @param WindowsAzure\MediaServices\Models\Locator $locator New locator data with valid id
+     *
+     * @return none
      */
     public function updateLocator($locator);
 
     /**
      * Delete locator
      *
-     * @param WindowsAzure\MediaServices\Models\Locator|string   $asset  Asset data or asset Id
+     * @param WindowsAzure\MediaServices\Models\Locator|string $locator Asset data or asset Id
+     *
+     * @return none
      */
     public function deleteLocator($locator);
 
     /**
      * Generate file info for all files in asset
      *
-     * @param WindowsAzure\MediaServices\Models\Asset|string   $asset  Asset data or asset Id
+     * @param WindowsAzure\MediaServices\Models\Asset|string $asset Asset data or asset Id
+     *
+     * @return none
      */
     public function createFileInfos($asset);
 
     /**
      * Get asset file.
      *
-     * @param WindowsAzure\MediaServices\Models\AssetFile|string    $assetFile  AssetFile data or assetFile Id
+     * @param WindowsAzure\MediaServices\Models\AssetFile|string $assetFile AssetFile data or assetFile Id
      *
      * @return WindowsAzure\MediaServices\Models\AssetFile
      */
@@ -226,27 +242,29 @@ interface IMediaServices extends FilterableService
     /**
      * Update asset file
      *
-     * @param WindowsAzure\MediaServices\Models\AssetFile    $assetFile  New AssetFile data
+     * @param WindowsAzure\MediaServices\Models\AssetFile $assetFile New AssetFile data
+     *
+     * @return none
      */
     public function updateAssetFile($assetFile);
 
     /**
      * Upload asset file to storage.
      *
-     * @param WindowsAzure\MediaServices\Models\Locator $locator    Write locator for file upload
-     * @param string                                    $name       Uploading file filename
-     * @param string                                    $body       Uploading file content
+     * @param WindowsAzure\MediaServices\Models\Locator $locator Write locator for file upload
+     * @param string                                    $name    Uploading file filename
+     * @param string                                    $body    Uploading file content
      *
-     * @return null
+     * @return none
      */
     public function uploadAssetFile($locator, $name, $body);
 
     /**
      * Create a job.
      *
-     * @param WindowsAzure\MediaServices\Models\Job $job            Job data
-     * @param array                                 $inputAssets    Input assets list
-     * @param array                                 $tasks          Performed tasks array (optional)
+     * @param WindowsAzure\MediaServices\Models\Job $job         Job data
+     * @param array                                 $inputAssets Input assets list
+     * @param array                                 $tasks       Performed tasks array (optional)
      *
      * @return array
      */
@@ -255,7 +273,7 @@ interface IMediaServices extends FilterableService
     /**
      * Get Job.
      *
-     * @param WindowsAzure\MediaServices\Models\Job|string   $job   Job data or job Id
+     * @param WindowsAzure\MediaServices\Models\Job|string $job Job data or job Id
      *
      * @return WindowsAzure\MediaServices\Models\Job
      */
@@ -271,14 +289,16 @@ interface IMediaServices extends FilterableService
     /**
      * Get status of a job
      *
-     * @param WindowsAzure\MediaServices\Models\Job|string   $job  Job data or job Id
+     * @param WindowsAzure\MediaServices\Models\Job|string $job Job data or job Id
+     *
+     * @return string
      */
     public function getJobStatus($job);
 
     /**
      * Get job tasks.
      *
-     * @param WindowsAzure\MediaServices\Models\Job|string   $job   Job data or job Id
+     * @param WindowsAzure\MediaServices\Models\Job|string $job Job data or job Id
      *
      * @return array
      */
@@ -288,7 +308,7 @@ interface IMediaServices extends FilterableService
     /**
      * Get job input assets.
      *
-     * @param WindowsAzure\MediaServices\Models\Job|string   $job   Job data or job Id
+     * @param WindowsAzure\MediaServices\Models\Job|string $job Job data or job Id
      *
      * @return array
      */
@@ -297,7 +317,7 @@ interface IMediaServices extends FilterableService
     /**
      * Get job output assets.
      *
-     * @param WindowsAzure\MediaServices\Models\Job|string   $job   Job data or job Id
+     * @param WindowsAzure\MediaServices\Models\Job|string $job Job data or job Id
      *
      * @return array
      */
@@ -306,14 +326,18 @@ interface IMediaServices extends FilterableService
     /**
      * Cancel a job
      *
-     * @param WindowsAzure\MediaServices\Models\Job|string   $job  Job data or job Id
+     * @param WindowsAzure\MediaServices\Models\Job|string $job Job data or job Id
+     *
+     * @return none
      */
     public function cancelJob($job);
 
     /**
      * Delete job
      *
-     * @param WindowsAzure\MediaServices\Models\Job|string   $job  Job data or job Id
+     * @param WindowsAzure\MediaServices\Models\Job|string $job Job data or job Id
+     *
+     * @return none
      */
     public function deleteJob($job);
 
@@ -327,8 +351,8 @@ interface IMediaServices extends FilterableService
     /**
      * Create a job.
      *
-     * @param WindowsAzure\MediaServices\Models\JobTemplate $jobTemplate    Job template data
-     * @param array                                         $taskTemplates  Performed tasks template array
+     * @param WindowsAzure\MediaServices\Models\JobTemplate $jobTemplate   Job template data
+     * @param array                                         $taskTemplates Performed tasks template array
      *
      * @return array
      */
@@ -337,7 +361,7 @@ interface IMediaServices extends FilterableService
     /**
      * Get job template.
      *
-     * @param WindowsAzure\MediaServices\Models\JobTemplate|string   $jobTemplate   JobTemplate data or jobTemplate Id
+     * @param WindowsAzure\MediaServices\Models\JobTemplate|string $jobTemplate JobTemplate data or jobTemplate Id
      *
      * @return WindowsAzure\MediaServices\Models\JobTemplate
      */
@@ -353,16 +377,19 @@ interface IMediaServices extends FilterableService
     /**
      * Get task templates for job template.
      *
-     * @param WindowsAzure\MediaServices\Models\JobTemplate|string   $jobTemplate   JobTemplate data or jobTemplate Id
+     * @param WindowsAzure\MediaServices\Models\JobTemplate|string $jobTemplate JobTemplate data or jobTemplate Id
      *
      * @return array
      */
     public function getJobTemplateTaskTemplateList($jobTemplate);
 
+
     /**
      * Delete job template
      *
-     * @param WindowsAzure\MediaServices\Models\JobTemplate|string   $jobTemplate  Job template data or job template Id
+     * @param WindowsAzure\MediaServices\Models\JobTemplate|string $jobTemplate Job template data or job template Id
+     *
+     * @return none
      */
     public function deleteJobTemplate($jobTemplate);
 
@@ -383,11 +410,10 @@ interface IMediaServices extends FilterableService
     /**
      * Get media processor by name with latest version
      *
-     * @param string    $name   Media processor name
+     * @param string $name Media processor name
      *
      * @return WindowsAzure\MediaServices\Models\JobTemplate\MediaProcessor
      */
     public function getLatestMediaProcessor($name);
 }
-
 
