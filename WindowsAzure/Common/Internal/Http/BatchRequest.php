@@ -147,5 +147,15 @@ class BatchRequest
     {
         return $this->_headers;
     }
+
+    /**
+     * Get request contexts
+     *
+     * @return array
+     */
+    public function getContexts()
+    {
+        return $this->_contexts;
+    }
 }
 

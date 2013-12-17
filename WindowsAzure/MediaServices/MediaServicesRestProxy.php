@@ -823,6 +823,7 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
         $result->setUri($this->getUri());
         $result->setPath('/Jobs');
         $result->setBody($this->wrapAtomEntry($job, $atomLinks));
+        $result->addStatusCode(Resources::STATUS_CREATED);
 
         return $result;
     }
@@ -852,6 +853,7 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
         $result->setUri($this->getUri());
         $result->setPath('/$1/Tasks');
         $result->setBody($this->wrapAtomEntry($task));
+        $result->addStatusCode(Resources::STATUS_CREATED);
 
         return $result;
     }
@@ -899,7 +901,7 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
             $body
         );
 
-        $batchResponse = new BatchResponse($response->getBody());
+        $batchResponse = new BatchResponse($response->getBody(), $batch);
         $responses     = $batchResponse->getContexts();
         $jobResponse   = $responses[0];
 
@@ -1120,6 +1122,7 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
         $result->setUri($this->getUri());
         $result->setPath('/JobTemplates');
         $result->setBody($this->wrapAtomEntry($jobTemplate));
+        $result->addStatusCode(Resources::STATUS_CREATED);
 
         return $result;
     }
@@ -1149,6 +1152,7 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
         $result->setUri($this->getUri());
         $result->setPath('/$1/TaskTemplates');
         $result->setBody($this->wrapAtomEntry($taskTemplate));
+        $result->addStatusCode(Resources::STATUS_CREATED);
 
         return $result;
     }
@@ -1195,7 +1199,7 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
             $body
         );
 
-        $batchResponse       = new BatchResponse($response->getBody());
+        $batchResponse       = new BatchResponse($response->getBody(), $batch);
         $responses           = $batchResponse->getContexts();
         $jobTemplateResponse = $responses[0];
 
