@@ -161,9 +161,12 @@ class Job
     /**
      * Create asset from array
      *
-     * @param array $options    Array containing values for object properties
+     * @param array $options Array containing values for object properties
+     *
+     * @return WindowsAzure\MediaServices\Models\Job
      */
-    public static function createFromOptions($options) {
+    public static function createFromOptions($options)
+    {
         $job = new Job();
         $job->fromArray($options);
 
@@ -171,18 +174,14 @@ class Job
     }
 
     /**
-     * Create job
-     *
-     * @param array $inputMediaAssets   Assets to process.
-     */
-    public function __construct() {
-    }
-
-    /**
      * Fill asset from array
-     * @param array $options    Array containing values for object properties
+     *
+     * @param array $options Array containing values for object properties
+     *
+     * @return none
      */
-    public function fromArray($options) {
+    public function fromArray($options)
+    {
         if (isset($options['Id'])) {
             Validate::isString($options['Id'], 'options[Id]');
             $this->_id = $options['Id'];
@@ -199,7 +198,10 @@ class Job
         }
 
         if (isset($options['LastModified'])) {
-            Validate::isDateString($options['LastModified'], 'options[LastModified]');
+            Validate::isDateString(
+                $options['LastModified'],
+                'options[LastModified]'
+            );
             $this->_lastModified = new \DateTime($options['LastModified']);
         }
 
@@ -214,7 +216,10 @@ class Job
         }
 
         if (isset($options['RunningDuration'])) {
-            Validate::isDouble($options['RunningDuration'], 'options[RunningDuration]');
+            Validate::isDouble(
+                $options['RunningDuration'],
+                'options[RunningDuration]'
+            );
             $this->_runningDuration = $options['RunningDuration'];
         }
 
@@ -239,18 +244,20 @@ class Job
      *
      * @return string
      */
-    public function getName() {
-       return $this->_name;
+    public function getName()
+    {
+        return $this->_name;
     }
 
     /**
      * Set "Name"
      *
-     * @param string    $value Name
+     * @param string $value Name
      *
      * @return none
      */
-    public function setName($value) {
+    public function setName($value)
+    {
         $this->_name = $value;
     }
 
@@ -259,8 +266,9 @@ class Job
      *
      * @return \DateTime
      */
-    public function getLastModified() {
-       return $this->_lastModified;
+    public function getLastModified()
+    {
+        return $this->_lastModified;
     }
 
     /**
@@ -268,8 +276,9 @@ class Job
      *
      * @return \DateTime
      */
-    public function getCreated() {
-       return $this->_created;
+    public function getCreated()
+    {
+        return $this->_created;
     }
 
     /**
@@ -277,8 +286,9 @@ class Job
      *
      * @return int
      */
-    public function getState() {
-       return $this->_state;
+    public function getState()
+    {
+        return $this->_state;
     }
 
     /**
@@ -286,8 +296,9 @@ class Job
      *
      * @return string
      */
-    public function getId() {
-       return $this->_id;
+    public function getId()
+    {
+        return $this->_id;
     }
 
     /**
@@ -295,18 +306,20 @@ class Job
      *
      * @return string
      */
-    public function getTemplateId() {
+    public function getTemplateId()
+    {
         return $this->_templateId;
     }
 
     /**
      * Set "Template id"
      *
-     * @param string    $value Template id
+     * @param string $value Template id
      *
      * @return none
      */
-    public function setTemplateId($value) {
+    public function setTemplateId($value)
+    {
         $this->_templateId = $value;
     }
 
@@ -315,7 +328,8 @@ class Job
      *
      * @return \DateTime
      */
-    public function getStartTime() {
+    public function getStartTime()
+    {
         return $this->_startTime;
     }
 
@@ -324,7 +338,8 @@ class Job
      *
      * @return double
      */
-    public function getRunningDuration() {
+    public function getRunningDuration()
+    {
         return $this->_runningDuration;
     }
 
@@ -333,18 +348,20 @@ class Job
      *
      * @return int
      */
-    public function getPriority() {
+    public function getPriority()
+    {
         return $this->_priority;
     }
 
     /**
      * Set "Priority"
      *
-     * @param int    $value Priority
+     * @param int $value Priority
      *
      * @return none
      */
-    public function setPriority($value) {
+    public function setPriority($value)
+    {
         $this->_priority = $value;
     }
 
@@ -353,7 +370,8 @@ class Job
      *
      * @return \DateTime
      */
-    public function getEndTime() {
+    public function getEndTime()
+    {
         return $this->_endTime;
     }
 }

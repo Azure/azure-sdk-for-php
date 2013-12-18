@@ -41,7 +41,6 @@ class ErrorDetailTest extends \PHPUnit_Framework_TestCase
     /**
      * @covers WindowsAzure\MediaServices\Models\ErrorDetail::createFromOptions
      * @covers WindowsAzure\MediaServices\Models\ErrorDetail::fromArray
-     * @covers WindowsAzure\MediaServices\Models\ErrorDetail::__construct
      */
     public function testCreateFromOptions(){
 

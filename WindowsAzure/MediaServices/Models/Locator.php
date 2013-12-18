@@ -54,7 +54,8 @@ class Locator
     const TYPE_SAS = 1;
 
     /**
-     * Type of Locator - OnDemandOrigin - Specifies a locator type which refers to an Azure Media Service On Demand Origin streaming endpoint
+     * Type of Locator - OnDemandOrigin - Specifies a locator type which refers to
+     * an Azure Media Service On Demand Origin streaming endpoint
      *
      * @var int
      */
@@ -133,14 +134,21 @@ class Locator
     /**
      * Create locator from array
      *
-     * @param array $options    Array containing values for object properties
+     * @param array $options Array containing values for object properties
+     *
+     * @return WindowsAzure\MediaServices\Models\Locator
      */
-    public static function createFromOptions($options) {
+    public static function createFromOptions($options)
+    {
         Validate::notNull($options['AssetId'], 'options[AssetId]');
         Validate::notNull($options['AccessPolicyId'], 'options[AccessPolicyId]');
         Validate::notNull($options['Type'], 'options[Type]');
 
-        $locator = new Locator($options['AssetId'], $options['AccessPolicyId'], $options['Type']);
+        $locator = new Locator(
+            $options['AssetId'],
+            $options['AccessPolicyId'],
+            $options['Type']
+        );
         $locator->fromArray($options);
 
         return $locator;
@@ -149,23 +157,37 @@ class Locator
     /**
      * Create locator
      *
-     * @param string    asset
-     * @param int       $type   Enumeration value that describes the type of Locator.
-     *                          None = 0,
-     *                          SAS = 1,
-     *                          OnDemandOrigin = 2
+     * @param WindowsAzure\MediaServices\Models\Asset|string        $asset        A
+     * target asset
+     *
+     * @param WindowsAzure\MediaServices\Models\AccessPolicy|string $accessPolicy A
+     * target access policy
+     *
+     * @param int                                                   $type         An
+     * enumeration value that describes the type of Locator.
      */
-    public function __construct($asset, $accessPolicy, $type) {
-        $this->_assetId         = Utilities::getEntityId($asset, 'WindowsAzure\MediaServices\Models\Asset');
-        $this->_accessPolicyId  = Utilities::getEntityId($accessPolicy, 'WindowsAzure\MediaServices\Models\AccessPolicy');
-        $this->_type            = $type;
+    public function __construct($asset, $accessPolicy, $type)
+    {
+        $this->_assetId        = Utilities::getEntityId(
+            $asset,
+            'WindowsAzure\MediaServices\Models\Asset'
+        );
+        $this->_accessPolicyId = Utilities::getEntityId(
+            $accessPolicy,
+            'WindowsAzure\MediaServices\Models\AccessPolicy'
+        );
+        $this->_type           = $type;
     }
 
     /**
      * Fill locator from array
-     * @param array $options    Array containing values for object properties
+     *
+     * @param array $options Array containing values for object properties
+     *
+     * @return none
      */
-    public function fromArray($options) {
+    public function fromArray($options)
+    {
         if (isset($options['Id'])) {
             Validate::isString($options['Id'], 'options[Id]');
             $this->_id = $options['Id'];
@@ -177,8 +199,13 @@ class Locator
         }
 
         if (isset($options['ExpirationDateTime'])) {
-            Validate::isDateString($options['ExpirationDateTime'], 'options[ExpirationDateTime]');
-            $this->_expirationDateTime = new \DateTime($options['ExpirationDateTime']);
+            Validate::isDateString(
+                $options['ExpirationDateTime'],
+                'options[ExpirationDateTime]'
+            );
+            $this->_expirationDateTime = new \DateTime(
+                $options['ExpirationDateTime']
+            );
         }
 
         if (isset($options['Type'])) {
@@ -197,12 +224,18 @@ class Locator
         }
 
         if (isset($options['ContentAccessComponent'])) {
-            Validate::isString($options['ContentAccessComponent'], 'options[ContentAccessComponent]');
+            Validate::isString(
+                $options['ContentAccessComponent'],
+                'options[ContentAccessComponent]'
+            );
             $this->_contentAccessComponent = $options['ContentAccessComponent'];
         }
 
         if (isset($options['AccessPolicyId'])) {
-            Validate::isString($options['AccessPolicyId'], 'options[AccessPolicyId]');
+            Validate::isString(
+                $options['AccessPolicyId'],
+                'options[AccessPolicyId]'
+            );
             $this->_accessPolicyId = $options['AccessPolicyId'];
         }
 
@@ -222,18 +255,20 @@ class Locator
      *
      * @return \DateTime
      */
-    public function getStartTime() {
-       return $this->_startTime;
+    public function getStartTime()
+    {
+        return $this->_startTime;
     }
 
     /**
      * Set "Start time"
      *
-     * @param \DateTime    $value Start time
+     * @param \DateTime $value Start time
      *
      * @return none
      */
-    public function setStartTime($value) {
+    public function setStartTime($value)
+    {
         $this->_startTime = $value;
     }
 
@@ -242,8 +277,9 @@ class Locator
      *
      * @return string
      */
-    public function getAssetId() {
-       return $this->_assetId;
+    public function getAssetId()
+    {
+        return $this->_assetId;
     }
 
     /**
@@ -251,8 +287,9 @@ class Locator
      *
      * @return string
      */
-    public function getAccessPolicyId() {
-       return $this->_accessPolicyId;
+    public function getAccessPolicyId()
+    {
+        return $this->_accessPolicyId;
     }
 
     /**
@@ -260,8 +297,9 @@ class Locator
      *
      * @return string
      */
-    public function getContentAccessComponent() {
-       return $this->_contentAccessComponent;
+    public function getContentAccessComponent()
+    {
+        return $this->_contentAccessComponent;
     }
 
     /**
@@ -269,8 +307,9 @@ class Locator
      *
      * @return string
      */
-    public function getBaseUri() {
-       return $this->_baseUri;
+    public function getBaseUri()
+    {
+        return $this->_baseUri;
     }
 
     /**
@@ -278,8 +317,9 @@ class Locator
      *
      * @return string
      */
-    public function getPath() {
-       return $this->_path;
+    public function getPath()
+    {
+        return $this->_path;
     }
 
     /**
@@ -287,18 +327,20 @@ class Locator
      *
      * @return int
      */
-    public function getType() {
-       return $this->_type;
+    public function getType()
+    {
+        return $this->_type;
     }
 
     /**
      * Set "Type"
      *
-     * @param int    $value Type
+     * @param int $value Type
      *
      * @return none
      */
-    public function setType($value) {
+    public function setType($value)
+    {
         $this->_type = $value;
     }
 
@@ -307,18 +349,20 @@ class Locator
      *
      * @return \DateTime
      */
-    public function getExpirationDateTime() {
-       return $this->_expirationDateTime;
+    public function getExpirationDateTime()
+    {
+        return $this->_expirationDateTime;
     }
 
     /**
      * Set "Expiration date time"
      *
-     * @param \DateTime    $value Expiration date time
+     * @param \DateTime $value Expiration date time
      *
      * @return none
      */
-    public function setExpirationDateTime($value) {
+    public function setExpirationDateTime($value)
+    {
         $this->_expirationDateTime = $value;
     }
 
@@ -327,18 +371,20 @@ class Locator
      *
      * @return string
      */
-    public function getName() {
-       return $this->_name;
+    public function getName()
+    {
+        return $this->_name;
     }
 
     /**
      * Set "Name"
      *
-     * @param string    $value Name
+     * @param string $value Name
      *
      * @return none
      */
-    public function setName($value) {
+    public function setName($value)
+    {
         $this->_name = $value;
     }
 
@@ -347,18 +393,20 @@ class Locator
      *
      * @return string
      */
-    public function getId() {
-       return $this->_id;
+    public function getId()
+    {
+        return $this->_id;
     }
 
     /**
      * Set "Locator id"
      *
-     * @param string    $value Locator id
+     * @param string $value Locator id
      *
      * @return none
      */
-    public function setId($value) {
+    public function setId($value)
+    {
         $this->_id = $value;
     }
 }

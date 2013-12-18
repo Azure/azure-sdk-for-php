@@ -82,7 +82,6 @@ class JobTest extends \PHPUnit_Framework_TestCase
     /**
      * @covers WindowsAzure\MediaServices\Models\Job::getName
      * @covers WindowsAzure\MediaServices\Models\Job::setName
-     * @covers WindowsAzure\MediaServices\Models\Job::__construct
      */
     public function testGetSetName(){
 

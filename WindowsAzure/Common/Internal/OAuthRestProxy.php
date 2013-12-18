@@ -44,22 +44,29 @@ class OAuthRestProxy extends ServiceRestProxy
     /**
      * Initializes new OAuthRestProxy object.
      *
-     * @param IHttpClient $channel        The HTTP client used to send HTTP requests.
-     * @param string      $uri            The storage account uri.
+     * @param IHttpClient $channel The HTTP client used to send HTTP requests.
+     * @param string      $uri     The storage account uri.
      */
     public function __construct($channel, $uri)
     {
-        parent::__construct($channel, $uri, Resources::EMPTY_STRING, new JsonSerializer());
+        parent::__construct(
+            $channel,
+            $uri,
+            Resources::EMPTY_STRING,
+            new JsonSerializer()
+        );
     }
 
 
     /**
      * Get OAuth access token.
      *
-     * @param string    $grantType      OAuth request grant_type field value.
-     * @param string    $clientId       OAuth request clent_id field value.
-     * @param string    $clientSecret   OAuth request clent_secret field value.
-     * @param string    $scope          OAuth request scope field value.
+     * @param string $grantType    OAuth request grant_type field value.
+     * @param string $clientId     OAuth request clent_id field value.
+     * @param string $clientSecret OAuth request clent_secret field value.
+     * @param string $scope        OAuth request scope field value.
+     *
+     * @return WindowsAzure\Common\Internal\Models\OAuthAccessToken
      */
     public function getAccessToken($grantType, $clientId, $clientSecret, $scope)
     {
@@ -70,39 +77,41 @@ class OAuthRestProxy extends ServiceRestProxy
         $statusCode     = Resources::STATUS_OK;
 
         $postParameters = $this->addPostParameter(
-                $postParameters,
-                Resources::OAUTH_GRANT_TYPE,
-                $grantType
+            $postParameters,
+            Resources::OAUTH_GRANT_TYPE,
+            $grantType
         );
 
         $postParameters = $this->addPostParameter(
-                $postParameters,
-                Resources::OAUTH_CLIENT_ID,
-                $clientId
+            $postParameters,
+            Resources::OAUTH_CLIENT_ID,
+            $clientId
         );
 
         $postParameters = $this->addPostParameter(
-                $postParameters,
-                Resources::OAUTH_CLIENT_SECRET,
-                $clientSecret
+            $postParameters,
+            Resources::OAUTH_CLIENT_SECRET,
+            $clientSecret
         );
 
         $postParameters = $this->addPostParameter(
-                $postParameters,
-                Resources::OAUTH_SCOPE,
-                $scope
+            $postParameters,
+            Resources::OAUTH_SCOPE,
+            $scope
         );
 
         $response = $this->send(
-                $method,
-                $headers,
-                $queryParams,
-                $postParameters,
-                Resources::EMPTY_STRING,
-                $statusCode
+            $method,
+            $headers,
+            $queryParams,
+            $postParameters,
+            Resources::EMPTY_STRING,
+            $statusCode
         );
 
-        return OAuthAccessToken::create($this->dataSerializer->unserialize($response->getBody()));
+        return OAuthAccessToken::create(
+            $this->dataSerializer->unserialize($response->getBody())
+        );
     }
 }
 

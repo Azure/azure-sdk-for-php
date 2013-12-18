@@ -63,9 +63,12 @@ class TaskHistoricalEvent
     /**
      * Create task historical event from array
      *
-     * @param array $options    Array containing values for object properties
+     * @param array $options Array containing values for object properties
+     *
+     * @return WindowsAzure\MediaServices\Models\TaskHistoricalEvent
      */
-    public static function createFromOptions($options) {
+    public static function createFromOptions($options)
+    {
         $taskHistoricalEvent = new TaskHistoricalEvent();
         $taskHistoricalEvent->fromArray($options);
 
@@ -74,16 +77,20 @@ class TaskHistoricalEvent
 
     /**
      * Create task historical event
-     *
      */
-    public function __construct() {
+    public function __construct()
+    {
     }
 
     /**
      * Fill task historical event from array
-     * @param array $options    Array containing values for object properties
+     *
+     * @param array $options Array containing values for object properties
+     *
+     * @return none
      */
-    public function fromArray($options) {
+    public function fromArray($options)
+    {
         if (isset($options['Code'])) {
             Validate::isInteger($options['Code'], 'options[Code]');
             $this->_code = $options['Code'];
@@ -105,8 +112,9 @@ class TaskHistoricalEvent
      *
      * @return \DateTime
      */
-    public function getTimeStamp() {
-       return $this->_timeStamp;
+    public function getTimeStamp()
+    {
+        return $this->_timeStamp;
     }
 
     /**
@@ -114,8 +122,9 @@ class TaskHistoricalEvent
      *
      * @return string
      */
-    public function getMessage() {
-       return $this->_message;
+    public function getMessage()
+    {
+        return $this->_message;
     }
 
     /**
@@ -123,8 +132,9 @@ class TaskHistoricalEvent
      *
      * @return int
      */
-    public function getCode() {
-       return $this->_code;
+    public function getCode()
+    {
+        return $this->_code;
     }
 }
 

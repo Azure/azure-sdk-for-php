@@ -140,9 +140,12 @@ class AssetFile
     /**
      * Create asset file from array
      *
-     * @param array $options    Array containing values for object properties
+     * @param array $options Array containing values for object properties
+     *
+     * @return WindowsAzure\MediaServices\Models\AssetFile
      */
-    public static function createFromOptions($options) {
+    public static function createFromOptions($options)
+    {
         Validate::notNull($options['Name'], 'options[Name]');
         Validate::notNull($options['ParentAssetId'], 'options[ParentAssetId]');
 
@@ -156,18 +159,24 @@ class AssetFile
      * Create asset file
      *
      * @param string $name          Friendly name for asset file.
-     * @param string $parentAssetId Asset Id of the Asset that this file is associated with.
+     * @param string $parentAssetId Asset Id of the Asset that this file is
+     *                              associated with.
      */
-    public function __construct($name, $parentAssetId) {
-        $this->_name = $name;
+    public function __construct($name, $parentAssetId)
+    {
+        $this->_name          = $name;
         $this->_parentAssetId = $parentAssetId;
     }
 
     /**
      * Fill asset file from array
-     * @param array $options    Array containing values for object properties
+     *
+     * @param array $options Array containing values for object properties
+     *
+     * @return none
      */
-    public function fromArray($options) {
+    public function fromArray($options)
+    {
         if (isset($options['Id'])) {
             Validate::isString($options['Id'], 'options[Id]');
             $this->_id = $options['Id'];
@@ -179,37 +188,58 @@ class AssetFile
         }
 
         if (isset($options['ContentFileSize'])) {
-            Validate::isString($options['ContentFileSize'], 'options[ContentFileSize]');
+            Validate::isString(
+                $options['ContentFileSize'],
+                'options[ContentFileSize]'
+            );
             $this->_contentFileSize = $options['ContentFileSize'];
         }
 
         if (isset($options['ParentAssetId'])) {
-            Validate::isString($options['ParentAssetId'], 'options[ParentAssetId]');
+            Validate::isString(
+                $options['ParentAssetId'],
+                'options[ParentAssetId]'
+            );
             $this->_parentAssetId = $options['ParentAssetId'];
         }
 
         if (isset($options['EncryptionVersion'])) {
-            Validate::isString($options['EncryptionVersion'], 'options[EncryptionVersion]');
+            Validate::isString(
+                $options['EncryptionVersion'],
+                'options[EncryptionVersion]'
+            );
             $this->_encryptionVersion = $options['EncryptionVersion'];
         }
 
         if (isset($options['EncryptionScheme'])) {
-            Validate::isString($options['EncryptionScheme'], 'options[EncryptionScheme]');
+            Validate::isString(
+                $options['EncryptionScheme'],
+                'options[EncryptionScheme]'
+            );
             $this->_encryptionScheme = $options['EncryptionScheme'];
         }
 
         if (isset($options['IsEncrypted'])) {
-            Validate::isBoolean($options['IsEncrypted'], 'options[IsEncrypted]');
+            Validate::isBoolean(
+                $options['IsEncrypted'],
+                'options[IsEncrypted]'
+            );
             $this->_isEncrypted = $options['IsEncrypted'];
         }
 
         if (isset($options['EncryptionKeyId'])) {
-            Validate::isString($options['EncryptionKeyId'], 'options[EncryptionKeyId]');
+            Validate::isString(
+                $options['EncryptionKeyId'],
+                'options[EncryptionKeyId]'
+            );
             $this->_encryptionKeyId = $options['EncryptionKeyId'];
         }
 
         if (isset($options['InitializationVector'])) {
-            Validate::isString($options['InitializationVector'], 'options[InitializationVector]');
+            Validate::isString(
+                $options['InitializationVector'],
+                'options[InitializationVector]'
+            );
             $this->_initializationVector = $options['InitializationVector'];
         }
 
@@ -219,7 +249,10 @@ class AssetFile
         }
 
         if (isset($options['LastModified'])) {
-            Validate::isDateString($options['LastModified'], 'options[LastModified]');
+            Validate::isDateString(
+                $options['LastModified'],
+                'options[LastModified]'
+            );
             $this->_lastModified = new \DateTime($options['LastModified']);
         }
 
@@ -234,7 +267,10 @@ class AssetFile
         }
 
         if (isset($options['ContentChecksum'])) {
-            Validate::isString($options['ContentChecksum'], 'options[ContentChecksum]');
+            Validate::isString(
+                $options['ContentChecksum'],
+                'options[ContentChecksum]'
+            );
             $this->_contentCheckSum = $options['ContentChecksum'];
         }
     }
@@ -244,18 +280,20 @@ class AssetFile
      *
      * @return string
      */
-    public function getContentCheckSum() {
-       return $this->_contentCheckSum;
+    public function getContentCheckSum()
+    {
+        return $this->_contentCheckSum;
     }
 
     /**
      * Set "Content check sum"
      *
-     * @param string    $value Content check sum
+     * @param string $value Content check sum
      *
      * @return none
      */
-    public function setContentCheckSum($value) {
+    public function setContentCheckSum($value)
+    {
         $this->_contentCheckSum = $value;
     }
 
@@ -264,18 +302,20 @@ class AssetFile
      *
      * @return string
      */
-    public function getMimeType() {
-       return $this->_mimeType;
+    public function getMimeType()
+    {
+        return $this->_mimeType;
     }
 
     /**
      * Set "Mime type"
      *
-     * @param string    $value Mime type
+     * @param string $value Mime type
      *
      * @return none
      */
-    public function setMimeType($value) {
+    public function setMimeType($value)
+    {
         $this->_mimeType = $value;
     }
 
@@ -284,8 +324,9 @@ class AssetFile
      *
      * @return \DateTime
      */
-    public function getCreated() {
-       return $this->_created;
+    public function getCreated()
+    {
+        return $this->_created;
     }
 
     /**
@@ -293,8 +334,9 @@ class AssetFile
      *
      * @return \DateTime
      */
-    public function getLastModified() {
-       return $this->_lastModified;
+    public function getLastModified()
+    {
+        return $this->_lastModified;
     }
 
     /**
@@ -302,18 +344,20 @@ class AssetFile
      *
      * @return bool
      */
-    public function getIsPrimary() {
-       return $this->_isPrimary;
+    public function getIsPrimary()
+    {
+        return $this->_isPrimary;
     }
 
     /**
      * Set "Is primary"
      *
-     * @param bool    $value Is primary
+     * @param bool $value Is primary
      *
      * @return none
      */
-    public function setIsPrimary($value) {
+    public function setIsPrimary($value)
+    {
         $this->_isPrimary = $value;
     }
 
@@ -322,18 +366,20 @@ class AssetFile
      *
      * @return string
      */
-    public function getInitializationVector() {
-       return $this->_initializationVector;
+    public function getInitializationVector()
+    {
+        return $this->_initializationVector;
     }
 
     /**
      * Set "Initialization vector"
      *
-     * @param string    $value Initialization vector
+     * @param string $value Initialization vector
      *
      * @return none
      */
-    public function setInitializationVector($value) {
+    public function setInitializationVector($value)
+    {
         $this->_initializationVector = $value;
     }
 
@@ -342,18 +388,20 @@ class AssetFile
      *
      * @return string
      */
-    public function getEncryptionKeyId() {
-       return $this->_encryptionKeyId;
+    public function getEncryptionKeyId()
+    {
+        return $this->_encryptionKeyId;
     }
 
     /**
      * Set "Encryption key id"
      *
-     * @param string    $value Encryption key id
+     * @param string $value Encryption key id
      *
      * @return none
      */
-    public function setEncryptionKeyId($value) {
+    public function setEncryptionKeyId($value)
+    {
         $this->_encryptionKeyId = $value;
     }
 
@@ -362,18 +410,20 @@ class AssetFile
      *
      * @return bool
      */
-    public function getIsEncrypted() {
-       return $this->_isEncrypted;
+    public function getIsEncrypted()
+    {
+        return $this->_isEncrypted;
     }
 
     /**
      * Set "Is encrypted"
      *
-     * @param bool    $value Is encrypted
+     * @param bool $value Is encrypted
      *
      * @return none
      */
-    public function setIsEncrypted($value) {
+    public function setIsEncrypted($value)
+    {
         $this->_isEncrypted = $value;
     }
 
@@ -382,18 +432,20 @@ class AssetFile
      *
      * @return string
      */
-    public function getEncryptionScheme() {
-       return $this->_encryptionScheme;
+    public function getEncryptionScheme()
+    {
+        return $this->_encryptionScheme;
     }
 
     /**
      * Set "Encryption scheme"
      *
-     * @param string    $value Encryption scheme
+     * @param string $value Encryption scheme
      *
      * @return none
      */
-    public function setEncryptionScheme($value) {
+    public function setEncryptionScheme($value)
+    {
         $this->_encryptionScheme = $value;
     }
 
@@ -402,18 +454,20 @@ class AssetFile
      *
      * @return string
      */
-    public function getEncryptionVersion() {
-       return $this->_encryptionVersion;
+    public function getEncryptionVersion()
+    {
+        return $this->_encryptionVersion;
     }
 
     /**
      * Set "Encryption version"
      *
-     * @param string    $value Encryption version
+     * @param string $value Encryption version
      *
      * @return none
      */
-    public function setEncryptionVersion($value) {
+    public function setEncryptionVersion($value)
+    {
         $this->_encryptionVersion = $value;
     }
 
@@ -422,18 +476,20 @@ class AssetFile
      *
      * @return string
      */
-    public function getParentAssetId() {
-       return $this->_parentAssetId;
+    public function getParentAssetId()
+    {
+        return $this->_parentAssetId;
     }
 
     /**
      * Set "Parent asset id"
      *
-     * @param string    $value Parent asset id
+     * @param string $value Parent asset id
      *
      * @return none
      */
-    public function setParentAssetId($value) {
+    public function setParentAssetId($value)
+    {
         $this->_parentAssetId = $value;
     }
 
@@ -442,18 +498,20 @@ class AssetFile
      *
      * @return int
      */
-    public function getContentFileSize() {
-       return $this->_contentFileSize;
+    public function getContentFileSize()
+    {
+        return $this->_contentFileSize;
     }
 
     /**
      * Set "Content file size"
      *
-     * @param int    $value Content file size
+     * @param int $value Content file size
      *
      * @return none
      */
-    public function setContentFileSize($value) {
+    public function setContentFileSize($value)
+    {
         $this->_contentFileSize = $value;
     }
 
@@ -462,18 +520,20 @@ class AssetFile
      *
      * @return string
      */
-    public function getName() {
-       return $this->_name;
+    public function getName()
+    {
+        return $this->_name;
     }
 
     /**
      * Set "Name"
      *
-     * @param string    $value Name
+     * @param string $value Name
      *
      * @return none
      */
-    public function setName($value) {
+    public function setName($value)
+    {
         $this->_name = $value;
     }
 
@@ -482,8 +542,9 @@ class AssetFile
      *
      * @return string
      */
-    public function getId() {
-       return $this->_id;
+    public function getId()
+    {
+        return $this->_id;
     }
 }
 

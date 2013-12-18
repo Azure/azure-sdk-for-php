@@ -404,43 +404,57 @@ class ServicesBuilder
     /**
      * Builds a media services object.
      *
-     * @param WindowsAzure\Common\Internal\MediaServicesSettings    $settings   The media services configuration settings.
+     * @param WindowsAzure\Common\Internal\MediaServicesSettings $settings The media
+     * services configuration settings.
      *
      * @return WindowsAzure\MediaServices\Internal\IMediaServices
      */
     public function createMediaServicesService($settings)
     {
-        Validate::isA($settings, 'WindowsAzure\Common\Internal\MediaServicesSettings', 'settings');
+        Validate::isA(
+            $settings,
+            'WindowsAzure\Common\Internal\MediaServicesSettings',
+            'settings'
+        );
 
-        $httpClient      = new HttpClient();
-        $serializer      = $this->serializer();
-        $uri             = Utilities::tryAddUrlScheme(
-                $settings->getEndpointUri(),
-                Resources::HTTPS_SCHEME
+        $httpClient = new HttpClient();
+        $serializer = $this->serializer();
+        $uri        = Utilities::tryAddUrlScheme(
+            $settings->getEndpointUri(),
+            Resources::HTTPS_SCHEME
         );
 
         $mediaServicesWrapper = new MediaServicesRestProxy(
-                $httpClient,
-                $uri,
-                $settings->getAccountName(),
-                $serializer
+            $httpClient,
+            $uri,
+            $settings->getAccountName(),
+            $serializer
         );
 
         // Adding headers filter
+        $xMSVersion     = Resources::MEDIA_SERVICES_API_LATEST_VERSION;
+        $dataVersion    = Resources::MEDIA_SERVICES_DATA_SERVICE_VERSION_VALUE;
+        $dataMaxVersion = Resources::MEDIA_SERVICES_MAX_DATA_SERVICE_VERSION_VALUE;
+        $accept         = Resources::ACCEPT_HEADER_VALUE;
+        $contentType    = Resources::ATOM_ENTRY_CONTENT_TYPE;
+
         $headers = array(
-            Resources::X_MS_VERSION             => Resources::MEDIA_SERVICES_API_LATEST_VERSION,
-            Resources::DATA_SERVICE_VERSION     => Resources::MEDIA_SERVICES_DATA_SERVICE_VERSION_VALUE,
-            Resources::MAX_DATA_SERVICE_VERSION => Resources::MEDIA_SERVICES_MAX_DATA_SERVICE_VERSION_VALUE,
-            Resources::ACCEPT_HEADER            => Resources::ACCEPT_HEADER_VALUE,
-            Resources::CONTENT_TYPE             => Resources::ATOM_ENTRY_CONTENT_TYPE,
+            Resources::X_MS_VERSION             => $xMSVersion,
+            Resources::DATA_SERVICE_VERSION     => $dataVersion,
+            Resources::MAX_DATA_SERVICE_VERSION => $dataMaxVersion,
+            Resources::ACCEPT_HEADER            => $accept,
+            Resources::CONTENT_TYPE             => $contentType,
         );
 
-        $headersFilter = new HeadersFilter($headers);
+        $headersFilter        = new HeadersFilter($headers);
         $mediaServicesWrapper = $mediaServicesWrapper->withFilter($headersFilter);
 
         // Adding OAuth filter
-        $oauthService = new OAuthRestProxy(new HttpClient(), $settings->getOAuthEndpointUri());
-        $authentification = new OAuthScheme(
+        $oauthService           = new OAuthRestProxy(
+            new HttpClient(),
+            $settings->getOAuthEndpointUri()
+        );
+        $authentification       = new OAuthScheme(
             $settings->getAccountName(),
             $settings->getAccessKey(),
             Resources::OAUTH_GT_CLIENT_CREDENTIALS,
@@ -448,7 +462,9 @@ class ServicesBuilder
             $oauthService
         );
         $authentificationFilter = new AuthenticationFilter($authentification);
-        $mediaServicesWrapper = $mediaServicesWrapper->withFilter($authentificationFilter);
+        $mediaServicesWrapper   = $mediaServicesWrapper->withFilter(
+            $authentificationFilter
+        );
 
         return $mediaServicesWrapper;
     }

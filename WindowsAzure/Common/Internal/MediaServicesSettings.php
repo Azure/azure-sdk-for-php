@@ -134,40 +134,38 @@ class MediaServicesSettings extends ServiceSettings
     /**
      * Creates new media services settings instance.
      *
-     * @param string $accountName         The user provided account name.
-     * @param string $primaryAccessKey    The user provided primary access key
-     * @param string $secondaryAccessKey  The user provided secondary access key
-     * @param string $endpointUri         The service management endpoint uri.
+     * @param string $accountName      The user provided account name.
+     * @param string $accessKey        The user provided primary access key
+     * @param string $endpointUri      The service management endpoint uri.
+     * @param string $oauthEndpointUri The OAuth service endpoint uri.
      */
-    public function __construct($accountName, $accessKey, $endpointUri = null, $oauthEndpointUri = null)
+    public function __construct(
+        $accountName,
+        $accessKey,
+        $endpointUri = null,
+        $oauthEndpointUri = null)
     {
         Validate::notNullOrEmpty($accountName, 'accountName');
         Validate::notNullOrEmpty($accessKey, 'accountKey');
         Validate::isString($accountName, 'accountName');
         Validate::isString($accessKey, 'accountKey');
 
-        if ($endpointUri != null)
-        {
+        if ($endpointUri != null) {
             Validate::isValidUri($endpointUri);
-        }
-        else
-        {
+        } else {
             $endpointUri = Resources::MEDIA_SERVICES_URL;
         }
 
-        if ($oauthEndpointUri != null)
-        {
+        if ($oauthEndpointUri != null) {
             Validate::isValidUri($oauthEndpointUri);
-        }
-        else
-        {
+        } else {
             $oauthEndpointUri = Resources::MEDIA_SERVICES_OAUTH_URL;
         }
 
-        $this->_accountName = $accountName;
-        $this->_accessKey = $accessKey;
-        $this->_endpointUri  = $endpointUri;
-        $this->_oauthEndpointUri  = $oauthEndpointUri;
+        $this->_accountName      = $accountName;
+        $this->_accessKey        = $accessKey;
+        $this->_endpointUri      = $endpointUri;
+        $this->_oauthEndpointUri = $oauthEndpointUri;
     }
 
     /**
@@ -198,19 +196,23 @@ class MediaServicesSettings extends ServiceSettings
                 $tokenizedSettings,
                 Resources::MEDIA_SERVICES_URL
             );
+
             $oauthEndpointUri = Utilities::tryGetValueInsensitive(
                 Resources::MEDIA_SERVICES_OAUTH_ENDPOINT_URI_NAME,
                 $tokenizedSettings,
                 Resources::MEDIA_SERVICES_OAUTH_URL
             );
+
             $accountName = Utilities::tryGetValueInsensitive(
                 Resources::MEDIA_SERVICES_ACCOUNT_NAME,
                 $tokenizedSettings
             );
+
             $accessKey = Utilities::tryGetValueInsensitive(
                 Resources::MEDIA_SERVICES_ACCESS_KEY,
                 $tokenizedSettings
             );
+
             return new MediaServicesSettings(
                 $accountName,
                 $accessKey,
