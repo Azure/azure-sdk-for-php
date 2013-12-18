@@ -78,6 +78,9 @@ class TestResources
     const MEDIA_SERVICES_DUMMY_FILE_CONTENT     = 'test file content';
     const MEDIA_SERVICES_DUMMY_FILE_NAME_1      = 'other.avi';
     const MEDIA_SERVICES_DUMMY_FILE_CONTENT_1   = 'other file content';
+    const MEDIA_SERVICES_ISM_FILE_NAME          = 'small.ism';
+    const MEDIA_SERVICES_ISMC_FILE_NAME         = 'small.ismc';
+    const MEDIA_SERVICES_STREAM_APPEND          = 'Manifest';
 
     // See https://tools.ietf.org/html/rfc2616
     const STATUS_NOT_MODIFIED          = 304;
@@ -528,6 +531,20 @@ class TestResources
 
     public static function getMediaServicesJobTemplate($taskTemplateId, $outputAssetName) {
         return '<?xml version="1.0" encoding="utf-8"?><jobTemplate><taskBody taskTemplateId="' . $taskTemplateId . '"><inputAsset>JobInputAsset(0)</inputAsset><outputAsset assetCreationOptions="0" assetName="' . $outputAssetName . '">JobOutputAsset(0)</outputAsset></taskBody></jobTemplate>';
+    }
+
+    public static function getSmallIsm(){
+        return '<?xml version="1.0" encoding="utf-8"?><smil xmlns="http://www.w3.org/2001/SMIL20/Language"><head><meta name="clientManifestRelativePath" content="small.ismc"/></head><body><switch><video src="small.ismv" systemBitrate="952962"><param name="trackID" value="1" valuetype="data" /></video></switch></body></smil>';
+    }
+
+    public static function getSmallIsmc(){
+        return '<?xml version="1.0" encoding="UTF-8"?>
+                <SmoothStreamingMedia MajorVersion="2" MinorVersion="1" Duration="20429600">
+                <StreamIndex Type="video" Url="QualityLevels({bitrate})/Fragments(video={start time})" Name="video" Chunks="1" QualityLevels="1">
+                <QualityLevel Index="0" Bitrate="952962" FourCC="AVC1" MaxWidth="512" MaxHeight="288" CodecPrivateData="0000000167640015ac2ca5020096ffc1000100148303032000000300200000064c08001fe40000ff20fe31c604000ff200007f907f18e1da1225160000000168e9093525"/>
+                <c t="0" d="20429600"/>
+                </StreamIndex>
+                </SmoothStreamingMedia>';
     }
 }
 

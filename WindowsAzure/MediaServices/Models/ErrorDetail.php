@@ -56,9 +56,12 @@ class ErrorDetail
     /**
      * Create error detail from array
      *
-     * @param array $options    Array containing values for object properties
+     * @param array $options Array containing values for object properties
+     *
+     * @return WindowsAzure\MediaServices\Models\ErrorDetail
      */
-    public static function createFromOptions($options) {
+    public static function createFromOptions($options)
+    {
         $errorDetail = new ErrorDetail();
         $errorDetail->fromArray($options);
 
@@ -66,17 +69,14 @@ class ErrorDetail
     }
 
     /**
-     * Create error detail
-     *
-     */
-    public function __construct() {
-    }
-
-    /**
      * Fill error detail from array
-     * @param array $options    Array containing values for object properties
+     *
+     * @param array $options Array containing values for object properties
+     *
+     * @return none
      */
-    public function fromArray($options) {
+    public function fromArray($options)
+    {
         if (isset($options['Code'])) {
             Validate::isInteger($options['Code'], 'options[Code]');
             $this->_code = $options['Code'];
@@ -93,8 +93,9 @@ class ErrorDetail
      *
      * @return string
      */
-    public function getMessage() {
-       return $this->_message;
+    public function getMessage()
+    {
+        return $this->_message;
     }
 
     /**
@@ -102,8 +103,9 @@ class ErrorDetail
      *
      * @return int
      */
-    public function getCode() {
-       return $this->_code;
+    public function getCode()
+    {
+        return $this->_code;
     }
 }
 

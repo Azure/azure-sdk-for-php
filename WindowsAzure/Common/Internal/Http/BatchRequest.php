@@ -65,27 +65,28 @@ class BatchRequest
     /**
      * Constructor
      */
-    public function __construct() {
+    public function __construct()
+    {
         $this->_contexts = array();
     }
 
     /**
      * Append new context to batch request
      *
-     * @param WindowsAzure\Common\Internal\Http\HttpCallContext $context    Http call context to add to batch request
+     * @param WindowsAzure\Common\Internal\Http\HttpCallContext $context Http call
+     * context to add to batch request
+     *
+     * @return none
      */
-    public function appendContext($context) {
+    public function appendContext($context)
+    {
         $this->_contexts[] = $context;
     }
 
     /**
-     * Given array of MIME parts in raw string, this function converts them into MIME
-     * representation.
+     * Encode contexts
      *
-     * @param array $contexts The MIME body parts.
-     *
-     * @return array Returns array with two elements 'headers' and 'body' which
-     * represents the MIME message.
+     * @return none
      */
     public function encode()
     {
@@ -105,7 +106,7 @@ class BatchRequest
         $changeSet = new \Mail_mimePart();
 
         $i = 1;
-        foreach($this->_contexts as $context) {
+        foreach ($this->_contexts as $context) {
             $context->addHeader(Resources::CONTENT_ID, $i);
             $changeSet->addSubpart((string)$context, $options);
 
@@ -125,7 +126,7 @@ class BatchRequest
         $batchEncoded = $batch->encode($batchId);
 
         $this->_headers = $batchEncoded['headers'];
-        $this->_body = $batchEncoded['body'];
+        $this->_body    = $batchEncoded['body'];
     }
 
     /**
@@ -133,7 +134,8 @@ class BatchRequest
      *
      * @return string
      */
-    public function getBody() {
+    public function getBody()
+    {
         return $this->_body;
     }
 
@@ -142,8 +144,19 @@ class BatchRequest
      *
      * @return array
      */
-    public function getHeaders() {
+    public function getHeaders()
+    {
         return $this->_headers;
+    }
+
+    /**
+     * Get request contexts
+     *
+     * @return array
+     */
+    public function getContexts()
+    {
+        return $this->_contexts;
     }
 }
 

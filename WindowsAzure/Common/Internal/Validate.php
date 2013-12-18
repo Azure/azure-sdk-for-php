@@ -269,7 +269,8 @@ class Validate
      *
      * @return boolean
      */
-    public static function isValidUri($uri) {
+    public static function isValidUri($uri)
+    {
         $isValid = filter_var($uri, FILTER_VALIDATE_URL);
 
         if ($isValid) {
@@ -336,21 +337,22 @@ class Validate
     /**
      * Validate if method exists in object
      *
-     * @param object $objectInstance    An object that requires method existing validation
-     * @param string $method            Method name
-     * @param string $name              The parameter name
+     * @param object $objectInstance An object that requires method existing
+     *                               validation
+     * @param string $method         Method name
+     * @param string $name           The parameter name
      *
      * @return boolean
      */
-    public static function methodExists($objectInstance, $method, $name) {
+    public static function methodExists($objectInstance, $method, $name)
+    {
         Validate::isString($method, 'method');
         Validate::notNull($objectInstance, 'objectInstance');
         Validate::isObject($objectInstance, 'objectInstance');
 
         if (method_exists($objectInstance, $method)) {
             return true;
-        }
-        else {
+        } else {
             throw new \InvalidArgumentException(
                 sprintf(
                     Resources::ERROR_METHOD_NOT_FOUND,
@@ -364,11 +366,15 @@ class Validate
     /**
      * Validate if string is date formatted
      *
-     * @param string $value
-     * @param string $name
+     * @param string $value Value to validate
+     * @param string $name  Name of parameter to insert in erro message
+     *
      * @throws \InvalidArgumentException
+     *
+     * @return boolean
      */
-    public static function isDateString($value, $name) {
+    public static function isDateString($value, $name)
+    {
         Validate::isString($value, 'value');
 
         try {

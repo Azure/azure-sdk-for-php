@@ -105,12 +105,18 @@ class JobTemplate
     /**
      * Create asset from array
      *
-     * @param array $options    Array containing values for object properties
+     * @param array $options Array containing values for object properties
+     *
+     * @return WindowsAzure\MediaServices\Models\JobTemplate
      */
-    public static function createFromOptions($options) {
+    public static function createFromOptions($options)
+    {
         Validate::notNull($options['JobTemplateBody'], 'options[JobTemplateBody]');
 
-        $jobTemplate = new JobTemplate($options['JobTemplateBody'], $options['TemplateType']);
+        $jobTemplate = new JobTemplate(
+            $options['JobTemplateBody'],
+            $options['TemplateType']
+        );
         $jobTemplate->fromArray($options);
 
         return $jobTemplate;
@@ -119,19 +125,26 @@ class JobTemplate
     /**
      * Create job template
      *
-     * @param string $jobTemplateBody   Job template XML body.
-     * @param string $templateType      Template type default to AccountLevel.
+     * @param string $jobTemplateBody Job template XML body.
+     * @param string $templateType    Template type default to AccountLevel.
      */
-    public function __construct($jobTemplateBody, $templateType = JobTemplate::TYPE_ACCOUNT_LEVEL) {
+    public function __construct(
+        $jobTemplateBody,
+        $templateType = JobTemplate::TYPE_ACCOUNT_LEVEL)
+    {
         $this->_jobTemplateBody = $jobTemplateBody;
-        $this->_templateType = $templateType;
+        $this->_templateType    = $templateType;
     }
 
     /**
      * Fill job template from array
-     * @param array $options    Array containing values for object properties
+     *
+     * @param array $options Array containing values for object properties
+     *
+     * @return none
      */
-    public function fromArray($options) {
+    public function fromArray($options)
+    {
         if (isset($options['Id'])) {
             Validate::isString($options['Id'], 'options[Id]');
             $this->_id = $options['Id'];
@@ -148,17 +161,26 @@ class JobTemplate
         }
 
         if (isset($options['LastModified'])) {
-            Validate::isDateString($options['LastModified'], 'options[LastModified]');
+            Validate::isDateString(
+                $options['LastModified'],
+                'options[LastModified]'
+            );
             $this->_lastModified = new \DateTime($options['LastModified']);
         }
 
         if (isset($options['JobTemplateBody'])) {
-            Validate::isString($options['JobTemplateBody'], 'options[JobTemplateBody]');
+            Validate::isString(
+                $options['JobTemplateBody'],
+                'options[JobTemplateBody]'
+            );
             $this->_jobTemplateBody = $options['JobTemplateBody'];
         }
 
         if (isset($options['NumberofInputAssets'])) {
-            Validate::isInteger($options['NumberofInputAssets'], 'options[NumberofInputAssets]');
+            Validate::isInteger(
+                $options['NumberofInputAssets'],
+                'options[NumberofInputAssets]'
+            );
             $this->_numberofInputAssets = $options['NumberofInputAssets'];
         }
 
@@ -173,18 +195,20 @@ class JobTemplate
      *
      * @return string
      */
-    public function getName() {
-       return $this->_name;
+    public function getName()
+    {
+        return $this->_name;
     }
 
     /**
      * Set "Name"
      *
-     * @param string    $value Name
+     * @param string $value Name
      *
      * @return none
      */
-    public function setName($value) {
+    public function setName($value)
+    {
         $this->_name = $value;
     }
 
@@ -193,8 +217,9 @@ class JobTemplate
      *
      * @return \DateTime
      */
-    public function getLastModified() {
-       return $this->_lastModified;
+    public function getLastModified()
+    {
+        return $this->_lastModified;
     }
 
     /**
@@ -202,8 +227,9 @@ class JobTemplate
      *
      * @return \DateTime
      */
-    public function getCreated() {
-       return $this->_created;
+    public function getCreated()
+    {
+        return $this->_created;
     }
 
     /**
@@ -211,8 +237,9 @@ class JobTemplate
      *
      * @return string
      */
-    public function getId() {
-       return $this->_id;
+    public function getId()
+    {
+        return $this->_id;
     }
 
     /**
@@ -220,18 +247,20 @@ class JobTemplate
      *
      * @return int
      */
-    public function getTemplateType() {
+    public function getTemplateType()
+    {
         return $this->_templateType;
     }
 
     /**
      * Set "Template type"
      *
-     * @param int    $value Template type
+     * @param int $value Template type
      *
      * @return none
      */
-    public function setTemplateType($value) {
+    public function setTemplateType($value)
+    {
         $this->_templateType = $value;
     }
 
@@ -240,18 +269,20 @@ class JobTemplate
      *
      * @return int
      */
-    public function getNumberofInputAssets() {
+    public function getNumberofInputAssets()
+    {
         return $this->_numberofInputAssets;
     }
 
     /**
      * Set "Number of input assets"
      *
-     * @param int    $value Number of input assets
+     * @param int $value Number of input assets
      *
      * @return none
      */
-    public function setNumberofInputAssets($value) {
+    public function setNumberofInputAssets($value)
+    {
         $this->_numberofInputAssets = $value;
     }
 
@@ -260,18 +291,20 @@ class JobTemplate
      *
      * @return string
      */
-    public function getJobTemplateBody() {
+    public function getJobTemplateBody()
+    {
         return $this->_jobTemplateBody;
     }
 
     /**
      * Set "Job template body"
      *
-     * @param string    $value Job template body
+     * @param string $value Job template body
      *
      * @return none
      */
-    public function setJobTemplateBody($value) {
+    public function setJobTemplateBody($value)
+    {
         $this->_jobTemplateBody = $value;
     }
 }
