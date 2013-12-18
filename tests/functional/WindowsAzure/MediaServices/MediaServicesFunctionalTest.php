@@ -657,7 +657,7 @@ class MediaServicesFunctionalTest extends MediaServicesRestProxyTestBase
     /**
      * @covers WindowsAzure\MediaServices\MediaServicesRestProxy::createAccessPolicy
      * @covers WindowsAzure\MediaServices\MediaServicesRestProxy::getAccessPolicyList
-     *  @covers WindowsAzure\MediaServices\MediaServicesRestProxy::deleteAccessPolicy
+     * @covers WindowsAzure\MediaServices\MediaServicesRestProxy::deleteAccessPolicy
      */
     public function testDeleteAccessPolicy(){
 
@@ -690,6 +690,7 @@ class MediaServicesFunctionalTest extends MediaServicesRestProxyTestBase
     }
 
     /**
+     * @covers WindowsAzure\MediaServices\MediaServicesRestProxy::createAsset
      * @covers WindowsAzure\MediaServices\MediaServicesRestProxy::createAccessPolicy
      * @covers WindowsAzure\MediaServices\MediaServicesRestProxy::createLocator
      */
@@ -726,6 +727,11 @@ class MediaServicesFunctionalTest extends MediaServicesRestProxyTestBase
         $this->assertEquals(TestResources::MEDIA_SERVICES_DUMMY_FILE_CONTENT, $result);
     }
 
+    /**
+     * @covers WindowsAzure\MediaServices\MediaServicesRestProxy::createAsset
+     * @covers WindowsAzure\MediaServices\MediaServicesRestProxy::createAccessPolicy
+     * @covers WindowsAzure\MediaServices\MediaServicesRestProxy::createLocator
+     */
     public function testCreatingOriginUrlForStreamingContent(){
 
         // Setup

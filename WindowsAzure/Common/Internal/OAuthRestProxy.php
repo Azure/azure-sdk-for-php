@@ -49,17 +49,22 @@ class OAuthRestProxy extends ServiceRestProxy
      */
     public function __construct($channel, $uri)
     {
-        parent::__construct($channel, $uri, Resources::EMPTY_STRING, new JsonSerializer());
+        parent::__construct(
+            $channel,
+            $uri,
+            Resources::EMPTY_STRING,
+            new JsonSerializer()
+        );
     }
 
 
     /**
      * Get OAuth access token.
      *
-     * @param string    $grantType    OAuth request grant_type field value.
-     * @param string    $clientId     OAuth request clent_id field value.
-     * @param string    $clientSecret OAuth request clent_secret field value.
-     * @param string    $scope        OAuth request scope field value.
+     * @param string $grantType    OAuth request grant_type field value.
+     * @param string $clientId     OAuth request clent_id field value.
+     * @param string $clientSecret OAuth request clent_secret field value.
+     * @param string $scope        OAuth request scope field value.
      *
      * @return WindowsAzure\Common\Internal\Models\OAuthAccessToken
      */
@@ -104,7 +109,9 @@ class OAuthRestProxy extends ServiceRestProxy
             $statusCode
         );
 
-        return OAuthAccessToken::create($this->dataSerializer->unserialize($response->getBody()));
+        return OAuthAccessToken::create(
+            $this->dataSerializer->unserialize($response->getBody())
+        );
     }
 }
 

@@ -54,7 +54,8 @@ class Locator
     const TYPE_SAS = 1;
 
     /**
-     * Type of Locator - OnDemandOrigin - Specifies a locator type which refers to an Azure Media Service On Demand Origin streaming endpoint
+     * Type of Locator - OnDemandOrigin - Specifies a locator type which refers to
+     * an Azure Media Service On Demand Origin streaming endpoint
      *
      * @var int
      */
@@ -143,7 +144,11 @@ class Locator
         Validate::notNull($options['AccessPolicyId'], 'options[AccessPolicyId]');
         Validate::notNull($options['Type'], 'options[Type]');
 
-        $locator = new Locator($options['AssetId'], $options['AccessPolicyId'], $options['Type']);
+        $locator = new Locator(
+            $options['AssetId'],
+            $options['AccessPolicyId'],
+            $options['Type']
+        );
         $locator->fromArray($options);
 
         return $locator;
@@ -152,14 +157,25 @@ class Locator
     /**
      * Create locator
      *
-     * @param WindowsAzure\MediaServices\Models\Asset|string        $asset        Target asset
-     * @param WindowsAzure\MediaServices\Models\AccessPolicy|string $accessPolicy Target asset
-     * @param int                                                   $type         Enumeration value that describes the type of Locator.
+     * @param WindowsAzure\MediaServices\Models\Asset|string        $asset        A
+     * target asset
+     *
+     * @param WindowsAzure\MediaServices\Models\AccessPolicy|string $accessPolicy A
+     * target access policy
+     *
+     * @param int                                                   $type         An
+     * enumeration value that describes the type of Locator.
      */
     public function __construct($asset, $accessPolicy, $type)
     {
-        $this->_assetId        = Utilities::getEntityId($asset, 'WindowsAzure\MediaServices\Models\Asset');
-        $this->_accessPolicyId = Utilities::getEntityId($accessPolicy, 'WindowsAzure\MediaServices\Models\AccessPolicy');
+        $this->_assetId        = Utilities::getEntityId(
+            $asset,
+            'WindowsAzure\MediaServices\Models\Asset'
+        );
+        $this->_accessPolicyId = Utilities::getEntityId(
+            $accessPolicy,
+            'WindowsAzure\MediaServices\Models\AccessPolicy'
+        );
         $this->_type           = $type;
     }
 
@@ -183,8 +199,13 @@ class Locator
         }
 
         if (isset($options['ExpirationDateTime'])) {
-            Validate::isDateString($options['ExpirationDateTime'], 'options[ExpirationDateTime]');
-            $this->_expirationDateTime = new \DateTime($options['ExpirationDateTime']);
+            Validate::isDateString(
+                $options['ExpirationDateTime'],
+                'options[ExpirationDateTime]'
+            );
+            $this->_expirationDateTime = new \DateTime(
+                $options['ExpirationDateTime']
+            );
         }
 
         if (isset($options['Type'])) {
@@ -203,12 +224,18 @@ class Locator
         }
 
         if (isset($options['ContentAccessComponent'])) {
-            Validate::isString($options['ContentAccessComponent'], 'options[ContentAccessComponent]');
+            Validate::isString(
+                $options['ContentAccessComponent'],
+                'options[ContentAccessComponent]'
+            );
             $this->_contentAccessComponent = $options['ContentAccessComponent'];
         }
 
         if (isset($options['AccessPolicyId'])) {
-            Validate::isString($options['AccessPolicyId'], 'options[AccessPolicyId]');
+            Validate::isString(
+                $options['AccessPolicyId'],
+                'options[AccessPolicyId]'
+            );
             $this->_accessPolicyId = $options['AccessPolicyId'];
         }
 
@@ -308,7 +335,7 @@ class Locator
     /**
      * Set "Type"
      *
-     * @param int    $value Type
+     * @param int $value Type
      *
      * @return none
      */

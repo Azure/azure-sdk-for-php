@@ -113,7 +113,10 @@ class JobTemplate
     {
         Validate::notNull($options['JobTemplateBody'], 'options[JobTemplateBody]');
 
-        $jobTemplate = new JobTemplate($options['JobTemplateBody'], $options['TemplateType']);
+        $jobTemplate = new JobTemplate(
+            $options['JobTemplateBody'],
+            $options['TemplateType']
+        );
         $jobTemplate->fromArray($options);
 
         return $jobTemplate;
@@ -125,7 +128,9 @@ class JobTemplate
      * @param string $jobTemplateBody Job template XML body.
      * @param string $templateType    Template type default to AccountLevel.
      */
-    public function __construct($jobTemplateBody, $templateType = JobTemplate::TYPE_ACCOUNT_LEVEL)
+    public function __construct(
+        $jobTemplateBody,
+        $templateType = JobTemplate::TYPE_ACCOUNT_LEVEL)
     {
         $this->_jobTemplateBody = $jobTemplateBody;
         $this->_templateType    = $templateType;
@@ -156,17 +161,26 @@ class JobTemplate
         }
 
         if (isset($options['LastModified'])) {
-            Validate::isDateString($options['LastModified'], 'options[LastModified]');
+            Validate::isDateString(
+                $options['LastModified'],
+                'options[LastModified]'
+            );
             $this->_lastModified = new \DateTime($options['LastModified']);
         }
 
         if (isset($options['JobTemplateBody'])) {
-            Validate::isString($options['JobTemplateBody'], 'options[JobTemplateBody]');
+            Validate::isString(
+                $options['JobTemplateBody'],
+                'options[JobTemplateBody]'
+            );
             $this->_jobTemplateBody = $options['JobTemplateBody'];
         }
 
         if (isset($options['NumberofInputAssets'])) {
-            Validate::isInteger($options['NumberofInputAssets'], 'options[NumberofInputAssets]');
+            Validate::isInteger(
+                $options['NumberofInputAssets'],
+                'options[NumberofInputAssets]'
+            );
             $this->_numberofInputAssets = $options['NumberofInputAssets'];
         }
 

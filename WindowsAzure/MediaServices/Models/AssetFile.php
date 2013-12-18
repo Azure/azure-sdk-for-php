@@ -159,11 +159,12 @@ class AssetFile
      * Create asset file
      *
      * @param string $name          Friendly name for asset file.
-     * @param string $parentAssetId Asset Id of the Asset that this file is associated with.
+     * @param string $parentAssetId Asset Id of the Asset that this file is
+     *                              associated with.
      */
     public function __construct($name, $parentAssetId)
     {
-        $this->_name = $name;
+        $this->_name          = $name;
         $this->_parentAssetId = $parentAssetId;
     }
 
@@ -187,37 +188,58 @@ class AssetFile
         }
 
         if (isset($options['ContentFileSize'])) {
-            Validate::isString($options['ContentFileSize'], 'options[ContentFileSize]');
+            Validate::isString(
+                $options['ContentFileSize'],
+                'options[ContentFileSize]'
+            );
             $this->_contentFileSize = $options['ContentFileSize'];
         }
 
         if (isset($options['ParentAssetId'])) {
-            Validate::isString($options['ParentAssetId'], 'options[ParentAssetId]');
+            Validate::isString(
+                $options['ParentAssetId'],
+                'options[ParentAssetId]'
+            );
             $this->_parentAssetId = $options['ParentAssetId'];
         }
 
         if (isset($options['EncryptionVersion'])) {
-            Validate::isString($options['EncryptionVersion'], 'options[EncryptionVersion]');
+            Validate::isString(
+                $options['EncryptionVersion'],
+                'options[EncryptionVersion]'
+            );
             $this->_encryptionVersion = $options['EncryptionVersion'];
         }
 
         if (isset($options['EncryptionScheme'])) {
-            Validate::isString($options['EncryptionScheme'], 'options[EncryptionScheme]');
+            Validate::isString(
+                $options['EncryptionScheme'],
+                'options[EncryptionScheme]'
+            );
             $this->_encryptionScheme = $options['EncryptionScheme'];
         }
 
         if (isset($options['IsEncrypted'])) {
-            Validate::isBoolean($options['IsEncrypted'], 'options[IsEncrypted]');
+            Validate::isBoolean(
+                $options['IsEncrypted'],
+                'options[IsEncrypted]'
+            );
             $this->_isEncrypted = $options['IsEncrypted'];
         }
 
         if (isset($options['EncryptionKeyId'])) {
-            Validate::isString($options['EncryptionKeyId'], 'options[EncryptionKeyId]');
+            Validate::isString(
+                $options['EncryptionKeyId'],
+                'options[EncryptionKeyId]'
+            );
             $this->_encryptionKeyId = $options['EncryptionKeyId'];
         }
 
         if (isset($options['InitializationVector'])) {
-            Validate::isString($options['InitializationVector'], 'options[InitializationVector]');
+            Validate::isString(
+                $options['InitializationVector'],
+                'options[InitializationVector]'
+            );
             $this->_initializationVector = $options['InitializationVector'];
         }
 
@@ -227,7 +249,10 @@ class AssetFile
         }
 
         if (isset($options['LastModified'])) {
-            Validate::isDateString($options['LastModified'], 'options[LastModified]');
+            Validate::isDateString(
+                $options['LastModified'],
+                'options[LastModified]'
+            );
             $this->_lastModified = new \DateTime($options['LastModified']);
         }
 
@@ -242,7 +267,10 @@ class AssetFile
         }
 
         if (isset($options['ContentChecksum'])) {
-            Validate::isString($options['ContentChecksum'], 'options[ContentChecksum]');
+            Validate::isString(
+                $options['ContentChecksum'],
+                'options[ContentChecksum]'
+            );
             $this->_contentCheckSum = $options['ContentChecksum'];
         }
     }
@@ -260,7 +288,7 @@ class AssetFile
     /**
      * Set "Content check sum"
      *
-     * @param string    $value Content check sum
+     * @param string $value Content check sum
      *
      * @return none
      */
@@ -282,7 +310,7 @@ class AssetFile
     /**
      * Set "Mime type"
      *
-     * @param string    $value Mime type
+     * @param string $value Mime type
      *
      * @return none
      */

@@ -77,12 +77,24 @@ class OAuthScheme implements IAuthScheme
      * Constructor.
      *
      * @param string                                      $accountName  account name.
-     * @param string                                      $accountKey   account primary or secondary key.
-     * @param string                                      $grantType    grant type for OAuth request.
-     * @param string                                      $scope        scope for OAurh request.
-     * @param WindowsAzure\Common\Internal\OAuthRestProxy $oauthService account primary or secondary key.
+     * @param string                                      $accountKey   account
+     * secondary key.
+     *
+     * @param string                                      $grantType    grant type
+     * for OAuth request.
+     *
+     * @param string                                      $scope        scope for
+     * OAurh request.
+     *
+     * @param WindowsAzure\Common\Internal\OAuthRestProxy $oauthService account
+     * primary or secondary key.
      */
-    public function __construct($accountName, $accountKey, $grantType, $scope, $oauthService)
+    public function __construct(
+        $accountName,
+        $accountKey,
+        $grantType,
+        $scope,
+        $oauthService)
     {
         Validate::isString($accountName, 'accountName');
         Validate::isString($accountKey, 'accountKey');
@@ -112,11 +124,18 @@ class OAuthScheme implements IAuthScheme
      */
     public function getAuthorizationHeader($headers, $url, $queryParams, $httpMethod)
     {
-        if (($this->accessToken == null) || ($this->accessToken->getExpiresIn() < time())) {
-            $this->accessToken = $this->oauthService->getAccessToken($this->grantType, $this->accountName, $this->accountKey, $this->scope);
+        if (($this->accessToken == null)
+            || ($this->accessToken->getExpiresIn() < time())) {
+            $this->accessToken = $this->oauthService->getAccessToken(
+                $this->grantType,
+                $this->accountName,
+                $this->accountKey,
+                $this->scope
+            );
         }
 
-        return Resources::OAUTH_ACCESS_TOKEN_PREFIX . $this->accessToken->getAccessToken();
+        return Resources::OAUTH_ACCESS_TOKEN_PREFIX .
+            $this->accessToken->getAccessToken();
     }
 }
 
