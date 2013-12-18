@@ -166,8 +166,11 @@ class IngestManifest
         }
 
         if (isset($options['Statistics'])) {
-            Validate::isValidUri($options['Statistics'], 'options[Statistics]');
-            $this->_statistics = $options['Statistics'];
+            $this->_statistics = null;
+            if (is_array($options['Statistics']) && (count($options['Statistics']) > 0)) {
+                $stat = IngestManifestStatistics::createFromOptions($options['Statistics'][0]);
+                $this->_statistics = $stat;
+            }
         }
 
         if (isset($options['StorageAccountName'])) {
@@ -179,7 +182,7 @@ class IngestManifest
     /**
      * Get "Statistics"
      *
-     * @return array
+     * @return WindowsAzure\MediaServices\Models\IngestManifestStatistics
      */
     public function getStatistics() {
         return $this->_statistics;
