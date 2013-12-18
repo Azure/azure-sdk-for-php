@@ -93,8 +93,11 @@ class Content extends AtomBase
      * Creates an ATOM CONTENT instance with specified simpleXML object
      *
      * @param \SimpleXMLElement $contentXml xml element of ATOM CONTENT
+     *
+     * @return none
      */
-    public function fromXml($contentXml) {
+    public function fromXml($contentXml)
+    {
         Validate::notNull($contentXml, 'contentXml');
         Validate::isA($contentXml, '\SimpleXMLElement', 'contentXml');
 

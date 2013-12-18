@@ -155,13 +155,15 @@ class Asset
     /**
      * Create asset from array
      *
-     * @param array $options    Array containing values for object properties
+     * @param array $options Array containing values for object properties
+     *
+     * @return WindowsAzure\MediaServices\Models\Asset
      */
-    public static function createFromOptions($options) {
+    public static function createFromOptions($options)
+    {
         Validate::notNull($options['Options'], 'options[Options]');
 
-        $encryptionOptions = $options['Options'];
-        $asset = new Asset($encryptionOptions);
+        $asset = new Asset($options['Options']);
         $asset->fromArray($options);
 
         return $asset;
@@ -170,21 +172,24 @@ class Asset
     /**
      * Create asset
      *
-     * @param int   $options    Asset encrytion options.
-     *                          None = 0,
-     *                          StorageEncrypted = 1,
-     *                          CommonEncryptionProtected = 2,
-     *                          EnvelopeEncryptionProtected = 4
+     * @param int $options Asset encrytion options.
+     *
+     * @return none
      */
-    public function __construct($options) {
+    public function __construct($options)
+    {
         $this->options = $options;
     }
 
     /**
      * Fill asset from array
-     * @param array $options    Array containing values for object properties
+     *
+     * @param array $options Array containing values for object properties
+     *
+     * @return none
      */
-    public function fromArray($options) {
+    public function fromArray($options)
+    {
         if (isset($options['Id'])) {
             Validate::isString($options['Id'], 'options[Id]');
             $this->_id = $options['Id'];
@@ -236,8 +241,9 @@ class Asset
      *
      * @return string
      */
-    public function getStorageAccountName() {
-       return $this->_storageAccountName;
+    public function getStorageAccountName()
+    {
+        return $this->_storageAccountName;
     }
 
     /**
@@ -245,8 +251,9 @@ class Asset
      *
      * @return string
      */
-    public function getUri() {
-       return $this->_uri;
+    public function getUri()
+    {
+        return $this->_uri;
     }
 
     /**
@@ -254,8 +261,9 @@ class Asset
      *
      * @return int
      */
-    public function getOptions() {
-       return $this->_options;
+    public function getOptions()
+    {
+        return $this->_options;
     }
 
     /**
@@ -265,7 +273,8 @@ class Asset
      *
      * @return none
      */
-    public function setOptions($value) {
+    public function setOptions($value)
+    {
         $this->_options = $value;
     }
 
@@ -274,8 +283,9 @@ class Asset
      *
      * @return string
      */
-    public function getName() {
-       return $this->_name;
+    public function getName()
+    {
+        return $this->_name;
     }
 
     /**
@@ -285,7 +295,8 @@ class Asset
      *
      * @return none
      */
-    public function setName($value) {
+    public function setName($value)
+    {
         $this->_name = $value;
     }
 
@@ -294,8 +305,9 @@ class Asset
      *
      * @return string
      */
-    public function getAlternateId() {
-       return $this->_alternateId;
+    public function getAlternateId()
+    {
+        return $this->_alternateId;
     }
 
     /**
@@ -305,7 +317,8 @@ class Asset
      *
      * @return none
      */
-    public function setAlternateId($value) {
+    public function setAlternateId($value)
+    {
         $this->_alternateId = $value;
     }
 
@@ -314,8 +327,9 @@ class Asset
      *
      * @return \DateTime
      */
-    public function getLastModified() {
-       return $this->_lastModified;
+    public function getLastModified()
+    {
+        return $this->_lastModified;
     }
 
     /**
@@ -323,8 +337,9 @@ class Asset
      *
      * @return \DateTime
      */
-    public function getCreated() {
-       return $this->_created;
+    public function getCreated()
+    {
+        return $this->_created;
     }
 
     /**
@@ -332,8 +347,9 @@ class Asset
      *
      * @return int
      */
-    public function getState() {
-       return $this->_state;
+    public function getState()
+    {
+        return $this->_state;
     }
 
     /**
@@ -341,8 +357,9 @@ class Asset
      *
      * @return string
      */
-    public function getId() {
-       return $this->_id;
+    public function getId()
+    {
+        return $this->_id;
     }
 }
 

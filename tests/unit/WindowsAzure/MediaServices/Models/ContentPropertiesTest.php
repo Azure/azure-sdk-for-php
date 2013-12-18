@@ -55,6 +55,7 @@ class ContentPropertiesTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @covers WindowsAzure\MediaServices\Models\ContentProperties::fromXml
+     * @covers WindowsAzure\MediaServices\Models\ContentProperties::_fromXmlToArray
      * @covers WindowsAzure\MediaServices\Models\ContentProperties::getProperties
      */
     public function testFromXml(){
@@ -62,8 +63,14 @@ class ContentPropertiesTest extends \PHPUnit_Framework_TestCase
         // Setup
         $testString = 'testString';
         $nameKey = 'name';
+        $objectKey = 'object';
         $xmlString = '<properties xmlns="' . Resources::DSM_XML_NAMESPACE . '" xmlns:d="' . Resources::DS_XML_NAMESPACE . '">
                        <d:' . $nameKey . '>' . $testString . '</d:' . $nameKey . '>
+                       <d:' . $objectKey . '>
+                         <d:element>
+                           <d:' . $nameKey . '>' . $testString . '</d:' . $nameKey . '>
+                         </d:element>
+                       </d:' . $objectKey . '>
                       </properties>';
         $xml = simplexml_load_string($xmlString);
         $prop = new ContentProperties();
@@ -73,8 +80,12 @@ class ContentPropertiesTest extends \PHPUnit_Framework_TestCase
         $result = $prop->getProperties();
 
         // Assert
-        $this->assertEquals(1, count($result));
+        $this->assertEquals(2, count($result));
         $this->assertEquals($testString, $result[$nameKey]);
+
+        $this->assertEquals(1, count($result[$objectKey]));
+        $this->assertEquals(1, count($result[$objectKey][0]));
+        $this->assertEquals($testString, $result[$objectKey][0][$nameKey]);
     }
 
     /**

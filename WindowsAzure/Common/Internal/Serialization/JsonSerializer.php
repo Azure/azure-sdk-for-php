@@ -51,6 +51,7 @@ class JsonSerializer implements ISerializer
         Validate::isString($rootName, 'rootName');
 
         $contianer = new \stdClass();
+
         $contianer->$rootName = $targetObject;
 
         return json_encode($contianer);
@@ -84,12 +85,9 @@ class JsonSerializer implements ISerializer
         Validate::isString($serialized, 'serialized');
 
         $json = json_decode($serialized);
-        if ($json && !is_array($json))
-        {
+        if ($json && !is_array($json)) {
             return get_object_vars($json);
-        }
-        else
-        {
+        } else {
             return $json;
         }
     }

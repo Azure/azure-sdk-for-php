@@ -103,6 +103,7 @@ class MediaServicesRestProxyTest extends MediaServicesRestProxyTestBase
      * @covers WindowsAzure\MediaServices\MediaServicesRestProxy::wrapAtomEntry
      * @covers WindowsAzure\MediaServices\MediaServicesRestProxy::getPropertiesFromAtomEntry
      * @covers WindowsAzure\MediaServices\MediaServicesRestProxy::_getEntityList
+     * @covers WindowsAzure\MediaServices\MediaServicesRestProxy::getEntryList
      */
     public function testGetAssetList()
     {
