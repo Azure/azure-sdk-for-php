@@ -168,12 +168,21 @@ class IngestManifestFile
     /**
      * Create manifest file from array
      *
-     * @param array $options    Array containing values for object properties
+     * @param array $options Array containing values for object properties
+     *
+     * @return WindowsAzure\MediaServices\Models\IngestManifestFile
      */
-    public static function createFromOptions($options) {
+    public static function createFromOptions($options)
+    {
         Validate::notNull($options['Name'], 'options[Name]');
-        Validate::notNull($options['ParentIngestManifestId'], 'options[ParentIngestManifestId]');
-        Validate::notNull($options['ParentIngestManifestAssetId'], 'options[ParentIngestManifestAssetId]');
+        Validate::notNull(
+            $options['ParentIngestManifestId'],
+            'options[ParentIngestManifestId]'
+        );
+        Validate::notNull(
+            $options['ParentIngestManifestAssetId'],
+            'options[ParentIngestManifestAssetId]'
+        );
 
         $file = new IngestManifestFile(
             $options['Name'],
@@ -188,11 +197,20 @@ class IngestManifestFile
     /**
      * Create manifest file
      *
-     * @param string $name                          Actual filename that will be uploaded.
-     * @param string $parentIngestManifestId        IngestManifest Id of the manifest that contains this file.
-     * @param string $parentIngestManifestAssetId   IngestManifestAsset Id of the IngestManifestAsset that this file is associated with.
+     * @param string $name                        Actual filename that will be
+     * uploaded.
+     *
+     * @param string $parentIngestManifestId      IngestManifest Id of the manifest
+     * that contains this file.
+     *
+     * @param string $parentIngestManifestAssetId IngestManifestAsset Id of the
+     * IngestManifestAsset that this file is associated with.
      */
-    public function __construct($name, $parentIngestManifestId, $parentIngestManifestAssetId) {
+    public function __construct(
+        $name,
+        $parentIngestManifestId,
+        $parentIngestManifestAssetId
+    ) {
         $this->_name = $name;
         $this->_parentIngestManifestId = $parentIngestManifestId;
         $this->_parentIngestManifestAssetId = $parentIngestManifestAssetId;
@@ -201,9 +219,12 @@ class IngestManifestFile
     /**
      * Fill manifest file from array
      *
-     * @param array $options    Array containing values for object properties
+     * @param array $options Array containing values for object properties
+     *
+     * @return none
      */
-    public function fromArray($options) {
+    public function fromArray($options)
+    {
         if (isset($options['Id'])) {
             Validate::isString($options['Id'], 'options[Id]');
             $this->_id = $options['Id'];
@@ -215,12 +236,18 @@ class IngestManifestFile
         }
 
         if (isset($options['EncryptionVersion'])) {
-            Validate::isString($options['EncryptionVersion'], 'options[EncryptionVersion]');
+            Validate::isString(
+                $options['EncryptionVersion'],
+                'options[EncryptionVersion]'
+            );
             $this->_encryptionVersion = $options['EncryptionVersion'];
         }
 
         if (isset($options['EncryptionScheme'])) {
-            Validate::isString($options['EncryptionScheme'], 'options[EncryptionScheme]');
+            Validate::isString(
+                $options['EncryptionScheme'],
+                'options[EncryptionScheme]'
+            );
             $this->_encryptionScheme = $options['EncryptionScheme'];
         }
 
@@ -230,12 +257,18 @@ class IngestManifestFile
         }
 
         if (isset($options['EncryptionKeyId'])) {
-            Validate::isString($options['EncryptionKeyId'], 'options[EncryptionKeyId]');
+            Validate::isString(
+                $options['EncryptionKeyId'],
+                'options[EncryptionKeyId]'
+            );
             $this->_encryptionKeyId = $options['EncryptionKeyId'];
         }
 
         if (isset($options['InitializationVector'])) {
-            Validate::isString($options['InitializationVector'], 'options[InitializationVector]');
+            Validate::isString(
+                $options['InitializationVector'],
+                'options[InitializationVector]'
+            );
             $this->_initializationVector = $options['InitializationVector'];
         }
 
@@ -245,7 +278,10 @@ class IngestManifestFile
         }
 
         if (isset($options['LastModified'])) {
-            Validate::isDateString($options['LastModified'], 'options[LastModified]');
+            Validate::isDateString(
+                $options['LastModified'],
+                'options[LastModified]'
+            );
             $this->_lastModified = new \DateTime($options['LastModified']);
         }
 
@@ -265,12 +301,18 @@ class IngestManifestFile
         }
 
         if (isset($options['ParentIngestManifestId'])) {
-            Validate::isString($options['ParentIngestManifestId'], 'options[ParentIngestManifestId]');
+            Validate::isString(
+                $options['ParentIngestManifestId'],
+                'options[ParentIngestManifestId]'
+            );
             $this->_parentIngestManifestId = $options['ParentIngestManifestId'];
         }
 
         if (isset($options['ParentIngestManifestAssetId'])) {
-            Validate::isString($options['ParentIngestManifestAssetId'], 'options[ParentIngestManifestAssetId]');
+            Validate::isString(
+                $options['ParentIngestManifestAssetId'],
+                'options[ParentIngestManifestAssetId]'
+            );
             $this->_parentIngestManifestAssetId = $options['ParentIngestManifestAssetId'];
         }
 
@@ -285,7 +327,8 @@ class IngestManifestFile
      *
      * @return string
      */
-    public function getErrorDetail() {
+    public function getErrorDetail()
+    {
         return $this->_errorDetail;
     }
 
@@ -294,18 +337,20 @@ class IngestManifestFile
      *
      * @return string
      */
-    public function getParentIngestManifestAssetId() {
+    public function getParentIngestManifestAssetId()
+    {
         return $this->_parentIngestManifestAssetId;
     }
 
     /**
      * Set "ParentIngestManifestAssetId"
      *
-     * @param string    $value ParentIngestManifestAssetId
+     * @param string $value ParentIngestManifestAssetId
      *
      * @return none
      */
-    public function setParentIngestManifestAssetId($value) {
+    public function setParentIngestManifestAssetId($value)
+    {
         $this->_parentIngestManifestAssetId = $value;
     }
 
@@ -314,18 +359,20 @@ class IngestManifestFile
      *
      * @return string
      */
-    public function getParentIngestManifestId() {
+    public function getParentIngestManifestId()
+    {
         return $this->_parentIngestManifestId;
     }
 
     /**
      * Set "ParentIngestManifestId"
      *
-     * @param string    $value ParentIngestManifestId
+     * @param string $value ParentIngestManifestId
      *
      * @return none
      */
-    public function setParentIngestManifestId($value) {
+    public function setParentIngestManifestId($value)
+    {
         $this->_parentIngestManifestId = $value;
     }
 
@@ -334,7 +381,8 @@ class IngestManifestFile
      *
      * @return int
      */
-    public function getState() {
+    public function getState()
+    {
         return $this->_state;
     }
 
@@ -343,18 +391,20 @@ class IngestManifestFile
      *
      * @return string
      */
-    public function getMimeType() {
-       return $this->_mimeType;
+    public function getMimeType()
+    {
+        return $this->_mimeType;
     }
 
     /**
      * Set "Mime type"
      *
-     * @param string    $value Mime type
+     * @param string $value Mime type
      *
      * @return none
      */
-    public function setMimeType($value) {
+    public function setMimeType($value)
+    {
         $this->_mimeType = $value;
     }
 
@@ -363,8 +413,9 @@ class IngestManifestFile
      *
      * @return \DateTime
      */
-    public function getCreated() {
-       return $this->_created;
+    public function getCreated()
+    {
+        return $this->_created;
     }
 
     /**
@@ -372,8 +423,9 @@ class IngestManifestFile
      *
      * @return \DateTime
      */
-    public function getLastModified() {
-       return $this->_lastModified;
+    public function getLastModified()
+    {
+        return $this->_lastModified;
     }
 
     /**
@@ -381,18 +433,20 @@ class IngestManifestFile
      *
      * @return bool
      */
-    public function getIsPrimary() {
-       return $this->_isPrimary;
+    public function getIsPrimary()
+    {
+        return $this->_isPrimary;
     }
 
     /**
      * Set "Is primary"
      *
-     * @param bool    $value Is primary
+     * @param bool $value Is primary
      *
      * @return none
      */
-    public function setIsPrimary($value) {
+    public function setIsPrimary($value)
+    {
         $this->_isPrimary = $value;
     }
 
@@ -401,18 +455,20 @@ class IngestManifestFile
      *
      * @return string
      */
-    public function getInitializationVector() {
-       return $this->_initializationVector;
+    public function getInitializationVector()
+    {
+        return $this->_initializationVector;
     }
 
     /**
      * Set "Initialization vector"
      *
-     * @param string    $value Initialization vector
+     * @param string $value Initialization vector
      *
      * @return none
      */
-    public function setInitializationVector($value) {
+    public function setInitializationVector($value)
+    {
         $this->_initializationVector = $value;
     }
 
@@ -421,18 +477,20 @@ class IngestManifestFile
      *
      * @return string
      */
-    public function getEncryptionKeyId() {
-       return $this->_encryptionKeyId;
+    public function getEncryptionKeyId()
+    {
+        return $this->_encryptionKeyId;
     }
 
     /**
      * Set "Encryption key id"
      *
-     * @param string    $value Encryption key id
+     * @param string $value Encryption key id
      *
      * @return none
      */
-    public function setEncryptionKeyId($value) {
+    public function setEncryptionKeyId($value)
+    {
         $this->_encryptionKeyId = $value;
     }
 
@@ -441,18 +499,20 @@ class IngestManifestFile
      *
      * @return bool
      */
-    public function getIsEncrypted() {
-       return $this->_isEncrypted;
+    public function getIsEncrypted()
+    {
+        return $this->_isEncrypted;
     }
 
     /**
      * Set "Is encrypted"
      *
-     * @param bool    $value Is encrypted
+     * @param bool $value Is encrypted
      *
      * @return none
      */
-    public function setIsEncrypted($value) {
+    public function setIsEncrypted($value)
+    {
         $this->_isEncrypted = $value;
     }
 
@@ -461,18 +521,20 @@ class IngestManifestFile
      *
      * @return string
      */
-    public function getEncryptionScheme() {
-       return $this->_encryptionScheme;
+    public function getEncryptionScheme()
+    {
+        return $this->_encryptionScheme;
     }
 
     /**
      * Set "Encryption scheme"
      *
-     * @param string    $value Encryption scheme
+     * @param string $value Encryption scheme
      *
      * @return none
      */
-    public function setEncryptionScheme($value) {
+    public function setEncryptionScheme($value)
+    {
         $this->_encryptionScheme = $value;
     }
 
@@ -481,18 +543,20 @@ class IngestManifestFile
      *
      * @return string
      */
-    public function getEncryptionVersion() {
-       return $this->_encryptionVersion;
+    public function getEncryptionVersion()
+    {
+        return $this->_encryptionVersion;
     }
 
     /**
      * Set "Encryption version"
      *
-     * @param string    $value Encryption version
+     * @param string $value Encryption version
      *
      * @return none
      */
-    public function setEncryptionVersion($value) {
+    public function setEncryptionVersion($value)
+    {
         $this->_encryptionVersion = $value;
     }
 
@@ -501,18 +565,20 @@ class IngestManifestFile
      *
      * @return string
      */
-    public function getName() {
-       return $this->_name;
+    public function getName()
+    {
+        return $this->_name;
     }
 
     /**
      * Set "Name"
      *
-     * @param string    $value Name
+     * @param string $value Name
      *
      * @return none
      */
-    public function setName($value) {
+    public function setName($value)
+    {
         $this->_name = $value;
     }
 
@@ -521,8 +587,9 @@ class IngestManifestFile
      *
      * @return string
      */
-    public function getId() {
-       return $this->_id;
+    public function getId()
+    {
+        return $this->_id;
     }
 }
 

@@ -58,7 +58,32 @@ class ContentPropertiesTest extends \PHPUnit_Framework_TestCase
      * @covers WindowsAzure\MediaServices\Models\ContentProperties::_fromXmlToArray
      * @covers WindowsAzure\MediaServices\Models\ContentProperties::getProperties
      */
-    public function testFromXml(){
+    public function testFromXmlSimple(){
+
+        // Setup
+        $testString = 'testString';
+        $nameKey = 'name';
+        $xmlString = '<properties xmlns="' . Resources::DSM_XML_NAMESPACE . '" xmlns:d="' . Resources::DS_XML_NAMESPACE . '">
+                       <d:' . $nameKey . '>' . $testString . '</d:' . $nameKey . '>
+                      </properties>';
+        $xml = simplexml_load_string($xmlString);
+        $prop = new ContentProperties();
+
+        // Test
+        $prop->fromXml($xml);
+        $result = $prop->getProperties();
+
+        // Assert
+        $this->assertEquals(1, count($result));
+        $this->assertEquals($testString, $result[$nameKey]);
+    }
+
+    /**
+     * @covers WindowsAzure\MediaServices\Models\ContentProperties::fromXml
+     * @covers WindowsAzure\MediaServices\Models\ContentProperties::_fromXmlToArray
+     * @covers WindowsAzure\MediaServices\Models\ContentProperties::getProperties
+     */
+    public function testFromXmlWithElement(){
 
         // Setup
         $testString = 'testString';
@@ -67,9 +92,7 @@ class ContentPropertiesTest extends \PHPUnit_Framework_TestCase
         $xmlString = '<properties xmlns="' . Resources::DSM_XML_NAMESPACE . '" xmlns:d="' . Resources::DS_XML_NAMESPACE . '">
                        <d:' . $nameKey . '>' . $testString . '</d:' . $nameKey . '>
                        <d:' . $objectKey . '>
-                         <d:element>
-                           <d:' . $nameKey . '>' . $testString . '</d:' . $nameKey . '>
-                         </d:element>
+                         <d:' . $nameKey . '>' . $testString . '</d:' . $nameKey . '>
                        </d:' . $objectKey . '>
                       </properties>';
         $xml = simplexml_load_string($xmlString);
@@ -84,8 +107,48 @@ class ContentPropertiesTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($testString, $result[$nameKey]);
 
         $this->assertEquals(1, count($result[$objectKey]));
+        $this->assertEquals($testString, $result[$objectKey][$nameKey]);
+    }
+
+    /**
+     * @covers WindowsAzure\MediaServices\Models\ContentProperties::fromXml
+     * @covers WindowsAzure\MediaServices\Models\ContentProperties::_fromXmlToArray
+     * @covers WindowsAzure\MediaServices\Models\ContentProperties::getProperties
+     */
+    public function testFromXmlWithComplexElement(){
+
+        // Setup
+        $testString = 'testString';
+        $nameKey = 'name';
+        $otherNameKey = 'name';
+        $objectKey = 'object';
+        $xmlString = '<properties xmlns="' . Resources::DSM_XML_NAMESPACE . '" xmlns:d="' . Resources::DS_XML_NAMESPACE . '">
+                       <d:' . $nameKey . '>' . $testString . '</d:' . $nameKey . '>
+                       <d:' . $objectKey . '>
+                         <d:element>
+                           <d:' . $nameKey . '>' . $testString . '</d:' . $nameKey . '>
+                         </d:element>
+                         <d:element>
+                           <d:' . $otherNameKey . '>' . $testString . '</d:' . $otherNameKey . '>
+                         </d:element>
+                       </d:' . $objectKey . '>
+                      </properties>';
+        $xml = simplexml_load_string($xmlString);
+        $prop = new ContentProperties();
+
+        // Test
+        $prop->fromXml($xml);
+        $result = $prop->getProperties();
+
+        // Assert
+        $this->assertEquals(2, count($result));
+        $this->assertEquals($testString, $result[$nameKey]);
+
+        $this->assertEquals(2, count($result[$objectKey]));
         $this->assertEquals(1, count($result[$objectKey][0]));
         $this->assertEquals($testString, $result[$objectKey][0][$nameKey]);
+        $this->assertEquals(1, count($result[$objectKey][1]));
+        $this->assertEquals($testString, $result[$objectKey][1][$otherNameKey]);
     }
 
     /**

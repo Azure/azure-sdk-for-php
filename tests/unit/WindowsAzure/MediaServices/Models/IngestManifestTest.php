@@ -59,7 +59,7 @@ class IngestManifestTest extends \PHPUnit_Framework_TestCase
                 'LastModified'                => '2013-12-18',
                 'Name'                        => $name,
                 'BlobStorageUriForUpload'     => $blobUri,
-                'Statistics'                  => array($statistics),
+                'Statistics'                  => $statistics,
                 'StorageAccountName'          => $storageName
         );
         $created = new \Datetime($options['Created']);
@@ -91,7 +91,7 @@ class IngestManifestTest extends \PHPUnit_Framework_TestCase
                 'FinishedFilesCount'      => 2
         );
         $options = array(
-                'Statistics'        => array($statistics)
+                'Statistics'        => $statistics
         );
         $ingestManifest = IngestManifest::createFromOptions($options);
 

@@ -50,6 +50,9 @@ use WindowsAzure\Common\Internal\Http\Url;
 use WindowsAzure\Common\Internal\Http\BatchRequest;
 use WindowsAzure\Common\Internal\Http\BatchResponse;
 use WindowsAzure\MediaServices\Models\StorageAccount;
+use WindowsAzure\MediaServices\Models\IngestManifest;
+use WindowsAzure\MediaServices\Models\IngestManifestAsset;
+use WindowsAzure\MediaServices\Models\IngestManifestFile;
 
 /**
  * This class constructs HTTP requests and receive HTTP responses for media services
@@ -241,17 +244,18 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
      *
      * @param object $entity Entity data
      * @param string $path   REST path
+     * @param array  $links  AtomLinks to other media services entities
      *
      * @return array Created entity data
      */
-    private function _createEntity($entity, $path)
+    private function _createEntity($entity, $path, $links = null)
     {
         $method      = Resources::HTTP_POST;
         $headers     = array();
         $postParams  = array();
         $queryParams = array();
         $statusCode  = Resources::STATUS_CREATED;
-        $body        = $this->wrapAtomEntry($entity);
+        $body        = $this->wrapAtomEntry($entity, $links);
 
         $response = $this->send(
             $method,
@@ -1480,5 +1484,379 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
         }
 
         return $result;
+    }
+
+    /**
+     * Create new IngestManifest
+     *
+     * @param WindowsAzure\MediaServices\Models\IngestManifest $ingestManifest An
+     * IngestManifest data
+     *
+     * @return WindowsAzure\MediaServices\Models\IngestManifest
+     */
+    public function createIngestManifest($ingestManifest)
+    {
+        Validate::isA(
+            $ingestManifest,
+            'WindowsAzure\Mediaservices\Models\IngestManifest', 'ingestManifest'
+        );
+
+        return IngestManifest::createFromOptions(
+            $this->_createEntity($ingestManifest, 'IngestManifests')
+        );
+    }
+
+    /**
+     * Get IngestManifest
+     *
+     * @param WindowsAzure\MediaServices\Models\IngestManifest|string $ingestManifest An
+     * IngestManifest data or IngestManifest Id
+     *
+     * @return WindowsAzure\MediaServices\Models\IngestManifest
+     */
+    public function getIngestManifest($ingestManifest)
+    {
+        $ingestManifestId = Utilities::getEntityId(
+            $ingestManifest,
+            'WindowsAzure\MediaServices\Models\IngestManifest'
+        );
+
+        return IngestManifest::createFromOptions(
+            $this->_getEntity("IngestManifests('{$ingestManifestId}')")
+        );
+    }
+
+    /**
+     * Get IngestManifest list
+     *
+     * @return array
+     */
+    public function getIngestManifestList()
+    {
+        $propertyList = $this->_getEntityList("IngestManifests");
+        $result       = array();
+
+        foreach ($propertyList as $properties) {
+            $result[] = IngestManifest::createFromOptions($properties);
+        }
+
+        return $result;
+    }
+
+    /**
+     * Get IngestManifest assets
+     *
+     * @param WindowsAzure\MediaServices\Models\IngestManifest|string $ingestManifest An
+     * IngestManifest data or IngestManifest Id
+     *
+     * @return array
+     */
+    public function getIngestManifestAssets($ingestManifest)
+    {
+        $ingestManifestId = Utilities::getEntityId(
+            $ingestManifest,
+            'WindowsAzure\MediaServices\Models\IngestManifest'
+        );
+
+        $propertyList = $this->_getEntityList(
+            "IngestManifests('{$ingestManifestId}')/IngestManifestAssets"
+        );
+        $result       = array();
+
+        foreach ($propertyList as $properties) {
+            $result[] = Asset::createFromOptions($properties);
+        }
+
+        return $result;
+    }
+
+    /**
+     * Get pending assets of IngestManifest
+     *
+     * @param WindowsAzure\MediaServices\Models\IngestManifest|string $ingestManifest An
+     * IngestManifest data or IngestManifest Id
+     *
+     * @return array
+     */
+    public function getPendingIngestManifestAssets($ingestManifest)
+    {
+        $ingestManifestId = Utilities::getEntityId(
+            $ingestManifest,
+            'WindowsAzure\MediaServices\Models\IngestManifest'
+        );
+
+        $propertyList = $this->_getEntityList(
+            "IngestManifests('{$ingestManifestId}')/PendingIngestManifestAssets"
+        );
+        $result       = array();
+
+        foreach ($propertyList as $properties) {
+            $result[] = Asset::createFromOptions($properties);
+        }
+
+        return $result;
+    }
+
+    /**
+     * Get storage account of IngestManifest
+     *
+     * @param WindowsAzure\MediaServices\Models\IngestManifest|string $ingestManifest An
+     * IngestManifest data or IngestManifest Id
+     *
+     * @return WindowsAzure\MediaServices\Models\StorageAccount
+     */
+    public function getIngestManifestStorageAccount($ingestManifest)
+    {
+        $ingestManifestId = Utilities::getEntityId(
+            $ingestManifest,
+            'WindowsAzure\MediaServices\Models\IngestManifest'
+        );
+
+        return StorageAccount::createFromOptions(
+            $this->_getEntity(
+                "IngestManifests('{$ingestManifestId}')/StorageAccount"
+            )
+        );
+    }
+
+    /**
+     * Update IngestManifest
+     *
+     * @param WindowsAzure\MediaServices\Models\IngestManifestt $ingestManifest New
+     * IngestManifest data with valid id
+     *
+     * @return none
+     */
+    public function updateIngestManifest($ingestManifest)
+    {
+        Validate::isA(
+            $ingestManifest,
+            'WindowsAzure\MediaServices\Models\IngestManifest',
+            'ingestManifest'
+        );
+
+        $this->_updateEntity(
+            $ingestManifest,
+            "IngestManifests('{$ingestManifest->getId()}')"
+        );
+    }
+
+    /**
+     * Delete IngestManifest
+     *
+     * @param WindowsAzure\MediaServices\Models\IngestManifest|string $ingestManifest An
+     * IngestManifest data or IngestManifest Id
+     *
+     * @return none
+     */
+    public function deleteIngestManifest($ingestManifest)
+    {
+        $ingestManifestId = Utilities::getEntityId(
+            $ingestManifest,
+            'WindowsAzure\MediaServices\Models\IngestManifest'
+        );
+
+        $this->_deleteEntity("IngestManifests('{$ingestManifestId}')");
+    }
+
+    /**
+     * Create new IngestManifestAsset
+     *
+     * @param WindowsAzure\MediaServices\Models\IngestManifestAsset $ingestManifestAsset An
+     * IngestManifestAsset data
+     *
+     * @param WindowsAzure\MediaServices\Models\Asset               $asset               An
+     * Asset data to be linked with IngestManifestAsset
+     *
+     * @return WindowsAzure\MediaServices\Models\IngestManifestAsset
+     */
+    public function createIngestManifestAsset($ingestManifestAsset, $asset)
+    {
+        Validate::isA(
+            $ingestManifestAsset,
+            'WindowsAzure\Mediaservices\Models\IngestManifestAsset',
+            'ingestManifestAsset'
+        );
+
+        Validate::isA(
+            $asset,
+            'WindowsAzure\Mediaservices\Models\Asset',
+            'asset'
+        );
+
+        $href = urlencode($asset->getId());
+
+        $atomLink = new AtomLink();
+        $atomLink->setHref($this->getUri() . "Assets('{$href}')");
+        $atomLink->setType(Resources::ATOM_ENTRY_CONTENT_TYPE);
+        $atomLink->setTitle('Asset');
+        $atomLink->setRel(Resources::MEDIA_SERVICES_ASSET_REL);
+
+        return IngestManifestAsset::createFromOptions(
+            $this->_createEntity(
+                $ingestManifestAsset,
+                'IngestManifestAssets',
+                array($atomLink)
+            )
+        );
+    }
+
+    /**
+     * Get IngestManifestAsset.
+     *
+     * @param WindowsAzure\MediaServices\Models\IngestManifestAsset|string $ingestManifestAsset An
+     * IngestManifestAsset data or IngestManifestAsset Id
+     *
+     * @return WindowsAzure\MediaServices\Models\IngestManifestAsset
+     */
+    public function getIngestManifestAsset($ingestManifestAsset)
+    {
+        $ingestManifestAssetId = Utilities::getEntityId(
+            $ingestManifestAsset,
+            'WindowsAzure\Mediaservices\Models\IngestManifestAsset'
+        );
+
+        return IngestManifestAsset::createFromOptions(
+            $this->_getEntity("IngestManifestAssets('{$ingestManifestAssetId}')")
+        );
+    }
+
+    /**
+     * Get list of IngestManifestAsset.
+     *
+     * @return array
+     */
+    public function getIngestManifestAssetList()
+    {
+        $propertyList = $this->_getEntityList('IngestManifestAssets');
+        $result       = array();
+
+        foreach ($propertyList as $properties) {
+            $result[] = IngestManifestAsset::createFromOptions($properties);
+        }
+
+        return $result;
+    }
+
+    /**
+     * Get IngestManifestFiles of IngestManifestAsset
+     *
+     * @param WindowsAzure\MediaServices\Models\IngestManifestAsset|string $ingestManifestAsset An
+     * IngestManifestAsset data or IngestManifestAsset Id
+     *
+     * @return array
+     */
+    public function getIngestManifestAssetFiles($ingestManifestAsset)
+    {
+        $ingestManifestAssetId = Utilities::getEntityId(
+            $ingestManifestAsset,
+            'WindowsAzure\MediaServices\Models\IngestManifestAsset'
+        );
+
+        $propertyList = $this->_getEntityList(
+            "IngestManifestAssets('{$ingestManifestAssetId}')/IngestManifestFiles"
+        );
+        $result       = array();
+
+        foreach ($propertyList as $properties) {
+            $result[] = ingestManifestFile::createFromOptions($properties);
+        }
+
+        return $result;
+    }
+
+
+    /**
+     * Delete IngestManifestAsset
+     *
+     * @param WindowsAzure\MediaServices\Models\IngestManifestAsset|string $ingestManifestAsset An
+     * IngestManifestAsset data or IngestManifestAsset Id
+     *
+     * @return none
+     */
+    public function deleteIngestManifestAsset($ingestManifestAsset)
+    {
+        $ingestManifestAssetId = Utilities::getEntityId(
+            $ingestManifestAsset,
+            'WindowsAzure\Mediaservices\Models\IngestManifestAsset'
+        );
+
+        $this->_deleteEntity("IngestManifestAssets('{$ingestManifestAssetId}')");
+    }
+
+    /**
+     * Create new IngestManifestFile
+     *
+     * @param WindowsAzure\MediaServices\Models\IngestManifestFile $ingestManifestFile An
+     * IngestManifestFile data
+     *
+     * @return WindowsAzure\MediaServices\Models\IngestManifestFile
+     */
+    public function createIngestManifestFile($ingestManifestFile)
+    {
+        Validate::isA(
+            $ingestManifestFile,
+            'WindowsAzure\Mediaservices\Models\IngestManifestFile',
+            'ingestManifestFile'
+        );
+
+        return IngestManifestFile::createFromOptions(
+            $this->_createEntity($ingestManifestFile, 'IngestManifestFiles')
+        );
+    }
+
+    /**
+     * Get IngestManifestFile.
+     *
+     * @param WindowsAzure\MediaServices\Models\IngestManifestFile|string $ingestManifestFile An
+     * IngestManifestFile data or IngestManifestFile Id
+     *
+     * @return WindowsAzure\MediaServices\Models\IngestManifestFile
+     */
+    public function getIngestManifestFile($ingestManifestFile)
+    {
+        $ingestManifestFileId = Utilities::getEntityId(
+            $ingestManifestFile,
+            'WindowsAzure\Mediaservices\Models\IngestManifestFile'
+        );
+
+        return IngestManifestFile::createFromOptions(
+            $this->_getEntity("IngestManifestFiles('{$ingestManifestFileId}')")
+        );
+    }
+
+    /**
+     * Get list of IngestManifestFile.
+     *
+     * @return array
+     */
+    public function getIngestManifestFileList()
+    {
+        $propertyList = $this->_getEntityList('IngestManifestFiles');
+        $result       = array();
+
+        foreach ($propertyList as $properties) {
+            $result[] = IngestManifestAsset::createFromOptions($properties);
+        }
+
+        return $result;
+    }
+
+    /**
+     * Delete IngestManifestFile
+     *
+     * @param WindowsAzure\MediaServices\Models\IngestManifestFile|string $ingestManifestFile An
+     * IngestManifestFile data or IngestManifestFile Id
+     *
+     * @return none
+     */
+    public function deleteIngestManifestFile($ingestManifestFile)
+    {
+        $ingestManifestFileId = Utilities::getEntityId(
+            $ingestManifestFile,
+            'WindowsAzure\Mediaservices\Models\IngestManifestFile'
+        );
+
+        $this->_deleteEntity("IngestManifestFiles('{$ingestManifestFileId}')");
     }
 }

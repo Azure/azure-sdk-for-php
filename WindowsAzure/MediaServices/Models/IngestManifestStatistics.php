@@ -71,9 +71,12 @@ class IngestManifestStatistics
     /**
      * Create ManifestStatistics from array
      *
-     * @param array $options    Array containing values for object properties
+     * @param array $options Array containing values for object properties
+     *
+     * @return WindowsAzure\MediaServices\Models\IngestManifestStatistics
      */
-    public static function createFromOptions($options) {
+    public static function createFromOptions($options)
+    {
         $statistics = new IngestManifestStatistics();
         $statistics->fromArray($options);
 
@@ -82,26 +85,42 @@ class IngestManifestStatistics
 
     /**
      * Fill ManifestStatistics from array
-     * @param array $options    Array containing values for object properties
+     *
+     * @param array $options Array containing values for object properties
+     *
+     * @return none
      */
-    public function fromArray($options) {
+    public function fromArray($options)
+    {
         if (isset($options['PendingFilesCount'])) {
-            Validate::isInteger($options['PendingFilesCount'], 'options[PendingFilesCount]');
+            Validate::isInteger(
+                $options['PendingFilesCount'],
+                'options[PendingFilesCount]'
+            );
             $this->_pendingFilesCount = $options['PendingFilesCount'];
         }
 
         if (isset($options['FinishedFilesCount'])) {
-            Validate::isInteger($options['FinishedFilesCount'], 'options[FinishedFilesCount]');
+            Validate::isInteger(
+                $options['FinishedFilesCount'],
+                'options[FinishedFilesCount]'
+            );
             $this->_finishedFilesCount = $options['FinishedFilesCount'];
         }
 
         if (isset($options['ErrorFilesCount'])) {
-            Validate::isInteger($options['ErrorFilesCount'], 'options[ErrorFilesCount]');
+            Validate::isInteger(
+                $options['ErrorFilesCount'],
+                'options[ErrorFilesCount]'
+            );
             $this->_errorFilesCount = $options['ErrorFilesCount'];
         }
 
         if (isset($options['ErrorFilesDetails'])) {
-            Validate::isString($options['ErrorFilesDetails'], 'options[ErrorFilesDetails]');
+            Validate::isString(
+                $options['ErrorFilesDetails'],
+                'options[ErrorFilesDetails]'
+            );
             $this->_errorFilesDetails = $options['ErrorFilesDetails'];
         }
     }
@@ -111,8 +130,9 @@ class IngestManifestStatistics
      *
      * @return string
      */
-    public function getErrorFilesDetails() {
-       return $this->_errorFilesDetails;
+    public function getErrorFilesDetails()
+    {
+        return $this->_errorFilesDetails;
     }
 
     /**
@@ -120,8 +140,9 @@ class IngestManifestStatistics
      *
      * @return int
      */
-    public function getErrorFilesCount() {
-       return $this->_errorFilesCount;
+    public function getErrorFilesCount()
+    {
+        return $this->_errorFilesCount;
     }
 
     /**
@@ -129,8 +150,9 @@ class IngestManifestStatistics
      *
      * @return int
      */
-    public function getFinishedFilesCount() {
-       return $this->_finishedFilesCount;
+    public function getFinishedFilesCount()
+    {
+        return $this->_finishedFilesCount;
     }
 
     /**
@@ -138,8 +160,9 @@ class IngestManifestStatistics
      *
      * @return int
      */
-    public function getPendingFilesCount() {
-       return $this->_pendingFilesCount;
+    public function getPendingFilesCount()
+    {
+        return $this->_pendingFilesCount;
     }
 }
 

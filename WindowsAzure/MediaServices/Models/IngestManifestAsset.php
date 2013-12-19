@@ -71,10 +71,16 @@ class IngestManifestAsset
     /**
      * Create IngestManifestAsset from array
      *
-     * @param array $options    Array containing values for object properties
+     * @param array $options Array containing values for object properties
+     *
+     * @return WindowsAzure\MediaServices\Models\IngestManifestAsset
      */
-    public static function createFromOptions($options) {
-        Validate::notNull($options['ParentIngestManifestId'], 'options[ParentIngestManifestId]');
+    public static function createFromOptions($options)
+    {
+        Validate::notNull(
+            $options['ParentIngestManifestId'],
+            'options[ParentIngestManifestId]'
+        );
 
         $asset = new IngestManifestAsset($options['ParentIngestManifestId']);
         $asset->fromArray($options);
@@ -85,17 +91,22 @@ class IngestManifestAsset
     /**
      * Create IngestManifestAsset
      *
-     * @param int   $parentIngestManifestId Parent IngestManifest id.
+     * @param int $parentIngestManifestId Parent IngestManifest id.
      */
-    public function __construct($parentIngestManifestId) {
+    public function __construct($parentIngestManifestId)
+    {
         $this->_parentIngestManifestId = $parentIngestManifestId;
     }
 
     /**
      * Fill IngestManifestAsset from array
-     * @param array $options    Array containing values for object properties
+     *
+     * @param array $options Array containing values for object properties
+     *
+     * @return none
      */
-    public function fromArray($options) {
+    public function fromArray($options)
+    {
         if (isset($options['Id'])) {
             Validate::isString($options['Id'], 'options[Id]');
             $this->_id = $options['Id'];
@@ -107,12 +118,18 @@ class IngestManifestAsset
         }
 
         if (isset($options['LastModified'])) {
-            Validate::isDateString($options['LastModified'], 'options[LastModified]');
+            Validate::isDateString(
+                $options['LastModified'],
+                'options[LastModified]'
+            );
             $this->_lastModified = new \DateTime($options['LastModified']);
         }
 
         if (isset($options['ParentIngestManifestId'])) {
-            Validate::isString($options['ParentIngestManifestId'], 'options[ParentIngestManifestId]');
+            Validate::isString(
+                $options['ParentIngestManifestId'],
+                'options[ParentIngestManifestId]'
+            );
             $this->_parentIngestManifestId = $options['ParentIngestManifestId'];
         }
     }
@@ -122,7 +139,8 @@ class IngestManifestAsset
      *
      * @return string
      */
-    public function getParentIngestManifestId() {
+    public function getParentIngestManifestId()
+    {
         return $this->_parentIngestManifestId;
     }
 
@@ -131,8 +149,9 @@ class IngestManifestAsset
      *
      * @return \DateTime
      */
-    public function getLastModified() {
-       return $this->_lastModified;
+    public function getLastModified()
+    {
+        return $this->_lastModified;
     }
 
     /**
@@ -140,8 +159,9 @@ class IngestManifestAsset
      *
      * @return \DateTime
      */
-    public function getCreated() {
-       return $this->_created;
+    public function getCreated()
+    {
+        return $this->_created;
     }
 
     /**
@@ -149,8 +169,9 @@ class IngestManifestAsset
      *
      * @return string
      */
-    public function getId() {
-       return $this->_id;
+    public function getId()
+    {
+        return $this->_id;
     }
 }
 

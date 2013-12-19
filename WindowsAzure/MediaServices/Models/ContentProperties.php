@@ -84,10 +84,14 @@ class ContentProperties
         foreach ($xml->children($dataNamespace) as $child) {
             if (count($child->children($dataNamespace)) > 0) {
                 $value = array();
-                foreach ($child->children($dataNamespace) as $subChild) {
-                    if ($subChild->getName() == 'element') {
+                $children = $child->children($dataNamespace);
+                $firstChild = $children[0];
+                if ($firstChild->getName() == 'element') {
+                    foreach ($children as $subChild) {
                         $value[] = $this->_fromXmlToArray($subChild);
                     }
+                } else {
+                    $value = $this->_fromXmlToArray($child);
                 }
             } else {
                 $value = (string)$child;
