@@ -1564,7 +1564,7 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
         $result       = array();
 
         foreach ($propertyList as $properties) {
-            $result[] = Asset::createFromOptions($properties);
+            $result[] = IngestManifestAsset::createFromOptions($properties);
         }
 
         return $result;
@@ -1591,7 +1591,7 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
         $result       = array();
 
         foreach ($propertyList as $properties) {
-            $result[] = Asset::createFromOptions($properties);
+            $result[] = IngestManifestAsset::createFromOptions($properties);
         }
 
         return $result;
@@ -1622,7 +1622,7 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
     /**
      * Update IngestManifest
      *
-     * @param WindowsAzure\MediaServices\Models\IngestManifestt $ingestManifest New
+     * @param WindowsAzure\MediaServices\Models\IngestManifest $ingestManifest New
      * IngestManifest data with valid id
      *
      * @return none
@@ -1836,7 +1836,7 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
         $result       = array();
 
         foreach ($propertyList as $properties) {
-            $result[] = IngestManifestAsset::createFromOptions($properties);
+            $result[] = IngestManifestFile::createFromOptions($properties);
         }
 
         return $result;
