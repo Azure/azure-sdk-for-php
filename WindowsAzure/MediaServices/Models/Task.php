@@ -215,7 +215,11 @@ class Task
         Validate::notNull($options['Options'], 'options[Options]');
         Validate::notNull($options['MediaProcessorId'], 'options[MediaProcessorId]');
 
-        $task = new Task($options['TaskBody'], $options['MediaProcessorId'], $options['Options']);
+        $task = new Task(
+            $options['TaskBody'],
+            $options['MediaProcessorId'],
+            $options['Options']
+        );
         $task->fromArray($options);
 
         return $task;
@@ -260,7 +264,10 @@ class Task
         }
 
         if (isset($options['MediaProcessorId'])) {
-            Validate::isString($options['MediaProcessorId'], 'options[MediaProcessorId]');
+            Validate::isString(
+                $options['MediaProcessorId'],
+                'options[MediaProcessorId]'
+            );
             $this->_mediaProcessorId = $options['MediaProcessorId'];
         }
 
@@ -285,7 +292,10 @@ class Task
         }
 
         if (isset($options['RunningDuration'])) {
-            Validate::isDouble($options['RunningDuration'], 'options[RunningDuration]');
+            Validate::isDouble(
+                $options['RunningDuration'],
+                'options[RunningDuration]'
+            );
             $this->_runningDuration = $options['RunningDuration'];
         }
 
@@ -310,22 +320,34 @@ class Task
         }
 
         if (isset($options['EncryptionKeyId'])) {
-            Validate::isString($options['EncryptionKeyId'], 'options[EncryptionKeyId]');
+            Validate::isString(
+                $options['EncryptionKeyId'],
+                'options[EncryptionKeyId]'
+            );
             $this->_encryptionKeyId = $options['EncryptionKeyId'];
         }
 
         if (isset($options['EncryptionScheme'])) {
-            Validate::isString($options['EncryptionScheme'], 'options[EncryptionScheme]');
+            Validate::isString(
+                $options['EncryptionScheme'],
+                'options[EncryptionScheme]'
+            );
             $this->_encryptionScheme = $options['EncryptionScheme'];
         }
 
         if (isset($options['EncryptionVersion'])) {
-            Validate::isString($options['EncryptionVersion'], 'options[EncryptionVersion]');
+            Validate::isString(
+                $options['EncryptionVersion'],
+                'options[EncryptionVersion]'
+            );
             $this->_encryptionVersion = $options['EncryptionVersion'];
         }
 
         if (isset($options['InitializationVector'])) {
-            Validate::isString($options['InitializationVector'], 'options[InitializationVector]');
+            Validate::isString(
+                $options['InitializationVector'],
+                'options[InitializationVector]'
+            );
             $this->_initializationVector = $options['InitializationVector'];
         }
 
@@ -333,7 +355,9 @@ class Task
             $this->_errorDetails = array();
             if (is_array($options['ErrorDetails'])) {
                 foreach ($options['ErrorDetails'] as $errorDetail) {
-                    $this->_errorDetails[] = ErrorDetail::createFromOptions($errorDetail);
+                    $this->_errorDetails[] = ErrorDetail::createFromOptions(
+                        $errorDetail
+                    );
                 }
             }
         }
@@ -342,7 +366,8 @@ class Task
             $this->_historicalEvents = array();
             if (is_array($options['HistoricalEvents'])) {
                 foreach ($options['HistoricalEvents'] as $historicalEvent) {
-                    $this->_historicalEvents[] = TaskHistoricalEvent::createFromOptions($historicalEvent);
+                    $evnt = TaskHistoricalEvent::createFromOptions($historicalEvent);
+                    $this->_historicalEvents[] = $evnt;
                 }
             }
         }

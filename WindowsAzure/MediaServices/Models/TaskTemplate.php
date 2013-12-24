@@ -147,10 +147,19 @@ class TaskTemplate
      */
     public static function createFromOptions($options)
     {
-        Validate::notNull($options['NumberofInputAssets'], 'options[NumberofInputAssets]');
-        Validate::notNull($options['NumberofOutputAssets'], 'options[NumberofOutputAssets]');
+        Validate::notNull(
+            $options['NumberofInputAssets'],
+            'options[NumberofInputAssets]'
+        );
+        Validate::notNull(
+            $options['NumberofOutputAssets'],
+            'options[NumberofOutputAssets]'
+        );
 
-        $taskTemplate = new TaskTemplate($options['NumberofInputAssets'], $options['NumberofOutputAssets']);
+        $taskTemplate = new TaskTemplate(
+            $options['NumberofInputAssets'],
+            $options['NumberofOutputAssets']
+        );
         $taskTemplate->fromArray($options);
 
         return $taskTemplate;
@@ -159,8 +168,10 @@ class TaskTemplate
     /**
      * Create task
      *
-     * @param int $numberOfInputAssets  Number of input Assets the TaskTemplate must process.
-     * @param int $numberOfOutputAssets Number of output Assets the TaskTemplate must process.
+     * @param int $numberOfInputAssets  Number of input Assets the TaskTemplate
+     *                                  must process.
+     * @param int $numberOfOutputAssets Number of output Assets the TaskTemplate
+     *                                  must process.
      */
     public function __construct($numberOfInputAssets, $numberOfOutputAssets)
     {
@@ -172,7 +183,7 @@ class TaskTemplate
     /**
      * Fill task template from array
      *
-     * @param array $options    Array containing values for object properties
+     * @param array $options Array containing values for object properties
      *
      * @return none
      */
@@ -199,12 +210,18 @@ class TaskTemplate
         }
 
         if (isset($options['LastModified'])) {
-            Validate::isDateString($options['LastModified'], 'options[LastModified]');
+            Validate::isDateString(
+                $options['LastModified'],
+                'options[LastModified]'
+            );
             $this->_lastModified = new \DateTime($options['LastModified']);
         }
 
         if (isset($options['MediaProcessorId'])) {
-            Validate::isString($options['MediaProcessorId'], 'options[MediaProcessorId]');
+            Validate::isString(
+                $options['MediaProcessorId'],
+                'options[MediaProcessorId]'
+            );
             $this->_mediaProcessorId = $options['MediaProcessorId'];
         }
 
@@ -214,12 +231,18 @@ class TaskTemplate
         }
 
         if (isset($options['NumberofInputAssets'])) {
-            Validate::isInteger($options['NumberofInputAssets'], 'options[NumberofInputAssets]');
+            Validate::isInteger(
+                $options['NumberofInputAssets'],
+                'options[NumberofInputAssets]'
+            );
             $this->_numberofInputAssets = $options['NumberofInputAssets'];
         }
 
         if (isset($options['NumberofOutputAssets'])) {
-            Validate::isInteger($options['NumberofOutputAssets'], 'options[NumberofOutputAssets]');
+            Validate::isInteger(
+                $options['NumberofOutputAssets'],
+                'options[NumberofOutputAssets]'
+            );
             $this->_numberofOutputAssets = $options['NumberofOutputAssets'];
         }
 
@@ -229,22 +252,34 @@ class TaskTemplate
         }
 
         if (isset($options['EncryptionKeyId'])) {
-            Validate::isString($options['EncryptionKeyId'], 'options[EncryptionKeyId]');
+            Validate::isString(
+                $options['EncryptionKeyId'],
+                'options[EncryptionKeyId]'
+            );
             $this->_encryptionKeyId = $options['EncryptionKeyId'];
         }
 
         if (isset($options['EncryptionScheme'])) {
-            Validate::isString($options['EncryptionScheme'], 'options[EncryptionScheme]');
+            Validate::isString(
+                $options['EncryptionScheme'],
+                'options[EncryptionScheme]'
+            );
             $this->_encryptionScheme = $options['EncryptionScheme'];
         }
 
         if (isset($options['EncryptionVersion'])) {
-            Validate::isString($options['EncryptionVersion'], 'options[EncryptionVersion]');
+            Validate::isString(
+                $options['EncryptionVersion'],
+                'options[EncryptionVersion]'
+            );
             $this->_encryptionVersion = $options['EncryptionVersion'];
         }
 
         if (isset($options['InitializationVector'])) {
-            Validate::isString($options['InitializationVector'], 'options[InitializationVector]');
+            Validate::isString(
+                $options['InitializationVector'],
+                'options[InitializationVector]'
+            );
             $this->_initializationVector = $options['InitializationVector'];
         }
     }

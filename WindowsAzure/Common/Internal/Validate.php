@@ -337,7 +337,8 @@ class Validate
     /**
      * Validate if method exists in object
      *
-     * @param object $objectInstance An object that requires method existing validation
+     * @param object $objectInstance An object that requires method existing
+     *                               validation
      * @param string $method         Method name
      * @param string $name           The parameter name
      *
@@ -351,8 +352,7 @@ class Validate
 
         if (method_exists($objectInstance, $method)) {
             return true;
-        }
-        else {
+        } else {
             throw new \InvalidArgumentException(
                 sprintf(
                     Resources::ERROR_METHOD_NOT_FOUND,

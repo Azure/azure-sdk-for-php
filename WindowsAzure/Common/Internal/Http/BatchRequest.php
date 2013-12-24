@@ -73,7 +73,8 @@ class BatchRequest
     /**
      * Append new context to batch request
      *
-     * @param WindowsAzure\Common\Internal\Http\HttpCallContext $context Http call context to add to batch request
+     * @param WindowsAzure\Common\Internal\Http\HttpCallContext $context Http call
+     * context to add to batch request
      *
      * @return none
      */

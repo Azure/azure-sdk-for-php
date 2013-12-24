@@ -620,11 +620,11 @@ class Utilities
      *
      * @return string
      */
-    public static function getEntityId($entity, $type, $method = 'getId') {
+    public static function getEntityId($entity, $type, $method = 'getId')
+    {
         if (is_string($entity)) {
             return $entity;
-        }
-        else {
+        } else {
             Validate::isA($entity, $type, 'entity');
             Validate::methodExists($entity, $method, $type);
 

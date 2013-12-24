@@ -80,10 +80,11 @@ class ContentProperties
      */
     private function _fromXmlToArray($xml) {
         $result = array();
-        foreach ($xml->children(Resources::DS_XML_NAMESPACE) as $child) {
-            if (count($child->children(Resources::DS_XML_NAMESPACE)) > 0) {
+        $dataNamespace = Resources::DS_XML_NAMESPACE;
+        foreach ($xml->children($dataNamespace) as $child) {
+            if (count($child->children($dataNamespace)) > 0) {
                 $value = array();
-                foreach ($child->children(Resources::DS_XML_NAMESPACE) as $subChild) {
+                foreach ($child->children($dataNamespace) as $subChild) {
                     if ($subChild->getName() == 'element') {
                         $value[] = $this->_fromXmlToArray($subChild);
                     }
@@ -115,7 +116,7 @@ class ContentProperties
         $this->properties = array();
         foreach ($methodArray as $method) {
             if ((strpos($method->name, 'get') === 0)
-            && $method->isPublic()
+                && $method->isPublic()
             ) {
                 $variableName  = substr($method->name, 3);
                 $variableValue = $method->invoke($object);

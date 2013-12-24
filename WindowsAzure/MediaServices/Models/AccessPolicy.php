@@ -53,14 +53,16 @@ class AccessPolicy
     const PERMISSIONS_READ = 1;
 
     /**
-     * The access rights the client has when interacting with the Asset. (Write)
+     * The access rights the client has when interacting with the Asset.
+     * (Write)
      *
      * @var int
      */
     const PERMISSIONS_WRITE = 2;
 
     /**
-     * The access rights the client has when interacting with the Asset. (Delete)
+     * The access rights the client has when interacting with the Asset.
+     * (Delete)
      *
      * @var int
      */
@@ -162,7 +164,10 @@ class AccessPolicy
         }
 
         if (isset($options['LastModified'])) {
-            Validate::isDateString($options['LastModified'], 'options[LastModified]');
+            Validate::isDateString(
+                $options['LastModified'],
+                'options[LastModified]'
+            );
             $this->_lastModified = new \DateTime($options['LastModified']);
         }
 
@@ -172,12 +177,18 @@ class AccessPolicy
         }
 
         if (isset($options['DurationInMinutes'])) {
-            Validate::isDouble($options['DurationInMinutes'], 'options[DurationInMinutes]');
+            Validate::isDouble(
+                $options['DurationInMinutes'],
+                'options[DurationInMinutes]'
+            );
             $this->_durationInMinutes = $options['DurationInMinutes'];
         }
 
         if (isset($options['Permissions'])) {
-            Validate::isInteger($options['Permissions'], 'options[Permissions]');
+            Validate::isInteger(
+                $options['Permissions'],
+                'options[Permissions]'
+            );
             $this->_permissions = $options['Permissions'];
         }
     }

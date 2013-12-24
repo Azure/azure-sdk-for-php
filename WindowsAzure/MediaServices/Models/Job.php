@@ -174,15 +174,6 @@ class Job
     }
 
     /**
-     * Create job
-     *
-     * @param array $inputMediaAssets Assets to process.
-     */
-    public function __construct()
-    {
-    }
-
-    /**
      * Fill asset from array
      *
      * @param array $options Array containing values for object properties
@@ -207,7 +198,10 @@ class Job
         }
 
         if (isset($options['LastModified'])) {
-            Validate::isDateString($options['LastModified'], 'options[LastModified]');
+            Validate::isDateString(
+                $options['LastModified'],
+                'options[LastModified]'
+            );
             $this->_lastModified = new \DateTime($options['LastModified']);
         }
 
@@ -222,7 +216,10 @@ class Job
         }
 
         if (isset($options['RunningDuration'])) {
-            Validate::isDouble($options['RunningDuration'], 'options[RunningDuration]');
+            Validate::isDouble(
+                $options['RunningDuration'],
+                'options[RunningDuration]'
+            );
             $this->_runningDuration = $options['RunningDuration'];
         }
 

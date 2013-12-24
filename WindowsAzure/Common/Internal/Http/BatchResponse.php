@@ -53,8 +53,11 @@ class BatchResponse
     /**
      * Constructor
      *
-     * @param string                                         $content Http response as string
-     * @param WindowsAzure\Common\Internal\Http\BatchRequest $request Source batch request object
+     * @param string                                         $content Http response
+     * as string
+     *
+     * @param WindowsAzure\Common\Internal\Http\BatchRequest $request Source batch
+     * request object
      */
     public function __construct($content, $request = null)
     {
@@ -67,7 +70,11 @@ class BatchResponse
         $requestContexts          = null;
 
         if ($request != null) {
-            Validate::isA($request, 'WindowsAzure\Common\Internal\Http\BatchRequest', 'request');
+            Validate::isA(
+                $request,
+                'WindowsAzure\Common\Internal\Http\BatchRequest',
+                'request'
+            );
             $requestContexts = $request->getContexts();
         }
 

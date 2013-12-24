@@ -69,13 +69,6 @@ class ErrorDetail
     }
 
     /**
-     * Create error detail
-     */
-    public function __construct()
-    {
-    }
-
-    /**
      * Fill error detail from array
      *
      * @param array $options Array containing values for object properties

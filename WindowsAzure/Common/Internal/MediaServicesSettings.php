@@ -139,7 +139,11 @@ class MediaServicesSettings extends ServiceSettings
      * @param string $endpointUri      The service management endpoint uri.
      * @param string $oauthEndpointUri The OAuth service endpoint uri.
      */
-    public function __construct($accountName, $accessKey, $endpointUri = null, $oauthEndpointUri = null)
+    public function __construct(
+        $accountName,
+        $accessKey,
+        $endpointUri = null,
+        $oauthEndpointUri = null)
     {
         Validate::notNullOrEmpty($accountName, 'accountName');
         Validate::notNullOrEmpty($accessKey, 'accountKey');

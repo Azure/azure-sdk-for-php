@@ -206,7 +206,10 @@ class Asset
         }
 
         if (isset($options['LastModified'])) {
-            Validate::isDateString($options['LastModified'], 'options[LastModified]');
+            Validate::isDateString(
+                $options['LastModified'],
+                'options[LastModified]'
+            );
             $this->_lastModified = new \DateTime($options['LastModified']);
         }
 
@@ -231,7 +234,10 @@ class Asset
         }
 
         if (isset($options['StorageAccountName'])) {
-            Validate::isString($options['StorageAccountName'], 'options[StorageAccountName]');
+            Validate::isString(
+                $options['StorageAccountName'],
+                'options[StorageAccountName]'
+            );
             $this->_storageAccountName = $options['StorageAccountName'];
         }
     }
@@ -291,7 +297,7 @@ class Asset
     /**
      * Set "Name"
      *
-     * @param string    $value Name
+     * @param string $value Name
      *
      * @return none
      */
@@ -313,7 +319,7 @@ class Asset
     /**
      * Set "Alternate id"
      *
-     * @param string    $value Alternate id
+     * @param string $value Alternate id
      *
      * @return none
      */
