@@ -39,7 +39,7 @@ use WindowsAzure\MediaServices\Models\Task;
 use WindowsAzure\MediaServices\Models\MediaProcessor;
 use WindowsAzure\MediaServices\Models\JobTemplate;
 use WindowsAzure\MediaServices\Models\TaskTemplate;
-use WindowsAzure\MediaServices\Models\ContentProperties;
+use WindowsAzure\MediaServices\Internal\ContentPropertiesSerializer;
 use WindowsAzure\Common\Internal\Atom\Feed;
 use WindowsAzure\Common\Internal\Atom\Entry;
 use WindowsAzure\Common\Internal\Atom\Content;
@@ -150,16 +150,9 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
     {
         Validate::notNull($entity, 'entity');
 
-        $properties = new ContentProperties();
-        $properties->setPropertiesFromObject($entity);
-
-        $propertyWriter = new \XMLWriter();
-        $propertyWriter->openMemory();
-        $properties->writeXml($propertyWriter);
-
         $content = new Content();
         $content->setType(Resources::XML_CONTENT_TYPE);
-        $content->setText($propertyWriter->outputMemory());
+        $content->setText(ContentPropertiesSerializer::serialize($entity));
 
         $atomEntry = new Entry();
         $atomEntry->setContent($content);
@@ -193,13 +186,9 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
         $result  = array();
         $content = $entry->getContent();
         if (!empty($content)) {
-            $propertiesXml = $content->getXml()->children(
-                Resources::DSM_XML_NAMESPACE
+            $result = ContentPropertiesSerializer::unserialize(
+                $content->getXml()->children(Resources::DSM_XML_NAMESPACE)
             );
-
-            $properties = new ContentProperties();
-            $properties->fromXml($propertiesXml);
-            $result = $properties->getProperties();
         }
 
         return $result;

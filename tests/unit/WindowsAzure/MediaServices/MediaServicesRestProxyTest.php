@@ -1169,7 +1169,7 @@ class MediaServicesRestProxyTest extends MediaServicesRestProxyTestBase
         $name = TestResources::MEDIA_SERVICES_INGEST_MANIFEST . $this->createSuffix();
         $ingestManifest->setName($name);
         $ingestManifest = $this->createIngestManifest($ingestManifest);
-        $ingestAssetFileName = TestResources::MEDIA_SERVICES_INGEST_MANIFEST_FILE . $this->createSuffix();
+        $ingestAssetFileName = TestResources::MEDIA_SERVICES_DUMMY_FILE_NAME . $this->createSuffix();
 
         $asset = new Asset(Asset::OPTIONS_NONE);
         $asset->setName(TestResources::MEDIA_SERVICES_ASSET_NAME . $this->createSuffix());
