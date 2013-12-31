@@ -1466,7 +1466,8 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
         $result     = null;
         foreach ($mediaProcessors as $mediaProcessor) {
             if (($mediaProcessor->getName() == $name)
-                && ($mediaProcessor->getVersion() > $maxVersion)) {
+                && ($mediaProcessor->getVersion() > $maxVersion)
+            ) {
                 $result     = $mediaProcessor;
                 $maxVersion = $mediaProcessor->getVersion();
             }

@@ -187,7 +187,8 @@ class IngestManifestFile
         $file = new IngestManifestFile(
             $options['Name'],
             $options['ParentIngestManifestId'],
-            $options['ParentIngestManifestAssetId']);
+            $options['ParentIngestManifestAssetId']
+        );
 
         $file->fromArray($options);
 
@@ -211,8 +212,8 @@ class IngestManifestFile
         $parentIngestManifestId,
         $parentIngestManifestAssetId
     ) {
-        $this->_name = $name;
-        $this->_parentIngestManifestId = $parentIngestManifestId;
+        $this->_name                        = $name;
+        $this->_parentIngestManifestId      = $parentIngestManifestId;
         $this->_parentIngestManifestAssetId = $parentIngestManifestAssetId;
     }
 
@@ -313,7 +314,9 @@ class IngestManifestFile
                 $options['ParentIngestManifestAssetId'],
                 'options[ParentIngestManifestAssetId]'
             );
-            $this->_parentIngestManifestAssetId = $options['ParentIngestManifestAssetId'];
+            $id = $options['ParentIngestManifestAssetId'];
+
+            $this->_parentIngestManifestAssetId = $id;
         }
 
         if (isset($options['ErrorDetail'])) {

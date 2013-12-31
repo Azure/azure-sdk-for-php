@@ -275,7 +275,7 @@ class Asset
     /**
      * Set "Options"
      *
-     * @param int    $value Options
+     * @param int $value Options
      *
      * @return none
      */

@@ -180,10 +180,9 @@ class IngestManifest
         if (isset($options['Statistics'])) {
             $this->_statistics = null;
             if (is_array($options['Statistics'])) {
-                $stat = IngestManifestStatistics::createFromOptions(
+                $this->_statistics = IngestManifestStatistics::createFromOptions(
                     $options['Statistics']
                 );
-                $this->_statistics = $stat;
             }
         }
 

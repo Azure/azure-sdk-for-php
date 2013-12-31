@@ -45,7 +45,7 @@ class ContentPropertiesSerializer
     /**
      * Parse a Properties xml.
      *
-     * @param \SimpleXML $xml XML object to parse
+     * @param \SimpleXML $xmlContent XML object to parse
      *
      * @return array
      */
@@ -58,6 +58,8 @@ class ContentPropertiesSerializer
 
     /**
      * Get properties XML from object.
+     *
+     * @param object The object to get properties
      *
      * @return string
      */
@@ -86,13 +88,14 @@ class ContentPropertiesSerializer
      *
      * @return array
      */
-    private static function _unserializeRecursive($xml) {
-        $result = array();
+    private static function _unserializeRecursive($xml)
+    {
+        $result        = array();
         $dataNamespace = Resources::DS_XML_NAMESPACE;
         foreach ($xml->children($dataNamespace) as $child) {
             if (count($child->children($dataNamespace)) > 0) {
-                $value = array();
-                $children = $child->children($dataNamespace);
+                $value      = array();
+                $children   = $child->children($dataNamespace);
                 $firstChild = $children[0];
                 if ($firstChild->getName() == 'element') {
                     foreach ($children as $subChild) {
@@ -118,7 +121,8 @@ class ContentPropertiesSerializer
     /**
      * Get object properties as array
      *
-     * @param   unknown $object Source object
+     * @param object     $object    Source object
+     * @param \XMLWriter $xmlWriter Xml writer to use
      *
      * @return  array
      */
@@ -147,7 +151,7 @@ class ContentPropertiesSerializer
                             Resources::DS_XML_NAMESPACE
                         );
 
-                        foreach($variableValue as $item) {
+                        foreach ($variableValue as $item) {
                             $xmlWriter->startElementNS(
                                 'data',
                                 Resources::ELEMENT,
