@@ -1066,6 +1066,32 @@ class MediaServicesRestProxyTest extends MediaServicesRestProxyTestBase
     }
 
     /**
+     * @covers WindowsAzure\MediaServices\MediaServicesRestProxy::getIngestManifestAssetList
+     */
+    public function testGetIngestManifestAssetList(){
+
+        //  Setup
+        $ingestManifest = new IngestManifest();
+        $name = TestResources::MEDIA_SERVICES_INGEST_MANIFEST . $this->createSuffix();
+        $ingestManifest->setName($name);
+        $ingestManifest = $this->createIngestManifest($ingestManifest);
+
+        $asset = new Asset(Asset::OPTIONS_NONE);
+        $asset->setName(TestResources::MEDIA_SERVICES_ASSET_NAME . $this->createSuffix());
+        $asset = $this->createAsset($asset);
+
+        $ingestManifestAsset = new IngestManifestAsset($ingestManifest->getId());
+        $ingestManifestAsset = $this->createIngestManifestAsset($ingestManifestAsset, $asset);
+
+        // Test
+        $result = $this->restProxy->getIngestManifestAssetList();
+
+        // Assert
+        $this->assertCount(1, $result);
+        $this->assertEquals($ingestManifestAsset->getId(), $result[0]->getId());
+    }
+
+    /**
      * @covers WindowsAzure\MediaServices\MediaServicesRestProxy::getIngestManifestAssetFiles
      */
     public function testGetIngestManifestAssetFiles(){

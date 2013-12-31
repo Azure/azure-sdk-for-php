@@ -167,6 +167,41 @@ class ContentPropertiesSerializerTest extends \PHPUnit_Framework_TestCase
      * @covers WindowsAzure\MediaServices\Internal\ContentPropertiesSerializer::serialize
      * @covers WindowsAzure\MediaServices\Internal\ContentPropertiesSerializer::_serializeRecursive
      */
+    public function testSerializeDate(){
+
+        // Setup
+        $name = 'NameName';
+        $nameKey = 'Name';
+        $optionsKey = 'Options';
+        $option = Asset::OPTIONS_STORAGE_ENCRYPTED;
+        $dateKey = 'Created';
+        $date = "2013-12-31T01:16:25+01:00";
+        $assetArray= array(
+            $nameKey => $name,
+            $optionsKey => $option,
+            $dateKey => $date,
+        );
+        $asset = Asset::createFromOptions($assetArray);
+
+        $expected = '
+            <meta:properties xmlns:meta="http://schemas.microsoft.com/ado/2007/08/dataservices/metadata">
+                <data:' . $optionsKey . ' xmlns:data="http://schemas.microsoft.com/ado/2007/08/dataservices">' . $option . '</data:' . $optionsKey . '>
+                <data:' . $nameKey .' xmlns:data="http://schemas.microsoft.com/ado/2007/08/dataservices">' . $name . '</data:' . $nameKey . '>
+                <data:' . $dateKey .' xmlns:data="http://schemas.microsoft.com/ado/2007/08/dataservices">' . $date . '</data:' . $dateKey . '>
+            </meta:properties>
+        ';
+
+        // Test
+        $result = ContentPropertiesSerializer::serialize($asset);
+
+        // Assert
+        $this->assertXmlStringEqualsXmlString($expected, $result);
+    }
+
+    /**
+     * @covers WindowsAzure\MediaServices\Internal\ContentPropertiesSerializer::serialize
+     * @covers WindowsAzure\MediaServices\Internal\ContentPropertiesSerializer::_serializeRecursive
+     */
     public function testSerializeElement(){
 
         // Setup
