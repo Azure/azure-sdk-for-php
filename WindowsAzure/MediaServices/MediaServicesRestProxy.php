@@ -1478,8 +1478,7 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
     /**
      * Create new IngestManifest
      *
-     * @param WindowsAzure\MediaServices\Models\IngestManifest $ingestManifest An
-     * IngestManifest data
+     * @param Models\IngestManifest $ingestManifest An IngestManifest data
      *
      * @return WindowsAzure\MediaServices\Models\IngestManifest
      */
@@ -1498,8 +1497,8 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
     /**
      * Get IngestManifest
      *
-     * @param WindowsAzure\MediaServices\Models\IngestManifest|string $ingestManifest An
-     * IngestManifest data or IngestManifest Id
+     * @param Models\IngestManifest|string $ingestManifest An IngestManifest data or
+     * IngestManifest Id
      *
      * @return WindowsAzure\MediaServices\Models\IngestManifest
      */
@@ -1535,8 +1534,8 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
     /**
      * Get IngestManifest assets
      *
-     * @param WindowsAzure\MediaServices\Models\IngestManifest|string $ingestManifest An
-     * IngestManifest data or IngestManifest Id
+     * @param Models\IngestManifest|string $ingestManifest An IngestManifest data or
+     * IngestManifest Id
      *
      * @return array
      */
@@ -1562,8 +1561,8 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
     /**
      * Get pending assets of IngestManifest
      *
-     * @param WindowsAzure\MediaServices\Models\IngestManifest|string $ingestManifest An
-     * IngestManifest data or IngestManifest Id
+     * @param Models\IngestManifest|string $ingestManifest An IngestManifest data or
+     * IngestManifest Id
      *
      * @return array
      */
@@ -1589,8 +1588,8 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
     /**
      * Get storage account of IngestManifest
      *
-     * @param WindowsAzure\MediaServices\Models\IngestManifest|string $ingestManifest An
-     * IngestManifest data or IngestManifest Id
+     * @param Models\IngestManifest|string $ingestManifest An IngestManifest data
+     * or IngestManifest Id
      *
      * @return WindowsAzure\MediaServices\Models\StorageAccount
      */
@@ -1611,8 +1610,8 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
     /**
      * Update IngestManifest
      *
-     * @param WindowsAzure\MediaServices\Models\IngestManifest $ingestManifest New
-     * IngestManifest data with valid id
+     * @param Models\IngestManifest $ingestManifest New IngestManifest data with
+     * valid id
      *
      * @return none
      */
@@ -1633,8 +1632,8 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
     /**
      * Delete IngestManifest
      *
-     * @param WindowsAzure\MediaServices\Models\IngestManifest|string $ingestManifest An
-     * IngestManifest data or IngestManifest Id
+     * @param Models\IngestManifest|string $ingestManifest An IngestManifest data or
+     * IngestManifest Id
      *
      * @return none
      */
@@ -1651,11 +1650,11 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
     /**
      * Create new IngestManifestAsset
      *
-     * @param WindowsAzure\MediaServices\Models\IngestManifestAsset $ingestManifestAsset An
-     * IngestManifestAsset data
+     * @param Models\IngestManifestAsset $ingestManifestAsset An IngestManifestAsset
+     * data
      *
-     * @param WindowsAzure\MediaServices\Models\Asset               $asset               An
-     * Asset data to be linked with IngestManifestAsset
+     * @param Models\Asset               $asset               An Asset data to be
+     * linked with IngestManifestAsset
      *
      * @return WindowsAzure\MediaServices\Models\IngestManifestAsset
      */
@@ -1693,7 +1692,7 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
     /**
      * Get IngestManifestAsset.
      *
-     * @param WindowsAzure\MediaServices\Models\IngestManifestAsset|string $ingestManifestAsset An
+     * @param Models\IngestManifestAsset|string $ingestManifestAsset An
      * IngestManifestAsset data or IngestManifestAsset Id
      *
      * @return WindowsAzure\MediaServices\Models\IngestManifestAsset
@@ -1730,7 +1729,7 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
     /**
      * Get IngestManifestFiles of IngestManifestAsset
      *
-     * @param WindowsAzure\MediaServices\Models\IngestManifestAsset|string $ingestManifestAsset An
+     * @param Models\IngestManifestAsset|string $ingestManifestAsset An
      * IngestManifestAsset data or IngestManifestAsset Id
      *
      * @return array
@@ -1758,7 +1757,7 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
     /**
      * Delete IngestManifestAsset
      *
-     * @param WindowsAzure\MediaServices\Models\IngestManifestAsset|string $ingestManifestAsset An
+     * @param Models\IngestManifestAsset|string $ingestManifestAsset An
      * IngestManifestAsset data or IngestManifestAsset Id
      *
      * @return none
@@ -1776,8 +1775,8 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
     /**
      * Create new IngestManifestFile
      *
-     * @param WindowsAzure\MediaServices\Models\IngestManifestFile $ingestManifestFile An
-     * IngestManifestFile data
+     * @param Models\IngestManifestFile $ingestManifestFile An IngestManifestFile
+     * data
      *
      * @return WindowsAzure\MediaServices\Models\IngestManifestFile
      */
@@ -1797,7 +1796,7 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
     /**
      * Get IngestManifestFile.
      *
-     * @param WindowsAzure\MediaServices\Models\IngestManifestFile|string $ingestManifestFile An
+     * @param Models\IngestManifestFile|string $ingestManifestFile An
      * IngestManifestFile data or IngestManifestFile Id
      *
      * @return WindowsAzure\MediaServices\Models\IngestManifestFile
@@ -1834,7 +1833,7 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
     /**
      * Delete IngestManifestFile
      *
-     * @param WindowsAzure\MediaServices\Models\IngestManifestFile|string $ingestManifestFile An
+     * @param Models\IngestManifestFile|string $ingestManifestFile An
      * IngestManifestFile data or IngestManifestFile Id
      *
      * @return none

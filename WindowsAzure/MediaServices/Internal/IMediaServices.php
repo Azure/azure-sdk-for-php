@@ -442,5 +442,169 @@ interface IMediaServices extends FilterableService
      * @return WindowsAzure\MediaServices\Models\JobTemplate\MediaProcessor
      */
     public function getLatestMediaProcessor($name);
+
+    /**
+     * Create new IngestManifest
+     *
+     * @param Models\IngestManifest $ingestManifest An IngestManifest data
+     *
+     * @return WindowsAzure\MediaServices\Models\IngestManifest
+     */
+    public function createIngestManifest($ingestManifest);
+
+    /**
+     * Get IngestManifest
+     *
+     * @param Models\IngestManifest|string $ingestManifest An IngestManifest data or
+     * IngestManifest Id
+     *
+     * @return WindowsAzure\MediaServices\Models\IngestManifest
+     */
+    public function getIngestManifest($ingestManifest);
+
+    /**
+     * Get IngestManifest list
+     *
+     * @return array
+     */
+    public function getIngestManifestList();
+
+    /**
+     * Get IngestManifest assets
+     *
+     * @param Models\IngestManifest|string $ingestManifest An IngestManifest data or
+     * IngestManifest Id
+     *
+     * @return array
+     */
+    public function getIngestManifestAssets($ingestManifest);
+
+    /**
+     * Get pending assets of IngestManifest
+     *
+     * @param Models\IngestManifest|string $ingestManifest An IngestManifest data or
+     * IngestManifest Id
+     *
+     * @return array
+     */
+    public function getPendingIngestManifestAssets($ingestManifest);
+
+    /**
+     * Get storage account of IngestManifest
+     *
+     * @param Models\IngestManifest|string $ingestManifest An IngestManifest data
+     * or IngestManifest Id
+     *
+     * @return WindowsAzure\MediaServices\Models\StorageAccount
+     */
+    public function getIngestManifestStorageAccount($ingestManifest);
+
+    /**
+     * Update IngestManifest
+     *
+     * @param Models\IngestManifest $ingestManifest New IngestManifest data with
+     * valid id
+     *
+     * @return none
+     */
+    public function updateIngestManifest($ingestManifest);
+
+    /**
+     * Delete IngestManifest
+     *
+     * @param Models\IngestManifest|string $ingestManifest An IngestManifest data or
+     * IngestManifest Id
+     *
+     * @return none
+     */
+    public function deleteIngestManifest($ingestManifest);
+
+    /**
+     * Create new IngestManifestAsset
+     *
+     * @param Models\IngestManifestAsset $ingestManifestAsset An IngestManifestAsset
+     * data
+     *
+     * @param Models\Asset               $asset               An Asset data to be
+     * linked with IngestManifestAsset
+     *
+     * @return WindowsAzure\MediaServices\Models\IngestManifestAsset
+     */
+    public function createIngestManifestAsset($ingestManifestAsset, $asset);
+
+    /**
+     * Get IngestManifestAsset.
+     *
+     * @param Models\IngestManifestAsset|string $ingestManifestAsset An
+     * IngestManifestAsset data or IngestManifestAsset Id
+     *
+     * @return WindowsAzure\MediaServices\Models\IngestManifestAsset
+     */
+    public function getIngestManifestAsset($ingestManifestAsset);
+
+    /**
+     * Get list of IngestManifestAsset.
+     *
+     * @return array
+     */
+    public function getIngestManifestAssetList();
+
+    /**
+     * Get IngestManifestFiles of IngestManifestAsset
+     *
+     * @param Models\IngestManifestAsset|string $ingestManifestAsset An
+     * IngestManifestAsset data or IngestManifestAsset Id
+     *
+     * @return array
+     */
+    public function getIngestManifestAssetFiles($ingestManifestAsset);
+
+
+    /**
+     * Delete IngestManifestAsset
+     *
+     * @param Models\IngestManifestAsset|string $ingestManifestAsset An
+     * IngestManifestAsset data or IngestManifestAsset Id
+     *
+     * @return none
+     */
+    public function deleteIngestManifestAsset($ingestManifestAsset);
+
+    /**
+     * Create new IngestManifestFile
+     *
+     * @param Models\IngestManifestFile $ingestManifestFile An IngestManifestFile
+     * data
+     *
+     * @return WindowsAzure\MediaServices\Models\IngestManifestFile
+     */
+    public function createIngestManifestFile($ingestManifestFile);
+
+    /**
+     * Get IngestManifestFile.
+     *
+     * @param Models\IngestManifestFile|string $ingestManifestFile An
+     * IngestManifestFile data or IngestManifestFile Id
+     *
+     * @return WindowsAzure\MediaServices\Models\IngestManifestFile
+     */
+    public function getIngestManifestFile($ingestManifestFile);
+
+    /**
+     * Get list of IngestManifestFile.
+     *
+     * @return array
+     */
+    public function getIngestManifestFileList();
+
+    /**
+     * Delete IngestManifestFile
+     *
+     * @param Models\IngestManifestFile|string $ingestManifestFile An
+     * IngestManifestFile data or IngestManifestFile Id
+     *
+     * @return none
+     */
+    public function deleteIngestManifestFile($ingestManifestFile);
 }
 
