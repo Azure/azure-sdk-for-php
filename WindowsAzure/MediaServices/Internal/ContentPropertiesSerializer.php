@@ -59,7 +59,7 @@ class ContentPropertiesSerializer
     /**
      * Get properties XML from object.
      *
-     * @param object The object to get properties
+     * @param object $object The object to get properties
      *
      * @return string
      */
