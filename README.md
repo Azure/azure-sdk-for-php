@@ -165,7 +165,8 @@ There are four basic steps that have to be performed before you can make a call 
 			$serviceManagementRestProxy = ServicesBuilder::getInstance()->createServiceManagementService($connectionString);
 
 	* For Media Services:
-			$mediaServicesRestProxy = ServicesBuilder->getInstance()->createMediaServicesService(new MediaServicesSettings( [YourAccountName], [YourPrimaryOrSecondaryAccessKey]));
+
+			$mediaServicesRestProxy = ServicesBuilder->getInstance()->createMediaServicesService(new MediaServicesSettings([YourAccountName], [YourPrimaryOrSecondaryAccessKey]));
 
 ## Table Storage
 
@@ -640,7 +641,7 @@ To create an asset with a file you need to create an empty asset, create access 
 $asset = new Asset(Asset::OPTIONS_NONE);
 $asset = $restProxy->createAsset($asset);
 
-$access = new AccessPolicy(‘[Some access policy name]’);
+$access = new AccessPolicy('[Some access policy name]');
 $access->setDurationInMinutes([Munites AccessPolicy is valid]);
 $access->setPermissions(AccessPolicy::PERMISSIONS_WRITE);
 $access = $restProxy->createAccessPolicy($access);
@@ -649,7 +650,7 @@ $locator = new Locator($asset,  $access, Locator::TYPE_SAS);
 $locator->setStartTime(new \DateTime('now -5 minutes'));
 $locator = $restProxy->createLocator($locator);
 
-$restProxy->uploadAssetFile($locator, ‘[file name]’, ‘[file content]’);
+$restProxy->uploadAssetFile($locator, '[file name]', '[file content]');
 $restProxy->createFileInfos($asset);
 ```
 
@@ -657,10 +658,10 @@ $restProxy->createFileInfos($asset);
 
 To perform media file encoding you will need input asset ($inputAsset) with a file in it (something like in previous chapter). Also you need to create an array of task data objects and a job data object. To create a task object use a media processor, task XML body and configuration name.
 ```PHP
-$mediaProcessor = $this->restProxy->getLatestMediaProcessor(‘[Media processor]’);
+$mediaProcessor = $this->restProxy->getLatestMediaProcessor('[Media processor]');
 
-$task = new Task(‘[Task XML body]’, $mediaProcessor->getId(), TaskOptions::NONE);
-$task->setConfiguration(‘[Configuration name]’);
+$task = new Task('[Task XML body]', $mediaProcessor->getId(), TaskOptions::NONE);
+$task->setConfiguration('[Configuration name]');
 
 $restProxy->createJob(new Job(), array($inputAsset), array($task));
 ```
@@ -670,7 +671,7 @@ $restProxy->createJob(new Job(), array($inputAsset), array($task));
 After you’ve uploaded a media file and encode it you can get a download URL for that file. Create a new access policy with read permission and link it with job output asset via locator.
 
 ```PHP
-$accessPolicy = new AccessPolicy(‘[Some access policy name]’);
+$accessPolicy = new AccessPolicy('[Some access policy name]');
 $accessPolicy->setDurationInMinutes([Munites AccessPolicy is valid]);
 $accessPolicy->setPermissions(AccessPolicy::PERMISSIONS_READ);
 $accessPolicy = $restProxy->createAccessPolicy($accessPolicy);
