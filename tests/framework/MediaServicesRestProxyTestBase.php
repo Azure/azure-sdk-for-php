@@ -58,6 +58,7 @@ class MediaServicesRestProxyTestBase extends ServiceRestProxyTestBase
     protected $ingestManifests = array();
     protected $ingestManifestAssets = array();
     protected $ingestManifestFiles = array();
+    protected $contentKeys = array();
 
     public function setUp()
     {
@@ -126,6 +127,14 @@ class MediaServicesRestProxyTestBase extends ServiceRestProxyTestBase
         return $result;
     }
 
+    public function createContentKey($contentKey) {
+        $result = $this->restProxy->createContentKey($contentKey);
+
+        $this->contentKeys[$result->getId()] = $result;
+
+        return $result;
+    }
+
     public function createAssetWithFile() {
         $asset = new Asset(Asset::OPTIONS_NONE);
         $asset->setName(TestResources::MEDIA_SERVICES_ASSET_NAME . $this->createSuffix());
@@ -146,6 +155,22 @@ class MediaServicesRestProxyTestBase extends ServiceRestProxyTestBase
         $this->restProxy->createFileInfos($asset);
 
         return $asset;
+    }
+
+    public function uploadFileToAsset($asset) {
+        $access = new AccessPolicy(TestResources::MEDIA_SERVICES_ACCESS_POLICY_NAME . $this->createSuffix());
+        $access->setDurationInMinutes(30);
+        $access->setPermissions(AccessPolicy::PERMISSIONS_WRITE);
+        $access = $this->createAccessPolicy($access);
+
+        $locator = new Locator($asset, $access, Locator::TYPE_SAS);
+        $locator->setName(TestResources::MEDIA_SERVICES_LOCATOR_NAME . $this->createSuffix());
+        $locator->setStartTime(new \DateTime('now -5 minutes'));
+        $locator = $this->createLocator($locator);
+
+        $fileName = TestResources::MEDIA_SERVICES_DUMMY_FILE_NAME;
+        $this->restProxy->uploadAssetFile($locator, $fileName, TestResources::MEDIA_SERVICES_DUMMY_FILE_CONTENT);
+        $this->restProxy->createFileInfos($asset);
     }
 
     public function createAssetWithFilesForStream() {
@@ -229,6 +254,10 @@ class MediaServicesRestProxyTestBase extends ServiceRestProxyTestBase
     protected function tearDown()
     {
         parent::tearDown();
+
+        foreach($this->contentKeys as $contentKey) {
+            $this->restProxy->deleteContentKey($contentKey);
+        }
 
         foreach($this->ingestManifestFiles as $ingestManifestFile) {
             $this->restProxy->deleteIngestManifestFile($ingestManifestFile);

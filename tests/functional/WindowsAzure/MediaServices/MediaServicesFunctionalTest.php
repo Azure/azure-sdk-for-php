@@ -41,6 +41,9 @@ use WindowsAzure\MediaServices\Models\TaskTemplate;
 use WindowsAzure\MediaServices\Models\IngestManifest;
 use WindowsAzure\MediaServices\Models\IngestManifestAsset;
 use WindowsAzure\MediaServices\Models\IngestManifestFile;
+use WindowsAzure\MediaServices\Models\ProtectionKeyTypes;
+use WindowsAzure\MediaServices\Models\ContentKey;
+use WindowsAzure\MediaServices\Models\ContentKeyTypes;
 use WindowsAzure\Common\Internal\Http\Url;
 use WindowsAzure\Common\Internal\Http\HttpClient;
 
@@ -844,6 +847,45 @@ class MediaServicesFunctionalTest extends MediaServicesRestProxyTestBase
         $this->assertEquals($asset->getId(), $assetFiles[0]->getParentAssetId());
         $this->assertContains($fileName, $resultFileNames);
         $this->assertEquals($asset->getId(), $assetFiles[1]->getParentAssetId());
+    }
+
+    public function testIngestEncryptedAsset()
+    {
+        $aesKey = '7868CC14AE5FA7E974FAFFAF072DDE2D250334E9D647C086D088C621B28F9F28';
+
+        $protectionKeyId = $this->restProxy->getProtectionKeyId(ProtectionKeyTypes::X509_CERTIFICATE_THUMBPRINT);
+        $protectionKey = $this->restProxy->getProtectionKey($protectionKeyId);
+        $certRes = openssl_x509_read($protectionKey);
+
+        $cryptedContentKey = '';
+        openssl_public_encrypt($aesKey, $cryptedContentKey, $certRes);
+
+        $contentKey = new ContentKey('nb:kid:UUID:' . Utilities::getGuid());
+        $contentKey->setEncryptedContentKey(base64_encode($cryptedContentKey));
+        $contentKey->setProtectionKeyId($protectionKeyId);
+        $contentKey->setProtectionKeyType(ProtectionKeyTypes::X509_CERTIFICATE_THUMBPRINT);
+        $contentKey->setContentKeyType(ContentKeyTypes::STORAGE_ENCRYPTION);
+        $contentKey->setChecksum(base64_encode(md5($cryptedContentKey)));
+        print_r($contentKey);
+        $this->createContentKey($contentKey);
+
+
+        $asset = new Asset(Asset::OPTIONS_STORAGE_ENCRYPTED);
+        $asset->setName(TestResources::MEDIA_SERVICES_ASSET_NAME . $this->createSuffix());
+        $asset = $this->createAsset($asset);
+
+        $this->restProxy->linkContentKeyToAsset($asset, $contentKey);
+
+        $this->uploadFileToAsset($asset);
+
+        $files = $this->restProxy->getAssetAssetFiles($asset);
+        $files[0]->setIsEncrypted(true);
+        $files[0]->setEncryptedKeyId($contentKey->getId());
+        $files[0]->setEncryptionScheme('StorageEncryption');
+        $files[0]->setEncryptionVersion('1.0');
+        $files[0]->setInitializationVector(openssl_random_pseudo_bytes(8));
+        $this->restProxy->updateAssetFile($files[0]);
+
     }
 }
 

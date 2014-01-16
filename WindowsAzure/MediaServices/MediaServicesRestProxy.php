@@ -53,6 +53,7 @@ use WindowsAzure\MediaServices\Models\StorageAccount;
 use WindowsAzure\MediaServices\Models\IngestManifest;
 use WindowsAzure\MediaServices\Models\IngestManifestAsset;
 use WindowsAzure\MediaServices\Models\IngestManifestFile;
+use WindowsAzure\MediaServices\Models\ContentKey;
 
 /**
  * This class constructs HTTP requests and receive HTTP responses for media services
@@ -1988,7 +1989,7 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
     public function createContentKey($contentKey)
     {
         Validate::isA(
-            $asset,
+            $contentKey,
             'WindowsAzure\Mediaservices\Models\ContentKey',
             'contentKey'
         );
@@ -2111,7 +2112,7 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
             $statusCode
         );
 
-        return $response->getBody();
+        return (string)simplexml_load_string($response->getBody());
     }
 
     /**
@@ -2127,7 +2128,7 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
         Validate::isString($protectionKeyId, 'protectionKeyId');
 
         $method      = Resources::HTTP_GET;
-        $path        = "GetProtectionKey?ProtectionKeyId={$protectionKeyId}";
+        $path        = "GetProtectionKey?ProtectionKeyId='{$protectionKeyId}'";
         $headers     = array();
         $postParams  = array();
         $queryParams = array();
@@ -2142,6 +2143,10 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
             $statusCode
         );
 
-        return $response->getBody();
+        $encoded = (string)simplexml_load_string($response->getBody());
+        $encoded = implode("\n",str_split($encoded, 76));
+        $encoded = "-----BEGIN CERTIFICATE-----\n" . $encoded . "\n-----END CERTIFICATE-----";
+
+        return $encoded;
     }
 }
