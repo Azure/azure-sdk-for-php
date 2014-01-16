@@ -683,7 +683,7 @@ $locator = $restProxy->createLocator($locator);
 // Azure needs time to publish media
 sleep(30);
 
-$url = $locator->getBaseUri() . '/' . ‘[File name]’ . $locator->getContentAccessComponent()
+$url = $locator->getBaseUri() . '/' . '[File name]' . $locator->getContentAccessComponent()
 ```
 
 ###Manage media services entities
