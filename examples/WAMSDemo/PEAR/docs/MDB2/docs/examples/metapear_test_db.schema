@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<database>
+
+ <name>metapear_test_db</name>
+ <create>1</create>
+ 
+ <table>
+
+  <name>numbers</name>
+
+  <declaration>
+
+   <field>
+    <name>number</name>
+    <type>integer</type>
+    <notnull>1</notnull>
+    <default>0</default>
+   </field>
+
+   <field>
+    <name>trans_en</name>
+    <type>text</type>
+    <length>100</length>
+    <default></default>
+   </field>
+
+   <field>
+    <name>trans_fr</name>
+    <type>text</type>
+    <length>100</length>
+    <default></default>
+   </field>
+
+  </declaration>
+
+ </table>
+
+ <table>
+
+  <name>test</name>
+
+  <declaration>
+
+   <field>
+    <name>test_id</name>
+    <type>integer</type>
+    <notnull>1</notnull>
+    <default>0</default>
+   </field>
+
+   <field>
+    <name>test_name</name>
+    <type>text</type>
+    <length>30</length>
+    <notnull>1</notnull>
+    <default>no name</default>
+   </field>
+
+   <field>
+    <name>test_date</name>
+    <type>timestamp</type>
+    <notnull>1</notnull>
+    <default>0000-00-00 00:00:00</default>
+   </field>
+
+  </declaration>
+
+  <initialization>
+
+   <insert>
+
+   <field>
+     <name>test_id</name>
+     <value>1</value>
+   </field>
+
+   <field>
+     <name>test_name</name>
+     <value>test0r</value>
+   </field>
+
+   <field>
+     <name>test_date</name>
+     <value>2002-02-12 16:33:53</value>
+   </field>
+
+   </insert>
+
+   <insert>
+
+   <field>
+     <name>test_id</name>
+     <value>2</value>
+   </field>
+
+   <field>
+     <name>test_name</name>
+     <value>gummihuhn</value>
+   </field>
+
+   <field>
+     <name>test_date</name>
+     <value>2001-02-12 16:34:03</value>
+   </field>
+
+   </insert>
+
+  </initialization>
+
+ </table>
+
+</database>

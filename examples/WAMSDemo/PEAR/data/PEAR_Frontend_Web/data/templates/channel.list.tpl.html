@@ -1,0 +1,77 @@
+<!-- INCLUDE caption.tpl.html -->
+    <script language="javascript">
+    <!--
+        function deleteChan(c)
+        {
+            if (!confirm('Do you really want to delete channel "'+c+'"?'))
+                return false;
+            return true;
+        }
+    -->
+    </script>
+    <table border="0" cellspacing="5">
+    <tr>
+      <td width="50" valign="top">
+        &nbsp;
+      </td>
+      <td valign="top">
+        &nbsp;
+      </td>
+      <td valign="top">
+        <b>Channel Server</b>
+      </td>
+      <td valign="top">
+        &nbsp;
+      </td>
+      <td valign="top">
+        <b>Description</b>
+      </td>
+    </tr>
+    <!-- BEGIN Row -->
+    <tr>
+      <td valign="top">
+        &nbsp;
+      </td>
+      <td valign="top">
+        <img src="{InstallerURL}?img=package" width="12" height="12" border="0">
+      </td>
+      <td valign="top">
+        {Channel}
+      </td>
+      <td valign="top">
+        {Delete}
+      </td>
+      <td valign="top">
+        {Summary}
+      </td>
+    </tr>
+    <!-- END Row -->
+    <tr>
+      <td valign="top">
+        &nbsp;
+      </td>
+      <td colspan="5">
+       <form name="updatechannels" method="GET" action="{UpdateChannelsURL}">
+        <input type="hidden" name="command" value="update-channels">
+        <input name="foo" type="submit" value="Update All Channels">
+       </form>
+      </td>
+    </tr>
+    </table>
+    <p>
+    <table border="0">
+    <tr>
+      <td>
+       <span class="green">Add a new channel server:</span>
+      </td>
+    </tr>
+    <tr>
+      <td>
+       <form name="addchannel" method="GET" action="{NewChannelURL}">
+        <input type="hidden" name="command" value="channel-discover">
+        <img src="{InstallerURL}?img=package" width="12" height="12" border="0" alt="package"><input name="chan" type="text" size="35"><input name="foo" type="submit" value="Discover Channel">
+       </form>
+      </td>
+    </tr>
+    </table>
+    </p>

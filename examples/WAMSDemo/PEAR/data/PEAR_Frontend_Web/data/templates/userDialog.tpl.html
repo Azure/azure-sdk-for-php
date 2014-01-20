@@ -1,0 +1,16 @@
+<!-- INCLUDE caption.tpl.html -->
+    <form action="{InstallerURL}?command={Command}{extra}" method="post">
+      <table border="0">
+      <!-- BEGIN InputField -->
+      <tr>
+        <td {width} valign="top">
+          <b>{prompt}:</b>
+        </td>
+        <td valign="top">
+          <input type="{type}" name="{name}" value="{default}" size="50">
+        </td>
+      </tr>
+      <!-- END InputField -->
+      </table>
+      <input type="submit" value="Submit!">{cancel}</input>
+    </form>

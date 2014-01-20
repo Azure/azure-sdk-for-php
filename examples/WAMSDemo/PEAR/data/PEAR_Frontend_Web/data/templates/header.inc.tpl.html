@@ -1,0 +1,52 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+ <title>{Title}</title>
+ <link rel="stylesheet" href="{InstallerURL}?css=style" />
+ <script language="javascript" src="{InstallerURL}?js=package"></script>
+ <meta name="description" content="{Headline}" />
+</head>
+
+<body   topmargin="0" leftmargin="0"
+	    marginheight="0" marginwidth="0"
+        bgcolor="#ffffff"
+        text="#000000"
+        link="#006600"
+        alink="#cccc00"
+        vlink="#003300"
+>
+<a name="TOP" />
+<table border="0" cellspacing="0" cellpadding="0" height="48" width="100%">
+  <tr bgcolor="#339900">
+    <td align="left" width="120">
+      <img src="{InstallerURL}?img=pear" width="104" height="50" vspace="2" hspace="5" alt="PEAR">
+    </td>
+    <td align="left" valign="middle" width="20">
+      &nbsp;
+    </td>
+    <td align="left" valign="middle">
+      <span class="Headline">{Headline}</span>
+    </td>
+  </tr>
+
+  <tr bgcolor="#003300"><td colspan="3"></td></tr>
+
+  <!-- BEGIN Search -->
+  <tr bgcolor="#006600">
+    <td align="right" valign="top" colspan="3">
+        <span style="color : #FFFFFF; font-size : 0.8em;">
+        <form action="{InstallerURL}?command=search" method="post">
+            <input type="hidden" name="search" value="name" />
+            Search package by name
+            <input type="text" name="input" value="" size="10">
+            <input type="hidden" name="channel" value="all" />
+            <input type="submit" value="Go"></input>
+        </form>
+        </span>
+    </td>
+  </tr>
+  <!-- END Search -->
+
+  <tr bgcolor="#003300"><td colspan="3"></td></tr>
+</table>
+

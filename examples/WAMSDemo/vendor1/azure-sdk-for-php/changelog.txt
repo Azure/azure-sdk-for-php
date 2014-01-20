@@ -1,0 +1,33 @@
+Windows Azure SDK For PHP 0.3.1, 2012-08-17
+-------------------------------------------
+- Added additional API support for Service Management:
+	* Operations on Hosted Services
+		> create, update, delete, list, get properties
+	* Operations on Deployments
+		> deployment: create, get, delete, swap, change configuration, update status, upgrade, rollback
+		> role instance: reboot, reimage
+
+
+Windows Azure SDK For PHP 0.3.0, 2012-07-16
+-------------------------------------------
+- Added Cloud Configuration Manager
+
+
+Windows Azure SDK For PHP 0.2.0, 2012-06-25
+-------------------------------------------
+- Added Service Bus Support
+	* Queues: create, list and delete queues; send, receive, unlock and delete messages
+	* Topics: create, list, and delete topics; create, list, and delete subscriptions; send, receive, unlock and delete messages; create, list, and delete rules
+- Added Composer package
+
+
+Windows Azure SDK For PHP 0.1.0, 2012-06-07
+-------------------------------------------
+First Official Release
+- Added REST Wrappers for the following Windows Azure 1.6 APIs:
+	* Tables
+	* Blobs
+	* Storage Queues
+	* Service Runtime
+	* Service Management for Storage Services only
+	

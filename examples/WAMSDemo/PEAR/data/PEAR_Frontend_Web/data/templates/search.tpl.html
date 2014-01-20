@@ -1,0 +1,38 @@
+    <!-- BEGIN Search -->
+    <p>
+    <form method="post" action="{InstallerURL}?command=search">
+    <input type="hidden" name="search" value="{Search_type}" />
+    <table border="0" cellpadding="5">
+      <tr>
+        <td width="10">
+          &nbsp;
+        </td>
+        <td colspan=3 valign="middle">
+          <span class="title">{Title}</span>
+        </td>
+      </tr>
+      <tr>
+        <td width="10">&nbsp;</td>
+        <td width="10">&nbsp;</td>
+        <td><b>{Description}</b></td>
+        <td><input type="text" name="input" value="" size=50 /></td>
+      </tr>
+      <tr>
+        <td width="10">&nbsp;</td>
+        <td width="10">&nbsp;</td>
+        <td><b>Channel</b></td>
+        <td><select name="channel">
+            <!-- BEGIN Search_channel -->
+            <option value="{Key}">{Value}</option>
+            <!-- END Search_channel -->
+        </select></td>
+      </tr>
+      <tr>
+        <td width="10">&nbsp;</td>
+        <td width="10">&nbsp;</td>
+        <td><input type="submit" value="Search!" /></td>
+      </tr>
+    </table>
+    </form>
+    </p>
+    <!-- END Search -->

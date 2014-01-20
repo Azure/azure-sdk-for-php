@@ -1,0 +1,61 @@
+<!-- INCLUDE header.inc.tpl.html -->
+<table cellpadding="0" cellspacing="0" width="100%">
+ <tr valign="top">
+  <td bgcolor="#f0f0f0" width="100">
+   <table width="180" border="0" cellpadding="4" cellspacing="0">
+    <tr valign="top">
+     <td style="font-size: 90%" align="center" width="200">
+       &nbsp;
+       <p><a href="{InstallerURL}?command=list">
+         <img src="{InstallerURL}?img=pkglist" width="43" height="45" border="0" alt="Package Management"><br>
+         Package Management
+       </a></p>
+       &nbsp;
+       <p><a href="{InstallerURL}?command=search">
+         <img src="{InstallerURL}?img=pkgsearch" width="43" height="45" border="0" alt="Package Search"><br>
+         Package Search
+       </a></p>
+       &nbsp;
+       <p><a href="{InstallerURL}?command=list-channels">
+         <img src="{InstallerURL}?img=pkglist" width="43" height="45" border="0" alt="Channel Management"><br>
+         Channel Management
+       </a></p>
+       &nbsp;
+       <p><a href="{InstallerURL}?command=config-show">
+         <img src="{InstallerURL}?img=config" width="46" height="46" border="0" alt="Configuration"><br>
+         Configuration
+       </a></p>
+       &nbsp;
+     </td>
+    </tr>
+   </table>
+  </td>
+  <td bgcolor="#cccccc" width="1"></td>
+  <td>
+   <table width="100%" cellpadding="10" cellspacing="0">
+    <tr>
+     <td valign="top">
+       <!-- BEGIN TitleBlock -->
+       <table border="0" cellpadding="5">
+         <tr>
+           <td valign="middle" width="10">
+           </td>
+           <td valign="middle">
+             <img src="{_InstallerURL}?img={_Icon}" border="0" alt="{_Icon}">
+           </td>
+           <td valign="middle" width="5">
+           </td>
+           <td valign="middle">
+             <span class="title">{_Title}</span>
+           </td>
+         </tr>
+       </table>
+       <br>
+       <!-- END TitleBlock -->
+
+  <!-- BEGIN NotProtected -->
+  <div id="error">{Filler}
+    <b>Warning:</b> This package management website is <b>not protected</b> with a password, this is a MAJOR security risk. Please read the <a href="{_InstallerURL}?command=doc-show&pkg=pear.php.net/PEAR_Frontend_Web&file=README" class="green">README</a>.
+  </div>
+  <!-- END NotProtected -->
+

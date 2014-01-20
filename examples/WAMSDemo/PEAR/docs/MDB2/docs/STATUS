@@ -1,0 +1,50 @@
+STATUS OF THE PEAR MDB2 PACKAGE
+=============================
+
+$Id: STATUS,v 1.15 2006/05/03 16:07:41 lsmith Exp $
+------------------------------------------------------------------------
+
+MDB2 Driver Feature Matrix
+------------------------
+Symbols:
+  x  =  implemented, but without tests
+  t  =  implemented, but one or more tests fail
+  T  =  implemented, passing all tests
+  e  =  emulated, without tests
+  l  =  emulated, but one or more tests fail
+  E  =  emulated, passing all tests
+  n  =  returns "not capable"
+  -  =  no implementation of this feature or status unknown
+
+                    fbsql     pgsql     mysqli    sqlite
+FEATURE        ibase  |  oci8  |  mysql  |  mssql  | querysim
+
+
+
+Test Conformance
+----------------
+Symbols:
+    o  =  Test passed
+    X  =  Test failed
+    L  =  Some portions of the test failed due to limitations in PHP or DBMS
+    n  =  Test returns "not capable"
+    -  =  Not tested
+
+                    fbsql     pgsql     mysqli    sqlite
+TEST           ibase  |  oci8  |  mysql  |  mssql  | querysim
+
+
+DBMS Versions Tested
+--------------------
+fbsql    
+ibase    
+mssql    
+mysql    
+mysqli   
+oci8     
+pgsql    
+sqlite   
+querysim 
+
+Tests were performed under both of the following PHP versions
+unles otherwise noted:

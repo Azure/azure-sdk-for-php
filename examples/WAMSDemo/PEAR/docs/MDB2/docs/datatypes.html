@@ -1,0 +1,64 @@
+<html>
+<head>
+<title>MDB2 data types</title>
+</head>
+<body>
+<center><h1>MDB2 data types</h1></center>
+<hr />
+<ul>
+<p><b>Author:</b> Manuel Lemos (<a href="mailto:mlemos@acm.org">mlemos@acm.org</a>)</p>
+<p><b>Version control:</b> <tt>@(#) $Id: datatypes.html,v 1.1 2004/01/05 20:47:15 lsmith Exp $</tt></p>
+<h2>Contents</h2>
+<li><a href="#4.0">Introduction</a></li>
+<ul>
+<li><a href="#5.1.1">Text data type</a></li>
+<li><a href="#5.1.2">Boolean data type</a></li>
+<li><a href="#5.1.3">Integer data type</a></li>
+<li><a href="#5.1.4">Decimal data type</a></li>
+<li><a href="#5.1.5">Float data type</a></li>
+<li><a href="#5.1.6">Date data type</a></li>
+<li><a href="#5.1.7">Time data type</a></li>
+<li><a href="#5.1.8">Time stamp data type</a></li>
+<li><a href="#5.1.9">Large object (file) data types</a></li>
+</ul>
+</ul>
+</ul>
+<hr />
+<h1><a name="4.0">Introduction</a></h1>
+<p>All <i>DBMS</i> provide multiple choice of data types for the information that can be stored in their database table fields.  However, the set of data types made available varies from <i>DBMS</i> to <i>DBMS</i>.</p>
+<p>To simplify the interface with the <i>DBMS</i> supported by <b>MDB2</b> it was defined a base set of data types that applications may access independently of the underlying <i>DBMS</i>.</p>
+<p>The <b>MDB2</b> applications programming interface takes care of mapping data types when managing database options.  It is also able to convert that is sent to and received from the underlying <i>DBMS</i> using the respective driver.</p>
+<h2><li><a name="5.1.1">Text data type</a></li></h2>
+<p>The text data type is available with two options for the length: one that is explicitly length limited and another of undefined length that should be as large as the database allows.</p>
+<p>The length limited option is the most recommended for efficiency reasons.  The undefined length option allows very large fields but may prevent the use of indexes and may not allow sorting on fields of its type.</p>
+<p>The fields of this type should be able to handle 8 bit characters.  Drivers take care of <i>DBMS</i> specific escaping of characters of special meaning with the values of the strings to be converted to this type.</p>
+<h2><li><a name="5.1.2">Boolean data type</a></li></h2>
+<p>The boolean data type represents only two values that can be either <tt>1</tt> or <tt>0</tt>.  Do not assume that these data types are stored as integers because some <i>DBMS</i> drivers may implement this type with single character text fields for a matter of efficient.  Ternary logic is possible by using <tt>null</tt> as the third possible value that may be assigned to fields of this type.</p>
+<h2><li><a name="5.1.3">Integer data type</a></li></h2>
+<p>The integer data type may store integer values as large as each <i>DBMS</i> may handle.  Fields of this type may be created optionally as unsigned integers but not all <i>DBMS</i> support it.  Therefore, such option may be ignored.  Truly portable applications should not rely on the availability of this option.</p>
+<h2><li><a name="5.1.4">Decimal data type</a></li></h2>
+<p>The decimal data type may store decimal numbers accurately with a fixed number of decimal places.  This data type is suitable for representing accurate values like currency amounts.</p>
+<p>Some <i>DBMS</i> drivers may emulate the decimal data type using integers.  Such drivers need to know in advance how many decimal places that should be used to perform eventual scale conversion when storing and retrieving values from a database. Despite this, applications may use arithmetic expressions and functions with the values stored on decimal type fields as long as any constant values that are used in the expressions are also converted with the respective <b>MDB2</b> conversion functions.</p>
+<p>The number of places that are used to the left and the right of the decimal point is pre-determined and fixed for all decimal values stored in the same database.  By default, <b>MDB2</b> uses 2 places to the right of the decimal point, but this may be changed when setting the database connection.  The number of places available to the right of the decimal point depend on the <i>DBMS</i>.</p>
+<p>It is not recommended to change the number places used to represent decimal values in database after it is installed. <b>MDB2</b> does not keep track of changes in the number of decimal places.</p>
+<h2><li><a name="5.1.5">Float data type</a></li></h2>
+<p>The float data type may store floating point decimal numbers. This data type is suitable for representing numbers within a large scale range that do not require high accuracy.  The scale and the precision limits of the values that may be stored in a database depends on the <i>DBMS</i> that it is used.</p>
+<h2><li><a name="5.1.6">Date data type</a></li></h2>
+<p>The date data type may represent dates with year, month and day.  <i>DBMS</i> independent representation of dates is accomplished by using text strings formatted according to the <i>IS0 8601</i> standard.</p>
+<p>The format defined by the <i>ISO 8601</i> standard for dates is <tt>YYYY-MM-DD</tt> where <tt>YYYY</tt> is the number of the year (<i>Gregorian</i> calendar), <tt>MM</tt> is the number of the month from 1 to 12 and <tt>DD</tt> is the number of the day from 1 to 31.  Months or days numbered below 10 should be padded on the left with <tt>0</tt>.</p>
+<p>Some <i>DBMS</i> have native support for date formats, but for others the <i>DBMS</i> driver may have to represent them as integers or text values.  In any case, it is always possible to make comparisons between date values as well sort query results by fields of this type.</p>
+<h2><li><a name="5.1.7">Time data type</a></li></h2>
+<p>The time data type may represent the time of a given moment of the day.  <i>DBMS</i> independent representation of the time of the day is also accomplished by using text strings formatted according to the <i>IS0 8601</i> standard.</p>
+<p>The format defined by the <i>ISO 8601</i> standard for the time of the day is <tt>HH:MI:SS</tt> where <tt>HH</tt> is the number of hour the day from 0 to 23 and <tt>MI</tt> and <tt>SS</tt> are respectively the number of the minute and of the second from 0 to 59.  Hours, minutes and seconds numbered below 10 should be padded on the left with <tt>0</tt>.</p>
+<p>Some <i>DBMS</i> have native support for time of the day formats, but for others the <i>DBMS</i> driver may have to represent them as integers or text values.  In any case, it is always possible to make comparisons between time values as well sort query results by fields of this type.</p>
+<h2><li><a name="5.1.8">Time stamp data type</a></li></h2>
+<p>The time stamp data type is a mere combination of the date and the time of the day data types.  The representation of values of the time stamp type is accomplished by joining the date and time string values in a single string joined by a space.  Therefore, the format template is <tt>YYYY-MM-DD HH:MI:SS</tt>.  The represented values obey the same rules and ranges described for the date and time data types.</p>
+<h2><li><a name="5.1.9">Large object (file) data types</a></li></h2>
+<p>The large object data types are meant to store data of undefined length that may be to large to store in text fields, like data that is usually stored in files.</p>
+<p><b>MDB2</b> supports two types of large object fields: Character Large OBjects (<i>CLOBs</i>) and Binary Large OBjects (<i>BLOBs</i>). <i>CLOB</i> fields are meant to store only data made of printable <i>ASCII</i> characters. <i>BLOB</i> fields are meant to store all types of data.</p>
+<p>Large object fields are usually not meant to be used as parameters of query search clause (<tt>WHERE</tt>) unless the underlying <i>DBMS</i> supports a feature usually known as <i>&quot;full text search&quot;</i>.</p>
+</ul>
+<hr />
+<address>Manuel Lemos (<a href="mailto:mlemos@acm.org">mlemos@acm.org</a>)</address>
+</body>
+</html>

@@ -1,0 +1,13 @@
+build/api
+build/code-browser
+build/coverage
+build/logs
+build/pdepend
+build/phpdox
+channel/
+*.tgz
+phpunit.xml
+cache.properties
+vendor
+nbproject
+phpcs-checkstyle.tmp

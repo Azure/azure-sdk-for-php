@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<root>
+  <tag1 attrib="val" />
+  <tag1 attrib="val2" >
+    <tag2>hello world </tag2>
+  </tag1>
+  <tag1 attrib="val23" />
+</root>

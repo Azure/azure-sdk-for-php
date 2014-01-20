@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<conf>
+  <name>clients</name>
+  <tables>
+    <table name="CLIENTS">
+      <field name="CLIEMP">
+        <label>Company</label>
+        <type>intern</type>
+        <required>true</required>
+      </field>
+      <field name="CLICOD">
+        <label>Client ID</label>
+        <type>intern</type>
+        <required>true</required>
+      </field>
+    </table>
+    <table name="ORDERS">
+      <field name="ORDNUM">
+        <label>Order id</label>
+        <type>intern</type>
+        <required>true</required>
+      </field>
+      <field name="ORDCLI">
+        <label>Client ID</label>
+        <type>intern</type>
+        <required>true</required>
+      </field>
+    </table>
+  </tables>
+</conf>

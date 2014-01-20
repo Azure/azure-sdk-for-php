@@ -1,0 +1,35 @@
+PEAR_Frontend_Web
+=================
+Webbased PEAR Package Manager, the best way to manage your pear-compatible packages.
+
+Installation:
+-------------
+1) Install this package (pear install PEAR_Frontend_Web)
+2) copy docs/index.php.txt to <webdir>/index.php where <webdir> is a web-accessible directory
+3) Open, in your browser, the URL to that freshly copied file.
+4) You are using the webfrontend : )
+
+!BC Warning: If you get a require_once error on PEAR/WebInstaller.php then copy docs/index.php.txt over the erroneous file (eg. index.php) !
+
+Permissions:
+------------
+Your entire PEAR directory has to be writable by the webserver !
+This webfrontend is a frontend, it calls the PEAR installer functions so it must be able to change all PEAR-managed files, through the webserver.
+
+Security:
+---------
+The webfrontend manages all packages, be sure to protect it !
+The easiest way is to protect it with a .htaccess file, in the webdir:
+$ echo "
+AuthUserFile $(pwd)/.htpasswd
+AuthType Basic
+AuthName \"Web-based PEAR Frontend\"
+Require valid-user" > .htaccess && htpasswd -c .htpasswd admin
+
+This command (everything after the $) creates a .htaccess file, like the one supplied with this documentation, and creates a .htpasswd with user 'admin'.
+(your apache config must have the directive: AllowOverride AuthConfig)
+
+
+Please report any problems through the bugtracker at http://pear.php.net/package/PEAR_Frontend_Web/bugs
+Have Fun,
+Tias

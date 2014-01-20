@@ -1,0 +1,11 @@
+Maintainers for MDB2 database backends/drivers:
+
+ibase       : Lorenzo Alberton <l.alberton@quipo.it>
+mssql       : David Coallier <david@jaws.com.mx
+mysql       : Lukas Smith <smith@pooteeweet.org>
+mysqli      : Lukas Smith <smith@pooteeweet.org>
+oci8        : Lukas Smith <smith@pooteeweet.org>
+pgsql       : Lukas Smith <smith@pooteeweet.org>
+fbsql       : unmaintained
+sqlite      : Lukas Smith <smith@pooteeweet.org>
+querysim    : Lukas Smith <smith@pooteeweet.org>
