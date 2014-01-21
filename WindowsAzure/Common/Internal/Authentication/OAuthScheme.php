@@ -94,8 +94,8 @@ class OAuthScheme implements IAuthScheme
         $accountKey,
         $grantType,
         $scope,
-        $oauthService)
-    {
+        $oauthService
+    ) {
         Validate::isString($accountName, 'accountName');
         Validate::isString($accountKey, 'accountKey');
         Validate::isString($grantType, 'grantType');
@@ -125,7 +125,8 @@ class OAuthScheme implements IAuthScheme
     public function getAuthorizationHeader($headers, $url, $queryParams, $httpMethod)
     {
         if (($this->accessToken == null)
-            || ($this->accessToken->getExpiresIn() < time())) {
+            || ($this->accessToken->getExpiresIn() < time())
+        ) {
             $this->accessToken = $this->oauthService->getAccessToken(
                 $this->grantType,
                 $this->accountName,
