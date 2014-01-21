@@ -11,17 +11,17 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- * 
+ *
  * PHP version 5
  *
  * @category  Microsoft
  * @package   WindowsAzure
  * @author    Azure PHP SDK <azurephpsdk@microsoft.com>
- * @copyright 2012 Microsoft Corporation
+ * @copyright Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
- 
+
 const CHANNEL_NAME = 'pear.windowsazure.com';
 const CHANNEL_SUMMARY = 'Windows Azure PEAR channel';
 const CHANNEL_ALIAS = 'WindowsAzure';
@@ -32,8 +32,8 @@ const CHANNEL_MAIN_CONTAINER = '$root';
 const CHANNEL_GET_CONTAINER = 'get';
 const CHANNEL_REST_CONTAINER = 'rest';
 const PACKAGE_NAME = 'WindowsAzure';
-const PACKAGE_RELEASE_VERSION = '0.3.1';
-const PACKAGE_API_VERSION = '0.3.1';
+const PACKAGE_RELEASE_VERSION = '0.4.0';
+const PACKAGE_API_VERSION = '0.4.0';
 const PACKAGE_RELEASE_STATE = 'beta';
 const PACKAGE_API_STATE = 'beta';
 const PACKAGE_MIN_PHP_VERSION = '5.3.0';
@@ -43,16 +43,14 @@ const PACKAGE_LICENSE_AGREEMENT = 'http://www.apache.org/licenses/LICENSE-2.0';
 const PACKAGE_SUMMARY = 'Windows Azure SDK for PHP.';
 const PACKAGE_DESCRIPTION = '
 This package contains client libraries for accessing the Windows Azure Tables, Blobs,
-Queues, Service Runtime, Service Management and Service Bus (Queues, Topics) REST APIs.
+Queues, Service Runtime, Service Management, Service Bus (Queues, Topics) and Media Services REST APIs.
 It is build as a thin REST call wrapper where each server call maps to a single method call within the library.
 ';
 const PACKAGE_RELEASE_NOTES = '
-- Added additional API support for Service Management:
-    * Operations on Hosted Services
+- Added API support for Media Services:
+    * Operations on Assets, Access policies, Locators, FileAssets, Jobs, Jobs templates, Tasks and Task templates
         > create, update, delete, list, get properties
-    * Operations on Deployments
-        > deployment: create, get, delete, swap, change configuration, update status, upgrade, rollback
-        > role instance: reboot, reimage
+    * Uploading files to Media Services storage
 ';
 $dependencies = array(
     array('required', 'HTTP_Request2',            'pear.php.net'),
