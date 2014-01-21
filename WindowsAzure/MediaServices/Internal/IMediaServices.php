@@ -26,7 +26,7 @@ namespace WindowsAzure\MediaServices\Internal;
 use WindowsAzure\Common\Internal\FilterableService;
 
 /**
- * This interface has all REST APIs provided by Windows Azure for Media Services.
+ * This interface has all REST APIs provided by Windows Azure for Blob service.
  *
  * @category  Microsoft
  * @package   WindowsAzure\MediaServices\Internal
@@ -35,6 +35,7 @@ use WindowsAzure\Common\Internal\FilterableService;
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @version   Release: @package_version@
  * @link      https://github.com/windowsazure/azure-sdk-for-php
+ * @see       http://msdn.microsoft.com/en-us/library/windowsazure/dd135733.aspx
  */
 interface IMediaServices extends FilterableService
 {
@@ -60,7 +61,7 @@ interface IMediaServices extends FilterableService
     /**
      * Get asset list
      *
-     * @return array of Models\Asset
+     * @return array
      */
     public function getAssetList();
 
@@ -70,7 +71,7 @@ interface IMediaServices extends FilterableService
      * @param WindowsAzure\MediaServices\Models\Asset|string $asset Asset data or
      * asset Id
      *
-     * @return array of Models\Locator
+     * @return array
      */
     public function getAssetLocators($asset);
 
@@ -80,7 +81,7 @@ interface IMediaServices extends FilterableService
      * @param WindowsAzure\MediaServices\Models\Asset|string $asset Asset data or
      * asset Id
      *
-     * @return array of Models\Asset
+     * @return array
      */
     public function getAssetParentAssets($asset);
 
@@ -90,7 +91,7 @@ interface IMediaServices extends FilterableService
      * @param WindowsAzure\MediaServices\Models\Asset|string $asset Asset data or
      * asset Id
      *
-     * @return array of Models\AssetFile
+     * @return array
      */
     public function getAssetAssetFileList($asset);
 
@@ -147,7 +148,7 @@ interface IMediaServices extends FilterableService
     /**
      * Get list of AccessPolicies.
      *
-     * @return array of Models\AccessPolicy
+     * @return array
      */
     public function getAccessPolicyList();
 
@@ -203,7 +204,7 @@ interface IMediaServices extends FilterableService
     /**
      * Get list of Locators.
      *
-     * @return array of Models\Locator
+     * @return array
      */
     public function getLocatorList();
 
@@ -251,7 +252,7 @@ interface IMediaServices extends FilterableService
     /**
      * Get list of all asset files.
      *
-     * @return array of Models\AssetFile
+     * @return array
      */
     public function getAssetFileList();
 
@@ -286,7 +287,7 @@ interface IMediaServices extends FilterableService
      * @param array                                 $tasks       Performed tasks
      * array (optional)
      *
-     * @return Models\Job
+     * @return array
      */
     public function createJob($job, $inputAssets, $tasks = null);
 
@@ -302,7 +303,7 @@ interface IMediaServices extends FilterableService
     /**
      * Get list of Jobs.
      *
-     * @return array of Models\Job
+     * @return array
      */
     public function getJobList();
 
@@ -320,7 +321,7 @@ interface IMediaServices extends FilterableService
      *
      * @param WindowsAzure\MediaServices\Models\Job|string $job Job data or job Id
      *
-     * @return array of Models\Task
+     * @return array
      */
     public function getJobTasks($job);
 
@@ -330,7 +331,7 @@ interface IMediaServices extends FilterableService
      *
      * @param WindowsAzure\MediaServices\Models\Job|string $job Job data or job Id
      *
-     * @return array of Models\Asset
+     * @return array
      */
     public function getJobInputMediaAssets($job);
 
@@ -339,7 +340,7 @@ interface IMediaServices extends FilterableService
      *
      * @param WindowsAzure\MediaServices\Models\Job|string $job Job data or job Id
      *
-     * @return array of Models\Asset
+     * @return array
      */
     public function getJobOutputMediaAssets($job);
 
@@ -364,7 +365,7 @@ interface IMediaServices extends FilterableService
     /**
      * Get list of tasks.
      *
-     * @return array of Models\Task
+     * @return array
      */
     public function getTaskList();
 
@@ -377,7 +378,7 @@ interface IMediaServices extends FilterableService
      * @param array                                         $taskTemplates Performed
      * tasks template array
      *
-     * @return Models\JobTemplate
+     * @return array
      */
     public function createJobTemplate($jobTemplate, $taskTemplates);
 
@@ -394,7 +395,7 @@ interface IMediaServices extends FilterableService
     /**
      * Get list of Job Templates.
      *
-     * @return array of Models\JobTemplate
+     * @return array
      */
     public function getJobTemplateList();
 
@@ -404,7 +405,7 @@ interface IMediaServices extends FilterableService
      * @param WindowsAzure\MediaServices\Models\JobTemplate|string $jobTemplate Job
      * template data or jobTemplate Id
      *
-     * @return array of Models\TaskTemplate
+     * @return array
      */
     public function getJobTemplateTaskTemplateList($jobTemplate);
 
@@ -422,14 +423,14 @@ interface IMediaServices extends FilterableService
     /**
      * Get list of task templates.
      *
-     * @return array of Models\Tasktemplate
+     * @return array
      */
     public function getTaskTemplateList();
 
     /**
      * Get list of all media processors asset files
      *
-     * @return array of Models\MediaProcessor
+     * @return array
      */
     public function getMediaProcessors();
 
@@ -441,169 +442,5 @@ interface IMediaServices extends FilterableService
      * @return WindowsAzure\MediaServices\Models\JobTemplate\MediaProcessor
      */
     public function getLatestMediaProcessor($name);
-
-    /**
-     * Create new IngestManifest
-     *
-     * @param Models\IngestManifest $ingestManifest An IngestManifest data
-     *
-     * @return WindowsAzure\MediaServices\Models\IngestManifest
-     */
-    public function createIngestManifest($ingestManifest);
-
-    /**
-     * Get IngestManifest
-     *
-     * @param Models\IngestManifest|string $ingestManifest An IngestManifest data or
-     * IngestManifest Id
-     *
-     * @return WindowsAzure\MediaServices\Models\IngestManifest
-     */
-    public function getIngestManifest($ingestManifest);
-
-    /**
-     * Get IngestManifest list
-     *
-     * @return array of Models\IngestManifest
-     */
-    public function getIngestManifestList();
-
-    /**
-     * Get IngestManifest assets
-     *
-     * @param Models\IngestManifest|string $ingestManifest An IngestManifest data or
-     * IngestManifest Id
-     *
-     * @return array of Models\IngestManifestAsset
-     */
-    public function getIngestManifestAssets($ingestManifest);
-
-    /**
-     * Get pending assets of IngestManifest
-     *
-     * @param Models\IngestManifest|string $ingestManifest An IngestManifest data or
-     * IngestManifest Id
-     *
-     * @return array of Models\IngestManifestAsset
-     */
-    public function getPendingIngestManifestAssets($ingestManifest);
-
-    /**
-     * Get storage account of IngestManifest
-     *
-     * @param Models\IngestManifest|string $ingestManifest An IngestManifest data
-     * or IngestManifest Id
-     *
-     * @return WindowsAzure\MediaServices\Models\StorageAccount
-     */
-    public function getIngestManifestStorageAccount($ingestManifest);
-
-    /**
-     * Update IngestManifest
-     *
-     * @param Models\IngestManifest $ingestManifest New IngestManifest data with
-     * valid id
-     *
-     * @return none
-     */
-    public function updateIngestManifest($ingestManifest);
-
-    /**
-     * Delete IngestManifest
-     *
-     * @param Models\IngestManifest|string $ingestManifest An IngestManifest data or
-     * IngestManifest Id
-     *
-     * @return none
-     */
-    public function deleteIngestManifest($ingestManifest);
-
-    /**
-     * Create new IngestManifestAsset
-     *
-     * @param Models\IngestManifestAsset $ingestManifestAsset An IngestManifestAsset
-     * data
-     *
-     * @param Models\Asset               $asset               An Asset data to be
-     * linked with IngestManifestAsset
-     *
-     * @return WindowsAzure\MediaServices\Models\IngestManifestAsset
-     */
-    public function createIngestManifestAsset($ingestManifestAsset, $asset);
-
-    /**
-     * Get IngestManifestAsset.
-     *
-     * @param Models\IngestManifestAsset|string $ingestManifestAsset An
-     * IngestManifestAsset data or IngestManifestAsset Id
-     *
-     * @return WindowsAzure\MediaServices\Models\IngestManifestAsset
-     */
-    public function getIngestManifestAsset($ingestManifestAsset);
-
-    /**
-     * Get list of IngestManifestAsset.
-     *
-     * @return array of Models\IngestManifestAsset
-     */
-    public function getIngestManifestAssetList();
-
-    /**
-     * Get IngestManifestFiles of IngestManifestAsset
-     *
-     * @param Models\IngestManifestAsset|string $ingestManifestAsset An
-     * IngestManifestAsset data or IngestManifestAsset Id
-     *
-     * @return array of Models\IngestManifestFiles
-     */
-    public function getIngestManifestAssetFiles($ingestManifestAsset);
-
-
-    /**
-     * Delete IngestManifestAsset
-     *
-     * @param Models\IngestManifestAsset|string $ingestManifestAsset An
-     * IngestManifestAsset data or IngestManifestAsset Id
-     *
-     * @return none
-     */
-    public function deleteIngestManifestAsset($ingestManifestAsset);
-
-    /**
-     * Create new IngestManifestFile
-     *
-     * @param Models\IngestManifestFile $ingestManifestFile An IngestManifestFile
-     * data
-     *
-     * @return WindowsAzure\MediaServices\Models\IngestManifestFile
-     */
-    public function createIngestManifestFile($ingestManifestFile);
-
-    /**
-     * Get IngestManifestFile.
-     *
-     * @param Models\IngestManifestFile|string $ingestManifestFile An
-     * IngestManifestFile data or IngestManifestFile Id
-     *
-     * @return WindowsAzure\MediaServices\Models\IngestManifestFile
-     */
-    public function getIngestManifestFile($ingestManifestFile);
-
-    /**
-     * Get list of IngestManifestFile.
-     *
-     * @return array of Models\IngestManifestFile
-     */
-    public function getIngestManifestFileList();
-
-    /**
-     * Delete IngestManifestFile
-     *
-     * @param Models\IngestManifestFile|string $ingestManifestFile An
-     * IngestManifestFile data or IngestManifestFile Id
-     *
-     * @return none
-     */
-    public function deleteIngestManifestFile($ingestManifestFile);
 }
 

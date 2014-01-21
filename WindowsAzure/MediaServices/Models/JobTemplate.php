@@ -130,8 +130,8 @@ class JobTemplate
      */
     public function __construct(
         $jobTemplateBody,
-        $templateType = JobTemplate::TYPE_ACCOUNT_LEVEL
-    ) {
+        $templateType = JobTemplate::TYPE_ACCOUNT_LEVEL)
+    {
         $this->_jobTemplateBody = $jobTemplateBody;
         $this->_templateType    = $templateType;
     }

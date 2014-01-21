@@ -55,9 +55,6 @@ class MediaServicesRestProxyTestBase extends ServiceRestProxyTestBase
     protected $jobTemplate = array();
     protected $job = array();
     protected $outputAssets = array();
-    protected $ingestManifests = array();
-    protected $ingestManifestAssets = array();
-    protected $ingestManifestFiles = array();
 
     public function setUp()
     {
@@ -98,30 +95,6 @@ class MediaServicesRestProxyTestBase extends ServiceRestProxyTestBase
         $result = $this->restProxy->createJob($job, $inputAssets, $tasks);
 
         $this->job[$result->getId()] = $result;
-
-        return $result;
-    }
-
-    public function createIngestManifest($ingestManifest) {
-        $result = $this->restProxy->createIngestManifest($ingestManifest);
-
-        $this->ingestManifests[$result->getId()] = $result;
-
-        return $result;
-    }
-
-    public function createIngestManifestAsset($ingestManifestAsset, $asset) {
-        $result = $this->restProxy->createIngestManifestAsset($ingestManifestAsset, $asset);
-
-        $this->ingestManifestAssets[$result->getId()] = $result;
-
-        return $result;
-    }
-
-    public function createIngestManifestFile($ingestManifestFile) {
-        $result = $this->restProxy->createIngestManifestFile($ingestManifestFile);
-
-        $this->ingestManifestFiles[$result->getId()] = $result;
 
         return $result;
     }
@@ -230,18 +203,6 @@ class MediaServicesRestProxyTestBase extends ServiceRestProxyTestBase
     {
         parent::tearDown();
 
-        foreach($this->ingestManifestFiles as $ingestManifestFile) {
-            $this->restProxy->deleteIngestManifestFile($ingestManifestFile);
-        }
-
-        foreach($this->ingestManifestAssets as $ingestManifestAsset) {
-            $this->restProxy->deleteIngestManifestAsset($ingestManifestAsset);
-        }
-
-        foreach($this->ingestManifests as $ingestManifest) {
-            $this->restProxy->deleteIngestManifest($ingestManifest);
-        }
-
         foreach($this->locator as $loc) {
             $this->restProxy->deleteLocator($loc);
         }
@@ -282,17 +243,5 @@ class MediaServicesRestProxyTestBase extends ServiceRestProxyTestBase
         }
         $this->restProxy->deleteJob($job->getId());
         unset($this->job[$job->getId()]);
-    }
-
-    public function waitIngestManifestFinishedFiles($manifest, $fileCount, $threshold = 40) {
-        $stat = $this->restProxy->getIngestManifest($manifest);
-        $attempt = 0;
-        while (($stat->getStatistics()->getFinishedFilesCount() < $fileCount)
-            && ($attempt < $threshold)
-        ) {
-            $stat = $this->restProxy->getIngestManifest($manifest);
-            $attempt++;
-            sleep(1);
-        }
     }
 }
