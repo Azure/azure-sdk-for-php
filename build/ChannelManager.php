@@ -10,17 +10,17 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- * 
+ *
  * PHP version 5
  *
  * @category  Microsoft
  * @package   WindowsAzure
  * @author    Azure PHP SDK <azurephpsdk@microsoft.com>
- * @copyright 2012 Microsoft Corporation
+ * @copyright Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
- 
+
 namespace WindowsAzure;
 
 require_once 'WindowsAzure/WindowsAzure.php';
@@ -41,40 +41,40 @@ use WindowsAzure\Common\ServicesBuilder;
  * @author    Azure PHP SDK <azurephpsdk@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
- * @version   Release: 0.3.1_2011-08
+ * @version   Release: 0.4.0_2014-01
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
 class ChannelManager
 {
     /**
-     * @var BlobRestProxy 
+     * @var BlobRestProxy
      */
     private static $_blobRestProxy;
-    
+
     /**
      * Creates new blob REST proxy.
-     * 
-     * @return BlobRestProxy 
+     *
+     * @return BlobRestProxy
      */
     private static function _createBlobRestProxy()
     {
 		$accountKey       = getenv('CHANNEL_STORAGE_SERVICE_KEY');
 		$accountName      = CHANNEL_STORAGE_SERVICE_NAME;
 		$blobEndpointUri  = CHANNEL_URL;
-		$connectionString = "BlobEndpoint=$blobEndpointUri;AccountName=$accountName;AccountKey=$accountKey";        
-        
+		$connectionString = "BlobEndpoint=$blobEndpointUri;AccountName=$accountName;AccountKey=$accountKey";
+
         return ServicesBuilder::getInstance()->createBlobService($connectionString);
     }
-    
+
     /**
      * Channel manager main entry.
-     * 
+     *
      * @return none
      */
     public static function main()
     {
         self::$_blobRestProxy = self::_createBlobRestProxy();
-        
+
         if (   isset($_GET['release'])
             || (isset($_SERVER['argv'])
             && @$_SERVER['argv'][1] == 'release')
@@ -89,7 +89,7 @@ class ChannelManager
             self::_manageChannel();
         }
     }
-    
+
     /**
      * Command line interaction with user to manage the channel by letting user to:
      * 1) Get the channel (either by creation of new one or download existing one).
@@ -97,8 +97,8 @@ class ChannelManager
      * 3) Prompt user to add current package.
      * 4) Upload the channel back.
      * 5) Verify that latest package is installable.
-     * 
-     * @return none 
+     *
+     * @return none
      */
     private static function _manageChannel()
     {
@@ -136,7 +136,7 @@ class ChannelManager
 
         self::_verifyInstall();
     }
-    
+
     /**
      * Creates new channel and removes existing channel files by:
      * 1) Removes existing channel files on the cloud.
@@ -144,11 +144,11 @@ class ChannelManager
      * 3) Cleans previous files if any and create new channel directory.
      * 4) Writes pirum.xml.
      * 5) Generates the channel files.
-     * 
+     *
      * @return none
      */
     private static function _createNewChannel()
-    { 
+    {
         echo "Removing old channel files if any...\n";
         self::_clearContainer(CHANNEL_MAIN_CONTAINER, self::$_blobRestProxy);
         self::_clearContainer(CHANNEL_GET_CONTAINER, self::$_blobRestProxy);
@@ -173,11 +173,11 @@ class ChannelManager
 
         self::_executeCommand("pirum build $dirName/");
     }
-    
+
     /**
      * Tries to install the new released package.
-     * 
-     * @return none 
+     *
+     * @return none
      */
     private static function _verifyInstall()
     {
@@ -190,9 +190,9 @@ class ChannelManager
 
     /**
      * Deletes all the Blobs in a specified container.
-     * 
+     *
      * @param string $container The container name.
-     * 
+     *
      * @return none
      */
     private static function _clearContainer($container)
@@ -206,10 +206,10 @@ class ChannelManager
 
     /**
      * Downloads all the Blobs in a container to a specified directory.
-     * 
+     *
      * @param string $containerName The container name.
      * @param string $dirName       The directory name.
-     * 
+     *
      * @return none
      */
     private static function _downloadContainerInDir($containerName, $dirName)
@@ -228,11 +228,11 @@ class ChannelManager
             file_put_contents($file, stream_get_contents($blob->getContentStream()));
         }
     }
-    
+
     /**
      * Downloads the channel files.
-     * 
-     * @return none 
+     *
+     * @return none
      */
     private static function _downloadChannel()
     {
@@ -241,13 +241,13 @@ class ChannelManager
         self::_downloadContainerInDir(CHANNEL_GET_CONTAINER, CHANNEL_DIR_NAME . '/get');
         self::_downloadContainerInDir(CHANNEL_REST_CONTAINER, CHANNEL_DIR_NAME . '/rest');
     }
-    
+
     /**
      * Uploads the channel files to blob storage.
-     * 
+     *
      * @return none
-     * 
-     * @throws \Exception 
+     *
+     * @throws \Exception
      */
     private static function _uploadChannel()
     {
@@ -292,10 +292,10 @@ class ChannelManager
     }
     /**
      * Scans a directory and returns all files under it recursively.
-     * 
+     *
      * @param string $dir    The directory path.
      * @param array  &$files The directory files.
-     * 
+     *
      * @return none
      */
     private static function _rscandir($dir, &$files) {
@@ -310,9 +310,9 @@ class ChannelManager
 
     /**
      * Tries to create new container if it does not exist.
-     * 
+     *
      * @param string $container The container name.
-     * 
+     *
      * @return none
      */
     private static function _tryCreateContainer($container)
@@ -331,7 +331,7 @@ class ChannelManager
 
     /**
      * Adds new package.
-     * 
+     *
      * @return none
      */
     private static function _addPackage()
@@ -345,8 +345,8 @@ class ChannelManager
 
     /**
      * Removes existing package.
-     * 
-     * @return none 
+     *
+     * @return none
      */
     private static function _removePackage()
     {
@@ -367,9 +367,9 @@ class ChannelManager
 
     /**
      * Creates new directory and removes existing one.
-     * 
+     *
      * @param string $dirName The directory name.
-     * 
+     *
      * @return none
      */
     private static function _createDir($dirName)
@@ -383,9 +383,9 @@ class ChannelManager
 
     /**
      * Executes cmdline command.
-     * 
+     *
      * @param string $command The command to execute.
-     * 
+     *
      * @return none
      */
     private static function _executeCommand($command)
@@ -397,12 +397,12 @@ class ChannelManager
             exit();
         }
     }
-    
+
     /**
      * Removes a whole directory with all files inside it.
-     * 
+     *
      * @param string $dir The directory path.
-     * 
+     *
      * @return none
      */
     private static function _rrmdir($dir)
@@ -414,19 +414,19 @@ class ChannelManager
                 unlink($file);
             }
         }
-        
+
         if (is_dir($dir)) {
             rmdir($dir);
         }
     }
-    
+
     /**
      * Prompts message to the uers and return back the input.
-     * 
+     *
      * @param string  $msg        The message to display.
      * @param boolean $isYesNoMsg Flag to indicate if this is Y/N question.
-     * 
-     * @return string 
+     *
+     * @return string
      */
     private static function _promptMsg($msg, $isYesNoMsg = false)
     {
