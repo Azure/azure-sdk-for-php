@@ -34,7 +34,7 @@ use WindowsAzure\Common\Internal\Resources;
  * @author    Azure PHP SDK <azurephpsdk@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
- * @version   Release: @package_version@
+ * @version   Release: 0.4.0_2014-01
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
 class ServiceBusSettings extends ServiceSettings
@@ -86,6 +86,13 @@ class ServiceBusSettings extends ServiceSettings
     private static $_serviceBusEndpointSetting;
     
     /**
+     * Validator for the StsEndpoint setting. Must be a valid Uri.
+     * 
+     * @var array
+     */
+    private static $_wrapEndpointUriSetting;
+    
+    /**
      * @var boolean
      */
     protected static $isInitialized = false;
@@ -117,9 +124,15 @@ class ServiceBusSettings extends ServiceSettings
             Resources::SHARED_SECRET_VALUE_NAME
         );
         
+        self::$_wrapEndpointUriSetting = self::settingWithFunc(
+            Resources::STS_ENDPOINT_NAME,
+            Validate::getIsValidUri()
+        );
+        
         self::$validSettingKeys[] = Resources::SERVICE_BUS_ENDPOINT_NAME;
         self::$validSettingKeys[] = Resources::SHARED_SECRET_ISSUER_NAME;
         self::$validSettingKeys[] = Resources::SHARED_SECRET_VALUE_NAME;
+        self::$validSettingKeys[] = Resources::STS_ENDPOINT_NAME;
     }
     
     /**
@@ -133,15 +146,13 @@ class ServiceBusSettings extends ServiceSettings
     public function __construct(
         $serviceBusEndpoint,
         $namespace,
+        $wrapEndpointUri,
         $wrapName,
         $wrapPassword
     ) {
         $this->_namespace             = $namespace;
         $this->_serviceBusEndpointUri = $serviceBusEndpoint;
-        $this->_wrapEndpointUri       = sprintf(
-            Resources::WRAP_ENDPOINT_URI_FORMAT,
-            $namespace
-        );
+        $this->_wrapEndpointUri       = $wrapEndpointUri;
         $this->_wrapName              = $wrapName;
         $this->_wrapPassword          = $wrapPassword;
     }
@@ -163,7 +174,8 @@ class ServiceBusSettings extends ServiceSettings
                 self::$_serviceBusEndpointSetting,
                 self::$_wrapNameSetting,
                 self::$_wrapPasswordSetting
-            )
+            ),
+            self::optional(self::$_wrapEndpointUriSetting)
         );
         
         if ($matchedSpecs) {
@@ -175,6 +187,11 @@ class ServiceBusSettings extends ServiceSettings
             // Parse the namespace part from the URI
             $namespace   = explode('.', parse_url($endpoint, PHP_URL_HOST));
             $namespace   = $namespace[0];
+            $wrapEndpointUri = Utilities::tryGetValueInsensitive(
+                Resources::STS_ENDPOINT_NAME,
+                $tokenizedSettings,
+                sprintf(Resources::WRAP_ENDPOINT_URI_FORMAT, $namespace)
+            );
             $issuerName  = Utilities::tryGetValueInsensitive(
                 Resources::SHARED_SECRET_ISSUER_NAME,
                 $tokenizedSettings
@@ -187,6 +204,7 @@ class ServiceBusSettings extends ServiceSettings
             return new ServiceBusSettings(
                 $endpoint,
                 $namespace,
+                $wrapEndpointUri,
                 $issuerName,
                 $issuerValue
             );

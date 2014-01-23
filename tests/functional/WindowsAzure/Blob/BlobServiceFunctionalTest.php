@@ -1242,7 +1242,7 @@ class BlobServiceFunctionalTest extends FunctionalTestBase
      */
     private function getBlobMetadataWorker($container, $options)
     {
-        $blob = BlobServiceFunctionalTestData::getInterestingBlobName();
+        $blob = BlobServiceFunctionalTestData::getInterestingBlobName($container);
 
         // Make sure there is something to test
         $createBlockBlobResult = $this->restProxy->createBlockBlob($container, $blob, "");
@@ -1386,7 +1386,7 @@ class BlobServiceFunctionalTest extends FunctionalTestBase
      */
     private function setBlobMetadataWorker($container, $options, $metadata)
     {
-        $blob = BlobServiceFunctionalTestData::getInterestingBlobName();
+        $blob = BlobServiceFunctionalTestData::getInterestingBlobName($container);
 
         // Make sure there is something to test
         $createBlockBlobResult = $this->restProxy->createBlockBlob($container, $blob, "");
@@ -1520,7 +1520,7 @@ class BlobServiceFunctionalTest extends FunctionalTestBase
      */
     private function getBlobPropertiesWorker($container, $options)
     {
-        $blob = BlobServiceFunctionalTestData::getInterestingBlobName();
+        $blob = BlobServiceFunctionalTestData::getInterestingBlobName($container);
 
         // Make sure there is something to test
         $createPageBlobResult = $this->restProxy->createPageBlob($container, $blob, 512);
@@ -1706,7 +1706,7 @@ class BlobServiceFunctionalTest extends FunctionalTestBase
      */
     private function setBlobPropertiesWorker($container, $properties)
     {
-        $blob = BlobServiceFunctionalTestData::getInterestingBlobName();
+        $blob = BlobServiceFunctionalTestData::getInterestingBlobName($container);
 
         // Make sure there is something to test
         $createPageBlobResult = $this->restProxy->createPageBlob($container, $blob, 512);
@@ -1819,7 +1819,7 @@ class BlobServiceFunctionalTest extends FunctionalTestBase
      */
     private function getBlobWorker($options, $container)
     {
-        $blob = BlobServiceFunctionalTestData::getInterestingBlobName();
+        $blob = BlobServiceFunctionalTestData::getInterestingBlobName($container);
 
         // Make sure there is something to test
         $dataSize = 512;
@@ -1987,7 +1987,7 @@ class BlobServiceFunctionalTest extends FunctionalTestBase
      */
     private function deleteBlobWorker($options, $container)
     {
-        $blob = BlobServiceFunctionalTestData::getInterestingBlobName();
+        $blob = BlobServiceFunctionalTestData::getInterestingBlobName($container);
 
         // Make sure there is something to test
         $dataSize = 512;
@@ -2123,7 +2123,7 @@ class BlobServiceFunctionalTest extends FunctionalTestBase
      */
     private function createBlobSnapshotWorker($options, $container)
     {
-        $blob = BlobServiceFunctionalTestData::getInterestingBlobName();
+        $blob = BlobServiceFunctionalTestData::getInterestingBlobName($container);
 
         // Make sure there is something to test
         $dataSize = 512;
@@ -2221,7 +2221,6 @@ class BlobServiceFunctionalTest extends FunctionalTestBase
      */
     public function testCopyBlobNoOptions()
     {
-
         $sourceContainers = array(
             BlobServiceFunctionalTestData::$testContainerNames[0],
             '$root',
@@ -2270,17 +2269,15 @@ class BlobServiceFunctionalTest extends FunctionalTestBase
      */
     private function copyBlobWorker($options, $sourceContainer, $destContainer)
     {
-        $sourceBlob = BlobServiceFunctionalTestData::getInterestingBlobName();
-        $destBlob = BlobServiceFunctionalTestData::getInterestingBlobName();
+        $sourceBlob = BlobServiceFunctionalTestData::getInterestingBlobName($sourceContainer);
+        $destBlob = BlobServiceFunctionalTestData::getInterestingBlobName($destContainer);
 
         // Make sure there is something to test
         $sourceDataSize = 512;
         $this->restProxy->createPageBlob($sourceContainer, $sourceBlob, $sourceDataSize);
 
-        // TODO: Just get etag from createBlockBlob https://github->com/WindowsAzure/azure-sdk-for-java/issues/74
         $destDataSize = 2048;
-        $this->restProxy->createPageBlob($destContainer, $destBlob, $destDataSize);
-        $destBlobInfo = $this->restProxy->getBlob($destContainer, $destBlob);
+        $destBlobInfo = $this->restProxy->createPageBlob($destContainer, $destBlob, $destDataSize);
         $this->restProxy->createBlobSnapshot($destContainer, $destBlob);
 
         $metadata = BlobServiceFunctionalTestData::getNiceMetadata();
@@ -2288,7 +2285,7 @@ class BlobServiceFunctionalTest extends FunctionalTestBase
         $snapshot = $this->restProxy->createBlobSnapshot($sourceContainer, $sourceBlob);
         if (!is_null($options)) {
             BlobServiceFunctionalTestData::fixETagAccessCondition($options->getSourceAccessCondition(), $snapshot->getETag());
-            BlobServiceFunctionalTestData::fixETagAccessCondition($options->getAccessCondition(), $destBlobInfo->getProperties()->getETag());
+            BlobServiceFunctionalTestData::fixETagAccessCondition($options->getAccessCondition(), $destBlobInfo->getETag());
             $options->setSourceSnapshot(is_null($options->getSourceSnapshot()) ? null : $snapshot->getSnapshot());
         }
 

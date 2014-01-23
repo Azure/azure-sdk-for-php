@@ -31,20 +31,29 @@ use WindowsAzure\Common\Internal\Utilities;
 
 class IntegrationTestBase extends BlobServiceRestProxyTestBase
 {
+    private static $isOneTimeSetup = false;
+
     public function setUp()
     {
         parent::setUp();
         $fiddlerFilter = new FiddlerFilter();
         $this->restProxy = $this->restProxy->withFilter($fiddlerFilter);
+
+        if (!self::$isOneTimeSetup) {
+            self::$isOneTimeSetup = true;
+        }
     }
 
     public static function tearDownAfterClass()
     {
-        $integrationTestBase = new IntegrationTestBase();
-        $integrationTestBase->setUp();
-        if ($integrationTestBase->isEmulated()) {
-            $serviceProperties = BlobServiceFunctionalTestData::getDefaultServiceProperties();
-            $integrationTestBase->restProxy->setServiceProperties($serviceProperties);
+        if (self::$isOneTimeSetup) {
+            $integrationTestBase = new IntegrationTestBase();
+            $integrationTestBase->setUp();
+            if ($integrationTestBase->isEmulated()) {
+                $serviceProperties = BlobServiceFunctionalTestData::getDefaultServiceProperties();
+                $integrationTestBase->restProxy->setServiceProperties($serviceProperties);
+            }
+            self::$isOneTimeSetup = false;
         }
         parent::tearDownAfterClass();
     }

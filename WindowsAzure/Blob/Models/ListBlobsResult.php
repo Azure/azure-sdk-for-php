@@ -36,7 +36,7 @@ use WindowsAzure\Common\Internal\InvalidArgumentTypeException;
  * @author    Azure PHP SDK <azurephpsdk@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
- * @version   Release: @package_version@
+ * @version   Release: 0.4.0_2014-01
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
 class ListBlobsResult
@@ -75,36 +75,46 @@ class ListBlobsResult
      * @var integer
      */
     private $_maxResults;
+    
+    /**
+     * @var string 
+     */
+    private $_containerName;
 
     /**
      * Creates ListBlobsResult object from parsed XML response.
      *
      * @param array $parsed XML response parsed into array.
      * 
-     * @return WindowsAzure\Blob\Models\ListBlobsResult.
+     * @return ListBlobsResult
      */
     public static function create($parsed)
     {
-        $result                = new ListBlobsResult();
-        $result->_prefix       = Utilities::tryGetValue(
+        $result                 = new ListBlobsResult();
+        $result->_containerName = Utilities::tryGetKeysChainValue(
+            $parsed,
+            Resources::XTAG_ATTRIBUTES,
+            Resources::XTAG_CONTAINER_NAME
+        );
+        $result->_prefix        = Utilities::tryGetValue(
             $parsed, Resources::QP_PREFIX
         );
-        $result->_marker       = Utilities::tryGetValue(
+        $result->_marker        = Utilities::tryGetValue(
             $parsed, Resources::QP_MARKER
         );
-        $result->_nextMarker   = Utilities::tryGetValue(
+        $result->_nextMarker    = Utilities::tryGetValue(
             $parsed, Resources::QP_NEXT_MARKER
         );
-        $result->_maxResults   = intval(
+        $result->_maxResults    = intval(
             Utilities::tryGetValue($parsed, Resources::QP_MAX_RESULTS, 0)
         );
-        $result->_delimiter    = Utilities::tryGetValue(
+        $result->_delimiter     = Utilities::tryGetValue(
             $parsed, Resources::QP_DELIMITER
         );
-        $result->_blobs        = array();
-        $result->_blobPrefixes = array();
-        $rawBlobs              = array();
-        $rawBlobPrefixes       = array();
+        $result->_blobs         = array();
+        $result->_blobPrefixes  = array();
+        $rawBlobs               = array();
+        $rawBlobPrefixes        = array();
         
         if (   is_array($parsed['Blobs'])
             && array_key_exists('Blob', $parsed['Blobs'])
@@ -148,7 +158,7 @@ class ListBlobsResult
     /**
      * Gets blobs.
      *
-     * @return array.
+     * @return array
      */
     public function getBlobs()
     {
@@ -160,7 +170,7 @@ class ListBlobsResult
      *
      * @param array $blobs list of blobs
      * 
-     * @return none.
+     * @return none
      */
     public function setBlobs($blobs)
     {
@@ -173,7 +183,7 @@ class ListBlobsResult
     /**
      * Gets blobPrefixes.
      *
-     * @return array.
+     * @return array
      */
     public function getBlobPrefixes()
     {
@@ -185,7 +195,7 @@ class ListBlobsResult
      *
      * @param array $blobPrefixes list of blobPrefixes
      * 
-     * @return none.
+     * @return none
      */
     public function setBlobPrefixes($blobPrefixes)
     {
@@ -198,7 +208,7 @@ class ListBlobsResult
     /**
      * Gets prefix.
      *
-     * @return string.
+     * @return string
      */
     public function getPrefix()
     {
@@ -210,7 +220,7 @@ class ListBlobsResult
      *
      * @param string $prefix value.
      * 
-     * @return none.
+     * @return none
      */
     public function setPrefix($prefix)
     {
@@ -220,7 +230,7 @@ class ListBlobsResult
     /**
      * Gets prefix.
      *
-     * @return string.
+     * @return string
      */
     public function getDelimiter()
     {
@@ -232,7 +242,7 @@ class ListBlobsResult
      *
      * @param string $delimiter value.
      * 
-     * @return none.
+     * @return none
      */
     public function setDelimiter($delimiter)
     {
@@ -242,7 +252,7 @@ class ListBlobsResult
     /**
      * Gets marker.
      * 
-     * @return string.
+     * @return string
      */
     public function getMarker()
     {
@@ -254,7 +264,7 @@ class ListBlobsResult
      *
      * @param string $marker value.
      * 
-     * @return none.
+     * @return none
      */
     public function setMarker($marker)
     {
@@ -264,7 +274,7 @@ class ListBlobsResult
     /**
      * Gets max results.
      * 
-     * @return integer.
+     * @return integer
      */
     public function getMaxResults()
     {
@@ -276,7 +286,7 @@ class ListBlobsResult
      *
      * @param integer $maxResults value.
      * 
-     * @return none.
+     * @return none
      */
     public function setMaxResults($maxResults)
     {
@@ -286,7 +296,7 @@ class ListBlobsResult
     /**
      * Gets next marker.
      * 
-     * @return string.
+     * @return string
      */
     public function getNextMarker()
     {
@@ -298,12 +308,32 @@ class ListBlobsResult
      *
      * @param string $nextMarker value.
      * 
-     * @return none.
+     * @return none
      */
     public function setNextMarker($nextMarker)
     {
         $this->_nextMarker = $nextMarker;
     }
+    
+    /**
+     * Gets container name.
+     * 
+     * @return string
+     */
+    public function getContainerName()
+    {
+        return $this->_containerName;
+    }
+
+    /**
+     * Sets container name.
+     *
+     * @param string $containerName value.
+     * 
+     * @return none
+     */
+    public function setContainerName($containerName)
+    {
+        $this->_containerName = $containerName;
+    }
 }
-
-

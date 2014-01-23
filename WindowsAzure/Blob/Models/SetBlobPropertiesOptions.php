@@ -33,50 +33,20 @@ use WindowsAzure\Common\Internal\Validate;
  * @author    Azure PHP SDK <azurephpsdk@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
- * @version   Release: @package_version@
+ * @version   Release: 0.4.0_2014-01
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
 class SetBlobPropertiesOptions extends BlobServiceOptions
 {
     /**
-     * @var string
+     * @var BlobProperties
      */
-    private $_blobContentType;
-    
-    /**
-     * @var string
-     */
-    private $_blobContentEncoding;
-    
-    /**
-     * @var string
-     */
-    private $_blobContentLanguage;
-    
-    /**
-     * @var integer
-     */
-    private $_blobContentLength;
-    
-    /**
-     * @var string
-     */
-    private $_blobContentMD5;
-    
-    /**
-     * @var string
-     */
-    private $_blobCacheControl;
+    private $_blobProperties;
     
     /**
      * @var string
      */
     private $_leaseId;
-    
-    /**
-     * @var integer
-     */
-    private $_sequenceNumber;
     
     /**
      * @var string
@@ -87,6 +57,18 @@ class SetBlobPropertiesOptions extends BlobServiceOptions
      * @var AccessCondition
      */
     private $_accessCondition;
+    
+    /**
+     * Creates a new SetBlobPropertiesOptions with a specified BlobProperties 
+     * instance.
+     * 
+     * @param BlobProperties $blobProperties The blob properties instance.
+     */
+    public function __construct($blobProperties = null)
+    {
+        $this->_blobProperties = is_null($blobProperties) 
+                                 ? new BlobProperties() : clone $blobProperties;
+    }
     
     /**
      * Gets access condition
@@ -117,7 +99,7 @@ class SetBlobPropertiesOptions extends BlobServiceOptions
      */
     public function getSequenceNumber()
     {
-        return $this->_sequenceNumber;
+        return $this->_blobProperties->getSequenceNumber();
     }
 
     /**
@@ -129,8 +111,7 @@ class SetBlobPropertiesOptions extends BlobServiceOptions
      */
     public function setSequenceNumber($sequenceNumber)
     {
-        Validate::isInteger($sequenceNumber, 'sequenceNumber');
-        $this->_sequenceNumber = $sequenceNumber;
+        $this->_blobProperties->setSequenceNumber($sequenceNumber);
     }
     
     /**
@@ -184,7 +165,7 @@ class SetBlobPropertiesOptions extends BlobServiceOptions
      */
     public function getBlobContentLength()
     {
-        return $this->_blobContentLength;
+        return $this->_blobProperties->getContentLength();
     }
 
     /**
@@ -196,8 +177,7 @@ class SetBlobPropertiesOptions extends BlobServiceOptions
      */
     public function setBlobContentLength($blobContentLength)
     {
-        Validate::isInteger($blobContentLength, 'blobContentLength');
-        $this->_blobContentLength = $blobContentLength;
+        $this->_blobProperties->setContentLength($blobContentLength);
     }
     
     /**
@@ -207,7 +187,7 @@ class SetBlobPropertiesOptions extends BlobServiceOptions
      */
     public function getBlobContentType()
     {
-        return $this->_blobContentType;
+        return $this->_blobProperties->getContentType();
     }
 
     /**
@@ -219,7 +199,7 @@ class SetBlobPropertiesOptions extends BlobServiceOptions
      */
     public function setBlobContentType($blobContentType)
     {
-        $this->_blobContentType = $blobContentType;
+        $this->_blobProperties->setContentType($blobContentType);
     }
     
     /**
@@ -229,7 +209,7 @@ class SetBlobPropertiesOptions extends BlobServiceOptions
      */
     public function getBlobContentEncoding()
     {
-        return $this->_blobContentEncoding;
+        return $this->_blobProperties->getContentEncoding();
     }
 
     /**
@@ -241,7 +221,7 @@ class SetBlobPropertiesOptions extends BlobServiceOptions
      */
     public function setBlobContentEncoding($blobContentEncoding)
     {
-        $this->_blobContentEncoding = $blobContentEncoding;
+        $this->_blobProperties->setContentEncoding($blobContentEncoding);
     }
     
     /**
@@ -251,7 +231,7 @@ class SetBlobPropertiesOptions extends BlobServiceOptions
      */
     public function getBlobContentLanguage()
     {
-        return $this->_blobContentLanguage;
+        return $this->_blobProperties->getContentLanguage();
     }
 
     /**
@@ -263,7 +243,7 @@ class SetBlobPropertiesOptions extends BlobServiceOptions
      */
     public function setBlobContentLanguage($blobContentLanguage)
     {
-        $this->_blobContentLanguage = $blobContentLanguage;
+        $this->_blobProperties->setContentLanguage($blobContentLanguage);
     }
     
     /**
@@ -273,7 +253,7 @@ class SetBlobPropertiesOptions extends BlobServiceOptions
      */
     public function getBlobContentMD5()
     {
-        return $this->_blobContentMD5;
+        return $this->_blobProperties->getContentMD5();
     }
 
     /**
@@ -285,7 +265,7 @@ class SetBlobPropertiesOptions extends BlobServiceOptions
      */
     public function setBlobContentMD5($blobContentMD5)
     {
-        $this->_blobContentMD5 = $blobContentMD5;
+        $this->_blobProperties->setContentMD5($blobContentMD5);
     }
     
     /**
@@ -295,7 +275,7 @@ class SetBlobPropertiesOptions extends BlobServiceOptions
      */
     public function getBlobCacheControl()
     {
-        return $this->_blobCacheControl;
+        return $this->_blobProperties->getCacheControl();
     }
     
     /**
@@ -307,8 +287,6 @@ class SetBlobPropertiesOptions extends BlobServiceOptions
      */
     public function setBlobCacheControl($blobCacheControl)
     {
-        $this->_blobCacheControl = $blobCacheControl;
+        $this->_blobProperties->setCacheControl($blobCacheControl);
     }
 }
-
-

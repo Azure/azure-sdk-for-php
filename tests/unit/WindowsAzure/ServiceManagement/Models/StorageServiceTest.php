@@ -34,7 +34,7 @@ use WindowsAzure\Common\Internal\Resources;
  * @author    Azure PHP SDK <azurephpsdk@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
- * @version   Release: @package_version@
+ * @version   Release: 0.4.0_2014-01
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
 class StorageServiceTest extends \PHPUnit_Framework_TestCase
@@ -80,20 +80,54 @@ class StorageServiceTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers WindowsAzure\ServiceManagement\Models\StorageService::setEndpoints
-     * @covers WindowsAzure\ServiceManagement\Models\StorageService::getEndpoints
+     * @covers WindowsAzure\ServiceManagement\Models\StorageService::setBlobEndpointUri
+     * @covers WindowsAzure\ServiceManagement\Models\StorageService::getBlobEndpointUri
      */
-    public function testSetEndpoints()
+    public function testSetBlobEndpointUri()
     {
         // Setup
-        $expected = array();
+        $expected = 'endpoint uri';
         $result = new StorageService();
         
         // Test
-        $result->setEndpoints($expected);
+        $result->setBlobEndpointUri($expected);
         
         // Assert
-        $this->assertEquals($expected, $result->getEndpoints());
+        $this->assertEquals($expected, $result->getBlobEndpointUri());
+    }
+    
+    /**
+     * @covers WindowsAzure\ServiceManagement\Models\StorageService::setQueueEndpointUri
+     * @covers WindowsAzure\ServiceManagement\Models\StorageService::getQueueEndpointUri
+     */
+    public function testSetQueueEndpointUri()
+    {
+        // Setup
+        $expected = 'endpoint uri';
+        $result = new StorageService();
+        
+        // Test
+        $result->setQueueEndpointUri($expected);
+        
+        // Assert
+        $this->assertEquals($expected, $result->getQueueEndpointUri());
+    }
+    
+    /**
+     * @covers WindowsAzure\ServiceManagement\Models\StorageService::setTableEndpointUri
+     * @covers WindowsAzure\ServiceManagement\Models\StorageService::getTableEndpointUri
+     */
+    public function testSetTableEndpointUri()
+    {
+        // Setup
+        $expected = 'endpoint uri';
+        $result = new StorageService();
+        
+        // Test
+        $result->setTableEndpointUri($expected);
+        
+        // Assert
+        $this->assertEquals($expected, $result->getTableEndpointUri());
     }
     
     /**

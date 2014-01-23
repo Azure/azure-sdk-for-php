@@ -27,8 +27,8 @@ use WindowsAzure\Common\Configuration;
 use WindowsAzure\Common\ServicesBuilder;
 use WindowsAzure\Common\Internal\Resources;
 use WindowsAzure\Common\Internal\Validate;
-use WindowsAzure\ServiceBus\WrapRestProxy;
-use WindowsAzure\ServiceBus\Models\ActiveToken;
+use WindowsAzure\ServiceBus\Internal\WrapRestProxy;
+use WindowsAzure\ServiceBus\Internal\ActiveToken;
 
 /**
  * Manages WRAP tokens. 
@@ -38,7 +38,7 @@ use WindowsAzure\ServiceBus\Models\ActiveToken;
  * @author    Azure PHP SDK <azurephpsdk@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
- * @version   Release: @package_version@
+ * @version   Release: 0.4.0_2014-01
  * @link      https://github.com/WindowsAzure/azure-sdk-for-php
  */
 

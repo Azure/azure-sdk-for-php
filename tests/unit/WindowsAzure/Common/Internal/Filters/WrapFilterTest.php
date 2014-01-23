@@ -30,6 +30,7 @@ use WindowsAzure\Common\Internal\Http\Url;
 use WindowsAzure\Common\Internal\Resources;
 use WindowsAzure\Common\Internal\InvalidArgumentTypeException;
 use WindowsAzure\Common\ServicesBuilder;
+use WindowsAzure\Common\Internal\ServiceBusSettings;
 
 /**
  * Unit tests for class WrapFilterTest
@@ -39,7 +40,7 @@ use WindowsAzure\Common\ServicesBuilder;
  * @author    Azure PHP SDK <azurephpsdk@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
- * @version   Release: @package_version@
+ * @version   Release: 0.4.0_2014-01
  * @link      https://github.com/WindowsAzure/azure-sdk-for-php
  */
 class WrapFilterTest extends \PHPUnit_Framework_TestCase
@@ -49,7 +50,10 @@ class WrapFilterTest extends \PHPUnit_Framework_TestCase
     public function setUp()
     {
         $builder = new ServicesBuilder();
-        $wrapUri = 'https://' . TestResources::serviceBusNamespace() .'-sb.accesscontrol.windows.net/WRAPv0.9';
+        $settings = ServiceBusSettings::createFromConnectionString(
+            TestResources::getServiceBusConnectionString()
+        );
+        $wrapUri = $settings->getWrapEndpointUri();
         $wrapBuilder = new \ReflectionMethod($builder, 'createWrapService');
         $wrapBuilder->setAccessible(true);
         $this->_wrapRestProxy = $wrapBuilder->invoke($builder, $wrapUri);
@@ -63,23 +67,18 @@ class WrapFilterTest extends \PHPUnit_Framework_TestCase
     {
         // Setup
         $channel = new HttpClient();
-        
-        $url = new Url(
-            'https://'
-            .TestResources::serviceBusNamespace()
-            .'.servicebus.windows.net'
+        $settings = ServiceBusSettings::createFromConnectionString(
+            TestResources::getServiceBusConnectionString()
         );
-        
-        $wrapUri = 'https://'
-            .TestResources::serviceBusNamespace()
-            .'-sb.accesscontrol.windows.net/WRAPv0.9';
+        $url = new Url($settings->getServiceBusEndpointUri());
+        $wrapUri = $settings->getWrapEndpointUri();
 
         $channel->setUrl($url);
         
         $wrapFilter = new WrapFilter(
             $wrapUri,
-            TestResources::wrapAuthenticationName(),
-            TestResources::wrapPassword(),
+            $settings->getWrapName(),
+            $settings->getWrapPassword(),
             $this->_wrapRestProxy
         );
         
@@ -105,14 +104,15 @@ class WrapFilterTest extends \PHPUnit_Framework_TestCase
         $channel->setUrl($url);
         $response = null;
 
-        $wrapUri = 'https://'
-            .TestResources::serviceBusNamespace()
-            .'-sb.accesscontro.windows.net';
+        $settings = ServiceBusSettings::createFromConnectionString(
+            TestResources::getServiceBusConnectionString()
+        );
+        $wrapUri = $settings->getWrapEndpointUri();
         
         $wrapFilter = new WrapFilter(
             $wrapUri,
-            TestResources::wrapAuthenticationName(),
-            TestResources::wrapPassword(),
+            $settings->getWrapName(),
+            $settings->getWrapPassword(),
             $this->_wrapRestProxy
         );
         // Test

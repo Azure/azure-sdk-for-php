@@ -29,20 +29,28 @@ use Tests\Framework\QueueServiceRestProxyTestBase;
 
 class IntegrationTestBase extends QueueServiceRestProxyTestBase
 {
+    private static $isOneTimeSetup = false;
+
     public function setUp()
     {
         parent::setUp();
         $fiddlerFilter = new FiddlerFilter();
         $this->restProxy = $this->restProxy->withFilter($fiddlerFilter);
+        if (!self::$isOneTimeSetup) {
+            self::$isOneTimeSetup = true;
+        }
     }
 
     public static function tearDownAfterClass()
     {
-        $integrationTestBase = new IntegrationTestBase();
-        $integrationTestBase->setUp();
-        if (!$integrationTestBase->isEmulated()) {
-            $serviceProperties = QueueServiceFunctionalTestData::getDefaultServiceProperties();
-            $integrationTestBase->restProxy->setServiceProperties($serviceProperties);
+        if (self::$isOneTimeSetup) {
+            $integrationTestBase = new IntegrationTestBase();
+            $integrationTestBase->setUp();
+            if (!$integrationTestBase->isEmulated()) {
+                $serviceProperties = QueueServiceFunctionalTestData::getDefaultServiceProperties();
+                $integrationTestBase->restProxy->setServiceProperties($serviceProperties);
+            }
+            self::$isOneTimeSetup = false;
         }
         parent::tearDownAfterClass();
     }

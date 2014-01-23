@@ -29,9 +29,10 @@ use Tests\Framework\TestResources;
 use WindowsAzure\Common\Configuration;
 use WindowsAzure\Common\ServiceException;
 use WindowsAzure\Common\Internal\WindowsAzureUtilities;
-use WindowsAzure\ServiceBus\WrapRestProxy;
+use WindowsAzure\ServiceBus\Internal\WrapRestProxy;
 use WindowsAzure\ServiceBus\Internal\WrapTokenManager;
 use WindowsAzure\Common\Internal\Resources;
+use WindowsAzure\Common\Internal\ServiceBusSettings;
 
 /**
  * Unit tests for WrapRestProxy class
@@ -41,7 +42,7 @@ use WindowsAzure\Common\Internal\Resources;
  * @author    Azure PHP SDK <azurephpsdk@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
- * @version   Release: @package_version@
+ * @version   Release: 0.4.0_2014-01
  * @link      https://github.com/WindowsAzure/azure-sdk-for-php
  */
 class WrapTokenManagerTest extends \PHPUnit_Framework_TestCase
@@ -51,7 +52,10 @@ class WrapTokenManagerTest extends \PHPUnit_Framework_TestCase
     public function setUp()
     {
         $builder = new ServicesBuilder();
-        $wrapUri = 'https://' . TestResources::serviceBusNamespace() .'-sb.accesscontrol.windows.net/WRAPv0.9';
+        $settings = ServiceBusSettings::createFromConnectionString(
+            TestResources::getServiceBusConnectionString()
+        );
+        $wrapUri = $settings->getWrapEndpointUri();
         $wrapBuilder = new \ReflectionMethod($builder, 'createWrapService');
         $wrapBuilder->setAccessible(true);
         $this->_wrapRestProxy = $wrapBuilder->invoke($builder, $wrapUri);
@@ -64,15 +68,13 @@ class WrapTokenManagerTest extends \PHPUnit_Framework_TestCase
     public function testGetAccessTokenSuccess() 
     {
         // Setup
-        $wrapUri = 'https://'
-            .TestResources::serviceBusNamespace()
-            .'-sb.accesscontrol.windows.net/WRAPv0.9';
-        $wrapUserName = TestResources::wrapAuthenticationName();
-        $wrapPassword = TestResources::wrapPassword();
-        
-        $scope = "https://"
-            .TestResources::serviceBusNameSpace()
-            .'.servicebus.windows.net';
+        $settings = ServiceBusSettings::createFromConnectionString(
+            TestResources::getServiceBusConnectionString()
+        );
+        $wrapUri = $settings->getWrapEndpointUri();
+        $wrapUserName = $settings->getWrapName();
+        $wrapPassword = $settings->getWrapPassword();
+        $scope = $settings->getServiceBusEndpointUri();
         
         // Execute 
         $wrapTokenManager = new WrapTokenManager(
@@ -99,13 +101,13 @@ class WrapTokenManagerTest extends \PHPUnit_Framework_TestCase
         $this->setExpectedException(get_class(
             new \InvalidArgumentException(''))
         );
+        $settings = ServiceBusSettings::createFromConnectionString(
+            TestResources::getServiceBusConnectionString()
+        );
         $wrapUri = 'IamNotAValidUri';
-        $wrapUserName = TestResources::wrapAuthenticationName();
-        $wrapPassword = TestResources::wrapPassword();
-        
-        $scope = "http://"
-            .TestResources::serviceBusNameSpace()
-            .'.servicebus.windows.net';
+        $wrapUserName = $settings->getWrapName();
+        $wrapPassword = $settings->getWrapPassword();
+        $scope = $settings->getServiceBusEndpointUri();
         
         $wrapTokenManager = new WrapTokenManager(
             $wrapUri,
@@ -127,15 +129,13 @@ class WrapTokenManagerTest extends \PHPUnit_Framework_TestCase
         $this->setExpectedException(get_class(
             new ServiceException(''))
         );
-        $wrapUri = 'https://'
-            .TestResources::serviceBusNamespace()
-            .'-sb.accesscontrol.windows.net/WRAPv0.9';
+        $settings = ServiceBusSettings::createFromConnectionString(
+            TestResources::getServiceBusConnectionString()
+        );
+        $wrapUri = $settings->getWrapEndpointUri();
         $wrapUserName = 'IAmNotAGoodUserName';
-        $wrapPassword = TestResources::wrapPassword();
-        
-        $scope = "http://"
-            .TestResources::serviceBusNameSpace()
-            .'.servicebus.windows.net';
+        $wrapPassword = $settings->getWrapPassword();
+        $scope = $settings->getServiceBusEndpointUri();
         
         $wrapTokenManager = new WrapTokenManager(
             $wrapUri,
@@ -158,15 +158,13 @@ class WrapTokenManagerTest extends \PHPUnit_Framework_TestCase
         $this->setExpectedException(get_class(
             new ServiceException(''))
         );
-        $wrapUri = 'https://'
-            .TestResources::serviceBusNamespace()
-            .'-sb.accesscontrol.windows.net/WRAPv0.9';
-        $wrapUserName = TestResources::wrapAuthenticationName();
+        $settings = ServiceBusSettings::createFromConnectionString(
+            TestResources::getServiceBusConnectionString()
+        );
+        $wrapUri = $settings->getWrapEndpointUri();
+        $wrapUserName = $settings->getWrapName();
         $wrapPassword = 'IAmNotACorrectPassword';
-        
-        $scope = "http://"
-            .TestResources::serviceBusNameSpace()
-            .'.servicebus.windows.net';
+        $scope = $settings->getServiceBusEndpointUri();
         
         $wrapTokenManager = new WrapTokenManager(
             $wrapUri,

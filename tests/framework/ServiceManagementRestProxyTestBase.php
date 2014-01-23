@@ -27,7 +27,6 @@ use Tests\Framework\TestResources;
 use WindowsAzure\Common\Internal\Resources;
 use WindowsAzure\ServiceManagement\Models\CreateServiceOptions;
 use WindowsAzure\ServiceManagement\Models\OperationStatus;
-use WindowsAzure\ServiceManagement\Models\Locations;
 use WindowsAzure\ServiceManagement\Models\DeploymentSlot;
 use WindowsAzure\ServiceManagement\Models\GetDeploymentOptions;
 
@@ -39,7 +38,7 @@ use WindowsAzure\ServiceManagement\Models\GetDeploymentOptions;
  * @author    Azure PHP SDK <azurephpsdk@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
- * @version   Release: @package_version@
+ * @version   Release: 0.4.0_2014-01
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
 class ServiceManagementRestProxyTestBase extends RestProxyTestBase
@@ -50,9 +49,9 @@ class ServiceManagementRestProxyTestBase extends RestProxyTestBase
     protected $createdDeployments;
     protected $defaultLocation;
     protected $defaultSlot;
-    protected $defaultDeploymentEncodedConfiguration;
-    protected $encodedComplexConfiguration;
-
+    protected $defaultDeploymentConfiguration;
+    protected $complexConfiguration;
+    protected $storageServiceName;
 
     public function setUp()
     {
@@ -60,19 +59,23 @@ class ServiceManagementRestProxyTestBase extends RestProxyTestBase
         $serviceManagementRestProxy = $this->builder->createServiceManagementService(TestResources::getServiceManagementConnectionString());
         parent::setProxy($serviceManagementRestProxy);
         
+        $result = $serviceManagementRestProxy->listLocations();
+        $locations = $result->getLocations();
+        $firstLocation = $locations[0];
         $this->createdStorageServices = array();
         $this->createdAffinityGroups = array();
         $this->createdHostedServices = array();
         $this->createdDeployments = array();
-        $this->defaultLocation = 'West US';
+        $this->defaultLocation = $firstLocation->getName();
         $this->defaultSlot = DeploymentSlot::PRODUCTION;
-        $this->defaultDeploymentEncodedConfiguration = base64_encode(file_get_contents(TestResources::simplePackageConfiguration()));
-        $this->encodedComplexConfiguration = base64_encode(file_get_contents(TestResources::complexPackageConfiguration()));
+        $this->defaultDeploymentConfiguration = file_get_contents(TestResources::simplePackageConfiguration());
+        $this->complexConfiguration = file_get_contents(TestResources::complexPackageConfiguration());
+        $this->storageServiceName = 'onesdkphp1234str';
     }
 
     public function createAffinityGroup($name)
     {
-        $location = Locations::WEST_US;
+        $location = $this->defaultLocation;
         $label = base64_encode($name);
         
         $this->restProxy->createAffinityGroup($name, $label, $location);
@@ -220,7 +223,7 @@ class ServiceManagementRestProxyTestBase extends RestProxyTestBase
         $label = base64_encode($deploymentName);
         $slot = is_null($slot) ? $this->defaultSlot : $slot;
         $packageUrl = TestResources::complexPackageUrl();
-        $configuration = $this->encodedComplexConfiguration;
+        $configuration = $this->complexConfiguration;
         
         if (!$this->hostedServiceExists($name)) {
             $this->createHostedService($name);
@@ -295,7 +298,7 @@ class ServiceManagementRestProxyTestBase extends RestProxyTestBase
         $label = base64_encode($deploymentName);
         $slot = is_null($slot) ? $this->defaultSlot : $slot;
         $packageUrl = TestResources::simplePackageUrl();
-        $configuration = $this->defaultDeploymentEncodedConfiguration;
+        $configuration = $this->defaultDeploymentConfiguration;
         
         if (!$this->hostedServiceExists($name)) {
             $this->createHostedService($name);
@@ -386,12 +389,11 @@ class ServiceManagementRestProxyTestBase extends RestProxyTestBase
         $this->assertNotNull($deployment->getPrivateId());
         $this->assertNotNull($deployment->getConfiguration());
         $this->assertNotNull($deployment->getUrl());
+        $this->assertNotNull($deployment->getSdkVersion());
         $this->assertEquals($name, $deployment->getName());
         $this->assertEquals($slot, strtolower($deployment->getSlot()));
         $this->assertEquals('Suspended', $deployment->getStatus());
         $this->assertEquals(base64_encode($name), $deployment->getLabel());
-        $this->assertEquals($roleCount, $deployment->getUpgradeDomainCount());
-        $this->assertEquals('1.6.21103.1459', $deployment->getSdkVersion());
         $this->assertEquals(false, $deployment->getLocked());
         $this->assertEquals(false, $deployment->getRollbackAllowed());
         $this->assertInstanceOf('WindowsAzure\ServiceManagement\Models\UpgradeStatus', $deployment->getUpgradeStatus());
@@ -445,8 +447,6 @@ class ServiceManagementRestProxyTestBase extends RestProxyTestBase
         $this->assertInstanceOf('WindowsAzure\ServiceManagement\Models\RoleInstance', $roleInstance);
         $this->assertEquals($roleName, $roleInstance->getRoleName());
         $this->assertEquals($roleInstanceName, $roleInstance->getInstanceName());
-        $this->assertEquals('StoppedVM', $roleInstance->getInstanceStatus());
-        $this->assertEquals('Small', $roleInstance->getInstanceSize());
         $this->assertEmpty($roleInstance->getInstanceStateDetails());
         $this->assertNull($roleInstance->getInstanceErrorCode());
         $this->assertEquals(0, $roleInstance->getInstanceUpgradeDomain());

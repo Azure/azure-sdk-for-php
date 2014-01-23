@@ -15,14 +15,14 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   WindowsAzure\ServiceBus
+ * @package   WindowsAzure\ServiceBus\Internal
  * @author    Azure PHP SDK <azurephpsdk@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link      https://github.com/WindowsAzure/azure-sdk-for-php
  */
 
-namespace WindowsAzure\ServiceBus;
+namespace WindowsAzure\ServiceBus\Internal;
 use WindowsAzure\Common\Internal\Http\IHttpClient;
 use WindowsAzure\Common\Internal\Http\Url;
 use WindowsAzure\Common\Internal\ServiceRestProxy;
@@ -32,17 +32,17 @@ use WindowsAzure\Common\Internal\Validate;
 use WindowsAzure\Common\Models\GetServicePropertiesResult;
 use WindowsAzure\Common\Models\ServiceProperties;
 use WindowsAzure\ServiceBus\Internal\IWrap;
-use WindowsAzure\ServiceBus\Models\WrapAccessTokenResult;
+use WindowsAzure\ServiceBus\Internal\WrapAccessTokenResult;
 
 /**
  * The WRAP service layer. 
  *
  * @category  Microsoft
- * @package   WindowsAzure\ServiceBus
+ * @package   WindowsAzure\ServiceBus\Internal
  * @author    Azure PHP SDK <azurephpsdk@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
- * @version   Release: @package_version@
+ * @version   Release: 0.4.0_2014-01
  * @link      https://github.com/WindowsAzure/azure-sdk-for-php
  */
 class WrapRestProxy extends ServiceRestProxy implements IWrap
@@ -68,7 +68,7 @@ class WrapRestProxy extends ServiceRestProxy implements IWrap
      * @param string $password The password of the WRAP service. 
      * @param string $scope    The scope of the WRAP service. 
      * 
-     * @return WindowsAzure\ServiceBus\Models\WrapAccessTokenResult
+     * @return WindowsAzure\ServiceBus\Internal\WrapAccessTokenResult
      */
     public function wrapAccessToken($uri, $name, $password, $scope)
     {

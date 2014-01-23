@@ -26,6 +26,7 @@ namespace Tests\Framework;
 use Tests\Framework\ServiceRestProxyTestBase;
 use WindowsAzure\Blob\Models\CreateContainerOptions;
 use WindowsAzure\Blob\Models\ListContainersOptions;
+use WindowsAzure\Common\ServiceException;
 
 /**
  * TestBase class for each unit test class.
@@ -35,7 +36,7 @@ use WindowsAzure\Blob\Models\ListContainersOptions;
  * @author    Azure PHP SDK <azurephpsdk@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
- * @version   Release: @package_version@
+ * @version   Release: 0.4.0_2014-01
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
 class BlobServiceRestProxyTestBase extends ServiceRestProxyTestBase

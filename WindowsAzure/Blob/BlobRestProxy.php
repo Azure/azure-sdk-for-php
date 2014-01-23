@@ -41,6 +41,7 @@ use WindowsAzure\Blob\Models\DeleteContainerOptions;
 use WindowsAzure\Blob\Models\ListBlobsOptions;
 use WindowsAzure\Blob\Models\ListBlobsResult;
 use WindowsAzure\Blob\Models\BlobType;
+use WindowsAzure\Blob\Models\Block;
 use WindowsAzure\Blob\Models\CreateBlobOptions;
 use WindowsAzure\Blob\Models\BlobProperties;
 use WindowsAzure\Blob\Models\GetBlobPropertiesOptions;
@@ -72,6 +73,7 @@ use WindowsAzure\Blob\Models\CreateBlobSnapshotOptions;
 use WindowsAzure\Blob\Models\CreateBlobSnapshotResult;
 use WindowsAzure\Blob\Models\PageRange;
 use WindowsAzure\Blob\Models\CopyBlobResult;
+use WindowsAzure\Blob\Models\BreakLeaseResult;
 
 /**
  * This class constructs HTTP requests and receive HTTP responses for blob
@@ -82,11 +84,45 @@ use WindowsAzure\Blob\Models\CopyBlobResult;
  * @author    Azure PHP SDK <azurephpsdk@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
- * @version   Release: @package_version@
+ * @version   Release: 0.4.0_2014-01
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
 class BlobRestProxy extends ServiceRestProxy implements IBlob
 {
+    /**
+     * @var int Defaults to 32MB
+     */
+    private $_SingleBlobUploadThresholdInBytes = 33554432 ;
+
+    /**
+     * Get the value for SingleBlobUploadThresholdInBytes
+     *
+     * @return int
+     */
+    public function getSingleBlobUploadThresholdInBytes()
+    {
+        return $this->_SingleBlobUploadThresholdInBytes;
+    }
+
+    /**
+     * Set the value for SingleBlobUploadThresholdInBytes, Max 64MB
+     *
+     * @param int $val The max size to send as a single blob block
+     *
+     * @return none
+     */
+    public function setSingleBlobUploadThresholdInBytes($val)
+    {
+        if ($val > 67108864) {
+            // What should the proper action here be?
+            $val = 67108864;
+        } elseif ($val < 1) {
+            // another spot that could use looking at
+            $val = 33554432;
+        }
+        $this->_SingleBlobUploadThresholdInBytes = $val;
+    }
+
     /**
      * Gets the copy blob source name with specified parameters. 
      * 
@@ -118,11 +154,19 @@ class BlobRestProxy extends ServiceRestProxy implements IBlob
      */
     private function _createPath($container, $blob)
     {
+        $encodedBlob = urlencode($blob);
+        // Unencode the forward slashes to match what the server expects.
+        $encodedBlob = str_replace('%2F', '/', $encodedBlob);
+        // Unencode the backward slashes to match what the server expects.
+        $encodedBlob = str_replace('%5C', '/', $encodedBlob);
+        // Re-encode the spaces (encoded as space) to the % encoding.
+        $encodedBlob = str_replace('+', '%20', $encodedBlob);
+        
         // Empty container means accessing default container
         if (empty($container)) {
-            return $blob;
+            return $encodedBlob;
         } else {
-            return $container . '/' . $blob;
+            return $container . '/' . $encodedBlob;
         }
     }
     
@@ -355,7 +399,7 @@ class BlobRestProxy extends ServiceRestProxy implements IBlob
      * @param BlobServiceOptions $options         The optional parameters.
      * @param AccessCondition    $accessCondition The access conditions.
      * 
-     * @return AcquireLeaseResult
+     * @return array
      */
     private function _putLeaseImpl($leaseAction, $container, $blob, $leaseId, 
         $options, $accessCondition = null
@@ -418,7 +462,7 @@ class BlobRestProxy extends ServiceRestProxy implements IBlob
             $statusCode
         );
         
-        return AcquireLeaseResult::create($response->getHeader());
+        return $response->getHeader();
     }
     
     /**
@@ -1054,7 +1098,7 @@ class BlobRestProxy extends ServiceRestProxy implements IBlob
         $this->addOptionalQueryParam(
             $queryParams,
             Resources::QP_PREFIX,
-            $options->getPrefix()
+            str_replace('\\', '/', $options->getPrefix())
         );
         $this->addOptionalQueryParam(
             $queryParams,
@@ -1207,38 +1251,82 @@ class BlobRestProxy extends ServiceRestProxy implements IBlob
         $headers     = array();
         $postParams  = array();
         $queryParams = array();
+        $bodySize    = 0;
         $path        = $this->_createPath($container, $blob);
         $statusCode  = Resources::STATUS_CREATED;
-        // If read file failed for any reason it will throw an exception.
-        $body = is_resource($content) ? stream_get_contents($content) : $content;
         
         if (is_null($options)) {
             $options = new CreateBlobOptions();
         }
         
-        $headers = $this->_addCreateBlobOptionalHeaders($options, $headers);
-        
-        $this->addOptionalHeader(
-            $headers,
-            Resources::X_MS_BLOB_TYPE,
-            BlobType::BLOCK_BLOB
-        );
-        $this->addOptionalQueryParam(
-            $queryParams,
-            Resources::QP_TIMEOUT,
-            $options->getTimeout()
-        );
-        
-        $response = $this->send(
-            $method, 
-            $headers, 
-            $queryParams, 
-            $postParams,
-            $path, 
-            $statusCode,
-            $body
-        );
-        
+        if (is_resource($content)) {
+            $cStat = fstat($content);
+            // if the resource is a remote file, $cStat will be false
+            if ($cStat) {
+                $bodySize = $cStat['size'];
+            }
+        } else {
+            $bodySize = strlen($content);
+        }
+
+        // if we have a size we can try to one shot this, else failsafe on block upload
+        if ($bodySize && $bodySize <= $this->_SingleBlobUploadThresholdInBytes) {
+            $headers = $this->_addCreateBlobOptionalHeaders($options, $headers);
+            
+            $this->addOptionalHeader(
+                $headers,
+                Resources::X_MS_BLOB_TYPE,
+                BlobType::BLOCK_BLOB
+            );
+            $this->addOptionalQueryParam(
+                $queryParams,
+                Resources::QP_TIMEOUT,
+                $options->getTimeout()
+            );
+
+            // If read file failed for any reason it will throw an exception.
+            $body = is_resource($content) ? stream_get_contents($content) : $content;
+
+            $response = $this->send(
+                $method, 
+                $headers, 
+                $queryParams, 
+                $postParams,
+                $path, 
+                $statusCode,
+                $body
+            );
+        } else {
+            // This is for large or failsafe upload
+            $end       = 0;
+            $counter   = 0;
+            $body      = '';
+            $blockIds  = array();
+            // if threshold is lower than 4mb, honor threshold, else use 4mb
+            $blockSize = ($this->_SingleBlobUploadThresholdInBytes < 4194304) ? $this->_SingleBlobUploadThresholdInBytes : 4194304;
+            while(!$end) {
+                if (is_resource($content)) {
+                    $body = fread($content, $blockSize);
+                    if (feof($content)) {
+                        $end = 1;
+                    }
+                } else {
+                    if (strlen($content) <= $blockSize) {
+                        $body = $content;
+                        $end = 1;
+                    } else {
+                        $body = substr($content, 0, $blockSize);
+                        $content = substr_replace($content, '', 0, $blockSize);
+                    }
+                }
+                $block = new Block();
+                $block->setBlockId(base64_encode(str_pad($counter++, '0', 6)));
+                $block->setType('Uncommitted');
+                array_push($blockIds, $block);
+                $this->createBlobBlock($container, $blob, $block->getBlockId(), $body);
+            }
+            $response = $this->commitBlobBlocks($container, $blob, $blockIds, $options);
+        }
         return CopyBlobResult::create($response->getHeader());
     }
     
@@ -1365,7 +1453,7 @@ class BlobRestProxy extends ServiceRestProxy implements IBlob
             base64_encode($blockId)
         );
         
-        $this->send(
+        $response = $this->send(
             $method, 
             $headers, 
             $queryParams, 
@@ -1374,6 +1462,8 @@ class BlobRestProxy extends ServiceRestProxy implements IBlob
             $statusCode,
             $body
         );
+        
+        return CopyBlobResult::create($response->getHeader());
     }
     
     /**
@@ -1392,7 +1482,7 @@ class BlobRestProxy extends ServiceRestProxy implements IBlob
      * @param Models\BlockList|array         $blockList The block entries.
      * @param Models\CommitBlobBlocksOptions $options   The optional parameters.
      * 
-     * @return none
+     * @return CopyBlobResult
      * 
      * @see http://msdn.microsoft.com/en-us/library/windowsazure/dd179467.aspx 
      */
@@ -1485,7 +1575,7 @@ class BlobRestProxy extends ServiceRestProxy implements IBlob
             'blocklist'
         );
         
-        $this->send(
+        return $this->send(
             $method, 
             $headers, 
             $queryParams, 
@@ -2177,7 +2267,10 @@ class BlobRestProxy extends ServiceRestProxy implements IBlob
         $headers             = array();
         $postParams          = array();
         $queryParams         = array();
-        $destinationBlobPath = $destinationContainer . '/' . $destinationBlob;
+        $destinationBlobPath = $this->_createPath(
+            $destinationContainer,
+            $destinationBlob
+        );
         $statusCode          = Resources::STATUS_CREATED;
         
         if (is_null($options)) {
@@ -2252,7 +2345,7 @@ class BlobRestProxy extends ServiceRestProxy implements IBlob
      */
     public function acquireLease($container, $blob, $options = null)
     {
-        return $this->_putLeaseImpl(
+        $headers = $this->_putLeaseImpl(
             LeaseMode::ACQUIRE_ACTION,
             $container,
             $blob,
@@ -2260,6 +2353,8 @@ class BlobRestProxy extends ServiceRestProxy implements IBlob
             is_null($options) ? new AcquireLeaseOptions() : $options,
             is_null($options) ? null : $options->getAccessCondition()
         );
+        
+        return AcquireLeaseResult::create($headers);
     }
     
     /**
@@ -2276,13 +2371,15 @@ class BlobRestProxy extends ServiceRestProxy implements IBlob
      */
     public function renewLease($container, $blob, $leaseId, $options = null)
     {
-        return $this->_putLeaseImpl(
+        $headers = $this->_putLeaseImpl(
             LeaseMode::RENEW_ACTION,
             $container,
             $blob,
             $leaseId,
             is_null($options) ? new BlobServiceOptions() : $options
         );
+        
+        return AcquireLeaseResult::create($headers);
     }
     
     /**
@@ -2315,23 +2412,22 @@ class BlobRestProxy extends ServiceRestProxy implements IBlob
      * 
      * @param string                    $container name of the container
      * @param string                    $blob      name of the blob
-     * @param string                    $leaseId   lease id when acquiring
      * @param Models\BlobServiceOptions $options   optional parameters
      * 
-     * @return none
+     * @return BreakLeaseResult
      * 
      * @see http://msdn.microsoft.com/en-us/library/windowsazure/ee691972.aspx
      */
-    public function breakLease($container, $blob, $leaseId, $options = null)
+    public function breakLease($container, $blob, $options = null)
     {
-        $this->_putLeaseImpl(
+        $headers = $this->_putLeaseImpl(
             LeaseMode::BREAK_ACTION,
             $container,
             $blob,
-            $leaseId,
+            null,
             is_null($options) ? new BlobServiceOptions() : $options
         );
+        
+        return BreakLeaseResult::create($headers);
     }
 }
-
-

@@ -34,7 +34,7 @@ use WindowsAzure\Common\Internal\Utilities;
  * @author    Azure PHP SDK <azurephpsdk@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
- * @version   Release: @package_version@
+ * @version   Release: 0.4.0_2014-01
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
 class CopyBlobResult
@@ -58,15 +58,16 @@ class CopyBlobResult
      */
     public static function create($headers)
     {
-        $result                 = new CopyBlobResult();
-        $headerWithLowerCaseKey = array_change_key_case($headers);
-
-        $result->setETag($headerWithLowerCaseKey[Resources::ETAG]);
-        $result->setLastModified(
-            Utilities::rfc1123ToDateTime(
-                $headerWithLowerCaseKey[Resources::LAST_MODIFIED]
-            )
-        );
+        $result = new CopyBlobResult();
+        $result->setETag(Utilities::tryGetValueInsensitive(
+                Resources::ETAG,
+                $headers));
+        if (Utilities::arrayKeyExistsInsensitive(Resources::LAST_MODIFIED, $headers)) {
+            $lastModified = Utilities::tryGetValueInsensitive(
+                Resources::LAST_MODIFIED,
+                $headers);
+            $result->setLastModified(Utilities::rfc1123ToDateTime($lastModified));
+        }
         
         return $result;
     }

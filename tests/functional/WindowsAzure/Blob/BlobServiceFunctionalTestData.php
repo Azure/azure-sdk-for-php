@@ -24,27 +24,27 @@
 
 namespace Tests\Functional\WindowsAzure\Blob;
 
+use WindowsAzure\Blob\Models\AccessCondition;
+use WindowsAzure\Blob\Models\ContainerAcl;
+use WindowsAzure\Blob\Models\CopyBlobOptions;
+use WindowsAzure\Blob\Models\CreateBlobOptions;
+use WindowsAzure\Blob\Models\CreateBlobSnapshotOptions;
+use WindowsAzure\Blob\Models\CreateContainerOptions;
+use WindowsAzure\Blob\Models\DeleteBlobOptions;
+use WindowsAzure\Blob\Models\DeleteContainerOptions;
+use WindowsAzure\Blob\Models\GetBlobOptions;
+use WindowsAzure\Blob\Models\GetBlobPropertiesOptions;
+use WindowsAzure\Blob\Models\ListBlobsOptions;
+use WindowsAzure\Blob\Models\ListContainersOptions;
+use WindowsAzure\Blob\Models\PublicAccessType;
+use WindowsAzure\Blob\Models\SetBlobMetadataOptions;
+use WindowsAzure\Blob\Models\SetBlobPropertiesOptions;
+use WindowsAzure\Blob\Models\SetContainerMetadataOptions;
+use WindowsAzure\Common\Internal\Resources;
 use WindowsAzure\Common\Models\Logging;
 use WindowsAzure\Common\Models\Metrics;
 use WindowsAzure\Common\Models\RetentionPolicy;
 use WindowsAzure\Common\Models\ServiceProperties;
-use WindowsAzure\Blob\Models\ContainerAcl;
-use WindowsAzure\Blob\Models\CopyBlobOptions;
-use WindowsAzure\Blob\Models\CreateBlobSnapshotOptions;
-use WindowsAzure\Blob\Models\GetBlobOptions;
-use WindowsAzure\Blob\Models\ListBlobsOptions;
-use WindowsAzure\Blob\Models\ListContainersOptions;
-use WindowsAzure\Blob\Models\CreateContainerOptions;
-use WindowsAzure\Blob\Models\DeleteBlobOptions;
-use WindowsAzure\Blob\Models\DeleteContainerOptions;
-use WindowsAzure\Blob\Models\AccessCondition;
-use WindowsAzure\Blob\Models\SetContainerMetadataOptions;
-use WindowsAzure\Common\Internal\Resources;
-use WindowsAzure\Blob\Models\PublicAccessType;
-use WindowsAzure\Blob\Models\CreateBlobOptions;
-use WindowsAzure\Blob\Models\SetBlobMetadataOptions;
-use WindowsAzure\Blob\Models\GetBlobPropertiesOptions;
-use WindowsAzure\Blob\Models\SetBlobPropertiesOptions;
 
 class BlobServiceFunctionalTestData
 {
@@ -70,12 +70,38 @@ class BlobServiceFunctionalTestData
 
     public static function getInterestingContainerName()
     {
+        // http://msdn.microsoft.com/en-us/library/windowsazure/dd135715.aspx
+        // 1. Container names must start with a letter or number, and can
+        //    contain only letters, numbers, and the dash (-) character.
+        // 2. Consecutive dashes are not permitted in container names.
+        // 3. All letters in a container name must be lowercase.
+        // 4. Container names must be from 3 through 63 characters long.
+        // 5. Container names cannot contain control characters: 0x00 to 0x1F
+
         return self::$testUniqueId . 'con-' . (self::$tempBlobCounter++);
     }
 
-    public static function getInterestingBlobName()
+    public static function getInterestingBlobName($container)
     {
-        return self::$testUniqueId . 'int-' . (self::$tempBlobCounter++);
+        // http://msdn.microsoft.com/en-us/library/windowsazure/dd135715.aspx
+        // 1. A blob name cannot contain control characters: 0x00 to 0x1F
+        // 2. A blob name can contain any combination of characters, but
+        //    reserved URL characters must be properly escaped.
+        // 3. A blob name must be at least one character long and cannot be
+        //    more than 1,024 characters long.
+        // 4. Blob names are case-sensitive.
+        // 5. Avoid blob names that end with a dot (.) or a forward slash (/);
+        //    they are removed by the server
+        // 6. Avoid blob names containing a dot-slash sequence (./);
+        //    the dot is removed by the server.
+
+        $uB2E4 = chr(0xEB) . chr(0x8B) . chr(0xA4); // UTF8 encoding of \uB2E4
+        $blobname = self::$testUniqueId . '/*\"\'&.({[<+ ' . chr(0x7D) . $uB2E4 . '_' . (self::$tempBlobCounter++);
+        if (empty($container) || $container == '$root') {
+            $blobname = str_replace('/', 'X', $blobname);
+            $blobname = str_replace('\\', 'X', $blobname);
+        }
+        return $blobname;
     }
 
     public static function getSimpleMessageText()

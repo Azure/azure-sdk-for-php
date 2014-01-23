@@ -21,7 +21,7 @@
  * @link      https://github.com/WindowsAzure/azure-sdk-for-php
  */
 namespace WindowsAzure\ServiceBus\Models;
-use WindowsAzure\ServiceBus\Models\Filter;
+use WindowsAzure\ServiceBus\Internal\Filter;
 
 /**
  * The false filter.
@@ -31,7 +31,7 @@ use WindowsAzure\ServiceBus\Models\Filter;
  * @author    Azure PHP SDK <azurephpsdk@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
- * @version   Release: @package_version@
+ * @version   Release: 0.4.0_2014-01
  * @link      https://github.com/WindowsAzure/azure-sdk-for-php
  */
 

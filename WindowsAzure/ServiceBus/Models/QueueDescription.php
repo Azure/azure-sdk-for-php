@@ -34,7 +34,7 @@ use WindowsAzure\Common\Internal\Utilities;
  * @author    Azure PHP SDK <azurephpsdk@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
- * @version   Release: @package_version@
+ * @version   Release: 0.4.0_2014-01
  * @link      https://github.com/WindowsAzure/azure-sdk-for-php
  */
 class QueueDescription
@@ -116,6 +116,8 @@ class QueueDescription
      */ 
     private $_messageCount;    
 
+    // @codingStandardsIgnoreStart
+    
     /**
      * Creates a queue description object with specified XML string.
      *
@@ -215,6 +217,9 @@ class QueueDescription
 
         return $queueDescription;
     }
+    
+    // @codingStandardsIgnoreEnd
+    
     /** 
      * Creates a queue description instance with default parameters. 
      */
@@ -377,8 +382,9 @@ class QueueDescription
     public function setDuplicateDetectionHistoryTimeWindow(
         $duplicateDetectionHistoryTimeWindow
     ) {
-        $this->_duplicateDetectionHistoryTimeWindow 
-            = $duplicateDetectionHistoryTimeWindow;
+        $value = $duplicateDetectionHistoryTimeWindow;
+        
+        $this->_duplicateDetectionHistoryTimeWindow = $value;
     }
 
     /**
@@ -469,4 +475,3 @@ class QueueDescription
         $this->_messageCount = $messageCount;
     }
 }
-

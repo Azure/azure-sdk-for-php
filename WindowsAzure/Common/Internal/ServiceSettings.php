@@ -42,7 +42,7 @@ use WindowsAzure\Common\Internal\Resources;
  * @author    Azure PHP SDK <azurephpsdk@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
- * @version   Release: @package_version@
+ * @version   Release: 0.4.0_2014-01
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
 abstract class ServiceSettings
@@ -116,9 +116,10 @@ abstract class ServiceSettings
      */
     protected static function getValidator($requirements, $isRequired, $atLeastOne)
     {
+        // @codingStandardsIgnoreStart
+        
         return function ($userSettings)
-            use ($requirements, $isRequired, $atLeastOne)
-        {
+         use ($requirements, $isRequired, $atLeastOne) {
             $oneFound = false;
             $result   = array_change_key_case($userSettings);
             foreach ($requirements as $requirement) {
@@ -150,6 +151,8 @@ abstract class ServiceSettings
                 return $result;
             }
         };
+        
+        // @codingStandardsIgnoreEnd
     }
     
     /**
@@ -159,7 +162,7 @@ abstract class ServiceSettings
      */
     protected static function atLeastOne()
     {
-        $allSettings  = func_get_args();
+        $allSettings = func_get_args();
         return self::getValidator($allSettings, false, true);
     }
     
@@ -170,7 +173,7 @@ abstract class ServiceSettings
      */
     protected static function optional()
     {
-        $optionalSettings  = func_get_args();
+        $optionalSettings = func_get_args();
         return self::getValidator($optionalSettings, false, false);
     }
     
@@ -181,7 +184,7 @@ abstract class ServiceSettings
      */
     protected static function allRequired()
     {
-        $requiredSettings  = func_get_args();
+        $requiredSettings = func_get_args();
         return self::getValidator($requiredSettings, true, false);
     }
     
@@ -219,8 +222,7 @@ abstract class ServiceSettings
         
         $validValuesCount = func_num_args();
         
-        $predicate = function ($settingValue) use ($validValuesCount, $validValues)
-        {
+        $predicate = function ($settingValue) use ($validValuesCount, $validValues) {
             if (empty($validValues)) {
                 // No restrictions, succeed,
                 return true;

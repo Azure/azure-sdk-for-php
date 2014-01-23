@@ -26,6 +26,7 @@ namespace Tests\Functional\WindowsAzure\Table;
 
 use Tests\Framework\TestResources;
 use WindowsAzure\Common\ServiceException;
+use WindowsAzure\Common\Internal\Utilities;
 use WindowsAzure\Table\Models\BatchError;
 use WindowsAzure\Table\Models\BatchOperations;
 use WindowsAzure\Table\Models\DeleteEntityOptions;
@@ -55,9 +56,19 @@ class TableServiceIntegrationTest extends IntegrationTestBase
     private static $creatableTables;
     private static $testTables;
 
-    public static function setUpBeforeClass()
+    private static $isOneTimeSetup = false;
+
+    public function setUp()
     {
-        parent::setUpBeforeClass();
+        parent::setUp();
+        if (!self::$isOneTimeSetup) {
+            $this->doOneTimeSetup();
+            self::$isOneTimeSetup = true;
+        }
+    }
+
+    private function doOneTimeSetup()
+    {
         self::$testTablesPrefix .= rand(0,1000);
         // Setup container names array (list of container names used by
         // integration tests)
@@ -84,71 +95,60 @@ class TableServiceIntegrationTest extends IntegrationTestBase
         self::$createTable2 = self::$creatableTables[1];
 
         // Create all test containers and their content
-        self::deleteAllTables(self::$testTables);
-        self::deleteAllTables(self::$creatableTables);
-        self::createTables(self::$testTablesPrefix, self::$testTables);
+        $this->deleteAllTables(self::$testTables);
+        $this->deleteAllTables(self::$creatableTables);
+        $this->createTables(self::$testTablesPrefix, self::$testTables);
     }
 
     public static function tearDownAfterClass()
     {
+        if (self::$isOneTimeSetup) {
+            $tmp = new TableServiceIntegrationTest();
+            $tmp->setUp();
+            $tmp->deleteAllTables(self::$testTables);
+            $tmp->deleteTables(self::$createableTablesPrefix, self::$creatableTables);
+            self::$isOneTimeSetup = false;
+        }
         parent::tearDownAfterClass();
-        self::deleteAllTables(self::$testTables);
-        self::deleteTables(self::$createableTablesPrefix, self::$creatableTables);
     }
 
-    private static function createTables($prefix, $list)
+    private function createTables($prefix, $list)
     {
-        $service = self::createService();
-        $containers = self::listTables($prefix);
+        $containers = $this->listTables($prefix);
         foreach($list as $item)  {
             if (!in_array($item, $containers)) {
-                $service->createTable($item);
+                $this->createTable($item);
             }
         }
     }
 
-    private static function deleteTables($prefix, $list)
+    private function deleteTables($prefix, $list)
     {
-        $service = self::createService();
-        $containers = self::listTables($prefix);
+        $containers = $this->listTables($prefix);
         foreach($list as $item)  {
             if (in_array($item, $containers)) {
-                $service->deleteTable($item);
+                $this->safeDeleteTable($item);
             }
         }
     }
 
-    private static function deleteAllTables($list)
+    private function deleteAllTables($list)
     {
-        $service = self::createService();
         foreach($list as $item)  {
-            try {
-                $service->deleteTable($item);
-            } catch (ServiceException $e) {
-                // Ignore
-                error_log($e->getMessage());
-            }
+            $this->safeDeleteTable($item);
         }
     }
 
-    private static function listTables($prefix)
+    private function listTables($prefix)
     {
-        $service = self::createService();
         $result = array();
         $qto = new QueryTablesOptions();
         $qto->setPrefix($prefix);
-        $list = $service->queryTables($qto);
+        $list = $this->restProxy->queryTables($qto);
         foreach($list->getTables() as $item)  {
             array_push($result, $item);
         }
         return $result;
-    }
-
-    private static function createService()
-    {
-        $tmp = new IntegrationTestBase();
-        $tmp->setUp();
-        return $tmp->restProxy;
     }
 
     /**
@@ -316,7 +316,7 @@ class TableServiceIntegrationTest extends IntegrationTestBase
     {
         // Arrange
         $binaryData = chr(1) . chr(2) . chr(3) . chr(4);
-        $uuid = strtolower(trim(com_create_guid(), '{}'));
+        $uuid = Utilities::getGuid();
         $entity = new Entity();
         $entity->setPartitionKey('001');
         $entity->setRowKey('insertEntityWorks');
@@ -620,7 +620,7 @@ class TableServiceIntegrationTest extends IntegrationTestBase
     {
         // Arrange
         $binaryData = chr(1) . chr(2) . chr(3) . chr(4);
-        $uuid = strtolower(trim(com_create_guid(), '{}'));
+        $uuid = Utilities::getGuid();
         $entity = new Entity();
         $entity->setPartitionKey('001');
         $entity->setRowKey('getEntityWorks');
@@ -784,7 +784,7 @@ class TableServiceIntegrationTest extends IntegrationTestBase
             $entity->addProperty('test4', EdmType::INT64, strval('12345678901' + $i));
             $entity->addProperty('test5', EdmType::DATETIME, new \DateTime('2012-01-0' . $i));
             $entity->addProperty('test6', EdmType::BINARY, chr($i));
-            $entity->addProperty('test7', EdmType::GUID, strtolower(trim(com_create_guid(), '{}')));
+            $entity->addProperty('test7', EdmType::GUID, Utilities::getGuid());
             $entities[$i] = $entity;
             $this->restProxy->insertEntity($table, $entity);
         }

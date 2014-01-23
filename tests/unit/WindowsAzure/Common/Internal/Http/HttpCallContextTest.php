@@ -11,7 +11,7 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- * 
+ *
  * PHP version 5
  *
  * @category  Microsoft
@@ -34,7 +34,7 @@ use WindowsAzure\Common\Internal\Http\Url;
  * @author    Azure PHP SDK <azurephpsdk@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
- * @version   Release: @package_version@
+ * @version   Release: 0.4.0_2014-01
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
 class HttpCallContextTest extends \PHPUnit_Framework_TestCase
@@ -46,7 +46,7 @@ class HttpCallContextTest extends \PHPUnit_Framework_TestCase
     {
         // Test
         $context = new HttpCallContext();
-        
+
         // Assert
         $this->assertNull($context->getBody());
         $this->assertNull($context->getMethod());
@@ -55,10 +55,10 @@ class HttpCallContextTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue(is_array($context->getHeaders()));
         $this->assertTrue(is_array($context->getQueryParameters()));
         $this->assertTrue(is_array($context->getStatusCodes()));
-        
+
         return $context;
     }
-    
+
     /**
      * @covers WindowsAzure\Common\Internal\Http\HttpCallContext::getMethod
      * @covers WindowsAzure\Common\Internal\Http\HttpCallContext::setMethod
@@ -68,14 +68,14 @@ class HttpCallContextTest extends \PHPUnit_Framework_TestCase
     {
         // Setup
         $expected = 'Method';
-        
+
         // Test
         $context->setMethod($expected);
-        
+
         // Assert
         $this->assertEquals($expected, $context->getMethod());
     }
-    
+
     /**
      * @covers WindowsAzure\Common\Internal\Http\HttpCallContext::getBody
      * @covers WindowsAzure\Common\Internal\Http\HttpCallContext::setBody
@@ -85,14 +85,14 @@ class HttpCallContextTest extends \PHPUnit_Framework_TestCase
     {
         // Setup
         $expected = 'Body';
-        
+
         // Test
         $context->setBody($expected);
-        
+
         // Assert
         $this->assertEquals($expected, $context->getBody());
     }
-    
+
     /**
      * @covers WindowsAzure\Common\Internal\Http\HttpCallContext::getPath
      * @covers WindowsAzure\Common\Internal\Http\HttpCallContext::setPath
@@ -102,14 +102,14 @@ class HttpCallContextTest extends \PHPUnit_Framework_TestCase
     {
         // Setup
         $expected = 'Path';
-        
+
         // Test
         $context->setPath($expected);
-        
+
         // Assert
         $this->assertEquals($expected, $context->getPath());
     }
-    
+
     /**
      * @covers WindowsAzure\Common\Internal\Http\HttpCallContext::getUri
      * @covers WindowsAzure\Common\Internal\Http\HttpCallContext::setUri
@@ -119,14 +119,14 @@ class HttpCallContextTest extends \PHPUnit_Framework_TestCase
     {
         // Setup
         $expected = new Url('http://www.microsoft.com');
-        
+
         // Test
         $context->setUri($expected);
-        
+
         // Assert
         $this->assertEquals($expected, $context->getUri());
     }
-    
+
     /**
      * @covers WindowsAzure\Common\Internal\Http\HttpCallContext::getHeaders
      * @covers WindowsAzure\Common\Internal\Http\HttpCallContext::setHeaders
@@ -137,14 +137,14 @@ class HttpCallContextTest extends \PHPUnit_Framework_TestCase
     {
         // Setup
         $expected = array('value1', 'value2', 'value3');
-        
+
         // Test
         $context->setHeaders($expected);
-        
+
         // Assert
         $this->assertEquals($expected, $context->getHeaders());
     }
-    
+
     /**
      * @covers WindowsAzure\Common\Internal\Http\HttpCallContext::getQueryParameters
      * @covers WindowsAzure\Common\Internal\Http\HttpCallContext::setQueryParameters
@@ -155,14 +155,14 @@ class HttpCallContextTest extends \PHPUnit_Framework_TestCase
     {
         // Setup
         $expected = array('value1', 'value2', 'value3');
-        
+
         // Test
         $context->setQueryParameters($expected);
-        
+
         // Assert
         $this->assertEquals($expected, $context->getQueryParameters());
     }
-    
+
     /**
      * @covers WindowsAzure\Common\Internal\Http\HttpCallContext::getStatusCodes
      * @covers WindowsAzure\Common\Internal\Http\HttpCallContext::setStatusCodes
@@ -173,14 +173,14 @@ class HttpCallContextTest extends \PHPUnit_Framework_TestCase
     {
         // Setup
         $expected = array(1, 2, 3);
-        
+
         // Test
         $context->setStatusCodes($expected);
-        
+
         // Assert
         $this->assertEquals($expected, $context->getStatusCodes());
     }
-    
+
     /**
      * @covers WindowsAzure\Common\Internal\Http\HttpCallContext::getHeader
      * @covers WindowsAzure\Common\Internal\Http\HttpCallContext::addHeader
@@ -191,14 +191,14 @@ class HttpCallContextTest extends \PHPUnit_Framework_TestCase
         // Setup
         $expected = 'value';
         $key = 'key';
-        
+
         // Test
         $context->addHeader($key, $expected);
-        
+
         // Assert
         $this->assertEquals($expected, $context->getHeader($key));
     }
-    
+
     /**
      * @covers WindowsAzure\Common\Internal\Http\HttpCallContext::removeHeader
      * @covers WindowsAzure\Common\Internal\Http\HttpCallContext::getHeaders
@@ -211,14 +211,14 @@ class HttpCallContextTest extends \PHPUnit_Framework_TestCase
         $value = 'value';
         $key = 'key';
         $context->addHeader($key, $value);
-        
+
         // Test
         $context->removeHeader($key);
-        
+
         // Assert
         $this->assertFalse(array_key_exists($key, $context->getHeaders()));
     }
-    
+
     /**
      * @covers WindowsAzure\Common\Internal\Http\HttpCallContext::__toString
      * @depends test__construct
@@ -237,10 +237,10 @@ class HttpCallContextTest extends \PHPUnit_Framework_TestCase
         $context->setUri($uri);
         $context->setPath($path);
         $context->setBody($body);
-        
+
         // Test
         $actual = $context->__toString();
-        
+
         // Assert
         $this->assertEquals($expected, $actual);
     }

@@ -62,7 +62,7 @@ use WindowsAzure\Table\Models\BatchResult;
  * @author    Azure PHP SDK <azurephpsdk@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
- * @version   Release: @package_version@
+ * @version   Release: 0.4.0_2014-01
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
 class TableRestProxy extends ServiceRestProxy implements ITable
@@ -155,43 +155,44 @@ class TableRestProxy extends ServiceRestProxy implements ITable
     {
         switch ($type) {
         case BatchOperationType::INSERT_ENTITY_OPERATION:
-            return $this->_constructInsertEntityContext($table, $entity, null);
+        return $this->_constructInsertEntityContext($table, $entity, null);
             
         case BatchOperationType::UPDATE_ENTITY_OPERATION:
-            return $this->_constructPutOrMergeEntityContext(
-                $table,
-                $entity,
-                Resources::HTTP_PUT,
-                true,
-                null
-            );
+        return $this->_constructPutOrMergeEntityContext(
+            $table,
+            $entity,
+            Resources::HTTP_PUT,
+            true,
+            null
+        );
             
         case BatchOperationType::MERGE_ENTITY_OPERATION:
-            return $this->_constructPutOrMergeEntityContext(
-                $table,
-                $entity,
-                Resources::HTTP_MERGE,
-                true,
-                null
-            );
+        return $this->_constructPutOrMergeEntityContext(
+            $table,
+            $entity,
+            Resources::HTTP_MERGE,
+            true,
+            null
+        );
             
         case BatchOperationType::INSERT_REPLACE_ENTITY_OPERATION:
-            return $this->_constructPutOrMergeEntityContext(
-                $table,
-                $entity,
-                Resources::HTTP_PUT,
-                false,
-                null
-            );
+        return $this->_constructPutOrMergeEntityContext(
+            $table,
+            $entity,
+            Resources::HTTP_PUT,
+            false,
+            null
+        );
             
         case BatchOperationType::INSERT_MERGE_ENTITY_OPERATION:
-            return $this->_constructPutOrMergeEntityContext(
-                $table,
-                $entity,
-                Resources::HTTP_MERGE,
-                false,
-                null
-            );
+        return $this->_constructPutOrMergeEntityContext(
+            $table,
+            $entity,
+            Resources::HTTP_MERGE,
+            false,
+            null
+        );
+            
         default:
             throw new \InvalidArgumentException();
         }
@@ -237,7 +238,7 @@ class TableRestProxy extends ServiceRestProxy implements ITable
                 // in bytes instead of the length in chars.
                 $context->addOptionalHeader(
                     Resources::CONTENT_LENGTH,
-                    mb_strlen($body)
+                    strlen($body)
                 );
                 break;
         
@@ -1004,8 +1005,6 @@ class TableRestProxy extends ServiceRestProxy implements ITable
             $options->setFilter($filter);
         }
         
-        $encodedPK   = $this->_encodeODataUriValue($options->getNextPartitionKey());
-        $encodedRK   = $this->_encodeODataUriValue($options->getNextRowKey());
         $queryParams = $this->_addOptionalQuery($queryParams, $options->getQuery());
         
         $this->addOptionalQueryParam(
@@ -1016,12 +1015,12 @@ class TableRestProxy extends ServiceRestProxy implements ITable
         $this->addOptionalQueryParam(
             $queryParams,
             Resources::QP_NEXT_PK,
-            $encodedPK
+            $options->getNextPartitionKey()
         );
         $this->addOptionalQueryParam(
             $queryParams,
             Resources::QP_NEXT_RK,
-            $encodedRK
+            $options->getNextRowKey()
         );
         
         $this->addOptionalHeader(

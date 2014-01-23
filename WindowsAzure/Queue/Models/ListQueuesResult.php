@@ -35,7 +35,7 @@ use WindowsAzure\Common\Internal\Utilities;
  * @author    Azure PHP SDK <azurephpsdk@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
- * @version   Release: @package_version@
+ * @version   Release: 0.4.0_2014-01
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
 class ListQueuesResult
@@ -45,6 +45,7 @@ class ListQueuesResult
     private $_marker;
     private $_nextMarker;
     private $_maxResults;
+    private $_accountName;
 
     /**
      * Creates ListQueuesResult object from parsed XML response.
@@ -55,21 +56,26 @@ class ListQueuesResult
      */
     public static function create($parsedResponse)
     {
-        $result              = new ListQueuesResult();
-        $result->_prefix     = Utilities::tryGetValue(
+        $result               = new ListQueuesResult();
+        $result->_accountName = Utilities::tryGetKeysChainValue(
+            $parsedResponse,
+            Resources::XTAG_ATTRIBUTES,
+            Resources::XTAG_ACCOUNT_NAME
+        );
+        $result->_prefix      = Utilities::tryGetValue(
             $parsedResponse, Resources::QP_PREFIX
         );
-        $result->_marker     = Utilities::tryGetValue(
+        $result->_marker      = Utilities::tryGetValue(
             $parsedResponse, Resources::QP_MARKER
         );
-        $result->_nextMarker = Utilities::tryGetValue(
+        $result->_nextMarker  = Utilities::tryGetValue(
             $parsedResponse, Resources::QP_NEXT_MARKER
         );
-        $result->_maxResults = Utilities::tryGetValue(
+        $result->_maxResults  = Utilities::tryGetValue(
             $parsedResponse, Resources::QP_MAX_RESULTS
         );
-        $result->_queues     = array();
-        $rawQueues           = array();
+        $result->_queues      = array();
+        $rawQueues            = array();
         
         if ( !empty($parsedResponse['Queues']) ) {
             $rawQueues = Utilities::getArray($parsedResponse['Queues']['Queue']);
@@ -197,6 +203,26 @@ class ListQueuesResult
     {
         $this->_nextMarker = $nextMarker;
     }
+    
+    /**
+     * Gets account name.
+     * 
+     * @return string
+     */
+    public function getAccountName()
+    {
+        return $this->_accountName;
+    }
+
+    /**
+     * Sets account name.
+     *
+     * @param string $accountName value.
+     * 
+     * @return none
+     */
+    public function setAccountName($accountName)
+    {
+        $this->_accountName = $accountName;
+    }
 }
-
-

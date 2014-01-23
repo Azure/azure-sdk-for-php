@@ -29,9 +29,10 @@ use Tests\Framework\TestResources;
 use WindowsAzure\Common\Configuration;
 use WindowsAzure\Common\ServiceException;
 use WindowsAzure\Common\Internal\Utilities;
-use WindowsAzure\ServiceBus\WrapRestProxy;
+use WindowsAzure\ServiceBus\Internal\WrapRestProxy;
 use WindowsAzure\Common\Internal\Resources;
 use WindowsAzure\Common\ServicesBuilder;
+use WindowsAzure\Common\Internal\ServiceBusSettings;
 
 /**
  * Unit tests for WrapRestProxy class
@@ -41,7 +42,7 @@ use WindowsAzure\Common\ServicesBuilder;
  * @author    Azure PHP SDK <azurephpsdk@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
- * @version   Release: @package_version@
+ * @version   Release: 0.4.0_2014-01
  * @link      https://github.com/WindowsAzure/azure-sdk-for-php
  */
 class WrapRestProxyTest extends \PHPUnit_Framework_TestCase
@@ -51,26 +52,28 @@ class WrapRestProxyTest extends \PHPUnit_Framework_TestCase
     public function setUp()
     {
         $builder = new ServicesBuilder();
-        $wrapUri = 'https://' . TestResources::serviceBusNamespace() .'-sb.accesscontrol.windows.net/WRAPv0.9';
+        $settings = ServiceBusSettings::createFromConnectionString(
+            TestResources::getServiceBusConnectionString()
+        );
+        $wrapUri = $settings->getWrapEndpointUri();
         $wrapBuilder = new \ReflectionMethod($builder, 'createWrapService');
         $wrapBuilder->setAccessible(true);
         $this->_wrapRestProxy = $wrapBuilder->invoke($builder, $wrapUri);
     }
     
     /**
-     * @covers WindowsAzure\ServiceBus\WrapRestProxy::__construct
-     * @covers WindowsAzure\ServiceBus\WrapRestProxy::wrapAccessToken
+     * @covers WindowsAzure\ServiceBus\Internal\WrapRestProxy::__construct
+     * @covers WindowsAzure\ServiceBus\Internal\WrapRestProxy::wrapAccessToken
      */
     public function testWrapAccessToken()
     {
-        $wrapUri = 'https://'
-            .TestResources::serviceBusNamespace()
-            .'-sb.accesscontrol.windows.net/WRAPv0.9';
-        $wrapUserName = TestResources::wrapAuthenticationName();
-        $wrapPassword = TestResources::wrapPassword();
-        $scope = 'http://'
-            .TestResources::serviceBusNameSpace()
-            .'.servicebus.windows.net';
+        $settings = ServiceBusSettings::createFromConnectionString(
+            TestResources::getServiceBusConnectionString()
+        );
+        $wrapUri = $settings->getWrapEndpointUri();
+        $wrapUserName = $settings->getWrapName();
+        $wrapPassword = $settings->getWrapPassword();
+        $scope = str_replace('https', 'http', $settings->getServiceBusEndpointUri());
         
         $wrapAccessTokenResult = $this->_wrapRestProxy->wrapAccessToken(
             $wrapUri, 

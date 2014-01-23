@@ -40,7 +40,7 @@ use WindowsAzure\ServiceBus\Models\SubscriptionDescription;
  * @author    Azure PHP SDK <azurephpsdk@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
- * @version   Release: @package_version@
+ * @version   Release: 0.4.0_2014-01
  * @link      https://github.com/WindowsAzure/azure-sdk-for-php
  */
 class SubscriptionInfo extends Entry
@@ -258,7 +258,9 @@ class SubscriptionInfo extends Entry
      */
     public function setDefaultMessageTimeToLive($defaultMessageTimeToLive)
     {   
-        $this->_subscriptionDescription->setDefaultMessageTimeToLive($defaultMessageTimeToLive);
+        $this->_subscriptionDescription->setDefaultMessageTimeToLive(
+            $defaultMessageTimeToLive
+        );
     }
 
     /**
@@ -268,7 +270,8 @@ class SubscriptionInfo extends Entry
      */
     public function getDeadLetteringOnMessageExpiration()
     {
-        return $this->_subscriptionDescription->getDeadLetteringOnMessageExpiration();
+        $subscriptionDesc = $this->_subscriptionDescription;
+        return $subscriptionDesc->getDeadLetteringOnMessageExpiration();
     }
 
     /** 
@@ -282,7 +285,9 @@ class SubscriptionInfo extends Entry
     public function setDeadLetteringOnMessageExpiration(
         $deadLetteringOnMessageExpiration
     ) {
-        $this->_subscriptionDescription->setDeadLetteringOnMessageExpiration($deadLetteringOnMessageExpiration);
+        $this->_subscriptionDescription->setDeadLetteringOnMessageExpiration(
+            $deadLetteringOnMessageExpiration
+        );
     }
 
     /**
@@ -292,7 +297,8 @@ class SubscriptionInfo extends Entry
      */
     public function getDeadLetteringOnFilterEvaluationExceptions()
     {
-        return $this->_subscriptionDescription->getDeadLetteringOnFilterEvaluationExceptions();
+        $subscriptionDesc = $this->_subscriptionDescription;
+        return $subscriptionDesc->getDeadLetteringOnFilterEvaluationExceptions();
     }
 
     /**
@@ -306,7 +312,8 @@ class SubscriptionInfo extends Entry
     public function setDeadLetteringOnFilterEvaluationExceptions(
         $deadLetteringOnFilterEvaluationExceptions
     ) {
-        $this->_subscriptionDescription->setdeadLetteringOnFilterEvaluationExceptions(
+        $subscriptionDesc = $this->_subscriptionDescription;
+        $subscriptionDesc->setdeadLetteringOnFilterEvaluationExceptions(
             $deadLetteringOnFilterEvaluationExceptions
         );
     }
@@ -330,7 +337,9 @@ class SubscriptionInfo extends Entry
      */
     public function setDefaultRuleDescription($defaultRuleDescription)
     {
-        $this->_subscriptionDescription->setDefaultRuleDescription($defaultRuleDescription);
+        $this->_subscriptionDescription->setDefaultRuleDescription(
+            $defaultRuleDescription
+        );
     }
 
     /**
@@ -396,6 +405,8 @@ class SubscriptionInfo extends Entry
      */
     public function setEnableBatchedOperations($enableBatchedOperations)
     {
-        $this->_subscriptionDescription->setEnableBatchedOperations($enableBatchedOperations); 
+        $this->_subscriptionDescription->setEnableBatchedOperations(
+            $enableBatchedOperations
+        );
     }
 }

@@ -23,11 +23,8 @@
  */
  
 namespace Client;
-use WindowsAzure\Common\Configuration;
+use WindowsAzure\Common\ServicesBuilder;
 use WindowsAzure\Common\Internal\Resources;
-use WindowsAzure\ServiceManagement\ServiceManagementService;
-use WindowsAzure\ServiceManagement\ServiceManagementSettings;
-use WindowsAzure\ServiceManagement\Models\Locations;
 use WindowsAzure\ServiceManagement\Models\OperationStatus;
 use WindowsAzure\ServiceManagement\Models\CreateServiceOptions;
 
@@ -39,7 +36,7 @@ use WindowsAzure\ServiceManagement\Models\CreateServiceOptions;
  * @author    Azure PHP SDK <azurephpsdk@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
- * @version   Release: @package_version@
+ * @version   Release: 0.4.0_2014-01
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
 class CloudSubscription
@@ -60,20 +57,8 @@ class CloudSubscription
      */
     public function __construct($subscriptionId, $certificatePath)
     {
-        $config = new Configuration();
-        $config->setProperty(
-            ServiceManagementSettings::SUBSCRIPTION_ID,
-            $subscriptionId
-        );
-        $config->setProperty(
-            ServiceManagementSettings::CERTIFICATE_PATH,
-            $certificatePath
-        );
-        $config->setProperty(
-            ServiceManagementSettings::URI,
-            Resources::SERVICE_MANAGEMENT_URL
-        );
-        $this->_proxy = ServiceManagementService::create($config);
+        $connectionString = "SubscriptionID=$subscriptionId;CertificatePath=$certificatePath";
+        $this->_proxy     = ServicesBuilder::getInstance()->createServiceManagementService($connectionString);
     }
     
     /**
@@ -85,7 +70,7 @@ class CloudSubscription
      */
     public function storageServiceExists($name)
     {
-        $result = $this->_proxy->listStorageServices();
+        $result          = $this->_proxy->listStorageServices();
         $storageServices = $result->getStorageServices();
         
         foreach ($storageServices as $storageService) {
@@ -109,7 +94,7 @@ class CloudSubscription
     public function createStorageService(
         $name,
         $execType = self:: SYNCHRONOUS,
-        $location = Locations::SOUTH_CENTRAL_US
+        $location = 'West US'
     ) {
         $newStorageService   = false;
         $cloudStorageService = null;
@@ -135,7 +120,9 @@ class CloudSubscription
             $cloudStorageService = new CloudStorageService(
                 $name,
                 $keys->getPrimary(),
-                $properties->getEndpoints()
+                $properties->getBlobEndpointUri(),
+                $properties->getQueueEndpointUri(),
+                $properties->getTableEndpointUri()
             );
         }
         

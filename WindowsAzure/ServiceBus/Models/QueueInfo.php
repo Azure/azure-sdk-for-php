@@ -39,7 +39,7 @@ use WindowsAzure\ServiceBus\Models\QueueDescription;
  * @author    Azure PHP SDK <azurephpsdk@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
- * @version   Release: @package_version@
+ * @version   Release: 0.4.0_2014-01
  * @link      https://github.com/WindowsAzure/azure-sdk-for-php
  */
 
@@ -256,7 +256,9 @@ class QueueInfo
      */
     public function setRequiresDuplicateDetection($requiresDuplicateDetection)
     {
-        $this->_queueDescription->setRequiresDuplicateDetection($requiresDuplicateDetection);
+        $this->_queueDescription->setRequiresDuplicateDetection(
+            $requiresDuplicateDetection
+        );
     }
 
     /**
@@ -300,7 +302,9 @@ class QueueInfo
      */
     public function setDefaultMessageTimeToLive($defaultMessageTimeToLive)
     {   
-        $this->_queueDescription->setDefaultMessageTimeToLive($defaultMessageTimeToLive);
+        $this->_queueDescription->setDefaultMessageTimeToLive(
+            $defaultMessageTimeToLive
+        );
     }
 
     /**
@@ -324,7 +328,9 @@ class QueueInfo
     public function setDeadLetteringOnMessageExpiration(
         $deadLetteringOnMessageExpiration
     ) {
-        $this->_queueDescription->setDeadLetteringOnMessageExpiration($deadLetteringOnMessageExpiration);
+        $this->_queueDescription->setDeadLetteringOnMessageExpiration(
+            $deadLetteringOnMessageExpiration
+        );
     }
 
     /**
@@ -394,7 +400,9 @@ class QueueInfo
      */
     public function setEnableBatchedOperations($enableBatchedOperations)
     {
-        $this->_queueDescription->setEnableBatchedOperations($enableBatchedOperations); 
+        $this->_queueDescription->setEnableBatchedOperations(
+            $enableBatchedOperations
+        );
     }
 
     /**

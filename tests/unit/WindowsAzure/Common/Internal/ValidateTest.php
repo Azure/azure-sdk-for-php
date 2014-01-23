@@ -11,7 +11,7 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- * 
+ *
  * PHP version 5
  *
  * @category  Microsoft
@@ -27,6 +27,7 @@ use WindowsAzure\Common\Internal\Validate;
 use WindowsAzure\Common\Internal\InvalidArgumentTypeException;
 use WindowsAzure\Common\Internal\Resources;
 use WindowsAzure\Common\Internal\Utilities;
+use WindowsAzure\MediaServices\Models\Asset;
 
 /**
  * Unit tests for class ValidateTest
@@ -36,7 +37,7 @@ use WindowsAzure\Common\Internal\Utilities;
  * @author    Azure PHP SDK <azurephpsdk@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
- * @version   Release: @package_version@
+ * @version   Release: 0.4.0_2014-01
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
 class ValidateTest extends \PHPUnit_Framework_TestCase
@@ -47,10 +48,10 @@ class ValidateTest extends \PHPUnit_Framework_TestCase
     public function testIsArrayWithArray()
     {
         Validate::isArray(array(), 'array');
-        
+
         $this->assertTrue(true);
     }
-    
+
     /**
      * @covers WindowsAzure\Common\Internal\Validate::isArray
      */
@@ -59,17 +60,17 @@ class ValidateTest extends \PHPUnit_Framework_TestCase
         $this->setExpectedException(get_class(new InvalidArgumentTypeException('')));
         Validate::isArray(123, 'array');
     }
-    
+
     /**
      * @covers WindowsAzure\Common\Internal\Validate::isString
      */
     public function testIsStringWithString()
     {
         Validate::isString('I\'m a string', 'string');
-        
+
         $this->assertTrue(true);
     }
-    
+
     /**
      * @covers WindowsAzure\Common\Internal\Validate::isString
      */
@@ -78,27 +79,27 @@ class ValidateTest extends \PHPUnit_Framework_TestCase
         $this->setExpectedException(get_class(new InvalidArgumentTypeException('')));
         Validate::isString(new \DateTime(), 'string');
     }
-    
+
     /**
      * @covers WindowsAzure\Common\Internal\Validate::isBoolean
      */
     public function testIsBooleanWithBoolean()
     {
         Validate::isBoolean(true);
-        
+
         $this->assertTrue(true);
     }
-    
+
     /**
      * @covers WindowsAzure\Common\Internal\Validate::isInteger
      */
     public function testIsIntegerWithInteger()
     {
         Validate::isInteger(123, 'integer');
-        
+
         $this->assertTrue(true);
     }
-    
+
     /**
      * @covers WindowsAzure\Common\Internal\Validate::isInteger
      */
@@ -107,17 +108,17 @@ class ValidateTest extends \PHPUnit_Framework_TestCase
         $this->setExpectedException(get_class(new InvalidArgumentTypeException('')));
         Validate::isInteger(new \DateTime(), 'integer');
     }
-    
+
     /**
      * @covers WindowsAzure\Common\Internal\Validate::isTrue
      */
     public function testIsTrueWithTrue()
     {
         Validate::isTrue(true, Resources::EMPTY_STRING);
-        
+
         $this->assertTrue(true);
     }
-    
+
     /**
      * @covers WindowsAzure\Common\Internal\Validate::isTrue
      */
@@ -126,7 +127,7 @@ class ValidateTest extends \PHPUnit_Framework_TestCase
         $this->setExpectedException('\InvalidArgumentException');
         Validate::isTrue(false, Resources::EMPTY_STRING);
     }
-    
+
     /**
      * @covers WindowsAzure\Common\Internal\Validate::isDate
      */
@@ -134,10 +135,10 @@ class ValidateTest extends \PHPUnit_Framework_TestCase
     {
         $date = Utilities::rfc1123ToDateTime('Fri, 09 Oct 2009 21:04:30 GMT');
         Validate::isDate($date);
-        
+
         $this->assertTrue(true);
     }
-    
+
     /**
      * @covers WindowsAzure\Common\Internal\Validate::isDate
      */
@@ -146,17 +147,17 @@ class ValidateTest extends \PHPUnit_Framework_TestCase
         $this->setExpectedException(get_class(new InvalidArgumentTypeException('DateTime')));
         Validate::isDate('not date');
     }
-    
+
     /**
      * @covers WindowsAzure\Common\Internal\Validate::notNullOrEmpty
      */
     public function testNotNullOrEmptyWithNonEmpty()
     {
         Validate::notNullOrEmpty(1234, 'not null');
-        
+
         $this->assertTrue(true);
     }
-    
+
     /**
      * @covers WindowsAzure\Common\Internal\Validate::notNullOrEmpty
      */
@@ -165,7 +166,7 @@ class ValidateTest extends \PHPUnit_Framework_TestCase
         $this->setExpectedException('\InvalidArgumentException');
         Validate::notNullOrEmpty(Resources::EMPTY_STRING, 'variable');
     }
-    
+
     /**
      * @covers WindowsAzure\Common\Internal\Validate::notNull
      */
@@ -186,7 +187,7 @@ class ValidateTest extends \PHPUnit_Framework_TestCase
 
         // Test
         $result = Validate::isInstanceOf($value, $stringObject, 'value');
-    
+
         // Assert
         $this->assertTrue($result);
     }
@@ -203,7 +204,7 @@ class ValidateTest extends \PHPUnit_Framework_TestCase
 
         // Test
         $result = Validate::isInstanceOf($value, $arrayObject, 'value');
-    
+
         // Assert
     }
 
@@ -218,7 +219,7 @@ class ValidateTest extends \PHPUnit_Framework_TestCase
 
         // Test
         $result = Validate::isInstanceOf($value, $arrayObject, 'value');
-    
+
         // Assert
         $this->assertTrue($result);
     }
@@ -235,7 +236,7 @@ class ValidateTest extends \PHPUnit_Framework_TestCase
 
         // Test
         $result = Validate::isInstanceOf($value, $stringObject, 'value');
-    
+
         // Assert
     }
 
@@ -250,7 +251,7 @@ class ValidateTest extends \PHPUnit_Framework_TestCase
 
         // Test
         $result = Validate::isInstanceOf($value, $intObject, 'value');
-    
+
         // Assert
         $this->assertTrue($result);
     }
@@ -267,7 +268,7 @@ class ValidateTest extends \PHPUnit_Framework_TestCase
 
         // Test
         $result = Validate::isInstanceOf($value, $stringObject, 'value');
-    
+
         // Assert
     }
 
@@ -280,7 +281,7 @@ class ValidateTest extends \PHPUnit_Framework_TestCase
         // Setup
         $value = null;
         $arrayObject = array();
-        
+
         // Test
         $result = Validate::isInstanceOf($value, $arrayObject, 'value');
 
@@ -293,10 +294,10 @@ class ValidateTest extends \PHPUnit_Framework_TestCase
      */
     public function testIsDoubleSuccess()
     {
-        // Setup 
+        // Setup
         $value = 3.14159265;
 
-        // Test 
+        // Test
         Validate::isDouble($value, 'value');
 
         // Assert
@@ -308,16 +309,16 @@ class ValidateTest extends \PHPUnit_Framework_TestCase
      */
     public function testIsDoubleFail()
     {
-        // Setup 
+        // Setup
         $this->setExpectedException('\InvalidArgumentException');
         $value = 'testInvalidDoubleValue';
 
-        // Test 
+        // Test
         Validate::isDouble($value, 'value');
 
         // Assert
     }
-    
+
     /**
      * @covers WindowsAzure\Common\Internal\Validate::isDouble
      */
@@ -325,9 +326,225 @@ class ValidateTest extends \PHPUnit_Framework_TestCase
     {
         // Test
         $function = Validate::getIsValidUri();
-        
+
         // Assert
         $this->assertInternalType('object', $function);
+    }
+
+    /**
+     * @covers WindowsAzure\Common\Internal\Validate::isValidUri
+     */
+    public function testIsValidUriPass()
+    {
+        // Setup
+        $value = 'http://test.com';
+
+        // Test
+        $result = Validate::isValidUri($value);
+
+        // Assert
+        $this->assertTrue($result);
+    }
+
+    /**
+     * @covers WindowsAzure\Common\Internal\Validate::isValidUri
+     */
+    public function testIsValidUriNull()
+    {
+        // Setup
+        $this->setExpectedException(get_class(new \RuntimeException('')));
+        $value = null;
+
+        // Test
+        $result = Validate::isValidUri($value);
+
+        // Assert
+    }
+
+    /**
+     * @covers WindowsAzure\Common\Internal\Validate::isValidUri
+     */
+    public function testIsValidUriNotUri()
+    {
+        // Setup
+        $this->setExpectedException(get_class(new \RuntimeException('')));
+        $value = 'test string';
+
+        // Test
+        $result = Validate::isValidUri($value);
+
+        // Assert
+    }
+
+    /**
+     * @covers WindowsAzure\Common\Internal\Validate::isObject
+     */
+    public function testIsObjectPass()
+    {
+        // Setup
+        $value = new \stdClass();
+
+        // Test
+        $result = Validate::isObject($value, 'value');
+
+        // Assert
+        $this->assertTrue($result);
+    }
+
+    /**
+     * @covers WindowsAzure\Common\Internal\Validate::isObject
+     */
+    public function testIsObjectNull()
+    {
+        // Setup
+        $this->setExpectedException(get_class(new InvalidArgumentTypeException('')));
+        $value = null;
+
+        // Test
+        $result = Validate::isObject($value, 'value');
+
+        // Assert
+    }
+
+    /**
+     * @covers WindowsAzure\Common\Internal\Validate::isObject
+     */
+    public function testIsObjectNotObject()
+    {
+        // Setup
+        $this->setExpectedException(get_class(new InvalidArgumentTypeException('')));
+        $value = 'test string';
+
+        // Test
+        $result = Validate::isObject($value, 'value');
+
+        // Assert
+    }
+
+    /**
+     * @covers WindowsAzure\Common\Internal\Validate::isA
+     */
+    public function testIsAResourcesPasses()
+    {
+        // Setup
+        $value = new Resources();
+        $type = 'WindowsAzure\Common\Internal\Resources';
+
+        // Test
+        $result = Validate::isA($value, $type, 'value');
+
+        // Assert
+        $this->assertTrue($result);
+    }
+
+    /**
+     * @covers WindowsAzure\Common\Internal\Validate::isA
+     */
+    public function testIsANull()
+    {
+        // Setup
+        $this->setExpectedException('\InvalidArgumentException');
+        $value = null;
+        $type = 'WindowsAzure\Common\Internal\Resources';
+
+        // Test
+        $result = Validate::isA($value, $type, 'value');
+
+        // Assert
+    }
+
+    /**
+     * @covers WindowsAzure\Common\Internal\Validate::isA
+     */
+    public function testIsAInvalidClass()
+    {
+        // Setup
+        $this->setExpectedException('\InvalidArgumentException');
+        $value = new Resources();
+        $type = 'Some\Invalid\Class';
+
+        // Test
+        $result = Validate::isA($value, $type, 'value');
+
+        // Assert
+    }
+
+    /**
+     * @covers WindowsAzure\Common\Internal\Validate::isA
+     */
+    public function testIsANotAClass()
+    {
+        // Setup
+        $this->setExpectedException(get_class(new InvalidArgumentTypeException('')));
+        $value = 'test string';
+        $type = 'WindowsAzure\Common\Internal\Resources';
+
+        // Test
+        $result = Validate::isA($value, $type, 'value');
+
+        // Assert
+    }
+
+    /**
+     * @covers WindowsAzure\Common\Internal\Validate::methodExists
+     */
+    public function testMethodExistsIfExists(){
+
+        // Setup
+        $asset = new Asset(Asset::OPTIONS_NONE);
+        $method = 'getState';
+
+        // Test
+        $result = Validate::methodExists($asset, $method, 'WindowsAzure\MediaServices\Models\Asset');
+
+        // Assert
+        $this->assertTrue($result);
+    }
+
+    /**
+     * @covers WindowsAzure\Common\Internal\Validate::methodExists
+     */
+    public function testMethodExistsIfNotExists(){
+
+        // Setup
+        $this->setExpectedException('\InvalidArgumentException');
+        $asset = new Asset(Asset::OPTIONS_NONE);
+        $method = 'setCreated';
+
+        // Test
+        $result = Validate::methodExists($asset, $method, 'WindowsAzure\MediaServices\Models\Asset');
+
+        // Assert
+    }
+
+    /**
+     * @covers WindowsAzure\Common\Internal\Validate::isDateString
+     */
+    public function testIsDateStringValid(){
+
+        // Setup
+        $value = '2013-11-25';
+
+        // Test
+        $result = Validate::isDateString($value, 'name');
+
+        // Assert
+        $this->assertTrue($result);
+    }
+
+    /**
+     * @covers WindowsAzure\Common\Internal\Validate::isDateString
+     */
+    public function testIsDateStringNotValid(){
+
+        // Setup
+        $this->setExpectedException('\InvalidArgumentException');
+        $value = 'not a date';
+
+        // Test
+        $result = Validate::isDateString($value, 'name');
+
+        // Assert
     }
 }
 

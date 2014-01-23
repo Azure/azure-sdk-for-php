@@ -28,6 +28,8 @@ use WindowsAzure\Common\Internal\StorageServiceSettings;
 
 class FunctionalTestBase extends IntegrationTestBase
 {
+    private static $isOneTimeSetup = false;
+
     protected $accountName;
 
     public function setUp()
@@ -35,31 +37,35 @@ class FunctionalTestBase extends IntegrationTestBase
         parent::setUp();
         $settings = StorageServiceSettings::createFromConnectionString($this->connectionString);
         $this->accountName = $settings->getName();
+        if (!self::$isOneTimeSetup) {
+            $this->doOneTimeSetup();
+            self::$isOneTimeSetup = true;
+        }
     }
 
-    public static function setUpBeforeClass()
+    private function doOneTimeSetup()
     {
-        parent::setUpBeforeClass();
-        $testBase = new FunctionalTestBase();
-        $testBase->setUp();
         QueueServiceFunctionalTestData::setupData();
 
         foreach(QueueServiceFunctionalTestData::$testQueueNames as $name)  {
-            $testBase->safeDeleteQueue($name);
+            $this->safeDeleteQueue($name);
         }
 
         foreach(QueueServiceFunctionalTestData::$testQueueNames as $name)  {
             self::println('Creating queue: ' . $name);
-            $testBase->restProxy->createQueue($name);
+            $this->restProxy->createQueue($name);
         }
     }
 
     public static function tearDownAfterClass()
     {
-        $testBase = new FunctionalTestBase();
-        $testBase->setUp();
-        foreach(QueueServiceFunctionalTestData::$testQueueNames as $name)  {
-            $testBase->safeDeleteQueue($name);
+        if (self::$isOneTimeSetup) {
+            $testBase = new FunctionalTestBase();
+            $testBase->setUp();
+            foreach(QueueServiceFunctionalTestData::$testQueueNames as $name)  {
+                $testBase->safeDeleteQueue($name);
+            }
+            self::$isOneTimeSetup = false;
         }
         parent::tearDownAfterClass();
     }

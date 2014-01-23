@@ -11,44 +11,50 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- * 
+ *
  * PHP version 5
  *
  * @category  Microsoft
- * @package   WindowsAzure\ServiceManagement\Models
+ * @package   WindowsAzure\Common\Internal\Authentication
  * @author    Azure PHP SDK <azurephpsdk@microsoft.com>
- * @copyright 2012 Microsoft Corporation
+ * @copyright Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
- 
-namespace WindowsAzure\ServiceManagement\Models;
+
+namespace WindowsAzure\Common\Internal\Authentication;
 
 /**
- * Available data center locations on Windows Azure.
+ * Interface for azure authentication schemes.
  *
  * @category  Microsoft
- * @package   WindowsAzure\ServiceManagement\Models
+ * @package   WindowsAzure\Common\Internal\Authentication
  * @author    Azure PHP SDK <azurephpsdk@microsoft.com>
- * @copyright 2012 Microsoft Corporation
+ * @copyright Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
- * @version   Release: @package_version@
+ * @version   Release: 0.4.0_2014-01
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
-class Locations
+interface IAuthScheme
 {
-    const ANYWHERE_US      = 'Anywhere US';
-    const NORTH_CENTRAL_US = 'North Central US';
-    const SOUTH_CENTRAL_US = 'South Central US';
-    const WEST_US          = 'West US';
-    const EAST_US          = 'East US';
-    const ANYWHERE_EUROPE  = 'Anywhere Europe';
-    const WEST_EUROPE      = 'West Europe';
-    const NORTH_EUROPE     = 'North Europe';
-    const ANYWHERE_ASIA    = 'Anywhere Asia';
-    const SOUTHEAST_ASIA   = 'Southeast Asia';
-    const EAST_ASIA        = 'East Asia';
-    const COUNT            = 11;
+    /**
+     * Returns authorization header to be included in the request.
+     *
+     * @param array  $headers     request headers.
+     * @param string $url         reuqest url.
+     * @param array  $queryParams query variables.
+     * @param string $httpMethod  request http method.
+     *
+     * @see Specifying the Authorization Header section at
+     *      http://msdn.microsoft.com/en-us/library/windowsazure/dd179428.aspx
+     *
+     * @abstract
+     *
+     * @return string
+     */
+    public function getAuthorizationHeader($headers, $url, $queryParams,
+        $httpMethod
+    );
 }
 
 

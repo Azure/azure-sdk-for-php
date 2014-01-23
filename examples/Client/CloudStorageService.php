@@ -23,13 +23,7 @@
  */
  
 namespace Client;
-use WindowsAzure\Common\Configuration;
-use WindowsAzure\Table\TableService;
-use WindowsAzure\Table\TableSettings;
-use WindowsAzure\Blob\BlobService;
-use WindowsAzure\Blob\BlobSettings;
-use WindowsAzure\Queue\QueueService;
-use WindowsAzure\Queue\QueueSettings;
+use WindowsAzure\Common\ServicesBuilder;
 use WindowsAzure\Table\Models\QueryTablesOptions;
 
 /**
@@ -40,7 +34,7 @@ use WindowsAzure\Table\Models\QueryTablesOptions;
  * @author    Azure PHP SDK <azurephpsdk@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
- * @version   Release: @package_version@
+ * @version   Release: 0.4.0_2014-01
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
 class CloudStorageService
@@ -61,45 +55,41 @@ class CloudStorageService
     private $_tableProxy;
     
     /**
+     * @var string
+     */
+    private $_blobEndpointUri;
+    
+    /**
+     * @var string
+     */
+    private $_queueEndpointUri;
+    
+    /**
+     * @var string
+     */
+    private $_tableEndpointUri;
+    
+    /**
      * Constructs CloudStorageService using the provided parameters.
      * 
-     * @param string $name      The storage service name.
-     * @param string $key       The storage service access key.
-     * @param array  $endpoints The storage service endpoints.
+     * @param string $name             The storage service name.
+     * @param string $key              The storage service access key.
+     * @param array  $blobEndpointUri  The blob endpoint URI.
+     * @param array  $queueEndpointUri The queue endpoint URI.
+     * @param array  $tableEndpointUri The queue endpoint URI.
+     * 
      * @throws \InvalidArgumentException 
      */
-    public function __construct($name, $key, $endpoints)
+    public function __construct($name, $key, $blobEndpointUri, $queueEndpointUri, $tableEndpointUri)
     {
-        $queueUri = null;
-        $blobUri  = null;
-        $tableUri = null;
+        $this->_queueEndpointUri = $queueEndpointUri;
+        $this->_blobEndpointUri  = $blobEndpointUri;
+        $this->_tableEndpointUri = $tableEndpointUri;
         
-        foreach ($endpoints as $value) {
-            if (substr_count($value, 'queue.core')) {
-                $queueUri = $value;
-            } else if (substr_count($value, 'table.core')) {
-                $tableUri = $value;
-            } else if (substr_count($value, 'blob.core')) {
-                $blobUri = $value;
-            } else {
-                throw new \InvalidArgumentException(ErrorMessages::INVALID_ENDPOINT);
-            }
-        }
-        
-        $config = new Configuration();
-        $config->setProperty(TableSettings::ACCOUNT_NAME, $name);
-        $config->setProperty(TableSettings::ACCOUNT_KEY, $key);
-        $config->setProperty(TableSettings::URI, $tableUri);
-        $config->setProperty(BlobSettings::ACCOUNT_NAME, $name);
-        $config->setProperty(BlobSettings::ACCOUNT_KEY, $key);
-        $config->setProperty(BlobSettings::URI, $tableUri);
-        $config->setProperty(QueueSettings::ACCOUNT_NAME, $name);
-        $config->setProperty(QueueSettings::ACCOUNT_KEY, $key);
-        $config->setProperty(QueueSettings::URI, $tableUri);
-        
-        $this->_tableProxy = TableService::create($config);
-        $this->_blobProxy  = BlobService::create($config);
-        $this->_queueProxy = QueueService::create($config);
+        $connectionString  = "DefaultEndpointsProtocol=http;AccountName=$name;AccountKey=$key";        
+        $this->_tableProxy = ServicesBuilder::getInstance()->createTableService($connectionString);;
+        $this->_blobProxy  = ServicesBuilder::getInstance()->createBlobService($connectionString);;
+        $this->_queueProxy = ServicesBuilder::getInstance()->createQueueService($connectionString);;
     }
     
     /**
@@ -181,6 +171,34 @@ class CloudStorageService
             return false;
         }
     }
+    
+    /**
+     * Gets storage service blob endpoint uri.
+     * 
+     * @return string
+     */
+    public function getBlobEndpointUri()
+    {
+        return $this->_blobEndpointUri;
+    }
+    
+    /**
+     * Gets storage service queue endpoint uri.
+     * 
+     * @return string
+     */
+    public function getQueueEndpointUri()
+    {
+        return $this->_queueEndpointUri;
+    }
+
+    /**
+     * Gets storage service table endpoint uri.
+     * 
+     * @return string
+     */
+    public function getTableEndpointUri()
+    {
+        return $this->_tableEndpointUri;
+    }
 }
-
-

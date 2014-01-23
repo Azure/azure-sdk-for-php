@@ -15,7 +15,7 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   Tests\Unit\WindowsAzure\ServiceBus\Models
+ * @package   Tests\Unit\WindowsAzure\ServiceBus\Internal
  * @author    Azure PHP SDK <azurephpsdk@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
@@ -23,33 +23,33 @@
  */
 
 namespace Tests\Unit\WindowsAzure\ServiceBus\Models;
-use WindowsAzure\ServiceBus\Models\Action;
+use WindowsAzure\ServiceBus\Internal\Filter;
 
 /**
- * Unit tests for class Action
+ * Unit tests for class Filter
  *
  * @category  Microsoft
- * @package   Tests\Unit\WindowsAzure\ServiceBus\Models
+ * @package   Tests\Unit\WindowsAzure\ServiceBus\Internal
  * @author    Azure PHP SDK <azurephpsdk@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
- * @version   Release: @package_version@
+ * @version   Release: 0.4.0_2014-01
  * @link      https://github.com/WindowsAzure/azure-sdk-for-php
  */
-class ActionTest extends \PHPUnit_Framework_TestCase
+class FilterTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @covers WindowsAzure\ServiceBus\Models\Action::__construct
+     * @covers WindowsAzure\ServiceBus\Internal\Filter::__construct
      */
-    public function testActionConstructor()
+    public function testFilterConstructor()
     {
         // Setup
         
         // Test
-        $action = new Action();
+        $filter = new Filter();
         
         // Assert
-        $this->assertNotNull($action);
+        $this->assertNotNull($filter);
     }
 
 }

@@ -39,12 +39,11 @@ use WindowsAzure\ServiceBus\Models\TopicDescription;
  * @author    Azure PHP SDK <azurephpsdk@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
- * @version   Release: @package_version@
+ * @version   Release: 0.4.0_2014-01
  * @link      https://github.com/WindowsAzure/azure-sdk-for-php
  */
 class TopicInfo extends Entry
 {
-
     /**
      * The entry of the topic info. 
      * 
@@ -211,7 +210,9 @@ class TopicInfo extends Entry
      */
     public function setDefaultMessageTimeToLive($defaultMessageTimeToLive)
     {
-        $this->_topicDescription->setDefaultMessageTimeToLive($defaultMessageTimeToLive);
+        $this->_topicDescription->setDefaultMessageTimeToLive(
+            $defaultMessageTimeToLive
+        );
     }
 
     /**
@@ -255,7 +256,9 @@ class TopicInfo extends Entry
      */
     public function setRequiresDuplicateDetection($requiresDuplicateDetection)
     {
-        $this->_topicDescription->setrequiresDuplicateDetection($requiresDuplicateDetection);
+        $this->_topicDescription->setrequiresDuplicateDetection(
+            $requiresDuplicateDetection
+        );
     }
 
     /**
@@ -303,7 +306,9 @@ class TopicInfo extends Entry
      */
     public function setEnableBatchedOperations($enableBatchedOperations)
     {
-        $this->_topicDescription->setenableBatchedOperations($enableBatchedOperations);
+        $this->_topicDescription->setenableBatchedOperations(
+            $enableBatchedOperations
+        );
     }
 
     /**

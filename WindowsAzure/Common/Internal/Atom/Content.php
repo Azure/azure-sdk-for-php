@@ -11,7 +11,7 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- * 
+ *
  * PHP version 5
  *
  * @category  Microsoft
@@ -26,7 +26,7 @@ namespace WindowsAzure\Common\Internal\Atom;
 use WindowsAzure\Common\Internal\Resources;
 use WindowsAzure\Common\Internal\Utilities;
 use WindowsAzure\Common\Internal\Validate;
-
+use WindowsAzure\Common\Internal\Atom\AtomProperties;
 /**
  * The content class of ATOM standard.
  *
@@ -35,31 +35,38 @@ use WindowsAzure\Common\Internal\Validate;
  * @author    Azure PHP SDK <azurephpsdk@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
- * @version   Release: @package_version@
+ * @version   Release: 0.4.0_2014-01
  * @link      https://github.com/WindowsAzure/azure-sdk-for-php
  */
 
 class Content extends AtomBase
 {
     /**
-     * The text of the content. 
+     * The text of the content.
      *
-     * @var string  
+     * @var string
      */
     protected $text;
 
     /**
-     * The type of the content. 
+     * The type of the content.
      *
-     * @var string  
+     * @var string
      */
     protected $type;
-     
-    /** 
+
+    /**
+     * Source XML object
+     *
+     * @var \SimpleXMLElement
+     */
+    protected $xml;
+
+    /**
      * Creates a Content instance with specified text.
      *
      * @param string $text The text of the content.
-     * 
+     *
      * @return none
      */
     public function __construct($text = null)
@@ -68,18 +75,31 @@ class Content extends AtomBase
     }
 
     /**
-     * Creates an ATOM CONTENT instance with specified xml string. 
-     * 
+     * Creates an ATOM CONTENT instance with specified xml string.
+     *
      * @param string $xmlString an XML based string of ATOM CONTENT.
-     * 
+     *
      * @return none
-     */ 
+     */
     public function parseXml($xmlString)
     {
         Validate::notNull($xmlString, 'xmlString');
         Validate::isString($xmlString, 'xmlString');
-        $contentXml = simplexml_load_string($xmlString);
+
+        $this->fromXml(simplexml_load_string($xmlString));
+    }
+
+    /**
+     * Creates an ATOM CONTENT instance with specified simpleXML object
+     *
+     * @param \SimpleXMLElement $contentXml xml element of ATOM CONTENT
+     *
+     * @return none
+     */
+    public function fromXml($contentXml)
+    {
         Validate::notNull($contentXml, 'contentXml');
+        Validate::isA($contentXml, '\SimpleXMLElement', 'contentXml');
 
         $attributes = $contentXml->attributes();
 
@@ -90,36 +110,48 @@ class Content extends AtomBase
         $text = '';
         foreach ($contentXml->children() as $child) {
             $text .= $child->asXML();
-        } 
+        }
 
         $this->text = $text;
+
+        $this->xml = $contentXml;
     }
 
-    /** 
-     * Gets the text of the content. 
+    /**
+     * Gets the text of the content.
      *
      * @return string
      */
     public function getText()
-    {   
+    {
         return $this->text;
-    } 
+    }
 
     /**
      * Sets the text of the content.
-     * 
+     *
      * @param string $text The text of the content.
-     * 
+     *
      * @return none
      */
     public function setText($text)
     {
-        $this->text = $text; 
+        $this->text = $text;
     }
 
     /**
-     * Gets the type of the content. 
-     * 
+     * Gets the xml object of the content.
+     *
+     * @return \SimpleXMLElement
+     */
+    public function getXml()
+    {
+        return $this->xml;
+    }
+
+    /**
+     * Gets the type of the content.
+     *
      * @return string
      */
     public function getType()
@@ -128,22 +160,22 @@ class Content extends AtomBase
     }
 
     /**
-     * Sets the type of the content. 
-     * 
+     * Sets the type of the content.
+     *
      * @param string $type The type of the content.
-     * 
+     *
      * @return none
      */
     public function setType($type)
     {
         $this->type = $type;
     }
-    
-    /** 
-     * Writes an XML representing the content. 
-     * 
+
+    /**
+     * Writes an XML representing the content.
+     *
      * @param \XMLWriter $xmlWriter The XML writer.
-     * 
+     *
      * @return none
      */
     public function writeXml($xmlWriter)
@@ -157,7 +189,7 @@ class Content extends AtomBase
 
         $this->writeOptionalAttribute(
             $xmlWriter,
-            'type', 
+            'type',
             $this->type
         );
 
@@ -165,11 +197,11 @@ class Content extends AtomBase
         $xmlWriter->endElement();
     }
 
-    /** 
-     * Writes an inner XML representing the content. 
-     * 
+    /**
+     * Writes an inner XML representing the content.
+     *
      * @param \XMLWriter $xmlWriter The XML writer.
-     * 
+     *
      * @return none
      */
     public function writeInnerXml($xmlWriter)
@@ -178,4 +210,4 @@ class Content extends AtomBase
         $xmlWriter->writeRaw($this->text);
     }
 }
-?>
+

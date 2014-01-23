@@ -11,7 +11,7 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- * 
+ *
  * PHP version 5
  *
  * @category  Microsoft
@@ -35,7 +35,7 @@ use WindowsAzure\Common\Internal\Atom\AtomLink;
  * @author    Azure PHP SDK <azurephpsdk@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
- * @version   Release: @package_version@
+ * @version   Release: 0.4.0_2014-01
  * @link      https://github.com/WindowsAzure/azure-sdk-for-php
  */
 
@@ -49,16 +49,16 @@ class AtomBase
     protected $attributes;
 
     /**
-     * Creates an ATOM base object with default parameters. 
-     */ 
+     * Creates an ATOM base object with default parameters.
+     */
     public function __construct()
-    {   
+    {
         $this->attributes = array();
         $atomlink         = new AtomLink();
     }
 
     /**
-     * Gets the attributes of the ATOM class. 
+     * Gets the attributes of the ATOM class.
      *
      * @return array
      */
@@ -70,7 +70,7 @@ class AtomBase
     /**
      * Sets the attributes of the ATOM class.
      *
-     * @param array $attributes The attributes of the array. 
+     * @param array $attributes The attributes of the array.
      *
      * @return array
      */
@@ -81,9 +81,9 @@ class AtomBase
     }
 
     /**
-     * Sets an attribute to the ATOM object instance. 
-     * 
-     * @param string $attributeKey   The key of the attribute. 
+     * Sets an attribute to the ATOM object instance.
+     *
+     * @param string $attributeKey   The key of the attribute.
      * @param mixed  $attributeValue The value of the attribute.
      *
      * @return none
@@ -91,12 +91,12 @@ class AtomBase
     public function setAttribute($attributeKey, $attributeValue)
     {
         $this->attributes[$attributeKey] = $attributeValue;
-    }   
+    }
 
     /**
-     * Gets an attribute with a specified attribute key. 
-     * 
-     * @param string $attributeKey The key of the attribute. 
+     * Gets an attribute with a specified attribute key.
+     *
+     * @param string $attributeKey The key of the attribute.
      *
      * @return none
      */
@@ -105,13 +105,13 @@ class AtomBase
         return $this->attributes[$attributeKey];
     }
 
-    /**     
-     * Processes author node. 
-     * 
-     * @param array $xmlWriter   The XML writer. 
+    /**
+     * Processes author node.
+     *
+     * @param array $xmlWriter   The XML writer.
      * @param array $itemArray   An array of item to write.
-     * @param array $elementName The name of the element. 
-     * 
+     * @param array $elementName The name of the element.
+     *
      * @return array
      */
     protected function writeArrayItem($xmlWriter, $itemArray, $elementName)
@@ -126,17 +126,17 @@ class AtomBase
                 $elementName,
                 Resources::ATOM_NAMESPACE
             );
-            $itemInstance->writeInnerXml($xmlWriter); 
+            $itemInstance->writeInnerXml($xmlWriter);
             $xmlWriter->endElement();
         }
-    
+
     }
 
-    /**     
-     * Processes author node. 
-     * 
-     * @param array $xmlArray An array of simple xml elements. 
-     * 
+    /**
+     * Processes author node.
+     *
+     * @param array $xmlArray An array of simple xml elements.
+     *
      * @return array
      */
     protected function processAuthorNode($xmlArray)
@@ -144,7 +144,7 @@ class AtomBase
         $author     = array();
         $authorItem = $xmlArray[Resources::AUTHOR];
 
-        if (is_array($authorItem)) { 
+        if (is_array($authorItem)) {
             foreach ($xmlArray[Resources::AUTHOR] as $authorXmlInstance) {
                 $authorInstance = new Person();
                 $authorInstance->parseXml($authorXmlInstance->asXML());
@@ -152,17 +152,17 @@ class AtomBase
             }
         } else {
             $authorInstance = new Person();
-            $authorInstance->parseXml($authorItem->asXML()); 
+            $authorInstance->parseXml($authorItem->asXML());
             $author[] = $authorInstance;
         }
         return $author;
     }
 
-    /**     
-     * Processes entry node. 
-     * 
-     * @param array $xmlArray An array of simple xml elements. 
-     * 
+    /**
+     * Processes entry node.
+     *
+     * @param array $xmlArray An array of simple xml elements.
+     *
      * @return array
      */
     protected function processEntryNode($xmlArray)
@@ -170,25 +170,25 @@ class AtomBase
         $entry     = array();
         $entryItem = $xmlArray[Resources::ENTRY];
 
-        if (is_array($entryItem)) { 
+        if (is_array($entryItem)) {
             foreach ($xmlArray[Resources::ENTRY] as $entryXmlInstance) {
                 $entryInstance = new Entry();
-                $entryInstance->parseXml($entryXmlInstance->asXML());
+                $entryInstance->fromXml($entryXmlInstance);
                 $entry[] = $entryInstance;
             }
         } else {
             $entryInstance = new Entry();
-            $entryInstance->parseXml($entryItem->asXML()); 
+            $entryInstance->fromXml($entryItem);
             $entry[] = $entryInstance;
         }
         return $entry;
     }
 
-    /**     
-     * Processes category node. 
-     * 
-     * @param array $xmlArray An array of simple xml elements. 
-     * 
+    /**
+     * Processes category node.
+     *
+     * @param array $xmlArray An array of simple xml elements.
+     *
      * @return array
      */
     protected function processCategoryNode($xmlArray)
@@ -196,7 +196,7 @@ class AtomBase
         $category     = array();
         $categoryItem = $xmlArray[Resources::CATEGORY];
 
-        if (is_array($categoryItem)) { 
+        if (is_array($categoryItem)) {
             foreach ($xmlArray[Resources::CATEGORY] as $categoryXmlInstance) {
                 $categoryInstance = new Category();
                 $categoryInstance->parseXml($categoryXmlInstance->asXML());
@@ -204,17 +204,17 @@ class AtomBase
             }
         } else {
             $categoryInstance = new Category();
-            $categoryInstance->parseXml($categoryItem->asXML()); 
+            $categoryInstance->parseXml($categoryItem->asXML());
             $category[] = $categoryInstance;
         }
         return $category;
     }
 
-    /**     
-     * Processes contributor node. 
-     * 
-     * @param array $xmlArray An array of simple xml elements. 
-     * 
+    /**
+     * Processes contributor node.
+     *
+     * @param array $xmlArray An array of simple xml elements.
+     *
      * @return array
      */
     protected function processContributorNode($xmlArray)
@@ -222,7 +222,7 @@ class AtomBase
         $category        = array();
         $contributorItem = $xmlArray[Resources::CONTRIBUTOR];
 
-        if (is_array($contributorItem)) { 
+        if (is_array($contributorItem)) {
             foreach ($xmlArray[Resources::CONTRIBUTOR] as $contributorXmlInstance) {
                 $contributorInstance = new Person();
                 $contributorInstance->parseXml($contributorXmlInstance->asXML());
@@ -240,11 +240,11 @@ class AtomBase
         return $contributor;
     }
 
-    /**     
-     * Processes link node. 
-     * 
-     * @param array $xmlArray An array of simple xml elements. 
-     * 
+    /**
+     * Processes link node.
+     *
+     * @param array $xmlArray An array of simple xml elements.
+     *
      * @return array
      */
     protected function processLinkNode($xmlArray)
@@ -268,12 +268,12 @@ class AtomBase
     }
 
     /**
-     * Writes an optional attribute for ATOM. 
-     * 
-     * @param \XMLWriter $xmlWriter      The XML writer. 
+     * Writes an optional attribute for ATOM.
+     *
+     * @param \XMLWriter $xmlWriter      The XML writer.
      * @param string     $attributeName  The name of the attribute.
-     * @param mixed      $attributeValue The value of the attribute. 
-     * 
+     * @param mixed      $attributeValue The value of the attribute.
+     *
      * @return none
      */
     protected function writeOptionalAttribute(
@@ -283,7 +283,7 @@ class AtomBase
     ) {
         Validate::notNull($xmlWriter, 'xmlWriter');
         Validate::isString($attributeName, 'attributeName');
-        
+
         if (!empty($attributeValue)) {
             $xmlWriter->writeAttribute(
                 $attributeName,
@@ -294,20 +294,20 @@ class AtomBase
 
     /**
      * Writes the optional elements namespaces.
-     * 
+     *
      * @param \XmlWriter $xmlWriter    The XML writer.
      * @param string     $prefix       The prefix.
      * @param string     $elementName  The element name.
      * @param string     $namespace    The namespace name.
      * @param string     $elementValue The element value.
-     * 
+     *
      * @return none
      */
     protected function writeOptionalElementNS(
-        $xmlWriter, 
-        $prefix, 
-        $elementName, 
-        $namespace, 
+        $xmlWriter,
+        $prefix,
+        $elementName,
+        $namespace,
         $elementValue
     ) {
         Validate::notNull($xmlWriter, 'xmlWriter');
@@ -315,9 +315,9 @@ class AtomBase
 
         if (!empty($elementValue)) {
             $xmlWriter->writeElementNS(
-                $prefix, 
-                $elementName, 
-                $namespace, 
+                $prefix,
+                $elementName,
+                $namespace,
                 $elementValue
             );
         }

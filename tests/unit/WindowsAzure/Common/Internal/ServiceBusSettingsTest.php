@@ -34,7 +34,7 @@ use WindowsAzure\Common\Internal\Resources;
  * @author    Azure PHP SDK <azurephpsdk@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
- * @version   Release: @package_version@
+ * @version   Release: 0.4.0_2014-01
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
 class ServiceBusSettingsTest extends \PHPUnit_Framework_TestCase
@@ -140,7 +140,7 @@ class ServiceBusSettingsTest extends \PHPUnit_Framework_TestCase
     {
         // Setup
         $expected = 'serviceBusEndpointUri';
-        $setting = new ServiceBusSettings($expected, null, null, null);
+        $setting = new ServiceBusSettings($expected, null, null, null, null);
         
         // Test
         $actual = $setting->getServiceBusEndpointUri();
@@ -156,7 +156,7 @@ class ServiceBusSettingsTest extends \PHPUnit_Framework_TestCase
     {
         // Setup
         $expected = 'namespace';
-        $setting = new ServiceBusSettings(null, $expected, null, null);
+        $setting = new ServiceBusSettings(null, $expected, null, null, null);
         
         // Test
         $actual = $setting->getNamespace();
@@ -172,7 +172,7 @@ class ServiceBusSettingsTest extends \PHPUnit_Framework_TestCase
     {
         // Setup
         $expected = 'wrapname';
-        $setting = new ServiceBusSettings(null, null, $expected, null);
+        $setting = new ServiceBusSettings(null, null, null, $expected, null);
         
         // Test
         $actual = $setting->getWrapName();
@@ -188,7 +188,7 @@ class ServiceBusSettingsTest extends \PHPUnit_Framework_TestCase
     {
         // Setup
         $expected = 'wrappassword';
-        $setting = new ServiceBusSettings(null, null, null, $expected);
+        $setting = new ServiceBusSettings(null, null, null, null, $expected);
         
         // Test
         $actual = $setting->getWrapPassword();
@@ -205,7 +205,7 @@ class ServiceBusSettingsTest extends \PHPUnit_Framework_TestCase
         // Setup
         $namespace = 'wrapendpoint';
         $expected = "https://$namespace-sb.accesscontrol.windows.net/WRAPv0.9";
-        $setting = new ServiceBusSettings(null, $namespace, null, null);
+        $setting = new ServiceBusSettings(null, null, $expected, null, null);
         
         // Test
         $actual = $setting->getWrapEndpointUri();
@@ -236,6 +236,40 @@ class ServiceBusSettingsTest extends \PHPUnit_Framework_TestCase
         $expectedWrapPassword = 'mypassword';
         $expectedWrapEndpointUri = "https://$expectedNamespace-sb.accesscontrol.windows.net/WRAPv0.9";
         $connectionString = "eNdPoinT=$expectedServiceBusEndpoint;sHarEdsecRetiSsuer=$expectedWrapName;shArEdsecrEtvAluE=$expectedWrapPassword";
+        
+        // Test
+        $actual = ServiceBusSettings::createFromConnectionString($connectionString);
+        
+        // Assert
+        $this->assertEquals($expectedNamespace, $actual->getNamespace());
+        $this->assertEquals($expectedServiceBusEndpoint, $actual->getServiceBusEndpointUri());
+        $this->assertEquals($expectedWrapName, $actual->getWrapName());
+        $this->assertEquals($expectedWrapPassword, $actual->getWrapPassword());
+        $this->assertEquals($expectedWrapEndpointUri, $actual->getWrapEndpointUri());
+    }
+    
+    /**
+     * @covers WindowsAzure\Common\Internal\ServiceBusSettings::createFromConnectionString
+     * @covers WindowsAzure\Common\Internal\ServiceBusSettings::init
+     * @covers WindowsAzure\Common\Internal\ServiceBusSettings::__construct
+     * @covers WindowsAzure\Common\Internal\ServiceSettings::getValidator
+     * @covers WindowsAzure\Common\Internal\ServiceSettings::optional
+     * @covers WindowsAzure\Common\Internal\ServiceSettings::allRequired
+     * @covers WindowsAzure\Common\Internal\ServiceSettings::setting
+     * @covers WindowsAzure\Common\Internal\ServiceSettings::settingWithFunc
+     * @covers WindowsAzure\Common\Internal\ServiceSettings::matchedSpecification
+     * @covers WindowsAzure\Common\Internal\ServiceSettings::parseAndValidateKeys
+     * @covers WindowsAzure\Common\Internal\ServiceSettings::noMatch
+     */
+    public function testCreateFromConnectionStringWithWrapEndpoint()
+    {
+        // Setup
+        $expectedNamespace = 'mynamespace';
+        $expectedServiceBusEndpoint = "https://$expectedNamespace.servicebus.windows.net";
+        $expectedWrapName = 'myname';
+        $expectedWrapPassword = 'mypassword';
+        $expectedWrapEndpointUri = "https://mysb-sb.accesscontrol.chinacloudapi.cn/";
+        $connectionString = "Endpoint=$expectedServiceBusEndpoint;StsEndpoint=$expectedWrapEndpointUri;SharedSecretIssuer=$expectedWrapName;SharedSecretValue=$expectedWrapPassword";
         
         // Test
         $actual = ServiceBusSettings::createFromConnectionString($connectionString);

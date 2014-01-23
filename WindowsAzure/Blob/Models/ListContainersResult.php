@@ -35,41 +35,70 @@ use WindowsAzure\Blob\Models\Container;
  * @author    Azure PHP SDK <azurephpsdk@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
- * @version   Release: @package_version@
+ * @version   Release: 0.4.0_2014-01
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
 class ListContainersResult
 {
+    /**
+     * @var array
+     */
     private $_containers;
+    
+    /**
+     * @var string
+     */
     private $_prefix;
+    
+    /**
+     * @var string
+     */
     private $_marker;
+    
+    /**
+     * @var string
+     */
     private $_nextMarker;
+    
+    /**
+     * @var integer
+     */
     private $_maxResults;
+    
+    /**
+     * @var string
+     */
+    private $_accountName;
 
     /**
      * Creates ListBlobResult object from parsed XML response.
      *
      * @param array $parsedResponse XML response parsed into array.
      * 
-     * @return WindowsAzure\Blob\Models\ListBlobResult.
+     * @return ListBlobResult
      */
     public static function create($parsedResponse)
     {
-        $result              = new ListContainersResult();
-        $result->_prefix     = Utilities::tryGetValue(
+        $result               = new ListContainersResult();
+        $result->_accountName = Utilities::tryGetKeysChainValue(
+            $parsedResponse,
+            Resources::XTAG_ATTRIBUTES,
+            Resources::XTAG_ACCOUNT_NAME
+        );
+        $result->_prefix      = Utilities::tryGetValue(
             $parsedResponse, Resources::QP_PREFIX
         );
-        $result->_marker     = Utilities::tryGetValue(
+        $result->_marker      = Utilities::tryGetValue(
             $parsedResponse, Resources::QP_MARKER
         );
-        $result->_nextMarker = Utilities::tryGetValue(
+        $result->_nextMarker  = Utilities::tryGetValue(
             $parsedResponse, Resources::QP_NEXT_MARKER
         );
-        $result->_maxResults = Utilities::tryGetValue(
+        $result->_maxResults  = Utilities::tryGetValue(
             $parsedResponse, Resources::QP_MAX_RESULTS
         );
-        $result->_containers = array();
-        $rawContainer        = array();
+        $result->_containers  = array();
+        $rawContainer         = array();
         
         if ( !empty($parsedResponse['Containers']) ) {
             $containersArray = $parsedResponse['Containers']['Container'];
@@ -98,9 +127,9 @@ class ListContainersResult
     /**
      * Sets containers.
      *
-     * @param array $containers list of containers
+     * @param array $containers list of containers.
      * 
-     * @return none.
+     * @return none
      */
     public function setContainers($containers)
     {
@@ -113,7 +142,7 @@ class ListContainersResult
     /**
      * Gets containers.
      *
-     * @return array.
+     * @return array
      */
     public function getContainers()
     {
@@ -123,7 +152,7 @@ class ListContainersResult
     /**
      * Gets prefix.
      *
-     * @return string.
+     * @return string
      */
     public function getPrefix()
     {
@@ -135,7 +164,7 @@ class ListContainersResult
      *
      * @param string $prefix value.
      * 
-     * @return none.
+     * @return none
      */
     public function setPrefix($prefix)
     {
@@ -145,7 +174,7 @@ class ListContainersResult
     /**
      * Gets marker.
      * 
-     * @return string.
+     * @return string
      */
     public function getMarker()
     {
@@ -157,7 +186,7 @@ class ListContainersResult
      *
      * @param string $marker value.
      * 
-     * @return none.
+     * @return none
      */
     public function setMarker($marker)
     {
@@ -167,7 +196,7 @@ class ListContainersResult
     /**
      * Gets max results.
      * 
-     * @return string.
+     * @return string
      */
     public function getMaxResults()
     {
@@ -179,7 +208,7 @@ class ListContainersResult
      *
      * @param string $maxResults value.
      * 
-     * @return none.
+     * @return none
      */
     public function setMaxResults($maxResults)
     {
@@ -189,7 +218,7 @@ class ListContainersResult
     /**
      * Gets next marker.
      * 
-     * @return string.
+     * @return string
      */
     public function getNextMarker()
     {
@@ -201,12 +230,32 @@ class ListContainersResult
      *
      * @param string $nextMarker value.
      * 
-     * @return none.
+     * @return none
      */
     public function setNextMarker($nextMarker)
     {
         $this->_nextMarker = $nextMarker;
     }
+    
+    /**
+     * Gets account name.
+     * 
+     * @return string
+     */
+    public function getAccountName()
+    {
+        return $this->_accountName;
+    }
+
+    /**
+     * Sets account name.
+     *
+     * @param string $accountName value.
+     * 
+     * @return none
+     */
+    public function setAccountName($accountName)
+    {
+        $this->_accountName = $accountName;
+    }
 }
-
-

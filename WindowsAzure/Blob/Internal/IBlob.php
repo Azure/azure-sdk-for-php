@@ -33,7 +33,7 @@ use WindowsAzure\Common\Internal\FilterableService;
  * @author    Azure PHP SDK <azurephpsdk@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
- * @version   Release: @package_version@
+ * @version   Release: 0.4.0_2014-01
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  * @see       http://msdn.microsoft.com/en-us/library/windowsazure/dd135733.aspx
  */
@@ -479,14 +479,13 @@ interface IBlob extends FilterableService
     * 
     * @param string                    $container name of the container
     * @param string                    $blob      name of the blob
-    * @param string                    $leaseId   lease id when acquiring
     * @param Models\BlobServiceOptions $options   optional parameters
     * 
     * @return none
     * 
     * @see http://msdn.microsoft.com/en-us/library/windowsazure/ee691972.aspx
     */
-    public function breakLease($container, $blob, $leaseId, $options = null);
+    public function breakLease($container, $blob, $options = null);
 }
 
 
