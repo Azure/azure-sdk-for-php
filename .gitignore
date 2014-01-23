@@ -8,6 +8,5 @@ channel/
 *.tgz
 phpunit.xml
 cache.properties
-vendor
 nbproject
 phpcs-checkstyle.tmp
