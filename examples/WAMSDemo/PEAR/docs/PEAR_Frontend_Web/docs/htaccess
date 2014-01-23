@@ -1,6 +1,0 @@
-# replace <full_pathname_to> with
-# the correct and full path to the .htpasswd file
-AuthUserFile <full_pathname_to>/.htpasswd
-AuthType Basic
-AuthName "Web-based PEAR Frontend"
-Require valid-user
