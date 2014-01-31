@@ -591,41 +591,33 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
             $asset,
             'WindowsAzure\MediaServices\Models\Asset'
         );
+        $assetId = urlencode($assetId);
 
         $contentKeyId = Utilities::getEntityId(
             $contentKey,
             'WindowsAzure\MediaServices\Models\ContentKey'
         );
 
+        $contentKeyId = urlencode($contentKeyId);
+
         $contentWriter = new \XMLWriter();
         $contentWriter->openMemory();
-        $contentWriter->startElementNS(
-            'meta',
-            Resources::PROPERTIES,
-            Resources::DSM_XML_NAMESPACE
-        );
         $contentWriter->writeElementNS(
             'data',
             'uri',
             Resources::DS_XML_NAMESPACE,
             $this->getUri() . "ContentKeys('{$contentKeyId}')"
         );
-        $contentWriter->endElement();
-
-        $atomEntry = new Entry();
-        $atomEntry->setContent($contentWriter->outputMemory());
-
-        $xmlWriter = new \XMLWriter();
-        $xmlWriter->openMemory();
-        $atomEntry->writeXml($xmlWriter);
 
         $method      = Resources::HTTP_POST;
         $path        = "Assets('{$assetId}')/\$links/ContentKeys";
-        $headers     = array();
+        $headers     = array(
+            Resources::CONTENT_TYPE => Resources::XML_CONTENT_TYPE,
+        );
         $postParams  = array();
         $queryParams = array();
-        $statusCode  = Resources::STATUS_CREATED;
-        $body        = $xmlWriter->outputMemory();
+        $statusCode  = Resources::STATUS_NO_CONTENT;
+        $body        = $contentWriter->outputMemory();
 
         $this->send(
             $method,

@@ -255,10 +255,6 @@ class MediaServicesRestProxyTestBase extends ServiceRestProxyTestBase
     {
         parent::tearDown();
 
-        foreach($this->contentKeys as $contentKey) {
-            $this->restProxy->deleteContentKey($contentKey);
-        }
-
         foreach($this->ingestManifestFiles as $ingestManifestFile) {
             $this->restProxy->deleteIngestManifestFile($ingestManifestFile);
         }
@@ -277,6 +273,17 @@ class MediaServicesRestProxyTestBase extends ServiceRestProxyTestBase
 
         foreach($this->assets as $asset) {
             $this->restProxy->deleteAsset($asset);
+        }
+
+        foreach($this->contentKeys as $contentKey) {
+            try {
+                $this->restProxy->deleteContentKey($contentKey);
+            }
+            catch (ServiceException $e) {
+                if ($e->getCode() != 400) {
+                    throw $e;
+                }
+            }
         }
 
         foreach($this->accessPolicy as $access) {
@@ -323,5 +330,25 @@ class MediaServicesRestProxyTestBase extends ServiceRestProxyTestBase
             $attempt++;
             sleep(1);
         }
+    }
+
+    public function createCheckSum($key, $data) {
+        $key = pack('H*', $key);
+
+        $alg = MCRYPT_RIJNDAEL_128; // AES
+        $mode = MCRYPT_MODE_ECB;
+
+        $encrypted = mcrypt_encrypt($alg, $key, $data, $mode);
+
+        return base64_encode(substr($encrypted, 0, 8));
+    }
+
+    public function encryptContentKey($cert, $data) {
+        $data = pack('H*', $data);
+
+        $cryptedContentKey = '';
+        openssl_public_encrypt($data, $cryptedContentKey, $cert, OPENSSL_PKCS1_OAEP_PADDING);
+
+        return $cryptedContentKey;
     }
 }

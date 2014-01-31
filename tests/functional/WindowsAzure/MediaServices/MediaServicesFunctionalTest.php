@@ -855,19 +855,19 @@ class MediaServicesFunctionalTest extends MediaServicesRestProxyTestBase
 
         $protectionKeyId = $this->restProxy->getProtectionKeyId(ProtectionKeyTypes::X509_CERTIFICATE_THUMBPRINT);
         $protectionKey = $this->restProxy->getProtectionKey($protectionKeyId);
-        $certRes = openssl_x509_read($protectionKey);
 
-        $cryptedContentKey = '';
-        openssl_public_encrypt($aesKey, $cryptedContentKey, $certRes);
+//                 foreach(unpack('C*', $cryptedContentKey) as $b) {
+//                     echo ($b > 127 ? $b - 256 : $b) . ', ';
+//                 }
 
-        $contentKey = new ContentKey('nb:kid:UUID:' . Utilities::getGuid());
-        $contentKey->setEncryptedContentKey(base64_encode($cryptedContentKey));
+
+        $contentKey = new ContentKey('nb:kid:UUID:' . Utilities::getGuid());//'nb:kid:UUID:3116a6f2-743f-4cc8-aa4e-e71bf8996349');//'nb:kid:UUID:' . Utilities::getGuid());
+        $contentKey->setEncryptedContentKey(base64_encode($this->encryptContentKey(openssl_x509_read($protectionKey), $aesKey)));
         $contentKey->setProtectionKeyId($protectionKeyId);
         $contentKey->setProtectionKeyType(ProtectionKeyTypes::X509_CERTIFICATE_THUMBPRINT);
         $contentKey->setContentKeyType(ContentKeyTypes::STORAGE_ENCRYPTION);
-        $contentKey->setChecksum(base64_encode(md5($cryptedContentKey)));
-        print_r($contentKey);
-        $this->createContentKey($contentKey);
+        $contentKey->setChecksum($this->createCheckSum($aesKey, $contentKey->getId()));
+        $contentKey = $this->createContentKey($contentKey);
 
 
         $asset = new Asset(Asset::OPTIONS_STORAGE_ENCRYPTED);
@@ -878,12 +878,12 @@ class MediaServicesFunctionalTest extends MediaServicesRestProxyTestBase
 
         $this->uploadFileToAsset($asset);
 
-        $files = $this->restProxy->getAssetAssetFiles($asset);
+        $files = $this->restProxy->getAssetAssetFileList($asset);
         $files[0]->setIsEncrypted(true);
-        $files[0]->setEncryptedKeyId($contentKey->getId());
+        $files[0]->setEncryptionKeyId($contentKey->getId());
         $files[0]->setEncryptionScheme('StorageEncryption');
         $files[0]->setEncryptionVersion('1.0');
-        $files[0]->setInitializationVector(openssl_random_pseudo_bytes(8));
+        $files[0]->setInitializationVector(base64_encode(openssl_random_pseudo_bytes(8)));
         $this->restProxy->updateAssetFile($files[0]);
 
     }

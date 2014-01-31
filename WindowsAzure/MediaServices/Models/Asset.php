@@ -178,7 +178,7 @@ class Asset
      */
     public function __construct($options)
     {
-        $this->options = $options;
+        $this->_options = $options;
     }
 
     /**
