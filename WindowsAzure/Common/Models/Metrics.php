@@ -11,7 +11,7 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- * 
+ *
  * PHP version 5
  *
  * @category  Microsoft
@@ -21,7 +21,7 @@
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
- 
+
 namespace WindowsAzure\Common\Models;
 use WindowsAzure\Common\Internal\Utilities;
 
@@ -40,35 +40,35 @@ class Metrics
 {
     /**
      * The version of Storage Analytics to configure
-     * 
+     *
      * @var string
      */
     private $_version;
-    
+
     /**
      * Indicates whether metrics is enabled for the storage service
-     * 
+     *
      * @var bool
      */
     private $_enabled;
-    
+
     /**
      * Indicates whether a retention policy is enabled for the storage service
-     * 
+     *
      * @var bool
      */
     private $_includeAPIs;
-    
+
     /**
      * @var WindowsAzure\Common\Models\RetentionPolicy
      */
     private $_retentionPolicy;
-    
+
     /**
      * Creates object from $parsedResponse.
-     * 
+     *
      * @param array $parsedResponse XML response parsed into array.
-     * 
+     *
      * @return WindowsAzure\Common\Models\Metrics
      */
     public static function create($parsedResponse)
@@ -84,103 +84,103 @@ class Metrics
         $result->setRetentionPolicy(
             RetentionPolicy::create($parsedResponse['RetentionPolicy'])
         );
-        
+
         return $result;
     }
-    
+
     /**
      * Gets retention policy
-     * 
+     *
      * @return WindowsAzure\Common\Models\RetentionPolicy
-     *  
+     *
      */
     public function getRetentionPolicy()
     {
         return $this->_retentionPolicy;
     }
-    
+
     /**
      * Sets retention policy
-     * 
+     *
      * @param RetentionPolicy $policy object to use
-     * 
-     * @return none.
+     *
+     * @return void.
      */
     public function setRetentionPolicy($policy)
     {
         $this->_retentionPolicy = $policy;
     }
-    
+
     /**
      * Gets include APIs.
-     * 
-     * @return bool. 
+     *
+     * @return bool.
      */
     public function getIncludeAPIs()
     {
         return $this->_includeAPIs;
     }
-    
+
     /**
      * Sets include APIs.
-     * 
+     *
      * @param $bool $includeAPIs value to use.
-     * 
-     * @return none. 
+     *
+     * @return void.
      */
     public function setIncludeAPIs($includeAPIs)
     {
         $this->_includeAPIs = $includeAPIs;
     }
-    
+
     /**
      * Gets enabled.
-     * 
-     * @return bool. 
+     *
+     * @return bool.
      */
     public function getEnabled()
     {
         return $this->_enabled;
     }
-    
+
     /**
      * Sets enabled.
-     * 
+     *
      * @param bool $enabled value to use.
-     * 
-     * @return none. 
+     *
+     * @return void.
      */
     public function setEnabled($enabled)
     {
         $this->_enabled = $enabled;
     }
-    
+
     /**
      * Gets version
-     * 
+     *
      * @return string.
      */
     public function getVersion()
     {
         return $this->_version;
     }
-    
+
     /**
      * Sets version
-     * 
+     *
      * @param string $version new value.
-     * 
-     * @return none.
+     *
+     * @return void.
      */
     public function setVersion($version)
     {
         $this->_version = $version;
     }
-    
+
     /**
      * Converts this object to array with XML tags
-     * 
-     * @return array. 
+     *
+     * @return array.
      */
     public function toArray()
     {
@@ -194,7 +194,7 @@ class Metrics
         $array['RetentionPolicy'] = !empty($this->_retentionPolicy)
             ? $this->_retentionPolicy->toArray()
             : null;
-        
+
         return $array;
     }
 }

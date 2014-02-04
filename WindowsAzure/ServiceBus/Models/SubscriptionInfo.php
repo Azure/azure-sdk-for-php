@@ -11,7 +11,7 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- * 
+ *
  * PHP version 5
  *
  * @category  Microsoft
@@ -21,7 +21,7 @@
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link      https://github.com/WindowsAzure/azure-sdk-for-php
  */
- 
+
 namespace WindowsAzure\ServiceBus\Models;
 
 use WindowsAzure\Common\Internal\Atom\Entry;
@@ -31,6 +31,7 @@ use WindowsAzure\Common\Internal\Resources;
 use WindowsAzure\Common\Internal\Utilities;
 use WindowsAzure\Common\Internal\Validate;
 use WindowsAzure\ServiceBus\Models\SubscriptionDescription;
+use XMLWriter;
 
 /**
  * The information of a subscription.
@@ -48,13 +49,13 @@ class SubscriptionInfo extends Entry
     /**
      * The entry of the subscription info.
      *
-     * @var Entry 
+     * @var Entry
      */
     private $_entry;
 
-    /** 
-     * The description of the subscription. 
-     * 
+    /**
+     * The description of the subscription.
+     *
      * @var SubscriptionDescription
      */
     private $_subscriptionDescription;
@@ -62,13 +63,13 @@ class SubscriptionInfo extends Entry
     /**
      * Creates a SubscriptionInfo instance with specified parameters.
      *
-     * @param string                  $title                   The title of 
+     * @param string                  $title                   The title of
      * the subscription.
-     * @param SubscriptionDescription $subscriptionDescription The description 
+     * @param SubscriptionDescription $subscriptionDescription The description
      * of the subscription.
      */
     public function __construct(
-        $title = Resources::EMPTY_STRING, 
+        $title = Resources::EMPTY_STRING,
         $subscriptionDescription = null
     ) {
         Validate::isString($title, 'title');
@@ -85,12 +86,12 @@ class SubscriptionInfo extends Entry
     }
 
     /**
-     * Populates the properties of the subscription info instance with a XML string. 
-     * 
-     * @param string $entryXml A XML string representing a subscription 
+     * Populates the properties of the subscription info instance with a XML string.
+     *
+     * @param string $entryXml A XML string representing a subscription
      * information instance.
-     * 
-     * @return none
+     *
+     * @return void
      */
     public function parseXml($entryXml)
     {
@@ -106,11 +107,11 @@ class SubscriptionInfo extends Entry
     }
 
     /**
-     * Writes XML based on the subscription information. 
-     * 
-     * @param XMLWriter $xmlWriter The XML writer. 
-     * 
-     * @return none
+     * Writes XML based on the subscription information.
+     *
+     * @param XMLWriter $xmlWriter The XML writer.
+     *
+     * @return void
      */
     public function writeXml($xmlWriter)
     {
@@ -140,16 +141,16 @@ class SubscriptionInfo extends Entry
 
     /**
      * Sets the entry of the subscription info.
-     * 
+     *
      * @param Entry $entry The entry of the subscription info.
      *
-     * @return none
+     * @return void
      */
     public function setEntry($entry)
     {
         $this->_entry = $entry;
     }
-    
+
     /**
      * Gets the title.
      *
@@ -165,7 +166,7 @@ class SubscriptionInfo extends Entry
      *
      * @param string $title The title of the queue info.
      *
-     * @return none
+     * @return void
      */
     public function setTitle($title)
     {
@@ -173,9 +174,9 @@ class SubscriptionInfo extends Entry
     }
 
     /**
-     * Gets the subscription description. 
+     * Gets the subscription description.
      *
-     * @return none
+     * @return void
      */
     public function getSubscriptionDescription()
     {
@@ -183,18 +184,18 @@ class SubscriptionInfo extends Entry
     }
 
     /**
-     * Sets the subscription description. 
-     * 
-     * @param string $subscriptionDescription The description of 
-     * the subscription. 
-     * 
-     * @return none
+     * Sets the subscription description.
+     *
+     * @param string $subscriptionDescription The description of
+     * the subscription.
+     *
+     * @return void
      */
     public function setSubscriptionDescription($subscriptionDescription)
     {
         $this->_subscriptionDescription = $subscriptionDescription;
     }
-    
+
     /**
      * Gets the lock duration.
      *
@@ -204,13 +205,13 @@ class SubscriptionInfo extends Entry
     {
         return $this->_subscriptionDescription->getLockDuration();
     }
-    
+
     /**
      * Sets the lock duration.
      *
-     * @param string $lockDuration The duration of the lock. 
-     * 
-     * @return none
+     * @param string $lockDuration The duration of the lock.
+     *
+     * @return void
      */
     public function setLockDuration($lockDuration)
     {
@@ -219,7 +220,7 @@ class SubscriptionInfo extends Entry
 
     /**
      * Gets requires session.
-     * 
+     *
      * @return boolean
      */
     public function getRequiresSession()
@@ -229,10 +230,10 @@ class SubscriptionInfo extends Entry
 
     /**
      * Sets the requires session.
-     * 
-     * @param boolean $requiresSession The requires session. 
-     * 
-     * @return none
+     *
+     * @param boolean $requiresSession The requires session.
+     *
+     * @return void
      */
     public function setRequiresSession($requiresSession)
     {
@@ -240,9 +241,9 @@ class SubscriptionInfo extends Entry
     }
 
     /**
-     * Gets default message time to live. 
-     * 
-     * @return string 
+     * Gets default message time to live.
+     *
+     * @return string
      */
     public function getDefaultMessageTimeToLive()
     {
@@ -250,22 +251,22 @@ class SubscriptionInfo extends Entry
     }
 
     /**
-     * Sets default message time to live. 
-     * 
-     * @param string $defaultMessageTimeToLive The default message time to live. 
-     * 
-     * @return none
+     * Sets default message time to live.
+     *
+     * @param string $defaultMessageTimeToLive The default message time to live.
+     *
+     * @return void
      */
     public function setDefaultMessageTimeToLive($defaultMessageTimeToLive)
-    {   
+    {
         $this->_subscriptionDescription->setDefaultMessageTimeToLive(
             $defaultMessageTimeToLive
         );
     }
 
     /**
-     * Gets dead lettering on message expiration. 
-     * 
+     * Gets dead lettering on message expiration.
+     *
      * @return string
      */
     public function getDeadLetteringOnMessageExpiration()
@@ -274,13 +275,13 @@ class SubscriptionInfo extends Entry
         return $subscriptionDesc->getDeadLetteringOnMessageExpiration();
     }
 
-    /** 
+    /**
      * Sets dead lettering on message expiration.
-     * 
-     * @param string $deadLetteringOnMessageExpiration The dead lettering 
+     *
+     * @param string $deadLetteringOnMessageExpiration The dead lettering
      * on message expiration.
-     * 
-     * @return none
+     *
+     * @return void
      */
     public function setDeadLetteringOnMessageExpiration(
         $deadLetteringOnMessageExpiration
@@ -291,9 +292,9 @@ class SubscriptionInfo extends Entry
     }
 
     /**
-     * Gets dead lettering on filter evaluation exceptions. 
-     * 
-     * @return string 
+     * Gets dead lettering on filter evaluation exceptions.
+     *
+     * @return string
      */
     public function getDeadLetteringOnFilterEvaluationExceptions()
     {
@@ -302,12 +303,12 @@ class SubscriptionInfo extends Entry
     }
 
     /**
-     * Sets dead lettering on filter evaluation exceptions. 
-     * 
-     * @param string $deadLetteringOnFilterEvaluationExceptions Sets dead lettering 
-     * on filter evaluation exceptions. 
-     * 
-     * @return none
+     * Sets dead lettering on filter evaluation exceptions.
+     *
+     * @param string $deadLetteringOnFilterEvaluationExceptions Sets dead lettering
+     * on filter evaluation exceptions.
+     *
+     * @return void
      */
     public function setDeadLetteringOnFilterEvaluationExceptions(
         $deadLetteringOnFilterEvaluationExceptions
@@ -319,9 +320,9 @@ class SubscriptionInfo extends Entry
     }
 
     /**
-     * Gets the default rule description. 
-     * 
-     * @return RuleDescription 
+     * Gets the default rule description.
+     *
+     * @return RuleDescription
      */
     public function getDefaultRuleDescription()
     {
@@ -330,10 +331,10 @@ class SubscriptionInfo extends Entry
 
     /**
      * Sets the default rule description.
-     * 
-     * @param string $defaultRuleDescription The default rule description. 
      *
-     * @return none
+     * @param string $defaultRuleDescription The default rule description.
+     *
+     * @return void
      */
     public function setDefaultRuleDescription($defaultRuleDescription)
     {
@@ -343,21 +344,21 @@ class SubscriptionInfo extends Entry
     }
 
     /**
-     * Gets the count of the message. 
-     * 
+     * Gets the count of the message.
+     *
      * @return integer
      */
     public function getMessageCount()
     {
         return $this->_subscriptionDescription->getMessageCount();
-    } 
+    }
 
     /**
      * Sets the count of the message.
-     * 
-     * @param string $messageCount The count of the message. 
      *
-     * @return none
+     * @param string $messageCount The count of the message.
+     *
+     * @return void
      */
     public function setMessageCount($messageCount)
     {
@@ -366,7 +367,7 @@ class SubscriptionInfo extends Entry
 
     /**
      * Gets maximum delivery count.
-     * 
+     *
      * @return integer
      */
     public function getMaxDeliveryCount()
@@ -375,11 +376,11 @@ class SubscriptionInfo extends Entry
     }
 
     /**
-     * Sets maximum delivery count. 
-     * 
-     * @param integer $maxDeliveryCount The maximum delivery count. 
+     * Sets maximum delivery count.
      *
-     * @return none
+     * @param integer $maxDeliveryCount The maximum delivery count.
+     *
+     * @return void
      */
     public function setMaxDeliveryCount($maxDeliveryCount)
     {
@@ -387,8 +388,8 @@ class SubscriptionInfo extends Entry
     }
 
     /**
-     * Gets enable batched operations. 
-     * 
+     * Gets enable batched operations.
+     *
      * @return boolean
      */
     public function getEnableBatchedOperations()
@@ -397,11 +398,11 @@ class SubscriptionInfo extends Entry
     }
 
     /**
-     * Sets enable batched operations. 
-     * 
-     * @param boolean $enableBatchedOperations Enable batched operations. 
-     * 
-     * @return none
+     * Sets enable batched operations.
+     *
+     * @param boolean $enableBatchedOperations Enable batched operations.
+     *
+     * @return void
      */
     public function setEnableBatchedOperations($enableBatchedOperations)
     {

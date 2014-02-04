@@ -11,7 +11,7 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- * 
+ *
  * PHP version 5
  *
  * @category  Microsoft
@@ -21,10 +21,11 @@
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
- 
+
 namespace WindowsAzure\Table\Models;
 use WindowsAzure\Common\Internal\Utilities;
 use WindowsAzure\Common\Internal\Resources;
+use WindowsAzure\Table\Internal\IAtomReaderWriter;
 
 /**
  * Holds result of calling insertEntity wrapper
@@ -43,16 +44,16 @@ class InsertEntityResult
      * @var Entity
      */
     private $_entity;
-    
+
     /**
      * Create InsertEntityResult object from HTTP response parts.
-     * 
+     *
      * @param string            $body           The HTTP response body.
      * @param array             $headers        The HTTP response headers.
      * @param IAtomReaderWriter $atomSerializer The atom reader and writer.
-     * 
+     *
      * @return \WindowsAzure\Table\Models\InsertEntityResult
-     * 
+     *
      * @static
      */
     public static function create($body, $headers, $atomSerializer)
@@ -61,26 +62,26 @@ class InsertEntityResult
         $entity = $atomSerializer->parseEntity($body);
         $entity->setETag(Utilities::tryGetValue($headers, Resources::ETAG));
         $result->setEntity($entity);
-        
+
         return $result;
     }
-    
+
     /**
      * Gets table entity.
-     * 
+     *
      * @return Entity
      */
     public function getEntity()
     {
         return $this->_entity;
     }
-    
+
     /**
      * Sets table entity.
-     * 
+     *
      * @param Entity $entity The table entity instance.
-     * 
-     * @return none
+     *
+     * @return void
      */
     public function setEntity($entity)
     {

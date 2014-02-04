@@ -11,7 +11,7 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- * 
+ *
  * PHP version 5
  *
  * @category  Microsoft
@@ -21,7 +21,7 @@
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
- 
+
 namespace WindowsAzure\ServiceManagement\Models;
 use WindowsAzure\Common\Internal\Resources;
 use WindowsAzure\Common\Internal\Utilities;
@@ -43,23 +43,23 @@ class GetAffinityGroupPropertiesResult
      * @var AffinityGroup
      */
     private $_affinityGroup;
-    
+
     /**
      * @var array
      */
     private $_hostedServices;
-    
+
     /**
      * @var array
      */
     private $_storageServices;
-    
+
     /**
      * Creates GetAffinityGroupPropertiesResult from parsed response into array.
-     * 
+     *
      * @param array $parsed The parsed HTTP response body.
-     * 
-     * @return GetAffinityGroupPropertiesResult 
+     *
+     * @return GetAffinityGroupPropertiesResult
      */
     public static function create($parsed)
     {
@@ -72,82 +72,82 @@ class GetAffinityGroupPropertiesResult
             Resources::XTAG_STORAGE_SERVICES,
             $parsed
         );
-        
+
         $result->_affinityGroup = new AffinityGroup($parsed);
-        
+
         foreach ($hostedServices as $value) {
             $service                   = new HostedService($value);
             $result->_hostedServices[] = $service;
         }
-        
+
         foreach ($storageServices as $value) {
             $service                    = new StorageService($value);
             $result->_storageServices[] = $service;
         }
-        
+
         return $result;
     }
-    
+
     /**
      * Gets the affinityGroup.
-     * 
-     * @return AffinityGroup 
+     *
+     * @return AffinityGroup
      */
     public function getAffinityGroup()
     {
         return $this->_affinityGroup;
     }
-    
+
     /**
      * Sets the affinityGroup.
-     * 
+     *
      * @param AffinityGroup $affinityGroup The affinityGroup.
-     * 
-     * @return none
+     *
+     * @return void
      */
     public function setAffinityGroup($affinityGroup)
     {
         $this->_affinityGroup = $affinityGroup;
     }
-    
+
     /**
      * Gets the hostedServices.
-     * 
-     * @return array 
+     *
+     * @return array
      */
     public function getHostedServices()
     {
         return $this->_hostedServices;
     }
-    
+
     /**
      * Sets the hostedServices.
-     * 
+     *
      * @param array $hostedServices The hostedServices.
-     * 
-     * @return none
+     *
+     * @return void
      */
     public function setHostedServices($hostedServices)
     {
         $this->_hostedServices = $hostedServices;
     }
-    
+
     /**
      * Gets the storageServices.
-     * 
-     * @return array 
+     *
+     * @return array
      */
     public function getStorageServices()
     {
         return $this->_storageServices;
     }
-    
+
     /**
      * Sets the storageServices.
-     * 
+     *
      * @param array $storageServices The storageServices.
-     * 
-     * @return none
+     *
+     * @return void
      */
     public function setStorageServices($storageServices)
     {

@@ -11,7 +11,7 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- * 
+ *
  * PHP version 5
  *
  * @category  Microsoft
@@ -21,7 +21,7 @@
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
- 
+
 namespace WindowsAzure\Table\Models\Filters;
 use WindowsAzure\Table\Models\EdmType;
 
@@ -39,18 +39,18 @@ use WindowsAzure\Table\Models\EdmType;
 class ConstantFilter extends Filter
 {
     /**
-     * @var mix
+     * @var mixed
      */
     private $_value;
-    
+
     /**
      * @var string
      */
     private $_edmType;
-    
+
     /**
      * Constructor.
-     * 
+     *
      * @param string $edmType The EDM type.
      * @param string $value   The EDM value.
      */
@@ -62,17 +62,17 @@ class ConstantFilter extends Filter
 
     /**
      * Gets value
-     * 
-     * @return mix 
+     *
+     * @return mixed
      */
     public function getValue()
     {
         return $this->_value;
     }
-    
+
     /**
      * Gets the type of the constant.
-     * 
+     *
      * @return string
      */
     public function getEdmType()

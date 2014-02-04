@@ -11,7 +11,7 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- * 
+ *
  * PHP version 5
  *
  * @category  Microsoft
@@ -21,7 +21,7 @@
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
- 
+
 namespace WindowsAzure\Blob\Models;
 use WindowsAzure\Common\Internal\Resources;
 use WindowsAzure\Common\Internal\Validate;
@@ -40,22 +40,22 @@ use WindowsAzure\Common\Internal\Utilities;
  */
 class SetBlobMetadataResult
 {
-    
+
     /**
      * @var \DateTime
      */
     private $_lastModified;
-    
+
     /**
      * @var string
      */
     private $_etag;
-    
+
     /**
      * Creates SetBlobMetadataResult from response headers.
-     * 
+     *
      * @param array $headers response headers
-     * 
+     *
      * @return SetBlobMetadataResult
      */
     public static function create($headers)
@@ -64,10 +64,10 @@ class SetBlobMetadataResult
         $date   = $headers[Resources::LAST_MODIFIED];
         $result->setLastModified(Utilities::rfc1123ToDateTime($date));
         $result->setETag($headers[Resources::ETAG]);
-        
+
         return $result;
     }
-    
+
     /**
      * Gets blob lastModified.
      *
@@ -83,7 +83,7 @@ class SetBlobMetadataResult
      *
      * @param \DateTime $lastModified value.
      *
-     * @return none.
+     * @return void.
      */
     public function setLastModified($lastModified)
     {
@@ -106,7 +106,7 @@ class SetBlobMetadataResult
      *
      * @param string $etag value.
      *
-     * @return none.
+     * @return void.
      */
     public function setETag($etag)
     {

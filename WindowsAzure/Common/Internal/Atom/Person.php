@@ -11,7 +11,7 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- * 
+ *
  * PHP version 5
  *
  * @category  Microsoft
@@ -42,27 +42,27 @@ use WindowsAzure\Common\Internal\Validate;
 class Person extends AtomBase
 {
     /**
-     * The name of the person. 
+     * The name of the person.
      *
-     * @var string  
+     * @var string
      */
     protected $name;
 
     /**
-     * The Uri of the person. 
+     * The Uri of the person.
      *
-     * @var string  
+     * @var string
      */
     protected $uri;
 
     /**
      * The email of the person.
      *
-     * @var string 
+     * @var string
      */
     protected $email;
-     
-    /** 
+
+    /**
      * Creates an ATOM person instance with specified name.
      *
      * @param string $name The name of the person.
@@ -73,12 +73,12 @@ class Person extends AtomBase
     }
 
     /**
-     * Populates the properties with a specified XML string. 
-     * 
-     * @param string $xmlString An XML based string representing 
-     * the Person instance. 
-     * 
-     * @return none
+     * Populates the properties with a specified XML string.
+     *
+     * @param string $xmlString An XML based string representing
+     * the Person instance.
+     *
+     * @return void
      */
     public function parseXml($xmlString)
     {
@@ -99,31 +99,31 @@ class Person extends AtomBase
         }
     }
 
-    /** 
-     * Gets the name of the person. 
+    /**
+     * Gets the name of the person.
      *
      * @return string
      */
     public function getName()
-    {   
-        return $this->name;
-    } 
-
-    /**
-     * Sets the name of the person.
-     * 
-     * @param string $name The name of the person.
-     * 
-     * @return none
-     */
-    public function setName($name)
     {
-        $this->name = $name; 
+        return $this->name;
     }
 
     /**
-     * Gets the URI of the person. 
-     * 
+     * Sets the name of the person.
+     *
+     * @param string $name The name of the person.
+     *
+     * @return void
+     */
+    public function setName($name)
+    {
+        $this->name = $name;
+    }
+
+    /**
+     * Gets the URI of the person.
+     *
      * @return string
      */
     public function getUri()
@@ -132,21 +132,21 @@ class Person extends AtomBase
     }
 
     /**
-     * Sets the URI of the person. 
-     * 
+     * Sets the URI of the person.
+     *
      * @param string $uri The URI of the person.
-     * 
-     * @return none
+     *
+     * @return void
      */
     public function setUri($uri)
     {
         $this->uri = $uri;
     }
 
-    
+
     /**
-     * Gets the email of the person. 
-     * 
+     * Gets the email of the person.
+     *
      * @return string
      */
     public function getEmail()
@@ -155,23 +155,23 @@ class Person extends AtomBase
     }
 
     /**
-     * Sets the email of the person. 
-     * 
+     * Sets the email of the person.
+     *
      * @param string $email The email of the person.
-     * 
-     * @return none
+     *
+     * @return void
      */
     public function setEmail($email)
     {
         $this->email = $email;
     }
 
-    /** 
-     * Writes an XML representing the person. 
-     * 
+    /**
+     * Writes an XML representing the person.
+     *
      * @param \XMLWriter $xmlWriter The XML writer.
-     * 
-     * @return none
+     *
+     * @return void
      */
     public function writeXml($xmlWriter)
     {
@@ -185,19 +185,19 @@ class Person extends AtomBase
         $xmlWriter->endElement();
     }
 
-    /** 
-     * Writes a inner XML representing the person. 
-     * 
+    /**
+     * Writes a inner XML representing the person.
+     *
      * @param \XMLWriter $xmlWriter The XML writer.
-     * 
-     * @return none
+     *
+     * @return void
      */
     public function writeInnerXml($xmlWriter)
     {
         Validate::notNull($xmlWriter, 'xmlWriter');
         $xmlWriter->writeElementNS(
             'atom',
-            'name', 
+            'name',
             Resources::ATOM_NAMESPACE,
             $this->name
         );
@@ -205,7 +205,7 @@ class Person extends AtomBase
         $this->writeOptionalElementNS(
             $xmlWriter,
             'atom',
-            'uri', 
+            'uri',
             Resources::ATOM_NAMESPACE,
             $this->uri
         );
@@ -213,7 +213,7 @@ class Person extends AtomBase
         $this->writeOptionalElementNS(
             $xmlWriter,
             'atom',
-            'email', 
+            'email',
             Resources::ATOM_NAMESPACE,
             $this->email
         );

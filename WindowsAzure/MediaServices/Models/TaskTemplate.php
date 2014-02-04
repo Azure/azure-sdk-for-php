@@ -185,7 +185,7 @@ class TaskTemplate
      *
      * @param array $options Array containing values for object properties
      *
-     * @return none
+     * @return void
      */
     public function fromArray($options)
     {
@@ -299,7 +299,7 @@ class TaskTemplate
      *
      * @param string $value Name
      *
-     * @return none
+     * @return void
      */
     public function setName($value)
     {
@@ -331,7 +331,7 @@ class TaskTemplate
      *
      * @param string $value Initialization vector
      *
-     * @return none
+     * @return void
      */
     public function setInitializationVector($value)
     {
@@ -353,7 +353,7 @@ class TaskTemplate
      *
      * @param string $value Encryption version
      *
-     * @return none
+     * @return void
      */
     public function setEncryptionVersion($value)
     {
@@ -375,7 +375,7 @@ class TaskTemplate
      *
      * @param string $value Encryption scheme
      *
-     * @return none
+     * @return void
      */
     public function setEncryptionScheme($value)
     {
@@ -397,7 +397,7 @@ class TaskTemplate
      *
      * @param string $value Encription key id
      *
-     * @return none
+     * @return void
      */
     public function setEncryptionKeyId($value)
     {
@@ -429,7 +429,7 @@ class TaskTemplate
      *
      * @param string $value Media procesot id
      *
-     * @return none
+     * @return void
      */
     public function setMediaProcessorId($value)
     {
@@ -451,7 +451,7 @@ class TaskTemplate
      *
      * @param string $value Configuration
      *
-     * @return none
+     * @return void
      */
     public function setConfiguration($value)
     {
@@ -493,7 +493,7 @@ class TaskTemplate
      *
      * @param string $value Description
      *
-     * @return none
+     * @return void
      */
     public function setDescription($value)
     {
@@ -515,7 +515,7 @@ class TaskTemplate
      *
      * @param int $value Number of output assets
      *
-     * @return none
+     * @return void
      */
     public function setNumberofOutputAssets($value)
     {
@@ -537,7 +537,7 @@ class TaskTemplate
      *
      * @param int $value Number of input assets
      *
-     * @return none
+     * @return void
      */
     public function setNumberofInputAssets($value)
     {

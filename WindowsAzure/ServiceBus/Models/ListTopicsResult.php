@@ -11,7 +11,7 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- * 
+ *
  * PHP version 5
  *
  * @category  Microsoft
@@ -28,7 +28,7 @@ use WindowsAzure\Common\Internal\Atom\Feed;
 use WindowsAzure\Common\Internal\Atom\Entry;
 
 /**
- * The result of a list topics request. 
+ * The result of a list topics request.
  *
  * @category  Microsoft
  * @package   WindowsAzure\ServiceBus\Models
@@ -41,41 +41,41 @@ use WindowsAzure\Common\Internal\Atom\Entry;
 class ListTopicsResult extends Feed
 {
     /**
-     * Gets the information of the topic. 
-     * 
+     * Gets the information of the topic.
+     *
      * @var array
-     */ 
+     */
     private $_topicInfos;
 
     /**
      * Populates the properties with a the response from the list topics request.
-     * 
-     * @param string $response The body of the response of the list topics request. 
-     * 
-     * @return none
-     */ 
+     *
+     * @param string $response The body of the response of the list topics request.
+     *
+     * @return void
+     */
     public function parseXml($response)
     {
         parent::parseXml($response);
         $listTopicsResultXml = new \SimpleXMLElement($response);
         $this->_topicInfos   = array();
         foreach ($listTopicsResultXml->entry as $entry) {
-            $topicInfo = new TopicInfo();   
+            $topicInfo = new TopicInfo();
             $topicInfo->parseXml($entry->asXml());
             $this->_topicInfos[] = $topicInfo;
-        } 
+        }
     }
 
     /**
-     * Creates a list topics result with default parameters. 
+     * Creates a list topics result with default parameters.
      */
     public function __construct()
     {
     }
 
     /**
-     * Gets the information of the topic. 
-     *  
+     * Gets the information of the topic.
+     *
      * @return array
      */
     public function getTopicInfos()
@@ -86,9 +86,9 @@ class ListTopicsResult extends Feed
     /**
      * Sets the topic information.
      *
-     * @param array $topicInfos The information of the topics. 
-     * 
-     * @return none
+     * @param array $topicInfos The information of the topics.
+     *
+     * @return void
      */
     public function setTopicInfos($topicInfos)
     {

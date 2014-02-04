@@ -86,7 +86,7 @@ class AtomBase
      * @param string $attributeKey   The key of the attribute.
      * @param mixed  $attributeValue The value of the attribute.
      *
-     * @return none
+     * @return void
      */
     public function setAttribute($attributeKey, $attributeValue)
     {
@@ -98,7 +98,7 @@ class AtomBase
      *
      * @param string $attributeKey The key of the attribute.
      *
-     * @return none
+     * @return void
      */
     public function getAttribute($attributeKey)
     {
@@ -274,7 +274,7 @@ class AtomBase
      * @param string     $attributeName  The name of the attribute.
      * @param mixed      $attributeValue The value of the attribute.
      *
-     * @return none
+     * @return void
      */
     protected function writeOptionalAttribute(
         $xmlWriter,
@@ -301,7 +301,7 @@ class AtomBase
      * @param string     $namespace    The namespace name.
      * @param string     $elementValue The element value.
      *
-     * @return none
+     * @return void
      */
     protected function writeOptionalElementNS(
         $xmlWriter,

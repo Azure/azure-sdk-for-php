@@ -11,7 +11,7 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- * 
+ *
  * PHP version 5
  *
  * @category  Microsoft
@@ -42,18 +42,18 @@ use WindowsAzure\ServiceBus\Models\RuleInfo;
 class ListRulesResult extends Feed
 {
     /**
-     * The information of the rule. 
-     * 
+     * The information of the rule.
+     *
      * @var array
      */
     private $_ruleInfos;
 
-    /** 
+    /**
      * Populates the properties with the response from the list rules request.
-     * 
-     * @param string $response The body of the response of the list rules request. 
-     * 
-     * @return none
+     *
+     * @param string $response The body of the response of the list rules request.
+     *
+     * @return void
      */
     public function parseXml($response)
     {
@@ -69,15 +69,15 @@ class ListRulesResult extends Feed
     }
 
     /**
-     * Creates a list rules result instance with default parameters. 
+     * Creates a list rules result instance with default parameters.
      */
     public function __construct()
     {
     }
 
     /**
-     * Gets the information of the rules. 
-     * 
+     * Gets the information of the rules.
+     *
      * @return array
      */
     public function getRuleInfos()
@@ -85,13 +85,13 @@ class ListRulesResult extends Feed
         return $this->_ruleInfos;
     }
 
-    /** 
-     * Sets the information of the rule. 
-     * 
-     * @param array $ruleInfos The information of the rule. 
-     * 
-     * @return none
-     */ 
+    /**
+     * Sets the information of the rule.
+     *
+     * @param array $ruleInfos The information of the rule.
+     *
+     * @return void
+     */
     public function setRuleInfos($ruleInfos)
     {
         $this->_ruleInfos = $ruleInfos;

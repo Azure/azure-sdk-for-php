@@ -11,7 +11,7 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- * 
+ *
  * PHP version 5
  *
  * @category  Microsoft
@@ -21,7 +21,7 @@
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
- 
+
 namespace WindowsAzure\Table\Models\Filters;
 
 /**
@@ -39,24 +39,24 @@ class Filter
 {
     /**
      * Apply and operation between two filters
-     * 
+     *
      * @param Filter $left  The left filter
      * @param Filter $right The right filter
-     * 
-     * @return \WindowsAzure\Table\Models\Filters\BinaryFilter 
+     *
+     * @return \WindowsAzure\Table\Models\Filters\BinaryFilter
      */
     public static function applyAnd($left, $right)
     {
         $filter = new BinaryFilter($left, 'and', $right);
         return $filter;
     }
-   
+
     /**
      * Applies not operation on $operand
-     * 
+     *
      * @param Filter $operand The operand
-     * 
-     * @return \WindowsAzure\Table\Models\Filters\UnaryFilter 
+     *
+     * @return \WindowsAzure\Table\Models\Filters\UnaryFilter
      */
     public static function applyNot($operand)
     {
@@ -66,10 +66,10 @@ class Filter
 
     /**
      * Apply or operation on the passed filers
-     * 
+     *
      * @param Filter $left  The left operand
      * @param Filter $right The right operand
-     * 
+     *
      * @return BinaryFilter
      */
     public static function applyOr($left, $right)
@@ -80,10 +80,10 @@ class Filter
 
     /**
      * Apply eq operation on the passed filers
-     * 
+     *
      * @param Filter $left  The left operand
      * @param Filter $right The right operand
-     * 
+     *
      * @return BinaryFilter
      */
     public static function applyEq($left, $right)
@@ -94,10 +94,10 @@ class Filter
 
     /**
      * Apply ne operation on the passed filers
-     * 
+     *
      * @param Filter $left  The left operand
      * @param Filter $right The right operand
-     * 
+     *
      * @return BinaryFilter
      */
     public static function applyNe($left, $right)
@@ -108,10 +108,10 @@ class Filter
 
     /**
      * Apply ge operation on the passed filers
-     * 
+     *
      * @param Filter $left  The left operand
      * @param Filter $right The right operand
-     * 
+     *
      * @return BinaryFilter
      */
     public static function applyGe($left, $right)
@@ -122,10 +122,10 @@ class Filter
 
     /**
      * Apply gt operation on the passed filers
-     * 
+     *
      * @param Filter $left  The left operand
      * @param Filter $right The right operand
-     * 
+     *
      * @return BinaryFilter
      */
     public static function applyGt($left, $right)
@@ -136,10 +136,10 @@ class Filter
 
     /**
      * Apply lt operation on the passed filers
-     * 
+     *
      * @param Filter $left  The left operand
      * @param Filter $right The right operand
-     * 
+     *
      * @return BinaryFilter
      */
     public static function applyLt($left, $right)
@@ -150,10 +150,10 @@ class Filter
 
     /**
      * Apply le operation on the passed filers
-     * 
+     *
      * @param Filter $left  The left operand
      * @param Filter $right The right operand
-     * 
+     *
      * @return BinaryFilter
      */
     public static function applyLe($left, $right)
@@ -164,11 +164,11 @@ class Filter
 
     /**
      * Apply constant filter on value.
-     * 
-     * @param mix    $value   The filter value
+     *
+     * @param mixed   $value   The filter value
      * @param string $edmType The value EDM type.
-     * 
-     * @return \WindowsAzure\Table\Models\Filters\ConstantFilter 
+     *
+     * @return \WindowsAzure\Table\Models\Filters\ConstantFilter
      */
     public static function applyConstant($value, $edmType = null)
     {
@@ -178,10 +178,10 @@ class Filter
 
     /**
      * Apply propertyName filter on $value
-     * 
+     *
      * @param string $value The filter value
-     * 
-     * @return \WindowsAzure\Table\Models\Filters\PropertyNameFilter 
+     *
+     * @return \WindowsAzure\Table\Models\Filters\PropertyNameFilter
      */
     public static function applyPropertyName($value)
     {
@@ -191,10 +191,10 @@ class Filter
 
     /**
      * Takes raw string filter
-     * 
+     *
      * @param string $value The raw string filter expression
-     * 
-     * @return \WindowsAzure\Table\Models\Filters\QueryStringFilter 
+     *
+     * @return \WindowsAzure\Table\Models\Filters\QueryStringFilter
      */
     public static function applyQueryString($value)
     {

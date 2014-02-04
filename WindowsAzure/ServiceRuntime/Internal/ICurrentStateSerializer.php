@@ -11,7 +11,7 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- * 
+ *
  * PHP version 5
  *
  * @category  Microsoft
@@ -39,11 +39,11 @@ interface ICurrentStateSerializer
 {
     /**
      * Serializes the current state.
-     * 
+     *
      * @param CurrentState $state  The current state.
      * @param string       $stream The output stream.
-     * 
-     * @return none
+     *
+     * @return void
      */
     public function serialize($state, $stream);
 }

@@ -10,7 +10,7 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- * 
+ *
  * PHP version 5
  *
  * @category  Microsoft
@@ -37,15 +37,15 @@ use WindowsAzure\Common\Internal\Resources;
 
 class Action
 {
-    /** 
-     * The attributes of the filter. 
+    /**
+     * The attributes of the filter.
      *
      * @var array
-     */ 
+     */
     protected $attributes;
 
     /**
-     * Creates an Action instance with default parameter. 
+     * Creates an Action instance with default parameter.
      */
     public function __construct()
     {
@@ -54,22 +54,22 @@ class Action
     }
 
     /**
-     * Gets the attributes. 
+     * Gets the attributes.
      *
      * @return array
-     */ 
+     */
     public function getAttributes()
     {
         return $this->attributes;
     }
 
     /**
-     * Sets an attribute. 
+     * Sets an attribute.
      *
      * @param string $key   The key of the attribute.
      * @param string $value The value of the attribute.
-     * 
-     * @return none
+     *
+     * @return void
      */
     protected function setAttribute($key, $value)
     {

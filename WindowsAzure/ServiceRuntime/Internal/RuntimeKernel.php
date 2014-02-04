@@ -11,7 +11,7 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- * 
+ *
  * PHP version 5
  *
  * @category  Microsoft
@@ -39,71 +39,71 @@ class RuntimeKernel
 {
     /**
      * The singleton instance of the runtime kernel.
-     * 
-     * @var type 
+     *
+     * @var RuntimeKernel
      */
     private static $_theKernel;
-    
+
     /**
      * The current state serializer.
-     * 
-     * @var type 
+     *
+     * @var XmlCurrentStateSerializer
      */
     private $_currentStateSerializer;
-    
+
     /**
      * The goal state deserializer.
-     * 
-     * @var type 
+     *
+     * @var ChunkedGoalStateDeserializer
      */
     private $_goalStateDeserializer;
-    
+
     /**
      * The input channel.
-     * 
-     * @var IInputChannel 
+     *
+     * @var IInputChannel
      */
     private $_inputChannel;
-    
+
     /**
      * The output channel.
-     * 
-     * @var IOutputChannel 
+     *
+     * @var IOutputChannel
      */
     private $_outputChannel;
-    
+
     /**
      * The runtime current state client.
-     * 
-     * @var Protocol1RuntimeCurrentStateClient 
+     *
+     * @var Protocol1RuntimeCurrentStateClient
      */
     private $_protocol1RuntimeCurrentStateClient;
-    
+
     /**
      * The role environment data deserializer.
-     * 
-     * @var IRoleEnvironmentDataDeserializer 
+     *
+     * @var IRoleEnvironmentDataDeserializer
      */
     private $_roleEnvironmentDataDeserializer;
-    
+
     /**
      * The runtime goal state client.
-     * 
-     * @var Protocol1RuntimeGoalStateClient 
+     *
+     * @var Protocol1RuntimeGoalStateClient
      */
     private $_protocol1RuntimeGoalStateClient;
-    
+
     /**
      * The runtime version protocol client.
-     * 
-     * @var RuntimeVersionProtocolClient 
+     *
+     * @var RuntimeVersionProtocolClient
      */
     private $_runtimeVersionProtocolClient;
-    
+
     /**
      * The runtime version manager.
-     * 
-     * @var RuntimeVersionManager 
+     *
+     * @var RuntimeVersionManager
      */
     private $_runtimeVersionManager;
 
@@ -116,16 +116,16 @@ class RuntimeKernel
         $this->_goalStateDeserializer  = new ChunkedGoalStateDeserializer();
         $this->_inputChannel           = new FileInputChannel();
         $this->_outputChannel          = new FileOutputChannel();
-        
+
         $this->_protocol1RuntimeCurrentStateClient = new
             Protocol1RuntimeCurrentStateClient(
                 $this->_currentStateSerializer,
                 $this->_outputChannel
             );
-        
-        $this->_roleEnvironmentDataDeserializer = new 
+
+        $this->_roleEnvironmentDataDeserializer = new
             XmlRoleEnvironmentDataDeserializer();
-        
+
         $this->_protocol1RuntimeGoalStateClient = new
             Protocol1RuntimeGoalStateClient(
                 $this->_protocol1RuntimeCurrentStateClient,
@@ -133,22 +133,22 @@ class RuntimeKernel
                 $this->_roleEnvironmentDataDeserializer,
                 $this->_inputChannel
             );
-        
+
         $this->_runtimeVersionProtocolClient = new RuntimeVersionProtocolClient(
             $this->_inputChannel
         );
-        
+
         $this->_runtimeVersionManager = new RuntimeVersionManager(
             $this->_runtimeVersionProtocolClient
         );
     }
-    
+
     /**
      * Gets the current kernel instance.
-     * 
+     *
      * @param boolean $forceNewInstance Boolean value indicating if a new instance
      * should be obtained even if a previous one exists.
-     * 
+     *
      * @return RuntimeKernel
      */
     public static function getKernel($forceNewInstance = false)
@@ -156,30 +156,30 @@ class RuntimeKernel
         if (is_null(self::$_theKernel) || $forceNewInstance) {
             self::$_theKernel = new RuntimeKernel();
         }
-        
+
         return self::$_theKernel;
     }
-    
+
     /**
      * Gets the current state serializer.
-     * 
+     *
      * @return ICurrentStateSerializer
      */
     public function getCurrentStateSerializer()
     {
         return $this->_currentStateSerializer;
     }
-    
+
     /**
      * Gets the goal state deserializer.
-     * 
+     *
      * @return IGoalStateDeserializer
      */
     public function getGoalStateDeserializer()
     {
         return $this->_goalStateDeserializer;
     }
-    
+
     /**
      * Gets the input channel.
      *
@@ -189,60 +189,60 @@ class RuntimeKernel
     {
         return $this->_inputChannel;
     }
-    
+
     /**
      * Gets the output channel.
-     * 
+     *
      * @return IOutputChannel
      */
     public function getOutputChannel()
     {
         return $this->_outputChannel;
     }
-    
+
     /**
      * Gets the runtime current state client.
-     * 
+     *
      * @return Protocol1RuntimeCurrentStateClient
      */
     public function getProtocol1RuntimeCurrentStateClient()
     {
         return $this->_protocol1RuntimeCurrentStateClient;
     }
-    
+
     /**
      * Gets the role environment data deserializer.
-     * 
+     *
      * @return IRoleEnvironmentDataDeserializer
      */
     public function getRoleEnvironmentDataDeserializer()
     {
         return $this->_roleEnvironmentDataDeserializer;
     }
-    
+
     /**
      * Gets the runtime goal state client.
-     * 
+     *
      * @return Protocol1RuntimeGoalStateClient
      */
     public function getProtocol1RuntimeGoalStateClient()
     {
         return $this->_protocol1RuntimeGoalStateClient;
     }
-    
+
     /**
      * Gets the runtime version protocol client.
-     * 
+     *
      * @return RuntimeVersionProtocolClient
      */
     public function getRuntimeVersionProtocolClient()
     {
         return $this->_runtimeVersionProtocolClient;
     }
-    
+
     /**
      * Gets the runtime version manager.
-     * 
+     *
      * @return RuntimeVersionManager
      */
     public function getRuntimeVersionManager()

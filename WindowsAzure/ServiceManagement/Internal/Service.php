@@ -11,7 +11,7 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- * 
+ *
  * PHP version 5
  *
  * @category  Microsoft
@@ -21,9 +21,10 @@
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
- 
+
 namespace WindowsAzure\ServiceManagement\Internal;
 use WindowsAzure\Common\Internal\Resources;
+use WindowsAzure\Common\Internal\Serialization\ISerializer;
 use WindowsAzure\Common\Internal\Utilities;
 use WindowsAzure\Common\Internal\Serialization\XmlSerializer;
 
@@ -44,30 +45,30 @@ class Service
      * @var string
      */
     private $_name;
-    
+
     /**
      * @var string
      */
     private $_label;
-    
+
     /**
      * @var string
      */
     private $_description;
-    
+
     /**
      * @var string
      */
     private $_location;
-    
+
     /**
-     * @var array 
+     * @var array
      */
     private $_serializationProperties;
-    
+
     /**
      * Creates Service object from the given raw array.
-     * 
+     *
      * @param array $sources The list of sources that has the row XML.
      */
     public function __construct($sources = array())
@@ -80,7 +81,7 @@ class Service
                     $this->getLabel()
                 )
             );
-            
+
             $this->setLocation(
                 Utilities::tryGetValue(
                     $source,
@@ -88,7 +89,7 @@ class Service
                     $this->getLocation()
                 )
             );
-            
+
             $this->setDescription(
                 Utilities::tryGetValue(
                     $source,
@@ -98,123 +99,123 @@ class Service
             );
         }
     }
-    
+
     /**
      * Gets the name.
-     * 
+     *
      * @return string
      */
     public function getName()
     {
         return $this->_name;
     }
-    
+
     /**
      * Sets the name.
-     * 
+     *
      * @param string $name The name.
-     * 
-     * @return none
+     *
+     * @return void
      */
     public function setName($name)
     {
         $this->_name = $name;
     }
-    
+
     /**
      * Gets the label.
-     * 
+     *
      * @return string
      */
     public function getLabel()
     {
         return $this->_label;
     }
-    
+
     /**
      * Sets the label.
-     * 
+     *
      * @param string $label The label.
-     * 
-     * @return none
+     *
+     * @return void
      */
     public function setLabel($label)
     {
         $this->_label = $label;
     }
-    
+
     /**
      * Gets the description.
-     * 
+     *
      * @return string
      */
     public function getDescription()
     {
         return $this->_description;
     }
-    
+
     /**
      * Sets the description.
-     * 
+     *
      * @param string $description The description.
-     * 
-     * @return none
+     *
+     * @return void
      */
     public function setDescription($description)
     {
         $this->_description = $description;
     }
-    
+
     /**
      * Gets the location.
-     * 
+     *
      * @return string
      */
     public function getLocation()
     {
         return $this->_location;
     }
-    
+
     /**
      * Sets the location.
-     * 
+     *
      * @param string $location The location.
-     * 
-     * @return none
+     *
+     * @return void
      */
     public function setLocation($location)
     {
         $this->_location = $location;
     }
-    
+
     /**
      * Adds serialization property.
-     * 
+     *
      * @param string $key   The property name.
      * @param string $value The property value.
-     * 
-     * @return none
+     *
+     * @return void
      */
     public function addSerializationProperty($key, $value)
     {
         $this->_serializationProperties[$key] = $value;
     }
-    
+
     /**
      * Gets serialization property value.
-     * 
+     *
      * @param string $key The property key.
-     * 
+     *
      * @return string
      */
     public function getSerializationPropertyValue($key)
     {
         return Utilities::tryGetValue($this->_serializationProperties, $key);
     }
-    
+
     /**
      * Converts the current object into array representation.
-     * 
+     *
      * @return array
      */
     protected function toArray()
@@ -223,7 +224,7 @@ class Service
         $arr[Resources::XTAG_NAMESPACE] = array(
             Resources::WA_XML_NAMESPACE => null
         );
-        
+
         Utilities::addIfNotEmpty(Resources::XTAG_LABEL, $this->_label, $arr);
         Utilities::addIfNotEmpty(
             Resources::XTAG_DESCRIPTION,
@@ -235,23 +236,23 @@ class Service
             $this->_location,
             $arr
         );
-        
+
         return $arr;
     }
-    
+
     /**
      * Serializes the current object.
-     * 
+     *
      * @param ISerializer $serializer The serializer.
-     * 
+     *
      * @return string
-     * 
+     *
      * @throws \InvalidArgumentException
      */
     public function serialize($serializer)
     {
         $serialized = Resources::EMPTY_STRING;
-        
+
         if ($serializer instanceof XmlSerializer) {
             $arr        = $this->toArray();
             $serialized = $serializer->serialize(
@@ -261,7 +262,7 @@ class Service
         } else {
             throw new \InvalidArgumentException(Resources::UNKNOWN_SRILZER_MSG);
         }
-        
+
         return $serialized;
     }
 }

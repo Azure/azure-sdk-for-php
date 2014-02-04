@@ -11,7 +11,7 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- * 
+ *
  * PHP version 5
  *
  * @category  Microsoft
@@ -21,14 +21,16 @@
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
- 
+
 namespace WindowsAzure\Common\Internal\Filters;
+use WindowsAzure\Common\Internal\Http\HttpClient;
 use WindowsAzure\Common\Internal\Resources;
 use WindowsAzure\Common\Internal\Validate;
 use WindowsAzure\Common\Internal\IServiceFilter;
 use WindowsAzure\Common\Internal\Authentication\SharedKeyAuthScheme;
 use WindowsAzure\Common\Internal\Authentication\TableSharedKeyLiteAuthScheme;
 use WindowsAzure\Common\Internal\InvalidArgumentTypeException;
+use WindowsAzure\ServiceBus\Internal\IWrap;
 use WindowsAzure\ServiceBus\Internal\WrapTokenManager;
 
 
@@ -53,20 +55,20 @@ class WrapFilter implements IServiceFilter
     /**
      * Creates a WrapFilter with specified WRAP parameters.
      *
-     * @param string $wrapUri       The URI of the WRAP service. 
+     * @param string $wrapUri       The URI of the WRAP service.
      * @param string $wrapUsername  The user name of the WRAP account.
      * @param string $wrapPassword  The password of the WRAP account.
      * @param IWrap  $wrapRestProxy The WRAP service REST proxy.
      */
     public function __construct(
-        $wrapUri, 
-        $wrapUsername, 
+        $wrapUri,
+        $wrapUsername,
         $wrapPassword,
         $wrapRestProxy
     ) {
         $this->_wrapTokenManager = new WrapTokenManager(
-            $wrapUri, 
-            $wrapUsername, 
+            $wrapUri,
+            $wrapUsername,
             $wrapPassword,
             $wrapRestProxy
         );
@@ -76,7 +78,7 @@ class WrapFilter implements IServiceFilter
      * Adds WRAP authentication header to the request headers.
      *
      * @param HttpClient $request HTTP channel object.
-     * 
+     *
      * @return \HTTP_Request2
      */
     public function handleRequest($request)
@@ -85,12 +87,12 @@ class WrapFilter implements IServiceFilter
         $wrapAccessToken = $this->_wrapTokenManager->getAccessToken(
             $request->getUrl()
         );
-        
+
         $authorization = sprintf(
             Resources::WRAP_AUTHORIZATION,
             $wrapAccessToken
         );
-        
+
         $request->setHeader(Resources::AUTHENTICATION, $authorization);
 
         return $request;
@@ -101,10 +103,10 @@ class WrapFilter implements IServiceFilter
      *
      * @param HttpClient              $request  A HTTP channel object.
      * @param \HTTP_Request2_Response $response A HTTP response object.
-     * 
+     *
      * @return \HTTP_Request2_Response
      */
-    public function handleResponse($request, $response) 
+    public function handleResponse($request, $response)
     {
         return $response;
     }

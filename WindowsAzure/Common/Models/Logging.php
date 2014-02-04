@@ -11,7 +11,7 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- * 
+ *
  * PHP version 5
  *
  * @category  Microsoft
@@ -21,7 +21,7 @@
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
- 
+
 namespace WindowsAzure\Common\Models;
 use WindowsAzure\Common\Models\RetentionPolicy;
 use WindowsAzure\Common\Internal\Utilities;
@@ -41,45 +41,45 @@ class Logging
 {
     /**
      * The version of Storage Analytics to configure
-     * 
+     *
      * @var string
      */
     private $_version;
-    
+
     /**
-     * Applies only to logging configuration. Indicates whether all delete requests 
+     * Applies only to logging configuration. Indicates whether all delete requests
      * should be logged.
-     * 
+     *
      * @var bool
      */
     private $_delete;
-    
+
     /**
-     * Applies only to logging configuration. Indicates whether all read requests 
+     * Applies only to logging configuration. Indicates whether all read requests
      * should be logged.
-     * 
+     *
      * @var bool.
      */
     private $_read;
-    
+
     /**
-     * Applies only to logging configuration. Indicates whether all write requests 
+     * Applies only to logging configuration. Indicates whether all write requests
      * should be logged.
-     * 
-     * @var bool 
+     *
+     * @var bool
      */
     private $_write;
-    
+
     /**
      * @var WindowsAzure\Common\Models\RetentionPolicy
      */
     private $_retentionPolicy;
-    
+
     /**
      * Creates object from $parsedResponse.
-     * 
+     *
      * @param array $parsedResponse XML response parsed into array.
-     * 
+     *
      * @return WindowsAzure\Common\Models\Logging
      */
     public static function create($parsedResponse)
@@ -92,125 +92,125 @@ class Logging
         $result->setRetentionPolicy(
             RetentionPolicy::create($parsedResponse['RetentionPolicy'])
         );
-        
+
         return $result;
     }
-    
+
     /**
      * Gets retention policy
-     * 
+     *
      * @return WindowsAzure\Common\Models\RetentionPolicy
-     *  
+     *
      */
     public function getRetentionPolicy()
     {
         return $this->_retentionPolicy;
     }
-    
+
     /**
      * Sets retention policy
-     * 
+     *
      * @param RetentionPolicy $policy object to use
-     * 
-     * @return none.
+     *
+     * @return void.
      */
     public function setRetentionPolicy($policy)
     {
         $this->_retentionPolicy = $policy;
     }
-    
+
     /**
      * Gets write
-     * 
+     *
      * @return bool.
      */
     public function getWrite()
     {
         return $this->_write;
     }
-    
+
     /**
      * Sets write
-     * 
+     *
      * @param bool $write new value.
-     * 
-     * @return none.
+     *
+     * @return void.
      */
     public function setWrite($write)
     {
         $this->_write = $write;
     }
-            
+
     /**
      * Gets read
-     * 
+     *
      * @return bool.
      */
     public function getRead()
     {
         return $this->_read;
     }
-    
+
     /**
      * Sets read
-     * 
+     *
      * @param bool $read new value.
-     * 
-     * @return none.
+     *
+     * @return void.
      */
     public function setRead($read)
     {
         $this->_read = $read;
     }
-    
+
     /**
      * Gets delete
-     * 
+     *
      * @return bool.
      */
     public function getDelete()
     {
         return $this->_delete;
     }
-    
+
     /**
      * Sets delete
-     * 
+     *
      * @param bool $delete new value.
-     * 
-     * @return none.
+     *
+     * @return void.
      */
     public function setDelete($delete)
     {
         $this->_delete = $delete;
     }
-    
+
     /**
      * Gets version
-     * 
+     *
      * @return string.
      */
     public function getVersion()
     {
         return $this->_version;
     }
-    
+
     /**
      * Sets version
-     * 
+     *
      * @param string $version new value.
-     * 
-     * @return none.
+     *
+     * @return void.
      */
     public function setVersion($version)
     {
         $this->_version = $version;
     }
-    
+
     /**
      * Converts this object to array with XML tags
-     * 
-     * @return array. 
+     *
+     * @return array.
      */
     public function toArray()
     {

@@ -73,10 +73,10 @@ class BatchRequest
     /**
      * Append new context to batch request
      *
-     * @param WindowsAzure\Common\Internal\Http\HttpCallContext $context Http call
+     * @param \WindowsAzure\Common\Internal\Http\HttpCallContext $context Http call
      * context to add to batch request
      *
-     * @return none
+     * @return void
      */
     public function appendContext($context)
     {
@@ -86,7 +86,7 @@ class BatchRequest
     /**
      * Encode contexts
      *
-     * @return none
+     * @return void
      */
     public function encode()
     {

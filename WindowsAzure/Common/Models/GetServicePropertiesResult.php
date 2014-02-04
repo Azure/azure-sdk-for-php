@@ -11,7 +11,7 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- * 
+ *
  * PHP version 5
  *
  * @category  Microsoft
@@ -39,38 +39,38 @@ use WindowsAzure\Common\Models\ServiceProperties;
 class GetServicePropertiesResult
 {
     private $_serviceProperties;
-    
+
     /**
      * Creates object from $parsedResponse.
-     * 
+     *
      * @param array $parsedResponse XML response parsed into array.
-     * 
+     *
      * @return WindowsAzure\Common\Models\GetServicePropertiesResult
      */
     public static function create($parsedResponse)
     {
         $result                     = new GetServicePropertiesResult();
         $result->_serviceProperties = ServiceProperties::create($parsedResponse);
-        
+
         return $result;
     }
-    
+
     /**
      * Gets service properties object.
-     * 
-     * @return WindowsAzure\Common\Models\ServiceProperties 
+     *
+     * @return WindowsAzure\Common\Models\ServiceProperties
      */
     public function getValue()
     {
         return $this->_serviceProperties;
     }
-    
+
     /**
      * Sets service properties object.
-     * 
+     *
      * @param ServiceProperties $serviceProperties object to use.
-     * 
-     * @return none 
+     *
+     * @return void
      */
     public function setValue($serviceProperties)
     {

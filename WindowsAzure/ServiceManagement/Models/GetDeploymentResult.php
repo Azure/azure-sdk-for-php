@@ -11,7 +11,7 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- * 
+ *
  * PHP version 5
  *
  * @category  Microsoft
@@ -21,7 +21,7 @@
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
- 
+
 namespace WindowsAzure\ServiceManagement\Models;
 
 /**
@@ -41,41 +41,41 @@ class GetDeploymentResult
      * @var Deployment
      */
     private $_deployment;
-    
+
     /**
      * Creates a new GetDeploymentResult from parsed response body.
-     * 
+     *
      * @param array $parsed The parsed response body in array representation.
-     * 
+     *
      * @return GetDeploymentResult
-     * 
+     *
      * @static
      */
     public static function create($parsed)
     {
         $result = new GetDeploymentResult();
-        
+
         $result->setDeployment(Deployment::create($parsed));
-        
+
         return $result;
     }
-    
+
     /**
      * Gets the deployment instance.
-     * 
+     *
      * @return Deployment
      */
     public function getDeployment()
     {
         return $this->_deployment;
     }
-    
+
     /**
      * Sets the deployment.
-     * 
+     *
      * @param Deployment $deployment The deployment instance.
-     * 
-     * @return none
+     *
+     * @return void
      */
     public function setDeployment($deployment)
     {

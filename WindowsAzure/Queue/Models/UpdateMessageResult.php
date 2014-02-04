@@ -11,7 +11,7 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- * 
+ *
  * PHP version 5
  *
  * @category  Microsoft
@@ -21,7 +21,7 @@
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
- 
+
 namespace WindowsAzure\Queue\Models;
 use WindowsAzure\Common\Internal\Validate;
 
@@ -39,62 +39,62 @@ use WindowsAzure\Common\Internal\Validate;
 class UpdateMessageResult
 {
     /**
-     * The value of PopReceipt is opaque to the client and its only purpose is to 
+     * The value of PopReceipt is opaque to the client and its only purpose is to
      * ensure that a message may be deleted with the delete message operation.
-     * 
+     *
      * @var string
      */
     private $_popReceipt;
-    
+
     /**
-     * A UTC date/time value that represents when the message will be visible on the 
+     * A UTC date/time value that represents when the message will be visible on the
      * queue.
-     * 
+     *
      * @var \DateTime
      */
     private $_timeNextVisible;
-    
+
     /**
      * Gets timeNextVisible field.
-     * 
+     *
      * @return \DateTime.
      */
     public function getTimeNextVisible()
     {
         return $this->_timeNextVisible;
     }
-    
+
     /**
      * Sets timeNextVisible field.
-     * 
-     * @param \DateTime $timeNextVisible A UTC date/time value that represents when 
+     *
+     * @param \DateTime $timeNextVisible A UTC date/time value that represents when
      * the message will be visible on the queue.
-     * 
-     * @return none.
+     *
+     * @return void.
      */
     public function setTimeNextVisible($timeNextVisible)
     {
         Validate::isDate($timeNextVisible);
-        
+
         $this->_timeNextVisible = $timeNextVisible;
     }
-    
+
     /**
      * Gets popReceipt field.
-     * 
+     *
      * @return string.
      */
     public function getPopReceipt()
     {
         return $this->_popReceipt;
     }
-    
+
     /**
      * Sets popReceipt field.
-     * 
+     *
      * @param string $popReceipt The pop receipt of the queue message.
-     * 
-     * @return none.
+     *
+     * @return void.
      */
     public function setPopReceipt($popReceipt)
     {

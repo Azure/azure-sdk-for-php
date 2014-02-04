@@ -11,7 +11,7 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- * 
+ *
  * PHP version 5
  *
  * @category  Microsoft
@@ -21,12 +21,12 @@
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
- 
+
 namespace WindowsAzure\Common\Internal;
 use WindowsAzure\Common\Internal\Resources;
 
 /**
- * Represents the settings used to sign and access a request against the service 
+ * Represents the settings used to sign and access a request against the service
  * bus.
  *
  * @category  Microsoft
@@ -43,71 +43,71 @@ class ServiceBusSettings extends ServiceSettings
      * @var string
      */
     private $_serviceBusEndpointUri;
-    
+
     /**
      * @var string
      */
     private $_wrapEndpointUri;
-    
+
     /**
      * @var string
      */
     private $_wrapName;
-    
+
     /**
      * @var string
      */
     private $_wrapPassword;
-    
+
     /**
      * @var string
      */
     private $_namespace;
-    
+
     /**
      * Validator for the SharedSecretValue setting. It has to be provided.
-     * 
+     *
      * @var array
      */
     private static $_wrapPasswordSetting;
-    
+
     /**
      * Validator for the SharedSecretIssuer setting. It has to be provided.
-     * 
+     *
      * @var array
      */
     private static $_wrapNameSetting;
-    
+
     /**
      * Validator for the Endpoint setting. Must be a valid Uri.
-     * 
+     *
      * @var array
      */
     private static $_serviceBusEndpointSetting;
-    
+
     /**
      * Validator for the StsEndpoint setting. Must be a valid Uri.
-     * 
+     *
      * @var array
      */
     private static $_wrapEndpointUriSetting;
-    
+
     /**
      * @var boolean
      */
     protected static $isInitialized = false;
-    
+
     /**
      * Holds the expected setting keys.
-     * 
+     *
      * @var array
      */
     protected static $validSettingKeys = array();
-    
+
     /**
      * Initializes static members of the class.
-     * 
-     * @return none
+     *
+     * @return void
      */
     protected static function init()
     {
@@ -115,29 +115,29 @@ class ServiceBusSettings extends ServiceSettings
             Resources::SERVICE_BUS_ENDPOINT_NAME,
             Validate::getIsValidUri()
         );
-        
+
         self::$_wrapNameSetting = self::setting(
             Resources::SHARED_SECRET_ISSUER_NAME
         );
-        
+
         self::$_wrapPasswordSetting = self::setting(
             Resources::SHARED_SECRET_VALUE_NAME
         );
-        
+
         self::$_wrapEndpointUriSetting = self::settingWithFunc(
             Resources::STS_ENDPOINT_NAME,
             Validate::getIsValidUri()
         );
-        
+
         self::$validSettingKeys[] = Resources::SERVICE_BUS_ENDPOINT_NAME;
         self::$validSettingKeys[] = Resources::SHARED_SECRET_ISSUER_NAME;
         self::$validSettingKeys[] = Resources::SHARED_SECRET_VALUE_NAME;
         self::$validSettingKeys[] = Resources::STS_ENDPOINT_NAME;
     }
-    
+
     /**
      * Creates new Service Bus settings instance.
-     * 
+     *
      * @param string $serviceBusEndpoint The Service Bus endpoint uri.
      * @param string $namespace          The service namespace.
      * @param string $wrapName           The wrap name.
@@ -156,18 +156,18 @@ class ServiceBusSettings extends ServiceSettings
         $this->_wrapName              = $wrapName;
         $this->_wrapPassword          = $wrapPassword;
     }
-    
+
     /**
      * Creates a ServiceBusSettings object from the given connection string.
-     * 
+     *
      * @param string $connectionString The storage settings connection string.
-     * 
-     * @return ServiceBusSettings 
+     *
+     * @return ServiceBusSettings
      */
     public static function createFromConnectionString($connectionString)
     {
         $tokenizedSettings = self::parseAndValidateKeys($connectionString);
-        
+
         $matchedSpecs = self::matchedSpecification(
             $tokenizedSettings,
             self::allRequired(
@@ -177,13 +177,13 @@ class ServiceBusSettings extends ServiceSettings
             ),
             self::optional(self::$_wrapEndpointUriSetting)
         );
-        
+
         if ($matchedSpecs) {
             $endpoint = Utilities::tryGetValueInsensitive(
                 Resources::SERVICE_BUS_ENDPOINT_NAME,
                 $tokenizedSettings
             );
-            
+
             // Parse the namespace part from the URI
             $namespace   = explode('.', parse_url($endpoint, PHP_URL_HOST));
             $namespace   = $namespace[0];
@@ -200,7 +200,7 @@ class ServiceBusSettings extends ServiceSettings
                 Resources::SHARED_SECRET_VALUE_NAME,
                 $tokenizedSettings
             );
-            
+
             return new ServiceBusSettings(
                 $endpoint,
                 $namespace,
@@ -209,54 +209,54 @@ class ServiceBusSettings extends ServiceSettings
                 $issuerValue
             );
         }
-        
+
         self::noMatch($connectionString);
     }
-    
+
     /**
      * Gets the Service Bus endpoint URI.
-     * 
+     *
      * @return string
      */
     public function getServiceBusEndpointUri()
     {
         return $this->_serviceBusEndpointUri;
     }
-    
+
     /**
      * Gets the wrap endpoint URI.
-     * 
+     *
      * @return string
      */
     public function getWrapEndpointUri()
     {
         return $this->_wrapEndpointUri;
     }
-    
+
     /**
      * Gets the wrap name.
-     * 
+     *
      * @return string
      */
     public function getWrapName()
     {
         return $this->_wrapName;
     }
-    
+
     /**
      * Gets the wrap password.
-     * 
+     *
      * @return string
      */
     public function getWrapPassword()
     {
         return $this->_wrapPassword;
     }
-    
+
     /**
      * Gets the namespace name.
-     * 
-     * @return string 
+     *
+     * @return string
      */
     public function getNamespace()
     {

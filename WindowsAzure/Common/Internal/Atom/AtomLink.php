@@ -11,7 +11,7 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- * 
+ *
  * PHP version 5
  *
  * @category  Microsoft
@@ -42,16 +42,16 @@ use WindowsAzure\Common\Internal\Validate;
 class AtomLink extends AtomBase
 {
     /**
-     * The undefined content. 
+     * The undefined content.
      *
-     * @var string  
+     * @var string
      */
     protected $undefinedContent;
 
     /**
-     * The HREF of the link. 
+     * The HREF of the link.
      *
-     * @var string  
+     * @var string
      */
     protected $href;
 
@@ -63,34 +63,34 @@ class AtomLink extends AtomBase
     protected $rel;
 
     /**
-     * The media type of the link. 
+     * The media type of the link.
      *
-     * @var string 
+     * @var string
      */
     protected $type;
 
     /**
      * The language of HREF.
-     * 
-     * @var string 
+     *
+     * @var string
      */
     protected $hreflang;
 
     /**
-     * The titile of the link. 
-     * 
-     * @var string 
-     */ 
+     * The titile of the link.
+     *
+     * @var string
+     */
     protected $title;
 
     /**
-     * The length of the link. 
-     * 
-     * @var integer 
+     * The length of the link.
+     *
+     * @var integer
      */
     protected $length;
-     
-    /** 
+
+    /**
      * Creates a AtomLink instance with specified text.
      */
     public function __construct()
@@ -98,12 +98,12 @@ class AtomLink extends AtomBase
     }
 
     /**
-     * Parse an ATOM Link xml. 
-     * 
+     * Parse an ATOM Link xml.
+     *
      * @param string $xmlString an XML based string of ATOM Link.
-     * 
-     * @return none
-     */ 
+     *
+     * @return void
+     */
     public function parseXml($xmlString)
     {
         Validate::notNull($xmlString, 'xmlString');
@@ -143,31 +143,31 @@ class AtomLink extends AtomBase
         }
     }
 
-    /** 
-     * Gets the href of the link. 
+    /**
+     * Gets the href of the link.
      *
      * @return string
      */
     public function getHref()
-    {   
-        return $this->href;
-    } 
-
-    /**
-     * Sets the href of the link.
-     * 
-     * @param string $href The href of the link.
-     *
-     * @return none
-     */
-    public function setHref($href)
     {
-        $this->href = $href; 
+        return $this->href;
     }
 
     /**
-     * Gets the rel of the atomLink. 
-     * 
+     * Sets the href of the link.
+     *
+     * @param string $href The href of the link.
+     *
+     * @return void
+     */
+    public function setHref($href)
+    {
+        $this->href = $href;
+    }
+
+    /**
+     * Gets the rel of the atomLink.
+     *
      * @return string
      */
     public function getRel()
@@ -176,11 +176,11 @@ class AtomLink extends AtomBase
     }
 
     /**
-     * Sets the rel of the link. 
-     * 
+     * Sets the rel of the link.
+     *
      * @param string $rel The rel of the atomLink.
      *
-     * @return none
+     * @return void
      */
     public function setRel($rel)
     {
@@ -188,9 +188,9 @@ class AtomLink extends AtomBase
     }
 
     /**
-     * Gets the type of the link. 
+     * Gets the type of the link.
      *
-     * @return string 
+     * @return string
      */
     public function getType()
     {
@@ -199,10 +199,10 @@ class AtomLink extends AtomBase
 
     /**
      * Sets the type of the link.
-     * 
-     * @param string $type The type of the link. 
      *
-     * @return none
+     * @param string $type The type of the link.
+     *
+     * @return void
      */
     public function setType($type)
     {
@@ -210,9 +210,9 @@ class AtomLink extends AtomBase
     }
 
     /**
-     * Gets the language of the href. 
-     * 
-     * @return string 
+     * Gets the language of the href.
+     *
+     * @return string
      */
     public function getHrefLang()
     {
@@ -220,21 +220,21 @@ class AtomLink extends AtomBase
     }
 
     /**
-     * Sets the language of the href. 
-     * 
+     * Sets the language of the href.
+     *
      * @param string $hrefLang The language of the href.
      *
-     * @return none
+     * @return void
      */
     public function setHrefLang($hrefLang)
     {
         $this->hrefLang = $hrefLang;
     }
 
-    /** 
-     * Gets the title of the link. 
-     * 
-     * @return string 
+    /**
+     * Gets the title of the link.
+     *
+     * @return string
      */
     public function getTitle()
     {
@@ -242,11 +242,11 @@ class AtomLink extends AtomBase
     }
 
     /**
-     * Sets the title of the link. 
-     * 
-     * @param string $title The title of the link. 
+     * Sets the title of the link.
      *
-     * @return none
+     * @param string $title The title of the link.
+     *
+     * @return void
      */
     public function setTitle($title)
     {
@@ -254,31 +254,31 @@ class AtomLink extends AtomBase
     }
 
     /**
-     * Gets the length of the link. 
-     * 
-     * @return string 
+     * Gets the length of the link.
+     *
+     * @return string
      */
-    public function getLength() 
+    public function getLength()
     {
         return $this->length;
     }
 
     /**
-     * Sets the length of the link. 
-     * 
-     * @param string $length The length of the link. 
+     * Sets the length of the link.
      *
-     * @return none
+     * @param string $length The length of the link.
+     *
+     * @return void
      */
     public function setLength($length)
     {
         $this->length = $length;
     }
 
-    /**     
-     * Gets the undefined content. 
+    /**
+     * Gets the undefined content.
      *
-     * @return string 
+     * @return string
      */
     public function getUndefinedContent()
     {
@@ -286,47 +286,47 @@ class AtomLink extends AtomBase
     }
 
     /**
-     * Sets the undefined content. 
-     * 
-     * @param string $undefinedContent The undefined content. 
+     * Sets the undefined content.
      *
-     * @return none
+     * @param string $undefinedContent The undefined content.
+     *
+     * @return void
      */
     public function setUndefinedContent($undefinedContent)
     {
         $this->undefinedContent = $undefinedContent;
     }
 
-    /** 
+    /**
      * Writes an XML representing the ATOM link item.
-     * 
+     *
      * @param \XMLWriter $xmlWriter The xml writer.
      *
-     * @return none
+     * @return void
      */
     public function writeXml($xmlWriter)
     {
         Validate::notNull($xmlWriter, 'xmlWriter');
         $xmlWriter->startElementNS(
-            'atom', 
-            Resources::LINK, 
+            'atom',
+            Resources::LINK,
             Resources::ATOM_NAMESPACE
         );
         $this->writeInnerXml($xmlWriter);
         $xmlWriter->endElement();
     }
 
-    /** 
+    /**
      * Writes the inner XML representing the ATOM link item.
-     * 
+     *
      * @param \XMLWriter $xmlWriter The xml writer.
-     * 
-     * @return none
+     *
+     * @return void
      */
     public function writeInnerXml($xmlWriter)
     {
         Validate::notNull($xmlWriter, 'xmlWriter');
-        
+
         $this->writeOptionalAttribute($xmlWriter, 'href', $this->href);
         $this->writeOptionalAttribute($xmlWriter, 'rel', $this->rel);
         $this->writeOptionalAttribute($xmlWriter, 'type', $this->type);

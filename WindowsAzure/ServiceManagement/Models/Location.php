@@ -11,7 +11,7 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- * 
+ *
  * PHP version 5
  *
  * @category  Microsoft
@@ -21,7 +21,7 @@
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
- 
+
 namespace WindowsAzure\ServiceManagement\Models;
 
 /**
@@ -41,50 +41,50 @@ class Location
      * @var string
      */
     private $_name;
-    
+
     /**
      * @var string
      */
     private $_displayName;
-    
+
     /**
      * Gets the name.
-     * 
+     *
      * @return string
      */
     public function getName()
     {
         return $this->_name;
     }
-    
+
     /**
      * Sets the name.
-     * 
+     *
      * @param string $name The name.
-     * 
-     * @return none
+     *
+     * @return void
      */
     public function setName($name)
     {
         $this->_name = $name;
     }
-    
+
     /**
      * Gets the displayName.
-     * 
+     *
      * @return string
      */
     public function getDisplayName()
     {
         return $this->_displayName;
     }
-    
+
     /**
      * Sets the displayName.
-     * 
+     *
      * @param string $displayName The displayName.
-     * 
-     * @return none
+     *
+     * @return void
      */
     public function setDisplayName($displayName)
     {

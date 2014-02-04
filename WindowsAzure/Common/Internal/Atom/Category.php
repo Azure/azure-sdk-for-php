@@ -11,7 +11,7 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- * 
+ *
  * PHP version 5
  *
  * @category  Microsoft
@@ -42,39 +42,39 @@ use WindowsAzure\Common\Internal\Validate;
 class Category extends AtomBase
 {
     /**
-     * The term of the category. 
+     * The term of the category.
      *
-     * @var string  
+     * @var string
      */
     protected $term;
 
     /**
-     * The scheme of the category. 
+     * The scheme of the category.
      *
-     * @var string  
+     * @var string
      */
     protected $scheme;
 
     /**
-     * The label of the category. 
-     * 
-     * @var string 
-     */ 
+     * The label of the category.
+     *
+     * @var string
+     */
     protected $label;
 
     /**
-     * The undefined content of the category. 
-     *  
-     * @var string 
+     * The undefined content of the category.
+     *
+     * @var string
      */
     protected $undefinedContent;
-     
-    /** 
+
+    /**
      * Creates a Category instance with specified text.
      *
      * @param string $undefinedContent The undefined content of the category.
      *
-     * @return none
+     * @return void
      */
     public function __construct($undefinedContent = Resources::EMPTY_STRING)
     {
@@ -82,12 +82,12 @@ class Category extends AtomBase
     }
 
     /**
-     * Creates an ATOM Category instance with specified xml string. 
-     * 
+     * Creates an ATOM Category instance with specified xml string.
+     *
      * @param string $xmlString an XML based string of ATOM CONTENT.
-     * 
-     * @return none
-     */ 
+     *
+     * @return void
+     */
     public function parseXml($xmlString)
     {
         Validate::notNull($xmlString, 'xmlString');
@@ -109,31 +109,31 @@ class Category extends AtomBase
         $this->undefinedContent =(string)$categoryXml;
     }
 
-    /** 
-     * Gets the term of the category. 
+    /**
+     * Gets the term of the category.
      *
      * @return string
      */
     public function getTerm()
-    {   
-        return $this->term;
-    } 
-
-    /**
-     * Sets the term of the category.
-     * 
-     * @param string $term The term of the category.
-     * 
-     * @return none
-     */
-    public function setTerm($term)
     {
-        $this->term = $term; 
+        return $this->term;
     }
 
     /**
-     * Gets the scheme of the category. 
-     * 
+     * Sets the term of the category.
+     *
+     * @param string $term The term of the category.
+     *
+     * @return void
+     */
+    public function setTerm($term)
+    {
+        $this->term = $term;
+    }
+
+    /**
+     * Gets the scheme of the category.
+     *
      * @return string
      */
     public function getScheme()
@@ -142,11 +142,11 @@ class Category extends AtomBase
     }
 
     /**
-     * Sets the scheme of the category. 
-     * 
+     * Sets the scheme of the category.
+     *
      * @param string $scheme The scheme of the category.
-     * 
-     * @return none
+     *
+     * @return void
      */
     public function setScheme($scheme)
     {
@@ -154,9 +154,9 @@ class Category extends AtomBase
     }
 
     /**
-     * Gets the label of the category. 
+     * Gets the label of the category.
      *
-     * @return string The label. 
+     * @return string The label.
      */
     public function getLabel()
     {
@@ -164,20 +164,20 @@ class Category extends AtomBase
     }
 
     /**
-     * Sets the label of the category. 
-     * 
-     * @param string $label The label of the category. 
-     * 
-     * @return none
-     */ 
+     * Sets the label of the category.
+     *
+     * @param string $label The label of the category.
+     *
+     * @return void
+     */
     public function setLabel($label)
     {
         $this->label = $label;
     }
 
     /**
-     * Gets the undefined content of the category. 
-     * 
+     * Gets the undefined content of the category.
+     *
      * @return string
      */
     public function getUndefinedContent()
@@ -186,29 +186,29 @@ class Category extends AtomBase
     }
 
     /**
-     * Sets the undefined content of the category. 
-     * 
-     * @param string $undefinedContent The undefined content of the category. 
+     * Sets the undefined content of the category.
      *
-     * @return none
+     * @param string $undefinedContent The undefined content of the category.
+     *
+     * @return void
      */
     public function setUndefinedContent($undefinedContent)
     {
         $this->undefinedContent = $undefinedContent;
     }
-    
-    /** 
-     * Writes an XML representing the category. 
-     * 
+
+    /**
+     * Writes an XML representing the category.
+     *
      * @param \XMLWriter $xmlWriter The XML writer.
-     * 
-     * @return none
+     *
+     * @return void
      */
     public function writeXml($xmlWriter)
     {
         Validate::notNull($xmlWriter, 'xmlWriter');
         $xmlWriter->startElementNS(
-            'atom', 
+            'atom',
             'category',
             Resources::ATOM_NAMESPACE
         );
@@ -216,34 +216,34 @@ class Category extends AtomBase
         $xmlWriter->endElement();
     }
 
-    /** 
-     * Writes an XML representing the category. 
-     * 
+    /**
+     * Writes an XML representing the category.
+     *
      * @param \XMLWriter $xmlWriter The XML writer.
-     * 
-     * @return none
+     *
+     * @return void
      */
     public function writeInnerXml($xmlWriter)
     {
         Validate::notNull($xmlWriter, 'xmlWriter');
         $this->writeOptionalAttribute(
             $xmlWriter,
-            'term', 
+            'term',
             $this->term
         );
 
         $this->writeOptionalAttribute(
             $xmlWriter,
-            'scheme', 
+            'scheme',
             $this->scheme
         );
 
         $this->writeOptionalAttribute(
             $xmlWriter,
-            'label', 
+            'label',
             $this->label
         );
-             
+
         if (!empty($this->undefinedContent)) {
             $xmlWriter->WriteRaw($this->undefinedContent);
         }

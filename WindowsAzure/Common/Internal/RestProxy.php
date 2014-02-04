@@ -11,7 +11,7 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- * 
+ *
  * PHP version 5
  *
  * @category  Microsoft
@@ -21,9 +21,11 @@
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
- 
+
 namespace WindowsAzure\Common\Internal;
+use WindowsAzure\Common\Internal\Http\IHttpClient;
 use WindowsAzure\Common\Internal\Resources;
+use WindowsAzure\Common\Internal\Serialization\ISerializer;
 use WindowsAzure\Common\Internal\Validate;
 use WindowsAzure\Common\Internal\Http\Url;
 
@@ -41,25 +43,25 @@ use WindowsAzure\Common\Internal\Http\Url;
 class RestProxy
 {
     /**
-     * @var WindowsAzure\Common\Internal\Http\IHttpClient
+     * @var \WindowsAzure\Common\Internal\Http\IHttpClient
      */
     private $_channel;
-    
+
     /**
      * @var array
      */
     private $_filters;
-    
+
     /**
-     * @var WindowsAzure\Common\Internal\Serialization\ISerializer
+     * @var \WindowsAzure\Common\Internal\Serialization\ISerializer
      */
     protected $dataSerializer;
-    
+
     /**
      * @var string
      */
     private $_uri;
-    
+
     /**
      * Initializes new RestProxy object.
      *
@@ -74,10 +76,10 @@ class RestProxy
         $this->dataSerializer = $dataSerializer;
         $this->_uri           = $uri;
     }
-    
+
     /**
      * Gets HTTP filters that will process each request.
-     * 
+     *
      * @return array
      */
     public function getFilters()
@@ -87,7 +89,7 @@ class RestProxy
 
     /**
      * Gets the Uri of the service.
-     * 
+     *
      * @return string
      */
     public function getUri()
@@ -95,24 +97,24 @@ class RestProxy
         return $this->_uri;
     }
 
-    /** 
-     * Sets the Uri of the service. 
+    /**
+     * Sets the Uri of the service.
      *
      * @param string $uri The URI of the request.
-     * 
-     * @return none
+     *
+     * @return void
      */
     public function setUri($uri)
     {
         $this->_uri = $uri;
     }
-    
+
     /**
      * Sends HTTP request with the specified HTTP call context.
-     * 
-     * @param WindowsAzure\Common\Internal\Http\HttpCallContext $context The HTTP 
+     *
+     * @param \WindowsAzure\Common\Internal\Http\HttpCallContext $context The HTTP
      * call context.
-     * 
+     *
      * @return \HTTP_Request2_Response
      */
     protected function sendContext($context)
@@ -137,18 +139,18 @@ class RestProxy
         }
         $url->setQueryVariables($queryParams);
         $url->appendUrlPath($path);
-        
+
         $channel->send($this->_filters, $url);
-        
+
         return $channel->getResponse();
     }
 
     /**
      * Adds new filter to new service rest proxy object and returns that object back.
      *
-     * @param WindowsAzure\Common\Internal\IServiceFilter $filter Filter to add for 
+     * @param \WindowsAzure\Common\Internal\IServiceFilter $filter Filter to add for
      * the pipeline.
-     * 
+     *
      * @return RestProxy.
      */
     public function withFilter($filter)
@@ -158,46 +160,46 @@ class RestProxy
 
         return $serviceProxyWithFilter;
     }
-    
+
     /**
      * Adds optional query parameter.
-     * 
+     *
      * Doesn't add the value if it satisfies empty().
-     * 
+     *
      * @param array  &$queryParameters The query parameters.
      * @param string $key              The query variable name.
      * @param string $value            The query variable value.
-     * 
-     * @return none
+     *
+     * @return void
      */
     protected function addOptionalQueryParam(&$queryParameters, $key, $value)
     {
         Validate::isArray($queryParameters, 'queryParameters');
         Validate::isString($key, 'key');
         Validate::isString($value, 'value');
-                
+
         if (!is_null($value) && Resources::EMPTY_STRING !== $value) {
             $queryParameters[$key] = $value;
         }
     }
-    
+
     /**
      * Adds optional header.
-     * 
+     *
      * Doesn't add the value if it satisfies empty().
-     * 
+     *
      * @param array  &$headers The HTTP header parameters.
      * @param string $key      The HTTP header name.
      * @param string $value    The HTTP header value.
-     * 
-     * @return none
+     *
+     * @return void
      */
     protected function addOptionalHeader(&$headers, $key, $value)
     {
         Validate::isArray($headers, 'headers');
         Validate::isString($key, 'key');
         Validate::isString($value, 'value');
-                
+
         if (!is_null($value) && Resources::EMPTY_STRING !== $value) {
             $headers[$key] = $value;
         }

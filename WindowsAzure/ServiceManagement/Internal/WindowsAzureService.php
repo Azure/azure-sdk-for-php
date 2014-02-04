@@ -11,7 +11,7 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- * 
+ *
  * PHP version 5
  *
  * @category  Microsoft
@@ -21,7 +21,7 @@
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
- 
+
 namespace WindowsAzure\ServiceManagement\Internal;
 use WindowsAzure\Common\Internal\Resources;
 use WindowsAzure\Common\Internal\Utilities;
@@ -43,21 +43,21 @@ class WindowsAzureService extends Service
      * @var string
      */
     private $_affinityGroup;
-    
+
     /**
      * @var string
      */
     private $_url;
-    
+
     /**
      * Constructs new storage service object.
-     * 
+     *
      * @param array $sources The list of sources that has the row XML.
      */
     public function __construct($sources = array())
     {
         parent::__construct($sources);
-        
+
         foreach ($sources as $source) {
             $this->setName(
                 Utilities::tryGetValue(
@@ -66,7 +66,7 @@ class WindowsAzureService extends Service
                     $this->getName()
                 )
             );
-            
+
             $this->setAffinityGroup(
                 Utilities::tryGetValue(
                     $source,
@@ -74,7 +74,7 @@ class WindowsAzureService extends Service
                     $this->getAffinityGroup()
                 )
             );
-            
+
             $this->setUrl(
                 Utilities::tryGetValue(
                     $source,
@@ -84,54 +84,54 @@ class WindowsAzureService extends Service
             );
         }
     }
-        
+
     /**
      * Gets the affinityGroup name.
-     * 
-     * @return string 
+     *
+     * @return string
      */
     public function getAffinityGroup()
     {
         return $this->_affinityGroup;
     }
-    
+
     /**
      * Sets the affinityGroup name.
-     * 
+     *
      * @param string $affinityGroup The affinityGroup name.
-     * 
-     * @return none
+     *
+     * @return void
      */
     public function setAffinityGroup($affinityGroup)
     {
         $this->_affinityGroup = $affinityGroup;
     }
-    
+
     /**
      * Gets the url name.
-     * 
-     * @return string 
+     *
+     * @return string
      */
     public function getUrl()
     {
         return $this->_url;
     }
-    
+
     /**
      * Sets the url name.
-     * 
+     *
      * @param string $url The url name.
-     * 
-     * @return none
+     *
+     * @return void
      */
     public function setUrl($url)
     {
         $this->_url = $url;
     }
-    
+
     /**
      * Converts the current object into ordered array representation.
-     * 
+     *
      * @return array
      */
     protected function toArray()

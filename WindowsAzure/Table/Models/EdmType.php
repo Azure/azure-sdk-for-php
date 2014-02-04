@@ -11,7 +11,7 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- * 
+ *
  * PHP version 5
  *
  * @category  Microsoft
@@ -21,7 +21,7 @@
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
- 
+
 namespace WindowsAzure\Table\Models;
 use WindowsAzure\Common\Internal\Utilities;
 use WindowsAzure\Common\Internal\Validate;
@@ -41,7 +41,7 @@ use WindowsAzure\Common\Internal\Resources;
 class EdmType
 {
     // @codingStandardsIgnoreStart
-    
+
     const DATETIME = 'Edm.DateTime';
     const BINARY   = 'Edm.Binary';
     const BOOLEAN  = 'Edm.Boolean';
@@ -50,32 +50,32 @@ class EdmType
     const INT32    = 'Edm.Int32';
     const INT64    = 'Edm.Int64';
     const STRING   = 'Edm.String';
-    
+
     /**
      * Converts the type to string if it's empty and validates the type.
-     * 
+     *
      * @param string $type The Edm type
-     * 
+     *
      * @return string
      */
     public static function processType($type)
     {
         $type = empty($type) ? self::STRING : $type;
         Validate::isTrue(self::isValid($type), Resources::INVALID_EDM_MSG);
-        
+
         return $type;
     }
-    
+
     /**
      * Validates that the value associated with the EDM type is valid.
-     * 
+     *
      * @param string $type       The EDM type.
-     * @param mix    $value      The EDM value.
+     * @param mixed   $value      The EDM value.
      * @param string &$condition The error message.
-     * 
+     *
      * @return boolean
-     * 
-     * @throws \InvalidArgumentException 
+     *
+     * @throws \InvalidArgumentException
      */
     public static function validateEdmValue($type, $value, &$condition = null)
     {
@@ -97,7 +97,7 @@ class EdmType
             case EdmType::DOUBLE:
                 $condition = 'is_double';
                 return is_double($value);
-                
+
             case EdmType::INT32:
                 $condition = 'is_int';
                 return is_int($value);
@@ -115,16 +115,16 @@ class EdmType
             }
         }
     }
-    
+
     /**
      * Serializes EDM value into proper value for sending it to Windows Azure.
-     * 
+     *
      * @param string $type  The EDM type.
-     * @param mix    $value The EDM value.
-     * 
+     * @param mixed   $value The EDM value.
+     *
      * @return string
-     * 
-     * @throws \InvalidArgumentException 
+     *
+     * @throws \InvalidArgumentException
      */
     public static function serializeValue($type, $value)
     {
@@ -137,10 +137,10 @@ class EdmType
         case null:
             // NULL also is treated as EdmType::STRING
             return strval($value);
-            
+
         case EdmType::BINARY:
             return base64_encode($value);
-            
+
         case EdmType::DATETIME:
             return Utilities::convertToEdmDateTime($value);
 
@@ -151,16 +151,16 @@ class EdmType
             throw new \InvalidArgumentException();
         }
     }
-    
+
     /**
      * Serializes EDM value into proper value to be used in query.
-     * 
+     *
      * @param string $type  The EDM type.
-     * @param mix    $value The EDM value.
-     * 
+     * @param mixed   $value The EDM value.
+     *
      * @return string
-     * 
-     * @throws \InvalidArgumentException 
+     *
+     * @throws \InvalidArgumentException
      */
     public static function serializeQueryValue($type, $value)
     {
@@ -178,7 +178,7 @@ class EdmType
         case EdmType::DOUBLE:
         case EdmType::INT32:
             return $value;
-            
+
         case EdmType::INT64:
             return $value . 'L';
 
@@ -194,15 +194,15 @@ class EdmType
             throw new \InvalidArgumentException();
         }
     }
-    
+
     /**
      * Converts the value into its proper type.
-     * 
+     *
      * @param string $type  The edm type.
      * @param string $value The edm value.
-     * 
-     * @return mix
-     * 
+     *
+     * @return mixed
+     *
      * @throws \InvalidArgumentException
      */
     public static function unserializeQueryValue($type, $value)
@@ -231,7 +231,7 @@ class EdmType
 
             case self::DOUBLE:
                 return doubleval($value);
-                
+
             case self::INT32:
                 return intval($value);
 
@@ -240,13 +240,13 @@ class EdmType
             }
         }
     }
-    
+
     /**
      * Check if the $type belongs to valid header types.
-     * 
+     *
      * @param string $type The type string to check.
-     * 
-     * @return boolean 
+     *
+     * @return boolean
      */
     public static function isValid($type)
     {
@@ -262,12 +262,12 @@ class EdmType
         case $type == null:
             // NULL also is treated as EdmType::STRING
             return true;
-        
+
         default:
             return false;
-                
+
         }
     }
-    
+
     // @codingStandardsIgnoreEnd
 }

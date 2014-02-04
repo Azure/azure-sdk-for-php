@@ -11,7 +11,7 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- * 
+ *
  * PHP version 5
  *
  * @category  Microsoft
@@ -79,7 +79,7 @@ class Protocol1RuntimeGoalStateClient implements IRuntimeGoalStateClient
 
     /**
      * Constructor
-     * 
+     *
      * @param Protocol1RuntimeCurrentStateClient $currentStateClient          The
      *      current state client.
      * @param IGoalStateDeserializer             $goalStateDeserializer       The
@@ -106,7 +106,7 @@ class Protocol1RuntimeGoalStateClient implements IRuntimeGoalStateClient
 
     /**
      * Gets the current goal state.
-     * 
+     *
      * @return GoalState
      */
     public function getCurrentGoalState()
@@ -118,7 +118,8 @@ class Protocol1RuntimeGoalStateClient implements IRuntimeGoalStateClient
 
     /**
      * Gets the role environment data.
-     * 
+     *
+     * @throws RoleEnvironmentNotAvailableException
      * @return RoleEnvironmentData
      */
     public function getRoleEnvironmentData()
@@ -149,8 +150,8 @@ class Protocol1RuntimeGoalStateClient implements IRuntimeGoalStateClient
      * Sets the endpoint.
      *
      * @param string $endpoint Sets the endpoint.
-     * 
-     * @return none
+     *
+     * @return void
      */
     public function setEndpoint($endpoint)
     {
@@ -159,7 +160,7 @@ class Protocol1RuntimeGoalStateClient implements IRuntimeGoalStateClient
 
     /**
      * Gets the endpoint.
-     * 
+     *
      * @return string
      */
     public function getEndpoint()
@@ -171,8 +172,8 @@ class Protocol1RuntimeGoalStateClient implements IRuntimeGoalStateClient
      * Sets the keep open state.
      *
      * @param string $keepOpen Sets the keep open state.
-     * 
-     * @return none
+     *
+     * @return void
      */
     public function setKeepOpen($keepOpen)
     {
@@ -181,7 +182,7 @@ class Protocol1RuntimeGoalStateClient implements IRuntimeGoalStateClient
 
     /**
      * Gets the keep open state.
-     * 
+     *
      * @return bool
      */
     public function getKeepOpen()
@@ -191,8 +192,8 @@ class Protocol1RuntimeGoalStateClient implements IRuntimeGoalStateClient
 
     /**
      * Ensures that the goal state is retrieved.
-     * 
-     * @return none
+     *
+     * @return void
      */
     private function _ensureGoalStateRetrieved()
     {

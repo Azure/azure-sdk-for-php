@@ -11,7 +11,7 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- * 
+ *
  * PHP version 5
  *
  * @category  Microsoft
@@ -28,7 +28,7 @@ use WindowsAzure\Common\Internal\Atom\Feed;
 use WindowsAzure\Common\Internal\Atom\Entry;
 
 /**
- * The results of list queues request. 
+ * The results of list queues request.
  *
  * @category  Microsoft
  * @package   WindowsAzure\ServiceBus\Models
@@ -41,18 +41,18 @@ use WindowsAzure\Common\Internal\Atom\Entry;
 class ListQueuesResult extends Feed
 {
     /**
-     * The information of the queue. 
+     * The information of the queue.
      *
      * @var array
      */
     private $_queueInfos;
 
-    /** 
+    /**
      * Populates the properties with the response from the list queues request.
-     * 
-     * @param string $response The body of the response of the list queues request. 
-     * 
-     * @return none
+     *
+     * @param string $response The body of the response of the list queues request.
+     *
+     * @return void
      */
     public function parseXml($response)
     {
@@ -67,15 +67,15 @@ class ListQueuesResult extends Feed
     }
 
     /**
-     * Creates a queue with default parameters. 
+     * Creates a queue with default parameters.
      */
     public function __construct()
     {
     }
 
     /**
-     * Gets the queue information. 
-     * 
+     * Gets the queue information.
+     *
      * @return array
      */
     public function getQueueInfos()
@@ -84,11 +84,11 @@ class ListQueuesResult extends Feed
     }
 
     /**
-     * Sets the information of the queue. 
-     * 
-     * @param array $queueInfos The information of the queue. 
-     * 
-     * @return none
+     * Sets the information of the queue.
+     *
+     * @param array $queueInfos The information of the queue.
+     *
+     * @return void
      */
     public function setQueueInfos($queueInfos)
     {

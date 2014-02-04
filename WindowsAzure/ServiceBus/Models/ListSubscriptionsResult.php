@@ -11,7 +11,7 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- * 
+ *
  * PHP version 5
  *
  * @category  Microsoft
@@ -43,20 +43,20 @@ use WindowsAzure\ServiceBus\Models\SubscriptionInfo;
 class ListSubscriptionsResult extends Feed
 {
     /**
-     * The information of the subscription. 
-     * 
+     * The information of the subscription.
+     *
      * @var array
      */
     private $_subscriptionInfos;
 
     /**
-     * Populates the properties with the response from the list 
+     * Populates the properties with the response from the list
      * subscriptions request.
-     * 
-     * @param string $response The body of the response of the list 
-     * subscriptions request. 
-     * 
-     * @return none
+     *
+     * @param string $response The body of the response of the list
+     * subscriptions request.
+     *
+     * @return void
      */
     public function parseXml($response)
     {
@@ -71,15 +71,15 @@ class ListSubscriptionsResult extends Feed
     }
 
     /**
-     * Creates a list subscriptions result with default parameters. 
+     * Creates a list subscriptions result with default parameters.
      */
     public function __construct()
     {
     }
-    
+
     /**
-     * Gets the information of the subscription. 
-     * 
+     * Gets the information of the subscription.
+     *
      * @return array
      */
     public function getSubscriptionInfos()
@@ -88,12 +88,12 @@ class ListSubscriptionsResult extends Feed
     }
 
     /**
-     * Sets the information of the rule. 
-     * 
+     * Sets the information of the rule.
+     *
      * @param array $subscriptionInfos The information of the
      * subscription.
-     * 
-     * @return none 
+     *
+     * @return void
      */
     public function setSubscriptionInfos($subscriptionInfos)
     {

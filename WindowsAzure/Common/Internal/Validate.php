@@ -42,12 +42,12 @@ class Validate
     /**
      * Throws exception if the provided variable type is not array.
      *
-     * @param mix    $var  The variable to check.
+     * @param mixed   $var  The variable to check.
      * @param string $name The parameter name.
      *
      * @throws InvalidArgumentTypeException.
      *
-     * @return none
+     * @return void
      */
     public static function isArray($var, $name)
     {
@@ -59,12 +59,12 @@ class Validate
     /**
      * Throws exception if the provided variable type is not string.
      *
-     * @param mix    $var  The variable to check.
+     * @param mixed   $var  The variable to check.
      * @param string $name The parameter name.
      *
      * @throws InvalidArgumentTypeException
      *
-     * @return none
+     * @return void
      */
     public static function isString($var, $name)
     {
@@ -78,11 +78,11 @@ class Validate
     /**
      * Throws exception if the provided variable type is not boolean.
      *
-     * @param mix $var variable to check against.
+     * @param mixed$var variable to check against.
      *
      * @throws InvalidArgumentTypeException
      *
-     * @return none
+     * @return void
      */
     public static function isBoolean($var)
     {
@@ -92,12 +92,12 @@ class Validate
     /**
      * Throws exception if the provided variable is set to null.
      *
-     * @param mix    $var  The variable to check.
+     * @param mixed   $var  The variable to check.
      * @param string $name The parameter name.
      *
      * @throws \InvalidArgumentException
      *
-     * @return none
+     * @return void
      */
     public static function notNullOrEmpty($var, $name)
     {
@@ -111,12 +111,12 @@ class Validate
     /**
      * Throws exception if the provided variable is not double.
      *
-     * @param mix    $var  The variable to check.
+     * @param mixed   $var  The variable to check.
      * @param string $name The parameter name.
      *
      * @throws \InvalidArgumentException
      *
-     * @return none
+     * @return void
      */
     public static function isDouble($var, $name)
     {
@@ -128,12 +128,12 @@ class Validate
     /**
      * Throws exception if the provided variable type is not integer.
      *
-     * @param mix    $var  The variable to check.
+     * @param mixed   $var  The variable to check.
      * @param string $name The parameter name.
      *
      * @throws InvalidArgumentTypeException
      *
-     * @return none
+     * @return void
      */
     public static function isInteger($var, $name)
     {
@@ -170,7 +170,7 @@ class Validate
      *
      * @throws \Exception
      *
-     * @return none
+     * @return void
      */
     public static function isTrue($isSatisfied, $failureMessage)
     {
@@ -182,11 +182,10 @@ class Validate
     /**
      * Throws exception if the provided $date is not of type \DateTime
      *
-     * @param mix $date variable to check against.
+     * @param mixed $date variable to check against.
      *
-     * @throws WindowsAzure\Common\Internal\InvalidArgumentTypeException
-     *
-     * @return none
+     * @throws InvalidArgumentTypeException
+     * @return void
      */
     public static function isDate($date)
     {
@@ -198,12 +197,12 @@ class Validate
     /**
      * Throws exception if the provided variable is set to null.
      *
-     * @param mix    $var  The variable to check.
+     * @param mixed   $var  The variable to check.
      * @param string $name The parameter name.
      *
      * @throws \InvalidArgumentException
      *
-     * @return none
+     * @return void
      */
     public static function notNull($var, $name)
     {
@@ -222,7 +221,7 @@ class Validate
      *
      * @throws \InvalidArgumentException
      *
-     * @return none
+     * @return void
      */
     public static function isInstanceOf($objectInstance, $classInstance, $name)
     {
@@ -265,8 +264,7 @@ class Validate
      *
      * @param string $uri String to check.
      *
-     * @throws \InvalidArgumentException
-     *
+     * @throws \RuntimeException
      * @return boolean
      */
     public static function isValidUri($uri)
@@ -285,7 +283,7 @@ class Validate
     /**
      * Throws exception if the provided variable type is not object.
      *
-     * @param mix    $var  The variable to check.
+     * @param mixed   $var  The variable to check.
      * @param string $name The parameter name.
      *
      * @throws InvalidArgumentTypeException.
@@ -339,9 +337,10 @@ class Validate
      *
      * @param object $objectInstance An object that requires method existing
      *                               validation
-     * @param string $method         Method name
-     * @param string $name           The parameter name
+     * @param string $method Method name
+     * @param string $name The parameter name
      *
+     * @throws \InvalidArgumentException
      * @return boolean
      */
     public static function methodExists($objectInstance, $method, $name)

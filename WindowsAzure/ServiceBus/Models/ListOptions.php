@@ -10,7 +10,7 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- * 
+ *
  * PHP version 5
  *
  * @category  Microsoft
@@ -20,7 +20,7 @@
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link      https://github.com/WindowsAzure/azure-sdk-for-php
  */
- 
+
 namespace WindowsAzure\ServiceBus\Models;
 
 /**
@@ -39,33 +39,33 @@ class ListOptions
 {
     /**
      * The skip query parameter for list API.
-     * 
+     *
      * @var integer
      */
-    private $_skip; 
+    private $_skip;
 
-    /** 
+    /**
      * The top query parameter for list API.
-     * 
+     *
      * @var integer
      */
     private $_top;
 
     /**
-     * Creates a list option instance with default parameters. 
+     * Creates a list option instance with default parameters.
      */
     public function __construct()
     {
     }
 
     /**
-     * Gets the skip parameter. 
-     * 
+     * Gets the skip parameter.
+     *
      * @return integer
      */
     public function getSkip()
     {
-        return $this->_skip; 
+        return $this->_skip;
     }
 
     /**
@@ -73,16 +73,16 @@ class ListOptions
      *
      * @param integer $skip value.
      *
-     * @return none
-     */ 
+     * @return void
+     */
     public function setSkip($skip)
     {
         $this->_skip = $skip;
     }
 
     /**
-     * Gets the top parameter. 
-     * 
+     * Gets the top parameter.
+     *
      * @return integer
      */
     public function getTop()
@@ -92,10 +92,10 @@ class ListOptions
 
     /**
      * Sets the top parameter.
-     * 
+     *
      * @param integer $top value.
-     * 
-     * @return none
+     *
+     * @return void
      */
     public function setTop($top)
     {

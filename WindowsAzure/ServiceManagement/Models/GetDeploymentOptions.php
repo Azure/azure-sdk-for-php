@@ -11,7 +11,7 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- * 
+ *
  * PHP version 5
  *
  * @category  Microsoft
@@ -21,7 +21,7 @@
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
- 
+
 namespace WindowsAzure\ServiceManagement\Models;
 use WindowsAzure\Common\Internal\Validate;
 use WindowsAzure\Common\Internal\Resources;
@@ -43,29 +43,29 @@ class GetDeploymentOptions
      * @var string
      */
     private $_slot;
-    
+
     /**
      * @var string
      */
     private $_deploymentName;
-    
-    
+
+
     /**
      * Gets the deployment slot.
-     * 
+     *
      * @return string
      */
     public function getSlot()
     {
         return $this->_slot;
     }
-    
+
     /**
      * Sets the deployment slot.
-     * 
+     *
      * @param string $slot The deployment slot name.
-     * 
-     * @return none
+     *
+     * @return void
      */
     public function setSlot($slot)
     {
@@ -75,32 +75,32 @@ class GetDeploymentOptions
             DeploymentSlot::isValid($slot),
             sprintf(Resources::INVALID_SLOT, $slot)
         );
-                
+
         $this->_slot = $slot;
     }
-    
+
     /**
      * Gets the deployment name.
-     * 
+     *
      * @return string
      */
     public function getDeploymentName()
     {
         return $this->_deploymentName;
     }
-    
+
     /**
      * Sets the deployment name.
-     * 
+     *
      * @param string $deploymentName The deployment name.
-     * 
-     * @return none
+     *
+     * @return void
      */
     public function setDeploymentName($deploymentName)
     {
         Validate::isString($deploymentName, 'deploymentName');
         Validate::notNullOrEmpty($deploymentName, 'deploymentName');
-                
+
         $this->_deploymentName = $deploymentName;
     }
 }

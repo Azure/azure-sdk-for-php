@@ -26,7 +26,7 @@ namespace WindowsAzure\Common\Internal\Atom;
 use WindowsAzure\Common\Internal\Resources;
 use WindowsAzure\Common\Internal\Utilities;
 use WindowsAzure\Common\Internal\Validate;
-use WindowsAzure\Common\Internal\Atom\AtomProperties;
+
 /**
  * The content class of ATOM standard.
  *
@@ -67,7 +67,7 @@ class Content extends AtomBase
      *
      * @param string $text The text of the content.
      *
-     * @return none
+     * @return \WindowsAzure\Common\Internal\Atom\Content
      */
     public function __construct($text = null)
     {
@@ -79,7 +79,7 @@ class Content extends AtomBase
      *
      * @param string $xmlString an XML based string of ATOM CONTENT.
      *
-     * @return none
+     * @return void
      */
     public function parseXml($xmlString)
     {
@@ -94,7 +94,7 @@ class Content extends AtomBase
      *
      * @param \SimpleXMLElement $contentXml xml element of ATOM CONTENT
      *
-     * @return none
+     * @return void
      */
     public function fromXml($contentXml)
     {
@@ -132,7 +132,7 @@ class Content extends AtomBase
      *
      * @param string $text The text of the content.
      *
-     * @return none
+     * @return void
      */
     public function setText($text)
     {
@@ -164,7 +164,7 @@ class Content extends AtomBase
      *
      * @param string $type The type of the content.
      *
-     * @return none
+     * @return void
      */
     public function setType($type)
     {
@@ -176,7 +176,7 @@ class Content extends AtomBase
      *
      * @param \XMLWriter $xmlWriter The XML writer.
      *
-     * @return none
+     * @return void
      */
     public function writeXml($xmlWriter)
     {
@@ -202,7 +202,7 @@ class Content extends AtomBase
      *
      * @param \XMLWriter $xmlWriter The XML writer.
      *
-     * @return none
+     * @return void
      */
     public function writeInnerXml($xmlWriter)
     {

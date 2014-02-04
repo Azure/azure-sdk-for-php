@@ -53,11 +53,12 @@ class BatchResponse
     /**
      * Constructor
      *
-     * @param string                                         $content Http response
+     * @param string $content Http response
      * as string
      *
-     * @param WindowsAzure\Common\Internal\Http\BatchRequest $request Source batch
+     * @param \WindowsAzure\Common\Internal\Http\BatchRequest $request Source batch
      * request object
+     * @throws \WindowsAzure\Common\ServiceException
      */
     public function __construct($content, $request = null)
     {

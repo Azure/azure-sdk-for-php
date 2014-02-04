@@ -11,7 +11,7 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- * 
+ *
  * PHP version 5
  *
  * @category  Microsoft
@@ -21,7 +21,7 @@
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link      https://github.com/WindowsAzure/azure-sdk-for-php
  */
- 
+
 namespace WindowsAzure\ServiceBus\Models;
 use WindowsAzure\Common\Internal\Atom\Entry;
 use WindowsAzure\Common\Internal\Atom\Content;
@@ -45,14 +45,14 @@ use WindowsAzure\ServiceBus\Models\TopicDescription;
 class TopicInfo extends Entry
 {
     /**
-     * The entry of the topic info. 
-     * 
+     * The entry of the topic info.
+     *
      * @var Entry
      */
     private $_entry;
 
     /**
-     * The description of the topics. 
+     * The description of the topics.
      *
      * @var TopicDescription
      */
@@ -62,11 +62,11 @@ class TopicInfo extends Entry
      * Creates a TopicInfo with specified parameters.
      *
      * @param string           $title            The name of the topic.
-     * @param TopicDescription $topicDescription The description of the 
+     * @param TopicDescription $topicDescription The description of the
      * topic.
      */
     public function __construct(
-        $title = Resources::EMPTY_STRING, 
+        $title = Resources::EMPTY_STRING,
         $topicDescription = null
     ) {
         Validate::isString($title, 'title');
@@ -82,13 +82,13 @@ class TopicInfo extends Entry
             Resources::SERVICE_BUS_NAMESPACE
         );
     }
-    
+
     /**
-     * Populates properties with a specified XML string. 
-     * 
-     * @param string $xmlString An XML string representing the topic information. 
-     * 
-     * @return none
+     * Populates properties with a specified XML string.
+     *
+     * @param string $xmlString An XML string representing the topic information.
+     *
+     * @return void
      */
     public function parseXml($xmlString)
     {
@@ -103,10 +103,10 @@ class TopicInfo extends Entry
 
     /**
      * Writes an XML string.
-     * 
+     *
      * @param \XMLWriter $xmlWriter The XML writer.
      *
-     * @return string 
+     * @return string
      */
     public function writeXml($xmlWriter)
     {
@@ -140,7 +140,7 @@ class TopicInfo extends Entry
      *
      * @param string $title The title of the queue info.
      *
-     * @return none
+     * @return void
      */
     public function setTitle($title)
     {
@@ -148,8 +148,8 @@ class TopicInfo extends Entry
     }
 
     /**
-     * Gets the entry. 
-     * 
+     * Gets the entry.
+     *
      * @return Entry
      */
     public function getEntry()
@@ -162,7 +162,7 @@ class TopicInfo extends Entry
      *
      * @param Entry $entry The entry of the queue info.
      *
-     * @return none
+     * @return void
      */
     public function setEntry($entry)
     {
@@ -170,8 +170,8 @@ class TopicInfo extends Entry
     }
 
     /**
-     * Gets the descriptions of the topic. 
-     * 
+     * Gets the descriptions of the topic.
+     *
      * @return TopicDescription
      */
     public function getTopicDescription()
@@ -179,12 +179,12 @@ class TopicInfo extends Entry
         return $this->_topicDescription;
     }
 
-    /** 
-     * Sets the descriptions of the topic. 
-     * 
-     * @param TopicDescription $topicDescription The description of the topic. 
-     * 
-     * @return none
+    /**
+     * Sets the descriptions of the topic.
+     *
+     * @param TopicDescription $topicDescription The description of the topic.
+     *
+     * @return void
      */
     public function setTopicDescription($topicDescription)
     {
@@ -200,13 +200,13 @@ class TopicInfo extends Entry
     {
         return $this->_topicDescription->getDefaultMessageTimeToLive();
     }
-    
+
     /**
      * Sets the default message to live.
      *
      * @param string $defaultMessageTimeToLive The default message time to live.
-     * 
-     * @return none
+     *
+     * @return void
      */
     public function setDefaultMessageTimeToLive($defaultMessageTimeToLive)
     {
@@ -216,8 +216,8 @@ class TopicInfo extends Entry
     }
 
     /**
-     * Gets the msax size in mega bytes. 
-     * 
+     * Gets the msax size in mega bytes.
+     *
      * @return integer
      */
     public function getMaxSizeInMegabytes()
@@ -226,11 +226,11 @@ class TopicInfo extends Entry
     }
 
     /**
-     * Sets max size in mega bytes. 
-     * 
-     * @param integer $maxSizeInMegabytes The maximum size in mega bytes. 
-     * 
-     * @return none
+     * Sets max size in mega bytes.
+     *
+     * @param integer $maxSizeInMegabytes The maximum size in mega bytes.
+     *
+     * @return void
      */
     public function setMaxSizeInMegabytes($maxSizeInMegabytes)
     {
@@ -239,8 +239,8 @@ class TopicInfo extends Entry
 
     /**
      * Gets requires duplicate detection.
-     * 
-     * @return boolean 
+     *
+     * @return boolean
      */
     public function getRequiresDuplicateDetection()
     {
@@ -248,11 +248,11 @@ class TopicInfo extends Entry
     }
 
     /**
-     * Sets requires duplicate detection. 
-     * 
+     * Sets requires duplicate detection.
+     *
      * @param boolean $requiresDuplicateDetection Sets requires duplicate detection.
      *
-     * @return none
+     * @return void
      */
     public function setRequiresDuplicateDetection($requiresDuplicateDetection)
     {
@@ -262,8 +262,8 @@ class TopicInfo extends Entry
     }
 
     /**
-     * Gets duplicate detection history time window. 
-     * 
+     * Gets duplicate detection history time window.
+     *
      * @return string
      */
     public function getDuplicateDetectionHistoryTimeWindow()
@@ -272,12 +272,12 @@ class TopicInfo extends Entry
     }
 
     /**
-     * Sets duplicate detection history time window. 
-     * 
-     * @param string $duplicateDetectionHistoryTimeWindow The duplicate 
+     * Sets duplicate detection history time window.
+     *
+     * @param string $duplicateDetectionHistoryTimeWindow The duplicate
      * detection history time window.
      *
-     * @return none
+     * @return void
      */
     public function setDuplicateDetectionHistoryTimeWindow(
         $duplicateDetectionHistoryTimeWindow
@@ -288,8 +288,8 @@ class TopicInfo extends Entry
     }
 
     /**
-     * Gets enable batched operations. 
-     * 
+     * Gets enable batched operations.
+     *
      * @return boolean
      */
     public function getEnableBatchedOperations()
@@ -299,10 +299,10 @@ class TopicInfo extends Entry
 
     /**
      * Sets enable batched operations.
-     * 
+     *
      * @param boolean $enableBatchedOperations Enables batched operations.
-     * 
-     * @return none
+     *
+     * @return void
      */
     public function setEnableBatchedOperations($enableBatchedOperations)
     {
@@ -312,21 +312,21 @@ class TopicInfo extends Entry
     }
 
     /**
-     * Gets size in bytes. 
-     * 
-     * @return integer 
+     * Gets size in bytes.
+     *
+     * @return integer
      */
     public function getSizeInBytes()
     {
         return $this->_topicDescription->getSizeInBytes();
     }
 
-    /** 
+    /**
      * Sets size in bytes.
-     * 
-     * @param integer $sizeInBytes The size in bytes. 
      *
-     * @return none
+     * @param integer $sizeInBytes The size in bytes.
+     *
+     * @return void
      */
     public function setSizeInBytes($sizeInBytes)
     {

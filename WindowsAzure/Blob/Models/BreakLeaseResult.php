@@ -11,7 +11,7 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- * 
+ *
  * PHP version 5
  *
  * @category  Microsoft
@@ -21,7 +21,7 @@
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
- 
+
 namespace WindowsAzure\Blob\Models;
 use WindowsAzure\Common\Internal\Resources;
 use WindowsAzure\Common\Internal\Utilities;
@@ -43,41 +43,41 @@ class BreakLeaseResult
      * @var string
      */
     private $_leaseTime;
-    
+
     /**
      * Creates BreakLeaseResult from response headers
-     * 
+     *
      * @param array $headers response headers
-     * 
+     *
      * @return BreakLeaseResult
      */
     public static function create($headers)
     {
         $result = new BreakLeaseResult();
-        
+
         $result->setLeaseTime(
             Utilities::tryGetValue($headers, Resources::X_MS_LEASE_TIME)
         );
-        
+
         return $result;
     }
-    
+
     /**
      * Gets lease time.
-     * 
+     *
      * @return string
      */
     public function getLeaseTime()
     {
         return $this->_leaseTime;
     }
-    
+
     /**
      * Sets lease time.
-     * 
+     *
      * @param string $leaseTime the blob lease time.
-     * 
-     * @return none
+     *
+     * @return void
      */
     public function setLeaseTime($leaseTime)
     {

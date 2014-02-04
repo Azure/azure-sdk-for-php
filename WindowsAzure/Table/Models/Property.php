@@ -11,7 +11,7 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- * 
+ *
  * PHP version 5
  *
  * @category  Microsoft
@@ -21,7 +21,7 @@
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
- 
+
 namespace WindowsAzure\Table\Models;
 use WindowsAzure\Table\Models\EdmType;
 use WindowsAzure\Common\Internal\Validate;
@@ -43,51 +43,51 @@ class Property
      * @var string
      */
     private $_edmType;
-    
+
     /**
-     * @var mix
+     * @var mixed
      */
     private $_value;
-    
+
     /**
      * Gets the type of the property.
-     * 
+     *
      * @return string
      */
     public function getEdmType()
     {
         return $this->_edmType;
     }
-    
+
     /**
      * Sets the value of the property.
-     * 
+     *
      * @param string $edmType The property type.
-     * 
-     * @return none
+     *
+     * @return void
      */
     public function setEdmType($edmType)
     {
         EdmType::isValid($edmType);
         $this->_edmType = $edmType;
     }
-    
+
     /**
      * Gets the value of the property.
-     * 
+     *
      * @return string
      */
     public function getValue()
     {
         return $this->_value;
     }
-    
+
     /**
      * Sets the property value.
-     * 
-     * @param mix $value The value of property.
-     * 
-     * @return none
+     *
+     * @param mixed$value The value of property.
+     *
+     * @return void
      */
     public function setValue($value)
     {

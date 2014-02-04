@@ -61,7 +61,7 @@ class ContentProperties
      *
      * @param string $xmlContent An XML based string of ATOM Link.
      *
-     * @return none
+     * @return void
      */
     public function fromXml($xmlContent)
     {
@@ -104,7 +104,7 @@ class ContentProperties
      *
      * @param object $object Object to serialize
      *
-     * @return none
+     * @return void
      */
     public function setPropertiesFromObject($object)
     {
@@ -145,7 +145,7 @@ class ContentProperties
      *
      * @param \XMLWriter $xmlWriter The xml writer.
      *
-     * @return none
+     * @return void
      */
     public function writeXml($xmlWriter)
     {
@@ -164,7 +164,7 @@ class ContentProperties
      *
      * @param \XMLWriter $xmlWriter The xml writer.
      *
-     * @return none
+     * @return void
      */
     public function writeInnerXml($xmlWriter)
     {

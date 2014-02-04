@@ -11,7 +11,7 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- * 
+ *
  * PHP version 5
  *
  * @category  Microsoft
@@ -21,7 +21,7 @@
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
- 
+
 namespace WindowsAzure\Table\Models;
 
 /**
@@ -41,17 +41,17 @@ class Query
      * @var array
      */
     private $_selectFields;
-    
+
     /**
      * @var Filters\Filter
      */
     private $_filter;
-    
+
     /**
      * @var integer
      */
     private $_top;
-    
+
     /**
      * Gets filter.
      *
@@ -66,14 +66,14 @@ class Query
      * Sets filter.
      *
      * @param Filters\Filter $filter value.
-     * 
-     * @return none.
+     *
+     * @return void.
      */
     public function setFilter($filter)
     {
         $this->_filter = $filter;
     }
-    
+
     /**
      * Gets top.
      *
@@ -88,26 +88,26 @@ class Query
      * Sets top.
      *
      * @param integer $top value.
-     * 
-     * @return none.
+     *
+     * @return void.
      */
     public function setTop($top)
     {
         $this->_top = $top;
     }
-    
+
     /**
      * Adds a field to select fields.
-     * 
+     *
      * @param string $field The value of the field.
-     * 
-     * @return none.
+     *
+     * @return void.
      */
     public function addSelectField($field)
     {
         $this->_selectFields[] = $field;
     }
-    
+
     /**
      * Gets selectFields.
      *
@@ -122,8 +122,8 @@ class Query
      * Sets selectFields.
      *
      * @param array $selectFields value.
-     * 
-     * @return none.
+     *
+     * @return void.
      */
     public function setSelectFields($selectFields)
     {

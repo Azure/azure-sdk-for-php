@@ -420,7 +420,7 @@ class ServicesBuilder
     /**
      * Builds a media services object.
      *
-     * @param WindowsAzure\Common\Internal\MediaServicesSettings $settings The media
+     * @param \WindowsAzure\Common\Internal\MediaServicesSettings $settings The media
      * services configuration settings.
      *
      * @return WindowsAzure\MediaServices\Internal\IMediaServices

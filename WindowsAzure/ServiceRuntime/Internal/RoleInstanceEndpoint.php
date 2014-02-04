@@ -11,7 +11,7 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- * 
+ *
  * PHP version 5
  *
  * @category  Microsoft
@@ -41,7 +41,7 @@ class RoleInstanceEndpoint
      * @var RoleInstance
      */
     private $_roleInstance;
-    
+
     /**
      * @var string
      */
@@ -51,15 +51,15 @@ class RoleInstanceEndpoint
      * @var string
      */
     private $_address;
-    
+
     /**
      * @var string
      */
     private $_port;
-    
+
     /**
      * Constructor
-     * 
+     *
      * @param string $protocol The protocol.
      * @param string $address  The Address.
      * @param string $port     The Port.
@@ -70,52 +70,52 @@ class RoleInstanceEndpoint
         $this->_address  = $address;
         $this->_port     = $port;
     }
-    
+
     /**
      * Sets the role instance.
-     * 
+     *
      * @param RoleInstance $roleInstance The role instance.
-     * 
-     * @return none
+     *
+     * @return void
      */
     public function setRoleInstance($roleInstance)
     {
         $this->_roleInstance = $roleInstance;
     }
-    
+
     /**
      * Returns the RoleInstance object associated with this endpoint.
-     * 
+     *
      * @return RoleInstance
      */
     public function getRoleInstance()
     {
         return $this->_roleInstance;
     }
-    
+
     /**
      * Returns the protocol associated with the endpoint.
-     * 
+     *
      * @return string
      */
     public function getProtocol()
     {
         return $this->_protocol;
     }
-    
+
     /**
      * Return the address.
-     * 
+     *
      * @return string
      */
     public function getAddress()
     {
         return $this->_address;
     }
-    
+
     /**
      * Return the port.
-     * 
+     *
      * @return string
      */
     public function getPort()

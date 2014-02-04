@@ -11,7 +11,7 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- * 
+ *
  * PHP version 5
  *
  * @category  Microsoft
@@ -39,10 +39,10 @@ interface IRuntimeCurrentStateClient
 {
     /**
      * Sets the current state.
-     * 
+     *
      * @param CurrentState $state The current state.
-     * 
-     * @return none
+     *
+     * @return void
      */
     public function setCurrentState($state);
 }

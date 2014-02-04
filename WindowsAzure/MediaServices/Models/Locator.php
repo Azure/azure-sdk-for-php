@@ -157,10 +157,10 @@ class Locator
     /**
      * Create locator
      *
-     * @param WindowsAzure\MediaServices\Models\Asset|string        $asset        A
+     * @param \WindowsAzure\MediaServices\Models\Asset|string        $asset        A
      * target asset
      *
-     * @param WindowsAzure\MediaServices\Models\AccessPolicy|string $accessPolicy A
+     * @param \WindowsAzure\MediaServices\Models\AccessPolicy|string $accessPolicy A
      * target access policy
      *
      * @param int                                                   $type         An
@@ -184,7 +184,7 @@ class Locator
      *
      * @param array $options Array containing values for object properties
      *
-     * @return none
+     * @return void
      */
     public function fromArray($options)
     {
@@ -265,7 +265,7 @@ class Locator
      *
      * @param \DateTime $value Start time
      *
-     * @return none
+     * @return void
      */
     public function setStartTime($value)
     {
@@ -337,7 +337,7 @@ class Locator
      *
      * @param int $value Type
      *
-     * @return none
+     * @return void
      */
     public function setType($value)
     {
@@ -359,7 +359,7 @@ class Locator
      *
      * @param \DateTime $value Expiration date time
      *
-     * @return none
+     * @return void
      */
     public function setExpirationDateTime($value)
     {
@@ -381,7 +381,7 @@ class Locator
      *
      * @param string $value Name
      *
-     * @return none
+     * @return void
      */
     public function setName($value)
     {
@@ -403,7 +403,7 @@ class Locator
      *
      * @param string $value Locator id
      *
-     * @return none
+     * @return void
      */
     public function setId($value)
     {

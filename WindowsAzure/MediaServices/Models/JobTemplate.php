@@ -141,7 +141,7 @@ class JobTemplate
      *
      * @param array $options Array containing values for object properties
      *
-     * @return none
+     * @return void
      */
     public function fromArray($options)
     {
@@ -205,7 +205,7 @@ class JobTemplate
      *
      * @param string $value Name
      *
-     * @return none
+     * @return void
      */
     public function setName($value)
     {
@@ -257,7 +257,7 @@ class JobTemplate
      *
      * @param int $value Template type
      *
-     * @return none
+     * @return void
      */
     public function setTemplateType($value)
     {
@@ -279,7 +279,7 @@ class JobTemplate
      *
      * @param int $value Number of input assets
      *
-     * @return none
+     * @return void
      */
     public function setNumberofInputAssets($value)
     {
@@ -301,7 +301,7 @@ class JobTemplate
      *
      * @param string $value Job template body
      *
-     * @return none
+     * @return void
      */
     public function setJobTemplateBody($value)
     {

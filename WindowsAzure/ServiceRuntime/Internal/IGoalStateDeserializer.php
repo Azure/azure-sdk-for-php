@@ -11,7 +11,7 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- * 
+ *
  * PHP version 5
  *
  * @category  Microsoft
@@ -39,17 +39,17 @@ interface IGoalStateDeserializer
 {
     /**
      * Initializes the goal state deserializer with the input stream.
-     * 
-     * @param Stream $inputStream The input stream.
-     * 
-     * @return none
+     *
+     * @param resource $inputStream The input stream.
+     *
+     * @return void
      */
     public function initialize($inputStream);
-    
+
     /**
      * Deserializes a goal state.
-     * 
-     * @return none
+     *
+     * @return void
      */
     public function deserialize();
 }

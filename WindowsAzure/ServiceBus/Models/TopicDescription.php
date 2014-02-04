@@ -11,7 +11,7 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- * 
+ *
  * PHP version 5
  *
  * @category  Microsoft
@@ -21,13 +21,13 @@
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link      https://github.com/WindowsAzure/azure-sdk-for-php
  */
- 
+
 namespace WindowsAzure\ServiceBus\Models;
 use WindowsAzure\Common\Internal\Resources;
 use WindowsAzure\Common\Internal\Utilities;
 
 /**
- * The description of the topic.  
+ * The description of the topic.
  *
  * @category  Microsoft
  * @package   WindowsAzure\ServiceBus\Models
@@ -39,50 +39,50 @@ use WindowsAzure\Common\Internal\Utilities;
  */
 class TopicDescription
 {
-    /** 
+    /**
      * The default message time to live.
-     * 
+     *
      * @var string
      */
     private $_defaultMessageTimeToLive;
 
     /**
-     * The maxizmu size in mega bytes. 
-     * 
+     * The maxizmu size in mega bytes.
+     *
      * @integer
      */
     private $_maxSizeInMegabytes;
 
     /**
-     * Requires duplicate detection. 
-     * 
-     * @var boolean 
+     * Requires duplicate detection.
+     *
+     * @var boolean
      */
     private $_requiresDuplicateDetection;
 
-    /** 
-     * Duplicate detection history time window. 
-     * 
+    /**
+     * Duplicate detection history time window.
+     *
      * @var string
      */
     private $_duplicateDetectionHistoryTimeWindow;
-    
+
     /**
-     * Enables batched operations. 
-     * 
+     * Enables batched operations.
+     *
      * @var boolean
      */
     private $_enableBatchedOperations;
-   
+
     /**
-     * The size in bytes. 
-     * 
+     * The size in bytes.
+     *
      * @var integer
-     */  
+     */
     private $_sizeInBytes;
 
     /**
-     * Creates a topic description with default parameters. 
+     * Creates a topic description with default parameters.
      */
     public function __construct()
     {
@@ -92,7 +92,7 @@ class TopicDescription
      * Creates a topic description object with specified XML string.
      *
      * @param string $topicDescriptionXml A XML based string describing
-     * the topic. 
+     * the topic.
      *
      * @return TopicDescription
      */
@@ -115,7 +115,7 @@ class TopicDescription
         }
 
         if (array_key_exists(
-            'RequiresDuplicateDetection', 
+            'RequiresDuplicateDetection',
             $topicDescriptionArray
         )
         ) {
@@ -125,7 +125,7 @@ class TopicDescription
         }
 
         if (array_key_exists(
-            'DuplicateDetectionHistoryTimeWindow', 
+            'DuplicateDetectionHistoryTimeWindow',
             $topicDescriptionArray
         )
         ) {
@@ -135,7 +135,7 @@ class TopicDescription
         }
 
         if (array_key_exists(
-            'EnableBatchedOperations', 
+            'EnableBatchedOperations',
             $topicDescriptionArray
         )) {
             $topicDescription->setEnableBatchedOperations(
@@ -155,13 +155,13 @@ class TopicDescription
     {
         return $this->_defaultMessageTimeToLive;
     }
-    
+
     /**
      * Sets the default message to live.
      *
      * @param string $defaultMessageTimeToLive The default message time to live.
-     * 
-     * @return none
+     *
+     * @return void
      */
     public function setDefaultMessageTimeToLive($defaultMessageTimeToLive)
     {
@@ -169,8 +169,8 @@ class TopicDescription
     }
 
     /**
-     * Gets the msax size in mega bytes. 
-     * 
+     * Gets the msax size in mega bytes.
+     *
      * @return integer
      */
     public function getMaxSizeInMegabytes()
@@ -179,11 +179,11 @@ class TopicDescription
     }
 
     /**
-     * Sets max size in mega bytes. 
-     * 
-     * @param integer $maxSizeInMegabytes The maximum size in mega bytes. 
-     * 
-     * @return none
+     * Sets max size in mega bytes.
+     *
+     * @param integer $maxSizeInMegabytes The maximum size in mega bytes.
+     *
+     * @return void
      */
     public function setMaxSizeInMegabytes($maxSizeInMegabytes)
     {
@@ -192,8 +192,8 @@ class TopicDescription
 
     /**
      * Gets requires duplicate detection.
-     * 
-     * @return boolean 
+     *
+     * @return boolean
      */
     public function getRequiresDuplicateDetection()
     {
@@ -201,11 +201,11 @@ class TopicDescription
     }
 
     /**
-     * Sets requires duplicate detection. 
-     * 
+     * Sets requires duplicate detection.
+     *
      * @param boolean $requiresDuplicateDetection Sets requires duplicate detection.
      *
-     * @return none
+     * @return void
      */
     public function setRequiresDuplicateDetection($requiresDuplicateDetection)
     {
@@ -213,8 +213,8 @@ class TopicDescription
     }
 
     /**
-     * Gets duplicate detection history time window. 
-     * 
+     * Gets duplicate detection history time window.
+     *
      * @return string
      */
     public function getDuplicateDetectionHistoryTimeWindow()
@@ -223,24 +223,24 @@ class TopicDescription
     }
 
     /**
-     * Sets duplicate detection history time window. 
-     * 
-     * @param string $duplicateDetectionHistoryTimeWindow The duplicate 
+     * Sets duplicate detection history time window.
+     *
+     * @param string $duplicateDetectionHistoryTimeWindow The duplicate
      * detection history time window.
      *
-     * @return none
+     * @return void
      */
     public function setDuplicateDetectionHistoryTimeWindow(
         $duplicateDetectionHistoryTimeWindow
     ) {
         $value = $duplicateDetectionHistoryTimeWindow;
-        
+
         $this->_duplicateDetectionHistoryTimeWindow = $value;
     }
 
     /**
-     * Gets enable batched operations. 
-     * 
+     * Gets enable batched operations.
+     *
      * @return boolean
      */
     public function getEnableBatchedOperations()
@@ -250,10 +250,10 @@ class TopicDescription
 
     /**
      * Sets enable batched operations.
-     * 
+     *
      * @param boolean $enableBatchedOperations Enables batched operations.
-     * 
-     * @return none
+     *
+     * @return void
      */
     public function setEnableBatchedOperations($enableBatchedOperations)
     {
@@ -261,21 +261,21 @@ class TopicDescription
     }
 
     /**
-     * Gets size in bytes. 
-     * 
-     * @return integer 
+     * Gets size in bytes.
+     *
+     * @return integer
      */
     public function getSizeInBytes()
     {
         return $this->_sizeInBytes;
     }
 
-    /** 
+    /**
      * Sets size in bytes.
-     * 
-     * @param integer $sizeInBytes The size in bytes. 
      *
-     * @return none
+     * @param integer $sizeInBytes The size in bytes.
+     *
+     * @return void
      */
     public function setSizeInBytes($sizeInBytes)
     {

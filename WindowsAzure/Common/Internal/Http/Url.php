@@ -11,7 +11,7 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- * 
+ *
  * PHP version 5
  *
  * @category  Microsoft
@@ -21,7 +21,7 @@
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
- 
+
 namespace WindowsAzure\Common\Internal\Http;
 require_once 'Net/URL2.php';
 use WindowsAzure\Common\Internal\Validate;
@@ -45,18 +45,18 @@ class Url implements IUrl
      * @var \Net_URL2
      */
     private $_url;
-    
+
     /**
      * Sets the url path to '/' if it's empty
-     * 
+     *
      * @param string $url the url string
-     * 
-     * @return none.
+     *
+     * @return void.
      */
     private function _setPathIfEmpty($url)
     {
         $path =  parse_url($url, PHP_URL_PATH);
-        
+
         if (empty($path)) {
             $this->setUrlPath('/');
         }
@@ -64,33 +64,33 @@ class Url implements IUrl
 
     /**
      * Constructor
-     * 
+     *
      * @param string $url the url to set.
-     * 
+     *
      * @return WindowsAzure\Common\Internal\Http\Url
      */
     public function __construct($url)
     {
         $errorMessage = Resources::INVALID_URL_MSG;
         Validate::isTrue(filter_var($url, FILTER_VALIDATE_URL), $errorMessage);
-        
+
         $this->_url = new \Net_URL2($url);
         $this->_setPathIfEmpty($url);
     }
-    
+
     /**
      * Makes deep copy from the current object.
-     * 
+     *
      * @return WindowsAzure\Common\Internal\Http\Url
      */
     public function __clone()
     {
         $this->_url = clone $this->_url;
     }
-    
+
     /**
      * Returns the query portion of the url
-     * 
+     *
      * @return string
      */
     public function getQuery()
@@ -100,7 +100,7 @@ class Url implements IUrl
 
     /**
      * Returns the query portion of the url in array form
-     * 
+     *
      * @return array
      */
     public function getQueryVariables()
@@ -111,75 +111,75 @@ class Url implements IUrl
     /**
      * Sets a an existing query parameter to value or creates a new one if the $key
      * doesn't exist.
-     * 
+     *
      * @param string $key   query parameter name.
      * @param string $value query value.
-     * 
-     * @return none
+     *
+     * @return void
      */
     public function setQueryVariable($key, $value)
     {
         Validate::isString($key, 'key');
         Validate::isString($value, 'value');
-        
+
         $this->_url->setQueryVariable($key, $value);
     }
-    
+
     /**
      * Gets actual URL string.
-     * 
+     *
      * @return string.
      */
     public function getUrl()
     {
         return $this->_url->getURL();
     }
-    
+
     /**
      * Sets url path
-     * 
+     *
      * @param string $urlPath url path to set.
-     * 
-     * @return none.
+     *
+     * @return void.
      */
     public function setUrlPath($urlPath)
     {
         Validate::isString($urlPath, 'urlPath');
-        
+
         $this->_url->setPath($urlPath);
     }
-    
+
     /**
      * Appends url path
-     * 
+     *
      * @param string $urlPath url path to append.
-     * 
-     * @return none.
+     *
+     * @return void.
      */
     public function appendUrlPath($urlPath)
     {
         Validate::isString($urlPath, 'urlPath');
-        
+
         $newUrlPath = parse_url($this->_url, PHP_URL_PATH) . $urlPath;
         $this->_url->setPath($newUrlPath);
     }
-    
+
     /**
      * Gets actual URL string.
-     * 
+     *
      * @return string.
      */
     public function __toString()
     {
         return $this->_url->getURL();
     }
-    
+
     /**
      * Sets the query string to the specified variables in $array
-     * 
+     *
      * @param array $array key/value representation of query variables.
-     * 
-     * @return none.
+     *
+     * @return void.
      */
     public function setQueryVariables($array)
     {

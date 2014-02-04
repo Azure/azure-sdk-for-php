@@ -11,7 +11,7 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- * 
+ *
  * PHP version 5
  *
  * @category  Microsoft
@@ -21,7 +21,7 @@
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link      https://github.com/WindowsAzure/azure-sdk-for-php
  */
- 
+
 namespace WindowsAzure\ServiceBus\Internal;
 use WindowsAzure\Common\Internal\Resources;
 use WindowsAzure\ServiceBus\Internal\WrapAccessTokenResult;
@@ -40,22 +40,22 @@ use WindowsAzure\Common\Internal\Utilities;
  */
 class ActiveToken
 {
-    /** 
-     * The WRAP access token result. 
-     * 
+    /**
+     * The WRAP access token result.
+     *
      * @var WrapAccessTokenResult
      */
     private $_wrapAccessTokenResult;
 
-    /** 
-     * When the WRAP access token expires. 
-     * 
+    /**
+     * When the WRAP access token expires.
+     *
      * @var \DateTime
      */
     private $_expirationDateTime;
 
     /**
-     * Creates an ActiveToken with specified WRAP 
+     * Creates an ActiveToken with specified WRAP
      * access token result.
      *
      * @param array $wrapAccessTokenResult A WRAP access token result.
@@ -74,13 +74,13 @@ class ActiveToken
     {
         return $this->_wrapAccessTokenResult;
     }
-    
+
     /**
      * Sets WRAP access token.
      *
      * @param string $wrapAccessTokenResult The WRAP access token result.
-     * 
-     * @return none
+     *
+     * @return void
      */
     public function setWrapAccessTokenResult($wrapAccessTokenResult)
     {
@@ -88,7 +88,7 @@ class ActiveToken
     }
 
     /**
-     * Gets expiration time.  
+     * Gets expiration time.
      *
      * @return \DateTime
      */
@@ -101,8 +101,8 @@ class ActiveToken
      * Sets expiration time.
      *
      * @param \DateTime $expirationDateTime value.
-     * 
-     * @return none
+     *
+     * @return void
      */
     public function setExpirationDateTime($expirationDateTime)
     {

@@ -11,7 +11,7 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- * 
+ *
  * PHP version 5
  *
  * @category  Microsoft
@@ -21,7 +21,7 @@
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
- 
+
 namespace WindowsAzure\Blob\Models;
 use WindowsAzure\Common\Internal\Resources;
 use WindowsAzure\Common\Internal\Validate;
@@ -40,28 +40,28 @@ use WindowsAzure\Common\Internal\Utilities;
  */
 class GetBlobMetadataResult
 {
-    
+
     /**
      * @var \DateTime
      */
     private $_lastModified;
-    
+
     /**
      * @var string
      */
     private $_etag;
-    
+
     /**
      * @var array
      */
     private $_metadata;
-    
+
     /**
      * Creates GetBlobMetadataResult from response headers.
-     * 
+     *
      * @param array $headers  The HTTP response headers.
      * @param array $metadata The blob metadata array.
-     * 
+     *
      * @return GetBlobMetadataResult
      */
     public static function create($headers, $metadata)
@@ -71,10 +71,10 @@ class GetBlobMetadataResult
         $result->setLastModified(Utilities::rfc1123ToDateTime($date));
         $result->setETag($headers[Resources::ETAG]);
         $result->setMetadata(is_null($metadata) ? array() : $metadata);
-        
+
         return $result;
     }
-    
+
     /**
      * Gets blob lastModified.
      *
@@ -90,7 +90,7 @@ class GetBlobMetadataResult
      *
      * @param \DateTime $lastModified value.
      *
-     * @return none.
+     * @return void.
      */
     public function setLastModified($lastModified)
     {
@@ -113,14 +113,14 @@ class GetBlobMetadataResult
      *
      * @param string $etag value.
      *
-     * @return none.
+     * @return void.
      */
     public function setETag($etag)
     {
         Validate::isString($etag, 'etag');
         $this->_etag = $etag;
     }
-    
+
     /**
      * Gets blob metadata.
      *
@@ -135,8 +135,8 @@ class GetBlobMetadataResult
      * Sets blob metadata.
      *
      * @param string $metadata value.
-     * 
-     * @return none.
+     *
+     * @return void.
      */
     public function setMetadata($metadata)
     {

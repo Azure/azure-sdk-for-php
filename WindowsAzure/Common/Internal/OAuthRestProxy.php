@@ -23,6 +23,7 @@
  */
 
 namespace WindowsAzure\Common\Internal;
+use WindowsAzure\Common\Internal\Http\IHttpClient;
 use WindowsAzure\Common\Internal\Resources;
 use WindowsAzure\Common\Internal\ServiceRestProxy;
 use WindowsAzure\Common\Models\OAuthAccessToken;

@@ -11,7 +11,7 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- * 
+ *
  * PHP version 5
  *
  * @category  Microsoft
@@ -38,18 +38,19 @@ namespace WindowsAzure\ServiceRuntime\Internal;
 class FileInputChannel implements IInputChannel
 {
     // @codingStandardsIgnoreStart
-    
+
     /**
      * @var Resource
      */
     private $_inputStream;
-    
+
     /**
      * Gets the input stream.
-     * 
+     *
      * @param string $name The input stream path.
-     * 
-     * @return none
+     *
+     * @throws ChannelNotAvailableException
+     * @return void
      */
     public function getInputStream($name)
     {
@@ -60,20 +61,20 @@ class FileInputChannel implements IInputChannel
             throw new ChannelNotAvailableException();
         }
     }
-    
+
     /**
      * Closes the input stream.
-     * 
-     * @return none
+     *
+     * @return void
      */
-    public function closeInputStream() 
+    public function closeInputStream()
     {
         if (!is_null($this->_inputStream)) {
             fclose($this->_inputStream);
             $this->_inputStream = null;
         }
     }
-    
+
     // @codingStandardsIgnoreEnd
 }
 

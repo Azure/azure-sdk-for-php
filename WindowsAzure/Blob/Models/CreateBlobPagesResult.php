@@ -11,7 +11,7 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- * 
+ *
  * PHP version 5
  *
  * @category  Microsoft
@@ -21,7 +21,7 @@
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
- 
+
 namespace WindowsAzure\Blob\Models;
 use WindowsAzure\Common\Internal\Resources;
 use WindowsAzure\Common\Internal\Validate;
@@ -44,35 +44,35 @@ class CreateBlobPagesResult
      * @var \DateTime
      */
     private $_lastModified;
-    
+
     /**
      * @var string
      */
     private $_etag;
-    
+
     /**
      * @var integer
      */
     private $_sequenceNumber;
-    
+
     /**
      * @var string
      */
     private $_contentMD5;
-    
+
     /**
-     * Creates CreateBlobPagesResult object from $parsed response in array 
+     * Creates CreateBlobPagesResult object from $parsed response in array
      * representation
-     * 
+     *
      * @param array $headers HTTP response headers
-     * 
+     *
      * @return CreateBlobPagesResult
      */
     public static function create($headers)
     {
         $result = new CreateBlobPagesResult();
         $clean  = array_change_key_case($headers);
-        
+
         $date = $clean[Resources::LAST_MODIFIED];
         $date = Utilities::rfc1123ToDateTime($date);
         $result->setETag($clean[Resources::ETAG]);
@@ -85,10 +85,10 @@ class CreateBlobPagesResult
                 Utilities::tryGetValue($clean, Resources::X_MS_BLOB_SEQUENCE_NUMBER)
             )
         );
-        
+
         return $result;
     }
-    
+
     /**
      * Gets blob lastModified.
      *
@@ -104,7 +104,7 @@ class CreateBlobPagesResult
      *
      * @param \DateTime $lastModified value.
      *
-     * @return none.
+     * @return void.
      */
     public function setLastModified($lastModified)
     {
@@ -127,14 +127,14 @@ class CreateBlobPagesResult
      *
      * @param string $etag value.
      *
-     * @return none.
+     * @return void.
      */
     public function setETag($etag)
     {
         Validate::isString($etag, 'etag');
         $this->_etag = $etag;
     }
-    
+
     /**
      * Gets blob contentMD5.
      *
@@ -150,13 +150,13 @@ class CreateBlobPagesResult
      *
      * @param string $contentMD5 value.
      *
-     * @return none.
+     * @return void.
      */
     public function setContentMD5($contentMD5)
     {
         $this->_contentMD5 = $contentMD5;
     }
-    
+
     /**
      * Gets blob sequenceNumber.
      *
@@ -172,7 +172,7 @@ class CreateBlobPagesResult
      *
      * @param int $sequenceNumber value.
      *
-     * @return none.
+     * @return void.
      */
     public function setSequenceNumber($sequenceNumber)
     {

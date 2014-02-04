@@ -11,7 +11,7 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- * 
+ *
  * PHP version 5
  *
  * @category  Microsoft
@@ -21,7 +21,7 @@
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
- 
+
 namespace WindowsAzure\Blob\Models;
 
 use WindowsAzure\Common\Internal\Utilities;
@@ -44,17 +44,17 @@ class AccessPolicy
      * @var string
      */
     private $_start;
-    
+
     /**
      * @var \DateTime
      */
     private $_expiry;
-    
+
     /**
      * @var \DateTime
      */
     private $_permission;
-    
+
     /**
      * Gets start.
      *
@@ -69,15 +69,15 @@ class AccessPolicy
      * Sets start.
      *
      * @param \DateTime $start value.
-     * 
-     * @return none.
+     *
+     * @return void.
      */
     public function setStart($start)
     {
         Validate::isDate($start);
         $this->_start = $start;
     }
-    
+
     /**
      * Gets expiry.
      *
@@ -92,15 +92,15 @@ class AccessPolicy
      * Sets expiry.
      *
      * @param \DateTime $expiry value.
-     * 
-     * @return none.
+     *
+     * @return void.
      */
     public function setExpiry($expiry)
     {
         Validate::isDate($expiry);
         $this->_expiry = $expiry;
     }
-    
+
     /**
      * Gets permission.
      *
@@ -115,27 +115,27 @@ class AccessPolicy
      * Sets permission.
      *
      * @param string $permission value.
-     * 
-     * @return none.
+     *
+     * @return void.
      */
     public function setPermission($permission)
     {
         $this->_permission = $permission;
     }
-    
+
     /**
      * Converts this current object to XML representation.
-     * 
+     *
      * @return array.
      */
     public function toArray()
     {
         $array = array();
-        
+
         $array['Start']      = Utilities::convertToEdmDateTime($this->_start);
         $array['Expiry']     = Utilities::convertToEdmDateTime($this->_expiry);
         $array['Permission'] = $this->_permission;
-        
+
         return $array;
     }
 }

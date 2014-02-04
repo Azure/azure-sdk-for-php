@@ -11,7 +11,7 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- * 
+ *
  * PHP version 5
  *
  * @category  Microsoft
@@ -21,7 +21,7 @@
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
- 
+
 namespace WindowsAzure\Table\Internal;
 use WindowsAzure\Common\Internal\Utilities;
 use WindowsAzure\Common\Internal\Resources;
@@ -45,44 +45,44 @@ class AtomReaderWriter implements IAtomReaderWriter
      * @var string
      */
     private $_atomNamespaceName;
-    
+
     /**
      * @var string
      */
     private $_dataServicesNamespaceName;
-    
+
     /**
-     * @var string 
+     * @var string
      */
     private $_dataServicesMetadataNamespaceName;
-    
+
     /**
      * @var string
      */
     private $_xmlVersion;
-    
+
     /**
      * @var string
      */
     private $_xmlEncoding;
-    
+
     /**
      * @var string
      */
     private $_dataServicesPrefix;
-    
+
     /**
      * @var string
      */
     private $_dataServicesMetadataPrefix;
-    
+
     /**
      * Generates the atom XML properties.
-     * 
+     *
      * @param \XmlWriter $xmlw       The XML writer.
      * @param array      $properties The atom properties.
-     * 
-     * @return none
+     *
+     * @return void
      */
     private function _generateProperties($xmlw, $properties)
     {
@@ -107,9 +107,9 @@ class AtomReaderWriter implements IAtomReaderWriter
 
     /**
      * Serializes the atom into XML representation.
-     * 
+     *
      * @param array $properties The atom properties.
-     * 
+     *
      * @return string
      */
     private function _serializeAtom($properties)
@@ -148,15 +148,15 @@ class AtomReaderWriter implements IAtomReaderWriter
         $xmlw->endElement();
         $xmlw->endElement();
         $xmlw->endElement();
-        
+
         return $xmlw->outputMemory(true);
     }
-    
-    /** 
+
+    /**
      * Creates new SimpleXml from Atom XML and registers the namespaces prefixes.
      *
      * @param string $body Response from HTTP call.
-     * 
+     *
      * @return \SimpleXml
      */
     private function _parseBody($body)
@@ -176,47 +176,47 @@ class AtomReaderWriter implements IAtomReaderWriter
 
         return $xml;
     }
-    
+
     /**
      * Parses one table entry and returns the table name.
-     * 
+     *
      * @param \SimpleXml $result The original XML body loaded in XML.
-     * 
+     *
      * @return string
      */
     private function _parseOneTable($result)
-    {        
+    {
         $query     = ".//$this->_dataServicesMetadataPrefix:properties/";
         $query    .= "$this->_dataServicesPrefix:TableName";
         $tableName = $result->xpath($query);
         $table     = (string)$tableName[0];
-        
+
         return $table;
     }
-    
+
     /**
      * Gets entry nodes from the XML body.
-     * 
+     *
      * @param \SimpleXml $body The original XML body loaded in XML.
-     * 
+     *
      * @return array
      */
     private function _getRawEntries($body)
     {
         $rawEntries = array();
-        
+
         if (!is_null($body) && $body->entry) {
             $rawEntries = $body->entry;
         }
-        
+
         return $rawEntries;
     }
-    
+
     /**
      * Parses an entity entry from given SimpleXML object.
-     * 
+     *
      * @param \SimpleXML $result The SimpleXML object representing the entity.
-     * 
+     *
      * @return \WindowsAzure\Table\Models\Entity
      */
     private function _parseOneEntity($result)
@@ -225,12 +225,12 @@ class AtomReaderWriter implements IAtomReaderWriter
         $prop   = $result->content->xpath(".//$prefix:properties");
         $prop   = $prop[0]->children($this->_dataServicesNamespaceName);
         $entity = new Entity();
-        
+
         // Set ETag
         $etag = $result->attributes($this->_dataServicesMetadataNamespaceName);
         $etag = $etag[Resources::ETAG];
         $entity->setETag((string)$etag);
-        
+
         foreach ($prop as $key => $value) {
             $attributes = $value->attributes(
                 $this->_dataServicesMetadataNamespaceName
@@ -238,19 +238,19 @@ class AtomReaderWriter implements IAtomReaderWriter
             $type       = $attributes['type'];
             $isnull     = $attributes['null'];
             $value      = EdmType::unserializeQueryValue((string)$type, $value);
-            
+
             $entity->addProperty(
                 (string)$key,
                 is_null($type) ? null : (string)$type,
                 $isnull ? null : $value
             );
         }
-        
+
         return $entity;
     }
-    
+
     /**
-     * Constructs new AtomReaderWriter object. 
+     * Constructs new AtomReaderWriter object.
      */
     public function __construct()
     {
@@ -262,37 +262,37 @@ class AtomReaderWriter implements IAtomReaderWriter
         $this->_xmlVersion                        = '1.0';
         $this->_xmlEncoding                       = 'UTF-8';
     }
-    
+
     /**
      * Constructs XML representation for table entry.
-     * 
+     *
      * @param string $name The name of the table.
-     * 
+     *
      * @return string
      */
     public function getTable($name)
     {
         return $this->_serializeAtom(array('TableName' => array($name => null)));
     }
-    
+
     /**
      * Parses one table entry.
-     * 
+     *
      * @param string $body The HTTP response body.
-     * 
-     * @return string 
+     *
+     * @return string
      */
     public function parseTable($body)
     {
         $result = $this->_parseBody($body);
         return $this->_parseOneTable($result);
     }
-    
+
     /**
      * Constructs array of tables from HTTP response body.
-     * 
+     *
      * @param string $body The HTTP response body.
-     * 
+     *
      * @return array
      */
     public function parseTableEntries($body)
@@ -300,26 +300,26 @@ class AtomReaderWriter implements IAtomReaderWriter
         $tables     = array();
         $result     = $this->_parseBody($body);
         $rawEntries = $this->_getRawEntries($result);
-        
+
         foreach ($rawEntries as $entry) {
             $tables[] = $this->_parseOneTable($entry);
         }
-        
+
         return $tables;
     }
-    
+
     /**
      * Constructs XML representation for entity.
-     * 
+     *
      * @param Models\Entity $entity The entity instance.
-     * 
+     *
      * @return string
      */
     public function getEntity($entity)
     {
         $entityProperties = $entity->getProperties();
         $properties       = array();
-        
+
         foreach ($entityProperties as $name => $property) {
             $attributes = array();
             $edmType    = $property->getEdmType();
@@ -333,15 +333,15 @@ class AtomReaderWriter implements IAtomReaderWriter
             $value             = EdmType::serializeValue($edmType, $edmValue);
             $properties[$name] = array($value => $attributes);
         }
-        
+
         return $this->_serializeAtom($properties);
     }
-    
+
     /**
      * Constructs entity from HTTP response body.
-     * 
+     *
      * @param string $body The HTTP response body.
-     * 
+     *
      * @return Entity
      */
     public function parseEntity($body)
@@ -350,12 +350,12 @@ class AtomReaderWriter implements IAtomReaderWriter
         $entity = $this->_parseOneEntity($result);
         return $entity;
     }
-    
+
     /**
      * Constructs array of entities from HTTP response body.
-     * 
+     *
      * @param string $body The HTTP response body.
-     * 
+     *
      * @return array
      */
     public function parseEntities($body)
@@ -363,11 +363,11 @@ class AtomReaderWriter implements IAtomReaderWriter
         $result     = $this->_parseBody($body);
         $entities   = array();
         $rawEntries = $this->_getRawEntries($result);
-        
+
         foreach ($rawEntries as $entity) {
             $entities[] = $this->_parseOneEntity($entity);
         }
-        
+
         return $entities;
     }
 }

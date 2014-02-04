@@ -11,7 +11,7 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- * 
+ *
  * PHP version 5
  *
  * @category  Microsoft
@@ -21,7 +21,7 @@
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
- 
+
 namespace WindowsAzure\ServiceManagement\Models;
 use WindowsAzure\Common\Internal\Resources;
 use WindowsAzure\Common\Internal\Utilities;
@@ -43,23 +43,23 @@ class UpgradeStatus
      * @var string
      */
     private $_upgradeType;
-    
+
     /**
      * @var string
      */
     private $_currentUpgradeDomainState;
-    
+
     /**
      * @var integer
      */
     private $_currentUpgradeDomain;
-    
+
     /**
      * Creates a new UpgradeStatus object from the parsed response.
-     * 
+     *
      * @param array $parsed The parsed response body in array representation
-     * 
-     * @return \WindowsAzure\ServiceManagement\Models\UpgradeStatus 
+     *
+     * @return \WindowsAzure\ServiceManagement\Models\UpgradeStatus
      */
     public static function create($parsed)
     {
@@ -76,85 +76,85 @@ class UpgradeStatus
             $parsed,
             Resources::XTAG_CURRENT_UPGRADE_DOMAIN
         );
-        
+
         $result->setCurrentUpgradeDomain(intval($currentUpgradeDomain));
         $result->setCurrentUpgradeDomainState($currentUpgradeDomainState);
         $result->setUpgradeType($upgradeType);
-        
+
         return $result;
     }
-    
+
     /**
      * Gets the deployment upgrade type.
-     * 
+     *
      * The upgrade type designated for this deployment. Possible values are Auto and
      * Manual.
-     * 
+     *
      * @return string
      */
     public function getUpgradeType()
     {
         return $this->_upgradeType;
     }
-    
+
     /**
      * Sets the deployment upgrade type.
-     * 
+     *
      * @param string $upgradeType The deployment upgrade type.
-     * 
-     * @return none
+     *
+     * @return void
      */
     public function setUpgradeType($upgradeType)
     {
         $this->_upgradeType = $upgradeType;
     }
-    
+
     /**
      * Gets the deployment current upgrade domain state.
-     * 
-     * The state of the current upgrade domain. Possible values are Before and 
+     *
+     * The state of the current upgrade domain. Possible values are Before and
      * During.
-     * 
+     *
      * @return string
      */
     public function getCurrentUpgradeDomainState()
     {
         return $this->_currentUpgradeDomainState;
     }
-    
+
     /**
      * Sets the deployment current upgrade domain state.
-     * 
+     *
      * @param string $currentUpgradeDomainState The deployment current upgrade domain
      * state.
-     * 
-     * @return none
+     *
+     * @return void
      */
     public function setCurrentUpgradeDomainState($currentUpgradeDomainState)
     {
         $this->_currentUpgradeDomainState = $currentUpgradeDomainState;
     }
-    
+
     /**
      * Gets the deployment current upgrade domain.
-     * 
-     * An integer value that identifies the current upgrade domain. Upgrade domains 
+     *
+     * An integer value that identifies the current upgrade domain. Upgrade domains
      * are identified with a zero-based index: the first upgrade domain has an ID of
      * 0, the second has an ID of 1, and so on.
-     * 
+     *
      * @return integer
      */
     public function getCurrentUpgradeDomain()
     {
         return $this->_currentUpgradeDomain;
     }
-    
+
     /**
      * Sets the deployment current upgrade domain.
-     * 
+     *
      * @param integer $currentUpgradeDomain The deployment current upgrade domain.
-     * 
-     * @return none
+     *
+     * @return void
      */
     public function setCurrentUpgradeDomain($currentUpgradeDomain)
     {
