@@ -1564,6 +1564,24 @@ class BlobRestProxyTest extends BlobServiceRestProxyTestBase
     * @covers WindowsAzure\Blob\BlobRestProxy::getSingleBlobUploadThresholdInBytes
     * @covers WindowsAzure\Blob\BlobRestProxy::setSingleBlobUploadThresholdInBytes
     */
+    public function testSingleBlobUploadZeroBytes()
+    {
+        // Bug reported for zero byte upload similar to unix touch command failing
+        $name = 'createEmptyBlob' . $this->createSuffix();
+	$this->createContainer($name);
+        $contentType = 'text/plain; charset=UTF-8';
+        $content = "";
+        $options = new CreateBlobOptions();
+        $options->setContentType($contentType);
+        $this->restProxy->createBlockBlob($name, 'EmptyFile', $content, $options);
+
+        // Now see if we can pick thje file back up.
+        $result = $this->restProxy->getBlob($name, $blob);
+        
+        // Assert
+        $this->assertEquals($content, stream_get_contents($result->getContentStream()));
+    }
+
     public function testSingleBlobUploadThresholdInBytes()
     {
         // Values based on http://msdn.microsoft.com/en-us/library/microsoft.windowsazure.storageclient.cloudblobclient.singleblobuploadthresholdinbytes.aspx
