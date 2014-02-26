@@ -182,6 +182,7 @@ spl_autoload_register(
             'tests\\unit\\windowsazure\\common\\serviceexceptiontest' => '/unit/WindowsAzure/Common/ServiceExceptionTest.php',
             'tests\\unit\\windowsazure\\common\\servicesbuildertest' => '/unit/WindowsAzure/Common/ServicesBuilderTest.php',
             'tests\\unit\\windowsazure\\createserviceoptionsmanagement\\models\\createserviceoptionstest' => '/unit/WindowsAzure/ServiceManagement/Models/CreateStorageServiceOptionsTest.php',
+            'tests\\unit\\windowsazure\\mediaservices\\clean' => '/unit/WindowsAzure/Clean.php',
             'tests\\unit\\windowsazure\\mediaservices\\internal\\contentpropertiesserializertest' => '/unit/WindowsAzure/MediaServices/Internal/ContentPropertiesSerializerTest.php',
             'tests\\unit\\windowsazure\\mediaservices\\mediaservicesfunctionaltest' => '/functional/WindowsAzure/MediaServices/MediaServicesFunctionalTest.php',
             'tests\\unit\\windowsazure\\mediaservices\\mediaservicesrestproxytest' => '/unit/WindowsAzure/MediaServices/MediaServicesRestProxyTest.php',

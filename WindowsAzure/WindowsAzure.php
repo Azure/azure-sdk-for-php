@@ -149,6 +149,7 @@ spl_autoload_register(
             'windowsazure\\mediaservices\\models\\assetfile' => '/MediaServices/Models/AssetFile.php',
             'windowsazure\\mediaservices\\models\\contentkey' => '/MediaServices/Models/ContentKey.php',
             'windowsazure\\mediaservices\\models\\contentkeytypes' => '/MediaServices/Models/ContentKeyTypes.php',
+            'windowsazure\\mediaservices\\models\\encryptionschemes' => '/MediaServices/Models/EncryptionSchemes.php',
             'windowsazure\\mediaservices\\models\\errordetail' => '/MediaServices/Models/ErrorDetail.php',
             'windowsazure\\mediaservices\\models\\ingestmanifest' => '/MediaServices/Models/IngestManifest.php',
             'windowsazure\\mediaservices\\models\\ingestmanifestasset' => '/MediaServices/Models/IngestManifestAsset.php',

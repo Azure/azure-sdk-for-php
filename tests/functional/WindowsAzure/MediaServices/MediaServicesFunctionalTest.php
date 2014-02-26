@@ -44,6 +44,7 @@ use WindowsAzure\MediaServices\Models\IngestManifestFile;
 use WindowsAzure\MediaServices\Models\ProtectionKeyTypes;
 use WindowsAzure\MediaServices\Models\ContentKey;
 use WindowsAzure\MediaServices\Models\ContentKeyTypes;
+use WindowsAzure\MediaServices\Models\EncryptionSchemes;
 use WindowsAzure\Common\Internal\Http\Url;
 use WindowsAzure\Common\Internal\Http\HttpClient;
 
@@ -875,8 +876,8 @@ class MediaServicesFunctionalTest extends MediaServicesRestProxyTestBase
         $files = $this->restProxy->getAssetAssetFileList($asset);
         $files[0]->setIsEncrypted(true);
         $files[0]->setEncryptionKeyId($contentKey->getId());
-        $files[0]->setEncryptionScheme('StorageEncryption');
-        $files[0]->setEncryptionVersion('1.0');
+        $files[0]->setEncryptionScheme(EncryptionSchemes::STORAGE_ENCRYPTION);
+        $files[0]->setEncryptionVersion(Resources::MEDIA_SERVICES_ENCRYPTION_VERSION);
         $files[0]->setInitializationVector(base64_encode(Utilities::generateCryptoKey(8)));
         $this->restProxy->updateAssetFile($files[0]);
 
