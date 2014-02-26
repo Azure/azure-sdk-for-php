@@ -851,22 +851,16 @@ class MediaServicesFunctionalTest extends MediaServicesRestProxyTestBase
 
     public function testIngestEncryptedAsset()
     {
-        $aesKey = '7868CC14AE5FA7E974FAFFAF072DDE2D250334E9D647C086D088C621B28F9F28';
+        $aesKey = Utilities::generateCryptoKey(32);
 
         $protectionKeyId = $this->restProxy->getProtectionKeyId(ProtectionKeyTypes::X509_CERTIFICATE_THUMBPRINT);
         $protectionKey = $this->restProxy->getProtectionKey($protectionKeyId);
 
-//                 foreach(unpack('C*', $cryptedContentKey) as $b) {
-//                     echo ($b > 127 ? $b - 256 : $b) . ', ';
-//                 }
-
-
-        $contentKey = new ContentKey('nb:kid:UUID:' . Utilities::getGuid());//'nb:kid:UUID:3116a6f2-743f-4cc8-aa4e-e71bf8996349');//'nb:kid:UUID:' . Utilities::getGuid());
-        $contentKey->setEncryptedContentKey(base64_encode($this->encryptContentKey(openssl_x509_read($protectionKey), $aesKey)));
+        $contentKey = new ContentKey();
+        $contentKey->setContentKey($aesKey, $protectionKey);
         $contentKey->setProtectionKeyId($protectionKeyId);
         $contentKey->setProtectionKeyType(ProtectionKeyTypes::X509_CERTIFICATE_THUMBPRINT);
         $contentKey->setContentKeyType(ContentKeyTypes::STORAGE_ENCRYPTION);
-        $contentKey->setChecksum($this->createCheckSum($aesKey, $contentKey->getId()));
         $contentKey = $this->createContentKey($contentKey);
 
 
@@ -883,7 +877,7 @@ class MediaServicesFunctionalTest extends MediaServicesRestProxyTestBase
         $files[0]->setEncryptionKeyId($contentKey->getId());
         $files[0]->setEncryptionScheme('StorageEncryption');
         $files[0]->setEncryptionVersion('1.0');
-        $files[0]->setInitializationVector(base64_encode(openssl_random_pseudo_bytes(8)));
+        $files[0]->setInitializationVector(base64_encode(Utilities::generateCryptoKey(8)));
         $this->restProxy->updateAssetFile($files[0]);
 
     }

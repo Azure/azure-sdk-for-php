@@ -24,6 +24,7 @@
 
 namespace WindowsAzure\MediaServices\Models;
 use WindowsAzure\Common\Internal\Validate;
+use WindowsAzure\Common\Internal\Utilities;
 
 
 
@@ -112,9 +113,7 @@ class ContentKey
      */
     public static function createFromOptions($options)
     {
-        Validate::notNull($options['Id'], 'options[Id]');
-
-        $contentKey = new ContentKey($options['Id']);
+        $contentKey = new ContentKey();
         $contentKey->fromArray($options);
 
         return $contentKey;
@@ -127,9 +126,9 @@ class ContentKey
      *
      * @return none
      */
-    public function __construct($id)
+    public function __construct()
     {
-        $this->_id = $id;
+        $this->_id = 'nb:kid:UUID:' . Utilities::getGuid();
     }
 
     /**
@@ -364,6 +363,59 @@ class ContentKey
     public function setId($value)
     {
         $this->_id = $value;
+    }
+
+    /**
+     * Generate encryption content key. Encrypt aes key with protection key from WAMS
+     *
+     * @param string $aesKey        Content key to encrypt
+     * @param string $protectionKey Protection key (public key) from WAMS
+     *
+     * @return none
+     */
+    private function generateEncryptedContentKey($aesKey, $protectionKey)
+    {
+        $cert = openssl_x509_read($protectionKey);
+
+        $cryptedContentKey = '';
+        openssl_public_encrypt($aesKey, $cryptedContentKey, $cert, OPENSSL_PKCS1_OAEP_PADDING);
+
+        $this->_encryptedContentKey = base64_encode($cryptedContentKey);
+    }
+
+    /**
+     * Generate checksum for content key.
+     *
+     * @param string $aesKey Content key
+     *
+     * @return none
+     */
+    private function generateChecksum($aesKey)
+    {
+        $encrypted = mcrypt_encrypt(
+            MCRYPT_RIJNDAEL_128, // AES
+            $aesKey,
+            $this->_id,
+            MCRYPT_MODE_ECB
+        );
+
+        $this->_checkSum = base64_encode(substr($encrypted, 0, 8));
+    }
+
+    /**
+     * Set not encrypted content key. Automatically encrypted content key and
+     * set checksum
+     *
+     * @param string $value         Content key
+     * @param string $protectionKey Protection key (public key) from WAMS
+
+     * @return none
+     */
+    public function setContentKey($value, $protectionKey)
+    {
+        $this->generateEncryptedContentKey($value, $protectionKey);
+
+        $this->generateChecksum($value);
     }
 }
 

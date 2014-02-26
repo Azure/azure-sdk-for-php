@@ -271,19 +271,19 @@ class MediaServicesRestProxyTestBase extends ServiceRestProxyTestBase
             $this->restProxy->deleteLocator($loc);
         }
 
-        foreach($this->assets as $asset) {
-            $this->restProxy->deleteAsset($asset);
-        }
-
         foreach($this->contentKeys as $contentKey) {
             try {
                 $this->restProxy->deleteContentKey($contentKey);
             }
             catch (ServiceException $e) {
-                if ($e->getCode() != 400) {
+                if (($e->getCode() != 400) && (strpos($e->getMessage(), 'Content Keys used to protect Asset cannot be deleted directly.') !== false)) {
                     throw $e;
                 }
             }
+        }
+
+        foreach($this->assets as $asset) {
+            $this->restProxy->deleteAsset($asset);
         }
 
         foreach($this->accessPolicy as $access) {
@@ -330,25 +330,5 @@ class MediaServicesRestProxyTestBase extends ServiceRestProxyTestBase
             $attempt++;
             sleep(1);
         }
-    }
-
-    public function createCheckSum($key, $data) {
-        $key = pack('H*', $key);
-
-        $alg = MCRYPT_RIJNDAEL_128; // AES
-        $mode = MCRYPT_MODE_ECB;
-
-        $encrypted = mcrypt_encrypt($alg, $key, $data, $mode);
-
-        return base64_encode(substr($encrypted, 0, 8));
-    }
-
-    public function encryptContentKey($cert, $data) {
-        $data = pack('H*', $data);
-
-        $cryptedContentKey = '';
-        openssl_public_encrypt($data, $cryptedContentKey, $cert, OPENSSL_PKCS1_OAEP_PADDING);
-
-        return $cryptedContentKey;
     }
 }

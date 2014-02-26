@@ -632,4 +632,16 @@ class Utilities
         }
     }
 
+    /**
+     * Generate key for use at encryption
+     *
+     * @param int $length Length of the key in bytes
+     *
+     * @return string Generated key as string of $length characters
+     */
+    public static function generateCryptoKey($length)
+    {
+        return openssl_random_pseudo_bytes($length);
+    }
+
 }
