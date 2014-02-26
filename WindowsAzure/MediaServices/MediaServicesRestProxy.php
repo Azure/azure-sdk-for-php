@@ -2039,7 +2039,7 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
      * protection content keys
      *
      *
-     * @return Models\ContentKey
+     * @return string Content key
      */
     public function rebindContentKey($contentKey, $x509Certificate)
     {
@@ -2047,14 +2047,30 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
             $contentKey,
             'WindowsAzure\Mediaservices\Models\ContentKey'
         );
+        $contentKeyId = urlencode($contentKeyId);
 
         $x509Certificate = urlencode($x509Certificate);
 
-        return ContentKey::createFromOptions(
-            $this->_getEntity("RebindContentKey?id='{$contentKeyId}'" .
-                "&x509Certificate='{$x509Certificate}'"
-            )
+        $method      = Resources::HTTP_GET;
+        $headers     = array();
+        $postParams  = array();
+        $queryParams = array();
+        $statusCode  = Resources::STATUS_OK;
+        $path        = "RebindContentKey?id='{$contentKeyId}'" .
+            "&x509Certificate='{$x509Certificate}'";
+
+        $response = $this->send(
+            $method,
+            $headers,
+            $postParams,
+            $queryParams,
+            $path,
+            $statusCode
         );
+
+        $key = (string)simplexml_load_string($response->getBody());
+
+        return base64_decode($key);
     }
 
     /**

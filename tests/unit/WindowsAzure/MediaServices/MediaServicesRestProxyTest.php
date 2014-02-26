@@ -1320,7 +1320,7 @@ class MediaServicesRestProxyTest extends MediaServicesRestProxyTestBase
         $result = $this->restProxy->rebindContentKey($contentKey, '');
 
         // Assert
-        print_r($result);
+        $this->assertEquals($result, $aesKey);
     }
 
     /**
