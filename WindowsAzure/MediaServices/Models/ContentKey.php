@@ -399,7 +399,7 @@ class ContentKey
             MCRYPT_MODE_ECB
         );
 
-        $this->_checkSum = base64_encode(substr($encrypted, 0, 8));
+        $this->_checksum = base64_encode(substr($encrypted, 0, 8));
     }
 
     /**

@@ -25,6 +25,8 @@ namespace Tests\Unit\WindowsAzure\MediaServices\Models;
 use WindowsAzure\MediaServices\Models\ContentKey;
 use WindowsAzure\MediaServices\Models\ContentKeyTypes;
 use WindowsAzure\MediaServices\Models\ProtectionKeyTypes;
+use WindowsAzure\Common\Internal\Resources;
+use WindowsAzure\Common\Internal\Utilities;
 
 /**
  * Represents access policy object used in media services
@@ -41,23 +43,9 @@ use WindowsAzure\MediaServices\Models\ProtectionKeyTypes;
 class ContentKeyTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @covers WindowsAzure\MediaServices\Models\ContentKey::__construct
-     */
-    public function test__construct(){
-
-        // Setup
-        $contentKeyId = 'content-key-id-12563';
-
-        // Test
-        $contentKey = new ContentKey($contentKeyId);
-
-        // Assert
-        $this->assertEquals($contentKeyId, $contentKey->getId());
-    }
-
-    /**
      * @covers WindowsAzure\MediaServices\Models\ContentKey::createFromOptions
      * @covers WindowsAzure\MediaServices\Models\ContentKey::fromArray
+     * @covers WindowsAzure\MediaServices\Models\ContentKey::__construct
      */
     public function testCreateFromOptions(){
 
@@ -101,8 +89,7 @@ class ContentKeyTest extends \PHPUnit_Framework_TestCase
 
         // Setup
         $checksum = 'checksum-of-content-key';
-        $contentKeyId = 'content-key-id-12563';
-        $contentKey = new ContentKey($contentKeyId);
+        $contentKey = new ContentKey();
 
         // Test
         $contentKey->setChecksum($checksum);
@@ -119,8 +106,7 @@ class ContentKeyTest extends \PHPUnit_Framework_TestCase
     public function testGetSetProtectionKeyType(){
 
         // Setup
-        $contentKeyId = 'content-key-id-12563';
-        $contentKey = new ContentKey($contentKeyId);
+        $contentKey = new ContentKey();
         $protectionKeyType = ProtectionKeyTypes::X509_CERTIFICATE_THUMBPRINT;
 
         // Test
@@ -138,8 +124,7 @@ class ContentKeyTest extends \PHPUnit_Framework_TestCase
     public function testGetSetProtectionKeyId(){
 
         // Setup
-        $contentKeyId = 'content-key-id-12563';
-        $contentKey = new ContentKey($contentKeyId);
+        $contentKey = new ContentKey();
         $protectionKeyId = 'protection-key-id-36589';
 
         // Test
@@ -157,8 +142,7 @@ class ContentKeyTest extends \PHPUnit_Framework_TestCase
     public function testGetSetName(){
 
         // Setup
-        $contentKeyId = 'content-key-id-12563';
-        $contentKey = new ContentKey($contentKeyId);
+        $contentKey = new ContentKey();
         $name = 'test Name For Content Key';
 
         // Test
@@ -176,8 +160,7 @@ class ContentKeyTest extends \PHPUnit_Framework_TestCase
     public function testGetSetEncryptedContentKey(){
 
         // Setup
-        $contentKeyId = 'content-key-id-12563';
-        $contentKey = new ContentKey($contentKeyId);
+        $contentKey = new ContentKey();
         $aesKey = '7868CC14AE5FA7E974FAFFAF072DDE2D250334E9D647C086D088C621B28F9F28';
 
         // Test
@@ -196,8 +179,7 @@ class ContentKeyTest extends \PHPUnit_Framework_TestCase
 
         // Setup
         $contentKeyType = ContentKeyTypes::STORAGE_ENCRYPTION;
-        $contentKeyId = 'content-key-id-12563';
-        $contentKey = new ContentKey($contentKeyId);
+        $contentKey = new ContentKey();
 
         // Test
         $contentKey->setContentKeyType($contentKeyType);
@@ -213,9 +195,7 @@ class ContentKeyTest extends \PHPUnit_Framework_TestCase
     public function testGetCreated(){
 
         // Setup
-        $contentKeyId = 'content-key-id-12563';
         $options = array(
-                'Id'                       => $contentKeyId,
                 'Created'                  => '2013-02-26'
         );
         $created = new \Datetime($options['Created']);
@@ -234,9 +214,7 @@ class ContentKeyTest extends \PHPUnit_Framework_TestCase
     public function testGetLastModified(){
 
         // Setup
-        $contentKeyId = 'content-key-id-12563';
         $options = array(
-                'Id'                       => $contentKeyId,
                 'LastModified'             => '2013-02-26'
         );
         $modified = new \Datetime($options['LastModified']);
@@ -256,9 +234,8 @@ class ContentKeyTest extends \PHPUnit_Framework_TestCase
     public function testGetSetId(){
 
         // Setup
-        $contentKeyId = 'content-key-id-12563';
         $newContentKeyId = 'content-key-id-14569';
-        $contentKey = new ContentKey($contentKeyId);
+        $contentKey = new ContentKey();
 
         // Test
         $contentKey->setId($newContentKeyId);
@@ -266,6 +243,44 @@ class ContentKeyTest extends \PHPUnit_Framework_TestCase
 
         // Assert
         $this->assertEquals($newContentKeyId, $result);
+    }
+
+    /**
+     * @covers WindowsAzure\MediaServices\Models\ContentKey::setContentKey
+     * @covers WindowsAzure\MediaServices\Models\ContentKey::generateChecksum
+     * @covers WindowsAzure\MediaServices\Models\ContentKey::generateEncryptedContentKey
+     *
+     */
+    public function testSetContentKey(){
+
+        // Setup
+        $protectionKey = '-----BEGIN CERTIFICATE-----
+MIIDSTCCAjGgAwIBAgIQqf92wku/HLJGCbMAU8GEnDANBgkqhkiG9w0BAQQFADAuMSwwKgYDVQQD
+EyN3YW1zYmx1cmVnMDAxZW5jcnlwdGFsbHNlY3JldHMtY2VydDAeFw0xMjA1MjkwNzAwMDBaFw0z
+MjA1MjkwNzAwMDBaMC4xLDAqBgNVBAMTI3dhbXNibHVyZWcwMDFlbmNyeXB0YWxsc2VjcmV0cy1j
+ZXJ0MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAzR0SEbXefvUjb9wCUfkEiKtGQ5Gc
+328qFPrhMjSo+YHe0AVviZ9YaxPPb0m1AaaRV4dqWpST2+JtDhLOmGpWmmA60tbATJDdmRzKi2eY
+AyhhE76MgJgL3myCQLP42jDusWXWSMabui3/tMDQs+zfi1sJ4Ch/lm5EvksYsu6o8sCv29VRwxfD
+LJPBy2NlbV4GbWz5Qxp2tAmHoROnfaRhwp6WIbquk69tEtu2U50CpPN2goLAqx2PpXAqA+prxCZY
+GTHqfmFJEKtZHhizVBTFPGS3ncfnQC9QIEwFbPw6E5PO5yNaB68radWsp5uvDg33G1i8IT39GstM
+W6zaaG7cNQIDAQABo2MwYTBfBgNVHQEEWDBWgBCOGT2hPhsvQioZimw8M+jOoTAwLjEsMCoGA1UE
+AxMjd2Ftc2JsdXJlZzAwMWVuY3J5cHRhbGxzZWNyZXRzLWNlcnSCEKn/dsJLvxyyRgmzAFPBhJww
+DQYJKoZIhvcNAQEEBQADggEBABcrQPma2ekNS3Wc5wGXL/aHyQaQRwFGymnUJ+VR8jVUZaC/U/f6
+lR98eTlwycjVwRL7D15BfClGEHw66QdHejaViJCjbEIJJ3p2c9fzBKhjLhzB3VVNiLIaH6RSI1bM
+Pd2eddSCqhDIn3VBN605GcYXMzhYp+YA6g9+YMNeS1b+LxX3fqixMQIxSHOLFZ1G/H2xfNawv0Vi
+kH3djNui3EKT1w/8aRkUv/AAV0b3rYkP/jA1I0CPn0XFk7STYoiJ3gJoKq9EMXhit+Iwfz0sMkfh
+WG12/XO+TAWqsK1ZxEjuC9OzrY7pFnNxs4Mu4S8iinehduSpY+9mDd3dHynNwT4=
+-----END CERTIFICATE-----';
+        $contentKey = new ContentKey();
+        $aesKey = base64_decode('KbOoNIjrQONfuyU86hA8mCFNq0sFoZHx0tTFopo+/mg=');
+
+        // Test
+        $contentKey->setContentKey($aesKey, $protectionKey);
+        $result = $contentKey->getEncryptedContentKey();
+
+        // Assert
+        $this->assertEquals(base64_encode(base64_decode($result)), $result);
+        $this->assertNotNull($contentKey->getChecksum());
     }
 
 }

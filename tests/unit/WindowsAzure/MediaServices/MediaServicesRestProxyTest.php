@@ -1268,6 +1268,7 @@ class MediaServicesRestProxyTest extends MediaServicesRestProxyTestBase
 
         // Assert
         $this->assertCount(1, $result);
+        $this->assertEquals($contentKey->getId(), $result[0]->getId());
     }
 
     /**
@@ -1320,7 +1321,7 @@ class MediaServicesRestProxyTest extends MediaServicesRestProxyTestBase
         $result = $this->restProxy->rebindContentKey($contentKey, '');
 
         // Assert
-        print_r($result);
+        $this->assertEquals($result, $aesKey);
     }
 
     /**
@@ -1385,6 +1386,7 @@ class MediaServicesRestProxyTest extends MediaServicesRestProxyTestBase
         // Assert
         $this->assertCount(1, $result);
         $this->assertEquals($protectionKeyId, $result[0]->getProtectionKeyId());
+        $this->assertEquals($contentKey->getId(), $result[0]->getId());
     }
     /**
      * @covers WindowsAzure\MediaServices\MediaServicesRestProxy::linkContentKeyToAsset
@@ -1451,6 +1453,4 @@ class MediaServicesRestProxyTest extends MediaServicesRestProxyTestBase
         $contentKeyFromAsset = $this->restProxy->getAssetContentKeys($asset);
         $this->assertEmpty($contentKeyFromAsset);
     }
-
-
 }
