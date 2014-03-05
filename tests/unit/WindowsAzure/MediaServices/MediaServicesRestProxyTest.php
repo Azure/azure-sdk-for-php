@@ -1243,6 +1243,11 @@ class MediaServicesRestProxyTest extends MediaServicesRestProxyTestBase
 
         // Assert
         $this->assertEquals($contentKey->getId(), $result->getId());
+        //current time and value of 'Created' field in $contentKey may differ on some seconds. That's why we check the difference in the boundary of hour
+        $this->assertLessThan(3600, abs(time() - $result->getCreated()->getTimestamp()));
+        $this->assertEquals($contentKey->getProtectionKeyId(), $result->getProtectionKeyId());
+        $this->assertEquals($contentKey->getProtectionKeyType(), $result->getProtectionKeyType());
+        $this->assertEquals($contentKey->getContentKeyType(), $result->getContentKeyType());
     }
 
      /**
@@ -1269,6 +1274,9 @@ class MediaServicesRestProxyTest extends MediaServicesRestProxyTestBase
         // Assert
         $this->assertCount(1, $result);
         $this->assertEquals($contentKey->getId(), $result[0]->getId());
+        $this->assertEquals($contentKey->getProtectionKeyId(), $result[0]->getProtectionKeyId());
+        $this->assertEquals($contentKey->getProtectionKeyType(), $result[0]->getProtectionKeyType());
+        $this->assertEquals($contentKey->getContentKeyType(), $result[0]->getContentKeyType());
     }
 
     /**

@@ -569,4 +569,19 @@ class UtilitiesTest extends \PHPUnit_Framework_TestCase
         //Assert
         $this->assertEquals($assetArray[$idKey], $result);
     }
+
+    /**
+     * @covers WindowsAzure\Common\Internal\Utilities::generateCryptoKey
+     */
+    public function testGenerateCryptoKey(){
+
+        // Setup
+        $length = 32;
+
+        // Test
+        $result = Utilities::generateCryptoKey($length);
+
+        // Assert
+        $this->assertEquals($length, strlen($result));
+    }
 }

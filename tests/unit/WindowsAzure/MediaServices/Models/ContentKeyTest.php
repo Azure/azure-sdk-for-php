@@ -254,33 +254,56 @@ class ContentKeyTest extends \PHPUnit_Framework_TestCase
     public function testSetContentKey(){
 
         // Setup
-        $protectionKey = '-----BEGIN CERTIFICATE-----
-MIIDSTCCAjGgAwIBAgIQqf92wku/HLJGCbMAU8GEnDANBgkqhkiG9w0BAQQFADAuMSwwKgYDVQQD
-EyN3YW1zYmx1cmVnMDAxZW5jcnlwdGFsbHNlY3JldHMtY2VydDAeFw0xMjA1MjkwNzAwMDBaFw0z
-MjA1MjkwNzAwMDBaMC4xLDAqBgNVBAMTI3dhbXNibHVyZWcwMDFlbmNyeXB0YWxsc2VjcmV0cy1j
-ZXJ0MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAzR0SEbXefvUjb9wCUfkEiKtGQ5Gc
-328qFPrhMjSo+YHe0AVviZ9YaxPPb0m1AaaRV4dqWpST2+JtDhLOmGpWmmA60tbATJDdmRzKi2eY
-AyhhE76MgJgL3myCQLP42jDusWXWSMabui3/tMDQs+zfi1sJ4Ch/lm5EvksYsu6o8sCv29VRwxfD
-LJPBy2NlbV4GbWz5Qxp2tAmHoROnfaRhwp6WIbquk69tEtu2U50CpPN2goLAqx2PpXAqA+prxCZY
-GTHqfmFJEKtZHhizVBTFPGS3ncfnQC9QIEwFbPw6E5PO5yNaB68radWsp5uvDg33G1i8IT39GstM
-W6zaaG7cNQIDAQABo2MwYTBfBgNVHQEEWDBWgBCOGT2hPhsvQioZimw8M+jOoTAwLjEsMCoGA1UE
-AxMjd2Ftc2JsdXJlZzAwMWVuY3J5cHRhbGxzZWNyZXRzLWNlcnSCEKn/dsJLvxyyRgmzAFPBhJww
-DQYJKoZIhvcNAQEEBQADggEBABcrQPma2ekNS3Wc5wGXL/aHyQaQRwFGymnUJ+VR8jVUZaC/U/f6
-lR98eTlwycjVwRL7D15BfClGEHw66QdHejaViJCjbEIJJ3p2c9fzBKhjLhzB3VVNiLIaH6RSI1bM
-Pd2eddSCqhDIn3VBN605GcYXMzhYp+YA6g9+YMNeS1b+LxX3fqixMQIxSHOLFZ1G/H2xfNawv0Vi
-kH3djNui3EKT1w/8aRkUv/AAV0b3rYkP/jA1I0CPn0XFk7STYoiJ3gJoKq9EMXhit+Iwfz0sMkfh
-WG12/XO+TAWqsK1ZxEjuC9OzrY7pFnNxs4Mu4S8iinehduSpY+9mDd3dHynNwT4=
+$protectionKey = '-----BEGIN CERTIFICATE-----
+MIICWDCCAcGgAwIBAgIJAMoW3Bym8NviMA0GCSqGSIb3DQEBBQUAMEUxCzAJBgNV
+BAYTAkFVMRMwEQYDVQQIDApTb21lLVN0YXRlMSEwHwYDVQQKDBhJbnRlcm5ldCBX
+aWRnaXRzIFB0eSBMdGQwHhcNMTQwMzA0MTExNTMxWhcNMTQwNDAzMTExNTMxWjBF
+MQswCQYDVQQGEwJBVTETMBEGA1UECAwKU29tZS1TdGF0ZTEhMB8GA1UECgwYSW50
+ZXJuZXQgV2lkZ2l0cyBQdHkgTHRkMIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKB
+gQCnUuC20WGTH8iBp/CcHOthHN/RodGDfiUmtGVAH60toze4lNkdy3xstHrdIkWY
+YOc3bTtiOLcl78YXkslkRTwKERCwLYsSQgZZK+bUE17oYpKgxKvW3Zrni8eQVzue
+KEjQGyGpdJw7C2RCtx31e941RVlXh2kda1KmF66EUrRywwIDAQABo1AwTjAdBgNV
+HQ4EFgQUUeTVs4bfDo7Ap/nWHvBbaPlcMjIwHwYDVR0jBBgwFoAUUeTVs4bfDo7A
+p/nWHvBbaPlcMjIwDAYDVR0TBAUwAwEB/zANBgkqhkiG9w0BAQUFAAOBgQCQvweb
+V2mQn2pGNuquGkStf+AYEPB4kxqRBBcbxOiWtHZsr/K0zIe0fWEiMKE/7X6CAgtJ
+JeryWs9JlCjCqU6O2WMxuOI2JRneprs78/3jieYbAAgpEK9LyhZC6QCT3WKrvh+j
+3uVcuoKBfVUFTvVtpSVttL7cNULIGYpP/V1yVg==
 -----END CERTIFICATE-----';
+
+        $private = '-----BEGIN RSA PRIVATE KEY-----
+MIICXAIBAAKBgQCnUuC20WGTH8iBp/CcHOthHN/RodGDfiUmtGVAH60toze4lNkd
+y3xstHrdIkWYYOc3bTtiOLcl78YXkslkRTwKERCwLYsSQgZZK+bUE17oYpKgxKvW
+3Zrni8eQVzueKEjQGyGpdJw7C2RCtx31e941RVlXh2kda1KmF66EUrRywwIDAQAB
+AoGAJWAG3+9PO1zbHdMUlNqE3VFk0V+y/As+YzHid/tbZJlTxgBBqz0b0vBRjXmt
+UAc9Po1AuYTvrCKt/fAE2kf4y+5dw6UeUpsfWbmDbFY1BPbgeETFXDE7DEXb7IJg
+YlDKOq7XwdQBUe1s2P7yAhfLggyjnnJKi6i/ZSrWYmrvCGkCQQDTsof9FmFZkrNK
+ZjoxFGOl5+2ZzW+3nZUKdiWKRHqZADMrajCtGJqSIFoZMuItiKxy8CXgTlNYxxXu
+5wFjmxjFAkEAylcTCAruZ2T+/+2WBpJNRLHZh+ivrSV/9PWr0GUSKBSG4iN/f6w7
+7MHCUqJlhLE95xq+TnpcDaFWKqQPTQRF5wJAEZhKEy/0AWTe//UFKyUdryFaryjS
++zjetVLihd5xLhxFJHub9hcQacrEkkmXYN92Lctl6oG4Da3mVcffZq7yXQJBAIYh
+Oqh2Npurw658HJu2mCoVi5IgmXQ6C5yizoaSuXqAQPnfdkF4NzE3ME3/ATT5GYP9
+onH7gtI2RRx3LP1s+7kCQDa5BheXwTt/yVachh3+eYlWszGbFxbOlFKn20wy68bZ
+hfb0RVoAxC2qqoNJKMNuN2Rct/j1Gk8qKp5YtaW12+M=
+-----END RSA PRIVATE KEY-----';
+
         $contentKey = new ContentKey();
+        $contentKey->setId('content-key-id-156k');
         $aesKey = base64_decode('KbOoNIjrQONfuyU86hA8mCFNq0sFoZHx0tTFopo+/mg=');
+        $checksum = '/IJUKYWw980=';
 
         // Test
         $contentKey->setContentKey($aesKey, $protectionKey);
-        $result = $contentKey->getEncryptedContentKey();
 
         // Assert
-        $this->assertEquals(base64_encode(base64_decode($result)), $result);
-        $this->assertNotNull($contentKey->getChecksum());
+        openssl_private_decrypt(
+            base64_decode($contentKey->getEncryptedContentKey()),
+            $decryptedContentKey,
+            openssl_get_privatekey($private),
+            OPENSSL_PKCS1_OAEP_PADDING
+        );
+
+        $this->assertEquals($decryptedContentKey, $aesKey);
+        $this->assertEquals($checksum, $contentKey->getChecksum());
     }
 
 }
