@@ -928,29 +928,56 @@ class MediaServicesFunctionalTest extends MediaServicesRestProxyTestBase
                 $manifest->getId(),
                 $manifestAsset->getId()
         );
+
         $manifestFile2 = new IngestManifestFile(
                 $otherFileName,
                 $manifest->getId(),
                 $manifestAsset->getId()
         );
 
-        $initializationVector = base64_encode(Utilities::generateCryptoKey(8));
+        $initializationVector1 = base64_encode(Utilities::generateCryptoKey(8));
+        $initializationVector2 = base64_encode(Utilities::generateCryptoKey(8));
 
         $manifestFile1->setIsEncrypted(true);
         $manifestFile1->setEncryptionKeyId($contentKey->getId());
         $manifestFile1->setEncryptionScheme(EncryptionSchemes::STORAGE_ENCRYPTION);
         $manifestFile1->setEncryptionVersion(Resources::MEDIA_SERVICES_ENCRYPTION_VERSION);
-        $manifestFile1->setInitializationVector($initializationVector);
+        $manifestFile1->setInitializationVector($initializationVector1);
 
         $manifestFile2->setIsEncrypted(true);
         $manifestFile2->setEncryptionKeyId($contentKey->getId());
         $manifestFile2->setEncryptionScheme(EncryptionSchemes::STORAGE_ENCRYPTION);
         $manifestFile2->setEncryptionVersion(Resources::MEDIA_SERVICES_ENCRYPTION_VERSION);
-        $manifestFile2->setInitializationVector($initializationVector);
+        $manifestFile2->setInitializationVector($initializationVector2);
 
         $manifestFile1 = $this->createIngestManifestFile($manifestFile1);
         $manifestFile2 = $this->createIngestManifestFile($manifestFile2);
+
         $initialStat = $this->restProxy->getIngestManifest($manifest);
+
+        $blobUrl = $manifest->getBlobStorageUriForUpload();
+        $blobUrlParts = explode('/', $blobUrl);
+        $blob = array_pop($blobUrlParts);
+
+        $blobRestProxy = $this->builder->createBlobService($this->connectionString);
+        $blobRestProxy->createBlockBlob(
+                $blob,
+                $fileName,
+                TestResources::MEDIA_SERVICES_DUMMY_FILE_CONTENT
+        );
+
+        $this->waitIngestManifestFinishedFiles($manifest, 1);
+        $finishedFirstStat = $this->restProxy->getIngestManifest($manifest);
+
+        $blobRestProxy = $this->builder->createBlobService($this->connectionString);
+        $blobRestProxy->createBlockBlob(
+                $blob,
+                $otherFileName,
+                TestResources::MEDIA_SERVICES_DUMMY_FILE_CONTENT_1
+        );
+
+        $this->waitIngestManifestFinishedFiles($manifest, 2);
+        $finishedSecondStat = $this->restProxy->getIngestManifest($manifest);
 
         // Test
 
@@ -958,13 +985,33 @@ class MediaServicesFunctionalTest extends MediaServicesRestProxyTestBase
         $contentKeysFromAsset = $this->restProxy->getAssetContentKeys($asset);
         $assetFiles = $this->restProxy->getAssetAssetFileList($asset);
 
+        $this->assertEquals(0, $initialStat->getStatistics()->getFinishedFilesCount());
+        $this->assertEquals(1, $finishedFirstStat->getStatistics()->getFinishedFilesCount());
+        $this->assertEquals(2, $finishedSecondStat->getStatistics()->getFinishedFilesCount());
+
         $this->assertEquals($contentKey->getId(), $contentKeysFromAsset[0]->getId());
 
         $this->assertEquals($contentKey->getId(), $manifestFile1->getEncryptionKeyId());
         $this->assertEquals('true', $manifestFile1->getIsEncrypted());
+        $this->assertEquals(EncryptionSchemes::STORAGE_ENCRYPTION, $manifestFile1->getEncryptionScheme());
+        $this->assertEquals($initializationVector1, $manifestFile1->getInitializationVector());
+        $this->assertEquals(Resources::MEDIA_SERVICES_ENCRYPTION_VERSION, $manifestFile1->getEncryptionVersion());
 
         $this->assertEquals($contentKey->getId(), $manifestFile2->getEncryptionKeyId());
         $this->assertEquals('true', $manifestFile2->getIsEncrypted());
+        $this->assertEquals(EncryptionSchemes::STORAGE_ENCRYPTION, $manifestFile2->getEncryptionScheme());
+        $this->assertEquals($initializationVector2, $manifestFile2->getInitializationVector());
+        $this->assertEquals(Resources::MEDIA_SERVICES_ENCRYPTION_VERSION, $manifestFile2->getEncryptionVersion());
+
+        // Files order is not static, so we don't know the index of each file and need to serve them as a set
+        $resultFileNames = array(
+                $assetFiles[0]->getName(),
+                $assetFiles[1]->getName(),
+        );
+        $this->assertContains($otherFileName, $resultFileNames);
+        $this->assertEquals($asset->getId(), $assetFiles[0]->getParentAssetId());
+        $this->assertContains($fileName, $resultFileNames);
+        $this->assertEquals($asset->getId(), $assetFiles[1]->getParentAssetId());
     }
 }
 

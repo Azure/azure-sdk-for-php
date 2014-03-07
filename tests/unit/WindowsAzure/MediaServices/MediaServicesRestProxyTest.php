@@ -1396,6 +1396,7 @@ class MediaServicesRestProxyTest extends MediaServicesRestProxyTestBase
         $this->assertEquals($protectionKeyId, $result[0]->getProtectionKeyId());
         $this->assertEquals($contentKey->getId(), $result[0]->getId());
     }
+
     /**
      * @covers WindowsAzure\MediaServices\MediaServicesRestProxy::linkContentKeyToAsset
      */
