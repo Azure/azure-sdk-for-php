@@ -67,12 +67,6 @@ To get the source code from GitHub, type
 			"require": {
 				"microsoft/windowsazure": "*"
 			},			
-			"repositories": [
-				{
-					"type": "pear",
-					"url": "http://pear.php.net"
-				}
-			],
 			"minimum-stability": "dev"
 		}
 
