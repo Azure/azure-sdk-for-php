@@ -81,6 +81,8 @@ class TestResources
     const MEDIA_SERVICES_ISM_FILE_NAME          = 'small.ism';
     const MEDIA_SERVICES_ISMC_FILE_NAME         = 'small.ismc';
     const MEDIA_SERVICES_STREAM_APPEND          = 'Manifest';
+    const MEDIA_SERVICES_INGEST_MANIFEST        = 'TestIngestManifest';
+    const MEDIA_SERVICES_INGEST_MANIFEST_ASSET  = 'TestIngestManifestAsset';
 
     // See https://tools.ietf.org/html/rfc2616
     const STATUS_NOT_MODIFIED          = 304;
