@@ -89,4 +89,21 @@ class BatchRequestTest extends \PHPUnit_Framework_TestCase
         $this->assertContains('multipart/mixed', $resultHeader['Content-Type']);
     }
 
+    /**
+     * @covers WindowsAzure\Common\Internal\Http\batchRequest::getContexts
+     */
+    public function testGetContexts(){
+
+        //  Setup
+        $batchReq = new BatchRequest();
+        $context = new HttpCallContext();
+        $batchReq->appendContext($context);
+
+        // Test
+        $result = $batchReq->getContexts();
+
+        // Assert
+        $this->assertEquals($context, $result[0]);
+    }
+
 }

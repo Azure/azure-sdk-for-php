@@ -38,6 +38,9 @@ use WindowsAzure\MediaServices\Models\Task;
 use WindowsAzure\MediaServices\Models\TaskOptions;
 use WindowsAzure\MediaServices\Models\JobTemplate;
 use WindowsAzure\MediaServices\Models\TaskTemplate;
+use WindowsAzure\MediaServices\Models\IngestManifest;
+use WindowsAzure\MediaServices\Models\IngestManifestAsset;
+use WindowsAzure\MediaServices\Models\IngestManifestFile;
 use WindowsAzure\Common\Internal\Http\Url;
 use WindowsAzure\Common\Internal\Http\HttpClient;
 
@@ -765,7 +768,82 @@ class MediaServicesFunctionalTest extends MediaServicesRestProxyTestBase
 
         // Assert
         $this->assertEquals($expectedFileContent, $result);
+    }
 
+    public function testBulkIngest() {
+
+        // Setup
+        $asset = new Asset(Asset::OPTIONS_NONE);
+        $asset->setName(TestResources::MEDIA_SERVICES_ASSET_NAME . $this->createSuffix());
+        $asset = $this->createAsset($asset);
+
+        $fileName = TestResources::MEDIA_SERVICES_DUMMY_FILE_NAME;
+        $otherFileName = TestResources::MEDIA_SERVICES_DUMMY_FILE_NAME_1;
+
+        // Test
+        $manifest = new IngestManifest();
+        $manifest->setName('IngestManifest' . $this->createSuffix());
+        $manifest = $this->createIngestManifest($manifest);
+
+        $manifestAsset = new IngestManifestAsset($manifest->getId());
+        $manifestAsset = $this->createIngestManifestAsset($manifestAsset, $asset);
+
+        $manifestFile1 = new IngestManifestFile(
+            $fileName,
+            $manifest->getId(),
+            $manifestAsset->getId()
+        );
+        $manifestFile1 = $this->createIngestManifestFile($manifestFile1);
+
+        $manifestFile2 = new IngestManifestFile(
+            $otherFileName,
+            $manifest->getId(),
+            $manifestAsset->getId()
+        );
+        $manifestFile2 = $this->createIngestManifestFile($manifestFile2);
+
+        $initialStat = $this->restProxy->getIngestManifest($manifest);
+
+        $blobUrl = $manifest->getBlobStorageUriForUpload();
+        $blobUrlParts = explode('/', $blobUrl);
+        $blob = array_pop($blobUrlParts);
+
+        $blobRestProxy = $this->builder->createBlobService($this->connectionString);
+        $blobRestProxy->createBlockBlob(
+            $blob,
+            $fileName,
+            TestResources::MEDIA_SERVICES_DUMMY_FILE_CONTENT
+        );
+
+        $this->waitIngestManifestFinishedFiles($manifest, 1);
+        $finishedFirstStat = $this->restProxy->getIngestManifest($manifest);
+
+        $blobRestProxy = $this->builder->createBlobService($this->connectionString);
+        $blobRestProxy->createBlockBlob(
+            $blob,
+            $otherFileName,
+            TestResources::MEDIA_SERVICES_DUMMY_FILE_CONTENT_1
+        );
+
+        $this->waitIngestManifestFinishedFiles($manifest, 2);
+        $finishedSecondStat = $this->restProxy->getIngestManifest($manifest);
+
+        // Assert
+        $this->assertEquals(0, $initialStat->getStatistics()->getFinishedFilesCount());
+        $this->assertEquals(1, $finishedFirstStat->getStatistics()->getFinishedFilesCount());
+        $this->assertEquals(2, $finishedSecondStat->getStatistics()->getFinishedFilesCount());
+
+        $assetFiles = $this->restProxy->getAssetAssetFileList($asset);
+
+        // Files order is not static, so we don't know the index of each file and need to serve them as a set
+        $resultFileNames = array(
+            $assetFiles[0]->getName(),
+            $assetFiles[1]->getName(),
+        );
+        $this->assertContains($otherFileName, $resultFileNames);
+        $this->assertEquals($asset->getId(), $assetFiles[0]->getParentAssetId());
+        $this->assertContains($fileName, $resultFileNames);
+        $this->assertEquals($asset->getId(), $assetFiles[1]->getParentAssetId());
     }
 }
 

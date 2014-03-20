@@ -38,6 +38,10 @@ use WindowsAzure\MediaServices\Models\TaskOptions;
 use WindowsAzure\MediaServices\Models\JobTemplate;
 use WindowsAzure\MediaServices\Models\TaskTemplate;
 use WindowsAzure\MediaServices\Models\StorageAccount;
+use WindowsAzure\MediaServices\Models\IngestManifest;
+use WindowsAzure\MediaServices\Models\IngestManifestAsset;
+use WindowsAzure\MediaServices\Models\IngestManifestFile;
+use WindowsAzure\MediaServices\Models\IngestManifestStatistics;
 
 /**
  * Unit tests for class MediaServicesRestProxy
@@ -850,5 +854,366 @@ class MediaServicesRestProxyTest extends MediaServicesRestProxyTestBase
         // Assert
         $this->assertEquals(1, count($parentAssetId));
         $this->assertEquals($inputAsset->getId(),$parentAssetId[0]->getId());
+    }
+
+    /**
+     * @covers WindowsAzure\MediaServices\MediaServicesRestProxy::createIngestManifest
+     * @covers WindowsAzure\MediaServices\MediaServicesRestProxy::deleteIngestManifest
+     */
+    public function testCreateIngestManifest(){
+
+        // Setup
+        $ingestManifest = new IngestManifest();
+        $name = TestResources::MEDIA_SERVICES_INGEST_MANIFEST . $this->createSuffix();
+        $ingestManifest->setName($name);
+
+        // Test
+        $ingestManifest = $this->createIngestManifest($ingestManifest);
+
+        // Assert
+        $this->assertEquals($name, $ingestManifest->getName());
+    }
+
+    /**
+     * @covers WindowsAzure\MediaServices\MediaServicesRestProxy::getIngestManifest
+     */
+    public function testGetIngestManifest(){
+
+        // Setup
+        $ingestManifest = new IngestManifest();
+        $name = TestResources::MEDIA_SERVICES_INGEST_MANIFEST . $this->createSuffix();
+        $ingestManifest->setName($name);
+        $ingestManifest = $this->createIngestManifest($ingestManifest);
+
+        // Test
+        $result = $this->restProxy->getIngestManifest($ingestManifest);
+
+        // Assert
+        $this->assertEquals($name, $result->getName());
+    }
+
+    /**
+     * @covers WindowsAzure\MediaServices\MediaServicesRestProxy::getIngestManifestList
+     */
+    public function testGetIngestManifestList(){
+
+        // Setup
+        $ingestManifest = new IngestManifest();
+        $name = TestResources::MEDIA_SERVICES_INGEST_MANIFEST . $this->createSuffix();
+        $ingestManifest->setName($name);
+        $ingestManifest = $this->createIngestManifest($ingestManifest);
+
+        // Test
+        $result = $this->restProxy->getIngestManifestList();
+
+        // Assert
+        $this->assertCount(1, $result);
+        $this->assertEquals($name, $result[0]->getName());
+    }
+
+    /**
+     * @covers WindowsAzure\MediaServices\MediaServicesRestProxy::getIngestManifestAssets
+     */
+    public function testGetIngestManifestAssets(){
+
+        // Setup
+        $ingestManifest = new IngestManifest();
+        $name = TestResources::MEDIA_SERVICES_INGEST_MANIFEST . $this->createSuffix();
+        $ingestManifest->setName($name);
+        $ingestManifest = $this->createIngestManifest($ingestManifest);
+        $ingestManifestFileName = TestResources::MEDIA_SERVICES_DUMMY_FILE_NAME;
+
+        $asset = new Asset(Asset::OPTIONS_NONE);
+        $asset->setName(TestResources::MEDIA_SERVICES_ASSET_NAME . $this->createSuffix());
+        $asset = $this->createAsset($asset);
+
+        $ingestManifestAsset = new IngestManifestAsset($ingestManifest->getId());
+        $ingestManifestAsset = $this->createIngestManifestAsset($ingestManifestAsset, $asset);
+
+        $ingestManifestFile = new IngestManifestFile($ingestManifestFileName, $ingestManifest->getId(), $ingestManifestAsset->getId());
+
+        $ingestManifestFile = $this->createIngestManifestFile($ingestManifestFile);
+
+        // Test
+        $result = $this->restProxy->getIngestManifestAssets($ingestManifest);
+
+        // Assert
+        $this->assertCount(1, $result);
+        $this->assertEquals($ingestManifest->getId(), $result[0]->getParentIngestManifestId());
+    }
+
+    /**
+     * @covers WindowsAzure\MediaServices\MediaServicesRestProxy::getPendingIngestManifestAssets
+     */
+    public function testGetPendingIngestManifestAssets(){
+
+        // Setup
+        $ingestManifest = new IngestManifest();
+        $name = TestResources::MEDIA_SERVICES_INGEST_MANIFEST . $this->createSuffix();
+        $ingestManifest->setName($name);
+        $ingestManifest = $this->createIngestManifest($ingestManifest);
+        $ingestManifestFileName = TestResources::MEDIA_SERVICES_DUMMY_FILE_NAME;
+
+        $asset = new Asset(Asset::OPTIONS_NONE);
+        $asset->setName(TestResources::MEDIA_SERVICES_ASSET_NAME . $this->createSuffix());
+        $asset = $this->createAsset($asset);
+
+        $ingestManifestAsset = new IngestManifestAsset($ingestManifest->getId());
+        $ingestManifestAsset = $this->createIngestManifestAsset($ingestManifestAsset, $asset);
+
+        $ingestManifestFile = new IngestManifestFile($ingestManifestFileName, $ingestManifest->getId(), $ingestManifestAsset->getId());
+
+        $ingestManifestFile = $this->createIngestManifestFile($ingestManifestFile);
+
+        // Test
+        $result = $this->restProxy->getPendingIngestManifestAssets($ingestManifest);
+
+        // Assert
+        $this->assertCount(1, $result);
+        $this->assertEquals($ingestManifest->getId(), $result[0]->getParentIngestManifestId());
+    }
+
+    /**
+     * @covers WindowsAzure\MediaServices\MediaServicesRestProxy::getIngestManifestStorageAccount
+     */
+    public function testGetIngestManifestStorageAccount(){
+
+        // Setup
+        $ingestManifest = new IngestManifest();
+        $name = TestResources::MEDIA_SERVICES_INGEST_MANIFEST . $this->createSuffix();
+        $ingestManifest->setName($name);
+        $ingestManifest = $this->createIngestManifest($ingestManifest);
+
+        $connectionParameters = TestResources::getMediaServicesConnectionParameters();
+        $storageAccountName = $connectionParameters['accountName'];
+
+        // Test
+        $result = $this->restProxy->getIngestManifestStorageAccount($ingestManifest);
+
+        // Assert
+        $this->assertEquals($ingestManifest->getStorageAccountName(), $result->getName());
+    }
+
+    /**
+     * @covers WindowsAzure\MediaServices\MediaServicesRestProxy::updateIngestManifest
+     */
+    public function testUpdateIngestManifest(){
+
+        // Setup
+        $ingestManifest = new IngestManifest();
+        $name = TestResources::MEDIA_SERVICES_INGEST_MANIFEST . $this->createSuffix();
+        $ingestManifest->setName($name);
+        $ingestManifest = $this->createIngestManifest($ingestManifest);
+        $name = TestResources::MEDIA_SERVICES_INGEST_MANIFEST . $this->createSuffix();
+
+        // Test
+        $ingestManifest->setName($name);
+        $this->restProxy->updateIngestManifest($ingestManifest);
+
+        // Assert
+        $this->assertEquals($name, $ingestManifest->getName());
+    }
+
+    /**
+     * @covers WindowsAzure\MediaServices\MediaServicesRestProxy::createIngestManifestAsset
+     * @covers WindowsAzure\MediaServices\MediaServicesRestProxy::deleteIngestManifestAsset
+     */
+    public function testCreateIngestManifestAsset(){
+
+        //  Setup
+        $ingestManifest = new IngestManifest();
+        $name = TestResources::MEDIA_SERVICES_INGEST_MANIFEST . $this->createSuffix();
+        $ingestManifest->setName($name);
+        $ingestManifest = $this->createIngestManifest($ingestManifest);
+
+        $asset = new Asset(Asset::OPTIONS_NONE);
+        $asset->setName(TestResources::MEDIA_SERVICES_ASSET_NAME . $this->createSuffix());
+        $asset = $this->createAsset($asset);
+
+        $ingestManifestAsset = new IngestManifestAsset($ingestManifest->getId());
+
+        // Test
+        $ingestManifestAsset = $this->createIngestManifestAsset($ingestManifestAsset, $asset);
+
+        // Assert
+        $this->assertEquals($ingestManifest->getId(), $ingestManifestAsset->getParentIngestManifestId());
+    }
+
+    /**
+     * @covers WindowsAzure\MediaServices\MediaServicesRestProxy::getIngestManifestAsset
+     */
+    public function testGetIngestManifestAsset(){
+
+        //  Setup
+        $ingestManifest = new IngestManifest();
+        $name = TestResources::MEDIA_SERVICES_INGEST_MANIFEST . $this->createSuffix();
+        $ingestManifest->setName($name);
+        $ingestManifest = $this->createIngestManifest($ingestManifest);
+
+        $asset = new Asset(Asset::OPTIONS_NONE);
+        $asset->setName(TestResources::MEDIA_SERVICES_ASSET_NAME . $this->createSuffix());
+        $asset = $this->createAsset($asset);
+
+        $ingestManifestAsset = new IngestManifestAsset($ingestManifest->getId());
+        $ingestManifestAsset = $this->createIngestManifestAsset($ingestManifestAsset, $asset);
+
+        // Test
+        $result = $this->restProxy->getIngestManifestAsset($ingestManifestAsset);
+
+        // Assert
+        $this->assertEquals($ingestManifest->getId(), $result->getParentIngestManifestId());
+        $this->assertEquals($ingestManifestAsset->getId(), $result->getId());
+    }
+
+    /**
+     * @covers WindowsAzure\MediaServices\MediaServicesRestProxy::getIngestManifestAssetList
+     */
+    public function testGetIngestManifestAssetList(){
+
+        //  Setup
+        $ingestManifest = new IngestManifest();
+        $name = TestResources::MEDIA_SERVICES_INGEST_MANIFEST . $this->createSuffix();
+        $ingestManifest->setName($name);
+        $ingestManifest = $this->createIngestManifest($ingestManifest);
+
+        $asset = new Asset(Asset::OPTIONS_NONE);
+        $asset->setName(TestResources::MEDIA_SERVICES_ASSET_NAME . $this->createSuffix());
+        $asset = $this->createAsset($asset);
+
+        $ingestManifestAsset = new IngestManifestAsset($ingestManifest->getId());
+        $ingestManifestAsset = $this->createIngestManifestAsset($ingestManifestAsset, $asset);
+
+        // Test
+        $result = $this->restProxy->getIngestManifestAssetList();
+
+        // Assert
+        $this->assertCount(1, $result);
+        $this->assertEquals($ingestManifestAsset->getId(), $result[0]->getId());
+    }
+
+    /**
+     * @covers WindowsAzure\MediaServices\MediaServicesRestProxy::getIngestManifestAssetFiles
+     */
+    public function testGetIngestManifestAssetFiles(){
+
+        //  Setup
+        $ingestManifest = new IngestManifest();
+        $name = TestResources::MEDIA_SERVICES_INGEST_MANIFEST . $this->createSuffix();
+        $ingestManifest->setName($name);
+        $ingestManifest = $this->createIngestManifest($ingestManifest);
+        $ingestAssetFileName = TestResources::MEDIA_SERVICES_DUMMY_FILE_NAME;
+
+        $asset = new Asset(Asset::OPTIONS_NONE);
+        $asset->setName(TestResources::MEDIA_SERVICES_ASSET_NAME . $this->createSuffix());
+        $asset = $this->createAsset($asset);
+
+        $ingestManifestAsset = new IngestManifestAsset($ingestManifest->getId());
+        $ingestManifestAsset = $this->createIngestManifestAsset($ingestManifestAsset, $asset);
+
+        $ingestManifestAssetFile = new IngestManifestFile($ingestAssetFileName, $ingestManifest->getId(), $ingestManifestAsset->getId());
+        $ingestManifestAssetFile = $this->createIngestManifestFile($ingestManifestAssetFile);
+
+        // Test
+        $result = $this->restProxy->getIngestManifestAssetFiles($ingestManifestAsset);
+
+        // Assert
+        $this->assertCount(1, $result);
+        $this->assertEquals($ingestManifest->getId(), $result[0]->getParentIngestManifestId());
+        $this->assertEquals($ingestManifestAsset->getId(), $result[0]->getParentIngestManifestAssetId());
+        $this->assertEquals($ingestAssetFileName, $result[0]->getName());
+    }
+
+    /**
+     * @covers WindowsAzure\MediaServices\MediaServicesRestProxy::createIngestManifestFile
+     * @covers WindowsAzure\MediaServices\MediaServicesRestProxy::deleteIngestManifestFile
+     */
+    public function testCreateIngestManifestFile(){
+
+        //  Setup
+        $ingestManifest = new IngestManifest();
+        $name = TestResources::MEDIA_SERVICES_INGEST_MANIFEST . $this->createSuffix();
+        $ingestManifest->setName($name);
+        $ingestManifest = $this->createIngestManifest($ingestManifest);
+        $ingestAssetFileName = TestResources::MEDIA_SERVICES_DUMMY_FILE_NAME;
+
+        $asset = new Asset(Asset::OPTIONS_NONE);
+        $asset->setName(TestResources::MEDIA_SERVICES_ASSET_NAME . $this->createSuffix());
+        $asset = $this->createAsset($asset);
+
+        $ingestManifestAsset = new IngestManifestAsset($ingestManifest->getId());
+        $ingestManifestAsset = $this->createIngestManifestAsset($ingestManifestAsset, $asset);
+
+        $ingestManifestFile = new IngestManifestFile($ingestAssetFileName, $ingestManifest->getId(), $ingestManifestAsset->getId());
+
+        // Test
+        $ingestManifestFile = $this->createIngestManifestFile($ingestManifestFile);
+
+        // Assert
+        $this->assertEquals($ingestManifest->getId(), $ingestManifestFile->getParentIngestManifestId());
+        $this->assertEquals($ingestManifestAsset->getId(), $ingestManifestFile->getParentIngestManifestAssetId());
+        $this->assertEquals($ingestAssetFileName, $ingestManifestFile->getName());
+    }
+
+    /**
+     * @covers WindowsAzure\MediaServices\MediaServicesRestProxy::getIngestManifestFile
+     */
+    public function testGetIngestManifestFile() {
+
+        // Setup
+        $ingestManifest = new IngestManifest();
+        $name = TestResources::MEDIA_SERVICES_INGEST_MANIFEST . $this->createSuffix();
+        $ingestManifest->setName($name);
+        $ingestManifest = $this->createIngestManifest($ingestManifest);
+        $ingestAssetFileName = TestResources::MEDIA_SERVICES_DUMMY_FILE_NAME;
+
+        $asset = new Asset(Asset::OPTIONS_NONE);
+        $asset->setName(TestResources::MEDIA_SERVICES_ASSET_NAME . $this->createSuffix());
+        $asset = $this->createAsset($asset);
+
+        $ingestManifestAsset = new IngestManifestAsset($ingestManifest->getId());
+        $ingestManifestAsset = $this->createIngestManifestAsset($ingestManifestAsset, $asset);
+
+        $ingestManifestFile = new IngestManifestFile($ingestAssetFileName, $ingestManifest->getId(), $ingestManifestAsset->getId());
+        $ingestManifestFile = $this->createIngestManifestFile($ingestManifestFile);
+
+        // Test
+        $result = $this->restProxy->getIngestManifestFile($ingestManifestFile);
+
+        // Assert
+        $this->assertEquals($ingestManifestFile->getParentIngestManifestId(), $result->getParentIngestManifestId());
+        $this->assertEquals($ingestManifestFile->getParentIngestManifestAssetId(), $result->getParentIngestManifestAssetId());
+        $this->assertEquals($ingestManifestFile->getName(), $result->getName());
+    }
+
+    /**
+     * @covers WindowsAzure\MediaServices\MediaServicesRestProxy::getIngestManifestFileList
+     */
+    public function testGetIngestManifestFileList(){
+
+        //  Setup
+        $ingestManifest = new IngestManifest();
+        $name = TestResources::MEDIA_SERVICES_INGEST_MANIFEST . $this->createSuffix();
+        $ingestManifest->setName($name);
+        $ingestManifest = $this->createIngestManifest($ingestManifest);
+        $ingestAssetFileName = TestResources::MEDIA_SERVICES_DUMMY_FILE_NAME . $this->createSuffix();
+
+        $asset = new Asset(Asset::OPTIONS_NONE);
+        $asset->setName(TestResources::MEDIA_SERVICES_ASSET_NAME . $this->createSuffix());
+        $asset = $this->createAsset($asset);
+
+        $ingestManifestAsset = new IngestManifestAsset($ingestManifest->getId());
+        $ingestManifestAsset = $this->createIngestManifestAsset($ingestManifestAsset, $asset);
+
+        $ingestManifestFile = new IngestManifestFile($ingestAssetFileName, $ingestManifest->getId(), $ingestManifestAsset->getId());
+        $ingestManifestFile = $this->createIngestManifestFile($ingestManifestFile);
+
+        // Test
+        $result = $this->restProxy->getIngestManifestFileList();
+
+        // Assert
+        $this->assertCount(1, $result);
+        $this->assertEquals($ingestManifestFile->getParentIngestManifestId(), $result[0]->getParentIngestManifestId());
+        $this->assertEquals($ingestManifestFile->getParentIngestManifestAssetId(), $result[0]->getParentIngestManifestAssetId());
+        $this->assertEquals($ingestManifestFile->getName(), $result[0]->getName());
     }
 }
