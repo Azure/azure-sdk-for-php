@@ -1,51 +1,51 @@
-# Windows Azure SDK for PHP
+# Microsoft Azure SDK for PHP
 
 This project provides a set of PHP client libraries that make it easy to access
-Windows Azure tables, blobs, queues, service bus (queues and topics), service runtime and service management APIs. For documentation on how to host PHP applications on Windows Azure, please see the
-[Windows Azure PHP Developer Center](http://www.windowsazure.com/en-us/develop/php/).
+Microsoft Azure tables, blobs, queues, service bus (queues and topics), service runtime and service management APIs. For documentation on how to host PHP applications on Microsoft Azure, please see the
+[Microsoft Azure PHP Developer Center](http://www.windowsazure.com/en-us/develop/php/).
 
 # Features
 
 * Tables
-	* create and delete tables
-	* create, query, insert, update, merge, and delete entities
-	* batch operations
-	* REST API Version: 2011-08-18
+  * create and delete tables
+  * create, query, insert, update, merge, and delete entities
+  * batch operations
+  * REST API Version: 2011-08-18
 * Blobs
-	* create, list, and delete containers, work with container metadata and permissions, list blobs in container
-	* create block and page blobs (from a stream or a string), work with blob blocks and pages, delete blobs
-	* work with blob properties, metadata, leases, snapshot a blob
-	* REST API Version: 2011-08-18 
+  * create, list, and delete containers, work with container metadata and permissions, list blobs in container
+  * create block and page blobs (from a stream or a string), work with blob blocks and pages, delete blobs
+  * work with blob properties, metadata, leases, snapshot a blob
+  * REST API Version: 2011-08-18 
 * Storage Queues
-	* create, list, and delete queues, and work with queue metadata and properties
-	* create, get, peek, update, delete messages
-	* REST API Version: 2011-08-18 
+  * create, list, and delete queues, and work with queue metadata and properties
+  * create, get, peek, update, delete messages
+  * REST API Version: 2011-08-18 
 * Service Bus
-	* Queues: create, list and delete queues; send, receive, unlock and delete messages
-	* Topics: create, list, and delete topics; create, list, and delete subscriptions; send, receive, unlock and delete messages; create, list, and delete rules
+  * Queues: create, list and delete queues; send, receive, unlock and delete messages
+  * Topics: create, list, and delete topics; create, list, and delete subscriptions; send, receive, unlock and delete messages; create, list, and delete rules
 * Service Runtime
-	* discover addresses and ports for the endpoints of other role instances in your service
-	* get configuration settings and access local resources
-	* get role instance information for current role and other role instances
-	* query and set the status of the current role
-	* REST API Version: 2011-03-08
+  * discover addresses and ports for the endpoints of other role instances in your service
+  * get configuration settings and access local resources
+  * get role instance information for current role and other role instances
+  * query and set the status of the current role
+  * REST API Version: 2011-03-08
 * Service Management
-	* storage accounts: create, update, delete, list, regenerate keys
-	* affinity groups: create, update, delete, list, get properties
-	* locations: list
-	* hosted services: create, update, delete, list, get properties
-	* deployment: create, get, delete, swap, change configuration, update status, upgrade, rollback
-	* role instance: reboot, reimage
-	* REST API Version: 2011-10-01
+  * storage accounts: create, update, delete, list, regenerate keys
+  * affinity groups: create, update, delete, list, get properties
+  * locations: list
+  * hosted services: create, update, delete, list, get properties
+  * deployment: create, get, delete, swap, change configuration, update status, upgrade, rollback
+  * role instance: reboot, reimage
+  * REST API Version: 2011-10-01
 * Media Services 
-	* Connection
-	* Ingest asset, upload files
-	* Encoding / process asset, create job, job templates
-	* Manage media services entities: create / update / read / delete / get list
-	* Delivery SAS and Streaming media content
-	* REST API Version: 2.2
+  * Connection
+  * Ingest asset, upload files
+  * Encoding / process asset, create job, job templates
+  * Manage media services entities: create / update / read / delete / get list
+  * Delivery SAS and Streaming media content
+  * REST API Version: 2.2
 
-	
+  
 # Getting Started
 ## Download Source Code
 
@@ -56,117 +56,117 @@ To get the source code from GitHub, type
 
 > **Note**
 > 
-> The PHP Client Libraries for Windows Azure have a dependency on the [HTTP_Request2](http://pear.php.net/package/HTTP_Request2), [Mail_mime](http://pear.php.net/package/Mail_mime), and [Mail_mimeDecode](http://pear.php.net/package/Mail_mimeDecode) PEAR packages. The recommended way to resolve these dependencies is to install them using the [PEAR package manager](http://pear.php.net/manual/en/installation.php).
+> The PHP Client Libraries for Microsoft Azure have a dependency on the [HTTP_Request2](http://pear.php.net/package/HTTP_Request2), [Mail_mime](http://pear.php.net/package/Mail_mime), and [Mail_mimeDecode](http://pear.php.net/package/Mail_mimeDecode) PEAR packages. The recommended way to resolve these dependencies is to install them using the [PEAR package manager](http://pear.php.net/manual/en/installation.php).
 
 
 ##Install via Composer
 
 1. Create a file named **composer.json** in the root of your project and add the following code to it:
 
-		{
-			"require": {
-				"microsoft/windowsazure": "*"
-			},			
-			"repositories": [
-				{
-					"type": "pear",
-					"url": "http://pear.php.net"
-				}
-			],
-			"minimum-stability": "dev"
-		}
+    {
+      "require": {
+        "microsoft/windowsazure": "*"
+      },      
+      "repositories": [
+        {
+          "type": "pear",
+          "url": "http://pear.php.net"
+        }
+      ],
+      "minimum-stability": "dev"
+    }
 
 2. Download **[composer.phar](http://getcomposer.org/composer.phar)** in your project root.
 
 3. Open a command prompt and execute this in your project root
 
-		php composer.phar install
+    php composer.phar install
 
-	> **Note**
-	>
-	> On Windows, you will also need to add the Git executable to your PATH environment variable.
+  > **Note**
+  >
+  > On Windows, you will also need to add the Git executable to your PATH environment variable.
 
 
 ##Install as a PEAR package
 
-To install the PHP Client Libraries for Windows Azure as a PEAR package, follow these steps:
+To install the PHP Client Libraries for Microsoft Azure as a PEAR package, follow these steps:
 
 1. [Install PEAR](http://pear.php.net/manual/en/installation.getting.php).
-2. Set-up the Windows Azure PEAR channel:
+2. Set-up the Microsoft Azure PEAR channel:
 
-		pear channel-discover pear.windowsazure.com
+    pear channel-discover pear.windowsazure.com
 3. Install the PEAR package:
 
-		pear install pear.windowsazure.com/WindowsAzure-0.4.0
+    pear install pear.windowsazure.com/WindowsAzure-0.4.0
 
 
 # Usage
 
 ## Getting Started
 
-There are four basic steps that have to be performed before you can make a call to any Windows Azure API when using the libraries. 
+There are four basic steps that have to be performed before you can make a call to any Microsoft Azure API when using the libraries. 
 
 * First, include the autoloader script:
 
-	If installed via PEAR or Git:
+  If installed via PEAR or Git:
 
-		require_once "WindowsAzure/WindowsAzure.php"; 
+    require_once "WindowsAzure/WindowsAzure.php"; 
 
-	If installed via Composer:
-		
-		require_once "vendor/autoload.php"; 
-	
+  If installed via Composer:
+    
+    require_once "vendor/autoload.php"; 
+  
 * Include the namespaces you are going to use.
 
-	To create any Windows Azure service client you need to use the **ServicesBuilder** class:
+  To create any Microsoft Azure service client you need to use the **ServicesBuilder** class:
 
-		use WindowsAzure\Common\ServicesBuilder;
+    use WindowsAzure\Common\ServicesBuilder;
 
-	To process exceptions you need:
+  To process exceptions you need:
 
-		use WindowsAzure\Common\ServiceException;
+    use WindowsAzure\Common\ServiceException;
 
-	
+  
 * To instantiate the service client you will also need a valid connection string. The format is: 
 
-	* For accessing a live storage service (tables, blobs, queues):
-	
-			DefaultEndpointsProtocol=[http|https];AccountName=[yourAccount];AccountKey=[yourKey]
-	
-	* For accessing the emulator storage:
-	
-			UseDevelopmentStorage=true
+  * For accessing a live storage service (tables, blobs, queues):
+  
+      DefaultEndpointsProtocol=[http|https];AccountName=[yourAccount];AccountKey=[yourKey]
+  
+  * For accessing the emulator storage:
+  
+      UseDevelopmentStorage=true
 
-	* For accessing the Service Bus:
+  * For accessing the Service Bus:
 
-			Endpoint=[yourEndpoint];SharedSecretIssuer=[yourWrapAuthenticationName];SharedSecretValue=[yourWrapPassword]
+      Endpoint=[yourEndpoint];SharedSecretIssuer=[yourWrapAuthenticationName];SharedSecretValue=[yourWrapPassword]
 
-		Where the Endpoint is typically of the format `https://[yourNamespace].servicebus.windows.net`.
+    Where the Endpoint is typically of the format `https://[yourNamespace].servicebus.windows.net`.
 
-	* For accessing Service Management APIs:
+  * For accessing Service Management APIs:
 
-			SubscriptionID=[yourSubscriptionId];CertificatePath=[filePathToYourCertificate]
+      SubscriptionID=[yourSubscriptionId];CertificatePath=[filePathToYourCertificate]
 
 
 * Instantiate a "REST Proxy" - a wrapper around the available calls for the given service.
 
-	* For the Storage services:
+  * For the Storage services:
 
-			$tableRestProxy = ServicesBuilder::getInstance()->createTableService($connectionString);
-			$blobRestProxy = ServicesBuilder::getInstance()->createBlobService($connectionString);
-			$queueRestProxy = ServicesBuilder::getInstance()->createQueueService($connectionString);
+      $tableRestProxy = ServicesBuilder::getInstance()->createTableService($connectionString);
+      $blobRestProxy = ServicesBuilder::getInstance()->createBlobService($connectionString);
+      $queueRestProxy = ServicesBuilder::getInstance()->createQueueService($connectionString);
 
-	* For Service Bus:
+  * For Service Bus:
 
-			$serviceBusRestProxy = ServicesBuilder::getInstance()->createServiceBusService($connectionString);
+      $serviceBusRestProxy = ServicesBuilder::getInstance()->createServiceBusService($connectionString);
 
-	* For Service Management:
+  * For Service Management:
 
-			$serviceManagementRestProxy = ServicesBuilder::getInstance()->createServiceManagementService($connectionString);
+      $serviceManagementRestProxy = ServicesBuilder::getInstance()->createServiceManagementService($connectionString);
 
-	* For Media Services:
+  * For Media Services:
 
-			$mediaServicesRestProxy = ServicesBuilder->getInstance()->createMediaServicesService(new MediaServicesSettings([YourAccountName], [YourPrimaryOrSecondaryAccessKey]));
+      $mediaServicesRestProxy = ServicesBuilder->getInstance()->createMediaServicesService(new MediaServicesSettings([YourAccountName], [YourPrimaryOrSecondaryAccessKey]));
 
 ## Table Storage
 
@@ -177,13 +177,13 @@ The following are examples of common operations performed with the Table serivce
 To create a table call **createTable**:
 
 ```PHP
-try	{
-	// Create table.
-	$tableRestProxy->createTable("mytable");
+try {
+  // Create table.
+  $tableRestProxy->createTable("mytable");
 } catch(ServiceException $e){
-	$code = $e->getCode();
-	$error_message = $e->getMessage();
-	echo $code.": ".$error_message."<br />";
+  $code = $e->getCode();
+  $error_message = $e->getMessage();
+  echo $code.": ".$error_message."<br />";
 }
 ```
 
@@ -203,11 +203,11 @@ $entity->setRowKey("1");
 $entity->addProperty("PropertyName", EdmType::STRING, "Sample");
 
 try{
-	$tableRestProxy->insertEntity("mytable", $entity);
+  $tableRestProxy->insertEntity("mytable", $entity);
 } catch(ServiceException $e){
-	$code = $e->getCode();
-	$error_message = $e->getMessage();
-	echo $code.": ".$error_message."<br />";
+  $code = $e->getCode();
+  $error_message = $e->getMessage();
+  echo $code.": ".$error_message."<br />";
 }
 ```
 
@@ -218,18 +218,18 @@ To query for entities you can call **queryEntities**. The subset of entities you
 ```PHP
 $filter = "RowKey eq '2'";
 
-try	{
-	$result = $tableRestProxy->queryEntities("mytable", $filter);
+try {
+  $result = $tableRestProxy->queryEntities("mytable", $filter);
 } catch(ServiceException $e){
-	$code = $e->getCode();
-	$error_message = $e->getMessage();
-	echo $code.": ".$error_message."<br />";
+  $code = $e->getCode();
+  $error_message = $e->getMessage();
+  echo $code.": ".$error_message."<br />";
 }
 
 $entities = $result->getEntities();
 
 foreach($entities as $entity){
-	echo $entity->getPartitionKey().":".$entity->getRowKey()."<br />";
+  echo $entity->getPartitionKey().":".$entity->getRowKey()."<br />";
 }
 ```
 
@@ -245,7 +245,7 @@ The following are examples of common operations performed with the Blob serivce.
 ```PHP
 // OPTIONAL: Set public access policy and metadata.
 // Create container options object.
-$createContainerOptions = new CreateContainerOptions();	
+$createContainerOptions = new CreateContainerOptions(); 
 
 // Set public access policy. Possible values are 
 // PublicAccessType::CONTAINER_AND_BLOBS and PublicAccessType::BLOBS_ONLY.
@@ -258,13 +258,13 @@ $createContainerOptions->setPublicAccess(PublicAccessType::CONTAINER_AND_BLOBS);
 $createContainerOptions->addMetaData("key1", "value1");
 $createContainerOptions->addMetaData("key2", "value2");
 
-try	{
-	// Create container.
-	$blobRestProxy->createContainer("mycontainer", $createContainerOptions);
+try {
+  // Create container.
+  $blobRestProxy->createContainer("mycontainer", $createContainerOptions);
 } catch(ServiceException $e){
-	$code = $e->getCode();
-	$error_message = $e->getMessage();
-	echo $code.": ".$error_message."<br />";
+  $code = $e->getCode();
+  $error_message = $e->getMessage();
+  echo $code.": ".$error_message."<br />";
 }
 ```
 
@@ -280,13 +280,13 @@ To upload a file as a blob, use the **BlobRestProxy->createBlockBlob** method. T
 $content = fopen("myfile.txt", "r");
 $blob_name = "myblob";
 
-try	{
-	//Upload blob
-	$blobRestProxy->createBlockBlob("mycontainer", $blob_name, $content);
+try {
+  //Upload blob
+  $blobRestProxy->createBlockBlob("mycontainer", $blob_name, $content);
 } catch(ServiceException $e){
-	$code = $e->getCode();
-	$error_message = $e->getMessage();
-	echo $code.": ".$error_message."<br />";
+  $code = $e->getCode();
+  $error_message = $e->getMessage();
+  echo $code.": ".$error_message."<br />";
 }
 ```
 
@@ -297,19 +297,19 @@ While the example above uploads a blob as a stream, a blob can also be uploaded 
 To list the blobs in a container, use the **BlobRestProxy->listBlobs** method with a **foreach** loop to loop through the result. The following code outputs the name and URI of each blob in a container.
 
 ```PHP
-try	{
-	// List blobs.
-	$blob_list = $blobRestProxy->listBlobs("mycontainer");
-	$blobs = $blob_list->getBlobs();
-	
-	foreach($blobs as $blob)
-	{
-		echo $blob->getName().": ".$blob->getUrl()."<br />";
-	}
+try {
+  // List blobs.
+  $blob_list = $blobRestProxy->listBlobs("mycontainer");
+  $blobs = $blob_list->getBlobs();
+  
+  foreach($blobs as $blob)
+  {
+    echo $blob->getName().": ".$blob->getUrl()."<br />";
+  }
 } catch(ServiceException $e){
-	$code = $e->getCode();
-	$error_message = $e->getMessage();
-	echo $code.": ".$error_message."<br />";
+  $code = $e->getCode();
+  $error_message = $e->getMessage();
+  echo $code.": ".$error_message."<br />";
 }
 ```
 
@@ -330,31 +330,31 @@ $createQueueOptions = new CreateQueueOptions();
 $createQueueOptions->addMetaData("key1", "value1");
 $createQueueOptions->addMetaData("key2", "value2");
 
-try	{
-	// Create queue.
-	$queueRestProxy->createQueue("myqueue", $createQueueOptions);
+try {
+  // Create queue.
+  $queueRestProxy->createQueue("myqueue", $createQueueOptions);
 } catch(ServiceException $e){
-	$code = $e->getCode();
-	$error_message = $e->getMessage();
-	echo $code.": ".$error_message."<br />";
+  $code = $e->getCode();
+  $error_message = $e->getMessage();
+  echo $code.": ".$error_message."<br />";
 }
 ```
 
 [Error Codes and Messages for Queues](http://msdn.microsoft.com/en-us/library/windowsazure/dd179446.aspx)
-	
+  
 
 ### Add a message to a queue
 
 To add a message to a queue, use **QueueRestProxy->createMessage**. The method takes the queue name, the message text, and message options (which are optional).
 
 ```PHP
-try	{
-	// Create message.
-	$queueRestProxy->createMessage("myqueue", "Hello World!");
+try {
+  // Create message.
+  $queueRestProxy->createMessage("myqueue", "Hello World!");
 } catch(ServiceException $e){
-	$code = $e->getCode();
-	$error_message = $e->getMessage();
-	echo $code.": ".$error_message."<br />";
+  $code = $e->getCode();
+  $error_message = $e->getMessage();
+  echo $code.": ".$error_message."<br />";
 }
 ```
 
@@ -367,12 +367,12 @@ You can peek at a message (or messages) at the front of a queue without removing
 $message_options = new PeekMessagesOptions();
 $message_options->setNumberOfMessages(1); // Default value is 1.
 
-try	{
-	$peekMessagesResult = $queueRestProxy->peekMessages("myqueue", $message_options);
+try {
+  $peekMessagesResult = $queueRestProxy->peekMessages("myqueue", $message_options);
 } catch(ServiceException $e){
-	$code = $e->getCode();
-	$error_message = $e->getMessage();
-	echo $code.": ".$error_message."<br />";
+  $code = $e->getCode();
+  $error_message = $e->getMessage();
+  echo $code.": ".$error_message."<br />";
 }
 
 $messages = $peekMessagesResult->getQueueMessages();
@@ -380,15 +380,15 @@ $messages = $peekMessagesResult->getQueueMessages();
 // View messages.
 $messageCount = count($messages);
 if($messageCount <= 0){
-	echo "There are no messages.<br />";
+  echo "There are no messages.<br />";
 }
 else{
-	foreach($messages as $message)	{
-		echo "Peeked message:<br />";
-		echo "Message Id: ".$message->getMessageId()."<br />";
-		echo "Date: ".date_format($message->getInsertionDate(), 'Y-m-d')."<br />";
-		echo "Message text: ".$message->getMessageText()."<br /><br />";
-	}
+  foreach($messages as $message)  {
+    echo "Peeked message:<br />";
+    echo "Message Id: ".$message->getMessageId()."<br />";
+    echo "Date: ".date_format($message->getInsertionDate(), 'Y-m-d')."<br />";
+    echo "Message text: ".$message->getMessageText()."<br /><br />";
+  }
 }
 ```
 
@@ -408,13 +408,13 @@ $message = $messages[0];
 $messageId = $message->getMessageId();
 $popReceipt = $message->getPopReceipt();
 
-try	{
-	// Delete message.
-	$queueRestProxy->deleteMessage("myqueue", $messageId, $popReceipt);
+try {
+  // Delete message.
+  $queueRestProxy->deleteMessage("myqueue", $messageId, $popReceipt);
 } catch(ServiceException $e){
-	$code = $e->getCode();
-	$error_message = $e->getMessage();
-	echo $code.": ".$error_message."<br />";
+  $code = $e->getCode();
+  $error_message = $e->getMessage();
+  echo $code.": ".$error_message."<br />";
 }
 ```
 
@@ -423,15 +423,15 @@ try	{
 ### Create a Queue
 
 ```PHP
-try	{
-	$queueInfo = new QueueInfo("myqueue");
-	
-	// Create queue.
-	$serviceBusRestProxy->createQueue($queueInfo);
+try {
+  $queueInfo = new QueueInfo("myqueue");
+  
+  // Create queue.
+  $serviceBusRestProxy->createQueue($queueInfo);
 } catch(ServiceException $e){
-	$code = $e->getCode();
-	$error_message = $e->getMessage();
-	echo $code.": ".$error_message."<br />";
+  $code = $e->getCode();
+  $error_message = $e->getMessage();
+  echo $code.": ".$error_message."<br />";
 }
 ```
 
@@ -443,17 +443,17 @@ To send a message to a Service Bus queue, your application will call the **Servi
 of the **BrokeredMessage** class.
 
 ```PHP
-try	{
-	// Create message.
-	$message = new BrokeredMessage();
-	$message->setBody("my message");
+try {
+  // Create message.
+  $message = new BrokeredMessage();
+  $message->setBody("my message");
 
-	// Send message.
-	$serviceBusRestProxy->sendQueueMessage("myqueue", $message);
+  // Send message.
+  $serviceBusRestProxy->sendQueueMessage("myqueue", $message);
 } catch(ServiceException $e){
-	$code = $e->getCode();
-	$error_message = $e->getMessage();
-	echo $code.": ".$error_message."<br />";
+  $code = $e->getCode();
+  $error_message = $e->getMessage();
+  echo $code.": ".$error_message."<br />";
 }
 ```
 
@@ -464,24 +464,24 @@ The primary way to receive messages from a queue is to use a **ServiceBusRestPro
 The example below demonstrates how a message can be received and processed using **PeekLock** mode (not the default mode).
 
 ```PHP
-try	{
-	// Set the receive mode to PeekLock (default is ReceiveAndDelete).
-	$options = new ReceiveMessageOptions();
-	$options->setPeekLock(true);
-	
-	// Receive message.
-	$message = $serviceBusRestProxy->receiveQueueMessage("myqueue", $options);
-	echo "Body: ".$message->getBody()."<br />";
-	echo "MessageID: ".$message->getMessageId()."<br />";
-	
-	// *** Process message here ***
-	
-	// Delete message.
-	$serviceBusRestProxy->deleteMessage($message);
+try {
+  // Set the receive mode to PeekLock (default is ReceiveAndDelete).
+  $options = new ReceiveMessageOptions();
+  $options->setPeekLock(true);
+  
+  // Receive message.
+  $message = $serviceBusRestProxy->receiveQueueMessage("myqueue", $options);
+  echo "Body: ".$message->getBody()."<br />";
+  echo "MessageID: ".$message->getMessageId()."<br />";
+  
+  // *** Process message here ***
+  
+  // Delete message.
+  $serviceBusRestProxy->deleteMessage($message);
 } catch(ServiceException $e){
-	$code = $e->getCode();
-	$error_message = $e->getMessage();
-	echo $code.": ".$error_message."<br />";
+  $code = $e->getCode();
+  $error_message = $e->getMessage();
+  echo $code.": ".$error_message."<br />";
 }
 ```
 
@@ -490,28 +490,28 @@ try	{
 ### Create a Topic
 
 ```PHP
-try	{		
-	// Create topic.
-	$topicInfo = new TopicInfo("mytopic");
-	$serviceBusRestProxy->createTopic($topicInfo);
+try {   
+  // Create topic.
+  $topicInfo = new TopicInfo("mytopic");
+  $serviceBusRestProxy->createTopic($topicInfo);
 } catch(ServiceException $e){
-	$code = $e->getCode();
-	$error_message = $e->getMessage();
-	echo $code.": ".$error_message."<br />";
+  $code = $e->getCode();
+  $error_message = $e->getMessage();
+  echo $code.": ".$error_message."<br />";
 }
 ```
 
 ### Create a subscription with the default (MatchAll) filter
 
 ```PHP
-try	{
-	// Create subscription.
-	$subscriptionInfo = new SubscriptionInfo("mysubscription");
-	$serviceBusRestProxy->createSubscription("mytopic", $subscriptionInfo);
+try {
+  // Create subscription.
+  $subscriptionInfo = new SubscriptionInfo("mysubscription");
+  $serviceBusRestProxy->createSubscription("mytopic", $subscriptionInfo);
 } catch(ServiceException $e){
-	$code = $e->getCode();
-	$error_message = $e->getMessage();
-	echo $code.": ".$error_message."<br />";
+  $code = $e->getCode();
+  $error_message = $e->getMessage();
+  echo $code.": ".$error_message."<br />";
 }
 ```
 
@@ -520,17 +520,17 @@ try	{
 Messages sent to Service Bus topics are instances of the **BrokeredMessage** class.
 
 ```PHP
-try	{
-	// Create message.
-	$message = new BrokeredMessage();
-	$message->setBody("my message");
+try {
+  // Create message.
+  $message = new BrokeredMessage();
+  $message->setBody("my message");
 
-	// Send message.
-	$serviceBusRestProxy->sendTopicMessage("mytopic", $message);
+  // Send message.
+  $serviceBusRestProxy->sendTopicMessage("mytopic", $message);
 } catch(ServiceException $e){
-	$code = $e->getCode();
-	$error_message = $e->getMessage();
-	echo $code.": ".$error_message."<br />";
+  $code = $e->getCode();
+  $error_message = $e->getMessage();
+  echo $code.": ".$error_message."<br />";
 }
 ```
 
@@ -541,21 +541,21 @@ The primary way to receive messages from a subscription is to use a **ServiceBus
 The example below demonstrates how a message can be received and processed using **ReceiveAndDelete** mode (the default mode). 
 
 ```PHP
-try	{
-	// Set receive mode to PeekLock (default is ReceiveAndDelete)
-	$options = new ReceiveMessageOptions();
-	$options->setReceiveAndDelete();
+try {
+  // Set receive mode to PeekLock (default is ReceiveAndDelete)
+  $options = new ReceiveMessageOptions();
+  $options->setReceiveAndDelete();
 
-	// Get message.
-	$message = $serviceBusRestProxy->receiveSubscriptionMessage("mytopic", 
-																"mysubscription", 
-																$options);
-	echo "Body: ".$message->getBody()."<br />";
-	echo "MessageID: ".$message->getMessageId()."<br />";
+  // Get message.
+  $message = $serviceBusRestProxy->receiveSubscriptionMessage("mytopic", 
+                                "mysubscription", 
+                                $options);
+  echo "Body: ".$message->getBody()."<br />";
+  echo "MessageID: ".$message->getMessageId()."<br />";
 } catch(ServiceException $e){
-	$code = $e->getCode();
-	$error_message = $e->getMessage();
-	echo $code.": ".$error_message."<br />";
+  $code = $e->getCode();
+  $error_message = $e->getMessage();
+  echo $code.": ".$error_message."<br />";
 }
 ```
 
@@ -565,15 +565,15 @@ try	{
 
 You  need to create two certificates, one for the server (a .cer file) and one for the client (a .pem file). To create the .pem file using [OpenSSL](http://www.openssl.org), execute this: 
 
-	openssl req -x509 -nodes -days 365 -newkey rsa:1024 -keyout mycert.pem -out mycert.pem
+  openssl req -x509 -nodes -days 365 -newkey rsa:1024 -keyout mycert.pem -out mycert.pem
 
 To create the .cer certificate, execute this: 
 
-	openssl x509 -inform pem -in mycert.pem -outform der -out mycert.cer
+  openssl x509 -inform pem -in mycert.pem -outform der -out mycert.cer
 
 ### List Available Locations
 
-```PHP	
+```PHP  
 $serviceManagementRestProxy->listLocations();
 $locations = $result->getLocations();
 foreach($locations as $location){
@@ -583,7 +583,7 @@ foreach($locations as $location){
 
 ### Create a Storage Service
 
-To create a storage service, you need a name for the service (between 3 and 24 lowercase characters and unique within Windows Azure), a label (a base-64 encoded name for the service, up to 100 characters), and either a location or an affinity group. Providing a description for the service is optional.
+To create a storage service, you need a name for the service (between 3 and 24 lowercase characters and unique within Microsoft Azure), a label (a base-64 encoded name for the service, up to 100 characters), and either a location or an affinity group. Providing a description for the service is optional.
 
 ```PHP
 $name = "mystorageservice";
@@ -593,11 +593,11 @@ $options->setLocation('West US');
 
 $result = $serviceManagementRestProxy->createStorageService($name, $label, $options);
 ```
-	
-	
+  
+  
 ### Create a Cloud Service
 
-A cloud service is also known as a hosted service (from earlier versions of Windows Azure).  The **createHostedServices** method allows you to create a new hosted service by providing a hosted service name (which must be unique in Windows Azure), a label (the base 64-endcoded hosted service name), and a **CreateServiceOptions** object which allows you to set the location *or* the affinity group for your service. 
+A cloud service is also known as a hosted service (from earlier versions of Microsoft Azure).  The **createHostedServices** method allows you to create a new hosted service by providing a hosted service name (which must be unique in Microsoft Azure), a label (the base 64-endcoded hosted service name), and a **CreateServiceOptions** object which allows you to set the location *or* the affinity group for your service. 
 
 ```PHP
 $name = "myhostedservice";
@@ -611,7 +611,7 @@ $result = $serviceManagementRestProxy->createHostedService($name, $label, $optio
 
 ### Create a Deployment
 
-To make a new deployment to Azure you must store the package file in a Windows Azure Blob Storage account under the same subscription as the hosted service to which the package is being uploaded. You can create a deployment package with the [Windows Azure PowerShell cmdlets](https://www.windowsazure.com/en-us/develop/php/how-to-guides/powershell-cmdlets/), or with the [cspack commandline tool](http://msdn.microsoft.com/en-us/library/windowsazure/gg432988.aspx).
+To make a new deployment to Azure you must store the package file in a Microsoft Azure Blob Storage account under the same subscription as the hosted service to which the package is being uploaded. You can create a deployment package with the [Microsoft Azure PowerShell cmdlets](https://www.windowsazure.com/en-us/develop/php/how-to-guides/powershell-cmdlets/), or with the [cspack commandline tool](http://msdn.microsoft.com/en-us/library/windowsazure/gg432988.aspx).
 
 ```PHP
 $hostedServiceName = "myhostedservice";
@@ -622,11 +622,11 @@ $configuration = file_get_contents('path_to_.cscfg_file');
 $label = base64_encode($hostedServiceName);
 
 $result = $serviceManagementRestProxy->createDeployment($hostedServiceName,
-												 $deploymentName,
-												 $slot,
-												 $packageUrl,
-												 $configuration,
-												 $label);
+                         $deploymentName,
+                         $slot,
+                         $packageUrl,
+                         $configuration,
+                         $label);
 
 $status = $serviceManagementRestProxy->getOperationStatus($result);
 echo "Operation status: ".$status->getStatus()."<br />";
@@ -700,19 +700,19 @@ Also you could get linked entities with methods “getAssetLocators”, “getAs
 
 The complete list of all methods available you could find in IMediaServices interface.
 
-**For more examples please see the [Windows Azure PHP Developer Center](http://www.windowsazure.com/en-us/develop/php)**
+**For more examples please see the [Microsoft Azure PHP Developer Center](http://www.windowsazure.com/en-us/develop/php)**
 
 # Need Help?
 
-Be sure to check out the Windows Azure [Developer Forums on Stack Overflow](http://go.microsoft.com/fwlink/?LinkId=234489) if you have trouble with the provided code.
+Be sure to check out the Microsoft Azure [Developer Forums on Stack Overflow](http://go.microsoft.com/fwlink/?LinkId=234489) if you have trouble with the provided code.
 
 # Contribute Code or Provide Feedback
 
-If you would like to become an active contributor to this project please follow the instructions provided in [Windows Azure Projects Contribution Guidelines](http://windowsazure.github.com/guidelines.html).
+If you would like to become an active contributor to this project please follow the instructions provided in [Microsoft Azure Projects Contribution Guidelines](http://windowsazure.github.com/guidelines.html).
 
 To setup your development environment, follow the instructions in this [wiki page](https://github.com/WindowsAzure/azure-sdk-for-php/wiki/Devbox-installation-guide).
 
 If you encounter any bugs with the library please file an issue in the [Issues](https://github.com/WindowsAzure/azure-sdk-for-php/issues) section of the project.
 
 # Learn More
-[Windows Azure PHP Developer Center](http://www.windowsazure.com/en-us/develop/php/)
+[Microsoft Azure PHP Developer Center](http://www.windowsazure.com/en-us/develop/php/)
