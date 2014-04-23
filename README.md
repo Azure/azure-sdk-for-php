@@ -51,7 +51,7 @@ Microsoft Azure tables, blobs, queues, service bus (queues and topics), service 
 
 To get the source code from GitHub, type
 
-    git clone https://github.com/WindowsAzure/azure-sdk-for-php.git
+    git clone https://github.com/Azure/azure-sdk-for-php.git
     cd ./azure-sdk-for-php
 
 > **Note**
@@ -710,9 +710,9 @@ Be sure to check out the Microsoft Azure [Developer Forums on Stack Overflow](ht
 
 If you would like to become an active contributor to this project please follow the instructions provided in [Microsoft Azure Projects Contribution Guidelines](http://windowsazure.github.com/guidelines.html).
 
-To setup your development environment, follow the instructions in this [wiki page](https://github.com/WindowsAzure/azure-sdk-for-php/wiki/Devbox-installation-guide).
+To setup your development environment, follow the instructions in this [wiki page](https://github.com/Azure/azure-sdk-for-php/wiki/Devbox-installation-guide).
 
-If you encounter any bugs with the library please file an issue in the [Issues](https://github.com/WindowsAzure/azure-sdk-for-php/issues) section of the project.
+If you encounter any bugs with the library please file an issue in the [Issues](https://github.com/Azure/azure-sdk-for-php/issues) section of the project.
 
 # Learn More
 [Microsoft Azure PHP Developer Center](http://www.windowsazure.com/en-us/develop/php/)
