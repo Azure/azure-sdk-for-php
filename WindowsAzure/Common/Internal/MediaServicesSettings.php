@@ -143,8 +143,8 @@ class MediaServicesSettings extends ServiceSettings
         $accountName,
         $accessKey,
         $endpointUri = null,
-        $oauthEndpointUri = null)
-    {
+        $oauthEndpointUri = null
+    ) {
         Validate::notNullOrEmpty($accountName, 'accountName');
         Validate::notNullOrEmpty($accessKey, 'accountKey');
         Validate::isString($accountName, 'accountName');

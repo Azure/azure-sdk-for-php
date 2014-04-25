@@ -367,6 +367,7 @@ class Task
             if (is_array($options['HistoricalEvents'])) {
                 foreach ($options['HistoricalEvents'] as $historicalEvent) {
                     $evnt = TaskHistoricalEvent::createFromOptions($historicalEvent);
+
                     $this->_historicalEvents[] = $evnt;
                 }
             }
