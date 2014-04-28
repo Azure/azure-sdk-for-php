@@ -11,7 +11,7 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- * 
+ *
  * PHP version 5
  *
  * @category  Microsoft
@@ -58,7 +58,7 @@ foreach($dependencies as $dependency) {
     $p->addPackageDepWithChannel($dependency[0], $dependency[1], $dependency[2]);
 }
 // The replacement doesn't work check: https://github.com/WindowsAzure/azure-sdk-for-php/issues/413
-$p->addReplacement('WindowsAzure/*.php', 'package-info', '0.3.1_2011-08', 'version');
+// $p->addReplacement('WindowsAzure/*.php', 'package-info', '0.3.1_2011-08', 'version');
 $p->generateContents();
 
 if (isset($_GET['make']) || (isset($_SERVER['argv']) && @$_SERVER['argv'][1] == 'make')) {

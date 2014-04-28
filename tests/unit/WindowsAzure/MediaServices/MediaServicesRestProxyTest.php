@@ -524,7 +524,7 @@ class MediaServicesRestProxyTest extends MediaServicesRestProxyTestBase
 
         $access = new AccessPolicy(TestResources::MEDIA_SERVICES_ACCESS_POLICY_NAME . $this->createSuffix());
         $access->setDurationInMinutes(30);
-        $access->setPermissions(AccessPolicy::PERMISSIONS_READ + AccessPolicy::PERMISSIONS_LIST);
+        $access->setPermissions(AccessPolicy::PERMISSIONS_READ);
         $access = $this->createAccessPolicy($access);
 
         $locator = new Locator($asset, $access, Locator::TYPE_ON_DEMAND_ORIGIN);

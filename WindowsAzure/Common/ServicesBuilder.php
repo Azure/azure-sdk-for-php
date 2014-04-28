@@ -60,7 +60,7 @@ use WindowsAzure\Common\Internal\Authentication\OAuthScheme;
  * @author    Azure PHP SDK <azurephpsdk@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
- * @version   Release: 0.3.1_2011-08
+ * @version   Release: 0.4.0_2014-01
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
 class ServicesBuilder
@@ -191,7 +191,9 @@ class ServicesBuilder
         );
 
         // Adding headers filter
-        $headers = array();
+        $headers = array(
+            Resources::USER_AGENT => Resources::SDK_USER_AGENT,
+        );
 
         $headers[Resources::X_MS_VERSION] = Resources::STORAGE_API_LATEST_VERSION;
 
@@ -242,7 +244,9 @@ class ServicesBuilder
         );
 
         // Adding headers filter
-        $headers = array();
+        $headers = array(
+            Resources::USER_AGENT => Resources::SDK_USER_AGENT,
+        );
 
         $headers[Resources::X_MS_VERSION] = Resources::STORAGE_API_LATEST_VERSION;
 
@@ -301,6 +305,7 @@ class ServicesBuilder
         $maxVersion            = Resources::MAX_DATA_SERVICE_VERSION_VALUE;
         $accept                = Resources::ACCEPT_HEADER_VALUE;
         $acceptCharset         = Resources::ACCEPT_CHARSET_VALUE;
+        $userAgent             = Resources::SDK_USER_AGENT;
 
         $headers[Resources::X_MS_VERSION]             = $latestServicesVersion;
         $headers[Resources::DATA_SERVICE_VERSION]     = $currentVersion;
@@ -308,6 +313,7 @@ class ServicesBuilder
         $headers[Resources::MAX_DATA_SERVICE_VERSION] = $maxVersion;
         $headers[Resources::ACCEPT_HEADER]            = $accept;
         $headers[Resources::ACCEPT_CHARSET]           = $acceptCharset;
+        $headers[Resources::USER_AGENT]               = $userAgent;
 
         $headersFilter = new HeadersFilter($headers);
         $tableWrapper  = $tableWrapper->withFilter($headersFilter);
@@ -350,6 +356,14 @@ class ServicesBuilder
             $serializer
         );
 
+        // Adding headers filter
+        $headers = array(
+            Resources::USER_AGENT => Resources::SDK_USER_AGENT,
+        );
+
+        $headersFilter     = new HeadersFilter($headers);
+        $serviceBusWrapper = $serviceBusWrapper->withFilter($headersFilter);
+
         $wrapFilter = new WrapFilter(
             $settings->getWrapEndpointUri(),
             $settings->getWrapName(),
@@ -389,7 +403,9 @@ class ServicesBuilder
         );
 
         // Adding headers filter
-        $headers = array();
+        $headers = array(
+            Resources::USER_AGENT => Resources::SDK_USER_AGENT
+        );
 
         $headers[Resources::X_MS_VERSION] = Resources::SM_API_LATEST_VERSION;
 
@@ -437,6 +453,7 @@ class ServicesBuilder
         $dataMaxVersion = Resources::MEDIA_SERVICES_MAX_DATA_SERVICE_VERSION_VALUE;
         $accept         = Resources::ACCEPT_HEADER_VALUE;
         $contentType    = Resources::ATOM_ENTRY_CONTENT_TYPE;
+        $userAgent      = Resources::SDK_USER_AGENT;
 
         $headers = array(
             Resources::X_MS_VERSION             => $xMSVersion,
@@ -444,6 +461,7 @@ class ServicesBuilder
             Resources::MAX_DATA_SERVICE_VERSION => $dataMaxVersion,
             Resources::ACCEPT_HEADER            => $accept,
             Resources::CONTENT_TYPE             => $contentType,
+            Resources::USER_AGENT               => $userAgent,
         );
 
         $headersFilter        = new HeadersFilter($headers);

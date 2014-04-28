@@ -64,7 +64,7 @@ use WindowsAzure\MediaServices\Models\ContentKey;
  * @author    Azure PHP SDK <azurephpsdk@microsoft.com>
  * @copyright Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
- * @version   Release: @package_version@
+ * @version   Release: 0.4.0_2014-01
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
 class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
@@ -177,7 +177,7 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
      * @param WindowsAzure\Common\Internal\Atom\Entry $entry Atom Entry containing
      * properties of media services object
      *
-     * @return array
+     * @return array of properties name => value
      */
     protected function getPropertiesFromAtomEntry($entry)
     {
@@ -200,7 +200,7 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
      *
      * @param string $xmlString Atom xml
      *
-     * @return array
+     * @return array of properties arrays
      */
     protected function getEntryList($xmlString)
     {
@@ -407,7 +407,7 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
     /**
      * Get asset list
      *
-     * @return array
+     * @return array of Models\Asset
      */
     public function getAssetList()
     {
@@ -427,7 +427,7 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
      * @param WindowsAzure\MediaServices\Models\Asset|string $asset Asset data or
      * asset Id
      *
-     * @return array
+     * @return array of Models\Locator
      */
     public function getAssetLocators($asset)
     {
@@ -477,7 +477,7 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
      * @param WindowsAzure\MediaServices\Models\Asset|string $asset Asset data or
      * asset Id
      *
-     * @return array
+     * @return array of Models\Asset
      */
     public function getAssetParentAssets($asset)
     {
@@ -502,7 +502,7 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
      * @param WindowsAzure\MediaServices\Models\Asset|string $asset Asset data or
      * asset Id
      *
-     * @return array
+     * @return array of Models\AssetFile
      */
     public function getAssetAssetFileList($asset)
     {
@@ -714,7 +714,7 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
     /**
      * Get list of AccessPolicies.
      *
-     * @return array
+     * @return array of Models\AccessPolicy
      */
     public function getAccessPolicyList()
     {
@@ -829,7 +829,7 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
     /**
      * Get list of Locators.
      *
-     * @return array
+     * @return array of Models\Locator
      */
     public function getLocatorList()
     {
@@ -917,7 +917,7 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
      * Get asset file.
      *
      * @param WindowsAzure\MediaServices\Models\AssetFile|string $assetFile AssetFile
-     *  data or assetFile Id
+     * data or assetFile Id
      *
      * @return WindowsAzure\MediaServices\Models\AssetFile
      */
@@ -937,7 +937,7 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
     /**
      * Get list of all asset files.
      *
-     * @return array
+     * @return array of Models\AssetFile
      */
     public function getAssetFileList()
     {
@@ -1084,7 +1084,7 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
      * @param array                                 $tasks       Performed tasks
      * array (optional)
      *
-     * @return array
+     * @return Models\Job
      */
     public function createJob($job, $inputAssets, $tasks = null)
     {
@@ -1151,7 +1151,7 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
     /**
      * Get list of Jobs.
      *
-     * @return array
+     * @return array of Models\Job
      */
     public function getJobList()
     {
@@ -1204,7 +1204,7 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
      *
      * @param WindowsAzure\MediaServices\Models\Job|string $job Job data or job Id
      *
-     * @return array
+     * @return array of Models\Task
      */
     public function getJobTasks($job)
     {
@@ -1229,7 +1229,7 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
      *
      * @param WindowsAzure\MediaServices\Models\Job|string $job Job data or job Id
      *
-     * @return array
+     * @return array of Models\Asset
      */
     public function getJobInputMediaAssets($job)
     {
@@ -1253,7 +1253,7 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
      *
      * @param WindowsAzure\MediaServices\Models\Job|string $job Job data or job Id
      *
-     * @return array
+     * @return array of Models\Asset
      */
     public function getJobOutputMediaAssets($job)
     {
@@ -1324,7 +1324,7 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
     /**
      * Get list of tasks.
      *
-     * @return array
+     * @return array of Models\Task
      */
     public function getTaskList()
     {
@@ -1401,7 +1401,7 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
      * @param array                                         $taskTemplates Performed
      * tasks template array
      *
-     * @return array
+     * @return Models\JobTemplate
      */
     public function createJobTemplate($jobTemplate, $taskTemplates)
     {
@@ -1479,7 +1479,7 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
     /**
      * Get list of Job Templates.
      *
-     * @return array
+     * @return array of Models\JobTemplate
      */
     public function getJobTemplateList()
     {
@@ -1499,7 +1499,7 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
      * @param WindowsAzure\MediaServices\Models\JobTemplate|string $jobTemplate Job
      * template data or jobTemplate Id
      *
-     * @return array
+     * @return array of Models\TaskTemplate
      */
     public function getJobTemplateTaskTemplateList($jobTemplate)
     {
@@ -1542,7 +1542,7 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
     /**
      * Get list of task templates.
      *
-     * @return array
+     * @return array of Models\Tasktemplate
      */
     public function getTaskTemplateList()
     {
@@ -1559,7 +1559,7 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
     /**
      * Get list of all media processors asset files
      *
-     * @return array
+     * @return array of Models\MediaProcessor
      */
     public function getMediaProcessors()
     {
@@ -1640,7 +1640,7 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
     /**
      * Get IngestManifest list
      *
-     * @return array
+     * @return array of Models\IngestManifest
      */
     public function getIngestManifestList()
     {
@@ -1660,7 +1660,7 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
      * @param Models\IngestManifest|string $ingestManifest An IngestManifest data or
      * IngestManifest Id
      *
-     * @return array
+     * @return array of Models\IngestManifestAsset
      */
     public function getIngestManifestAssets($ingestManifest)
     {
@@ -1687,7 +1687,7 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
      * @param Models\IngestManifest|string $ingestManifest An IngestManifest data or
      * IngestManifest Id
      *
-     * @return array
+     * @return array of Models\IngestManifestAsset
      */
     public function getPendingIngestManifestAssets($ingestManifest)
     {
@@ -1835,7 +1835,7 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
     /**
      * Get list of IngestManifestAsset.
      *
-     * @return array
+     * @return array of Models\IngestManifestAsset
      */
     public function getIngestManifestAssetList()
     {
@@ -1855,7 +1855,7 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
      * @param Models\IngestManifestAsset|string $ingestManifestAsset An
      * IngestManifestAsset data or IngestManifestAsset Id
      *
-     * @return array
+     * @return array of Models\IngestManifestFiles
      */
     public function getIngestManifestAssetFiles($ingestManifestAsset)
     {
@@ -1939,7 +1939,7 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
     /**
      * Get list of IngestManifestFile.
      *
-     * @return array
+     * @return array of Models\IngestManifestFile
      */
     public function getIngestManifestFileList()
     {

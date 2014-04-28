@@ -32,7 +32,7 @@ namespace WindowsAzure\Common\Internal;
  * @author    Azure PHP SDK <azurephpsdk@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
- * @version   Release: 0.3.1_2011-08
+ * @version   Release: 0.4.0_2014-01
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
 class Resources
@@ -181,6 +181,7 @@ class Resources
     const MAX_DATA_SERVICE_VERSION           = 'maxdataserviceversion';
     const ACCEPT_HEADER                      = 'accept';
     const ACCEPT_CHARSET                     = 'accept-charset';
+    const USER_AGENT                         = 'User-Agent';
 
     // Type
     const QUEUE_TYPE_NAME              = 'IQueue';
@@ -243,18 +244,19 @@ class Resources
 
 
     // Header values
-    const STORAGE_API_LATEST_VERSION                        = '2011-08-18';
-    const SM_API_LATEST_VERSION                             = '2011-10-01';
-    const DATA_SERVICE_VERSION_VALUE                        = '1.0;NetFx';
-    const MAX_DATA_SERVICE_VERSION_VALUE                    = '2.0;NetFx';
-    const ACCEPT_HEADER_VALUE                               = 'application/atom+xml,application/xml';
-    const ATOM_ENTRY_CONTENT_TYPE                           = 'application/atom+xml;type=entry;charset=utf-8';
-    const ATOM_FEED_CONTENT_TYPE                            = 'application/atom+xml;type=feed;charset=utf-8';
-    const ACCEPT_CHARSET_VALUE                              = 'utf-8';
-    const INT32_MAX                                         = 2147483647;
-    const MEDIA_SERVICES_API_LATEST_VERSION                 = '2.2';
-    const MEDIA_SERVICES_DATA_SERVICE_VERSION_VALUE         = '3.0;NetFx';
-    const MEDIA_SERVICES_MAX_DATA_SERVICE_VERSION_VALUE     = '3.0;NetFx';
+    const SDK_USER_AGENT                                = 'Azure-SDK-For-PHP/0.4.0';
+    const STORAGE_API_LATEST_VERSION                    = '2011-08-18';
+    const SM_API_LATEST_VERSION                         = '2011-10-01';
+    const DATA_SERVICE_VERSION_VALUE                    = '1.0;NetFx';
+    const MAX_DATA_SERVICE_VERSION_VALUE                = '2.0;NetFx';
+    const ACCEPT_HEADER_VALUE                           = 'application/atom+xml,application/xml';
+    const ATOM_ENTRY_CONTENT_TYPE                       = 'application/atom+xml;type=entry;charset=utf-8';
+    const ATOM_FEED_CONTENT_TYPE                        = 'application/atom+xml;type=feed;charset=utf-8';
+    const ACCEPT_CHARSET_VALUE                          = 'utf-8';
+    const INT32_MAX                                     = 2147483647;
+    const MEDIA_SERVICES_API_LATEST_VERSION             = '2.2';
+    const MEDIA_SERVICES_DATA_SERVICE_VERSION_VALUE     = '3.0;NetFx';
+    const MEDIA_SERVICES_MAX_DATA_SERVICE_VERSION_VALUE = '3.0;NetFx';
 
     // Query parameter names
     const QP_PREFIX             = 'Prefix';
