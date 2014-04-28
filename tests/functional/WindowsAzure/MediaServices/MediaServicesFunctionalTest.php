@@ -969,7 +969,6 @@ class MediaServicesFunctionalTest extends MediaServicesRestProxyTestBase
         $this->waitIngestManifestFinishedFiles($manifest, 1);
         $finishedFirstStat = $this->restProxy->getIngestManifest($manifest);
 
-        $blobRestProxy = $this->builder->createBlobService($this->connectionString);
         $blobRestProxy->createBlockBlob(
                 $blob,
                 $otherFileName,
