@@ -220,7 +220,6 @@ class MediaServicesRestProxyTestBase extends ServiceRestProxyTestBase
         $job->setName($name);
 
         $jobResult = $this->createJob($job, array($inputAsset), array($task));
-        $this->job[$jobResult->getId()] = $jobResult;
 
         return $jobResult;
     }
@@ -310,12 +309,16 @@ class MediaServicesRestProxyTestBase extends ServiceRestProxyTestBase
         return sprintf('-%04x', mt_rand(0, 65535));
     }
 
-    public function deleteJob($job){
+    public function waitJobStatus($job, $statusArray) {
         $status = $this->restProxy->getJobStatus($job);
-        while ($status != Job::STATE_FINISHED && $status != Job::STATE_ERROR && $status != Job::STATE_CANCELED) {
+        while (!in_array($status, $statusArray)) {
             sleep(1);
             $status = $this->restProxy->getJobStatus($job);
         }
+    }
+    
+    public function deleteJob($job){
+        $this->waitJobStatus($job, array(Job::STATE_FINISHED, Job::STATE_ERROR, Job::STATE_CANCELED));
         $this->restProxy->deleteJob($job->getId());
         unset($this->job[$job->getId()]);
     }

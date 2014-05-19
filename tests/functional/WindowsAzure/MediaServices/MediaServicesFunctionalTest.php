@@ -894,6 +894,94 @@ class MediaServicesFunctionalTest extends MediaServicesRestProxyTestBase
         $this->assertEquals($contentKey->getId(), $contentKeyFromAsset[0]->getId());
     }
 
+
+    public function testIngestEncryptedAssetAndDecryptAtAzure()
+    {
+        // Setup
+        $content = TestResources::MEDIA_SERVICES_DUMMY_FILE_CONTENT;
+        
+        $aesKey = Utilities::generateCryptoKey(32);
+        $protectionKeyId = $this->restProxy->getProtectionKeyId(ProtectionKeyTypes::X509_CERTIFICATE_THUMBPRINT);
+        $protectionKey = $this->restProxy->getProtectionKey($protectionKeyId);
+    
+        $contentKey = new ContentKey();
+        $contentKey->setContentKey($aesKey, $protectionKey);
+        $contentKey->setProtectionKeyId($protectionKeyId);
+        $contentKey->setProtectionKeyType(ProtectionKeyTypes::X509_CERTIFICATE_THUMBPRINT);
+        $contentKey->setContentKeyType(ContentKeyTypes::STORAGE_ENCRYPTION);
+        $contentKey = $this->createContentKey($contentKey);
+    
+        $asset = new Asset(Asset::OPTIONS_STORAGE_ENCRYPTED);
+        $asset->setName(TestResources::MEDIA_SERVICES_ASSET_NAME . $this->createSuffix());
+        $asset = $this->createAsset($asset);
+    
+        $this->restProxy->linkContentKeyToAsset($asset, $contentKey);
+
+        $initializationVector = Utilities::generateCryptoKey(8);
+        $encrypted = Utilities::ctrCrypt($content, $aesKey, str_pad($initializationVector, 16, chr(0)));
+        
+        // Test
+        $access = new AccessPolicy(TestResources::MEDIA_SERVICES_ACCESS_POLICY_NAME . $this->createSuffix());
+        $access->setDurationInMinutes(30);
+        $access->setPermissions(AccessPolicy::PERMISSIONS_WRITE);
+        $access = $this->createAccessPolicy($access);
+
+        $locator = new Locator($asset, $access, Locator::TYPE_SAS);
+        $locator->setName(TestResources::MEDIA_SERVICES_LOCATOR_NAME . $this->createSuffix());
+        $locator->setStartTime(new \DateTime('now -5 minutes'));
+        $locator = $this->createLocator($locator);
+
+        $fileName = TestResources::MEDIA_SERVICES_DUMMY_FILE_NAME;
+        $this->restProxy->uploadAssetFile($locator, $fileName, $encrypted);
+        $this->restProxy->createFileInfos($asset);
+            
+        $files = $this->restProxy->getAssetAssetFileList($asset);
+        $files[0]->setIsEncrypted(true);
+        $files[0]->setEncryptionKeyId($contentKey->getId());
+        $files[0]->setEncryptionScheme(EncryptionSchemes::STORAGE_ENCRYPTION);
+        $files[0]->setEncryptionVersion(Resources::MEDIA_SERVICES_ENCRYPTION_VERSION);
+        $files[0]->setInitializationVector(Utilities::base256ToDec($initializationVector));
+        $this->restProxy->updateAssetFile($files[0]);
+        
+        $decodeProcessor = $this->restProxy->getLatestMediaProcessor(TestResources::MEDIA_SERVICES_DECODE_PROCESSOR_NAME);
+        $task = new Task(TestResources::getMediaServicesTask($this->getOutputAssetName()), $decodeProcessor->getId(), TaskOptions::NONE);
+        $job = new Job();
+        $job->setName(TestResources::MEDIA_SERVICES_JOB_NAME . $this->createSuffix());
+        $job = $this->createJob($job, array($asset), array($task));
+        
+        $this->waitJobStatus($job, array(Job::STATE_FINISHED, Job::STATE_ERROR));
+
+        $this->assertEquals($this->restProxy->getJobStatus($job), Job::STATE_FINISHED);
+        
+        $outputAssets = $this->restProxy->getJobOutputMediaAssets($job);
+        $this->assertCount(1, $outputAssets);
+        
+        $accessPolicy = new AccessPolicy(TestResources::MEDIA_SERVICES_ACCESS_POLICY_NAME . $this->createSuffix());
+        $accessPolicy->setDurationInMinutes(300);
+        $accessPolicy->setPermissions(AccessPolicy::PERMISSIONS_READ);
+        $accessPolicy = $this->createAccessPolicy($accessPolicy);
+        
+        $locator = new Locator($outputAssets[0], $accessPolicy, Locator::TYPE_SAS);
+        $locator->setName(TestResources::MEDIA_SERVICES_LOCATOR_NAME . $this->createSuffix());
+        $locator->setStartTime(new \DateTime('now -5 minutes'));
+        $locator = $this->createLocator($locator);
+        
+        // without sleep() Locator hasn't enough time to create URL, so that's why we have to use at least sleep(30)
+        sleep(40);
+        
+        $method      = Resources::HTTP_GET;
+        $url         = new Url($locator->getBaseUri() . '/' . TestResources::MEDIA_SERVICES_DUMMY_FILE_NAME . $locator->getContentAccessComponent());
+        $filters     = array();
+        $statusCode  = Resources::STATUS_OK;
+        
+        $httpClient = new HttpClient();
+        $httpClient->setMethod($method);
+        $httpClient->setExpectedStatusCode($statusCode);
+        $actual = $httpClient->send($filters, $url);
+        
+        $this->assertEquals($content, $actual);
+    }
+    
     public function testBulkIngestEncryptedAsset(){
 
         // Setup

@@ -643,5 +643,54 @@ class Utilities
     {
         return openssl_random_pseudo_bytes($length);
     }
+    
+    
+    /**
+     * Encrypts $str with CTR encryption
+     * 
+     * @param string $str Data to be encrypted
+     * @param string $key Encryption key
+     * @param string $iv  Initialization vector
+     * 
+     * @return string Encrypted data
+     */
+    public static function ctrCrypt($str, $key, $iv) {
+        $blockCount = ceil(strlen($str) / 16);
+    
+        $ctrStr = '';
+        for ($i = 0; $i < $blockCount; ++$i) {
+            $ctrStr .= $iv;
+    
+            // increment IV
+            $j = 15;
+            do {
+                $n = ord($iv[$j]) + 1;
+                $iv[$j] = chr($n & 0xFF);
+                $j--;
+            }
+            while (($n == 0x100) && ($j >= 0));
+        }
+    
+        return $str ^ mcrypt_encrypt(MCRYPT_RIJNDAEL_128, $key, $ctrStr, MCRYPT_MODE_ECB);
+    }
+    
+    /**
+     * Convert base 256 number to decimal number. 
+     * 
+     * @param string $s Base 256 number
+     * 
+     * @return string Decimal number
+     */
+    function base256ToDec($s) {
+    
+        $result = 0;
+        $base = 1;
+        for($i = strlen($s) - 1; $i >= 0; $i--) {
+            $result = bcadd($result, bcmul(ord($s[$i]), $base));
+            $base = bcmul($base, 256);
+        }
+    
+        return $result;
+    }
 
 }
