@@ -31,6 +31,7 @@ use WindowsAzure\Common\Models\ServiceProperties;
 use WindowsAzure\Common\Internal\Serialization\XmlSerializer;
 use WindowsAzure\MediaServices\Models\Asset;
 
+
 /**
  * Unit tests for class Utilities
  *
@@ -593,12 +594,12 @@ class UtilitiesTest extends \PHPUnit_Framework_TestCase
         // Setup
         $data = 'Test data more than 16 bytes';
         $key = Utilities::generateCryptoKey(32);
-        $efectiveIv = Utilities::generateCryptoKey(8);
-        $iv = str_pad($efectiveIv, 16, chr(255));
+        $efectiveInitializationVector = Utilities::generateCryptoKey(8);
+        $initializationVector = str_pad($efectiveInitializationVector, 16, chr(255));
     
         // Test
-        $ecnrypted = Utilities::ctrCrypt($data, $key, $iv);
-        $decrypted = Utilities::ctrCrypt($ecnrypted, $key, $iv);
+        $ecnrypted = Utilities::ctrCrypt($data, $key, $initializationVector);
+        $decrypted = Utilities::ctrCrypt($ecnrypted, $key, $initializationVector);
     
         // Assert
         $this->assertEquals($data, $decrypted);
@@ -612,16 +613,48 @@ class UtilitiesTest extends \PHPUnit_Framework_TestCase
         // Setup
         $data = 'Test data more than 16 bytes';
         $key = base64_decode('QNhZJajWRH3fmCKDJtMluj6PUBvkADwJ7dX4KQGI99o=');
-        $efectiveIv = base64_decode('k3AmLEGFubw=');
+        $efectiveInitializationVector = base64_decode('k3AmLEGFubw=');
         $expected = base64_decode('j3+9MFQVctoWlUvqbn/xReun0XnWqwJ3tpvbpw==');
         
-        $iv = str_pad($efectiveIv, 16, chr(255));
+        $initializationVector = str_pad($efectiveInitializationVector, 16, chr(255));
         
         // Test
-        $actual = Utilities::ctrCrypt($data, $key, $iv);
+        $actual = Utilities::ctrCrypt($data, $key, $initializationVector);
     
         // Assert
         $this->assertEquals($actual, $expected);
+    }
+    
+    /**
+     * @covers WindowsAzure\Common\Internal\Utilities::ctrCrypt
+     */
+    public function testCtrCryptInvalidKeyLength(){
+    
+        // Setup
+        $data = 'Test data more than 16 bytes';
+        $key = '12345';
+        $efectiveInitializationVector = Utilities::generateCryptoKey(8);
+        $this->setExpectedException(get_class(new \InvalidArgumentException('')));
+        
+        $initializationVector = str_pad($efectiveInitializationVector, 16, chr(255));
+        
+        // Test
+        $actual = Utilities::ctrCrypt($data, $key, $initializationVector);
+    }
+    
+    /**
+     * @covers WindowsAzure\Common\Internal\Utilities::ctrCrypt
+     */
+    public function testCtrCryptInvalidInitializationVectorLength(){
+    
+        // Setup
+        $data = 'Test data more than 16 bytes';
+        $key = Utilities::generateCryptoKey(32);
+        $initializationVector = '1234';
+        $this->setExpectedException(get_class(new \InvalidArgumentException('')));
+        
+        // Test
+        $actual = Utilities::ctrCrypt($data, $key, $initializationVector);
     }
     
     /**

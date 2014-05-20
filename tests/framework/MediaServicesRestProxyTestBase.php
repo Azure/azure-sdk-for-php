@@ -71,67 +71,49 @@ class MediaServicesRestProxyTestBase extends ServiceRestProxyTestBase
 
     public function createAsset($asset) {
         $result = $this->restProxy->createAsset($asset);
-
         $this->assets[$result->getId()] = $result;
-
         return $result;
     }
 
     public function createAccessPolicy($accessPolicy) {
         $result = $this->restProxy->createAccessPolicy($accessPolicy);
-
         $this->accessPolicy[$result->getId()] = $result;
-
         return $result;
     }
 
     public function createLocator($loc) {
-
         $result = $this->restProxy->createLocator($loc);
-
         $this->locator[$result->getId()] = $result;
-
         return $result;
     }
 
     public function createJob($job, $inputAssets, $tasks = null) {
-
         $result = $this->restProxy->createJob($job, $inputAssets, $tasks);
-
         $this->job[$result->getId()] = $result;
-
         return $result;
     }
 
     public function createIngestManifest($ingestManifest) {
         $result = $this->restProxy->createIngestManifest($ingestManifest);
-
         $this->ingestManifests[$result->getId()] = $result;
-
         return $result;
     }
 
     public function createIngestManifestAsset($ingestManifestAsset, $asset) {
         $result = $this->restProxy->createIngestManifestAsset($ingestManifestAsset, $asset);
-
         $this->ingestManifestAssets[$result->getId()] = $result;
-
         return $result;
     }
 
     public function createIngestManifestFile($ingestManifestFile) {
         $result = $this->restProxy->createIngestManifestFile($ingestManifestFile);
-
         $this->ingestManifestFiles[$result->getId()] = $result;
-
         return $result;
     }
 
     public function createContentKey($contentKey) {
         $result = $this->restProxy->createContentKey($contentKey);
-
         $this->contentKeys[$result->getId()] = $result;
-
         return $result;
     }
 
@@ -270,19 +252,24 @@ class MediaServicesRestProxyTestBase extends ServiceRestProxyTestBase
             $this->restProxy->deleteLocator($loc);
         }
 
+        foreach($this->assets as $asset) {
+            $contentKeyList = $this->restProxy->getAssetContentKeys($asset);
+            foreach($contentKeyList as $contentKey) {
+                unset($this->contentKeys[$contentKey->getId()]);
+            }
+        
+            $this->restProxy->deleteAsset($asset);
+        }
+        
+        $availableContentKeyList = $this->restProxy->getContentKeyList();
+        $availableContentKeyIds = array();
+        foreach($availableContentKeyList as $availableContentKey) {
+            $availableContentKeyIds[] = $availableContentKey->getId();
+        }
         foreach($this->contentKeys as $contentKey) {
-            try {
+            if (in_array($contentKey->getId(), $availableContentKeyIds)) {
                 $this->restProxy->deleteContentKey($contentKey);
             }
-            catch (ServiceException $e) {
-                if (($e->getCode() != 400) && (strpos($e->getMessage(), 'Content Keys used to protect Asset cannot be deleted directly.') !== false)) {
-                    throw $e;
-                }
-            }
-        }
-
-        foreach($this->assets as $asset) {
-            $this->restProxy->deleteAsset($asset);
         }
 
         foreach($this->accessPolicy as $access) {

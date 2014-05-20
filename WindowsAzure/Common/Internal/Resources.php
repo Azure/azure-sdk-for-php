@@ -88,6 +88,7 @@ class Resources
     const BATCH_ENTITY_DEL_MSG = 'The entity was deleted successfully.';
     const INVALID_PROP_VAL_MSG = "'%s' property value must satisfy %s.";
     const INVALID_PARAM_MSG = "The provided variable '%s' should be of type '%s'";
+    const INVALID_STRING_LENGTH = "The provided variable '%s' should be of %s characters long";
     const INVALID_BTE_MSG = "The blob block type must exist in %s";
     const INVALID_BLOB_PAT_MSG = 'The provided access type is invalid.';
     const INVALID_SVC_PROP_MSG = 'The provided service properties is invalid.';

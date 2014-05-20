@@ -633,11 +633,11 @@ class Utilities
     }
 
     /**
-     * Generate key for use at encryption
+     * Generate a pseudo-random string of bytes using a cryptographically strong algorithm.
      *
-     * @param int $length Length of the key in bytes
+     * @param int $length Length of the string in bytes
      *
-     * @return string Generated key as string of $length characters
+     * @return string|boolean Generated string of bytes on success, or FALSE on failure.
      */
     public static function generateCryptoKey($length)
     {
@@ -646,47 +646,62 @@ class Utilities
     
     
     /**
-     * Encrypts $str with CTR encryption
+     * Encrypts $data with CTR encryption
      * 
-     * @param string $str Data to be encrypted
-     * @param string $key Encryption key
-     * @param string $iv  Initialization vector
+     * @param string $data                 Data to be encrypted
+     * @param string $key                  AES Encryption key
+     * @param string $initializationVector Initialization vector
      * 
      * @return string Encrypted data
      */
-    public static function ctrCrypt($str, $key, $iv) {
-        $blockCount = ceil(strlen($str) / 16);
+    public static function ctrCrypt($data, $key, $initializationVector) 
+    {
+        Validate::isString($data, 'data');
+        Validate::isString($key, 'key');
+        Validate::isString($initializationVector, 'initializationVector');
+        
+        Validate::isTrue(
+            (strlen($key) == 16 || strlen($key) == 24 || strlen($key) == 32), 
+            sprintf(Resources::INVALID_STRING_LENGTH, 'key', '16, 24, 32'));
+        
+        Validate::isTrue(
+            (strlen($initializationVector) == 16), 
+            sprintf(Resources::INVALID_STRING_LENGTH, 'initializationVector', '16'));
+        
+        $blockCount = ceil(strlen($data) / 16);
     
-        $ctrStr = '';
+        $ctrData = '';
         for ($i = 0; $i < $blockCount; ++$i) {
-            $ctrStr .= $iv;
+            $ctrData .= $initializationVector;
     
-            // increment IV
+            // increment Initialization Vector
             $j = 15;
             do {
-                $n = ord($iv[$j]) + 1;
-                $iv[$j] = chr($n & 0xFF);
+                $digit = ord($initializationVector[$j]) + 1;
+                $initializationVector[$j] = chr($digit & 0xFF);
                 $j--;
             }
-            while (($n == 0x100) && ($j >= 0));
+            while (($digit == 0x100) && ($j >= 0));
         }
     
-        return $str ^ mcrypt_encrypt(MCRYPT_RIJNDAEL_128, $key, $ctrStr, MCRYPT_MODE_ECB);
+        return $data ^ mcrypt_encrypt(MCRYPT_RIJNDAEL_128, $key, $ctrData, MCRYPT_MODE_ECB);
     }
     
     /**
      * Convert base 256 number to decimal number. 
      * 
-     * @param string $s Base 256 number
+     * @param string $number Base 256 number
      * 
      * @return string Decimal number
      */
-    function base256ToDec($s) {
-    
+    public static function base256ToDec($number) 
+    {
+        Validate::isString($number, 'number');
+        
         $result = 0;
         $base = 1;
-        for($i = strlen($s) - 1; $i >= 0; $i--) {
-            $result = bcadd($result, bcmul(ord($s[$i]), $base));
+        for($i = strlen($number) - 1; $i >= 0; $i--) {
+            $result = bcadd($result, bcmul(ord($number[$i]), $base));
             $base = bcmul($base, 256);
         }
     
