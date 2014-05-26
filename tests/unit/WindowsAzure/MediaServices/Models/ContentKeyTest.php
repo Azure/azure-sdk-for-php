@@ -247,8 +247,8 @@ class ContentKeyTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @covers WindowsAzure\MediaServices\Models\ContentKey::setContentKey
-     * @covers WindowsAzure\MediaServices\Models\ContentKey::generateChecksum
-     * @covers WindowsAzure\MediaServices\Models\ContentKey::generateEncryptedContentKey
+     * @covers WindowsAzure\MediaServices\Models\ContentKey::_generateChecksum
+     * @covers WindowsAzure\MediaServices\Models\ContentKey::_generateEncryptedContentKey
      */
     public function testSetContentKey(){
 
