@@ -122,8 +122,6 @@ class ContentKey
     /**
      * Create contentKey
      *
-     * @param int $id ContentKey id.
-     *
      * @return none
      */
     public function __construct()
@@ -206,7 +204,8 @@ class ContentKey
      *
      * @return string
      */
-    public function getChecksum() {
+    public function getChecksum()
+    {
         return $this->_checksum;
     }
 
@@ -217,7 +216,8 @@ class ContentKey
      *
      * @return none
      */
-    public function setChecksum($value) {
+    public function setChecksum($value)
+    {
         $this->_checksum = $value;
     }
 
@@ -226,7 +226,8 @@ class ContentKey
      *
      * @return int
      */
-    public function getProtectionKeyType() {
+    public function getProtectionKeyType()
+    {
         return $this->_protectionKeyType;
     }
 
@@ -237,7 +238,8 @@ class ContentKey
      *
      * @return none
      */
-    public function setProtectionKeyType($value) {
+    public function setProtectionKeyType($value)
+    {
         $this->_protectionKeyType = $value;
     }
 
@@ -246,7 +248,8 @@ class ContentKey
      *
      * @return string
      */
-    public function getProtectionKeyId() {
+    public function getProtectionKeyId()
+    {
         return $this->_protectionKeyId;
     }
 
@@ -257,7 +260,8 @@ class ContentKey
      *
      * @return none
      */
-    public function setProtectionKeyId($value) {
+    public function setProtectionKeyId($value)
+    {
         $this->_protectionKeyId = $value;
     }
 
@@ -288,7 +292,8 @@ class ContentKey
      *
      * @return string
      */
-    public function getEncryptedContentKey() {
+    public function getEncryptedContentKey()
+    {
         return $this->_encryptedContentKey;
     }
 
@@ -299,7 +304,8 @@ class ContentKey
      *
      * @return none
      */
-    public function setEncryptedContentKey($value) {
+    public function setEncryptedContentKey($value)
+    {
         $this->_encryptedContentKey = $value;
     }
 
@@ -308,7 +314,8 @@ class ContentKey
      *
      * @return int
      */
-    public function getContentKeyType() {
+    public function getContentKeyType()
+    {
         return $this->_contentKeyType;
     }
 
@@ -319,7 +326,8 @@ class ContentKey
      *
      * @return none
      */
-    public function setContentKeyType($value) {
+    public function setContentKeyType($value)
+    {
         $this->_contentKeyType = $value;
     }
 
@@ -373,12 +381,17 @@ class ContentKey
      *
      * @return none
      */
-    private function generateEncryptedContentKey($aesKey, $protectionKey)
+    private function _generateEncryptedContentKey($aesKey, $protectionKey)
     {
         $cert = openssl_x509_read($protectionKey);
 
         $cryptedContentKey = '';
-        openssl_public_encrypt($aesKey, $cryptedContentKey, $cert, OPENSSL_PKCS1_OAEP_PADDING);
+        openssl_public_encrypt(
+            $aesKey, 
+            $cryptedContentKey, 
+            $cert, 
+            OPENSSL_PKCS1_OAEP_PADDING
+        );
 
         $this->_encryptedContentKey = base64_encode($cryptedContentKey);
     }
@@ -390,7 +403,7 @@ class ContentKey
      *
      * @return none
      */
-    private function generateChecksum($aesKey)
+    private function _generateChecksum($aesKey)
     {
         $encrypted = mcrypt_encrypt(
             MCRYPT_RIJNDAEL_128, // AES
@@ -408,14 +421,14 @@ class ContentKey
      *
      * @param string $value         Content key
      * @param string $protectionKey Protection key (public key) from WAMS
-
+     *
      * @return none
      */
     public function setContentKey($value, $protectionKey)
     {
-        $this->generateEncryptedContentKey($value, $protectionKey);
+        $this->_generateEncryptedContentKey($value, $protectionKey);
 
-        $this->generateChecksum($value);
+        $this->_generateChecksum($value);
     }
 }
 

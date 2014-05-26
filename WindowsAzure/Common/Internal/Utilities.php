@@ -633,11 +633,13 @@ class Utilities
     }
 
     /**
-     * Generate a pseudo-random string of bytes using a cryptographically strong algorithm.
+     * Generate a pseudo-random string of bytes using a cryptographically strong 
+     * algorithm.
      *
      * @param int $length Length of the string in bytes
      *
-     * @return string|boolean Generated string of bytes on success, or FALSE on failure.
+     * @return string|boolean Generated string of bytes on success, or FALSE on 
+     *                        failure.
      */
     public static function generateCryptoKey($length)
     {
@@ -662,11 +664,13 @@ class Utilities
         
         Validate::isTrue(
             (strlen($key) == 16 || strlen($key) == 24 || strlen($key) == 32), 
-            sprintf(Resources::INVALID_STRING_LENGTH, 'key', '16, 24, 32'));
+            sprintf(Resources::INVALID_STRING_LENGTH, 'key', '16, 24, 32')
+        );
         
         Validate::isTrue(
             (strlen($initializationVector) == 16), 
-            sprintf(Resources::INVALID_STRING_LENGTH, 'initializationVector', '16'));
+            sprintf(Resources::INVALID_STRING_LENGTH, 'initializationVector', '16')
+        );
         
         $blockCount = ceil(strlen($data) / 16);
     
@@ -677,14 +681,21 @@ class Utilities
             // increment Initialization Vector
             $j = 15;
             do {
-                $digit = ord($initializationVector[$j]) + 1;
+                $digit                    = ord($initializationVector[$j]) + 1;
                 $initializationVector[$j] = chr($digit & 0xFF);
+                
                 $j--;
-            }
-            while (($digit == 0x100) && ($j >= 0));
+            } while (($digit == 0x100) && ($j >= 0));
         }
     
-        return $data ^ mcrypt_encrypt(MCRYPT_RIJNDAEL_128, $key, $ctrData, MCRYPT_MODE_ECB);
+        $encryptCtrData = mcrypt_encrypt(
+            MCRYPT_RIJNDAEL_128, 
+            $key, 
+            $ctrData, 
+            MCRYPT_MODE_ECB
+        );
+        
+        return $data ^ $encryptCtrData;
     }
     
     /**
@@ -699,10 +710,10 @@ class Utilities
         Validate::isString($number, 'number');
         
         $result = 0;
-        $base = 1;
-        for($i = strlen($number) - 1; $i >= 0; $i--) {
+        $base   = 1;
+        for ($i = strlen($number) - 1; $i >= 0; $i--) {
             $result = bcadd($result, bcmul(ord($number[$i]), $base));
-            $base = bcmul($base, 256);
+            $base   = bcmul($base, 256);
         }
     
         return $result;

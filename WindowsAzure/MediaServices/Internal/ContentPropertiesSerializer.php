@@ -136,7 +136,7 @@ class ContentPropertiesSerializer
         $result = array();
         foreach ($methodArray as $method) {
             if ((strpos($method->name, 'get') === 0)
-            && $method->isPublic()
+                && $method->isPublic()
             ) {
                 $variableName  = substr($method->name, 3);
                 $variableValue = $method->invoke($object);
