@@ -2152,7 +2152,7 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
         );
 
         $encoded  = (string)simplexml_load_string($response->getBody());
-        $encoded  = implode("\n",str_split($encoded, 76));
+        $encoded  = implode("\n", str_split($encoded, 76));
         $encoded  = "-----BEGIN CERTIFICATE-----\n" . $encoded;
         $encoded .= "\n-----END CERTIFICATE-----";
 
