@@ -188,6 +188,7 @@ spl_autoload_register(
             'tests\\unit\\windowsazure\\mediaservices\\models\\accesspolicytest' => '/unit/WindowsAzure/MediaServices/Models/AccessPolicyTest.php',
             'tests\\unit\\windowsazure\\mediaservices\\models\\assetfiletest' => '/unit/WindowsAzure/MediaServices/Models/AssetFileTest.php',
             'tests\\unit\\windowsazure\\mediaservices\\models\\assettest' => '/unit/WindowsAzure/MediaServices/Models/AssetTest.php',
+            'tests\\unit\\windowsazure\\mediaservices\\models\\contentkeytest' => '/unit/WindowsAzure/MediaServices/Models/ContentKeyTest.php',
             'tests\\unit\\windowsazure\\mediaservices\\models\\errordetailtest' => '/unit/WindowsAzure/MediaServices/Models/ErrorDetailTest.php',
             'tests\\unit\\windowsazure\\mediaservices\\models\\ingestmanifestassettest' => '/unit/WindowsAzure/MediaServices/Models/IngestManifestAssetTest.php',
             'tests\\unit\\windowsazure\\mediaservices\\models\\ingestmanifestfiletest' => '/unit/WindowsAzure/MediaServices/Models/IngestManifestFileTest.php',

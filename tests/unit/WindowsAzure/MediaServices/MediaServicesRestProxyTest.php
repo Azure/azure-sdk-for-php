@@ -42,6 +42,9 @@ use WindowsAzure\MediaServices\Models\IngestManifest;
 use WindowsAzure\MediaServices\Models\IngestManifestAsset;
 use WindowsAzure\MediaServices\Models\IngestManifestFile;
 use WindowsAzure\MediaServices\Models\IngestManifestStatistics;
+use WindowsAzure\MediaServices\Models\ContentKey;
+use WindowsAzure\MediaServices\Models\ProtectionKeyTypes;
+use WindowsAzure\MediaServices\Models\ContentKeyTypes;
 
 /**
  * Unit tests for class MediaServicesRestProxy
@@ -391,14 +394,13 @@ class MediaServicesRestProxyTest extends MediaServicesRestProxyTestBase
         $asset = new Asset(Asset::OPTIONS_NONE);
         $asset->setName(TestResources::MEDIA_SERVICES_ASSET_NAME . $this->createSuffix());
         $asset = $this->createAsset($asset);
-        $connectionParameters = TestResources::getMediaServicesConnectionParameters();
-        $storageAccountName = $connectionParameters['accountName'];
 
         // Test
         $result = $this->restProxy->getAssetStorageAccount($asset);
 
         // Assert
-        $this->assertEquals($storageAccountName, $result->getName());
+        $this->assertNotEmpty($result);
+        $this->assertNotEmpty($result->getName());
     }
 
     /**
@@ -1215,5 +1217,248 @@ class MediaServicesRestProxyTest extends MediaServicesRestProxyTestBase
         $this->assertEquals($ingestManifestFile->getParentIngestManifestId(), $result[0]->getParentIngestManifestId());
         $this->assertEquals($ingestManifestFile->getParentIngestManifestAssetId(), $result[0]->getParentIngestManifestAssetId());
         $this->assertEquals($ingestManifestFile->getName(), $result[0]->getName());
+    }
+
+    /**
+     * @covers WindowsAzure\MediaServices\MediaServicesRestProxy::createContentKey
+     * @covers WindowsAzure\MediaServices\MediaServicesRestProxy::deleteContentKey
+     */
+    public function testCreateContentKey(){
+
+        // Setup
+        $aesKey = Utilities::generateCryptoKey(32);
+
+        $protectionKeyId = $this->restProxy->getProtectionKeyId(ProtectionKeyTypes::X509_CERTIFICATE_THUMBPRINT);
+        $protectionKey = $this->restProxy->getProtectionKey($protectionKeyId);
+
+        $contentKey = new ContentKey();
+        $contentKey->setContentKey($aesKey, $protectionKey);
+        $contentKey->setProtectionKeyId($protectionKeyId);
+        $contentKey->setProtectionKeyType(ProtectionKeyTypes::X509_CERTIFICATE_THUMBPRINT);
+        $contentKey->setContentKeyType(ContentKeyTypes::STORAGE_ENCRYPTION);
+
+        // Test
+        $result = $this->createContentKey($contentKey);
+
+        // Assert
+        $this->assertEquals($contentKey->getId(), $result->getId());
+        //current time and value of 'Created' field in $contentKey may differ on some seconds. That's why we check the difference in the boundary of hour
+        $this->assertLessThan(3600, abs(time() - $result->getCreated()->getTimestamp()));
+        $this->assertEquals($contentKey->getProtectionKeyId(), $result->getProtectionKeyId());
+        $this->assertEquals($contentKey->getProtectionKeyType(), $result->getProtectionKeyType());
+        $this->assertEquals($contentKey->getContentKeyType(), $result->getContentKeyType());
+    }
+
+     /**
+     * @covers WindowsAzure\MediaServices\MediaServicesRestProxy::getContentKeyList
+     */
+    public function testGetContentKeyList(){
+
+        // Setup
+        $aesKey = Utilities::generateCryptoKey(32);
+
+        $protectionKeyId = $this->restProxy->getProtectionKeyId(ProtectionKeyTypes::X509_CERTIFICATE_THUMBPRINT);
+        $protectionKey = $this->restProxy->getProtectionKey($protectionKeyId);
+
+        $contentKey = new ContentKey();
+        $contentKey->setContentKey($aesKey, $protectionKey);
+        $contentKey->setProtectionKeyId($protectionKeyId);
+        $contentKey->setProtectionKeyType(ProtectionKeyTypes::X509_CERTIFICATE_THUMBPRINT);
+        $contentKey->setContentKeyType(ContentKeyTypes::STORAGE_ENCRYPTION);
+        $contentKey = $this->createContentKey($contentKey);
+
+        // Test
+        $result = $this->restProxy->getContentKeyList();
+
+        // Assert
+        $this->assertCount(1, $result);
+        $this->assertEquals($contentKey->getId(), $result[0]->getId());
+        $this->assertEquals($contentKey->getProtectionKeyId(), $result[0]->getProtectionKeyId());
+        $this->assertEquals($contentKey->getProtectionKeyType(), $result[0]->getProtectionKeyType());
+        $this->assertEquals($contentKey->getContentKeyType(), $result[0]->getContentKeyType());
+    }
+
+    /**
+     * @covers WindowsAzure\MediaServices\MediaServicesRestProxy::getContentKey
+     */
+    public function testGetContentKey(){
+
+        // Setup
+        $aesKey = Utilities::generateCryptoKey(32);
+
+        $protectionKeyId = $this->restProxy->getProtectionKeyId(ProtectionKeyTypes::X509_CERTIFICATE_THUMBPRINT);
+        $protectionKey = $this->restProxy->getProtectionKey($protectionKeyId);
+
+        $contentKey = new ContentKey();
+        $contentKey->setContentKey($aesKey, $protectionKey);
+        $contentKey->setProtectionKeyId($protectionKeyId);
+        $contentKey->setProtectionKeyType(ProtectionKeyTypes::X509_CERTIFICATE_THUMBPRINT);
+        $contentKey->setContentKeyType(ContentKeyTypes::STORAGE_ENCRYPTION);
+        $contentKey = $this->createContentKey($contentKey);
+
+        // Test
+        $result = $this->restProxy->getContentKey($contentKey);
+
+        // Assert
+        $this->assertEquals($contentKey->getId(), $result->getId());
+        $this->assertEquals($contentKey->getProtectionKeyId(), $result->getProtectionKeyId());
+        $this->assertEquals($contentKey->getProtectionKeyType(), $result->getProtectionKeyType());
+        $this->assertEquals($contentKey->getContentKeyType(), $result->getContentKeyType());
+    }
+
+    /**
+     * @covers WindowsAzure\MediaServices\MediaServicesRestProxy::rebindContentKey
+     */
+    public function testRebindContentKey(){
+
+        // Setup
+        $aesKey = Utilities::generateCryptoKey(32);
+
+        $protectionKeyId = $this->restProxy->getProtectionKeyId(ContentKeyTypes::STORAGE_ENCRYPTION);
+        $protectionKey = $this->restProxy->getProtectionKey($protectionKeyId);
+
+        $contentKey = new ContentKey();
+        $contentKey->setContentKey($aesKey, $protectionKey);
+        $contentKey->setProtectionKeyId($protectionKeyId);
+        $contentKey->setProtectionKeyType(ProtectionKeyTypes::X509_CERTIFICATE_THUMBPRINT);
+        $contentKey->setContentKeyType(ContentKeyTypes::STORAGE_ENCRYPTION);
+        $contentKey = $this->createContentKey($contentKey);
+
+        // Test
+        $result = $this->restProxy->rebindContentKey($contentKey, '');
+
+        // Assert
+        $this->assertEquals($result, $aesKey);
+    }
+
+    /**
+     * @covers WindowsAzure\MediaServices\MediaServicesRestProxy::getProtectionKeyId
+     */
+    public function testGetProtectionKeyId(){
+
+        // Setup
+        $contentKeyType = ContentKeyTypes::STORAGE_ENCRYPTION;
+
+        // Test
+        $protectionKeyId = $this->restProxy->getProtectionKeyId($contentKeyType);
+
+        // Assert
+        $this->assertNotNull($protectionKeyId);
+    }
+
+    /**
+     * @covers WindowsAzure\MediaServices\MediaServicesRestProxy::getProtectionKey
+     */
+    public function testGetProtectionKey(){
+
+        // Setup
+        $contentKeyType = ContentKeyTypes::STORAGE_ENCRYPTION;
+        $protectionKeyId = $this->restProxy->getProtectionKeyId($contentKeyType);
+
+        // Test
+        $protectionKey = $this->restProxy->getProtectionKey($protectionKeyId);
+
+        // Assert
+        $this->assertNotNull($protectionKey);
+    }
+
+    /**
+     * @covers WindowsAzure\MediaServices\MediaServicesRestProxy::getAssetContentKeys
+     */
+    public function testGetAssetContentKeys(){
+
+        // Setup
+        $aesKey = Utilities::generateCryptoKey(32);
+
+        $protectionKeyId = $this->restProxy->getProtectionKeyId(ContentKeyTypes::COMMON_ENCRYPTION);
+        $protectionKey = $this->restProxy->getProtectionKey($protectionKeyId);
+
+        $contentKey = new ContentKey();
+        $contentKey->setContentKey($aesKey, $protectionKey);
+        $contentKey->setProtectionKeyId($protectionKeyId);
+        $contentKey->setProtectionKeyType(ProtectionKeyTypes::X509_CERTIFICATE_THUMBPRINT);
+        $contentKey->setContentKeyType(ContentKeyTypes::COMMON_ENCRYPTION);
+        $contentKey = $this->createContentKey($contentKey);
+
+
+        $asset = new Asset(Asset::OPTIONS_COMMON_ENCRYPTION_PROTECTED);
+        $asset->setName(TestResources::MEDIA_SERVICES_ASSET_NAME . $this->createSuffix());
+        $asset = $this->createAsset($asset);
+
+        $this->restProxy->linkContentKeyToAsset($asset, $contentKey);
+
+        // Test
+        $result = $this->restProxy->getAssetContentKeys($asset);
+
+        // Assert
+        $this->assertCount(1, $result);
+        $this->assertEquals($protectionKeyId, $result[0]->getProtectionKeyId());
+        $this->assertEquals($contentKey->getId(), $result[0]->getId());
+    }
+
+    /**
+     * @covers WindowsAzure\MediaServices\MediaServicesRestProxy::linkContentKeyToAsset
+     */
+    public function testLinkContentKeyToAsset(){
+
+        // Setup
+        $aesKey = Utilities::generateCryptoKey(16);
+
+        $protectionKeyId = $this->restProxy->getProtectionKeyId(ContentKeyTypes::COMMON_ENCRYPTION);
+        $protectionKey = $this->restProxy->getProtectionKey($protectionKeyId);
+
+        $contentKey = new ContentKey();
+        $contentKey->setContentKey($aesKey, $protectionKey);
+        $contentKey->setProtectionKeyId($protectionKeyId);
+        $contentKey->setProtectionKeyType(ProtectionKeyTypes::X509_CERTIFICATE_THUMBPRINT);
+        $contentKey->setContentKeyType(ContentKeyTypes::COMMON_ENCRYPTION);
+        $contentKey = $this->createContentKey($contentKey);
+
+
+        $asset = new Asset(Asset::OPTIONS_COMMON_ENCRYPTION_PROTECTED);
+        $asset->setName(TestResources::MEDIA_SERVICES_ASSET_NAME . $this->createSuffix());
+        $asset = $this->createAsset($asset);
+
+        // Test
+        $this->restProxy->linkContentKeyToAsset($asset, $contentKey);
+
+        // Assert
+        $contentKeyFromAsset = $this->restProxy->getAssetContentKeys($asset);
+        $this->assertEquals($contentKey->getId(), $contentKeyFromAsset[0]->getId());
+        $this->assertEquals($contentKey->getProtectionKeyId(), $contentKeyFromAsset[0]->getProtectionKeyId());
+        $this->assertEquals($contentKey->getContentKeyType(), $contentKeyFromAsset[0]->getContentKeyType());
+    }
+
+    /**
+     * @covers WindowsAzure\MediaServices\MediaServicesRestProxy::removeContentKeyFromAsset
+     */
+    public function testRemoveContentKeyFromAsset(){
+
+        // Setup
+        $aesKey = Utilities::generateCryptoKey(32);
+
+        $protectionKeyId = $this->restProxy->getProtectionKeyId(ContentKeyTypes::COMMON_ENCRYPTION);
+        $protectionKey = $this->restProxy->getProtectionKey($protectionKeyId);
+
+        $contentKey = new ContentKey();
+        $contentKey->setContentKey($aesKey, $protectionKey);
+        $contentKey->setProtectionKeyId($protectionKeyId);
+        $contentKey->setProtectionKeyType(ProtectionKeyTypes::X509_CERTIFICATE_THUMBPRINT);
+        $contentKey->setContentKeyType(ContentKeyTypes::COMMON_ENCRYPTION);
+        $contentKey = $this->createContentKey($contentKey);
+
+
+        $asset = new Asset(Asset::OPTIONS_COMMON_ENCRYPTION_PROTECTED);
+        $asset->setName(TestResources::MEDIA_SERVICES_ASSET_NAME . $this->createSuffix());
+        $asset = $this->createAsset($asset);
+
+        $this->restProxy->linkContentKeyToAsset($asset, $contentKey);
+
+        // Test
+        $this->restProxy->removeContentKeyFromAsset($asset, $contentKey);
+
+        // Assert
+        $contentKeyFromAsset = $this->restProxy->getAssetContentKeys($asset);
+        $this->assertEmpty($contentKeyFromAsset);
     }
 }

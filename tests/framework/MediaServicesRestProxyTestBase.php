@@ -58,6 +58,7 @@ class MediaServicesRestProxyTestBase extends ServiceRestProxyTestBase
     protected $ingestManifests = array();
     protected $ingestManifestAssets = array();
     protected $ingestManifestFiles = array();
+    protected $contentKeys = array();
 
     public function setUp()
     {
@@ -70,59 +71,49 @@ class MediaServicesRestProxyTestBase extends ServiceRestProxyTestBase
 
     public function createAsset($asset) {
         $result = $this->restProxy->createAsset($asset);
-
         $this->assets[$result->getId()] = $result;
-
         return $result;
     }
 
     public function createAccessPolicy($accessPolicy) {
         $result = $this->restProxy->createAccessPolicy($accessPolicy);
-
         $this->accessPolicy[$result->getId()] = $result;
-
         return $result;
     }
 
     public function createLocator($loc) {
-
         $result = $this->restProxy->createLocator($loc);
-
         $this->locator[$result->getId()] = $result;
-
         return $result;
     }
 
     public function createJob($job, $inputAssets, $tasks = null) {
-
         $result = $this->restProxy->createJob($job, $inputAssets, $tasks);
-
         $this->job[$result->getId()] = $result;
-
         return $result;
     }
 
     public function createIngestManifest($ingestManifest) {
         $result = $this->restProxy->createIngestManifest($ingestManifest);
-
         $this->ingestManifests[$result->getId()] = $result;
-
         return $result;
     }
 
     public function createIngestManifestAsset($ingestManifestAsset, $asset) {
         $result = $this->restProxy->createIngestManifestAsset($ingestManifestAsset, $asset);
-
         $this->ingestManifestAssets[$result->getId()] = $result;
-
         return $result;
     }
 
     public function createIngestManifestFile($ingestManifestFile) {
         $result = $this->restProxy->createIngestManifestFile($ingestManifestFile);
-
         $this->ingestManifestFiles[$result->getId()] = $result;
+        return $result;
+    }
 
+    public function createContentKey($contentKey) {
+        $result = $this->restProxy->createContentKey($contentKey);
+        $this->contentKeys[$result->getId()] = $result;
         return $result;
     }
 
@@ -146,6 +137,22 @@ class MediaServicesRestProxyTestBase extends ServiceRestProxyTestBase
         $this->restProxy->createFileInfos($asset);
 
         return $asset;
+    }
+
+    public function uploadFileToAsset($asset) {
+        $access = new AccessPolicy(TestResources::MEDIA_SERVICES_ACCESS_POLICY_NAME . $this->createSuffix());
+        $access->setDurationInMinutes(30);
+        $access->setPermissions(AccessPolicy::PERMISSIONS_WRITE);
+        $access = $this->createAccessPolicy($access);
+
+        $locator = new Locator($asset, $access, Locator::TYPE_SAS);
+        $locator->setName(TestResources::MEDIA_SERVICES_LOCATOR_NAME . $this->createSuffix());
+        $locator->setStartTime(new \DateTime('now -5 minutes'));
+        $locator = $this->createLocator($locator);
+
+        $fileName = TestResources::MEDIA_SERVICES_DUMMY_FILE_NAME;
+        $this->restProxy->uploadAssetFile($locator, $fileName, TestResources::MEDIA_SERVICES_DUMMY_FILE_CONTENT);
+        $this->restProxy->createFileInfos($asset);
     }
 
     public function createAssetWithFilesForStream() {
@@ -195,7 +202,6 @@ class MediaServicesRestProxyTestBase extends ServiceRestProxyTestBase
         $job->setName($name);
 
         $jobResult = $this->createJob($job, array($inputAsset), array($task));
-        $this->job[$jobResult->getId()] = $jobResult;
 
         return $jobResult;
     }
@@ -247,7 +253,23 @@ class MediaServicesRestProxyTestBase extends ServiceRestProxyTestBase
         }
 
         foreach($this->assets as $asset) {
+            $contentKeyList = $this->restProxy->getAssetContentKeys($asset);
+            foreach($contentKeyList as $contentKey) {
+                unset($this->contentKeys[$contentKey->getId()]);
+            }
+        
             $this->restProxy->deleteAsset($asset);
+        }
+        
+        $availableContentKeyList = $this->restProxy->getContentKeyList();
+        $availableContentKeyIds = array();
+        foreach($availableContentKeyList as $availableContentKey) {
+            $availableContentKeyIds[] = $availableContentKey->getId();
+        }
+        foreach($this->contentKeys as $contentKey) {
+            if (in_array($contentKey->getId(), $availableContentKeyIds)) {
+                $this->restProxy->deleteContentKey($contentKey);
+            }
         }
 
         foreach($this->accessPolicy as $access) {
@@ -274,12 +296,16 @@ class MediaServicesRestProxyTestBase extends ServiceRestProxyTestBase
         return sprintf('-%04x', mt_rand(0, 65535));
     }
 
-    public function deleteJob($job){
+    public function waitJobStatus($job, $statusArray) {
         $status = $this->restProxy->getJobStatus($job);
-        while ($status != Job::STATE_FINISHED && $status != Job::STATE_ERROR && $status != Job::STATE_CANCELED) {
+        while (!in_array($status, $statusArray)) {
             sleep(1);
             $status = $this->restProxy->getJobStatus($job);
         }
+    }
+    
+    public function deleteJob($job){
+        $this->waitJobStatus($job, array(Job::STATE_FINISHED, Job::STATE_ERROR, Job::STATE_CANCELED));
         $this->restProxy->deleteJob($job->getId());
         unset($this->job[$job->getId()]);
     }

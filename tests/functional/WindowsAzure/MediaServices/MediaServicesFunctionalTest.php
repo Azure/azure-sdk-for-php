@@ -41,6 +41,10 @@ use WindowsAzure\MediaServices\Models\TaskTemplate;
 use WindowsAzure\MediaServices\Models\IngestManifest;
 use WindowsAzure\MediaServices\Models\IngestManifestAsset;
 use WindowsAzure\MediaServices\Models\IngestManifestFile;
+use WindowsAzure\MediaServices\Models\ProtectionKeyTypes;
+use WindowsAzure\MediaServices\Models\ContentKey;
+use WindowsAzure\MediaServices\Models\ContentKeyTypes;
+use WindowsAzure\MediaServices\Models\EncryptionSchemes;
 use WindowsAzure\Common\Internal\Http\Url;
 use WindowsAzure\Common\Internal\Http\HttpClient;
 
@@ -839,6 +843,257 @@ class MediaServicesFunctionalTest extends MediaServicesRestProxyTestBase
         $resultFileNames = array(
             $assetFiles[0]->getName(),
             $assetFiles[1]->getName(),
+        );
+        $this->assertContains($otherFileName, $resultFileNames);
+        $this->assertEquals($asset->getId(), $assetFiles[0]->getParentAssetId());
+        $this->assertContains($fileName, $resultFileNames);
+        $this->assertEquals($asset->getId(), $assetFiles[1]->getParentAssetId());
+    }
+
+    public function testIngestEncryptedAsset()
+    {
+        // Setup
+        $aesKey = Utilities::generateCryptoKey(32);
+
+        $protectionKeyId = $this->restProxy->getProtectionKeyId(ProtectionKeyTypes::X509_CERTIFICATE_THUMBPRINT);
+        $protectionKey = $this->restProxy->getProtectionKey($protectionKeyId);
+
+        $contentKey = new ContentKey();
+        $contentKey->setContentKey($aesKey, $protectionKey);
+        $contentKey->setProtectionKeyId($protectionKeyId);
+        $contentKey->setProtectionKeyType(ProtectionKeyTypes::X509_CERTIFICATE_THUMBPRINT);
+        $contentKey->setContentKeyType(ContentKeyTypes::STORAGE_ENCRYPTION);
+        $contentKey = $this->createContentKey($contentKey);
+
+
+        $asset = new Asset(Asset::OPTIONS_STORAGE_ENCRYPTED);
+        $asset->setName(TestResources::MEDIA_SERVICES_ASSET_NAME . $this->createSuffix());
+        $asset = $this->createAsset($asset);
+
+        $this->restProxy->linkContentKeyToAsset($asset, $contentKey);
+        $initializationVector = base64_encode(Utilities::generateCryptoKey(8));
+
+        // Test
+        $this->uploadFileToAsset($asset);
+
+        $files = $this->restProxy->getAssetAssetFileList($asset);
+        $files[0]->setIsEncrypted(true);
+        $files[0]->setEncryptionKeyId($contentKey->getId());
+        $files[0]->setEncryptionScheme(EncryptionSchemes::STORAGE_ENCRYPTION);
+        $files[0]->setEncryptionVersion(Resources::MEDIA_SERVICES_ENCRYPTION_VERSION);
+        $files[0]->setInitializationVector($initializationVector);
+        $this->restProxy->updateAssetFile($files[0]);
+
+        // Assert
+        $files = $this->restProxy->getAssetAssetFileList($asset);
+        $contentKeyFromAsset = $this->restProxy->getAssetContentKeys($asset);
+
+        $this->assertEquals($initializationVector, $files[0]->getInitializationVector());
+        $this->assertEquals(Resources::MEDIA_SERVICES_ENCRYPTION_VERSION, $files[0]->getEncryptionVersion());
+        $this->assertEquals($contentKey->getProtectionKeyId(), $contentKeyFromAsset[0]->getProtectionKeyId());
+        $this->assertEquals($contentKey->getId(), $contentKeyFromAsset[0]->getId());
+    }
+
+
+    public function testIngestEncryptedAssetAndDecryptAtAzure()
+    {
+        // Setup
+        $content = TestResources::MEDIA_SERVICES_DUMMY_FILE_CONTENT;
+        
+        $aesKey = Utilities::generateCryptoKey(32);
+        $protectionKeyId = $this->restProxy->getProtectionKeyId(ProtectionKeyTypes::X509_CERTIFICATE_THUMBPRINT);
+        $protectionKey = $this->restProxy->getProtectionKey($protectionKeyId);
+    
+        $contentKey = new ContentKey();
+        $contentKey->setContentKey($aesKey, $protectionKey);
+        $contentKey->setProtectionKeyId($protectionKeyId);
+        $contentKey->setProtectionKeyType(ProtectionKeyTypes::X509_CERTIFICATE_THUMBPRINT);
+        $contentKey->setContentKeyType(ContentKeyTypes::STORAGE_ENCRYPTION);
+        $contentKey = $this->createContentKey($contentKey);
+    
+        $asset = new Asset(Asset::OPTIONS_STORAGE_ENCRYPTED);
+        $asset->setName(TestResources::MEDIA_SERVICES_ASSET_NAME . $this->createSuffix());
+        $asset = $this->createAsset($asset);
+    
+        $this->restProxy->linkContentKeyToAsset($asset, $contentKey);
+
+        $initializationVector = Utilities::generateCryptoKey(8);
+        $encrypted = Utilities::ctrCrypt($content, $aesKey, str_pad($initializationVector, 16, chr(0)));
+        
+        // Test
+        $access = new AccessPolicy(TestResources::MEDIA_SERVICES_ACCESS_POLICY_NAME . $this->createSuffix());
+        $access->setDurationInMinutes(30);
+        $access->setPermissions(AccessPolicy::PERMISSIONS_WRITE);
+        $access = $this->createAccessPolicy($access);
+
+        $locator = new Locator($asset, $access, Locator::TYPE_SAS);
+        $locator->setName(TestResources::MEDIA_SERVICES_LOCATOR_NAME . $this->createSuffix());
+        $locator->setStartTime(new \DateTime('now -5 minutes'));
+        $locator = $this->createLocator($locator);
+
+        $fileName = TestResources::MEDIA_SERVICES_DUMMY_FILE_NAME;
+        $this->restProxy->uploadAssetFile($locator, $fileName, $encrypted);
+        $this->restProxy->createFileInfos($asset);
+            
+        $files = $this->restProxy->getAssetAssetFileList($asset);
+        $files[0]->setIsEncrypted(true);
+        $files[0]->setEncryptionKeyId($contentKey->getId());
+        $files[0]->setEncryptionScheme(EncryptionSchemes::STORAGE_ENCRYPTION);
+        $files[0]->setEncryptionVersion(Resources::MEDIA_SERVICES_ENCRYPTION_VERSION);
+        $files[0]->setInitializationVector(Utilities::base256ToDec($initializationVector));
+        $this->restProxy->updateAssetFile($files[0]);
+        
+        $decodeProcessor = $this->restProxy->getLatestMediaProcessor(TestResources::MEDIA_SERVICES_DECODE_PROCESSOR_NAME);
+        $task = new Task(TestResources::getMediaServicesTask($this->getOutputAssetName()), $decodeProcessor->getId(), TaskOptions::NONE);
+        $job = new Job();
+        $job->setName(TestResources::MEDIA_SERVICES_JOB_NAME . $this->createSuffix());
+        $job = $this->createJob($job, array($asset), array($task));
+        
+        $this->waitJobStatus($job, array(Job::STATE_FINISHED, Job::STATE_ERROR));
+
+        $this->assertEquals($this->restProxy->getJobStatus($job), Job::STATE_FINISHED);
+        
+        $outputAssets = $this->restProxy->getJobOutputMediaAssets($job);
+        $this->assertCount(1, $outputAssets);
+        
+        $accessPolicy = new AccessPolicy(TestResources::MEDIA_SERVICES_ACCESS_POLICY_NAME . $this->createSuffix());
+        $accessPolicy->setDurationInMinutes(300);
+        $accessPolicy->setPermissions(AccessPolicy::PERMISSIONS_READ);
+        $accessPolicy = $this->createAccessPolicy($accessPolicy);
+        
+        $locator = new Locator($outputAssets[0], $accessPolicy, Locator::TYPE_SAS);
+        $locator->setName(TestResources::MEDIA_SERVICES_LOCATOR_NAME . $this->createSuffix());
+        $locator->setStartTime(new \DateTime('now -5 minutes'));
+        $locator = $this->createLocator($locator);
+        
+        // without sleep() Locator hasn't enough time to create URL, so that's why we have to use at least sleep(30)
+        sleep(40);
+        
+        $method      = Resources::HTTP_GET;
+        $url         = new Url($locator->getBaseUri() . '/' . TestResources::MEDIA_SERVICES_DUMMY_FILE_NAME . $locator->getContentAccessComponent());
+        $filters     = array();
+        $statusCode  = Resources::STATUS_OK;
+        
+        $httpClient = new HttpClient();
+        $httpClient->setMethod($method);
+        $httpClient->setExpectedStatusCode($statusCode);
+        $actual = $httpClient->send($filters, $url);
+        
+        $this->assertEquals($content, $actual);
+    }
+    
+    public function testBulkIngestEncryptedAsset(){
+
+        // Setup
+        $asset = new Asset(Asset::OPTIONS_STORAGE_ENCRYPTED);
+        $asset->setName(TestResources::MEDIA_SERVICES_ASSET_NAME . $this->createSuffix());
+        $asset = $this->createAsset($asset);
+
+        $aesKey = Utilities::generateCryptoKey(32);
+        $protectionKeyId = $this->restProxy->getProtectionKeyId(ProtectionKeyTypes::X509_CERTIFICATE_THUMBPRINT);
+        $protectionKey = $this->restProxy->getProtectionKey($protectionKeyId);
+
+        $contentKey = new ContentKey();
+        $contentKey->setContentKey($aesKey, $protectionKey);
+        $contentKey->setProtectionKeyId($protectionKeyId);
+        $contentKey->setProtectionKeyType(ProtectionKeyTypes::X509_CERTIFICATE_THUMBPRINT);
+        $contentKey->setContentKeyType(ContentKeyTypes::STORAGE_ENCRYPTION);
+        $contentKey = $this->createContentKey($contentKey);
+        $this->restProxy->linkContentKeyToAsset($asset, $contentKey);
+
+        $fileName = TestResources::MEDIA_SERVICES_DUMMY_FILE_NAME;
+        $otherFileName = TestResources::MEDIA_SERVICES_DUMMY_FILE_NAME_1;
+
+        $manifest = new IngestManifest();
+        $manifest->setName('IngestManifest' . $this->createSuffix());
+        $manifest = $this->createIngestManifest($manifest);
+
+        $manifestAsset = new IngestManifestAsset($manifest->getId());
+        $manifestAsset = $this->createIngestManifestAsset($manifestAsset, $asset);
+
+        $manifestFile1 = new IngestManifestFile(
+                $fileName,
+                $manifest->getId(),
+                $manifestAsset->getId()
+        );
+
+        $manifestFile2 = new IngestManifestFile(
+                $otherFileName,
+                $manifest->getId(),
+                $manifestAsset->getId()
+        );
+
+        $initializationVector1 = base64_encode(Utilities::generateCryptoKey(8));
+        $initializationVector2 = base64_encode(Utilities::generateCryptoKey(8));
+
+        $manifestFile1->setIsEncrypted(true);
+        $manifestFile1->setEncryptionKeyId($contentKey->getId());
+        $manifestFile1->setEncryptionScheme(EncryptionSchemes::STORAGE_ENCRYPTION);
+        $manifestFile1->setEncryptionVersion(Resources::MEDIA_SERVICES_ENCRYPTION_VERSION);
+        $manifestFile1->setInitializationVector($initializationVector1);
+
+        $manifestFile2->setIsEncrypted(true);
+        $manifestFile2->setEncryptionKeyId($contentKey->getId());
+        $manifestFile2->setEncryptionScheme(EncryptionSchemes::STORAGE_ENCRYPTION);
+        $manifestFile2->setEncryptionVersion(Resources::MEDIA_SERVICES_ENCRYPTION_VERSION);
+        $manifestFile2->setInitializationVector($initializationVector2);
+
+        $manifestFile1 = $this->createIngestManifestFile($manifestFile1);
+        $manifestFile2 = $this->createIngestManifestFile($manifestFile2);
+
+        $initialStat = $this->restProxy->getIngestManifest($manifest);
+
+        $blobUrl = $manifest->getBlobStorageUriForUpload();
+        $blobUrlParts = explode('/', $blobUrl);
+        $blob = array_pop($blobUrlParts);
+
+        $blobRestProxy = $this->builder->createBlobService($this->connectionString);
+        $blobRestProxy->createBlockBlob(
+                $blob,
+                $fileName,
+                TestResources::MEDIA_SERVICES_DUMMY_FILE_CONTENT
+        );
+
+        $this->waitIngestManifestFinishedFiles($manifest, 1);
+        $finishedFirstStat = $this->restProxy->getIngestManifest($manifest);
+
+        $blobRestProxy->createBlockBlob(
+                $blob,
+                $otherFileName,
+                TestResources::MEDIA_SERVICES_DUMMY_FILE_CONTENT_1
+        );
+
+        $this->waitIngestManifestFinishedFiles($manifest, 2);
+        $finishedSecondStat = $this->restProxy->getIngestManifest($manifest);
+
+        // Test
+
+        // Assert
+        $contentKeysFromAsset = $this->restProxy->getAssetContentKeys($asset);
+        $assetFiles = $this->restProxy->getAssetAssetFileList($asset);
+
+        $this->assertEquals(0, $initialStat->getStatistics()->getFinishedFilesCount());
+        $this->assertEquals(1, $finishedFirstStat->getStatistics()->getFinishedFilesCount());
+        $this->assertEquals(2, $finishedSecondStat->getStatistics()->getFinishedFilesCount());
+
+        $this->assertEquals($contentKey->getId(), $contentKeysFromAsset[0]->getId());
+
+        $this->assertEquals($contentKey->getId(), $manifestFile1->getEncryptionKeyId());
+        $this->assertEquals('true', $manifestFile1->getIsEncrypted());
+        $this->assertEquals(EncryptionSchemes::STORAGE_ENCRYPTION, $manifestFile1->getEncryptionScheme());
+        $this->assertEquals($initializationVector1, $manifestFile1->getInitializationVector());
+        $this->assertEquals(Resources::MEDIA_SERVICES_ENCRYPTION_VERSION, $manifestFile1->getEncryptionVersion());
+
+        $this->assertEquals($contentKey->getId(), $manifestFile2->getEncryptionKeyId());
+        $this->assertEquals('true', $manifestFile2->getIsEncrypted());
+        $this->assertEquals(EncryptionSchemes::STORAGE_ENCRYPTION, $manifestFile2->getEncryptionScheme());
+        $this->assertEquals($initializationVector2, $manifestFile2->getInitializationVector());
+        $this->assertEquals(Resources::MEDIA_SERVICES_ENCRYPTION_VERSION, $manifestFile2->getEncryptionVersion());
+
+        // Files order is not static, so we don't know the index of each file and need to serve them as a set
+        $resultFileNames = array(
+                $assetFiles[0]->getName(),
+                $assetFiles[1]->getName(),
         );
         $this->assertContains($otherFileName, $resultFileNames);
         $this->assertEquals($asset->getId(), $assetFiles[0]->getParentAssetId());

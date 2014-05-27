@@ -53,6 +53,7 @@ use WindowsAzure\MediaServices\Models\StorageAccount;
 use WindowsAzure\MediaServices\Models\IngestManifest;
 use WindowsAzure\MediaServices\Models\IngestManifestAsset;
 use WindowsAzure\MediaServices\Models\IngestManifestFile;
+use WindowsAzure\MediaServices\Models\ContentKey;
 
 /**
  * This class constructs HTTP requests and receive HTTP responses for media services
@@ -446,6 +447,31 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
     }
 
     /**
+     * Get asset ContentKeys
+     *
+     * @param WindowsAzure\MediaServices\Models\Asset|string $asset Asset data or
+     * asset Id
+     *
+     * @return array
+     */
+    public function getAssetContentKeys($asset)
+    {
+        $assetId = Utilities::getEntityId(
+            $asset,
+            'WindowsAzure\MediaServices\Models\Asset'
+        );
+
+        $propertyList = $this->_getEntityList("Assets('{$assetId}')/ContentKeys");
+        $result       = array();
+
+        foreach ($propertyList as $properties) {
+            $result[] = ContentKey::createFromOptions($properties);
+        }
+
+        return $result;
+    }
+
+    /**
      * Get parent assets of asset
      *
      * @param WindowsAzure\MediaServices\Models\Asset|string $asset Asset data or
@@ -546,6 +572,102 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
         );
 
         $this->_deleteEntity("Assets('{$assetId}')");
+    }
+
+    /**
+     * Link ContentKey to Asset
+     *
+     * @param Models\Asset|string      $asset      Asset to link a ContentKey or
+     * Asset id
+     *
+     * @param Models\ContentKey|string $contentKey ContentKey to link or
+     * ContentKey id
+     *
+     * @return none
+     */
+    public function linkContentKeyToAsset($asset, $contentKey)
+    {
+        $assetId = Utilities::getEntityId(
+            $asset,
+            'WindowsAzure\MediaServices\Models\Asset'
+        );
+        $assetId = urlencode($assetId);
+
+        $contentKeyId = Utilities::getEntityId(
+            $contentKey,
+            'WindowsAzure\MediaServices\Models\ContentKey'
+        );
+
+        $contentKeyId = urlencode($contentKeyId);
+
+        $contentWriter = new \XMLWriter();
+        $contentWriter->openMemory();
+        $contentWriter->writeElementNS(
+            'data',
+            'uri',
+            Resources::DS_XML_NAMESPACE,
+            $this->getUri() . "ContentKeys('{$contentKeyId}')"
+        );
+
+        $method      = Resources::HTTP_POST;
+        $path        = "Assets('{$assetId}')/\$links/ContentKeys";
+        $headers     = array(
+            Resources::CONTENT_TYPE => Resources::XML_CONTENT_TYPE,
+        );
+        $postParams  = array();
+        $queryParams = array();
+        $statusCode  = Resources::STATUS_NO_CONTENT;
+        $body        = $contentWriter->outputMemory();
+
+        $this->send(
+            $method,
+            $headers,
+            $postParams,
+            $queryParams,
+            $path,
+            $statusCode,
+            $body
+        );
+    }
+
+    /**
+     * Remove ContentKey from Asset
+     *
+     * @param Models\Asset|string      $asset      Asset to remove a ContentKey or
+     * Asset id
+     *
+     * @param Models\ContentKey|string $contentKey ContentKey to remove or
+     * ContentKey id
+     *
+     * @return none
+     */
+    public function removeContentKeyFromAsset($asset, $contentKey)
+    {
+        $assetId = Utilities::getEntityId(
+            $asset,
+            'WindowsAzure\MediaServices\Models\Asset'
+        );
+
+        $contentKeyId = Utilities::getEntityId(
+            $contentKey,
+            'WindowsAzure\MediaServices\Models\ContentKey'
+        );
+
+        $method      = Resources::HTTP_DELETE;
+        $path        = "Assets('{$assetId}')/\$links/ContentKeys('{$contentKeyId}')";
+        $headers     = array();
+        $postParams  = array();
+        $queryParams = array();
+        $statusCode  = Resources::STATUS_NO_CONTENT;
+
+        $this->send(
+            $method,
+            $headers,
+            $postParams,
+            $queryParams,
+            $path,
+            $statusCode
+        );
     }
 
     /**
@@ -1847,5 +1969,193 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
         );
 
         $this->_deleteEntity("IngestManifestFiles('{$ingestManifestFileId}')");
+    }
+
+    /**
+     * Create new ContentKey
+     *
+     * @param Models\ContentKey $contentKey ContentKey data
+     *
+     * @return Models\ContentKey Created ContentKey
+     */
+    public function createContentKey($contentKey)
+    {
+        Validate::isA(
+            $contentKey,
+            'WindowsAzure\Mediaservices\Models\ContentKey',
+            'contentKey'
+        );
+
+        return ContentKey::createFromOptions(
+            $this->_createEntity($contentKey, 'ContentKeys')
+        );
+    }
+
+    /**
+     * Get list of ContentKey.
+     *
+     * @return array
+     */
+    public function getContentKeyList()
+    {
+        $propertyList = $this->_getEntityList('ContentKeys');
+        $result       = array();
+
+        foreach ($propertyList as $properties) {
+            $result[] = ContentKey::createFromOptions($properties);
+        }
+
+        return $result;
+    }
+
+    /**
+     * Get ContentKey.
+     *
+     * @param Models\ContentKey|string $contentKey An ContentKey data or
+     * ContentKey Id
+     *
+     * @return Models\ContentKey
+     */
+    public function getContentKey($contentKey)
+    {
+        $contentKeyId = Utilities::getEntityId(
+            $contentKey,
+            'WindowsAzure\Mediaservices\Models\ContentKey'
+        );
+
+        return ContentKey::createFromOptions(
+            $this->_getEntity("ContentKeys('{$contentKeyId}')")
+        );
+    }
+
+    /**
+     * Rebind ContentKey.
+     *
+     * @param Models\ContentKey|string $contentKey      An ContentKey data or
+     * ContentKey Id
+     *
+     * @param string                   $x509Certificate X.509 certificate (with only
+     * the public key) that was used to encrypt the clear storage encryption/common
+     * protection content keys
+     *
+     *
+     * @return string Content key
+     */
+    public function rebindContentKey($contentKey, $x509Certificate)
+    {
+        $contentKeyId = Utilities::getEntityId(
+            $contentKey,
+            'WindowsAzure\Mediaservices\Models\ContentKey'
+        );
+        $contentKeyId = urlencode($contentKeyId);
+
+        $x509Certificate = urlencode($x509Certificate);
+
+        $method      = Resources::HTTP_GET;
+        $headers     = array();
+        $postParams  = array();
+        $queryParams = array();
+        $statusCode  = Resources::STATUS_OK;
+        $path        = "RebindContentKey?id='{$contentKeyId}'" .
+            "&x509Certificate='{$x509Certificate}'";
+
+        $response = $this->send(
+            $method,
+            $headers,
+            $postParams,
+            $queryParams,
+            $path,
+            $statusCode
+        );
+
+        $key = (string)simplexml_load_string($response->getBody());
+
+        return base64_decode($key);
+    }
+
+    /**
+     * Delete ContentKey
+     *
+     * @param Models\ContentKey|string $contentKey An ContentKey data or
+     * ContentKey Id
+     *
+     * @return none
+     */
+    public function deleteContentKey($contentKey)
+    {
+        $contentKeyId = Utilities::getEntityId(
+            $contentKey,
+            'WindowsAzure\Mediaservices\Models\ContentKey'
+        );
+
+        $this->_deleteEntity("ContentKeys('{$contentKeyId}')");
+    }
+
+    /**
+     * The GetProtectionKeyId function retrieves an X.509 certificate thumbprint that
+     * is used to ensure that you have the correct certificate installed on your
+     * machine when encrypting your user-defined content key.
+     *
+     * @param int $contentKeyType ContentKey type
+     *
+     * @return string
+     */
+    public function getProtectionKeyId($contentKeyType)
+    {
+        Validate::isInteger($contentKeyType, 'contentKeyType');
+
+        $method      = Resources::HTTP_GET;
+        $path        = "GetProtectionKeyId?contentKeyType={$contentKeyType}";
+        $headers     = array();
+        $postParams  = array();
+        $queryParams = array();
+        $statusCode  = Resources::STATUS_OK;
+
+        $response = $this->send(
+            $method,
+            $headers,
+            $postParams,
+            $queryParams,
+            $path,
+            $statusCode
+        );
+
+        return (string)simplexml_load_string($response->getBody());
+    }
+
+    /**
+     * Retrieve the specific X.509 certificate that should be used to encrypt your
+     * user-defined content key
+     *
+     * @param string $protectionKeyId ProtectionKey id
+     *
+     * @return string
+     */
+    public function getProtectionKey($protectionKeyId)
+    {
+        Validate::isString($protectionKeyId, 'protectionKeyId');
+
+        $method      = Resources::HTTP_GET;
+        $path        = "GetProtectionKey?ProtectionKeyId='{$protectionKeyId}'";
+        $headers     = array();
+        $postParams  = array();
+        $queryParams = array();
+        $statusCode  = Resources::STATUS_OK;
+
+        $response = $this->send(
+            $method,
+            $headers,
+            $postParams,
+            $queryParams,
+            $path,
+            $statusCode
+        );
+
+        $encoded  = (string)simplexml_load_string($response->getBody());
+        $encoded  = implode("\n", str_split($encoded, 76));
+        $encoded  = "-----BEGIN CERTIFICATE-----\n" . $encoded;
+        $encoded .= "\n-----END CERTIFICATE-----";
+
+        return $encoded;
     }
 }
