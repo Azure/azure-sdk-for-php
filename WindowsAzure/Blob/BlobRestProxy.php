@@ -35,7 +35,7 @@ use WindowsAzure\Blob\Models\ListContainersOptions;
 use WindowsAzure\Blob\Models\ListContainersResult;
 use WindowsAzure\Blob\Models\CreateContainerOptions;
 use WindowsAzure\Blob\Models\GetContainerPropertiesResult;
-use WindowsAzure\Blob\Models\GetContainerAclResult;
+use WindowsAzure\Blob\Models\GetContainerACLResult;
 use WindowsAzure\Blob\Models\SetContainerMetadataOptions;
 use WindowsAzure\Blob\Models\DeleteContainerOptions;
 use WindowsAzure\Blob\Models\ListBlobsOptions;

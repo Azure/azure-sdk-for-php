@@ -10,20 +10,13 @@
         }
     ],
     "require": {
-        "pear-pear/HTTP_Request2":   "*",
-        "pear-pear/Mail_Mime":       "*",
-        "pear-pear/Mail_mimeDecode": "*"
+        "pear/net_url2": "dev-topics/composer-for-pear",
+        "pear/http_request2": "dev-topics/composer-for-pear",
+        "pear/mail_mime-decode": "dev-master",
+        "pear/mail_mime": "dev-topics/composer-for-pear"
     },
-    
-    "repositories": [
-        {
-            "type": "pear",
-            "url": "http://pear.php.net"
-        }
-    ],
-    
     "autoload": {
         "psr-0": { "WindowsAzure\\": "" }
     }
-    
 }
+
